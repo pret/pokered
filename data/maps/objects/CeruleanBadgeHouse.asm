@@ -9,7 +9,7 @@ CeruleanBadgeHouse_Object:
 	db 0 ; signs
 
 	db 1 ; objects
-	object SPRITE_FAT_BALD_GUY, 5, 3, STAY, RIGHT, 1 ; person
+	object SPRITE_MIDDLE_AGED_MAN, 5, 3, STAY, RIGHT, 1 ; person
 
 	; warp-to
 	warp_to 2, 0, CERULEAN_BADGE_HOUSE_WIDTH

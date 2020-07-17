@@ -8,7 +8,7 @@ SafariZoneSecretHouse_Object:
 	db 0 ; signs
 
 	db 1 ; objects
-	object SPRITE_FISHER, 3, 3, STAY, DOWN, 1 ; person
+	object SPRITE_FISHING_GURU, 3, 3, STAY, DOWN, 1 ; person
 
 	; warp-to
 	warp_to 2, 7, SAFARI_ZONE_SECRET_HOUSE_WIDTH ; SAFARI_ZONE_WEST

@@ -11,7 +11,7 @@ CeladonMartRoof_Object:
 	sign 13, 2, 6 ; CeladonMartRoofText6
 
 	db 2 ; objects
-	object SPRITE_BLACK_HAIR_BOY_2, 10, 4, STAY, LEFT, 1 ; person
+	object SPRITE_SUPER_NERD, 10, 4, STAY, LEFT, 1 ; person
 	object SPRITE_LITTLE_GIRL, 5, 5, WALK, 0, 2 ; person
 
 	; warp-to

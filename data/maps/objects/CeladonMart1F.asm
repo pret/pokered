@@ -14,7 +14,7 @@ CeladonMart1F_Object:
 	sign 14, 1, 3 ; CeladonMart1Text3
 
 	db 1 ; objects
-	object SPRITE_CABLE_CLUB_WOMAN, 8, 3, STAY, DOWN, 1 ; person
+	object SPRITE_LINK_RECEPTIONIST, 8, 3, STAY, DOWN, 1 ; person
 
 	; warp-to
 	warp_to 2, 7, CELADON_MART_1F_WIDTH

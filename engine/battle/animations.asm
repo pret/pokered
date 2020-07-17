@@ -1901,39 +1901,39 @@ AnimationSubstitute:
 	ldh a, [hWhoseTurn]
 	and a
 	jr z, .playerTurn
-	ld hl, SlowbroSprite ; facing down sprite
+	ld hl, MonsterSprite tile 0 ; facing down sprite
 	ld de, wTempPic + $120
-	call CopySlowbroSpriteData
-	ld hl, SlowbroSprite + $10
+	call CopyMonsterSpriteData
+	ld hl, MonsterSprite tile 1
 	ld de, wTempPic + $120 + $70
-	call CopySlowbroSpriteData
-	ld hl, SlowbroSprite + $20
+	call CopyMonsterSpriteData
+	ld hl, MonsterSprite tile 2
 	ld de, wTempPic + $120 + $10
-	call CopySlowbroSpriteData
-	ld hl, SlowbroSprite + $30
+	call CopyMonsterSpriteData
+	ld hl, MonsterSprite tile 3
 	ld de, wTempPic + $120 + $10 + $70
-	call CopySlowbroSpriteData
+	call CopyMonsterSpriteData
 	jr .next
 .playerTurn
-	ld hl, SlowbroSprite + $40 ; facing up sprite
+	ld hl, MonsterSprite tile 4 ; facing up sprite
 	ld de, wTempPic + $120 + $70
-	call CopySlowbroSpriteData
-	ld hl, SlowbroSprite + $50
+	call CopyMonsterSpriteData
+	ld hl, MonsterSprite tile 5
 	ld de, wTempPic + $120 + $e0
-	call CopySlowbroSpriteData
-	ld hl, SlowbroSprite + $60
+	call CopyMonsterSpriteData
+	ld hl, MonsterSprite tile 6
 	ld de, wTempPic + $120 + $80
-	call CopySlowbroSpriteData
-	ld hl, SlowbroSprite + $70
+	call CopyMonsterSpriteData
+	ld hl, MonsterSprite tile 7
 	ld de, wTempPic + $120 + $f0
-	call CopySlowbroSpriteData
+	call CopyMonsterSpriteData
 .next
 	call CopyTempPicToMonPic
 	jp AnimationShowMonPic
 
-CopySlowbroSpriteData:
-	ld bc, $10
-	ld a, BANK(SlowbroSprite)
+CopyMonsterSpriteData:
+	ld bc, 1 tiles
+	ld a, BANK(MonsterSprite)
 	jp FarCopyData2
 
 HideSubstituteShowMonAnim:

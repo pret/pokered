@@ -10,9 +10,9 @@ CeladonMart2F_Object:
 	sign 14, 1, 5 ; CeladonMart2Text5
 
 	db 4 ; objects
-	object SPRITE_MART_GUY, 5, 3, STAY, DOWN, 1 ; person
-	object SPRITE_MART_GUY, 6, 3, STAY, DOWN, 2 ; person
-	object SPRITE_FAT_BALD_GUY, 19, 5, STAY, NONE, 3 ; person
+	object SPRITE_CLERK, 5, 3, STAY, DOWN, 1 ; person
+	object SPRITE_CLERK, 6, 3, STAY, DOWN, 2 ; person
+	object SPRITE_MIDDLE_AGED_MAN, 19, 5, STAY, NONE, 3 ; person
 	object SPRITE_GIRL, 14, 4, WALK, 1, 4 ; person
 
 	; warp-to

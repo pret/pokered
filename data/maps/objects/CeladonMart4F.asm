@@ -10,9 +10,9 @@ CeladonMart4F_Object:
 	sign 14, 1, 4 ; CeladonMart4Text4
 
 	db 3 ; objects
-	object SPRITE_MART_GUY, 5, 7, STAY, NONE, 1 ; person
-	object SPRITE_BLACK_HAIR_BOY_2, 15, 5, WALK, 2, 2 ; person
-	object SPRITE_BUG_CATCHER, 5, 2, WALK, 2, 3 ; person
+	object SPRITE_CLERK, 5, 7, STAY, NONE, 1 ; person
+	object SPRITE_SUPER_NERD, 15, 5, WALK, 2, 2 ; person
+	object SPRITE_YOUNGSTER, 5, 2, WALK, 2, 3 ; person
 
 	; warp-to
 	warp_to 12, 1, CELADON_MART_4F_WIDTH ; CELADON_MART_3F

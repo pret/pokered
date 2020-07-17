@@ -8,9 +8,9 @@ BikeShop_Object:
 	db 0 ; signs
 
 	db 3 ; objects
-	object SPRITE_BIKE_SHOP_GUY, 6, 2, STAY, NONE, 1 ; person
-	object SPRITE_MOM_GEISHA, 5, 6, WALK, 1, 2 ; person
-	object SPRITE_BUG_CATCHER, 1, 3, STAY, UP, 3 ; person
+	object SPRITE_BIKE_SHOP_CLERK, 6, 2, STAY, NONE, 1 ; person
+	object SPRITE_MIDDLE_AGED_WOMAN, 5, 6, WALK, 1, 2 ; person
+	object SPRITE_YOUNGSTER, 1, 3, STAY, UP, 3 ; person
 
 	; warp-to
 	warp_to 2, 7, BIKE_SHOP_WIDTH

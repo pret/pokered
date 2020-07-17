@@ -10,9 +10,9 @@ VermilionGym_Object:
 	db 5 ; objects
 	object SPRITE_ROCKER, 5, 1, STAY, DOWN, 1, OPP_LT_SURGE, 1
 	object SPRITE_GENTLEMAN, 9, 6, STAY, LEFT, 2, OPP_GENTLEMAN, 3
-	object SPRITE_BLACK_HAIR_BOY_2, 3, 8, STAY, LEFT, 3, OPP_ROCKER, 1
+	object SPRITE_SUPER_NERD, 3, 8, STAY, LEFT, 3, OPP_ROCKER, 1
 	object SPRITE_SAILOR, 0, 10, STAY, RIGHT, 4, OPP_SAILOR, 8
-	object SPRITE_GYM_HELPER, 4, 14, STAY, DOWN, 5 ; person
+	object SPRITE_GYM_GUIDE, 4, 14, STAY, DOWN, 5 ; person
 
 	; warp-to
 	warp_to 4, 17, VERMILION_GYM_WIDTH

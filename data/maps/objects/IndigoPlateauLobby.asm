@@ -10,10 +10,10 @@ IndigoPlateauLobby_Object:
 
 	db 5 ; objects
 	object SPRITE_NURSE, 7, 5, STAY, DOWN, 1 ; person
-	object SPRITE_GYM_HELPER, 4, 9, STAY, RIGHT, 2 ; person
-	object SPRITE_LASS, 5, 1, STAY, DOWN, 3 ; person
-	object SPRITE_MART_GUY, 0, 5, STAY, RIGHT, 4 ; person
-	object SPRITE_CABLE_CLUB_WOMAN, 13, 6, STAY, DOWN, 5 ; person
+	object SPRITE_GYM_GUIDE, 4, 9, STAY, RIGHT, 2 ; person
+	object SPRITE_COOLTRAINER_F, 5, 1, STAY, DOWN, 3 ; person
+	object SPRITE_CLERK, 0, 5, STAY, RIGHT, 4 ; person
+	object SPRITE_LINK_RECEPTIONIST, 13, 6, STAY, DOWN, 5 ; person
 
 	; warp-to
 	warp_to 7, 11, INDIGO_PLATEAU_LOBBY_WIDTH

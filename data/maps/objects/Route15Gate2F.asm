@@ -8,7 +8,7 @@ Route15Gate2F_Object:
 	sign 6, 2, 2 ; Route15GateUpstairsText2
 
 	db 1 ; objects
-	object SPRITE_OAK_AIDE, 4, 2, STAY, DOWN, 1
+	object SPRITE_SCIENTIST, 4, 2, STAY, DOWN, 1
 
 	; warp-to
 	warp_to 7, 7, ROUTE_15_GATE_2F_WIDTH ; ROUTE_15_GATE_1F

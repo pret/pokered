@@ -12,10 +12,10 @@ CeladonMansion1F_Object:
 	sign 4, 9, 5 ; CeladonMansion1Text5
 
 	db 4 ; objects
-	object SPRITE_SLOWBRO, 0, 5, STAY, RIGHT, 1 ; person
-	object SPRITE_OLD_MEDIUM_WOMAN, 1, 5, STAY, DOWN, 2 ; person
-	object SPRITE_CLEFAIRY, 1, 8, WALK, 2, 3 ; person
-	object SPRITE_SLOWBRO, 4, 4, WALK, 1, 4 ; person
+	object SPRITE_MONSTER, 0, 5, STAY, RIGHT, 1 ; person
+	object SPRITE_GRANNY, 1, 5, STAY, DOWN, 2 ; person
+	object SPRITE_FAIRY, 1, 8, WALK, 2, 3 ; person
+	object SPRITE_MONSTER, 4, 4, WALK, 1, 4 ; person
 
 	; warp-to
 	warp_to 4, 11, CELADON_MANSION_1F_WIDTH

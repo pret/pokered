@@ -8,9 +8,9 @@ PewterNidoranHouse_Object:
 	db 0 ; signs
 
 	db 3 ; objects
-	object SPRITE_SLOWBRO, 4, 5, STAY, LEFT, 1 ; person
-	object SPRITE_YOUNG_BOY, 3, 5, STAY, RIGHT, 2 ; person
-	object SPRITE_FAT_BALD_GUY, 1, 2, STAY, NONE, 3 ; person
+	object SPRITE_MONSTER, 4, 5, STAY, LEFT, 1 ; person
+	object SPRITE_LITTLE_BOY, 3, 5, STAY, RIGHT, 2 ; person
+	object SPRITE_MIDDLE_AGED_MAN, 1, 2, STAY, NONE, 3 ; person
 
 	; warp-to
 	warp_to 2, 7, PEWTER_NIDORAN_HOUSE_WIDTH

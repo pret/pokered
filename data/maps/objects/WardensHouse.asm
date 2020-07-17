@@ -11,7 +11,7 @@ WardensHouse_Object:
 
 	db 3 ; objects
 	object SPRITE_WARDEN, 2, 3, STAY, NONE, 1 ; person
-	object SPRITE_BALL, 8, 3, STAY, NONE, 2, RARE_CANDY
+	object SPRITE_POKE_BALL, 8, 3, STAY, NONE, 2, RARE_CANDY
 	object SPRITE_BOULDER, 8, 4, STAY, BOULDER_MOVEMENT_BYTE_2, 3 ; person
 
 	; warp-to

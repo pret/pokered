@@ -11,7 +11,7 @@ SilphCo1F_Object:
 	db 0 ; signs
 
 	db 1 ; objects
-	object SPRITE_CABLE_CLUB_WOMAN, 4, 2, STAY, DOWN, 1 ; person
+	object SPRITE_LINK_RECEPTIONIST, 4, 2, STAY, DOWN, 1 ; person
 
 	; warp-to
 	warp_to 10, 17, SILPH_CO_1F_WIDTH

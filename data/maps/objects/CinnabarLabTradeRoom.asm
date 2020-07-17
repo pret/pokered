@@ -8,9 +8,9 @@ CinnabarLabTradeRoom_Object:
 	db 0 ; signs
 
 	db 3 ; objects
-	object SPRITE_BLACK_HAIR_BOY_2, 3, 2, STAY, DOWN, 1 ; person
-	object SPRITE_OLD_PERSON, 1, 4, STAY, NONE, 2 ; person
-	object SPRITE_FOULARD_WOMAN, 5, 5, STAY, UP, 3 ; person
+	object SPRITE_SUPER_NERD, 3, 2, STAY, DOWN, 1 ; person
+	object SPRITE_GRAMPS, 1, 4, STAY, NONE, 2 ; person
+	object SPRITE_BEAUTY, 5, 5, STAY, UP, 3 ; person
 
 	; warp-to
 	warp_to 2, 7, CINNABAR_LAB_TRADE_ROOM_WIDTH ; CINNABAR_LAB

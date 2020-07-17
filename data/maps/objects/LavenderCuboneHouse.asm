@@ -8,7 +8,7 @@ LavenderCuboneHouse_Object:
 	db 0 ; signs
 
 	db 2 ; objects
-	object SPRITE_SLOWBRO, 3, 5, STAY, UP, 1 ; person
+	object SPRITE_MONSTER, 3, 5, STAY, UP, 1 ; person
 	object SPRITE_BRUNETTE_GIRL, 2, 4, STAY, RIGHT, 2 ; person
 
 	; warp-to

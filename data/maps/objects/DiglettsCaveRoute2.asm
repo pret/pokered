@@ -9,7 +9,7 @@ DiglettsCaveRoute2_Object:
 	db 0 ; signs
 
 	db 1 ; objects
-	object SPRITE_FISHER, 3, 3, STAY, NONE, 1 ; person
+	object SPRITE_FISHING_GURU, 3, 3, STAY, NONE, 1 ; person
 
 	; warp-to
 	warp_to 2, 7, DIGLETTS_CAVE_ROUTE_2_WIDTH

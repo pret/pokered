@@ -10,8 +10,8 @@ SilphCo11F_Object:
 	db 0 ; signs
 
 	db 5 ; objects
-	object SPRITE_MR_MASTERBALL, 7, 5, STAY, DOWN, 1 ; person
-	object SPRITE_FOULARD_WOMAN, 10, 5, STAY, DOWN, 2 ; person
+	object SPRITE_SILPH_PRESIDENT, 7, 5, STAY, DOWN, 1 ; person
+	object SPRITE_BEAUTY, 10, 5, STAY, DOWN, 2 ; person
 	object SPRITE_GIOVANNI, 6, 9, STAY, DOWN, 3, OPP_GIOVANNI, 2
 	object SPRITE_ROCKET, 3, 16, STAY, UP, 4, OPP_ROCKET, 41
 	object SPRITE_ROCKET, 15, 9, STAY, UP, 5, OPP_ROCKET, 40

@@ -17,7 +17,7 @@ SafariZoneCenter_Object:
 	sign 14, 22, 3 ; SafariZoneCenterText3
 
 	db 1 ; objects
-	object SPRITE_BALL, 14, 10, STAY, NONE, 1, NUGGET
+	object SPRITE_POKE_BALL, 14, 10, STAY, NONE, 1, NUGGET
 
 	; warp-to
 	warp_to 14, 25, SAFARI_ZONE_CENTER_WIDTH ; SAFARI_ZONE_GATE
