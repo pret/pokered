@@ -326,7 +326,7 @@ BattleTransition_FlashScreen_:
 	ld hl, BattleTransition_FlashScreenPalettes
 .loop
 	ld a, [hli]
-	cp $1
+	cp 1
 	jr z, .done
 	ldh [rBGP], a
 	ld c, 2
@@ -339,7 +339,7 @@ BattleTransition_FlashScreen_:
 
 BattleTransition_FlashScreenPalettes:
 	db $F9,$FE,$FF,$FE,$F9,$E4,$90,$40,$00,$40,$90,$E4
-	db $01 ; terminator
+	db 1 ; end
 
 ; used for low level trainer dungeon battles
 BattleTransition_Shrink:
@@ -649,87 +649,36 @@ BattleTransition_Circle_Sub2:
 	ld l, a
 	jp BattleTransition_Circle_Sub3
 
+half_circle: MACRO
+	; quadrant x, circle data, target coord
+	db \1
+	dw \2
+	dwcoord \3, \4
+ENDM
+
 BattleTransition_HalfCircle1:
-	db $01
-	dw BattleTransition_CircleData1
-	dwcoord 18, 6
-
-	db $01
-	dw BattleTransition_CircleData2
-	dwcoord 19, 3
-
-	db $01
-	dw BattleTransition_CircleData3
-	dwcoord 18, 0
-
-	db $01
-	dw BattleTransition_CircleData4
-	dwcoord 14, 0
-
-	db $01
-	dw BattleTransition_CircleData5
-	dwcoord 10, 0
-
-	db $00
-	dw BattleTransition_CircleData5
-	dwcoord 9, 0
-
-	db $00
-	dw BattleTransition_CircleData4
-	dwcoord 5, 0
-
-	db $00
-	dw BattleTransition_CircleData3
-	dwcoord 1, 0
-
-	db $00
-	dw BattleTransition_CircleData2
-	dwcoord 0, 3
-
-	db $00
-	dw BattleTransition_CircleData1
-	dwcoord 1, 6
+	half_circle $01, BattleTransition_CircleData1, 18,  6
+	half_circle $01, BattleTransition_CircleData2, 19,  3
+	half_circle $01, BattleTransition_CircleData3, 18,  0
+	half_circle $01, BattleTransition_CircleData4, 14,  0
+	half_circle $01, BattleTransition_CircleData5, 10,  0
+	half_circle $00, BattleTransition_CircleData5,  9,  0
+	half_circle $00, BattleTransition_CircleData4,  5,  0
+	half_circle $00, BattleTransition_CircleData3,  1,  0
+	half_circle $00, BattleTransition_CircleData2,  0,  3
+	half_circle $00, BattleTransition_CircleData1,  1,  6
 
 BattleTransition_HalfCircle2:
-	db $00
-	dw BattleTransition_CircleData1
-	dwcoord 1, 11
-
-	db $00
-	dw BattleTransition_CircleData2
-	dwcoord 0, 14
-
-	db $00
-	dw BattleTransition_CircleData3
-	dwcoord 1, 17
-
-	db $00
-	dw BattleTransition_CircleData4
-	dwcoord 5, 17
-
-	db $00
-	dw BattleTransition_CircleData5
-	dwcoord 9, 17
-
-	db $01
-	dw BattleTransition_CircleData5
-	dwcoord 10, 17
-
-	db $01
-	dw BattleTransition_CircleData4
-	dwcoord 14, 17
-
-	db $01
-	dw BattleTransition_CircleData3
-	dwcoord 18, 17
-
-	db $01
-	dw BattleTransition_CircleData2
-	dwcoord 19, 14
-
-	db $01
-	dw BattleTransition_CircleData1
-	dwcoord 18, 11
+	half_circle $00, BattleTransition_CircleData1,  1, 11
+	half_circle $00, BattleTransition_CircleData2,  0, 14
+	half_circle $00, BattleTransition_CircleData3,  1, 17
+	half_circle $00, BattleTransition_CircleData4,  5, 17
+	half_circle $00, BattleTransition_CircleData5,  9, 17
+	half_circle $01, BattleTransition_CircleData5, 10, 17
+	half_circle $01, BattleTransition_CircleData4, 14, 17
+	half_circle $01, BattleTransition_CircleData3, 18, 17
+	half_circle $01, BattleTransition_CircleData2, 19, 14
+	half_circle $01, BattleTransition_CircleData1, 18, 11
 
 BattleTransition_Circle_Sub3:
 	push hl
