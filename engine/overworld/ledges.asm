@@ -72,5 +72,5 @@ LedgeHoppingShadow:
 LedgeHoppingShadowEnd:
 
 LedgeHoppingShadowOAM:
-	db $FF,$10,$FF,$20
-	db $FF,$40,$FF,$60
+	dbsprite  2, -1,  0,  7, $ff, OAM_HFLIP
+	dbsprite  8, -1,  0,  7, $ff, OAM_HFLIP | OAM_VFLIP

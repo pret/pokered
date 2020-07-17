@@ -183,12 +183,18 @@ UpdateCinnabarGymGateTileBlocks_::
 	jr nz, .loop
 	ret
 
+gym_gate_coord: MACRO
+	db \1, \2, \3, 0
+ENDM
+
+HORIZONTAL_GATE_BLOCK EQU $54
+VERTICAL_GATE_BLOCK   EQU $5f
+
 CinnabarGymGateCoords:
-	; format: x-coord, y-coord, direction, padding
-	; direction: $54 = horizontal gate, $5f = vertical gate
-	db $09,$03,$54,$00
-	db $06,$03,$54,$00
-	db $06,$06,$54,$00
-	db $03,$08,$5f,$00
-	db $02,$06,$54,$00
-	db $02,$03,$54,$00
+	; x coord, y coord, block id
+	gym_gate_coord 9, 3, HORIZONTAL_GATE_BLOCK
+	gym_gate_coord 6, 3, HORIZONTAL_GATE_BLOCK
+	gym_gate_coord 6, 6, HORIZONTAL_GATE_BLOCK
+	gym_gate_coord 3, 8, VERTICAL_GATE_BLOCK
+	gym_gate_coord 2, 6, HORIZONTAL_GATE_BLOCK
+	gym_gate_coord 2, 3, HORIZONTAL_GATE_BLOCK

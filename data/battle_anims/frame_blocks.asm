@@ -122,1124 +122,1117 @@ FrameBlockPointers:
 	dw FrameBlock78
 	dw FrameBlock79
 
-; FrameBlock format is as follows:
-; first byte = number of tiles in FrameBlock
-;
-; Next, each group of 4 bytes describes a tile in the FrameBlock
-; first byte = y offset
-; second byte = x offset
-; third byte = tile id (it's actually tile id - $31)
-; fourth byte = tile properties (xflip/yflip/etc.)
 FrameBlock01:
 	db 9 ; #
-	db $00, $00, $2c, $00
-	db $00, $08, $2d, $00
-	db $00, $10, $2c, $20
-	db $08, $00, $3c, $00
-	db $08, $08, $3d, $00
-	db $08, $10, $3c, $20
-	db $10, $00, $2c, $40
-	db $10, $08, $2d, $40
-	db $10, $10, $2c, $60
+	dbsprite  0,  0,  0,  0, $2c, 0
+	dbsprite  1,  0,  0,  0, $2d, 0
+	dbsprite  2,  0,  0,  0, $2c, OAM_HFLIP
+	dbsprite  0,  1,  0,  0, $3c, 0
+	dbsprite  1,  1,  0,  0, $3d, 0
+	dbsprite  2,  1,  0,  0, $3c, OAM_HFLIP
+	dbsprite  0,  2,  0,  0, $2c, OAM_VFLIP
+	dbsprite  1,  2,  0,  0, $2d, OAM_VFLIP
+	dbsprite  2,  2,  0,  0, $2c, OAM_HFLIP | OAM_VFLIP
 
 FrameBlock02:
 	db 16 ; #
-	db $00, $00, $20, $00
-	db $00, $08, $21, $00
-	db $00, $10, $21, $20
-	db $00, $18, $20, $20
-	db $08, $00, $30, $00
-	db $08, $08, $31, $00
-	db $08, $10, $31, $20
-	db $08, $18, $30, $20
-	db $10, $00, $30, $40
-	db $10, $08, $31, $40
-	db $10, $10, $31, $60
-	db $10, $18, $30, $60
-	db $18, $00, $20, $40
-	db $18, $08, $21, $40
-	db $18, $10, $21, $60
-	db $18, $18, $20, $60
+	dbsprite  0,  0,  0,  0, $20, 0
+	dbsprite  1,  0,  0,  0, $21, 0
+	dbsprite  2,  0,  0,  0, $21, OAM_HFLIP
+	dbsprite  3,  0,  0,  0, $20, OAM_HFLIP
+	dbsprite  0,  1,  0,  0, $30, 0
+	dbsprite  1,  1,  0,  0, $31, 0
+	dbsprite  2,  1,  0,  0, $31, OAM_HFLIP
+	dbsprite  3,  1,  0,  0, $30, OAM_HFLIP
+	dbsprite  0,  2,  0,  0, $30, OAM_VFLIP
+	dbsprite  1,  2,  0,  0, $31, OAM_VFLIP
+	dbsprite  2,  2,  0,  0, $31, OAM_HFLIP | OAM_VFLIP
+	dbsprite  3,  2,  0,  0, $30, OAM_HFLIP | OAM_VFLIP
+	dbsprite  0,  3,  0,  0, $20, OAM_VFLIP
+	dbsprite  1,  3,  0,  0, $21, OAM_VFLIP
+	dbsprite  2,  3,  0,  0, $21, OAM_HFLIP | OAM_VFLIP
+	dbsprite  3,  3,  0,  0, $20, OAM_HFLIP | OAM_VFLIP
 
 FrameBlock03:
 	db 4 ; #
-	db $00, $00, $02, $00
-	db $00, $08, $02, $20
-	db $08, $00, $12, $00
-	db $08, $08, $12, $20
+	dbsprite  0,  0,  0,  0, $02, 0
+	dbsprite  1,  0,  0,  0, $02, OAM_HFLIP
+	dbsprite  0,  1,  0,  0, $12, 0
+	dbsprite  1,  1,  0,  0, $12, OAM_HFLIP
 
 FrameBlock04:
 	db 4 ; #
-	db $00, $00, $06, $00
-	db $00, $08, $07, $00
-	db $08, $00, $16, $00
-	db $08, $08, $17, $00
+	dbsprite  0,  0,  0,  0, $06, 0
+	dbsprite  1,  0,  0,  0, $07, 0
+	dbsprite  0,  1,  0,  0, $16, 0
+	dbsprite  1,  1,  0,  0, $17, 0
 
 FrameBlock05:
 	db 4 ; #
-	db $00, $00, $07, $20
-	db $00, $08, $06, $20
-	db $08, $00, $17, $20
-	db $08, $08, $16, $20
+	dbsprite  0,  0,  0,  0, $07, OAM_HFLIP
+	dbsprite  1,  0,  0,  0, $06, OAM_HFLIP
+	dbsprite  0,  1,  0,  0, $17, OAM_HFLIP
+	dbsprite  1,  1,  0,  0, $16, OAM_HFLIP
 
 FrameBlock06:
 	db 12 ; #
-	db $00, $08, $23, $00
-	db $08, $00, $32, $00
-	db $08, $08, $33, $00
-	db $00, $10, $23, $20
-	db $08, $10, $33, $20
-	db $08, $18, $32, $20
-	db $10, $00, $32, $40
-	db $10, $08, $33, $40
-	db $18, $08, $23, $40
-	db $10, $10, $33, $60
-	db $10, $18, $32, $60
-	db $18, $10, $23, $60
+	dbsprite  1,  0,  0,  0, $23, 0
+	dbsprite  0,  1,  0,  0, $32, 0
+	dbsprite  1,  1,  0,  0, $33, 0
+	dbsprite  2,  0,  0,  0, $23, OAM_HFLIP
+	dbsprite  2,  1,  0,  0, $33, OAM_HFLIP
+	dbsprite  3,  1,  0,  0, $32, OAM_HFLIP
+	dbsprite  0,  2,  0,  0, $32, OAM_VFLIP
+	dbsprite  1,  2,  0,  0, $33, OAM_VFLIP
+	dbsprite  1,  3,  0,  0, $23, OAM_VFLIP
+	dbsprite  2,  2,  0,  0, $33, OAM_HFLIP | OAM_VFLIP
+	dbsprite  3,  2,  0,  0, $32, OAM_HFLIP | OAM_VFLIP
+	dbsprite  2,  3,  0,  0, $23, OAM_HFLIP | OAM_VFLIP
 
 FrameBlock07:
 	db 16 ; #
-	db $00, $00, $20, $00
-	db $00, $08, $21, $00
-	db $08, $00, $30, $00
-	db $08, $08, $31, $00
-	db $00, $10, $21, $20
-	db $00, $18, $20, $20
-	db $08, $10, $31, $20
-	db $08, $18, $30, $20
-	db $10, $00, $30, $40
-	db $10, $08, $31, $40
-	db $18, $00, $20, $40
-	db $18, $08, $21, $40
-	db $10, $10, $31, $60
-	db $10, $18, $30, $60
-	db $18, $10, $21, $60
-	db $18, $18, $20, $60
+	dbsprite  0,  0,  0,  0, $20, 0
+	dbsprite  1,  0,  0,  0, $21, 0
+	dbsprite  0,  1,  0,  0, $30, 0
+	dbsprite  1,  1,  0,  0, $31, 0
+	dbsprite  2,  0,  0,  0, $21, OAM_HFLIP
+	dbsprite  3,  0,  0,  0, $20, OAM_HFLIP
+	dbsprite  2,  1,  0,  0, $31, OAM_HFLIP
+	dbsprite  3,  1,  0,  0, $30, OAM_HFLIP
+	dbsprite  0,  2,  0,  0, $30, OAM_VFLIP
+	dbsprite  1,  2,  0,  0, $31, OAM_VFLIP
+	dbsprite  0,  3,  0,  0, $20, OAM_VFLIP
+	dbsprite  1,  3,  0,  0, $21, OAM_VFLIP
+	dbsprite  2,  2,  0,  0, $31, OAM_HFLIP | OAM_VFLIP
+	dbsprite  3,  2,  0,  0, $30, OAM_HFLIP | OAM_VFLIP
+	dbsprite  2,  3,  0,  0, $21, OAM_HFLIP | OAM_VFLIP
+	dbsprite  3,  3,  0,  0, $20, OAM_HFLIP | OAM_VFLIP
 
 FrameBlock08:
 	db 16 ; #
-	db $00, $00, $20, $00
-	db $00, $08, $21, $00
-	db $08, $00, $30, $00
-	db $08, $08, $31, $00
-	db $00, $18, $21, $20
-	db $00, $20, $20, $20
-	db $08, $18, $31, $20
-	db $08, $20, $30, $20
-	db $18, $00, $30, $40
-	db $18, $08, $31, $40
-	db $20, $00, $20, $40
-	db $20, $08, $21, $40
-	db $18, $18, $31, $60
-	db $18, $20, $30, $60
-	db $20, $18, $21, $60
-	db $20, $20, $20, $60
+	dbsprite  0,  0,  0,  0, $20, 0
+	dbsprite  1,  0,  0,  0, $21, 0
+	dbsprite  0,  1,  0,  0, $30, 0
+	dbsprite  1,  1,  0,  0, $31, 0
+	dbsprite  3,  0,  0,  0, $21, OAM_HFLIP
+	dbsprite  4,  0,  0,  0, $20, OAM_HFLIP
+	dbsprite  3,  1,  0,  0, $31, OAM_HFLIP
+	dbsprite  4,  1,  0,  0, $30, OAM_HFLIP
+	dbsprite  0,  3,  0,  0, $30, OAM_VFLIP
+	dbsprite  1,  3,  0,  0, $31, OAM_VFLIP
+	dbsprite  0,  4,  0,  0, $20, OAM_VFLIP
+	dbsprite  1,  4,  0,  0, $21, OAM_VFLIP
+	dbsprite  3,  3,  0,  0, $31, OAM_HFLIP | OAM_VFLIP
+	dbsprite  4,  3,  0,  0, $30, OAM_HFLIP | OAM_VFLIP
+	dbsprite  3,  4,  0,  0, $21, OAM_HFLIP | OAM_VFLIP
+	dbsprite  4,  4,  0,  0, $20, OAM_HFLIP | OAM_VFLIP
 
 FrameBlock09:
 	db 12 ; #
-	db $00, $00, $24, $00
-	db $00, $08, $25, $00
-	db $08, $00, $34, $00
-	db $00, $18, $25, $20
-	db $00, $20, $24, $20
-	db $08, $20, $34, $20
-	db $18, $00, $34, $40
-	db $20, $00, $24, $40
-	db $20, $08, $25, $40
-	db $18, $20, $34, $60
-	db $20, $18, $25, $60
-	db $20, $20, $24, $60
+	dbsprite  0,  0,  0,  0, $24, 0
+	dbsprite  1,  0,  0,  0, $25, 0
+	dbsprite  0,  1,  0,  0, $34, 0
+	dbsprite  3,  0,  0,  0, $25, OAM_HFLIP
+	dbsprite  4,  0,  0,  0, $24, OAM_HFLIP
+	dbsprite  4,  1,  0,  0, $34, OAM_HFLIP
+	dbsprite  0,  3,  0,  0, $34, OAM_VFLIP
+	dbsprite  0,  4,  0,  0, $24, OAM_VFLIP
+	dbsprite  1,  4,  0,  0, $25, OAM_VFLIP
+	dbsprite  4,  3,  0,  0, $34, OAM_HFLIP | OAM_VFLIP
+	dbsprite  3,  4,  0,  0, $25, OAM_HFLIP | OAM_VFLIP
+	dbsprite  4,  4,  0,  0, $24, OAM_HFLIP | OAM_VFLIP
 
 FrameBlock0a:
 	db 12 ; #
-	db $00, $00, $24, $00
-	db $00, $08, $25, $00
-	db $08, $00, $34, $00
-	db $00, $20, $25, $20
-	db $00, $28, $24, $20
-	db $08, $28, $34, $20
-	db $20, $00, $34, $40
-	db $28, $00, $24, $40
-	db $28, $08, $25, $40
-	db $20, $28, $34, $60
-	db $28, $20, $25, $60
-	db $28, $28, $24, $60
+	dbsprite  0,  0,  0,  0, $24, 0
+	dbsprite  1,  0,  0,  0, $25, 0
+	dbsprite  0,  1,  0,  0, $34, 0
+	dbsprite  4,  0,  0,  0, $25, OAM_HFLIP
+	dbsprite  5,  0,  0,  0, $24, OAM_HFLIP
+	dbsprite  5,  1,  0,  0, $34, OAM_HFLIP
+	dbsprite  0,  4,  0,  0, $34, OAM_VFLIP
+	dbsprite  0,  5,  0,  0, $24, OAM_VFLIP
+	dbsprite  1,  5,  0,  0, $25, OAM_VFLIP
+	dbsprite  5,  4,  0,  0, $34, OAM_HFLIP | OAM_VFLIP
+	dbsprite  4,  5,  0,  0, $25, OAM_HFLIP | OAM_VFLIP
+	dbsprite  5,  5,  0,  0, $24, OAM_HFLIP | OAM_VFLIP
 
 FrameBlock0b:
 	db 4 ; #
-	db $00, $00, $05, $00
-	db $00, $08, $05, $20
-	db $08, $00, $15, $00
-	db $08, $08, $15, $20
+	dbsprite  0,  0,  0,  0, $05, 0
+	dbsprite  1,  0,  0,  0, $05, OAM_HFLIP
+	dbsprite  0,  1,  0,  0, $15, 0
+	dbsprite  1,  1,  0,  0, $15, OAM_HFLIP
 
 FrameBlock0c:
 	db 4 ; #
-	db $00, $00, $04, $00
-	db $00, $08, $04, $20
-	db $08, $00, $14, $00
-	db $08, $08, $14, $20
+	dbsprite  0,  0,  0,  0, $04, 0
+	dbsprite  1,  0,  0,  0, $04, OAM_HFLIP
+	dbsprite  0,  1,  0,  0, $14, 0
+	dbsprite  1,  1,  0,  0, $14, OAM_HFLIP
 
 FrameBlock0d:
 	db 8 ; #
-	db $00, $00, $0c, $00
-	db $00, $08, $0d, $00
-	db $08, $00, $1c, $00
-	db $08, $08, $1d, $00
-	db $10, $00, $1d, $60
-	db $10, $08, $1c, $60
-	db $18, $00, $0d, $60
-	db $18, $08, $0c, $60
+	dbsprite  0,  0,  0,  0, $0c, 0
+	dbsprite  1,  0,  0,  0, $0d, 0
+	dbsprite  0,  1,  0,  0, $1c, 0
+	dbsprite  1,  1,  0,  0, $1d, 0
+	dbsprite  0,  2,  0,  0, $1d, OAM_HFLIP | OAM_VFLIP
+	dbsprite  1,  2,  0,  0, $1c, OAM_HFLIP | OAM_VFLIP
+	dbsprite  0,  3,  0,  0, $0d, OAM_HFLIP | OAM_VFLIP
+	dbsprite  1,  3,  0,  0, $0c, OAM_HFLIP | OAM_VFLIP
 
 FrameBlock0e:
 	db 4 ; #
-	db $20, $00, $0c, $00
-	db $20, $08, $0d, $00
-	db $28, $00, $1c, $00
-	db $28, $08, $1d, $00
+	dbsprite  0,  4,  0,  0, $0c, 0
+	dbsprite  1,  4,  0,  0, $0d, 0
+	dbsprite  0,  5,  0,  0, $1c, 0
+	dbsprite  1,  5,  0,  0, $1d, 0
 
 FrameBlock0f:
 	db 4 ; #
-	db $30, $00, $1d, $60
-	db $30, $08, $1c, $60
-	db $38, $00, $0d, $60
-	db $38, $08, $0c, $60
+	dbsprite  0,  6,  0,  0, $1d, OAM_HFLIP | OAM_VFLIP
+	dbsprite  1,  6,  0,  0, $1c, OAM_HFLIP | OAM_VFLIP
+	dbsprite  0,  7,  0,  0, $0d, OAM_HFLIP | OAM_VFLIP
+	dbsprite  1,  7,  0,  0, $0c, OAM_HFLIP | OAM_VFLIP
 
 FrameBlock10:
 	db 8 ; #
-	db $00, $00, $0e, $00
-	db $00, $08, $0f, $00
-	db $08, $00, $1e, $00
-	db $08, $08, $1f, $00
-	db $00, $10, $0f, $20
-	db $00, $18, $0e, $20
-	db $08, $10, $1f, $20
-	db $08, $18, $1e, $20
+	dbsprite  0,  0,  0,  0, $0e, 0
+	dbsprite  1,  0,  0,  0, $0f, 0
+	dbsprite  0,  1,  0,  0, $1e, 0
+	dbsprite  1,  1,  0,  0, $1f, 0
+	dbsprite  2,  0,  0,  0, $0f, OAM_HFLIP
+	dbsprite  3,  0,  0,  0, $0e, OAM_HFLIP
+	dbsprite  2,  1,  0,  0, $1f, OAM_HFLIP
+	dbsprite  3,  1,  0,  0, $1e, OAM_HFLIP
 
 FrameBlock11:
 	db 8 ; #
-	db $00, $00, $0e, $00
-	db $00, $08, $0f, $00
-	db $08, $00, $1e, $00
-	db $08, $08, $1f, $00
-	db $00, $20, $0f, $20
-	db $00, $28, $0e, $20
-	db $08, $20, $1f, $20
-	db $08, $28, $1e, $20
+	dbsprite  0,  0,  0,  0, $0e, 0
+	dbsprite  1,  0,  0,  0, $0f, 0
+	dbsprite  0,  1,  0,  0, $1e, 0
+	dbsprite  1,  1,  0,  0, $1f, 0
+	dbsprite  4,  0,  0,  0, $0f, OAM_HFLIP
+	dbsprite  5,  0,  0,  0, $0e, OAM_HFLIP
+	dbsprite  4,  1,  0,  0, $1f, OAM_HFLIP
+	dbsprite  5,  1,  0,  0, $1e, OAM_HFLIP
 
 FrameBlock12:
 	db 3 ; #
-	db $00, $00, $37, $00
-	db $08, $10, $37, $00
-	db $00, $20, $37, $00
+	dbsprite  0,  0,  0,  0, $37, 0
+	dbsprite  2,  1,  0,  0, $37, 0
+	dbsprite  4,  0,  0,  0, $37, 0
 
 FrameBlock13:
 	db 4 ; #
-	db $00, $00, $36, $00
-	db $00, $08, $36, $20
-	db $08, $00, $36, $40
-	db $08, $08, $36, $60
+	dbsprite  0,  0,  0,  0, $36, 0
+	dbsprite  1,  0,  0,  0, $36, OAM_HFLIP
+	dbsprite  0,  1,  0,  0, $36, OAM_VFLIP
+	dbsprite  1,  1,  0,  0, $36, OAM_HFLIP | OAM_VFLIP
 
 FrameBlock14:
 	db 8 ; #
-	db $00, $10, $28, $00
-	db $00, $18, $28, $20
-	db $08, $10, $38, $00
-	db $08, $18, $38, $20
-	db $00, $20, $36, $00
-	db $00, $28, $36, $20
-	db $08, $20, $36, $40
-	db $08, $28, $36, $60
+	dbsprite  2,  0,  0,  0, $28, 0
+	dbsprite  3,  0,  0,  0, $28, OAM_HFLIP
+	dbsprite  2,  1,  0,  0, $38, 0
+	dbsprite  3,  1,  0,  0, $38, OAM_HFLIP
+	dbsprite  4,  0,  0,  0, $36, 0
+	dbsprite  5,  0,  0,  0, $36, OAM_HFLIP
+	dbsprite  4,  1,  0,  0, $36, OAM_VFLIP
+	dbsprite  5,  1,  0,  0, $36, OAM_HFLIP | OAM_VFLIP
 
 FrameBlock15:
 	db 12 ; #
-	db $00, $00, $28, $00
-	db $00, $08, $28, $20
-	db $08, $00, $38, $00
-	db $08, $08, $38, $20
-	db $00, $10, $29, $00
-	db $00, $18, $29, $20
-	db $08, $10, $39, $00
-	db $08, $18, $39, $20
-	db $00, $20, $28, $00
-	db $00, $28, $28, $20
-	db $08, $20, $38, $00
-	db $08, $28, $38, $20
+	dbsprite  0,  0,  0,  0, $28, 0
+	dbsprite  1,  0,  0,  0, $28, OAM_HFLIP
+	dbsprite  0,  1,  0,  0, $38, 0
+	dbsprite  1,  1,  0,  0, $38, OAM_HFLIP
+	dbsprite  2,  0,  0,  0, $29, 0
+	dbsprite  3,  0,  0,  0, $29, OAM_HFLIP
+	dbsprite  2,  1,  0,  0, $39, 0
+	dbsprite  3,  1,  0,  0, $39, OAM_HFLIP
+	dbsprite  4,  0,  0,  0, $28, 0
+	dbsprite  5,  0,  0,  0, $28, OAM_HFLIP
+	dbsprite  4,  1,  0,  0, $38, 0
+	dbsprite  5,  1,  0,  0, $38, OAM_HFLIP
 
 FrameBlock16:
 	db 8 ; #
-	db $00, $00, $29, $00
-	db $00, $08, $29, $20
-	db $08, $00, $39, $00
-	db $08, $08, $39, $20
-	db $00, $20, $29, $00
-	db $00, $28, $29, $20
-	db $08, $20, $39, $00
-	db $08, $28, $39, $20
+	dbsprite  0,  0,  0,  0, $29, 0
+	dbsprite  1,  0,  0,  0, $29, OAM_HFLIP
+	dbsprite  0,  1,  0,  0, $39, 0
+	dbsprite  1,  1,  0,  0, $39, OAM_HFLIP
+	dbsprite  4,  0,  0,  0, $29, 0
+	dbsprite  5,  0,  0,  0, $29, OAM_HFLIP
+	dbsprite  4,  1,  0,  0, $39, 0
+	dbsprite  5,  1,  0,  0, $39, OAM_HFLIP
 
 FrameBlock17:
 	db 4 ; #
-	db $00, $00, $08, $00
-	db $00, $08, $09, $00
-	db $08, $00, $18, $00
-	db $08, $08, $19, $00
+	dbsprite  0,  0,  0,  0, $08, 0
+	dbsprite  1,  0,  0,  0, $09, 0
+	dbsprite  0,  1,  0,  0, $18, 0
+	dbsprite  1,  1,  0,  0, $19, 0
 
 FrameBlock18:
 	db 1 ; #
-	db $18, $00, $45, $60
+	dbsprite  0,  3,  0,  0, $45, OAM_HFLIP | OAM_VFLIP
 
 FrameBlock19:
 	db 2 ; #
-	db $18, $08, $45, $00
-	db $10, $08, $46, $60
+	dbsprite  1,  3,  0,  0, $45, 0
+	dbsprite  1,  2,  0,  0, $46, OAM_HFLIP | OAM_VFLIP
 
 FrameBlock1a:
 	db 2 ; #
-	db $10, $10, $45, $60
-	db $18, $10, $46, $00
+	dbsprite  2,  2,  0,  0, $45, OAM_HFLIP | OAM_VFLIP
+	dbsprite  2,  3,  0,  0, $46, 0
 
 FrameBlock1b:
 	db 2 ; #
-	db $10, $18, $45, $00
-	db $08, $18, $46, $60
+	dbsprite  3,  2,  0,  0, $45, 0
+	dbsprite  3,  1,  0,  0, $46, OAM_HFLIP | OAM_VFLIP
 
 FrameBlock1c:
 	db 2 ; #
-	db $08, $20, $45, $60
-	db $10, $20, $46, $00
+	dbsprite  4,  1,  0,  0, $45, OAM_HFLIP | OAM_VFLIP
+	dbsprite  4,  2,  0,  0, $46, 0
 
 FrameBlock1d:
 	db 2 ; #
-	db $08, $28, $45, $00
-	db $00, $28, $46, $60
+	dbsprite  5,  1,  0,  0, $45, 0
+	dbsprite  5,  0,  0,  0, $46, OAM_HFLIP | OAM_VFLIP
 
 FrameBlock1e:
 	db 2 ; #
-	db $00, $30, $45, $60
-	db $08, $30, $46, $00
+	dbsprite  6,  0,  0,  0, $45, OAM_HFLIP | OAM_VFLIP
+	dbsprite  6,  1,  0,  0, $46, 0
 
 FrameBlock75:
 	db 4 ; #
-	db $00, $00, $43, $00
-	db $00, $08, $43, $20
-	db $08, $00, $22, $00
-	db $08, $08, $43, $60
+	dbsprite  0,  0,  0,  0, $43, 0
+	dbsprite  1,  0,  0,  0, $43, OAM_HFLIP
+	dbsprite  0,  1,  0,  0, $22, 0
+	dbsprite  1,  1,  0,  0, $43, OAM_HFLIP | OAM_VFLIP
 
 FrameBlock1f:
 	db 2 ; #
-	db $00, $00, $03, $00
-	db $00, $30, $03, $20
+	dbsprite  0,  0,  0,  0, $03, 0
+	dbsprite  6,  0,  0,  0, $03, OAM_HFLIP
 
 FrameBlock20:
 	db 6 ; #
-	db $00, $00, $03, $00
-	db $00, $30, $03, $20
-	db $08, $08, $03, $00
-	db $08, $28, $03, $20
-	db $08, $00, $13, $00
-	db $08, $30, $13, $20
+	dbsprite  0,  0,  0,  0, $03, 0
+	dbsprite  6,  0,  0,  0, $03, OAM_HFLIP
+	dbsprite  1,  1,  0,  0, $03, 0
+	dbsprite  5,  1,  0,  0, $03, OAM_HFLIP
+	dbsprite  0,  1,  0,  0, $13, 0
+	dbsprite  6,  1,  0,  0, $13, OAM_HFLIP
 
 FrameBlock21:
 	db 12 ; #
-	db $00, $00, $03, $00
-	db $00, $30, $03, $20
-	db $08, $08, $03, $00
-	db $08, $28, $03, $20
-	db $08, $00, $13, $00
-	db $08, $30, $13, $20
-	db $10, $10, $03, $00
-	db $10, $20, $03, $20
-	db $10, $08, $13, $00
-	db $10, $28, $13, $20
-	db $10, $00, $03, $00
-	db $10, $30, $03, $20
+	dbsprite  0,  0,  0,  0, $03, 0
+	dbsprite  6,  0,  0,  0, $03, OAM_HFLIP
+	dbsprite  1,  1,  0,  0, $03, 0
+	dbsprite  5,  1,  0,  0, $03, OAM_HFLIP
+	dbsprite  0,  1,  0,  0, $13, 0
+	dbsprite  6,  1,  0,  0, $13, OAM_HFLIP
+	dbsprite  2,  2,  0,  0, $03, 0
+	dbsprite  4,  2,  0,  0, $03, OAM_HFLIP
+	dbsprite  1,  2,  0,  0, $13, 0
+	dbsprite  5,  2,  0,  0, $13, OAM_HFLIP
+	dbsprite  0,  2,  0,  0, $03, 0
+	dbsprite  6,  2,  0,  0, $03, OAM_HFLIP
 
 FrameBlock22:
 	db 19 ; #
-	db $00, $00, $03, $00
-	db $08, $00, $13, $00
-	db $10, $00, $03, $00
-	db $18, $00, $13, $00
-	db $08, $08, $03, $00
-	db $10, $08, $13, $00
-	db $18, $08, $03, $00
-	db $10, $10, $03, $00
-	db $18, $10, $13, $00
-	db $18, $18, $03, $00
-	db $10, $20, $03, $20
-	db $18, $20, $13, $20
-	db $08, $28, $03, $20
-	db $10, $28, $13, $20
-	db $18, $28, $03, $20
-	db $00, $30, $03, $20
-	db $08, $30, $13, $20
-	db $10, $30, $03, $20
-	db $18, $30, $13, $20
+	dbsprite  0,  0,  0,  0, $03, 0
+	dbsprite  0,  1,  0,  0, $13, 0
+	dbsprite  0,  2,  0,  0, $03, 0
+	dbsprite  0,  3,  0,  0, $13, 0
+	dbsprite  1,  1,  0,  0, $03, 0
+	dbsprite  1,  2,  0,  0, $13, 0
+	dbsprite  1,  3,  0,  0, $03, 0
+	dbsprite  2,  2,  0,  0, $03, 0
+	dbsprite  2,  3,  0,  0, $13, 0
+	dbsprite  3,  3,  0,  0, $03, 0
+	dbsprite  4,  2,  0,  0, $03, OAM_HFLIP
+	dbsprite  4,  3,  0,  0, $13, OAM_HFLIP
+	dbsprite  5,  1,  0,  0, $03, OAM_HFLIP
+	dbsprite  5,  2,  0,  0, $13, OAM_HFLIP
+	dbsprite  5,  3,  0,  0, $03, OAM_HFLIP
+	dbsprite  6,  0,  0,  0, $03, OAM_HFLIP
+	dbsprite  6,  1,  0,  0, $13, OAM_HFLIP
+	dbsprite  6,  2,  0,  0, $03, OAM_HFLIP
+	dbsprite  6,  3,  0,  0, $13, OAM_HFLIP
 
 FrameBlock23:
 	db 4 ; #
-	db $00, $00, $0a, $00
-	db $00, $08, $0b, $00
-	db $08, $00, $1a, $00
-	db $08, $08, $1b, $00
+	dbsprite  0,  0,  0,  0, $0a, 0
+	dbsprite  1,  0,  0,  0, $0b, 0
+	dbsprite  0,  1,  0,  0, $1a, 0
+	dbsprite  1,  1,  0,  0, $1b, 0
 
 FrameBlock24:
 	db 2 ; #
-	db $08, $00, $0a, $00
-	db $08, $08, $0b, $00
+	dbsprite  0,  1,  0,  0, $0a, 0
+	dbsprite  1,  1,  0,  0, $0b, 0
 
 FrameBlock25:
 	db 12 ; #
-	db $10, $00, $0a, $00
-	db $10, $08, $0b, $00
-	db $18, $00, $1a, $00
-	db $18, $08, $1b, $00
-	db $00, $10, $0a, $00
-	db $00, $18, $0b, $00
-	db $08, $10, $1a, $00
-	db $08, $18, $1b, $00
-	db $08, $20, $0a, $00
-	db $08, $28, $0b, $00
-	db $10, $20, $1a, $00
-	db $10, $28, $1b, $00
+	dbsprite  0,  2,  0,  0, $0a, 0
+	dbsprite  1,  2,  0,  0, $0b, 0
+	dbsprite  0,  3,  0,  0, $1a, 0
+	dbsprite  1,  3,  0,  0, $1b, 0
+	dbsprite  2,  0,  0,  0, $0a, 0
+	dbsprite  3,  0,  0,  0, $0b, 0
+	dbsprite  2,  1,  0,  0, $1a, 0
+	dbsprite  3,  1,  0,  0, $1b, 0
+	dbsprite  4,  1,  0,  0, $0a, 0
+	dbsprite  5,  1,  0,  0, $0b, 0
+	dbsprite  4,  2,  0,  0, $1a, 0
+	dbsprite  5,  2,  0,  0, $1b, 0
 
 FrameBlock26:
 	db 4 ; #
-	db $00, $10, $44, $00
-	db $00, $18, $44, $20
-	db $08, $10, $44, $40
-	db $08, $18, $44, $60
+	dbsprite  2,  0,  0,  0, $44, 0
+	dbsprite  3,  0,  0,  0, $44, OAM_HFLIP
+	dbsprite  2,  1,  0,  0, $44, OAM_VFLIP
+	dbsprite  3,  1,  0,  0, $44, OAM_HFLIP | OAM_VFLIP
 
 FrameBlock27:
 	db 5 ; #
-	db $08, $08, $44, $00
-	db $08, $10, $44, $20
-	db $10, $08, $44, $40
-	db $10, $10, $44, $60
-	db $00, $18, $47, $00
+	dbsprite  1,  1,  0,  0, $44, 0
+	dbsprite  2,  1,  0,  0, $44, OAM_HFLIP
+	dbsprite  1,  2,  0,  0, $44, OAM_VFLIP
+	dbsprite  2,  2,  0,  0, $44, OAM_HFLIP | OAM_VFLIP
+	dbsprite  3,  0,  0,  0, $47, 0
 
 FrameBlock28:
 	db 6 ; #
-	db $10, $00, $44, $00
-	db $10, $08, $44, $20
-	db $18, $00, $44, $40
-	db $18, $08, $44, $60
-	db $08, $10, $47, $00
-	db $02, $16, $47, $00
+	dbsprite  0,  2,  0,  0, $44, 0
+	dbsprite  1,  2,  0,  0, $44, OAM_HFLIP
+	dbsprite  0,  3,  0,  0, $44, OAM_VFLIP
+	dbsprite  1,  3,  0,  0, $44, OAM_HFLIP | OAM_VFLIP
+	dbsprite  2,  1,  0,  0, $47, 0
+	dbsprite  2,  0,  6,  2, $47, 0
 
 FrameBlock29:
 	db 4 ; #
-	db $18, $00, $47, $00
-	db $12, $06, $47, $00
-	db $0c, $0c, $47, $00
-	db $06, $12, $47, $00
+	dbsprite  0,  3,  0,  0, $47, 0
+	dbsprite  0,  2,  6,  2, $47, 0
+	dbsprite  1,  1,  4,  4, $47, 0
+	dbsprite  2,  0,  2,  6, $47, 0
 
 FrameBlock2a:
 	db 4 ; #
-	db $00, $00, $44, $00
-	db $00, $08, $44, $20
-	db $08, $00, $44, $40
-	db $08, $08, $44, $60
+	dbsprite  0,  0,  0,  0, $44, 0
+	dbsprite  1,  0,  0,  0, $44, OAM_HFLIP
+	dbsprite  0,  1,  0,  0, $44, OAM_VFLIP
+	dbsprite  1,  1,  0,  0, $44, OAM_HFLIP | OAM_VFLIP
 
 FrameBlock2b:
 	db 2 ; #
-	db $06, $02, $47, $00
-	db $00, $08, $47, $00
+	dbsprite  0,  0,  2,  6, $47, 0
+	dbsprite  1,  0,  0,  0, $47, 0
 
 FrameBlock2c:
 	db 1 ; #
-	db $a0, $00, $4d, $00
+	dbsprite  0, 20,  0,  0, $4d, 0
 
 FrameBlock2d:
 	db 8 ; #
-	db $00, $00, $26, $00
-	db $00, $08, $27, $00
-	db $08, $00, $36, $00
-	db $08, $08, $37, $00
-	db $10, $00, $28, $00
-	db $10, $08, $29, $00
-	db $18, $00, $38, $00
-	db $18, $08, $39, $00
+	dbsprite  0,  0,  0,  0, $26, 0
+	dbsprite  1,  0,  0,  0, $27, 0
+	dbsprite  0,  1,  0,  0, $36, 0
+	dbsprite  1,  1,  0,  0, $37, 0
+	dbsprite  0,  2,  0,  0, $28, 0
+	dbsprite  1,  2,  0,  0, $29, 0
+	dbsprite  0,  3,  0,  0, $38, 0
+	dbsprite  1,  3,  0,  0, $39, 0
 
 FrameBlock2e:
 	db 8 ; #
-	db $00, $00, $27, $20
-	db $00, $08, $26, $20
-	db $08, $00, $37, $20
-	db $08, $08, $36, $20
-	db $10, $00, $29, $20
-	db $10, $08, $28, $20
-	db $18, $00, $39, $20
-	db $18, $08, $38, $20
+	dbsprite  0,  0,  0,  0, $27, OAM_HFLIP
+	dbsprite  1,  0,  0,  0, $26, OAM_HFLIP
+	dbsprite  0,  1,  0,  0, $37, OAM_HFLIP
+	dbsprite  1,  1,  0,  0, $36, OAM_HFLIP
+	dbsprite  0,  2,  0,  0, $29, OAM_HFLIP
+	dbsprite  1,  2,  0,  0, $28, OAM_HFLIP
+	dbsprite  0,  3,  0,  0, $39, OAM_HFLIP
+	dbsprite  1,  3,  0,  0, $38, OAM_HFLIP
 
 FrameBlock2f:
 	db 4 ; #
-	db $00, $00, $0c, $00
-	db $00, $08, $0d, $00
-	db $08, $00, $0c, $40
-	db $08, $08, $0d, $40
+	dbsprite  0,  0,  0,  0, $0c, 0
+	dbsprite  1,  0,  0,  0, $0d, 0
+	dbsprite  0,  1,  0,  0, $0c, OAM_VFLIP
+	dbsprite  1,  1,  0,  0, $0d, OAM_VFLIP
 
 FrameBlock30:
 	db 4 ; #
-	db $00, $00, $44, $00
-	db $00, $08, $44, $20
-	db $08, $00, $44, $40
-	db $08, $08, $44, $60
+	dbsprite  0,  0,  0,  0, $44, 0
+	dbsprite  1,  0,  0,  0, $44, OAM_HFLIP
+	dbsprite  0,  1,  0,  0, $44, OAM_VFLIP
+	dbsprite  1,  1,  0,  0, $44, OAM_HFLIP | OAM_VFLIP
 
 FrameBlock31:
 	db 1 ; #
-	db $00, $00, $45, $00
+	dbsprite  0,  0,  0,  0, $45, 0
 
 FrameBlock32:
 	db 7 ; #
-	db $00, $00, $4d, $00
-	db $00, $08, $2f, $00
-	db $00, $10, $4d, $20
-	db $08, $00, $4e, $00
-	db $08, $08, $07, $00
-	db $08, $10, $4e, $20
-	db $10, $08, $3f, $00
+	dbsprite  0,  0,  0,  0, $4d, 0
+	dbsprite  1,  0,  0,  0, $2f, 0
+	dbsprite  2,  0,  0,  0, $4d, OAM_HFLIP
+	dbsprite  0,  1,  0,  0, $4e, 0
+	dbsprite  1,  1,  0,  0, $07, 0
+	dbsprite  2,  1,  0,  0, $4e, OAM_HFLIP
+	dbsprite  1,  2,  0,  0, $3f, 0
 
 FrameBlock33:
 	db 7 ; #
-	db $00, $08, $3f, $40
-	db $08, $00, $4e, $40
-	db $08, $08, $07, $40
-	db $08, $10, $4e, $60
-	db $10, $00, $4d, $40
-	db $10, $08, $2f, $40
-	db $10, $10, $4d, $60
+	dbsprite  1,  0,  0,  0, $3f, OAM_VFLIP
+	dbsprite  0,  1,  0,  0, $4e, OAM_VFLIP
+	dbsprite  1,  1,  0,  0, $07, OAM_VFLIP
+	dbsprite  2,  1,  0,  0, $4e, OAM_HFLIP | OAM_VFLIP
+	dbsprite  0,  2,  0,  0, $4d, OAM_VFLIP
+	dbsprite  1,  2,  0,  0, $2f, OAM_VFLIP
+	dbsprite  2,  2,  0,  0, $4d, OAM_HFLIP | OAM_VFLIP
 
 FrameBlock34:
 	db 1 ; #
-	db $a0, $00, $00, $10
+	dbsprite  0, 20,  0,  0, $00, OAM_OBP1
 
 FrameBlock35:
 	db 6 ; #
-	db $00, $00, $2a, $00
-	db $00, $08, $2b, $00
-	db $08, $00, $3a, $00
-	db $10, $00, $3a, $40
-	db $18, $00, $2a, $40
-	db $18, $08, $2b, $40
+	dbsprite  0,  0,  0,  0, $2a, 0
+	dbsprite  1,  0,  0,  0, $2b, 0
+	dbsprite  0,  1,  0,  0, $3a, 0
+	dbsprite  0,  2,  0,  0, $3a, OAM_VFLIP
+	dbsprite  0,  3,  0,  0, $2a, OAM_VFLIP
+	dbsprite  1,  3,  0,  0, $2b, OAM_VFLIP
 
 FrameBlock36:
 	db 4 ; #
-	db $00, $00, $00, $00
-	db $00, $08, $01, $00
-	db $08, $00, $10, $00
-	db $08, $08, $11, $00
+	dbsprite  0,  0,  0,  0, $00, 0
+	dbsprite  1,  0,  0,  0, $01, 0
+	dbsprite  0,  1,  0,  0, $10, 0
+	dbsprite  1,  1,  0,  0, $11, 0
 
 FrameBlock37:
 	db 4 ; #
-	db $00, $00, $01, $a0
-	db $00, $08, $00, $a0
-	db $08, $00, $11, $a0
-	db $08, $08, $10, $a0
+	dbsprite  0,  0,  0,  0, $01, OAM_BEHIND_BG | OAM_HFLIP
+	dbsprite  1,  0,  0,  0, $00, OAM_BEHIND_BG | OAM_HFLIP
+	dbsprite  0,  1,  0,  0, $11, OAM_BEHIND_BG | OAM_HFLIP
+	dbsprite  1,  1,  0,  0, $10, OAM_BEHIND_BG | OAM_HFLIP
 
 FrameBlock38:
 	db 4 ; #
-	db $00, $00, $0a, $00
-	db $00, $08, $0b, $00
-	db $08, $00, $1a, $00
-	db $08, $08, $1b, $00
+	dbsprite  0,  0,  0,  0, $0a, 0
+	dbsprite  1,  0,  0,  0, $0b, 0
+	dbsprite  0,  1,  0,  0, $1a, 0
+	dbsprite  1,  1,  0,  0, $1b, 0
 
 FrameBlock39:
 	db 4 ; #
-	db $00, $00, $0b, $20
-	db $00, $08, $0a, $20
-	db $08, $00, $1b, $20
-	db $08, $08, $1a, $20
+	dbsprite  0,  0,  0,  0, $0b, OAM_HFLIP
+	dbsprite  1,  0,  0,  0, $0a, OAM_HFLIP
+	dbsprite  0,  1,  0,  0, $1b, OAM_HFLIP
+	dbsprite  1,  1,  0,  0, $1a, OAM_HFLIP
 
 FrameBlock3a:
 	db 4 ; #
-	db $20, $00, $05, $00
-	db $20, $08, $05, $20
-	db $28, $00, $15, $00
-	db $28, $08, $15, $20
+	dbsprite  0,  4,  0,  0, $05, 0
+	dbsprite  1,  4,  0,  0, $05, OAM_HFLIP
+	dbsprite  0,  5,  0,  0, $15, 0
+	dbsprite  1,  5,  0,  0, $15, OAM_HFLIP
 
 FrameBlock3b:
 	db 5 ; #
-	db $18, $00, $04, $00
-	db $18, $08, $04, $20
-	db $20, $00, $14, $00
-	db $20, $08, $14, $20
-	db $28, $04, $41, $00
+	dbsprite  0,  3,  0,  0, $04, 0
+	dbsprite  1,  3,  0,  0, $04, OAM_HFLIP
+	dbsprite  0,  4,  0,  0, $14, 0
+	dbsprite  1,  4,  0,  0, $14, OAM_HFLIP
+	dbsprite  0,  5,  4,  0, $41, 0
 
 FrameBlock3c:
 	db 6 ; #
-	db $10, $00, $05, $00
-	db $10, $08, $05, $20
-	db $18, $00, $15, $00
-	db $18, $08, $15, $20
-	db $20, $04, $42, $00
-	db $28, $04, $42, $00
+	dbsprite  0,  2,  0,  0, $05, 0
+	dbsprite  1,  2,  0,  0, $05, OAM_HFLIP
+	dbsprite  0,  3,  0,  0, $15, 0
+	dbsprite  1,  3,  0,  0, $15, OAM_HFLIP
+	dbsprite  0,  4,  4,  0, $42, 0
+	dbsprite  0,  5,  4,  0, $42, 0
 
 FrameBlock3d:
 	db 7 ; #
-	db $08, $00, $04, $00
-	db $08, $08, $04, $20
-	db $10, $00, $14, $00
-	db $10, $08, $14, $20
-	db $18, $04, $41, $00
-	db $20, $04, $41, $00
-	db $28, $04, $41, $00
+	dbsprite  0,  1,  0,  0, $04, 0
+	dbsprite  1,  1,  0,  0, $04, OAM_HFLIP
+	dbsprite  0,  2,  0,  0, $14, 0
+	dbsprite  1,  2,  0,  0, $14, OAM_HFLIP
+	dbsprite  0,  3,  4,  0, $41, 0
+	dbsprite  0,  4,  4,  0, $41, 0
+	dbsprite  0,  5,  4,  0, $41, 0
 
 FrameBlock3e:
 	db 8 ; #
-	db $00, $00, $05, $00
-	db $00, $08, $05, $20
-	db $08, $00, $15, $00
-	db $08, $08, $15, $20
-	db $10, $04, $42, $00
-	db $18, $04, $42, $00
-	db $20, $04, $42, $00
-	db $28, $04, $42, $00
+	dbsprite  0,  0,  0,  0, $05, 0
+	dbsprite  1,  0,  0,  0, $05, OAM_HFLIP
+	dbsprite  0,  1,  0,  0, $15, 0
+	dbsprite  1,  1,  0,  0, $15, OAM_HFLIP
+	dbsprite  0,  2,  4,  0, $42, 0
+	dbsprite  0,  3,  4,  0, $42, 0
+	dbsprite  0,  4,  4,  0, $42, 0
+	dbsprite  0,  5,  4,  0, $42, 0
 
 FrameBlock3f:
 	db 8 ; #
-	db $00, $00, $04, $00
-	db $00, $08, $04, $20
-	db $08, $00, $14, $00
-	db $08, $08, $14, $20
-	db $10, $04, $41, $00
-	db $18, $04, $41, $00
-	db $20, $04, $41, $00
-	db $28, $04, $41, $00
+	dbsprite  0,  0,  0,  0, $04, 0
+	dbsprite  1,  0,  0,  0, $04, OAM_HFLIP
+	dbsprite  0,  1,  0,  0, $14, 0
+	dbsprite  1,  1,  0,  0, $14, OAM_HFLIP
+	dbsprite  0,  2,  4,  0, $41, 0
+	dbsprite  0,  3,  4,  0, $41, 0
+	dbsprite  0,  4,  4,  0, $41, 0
+	dbsprite  0,  5,  4,  0, $41, 0
 
 FrameBlock40:
 	db 3 ; #
-	db $00, $00, $3d, $00
-	db $00, $08, $3d, $00
-	db $08, $08, $3d, $00
+	dbsprite  0,  0,  0,  0, $3d, 0
+	dbsprite  1,  0,  0,  0, $3d, 0
+	dbsprite  1,  1,  0,  0, $3d, 0
 
 FrameBlock41:
 	db 4 ; #
-	db $00, $00, $06, $00
-	db $00, $08, $06, $20
-	db $08, $00, $16, $00
-	db $08, $08, $17, $00
+	dbsprite  0,  0,  0,  0, $06, 0
+	dbsprite  1,  0,  0,  0, $06, OAM_HFLIP
+	dbsprite  0,  1,  0,  0, $16, 0
+	dbsprite  1,  1,  0,  0, $17, 0
 
 FrameBlock42:
 	db 11 ; #
-	db $00, $10, $42, $00
-	db $08, $00, $42, $00
-	db $08, $08, $42, $00
-	db $08, $10, $42, $00
-	db $08, $18, $42, $00
-	db $08, $20, $42, $00
-	db $10, $10, $42, $00
-	db $18, $08, $42, $00
-	db $18, $18, $42, $00
-	db $20, $00, $42, $00
-	db $20, $20, $42, $00
+	dbsprite  2,  0,  0,  0, $42, 0
+	dbsprite  0,  1,  0,  0, $42, 0
+	dbsprite  1,  1,  0,  0, $42, 0
+	dbsprite  2,  1,  0,  0, $42, 0
+	dbsprite  3,  1,  0,  0, $42, 0
+	dbsprite  4,  1,  0,  0, $42, 0
+	dbsprite  2,  2,  0,  0, $42, 0
+	dbsprite  1,  3,  0,  0, $42, 0
+	dbsprite  3,  3,  0,  0, $42, 0
+	dbsprite  0,  4,  0,  0, $42, 0
+	dbsprite  4,  4,  0,  0, $42, 0
 
 FrameBlock43:
 	db 11 ; #
-	db $00, $10, $41, $00
-	db $08, $00, $41, $00
-	db $08, $08, $41, $00
-	db $08, $10, $41, $00
-	db $08, $18, $41, $00
-	db $08, $20, $41, $00
-	db $10, $10, $41, $00
-	db $18, $08, $41, $00
-	db $18, $18, $41, $00
-	db $20, $00, $41, $00
-	db $20, $20, $41, $00
+	dbsprite  2,  0,  0,  0, $41, 0
+	dbsprite  0,  1,  0,  0, $41, 0
+	dbsprite  1,  1,  0,  0, $41, 0
+	dbsprite  2,  1,  0,  0, $41, 0
+	dbsprite  3,  1,  0,  0, $41, 0
+	dbsprite  4,  1,  0,  0, $41, 0
+	dbsprite  2,  2,  0,  0, $41, 0
+	dbsprite  1,  3,  0,  0, $41, 0
+	dbsprite  3,  3,  0,  0, $41, 0
+	dbsprite  0,  4,  0,  0, $41, 0
+	dbsprite  4,  4,  0,  0, $41, 0
 
 FrameBlock44:
 	db 4 ; #
-	db $00, $00, $49, $00
-	db $00, $28, $49, $00
-	db $28, $00, $49, $00
-	db $28, $28, $49, $00
+	dbsprite  0,  0,  0,  0, $49, 0
+	dbsprite  5,  0,  0,  0, $49, 0
+	dbsprite  0,  5,  0,  0, $49, 0
+	dbsprite  5,  5,  0,  0, $49, 0
 
 FrameBlock45:
 	db 4 ; #
-	db $00, $00, $49, $00
-	db $00, $18, $49, $00
-	db $18, $00, $49, $00
-	db $18, $18, $49, $00
+	dbsprite  0,  0,  0,  0, $49, 0
+	dbsprite  3,  0,  0,  0, $49, 0
+	dbsprite  0,  3,  0,  0, $49, 0
+	dbsprite  3,  3,  0,  0, $49, 0
 
 FrameBlock46:
 	db 4 ; #
-	db $00, $00, $49, $00
-	db $00, $08, $49, $00
-	db $08, $00, $49, $00
-	db $08, $08, $49, $00
+	dbsprite  0,  0,  0,  0, $49, 0
+	dbsprite  1,  0,  0,  0, $49, 0
+	dbsprite  0,  1,  0,  0, $49, 0
+	dbsprite  1,  1,  0,  0, $49, 0
 
 FrameBlock47:
 	db 4 ; #
-	db $00, $00, $43, $00
-	db $00, $08, $43, $20
-	db $08, $00, $43, $40
-	db $08, $08, $43, $60
+	dbsprite  0,  0,  0,  0, $43, 0
+	dbsprite  1,  0,  0,  0, $43, OAM_HFLIP
+	dbsprite  0,  1,  0,  0, $43, OAM_VFLIP
+	dbsprite  1,  1,  0,  0, $43, OAM_HFLIP | OAM_VFLIP
 
 SmallBlackCircleFrameBlock:
 	db 4 ; #
-	db $08, $08, $33, $00
-	db $08, $10, $33, $20
-	db $10, $08, $33, $40
-	db $10, $10, $33, $60
+	dbsprite  1,  1,  0,  0, $33, 0
+	dbsprite  2,  1,  0,  0, $33, OAM_HFLIP
+	dbsprite  1,  2,  0,  0, $33, OAM_VFLIP
+	dbsprite  2,  2,  0,  0, $33, OAM_HFLIP | OAM_VFLIP
 
 LargeBlackCircleFrameBlock:
 	db 16 ; #
-	db $00, $00, $22, $00
-	db $00, $08, $23, $00
-	db $00, $10, $23, $20
-	db $00, $18, $22, $20
-	db $08, $00, $32, $00
-	db $08, $08, $43, $00
-	db $08, $10, $43, $20
-	db $08, $18, $32, $20
-	db $10, $00, $32, $40
-	db $10, $08, $43, $40
-	db $10, $10, $43, $60
-	db $10, $18, $32, $60
-	db $18, $00, $22, $40
-	db $18, $08, $23, $40
-	db $18, $10, $23, $60
-	db $18, $18, $22, $60
+	dbsprite  0,  0,  0,  0, $22, 0
+	dbsprite  1,  0,  0,  0, $23, 0
+	dbsprite  2,  0,  0,  0, $23, OAM_HFLIP
+	dbsprite  3,  0,  0,  0, $22, OAM_HFLIP
+	dbsprite  0,  1,  0,  0, $32, 0
+	dbsprite  1,  1,  0,  0, $43, 0
+	dbsprite  2,  1,  0,  0, $43, OAM_HFLIP
+	dbsprite  3,  1,  0,  0, $32, OAM_HFLIP
+	dbsprite  0,  2,  0,  0, $32, OAM_VFLIP
+	dbsprite  1,  2,  0,  0, $43, OAM_VFLIP
+	dbsprite  2,  2,  0,  0, $43, OAM_HFLIP | OAM_VFLIP
+	dbsprite  3,  2,  0,  0, $32, OAM_HFLIP | OAM_VFLIP
+	dbsprite  0,  3,  0,  0, $22, OAM_VFLIP
+	dbsprite  1,  3,  0,  0, $23, OAM_VFLIP
+	dbsprite  2,  3,  0,  0, $23, OAM_HFLIP | OAM_VFLIP
+	dbsprite  3,  3,  0,  0, $22, OAM_HFLIP | OAM_VFLIP
 
 FrameBlock71:
 	db 16 ; #
-	db $00, $00, $22, $00
-	db $00, $08, $3b, $00
-	db $00, $10, $23, $20
-	db $00, $18, $22, $20
-	db $08, $00, $32, $00
-	db $08, $08, $43, $00
-	db $08, $10, $43, $20
-	db $08, $18, $32, $20
-	db $10, $00, $32, $40
-	db $10, $08, $43, $40
-	db $10, $10, $43, $60
-	db $10, $18, $32, $60
-	db $18, $00, $22, $40
-	db $18, $08, $23, $40
-	db $18, $10, $23, $60
-	db $18, $18, $22, $60
+	dbsprite  0,  0,  0,  0, $22, 0
+	dbsprite  1,  0,  0,  0, $3b, 0
+	dbsprite  2,  0,  0,  0, $23, OAM_HFLIP
+	dbsprite  3,  0,  0,  0, $22, OAM_HFLIP
+	dbsprite  0,  1,  0,  0, $32, 0
+	dbsprite  1,  1,  0,  0, $43, 0
+	dbsprite  2,  1,  0,  0, $43, OAM_HFLIP
+	dbsprite  3,  1,  0,  0, $32, OAM_HFLIP
+	dbsprite  0,  2,  0,  0, $32, OAM_VFLIP
+	dbsprite  1,  2,  0,  0, $43, OAM_VFLIP
+	dbsprite  2,  2,  0,  0, $43, OAM_HFLIP | OAM_VFLIP
+	dbsprite  3,  2,  0,  0, $32, OAM_HFLIP | OAM_VFLIP
+	dbsprite  0,  3,  0,  0, $22, OAM_VFLIP
+	dbsprite  1,  3,  0,  0, $23, OAM_VFLIP
+	dbsprite  2,  3,  0,  0, $23, OAM_HFLIP | OAM_VFLIP
+	dbsprite  3,  3,  0,  0, $22, OAM_HFLIP | OAM_VFLIP
 
 FrameBlock72:
 	db 12 ; #
-	db $00, $00, $32, $00
-	db $00, $08, $43, $00
-	db $00, $10, $43, $20
-	db $00, $18, $32, $20
-	db $08, $00, $32, $40
-	db $08, $08, $43, $40
-	db $08, $10, $43, $60
-	db $08, $18, $32, $60
-	db $10, $00, $22, $40
-	db $10, $08, $23, $40
-	db $10, $10, $23, $60
-	db $10, $18, $22, $60
+	dbsprite  0,  0,  0,  0, $32, 0
+	dbsprite  1,  0,  0,  0, $43, 0
+	dbsprite  2,  0,  0,  0, $43, OAM_HFLIP
+	dbsprite  3,  0,  0,  0, $32, OAM_HFLIP
+	dbsprite  0,  1,  0,  0, $32, OAM_VFLIP
+	dbsprite  1,  1,  0,  0, $43, OAM_VFLIP
+	dbsprite  2,  1,  0,  0, $43, OAM_HFLIP | OAM_VFLIP
+	dbsprite  3,  1,  0,  0, $32, OAM_HFLIP | OAM_VFLIP
+	dbsprite  0,  2,  0,  0, $22, OAM_VFLIP
+	dbsprite  1,  2,  0,  0, $23, OAM_VFLIP
+	dbsprite  2,  2,  0,  0, $23, OAM_HFLIP | OAM_VFLIP
+	dbsprite  3,  2,  0,  0, $22, OAM_HFLIP | OAM_VFLIP
 
 FrameBlock73:
 	db 8 ; #
-	db $00, $00, $32, $40
-	db $00, $08, $43, $40
-	db $00, $10, $43, $60
-	db $00, $18, $32, $60
-	db $08, $00, $22, $40
-	db $08, $08, $23, $40
-	db $08, $10, $23, $60
-	db $08, $18, $22, $60
+	dbsprite  0,  0,  0,  0, $32, OAM_VFLIP
+	dbsprite  1,  0,  0,  0, $43, OAM_VFLIP
+	dbsprite  2,  0,  0,  0, $43, OAM_HFLIP | OAM_VFLIP
+	dbsprite  3,  0,  0,  0, $32, OAM_HFLIP | OAM_VFLIP
+	dbsprite  0,  1,  0,  0, $22, OAM_VFLIP
+	dbsprite  1,  1,  0,  0, $23, OAM_VFLIP
+	dbsprite  2,  1,  0,  0, $23, OAM_HFLIP | OAM_VFLIP
+	dbsprite  3,  1,  0,  0, $22, OAM_HFLIP | OAM_VFLIP
 
 FrameBlock74:
 	db 4 ; #
-	db $00, $00, $22, $40
-	db $00, $08, $23, $40
-	db $00, $10, $23, $60
-	db $00, $18, $22, $60
+	dbsprite  0,  0,  0,  0, $22, OAM_VFLIP
+	dbsprite  1,  0,  0,  0, $23, OAM_VFLIP
+	dbsprite  2,  0,  0,  0, $23, OAM_HFLIP | OAM_VFLIP
+	dbsprite  3,  0,  0,  0, $22, OAM_HFLIP | OAM_VFLIP
 
 FrameBlock4a:
 	db 4 ; #
-	db $08, $18, $4c, $20
-	db $20, $08, $4b, $00
-	db $30, $20, $4c, $00
-	db $18, $30, $4b, $40
+	dbsprite  3,  1,  0,  0, $4c, OAM_HFLIP
+	dbsprite  1,  4,  0,  0, $4b, 0
+	dbsprite  4,  6,  0,  0, $4c, 0
+	dbsprite  6,  3,  0,  0, $4b, OAM_VFLIP
 
 FrameBlock4b:
 	db 4 ; #
-	db $00, $18, $4c, $00
-	db $20, $00, $4b, $40
-	db $38, $20, $4c, $20
-	db $18, $38, $4b, $00
+	dbsprite  3,  0,  0,  0, $4c, 0
+	dbsprite  0,  4,  0,  0, $4b, OAM_VFLIP
+	dbsprite  4,  7,  0,  0, $4c, OAM_HFLIP
+	dbsprite  7,  3,  0,  0, $4b, 0
 
 FrameBlock4c:
 	db 4 ; #
-	db $10, $08, $4a, $40
-	db $30, $10, $4a, $00
-	db $28, $30, $4a, $20
-	db $08, $28, $4a, $60
+	dbsprite  1,  2,  0,  0, $4a, OAM_VFLIP
+	dbsprite  2,  6,  0,  0, $4a, 0
+	dbsprite  6,  5,  0,  0, $4a, OAM_HFLIP
+	dbsprite  5,  1,  0,  0, $4a, OAM_HFLIP | OAM_VFLIP
 
 FrameBlock4d:
 	db 4 ; #
-	db $08, $00, $4a, $20
-	db $38, $08, $4a, $60
-	db $30, $38, $4a, $40
-	db $00, $30, $4a, $00
+	dbsprite  0,  1,  0,  0, $4a, OAM_HFLIP
+	dbsprite  1,  7,  0,  0, $4a, OAM_HFLIP | OAM_VFLIP
+	dbsprite  7,  6,  0,  0, $4a, OAM_VFLIP
+	dbsprite  6,  0,  0,  0, $4a, 0
 
 FrameBlock4e:
 	db 8 ; #
-	db $00, $30, $44, $00
-	db $00, $38, $44, $20
-	db $08, $30, $44, $40
-	db $08, $38, $44, $60
-	db $26, $0a, $44, $00
-	db $26, $12, $44, $20
-	db $2e, $0a, $44, $40
-	db $2e, $12, $44, $60
+	dbsprite  6,  0,  0,  0, $44, 0
+	dbsprite  7,  0,  0,  0, $44, OAM_HFLIP
+	dbsprite  6,  1,  0,  0, $44, OAM_VFLIP
+	dbsprite  7,  1,  0,  0, $44, OAM_HFLIP | OAM_VFLIP
+	dbsprite  1,  4,  2,  6, $44, 0
+	dbsprite  2,  4,  2,  6, $44, OAM_HFLIP
+	dbsprite  1,  5,  2,  6, $44, OAM_VFLIP
+	dbsprite  2,  5,  2,  6, $44, OAM_HFLIP | OAM_VFLIP
 
 FrameBlock4f:
 	db 12 ; #
-	db $0e, $22, $44, $00
-	db $0e, $2a, $44, $20
-	db $16, $22, $44, $40
-	db $16, $2a, $44, $60
-	db $06, $32, $47, $00
-	db $00, $38, $47, $00
-	db $1a, $16, $44, $00
-	db $1a, $1e, $44, $20
-	db $22, $16, $44, $40
-	db $22, $1e, $44, $60
-	db $30, $08, $47, $00
-	db $2a, $0e, $47, $00
+	dbsprite  4,  1,  2,  6, $44, 0
+	dbsprite  5,  1,  2,  6, $44, OAM_HFLIP
+	dbsprite  4,  2,  2,  6, $44, OAM_VFLIP
+	dbsprite  5,  2,  2,  6, $44, OAM_HFLIP | OAM_VFLIP
+	dbsprite  6,  0,  2,  6, $47, 0
+	dbsprite  7,  0,  0,  0, $47, 0
+	dbsprite  2,  3,  6,  2, $44, 0
+	dbsprite  3,  3,  6,  2, $44, OAM_HFLIP
+	dbsprite  2,  4,  6,  2, $44, OAM_VFLIP
+	dbsprite  3,  4,  6,  2, $44, OAM_HFLIP | OAM_VFLIP
+	dbsprite  1,  6,  0,  0, $47, 0
+	dbsprite  1,  5,  6,  2, $47, 0
 
 FrameBlock50:
 	db 8 ; #
-	db $06, $32, $47, $00
-	db $00, $38, $47, $00
-	db $12, $26, $47, $00
-	db $0c, $2c, $47, $00
-	db $1e, $1a, $47, $00
-	db $18, $20, $47, $00
-	db $2a, $0e, $47, $00
-	db $24, $14, $47, $00
+	dbsprite  6,  0,  2,  6, $47, 0
+	dbsprite  7,  0,  0,  0, $47, 0
+	dbsprite  4,  2,  6,  2, $47, 0
+	dbsprite  5,  1,  4,  4, $47, 0
+	dbsprite  3,  3,  2,  6, $47, 0
+	dbsprite  4,  3,  0,  0, $47, 0
+	dbsprite  1,  5,  6,  2, $47, 0
+	dbsprite  2,  4,  4,  4, $47, 0
 
 FrameBlock51:
 	db 8 ; #
-	db $00, $00, $35, $20
-	db $08, $00, $35, $40
-	db $10, $00, $35, $00
-	db $18, $00, $35, $60
-	db $00, $40, $35, $00
-	db $08, $40, $35, $60
-	db $10, $40, $35, $20
-	db $18, $40, $35, $40
+	dbsprite  0,  0,  0,  0, $35, OAM_HFLIP
+	dbsprite  0,  1,  0,  0, $35, OAM_VFLIP
+	dbsprite  0,  2,  0,  0, $35, 0
+	dbsprite  0,  3,  0,  0, $35, OAM_HFLIP | OAM_VFLIP
+	dbsprite  8,  0,  0,  0, $35, 0
+	dbsprite  8,  1,  0,  0, $35, OAM_HFLIP | OAM_VFLIP
+	dbsprite  8,  2,  0,  0, $35, OAM_HFLIP
+	dbsprite  8,  3,  0,  0, $35, OAM_VFLIP
 
 FrameBlock52:
 	db 4 ; #
-	db $00, $00, $2a, $00
-	db $00, $08, $2b, $00
-	db $08, $00, $3a, $00
-	db $08, $08, $3b, $00
+	dbsprite  0,  0,  0,  0, $2a, 0
+	dbsprite  1,  0,  0,  0, $2b, 0
+	dbsprite  0,  1,  0,  0, $3a, 0
+	dbsprite  1,  1,  0,  0, $3b, 0
 
 FrameBlock53:
 	db 3 ; #
-	db $00, $00, $3f, $00
-	db $00, $08, $3f, $00
-	db $08, $06, $3f, $00
+	dbsprite  0,  0,  0,  0, $3f, 0
+	dbsprite  1,  0,  0,  0, $3f, 0
+	dbsprite  0,  1,  6,  0, $3f, 0
 
 FrameBlock54:
 	db 4 ; #
-	db $00, $00, $0e, $00
-	db $00, $08, $0e, $20
-	db $08, $00, $0f, $00
-	db $08, $08, $0f, $20
+	dbsprite  0,  0,  0,  0, $0e, 0
+	dbsprite  1,  0,  0,  0, $0e, OAM_HFLIP
+	dbsprite  0,  1,  0,  0, $0f, 0
+	dbsprite  1,  1,  0,  0, $0f, OAM_HFLIP
 
 FrameBlock55:
 	db 3 ; #
-	db $10, $00, $2c, $00
-	db $10, $08, $3c, $00
-	db $10, $10, $2d, $00
+	dbsprite  0,  2,  0,  0, $2c, 0
+	dbsprite  1,  2,  0,  0, $3c, 0
+	dbsprite  2,  2,  0,  0, $2d, 0
 
 FrameBlock56:
 	db 6 ; #
-	db $10, $10, $31, $00
-	db $10, $18, $31, $00
-	db $08, $10, $2c, $00
-	db $08, $18, $3c, $00
-	db $08, $20, $2d, $00
-	db $10, $20, $2d, $00
+	dbsprite  2,  2,  0,  0, $31, 0
+	dbsprite  3,  2,  0,  0, $31, 0
+	dbsprite  2,  1,  0,  0, $2c, 0
+	dbsprite  3,  1,  0,  0, $3c, 0
+	dbsprite  4,  1,  0,  0, $2d, 0
+	dbsprite  4,  2,  0,  0, $2d, 0
 
 FrameBlock57:
 	db 9 ; #
-	db $08, $20, $31, $00
-	db $10, $20, $31, $00
-	db $08, $28, $31, $00
-	db $10, $28, $31, $00
-	db $00, $20, $2c, $00
-	db $00, $28, $3c, $00
-	db $00, $30, $2d, $00
-	db $08, $30, $2d, $00
-	db $10, $30, $2d, $00
+	dbsprite  4,  1,  0,  0, $31, 0
+	dbsprite  4,  2,  0,  0, $31, 0
+	dbsprite  5,  1,  0,  0, $31, 0
+	dbsprite  5,  2,  0,  0, $31, 0
+	dbsprite  4,  0,  0,  0, $2c, 0
+	dbsprite  5,  0,  0,  0, $3c, 0
+	dbsprite  6,  0,  0,  0, $2d, 0
+	dbsprite  6,  1,  0,  0, $2d, 0
+	dbsprite  6,  2,  0,  0, $2d, 0
 
 FrameBlock58:
 	db 7 ; #
-	db $00, $00, $46, $00
-	db $08, $02, $47, $00
-	db $10, $03, $48, $00
-	db $18, $04, $48, $00
-	db $20, $05, $48, $00
-	db $28, $05, $48, $00
-	db $30, $05, $48, $00
+	dbsprite  0,  0,  0,  0, $46, 0
+	dbsprite  0,  1,  2,  0, $47, 0
+	dbsprite  0,  2,  3,  0, $48, 0
+	dbsprite  0,  3,  4,  0, $48, 0
+	dbsprite  0,  4,  5,  0, $48, 0
+	dbsprite  0,  5,  5,  0, $48, 0
+	dbsprite  0,  6,  5,  0, $48, 0
 
 FrameBlock59:
 	db 1 ; #
-	db $00, $00, $42, $00
+	dbsprite  0,  0,  0,  0, $42, 0
 
 FrameBlock5a:
 	db 12 ; #
-	db $00, $00, $24, $00
-	db $00, $08, $25, $00
-	db $08, $00, $34, $00
-	db $00, $10, $25, $20
-	db $00, $18, $24, $20
-	db $08, $18, $34, $20
-	db $10, $00, $34, $40
-	db $18, $00, $24, $40
-	db $18, $08, $25, $40
-	db $10, $18, $34, $60
-	db $18, $10, $25, $60
-	db $18, $18, $24, $60
+	dbsprite  0,  0,  0,  0, $24, 0
+	dbsprite  1,  0,  0,  0, $25, 0
+	dbsprite  0,  1,  0,  0, $34, 0
+	dbsprite  2,  0,  0,  0, $25, OAM_HFLIP
+	dbsprite  3,  0,  0,  0, $24, OAM_HFLIP
+	dbsprite  3,  1,  0,  0, $34, OAM_HFLIP
+	dbsprite  0,  2,  0,  0, $34, OAM_VFLIP
+	dbsprite  0,  3,  0,  0, $24, OAM_VFLIP
+	dbsprite  1,  3,  0,  0, $25, OAM_VFLIP
+	dbsprite  3,  2,  0,  0, $34, OAM_HFLIP | OAM_VFLIP
+	dbsprite  2,  3,  0,  0, $25, OAM_HFLIP | OAM_VFLIP
+	dbsprite  3,  3,  0,  0, $24, OAM_HFLIP | OAM_VFLIP
 
 FrameBlock5b:
 	db 4 ; #
-	db $00, $00, $43, $00
-	db $00, $08, $43, $20
-	db $08, $00, $43, $40
-	db $08, $08, $43, $60
+	dbsprite  0,  0,  0,  0, $43, 0
+	dbsprite  1,  0,  0,  0, $43, OAM_HFLIP
+	dbsprite  0,  1,  0,  0, $43, OAM_VFLIP
+	dbsprite  1,  1,  0,  0, $43, OAM_HFLIP | OAM_VFLIP
 
 FrameBlock5c:
 	db 8 ; #
-	db $00, $00, $49, $00
-	db $02, $08, $49, $00
-	db $18, $00, $49, $00
-	db $10, $10, $49, $00
-	db $08, $00, $43, $00
-	db $08, $08, $43, $20
-	db $10, $00, $43, $40
-	db $10, $08, $43, $60
+	dbsprite  0,  0,  0,  0, $49, 0
+	dbsprite  1,  0,  0,  2, $49, 0
+	dbsprite  0,  3,  0,  0, $49, 0
+	dbsprite  2,  2,  0,  0, $49, 0
+	dbsprite  0,  1,  0,  0, $43, 0
+	dbsprite  1,  1,  0,  0, $43, OAM_HFLIP
+	dbsprite  0,  2,  0,  0, $43, OAM_VFLIP
+	dbsprite  1,  2,  0,  0, $43, OAM_HFLIP | OAM_VFLIP
 
 FrameBlock5d:
 	db 11 ; #
-	db $00, $00, $49, $00
-	db $18, $02, $49, $00
-	db $14, $10, $49, $00
-	db $08, $00, $43, $00
-	db $00, $08, $43, $20
-	db $10, $00, $43, $40
-	db $10, $08, $43, $60
-	db $04, $08, $43, $00
-	db $04, $10, $43, $20
-	db $0c, $08, $43, $40
-	db $0c, $10, $43, $60
+	dbsprite  0,  0,  0,  0, $49, 0
+	dbsprite  0,  3,  2,  0, $49, 0
+	dbsprite  2,  2,  0,  4, $49, 0
+	dbsprite  0,  1,  0,  0, $43, 0
+	dbsprite  1,  0,  0,  0, $43, OAM_HFLIP
+	dbsprite  0,  2,  0,  0, $43, OAM_VFLIP
+	dbsprite  1,  2,  0,  0, $43, OAM_HFLIP | OAM_VFLIP
+	dbsprite  1,  0,  0,  4, $43, 0
+	dbsprite  2,  0,  0,  4, $43, OAM_HFLIP
+	dbsprite  1,  1,  0,  4, $43, OAM_VFLIP
+	dbsprite  2,  1,  0,  4, $43, OAM_HFLIP | OAM_VFLIP
 
 FrameBlock5e:
 	db 15 ; #
-	db $00, $08, $49, $00
-	db $08, $10, $49, $00
-	db $20, $00, $49, $00
-	db $08, $00, $43, $00
-	db $08, $08, $43, $20
-	db $10, $00, $43, $40
-	db $10, $08, $43, $60
-	db $10, $10, $43, $00
-	db $10, $18, $43, $20
-	db $18, $10, $43, $40
-	db $18, $18, $43, $60
-	db $20, $08, $43, $00
-	db $20, $10, $43, $20
-	db $28, $08, $43, $40
-	db $28, $10, $43, $60
+	dbsprite  1,  0,  0,  0, $49, 0
+	dbsprite  2,  1,  0,  0, $49, 0
+	dbsprite  0,  4,  0,  0, $49, 0
+	dbsprite  0,  1,  0,  0, $43, 0
+	dbsprite  1,  1,  0,  0, $43, OAM_HFLIP
+	dbsprite  0,  2,  0,  0, $43, OAM_VFLIP
+	dbsprite  1,  2,  0,  0, $43, OAM_HFLIP | OAM_VFLIP
+	dbsprite  2,  2,  0,  0, $43, 0
+	dbsprite  3,  2,  0,  0, $43, OAM_HFLIP
+	dbsprite  2,  3,  0,  0, $43, OAM_VFLIP
+	dbsprite  3,  3,  0,  0, $43, OAM_HFLIP | OAM_VFLIP
+	dbsprite  1,  4,  0,  0, $43, 0
+	dbsprite  2,  4,  0,  0, $43, OAM_HFLIP
+	dbsprite  1,  5,  0,  0, $43, OAM_VFLIP
+	dbsprite  2,  5,  0,  0, $43, OAM_HFLIP | OAM_VFLIP
 
 FrameBlock5f:
 	db 4 ; #
-	db $00, $00, $49, $00
-	db $00, $10, $49, $00
-	db $00, $20, $49, $00
-	db $00, $30, $49, $00
+	dbsprite  0,  0,  0,  0, $49, 0
+	dbsprite  2,  0,  0,  0, $49, 0
+	dbsprite  4,  0,  0,  0, $49, 0
+	dbsprite  6,  0,  0,  0, $49, 0
 
 FrameBlock60:
 	db 8 ; #
-	db $00, $00, $49, $00
-	db $00, $10, $49, $00
-	db $00, $20, $49, $00
-	db $00, $30, $49, $00
-	db $08, $08, $49, $00
-	db $08, $18, $49, $00
-	db $08, $28, $49, $00
-	db $08, $38, $49, $00
+	dbsprite  0,  0,  0,  0, $49, 0
+	dbsprite  2,  0,  0,  0, $49, 0
+	dbsprite  4,  0,  0,  0, $49, 0
+	dbsprite  6,  0,  0,  0, $49, 0
+	dbsprite  1,  1,  0,  0, $49, 0
+	dbsprite  3,  1,  0,  0, $49, 0
+	dbsprite  5,  1,  0,  0, $49, 0
+	dbsprite  7,  1,  0,  0, $49, 0
 
 FrameBlock61:
 	db 12 ; #
-	db $00, $00, $49, $00
-	db $00, $10, $49, $00
-	db $00, $20, $49, $00
-	db $00, $30, $49, $00
-	db $08, $08, $49, $00
-	db $08, $18, $49, $00
-	db $08, $28, $49, $00
-	db $08, $38, $49, $00
-	db $10, $00, $49, $00
-	db $10, $10, $49, $00
-	db $10, $20, $49, $00
-	db $10, $30, $49, $00
+	dbsprite  0,  0,  0,  0, $49, 0
+	dbsprite  2,  0,  0,  0, $49, 0
+	dbsprite  4,  0,  0,  0, $49, 0
+	dbsprite  6,  0,  0,  0, $49, 0
+	dbsprite  1,  1,  0,  0, $49, 0
+	dbsprite  3,  1,  0,  0, $49, 0
+	dbsprite  5,  1,  0,  0, $49, 0
+	dbsprite  7,  1,  0,  0, $49, 0
+	dbsprite  0,  2,  0,  0, $49, 0
+	dbsprite  2,  2,  0,  0, $49, 0
+	dbsprite  4,  2,  0,  0, $49, 0
+	dbsprite  6,  2,  0,  0, $49, 0
 
 FrameBlock62:
 	db 15 ; #
-	db $00, $00, $49, $00
-	db $00, $10, $49, $00
-	db $00, $20, $49, $00
-	db $00, $30, $49, $00
-	db $08, $08, $49, $00
-	db $08, $18, $49, $00
-	db $08, $28, $49, $00
-	db $08, $38, $49, $00
-	db $10, $00, $49, $00
-	db $10, $10, $49, $00
-	db $10, $20, $49, $00
-	db $10, $30, $49, $00
-	db $18, $08, $49, $00
-	db $18, $18, $49, $00
-	db $18, $28, $49, $00
-	db $18, $38, $49, $00 ; unused
+	dbsprite  0,  0,  0,  0, $49, 0
+	dbsprite  2,  0,  0,  0, $49, 0
+	dbsprite  4,  0,  0,  0, $49, 0
+	dbsprite  6,  0,  0,  0, $49, 0
+	dbsprite  1,  1,  0,  0, $49, 0
+	dbsprite  3,  1,  0,  0, $49, 0
+	dbsprite  5,  1,  0,  0, $49, 0
+	dbsprite  7,  1,  0,  0, $49, 0
+	dbsprite  0,  2,  0,  0, $49, 0
+	dbsprite  2,  2,  0,  0, $49, 0
+	dbsprite  4,  2,  0,  0, $49, 0
+	dbsprite  6,  2,  0,  0, $49, 0
+	dbsprite  1,  3,  0,  0, $49, 0
+	dbsprite  3,  3,  0,  0, $49, 0
+	dbsprite  5,  3,  0,  0, $49, 0
+	dbsprite  7,  3,  0,  0, $49, 0
 
 FrameBlock63:
 	db 6 ; #
-	db $10, $00, $26, $00
-	db $10, $08, $27, $00
-	db $08, $10, $26, $00
-	db $08, $18, $27, $00
-	db $00, $20, $26, $00
-	db $00, $28, $27, $00
+	dbsprite  0,  2,  0,  0, $26, 0
+	dbsprite  1,  2,  0,  0, $27, 0
+	dbsprite  2,  1,  0,  0, $26, 0
+	dbsprite  3,  1,  0,  0, $27, 0
+	dbsprite  4,  0,  0,  0, $26, 0
+	dbsprite  5,  0,  0,  0, $27, 0
 
 FrameBlock64:
 	db 6 ; #
-	db $18, $00, $27, $00
-	db $10, $08, $26, $00
-	db $10, $10, $27, $00
-	db $08, $18, $26, $00
-	db $08, $20, $27, $00
-	db $00, $28, $26, $00
+	dbsprite  0,  3,  0,  0, $27, 0
+	dbsprite  1,  2,  0,  0, $26, 0
+	dbsprite  2,  2,  0,  0, $27, 0
+	dbsprite  3,  1,  0,  0, $26, 0
+	dbsprite  4,  1,  0,  0, $27, 0
+	dbsprite  5,  0,  0,  0, $26, 0
 
 FrameBlock65:
 	db 6 ; #
-	db $00, $00, $1c, $00
-	db $00, $08, $1d, $00
-	db $10, $00, $1c, $00
-	db $10, $08, $1d, $00
-	db $20, $00, $1c, $00
-	db $20, $08, $1d, $00
+	dbsprite  0,  0,  0,  0, $1c, 0
+	dbsprite  1,  0,  0,  0, $1d, 0
+	dbsprite  0,  2,  0,  0, $1c, 0
+	dbsprite  1,  2,  0,  0, $1d, 0
+	dbsprite  0,  4,  0,  0, $1c, 0
+	dbsprite  1,  4,  0,  0, $1d, 0
 
 FrameBlock66:
 	db 2 ; #
-	db $00, $00, $03, $00
-	db $08, $00, $13, $00
+	dbsprite  0,  0,  0,  0, $03, 0
+	dbsprite  0,  1,  0,  0, $13, 0
 
 FrameBlock67:
 	db 1 ; #
-	db $00, $00, $03, $00
+	dbsprite  0,  0,  0,  0, $03, 0
 
 FrameBlock68:
 	db 4 ; #
-	db $00, $00, $03, $00
-	db $00, $08, $03, $20
-	db $08, $00, $13, $00
-	db $08, $08, $13, $20
+	dbsprite  0,  0,  0,  0, $03, 0
+	dbsprite  1,  0,  0,  0, $03, OAM_HFLIP
+	dbsprite  0,  1,  0,  0, $13, 0
+	dbsprite  1,  1,  0,  0, $13, OAM_HFLIP
 
 FrameBlock69:
 	db 1 ; #
-	db $00, $00, $06, $00
+	dbsprite  0,  0,  0,  0, $06, 0
 
 FrameBlock6a:
 	db 8 ; #
-	db $00, $00, $2e, $00
-	db $00, $30, $2e, $20
-	db $30, $00, $2e, $40
-	db $30, $30, $2e, $60
-	db $00, $18, $2f, $00
-	db $30, $18, $2f, $40
-	db $18, $00, $3e, $00
-	db $18, $30, $3e, $20
+	dbsprite  0,  0,  0,  0, $2e, 0
+	dbsprite  6,  0,  0,  0, $2e, OAM_HFLIP
+	dbsprite  0,  6,  0,  0, $2e, OAM_VFLIP
+	dbsprite  6,  6,  0,  0, $2e, OAM_HFLIP | OAM_VFLIP
+	dbsprite  3,  0,  0,  0, $2f, 0
+	dbsprite  3,  6,  0,  0, $2f, OAM_VFLIP
+	dbsprite  0,  3,  0,  0, $3e, 0
+	dbsprite  6,  3,  0,  0, $3e, OAM_HFLIP
 
 FrameBlock6b:
 	db 8 ; #
-	db $00, $00, $2e, $00
-	db $00, $20, $2e, $20
-	db $20, $00, $2e, $40
-	db $20, $20, $2e, $60
-	db $00, $10, $2f, $00
-	db $20, $10, $2f, $40
-	db $10, $00, $3e, $00
-	db $10, $20, $3e, $20
+	dbsprite  0,  0,  0,  0, $2e, 0
+	dbsprite  4,  0,  0,  0, $2e, OAM_HFLIP
+	dbsprite  0,  4,  0,  0, $2e, OAM_VFLIP
+	dbsprite  4,  4,  0,  0, $2e, OAM_HFLIP | OAM_VFLIP
+	dbsprite  2,  0,  0,  0, $2f, 0
+	dbsprite  2,  4,  0,  0, $2f, OAM_VFLIP
+	dbsprite  0,  2,  0,  0, $3e, 0
+	dbsprite  4,  2,  0,  0, $3e, OAM_HFLIP
 
 FrameBlock6c:
 	db 8 ; #
-	db $00, $00, $2e, $00
-	db $00, $10, $2e, $20
-	db $10, $00, $2e, $40
-	db $10, $10, $2e, $60
-	db $00, $08, $2f, $00
-	db $10, $08, $2f, $40
-	db $08, $00, $3e, $00
-	db $08, $10, $3e, $20
+	dbsprite  0,  0,  0,  0, $2e, 0
+	dbsprite  2,  0,  0,  0, $2e, OAM_HFLIP
+	dbsprite  0,  2,  0,  0, $2e, OAM_VFLIP
+	dbsprite  2,  2,  0,  0, $2e, OAM_HFLIP | OAM_VFLIP
+	dbsprite  1,  0,  0,  0, $2f, 0
+	dbsprite  1,  2,  0,  0, $2f, OAM_VFLIP
+	dbsprite  0,  1,  0,  0, $3e, 0
+	dbsprite  2,  1,  0,  0, $3e, OAM_HFLIP
 
 FrameBlock6d:
 	db 2 ; #
-	db $00, $00, $1e, $00
-	db $00, $08, $1f, $00
+	dbsprite  0,  0,  0,  0, $1e, 0
+	dbsprite  1,  0,  0,  0, $1f, 0
 
 FrameBlock6e:
 	db 4 ; #
-	db $00, $00, $48, $00
-	db $00, $08, $48, $20
-	db $08, $00, $12, $00
-	db $08, $08, $12, $20
+	dbsprite  0,  0,  0,  0, $48, 0
+	dbsprite  1,  0,  0,  0, $48, OAM_HFLIP
+	dbsprite  0,  1,  0,  0, $12, 0
+	dbsprite  1,  1,  0,  0, $12, OAM_HFLIP
 
 FrameBlock6f:
 	db 4 ; #
-	db $00, $00, $4a, $00
-	db $00, $08, $07, $00
-	db $08, $00, $16, $00
-	db $08, $08, $17, $00
+	dbsprite  0,  0,  0,  0, $4a, 0
+	dbsprite  1,  0,  0,  0, $07, 0
+	dbsprite  0,  1,  0,  0, $16, 0
+	dbsprite  1,  1,  0,  0, $17, 0
 
 FrameBlock70:
 	db 4 ; #
-	db $00, $00, $07, $20
-	db $00, $08, $4a, $20
-	db $08, $00, $17, $20
-	db $08, $08, $16, $20
+	dbsprite  0,  0,  0,  0, $07, OAM_HFLIP
+	dbsprite  1,  0,  0,  0, $4a, OAM_HFLIP
+	dbsprite  0,  1,  0,  0, $17, OAM_HFLIP
+	dbsprite  1,  1,  0,  0, $16, OAM_HFLIP
 
 FrameBlock76:
 	db 7 ; #
-	db $00, $10, $2f, $00
-	db $01, $08, $2f, $00
-	db $01, $18, $2f, $00
-	db $02, $00, $2e, $00
-	db $02, $20, $2e, $20
-	db $0a, $00, $3e, $00
-	db $0a, $20, $3e, $20
+	dbsprite  2,  0,  0,  0, $2f, 0
+	dbsprite  1,  0,  0,  1, $2f, 0
+	dbsprite  3,  0,  0,  1, $2f, 0
+	dbsprite  0,  0,  0,  2, $2e, 0
+	dbsprite  4,  0,  0,  2, $2e, OAM_HFLIP
+	dbsprite  0,  1,  0,  2, $3e, 0
+	dbsprite  4,  1,  0,  2, $3e, OAM_HFLIP
 
 FrameBlock77:
 	db 4 ; #
-	db $00, $02, $4b, $00
-	db $00, $0a, $4c, $00
-	db $08, $00, $4c, $60
-	db $08, $08, $4b, $60
+	dbsprite  0,  0,  2,  0, $4b, 0
+	dbsprite  1,  0,  2,  0, $4c, 0
+	dbsprite  0,  1,  0,  0, $4c, OAM_HFLIP | OAM_VFLIP
+	dbsprite  1,  1,  0,  0, $4b, OAM_HFLIP | OAM_VFLIP
 
 FrameBlock78:
 	db 1 ; #
-	db $00, $00, $4d, $00
+	dbsprite  0,  0,  0,  0, $4d, 0
 
 FrameBlock79:
 	db 1 ; #
-	db $00, $00, $4e, $00
+	dbsprite  0,  0,  0,  0, $4e, 0
 
 INCLUDE "data/battle_anims/base_coords.asm"
 
 FrameBlock00:
 	db 0 ; #
-	db $00
+
+	db $00 ; unused

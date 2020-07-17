@@ -146,7 +146,7 @@ AnimateShootingStar:
 	ret
 
 SmallStarsOAM:
-	db $00,$00,$A2,$90
+	dbsprite  0,  0,  0,  0, $A2, OAM_BEHIND_BG | OAM_OBP1
 SmallStarsOAMEnd:
 
 SmallStarsWaveCoordsPointerTable:
@@ -161,28 +161,28 @@ SmallStarsWaveCoordsPointerTable:
 ; These arrays contain the Y and X coordinates of each OAM entry.
 
 SmallStarsWave1Coords:
-	db $68,$30
-	db $68,$40
-	db $68,$58
-	db $68,$78
+	db $68, $30
+	db $68, $40
+	db $68, $58
+	db $68, $78
 
 SmallStarsWave2Coords:
-	db $68,$38
-	db $68,$48
-	db $68,$60
-	db $68,$70
+	db $68, $38
+	db $68, $48
+	db $68, $60
+	db $68, $70
 
 SmallStarsWave3Coords:
-	db $68,$34
-	db $68,$4C
-	db $68,$54
-	db $68,$64
+	db $68, $34
+	db $68, $4C
+	db $68, $54
+	db $68, $64
 
 SmallStarsWave4Coords:
-	db $68,$3C
-	db $68,$5C
-	db $68,$6C
-	db $68,$74
+	db $68, $3C
+	db $68, $5C
+	db $68, $6C
+	db $68, $74
 
 SmallStarsEmptyWave:
 	db $FF
@@ -213,29 +213,29 @@ MoveDownSmallStars:
 	ret
 
 GameFreakLogoOAMData:
-	db $48,$50,$8D,$00
-	db $48,$58,$8E,$00
-	db $50,$50,$8F,$00
-	db $50,$58,$90,$00
-	db $58,$50,$91,$00
-	db $58,$58,$92,$00
-	db $60,$30,$80,$00
-	db $60,$38,$81,$00
-	db $60,$40,$82,$00
-	db $60,$48,$83,$00
-	db $60,$50,$93,$00
-	db $60,$58,$84,$00
-	db $60,$60,$85,$00
-	db $60,$68,$83,$00
-	db $60,$70,$81,$00
-	db $60,$78,$86,$00
+	dbsprite 10,  9,  0,  0, $8d, 0
+	dbsprite 11,  9,  0,  0, $8e, 0
+	dbsprite 10, 10,  0,  0, $8f, 0
+	dbsprite 11, 10,  0,  0, $90, 0
+	dbsprite 10, 11,  0,  0, $91, 0
+	dbsprite 11, 11,  0,  0, $92, 0
+	dbsprite  6, 12,  0,  0, $80, 0
+	dbsprite  7, 12,  0,  0, $81, 0
+	dbsprite  8, 12,  0,  0, $82, 0
+	dbsprite  9, 12,  0,  0, $83, 0
+	dbsprite 10, 12,  0,  0, $93, 0
+	dbsprite 11, 12,  0,  0, $84, 0
+	dbsprite 12, 12,  0,  0, $85, 0
+	dbsprite 13, 12,  0,  0, $83, 0
+	dbsprite 14, 12,  0,  0, $81, 0
+	dbsprite 15, 12,  0,  0, $86, 0
 GameFreakLogoOAMDataEnd:
 
 GameFreakShootingStarOAMData:
-	db $00,$A0,$A0,$10
-	db $00,$A8,$A0,$30
-	db $08,$A0,$A1,$10
-	db $08,$A8,$A1,$30
+	dbsprite 20,  0,  0,  0, $a0, OAM_OBP1
+	dbsprite 21,  0,  0,  0, $a0, OAM_OBP1 | OAM_HFLIP
+	dbsprite 20,  1,  0,  0, $a1, OAM_OBP1
+	dbsprite 21,  1,  0,  0, $a1, OAM_OBP1 | OAM_HFLIP
 GameFreakShootingStarOAMDataEnd:
 
 FallingStar:

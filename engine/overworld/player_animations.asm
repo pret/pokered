@@ -470,14 +470,10 @@ ItsABiteText:
 
 FishingRodOAM:
 ; specifies how the fishing rod should be drawn on the screen
-; first byte = screen y coordinate
-; second byte = screen x coordinate
-; third byte = tile number
-; fourth byte = sprite properties
-	db $5B, $4C, $FD, $00 ; player facing down
-	db $44, $4C, $FD, $00 ; player facing up
-	db $50, $40, $FE, $00 ; player facing left
-	db $50, $58, $FE, $20 ; player facing right ($20 means "horizontally flip the tile")
+	dbsprite  9, 11,  4,  3, $fd, 0         ; down
+	dbsprite  9,  8,  4,  4, $fd, 0         ; up
+	dbsprite  8, 10,  0,  0, $fe, 0         ; left
+	dbsprite 11, 10,  0,  0, $fe, OAM_HFLIP ; right
 
 fishing_gfx: MACRO
 	dw \1

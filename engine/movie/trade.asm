@@ -59,11 +59,11 @@ TradeAnimCommon:
 addtradefunc: MACRO
 \1TradeFunc::
 	dw \1
-	ENDM
+ENDM
 
 tradefunc: MACRO
 	db (\1TradeFunc - TradeFuncPointerTable) / 2
-	ENDM
+ENDM
 
 ; The functions in the sequences below are executed in order by TradeFuncCommon.
 ; They are from opposite perspectives. The external clock one makes use of
@@ -86,7 +86,7 @@ InternalClockTradeFuncSequence:
 	tradefunc Trade_ShowEnemyMon
 	tradefunc Trade_Delay100
 	tradefunc Trade_Cleanup
-	db $FF
+	db -1 ; end
 
 ExternalClockTradeFuncSequence:
 	tradefunc LoadTradingGFXAndMonNames
@@ -110,7 +110,7 @@ ExternalClockTradeFuncSequence:
 	tradefunc Trade_ShowClearedWindow
 	tradefunc PrintTradeWentToText
 	tradefunc Trade_Cleanup
-	db $FF
+	db -1 ; end
 
 TradeFuncPointerTable:
 	addtradefunc LoadTradingGFXAndMonNames
@@ -346,8 +346,8 @@ Trade_AnimateBallEnteringLinkCable:
 	ret
 
 Trade_BallInsideLinkCableOAM:
-	db $7E,$00,$7E,$20
-	db $7E,$40,$7E,$60
+	dbsprite  0, 15,  0,  6, $7e, OAM_HFLIP
+	dbsprite  8, 15,  0,  6, $7e, OAM_HFLIP | OAM_VFLIP
 
 Trade_ShowEnemyMon:
 	ld a, TRADE_BALL_TILT_ANIM
@@ -697,31 +697,33 @@ Trade_WriteCircleOAM:
 	jr nz, .loop
 	ret
 
+trade_circle_oam: MACRO
+	dw \1
+	db \2, \3
+ENDM
+
 Trade_CircleOAMPointers:
-	dw Trade_CircleOAM0
-	db $08,$08
-	dw Trade_CircleOAM1
-	db $18,$08
-	dw Trade_CircleOAM2
-	db $08,$18
-	dw Trade_CircleOAM3
-	db $18,$18
+	; oam pointer, upper-left x coord, upper-left y coord
+	trade_circle_oam Trade_CircleOAM0, $08, $08
+	trade_circle_oam Trade_CircleOAM1, $18, $08
+	trade_circle_oam Trade_CircleOAM2, $08, $18
+	trade_circle_oam Trade_CircleOAM3, $18, $18
 
 Trade_CircleOAM0:
-	db $38,$10,$39,$10
-	db $3A,$10,$3B,$10
+	dbsprite  2,  7,  0,  0, $39, OAM_OBP1
+	dbsprite  2,  7,  0,  2, $3b, OAM_OBP1
 
 Trade_CircleOAM1:
-	db $39,$30,$38,$30
-	db $3B,$30,$3A,$30
+	dbsprite  6,  7,  0,  1, $38, OAM_OBP1 | OAM_HFLIP
+	dbsprite  6,  7,  0,  3, $3a, OAM_OBP1 | OAM_HFLIP
 
 Trade_CircleOAM2:
-	db $3A,$50,$3B,$50
-	db $38,$50,$39,$50
+	dbsprite 10,  7,  0,  2, $3b, OAM_OBP1 | OAM_VFLIP
+	dbsprite 10,  7,  0,  0, $39, OAM_OBP1 | OAM_VFLIP
 
 Trade_CircleOAM3:
-	db $3B,$70,$3A,$70
-	db $39,$70,$38,$70
+	dbsprite 14,  7,  0,  3, $3a, OAM_OBP1 | OAM_HFLIP | OAM_VFLIP
+	dbsprite 14,  7,  0,  1, $38, OAM_OBP1 | OAM_HFLIP | OAM_VFLIP
 
 ; a = species
 Trade_LoadMonSprite:

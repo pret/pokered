@@ -61,15 +61,20 @@ Music_DoLowHealthAlarm::
 	jr nz, .copyLoop
 	ret
 
+alarm_tone: MACRO
+	db \1 ; length
+	db \2 ; envelope
+	dw \3 ; frequency
+ENDM
+
 ;bytes to write to sound channel 1 registers for health alarm.
-;starting at FF11 (FF10 is always zeroed), so these bytes are:
-;length, envelope, freq lo, freq hi
+;starting at FF11 (FF10 is always zeroed).
 .toneDataHi
-	db $A0,$E2,$50,$87
+	alarm_tone $A0, $E2, $8750
 
 .toneDataLo
-	db $B0,$E2,$EE,$86
+	alarm_tone $B0, $E2, $86EE
 
 ;written to stop the alarm
 .toneDataSilence
-	db $00,$00,$00,$80
+	alarm_tone $00, $00, $8000

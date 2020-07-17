@@ -37,26 +37,27 @@ MapSpriteSets:
 	db $02 ; ROUTE_24
 	db $02 ; ROUTE_25
 
+EAST_WEST   EQU 1
+NORTH_SOUTH EQU 2
+
 ; Format:
-; 00: determines whether the map is split East/West or North/South
-; $01 = East/West divide
-; $02 = North/South divide
+; 00: determines whether the map is split EAST_WEST or NORTH_SOUTH
 ; 01: coordinate of dividing line
 ; 02: sprite set ID if in the West or North side
 ; 03: sprite set ID if in the East or South side
 SplitMapSpriteSets:
-	db $02, $25, $02, $01 ; $f1
-	db $02, $32, $02, $03 ; $f2
-	db $01, $39, $04, $08 ; $f3
-	db $02, $15, $03, $08 ; $f4
-	db $01, $08, $0A, $08 ; $f5
-	db $01, $18, $09, $05 ; $f6
-	db $01, $22, $09, $0A ; $f7
-	db $01, $35, $01, $0A ; $f8
-	db $02, $21, $02, $07 ; $f9
-	db $02, $02, $07, $04 ; $fa
-	db $01, $11, $05, $07 ; $fb
-	db $01, $03, $07, $03 ; $fc
+	db NORTH_SOUTH, 37, $02, $01 ; $f1
+	db NORTH_SOUTH, 50, $02, $03 ; $f2
+	db EAST_WEST,   57, $04, $08 ; $f3
+	db NORTH_SOUTH, 21, $03, $08 ; $f4
+	db EAST_WEST,    8, $0A, $08 ; $f5
+	db EAST_WEST,   24, $09, $05 ; $f6
+	db EAST_WEST,   34, $09, $0A ; $f7
+	db EAST_WEST,   53, $01, $0A ; $f8
+	db NORTH_SOUTH, 33, $02, $07 ; $f9
+	db NORTH_SOUTH,  2, $07, $04 ; $fa
+	db EAST_WEST,   17, $05, $07 ; $fb
+	db EAST_WEST,    3, $07, $03 ; $fc
 
 SpriteSets:
 ; sprite set $01
