@@ -1148,7 +1148,7 @@ AnimationSlideMonUp:
 
 AnimationSlideMonDown:
 ; Slides the mon's sprite down out of the screen.
-	xor a
+	xor a ; TILEMAP_MON_PIC
 	call GetTileIDList
 .loop
 	call GetMonSpriteTileMapPointerFromRowCount
@@ -1355,7 +1355,7 @@ AnimationFlashEnemyMonPic:
 	jp CallWithTurnFlipped
 
 AnimationShowMonPic:
-	xor a
+	xor a ; TILEMAP_MON_PIC
 	call GetTileIDList
 	call GetMonSpriteTileMapPointerFromRowCount
 	call CopyPicTiles
@@ -1379,7 +1379,7 @@ AnimationShakeBackAndForth:
 	decoord 13, 0
 
 .next
-	xor a
+	xor a ; TILEMAP_MON_PIC
 	ld c, $10
 .loop
 	push af
@@ -1424,7 +1424,7 @@ AnimationMoveMonHorizontally:
 	jr z, .next
 	hlcoord 11, 0
 .next
-	xor a
+	xor a ; TILEMAP_MON_PIC
 	push hl
 	call GetTileIDList
 	pop hl
@@ -1715,8 +1715,8 @@ MinimizedMonSpriteEnd:
 
 AnimationSlideMonDownAndHide:
 ; Slides the mon's sprite down and disappears. Used in Acid Armor.
-	ld a, $1
-	ld c, $2
+	ld a, TILEMAP_SLIDE_DOWN_MON_PIC_7X5
+	ld c, 2
 .loop
 	push bc
 	push af
@@ -1735,7 +1735,7 @@ AnimationSlideMonDownAndHide:
 	jr nz, .loop
 	call AnimationHideMonPic
 	ld hl, wTempPic
-	ld bc, $310
+	ld bc, 7 * 7 tiles
 	xor a
 	call FillMemory
 	jp CopyTempPicToMonPic
@@ -2007,7 +2007,7 @@ ChangeMonPic:
 	ld [wd0b5], a
 	call GetMonHeader
 	predef LoadMonBackPic
-	xor a
+	xor a ; TILEMAP_MON_PIC
 	call GetTileIDList
 	call GetMonSpriteTileMapPointerFromRowCount
 	call CopyPicTiles

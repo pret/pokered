@@ -282,7 +282,7 @@ Trade_DrawOpenEndOfLinkCable:
 	ld a, %10001011
 	ldh [rLCDC], a
 	hlcoord 6, 2
-	ld b, $7 ; open end of link cable tile ID list index
+	ld b, TILEMAP_LINK_CABLE
 	call CopyTileIDsFromList_ZeroBaseTileID
 	call Trade_CopyTileMapToVRAM
 	ld a, SFX_HEAL_HP
@@ -474,7 +474,7 @@ Trade_DrawLeftGameboy:
 
 ; draw gameboy pic
 	hlcoord 5, 3
-	ld b, $6
+	ld b, TILEMAP_GAME_BOY
 	call CopyTileIDsFromList_ZeroBaseTileID
 
 ; draw text box with player name below gameboy pic
@@ -521,7 +521,7 @@ Trade_DrawRightGameboy:
 
 ; draw gameboy pic
 	hlcoord 7, 8
-	ld b, $6
+	ld b, TILEMAP_GAME_BOY
 	call CopyTileIDsFromList_ZeroBaseTileID
 
 ; draw text box with enemy name above link cable
