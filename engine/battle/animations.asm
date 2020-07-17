@@ -17,11 +17,11 @@ DrawFrameBlock:
 	ld [wFBTileCounter], a
 	ld a, [wSubAnimTransform]
 	dec a
-	jr z, .flipHorizontalAndVertical   ; 1
+	jr z, .flipHorizontalAndVertical   ; SUBANIMTYPE_HVFLIP
 	dec a
-	jp z, .flipHorizontalTranslateDown ; 2
+	jp z, .flipHorizontalTranslateDown ; SUBANIMTYPE_HFLIP
 	dec a
-	jr z, .flipBaseCoords              ; 3
+	jr z, .flipBaseCoords              ; SUBANIMTYPE_COORDFLIP
 .noTransformation
 	ld a, [wBaseCoordY]
 	add [hl]
@@ -43,7 +43,7 @@ DrawFrameBlock:
 	ld b, a
 	ld a, 168
 	sub b ; flip X base coordinate
-.finishCopying ; finish copying values to OAM (when [wSubAnimTransform] not 1 or 2)
+.finishCopying ; finish copying values to OAM (when subanimation not transformed)
 	add [hl] ; X offset
 	ld [de], a ; store X
 	inc hl
@@ -271,7 +271,7 @@ LoadSubanimation:
 	ld [wSubAnimCounter], a ; number of frame blocks
 	ld a, b
 	and %11100000
-	cp 5 << 5 ; is subanimation type 5?
+	cp SUBANIMTYPE_ENEMY << 5
 	jr nz, .isNotType5
 .isType5
 	call GetSubanimationTransform2
@@ -283,7 +283,7 @@ LoadSubanimation:
 	srl a
 	swap a
 	ld [wSubAnimTransform], a
-	cp 4 ; is the animation reversed?
+	cp SUBANIMTYPE_REVERSE
 	ld hl, 0
 	jr nz, .storeSubentryAddr
 ; if the animation is reversed, then place the initial subentry address at the end of the list of subentries
@@ -303,8 +303,8 @@ LoadSubanimation:
 	ld [wSubAnimSubEntryAddr + 1], a
 	ret
 
-; called if the subanimation type is not 5
-; sets the transform to 0 (i.e. no transform) if it's the player's turn
+; called if the subanimation type is not SUBANIMTYPE_ENEMY
+; sets the transform to SUBANIMTYPE_NORMAL if it's the player's turn
 ; sets the transform to the subanimation type if it's the enemy's turn
 GetSubanimationTransform1:
 	ld b, a
@@ -312,18 +312,18 @@ GetSubanimationTransform1:
 	and a
 	ld a, b
 	ret nz
-	xor a
+	xor a ; SUBANIMTYPE_NORMAL << 5
 	ret
 
-; called if the subanimation type is 5
-; sets the transform to 2 (i.e. horizontal and vertical flip) if it's the player's turn
-; sets the transform to 0 (i.e. no transform) if it's the enemy's turn
+; called if the subanimation type is SUBANIMTYPE_ENEMY
+; sets the transform to SUBANIMTYPE_HFLIP if it's the player's turn
+; sets the transform to SUBANIMTYPE_NORMAL if it's the enemy's turn
 GetSubanimationTransform2:
 	ldh a, [hWhoseTurn]
 	and a
-	ld a, 2 << 5
+	ld a, SUBANIMTYPE_HFLIP << 5
 	ret z
-	xor a
+	xor a ; SUBANIMTYPE_NORMAL << 5
 	ret
 
 ; loads tile patterns for battle animations
@@ -600,7 +600,7 @@ PlaySubanimation:
 	ld a, [wSubAnimSubEntryAddr]
 	ld l, a
 	ld a, [wSubAnimTransform]
-	cp 4 ; is the animation reversed?
+	cp SUBANIMTYPE_REVERSE
 	ld bc, 3
 	jr nz, .nextSubanimationSubentry
 	ld bc, -3

@@ -86,24 +86,28 @@ SubanimationPointers:
 	dw Subanimation54
 	dw Subanimation55
 
-; subanimation format:
-; db (type << 5) | count
+; format:
+; subanim type, count
 ; REPT count
 ;     db frame block id, base coordinate id, frame block mode
 ; endr
 
+subanim: MACRO
+	db (\1 << 5) | \2
+ENDM
+
 Subanimation04:
-	db (2 << 5) | 3
+	subanim SUBANIMTYPE_HFLIP, 3
 	db FRAMEBLOCK_02, $1a, $00
 	db FRAMEBLOCK_02, $10, $00
 	db FRAMEBLOCK_02, $03, $00
 
 Subanimation05:
-	db (2 << 5) | 1
+	subanim SUBANIMTYPE_HFLIP, 1
 	db FRAMEBLOCK_02, $10, $00
 
 Subanimation08:
-	db (0 << 5) | 11
+	subanim SUBANIMTYPE_NORMAL, 11
 	db FRAMEBLOCK_03, $30, $00
 	db FRAMEBLOCK_03, $44, $00
 	db FRAMEBLOCK_03, $94, $00
@@ -117,7 +121,7 @@ Subanimation08:
 	db FRAMEBLOCK_03, $34, $00
 
 Subanimation07:
-	db (0 << 5) | 11
+	subanim SUBANIMTYPE_NORMAL, 11
 	db FRAMEBLOCK_03, $30, $00
 	db FRAMEBLOCK_03, $a2, $00
 	db FRAMEBLOCK_03, $31, $00
@@ -131,7 +135,7 @@ Subanimation07:
 	db FRAMEBLOCK_03, $34, $00
 
 Subanimation06:
-	db (0 << 5) | 11
+	subanim SUBANIMTYPE_NORMAL, 11
 	db FRAMEBLOCK_03, $30, $00
 	db FRAMEBLOCK_03, $a2, $00
 	db FRAMEBLOCK_03, $93, $00
@@ -145,14 +149,14 @@ Subanimation06:
 	db FRAMEBLOCK_03, $34, $00
 
 Subanimation09:
-	db (0 << 5) | 4
+	subanim SUBANIMTYPE_NORMAL, 4
 	db FRAMEBLOCK_03, $21, $04
 	db FRAMEBLOCK_04, $21, $04
 	db FRAMEBLOCK_03, $21, $04
 	db FRAMEBLOCK_05, $21, $04
 
 Subanimation0a:
-	db (2 << 5) | 6
+	subanim SUBANIMTYPE_HFLIP, 6
 	db FRAMEBLOCK_06, $1b, $00
 	db FRAMEBLOCK_07, $1b, $00
 	db FRAMEBLOCK_08, $36, $00
@@ -161,18 +165,18 @@ Subanimation0a:
 	db FRAMEBLOCK_0A, $15, $00
 
 Subanimation0b:
-	db (0 << 5) | 4
+	subanim SUBANIMTYPE_NORMAL, 4
 	db FRAMEBLOCK_01, $2d, $00
 	db FRAMEBLOCK_03, $2f, $00
 	db FRAMEBLOCK_03, $35, $00
 	db FRAMEBLOCK_03, $4d, $00
 
 Subanimation55:
-	db (2 << 5) | 1
+	subanim SUBANIMTYPE_HFLIP, 1
 	db FRAMEBLOCK_01, $9d, $00
 
 Subanimation11:
-	db (2 << 5) | 12
+	subanim SUBANIMTYPE_HFLIP, 12
 	db FRAMEBLOCK_0B, $26, $00
 	db FRAMEBLOCK_0C, $26, $00
 	db FRAMEBLOCK_0B, $26, $00
@@ -187,7 +191,7 @@ Subanimation11:
 	db FRAMEBLOCK_0C, $27, $00
 
 Subanimation2b:
-	db (2 << 5) | 11
+	subanim SUBANIMTYPE_HFLIP, 11
 	db FRAMEBLOCK_0D, $03, $03
 	db FRAMEBLOCK_0E, $03, $03
 	db FRAMEBLOCK_0F, $03, $00
@@ -201,7 +205,7 @@ Subanimation2b:
 	db FRAMEBLOCK_11, $1b, $00
 
 Subanimation2c:
-	db (2 << 5) | 12
+	subanim SUBANIMTYPE_HFLIP, 12
 	db FRAMEBLOCK_12, $01, $00
 	db FRAMEBLOCK_12, $0f, $00
 	db FRAMEBLOCK_12, $1b, $00
@@ -216,7 +220,7 @@ Subanimation2c:
 	db FRAMEBLOCK_16, $38, $00
 
 Subanimation12:
-	db (3 << 5) | 9
+	subanim SUBANIMTYPE_COORDFLIP, 9
 	db FRAMEBLOCK_17, $30, $00
 	db FRAMEBLOCK_17, $39, $00
 	db FRAMEBLOCK_17, $3a, $00
@@ -228,35 +232,35 @@ Subanimation12:
 	db FRAMEBLOCK_17, $1f, $00
 
 Subanimation00:
-	db (2 << 5) | 1
+	subanim SUBANIMTYPE_HFLIP, 1
 	db FRAMEBLOCK_01, $17, $00
 
 Subanimation01:
-	db (2 << 5) | 2
+	subanim SUBANIMTYPE_HFLIP, 2
 	db FRAMEBLOCK_01, $0f, $00
 	db FRAMEBLOCK_01, $1d, $00
 
 Subanimation02:
-	db (2 << 5) | 3
+	subanim SUBANIMTYPE_HFLIP, 3
 	db FRAMEBLOCK_01, $12, $00
 	db FRAMEBLOCK_01, $15, $00
 	db FRAMEBLOCK_01, $1c, $00
 
 Subanimation03:
-	db (2 << 5) | 4
+	subanim SUBANIMTYPE_HFLIP, 4
 	db FRAMEBLOCK_01, $0b, $00
 	db FRAMEBLOCK_01, $11, $00
 	db FRAMEBLOCK_01, $18, $00
 	db FRAMEBLOCK_01, $1d, $00
 
 Subanimation0c:
-	db (2 << 5) | 3
+	subanim SUBANIMTYPE_HFLIP, 3
 	db FRAMEBLOCK_0C, $20, $00
 	db FRAMEBLOCK_0C, $21, $00
 	db FRAMEBLOCK_0C, $23, $00
 
 Subanimation0d:
-	db (2 << 5) | 6
+	subanim SUBANIMTYPE_HFLIP, 6
 	db FRAMEBLOCK_0C, $20, $02
 	db FRAMEBLOCK_0C, $15, $00
 	db FRAMEBLOCK_0C, $21, $02
@@ -265,7 +269,7 @@ Subanimation0d:
 	db FRAMEBLOCK_0C, $19, $00
 
 Subanimation0e:
-	db (2 << 5) | 9
+	subanim SUBANIMTYPE_HFLIP, 9
 	db FRAMEBLOCK_0C, $20, $02
 	db FRAMEBLOCK_0C, $15, $02
 	db FRAMEBLOCK_0C, $07, $00
@@ -277,7 +281,7 @@ Subanimation0e:
 	db FRAMEBLOCK_0C, $0c, $00
 
 Subanimation1f:
-	db (4 << 5) | 5
+	subanim SUBANIMTYPE_REVERSE, 5
 	db FRAMEBLOCK_0C, $30, $03
 	db FRAMEBLOCK_0C, $40, $03
 	db FRAMEBLOCK_0C, $41, $03
@@ -285,7 +289,7 @@ Subanimation1f:
 	db FRAMEBLOCK_0C, $21, $00
 
 Subanimation2e:
-	db (1 << 5) | 14
+	subanim SUBANIMTYPE_HVFLIP, 14
 	db FRAMEBLOCK_18, $43, $02
 	db FRAMEBLOCK_75, $52, $04
 	db FRAMEBLOCK_19, $43, $02
@@ -302,14 +306,14 @@ Subanimation2e:
 	db FRAMEBLOCK_75, $1b, $00
 
 Subanimation2f:
-	db (2 << 5) | 4
+	subanim SUBANIMTYPE_HFLIP, 4
 	db FRAMEBLOCK_1F, $24, $00
 	db FRAMEBLOCK_20, $20, $00
 	db FRAMEBLOCK_21, $1a, $00
 	db FRAMEBLOCK_22, $15, $00
 
 Subanimation30:
-	db (2 << 5) | 18
+	subanim SUBANIMTYPE_HFLIP, 18
 	db FRAMEBLOCK_23, $00, $02
 	db FRAMEBLOCK_23, $02, $02
 	db FRAMEBLOCK_23, $04, $00
@@ -330,7 +334,7 @@ Subanimation30:
 	db FRAMEBLOCK_24, $28, $00
 
 Subanimation0f:
-	db (2 << 5) | 12
+	subanim SUBANIMTYPE_HFLIP, 12
 	db FRAMEBLOCK_26, $0e, $02
 	db FRAMEBLOCK_26, $16, $02
 	db FRAMEBLOCK_26, $1c, $00
@@ -345,7 +349,7 @@ Subanimation0f:
 	db FRAMEBLOCK_29, $1c, $00
 
 Subanimation16:
-	db (2 << 5) | 12
+	subanim SUBANIMTYPE_HFLIP, 12
 	db FRAMEBLOCK_2A, $05, $00
 	db FRAMEBLOCK_2B, $05, $02
 	db FRAMEBLOCK_2B, $0c, $02
@@ -360,7 +364,7 @@ Subanimation16:
 	db FRAMEBLOCK_2C, $00, $00
 
 Subanimation10:
-	db (4 << 5) | 8
+	subanim SUBANIMTYPE_REVERSE, 8
 	db FRAMEBLOCK_2D, $44, $00
 	db FRAMEBLOCK_2E, $45, $00
 	db FRAMEBLOCK_2D, $46, $00
@@ -371,7 +375,7 @@ Subanimation10:
 	db FRAMEBLOCK_2E, $1a, $00
 
 Subanimation31:
-	db (1 << 5) | 10
+	subanim SUBANIMTYPE_HVFLIP, 10
 	db FRAMEBLOCK_2F, $46, $00
 	db FRAMEBLOCK_2F, $4a, $00
 	db FRAMEBLOCK_2F, $4b, $00
@@ -384,7 +388,7 @@ Subanimation31:
 	db FRAMEBLOCK_2F, $51, $00
 
 Subanimation13:
-	db (4 << 5) | 6
+	subanim SUBANIMTYPE_REVERSE, 6
 	db FRAMEBLOCK_30, $31, $00
 	db FRAMEBLOCK_30, $32, $00
 	db FRAMEBLOCK_30, $92, $00
@@ -393,7 +397,7 @@ Subanimation13:
 	db FRAMEBLOCK_30, $10, $00
 
 Subanimation14:
-	db (2 << 5) | 9
+	subanim SUBANIMTYPE_HFLIP, 9
 	db FRAMEBLOCK_30, $10, $00
 	db FRAMEBLOCK_30, $10, $03
 	db FRAMEBLOCK_31, $1c, $04
@@ -405,7 +409,7 @@ Subanimation14:
 	db FRAMEBLOCK_31, $27, $00
 
 Subanimation41:
-	db (4 << 5) | 5
+	subanim SUBANIMTYPE_REVERSE, 5
 	db FRAMEBLOCK_03, $31, $00
 	db FRAMEBLOCK_03, $32, $00
 	db FRAMEBLOCK_03, $92, $00
@@ -413,32 +417,32 @@ Subanimation41:
 	db FRAMEBLOCK_03, $10, $00
 
 Subanimation42:
-	db (2 << 5) | 3
+	subanim SUBANIMTYPE_HFLIP, 3
 	db FRAMEBLOCK_SMALL_BLACK_CIRCLE, $08, $00
 	db FRAMEBLOCK_LARGE_BLACK_CIRCLE, $08, $00
 	db FRAMEBLOCK_5A, $08, $00
 
 Subanimation15:
-	db (1 << 5) | 2
+	subanim SUBANIMTYPE_HVFLIP, 2
 	db FRAMEBLOCK_35, $52, $00
 	db FRAMEBLOCK_35, $53, $00
 
 Subanimation17:
-	db (2 << 5) | 4
+	subanim SUBANIMTYPE_HFLIP, 4
 	db FRAMEBLOCK_36, $54, $00
 	db FRAMEBLOCK_36, $55, $00
 	db FRAMEBLOCK_37, $56, $00
 	db FRAMEBLOCK_37, $57, $00
 
 Subanimation18:
-	db (5 << 5) | 4
+	subanim SUBANIMTYPE_ENEMY, 4
 	db FRAMEBLOCK_36, $54, $00
 	db FRAMEBLOCK_36, $55, $00
 	db FRAMEBLOCK_37, $56, $00
 	db FRAMEBLOCK_37, $57, $00
 
 Subanimation40:
-	db (2 << 5) | 6
+	subanim SUBANIMTYPE_HFLIP, 6
 	db FRAMEBLOCK_17, $54, $00
 	db FRAMEBLOCK_17, $55, $00
 	db FRAMEBLOCK_17, $0e, $00
@@ -447,7 +451,7 @@ Subanimation40:
 	db FRAMEBLOCK_17, $13, $00
 
 Subanimation19:
-	db (4 << 5) | 12
+	subanim SUBANIMTYPE_REVERSE, 12
 	db FRAMEBLOCK_38, $31, $00
 	db FRAMEBLOCK_39, $31, $00
 	db FRAMEBLOCK_38, $32, $00
@@ -462,7 +466,7 @@ Subanimation19:
 	db FRAMEBLOCK_39, $10, $00
 
 Subanimation1a:
-	db (2 << 5) | 16
+	subanim SUBANIMTYPE_HFLIP, 16
 	db FRAMEBLOCK_3A, $08, $00
 	db FRAMEBLOCK_3B, $08, $00
 	db FRAMEBLOCK_3C, $08, $00
@@ -481,20 +485,20 @@ Subanimation1a:
 	db FRAMEBLOCK_3F, $0b, $00
 
 Subanimation1b:
-	db (4 << 5) | 4
+	subanim SUBANIMTYPE_REVERSE, 4
 	db FRAMEBLOCK_40, $31, $00
 	db FRAMEBLOCK_40, $32, $00
 	db FRAMEBLOCK_40, $92, $00
 	db FRAMEBLOCK_40, $15, $00
 
 Subanimation1c:
-	db (2 << 5) | 3
+	subanim SUBANIMTYPE_HFLIP, 3
 	db FRAMEBLOCK_41, $58, $00
 	db FRAMEBLOCK_41, $59, $00
 	db FRAMEBLOCK_41, $21, $00
 
 Subanimation1d:
-	db (5 << 5) | 15
+	subanim SUBANIMTYPE_ENEMY, 15
 	db FRAMEBLOCK_24, $9a, $00
 	db FRAMEBLOCK_23, $1b, $02
 	db FRAMEBLOCK_24, $22, $00
@@ -512,22 +516,22 @@ Subanimation1d:
 	db FRAMEBLOCK_25, $99, $03
 
 Subanimation1e:
-	db (0 << 5) | 1
+	subanim SUBANIMTYPE_NORMAL, 1
 	db FRAMEBLOCK_25, $75, $00
 
 Subanimation20:
-	db (2 << 5) | 2
+	subanim SUBANIMTYPE_HFLIP, 2
 	db FRAMEBLOCK_42, $07, $00
 	db FRAMEBLOCK_43, $07, $00
 
 Subanimation21:
-	db (2 << 5) | 3
+	subanim SUBANIMTYPE_HFLIP, 3
 	db FRAMEBLOCK_44, $00, $00
 	db FRAMEBLOCK_45, $08, $00
 	db FRAMEBLOCK_46, $10, $02
 
 Subanimation22:
-	db (4 << 5) | 11
+	subanim SUBANIMTYPE_REVERSE, 11
 	db FRAMEBLOCK_47, $10, $00
 	db FRAMEBLOCK_47, $56, $00
 	db FRAMEBLOCK_47, $07, $00
@@ -541,7 +545,7 @@ Subanimation22:
 	db FRAMEBLOCK_47, $b0, $00
 
 Subanimation2d:
-	db (3 << 5) | 6
+	subanim SUBANIMTYPE_COORDFLIP, 6
 	db FRAMEBLOCK_44, $64, $00
 	db FRAMEBLOCK_45, $65, $00
 	db FRAMEBLOCK_46, $66, $00
@@ -550,15 +554,15 @@ Subanimation2d:
 	db FRAMEBLOCK_47, $66, $00
 
 Subanimation39:
-	db (3 << 5) | 1
+	subanim SUBANIMTYPE_COORDFLIP, 1
 	db FRAMEBLOCK_47, $67, $00
 
 Subanimation4e:
-	db (2 << 5) | 1
+	subanim SUBANIMTYPE_HFLIP, 1
 	db FRAMEBLOCK_71, $0f, $03
 
 Subanimation4f:
-	db (2 << 5) | 7
+	subanim SUBANIMTYPE_HFLIP, 7
 	db FRAMEBLOCK_71, $0f, $00
 	db FRAMEBLOCK_71, $08, $00
 	db FRAMEBLOCK_71, $01, $00
@@ -568,7 +572,7 @@ Subanimation4f:
 	db FRAMEBLOCK_74, $95, $00
 
 Subanimation50:
-	db (2 << 5) | 8
+	subanim SUBANIMTYPE_HFLIP, 8
 	db FRAMEBLOCK_74, $95, $00
 	db FRAMEBLOCK_73, $95, $00
 	db FRAMEBLOCK_72, $95, $00
@@ -579,7 +583,7 @@ Subanimation50:
 	db FRAMEBLOCK_71, $16, $00
 
 Subanimation29:
-	db (2 << 5) | 29
+	subanim SUBANIMTYPE_HFLIP, 29
 	db FRAMEBLOCK_SMALL_BLACK_CIRCLE, $0f, $00
 	db FRAMEBLOCK_4A, $68, $03
 	db FRAMEBLOCK_4B, $2a, $03
@@ -611,63 +615,63 @@ Subanimation29:
 	db FRAMEBLOCK_LARGE_BLACK_CIRCLE, $6b, $00
 
 Subanimation2a:
-	db (2 << 5) | 4
+	subanim SUBANIMTYPE_HFLIP, 4
 	db FRAMEBLOCK_4E, $2b, $00
 	db FRAMEBLOCK_4F, $2b, $00
 	db FRAMEBLOCK_50, $2b, $00
 	db FRAMEBLOCK_50, $2b, $00
 
 Subanimation23:
-	db (2 << 5) | 2
+	subanim SUBANIMTYPE_HFLIP, 2
 	db FRAMEBLOCK_51, $2d, $00
 	db FRAMEBLOCK_51, $6e, $00
 
 Subanimation24:
-	db (5 << 5) | 2
+	subanim SUBANIMTYPE_ENEMY, 2
 	db FRAMEBLOCK_51, $2d, $00
 	db FRAMEBLOCK_51, $6e, $00
 
 Subanimation25:
-	db (3 << 5) | 2
+	subanim SUBANIMTYPE_COORDFLIP, 2
 	db FRAMEBLOCK_52, $71, $00
 	db FRAMEBLOCK_52, $72, $00
 
 Subanimation26:
-	db (0 << 5) | 2
+	subanim SUBANIMTYPE_NORMAL, 2
 	db FRAMEBLOCK_52, $01, $00
 	db FRAMEBLOCK_52, $2c, $00
 
 Subanimation3a:
-	db (3 << 5) | 3
+	subanim SUBANIMTYPE_COORDFLIP, 3
 	db FRAMEBLOCK_53, $71, $00
 	db FRAMEBLOCK_53, $7f, $00
 	db FRAMEBLOCK_53, $81, $00
 
 Subanimation3b:
-	db (0 << 5) | 3
+	subanim SUBANIMTYPE_NORMAL, 3
 	db FRAMEBLOCK_53, $01, $00
 	db FRAMEBLOCK_53, $15, $00
 	db FRAMEBLOCK_53, $2c, $00
 
 Subanimation27:
-	db (5 << 5) | 2
+	subanim SUBANIMTYPE_ENEMY, 2
 	db FRAMEBLOCK_54, $01, $00
 	db FRAMEBLOCK_54, $2c, $00
 
 Subanimation28:
-	db (1 << 5) | 3
+	subanim SUBANIMTYPE_HVFLIP, 3
 	db FRAMEBLOCK_55, $73, $03
 	db FRAMEBLOCK_56, $73, $03
 	db FRAMEBLOCK_57, $73, $00
 
 Subanimation32:
-	db (3 << 5) | 3
+	subanim SUBANIMTYPE_COORDFLIP, 3
 	db FRAMEBLOCK_47, $74, $00
 	db FRAMEBLOCK_47, $43, $00
 	db FRAMEBLOCK_47, $75, $00
 
 Subanimation33:
-	db (1 << 5) | 6
+	subanim SUBANIMTYPE_HVFLIP, 6
 	db FRAMEBLOCK_58, $76, $00
 	db FRAMEBLOCK_34, $76, $00
 	db FRAMEBLOCK_58, $76, $00
@@ -676,7 +680,7 @@ Subanimation33:
 	db FRAMEBLOCK_34, $76, $00
 
 Subanimation3c:
-	db (3 << 5) | 7
+	subanim SUBANIMTYPE_COORDFLIP, 7
 	db FRAMEBLOCK_59, $79, $03
 	db FRAMEBLOCK_59, $7b, $03
 	db FRAMEBLOCK_59, $77, $03
@@ -686,7 +690,7 @@ Subanimation3c:
 	db FRAMEBLOCK_59, $76, $00
 
 Subanimation3d:
-	db (0 << 5) | 8
+	subanim SUBANIMTYPE_NORMAL, 8
 	db FRAMEBLOCK_3A, $4d, $00
 	db FRAMEBLOCK_3B, $4d, $00
 	db FRAMEBLOCK_3C, $4d, $00
@@ -697,7 +701,7 @@ Subanimation3d:
 	db FRAMEBLOCK_3F, $4d, $00
 
 Subanimation34:
-	db (1 << 5) | 21
+	subanim SUBANIMTYPE_HVFLIP, 21
 	db FRAMEBLOCK_SMALL_BLACK_CIRCLE, $7d, $00
 	db FRAMEBLOCK_LARGE_BLACK_CIRCLE, $7d, $00
 	db FRAMEBLOCK_5A, $7d, $00
@@ -721,14 +725,14 @@ Subanimation34:
 	db FRAMEBLOCK_5A, $82, $00
 
 Subanimation35:
-	db (1 << 5) | 4
+	subanim SUBANIMTYPE_HVFLIP, 4
 	db FRAMEBLOCK_5B, $83, $03
 	db FRAMEBLOCK_5C, $84, $03
 	db FRAMEBLOCK_5D, $85, $03
 	db FRAMEBLOCK_5E, $09, $00
 
 Subanimation36:
-	db (2 << 5) | 8
+	subanim SUBANIMTYPE_HFLIP, 8
 	db FRAMEBLOCK_5F, $2a, $00
 	db FRAMEBLOCK_5F, $00, $00
 	db FRAMEBLOCK_60, $2a, $00
@@ -739,7 +743,7 @@ Subanimation36:
 	db FRAMEBLOCK_62, $00, $00
 
 Subanimation37:
-	db (1 << 5) | 10
+	subanim SUBANIMTYPE_HVFLIP, 10
 	db FRAMEBLOCK_63, $89, $00
 	db FRAMEBLOCK_64, $75, $00
 	db FRAMEBLOCK_63, $76, $00
@@ -752,7 +756,7 @@ Subanimation37:
 	db FRAMEBLOCK_65, $1a, $00
 
 Subanimation38:
-	db (2 << 5) | 16
+	subanim SUBANIMTYPE_HFLIP, 16
 	db FRAMEBLOCK_66, $8a, $00
 	db FRAMEBLOCK_66, $33, $00
 	db FRAMEBLOCK_66, $2e, $00
@@ -771,7 +775,7 @@ Subanimation38:
 	db FRAMEBLOCK_67, $29, $00
 
 Subanimation3e:
-	db (4 << 5) | 18
+	subanim SUBANIMTYPE_REVERSE, 18
 	db FRAMEBLOCK_02, $31, $00
 	db FRAMEBLOCK_34, $31, $00
 	db FRAMEBLOCK_02, $31, $00
@@ -792,7 +796,7 @@ Subanimation3e:
 	db FRAMEBLOCK_02, $10, $00
 
 Subanimation3f:
-	db (3 << 5) | 18
+	subanim SUBANIMTYPE_COORDFLIP, 18
 	db FRAMEBLOCK_68, $4b, $00
 	db FRAMEBLOCK_68, $8c, $00
 	db FRAMEBLOCK_68, $20, $00
@@ -813,7 +817,7 @@ Subanimation3f:
 	db FRAMEBLOCK_68, $1f, $00
 
 Subanimation44:
-	db (1 << 5) | 12
+	subanim SUBANIMTYPE_HVFLIP, 12
 	db FRAMEBLOCK_69, $4b, $00
 	db FRAMEBLOCK_69, $8c, $00
 	db FRAMEBLOCK_69, $20, $00
@@ -828,20 +832,20 @@ Subanimation44:
 	db FRAMEBLOCK_69, $06, $00
 
 Subanimation43:
-	db (5 << 5) | 3
+	subanim SUBANIMTYPE_ENEMY, 3
 	db FRAMEBLOCK_6A, $07, $00
 	db FRAMEBLOCK_6B, $0f, $00
 	db FRAMEBLOCK_6C, $17, $00
 
 Subanimation45:
-	db (1 << 5) | 4
+	subanim SUBANIMTYPE_HVFLIP, 4
 	db FRAMEBLOCK_6D, $8b, $00
 	db FRAMEBLOCK_6D, $84, $00
 	db FRAMEBLOCK_6D, $63, $00
 	db FRAMEBLOCK_6D, $8c, $00
 
 Subanimation46:
-	db (1 << 5) | 6
+	subanim SUBANIMTYPE_HVFLIP, 6
 	db FRAMEBLOCK_6D, $8b, $00
 	db FRAMEBLOCK_6D, $84, $00
 	db FRAMEBLOCK_6D, $63, $00
@@ -850,13 +854,13 @@ Subanimation46:
 	db FRAMEBLOCK_6D, $89, $00
 
 Subanimation47:
-	db (1 << 5) | 3
+	subanim SUBANIMTYPE_HVFLIP, 3
 	db FRAMEBLOCK_06, $82, $00
 	db FRAMEBLOCK_07, $82, $00
 	db FRAMEBLOCK_08, $96, $00
 
 Subanimation48:
-	db (0 << 5) | 6
+	subanim SUBANIMTYPE_NORMAL, 6
 	db FRAMEBLOCK_03, $41, $04
 	db FRAMEBLOCK_03, $48, $04
 	db FRAMEBLOCK_04, $48, $04
@@ -865,24 +869,24 @@ Subanimation48:
 	db FRAMEBLOCK_03, $48, $03
 
 Subanimation49:
-	db (0 << 5) | 4
+	subanim SUBANIMTYPE_NORMAL, 4
 	db FRAMEBLOCK_04, $48, $04
 	db FRAMEBLOCK_03, $48, $04
 	db FRAMEBLOCK_05, $48, $04
 	db FRAMEBLOCK_03, $48, $03
 
 Subanimation4a:
-	db (0 << 5) | 1
+	subanim SUBANIMTYPE_NORMAL, 1
 	db FRAMEBLOCK_04, $84, $03
 
 Subanimation4b:
-	db (0 << 5) | 3
+	subanim SUBANIMTYPE_NORMAL, 3
 	db FRAMEBLOCK_06, $72, $00
 	db FRAMEBLOCK_07, $72, $00
 	db FRAMEBLOCK_08, $72, $00
 
 Subanimation4c:
-	db (3 << 5) | 8
+	subanim SUBANIMTYPE_COORDFLIP, 8
 	db FRAMEBLOCK_6F, $30, $00
 	db FRAMEBLOCK_6E, $30, $00
 	db FRAMEBLOCK_70, $30, $00
@@ -893,7 +897,7 @@ Subanimation4c:
 	db FRAMEBLOCK_6E, $30, $00
 
 Subanimation4d:
-	db (1 << 5) | 6
+	subanim SUBANIMTYPE_HVFLIP, 6
 	db FRAMEBLOCK_32, $4b, $00
 	db FRAMEBLOCK_33, $4f, $00
 	db FRAMEBLOCK_32, $20, $00
@@ -902,7 +906,7 @@ Subanimation4d:
 	db FRAMEBLOCK_33, $0d, $00
 
 Subanimation51:
-	db (5 << 5) | 6
+	subanim SUBANIMTYPE_ENEMY, 6
 	db FRAMEBLOCK_76, $1b, $00
 	db FRAMEBLOCK_34, $1b, $00
 	db FRAMEBLOCK_76, $1b, $00
@@ -911,7 +915,7 @@ Subanimation51:
 	db FRAMEBLOCK_34, $1b, $00
 
 Subanimation52:
-	db (2 << 5) | 7
+	subanim SUBANIMTYPE_HFLIP, 7
 	db FRAMEBLOCK_77, $25, $00
 	db FRAMEBLOCK_77, $9b, $00
 	db FRAMEBLOCK_77, $1a, $00
@@ -921,7 +925,7 @@ Subanimation52:
 	db FRAMEBLOCK_77, $8c, $00
 
 Subanimation53:
-	db (0 << 5) | 12
+	subanim SUBANIMTYPE_NORMAL, 12
 	db FRAMEBLOCK_78, $30, $00
 	db FRAMEBLOCK_78, $a2, $00
 	db FRAMEBLOCK_78, $93, $00
@@ -936,7 +940,7 @@ Subanimation53:
 	db FRAMEBLOCK_01, $9e, $00
 
 Subanimation54:
-	db (0 << 5) | 11
+	subanim SUBANIMTYPE_NORMAL, 11
 	db FRAMEBLOCK_79, $30, $00
 	db FRAMEBLOCK_79, $a2, $00
 	db FRAMEBLOCK_79, $93, $00

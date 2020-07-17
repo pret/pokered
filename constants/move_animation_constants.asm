@@ -131,6 +131,15 @@ FIRST_SE_ID EQU const_value
 	const SUBANIM_54
 	const SUBANIM_55
 
+; types of subanimations
+	const_def
+	const SUBANIMTYPE_NORMAL
+	const SUBANIMTYPE_HVFLIP
+	const SUBANIMTYPE_HFLIP
+	const SUBANIMTYPE_COORDFLIP
+	const SUBANIMTYPE_REVERSE
+	const SUBANIMTYPE_ENEMY
+
 ; frame blocks that are part of subanimations
 	const_def
 	const FRAMEBLOCK_00
