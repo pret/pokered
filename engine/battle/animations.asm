@@ -132,15 +132,15 @@ DrawFrameBlock:
 	jp nz, .loop ; go back up if there are more tiles to draw
 .afterDrawingTiles
 	ld a, [wFBMode]
-	cp 2
+	cp FRAMEBLOCKMODE_02
 	jr z, .advanceFrameBlockDestAddr; skip delay and don't clean OAM buffer
 	ld a, [wSubAnimFrameDelay]
 	ld c, a
 	call DelayFrames
 	ld a, [wFBMode]
-	cp 3
+	cp FRAMEBLOCKMODE_03
 	jr z, .advanceFrameBlockDestAddr ; skip cleaning OAM buffer
-	cp 4
+	cp FRAMEBLOCKMODE_04
 	jr z, .done ; skip cleaning OAM buffer and don't advance the frame block destination address
 	ld a, [wAnimationID]
 	cp GROWL
