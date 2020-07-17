@@ -2010,7 +2010,7 @@ LoadSurfingPlayerSpriteGraphics::
 	jr LoadPlayerSpriteGraphicsCommon
 
 LoadBikePlayerSpriteGraphics::
-	ld de, RedCyclingSprite
+	ld de, RedBikeSprite
 	ld hl, vNPCSprites
 
 LoadPlayerSpriteGraphicsCommon::
