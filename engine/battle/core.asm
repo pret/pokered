@@ -921,7 +921,7 @@ TrainerBattleVictory:
 	ld b, MUSIC_DEFEATED_TRAINER
 .gymleader
 	ld a, [wTrainerClass]
-	cp SONY3 ; final battle against rival
+	cp RIVAL3 ; final battle against rival
 	jr nz, .notrival
 	ld b, MUSIC_DEFEATED_GYM_LEADER
 	ld hl, wFlags_D733
@@ -1134,7 +1134,7 @@ HandlePlayerBlackOut:
 	cp LINK_STATE_BATTLING
 	jr z, .notSony1Battle
 	ld a, [wCurOpponent]
-	cp OPP_SONY1
+	cp OPP_RIVAL1
 	jr nz, .notSony1Battle
 	hlcoord 0, 0  ; sony 1 battle
 	lb bc, 8, 21

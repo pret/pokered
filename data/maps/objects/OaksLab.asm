@@ -8,7 +8,7 @@ OaksLab_Object:
 	db 0 ; signs
 
 	db 11 ; objects
-	object SPRITE_BLUE, 4, 3, STAY, NONE, 1, OPP_SONY1, 1
+	object SPRITE_BLUE, 4, 3, STAY, NONE, 1, OPP_RIVAL1, 1
 	object SPRITE_POKE_BALL, 6, 3, STAY, NONE, 2 ; person
 	object SPRITE_POKE_BALL, 7, 3, STAY, NONE, 3 ; person
 	object SPRITE_POKE_BALL, 8, 3, STAY, NONE, 4 ; person

@@ -31,7 +31,7 @@ ENDM
 	trainer_const TAMER         ; $16
 	trainer_const BIRD_KEEPER   ; $17
 	trainer_const BLACKBELT     ; $18
-	trainer_const SONY1         ; $19
+	trainer_const RIVAL1        ; $19
 	trainer_const PROF_OAK      ; $1A
 	trainer_const CHIEF         ; $1B
 	trainer_const SCIENTIST     ; $1C
@@ -48,8 +48,8 @@ ENDM
 	trainer_const BLAINE        ; $27
 	trainer_const SABRINA       ; $28
 	trainer_const GENTLEMAN     ; $29
-	trainer_const SONY2         ; $2A
-	trainer_const SONY3         ; $2B
+	trainer_const RIVAL2        ; $2A
+	trainer_const RIVAL3        ; $2B
 	trainer_const LORELEI       ; $2C
 	trainer_const CHANNELER     ; $2D
 	trainer_const AGATHA        ; $2E
