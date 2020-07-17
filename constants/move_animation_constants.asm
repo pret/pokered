@@ -1,6 +1,7 @@
 ; special effects that are part of move animations
-
-	const_def $D8
+	const_def $C0
+FIRST_SE_ID EQU const_value
+	const_skip $18
 	const SE_WAVY_SCREEN               ; $D8 used in Psywave/Night Shade/Psychic etc.
 	const SE_SUBSTITUTE_MON            ; $D9 used in Substitute (turns the pokemon into a mini sprite)
 	const SE_SHAKE_BACK_AND_FORTH      ; $DA used in Double Team
@@ -40,3 +41,92 @@
 	const SE_RESET_SCREEN_PALETTE      ; $FC used in Leer/Thunderpunch/etc.
 	const SE_DARK_SCREEN_PALETTE       ; $FD used in Hyper Beam/Thunderpunch/etc.
 	const SE_DARK_SCREEN_FLASH         ; $FE used in Cut/Take Down/etc.
+
+; subanimations that are part of move animations
+	const_def
+	const SUBANIM_00
+	const SUBANIM_01
+	const SUBANIM_02
+	const SUBANIM_03
+	const SUBANIM_04
+	const SUBANIM_05
+	const SUBANIM_06
+	const SUBANIM_07
+	const SUBANIM_08
+	const SUBANIM_09
+	const SUBANIM_0A
+	const SUBANIM_0B
+	const SUBANIM_0C
+	const SUBANIM_0D
+	const SUBANIM_0E
+	const SUBANIM_0F
+	const SUBANIM_10
+	const SUBANIM_11
+	const SUBANIM_12
+	const SUBANIM_13
+	const SUBANIM_14
+	const SUBANIM_15
+	const SUBANIM_16
+	const SUBANIM_17
+	const SUBANIM_18
+	const SUBANIM_19
+	const SUBANIM_1A
+	const SUBANIM_1B
+	const SUBANIM_1C
+	const SUBANIM_1D
+	const SUBANIM_1E
+	const SUBANIM_1F
+	const SUBANIM_20
+	const SUBANIM_21
+	const SUBANIM_22
+	const SUBANIM_23
+	const SUBANIM_24
+	const SUBANIM_25
+	const SUBANIM_26
+	const SUBANIM_27
+	const SUBANIM_28
+	const SUBANIM_29
+	const SUBANIM_2A
+	const SUBANIM_2B
+	const SUBANIM_2C
+	const SUBANIM_2D
+	const SUBANIM_2E
+	const SUBANIM_2F
+	const SUBANIM_30
+	const SUBANIM_31
+	const SUBANIM_32
+	const SUBANIM_33
+	const SUBANIM_34
+	const SUBANIM_35
+	const SUBANIM_36
+	const SUBANIM_37
+	const SUBANIM_38
+	const SUBANIM_39
+	const SUBANIM_3A
+	const SUBANIM_3B
+	const SUBANIM_3C
+	const SUBANIM_3D
+	const SUBANIM_3E
+	const SUBANIM_3F
+	const SUBANIM_40
+	const SUBANIM_41
+	const SUBANIM_42
+	const SUBANIM_43
+	const SUBANIM_44
+	const SUBANIM_45
+	const SUBANIM_46
+	const SUBANIM_47
+	const SUBANIM_48
+	const SUBANIM_49
+	const SUBANIM_4A
+	const SUBANIM_4B
+	const SUBANIM_4C
+	const SUBANIM_4D
+	const SUBANIM_4E
+	const SUBANIM_4F
+	const SUBANIM_50
+	const SUBANIM_51
+	const SUBANIM_52
+	const SUBANIM_53
+	const SUBANIM_54
+	const SUBANIM_55

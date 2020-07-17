@@ -177,9 +177,9 @@ PlayAnimation:
 	ld l, a
 .animationLoop
 	ld a, [hli]
-	cp $FF
+	cp -1
 	jr z, .AnimationOver
-	cp $C0 ; is this subanimation or a special effect?
+	cp FIRST_SE_ID ; is this subanimation or a special effect?
 	jr c, .playSubanimation
 .doSpecialEffect
 	ld c, a
@@ -194,7 +194,7 @@ PlayAnimation:
 	jr .searchSpecialEffectTableLoop
 .foundMatch
 	ld a, [hli]
-	cp -1 ; is there a sound to play?
+	cp NO_MOVE - 1 ; is there a sound to play?
 	jr z, .skipPlayingSound
 	ld [wAnimSoundID], a ; store sound
 	push hl
@@ -347,18 +347,17 @@ LoadAnimationTileset:
 	ld c, a ; number of tiles
 	jp CopyVideoData ; load tileset
 
+anim_tileset: MACRO
+	db \1
+	dw \2
+	db -1 ; padding
+ENDM
+
 AnimationTilesetPointers:
-	db 79 ; number of tiles
-	dw AnimationTileset1
-	db $FF
-
-	db 79 ; number of tiles
-	dw AnimationTileset2
-	db $FF
-
-	db 64 ; number of tiles
-	dw AnimationTileset1
-	db $FF
+	; number of tiles, gfx pointer
+	anim_tileset 79, AnimationTileset1
+	anim_tileset 79, AnimationTileset2
+	anim_tileset 64, AnimationTileset1
 
 AnimationTileset1:
 	INCBIN "gfx/battle/attack_anim_1.2bpp"
@@ -412,7 +411,7 @@ MoveAnimation:
 	ld [wSubAnimSubEntryAddr], a
 	ld [wUnusedD09B], a
 	ld [wSubAnimTransform], a
-	dec a
+	dec a ; NO_MOVE - 1
 	ld [wAnimSoundID], a
 	pop af
 	pop bc
@@ -461,10 +460,10 @@ PlayApplyingAttackAnimation:
 	jp hl
 
 AnimationTypePointerTable:
-	dw ShakeScreenVertically ; enemy mon has used a damaging move without a side effect
+	dw ShakeScreenVertically        ; enemy mon has used a damaging move without a side effect
 	dw ShakeScreenHorizontallyHeavy ; enemy mon has used a damaging move with a side effect
-	dw ShakeScreenHorizontallySlow ; enemy mon has used a non-damaging move
-	dw BlinkEnemyMonSprite ; player mon has used a damaging move without a side effect
+	dw ShakeScreenHorizontallySlow  ; enemy mon has used a non-damaging move
+	dw BlinkEnemyMonSprite          ; player mon has used a damaging move without a side effect
 	dw ShakeScreenHorizontallyLight ; player mon has used a damaging move with a side effect
 	dw ShakeScreenHorizontallySlow2 ; player mon has used a non-damaging move
 
@@ -549,7 +548,7 @@ SetAnimationPalette:
 
 PlaySubanimation:
 	ld a, [wAnimSoundID]
-	cp $FF
+	cp NO_MOVE - 1
 	jr z, .skipPlayingSound
 	call GetMoveSound
 	call PlaySound

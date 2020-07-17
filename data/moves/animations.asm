@@ -203,1059 +203,1072 @@ AttackAnimationPointers:
 	dw ThrowBaitAnim
 	dw ZigZagScreenAnim
 
-; each animation is a list of subanimations and special effects
-; if first byte < $56
-;	db tileset_and_delay, sound_id, subanimation_id
-; if first byte >= $D8
-;	db special_effect_id, sound_id
-; $FF terminated
+; each animation is a list of subanimations
+; and/or special effects, terminated by -1
+
+;\1: sound_id
+;\2: special_effect_id or subanimation_id
+; if \2 is a subanimation_id:
+;\3: tileset_id
+;\4: delay
+battle_anim: MACRO
+	IF _NARG == 4
+		db (\3 << 6) | \4
+		db \1 - 1
+		db \2
+	ELSE
+		db \2
+		db \1 - 1
+	ENDC
+ENDM
+
 ZigZagScreenAnim:
-	db SE_WAVY_SCREEN, $FF
-	db $FF
+	battle_anim NO_MOVE, SE_WAVY_SCREEN
+	db -1 ; end
 
 PoundAnim:
 StruggleAnim:
-	db $08, $00, $01
-	db $FF
+	battle_anim POUND, SUBANIM_01, 0, 8
+	db -1 ; end
 
 KarateChopAnim:
-	db $08, $01, $03
-	db $FF
+	battle_anim KARATE_CHOP, SUBANIM_03, 0, 8
+	db -1 ; end
 
 DoubleSlapAnim:
-	db $05, $02, $01
-	db $05, $02, $01
-	db $FF
+	battle_anim DOUBLESLAP, SUBANIM_01, 0, 5
+	battle_anim DOUBLESLAP, SUBANIM_01, 0, 5
+	db -1 ; end
 
 CometPunchAnim:
-	db $04, $03, $02
-	db $04, $03, $02
-	db $FF
+	battle_anim COMET_PUNCH, SUBANIM_02, 0, 4
+	battle_anim COMET_PUNCH, SUBANIM_02, 0, 4
+	db -1 ; end
 
 MegaPunchAnim:
-	db $46, $04, $04
-	db $FF
+	battle_anim MEGA_PUNCH, SUBANIM_04, 1, 6
+	db -1 ; end
 
 PayDayAnim:
-	db $08, $00, $01
-	db $04, $05, $52
-	db $FF
+	battle_anim POUND, SUBANIM_01, 0, 8
+	battle_anim PAY_DAY, SUBANIM_52, 0, 4
+	db -1 ; end
 
 FirePunchAnim:
-	db $06, $06, $02
-	db $46, $FF, $11
-	db $FF
+	battle_anim FIRE_PUNCH, SUBANIM_02, 0, 6
+	battle_anim NO_MOVE, SUBANIM_11, 1, 6
+	db -1 ; end
 
 IcePunchAnim:
-	db $06, $07, $02
-	db $10, $FF, $2F
-	db $FF
+	battle_anim ICE_PUNCH, SUBANIM_02, 0, 6
+	battle_anim NO_MOVE, SUBANIM_2F, 0, 16
+	db -1 ; end
 
 ThunderPunchAnim:
-	db $06, $08, $02
-	db SE_DARK_SCREEN_PALETTE, $FF
-	db $46, $FF, $2B
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db $FF
+	battle_anim THUNDERPUNCH, SUBANIM_02, 0, 6
+	battle_anim NO_MOVE, SE_DARK_SCREEN_PALETTE
+	battle_anim NO_MOVE, SUBANIM_2B, 1, 6
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1 ; end
 
 ScratchAnim:
-	db $06, $09, $0F
-	db $FF
+	battle_anim SCRATCH, SUBANIM_0F, 0, 6
+	db -1 ; end
 
 VicegripAnim:
-	db $08, $0A, $2A
-	db $FF
+	battle_anim VICEGRIP, SUBANIM_2A, 0, 8
+	db -1 ; end
 
 GuillotineAnim:
-	db $06, $0B, $2A
-	db $FF
+	battle_anim GUILLOTINE, SUBANIM_2A, 0, 6
+	db -1 ; end
 
 RazorWindAnim:
-	db $04, $0C, $16
-	db $FF
+	battle_anim RAZOR_WIND, SUBANIM_16, 0, 4
+	db -1 ; end
 
 SwordsDanceAnim:
-	db $46, $0D, $18
-	db $46, $0D, $18
-	db $46, $0D, $18
-	db $FF
+	battle_anim SWORDS_DANCE, SUBANIM_18, 1, 6
+	battle_anim SWORDS_DANCE, SUBANIM_18, 1, 6
+	battle_anim SWORDS_DANCE, SUBANIM_18, 1, 6
+	db -1 ; end
 
 CutAnim:
-	db SE_DARK_SCREEN_FLASH, $0E
-	db $04, $FF, $16
-	db $FF
+	battle_anim CUT, SE_DARK_SCREEN_FLASH
+	battle_anim NO_MOVE, SUBANIM_16, 0, 4
+	db -1 ; end
 
 GustAnim:
-	db $46, $0F, $10
-	db $06, $FF, $02
-	db $FF
+	battle_anim GUST, SUBANIM_10, 1, 6
+	battle_anim NO_MOVE, SUBANIM_02, 0, 6
+	db -1 ; end
 
 WingAttackAnim:
-	db $46, $10, $04
-	db $FF
+	battle_anim WING_ATTACK, SUBANIM_04, 1, 6
+	db -1 ; end
 
 WhirlwindAnim:
-	db $46, $11, $10
-	db SE_SLIDE_ENEMY_MON_OFF, $FF
-	db $FF
+	battle_anim WHIRLWIND, SUBANIM_10, 1, 6
+	battle_anim NO_MOVE, SE_SLIDE_ENEMY_MON_OFF
+	db -1 ; end
 
 FlyAnim:
-	db $46, $12, $04
-	db SE_SHOW_MON_PIC, $FF
-	db $FF
+	battle_anim FLY, SUBANIM_04, 1, 6
+	battle_anim NO_MOVE, SE_SHOW_MON_PIC
+	db -1 ; end
 
 BindAnim:
-	db $04, $13, $23
-	db $04, $13, $23
-	db $FF
+	battle_anim BIND, SUBANIM_23, 0, 4
+	battle_anim BIND, SUBANIM_23, 0, 4
+	db -1 ; end
 
 SlamAnim:
-	db $06, $14, $02
-	db $FF
+	battle_anim SLAM, SUBANIM_02, 0, 6
+	db -1 ; end
 
 VineWhipAnim:
-	db $01, $15, $16
-	db $08, $FF, $01
-	db $FF
+	battle_anim VINE_WHIP, SUBANIM_16, 0, 1
+	battle_anim NO_MOVE, SUBANIM_01, 0, 8
+	db -1 ; end
 
 StompAnim:
-	db $48, $16, $05
-	db $FF
+	battle_anim STOMP, SUBANIM_05, 1, 8
+	db -1 ; end
 
 DoubleKickAnim:
-	db $08, $17, $01
-	db $08, $17, $01
-	db $FF
+	battle_anim DOUBLE_KICK, SUBANIM_01, 0, 8
+	battle_anim DOUBLE_KICK, SUBANIM_01, 0, 8
+	db -1 ; end
 
 MegaKickAnim:
-	db $46, $18, $04
-	db $FF
+	battle_anim MEGA_KICK, SUBANIM_04, 1, 6
+	db -1 ; end
 
 JumpKickAnim:
-	db $46, $19, $04
-	db $FF
+	battle_anim JUMP_KICK, SUBANIM_04, 1, 6
+	db -1 ; end
 
 RollingKickAnim:
-	db SE_DARK_SCREEN_FLASH, $1A
-	db $46, $FF, $04
-	db $FF
+	battle_anim ROLLING_KICK, SE_DARK_SCREEN_FLASH
+	battle_anim NO_MOVE, SUBANIM_04, 1, 6
+	db -1 ; end
 
 SandAttackAnim:
-	db $46, $1B, $28
-	db $FF
+	battle_anim SAND_ATTACK, SUBANIM_28, 1, 6
+	db -1 ; end
 
 HeatButtAnim:
-	db $46, $1C, $05
-	db $FF
+	battle_anim HEADBUTT, SUBANIM_05, 1, 6
+	db -1 ; end
 
 HornAttackAnim:
-	db $06, $1D, $45
-	db $46, $FF, $05
-	db $FF
+	battle_anim HORN_ATTACK, SUBANIM_45, 0, 6
+	battle_anim NO_MOVE, SUBANIM_05, 1, 6
+	db -1 ; end
 
 FuryAttackAnim:
-	db $02, $1E, $46
-	db $02, $FF, $46
-	db $FF
+	battle_anim FURY_ATTACK, SUBANIM_46, 0, 2
+	battle_anim NO_MOVE, SUBANIM_46, 0, 2
+	db -1 ; end
 
 HornDrillAnim:
-	db $42, $1F, $05
-	db $42, $FF, $05
-	db $42, $FF, $05
-	db $42, $FF, $05
-	db $42, $FF, $05
-	db $FF
+	battle_anim HORN_DRILL, SUBANIM_05, 1, 2
+	battle_anim NO_MOVE, SUBANIM_05, 1, 2
+	battle_anim NO_MOVE, SUBANIM_05, 1, 2
+	battle_anim NO_MOVE, SUBANIM_05, 1, 2
+	battle_anim NO_MOVE, SUBANIM_05, 1, 2
+	db -1 ; end
 
 TackleAnim:
-	db SE_MOVE_MON_HORIZONTALLY, $48
-	db SE_RESET_MON_POSITION, $FF
-	db $FF
+	battle_anim LEECH_SEED, SE_MOVE_MON_HORIZONTALLY
+	battle_anim NO_MOVE, SE_RESET_MON_POSITION
+	db -1 ; end
 
 BodySlamAnim:
-	db SE_MOVE_MON_HORIZONTALLY, $48
-	db SE_DARK_SCREEN_FLASH, $FF
-	db SE_DARK_SCREEN_FLASH, $FF
-	db SE_RESET_MON_POSITION, $FF
-	db $FF
+	battle_anim LEECH_SEED, SE_MOVE_MON_HORIZONTALLY
+	battle_anim NO_MOVE, SE_DARK_SCREEN_FLASH
+	battle_anim NO_MOVE, SE_DARK_SCREEN_FLASH
+	battle_anim NO_MOVE, SE_RESET_MON_POSITION
+	db -1 ; end
 
 WrapAnim:
-	db $04, $22, $23
-	db $04, $22, $23
-	db $04, $22, $23
-	db $FF
+	battle_anim WRAP, SUBANIM_23, 0, 4
+	battle_anim WRAP, SUBANIM_23, 0, 4
+	battle_anim WRAP, SUBANIM_23, 0, 4
+	db -1 ; end
 
 TakeDownAnim:
-	db SE_MOVE_MON_HORIZONTALLY, $48
-	db SE_DARK_SCREEN_FLASH, $23
-	db SE_RESET_MON_POSITION, $FF
-	db $FF
+	battle_anim LEECH_SEED, SE_MOVE_MON_HORIZONTALLY
+	battle_anim TAKE_DOWN, SE_DARK_SCREEN_FLASH
+	battle_anim NO_MOVE, SE_RESET_MON_POSITION
+	db -1 ; end
 
 ThrashAnim:
-	db $46, $24, $04
-	db $FF
+	battle_anim THRASH, SUBANIM_04, 1, 6
+	db -1 ; end
 
 DoubleEdgeAnim:
-	db SE_LIGHT_SCREEN_PALETTE, $48
-	db $06, $FF, $2D
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db SE_MOVE_MON_HORIZONTALLY, $FF
-	db SE_DARK_SCREEN_FLASH, $25
-	db SE_RESET_MON_POSITION, $FF
-	db $FF
+	battle_anim LEECH_SEED, SE_LIGHT_SCREEN_PALETTE
+	battle_anim NO_MOVE, SUBANIM_2D, 0, 6
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	battle_anim NO_MOVE, SE_MOVE_MON_HORIZONTALLY
+	battle_anim DOUBLE_EDGE, SE_DARK_SCREEN_FLASH
+	battle_anim NO_MOVE, SE_RESET_MON_POSITION
+	db -1 ; end
 
 TailWhipAnim:
-	db SE_MOVE_MON_HORIZONTALLY, $84
-	db SE_DELAY_ANIMATION_10, $FF
-	db SE_RESET_MON_POSITION, $84
-	db SE_DELAY_ANIMATION_10, $FF
-	db SE_MOVE_MON_HORIZONTALLY, $84
-	db SE_DELAY_ANIMATION_10, $FF
-	db SE_RESET_MON_POSITION, $84
-	db $FF
+	battle_anim AMNESIA, SE_MOVE_MON_HORIZONTALLY
+	battle_anim NO_MOVE, SE_DELAY_ANIMATION_10
+	battle_anim AMNESIA, SE_RESET_MON_POSITION
+	battle_anim NO_MOVE, SE_DELAY_ANIMATION_10
+	battle_anim AMNESIA, SE_MOVE_MON_HORIZONTALLY
+	battle_anim NO_MOVE, SE_DELAY_ANIMATION_10
+	battle_anim AMNESIA, SE_RESET_MON_POSITION
+	db -1 ; end
 
 PoisonStingAnim:
-	db $06, $27, $00
-	db $FF
+	battle_anim POISON_STING, SUBANIM_00, 0, 6
+	db -1 ; end
 
 TwineedleAnim:
-	db $05, $28, $01
-	db $05, $28, $01
-	db $FF
+	battle_anim TWINEEDLE, SUBANIM_01, 0, 5
+	battle_anim TWINEEDLE, SUBANIM_01, 0, 5
+	db -1 ; end
 
 PinMissileAnim:
-	db $03, $29, $01
-	db $FF
+	battle_anim PIN_MISSILE, SUBANIM_01, 0, 3
+	db -1 ; end
 
 LeerAnim:
-	db SE_DARK_SCREEN_PALETTE, $48
-	db SE_DARK_SCREEN_FLASH, $2A
-	db SE_DARK_SCREEN_FLASH, $2A
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db $FF
+	battle_anim LEECH_SEED, SE_DARK_SCREEN_PALETTE
+	battle_anim LEER, SE_DARK_SCREEN_FLASH
+	battle_anim LEER, SE_DARK_SCREEN_FLASH
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1 ; end
 
 BiteAnim:
-	db $08, $2B, $02
-	db $FF
+	battle_anim BITE, SUBANIM_02, 0, 8
+	db -1 ; end
 
 GrowlAnim:
-	db $46, $2C, $12
-	db $FF
+	battle_anim GROWL, SUBANIM_12, 1, 6
+	db -1 ; end
 
 RoarAnim:
-	db $46, $2D, $15
-	db $46, $2D, $15
-	db $46, $2D, $15
-	db $FF
+	battle_anim ROAR, SUBANIM_15, 1, 6
+	battle_anim ROAR, SUBANIM_15, 1, 6
+	battle_anim ROAR, SUBANIM_15, 1, 6
+	db -1 ; end
 
 SingAnim:
-	db $46, $2E, $12
-	db $50, $FF, $40
-	db $50, $FF, $40
-	db $FF
+	battle_anim SING, SUBANIM_12, 1, 6
+	battle_anim NO_MOVE, SUBANIM_40, 1, 16
+	battle_anim NO_MOVE, SUBANIM_40, 1, 16
+	db -1 ; end
 
 SupersonicAnim:
-	db $06, $2F, $31
-	db $FF
+	battle_anim SUPERSONIC, SUBANIM_31, 0, 6
+	db -1 ; end
 
 SonicBoomAnim:
-	db $46, $2D, $15
-	db $46, $2D, $15
-	db $46, $0F, $10
-	db $46, $FF, $05
-	db $FF
+	battle_anim ROAR, SUBANIM_15, 1, 6
+	battle_anim ROAR, SUBANIM_15, 1, 6
+	battle_anim GUST, SUBANIM_10, 1, 6
+	battle_anim NO_MOVE, SUBANIM_05, 1, 6
+	db -1 ; end
 
 DisableAnim:
-	db SE_DARK_SCREEN_PALETTE, $48
-	db SE_DARK_SCREEN_FLASH, $2A
-	db SE_DARK_SCREEN_FLASH, $2A
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db $FF
+	battle_anim LEECH_SEED, SE_DARK_SCREEN_PALETTE
+	battle_anim LEER, SE_DARK_SCREEN_FLASH
+	battle_anim LEER, SE_DARK_SCREEN_FLASH
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1 ; end
 
 AcidAnim:
-	db $46, $32, $13
-	db $46, $32, $14
-	db $FF
+	battle_anim ACID, SUBANIM_13, 1, 6
+	battle_anim ACID, SUBANIM_14, 1, 6
+	db -1 ; end
 
 EmberAnim:
-	db $46, $33, $11
-	db $FF
+	battle_anim EMBER, SUBANIM_11, 1, 6
+	db -1 ; end
 
 FlamethrowerAnim:
-	db $46, $34, $1F
-	db $46, $34, $0C
-	db $46, $34, $0D
-	db $FF
+	battle_anim FLAMETHROWER, SUBANIM_1F, 1, 6
+	battle_anim FLAMETHROWER, SUBANIM_0C, 1, 6
+	battle_anim FLAMETHROWER, SUBANIM_0D, 1, 6
+	db -1 ; end
 
 MistAnim:
-	db SE_LIGHT_SCREEN_PALETTE, $FF
-	db SE_WATER_DROPLETS_EVERYWHERE, $38
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db $FF
+	battle_anim NO_MOVE, SE_LIGHT_SCREEN_PALETTE
+	battle_anim SURF, SE_WATER_DROPLETS_EVERYWHERE
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1 ; end
 
 WaterGunAnim:
-	db $06, $36, $2C
-	db $FF
+	battle_anim WATER_GUN, SUBANIM_2C, 0, 6
+	db -1 ; end
 
 HydroPumpAnim:
-	db $06, $37, $1A
-	db $06, $37, $1A
-	db $FF
+	battle_anim HYDRO_PUMP, SUBANIM_1A, 0, 6
+	battle_anim HYDRO_PUMP, SUBANIM_1A, 0, 6
+	db -1 ; end
 
 SurfAnim:
-	db SE_WATER_DROPLETS_EVERYWHERE, $38
-	db $06, $37, $1A
-	db $FF
+	battle_anim SURF, SE_WATER_DROPLETS_EVERYWHERE
+	battle_anim HYDRO_PUMP, SUBANIM_1A, 0, 6
+	db -1 ; end
 
 IceBeamAnim:
-	db $03, $39, $2E
-	db $10, $FF, $2F
-	db $FF
+	battle_anim ICE_BEAM, SUBANIM_2E, 0, 3
+	battle_anim NO_MOVE, SUBANIM_2F, 0, 16
+	db -1 ; end
 
 BlizzardAnim:
-	db $04, $3A, $38
-	db $04, $37, $38
-	db $FF
+	battle_anim BLIZZARD, SUBANIM_38, 0, 4
+	battle_anim HYDRO_PUMP, SUBANIM_38, 0, 4
+	db -1 ; end
 
 PsyBeamAnim:
-	db $03, $3B, $2E
-	db SE_FLASH_SCREEN_LONG, $FF
-	db $FF
+	battle_anim PSYBEAM, SUBANIM_2E, 0, 3
+	battle_anim NO_MOVE, SE_FLASH_SCREEN_LONG
+	db -1 ; end
 
 BubbleBeamAnim:
-	db $12, $3C, $35
-	db $FF
+	battle_anim BUBBLEBEAM, SUBANIM_35, 0, 18
+	db -1 ; end
 
 AuroraBeamAnim:
-	db $03, $3D, $2E
-	db SE_DELAY_ANIMATION_10, $FF
-	db SE_DELAY_ANIMATION_10, $FF
-	db $FF
+	battle_anim AURORA_BEAM, SUBANIM_2E, 0, 3
+	battle_anim NO_MOVE, SE_DELAY_ANIMATION_10
+	battle_anim NO_MOVE, SE_DELAY_ANIMATION_10
+	db -1 ; end
 
 HyperBeamAnim:
-	db SE_DARK_SCREEN_PALETTE, $48
-	db SE_SPIRAL_BALLS_INWARD, $FF
-	db $02, $3E, $2E
-	db SE_DARK_SCREEN_FLASH, $FF
-	db SE_DARK_SCREEN_FLASH, $FF
-	db $46, $04, $04
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db $FF
+	battle_anim LEECH_SEED, SE_DARK_SCREEN_PALETTE
+	battle_anim NO_MOVE, SE_SPIRAL_BALLS_INWARD
+	battle_anim HYPER_BEAM, SUBANIM_2E, 0, 2
+	battle_anim NO_MOVE, SE_DARK_SCREEN_FLASH
+	battle_anim NO_MOVE, SE_DARK_SCREEN_FLASH
+	battle_anim MEGA_PUNCH, SUBANIM_04, 1, 6
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1 ; end
 
 PeckAnim:
-	db $08, $3F, $01
-	db $FF
+	battle_anim PECK, SUBANIM_01, 0, 8
+	db -1 ; end
 
 DrillPeckAnim:
-	db $46, $40, $04
-	db $FF
+	battle_anim DRILL_PECK, SUBANIM_04, 1, 6
+	db -1 ; end
 
 SubmissionAnim:
-	db SE_SLIDE_MON_OFF, $41
-	db $06, $FF, $01
-	db SE_SHOW_MON_PIC, $FF
-	db $FF
+	battle_anim SUBMISSION, SE_SLIDE_MON_OFF
+	battle_anim NO_MOVE, SUBANIM_01, 0, 6
+	battle_anim NO_MOVE, SE_SHOW_MON_PIC
+	db -1 ; end
 
 LowKickAnim:
-	db SE_SLIDE_MON_OFF, $42
-	db $46, $FF, $04
-	db SE_SHOW_MON_PIC, $FF
-	db $FF
+	battle_anim LOW_KICK, SE_SLIDE_MON_OFF
+	battle_anim NO_MOVE, SUBANIM_04, 1, 6
+	battle_anim NO_MOVE, SE_SHOW_MON_PIC
+	db -1 ; end
 
 CounterAnim:
-	db SE_SLIDE_MON_OFF, $43
-	db $46, $FF, $04
-	db SE_SHOW_MON_PIC, $FF
-	db $FF
+	battle_anim COUNTER, SE_SLIDE_MON_OFF
+	battle_anim NO_MOVE, SUBANIM_04, 1, 6
+	battle_anim NO_MOVE, SE_SHOW_MON_PIC
+	db -1 ; end
 
 SeismicTossAnim:
-	db SE_BLINK_ENEMY_MON, $FF
-	db $41, $8B, $4E
-	db SE_HIDE_ENEMY_MON_PIC, $FF
-	db SE_SLIDE_MON_OFF, $FF
-	db $42, $44, $4F
-	db SE_DELAY_ANIMATION_10, $FF
-	db SE_DELAY_ANIMATION_10, $FF
-	db SE_SHOW_MON_PIC, $FF
-	db $41, $44, $50
-	db SE_SHOW_ENEMY_MON_PIC, $FF
-	db SE_SHAKE_SCREEN, $FF
-	db $FF
+	battle_anim NO_MOVE, SE_BLINK_ENEMY_MON
+	battle_anim BARRAGE, SUBANIM_4E, 1, 1
+	battle_anim NO_MOVE, SE_HIDE_ENEMY_MON_PIC
+	battle_anim NO_MOVE, SE_SLIDE_MON_OFF
+	battle_anim SEISMIC_TOSS, SUBANIM_4F, 1, 2
+	battle_anim NO_MOVE, SE_DELAY_ANIMATION_10
+	battle_anim NO_MOVE, SE_DELAY_ANIMATION_10
+	battle_anim NO_MOVE, SE_SHOW_MON_PIC
+	battle_anim SEISMIC_TOSS, SUBANIM_50, 1, 1
+	battle_anim NO_MOVE, SE_SHOW_ENEMY_MON_PIC
+	battle_anim NO_MOVE, SE_SHAKE_SCREEN
+	db -1 ; end
 
 StrengthAnim:
-	db SE_MOVE_MON_HORIZONTALLY, $48
-	db SE_RESET_MON_POSITION, $FF
-	db $46, $06, $04
-	db $FF
+	battle_anim LEECH_SEED, SE_MOVE_MON_HORIZONTALLY
+	battle_anim NO_MOVE, SE_RESET_MON_POSITION
+	battle_anim FIRE_PUNCH, SUBANIM_04, 1, 6
+	db -1 ; end
 
 AbsorbAnim:
-	db SE_LIGHT_SCREEN_PALETTE, $46
-	db $06, $FF, $21
-	db $06, $FF, $22
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db $FF
+	battle_anim ABSORB, SE_LIGHT_SCREEN_PALETTE
+	battle_anim NO_MOVE, SUBANIM_21, 0, 6
+	battle_anim NO_MOVE, SUBANIM_22, 0, 6
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1 ; end
 
 MegaDrainAnim:
-	db SE_LIGHT_SCREEN_PALETTE, $47
-	db SE_DARK_SCREEN_FLASH, $FF
-	db $06, $FF, $21
-	db $06, $FF, $22
-	db SE_DARK_SCREEN_FLASH, $FF
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db $FF
+	battle_anim MEGA_DRAIN, SE_LIGHT_SCREEN_PALETTE
+	battle_anim NO_MOVE, SE_DARK_SCREEN_FLASH
+	battle_anim NO_MOVE, SUBANIM_21, 0, 6
+	battle_anim NO_MOVE, SUBANIM_22, 0, 6
+	battle_anim NO_MOVE, SE_DARK_SCREEN_FLASH
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1 ; end
 
 LeechSeedAnim:
-	db $46, $48, $1B
-	db $55, $4D, $1C
-	db $FF
+	battle_anim LEECH_SEED, SUBANIM_1B, 1, 6
+	battle_anim STUN_SPORE, SUBANIM_1C, 1, 21
+	db -1 ; end
 
 GrowthAnim:
-	db SE_LIGHT_SCREEN_PALETTE, $49
-	db SE_SPIRAL_BALLS_INWARD, $FF
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db $FF
+	battle_anim GROWTH, SE_LIGHT_SCREEN_PALETTE
+	battle_anim NO_MOVE, SE_SPIRAL_BALLS_INWARD
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1 ; end
 
 RazorLeafAnim:
-	db SE_LEAVES_FALLING, $4A
-	db $41, $80, $44
-	db $01, $0C, $16
-	db $FF
+	battle_anim RAZOR_LEAF, SE_LEAVES_FALLING
+	battle_anim SWIFT, SUBANIM_44, 1, 1
+	battle_anim RAZOR_WIND, SUBANIM_16, 0, 1
+	db -1 ; end
 
 SolarBeamAnim:
-	db $06, $4B, $2E
-	db $06, $FF, $01
-	db $FF
+	battle_anim SOLARBEAM, SUBANIM_2E, 0, 6
+	battle_anim NO_MOVE, SUBANIM_01, 0, 6
+	db -1 ; end
 
 PoisonPowderAnim:
-	db $06, $4C, $36
-	db $FF
+	battle_anim POISONPOWDER, SUBANIM_36, 0, 6
+	db -1 ; end
 
 StunSporeAnim:
-	db $06, $4D, $36
-	db $FF
+	battle_anim STUN_SPORE, SUBANIM_36, 0, 6
+	db -1 ; end
 
 SleepPowderAnim:
-	db $06, $4E, $36
-	db $FF
+	battle_anim SLEEP_POWDER, SUBANIM_36, 0, 6
+	db -1 ; end
 
 PedalDanceAnim:
-	db SE_LIGHT_SCREEN_PALETTE, $4F
-	db SE_PETALS_FALLING, $FF
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db $FF
+	battle_anim PETAL_DANCE, SE_LIGHT_SCREEN_PALETTE
+	battle_anim NO_MOVE, SE_PETALS_FALLING
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1 ; end
 
 StringShotAnim:
-	db $08, $50, $37
-	db $FF
+	battle_anim STRING_SHOT, SUBANIM_37, 0, 8
+	db -1 ; end
 
 DragonRageAnim:
-	db $46, $51, $1F
-	db $46, $FF, $0C
-	db $46, $FF, $0D
-	db $46, $FF, $0E
-	db $FF
+	battle_anim DRAGON_RAGE, SUBANIM_1F, 1, 6
+	battle_anim NO_MOVE, SUBANIM_0C, 1, 6
+	battle_anim NO_MOVE, SUBANIM_0D, 1, 6
+	battle_anim NO_MOVE, SUBANIM_0E, 1, 6
+	db -1 ; end
 
 FireSpinAnim:
-	db $46, $52, $0C
-	db $46, $FF, $0D
-	db $46, $FF, $0E
-	db $FF
+	battle_anim FIRE_SPIN, SUBANIM_0C, 1, 6
+	battle_anim NO_MOVE, SUBANIM_0D, 1, 6
+	battle_anim NO_MOVE, SUBANIM_0E, 1, 6
+	db -1 ; end
 
 ThunderShockAnim:
-	db $42, $53, $29
-	db $FF
+	battle_anim THUNDERSHOCK, SUBANIM_29, 1, 2
+	db -1 ; end
 
 ThunderBoltAnim:
-	db $41, $54, $29
-	db $41, $54, $29
-	db $FF
+	battle_anim THUNDERBOLT, SUBANIM_29, 1, 1
+	battle_anim THUNDERBOLT, SUBANIM_29, 1, 1
+	db -1 ; end
 
 ThunderWaveAnim:
-	db $42, $55, $29
-	db $02, $FF, $23
-	db $04, $FF, $23
-	db $FF
+	battle_anim THUNDER_WAVE, SUBANIM_29, 1, 2
+	battle_anim NO_MOVE, SUBANIM_23, 0, 2
+	battle_anim NO_MOVE, SUBANIM_23, 0, 4
+	db -1 ; end
 
 ThunderAnim:
-	db SE_DARK_SCREEN_PALETTE, $56
-	db SE_DARK_SCREEN_FLASH, $FF
-	db $46, $FF, $2B
-	db SE_DARK_SCREEN_FLASH, $FF
-	db $42, $54, $29
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db $FF
+	battle_anim THUNDER, SE_DARK_SCREEN_PALETTE
+	battle_anim NO_MOVE, SE_DARK_SCREEN_FLASH
+	battle_anim NO_MOVE, SUBANIM_2B, 1, 6
+	battle_anim NO_MOVE, SE_DARK_SCREEN_FLASH
+	battle_anim THUNDERBOLT, SUBANIM_29, 1, 2
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1 ; end
 
 RockThrowAnim:
-	db $04, $57, $30
-	db $FF
+	battle_anim ROCK_THROW, SUBANIM_30, 0, 4
+	db -1 ; end
 
 EarthquakeAnim:
-	db SE_SHAKE_SCREEN, $58
-	db SE_SHAKE_SCREEN, $58
-	db $FF
+	battle_anim EARTHQUAKE, SE_SHAKE_SCREEN
+	battle_anim EARTHQUAKE, SE_SHAKE_SCREEN
+	db -1 ; end
 
 FissureAnim:
-	db SE_DARK_SCREEN_FLASH, $59
-	db SE_SHAKE_SCREEN, $FF
-	db SE_DARK_SCREEN_FLASH, $59
-	db SE_SHAKE_SCREEN, $FF
-	db $FF
+	battle_anim FISSURE, SE_DARK_SCREEN_FLASH
+	battle_anim NO_MOVE, SE_SHAKE_SCREEN
+	battle_anim FISSURE, SE_DARK_SCREEN_FLASH
+	battle_anim NO_MOVE, SE_SHAKE_SCREEN
+	db -1 ; end
 
 DigAnim:
-	db $46, $5A, $04
-	db SE_SLIDE_MON_UP, $FF
-	db $FF
+	battle_anim DIG, SUBANIM_04, 1, 6
+	battle_anim NO_MOVE, SE_SLIDE_MON_UP
+	db -1 ; end
 
 ToxicAnim:
-	db SE_WATER_DROPLETS_EVERYWHERE, $38
-	db $46, $5B, $14
-	db $FF
+	battle_anim SURF, SE_WATER_DROPLETS_EVERYWHERE
+	battle_anim TOXIC, SUBANIM_14, 1, 6
+	db -1 ; end
 
 ConfusionAnim:
-	db SE_FLASH_SCREEN_LONG, $5C
-	db $FF
+	battle_anim CONFUSION, SE_FLASH_SCREEN_LONG
+	db -1 ; end
 
 PsychicAnim:
-	db SE_FLASH_SCREEN_LONG, $5D
-	db SE_WAVY_SCREEN, $FF
-	db $FF
+	battle_anim PSYCHIC_M, SE_FLASH_SCREEN_LONG
+	battle_anim NO_MOVE, SE_WAVY_SCREEN
+	db -1 ; end
 
 HypnosisAnim:
-	db SE_FLASH_SCREEN_LONG, $5E
-	db $FF
+	battle_anim HYPNOSIS, SE_FLASH_SCREEN_LONG
+	db -1 ; end
 
 MeditateAnim:
-	db SE_LIGHT_SCREEN_PALETTE, $5F
-	db $46, $FF, $43
-	db SE_DARK_SCREEN_FLASH, $FF
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db $FF
+	battle_anim MEDITATE, SE_LIGHT_SCREEN_PALETTE
+	battle_anim NO_MOVE, SUBANIM_43, 1, 6
+	battle_anim NO_MOVE, SE_DARK_SCREEN_FLASH
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1 ; end
 
 AgilityAnim:
-	db SE_LIGHT_SCREEN_PALETTE, $60
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db $FF
+	battle_anim AGILITY, SE_LIGHT_SCREEN_PALETTE
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1 ; end
 
 QuickAttackAnim:
-	db SE_SLIDE_MON_OFF, $61
-	db $46, $FF, $04
-	db SE_SHOW_MON_PIC, $FF
-	db $FF
+	battle_anim QUICK_ATTACK, SE_SLIDE_MON_OFF
+	battle_anim NO_MOVE, SUBANIM_04, 1, 6
+	battle_anim NO_MOVE, SE_SHOW_MON_PIC
+	db -1 ; end
 
 RageAnim:
-	db $06, $62, $01
-	db $FF
+	battle_anim RAGE, SUBANIM_01, 0, 6
+	db -1 ; end
 
 TeleportAnim:
-	db SE_SQUISH_MON_PIC, $63
-	db SE_SHOOT_BALLS_UPWARD, $FF
-	db $FF
+	battle_anim TELEPORT, SE_SQUISH_MON_PIC
+	battle_anim NO_MOVE, SE_SHOOT_BALLS_UPWARD
+	db -1 ; end
 
 NightShadeAnim:
-	db SE_FLASH_SCREEN_LONG, $5C
-	db SE_WAVY_SCREEN, $FF
-	db $FF
+	battle_anim CONFUSION, SE_FLASH_SCREEN_LONG
+	battle_anim NO_MOVE, SE_WAVY_SCREEN
+	db -1 ; end
 
 MimicAnim:
-	db $46, $65, $21
-	db $46, $65, $22
-	db $FF
+	battle_anim MIMIC, SUBANIM_21, 1, 6
+	battle_anim MIMIC, SUBANIM_22, 1, 6
+	db -1 ; end
 
 ScreechAnim:
-	db $46, $66, $12
-	db $FF
+	battle_anim SCREECH, SUBANIM_12, 1, 6
+	db -1 ; end
 
 DoubleTeamAnim:
-	db SE_DARK_SCREEN_PALETTE, $FF
-	db SE_DELAY_ANIMATION_10, $FF
-	db SE_DELAY_ANIMATION_10, $FF
-	db SE_DARK_SCREEN_FLASH, $FF
-	db SE_DARK_SCREEN_FLASH, $FF
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db SE_SHAKE_BACK_AND_FORTH, $67
-	db SE_SHOW_MON_PIC, $FF
-	db $46, $6F, $33
-	db $FF
+	battle_anim NO_MOVE, SE_DARK_SCREEN_PALETTE
+	battle_anim NO_MOVE, SE_DELAY_ANIMATION_10
+	battle_anim NO_MOVE, SE_DELAY_ANIMATION_10
+	battle_anim NO_MOVE, SE_DARK_SCREEN_FLASH
+	battle_anim NO_MOVE, SE_DARK_SCREEN_FLASH
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	battle_anim DOUBLE_TEAM, SE_SHAKE_BACK_AND_FORTH
+	battle_anim NO_MOVE, SE_SHOW_MON_PIC
+	battle_anim BARRIER, SUBANIM_33, 1, 6
+	db -1 ; end
 
 RecoverAnim:
-	db SE_BLINK_MON, $68
-	db SE_LIGHT_SCREEN_PALETTE, $FF
-	db SE_SPIRAL_BALLS_INWARD, $FF
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db $FF
+	battle_anim RECOVER, SE_BLINK_MON
+	battle_anim NO_MOVE, SE_LIGHT_SCREEN_PALETTE
+	battle_anim NO_MOVE, SE_SPIRAL_BALLS_INWARD
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1 ; end
 
 HardenAnim:
-	db SE_LIGHT_SCREEN_PALETTE, $69
-	db $46, $FF, $43
-	db SE_DARK_SCREEN_FLASH, $FF
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db $FF
+	battle_anim HARDEN, SE_LIGHT_SCREEN_PALETTE
+	battle_anim NO_MOVE, SUBANIM_43, 1, 6
+	battle_anim NO_MOVE, SE_DARK_SCREEN_FLASH
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1 ; end
 
 MinimizeAnim:
-	db SE_LIGHT_SCREEN_PALETTE, $6A
-	db SE_SPIRAL_BALLS_INWARD, $FF
-	db SE_MINIMIZE_MON, $FF
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db $FF
+	battle_anim MINIMIZE, SE_LIGHT_SCREEN_PALETTE
+	battle_anim NO_MOVE, SE_SPIRAL_BALLS_INWARD
+	battle_anim NO_MOVE, SE_MINIMIZE_MON
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1 ; end
 
 SmokeScreenAnim:
-	db $46, $6B, $28
-	db $04, $FF, $0A
-	db SE_DARKEN_MON_PALETTE, $FF
-	db SE_DELAY_ANIMATION_10, $FF
-	db SE_DELAY_ANIMATION_10, $FF
-	db SE_DARK_SCREEN_PALETTE, $FF
-	db SE_DELAY_ANIMATION_10, $FF
-	db SE_DELAY_ANIMATION_10, $FF
-	db SE_DELAY_ANIMATION_10, $FF
-	db SE_DELAY_ANIMATION_10, $FF
-	db SE_DELAY_ANIMATION_10, $FF
-	db SE_DELAY_ANIMATION_10, $FF
-	db SE_DARKEN_MON_PALETTE, $FF
-	db SE_DELAY_ANIMATION_10, $FF
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db $FF
+	battle_anim SMOKESCREEN, SUBANIM_28, 1, 6
+	battle_anim NO_MOVE, SUBANIM_0A, 0, 4
+	battle_anim NO_MOVE, SE_DARKEN_MON_PALETTE
+	battle_anim NO_MOVE, SE_DELAY_ANIMATION_10
+	battle_anim NO_MOVE, SE_DELAY_ANIMATION_10
+	battle_anim NO_MOVE, SE_DARK_SCREEN_PALETTE
+	battle_anim NO_MOVE, SE_DELAY_ANIMATION_10
+	battle_anim NO_MOVE, SE_DELAY_ANIMATION_10
+	battle_anim NO_MOVE, SE_DELAY_ANIMATION_10
+	battle_anim NO_MOVE, SE_DELAY_ANIMATION_10
+	battle_anim NO_MOVE, SE_DELAY_ANIMATION_10
+	battle_anim NO_MOVE, SE_DELAY_ANIMATION_10
+	battle_anim NO_MOVE, SE_DARKEN_MON_PALETTE
+	battle_anim NO_MOVE, SE_DELAY_ANIMATION_10
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1 ; end
 
 ConfuseRayAnim:
-	db SE_DARK_SCREEN_PALETTE, $6C
-	db $46, $FF, $3E
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db $FF
+	battle_anim CONFUSE_RAY, SE_DARK_SCREEN_PALETTE
+	battle_anim NO_MOVE, SUBANIM_3E, 1, 6
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1 ; end
 
 WithdrawAnim:
-	db SE_LIGHT_SCREEN_PALETTE, $6E
-	db SE_SLIDE_MON_DOWN, $FF
-	db $06, $FF, $51
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db SE_SHOW_MON_PIC, $FF
-	db $FF
+	battle_anim DEFENSE_CURL, SE_LIGHT_SCREEN_PALETTE
+	battle_anim NO_MOVE, SE_SLIDE_MON_DOWN
+	battle_anim NO_MOVE, SUBANIM_51, 0, 6
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	battle_anim NO_MOVE, SE_SHOW_MON_PIC
+	db -1 ; end
 
 DefenseCurlAnim:
-	db SE_LIGHT_SCREEN_PALETTE, $6E
-	db $06, $FF, $43
-	db SE_DARK_SCREEN_FLASH, $FF
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db $FF
+	battle_anim DEFENSE_CURL, SE_LIGHT_SCREEN_PALETTE
+	battle_anim NO_MOVE, SUBANIM_43, 0, 6
+	battle_anim NO_MOVE, SE_DARK_SCREEN_FLASH
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1 ; end
 
 BarrierAnim:
-	db $46, $6F, $33
-	db $46, $6F, $33
-	db $FF
+	battle_anim BARRIER, SUBANIM_33, 1, 6
+	battle_anim BARRIER, SUBANIM_33, 1, 6
+	db -1 ; end
 
 LightScreenAnim:
-	db SE_LIGHT_SCREEN_PALETTE, $FF
-	db $46, $70, $33
-	db $46, $70, $33
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db $FF
+	battle_anim NO_MOVE, SE_LIGHT_SCREEN_PALETTE
+	battle_anim LIGHT_SCREEN, SUBANIM_33, 1, 6
+	battle_anim LIGHT_SCREEN, SUBANIM_33, 1, 6
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1 ; end
 
 HazeAnim:
-	db SE_DARKEN_MON_PALETTE, $FF
-	db SE_WATER_DROPLETS_EVERYWHERE, $38
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db $FF
+	battle_anim NO_MOVE, SE_DARKEN_MON_PALETTE
+	battle_anim SURF, SE_WATER_DROPLETS_EVERYWHERE
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1 ; end
 
 ReflectAnim:
-	db SE_DARK_SCREEN_PALETTE, $FF
-	db $46, $72, $33
-	db $46, $72, $33
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db $FF
+	battle_anim NO_MOVE, SE_DARK_SCREEN_PALETTE
+	battle_anim REFLECT, SUBANIM_33, 1, 6
+	battle_anim REFLECT, SUBANIM_33, 1, 6
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1 ; end
 
 FocusEnergyAnim:
-	db SE_SPIRAL_BALLS_INWARD, $73
-	db $FF
+	battle_anim FOCUS_ENERGY, SE_SPIRAL_BALLS_INWARD
+	db -1 ; end
 
 BideAnim:
-	db $46, $74, $04
-	db $FF
+	battle_anim BIDE, SUBANIM_04, 1, 6
+	db -1 ; end
 
 MetronomeAnim:
-	db SE_MOVE_MON_HORIZONTALLY, $84
-	db SE_DELAY_ANIMATION_10, $FF
-	db SE_RESET_MON_POSITION, $84
-	db SE_DELAY_ANIMATION_10, $FF
-	db SE_MOVE_MON_HORIZONTALLY, $84
-	db SE_DELAY_ANIMATION_10, $FF
-	db SE_RESET_MON_POSITION, $84
-	db $FF
+	battle_anim AMNESIA, SE_MOVE_MON_HORIZONTALLY
+	battle_anim NO_MOVE, SE_DELAY_ANIMATION_10
+	battle_anim AMNESIA, SE_RESET_MON_POSITION
+	battle_anim NO_MOVE, SE_DELAY_ANIMATION_10
+	battle_anim AMNESIA, SE_MOVE_MON_HORIZONTALLY
+	battle_anim NO_MOVE, SE_DELAY_ANIMATION_10
+	battle_anim AMNESIA, SE_RESET_MON_POSITION
+	db -1 ; end
 
 MirrorMoveAnim:
-	db $08, $76, $01
-	db $FF
+	battle_anim MIRROR_MOVE, SUBANIM_01, 0, 8
+	db -1 ; end
 
 SelfdestructAnim:
-	db $43, $77, $34
-	db $FF
+	battle_anim SELFDESTRUCT, SUBANIM_34, 1, 3
+	db -1 ; end
 
 EggBombAnim:
-	db $44, $78, $41
-	db $44, $78, $42
-	db $FF
+	battle_anim EGG_BOMB, SUBANIM_41, 1, 4
+	battle_anim EGG_BOMB, SUBANIM_42, 1, 4
+	db -1 ; end
 
 LickAnim:
-	db $46, $7B, $14
-	db $FF
+	battle_anim SLUDGE, SUBANIM_14, 1, 6
+	db -1 ; end
 
 SmogAnim:
-	db SE_DARKEN_MON_PALETTE, $48
-	db $46, $7A, $19
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db $FF
+	battle_anim LEECH_SEED, SE_DARKEN_MON_PALETTE
+	battle_anim SMOG, SUBANIM_19, 1, 6
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1 ; end
 
 SludgeAnim:
-	db $46, $7B, $13
-	db $46, $7B, $14
-	db $FF
+	battle_anim SLUDGE, SUBANIM_13, 1, 6
+	battle_anim SLUDGE, SUBANIM_14, 1, 6
+	db -1 ; end
 
 BoneClubAnim:
-	db $08, $7C, $02
-	db $FF
+	battle_anim BONE_CLUB, SUBANIM_02, 0, 8
+	db -1 ; end
 
 FireBlastAnim:
-	db $46, $7D, $1F
-	db $46, $FF, $20
-	db $46, $FF, $20
-	db $46, $FF, $0C
-	db $46, $FF, $0D
-	db $FF
+	battle_anim FIRE_BLAST, SUBANIM_1F, 1, 6
+	battle_anim NO_MOVE, SUBANIM_20, 1, 6
+	battle_anim NO_MOVE, SUBANIM_20, 1, 6
+	battle_anim NO_MOVE, SUBANIM_0C, 1, 6
+	battle_anim NO_MOVE, SUBANIM_0D, 1, 6
+	db -1 ; end
 
 WaterfallAnim:
-	db SE_SLIDE_MON_DOWN, $48
-	db $06, $37, $1A
-	db $08, $FF, $02
-	db SE_SLIDE_MON_UP, $FF
-	db $FF
+	battle_anim LEECH_SEED, SE_SLIDE_MON_DOWN
+	battle_anim HYDRO_PUMP, SUBANIM_1A, 0, 6
+	battle_anim NO_MOVE, SUBANIM_02, 0, 8
+	battle_anim NO_MOVE, SE_SLIDE_MON_UP
+	db -1 ; end
 
 ClampAnim:
-	db $08, $7F, $2A
-	db $06, $83, $23
-	db $06, $83, $23
-	db $FF
+	battle_anim CLAMP, SUBANIM_2A, 0, 8
+	battle_anim CONSTRICT, SUBANIM_23, 0, 6
+	battle_anim CONSTRICT, SUBANIM_23, 0, 6
+	db -1 ; end
 
 SwiftAnim:
-	db $43, $80, $3F
-	db $FF
+	battle_anim SWIFT, SUBANIM_3F, 1, 3
+	db -1 ; end
 
 SkullBashAnim:
-	db $46, $81, $05
-	db $FF
+	battle_anim SKULL_BASH, SUBANIM_05, 1, 6
+	db -1 ; end
 
 SpikeCannonAnim:
-	db $44, $82, $04
-	db $FF
+	battle_anim SPIKE_CANNON, SUBANIM_04, 1, 4
+	db -1 ; end
 
 ConstrictAnim:
-	db $06, $83, $23
-	db $06, $83, $23
-	db $06, $83, $23
-	db $FF
+	battle_anim CONSTRICT, SUBANIM_23, 0, 6
+	battle_anim CONSTRICT, SUBANIM_23, 0, 6
+	battle_anim CONSTRICT, SUBANIM_23, 0, 6
+	db -1 ; end
 
 AmnesiaAnim:
-	db $08, $84, $25
-	db $08, $84, $25
-	db $FF
+	battle_anim AMNESIA, SUBANIM_25, 0, 8
+	battle_anim AMNESIA, SUBANIM_25, 0, 8
+	db -1 ; end
 
 KinesisAnim:
-	db $08, $85, $01
-	db $FF
+	battle_anim KINESIS, SUBANIM_01, 0, 8
+	db -1 ; end
 
 SoftboiledAnim:
-	db SE_SLIDE_MON_HALF_OFF, $48
-	db $08, $86, $4C
-	db SE_LIGHT_SCREEN_PALETTE, $FF
-	db SE_SPIRAL_BALLS_INWARD, $FF
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db SE_SHOW_MON_PIC, $FF
-	db $FF
+	battle_anim LEECH_SEED, SE_SLIDE_MON_HALF_OFF
+	battle_anim SOFTBOILED, SUBANIM_4C, 0, 8
+	battle_anim NO_MOVE, SE_LIGHT_SCREEN_PALETTE
+	battle_anim NO_MOVE, SE_SPIRAL_BALLS_INWARD
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	battle_anim NO_MOVE, SE_SHOW_MON_PIC
+	db -1 ; end
 
 HiJumpKickAnim:
-	db $46, $87, $04
-	db $FF
+	battle_anim HI_JUMP_KICK, SUBANIM_04, 1, 6
+	db -1 ; end
 
 GlareAnim:
-	db SE_DARK_SCREEN_PALETTE, $48
-	db SE_DARK_SCREEN_FLASH, $88
-	db SE_DARK_SCREEN_FLASH, $FF
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db $FF
+	battle_anim LEECH_SEED, SE_DARK_SCREEN_PALETTE
+	battle_anim GLARE, SE_DARK_SCREEN_FLASH
+	battle_anim NO_MOVE, SE_DARK_SCREEN_FLASH
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1 ; end
 
 DreamEaterAnim:
-	db SE_FLASH_SCREEN_LONG, $89
-	db SE_DARK_SCREEN_PALETTE, $89
-	db $08, $89, $02
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db $FF
+	battle_anim DREAM_EATER, SE_FLASH_SCREEN_LONG
+	battle_anim DREAM_EATER, SE_DARK_SCREEN_PALETTE
+	battle_anim DREAM_EATER, SUBANIM_02, 0, 8
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1 ; end
 
 PoisonGasAnim:
-	db $46, $8A, $19
-	db $FF
+	battle_anim POISON_GAS, SUBANIM_19, 1, 6
+	db -1 ; end
 
 BarrageAnim:
-	db $43, $8B, $41
-	db $05, $FF, $55
-	db $FF
+	battle_anim BARRAGE, SUBANIM_41, 1, 3
+	battle_anim NO_MOVE, SUBANIM_55, 0, 5
+	db -1 ; end
 
 LeechLifeAnim:
-	db $08, $8C, $02
-	db SE_DARK_SCREEN_FLASH, $FF
-	db $06, $FF, $21
-	db $06, $FF, $22
-	db SE_DARK_SCREEN_FLASH, $FF
-	db $FF
+	battle_anim LEECH_LIFE, SUBANIM_02, 0, 8
+	battle_anim NO_MOVE, SE_DARK_SCREEN_FLASH
+	battle_anim NO_MOVE, SUBANIM_21, 0, 6
+	battle_anim NO_MOVE, SUBANIM_22, 0, 6
+	battle_anim NO_MOVE, SE_DARK_SCREEN_FLASH
+	db -1 ; end
 
 LovelyKissAnim:
-	db $06, $8D, $12
-	db $FF
+	battle_anim LOVELY_KISS, SUBANIM_12, 0, 6
+	db -1 ; end
 
 SkyAttackAnim:
-	db SE_SQUISH_MON_PIC, $8E
-	db SE_SHOOT_BALLS_UPWARD, $FF
-	db $46, $87, $04
-	db SE_SHOW_MON_PIC, $FF
-	db $FF
+	battle_anim SKY_ATTACK, SE_SQUISH_MON_PIC
+	battle_anim NO_MOVE, SE_SHOOT_BALLS_UPWARD
+	battle_anim HI_JUMP_KICK, SUBANIM_04, 1, 6
+	battle_anim NO_MOVE, SE_SHOW_MON_PIC
+	db -1 ; end
 
 TransformAnim:
-	db $46, $8F, $21
-	db $44, $8F, $22
-	db $08, $FF, $47
-	db SE_TRANSFORM_MON, $FF
-	db $FF
+	battle_anim TRANSFORM, SUBANIM_21, 1, 6
+	battle_anim TRANSFORM, SUBANIM_22, 1, 4
+	battle_anim NO_MOVE, SUBANIM_47, 0, 8
+	battle_anim NO_MOVE, SE_TRANSFORM_MON
+	db -1 ; end
 
 BubbleAnim:
-	db $16, $90, $35
-	db $FF
+	battle_anim BUBBLE, SUBANIM_35, 0, 22
+	db -1 ; end
 
 DizzyPunchAnim:
-	db $06, $91, $17
-	db $06, $91, $17
-	db $06, $91, $17
-	db $06, $02, $02
-	db $FF
+	battle_anim DIZZY_PUNCH, SUBANIM_17, 0, 6
+	battle_anim DIZZY_PUNCH, SUBANIM_17, 0, 6
+	battle_anim DIZZY_PUNCH, SUBANIM_17, 0, 6
+	battle_anim DOUBLESLAP, SUBANIM_02, 0, 6
+	db -1 ; end
 
 SporeAnim:
-	db $06, $92, $36
-	db $FF
+	battle_anim SPORE, SUBANIM_36, 0, 6
+	db -1 ; end
 
 FlashAnim:
-	db SE_LIGHT_SCREEN_PALETTE, $48
-	db SE_DARK_SCREEN_FLASH, $88
-	db SE_DARK_SCREEN_FLASH, $FF
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db $FF
+	battle_anim LEECH_SEED, SE_LIGHT_SCREEN_PALETTE
+	battle_anim GLARE, SE_DARK_SCREEN_FLASH
+	battle_anim NO_MOVE, SE_DARK_SCREEN_FLASH
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1 ; end
 
 PsywaveAnim:
-	db $06, $2F, $31
-	db SE_WAVY_SCREEN, $5C
-	db $FF
+	battle_anim SUPERSONIC, SUBANIM_31, 0, 6
+	battle_anim CONFUSION, SE_WAVY_SCREEN
+	db -1 ; end
 
 SplashAnim:
-	db SE_BOUNCE_UP_AND_DOWN, $95
-	db $FF
+	battle_anim SPLASH, SE_BOUNCE_UP_AND_DOWN
+	db -1 ; end
 
 AcidArmorAnim:
-	db SE_SLIDE_MON_DOWN_AND_HIDE, $96
-	db $FF
+	battle_anim ACID_ARMOR, SE_SLIDE_MON_DOWN_AND_HIDE
+	db -1 ; end
 
 CrabHammerAnim:
-	db $46, $97, $05
-	db $06, $FF, $2A
-	db $FF
+	battle_anim CRABHAMMER, SUBANIM_05, 1, 6
+	battle_anim NO_MOVE, SUBANIM_2A, 0, 6
+	db -1 ; end
 
 ExplosionAnim:
-	db $43, $98, $34
-	db $FF
+	battle_anim EXPLOSION, SUBANIM_34, 1, 3
+	db -1 ; end
 
 FurySwipesAnim:
-	db $04, $99, $0F
-	db $FF
+	battle_anim FURY_SWIPES, SUBANIM_0F, 0, 4
+	db -1 ; end
 
 BonemerangAnim:
-	db $06, $9A, $02
-	db $FF
+	battle_anim BONEMERANG, SUBANIM_02, 0, 6
+	db -1 ; end
 
 RestAnim:
-	db $10, $9B, $3A
-	db $10, $9B, $3A
-	db $FF
+	battle_anim REST, SUBANIM_3A, 0, 16
+	battle_anim REST, SUBANIM_3A, 0, 16
+	db -1 ; end
 
 RockSlideAnim:
-	db $04, $9C, $1D
-	db $03, $9C, $1E
-	db $46, $9D, $04
-	db $FF
+	battle_anim ROCK_SLIDE, SUBANIM_1D, 0, 4
+	battle_anim ROCK_SLIDE, SUBANIM_1E, 0, 3
+	battle_anim HYPER_FANG, SUBANIM_04, 1, 6
+	db -1 ; end
 
 HyperFangAnim:
-	db $06, $9D, $02
-	db $FF
+	battle_anim HYPER_FANG, SUBANIM_02, 0, 6
+	db -1 ; end
 
 SharpenAnim:
-	db SE_LIGHT_SCREEN_PALETTE, $9E
-	db $46, $FF, $43
-	db SE_DARK_SCREEN_FLASH, $FF
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db $FF
+	battle_anim SHARPEN, SE_LIGHT_SCREEN_PALETTE
+	battle_anim NO_MOVE, SUBANIM_43, 1, 6
+	battle_anim NO_MOVE, SE_DARK_SCREEN_FLASH
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1 ; end
 
 ConversionAnim:
-	db SE_DARK_SCREEN_FLASH, $9F
-	db $46, $FF, $21
-	db $46, $FF, $22
-	db SE_DARK_SCREEN_FLASH, $FF
-	db $FF
+	battle_anim CONVERSION, SE_DARK_SCREEN_FLASH
+	battle_anim NO_MOVE, SUBANIM_21, 1, 6
+	battle_anim NO_MOVE, SUBANIM_22, 1, 6
+	battle_anim NO_MOVE, SE_DARK_SCREEN_FLASH
+	db -1 ; end
 
 TriAttackAnim:
-	db SE_DARK_SCREEN_FLASH, $A0
-	db $46, $FF, $4D
-	db SE_DARK_SCREEN_FLASH, $FF
-	db $FF
+	battle_anim TRI_ATTACK, SE_DARK_SCREEN_FLASH
+	battle_anim NO_MOVE, SUBANIM_4D, 1, 6
+	battle_anim NO_MOVE, SE_DARK_SCREEN_FLASH
+	db -1 ; end
 
 SuperFangAnim:
-	db SE_DARK_SCREEN_PALETTE, $48
-	db $46, $A1, $04
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db $FF
+	battle_anim LEECH_SEED, SE_DARK_SCREEN_PALETTE
+	battle_anim SUPER_FANG, SUBANIM_04, 1, 6
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1 ; end
 
 SlashAnim:
-	db $06, $A2, $0F
-	db $FF
+	battle_anim SLASH, SUBANIM_0F, 0, 6
+	db -1 ; end
 
 SubstituteAnim:
-	db SE_SLIDE_MON_OFF, $A3
-	db $08, $FF, $47
-	db SE_SUBSTITUTE_MON, $FF
-	db $FF
+	battle_anim SUBSTITUTE, SE_SLIDE_MON_OFF
+	battle_anim NO_MOVE, SUBANIM_47, 0, 8
+	battle_anim NO_MOVE, SE_SUBSTITUTE_MON
+	db -1 ; end
 
 BallTossAnim:
-	db $03, $FF, $06
-	db $FF
+	battle_anim NO_MOVE, SUBANIM_06, 0, 3
+	db -1 ; end
 
 GreatTossAnim:
-	db $03, $FF, $07
-	db $FF
+	battle_anim NO_MOVE, SUBANIM_07, 0, 3
+	db -1 ; end
 
 UltraTossAnim:
-	db $02, $FF, $08
-	db $FF
+	battle_anim NO_MOVE, SUBANIM_08, 0, 2
+	db -1 ; end
 
 BallShakeAnim:
-	db $04, $FF, $09
-	db $FF
+	battle_anim NO_MOVE, SUBANIM_09, 0, 4
+	db -1 ; end
 
 BallPoofAnim:
-	db $04, $FF, $0A
-	db $FF
+	battle_anim NO_MOVE, SUBANIM_0A, 0, 4
+	db -1 ; end
 
 ShowPicAnim:
-	db SE_SHOW_ENEMY_MON_PIC, $FF
-	db $FF
+	battle_anim NO_MOVE, SE_SHOW_ENEMY_MON_PIC
+	db -1 ; end
 
 HidePicAnim:
-	db SE_HIDE_ENEMY_MON_PIC, $FF
-	db $FF
+	battle_anim NO_MOVE, SE_HIDE_ENEMY_MON_PIC
+	db -1 ; end
 
 EnemyFlashAnim:
-	db SE_SHOW_MON_PIC, $FF
-	db $FF
+	battle_anim NO_MOVE, SE_SHOW_MON_PIC
+	db -1 ; end
 
 PlayerFlashAnim:
-	db SE_FLASH_MON_PIC, $FF
-	db $FF
+	battle_anim NO_MOVE, SE_FLASH_MON_PIC
+	db -1 ; end
 
 EnemyHUDShakeAnim:
-	db SE_SHAKE_ENEMY_HUD, $FF
-	db $FF
+	battle_anim NO_MOVE, SE_SHAKE_ENEMY_HUD
+	db -1 ; end
 
 TradeBallDropAnim:
-	db $86, $FF, $48
-	db $FF
+	battle_anim NO_MOVE, SUBANIM_48, 2, 6
+	db -1 ; end
 
 TradeBallAppear1Anim:
-	db $84, $FF, $49
-	db $FF
+	battle_anim NO_MOVE, SUBANIM_49, 2, 4
+	db -1 ; end
 
 TradeBallAppear2Anim:
-	db $86, $FF, $4A
-	db $FF
+	battle_anim NO_MOVE, SUBANIM_4A, 2, 6
+	db -1 ; end
 
 TradeBallPoofAnim:
-	db $86, $FF, $4B
-	db $FF
+	battle_anim NO_MOVE, SUBANIM_4B, 2, 6
+	db -1 ; end
 
 XStatItemAnim:
-	db SE_LIGHT_SCREEN_PALETTE, $FF
-	db SE_SPIRAL_BALLS_INWARD, $FF
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db $FF
+	battle_anim NO_MOVE, SE_LIGHT_SCREEN_PALETTE
+	battle_anim NO_MOVE, SE_SPIRAL_BALLS_INWARD
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1 ; end
 
 ShrinkingSquareAnim:
-	db SE_LIGHT_SCREEN_PALETTE, $FF
-	db $46, $FF, $43
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db $FF
+	battle_anim NO_MOVE, SE_LIGHT_SCREEN_PALETTE
+	battle_anim NO_MOVE, SUBANIM_43, 1, 6
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1 ; end
 
 XStatItemBlackAnim:
-	db SE_DARKEN_MON_PALETTE, $FF
-	db SE_SPIRAL_BALLS_INWARD, $FF
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db $FF
+	battle_anim NO_MOVE, SE_DARKEN_MON_PALETTE
+	battle_anim NO_MOVE, SE_SPIRAL_BALLS_INWARD
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1 ; end
 
 ShrinkingSquareBlackAnim:
-	db SE_DARKEN_MON_PALETTE, $FF
-	db $46, $FF, $43
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db $FF
+	battle_anim NO_MOVE, SE_DARKEN_MON_PALETTE
+	battle_anim NO_MOVE, SUBANIM_43, 1, 6
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1 ; end
 
 UnusedAnim:
-	db SE_LIGHT_SCREEN_PALETTE, $FF
-	db SE_SHOOT_MANY_BALLS_UPWARD, $FF
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db $FF
+	battle_anim NO_MOVE, SE_LIGHT_SCREEN_PALETTE
+	battle_anim NO_MOVE, SE_SHOOT_MANY_BALLS_UPWARD
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1 ; end
 
 ParalyzeAnim:
-	db $04, $13, $24
-	db $04, $13, $24
-	db $FF
+	battle_anim BIND, SUBANIM_24, 0, 4
+	battle_anim BIND, SUBANIM_24, 0, 4
+	db -1 ; end
 
 PoisonAnim:
-	db $08, $13, $27
-	db $08, $13, $27
-	db $FF
+	battle_anim BIND, SUBANIM_27, 0, 8
+	battle_anim BIND, SUBANIM_27, 0, 8
+	db -1 ; end
 
 SleepPlayerAnim:
-	db $10, $9B, $3A
-	db $10, $9B, $3A
-	db $FF
+	battle_anim REST, SUBANIM_3A, 0, 16
+	battle_anim REST, SUBANIM_3A, 0, 16
+	db -1 ; end
 
 SleepEnemyAnim:
-	db $10, $9B, $3B
-	db $10, $9B, $3B
-	db $FF
+	battle_anim REST, SUBANIM_3B, 0, 16
+	battle_anim REST, SUBANIM_3B, 0, 16
+	db -1 ; end
 
 ConfusedPlayerAnim:
-	db $08, $84, $25
-	db $08, $84, $25
-	db $FF
+	battle_anim AMNESIA, SUBANIM_25, 0, 8
+	battle_anim AMNESIA, SUBANIM_25, 0, 8
+	db -1 ; end
 
 ConfusedEnemyAnim:
-	db $08, $84, $26
-	db $08, $84, $26
-	db $FF
+	battle_anim AMNESIA, SUBANIM_26, 0, 8
+	battle_anim AMNESIA, SUBANIM_26, 0, 8
+	db -1 ; end
 
 BallBlockAnim:
-	db $03, $FF, $0B
-	db $FF
+	battle_anim NO_MOVE, SUBANIM_0B, 0, 3
+	db -1 ; end
 
 FaintAnim:
-	db SE_SLIDE_MON_DOWN, $5A
-	db $FF
+	battle_anim DIG, SE_SLIDE_MON_DOWN
+	db -1 ; end
 
 ShakeScreenAnim:
-	db SE_SHAKE_SCREEN, $FF
-	db $FF
+	battle_anim NO_MOVE, SE_SHAKE_SCREEN
+	db -1 ; end
 
 ThrowRockAnim:
-	db $03, $8B, $53
-	db $FF
+	battle_anim BARRAGE, SUBANIM_53, 0, 3
+	db -1 ; end
 
 ThrowBaitAnim:
-	db $03, $8B, $54
-	db $FF
+	battle_anim BARRAGE, SUBANIM_54, 0, 3
+	db -1 ; end
