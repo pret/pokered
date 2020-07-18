@@ -10,21 +10,23 @@ CinnabarGymScript_75759:
 	bit 6, [hl]
 	res 6, [hl]
 	push hl
-	call nz, CinnabarGymScript_75772
+	call nz, .LoadNames
 	pop hl
 	bit 5, [hl]
 	res 5, [hl]
 	call nz, UpdateCinnabarGymGateTileBlocks
 	ResetEvent EVENT_2A7
 	ret
-CinnabarGymScript_75772:
-	ld hl, Gym7CityName
-	ld de, Gym7LeaderName
+
+.LoadNames:
+	ld hl, .CityName
+	ld de, .LeaderName
 	jp LoadGymLeaderAndCityName
 
-Gym7CityName:
+.CityName:
 	db "CINNABAR ISLAND@"
-Gym7LeaderName:
+
+.LeaderName:
 	db "BLAINE@"
 
 CinnabarGymScript_75792:

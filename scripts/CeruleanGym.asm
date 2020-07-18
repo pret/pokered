@@ -2,7 +2,7 @@ CeruleanGym_Script:
 	ld hl, wCurrentMapScriptFlags
 	bit 6, [hl]
 	res 6, [hl]
-	call nz, CeruleanGymScript_5c6d0
+	call nz, .LoadNames
 	call EnableAutoTextBoxDrawing
 	ld hl, CeruleanGymTrainerHeader0
 	ld de, CeruleanGym_ScriptPointers
@@ -11,15 +11,15 @@ CeruleanGym_Script:
 	ld [wCeruleanGymCurScript], a
 	ret
 
-CeruleanGymScript_5c6d0:
-	ld hl, Gym2CityName
-	ld de, Gym2LeaderName
+.LoadNames:
+	ld hl, .CityName
+	ld de, .LeaderName
 	jp LoadGymLeaderAndCityName
 
-Gym2CityName:
+.CityName:
 	db "CERULEAN CITY@"
 
-Gym2LeaderName:
+.LeaderName:
 	db "MISTY@"
 
 CeruleanGymScript_5c6ed:

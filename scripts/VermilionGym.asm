@@ -3,7 +3,7 @@ VermilionGym_Script:
 	bit 5, [hl]
 	res 5, [hl]
 	push hl
-	call nz, VermilionGymLoadName
+	call nz, .LoadNames
 	pop hl
 	bit 6, [hl]
 	res 6, [hl]
@@ -16,15 +16,15 @@ VermilionGym_Script:
 	ld [wVermilionGymCurScript], a
 	ret
 
-VermilionGymLoadName:
-	ld hl, Gym3CityName
-	ld de, Gym3LeaderName
+.LoadNames:
+	ld hl, .CityName
+	ld de, .LeaderName
 	jp LoadGymLeaderAndCityName
 
-Gym3CityName:
+.CityName:
 	db "VERMILION CITY@"
 
-Gym3LeaderName:
+.LeaderName:
 	db "LT.SURGE@"
 
 VermilionGymSetDoorTile:

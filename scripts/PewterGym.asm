@@ -2,7 +2,7 @@ PewterGym_Script:
 	ld hl, wCurrentMapScriptFlags
 	bit 6, [hl]
 	res 6, [hl]
-	call nz, PewterGymScript_5c3a4
+	call nz, .LoadNames
 	call EnableAutoTextBoxDrawing
 	ld hl, PewterGymTrainerHeader0
 	ld de, PewterGym_ScriptPointers
@@ -11,15 +11,15 @@ PewterGym_Script:
 	ld [wPewterGymCurScript], a
 	ret
 
-PewterGymScript_5c3a4:
-	ld hl, Gym1CityName
-	ld de, Gym1LeaderName
+.LoadNames:
+	ld hl, .CityName
+	ld de, .LeaderName
 	jp LoadGymLeaderAndCityName
 
-Gym1CityName:
+.CityName:
 	db "PEWTER CITY@"
 
-Gym1LeaderName:
+.LeaderName:
 	db "BROCK@"
 
 PewterGymScript_5c3bf:

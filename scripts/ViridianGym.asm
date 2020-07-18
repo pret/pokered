@@ -1,6 +1,6 @@
 ViridianGym_Script:
-	ld hl, Gym8CityName
-	ld de, Gym8LeaderName
+	ld hl, .CityName
+	ld de, .LeaderName
 	call LoadGymLeaderAndCityName
 	call EnableAutoTextBoxDrawing
 	ld hl, ViridianGymTrainerHeader0
@@ -10,9 +10,10 @@ ViridianGym_Script:
 	ld [wViridianGymCurScript], a
 	ret
 
-Gym8CityName:
+.CityName:
 	db "VIRIDIAN CITY@"
-Gym8LeaderName:
+
+.LeaderName:
 	db "GIOVANNI@"
 
 ViridianGymScript_748d6:
