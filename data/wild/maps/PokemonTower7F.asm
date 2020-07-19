@@ -8,6 +8,6 @@ TowerMons7:
 	db 28,HAUNTER
 	db 22,CUBONE
 	db 24,CUBONE
-	db 28,HAUNTER
-	db 30,HAUNTER
+	db 28,GENGAR
+	db 30,GENGAR
 	db $00

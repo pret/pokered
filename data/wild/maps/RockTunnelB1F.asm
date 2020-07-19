@@ -1,13 +1,13 @@
 TunnelMonsB2:
 	db $0F
 	db 16,ZUBAT
-	db 17,ZUBAT
-	db 17,GEODUDE
-	db 15,MACHOP
-	db 16,GEODUDE
-	db 18,ZUBAT
-	db 17,MACHOP
-	db 17,ONIX
-	db 13,ONIX
-	db 18,GEODUDE
+	db 19,GEODUDE
+	db 19,DIGLETT
+	db 19,MACHOP
+	db 20,CUBONE
+	db 23,SLOWPOKE
+	db 17,GRIMER
+	db 22,EXEGGCUTE
+	db 21,LAPRAS
+	db 21,CHANSEY
 	db $00

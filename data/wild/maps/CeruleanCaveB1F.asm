@@ -9,5 +9,5 @@ DungeonMonsB1:
 	db 57,SANDSLASH
 	db 65,DITTO
 	db 63,DITTO
-	db 67,DITTO
+	db 67,MEW
 	db $00

@@ -1,13 +1,13 @@
 ForestMons:
 	db $08
 	db 4,CATERPIE
-	db 5,METAPOD
-	db 3,CATERPIE
-	db 5,CATERPIE
-	db 4,METAPOD
-	db 6,METAPOD
-	db 4,KAKUNA
+	db 5,VENONAT
 	db 3,WEEDLE
+	db 5,KABUTO
+	db 4,PARAS
+	db 6,PARAS
+	db 4,OMANYTE
+	db 3,ABRA
 	db 3,PIKACHU
-	db 5,PIKACHU
+	db 5,CHANSEY
 	db $00

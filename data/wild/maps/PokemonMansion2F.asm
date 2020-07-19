@@ -3,11 +3,11 @@ MansionMons2:
 	db 32,VULPIX
 	db 34,GRIMER
 	db 34,GRIMER
-	db 30,PONYTA
-	db 30,GRIMER
-	db 32,PONYTA
-	db 30,KOFFING
-	db 28,PONYTA
+	db 35,PONYTA
+	db 35,GROWLITHE
+	db 37,PONYTA
+	db 36,KOFFING
 	db 39,MUK
-	db 37,WEEZING
+	db 39,MAGMAR
+	db 37,MAGMAR
 	db $00

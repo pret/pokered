@@ -6,8 +6,8 @@ Route18Mons:
 	db 24,DODUO
 	db 25,FEAROW
 	db 26,DODUO
-	db 28,DODUO
-	db 29,RATICATE
-	db 27,FEAROW
-	db 29,FEAROW
+	db 28,POLIWHIRL
+	db 32,VENONAT
+	db 32,VAPOREON
+	db 33,VAPOREON
 	db $00

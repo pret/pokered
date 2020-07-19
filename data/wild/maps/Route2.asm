@@ -1,13 +1,13 @@
 Route2Mons:
 	db $19
-	db 3,RATTATA
-	db 3,PIDGEY
-	db 4,PIDGEY
+	db 3,MANKEY
+	db 3,MEOWTH
+	db 4,CUBONE
 	db 4,RATTATA
 	db 5,PIDGEY
 	db 3,CATERPIE
-	db 2,RATTATA
-	db 5,RATTATA
-	db 4,CATERPIE
-	db 5,CATERPIE
+	db 2,WEEDLE
+	db 5,WEEDLE
+	db 4,MACHOP
+	db 5,SCYTHER
 	db $00

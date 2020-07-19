@@ -1,13 +1,13 @@
 MansionMons1:
 	db $0A
 	db 32,GRIMER
-	db 30,GRIMER
-	db 34,PONYTA
-	db 30,PONYTA
-	db 34,VULPIX
-	db 32,PONYTA
-	db 30,KOFFING
-	db 28,PONYTA
-	db 37,MUK
+	db 35,GRIMER
+	db 37,PONYTA
+	db 38,PONYTA
+	db 37,VULPIX
+	db 35,PONYTA
+	db 36,KOFFING
+	db 36,PONYTA
+	db 39,WEEZING
 	db 39,WEEZING
 	db $00
