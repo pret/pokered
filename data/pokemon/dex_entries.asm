@@ -1255,5 +1255,5 @@ VictreebelDexEntry:
 MissingNoDexEntry:
 	db "???@"
 	db 10 ; 1.0 m
-	db 100 ; 10.0 kg
-	text "コメント　さくせいちゅう@" ; コメント作成中 (Comment to be written)
+	dw 100 ; 10.0 kg
+	db "コメント　さくせいちゅう@" ; コメント作成中 (Comment to be written)
