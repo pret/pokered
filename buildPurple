@@ -1,0 +1,3 @@
+# It just builds blue then renames it..
+make blue && cp pokeblue.gbc pokepurple.gbc
+
