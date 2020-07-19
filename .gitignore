@@ -28,3 +28,7 @@
 *.sn*
 *.sa*
 *.sg1
+
+# CSV dumps
+csv/
+

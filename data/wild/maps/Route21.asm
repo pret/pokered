@@ -10,6 +10,7 @@ Route21Mons:
 	db 28,TANGELA
 	db 30,TANGELA
 	db 32,TANGELA
+	; Kind of looks like two different areas?
 	db $05
 	db 5,TENTACOOL
 	db 10,TENTACOOL
