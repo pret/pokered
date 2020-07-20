@@ -241,6 +241,7 @@ SetPal_TrainerCard:
 	ret
 
 SetPalFunctions:
+; entries correspond to SET_PAL_* constants
 	dw SetPal_BattleBlack
 	dw SetPal_Battle
 	dw SetPal_TownMap

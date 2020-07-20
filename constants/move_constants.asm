@@ -1,3 +1,9 @@
+; move ids
+; indexes for:
+; - Moves (see data/moves/moves.asm)
+; - MoveNames (see data/moves/names.asm)
+; - AttackAnimationPointers (see data/moves/animations.asm)
+; - MoveSoundTable (see data/moves/sfx.asm)
 	const_def
 	const NO_MOVE      ; 00
 	const POUND        ; 01

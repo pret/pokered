@@ -16,6 +16,7 @@ UseItem_::
 	jp hl
 
 ItemUsePtrTable:
+; entries correspond to item ids
 	dw ItemUseBall       ; MASTER_BALL
 	dw ItemUseBall       ; ULTRA_BALL
 	dw ItemUseBall       ; GREAT_BALL
@@ -1808,23 +1809,17 @@ WakeUpEntireParty:
 	jr nz, .loop
 	ret
 
-; Format:
-; 00: Y
-; 01: X
 Route12SnorlaxFluteCoords:
-	db 62,9  ; one space West of Snorlax
-	db 61,10 ; one space North of Snorlax
-	db 63,10 ; one space South of Snorlax
-	db 62,11 ; one space East of Snorlax
-	db $ff ; terminator
+	dbmapcoord  9, 62 ; one space West of Snorlax
+	dbmapcoord 10, 61 ; one space North of Snorlax
+	dbmapcoord 10, 63 ; one space South of Snorlax
+	dbmapcoord 11, 62 ; one space East of Snorlax
+	db -1 ; end
 
-; Format:
-; 00: Y
-; 01: X
 Route16SnorlaxFluteCoords:
-	db 10,27 ; one space East of Snorlax
-	db 10,25 ; one space West of Snorlax
-	db $ff ; terminator
+	dbmapcoord 27, 10 ; one space East of Snorlax
+	dbmapcoord 25, 10 ; one space West of Snorlax
+	db -1 ; end
 
 PlayedFluteNoEffectText:
 	text_far _PlayedFluteNoEffectText

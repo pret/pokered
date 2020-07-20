@@ -1,4 +1,4 @@
-; emotion bubbles
+; EmotionBubblesPointerTable indexes (see engine/overworld/emotion_bubbles.asm)
 	const_def
 	const EXCLAMATION_BUBBLE ; 0
 	const QUESTION_BUBBLE    ; 1
@@ -13,6 +13,7 @@ SLOTSBIRD   EQU $1210
 SLOTSMOUSE  EQU $1614
 
 ; in game trades
+; TradeMons indexes (see data/events/trades.asm)
 	const_def
 	const TRADE_FOR_TERRY
 	const TRADE_FOR_MARCEL
@@ -26,6 +27,7 @@ SLOTSMOUSE  EQU $1614
 	const TRADE_FOR_SPOT
 
 ; in game trade dialog sets
+; InGameTradeTextPointers indexes (see engine/events/in_game_trades.asm)
 	const_def
 	const TRADE_DIALOGSET_CASUAL
 	const TRADE_DIALOGSET_POLITE

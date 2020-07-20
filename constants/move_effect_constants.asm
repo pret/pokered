@@ -1,8 +1,8 @@
-; tentative move effect constants
 ; {stat}_(UP|DOWN)(1|2) means that the move raises the user's (or lowers the target's) corresponding stat modifier by 1 (or 2) stages
-; {status condition}_side_effect means that the move has a side chance of causing that condition
-; {status condition}_effect means that the move causes the status condition every time it hits the target
+; {status condition}_SIDE_EFFECT means that the move has a side chance of causing that condition
+; {status condition}_EFFECT means that the move causes the status condition every time it hits the target
 
+; MoveEffectPointerTable indexes (see data/moves/effects_pointers.asm)
 	const_def
 	const NO_ADDITIONAL_EFFECT       ; $00
 	const EFFECT_01                  ; $01 unused

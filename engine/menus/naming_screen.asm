@@ -231,10 +231,10 @@ DisplayNamingScreen:
 	ld [wNamingScreenLetter], a
 	call CalcStringLength
 	ld a, [wNamingScreenLetter]
-	cp $e5
+	cp "ﾞ"
 	ld de, Dakutens
 	jr z, .dakutensAndHandakutens
-	cp $e4
+	cp "ﾟ"
 	ld de, Handakutens
 	jr z, .dakutensAndHandakutens
 	ld a, [wNamingScreenType]

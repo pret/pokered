@@ -1,4 +1,5 @@
 ; overworld sprites
+; SpriteSheetPointerTable indexes (see data/sprites/sprites.asm)
 	const_def
 	const SPRITE_NONE                    ; $00
 	const SPRITE_RED                     ; $01

@@ -34,7 +34,7 @@ DisplayListMenuID::
 	hlcoord 4, 2 ; coordinates of upper left corner of menu text box
 	lb de, 9, 14 ; height and width of menu text box
 	ld a, [wListMenuID]
-	and a ; is it a PC pokemon list?
+	and a ; PCPOKEMONLISTMENU?
 	jr nz, .skipMovingSprites
 	call UpdateSprites
 .skipMovingSprites
@@ -126,7 +126,7 @@ DisplayListMenuIDLoop::
 	ld a, [hl]
 	ld [wcf91], a
 	ld a, [wListMenuID]
-	and a ; is it a PC pokemon list?
+	and a ; PCPOKEMONLISTMENU?
 	jr z, .pokemonList
 	push hl
 	call GetItemPrice
@@ -374,7 +374,7 @@ PrintListMenuEntries::
 	push hl
 	push de
 	ld a, [wListMenuID]
-	and a
+	and a ; PCPOKEMONLISTMENU?
 	jr z, .pokemonPCMenu
 	cp MOVESLISTMENU
 	jr z, .movesMenu
@@ -422,7 +422,7 @@ PrintListMenuEntries::
 	call PrintBCDNumber
 .skipPrintingItemPrice
 	ld a, [wListMenuID]
-	and a
+	and a ; PCPOKEMONLISTMENU?
 	jr nz, .skipPrintingPokemonLevel
 .printPokemonLevel
 	ld a, [wd11e]

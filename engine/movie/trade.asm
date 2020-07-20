@@ -604,7 +604,7 @@ Trade_AnimCircledMon:
 	ld c, $14
 .loop
 	ld a, [hl]
-	xor $40
+	xor ICONOFFSET
 	ld [hl], a
 	add hl, de
 	dec c
@@ -710,20 +710,20 @@ Trade_CircleOAMPointers:
 	trade_circle_oam Trade_CircleOAM3, $18, $18
 
 Trade_CircleOAM0:
-	dbsprite  2,  7,  0,  0, $39, OAM_OBP1
-	dbsprite  2,  7,  0,  2, $3b, OAM_OBP1
+	dbsprite  2,  7,  0,  0, ICON_TRADEBUBBLE << 2 + 1, OAM_OBP1
+	dbsprite  2,  7,  0,  2, ICON_TRADEBUBBLE << 2 + 3, OAM_OBP1
 
 Trade_CircleOAM1:
-	dbsprite  6,  7,  0,  1, $38, OAM_OBP1 | OAM_HFLIP
-	dbsprite  6,  7,  0,  3, $3a, OAM_OBP1 | OAM_HFLIP
+	dbsprite  6,  7,  0,  1, ICON_TRADEBUBBLE << 2 + 0, OAM_OBP1 | OAM_HFLIP
+	dbsprite  6,  7,  0,  3, ICON_TRADEBUBBLE << 2 + 2, OAM_OBP1 | OAM_HFLIP
 
 Trade_CircleOAM2:
-	dbsprite 10,  7,  0,  2, $3b, OAM_OBP1 | OAM_VFLIP
-	dbsprite 10,  7,  0,  0, $39, OAM_OBP1 | OAM_VFLIP
+	dbsprite 10,  7,  0,  2, ICON_TRADEBUBBLE << 2 + 3, OAM_OBP1 | OAM_VFLIP
+	dbsprite 10,  7,  0,  0, ICON_TRADEBUBBLE << 2 + 1, OAM_OBP1 | OAM_VFLIP
 
 Trade_CircleOAM3:
-	dbsprite 14,  7,  0,  3, $3a, OAM_OBP1 | OAM_HFLIP | OAM_VFLIP
-	dbsprite 14,  7,  0,  1, $38, OAM_OBP1 | OAM_HFLIP | OAM_VFLIP
+	dbsprite 14,  7,  0,  3, ICON_TRADEBUBBLE << 2 + 2, OAM_OBP1 | OAM_HFLIP | OAM_VFLIP
+	dbsprite 14,  7,  0,  1, ICON_TRADEBUBBLE << 2 + 0, OAM_OBP1 | OAM_HFLIP | OAM_VFLIP
 
 ; a = species
 Trade_LoadMonSprite:

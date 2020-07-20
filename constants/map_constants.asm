@@ -4,6 +4,15 @@ mapconst: MACRO
 \1_WIDTH EQU \3
 ENDM
 
+; map ids
+; indexes for:
+; - MapHeaderBanks (see data/maps/map_header_banks.asm)
+; - MapHeaderPointers (see data/maps/map_header_pointers.asm)
+; - MapSongBanks (see data/maps/songs.asm)
+; - MapHSPointers (see data/maps/hide_show_data.asm)
+; - MapSpriteSets (see data/maps/sprite_sets.asm)
+; - ExternalMapEntries (see data/maps/town_map_entries.asm)
+; Each map also has associated data in maps.asm.
 	const_def
 	mapconst PALLET_TOWN,                    9, 10 ; $00
 	mapconst VIRIDIAN_CITY,                 18, 20 ; $01
