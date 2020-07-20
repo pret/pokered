@@ -256,7 +256,7 @@ NoHS:
 	db $FF, $FF, $FF
 
 MissableObjects:
-; entries correspond to HS_* constants
+; entries correspond to HS_* constants (see constants/hide_show_constants)
 ; format: map id, object id, HIDE/SHOW
 
 PalletTownHS:

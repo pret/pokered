@@ -1,4 +1,5 @@
 ; special effects that are part of move animations
+; SpecialEffectPointers associates them with effect routines (see data/battle_anims/special_effect_pointers.asm)
 	const_def $C0
 FIRST_SE_ID EQU const_value
 	const_skip $18
@@ -43,6 +44,7 @@ FIRST_SE_ID EQU const_value
 	const SE_DARK_SCREEN_FLASH         ; $FE used in Cut/Take Down/etc.
 
 ; subanimations that are part of move animations
+; SubanimationPointers indexes (see data/battle_anims/subanimations.asm)
 	const_def
 	const SUBANIM_00
 	const SUBANIM_01
@@ -141,6 +143,7 @@ FIRST_SE_ID EQU const_value
 	const SUBANIMTYPE_ENEMY
 
 ; frame blocks that are part of subanimations
+; FrameBlockPointers indexes (see data/battle_anims/frame_blocks.asm)
 	const_def
 	const FRAMEBLOCK_00
 	const FRAMEBLOCK_01
@@ -266,6 +269,7 @@ FIRST_SE_ID EQU const_value
 	const FRAMEBLOCK_79
 
 ; base coordinates that are part of subanimations
+; FrameBlockBaseCoords indexes (see data/battle_anims/base_coords.asm)
 	const_def
 	const BASECOORD_00
 	const BASECOORD_01

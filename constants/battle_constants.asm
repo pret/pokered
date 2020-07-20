@@ -8,7 +8,7 @@ NUM_DVS       EQU 2
 ; D733 flags
 BIT_TEST_BATTLE EQU 0
 
-; battle type constants
+; battle type constants (wBattleType values)
 	const_def
 	const BATTLE_TYPE_NORMAL  ; 0
 	const BATTLE_TYPE_OLD_MAN ; 1
@@ -43,7 +43,7 @@ MAX_STAT_VALUE EQU 999
 ATKDEFDV_TRAINER EQU $98
 SPDSPCDV_TRAINER EQU $88
 
-; volatile statuses 1
+; wPlayerBattleStatus1 or wEnemyBattleStatus1 bit flags
 	const_def
 	const STORING_ENERGY           ; 0 ; Bide
 	const THRASHING_ABOUT          ; 1 ; e.g. Thrash
@@ -54,7 +54,7 @@ SPDSPCDV_TRAINER EQU $88
 	const INVULNERABLE             ; 6 ; charging up Fly/Dig
 	const CONFUSED                 ; 7
 
-; volatile statuses 2
+; wPlayerBattleStatus2 or wEnemyBattleStatus2 bit flags
 	const_def
 	const USING_X_ACCURACY    ; 0
 	const PROTECTED_BY_MIST   ; 1
@@ -65,7 +65,7 @@ SPDSPCDV_TRAINER EQU $88
 	const USING_RAGE          ; 6
 	const SEEDED              ; 7
 
-; volatile statuses 3
+; wPlayerBattleStatus3 or wEnemyBattleStatus3 bit flags
 	const_def
 	const BADLY_POISONED      ; 0
 	const HAS_LIGHT_SCREEN_UP ; 1

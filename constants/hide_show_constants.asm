@@ -1,6 +1,7 @@
 HIDE EQU $11
 SHOW EQU $15
 
+; MissableObjects indexes (see data/maps/hide_show_data.asm)
 ; this is a list of the sprites that can be enabled/disabled during the game
 ; sprites marked with an X are constants that are never used
 ; because those sprites are not (de)activated in a map's script

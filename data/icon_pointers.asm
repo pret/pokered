@@ -2,36 +2,36 @@ mon_icon_header: MACRO
 	dw \1 tile \2
 	db \3
 	db BANK(\1)
-	dw vSprites tile \4
+	dw vSprites tile (\4)
 ENDM
 
 MonPartySpritePointers:
 	; gfx pointer, gfx tile offset, # tiles, vSprites tile offset
-	mon_icon_header MonsterSprite,       12, 4, $00
-	mon_icon_header PokeBallSprite,       0, 8, $04
-	mon_icon_header FairySprite,         12, 4, $0c
-	mon_icon_header BirdSprite,          12, 4, $10
-	mon_icon_header SeelSprite,           0, 4, $14
-	mon_icon_header BugIconFrame2,        0, 1, $18
-	mon_icon_header BugIconFrame2,        1, 1, $1a
-	mon_icon_header PlantIconFrame2,      0, 1, $1c
-	mon_icon_header PlantIconFrame2,      1, 1, $1e
-	mon_icon_header SnakeIconFrame1,      0, 1, $20
-	mon_icon_header SnakeIconFrame1,      1, 1, $22
-	mon_icon_header QuadrupedIconFrame1,  0, 1, $24
-	mon_icon_header QuadrupedIconFrame1,  1, 1, $26
-	mon_icon_header TradeBubbleIconGFX,   0, 4, $38
-	mon_icon_header MonsterSprite,        0, 4, $40
-	mon_icon_header PokeBallSprite,       0, 8, $44
-	mon_icon_header FairySprite,          0, 4, $4c
-	mon_icon_header BirdSprite,           0, 4, $50
-	mon_icon_header SeelSprite,          12, 4, $54
-	mon_icon_header BugIconFrame1,        0, 1, $58
-	mon_icon_header BugIconFrame1,        1, 1, $5a
-	mon_icon_header PlantIconFrame1,      0, 1, $5c
-	mon_icon_header PlantIconFrame1,      1, 1, $5e
-	mon_icon_header SnakeIconFrame2,      0, 1, $60
-	mon_icon_header SnakeIconFrame2,      1, 1, $62
-	mon_icon_header QuadrupedIconFrame2,  0, 1, $64
-	mon_icon_header QuadrupedIconFrame2,  1, 1, $66
-	mon_icon_header TradeBubbleIconGFX,   4, 4, $78
+	mon_icon_header MonsterSprite,       12, 4, ICON_MON << 2
+	mon_icon_header PokeBallSprite,       0, 8, ICON_BALL << 2
+	mon_icon_header FairySprite,         12, 4, ICON_FAIRY << 2
+	mon_icon_header BirdSprite,          12, 4, ICON_BIRD << 2
+	mon_icon_header SeelSprite,           0, 4, ICON_WATER << 2
+	mon_icon_header BugIconFrame2,        0, 1, ICON_BUG << 2
+	mon_icon_header BugIconFrame2,        1, 1, ICON_BUG << 2 + 2
+	mon_icon_header PlantIconFrame2,      0, 1, ICON_GRASS << 2
+	mon_icon_header PlantIconFrame2,      1, 1, ICON_GRASS << 2 + 2
+	mon_icon_header SnakeIconFrame1,      0, 1, ICON_SNAKE << 2
+	mon_icon_header SnakeIconFrame1,      1, 1, ICON_SNAKE << 2 + 2
+	mon_icon_header QuadrupedIconFrame1,  0, 1, ICON_QUADRUPED << 2
+	mon_icon_header QuadrupedIconFrame1,  1, 1, ICON_QUADRUPED << 2 + 2
+	mon_icon_header TradeBubbleIconGFX,   0, 4, ICON_TRADEBUBBLE << 2
+	mon_icon_header MonsterSprite,        0, 4, ICONOFFSET + ICON_MON << 2
+	mon_icon_header PokeBallSprite,       0, 8, ICONOFFSET + ICON_BALL << 2
+	mon_icon_header FairySprite,          0, 4, ICONOFFSET + ICON_FAIRY << 2
+	mon_icon_header BirdSprite,           0, 4, ICONOFFSET + ICON_BIRD << 2
+	mon_icon_header SeelSprite,          12, 4, ICONOFFSET + ICON_WATER << 2
+	mon_icon_header BugIconFrame1,        0, 1, ICONOFFSET + ICON_BUG << 2
+	mon_icon_header BugIconFrame1,        1, 1, ICONOFFSET + ICON_BUG << 2 + 2
+	mon_icon_header PlantIconFrame1,      0, 1, ICONOFFSET + ICON_GRASS << 2
+	mon_icon_header PlantIconFrame1,      1, 1, ICONOFFSET + ICON_GRASS << 2 + 2
+	mon_icon_header SnakeIconFrame2,      0, 1, ICONOFFSET + ICON_SNAKE << 2
+	mon_icon_header SnakeIconFrame2,      1, 1, ICONOFFSET + ICON_SNAKE << 2 + 2
+	mon_icon_header QuadrupedIconFrame2,  0, 1, ICONOFFSET + ICON_QUADRUPED << 2
+	mon_icon_header QuadrupedIconFrame2,  1, 1, ICONOFFSET + ICON_QUADRUPED << 2 + 2
+	mon_icon_header TradeBubbleIconGFX,   4, 4, ICONOFFSET + ICON_TRADEBUBBLE << 2

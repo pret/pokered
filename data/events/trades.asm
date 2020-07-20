@@ -1,4 +1,5 @@
 TradeMons:
+; entries correspond to TRADE_FOR_* constants
 	; give mon, get mon, dialog id, nickname
 	db NIDORINO,   NIDORINA,  TRADE_DIALOGSET_CASUAL, "TERRY@@@@@@"
 	db ABRA,       MR_MIME,   TRADE_DIALOGSET_CASUAL, "MARCEL@@@@@"

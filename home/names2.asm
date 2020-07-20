@@ -1,4 +1,5 @@
 NamePointers::
+; entries correspond to *_NAME constants
 	dw MonsterNames
 	dw MoveNames
 	dw UnusedNames

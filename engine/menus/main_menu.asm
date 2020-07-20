@@ -678,11 +678,11 @@ SetCursorPositionsFromOptions:
 ; 00: X coordinate of menu cursor
 ; 01: delay after printing a letter (in frames)
 TextSpeedOptionData:
-	db 14,5 ; Slow
-	db  7,3 ; Medium
-	db  1,1 ; Fast
+	db 14, 5 ; Slow
+	db  7, 3 ; Medium
+	db  1, 1 ; Fast
 	db 7 ; default X coordinate (Medium)
-	db $ff ; terminator
+	db -1 ; end
 
 CheckForPlayerNameInSRAM:
 ; Check if the player name data in SRAM has a string terminator character

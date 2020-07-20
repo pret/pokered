@@ -1,4 +1,5 @@
 CreditsTextPointers:
+; entries correspond to CRED_* constants
 	dw CredVersion
 	dw CredTajiri
 	dw CredTaOota

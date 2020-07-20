@@ -1,3 +1,10 @@
+; pokemon ids
+; indexes for:
+; - MonsterNames (see data/pokemon/names.asm)
+; - EvosMovesPointerTable (see data/pokemon/evos_moves.asm)
+; - CryData (see data/pokemon/cries.asm)
+; - PokedexOrder (see data/pokemon/dex_order.asm)
+; - PokedexEntryPointers (see data/pokemon/dex_entries.asm)
 	const_def
 	const NO_MON       ; $00
 	const RHYDON       ; $01

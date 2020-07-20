@@ -233,6 +233,7 @@ InGameTrade_TrainerString:
 	db "<TRAINER>@@@@@@@@@@"
 
 InGameTradeTextPointers:
+; entries correspond to TRADE_DIALOGSET_* constants
 	dw TradeTextPointers1
 	dw TradeTextPointers2
 	dw TradeTextPointers3

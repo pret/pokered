@@ -1,3 +1,4 @@
+; joypad buttons
 	const_def
 	const BIT_A_BUTTON
 	const BIT_B_BUTTON

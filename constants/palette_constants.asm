@@ -6,6 +6,7 @@
 	const BLACK
 
 ; pal/blk packets
+; SetPalFunctions indexes (see engine/gfx/palettes.asm)
 	const_def
 	const SET_PAL_BATTLE_BLACK         ; $00
 	const SET_PAL_BATTLE               ; $01
@@ -26,6 +27,7 @@ SET_PAL_PARTY_MENU_HP_BARS EQU $fc
 SET_PAL_DEFAULT EQU $ff
 
 ; sgb palettes
+; SuperPalettes indexes (see data/sgb/sgb_palettes.asm)
 	const_def
 	const PAL_ROUTE     ; $00
 	const PAL_PALLET    ; $01

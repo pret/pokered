@@ -1,3 +1,4 @@
+; TypeNames indexes (see data/types/names.asm)
 	const_def
 
 PHYSICAL EQU const_value

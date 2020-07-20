@@ -31,6 +31,7 @@ REDRAW_COL EQU 1
 REDRAW_ROW EQU 2
 
 ; tile list ids
+; TileIDListPointerTable indexes (see data/tilemaps.asm)
 	const_def
 	const TILEMAP_MON_PIC
 	const TILEMAP_SLIDE_DOWN_MON_PIC_7X5

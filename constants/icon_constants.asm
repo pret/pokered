@@ -1,4 +1,5 @@
 ; party menu icons
+; used in MonPartySpritePointers (see data/icon_pointers.asm)
 	const_def
 	const ICON_MON       ; $0
 	const ICON_BALL      ; $1
@@ -10,3 +11,7 @@
 	const ICON_GRASS     ; $7
 	const ICON_SNAKE     ; $8
 	const ICON_QUADRUPED ; $9
+
+ICON_TRADEBUBBLE EQU $e
+
+ICONOFFSET EQU $40 ; difference between alternating icon frames' tile IDs

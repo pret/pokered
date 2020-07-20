@@ -1,3 +1,5 @@
+; wEventFlags bit flags
+
 ; Pallet Town events
 	const_def
 	const EVENT_FOLLOWED_OAK_INTO_LAB

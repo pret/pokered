@@ -62,6 +62,7 @@ EmotionBubble:
 	jp UpdateSprites
 
 EmotionBubblesPointerTable:
+; entries correspond to *_BUBBLE constants
 	dw ShockEmote
 	dw QuestionEmote
 	dw HappyEmote

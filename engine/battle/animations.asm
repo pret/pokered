@@ -848,8 +848,8 @@ TradeShakePokeball:
 	jp PlaySound
 
 BallMoveDistances1:
-	db -12,-12,-8
-	db $ff ; terminator
+	db -12, -12, -8
+	db -1 ; end
 
 ; function to make the pokeball jump up
 TradeJumpPokeball:
@@ -889,8 +889,8 @@ TradeJumpPokeball:
 	jr .loop
 
 BallMoveDistances2:
-	db 11,12,-12,-7,7,12,-8,8
-	db $ff ; terminator
+	db 11, 12, -12, -7, 7, 12, -8, 8
+	db -1 ; end
 
 ; this function copies the current musical note graphic
 ; so that there are two musical notes flying towards the defending pokemon
@@ -1522,7 +1522,7 @@ SpiralBallAnimationCoordinates:
 	db $58, $28
 	db $50, $30
 	db $50, $28
-	db $FF ; list terminator
+	db -1 ; end
 
 AnimationSquishMonPic:
 ; Squishes the mon's sprite horizontally making it
@@ -1677,13 +1677,13 @@ UpwardBallsAnimXCoordinatesPlayerTurn:
 ; List of x coordinates for each pillar of "energy" balls in the
 ; AnimationShootManyBallsUpward animation. It's unused in the game.
 	db $10, $40, $28, $18, $38, $30
-	db $FF ; list terminator
+	db -1 ; end
 
 UpwardBallsAnimXCoordinatesEnemyTurn:
 ; List of x coordinates for each pillar of "energy" balls in the
 ; AnimationShootManyBallsUpward animation. It's unused in the game.
 	db $60, $90, $78, $68, $88, $80
-	db $FF ; list terminator
+	db -1 ; end
 
 AnimationMinimizeMon:
 ; Changes the mon's sprite to a mini black sprite. Used by the

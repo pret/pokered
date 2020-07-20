@@ -5,11 +5,11 @@ PC_ITEM_CAPACITY  EQU 50
 	const_def 1
 	const MESSAGE_BOX                       ; $01
 	const_skip                              ; $02
-	const_skip                              ; $03
+	const MENU_TEMPLATE_03                  ; $03 unused
 	const FIELD_MOVE_MON_MENU               ; $04
 	const JP_MOCHIMONO_MENU_TEMPLATE        ; $05
 	const USE_TOSS_MENU_TEMPLATE            ; $06
-	const_skip                              ; $07
+	const MENU_TEMPLATE_07                  ; $07 unused
 	const JP_SAVE_MESSAGE_MENU_TEMPLATE     ; $08
 	const JP_SPEED_OPTIONS_MENU_TEMPLATE    ; $09
 	const_skip                              ; $0a
@@ -18,7 +18,7 @@ PC_ITEM_CAPACITY  EQU 50
 	const LIST_MENU_BOX                     ; $0d
 	const BUY_SELL_QUIT_MENU_TEMPLATE       ; $0e
 	const MONEY_BOX_TEMPLATE                ; $0f
-	const_skip                              ; $10
+	const MENU_TEMPLATE_10                  ; $10 unused
 	const MON_SPRITE_POPUP                  ; $11
 	const JP_AH_MENU_TEMPLATE               ; $12
 	const MONEY_BOX                         ; $13
@@ -32,6 +32,7 @@ PC_ITEM_CAPACITY  EQU 50
 	const SAFARI_BATTLE_MENU_TEMPLATE       ; $1b
 
 ; two option menu constants
+; TwoOptionMenuStrings indexes (see data/yes_no_menu_strings.asm)
 	const_def
 	const YES_NO_MENU       ; 0
 	const NORTH_WEST_MENU   ; 1
@@ -58,7 +59,7 @@ CHOSE_SECOND_ITEM EQU 2
 	const PARTY_TO_DAYCARE ; 3
 
 ; party menu types
-; PartyMenuMessagePointers indexes
+; PartyMenuMessagePointers indexes (see engine/menus/party_menu.asm)
 	const_def
 	const NORMAL_PARTY_MENU    ; $00
 	const USE_ITEM_PARTY_MENU  ; $01
@@ -67,7 +68,7 @@ CHOSE_SECOND_ITEM EQU 2
 	const SWAP_MONS_PARTY_MENU ; $04
 	const EVO_STONE_PARTY_MENU ; $05
 ; party menu message IDs
-; PartyMenuItemUseMessagePointers indexes
+; PartyMenuItemUseMessagePointers indexes (see engine/menus/party_menu.asm)
 	const_next $F0
 FIRST_PARTY_MENU_TEXT_ID EQU const_value
 	const ANTIDOTE_MSG         ; $F0
