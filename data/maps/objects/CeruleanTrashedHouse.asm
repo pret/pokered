@@ -10,7 +10,7 @@ CeruleanTrashedHouse_Object:
 	sign 3, 0, 3 ; CeruleanHouseTrashedText3
 
 	db 2 ; objects
-	object SPRITE_FISHER, 2, 1, STAY, DOWN, 1 ; person
+	object SPRITE_FISHING_GURU, 2, 1, STAY, DOWN, 1 ; person
 	object SPRITE_GIRL, 5, 6, WALK, 2, 2 ; person
 
 	; warp-to

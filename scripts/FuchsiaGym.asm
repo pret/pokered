@@ -1,5 +1,5 @@
 FuchsiaGym_Script:
-	call FuchsiaGymScript_75453
+	call .LoadNames
 	call EnableAutoTextBoxDrawing
 	ld hl, FuchsiaGymTrainerHeader0
 	ld de, FuchsiaGym_ScriptPointers
@@ -8,19 +8,20 @@ FuchsiaGym_Script:
 	ld [wFuchsiaGymCurScript], a
 	ret
 
-FuchsiaGymScript_75453:
+.LoadNames:
 	ld hl, wCurrentMapScriptFlags
 	bit 6, [hl]
 	res 6, [hl]
 	ret z
-	ld hl, Gym5CityName
-	ld de, Gym5LeaderName
+	ld hl, .CityName
+	ld de, .LeaderName
 	call LoadGymLeaderAndCityName
 	ret
 
-Gym5CityName:
+.CityName:
 	db "FUCHSIA CITY@"
-Gym5LeaderName:
+
+.LeaderName:
 	db "KOGA@"
 
 FuchsiaGymScript_75477:

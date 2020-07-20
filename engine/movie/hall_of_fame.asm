@@ -202,7 +202,7 @@ HoFLoadPlayerPics:
 
 HoFLoadMonPlayerPicTileIDs:
 ; c = base tile ID
-	ld b, 0
+	ld b, TILEMAP_MON_PIC
 	hlcoord 12, 5
 	predef_jump CopyTileIDsFromList
 

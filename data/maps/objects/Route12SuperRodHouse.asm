@@ -8,7 +8,7 @@ Route12SuperRodHouse_Object:
 	db 0 ; signs
 
 	db 1 ; objects
-	object SPRITE_FISHER, 2, 4, STAY, RIGHT, 1 ; person
+	object SPRITE_FISHING_GURU, 2, 4, STAY, RIGHT, 1 ; person
 
 	; warp-to
 	warp_to 2, 7, ROUTE_12_SUPER_ROD_HOUSE_WIDTH

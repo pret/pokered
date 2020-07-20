@@ -17,12 +17,12 @@ ViridianCity_Object:
 	sign 27, 7, 13 ; ViridianCityText13
 
 	db 7 ; objects
-	object SPRITE_BUG_CATCHER, 13, 20, WALK, 0, 1 ; person
+	object SPRITE_YOUNGSTER, 13, 20, WALK, 0, 1 ; person
 	object SPRITE_GAMBLER, 30, 8, STAY, NONE, 2 ; person
-	object SPRITE_BUG_CATCHER, 30, 25, WALK, 0, 3 ; person
+	object SPRITE_YOUNGSTER, 30, 25, WALK, 0, 3 ; person
 	object SPRITE_GIRL, 17, 9, STAY, RIGHT, 4 ; person
-	object SPRITE_LYING_OLD_MAN, 18, 9, STAY, NONE, 5 ; person
-	object SPRITE_FISHER2, 6, 23, STAY, DOWN, 6 ; person
+	object SPRITE_GAMBLER_ASLEEP, 18, 9, STAY, NONE, 5 ; person
+	object SPRITE_FISHER, 6, 23, STAY, DOWN, 6 ; person
 	object SPRITE_GAMBLER, 17, 5, WALK, 2, 7 ; person
 
 	; warp-to

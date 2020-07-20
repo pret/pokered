@@ -79,7 +79,19 @@ ScalePixelsByTwo:
 
 ; repeats each input bit twice
 DuplicateBitsTable:
-	db $00, $03, $0c, $0f
-	db $30, $33, $3c, $3f
-	db $c0, $c3, $cc, $cf
-	db $f0, $f3, $fc, $ff
+	db %00000000
+	db %00000011
+	db %00001100
+	db %00001111
+	db %00110000
+	db %00110011
+	db %00111100
+	db %00111111
+	db %11000000
+	db %11000011
+	db %11001100
+	db %11001111
+	db %11110000
+	db %11110011
+	db %11111100
+	db %11111111

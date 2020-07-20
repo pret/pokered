@@ -66,13 +66,15 @@ PokeCenterFlashingMonitorAndHealBall:
 	INCBIN "gfx/overworld/heal_machine.2bpp"
 
 PokeCenterOAMData:
-	db $24,$34,$7C,$10 ; heal machine monitor
-	db $2B,$30,$7D,$10 ; pokeballs 1-6
-	db $2B,$38,$7D,$30
-	db $30,$30,$7D,$10
-	db $30,$38,$7D,$30
-	db $35,$30,$7D,$10
-	db $35,$38,$7D,$30
+	; heal machine monitor
+	dbsprite  6,  4,  4,  4, $7c, OAM_OBP1
+	; poke balls 1-6
+	dbsprite  6,  5,  0,  3, $7d, OAM_OBP1
+	dbsprite  7,  5,  0,  3, $7d, OAM_OBP1 | OAM_HFLIP
+	dbsprite  6,  6,  0,  0, $7d, OAM_OBP1
+	dbsprite  7,  6,  0,  0, $7d, OAM_OBP1 | OAM_HFLIP
+	dbsprite  6,  6,  0,  5, $7d, OAM_OBP1
+	dbsprite  7,  6,  0,  5, $7d, OAM_OBP1 | OAM_HFLIP
 
 ; d = value to xor with palette
 FlashSprite8Times:

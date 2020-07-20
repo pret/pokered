@@ -29,12 +29,12 @@ CeladonCity_Object:
 
 	db 9 ; objects
 	object SPRITE_LITTLE_GIRL, 8, 17, WALK, 0, 1 ; person
-	object SPRITE_OLD_PERSON, 11, 28, STAY, UP, 2 ; person
+	object SPRITE_GRAMPS, 11, 28, STAY, UP, 2 ; person
 	object SPRITE_GIRL, 14, 19, WALK, 1, 3 ; person
-	object SPRITE_OLD_PERSON, 25, 22, STAY, DOWN, 4 ; person
-	object SPRITE_OLD_PERSON, 22, 16, STAY, DOWN, 5 ; person
-	object SPRITE_FISHER2, 32, 12, STAY, LEFT, 6 ; person
-	object SPRITE_SLOWBRO, 30, 12, STAY, RIGHT, 7 ; person
+	object SPRITE_GRAMPS, 25, 22, STAY, DOWN, 4 ; person
+	object SPRITE_GRAMPS, 22, 16, STAY, DOWN, 5 ; person
+	object SPRITE_FISHER, 32, 12, STAY, LEFT, 6 ; person
+	object SPRITE_MONSTER, 30, 12, STAY, RIGHT, 7 ; person
 	object SPRITE_ROCKET, 32, 29, WALK, 2, 8 ; person
 	object SPRITE_ROCKET, 42, 14, WALK, 2, 9 ; person
 

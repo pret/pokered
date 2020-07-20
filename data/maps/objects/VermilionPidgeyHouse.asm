@@ -8,9 +8,9 @@ VermilionPidgeyHouse_Object:
 	db 0 ; signs
 
 	db 3 ; objects
-	object SPRITE_BUG_CATCHER, 5, 3, STAY, LEFT, 1 ; person
+	object SPRITE_YOUNGSTER, 5, 3, STAY, LEFT, 1 ; person
 	object SPRITE_BIRD, 3, 5, WALK, 2, 2 ; person
-	object SPRITE_PAPER_SHEET, 4, 3, STAY, NONE, 3 ; person
+	object SPRITE_PAPER, 4, 3, STAY, NONE, 3 ; person
 
 	; warp-to
 	warp_to 2, 7, VERMILION_PIDGEY_HOUSE_WIDTH

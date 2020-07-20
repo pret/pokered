@@ -12,8 +12,8 @@ CeladonMart5F_Object:
 	db 4 ; objects
 	object SPRITE_GENTLEMAN, 14, 5, WALK, 1, 1 ; person
 	object SPRITE_SAILOR, 2, 6, STAY, NONE, 2 ; person
-	object SPRITE_MART_GUY, 5, 3, STAY, DOWN, 3 ; person
-	object SPRITE_MART_GUY, 6, 3, STAY, DOWN, 4 ; person
+	object SPRITE_CLERK, 5, 3, STAY, DOWN, 3 ; person
+	object SPRITE_CLERK, 6, 3, STAY, DOWN, 4 ; person
 
 	; warp-to
 	warp_to 12, 1, CELADON_MART_5F_WIDTH ; CELADON_MART_ROOF

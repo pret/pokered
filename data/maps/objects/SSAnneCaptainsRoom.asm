@@ -9,7 +9,7 @@ SSAnneCaptainsRoom_Object:
 	sign 1, 2, 3 ; SSAnne7Text3
 
 	db 1 ; objects
-	object SPRITE_SS_CAPTAIN, 4, 2, STAY, UP, 1 ; person
+	object SPRITE_CAPTAIN, 4, 2, STAY, UP, 1 ; person
 
 	; warp-to
 	warp_to 0, 7, SS_ANNE_CAPTAINS_ROOM_WIDTH ; SS_ANNE_2F

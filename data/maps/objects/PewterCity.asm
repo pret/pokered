@@ -20,11 +20,11 @@ PewterCity_Object:
 	sign 25, 23, 12 ; PewterCityText12
 
 	db 5 ; objects
-	object SPRITE_LASS, 8, 15, STAY, NONE, 1 ; person
-	object SPRITE_BLACK_HAIR_BOY_1, 17, 25, STAY, NONE, 2 ; person
-	object SPRITE_BLACK_HAIR_BOY_2, 27, 17, STAY, NONE, 3 ; person
-	object SPRITE_BLACK_HAIR_BOY_2, 26, 25, WALK, 2, 4 ; person
-	object SPRITE_BUG_CATCHER, 35, 16, STAY, DOWN, 5 ; person
+	object SPRITE_COOLTRAINER_F, 8, 15, STAY, NONE, 1 ; person
+	object SPRITE_COOLTRAINER_M, 17, 25, STAY, NONE, 2 ; person
+	object SPRITE_SUPER_NERD, 27, 17, STAY, NONE, 3 ; person
+	object SPRITE_SUPER_NERD, 26, 25, WALK, 2, 4 ; person
+	object SPRITE_YOUNGSTER, 35, 16, STAY, DOWN, 5 ; person
 
 	; warp-to
 	warp_to 14, 7, PEWTER_CITY_WIDTH ; MUSEUM_1F

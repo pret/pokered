@@ -2944,7 +2944,7 @@ wd732::
 ; bit 0: play time being counted
 ; bit 1: remnant of debug mode; only set by the debug build.
 ; if it is set:
-; 1. skips most of Prof. Oak's speech, and uses NINTEN as the player's name and SONY as the rival's name
+; 1. skips most of Prof. Oak's speech, and uses NINTEN as the player's name and RIVAL as the rival's name
 ; 2. does not have the player start in floor two of the player's house (instead sending them to [wLastMap])
 ; 3. allows wild battles to be avoided by holding down B
 ; furthermore, in the debug build:

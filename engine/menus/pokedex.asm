@@ -599,10 +599,8 @@ PokeText:
 
 ; horizontal line that divides the pokedex text description from the rest of the data
 PokedexDataDividerLine:
-	db $68,$69,$6B,$69,$6B
-	db $69,$6B,$69,$6B,$6B
-	db $6B,$6B,$69,$6B,$69
-	db $6B,$69,$6B,$69,$6A
+	db $68, $69, $6B, $69, $6B, $69, $6B, $69, $6B, $6B
+	db $6B, $6B, $69, $6B, $69, $6B, $69, $6B, $69, $6A
 	db "@"
 
 ; draws a line of tiles

@@ -19,8 +19,8 @@ LavenderTown_Object:
 
 	db 3 ; objects
 	object SPRITE_LITTLE_GIRL, 15, 9, WALK, 0, 1 ; person
-	object SPRITE_BLACK_HAIR_BOY_1, 9, 10, STAY, NONE, 2 ; person
-	object SPRITE_BLACK_HAIR_BOY_2, 8, 7, WALK, 2, 3 ; person
+	object SPRITE_COOLTRAINER_M, 9, 10, STAY, NONE, 2 ; person
+	object SPRITE_SUPER_NERD, 8, 7, WALK, 2, 3 ; person
 
 	; warp-to
 	warp_to 3, 5, LAVENDER_TOWN_WIDTH ; LAVENDER_POKECENTER

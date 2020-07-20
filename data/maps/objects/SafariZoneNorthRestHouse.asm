@@ -8,8 +8,8 @@ SafariZoneNorthRestHouse_Object:
 	db 0 ; signs
 
 	db 3 ; objects
-	object SPRITE_OAK_AIDE, 6, 3, WALK, 2, 1 ; person
-	object SPRITE_WHITE_PLAYER, 3, 4, STAY, NONE, 2 ; person
+	object SPRITE_SCIENTIST, 6, 3, WALK, 2, 1 ; person
+	object SPRITE_SAFARI_ZONE_WORKER, 3, 4, STAY, NONE, 2 ; person
 	object SPRITE_GENTLEMAN, 1, 5, WALK, 1, 3 ; person
 
 	; warp-to

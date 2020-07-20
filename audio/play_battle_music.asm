@@ -16,7 +16,7 @@ PlayBattleMusic::
 	ld a, [wCurOpponent]
 	cp OPP_ID_OFFSET
 	jr c, .wildBattle
-	cp OPP_SONY3
+	cp OPP_RIVAL3
 	jr z, .finalBattle
 	cp OPP_LANCE
 	jr nz, .normalTrainerBattle

@@ -9,9 +9,9 @@ CinnabarPokecenter_Object:
 
 	db 4 ; objects
 	object SPRITE_NURSE, 3, 1, STAY, DOWN, 1 ; person
-	object SPRITE_LASS, 9, 4, WALK, 0, 2 ; person
+	object SPRITE_COOLTRAINER_F, 9, 4, WALK, 0, 2 ; person
 	object SPRITE_GENTLEMAN, 2, 6, STAY, NONE, 3 ; person
-	object SPRITE_CABLE_CLUB_WOMAN, 11, 2, STAY, DOWN, 4 ; person
+	object SPRITE_LINK_RECEPTIONIST, 11, 2, STAY, DOWN, 4 ; person
 
 	; warp-to
 	warp_to 3, 7, CINNABAR_POKECENTER_WIDTH

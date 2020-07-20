@@ -14,10 +14,10 @@ CeladonMansion3F_Object:
 	sign 4, 9, 8 ; CeladonMansion3Text8
 
 	db 4 ; objects
-	object SPRITE_BIKE_SHOP_GUY, 0, 4, STAY, UP, 1 ; person
-	object SPRITE_MART_GUY, 3, 4, STAY, UP, 2 ; person
-	object SPRITE_BLACK_HAIR_BOY_2, 0, 7, STAY, UP, 3 ; person
-	object SPRITE_LAPRAS_GIVER, 2, 3, STAY, NONE, 4 ; person
+	object SPRITE_BIKE_SHOP_CLERK, 0, 4, STAY, UP, 1 ; person
+	object SPRITE_CLERK, 3, 4, STAY, UP, 2 ; person
+	object SPRITE_SUPER_NERD, 0, 7, STAY, UP, 3 ; person
+	object SPRITE_SILPH_WORKER, 2, 3, STAY, NONE, 4 ; person
 
 	; warp-to
 	warp_to 6, 1, CELADON_MANSION_3F_WIDTH ; CELADON_MANSION_2F

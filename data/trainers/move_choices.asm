@@ -20,7 +20,7 @@ TrainerClassMoveChoiceModifications:
 	move_choices 1       ; BIKER
 	move_choices 1, 3    ; BURGLAR
 	move_choices 1       ; ENGINEER
-	move_choices 1, 2    ; JUGGLER_X
+	move_choices 1, 2    ; UNUSED_JUGGLER
 	move_choices 1, 3    ; FISHER
 	move_choices 1, 3    ; SWIMMER
 	move_choices         ; CUE_BALL
@@ -32,7 +32,7 @@ TrainerClassMoveChoiceModifications:
 	move_choices 1       ; TAMER
 	move_choices 1       ; BIRD_KEEPER
 	move_choices 1       ; BLACKBELT
-	move_choices 1       ; SONY1
+	move_choices 1       ; RIVAL1
 	move_choices 1, 3    ; PROF_OAK
 	move_choices 1, 2    ; CHIEF
 	move_choices 1, 2    ; SCIENTIST
@@ -49,8 +49,8 @@ TrainerClassMoveChoiceModifications:
 	move_choices 1, 3    ; BLAINE
 	move_choices 1, 3    ; SABRINA
 	move_choices 1, 2    ; GENTLEMAN
-	move_choices 1, 3    ; SONY2
-	move_choices 1, 3    ; SONY3
+	move_choices 1, 3    ; RIVAL2
+	move_choices 1, 3    ; RIVAL3
 	move_choices 1, 2, 3 ; LORELEI
 	move_choices 1       ; CHANNELER
 	move_choices 1       ; AGATHA

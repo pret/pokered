@@ -131,7 +131,7 @@ Route22Script1:
 	ld hl, Route22RivalDefeatedText1
 	ld de, Route22Text_511bc
 	call SaveEndBattleTextPointers
-	ld a, OPP_SONY1
+	ld a, OPP_RIVAL1
 	ld [wCurOpponent], a
 	ld hl, StarterMons_50faf
 	call Route22Script_50ed6
@@ -287,7 +287,7 @@ Route22Script4:
 	ld hl, Route22RivalDefeatedText2
 	ld de, Route22Text_511d0
 	call SaveEndBattleTextPointers
-	ld a, OPP_SONY2
+	ld a, OPP_RIVAL2
 	ld [wCurOpponent], a
 	ld hl, StarterMons_510d9
 	call Route22Script_50ed6

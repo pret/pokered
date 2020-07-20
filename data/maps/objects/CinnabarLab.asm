@@ -15,7 +15,7 @@ CinnabarLab_Object:
 	sign 17, 4, 5 ; Lab1Text5
 
 	db 1 ; objects
-	object SPRITE_FISHER, 1, 3, STAY, NONE, 1 ; person
+	object SPRITE_FISHING_GURU, 1, 3, STAY, NONE, 1 ; person
 
 	; warp-to
 	warp_to 2, 7, CINNABAR_LAB_WIDTH

@@ -9,7 +9,7 @@ CeladonMansionRoofHouse_Object:
 
 	db 2 ; objects
 	object SPRITE_HIKER, 2, 2, STAY, DOWN, 1 ; person
-	object SPRITE_BALL, 4, 3, STAY, NONE, 2 ; person
+	object SPRITE_POKE_BALL, 4, 3, STAY, NONE, 2 ; person
 
 	; warp-to
 	warp_to 2, 7, CELADON_MANSION_ROOF_HOUSE_WIDTH ; CELADON_MANSION_ROOF

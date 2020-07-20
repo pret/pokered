@@ -1,14 +1,9 @@
-const_value = -1
+	const_def -1
 	const MOVE_NIDORINO_RIGHT
 	const MOVE_GENGAR_RIGHT
 	const MOVE_GENGAR_LEFT
 
 ANIMATION_END EQU 80
-
-const_value = 3
-	const GENGAR_INTRO_TILES1
-	const GENGAR_INTRO_TILES2
-	const GENGAR_INTRO_TILES3
 
 PlayIntro:
 	xor a
@@ -34,7 +29,7 @@ PlayIntroScene:
 	ldh [rOBP1], a
 	xor a
 	ldh [hSCX], a
-	ld b, GENGAR_INTRO_TILES1
+	ld b, TILEMAP_GENGAR_INTRO_1
 	call IntroCopyTiles
 	ld a, 0
 	ld [wBaseCoordX], a
@@ -77,7 +72,7 @@ PlayIntroScene:
 	ret c
 
 ; raise
-	ld b, GENGAR_INTRO_TILES2
+	ld b, TILEMAP_GENGAR_INTRO_2
 	call IntroCopyTiles
 	ld a, SFX_INTRO_RAISE
 	call PlaySound
@@ -88,7 +83,7 @@ PlayIntroScene:
 	ret c
 
 ; slash
-	ld b, GENGAR_INTRO_TILES3
+	ld b, TILEMAP_GENGAR_INTRO_3
 	call IntroCopyTiles
 	ld a, SFX_INTRO_CRASH
 	call PlaySound
@@ -107,7 +102,7 @@ PlayIntroScene:
 
 	lb de, 8 / 2, MOVE_GENGAR_LEFT
 	call IntroMoveMon
-	ld b, GENGAR_INTRO_TILES1
+	ld b, TILEMAP_GENGAR_INTRO_1
 	call IntroCopyTiles
 	ld c, 60
 	call CheckForUserInterruption
@@ -445,6 +440,7 @@ GameFreakIntroEnd:
 
 FightIntroBackMon:
 	INCBIN "gfx/intro_credits/gengar.2bpp"
+	ds 16, $00 ; blank tile
 FightIntroBackMonEnd:
 
 FightIntroFrontMon:

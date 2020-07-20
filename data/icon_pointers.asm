@@ -7,9 +7,9 @@ ENDM
 
 MonPartySpritePointers:
 	; gfx pointer, gfx tile offset, # tiles, vSprites tile offset
-	mon_icon_header SlowbroSprite,       12, 4, $00
-	mon_icon_header BallSprite,           0, 8, $04
-	mon_icon_header ClefairySprite,      12, 4, $0c
+	mon_icon_header MonsterSprite,       12, 4, $00
+	mon_icon_header PokeBallSprite,       0, 8, $04
+	mon_icon_header FairySprite,         12, 4, $0c
 	mon_icon_header BirdSprite,          12, 4, $10
 	mon_icon_header SeelSprite,           0, 4, $14
 	mon_icon_header BugIconFrame2,        0, 1, $18
@@ -21,9 +21,9 @@ MonPartySpritePointers:
 	mon_icon_header QuadrupedIconFrame1,  0, 1, $24
 	mon_icon_header QuadrupedIconFrame1,  1, 1, $26
 	mon_icon_header TradeBubbleIconGFX,   0, 4, $38
-	mon_icon_header SlowbroSprite,        0, 4, $40
-	mon_icon_header BallSprite,           0, 8, $44
-	mon_icon_header ClefairySprite,       0, 4, $4c
+	mon_icon_header MonsterSprite,        0, 4, $40
+	mon_icon_header PokeBallSprite,       0, 8, $44
+	mon_icon_header FairySprite,          0, 4, $4c
 	mon_icon_header BirdSprite,           0, 4, $50
 	mon_icon_header SeelSprite,          12, 4, $54
 	mon_icon_header BugIconFrame1,        0, 1, $58

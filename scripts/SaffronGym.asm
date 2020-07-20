@@ -2,7 +2,7 @@ SaffronGym_Script:
 	ld hl, wCurrentMapScriptFlags
 	bit 6, [hl]
 	res 6, [hl]
-	call nz, .extra
+	call nz, .LoadNames
 	call EnableAutoTextBoxDrawing
 	ld hl, SaffronGymTrainerHeader0
 	ld de, SaffronGym_ScriptPointers
@@ -11,15 +11,15 @@ SaffronGym_Script:
 	ld [wSaffronGymCurScript], a
 	ret
 
-.extra
-	ld hl, Gym6CityName
-	ld de, Gym6LeaderName
+.LoadNames:
+	ld hl, .CityName
+	ld de, .LeaderName
 	jp LoadGymLeaderAndCityName
 
-Gym6CityName:
+.CityName:
 	db "SAFFRON CITY@"
 
-Gym6LeaderName:
+.LeaderName:
 	db "SABRINA@"
 
 SaffronGymText_5d048:

@@ -20,8 +20,8 @@ SafariZoneNorth_Object:
 	sign 26, 28, 7 ; SafariZoneNorthText7
 
 	db 2 ; objects
-	object SPRITE_BALL, 25, 1, STAY, NONE, 1, PROTEIN
-	object SPRITE_BALL, 19, 7, STAY, NONE, 2, TM_SKULL_BASH
+	object SPRITE_POKE_BALL, 25, 1, STAY, NONE, 1, PROTEIN
+	object SPRITE_POKE_BALL, 19, 7, STAY, NONE, 2, TM_SKULL_BASH
 
 	; warp-to
 	warp_to 2, 35, SAFARI_ZONE_NORTH_WIDTH ; SAFARI_ZONE_WEST

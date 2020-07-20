@@ -10,10 +10,10 @@ PokemonMansion2F_Object:
 	db 0 ; signs
 
 	db 4 ; objects
-	object SPRITE_BLACK_HAIR_BOY_2, 3, 17, WALK, 2, 1, OPP_BURGLAR, 7
-	object SPRITE_BALL, 28, 7, STAY, NONE, 2, CALCIUM
-	object SPRITE_BOOK_MAP_DEX, 18, 2, STAY, NONE, 3 ; person
-	object SPRITE_BOOK_MAP_DEX, 3, 22, STAY, NONE, 4 ; person
+	object SPRITE_SUPER_NERD, 3, 17, WALK, 2, 1, OPP_BURGLAR, 7
+	object SPRITE_POKE_BALL, 28, 7, STAY, NONE, 2, CALCIUM
+	object SPRITE_POKEDEX, 18, 2, STAY, NONE, 3 ; person
+	object SPRITE_POKEDEX, 3, 22, STAY, NONE, 4 ; person
 
 	; warp-to
 	warp_to 5, 10, POKEMON_MANSION_2F_WIDTH ; POKEMON_MANSION_1F

@@ -98,7 +98,7 @@ LoadMapSpriteTilePatterns:
 	push af
 	ld a, [hl] ; [x#SPRITESTATEDATA2_IMAGEBASEOFFSET]
 	ld b, a ; b = current sprite picture ID
-	cp SPRITE_BALL ; is it a 4-tile sprite?
+	cp FIRST_STILL_SPRITE ; is it a 4-tile sprite?
 	jr c, .notFourTileSprite
 	pop af
 	ldh a, [hFourTileSpriteCount]

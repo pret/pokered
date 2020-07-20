@@ -15,3 +15,8 @@ color    EQUS "+ PAL_COLOR_SIZE *"
 
 tiles EQUS "* LEN_2BPP_TILE"
 tile  EQUS "+ LEN_2BPP_TILE *"
+
+dbsprite: MACRO
+; x tile, y tile, x pixel, y pixel, vtile offset, attributes
+	db (\2 * TILE_WIDTH) % $100 + \4, (\1 * TILE_WIDTH) % $100 + \3, \5, \6
+ENDM
