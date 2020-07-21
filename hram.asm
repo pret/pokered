@@ -1,7 +1,5 @@
 SECTION "HRAM", HRAM
 
-hDMARoutine:: ds 10
-
 ; Initialized to 16.
 ; Decremented each input iteration if the player
 ; presses the reset sequence (A+B+SEL+START).
