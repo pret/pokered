@@ -13,14 +13,16 @@ WriteDMACodeToHRAM::
 	ret
 
 DMARoutine:
+LOAD "OAM DMA", HRAM
+hDMARoutine::
 	; initiate DMA
 	ld a, HIGH(wOAMBuffer)
 	ldh [rDMA], a
-
 	; wait for DMA to finish
 	ld a, $28
 .wait
 	dec a
 	jr nz, .wait
 	ret
+ENDL
 DMARoutineEnd:
