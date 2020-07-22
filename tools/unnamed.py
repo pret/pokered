@@ -81,7 +81,7 @@ for objfile in objects:
     elif magic == b'RGB9':
         obj_ver = 10 + unpack_file("<I", f)[0]
 
-    if obj_ver not in [6, 10, 11, 12, 13]:
+    if obj_ver not in [6, 10, 11, 12, 13, 15]:
         print("Error: File '%s' is of an unknown format." % objfile, file=stderr)
         exit(1)
 
