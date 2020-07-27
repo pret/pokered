@@ -1,7 +1,7 @@
-; pokered requires rgbds 0.4.0 or newer.
+; pokered requires rgbds 0.4.1 or newer.
 MAJOR EQU 0
 MINOR EQU 4
-PATCH EQU 0
+PATCH EQU 1
 
 IF !DEF(__RGBDS_MAJOR__) || !DEF(__RGBDS_MINOR__) || !DEF(__RGBDS_PATCH__)
 	fail "pokered requires rgbds {MAJOR}.{MINOR}.{PATCH} or newer."
