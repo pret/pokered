@@ -53,7 +53,7 @@ SpriteFacingAndAnimationTable:
 
 .FlippedOAM:
 	; y, x, attributes
-	db 0, 8, OAMFLAG_VFLIPPED ; top left
-	db 0, 0, OAMFLAG_VFLIPPED ; top right
-	db 8, 8, OAMFLAG_VFLIPPED | OAMFLAG_CANBEMASKED ; bottom left
-	db 8, 0, OAMFLAG_VFLIPPED | OAMFLAG_CANBEMASKED | OAMFLAG_ENDOFDATA ; bottom right
+	db 0, 8, OAMFLAG_HFLIPPED ; top left
+	db 0, 0, OAMFLAG_HFLIPPED ; top right
+	db 8, 8, OAMFLAG_HFLIPPED | OAMFLAG_CANBEMASKED ; bottom left
+	db 8, 0, OAMFLAG_HFLIPPED | OAMFLAG_CANBEMASKED | OAMFLAG_ENDOFDATA ; bottom right
