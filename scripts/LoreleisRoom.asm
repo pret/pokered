@@ -133,7 +133,7 @@ LoreleiTrainerHeader0:
 LoreleiText1:
 	text_asm
 	ld hl, LoreleiTrainerHeader0
-	call TalkToTrainer
+	call TalkToTrainerOriginal
 	jp TextScriptEnd
 
 LoreleiBeforeBattleText:

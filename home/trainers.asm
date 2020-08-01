@@ -86,7 +86,7 @@ ReadTrainerHeaderInfo::
 TrainerFlagAction::
 	predef_jump FlagActionPredef
 
-TalkToTrainer::
+TalkToTrainerOriginal::
 	call StoreTrainerHeaderPointer
 	xor a
 	call ReadTrainerHeaderInfo     ; read flag's bit
@@ -98,8 +98,7 @@ TalkToTrainer::
 	call TrainerFlagAction      ; read trainer's flag
 	ld a, c
 	and a
-	;jr z, .trainerNotYetFought     ; test trainer's flag
-	jp .trainerNotYetFought ; Allow re-battling
+	jr z, .trainerNotYetFought     ; test trainer's flag
 	ld a, $6
 	call ReadTrainerHeaderInfo     ; print after battle text
 	jp PrintText

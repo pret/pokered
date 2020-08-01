@@ -131,7 +131,7 @@ BrunoTrainerHeader0:
 BrunoText1:
 	text_asm
 	ld hl, BrunoTrainerHeader0
-	call TalkToTrainer
+	call TalkToTrainerOriginal
 	jp TextScriptEnd
 
 BrunoBeforeBattleText:

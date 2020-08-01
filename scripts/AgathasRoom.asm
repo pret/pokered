@@ -134,7 +134,7 @@ AgathaTrainerHeader0:
 AgathaText1:
 	text_asm
 	ld hl, AgathaTrainerHeader0
-	call TalkToTrainer
+	call TalkToTrainerOriginal
 	jp TextScriptEnd
 
 AgathaBeforeBattleText:

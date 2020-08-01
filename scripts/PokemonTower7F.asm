@@ -236,19 +236,19 @@ PokemonTower7TrainerHeader2:
 PokemonTower7Text1:
 	text_asm
 	ld hl, PokemonTower7TrainerHeader0
-	call TalkToTrainer
+	call TalkToTrainerOriginal
 	jp TextScriptEnd
 
 PokemonTower7Text2:
 	text_asm
 	ld hl, PokemonTower7TrainerHeader1
-	call TalkToTrainer
+	call TalkToTrainerOriginal
 	jp TextScriptEnd
 
 PokemonTower7Text3:
 	text_asm
 	ld hl, PokemonTower7TrainerHeader2
-	call TalkToTrainer
+	call TalkToTrainerOriginal
 	jp TextScriptEnd
 
 PokemonTower7FujiText:
