@@ -144,7 +144,7 @@ LanceTrainerHeader0:
 LanceText1:
 	text_asm
 	ld hl, LanceTrainerHeader0
-	call TalkToTrainer
+	call TalkToTrainerOriginal
 	jp TextScriptEnd
 
 LanceBeforeBattleText:

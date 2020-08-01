@@ -189,17 +189,10 @@ RocketHideout4AfterBattleText3:
 	text_far _RocketHide4AfterBattleText3
 	text_end
 
-; It's easier to just have this rocket drop the lift key without battling him.
 RocketHideout4Text4:
 	text_asm
-	ld hl, RocketHideout4Text_455ec
-	call PrintText
-	CheckAndSetEvent EVENT_ROCKET_DROPPED_LIFT_KEY
-	jr nz, .asm_455e9
-	ld a, HS_ROCKET_HIDEOUT_B4F_ITEM_5
-	ld [wMissableObjectIndex], a
-	predef ShowObject
-.asm_455e9
+	ld hl, RocketHideout4TrainerHeader2
+	call TalkToTrainerOriginal
 	jp TextScriptEnd
 
 RocketHideout4BattleText4:
