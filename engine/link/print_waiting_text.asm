@@ -16,5 +16,12 @@ PrintWaitingText::
 	ld c, 50
 	jp DelayFrames
 
+IF DEF(_ENGLISH)
 WaitingText:
 	db "Waiting...!@"
+ENDC
+
+IF DEF(_GERMAN)
+WaitingText:
+	db "BITTE WARTEN…@"
+ENDC

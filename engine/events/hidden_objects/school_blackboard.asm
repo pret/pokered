@@ -67,11 +67,21 @@ LinkCableHelpText2:
 	text_far _LinkCableHelpText2
 	text_end
 
+IF DEF(_ENGLISH)
 HowToLinkText:
 	db   "HOW TO LINK"
 	next "COLOSSEUM"
 	next "TRADE CENTER"
 	next "STOP READING@"
+ENDC
+
+IF DEF(_GERMAN)
+HowToLinkText:
+	db   "LINK-INFO"
+	next "KOLOSSEUM"
+	next "HANDELSCENTER"
+	next "VERLASSEN@"
+ENDC
 
 LinkCableInfoTexts:
 	dw LinkCableInfoText1
@@ -184,6 +194,7 @@ ViridianSchoolBlackboardText2:
 	text_far _ViridianSchoolBlackboardText2
 	text_end
 
+IF DEF(_ENGLISH)
 StatusAilmentText1:
 	db   " SLP"
 	next " PSN"
@@ -193,6 +204,19 @@ StatusAilmentText2:
 	db   " BRN"
 	next " FRZ"
 	next " QUIT@"
+ENDC
+
+IF DEF(_GERMAN)
+StatusAilmentText1:
+	db   " SLF"
+	next " GIF"
+	next " PAR@"
+
+StatusAilmentText2:
+	db   " BRT"
+	next " GFR"
+	next " ZUR.@"
+ENDC
 
 	db "@" ; unused
 

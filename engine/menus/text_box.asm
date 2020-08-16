@@ -342,7 +342,15 @@ DisplayTwoOptionMenu:
 
 TwoOptionMenu_SaveScreenTiles:
 	ld de, wBuffer
+
+IF DEF(_ENGLISH)
 	lb bc, 5, 6
+ENDC
+
+IF DEF(_GERMAN)
+	lb bc, 5, 7
+ENDC
+
 .loop
 	ld a, [hli]
 	ld [de], a
@@ -350,17 +358,41 @@ TwoOptionMenu_SaveScreenTiles:
 	dec c
 	jr nz, .loop
 	push bc
+
+IF DEF(_ENGLISH)
 	ld bc, SCREEN_WIDTH - 6
+ENDC
+
+IF DEF(_GERMAN)
+	ld bc, SCREEN_WIDTH - 7
+ENDC
+
 	add hl, bc
 	pop bc
+
+IF DEF(_ENGLISH)
 	ld c, $6
+ENDC
+
+IF DEF(_GERMAN)
+	ld c, $7
+ENDC
+
 	dec b
 	jr nz, .loop
 	ret
 
 TwoOptionMenu_RestoreScreenTiles:
 	ld de, wBuffer
+
+IF DEF(_ENGLISH)
 	lb bc, 5, 6
+ENDC
+
+IF DEF(_GERMAN)
+	lb bc, 5, 7
+ENDC
+
 .loop
 	ld a, [de]
 	inc de
@@ -368,10 +400,26 @@ TwoOptionMenu_RestoreScreenTiles:
 	dec c
 	jr nz, .loop
 	push bc
+
+IF DEF(_ENGLISH)
 	ld bc, SCREEN_WIDTH - 6
+ENDC
+
+IF DEF(_GERMAN)
+	ld bc, SCREEN_WIDTH - 7
+ENDC
+
 	add hl, bc
 	pop bc
+
+IF DEF(_ENGLISH)
 	ld c, 6
+ENDC
+
+IF DEF(_GERMAN)
+	ld c, 7
+ENDC
+
 	dec b
 	jr nz, .loop
 	call UpdateSprites
@@ -501,10 +549,19 @@ DisplayFieldMoveMonMenu:
 
 INCLUDE "data/moves/field_move_names.asm"
 
+IF DEF(_ENGLISH)
 PokemonMenuEntries:
 	db   "STATS"
 	next "SWITCH"
 	next "CANCEL@"
+ENDC
+
+IF DEF(_GERMAN)
+PokemonMenuEntries:
+	db   "STATUS"
+	next "TAUSCH"
+	next "ZURÜCK@"
+ENDC
 
 GetMonFieldMoves:
 	ld a, [wWhichPokemon]

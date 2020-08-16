@@ -48,6 +48,7 @@ TrainerNamePointers:
 	dw wTrainerName
 	dw wTrainerName
 
+IF DEF(_ENGLISH)
 .YoungsterName:     db "YOUNGSTER@"
 .BugCatcherName:    db "BUG CATCHER@"
 .LassName:          db "LASS@"
@@ -69,3 +70,28 @@ TrainerNamePointers:
 .RocketName:        db "ROCKET@"
 .CooltrainerMName:  db "COOLTRAINER♂@"
 .CooltrainerFName:  db "COOLTRAINER♀@"
+ENDC
+
+IF DEF(_GERMAN)
+.YoungsterName:     db "TEENAGER@"
+.BugCatcherName:    db "KÄFERSAMMLER@"
+.LassName:          db "GÖRE@"
+.JrTrainerMName:    db "PFADFINDER@"
+.JrTrainerFName:    db "PFADFINDERIN@"
+.PokemaniacName:    db "#MANIAC@"
+.SuperNerdName:     db "STREBER@"
+.BurglarName:       db "DIEB@"
+.EngineerName:      db "MECHANIKER@"
+.UnusedJugglerName: db "JONGLEUR@"
+.SwimmerName:       db "SCHWIMMER@"
+.BeautyName:        db "SCHÖNHEIT@"
+.RockerName:        db "ROCKER@"
+.JugglerName:       db "JONGLEUR@"
+.BlackbeltName:     db "SCHWARZGURT@"
+.ProfOakName:       db "PROF.EICH@"
+.ChiefName:         db "CHIEF@"
+.ScientistName:     db "FORSCHER@"
+.RocketName:        db "ROCKET@"
+.CooltrainerMName:  db "TRAINER@"
+.CooltrainerFName:  db "TRAINERIN@"
+ENDC

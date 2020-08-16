@@ -172,6 +172,7 @@ PlaceCommandCharacter::
 	inc de
 	jp PlaceNextChar
 
+IF DEF(_ENGLISH)
 TMCharText::      db "TM@"
 TrainerCharText:: db "TRAINER@"
 PCCharText::      db "PC@"
@@ -180,6 +181,18 @@ PlacePOKeText::   db "POKé@"
 SixDotsCharText:: db "……@"
 EnemyText::       db "Enemy @"
 PlacePKMNText::   db "<PK><MN>@"
+ENDC
+
+IF DEF(_GERMAN)
+PCCharText::      db "PC@"
+RocketCharText::  db "ROCKET@"
+SixDotsCharText:: db "……@"
+PlacePKMNText::   db "<PK><MN>@"
+TMCharText::      db "TM@"
+TrainerCharText:: db "TRAINER@"
+PlacePOKeText::   db "POKé@"
+EnemyText::       db "Gegn. @"
+ENDC
 
 ContText::
 	push de

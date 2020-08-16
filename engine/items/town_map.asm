@@ -131,8 +131,15 @@ LoadTownMap_Nest:
 	ld [hl], a
 	ret
 
+IF DEF(_ENGLISH)
 MonsNestText:
 	db "'s NEST@"
+ENDC
+
+IF DEF(_GERMAN)
+MonsNestText:
+	db " FUNDORT@"
+ENDC
 
 LoadTownMap_Fly::
 	call ClearSprites
@@ -243,8 +250,15 @@ LoadTownMap_Fly::
 	ld hl, wFlyLocationsList + 11
 	jr .pressedDown
 
+IF DEF(_ENGLISH)
 ToText:
 	db "To@"
+ENDC
+
+IF DEF(_GERMAN)
+ToText:
+	db " <to>@"
+ENDC
 
 BuildFlyLocationsList:
 	ld hl, wFlyLocationsList - 1
@@ -413,8 +427,15 @@ DisplayWildLocations:
 	ld bc, $a0
 	jp CopyData
 
+IF DEF(_ENGLISH)
 AreaUnknownText:
 	db " AREA UNKNOWN@"
+ENDC
+
+IF DEF(_GERMAN)
+AreaUnknownText:
+	db " GEBIET UNB.@"
+ENDC
 
 TownMapCoordsToOAMCoords:
 ; in: lower nybble of a = x, upper nybble of a = y
@@ -583,7 +604,13 @@ LoadTownMapEntry:
 
 INCLUDE "data/maps/town_map_entries.asm"
 
-INCLUDE "data/maps/names.asm"
+IF DEF(_ENGLISH)
+INCLUDE "data/text/text_en/map_names.asm"
+ENDC
+
+IF DEF(_GERMAN)
+INCLUDE "data/text/text_de/map_names.asm"
+ENDC
 
 MonNestIcon:
 	INCBIN "gfx/town_map/mon_nest_icon.1bpp"

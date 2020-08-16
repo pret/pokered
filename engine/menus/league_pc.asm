@@ -112,8 +112,15 @@ LeaguePCShowMon:
 	call PrintNumber
 	farjp HoFDisplayMonInfo
 
+IF DEF(_ENGLISH)
 HallOfFameNoText:
 	db "HALL OF FAME No   @"
+ENDC
+
+IF DEF(_GERMAN)
+HallOfFameNoText:
+	db "RUHMESHALLE Nr.@"
+ENDC
 
 AccessedHoFPCText:
 	text_far _AccessedHoFPCText

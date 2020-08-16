@@ -42,7 +42,14 @@ DisplayTitleScreen:
 	call FarCopyData2
 	ld hl, GamefreakLogoGraphics
 	ld de, vTitleLogo2 tile (16 + 5)
+
+IF DEF(_ENGLISH)
 	ld bc, 9 tiles
+ENDC
+
+IF DEF(_GERMAN)
+	ld bc, 10 tiles
+ENDC
 	ld a, BANK(GamefreakLogoGraphics)
 	call FarCopyData2
 	ld hl, PokemonLogoGraphics
@@ -110,8 +117,15 @@ DisplayTitleScreen:
 
 	jr .next
 
+IF DEF(_ENGLISH)
 .tileScreenCopyrightTiles
 	db $41,$42,$43,$42,$44,$42,$45,$46,$47,$48,$49,$4A,$4B,$4C,$4D,$4E ; ©'95.'96.'98 GAME FREAK inc.
+ENDC
+
+IF DEF(_GERMAN)
+.tileScreenCopyrightTiles
+	db $41,$42,$43,$44,$42,$43,$4F,$46,$47,$48,$49,$4A,$4B,$4C,$4D,$4E ; ©1995-1999 GAME FREAK inc.
+ENDC
 
 .next
 	call SaveScreenTilesToBuffer2
@@ -375,33 +389,66 @@ LoadCopyrightAndTextBoxTiles:
 LoadCopyrightTiles:
 	ld de, NintendoCopyrightLogoGraphics
 	ld hl, vChars2 tile $60
+
+IF DEF(_ENGLISH)
 	lb bc, BANK(NintendoCopyrightLogoGraphics), (GamefreakLogoGraphicsEnd - NintendoCopyrightLogoGraphics) / $10
+ENDC
+
+IF DEF(_GERMAN)
+	lb bc, BANK(NintendoCopyrightLogoGraphics), (NineTileEnd - NintendoCopyrightLogoGraphics) / $10
+ENDC
+
 	call CopyVideoData
 	hlcoord 2, 7
 	ld de, CopyrightTextString
 	jp PlaceString
 
+IF DEF(_ENGLISH)
 CopyrightTextString:
 	db   $60,$61,$62,$61,$63,$61,$64,$7F,$65,$66,$67,$68,$69,$6A             ; ©'95.'96.'98 Nintendo
 	next $60,$61,$62,$61,$63,$61,$64,$7F,$6B,$6C,$6D,$6E,$6F,$70,$71,$72     ; ©'95.'96.'98 Creatures inc.
 	next $60,$61,$62,$61,$63,$61,$64,$7F,$73,$74,$75,$76,$77,$78,$79,$7A,$7B ; ©'95.'96.'98 GAME FREAK inc.
 	db   "@"
+ENDC
+
+IF DEF(_GERMAN)
+CopyrightTextString:
+	db   $60,$61,$62,$63,$61,$62,$7C,$7F,$65,$66,$67,$68,$69,$6A             ; 1995-1999 Nintendo
+	next $60,$61,$62,$63,$61,$62,$7C,$7F,$6B,$6C,$6D,$6E,$6F,$70,$71,$72     ; 1995-1999 Creatures inc.
+	next $60,$61,$62,$63,$61,$62,$7C,$7F,$73,$74,$75,$76,$77,$78,$79,$7A,$7B ; 1995-1999 GAME FREAK inc.
+	db   "@"
+ENDC
 
 INCLUDE "data/pokemon/title_mons.asm"
 
 ; prints version text (red, blue)
 PrintGameVersionOnTitleScreen:
+
+IF DEF(_ENGLISH)
 	hlcoord 7, 8
+ENDC
+
+IF DEF(_GERMAN)
+	hlcoord 6, 8
+ENDC
+
 	ld de, VersionOnTitleScreenText
 	jp PlaceString
 
 ; these point to special tiles specifically loaded for that purpose and are not usual text
+IF DEF(_ENGLISH)
 VersionOnTitleScreenText:
 IF DEF(_RED)
 	db $60,$61,$7F,$65,$66,$67,$68,$69,"@" ; "Red Version"
 ENDC
 IF DEF(_BLUE)
 	db $61,$62,$63,$64,$65,$66,$67,$68,"@" ; "Blue Version"
+ENDC
+ENDC
+
+IF DEF(_GERMAN)
+VersionOnTitleScreenText:
+	db $60,$61,$62,$63,$64,$65,$66,$67,$68,$69,"@" ; "Rote Edition" / "Blaue Edition"
 ENDC
 
 NintenText: db "NINTEN@"

@@ -84,27 +84,28 @@ UnusedPlayerNameLengthFunc:
 	jr .loop
 
 DiplomaTextPointersAndCoords:
-	dw DiplomaText
+	dw DiplomaTitle
 	dwcoord 5, 2
-	dw DiplomaPlayer
+	dw DiplomaHeader1
 	dwcoord 3, 4
-	dw DiplomaEmptyText
+	dw DiplomaHeader2
 	dwcoord 15, 4
-	dw DiplomaCongrats
+	dw DiplomaBody
 	dwcoord 2, 6
 	dw DiplomaGameFreak
 	dwcoord 9, 16
 
-DiplomaText:
+IF DEF(_ENGLISH)
+DiplomaTitle:
 	db CIRCLE_TILE_ID, "Diploma", CIRCLE_TILE_ID, "@"
 
-DiplomaPlayer:
+DiplomaHeader1:
 	db "Player@"
 
-DiplomaEmptyText:
+DiplomaHeader2:
 	db "@"
 
-DiplomaCongrats:
+DiplomaBody:
 	db   "Congrats! This"
 	next "diploma certifies"
 	next "that you have"
@@ -113,3 +114,24 @@ DiplomaCongrats:
 
 DiplomaGameFreak:
 	db "GAME FREAK@"
+ENDC
+
+IF DEF(_GERMAN)
+DiplomaTitle:
+	db CIRCLE_TILE_ID, "Diplom", CIRCLE_TILE_ID, "@"
+
+DiplomaHeader1:
+	db "Herzlichen Glück-@"
+
+DiplomaHeader2:	
+	db "wunsch         !@"
+
+DiplomaBody:	
+	db   "Du hast es ge-"
+	next "schafft, den"
+	next "#DEX zu"
+	next "vervollständigen@"
+
+DiplomaGameFreak:	
+	db "GAME FREAK@"
+ENDC

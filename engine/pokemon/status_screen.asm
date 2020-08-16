@@ -204,6 +204,7 @@ NamePointers2:
 	dw wBoxMonNicks
 	dw wDayCareMonName
 
+IF DEF(_ENGLISH)
 Type1Text:
 	db   "TYPE1/"
 	next ""
@@ -225,6 +226,31 @@ StatusText:
 
 OKText:
 	db "OK@"
+ENDC
+
+IF DEF(_GERMAN)
+Type1Text:
+	db "TYP1/"
+	next ""
+	; fallthrough	
+Type2Text:
+	db "TYP2/"
+	next ""
+	; fallthrough	
+IDNoText:
+	db "<ID>№/"
+	next ""
+	; fallthrough	
+OTText:
+	db   "OT/"
+	next "@"
+	
+StatusText:
+	db "STATUS/@"
+	
+OKText:
+	db "OK@"
+ENDC
 
 ; Draws a line starting from hl high b and wide c
 DrawLineBox:
@@ -289,11 +315,21 @@ PrintStat:
 	add hl, de
 	ret
 
+IF DEF(_ENGLISH)
 StatsText:
 	db   "ATTACK"
 	next "DEFENSE"
 	next "SPEED"
 	next "SPECIAL@"
+ENDC
+
+IF DEF(_GERMAN)
+StatsText:
+	db   "ANGR"
+	next "VERT"
+	next "INIT"
+	next "SPEZ@"
+ENDC
 
 StatusScreen2:
 	ldh a, [hTilesetType]
@@ -329,8 +365,17 @@ StatusScreen2:
 	ld b, a ; Number of moves ?
 	hlcoord 11, 10
 	ld de, SCREEN_WIDTH * 2
+	
+IF DEF(_ENGLISH)
 	ld a, "<BOLD_P>"
 	call StatusScreen_PrintPP ; Print "PP"
+ENDC
+
+IF DEF (_GERMAN)
+	ld a, "A" ; overwritten by function
+	call StatusScreen_PrintAP ; Print "AP"
+ENDC
+
 	ld a, b
 	and a
 	jr z, .InitPP
@@ -463,9 +508,17 @@ CalcExpToLevelUp:
 	ld [hl], a
 	ret
 
+IF DEF(_ENGLISH)
 StatusScreenExpText:
 	db   "EXP POINTS"
 	next "LEVEL UP@"
+ENDC
+
+IF DEF(_GERMAN)
+StatusScreenExpText:
+	db   "EP-PUNKTE"
+	next "LEVEL UP@"
+ENDC
 
 StatusScreen_ClearName:
 	ld bc, 10
@@ -480,3 +533,15 @@ StatusScreen_PrintPP:
 	dec c
 	jr nz, StatusScreen_PrintPP
 	ret
+
+IF DEF (_GERMAN)
+StatusScreen_PrintAP:
+	ld a, "A"
+	ldi [hl], a
+	ld a, "P"
+	ldd [hl], a
+	add hl, de
+	dec c
+	jr nz, StatusScreen_PrintAP
+	ret
+ENDC

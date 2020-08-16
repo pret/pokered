@@ -1239,6 +1239,11 @@ wAIItem::
 wUsedItemOnWhichPokemon::
 	ds 1
 
+IF DEF(_GERMAN)
+; ???
+	ds 5
+ENDC
+
 wAnimSoundID::
 ; sound ID during battle animations
 	ds 1

@@ -2030,20 +2030,44 @@ DisplayBattleMenu::
 	ld bc, NAME_LENGTH
 	call CopyData
 ; the following simulates the keystrokes by drawing menus on screen
+IF DEF(_ENGLISH)
 	hlcoord 9, 14
+ENDC
+
+IF DEF(_GERMAN)
+	hlcoord 7, 14
+ENDC
+
 	ld [hl], "▶"
 	ld c, 80
 	call DelayFrames
 	ld [hl], " "
+
+IF DEF(_ENGLISH)
 	hlcoord 9, 16
+ENDC
+
+IF DEF(_GERMAN)
+	hlcoord 7, 16
+ENDC
+
 	ld [hl], "▶"
 	ld c, 50
 	call DelayFrames
 	ld [hl], "▷"
 	ld a, $2 ; select the "ITEM" menu
 	jp .upperLeftMenuItemWasNotSelected
+
+IF DEF(_ENGLISH)
 .oldManName
 	db "OLD MAN@"
+ENDC
+
+IF DEF(_GERMAN)
+.oldManName
+	db "GREIS@"
+ENDC
+
 .handleBattleMenuInput
 	ld a, [wBattleAndStartSavedMenuItem]
 	ld [wCurrentMenuItem], a
@@ -2060,13 +2084,31 @@ DisplayBattleMenu::
 	ld a, " "
 	jr z, .safariLeftColumn
 ; put cursor in left column for normal battle menu (i.e. when it's not a Safari battle)
+IF DEF(_ENGLISH)
 	ldcoord_a 15, 14 ; clear upper cursor position in right column
 	ldcoord_a 15, 16 ; clear lower cursor position in right column
 	ld b, $9 ; top menu item X
+ENDC
+
+IF DEF(_GERMAN)
+	ldcoord_a 12, 14 ; clear upper cursor position in right column
+	ldcoord_a 12, 16 ; clear lower cursor position in right column
+	ld b, $7 ; top menu item X
+ENDC
+
 	jr .leftColumn_WaitForInput
 .safariLeftColumn
+
+IF DEF(_ENGLISH)
 	ldcoord_a 13, 14
 	ldcoord_a 13, 16
+ENDC
+
+IF DEF(_GERMAN)
+	ldcoord_a 13, 13
+	ldcoord_a 13, 15
+ENDC
+
 	hlcoord 7, 14
 	ld de, wNumSafariBalls
 	lb bc, 1, 2
@@ -2093,9 +2135,19 @@ DisplayBattleMenu::
 	ld a, " "
 	jr z, .safariRightColumn
 ; put cursor in right column for normal battle menu (i.e. when it's not a Safari battle)
+
+IF DEF(_ENGLISH)
 	ldcoord_a 9, 14 ; clear upper cursor position in left column
 	ldcoord_a 9, 16 ; clear lower cursor position in left column
 	ld b, $f ; top menu item X
+ENDC
+
+IF DEF(_GERMAN)
+	ldcoord_a 7, 14 ; clear upper cursor position in left column
+	ldcoord_a 7, 16 ; clear lower cursor position in left column
+	ld b, $c ; top menu item X
+ENDC
+
 	jr .rightColumn_WaitForInput
 .safariRightColumn
 	ldcoord_a 1, 14 ; clear upper cursor position in left column
@@ -2104,7 +2156,15 @@ DisplayBattleMenu::
 	ld de, wNumSafariBalls
 	lb bc, 1, 2
 	call PrintNumber
+	
+IF DEF(_ENGLISH)
 	ld b, $d ; top menu item X
+ENDC
+
+IF DEF(_GERMAN)
+	ld b, $c ; top menu item X
+ENDC
+
 .rightColumn_WaitForInput
 	ld hl, wTopMenuItemY
 	ld a, $e
@@ -2674,8 +2734,16 @@ MoveDisabledText:
 	text_far _MoveDisabledText
 	text_end
 
+IF DEF(_ENGLISH)
 WhichTechniqueString:
 	db "WHICH TECHNIQUE?@"
+ENDC
+
+IF DEF(_GERMAN)
+WhichTechniqueString:
+	db   "Welche attacke?"
+	next "                 @"
+ENDC
 
 SelectMenuItem_CursorUp:
 	ld a, [wCurrentMenuItem]
@@ -2894,11 +2962,21 @@ PrintMenuItem:
 	ldh [hAutoBGTransferEnabled], a
 	jp Delay3
 
+IF DEF(_ENGLISH)
 DisabledText:
 	db "disabled!@"
 
 TypeText:
 	db "TYPE@"
+ENDC
+
+IF DEF(_GERMAN)
+DisabledText:
+	db "BLOCKIERT@"
+	
+TypeText:
+	db "TYP@"
+ENDC
 
 SelectEnemyMove:
 	ld a, [wLinkState]
@@ -6797,6 +6875,8 @@ InitWildBattle:
 	ld [hli], a   ; write front sprite pointer
 	ld [hl], b
 	ld hl, wEnemyMonNick  ; set name to "GHOST"
+
+IF DEF(_ENGLISH)
 	ld a, "G"
 	ld [hli], a
 	ld a, "H"
@@ -6808,6 +6888,22 @@ InitWildBattle:
 	ld a, "T"
 	ld [hli], a
 	ld [hl], "@"
+ENDC
+
+IF DEF(_GERMAN)
+	ld a, "G"
+	ld [hli], a
+	ld a, "E"
+	ld [hli], a
+	ld a, "I"
+	ld [hli], a
+	ld a, "S"
+	ld [hli], a
+	ld a, "T"
+	ld [hli], a
+	ld [hl], "@"
+ENDC
+
 	ld a, [wcf91]
 	push af
 	ld a, MON_GHOST

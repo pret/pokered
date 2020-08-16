@@ -74,6 +74,7 @@ EndOfBattle:
 	ld [wDestinationWarpID], a
 	ret
 
+IF DEF(_ENGLISH)
 YouWinText:
 	db "YOU WIN@"
 
@@ -82,6 +83,18 @@ YouLoseText:
 
 DrawText:
 	db "  DRAW@"
+ENDC
+
+IF DEF(_GERMAN)
+YouWinText:
+	db "GEWONNEN@"
+	
+YouLoseText:
+	db "VERLOREN@"
+	
+DrawText:
+	db "UNENTSCHIEDEN@"
+ENDC
 
 PickUpPayDayMoneyText:
 	text_far _PickUpPayDayMoneyText

@@ -91,8 +91,15 @@ AnimateHallOfFame:
 	res 3, [hl]
 	ret
 
+IF DEF(_ENGLISH)
 HallOfFameText:
 	db "HALL OF FAME@"
+ENDC
+
+IF DEF(_GERMAN)
+HallOfFameText:
+	db "RUHMESHALLE@"
+ENDC
 
 HoFShowMonOrPlayer:
 	call ClearScreen
@@ -177,10 +184,19 @@ HoFDisplayMonInfo:
 	ld a, [wHoFMonSpecies]
 	jp PlayCry
 
+IF DEF(_ENGLISH)
 HoFMonInfoText:
 	db   "LEVEL/"
 	next "TYPE1/"
 	next "TYPE2/@"
+ENDC
+
+IF DEF(_GERMAN)
+HoFMonInfoText:
+	db   "LEVEL/"
+	next "TYP1/"
+	next "TYP2/"
+ENDC
 
 HoFLoadPlayerPics:
 	ld de, RedPicFront
@@ -250,11 +266,21 @@ HoFPrintTextAndDelay:
 	ld c, 120
 	jp DelayFrames
 
+IF DEF(_ENGLISH)
 HoFPlayTimeText:
 	db "PLAY TIME@"
 
 HoFMoneyText:
 	db "MONEY@"
+ENDC
+
+IF DEF(_GERMAN)
+HoFPlayTimeText:
+	db "SPIELZEIT@"
+
+HoFMoneyText:
+	db "GELD@"
+ENDC
 
 DexSeenOwnedText:
 	text_far _DexSeenOwnedText

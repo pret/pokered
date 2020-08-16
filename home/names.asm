@@ -101,10 +101,19 @@ GetMachineName::
 	pop hl
 	ret
 
+IF DEF(_ENGLISH)
 TechnicalPrefix::
 	db "TM"
 HiddenPrefix::
 	db "HM"
+ENDC
+
+IF DEF(_GERMAN)
+TechnicalPrefix::
+	db "TM"
+HiddenPrefix::
+	db "VM"
+ENDC
 
 ; sets carry if item is HM, clears carry if item is not HM
 ; Input: a = item ID

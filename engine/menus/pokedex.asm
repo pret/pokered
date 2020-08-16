@@ -359,6 +359,7 @@ DrawPokedexVerticalLine:
 	jr nz, .loop
 	ret
 
+IF DEF(_ENGLISH)
 PokedexSeenText:
 	db "SEEN@"
 
@@ -373,6 +374,24 @@ PokedexMenuItemsText:
 	next "CRY"
 	next "AREA"
 	next "QUIT@"
+ENDC
+
+IF DEF(_GERMAN)
+PokedexSeenText:
+	db "GES@"
+	
+PokedexOwnText:
+	db "BES@"
+	
+PokedexContentsText:
+	db "INHALT@"
+	
+PokedexMenuItemsText:
+	db   "DATA"
+	next "RUF"
+	next "GEB."
+	next "ZUR.@"
+ENDC
 
 ; tests if a pokemon's bit is set in the seen or owned pokemon bit fields
 ; INPUT:
@@ -515,6 +534,8 @@ ShowPokedexDataInternal:
 	jp z, .waitForButtonPress ; if the pokemon has not been owned, don't print the height, weight, or description
 	inc de ; de = address of feet (height)
 	ld a, [de] ; reads feet, but a is overwritten without being used
+
+IF DEF(_ENGLISH)
 	hlcoord 12, 6
 	lb bc, 1, 2
 	call PrintNumber ; print feet (height)
@@ -527,6 +548,25 @@ ShowPokedexDataInternal:
 	call PrintNumber ; print inches (height)
 	ld a, "″"
 	ld [hl], a
+ENDC
+
+IF DEF(_GERMAN) ; + all european languages?
+	push af
+	hlcoord 13, 6
+	lb bc, 1, 3
+	call PrintNumber ; print meters (height)
+	hlcoord 14, 6
+	pop af
+	cp 10
+	jr nc, .skipLeadingZero
+	ld [hl], "0" ; if the height is less than 10, put a 0 before the decimal point
+.skipLeadingZero
+	inc hl
+	ld a, [hli]
+	ld [hld], a ; make space for the decimal point by moving the last digit forward one tile
+	ld [hl], "⠄" ; decimal point tile
+ENDC
+
 ; now print the weight (note that weight is stored in tenths of pounds internally)
 	inc de
 	inc de
@@ -544,8 +584,17 @@ ShowPokedexDataInternal:
 	ld a, [de] ; a = lower byte of weight
 	ld [hl], a ; store lower byte of weight in [hDexWeight + 1]
 	ld de, hDexWeight
+
+IF DEF(_ENGLISH)
 	hlcoord 11, 8
 	lb bc, 2, 5 ; 2 bytes, 5 digits
+ENDC
+
+IF DEF(_GERMAN)
+	hlcoord 12, 8
+	lb bc, 2, 4 ; 2 bytes, 4 digits
+ENDC
+
 	call PrintNumber ; print weight
 	hlcoord 14, 8
 	ldh a, [hDexWeight + 1]
@@ -589,9 +638,17 @@ ShowPokedexDataInternal:
 	ldh [rNR50], a
 	ret
 
+IF DEF(_ENGLISH)
 HeightWeightText:
 	db   "HT  ?′??″"
 	next "WT   ???lb@"
+ENDC
+
+IF DEF(_GERMAN)
+HeightWeightText:
+	db   "GR.  ???",$60
+	next "GEW  ???",$61,$62,"@"
+ENDC
 
 ; XXX does anything point to this?
 PokeText:
@@ -621,7 +678,13 @@ DrawTileLine:
 	pop bc
 	ret
 
-INCLUDE "data/pokemon/dex_entries.asm"
+IF DEF(_ENGLISH)
+INCLUDE "data/pokemon/text/text_en/dex_entries.asm"
+ENDC
+
+IF DEF(_GERMAN)
+INCLUDE "data/pokemon/text/text_de/dex_entries.asm"
+ENDC
 
 PokedexToIndex:
 	; converts the Pokédex number at wd11e to an index

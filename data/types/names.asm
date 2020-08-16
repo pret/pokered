@@ -22,6 +22,7 @@ ENDR
 	dw .Ice
 	dw .Dragon
 
+IF DEF(_ENGLISH)
 .Normal:   db "NORMAL@"
 .Fighting: db "FIGHTING@"
 .Flying:   db "FLYING@"
@@ -38,3 +39,23 @@ ENDR
 .Bug:      db "BUG@"
 .Ghost:    db "GHOST@"
 .Dragon:   db "DRAGON@"
+ENDC
+
+IF DEF(_GERMAN)
+.Normal:   db "NORMAL@"
+.Fighting: db "KAMPF@"
+.Flying:   db "FLUG@"
+.Poison:   db "GIFT@"
+.Fire:     db "FEUER@"
+.Water:    db "WASSER@"
+.Grass:    db "PFLANZE@"
+.Electric: db "ELEKTRO@"
+.Psychic:  db "PSYCHO@"
+.Ice:      db "EIS@"
+.Ground:   db "BODEN@"
+.Rock:     db "GESTEIN@"
+.Bird:     db "VOGEL@"
+.Bug:      db "KÄFER@"
+.Ghost:    db "GEIST@"
+.Dragon:   db "DRACHEN@"
+ENDC

@@ -13,8 +13,17 @@ AskName:
 	call GetMonName
 	ld hl, DoYouWantToNicknameText
 	call PrintText
+
+IF DEF(_ENGLISH)
 	hlcoord 14, 7
 	lb bc, 8, 15
+ENDC
+
+IF DEF(_GERMAN)
+	hlcoord 13, 7
+	lb bc, 8, 14
+ENDC
+
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
@@ -323,6 +332,7 @@ DisplayNamingScreen:
 	ld [wTopMenuItemX], a
 	jp EraseMenuCursor
 
+IF DEF(_ENGLISH)
 LoadEDTile:
 	ld de, ED_Tile
 	ld hl, vFont tile $70
@@ -330,6 +340,19 @@ LoadEDTile:
 	; to fix the graphical bug on poor emulators
 	;lb bc, BANK(ED_Tile), (ED_TileEnd - ED_Tile) / $8
 	jp CopyVideoDataDouble
+ENDC
+
+IF DEF(_GERMAN) ; all european builds?
+LoadEDTile:
+; code from the english build results in a corrupted ED tile
+	call DisableLCD
+	ld de, vFont + $700
+	ld hl, ED_Tile
+	ld bc, $8
+	ld a, $1
+	call FarCopyDataDouble
+	jp EnableLCD
+ENDC
 
 ED_Tile:
 	INCBIN "gfx/font/ED.1bpp"
@@ -365,7 +388,13 @@ PrintAlphabet:
 	ldh [hAutoBGTransferEnabled], a
 	jp Delay3
 
-INCLUDE "data/text/alphabets.asm"
+IF DEF(_ENGLISH)
+INCLUDE "data/text/text_en/alphabets.asm"
+ENDC
+
+IF DEF(_GERMAN)
+INCLUDE "data/text/text_de/alphabets.asm"
+ENDC
 
 PrintNicknameAndUnderscores:
 	call CalcStringLength
@@ -435,7 +464,13 @@ DakutensAndHandakutens:
 	ld [wNamingScreenLetter], a
 	ret
 
-INCLUDE "data/text/dakutens.asm"
+IF DEF(_ENGLISH)
+INCLUDE "data/text/text_en/dakutens.asm"
+ENDC
+
+IF DEF(_GERMAN)
+INCLUDE "data/text/text_de/dakutens.asm"
+ENDC
 
 ; calculates the length of the string at wcf4b and stores it in c
 CalcStringLength:
@@ -467,9 +502,11 @@ PrintNamingText:
 	call GetMonName
 	hlcoord 4, 1
 	call PlaceString
+IF DEF(_ENGLISH)
 	ld hl, $1
 	add hl, bc
 	ld [hl], "の" ; leftover from Japanese version; blank tile $c9 in English
+ENDC
 	hlcoord 1, 3
 	ld de, NicknameTextString
 	jr .placeString
@@ -481,6 +518,8 @@ PrintNamingText:
 .placeString
 	jp PlaceString
 
+
+IF DEF(_ENGLISH)
 YourTextString:
 	db "YOUR @"
 
@@ -492,3 +531,18 @@ NameTextString:
 
 NicknameTextString:
 	db "NICKNAME?@"
+ENDC
+
+IF DEF(_GERMAN)
+YourTextString:
+	db "DEIN @"
+	
+RivalsTextString:
+	db "GEGNER-@"
+	
+NameTextString:
+	db "NAME?@"
+	
+NicknameTextString:
+	db "ALIAS?@"
+ENDC

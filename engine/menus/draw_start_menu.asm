@@ -59,6 +59,7 @@ DrawStartMenu::
 	res 6, [hl] ; turn pauses between printing letters back on
 	ret
 
+IF DEF(_ENGLISH)
 StartMenuPokedexText:
 	db "POKéDEX@"
 
@@ -79,6 +80,31 @@ StartMenuExitText:
 
 StartMenuOptionText:
 	db "OPTION@"
+ENDC
+
+
+IF DEF(_GERMAN)
+StartMenuPokedexText:
+	db "#DEX@"
+	
+StartMenuPokemonText:
+	db "#MON@"
+	
+StartMenuItemText:
+	db "ITEM@"
+
+StartMenuSaveText:
+	db "SICHERN@"
+	
+StartMenuResetText:
+	db "RESET@"
+	
+StartMenuExitText:
+	db "ZURÜCK@"
+	
+StartMenuOptionText:
+	db "OPTION@"
+ENDC
 
 PrintStartMenuItem:
 	push hl

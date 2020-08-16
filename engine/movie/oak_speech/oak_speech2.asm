@@ -187,7 +187,13 @@ DisplayIntroNameTextBox:
 .namestring
 	db "NAME@"
 
-INCLUDE "data/player_names.asm"
+IF DEF(_ENGLISH)
+INCLUDE "data/text/text_en/player_names.asm"
+ENDC
+
+IF DEF(_GERMAN)
+INCLUDE "data/text/text_de/player_names.asm"
+ENDC
 
 GetDefaultName:
 ; a = name index
@@ -213,7 +219,13 @@ GetDefaultName:
 	ld bc, $14
 	jp CopyData
 
-INCLUDE "data/player_names_list.asm"
+IF DEF(_ENGLISH)
+INCLUDE "data/text/text_en/player_names_list.asm"
+ENDC
+
+IF DEF(_GERMAN)
+INCLUDE "data/text/text_de/player_names_list.asm"
+ENDC
 
 LinkMenuEmptyText:
 	text_end

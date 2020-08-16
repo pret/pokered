@@ -170,8 +170,15 @@ SaveSAV:
 	ld c, 30
 	jp DelayFrames
 
+IF DEF(_ENGLISH)
 NowSavingString:
 	db "Now saving...@"
+ENDC
+
+IF DEF(_GERMAN)
+NowSavingString:
+	db "Speichern...@"
+ENDC
 
 SaveSAVConfirm:
 	call PrintText
@@ -507,8 +514,15 @@ BoxNames:
 	next "BOX11"
 	next "BOX12@"
 
+IF DEF(_ENGLISH)
 BoxNoText:
 	db "BOX No.@"
+ENDC
+
+IF DEF(_GERMAN)
+BoxNoText:
+	db "BOX Nr.@"
+ENDC
 
 EmptyAllSRAMBoxes:
 ; marks all boxes in SRAM as empty (initialisation for the first time the

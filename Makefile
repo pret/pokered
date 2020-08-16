@@ -1,4 +1,6 @@
-roms := pokered.gbc pokeblue.gbc pokeblue_debug.gbc
+roms := pokered.gbc pokeblue.gbc pokeblue_debug.gbc pokerot.gbc pokeblau.gbc
+romsen := pokered.gbc pokeblue.gbc
+romsde := pokerot.gbc pokeblau.gbc
 
 rom_obj := \
 audio.o \
@@ -11,9 +13,22 @@ gfx/pics.o \
 gfx/sprites.o \
 gfx/tilesets.o
 
+rom_obj_de := \
+audio.o \
+home.o \
+main.o \
+maps.o \
+text_de.o \
+wram.o \
+gfx/pics.o \
+gfx/sprites.o \
+gfx/tilesets.o
+
 pokered_obj        := $(rom_obj:.o=_red.o)
 pokeblue_obj       := $(rom_obj:.o=_blue.o)
 pokeblue_debug_obj := $(rom_obj:.o=_blue_debug.o)
+pokerot_obj        := $(rom_obj_de:.o=_rot.o)
+pokeblau_obj       := $(rom_obj_de:.o=_blau.o)
 
 
 ### Build tools
@@ -37,18 +52,22 @@ RGBLINK ?= $(RGBDS)rgblink
 .SECONDEXPANSION:
 .PRECIOUS:
 .SECONDARY:
-.PHONY: all red blue blue_debug clean tidy compare tools
+.PHONY: all english german red blue rot blau blue_debug clean tidy compare tools
 
 all: $(roms)
+english: $(romsen)
+german: $(romsde)
 red:        pokered.gbc
 blue:       pokeblue.gbc
 blue_debug: pokeblue_debug.gbc
+rot:        pokerot.gbc
+blau:       pokeblau.gbc
 
 clean: tidy
 	find gfx \( -iname '*.1bpp' -o -iname '*.2bpp' -o -iname '*.pic' \) -delete
 
 tidy:
-	rm -f $(roms) $(pokered_obj) $(pokeblue_obj) $(pokeblue_debug_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym) rgbdscheck.o
+	rm -f $(roms) $(pokered_obj) $(pokeblue_obj) $(pokeblue_debug_obj) $(pokerot_obj) $(pokeblau_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym) rgbdscheck.o
 	$(MAKE) clean -C tools/
 
 compare: $(roms)
@@ -64,9 +83,11 @@ ifeq ($(DEBUG),1)
 RGBASMFLAGS += -E
 endif
 
-$(pokered_obj):        RGBASMFLAGS += -D _RED
-$(pokeblue_obj):       RGBASMFLAGS += -D _BLUE
-$(pokeblue_debug_obj): RGBASMFLAGS += -D _BLUE -D _DEBUG
+$(pokered_obj):        RGBASMFLAGS += -D _RED -D _ENGLISH
+$(pokeblue_obj):       RGBASMFLAGS += -D _BLUE -D _ENGLISH
+$(pokeblue_debug_obj): RGBASMFLAGS += -D _BLUE -D ENGLISH -D _DEBUG
+$(pokerot_obj):        RGBASMFLAGS += -D _RED -D _GERMAN
+$(pokeblau_obj):       RGBASMFLAGS += -D _BLUE -D _GERMAN
 
 rgbdscheck.o: rgbdscheck.asm
 	$(RGBASM) -o $@ $<
@@ -89,6 +110,8 @@ $(info $(shell $(MAKE) -C tools))
 $(foreach obj, $(pokered_obj), $(eval $(call DEP,$(obj),$(obj:_red.o=.asm))))
 $(foreach obj, $(pokeblue_obj), $(eval $(call DEP,$(obj),$(obj:_blue.o=.asm))))
 $(foreach obj, $(pokeblue_debug_obj), $(eval $(call DEP,$(obj),$(obj:_blue_debug.o=.asm))))
+$(foreach obj, $(pokerot_obj), $(eval $(call DEP,$(obj),$(obj:_rot.o=.asm))))
+$(foreach obj, $(pokeblau_obj), $(eval $(call DEP,$(obj),$(obj:_blau.o=.asm))))
 
 endif
 
@@ -99,10 +122,14 @@ endif
 pokered_pad        = 0x00
 pokeblue_pad       = 0x00
 pokeblue_debug_pad = 0xff
+pokerot_pad        = 0x00
+pokeblau_pad       = 0x00
 
 pokered_opt        = -jsv -n 0 -k 01 -l 0x33 -m 0x13 -r 03 -t "POKEMON RED"
 pokeblue_opt       = -jsv -n 0 -k 01 -l 0x33 -m 0x13 -r 03 -t "POKEMON BLUE"
 pokeblue_debug_opt = -jsv -n 0 -k 01 -l 0x33 -m 0x13 -r 03 -t "POKEMON BLUE"
+pokerot_opt        = -jsv -n 0 -k 01 -l 0x33 -m 0x1B -r 03 -t "POKEMON RED"
+pokeblau_opt       = -jsv -n 0 -k 01 -l 0x33 -m 0x1B -r 03 -t "POKEMON BLUE"
 
 %.gbc: $$(%_obj) layout.link
 	$(RGBLINK) -p $($*_pad) -d -m $*.map -n $*.sym -l layout.link -o $@ $(filter %.o,$^)

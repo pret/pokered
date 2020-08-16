@@ -10,8 +10,17 @@ INCLUDE "engine/battle/safari_zone.asm"
 INCLUDE "engine/movie/title.asm"
 INCLUDE "engine/pokemon/load_mon_data.asm"
 INCLUDE "data/items/prices.asm"
-INCLUDE "data/items/names.asm"
-INCLUDE "data/text/unused_names.asm"
+
+IF DEF(_ENGLISH)
+INCLUDE "data/text/text_en/item_names.asm"
+INCLUDE "data/text/text_en/unused_names.asm"
+ENDC
+
+IF DEF(_GERMAN)
+INCLUDE "data/text/text_de/item_names.asm"
+INCLUDE "data/text/text_de/unused_names.asm"
+ENDC
+
 INCLUDE "engine/gfx/sprite_oam.asm"
 INCLUDE "engine/gfx/oam_dma.asm"
 INCLUDE "engine/link/print_waiting_text.asm"
@@ -125,7 +134,14 @@ INCLUDE "engine/overworld/ledges.asm"
 
 SECTION "Pokémon Names", ROMX
 
-INCLUDE "data/pokemon/names.asm"
+IF DEF(_ENGLISH)
+INCLUDE "data/text/text_en/monster_names.asm"
+ENDC
+
+IF DEF(_GERMAN)
+INCLUDE "data/text/text_de/monster_names.asm"
+ENDC
+
 INCLUDE "engine/movie/oak_speech/clear_save.asm"
 INCLUDE "engine/events/elevator.asm"
 

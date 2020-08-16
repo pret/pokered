@@ -163,11 +163,21 @@ PrintPrizePrice:
 	call PrintBCDNumber
 	ret
 
+IF DEF(_ENGLISH)
 .CoinString:
 	db "COIN@"
 
 .SixSpacesString:
 	db "      @"
+ENDC
+
+IF DEF(_GERMAN)
+.CoinString:
+	db "MÜNZEN@"
+
+.SixSpacesString:
+	db "       @"
+ENDC
 
 LoadCoinsToSubtract:
 	ld a, [wWhichPrize]

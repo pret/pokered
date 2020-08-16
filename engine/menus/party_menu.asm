@@ -107,10 +107,21 @@ RedrawPartyMenu_::
 	pop bc
 	inc c
 	jp .loop
+
+IF DEF(_ENGLISH)
 .ableToLearnMoveText
 	db "ABLE@"
 .notAbleToLearnMoveText
 	db "NOT ABLE@"
+ENDC
+
+IF DEF(_GERMAN)
+.ableToLearnMoveText
+	db "OK@"
+.notAbleToLearnMoveText
+	db "NEIN@"
+ENDC
+
 .evolutionStoneMenu
 	push hl
 	ld hl, EvosMovesPointerTable
@@ -164,10 +175,21 @@ RedrawPartyMenu_::
 	call PlaceString
 	pop hl
 	jr .printLevel
+
+IF DEF(_ENGLISH)
 .ableToEvolveText
 	db "ABLE@"
 .notAbleToEvolveText
 	db "NOT ABLE@"
+ENDC
+
+IF DEF(_GERMAN)
+.ableToEvolveText
+	db "OK@"
+.notAbleToEvolveText
+	db "NEIN@"
+ENDC
+
 .afterDrawingMonEntries
 	ld b, SET_PAL_PARTY_MENU
 	call RunPaletteCommand
