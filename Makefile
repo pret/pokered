@@ -85,7 +85,7 @@ endif
 
 $(pokered_obj):        RGBASMFLAGS += -D _RED -D _ENGLISH
 $(pokeblue_obj):       RGBASMFLAGS += -D _BLUE -D _ENGLISH
-$(pokeblue_debug_obj): RGBASMFLAGS += -D _BLUE -D ENGLISH -D _DEBUG
+$(pokeblue_debug_obj): RGBASMFLAGS += -D _BLUE -D _ENGLISH -D _DEBUG
 $(pokerot_obj):        RGBASMFLAGS += -D _RED -D _GERMAN
 $(pokeblau_obj):       RGBASMFLAGS += -D _BLUE -D _GERMAN
 
