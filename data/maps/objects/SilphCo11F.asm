@@ -16,8 +16,4 @@ SilphCo11F_Object:
 	object SPRITE_ROCKET, 3, 16, STAY, UP, 4, OPP_ROCKET, 41
 	object SPRITE_ROCKET, 15, 9, STAY, UP, 5, OPP_ROCKET, 40
 
-	; warp-to
-	warp_to 9, 0, SILPH_CO_11F_WIDTH ; SILPH_CO_10F
-	warp_to 13, 0, SILPH_CO_11F_WIDTH ; SILPH_CO_ELEVATOR
-	warp_to 5, 5, SILPH_CO_11F_WIDTH
-	warp_to 3, 2, SILPH_CO_11F_WIDTH ; SILPH_CO_7F
+	def_warps_to SILPH_CO_11F

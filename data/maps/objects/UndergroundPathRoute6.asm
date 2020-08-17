@@ -11,7 +11,4 @@ UndergroundPathRoute6_Object:
 	def_objects
 	object SPRITE_GIRL, 2, 3, STAY, NONE, 1 ; person
 
-	; warp-to
-	warp_to 3, 7, UNDERGROUND_PATH_ROUTE_6_WIDTH
-	warp_to 4, 7, UNDERGROUND_PATH_ROUTE_6_WIDTH
-	warp_to 4, 4, UNDERGROUND_PATH_ROUTE_6_WIDTH ; UNDERGROUND_PATH_NORTH_SOUTH
+	def_warps_to UNDERGROUND_PATH_ROUTE_6

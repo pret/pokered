@@ -19,8 +19,4 @@ Route23_Object:
 	object SPRITE_GUARD, 8, 119, STAY, DOWN, 6 ; person
 	object SPRITE_GUARD, 8, 136, STAY, DOWN, 7 ; person
 
-	; warp-to
-	warp_to 7, 139, ROUTE_23_WIDTH ; ROUTE_22_GATE
-	warp_to 8, 139, ROUTE_23_WIDTH ; ROUTE_22_GATE
-	warp_to 4, 31, ROUTE_23_WIDTH ; VICTORY_ROAD_1F
-	warp_to 14, 31, ROUTE_23_WIDTH ; VICTORY_ROAD_2F
+	def_warps_to ROUTE_23

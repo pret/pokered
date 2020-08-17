@@ -20,6 +20,4 @@ OaksLab_Object:
 	object SPRITE_SCIENTIST, 2, 10, STAY, NONE, 10 ; person
 	object SPRITE_SCIENTIST, 8, 10, STAY, NONE, 11 ; person
 
-	; warp-to
-	warp_to 4, 11, OAKS_LAB_WIDTH
-	warp_to 5, 11, OAKS_LAB_WIDTH
+	def_warps_to OAKS_LAB

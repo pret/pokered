@@ -27,7 +27,4 @@ CeladonMart3F_Object:
 	object SPRITE_GAMEBOY_KID, 8, 2, STAY, DOWN, 4 ; person
 	object SPRITE_LITTLE_BOY, 2, 5, STAY, UP, 5 ; person
 
-	; warp-to
-	warp_to 12, 1, CELADON_MART_3F_WIDTH ; CELADON_MART_4F
-	warp_to 16, 1, CELADON_MART_3F_WIDTH ; CELADON_MART_2F
-	warp_to 1, 1, CELADON_MART_3F_WIDTH ; CELADON_MART_ELEVATOR
+	def_warps_to CELADON_MART_3F

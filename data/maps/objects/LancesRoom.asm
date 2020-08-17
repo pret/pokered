@@ -11,7 +11,4 @@ LancesRoom_Object:
 	def_objects
 	object SPRITE_LANCE, 6, 1, STAY, DOWN, 1, OPP_LANCE, 1
 
-	; warp-to
-	warp_to 24, 16, LANCES_ROOM_WIDTH ; AGATHAS_ROOM
-	warp_to 5, 0, LANCES_ROOM_WIDTH ; CHAMPIONS_ROOM
-	warp_to 6, 0, LANCES_ROOM_WIDTH ; CHAMPIONS_ROOM
+	def_warps_to LANCES_ROOM

@@ -11,7 +11,4 @@ DiglettsCaveRoute11_Object:
 	def_objects
 	object SPRITE_GAMBLER, 2, 3, STAY, NONE, 1 ; person
 
-	; warp-to
-	warp_to 2, 7, DIGLETTS_CAVE_ROUTE_11_WIDTH
-	warp_to 3, 7, DIGLETTS_CAVE_ROUTE_11_WIDTH
-	warp_to 4, 4, DIGLETTS_CAVE_ROUTE_11_WIDTH ; DIGLETTS_CAVE
+	def_warps_to DIGLETTS_CAVE_ROUTE_11

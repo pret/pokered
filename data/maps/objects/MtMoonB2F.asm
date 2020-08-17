@@ -20,8 +20,4 @@ MtMoonB2F_Object:
 	object SPRITE_POKE_BALL, 25, 21, STAY, NONE, 8, HP_UP
 	object SPRITE_POKE_BALL, 29, 5, STAY, NONE, 9, TM_MEGA_PUNCH
 
-	; warp-to
-	warp_to 25, 9, MT_MOON_B2F_WIDTH ; MT_MOON_B1F
-	warp_to 21, 17, MT_MOON_B2F_WIDTH ; MT_MOON_B1F
-	warp_to 15, 27, MT_MOON_B2F_WIDTH ; MT_MOON_B1F
-	warp_to 5, 7, MT_MOON_B2F_WIDTH ; MT_MOON_B1F
+	def_warps_to MT_MOON_B2F

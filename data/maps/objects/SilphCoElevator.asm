@@ -10,6 +10,4 @@ SilphCoElevator_Object:
 
 	def_objects
 
-	; warp-to
-	warp_to 1, 3, SILPH_CO_ELEVATOR_WIDTH
-	warp_to 2, 3, SILPH_CO_ELEVATOR_WIDTH
+	def_warps_to SILPH_CO_ELEVATOR

@@ -15,5 +15,4 @@ CopycatsHouse2F_Object:
 	object SPRITE_BIRD, 2, 0, STAY, DOWN, 4 ; person
 	object SPRITE_FAIRY, 1, 6, STAY, RIGHT, 5 ; person
 
-	; warp-to
-	warp_to 7, 1, COPYCATS_HOUSE_2F_WIDTH ; COPYCATS_HOUSE_1F
+	def_warps_to COPYCATS_HOUSE_2F

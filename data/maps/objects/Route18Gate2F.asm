@@ -11,5 +11,4 @@ Route18Gate2F_Object:
 	def_objects
 	object SPRITE_YOUNGSTER, 4, 2, WALK, LEFT_RIGHT, 1 ; person
 
-	; warp-to
-	warp_to 7, 7, ROUTE_18_GATE_2F_WIDTH ; ROUTE_18_GATE_1F
+	def_warps_to ROUTE_18_GATE_2F

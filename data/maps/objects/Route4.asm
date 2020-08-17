@@ -16,7 +16,4 @@ Route4_Object:
 	object SPRITE_COOLTRAINER_F, 63, 3, STAY, RIGHT, 2, OPP_LASS, 4
 	object SPRITE_POKE_BALL, 57, 3, STAY, NONE, 3, TM_WHIRLWIND
 
-	; warp-to
-	warp_to 11, 5, ROUTE_4_WIDTH ; MT_MOON_POKECENTER
-	warp_to 18, 5, ROUTE_4_WIDTH ; MT_MOON_1F
-	warp_to 24, 5, ROUTE_4_WIDTH ; MT_MOON_B1F
+	def_warps_to ROUTE_4

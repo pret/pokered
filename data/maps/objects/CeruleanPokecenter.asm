@@ -13,6 +13,4 @@ CeruleanPokecenter_Object:
 	object SPRITE_GENTLEMAN, 4, 3, STAY, DOWN, 3 ; person
 	object SPRITE_LINK_RECEPTIONIST, 11, 2, STAY, DOWN, 4 ; person
 
-	; warp-to
-	warp_to 3, 7, CERULEAN_POKECENTER_WIDTH
-	warp_to 4, 7, CERULEAN_POKECENTER_WIDTH
+	def_warps_to CERULEAN_POKECENTER

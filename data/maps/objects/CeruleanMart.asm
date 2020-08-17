@@ -12,6 +12,4 @@ CeruleanMart_Object:
 	object SPRITE_COOLTRAINER_M, 3, 4, WALK, UP_DOWN, 2 ; person
 	object SPRITE_COOLTRAINER_F, 6, 2, WALK, LEFT_RIGHT, 3 ; person
 
-	; warp-to
-	warp_to 3, 7, CERULEAN_MART_WIDTH
-	warp_to 4, 7, CERULEAN_MART_WIDTH
+	def_warps_to CERULEAN_MART

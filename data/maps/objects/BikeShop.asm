@@ -12,6 +12,4 @@ BikeShop_Object:
 	object SPRITE_MIDDLE_AGED_WOMAN, 5, 6, WALK, UP_DOWN, 2 ; person
 	object SPRITE_YOUNGSTER, 1, 3, STAY, UP, 3 ; person
 
-	; warp-to
-	warp_to 2, 7, BIKE_SHOP_WIDTH
-	warp_to 3, 7, BIKE_SHOP_WIDTH
+	def_warps_to BIKE_SHOP

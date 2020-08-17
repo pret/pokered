@@ -17,6 +17,4 @@ PokemonFanClub_Object:
 	object SPRITE_GENTLEMAN, 3, 1, STAY, DOWN, 5 ; person
 	object SPRITE_LINK_RECEPTIONIST, 5, 1, STAY, DOWN, 6 ; person
 
-	; warp-to
-	warp_to 2, 7, POKEMON_FAN_CLUB_WIDTH
-	warp_to 3, 7, POKEMON_FAN_CLUB_WIDTH
+	def_warps_to POKEMON_FAN_CLUB

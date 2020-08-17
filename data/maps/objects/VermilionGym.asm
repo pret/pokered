@@ -14,6 +14,4 @@ VermilionGym_Object:
 	object SPRITE_SAILOR, 0, 10, STAY, RIGHT, 4, OPP_SAILOR, 8
 	object SPRITE_GYM_GUIDE, 4, 14, STAY, DOWN, 5 ; person
 
-	; warp-to
-	warp_to 4, 17, VERMILION_GYM_WIDTH
-	warp_to 5, 17, VERMILION_GYM_WIDTH
+	def_warps_to VERMILION_GYM

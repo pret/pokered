@@ -10,6 +10,4 @@ HallOfFame_Object:
 	def_objects
 	object SPRITE_OAK, 5, 2, STAY, DOWN, 1 ; person
 
-	; warp-to
-	warp_to 4, 7, HALL_OF_FAME_WIDTH ; CHAMPIONS_ROOM
-	warp_to 5, 7, HALL_OF_FAME_WIDTH ; CHAMPIONS_ROOM
+	def_warps_to HALL_OF_FAME

@@ -17,7 +17,4 @@ VictoryRoad1F_Object:
 	object SPRITE_BOULDER, 14, 2, STAY, BOULDER_MOVEMENT_BYTE_2, 6 ; person
 	object SPRITE_BOULDER, 2, 10, STAY, BOULDER_MOVEMENT_BYTE_2, 7 ; person
 
-	; warp-to
-	warp_to 8, 17, VICTORY_ROAD_1F_WIDTH
-	warp_to 9, 17, VICTORY_ROAD_1F_WIDTH
-	warp_to 1, 1, VICTORY_ROAD_1F_WIDTH ; VICTORY_ROAD_2F
+	def_warps_to VICTORY_ROAD_1F

@@ -14,5 +14,4 @@ CeladonMartRoof_Object:
 	object SPRITE_SUPER_NERD, 10, 4, STAY, LEFT, 1 ; person
 	object SPRITE_LITTLE_GIRL, 5, 5, WALK, ANY_DIR, 2 ; person
 
-	; warp-to
-	warp_to 15, 2, CELADON_MART_ROOF_WIDTH ; CELADON_MART_5F
+	def_warps_to CELADON_MART_ROOF

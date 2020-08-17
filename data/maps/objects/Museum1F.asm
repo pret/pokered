@@ -17,9 +17,4 @@ Museum1F_Object:
 	object SPRITE_SCIENTIST, 17, 4, STAY, NONE, 4 ; person
 	object SPRITE_OLD_AMBER, 16, 2, STAY, NONE, 5 ; person
 
-	; warp-to
-	warp_to 10, 7, MUSEUM_1F_WIDTH
-	warp_to 11, 7, MUSEUM_1F_WIDTH
-	warp_to 16, 7, MUSEUM_1F_WIDTH
-	warp_to 17, 7, MUSEUM_1F_WIDTH
-	warp_to 7, 7, MUSEUM_1F_WIDTH ; MUSEUM_2F
+	def_warps_to MUSEUM_1F

@@ -8,5 +8,4 @@ RedsHouse2F_Object:
 
 	def_objects
 
-	; warp-to
-	warp_to 7, 1, REDS_HOUSE_2F_WIDTH
+	def_warps_to REDS_HOUSE_2F

@@ -12,6 +12,4 @@ PewterMart_Object:
 	object SPRITE_YOUNGSTER, 3, 3, WALK, UP_DOWN, 2 ; person
 	object SPRITE_SUPER_NERD, 5, 5, STAY, NONE, 3 ; person
 
-	; warp-to
-	warp_to 3, 7, PEWTER_MART_WIDTH
-	warp_to 4, 7, PEWTER_MART_WIDTH
+	def_warps_to PEWTER_MART

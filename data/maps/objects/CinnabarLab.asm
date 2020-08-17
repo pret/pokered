@@ -17,9 +17,4 @@ CinnabarLab_Object:
 	def_objects
 	object SPRITE_FISHING_GURU, 1, 3, STAY, NONE, 1 ; person
 
-	; warp-to
-	warp_to 2, 7, CINNABAR_LAB_WIDTH
-	warp_to 3, 7, CINNABAR_LAB_WIDTH
-	warp_to 8, 4, CINNABAR_LAB_WIDTH ; CINNABAR_LAB_TRADE_ROOM
-	warp_to 12, 4, CINNABAR_LAB_WIDTH ; CINNABAR_LAB_METRONOME_ROOM
-	warp_to 16, 4, CINNABAR_LAB_WIDTH ; CINNABAR_LAB_FOSSIL_ROOM
+	def_warps_to CINNABAR_LAB

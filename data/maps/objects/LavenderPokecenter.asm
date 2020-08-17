@@ -13,6 +13,4 @@ LavenderPokecenter_Object:
 	object SPRITE_LITTLE_GIRL, 2, 6, WALK, UP_DOWN, 3 ; person
 	object SPRITE_LINK_RECEPTIONIST, 11, 2, STAY, DOWN, 4 ; person
 
-	; warp-to
-	warp_to 3, 7, LAVENDER_POKECENTER_WIDTH
-	warp_to 4, 7, LAVENDER_POKECENTER_WIDTH
+	def_warps_to LAVENDER_POKECENTER

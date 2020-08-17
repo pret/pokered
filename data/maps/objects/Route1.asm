@@ -10,5 +10,7 @@ Route1_Object:
 	object SPRITE_YOUNGSTER, 5, 24, WALK, UP_DOWN, 1 ; person
 	object SPRITE_YOUNGSTER, 15, 13, WALK, LEFT_RIGHT, 2 ; person
 
-	; warp-to (unused)
+	def_warps_to ROUTE_1
+
+	; unused
 	warp_to 2, 7, 4

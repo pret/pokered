@@ -10,6 +10,4 @@ SSAnne3F_Object:
 	def_objects
 	object SPRITE_SAILOR, 9, 3, WALK, LEFT_RIGHT, 1 ; person
 
-	; warp-to
-	warp_to 0, 3, SS_ANNE_3F_WIDTH ; SS_ANNE_BOW
-	warp_to 19, 3, SS_ANNE_3F_WIDTH ; SS_ANNE_2F
+	def_warps_to SS_ANNE_3F

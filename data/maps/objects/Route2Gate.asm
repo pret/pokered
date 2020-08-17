@@ -13,8 +13,4 @@ Route2Gate_Object:
 	object SPRITE_SCIENTIST, 1, 4, STAY, LEFT, 1 ; person
 	object SPRITE_YOUNGSTER, 5, 4, WALK, LEFT_RIGHT, 2 ; person
 
-	; warp-to
-	warp_to 4, 0, ROUTE_2_GATE_WIDTH
-	warp_to 5, 0, ROUTE_2_GATE_WIDTH
-	warp_to 4, 7, ROUTE_2_GATE_WIDTH
-	warp_to 5, 7, ROUTE_2_GATE_WIDTH
+	def_warps_to ROUTE_2_GATE

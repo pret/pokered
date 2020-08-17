@@ -9,6 +9,4 @@ VermilionDock_Object:
 
 	def_objects
 
-	; warp-to
-	warp_to 14, 0, VERMILION_DOCK_WIDTH
-	warp_to 14, 2, VERMILION_DOCK_WIDTH ; SS_ANNE_1F
+	def_warps_to VERMILION_DOCK

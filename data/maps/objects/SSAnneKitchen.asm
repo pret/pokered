@@ -15,5 +15,4 @@ SSAnneKitchen_Object:
 	object SPRITE_COOK, 13, 10, STAY, NONE, 6 ; person
 	object SPRITE_COOK, 11, 13, STAY, UP, 7 ; person
 
-	; warp-to
-	warp_to 6, 0, SS_ANNE_KITCHEN_WIDTH ; SS_ANNE_1F
+	def_warps_to SS_ANNE_KITCHEN

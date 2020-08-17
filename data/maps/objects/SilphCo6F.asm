@@ -22,9 +22,4 @@ SilphCo6F_Object:
 	object SPRITE_POKE_BALL, 3, 12, STAY, NONE, 9, HP_UP
 	object SPRITE_POKE_BALL, 2, 15, STAY, NONE, 10, X_ACCURACY
 
-	; warp-to
-	warp_to 16, 0, SILPH_CO_6F_WIDTH ; SILPH_CO_7F
-	warp_to 14, 0, SILPH_CO_6F_WIDTH ; SILPH_CO_5F
-	warp_to 18, 0, SILPH_CO_6F_WIDTH ; SILPH_CO_ELEVATOR
-	warp_to 3, 3, SILPH_CO_6F_WIDTH ; SILPH_CO_4F
-	warp_to 23, 3, SILPH_CO_6F_WIDTH ; SILPH_CO_2F
+	def_warps_to SILPH_CO_6F

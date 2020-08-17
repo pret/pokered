@@ -16,10 +16,4 @@ CeladonMart1F_Object:
 	def_objects
 	object SPRITE_LINK_RECEPTIONIST, 8, 3, STAY, DOWN, 1 ; person
 
-	; warp-to
-	warp_to 2, 7, CELADON_MART_1F_WIDTH
-	warp_to 3, 7, CELADON_MART_1F_WIDTH
-	warp_to 16, 7, CELADON_MART_1F_WIDTH
-	warp_to 17, 7, CELADON_MART_1F_WIDTH
-	warp_to 12, 1, CELADON_MART_1F_WIDTH ; CELADON_MART_2F
-	warp_to 1, 1, CELADON_MART_1F_WIDTH ; CELADON_MART_ELEVATOR
+	def_warps_to CELADON_MART_1F

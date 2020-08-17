@@ -11,6 +11,4 @@ Route2TradeHouse_Object:
 	object SPRITE_SCIENTIST, 2, 4, STAY, RIGHT, 1 ; person
 	object SPRITE_GAMEBOY_KID, 4, 1, STAY, DOWN, 2 ; person
 
-	; warp-to
-	warp_to 2, 7, ROUTE_2_TRADE_HOUSE_WIDTH
-	warp_to 3, 7, ROUTE_2_TRADE_HOUSE_WIDTH
+	def_warps_to ROUTE_2_TRADE_HOUSE

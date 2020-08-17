@@ -11,7 +11,4 @@ FuchsiaGoodRodHouse_Object:
 	def_objects
 	object SPRITE_FISHING_GURU, 5, 3, STAY, RIGHT, 1 ; person
 
-	; warp-to
-	warp_to 2, 0, FUCHSIA_GOOD_ROD_HOUSE_WIDTH
-	warp_to 2, 7, FUCHSIA_GOOD_ROD_HOUSE_WIDTH
-	warp_to 3, 7, FUCHSIA_GOOD_ROD_HOUSE_WIDTH
+	def_warps_to FUCHSIA_GOOD_ROD_HOUSE

@@ -12,6 +12,4 @@ BluesHouse_Object:
 	object SPRITE_DAISY, 6, 4, WALK, UP_DOWN, 2, 0 ; Daisy, walking around
 	object SPRITE_POKEDEX, 3, 3, STAY, NONE, 3, 0 ; map on table
 
-	; warp-to
-	warp_to 2, 7, BLUES_HOUSE_WIDTH
-	warp_to 3, 7, BLUES_HOUSE_WIDTH
+	def_warps_to BLUES_HOUSE

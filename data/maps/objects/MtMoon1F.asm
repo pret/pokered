@@ -26,9 +26,4 @@ MtMoon1F_Object:
 	object SPRITE_POKE_BALL, 20, 33, STAY, NONE, 12, POTION
 	object SPRITE_POKE_BALL, 5, 32, STAY, NONE, 13, TM_WATER_GUN
 
-	; warp-to
-	warp_to 14, 35, MT_MOON_1F_WIDTH
-	warp_to 15, 35, MT_MOON_1F_WIDTH
-	warp_to 5, 5, MT_MOON_1F_WIDTH ; MT_MOON_B1F
-	warp_to 17, 11, MT_MOON_1F_WIDTH ; MT_MOON_B1F
-	warp_to 25, 15, MT_MOON_1F_WIDTH ; MT_MOON_B1F
+	def_warps_to MT_MOON_1F

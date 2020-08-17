@@ -12,6 +12,4 @@ VermilionMart_Object:
 	object SPRITE_COOLTRAINER_M, 5, 6, STAY, NONE, 2 ; person
 	object SPRITE_COOLTRAINER_F, 3, 3, WALK, LEFT_RIGHT, 3 ; person
 
-	; warp-to
-	warp_to 3, 7, VERMILION_MART_WIDTH
-	warp_to 4, 7, VERMILION_MART_WIDTH
+	def_warps_to VERMILION_MART

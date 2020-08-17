@@ -15,7 +15,4 @@ IndigoPlateauLobby_Object:
 	object SPRITE_CLERK, 0, 5, STAY, RIGHT, 4 ; person
 	object SPRITE_LINK_RECEPTIONIST, 13, 6, STAY, DOWN, 5 ; person
 
-	; warp-to
-	warp_to 7, 11, INDIGO_PLATEAU_LOBBY_WIDTH
-	warp_to 8, 11, INDIGO_PLATEAU_LOBBY_WIDTH
-	warp_to 8, 0, INDIGO_PLATEAU_LOBBY_WIDTH ; LORELEIS_ROOM
+	def_warps_to INDIGO_PLATEAU_LOBBY

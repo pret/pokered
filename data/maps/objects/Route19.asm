@@ -18,4 +18,4 @@ Route19_Object:
 	object SPRITE_SWIMMER, 9, 42, STAY, UP, 9, OPP_SWIMMER, 8
 	object SPRITE_SWIMMER, 10, 44, STAY, DOWN, 10, OPP_BEAUTY, 14
 
-	; warp-to
+	def_warps_to ROUTE_19

@@ -12,5 +12,4 @@ PokemonTower7F_Object:
 	object SPRITE_ROCKET, 9, 7, STAY, RIGHT, 3, OPP_ROCKET, 21
 	object SPRITE_MR_FUJI, 10, 3, STAY, DOWN, 4 ; person
 
-	; warp-to
-	warp_to 9, 16, POKEMON_TOWER_7F_WIDTH ; POKEMON_TOWER_6F
+	def_warps_to POKEMON_TOWER_7F

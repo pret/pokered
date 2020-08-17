@@ -17,3 +17,5 @@ Route14_Object:
 	object SPRITE_BIKER, 4, 30, STAY, RIGHT, 8, OPP_BIKER, 14
 	object SPRITE_BIKER, 15, 30, STAY, LEFT, 9, OPP_BIKER, 15
 	object SPRITE_BIKER, 4, 31, STAY, RIGHT, 10, OPP_BIKER, 2
+
+	def_warps_to ROUTE_14

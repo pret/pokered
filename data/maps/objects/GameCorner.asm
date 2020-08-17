@@ -22,7 +22,4 @@ GameCorner_Object:
 	object SPRITE_GENTLEMAN, 17, 13, STAY, RIGHT, 10 ; person
 	object SPRITE_ROCKET, 9, 5, STAY, UP, 11, OPP_ROCKET, 7
 
-	; warp-to
-	warp_to 15, 17, GAME_CORNER_WIDTH
-	warp_to 16, 17, GAME_CORNER_WIDTH
-	warp_to 17, 4, GAME_CORNER_WIDTH ; ROCKET_HIDEOUT_B1F
+	def_warps_to GAME_CORNER

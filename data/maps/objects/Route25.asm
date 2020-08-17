@@ -19,5 +19,4 @@ Route25_Object:
 	object SPRITE_HIKER, 13, 7, STAY, RIGHT, 9, OPP_HIKER, 4
 	object SPRITE_POKE_BALL, 22, 2, STAY, NONE, 10, TM_SEISMIC_TOSS
 
-	; warp-to
-	warp_to 45, 3, ROUTE_25_WIDTH ; BILLS_HOUSE
+	def_warps_to ROUTE_25

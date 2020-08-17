@@ -14,6 +14,4 @@ WardensHouse_Object:
 	object SPRITE_POKE_BALL, 8, 3, STAY, NONE, 2, RARE_CANDY
 	object SPRITE_BOULDER, 8, 4, STAY, BOULDER_MOVEMENT_BYTE_2, 3 ; person
 
-	; warp-to
-	warp_to 4, 7, WARDENS_HOUSE_WIDTH
-	warp_to 5, 7, WARDENS_HOUSE_WIDTH
+	def_warps_to WARDENS_HOUSE

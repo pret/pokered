@@ -9,6 +9,4 @@ DiglettsCave_Object:
 
 	def_objects
 
-	; warp-to
-	warp_to 5, 5, DIGLETTS_CAVE_WIDTH ; DIGLETTS_CAVE_ROUTE_2
-	warp_to 37, 31, DIGLETTS_CAVE_WIDTH ; DIGLETTS_CAVE_ROUTE_11
+	def_warps_to DIGLETTS_CAVE

@@ -12,8 +12,4 @@ Route22Gate_Object:
 	def_objects
 	object SPRITE_GUARD, 6, 2, STAY, LEFT, 1 ; person
 
-	; warp-to
-	warp_to 4, 7, ROUTE_22_GATE_WIDTH
-	warp_to 5, 7, ROUTE_22_GATE_WIDTH
-	warp_to 4, 0, ROUTE_22_GATE_WIDTH
-	warp_to 5, 0, ROUTE_22_GATE_WIDTH
+	def_warps_to ROUTE_22_GATE

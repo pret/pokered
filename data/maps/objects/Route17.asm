@@ -22,3 +22,5 @@ Route17_Object:
 	object SPRITE_BIKER, 14, 98, STAY, RIGHT, 8, OPP_CUE_BALL, 8
 	object SPRITE_BIKER, 5, 98, STAY, LEFT, 9, OPP_BIKER, 11
 	object SPRITE_BIKER, 10, 118, STAY, DOWN, 10, OPP_BIKER, 12
+
+	def_warps_to ROUTE_17

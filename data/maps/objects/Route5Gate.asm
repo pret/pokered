@@ -12,8 +12,4 @@ Route5Gate_Object:
 	def_objects
 	object SPRITE_GUARD, 1, 3, STAY, RIGHT, 1 ; person
 
-	; warp-to
-	warp_to 3, 5, ROUTE_5_GATE_WIDTH
-	warp_to 4, 5, ROUTE_5_GATE_WIDTH
-	warp_to 3, 0, ROUTE_5_GATE_WIDTH
-	warp_to 4, 0, ROUTE_5_GATE_WIDTH
+	def_warps_to ROUTE_5_GATE

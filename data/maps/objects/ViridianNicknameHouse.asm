@@ -13,6 +13,4 @@ ViridianNicknameHouse_Object:
 	object SPRITE_BIRD, 5, 5, WALK, LEFT_RIGHT, 3 ; person
 	object SPRITE_CLIPBOARD, 4, 0, STAY, NONE, 4 ; person
 
-	; warp-to
-	warp_to 2, 7, VIRIDIAN_NICKNAME_HOUSE_WIDTH
-	warp_to 3, 7, VIRIDIAN_NICKNAME_HOUSE_WIDTH
+	def_warps_to VIRIDIAN_NICKNAME_HOUSE

@@ -15,12 +15,4 @@ MtMoonB1F_Object:
 
 	def_objects
 
-	; warp-to
-	warp_to 5, 5, MT_MOON_B1F_WIDTH ; MT_MOON_1F
-	warp_to 17, 11, MT_MOON_B1F_WIDTH ; MT_MOON_B2F
-	warp_to 25, 9, MT_MOON_B1F_WIDTH ; MT_MOON_1F
-	warp_to 25, 15, MT_MOON_B1F_WIDTH ; MT_MOON_1F
-	warp_to 21, 17, MT_MOON_B1F_WIDTH ; MT_MOON_B2F
-	warp_to 13, 27, MT_MOON_B1F_WIDTH ; MT_MOON_B2F
-	warp_to 23, 3, MT_MOON_B1F_WIDTH ; MT_MOON_B2F
-	warp_to 27, 3, MT_MOON_B1F_WIDTH
+	def_warps_to MT_MOON_B1F

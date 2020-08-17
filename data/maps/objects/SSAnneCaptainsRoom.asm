@@ -11,5 +11,4 @@ SSAnneCaptainsRoom_Object:
 	def_objects
 	object SPRITE_CAPTAIN, 4, 2, STAY, UP, 1 ; person
 
-	; warp-to
-	warp_to 0, 7, SS_ANNE_CAPTAINS_ROOM_WIDTH ; SS_ANNE_2F
+	def_warps_to SS_ANNE_CAPTAINS_ROOM

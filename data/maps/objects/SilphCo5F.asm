@@ -25,11 +25,4 @@ SilphCo5F_Object:
 	object SPRITE_CLIPBOARD, 25, 10, STAY, NONE, 10 ; person
 	object SPRITE_CLIPBOARD, 24, 6, STAY, NONE, 11 ; person
 
-	; warp-to
-	warp_to 24, 0, SILPH_CO_5F_WIDTH ; SILPH_CO_6F
-	warp_to 26, 0, SILPH_CO_5F_WIDTH ; SILPH_CO_4F
-	warp_to 20, 0, SILPH_CO_5F_WIDTH ; SILPH_CO_ELEVATOR
-	warp_to 27, 3, SILPH_CO_5F_WIDTH ; SILPH_CO_7F
-	warp_to 9, 15, SILPH_CO_5F_WIDTH ; SILPH_CO_9F
-	warp_to 11, 5, SILPH_CO_5F_WIDTH ; SILPH_CO_3F
-	warp_to 3, 15, SILPH_CO_5F_WIDTH ; SILPH_CO_3F
+	def_warps_to SILPH_CO_5F

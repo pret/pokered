@@ -15,6 +15,4 @@ MtMoonPokecenter_Object:
 	object SPRITE_CLIPBOARD, 7, 2, STAY, NONE, 5 ; person
 	object SPRITE_LINK_RECEPTIONIST, 11, 2, STAY, DOWN, 6 ; person
 
-	; warp-to
-	warp_to 3, 7, MT_MOON_POKECENTER_WIDTH
-	warp_to 4, 7, MT_MOON_POKECENTER_WIDTH
+	def_warps_to MT_MOON_POKECENTER

@@ -16,5 +16,4 @@ PokemonMansionB1F_Object:
 	object SPRITE_POKEDEX, 16, 20, STAY, NONE, 7 ; person
 	object SPRITE_POKE_BALL, 5, 13, STAY, NONE, 8, SECRET_KEY
 
-	; warp-to
-	warp_to 23, 22, POKEMON_MANSION_B1F_WIDTH ; POKEMON_MANSION_1F
+	def_warps_to POKEMON_MANSION_B1F

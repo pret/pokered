@@ -11,5 +11,4 @@ Route12Gate2F_Object:
 	def_objects
 	object SPRITE_BRUNETTE_GIRL, 3, 4, WALK, UP_DOWN, 1 ; person
 
-	; warp-to
-	warp_to 7, 7, ROUTE_12_GATE_2F_WIDTH ; ROUTE_12_GATE_1F
+	def_warps_to ROUTE_12_GATE_2F

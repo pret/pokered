@@ -12,7 +12,4 @@ RedsHouse1F_Object:
 	def_objects
 	object SPRITE_MOM, 5, 4, STAY, LEFT, 1 ; Mom
 
-	; warp-to
-	warp_to 2, 7, REDS_HOUSE_1F_WIDTH
-	warp_to 3, 7, REDS_HOUSE_1F_WIDTH
-	warp_to 7, 1, REDS_HOUSE_1F_WIDTH
+	def_warps_to REDS_HOUSE_1F

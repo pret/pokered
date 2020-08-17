@@ -12,6 +12,4 @@ SaffronMart_Object:
 	object SPRITE_SUPER_NERD, 4, 2, STAY, NONE, 2 ; person
 	object SPRITE_COOLTRAINER_F, 6, 5, WALK, ANY_DIR, 3 ; person
 
-	; warp-to
-	warp_to 3, 7, SAFFRON_MART_WIDTH
-	warp_to 4, 7, SAFFRON_MART_WIDTH
+	def_warps_to SAFFRON_MART

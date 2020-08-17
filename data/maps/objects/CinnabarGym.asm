@@ -18,6 +18,4 @@ CinnabarGym_Object:
 	object SPRITE_SUPER_NERD, 3, 8, STAY, DOWN, 8, OPP_SUPER_NERD, 12
 	object SPRITE_GYM_GUIDE, 16, 13, STAY, DOWN, 9 ; person
 
-	; warp-to
-	warp_to 16, 17, CINNABAR_GYM_WIDTH
-	warp_to 17, 17, CINNABAR_GYM_WIDTH
+	def_warps_to CINNABAR_GYM

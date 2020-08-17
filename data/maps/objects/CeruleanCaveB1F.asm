@@ -11,5 +11,4 @@ CeruleanCaveB1F_Object:
 	object SPRITE_POKE_BALL, 16, 9, STAY, NONE, 2, ULTRA_BALL
 	object SPRITE_POKE_BALL, 18, 1, STAY, NONE, 3, MAX_REVIVE
 
-	; warp-to
-	warp_to 3, 6, CERULEAN_CAVE_B1F_WIDTH ; CERULEAN_CAVE_1F
+	def_warps_to CERULEAN_CAVE_B1F

@@ -9,6 +9,4 @@ IndigoPlateau_Object:
 
 	def_objects
 
-	; warp-to
-	warp_to 9, 5, INDIGO_PLATEAU_WIDTH ; INDIGO_PLATEAU_LOBBY
-	warp_to 10, 5, INDIGO_PLATEAU_WIDTH ; INDIGO_PLATEAU_LOBBY
+	def_warps_to INDIGO_PLATEAU

@@ -13,6 +13,4 @@ PewterPokecenter_Object:
 	object SPRITE_FAIRY, 1, 3, STAY, DOWN, 3 ; person
 	object SPRITE_LINK_RECEPTIONIST, 11, 2, STAY, DOWN, 4 ; person
 
-	; warp-to
-	warp_to 3, 7, PEWTER_POKECENTER_WIDTH
-	warp_to 4, 7, PEWTER_POKECENTER_WIDTH
+	def_warps_to PEWTER_POKECENTER

@@ -12,8 +12,4 @@ AgathasRoom_Object:
 	def_objects
 	object SPRITE_AGATHA, 5, 2, STAY, DOWN, 1, OPP_AGATHA, 1
 
-	; warp-to
-	warp_to 4, 11, AGATHAS_ROOM_WIDTH ; BRUNOS_ROOM
-	warp_to 5, 11, AGATHAS_ROOM_WIDTH ; BRUNOS_ROOM
-	warp_to 4, 0, AGATHAS_ROOM_WIDTH ; LANCES_ROOM
-	warp_to 5, 0, AGATHAS_ROOM_WIDTH ; LANCES_ROOM
+	def_warps_to AGATHAS_ROOM

@@ -17,6 +17,4 @@ FuchsiaGym_Object:
 	object SPRITE_ROCKER, 2, 7, STAY, LEFT, 7, OPP_JUGGLER, 4
 	object SPRITE_GYM_GUIDE, 7, 15, STAY, DOWN, 8 ; person
 
-	; warp-to
-	warp_to 4, 17, FUCHSIA_GYM_WIDTH
-	warp_to 5, 17, FUCHSIA_GYM_WIDTH
+	def_warps_to FUCHSIA_GYM

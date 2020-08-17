@@ -12,6 +12,4 @@ ViridianMart_Object:
 	object SPRITE_YOUNGSTER, 5, 5, WALK, UP_DOWN, 2 ; person
 	object SPRITE_COOLTRAINER_M, 3, 3, STAY, NONE, 3 ; person
 
-	; warp-to
-	warp_to 3, 7, VIRIDIAN_MART_WIDTH
-	warp_to 4, 7, VIRIDIAN_MART_WIDTH
+	def_warps_to VIRIDIAN_MART

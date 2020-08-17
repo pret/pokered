@@ -15,6 +15,4 @@ MrFujisHouse_Object:
 	object SPRITE_MR_FUJI, 3, 1, STAY, NONE, 5 ; person
 	object SPRITE_POKEDEX, 3, 3, STAY, NONE, 6 ; person
 
-	; warp-to
-	warp_to 2, 7, MR_FUJIS_HOUSE_WIDTH
-	warp_to 3, 7, MR_FUJIS_HOUSE_WIDTH
+	def_warps_to MR_FUJIS_HOUSE

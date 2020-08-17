@@ -12,6 +12,4 @@ CinnabarLabTradeRoom_Object:
 	object SPRITE_GRAMPS, 1, 4, STAY, NONE, 2 ; person
 	object SPRITE_BEAUTY, 5, 5, STAY, UP, 3 ; person
 
-	; warp-to
-	warp_to 2, 7, CINNABAR_LAB_TRADE_ROOM_WIDTH ; CINNABAR_LAB
-	warp_to 3, 7, CINNABAR_LAB_TRADE_ROOM_WIDTH ; CINNABAR_LAB
+	def_warps_to CINNABAR_LAB_TRADE_ROOM

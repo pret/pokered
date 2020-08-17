@@ -15,5 +15,4 @@ Museum2F_Object:
 	object SPRITE_BRUNETTE_GIRL, 11, 5, STAY, NONE, 4 ; person
 	object SPRITE_HIKER, 12, 5, STAY, DOWN, 5 ; person
 
-	; warp-to
-	warp_to 7, 7, MUSEUM_2F_WIDTH ; MUSEUM_1F
+	def_warps_to MUSEUM_2F

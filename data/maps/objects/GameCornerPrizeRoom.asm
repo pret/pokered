@@ -14,6 +14,4 @@ GameCornerPrizeRoom_Object:
 	object SPRITE_BALDING_GUY, 1, 4, STAY, NONE, 1 ; person
 	object SPRITE_GAMBLER, 7, 3, WALK, LEFT_RIGHT, 2 ; person
 
-	; warp-to
-	warp_to 4, 7, GAME_CORNER_PRIZE_ROOM_WIDTH
-	warp_to 5, 7, GAME_CORNER_PRIZE_ROOM_WIDTH
+	def_warps_to GAME_CORNER_PRIZE_ROOM

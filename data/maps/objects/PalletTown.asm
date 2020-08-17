@@ -17,7 +17,4 @@ PalletTown_Object:
 	object SPRITE_GIRL, 3, 8, WALK, ANY_DIR, 2 ; person
 	object SPRITE_FISHER, 11, 14, WALK, ANY_DIR, 3 ; person
 
-	; warp-to
-	warp_to 5, 5, PALLET_TOWN_WIDTH ; REDS_HOUSE_1F
-	warp_to 13, 5, PALLET_TOWN_WIDTH ; BLUES_HOUSE
-	warp_to 12, 11, PALLET_TOWN_WIDTH ; OAKS_LAB
+	def_warps_to PALLET_TOWN

@@ -10,6 +10,4 @@ RocketHideoutElevator_Object:
 
 	def_objects
 
-	; warp-to
-	warp_to 2, 1, ROCKET_HIDEOUT_ELEVATOR_WIDTH ; ROCKET_HIDEOUT_B1F
-	warp_to 3, 1, ROCKET_HIDEOUT_ELEVATOR_WIDTH ; ROCKET_HIDEOUT_B1F
+	def_warps_to ROCKET_HIDEOUT_ELEVATOR

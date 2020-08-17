@@ -10,6 +10,4 @@ CeladonMartElevator_Object:
 
 	def_objects
 
-	; warp-to
-	warp_to 1, 3, CELADON_MART_ELEVATOR_WIDTH ; CELADON_MART_1F
-	warp_to 2, 3, CELADON_MART_ELEVATOR_WIDTH ; CELADON_MART_1F
+	def_warps_to CELADON_MART_ELEVATOR

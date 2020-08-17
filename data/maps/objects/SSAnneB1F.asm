@@ -13,10 +13,4 @@ SSAnneB1F_Object:
 
 	def_objects
 
-	; warp-to
-	warp_to 23, 3, SS_ANNE_B1F_WIDTH ; SS_ANNE_B1F_ROOMS
-	warp_to 19, 3, SS_ANNE_B1F_WIDTH ; SS_ANNE_B1F_ROOMS
-	warp_to 15, 3, SS_ANNE_B1F_WIDTH ; SS_ANNE_B1F_ROOMS
-	warp_to 11, 3, SS_ANNE_B1F_WIDTH ; SS_ANNE_B1F_ROOMS
-	warp_to 7, 3, SS_ANNE_B1F_WIDTH ; SS_ANNE_B1F_ROOMS
-	warp_to 27, 5, SS_ANNE_B1F_WIDTH ; SS_ANNE_1F
+	def_warps_to SS_ANNE_B1F

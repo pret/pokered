@@ -12,6 +12,4 @@ FuchsiaBillsGrandpasHouse_Object:
 	object SPRITE_GAMBLER, 7, 2, STAY, UP, 2 ; person
 	object SPRITE_YOUNGSTER, 5, 5, STAY, NONE, 3 ; person
 
-	; warp-to
-	warp_to 2, 7, FUCHSIA_BILLS_GRANDPAS_HOUSE_WIDTH
-	warp_to 3, 7, FUCHSIA_BILLS_GRANDPAS_HOUSE_WIDTH
+	def_warps_to FUCHSIA_BILLS_GRANDPAS_HOUSE

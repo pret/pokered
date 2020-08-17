@@ -15,7 +15,4 @@ CeladonMart2F_Object:
 	object SPRITE_MIDDLE_AGED_MAN, 19, 5, STAY, NONE, 3 ; person
 	object SPRITE_GIRL, 14, 4, WALK, UP_DOWN, 4 ; person
 
-	; warp-to
-	warp_to 12, 1, CELADON_MART_2F_WIDTH ; CELADON_MART_1F
-	warp_to 16, 1, CELADON_MART_2F_WIDTH ; CELADON_MART_3F
-	warp_to 1, 1, CELADON_MART_2F_WIDTH ; CELADON_MART_ELEVATOR
+	def_warps_to CELADON_MART_2F

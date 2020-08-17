@@ -20,6 +20,4 @@ ViridianGym_Object:
 	object SPRITE_GYM_GUIDE, 16, 15, STAY, DOWN, 10 ; person
 	object SPRITE_POKE_BALL, 16, 9, STAY, NONE, 11, REVIVE
 
-	; warp-to
-	warp_to 16, 17, VIRIDIAN_GYM_WIDTH
-	warp_to 17, 17, VIRIDIAN_GYM_WIDTH
+	def_warps_to VIRIDIAN_GYM

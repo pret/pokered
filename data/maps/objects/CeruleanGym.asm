@@ -13,6 +13,4 @@ CeruleanGym_Object:
 	object SPRITE_SWIMMER, 8, 7, STAY, LEFT, 3, OPP_SWIMMER, 1
 	object SPRITE_GYM_GUIDE, 7, 10, STAY, DOWN, 4 ; person
 
-	; warp-to
-	warp_to 4, 13, CERULEAN_GYM_WIDTH
-	warp_to 5, 13, CERULEAN_GYM_WIDTH
+	def_warps_to CERULEAN_GYM

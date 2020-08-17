@@ -15,7 +15,4 @@ PokemonTower1F_Object:
 	object SPRITE_GIRL, 13, 7, STAY, NONE, 4 ; person
 	object SPRITE_CHANNELER, 17, 7, STAY, LEFT, 5 ; person
 
-	; warp-to
-	warp_to 10, 17, POKEMON_TOWER_1F_WIDTH
-	warp_to 11, 17, POKEMON_TOWER_1F_WIDTH
-	warp_to 18, 9, POKEMON_TOWER_1F_WIDTH ; POKEMON_TOWER_2F
+	def_warps_to POKEMON_TOWER_1F

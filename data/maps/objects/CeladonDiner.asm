@@ -14,6 +14,4 @@ CeladonDiner_Object:
 	object SPRITE_FISHER, 5, 3, STAY, RIGHT, 4 ; person
 	object SPRITE_GYM_GUIDE, 0, 1, STAY, DOWN, 5 ; person
 
-	; warp-to
-	warp_to 3, 7, CELADON_DINER_WIDTH
-	warp_to 4, 7, CELADON_DINER_WIDTH
+	def_warps_to CELADON_DINER

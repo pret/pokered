@@ -10,5 +10,4 @@ Route15Gate2F_Object:
 	def_objects
 	object SPRITE_SCIENTIST, 4, 2, STAY, DOWN, 1
 
-	; warp-to
-	warp_to 7, 7, ROUTE_15_GATE_2F_WIDTH ; ROUTE_15_GATE_1F
+	def_warps_to ROUTE_15_GATE_2F

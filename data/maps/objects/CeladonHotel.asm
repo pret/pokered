@@ -12,6 +12,4 @@ CeladonHotel_Object:
 	object SPRITE_BEAUTY, 2, 4, STAY, NONE, 2 ; person
 	object SPRITE_SUPER_NERD, 8, 4, WALK, LEFT_RIGHT, 3 ; person
 
-	; warp-to
-	warp_to 3, 7, CELADON_HOTEL_WIDTH
-	warp_to 4, 7, CELADON_HOTEL_WIDTH
+	def_warps_to CELADON_HOTEL

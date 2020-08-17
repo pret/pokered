@@ -17,6 +17,4 @@ CeladonGym_Object:
 	object SPRITE_BEAUTY, 3, 3, STAY, DOWN, 7, OPP_BEAUTY, 3
 	object SPRITE_COOLTRAINER_F, 5, 3, STAY, DOWN, 8, OPP_COOLTRAINER_F, 1
 
-	; warp-to
-	warp_to 4, 17, CELADON_GYM_WIDTH
-	warp_to 5, 17, CELADON_GYM_WIDTH
+	def_warps_to CELADON_GYM

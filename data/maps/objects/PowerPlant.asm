@@ -24,7 +24,4 @@ PowerPlant_Object:
 	object SPRITE_POKE_BALL, 26, 32, STAY, NONE, 13, TM_THUNDER
 	object SPRITE_POKE_BALL, 20, 32, STAY, NONE, 14, TM_REFLECT
 
-	; warp-to
-	warp_to 4, 35, POWER_PLANT_WIDTH
-	warp_to 5, 35, POWER_PLANT_WIDTH
-	warp_to 0, 11, POWER_PLANT_WIDTH
+	def_warps_to POWER_PLANT

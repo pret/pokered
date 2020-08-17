@@ -13,9 +13,4 @@ Route5_Object:
 
 	def_objects
 
-	; warp-to
-	warp_to 10, 29, ROUTE_5_WIDTH ; ROUTE_5_GATE
-	warp_to 9, 29, ROUTE_5_WIDTH ; ROUTE_5_GATE
-	warp_to 10, 33, ROUTE_5_WIDTH ; ROUTE_5_GATE
-	warp_to 17, 27, ROUTE_5_WIDTH ; UNDERGROUND_PATH_ROUTE_5
-	warp_to 10, 21, ROUTE_5_WIDTH ; DAYCARE
+	def_warps_to ROUTE_5

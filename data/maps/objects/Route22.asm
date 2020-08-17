@@ -11,5 +11,4 @@ Route22_Object:
 	object SPRITE_BLUE, 25, 5, STAY, NONE, 1 ; person
 	object SPRITE_BLUE, 25, 5, STAY, NONE, 2 ; person
 
-	; warp-to
-	warp_to 8, 5, ROUTE_22_WIDTH ; ROUTE_22_GATE
+	def_warps_to ROUTE_22

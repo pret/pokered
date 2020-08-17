@@ -15,7 +15,4 @@ CeladonMart5F_Object:
 	object SPRITE_CLERK, 5, 3, STAY, DOWN, 3 ; person
 	object SPRITE_CLERK, 6, 3, STAY, DOWN, 4 ; person
 
-	; warp-to
-	warp_to 12, 1, CELADON_MART_5F_WIDTH ; CELADON_MART_ROOF
-	warp_to 16, 1, CELADON_MART_5F_WIDTH ; CELADON_MART_4F
-	warp_to 1, 1, CELADON_MART_5F_WIDTH ; CELADON_MART_ELEVATOR
+	def_warps_to CELADON_MART_5F

@@ -13,8 +13,4 @@ ChampionsRoom_Object:
 	object SPRITE_BLUE, 4, 2, STAY, DOWN, 1 ; person
 	object SPRITE_OAK, 3, 7, STAY, UP, 2 ; person
 
-	; warp-to
-	warp_to 3, 7, CHAMPIONS_ROOM_WIDTH ; LANCES_ROOM
-	warp_to 4, 7, CHAMPIONS_ROOM_WIDTH ; LANCES_ROOM
-	warp_to 3, 0, CHAMPIONS_ROOM_WIDTH ; HALL_OF_FAME
-	warp_to 4, 0, CHAMPIONS_ROOM_WIDTH ; HALL_OF_FAME
+	def_warps_to CHAMPIONS_ROOM
