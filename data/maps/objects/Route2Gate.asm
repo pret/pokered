@@ -11,7 +11,7 @@ Route2Gate_Object:
 
 	db 2 ; objects
 	object SPRITE_SCIENTIST, 1, 4, STAY, LEFT, 1 ; person
-	object SPRITE_YOUNGSTER, 5, 4, WALK, 2, 2 ; person
+	object SPRITE_YOUNGSTER, 5, 4, WALK, LEFT_RIGHT, 2 ; person
 
 	; warp-to
 	warp_to 4, 0, ROUTE_2_GATE_WIDTH

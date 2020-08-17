@@ -11,7 +11,7 @@ CopycatsHouse1F_Object:
 	db 3 ; objects
 	object SPRITE_MIDDLE_AGED_WOMAN, 2, 2, STAY, DOWN, 1 ; person
 	object SPRITE_MIDDLE_AGED_MAN, 5, 4, STAY, LEFT, 2 ; person
-	object SPRITE_FAIRY, 1, 4, WALK, 1, 3 ; person
+	object SPRITE_FAIRY, 1, 4, WALK, UP_DOWN, 3 ; person
 
 	; warp-to
 	warp_to 2, 7, COPYCATS_HOUSE_1F_WIDTH

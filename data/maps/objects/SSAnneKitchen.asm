@@ -7,9 +7,9 @@ SSAnneKitchen_Object:
 	db 0 ; signs
 
 	db 7 ; objects
-	object SPRITE_COOK, 1, 8, WALK, 1, 1 ; person
-	object SPRITE_COOK, 5, 8, WALK, 1, 2 ; person
-	object SPRITE_COOK, 9, 7, WALK, 1, 3 ; person
+	object SPRITE_COOK, 1, 8, WALK, UP_DOWN, 1 ; person
+	object SPRITE_COOK, 5, 8, WALK, UP_DOWN, 2 ; person
+	object SPRITE_COOK, 9, 7, WALK, UP_DOWN, 3 ; person
 	object SPRITE_COOK, 13, 6, STAY, NONE, 4 ; person
 	object SPRITE_COOK, 13, 8, STAY, NONE, 5 ; person
 	object SPRITE_COOK, 13, 10, STAY, NONE, 6 ; person

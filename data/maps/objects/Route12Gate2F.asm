@@ -9,7 +9,7 @@ Route12Gate2F_Object:
 	sign 6, 2, 3 ; Route12GateUpstairsText3
 
 	db 1 ; objects
-	object SPRITE_BRUNETTE_GIRL, 3, 4, WALK, 1, 1 ; person
+	object SPRITE_BRUNETTE_GIRL, 3, 4, WALK, UP_DOWN, 1 ; person
 
 	; warp-to
 	warp_to 7, 7, ROUTE_12_GATE_2F_WIDTH ; ROUTE_12_GATE_1F

@@ -12,7 +12,7 @@ CinnabarLabMetronomeRoom_Object:
 
 	db 2 ; objects
 	object SPRITE_SCIENTIST, 7, 2, STAY, DOWN, 1 ; person
-	object SPRITE_SCIENTIST, 2, 3, WALK, 2, 2 ; person
+	object SPRITE_SCIENTIST, 2, 3, WALK, LEFT_RIGHT, 2 ; person
 
 	; warp-to
 	warp_to 2, 7, CINNABAR_LAB_METRONOME_ROOM_WIDTH ; CINNABAR_LAB

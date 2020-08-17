@@ -25,15 +25,15 @@ SaffronCity_Object:
 
 	db 15 ; objects
 	object SPRITE_ROCKET, 7, 6, STAY, NONE, 1 ; person
-	object SPRITE_ROCKET, 20, 8, WALK, 2, 2 ; person
+	object SPRITE_ROCKET, 20, 8, WALK, LEFT_RIGHT, 2 ; person
 	object SPRITE_ROCKET, 34, 4, STAY, NONE, 3 ; person
 	object SPRITE_ROCKET, 13, 12, STAY, NONE, 4 ; person
-	object SPRITE_ROCKET, 11, 25, WALK, 2, 5 ; person
-	object SPRITE_ROCKET, 32, 13, WALK, 2, 6 ; person
-	object SPRITE_ROCKET, 18, 30, WALK, 2, 7 ; person
-	object SPRITE_SCIENTIST, 8, 14, WALK, 0, 8 ; person
+	object SPRITE_ROCKET, 11, 25, WALK, LEFT_RIGHT, 5 ; person
+	object SPRITE_ROCKET, 32, 13, WALK, LEFT_RIGHT, 6 ; person
+	object SPRITE_ROCKET, 18, 30, WALK, LEFT_RIGHT, 7 ; person
+	object SPRITE_SCIENTIST, 8, 14, WALK, ANY_DIR, 8 ; person
 	object SPRITE_SILPH_WORKER, 23, 23, STAY, NONE, 9 ; person
-	object SPRITE_ERIKA, 17, 30, WALK, 2, 10 ; person
+	object SPRITE_ERIKA, 17, 30, WALK, LEFT_RIGHT, 10 ; person
 	object SPRITE_GENTLEMAN, 30, 12, STAY, DOWN, 11 ; person
 	object SPRITE_BIRD, 31, 12, STAY, DOWN, 12 ; person
 	object SPRITE_ROCKER, 18, 8, STAY, UP, 13 ; person

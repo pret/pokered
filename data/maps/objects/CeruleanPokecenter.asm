@@ -9,7 +9,7 @@ CeruleanPokecenter_Object:
 
 	db 4 ; objects
 	object SPRITE_NURSE, 3, 1, STAY, DOWN, 1 ; person
-	object SPRITE_SUPER_NERD, 10, 5, WALK, 0, 2 ; person
+	object SPRITE_SUPER_NERD, 10, 5, WALK, ANY_DIR, 2 ; person
 	object SPRITE_GENTLEMAN, 4, 3, STAY, DOWN, 3 ; person
 	object SPRITE_LINK_RECEPTIONIST, 11, 2, STAY, DOWN, 4 ; person
 

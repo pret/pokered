@@ -15,7 +15,7 @@ SSAnne2F_Object:
 	db 0 ; signs
 
 	db 2 ; objects
-	object SPRITE_WAITER, 3, 7, WALK, 1, 1 ; person
+	object SPRITE_WAITER, 3, 7, WALK, UP_DOWN, 1 ; person
 	object SPRITE_BLUE, 36, 4, STAY, DOWN, 2, OPP_RIVAL1, 1
 
 	; warp-to

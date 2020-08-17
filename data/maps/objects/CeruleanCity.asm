@@ -25,12 +25,12 @@ CeruleanCity_Object:
 	object SPRITE_BLUE, 20, 2, STAY, DOWN, 1 ; person
 	object SPRITE_ROCKET, 30, 8, STAY, NONE, 2, OPP_ROCKET, 5
 	object SPRITE_COOLTRAINER_M, 31, 20, STAY, DOWN, 3 ; person
-	object SPRITE_SUPER_NERD, 15, 18, WALK, 1, 4 ; person
-	object SPRITE_SUPER_NERD, 9, 21, WALK, 2, 5 ; person
+	object SPRITE_SUPER_NERD, 15, 18, WALK, UP_DOWN, 4 ; person
+	object SPRITE_SUPER_NERD, 9, 21, WALK, LEFT_RIGHT, 5 ; person
 	object SPRITE_GUARD, 28, 12, STAY, DOWN, 6 ; person
 	object SPRITE_COOLTRAINER_F, 29, 26, STAY, LEFT, 7 ; person
 	object SPRITE_MONSTER, 28, 26, STAY, DOWN, 8 ; person
-	object SPRITE_COOLTRAINER_F, 9, 27, WALK, 2, 9 ; person
+	object SPRITE_COOLTRAINER_F, 9, 27, WALK, LEFT_RIGHT, 9 ; person
 	object SPRITE_SUPER_NERD, 4, 12, STAY, DOWN, 10 ; person
 	object SPRITE_GUARD, 27, 12, STAY, DOWN, 11 ; person
 

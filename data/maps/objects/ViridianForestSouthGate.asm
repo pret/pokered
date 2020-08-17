@@ -11,7 +11,7 @@ ViridianForestSouthGate_Object:
 
 	db 2 ; objects
 	object SPRITE_GIRL, 8, 4, STAY, LEFT, 1 ; person
-	object SPRITE_LITTLE_GIRL, 2, 4, WALK, 1, 2 ; person
+	object SPRITE_LITTLE_GIRL, 2, 4, WALK, UP_DOWN, 2 ; person
 
 	; warp-to
 	warp_to 4, 0, VIRIDIAN_FOREST_SOUTH_GATE_WIDTH ; VIRIDIAN_FOREST

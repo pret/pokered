@@ -8,7 +8,7 @@ SSAnne3F_Object:
 	db 0 ; signs
 
 	db 1 ; objects
-	object SPRITE_SAILOR, 9, 3, WALK, 2, 1 ; person
+	object SPRITE_SAILOR, 9, 3, WALK, LEFT_RIGHT, 1 ; person
 
 	; warp-to
 	warp_to 0, 3, SS_ANNE_3F_WIDTH ; SS_ANNE_BOW

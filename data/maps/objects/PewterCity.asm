@@ -23,7 +23,7 @@ PewterCity_Object:
 	object SPRITE_COOLTRAINER_F, 8, 15, STAY, NONE, 1 ; person
 	object SPRITE_COOLTRAINER_M, 17, 25, STAY, NONE, 2 ; person
 	object SPRITE_SUPER_NERD, 27, 17, STAY, NONE, 3 ; person
-	object SPRITE_SUPER_NERD, 26, 25, WALK, 2, 4 ; person
+	object SPRITE_SUPER_NERD, 26, 25, WALK, LEFT_RIGHT, 4 ; person
 	object SPRITE_YOUNGSTER, 35, 16, STAY, DOWN, 5 ; person
 
 	; warp-to

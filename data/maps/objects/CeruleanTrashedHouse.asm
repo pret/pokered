@@ -11,7 +11,7 @@ CeruleanTrashedHouse_Object:
 
 	db 2 ; objects
 	object SPRITE_FISHING_GURU, 2, 1, STAY, DOWN, 1 ; person
-	object SPRITE_GIRL, 5, 6, WALK, 2, 2 ; person
+	object SPRITE_GIRL, 5, 6, WALK, LEFT_RIGHT, 2 ; person
 
 	; warp-to
 	warp_to 2, 7, CERULEAN_TRASHED_HOUSE_WIDTH

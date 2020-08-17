@@ -18,9 +18,9 @@ LavenderTown_Object:
 	sign 17, 7, 9 ; LavenderTownText9
 
 	db 3 ; objects
-	object SPRITE_LITTLE_GIRL, 15, 9, WALK, 0, 1 ; person
+	object SPRITE_LITTLE_GIRL, 15, 9, WALK, ANY_DIR, 1 ; person
 	object SPRITE_COOLTRAINER_M, 9, 10, STAY, NONE, 2 ; person
-	object SPRITE_SUPER_NERD, 8, 7, WALK, 2, 3 ; person
+	object SPRITE_SUPER_NERD, 8, 7, WALK, LEFT_RIGHT, 3 ; person
 
 	; warp-to
 	warp_to 3, 5, LAVENDER_TOWN_WIDTH ; LAVENDER_POKECENTER
