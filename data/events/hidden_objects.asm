@@ -316,10 +316,10 @@ GameCornerHiddenObjects:
 	hidden_object 18, 13, $d0, StartSlotMachine
 	hidden_object 18, 12, $d0, StartSlotMachine
 	hidden_object 18, 11, $d0, StartSlotMachine
-	hidden_object 18, 10, $ff, StartSlotMachine ; "Someone's Keys"
+	hidden_object 18, 10, SLOTS_SOMEONESKEYS, StartSlotMachine
 	hidden_object 13, 10, $d0, StartSlotMachine
 	hidden_object 13, 11, $d0, StartSlotMachine
-	hidden_object 13, 12, $fe, StartSlotMachine ; "Out To Lunch"
+	hidden_object 13, 12, SLOTS_OUTTOLUNCH, StartSlotMachine
 	hidden_object 13, 13, $d0, StartSlotMachine
 	hidden_object 13, 14, $d0, StartSlotMachine
 	hidden_object 13, 15, $d0, StartSlotMachine
@@ -338,7 +338,7 @@ GameCornerHiddenObjects:
 	hidden_object  6, 15, $d0, StartSlotMachine
 	hidden_object  6, 14, $d0, StartSlotMachine
 	hidden_object  6, 13, $d0, StartSlotMachine
-	hidden_object  6, 12, $fd, StartSlotMachine ; "Out Of Order"
+	hidden_object  6, 12, SLOTS_OUTOFORDER, StartSlotMachine
 	hidden_object  6, 11, $d0, StartSlotMachine
 	hidden_object  6, 10, $d0, StartSlotMachine
 	hidden_object  1, 10, $d0, StartSlotMachine
@@ -416,8 +416,8 @@ MtMoon3HiddenObjects:
 	db -1 ; end
 
 IndigoPlateauHiddenObjects:
-	hidden_object  8, 13, $ff, PrintIndigoPlateauHQText
-	hidden_object 11, 13, SPRITE_FACING_DOWN, PrintIndigoPlateauHQText
+	hidden_object  8, 13, $ff, PrintIndigoPlateauHQText ; inaccessible
+	hidden_object 11, 13, SPRITE_FACING_DOWN, PrintIndigoPlateauHQText ; inaccessible
 	db -1 ; end
 
 Route25HiddenObjects:
@@ -471,7 +471,7 @@ Route13HiddenObjects:
 	db -1 ; end
 
 SafariZoneEntranceHiddenObjects:
-	hidden_object 10,  1, NUGGET, HiddenItems
+	hidden_object 10,  1, NUGGET, HiddenItems ; inaccessible
 	db -1 ; end
 
 SafariZoneWestHiddenObjects:

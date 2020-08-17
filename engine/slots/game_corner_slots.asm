@@ -1,10 +1,10 @@
 StartSlotMachine:
 	ld a, [wHiddenObjectFunctionArgument]
-	cp $fd
+	cp SLOTS_OUTOFORDER
 	jr z, .printOutOfOrder
-	cp $fe
+	cp SLOTS_OUTTOLUNCH
 	jr z, .printOutToLunch
-	cp $ff
+	cp SLOTS_SOMEONESKEYS
 	jr z, .printSomeonesKeys
 	farcall AbleToPlaySlotsCheck
 	ld a, [wCanPlaySlots]

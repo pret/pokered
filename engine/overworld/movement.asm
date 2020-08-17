@@ -93,9 +93,9 @@ UpdatePlayerSprite:
 	ld c, a
 	ld a, [wGrassTile]
 	cp c
-	ld a, $0
+	ld a, 0
 	jr nz, .next2
-	ld a, $80
+	ld a, OAM_BEHIND_BG
 .next2
 	ld [wSpritePlayerStateData2GrassPriority], a
 	ret
@@ -150,15 +150,15 @@ UpdateNPCSprite:
 	and a
 	ret nz           ; don't do anything yet if player is currently moving (redundant, already tested in CheckSpriteAvailability)
 	call InitializeSpriteScreenPosition
-	ld h, $c2
+	ld h, HIGH(wSpriteStateData2)
 	ldh a, [hCurrentSpriteOffset]
 	add $6
 	ld l, a
 	ld a, [hl]       ; x#SPRITESTATEDATA2_MOVEMENTBYTE1
 	inc a
-	jr z, .randomMovement  ; value $FF
+	jr z, .randomMovement  ; value STAY
 	inc a
-	jr z, .randomMovement  ; value $FE
+	jr z, .randomMovement  ; value WALK
 ; scripted movement
 	dec a
 	ld [hl], a       ; increment movement byte 1 (movement data index)
@@ -184,7 +184,7 @@ UpdateNPCSprite:
 .next
 	cp WALK
 	jr nz, .determineDirection
-; current NPC movement data is $fe. this seems buggy
+; current NPC movement data is WALK ($fe). this seems buggy
 	ld [hl], $1     ; set movement byte 1 to $1
 	ld de, wNPCMovementDirections
 	call LoadDEPlusA ; a = [wNPCMovementDirections + $fe] (?)
@@ -195,20 +195,20 @@ UpdateNPCSprite:
 .determineDirection
 	ld b, a
 	ld a, [wCurSpriteMovement2]
-	cp $d0
-	jr z, .moveDown    ; movement byte 2 = $d0 forces down
-	cp $d1
-	jr z, .moveUp      ; movement byte 2 = $d1 forces up
-	cp $d2
-	jr z, .moveLeft    ; movement byte 2 = $d2 forces left
-	cp $d3
-	jr z, .moveRight   ; movement byte 2 = $d3 forces right
+	cp DOWN
+	jr z, .moveDown
+	cp UP
+	jr z, .moveUp
+	cp LEFT
+	jr z, .moveLeft
+	cp RIGHT
+	jr z, .moveRight
 	ld a, b
-	cp $40             ; a < $40: down (or left)
+	cp NPC_MOVEMENT_UP ; NPC_MOVEMENT_DOWN <= a < NPC_MOVEMENT_UP: down (or left)
 	jr nc, .notDown
 	ld a, [wCurSpriteMovement2]
-	cp $2
-	jr z, .moveLeft    ; movement byte 2 = $2 only allows left or right
+	cp LEFT_RIGHT
+	jr z, .moveLeft
 .moveDown
 	ld de, 2*SCREEN_WIDTH
 	add hl, de         ; move tile pointer two rows down
@@ -216,11 +216,11 @@ UpdateNPCSprite:
 	lb bc, 4, SPRITE_FACING_DOWN
 	jr TryWalking
 .notDown
-	cp $80             ; $40 <= a < $80: up (or right)
+	cp NPC_MOVEMENT_LEFT ; NPC_MOVEMENT_UP <= a < NPC_MOVEMENT_LEFT: up (or right)
 	jr nc, .notUp
 	ld a, [wCurSpriteMovement2]
-	cp $2
-	jr z, .moveRight   ; movement byte 2 = $2 only allows left or right
+	cp LEFT_RIGHT
+	jr z, .moveRight
 .moveUp
 	ld de, -2*SCREEN_WIDTH
 	add hl, de         ; move tile pointer two rows up
@@ -228,21 +228,21 @@ UpdateNPCSprite:
 	lb bc, 8, SPRITE_FACING_UP
 	jr TryWalking
 .notUp
-	cp $c0             ; $80 <= a < $c0: left (or up)
+	cp NPC_MOVEMENT_RIGHT ; NPC_MOVEMENT_LEFT <= a < NPC_MOVEMENT_RIGHT: left (or up)
 	jr nc, .notLeft
 	ld a, [wCurSpriteMovement2]
-	cp $1
-	jr z, .moveUp      ; movement byte 2 = $1 only allows up or down
+	cp UP_DOWN
+	jr z, .moveUp
 .moveLeft
 	dec hl
 	dec hl             ; move tile pointer two columns left
 	lb de, 0, -1
 	lb bc, 2, SPRITE_FACING_LEFT
 	jr TryWalking
-.notLeft              ; $c0 <= a: right (or down)
+.notLeft               ; NPC_MOVEMENT_RIGHT <= a: right (or down)
 	ld a, [wCurSpriteMovement2]
-	cp $1
-	jr z, .moveDown    ; movement byte 2 = $1 only allows up or down
+	cp UP_DOWN
+	jr z, .moveDown
 .moveRight
 	inc hl
 	inc hl             ; move tile pointer two columns right
@@ -281,7 +281,7 @@ TryWalking:
 	call CanWalkOntoTile
 	pop de
 	ret c               ; cannot walk there (reinitialization of delay values already done)
-	ld h, $c2
+	ld h, HIGH(wSpriteStateData2)
 	ldh a, [hCurrentSpriteOffset]
 	add $4
 	ld l, a
@@ -341,8 +341,8 @@ UpdateSpriteInWalkingAnimation:
 	add l
 	ld l, a
 	ld a, [hl]                       ; x#SPRITESTATEDATA2_MOVEMENTBYTE1
-	cp $fe
-	jr nc, .initNextMovementCounter  ; values $fe and $ff
+	cp WALK
+	jr nc, .initNextMovementCounter  ; values WALK or STAY
 	ldh a, [hCurrentSpriteOffset]
 	inc a
 	ld l, a
@@ -383,8 +383,8 @@ UpdateSpriteMovementDelay:
 	ld a, [hl]              ; x#SPRITESTATEDATA2_MOVEMENTBYTE1
 	inc l
 	inc l
-	cp $fe
-	jr nc, .tickMoveCounter ; values $fe or $ff
+	cp WALK
+	jr nc, .tickMoveCounter ; values WALK or STAY
 	ld [hl], $0
 	jr .moving
 .tickMoveCounter
@@ -485,8 +485,8 @@ CheckSpriteAvailability:
 	add SPRITESTATEDATA2_MOVEMENTBYTE1
 	ld l, a
 	ld a, [hl]      ; x#SPRITESTATEDATA2_MOVEMENTBYTE1
-	cp $fe
-	jr c, .skipXVisibilityTest ; movement byte 1 < $fe (i.e. the sprite's movement is scripted)
+	cp WALK
+	jr c, .skipXVisibilityTest ; movement byte 1 < WALK (i.e. the sprite's movement is scripted)
 	ldh a, [hCurrentSpriteOffset]
 	add SPRITESTATEDATA2_MAPY
 	ld l, a
@@ -495,7 +495,7 @@ CheckSpriteAvailability:
 	cp b
 	jr z, .skipYVisibilityTest
 	jr nc, .spriteInvisible ; above screen region
-	add $8                  ; screen is 9 tiles high
+	add SCREEN_HEIGHT / 2 - 1
 	cp b
 	jr c, .spriteInvisible  ; below screen region
 .skipYVisibilityTest
@@ -505,7 +505,7 @@ CheckSpriteAvailability:
 	cp b
 	jr z, .skipXVisibilityTest
 	jr nc, .spriteInvisible ; left of screen region
-	add $9                  ; screen is 10 tiles wide
+	add SCREEN_WIDTH / 2 - 1
 	cp b
 	jr c, .spriteInvisible  ; right of screen region
 .skipXVisibilityTest
@@ -519,7 +519,7 @@ CheckSpriteAvailability:
 	ld a, [hld]
 	cp d
 	jr nc, .spriteInvisible ; standing on tile with ID >=MAP_TILESET_SIZE (bottom right tile)
-	ld bc, -20
+	ld bc, -SCREEN_WIDTH
 	add hl, bc              ; go back one row of tiles
 	ld a, [hli]
 	cp d
@@ -547,9 +547,9 @@ CheckSpriteAvailability:
 	ld l, a
 	ld a, [wGrassTile]
 	cp c
-	ld a, $0
+	ld a, 0
 	jr nz, .notInGrass
-	ld a, $80
+	ld a, OAM_BEHIND_BG
 .notInGrass
 	ld [hl], a       ; x#SPRITESTATEDATA2_GRASSPRIORITY
 	and a
@@ -587,8 +587,8 @@ CanWalkOntoTile:
 	add SPRITESTATEDATA2_MOVEMENTBYTE1
 	ld l, a
 	ld a, [hl]         ; x#SPRITESTATEDATA2_MOVEMENTBYTE1
-	cp $fe
-	jr nc, .notScripted    ; values $fe and $ff
+	cp WALK
+	jr nc, .notScripted    ; values WALK or STAY
 ; always allow walking if the movement is scripted
 	and a
 	ret
@@ -603,7 +603,7 @@ CanWalkOntoTile:
 	jr z, .impassable
 	cp c
 	jr nz, .tilePassableLoop
-	ld h, $c2
+	ld h, HIGH(wSpriteStateData2)
 	ldh a, [hCurrentSpriteOffset]
 	add $6
 	ld l, a

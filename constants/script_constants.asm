@@ -12,6 +12,11 @@ SLOTSFISH   EQU $0E0C
 SLOTSBIRD   EQU $1210
 SLOTSMOUSE  EQU $1614
 
+; StartSlotMachine dialogs
+SLOTS_OUTOFORDER   EQU $fd
+SLOTS_OUTTOLUNCH   EQU $fe
+SLOTS_SOMEONESKEYS EQU $ff
+
 ; in game trades
 ; TradeMons indexes (see data/events/trades.asm)
 	const_def
