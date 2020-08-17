@@ -15,7 +15,7 @@ InitYesNoTextBoxParameters::
 	xor a ; YES_NO_MENU
 	ld [wTwoOptionMenuID], a
 	hlcoord 14, 7
-	ld bc, $80f
+	lb bc, 8, 15
 	ret
 
 YesNoChoicePokeCenter::
