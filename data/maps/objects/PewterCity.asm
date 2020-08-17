@@ -1,7 +1,7 @@
 PewterCity_Object:
 	db $a ; border block
 
-	db 7 ; warps
+	def_warps
 	warp 14, 7, 0, MUSEUM_1F
 	warp 19, 5, 2, MUSEUM_1F
 	warp 16, 17, 0, PEWTER_GYM
@@ -10,7 +10,7 @@ PewterCity_Object:
 	warp 7, 29, 0, PEWTER_SPEECH_HOUSE
 	warp 13, 25, 0, PEWTER_POKECENTER
 
-	db 7 ; signs
+	def_signs
 	sign 19, 29, 6 ; PewterCityText6
 	sign 33, 19, 7 ; PewterCityText7
 	sign 24, 17, 8 ; MartSignText
@@ -19,7 +19,7 @@ PewterCity_Object:
 	sign 11, 17, 11 ; PewterCityText11
 	sign 25, 23, 12 ; PewterCityText12
 
-	db 5 ; objects
+	def_objects
 	object SPRITE_COOLTRAINER_F, 8, 15, STAY, NONE, 1 ; person
 	object SPRITE_COOLTRAINER_M, 17, 25, STAY, NONE, 2 ; person
 	object SPRITE_SUPER_NERD, 27, 17, STAY, NONE, 3 ; person

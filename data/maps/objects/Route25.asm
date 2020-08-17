@@ -1,13 +1,13 @@
 Route25_Object:
 	db $2c ; border block
 
-	db 1 ; warps
+	def_warps
 	warp 45, 3, 0, BILLS_HOUSE
 
-	db 1 ; signs
+	def_signs
 	sign 43, 3, 11 ; Route25Text11
 
-	db 10 ; objects
+	def_objects
 	object SPRITE_YOUNGSTER, 14, 2, STAY, DOWN, 1, OPP_YOUNGSTER, 5
 	object SPRITE_YOUNGSTER, 18, 5, STAY, UP, 2, OPP_YOUNGSTER, 6
 	object SPRITE_COOLTRAINER_M, 24, 4, STAY, DOWN, 3, OPP_JR_TRAINER_M, 2

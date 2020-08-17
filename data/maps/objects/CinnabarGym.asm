@@ -1,13 +1,13 @@
 CinnabarGym_Object:
 	db $2e ; border block
 
-	db 2 ; warps
+	def_warps
 	warp 16, 17, 1, LAST_MAP
 	warp 17, 17, 1, LAST_MAP
 
-	db 0 ; signs
+	def_signs
 
-	db 9 ; objects
+	def_objects
 	object SPRITE_MIDDLE_AGED_MAN, 3, 3, STAY, DOWN, 1, OPP_BLAINE, 1
 	object SPRITE_SUPER_NERD, 17, 2, STAY, DOWN, 2, OPP_SUPER_NERD, 9
 	object SPRITE_SUPER_NERD, 17, 8, STAY, DOWN, 3, OPP_BURGLAR, 4

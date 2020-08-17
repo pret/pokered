@@ -1,14 +1,14 @@
 UndergroundPathRoute7Copy_Object:
 	db $a ; border block
 
-	db 3 ; warps
+	def_warps
 	warp 3, 7, 5, LAST_MAP
 	warp 4, 7, 5, LAST_MAP
 	warp 4, 4, 0, UNDERGROUND_PATH_WEST_EAST
 
-	db 0 ; signs
+	def_signs
 
-	db 2 ; objects
+	def_objects
 	object SPRITE_GIRL, 3, 2, STAY, NONE, 1 ; person
 	object SPRITE_MIDDLE_AGED_MAN, 2, 4, STAY, NONE, 2 ; person
 

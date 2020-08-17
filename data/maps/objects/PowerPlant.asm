@@ -1,14 +1,14 @@
 PowerPlant_Object:
 	db $2e ; border block
 
-	db 3 ; warps
+	def_warps
 	warp 4, 35, 3, LAST_MAP
 	warp 5, 35, 3, LAST_MAP
 	warp 0, 11, 3, LAST_MAP
 
-	db 0 ; signs
+	def_signs
 
-	db 14 ; objects
+	def_objects
 	object SPRITE_POKE_BALL, 9, 20, STAY, NONE, 1, VOLTORB, 40
 	object SPRITE_POKE_BALL, 32, 18, STAY, NONE, 2, VOLTORB, 40
 	object SPRITE_POKE_BALL, 21, 25, STAY, NONE, 3, VOLTORB, 40

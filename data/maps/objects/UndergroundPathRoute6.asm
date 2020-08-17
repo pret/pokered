@@ -1,14 +1,14 @@
 UndergroundPathRoute6_Object:
 	db $a ; border block
 
-	db 3 ; warps
+	def_warps
 	warp 3, 7, 3, LAST_MAP
 	warp 4, 7, 3, LAST_MAP
 	warp 4, 4, 1, UNDERGROUND_PATH_NORTH_SOUTH
 
-	db 0 ; signs
+	def_signs
 
-	db 1 ; objects
+	def_objects
 	object SPRITE_GIRL, 2, 3, STAY, NONE, 1 ; person
 
 	; warp-to

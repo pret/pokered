@@ -1,13 +1,13 @@
 CinnabarLabFossilRoom_Object:
 	db $17 ; border block
 
-	db 2 ; warps
+	def_warps
 	warp 2, 7, 4, CINNABAR_LAB
 	warp 3, 7, 4, CINNABAR_LAB
 
-	db 0 ; signs
+	def_signs
 
-	db 2 ; objects
+	def_objects
 	object SPRITE_SCIENTIST, 5, 2, WALK, LEFT_RIGHT, 1 ; person
 	object SPRITE_SCIENTIST, 7, 6, STAY, UP, 2 ; person
 

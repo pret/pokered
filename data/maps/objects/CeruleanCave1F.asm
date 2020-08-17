@@ -1,7 +1,7 @@
 CeruleanCave1F_Object:
 	db $7d ; border block
 
-	db 9 ; warps
+	def_warps
 	warp 24, 17, 6, LAST_MAP
 	warp 25, 17, 6, LAST_MAP
 	warp 27, 1, 0, CERULEAN_CAVE_2F
@@ -12,9 +12,9 @@ CeruleanCave1F_Object:
 	warp 3, 11, 5, CERULEAN_CAVE_2F
 	warp 0, 6, 0, CERULEAN_CAVE_B1F
 
-	db 0 ; signs
+	def_signs
 
-	db 3 ; objects
+	def_objects
 	object SPRITE_POKE_BALL, 7, 13, STAY, NONE, 1, FULL_RESTORE
 	object SPRITE_POKE_BALL, 19, 3, STAY, NONE, 2, MAX_ELIXER
 	object SPRITE_POKE_BALL, 5, 0, STAY, NONE, 3, NUGGET

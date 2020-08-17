@@ -1,7 +1,7 @@
 SSAnne1F_Object:
 	db $c ; border block
 
-	db 11 ; warps
+	def_warps
 	warp 26, 0, 1, VERMILION_DOCK
 	warp 27, 0, 1, VERMILION_DOCK
 	warp 31, 8, 0, SS_ANNE_1F_ROOMS
@@ -14,9 +14,9 @@ SSAnne1F_Object:
 	warp 37, 15, 5, SS_ANNE_B1F
 	warp 3, 16, 0, SS_ANNE_KITCHEN
 
-	db 0 ; signs
+	def_signs
 
-	db 2 ; objects
+	def_objects
 	object SPRITE_WAITER, 12, 6, WALK, LEFT_RIGHT, 1 ; person
 	object SPRITE_SAILOR, 27, 5, STAY, NONE, 2 ; person
 

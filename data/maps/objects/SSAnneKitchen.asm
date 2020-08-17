@@ -1,12 +1,12 @@
 SSAnneKitchen_Object:
 	db $c ; border block
 
-	db 1 ; warps
+	def_warps
 	warp 6, 0, 10, SS_ANNE_1F
 
-	db 0 ; signs
+	def_signs
 
-	db 7 ; objects
+	def_objects
 	object SPRITE_COOK, 1, 8, WALK, UP_DOWN, 1 ; person
 	object SPRITE_COOK, 5, 8, WALK, UP_DOWN, 2 ; person
 	object SPRITE_COOK, 9, 7, WALK, UP_DOWN, 3 ; person

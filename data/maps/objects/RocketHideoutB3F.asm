@@ -1,13 +1,13 @@
 RocketHideoutB3F_Object:
 	db $2e ; border block
 
-	db 2 ; warps
+	def_warps
 	warp 25, 6, 1, ROCKET_HIDEOUT_B2F
 	warp 19, 18, 0, ROCKET_HIDEOUT_B4F
 
-	db 0 ; signs
+	def_signs
 
-	db 4 ; objects
+	def_objects
 	object SPRITE_ROCKET, 10, 22, STAY, RIGHT, 1, OPP_ROCKET, 14
 	object SPRITE_ROCKET, 26, 12, STAY, UP, 2, OPP_ROCKET, 15
 	object SPRITE_POKE_BALL, 26, 17, STAY, NONE, 3, TM_DOUBLE_EDGE

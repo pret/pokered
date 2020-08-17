@@ -1,16 +1,16 @@
 RocketHideoutB2F_Object:
 	db $2e ; border block
 
-	db 5 ; warps
+	def_warps
 	warp 27, 8, 0, ROCKET_HIDEOUT_B1F
 	warp 21, 8, 0, ROCKET_HIDEOUT_B3F
 	warp 24, 19, 0, ROCKET_HIDEOUT_ELEVATOR
 	warp 21, 22, 3, ROCKET_HIDEOUT_B1F
 	warp 25, 19, 1, ROCKET_HIDEOUT_ELEVATOR
 
-	db 0 ; signs
+	def_signs
 
-	db 5 ; objects
+	def_objects
 	object SPRITE_ROCKET, 20, 12, STAY, DOWN, 1, OPP_ROCKET, 13
 	object SPRITE_POKE_BALL, 1, 11, STAY, NONE, 2, MOON_STONE
 	object SPRITE_POKE_BALL, 16, 8, STAY, NONE, 3, NUGGET

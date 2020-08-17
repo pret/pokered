@@ -1,7 +1,7 @@
 SilphCo5F_Object:
 	db $2e ; border block
 
-	db 7 ; warps
+	def_warps
 	warp 24, 0, 1, SILPH_CO_6F
 	warp 26, 0, 1, SILPH_CO_4F
 	warp 20, 0, 0, SILPH_CO_ELEVATOR
@@ -10,9 +10,9 @@ SilphCo5F_Object:
 	warp 11, 5, 4, SILPH_CO_3F
 	warp 3, 15, 5, SILPH_CO_3F
 
-	db 0 ; signs
+	def_signs
 
-	db 11 ; objects
+	def_objects
 	object SPRITE_SILPH_WORKER, 13, 9, STAY, NONE, 1 ; person
 	object SPRITE_ROCKET, 8, 16, STAY, RIGHT, 2, OPP_ROCKET, 28
 	object SPRITE_SCIENTIST, 8, 3, STAY, RIGHT, 3, OPP_SCIENTIST, 6

@@ -1,14 +1,14 @@
 Museum2F_Object:
 	db $a ; border block
 
-	db 1 ; warps
+	def_warps
 	warp 7, 7, 4, MUSEUM_1F
 
-	db 2 ; signs
+	def_signs
 	sign 11, 2, 6 ; Museum2FText6
 	sign 2, 5, 7 ; Museum2FText7
 
-	db 5 ; objects
+	def_objects
 	object SPRITE_YOUNGSTER, 1, 7, WALK, LEFT_RIGHT, 1 ; person
 	object SPRITE_GRAMPS, 0, 5, STAY, DOWN, 2 ; person
 	object SPRITE_SCIENTIST, 7, 5, STAY, DOWN, 3 ; person

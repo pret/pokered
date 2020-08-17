@@ -1,3 +1,12 @@
+def_objects: MACRO
+if DEF(_NUM_OBJECTS)
+	PURGE _NUM_OBJECTS
+endc
+_NUM_OBJECTS EQUS "_NUM_OBJECTS_\@"
+	db _NUM_OBJECTS
+_NUM_OBJECTS = 0
+ENDM
+
 ;\1 sprite id
 ;\2 x position
 ;\3 y position
@@ -23,6 +32,16 @@ object: MACRO
 	ELSE
 		db \6
 	ENDC
+_NUM_OBJECTS = _NUM_OBJECTS + 1
+ENDM
+
+def_warps: MACRO
+if DEF(_NUM_WARPS)
+	PURGE _NUM_WARPS
+endc
+_NUM_WARPS EQUS "_NUM_WARPS_\@"
+	db _NUM_WARPS
+_NUM_WARPS = 0
 ENDM
 
 ;\1 x position
@@ -31,6 +50,16 @@ ENDM
 ;\4 destination map (-1 = wLastMap)
 warp: MACRO
 	db \2, \1, \3, \4
+_NUM_WARPS = _NUM_WARPS + 1
+ENDM
+
+def_signs: MACRO
+if DEF(_NUM_SIGNS)
+	PURGE _NUM_SIGNS
+endc
+_NUM_SIGNS EQUS "_NUM_SIGNS_\@"
+	db _NUM_SIGNS
+_NUM_SIGNS = 0
 ENDM
 
 ;\1 x position
@@ -38,6 +67,7 @@ ENDM
 ;\3 sign id
 sign: MACRO
 	db \2, \1, \3
+_NUM_SIGNS = _NUM_SIGNS + 1
 ENDM
 
 ;\1 x position

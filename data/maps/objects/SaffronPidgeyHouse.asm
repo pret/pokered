@@ -1,13 +1,13 @@
 SaffronPidgeyHouse_Object:
 	db $a ; border block
 
-	db 2 ; warps
+	def_warps
 	warp 2, 7, 3, LAST_MAP
 	warp 3, 7, 3, LAST_MAP
 
-	db 0 ; signs
+	def_signs
 
-	db 4 ; objects
+	def_objects
 	object SPRITE_BRUNETTE_GIRL, 2, 3, STAY, RIGHT, 1 ; person
 	object SPRITE_BIRD, 0, 4, WALK, UP_DOWN, 2 ; person
 	object SPRITE_YOUNGSTER, 4, 1, STAY, DOWN, 3 ; person

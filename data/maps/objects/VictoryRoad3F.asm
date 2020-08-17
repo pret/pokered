@@ -1,15 +1,15 @@
 VictoryRoad3F_Object:
 	db $7d ; border block
 
-	db 4 ; warps
+	def_warps
 	warp 23, 7, 3, VICTORY_ROAD_2F
 	warp 26, 8, 5, VICTORY_ROAD_2F
 	warp 27, 15, 4, VICTORY_ROAD_2F
 	warp 2, 0, 6, VICTORY_ROAD_2F
 
-	db 0 ; signs
+	def_signs
 
-	db 10 ; objects
+	def_objects
 	object SPRITE_COOLTRAINER_M, 28, 5, STAY, LEFT, 1, OPP_COOLTRAINER_M, 2
 	object SPRITE_COOLTRAINER_F, 7, 13, STAY, RIGHT, 2, OPP_COOLTRAINER_F, 2
 	object SPRITE_COOLTRAINER_M, 6, 14, STAY, LEFT, 3, OPP_COOLTRAINER_M, 3

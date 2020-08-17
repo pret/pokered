@@ -1,16 +1,16 @@
 Museum1F_Object:
 	db $a ; border block
 
-	db 5 ; warps
+	def_warps
 	warp 10, 7, 0, LAST_MAP
 	warp 11, 7, 0, LAST_MAP
 	warp 16, 7, 1, LAST_MAP
 	warp 17, 7, 1, LAST_MAP
 	warp 7, 7, 0, MUSEUM_2F
 
-	db 0 ; signs
+	def_signs
 
-	db 5 ; objects
+	def_objects
 	object SPRITE_SCIENTIST, 12, 4, STAY, LEFT, 1 ; person
 	object SPRITE_GAMBLER, 1, 4, STAY, NONE, 2 ; person
 	object SPRITE_SCIENTIST, 15, 2, STAY, DOWN, 3 ; person

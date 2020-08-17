@@ -1,13 +1,13 @@
 SSAnne3F_Object:
 	db $c ; border block
 
-	db 2 ; warps
+	def_warps
 	warp 0, 3, 0, SS_ANNE_BOW
 	warp 19, 3, 7, SS_ANNE_2F
 
-	db 0 ; signs
+	def_signs
 
-	db 1 ; objects
+	def_objects
 	object SPRITE_SAILOR, 9, 3, WALK, LEFT_RIGHT, 1 ; person
 
 	; warp-to

@@ -1,7 +1,7 @@
 SSAnneB1FRooms_Object:
 	db $c ; border block
 
-	db 10 ; warps
+	def_warps
 	warp 2, 5, 4, SS_ANNE_B1F
 	warp 3, 5, 4, SS_ANNE_B1F
 	warp 12, 5, 3, SS_ANNE_B1F
@@ -13,9 +13,9 @@ SSAnneB1FRooms_Object:
 	warp 12, 15, 0, SS_ANNE_B1F
 	warp 13, 15, 0, SS_ANNE_B1F
 
-	db 0 ; signs
+	def_signs
 
-	db 11 ; objects
+	def_objects
 	object SPRITE_SAILOR, 0, 13, STAY, DOWN, 1, OPP_SAILOR, 3
 	object SPRITE_SAILOR, 2, 11, STAY, DOWN, 2, OPP_SAILOR, 4
 	object SPRITE_SAILOR, 12, 3, STAY, LEFT, 3, OPP_SAILOR, 5

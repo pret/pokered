@@ -1,13 +1,13 @@
 FuchsiaBillsGrandpasHouse_Object:
 	db $a ; border block
 
-	db 2 ; warps
+	def_warps
 	warp 2, 7, 1, LAST_MAP
 	warp 3, 7, 1, LAST_MAP
 
-	db 0 ; signs
+	def_signs
 
-	db 3 ; objects
+	def_objects
 	object SPRITE_MIDDLE_AGED_WOMAN, 2, 3, STAY, RIGHT, 1 ; person
 	object SPRITE_GAMBLER, 7, 2, STAY, UP, 2 ; person
 	object SPRITE_YOUNGSTER, 5, 5, STAY, NONE, 3 ; person

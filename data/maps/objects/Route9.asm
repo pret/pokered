@@ -1,12 +1,12 @@
 Route9_Object:
 	db $2c ; border block
 
-	db 0 ; warps
+	def_warps
 
-	db 1 ; signs
+	def_signs
 	sign 25, 7, 11 ; Route9Text11
 
-	db 10 ; objects
+	def_objects
 	object SPRITE_COOLTRAINER_F, 13, 10, STAY, LEFT, 1, OPP_JR_TRAINER_F, 5
 	object SPRITE_COOLTRAINER_M, 24, 7, STAY, LEFT, 2, OPP_JR_TRAINER_M, 7
 	object SPRITE_COOLTRAINER_M, 31, 7, STAY, RIGHT, 3, OPP_JR_TRAINER_M, 8

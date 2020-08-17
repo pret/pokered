@@ -1,7 +1,7 @@
 SaffronGym_Object:
 	db $2e ; border block
 
-	db 32 ; warps
+	def_warps
 	warp 8, 17, 2, LAST_MAP
 	warp 9, 17, 2, LAST_MAP
 	warp 1, 3, 22, SAFFRON_GYM
@@ -35,9 +35,9 @@ SaffronGym_Object:
 	warp 15, 17, 11, SAFFRON_GYM
 	warp 19, 17, 19, SAFFRON_GYM
 
-	db 0 ; signs
+	def_signs
 
-	db 9 ; objects
+	def_objects
 	object SPRITE_GIRL, 9, 8, STAY, DOWN, 1, OPP_SABRINA, 1
 	object SPRITE_CHANNELER, 10, 1, STAY, DOWN, 2, OPP_CHANNELER, 22
 	object SPRITE_YOUNGSTER, 17, 1, STAY, DOWN, 3, OPP_PSYCHIC_TR, 1

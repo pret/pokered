@@ -1,13 +1,13 @@
 PokemonTower5F_Object:
 	db $1 ; border block
 
-	db 2 ; warps
+	def_warps
 	warp 3, 9, 0, POKEMON_TOWER_4F
 	warp 18, 9, 0, POKEMON_TOWER_6F
 
-	db 0 ; signs
+	def_signs
 
-	db 6 ; objects
+	def_objects
 	object SPRITE_CHANNELER, 12, 8, STAY, NONE, 1 ; person
 	object SPRITE_CHANNELER, 17, 7, STAY, LEFT, 2, OPP_CHANNELER, 14
 	object SPRITE_CHANNELER, 14, 3, STAY, LEFT, 3, OPP_CHANNELER, 16

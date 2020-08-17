@@ -1,13 +1,13 @@
 VermilionPokecenter_Object:
 	db $0 ; border block
 
-	db 2 ; warps
+	def_warps
 	warp 3, 7, 0, LAST_MAP
 	warp 4, 7, 0, LAST_MAP
 
-	db 0 ; signs
+	def_signs
 
-	db 4 ; objects
+	def_objects
 	object SPRITE_NURSE, 3, 1, STAY, DOWN, 1 ; person
 	object SPRITE_FISHING_GURU, 10, 5, STAY, NONE, 2 ; person
 	object SPRITE_SAILOR, 5, 4, STAY, NONE, 3 ; person

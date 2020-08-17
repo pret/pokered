@@ -1,13 +1,13 @@
 FightingDojo_Object:
 	db $3 ; border block
 
-	db 2 ; warps
+	def_warps
 	warp 4, 11, 1, LAST_MAP
 	warp 5, 11, 1, LAST_MAP
 
-	db 0 ; signs
+	def_signs
 
-	db 7 ; objects
+	def_objects
 	object SPRITE_HIKER, 5, 3, STAY, DOWN, 1, OPP_BLACKBELT, 1
 	object SPRITE_HIKER, 3, 4, STAY, RIGHT, 2, OPP_BLACKBELT, 2
 	object SPRITE_HIKER, 3, 6, STAY, RIGHT, 3, OPP_BLACKBELT, 3

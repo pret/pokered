@@ -1,17 +1,17 @@
 Route11_Object:
 	db $f ; border block
 
-	db 5 ; warps
+	def_warps
 	warp 49, 8, 0, ROUTE_11_GATE_1F
 	warp 49, 9, 1, ROUTE_11_GATE_1F
 	warp 58, 8, 2, ROUTE_11_GATE_1F
 	warp 58, 9, 3, ROUTE_11_GATE_1F
 	warp 4, 5, 0, DIGLETTS_CAVE_ROUTE_11
 
-	db 1 ; signs
+	def_signs
 	sign 1, 5, 11 ; Route11Text11
 
-	db 10 ; objects
+	def_objects
 	object SPRITE_GAMBLER, 10, 14, STAY, DOWN, 1, OPP_GAMBLER, 1
 	object SPRITE_GAMBLER, 26, 9, STAY, DOWN, 2, OPP_GAMBLER, 2
 	object SPRITE_YOUNGSTER, 13, 5, STAY, LEFT, 3, OPP_YOUNGSTER, 9

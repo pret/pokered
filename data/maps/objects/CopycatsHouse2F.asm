@@ -1,14 +1,14 @@
 CopycatsHouse2F_Object:
 	db $a ; border block
 
-	db 1 ; warps
+	def_warps
 	warp 7, 1, 2, COPYCATS_HOUSE_1F
 
-	db 2 ; signs
+	def_signs
 	sign 3, 5, 6 ; CopycatsHouse2FText6
 	sign 0, 1, 7 ; CopycatsHouse2FText7
 
-	db 5 ; objects
+	def_objects
 	object SPRITE_BRUNETTE_GIRL, 4, 3, WALK, ANY_DIR, 1 ; person
 	object SPRITE_BIRD, 4, 6, WALK, LEFT_RIGHT, 2 ; person
 	object SPRITE_MONSTER, 5, 1, STAY, DOWN, 3 ; person

@@ -1,7 +1,7 @@
 ViridianForest_Object:
 	db $3 ; border block
 
-	db 6 ; warps
+	def_warps
 	warp 1, 0, 2, VIRIDIAN_FOREST_NORTH_GATE
 	warp 2, 0, 3, VIRIDIAN_FOREST_NORTH_GATE
 	warp 15, 47, 1, VIRIDIAN_FOREST_SOUTH_GATE
@@ -9,7 +9,7 @@ ViridianForest_Object:
 	warp 17, 47, 1, VIRIDIAN_FOREST_SOUTH_GATE
 	warp 18, 47, 1, VIRIDIAN_FOREST_SOUTH_GATE
 
-	db 6 ; signs
+	def_signs
 	sign 24, 40, 9 ; ViridianForestText9
 	sign 16, 32, 10 ; ViridianForestText10
 	sign 26, 17, 11 ; ViridianForestText11
@@ -17,7 +17,7 @@ ViridianForest_Object:
 	sign 18, 45, 13 ; ViridianForestText13
 	sign 2, 1, 14 ; ViridianForestText14
 
-	db 8 ; objects
+	def_objects
 	object SPRITE_YOUNGSTER, 16, 43, STAY, NONE, 1 ; person
 	object SPRITE_YOUNGSTER, 30, 33, STAY, LEFT, 2, OPP_BUG_CATCHER, 1
 	object SPRITE_YOUNGSTER, 30, 19, STAY, LEFT, 3, OPP_BUG_CATCHER, 2

@@ -1,13 +1,13 @@
 OaksLab_Object:
 	db $3 ; border block
 
-	db 2 ; warps
+	def_warps
 	warp 4, 11, 2, LAST_MAP
 	warp 5, 11, 2, LAST_MAP
 
-	db 0 ; signs
+	def_signs
 
-	db 11 ; objects
+	def_objects
 	object SPRITE_BLUE, 4, 3, STAY, NONE, 1, OPP_RIVAL1, 1
 	object SPRITE_POKE_BALL, 6, 3, STAY, NONE, 2 ; person
 	object SPRITE_POKE_BALL, 7, 3, STAY, NONE, 3 ; person

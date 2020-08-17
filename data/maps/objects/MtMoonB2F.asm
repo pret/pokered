@@ -1,15 +1,15 @@
 MtMoonB2F_Object:
 	db $3 ; border block
 
-	db 4 ; warps
+	def_warps
 	warp 25, 9, 1, MT_MOON_B1F
 	warp 21, 17, 4, MT_MOON_B1F
 	warp 15, 27, 5, MT_MOON_B1F
 	warp 5, 7, 6, MT_MOON_B1F
 
-	db 0 ; signs
+	def_signs
 
-	db 9 ; objects
+	def_objects
 	object SPRITE_SUPER_NERD, 12, 8, STAY, RIGHT, 1, OPP_SUPER_NERD, 2
 	object SPRITE_ROCKET, 11, 16, STAY, DOWN, 2, OPP_ROCKET, 1
 	object SPRITE_ROCKET, 15, 22, STAY, DOWN, 3, OPP_ROCKET, 2

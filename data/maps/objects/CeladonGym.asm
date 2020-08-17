@@ -1,13 +1,13 @@
 CeladonGym_Object:
 	db $3 ; border block
 
-	db 2 ; warps
+	def_warps
 	warp 4, 17, 6, LAST_MAP
 	warp 5, 17, 6, LAST_MAP
 
-	db 0 ; signs
+	def_signs
 
-	db 8 ; objects
+	def_objects
 	object SPRITE_ERIKA, 4, 3, STAY, DOWN, 1, OPP_ERIKA, 1
 	object SPRITE_COOLTRAINER_F, 2, 11, STAY, RIGHT, 2, OPP_LASS, 17
 	object SPRITE_BEAUTY, 7, 10, STAY, LEFT, 3, OPP_BEAUTY, 1

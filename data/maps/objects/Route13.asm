@@ -1,14 +1,14 @@
 Route13_Object:
 	db $43 ; border block
 
-	db 0 ; warps
+	def_warps
 
-	db 3 ; signs
+	def_signs
 	sign 15, 13, 11 ; Route13Text11
 	sign 33, 5, 12 ; Route13Text12
 	sign 31, 11, 13 ; Route13Text13
 
-	db 10 ; objects
+	def_objects
 	object SPRITE_COOLTRAINER_M, 49, 10, STAY, RIGHT, 1, OPP_BIRD_KEEPER, 1
 	object SPRITE_COOLTRAINER_F, 48, 10, STAY, DOWN, 2, OPP_JR_TRAINER_F, 12
 	object SPRITE_COOLTRAINER_F, 27, 9, STAY, DOWN, 3, OPP_JR_TRAINER_F, 13

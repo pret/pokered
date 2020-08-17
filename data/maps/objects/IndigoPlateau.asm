@@ -1,13 +1,13 @@
 IndigoPlateau_Object:
 	db $e ; border block
 
-	db 2 ; warps
+	def_warps
 	warp 9, 5, 0, INDIGO_PLATEAU_LOBBY
 	warp 10, 5, 0, INDIGO_PLATEAU_LOBBY
 
-	db 0 ; signs
+	def_signs
 
-	db 0 ; objects
+	def_objects
 
 	; warp-to
 	warp_to 9, 5, INDIGO_PLATEAU_WIDTH ; INDIGO_PLATEAU_LOBBY

@@ -1,11 +1,11 @@
 Route24_Object:
 	db $2c ; border block
 
-	db 0 ; warps
+	def_warps
 
-	db 0 ; signs
+	def_signs
 
-	db 8 ; objects
+	def_objects
 	object SPRITE_COOLTRAINER_M, 11, 15, STAY, LEFT, 1, OPP_ROCKET, 6
 	object SPRITE_COOLTRAINER_M, 5, 20, STAY, UP, 2, OPP_JR_TRAINER_M, 2
 	object SPRITE_COOLTRAINER_M, 11, 19, STAY, LEFT, 3, OPP_JR_TRAINER_M, 3

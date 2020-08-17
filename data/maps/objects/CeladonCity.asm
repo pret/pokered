@@ -1,7 +1,7 @@
 CeladonCity_Object:
 	db $f ; border block
 
-	db 13 ; warps
+	def_warps
 	warp 8, 13, 0, CELADON_MART_1F
 	warp 10, 13, 2, CELADON_MART_1F
 	warp 24, 9, 0, CELADON_MANSION_1F
@@ -16,7 +16,7 @@ CeladonCity_Object:
 	warp 35, 27, 0, CELADON_CHIEF_HOUSE
 	warp 43, 27, 0, CELADON_HOTEL
 
-	db 9 ; signs
+	def_signs
 	sign 27, 15, 10 ; CeladonCityText10
 	sign 19, 15, 11 ; CeladonCityText11
 	sign 42, 9, 12 ; PokeCenterSignText
@@ -27,7 +27,7 @@ CeladonCity_Object:
 	sign 33, 21, 17 ; CeladonCityText17
 	sign 27, 21, 18 ; CeladonCityText18
 
-	db 9 ; objects
+	def_objects
 	object SPRITE_LITTLE_GIRL, 8, 17, WALK, ANY_DIR, 1 ; person
 	object SPRITE_GRAMPS, 11, 28, STAY, UP, 2 ; person
 	object SPRITE_GIRL, 14, 19, WALK, UP_DOWN, 3 ; person

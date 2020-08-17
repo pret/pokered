@@ -1,14 +1,14 @@
 SSAnneCaptainsRoom_Object:
 	db $c ; border block
 
-	db 1 ; warps
+	def_warps
 	warp 0, 7, 8, SS_ANNE_2F
 
-	db 2 ; signs
+	def_signs
 	sign 4, 1, 2 ; SSAnne7Text2
 	sign 1, 2, 3 ; SSAnne7Text3
 
-	db 1 ; objects
+	def_objects
 	object SPRITE_CAPTAIN, 4, 2, STAY, UP, 1 ; person
 
 	; warp-to

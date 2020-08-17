@@ -1,13 +1,13 @@
 HallOfFame_Object:
 	db $3 ; border block
 
-	db 2 ; warps
+	def_warps
 	warp 4, 7, 2, CHAMPIONS_ROOM
 	warp 5, 7, 3, CHAMPIONS_ROOM
 
-	db 0 ; signs
+	def_signs
 
-	db 1 ; objects
+	def_objects
 	object SPRITE_OAK, 5, 2, STAY, DOWN, 1 ; person
 
 	; warp-to

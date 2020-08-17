@@ -1,13 +1,13 @@
 FuchsiaGym_Object:
 	db $3 ; border block
 
-	db 2 ; warps
+	def_warps
 	warp 4, 17, 5, LAST_MAP
 	warp 5, 17, 5, LAST_MAP
 
-	db 0 ; signs
+	def_signs
 
-	db 8 ; objects
+	def_objects
 	object SPRITE_KOGA, 4, 10, STAY, DOWN, 1, OPP_KOGA, 1
 	object SPRITE_ROCKER, 8, 13, STAY, DOWN, 2, OPP_JUGGLER, 7
 	object SPRITE_ROCKER, 7, 8, STAY, RIGHT, 3, OPP_JUGGLER, 3

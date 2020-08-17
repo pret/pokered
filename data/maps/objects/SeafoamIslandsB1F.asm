@@ -1,7 +1,7 @@
 SeafoamIslandsB1F_Object:
 	db $7d ; border block
 
-	db 7 ; warps
+	def_warps
 	warp 4, 2, 0, SEAFOAM_ISLANDS_B2F
 	warp 7, 5, 4, SEAFOAM_ISLANDS_1F
 	warp 13, 7, 2, SEAFOAM_ISLANDS_B2F
@@ -10,9 +10,9 @@ SeafoamIslandsB1F_Object:
 	warp 25, 11, 5, SEAFOAM_ISLANDS_B2F
 	warp 25, 3, 5, SEAFOAM_ISLANDS_1F
 
-	db 0 ; signs
+	def_signs
 
-	db 2 ; objects
+	def_objects
 	object SPRITE_BOULDER, 17, 6, STAY, BOULDER_MOVEMENT_BYTE_2, 1 ; person
 	object SPRITE_BOULDER, 22, 6, STAY, BOULDER_MOVEMENT_BYTE_2, 2 ; person
 

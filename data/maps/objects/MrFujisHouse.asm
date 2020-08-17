@@ -1,13 +1,13 @@
 MrFujisHouse_Object:
 	db $a ; border block
 
-	db 2 ; warps
+	def_warps
 	warp 2, 7, 2, LAST_MAP
 	warp 3, 7, 2, LAST_MAP
 
-	db 0 ; signs
+	def_signs
 
-	db 6 ; objects
+	def_objects
 	object SPRITE_SUPER_NERD, 3, 5, STAY, NONE, 1 ; person
 	object SPRITE_LITTLE_GIRL, 6, 3, STAY, DOWN, 2 ; person
 	object SPRITE_MONSTER, 6, 4, STAY, UP, 3 ; person

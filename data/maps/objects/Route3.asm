@@ -1,12 +1,12 @@
 Route3_Object:
 	db $2c ; border block
 
-	db 0 ; warps
+	def_warps
 
-	db 1 ; signs
+	def_signs
 	sign 59, 9, 10 ; Route3Text10
 
-	db 9 ; objects
+	def_objects
 	object SPRITE_SUPER_NERD, 57, 11, STAY, NONE, 1 ; person
 	object SPRITE_YOUNGSTER, 10, 6, STAY, RIGHT, 2, OPP_BUG_CATCHER, 4
 	object SPRITE_YOUNGSTER, 14, 4, STAY, DOWN, 3, OPP_YOUNGSTER, 1

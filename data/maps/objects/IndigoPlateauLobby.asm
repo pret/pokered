@@ -1,14 +1,14 @@
 IndigoPlateauLobby_Object:
 	db $0 ; border block
 
-	db 3 ; warps
+	def_warps
 	warp 7, 11, 0, LAST_MAP
 	warp 8, 11, 1, LAST_MAP
 	warp 8, 0, 0, LORELEIS_ROOM
 
-	db 0 ; signs
+	def_signs
 
-	db 5 ; objects
+	def_objects
 	object SPRITE_NURSE, 7, 5, STAY, DOWN, 1 ; person
 	object SPRITE_GYM_GUIDE, 4, 9, STAY, RIGHT, 2 ; person
 	object SPRITE_COOLTRAINER_F, 5, 1, STAY, DOWN, 3 ; person
