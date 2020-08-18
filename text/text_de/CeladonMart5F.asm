@@ -1,28 +1,32 @@
 _CeladonMart5Text1::
-	text "#MON ability"
-	line "enhancers can be"
-	cont "bought only here."
+	text "Nur hier kannst"
+	line "Du leistungs-"
+	cont "fördernde Mittel"
+	cont "für Deine #MON"
+	cont "kaufen!"
 
-	para "Use CALCIUM to"
-	line "increase SPECIAL"
-	cont "abilities."
+	para "KALZIUM steigert"
+	line "die Stärke von"
+	cont "SPEZIAL-ATTACKEN!"
 
-	para "Use CARBOS to"
-	line "increase SPEED."
+	para "CARBON erhöht die"
+	line "INITIATIVE."
 	done
 
 _CeladonMart5Text2::
-	text "I'm here for"
-	line "#MON ability"
-	cont "enhancers."
+	text "Ich bin wegen"
+	line "der leistungs-"
+	cont "fördernden Mittel"
+	cont "für #MON hier."
 
-	para "PROTEIN increases"
-	line "ATTACK power."
+	para "PROTEIN steigert"
+	line "die ANGRIFFS-"
+	cont "STÄRKE."
 
-	para "IRON increases"
-	line "DEFENSE!"
+	para "EISEN stärkt die"
+	line "ABWEHR!"
 	done
 
 _CeladonMart5Text5::
-	text "5F: DRUG STORE"
+	text "S4: DROGERIE"
 	done

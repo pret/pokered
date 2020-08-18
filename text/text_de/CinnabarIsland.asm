@@ -1,37 +1,41 @@
 _CinnabarIslandText8::
-	text "The door is"
-	line "locked..."
+	text "Die Tür ist"
+	line "verschlossen..."
 	done
 
 _CinnabarIslandText1::
-	text "CINNABAR GYM's"
-	line "BLAINE is an odd"
-	cont "man who has lived"
-	cont "here for decades."
+	text "PYRO, der"
+	line "ARENALEITER der"
+	cont "ZINNOBERINSEL,"
+	cont "ist ein seltsamer"
+	cont "Mann. Er lebt"
+	cont "hier seit Jahren."
 	done
 
 _CinnabarIslandText2::
-	text "Scientists conduct"
-	line "experiments in"
-	cont "the burned out"
-	cont "building."
+	text "Forscher"
+	line "experimentieren"
+	cont "in dem"
+	cont "ausgebrannten"
+	cont "Gebäude."
 	done
 
 _CinnabarIslandText3::
-	text "CINNABAR ISLAND"
-	line "The Fiery Town of"
-	cont "Burning Desire"
+	text "ZINNOBERINSEL"
+	line "Die Stadt"
+	cont "brennender"
+	cont "Leidenschaft!"
 	done
 
 _CinnabarIslandText6::
-	text "#MON LAB"
+	text "#MON LABOR"
 	done
 
 _CinnabarIslandText7::
-	text "CINNABAR ISLAND"
-	line "#MON GYM"
-	cont "LEADER: BLAINE"
+	text "ZINNOBERINSEL"
+	line "PKMN-ARENA"
+	cont "ARENALEITER: PYRO"
 
-	para "The Hot-Headed"
-	line "Quiz Master!"
+	para "Der hitzköpfige"
+	line "Quiz-Master!"
 	done

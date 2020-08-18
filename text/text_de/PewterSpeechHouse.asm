@@ -1,19 +1,23 @@
 _PewterHouse2Text1::
-	text "#MON learn new"
-	line "techniques as"
-	cont "they grow!"
+	text "Mit wachsender"
+	line "Erfahrung lernen"
+	cont "#MON neue"
+	cont "Attacken!"
 
-	para "But, some moves"
-	line "must be taught by"
-	cont "the trainer!"
+	para "Manche Attacken"
+	line "kann ihnen jedoch"
+	cont "nur ein Trainer"
+	cont "beibringen!"
 	done
 
 _PewterHouse2Text2::
-	text "#MON become"
-	line "easier to catch"
-	cont "when they are"
-	cont "hurt or asleep!"
+	text "#MON sind"
+	line "einfacher zu"
+	cont "fangen, wenn sie"
+	cont "verletzt sind"
+	cont "oder schlafen!"
 
-	para "But, it's not a"
-	line "sure thing!"
+	para "Trotzdem"
+	line "gibt es keine"
+	cont "Erfolgsgarantie!"
 	done

@@ -1,36 +1,42 @@
 _CeruleanTrashedText_1d6ab::
-	text "Those miserable"
-	line "ROCKETs!"
+	text "Dieses gemeine"
+	line "TEAM ROCKET!"
 
-	para "Look what they"
-	line "did here!"
+	para "Hör Dir an, was"
+	line "sie wieder"
+	cont "verbrochen haben!"
 
-	para "They stole a TM"
-	line "for teaching"
-	cont "#MON how to"
-	cont "DIG holes!"
+	para "Sie haben den"
+	line "SCHAUFLER"
+	cont "gestohlen, eine"
+	cont "TM, mit der"
+	cont "#MON Löcher"
+	cont "graben können!"
 
-	para "That cost me a"
-	line "bundle, it did!"
+	para "Der SCHAUFLER war"
+	line "sündhaft teuer!"
 	done
 
 _CeruleanTrashedText_1d6b0::
-	text "I figure what's"
-	line "lost is lost!"
+	text "Was weg ist,"
+	line "ist weg!"
 
-	para "I decided to teach"
-	line "DIGLETT how to"
-	cont "DIG without a TM!"
+	para "Ich werde DIGDA"
+	line "beibringen, ohne"
+	cont "den SCHAUFLER"
+	cont "zu graben!"
 	done
 
 _CeruleanHouseTrashedText2::
-	text "TEAM ROCKET must"
-	line "be trying to DIG"
-	cont "their way into no"
-	cont "good!"
+	text "Das TEAM ROCKET"
+	line "braucht den"
+	cont "SCHAUFLER sicher"
+	cont "für irgendeine"
+	cont "Schandtat!"
 	done
 
 _CeruleanHouseTrashedText3::
-	text "TEAM ROCKET left"
-	line "a way out!"
+	text "Das TEAM ROCKET"
+	line "hat Spuren"
+	cont "hinterlassen!"
 	done

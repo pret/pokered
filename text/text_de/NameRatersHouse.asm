@@ -1,60 +1,65 @@
 _NameRaterText_1dab3::
-	text "Hello, hello!"
-	line "I am the official"
-	cont "NAME RATER!"
+	text "Hallo! Ich bin"
+	line "der offizielle"
+	cont "NAMEN-BEWERTER!"
 
-	para "Want me to rate"
-	line "the nicknames of"
-	cont "your #MON?"
+	para "Soll ich die"
+	line "Spitznamen Deiner"
+	cont "#MON bewerten?"
 	done
 
 _NameRaterText_1dab8::
-	text "Which #MON"
-	line "should I look at?"
+	text "Von welchem"
+	line "#MON soll ich"
+	cont "den Spitznamen"
+	cont "beurteilen?"
 	prompt
 
 _NameRaterText_1dabd::
+	text "Der Spitzname ist"
+	line "@"
 	text_ram wcd6d
-	text ", is it?"
-	line "That is a decent"
-	cont "nickname!"
+	text ", oder?"
+	cont "Ein schöner Name!"
 
-	para "But, would you"
-	line "like me to give"
-	cont "it a nicer name?"
+	para "Gefällt er Dir"
+	line "noch immer, oder"
+	cont "möchtest Du ihn"
+	cont "ändern?"
 
-	para "How about it?"
+	para "Was möchtest Du?"
 	done
 
 _NameRaterText_1dac2::
-	text "Fine! What should"
-	line "we name it?"
+	text "Gut! Wie soll der"
+	line "neue Name lauten?"
 	prompt
 
 _NameRaterText_1dac7::
-	text "OK! This #MON"
-	line "has been renamed"
-	cont "@"
+	text "OK! Der neue Name"
+	line "dieses #MON"
+	cont "ist @"
 	text_ram wBuffer
 	text "!"
 
-	para "That's a better"
-	line "name than before!"
+	para "Ein noch"
+	line "schönerer Name"
+	cont "als zuvor!"
 	done
 
 _NameRaterText_1dacc::
-	text "Fine! Come any"
-	line "time you like!"
+	text "Komm vorbei, wann"
+	line "immer Du magst!"
 	done
 
 _NameRaterText_1dad1::
 	text_ram wcd6d
-	text ", is it?"
-	line "That is a truly"
-	cont "impeccable name!"
+	text "!"
+	line "Ein wirklich"
+	cont "tadelloser Name!"
 
-	para "Take good care of"
-	line "@"
+	para "Kümmere Dich gut"
+	line "um @"
 	text_ram wcd6d
 	text "!"
 	done

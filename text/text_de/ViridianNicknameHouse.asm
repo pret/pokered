@@ -1,23 +1,27 @@
 _ViridianHouseText1::
-	text "Coming up with"
-	line "nicknames is fun,"
-	cont "but hard."
+	text "Es macht Spaß,"
+	line "sich Spitznamen"
+	cont "auszudenken. Aber"
+	cont "es erfordert viel"
+	cont "Einfallsreichtum!"
 
-	para "Simple names are"
-	line "the easiest to"
-	cont "remember."
+	para "Einfache Namen"
+	line "kann man sich"
+	cont "leichter merken!"
 	done
 
 _ViridianHouseText2::
-	text "My Daddy loves"
-	line "#MON too."
+	text "Mein Papa mag"
+	line "#MON auch"
+	cont "sehr gerne!"
 	done
 
 _ViridianHouseText_1d5b1::
-	text "SPEARY: Tetweet!"
+	text "WILLI: "
+	line "Habi! Habitak!"
 	done
 
 _ViridianHouseText4::
-	text "SPEAROW"
-	line "Name: SPEARY"
+	text "HABITAK"
+	line "Spitzname: WILLI"
 	done

@@ -1,90 +1,109 @@
 _Route24EndBattleText1::
-	text "I"
-	line "thought not!"
+	text "Ich"
+	line "habe wohl doch"
+	cont "nichts gesehen!"
 	prompt
 
 _Route24AfterBattleText1::
-	text "I hid because the"
-	line "people on the"
-	cont "bridge scared me!"
+	text "Ich habe mich"
+	line "versteckt, weil"
+	cont "mir die Leute auf"
+	cont "der Brücke Angst"
+	cont "gemacht haben!"
 	done
 
 _Route24BattleText2::
-	text "OK! I'm No. 5!"
-	line "I'll stomp you!"
+	text "Ich bin Nr. 5!"
+	line "Dich mache ich"
+	cont "platt!"
 	done
 
 _Route24EndBattleText2::
-	text "Whoa!"
-	line "Too much!"
+	text "Das"
+	line "war zuviel des"
+	cont "Guten!"
 	prompt
 
 _Route24AfterBattleText2::
-	text "I did my best, I"
-	line "have no regrets!"
+	text "Ich habe alles"
+	line "gegeben, ich"
+	cont "schäme mich"
+	cont "nicht!"
 	done
 
 _Route24BattleText3::
-	text "I'm No. 4!"
-	line "Getting tired?"
+	text "Ich bin Nr. 4!"
+	line "Wirst Du müde?"
 	done
 
 _Route24EndBattleText3::
-	text "I lost"
-	line "too!"
+	text "Ich habe"
+	line "auch verloren!"
 	prompt
 
 _Route24AfterBattleText3::
-	text "I did my best, so"
-	line "I've no regrets!"
+	text "Ich habe alles"
+	line "gegeben, ich"
+	cont "schäme mich"
+	cont "nicht!"
 	done
 
 _Route24BattleText4::
-	text "Here's No. 3!"
-	line "I won't be easy!"
+	text "Hier kommt Nr. 3!"
+	line "Ich mache Dir das"
+	cont "Leben schwer!"
 	done
 
 _Route24EndBattleText4::
-	text "Ow!"
-	line "Stomped flat!"
+	text "Ah!"
+	line "Eiskalt erwischt!"
 	prompt
 
 _Route24AfterBattleText4::
-	text "I did my best, I"
-	line "have no regrets!"
+	text "Ich habe alles"
+	line "gegeben, ich"
+	cont "schäme mich"
+	cont "nicht!"
 	done
 
 _Route24BattleText5::
-	text "I'm second!"
-	line "Now it's serious!"
+	text "Ich bin Nr. 2!"
+	line "Nun wird es"
+	cont "ernst!"
 	done
 
 _Route24EndBattleText5::
-	text "How could I"
-	line "lose?"
+	text "Wie konnte"
+	line "ich verlieren?"
 	prompt
 
 _Route24AfterBattleText5::
-	text "I did my best, I"
-	line "have no regrets!"
+	text "Ich habe alles"
+	line "gegeben, ich"
+	cont "schäme mich"
+	cont "nicht!"
 	done
 
 _Route24BattleText6::
-	text "This is NUGGET"
-	line "BRIDGE! Beat us 5"
-	cont "trainers and win"
-	cont "a fabulous prize!"
+	text "Das hier ist die"
+	line "NUGGET-BRÜCKE!"
+	cont "Wenn Du uns fünf"
+	cont "Trainer besiegst, "
+	cont "erhältst Du einen"
+	cont "wertvollen Preis!"
 
-	para "Think you got"
-	line "what it takes?"
+	para "Willst Du Dein"
+	line "Glück versuchen?"
 	done
 
 _Route24EndBattleText6::
-	text "Whoo!"
-	line "Good stuff!"
+	text "Wow!"
+	line "Du bist gut!"
 	prompt
 
 _Route24AfterBattleText6::
-	text "I did my best, I"
-	line "have no regrets!"
+	text "Ich habe alles"
+	line "gegeben, ich"
+	cont "schäme mich"
+	cont "nicht!"
 	done

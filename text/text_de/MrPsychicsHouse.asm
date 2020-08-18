@@ -1,26 +1,30 @@
 _TM29PreReceiveText::
-	text "...Wait! Don't"
-	line "say a word!"
+	text "Warte! Sag"
+	line "kein Wort!"
 
-	para "You wanted this!"
+	para "Du suchst dies"
+	line "hier, oder?"
 	prompt
 
 _ReceivedTM29Text::
-	text "<PLAYER> received"
+	text "<PLAYER> erhält"
 	line "@"
 	text_ram wcf4b
 	text "!@"
 	text_end
 
 _TM29ExplanationText::
-	text "TM29 is PSYCHIC!"
+	text "TM29 ist"
+	line "PSYCHOKINESE!"
 
-	para "It can lower the"
-	line "target's SPECIAL"
-	cont "abilities."
+	para "Sie vermindert"
+	line "die SPEZIAL-"
+	cont "FÄHIGKEITEN des"
+	cont "Gegners."
 	done
 
 _TM29NoRoomText::
-	text "Where do you plan"
-	line "to put this?"
+	text "Hey, Du kannst"
+	line "keine Items mehr"
+	cont "tragen!"
 	done

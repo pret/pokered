@@ -1,137 +1,159 @@
 _Route21BattleText1::
-	text "You want to know"
-	line "if the fish are"
-	cont "biting?"
+	text "Möchtest Du"
+	line "wissen, ob die"
+	cont "Fische beißen?"
 	done
 
 _Route21EndBattleText1::
-	text "Dang!"
+	text "Mist!"
 	prompt
 
 _Route21AfterBattleText1::
-	text "I can't catch"
-	line "anything good!"
+	text "Bisher habe ich"
+	line "noch nichts"
+	cont "gefangen!"
 	done
 
 _Route21BattleText2::
-	text "I got a big haul!"
-	line "Wanna go for it?"
+	text "Ich habe einen"
+	line "guten Fang"
+	cont "gemacht! Möchtest"
+	cont "Du ihn sehen?"
 	done
 
 _Route21EndBattleText2::
-	text "Darn"
-	line "MAGIKARP!"
+	text "NEIN!"
+	line "KARPADOR!"
 	prompt
 
 _Route21AfterBattleText2::
-	text "I seem to only"
-	line "catch MAGIKARP!"
+	text "Oh nein! Ich habe"
+	line "schon wieder "
+	cont "ein KARPADOR"
+	cont "gefangen!"
 	done
 
 _Route21BattleText3::
-	text "The sea cleanses"
-	line "my body and soul!"
+	text "Die See reinigt"
+	line "Körper und Seele!"
 	done
 
 _Route21EndBattleText3::
-	text "Ayah!"
+	text "Nein!"
 	prompt
 
 _Route21AfterBattleText3::
-	text "I like the"
-	line "mountains too!"
+	text "Aber ich mag die"
+	line "Berge genauso"
+	cont "gern!"
 	done
 
 _Route21BattleText4::
-	text "What's wrong with"
-	line "me swimming?"
+	text "Stört es Dich,"
+	line "daß ich hier"
+	cont "schwimme?"
 	done
 
 _Route21EndBattleText4::
-	text "Cheap"
-	line "shot!"
+	text "Das"
+	line "war unter der"
+	cont "Gürtellinie!"
 	prompt
 
 _Route21AfterBattleText4::
-	text "I look like what?"
-	line "A studded inner"
-	cont "tube? Get lost!"
+	text "Wie habe ich"
+	line "ausgesehen? Wie"
+	cont "ein nasser Sack?"
+	cont "Hau endlich ab!"
 	done
 
 _Route21BattleText5::
-	text "I caught all my"
-	line "#MON at sea!"
+	text "Ich habe alle"
+	line "meine #MON"
+	cont "auf See gefangen!"
 	done
 
 _Route21EndBattleText5::
-	text "Diver!!"
-	line "Down!!"
+	text_start
+	line "Auweia! Ich bin"
+	cont "untergegangen!"
 	prompt
 
 _Route21AfterBattleText5::
-	text "Where'd you catch"
-	line "your #MON?"
+	text "Wo hast Du Deine"
+	line "#MON gefangen?"
 	done
 
 _Route21BattleText6::
-	text "Right now, I'm in"
-	line "a triathlon meet!"
+	text "Ich nehme an"
+	line "einem Triathlon"
+	cont "teil!"
 	done
 
 _Route21EndBattleText6::
-	text "Pant..."
-	line "pant...pant..."
+	text "Ächz,"
+	line "schnauf..."
 	prompt
 
 _Route21AfterBattleText6::
-	text "I'm beat!"
-	line "But, I still have"
-	cont "the bike race and"
-	cont "marathon left!"
+	text "Du hast gewonnen!"
+	line "Aber ich kann"
+	cont "noch beim"
+	cont "Marathon und im"
+	cont "Radrennen siegen!"
 	done
 
 _Route21BattleText7::
-	text "Ahh! Feel the sun"
-	line "and the wind!"
+	text "Ahh!"
+	line "Genieße die Sonne"
+	cont "und den Wind!"
 	done
 
 _Route21EndBattleText7::
-	text "Yow!"
-	line "I lost!"
+	text "Ups!"
+	line "Ich hab verloren!"
 	prompt
 
 _Route21AfterBattleText7::
-	text "I'm sunburnt to a"
-	line "crisp!"
+	text "Die Sonne hat"
+	line "mich wie ein"
+	cont "Hähnchen"
+	cont "geröstet!"
 	done
 
 _Route21BattleText8::
-	text "Hey, don't scare"
-	line "away the fish!"
+	text "Hey, Du verjagst"
+	line "die Fische!"
 	done
 
 _Route21EndBattleText8::
-	text "Sorry!"
-	line "I didn't mean it!"
+	text_start
+	line "Entschuldigung,"
+	cont "ich wollte nicht"
+	cont "so barsch sein!"
 	prompt
 
 _Route21AfterBattleText8::
-	text "I was just angry"
-	line "that I couldn't"
-	cont "catch anything."
+	text "Ich war nur"
+	line "sauer, weil ich"
+	cont "noch nichts"
+	cont "gefangen habe."
 	done
 
 _Route21BattleText9::
-	text "Keep me company"
-	line "'til I get a hit!"
+	text "Leiste mir"
+	line "Gesellschaft, bis"
+	cont "etwas anbeißt!"
 	done
 
 _Route21EndBattleText9::
-	text "That"
-	line "burned some time."
+	text "Naja,"
+	line "Wenigstens ist"
+	cont "etwas Zeit"
+	cont "vergangen!"
 	prompt
 
 _Route21AfterBattleText9::
-	text "Oh wait! I got a"
-	line "bite! Yeah!"
+	text "Juchhu! Etwas"
+	line "hat angebissen!"
 	done

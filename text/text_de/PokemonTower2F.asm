@@ -1,57 +1,64 @@
 _PokemonTower2Text_6062d::
-	text "<RIVAL>: Hey,"
-	line "<PLAYER>! What"
-	cont "brings you here?"
-	cont "Your #MON"
-	cont "don't look dead!"
+	text "<RIVAL>: Hallo,"
+	line "<PLAYER>! Was"
+	cont "machst Du hier?"
+	cont "Deine #MON"
+	cont "sehen ganz fit"
+	cont "aus!"
 
-	para "I can at least"
-	line "make them faint!"
-	cont "Let's go, pal!"
+	para "Naja, nach dem"
+	line "Kampf wird es"
+	cont "anders aussehen!"
 	done
 
 _PokemonTower2Text_60632::
-	text "What?"
-	line "You stinker!"
+	text "Was?"
+	line "Du bist eine"
+	cont "harte Nuß!"
 
-	para "I took it easy on"
-	line "you too!"
+	para "Ich bin es wohl"
+	line "etwas zu locker"
+	cont "angegangen!"
 	prompt
 
 _PokemonTower2Text_60637::
-	text "<RIVAL>: Well,"
-	line "look at all your"
-	cont "wimpy #MON!"
+	text "<RIVAL>: Deine"
+	line "#MON sind"
+	cont "nicht in Form!"
 
-	para "Toughen them up a"
-	line "bit more!"
+	para "Trainiere sie ein"
+	line "bißchen härter!"
 	prompt
 
 _PokemonTower2Text_6063c::
-	text "How's your #DEX"
-	line "coming, pal?"
-	cont "I just caught a"
-	cont "CUBONE!"
+	text "Wie macht sich"
+	line "Dein #DEX,"
+	cont "Kumpel? Ich habe"
+	cont "kürzlich ein"
+	cont "TRAGOSSO"
+	cont "gefangen!"
 
-	para "I can't find the"
-	line "grown-up MAROWAK"
-	cont "yet!"
+	para "Allerdings habe"
+	line "ich noch kein"
+	cont "KNOGGA!"
 
-	para "I doubt there are"
-	line "any left! Well, I"
-	cont "better get going!"
-	cont "I've got a lot to"
-	cont "accomplish, pal!"
+	para "Ich glaube, von"
+	line "diesen #MON"
+	cont "gibt es nur noch"
+	cont "wenige. Also, ich"
+	cont "habe viel zu tun!"
+	cont "Ich muß weiter!"
 
-	para "Smell ya later!"
+	para "Dann bis später!"
 	done
 
 _PokemonTower2Text2::
-	text "Even we could not"
-	line "identify the"
-	cont "wayward GHOSTs!"
+	text "Selbst wir können"
+	line "die eigenwilligen"
+	cont "GEISTER nicht"
+	cont "identifizieren!"
 
-	para "A SILPH SCOPE"
-	line "might be able to"
-	cont "unmask them."
+	para "Man benötigt das"
+	line "SILPH SCOPE, um"
+	cont "sie zu erkennen!"
 	done

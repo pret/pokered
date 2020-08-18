@@ -1,12 +1,15 @@
 _CeladonPrizeRoomText1::
-	text "I sure do fancy"
-	line "that PORYGON!"
+	text "Ich hätte gerne"
+	line "einen PORYGON!"
 
-	para "But, it's hard to"
-	line "win at slots!"
+	para "Aber ich habe"
+	line "kein Glück an"
+	cont "den einarmigen"
+	cont "Banditen!"
 	done
 
 _CeladonPrizeRoomText2::
-	text "I had a major"
-	line "haul today!"
+	text "Ich hatte"
+	line "heute eine"
+	cont "Glückssträhne!"
 	done

@@ -1,23 +1,24 @@
 _VermilionHouse2Text_560b1::
-	text "I'm the FISHING"
-	line "GURU!"
+	text "Ich bin der"
+	line "PROFIANGLER!"
 
-	para "I simply Looove"
-	line "fishing!"
+	para "Ich liebe den"
+	line "Angelsport!"
 
-	para "Do you like to"
-	line "fish?"
+	para "Angelst Du auch"
+	line "gerne?"
 	done
 
 _VermilionHouse2Text_560b6::
-	text "Grand! I like"
-	line "your style!"
+	text "Klasse! Du bist"
+	line "mir sympathisch!"
 
-	para "Take this and"
-	line "fish, young one!"
+	para "Nimm das hier"
+	line "und gehe angeln,"
+	cont "junger Freund!"
 
-	para "<PLAYER> received"
-	line "an @"
+	para "<PLAYER> erhält"
+	line "eine @"
 	text_ram wcf4b
 	text "!@"
 	text_end
@@ -25,31 +26,31 @@ _VermilionHouse2Text_560b6::
 _VermilionHouse2Text_560bb::
 	text_start
 
-	para "Fishing is a way"
-	line "of life!"
+	para "Angeln ist meine"
+	line "Leidenschaft!"
 
-	para "From the seas to"
-	line "rivers, go out"
-	cont "and land the big"
-	cont "one, young one!"
+	para "Suche in Seen"
+	line "und Flüssen und"
+	cont "lande den großen"
+	cont "Fang!"
 	done
 
 _VermilionHouse2Text_560c0::
-	text "Oh... That's so"
-	line "disappointing..."
+	text "Oh... Das ist"
+	line "wirklich schade!"
 	done
 
 _VermilionHouse2Text_560c5::
-	text "Hello there,"
-	line "<PLAYER>!"
+	text "Hallo, <PLAYER>!"
 
-	para "How are the fish"
-	line "biting?"
+	para "Wie beißen die"
+	line "Fische?"
 	done
 
 _VermilionHouse2Text_560ca::
-	text "Oh no!"
+	text "Oh nein!"
 
-	para "You have no room"
-	line "for my gift!"
+	para "Du hast keinen"
+	line "Platz für mein"
+	cont "Geschenk!"
 	done

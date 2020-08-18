@@ -1,56 +1,61 @@
 _OakAppearsText::
-	text "OAK: Hey! Wait!"
-	line "Don't go out!@"
+	text "EICH: Warte!"
+	line "Geh nicht raus!@"
 	text_end
 
 _OakWalksUpText::
-	text "OAK: It's unsafe!"
-	line "Wild #MON live"
-	cont "in tall grass!"
+	text "PROF. EICH:"
+	line "Draußen ist es"
+	cont "gefährlich! Wilde"
+	cont "#MON leben im"
+	cont "hohen Gras!"
 
-	para "You need your own"
-	line "#MON for your"
-	cont "protection."
-	cont "I know!"
+	para "Du brauchst eigene"
+	line "#MON, um"
+	cont "Dich zu schützen."
 
-	para "Here, come with"
-	line "me!"
+	para "Komm, folge"
+	line "mir!"
 	done
 
 _PalletTownText2::
-	text "I'm raising"
-	line "#MON too!"
+	text "Auch ich ziehe"
+	line "#MON auf!"
 
-	para "When they get"
-	line "strong, they can"
-	cont "protect me!"
+	para "Wenn sie stark"
+	line "sind, können sie"
+	cont "mich beschützen!"
 	done
 
 _PalletTownText3::
-	text "Technology is"
-	line "incredible!"
+	text "Die Technik"
+	line "heutzutage ist"
+	cont "unglaublich!"
 
-	para "You can now store"
-	line "and recall items"
-	cont "and #MON as"
-	cont "data via PC!"
+	para "Man kann sogar"
+	line "Items und "
+	cont "#MON"
+	cont "via PC lagern"
+	cont "und wieder"
+	cont "abrufen!"
 	done
 
 _PalletTownText4::
-	text "OAK #MON"
-	line "RESEARCH LAB"
+	text "PROFESSOR EICH"
+	line "#MON-LABOR"
 	done
 
 _PalletTownText5::
-	text "PALLET TOWN"
-	line "Shades of your"
-	cont "journey await!"
+	text "ALABASTIA"
+	line "Dich erwarten"
+	cont "aufregende"
+	cont "Abenteuer!"
 	done
 
 _PalletTownText6::
-	text "<PLAYER>'s house "
+	text "Haus von <PLAYER>"
 	done
 
 _PalletTownText7::
-	text "<RIVAL>'s house "
+	text "Haus von <RIVAL>"
 	done

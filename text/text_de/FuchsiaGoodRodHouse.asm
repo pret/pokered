@@ -1,44 +1,44 @@
 _FuchsiaHouse3Text_561bd::
-	text "I'm the FISHING"
-	line "GURU's older"
-	cont "brother!"
+	text "Ich bin der"
+	line "ältere Bruder des"
+	cont "PROFIANGLERS!"
 
-	para "I simply Looove"
-	line "fishing!"
+	para "Ich liebe"
+	line "den Angelsport!"
 
-	para "Do you like to"
-	line "fish?"
+	para "Angelst Du auch"
+	line "gerne?"
 	done
 
 _FuchsiaHouse3Text_561c2::
-	text "Grand! I like"
-	line "your style!"
+	text "Klasse! Du bist"
+	line "mir sympathisch!"
 
-	para "Take this and"
-	line "fish, young one!"
+	para "Nimm das hier"
+	line "und gehe angeln!"
 
-	para "<PLAYER> received"
-	line "a @"
+	para "<PLAYER> erhält"
+	line "eine @"
 	text_ram wcf4b
 	text "!@"
 	text_end
 
 _FuchsiaHouse3Text_56212::
-	text "Oh... That's so"
-	line "disappointing..."
+	text "Oh!"
+	line "Das ist schade!"
 	done
 
 _FuchsiaHouse3Text_56217::
-	text "Hello there,"
-	line "<PLAYER>!"
+	text "Hallo, <PLAYER>!"
 
-	para "How are the fish"
-	line "biting?"
+	para "Wie beißen die"
+	line "Fische?"
 	done
 
 _FuchsiaHouse3Text_5621c::
-	text "Oh no!"
+	text "Oh nein!"
 
-	para "You have no room"
-	line "for my gift!"
+	para "Du hast keinen"
+	line "Platz mehr für"
+	cont "mein Geschenk!"
 	done

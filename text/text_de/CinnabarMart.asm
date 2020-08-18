@@ -1,10 +1,12 @@
 _CinnabarMartText2::
-	text "Don't they have X"
-	line "ATTACK? It's good"
-	cont "for battles!"
+	text "Haben sie kein"
+	line "X-ANGRIFF? Es ist"
+	cont "in Kämpfen sehr"
+	cont "nützlich!"
 	done
 
 _CinnabarMartText3::
-	text "It never hurts to"
-	line "have extra items!"
+	text "Man sollte immer"
+	line "einige Items bei"
+	cont "sich tragen!"
 	done

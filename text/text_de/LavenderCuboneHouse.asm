@@ -1,25 +1,27 @@
 _LavenderHouse2Text1::
-	text "CUBONE: Kyarugoo!@"
+	text "TRAGOSSO:"
+	line "Kiajahuu!@"
 	text_end
 
 _LavenderHouse2Text_1d9dc::
-	text "I hate those"
-	line "horrible ROCKETs!"
+	text "Ich hasse dieses"
+	line "furchtbare TEAM"
+	cont "ROCKET!"
 
-	para "That poor CUBONE's"
-	line "mother..."
+	para "Die arme Mutter"
+	line "des TRAGOSSO!"
 
-	para "It was killed"
-	line "trying to escape"
-	cont "from TEAM ROCKET!"
+	para "Sie konnte dem"
+	line "TEAM ROCKET"
+	cont "nicht entkommen!"
 	done
 
 _LavenderHouse2Text_1d9e1::
-	text "The GHOST of"
-	line "#MON TOWER is"
-	cont "gone!"
+	text "Der GEIST im"
+	line "#MON-TURM"
+	cont "ist verschwunden!"
 
-	para "Someone must have"
-	line "soothed its"
-	cont "restless soul!"
+	para "Jemand muß seine"
+	line "rastlose Seele"
+	cont "erlöst haben!"
 	done

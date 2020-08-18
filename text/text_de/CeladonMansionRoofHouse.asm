@@ -1,10 +1,11 @@
 _CeladonMansion5Text1::
-	text "I know everything"
-	line "about the world"
-	cont "of #MON in"
-	cont "your GAME BOY!"
+	text "Ich kenne jedes"
+	line "Detail der"
+	cont "#MON-WELT"
+	cont "in Deinem"
+	cont "GAME BOY!"
 
-	para "Get together with"
-	line "your friends and"
-	cont "trade #MON!"
+	para "Triff Dich mit"
+	line "Freunden und"
+	cont "tausche #MON!"
 	done

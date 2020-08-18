@@ -1,61 +1,67 @@
 _PokemonTower2Text_60c1f::
-	text "The GHOST was the"
-	line "restless soul of"
-	cont "CUBONE's mother!"
+	text "Der GEIST war die"
+	line "rastlose Seele"
+	cont "der Mutter eines"
+	cont "TRAGOSSO!"
 	done
 
 _PokemonTower2Text_60c24::
-	text "The mother's soul"
-	line "was calmed."
+	text "Ihre Seele hat"
+	line "Frieden gefunden."
 
-	para "It departed to"
-	line "the afterlife!"
+	para "Sie ist in"
+	line "das Jenseits"
+	cont "eingekehrt..."
 	done
 
 _PokemonTower6BattleText1::
-	text "Give...me..."
-	line "blood..."
+	text "Ich... brauche..."
+	line "Blut..."
 	done
 
 _PokemonTower6EndBattleText1::
-	text "Groan!"
+	text_start
+	line "Wo bin ich?"
 	prompt
 
 _PokemonTower6AfterBattleText1::
-	text "I feel anemic and"
-	line "weak..."
+	text "Ich fühle mich"
+	line "so blutleer und"
+	cont "schwach..."
 	done
 
 _PokemonTower6BattleText2::
-	text "Urff... Kwaah!"
+	text "Buuh... Buhuhu!"
 	done
 
 _PokemonTower6EndBattleText2::
-	text "Some-"
-	line "thing fell out!"
+	text_start
+	line "Irgend etwas hat"
+	cont "mich verlassen!"
 	prompt
 
 _PokemonTower6AfterBattleText2::
-	text "Hair didn't fall"
-	line "out! It was an"
-	cont "evil spirit!"
+	text "Es war ein böser"
+	line "Geist, der Besitz"
+	cont "von mir ergriffen"
+	cont "hatte!"
 	done
 
 _PokemonTower6BattleText3::
-	text "Ke..ke...ke..."
-	line "ke..ke...ke!!"
+	text "Buh..."
+	line "Buh... Buhuhu..."
 	done
 
 _PokemonTower6EndBattleText3::
-	text "Keee!"
+	text "Buuh!"
 	prompt
 
 _PokemonTower6AfterBattleText3::
-	text "What's going on"
-	line "here?"
+	text "Was geht hier"
+	line "vor?"
 	done
 
 _PokemonTower6Text6::
-	text "Be gone..."
-	line "Intruders..."
+	text "Verschwindet..."
+	line "Eindringlinge..."
 	done

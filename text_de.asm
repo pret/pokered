@@ -272,9 +272,9 @@ INCLUDE "data/text/text_de/text_7.asm"
 
 SECTION "Pokédex Text", ROMX
 
-INCLUDE "data/pokemon/dex_text.asm"
+INCLUDE "version/pokerot/data/pokemon/dex_text.asm"
 
 
 SECTION "Move Names", ROMX
 
-INCLUDE "data/moves/names.asm"
+INCLUDE "version/pokerot/data/moves/names.asm"

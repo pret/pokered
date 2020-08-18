@@ -1,24 +1,25 @@
 _CeruleanPokecenterText2::
-	text "That BILL!"
+	text "Dieser BILL!"
 
-	para "I heard that"
-	line "he'll do whatever"
-	cont "it takes to get"
-	cont "rare #MON!"
+	para "Ich hörte, für"
+	line "seltene #MON"
+	cont "würde er alles"
+	cont "tun!"
 	done
 
 _CeruleanPokecenterText3::
-	text "Have you heard"
-	line "about BILL?"
+	text "Hat man Dir schon"
+	line "von BILL erzählt?"
 
-	para "Everyone calls"
-	line "him a #MANIAC!"
+	para "Jeder nennt ihn"
+	line "den #MANIAC!"
 
-	para "I think people"
-	line "are just jealous"
-	cont "of BILL, though."
+	para "Aber ich glaube,"
+	line "die Leute sind"
+	cont "bloß neidisch auf"
+	cont "BILL."
 
-	para "Who wouldn't want"
-	line "to boast about"
-	cont "their #MON?"
+	para "Wer würde denn"
+	line "nicht mit seinen"
+	cont "#MON prahlen?"
 	done

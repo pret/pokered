@@ -1,21 +1,23 @@
 _CeladonHotelText1::
-	text "#MON? No, this"
-	line "is a hotel for"
-	cont "people."
+	text "In diesem Hotel"
+	line "sind keine"
+	cont "#MON erlaubt!"
 
-	para "We're full up."
+	para "Tut mir leid."
 	done
 
 _CeladonHotelText2::
-	text "I'm on vacation"
-	line "with my brother"
-	cont "and boy friend."
+	text "Ich mache hier"
+	line "mit meinem Bruder"
+	cont "und meinem Freund"
+	cont "Urlaub."
 
-	para "CELADON is such a"
-	line "pretty city!"
+	para "PRISMANIA CITY"
+	line "ist wunderschön!"
 	done
 
 _CeladonHotelText3::
-	text "Why did she bring"
-	line "her brother?"
+	text "Warum nur mußte"
+	line "sie ihren Bruder"
+	cont "mitnehmen?"
 	done

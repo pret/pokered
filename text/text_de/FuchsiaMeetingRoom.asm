@@ -1,26 +1,30 @@
 _FuchsiaMeetingRoomText1::
-	text "We nicknamed the"
-	line "WARDEN SLOWPOKE."
+	text "Der WÄRTER trägt"
+	line "den Spitznamen"
+	cont "FLEGMON."
 
-	para "He and SLOWPOKE"
-	line "both look vacant!"
+	para "Er und FLEGMON"
+	line "ähneln sich sehr!"
 	done
 
 _FuchsiaMeetingRoomText2::
-	text "SLOWPOKE is very"
-	line "knowledgeable"
-	cont "about #MON!"
+	text "FLEGMON weiß"
+	line "eine Menge über"
+	cont "#MON!"
 
-	para "He even has some"
-	line "fossils of rare,"
-	cont "extinct #MON!"
+	para "Er besitzt sogar"
+	line "einige Fossilien"
+	cont "ausgestorbener"
+	cont "URZEIT-#MON!"
 	done
 
 _FuchsiaMeetingRoomText3::
-	text "SLOWPOKE came in,"
-	line "but I couldn't"
-	cont "understand him."
+	text "FLEGMON war hier,"
+	line "aber ich habe ihn"
+	cont "nicht verstehen"
+	cont "können!"
 
-	para "I think he's got"
-	line "a speech problem!"
+	para "Ich glaube, er"
+	line "hat keine Zähne"
+	cont "mehr!"
 	done

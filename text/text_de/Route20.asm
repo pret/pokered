@@ -1,156 +1,185 @@
 _Route20BattleText1::
-	text "The water is"
-	line "shallow here."
+	text "Das Wasser ist"
+	line "hier sehr flach."
 	done
 
 _Route20EndBattleText1::
-	text "Splash!"
+	text_start
+	line "Platsch!"
 	prompt
 
 _Route20AfterBattleText1::
-	text "I wish I could"
-	line "ride my #MON."
+	text "Ich wünschte, ich"
+	line "könnte auf einem"
+	cont "#MON reiten."
 	done
 
 _Route20BattleText2::
-	text "SEAFOAM is a"
-	line "quiet getaway!"
+	text "Die"
+	line "SEESCHAUMINSELN"
+	cont "sind ein stiller"
+	cont "Zufluchtsort!"
 	done
 
 _Route20EndBattleText2::
-	text "Quit it!"
+	text_start
+	line "Schluß damit!"
 	prompt
 
 _Route20AfterBattleText2::
-	text "There's a huge"
-	line "cavern underneath"
-	cont "this island."
+	text "Unter dieser"
+	line "Insel befindet"
+	cont "sich eine riesige"
+	cont "Höhle!"
 	done
 
 _Route20BattleText3::
-	text "I love floating"
-	line "with the fishes!"
+	text "Ich lasse mich"
+	line "gerne mit den"
+	cont "Fischen treiben!"
 	done
 
 _Route20EndBattleText3::
-	text "Yowch!"
+	text "Autsch!"
 	prompt
 
 _Route20AfterBattleText3::
-	text "Want to float"
-	line "with me?"
+	text "Möchtest Du mir"
+	line "Gesellschaft"
+	cont "leisten?"
 	done
 
 _Route20BattleText4::
-	text "Are you on"
-	line "vacation too?"
+	text "Machst Du auch"
+	line "gerade Urlaub?"
 	done
 
 _Route20EndBattleText4::
-	text "No"
-	line "mercy at all!"
+	text "Du"
+	line "kennst keine"
+	cont "Gnade!"
 	prompt
 
 _Route20AfterBattleText4::
-	text "SEAFOAM used to"
-	line "be one island!"
+	text "Die"
+	line "SEESCHAUMINSELN"
+	cont "waren einmal EINE"
+	cont "große Insel!"
 	done
 
 _Route20BattleText5::
-	text "Check out my buff"
-	line "physique!"
+	text "Schau Dir meinen"
+	line "gestählten Körper"
+	cont "ruhig an!"
 	done
 
 _Route20EndBattleText5::
-	text "Wimpy!"
+	text_start
+	line "Waschlappen!"
 	prompt
 
 _Route20AfterBattleText5::
-	text "I should've been"
-	line "buffing up my"
-	cont "#MON, not me!"
+	text "Ich hätte meine"
+	line "#MON stählen"
+	cont "sollen, nicht"
+	cont "meinen Körper!"
 	done
 
 _Route20BattleText6::
-	text "Why are you"
-	line "riding a #MON?"
-	cont "Can't you swim?"
+	text "Warum reitest Du"
+	line "auf dem #MON?"
+	cont "Kannst Du nicht"
+	cont "schwimmen?"
 	done
 
 _Route20EndBattleText6::
-	text "Ouch!"
-	line "Torpedoed!"
+	text "Ich"
+	line "wurde torpediert!"
 	prompt
 
 _Route20AfterBattleText6::
-	text "Riding a #MON"
-	line "sure looks fun!"
+	text "Es dürfte Spaß"
+	line "machen, auf einem"
+	cont "#MON zu"
+	cont "reiten!"
 	done
 
 _Route20BattleText7::
-	text "I rode my bird"
-	line "#MON here!"
+	text "Mein"
+	line "VOGEL-#MON"
+	cont "hat mich hierher"
+	cont "getragen!"
 	done
 
 _Route20EndBattleText7::
-	text "Oh"
-	line "no!"
+	text_start
+	line "Oh nein!"
 	prompt
 
 _Route20AfterBattleText7::
-	text "My birds can't"
-	line "FLY me back!"
+	text "Kann ich mit"
+	line "meinen VOGEL-"
+	cont "#MON noch"
+	cont "zurückfliegen?"
 	done
 
 _Route20BattleText8::
-	text "My boy friend gave"
-	line "me big pearls!"
+	text "Mein Freund hat"
+	line "mir eine große"
+	cont "Perle geschenkt!"
 	done
 
 _Route20EndBattleText8::
-	text "Don't"
-	line "touch my pearls!"
+	text_start
+	line "Laß die Finger"
+	cont "von meiner Perle!"
 	prompt
 
 _Route20AfterBattleText8::
-	text "Will my pearls"
-	line "grow bigger"
-	cont "inside CLOYSTER?"
+	text "Ob meine Perle"
+	line "in einem AUSTOS"
+	cont "größer würde?"
 	done
 
 _Route20BattleText9::
-	text "I swam here from"
-	line "CINNABAR ISLAND!"
+	text "Ich bin von der"
+	line "ZINNOBERINSEL"
+	cont "herüber-"
+	cont "geschwommen!"
 	done
 
 _Route20EndBattleText9::
-	text "I'm"
-	line "so disappointed!"
+	text "Ich"
+	line "bin enttäuscht!"
 	prompt
 
 _Route20AfterBattleText9::
-	text "#MON have"
-	line "taken over an"
-	cont "abandoned mansion"
-	cont "on CINNABAR!"
+	text "Auf der"
+	line "ZINNOBERINSEL"
+	cont "haben #MON"
+	cont "eine verlassene"
+	cont "Villa besiedelt!"
 	done
 
 _Route20BattleText10::
-	text "CINNABAR, in the"
-	line "west, has a LAB"
-	cont "for #MON."
+	text "Auf der"
+	line "ZINNOBERINSEL"
+	cont "befindet sich ein"
+	cont "#MON-LABOR."
 	done
 
 _Route20EndBattleText10::
-	text "Wait!"
+	text "Warte!"
 	prompt
 
 _Route20AfterBattleText10::
-	text "CINNABAR is a "
-	line "volcanic island!"
+	text "Die"
+	line "ZINNOBERINSEL ist"
+	cont "ein vulkanisches"
+	cont "Eiland!"
 	done
 
 _Route20Text12::
 _Route20Text11::
-	text "SEAFOAM ISLANDS"
+	text "SEESCHAUMINSELN"
 	done

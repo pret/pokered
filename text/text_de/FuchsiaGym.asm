@@ -1,26 +1,28 @@
 _KogaBeforeBattleText::
-	text "KOGA: Fwahahaha!"
+	text "KOGA: Hahaha!"
 
-	para "A mere child like"
-	line "you dares to"
-	cont "challenge me?"
+	para "Ein Kind fordert"
+	line "einen Ninja-"
+	cont "Meister zum"
+	cont "Kampf heraus?"
 
-	para "Very well, I"
-	line "shall show you"
-	cont "true terror as a"
-	cont "ninja master!"
+	para "Wie Du willst!"
+	line "Erlebe eine Welt"
+	cont "des Schreckens,"
+	cont "bevor ich Dich"
+	cont "besiege!"
 
-	para "You shall feel"
-	line "the despair of"
-	cont "poison and sleep"
-	cont "techniques!"
+	para "An meinen"
+	line "Schlaf- und Gift-"
+	cont "Attacken sollst"
+	cont "Du verzweifeln!"
 	done
 
 _KogaAfterBattleText::
-	text "Humph!"
-	line "You have proven"
-	cont "your worth!"
+	text "Na sowas!"
+	line "Du bist ein"
+	cont "würdiger Kämpfer!"
 
-	para "Here! Take the"
-	line "SOULBADGE!"
+	para "Ich reiche Dir"
+	line "den SEELENORDEN!"
 	prompt

@@ -1,19 +1,25 @@
 _CeruleanMartText2::
-	text "Use REPEL to keep"
-	line "bugs and weak"
-	cont "#MON away."
+	text "Benutze einen"
+	line "SCHUTZ, um Käfer"
+	cont "und schwächere"
+	cont "#MON von Dir"
+	cont "fernzuhalten!"
 
-	para "Put your strongest"
-	line "#MON at the"
-	cont "top of the list"
-	cont "for best results!"
+	para "Für optimalen"
+	line "Schutz solltest"
+	cont "Du das stärkste"
+	cont "#MON an die"
+	cont "Spitze der Liste"
+	cont "setzen!"
 	done
 
 _CeruleanMartText3::
-	text "Have you seen any"
-	line "RARE CANDY?"
+	text "Besitzt Du"
+	line "SONDERBONBONS?"
 
-	para "It's supposed to"
-	line "make #MON go"
-	cont "up one level!"
+	para "Gibt man einem"
+	line "#MON ein"
+	cont "BONBON, dann"
+	cont "erreicht es den"
+	cont "nächsten Level!"
 	done

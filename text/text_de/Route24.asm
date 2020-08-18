@@ -1,67 +1,81 @@
 _Route24Text_51510::
-	text "Congratulations!"
-	line "You beat our 5"
-	cont "contest trainers!@"
+	text "Herzlichen"
+	line "Glückwunsch!"
+	cont "Du hast alle fünf"
+	cont "Trainer besiegt!@"
 	text_end
 
 _Route24Text_51515::
 	text_start
 
-	para "You just earned a"
-	line "fabulous prize!"
+	para "Du hast einen"
+	line "großartigen Preis"
+	cont "gewonnen!"
 	prompt
 
 _Route24Text_5151a::
-	text "<PLAYER> received"
-	line "a @"
+	text "<PLAYER> erhält"
+	line "einen @"
 	text_ram wcf4b
 	text "!@"
 	text_end
 
 _Route24Text_51521::
-	text "You don't have"
-	line "any room!"
+	text "Du hast keinen"
+	line "Platz für weitere"
+	cont "Items!"
 	done
 
 _Route24Text_51526::
-	text "By the way, would"
-	line "you like to join"
-	cont "TEAM ROCKET?"
+	text "Möchtest Du auch"
+	line "Mitglied des"
+	cont "TEAM ROCKET"
+	cont "werden?"
 
-	para "We're a group"
-	line "dedicated to evil"
-	cont "using #MON!"
+	para "Unsere"
+	line "Gruppierung"
+	cont "benutzt #MON"
+	cont "für teuflische"
+	cont "Zwecke!"
 
-	para "Want to join?"
+	para "Möchtest Du"
+	line "beitreten?"
 
-	para "Are you sure?"
+	para "Wirklich nicht?"
 
-	para "Come on, join us!"
+	para "Komm schon,"
+	line "werde Mitglied!"
 
-	para "I'm telling you"
-	line "to join!"
+	para "Ich empfehle Dir,"
+	line "ein Mitglied zu"
+	cont "werden!"
 
-	para "OK, you need"
-	line "convincing!"
+	para "Ich glaube, ich"
+	line "sollte ein wenig"
+	cont "Überzeugungs-"
+	cont "arbeit leisten!"
 
-	para "I'll make you an"
-	line "offer you can't"
-	cont "refuse!"
+	para "Dieses Angebot"
+	line "kannst Du nicht"
+	cont "ablehnen!"
 	done
 
 _Route24Text_5152b::
 	text "Arrgh!"
-	line "You are good!"
+	line "Du bist gut!"
 	prompt
 
 _Route24Text_51530::
-	text "With your ability,"
-	line "you could become"
-	cont "a top leader in"
-	cont "TEAM ROCKET!"
+	text "Bei Deinem Können"
+	line "würdest Du im"
+	cont "TEAM ROCKET"
+	cont "leicht die rechte"
+	cont "Hand vom Boss!"
 	done
 
 _Route24BattleText1::
-	text "I saw your feat"
-	line "from the grass!"
+	text "Ich habe Deine"
+	line "Vorstellung aus"
+	cont "dem Gras heraus"
+	cont "beobachtet!"
 	done

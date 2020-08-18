@@ -1,78 +1,86 @@
 _Lab4Text_75dc6::
-	text "Hiya!"
+	text "Hallo!"
 
-	para "I am important"
-	line "doctor!"
+	para "Ich leite hier"
+	line "die Forschungen!"
 
-	para "I study here rare"
-	line "#MON fossils!"
+	para "Wir erforschen"
+	line "Fossilien von"
+	cont "URZEIT-#MON!"
 
-	para "You! Have you a"
-	line "fossil for me?"
+	para "Hast Du ein"
+	line "Fossil für mich?"
 	prompt
 
 _Lab4Text_75dcb::
-	text "No! Is too bad!"
+	text "Nein? Zu schade!"
 	done
 
 _Lab4Text_75dd0::
-	text "I take a little"
-	line "time!"
+	text "Es wird einige"
+	line "Zeit dauern!"
 
-	para "You go for walk a"
-	line "little while!"
+	para "Komm einfach"
+	line "später wieder"
+	cont "vorbei!"
 	done
 
 _Lab4Text_75dd5::
-	text "Where were you?"
+	text "Wo warst Du?"
 
-	para "Your fossil is"
-	line "back to life!"
+	para "Wir haben"
+	line "Dein Fossil"
+	cont "wiederbelebt!"
 
-	para "It was @"
+	para "Ein @"
 	text_ram wcf4b
-	text_start
-	line "like I think!"
+	text ","
+	line "ganz wie ich es"
+	cont "vermutet habe!"
 	prompt
 
 _Lab4Text_610ae::
-	text "Oh! That is"
+	text "Oh! Das ist ein"
 	line "@"
 	text_ram wcd6d
 	text "!"
 
-	para "It is fossil of"
-	line "@"
+	para "Es ist ein Fossil"
+	line "von @"
 	text_ram wcf4b
-	text ", a"
-	cont "#MON that is"
-	cont "already extinct!"
+	text ","
+	cont "einem schon lange"
+	cont "ausgestorbenen"
+	cont "#MON!"
 
-	para "My Resurrection"
-	line "Machine will make"
-	cont "that #MON live"
-	cont "again!"
+	para "Dank modernster"
+	line "Technik können"
+	cont "wir #MON"
+	cont "aus Fossilien"
+	cont "wiederbeleben!"
 	done
 
 _Lab4Text_610b3::
-	text "So! You hurry and"
-	line "give me that!"
+	text "Gib es schnell"
+	line "her, damit ich"
+	cont "fortfahren kann!"
 
-	para "<PLAYER> handed"
-	line "over @"
+	para "<PLAYER> übergibt"
+	line "das @"
 	text_ram wcd6d
 	text "!"
 	prompt
 
 _Lab4Text_610b8::
-	text "I take a little"
-	line "time!"
+	text "Es wird einige"
+	line "Zeit dauern!"
 
-	para "You go for walk a"
-	line "little while!"
+	para "Komm einfach"
+	line "später wieder"
+	cont "vorbei!"
 	done
 
 _Lab4Text_610bd::
-	text "Aiyah! You come"
-	line "again!"
+	text "Du bist jederzeit"
+	line "willkommen!"
 	done
