@@ -51,6 +51,7 @@ ENDM
 warp: MACRO
 	db \2, \1, \3, \4
 _NUM_WARPS = _NUM_WARPS + 1
+; the Nth warp defines a corresponding Nth warp_to, stored in _WARP_TO_NUM_<N>
 _WARP_TO_NAME EQUS "_WARP_TO_NUM_{d:{_NUM_WARPS}}"
 _WARP_TO_NAME EQUS "warp_to \1, \2, _WARP_TO_WIDTH"
 	PURGE _WARP_TO_NAME
@@ -75,6 +76,7 @@ ENDM
 
 ;\1 source map
 def_warps_to: MACRO
+; output and purge each _WARP_TO_NUM_<N> warp_to, from N=1 to _NUM_WARPS
 _WARP_TO_WIDTH = \1_WIDTH
 _WARP_TO_N = 1
 	REPT _NUM_WARPS
