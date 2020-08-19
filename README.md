@@ -7,6 +7,8 @@ It builds the following ROMs:
 - Pokemon Red (UE) [S][!].gb `sha1: ea9bcae617fdf159b045185467ae58b2e4a48b9a`
 - Pokemon Blue (UE) [S][!].gb `sha1: d7037c83e1ae5b39bde3c30787637ba1d4c48ce2`
 - BLUEMONS.GB (debug build) `sha1: 5b1456177671b79b263c614ea0e7cc9ac542e9c4`
+- Pokemon Rote Edition (G) [S][!].gb `sha1: 87d523fe1a0c548db7c5477b451ddec1eb083c06
+- Pokemon Blaue Edition (G) [S][!].gb `sha1: 20e72dc6f41493eee1fdd0cef54214e6c3389688
 
 To set up the repository, see [**INSTALL.md**](INSTALL.md).
 
