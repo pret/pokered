@@ -7,7 +7,12 @@ done   EQUS "db \"<DONE>\""   ; End a text box.
 prompt EQUS "db \"<PROMPT>\"" ; Prompt the player to end a text box (initiating some other event).
 
 page   EQUS "db \"<PAGE>\","         ; Start a new Pokédex page.
+IF DEF(_ENGLISH)
 dex    EQUS "db \"<DEXEND>\", \"@\"" ; End a Pokédex entry.
+ENDC
+IF DEF(_GERMAN)
+dex    EQUS "db \".\", \"@@\"" ; End a Pokédex entry.
+ENDC
 
 
 ; TextCommandJumpTable indexes (see home/text.asm)

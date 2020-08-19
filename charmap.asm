@@ -77,6 +77,9 @@
 	; needed for ShowPokedexDataInternal (see engine/menus/pokedex.asm)
 	charmap "′",         $60 ; gfx/pokedex/pokedex.png
 	charmap "″",         $61 ; gfx/pokedex/pokedex.png
+	charmap "<meter>",   $60 ; gfx/pokedex/pokedex_eur.png
+	charmap "<kilo>",    $61 ; gfx/pokedex/pokedex_eur.png
+	charmap "<gram>",    $62 ; gfx/pokedex/pokedex_eur.png
 
 	; needed for StatusScreen (see engine/pokemon/status_screen.asm)
 	charmap "<BOLD_P>",  $72 ; gfx/font/P.1bpp

@@ -507,11 +507,21 @@ CeladonGameCornerScript_48f1e:
 	res 6, [hl]
 	ret
 
+IF DEF(_ENGLISH)
 GameCornerMoneyText:
 	db "MONEY@"
 
 GameCornerCoinText:
 	db "COIN@"
+ENDC
+
+IF DEF(_GERMAN)
+GameCornerMoneyText:
+	db "GELD@"
+
+GameCornerCoinText:
+	db "MÜNZEN@"
+ENDC
 
 GameCornerBlankText1:
 	db "       @"

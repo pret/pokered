@@ -76,8 +76,14 @@ DontAbandonLearning:
 AbandonLearning:
 	ld hl, AbandonLearningText
 	call PrintText
+IF DEF(_ENGLISH)
 	hlcoord 14, 7
 	lb bc, 8, 15
+ENDC
+IF DEF(_GERMAN)
+	hlcoord 13, 7
+	lb bc, 8, 14
+ENDC
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID ; yes/no menu
@@ -99,8 +105,14 @@ TryingToLearn:
 	push hl
 	ld hl, TryingToLearnText
 	call PrintText
+IF DEF(_ENGLISH)
 	hlcoord 14, 7
 	lb bc, 8, 15
+ENDC
+IF DEF(_GERMAN)
+	hlcoord 13, 7
+	lb bc, 8, 14
+ENDC
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID ; yes/no menu

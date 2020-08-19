@@ -1,13 +1,15 @@
 _ViridianForestEntranceText1::
-	text "Are you going to"
-	line "VIRIDIAN FOREST?"
-	cont "Be careful, it's"
-	cont "a natural maze!"
+	text "Du gehst in den"
+	line "VERTANIA-WALD?"
+	cont "Sei auf der Hut,"
+	cont "dort verläuft man"
+	cont "sich leicht!"
 	done
 
 _ViridianForestEntranceText2::
-	text "RATTATA may be"
-	line "small, but its"
-	cont "bite is wicked!"
-	cont "Did you get one?"
+	text "Hast Du schon"
+	line "ein RATTFRATZ"
+	cont "gefangen? Es ist"
+	cont "klein, aber sein"
+	cont "Biß ist heftig!"
 	done

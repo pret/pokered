@@ -133,8 +133,14 @@ MainSlotMachineLoop:
 .skip2
 	ld hl, OneMoreGoSlotMachineText
 	call PrintText
+IF DEF(_ENGLISH)
 	hlcoord 14, 12
 	lb bc, 13, 15
+ENDC
+IF DEF(_GERMAN)
+	hlcoord 13, 12
+	lb bc, 13, 14
+ENDC
 	xor a ; YES_NO_MENU
 	ld [wTwoOptionMenuID], a
 	ld a, TWO_OPTION_MENU
@@ -883,6 +889,7 @@ SlotMachineMapEnd:
 
 INCLUDE "data/events/slot_machine_wheels.asm"
 
+IF DEF(_ENGLISH)
 SlotMachineTiles1:
 IF DEF(_RED)
 	INCBIN "gfx/slots/red_slots_1.2bpp"
@@ -891,3 +898,15 @@ IF DEF(_BLUE)
 	INCBIN "gfx/slots/blue_slots_1.2bpp"
 ENDC
 SlotMachineTiles1End:
+ENDC
+
+IF DEF(_GERMAN)
+SlotMachineTiles1:
+IF DEF(_RED)
+	INCBIN "gfx/slots/rot_slots_1.2bpp"
+ENDC
+IF DEF(_BLUE)
+	INCBIN "gfx/slots/blau_slots_1.2bpp"
+ENDC
+SlotMachineTiles1End:
+ENDC

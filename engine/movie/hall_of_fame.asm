@@ -195,7 +195,7 @@ IF DEF(_GERMAN)
 HoFMonInfoText:
 	db   "LEVEL/"
 	next "TYP1/"
-	next "TYP2/"
+	next "TYP2/@"
 ENDC
 
 HoFLoadPlayerPics:

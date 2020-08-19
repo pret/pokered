@@ -2105,8 +2105,8 @@ IF DEF(_ENGLISH)
 ENDC
 
 IF DEF(_GERMAN)
-	ldcoord_a 13, 13
-	ldcoord_a 13, 15
+	ldcoord_a 12, 14
+	ldcoord_a 12, 16
 ENDC
 
 	hlcoord 7, 14
@@ -2944,7 +2944,12 @@ PrintMenuItem:
 	call PlaceString
 	hlcoord 7, 11
 	ld [hl], "/"
+IF DEF(_ENGLISH)
 	hlcoord 5, 9
+ENDC
+IF DEF(_GERMAN)
+	hlcoord 4, 9
+ENDC
 	ld [hl], "/"
 	hlcoord 5, 11
 	ld de, wcd6d

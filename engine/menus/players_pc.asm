@@ -1,6 +1,8 @@
 PlayerPC::
+IF DEF(_ENGLISH)
 	ld hl, wd730
 	set 6, [hl]
+ENDC
 	ld a, ITEM_NAME
 	ld [wNameListType], a
 	call SaveScreenTilesToBuffer1
@@ -17,6 +19,10 @@ PlayerPC::
 	call PrintText
 
 PlayerPCMenu:
+IF DEF(_GERMAN)
+	ld hl, wd730
+	set 6, [hl]
+ENDC		 
 	ld a, [wParentMenuItem]
 	ld [wCurrentMenuItem], a
 	ld hl, wFlags_0xcd60

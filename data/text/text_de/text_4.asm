@@ -110,7 +110,6 @@ _DidNotLearnText::
 	text_ram wLearnMoveMonName
 	text_start
 	line "hat @"
-	cont "@"
 	text_ram wcf4b
 	text_start
 	cont "nicht erlernt!"

@@ -10,8 +10,15 @@ ViridianGym_Script:
 	ld [wViridianGymCurScript], a
 	ret
 
+IF DEF(_ENGLISH)
 .CityName:
 	db "VIRIDIAN CITY@"
+ENDC
+
+IF DEF(_GERMAN)
+.CityName:
+	db "VERTANIA CITY@"
+ENDC
 
 .LeaderName:
 	db "GIOVANNI@"

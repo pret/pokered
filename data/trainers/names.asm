@@ -52,7 +52,7 @@ ENDC
 IF DEF(_GERMAN)
 TrainerNames::
 	db "TEENAGER@"
-	db "KÄERSAMMLER@"
+	db "KÄFERSAMMLER@"
 	db "GÖRE@"
 	db "MATROSE@"
 	db "PFADFINDER@"

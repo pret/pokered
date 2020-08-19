@@ -52,7 +52,7 @@ _BoulderText::
 	done
 
 _MartSignText::
-	text "Wir erf6llen alle"
+	text "Wir erfüllen alle"
 	line "Item-Wünsche!"
 	
 	para "PKMN-SUPERMARKT"
@@ -127,7 +127,7 @@ _OaksAideComeBackText::
 	line "Du @"
 	text_decimal hOaksAideRequirement, 1, 3
 	text " #MON"
-	line "besitzt. Ich"
+	cont "besitzt. Ich"
 	cont "hebe Dir Dein"
 	cont "Geschenk auf."
 	done

@@ -248,14 +248,25 @@ Credits:
 	ld hl, vChars2 tile $60
 	lb bc, BANK(TheEndGfx), (TheEndGfxEnd - TheEndGfx) / $10
 	call CopyVideoData
+IF DEF(_ENGLISH)
 	hlcoord 4, 8
+ENDC
+IF DEF(_GERMAN)
+	hlcoord 7, 8
+ENDC
 	ld de, TheEndTextString
 	call PlaceString
+IF DEF(_ENGLISH)
 	hlcoord 4, 9
+ENDC
+IF DEF(_GERMAN)
+	hlcoord 7, 9
+ENDC
 	inc de
 	call PlaceString
 	jp FadeInCreditsText
 
+IF DEF(_ENGLISH)
 TheEndTextString:
 ; "T H E  E N D"
 	db $60," ",$62," ",$64,"  ",$64," ",$66," ",$68,"@"
@@ -264,6 +275,18 @@ TheEndTextString:
 INCLUDE "data/credits/credits_order.asm"
 
 INCLUDE "data/credits/credits_text.asm"
+ENDC
+
+IF DEF(_GERMAN)
+TheEndTextString:
+; "T H E  E N D"
+	db $64," ",$66," ",$68," ",$64,"@"
+	db $65," ",$67," ",$69," ",$65,"@"
+
+INCLUDE "version/pokerot/data/credits/credits_order.asm"
+
+INCLUDE "version/pokerot/data/credits/credits_text.asm"
+ENDC
 
 TheEndGfx:
 	INCBIN "gfx/intro_credits/the_end.2bpp"

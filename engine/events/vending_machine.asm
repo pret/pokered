@@ -84,11 +84,20 @@ VendingMachineText1:
 	text_far _VendingMachineText1
 	text_end
 
+IF DEF(_ENGLISH)
 DrinkText:
 	db   "FRESH WATER"
 	next "SODA POP"
 	next "LEMONADE"
 	next "CANCEL@"
+ENDC
+IF DEF(_GERMAN)
+DrinkText:
+	db   "TAFELWASSER"
+	next "SPRUDEL"
+	next "LIMONADE"
+	next "ZURÜCK@"
+ENDC
 
 DrinkPriceText:
 	db   "¥200"

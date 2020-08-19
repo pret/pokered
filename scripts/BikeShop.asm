@@ -78,9 +78,17 @@ BikeShopText1:
 .Done
 	jp TextScriptEnd
 
+IF DEF(_ENGLISH)
 BikeShopMenuText:
 	db   "BICYCLE"
 	next "CANCEL@"
+ENDC
+
+IF DEF(_GERMAN)
+BikeShopMenuText:
+	db   "FAHRRAD"
+	next "ZURÜCK@"
+ENDC
 
 BikeShopMenuPrice:
 	db "¥1000000@"

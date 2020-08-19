@@ -145,8 +145,10 @@ DisplayMoneyBox:
 	res 6, [hl]
 	ret
 
+IF DEF(_ENGLISH)
 CurrencyString:
 	db "      ¥@"
+ENDC
 
 DoBuySellQuitMenu:
 	ld a, [wd730]

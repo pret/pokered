@@ -35,7 +35,12 @@ DisplayDiploma::
 	pop bc
 	dec c
 	jr nz, .asm_56715
+IF DEF(_ENGLISH)
 	hlcoord 10, 4
+ENDC
+IF DEF(_GERMAN)
+	hlcoord 9, 6
+ENDC
 	ld de, wPlayerName
 	call PlaceString
 	farcall DrawPlayerCharacter
@@ -83,6 +88,7 @@ UnusedPlayerNameLengthFunc:
 	dec c
 	jr .loop
 
+IF DEF(_ENGLISH)
 DiplomaTextPointersAndCoords:
 	dw DiplomaTitle
 	dwcoord 5, 2
@@ -95,7 +101,6 @@ DiplomaTextPointersAndCoords:
 	dw DiplomaGameFreak
 	dwcoord 9, 16
 
-IF DEF(_ENGLISH)
 DiplomaTitle:
 	db CIRCLE_TILE_ID, "Diploma", CIRCLE_TILE_ID, "@"
 
@@ -117,6 +122,18 @@ DiplomaGameFreak:
 ENDC
 
 IF DEF(_GERMAN)
+DiplomaTextPointersAndCoords:
+	dw DiplomaTitle
+	dwcoord 6, 2
+	dw DiplomaHeader1
+	dwcoord 2, 4
+	dw DiplomaHeader2
+	dwcoord 2, 6
+	dw DiplomaBody
+	dwcoord 2, 8
+	dw DiplomaGameFreak
+	dwcoord 9, 16
+
 DiplomaTitle:
 	db CIRCLE_TILE_ID, "Diplom", CIRCLE_TILE_ID, "@"
 

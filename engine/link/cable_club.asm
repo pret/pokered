@@ -11,7 +11,12 @@ CableClub_DoBattleOrTrade:
 	call LoadTrainerInfoTextBoxTiles
 	hlcoord 3, 8
 	ld b, 2
+IF DEF(_ENGLISH)
 	ld c, 12
+ENDC
+IF DEF(_GERMAN)
+	ld c, 13
+ENDC
 	call CableClub_TextBoxBorder
 	hlcoord 4, 10
 	ld de, PleaseWaitString
@@ -289,8 +294,15 @@ CableClub_DoBattleOrTradeAgain:
 	call PlayMusic
 	jr CallCurrentTradeCenterFunction
 
+IF DEF(_ENGLISH)
 PleaseWaitString:
 	db "PLEASE WAIT!@"
+ENDC
+
+IF DEF(_GERMAN)
+PleaseWaitString:
+	db "BITTE WARTEN!@"
+ENDC
 
 CallCurrentTradeCenterFunction:
 	ld hl, TradeCenterPointerTable
@@ -532,8 +544,17 @@ TradeCenter_SelectMon:
 	ld a, $1 ; TradeCenter_Trade
 	ld [wTradeCenterPointerTableIndex], a
 	jp CallCurrentTradeCenterFunction
+
+IF DEF(_ENGLISH)
 .statsTrade
 	db "STATS     TRADE@"
+ENDC
+
+IF DEF(_GERMAN)
+.statsTrade
+	db "STATUS    TAUSCH@"
+ENDC
+
 .selectedCancelMenuItem
 	ld a, [wCurrentMenuItem]
 	ld b, a
@@ -595,6 +616,7 @@ ReturnToCableClubRoom:
 	call GBFadeInFromWhite
 	ret
 
+IF DEF(_ENGLISH)
 TradeCenter_DrawCancelBox:
 	hlcoord 11, 15
 	ld a, $7e
@@ -608,8 +630,30 @@ TradeCenter_DrawCancelBox:
 	ld de, CancelTextString
 	jp PlaceString
 
+
 CancelTextString:
 	db "CANCEL@"
+ENDC
+
+IF DEF(_GERMAN)
+TradeCenter_DrawCancelBox:
+	hlcoord 8, 15
+	ld a, $7e
+	ld bc, 2 * SCREEN_WIDTH + 12
+	call FillMemory
+	hlcoord 0, 15
+	ld b, 1
+	ld c, 12
+	call CableClub_TextBoxBorder
+	hlcoord 2, 16
+	ld de, CancelTextString
+	jp PlaceString
+
+
+CancelTextString:
+	db "ABBRECHEN@"
+
+ENDC
 
 TradeCenter_PlaceSelectedEnemyMonMenuCursor:
 	ld a, [wSerialSyncAndExchangeNybbleReceiveData]
@@ -875,12 +919,23 @@ WillBeTradedText:
 	text_far _WillBeTradedText
 	text_end
 
+IF DEF(_ENGLISH)
 TradeCompleted:
 	db "Trade completed!@"
 
 TradeCanceled:
 	db   "Too bad! The trade"
 	next "was canceled!@"
+ENDC
+
+IF DEF(_GERMAN)
+TradeCompleted:
+	db "TAUSCH VOLLZOGEN!@"
+
+TradeCanceled:
+	db   "Schade! Der tausch"
+	next "wurde abgebrochen!@"
+ENDC
 
 TradeCenterPointerTable:
 	dw TradeCenter_SelectMon

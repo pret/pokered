@@ -28,7 +28,12 @@ LinkCableHelp::
 	set 6, [hl]
 	hlcoord 0, 0
 	ld b, 8
+IF DEF(_ENGLISH)
 	ld c, 13
+ENDC
+IF DEF(_GERMAN)
+	ld c, 14
+ENDC
 	call TextBoxBorder
 	hlcoord 2, 2
 	ld de, HowToLinkText
@@ -204,6 +209,8 @@ StatusAilmentText2:
 	db   " BRN"
 	next " FRZ"
 	next " QUIT@"
+
+	db "@" ; unused
 ENDC
 
 IF DEF(_GERMAN)
@@ -217,8 +224,6 @@ StatusAilmentText2:
 	next " GFR"
 	next " ZUR.@"
 ENDC
-
-	db "@" ; unused
 
 ViridianBlackboardStatusPointers:
 	dw ViridianBlackboardSleepText

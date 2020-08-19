@@ -112,8 +112,6 @@ BuySellQuitText:
 	next "VERKAUF"
 	next "TSCHÜSS!@"
 	
-	db "@" ; unused
-	
 UseTossText:
 	db   "OK"
 	next "MÜLL@"

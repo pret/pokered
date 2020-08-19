@@ -141,12 +141,30 @@ LinkMenu:
 	call SaveScreenTilesToBuffer1
 	ld hl, WhereWouldYouLikeText
 	call PrintText
+	
+IF DEF(_ENGLISH)
 	hlcoord 5, 5
 	ld b, $6
 	ld c, $d
+ENDC
+
+IF DEF(_GERMAN)
+	hlcoord 4, 5
+	ld b, $6
+	ld c, $e
+ENDC
+
 	call TextBoxBorder
 	call UpdateSprites
+
+IF DEF(_ENGLISH)
 	hlcoord 7, 7
+ENDC
+
+IF DEF(_GERMAN)
+	hlcoord 6, 7
+ENDC
+
 	ld de, CableClubOptionsText
 	call PlaceString
 	xor a
@@ -155,7 +173,15 @@ LinkMenu:
 	ld hl, wTopMenuItemY
 	ld a, $7
 	ld [hli], a
+
+IF DEF(_ENGLISH)
 	ld a, $6
+ENDC
+
+IF DEF(_GERMAN)
+	ld a, $5
+ENDC
+
 	ld [hli], a
 	xor a
 	ld [hli], a
@@ -239,12 +265,25 @@ LinkMenu:
 	ld b, c
 	ld c, d
 .updateCursorPosition
+
+IF DEF(_ENGLISH)
 	ld a, b
 	ldcoord_a 6, 7
 	ld a, c
 	ldcoord_a 6, 9
 	ld a, d
 	ldcoord_a 6, 11
+ENDC
+
+IF DEF(_GERMAN)
+	ld a, b
+	ldcoord_a 5, 7
+	ld a, c
+	ldcoord_a 5, 9
+	ld a, d
+	ldcoord_a 5, 11
+ENDC
+
 	ld c, 40
 	call DelayFrames
 	call LoadScreenTilesFromBuffer1

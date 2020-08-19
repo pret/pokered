@@ -346,9 +346,9 @@ IF DEF(_GERMAN) ; all european builds?
 LoadEDTile:
 ; code from the english build results in a corrupted ED tile
 	call DisableLCD
-	ld de, vFont + $700
+	ld de, vFont tile $70
 	ld hl, ED_Tile
-	ld bc, $8
+	ld bc, (ED_TileEnd - ED_Tile)
 	ld a, $1
 	call FarCopyDataDouble
 	jp EnableLCD

@@ -16,8 +16,15 @@ SaffronGym_Script:
 	ld de, .LeaderName
 	jp LoadGymLeaderAndCityName
 
+IF DEF(_ENGLISH)
 .CityName:
 	db "SAFFRON CITY@"
+ENDC
+
+IF DEF(_GERMAN)
+.CityName:
+	db "SAFFRONIA CITY@"
+ENDC
 
 .LeaderName:
 	db "SABRINA@"

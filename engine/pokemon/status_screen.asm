@@ -537,7 +537,7 @@ StatusScreen_PrintPP:
 IF DEF (_GERMAN)
 StatusScreen_PrintAP:
 	ld a, "A"
-	ldi [hl], a
+	ld [hli], a
 	ld a, "P"
 	ldd [hl], a
 	add hl, de

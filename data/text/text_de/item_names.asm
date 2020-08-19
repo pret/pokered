@@ -2,7 +2,7 @@ ItemNames::
 	db "MEISTERBALL@"
 	db "HYPERBALL@"
 	db "SUPERBALL@"
-	db "POKé BALL@"
+	db "POKéBALL@"
 	db "KARTE@"
 	db "FAHRRAD@"
 	db "?????@"

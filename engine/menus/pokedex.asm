@@ -564,7 +564,7 @@ IF DEF(_GERMAN) ; + all european languages?
 	inc hl
 	ld a, [hli]
 	ld [hld], a ; make space for the decimal point by moving the last digit forward one tile
-	ld [hl], "⠄" ; decimal point tile
+	ld [hl], "<DOT>" ; decimal point tile
 ENDC
 
 ; now print the weight (note that weight is stored in tenths of pounds internally)
@@ -646,8 +646,8 @@ ENDC
 
 IF DEF(_GERMAN)
 HeightWeightText:
-	db   "GR.  ???",$60
-	next "GEW  ???",$61,$62,"@"
+	db   "GR.  ???<meter>"
+	next "GEW  ???<kilo><gram>@"
 ENDC
 
 ; XXX does anything point to this?

@@ -16,8 +16,15 @@ CeladonGym_Script:
 	ld de, .LeaderName
 	jp LoadGymLeaderAndCityName
 
+IF DEF(_ENGLISH)
 .CityName:
 	db "CELADON CITY@"
+ENDC
+
+IF DEF(_GERMAN)
+.CityName:
+	db "PRISMANIA CITY@"
+ENDC
 
 .LeaderName:
 	db "ERIKA@"

@@ -98,6 +98,7 @@ BadgeTextPointers:
 	dw VolcanoBadgeText
 	dw EarthBadgeText
 
+IF DEF(_ENGLISH)
 EarthBadgeText:
 	db "EARTHBADGE@"
 
@@ -118,6 +119,30 @@ ThunderBadgeText:
 
 CascadeBadgeText:
 	db "CASCADEBADGE@"
+ENDC
+
+IF DEF(_GERMAN)
+EarthBadgeText:
+	db "ERDORDEN@"
+
+VolcanoBadgeText:
+	db "VULKANORDEN@"
+
+MarshBadgeText:
+	db "SUMPFORDEN@"
+
+SoulBadgeText:
+	db "SEELENORDEN@"
+
+RainbowBadgeText:
+	db "FARBORDEN@"
+
+ThunderBadgeText:
+	db "DONNERORDEN@"
+
+CascadeBadgeText:
+	db "QUELLORDEN@"
+ENDC
 
 Route23Script_512d8:
 	ld a, $1

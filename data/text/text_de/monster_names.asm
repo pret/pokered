@@ -7,7 +7,7 @@ MonsterNames::
 	db "VOLTOBAL@@"
 	db "NIDOKING@@"
 	db "LAHMUS@@@@"
-	db "BISAKNOS@@"
+	db "BISAKNOSP@"
 	db "KOKOWEI@@@"
 	db "SCHLURP@@@"
 	db "OWEI@@@@@@"

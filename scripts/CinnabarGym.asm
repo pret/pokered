@@ -23,11 +23,21 @@ CinnabarGymScript_75759:
 	ld de, .LeaderName
 	jp LoadGymLeaderAndCityName
 
+IF DEF(_ENGLISH)
 .CityName:
 	db "CINNABAR ISLAND@"
 
 .LeaderName:
 	db "BLAINE@"
+ENDC
+
+IF DEF(_GERMAN)
+.CityName:
+	db "ZINNOBERINSEL@"
+
+.LeaderName:
+	db "PYRO@"
+ENDC
 
 CinnabarGymScript_75792:
 	xor a

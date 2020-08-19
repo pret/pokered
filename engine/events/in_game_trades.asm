@@ -84,7 +84,13 @@ InGameTrade_GetMonName:
 	ld bc, NAME_LENGTH
 	jp CopyData
 
+IF DEF(_ENGLISH)
 INCLUDE "data/events/trades.asm"
+ENDC
+
+IF DEF(_GERMAN)
+INCLUDE "version/pokerot/data/events/trades.asm"
+ENDC
 
 InGameTrade_DoTrade:
 	xor a ; NORMAL_PARTY_MENU

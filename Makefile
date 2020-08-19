@@ -154,6 +154,8 @@ gfx/intro_credits/the_end.2bpp: tools/gfx += --interleave --png=$<
 
 gfx/slots/red_slots_1.2bpp: tools/gfx += --trim-whitespace
 gfx/slots/blue_slots_1.2bpp: tools/gfx += --trim-whitespace
+gfx/slots/rot_slots_1.2bpp: tools/gfx += --trim-whitespace
+gfx/slots/blau_slots_1.2bpp: tools/gfx += --trim-whitespace
 
 gfx/tilesets/%.2bpp: tools/gfx += --trim-whitespace
 gfx/tilesets/reds_house.2bpp: tools/gfx += --preserve=0x48

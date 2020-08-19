@@ -12,17 +12,36 @@ DisplayPCMainMenu::
 	jr nz, .leaguePCAvailable
 	hlcoord 0, 0
 	ld b, 8
+
+IF DEF(_ENGLISH)
 	ld c, 14
+ENDC
+IF DEF(_GERMAN)
+	ld c, 15
+ENDC
+
 	jr .next
 .noOaksPC
 	hlcoord 0, 0
 	ld b, 6
+
+IF DEF(_ENGLISH)
 	ld c, 14
+ENDC
+IF DEF(_GERMAN)
+	ld c, 15
+ENDC
+
 	jr .next
 .leaguePCAvailable
 	hlcoord 0, 0
 	ld b, 10
+IF DEF(_ENGLISH)
 	ld c, 14
+ENDC
+IF DEF(_GERMAN)
+	ld c, 15
+ENDC
 .next
 	call TextBoxBorder
 	call UpdateSprites
@@ -39,11 +58,21 @@ DisplayPCMainMenu::
 .next2
 	call PlaceString
 	hlcoord 2, 4
+IF DEF(_ENGLISH)
 	ld de, wPlayerName
+ENDC
+IF DEF(_GERMAN)
+	ld de, PlayersPCText
+ENDC
 	call PlaceString
 	ld l, c
 	ld h, b
+IF DEF(_ENGLISH)
 	ld de, PlayersPCText
+ENDC
+IF DEF(_GERMAN)
+	ld de, wPlayerName
+ENDC
 	call PlaceString
 	CheckEvent EVENT_GOT_POKEDEX
 	jr z, .noOaksPC2
@@ -85,12 +114,23 @@ DisplayPCMainMenu::
 	ldh [hAutoBGTransferEnabled], a
 	ret
 
+IF DEF(_ENGLISH)
 SomeonesPCText:   db "SOMEONE's PC@"
 BillsPCText:      db "BILL's PC@"
 PlayersPCText:    db "'s PC@"
 OaksPCText:       db "PROF.OAK's PC@"
 PKMNLeaguePCText: db "<PKMN>LEAGUE@"
 LogOffPCText:     db "LOG OFF@"
+ENDC
+
+IF DEF(_GERMAN)
+SomeonesPCText:   db "JEMANDES PC@"
+BillsPCText:      db "BILLS PC@"
+PlayersPCText:    db "PC VON @"
+OaksPCText:       db "EICHS PC@"
+PKMNLeaguePCText: db "<PKMN>-LIGA@"
+LogOffPCText:     db "AUSLOGGEN@"
+ENDC
 
 BillsPC_::
 	ld hl, wd730
@@ -121,7 +161,14 @@ BillsPCMenu:
 	call LoadScreenTilesFromBuffer2DisableBGTransfer
 	hlcoord 0, 0
 	ld b, 10
+
+IF DEF(_ENGLISH)
 	ld c, 12
+ENDC
+IF DEF(_GERMAN)
+	ld c, 14
+ENDC
+
 	call TextBoxBorder
 	hlcoord 2, 2
 	ld de, BillsPCMenuText
@@ -338,6 +385,7 @@ DisplayMonListMenu:
 	ld [wPartyAndBillsPCSavedMenuItem], a
 	ret
 
+IF DEF(_ENGLISH)
 BillsPCMenuText:
 	db   "WITHDRAW <PKMN>"
 	next "DEPOSIT <PKMN>"
@@ -348,6 +396,20 @@ BillsPCMenuText:
 
 BoxNoPCText:
 	db "BOX No.@"
+ENDC
+
+IF DEF(_GERMAN)
+BillsPCMenuText:
+	db   "<PKMN> MITNEHMEN"
+	next "<PKMN> ABLEGEN"
+	next "<PKMN> FREILASSEN"
+	next "BOX WECHSELN"
+	next "TSCHÜSS!"
+	db "@"
+
+BoxNoPCText:
+	db "BOX Nr.@"
+ENDC
 
 KnowsHMMove::
 ; returns whether mon with party index [wWhichPokemon] knows an HM move
@@ -380,9 +442,16 @@ HMMoveArray:
 INCLUDE "data/moves/hm_moves.asm"
 
 DisplayDepositWithdrawMenu:
+IF DEF(_ENGLISH)
 	hlcoord 9, 10
 	ld b, 6
 	ld c, 9
+ENDC
+IF DEF(_GERMAN)
+	hlcoord 8, 10
+	ld b, 6
+	ld c, 10
+ENDC
 	call TextBoxBorder
 	ld a, [wParentMenuItem]
 	and a ; was the Deposit or Withdraw item selected in the parent menu?
@@ -390,15 +459,27 @@ DisplayDepositWithdrawMenu:
 	jr nz, .next
 	ld de, WithdrawPCText
 .next
+IF DEF(_ENGLISH)
 	hlcoord 11, 12
 	call PlaceString
 	hlcoord 11, 14
+ENDC
+IF DEF(_GERMAN)
+	hlcoord 10, 12
+	call PlaceString
+	hlcoord 10, 14
+ENDC
 	ld de, StatsCancelPCText
 	call PlaceString
 	ld hl, wTopMenuItemY
 	ld a, 12
 	ld [hli], a ; wTopMenuItemY
+IF DEF(_ENGLISH)
 	ld a, 10
+ENDC
+IF DEF(_GERMAN)
+	ld a, 9
+ENDC
 	ld [hli], a ; wTopMenuItemX
 	xor a
 	ld [hli], a ; wCurrentMenuItem
@@ -446,11 +527,21 @@ DisplayDepositWithdrawMenu:
 	call LoadGBPal
 	jr .loop
 
+IF DEF(_ENGLISH)
 DepositPCText:  db "DEPOSIT@"
 WithdrawPCText: db "WITHDRAW@"
 StatsCancelPCText:
 	db   "STATS"
 	next "CANCEL@"
+ENDC
+
+IF DEF(_GERMAN)
+DepositPCText:  db "ABLEGEN@"
+WithdrawPCText: db "MITNEHMEN@"
+StatsCancelPCText:
+	db   "STATUS"
+	next "ZURÜCK@"
+ENDC
 
 SwitchOnText:
 	text_far _SwitchOnText

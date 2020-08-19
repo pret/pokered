@@ -752,7 +752,13 @@ PrintStatText:
 	ld bc, $a
 	jp CopyData
 
+IF DEF(_ENGLISH)
 INCLUDE "data/battle/stat_names.asm"
+ENDC
+
+IF DEF(_GERMAN)
+INCLUDE "version/pokerot/data/battle/stat_names.asm"
+ENDC
 
 INCLUDE "data/battle/stat_modifiers.asm"
 
