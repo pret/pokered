@@ -9,7 +9,7 @@ Route18Gate2F_Object:
 	sign 6, 2, 3 ; Route18GateUpstairsText3
 
 	db 1 ; objects
-	object SPRITE_YOUNGSTER, 4, 2, WALK, 2, 1 ; person
+	object SPRITE_YOUNGSTER, 4, 2, WALK, LEFT_RIGHT, 1 ; person
 
 	; warp-to
 	warp_to 7, 7, ROUTE_18_GATE_2F_WIDTH ; ROUTE_18_GATE_1F

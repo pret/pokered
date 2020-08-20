@@ -14,8 +14,8 @@ PalletTown_Object:
 
 	db 3 ; objects
 	object SPRITE_OAK, 8, 5, STAY, NONE, 1 ; person
-	object SPRITE_GIRL, 3, 8, WALK, 0, 2 ; person
-	object SPRITE_FISHER, 11, 14, WALK, 0, 3 ; person
+	object SPRITE_GIRL, 3, 8, WALK, ANY_DIR, 2 ; person
+	object SPRITE_FISHER, 11, 14, WALK, ANY_DIR, 3 ; person
 
 	; warp-to
 	warp_to 5, 5, PALLET_TOWN_WIDTH ; REDS_HOUSE_1F

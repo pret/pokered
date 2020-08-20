@@ -16,7 +16,7 @@ CinnabarIsland_Object:
 	sign 13, 3, 7 ; CinnabarIslandText7
 
 	db 2 ; objects
-	object SPRITE_GIRL, 12, 5, WALK, 2, 1 ; person
+	object SPRITE_GIRL, 12, 5, WALK, LEFT_RIGHT, 1 ; person
 	object SPRITE_GAMBLER, 14, 6, STAY, NONE, 2 ; person
 
 	; warp-to

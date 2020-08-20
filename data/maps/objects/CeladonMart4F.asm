@@ -11,8 +11,8 @@ CeladonMart4F_Object:
 
 	db 3 ; objects
 	object SPRITE_CLERK, 5, 7, STAY, NONE, 1 ; person
-	object SPRITE_SUPER_NERD, 15, 5, WALK, 2, 2 ; person
-	object SPRITE_YOUNGSTER, 5, 2, WALK, 2, 3 ; person
+	object SPRITE_SUPER_NERD, 15, 5, WALK, LEFT_RIGHT, 2 ; person
+	object SPRITE_YOUNGSTER, 5, 2, WALK, LEFT_RIGHT, 3 ; person
 
 	; warp-to
 	warp_to 12, 1, CELADON_MART_4F_WIDTH ; CELADON_MART_3F

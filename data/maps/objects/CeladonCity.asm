@@ -28,15 +28,15 @@ CeladonCity_Object:
 	sign 27, 21, 18 ; CeladonCityText18
 
 	db 9 ; objects
-	object SPRITE_LITTLE_GIRL, 8, 17, WALK, 0, 1 ; person
+	object SPRITE_LITTLE_GIRL, 8, 17, WALK, ANY_DIR, 1 ; person
 	object SPRITE_GRAMPS, 11, 28, STAY, UP, 2 ; person
-	object SPRITE_GIRL, 14, 19, WALK, 1, 3 ; person
+	object SPRITE_GIRL, 14, 19, WALK, UP_DOWN, 3 ; person
 	object SPRITE_GRAMPS, 25, 22, STAY, DOWN, 4 ; person
 	object SPRITE_GRAMPS, 22, 16, STAY, DOWN, 5 ; person
 	object SPRITE_FISHER, 32, 12, STAY, LEFT, 6 ; person
 	object SPRITE_MONSTER, 30, 12, STAY, RIGHT, 7 ; person
-	object SPRITE_ROCKET, 32, 29, WALK, 2, 8 ; person
-	object SPRITE_ROCKET, 42, 14, WALK, 2, 9 ; person
+	object SPRITE_ROCKET, 32, 29, WALK, LEFT_RIGHT, 8 ; person
+	object SPRITE_ROCKET, 42, 14, WALK, LEFT_RIGHT, 9 ; person
 
 	; warp-to
 	warp_to 8, 13, CELADON_CITY_WIDTH ; CELADON_MART_1F

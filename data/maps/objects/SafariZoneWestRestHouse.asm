@@ -8,7 +8,7 @@ SafariZoneWestRestHouse_Object:
 	db 0 ; signs
 
 	db 3 ; objects
-	object SPRITE_SCIENTIST, 4, 4, WALK, 0, 1 ; person
+	object SPRITE_SCIENTIST, 4, 4, WALK, ANY_DIR, 1 ; person
 	object SPRITE_COOLTRAINER_M, 0, 2, STAY, RIGHT, 2 ; person
 	object SPRITE_ERIKA, 6, 2, STAY, DOWN, 3 ; person
 

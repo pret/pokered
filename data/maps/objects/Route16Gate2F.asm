@@ -10,7 +10,7 @@ Route16Gate2F_Object:
 
 	db 2 ; objects
 	object SPRITE_LITTLE_BOY, 4, 2, STAY, NONE, 1 ; person
-	object SPRITE_LITTLE_GIRL, 2, 5, WALK, 2, 2 ; person
+	object SPRITE_LITTLE_GIRL, 2, 5, WALK, LEFT_RIGHT, 2 ; person
 
 	; warp-to
 	warp_to 7, 7, ROUTE_16_GATE_2F_WIDTH ; ROUTE_16_GATE_1F

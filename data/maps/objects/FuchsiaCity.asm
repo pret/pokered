@@ -29,15 +29,15 @@ FuchsiaCity_Object:
 	sign 7, 7, 24 ; FuchsiaCityText24
 
 	db 10 ; objects
-	object SPRITE_YOUNGSTER, 10, 12, WALK, 2, 1 ; person
-	object SPRITE_GAMBLER, 28, 17, WALK, 2, 2 ; person
+	object SPRITE_YOUNGSTER, 10, 12, WALK, LEFT_RIGHT, 1 ; person
+	object SPRITE_GAMBLER, 28, 17, WALK, LEFT_RIGHT, 2 ; person
 	object SPRITE_FISHER, 30, 14, STAY, DOWN, 3 ; person
 	object SPRITE_YOUNGSTER, 24, 8, STAY, UP, 4 ; person
-	object SPRITE_FAIRY, 31, 5, WALK, 0, 5 ; person
+	object SPRITE_FAIRY, 31, 5, WALK, ANY_DIR, 5 ; person
 	object SPRITE_POKE_BALL, 25, 6, STAY, NONE, 6 ; person
-	object SPRITE_MONSTER, 12, 6, WALK, 2, 7 ; person
-	object SPRITE_MONSTER, 30, 12, WALK, 2, 8 ; person
-	object SPRITE_SEEL, 8, 17, WALK, 0, 9 ; person
+	object SPRITE_MONSTER, 12, 6, WALK, LEFT_RIGHT, 7 ; person
+	object SPRITE_MONSTER, 30, 12, WALK, LEFT_RIGHT, 8 ; person
+	object SPRITE_SEEL, 8, 17, WALK, ANY_DIR, 9 ; person
 	object SPRITE_FOSSIL, 6, 5, STAY, NONE, 10 ; person
 
 	; warp-to

@@ -16,11 +16,11 @@ InitYesNoTextBoxParameters::
 	ld [wTwoOptionMenuID], a
 IF DEF(_ENGLISH)
 	hlcoord 14, 7
-	ld bc, $80f
+	lb bc, 8, 15
 ENDC
 IF DEF(_GERMAN)
 	hlcoord 13, 7
-	ld bc, $80e
+	lb bc, 8, 14
 ENDC
 	ret
 

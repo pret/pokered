@@ -9,7 +9,7 @@ VermilionPidgeyHouse_Object:
 
 	db 3 ; objects
 	object SPRITE_YOUNGSTER, 5, 3, STAY, LEFT, 1 ; person
-	object SPRITE_BIRD, 3, 5, WALK, 2, 2 ; person
+	object SPRITE_BIRD, 3, 5, WALK, LEFT_RIGHT, 2 ; person
 	object SPRITE_PAPER, 4, 3, STAY, NONE, 3 ; person
 
 	; warp-to

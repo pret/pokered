@@ -14,8 +14,8 @@ CeladonMansion1F_Object:
 	db 4 ; objects
 	object SPRITE_MONSTER, 0, 5, STAY, RIGHT, 1 ; person
 	object SPRITE_GRANNY, 1, 5, STAY, DOWN, 2 ; person
-	object SPRITE_FAIRY, 1, 8, WALK, 2, 3 ; person
-	object SPRITE_MONSTER, 4, 4, WALK, 1, 4 ; person
+	object SPRITE_FAIRY, 1, 8, WALK, LEFT_RIGHT, 3 ; person
+	object SPRITE_MONSTER, 4, 4, WALK, UP_DOWN, 4 ; person
 
 	; warp-to
 	warp_to 4, 11, CELADON_MANSION_1F_WIDTH

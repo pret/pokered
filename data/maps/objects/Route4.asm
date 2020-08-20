@@ -12,7 +12,7 @@ Route4_Object:
 	sign 27, 7, 6 ; Route4Text6
 
 	db 3 ; objects
-	object SPRITE_COOLTRAINER_F, 9, 8, WALK, 0, 1 ; person
+	object SPRITE_COOLTRAINER_F, 9, 8, WALK, ANY_DIR, 1 ; person
 	object SPRITE_COOLTRAINER_F, 63, 3, STAY, RIGHT, 2, OPP_LASS, 4
 	object SPRITE_POKE_BALL, 57, 3, STAY, NONE, 3, TM_WHIRLWIND
 
