@@ -180,7 +180,7 @@
 	charmap "p'",        $da
 	charmap "s'",        $db
 	charmap "'s",        $dc
-	; prefer "'s" over "t'" in letter sequence "t's" (see _StartSlotMachineText in text_de.asm)
+	; prefer "'s" over "t'" in letter sequence "t's" (see _StartSlotMachineText in data/text/text_2.asm)
 	charmap "t´",        $dd
 	;charmap "t'",        $dd
 	charmap "u'",        $de
