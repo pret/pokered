@@ -91,6 +91,7 @@ DrinkText:
 	next "LEMONADE"
 	next "CANCEL@"
 ENDC
+
 IF DEF(_GERMAN)
 DrinkText:
 	db   "TAFELWASSER"

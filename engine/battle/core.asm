@@ -2033,24 +2033,19 @@ DisplayBattleMenu::
 IF DEF(_ENGLISH)
 	hlcoord 9, 14
 ENDC
-
 IF DEF(_GERMAN)
 	hlcoord 7, 14
 ENDC
-
 	ld [hl], "▶"
 	ld c, 80
 	call DelayFrames
 	ld [hl], " "
-
 IF DEF(_ENGLISH)
 	hlcoord 9, 16
 ENDC
-
 IF DEF(_GERMAN)
 	hlcoord 7, 16
 ENDC
-
 	ld [hl], "▶"
 	ld c, 50
 	call DelayFrames
@@ -2089,26 +2084,21 @@ IF DEF(_ENGLISH)
 	ldcoord_a 15, 16 ; clear lower cursor position in right column
 	ld b, $9 ; top menu item X
 ENDC
-
 IF DEF(_GERMAN)
 	ldcoord_a 12, 14 ; clear upper cursor position in right column
 	ldcoord_a 12, 16 ; clear lower cursor position in right column
 	ld b, $7 ; top menu item X
 ENDC
-
 	jr .leftColumn_WaitForInput
 .safariLeftColumn
-
 IF DEF(_ENGLISH)
 	ldcoord_a 13, 14
 	ldcoord_a 13, 16
 ENDC
-
 IF DEF(_GERMAN)
 	ldcoord_a 12, 14
 	ldcoord_a 12, 16
 ENDC
-
 	hlcoord 7, 14
 	ld de, wNumSafariBalls
 	lb bc, 1, 2
@@ -2135,19 +2125,16 @@ ENDC
 	ld a, " "
 	jr z, .safariRightColumn
 ; put cursor in right column for normal battle menu (i.e. when it's not a Safari battle)
-
 IF DEF(_ENGLISH)
 	ldcoord_a 9, 14 ; clear upper cursor position in left column
 	ldcoord_a 9, 16 ; clear lower cursor position in left column
 	ld b, $f ; top menu item X
 ENDC
-
 IF DEF(_GERMAN)
 	ldcoord_a 7, 14 ; clear upper cursor position in left column
 	ldcoord_a 7, 16 ; clear lower cursor position in left column
 	ld b, $c ; top menu item X
 ENDC
-
 	jr .rightColumn_WaitForInput
 .safariRightColumn
 	ldcoord_a 1, 14 ; clear upper cursor position in left column
@@ -2156,15 +2143,12 @@ ENDC
 	ld de, wNumSafariBalls
 	lb bc, 1, 2
 	call PrintNumber
-	
 IF DEF(_ENGLISH)
 	ld b, $d ; top menu item X
 ENDC
-
 IF DEF(_GERMAN)
 	ld b, $c ; top menu item X
 ENDC
-
 .rightColumn_WaitForInput
 	ld hl, wTopMenuItemY
 	ld a, $e

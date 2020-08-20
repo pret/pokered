@@ -31,11 +31,9 @@ IF DEF(_ENGLISH)
 	cp "P"
 	ret nz
 ENDC
-
 IF DEF(_GERMAN)
 	ret
 ENDC
-
 .ok
 	ld a, [wPartyCount]
 	dec a

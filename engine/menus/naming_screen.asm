@@ -13,17 +13,14 @@ AskName:
 	call GetMonName
 	ld hl, DoYouWantToNicknameText
 	call PrintText
-
 IF DEF(_ENGLISH)
 	hlcoord 14, 7
 	lb bc, 8, 15
 ENDC
-
 IF DEF(_GERMAN)
 	hlcoord 13, 7
 	lb bc, 8, 14
 ENDC
-
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
@@ -389,11 +386,11 @@ PrintAlphabet:
 	jp Delay3
 
 IF DEF(_ENGLISH)
-INCLUDE "data/text/text_en/alphabets.asm"
+INCLUDE "data/text/alphabets.asm"
 ENDC
 
 IF DEF(_GERMAN)
-INCLUDE "data/text/text_de/alphabets.asm"
+INCLUDE "version/pokerot/data/text/alphabets.asm"
 ENDC
 
 PrintNicknameAndUnderscores:
@@ -464,13 +461,7 @@ DakutensAndHandakutens:
 	ld [wNamingScreenLetter], a
 	ret
 
-IF DEF(_ENGLISH)
-INCLUDE "data/text/text_en/dakutens.asm"
-ENDC
-
-IF DEF(_GERMAN)
-INCLUDE "data/text/text_de/dakutens.asm"
-ENDC
+INCLUDE "data/text/dakutens.asm"
 
 ; calculates the length of the string at wcf4b and stores it in c
 CalcStringLength:

@@ -277,7 +277,13 @@ INCLUDE "data/trainers/move_choices.asm"
 
 INCLUDE "data/trainers/pic_pointers_money.asm"
 
+IF DEF(_ENGLISH)
 INCLUDE "data/trainers/names.asm"
+ENDC
+
+IF DEF(_GERMAN)
+INCLUDE "version/pokerot/data/trainers/names.asm"
+ENDC
 
 INCLUDE "engine/battle/misc.asm"
 

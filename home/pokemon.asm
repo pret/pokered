@@ -323,7 +323,6 @@ IF DEF(_ENGLISH)
 	ld [hli], a
 	ld [hl], "T"
 ENDC
-
 IF DEF(_GERMAN)
 	ld a, "B"
 	ld [hli], a

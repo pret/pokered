@@ -605,11 +605,11 @@ LoadTownMapEntry:
 INCLUDE "data/maps/town_map_entries.asm"
 
 IF DEF(_ENGLISH)
-INCLUDE "data/text/text_en/map_names.asm"
+INCLUDE "data/maps/names.asm"
 ENDC
 
 IF DEF(_GERMAN)
-INCLUDE "data/text/text_de/map_names.asm"
+INCLUDE "version/pokerot/data/maps/names.asm"
 ENDC
 
 MonNestIcon:

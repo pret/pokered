@@ -1,4 +1,9 @@
+IF DEF(_ENGLISH)
 INCLUDE "charmap.asm"
+ENDC
+IF DEF(_GERMAN)
+INCLUDE "version/pokerot/charmap.asm"
+ENDC
 
 INCLUDE "macros.asm"
 
@@ -28,15 +33,12 @@ INCLUDE "constants/map_constants.asm"
 INCLUDE "constants/map_data_constants.asm"
 INCLUDE "constants/map_object_constants.asm"
 INCLUDE "constants/hide_show_constants.asm"
-
 IF DEF(_ENGLISH)
 INCLUDE "constants/credits_constants.asm"
 ENDC
-
 IF DEF(_GERMAN)
 INCLUDE "version/pokerot/constants/credits_constants.asm"
 ENDC
-
 INCLUDE "constants/audio_constants.asm"
 INCLUDE "constants/music_constants.asm"
 INCLUDE "constants/tileset_constants.asm"

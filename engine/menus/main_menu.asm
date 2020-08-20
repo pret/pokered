@@ -141,30 +141,24 @@ LinkMenu:
 	call SaveScreenTilesToBuffer1
 	ld hl, WhereWouldYouLikeText
 	call PrintText
-	
 IF DEF(_ENGLISH)
 	hlcoord 5, 5
 	ld b, $6
 	ld c, $d
 ENDC
-
 IF DEF(_GERMAN)
 	hlcoord 4, 5
 	ld b, $6
 	ld c, $e
 ENDC
-
 	call TextBoxBorder
 	call UpdateSprites
-
 IF DEF(_ENGLISH)
 	hlcoord 7, 7
 ENDC
-
 IF DEF(_GERMAN)
 	hlcoord 6, 7
 ENDC
-
 	ld de, CableClubOptionsText
 	call PlaceString
 	xor a
@@ -173,15 +167,12 @@ ENDC
 	ld hl, wTopMenuItemY
 	ld a, $7
 	ld [hli], a
-
 IF DEF(_ENGLISH)
 	ld a, $6
 ENDC
-
 IF DEF(_GERMAN)
 	ld a, $5
 ENDC
-
 	ld [hli], a
 	xor a
 	ld [hli], a
@@ -265,7 +256,6 @@ ENDC
 	ld b, c
 	ld c, d
 .updateCursorPosition
-
 IF DEF(_ENGLISH)
 	ld a, b
 	ldcoord_a 6, 7
@@ -274,7 +264,6 @@ IF DEF(_ENGLISH)
 	ld a, d
 	ldcoord_a 6, 11
 ENDC
-
 IF DEF(_GERMAN)
 	ld a, b
 	ldcoord_a 5, 7
@@ -283,7 +272,6 @@ IF DEF(_GERMAN)
 	ld a, d
 	ldcoord_a 5, 11
 ENDC
-
 	ld c, 40
 	call DelayFrames
 	call LoadScreenTilesFromBuffer1
@@ -403,7 +391,6 @@ ENDC
 DisplayContinueGameInfo:
 	xor a
 	ldh [hAutoBGTransferEnabled], a
-	
 IF DEF(_ENGLISH)
 	hlcoord 4, 7
 	ld b, 8
@@ -411,7 +398,6 @@ IF DEF(_ENGLISH)
 	call TextBoxBorder
 	hlcoord 5, 9
 ENDC
-
 IF DEF(_GERMAN)
 	hlcoord 3, 7
 	ld b, 8
@@ -419,7 +405,6 @@ IF DEF(_GERMAN)
 	call TextBoxBorder
 	hlcoord 4, 9
 ENDC
-
 	ld de, SaveScreenInfoText
 	call PlaceString
 	hlcoord 12, 9
@@ -439,31 +424,25 @@ ENDC
 PrintSaveScreenText:
 	xor a
 	ldh [hAutoBGTransferEnabled], a
-	
 IF DEF(_ENGLISH)
 	hlcoord 4, 0
 	ld b, $8
 	ld c, $e
 ENDC
-
 IF DEF(_GERMAN)
 	hlcoord 3, 0
 	ld b, $8
 	ld c, $f
 ENDC
-
 	call TextBoxBorder
 	call LoadTextBoxTilePatterns
 	call UpdateSprites
-	
 IF DEF(_ENGLISH)
 	hlcoord 5, 2
 ENDC
-
 IF DEF(_GERMAN)
 	hlcoord 4, 2
 ENDC
-
 	ld de, SaveScreenInfoText
 	call PlaceString
 	hlcoord 12, 2

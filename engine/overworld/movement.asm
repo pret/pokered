@@ -463,11 +463,11 @@ InitializeSpriteScreenPosition:
 	ld b, a
 	ld a, [hl]      ; x#SPRITESTATEDATA2_MAPY
 	sub b           ; relative to player position
-IF DEF(_GERMAN)
-	call Func_515D
-ENDC
 IF DEF(_ENGLISH)
 	swap a          ; * 16
+ENDC
+IF DEF(_GERMAN)
+	call Func_515D
 ENDC
 	sub $4          ; - 4
 	dec h
@@ -477,11 +477,11 @@ ENDC
 	ld b, a
 	ld a, [hli]     ; x#SPRITESTATEDATA2_MAPX
 	sub b           ; relative to player position
-IF DEF(_GERMAN)
-	call Func_515D
-ENDC
 IF DEF(_ENGLISH)
 	swap a          ; * 16
+ENDC
+IF DEF(_GERMAN)
+	call Func_515D
 ENDC
 	dec h
 	ld [hl], a      ; [x#SPRITESTATEDATA1_XPIXELS]

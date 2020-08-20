@@ -18,7 +18,7 @@ audio.o \
 home.o \
 main.o \
 maps.o \
-text_de.o \
+version/pokerot/text.o \
 wram.o \
 gfx/pics.o \
 gfx/sprites.o \

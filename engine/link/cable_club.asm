@@ -652,7 +652,6 @@ TradeCenter_DrawCancelBox:
 
 CancelTextString:
 	db "ABBRECHEN@"
-
 ENDC
 
 TradeCenter_PlaceSelectedEnemyMonMenuCursor:

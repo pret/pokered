@@ -188,11 +188,11 @@ DisplayIntroNameTextBox:
 	db "NAME@"
 
 IF DEF(_ENGLISH)
-INCLUDE "data/text/text_en/player_names.asm"
+INCLUDE "data/player_names.asm"
 ENDC
 
 IF DEF(_GERMAN)
-INCLUDE "data/text/text_de/player_names.asm"
+INCLUDE "version/pokerot/data/player_names.asm"
 ENDC
 
 GetDefaultName:
@@ -220,11 +220,11 @@ GetDefaultName:
 	jp CopyData
 
 IF DEF(_ENGLISH)
-INCLUDE "data/text/text_en/player_names_list.asm"
+INCLUDE "data/player_names_list.asm"
 ENDC
 
 IF DEF(_GERMAN)
-INCLUDE "data/text/text_de/player_names_list.asm"
+INCLUDE "version/pokerot/data/player_names_list.asm"
 ENDC
 
 LinkMenuEmptyText:

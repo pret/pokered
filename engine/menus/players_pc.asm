@@ -29,17 +29,14 @@ ENDC
 	set 5, [hl]
 	call LoadScreenTilesFromBuffer2
 	hlcoord 0, 0
-
 IF DEF(_ENGLISH)
 	ld b, $8
 	ld c, $e
 ENDC
-
 IF DEF(_GERMAN)
 	ld b, $8
 	ld c, $f
 ENDC
-
 	call TextBoxBorder
 	call UpdateSprites
 	hlcoord 2, 2

@@ -125,7 +125,13 @@ GetAddressOfScreenCoords:
 	add hl, de
 	ret
 
+IF DEF(_ENGLISH)
 INCLUDE "data/text_boxes.asm"
+ENDC
+
+IF DEF(_GERMAN)
+INCLUDE "version/pokerot/data/text_boxes.asm"
+ENDC
 
 DisplayMoneyBox:
 	ld hl, wd730
@@ -344,15 +350,12 @@ DisplayTwoOptionMenu:
 
 TwoOptionMenu_SaveScreenTiles:
 	ld de, wBuffer
-
 IF DEF(_ENGLISH)
 	lb bc, 5, 6
 ENDC
-
 IF DEF(_GERMAN)
 	lb bc, 5, 7
 ENDC
-
 .loop
 	ld a, [hli]
 	ld [de], a
@@ -360,41 +363,32 @@ ENDC
 	dec c
 	jr nz, .loop
 	push bc
-
 IF DEF(_ENGLISH)
 	ld bc, SCREEN_WIDTH - 6
 ENDC
-
 IF DEF(_GERMAN)
 	ld bc, SCREEN_WIDTH - 7
 ENDC
-
 	add hl, bc
 	pop bc
-
 IF DEF(_ENGLISH)
 	ld c, $6
 ENDC
-
 IF DEF(_GERMAN)
 	ld c, $7
 ENDC
-
 	dec b
 	jr nz, .loop
 	ret
 
 TwoOptionMenu_RestoreScreenTiles:
 	ld de, wBuffer
-
 IF DEF(_ENGLISH)
 	lb bc, 5, 6
 ENDC
-
 IF DEF(_GERMAN)
 	lb bc, 5, 7
 ENDC
-
 .loop
 	ld a, [de]
 	inc de
@@ -402,32 +396,32 @@ ENDC
 	dec c
 	jr nz, .loop
 	push bc
-
 IF DEF(_ENGLISH)
 	ld bc, SCREEN_WIDTH - 6
 ENDC
-
 IF DEF(_GERMAN)
 	ld bc, SCREEN_WIDTH - 7
 ENDC
-
 	add hl, bc
 	pop bc
-
 IF DEF(_ENGLISH)
 	ld c, 6
 ENDC
-
 IF DEF(_GERMAN)
 	ld c, 7
 ENDC
-
 	dec b
 	jr nz, .loop
 	call UpdateSprites
 	ret
 
+IF DEF(_ENGLISH)
 INCLUDE "data/yes_no_menu_strings.asm"
+ENDC
+
+IF DEF(_GERMAN)
+INCLUDE "version/pokerot/data/yes_no_menu_strings.asm"
+ENDC
 
 DisplayFieldMoveMonMenu:
 	xor a
@@ -549,9 +543,9 @@ DisplayFieldMoveMonMenu:
 	ld de, PokemonMenuEntries
 	jp PlaceString
 
+IF DEF(_ENGLISH)
 INCLUDE "data/moves/field_move_names.asm"
 
-IF DEF(_ENGLISH)
 PokemonMenuEntries:
 	db   "STATS"
 	next "SWITCH"
@@ -559,6 +553,8 @@ PokemonMenuEntries:
 ENDC
 
 IF DEF(_GERMAN)
+INCLUDE "version/pokerot/data/moves/field_move_names.asm"
+
 PokemonMenuEntries:
 	db   "STATUS"
 	next "TAUSCH"
@@ -617,4 +613,10 @@ GetMonFieldMoves:
 	pop hl
 	ret
 
+IF DEF(_ENGLISH)
 INCLUDE "data/moves/field_moves.asm"
+ENDC
+
+IF DEF(_GERMAN)
+INCLUDE "version/pokerot/data/moves/field_moves.asm"
+ENDC

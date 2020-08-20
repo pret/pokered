@@ -534,7 +534,6 @@ ShowPokedexDataInternal:
 	jp z, .waitForButtonPress ; if the pokemon has not been owned, don't print the height, weight, or description
 	inc de ; de = address of feet (height)
 	ld a, [de] ; reads feet, but a is overwritten without being used
-
 IF DEF(_ENGLISH)
 	hlcoord 12, 6
 	lb bc, 1, 2
@@ -549,7 +548,6 @@ IF DEF(_ENGLISH)
 	ld a, "″"
 	ld [hl], a
 ENDC
-
 IF DEF(_GERMAN) ; + all european languages?
 	push af
 	hlcoord 13, 6
@@ -566,7 +564,6 @@ IF DEF(_GERMAN) ; + all european languages?
 	ld [hld], a ; make space for the decimal point by moving the last digit forward one tile
 	ld [hl], "<DOT>" ; decimal point tile
 ENDC
-
 ; now print the weight (note that weight is stored in tenths of pounds internally)
 	inc de
 	inc de
@@ -584,17 +581,14 @@ ENDC
 	ld a, [de] ; a = lower byte of weight
 	ld [hl], a ; store lower byte of weight in [hDexWeight + 1]
 	ld de, hDexWeight
-
 IF DEF(_ENGLISH)
 	hlcoord 11, 8
 	lb bc, 2, 5 ; 2 bytes, 5 digits
 ENDC
-
 IF DEF(_GERMAN)
 	hlcoord 12, 8
 	lb bc, 2, 4 ; 2 bytes, 4 digits
 ENDC
-
 	call PrintNumber ; print weight
 	hlcoord 14, 8
 	ldh a, [hDexWeight + 1]
@@ -679,11 +673,11 @@ DrawTileLine:
 	ret
 
 IF DEF(_ENGLISH)
-INCLUDE "data/pokemon/text/text_en/dex_entries.asm"
+INCLUDE "data/pokemon/dex_entries.asm"
 ENDC
 
 IF DEF(_GERMAN)
-INCLUDE "data/pokemon/text/text_de/dex_entries.asm"
+INCLUDE "version/pokerot/data/pokemon/dex_entries.asm"
 ENDC
 
 PokedexToIndex:

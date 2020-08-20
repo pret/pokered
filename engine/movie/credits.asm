@@ -279,7 +279,7 @@ ENDC
 
 IF DEF(_GERMAN)
 TheEndTextString:
-; "T H E  E N D"
+; "E N D E"
 	db $64," ",$66," ",$68," ",$64,"@"
 	db $65," ",$67," ",$69," ",$65,"@"
 

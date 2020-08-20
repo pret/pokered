@@ -18,12 +18,10 @@ EndOfBattle:
 	ld de, YouLoseText
 	jr z, .placeWinOrLoseString
 	ld de, DrawText
-	
 IF DEF(_ENGLISH)
 .placeWinOrLoseString
 	hlcoord 6, 8
 ENDC
-
 IF DEF(_GERMAN)
 	hlcoord 4,8
 	jr .placeDrawString
@@ -31,7 +29,6 @@ IF DEF(_GERMAN)
 	hlcoord 6, 8
 .placeDrawString
 ENDC
-
 	call PlaceString
 	ld c, 200
 	call DelayFrames

@@ -49,4 +49,10 @@ PrintType_:
 	pop hl
 	jp PlaceString
 
+IF DEF(_ENGLISH)
 INCLUDE "data/types/names.asm"
+ENDC
+
+IF DEF(_GERMAN)
+INCLUDE "version/pokerot/data/types/names.asm"
+ENDC

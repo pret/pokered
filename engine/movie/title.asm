@@ -42,11 +42,9 @@ DisplayTitleScreen:
 	call FarCopyData2
 	ld hl, GamefreakLogoGraphics
 	ld de, vTitleLogo2 tile (16 + 5)
-
 IF DEF(_ENGLISH)
 	ld bc, 9 tiles
 ENDC
-
 IF DEF(_GERMAN)
 	ld bc, 10 tiles
 ENDC
@@ -389,15 +387,12 @@ LoadCopyrightAndTextBoxTiles:
 LoadCopyrightTiles:
 	ld de, NintendoCopyrightLogoGraphics
 	ld hl, vChars2 tile $60
-
 IF DEF(_ENGLISH)
 	lb bc, BANK(NintendoCopyrightLogoGraphics), (GamefreakLogoGraphicsEnd - NintendoCopyrightLogoGraphics) / $10
 ENDC
-
 IF DEF(_GERMAN)
 	lb bc, BANK(NintendoCopyrightLogoGraphics), (NineTileEnd - NintendoCopyrightLogoGraphics) / $10
 ENDC
-
 	call CopyVideoData
 	hlcoord 2, 7
 	ld de, CopyrightTextString
@@ -423,15 +418,12 @@ INCLUDE "data/pokemon/title_mons.asm"
 
 ; prints version text (red, blue)
 PrintGameVersionOnTitleScreen:
-
 IF DEF(_ENGLISH)
 	hlcoord 7, 8
 ENDC
-
 IF DEF(_GERMAN)
 	hlcoord 6, 8
 ENDC
-
 	ld de, VersionOnTitleScreenText
 	jp PlaceString
 

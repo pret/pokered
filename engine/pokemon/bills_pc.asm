@@ -12,26 +12,22 @@ DisplayPCMainMenu::
 	jr nz, .leaguePCAvailable
 	hlcoord 0, 0
 	ld b, 8
-
 IF DEF(_ENGLISH)
 	ld c, 14
 ENDC
 IF DEF(_GERMAN)
 	ld c, 15
 ENDC
-
 	jr .next
 .noOaksPC
 	hlcoord 0, 0
 	ld b, 6
-
 IF DEF(_ENGLISH)
 	ld c, 14
 ENDC
 IF DEF(_GERMAN)
 	ld c, 15
 ENDC
-
 	jr .next
 .leaguePCAvailable
 	hlcoord 0, 0
@@ -161,14 +157,12 @@ BillsPCMenu:
 	call LoadScreenTilesFromBuffer2DisableBGTransfer
 	hlcoord 0, 0
 	ld b, 10
-
 IF DEF(_ENGLISH)
 	ld c, 12
 ENDC
 IF DEF(_GERMAN)
 	ld c, 14
 ENDC
-
 	call TextBoxBorder
 	hlcoord 2, 2
 	ld de, BillsPCMenuText

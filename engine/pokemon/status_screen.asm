@@ -365,17 +365,14 @@ StatusScreen2:
 	ld b, a ; Number of moves ?
 	hlcoord 11, 10
 	ld de, SCREEN_WIDTH * 2
-	
 IF DEF(_ENGLISH)
 	ld a, "<BOLD_P>"
 	call StatusScreen_PrintPP ; Print "PP"
 ENDC
-
 IF DEF (_GERMAN)
 	ld a, "A" ; overwritten by function
 	call StatusScreen_PrintAP ; Print "AP"
 ENDC
-
 	ld a, b
 	and a
 	jr z, .InitPP

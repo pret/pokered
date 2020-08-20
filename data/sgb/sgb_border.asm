@@ -11,10 +11,10 @@ ENDC
 IF DEF(_GERMAN)
 BorderPalettes:
 IF DEF(_RED)
-	INCBIN "version/pokerot/gfx/sgb/red_border.tilemap"
+	INCBIN "gfx/sgb/rot_border.tilemap"
 ENDC
 IF DEF(_BLUE)
-	INCBIN "version/pokerot/gfx/sgb/blue_border.tilemap"
+	INCBIN "gfx/sgb/blau_border.tilemap"
 ENDC
 ENDC
 
@@ -78,9 +78,9 @@ ENDC
 IF DEF(_GERMAN)
 SGBBorderGraphics:
 IF DEF(_RED)
-	INCBIN "version/pokerot/gfx/sgb/red_border.2bpp"
+	INCBIN "gfx/sgb/rot_border.2bpp"
 ENDC
 IF DEF(_BLUE)
-	INCBIN "version/pokerot/gfx/sgb/blue_border.2bpp"
+	INCBIN "gfx/sgb/blau_border.2bpp"
 ENDC
 ENDC

@@ -14,28 +14,28 @@ PrintStatusAilment::
 	ld [hli], a
 	ld a, "L"
 	ld [hli], a
-	ld [hl], "P"
+	ld [hl], "F"
 	ret
 .psn
-	ld a, "P"
+	ld a, "G"
 	ld [hli], a
-	ld a, "S"
+	ld a, "I"
 	ld [hli], a
-	ld [hl], "N"
+	ld [hl], "F"
 	ret
 .brn
 	ld a, "B"
 	ld [hli], a
 	ld a, "R"
 	ld [hli], a
-	ld [hl], "N"
+	ld [hl], "T"
 	ret
 .frz
+	ld a, "G"
+	ld [hli], a
 	ld a, "F"
 	ld [hli], a
-	ld a, "R"
-	ld [hli], a
-	ld [hl], "Z"
+	ld [hl], "R"
 	ret
 .par
 	ld a, "P"
