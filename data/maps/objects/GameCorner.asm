@@ -1,15 +1,15 @@
 GameCorner_Object:
 	db $f ; border block
 
-	db 3 ; warps
+	def_warps
 	warp 15, 17, 7, LAST_MAP
 	warp 16, 17, 7, LAST_MAP
 	warp 17, 4, 1, ROCKET_HIDEOUT_B1F
 
-	db 1 ; signs
+	def_signs
 	sign 9, 4, 12 ; CeladonGameCornerText12
 
-	db 11 ; objects
+	def_objects
 	object SPRITE_BEAUTY, 2, 6, STAY, DOWN, 1 ; person
 	object SPRITE_CLERK, 5, 6, STAY, DOWN, 2 ; person
 	object SPRITE_MIDDLE_AGED_MAN, 2, 10, STAY, LEFT, 3 ; person
@@ -22,7 +22,4 @@ GameCorner_Object:
 	object SPRITE_GENTLEMAN, 17, 13, STAY, RIGHT, 10 ; person
 	object SPRITE_ROCKET, 9, 5, STAY, UP, 11, OPP_ROCKET, 7
 
-	; warp-to
-	warp_to 15, 17, GAME_CORNER_WIDTH
-	warp_to 16, 17, GAME_CORNER_WIDTH
-	warp_to 17, 4, GAME_CORNER_WIDTH ; ROCKET_HIDEOUT_B1F
+	def_warps_to GAME_CORNER

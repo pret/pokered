@@ -1,13 +1,13 @@
 ViridianGym_Object:
 	db $3 ; border block
 
-	db 2 ; warps
+	def_warps
 	warp 16, 17, 4, LAST_MAP
 	warp 17, 17, 4, LAST_MAP
 
-	db 0 ; signs
+	def_signs
 
-	db 11 ; objects
+	def_objects
 	object SPRITE_GIOVANNI, 2, 1, STAY, DOWN, 1, OPP_GIOVANNI, 3
 	object SPRITE_COOLTRAINER_M, 12, 7, STAY, DOWN, 2, OPP_COOLTRAINER_M, 9
 	object SPRITE_HIKER, 11, 11, STAY, UP, 3, OPP_BLACKBELT, 6
@@ -20,6 +20,4 @@ ViridianGym_Object:
 	object SPRITE_GYM_GUIDE, 16, 15, STAY, DOWN, 10 ; person
 	object SPRITE_POKE_BALL, 16, 9, STAY, NONE, 11, REVIVE
 
-	; warp-to
-	warp_to 16, 17, VIRIDIAN_GYM_WIDTH
-	warp_to 17, 17, VIRIDIAN_GYM_WIDTH
+	def_warps_to VIRIDIAN_GYM

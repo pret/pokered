@@ -1,16 +1,16 @@
 SilphCo6F_Object:
 	db $2e ; border block
 
-	db 5 ; warps
+	def_warps
 	warp 16, 0, 1, SILPH_CO_7F
 	warp 14, 0, 0, SILPH_CO_5F
 	warp 18, 0, 0, SILPH_CO_ELEVATOR
 	warp 3, 3, 4, SILPH_CO_4F
 	warp 23, 3, 6, SILPH_CO_2F
 
-	db 0 ; signs
+	def_signs
 
-	db 10 ; objects
+	def_objects
 	object SPRITE_SILPH_WORKER, 10, 6, STAY, NONE, 1 ; person
 	object SPRITE_SILPH_WORKER, 20, 6, STAY, NONE, 2 ; person
 	object SPRITE_ERIKA, 21, 6, STAY, DOWN, 3 ; person
@@ -22,9 +22,4 @@ SilphCo6F_Object:
 	object SPRITE_POKE_BALL, 3, 12, STAY, NONE, 9, HP_UP
 	object SPRITE_POKE_BALL, 2, 15, STAY, NONE, 10, X_ACCURACY
 
-	; warp-to
-	warp_to 16, 0, SILPH_CO_6F_WIDTH ; SILPH_CO_7F
-	warp_to 14, 0, SILPH_CO_6F_WIDTH ; SILPH_CO_5F
-	warp_to 18, 0, SILPH_CO_6F_WIDTH ; SILPH_CO_ELEVATOR
-	warp_to 3, 3, SILPH_CO_6F_WIDTH ; SILPH_CO_4F
-	warp_to 23, 3, SILPH_CO_6F_WIDTH ; SILPH_CO_2F
+	def_warps_to SILPH_CO_6F

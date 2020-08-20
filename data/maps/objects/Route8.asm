@@ -1,17 +1,17 @@
 Route8_Object:
 	db $2c ; border block
 
-	db 5 ; warps
+	def_warps
 	warp 1, 9, 0, ROUTE_8_GATE
 	warp 1, 10, 1, ROUTE_8_GATE
 	warp 8, 9, 2, ROUTE_8_GATE
 	warp 8, 10, 3, ROUTE_8_GATE
 	warp 13, 3, 0, UNDERGROUND_PATH_ROUTE_8
 
-	db 1 ; signs
+	def_signs
 	sign 17, 3, 10 ; Route8Text10
 
-	db 9 ; objects
+	def_objects
 	object SPRITE_SUPER_NERD, 8, 5, STAY, RIGHT, 1, OPP_SUPER_NERD, 3
 	object SPRITE_GAMBLER, 13, 9, STAY, UP, 2, OPP_GAMBLER, 5
 	object SPRITE_SUPER_NERD, 42, 6, STAY, UP, 3, OPP_SUPER_NERD, 4
@@ -22,9 +22,4 @@ Route8_Object:
 	object SPRITE_GAMBLER, 46, 13, STAY, DOWN, 8, OPP_GAMBLER, 7
 	object SPRITE_COOLTRAINER_F, 51, 12, STAY, LEFT, 9, OPP_LASS, 16
 
-	; warp-to
-	warp_to 1, 9, ROUTE_8_WIDTH ; ROUTE_8_GATE
-	warp_to 1, 10, ROUTE_8_WIDTH ; ROUTE_8_GATE
-	warp_to 8, 9, ROUTE_8_WIDTH ; ROUTE_8_GATE
-	warp_to 8, 10, ROUTE_8_WIDTH ; ROUTE_8_GATE
-	warp_to 13, 3, ROUTE_8_WIDTH ; UNDERGROUND_PATH_ROUTE_8
+	def_warps_to ROUTE_8

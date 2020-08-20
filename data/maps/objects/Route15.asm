@@ -1,16 +1,16 @@
 Route15_Object:
 	db $43 ; border block
 
-	db 4 ; warps
+	def_warps
 	warp 7, 8, 0, ROUTE_15_GATE_1F
 	warp 7, 9, 1, ROUTE_15_GATE_1F
 	warp 14, 8, 2, ROUTE_15_GATE_1F
 	warp 14, 9, 3, ROUTE_15_GATE_1F
 
-	db 1 ; signs
+	def_signs
 	sign 39, 9, 12 ; Route15Text12
 
-	db 11 ; objects
+	def_objects
 	object SPRITE_COOLTRAINER_F, 41, 11, STAY, DOWN, 1, OPP_JR_TRAINER_F, 20
 	object SPRITE_COOLTRAINER_F, 53, 10, STAY, LEFT, 2, OPP_JR_TRAINER_F, 21
 	object SPRITE_COOLTRAINER_M, 31, 13, STAY, UP, 3, OPP_BIRD_KEEPER, 6
@@ -23,8 +23,4 @@ Route15_Object:
 	object SPRITE_COOLTRAINER_F, 18, 13, STAY, UP, 10, OPP_JR_TRAINER_F, 23
 	object SPRITE_POKE_BALL, 18, 5, STAY, NONE, 11, TM_RAGE
 
-	; warp-to
-	warp_to 7, 8, ROUTE_15_WIDTH ; ROUTE_15_GATE_1F
-	warp_to 7, 9, ROUTE_15_WIDTH ; ROUTE_15_GATE_1F
-	warp_to 14, 8, ROUTE_15_WIDTH ; ROUTE_15_GATE_1F
-	warp_to 14, 9, ROUTE_15_WIDTH ; ROUTE_15_GATE_1F
+	def_warps_to ROUTE_15

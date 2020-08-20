@@ -1,9 +1,11 @@
 Colosseum_Object:
 	db $e ; border block
 
-	db 0 ; warps
+	def_warps
 
-	db 0 ; signs
+	def_signs
 
-	db 1 ; objects
+	def_objects
 	object SPRITE_RED, 2, 2, STAY, 0, 1 ; person
+
+	def_warps_to COLOSSEUM

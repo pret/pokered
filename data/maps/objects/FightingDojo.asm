@@ -1,13 +1,13 @@
 FightingDojo_Object:
 	db $3 ; border block
 
-	db 2 ; warps
+	def_warps
 	warp 4, 11, 1, LAST_MAP
 	warp 5, 11, 1, LAST_MAP
 
-	db 0 ; signs
+	def_signs
 
-	db 7 ; objects
+	def_objects
 	object SPRITE_HIKER, 5, 3, STAY, DOWN, 1, OPP_BLACKBELT, 1
 	object SPRITE_HIKER, 3, 4, STAY, RIGHT, 2, OPP_BLACKBELT, 2
 	object SPRITE_HIKER, 3, 6, STAY, RIGHT, 3, OPP_BLACKBELT, 3
@@ -16,6 +16,4 @@ FightingDojo_Object:
 	object SPRITE_POKE_BALL, 4, 1, STAY, NONE, 6 ; person
 	object SPRITE_POKE_BALL, 5, 1, STAY, NONE, 7 ; person
 
-	; warp-to
-	warp_to 4, 11, FIGHTING_DOJO_WIDTH
-	warp_to 5, 11, FIGHTING_DOJO_WIDTH
+	def_warps_to FIGHTING_DOJO

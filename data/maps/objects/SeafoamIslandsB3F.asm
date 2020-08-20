@@ -1,7 +1,7 @@
 SeafoamIslandsB3F_Object:
 	db $7d ; border block
 
-	db 7 ; warps
+	def_warps
 	warp 5, 12, 1, SEAFOAM_ISLANDS_B2F
 	warp 8, 6, 2, SEAFOAM_ISLANDS_B4F
 	warp 25, 4, 3, SEAFOAM_ISLANDS_B4F
@@ -10,9 +10,9 @@ SeafoamIslandsB3F_Object:
 	warp 20, 17, 0, SEAFOAM_ISLANDS_B4F
 	warp 21, 17, 1, SEAFOAM_ISLANDS_B4F
 
-	db 0 ; signs
+	def_signs
 
-	db 6 ; objects
+	def_objects
 	object SPRITE_BOULDER, 5, 14, STAY, BOULDER_MOVEMENT_BYTE_2, 1 ; person
 	object SPRITE_BOULDER, 3, 15, STAY, BOULDER_MOVEMENT_BYTE_2, 2 ; person
 	object SPRITE_BOULDER, 8, 14, STAY, BOULDER_MOVEMENT_BYTE_2, 3 ; person
@@ -20,11 +20,4 @@ SeafoamIslandsB3F_Object:
 	object SPRITE_BOULDER, 18, 6, STAY, NONE, 5 ; person
 	object SPRITE_BOULDER, 19, 6, STAY, NONE, 6 ; person
 
-	; warp-to
-	warp_to 5, 12, SEAFOAM_ISLANDS_B3F_WIDTH ; SEAFOAM_ISLANDS_B2F
-	warp_to 8, 6, SEAFOAM_ISLANDS_B3F_WIDTH ; SEAFOAM_ISLANDS_B4F
-	warp_to 25, 4, SEAFOAM_ISLANDS_B3F_WIDTH ; SEAFOAM_ISLANDS_B4F
-	warp_to 25, 3, SEAFOAM_ISLANDS_B3F_WIDTH ; SEAFOAM_ISLANDS_B2F
-	warp_to 25, 14, SEAFOAM_ISLANDS_B3F_WIDTH ; SEAFOAM_ISLANDS_B2F
-	warp_to 20, 17, SEAFOAM_ISLANDS_B3F_WIDTH ; SEAFOAM_ISLANDS_B4F
-	warp_to 21, 17, SEAFOAM_ISLANDS_B3F_WIDTH ; SEAFOAM_ISLANDS_B4F
+	def_warps_to SEAFOAM_ISLANDS_B3F

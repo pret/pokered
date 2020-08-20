@@ -1,7 +1,7 @@
 SSAnneB1FRooms_Object:
 	db $c ; border block
 
-	db 10 ; warps
+	def_warps
 	warp 2, 5, 4, SS_ANNE_B1F
 	warp 3, 5, 4, SS_ANNE_B1F
 	warp 12, 5, 3, SS_ANNE_B1F
@@ -13,9 +13,9 @@ SSAnneB1FRooms_Object:
 	warp 12, 15, 0, SS_ANNE_B1F
 	warp 13, 15, 0, SS_ANNE_B1F
 
-	db 0 ; signs
+	def_signs
 
-	db 11 ; objects
+	def_objects
 	object SPRITE_SAILOR, 0, 13, STAY, DOWN, 1, OPP_SAILOR, 3
 	object SPRITE_SAILOR, 2, 11, STAY, DOWN, 2, OPP_SAILOR, 4
 	object SPRITE_SAILOR, 12, 3, STAY, LEFT, 3, OPP_SAILOR, 5
@@ -28,14 +28,4 @@ SSAnneB1FRooms_Object:
 	object SPRITE_POKE_BALL, 10, 2, STAY, NONE, 10, TM_REST
 	object SPRITE_POKE_BALL, 12, 11, STAY, NONE, 11, MAX_POTION
 
-	; warp-to
-	warp_to 2, 5, SS_ANNE_B1F_ROOMS_WIDTH ; SS_ANNE_B1F
-	warp_to 3, 5, SS_ANNE_B1F_ROOMS_WIDTH ; SS_ANNE_B1F
-	warp_to 12, 5, SS_ANNE_B1F_ROOMS_WIDTH ; SS_ANNE_B1F
-	warp_to 13, 5, SS_ANNE_B1F_ROOMS_WIDTH ; SS_ANNE_B1F
-	warp_to 22, 5, SS_ANNE_B1F_ROOMS_WIDTH ; SS_ANNE_B1F
-	warp_to 23, 5, SS_ANNE_B1F_ROOMS_WIDTH ; SS_ANNE_B1F
-	warp_to 2, 15, SS_ANNE_B1F_ROOMS_WIDTH ; SS_ANNE_B1F
-	warp_to 3, 15, SS_ANNE_B1F_ROOMS_WIDTH ; SS_ANNE_B1F
-	warp_to 12, 15, SS_ANNE_B1F_ROOMS_WIDTH ; SS_ANNE_B1F
-	warp_to 13, 15, SS_ANNE_B1F_ROOMS_WIDTH ; SS_ANNE_B1F
+	def_warps_to SS_ANNE_B1F_ROOMS

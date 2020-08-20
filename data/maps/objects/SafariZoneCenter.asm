@@ -1,7 +1,7 @@
 SafariZoneCenter_Object:
 	db $0 ; border block
 
-	db 9 ; warps
+	def_warps
 	warp 14, 25, 2, SAFARI_ZONE_GATE
 	warp 15, 25, 3, SAFARI_ZONE_GATE
 	warp 0, 10, 4, SAFARI_ZONE_WEST
@@ -12,20 +12,11 @@ SafariZoneCenter_Object:
 	warp 29, 11, 3, SAFARI_ZONE_EAST
 	warp 17, 19, 0, SAFARI_ZONE_CENTER_REST_HOUSE
 
-	db 2 ; signs
+	def_signs
 	sign 18, 20, 2 ; SafariZoneCenterText2
 	sign 14, 22, 3 ; SafariZoneCenterText3
 
-	db 1 ; objects
+	def_objects
 	object SPRITE_POKE_BALL, 14, 10, STAY, NONE, 1, NUGGET
 
-	; warp-to
-	warp_to 14, 25, SAFARI_ZONE_CENTER_WIDTH ; SAFARI_ZONE_GATE
-	warp_to 15, 25, SAFARI_ZONE_CENTER_WIDTH ; SAFARI_ZONE_GATE
-	warp_to 0, 10, SAFARI_ZONE_CENTER_WIDTH ; SAFARI_ZONE_WEST
-	warp_to 0, 11, SAFARI_ZONE_CENTER_WIDTH ; SAFARI_ZONE_WEST
-	warp_to 14, 0, SAFARI_ZONE_CENTER_WIDTH ; SAFARI_ZONE_NORTH
-	warp_to 15, 0, SAFARI_ZONE_CENTER_WIDTH ; SAFARI_ZONE_NORTH
-	warp_to 29, 10, SAFARI_ZONE_CENTER_WIDTH ; SAFARI_ZONE_EAST
-	warp_to 29, 11, SAFARI_ZONE_CENTER_WIDTH ; SAFARI_ZONE_EAST
-	warp_to 17, 19, SAFARI_ZONE_CENTER_WIDTH ; SAFARI_ZONE_CENTER_REST_HOUSE
+	def_warps_to SAFARI_ZONE_CENTER

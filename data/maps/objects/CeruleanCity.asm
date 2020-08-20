@@ -1,7 +1,7 @@
 CeruleanCity_Object:
 	db $f ; border block
 
-	db 10 ; warps
+	def_warps
 	warp 27, 11, 0, CERULEAN_TRASHED_HOUSE
 	warp 13, 15, 0, CERULEAN_TRADE_HOUSE
 	warp 19, 17, 0, CERULEAN_POKECENTER
@@ -13,7 +13,7 @@ CeruleanCity_Object:
 	warp 9, 11, 1, CERULEAN_BADGE_HOUSE
 	warp 9, 9, 0, CERULEAN_BADGE_HOUSE
 
-	db 6 ; signs
+	def_signs
 	sign 23, 19, 12 ; CeruleanCityText12
 	sign 17, 29, 13 ; CeruleanCityText13
 	sign 26, 25, 14 ; MartSignText
@@ -21,7 +21,7 @@ CeruleanCity_Object:
 	sign 11, 25, 16 ; CeruleanCityText16
 	sign 27, 21, 17 ; CeruleanCityText17
 
-	db 11 ; objects
+	def_objects
 	object SPRITE_BLUE, 20, 2, STAY, DOWN, 1 ; person
 	object SPRITE_ROCKET, 30, 8, STAY, NONE, 2, OPP_ROCKET, 5
 	object SPRITE_COOLTRAINER_M, 31, 20, STAY, DOWN, 3 ; person
@@ -34,14 +34,4 @@ CeruleanCity_Object:
 	object SPRITE_SUPER_NERD, 4, 12, STAY, DOWN, 10 ; person
 	object SPRITE_GUARD, 27, 12, STAY, DOWN, 11 ; person
 
-	; warp-to
-	warp_to 27, 11, CERULEAN_CITY_WIDTH ; CERULEAN_TRASHED_HOUSE
-	warp_to 13, 15, CERULEAN_CITY_WIDTH ; CERULEAN_TRADE_HOUSE
-	warp_to 19, 17, CERULEAN_CITY_WIDTH ; CERULEAN_POKECENTER
-	warp_to 30, 19, CERULEAN_CITY_WIDTH ; CERULEAN_GYM
-	warp_to 13, 25, CERULEAN_CITY_WIDTH ; BIKE_SHOP
-	warp_to 25, 25, CERULEAN_CITY_WIDTH ; CERULEAN_MART
-	warp_to 4, 11, CERULEAN_CITY_WIDTH ; CERULEAN_CAVE_1F
-	warp_to 27, 9, CERULEAN_CITY_WIDTH ; CERULEAN_TRASHED_HOUSE
-	warp_to 9, 11, CERULEAN_CITY_WIDTH ; CERULEAN_BADGE_HOUSE
-	warp_to 9, 9, CERULEAN_CITY_WIDTH ; CERULEAN_BADGE_HOUSE
+	def_warps_to CERULEAN_CITY

@@ -1,12 +1,12 @@
 Route19_Object:
 	db $43 ; border block
 
-	db 0 ; warps
+	def_warps
 
-	db 1 ; signs
+	def_signs
 	sign 11, 9, 11 ; Route19Text11
 
-	db 10 ; objects
+	def_objects
 	object SPRITE_COOLTRAINER_M, 8, 7, STAY, LEFT, 1, OPP_SWIMMER, 2
 	object SPRITE_COOLTRAINER_M, 13, 7, STAY, LEFT, 2, OPP_SWIMMER, 3
 	object SPRITE_SWIMMER, 13, 25, STAY, LEFT, 3, OPP_SWIMMER, 4
@@ -18,4 +18,4 @@ Route19_Object:
 	object SPRITE_SWIMMER, 9, 42, STAY, UP, 9, OPP_SWIMMER, 8
 	object SPRITE_SWIMMER, 10, 44, STAY, DOWN, 10, OPP_BEAUTY, 14
 
-	; warp-to
+	def_warps_to ROUTE_19

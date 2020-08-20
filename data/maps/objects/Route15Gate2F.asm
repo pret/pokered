@@ -1,14 +1,13 @@
 Route15Gate2F_Object:
 	db $a ; border block
 
-	db 1 ; warps
+	def_warps
 	warp 7, 7, 4, ROUTE_15_GATE_1F
 
-	db 1 ; signs
+	def_signs
 	sign 6, 2, 2 ; Route15GateUpstairsText2
 
-	db 1 ; objects
+	def_objects
 	object SPRITE_SCIENTIST, 4, 2, STAY, DOWN, 1
 
-	; warp-to
-	warp_to 7, 7, ROUTE_15_GATE_2F_WIDTH ; ROUTE_15_GATE_1F
+	def_warps_to ROUTE_15_GATE_2F

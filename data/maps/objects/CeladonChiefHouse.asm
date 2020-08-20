@@ -1,17 +1,15 @@
 CeladonChiefHouse_Object:
 	db $f ; border block
 
-	db 2 ; warps
+	def_warps
 	warp 2, 7, 11, LAST_MAP
 	warp 3, 7, 11, LAST_MAP
 
-	db 0 ; signs
+	def_signs
 
-	db 3 ; objects
+	def_objects
 	object SPRITE_GRAMPS, 4, 2, STAY, DOWN, 1 ; person
 	object SPRITE_ROCKET, 1, 4, WALK, ANY_DIR, 2 ; person
 	object SPRITE_SAILOR, 5, 6, STAY, LEFT, 3 ; person
 
-	; warp-to
-	warp_to 2, 7, CELADON_CHIEF_HOUSE_WIDTH
-	warp_to 3, 7, CELADON_CHIEF_HOUSE_WIDTH
+	def_warps_to CELADON_CHIEF_HOUSE

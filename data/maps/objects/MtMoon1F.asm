@@ -1,17 +1,17 @@
 MtMoon1F_Object:
 	db $3 ; border block
 
-	db 5 ; warps
+	def_warps
 	warp 14, 35, 1, LAST_MAP
 	warp 15, 35, 1, LAST_MAP
 	warp 5, 5, 0, MT_MOON_B1F
 	warp 17, 11, 2, MT_MOON_B1F
 	warp 25, 15, 3, MT_MOON_B1F
 
-	db 1 ; signs
+	def_signs
 	sign 15, 23, 14 ; MtMoon1Text14
 
-	db 13 ; objects
+	def_objects
 	object SPRITE_HIKER, 5, 6, STAY, DOWN, 1, OPP_HIKER, 1
 	object SPRITE_YOUNGSTER, 12, 16, STAY, RIGHT, 2, OPP_YOUNGSTER, 3
 	object SPRITE_COOLTRAINER_F, 30, 4, STAY, DOWN, 3, OPP_LASS, 5
@@ -26,9 +26,4 @@ MtMoon1F_Object:
 	object SPRITE_POKE_BALL, 20, 33, STAY, NONE, 12, POTION
 	object SPRITE_POKE_BALL, 5, 32, STAY, NONE, 13, TM_WATER_GUN
 
-	; warp-to
-	warp_to 14, 35, MT_MOON_1F_WIDTH
-	warp_to 15, 35, MT_MOON_1F_WIDTH
-	warp_to 5, 5, MT_MOON_1F_WIDTH ; MT_MOON_B1F
-	warp_to 17, 11, MT_MOON_1F_WIDTH ; MT_MOON_B1F
-	warp_to 25, 15, MT_MOON_1F_WIDTH ; MT_MOON_B1F
+	def_warps_to MT_MOON_1F

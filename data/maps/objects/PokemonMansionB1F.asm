@@ -1,12 +1,12 @@
 PokemonMansionB1F_Object:
 	db $1 ; border block
 
-	db 1 ; warps
+	def_warps
 	warp 23, 22, 5, POKEMON_MANSION_1F
 
-	db 0 ; signs
+	def_signs
 
-	db 8 ; objects
+	def_objects
 	object SPRITE_SUPER_NERD, 16, 23, STAY, NONE, 1, OPP_BURGLAR, 9
 	object SPRITE_SCIENTIST, 27, 11, STAY, DOWN, 2, OPP_SCIENTIST, 13
 	object SPRITE_POKE_BALL, 10, 2, STAY, NONE, 3, RARE_CANDY
@@ -16,5 +16,4 @@ PokemonMansionB1F_Object:
 	object SPRITE_POKEDEX, 16, 20, STAY, NONE, 7 ; person
 	object SPRITE_POKE_BALL, 5, 13, STAY, NONE, 8, SECRET_KEY
 
-	; warp-to
-	warp_to 23, 22, POKEMON_MANSION_B1F_WIDTH ; POKEMON_MANSION_1F
+	def_warps_to POKEMON_MANSION_B1F

@@ -1,14 +1,14 @@
 RocketHideoutB4F_Object:
 	db $2e ; border block
 
-	db 3 ; warps
+	def_warps
 	warp 19, 10, 1, ROCKET_HIDEOUT_B3F
 	warp 24, 15, 0, ROCKET_HIDEOUT_ELEVATOR
 	warp 25, 15, 1, ROCKET_HIDEOUT_ELEVATOR
 
-	db 0 ; signs
+	def_signs
 
-	db 9 ; objects
+	def_objects
 	object SPRITE_GIOVANNI, 25, 3, STAY, DOWN, 1, OPP_GIOVANNI, 1
 	object SPRITE_ROCKET, 23, 12, STAY, DOWN, 2, OPP_ROCKET, 16
 	object SPRITE_ROCKET, 26, 12, STAY, DOWN, 3, OPP_ROCKET, 17
@@ -19,7 +19,4 @@ RocketHideoutB4F_Object:
 	object SPRITE_POKE_BALL, 25, 2, STAY, NONE, 8, SILPH_SCOPE
 	object SPRITE_POKE_BALL, 10, 2, STAY, NONE, 9, LIFT_KEY
 
-	; warp-to
-	warp_to 19, 10, ROCKET_HIDEOUT_B4F_WIDTH ; ROCKET_HIDEOUT_B3F
-	warp_to 24, 15, ROCKET_HIDEOUT_B4F_WIDTH ; ROCKET_HIDEOUT_ELEVATOR
-	warp_to 25, 15, ROCKET_HIDEOUT_B4F_WIDTH ; ROCKET_HIDEOUT_ELEVATOR
+	def_warps_to ROCKET_HIDEOUT_B4F

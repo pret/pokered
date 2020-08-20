@@ -1,15 +1,13 @@
 NameRatersHouse_Object:
 	db $a ; border block
 
-	db 2 ; warps
+	def_warps
 	warp 2, 7, 5, LAST_MAP
 	warp 3, 7, 5, LAST_MAP
 
-	db 0 ; signs
+	def_signs
 
-	db 1 ; objects
+	def_objects
 	object SPRITE_SILPH_PRESIDENT, 5, 3, STAY, LEFT, 1 ; person
 
-	; warp-to
-	warp_to 2, 7, NAME_RATERS_HOUSE_WIDTH
-	warp_to 3, 7, NAME_RATERS_HOUSE_WIDTH
+	def_warps_to NAME_RATERS_HOUSE

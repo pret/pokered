@@ -1,7 +1,7 @@
 VermilionCity_Object:
 	db $43 ; border block
 
-	db 9 ; warps
+	def_warps
 	warp 11, 3, 0, VERMILION_POKECENTER
 	warp 9, 13, 0, POKEMON_FAN_CLUB
 	warp 23, 13, 0, VERMILION_MART
@@ -12,7 +12,7 @@ VermilionCity_Object:
 	warp 15, 13, 0, VERMILION_TRADE_HOUSE
 	warp 7, 3, 0, VERMILION_OLD_ROD_HOUSE
 
-	db 7 ; signs
+	def_signs
 	sign 27, 3, 7 ; VermilionCityText7
 	sign 37, 13, 8 ; VermilionCityText8
 	sign 24, 13, 9 ; MartSignText
@@ -21,7 +21,7 @@ VermilionCity_Object:
 	sign 7, 19, 12 ; VermilionCityText12
 	sign 29, 15, 13 ; VermilionCityText13
 
-	db 6 ; objects
+	def_objects
 	object SPRITE_BEAUTY, 19, 7, WALK, LEFT_RIGHT, 1 ; person
 	object SPRITE_GAMBLER, 14, 6, STAY, NONE, 2 ; person
 	object SPRITE_SAILOR, 19, 30, STAY, UP, 3 ; person
@@ -29,13 +29,4 @@ VermilionCity_Object:
 	object SPRITE_MONSTER, 29, 9, WALK, UP_DOWN, 5 ; person
 	object SPRITE_SAILOR, 25, 27, WALK, LEFT_RIGHT, 6 ; person
 
-	; warp-to
-	warp_to 11, 3, VERMILION_CITY_WIDTH ; VERMILION_POKECENTER
-	warp_to 9, 13, VERMILION_CITY_WIDTH ; POKEMON_FAN_CLUB
-	warp_to 23, 13, VERMILION_CITY_WIDTH ; VERMILION_MART
-	warp_to 12, 19, VERMILION_CITY_WIDTH ; VERMILION_GYM
-	warp_to 23, 19, VERMILION_CITY_WIDTH ; VERMILION_PIDGEY_HOUSE
-	warp_to 18, 31, VERMILION_CITY_WIDTH ; VERMILION_DOCK
-	warp_to 19, 31, VERMILION_CITY_WIDTH ; VERMILION_DOCK
-	warp_to 15, 13, VERMILION_CITY_WIDTH ; VERMILION_TRADE_HOUSE
-	warp_to 7, 3, VERMILION_CITY_WIDTH ; VERMILION_OLD_ROD_HOUSE
+	def_warps_to VERMILION_CITY

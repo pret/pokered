@@ -1,15 +1,15 @@
 VictoryRoad3F_Object:
 	db $7d ; border block
 
-	db 4 ; warps
+	def_warps
 	warp 23, 7, 3, VICTORY_ROAD_2F
 	warp 26, 8, 5, VICTORY_ROAD_2F
 	warp 27, 15, 4, VICTORY_ROAD_2F
 	warp 2, 0, 6, VICTORY_ROAD_2F
 
-	db 0 ; signs
+	def_signs
 
-	db 10 ; objects
+	def_objects
 	object SPRITE_COOLTRAINER_M, 28, 5, STAY, LEFT, 1, OPP_COOLTRAINER_M, 2
 	object SPRITE_COOLTRAINER_F, 7, 13, STAY, RIGHT, 2, OPP_COOLTRAINER_F, 2
 	object SPRITE_COOLTRAINER_M, 6, 14, STAY, LEFT, 3, OPP_COOLTRAINER_M, 3
@@ -21,8 +21,4 @@ VictoryRoad3F_Object:
 	object SPRITE_BOULDER, 24, 10, STAY, BOULDER_MOVEMENT_BYTE_2, 9 ; person
 	object SPRITE_BOULDER, 22, 15, STAY, BOULDER_MOVEMENT_BYTE_2, 10 ; person
 
-	; warp-to
-	warp_to 23, 7, VICTORY_ROAD_3F_WIDTH ; VICTORY_ROAD_2F
-	warp_to 26, 8, VICTORY_ROAD_3F_WIDTH ; VICTORY_ROAD_2F
-	warp_to 27, 15, VICTORY_ROAD_3F_WIDTH ; VICTORY_ROAD_2F
-	warp_to 2, 0, VICTORY_ROAD_3F_WIDTH ; VICTORY_ROAD_2F
+	def_warps_to VICTORY_ROAD_3F

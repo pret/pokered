@@ -1,15 +1,15 @@
 Route20_Object:
 	db $43 ; border block
 
-	db 2 ; warps
+	def_warps
 	warp 48, 5, 0, SEAFOAM_ISLANDS_1F
 	warp 58, 9, 2, SEAFOAM_ISLANDS_1F
 
-	db 2 ; signs
+	def_signs
 	sign 51, 7, 11 ; Route20Text11
 	sign 57, 11, 12 ; Route20Text12
 
-	db 10 ; objects
+	def_objects
 	object SPRITE_SWIMMER, 87, 8, STAY, UP, 1, OPP_SWIMMER, 9
 	object SPRITE_SWIMMER, 68, 11, STAY, UP, 2, OPP_BEAUTY, 15
 	object SPRITE_SWIMMER, 45, 10, STAY, DOWN, 3, OPP_BEAUTY, 6
@@ -21,6 +21,4 @@ Route20_Object:
 	object SPRITE_SWIMMER, 24, 12, STAY, DOWN, 9, OPP_JR_TRAINER_F, 16
 	object SPRITE_SWIMMER, 15, 8, STAY, UP, 10, OPP_BEAUTY, 8
 
-	; warp-to
-	warp_to 48, 5, ROUTE_20_WIDTH ; SEAFOAM_ISLANDS_1F
-	warp_to 58, 9, ROUTE_20_WIDTH ; SEAFOAM_ISLANDS_1F
+	def_warps_to ROUTE_20

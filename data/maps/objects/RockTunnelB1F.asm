@@ -1,15 +1,15 @@
 RockTunnelB1F_Object:
 	db $3 ; border block
 
-	db 4 ; warps
+	def_warps
 	warp 33, 25, 4, ROCK_TUNNEL_1F
 	warp 27, 3, 5, ROCK_TUNNEL_1F
 	warp 23, 11, 6, ROCK_TUNNEL_1F
 	warp 3, 3, 7, ROCK_TUNNEL_1F
 
-	db 0 ; signs
+	def_signs
 
-	db 8 ; objects
+	def_objects
 	object SPRITE_COOLTRAINER_F, 11, 13, STAY, DOWN, 1, OPP_JR_TRAINER_F, 9
 	object SPRITE_HIKER, 6, 10, STAY, DOWN, 2, OPP_HIKER, 9
 	object SPRITE_SUPER_NERD, 3, 5, STAY, DOWN, 3, OPP_POKEMANIAC, 3
@@ -19,8 +19,4 @@ RockTunnelB1F_Object:
 	object SPRITE_HIKER, 33, 5, STAY, RIGHT, 7, OPP_HIKER, 11
 	object SPRITE_SUPER_NERD, 26, 30, STAY, DOWN, 8, OPP_POKEMANIAC, 5
 
-	; warp-to
-	warp_to 33, 25, ROCK_TUNNEL_B1F_WIDTH ; ROCK_TUNNEL_1F
-	warp_to 27, 3, ROCK_TUNNEL_B1F_WIDTH ; ROCK_TUNNEL_1F
-	warp_to 23, 11, ROCK_TUNNEL_B1F_WIDTH ; ROCK_TUNNEL_1F
-	warp_to 3, 3, ROCK_TUNNEL_B1F_WIDTH ; ROCK_TUNNEL_1F
+	def_warps_to ROCK_TUNNEL_B1F
