@@ -903,10 +903,10 @@ ENDC
 IF DEF(_GERMAN)
 SlotMachineTiles1:
 IF DEF(_RED)
-	INCBIN "gfx/slots/rot_slots_1.2bpp"
+	INCBIN "version/pokerot/gfx/slots/red_slots_1.2bpp"
 ENDC
 IF DEF(_BLUE)
-	INCBIN "gfx/slots/blau_slots_1.2bpp"
+	INCBIN "version/pokerot/gfx/slots/blue_slots_1.2bpp"
 ENDC
 SlotMachineTiles1End:
 ENDC

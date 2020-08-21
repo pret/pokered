@@ -6,7 +6,7 @@ FontGraphicsEnd::
 ENDC
 
 IF DEF(_GERMAN)
-FontGraphics:: INCBIN "gfx/font/font_de_fr.1bpp"
+FontGraphics:: INCBIN "version/pokerot/gfx/font/font.1bpp"
 FontGraphicsEnd::
 ENDC
 
@@ -18,7 +18,7 @@ HpBarAndStatusGraphicsEnd::
 ENDC
 
 IF DEF(_GERMAN)
-HpBarAndStatusGraphics:: INCBIN "gfx/font/font_battle_extra_de.2bpp"
+HpBarAndStatusGraphics:: INCBIN "version/pokerot/gfx/font/font_battle_extra.2bpp"
 HpBarAndStatusGraphicsEnd::
 ENDC
 
@@ -36,10 +36,10 @@ GamefreakLogoGraphicsEnd:
 ENDC
 
 IF DEF(_GERMAN)
-NintendoCopyrightLogoGraphics: INCBIN "gfx/intro_credits/copyright_eur.2bpp"
+NintendoCopyrightLogoGraphics: INCBIN "version/pokerot/gfx/intro_credits/copyright.2bpp"
 
 GamefreakLogoGraphics: INCBIN "gfx/title/gamefreak_inc.2bpp"
-NineTile:              INCBIN "gfx/title/copyright_9_tile.2bpp"
+NineTile:              INCBIN "version/pokerot/gfx/title/copyright_9_tile.2bpp"
 NineTileEnd:
 ENDC
 
@@ -52,7 +52,7 @@ PokedexTileGraphicsEnd:
 ENDC
 
 IF DEF(_GERMAN)
-PokedexTileGraphics: INCBIN "gfx/pokedex/pokedex_eur.2bpp"
+PokedexTileGraphics: INCBIN "version/pokerot/gfx/pokedex/pokedex.2bpp"
 PokedexTileGraphicsEnd:
 ENDC
 

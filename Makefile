@@ -1,6 +1,6 @@
 roms := pokered.gbc pokeblue.gbc pokeblue_debug.gbc pokerot.gbc pokeblau.gbc
-romsen := pokered.gbc pokeblue.gbc
-romsde := pokerot.gbc pokeblau.gbc
+roms_en := pokered.gbc pokeblue.gbc
+roms_de := pokerot.gbc pokeblau.gbc
 
 rom_obj := \
 audio.o \
@@ -55,8 +55,8 @@ RGBLINK ?= $(RGBDS)rgblink
 .PHONY: all english german red blue rot blau blue_debug clean tidy compare tools
 
 all: $(roms)
-english: $(romsen)
-german: $(romsde)
+english: $(roms_en)
+german: $(roms_de)
 red:        pokered.gbc
 blue:       pokeblue.gbc
 blue_debug: pokeblue_debug.gbc
@@ -65,6 +65,7 @@ blau:       pokeblau.gbc
 
 clean: tidy
 	find gfx \( -iname '*.1bpp' -o -iname '*.2bpp' -o -iname '*.pic' \) -delete
+	find version/pokerot/gfx \( -iname '*.1bpp' -o -iname '*.2bpp' -o -iname '*.pic' \) -delete
 
 tidy:
 	rm -f $(roms) $(pokered_obj) $(pokeblue_obj) $(pokeblue_debug_obj) $(pokerot_obj) $(pokeblau_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym) rgbdscheck.o
@@ -154,10 +155,11 @@ gfx/intro_credits/the_end.2bpp: tools/gfx += --interleave --png=$<
 
 gfx/slots/red_slots_1.2bpp: tools/gfx += --trim-whitespace
 gfx/slots/blue_slots_1.2bpp: tools/gfx += --trim-whitespace
-gfx/slots/rot_slots_1.2bpp: tools/gfx += --trim-whitespace
-gfx/slots/blau_slots_1.2bpp: tools/gfx += --trim-whitespace
+version/pokerot/gfx/slots/red_slots_1.2bpp: tools/gfx += --trim-whitespace
+version/pokerot/gfx/slots/blue_slots_1.2bpp: tools/gfx += --trim-whitespace
 
 gfx/tilesets/%.2bpp: tools/gfx += --trim-whitespace
+version/pokerot/gfx/tilesets/%.2bpp: tools/gfx += --trim-whitespace
 gfx/tilesets/reds_house.2bpp: tools/gfx += --preserve=0x48
 
 gfx/trade/game_boy.2bpp: tools/gfx += --remove-duplicates

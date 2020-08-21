@@ -6,7 +6,7 @@ Overworld_Block::   INCBIN "gfx/blocksets/overworld.bst"
 ENDC
 
 IF DEF(_GERMAN)
-Overworld_GFX::     INCBIN "gfx/tilesets/overworld_de.2bpp"
+Overworld_GFX::     INCBIN "version/pokerot/gfx/tilesets/overworld.2bpp"
 Overworld_Block::   INCBIN "gfx/blocksets/overworld.bst"
 ENDC
 
