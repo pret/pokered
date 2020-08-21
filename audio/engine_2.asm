@@ -1065,8 +1065,14 @@ Audio2_IsCry:
 	jr z, .no
 	jr c, .yes
 .no
+IF DEF(_ENGLISH)
 	scf
 	ccf
+ENDC
+IF DEF(_GERMAN)
+	ld a, [wLowHealthAlarm]
+	rla
+ENDC
 	ret
 .yes
 	scf

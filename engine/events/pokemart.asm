@@ -84,8 +84,14 @@ DisplayPokemartDialogue_::
 	ld hl, PokemartTellSellPriceText
 	lb bc, 14, 1 ; location that PrintText always prints to, this is useless
 	call PrintText
+IF DEF(_ENGLISH)
 	hlcoord 14, 7
 	lb bc, 8, 15
+ENDC
+IF DEF(_GERMAN)
+	hlcoord 13, 7
+	lb bc, 8, 14
+ENDC
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID ; yes/no menu
@@ -162,8 +168,14 @@ DisplayPokemartDialogue_::
 	call CopyStringToCF4B ; copy name to wcf4b
 	ld hl, PokemartTellBuyPriceText
 	call PrintText
+IF DEF(_ENGLISH)
 	hlcoord 14, 7
 	lb bc, 8, 15
+ENDC
+IF DEF(_GERMAN)
+	hlcoord 13, 7
+	lb bc, 8, 14
+ENDC
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID ; yes/no menu

@@ -1,9 +1,21 @@
+IF DEF(_ENGLISH)
 BorderPalettes:
 IF DEF(_RED)
 	INCBIN "gfx/sgb/red_border.tilemap"
 ENDC
 IF DEF(_BLUE)
 	INCBIN "gfx/sgb/blue_border.tilemap"
+ENDC
+ENDC
+
+IF DEF(_GERMAN)
+BorderPalettes:
+IF DEF(_RED)
+	INCBIN "version/pokerot/gfx/sgb/red_border.tilemap"
+ENDC
+IF DEF(_BLUE)
+	INCBIN "version/pokerot/gfx/sgb/blue_border.tilemap"
+ENDC
 ENDC
 
 	ds $100
@@ -53,10 +65,22 @@ ENDC
 
 	ds $18
 
+IF DEF(_ENGLISH)
 SGBBorderGraphics:
 IF DEF(_RED)
 	INCBIN "gfx/sgb/red_border.2bpp"
 ENDC
 IF DEF(_BLUE)
 	INCBIN "gfx/sgb/blue_border.2bpp"
+ENDC
+ENDC
+
+IF DEF(_GERMAN)
+SGBBorderGraphics:
+IF DEF(_RED)
+	INCBIN "version/pokerot/gfx/sgb/red_border.2bpp"
+ENDC
+IF DEF(_BLUE)
+	INCBIN "version/pokerot/gfx/sgb/blue_border.2bpp"
+ENDC
 ENDC

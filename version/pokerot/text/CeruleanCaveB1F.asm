@@ -1,0 +1,2 @@
+_MewtwoBattleText::
+	text "Wow!@@"

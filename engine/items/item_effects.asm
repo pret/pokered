@@ -825,10 +825,21 @@ ItemUseMedicine:
 	xor a
 	ld [wActionResultOrTookBattleTurn], a ; item use failed
 	jp PrintText
+
+IF DEF(_ENGLISH)
 .emptyPartyText
 	text "You don't have"
 	line "any #MON!"
 	prompt
+ENDC
+
+IF DEF(_GERMAN)
+.emptyPartyText
+	text "Du besitzt noch"
+	line "keine #MON!"
+	prompt
+ENDC
+
 .notUsingSoftboiled
 	call DisplayPartyMenu
 .getPartyMonDataAddress
@@ -1425,12 +1436,23 @@ VitaminNoEffectText:
 	text_far _VitaminNoEffectText
 	text_end
 
+IF DEF(_ENGLISH)
 VitaminText:
 	db "HEALTH@"
 	db "ATTACK@"
 	db "DEFENSE@"
 	db "SPEED@"
 	db "SPECIAL@"
+ENDC
+
+IF DEF(_GERMAN)
+VitaminText:
+	db "GESU@"
+	db "ANGR@"
+	db "VERT@"
+	db "INIT@"
+	db "SPEZ@"
+ENDC
 
 ItemUseBait:
 	ld hl, ThrewBaitText
@@ -2214,8 +2236,14 @@ ItemUseTMHM:
 	call PrintText
 	ld hl, TeachMachineMoveText
 	call PrintText
+IF DEF(_ENGLISH)
 	hlcoord 14, 7
 	lb bc, 8, 15
+ENDC
+IF DEF(_GERMAN)
+	hlcoord 13, 7
+	lb bc, 8, 14
+ENDC
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID ; yes/no menu
@@ -2600,8 +2628,14 @@ TossItem_::
 	call CopyStringToCF4B ; copy name to wcf4b
 	ld hl, IsItOKToTossItemText
 	call PrintText
+IF DEF(_ENGLISH)
 	hlcoord 14, 7
 	lb bc, 8, 15
+ENDC
+IF DEF(_GERMAN)
+	hlcoord 13, 7
+	lb bc, 8, 14
+ENDC
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID ; yes/no menu

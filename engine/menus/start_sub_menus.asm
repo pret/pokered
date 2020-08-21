@@ -568,6 +568,7 @@ TrainerInfo_FarCopyData:
 	ld a, BANK(TrainerInfoTextBoxTileGraphics)
 	jp FarCopyData2
 
+IF DEF(_ENGLISH)
 TrainerInfo_NameMoneyTimeText:
 	db   "NAME/"
 	next "MONEY/"
@@ -576,6 +577,18 @@ TrainerInfo_NameMoneyTimeText:
 ; $76 is a circle tile
 TrainerInfo_BadgesText:
 	db $76,"BADGES",$76,"@"
+ENDC
+
+IF DEF(_GERMAN)
+TrainerInfo_NameMoneyTimeText:
+	db   "NAME/"
+	next "GELD/"
+	next "ZEIT/@"
+	
+; $76 is a circle tile
+TrainerInfo_BadgesText:
+	db $76,"ORDEN",$76,"@"
+ENDC
 
 ; draws a text box on the trainer info screen
 ; height is always 6

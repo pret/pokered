@@ -16,8 +16,15 @@ CeruleanGym_Script:
 	ld de, .LeaderName
 	jp LoadGymLeaderAndCityName
 
+IF DEF(_ENGLISH)
 .CityName:
 	db "CERULEAN CITY@"
+ENDC
+
+IF DEF(_GERMAN)
+.CityName:
+	db "AZURIA CITY@"
+ENDC
 
 .LeaderName:
 	db "MISTY@"

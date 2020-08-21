@@ -122,12 +122,23 @@ BillsHousePokemonListText1:
 	text_far _BillsHousePokemonListText1
 	text_end
 
+IF DEF(_ENGLISH)
 BillsMonListText:
 	db   "EEVEE"
 	next "FLAREON"
 	next "JOLTEON"
 	next "VAPOREON"
 	next "CANCEL@"
+ENDC
+
+IF DEF(_GERMAN)
+BillsMonListText:
+	db   "EVOLI"
+	next "FLAMARA"
+	next "BLITZA"
+	next "AQUANA"
+	next "ZURÜCK@"
+ENDC
 
 BillsHousePokemonListText2:
 	text_far _BillsHousePokemonListText2

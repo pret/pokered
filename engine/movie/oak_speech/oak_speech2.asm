@@ -187,7 +187,13 @@ DisplayIntroNameTextBox:
 .namestring
 	db "NAME@"
 
+IF DEF(_ENGLISH)
 INCLUDE "data/player_names.asm"
+ENDC
+
+IF DEF(_GERMAN)
+INCLUDE "version/pokerot/data/player_names.asm"
+ENDC
 
 GetDefaultName:
 ; a = name index
@@ -213,7 +219,13 @@ GetDefaultName:
 	ld bc, $14
 	jp CopyData
 
+IF DEF(_ENGLISH)
 INCLUDE "data/player_names_list.asm"
+ENDC
+
+IF DEF(_GERMAN)
+INCLUDE "version/pokerot/data/player_names_list.asm"
+ENDC
 
 LinkMenuEmptyText:
 	text_end

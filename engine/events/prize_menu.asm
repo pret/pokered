@@ -151,7 +151,12 @@ PrintPrizePrice:
 	ld c, 7
 	call TextBoxBorder
 	call UpdateSprites
+IF DEF(_ENGLISH)
 	hlcoord 12, 0
+ENDC
+IF DEF(_GERMAN)
+	hlcoord 13, 0
+ENDC
 	ld de, .CoinString
 	call PlaceString
 	hlcoord 13, 1
@@ -163,8 +168,15 @@ PrintPrizePrice:
 	call PrintBCDNumber
 	ret
 
+IF DEF(_ENGLISH)
 .CoinString:
 	db "COIN@"
+ENDC
+
+IF DEF(_GERMAN)
+.CoinString:
+	db "MÜNZEN@"
+ENDC
 
 .SixSpacesString:
 	db "      @"

@@ -18,4 +18,10 @@ SaveTrainerName::
 	jr nz, .CopyCharacter
 	ret
 
+IF DEF(_ENGLISH)
 INCLUDE "data/trainers/name_pointers.asm"
+ENDC
+
+IF DEF(_GERMAN)
+INCLUDE "version/pokerot/data/trainers/name_pointers.asm"
+ENDC

@@ -18,8 +18,17 @@ EndOfBattle:
 	ld de, YouLoseText
 	jr z, .placeWinOrLoseString
 	ld de, DrawText
+IF DEF(_ENGLISH)
 .placeWinOrLoseString
 	hlcoord 6, 8
+ENDC
+IF DEF(_GERMAN)
+	hlcoord 4,8
+	jr .placeDrawString
+.placeWinOrLoseString
+	hlcoord 6, 8
+.placeDrawString
+ENDC
 	call PlaceString
 	ld c, 200
 	call DelayFrames
@@ -74,6 +83,7 @@ EndOfBattle:
 	ld [wDestinationWarpID], a
 	ret
 
+IF DEF(_ENGLISH)
 YouWinText:
 	db "YOU WIN@"
 
@@ -82,6 +92,18 @@ YouLoseText:
 
 DrawText:
 	db "  DRAW@"
+ENDC
+
+IF DEF(_GERMAN)
+YouWinText:
+	db "GEWONNEN@"
+	
+YouLoseText:
+	db "VERLOREN@"
+	
+DrawText:
+	db "UNENTSCHIEDEN@"
+ENDC
 
 PickUpPayDayMoneyText:
 	text_far _PickUpPayDayMoneyText

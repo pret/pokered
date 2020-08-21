@@ -3,7 +3,12 @@ DisplayLinkBattleVersusTextBox:
 	call LoadTextBoxTilePatterns
 	hlcoord 3, 4
 	ld b, 7
+IF DEF(_ENGLISH)
 	ld c, 12
+ENDC
+IF DEF(_GERMAN)
+	ld c, 13
+ENDC
 	call TextBoxBorder
 	hlcoord 4, 5
 	ld de, wPlayerName
@@ -13,9 +18,16 @@ DisplayLinkBattleVersusTextBox:
 	call PlaceString
 ; place bold "VS" tiles between the names
 	hlcoord 9, 8
-	ld a, $69
+IF DEF(_ENGLISH)
+	ld a, "<BOLD_V>"
 	ld [hli], a
-	ld [hl], $6a
+	ld [hl], "<BOLD_S>"
+ENDC
+IF DEF(_GERMAN)
+	ld a, "V"
+	ld [hli], a
+	ld [hl], "S"
+ENDC
 	xor a
 	ld [wUpdateSpritesEnabled], a
 	callfar SetupPlayerAndEnemyPokeballs

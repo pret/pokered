@@ -522,5 +522,12 @@ PrintListMenuEntries::
 	ld de, ListMenuCancelText
 	jp PlaceString
 
+IF DEF(_ENGLISH)
 ListMenuCancelText::
 	db "CANCEL@"
+ENDC
+
+IF DEF(_GERMAN)
+ListMenuCancelText::
+	db "ZURÜCK@"
+ENDC

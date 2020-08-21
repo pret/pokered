@@ -35,7 +35,12 @@ DisplayDiploma::
 	pop bc
 	dec c
 	jr nz, .asm_56715
+IF DEF(_ENGLISH)
 	hlcoord 10, 4
+ENDC
+IF DEF(_GERMAN)
+	hlcoord 9, 6
+ENDC
 	ld de, wPlayerName
 	call PlaceString
 	farcall DrawPlayerCharacter
@@ -83,28 +88,29 @@ UnusedPlayerNameLengthFunc:
 	dec c
 	jr .loop
 
+IF DEF(_ENGLISH)
 DiplomaTextPointersAndCoords:
-	dw DiplomaText
+	dw DiplomaTitle
 	dwcoord 5, 2
-	dw DiplomaPlayer
+	dw DiplomaHeader1
 	dwcoord 3, 4
-	dw DiplomaEmptyText
+	dw DiplomaHeader2
 	dwcoord 15, 4
-	dw DiplomaCongrats
+	dw DiplomaBody
 	dwcoord 2, 6
 	dw DiplomaGameFreak
 	dwcoord 9, 16
 
-DiplomaText:
+DiplomaTitle:
 	db CIRCLE_TILE_ID, "Diploma", CIRCLE_TILE_ID, "@"
 
-DiplomaPlayer:
+DiplomaHeader1:
 	db "Player@"
 
-DiplomaEmptyText:
+DiplomaHeader2:
 	db "@"
 
-DiplomaCongrats:
+DiplomaBody:
 	db   "Congrats! This"
 	next "diploma certifies"
 	next "that you have"
@@ -113,3 +119,36 @@ DiplomaCongrats:
 
 DiplomaGameFreak:
 	db "GAME FREAK@"
+ENDC
+
+IF DEF(_GERMAN)
+DiplomaTextPointersAndCoords:
+	dw DiplomaTitle
+	dwcoord 6, 2
+	dw DiplomaHeader1
+	dwcoord 2, 4
+	dw DiplomaHeader2
+	dwcoord 2, 6
+	dw DiplomaBody
+	dwcoord 2, 8
+	dw DiplomaGameFreak
+	dwcoord 9, 16
+
+DiplomaTitle:
+	db CIRCLE_TILE_ID, "Diplom", CIRCLE_TILE_ID, "@"
+
+DiplomaHeader1:
+	db "Herzlichen Glück-@"
+
+DiplomaHeader2:	
+	db "wunsch         !@"
+
+DiplomaBody:	
+	db   "Du hast es ge-"
+	next "schafft, den"
+	next "#DEX zu"
+	next "vervollständigen@"
+
+DiplomaGameFreak:	
+	db "GAME FREAK@"
+ENDC

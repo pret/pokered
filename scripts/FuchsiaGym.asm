@@ -18,8 +18,15 @@ FuchsiaGym_Script:
 	call LoadGymLeaderAndCityName
 	ret
 
+IF DEF(_ENGLISH)
 .CityName:
 	db "FUCHSIA CITY@"
+ENDC
+
+IF DEF(_GERMAN)
+.CityName:
+	db "FUCHSANIA CITY@"
+ENDC
 
 .LeaderName:
 	db "KOGA@"

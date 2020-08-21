@@ -14,8 +14,14 @@ Func_35f4::
 InitYesNoTextBoxParameters::
 	xor a ; YES_NO_MENU
 	ld [wTwoOptionMenuID], a
+IF DEF(_ENGLISH)
 	hlcoord 14, 7
 	lb bc, 8, 15
+ENDC
+IF DEF(_GERMAN)
+	hlcoord 13, 7
+	lb bc, 8, 14
+ENDC
 	ret
 
 YesNoChoicePokeCenter::

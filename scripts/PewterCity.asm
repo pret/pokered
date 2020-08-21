@@ -281,6 +281,10 @@ PewterCityText_19431:
 
 PewterCityText5:
 	text_asm
+IF DEF(_GERMAN)
+	ld a, $FC
+	ld [$CD6B], a
+ENDC
 	ld hl, PewterCityText_1945d
 	call PrintText
 	xor a

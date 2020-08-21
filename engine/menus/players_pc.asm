@@ -1,6 +1,8 @@
 PlayerPC::
+IF DEF(_ENGLISH)
 	ld hl, wd730
 	set 6, [hl]
+ENDC
 	ld a, ITEM_NAME
 	ld [wNameListType], a
 	call SaveScreenTilesToBuffer1
@@ -17,14 +19,24 @@ PlayerPC::
 	call PrintText
 
 PlayerPCMenu:
+IF DEF(_GERMAN)
+	ld hl, wd730
+	set 6, [hl]
+ENDC		 
 	ld a, [wParentMenuItem]
 	ld [wCurrentMenuItem], a
 	ld hl, wFlags_0xcd60
 	set 5, [hl]
 	call LoadScreenTilesFromBuffer2
 	hlcoord 0, 0
+IF DEF(_ENGLISH)
 	ld b, $8
 	ld c, $e
+ENDC
+IF DEF(_GERMAN)
+	ld b, $8
+	ld c, $f
+ENDC
 	call TextBoxBorder
 	call UpdateSprites
 	hlcoord 2, 2
@@ -240,11 +252,21 @@ PlayerPCToss:
 	call TossItem ; disallows tossing key items
 	jp .loop
 
+IF DEF(_ENGLISH)
 PlayersPCMenuEntries:
 	db   "WITHDRAW ITEM"
 	next "DEPOSIT ITEM"
 	next "TOSS ITEM"
 	next "LOG OFF@"
+ENDC
+
+IF DEF(_GERMAN)
+PlayersPCMenuEntries:
+	db   "ITEM AUFNEHMEN"
+	next "ITEM ABLEGEN"
+	next "ITEM WEGWERFEN"
+	next "AUSLOGGEN@"
+ENDC
 
 TurnedOnPC2Text:
 	text_far _TurnedOnPC2Text

@@ -3,8 +3,15 @@ PrizeDifferentMenuPtrs:
 	dw PrizeMenuMon2Entries, PrizeMenuMon2Cost
 	dw PrizeMenuTMsEntries,  PrizeMenuTMsCost
 
+IF DEF(_ENGLISH)
 NoThanksText:
 	db "NO THANKS@"
+ENDC
+
+IF DEF(_GERMAN)
+NoThanksText:
+	db "TSCHÜSS!@"
+ENDC
 
 PrizeMenuMon1Entries:
 	db ABRA

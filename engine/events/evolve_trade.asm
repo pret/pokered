@@ -17,6 +17,7 @@ EvolveTradeMon:
 
 ; This was fixed in Yellow.
 
+IF DEF(_ENGLISH)
 	ld a, [wInGameTradeReceiveMonName]
 
 	; GRAVELER
@@ -29,7 +30,10 @@ EvolveTradeMon:
 	ld a, [wInGameTradeReceiveMonName + 1]
 	cp "P"
 	ret nz
-
+ENDC
+IF DEF(_GERMAN)
+	ret
+ENDC
 .ok
 	ld a, [wPartyCount]
 	dec a

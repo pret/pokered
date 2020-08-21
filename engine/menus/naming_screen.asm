@@ -13,8 +13,14 @@ AskName:
 	call GetMonName
 	ld hl, DoYouWantToNicknameText
 	call PrintText
+IF DEF(_ENGLISH)
 	hlcoord 14, 7
 	lb bc, 8, 15
+ENDC
+IF DEF(_GERMAN)
+	hlcoord 13, 7
+	lb bc, 8, 14
+ENDC
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
@@ -323,6 +329,7 @@ DisplayNamingScreen:
 	ld [wTopMenuItemX], a
 	jp EraseMenuCursor
 
+IF DEF(_ENGLISH)
 LoadEDTile:
 	ld de, ED_Tile
 	ld hl, vFont tile $70
@@ -330,6 +337,19 @@ LoadEDTile:
 	; to fix the graphical bug on poor emulators
 	;lb bc, BANK(ED_Tile), (ED_TileEnd - ED_Tile) / $8
 	jp CopyVideoDataDouble
+ENDC
+
+IF DEF(_GERMAN) ; all european builds?
+LoadEDTile:
+; code from the english build results in a corrupted ED tile
+	call DisableLCD
+	ld de, vFont tile $70
+	ld hl, ED_Tile
+	ld bc, (ED_TileEnd - ED_Tile)
+	ld a, $1
+	call FarCopyDataDouble
+	jp EnableLCD
+ENDC
 
 ED_Tile:
 	INCBIN "gfx/font/ED.1bpp"
@@ -365,7 +385,13 @@ PrintAlphabet:
 	ldh [hAutoBGTransferEnabled], a
 	jp Delay3
 
+IF DEF(_ENGLISH)
 INCLUDE "data/text/alphabets.asm"
+ENDC
+
+IF DEF(_GERMAN)
+INCLUDE "version/pokerot/data/text/alphabets.asm"
+ENDC
 
 PrintNicknameAndUnderscores:
 	call CalcStringLength
@@ -467,9 +493,11 @@ PrintNamingText:
 	call GetMonName
 	hlcoord 4, 1
 	call PlaceString
+IF DEF(_ENGLISH)
 	ld hl, $1
 	add hl, bc
 	ld [hl], "の" ; leftover from Japanese version; blank tile $c9 in English
+ENDC
 	hlcoord 1, 3
 	ld de, NicknameTextString
 	jr .placeString
@@ -481,6 +509,8 @@ PrintNamingText:
 .placeString
 	jp PlaceString
 
+
+IF DEF(_ENGLISH)
 YourTextString:
 	db "YOUR @"
 
@@ -492,3 +522,18 @@ NameTextString:
 
 NicknameTextString:
 	db "NICKNAME?@"
+ENDC
+
+IF DEF(_GERMAN)
+YourTextString:
+	db "DEIN @"
+	
+RivalsTextString:
+	db "GEGNER-@"
+	
+NameTextString:
+	db "NAME?@"
+	
+NicknameTextString:
+	db "ALIAS?@"
+ENDC

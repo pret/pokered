@@ -141,12 +141,24 @@ LinkMenu:
 	call SaveScreenTilesToBuffer1
 	ld hl, WhereWouldYouLikeText
 	call PrintText
+IF DEF(_ENGLISH)
 	hlcoord 5, 5
 	ld b, $6
 	ld c, $d
+ENDC
+IF DEF(_GERMAN)
+	hlcoord 4, 5
+	ld b, $6
+	ld c, $e
+ENDC
 	call TextBoxBorder
 	call UpdateSprites
+IF DEF(_ENGLISH)
 	hlcoord 7, 7
+ENDC
+IF DEF(_GERMAN)
+	hlcoord 6, 7
+ENDC
 	ld de, CableClubOptionsText
 	call PlaceString
 	xor a
@@ -155,7 +167,12 @@ LinkMenu:
 	ld hl, wTopMenuItemY
 	ld a, $7
 	ld [hli], a
+IF DEF(_ENGLISH)
 	ld a, $6
+ENDC
+IF DEF(_GERMAN)
+	ld a, $5
+ENDC
 	ld [hli], a
 	xor a
 	ld [hli], a
@@ -239,12 +256,22 @@ LinkMenu:
 	ld b, c
 	ld c, d
 .updateCursorPosition
+IF DEF(_ENGLISH)
 	ld a, b
 	ldcoord_a 6, 7
 	ld a, c
 	ldcoord_a 6, 9
 	ld a, d
 	ldcoord_a 6, 11
+ENDC
+IF DEF(_GERMAN)
+	ld a, b
+	ldcoord_a 5, 7
+	ld a, c
+	ldcoord_a 5, 9
+	ld a, d
+	ldcoord_a 5, 11
+ENDC
 	ld c, 40
 	call DelayFrames
 	call LoadScreenTilesFromBuffer1
@@ -329,6 +356,7 @@ SpecialEnterMap::
 	ret nz
 	jp EnterMap
 
+IF DEF(_ENGLISH)
 ContinueText:
 	db "CONTINUE"
 	next ""
@@ -342,15 +370,41 @@ CableClubOptionsText:
 	db   "TRADE CENTER"
 	next "COLOSSEUM"
 	next "CANCEL@"
+ENDC
+
+IF DEF(_GERMAN)
+ContinueText:
+	db "WEITER"
+	next ""
+	; fallthrough
+	
+NewGameText:
+	db   "NEUES SPIEL"
+	next "OPTIONEN@"
+	
+CableClubOptionsText:
+	db   "HANDELSCENTER"
+	next "KOLOSSEUM"
+	next "ZURÜCK@"
+ENDC
 
 DisplayContinueGameInfo:
 	xor a
 	ldh [hAutoBGTransferEnabled], a
+IF DEF(_ENGLISH)
 	hlcoord 4, 7
 	ld b, 8
 	ld c, 14
 	call TextBoxBorder
 	hlcoord 5, 9
+ENDC
+IF DEF(_GERMAN)
+	hlcoord 3, 7
+	ld b, 8
+	ld c, 15
+	call TextBoxBorder
+	hlcoord 4, 9
+ENDC
 	ld de, SaveScreenInfoText
 	call PlaceString
 	hlcoord 12, 9
@@ -370,13 +424,25 @@ DisplayContinueGameInfo:
 PrintSaveScreenText:
 	xor a
 	ldh [hAutoBGTransferEnabled], a
+IF DEF(_ENGLISH)
 	hlcoord 4, 0
 	ld b, $8
 	ld c, $e
+ENDC
+IF DEF(_GERMAN)
+	hlcoord 3, 0
+	ld b, $8
+	ld c, $f
+ENDC
 	call TextBoxBorder
 	call LoadTextBoxTilePatterns
 	call UpdateSprites
+IF DEF(_ENGLISH)
 	hlcoord 5, 2
+ENDC
+IF DEF(_GERMAN)
+	hlcoord 4, 2
+ENDC
 	ld de, SaveScreenInfoText
 	call PlaceString
 	hlcoord 12, 2
@@ -423,11 +489,21 @@ PrintPlayTime:
 	lb bc, LEADING_ZEROES | 1, 2
 	jp PrintNumber
 
+IF DEF(_ENGLISH)
 SaveScreenInfoText:
 	db   "PLAYER"
 	next "BADGES    "
 	next "#DEX    "
 	next "TIME@"
+ENDC
+
+IF DEF(_GERMAN)
+SaveScreenInfoText:
+	db   "SPIELER"
+	next "ORDEN          "
+	next "#DEX        "
+	next "ZEIT@"
+ENDC
 
 DisplayOptionMenu:
 	hlcoord 0, 0
@@ -581,6 +657,7 @@ DisplayOptionMenu:
 	ld [wOptionsTextSpeedCursorX], a ; text speed cursor X coordinate
 	jp .eraseOldMenuCursor
 
+IF DEF(_ENGLISH)
 TextSpeedOptionText:
 	db   "TEXT SPEED"
 	next " FAST  MEDIUM SLOW@"
@@ -595,6 +672,24 @@ BattleStyleOptionText:
 
 OptionMenuCancelText:
 	db "CANCEL@"
+ENDC
+
+IF DEF(_GERMAN)
+TextSpeedOptionText:
+	db   "TEXT-TEMPO"
+	next " 3     2      1   @"
+	
+BattleAnimationOptionText:
+	db   "KAMPFANIMATION"
+	next " AN       AUS@"
+	
+BattleStyleOptionText:
+	db   "KAMPFSTIL"
+	next " WECHSEL  FOLGEND@"
+	
+OptionMenuCancelText:
+	db "ZURÜCK@"
+ENDC
 
 ; sets the options variable according to the current placement of the menu cursors in the options menu
 SetOptionsFromCursorPositions:

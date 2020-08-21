@@ -28,7 +28,12 @@ LinkCableHelp::
 	set 6, [hl]
 	hlcoord 0, 0
 	ld b, 8
+IF DEF(_ENGLISH)
 	ld c, 13
+ENDC
+IF DEF(_GERMAN)
+	ld c, 14
+ENDC
 	call TextBoxBorder
 	hlcoord 2, 2
 	ld de, HowToLinkText
@@ -67,11 +72,21 @@ LinkCableHelpText2:
 	text_far _LinkCableHelpText2
 	text_end
 
+IF DEF(_ENGLISH)
 HowToLinkText:
 	db   "HOW TO LINK"
 	next "COLOSSEUM"
 	next "TRADE CENTER"
 	next "STOP READING@"
+ENDC
+
+IF DEF(_GERMAN)
+HowToLinkText:
+	db   "LINK-INFO"
+	next "KOLOSSEUM"
+	next "HANDELSCENTER"
+	next "VERLASSEN@"
+ENDC
 
 LinkCableInfoTexts:
 	dw LinkCableInfoText1
@@ -184,6 +199,7 @@ ViridianSchoolBlackboardText2:
 	text_far _ViridianSchoolBlackboardText2
 	text_end
 
+IF DEF(_ENGLISH)
 StatusAilmentText1:
 	db   " SLP"
 	next " PSN"
@@ -195,6 +211,19 @@ StatusAilmentText2:
 	next " QUIT@"
 
 	db "@" ; unused
+ENDC
+
+IF DEF(_GERMAN)
+StatusAilmentText1:
+	db   " SLF"
+	next " GIF"
+	next " PAR@"
+
+StatusAilmentText2:
+	db   " BRT"
+	next " GFR"
+	next " ZUR.@"
+ENDC
 
 ViridianBlackboardStatusPointers:
 	dw ViridianBlackboardSleepText

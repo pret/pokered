@@ -1,7 +1,12 @@
 PrintWaitingText::
 	hlcoord 3, 10
 	ld b, $1
+IF DEF(_ENGLISH)
 	ld c, $b
+ENDC
+IF DEF(_GERMAN)
+	ld c, $d
+ENDC
 	ld a, [wIsInBattle]
 	and a
 	jr z, .asm_4c17
@@ -16,5 +21,12 @@ PrintWaitingText::
 	ld c, 50
 	jp DelayFrames
 
+IF DEF(_ENGLISH)
 WaitingText:
 	db "Waiting...!@"
+ENDC
+
+IF DEF(_GERMAN)
+WaitingText:
+	db "BITTE WARTEN…@"
+ENDC

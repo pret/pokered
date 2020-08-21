@@ -16,11 +16,21 @@ PewterGym_Script:
 	ld de, .LeaderName
 	jp LoadGymLeaderAndCityName
 
+IF DEF(_ENGLISH)
 .CityName:
 	db "PEWTER CITY@"
 
 .LeaderName:
 	db "BROCK@"
+ENDC
+
+IF DEF(_GERMAN)
+.CityName:
+	db "MARMORIA CITY@"
+
+.LeaderName:
+	db "ROCKO@"
+ENDC
 
 PewterGymScript_5c3bf:
 	xor a
