@@ -3,9 +3,9 @@ RockTunnelB1F_Object:
 
 	def_warps
 	warp 33, 25, 4, ROCK_TUNNEL_1F
-	warp 27, 3, 5, ROCK_TUNNEL_1F
+	warp 27,  3, 5, ROCK_TUNNEL_1F
 	warp 23, 11, 6, ROCK_TUNNEL_1F
-	warp 3, 3, 7, ROCK_TUNNEL_1F
+	warp  3,  3, 7, ROCK_TUNNEL_1F
 
 	def_signs
 

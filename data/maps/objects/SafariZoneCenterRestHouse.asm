@@ -2,8 +2,8 @@ SafariZoneCenterRestHouse_Object:
 	db $a ; border block
 
 	def_warps
-	warp 2, 7, 8, SAFARI_ZONE_CENTER
-	warp 3, 7, 8, SAFARI_ZONE_CENTER
+	warp  2,  7, 8, SAFARI_ZONE_CENTER
+	warp  3,  7, 8, SAFARI_ZONE_CENTER
 
 	def_signs
 

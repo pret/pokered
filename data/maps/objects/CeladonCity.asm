@@ -2,12 +2,12 @@ CeladonCity_Object:
 	db $f ; border block
 
 	def_warps
-	warp 8, 13, 0, CELADON_MART_1F
+	warp  8, 13, 0, CELADON_MART_1F
 	warp 10, 13, 2, CELADON_MART_1F
-	warp 24, 9, 0, CELADON_MANSION_1F
-	warp 24, 3, 2, CELADON_MANSION_1F
-	warp 25, 3, 2, CELADON_MANSION_1F
-	warp 41, 9, 0, CELADON_POKECENTER
+	warp 24,  9, 0, CELADON_MANSION_1F
+	warp 24,  3, 2, CELADON_MANSION_1F
+	warp 25,  3, 2, CELADON_MANSION_1F
+	warp 41,  9, 0, CELADON_POKECENTER
 	warp 12, 27, 0, CELADON_GYM
 	warp 28, 19, 0, GAME_CORNER
 	warp 39, 19, 0, CELADON_MART_5F ; beta warp! no longer used
@@ -19,9 +19,9 @@ CeladonCity_Object:
 	def_signs
 	sign 27, 15, 10 ; CeladonCityText10
 	sign 19, 15, 11 ; CeladonCityText11
-	sign 42, 9, 12 ; PokeCenterSignText
+	sign 42,  9, 12 ; PokeCenterSignText
 	sign 13, 29, 13 ; CeladonCityText13
-	sign 21, 9, 14 ; CeladonCityText14
+	sign 21,  9, 14 ; CeladonCityText14
 	sign 12, 13, 15 ; CeladonCityText15
 	sign 39, 21, 16 ; CeladonCityText16
 	sign 33, 21, 17 ; CeladonCityText17

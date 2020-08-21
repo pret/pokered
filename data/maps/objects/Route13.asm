@@ -5,7 +5,7 @@ Route13_Object:
 
 	def_signs
 	sign 15, 13, 11 ; Route13Text11
-	sign 33, 5, 12 ; Route13Text12
+	sign 33,  5, 12 ; Route13Text12
 	sign 31, 11, 13 ; Route13Text13
 
 	def_objects

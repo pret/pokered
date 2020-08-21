@@ -4,7 +4,7 @@ Route3_Object:
 	def_warps
 
 	def_signs
-	sign 59, 9, 10 ; Route3Text10
+	sign 59,  9, 10 ; Route3Text10
 
 	def_objects
 	object SPRITE_SUPER_NERD, 57, 11, STAY, NONE, 1 ; person

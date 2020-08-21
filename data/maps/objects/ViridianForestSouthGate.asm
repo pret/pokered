@@ -2,10 +2,10 @@ ViridianForestSouthGate_Object:
 	db $a ; border block
 
 	def_warps
-	warp 4, 0, 3, VIRIDIAN_FOREST
-	warp 5, 0, 4, VIRIDIAN_FOREST
-	warp 4, 7, 5, LAST_MAP
-	warp 5, 7, 5, LAST_MAP
+	warp  4,  0, 3, VIRIDIAN_FOREST
+	warp  5,  0, 4, VIRIDIAN_FOREST
+	warp  4,  7, 5, LAST_MAP
+	warp  5,  7, 5, LAST_MAP
 
 	def_signs
 

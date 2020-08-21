@@ -2,7 +2,7 @@ RedsHouse2F_Object:
 	db $a ; border block
 
 	def_warps
-	warp 7, 1, 2, REDS_HOUSE_1F
+	warp  7,  1, 2, REDS_HOUSE_1F
 
 	def_signs
 

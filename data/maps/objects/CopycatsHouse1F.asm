@@ -2,9 +2,9 @@ CopycatsHouse1F_Object:
 	db $a ; border block
 
 	def_warps
-	warp 2, 7, 0, LAST_MAP
-	warp 3, 7, 0, LAST_MAP
-	warp 7, 1, 0, COPYCATS_HOUSE_2F
+	warp  2,  7, 0, LAST_MAP
+	warp  3,  7, 0, LAST_MAP
+	warp  7,  1, 0, COPYCATS_HOUSE_2F
 
 	def_signs
 

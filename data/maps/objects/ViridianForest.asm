@@ -2,20 +2,20 @@ ViridianForest_Object:
 	db $3 ; border block
 
 	def_warps
-	warp 1, 0, 2, VIRIDIAN_FOREST_NORTH_GATE
-	warp 2, 0, 3, VIRIDIAN_FOREST_NORTH_GATE
+	warp  1,  0, 2, VIRIDIAN_FOREST_NORTH_GATE
+	warp  2,  0, 3, VIRIDIAN_FOREST_NORTH_GATE
 	warp 15, 47, 1, VIRIDIAN_FOREST_SOUTH_GATE
 	warp 16, 47, 1, VIRIDIAN_FOREST_SOUTH_GATE
 	warp 17, 47, 1, VIRIDIAN_FOREST_SOUTH_GATE
 	warp 18, 47, 1, VIRIDIAN_FOREST_SOUTH_GATE
 
 	def_signs
-	sign 24, 40, 9 ; ViridianForestText9
+	sign 24, 40,  9 ; ViridianForestText9
 	sign 16, 32, 10 ; ViridianForestText10
 	sign 26, 17, 11 ; ViridianForestText11
-	sign 4, 24, 12 ; ViridianForestText12
+	sign  4, 24, 12 ; ViridianForestText12
 	sign 18, 45, 13 ; ViridianForestText13
-	sign 2, 1, 14 ; ViridianForestText14
+	sign  2,  1, 14 ; ViridianForestText14
 
 	def_objects
 	object SPRITE_YOUNGSTER, 16, 43, STAY, NONE, 1 ; person

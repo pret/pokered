@@ -2,14 +2,14 @@ CeladonMansion1F_Object:
 	db $f ; border block
 
 	def_warps
-	warp 4, 11, 2, LAST_MAP
-	warp 5, 11, 2, LAST_MAP
-	warp 4, 0, 4, LAST_MAP
-	warp 7, 1, 1, CELADON_MANSION_2F
-	warp 2, 1, 2, CELADON_MANSION_2F
+	warp  4, 11, 2, LAST_MAP
+	warp  5, 11, 2, LAST_MAP
+	warp  4,  0, 4, LAST_MAP
+	warp  7,  1, 1, CELADON_MANSION_2F
+	warp  2,  1, 2, CELADON_MANSION_2F
 
 	def_signs
-	sign 4, 9, 5 ; CeladonMansion1Text5
+	sign  4,  9, 5 ; CeladonMansion1Text5
 
 	def_objects
 	object SPRITE_MONSTER, 0, 5, STAY, RIGHT, 1 ; person

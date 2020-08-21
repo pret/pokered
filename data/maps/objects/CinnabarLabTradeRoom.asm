@@ -2,8 +2,8 @@ CinnabarLabTradeRoom_Object:
 	db $17 ; border block
 
 	def_warps
-	warp 2, 7, 2, CINNABAR_LAB
-	warp 3, 7, 2, CINNABAR_LAB
+	warp  2,  7, 2, CINNABAR_LAB
+	warp  3,  7, 2, CINNABAR_LAB
 
 	def_signs
 

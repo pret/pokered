@@ -2,8 +2,8 @@ SafariZoneSecretHouse_Object:
 	db $17 ; border block
 
 	def_warps
-	warp 2, 7, 6, SAFARI_ZONE_WEST
-	warp 3, 7, 6, SAFARI_ZONE_WEST
+	warp  2,  7, 6, SAFARI_ZONE_WEST
+	warp  3,  7, 6, SAFARI_ZONE_WEST
 
 	def_signs
 

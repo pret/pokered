@@ -5,16 +5,16 @@ ViridianCity_Object:
 	warp 23, 25, 0, VIRIDIAN_POKECENTER
 	warp 29, 19, 0, VIRIDIAN_MART
 	warp 21, 15, 0, VIRIDIAN_SCHOOL_HOUSE
-	warp 21, 9, 0, VIRIDIAN_NICKNAME_HOUSE
-	warp 32, 7, 0, VIRIDIAN_GYM
+	warp 21,  9, 0, VIRIDIAN_NICKNAME_HOUSE
+	warp 32,  7, 0, VIRIDIAN_GYM
 
 	def_signs
-	sign 17, 17, 8 ; ViridianCityText8
-	sign 19, 1, 9 ; ViridianCityText9
+	sign 17, 17,  8 ; ViridianCityText8
+	sign 19,  1,  9 ; ViridianCityText9
 	sign 21, 29, 10 ; ViridianCityText10
 	sign 30, 19, 11 ; MartSignText
 	sign 24, 25, 12 ; PokeCenterSignText
-	sign 27, 7, 13 ; ViridianCityText13
+	sign 27,  7, 13 ; ViridianCityText13
 
 	def_objects
 	object SPRITE_YOUNGSTER, 13, 20, WALK, ANY_DIR, 1 ; person

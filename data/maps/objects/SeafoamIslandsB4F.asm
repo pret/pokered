@@ -4,12 +4,12 @@ SeafoamIslandsB4F_Object:
 	def_warps
 	warp 20, 17, 5, SEAFOAM_ISLANDS_B3F
 	warp 21, 17, 6, SEAFOAM_ISLANDS_B3F
-	warp 11, 7, 1, SEAFOAM_ISLANDS_B3F
-	warp 25, 4, 2, SEAFOAM_ISLANDS_B3F
+	warp 11,  7, 1, SEAFOAM_ISLANDS_B3F
+	warp 25,  4, 2, SEAFOAM_ISLANDS_B3F
 
 	def_signs
-	sign 9, 15, 4 ; SeafoamIslands5Text4
-	sign 23, 1, 5 ; SeafoamIslands5Text5
+	sign  9, 15, 4 ; SeafoamIslands5Text4
+	sign 23,  1, 5 ; SeafoamIslands5Text5
 
 	def_objects
 	object SPRITE_BOULDER, 4, 15, STAY, NONE, 1 ; person

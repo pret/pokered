@@ -2,9 +2,9 @@ IndigoPlateauLobby_Object:
 	db $0 ; border block
 
 	def_warps
-	warp 7, 11, 0, LAST_MAP
-	warp 8, 11, 1, LAST_MAP
-	warp 8, 0, 0, LORELEIS_ROOM
+	warp  7, 11, 0, LAST_MAP
+	warp  8, 11, 1, LAST_MAP
+	warp  8,  0, 0, LORELEIS_ROOM
 
 	def_signs
 

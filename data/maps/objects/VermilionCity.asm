@@ -2,23 +2,23 @@ VermilionCity_Object:
 	db $43 ; border block
 
 	def_warps
-	warp 11, 3, 0, VERMILION_POKECENTER
-	warp 9, 13, 0, POKEMON_FAN_CLUB
+	warp 11,  3, 0, VERMILION_POKECENTER
+	warp  9, 13, 0, POKEMON_FAN_CLUB
 	warp 23, 13, 0, VERMILION_MART
 	warp 12, 19, 0, VERMILION_GYM
 	warp 23, 19, 0, VERMILION_PIDGEY_HOUSE
 	warp 18, 31, 0, VERMILION_DOCK
 	warp 19, 31, 0, VERMILION_DOCK
 	warp 15, 13, 0, VERMILION_TRADE_HOUSE
-	warp 7, 3, 0, VERMILION_OLD_ROD_HOUSE
+	warp  7,  3, 0, VERMILION_OLD_ROD_HOUSE
 
 	def_signs
-	sign 27, 3, 7 ; VermilionCityText7
-	sign 37, 13, 8 ; VermilionCityText8
-	sign 24, 13, 9 ; MartSignText
-	sign 12, 3, 10 ; PokeCenterSignText
-	sign 7, 13, 11 ; VermilionCityText11
-	sign 7, 19, 12 ; VermilionCityText12
+	sign 27,  3,  7 ; VermilionCityText7
+	sign 37, 13,  8 ; VermilionCityText8
+	sign 24, 13,  9 ; MartSignText
+	sign 12,  3, 10 ; PokeCenterSignText
+	sign  7, 13, 11 ; VermilionCityText11
+	sign  7, 19, 12 ; VermilionCityText12
 	sign 29, 15, 13 ; VermilionCityText13
 
 	def_objects

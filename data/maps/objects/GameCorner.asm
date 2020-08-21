@@ -4,10 +4,10 @@ GameCorner_Object:
 	def_warps
 	warp 15, 17, 7, LAST_MAP
 	warp 16, 17, 7, LAST_MAP
-	warp 17, 4, 1, ROCKET_HIDEOUT_B1F
+	warp 17,  4, 1, ROCKET_HIDEOUT_B1F
 
 	def_signs
-	sign 9, 4, 12 ; CeladonGameCornerText12
+	sign  9,  4, 12 ; CeladonGameCornerText12
 
 	def_objects
 	object SPRITE_BEAUTY, 2, 6, STAY, DOWN, 1 ; person

@@ -2,8 +2,8 @@ BillsHouse_Object:
 	db $d ; border block
 
 	def_warps
-	warp 2, 7, 0, LAST_MAP
-	warp 3, 7, 0, LAST_MAP
+	warp  2,  7, 0, LAST_MAP
+	warp  3,  7, 0, LAST_MAP
 
 	def_signs
 

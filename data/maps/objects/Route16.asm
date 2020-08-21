@@ -6,15 +6,15 @@ Route16_Object:
 	warp 17, 11, 1, ROUTE_16_GATE_1F
 	warp 24, 10, 2, ROUTE_16_GATE_1F
 	warp 24, 11, 3, ROUTE_16_GATE_1F
-	warp 17, 4, 4, ROUTE_16_GATE_1F
-	warp 17, 5, 5, ROUTE_16_GATE_1F
-	warp 24, 4, 6, ROUTE_16_GATE_1F
-	warp 24, 5, 7, ROUTE_16_GATE_1F
-	warp 7, 5, 0, ROUTE_16_FLY_HOUSE
+	warp 17,  4, 4, ROUTE_16_GATE_1F
+	warp 17,  5, 5, ROUTE_16_GATE_1F
+	warp 24,  4, 6, ROUTE_16_GATE_1F
+	warp 24,  5, 7, ROUTE_16_GATE_1F
+	warp  7,  5, 0, ROUTE_16_FLY_HOUSE
 
 	def_signs
 	sign 27, 11, 8 ; Route16Text8
-	sign 5, 17, 9 ; Route16Text9
+	sign  5, 17, 9 ; Route16Text9
 
 	def_objects
 	object SPRITE_BIKER, 17, 12, STAY, LEFT, 1, OPP_BIKER, 5

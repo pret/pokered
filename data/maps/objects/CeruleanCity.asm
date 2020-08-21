@@ -8,10 +8,10 @@ CeruleanCity_Object:
 	warp 30, 19, 0, CERULEAN_GYM
 	warp 13, 25, 0, BIKE_SHOP
 	warp 25, 25, 0, CERULEAN_MART
-	warp 4, 11, 0, CERULEAN_CAVE_1F
-	warp 27, 9, 2, CERULEAN_TRASHED_HOUSE
-	warp 9, 11, 1, CERULEAN_BADGE_HOUSE
-	warp 9, 9, 0, CERULEAN_BADGE_HOUSE
+	warp  4, 11, 0, CERULEAN_CAVE_1F
+	warp 27,  9, 2, CERULEAN_TRASHED_HOUSE
+	warp  9, 11, 1, CERULEAN_BADGE_HOUSE
+	warp  9,  9, 0, CERULEAN_BADGE_HOUSE
 
 	def_signs
 	sign 23, 19, 12 ; CeruleanCityText12

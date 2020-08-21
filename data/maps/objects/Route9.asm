@@ -4,7 +4,7 @@ Route9_Object:
 	def_warps
 
 	def_signs
-	sign 25, 7, 11 ; Route9Text11
+	sign 25,  7, 11 ; Route9Text11
 
 	def_objects
 	object SPRITE_COOLTRAINER_F, 13, 10, STAY, LEFT, 1, OPP_JR_TRAINER_F, 5

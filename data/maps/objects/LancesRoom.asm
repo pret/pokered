@@ -3,8 +3,8 @@ LancesRoom_Object:
 
 	def_warps
 	warp 24, 16, 2, AGATHAS_ROOM
-	warp 5, 0, 0, CHAMPIONS_ROOM
-	warp 6, 0, 0, CHAMPIONS_ROOM
+	warp  5,  0, 0, CHAMPIONS_ROOM
+	warp  6,  0, 0, CHAMPIONS_ROOM
 
 	def_signs
 

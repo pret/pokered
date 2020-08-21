@@ -4,12 +4,12 @@ Route17_Object:
 	def_warps
 
 	def_signs
-	sign 9, 51, 11 ; Route17Text11
-	sign 9, 63, 12 ; Route17Text12
-	sign 9, 75, 13 ; Route17Text13
-	sign 9, 87, 14 ; Route17Text14
-	sign 9, 111, 15 ; Route17Text15
-	sign 9, 141, 16 ; Route17Text16
+	sign  9, 51, 11 ; Route17Text11
+	sign  9, 63, 12 ; Route17Text12
+	sign  9, 75, 13 ; Route17Text13
+	sign  9, 87, 14 ; Route17Text14
+	sign  9, 111, 15 ; Route17Text15
+	sign  9, 141, 16 ; Route17Text16
 
 	def_objects
 	object SPRITE_BIKER, 12, 19, STAY, LEFT, 1, OPP_CUE_BALL, 4

@@ -2,9 +2,9 @@ UndergroundPathRoute7_Object:
 	db $a ; border block
 
 	def_warps
-	warp 3, 7, 4, LAST_MAP
-	warp 4, 7, 4, LAST_MAP
-	warp 4, 4, 0, UNDERGROUND_PATH_WEST_EAST
+	warp  3,  7, 4, LAST_MAP
+	warp  4,  7, 4, LAST_MAP
+	warp  4,  4, 0, UNDERGROUND_PATH_WEST_EAST
 
 	def_signs
 

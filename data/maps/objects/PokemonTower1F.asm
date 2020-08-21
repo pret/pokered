@@ -4,7 +4,7 @@ PokemonTower1F_Object:
 	def_warps
 	warp 10, 17, 1, LAST_MAP
 	warp 11, 17, 1, LAST_MAP
-	warp 18, 9, 1, POKEMON_TOWER_2F
+	warp 18,  9, 1, POKEMON_TOWER_2F
 
 	def_signs
 

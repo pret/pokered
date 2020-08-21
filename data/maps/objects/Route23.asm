@@ -2,13 +2,13 @@ Route23_Object:
 	db $f ; border block
 
 	def_warps
-	warp 7, 139, 2, ROUTE_22_GATE
-	warp 8, 139, 3, ROUTE_22_GATE
-	warp 4, 31, 0, VICTORY_ROAD_1F
+	warp  7, 139, 2, ROUTE_22_GATE
+	warp  8, 139, 3, ROUTE_22_GATE
+	warp  4, 31, 0, VICTORY_ROAD_1F
 	warp 14, 31, 1, VICTORY_ROAD_2F
 
 	def_signs
-	sign 3, 33, 8 ; Route23Text8
+	sign  3, 33, 8 ; Route23Text8
 
 	def_objects
 	object SPRITE_GUARD, 4, 35, STAY, DOWN, 1 ; person

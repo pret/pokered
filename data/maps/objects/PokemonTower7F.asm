@@ -2,7 +2,7 @@ PokemonTower7F_Object:
 	db $1 ; border block
 
 	def_warps
-	warp 9, 16, 1, POKEMON_TOWER_6F
+	warp  9, 16, 1, POKEMON_TOWER_6F
 
 	def_signs
 

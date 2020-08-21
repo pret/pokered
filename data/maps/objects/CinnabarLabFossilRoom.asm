@@ -2,8 +2,8 @@ CinnabarLabFossilRoom_Object:
 	db $17 ; border block
 
 	def_warps
-	warp 2, 7, 4, CINNABAR_LAB
-	warp 3, 7, 4, CINNABAR_LAB
+	warp  2,  7, 4, CINNABAR_LAB
+	warp  3,  7, 4, CINNABAR_LAB
 
 	def_signs
 

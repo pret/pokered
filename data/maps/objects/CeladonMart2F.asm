@@ -2,12 +2,12 @@ CeladonMart2F_Object:
 	db $f ; border block
 
 	def_warps
-	warp 12, 1, 4, CELADON_MART_1F
-	warp 16, 1, 1, CELADON_MART_3F
-	warp 1, 1, 0, CELADON_MART_ELEVATOR
+	warp 12,  1, 4, CELADON_MART_1F
+	warp 16,  1, 1, CELADON_MART_3F
+	warp  1,  1, 0, CELADON_MART_ELEVATOR
 
 	def_signs
-	sign 14, 1, 5 ; CeladonMart2Text5
+	sign 14,  1, 5 ; CeladonMart2Text5
 
 	def_objects
 	object SPRITE_CLERK, 5, 3, STAY, DOWN, 1 ; person
