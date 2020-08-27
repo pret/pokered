@@ -433,32 +433,32 @@ IntroNidorinoAnimation7:
 	db ANIMATION_END
 
 GameFreakIntro:
-	INCBIN "gfx/intro_credits/gamefreak_presents.2bpp"
-	INCBIN "gfx/intro_credits/gamefreak_logo.2bpp"
+	INCBIN "gfx/splash/gamefreak_presents.2bpp"
+	INCBIN "gfx/splash/gamefreak_logo.2bpp"
 	ds 16, $00 ; blank tile
 GameFreakIntroEnd:
 
 FightIntroBackMon:
-	INCBIN "gfx/intro_credits/gengar.2bpp"
+	INCBIN "gfx/intro/gengar.2bpp"
 	ds 16, $00 ; blank tile
 FightIntroBackMonEnd:
 
-FightIntroFrontMon:
-
 IF DEF(_RED)
-	INCBIN "gfx/intro_credits/red_nidorino_1.2bpp"
+FightIntroFrontMon:
+	INCBIN "gfx/intro/red_nidorino_1.2bpp"
 FightIntroFrontMon2:
-	INCBIN "gfx/intro_credits/red_nidorino_2.2bpp"
+	INCBIN "gfx/intro/red_nidorino_2.2bpp"
 FightIntroFrontMon3:
-	INCBIN "gfx/intro_credits/red_nidorino_3.2bpp"
+	INCBIN "gfx/intro/red_nidorino_3.2bpp"
 ENDC
 
 IF DEF(_BLUE)
-	INCBIN "gfx/intro_credits/blue_jigglypuff_1.2bpp"
+FightIntroFrontMon:
+	INCBIN "gfx/intro/blue_jigglypuff_1.2bpp"
 FightIntroFrontMon2:
-	INCBIN "gfx/intro_credits/blue_jigglypuff_2.2bpp"
+	INCBIN "gfx/intro/blue_jigglypuff_2.2bpp"
 FightIntroFrontMon3:
-	INCBIN "gfx/intro_credits/blue_jigglypuff_3.2bpp"
+	INCBIN "gfx/intro/blue_jigglypuff_3.2bpp"
 ENDC
 
 FightIntroFrontMonEnd:

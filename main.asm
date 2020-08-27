@@ -314,7 +314,7 @@ INCLUDE "gfx/version.asm"
 
 SECTION "bank1C", ROMX
 
-INCLUDE "engine/movie/gamefreak.asm"
+INCLUDE "engine/movie/splash.asm"
 INCLUDE "engine/movie/hall_of_fame.asm"
 INCLUDE "engine/overworld/healing_machine.asm"
 INCLUDE "engine/overworld/player_animations.asm"

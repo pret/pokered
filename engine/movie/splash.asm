@@ -239,5 +239,5 @@ GameFreakShootingStarOAMData:
 GameFreakShootingStarOAMDataEnd:
 
 FallingStar:
-	INCBIN "gfx/intro_credits/falling_star.2bpp"
+	INCBIN "gfx/splash/falling_star.2bpp"
 FallingStarEnd:
