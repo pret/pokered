@@ -33,10 +33,10 @@ FightingDojoScript1:
 	ldh [hJoyHeld], a
 	ld [wcf0d], a
 	ld a, [wYCoord]
-	cp $3
+	cp 3
 	ret nz
 	ld a, [wXCoord]
-	cp $4
+	cp 4
 	ret nz
 	ld a, $1
 	ld [wcf0d], a

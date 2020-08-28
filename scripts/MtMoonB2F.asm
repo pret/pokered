@@ -56,10 +56,10 @@ MtMoon3Script0:
 	CheckEvent EVENT_BEAT_MT_MOON_EXIT_SUPER_NERD
 	jp nz, MtMoon3Script_49d91
 	ld a, [wYCoord]
-	cp $8
+	cp 8
 	jp nz, MtMoon3Script_49d91
 	ld a, [wXCoord]
-	cp $d
+	cp 13
 	jp nz, MtMoon3Script_49d91
 	xor a
 	ldh [hJoyHeld], a

@@ -59,10 +59,10 @@ SeafoamIslands4Script0:
 	CheckBothEventsSet EVENT_SEAFOAM3_BOULDER1_DOWN_HOLE, EVENT_SEAFOAM3_BOULDER2_DOWN_HOLE
 	ret z
 	ld a, [wYCoord]
-	cp $8
+	cp 8
 	ret nz
 	ld a, [wXCoord]
-	cp $f
+	cp 15
 	ret nz
 	ld hl, wSimulatedJoypadStatesEnd
 	ld de, RLEMovement46632
@@ -94,9 +94,9 @@ SeafoamIslands4Script2:
 	CheckBothEventsSet EVENT_SEAFOAM3_BOULDER1_DOWN_HOLE, EVENT_SEAFOAM3_BOULDER2_DOWN_HOLE
 	ret z
 	ld a, [wXCoord]
-	cp $12
+	cp 18
 	jr z, .asm_4665e
-	cp $13
+	cp 19
 	ld a, $0
 	jr nz, .asm_4667b
 	ld de, RLEData_4667f

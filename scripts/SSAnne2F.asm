@@ -71,7 +71,7 @@ CoordsData_61411:
 
 SSAnne2Script_61416:
 	ld a, [wXCoord]
-	cp $25
+	cp 37
 	jr nz, .asm_61426
 	ld a, PLAYER_DIR_LEFT
 	ld [wPlayerMovingDirection], a
@@ -134,7 +134,7 @@ SSAnne2Script2:
 	ldh [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
 	ld a, [wXCoord]
-	cp $25
+	cp 37
 	jr nz, .asm_61497
 	ld de, MovementData_614b9
 	jr .asm_6149a

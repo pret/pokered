@@ -65,9 +65,9 @@ PewterCityScript1:
 	ldh [hSpriteScreenYCoord], a
 	ld a, $30
 	ldh [hSpriteScreenXCoord], a
-	ld a, $c
+	ld a, 12
 	ldh [hSpriteMapYCoord], a
-	ld a, $11
+	ld a, 17
 	ldh [hSpriteMapXCoord], a
 	ld a, $3
 	ld [wSpriteIndex], a
@@ -133,9 +133,9 @@ PewterCityScript4:
 	ldh [hSpriteScreenYCoord], a
 	ld a, $40
 	ldh [hSpriteScreenXCoord], a
-	ld a, $16
+	ld a, 22
 	ldh [hSpriteMapYCoord], a
-	ld a, $10
+	ld a, 16
 	ldh [hSpriteMapXCoord], a
 	ld a, $5
 	ld [wSpriteIndex], a
