@@ -80,7 +80,7 @@ ENDC
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, [wXCoord]
-	cp $14
+	cp 20
 	jr z, .asm_19535
 	ld a, $1
 	ldh [hSpriteIndex], a
@@ -183,7 +183,7 @@ CeruleanCityScript2:
 	ldh [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
 	ld a, [wXCoord]
-	cp $14
+	cp 20
 	jr nz, .asm_195f0
 	ld de, CeruleanCityMovement4
 	jr .asm_195f3

@@ -13,13 +13,13 @@ Museum1F_ScriptPointers:
 
 Museum1FScript0:
 	ld a, [wYCoord]
-	cp $4
+	cp 4
 	ret nz
 	ld a, [wXCoord]
-	cp $9
+	cp 9
 	jr z, .asm_5c120
 	ld a, [wXCoord]
-	cp $a
+	cp 10
 	ret nz
 .asm_5c120
 	xor a
@@ -41,17 +41,17 @@ Museum1F_TextPointers:
 Museum1FText1:
 	text_asm
 	ld a, [wYCoord]
-	cp $4
+	cp 4
 	jr nz, .asm_8774b
 	ld a, [wXCoord]
-	cp $d
+	cp 13
 	jp z, Museum1FScript_5c1f9
 	jr .asm_b8709
 .asm_8774b
 	cp $3
 	jr nz, .asm_d49e7
 	ld a, [wXCoord]
-	cp $c
+	cp 12
 	jp z, Museum1FScript_5c1f9
 .asm_d49e7
 	CheckEvent EVENT_BOUGHT_MUSEUM_TICKET

@@ -69,9 +69,9 @@ BillsHouseScript3:
 	ldh [hSpriteScreenYCoord], a
 	ld a, $40
 	ldh [hSpriteScreenXCoord], a
-	ld a, $6
+	ld a, 6
 	ldh [hSpriteMapYCoord], a
-	ld a, $5
+	ld a, 5
 	ldh [hSpriteMapXCoord], a
 	call SetSpritePosition1
 	ld a, HS_BILL_1

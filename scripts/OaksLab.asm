@@ -152,7 +152,7 @@ OaksLabScript5:
 
 OaksLabScript6:
 	ld a, [wYCoord]
-	cp $6
+	cp 6
 	ret nz
 	ld a, $5
 	ldh [hSpriteIndex], a
@@ -200,7 +200,7 @@ OaksLabScript8:
 .Charmander
 	ld de, .MiddleBallMovement1
 	ld a, [wYCoord]
-	cp $4 ; is the player standing below the table?
+	cp 4 ; is the player standing below the table?
 	jr z, .moveBlue
 	ld de, .MiddleBallMovement2
 	jr .moveBlue
@@ -224,7 +224,7 @@ OaksLabScript8:
 .Squirtle
 	ld de, .RightBallMovement1
 	ld a, [wYCoord]
-	cp $4 ; is the player standing below the table?
+	cp 4 ; is the player standing below the table?
 	jr z, .moveBlue
 	ld de, .RightBallMovement2
 	jr .moveBlue
@@ -250,7 +250,7 @@ OaksLabScript8:
 .Bulbasaur
 	ld de, .LeftBallMovement1
 	ld a, [wXCoord]
-	cp $9 ; is the player standing to the right of the table?
+	cp 9 ; is the player standing to the right of the table?
 	jr nz, .moveBlue
 	push hl
 	ld a, $1
@@ -341,7 +341,7 @@ OaksLabScript9:
 
 OaksLabScript10:
 	ld a, [wYCoord]
-	cp $6
+	cp 6
 	ret nz
 	ld a, $1
 	ldh [hSpriteIndex], a
@@ -447,7 +447,7 @@ OaksLabScript13:
 	ld de, .RivalExitMovement
 	call MoveSprite
 	ld a, [wXCoord]
-	cp $4
+	cp 4
 	; move left or right depending on where the player is standing
 	jr nz, .moveLeft
 	ld a, NPC_MOVEMENT_RIGHT
@@ -489,7 +489,7 @@ OaksLabScript14:
 	cp $5
 	jr nz, .turnPlayerDown
 	ld a, [wXCoord]
-	cp $4
+	cp 4
 	jr nz, .turnPlayerLeft
 	ld a, SPRITE_FACING_RIGHT
 	ld [wSpritePlayerStateData1FacingDirection], a
@@ -673,30 +673,30 @@ OaksLabScript_RemoveParcel:
 OaksLabScript_1d02b:
 	ld a, $7c
 	ldh [hSpriteScreenYCoord], a
-	ld a, $8
+	ld a, 8
 	ldh [hSpriteMapXCoord], a
 	ld a, [wYCoord]
-	cp $3
+	cp 3
 	jr nz, .asm_1d045
 	ld a, $4
 	ld [wNPCMovementDirections2Index], a
 	ld a, $30
-	ld b, $b
+	ld b, 11
 	jr .asm_1d068
 .asm_1d045
-	cp $1
+	cp 1
 	jr nz, .asm_1d054
 	ld a, $2
 	ld [wNPCMovementDirections2Index], a
 	ld a, $30
-	ld b, $9
+	ld b, 9
 	jr .asm_1d068
 .asm_1d054
 	ld a, $3
 	ld [wNPCMovementDirections2Index], a
-	ld b, $a
+	ld b, 10
 	ld a, [wXCoord]
-	cp $4
+	cp 4
 	jr nz, .asm_1d066
 	ld a, $40
 	jr .asm_1d068

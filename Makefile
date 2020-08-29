@@ -114,16 +114,16 @@ pokeblue_debug_opt = -jsv -n 0 -k 01 -l 0x33 -m 0x13 -r 03 -t "POKEMON BLUE"
 gfx/battle/attack_anim_1.2bpp: tools/gfx += --trim-whitespace
 gfx/battle/attack_anim_2.2bpp: tools/gfx += --trim-whitespace
 
-gfx/intro_credits/blue_jigglypuff_1.2bpp: rgbgfx += -h
-gfx/intro_credits/blue_jigglypuff_2.2bpp: rgbgfx += -h
-gfx/intro_credits/blue_jigglypuff_3.2bpp: rgbgfx += -h
-gfx/intro_credits/red_nidorino_1.2bpp: rgbgfx += -h
-gfx/intro_credits/red_nidorino_2.2bpp: rgbgfx += -h
-gfx/intro_credits/red_nidorino_3.2bpp: rgbgfx += -h
-gfx/intro_credits/gengar.2bpp: rgbgfx += -h
-gfx/intro_credits/gengar.2bpp: tools/gfx += --remove-duplicates --preserve=0x19,0x76
+gfx/intro/blue_jigglypuff_1.2bpp: rgbgfx += -h
+gfx/intro/blue_jigglypuff_2.2bpp: rgbgfx += -h
+gfx/intro/blue_jigglypuff_3.2bpp: rgbgfx += -h
+gfx/intro/red_nidorino_1.2bpp: rgbgfx += -h
+gfx/intro/red_nidorino_2.2bpp: rgbgfx += -h
+gfx/intro/red_nidorino_3.2bpp: rgbgfx += -h
+gfx/intro/gengar.2bpp: rgbgfx += -h
+gfx/intro/gengar.2bpp: tools/gfx += --remove-duplicates --preserve=0x19,0x76
 
-gfx/intro_credits/the_end.2bpp: tools/gfx += --interleave --png=$<
+gfx/credits/the_end.2bpp: tools/gfx += --interleave --png=$<
 
 gfx/slots/red_slots_1.2bpp: tools/gfx += --trim-whitespace
 gfx/slots/blue_slots_1.2bpp: tools/gfx += --trim-whitespace

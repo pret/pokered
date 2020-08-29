@@ -266,5 +266,5 @@ INCLUDE "data/credits/credits_order.asm"
 INCLUDE "data/credits/credits_text.asm"
 
 TheEndGfx:
-	INCBIN "gfx/intro_credits/the_end.2bpp"
+	INCBIN "gfx/credits/the_end.2bpp"
 TheEndGfxEnd:

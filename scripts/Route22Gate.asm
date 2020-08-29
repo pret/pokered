@@ -4,7 +4,7 @@ Route22Gate_Script:
 	ld a, [wRoute22GateCurScript]
 	call CallFunctionInTable
 	ld a, [wYCoord]
-	cp $4
+	cp 4
 	ld a, ROUTE_23
 	jr c, .asm_1e69a
 	ld a, ROUTE_22

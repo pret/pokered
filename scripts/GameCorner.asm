@@ -64,13 +64,13 @@ CeladonGameCornerScript1:
 	call SetSpriteMovementBytesToFF
 	ld de, MovementData_48c5a
 	ld a, [wYCoord]
-	cp $6
+	cp 6
 	jr nz, .asm_48c43
 	ld de, MovementData_48c63
 	jr .asm_48c4d
 .asm_48c43
 	ld a, [wXCoord]
-	cp $8
+	cp 8
 	jr nz, .asm_48c4d
 	ld de, MovementData_48c63
 .asm_48c4d

@@ -31,13 +31,13 @@ SlideDownMonTiles_7x3:
 	INCBIN "gfx/pokemon/slide_down_7x3.tilemap"
 
 GengarIntroTiles1:
-	INCBIN "gfx/intro_credits/gengar_1.tilemap"
+	INCBIN "gfx/intro/gengar_1.tilemap"
 
 GengarIntroTiles2:
-	INCBIN "gfx/intro_credits/gengar_2.tilemap"
+	INCBIN "gfx/intro/gengar_2.tilemap"
 
 GengarIntroTiles3:
-	INCBIN "gfx/intro_credits/gengar_3.tilemap"
+	INCBIN "gfx/intro/gengar_3.tilemap"
 
 GameBoyTiles:
 	INCBIN "gfx/trade/game_boy.tilemap"
