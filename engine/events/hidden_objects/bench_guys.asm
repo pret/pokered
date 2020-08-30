@@ -5,7 +5,7 @@ PrintBenchGuyText:
 	ld b, a
 .loop
 	ld a, [hli]
-	cp $ff
+	cp -1
 	ret z
 	cp b
 	jr z, .match
@@ -21,33 +21,26 @@ PrintBenchGuyText:
 	ld a, [hl]
 	jp PrintPredefTextID
 
-; format: db map id, player sprite facing direction, text id of PredefTextIDPointerTable
+bench_guy_text: MACRO
+	db \1, \2
+	db_tx_pre \3
+ENDM
+
 BenchGuyTextPointers:
-	db VIRIDIAN_POKECENTER,   SPRITE_FACING_LEFT
-	db_tx_pre ViridianCityPokecenterBenchGuyText
-	db PEWTER_POKECENTER,     SPRITE_FACING_LEFT
-	db_tx_pre PewterCityPokecenterBenchGuyText
-	db CERULEAN_POKECENTER,   SPRITE_FACING_LEFT
-	db_tx_pre CeruleanCityPokecenterBenchGuyText
-	db LAVENDER_POKECENTER,   SPRITE_FACING_LEFT
-	db_tx_pre LavenderCityPokecenterBenchGuyText
-	db VERMILION_POKECENTER,  SPRITE_FACING_LEFT
-	db_tx_pre VermilionCityPokecenterBenchGuyText
-	db CELADON_POKECENTER,    SPRITE_FACING_LEFT
-	db_tx_pre CeladonCityPokecenterBenchGuyText
-	db CELADON_HOTEL,         SPRITE_FACING_LEFT
-	db_tx_pre CeladonCityHotelText
-	db FUCHSIA_POKECENTER,    SPRITE_FACING_LEFT
-	db_tx_pre FuchsiaCityPokecenterBenchGuyText
-	db CINNABAR_POKECENTER,   SPRITE_FACING_LEFT
-	db_tx_pre CinnabarIslandPokecenterBenchGuyText
-	db SAFFRON_POKECENTER,    SPRITE_FACING_LEFT
-	db_tx_pre SaffronCityPokecenterBenchGuyText
-	db MT_MOON_POKECENTER,    SPRITE_FACING_LEFT
-	db_tx_pre MtMoonPokecenterBenchGuyText
-	db ROCK_TUNNEL_POKECENTER,SPRITE_FACING_LEFT
-	db_tx_pre RockTunnelPokecenterBenchGuyText
-	db $FF
+	; map id, player facing direction, predef text
+	bench_guy_text VIRIDIAN_POKECENTER,    SPRITE_FACING_LEFT, ViridianCityPokecenterBenchGuyText
+	bench_guy_text PEWTER_POKECENTER,      SPRITE_FACING_LEFT, PewterCityPokecenterBenchGuyText
+	bench_guy_text CERULEAN_POKECENTER,    SPRITE_FACING_LEFT, CeruleanCityPokecenterBenchGuyText
+	bench_guy_text LAVENDER_POKECENTER,    SPRITE_FACING_LEFT, LavenderCityPokecenterBenchGuyText
+	bench_guy_text VERMILION_POKECENTER,   SPRITE_FACING_LEFT, VermilionCityPokecenterBenchGuyText
+	bench_guy_text CELADON_POKECENTER,     SPRITE_FACING_LEFT, CeladonCityPokecenterBenchGuyText
+	bench_guy_text CELADON_HOTEL,          SPRITE_FACING_LEFT, CeladonCityHotelText
+	bench_guy_text FUCHSIA_POKECENTER,     SPRITE_FACING_LEFT, FuchsiaCityPokecenterBenchGuyText
+	bench_guy_text CINNABAR_POKECENTER,    SPRITE_FACING_LEFT, CinnabarIslandPokecenterBenchGuyText
+	bench_guy_text SAFFRON_POKECENTER,     SPRITE_FACING_LEFT, SaffronCityPokecenterBenchGuyText
+	bench_guy_text MT_MOON_POKECENTER,     SPRITE_FACING_LEFT, MtMoonPokecenterBenchGuyText
+	bench_guy_text ROCK_TUNNEL_POKECENTER, SPRITE_FACING_LEFT, RockTunnelPokecenterBenchGuyText
+	db -1 ; end
 
 ViridianCityPokecenterBenchGuyText::
 	text_far _ViridianCityPokecenterGuyText

@@ -188,19 +188,24 @@ hidden_text_predef: MACRO
 	dba \4 ; object routine
 ENDM
 
+; Some hidden objects use SPRITE_FACING_* values,
+; but these do not actually prevent the player
+; from interacting with them in any direction.
+ANY_FACING EQU $d0
+
 TradeCenterHiddenObjects:
-	hidden_object  5,  4, $d0, CableClubRightGameboy
-	hidden_object  4,  4, $d0, CableClubLeftGameboy
+	hidden_object  5,  4, ANY_FACING, CableClubRightGameboy
+	hidden_object  4,  4, ANY_FACING, CableClubLeftGameboy
 	db -1 ; end
 
 ColosseumHiddenObjects:
-	hidden_object  5,  4, $d0, CableClubRightGameboy
-	hidden_object  4,  4, $d0, CableClubLeftGameboy
+	hidden_object  5,  4, ANY_FACING, CableClubRightGameboy
+	hidden_object  4,  4, ANY_FACING, CableClubLeftGameboy
 	db -1 ; end
 
 RedsHouse2FHiddenObjects:
 	hidden_object  0,  1, SPRITE_FACING_UP, OpenRedsPC
-	hidden_object  3,  5, $d0, PrintRedSNESText
+	hidden_object  3,  5, ANY_FACING, PrintRedSNESText
 	db -1 ; end
 
 BluesHouseHiddenObjects:
@@ -279,16 +284,17 @@ VermilionGymHiddenObjects:
 	hidden_object  3, 14, SPRITE_FACING_UP, GymStatues
 	hidden_object  6, 14, SPRITE_FACING_UP, GymStatues
 	hidden_object  6,  1, SPRITE_FACING_DOWN, PrintTrashText
-	hidden_object  1,  7, 0, GymTrashScript
-	hidden_object  1,  9, 1, GymTrashScript
-	hidden_object  1, 11, 2, GymTrashScript
-	hidden_object  3,  7, 3, GymTrashScript
-	hidden_object  3,  9, 4, GymTrashScript
-	hidden_object  3, 11, 5, GymTrashScript
-	hidden_object  5,  7, 6, GymTrashScript
-	hidden_object  5,  9, 7, GymTrashScript
-	hidden_object  5, 11, 8, GymTrashScript
-	hidden_object  7,  7, 9, GymTrashScript
+	; third param: [wGymTrashCanIndex]
+	hidden_object  1,  7,  0, GymTrashScript
+	hidden_object  1,  9,  1, GymTrashScript
+	hidden_object  1, 11,  2, GymTrashScript
+	hidden_object  3,  7,  3, GymTrashScript
+	hidden_object  3,  9,  4, GymTrashScript
+	hidden_object  3, 11,  5, GymTrashScript
+	hidden_object  5,  7,  6, GymTrashScript
+	hidden_object  5,  9,  7, GymTrashScript
+	hidden_object  5, 11,  8, GymTrashScript
+	hidden_object  7,  7,  9, GymTrashScript
 	hidden_object  7,  9, 10, GymTrashScript
 	hidden_object  7, 11, 11, GymTrashScript
 	hidden_object  9,  7, 12, GymTrashScript
@@ -311,42 +317,42 @@ CeladonGymHiddenObjects:
 	db -1 ; end
 
 GameCornerHiddenObjects:
-	hidden_object 18, 15, $d0, StartSlotMachine
-	hidden_object 18, 14, $d0, StartSlotMachine
-	hidden_object 18, 13, $d0, StartSlotMachine
-	hidden_object 18, 12, $d0, StartSlotMachine
-	hidden_object 18, 11, $d0, StartSlotMachine
+	hidden_object 18, 15, ANY_FACING, StartSlotMachine
+	hidden_object 18, 14, ANY_FACING, StartSlotMachine
+	hidden_object 18, 13, ANY_FACING, StartSlotMachine
+	hidden_object 18, 12, ANY_FACING, StartSlotMachine
+	hidden_object 18, 11, ANY_FACING, StartSlotMachine
 	hidden_object 18, 10, SLOTS_SOMEONESKEYS, StartSlotMachine
-	hidden_object 13, 10, $d0, StartSlotMachine
-	hidden_object 13, 11, $d0, StartSlotMachine
+	hidden_object 13, 10, ANY_FACING, StartSlotMachine
+	hidden_object 13, 11, ANY_FACING, StartSlotMachine
 	hidden_object 13, 12, SLOTS_OUTTOLUNCH, StartSlotMachine
-	hidden_object 13, 13, $d0, StartSlotMachine
-	hidden_object 13, 14, $d0, StartSlotMachine
-	hidden_object 13, 15, $d0, StartSlotMachine
-	hidden_object 12, 15, $d0, StartSlotMachine
-	hidden_object 12, 14, $d0, StartSlotMachine
-	hidden_object 12, 13, $d0, StartSlotMachine
-	hidden_object 12, 12, $d0, StartSlotMachine
-	hidden_object 12, 11, $d0, StartSlotMachine
-	hidden_object 12, 10, $d0, StartSlotMachine
-	hidden_object  7, 10, $d0, StartSlotMachine
-	hidden_object  7, 11, $d0, StartSlotMachine
-	hidden_object  7, 12, $d0, StartSlotMachine
-	hidden_object  7, 13, $d0, StartSlotMachine
-	hidden_object  7, 14, $d0, StartSlotMachine
-	hidden_object  7, 15, $d0, StartSlotMachine
-	hidden_object  6, 15, $d0, StartSlotMachine
-	hidden_object  6, 14, $d0, StartSlotMachine
-	hidden_object  6, 13, $d0, StartSlotMachine
+	hidden_object 13, 13, ANY_FACING, StartSlotMachine
+	hidden_object 13, 14, ANY_FACING, StartSlotMachine
+	hidden_object 13, 15, ANY_FACING, StartSlotMachine
+	hidden_object 12, 15, ANY_FACING, StartSlotMachine
+	hidden_object 12, 14, ANY_FACING, StartSlotMachine
+	hidden_object 12, 13, ANY_FACING, StartSlotMachine
+	hidden_object 12, 12, ANY_FACING, StartSlotMachine
+	hidden_object 12, 11, ANY_FACING, StartSlotMachine
+	hidden_object 12, 10, ANY_FACING, StartSlotMachine
+	hidden_object  7, 10, ANY_FACING, StartSlotMachine
+	hidden_object  7, 11, ANY_FACING, StartSlotMachine
+	hidden_object  7, 12, ANY_FACING, StartSlotMachine
+	hidden_object  7, 13, ANY_FACING, StartSlotMachine
+	hidden_object  7, 14, ANY_FACING, StartSlotMachine
+	hidden_object  7, 15, ANY_FACING, StartSlotMachine
+	hidden_object  6, 15, ANY_FACING, StartSlotMachine
+	hidden_object  6, 14, ANY_FACING, StartSlotMachine
+	hidden_object  6, 13, ANY_FACING, StartSlotMachine
 	hidden_object  6, 12, SLOTS_OUTOFORDER, StartSlotMachine
-	hidden_object  6, 11, $d0, StartSlotMachine
-	hidden_object  6, 10, $d0, StartSlotMachine
-	hidden_object  1, 10, $d0, StartSlotMachine
-	hidden_object  1, 11, $d0, StartSlotMachine
-	hidden_object  1, 12, $d0, StartSlotMachine
-	hidden_object  1, 13, $d0, StartSlotMachine
-	hidden_object  1, 14, $d0, StartSlotMachine
-	hidden_object  1, 15, $d0, StartSlotMachine
+	hidden_object  6, 11, ANY_FACING, StartSlotMachine
+	hidden_object  6, 10, ANY_FACING, StartSlotMachine
+	hidden_object  1, 10, ANY_FACING, StartSlotMachine
+	hidden_object  1, 11, ANY_FACING, StartSlotMachine
+	hidden_object  1, 12, ANY_FACING, StartSlotMachine
+	hidden_object  1, 13, ANY_FACING, StartSlotMachine
+	hidden_object  1, 14, ANY_FACING, StartSlotMachine
+	hidden_object  1, 15, ANY_FACING, StartSlotMachine
 	hidden_object  0,  8, COIN+10, HiddenCoins
 	hidden_object  1, 16, COIN+10, HiddenCoins
 	hidden_object  3, 11, COIN+20, HiddenCoins
@@ -378,12 +384,13 @@ FuchsiaGymHiddenObjects:
 
 CinnabarGymHiddenObjects:
 	hidden_object 17, 13, SPRITE_FACING_UP, GymStatues
-	hidden_object 15,  7, (0 << 4) | 1, PrintCinnabarQuiz
-	hidden_object 10,  1, (1 << 4) | 2, PrintCinnabarQuiz
-	hidden_object  9,  7, (1 << 4) | 3, PrintCinnabarQuiz
-	hidden_object  9, 13, (1 << 4) | 4, PrintCinnabarQuiz
-	hidden_object  1, 13, (0 << 4) | 5, PrintCinnabarQuiz
-	hidden_object  1,  7, (1 << 4) | 6, PrintCinnabarQuiz
+	; third param: ([hGymGateAnswer] << 4) | [hGymGateIndex]
+	hidden_object 15,  7, (FALSE << 4) | 1, PrintCinnabarQuiz
+	hidden_object 10,  1, (TRUE  << 4) | 2, PrintCinnabarQuiz
+	hidden_object  9,  7, (TRUE  << 4) | 3, PrintCinnabarQuiz
+	hidden_object  9, 13, (TRUE  << 4) | 4, PrintCinnabarQuiz
+	hidden_object  1, 13, (FALSE << 4) | 5, PrintCinnabarQuiz
+	hidden_object  1,  7, (TRUE  << 4) | 6, PrintCinnabarQuiz
 	db -1 ; end
 
 CinnabarPokecenterHiddenObjects:
@@ -602,12 +609,12 @@ CinnabarLab4HiddenObjects:
 	db -1 ; end
 
 BikeShopHiddenObjects:
-	hidden_object  1,  0, $d0, PrintNewBikeText
-	hidden_object  2,  1, $d0, PrintNewBikeText
-	hidden_object  1,  2, $d0, PrintNewBikeText
-	hidden_object  3,  2, $d0, PrintNewBikeText
-	hidden_object  0,  4, $d0, PrintNewBikeText
-	hidden_object  1,  5, $d0, PrintNewBikeText
+	hidden_object  1,  0, ANY_FACING, PrintNewBikeText
+	hidden_object  2,  1, ANY_FACING, PrintNewBikeText
+	hidden_object  1,  2, ANY_FACING, PrintNewBikeText
+	hidden_object  3,  2, ANY_FACING, PrintNewBikeText
+	hidden_object  0,  4, ANY_FACING, PrintNewBikeText
+	hidden_object  1,  5, ANY_FACING, PrintNewBikeText
 	db -1 ; end
 
 Route11HiddenObjects:
