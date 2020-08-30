@@ -255,19 +255,19 @@ OaksLabScript8:
 	push hl
 	ld a, $1
 	ldh [hSpriteIndex], a
-	ld a, $4
+	ld a, SPRITESTATEDATA1_YPIXELS
 	ldh [hSpriteDataOffset], a
 	call GetPointerWithinSpriteStateData1
 	push hl
-	ld [hl], $4c
+	ld [hl], $4c ; SPRITESTATEDATA1_YPIXELS
 	inc hl
 	inc hl
-	ld [hl], $0
+	ld [hl], $0 ; SPRITESTATEDATA1_XPIXELS
 	pop hl
 	inc h
-	ld [hl], $8
+	ld [hl], 8 ; SPRITESTATEDATA2_MAPY
 	inc hl
-	ld [hl], $9
+	ld [hl], 9 ; SPRITESTATEDATA2_MAPX
 	ld de, .LeftBallMovement2 ; the rival is not currently onscreen, so account for that
 	pop hl
 	jr .moveBlue
@@ -841,13 +841,13 @@ OaksLabText39:
 OaksLabScript_1d157:
 	ld a, $5
 	ldh [hSpriteIndex], a
-	ld a, $9
+	ld a, SPRITESTATEDATA1_FACINGDIRECTION
 	ldh [hSpriteDataOffset], a
 	call GetPointerWithinSpriteStateData1
 	ld [hl], SPRITE_FACING_DOWN
 	ld a, $1
 	ldh [hSpriteIndex], a
-	ld a, $9
+	ld a, SPRITESTATEDATA1_FACINGDIRECTION
 	ldh [hSpriteDataOffset], a
 	call GetPointerWithinSpriteStateData1
 	ld [hl], SPRITE_FACING_RIGHT
@@ -948,10 +948,10 @@ OaksLabReceivedMonText:
 OaksLabScript_1d22d:
 	ld a, $5
 	ldh [hSpriteIndex], a
-	ld a, $9
+	ld a, SPRITESTATEDATA1_FACINGDIRECTION
 	ldh [hSpriteDataOffset], a
 	call GetPointerWithinSpriteStateData1
-	ld [hl], $0
+	ld [hl], SPRITE_FACING_DOWN
 	ld hl, OaksLabLastMonText
 	call PrintText
 	jp TextScriptEnd

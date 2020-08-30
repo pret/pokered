@@ -84,10 +84,10 @@ ENDC
 	jr z, .asm_19535
 	ld a, $1
 	ldh [hSpriteIndex], a
-	ld a, $5
+	ld a, SPRITESTATEDATA2_MAPX
 	ldh [hSpriteDataOffset], a
 	call GetPointerWithinSpriteStateData2
-	ld [hl], $19
+	ld [hl], 25
 .asm_19535
 	ld a, HS_CERULEAN_RIVAL
 	ld [wMissableObjectIndex], a

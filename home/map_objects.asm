@@ -80,7 +80,7 @@ SetSpriteFacingDirectionAndDelay::
 	jp DelayFrames
 
 SetSpriteFacingDirection::
-	ld a, $9
+	ld a, SPRITESTATEDATA1_FACINGDIRECTION
 	ldh [hSpriteDataOffset], a
 	call GetPointerWithinSpriteStateData1
 	ldh a, [hSpriteFacingDirection]
@@ -88,7 +88,7 @@ SetSpriteFacingDirection::
 	ret
 
 SetSpriteImageIndexAfterSettingFacingDirection::
-	ld de, -7
+	ld de, SPRITESTATEDATA1_IMAGEINDEX - SPRITESTATEDATA1_FACINGDIRECTION
 	add hl, de
 	ld [hl], a
 	ret
@@ -158,11 +158,11 @@ CheckBoulderCoords::
 	jp CheckCoords
 
 GetPointerWithinSpriteStateData1::
-	ld h, $c1
+	ld h, HIGH(wSpriteStateData1)
 	jr _GetPointerWithinSpriteStateData
 
 GetPointerWithinSpriteStateData2::
-	ld h, $c2
+	ld h, HIGH(wSpriteStateData2)
 
 _GetPointerWithinSpriteStateData:
 	ldh a, [hSpriteDataOffset]
