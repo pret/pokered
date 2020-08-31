@@ -1,3 +1,5 @@
+NOT_VISITED EQU $fe
+
 DisplayTownMap:
 	call LoadTownMap
 	ld hl, wUpdateSpritesEnabled
@@ -224,7 +226,7 @@ LoadTownMap_Fly::
 	ld a, [hl]
 	cp $ff
 	jr z, .wrapToStartOfList
-	cp $fe
+	cp NOT_VISITED
 	jr z, .pressedUp ; skip past unvisited towns
 	jp .townMapFlyLoop
 .wrapToStartOfList
@@ -236,11 +238,11 @@ LoadTownMap_Fly::
 	ld a, [hl]
 	cp $ff
 	jr z, .wrapToEndOfList
-	cp $fe
+	cp NOT_VISITED
 	jr z, .pressedDown ; skip past unvisited towns
 	jp .townMapFlyLoop
 .wrapToEndOfList
-	ld hl, wFlyLocationsList + 11
+	ld hl, wFlyLocationsList + NUM_CITY_MAPS
 	jr .pressedDown
 
 ToText:
@@ -254,11 +256,11 @@ BuildFlyLocationsList:
 	ld e, a
 	ld a, [wTownVisitedFlag + 1]
 	ld d, a
-	ld bc, SAFFRON_CITY + 1
+	lb bc, 0, NUM_CITY_MAPS
 .loop
 	srl d
 	rr e
-	ld a, $fe ; store $fe if the town hasn't been visited
+	ld a, NOT_VISITED
 	jr nc, .notVisited
 	ld a, b ; store the map number of the town if it has been visited
 .notVisited
@@ -554,7 +556,7 @@ ZeroOutDuplicatesInList:
 LoadTownMapEntry:
 ; in: a = map number
 ; out: lower nybble of [de] = x, upper nybble of [de] = y, hl = address of name
-	cp REDS_HOUSE_1F
+	cp FIRST_INDOOR_MAP
 	jr c, .external
 	ld bc, 4
 	ld hl, InternalMapEntries

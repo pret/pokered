@@ -118,9 +118,6 @@ GetBattleTransitionID_CompareLevels:
 	ld [wBattleTransitionSpiralDirection], a
 	ret
 
-; fails to recognize VICTORY_ROAD_2F, VICTORY_ROAD_3F, all ROCKET_HIDEOUT maps,
-; POKEMON_MANSION_1F, SEAFOAM_ISLANDS_[B1F-B4F], POWER_PLANT, DIGLETTS_CAVE
-; and SILPH_CO_[9-11]F as dungeon maps
 GetBattleTransitionID_IsDungeonMap:
 	ld a, [wCurMap]
 	ld e, a

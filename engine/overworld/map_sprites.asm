@@ -255,7 +255,7 @@ ReadSpriteSheetData:
 ; sets carry if the map is a city or route, unsets carry if not
 InitOutsideMapSprites:
 	ld a, [wCurMap]
-	cp REDS_HOUSE_1F ; is the map a city or a route (map ID less than $25)?
+	cp FIRST_INDOOR_MAP ; is the map a city or a route?
 	ret nc ; if not, return
 	ld hl, MapSpriteSets
 	add l

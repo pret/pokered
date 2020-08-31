@@ -1573,7 +1573,7 @@ ItemUseCardKey:
 	ld b, a
 .loop
 	ld a, [hli]
-	cp $ff
+	cp -1
 	jp z, ItemUseNotTime
 	cp b
 	jr nz, .nextEntry1
@@ -1600,46 +1600,7 @@ ItemUseCardKey:
 	set 7, [hl]
 	ret
 
-; These tables are probably supposed to be door locations in Silph Co.,
-; but they are unused.
-; The reason there are 3 tables is unknown.
-
-; Format:
-; 00: Map ID
-; 01: Y
-; 02: X
-; 03: ID?
-
-CardKeyTable1:
-	db  SILPH_CO_2F,$04,$04,$00
-	db  SILPH_CO_2F,$04,$05,$01
-	db  SILPH_CO_4F,$0C,$04,$02
-	db  SILPH_CO_4F,$0C,$05,$03
-	db  SILPH_CO_7F,$06,$0A,$04
-	db  SILPH_CO_7F,$06,$0B,$05
-	db  SILPH_CO_9F,$04,$12,$06
-	db  SILPH_CO_9F,$04,$13,$07
-	db SILPH_CO_10F,$08,$0A,$08
-	db SILPH_CO_10F,$08,$0B,$09
-	db $ff
-
-CardKeyTable2:
-	db SILPH_CO_3F,$08,$09,$0A
-	db SILPH_CO_3F,$09,$09,$0B
-	db SILPH_CO_5F,$04,$07,$0C
-	db SILPH_CO_5F,$05,$07,$0D
-	db SILPH_CO_6F,$0C,$05,$0E
-	db SILPH_CO_6F,$0D,$05,$0F
-	db SILPH_CO_8F,$08,$07,$10
-	db SILPH_CO_8F,$09,$07,$11
-	db SILPH_CO_9F,$08,$03,$12
-	db SILPH_CO_9F,$09,$03,$13
-	db $ff
-
-CardKeyTable3:
-	db SILPH_CO_11F,$08,$09,$14
-	db SILPH_CO_11F,$09,$09,$15
-	db $ff
+INCLUDE "data/events/card_key_coords.asm"
 
 ItemUsePokedoll:
 	ld a, [wIsInBattle]

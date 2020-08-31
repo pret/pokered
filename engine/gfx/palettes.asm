@@ -145,11 +145,11 @@ SetPal_Overworld:
 	cp CAVERN
 	jr z, .caveOrBruno
 	ld a, [wCurMap]
-	cp REDS_HOUSE_1F
+	cp FIRST_INDOOR_MAP
 	jr c, .townOrRoute
 	cp CERULEAN_CAVE_2F
 	jr c, .normalDungeonOrBuilding
-	cp NAME_RATERS_HOUSE
+	cp CERULEAN_CAVE_1F + 1
 	jr c, .caveOrBruno
 	cp LORELEIS_ROOM
 	jr z, .Lorelei
@@ -158,7 +158,7 @@ SetPal_Overworld:
 .normalDungeonOrBuilding
 	ld a, [wLastMap] ; town or route that current dungeon or building is located
 .townOrRoute
-	cp SAFFRON_CITY + 1
+	cp NUM_CITY_MAPS
 	jr c, .town
 	ld a, PAL_ROUTE - 1
 .town

@@ -1,3 +1,8 @@
+; GetBattleTransitionID_IsDungeonMap fails to recognize
+; VICTORY_ROAD_2F, VICTORY_ROAD_3F, all ROCKET_HIDEOUT maps,
+; POKEMON_MANSION_1F, SEAFOAM_ISLANDS_[B1F-B4F], POWER_PLANT,
+; DIGLETTS_CAVE, and SILPH_CO_[9-11]F as dungeon maps
+
 ; GetBattleTransitionID_IsDungeonMap checks if wCurMap
 ; is equal to one of these maps
 DungeonMaps1:

@@ -83,17 +83,18 @@ UnusedPlayerNameLengthFunc:
 	dec c
 	jr .loop
 
+diploma_text: MACRO
+	dw \3
+	dwcoord \1, \2
+ENDM
+
 DiplomaTextPointersAndCoords:
-	dw DiplomaText
-	dwcoord 5, 2
-	dw DiplomaPlayer
-	dwcoord 3, 4
-	dw DiplomaEmptyText
-	dwcoord 15, 4
-	dw DiplomaCongrats
-	dwcoord 2, 6
-	dw DiplomaGameFreak
-	dwcoord 9, 16
+	; x, y, text
+	diploma_text  5,  2, DiplomaText
+	diploma_text  3,  4, DiplomaPlayer
+	diploma_text 15,  4, DiplomaEmptyText
+	diploma_text  2,  6, DiplomaCongrats
+	diploma_text  9, 16, DiplomaGameFreak
 
 DiplomaText:
 	db CIRCLE_TILE_ID, "Diploma", CIRCLE_TILE_ID, "@"

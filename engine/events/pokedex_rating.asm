@@ -56,38 +56,22 @@ PokedexRatingText_441cc:
 	text_end
 
 DexRatingsTable:
-	db 10
-	dw PokedexRatingText_44201
-	db 20
-	dw PokedexRatingText_44206
-	db 30
-	dw PokedexRatingText_4420b
-	db 40
-	dw PokedexRatingText_44210
-	db 50
-	dw PokedexRatingText_44215
-	db 60
-	dw PokedexRatingText_4421a
-	db 70
-	dw PokedexRatingText_4421f
-	db 80
-	dw PokedexRatingText_44224
-	db 90
-	dw PokedexRatingText_44229
-	db 100
-	dw PokedexRatingText_4422e
-	db 110
-	dw PokedexRatingText_44233
-	db 120
-	dw PokedexRatingText_44238
-	db 130
-	dw PokedexRatingText_4423d
-	db 140
-	dw PokedexRatingText_44242
-	db 150
-	dw PokedexRatingText_44247
-	db NUM_POKEMON + 1
-	dw PokedexRatingText_4424c
+	dbw 10, PokedexRatingText_44201
+	dbw 20, PokedexRatingText_44206
+	dbw 30, PokedexRatingText_4420b
+	dbw 40, PokedexRatingText_44210
+	dbw 50, PokedexRatingText_44215
+	dbw 60, PokedexRatingText_4421a
+	dbw 70, PokedexRatingText_4421f
+	dbw 80, PokedexRatingText_44224
+	dbw 90, PokedexRatingText_44229
+	dbw 100, PokedexRatingText_4422e
+	dbw 110, PokedexRatingText_44233
+	dbw 120, PokedexRatingText_44238
+	dbw 130, PokedexRatingText_4423d
+	dbw 140, PokedexRatingText_44242
+	dbw 150, PokedexRatingText_44247
+	dbw NUM_POKEMON + 1, PokedexRatingText_4424c
 
 PokedexRatingText_44201:
 	text_far _OaksLabText_44201

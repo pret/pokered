@@ -897,7 +897,7 @@ wBadgeNameTile::
 ; first tile ID of the name being drawn
 
 wFlyLocationsList::
-; 11 bytes plus $ff sentinel values at each end
+; NUM_CITY_MAPS bytes plus $ff sentinel values at each end
 
 wSlotMachineWheel1Offset::
 
@@ -2818,7 +2818,7 @@ wWalkBikeSurfState::
 	ds 10
 
 wTownVisitedFlag::
-	flag_array 13
+	flag_array NUM_CITY_MAPS
 
 wSafariSteps::
 ; starts at 502
