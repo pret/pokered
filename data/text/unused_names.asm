@@ -1,4 +1,4 @@
-UnusedNames::
+UnusedBadgeNames::
 	db "かみなりバッヂ@" ; THUNDER BADGE
 	db "かいがらバッヂ@" ; SHELL BADGE
 	db "おじぞうバッヂ@" ; JIZOU BADGE
@@ -8,6 +8,8 @@ UnusedNames::
 	db "バラバッヂ@" ; ROSE BADGE
 	db "ひのたまバッヂ@" ; FIREBALL BADGE
 	db "ゴールドバッヂ@" ; GOLD BADGE
+
+UnusedRankingNames:
 	db "たまご@" ; EGG
 	db "ひよこ@" ; CHICK
 	db "ブロンズ@" ; BRONZE
