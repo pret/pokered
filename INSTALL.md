@@ -1,6 +1,6 @@
 # Instructions
 
-These instructions explain how to set up the tools required to build **pokered**, including [**rgbds**](https://github.com/rednex/rgbds), which assembles the source files into a ROM.
+These instructions explain how to set up the tools required to build **pokered**, including [**rgbds**](https://github.com/gbdev/rgbds), which assembles the source files into a ROM.
 
 If you run into trouble, ask for help on IRC or Discord (see [README.md](README.md)).
 
@@ -36,7 +36,7 @@ Run setup and leave the default settings. At the "**Select Packages**" step, cho
 
 Double click on the text that says "**Skip**" next to each package to select the most recent version to install.
 
-Then download [**rgbds**](https://github.com/rednex/rgbds/releases/): the latest **win64.zip** or **win32.zip** release. Extract it and put all the `exe` and `dll` files individually in **C:\cygwin64\usr\local\bin**.
+Then download [**rgbds**](https://github.com/gbdev/rgbds/releases/): the latest **win64.zip** or **win32.zip** release. Extract it and put all the `exe` and `dll` files individually in **C:\cygwin64\usr\local\bin**.
 
 **Note: If you already have an older rgbds, you will need to update to 0.4.1.** Ignore this if you have never installed rgbds before. If a version newer than 0.4.1 does not work, try downloading 0.4.1.
 
@@ -86,7 +86,7 @@ To install **rgbds**:
 
 ```bash
 sudo apt-get install pkg-config flex bison libpng-dev
-git clone -b v0.4.1 --depth=1 https://github.com/rednex/rgbds
+git clone -b v0.4.1 --depth=1 https://github.com/gbdev/rgbds
 sudo make -C rgbds install
 ```
 
@@ -102,7 +102,7 @@ To install **rgbds**:
 
 ```bash
 sudo zypper install pkg-config flex bison libpng16-devel
-git clone -b v0.4.1 --depth=1 https://github.com/rednex/rgbds
+git clone -b v0.4.1 --depth=1 https://github.com/gbdev/rgbds
 sudo make -C rgbds install
 ```
 
@@ -120,7 +120,7 @@ Alternatively, to install **rgbds** manually:
 
 ```bash
 sudo pacman -S pkg-config flex bison libpng
-git clone -b v0.4.1 --depth=1 https://github.com/rednex/rgbds
+git clone -b v0.4.1 --depth=1 https://github.com/gbdev/rgbds
 sudo make -C rgbds install
 ```
 
@@ -157,7 +157,7 @@ If `rgbds` is not available, you'll also need these:
 To install **rgbds**:
 
 ```bash
-git clone -b v0.4.1 --depth=1 https://github.com/rednex/rgbds
+git clone -b v0.4.1 --depth=1 https://github.com/gbdev/rgbds
 sudo make -C rgbds install
 ```
 

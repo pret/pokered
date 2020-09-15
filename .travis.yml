@@ -5,7 +5,7 @@ os:
 install:
   - |-
     ( cd
-        git clone -b v0.4.1 --depth=1 https://github.com/rednex/rgbds
+        git clone -b v0.4.1 --depth=1 https://github.com/gbdev/rgbds
         sudo make -C rgbds install
         rm -rf rgbds
     )
