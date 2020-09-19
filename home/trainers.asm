@@ -6,8 +6,9 @@ StoreTrainerHeaderPointer::
 	ld [wTrainerHeaderPtr+1], a
 	ret
 
-; executes the current map script from the function pointer array provided in hl.
+; executes the current map script from the function pointer array provided in de.
 ; a: map script index to execute (unless overridden by [wd733] bit 4)
+; hl: trainer header pointer
 ExecuteCurMapScriptInTable::
 	push af
 	push de
