@@ -286,8 +286,8 @@ ItemUseBall:
 	ld b, 4
 	call Divide
 
-; If W > 255, store 255 in [hQuotient + 3].
-; Let X = min(W, 255) = [hQuotient + 3].
+; If W <= 255, store 255 in [hQuotient + 3].
+; Let X = (W > 255 ? W : 255) = [hQuotient + 3].
 	ldh a, [hQuotient + 2]
 	and a
 	jr z, .skip3
