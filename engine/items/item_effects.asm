@@ -170,7 +170,7 @@ ItemUseBall:
 	cp POKEMON_TOWER_6F
 	jr nz, .loop
 	ld a, [wEnemyMonSpecies2]
-	cp GHOST_MON
+	cp RESTLESS_SOUL
 	ld b, $10 ; can't be caught value
 	jp z, .setAnimData
 

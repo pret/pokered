@@ -33,7 +33,7 @@ PrintBeginningBattleText:
 	call IsItemInBag
 	ld a, [wEnemyMonSpecies2]
 	ld [wcf91], a
-	cp GHOST_MON
+	cp RESTLESS_SOUL
 	jr z, .isMarowak
 	ld a, b
 	and a
