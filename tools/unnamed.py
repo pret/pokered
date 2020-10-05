@@ -32,6 +32,7 @@ import argparse
 parser = argparse.ArgumentParser(description="Parse the symfile to find unnamed symbols")
 parser.add_argument('symfile', type=argparse.FileType('r'), help="the list of symbols")
 parser.add_argument('-r', '--rootdir', type=str, help="scan the output files to obtain a list of files with unnamed symbols (NOTE: will rebuild objects as necessary)")
+parser.add_argument('-l', '--list', type=int, default=0, help="output this many of each file's unnamed symbols (NOTE: requires -r)")
 args = parser.parse_args()
 
 # Get list of object files
@@ -97,10 +98,12 @@ for objfile in objects:
             continue
 
         if sym_filename not in files:
-            files[sym_filename] = 0
-        files[sym_filename] += 1
+            files[sym_filename] = []
+        files[sym_filename].append(sym_name)
 
 # Sort the files, the one with the most amount of symbols first
-files = sorted([(fname, files[fname]) for fname in files], key=lambda x: x[1], reverse=True)
+files = sorted(((f, files[f]) for f in files), key=lambda x: len(x[1]), reverse=True)
 for f in files:
-    print("%s: %d" % (f[0], f[1]))
+    filename, unnamed = f
+    sym_list = ', '.join(unnamed[:args.list])
+    print("%s: %d%s" % (filename, len(unnamed), ': ' + sym_list if sym_list else ''))
