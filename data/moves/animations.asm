@@ -78,7 +78,7 @@ AttackAnimationPointers:
 	dw PoisonPowderAnim
 	dw StunSporeAnim
 	dw SleepPowderAnim
-	dw PedalDanceAnim
+	dw PetalDanceAnim
 	dw StringShotAnim
 	dw DragonRageAnim
 	dw FireSpinAnim
@@ -650,7 +650,7 @@ SleepPowderAnim:
 	battle_anim SLEEP_POWDER, SUBANIM_36, 0, 6
 	db -1 ; end
 
-PedalDanceAnim:
+PetalDanceAnim:
 	battle_anim PETAL_DANCE, SE_LIGHT_SCREEN_PALETTE
 	battle_anim NO_MOVE, SE_PETALS_FALLING
 	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
