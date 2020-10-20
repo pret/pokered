@@ -71,16 +71,20 @@ TryPushingBoulder::
 	ret
 
 PushBoulderUpMovementData:
-	db NPC_MOVEMENT_UP,$FF
+	db NPC_MOVEMENT_UP
+	db -1 ; end
 
 PushBoulderDownMovementData:
-	db NPC_MOVEMENT_DOWN,$FF
+	db NPC_MOVEMENT_DOWN
+	db -1 ; end
 
 PushBoulderLeftMovementData:
-	db NPC_MOVEMENT_LEFT,$FF
+	db NPC_MOVEMENT_LEFT
+	db -1 ; end
 
 PushBoulderRightMovementData:
-	db NPC_MOVEMENT_RIGHT,$FF
+	db NPC_MOVEMENT_RIGHT
+	db -1 ; end
 
 DoBoulderDustAnimation::
 	ld a, [wd730]

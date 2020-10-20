@@ -335,7 +335,18 @@ BattleTransition_FlashScreen_:
 	ret
 
 BattleTransition_FlashScreenPalettes:
-	db $F9,$FE,$FF,$FE,$F9,$E4,$90,$40,$00,$40,$90,$E4
+	db %11111001
+	db %11111110
+	db %11111111
+	db %11111110
+	db %11111001
+	db %11100100
+	db %10010000
+	db %01000000
+	db %00000000
+	db %01000000
+	db %10010000
+	db %11100100
 	db 1 ; end
 
 ; used for low level trainer dungeon battles
@@ -646,6 +657,11 @@ BattleTransition_Circle_Sub2:
 	ld l, a
 	jp BattleTransition_Circle_Sub3
 
+; halves
+	const_def
+	const CIRCLE_LEFT
+	const CIRCLE_RIGHT
+
 half_circle: MACRO
 	; quadrant x, circle data, target coord
 	db \1
@@ -654,28 +670,28 @@ half_circle: MACRO
 ENDM
 
 BattleTransition_HalfCircle1:
-	half_circle $01, BattleTransition_CircleData1, 18,  6
-	half_circle $01, BattleTransition_CircleData2, 19,  3
-	half_circle $01, BattleTransition_CircleData3, 18,  0
-	half_circle $01, BattleTransition_CircleData4, 14,  0
-	half_circle $01, BattleTransition_CircleData5, 10,  0
-	half_circle $00, BattleTransition_CircleData5,  9,  0
-	half_circle $00, BattleTransition_CircleData4,  5,  0
-	half_circle $00, BattleTransition_CircleData3,  1,  0
-	half_circle $00, BattleTransition_CircleData2,  0,  3
-	half_circle $00, BattleTransition_CircleData1,  1,  6
+	half_circle CIRCLE_RIGHT, BattleTransition_CircleData1, 18,  6
+	half_circle CIRCLE_RIGHT, BattleTransition_CircleData2, 19,  3
+	half_circle CIRCLE_RIGHT, BattleTransition_CircleData3, 18,  0
+	half_circle CIRCLE_RIGHT, BattleTransition_CircleData4, 14,  0
+	half_circle CIRCLE_RIGHT, BattleTransition_CircleData5, 10,  0
+	half_circle CIRCLE_LEFT,  BattleTransition_CircleData5,  9,  0
+	half_circle CIRCLE_LEFT,  BattleTransition_CircleData4,  5,  0
+	half_circle CIRCLE_LEFT,  BattleTransition_CircleData3,  1,  0
+	half_circle CIRCLE_LEFT,  BattleTransition_CircleData2,  0,  3
+	half_circle CIRCLE_LEFT,  BattleTransition_CircleData1,  1,  6
 
 BattleTransition_HalfCircle2:
-	half_circle $00, BattleTransition_CircleData1,  1, 11
-	half_circle $00, BattleTransition_CircleData2,  0, 14
-	half_circle $00, BattleTransition_CircleData3,  1, 17
-	half_circle $00, BattleTransition_CircleData4,  5, 17
-	half_circle $00, BattleTransition_CircleData5,  9, 17
-	half_circle $01, BattleTransition_CircleData5, 10, 17
-	half_circle $01, BattleTransition_CircleData4, 14, 17
-	half_circle $01, BattleTransition_CircleData3, 18, 17
-	half_circle $01, BattleTransition_CircleData2, 19, 14
-	half_circle $01, BattleTransition_CircleData1, 18, 11
+	half_circle CIRCLE_LEFT,  BattleTransition_CircleData1,  1, 11
+	half_circle CIRCLE_LEFT,  BattleTransition_CircleData2,  0, 14
+	half_circle CIRCLE_LEFT,  BattleTransition_CircleData3,  1, 17
+	half_circle CIRCLE_LEFT,  BattleTransition_CircleData4,  5, 17
+	half_circle CIRCLE_LEFT,  BattleTransition_CircleData5,  9, 17
+	half_circle CIRCLE_RIGHT, BattleTransition_CircleData5, 10, 17
+	half_circle CIRCLE_RIGHT, BattleTransition_CircleData4, 14, 17
+	half_circle CIRCLE_RIGHT, BattleTransition_CircleData3, 18, 17
+	half_circle CIRCLE_RIGHT, BattleTransition_CircleData2, 19, 14
+	half_circle CIRCLE_RIGHT, BattleTransition_CircleData1, 18, 11
 
 BattleTransition_Circle_Sub3:
 	push hl
@@ -704,7 +720,7 @@ BattleTransition_Circle_Sub3:
 	add hl, bc
 	ld a, [de]
 	inc de
-	cp $ff
+	cp -1
 	ret z
 	and a
 	jr z, BattleTransition_Circle_Sub3
@@ -722,17 +738,8 @@ BattleTransition_Circle_Sub3:
 	jr nz, .loop2
 	jr BattleTransition_Circle_Sub3
 
-BattleTransition_CircleData1:
-	db $02,$03,$05,$04,$09,$FF
-
-BattleTransition_CircleData2:
-	db $01,$01,$02,$02,$04,$02,$04,$02,$03,$FF
-
-BattleTransition_CircleData3:
-	db $02,$01,$03,$01,$04,$01,$04,$01,$04,$01,$03,$01,$02,$01,$01,$01,$01,$FF
-
-BattleTransition_CircleData4:
-	db $04,$01,$04,$00,$03,$01,$03,$00,$02,$01,$02,$00,$01,$FF
-
-BattleTransition_CircleData5:
-	db $04,$00,$03,$00,$03,$00,$02,$00,$02,$00,$01,$00,$01,$00,$01,$FF
+BattleTransition_CircleData1: db 2, 3, 5, 4, 9, -1
+BattleTransition_CircleData2: db 1, 1, 2, 2, 4, 2, 4, 2, 3, -1
+BattleTransition_CircleData3: db 2, 1, 3, 1, 4, 1, 4, 1, 4, 1, 3, 1, 2, 1, 1, 1, 1, -1
+BattleTransition_CircleData4: db 4, 1, 4, 0, 3, 1, 3, 0, 2, 1, 2, 0, 1, -1
+BattleTransition_CircleData5: db 4, 0, 3, 0, 3, 0, 2, 0, 2, 0, 1, 0, 1, 0, 1, -1

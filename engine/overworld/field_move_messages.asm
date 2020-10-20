@@ -46,7 +46,8 @@ IsSurfingAllowed:
 	jp PrintText
 
 CoordsData_cdf7:
-	db $0B,$07,$FF
+	dbmapcoord  7, 11
+	db -1 ; end
 
 CurrentTooFastText:
 	text_far _CurrentTooFastText

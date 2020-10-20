@@ -1,5 +1,6 @@
 add_tx_pre: MACRO
-\1_id:: dw \1
+\1_id::
+	dw \1
 ENDM
 
 TextPredefs::
