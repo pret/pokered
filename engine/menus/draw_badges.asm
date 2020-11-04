@@ -49,8 +49,7 @@ DrawBadges:
 
 	hlcoord 2, 14
 	ld de, wTempObtainedBadgesBooleans + 4
-;	call .DrawBadgeRow
-;	ret
+	; fallthrough
 
 .DrawBadgeRow
 ; Draw 4 badges.
