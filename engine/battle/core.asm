@@ -6302,7 +6302,7 @@ LoadPlayerBackPic:
 	dec a ; is it the old man tutorial?
 	ld de, RedPicBack
 	jr nz, .next
-	ld de, OldManPic
+	ld de, OldManPicBack
 .next
 	ld a, BANK(RedPicBack)
 	call UncompressSpriteFromDE
