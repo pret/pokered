@@ -231,27 +231,9 @@ CalcStat::
 	ret
 
 AddEnemyMonToPlayerParty::
-	ldh a, [hLoadedROMBank]
-	push af
-	ld a, BANK(_AddEnemyMonToPlayerParty)
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
-	call _AddEnemyMonToPlayerParty
-	pop bc
-	ld a, b
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	homecall_sf _AddEnemyMonToPlayerParty
 	ret
 
 MoveMon::
-	ldh a, [hLoadedROMBank]
-	push af
-	ld a, BANK(_MoveMon)
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
-	call _MoveMon
-	pop bc
-	ld a, b
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	homecall_sf _MoveMon
 	ret

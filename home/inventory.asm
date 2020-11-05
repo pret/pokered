@@ -22,15 +22,7 @@ AddAmountSoldToMoney::
 ; [wWhichPokemon] = index (within the inventory) of the item to remove
 ; [wItemQuantity] = quantity to remove
 RemoveItemFromInventory::
-	ldh a, [hLoadedROMBank]
-	push af
-	ld a, BANK(RemoveItemFromInventory_)
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
-	call RemoveItemFromInventory_
-	pop af
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	homecall RemoveItemFromInventory_
 	ret
 
 ; function to add an item (in varying quantities) to the player's bag or PC box
@@ -41,15 +33,6 @@ RemoveItemFromInventory::
 ; sets carry flag if successful, unsets carry flag if unsuccessful
 AddItemToInventory::
 	push bc
-	ldh a, [hLoadedROMBank]
-	push af
-	ld a, BANK(AddItemToInventory_)
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
-	call AddItemToInventory_
-	pop bc
-	ld a, b
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	homecall_sf AddItemToInventory_
 	pop bc
 	ret

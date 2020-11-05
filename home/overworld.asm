@@ -2321,16 +2321,16 @@ LoadMapData::
 ; copy current map view to VRAM
 	hlcoord 0, 0
 	ld de, vBGMap0
-	ld b, 18
+	ld b, SCREEN_HEIGHT
 .vramCopyLoop
-	ld c, 20
+	ld c, SCREEN_WIDTH
 .vramCopyInnerLoop
 	ld a, [hli]
 	ld [de], a
 	inc e
 	dec c
 	jr nz, .vramCopyInnerLoop
-	ld a, 32 - 20
+	ld a, BG_MAP_WIDTH - SCREEN_WIDTH
 	add e
 	ld e, a
 	jr nc, .noCarry
@@ -2366,15 +2366,15 @@ SwitchToMapRomBank::
 	ld c, a
 	ld b, $00
 	ld a, BANK(MapHeaderBanks)
-	call BankswitchHome ; switch to ROM bank 3
+	call BankswitchHome
 	ld hl, MapHeaderBanks
 	add hl, bc
 	ld a, [hl]
-	ldh [hMapROMBank], a ; save map ROM bank
+	ldh [hMapROMBank], a
 	call BankswitchBack
 	ldh a, [hMapROMBank]
 	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a ; switch to map ROM bank
+	ld [MBC1RomBank], a
 	pop bc
 	pop hl
 	ret
@@ -2395,7 +2395,7 @@ ResetUsingStrengthOutOfBattleBit:
 
 ForceBikeOrSurf::
 	ld b, BANK(RedSprite)
-	ld hl, LoadPlayerSpriteGraphics
+	ld hl, LoadPlayerSpriteGraphics ; in bank 0
 	call Bankswitch
 	jp PlayDefaultMusic ; update map/player state?
 
