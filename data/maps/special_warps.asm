@@ -48,11 +48,11 @@ FirstMapSpec:
 	special_warp_spec REDS_HOUSE_2F, 3, 6, REDS_HOUSE_2
 TradeCenterSpec1:
 	special_warp_spec TRADE_CENTER,  3, 4, CLUB
-TradeCenterSpec2:                   
+TradeCenterSpec2:
 	special_warp_spec TRADE_CENTER,  6, 4, CLUB
-ColosseumSpec1:                     
+ColosseumSpec1:
 	special_warp_spec COLOSSEUM,     3, 4, CLUB
-ColosseumSpec2:                     
+ColosseumSpec2:
 	special_warp_spec COLOSSEUM,     6, 4, CLUB
 
 

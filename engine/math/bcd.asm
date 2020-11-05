@@ -13,7 +13,7 @@ DivideBCD::
 	ldh [hDivideBCDBuffer+1], a
 	ldh [hDivideBCDBuffer+2], a
 	ld d, $1
-.mulBy10Loop 
+.mulBy10Loop
 ; multiply the divisor by 10 until the leading digit is nonzero
 ; to set up the standard long division algorithm
 	ldh a, [hDivideBCDDivisor]
@@ -108,7 +108,7 @@ DivideBCD::
 	ldh a, [hDivideBCDBuffer+2]
 	ldh [hDivideBCDQuotient+2], a
 	pop de
-	ld a, $6 
+	ld a, $6
 	sub d
 	and a
 	ret z

@@ -430,7 +430,7 @@ _MoveMon::
 	cp PARTY_TO_DAYCARE
 	ld de, wDayCareMonOT
 	jr z, .findOTsrc
-	dec a 
+	dec a
 	ld hl, wPartyMonOT
 	ld a, [wPartyCount]
 	jr nz, .addOToffset

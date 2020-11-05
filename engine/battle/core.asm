@@ -4485,7 +4485,7 @@ CalculateDamage:
 	ld b, 4
 	call Divide
 
-; Update wCurDamage. 
+; Update wCurDamage.
 ; Capped at MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE: 999 - 2 = 997.
 	ld hl, wDamage
 	ld b, [hl]
