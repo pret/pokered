@@ -86,7 +86,7 @@ HealEffect_:
 	ld [wHPBarNewHP], a
 .playAnim
 	ld hl, PlayCurrentMoveAnimation
-	call BankswitchEtoF
+	call EffectCallBattleCore
 	ldh a, [hWhoseTurn]
 	and a
 	hlcoord 10, 9
@@ -98,14 +98,14 @@ HealEffect_:
 	ld [wHPBarType], a
 	predef UpdateHPBar2
 	ld hl, DrawHUDsAndHPBars
-	call BankswitchEtoF
+	call EffectCallBattleCore
 	ld hl, RegainedHealthText
 	jp PrintText
 .failed
 	ld c, 50
 	call DelayFrames
 	ld hl, PrintButItFailedText_
-	jp BankswitchEtoF
+	jp EffectCallBattleCore
 
 StartedSleepingEffect:
 	text_far _StartedSleepingEffect

@@ -4,11 +4,11 @@
 ScaleSpriteByTwo:
 	ld de, sSpriteBuffer1 + (4*4*8) - 5          ; last byte of input data, last 4 rows already skipped
 	ld hl, sSpriteBuffer0 + SPRITEBUFFERSIZE - 1 ; end of destination buffer
-	call ScaleLastSpriteColumnByTwo               ; last tile column is special case
-	call ScaleFirstThreeSpriteColumnsByTwo        ; scale first 3 tile columns
+	call ScaleLastSpriteColumnByTwo              ; last tile column is special case
+	call ScaleFirstThreeSpriteColumnsByTwo       ; scale first 3 tile columns
 	ld de, sSpriteBuffer2 + (4*4*8) - 5          ; last byte of input data, last 4 rows already skipped
 	ld hl, sSpriteBuffer1 + SPRITEBUFFERSIZE - 1 ; end of destination buffer
-	call ScaleLastSpriteColumnByTwo               ; last tile column is special case
+	call ScaleLastSpriteColumnByTwo              ; last tile column is special case
 
 ScaleFirstThreeSpriteColumnsByTwo:
 	ld b, $3 ; 3 tile columns

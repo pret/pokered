@@ -133,7 +133,7 @@ DrawFrameBlock:
 .afterDrawingTiles
 	ld a, [wFBMode]
 	cp FRAMEBLOCKMODE_02
-	jr z, .advanceFrameBlockDestAddr; skip delay and don't clean OAM buffer
+	jr z, .advanceFrameBlockDestAddr ; skip delay and don't clean OAM buffer
 	ld a, [wSubAnimFrameDelay]
 	ld c, a
 	call DelayFrames
@@ -2410,7 +2410,7 @@ FallingObjects_InitXCoords:
 	ret
 
 FallingObjects_InitialXCoords:
-	db $38,$40,$50,$60,$70,$88,$90,$56,$67,$4A,$77,$84,$98,$32,$22,$5C,$6C,$7D,$8E,$99
+	db $38, $40, $50, $60, $70, $88, $90, $56, $67, $4A, $77, $84, $98, $32, $22, $5C, $6C, $7D, $8E, $99
 
 FallingObjects_InitMovementData:
 	ld hl, wFallingObjectsMovementData
@@ -2426,7 +2426,7 @@ FallingObjects_InitMovementData:
 	ret
 
 FallingObjects_InitialMovementData:
-	db $00,$84,$06,$81,$02,$88,$01,$83,$05,$89,$09,$80,$07,$87,$03,$82,$04,$85,$08,$86
+	db $00, $84, $06, $81, $02, $88, $01, $83, $05, $89, $09, $80, $07, $87, $03, $82, $04, $85, $08, $86
 
 AnimationShakeEnemyHUD:
 ; Shakes the enemy HUD.
@@ -2583,7 +2583,7 @@ TossBallAnimation:
 
 .PokeBallAnimations:
 ; sequence of animations that make up the Poké Ball toss
-	db POOF_ANIM,HIDEPIC_ANIM,SHAKE_ANIM,POOF_ANIM,SHOWPIC_ANIM
+	db POOF_ANIM, HIDEPIC_ANIM, SHAKE_ANIM, POOF_ANIM, SHOWPIC_ANIM
 
 .BlockBall
 	ld a, TOSS_ANIM

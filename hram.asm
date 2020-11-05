@@ -96,8 +96,8 @@ hTilePlayerStandingOn:: db
 hSpritePriority:: db
 
 UNION
-;; Multiplication and division variables are meant
-;; to overlap for back-to-back usage. Big endian.
+; Multiplication and division variables are meant
+; to overlap for back-to-back usage. Big endian.
 UNION
 	ds 1
 hMultiplicand:: ds 3

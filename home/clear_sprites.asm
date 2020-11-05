@@ -1,7 +1,7 @@
 ClearSprites::
 	xor a
 	ld hl, wOAMBuffer
-	ld b, 40 * 4
+	ld b, wOAMBufferEnd - wOAMBuffer
 .loop
 	ld [hli], a
 	dec b

@@ -141,7 +141,7 @@ TransformEffect_:
 
 .failed
 	ld hl, PrintButItFailedText_
-	jp BankswitchEtoF
+	jp EffectCallBattleCore
 
 TransformedText:
 	text_far _TransformedText

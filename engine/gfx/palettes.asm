@@ -353,10 +353,10 @@ SendSGBPacket:
 	ld d, a
 .nextBit0
 	bit 0, d
-; if 0th bit is not zero set P14=HIGH,P15=LOW (send bit 1)
+; if 0th bit is not zero set P14=HIGH, P15=LOW (send bit 1)
 	ld a, $10
 	jr nz, .next0
-; else (if 0th bit is zero) set P14=LOW,P15=HIGH (send bit 0)
+; else (if 0th bit is zero) set P14=LOW, P15=HIGH (send bit 0)
 	ld a, $20
 .next0
 	ldh [rJOYP], a
@@ -364,7 +364,7 @@ SendSGBPacket:
 	ld a, $30
 	ldh [rJOYP], a
 ; rotation will put next bit in 0th position (so  we can always use command
-; "bit 0,d" to fetch the bit that has to be sent)
+; "bit 0, d" to fetch the bit that has to be sent)
 	rr d
 ; decrease bit counter so we know when we have sent all 8 bits of current byte
 	dec e
@@ -608,9 +608,7 @@ CopySGBBorderTiles:
 ; This function converts 2BPP planar data into this format by mapping
 ; 2BPP colors 0-3 to 4BPP colors 0-3. 4BPP colors 4-15 are not used.
 	ld b, 128
-
 .tileLoop
-
 ; Copy bit planes 1 and 2 of the tile data.
 	ld c, 16
 .copyLoop
