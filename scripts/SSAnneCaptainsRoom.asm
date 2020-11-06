@@ -45,7 +45,7 @@ SSAnne7RubText:
 	text_far _SSAnne7RubText
 	text_asm
 	ld a, [wAudioROMBank]
-	cp BANK(Audio3_UpdateMusic)
+	cp BANK("Audio Engine 3")
 	ld [wAudioSavedROMBank], a
 	jr nz, .asm_61908
 	ld a, SFX_STOP_ALL_MUSIC

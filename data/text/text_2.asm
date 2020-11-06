@@ -888,7 +888,7 @@ _UseNextMonText::
 	text "Use next #MON?"
 	done
 
-_Sony1WinText::
+_Rival1WinText::
 	text "<RIVAL>: Yeah! Am"
 	line "I great or what?"
 	prompt

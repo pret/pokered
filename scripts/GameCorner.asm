@@ -475,8 +475,8 @@ CeladonGameCornerScript_48f1e:
 	ld hl, wd730
 	set 6, [hl]
 	hlcoord 11, 0
-	ld b, $5
-	ld c, $7
+	ld b, 5
+	ld c, 7
 	call TextBoxBorder
 	call UpdateSprites
 	hlcoord 12, 1
@@ -491,7 +491,7 @@ CeladonGameCornerScript_48f1e:
 	call PlaceString
 	hlcoord 12, 3
 	ld de, wPlayerMoney
-	ld c, $a3
+	ld c, 3 | MONEY_SIGN | LEADING_ZEROES
 	call PrintBCDNumber
 	hlcoord 12, 4
 	ld de, GameCornerCoinText

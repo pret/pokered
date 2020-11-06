@@ -35,7 +35,7 @@ AnimateHealingMachine:
 	dec b
 	jr nz, .partyLoop
 	ld a, [wAudioROMBank]
-	cp BANK(Audio3_UpdateMusic)
+	cp BANK("Audio Engine 3")
 	ld [wAudioSavedROMBank], a
 	jr nz, .next
 	ld a, SFX_STOP_ALL_MUSIC

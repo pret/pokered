@@ -41,7 +41,6 @@ PewterGymScript3:
 	jp z, PewterGymScript_5c3bf
 	ld a, $f0
 	ld [wJoyIgnore], a
-
 PewterGymScript_5c3df:
 	ld a, $4
 	ldh [hSpriteIndexOrTextID], a

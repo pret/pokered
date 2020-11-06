@@ -14,6 +14,7 @@ PewterMartText2:
 	ld hl, .Text
 	call PrintText
 	jp TextScriptEnd
+
 .Text
 	text_far _PewterMartText2
 	text_end
@@ -23,6 +24,7 @@ PewterMartText3:
 	ld hl, .Text
 	call PrintText
 	jp TextScriptEnd
+
 .Text
 	text_far _PewterMartText3
 	text_end

@@ -18,23 +18,21 @@ LanceShowOrHideEntranceBlocks:
 	; open entrance
 	ld a, $31
 	ld b, $32
-	jp LanceSetEntranceBlocks
+	jp .setEntranceBlocks
 .closeEntrance
 	ld a, $72
 	ld b, $73
-
-LanceSetEntranceBlocks:
+.setEntranceBlocks
 ; Replaces the tile blocks so the player can't leave.
 	push bc
 	ld [wNewTileBlockID], a
 	lb bc, 6, 2
-	call LanceSetEntranceBlock
+	call .SetEntranceBlock
 	pop bc
 	ld a, b
 	ld [wNewTileBlockID], a
 	lb bc, 6, 3
-
-LanceSetEntranceBlock:
+.SetEntranceBlock:
 	predef_jump ReplaceTileBlock
 
 ResetLanceScript:

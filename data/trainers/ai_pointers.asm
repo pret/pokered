@@ -27,7 +27,7 @@ TrainerAIPointers:
 	dbw 3, GenericAI
 	dbw 3, GenericAI
 	dbw 2, BlackbeltAI ; blackbelt
-	dbw 3, GenericAI
+	dbw 3, GenericAI ; rival1
 	dbw 3, GenericAI
 	dbw 1, GenericAI ; chief
 	dbw 3, GenericAI
@@ -44,8 +44,8 @@ TrainerAIPointers:
 	dbw 2, BlaineAI ; blaine
 	dbw 1, SabrinaAI ; sabrina
 	dbw 3, GenericAI
-	dbw 1, Sony2AI ; sony2
-	dbw 1, Sony3AI ; sony3
+	dbw 1, Rival2AI ; rival2
+	dbw 1, Rival3AI ; rival3
 	dbw 2, LoreleiAI ; lorelei
 	dbw 3, GenericAI
 	dbw 2, AgathaAI ; agatha

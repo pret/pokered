@@ -73,7 +73,6 @@ UpdateMusic6Times::
 	ld b, a
 	cp BANK(Audio1_UpdateMusic)
 	jr nz, .checkForAudio2
-
 ; audio 1
 	ld hl, Audio1_UpdateMusic
 	jr .next
@@ -81,7 +80,6 @@ UpdateMusic6Times::
 .checkForAudio2
 	cp BANK(Audio2_UpdateMusic)
 	jr nz, .audio3
-
 ; audio 2
 	ld hl, Audio2_UpdateMusic
 	jr .next
@@ -177,7 +175,6 @@ PlaySound::
 	ld [MBC1RomBank], a
 	cp BANK(Audio1_PlaySound)
 	jr nz, .checkForAudio2
-
 ; audio 1
 	ld a, b
 	call Audio1_PlaySound
@@ -186,7 +183,6 @@ PlaySound::
 .checkForAudio2
 	cp BANK(Audio2_PlaySound)
 	jr nz, .audio3
-
 ; audio 2
 	ld a, b
 	call Audio2_PlaySound

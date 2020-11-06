@@ -666,7 +666,7 @@ OaksLabScript_RemoveParcel:
 	ld hl, wNumBagItems
 	ld a, c
 	ld [wWhichPokemon], a
-	ld a, $1
+	ld a, 1
 	ld [wItemQuantity], a
 	jp RemoveItemFromInventory
 
@@ -716,7 +716,7 @@ OaksLabScript_1d076:
 	ld a, l
 	ld [wMapTextPtr], a
 	ld a, h
-	ld [wMapTextPtr+1], a
+	ld [wMapTextPtr + 1], a
 	ret
 
 OaksLab_TextPointers:

@@ -50,8 +50,8 @@ BikeShopText1:
 	ld hl, wd730
 	set 6, [hl]
 	hlcoord 0, 0
-	ld b, $4
-	ld c, $f
+	ld b, 4
+	ld c, 15
 	call TextBoxBorder
 	call UpdateSprites
 	hlcoord 2, 2
@@ -63,7 +63,7 @@ BikeShopText1:
 	ld hl, BikeShopText_1d815
 	call PrintText
 	call HandleMenuInput
-	bit 1, a
+	bit BIT_B_BUTTON, a
 	jr nz, .cancel
 	ld hl, wd730
 	res 6, [hl]
