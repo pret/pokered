@@ -16,7 +16,7 @@ ReadTrainer:
 
 ; get the pointer to trainer data for this class
 	ld a, [wCurOpponent]
-	sub $C9 ; convert value from pokemon to trainer
+	sub OPP_ID_OFFSET + 1 ; convert value from pokemon to trainer
 	add a
 	ld hl, TrainerDataPointers
 	ld c, a
@@ -79,7 +79,7 @@ ReadTrainer:
 	pop hl
 	jr .SpecialTrainer
 .AddLoneMove
-; does the trainer have a single monster with a different move
+; does the trainer have a single monster with a different move?
 	ld a, [wLoneAttackNo] ; Brock is 01, Misty is 02, Erika is 04, etc
 	and a
 	jr z, .AddTeamMove

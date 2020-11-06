@@ -27,7 +27,7 @@ AddItemToInventory_::
 	ld a, [hli]
 	and a
 	jr z, .addNewItem
-.loop
+.notAtEndOfInventory
 	ld a, [hli]
 	ld b, a ; b = ID of current item in table
 	ld a, [wcf91] ; a = ID of item being added
@@ -36,7 +36,7 @@ AddItemToInventory_::
 	inc hl
 	ld a, [hl]
 	cp $ff ; is it the end of the table?
-	jr nz, .loop
+	jr nz, .notAtEndOfInventory
 .addNewItem ; add an item not yet in the inventory
 	pop hl
 	ld a, d
@@ -73,7 +73,7 @@ AddItemToInventory_::
 ; if so, store 99 in the current slot and store the rest in a new slot
 	ld a, 99
 	ld [hli], a
-	jp .loop
+	jp .notAtEndOfInventory
 .increaseItemQuantityFailed
 	pop hl
 	and a

@@ -1,4 +1,4 @@
-; b = new colour for BG colour 0 (usually white) for 4 frames
+; b = new color for BG color 0 (usually white) for 4 frames
 ChangeBGPalColor0_4Frames:
 	call GetPredefRegisters
 	ldh a, [rBGP]

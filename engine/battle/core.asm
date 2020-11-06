@@ -1098,7 +1098,7 @@ ChooseNextMon:
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	jr nz, .notLinkBattle
-	inc a
+	inc a ; 1
 	ld [wActionResultOrTookBattleTurn], a
 	call LinkBattleExchangeData
 .notLinkBattle
@@ -1724,7 +1724,7 @@ SendOutMon:
 	ld hl, wEnemyMonHP
 	ld a, [hli]
 	or [hl] ; is enemy mon HP zero?
-	jp z, .skipDrawingEnemyHUDAndHPBar; if HP is zero, skip drawing the HUD and HP bar
+	jp z, .skipDrawingEnemyHUDAndHPBar ; if HP is zero, skip drawing the HUD and HP bar
 	call DrawEnemyHUDAndHPBar
 .skipDrawingEnemyHUDAndHPBar
 	call DrawPlayerHUDAndHPBar
@@ -2017,14 +2017,16 @@ DisplayBattleMenu::
 	dec a
 	jp nz, .handleBattleMenuInput ; handle menu input if it's not the old man tutorial
 ; the following happens for the old man tutorial
+	; Temporarily save the player name in wGrassRate,
+	; which is supposed to get overwritten when entering a
+	; map with wild Pokémon.
+	; Due to an oversight, the data may not get
+	; overwritten (on Cinnabar and Route 21) and the infamous
+	; Missingno. glitch can show up.
 	ld hl, wPlayerName
 	ld de, wGrassRate
 	ld bc, NAME_LENGTH
-	call CopyData  ; temporarily save the player name in unused space,
-	               ; which is supposed to get overwritten when entering a
-	               ; map with wild Pokémon. Due to an oversight, the data
-	               ; may not get overwritten (cinnabar) and the infamous
-	               ; Missingno. glitch can show up.
+	call CopyData
 	ld hl, .oldManName
 	ld de, wPlayerName
 	ld bc, NAME_LENGTH
@@ -2206,7 +2208,7 @@ BagWasSelected:
 OldManItemList:
 	db 1 ; # items
 	db POKE_BALL, 50
-	db -1
+	db -1 ; end
 
 DisplayPlayerBag:
 	; get the pointer to player's bag when in a normal battle
@@ -4101,7 +4103,7 @@ CheckForDisobedience:
 	call GetCurrentMove
 .canUseMove
 	ld a, $1
-	and a; clear Z flag
+	and a ; clear Z flag
 	ret
 .cannotUseMove
 	xor a ; set Z flag
@@ -4485,7 +4487,7 @@ CalculateDamage:
 	ld b, 4
 	call Divide
 
-; Update wCurDamage. 
+; Update wCurDamage.
 ; Capped at MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE: 999 - 2 = 997.
 	ld hl, wDamage
 	ld b, [hl]
@@ -4574,7 +4576,7 @@ JumpToOHKOMoveEffect:
 INCLUDE "data/battle/unused_critical_hit_moves.asm"
 
 ; determines if attack is a critical hit
-; azure heights claims "the fastest pokémon (who are,not coincidentally,
+; Azure Heights claims "the fastest pokémon (who are, not coincidentally,
 ; among the most popular) tend to CH about 20 to 25% of the time."
 CriticalHitTest:
 	xor a
@@ -6302,7 +6304,7 @@ LoadPlayerBackPic:
 	dec a ; is it the old man tutorial?
 	ld de, RedPicBack
 	jr nz, .next
-	ld de, OldManPic
+	ld de, OldManPicBack
 .next
 	ld a, BANK(RedPicBack)
 	call UncompressSpriteFromDE

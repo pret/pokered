@@ -325,16 +325,7 @@ PrintStatusCondition::
 	ret
 
 PrintStatusConditionNotFainted::
-	ldh a, [hLoadedROMBank]
-	push af
-	ld a, BANK(PrintStatusAilment)
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
-	call PrintStatusAilment ; print status condition
-	pop bc
-	ld a, b
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	homecall_sf PrintStatusAilment
 	ret
 
 ; function to print pokemon level, leaving off the ":L" if the level is at least 100

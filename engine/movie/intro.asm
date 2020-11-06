@@ -23,7 +23,7 @@ PlayIntro:
 PlayIntroScene:
 	ld b, SET_PAL_NIDORINO_INTRO
 	call RunPaletteCommand
-	ldPal a, BLACK, DARK_GRAY, LIGHT_GRAY, WHITE
+	ldpal a, SHADE_BLACK, SHADE_DARK, SHADE_LIGHT, SHADE_WHITE
 	ldh [rBGP], a
 	ldh [rOBP0], a
 	ldh [rOBP1], a
@@ -307,7 +307,7 @@ PlayShootingStar:
 	ld b, SET_PAL_GAME_FREAK_INTRO
 	call RunPaletteCommand
 	farcall LoadCopyrightAndTextBoxTiles
-	ldPal a, BLACK, DARK_GRAY, LIGHT_GRAY, WHITE
+	ldpal a, SHADE_BLACK, SHADE_DARK, SHADE_LIGHT, SHADE_WHITE
 	ldh [rBGP], a
 	ld c, 180
 	call DelayFrames

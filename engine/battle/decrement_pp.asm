@@ -37,7 +37,7 @@ DecrementPP:
 	ld a, [wPlayerMoveListIndex] ; which move (0, 1, 2, 3) did we use?
 	ld c, a
 	ld b, 0
-	add hl ,bc           ; calculate the address in memory of the PP we need to decrement
+	add hl, bc           ; calculate the address in memory of the PP we need to decrement
 	                     ; based on the move chosen.
 	dec [hl]             ; Decrement PP
 	ret

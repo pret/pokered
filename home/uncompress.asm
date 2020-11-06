@@ -561,7 +561,7 @@ ResetSpriteBufferPointers::
 
 ; maps each nybble to its reverse
 NybbleReverseTable::
-	db $0, $8, $4, $c, $2, $a, $6 ,$e, $1, $9, $5, $d, $3, $b, $7 ,$f
+	db $0, $8, $4, $c, $2, $a, $6, $e, $1, $9, $5, $d, $3, $b, $7, $f
 
 ; combines the two loaded chunks with xor (the chunk loaded second is the destination). Both chunks are differeintial decoded beforehand.
 UnpackSpriteMode2::

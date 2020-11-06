@@ -146,15 +146,7 @@ DisplayPokemartDialogue::
 	call LoadItemList
 	ld a, PRICEDITEMLISTMENU
 	ld [wListMenuID], a
-	ldh a, [hLoadedROMBank]
-	push af
-	ld a, BANK(DisplayPokemartDialogue_)
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
-	call DisplayPokemartDialogue_
-	pop af
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	homecall DisplayPokemartDialogue_
 	jp AfterDisplayingTextID
 
 PokemartGreetingText::
@@ -185,15 +177,7 @@ DisplayPokemonCenterDialogue::
 	ldh [hItemPrice + 2], a
 
 	inc hl
-	ldh a, [hLoadedROMBank]
-	push af
-	ld a, BANK(DisplayPokemonCenterDialogue_)
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
-	call DisplayPokemonCenterDialogue_
-	pop af
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	homecall DisplayPokemonCenterDialogue_
 	jp AfterDisplayingTextID
 
 DisplaySafariGameOverText::

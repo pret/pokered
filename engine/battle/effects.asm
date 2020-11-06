@@ -198,7 +198,7 @@ FreezeBurnParalyzeEffect:
 	ret nz ; return if they have a substitute, can't effect them
 	ldh a, [hWhoseTurn]
 	and a
-	jp nz, opponentAttacker
+	jp nz, .opponentAttacker
 	ld a, [wEnemyMonStatus]
 	and a
 	jp nz, CheckDefrost ; can't inflict status if opponent is already statused
@@ -224,17 +224,17 @@ FreezeBurnParalyzeEffect:
 	ret nc ; do nothing if random value is >= 1A or 4D [no status applied]
 	ld a, b ; what type of effect is this?
 	cp BURN_SIDE_EFFECT1
-	jr z, .burn
+	jr z, .burn1
 	cp FREEZE_SIDE_EFFECT
-	jr z, .freeze
-; .paralyze
+	jr z, .freeze1
+; .paralyze1
 	ld a, 1 << PAR
 	ld [wEnemyMonStatus], a
 	call QuarterSpeedDueToParalysis ; quarter speed of affected mon
 	ld a, ANIM_A9
 	call PlayBattleAnimation
 	jp PrintMayNotAttackText ; print paralysis text
-.burn
+.burn1
 	ld a, 1 << BRN
 	ld [wEnemyMonStatus], a
 	call HalveAttackDueToBurn ; halve attack of affected mon
@@ -242,7 +242,7 @@ FreezeBurnParalyzeEffect:
 	call PlayBattleAnimation
 	ld hl, BurnedText
 	jp PrintText
-.freeze
+.freeze1
 	call ClearHyperBeam ; resets hyper beam (recharge) condition from target
 	ld a, 1 << FRZ
 	ld [wEnemyMonStatus], a
@@ -250,7 +250,7 @@ FreezeBurnParalyzeEffect:
 	call PlayBattleAnimation
 	ld hl, FrozenText
 	jp PrintText
-opponentAttacker:
+.opponentAttacker
 	ld a, [wBattleMonStatus] ; mostly same as above with addresses swapped for opponent
 	and a
 	jp nz, CheckDefrost
@@ -265,10 +265,10 @@ opponentAttacker:
 	ld a, [wEnemyMoveEffect]
 	cp PARALYZE_SIDE_EFFECT1 + 1
 	ld b, $1a
-	jr c, .next1
+	jr c, .next2
 	ld b, $4d
 	sub $1e
-.next1
+.next2
 	push af
 	call BattleRandom
 	cp b
@@ -276,20 +276,21 @@ opponentAttacker:
 	ret nc
 	ld a, b
 	cp BURN_SIDE_EFFECT1
-	jr z, .burn
+	jr z, .burn2
 	cp FREEZE_SIDE_EFFECT
-	jr z, .freeze
+	jr z, .freeze2
+; .paralyze2
 	ld a, 1 << PAR
 	ld [wBattleMonStatus], a
 	call QuarterSpeedDueToParalysis
 	jp PrintMayNotAttackText
-.burn
+.burn2
 	ld a, 1 << BRN
 	ld [wBattleMonStatus], a
 	call HalveAttackDueToBurn
 	ld hl, BurnedText
 	jp PrintText
-.freeze
+.freeze2
 ; hyper beam bits aren't reseted for opponent's side
 	ld a, 1 << FRZ
 	ld [wBattleMonStatus], a
@@ -458,14 +459,14 @@ UpdateStatDone:
 	ld bc, wPlayerMonMinimized
 	ldh a, [hWhoseTurn]
 	and a
-	jr z, .asm_3f4e6
+	jr z, .playerTurn
 	ld hl, wEnemyBattleStatus2
 	ld de, wEnemyMoveNum
 	ld bc, wEnemyMonMinimized
-.asm_3f4e6
+.playerTurn
 	ld a, [de]
 	cp MINIMIZE
-	jr nz, .asm_3f4f9
+	jr nz, .notMinimize
  ; if a substitute is up, slide off the substitute and show the mon pic before
  ; playing the minimize animation
 	bit HAS_SUBSTITUTE_UP, [hl]
@@ -476,7 +477,7 @@ UpdateStatDone:
 	push de
 	call nz, Bankswitch
 	pop de
-.asm_3f4f9
+.notMinimize
 	call PlayCurrentMoveAnimation
 	ld a, [de]
 	cp MINIMIZE

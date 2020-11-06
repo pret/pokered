@@ -1,6 +1,9 @@
+; divide hMoney by hDivideBCDDivisor
+; return output in hDivideBCDQuotient (same as hDivideBCDDivisor)
+; used only to halve player money upon losing a fight
 DivideBCDPredef::
 DivideBCDPredef2::
-DivideBCDPredef3::
+DivideBCDPredef3:: ; only used function
 DivideBCDPredef4::
 	call GetPredefRegisters
 
@@ -10,7 +13,7 @@ DivideBCD::
 	ldh [hDivideBCDBuffer+1], a
 	ldh [hDivideBCDBuffer+2], a
 	ld d, $1
-.mulBy10Loop 
+.mulBy10Loop
 ; multiply the divisor by 10 until the leading digit is nonzero
 ; to set up the standard long division algorithm
 	ldh a, [hDivideBCDDivisor]
@@ -40,6 +43,7 @@ DivideBCD::
 	and $f0
 	ldh [hDivideBCDDivisor+2], a
 	jr .mulBy10Loop
+
 .next
 	push de
 	push de
@@ -104,7 +108,7 @@ DivideBCD::
 	ldh a, [hDivideBCDBuffer+2]
 	ldh [hDivideBCDQuotient+2], a
 	pop de
-	ld a, $6 
+	ld a, $6
 	sub d
 	and a
 	ret z
@@ -151,8 +155,8 @@ DivideBCD_getNextDigit:
 	pop bc
 	ret c
 	inc b
-	ld de, hMoney+2 ; since SubBCD works starting from the least significant digit
-	ld hl, hDivideBCDDivisor+2  
+	ld de, hMoney + 2 ; since SubBCD works starting from the least significant digit
+	ld hl, hDivideBCDDivisor + 2
 	push bc
 	call SubBCD
 	pop bc

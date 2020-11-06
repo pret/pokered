@@ -294,7 +294,7 @@ TrainerAI:
 	ret z ; if not a trainer, we're done here
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
-	ret z
+	ret z ; if in a link battle, we're done as well
 	ld a, [wTrainerClass] ; what trainer class is this?
 	dec a
 	ld c, a
