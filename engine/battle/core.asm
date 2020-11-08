@@ -2602,13 +2602,13 @@ SelectMenuItem:
 	call HandleMenuInput
 	ld hl, hFlagsFFF6
 	res 1, [hl]
-	bit 6, a
-	jp nz, SelectMenuItem_CursorUp ; up
-	bit 7, a
-	jp nz, SelectMenuItem_CursorDown ; down
-	bit 2, a
-	jp nz, SwapMovesInMenu ; select
-	bit 1, a ; B, but was it reset above?
+	bit BIT_D_UP, a
+	jp nz, SelectMenuItem_CursorUp
+	bit BIT_D_DOWN, a
+	jp nz, SelectMenuItem_CursorDown
+	bit BIT_SELECT, a
+	jp nz, SwapMovesInMenu
+	bit BIT_B_BUTTON, a
 	push af
 	xor a
 	ld [wMenuItemToSwap], a
