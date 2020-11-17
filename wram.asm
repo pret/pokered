@@ -1996,8 +1996,9 @@ wMonHGrowthRate::
 
 wMonHLearnset::
 ; bit field
-	flag_array 50 + 5
+	flag_array NUM_TMS + NUM_HMS
 	ds 1
+wMonHeaderEnd::
 
 wSavedTilesetType::
 ; saved at the start of a battle and then written back at the end of the battle
