@@ -3035,30 +3035,32 @@ wSecondLockTrashCanIndex::
 wEventFlags::
 	flag_array NUM_EVENTS
 
+
+UNION
+wGrassRate:: db
+wGrassMons::
+	ds 10 * 2
+
+	ds 8
+
+wWaterRate:: db
+wWaterMons::
+	ds 10 * 2
+
+NEXTU
 wLinkEnemyTrainerName::
 ; linked game's trainer name
+	ds NAME_LENGTH
 
-wGrassRate::
 	ds 1
 
-wGrassMons::
-;	ds 20
-
-	ds 11
-; Overload wGrassMons
 wSerialEnemyDataBlock::
+;	ds $1a8
+
 	ds 9
 
 wEnemyPartyCount:: ds 1
 wEnemyPartyMons::  ds PARTY_LENGTH + 1
-
-; Overload enemy party data
-UNION
-
-wWaterRate:: db
-wWaterMons:: db
-
-NEXTU
 
 wEnemyMons::
 wEnemyMon1:: party_struct wEnemyMon1
