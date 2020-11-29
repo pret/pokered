@@ -277,11 +277,11 @@ hFrameCounter:: db ; decremented every V-blank (used for delays)
 ; you can detect that the V-blank handler has run since then.
 hVBlankOccurred:: db
 
-; 00 = indoor
-; 01 = cave
-; 02 = outdoor
-; this is often set to 00 in order to turn off water and flower BG tile animations
-hTilesetType:: db
+; Controls whether flower and water tiles are animated.
+; 00 = flowers and water are static (breaks Surf)
+; 01 = flowers are static, water is animated 
+; 02 = flowers and water are animated
+hTileAnimations:: db
 
 hMovingBGTilesCounter1:: db
 

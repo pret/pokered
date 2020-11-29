@@ -51,7 +51,7 @@ SlidePlayerAndEnemySilhouettesOnScreen:
 	ldh [hWY], a
 	ldh [rWY], a
 	xor a
-	ldh [hTilesetType], a
+	ldh [hTileAnimations], a
 	ldh [hSCY], a
 	dec a
 	ld [wUpdateSpritesEnabled], a
@@ -6275,7 +6275,7 @@ DoBattleTransitionAndInitBattleVariables:
 	ldh [hAutoBGTransferEnabled], a
 	ldh [hWY], a
 	ldh [rWY], a
-	ldh [hTilesetType], a
+	ldh [hTileAnimations], a
 	ld hl, wPlayerStatsToDouble
 	ld [hli], a
 	ld [hli], a
@@ -6866,7 +6866,7 @@ _InitBattleCommon:
 	pop af
 	ld [wMapPalOffset], a
 	ld a, [wSavedTilesetType]
-	ldh [hTilesetType], a
+	ldh [hTileAnimations], a
 	scf
 	ret
 .emptyString

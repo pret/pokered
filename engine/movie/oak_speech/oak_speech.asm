@@ -52,7 +52,7 @@ OakSpeech:
 	ld [wDestinationMap], a
 	call SpecialWarpIn
 	xor a
-	ldh [hTilesetType], a
+	ldh [hTileAnimations], a
 	ld a, [wd732]
 	bit 1, a ; possibly a debug mode bit
 	jp nz, .skipChoosingNames

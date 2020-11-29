@@ -454,10 +454,10 @@ StartMenu_TrainerInfo::
 	call GBPalWhiteOut
 	call ClearScreen
 	call UpdateSprites
-	ldh a, [hTilesetType]
+	ldh a, [hTileAnimations]
 	push af
 	xor a
-	ldh [hTilesetType], a
+	ldh [hTileAnimations], a
 	call DrawTrainerInfo
 	predef DrawBadges ; draw badges
 	ld b, SET_PAL_TRAINER_CARD
@@ -471,7 +471,7 @@ StartMenu_TrainerInfo::
 	call ReloadMapData
 	call LoadGBPal
 	pop af
-	ldh [hTilesetType], a
+	ldh [hTileAnimations], a
 	jp RedisplayStartMenu
 
 ; loads tile patterns and draws everything except for gym leader faces / badges

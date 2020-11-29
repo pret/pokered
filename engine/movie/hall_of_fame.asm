@@ -19,7 +19,7 @@ AnimateHallOfFame:
 	call FillMemory
 	xor a
 	ld [wUpdateSpritesEnabled], a
-	ldh [hTilesetType], a
+	ldh [hTileAnimations], a
 	ld [wSpriteFlipped], a
 	ld [wLetterPrintingDelayFlags], a ; no delay
 	ld [wHoFMonOrPlayer], a ; mon

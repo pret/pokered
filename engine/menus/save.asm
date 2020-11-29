@@ -70,7 +70,7 @@ LoadSAV0:
 	ld bc, wSpriteDataEnd - wSpriteDataStart
 	call CopyData
 	ld a, [sTilesetType]
-	ldh [hTilesetType], a
+	ldh [hTileAnimations], a
 	ld hl, sCurBoxData
 	ld de, wBoxDataStart
 	ld bc, wBoxDataEnd - wBoxDataStart
@@ -217,7 +217,7 @@ SaveSAVtoSRAM0:
 	ld de, sCurBoxData
 	ld bc, wBoxDataEnd - wBoxDataStart
 	call CopyData
-	ldh a, [hTilesetType]
+	ldh a, [hTileAnimations]
 	ld [sTilesetType], a
 	ld hl, sPlayerName
 	ld bc, sMainDataCheckSum - sPlayerName

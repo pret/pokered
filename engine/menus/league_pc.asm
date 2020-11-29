@@ -6,10 +6,10 @@ PKMNLeaguePC:
 	push hl
 	ld a, [wUpdateSpritesEnabled]
 	push af
-	ldh a, [hTilesetType]
+	ldh a, [hTileAnimations]
 	push af
 	xor a
-	ldh [hTilesetType], a
+	ldh [hTileAnimations], a
 	ld [wSpriteFlipped], a
 	ld [wUpdateSpritesEnabled], a
 	ld [wHoFTeamIndex2], a
@@ -40,7 +40,7 @@ PKMNLeaguePC:
 	jr nz, .loop
 .doneShowingTeams
 	pop af
-	ldh [hTilesetType], a
+	ldh [hTileAnimations], a
 	pop af
 	ld [wUpdateSpritesEnabled], a
 	pop hl

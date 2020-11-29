@@ -19,7 +19,7 @@ EvolveMon:
 	call Delay3
 	xor a
 	ldh [hAutoBGTransferEnabled], a
-	ldh [hTilesetType], a
+	ldh [hTileAnimations], a
 	ld a, [wEvoOldSpecies]
 	ld [wWholeScreenPaletteMonSpecies], a
 	ld c, 0
