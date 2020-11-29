@@ -1,3 +1,4 @@
+; This corresponds to SFX_KEY_ITEM in pokegold and pokecrystal.
 SFX_Unused2_Ch5:
 	execute_music
 	tempo 256
