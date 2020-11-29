@@ -277,10 +277,10 @@ hFrameCounter:: db ; decremented every V-blank (used for delays)
 ; you can detect that the V-blank handler has run since then.
 hVBlankOccurred:: db
 
-; Controls whether flower and water tiles are animated.
-; 00 = flowers and water are static (breaks Surf)
-; 01 = flowers are static, water is animated 
-; 02 = flowers and water are animated
+; Controls which tiles are animated.
+; 0 = no animations (breaks Surf)
+; 1 = water tile $14 is animated
+; 2 = water tile $14 and flower tile $03 are animated
 hTileAnimations:: db
 
 hMovingBGTilesCounter1:: db
