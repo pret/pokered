@@ -56,7 +56,7 @@ RedrawMapView:
 	push af
 	xor a
 	ldh [hAutoBGTransferEnabled], a
-	ldh [hTileAnimations], a ; no flower/water BG tile animations
+	ldh [hTileAnimations], a
 	call LoadCurrentMapView
 	call RunDefaultPaletteCommand
 	ld hl, wMapViewVRAMPointer
