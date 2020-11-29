@@ -9,8 +9,8 @@ MAP_BORDER EQU 3
 	shift_const SOUTH ; 4
 	shift_const NORTH ; 8
 
-; tileset environments
+; flower and water tile animations
 	const_def
-	const INDOOR  ; 0
-	const CAVE    ; 1
-	const OUTDOOR ; 2
+	const STATIC_FLOWERS_WATER           ; 0
+	const STATIC_FLOWERS_ANIMATED_WATER  ; 1
+	const ANIMATED_FLOWERS_WATER         ; 2

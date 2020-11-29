@@ -6865,7 +6865,7 @@ _InitBattleCommon:
 	ld [wLetterPrintingDelayFlags], a
 	pop af
 	ld [wMapPalOffset], a
-	ld a, [wSavedTilesetType]
+	ld a, [wSavedTileAnimations]
 	ldh [hTileAnimations], a
 	scf
 	ret

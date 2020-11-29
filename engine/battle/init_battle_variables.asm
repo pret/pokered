@@ -1,6 +1,6 @@
 InitBattleVariables:
 	ldh a, [hTileAnimations]
-	ld [wSavedTilesetType], a
+	ld [wSavedTileAnimations], a
 	xor a
 	ld [wActionResultOrTookBattleTurn], a
 	ld [wBattleResult], a
