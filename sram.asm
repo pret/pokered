@@ -17,7 +17,7 @@ sMainData::    ds wMainDataEnd   - wMainDataStart
 sSpriteData::  ds wSpriteDataEnd - wSpriteDataStart
 sPartyData::   ds wPartyDataEnd  - wPartyDataStart
 sCurBoxData::  ds wBoxDataEnd    - wBoxDataStart
-sTilesetType:: ds 1
+sTileAnimations:: ds 1
 sMainDataCheckSum:: ds 1
 
 

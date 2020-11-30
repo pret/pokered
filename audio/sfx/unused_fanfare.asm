@@ -1,4 +1,5 @@
-SFX_Unused2_Ch5:
+; This corresponds to SFX_KEY_ITEM in pokegold and pokecrystal.
+SFX_UnusedFanfare_Ch5: ; unreferenced
 	execute_music
 	tempo 256
 	volume 7, 7
@@ -16,8 +17,7 @@ SFX_Unused2_Ch5:
 	note E_, 8
 	sound_ret
 
-
-SFX_Unused2_Ch6:
+SFX_UnusedFanfare_Ch6: ; unreferenced
 	execute_music
 	vibrato 8, 2, 7
 	duty_cycle 2
@@ -32,8 +32,7 @@ SFX_Unused2_Ch6:
 	note B_, 8
 	sound_ret
 
-
-SFX_Unused2_Ch7:
+SFX_UnusedFanfare_Ch7: ; unreferenced
 	execute_music
 	note_type 6, 1, 0
 	octave 4

@@ -23,7 +23,7 @@ LoadTilesetHeader:
 	dec c
 	jr nz, .copyTilesetHeaderLoop
 	ld a, [hl]
-	ldh [hTilesetType], a
+	ldh [hTileAnimations], a
 	xor a
 	ldh [hMovingBGTilesCounter1], a
 	pop hl

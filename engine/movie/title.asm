@@ -26,7 +26,7 @@ DisplayTitleScreen:
 	ld a, $1
 	ldh [hAutoBGTransferEnabled], a
 	xor a
-	ldh [hTilesetType], a
+	ldh [hTileAnimations], a
 	ldh [hSCX], a
 	ld a, $40
 	ldh [hSCY], a

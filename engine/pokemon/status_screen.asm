@@ -101,10 +101,10 @@ StatusScreen:
 	ld hl, vChars2 tile $72
 	lb bc, BANK(PTile), 1
 	call CopyVideoDataDouble ; bold P (for PP)
-	ldh a, [hTilesetType]
+	ldh a, [hTileAnimations]
 	push af
 	xor a
-	ldh [hTilesetType], a
+	ldh [hTileAnimations], a
 	hlcoord 19, 1
 	lb bc, 6, 10
 	call DrawLineBox ; Draws the box around name, HP and status
@@ -174,7 +174,7 @@ StatusScreen:
 	call PlayCry ; play Pokémon cry
 	call WaitForTextScrollButtonPress ; wait for button
 	pop af
-	ldh [hTilesetType], a
+	ldh [hTileAnimations], a
 	ret
 
 .GetStringPointer
@@ -296,10 +296,10 @@ StatsText:
 	next "SPECIAL@"
 
 StatusScreen2:
-	ldh a, [hTilesetType]
+	ldh a, [hTileAnimations]
 	push af
 	xor a
-	ldh [hTilesetType], a
+	ldh [hTileAnimations], a
 	ldh [hAutoBGTransferEnabled], a
 	ld bc, NUM_MOVES + 1
 	ld hl, wMoves
@@ -429,7 +429,7 @@ StatusScreen2:
 	call Delay3
 	call WaitForTextScrollButtonPress ; wait for button
 	pop af
-	ldh [hTilesetType], a
+	ldh [hTileAnimations], a
 	ld hl, wd72c
 	res 1, [hl]
 	ld a, $77

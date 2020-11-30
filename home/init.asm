@@ -65,7 +65,7 @@ rLCDC_DEFAULT EQU %11100011
 	call WriteDMACodeToHRAM
 
 	xor a
-	ldh [hTilesetType], a
+	ldh [hTileAnimations], a
 	ldh [rSTAT], a
 	ldh [hSCX], a
 	ldh [hSCY], a

@@ -52,11 +52,11 @@ RedrawMapView:
 	ret z
 	ldh a, [hAutoBGTransferEnabled]
 	push af
-	ldh a, [hTilesetType]
+	ldh a, [hTileAnimations]
 	push af
 	xor a
 	ldh [hAutoBGTransferEnabled], a
-	ldh [hTilesetType], a ; no flower/water BG tile animations
+	ldh [hTileAnimations], a
 	call LoadCurrentMapView
 	call RunDefaultPaletteCommand
 	ld hl, wMapViewVRAMPointer
@@ -112,7 +112,7 @@ RedrawMapView:
 	dec c
 	jr nz, .redrawRowLoop
 	pop af
-	ldh [hTilesetType], a
+	ldh [hTileAnimations], a
 	pop af
 	ldh [hAutoBGTransferEnabled], a
 	ret

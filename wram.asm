@@ -2000,7 +2000,7 @@ wMonHLearnset::
 	ds 1
 wMonHeaderEnd::
 
-wSavedTilesetType::
+wSavedTileAnimations::
 ; saved at the start of a battle and then written back at the end of the battle
 	ds 1
 
