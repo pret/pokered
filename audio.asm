@@ -411,7 +411,7 @@ INCLUDE "audio/music/pokecenter.asm"
 SECTION "Music 2", ROMX
 
 INCLUDE "audio/sfx/pokeflute_ch5_ch6.asm"
-INCLUDE "audio/sfx/unreferenced_fanfare.asm"
+INCLUDE "audio/sfx/unused_fanfare.asm"
 INCLUDE "audio/music/gymleaderbattle.asm"
 INCLUDE "audio/music/trainerbattle.asm"
 INCLUDE "audio/music/wildbattle.asm"
