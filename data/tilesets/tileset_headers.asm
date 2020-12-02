@@ -3,7 +3,7 @@ tileset: MACRO
 	dw \1, \2, \3 ; Block, GFX, Coll
 	db \4, \5, \6 ; counter tiles
 	db \7         ; grass tile
-	db \8         ; animations (none, water, water & flowers)
+	db \8         ; animations (TILEANIM_* value)
 ENDM
 
 Tilesets:
