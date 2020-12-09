@@ -82,17 +82,38 @@ for objfile in objects:
     elif magic == b'RGB9':
         obj_ver = 10 + unpack_file("<I", f)[0]
 
-    if obj_ver not in [6, 10, 11, 12, 13, 15]:
+    if obj_ver not in [6, 10, 11, 12, 13, 15, 16]:
         print("Error: File '%s' is of an unknown format." % objfile, file=stderr)
         exit(1)
 
-    num_symbols = unpack_file("<II", f)[0]
+    num_symbols = unpack_file("<I", f)[0]
+    unpack_file("<I", f) # skip num sections
+
+    if obj_ver in [16]:
+        node_filenames = []
+        num_nodes = unpack_file("<I", f)[0]
+        for x in range(num_nodes):
+            unpack_file("<II", f) # parent id, parent line no
+            node_type = unpack_file("<B", f)[0]
+            if node_type:
+                node_filenames.append(read_string(f))
+            else:
+                node_filenames.append("rept")
+                depth = unpack_file("<I", f)[0]
+                for i in range(depth):
+                    unpack_file("<I", f) # rept iterations
+        node_filenames.reverse()
+
     for x in range(num_symbols):
         sym_name = read_string(f)
         sym_type = symtype(unpack_file("<B", f)[0] & 0x7f)
         if sym_type == symtype.IMPORT:
             continue
-        sym_filename = read_string(f)
+        if obj_ver in [16]:
+            sym_fileno = unpack_file("<I", f)[0]
+            sym_filename = node_filenames[sym_fileno]
+        else:
+            sym_filename = read_string(f)
         unpack_file("<III", f)
         if sym_name not in symbols:
             continue
