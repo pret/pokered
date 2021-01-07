@@ -81,7 +81,7 @@ HandlePokedexSideMenu:
 	ld hl, wTopMenuItemY
 	ld a, 10
 	ld [hli], a ; top menu item Y
-	ld a, 15
+	ld a, 15 ; in other localizations, this is 12
 	ld [hli], a ; top menu item X
 	xor a
 	ld [hli], a ; current menu item ID
@@ -105,8 +105,8 @@ HandlePokedexSideMenu:
 	jr z, .choseCry
 	dec a
 	jr z, .choseArea
-.choseQuit
-	ld b, 1
+
+	ld b, 1 ; choseQuit
 .exitSideMenu
 	pop af
 	ld [wDexMaxSeenMon], a
@@ -454,7 +454,7 @@ ShowPokedexDataInternal:
 	hlcoord 9, 2
 	call PlaceString
 
-	ld hl, PokedexEntryPointers
+	ld hl, PokedexEntryPointers ; this block sets de to PokedexEntryPointers[(wd11e-1)*2]
 	ld a, [wd11e]
 	dec a
 	ld e, a
@@ -489,7 +489,7 @@ ShowPokedexDataInternal:
 	pop af
 	ld [wd11e], a
 	ld a, [wcf91]
-	ld [wd0b5], a
+	ld [wd0b5], a ; equivalent to wd0b5 = wcf91
 	pop de
 
 	push af
