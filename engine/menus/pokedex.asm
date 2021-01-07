@@ -489,7 +489,7 @@ ShowPokedexDataInternal:
 	pop af
 	ld [wd11e], a
 	ld a, [wcf91]
-	ld [wd0b5], a ; equivalent to wd0b5 = wcf91
+	ld [wd0b5], a ;
 	pop de
 
 	push af
