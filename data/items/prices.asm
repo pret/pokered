@@ -61,7 +61,7 @@ ItemPrices::
 	money 200   ; FRESH_WATER
 	money 300   ; SODA_POP
 	money 350   ; LEMONADE
-	money 0     ; S_S_TICKET
+	money 10000     ; S_S_TICKET
 	money 0     ; GOLD_TEETH
 	money 500   ; X_ATTACK
 	money 550   ; X_DEFEND
