@@ -1051,15 +1051,15 @@ ItemUseMedicine:
 	call AddNTimes ; calculate coordinates of HP bar of pokemon that used Softboiled
 	ld a, SFX_HEAL_HP
 	call PlaySoundWaitForCurrent
-	ldh a, [hFlagsFFF6]
+	ldh a, [hUILayoutFlags]
 	set 0, a
-	ldh [hFlagsFFF6], a
+	ldh [hUILayoutFlags], a
 	ld a, $02
 	ld [wHPBarType], a
 	predef UpdateHPBar2 ; animate HP bar decrease of pokemon that used Softboiled
-	ldh a, [hFlagsFFF6]
+	ldh a, [hUILayoutFlags]
 	res 0, a
-	ldh [hFlagsFFF6], a
+	ldh [hUILayoutFlags], a
 	pop af
 	ld b, a ; store heal amount (1/5 of max HP)
 	ld hl, wHPBarOldHP + 1
@@ -1201,15 +1201,15 @@ ItemUseMedicine:
 	jr z, .playStatusAilmentCuringSound
 	ld a, SFX_HEAL_HP
 	call PlaySoundWaitForCurrent
-	ldh a, [hFlagsFFF6]
+	ldh a, [hUILayoutFlags]
 	set 0, a
-	ldh [hFlagsFFF6], a
+	ldh [hUILayoutFlags], a
 	ld a, $02
 	ld [wHPBarType], a
 	predef UpdateHPBar2 ; animate the HP bar lengthening
-	ldh a, [hFlagsFFF6]
+	ldh a, [hUILayoutFlags]
 	res 0, a
-	ldh [hFlagsFFF6], a
+	ldh [hUILayoutFlags], a
 	ld a, REVIVE_MSG
 	ld [wPartyMenuTypeOrMessageID], a
 	ld a, [wcf91]

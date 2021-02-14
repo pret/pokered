@@ -62,7 +62,7 @@ PlaceNextChar::
 	cp "<NEXT>"
 	jr nz, .NotNext
 	ld bc, 2 * SCREEN_WIDTH
-	ldh a, [hFlagsFFF6]
+	ldh a, [hUILayoutFlags]
 	bit 2, a
 	jr z, .ok
 	ld bc, SCREEN_WIDTH

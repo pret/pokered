@@ -40,7 +40,7 @@ DrawHP_:
 	push hl
 	call DrawHPBar
 	pop hl
-	ldh a, [hFlagsFFF6]
+	ldh a, [hUILayoutFlags]
 	bit 0, a
 	jr z, .printFractionBelowBar
 	ld bc, $9 ; right of bar
