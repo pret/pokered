@@ -211,12 +211,13 @@ FreezeBurnParalyzeEffect:
 	cp b ; do target type 2 and move type match?
 	ret z  ; return if they match
 	ld a, [wPlayerMoveEffect]
-	cp PARALYZE_SIDE_EFFECT1 + 1 ; 10% status effects are 04, 05, 06 so 07 will set carry for those
-	ld b, $1a ; 0x1A/0x100 or 26/256 = 10.2%~ chance
-	jr c, .next1 ; branch ahead if this is a 10% chance effect..
-	ld b, $4d ; else use 0x4D/0x100 or 77/256 = 30.1%~ chance
-	sub $1e ; subtract $1E to map to equivalent 10% chance effects
-.next1
+	cp PARALYZE_SIDE_EFFECT1 + 1
+	ld b, 10 percent + 1
+	jr c, .regular_effectiveness
+; extra effectiveness
+	ld b, 30 percent + 1
+	sub BURN_SIDE_EFFECT2 - BURN_SIDE_EFFECT1 ; treat extra effective as regular from now on
+.regular_effectiveness
 	push af
 	call BattleRandom ; get random 8bit value for probability test
 	cp b
@@ -264,11 +265,12 @@ FreezeBurnParalyzeEffect:
 	ret z
 	ld a, [wEnemyMoveEffect]
 	cp PARALYZE_SIDE_EFFECT1 + 1
-	ld b, $1a
-	jr c, .next2
-	ld b, $4d
-	sub $1e
-.next2
+	ld b, 10 percent + 1
+	jr c, .regular_effectiveness2
+; extra effectiveness
+	ld b, 30 percent + 1
+	sub BURN_SIDE_EFFECT2 - BURN_SIDE_EFFECT1 ; treat extra effective as regular from now on
+.regular_effectiveness2
 	push af
 	call BattleRandom
 	cp b
