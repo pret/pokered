@@ -50,11 +50,10 @@ ENDM
 ;\4 destination map (-1 = wLastMap)
 warp: MACRO
 	db \2, \1, \3, \4
+_TMP EQUS "\n_WARP_{d:{_NUM_WARPS}}_X = \1\n_WARP_{d:{_NUM_WARPS}}_Y = \2"
+	_TMP
+	PURGE _TMP
 _NUM_WARPS = _NUM_WARPS + 1
-; the Nth warp defines a corresponding Nth warp_to, stored in _WARP_TO_NUM_<N>
-_WARP_TO_NAME EQUS "_WARP_TO_NUM_{d:{_NUM_WARPS}}"
-_WARP_TO_NAME EQUS "warp_to \1, \2, _WARP_TO_WIDTH"
-	PURGE _WARP_TO_NAME
 ENDM
 
 def_signs: MACRO
@@ -76,17 +75,12 @@ ENDM
 
 ;\1 source map
 def_warps_to: MACRO
-; output and purge each _WARP_TO_NUM_<N> warp_to, from N=1 to _NUM_WARPS
-_WARP_TO_WIDTH = \1_WIDTH
-_WARP_TO_N = 1
+N = 0
 	REPT _NUM_WARPS
-_WARP_TO_NAME EQUS "_WARP_TO_NUM_{d:_WARP_TO_N}"
-		_WARP_TO_NAME
-_WARP_TO_N = _WARP_TO_N + 1
-_PURGE_WARP_TO_NUM EQUS "PURGE {_WARP_TO_NAME}"
-		_PURGE_WARP_TO_NUM
-		PURGE _PURGE_WARP_TO_NUM
-		PURGE _WARP_TO_NAME
+_TMP EQUS "warp_to _WARP_{d:N}_X, _WARP_{d:N}_Y, \1_WIDTH"
+		_TMP
+		PURGE _TMP
+N = N + 1
 	ENDR
 ENDM
 
