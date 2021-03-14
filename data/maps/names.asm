@@ -50,5 +50,5 @@ RocketHQName:        db "ROCKET HQ@"
 SilphCoName:         db "SILPH CO.@"
 PokemonMansionName:  db "<PKMN> MANSION@"
 SafariZoneName:      db "SAFARI ZONE@"
-CeruleanCaveName:    db "CERULEAN CAVE@"
+CeruleanCaveName:    db "CERULEAN CAVE@" ; "UNKNOWN DUNGEON" in pokestadium/stadium1
 PowerPlantName:      db "POWER PLANT@"
