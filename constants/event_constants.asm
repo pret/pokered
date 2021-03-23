@@ -1,2562 +1,775 @@
-const_value = 0
+; wEventFlags bit flags
 
-	const EVENT_FOLLOWED_OAK_INTO_LAB                ; 000, (D747, bit 0)
-	const EVENT_001                                  ; 001, (D747, bit 1)
-	const EVENT_002                                  ; 002, (D747, bit 2)
-	const EVENT_HALL_OF_FAME_DEX_RATING              ; 003, (D747, bit 3)
-	const EVENT_004                                  ; 004, (D747, bit 4)
-	const EVENT_005                                  ; 005, (D747, bit 5)
-	const EVENT_PALLET_AFTER_GETTING_POKEBALLS       ; 006, (D747, bit 6)
-	const EVENT_007                                  ; 007, (D747, bit 7)
-	const EVENT_008                                  ; 008, (D748, bit 0)
-	const EVENT_009                                  ; 009, (D748, bit 1)
-	const EVENT_00A                                  ; 00A, (D748, bit 2)
-	const EVENT_00B                                  ; 00B, (D748, bit 3)
-	const EVENT_00C                                  ; 00C, (D748, bit 4)
-	const EVENT_00D                                  ; 00D, (D748, bit 5)
-	const EVENT_00E                                  ; 00E, (D748, bit 6)
-	const EVENT_00F                                  ; 00F, (D748, bit 7)
-	const EVENT_010                                  ; 010, (D749, bit 0)
-	const EVENT_011                                  ; 011, (D749, bit 1)
-	const EVENT_012                                  ; 012, (D749, bit 2)
-	const EVENT_013                                  ; 013, (D749, bit 3)
-	const EVENT_014                                  ; 014, (D749, bit 4)
-	const EVENT_015                                  ; 015, (D749, bit 5)
-	const EVENT_016                                  ; 016, (D749, bit 6)
-	const EVENT_017                                  ; 017, (D749, bit 7)
-	const EVENT_GOT_TOWN_MAP                         ; 018, (D74A, bit 0)
-	const EVENT_ENTERED_BLUES_HOUSE                  ; 019, (D74A, bit 1)
-	const EVENT_DAISY_WALKING                        ; 01A, (D74A, bit 2)
-	const EVENT_01B                                  ; 01B, (D74A, bit 3)
-	const EVENT_01C                                  ; 01C, (D74A, bit 4)
-	const EVENT_01D                                  ; 01D, (D74A, bit 5)
-	const EVENT_01E                                  ; 01E, (D74A, bit 6)
-	const EVENT_01F                                  ; 01F, (D74A, bit 7)
-	const EVENT_FOLLOWED_OAK_INTO_LAB_2              ; 020, (D74B, bit 0)
-	const EVENT_OAK_ASKED_TO_CHOOSE_MON              ; 021, (D74B, bit 1)
-	const EVENT_GOT_STARTER                          ; 022, (D74B, bit 2)
-	const EVENT_BATTLED_RIVAL_IN_OAKS_LAB            ; 023, (D74B, bit 3)
-	const EVENT_GOT_POKEBALLS_FROM_OAK               ; 024, (D74B, bit 4)
-	const EVENT_GOT_POKEDEX                          ; 025, (D74B, bit 5)
-	const EVENT_PALLET_AFTER_GETTING_POKEBALLS_2     ; 026, (D74B, bit 6)
-	const EVENT_OAK_APPEARED_IN_PALLET               ; 027, (D74B, bit 7)
-	const EVENT_VIRIDIAN_GYM_OPEN                    ; 028, (D74C, bit 0)
-	const EVENT_GOT_TM42                             ; 029, (D74C, bit 1)
-	const EVENT_02A                                  ; 02A, (D74C, bit 2)
-	const EVENT_02B                                  ; 02B, (D74C, bit 3)
-	const EVENT_02C                                  ; 02C, (D74C, bit 4)
-	const EVENT_02D                                  ; 02D, (D74C, bit 5)
-	const EVENT_02E                                  ; 02E, (D74C, bit 6)
-	const EVENT_02F                                  ; 02F, (D74C, bit 7)
-	const EVENT_030                                  ; 030, (D74D, bit 0)
-	const EVENT_031                                  ; 031, (D74D, bit 1)
-	const EVENT_032                                  ; 032, (D74D, bit 2)
-	const EVENT_033                                  ; 033, (D74D, bit 3)
-	const EVENT_034                                  ; 034, (D74D, bit 4)
-	const EVENT_035                                  ; 035, (D74D, bit 5)
-	const EVENT_036                                  ; 036, (D74D, bit 6)
-	const EVENT_037                                  ; 037, (D74D, bit 7)
-	const EVENT_OAK_GOT_PARCEL                       ; 038, (D74E, bit 0)
-	const EVENT_GOT_OAKS_PARCEL                      ; 039, (D74E, bit 1)
-	const EVENT_03A                                  ; 03A, (D74E, bit 2)
-	const EVENT_03B                                  ; 03B, (D74E, bit 3)
-	const EVENT_03C                                  ; 03C, (D74E, bit 4)
-	const EVENT_03D                                  ; 03D, (D74E, bit 5)
-	const EVENT_03E                                  ; 03E, (D74E, bit 6)
-	const EVENT_03F                                  ; 03F, (D74E, bit 7)
-	const EVENT_040                                  ; 040, (D74F, bit 0)
-	const EVENT_041                                  ; 041, (D74F, bit 1)
-	const EVENT_042                                  ; 042, (D74F, bit 2)
-	const EVENT_043                                  ; 043, (D74F, bit 3)
-	const EVENT_044                                  ; 044, (D74F, bit 4)
-	const EVENT_045                                  ; 045, (D74F, bit 5)
-	const EVENT_046                                  ; 046, (D74F, bit 6)
-	const EVENT_047                                  ; 047, (D74F, bit 7)
-	const EVENT_048                                  ; 048, (D750, bit 0)
-	const EVENT_049                                  ; 049, (D750, bit 1)
-	const EVENT_04A                                  ; 04A, (D750, bit 2)
-	const EVENT_04B                                  ; 04B, (D750, bit 3)
-	const EVENT_04C                                  ; 04C, (D750, bit 4)
-	const EVENT_04D                                  ; 04D, (D750, bit 5)
-	const EVENT_04E                                  ; 04E, (D750, bit 6)
-	const EVENT_04F                                  ; 04F, (D750, bit 7)
-	const EVENT_GOT_TM27                             ; 050, (D751, bit 0)
-	const EVENT_BEAT_VIRIDIAN_GYM_GIOVANNI           ; 051, (D751, bit 1)
-	const EVENT_BEAT_VIRIDIAN_GYM_TRAINER_0          ; 052, (D751, bit 2)
-	const EVENT_BEAT_VIRIDIAN_GYM_TRAINER_1          ; 053, (D751, bit 3)
-	const EVENT_BEAT_VIRIDIAN_GYM_TRAINER_2          ; 054, (D751, bit 4)
-	const EVENT_BEAT_VIRIDIAN_GYM_TRAINER_3          ; 055, (D751, bit 5)
-	const EVENT_BEAT_VIRIDIAN_GYM_TRAINER_4          ; 056, (D751, bit 6)
-	const EVENT_BEAT_VIRIDIAN_GYM_TRAINER_5          ; 057, (D751, bit 7)
-	const EVENT_BEAT_VIRIDIAN_GYM_TRAINER_6          ; 058, (D752, bit 0)
-	const EVENT_BEAT_VIRIDIAN_GYM_TRAINER_7          ; 059, (D752, bit 1)
-	const EVENT_05A                                  ; 05A, (D752, bit 2)
-	const EVENT_05B                                  ; 05B, (D752, bit 3)
-	const EVENT_05C                                  ; 05C, (D752, bit 4)
-	const EVENT_05D                                  ; 05D, (D752, bit 5)
-	const EVENT_05E                                  ; 05E, (D752, bit 6)
-	const EVENT_05F                                  ; 05F, (D752, bit 7)
-	const EVENT_060                                  ; 060, (D753, bit 0)
-	const EVENT_061                                  ; 061, (D753, bit 1)
-	const EVENT_062                                  ; 062, (D753, bit 2)
-	const EVENT_063                                  ; 063, (D753, bit 3)
-	const EVENT_064                                  ; 064, (D753, bit 4)
-	const EVENT_065                                  ; 065, (D753, bit 5)
-	const EVENT_066                                  ; 066, (D753, bit 6)
-	const EVENT_067                                  ; 067, (D753, bit 7)
-	const EVENT_BOUGHT_MUSEUM_TICKET                 ; 068, (D754, bit 0)
-	const EVENT_GOT_OLD_AMBER                        ; 069, (D754, bit 1)
-	const EVENT_06A                                  ; 06A, (D754, bit 2)
-	const EVENT_06B                                  ; 06B, (D754, bit 3)
-	const EVENT_06C                                  ; 06C, (D754, bit 4)
-	const EVENT_06D                                  ; 06D, (D754, bit 5)
-	const EVENT_06E                                  ; 06E, (D754, bit 6)
-	const EVENT_06F                                  ; 06F, (D754, bit 7)
-	const EVENT_070                                  ; 070, (D755, bit 0)
-	const EVENT_071                                  ; 071, (D755, bit 1)
-	const EVENT_BEAT_PEWTER_GYM_TRAINER_0            ; 072, (D755, bit 2)
-	const EVENT_073                                  ; 073, (D755, bit 3)
-	const EVENT_074                                  ; 074, (D755, bit 4)
-	const EVENT_075                                  ; 075, (D755, bit 5)
-	const EVENT_GOT_TM34                             ; 076, (D755, bit 6)
-	const EVENT_BEAT_BROCK                           ; 077, (D755, bit 7)
-	const EVENT_078                                  ; 078, (D756, bit 0)
-	const EVENT_079                                  ; 079, (D756, bit 1)
-	const EVENT_07A                                  ; 07A, (D756, bit 2)
-	const EVENT_07B                                  ; 07B, (D756, bit 3)
-	const EVENT_07C                                  ; 07C, (D756, bit 4)
-	const EVENT_07D                                  ; 07D, (D756, bit 5)
-	const EVENT_07E                                  ; 07E, (D756, bit 6)
-	const EVENT_07F                                  ; 07F, (D756, bit 7)
-	const EVENT_080                                  ; 080, (D757, bit 0)
-	const EVENT_081                                  ; 081, (D757, bit 1)
-	const EVENT_082                                  ; 082, (D757, bit 2)
-	const EVENT_083                                  ; 083, (D757, bit 3)
-	const EVENT_084                                  ; 084, (D757, bit 4)
-	const EVENT_085                                  ; 085, (D757, bit 5)
-	const EVENT_086                                  ; 086, (D757, bit 6)
-	const EVENT_087                                  ; 087, (D757, bit 7)
-	const EVENT_088                                  ; 088, (D758, bit 0)
-	const EVENT_089                                  ; 089, (D758, bit 1)
-	const EVENT_08A                                  ; 08A, (D758, bit 2)
-	const EVENT_08B                                  ; 08B, (D758, bit 3)
-	const EVENT_08C                                  ; 08C, (D758, bit 4)
-	const EVENT_08D                                  ; 08D, (D758, bit 5)
-	const EVENT_08E                                  ; 08E, (D758, bit 6)
-	const EVENT_08F                                  ; 08F, (D758, bit 7)
-	const EVENT_090                                  ; 090, (D759, bit 0)
-	const EVENT_091                                  ; 091, (D759, bit 1)
-	const EVENT_092                                  ; 092, (D759, bit 2)
-	const EVENT_093                                  ; 093, (D759, bit 3)
-	const EVENT_094                                  ; 094, (D759, bit 4)
-	const EVENT_095                                  ; 095, (D759, bit 5)
-	const EVENT_096                                  ; 096, (D759, bit 6)
-	const EVENT_097                                  ; 097, (D759, bit 7)
-	const EVENT_BEAT_CERULEAN_RIVAL                  ; 098, (D75A, bit 0)
-	const EVENT_099                                  ; 099, (D75A, bit 1)
-	const EVENT_09A                                  ; 09A, (D75A, bit 2)
-	const EVENT_09B                                  ; 09B, (D75A, bit 3)
-	const EVENT_09C                                  ; 09C, (D75A, bit 4)
-	const EVENT_09D                                  ; 09D, (D75A, bit 5)
-	const EVENT_09E                                  ; 09E, (D75A, bit 6)
-	const EVENT_09F                                  ; 09F, (D75A, bit 7)
-	const EVENT_0A0                                  ; 0A0, (D75B, bit 0)
-	const EVENT_0A1                                  ; 0A1, (D75B, bit 1)
-	const EVENT_0A2                                  ; 0A2, (D75B, bit 2)
-	const EVENT_0A3                                  ; 0A3, (D75B, bit 3)
-	const EVENT_0A4                                  ; 0A4, (D75B, bit 4)
-	const EVENT_0A5                                  ; 0A5, (D75B, bit 5)
-	const EVENT_0A6                                  ; 0A6, (D75B, bit 6)
-	const EVENT_BEAT_CERULEAN_ROCKET_THIEF           ; 0A7, (D75B, bit 7)
-	const EVENT_0A8                                  ; 0A8, (D75C, bit 0)
-	const EVENT_0A9                                  ; 0A9, (D75C, bit 1)
-	const EVENT_0AA                                  ; 0AA, (D75C, bit 2)
-	const EVENT_0AB                                  ; 0AB, (D75C, bit 3)
-	const EVENT_0AC                                  ; 0AC, (D75C, bit 4)
-	const EVENT_0AD                                  ; 0AD, (D75C, bit 5)
-	const EVENT_0AE                                  ; 0AE, (D75C, bit 6)
-	const EVENT_0AF                                  ; 0AF, (D75C, bit 7)
-	const EVENT_0B0                                  ; 0B0, (D75D, bit 0)
-	const EVENT_0B1                                  ; 0B1, (D75D, bit 1)
-	const EVENT_0B2                                  ; 0B2, (D75D, bit 2)
-	const EVENT_0B3                                  ; 0B3, (D75D, bit 3)
-	const EVENT_0B4                                  ; 0B4, (D75D, bit 4)
-	const EVENT_0B5                                  ; 0B5, (D75D, bit 5)
-	const EVENT_0B6                                  ; 0B6, (D75D, bit 6)
-	const EVENT_0B7                                  ; 0B7, (D75D, bit 7)
-	const EVENT_0B8                                  ; 0B8, (D75E, bit 0)
-	const EVENT_0B9                                  ; 0B9, (D75E, bit 1)
-	const EVENT_BEAT_CERULEAN_GYM_TRAINER_0          ; 0BA, (D75E, bit 2)
-	const EVENT_BEAT_CERULEAN_GYM_TRAINER_1          ; 0BB, (D75E, bit 3)
-	const EVENT_0BC                                  ; 0BC, (D75E, bit 4)
-	const EVENT_0BD                                  ; 0BD, (D75E, bit 5)
-	const EVENT_GOT_TM11                             ; 0BE, (D75E, bit 6)
-	const EVENT_BEAT_MISTY                           ; 0BF, (D75E, bit 7)
-	const EVENT_GOT_BICYCLE                          ; 0C0, (D75F, bit 0)
-	const EVENT_0C1                                  ; 0C1, (D75F, bit 1)
-	const EVENT_0C2                                  ; 0C2, (D75F, bit 2)
-	const EVENT_0C3                                  ; 0C3, (D75F, bit 3)
-	const EVENT_0C4                                  ; 0C4, (D75F, bit 4)
-	const EVENT_0C5                                  ; 0C5, (D75F, bit 5)
-	const EVENT_0C6                                  ; 0C6, (D75F, bit 6)
-	const EVENT_0C7                                  ; 0C7, (D75F, bit 7)
-	const EVENT_0C8                                  ; 0C8, (D760, bit 0)
-	const EVENT_0C9                                  ; 0C9, (D760, bit 1)
-	const EVENT_0CA                                  ; 0CA, (D760, bit 2)
-	const EVENT_0CB                                  ; 0CB, (D760, bit 3)
-	const EVENT_0CC                                  ; 0CC, (D760, bit 4)
-	const EVENT_0CD                                  ; 0CD, (D760, bit 5)
-	const EVENT_0CE                                  ; 0CE, (D760, bit 6)
-	const EVENT_0CF                                  ; 0CF, (D760, bit 7)
-	const EVENT_0D0                                  ; 0D0, (D761, bit 0)
-	const EVENT_0D1                                  ; 0D1, (D761, bit 1)
-	const EVENT_0D2                                  ; 0D2, (D761, bit 2)
-	const EVENT_0D3                                  ; 0D3, (D761, bit 3)
-	const EVENT_0D4                                  ; 0D4, (D761, bit 4)
-	const EVENT_0D5                                  ; 0D5, (D761, bit 5)
-	const EVENT_0D6                                  ; 0D6, (D761, bit 6)
-	const EVENT_0D7                                  ; 0D7, (D761, bit 7)
-	const EVENT_0D8                                  ; 0D8, (D762, bit 0)
-	const EVENT_0D9                                  ; 0D9, (D762, bit 1)
-	const EVENT_0DA                                  ; 0DA, (D762, bit 2)
-	const EVENT_0DB                                  ; 0DB, (D762, bit 3)
-	const EVENT_0DC                                  ; 0DC, (D762, bit 4)
-	const EVENT_0DD                                  ; 0DD, (D762, bit 5)
-	const EVENT_0DE                                  ; 0DE, (D762, bit 6)
-	const EVENT_0DF                                  ; 0DF, (D762, bit 7)
-	const EVENT_0E0                                  ; 0E0, (D763, bit 0)
-	const EVENT_0E1                                  ; 0E1, (D763, bit 1)
-	const EVENT_0E2                                  ; 0E2, (D763, bit 2)
-	const EVENT_0E3                                  ; 0E3, (D763, bit 3)
-	const EVENT_0E4                                  ; 0E4, (D763, bit 4)
-	const EVENT_0E5                                  ; 0E5, (D763, bit 5)
-	const EVENT_0E6                                  ; 0E6, (D763, bit 6)
-	const EVENT_0E7                                  ; 0E7, (D763, bit 7)
-	const EVENT_0E8                                  ; 0E8, (D764, bit 0)
-	const EVENT_0E9                                  ; 0E9, (D764, bit 1)
-	const EVENT_0EA                                  ; 0EA, (D764, bit 2)
-	const EVENT_0EB                                  ; 0EB, (D764, bit 3)
-	const EVENT_0EC                                  ; 0EC, (D764, bit 4)
-	const EVENT_0ED                                  ; 0ED, (D764, bit 5)
-	const EVENT_POKEMON_TOWER_RIVAL_ON_LEFT          ; 0EE, (D764, bit 6)
-	const EVENT_BEAT_POKEMON_TOWER_RIVAL             ; 0EF, (D764, bit 7)
-	const EVENT_0F0                                  ; 0F0, (D765, bit 0)
-	const EVENT_BEAT_POKEMONTOWER_3_TRAINER_0        ; 0F1, (D765, bit 1)
-	const EVENT_BEAT_POKEMONTOWER_3_TRAINER_1        ; 0F2, (D765, bit 2)
-	const EVENT_BEAT_POKEMONTOWER_3_TRAINER_2        ; 0F3, (D765, bit 3)
-	const EVENT_0F4                                  ; 0F4, (D765, bit 4)
-	const EVENT_0F5                                  ; 0F5, (D765, bit 5)
-	const EVENT_0F6                                  ; 0F6, (D765, bit 6)
-	const EVENT_0F7                                  ; 0F7, (D765, bit 7)
-	const EVENT_0F8                                  ; 0F8, (D766, bit 0)
-	const EVENT_BEAT_POKEMONTOWER_4_TRAINER_0        ; 0F9, (D766, bit 1)
-	const EVENT_BEAT_POKEMONTOWER_4_TRAINER_1        ; 0FA, (D766, bit 2)
-	const EVENT_BEAT_POKEMONTOWER_4_TRAINER_2        ; 0FB, (D766, bit 3)
-	const EVENT_0FC                                  ; 0FC, (D766, bit 4)
-	const EVENT_0FD                                  ; 0FD, (D766, bit 5)
-	const EVENT_0FE                                  ; 0FE, (D766, bit 6)
-	const EVENT_0FF                                  ; 0FF, (D766, bit 7)
-	const EVENT_100                                  ; 100, (D767, bit 0)
-	const EVENT_101                                  ; 101, (D767, bit 1)
-	const EVENT_BEAT_POKEMONTOWER_5_TRAINER_0        ; 102, (D767, bit 2)
-	const EVENT_BEAT_POKEMONTOWER_5_TRAINER_1        ; 103, (D767, bit 3)
-	const EVENT_BEAT_POKEMONTOWER_5_TRAINER_2        ; 104, (D767, bit 4)
-	const EVENT_BEAT_POKEMONTOWER_5_TRAINER_3        ; 105, (D767, bit 5)
-	const EVENT_106                                  ; 106, (D767, bit 6)
-	const EVENT_IN_PURIFIED_ZONE                     ; 107, (D767, bit 7)
-	const EVENT_108                                  ; 108, (D768, bit 0)
-	const EVENT_BEAT_POKEMONTOWER_6_TRAINER_0        ; 109, (D768, bit 1)
-	const EVENT_BEAT_POKEMONTOWER_6_TRAINER_1        ; 10A, (D768, bit 2)
-	const EVENT_BEAT_POKEMONTOWER_6_TRAINER_2        ; 10B, (D768, bit 3)
-	const EVENT_10C                                  ; 10C, (D768, bit 4)
-	const EVENT_10D                                  ; 10D, (D768, bit 5)
-	const EVENT_10E                                  ; 10E, (D768, bit 6)
-	const EVENT_BEAT_GHOST_MAROWAK                   ; 10F, (D768, bit 7)
-	const EVENT_110                                  ; 110, (D769, bit 0)
-	const EVENT_BEAT_POKEMONTOWER_7_TRAINER_0        ; 111, (D769, bit 1)
-	const EVENT_BEAT_POKEMONTOWER_7_TRAINER_1        ; 112, (D769, bit 2)
-	const EVENT_BEAT_POKEMONTOWER_7_TRAINER_2        ; 113, (D769, bit 3)
-	const EVENT_114                                  ; 114, (D769, bit 4)
-	const EVENT_115                                  ; 115, (D769, bit 5)
-	const EVENT_116                                  ; 116, (D769, bit 6)
-	const EVENT_RESCUED_MR_FUJI_2                    ; 117, (D769, bit 7)
-	const EVENT_118                                  ; 118, (D76A, bit 0)
-	const EVENT_119                                  ; 119, (D76A, bit 1)
-	const EVENT_11A                                  ; 11A, (D76A, bit 2)
-	const EVENT_11B                                  ; 11B, (D76A, bit 3)
-	const EVENT_11C                                  ; 11C, (D76A, bit 4)
-	const EVENT_11D                                  ; 11D, (D76A, bit 5)
-	const EVENT_11E                                  ; 11E, (D76A, bit 6)
-	const EVENT_11F                                  ; 11F, (D76A, bit 7)
-	const EVENT_120                                  ; 120, (D76B, bit 0)
-	const EVENT_121                                  ; 121, (D76B, bit 1)
-	const EVENT_122                                  ; 122, (D76B, bit 2)
-	const EVENT_123                                  ; 123, (D76B, bit 3)
-	const EVENT_124                                  ; 124, (D76B, bit 4)
-	const EVENT_125                                  ; 125, (D76B, bit 5)
-	const EVENT_126                                  ; 126, (D76B, bit 6)
-	const EVENT_127                                  ; 127, (D76B, bit 7)
-	const EVENT_GOT_POKE_FLUTE                       ; 128, (D76C, bit 0)
-	const EVENT_129                                  ; 129, (D76C, bit 1)
-	const EVENT_12A                                  ; 12A, (D76C, bit 2)
-	const EVENT_12B                                  ; 12B, (D76C, bit 3)
-	const EVENT_12C                                  ; 12C, (D76C, bit 4)
-	const EVENT_12D                                  ; 12D, (D76C, bit 5)
-	const EVENT_12E                                  ; 12E, (D76C, bit 6)
-	const EVENT_12F                                  ; 12F, (D76C, bit 7)
-	const EVENT_130                                  ; 130, (D76D, bit 0)
-	const EVENT_131                                  ; 131, (D76D, bit 1)
-	const EVENT_132                                  ; 132, (D76D, bit 2)
-	const EVENT_133                                  ; 133, (D76D, bit 3)
-	const EVENT_134                                  ; 134, (D76D, bit 4)
-	const EVENT_135                                  ; 135, (D76D, bit 5)
-	const EVENT_136                                  ; 136, (D76D, bit 6)
-	const EVENT_137                                  ; 137, (D76D, bit 7)
-	const EVENT_138                                  ; 138, (D76E, bit 0)
-	const EVENT_139                                  ; 139, (D76E, bit 1)
-	const EVENT_13A                                  ; 13A, (D76E, bit 2)
-	const EVENT_13B                                  ; 13B, (D76E, bit 3)
-	const EVENT_13C                                  ; 13C, (D76E, bit 4)
-	const EVENT_13D                                  ; 13D, (D76E, bit 5)
-	const EVENT_13E                                  ; 13E, (D76E, bit 6)
-	const EVENT_13F                                  ; 13F, (D76E, bit 7)
-	const EVENT_140                                  ; 140, (D76F, bit 0)
-	const EVENT_141                                  ; 141, (D76F, bit 1)
-	const EVENT_142                                  ; 142, (D76F, bit 2)
-	const EVENT_143                                  ; 143, (D76F, bit 3)
-	const EVENT_144                                  ; 144, (D76F, bit 4)
-	const EVENT_145                                  ; 145, (D76F, bit 5)
-	const EVENT_146                                  ; 146, (D76F, bit 6)
-	const EVENT_147                                  ; 147, (D76F, bit 7)
-	const EVENT_148                                  ; 148, (D770, bit 0)
-	const EVENT_149                                  ; 149, (D770, bit 1)
-	const EVENT_14A                                  ; 14A, (D770, bit 2)
-	const EVENT_14B                                  ; 14B, (D770, bit 3)
-	const EVENT_14C                                  ; 14C, (D770, bit 4)
-	const EVENT_14D                                  ; 14D, (D770, bit 5)
-	const EVENT_14E                                  ; 14E, (D770, bit 6)
-	const EVENT_14F                                  ; 14F, (D770, bit 7)
-	const EVENT_150                                  ; 150, (D771, bit 0)
-	const EVENT_GOT_BIKE_VOUCHER                     ; 151, (D771, bit 1)
-	const EVENT_152                                  ; 152, (D771, bit 2)
-	const EVENT_153                                  ; 153, (D771, bit 3)
-	const EVENT_154                                  ; 154, (D771, bit 4)
-	const EVENT_155                                  ; 155, (D771, bit 5)
-	const EVENT_SEEL_FAN_BOAST                       ; 156, (D771, bit 6)
-	const EVENT_PIKACHU_FAN_BOAST                    ; 157, (D771, bit 7)
-	const EVENT_158                                  ; 158, (D772, bit 0)
-	const EVENT_159                                  ; 159, (D772, bit 1)
-	const EVENT_15A                                  ; 15A, (D772, bit 2)
-	const EVENT_15B                                  ; 15B, (D772, bit 3)
-	const EVENT_15C                                  ; 15C, (D772, bit 4)
-	const EVENT_15D                                  ; 15D, (D772, bit 5)
-	const EVENT_15E                                  ; 15E, (D772, bit 6)
-	const EVENT_15F                                  ; 15F, (D772, bit 7)
-	const EVENT_2ND_LOCK_OPENED                      ; 160, (D773, bit 0)
-	const EVENT_1ST_LOCK_OPENED                      ; 161, (D773, bit 1)
-	const EVENT_BEAT_VERMILION_GYM_TRAINER_0         ; 162, (D773, bit 2)
-	const EVENT_BEAT_VERMILION_GYM_TRAINER_1         ; 163, (D773, bit 3)
-	const EVENT_BEAT_VERMILION_GYM_TRAINER_2         ; 164, (D773, bit 4)
-	const EVENT_165                                  ; 165, (D773, bit 5)
-	const EVENT_GOT_TM24                             ; 166, (D773, bit 6)
-	const EVENT_BEAT_LT_SURGE                        ; 167, (D773, bit 7)
-	const EVENT_168                                  ; 168, (D774, bit 0)
-	const EVENT_169                                  ; 169, (D774, bit 1)
-	const EVENT_16A                                  ; 16A, (D774, bit 2)
-	const EVENT_16B                                  ; 16B, (D774, bit 3)
-	const EVENT_16C                                  ; 16C, (D774, bit 4)
-	const EVENT_16D                                  ; 16D, (D774, bit 5)
-	const EVENT_16E                                  ; 16E, (D774, bit 6)
-	const EVENT_16F                                  ; 16F, (D774, bit 7)
-	const EVENT_170                                  ; 170, (D775, bit 0)
-	const EVENT_171                                  ; 171, (D775, bit 1)
-	const EVENT_172                                  ; 172, (D775, bit 2)
-	const EVENT_173                                  ; 173, (D775, bit 3)
-	const EVENT_174                                  ; 174, (D775, bit 4)
-	const EVENT_175                                  ; 175, (D775, bit 5)
-	const EVENT_176                                  ; 176, (D775, bit 6)
-	const EVENT_177                                  ; 177, (D775, bit 7)
-	const EVENT_178                                  ; 178, (D776, bit 0)
-	const EVENT_179                                  ; 179, (D776, bit 1)
-	const EVENT_17A                                  ; 17A, (D776, bit 2)
-	const EVENT_17B                                  ; 17B, (D776, bit 3)
-	const EVENT_17C                                  ; 17C, (D776, bit 4)
-	const EVENT_17D                                  ; 17D, (D776, bit 5)
-	const EVENT_17E                                  ; 17E, (D776, bit 6)
-	const EVENT_17F                                  ; 17F, (D776, bit 7)
-	const EVENT_GOT_TM41                             ; 180, (D777, bit 0)
-	const EVENT_181                                  ; 181, (D777, bit 1)
-	const EVENT_182                                  ; 182, (D777, bit 2)
-	const EVENT_183                                  ; 183, (D777, bit 3)
-	const EVENT_184                                  ; 184, (D777, bit 4)
-	const EVENT_185                                  ; 185, (D777, bit 5)
-	const EVENT_186                                  ; 186, (D777, bit 6)
-	const EVENT_187                                  ; 187, (D777, bit 7)
-	const EVENT_188                                  ; 188, (D778, bit 0)
-	const EVENT_189                                  ; 189, (D778, bit 1)
-	const EVENT_18A                                  ; 18A, (D778, bit 2)
-	const EVENT_18B                                  ; 18B, (D778, bit 3)
-	const EVENT_GOT_TM13                             ; 18C, (D778, bit 4)
-	const EVENT_GOT_TM48                             ; 18D, (D778, bit 5)
-	const EVENT_GOT_TM49                             ; 18E, (D778, bit 6)
-	const EVENT_GOT_TM18                             ; 18F, (D778, bit 7)
-	const EVENT_190                                  ; 190, (D779, bit 0)
-	const EVENT_191                                  ; 191, (D779, bit 1)
-	const EVENT_192                                  ; 192, (D779, bit 2)
-	const EVENT_193                                  ; 193, (D779, bit 3)
-	const EVENT_194                                  ; 194, (D779, bit 4)
-	const EVENT_195                                  ; 195, (D779, bit 5)
-	const EVENT_196                                  ; 196, (D779, bit 6)
-	const EVENT_197                                  ; 197, (D779, bit 7)
-	const EVENT_198                                  ; 198, (D77A, bit 0)
-	const EVENT_199                                  ; 199, (D77A, bit 1)
-	const EVENT_19A                                  ; 19A, (D77A, bit 2)
-	const EVENT_19B                                  ; 19B, (D77A, bit 3)
-	const EVENT_19C                                  ; 19C, (D77A, bit 4)
-	const EVENT_19D                                  ; 19D, (D77A, bit 5)
-	const EVENT_19E                                  ; 19E, (D77A, bit 6)
-	const EVENT_19F                                  ; 19F, (D77A, bit 7)
-	const EVENT_1A0                                  ; 1A0, (D77B, bit 0)
-	const EVENT_1A1                                  ; 1A1, (D77B, bit 1)
-	const EVENT_1A2                                  ; 1A2, (D77B, bit 2)
-	const EVENT_1A3                                  ; 1A3, (D77B, bit 3)
-	const EVENT_1A4                                  ; 1A4, (D77B, bit 4)
-	const EVENT_1A5                                  ; 1A5, (D77B, bit 5)
-	const EVENT_1A6                                  ; 1A6, (D77B, bit 6)
-	const EVENT_1A7                                  ; 1A7, (D77B, bit 7)
-	const EVENT_GOT_TM21                             ; 1A8, (D77C, bit 0)
-	const EVENT_BEAT_ERIKA                           ; 1A9, (D77C, bit 1)
-	const EVENT_BEAT_CELADON_GYM_TRAINER_0           ; 1AA, (D77C, bit 2)
-	const EVENT_BEAT_CELADON_GYM_TRAINER_1           ; 1AB, (D77C, bit 3)
-	const EVENT_BEAT_CELADON_GYM_TRAINER_2           ; 1AC, (D77C, bit 4)
-	const EVENT_BEAT_CELADON_GYM_TRAINER_3           ; 1AD, (D77C, bit 5)
-	const EVENT_BEAT_CELADON_GYM_TRAINER_4           ; 1AE, (D77C, bit 6)
-	const EVENT_BEAT_CELADON_GYM_TRAINER_5           ; 1AF, (D77C, bit 7)
-	const EVENT_BEAT_CELADON_GYM_TRAINER_6           ; 1B0, (D77D, bit 0)
-	const EVENT_1B1                                  ; 1B1, (D77D, bit 1)
-	const EVENT_1B2                                  ; 1B2, (D77D, bit 2)
-	const EVENT_1B3                                  ; 1B3, (D77D, bit 3)
-	const EVENT_1B4                                  ; 1B4, (D77D, bit 4)
-	const EVENT_1B5                                  ; 1B5, (D77D, bit 5)
-	const EVENT_1B6                                  ; 1B6, (D77D, bit 6)
-	const EVENT_1B7                                  ; 1B7, (D77D, bit 7)
-	const EVENT_1B8                                  ; 1B8, (D77E, bit 0)
-	const EVENT_FOUND_ROCKET_HIDEOUT                 ; 1B9, (D77E, bit 1)
-	const EVENT_GOT_10_COINS                         ; 1BA, (D77E, bit 2)
-	const EVENT_GOT_20_COINS                         ; 1BB, (D77E, bit 3)
-	const EVENT_GOT_20_COINS_2                       ; 1BC, (D77E, bit 4)
-	const EVENT_1BD                                  ; 1BD, (D77E, bit 5)
-	const EVENT_1BE                                  ; 1BE, (D77E, bit 6)
-	const EVENT_1BF                                  ; 1BF, (D77E, bit 7)
-	const EVENT_1C0                                  ; 1C0, (D77F, bit 0)
-	const EVENT_1C1                                  ; 1C1, (D77F, bit 1)
-	const EVENT_1C2                                  ; 1C2, (D77F, bit 2)
-	const EVENT_1C3                                  ; 1C3, (D77F, bit 3)
-	const EVENT_1C4                                  ; 1C4, (D77F, bit 4)
-	const EVENT_1C5                                  ; 1C5, (D77F, bit 5)
-	const EVENT_1C6                                  ; 1C6, (D77F, bit 6)
-	const EVENT_1C7                                  ; 1C7, (D77F, bit 7)
-	const EVENT_1C8                                  ; 1C8, (D780, bit 0)
-	const EVENT_1C9                                  ; 1C9, (D780, bit 1)
-	const EVENT_1CA                                  ; 1CA, (D780, bit 2)
-	const EVENT_1CB                                  ; 1CB, (D780, bit 3)
-	const EVENT_1CC                                  ; 1CC, (D780, bit 4)
-	const EVENT_1CD                                  ; 1CD, (D780, bit 5)
-	const EVENT_1CE                                  ; 1CE, (D780, bit 6)
-	const EVENT_1CF                                  ; 1CF, (D780, bit 7)
-	const EVENT_1D0                                  ; 1D0, (D781, bit 0)
-	const EVENT_1D1                                  ; 1D1, (D781, bit 1)
-	const EVENT_1D2                                  ; 1D2, (D781, bit 2)
-	const EVENT_1D3                                  ; 1D3, (D781, bit 3)
-	const EVENT_1D4                                  ; 1D4, (D781, bit 4)
-	const EVENT_1D5                                  ; 1D5, (D781, bit 5)
-	const EVENT_1D6                                  ; 1D6, (D781, bit 6)
-	const EVENT_1D7                                  ; 1D7, (D781, bit 7)
-	const EVENT_1D8                                  ; 1D8, (D782, bit 0)
-	const EVENT_1D9                                  ; 1D9, (D782, bit 1)
-	const EVENT_1DA                                  ; 1DA, (D782, bit 2)
-	const EVENT_1DB                                  ; 1DB, (D782, bit 3)
-	const EVENT_1DC                                  ; 1DC, (D782, bit 4)
-	const EVENT_1DD                                  ; 1DD, (D782, bit 5)
-	const EVENT_1DE                                  ; 1DE, (D782, bit 6)
-	const EVENT_1DF                                  ; 1DF, (D782, bit 7)
-	const EVENT_GOT_COIN_CASE                        ; 1E0, (D783, bit 0)
-	const EVENT_1E1                                  ; 1E1, (D783, bit 1)
-	const EVENT_1E2                                  ; 1E2, (D783, bit 2)
-	const EVENT_1E3                                  ; 1E3, (D783, bit 3)
-	const EVENT_1E4                                  ; 1E4, (D783, bit 4)
-	const EVENT_1E5                                  ; 1E5, (D783, bit 5)
-	const EVENT_1E6                                  ; 1E6, (D783, bit 6)
-	const EVENT_1E7                                  ; 1E7, (D783, bit 7)
-	const EVENT_1E8                                  ; 1E8, (D784, bit 0)
-	const EVENT_1E9                                  ; 1E9, (D784, bit 1)
-	const EVENT_1EA                                  ; 1EA, (D784, bit 2)
-	const EVENT_1EB                                  ; 1EB, (D784, bit 3)
-	const EVENT_1EC                                  ; 1EC, (D784, bit 4)
-	const EVENT_1ED                                  ; 1ED, (D784, bit 5)
-	const EVENT_1EE                                  ; 1EE, (D784, bit 6)
-	const EVENT_1EF                                  ; 1EF, (D784, bit 7)
-	const EVENT_1F0                                  ; 1F0, (D785, bit 0)
-	const EVENT_1F1                                  ; 1F1, (D785, bit 1)
-	const EVENT_1F2                                  ; 1F2, (D785, bit 2)
-	const EVENT_1F3                                  ; 1F3, (D785, bit 3)
-	const EVENT_1F4                                  ; 1F4, (D785, bit 4)
-	const EVENT_1F5                                  ; 1F5, (D785, bit 5)
-	const EVENT_1F6                                  ; 1F6, (D785, bit 6)
-	const EVENT_1F7                                  ; 1F7, (D785, bit 7)
-	const EVENT_1F8                                  ; 1F8, (D786, bit 0)
-	const EVENT_1F9                                  ; 1F9, (D786, bit 1)
-	const EVENT_1FA                                  ; 1FA, (D786, bit 2)
-	const EVENT_1FB                                  ; 1FB, (D786, bit 3)
-	const EVENT_1FC                                  ; 1FC, (D786, bit 4)
-	const EVENT_1FD                                  ; 1FD, (D786, bit 5)
-	const EVENT_1FE                                  ; 1FE, (D786, bit 6)
-	const EVENT_1FF                                  ; 1FF, (D786, bit 7)
-	const EVENT_200                                  ; 200, (D787, bit 0)
-	const EVENT_201                                  ; 201, (D787, bit 1)
-	const EVENT_202                                  ; 202, (D787, bit 2)
-	const EVENT_203                                  ; 203, (D787, bit 3)
-	const EVENT_204                                  ; 204, (D787, bit 4)
-	const EVENT_205                                  ; 205, (D787, bit 5)
-	const EVENT_206                                  ; 206, (D787, bit 6)
-	const EVENT_207                                  ; 207, (D787, bit 7)
-	const EVENT_208                                  ; 208, (D788, bit 0)
-	const EVENT_209                                  ; 209, (D788, bit 1)
-	const EVENT_20A                                  ; 20A, (D788, bit 2)
-	const EVENT_20B                                  ; 20B, (D788, bit 3)
-	const EVENT_20C                                  ; 20C, (D788, bit 4)
-	const EVENT_20D                                  ; 20D, (D788, bit 5)
-	const EVENT_20E                                  ; 20E, (D788, bit 6)
-	const EVENT_20F                                  ; 20F, (D788, bit 7)
-	const EVENT_210                                  ; 210, (D789, bit 0)
-	const EVENT_211                                  ; 211, (D789, bit 1)
-	const EVENT_212                                  ; 212, (D789, bit 2)
-	const EVENT_213                                  ; 213, (D789, bit 3)
-	const EVENT_214                                  ; 214, (D789, bit 4)
-	const EVENT_215                                  ; 215, (D789, bit 5)
-	const EVENT_216                                  ; 216, (D789, bit 6)
-	const EVENT_217                                  ; 217, (D789, bit 7)
-	const EVENT_218                                  ; 218, (D78A, bit 0)
-	const EVENT_219                                  ; 219, (D78A, bit 1)
-	const EVENT_21A                                  ; 21A, (D78A, bit 2)
-	const EVENT_21B                                  ; 21B, (D78A, bit 3)
-	const EVENT_21C                                  ; 21C, (D78A, bit 4)
-	const EVENT_21D                                  ; 21D, (D78A, bit 5)
-	const EVENT_21E                                  ; 21E, (D78A, bit 6)
-	const EVENT_21F                                  ; 21F, (D78A, bit 7)
-	const EVENT_220                                  ; 220, (D78B, bit 0)
-	const EVENT_221                                  ; 221, (D78B, bit 1)
-	const EVENT_222                                  ; 222, (D78B, bit 2)
-	const EVENT_223                                  ; 223, (D78B, bit 3)
-	const EVENT_224                                  ; 224, (D78B, bit 4)
-	const EVENT_225                                  ; 225, (D78B, bit 5)
-	const EVENT_226                                  ; 226, (D78B, bit 6)
-	const EVENT_227                                  ; 227, (D78B, bit 7)
-	const EVENT_228                                  ; 228, (D78C, bit 0)
-	const EVENT_229                                  ; 229, (D78C, bit 1)
-	const EVENT_22A                                  ; 22A, (D78C, bit 2)
-	const EVENT_22B                                  ; 22B, (D78C, bit 3)
-	const EVENT_22C                                  ; 22C, (D78C, bit 4)
-	const EVENT_22D                                  ; 22D, (D78C, bit 5)
-	const EVENT_22E                                  ; 22E, (D78C, bit 6)
-	const EVENT_22F                                  ; 22F, (D78C, bit 7)
-	const EVENT_230                                  ; 230, (D78D, bit 0)
-	const EVENT_231                                  ; 231, (D78D, bit 1)
-	const EVENT_232                                  ; 232, (D78D, bit 2)
-	const EVENT_233                                  ; 233, (D78D, bit 3)
-	const EVENT_234                                  ; 234, (D78D, bit 4)
-	const EVENT_235                                  ; 235, (D78D, bit 5)
-	const EVENT_236                                  ; 236, (D78D, bit 6)
-	const EVENT_237                                  ; 237, (D78D, bit 7)
-	const EVENT_GOT_HM04                             ; 238, (D78E, bit 0)
-	const EVENT_GAVE_GOLD_TEETH                      ; 239, (D78E, bit 1)
-	const EVENT_23A                                  ; 23A, (D78E, bit 2)
-	const EVENT_23B                                  ; 23B, (D78E, bit 3)
-	const EVENT_23C                                  ; 23C, (D78E, bit 4)
-	const EVENT_23D                                  ; 23D, (D78E, bit 5)
-	const EVENT_23E                                  ; 23E, (D78E, bit 6)
-	const EVENT_23F                                  ; 23F, (D78E, bit 7)
-	const EVENT_240                                  ; 240, (D78F, bit 0)
-	const EVENT_241                                  ; 241, (D78F, bit 1)
-	const EVENT_242                                  ; 242, (D78F, bit 2)
-	const EVENT_243                                  ; 243, (D78F, bit 3)
-	const EVENT_244                                  ; 244, (D78F, bit 4)
-	const EVENT_245                                  ; 245, (D78F, bit 5)
-	const EVENT_246                                  ; 246, (D78F, bit 6)
-	const EVENT_247                                  ; 247, (D78F, bit 7)
-	const EVENT_248                                  ; 248, (D790, bit 0)
-	const EVENT_249                                  ; 249, (D790, bit 1)
-	const EVENT_24A                                  ; 24A, (D790, bit 2)
-	const EVENT_24B                                  ; 24B, (D790, bit 3)
-	const EVENT_24C                                  ; 24C, (D790, bit 4)
-	const EVENT_24D                                  ; 24D, (D790, bit 5)
-	const EVENT_SAFARI_GAME_OVER                     ; 24E, (D790, bit 6)
-	const EVENT_IN_SAFARI_ZONE                       ; 24F, (D790, bit 7)
-	const EVENT_250                                  ; 250, (D791, bit 0)
-	const EVENT_251                                  ; 251, (D791, bit 1)
-	const EVENT_252                                  ; 252, (D791, bit 2)
-	const EVENT_253                                  ; 253, (D791, bit 3)
-	const EVENT_254                                  ; 254, (D791, bit 4)
-	const EVENT_255                                  ; 255, (D791, bit 5)
-	const EVENT_256                                  ; 256, (D791, bit 6)
-	const EVENT_257                                  ; 257, (D791, bit 7)
-	const EVENT_GOT_TM06                             ; 258, (D792, bit 0)
-	const EVENT_BEAT_KOGA                            ; 259, (D792, bit 1)
-	const EVENT_BEAT_FUCHSIA_GYM_TRAINER_0           ; 25A, (D792, bit 2)
-	const EVENT_BEAT_FUCHSIA_GYM_TRAINER_1           ; 25B, (D792, bit 3)
-	const EVENT_BEAT_FUCHSIA_GYM_TRAINER_2           ; 25C, (D792, bit 4)
-	const EVENT_BEAT_FUCHSIA_GYM_TRAINER_3           ; 25D, (D792, bit 5)
-	const EVENT_BEAT_FUCHSIA_GYM_TRAINER_4           ; 25E, (D792, bit 6)
-	const EVENT_BEAT_FUCHSIA_GYM_TRAINER_5           ; 25F, (D792, bit 7)
-	const EVENT_260                                  ; 260, (D793, bit 0)
-	const EVENT_261                                  ; 261, (D793, bit 1)
-	const EVENT_262                                  ; 262, (D793, bit 2)
-	const EVENT_263                                  ; 263, (D793, bit 3)
-	const EVENT_264                                  ; 264, (D793, bit 4)
-	const EVENT_265                                  ; 265, (D793, bit 5)
-	const EVENT_266                                  ; 266, (D793, bit 6)
-	const EVENT_267                                  ; 267, (D793, bit 7)
-	const EVENT_268                                  ; 268, (D794, bit 0)
-	const EVENT_269                                  ; 269, (D794, bit 1)
-	const EVENT_26A                                  ; 26A, (D794, bit 2)
-	const EVENT_26B                                  ; 26B, (D794, bit 3)
-	const EVENT_26C                                  ; 26C, (D794, bit 4)
-	const EVENT_26D                                  ; 26D, (D794, bit 5)
-	const EVENT_26E                                  ; 26E, (D794, bit 6)
-	const EVENT_26F                                  ; 26F, (D794, bit 7)
-	const EVENT_270                                  ; 270, (D795, bit 0)
-	const EVENT_271                                  ; 271, (D795, bit 1)
-	const EVENT_272                                  ; 272, (D795, bit 2)
-	const EVENT_273                                  ; 273, (D795, bit 3)
-	const EVENT_274                                  ; 274, (D795, bit 4)
-	const EVENT_275                                  ; 275, (D795, bit 5)
-	const EVENT_276                                  ; 276, (D795, bit 6)
-	const EVENT_277                                  ; 277, (D795, bit 7)
-	const EVENT_MANSION_SWITCH_ON                    ; 278, (D796, bit 0)
-	const EVENT_279                                  ; 279, (D796, bit 1)
-	const EVENT_27A                                  ; 27A, (D796, bit 2)
-	const EVENT_27B                                  ; 27B, (D796, bit 3)
-	const EVENT_27C                                  ; 27C, (D796, bit 4)
-	const EVENT_27D                                  ; 27D, (D796, bit 5)
-	const EVENT_27E                                  ; 27E, (D796, bit 6)
-	const EVENT_27F                                  ; 27F, (D796, bit 7)
-	const EVENT_280                                  ; 280, (D797, bit 0)
-	const EVENT_281                                  ; 281, (D797, bit 1)
-	const EVENT_282                                  ; 282, (D797, bit 2)
-	const EVENT_283                                  ; 283, (D797, bit 3)
-	const EVENT_284                                  ; 284, (D797, bit 4)
-	const EVENT_285                                  ; 285, (D797, bit 5)
-	const EVENT_286                                  ; 286, (D797, bit 6)
-	const EVENT_287                                  ; 287, (D797, bit 7)
-	const EVENT_288                                  ; 288, (D798, bit 0)
-	const EVENT_BEAT_MANSION_1_TRAINER_0             ; 289, (D798, bit 1)
-	const EVENT_28A                                  ; 28A, (D798, bit 2)
-	const EVENT_28B                                  ; 28B, (D798, bit 3)
-	const EVENT_28C                                  ; 28C, (D798, bit 4)
-	const EVENT_28D                                  ; 28D, (D798, bit 5)
-	const EVENT_28E                                  ; 28E, (D798, bit 6)
-	const EVENT_28F                                  ; 28F, (D798, bit 7)
-	const EVENT_290                                  ; 290, (D799, bit 0)
-	const EVENT_291                                  ; 291, (D799, bit 1)
-	const EVENT_292                                  ; 292, (D799, bit 2)
-	const EVENT_293                                  ; 293, (D799, bit 3)
-	const EVENT_294                                  ; 294, (D799, bit 4)
-	const EVENT_295                                  ; 295, (D799, bit 5)
-	const EVENT_296                                  ; 296, (D799, bit 6)
-	const EVENT_297                                  ; 297, (D799, bit 7)
-	const EVENT_GOT_TM38                             ; 298, (D79A, bit 0)
-	const EVENT_BEAT_BLAINE                          ; 299, (D79A, bit 1)
-	const EVENT_BEAT_CINNABAR_GYM_TRAINER_0          ; 29A, (D79A, bit 2)
-	const EVENT_BEAT_CINNABAR_GYM_TRAINER_1          ; 29B, (D79A, bit 3)
-	const EVENT_BEAT_CINNABAR_GYM_TRAINER_2          ; 29C, (D79A, bit 4)
-	const EVENT_BEAT_CINNABAR_GYM_TRAINER_3          ; 29D, (D79A, bit 5)
-	const EVENT_BEAT_CINNABAR_GYM_TRAINER_4          ; 29E, (D79A, bit 6)
-	const EVENT_BEAT_CINNABAR_GYM_TRAINER_5          ; 29F, (D79A, bit 7)
-	const EVENT_BEAT_CINNABAR_GYM_TRAINER_6          ; 2A0, (D79B, bit 0)
-	const EVENT_2A1                                  ; 2A1, (D79B, bit 1)
-	const EVENT_2A2                                  ; 2A2, (D79B, bit 2)
-	const EVENT_2A3                                  ; 2A3, (D79B, bit 3)
-	const EVENT_2A4                                  ; 2A4, (D79B, bit 4)
-	const EVENT_2A5                                  ; 2A5, (D79B, bit 5)
-	const EVENT_2A6                                  ; 2A6, (D79B, bit 6)
-	const EVENT_2A7                                  ; 2A7, (D79B, bit 7)
-	const EVENT_CINNABAR_GYM_GATE0_UNLOCKED          ; 2A8, (D79C, bit 0) doesn't exist, but the bit is set
-	const EVENT_CINNABAR_GYM_GATE1_UNLOCKED          ; 2A9, (D79C, bit 1)
-	const EVENT_CINNABAR_GYM_GATE2_UNLOCKED          ; 2AA, (D79C, bit 2)
-	const EVENT_CINNABAR_GYM_GATE3_UNLOCKED          ; 2AB, (D79C, bit 3)
-	const EVENT_CINNABAR_GYM_GATE4_UNLOCKED          ; 2AC, (D79C, bit 4)
-	const EVENT_CINNABAR_GYM_GATE5_UNLOCKED          ; 2AD, (D79C, bit 5)
-	const EVENT_CINNABAR_GYM_GATE6_UNLOCKED          ; 2AE, (D79C, bit 6)
-	const EVENT_2AF                                  ; 2AF, (D79C, bit 7)
-	const EVENT_2B0                                  ; 2B0, (D79D, bit 0)
-	const EVENT_2B1                                  ; 2B1, (D79D, bit 1)
-	const EVENT_2B2                                  ; 2B2, (D79D, bit 2)
-	const EVENT_2B3                                  ; 2B3, (D79D, bit 3)
-	const EVENT_2B4                                  ; 2B4, (D79D, bit 4)
-	const EVENT_2B5                                  ; 2B5, (D79D, bit 5)
-	const EVENT_2B6                                  ; 2B6, (D79D, bit 6)
-	const EVENT_2B7                                  ; 2B7, (D79D, bit 7)
-	const EVENT_2B8                                  ; 2B8, (D79E, bit 0)
-	const EVENT_2B9                                  ; 2B9, (D79E, bit 1)
-	const EVENT_2BA                                  ; 2BA, (D79E, bit 2)
-	const EVENT_2BB                                  ; 2BB, (D79E, bit 3)
-	const EVENT_2BC                                  ; 2BC, (D79E, bit 4)
-	const EVENT_2BD                                  ; 2BD, (D79E, bit 5)
-	const EVENT_2BE                                  ; 2BE, (D79E, bit 6)
-	const EVENT_2BF                                  ; 2BF, (D79E, bit 7)
-	const EVENT_2C0                                  ; 2C0, (D79F, bit 0)
-	const EVENT_2C1                                  ; 2C1, (D79F, bit 1)
-	const EVENT_2C2                                  ; 2C2, (D79F, bit 2)
-	const EVENT_2C3                                  ; 2C3, (D79F, bit 3)
-	const EVENT_2C4                                  ; 2C4, (D79F, bit 4)
-	const EVENT_2C5                                  ; 2C5, (D79F, bit 5)
-	const EVENT_2C6                                  ; 2C6, (D79F, bit 6)
-	const EVENT_2C7                                  ; 2C7, (D79F, bit 7)
-	const EVENT_2C8                                  ; 2C8, (D7A0, bit 0)
-	const EVENT_2C9                                  ; 2C9, (D7A0, bit 1)
-	const EVENT_2CA                                  ; 2CA, (D7A0, bit 2)
-	const EVENT_2CB                                  ; 2CB, (D7A0, bit 3)
-	const EVENT_2CC                                  ; 2CC, (D7A0, bit 4)
-	const EVENT_2CD                                  ; 2CD, (D7A0, bit 5)
-	const EVENT_2CE                                  ; 2CE, (D7A0, bit 6)
-	const EVENT_2CF                                  ; 2CF, (D7A0, bit 7)
-	const EVENT_2D0                                  ; 2D0, (D7A1, bit 0)
-	const EVENT_2D1                                  ; 2D1, (D7A1, bit 1)
-	const EVENT_2D2                                  ; 2D2, (D7A1, bit 2)
-	const EVENT_2D3                                  ; 2D3, (D7A1, bit 3)
-	const EVENT_2D4                                  ; 2D4, (D7A1, bit 4)
-	const EVENT_2D5                                  ; 2D5, (D7A1, bit 5)
-	const EVENT_2D6                                  ; 2D6, (D7A1, bit 6)
-	const EVENT_GOT_TM35                             ; 2D7, (D7A1, bit 7)
-	const EVENT_2D8                                  ; 2D8, (D7A2, bit 0)
-	const EVENT_2D9                                  ; 2D9, (D7A2, bit 1)
-	const EVENT_2DA                                  ; 2DA, (D7A2, bit 2)
-	const EVENT_2DB                                  ; 2DB, (D7A2, bit 3)
-	const EVENT_2DC                                  ; 2DC, (D7A2, bit 4)
-	const EVENT_2DD                                  ; 2DD, (D7A2, bit 5)
-	const EVENT_2DE                                  ; 2DE, (D7A2, bit 6)
-	const EVENT_2DF                                  ; 2DF, (D7A2, bit 7)
-	const EVENT_GAVE_FOSSIL_TO_LAB                   ; 2E0, (D7A3, bit 0)
-	const EVENT_LAB_STILL_REVIVING_FOSSIL            ; 2E1, (D7A3, bit 1)
-	const EVENT_LAB_HANDING_OVER_FOSSIL_MON          ; 2E2, (D7A3, bit 2)
-	const EVENT_2E3                                  ; 2E3, (D7A3, bit 3)
-	const EVENT_2E4                                  ; 2E4, (D7A3, bit 4)
-	const EVENT_2E5                                  ; 2E5, (D7A3, bit 5)
-	const EVENT_2E6                                  ; 2E6, (D7A3, bit 6)
-	const EVENT_2E7                                  ; 2E7, (D7A3, bit 7)
-	const EVENT_2E8                                  ; 2E8, (D7A4, bit 0)
-	const EVENT_2E9                                  ; 2E9, (D7A4, bit 1)
-	const EVENT_2EA                                  ; 2EA, (D7A4, bit 2)
-	const EVENT_2EB                                  ; 2EB, (D7A4, bit 3)
-	const EVENT_2EC                                  ; 2EC, (D7A4, bit 4)
-	const EVENT_2ED                                  ; 2ED, (D7A4, bit 5)
-	const EVENT_2EE                                  ; 2EE, (D7A4, bit 6)
-	const EVENT_2EF                                  ; 2EF, (D7A4, bit 7)
-	const EVENT_2F0                                  ; 2F0, (D7A5, bit 0)
-	const EVENT_2F1                                  ; 2F1, (D7A5, bit 1)
-	const EVENT_2F2                                  ; 2F2, (D7A5, bit 2)
-	const EVENT_2F3                                  ; 2F3, (D7A5, bit 3)
-	const EVENT_2F4                                  ; 2F4, (D7A5, bit 4)
-	const EVENT_2F5                                  ; 2F5, (D7A5, bit 5)
-	const EVENT_2F6                                  ; 2F6, (D7A5, bit 6)
-	const EVENT_2F7                                  ; 2F7, (D7A5, bit 7)
-	const EVENT_2F8                                  ; 2F8, (D7A6, bit 0)
-	const EVENT_2F9                                  ; 2F9, (D7A6, bit 1)
-	const EVENT_2FA                                  ; 2FA, (D7A6, bit 2)
-	const EVENT_2FB                                  ; 2FB, (D7A6, bit 3)
-	const EVENT_2FC                                  ; 2FC, (D7A6, bit 4)
-	const EVENT_2FD                                  ; 2FD, (D7A6, bit 5)
-	const EVENT_2FE                                  ; 2FE, (D7A6, bit 6)
-	const EVENT_2FF                                  ; 2FF, (D7A6, bit 7)
-	const EVENT_300                                  ; 300, (D7A7, bit 0)
-	const EVENT_301                                  ; 301, (D7A7, bit 1)
-	const EVENT_302                                  ; 302, (D7A7, bit 2)
-	const EVENT_303                                  ; 303, (D7A7, bit 3)
-	const EVENT_304                                  ; 304, (D7A7, bit 4)
-	const EVENT_305                                  ; 305, (D7A7, bit 5)
-	const EVENT_306                                  ; 306, (D7A7, bit 6)
-	const EVENT_307                                  ; 307, (D7A7, bit 7)
-	const EVENT_308                                  ; 308, (D7A8, bit 0)
-	const EVENT_309                                  ; 309, (D7A8, bit 1)
-	const EVENT_30A                                  ; 30A, (D7A8, bit 2)
-	const EVENT_30B                                  ; 30B, (D7A8, bit 3)
-	const EVENT_30C                                  ; 30C, (D7A8, bit 4)
-	const EVENT_30D                                  ; 30D, (D7A8, bit 5)
-	const EVENT_30E                                  ; 30E, (D7A8, bit 6)
-	const EVENT_30F                                  ; 30F, (D7A8, bit 7)
-	const EVENT_310                                  ; 310, (D7A9, bit 0)
-	const EVENT_311                                  ; 311, (D7A9, bit 1)
-	const EVENT_312                                  ; 312, (D7A9, bit 2)
-	const EVENT_313                                  ; 313, (D7A9, bit 3)
-	const EVENT_314                                  ; 314, (D7A9, bit 4)
-	const EVENT_315                                  ; 315, (D7A9, bit 5)
-	const EVENT_316                                  ; 316, (D7A9, bit 6)
-	const EVENT_317                                  ; 317, (D7A9, bit 7)
-	const EVENT_318                                  ; 318, (D7AA, bit 0)
-	const EVENT_319                                  ; 319, (D7AA, bit 1)
-	const EVENT_31A                                  ; 31A, (D7AA, bit 2)
-	const EVENT_31B                                  ; 31B, (D7AA, bit 3)
-	const EVENT_31C                                  ; 31C, (D7AA, bit 4)
-	const EVENT_31D                                  ; 31D, (D7AA, bit 5)
-	const EVENT_31E                                  ; 31E, (D7AA, bit 6)
-	const EVENT_31F                                  ; 31F, (D7AA, bit 7)
-	const EVENT_320                                  ; 320, (D7AB, bit 0)
-	const EVENT_321                                  ; 321, (D7AB, bit 1)
-	const EVENT_322                                  ; 322, (D7AB, bit 2)
-	const EVENT_323                                  ; 323, (D7AB, bit 3)
-	const EVENT_324                                  ; 324, (D7AB, bit 4)
-	const EVENT_325                                  ; 325, (D7AB, bit 5)
-	const EVENT_326                                  ; 326, (D7AB, bit 6)
-	const EVENT_327                                  ; 327, (D7AB, bit 7)
-	const EVENT_328                                  ; 328, (D7AC, bit 0)
-	const EVENT_329                                  ; 329, (D7AC, bit 1)
-	const EVENT_32A                                  ; 32A, (D7AC, bit 2)
-	const EVENT_32B                                  ; 32B, (D7AC, bit 3)
-	const EVENT_32C                                  ; 32C, (D7AC, bit 4)
-	const EVENT_32D                                  ; 32D, (D7AC, bit 5)
-	const EVENT_32E                                  ; 32E, (D7AC, bit 6)
-	const EVENT_32F                                  ; 32F, (D7AC, bit 7)
-	const EVENT_330                                  ; 330, (D7AD, bit 0)
-	const EVENT_331                                  ; 331, (D7AD, bit 1)
-	const EVENT_332                                  ; 332, (D7AD, bit 2)
-	const EVENT_333                                  ; 333, (D7AD, bit 3)
-	const EVENT_334                                  ; 334, (D7AD, bit 4)
-	const EVENT_335                                  ; 335, (D7AD, bit 5)
-	const EVENT_336                                  ; 336, (D7AD, bit 6)
-	const EVENT_337                                  ; 337, (D7AD, bit 7)
-	const EVENT_338                                  ; 338, (D7AE, bit 0)
-	const EVENT_339                                  ; 339, (D7AE, bit 1)
-	const EVENT_33A                                  ; 33A, (D7AE, bit 2)
-	const EVENT_33B                                  ; 33B, (D7AE, bit 3)
-	const EVENT_33C                                  ; 33C, (D7AE, bit 4)
-	const EVENT_33D                                  ; 33D, (D7AE, bit 5)
-	const EVENT_33E                                  ; 33E, (D7AE, bit 6)
-	const EVENT_33F                                  ; 33F, (D7AE, bit 7)
-	const EVENT_GOT_TM31                             ; 340, (D7AF, bit 0)
-	const EVENT_341                                  ; 341, (D7AF, bit 1)
-	const EVENT_342                                  ; 342, (D7AF, bit 2)
-	const EVENT_343                                  ; 343, (D7AF, bit 3)
-	const EVENT_344                                  ; 344, (D7AF, bit 4)
-	const EVENT_345                                  ; 345, (D7AF, bit 5)
-	const EVENT_346                                  ; 346, (D7AF, bit 6)
-	const EVENT_347                                  ; 347, (D7AF, bit 7)
-	const EVENT_348                                  ; 348, (D7B0, bit 0)
-	const EVENT_349                                  ; 349, (D7B0, bit 1)
-	const EVENT_34A                                  ; 34A, (D7B0, bit 2)
-	const EVENT_34B                                  ; 34B, (D7B0, bit 3)
-	const EVENT_34C                                  ; 34C, (D7B0, bit 4)
-	const EVENT_34D                                  ; 34D, (D7B0, bit 5)
-	const EVENT_34E                                  ; 34E, (D7B0, bit 6)
-	const EVENT_34F                                  ; 34F, (D7B0, bit 7)
-	const EVENT_DEFEATED_FIGHTING_DOJO               ; 350, (D7B1, bit 0)
-	const EVENT_BEAT_KARATE_MASTER                   ; 351, (D7B1, bit 1)
-	const EVENT_BEAT_FIGHTING_DOJO_TRAINER_0         ; 352, (D7B1, bit 2)
-	const EVENT_BEAT_FIGHTING_DOJO_TRAINER_1         ; 353, (D7B1, bit 3)
-	const EVENT_BEAT_FIGHTING_DOJO_TRAINER_2         ; 354, (D7B1, bit 4)
-	const EVENT_BEAT_FIGHTING_DOJO_TRAINER_3         ; 355, (D7B1, bit 5)
-	const EVENT_GOT_HITMONLEE                        ; 356, (D7B1, bit 6)
-	const EVENT_GOT_HITMONCHAN                       ; 357, (D7B1, bit 7)
-	const EVENT_358                                  ; 358, (D7B2, bit 0)
-	const EVENT_359                                  ; 359, (D7B2, bit 1)
-	const EVENT_35A                                  ; 35A, (D7B2, bit 2)
-	const EVENT_35B                                  ; 35B, (D7B2, bit 3)
-	const EVENT_35C                                  ; 35C, (D7B2, bit 4)
-	const EVENT_35D                                  ; 35D, (D7B2, bit 5)
-	const EVENT_35E                                  ; 35E, (D7B2, bit 6)
-	const EVENT_35F                                  ; 35F, (D7B2, bit 7)
-	const EVENT_GOT_TM46                             ; 360, (D7B3, bit 0)
-	const EVENT_BEAT_SABRINA                         ; 361, (D7B3, bit 1)
-	const EVENT_BEAT_SAFFRON_GYM_TRAINER_0           ; 362, (D7B3, bit 2)
-	const EVENT_BEAT_SAFFRON_GYM_TRAINER_1           ; 363, (D7B3, bit 3)
-	const EVENT_BEAT_SAFFRON_GYM_TRAINER_2           ; 364, (D7B3, bit 4)
-	const EVENT_BEAT_SAFFRON_GYM_TRAINER_3           ; 365, (D7B3, bit 5)
-	const EVENT_BEAT_SAFFRON_GYM_TRAINER_4           ; 366, (D7B3, bit 6)
-	const EVENT_BEAT_SAFFRON_GYM_TRAINER_5           ; 367, (D7B3, bit 7)
-	const EVENT_BEAT_SAFFRON_GYM_TRAINER_6           ; 368, (D7B4, bit 0)
-	const EVENT_369                                  ; 369, (D7B4, bit 1)
-	const EVENT_36A                                  ; 36A, (D7B4, bit 2)
-	const EVENT_36B                                  ; 36B, (D7B4, bit 3)
-	const EVENT_36C                                  ; 36C, (D7B4, bit 4)
-	const EVENT_36D                                  ; 36D, (D7B4, bit 5)
-	const EVENT_36E                                  ; 36E, (D7B4, bit 6)
-	const EVENT_36F                                  ; 36F, (D7B4, bit 7)
-	const EVENT_370                                  ; 370, (D7B5, bit 0)
-	const EVENT_371                                  ; 371, (D7B5, bit 1)
-	const EVENT_372                                  ; 372, (D7B5, bit 2)
-	const EVENT_373                                  ; 373, (D7B5, bit 3)
-	const EVENT_374                                  ; 374, (D7B5, bit 4)
-	const EVENT_375                                  ; 375, (D7B5, bit 5)
-	const EVENT_376                                  ; 376, (D7B5, bit 6)
-	const EVENT_377                                  ; 377, (D7B5, bit 7)
-	const EVENT_378                                  ; 378, (D7B6, bit 0)
-	const EVENT_379                                  ; 379, (D7B6, bit 1)
-	const EVENT_37A                                  ; 37A, (D7B6, bit 2)
-	const EVENT_37B                                  ; 37B, (D7B6, bit 3)
-	const EVENT_37C                                  ; 37C, (D7B6, bit 4)
-	const EVENT_37D                                  ; 37D, (D7B6, bit 5)
-	const EVENT_37E                                  ; 37E, (D7B6, bit 6)
-	const EVENT_37F                                  ; 37F, (D7B6, bit 7)
-	const EVENT_380                                  ; 380, (D7B7, bit 0)
-	const EVENT_381                                  ; 381, (D7B7, bit 1)
-	const EVENT_382                                  ; 382, (D7B7, bit 2)
-	const EVENT_383                                  ; 383, (D7B7, bit 3)
-	const EVENT_384                                  ; 384, (D7B7, bit 4)
-	const EVENT_385                                  ; 385, (D7B7, bit 5)
-	const EVENT_386                                  ; 386, (D7B7, bit 6)
-	const EVENT_387                                  ; 387, (D7B7, bit 7)
-	const EVENT_388                                  ; 388, (D7B8, bit 0)
-	const EVENT_389                                  ; 389, (D7B8, bit 1)
-	const EVENT_38A                                  ; 38A, (D7B8, bit 2)
-	const EVENT_38B                                  ; 38B, (D7B8, bit 3)
-	const EVENT_38C                                  ; 38C, (D7B8, bit 4)
-	const EVENT_38D                                  ; 38D, (D7B8, bit 5)
-	const EVENT_38E                                  ; 38E, (D7B8, bit 6)
-	const EVENT_38F                                  ; 38F, (D7B8, bit 7)
-	const EVENT_390                                  ; 390, (D7B9, bit 0)
-	const EVENT_391                                  ; 391, (D7B9, bit 1)
-	const EVENT_392                                  ; 392, (D7B9, bit 2)
-	const EVENT_393                                  ; 393, (D7B9, bit 3)
-	const EVENT_394                                  ; 394, (D7B9, bit 4)
-	const EVENT_395                                  ; 395, (D7B9, bit 5)
-	const EVENT_396                                  ; 396, (D7B9, bit 6)
-	const EVENT_SILPH_CO_RECEPTIONIST_AT_DESK        ; 397, (D7B9, bit 7)
-	const EVENT_398                                  ; 398, (D7BA, bit 0)
-	const EVENT_399                                  ; 399, (D7BA, bit 1)
-	const EVENT_39A                                  ; 39A, (D7BA, bit 2)
-	const EVENT_39B                                  ; 39B, (D7BA, bit 3)
-	const EVENT_39C                                  ; 39C, (D7BA, bit 4)
-	const EVENT_39D                                  ; 39D, (D7BA, bit 5)
-	const EVENT_39E                                  ; 39E, (D7BA, bit 6)
-	const EVENT_39F                                  ; 39F, (D7BA, bit 7)
-	const EVENT_3A0                                  ; 3A0, (D7BB, bit 0)
-	const EVENT_3A1                                  ; 3A1, (D7BB, bit 1)
-	const EVENT_3A2                                  ; 3A2, (D7BB, bit 2)
-	const EVENT_3A3                                  ; 3A3, (D7BB, bit 3)
-	const EVENT_3A4                                  ; 3A4, (D7BB, bit 4)
-	const EVENT_3A5                                  ; 3A5, (D7BB, bit 5)
-	const EVENT_3A6                                  ; 3A6, (D7BB, bit 6)
-	const EVENT_3A7                                  ; 3A7, (D7BB, bit 7)
-	const EVENT_3A8                                  ; 3A8, (D7BC, bit 0)
-	const EVENT_3A9                                  ; 3A9, (D7BC, bit 1)
-	const EVENT_3AA                                  ; 3AA, (D7BC, bit 2)
-	const EVENT_3AB                                  ; 3AB, (D7BC, bit 3)
-	const EVENT_3AC                                  ; 3AC, (D7BC, bit 4)
-	const EVENT_3AD                                  ; 3AD, (D7BC, bit 5)
-	const EVENT_3AE                                  ; 3AE, (D7BC, bit 6)
-	const EVENT_3AF                                  ; 3AF, (D7BC, bit 7)
-	const EVENT_GOT_TM29                             ; 3B0, (D7BD, bit 0)
-	const EVENT_3B1                                  ; 3B1, (D7BD, bit 1)
-	const EVENT_3B2                                  ; 3B2, (D7BD, bit 2)
-	const EVENT_3B3                                  ; 3B3, (D7BD, bit 3)
-	const EVENT_3B4                                  ; 3B4, (D7BD, bit 4)
-	const EVENT_3B5                                  ; 3B5, (D7BD, bit 5)
-	const EVENT_3B6                                  ; 3B6, (D7BD, bit 6)
-	const EVENT_3B7                                  ; 3B7, (D7BD, bit 7)
-	const EVENT_3B8                                  ; 3B8, (D7BE, bit 0)
-	const EVENT_3B9                                  ; 3B9, (D7BE, bit 1)
-	const EVENT_3BA                                  ; 3BA, (D7BE, bit 2)
-	const EVENT_3BB                                  ; 3BB, (D7BE, bit 3)
-	const EVENT_3BC                                  ; 3BC, (D7BE, bit 4)
-	const EVENT_3BD                                  ; 3BD, (D7BE, bit 5)
-	const EVENT_3BE                                  ; 3BE, (D7BE, bit 6)
-	const EVENT_3BF                                  ; 3BF, (D7BE, bit 7)
-	const EVENT_GOT_POTION_SAMPLE                    ; 3C0, (D7BF, bit 0)
-	const EVENT_3C1                                  ; 3C1, (D7BF, bit 1)
-	const EVENT_3C2                                  ; 3C2, (D7BF, bit 2)
-	const EVENT_3C3                                  ; 3C3, (D7BF, bit 3)
-	const EVENT_3C4                                  ; 3C4, (D7BF, bit 4)
-	const EVENT_3C5                                  ; 3C5, (D7BF, bit 5)
-	const EVENT_3C6                                  ; 3C6, (D7BF, bit 6)
-	const EVENT_3C7                                  ; 3C7, (D7BF, bit 7)
-	const EVENT_3C8                                  ; 3C8, (D7C0, bit 0)
-	const EVENT_3C9                                  ; 3C9, (D7C0, bit 1)
-	const EVENT_3CA                                  ; 3CA, (D7C0, bit 2)
-	const EVENT_3CB                                  ; 3CB, (D7C0, bit 3)
-	const EVENT_3CC                                  ; 3CC, (D7C0, bit 4)
-	const EVENT_3CD                                  ; 3CD, (D7C0, bit 5)
-	const EVENT_3CE                                  ; 3CE, (D7C0, bit 6)
-	const EVENT_3CF                                  ; 3CF, (D7C0, bit 7)
-	const EVENT_3D0                                  ; 3D0, (D7C1, bit 0)
-	const EVENT_3D1                                  ; 3D1, (D7C1, bit 1)
-	const EVENT_3D2                                  ; 3D2, (D7C1, bit 2)
-	const EVENT_3D3                                  ; 3D3, (D7C1, bit 3)
-	const EVENT_3D4                                  ; 3D4, (D7C1, bit 4)
-	const EVENT_3D5                                  ; 3D5, (D7C1, bit 5)
-	const EVENT_3D6                                  ; 3D6, (D7C1, bit 6)
-	const EVENT_3D7                                  ; 3D7, (D7C1, bit 7)
-	const EVENT_GOT_HM05                             ; 3D8, (D7C2, bit 0)
-	const EVENT_3D9                                  ; 3D9, (D7C2, bit 1)
-	const EVENT_3DA                                  ; 3DA, (D7C2, bit 2)
-	const EVENT_3DB                                  ; 3DB, (D7C2, bit 3)
-	const EVENT_3DC                                  ; 3DC, (D7C2, bit 4)
-	const EVENT_3DD                                  ; 3DD, (D7C2, bit 5)
-	const EVENT_3DE                                  ; 3DE, (D7C2, bit 6)
-	const EVENT_3DF                                  ; 3DF, (D7C2, bit 7)
-	const EVENT_3E0                                  ; 3E0, (D7C3, bit 0)
-	const EVENT_3E1                                  ; 3E1, (D7C3, bit 1)
-	const EVENT_BEAT_ROUTE_3_TRAINER_0               ; 3E2, (D7C3, bit 2)
-	const EVENT_BEAT_ROUTE_3_TRAINER_1               ; 3E3, (D7C3, bit 3)
-	const EVENT_BEAT_ROUTE_3_TRAINER_2               ; 3E4, (D7C3, bit 4)
-	const EVENT_BEAT_ROUTE_3_TRAINER_3               ; 3E5, (D7C3, bit 5)
-	const EVENT_BEAT_ROUTE_3_TRAINER_4               ; 3E6, (D7C3, bit 6)
-	const EVENT_BEAT_ROUTE_3_TRAINER_5               ; 3E7, (D7C3, bit 7)
-	const EVENT_BEAT_ROUTE_3_TRAINER_6               ; 3E8, (D7C4, bit 0)
-	const EVENT_BEAT_ROUTE_3_TRAINER_7               ; 3E9, (D7C4, bit 1)
-	const EVENT_3EA                                  ; 3EA, (D7C4, bit 2)
-	const EVENT_3EB                                  ; 3EB, (D7C4, bit 3)
-	const EVENT_3EC                                  ; 3EC, (D7C4, bit 4)
-	const EVENT_3ED                                  ; 3ED, (D7C4, bit 5)
-	const EVENT_3EE                                  ; 3EE, (D7C4, bit 6)
-	const EVENT_3EF                                  ; 3EF, (D7C4, bit 7)
-	const EVENT_3F0                                  ; 3F0, (D7C5, bit 0)
-	const EVENT_3F1                                  ; 3F1, (D7C5, bit 1)
-	const EVENT_BEAT_ROUTE_4_TRAINER_0               ; 3F2, (D7C5, bit 2)
-	const EVENT_3F3                                  ; 3F3, (D7C5, bit 3)
-	const EVENT_3F4                                  ; 3F4, (D7C5, bit 4)
-	const EVENT_3F5                                  ; 3F5, (D7C5, bit 5)
-	const EVENT_3F6                                  ; 3F6, (D7C5, bit 6)
-	const EVENT_3F7                                  ; 3F7, (D7C5, bit 7)
-	const EVENT_3F8                                  ; 3F8, (D7C6, bit 0)
-	const EVENT_3F9                                  ; 3F9, (D7C6, bit 1)
-	const EVENT_3FA                                  ; 3FA, (D7C6, bit 2)
-	const EVENT_3FB                                  ; 3FB, (D7C6, bit 3)
-	const EVENT_3FC                                  ; 3FC, (D7C6, bit 4)
-	const EVENT_3FD                                  ; 3FD, (D7C6, bit 5)
-	const EVENT_3FE                                  ; 3FE, (D7C6, bit 6)
-	const EVENT_BOUGHT_MAGIKARP                      ; 3FF, (D7C6, bit 7)
-	const EVENT_400                                  ; 400, (D7C7, bit 0)
-	const EVENT_401                                  ; 401, (D7C7, bit 1)
-	const EVENT_402                                  ; 402, (D7C7, bit 2)
-	const EVENT_403                                  ; 403, (D7C7, bit 3)
-	const EVENT_404                                  ; 404, (D7C7, bit 4)
-	const EVENT_405                                  ; 405, (D7C7, bit 5)
-	const EVENT_406                                  ; 406, (D7C7, bit 6)
-	const EVENT_407                                  ; 407, (D7C7, bit 7)
-	const EVENT_408                                  ; 408, (D7C8, bit 0)
-	const EVENT_409                                  ; 409, (D7C8, bit 1)
-	const EVENT_40A                                  ; 40A, (D7C8, bit 2)
-	const EVENT_40B                                  ; 40B, (D7C8, bit 3)
-	const EVENT_40C                                  ; 40C, (D7C8, bit 4)
-	const EVENT_40D                                  ; 40D, (D7C8, bit 5)
-	const EVENT_40E                                  ; 40E, (D7C8, bit 6)
-	const EVENT_40F                                  ; 40F, (D7C8, bit 7)
-	const EVENT_410                                  ; 410, (D7C9, bit 0)
-	const EVENT_BEAT_ROUTE_6_TRAINER_0               ; 411, (D7C9, bit 1)
-	const EVENT_BEAT_ROUTE_6_TRAINER_1               ; 412, (D7C9, bit 2)
-	const EVENT_BEAT_ROUTE_6_TRAINER_2               ; 413, (D7C9, bit 3)
-	const EVENT_BEAT_ROUTE_6_TRAINER_3               ; 414, (D7C9, bit 4)
-	const EVENT_BEAT_ROUTE_6_TRAINER_4               ; 415, (D7C9, bit 5)
-	const EVENT_BEAT_ROUTE_6_TRAINER_5               ; 416, (D7C9, bit 6)
-	const EVENT_417                                  ; 417, (D7C9, bit 7)
-	const EVENT_418                                  ; 418, (D7CA, bit 0)
-	const EVENT_419                                  ; 419, (D7CA, bit 1)
-	const EVENT_41A                                  ; 41A, (D7CA, bit 2)
-	const EVENT_41B                                  ; 41B, (D7CA, bit 3)
-	const EVENT_41C                                  ; 41C, (D7CA, bit 4)
-	const EVENT_41D                                  ; 41D, (D7CA, bit 5)
-	const EVENT_41E                                  ; 41E, (D7CA, bit 6)
-	const EVENT_41F                                  ; 41F, (D7CA, bit 7)
-	const EVENT_420                                  ; 420, (D7CB, bit 0)
-	const EVENT_421                                  ; 421, (D7CB, bit 1)
-	const EVENT_422                                  ; 422, (D7CB, bit 2)
-	const EVENT_423                                  ; 423, (D7CB, bit 3)
-	const EVENT_424                                  ; 424, (D7CB, bit 4)
-	const EVENT_425                                  ; 425, (D7CB, bit 5)
-	const EVENT_426                                  ; 426, (D7CB, bit 6)
-	const EVENT_427                                  ; 427, (D7CB, bit 7)
-	const EVENT_428                                  ; 428, (D7CC, bit 0)
-	const EVENT_429                                  ; 429, (D7CC, bit 1)
-	const EVENT_42A                                  ; 42A, (D7CC, bit 2)
-	const EVENT_42B                                  ; 42B, (D7CC, bit 3)
-	const EVENT_42C                                  ; 42C, (D7CC, bit 4)
-	const EVENT_42D                                  ; 42D, (D7CC, bit 5)
-	const EVENT_42E                                  ; 42E, (D7CC, bit 6)
-	const EVENT_42F                                  ; 42F, (D7CC, bit 7)
-	const EVENT_430                                  ; 430, (D7CD, bit 0)
-	const EVENT_BEAT_ROUTE_8_TRAINER_0               ; 431, (D7CD, bit 1)
-	const EVENT_BEAT_ROUTE_8_TRAINER_1               ; 432, (D7CD, bit 2)
-	const EVENT_BEAT_ROUTE_8_TRAINER_2               ; 433, (D7CD, bit 3)
-	const EVENT_BEAT_ROUTE_8_TRAINER_3               ; 434, (D7CD, bit 4)
-	const EVENT_BEAT_ROUTE_8_TRAINER_4               ; 435, (D7CD, bit 5)
-	const EVENT_BEAT_ROUTE_8_TRAINER_5               ; 436, (D7CD, bit 6)
-	const EVENT_BEAT_ROUTE_8_TRAINER_6               ; 437, (D7CD, bit 7)
-	const EVENT_BEAT_ROUTE_8_TRAINER_7               ; 438, (D7CE, bit 0)
-	const EVENT_BEAT_ROUTE_8_TRAINER_8               ; 439, (D7CE, bit 1)
-	const EVENT_43A                                  ; 43A, (D7CE, bit 2)
-	const EVENT_43B                                  ; 43B, (D7CE, bit 3)
-	const EVENT_43C                                  ; 43C, (D7CE, bit 4)
-	const EVENT_43D                                  ; 43D, (D7CE, bit 5)
-	const EVENT_43E                                  ; 43E, (D7CE, bit 6)
-	const EVENT_43F                                  ; 43F, (D7CE, bit 7)
-	const EVENT_440                                  ; 440, (D7CF, bit 0)
-	const EVENT_BEAT_ROUTE_9_TRAINER_0               ; 441, (D7CF, bit 1)
-	const EVENT_BEAT_ROUTE_9_TRAINER_1               ; 442, (D7CF, bit 2)
-	const EVENT_BEAT_ROUTE_9_TRAINER_2               ; 443, (D7CF, bit 3)
-	const EVENT_BEAT_ROUTE_9_TRAINER_3               ; 444, (D7CF, bit 4)
-	const EVENT_BEAT_ROUTE_9_TRAINER_4               ; 445, (D7CF, bit 5)
-	const EVENT_BEAT_ROUTE_9_TRAINER_5               ; 446, (D7CF, bit 6)
-	const EVENT_BEAT_ROUTE_9_TRAINER_6               ; 447, (D7CF, bit 7)
-	const EVENT_BEAT_ROUTE_9_TRAINER_7               ; 448, (D7D0, bit 0)
-	const EVENT_BEAT_ROUTE_9_TRAINER_8               ; 449, (D7D0, bit 1)
-	const EVENT_44A                                  ; 44A, (D7D0, bit 2)
-	const EVENT_44B                                  ; 44B, (D7D0, bit 3)
-	const EVENT_44C                                  ; 44C, (D7D0, bit 4)
-	const EVENT_44D                                  ; 44D, (D7D0, bit 5)
-	const EVENT_44E                                  ; 44E, (D7D0, bit 6)
-	const EVENT_44F                                  ; 44F, (D7D0, bit 7)
-	const EVENT_450                                  ; 450, (D7D1, bit 0)
-	const EVENT_BEAT_ROUTE_10_TRAINER_0              ; 451, (D7D1, bit 1)
-	const EVENT_BEAT_ROUTE_10_TRAINER_1              ; 452, (D7D1, bit 2)
-	const EVENT_BEAT_ROUTE_10_TRAINER_2              ; 453, (D7D1, bit 3)
-	const EVENT_BEAT_ROUTE_10_TRAINER_3              ; 454, (D7D1, bit 4)
-	const EVENT_BEAT_ROUTE_10_TRAINER_4              ; 455, (D7D1, bit 5)
-	const EVENT_BEAT_ROUTE_10_TRAINER_5              ; 456, (D7D1, bit 6)
-	const EVENT_457                                  ; 457, (D7D1, bit 7)
-	const EVENT_458                                  ; 458, (D7D2, bit 0)
-	const EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_0         ; 459, (D7D2, bit 1)
-	const EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_1         ; 45A, (D7D2, bit 2)
-	const EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_2         ; 45B, (D7D2, bit 3)
-	const EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_3         ; 45C, (D7D2, bit 4)
-	const EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_4         ; 45D, (D7D2, bit 5)
-	const EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_5         ; 45E, (D7D2, bit 6)
-	const EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_6         ; 45F, (D7D2, bit 7)
-	const EVENT_460                                  ; 460, (D7D3, bit 0)
-	const EVENT_BEAT_POWER_PLANT_VOLTORB_0           ; 461, (D7D3, bit 1)
-	const EVENT_BEAT_POWER_PLANT_VOLTORB_1           ; 462, (D7D3, bit 2)
-	const EVENT_BEAT_POWER_PLANT_VOLTORB_2           ; 463, (D7D3, bit 3)
-	const EVENT_BEAT_POWER_PLANT_VOLTORB_3           ; 464, (D7D3, bit 4)
-	const EVENT_BEAT_POWER_PLANT_VOLTORB_4           ; 465, (D7D3, bit 5)
-	const EVENT_BEAT_POWER_PLANT_VOLTORB_5           ; 466, (D7D3, bit 6)
-	const EVENT_BEAT_POWER_PLANT_VOLTORB_6           ; 467, (D7D3, bit 7)
-	const EVENT_BEAT_POWER_PLANT_VOLTORB_7           ; 468, (D7D4, bit 0)
-	const EVENT_BEAT_ZAPDOS                          ; 469, (D7D4, bit 1)
-	const EVENT_46A                                  ; 46A, (D7D4, bit 2)
-	const EVENT_46B                                  ; 46B, (D7D4, bit 3)
-	const EVENT_46C                                  ; 46C, (D7D4, bit 4)
-	const EVENT_46D                                  ; 46D, (D7D4, bit 5)
-	const EVENT_46E                                  ; 46E, (D7D4, bit 6)
-	const EVENT_46F                                  ; 46F, (D7D4, bit 7)
-	const EVENT_470                                  ; 470, (D7D5, bit 0)
-	const EVENT_BEAT_ROUTE_11_TRAINER_0              ; 471, (D7D5, bit 1)
-	const EVENT_BEAT_ROUTE_11_TRAINER_1              ; 472, (D7D5, bit 2)
-	const EVENT_BEAT_ROUTE_11_TRAINER_2              ; 473, (D7D5, bit 3)
-	const EVENT_BEAT_ROUTE_11_TRAINER_3              ; 474, (D7D5, bit 4)
-	const EVENT_BEAT_ROUTE_11_TRAINER_4              ; 475, (D7D5, bit 5)
-	const EVENT_BEAT_ROUTE_11_TRAINER_5              ; 476, (D7D5, bit 6)
-	const EVENT_BEAT_ROUTE_11_TRAINER_6              ; 477, (D7D5, bit 7)
-	const EVENT_BEAT_ROUTE_11_TRAINER_7              ; 478, (D7D6, bit 0)
-	const EVENT_BEAT_ROUTE_11_TRAINER_8              ; 479, (D7D6, bit 1)
-	const EVENT_BEAT_ROUTE_11_TRAINER_9              ; 47A, (D7D6, bit 2)
-	const EVENT_47B                                  ; 47B, (D7D6, bit 3)
-	const EVENT_47C                                  ; 47C, (D7D6, bit 4)
-	const EVENT_47D                                  ; 47D, (D7D6, bit 5)
-	const EVENT_47E                                  ; 47E, (D7D6, bit 6)
-	const EVENT_GOT_ITEMFINDER                       ; 47F, (D7D6, bit 7)
-	const EVENT_GOT_TM39                             ; 480, (D7D7, bit 0)
-	const EVENT_481                                  ; 481, (D7D7, bit 1)
-	const EVENT_BEAT_ROUTE_12_TRAINER_0              ; 482, (D7D7, bit 2)
-	const EVENT_BEAT_ROUTE_12_TRAINER_1              ; 483, (D7D7, bit 3)
-	const EVENT_BEAT_ROUTE_12_TRAINER_2              ; 484, (D7D7, bit 4)
-	const EVENT_BEAT_ROUTE_12_TRAINER_3              ; 485, (D7D7, bit 5)
-	const EVENT_BEAT_ROUTE_12_TRAINER_4              ; 486, (D7D7, bit 6)
-	const EVENT_BEAT_ROUTE_12_TRAINER_5              ; 487, (D7D7, bit 7)
-	const EVENT_BEAT_ROUTE_12_TRAINER_6              ; 488, (D7D8, bit 0)
-	const EVENT_489                                  ; 489, (D7D8, bit 1)
-	const EVENT_48A                                  ; 48A, (D7D8, bit 2)
-	const EVENT_48B                                  ; 48B, (D7D8, bit 3)
-	const EVENT_48C                                  ; 48C, (D7D8, bit 4)
-	const EVENT_48D                                  ; 48D, (D7D8, bit 5)
-	const EVENT_FIGHT_ROUTE12_SNORLAX                ; 48E, (D7D8, bit 6)
-	const EVENT_BEAT_ROUTE12_SNORLAX                 ; 48F, (D7D8, bit 7)
-	const EVENT_490                                  ; 490, (D7D9, bit 0)
-	const EVENT_BEAT_ROUTE_13_TRAINER_0              ; 491, (D7D9, bit 1)
-	const EVENT_BEAT_ROUTE_13_TRAINER_1              ; 492, (D7D9, bit 2)
-	const EVENT_BEAT_ROUTE_13_TRAINER_2              ; 493, (D7D9, bit 3)
-	const EVENT_BEAT_ROUTE_13_TRAINER_3              ; 494, (D7D9, bit 4)
-	const EVENT_BEAT_ROUTE_13_TRAINER_4              ; 495, (D7D9, bit 5)
-	const EVENT_BEAT_ROUTE_13_TRAINER_5              ; 496, (D7D9, bit 6)
-	const EVENT_BEAT_ROUTE_13_TRAINER_6              ; 497, (D7D9, bit 7)
-	const EVENT_BEAT_ROUTE_13_TRAINER_7              ; 498, (D7DA, bit 0)
-	const EVENT_BEAT_ROUTE_13_TRAINER_8              ; 499, (D7DA, bit 1)
-	const EVENT_BEAT_ROUTE_13_TRAINER_9              ; 49A, (D7DA, bit 2)
-	const EVENT_49B                                  ; 49B, (D7DA, bit 3)
-	const EVENT_49C                                  ; 49C, (D7DA, bit 4)
-	const EVENT_49D                                  ; 49D, (D7DA, bit 5)
-	const EVENT_49E                                  ; 49E, (D7DA, bit 6)
-	const EVENT_49F                                  ; 49F, (D7DA, bit 7)
-	const EVENT_4A0                                  ; 4A0, (D7DB, bit 0)
-	const EVENT_BEAT_ROUTE_14_TRAINER_0              ; 4A1, (D7DB, bit 1)
-	const EVENT_BEAT_ROUTE_14_TRAINER_1              ; 4A2, (D7DB, bit 2)
-	const EVENT_BEAT_ROUTE_14_TRAINER_2              ; 4A3, (D7DB, bit 3)
-	const EVENT_BEAT_ROUTE_14_TRAINER_3              ; 4A4, (D7DB, bit 4)
-	const EVENT_BEAT_ROUTE_14_TRAINER_4              ; 4A5, (D7DB, bit 5)
-	const EVENT_BEAT_ROUTE_14_TRAINER_5              ; 4A6, (D7DB, bit 6)
-	const EVENT_BEAT_ROUTE_14_TRAINER_6              ; 4A7, (D7DB, bit 7)
-	const EVENT_BEAT_ROUTE_14_TRAINER_7              ; 4A8, (D7DC, bit 0)
-	const EVENT_BEAT_ROUTE_14_TRAINER_8              ; 4A9, (D7DC, bit 1)
-	const EVENT_BEAT_ROUTE_14_TRAINER_9              ; 4AA, (D7DC, bit 2)
-	const EVENT_4AB                                  ; 4AB, (D7DC, bit 3)
-	const EVENT_4AC                                  ; 4AC, (D7DC, bit 4)
-	const EVENT_4AD                                  ; 4AD, (D7DC, bit 5)
-	const EVENT_4AE                                  ; 4AE, (D7DC, bit 6)
-	const EVENT_4AF                                  ; 4AF, (D7DC, bit 7)
-	const EVENT_GOT_EXP_ALL                          ; 4B0, (D7DD, bit 0)
-	const EVENT_BEAT_ROUTE_15_TRAINER_0              ; 4B1, (D7DD, bit 1)
-	const EVENT_BEAT_ROUTE_15_TRAINER_1              ; 4B2, (D7DD, bit 2)
-	const EVENT_BEAT_ROUTE_15_TRAINER_2              ; 4B3, (D7DD, bit 3)
-	const EVENT_BEAT_ROUTE_15_TRAINER_3              ; 4B4, (D7DD, bit 4)
-	const EVENT_BEAT_ROUTE_15_TRAINER_4              ; 4B5, (D7DD, bit 5)
-	const EVENT_BEAT_ROUTE_15_TRAINER_5              ; 4B6, (D7DD, bit 6)
-	const EVENT_BEAT_ROUTE_15_TRAINER_6              ; 4B7, (D7DD, bit 7)
-	const EVENT_BEAT_ROUTE_15_TRAINER_7              ; 4B8, (D7DE, bit 0)
-	const EVENT_BEAT_ROUTE_15_TRAINER_8              ; 4B9, (D7DE, bit 1)
-	const EVENT_BEAT_ROUTE_15_TRAINER_9              ; 4BA, (D7DE, bit 2)
-	const EVENT_4BB                                  ; 4BB, (D7DE, bit 3)
-	const EVENT_4BC                                  ; 4BC, (D7DE, bit 4)
-	const EVENT_4BD                                  ; 4BD, (D7DE, bit 5)
-	const EVENT_4BE                                  ; 4BE, (D7DE, bit 6)
-	const EVENT_4BF                                  ; 4BF, (D7DE, bit 7)
-	const EVENT_4C0                                  ; 4C0, (D7DF, bit 0)
-	const EVENT_BEAT_ROUTE_16_TRAINER_0              ; 4C1, (D7DF, bit 1)
-	const EVENT_BEAT_ROUTE_16_TRAINER_1              ; 4C2, (D7DF, bit 2)
-	const EVENT_BEAT_ROUTE_16_TRAINER_2              ; 4C3, (D7DF, bit 3)
-	const EVENT_BEAT_ROUTE_16_TRAINER_3              ; 4C4, (D7DF, bit 4)
-	const EVENT_BEAT_ROUTE_16_TRAINER_4              ; 4C5, (D7DF, bit 5)
-	const EVENT_BEAT_ROUTE_16_TRAINER_5              ; 4C6, (D7DF, bit 6)
-	const EVENT_4C7                                  ; 4C7, (D7DF, bit 7)
-	const EVENT_FIGHT_ROUTE16_SNORLAX                ; 4C8, (D7E0, bit 0)
-	const EVENT_BEAT_ROUTE16_SNORLAX                 ; 4C9, (D7E0, bit 1)
-	const EVENT_4CA                                  ; 4CA, (D7E0, bit 2)
-	const EVENT_4CB                                  ; 4CB, (D7E0, bit 3)
-	const EVENT_4CC                                  ; 4CC, (D7E0, bit 4)
-	const EVENT_4CD                                  ; 4CD, (D7E0, bit 5)
-	const EVENT_GOT_HM02                             ; 4CE, (D7E0, bit 6)
-	const EVENT_RESCUED_MR_FUJI                      ; 4CF, (D7E0, bit 7)
-	const EVENT_4D0                                  ; 4D0, (D7E1, bit 0)
-	const EVENT_BEAT_ROUTE_17_TRAINER_0              ; 4D1, (D7E1, bit 1)
-	const EVENT_BEAT_ROUTE_17_TRAINER_1              ; 4D2, (D7E1, bit 2)
-	const EVENT_BEAT_ROUTE_17_TRAINER_2              ; 4D3, (D7E1, bit 3)
-	const EVENT_BEAT_ROUTE_17_TRAINER_3              ; 4D4, (D7E1, bit 4)
-	const EVENT_BEAT_ROUTE_17_TRAINER_4              ; 4D5, (D7E1, bit 5)
-	const EVENT_BEAT_ROUTE_17_TRAINER_5              ; 4D6, (D7E1, bit 6)
-	const EVENT_BEAT_ROUTE_17_TRAINER_6              ; 4D7, (D7E1, bit 7)
-	const EVENT_BEAT_ROUTE_17_TRAINER_7              ; 4D8, (D7E2, bit 0)
-	const EVENT_BEAT_ROUTE_17_TRAINER_8              ; 4D9, (D7E2, bit 1)
-	const EVENT_BEAT_ROUTE_17_TRAINER_9              ; 4DA, (D7E2, bit 2)
-	const EVENT_4DB                                  ; 4DB, (D7E2, bit 3)
-	const EVENT_4DC                                  ; 4DC, (D7E2, bit 4)
-	const EVENT_4DD                                  ; 4DD, (D7E2, bit 5)
-	const EVENT_4DE                                  ; 4DE, (D7E2, bit 6)
-	const EVENT_4DF                                  ; 4DF, (D7E2, bit 7)
-	const EVENT_4E0                                  ; 4E0, (D7E3, bit 0)
-	const EVENT_BEAT_ROUTE_18_TRAINER_0              ; 4E1, (D7E3, bit 1)
-	const EVENT_BEAT_ROUTE_18_TRAINER_1              ; 4E2, (D7E3, bit 2)
-	const EVENT_BEAT_ROUTE_18_TRAINER_2              ; 4E3, (D7E3, bit 3)
-	const EVENT_4E4                                  ; 4E4, (D7E3, bit 4)
-	const EVENT_4E5                                  ; 4E5, (D7E3, bit 5)
-	const EVENT_4E6                                  ; 4E6, (D7E3, bit 6)
-	const EVENT_4E7                                  ; 4E7, (D7E3, bit 7)
-	const EVENT_4E8                                  ; 4E8, (D7E4, bit 0)
-	const EVENT_4E9                                  ; 4E9, (D7E4, bit 1)
-	const EVENT_4EA                                  ; 4EA, (D7E4, bit 2)
-	const EVENT_4EB                                  ; 4EB, (D7E4, bit 3)
-	const EVENT_4EC                                  ; 4EC, (D7E4, bit 4)
-	const EVENT_4ED                                  ; 4ED, (D7E4, bit 5)
-	const EVENT_4EE                                  ; 4EE, (D7E4, bit 6)
-	const EVENT_4EF                                  ; 4EF, (D7E4, bit 7)
-	const EVENT_4F0                                  ; 4F0, (D7E5, bit 0)
-	const EVENT_BEAT_ROUTE_19_TRAINER_0              ; 4F1, (D7E5, bit 1)
-	const EVENT_BEAT_ROUTE_19_TRAINER_1              ; 4F2, (D7E5, bit 2)
-	const EVENT_BEAT_ROUTE_19_TRAINER_2              ; 4F3, (D7E5, bit 3)
-	const EVENT_BEAT_ROUTE_19_TRAINER_3              ; 4F4, (D7E5, bit 4)
-	const EVENT_BEAT_ROUTE_19_TRAINER_4              ; 4F5, (D7E5, bit 5)
-	const EVENT_BEAT_ROUTE_19_TRAINER_5              ; 4F6, (D7E5, bit 6)
-	const EVENT_BEAT_ROUTE_19_TRAINER_6              ; 4F7, (D7E5, bit 7)
-	const EVENT_BEAT_ROUTE_19_TRAINER_7              ; 4F8, (D7E6, bit 0)
-	const EVENT_BEAT_ROUTE_19_TRAINER_8              ; 4F9, (D7E6, bit 1)
-	const EVENT_BEAT_ROUTE_19_TRAINER_9              ; 4FA, (D7E6, bit 2)
-	const EVENT_4FB                                  ; 4FB, (D7E6, bit 3)
-	const EVENT_4FC                                  ; 4FC, (D7E6, bit 4)
-	const EVENT_4FD                                  ; 4FD, (D7E6, bit 5)
-	const EVENT_4FE                                  ; 4FE, (D7E6, bit 6)
-	const EVENT_4FF                                  ; 4FF, (D7E6, bit 7)
-	const EVENT_IN_SEAFOAM_ISLANDS                   ; 500, (D7E7, bit 0)
-	const EVENT_BEAT_ROUTE_20_TRAINER_0              ; 501, (D7E7, bit 1)
-	const EVENT_BEAT_ROUTE_20_TRAINER_1              ; 502, (D7E7, bit 2)
-	const EVENT_BEAT_ROUTE_20_TRAINER_2              ; 503, (D7E7, bit 3)
-	const EVENT_BEAT_ROUTE_20_TRAINER_3              ; 504, (D7E7, bit 4)
-	const EVENT_BEAT_ROUTE_20_TRAINER_4              ; 505, (D7E7, bit 5)
-	const EVENT_BEAT_ROUTE_20_TRAINER_5              ; 506, (D7E7, bit 6)
-	const EVENT_BEAT_ROUTE_20_TRAINER_6              ; 507, (D7E7, bit 7)
-	const EVENT_BEAT_ROUTE_20_TRAINER_7              ; 508, (D7E8, bit 0)
-	const EVENT_BEAT_ROUTE_20_TRAINER_8              ; 509, (D7E8, bit 1)
-	const EVENT_BEAT_ROUTE_20_TRAINER_9              ; 50A, (D7E8, bit 2)
-	const EVENT_50B                                  ; 50B, (D7E8, bit 3)
-	const EVENT_50C                                  ; 50C, (D7E8, bit 4)
-	const EVENT_50D                                  ; 50D, (D7E8, bit 5)
-	const EVENT_SEAFOAM1_BOULDER1_DOWN_HOLE          ; 50E, (D7E8, bit 6)
-	const EVENT_SEAFOAM1_BOULDER2_DOWN_HOLE          ; 50F, (D7E8, bit 7)
-	const EVENT_510                                  ; 510, (D7E9, bit 0)
-	const EVENT_BEAT_ROUTE_21_TRAINER_0              ; 511, (D7E9, bit 1)
-	const EVENT_BEAT_ROUTE_21_TRAINER_1              ; 512, (D7E9, bit 2)
-	const EVENT_BEAT_ROUTE_21_TRAINER_2              ; 513, (D7E9, bit 3)
-	const EVENT_BEAT_ROUTE_21_TRAINER_3              ; 514, (D7E9, bit 4)
-	const EVENT_BEAT_ROUTE_21_TRAINER_4              ; 515, (D7E9, bit 5)
-	const EVENT_BEAT_ROUTE_21_TRAINER_5              ; 516, (D7E9, bit 6)
-	const EVENT_BEAT_ROUTE_21_TRAINER_6              ; 517, (D7E9, bit 7)
-	const EVENT_BEAT_ROUTE_21_TRAINER_7              ; 518, (D7EA, bit 0)
-	const EVENT_BEAT_ROUTE_21_TRAINER_8              ; 519, (D7EA, bit 1)
-	const EVENT_51A                                  ; 51A, (D7EA, bit 2)
-	const EVENT_51B                                  ; 51B, (D7EA, bit 3)
-	const EVENT_51C                                  ; 51C, (D7EA, bit 4)
-	const EVENT_51D                                  ; 51D, (D7EA, bit 5)
-	const EVENT_51E                                  ; 51E, (D7EA, bit 6)
-	const EVENT_51F                                  ; 51F, (D7EA, bit 7)
-	const EVENT_1ST_ROUTE22_RIVAL_BATTLE             ; 520, (D7EB, bit 0)
-	const EVENT_2ND_ROUTE22_RIVAL_BATTLE             ; 521, (D7EB, bit 1)
-	const EVENT_522                                  ; 522, (D7EB, bit 2)
-	const EVENT_523                                  ; 523, (D7EB, bit 3)
-	const EVENT_524                                  ; 524, (D7EB, bit 4)
-	const EVENT_BEAT_ROUTE22_RIVAL_1ST_BATTLE        ; 525, (D7EB, bit 5)
-	const EVENT_BEAT_ROUTE22_RIVAL_2ND_BATTLE        ; 526, (D7EB, bit 6)
-	const EVENT_ROUTE22_RIVAL_WANTS_BATTLE           ; 527, (D7EB, bit 7)
-	const EVENT_528                                  ; 528, (D7EC, bit 0)
-	const EVENT_529                                  ; 529, (D7EC, bit 1)
-	const EVENT_52A                                  ; 52A, (D7EC, bit 2)
-	const EVENT_52B                                  ; 52B, (D7EC, bit 3)
-	const EVENT_52C                                  ; 52C, (D7EC, bit 4)
-	const EVENT_52D                                  ; 52D, (D7EC, bit 5)
-	const EVENT_52E                                  ; 52E, (D7EC, bit 6)
-	const EVENT_52F                                  ; 52F, (D7EC, bit 7)
-	const EVENT_PASSED_CASCADEBADGE_CHECK            ; 530, (D7ED, bit 0)
-	const EVENT_PASSED_THUNDERBADGE_CHECK            ; 531, (D7ED, bit 1)
-	const EVENT_PASSED_RAINBOWBADGE_CHECK            ; 532, (D7ED, bit 2)
-	const EVENT_PASSED_SOULBADGE_CHECK               ; 533, (D7ED, bit 3)
-	const EVENT_PASSED_MARSHBADGE_CHECK              ; 534, (D7ED, bit 4)
-	const EVENT_PASSED_VOLCANOBADGE_CHECK            ; 535, (D7ED, bit 5)
-	const EVENT_PASSED_EARTHBADGE_CHECK              ; 536, (D7ED, bit 6)
-	const EVENT_537                                  ; 537, (D7ED, bit 7)
-	const EVENT_VICTORY_ROAD_2_BOULDER_ON_SWITCH1    ; 538, (D7EE, bit 0)
-	const EVENT_BEAT_VICTORY_ROAD_2_TRAINER_0        ; 539, (D7EE, bit 1)
-	const EVENT_BEAT_VICTORY_ROAD_2_TRAINER_1        ; 53A, (D7EE, bit 2)
-	const EVENT_BEAT_VICTORY_ROAD_2_TRAINER_2        ; 53B, (D7EE, bit 3)
-	const EVENT_BEAT_VICTORY_ROAD_2_TRAINER_3        ; 53C, (D7EE, bit 4)
-	const EVENT_BEAT_VICTORY_ROAD_2_TRAINER_4        ; 53D, (D7EE, bit 5)
-	const EVENT_BEAT_MOLTRES                         ; 53E, (D7EE, bit 6)
-	const EVENT_VICTORY_ROAD_2_BOULDER_ON_SWITCH2    ; 53F, (D7EE, bit 7)
-	const EVENT_GOT_NUGGET                           ; 540, (D7EF, bit 0)
-	const EVENT_BEAT_ROUTE24_ROCKET                  ; 541, (D7EF, bit 1)
-	const EVENT_BEAT_ROUTE_24_TRAINER_0              ; 542, (D7EF, bit 2)
-	const EVENT_BEAT_ROUTE_24_TRAINER_1              ; 543, (D7EF, bit 3)
-	const EVENT_BEAT_ROUTE_24_TRAINER_2              ; 544, (D7EF, bit 4)
-	const EVENT_BEAT_ROUTE_24_TRAINER_3              ; 545, (D7EF, bit 5)
-	const EVENT_BEAT_ROUTE_24_TRAINER_4              ; 546, (D7EF, bit 6)
-	const EVENT_BEAT_ROUTE_24_TRAINER_5              ; 547, (D7EF, bit 7)
-	const EVENT_548                                  ; 548, (D7F0, bit 0)
-	const EVENT_NUGGET_REWARD_AVAILABLE              ; 549, (D7F0, bit 1)
-	const EVENT_54A                                  ; 54A, (D7F0, bit 2)
-	const EVENT_54B                                  ; 54B, (D7F0, bit 3)
-	const EVENT_54C                                  ; 54C, (D7F0, bit 4)
-	const EVENT_54D                                  ; 54D, (D7F0, bit 5)
-	const EVENT_54E                                  ; 54E, (D7F0, bit 6)
-	const EVENT_54F                                  ; 54F, (D7F0, bit 7)
-	const EVENT_MET_BILL                             ; 550, (D7F1, bit 0)
-	const EVENT_BEAT_ROUTE_25_TRAINER_0              ; 551, (D7F1, bit 1)
-	const EVENT_BEAT_ROUTE_25_TRAINER_1              ; 552, (D7F1, bit 2)
-	const EVENT_BEAT_ROUTE_25_TRAINER_2              ; 553, (D7F1, bit 3)
-	const EVENT_BEAT_ROUTE_25_TRAINER_3              ; 554, (D7F1, bit 4)
-	const EVENT_BEAT_ROUTE_25_TRAINER_4              ; 555, (D7F1, bit 5)
-	const EVENT_BEAT_ROUTE_25_TRAINER_5              ; 556, (D7F1, bit 6)
-	const EVENT_BEAT_ROUTE_25_TRAINER_6              ; 557, (D7F1, bit 7)
-	const EVENT_BEAT_ROUTE_25_TRAINER_7              ; 558, (D7F2, bit 0)
-	const EVENT_BEAT_ROUTE_25_TRAINER_8              ; 559, (D7F2, bit 1)
-	const EVENT_55A                                  ; 55A, (D7F2, bit 2)
-	const EVENT_USED_CELL_SEPARATOR_ON_BILL          ; 55B, (D7F2, bit 3)
-	const EVENT_GOT_SS_TICKET                        ; 55C, (D7F2, bit 4)
-	const EVENT_MET_BILL_2                           ; 55D, (D7F2, bit 5)
-	const EVENT_BILL_SAID_USE_CELL_SEPARATOR         ; 55E, (D7F2, bit 6)
-	const EVENT_LEFT_BILLS_HOUSE_AFTER_HELPING       ; 55F, (D7F2, bit 7)
-	const EVENT_560                                  ; 560, (D7F3, bit 0)
-	const EVENT_561                                  ; 561, (D7F3, bit 1)
-	const EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_0       ; 562, (D7F3, bit 2)
-	const EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_1       ; 563, (D7F3, bit 3)
-	const EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_2       ; 564, (D7F3, bit 4)
-	const EVENT_565                                  ; 565, (D7F3, bit 5)
-	const EVENT_566                                  ; 566, (D7F3, bit 6)
-	const EVENT_567                                  ; 567, (D7F3, bit 7)
-	const EVENT_568                                  ; 568, (D7F4, bit 0)
-	const EVENT_569                                  ; 569, (D7F4, bit 1)
-	const EVENT_56A                                  ; 56A, (D7F4, bit 2)
-	const EVENT_56B                                  ; 56B, (D7F4, bit 3)
-	const EVENT_56C                                  ; 56C, (D7F4, bit 4)
-	const EVENT_56D                                  ; 56D, (D7F4, bit 5)
-	const EVENT_56E                                  ; 56E, (D7F4, bit 6)
-	const EVENT_56F                                  ; 56F, (D7F4, bit 7)
-	const EVENT_570                                  ; 570, (D7F5, bit 0)
-	const EVENT_BEAT_MT_MOON_1_TRAINER_0             ; 571, (D7F5, bit 1)
-	const EVENT_BEAT_MT_MOON_1_TRAINER_1             ; 572, (D7F5, bit 2)
-	const EVENT_BEAT_MT_MOON_1_TRAINER_2             ; 573, (D7F5, bit 3)
-	const EVENT_BEAT_MT_MOON_1_TRAINER_3             ; 574, (D7F5, bit 4)
-	const EVENT_BEAT_MT_MOON_1_TRAINER_4             ; 575, (D7F5, bit 5)
-	const EVENT_BEAT_MT_MOON_1_TRAINER_5             ; 576, (D7F5, bit 6)
-	const EVENT_BEAT_MT_MOON_1_TRAINER_6             ; 577, (D7F5, bit 7)
-	const EVENT_578                                  ; 578, (D7F6, bit 0)
-	const EVENT_BEAT_MT_MOON_EXIT_SUPER_NERD         ; 579, (D7F6, bit 1)
-	const EVENT_BEAT_MT_MOON_3_TRAINER_0             ; 57A, (D7F6, bit 2)
-	const EVENT_BEAT_MT_MOON_3_TRAINER_1             ; 57B, (D7F6, bit 3)
-	const EVENT_BEAT_MT_MOON_3_TRAINER_2             ; 57C, (D7F6, bit 4)
-	const EVENT_BEAT_MT_MOON_3_TRAINER_3             ; 57D, (D7F6, bit 5)
-	const EVENT_GOT_DOME_FOSSIL                      ; 57E, (D7F6, bit 6)
-	const EVENT_GOT_HELIX_FOSSIL                     ; 57F, (D7F6, bit 7)
-	const EVENT_580                                  ; 580, (D7F7, bit 0)
-	const EVENT_581                                  ; 581, (D7F7, bit 1)
-	const EVENT_582                                  ; 582, (D7F7, bit 2)
-	const EVENT_583                                  ; 583, (D7F7, bit 3)
-	const EVENT_584                                  ; 584, (D7F7, bit 4)
-	const EVENT_585                                  ; 585, (D7F7, bit 5)
-	const EVENT_586                                  ; 586, (D7F7, bit 6)
-	const EVENT_587                                  ; 587, (D7F7, bit 7)
-	const EVENT_588                                  ; 588, (D7F8, bit 0)
-	const EVENT_589                                  ; 589, (D7F8, bit 1)
-	const EVENT_58A                                  ; 58A, (D7F8, bit 2)
-	const EVENT_58B                                  ; 58B, (D7F8, bit 3)
-	const EVENT_58C                                  ; 58C, (D7F8, bit 4)
-	const EVENT_58D                                  ; 58D, (D7F8, bit 5)
-	const EVENT_58E                                  ; 58E, (D7F8, bit 6)
-	const EVENT_58F                                  ; 58F, (D7F8, bit 7)
-	const EVENT_590                                  ; 590, (D7F9, bit 0)
-	const EVENT_591                                  ; 591, (D7F9, bit 1)
-	const EVENT_592                                  ; 592, (D7F9, bit 2)
-	const EVENT_593                                  ; 593, (D7F9, bit 3)
-	const EVENT_594                                  ; 594, (D7F9, bit 4)
-	const EVENT_595                                  ; 595, (D7F9, bit 5)
-	const EVENT_596                                  ; 596, (D7F9, bit 6)
-	const EVENT_597                                  ; 597, (D7F9, bit 7)
-	const EVENT_598                                  ; 598, (D7FA, bit 0)
-	const EVENT_599                                  ; 599, (D7FA, bit 1)
-	const EVENT_59A                                  ; 59A, (D7FA, bit 2)
-	const EVENT_59B                                  ; 59B, (D7FA, bit 3)
-	const EVENT_59C                                  ; 59C, (D7FA, bit 4)
-	const EVENT_59D                                  ; 59D, (D7FA, bit 5)
-	const EVENT_59E                                  ; 59E, (D7FA, bit 6)
-	const EVENT_59F                                  ; 59F, (D7FA, bit 7)
-	const EVENT_5A0                                  ; 5A0, (D7FB, bit 0)
-	const EVENT_5A1                                  ; 5A1, (D7FB, bit 1)
-	const EVENT_5A2                                  ; 5A2, (D7FB, bit 2)
-	const EVENT_5A3                                  ; 5A3, (D7FB, bit 3)
-	const EVENT_5A4                                  ; 5A4, (D7FB, bit 4)
-	const EVENT_5A5                                  ; 5A5, (D7FB, bit 5)
-	const EVENT_5A6                                  ; 5A6, (D7FB, bit 6)
-	const EVENT_5A7                                  ; 5A7, (D7FB, bit 7)
-	const EVENT_5A8                                  ; 5A8, (D7FC, bit 0)
-	const EVENT_5A9                                  ; 5A9, (D7FC, bit 1)
-	const EVENT_5AA                                  ; 5AA, (D7FC, bit 2)
-	const EVENT_5AB                                  ; 5AB, (D7FC, bit 3)
-	const EVENT_5AC                                  ; 5AC, (D7FC, bit 4)
-	const EVENT_5AD                                  ; 5AD, (D7FC, bit 5)
-	const EVENT_5AE                                  ; 5AE, (D7FC, bit 6)
-	const EVENT_5AF                                  ; 5AF, (D7FC, bit 7)
-	const EVENT_5B0                                  ; 5B0, (D7FD, bit 0)
-	const EVENT_5B1                                  ; 5B1, (D7FD, bit 1)
-	const EVENT_5B2                                  ; 5B2, (D7FD, bit 2)
-	const EVENT_5B3                                  ; 5B3, (D7FD, bit 3)
-	const EVENT_5B4                                  ; 5B4, (D7FD, bit 4)
-	const EVENT_5B5                                  ; 5B5, (D7FD, bit 5)
-	const EVENT_5B6                                  ; 5B6, (D7FD, bit 6)
-	const EVENT_5B7                                  ; 5B7, (D7FD, bit 7)
-	const EVENT_5B8                                  ; 5B8, (D7FE, bit 0)
-	const EVENT_5B9                                  ; 5B9, (D7FE, bit 1)
-	const EVENT_5BA                                  ; 5BA, (D7FE, bit 2)
-	const EVENT_5BB                                  ; 5BB, (D7FE, bit 3)
-	const EVENT_5BC                                  ; 5BC, (D7FE, bit 4)
-	const EVENT_5BD                                  ; 5BD, (D7FE, bit 5)
-	const EVENT_5BE                                  ; 5BE, (D7FE, bit 6)
-	const EVENT_5BF                                  ; 5BF, (D7FE, bit 7)
-	const EVENT_5C0                                  ; 5C0, (D7FF, bit 0)
-	const EVENT_5C1                                  ; 5C1, (D7FF, bit 1)
-	const EVENT_5C2                                  ; 5C2, (D7FF, bit 2)
-	const EVENT_5C3                                  ; 5C3, (D7FF, bit 3)
-	const EVENT_BEAT_SS_ANNE_5_TRAINER_0             ; 5C4, (D7FF, bit 4)
-	const EVENT_BEAT_SS_ANNE_5_TRAINER_1             ; 5C5, (D7FF, bit 5)
-	const EVENT_5C6                                  ; 5C6, (D7FF, bit 6)
-	const EVENT_5C7                                  ; 5C7, (D7FF, bit 7)
-	const EVENT_5C8                                  ; 5C8, (D800, bit 0)
-	const EVENT_5C9                                  ; 5C9, (D800, bit 1)
-	const EVENT_5CA                                  ; 5CA, (D800, bit 2)
-	const EVENT_5CB                                  ; 5CB, (D800, bit 3)
-	const EVENT_5CC                                  ; 5CC, (D800, bit 4)
-	const EVENT_5CD                                  ; 5CD, (D800, bit 5)
-	const EVENT_5CE                                  ; 5CE, (D800, bit 6)
-	const EVENT_5CF                                  ; 5CF, (D800, bit 7)
-	const EVENT_5D0                                  ; 5D0, (D801, bit 0)
-	const EVENT_5D1                                  ; 5D1, (D801, bit 1)
-	const EVENT_5D2                                  ; 5D2, (D801, bit 2)
-	const EVENT_5D3                                  ; 5D3, (D801, bit 3)
-	const EVENT_5D4                                  ; 5D4, (D801, bit 4)
-	const EVENT_5D5                                  ; 5D5, (D801, bit 5)
-	const EVENT_5D6                                  ; 5D6, (D801, bit 6)
-	const EVENT_5D7                                  ; 5D7, (D801, bit 7)
-	const EVENT_5D8                                  ; 5D8, (D802, bit 0)
-	const EVENT_5D9                                  ; 5D9, (D802, bit 1)
-	const EVENT_5DA                                  ; 5DA, (D802, bit 2)
-	const EVENT_5DB                                  ; 5DB, (D802, bit 3)
-	const EVENT_5DC                                  ; 5DC, (D802, bit 4)
-	const EVENT_5DD                                  ; 5DD, (D802, bit 5)
-	const EVENT_5DE                                  ; 5DE, (D802, bit 6)
-	const EVENT_5DF                                  ; 5DF, (D802, bit 7)
-	const EVENT_GOT_HM01                             ; 5E0, (D803, bit 0)
-	const EVENT_RUBBED_CAPTAINS_BACK                 ; 5E1, (D803, bit 1)
-	const EVENT_SS_ANNE_LEFT                         ; 5E2, (D803, bit 2)
-	const EVENT_WALKED_PAST_GUARD_AFTER_SS_ANNE_LEFT ; 5E3, (D803, bit 3)
-	const EVENT_STARTED_WALKING_OUT_OF_DOCK          ; 5E4, (D803, bit 4)
-	const EVENT_WALKED_OUT_OF_DOCK                   ; 5E5, (D803, bit 5)
-	const EVENT_5E6                                  ; 5E6, (D803, bit 6)
-	const EVENT_5E7                                  ; 5E7, (D803, bit 7)
-	const EVENT_5E8                                  ; 5E8, (D804, bit 0)
-	const EVENT_5E9                                  ; 5E9, (D804, bit 1)
-	const EVENT_5EA                                  ; 5EA, (D804, bit 2)
-	const EVENT_5EB                                  ; 5EB, (D804, bit 3)
-	const EVENT_5EC                                  ; 5EC, (D804, bit 4)
-	const EVENT_5ED                                  ; 5ED, (D804, bit 5)
-	const EVENT_5EE                                  ; 5EE, (D804, bit 6)
-	const EVENT_5EF                                  ; 5EF, (D804, bit 7)
-	const EVENT_5F0                                  ; 5F0, (D805, bit 0)
-	const EVENT_BEAT_SS_ANNE_8_TRAINER_0             ; 5F1, (D805, bit 1)
-	const EVENT_BEAT_SS_ANNE_8_TRAINER_1             ; 5F2, (D805, bit 2)
-	const EVENT_BEAT_SS_ANNE_8_TRAINER_2             ; 5F3, (D805, bit 3)
-	const EVENT_BEAT_SS_ANNE_8_TRAINER_3             ; 5F4, (D805, bit 4)
-	const EVENT_5F5                                  ; 5F5, (D805, bit 5)
-	const EVENT_5F6                                  ; 5F6, (D805, bit 6)
-	const EVENT_5F7                                  ; 5F7, (D805, bit 7)
-	const EVENT_5F8                                  ; 5F8, (D806, bit 0)
-	const EVENT_5F9                                  ; 5F9, (D806, bit 1)
-	const EVENT_5FA                                  ; 5FA, (D806, bit 2)
-	const EVENT_5FB                                  ; 5FB, (D806, bit 3)
-	const EVENT_5FC                                  ; 5FC, (D806, bit 4)
-	const EVENT_5FD                                  ; 5FD, (D806, bit 5)
-	const EVENT_5FE                                  ; 5FE, (D806, bit 6)
-	const EVENT_5FF                                  ; 5FF, (D806, bit 7)
-	const EVENT_600                                  ; 600, (D807, bit 0)
-	const EVENT_BEAT_SS_ANNE_9_TRAINER_0             ; 601, (D807, bit 1)
-	const EVENT_BEAT_SS_ANNE_9_TRAINER_1             ; 602, (D807, bit 2)
-	const EVENT_BEAT_SS_ANNE_9_TRAINER_2             ; 603, (D807, bit 3)
-	const EVENT_BEAT_SS_ANNE_9_TRAINER_3             ; 604, (D807, bit 4)
-	const EVENT_605                                  ; 605, (D807, bit 5)
-	const EVENT_606                                  ; 606, (D807, bit 6)
-	const EVENT_607                                  ; 607, (D807, bit 7)
-	const EVENT_608                                  ; 608, (D808, bit 0)
-	const EVENT_609                                  ; 609, (D808, bit 1)
-	const EVENT_60A                                  ; 60A, (D808, bit 2)
-	const EVENT_60B                                  ; 60B, (D808, bit 3)
-	const EVENT_60C                                  ; 60C, (D808, bit 4)
-	const EVENT_60D                                  ; 60D, (D808, bit 5)
-	const EVENT_60E                                  ; 60E, (D808, bit 6)
-	const EVENT_60F                                  ; 60F, (D808, bit 7)
-	const EVENT_610                                  ; 610, (D809, bit 0)
-	const EVENT_BEAT_SS_ANNE_10_TRAINER_0            ; 611, (D809, bit 1)
-	const EVENT_BEAT_SS_ANNE_10_TRAINER_1            ; 612, (D809, bit 2)
-	const EVENT_BEAT_SS_ANNE_10_TRAINER_2            ; 613, (D809, bit 3)
-	const EVENT_BEAT_SS_ANNE_10_TRAINER_3            ; 614, (D809, bit 4)
-	const EVENT_BEAT_SS_ANNE_10_TRAINER_4            ; 615, (D809, bit 5)
-	const EVENT_BEAT_SS_ANNE_10_TRAINER_5            ; 616, (D809, bit 6)
-	const EVENT_617                                  ; 617, (D809, bit 7)
-	const EVENT_618                                  ; 618, (D80A, bit 0)
-	const EVENT_619                                  ; 619, (D80A, bit 1)
-	const EVENT_61A                                  ; 61A, (D80A, bit 2)
-	const EVENT_61B                                  ; 61B, (D80A, bit 3)
-	const EVENT_61C                                  ; 61C, (D80A, bit 4)
-	const EVENT_61D                                  ; 61D, (D80A, bit 5)
-	const EVENT_61E                                  ; 61E, (D80A, bit 6)
-	const EVENT_61F                                  ; 61F, (D80A, bit 7)
-	const EVENT_620                                  ; 620, (D80B, bit 0)
-	const EVENT_621                                  ; 621, (D80B, bit 1)
-	const EVENT_622                                  ; 622, (D80B, bit 2)
-	const EVENT_623                                  ; 623, (D80B, bit 3)
-	const EVENT_624                                  ; 624, (D80B, bit 4)
-	const EVENT_625                                  ; 625, (D80B, bit 5)
-	const EVENT_626                                  ; 626, (D80B, bit 6)
-	const EVENT_627                                  ; 627, (D80B, bit 7)
-	const EVENT_628                                  ; 628, (D80C, bit 0)
-	const EVENT_629                                  ; 629, (D80C, bit 1)
-	const EVENT_62A                                  ; 62A, (D80C, bit 2)
-	const EVENT_62B                                  ; 62B, (D80C, bit 3)
-	const EVENT_62C                                  ; 62C, (D80C, bit 4)
-	const EVENT_62D                                  ; 62D, (D80C, bit 5)
-	const EVENT_62E                                  ; 62E, (D80C, bit 6)
-	const EVENT_62F                                  ; 62F, (D80C, bit 7)
-	const EVENT_630                                  ; 630, (D80D, bit 0)
-	const EVENT_631                                  ; 631, (D80D, bit 1)
-	const EVENT_632                                  ; 632, (D80D, bit 2)
-	const EVENT_633                                  ; 633, (D80D, bit 3)
-	const EVENT_634                                  ; 634, (D80D, bit 4)
-	const EVENT_635                                  ; 635, (D80D, bit 5)
-	const EVENT_636                                  ; 636, (D80D, bit 6)
-	const EVENT_637                                  ; 637, (D80D, bit 7)
-	const EVENT_638                                  ; 638, (D80E, bit 0)
-	const EVENT_639                                  ; 639, (D80E, bit 1)
-	const EVENT_63A                                  ; 63A, (D80E, bit 2)
-	const EVENT_63B                                  ; 63B, (D80E, bit 3)
-	const EVENT_63C                                  ; 63C, (D80E, bit 4)
-	const EVENT_63D                                  ; 63D, (D80E, bit 5)
-	const EVENT_63E                                  ; 63E, (D80E, bit 6)
-	const EVENT_63F                                  ; 63F, (D80E, bit 7)
-	const EVENT_640                                  ; 640, (D80F, bit 0)
-	const EVENT_641                                  ; 641, (D80F, bit 1)
-	const EVENT_642                                  ; 642, (D80F, bit 2)
-	const EVENT_643                                  ; 643, (D80F, bit 3)
-	const EVENT_644                                  ; 644, (D80F, bit 4)
-	const EVENT_645                                  ; 645, (D80F, bit 5)
-	const EVENT_646                                  ; 646, (D80F, bit 6)
-	const EVENT_647                                  ; 647, (D80F, bit 7)
-	const EVENT_648                                  ; 648, (D810, bit 0)
-	const EVENT_649                                  ; 649, (D810, bit 1)
-	const EVENT_64A                                  ; 64A, (D810, bit 2)
-	const EVENT_64B                                  ; 64B, (D810, bit 3)
-	const EVENT_64C                                  ; 64C, (D810, bit 4)
-	const EVENT_64D                                  ; 64D, (D810, bit 5)
-	const EVENT_64E                                  ; 64E, (D810, bit 6)
-	const EVENT_64F                                  ; 64F, (D810, bit 7)
-	const EVENT_650                                  ; 650, (D811, bit 0)
-	const EVENT_651                                  ; 651, (D811, bit 1)
-	const EVENT_652                                  ; 652, (D811, bit 2)
-	const EVENT_653                                  ; 653, (D811, bit 3)
-	const EVENT_654                                  ; 654, (D811, bit 4)
-	const EVENT_655                                  ; 655, (D811, bit 5)
-	const EVENT_656                                  ; 656, (D811, bit 6)
-	const EVENT_657                                  ; 657, (D811, bit 7)
-	const EVENT_658                                  ; 658, (D812, bit 0)
-	const EVENT_659                                  ; 659, (D812, bit 1)
-	const EVENT_65A                                  ; 65A, (D812, bit 2)
-	const EVENT_65B                                  ; 65B, (D812, bit 3)
-	const EVENT_65C                                  ; 65C, (D812, bit 4)
-	const EVENT_65D                                  ; 65D, (D812, bit 5)
-	const EVENT_65E                                  ; 65E, (D812, bit 6)
-	const EVENT_65F                                  ; 65F, (D812, bit 7)
-	const EVENT_VICTORY_ROAD_3_BOULDER_ON_SWITCH1    ; 660, (D813, bit 0)
-	const EVENT_BEAT_VICTORY_ROAD_3_TRAINER_0        ; 661, (D813, bit 1)
-	const EVENT_BEAT_VICTORY_ROAD_3_TRAINER_1        ; 662, (D813, bit 2)
-	const EVENT_BEAT_VICTORY_ROAD_3_TRAINER_2        ; 663, (D813, bit 3)
-	const EVENT_BEAT_VICTORY_ROAD_3_TRAINER_3        ; 664, (D813, bit 4)
-	const EVENT_665                                  ; 665, (D813, bit 5)
-	const EVENT_VICTORY_ROAD_3_BOULDER_ON_SWITCH2    ; 666, (D813, bit 6)
-	const EVENT_667                                  ; 667, (D813, bit 7)
-	const EVENT_668                                  ; 668, (D814, bit 0)
-	const EVENT_669                                  ; 669, (D814, bit 1)
-	const EVENT_66A                                  ; 66A, (D814, bit 2)
-	const EVENT_66B                                  ; 66B, (D814, bit 3)
-	const EVENT_66C                                  ; 66C, (D814, bit 4)
-	const EVENT_66D                                  ; 66D, (D814, bit 5)
-	const EVENT_66E                                  ; 66E, (D814, bit 6)
-	const EVENT_66F                                  ; 66F, (D814, bit 7)
-	const EVENT_670                                  ; 670, (D815, bit 0)
-	const EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_0      ; 671, (D815, bit 1)
-	const EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_1      ; 672, (D815, bit 2)
-	const EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_2      ; 673, (D815, bit 3)
-	const EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_3      ; 674, (D815, bit 4)
-	const EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_4      ; 675, (D815, bit 5)
-	const EVENT_676                                  ; 676, (D815, bit 6)
-	const EVENT_677                                  ; 677, (D815, bit 7)
-	const EVENT_678                                  ; 678, (D816, bit 0)
-	const EVENT_679                                  ; 679, (D816, bit 1)
-	const EVENT_67A                                  ; 67A, (D816, bit 2)
-	const EVENT_67B                                  ; 67B, (D816, bit 3)
-	const EVENT_67C                                  ; 67C, (D816, bit 4)
-	const EVENT_67D                                  ; 67D, (D816, bit 5)
-	const EVENT_67E                                  ; 67E, (D816, bit 6)
-	const EVENT_67F                                  ; 67F, (D816, bit 7)
-	const EVENT_680                                  ; 680, (D817, bit 0)
-	const EVENT_BEAT_ROCKET_HIDEOUT_2_TRAINER_0      ; 681, (D817, bit 1)
-	const EVENT_682                                  ; 682, (D817, bit 2)
-	const EVENT_683                                  ; 683, (D817, bit 3)
-	const EVENT_684                                  ; 684, (D817, bit 4)
-	const EVENT_685                                  ; 685, (D817, bit 5)
-	const EVENT_686                                  ; 686, (D817, bit 6)
-	const EVENT_687                                  ; 687, (D817, bit 7)
-	const EVENT_688                                  ; 688, (D818, bit 0)
-	const EVENT_689                                  ; 689, (D818, bit 1)
-	const EVENT_68A                                  ; 68A, (D818, bit 2)
-	const EVENT_68B                                  ; 68B, (D818, bit 3)
-	const EVENT_68C                                  ; 68C, (D818, bit 4)
-	const EVENT_68D                                  ; 68D, (D818, bit 5)
-	const EVENT_68E                                  ; 68E, (D818, bit 6)
-	const EVENT_68F                                  ; 68F, (D818, bit 7)
-	const EVENT_690                                  ; 690, (D819, bit 0)
-	const EVENT_BEAT_ROCKET_HIDEOUT_3_TRAINER_0      ; 691, (D819, bit 1)
-	const EVENT_BEAT_ROCKET_HIDEOUT_3_TRAINER_1      ; 692, (D819, bit 2)
-	const EVENT_693                                  ; 693, (D819, bit 3)
-	const EVENT_694                                  ; 694, (D819, bit 4)
-	const EVENT_695                                  ; 695, (D819, bit 5)
-	const EVENT_696                                  ; 696, (D819, bit 6)
-	const EVENT_697                                  ; 697, (D819, bit 7)
-	const EVENT_698                                  ; 698, (D81A, bit 0)
-	const EVENT_699                                  ; 699, (D81A, bit 1)
-	const EVENT_69A                                  ; 69A, (D81A, bit 2)
-	const EVENT_69B                                  ; 69B, (D81A, bit 3)
-	const EVENT_69C                                  ; 69C, (D81A, bit 4)
-	const EVENT_69D                                  ; 69D, (D81A, bit 5)
-	const EVENT_69E                                  ; 69E, (D81A, bit 6)
-	const EVENT_69F                                  ; 69F, (D81A, bit 7)
-	const EVENT_6A0                                  ; 6A0, (D81B, bit 0)
-	const EVENT_6A1                                  ; 6A1, (D81B, bit 1)
-	const EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_0      ; 6A2, (D81B, bit 2)
-	const EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_1      ; 6A3, (D81B, bit 3)
-	const EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_2      ; 6A4, (D81B, bit 4)
-	const EVENT_ROCKET_HIDEOUT_4_DOOR_UNLOCKED       ; 6A5, (D81B, bit 5)
-	const EVENT_ROCKET_DROPPED_LIFT_KEY              ; 6A6, (D81B, bit 6)
-	const EVENT_BEAT_ROCKET_HIDEOUT_GIOVANNI         ; 6A7, (D81B, bit 7)
-	const EVENT_6A8                                  ; 6A8, (D81C, bit 0)
-	const EVENT_6A9                                  ; 6A9, (D81C, bit 1)
-	const EVENT_6AA                                  ; 6AA, (D81C, bit 2)
-	const EVENT_6AB                                  ; 6AB, (D81C, bit 3)
-	const EVENT_6AC                                  ; 6AC, (D81C, bit 4)
-	const EVENT_6AD                                  ; 6AD, (D81C, bit 5)
-	const EVENT_6AE                                  ; 6AE, (D81C, bit 6)
-	const EVENT_6AF                                  ; 6AF, (D81C, bit 7)
-	const EVENT_6B0                                  ; 6B0, (D81D, bit 0)
-	const EVENT_6B1                                  ; 6B1, (D81D, bit 1)
-	const EVENT_6B2                                  ; 6B2, (D81D, bit 2)
-	const EVENT_6B3                                  ; 6B3, (D81D, bit 3)
-	const EVENT_6B4                                  ; 6B4, (D81D, bit 4)
-	const EVENT_6B5                                  ; 6B5, (D81D, bit 5)
-	const EVENT_6B6                                  ; 6B6, (D81D, bit 6)
-	const EVENT_6B7                                  ; 6B7, (D81D, bit 7)
-	const EVENT_6B8                                  ; 6B8, (D81E, bit 0)
-	const EVENT_6B9                                  ; 6B9, (D81E, bit 1)
-	const EVENT_6BA                                  ; 6BA, (D81E, bit 2)
-	const EVENT_6BB                                  ; 6BB, (D81E, bit 3)
-	const EVENT_6BC                                  ; 6BC, (D81E, bit 4)
-	const EVENT_6BD                                  ; 6BD, (D81E, bit 5)
-	const EVENT_6BE                                  ; 6BE, (D81E, bit 6)
-	const EVENT_6BF                                  ; 6BF, (D81E, bit 7)
-	const EVENT_6C0                                  ; 6C0, (D81F, bit 0)
-	const EVENT_6C1                                  ; 6C1, (D81F, bit 1)
-	const EVENT_6C2                                  ; 6C2, (D81F, bit 2)
-	const EVENT_6C3                                  ; 6C3, (D81F, bit 3)
-	const EVENT_6C4                                  ; 6C4, (D81F, bit 4)
-	const EVENT_6C5                                  ; 6C5, (D81F, bit 5)
-	const EVENT_6C6                                  ; 6C6, (D81F, bit 6)
-	const EVENT_6C7                                  ; 6C7, (D81F, bit 7)
-	const EVENT_6C8                                  ; 6C8, (D820, bit 0)
-	const EVENT_6C9                                  ; 6C9, (D820, bit 1)
-	const EVENT_6CA                                  ; 6CA, (D820, bit 2)
-	const EVENT_6CB                                  ; 6CB, (D820, bit 3)
-	const EVENT_6CC                                  ; 6CC, (D820, bit 4)
-	const EVENT_6CD                                  ; 6CD, (D820, bit 5)
-	const EVENT_6CE                                  ; 6CE, (D820, bit 6)
-	const EVENT_6CF                                  ; 6CF, (D820, bit 7)
-	const EVENT_6D0                                  ; 6D0, (D821, bit 0)
-	const EVENT_6D1                                  ; 6D1, (D821, bit 1)
-	const EVENT_6D2                                  ; 6D2, (D821, bit 2)
-	const EVENT_6D3                                  ; 6D3, (D821, bit 3)
-	const EVENT_6D4                                  ; 6D4, (D821, bit 4)
-	const EVENT_6D5                                  ; 6D5, (D821, bit 5)
-	const EVENT_6D6                                  ; 6D6, (D821, bit 6)
-	const EVENT_6D7                                  ; 6D7, (D821, bit 7)
-	const EVENT_6D8                                  ; 6D8, (D822, bit 0)
-	const EVENT_6D9                                  ; 6D9, (D822, bit 1)
-	const EVENT_6DA                                  ; 6DA, (D822, bit 2)
-	const EVENT_6DB                                  ; 6DB, (D822, bit 3)
-	const EVENT_6DC                                  ; 6DC, (D822, bit 4)
-	const EVENT_6DD                                  ; 6DD, (D822, bit 5)
-	const EVENT_6DE                                  ; 6DE, (D822, bit 6)
-	const EVENT_6DF                                  ; 6DF, (D822, bit 7)
-	const EVENT_6E0                                  ; 6E0, (D823, bit 0)
-	const EVENT_6E1                                  ; 6E1, (D823, bit 1)
-	const EVENT_6E2                                  ; 6E2, (D823, bit 2)
-	const EVENT_6E3                                  ; 6E3, (D823, bit 3)
-	const EVENT_6E4                                  ; 6E4, (D823, bit 4)
-	const EVENT_6E5                                  ; 6E5, (D823, bit 5)
-	const EVENT_6E6                                  ; 6E6, (D823, bit 6)
-	const EVENT_6E7                                  ; 6E7, (D823, bit 7)
-	const EVENT_6E8                                  ; 6E8, (D824, bit 0)
-	const EVENT_6E9                                  ; 6E9, (D824, bit 1)
-	const EVENT_6EA                                  ; 6EA, (D824, bit 2)
-	const EVENT_6EB                                  ; 6EB, (D824, bit 3)
-	const EVENT_6EC                                  ; 6EC, (D824, bit 4)
-	const EVENT_6ED                                  ; 6ED, (D824, bit 5)
-	const EVENT_6EE                                  ; 6EE, (D824, bit 6)
-	const EVENT_6EF                                  ; 6EF, (D824, bit 7)
-	const EVENT_6F0                                  ; 6F0, (D825, bit 0)
-	const EVENT_6F1                                  ; 6F1, (D825, bit 1)
-	const EVENT_BEAT_SILPH_CO_2F_TRAINER_0           ; 6F2, (D825, bit 2)
-	const EVENT_BEAT_SILPH_CO_2F_TRAINER_1           ; 6F3, (D825, bit 3)
-	const EVENT_BEAT_SILPH_CO_2F_TRAINER_2           ; 6F4, (D825, bit 4)
-	const EVENT_BEAT_SILPH_CO_2F_TRAINER_3           ; 6F5, (D825, bit 5)
-	const EVENT_6F6                                  ; 6F6, (D825, bit 6)
-	const EVENT_6F7                                  ; 6F7, (D825, bit 7)
-	const EVENT_6F8                                  ; 6F8, (D826, bit 0)
-	const EVENT_6F9                                  ; 6F9, (D826, bit 1)
-	const EVENT_6FA                                  ; 6FA, (D826, bit 2)
-	const EVENT_6FB                                  ; 6FB, (D826, bit 3)
-	const EVENT_6FC                                  ; 6FC, (D826, bit 4)
-	const EVENT_SILPH_CO_2_UNLOCKED_DOOR1            ; 6FD, (D826, bit 5)
-	const EVENT_SILPH_CO_2_UNLOCKED_DOOR2            ; 6FE, (D826, bit 6)
-	const EVENT_GOT_TM36                             ; 6FF, (D826, bit 7)
-	const EVENT_700                                  ; 700, (D827, bit 0)
-	const EVENT_701                                  ; 701, (D827, bit 1)
-	const EVENT_BEAT_SILPH_CO_3F_TRAINER_0           ; 702, (D827, bit 2)
-	const EVENT_BEAT_SILPH_CO_3F_TRAINER_1           ; 703, (D827, bit 3)
-	const EVENT_704                                  ; 704, (D827, bit 4)
-	const EVENT_705                                  ; 705, (D827, bit 5)
-	const EVENT_706                                  ; 706, (D827, bit 6)
-	const EVENT_707                                  ; 707, (D827, bit 7)
-	const EVENT_SILPH_CO_3_UNLOCKED_DOOR1            ; 708, (D828, bit 0)
-	const EVENT_SILPH_CO_3_UNLOCKED_DOOR2            ; 709, (D828, bit 1)
-	const EVENT_70A                                  ; 70A, (D828, bit 2)
-	const EVENT_70B                                  ; 70B, (D828, bit 3)
-	const EVENT_70C                                  ; 70C, (D828, bit 4)
-	const EVENT_70D                                  ; 70D, (D828, bit 5)
-	const EVENT_70E                                  ; 70E, (D828, bit 6)
-	const EVENT_70F                                  ; 70F, (D828, bit 7)
-	const EVENT_710                                  ; 710, (D829, bit 0)
-	const EVENT_711                                  ; 711, (D829, bit 1)
-	const EVENT_BEAT_SILPH_CO_4F_TRAINER_0           ; 712, (D829, bit 2)
-	const EVENT_BEAT_SILPH_CO_4F_TRAINER_1           ; 713, (D829, bit 3)
-	const EVENT_BEAT_SILPH_CO_4F_TRAINER_2           ; 714, (D829, bit 4)
-	const EVENT_715                                  ; 715, (D829, bit 5)
-	const EVENT_716                                  ; 716, (D829, bit 6)
-	const EVENT_717                                  ; 717, (D829, bit 7)
-	const EVENT_SILPH_CO_4_UNLOCKED_DOOR1            ; 718, (D82A, bit 0)
-	const EVENT_SILPH_CO_4_UNLOCKED_DOOR2            ; 719, (D82A, bit 1)
-	const EVENT_71A                                  ; 71A, (D82A, bit 2)
-	const EVENT_71B                                  ; 71B, (D82A, bit 3)
-	const EVENT_71C                                  ; 71C, (D82A, bit 4)
-	const EVENT_71D                                  ; 71D, (D82A, bit 5)
-	const EVENT_71E                                  ; 71E, (D82A, bit 6)
-	const EVENT_71F                                  ; 71F, (D82A, bit 7)
-	const EVENT_720                                  ; 720, (D82B, bit 0)
-	const EVENT_721                                  ; 721, (D82B, bit 1)
-	const EVENT_BEAT_SILPH_CO_5F_TRAINER_0           ; 722, (D82B, bit 2)
-	const EVENT_BEAT_SILPH_CO_5F_TRAINER_1           ; 723, (D82B, bit 3)
-	const EVENT_BEAT_SILPH_CO_5F_TRAINER_2           ; 724, (D82B, bit 4)
-	const EVENT_BEAT_SILPH_CO_5F_TRAINER_3           ; 725, (D82B, bit 5)
-	const EVENT_726                                  ; 726, (D82B, bit 6)
-	const EVENT_727                                  ; 727, (D82B, bit 7)
-	const EVENT_SILPH_CO_5_UNLOCKED_DOOR1            ; 728, (D82C, bit 0)
-	const EVENT_SILPH_CO_5_UNLOCKED_DOOR2            ; 729, (D82C, bit 1)
-	const EVENT_SILPH_CO_5_UNLOCKED_DOOR3            ; 72A, (D82C, bit 2)
-	const EVENT_72B                                  ; 72B, (D82C, bit 3)
-	const EVENT_72C                                  ; 72C, (D82C, bit 4)
-	const EVENT_72D                                  ; 72D, (D82C, bit 5)
-	const EVENT_72E                                  ; 72E, (D82C, bit 6)
-	const EVENT_72F                                  ; 72F, (D82C, bit 7)
-	const EVENT_730                                  ; 730, (D82D, bit 0)
-	const EVENT_731                                  ; 731, (D82D, bit 1)
-	const EVENT_732                                  ; 732, (D82D, bit 2)
-	const EVENT_733                                  ; 733, (D82D, bit 3)
-	const EVENT_734                                  ; 734, (D82D, bit 4)
-	const EVENT_735                                  ; 735, (D82D, bit 5)
-	const EVENT_BEAT_SILPH_CO_6F_TRAINER_0           ; 736, (D82D, bit 6)
-	const EVENT_BEAT_SILPH_CO_6F_TRAINER_1           ; 737, (D82D, bit 7)
-	const EVENT_BEAT_SILPH_CO_6F_TRAINER_2           ; 738, (D82E, bit 0)
-	const EVENT_739                                  ; 739, (D82E, bit 1)
-	const EVENT_73A                                  ; 73A, (D82E, bit 2)
-	const EVENT_73B                                  ; 73B, (D82E, bit 3)
-	const EVENT_73C                                  ; 73C, (D82E, bit 4)
-	const EVENT_73D                                  ; 73D, (D82E, bit 5)
-	const EVENT_73E                                  ; 73E, (D82E, bit 6)
-	const EVENT_SILPH_CO_6_UNLOCKED_DOOR             ; 73F, (D82E, bit 7)
-	const EVENT_BEAT_SILPH_CO_RIVAL                  ; 740, (D82F, bit 0)
-	const EVENT_741                                  ; 741, (D82F, bit 1)
-	const EVENT_742                                  ; 742, (D82F, bit 2)
-	const EVENT_743                                  ; 743, (D82F, bit 3)
-	const EVENT_744                                  ; 744, (D82F, bit 4)
-	const EVENT_BEAT_SILPH_CO_7F_TRAINER_0           ; 745, (D82F, bit 5)
-	const EVENT_BEAT_SILPH_CO_7F_TRAINER_1           ; 746, (D82F, bit 6)
-	const EVENT_BEAT_SILPH_CO_7F_TRAINER_2           ; 747, (D82F, bit 7)
-	const EVENT_BEAT_SILPH_CO_7F_TRAINER_3           ; 748, (D830, bit 0)
-	const EVENT_749                                  ; 749, (D830, bit 1)
-	const EVENT_74A                                  ; 74A, (D830, bit 2)
-	const EVENT_74B                                  ; 74B, (D830, bit 3)
-	const EVENT_SILPH_CO_7_UNLOCKED_DOOR1            ; 74C, (D830, bit 4)
-	const EVENT_SILPH_CO_7_UNLOCKED_DOOR2            ; 74D, (D830, bit 5)
-	const EVENT_SILPH_CO_7_UNLOCKED_DOOR3            ; 74E, (D830, bit 6)
-	const EVENT_74F                                  ; 74F, (D830, bit 7)
-	const EVENT_750                                  ; 750, (D831, bit 0)
-	const EVENT_751                                  ; 751, (D831, bit 1)
-	const EVENT_BEAT_SILPH_CO_8F_TRAINER_0           ; 752, (D831, bit 2)
-	const EVENT_BEAT_SILPH_CO_8F_TRAINER_1           ; 753, (D831, bit 3)
-	const EVENT_BEAT_SILPH_CO_8F_TRAINER_2           ; 754, (D831, bit 4)
-	const EVENT_755                                  ; 755, (D831, bit 5)
-	const EVENT_756                                  ; 756, (D831, bit 6)
-	const EVENT_757                                  ; 757, (D831, bit 7)
-	const EVENT_SILPH_CO_8_UNLOCKED_DOOR             ; 758, (D832, bit 0)
-	const EVENT_759                                  ; 759, (D832, bit 1)
-	const EVENT_75A                                  ; 75A, (D832, bit 2)
-	const EVENT_75B                                  ; 75B, (D832, bit 3)
-	const EVENT_75C                                  ; 75C, (D832, bit 4)
-	const EVENT_75D                                  ; 75D, (D832, bit 5)
-	const EVENT_75E                                  ; 75E, (D832, bit 6)
-	const EVENT_75F                                  ; 75F, (D832, bit 7)
-	const EVENT_760                                  ; 760, (D833, bit 0)
-	const EVENT_761                                  ; 761, (D833, bit 1)
-	const EVENT_BEAT_SILPH_CO_9F_TRAINER_0           ; 762, (D833, bit 2)
-	const EVENT_BEAT_SILPH_CO_9F_TRAINER_1           ; 763, (D833, bit 3)
-	const EVENT_BEAT_SILPH_CO_9F_TRAINER_2           ; 764, (D833, bit 4)
-	const EVENT_765                                  ; 765, (D833, bit 5)
-	const EVENT_766                                  ; 766, (D833, bit 6)
-	const EVENT_767                                  ; 767, (D833, bit 7)
-	const EVENT_SILPH_CO_9_UNLOCKED_DOOR1            ; 768, (D834, bit 0)
-	const EVENT_SILPH_CO_9_UNLOCKED_DOOR2            ; 769, (D834, bit 1)
-	const EVENT_SILPH_CO_9_UNLOCKED_DOOR3            ; 76A, (D834, bit 2)
-	const EVENT_SILPH_CO_9_UNLOCKED_DOOR4            ; 76B, (D834, bit 3)
-	const EVENT_76C                                  ; 76C, (D834, bit 4)
-	const EVENT_76D                                  ; 76D, (D834, bit 5)
-	const EVENT_76E                                  ; 76E, (D834, bit 6)
-	const EVENT_76F                                  ; 76F, (D834, bit 7)
-	const EVENT_770                                  ; 770, (D835, bit 0)
-	const EVENT_BEAT_SILPH_CO_10F_TRAINER_0          ; 771, (D835, bit 1)
-	const EVENT_BEAT_SILPH_CO_10F_TRAINER_1          ; 772, (D835, bit 2)
-	const EVENT_773                                  ; 773, (D835, bit 3)
-	const EVENT_774                                  ; 774, (D835, bit 4)
-	const EVENT_775                                  ; 775, (D835, bit 5)
-	const EVENT_776                                  ; 776, (D835, bit 6)
-	const EVENT_777                                  ; 777, (D835, bit 7)
-	const EVENT_SILPH_CO_10_UNLOCKED_DOOR            ; 778, (D836, bit 0)
-	const EVENT_779                                  ; 779, (D836, bit 1)
-	const EVENT_77A                                  ; 77A, (D836, bit 2)
-	const EVENT_77B                                  ; 77B, (D836, bit 3)
-	const EVENT_77C                                  ; 77C, (D836, bit 4)
-	const EVENT_77D                                  ; 77D, (D836, bit 5)
-	const EVENT_77E                                  ; 77E, (D836, bit 6)
-	const EVENT_77F                                  ; 77F, (D836, bit 7)
-	const EVENT_780                                  ; 780, (D837, bit 0)
-	const EVENT_781                                  ; 781, (D837, bit 1)
-	const EVENT_782                                  ; 782, (D837, bit 2)
-	const EVENT_783                                  ; 783, (D837, bit 3)
-	const EVENT_BEAT_SILPH_CO_11F_TRAINER_0          ; 784, (D837, bit 4)
-	const EVENT_BEAT_SILPH_CO_11F_TRAINER_1          ; 785, (D837, bit 5)
-	const EVENT_786                                  ; 786, (D837, bit 6)
-	const EVENT_787                                  ; 787, (D837, bit 7)
-	const EVENT_SILPH_CO_11_UNLOCKED_DOOR            ; 788, (D838, bit 0)
-	const EVENT_789                                  ; 789, (D838, bit 1)
-	const EVENT_78A                                  ; 78A, (D838, bit 2)
-	const EVENT_78B                                  ; 78B, (D838, bit 3)
-	const EVENT_78C                                  ; 78C, (D838, bit 4)
-	const EVENT_GOT_MASTER_BALL                      ; 78D, (D838, bit 5)
-	const EVENT_78E                                  ; 78E, (D838, bit 6)
-	const EVENT_BEAT_SILPH_CO_GIOVANNI               ; 78F, (D838, bit 7)
-	const EVENT_790                                  ; 790, (D839, bit 0)
-	const EVENT_791                                  ; 791, (D839, bit 1)
-	const EVENT_792                                  ; 792, (D839, bit 2)
-	const EVENT_793                                  ; 793, (D839, bit 3)
-	const EVENT_794                                  ; 794, (D839, bit 4)
-	const EVENT_795                                  ; 795, (D839, bit 5)
-	const EVENT_796                                  ; 796, (D839, bit 6)
-	const EVENT_797                                  ; 797, (D839, bit 7)
-	const EVENT_798                                  ; 798, (D83A, bit 0)
-	const EVENT_799                                  ; 799, (D83A, bit 1)
-	const EVENT_79A                                  ; 79A, (D83A, bit 2)
-	const EVENT_79B                                  ; 79B, (D83A, bit 3)
-	const EVENT_79C                                  ; 79C, (D83A, bit 4)
-	const EVENT_79D                                  ; 79D, (D83A, bit 5)
-	const EVENT_79E                                  ; 79E, (D83A, bit 6)
-	const EVENT_79F                                  ; 79F, (D83A, bit 7)
-	const EVENT_7A0                                  ; 7A0, (D83B, bit 0)
-	const EVENT_7A1                                  ; 7A1, (D83B, bit 1)
-	const EVENT_7A2                                  ; 7A2, (D83B, bit 2)
-	const EVENT_7A3                                  ; 7A3, (D83B, bit 3)
-	const EVENT_7A4                                  ; 7A4, (D83B, bit 4)
-	const EVENT_7A5                                  ; 7A5, (D83B, bit 5)
-	const EVENT_7A6                                  ; 7A6, (D83B, bit 6)
-	const EVENT_7A7                                  ; 7A7, (D83B, bit 7)
-	const EVENT_7A8                                  ; 7A8, (D83C, bit 0)
-	const EVENT_7A9                                  ; 7A9, (D83C, bit 1)
-	const EVENT_7AA                                  ; 7AA, (D83C, bit 2)
-	const EVENT_7AB                                  ; 7AB, (D83C, bit 3)
-	const EVENT_7AC                                  ; 7AC, (D83C, bit 4)
-	const EVENT_7AD                                  ; 7AD, (D83C, bit 5)
-	const EVENT_7AE                                  ; 7AE, (D83C, bit 6)
-	const EVENT_7AF                                  ; 7AF, (D83C, bit 7)
-	const EVENT_7B0                                  ; 7B0, (D83D, bit 0)
-	const EVENT_7B1                                  ; 7B1, (D83D, bit 1)
-	const EVENT_7B2                                  ; 7B2, (D83D, bit 2)
-	const EVENT_7B3                                  ; 7B3, (D83D, bit 3)
-	const EVENT_7B4                                  ; 7B4, (D83D, bit 4)
-	const EVENT_7B5                                  ; 7B5, (D83D, bit 5)
-	const EVENT_7B6                                  ; 7B6, (D83D, bit 6)
-	const EVENT_7B7                                  ; 7B7, (D83D, bit 7)
-	const EVENT_7B8                                  ; 7B8, (D83E, bit 0)
-	const EVENT_7B9                                  ; 7B9, (D83E, bit 1)
-	const EVENT_7BA                                  ; 7BA, (D83E, bit 2)
-	const EVENT_7BB                                  ; 7BB, (D83E, bit 3)
-	const EVENT_7BC                                  ; 7BC, (D83E, bit 4)
-	const EVENT_7BD                                  ; 7BD, (D83E, bit 5)
-	const EVENT_7BE                                  ; 7BE, (D83E, bit 6)
-	const EVENT_7BF                                  ; 7BF, (D83E, bit 7)
-	const EVENT_7C0                                  ; 7C0, (D83F, bit 0)
-	const EVENT_7C1                                  ; 7C1, (D83F, bit 1)
-	const EVENT_7C2                                  ; 7C2, (D83F, bit 2)
-	const EVENT_7C3                                  ; 7C3, (D83F, bit 3)
-	const EVENT_7C4                                  ; 7C4, (D83F, bit 4)
-	const EVENT_7C5                                  ; 7C5, (D83F, bit 5)
-	const EVENT_7C6                                  ; 7C6, (D83F, bit 6)
-	const EVENT_7C7                                  ; 7C7, (D83F, bit 7)
-	const EVENT_7C8                                  ; 7C8, (D840, bit 0)
-	const EVENT_7C9                                  ; 7C9, (D840, bit 1)
-	const EVENT_7CA                                  ; 7CA, (D840, bit 2)
-	const EVENT_7CB                                  ; 7CB, (D840, bit 3)
-	const EVENT_7CC                                  ; 7CC, (D840, bit 4)
-	const EVENT_7CD                                  ; 7CD, (D840, bit 5)
-	const EVENT_7CE                                  ; 7CE, (D840, bit 6)
-	const EVENT_7CF                                  ; 7CF, (D840, bit 7)
-	const EVENT_7D0                                  ; 7D0, (D841, bit 0)
-	const EVENT_7D1                                  ; 7D1, (D841, bit 1)
-	const EVENT_7D2                                  ; 7D2, (D841, bit 2)
-	const EVENT_7D3                                  ; 7D3, (D841, bit 3)
-	const EVENT_7D4                                  ; 7D4, (D841, bit 4)
-	const EVENT_7D5                                  ; 7D5, (D841, bit 5)
-	const EVENT_7D6                                  ; 7D6, (D841, bit 6)
-	const EVENT_7D7                                  ; 7D7, (D841, bit 7)
-	const EVENT_7D8                                  ; 7D8, (D842, bit 0)
-	const EVENT_7D9                                  ; 7D9, (D842, bit 1)
-	const EVENT_7DA                                  ; 7DA, (D842, bit 2)
-	const EVENT_7DB                                  ; 7DB, (D842, bit 3)
-	const EVENT_7DC                                  ; 7DC, (D842, bit 4)
-	const EVENT_7DD                                  ; 7DD, (D842, bit 5)
-	const EVENT_7DE                                  ; 7DE, (D842, bit 6)
-	const EVENT_7DF                                  ; 7DF, (D842, bit 7)
-	const EVENT_7E0                                  ; 7E0, (D843, bit 0)
-	const EVENT_7E1                                  ; 7E1, (D843, bit 1)
-	const EVENT_7E2                                  ; 7E2, (D843, bit 2)
-	const EVENT_7E3                                  ; 7E3, (D843, bit 3)
-	const EVENT_7E4                                  ; 7E4, (D843, bit 4)
-	const EVENT_7E5                                  ; 7E5, (D843, bit 5)
-	const EVENT_7E6                                  ; 7E6, (D843, bit 6)
-	const EVENT_7E7                                  ; 7E7, (D843, bit 7)
-	const EVENT_7E8                                  ; 7E8, (D844, bit 0)
-	const EVENT_7E9                                  ; 7E9, (D844, bit 1)
-	const EVENT_7EA                                  ; 7EA, (D844, bit 2)
-	const EVENT_7EB                                  ; 7EB, (D844, bit 3)
-	const EVENT_7EC                                  ; 7EC, (D844, bit 4)
-	const EVENT_7ED                                  ; 7ED, (D844, bit 5)
-	const EVENT_7EE                                  ; 7EE, (D844, bit 6)
-	const EVENT_7EF                                  ; 7EF, (D844, bit 7)
-	const EVENT_7F0                                  ; 7F0, (D845, bit 0)
-	const EVENT_7F1                                  ; 7F1, (D845, bit 1)
-	const EVENT_7F2                                  ; 7F2, (D845, bit 2)
-	const EVENT_7F3                                  ; 7F3, (D845, bit 3)
-	const EVENT_7F4                                  ; 7F4, (D845, bit 4)
-	const EVENT_7F5                                  ; 7F5, (D845, bit 5)
-	const EVENT_7F6                                  ; 7F6, (D845, bit 6)
-	const EVENT_7F7                                  ; 7F7, (D845, bit 7)
-	const EVENT_7F8                                  ; 7F8, (D846, bit 0)
-	const EVENT_7F9                                  ; 7F9, (D846, bit 1)
-	const EVENT_7FA                                  ; 7FA, (D846, bit 2)
-	const EVENT_7FB                                  ; 7FB, (D846, bit 3)
-	const EVENT_7FC                                  ; 7FC, (D846, bit 4)
-	const EVENT_7FD                                  ; 7FD, (D846, bit 5)
-	const EVENT_7FE                                  ; 7FE, (D846, bit 6)
-	const EVENT_7FF                                  ; 7FF, (D846, bit 7)
-	const EVENT_800                                  ; 800, (D847, bit 0)
-	const EVENT_BEAT_MANSION_2_TRAINER_0             ; 801, (D847, bit 1)
-	const EVENT_802                                  ; 802, (D847, bit 2)
-	const EVENT_803                                  ; 803, (D847, bit 3)
-	const EVENT_804                                  ; 804, (D847, bit 4)
-	const EVENT_805                                  ; 805, (D847, bit 5)
-	const EVENT_806                                  ; 806, (D847, bit 6)
-	const EVENT_807                                  ; 807, (D847, bit 7)
-	const EVENT_808                                  ; 808, (D848, bit 0)
-	const EVENT_809                                  ; 809, (D848, bit 1)
-	const EVENT_80A                                  ; 80A, (D848, bit 2)
-	const EVENT_80B                                  ; 80B, (D848, bit 3)
-	const EVENT_80C                                  ; 80C, (D848, bit 4)
-	const EVENT_80D                                  ; 80D, (D848, bit 5)
-	const EVENT_80E                                  ; 80E, (D848, bit 6)
-	const EVENT_80F                                  ; 80F, (D848, bit 7)
-	const EVENT_810                                  ; 810, (D849, bit 0)
-	const EVENT_BEAT_MANSION_3_TRAINER_0             ; 811, (D849, bit 1)
-	const EVENT_BEAT_MANSION_3_TRAINER_1             ; 812, (D849, bit 2)
-	const EVENT_813                                  ; 813, (D849, bit 3)
-	const EVENT_814                                  ; 814, (D849, bit 4)
-	const EVENT_815                                  ; 815, (D849, bit 5)
-	const EVENT_816                                  ; 816, (D849, bit 6)
-	const EVENT_817                                  ; 817, (D849, bit 7)
-	const EVENT_818                                  ; 818, (D84A, bit 0)
-	const EVENT_819                                  ; 819, (D84A, bit 1)
-	const EVENT_81A                                  ; 81A, (D84A, bit 2)
-	const EVENT_81B                                  ; 81B, (D84A, bit 3)
-	const EVENT_81C                                  ; 81C, (D84A, bit 4)
-	const EVENT_81D                                  ; 81D, (D84A, bit 5)
-	const EVENT_81E                                  ; 81E, (D84A, bit 6)
-	const EVENT_81F                                  ; 81F, (D84A, bit 7)
-	const EVENT_820                                  ; 820, (D84B, bit 0)
-	const EVENT_BEAT_MANSION_4_TRAINER_0             ; 821, (D84B, bit 1)
-	const EVENT_BEAT_MANSION_4_TRAINER_1             ; 822, (D84B, bit 2)
-	const EVENT_823                                  ; 823, (D84B, bit 3)
-	const EVENT_824                                  ; 824, (D84B, bit 4)
-	const EVENT_825                                  ; 825, (D84B, bit 5)
-	const EVENT_826                                  ; 826, (D84B, bit 6)
-	const EVENT_827                                  ; 827, (D84B, bit 7)
-	const EVENT_828                                  ; 828, (D84C, bit 0)
-	const EVENT_829                                  ; 829, (D84C, bit 1)
-	const EVENT_82A                                  ; 82A, (D84C, bit 2)
-	const EVENT_82B                                  ; 82B, (D84C, bit 3)
-	const EVENT_82C                                  ; 82C, (D84C, bit 4)
-	const EVENT_82D                                  ; 82D, (D84C, bit 5)
-	const EVENT_82E                                  ; 82E, (D84C, bit 6)
-	const EVENT_82F                                  ; 82F, (D84C, bit 7)
-	const EVENT_830                                  ; 830, (D84D, bit 0)
-	const EVENT_831                                  ; 831, (D84D, bit 1)
-	const EVENT_832                                  ; 832, (D84D, bit 2)
-	const EVENT_833                                  ; 833, (D84D, bit 3)
-	const EVENT_834                                  ; 834, (D84D, bit 4)
-	const EVENT_835                                  ; 835, (D84D, bit 5)
-	const EVENT_836                                  ; 836, (D84D, bit 6)
-	const EVENT_837                                  ; 837, (D84D, bit 7)
-	const EVENT_838                                  ; 838, (D84E, bit 0)
-	const EVENT_839                                  ; 839, (D84E, bit 1)
-	const EVENT_83A                                  ; 83A, (D84E, bit 2)
-	const EVENT_83B                                  ; 83B, (D84E, bit 3)
-	const EVENT_83C                                  ; 83C, (D84E, bit 4)
-	const EVENT_83D                                  ; 83D, (D84E, bit 5)
-	const EVENT_83E                                  ; 83E, (D84E, bit 6)
-	const EVENT_83F                                  ; 83F, (D84E, bit 7)
-	const EVENT_840                                  ; 840, (D84F, bit 0)
-	const EVENT_841                                  ; 841, (D84F, bit 1)
-	const EVENT_842                                  ; 842, (D84F, bit 2)
-	const EVENT_843                                  ; 843, (D84F, bit 3)
-	const EVENT_844                                  ; 844, (D84F, bit 4)
-	const EVENT_845                                  ; 845, (D84F, bit 5)
-	const EVENT_846                                  ; 846, (D84F, bit 6)
-	const EVENT_847                                  ; 847, (D84F, bit 7)
-	const EVENT_848                                  ; 848, (D850, bit 0)
-	const EVENT_849                                  ; 849, (D850, bit 1)
-	const EVENT_84A                                  ; 84A, (D850, bit 2)
-	const EVENT_84B                                  ; 84B, (D850, bit 3)
-	const EVENT_84C                                  ; 84C, (D850, bit 4)
-	const EVENT_84D                                  ; 84D, (D850, bit 5)
-	const EVENT_84E                                  ; 84E, (D850, bit 6)
-	const EVENT_84F                                  ; 84F, (D850, bit 7)
-	const EVENT_850                                  ; 850, (D851, bit 0)
-	const EVENT_851                                  ; 851, (D851, bit 1)
-	const EVENT_852                                  ; 852, (D851, bit 2)
-	const EVENT_853                                  ; 853, (D851, bit 3)
-	const EVENT_854                                  ; 854, (D851, bit 4)
-	const EVENT_855                                  ; 855, (D851, bit 5)
-	const EVENT_856                                  ; 856, (D851, bit 6)
-	const EVENT_857                                  ; 857, (D851, bit 7)
-	const EVENT_858                                  ; 858, (D852, bit 0)
-	const EVENT_859                                  ; 859, (D852, bit 1)
-	const EVENT_85A                                  ; 85A, (D852, bit 2)
-	const EVENT_85B                                  ; 85B, (D852, bit 3)
-	const EVENT_85C                                  ; 85C, (D852, bit 4)
-	const EVENT_85D                                  ; 85D, (D852, bit 5)
-	const EVENT_85E                                  ; 85E, (D852, bit 6)
-	const EVENT_85F                                  ; 85F, (D852, bit 7)
-	const EVENT_860                                  ; 860, (D853, bit 0)
-	const EVENT_861                                  ; 861, (D853, bit 1)
-	const EVENT_862                                  ; 862, (D853, bit 2)
-	const EVENT_863                                  ; 863, (D853, bit 3)
-	const EVENT_864                                  ; 864, (D853, bit 4)
-	const EVENT_865                                  ; 865, (D853, bit 5)
-	const EVENT_866                                  ; 866, (D853, bit 6)
-	const EVENT_867                                  ; 867, (D853, bit 7)
-	const EVENT_868                                  ; 868, (D854, bit 0)
-	const EVENT_869                                  ; 869, (D854, bit 1)
-	const EVENT_86A                                  ; 86A, (D854, bit 2)
-	const EVENT_86B                                  ; 86B, (D854, bit 3)
-	const EVENT_86C                                  ; 86C, (D854, bit 4)
-	const EVENT_86D                                  ; 86D, (D854, bit 5)
-	const EVENT_86E                                  ; 86E, (D854, bit 6)
-	const EVENT_86F                                  ; 86F, (D854, bit 7)
-	const EVENT_870                                  ; 870, (D855, bit 0)
-	const EVENT_871                                  ; 871, (D855, bit 1)
-	const EVENT_872                                  ; 872, (D855, bit 2)
-	const EVENT_873                                  ; 873, (D855, bit 3)
-	const EVENT_874                                  ; 874, (D855, bit 4)
-	const EVENT_875                                  ; 875, (D855, bit 5)
-	const EVENT_876                                  ; 876, (D855, bit 6)
-	const EVENT_877                                  ; 877, (D855, bit 7)
-	const EVENT_878                                  ; 878, (D856, bit 0)
-	const EVENT_879                                  ; 879, (D856, bit 1)
-	const EVENT_87A                                  ; 87A, (D856, bit 2)
-	const EVENT_87B                                  ; 87B, (D856, bit 3)
-	const EVENT_87C                                  ; 87C, (D856, bit 4)
-	const EVENT_87D                                  ; 87D, (D856, bit 5)
-	const EVENT_87E                                  ; 87E, (D856, bit 6)
-	const EVENT_87F                                  ; 87F, (D856, bit 7)
-	const EVENT_GOT_HM03                             ; 880, (D857, bit 0)
-	const EVENT_881                                  ; 881, (D857, bit 1)
-	const EVENT_882                                  ; 882, (D857, bit 2)
-	const EVENT_883                                  ; 883, (D857, bit 3)
-	const EVENT_884                                  ; 884, (D857, bit 4)
-	const EVENT_885                                  ; 885, (D857, bit 5)
-	const EVENT_886                                  ; 886, (D857, bit 6)
-	const EVENT_887                                  ; 887, (D857, bit 7)
-	const EVENT_888                                  ; 888, (D858, bit 0)
-	const EVENT_889                                  ; 889, (D858, bit 1)
-	const EVENT_88A                                  ; 88A, (D858, bit 2)
-	const EVENT_88B                                  ; 88B, (D858, bit 3)
-	const EVENT_88C                                  ; 88C, (D858, bit 4)
-	const EVENT_88D                                  ; 88D, (D858, bit 5)
-	const EVENT_88E                                  ; 88E, (D858, bit 6)
-	const EVENT_88F                                  ; 88F, (D858, bit 7)
-	const EVENT_890                                  ; 890, (D859, bit 0)
-	const EVENT_891                                  ; 891, (D859, bit 1)
-	const EVENT_892                                  ; 892, (D859, bit 2)
-	const EVENT_893                                  ; 893, (D859, bit 3)
-	const EVENT_894                                  ; 894, (D859, bit 4)
-	const EVENT_895                                  ; 895, (D859, bit 5)
-	const EVENT_896                                  ; 896, (D859, bit 6)
-	const EVENT_897                                  ; 897, (D859, bit 7)
-	const EVENT_898                                  ; 898, (D85A, bit 0)
-	const EVENT_899                                  ; 899, (D85A, bit 1)
-	const EVENT_89A                                  ; 89A, (D85A, bit 2)
-	const EVENT_89B                                  ; 89B, (D85A, bit 3)
-	const EVENT_89C                                  ; 89C, (D85A, bit 4)
-	const EVENT_89D                                  ; 89D, (D85A, bit 5)
-	const EVENT_89E                                  ; 89E, (D85A, bit 6)
-	const EVENT_89F                                  ; 89F, (D85A, bit 7)
-	const EVENT_8A0                                  ; 8A0, (D85B, bit 0)
-	const EVENT_8A1                                  ; 8A1, (D85B, bit 1)
-	const EVENT_8A2                                  ; 8A2, (D85B, bit 2)
-	const EVENT_8A3                                  ; 8A3, (D85B, bit 3)
-	const EVENT_8A4                                  ; 8A4, (D85B, bit 4)
-	const EVENT_8A5                                  ; 8A5, (D85B, bit 5)
-	const EVENT_8A6                                  ; 8A6, (D85B, bit 6)
-	const EVENT_8A7                                  ; 8A7, (D85B, bit 7)
-	const EVENT_8A8                                  ; 8A8, (D85C, bit 0)
-	const EVENT_8A9                                  ; 8A9, (D85C, bit 1)
-	const EVENT_8AA                                  ; 8AA, (D85C, bit 2)
-	const EVENT_8AB                                  ; 8AB, (D85C, bit 3)
-	const EVENT_8AC                                  ; 8AC, (D85C, bit 4)
-	const EVENT_8AD                                  ; 8AD, (D85C, bit 5)
-	const EVENT_8AE                                  ; 8AE, (D85C, bit 6)
-	const EVENT_8AF                                  ; 8AF, (D85C, bit 7)
-	const EVENT_8B0                                  ; 8B0, (D85D, bit 0)
-	const EVENT_8B1                                  ; 8B1, (D85D, bit 1)
-	const EVENT_8B2                                  ; 8B2, (D85D, bit 2)
-	const EVENT_8B3                                  ; 8B3, (D85D, bit 3)
-	const EVENT_8B4                                  ; 8B4, (D85D, bit 4)
-	const EVENT_8B5                                  ; 8B5, (D85D, bit 5)
-	const EVENT_8B6                                  ; 8B6, (D85D, bit 6)
-	const EVENT_8B7                                  ; 8B7, (D85D, bit 7)
-	const EVENT_8B8                                  ; 8B8, (D85E, bit 0)
-	const EVENT_8B9                                  ; 8B9, (D85E, bit 1)
-	const EVENT_8BA                                  ; 8BA, (D85E, bit 2)
-	const EVENT_8BB                                  ; 8BB, (D85E, bit 3)
-	const EVENT_8BC                                  ; 8BC, (D85E, bit 4)
-	const EVENT_8BD                                  ; 8BD, (D85E, bit 5)
-	const EVENT_8BE                                  ; 8BE, (D85E, bit 6)
-	const EVENT_8BF                                  ; 8BF, (D85E, bit 7)
-	const EVENT_8C0                                  ; 8C0, (D85F, bit 0)
-	const EVENT_BEAT_MEWTWO                          ; 8C1, (D85F, bit 1)
-	const EVENT_8C2                                  ; 8C2, (D85F, bit 2)
-	const EVENT_8C3                                  ; 8C3, (D85F, bit 3)
-	const EVENT_8C4                                  ; 8C4, (D85F, bit 4)
-	const EVENT_8C5                                  ; 8C5, (D85F, bit 5)
-	const EVENT_8C6                                  ; 8C6, (D85F, bit 6)
-	const EVENT_8C7                                  ; 8C7, (D85F, bit 7)
-	const EVENT_8C8                                  ; 8C8, (D860, bit 0)
-	const EVENT_8C9                                  ; 8C9, (D860, bit 1)
-	const EVENT_8CA                                  ; 8CA, (D860, bit 2)
-	const EVENT_8CB                                  ; 8CB, (D860, bit 3)
-	const EVENT_8CC                                  ; 8CC, (D860, bit 4)
-	const EVENT_8CD                                  ; 8CD, (D860, bit 5)
-	const EVENT_8CE                                  ; 8CE, (D860, bit 6)
-	const EVENT_8CF                                  ; 8CF, (D860, bit 7)
-	const EVENT_8D0                                  ; 8D0, (D861, bit 0)
-	const EVENT_8D1                                  ; 8D1, (D861, bit 1)
-	const EVENT_8D2                                  ; 8D2, (D861, bit 2)
-	const EVENT_8D3                                  ; 8D3, (D861, bit 3)
-	const EVENT_8D4                                  ; 8D4, (D861, bit 4)
-	const EVENT_8D5                                  ; 8D5, (D861, bit 5)
-	const EVENT_8D6                                  ; 8D6, (D861, bit 6)
-	const EVENT_8D7                                  ; 8D7, (D861, bit 7)
-	const EVENT_8D8                                  ; 8D8, (D862, bit 0)
-	const EVENT_8D9                                  ; 8D9, (D862, bit 1)
-	const EVENT_8DA                                  ; 8DA, (D862, bit 2)
-	const EVENT_8DB                                  ; 8DB, (D862, bit 3)
-	const EVENT_8DC                                  ; 8DC, (D862, bit 4)
-	const EVENT_8DD                                  ; 8DD, (D862, bit 5)
-	const EVENT_8DE                                  ; 8DE, (D862, bit 6)
-	const EVENT_8DF                                  ; 8DF, (D862, bit 7)
-	const ELITE4_EVENTS_START                        ; 8E0, (D863, bit 0)
-	const EVENT_BEAT_LORELEIS_ROOM_TRAINER_0         ; 8E1, (D863, bit 1)
-	const EVENT_8E2                                  ; 8E2, (D863, bit 2)
-	const EVENT_8E3                                  ; 8E3, (D863, bit 3)
-	const EVENT_8E4                                  ; 8E4, (D863, bit 4)
-	const EVENT_8E5                                  ; 8E5, (D863, bit 5)
-	const EVENT_AUTOWALKED_INTO_LORELEIS_ROOM        ; 8E6, (D863, bit 6)
-	const EVENT_8E7                                  ; 8E7, (D863, bit 7)
-	const EVENT_8E8                                  ; 8E8, (D864, bit 0)
-	const EVENT_BEAT_BRUNOS_ROOM_TRAINER_0           ; 8E9, (D864, bit 1)
-	const EVENT_8EA                                  ; 8EA, (D864, bit 2)
-	const EVENT_8EB                                  ; 8EB, (D864, bit 3)
-	const EVENT_8EC                                  ; 8EC, (D864, bit 4)
-	const EVENT_8ED                                  ; 8ED, (D864, bit 5)
-	const EVENT_AUTOWALKED_INTO_BRUNOS_ROOM          ; 8EE, (D864, bit 6)
-	const EVENT_8EF                                  ; 8EF, (D864, bit 7)
-	const EVENT_8F0                                  ; 8F0, (D865, bit 0)
-	const EVENT_BEAT_AGATHAS_ROOM_TRAINER_0          ; 8F1, (D865, bit 1)
-	const EVENT_8F2                                  ; 8F2, (D865, bit 2)
-	const EVENT_8F3                                  ; 8F3, (D865, bit 3)
-	const EVENT_8F4                                  ; 8F4, (D865, bit 4)
-	const EVENT_8F5                                  ; 8F5, (D865, bit 5)
-	const EVENT_AUTOWALKED_INTO_AGATHAS_ROOM         ; 8F6, (D865, bit 6)
-	const EVENT_8F7                                  ; 8F7, (D865, bit 7)
-	const EVENT_8F8                                  ; 8F8, (D866, bit 0)
-	const EVENT_BEAT_LANCES_ROOM_TRAINER_0           ; 8F9, (D866, bit 1)
-	const EVENT_8FA                                  ; 8FA, (D866, bit 2)
-	const EVENT_8FB                                  ; 8FB, (D866, bit 3)
-	const EVENT_8FC                                  ; 8FC, (D866, bit 4)
-	const EVENT_8FD                                  ; 8FD, (D866, bit 5)
-	const EVENT_BEAT_LANCE                           ; 8FE, (D866, bit 6)
-	const EVENT_LANCES_ROOM_LOCK_DOOR                ; 8FF, (D866, bit 7)
-	const EVENT_900                                  ; 900, (D867, bit 0)
-	const EVENT_BEAT_CHAMPION_RIVAL                  ; 901, (D867, bit 1)
-	const EVENT_902                                  ; 902, (D867, bit 2)
-	const EVENT_903                                  ; 903, (D867, bit 3)
-	const EVENT_904                                  ; 904, (D867, bit 4)
-	const EVENT_905                                  ; 905, (D867, bit 5)
-	const EVENT_906                                  ; 906, (D867, bit 6)
-	const ELITE4_CHAMPION_EVENTS_END                 ; 907, (D867, bit 7)
-	const EVENT_908                                  ; 908, (D868, bit 0)
-	const EVENT_909                                  ; 909, (D868, bit 1)
-	const EVENT_90A                                  ; 90A, (D868, bit 2)
-	const EVENT_90B                                  ; 90B, (D868, bit 3)
-	const EVENT_90C                                  ; 90C, (D868, bit 4)
-	const EVENT_90D                                  ; 90D, (D868, bit 5)
-	const EVENT_90E                                  ; 90E, (D868, bit 6)
-	const EVENT_90F                                  ; 90F, (D868, bit 7)
-	const EVENT_910                                  ; 910, (D869, bit 0)
-	const EVENT_BEAT_VICTORY_ROAD_1_TRAINER_0        ; 911, (D869, bit 1)
-	const EVENT_BEAT_VICTORY_ROAD_1_TRAINER_1        ; 912, (D869, bit 2)
-	const EVENT_913                                  ; 913, (D869, bit 3)
-	const EVENT_914                                  ; 914, (D869, bit 4)
-	const EVENT_915                                  ; 915, (D869, bit 5)
-	const EVENT_916                                  ; 916, (D869, bit 6)
-	const EVENT_VICTORY_ROAD_1_BOULDER_ON_SWITCH     ; 917, (D869, bit 7)
-	const EVENT_918                                  ; 918, (D86A, bit 0)
-	const EVENT_919                                  ; 919, (D86A, bit 1)
-	const EVENT_91A                                  ; 91A, (D86A, bit 2)
-	const EVENT_91B                                  ; 91B, (D86A, bit 3)
-	const EVENT_91C                                  ; 91C, (D86A, bit 4)
-	const EVENT_91D                                  ; 91D, (D86A, bit 5)
-	const EVENT_91E                                  ; 91E, (D86A, bit 6)
-	const EVENT_91F                                  ; 91F, (D86A, bit 7)
-	const EVENT_920                                  ; 920, (D86B, bit 0)
-	const EVENT_921                                  ; 921, (D86B, bit 1)
-	const EVENT_922                                  ; 922, (D86B, bit 2)
-	const EVENT_923                                  ; 923, (D86B, bit 3)
-	const EVENT_924                                  ; 924, (D86B, bit 4)
-	const EVENT_925                                  ; 925, (D86B, bit 5)
-	const EVENT_926                                  ; 926, (D86B, bit 6)
-	const EVENT_927                                  ; 927, (D86B, bit 7)
-	const EVENT_928                                  ; 928, (D86C, bit 0)
-	const EVENT_929                                  ; 929, (D86C, bit 1)
-	const EVENT_92A                                  ; 92A, (D86C, bit 2)
-	const EVENT_92B                                  ; 92B, (D86C, bit 3)
-	const EVENT_92C                                  ; 92C, (D86C, bit 4)
-	const EVENT_92D                                  ; 92D, (D86C, bit 5)
-	const EVENT_92E                                  ; 92E, (D86C, bit 6)
-	const EVENT_92F                                  ; 92F, (D86C, bit 7)
-	const EVENT_930                                  ; 930, (D86D, bit 0)
-	const EVENT_931                                  ; 931, (D86D, bit 1)
-	const EVENT_932                                  ; 932, (D86D, bit 2)
-	const EVENT_933                                  ; 933, (D86D, bit 3)
-	const EVENT_934                                  ; 934, (D86D, bit 4)
-	const EVENT_935                                  ; 935, (D86D, bit 5)
-	const EVENT_936                                  ; 936, (D86D, bit 6)
-	const EVENT_937                                  ; 937, (D86D, bit 7)
-	const EVENT_938                                  ; 938, (D86E, bit 0)
-	const EVENT_939                                  ; 939, (D86E, bit 1)
-	const EVENT_93A                                  ; 93A, (D86E, bit 2)
-	const EVENT_93B                                  ; 93B, (D86E, bit 3)
-	const EVENT_93C                                  ; 93C, (D86E, bit 4)
-	const EVENT_93D                                  ; 93D, (D86E, bit 5)
-	const EVENT_93E                                  ; 93E, (D86E, bit 6)
-	const EVENT_93F                                  ; 93F, (D86E, bit 7)
-	const EVENT_940                                  ; 940, (D86F, bit 0)
-	const EVENT_941                                  ; 941, (D86F, bit 1)
-	const EVENT_942                                  ; 942, (D86F, bit 2)
-	const EVENT_943                                  ; 943, (D86F, bit 3)
-	const EVENT_944                                  ; 944, (D86F, bit 4)
-	const EVENT_945                                  ; 945, (D86F, bit 5)
-	const EVENT_946                                  ; 946, (D86F, bit 6)
-	const EVENT_947                                  ; 947, (D86F, bit 7)
-	const EVENT_948                                  ; 948, (D870, bit 0)
-	const EVENT_949                                  ; 949, (D870, bit 1)
-	const EVENT_94A                                  ; 94A, (D870, bit 2)
-	const EVENT_94B                                  ; 94B, (D870, bit 3)
-	const EVENT_94C                                  ; 94C, (D870, bit 4)
-	const EVENT_94D                                  ; 94D, (D870, bit 5)
-	const EVENT_94E                                  ; 94E, (D870, bit 6)
-	const EVENT_94F                                  ; 94F, (D870, bit 7)
-	const EVENT_950                                  ; 950, (D871, bit 0)
-	const EVENT_951                                  ; 951, (D871, bit 1)
-	const EVENT_952                                  ; 952, (D871, bit 2)
-	const EVENT_953                                  ; 953, (D871, bit 3)
-	const EVENT_954                                  ; 954, (D871, bit 4)
-	const EVENT_955                                  ; 955, (D871, bit 5)
-	const EVENT_956                                  ; 956, (D871, bit 6)
-	const EVENT_957                                  ; 957, (D871, bit 7)
-	const EVENT_958                                  ; 958, (D872, bit 0)
-	const EVENT_959                                  ; 959, (D872, bit 1)
-	const EVENT_95A                                  ; 95A, (D872, bit 2)
-	const EVENT_95B                                  ; 95B, (D872, bit 3)
-	const EVENT_95C                                  ; 95C, (D872, bit 4)
-	const EVENT_95D                                  ; 95D, (D872, bit 5)
-	const EVENT_95E                                  ; 95E, (D872, bit 6)
-	const EVENT_95F                                  ; 95F, (D872, bit 7)
-	const EVENT_960                                  ; 960, (D873, bit 0)
-	const EVENT_961                                  ; 961, (D873, bit 1)
-	const EVENT_962                                  ; 962, (D873, bit 2)
-	const EVENT_963                                  ; 963, (D873, bit 3)
-	const EVENT_964                                  ; 964, (D873, bit 4)
-	const EVENT_965                                  ; 965, (D873, bit 5)
-	const EVENT_966                                  ; 966, (D873, bit 6)
-	const EVENT_967                                  ; 967, (D873, bit 7)
-	const EVENT_968                                  ; 968, (D874, bit 0)
-	const EVENT_969                                  ; 969, (D874, bit 1)
-	const EVENT_96A                                  ; 96A, (D874, bit 2)
-	const EVENT_96B                                  ; 96B, (D874, bit 3)
-	const EVENT_96C                                  ; 96C, (D874, bit 4)
-	const EVENT_96D                                  ; 96D, (D874, bit 5)
-	const EVENT_96E                                  ; 96E, (D874, bit 6)
-	const EVENT_96F                                  ; 96F, (D874, bit 7)
-	const EVENT_970                                  ; 970, (D875, bit 0)
-	const EVENT_971                                  ; 971, (D875, bit 1)
-	const EVENT_972                                  ; 972, (D875, bit 2)
-	const EVENT_973                                  ; 973, (D875, bit 3)
-	const EVENT_974                                  ; 974, (D875, bit 4)
-	const EVENT_975                                  ; 975, (D875, bit 5)
-	const EVENT_976                                  ; 976, (D875, bit 6)
-	const EVENT_977                                  ; 977, (D875, bit 7)
-	const EVENT_978                                  ; 978, (D876, bit 0)
-	const EVENT_979                                  ; 979, (D876, bit 1)
-	const EVENT_97A                                  ; 97A, (D876, bit 2)
-	const EVENT_97B                                  ; 97B, (D876, bit 3)
-	const EVENT_97C                                  ; 97C, (D876, bit 4)
-	const EVENT_97D                                  ; 97D, (D876, bit 5)
-	const EVENT_97E                                  ; 97E, (D876, bit 6)
-	const EVENT_97F                                  ; 97F, (D876, bit 7)
-	const EVENT_980                                  ; 980, (D877, bit 0)
-	const EVENT_981                                  ; 981, (D877, bit 1)
-	const EVENT_982                                  ; 982, (D877, bit 2)
-	const EVENT_983                                  ; 983, (D877, bit 3)
-	const EVENT_984                                  ; 984, (D877, bit 4)
-	const EVENT_985                                  ; 985, (D877, bit 5)
-	const EVENT_986                                  ; 986, (D877, bit 6)
-	const EVENT_987                                  ; 987, (D877, bit 7)
-	const EVENT_988                                  ; 988, (D878, bit 0)
-	const EVENT_989                                  ; 989, (D878, bit 1)
-	const EVENT_98A                                  ; 98A, (D878, bit 2)
-	const EVENT_98B                                  ; 98B, (D878, bit 3)
-	const EVENT_98C                                  ; 98C, (D878, bit 4)
-	const EVENT_98D                                  ; 98D, (D878, bit 5)
-	const EVENT_98E                                  ; 98E, (D878, bit 6)
-	const EVENT_98F                                  ; 98F, (D878, bit 7)
-	const EVENT_990                                  ; 990, (D879, bit 0)
-	const EVENT_991                                  ; 991, (D879, bit 1)
-	const EVENT_992                                  ; 992, (D879, bit 2)
-	const EVENT_993                                  ; 993, (D879, bit 3)
-	const EVENT_994                                  ; 994, (D879, bit 4)
-	const EVENT_995                                  ; 995, (D879, bit 5)
-	const EVENT_996                                  ; 996, (D879, bit 6)
-	const EVENT_997                                  ; 997, (D879, bit 7)
-	const EVENT_998                                  ; 998, (D87A, bit 0)
-	const EVENT_999                                  ; 999, (D87A, bit 1)
-	const EVENT_99A                                  ; 99A, (D87A, bit 2)
-	const EVENT_99B                                  ; 99B, (D87A, bit 3)
-	const EVENT_99C                                  ; 99C, (D87A, bit 4)
-	const EVENT_99D                                  ; 99D, (D87A, bit 5)
-	const EVENT_99E                                  ; 99E, (D87A, bit 6)
-	const EVENT_99F                                  ; 99F, (D87A, bit 7)
-	const EVENT_9A0                                  ; 9A0, (D87B, bit 0)
-	const EVENT_9A1                                  ; 9A1, (D87B, bit 1)
-	const EVENT_9A2                                  ; 9A2, (D87B, bit 2)
-	const EVENT_9A3                                  ; 9A3, (D87B, bit 3)
-	const EVENT_9A4                                  ; 9A4, (D87B, bit 4)
-	const EVENT_9A5                                  ; 9A5, (D87B, bit 5)
-	const EVENT_9A6                                  ; 9A6, (D87B, bit 6)
-	const EVENT_9A7                                  ; 9A7, (D87B, bit 7)
-	const EVENT_9A8                                  ; 9A8, (D87C, bit 0)
-	const EVENT_9A9                                  ; 9A9, (D87C, bit 1)
-	const EVENT_9AA                                  ; 9AA, (D87C, bit 2)
-	const EVENT_9AB                                  ; 9AB, (D87C, bit 3)
-	const EVENT_9AC                                  ; 9AC, (D87C, bit 4)
-	const EVENT_9AD                                  ; 9AD, (D87C, bit 5)
-	const EVENT_9AE                                  ; 9AE, (D87C, bit 6)
-	const EVENT_9AF                                  ; 9AF, (D87C, bit 7)
-	const EVENT_9B0                                  ; 9B0, (D87D, bit 0)
-	const EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_0         ; 9B1, (D87D, bit 1)
-	const EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_1         ; 9B2, (D87D, bit 2)
-	const EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_2         ; 9B3, (D87D, bit 3)
-	const EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_3         ; 9B4, (D87D, bit 4)
-	const EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_4         ; 9B5, (D87D, bit 5)
-	const EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_5         ; 9B6, (D87D, bit 6)
-	const EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_6         ; 9B7, (D87D, bit 7)
-	const EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_7         ; 9B8, (D87E, bit 0)
-	const EVENT_9B9                                  ; 9B9, (D87E, bit 1)
-	const EVENT_9BA                                  ; 9BA, (D87E, bit 2)
-	const EVENT_9BB                                  ; 9BB, (D87E, bit 3)
-	const EVENT_9BC                                  ; 9BC, (D87E, bit 4)
-	const EVENT_9BD                                  ; 9BD, (D87E, bit 5)
-	const EVENT_9BE                                  ; 9BE, (D87E, bit 6)
-	const EVENT_9BF                                  ; 9BF, (D87E, bit 7)
-	const EVENT_SEAFOAM2_BOULDER1_DOWN_HOLE          ; 9C0, (D87F, bit 0)
-	const EVENT_SEAFOAM2_BOULDER2_DOWN_HOLE          ; 9C1, (D87F, bit 1)
-	const EVENT_9C2                                  ; 9C2, (D87F, bit 2)
-	const EVENT_9C3                                  ; 9C3, (D87F, bit 3)
-	const EVENT_9C4                                  ; 9C4, (D87F, bit 4)
-	const EVENT_9C5                                  ; 9C5, (D87F, bit 5)
-	const EVENT_9C6                                  ; 9C6, (D87F, bit 6)
-	const EVENT_9C7                                  ; 9C7, (D87F, bit 7)
-	const EVENT_SEAFOAM3_BOULDER1_DOWN_HOLE          ; 9C8, (D880, bit 0)
-	const EVENT_SEAFOAM3_BOULDER2_DOWN_HOLE          ; 9C9, (D880, bit 1)
-	const EVENT_9CA                                  ; 9CA, (D880, bit 2)
-	const EVENT_9CB                                  ; 9CB, (D880, bit 3)
-	const EVENT_9CC                                  ; 9CC, (D880, bit 4)
-	const EVENT_9CD                                  ; 9CD, (D880, bit 5)
-	const EVENT_9CE                                  ; 9CE, (D880, bit 6)
-	const EVENT_9CF                                  ; 9CF, (D880, bit 7)
-	const EVENT_SEAFOAM4_BOULDER1_DOWN_HOLE          ; 9D0, (D881, bit 0)
-	const EVENT_SEAFOAM4_BOULDER2_DOWN_HOLE          ; 9D1, (D881, bit 1)
-	const EVENT_9D2                                  ; 9D2, (D881, bit 2)
-	const EVENT_9D3                                  ; 9D3, (D881, bit 3)
-	const EVENT_9D4                                  ; 9D4, (D881, bit 4)
-	const EVENT_9D5                                  ; 9D5, (D881, bit 5)
-	const EVENT_9D6                                  ; 9D6, (D881, bit 6)
-	const EVENT_9D7                                  ; 9D7, (D881, bit 7)
-	const EVENT_9D8                                  ; 9D8, (D882, bit 0)
-	const EVENT_9D9                                  ; 9D9, (D882, bit 1)
-	const EVENT_BEAT_ARTICUNO                        ; 9DA, (D882, bit 2)
-	const EVENT_9DB                                  ; 9DB, (D882, bit 3)
-	const EVENT_9DC                                  ; 9DC, (D882, bit 4)
-	const EVENT_9DD                                  ; 9DD, (D882, bit 5)
-	const EVENT_9DE                                  ; 9DE, (D882, bit 6)
-	const EVENT_9DF                                  ; 9DF, (D882, bit 7)
-	const EVENT_9E0                                  ; 9E0, (D883, bit 0)
-	const EVENT_9E1                                  ; 9E1, (D883, bit 1)
-	const EVENT_9E2                                  ; 9E2, (D883, bit 2)
-	const EVENT_9E3                                  ; 9E3, (D883, bit 3)
-	const EVENT_9E4                                  ; 9E4, (D883, bit 4)
-	const EVENT_9E5                                  ; 9E5, (D883, bit 5)
-	const EVENT_9E6                                  ; 9E6, (D883, bit 6)
-	const EVENT_9E7                                  ; 9E7, (D883, bit 7)
-	const EVENT_9E8                                  ; 9E8, (D884, bit 0)
-	const EVENT_9E9                                  ; 9E9, (D884, bit 1)
-	const EVENT_9EA                                  ; 9EA, (D884, bit 2)
-	const EVENT_9EB                                  ; 9EB, (D884, bit 3)
-	const EVENT_9EC                                  ; 9EC, (D884, bit 4)
-	const EVENT_9ED                                  ; 9ED, (D884, bit 5)
-	const EVENT_9EE                                  ; 9EE, (D884, bit 6)
-	const EVENT_9EF                                  ; 9EF, (D884, bit 7)
-	const EVENT_9F0                                  ; 9F0, (D885, bit 0)
-	const EVENT_9F1                                  ; 9F1, (D885, bit 1)
-	const EVENT_9F2                                  ; 9F2, (D885, bit 2)
-	const EVENT_9F3                                  ; 9F3, (D885, bit 3)
-	const EVENT_9F4                                  ; 9F4, (D885, bit 4)
-	const EVENT_9F5                                  ; 9F5, (D885, bit 5)
-	const EVENT_9F6                                  ; 9F6, (D885, bit 6)
-	const EVENT_9F7                                  ; 9F7, (D885, bit 7)
-	const EVENT_9F8                                  ; 9F8, (D886, bit 0)
-	const EVENT_9F9                                  ; 9F9, (D886, bit 1)
-	const EVENT_9FA                                  ; 9FA, (D886, bit 2)
-	const EVENT_9FB                                  ; 9FB, (D886, bit 3)
-	const EVENT_9FC                                  ; 9FC, (D886, bit 4)
-	const EVENT_9FD                                  ; 9FD, (D886, bit 5)
-	const EVENT_9FE                                  ; 9FE, (D886, bit 6)
-	const EVENT_9FF                                  ; 9FF, (D886, bit 7)
+; Pallet Town events
+	const_def
+	const EVENT_FOLLOWED_OAK_INTO_LAB
+	const_skip 2
+	const EVENT_HALL_OF_FAME_DEX_RATING
+	const_skip 2
+	const EVENT_PALLET_AFTER_GETTING_POKEBALLS
+	const_skip 17
+	const EVENT_GOT_TOWN_MAP
+	const EVENT_ENTERED_BLUES_HOUSE
+	const EVENT_DAISY_WALKING
+	const_skip 5
+	const EVENT_FOLLOWED_OAK_INTO_LAB_2
+	const EVENT_OAK_ASKED_TO_CHOOSE_MON
+	const EVENT_GOT_STARTER
+	const EVENT_BATTLED_RIVAL_IN_OAKS_LAB
+	const EVENT_GOT_POKEBALLS_FROM_OAK
+	const EVENT_GOT_POKEDEX
+	const EVENT_PALLET_AFTER_GETTING_POKEBALLS_2
+	const EVENT_OAK_APPEARED_IN_PALLET
+
+; Viridian City events
+	const_next $28
+	const EVENT_VIRIDIAN_GYM_OPEN
+	const EVENT_GOT_TM42
+	const_skip 14
+	const EVENT_OAK_GOT_PARCEL
+	const EVENT_GOT_OAKS_PARCEL
+	const_skip 22
+	const EVENT_GOT_TM27
+	const EVENT_BEAT_VIRIDIAN_GYM_GIOVANNI
+	const EVENT_BEAT_VIRIDIAN_GYM_TRAINER_0
+	const EVENT_BEAT_VIRIDIAN_GYM_TRAINER_1
+	const EVENT_BEAT_VIRIDIAN_GYM_TRAINER_2
+	const EVENT_BEAT_VIRIDIAN_GYM_TRAINER_3
+	const EVENT_BEAT_VIRIDIAN_GYM_TRAINER_4
+	const EVENT_BEAT_VIRIDIAN_GYM_TRAINER_5
+	const EVENT_BEAT_VIRIDIAN_GYM_TRAINER_6
+	const EVENT_BEAT_VIRIDIAN_GYM_TRAINER_7
+
+; Pewter City events
+	const_next $68
+	const EVENT_BOUGHT_MUSEUM_TICKET
+	const EVENT_GOT_OLD_AMBER
+	const_skip 8
+	const EVENT_BEAT_PEWTER_GYM_TRAINER_0
+	const_skip 3
+	const EVENT_GOT_TM34
+	const EVENT_BEAT_BROCK
+
+; Cerulean City events
+	const_next $98
+	const EVENT_BEAT_CERULEAN_RIVAL
+	const_skip 14
+	const EVENT_BEAT_CERULEAN_ROCKET_THIEF
+	const_skip 18
+	const EVENT_BEAT_CERULEAN_GYM_TRAINER_0
+	const EVENT_BEAT_CERULEAN_GYM_TRAINER_1
+	const_skip 2
+	const EVENT_GOT_TM11
+	const EVENT_BEAT_MISTY
+	const EVENT_GOT_BICYCLE
+
+; Lavender Town events
+	const_next $F0 - 2
+	const EVENT_POKEMON_TOWER_RIVAL_ON_LEFT
+	const EVENT_BEAT_POKEMON_TOWER_RIVAL
+	const_skip
+	const EVENT_BEAT_POKEMONTOWER_3_TRAINER_0
+	const EVENT_BEAT_POKEMONTOWER_3_TRAINER_1
+	const EVENT_BEAT_POKEMONTOWER_3_TRAINER_2
+	const_skip 5
+	const EVENT_BEAT_POKEMONTOWER_4_TRAINER_0
+	const EVENT_BEAT_POKEMONTOWER_4_TRAINER_1
+	const EVENT_BEAT_POKEMONTOWER_4_TRAINER_2
+	const_skip 6
+	const EVENT_BEAT_POKEMONTOWER_5_TRAINER_0
+	const EVENT_BEAT_POKEMONTOWER_5_TRAINER_1
+	const EVENT_BEAT_POKEMONTOWER_5_TRAINER_2
+	const EVENT_BEAT_POKEMONTOWER_5_TRAINER_3
+	const_skip
+	const EVENT_IN_PURIFIED_ZONE
+	const_skip
+	const EVENT_BEAT_POKEMONTOWER_6_TRAINER_0
+	const EVENT_BEAT_POKEMONTOWER_6_TRAINER_1
+	const EVENT_BEAT_POKEMONTOWER_6_TRAINER_2
+	const_skip 3
+	const EVENT_BEAT_GHOST_MAROWAK
+	const_skip
+	const EVENT_BEAT_POKEMONTOWER_7_TRAINER_0
+	const EVENT_BEAT_POKEMONTOWER_7_TRAINER_1
+	const EVENT_BEAT_POKEMONTOWER_7_TRAINER_2
+	const_skip 3
+	const EVENT_RESCUED_MR_FUJI_2
+	const_skip 16
+	const EVENT_GOT_POKE_FLUTE
+
+; Vermilion City events
+	const_next $150
+	const_skip
+	const EVENT_GOT_BIKE_VOUCHER
+	const_skip 4
+	const EVENT_SEEL_FAN_BOAST
+	const EVENT_PIKACHU_FAN_BOAST
+	const_skip 8
+	const EVENT_2ND_LOCK_OPENED
+	const EVENT_1ST_LOCK_OPENED
+	const EVENT_BEAT_VERMILION_GYM_TRAINER_0
+	const EVENT_BEAT_VERMILION_GYM_TRAINER_1
+	const EVENT_BEAT_VERMILION_GYM_TRAINER_2
+	const_skip
+	const EVENT_GOT_TM24
+	const EVENT_BEAT_LT_SURGE
+
+; Celadon City events
+	const_next $180
+	const EVENT_GOT_TM41
+	const_skip 11
+	const EVENT_GOT_TM13
+	const EVENT_GOT_TM48
+	const EVENT_GOT_TM49
+	const EVENT_GOT_TM18
+	const_skip 24
+	const EVENT_GOT_TM21
+	const EVENT_BEAT_ERIKA
+	const EVENT_BEAT_CELADON_GYM_TRAINER_0
+	const EVENT_BEAT_CELADON_GYM_TRAINER_1
+	const EVENT_BEAT_CELADON_GYM_TRAINER_2
+	const EVENT_BEAT_CELADON_GYM_TRAINER_3
+	const EVENT_BEAT_CELADON_GYM_TRAINER_4
+	const EVENT_BEAT_CELADON_GYM_TRAINER_5
+	const EVENT_BEAT_CELADON_GYM_TRAINER_6
+	const_skip 7
+	const EVENT_1B8 ; ???
+	const EVENT_FOUND_ROCKET_HIDEOUT
+	const EVENT_GOT_10_COINS
+	const EVENT_GOT_20_COINS
+	const EVENT_GOT_20_COINS_2
+	const_skip 2
+	const EVENT_1BF ; ???
+	const_skip 32
+	const EVENT_GOT_COIN_CASE
+
+; Fuchsia City events
+	const_next $238
+	const EVENT_GOT_HM04
+	const EVENT_GAVE_GOLD_TEETH
+	const_skip 20
+	const EVENT_SAFARI_GAME_OVER
+	const EVENT_IN_SAFARI_ZONE
+	const_skip 8
+	const EVENT_GOT_TM06
+	const EVENT_BEAT_KOGA
+	const EVENT_BEAT_FUCHSIA_GYM_TRAINER_0
+	const EVENT_BEAT_FUCHSIA_GYM_TRAINER_1
+	const EVENT_BEAT_FUCHSIA_GYM_TRAINER_2
+	const EVENT_BEAT_FUCHSIA_GYM_TRAINER_3
+	const EVENT_BEAT_FUCHSIA_GYM_TRAINER_4
+	const EVENT_BEAT_FUCHSIA_GYM_TRAINER_5
+
+; Cinnabar Island events
+	const_next $278
+	const EVENT_MANSION_SWITCH_ON
+	const_skip 16
+	const EVENT_BEAT_MANSION_1_TRAINER_0
+	const_skip 14
+	const EVENT_GOT_TM38
+	const EVENT_BEAT_BLAINE
+	const EVENT_BEAT_CINNABAR_GYM_TRAINER_0
+	const EVENT_BEAT_CINNABAR_GYM_TRAINER_1
+	const EVENT_BEAT_CINNABAR_GYM_TRAINER_2
+	const EVENT_BEAT_CINNABAR_GYM_TRAINER_3
+	const EVENT_BEAT_CINNABAR_GYM_TRAINER_4
+	const EVENT_BEAT_CINNABAR_GYM_TRAINER_5
+	const EVENT_BEAT_CINNABAR_GYM_TRAINER_6
+	const_skip 6
+	const EVENT_2A7 ; ???
+	const EVENT_CINNABAR_GYM_GATE0_UNLOCKED
+	const EVENT_CINNABAR_GYM_GATE1_UNLOCKED
+	const EVENT_CINNABAR_GYM_GATE2_UNLOCKED
+	const EVENT_CINNABAR_GYM_GATE3_UNLOCKED
+	const EVENT_CINNABAR_GYM_GATE4_UNLOCKED
+	const EVENT_CINNABAR_GYM_GATE5_UNLOCKED
+	const EVENT_CINNABAR_GYM_GATE6_UNLOCKED
+	const_skip 40
+	const EVENT_GOT_TM35
+	const_skip 8
+	const EVENT_GAVE_FOSSIL_TO_LAB
+	const EVENT_LAB_STILL_REVIVING_FOSSIL
+	const EVENT_LAB_HANDING_OVER_FOSSIL_MON
+
+; Saffron City events
+	const_next $340
+	const EVENT_GOT_TM31
+	const_skip 15
+	const EVENT_DEFEATED_FIGHTING_DOJO
+	const EVENT_BEAT_KARATE_MASTER
+	const EVENT_BEAT_FIGHTING_DOJO_TRAINER_0
+	const EVENT_BEAT_FIGHTING_DOJO_TRAINER_1
+	const EVENT_BEAT_FIGHTING_DOJO_TRAINER_2
+	const EVENT_BEAT_FIGHTING_DOJO_TRAINER_3
+	const EVENT_GOT_HITMONLEE
+	const EVENT_GOT_HITMONCHAN
+	const_skip 8
+	const EVENT_GOT_TM46
+	const EVENT_BEAT_SABRINA
+	const EVENT_BEAT_SAFFRON_GYM_TRAINER_0
+	const EVENT_BEAT_SAFFRON_GYM_TRAINER_1
+	const EVENT_BEAT_SAFFRON_GYM_TRAINER_2
+	const EVENT_BEAT_SAFFRON_GYM_TRAINER_3
+	const EVENT_BEAT_SAFFRON_GYM_TRAINER_4
+	const EVENT_BEAT_SAFFRON_GYM_TRAINER_5
+	const EVENT_BEAT_SAFFRON_GYM_TRAINER_6
+	const_skip 46
+	const EVENT_SILPH_CO_RECEPTIONIST_AT_DESK
+	const_skip 24
+	const EVENT_GOT_TM29
+
+; Route 1 events
+	const_next $3C0
+	const EVENT_GOT_POTION_SAMPLE
+
+; Route 2 events
+	const_next $3D8
+	const EVENT_GOT_HM05
+
+; Route 3 events
+	const_next $3E0
+	const_skip 2
+	const EVENT_BEAT_ROUTE_3_TRAINER_0
+	const EVENT_BEAT_ROUTE_3_TRAINER_1
+	const EVENT_BEAT_ROUTE_3_TRAINER_2
+	const EVENT_BEAT_ROUTE_3_TRAINER_3
+	const EVENT_BEAT_ROUTE_3_TRAINER_4
+	const EVENT_BEAT_ROUTE_3_TRAINER_5
+	const EVENT_BEAT_ROUTE_3_TRAINER_6
+	const EVENT_BEAT_ROUTE_3_TRAINER_7
+
+; Route 4 events
+	const_next $3F0
+	const_skip 2
+	const EVENT_BEAT_ROUTE_4_TRAINER_0
+	const_skip 12
+	const EVENT_BOUGHT_MAGIKARP
+
+; Route 6 events
+	const_next $410
+	const_skip
+	const EVENT_BEAT_ROUTE_6_TRAINER_0
+	const EVENT_BEAT_ROUTE_6_TRAINER_1
+	const EVENT_BEAT_ROUTE_6_TRAINER_2
+	const EVENT_BEAT_ROUTE_6_TRAINER_3
+	const EVENT_BEAT_ROUTE_6_TRAINER_4
+	const EVENT_BEAT_ROUTE_6_TRAINER_5
+
+; Route 8 events
+	const_next $430
+	const_skip
+	const EVENT_BEAT_ROUTE_8_TRAINER_0
+	const EVENT_BEAT_ROUTE_8_TRAINER_1
+	const EVENT_BEAT_ROUTE_8_TRAINER_2
+	const EVENT_BEAT_ROUTE_8_TRAINER_3
+	const EVENT_BEAT_ROUTE_8_TRAINER_4
+	const EVENT_BEAT_ROUTE_8_TRAINER_5
+	const EVENT_BEAT_ROUTE_8_TRAINER_6
+	const EVENT_BEAT_ROUTE_8_TRAINER_7
+	const EVENT_BEAT_ROUTE_8_TRAINER_8
+
+; Route 9 events
+	const_next $440
+	const_skip
+	const EVENT_BEAT_ROUTE_9_TRAINER_0
+	const EVENT_BEAT_ROUTE_9_TRAINER_1
+	const EVENT_BEAT_ROUTE_9_TRAINER_2
+	const EVENT_BEAT_ROUTE_9_TRAINER_3
+	const EVENT_BEAT_ROUTE_9_TRAINER_4
+	const EVENT_BEAT_ROUTE_9_TRAINER_5
+	const EVENT_BEAT_ROUTE_9_TRAINER_6
+	const EVENT_BEAT_ROUTE_9_TRAINER_7
+	const EVENT_BEAT_ROUTE_9_TRAINER_8
+
+; Route 10 events
+	const_next $450
+	const_skip
+	const EVENT_BEAT_ROUTE_10_TRAINER_0
+	const EVENT_BEAT_ROUTE_10_TRAINER_1
+	const EVENT_BEAT_ROUTE_10_TRAINER_2
+	const EVENT_BEAT_ROUTE_10_TRAINER_3
+	const EVENT_BEAT_ROUTE_10_TRAINER_4
+	const EVENT_BEAT_ROUTE_10_TRAINER_5
+	const_skip 2
+	const EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_0
+	const EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_1
+	const EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_2
+	const EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_3
+	const EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_4
+	const EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_5
+	const EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_6
+	const_skip
+	const EVENT_BEAT_POWER_PLANT_VOLTORB_0
+	const EVENT_BEAT_POWER_PLANT_VOLTORB_1
+	const EVENT_BEAT_POWER_PLANT_VOLTORB_2
+	const EVENT_BEAT_POWER_PLANT_VOLTORB_3
+	const EVENT_BEAT_POWER_PLANT_VOLTORB_4
+	const EVENT_BEAT_POWER_PLANT_VOLTORB_5
+	const EVENT_BEAT_POWER_PLANT_VOLTORB_6
+	const EVENT_BEAT_POWER_PLANT_VOLTORB_7
+	const EVENT_BEAT_ZAPDOS
+
+; Route 11 events
+	const_next $470
+	const_skip
+	const EVENT_BEAT_ROUTE_11_TRAINER_0
+	const EVENT_BEAT_ROUTE_11_TRAINER_1
+	const EVENT_BEAT_ROUTE_11_TRAINER_2
+	const EVENT_BEAT_ROUTE_11_TRAINER_3
+	const EVENT_BEAT_ROUTE_11_TRAINER_4
+	const EVENT_BEAT_ROUTE_11_TRAINER_5
+	const EVENT_BEAT_ROUTE_11_TRAINER_6
+	const EVENT_BEAT_ROUTE_11_TRAINER_7
+	const EVENT_BEAT_ROUTE_11_TRAINER_8
+	const EVENT_BEAT_ROUTE_11_TRAINER_9
+	const_skip 4
+	const EVENT_GOT_ITEMFINDER
+
+; Route 12 events
+	const_next $480
+	const EVENT_GOT_TM39
+	const_skip
+	const EVENT_BEAT_ROUTE_12_TRAINER_0
+	const EVENT_BEAT_ROUTE_12_TRAINER_1
+	const EVENT_BEAT_ROUTE_12_TRAINER_2
+	const EVENT_BEAT_ROUTE_12_TRAINER_3
+	const EVENT_BEAT_ROUTE_12_TRAINER_4
+	const EVENT_BEAT_ROUTE_12_TRAINER_5
+	const EVENT_BEAT_ROUTE_12_TRAINER_6
+	const_skip 5
+	const EVENT_FIGHT_ROUTE12_SNORLAX
+	const EVENT_BEAT_ROUTE12_SNORLAX
+
+; Route 13 events
+	const_next $490
+	const_skip
+	const EVENT_BEAT_ROUTE_13_TRAINER_0
+	const EVENT_BEAT_ROUTE_13_TRAINER_1
+	const EVENT_BEAT_ROUTE_13_TRAINER_2
+	const EVENT_BEAT_ROUTE_13_TRAINER_3
+	const EVENT_BEAT_ROUTE_13_TRAINER_4
+	const EVENT_BEAT_ROUTE_13_TRAINER_5
+	const EVENT_BEAT_ROUTE_13_TRAINER_6
+	const EVENT_BEAT_ROUTE_13_TRAINER_7
+	const EVENT_BEAT_ROUTE_13_TRAINER_8
+	const EVENT_BEAT_ROUTE_13_TRAINER_9
+
+; Route 14 events
+	const_next $4A0
+	const_skip
+	const EVENT_BEAT_ROUTE_14_TRAINER_0
+	const EVENT_BEAT_ROUTE_14_TRAINER_1
+	const EVENT_BEAT_ROUTE_14_TRAINER_2
+	const EVENT_BEAT_ROUTE_14_TRAINER_3
+	const EVENT_BEAT_ROUTE_14_TRAINER_4
+	const EVENT_BEAT_ROUTE_14_TRAINER_5
+	const EVENT_BEAT_ROUTE_14_TRAINER_6
+	const EVENT_BEAT_ROUTE_14_TRAINER_7
+	const EVENT_BEAT_ROUTE_14_TRAINER_8
+	const EVENT_BEAT_ROUTE_14_TRAINER_9
+
+; Route 15 events
+	const_next $4B0
+	const EVENT_GOT_EXP_ALL
+	const EVENT_BEAT_ROUTE_15_TRAINER_0
+	const EVENT_BEAT_ROUTE_15_TRAINER_1
+	const EVENT_BEAT_ROUTE_15_TRAINER_2
+	const EVENT_BEAT_ROUTE_15_TRAINER_3
+	const EVENT_BEAT_ROUTE_15_TRAINER_4
+	const EVENT_BEAT_ROUTE_15_TRAINER_5
+	const EVENT_BEAT_ROUTE_15_TRAINER_6
+	const EVENT_BEAT_ROUTE_15_TRAINER_7
+	const EVENT_BEAT_ROUTE_15_TRAINER_8
+	const EVENT_BEAT_ROUTE_15_TRAINER_9
+
+; Route 16 events
+	const_next $4C0
+	const_skip
+	const EVENT_BEAT_ROUTE_16_TRAINER_0
+	const EVENT_BEAT_ROUTE_16_TRAINER_1
+	const EVENT_BEAT_ROUTE_16_TRAINER_2
+	const EVENT_BEAT_ROUTE_16_TRAINER_3
+	const EVENT_BEAT_ROUTE_16_TRAINER_4
+	const EVENT_BEAT_ROUTE_16_TRAINER_5
+	const_skip
+	const EVENT_FIGHT_ROUTE16_SNORLAX
+	const EVENT_BEAT_ROUTE16_SNORLAX
+	const_skip 4
+	const EVENT_GOT_HM02
+	const EVENT_RESCUED_MR_FUJI
+
+; Route 17 events
+	const_next $4D0
+	const_skip
+	const EVENT_BEAT_ROUTE_17_TRAINER_0
+	const EVENT_BEAT_ROUTE_17_TRAINER_1
+	const EVENT_BEAT_ROUTE_17_TRAINER_2
+	const EVENT_BEAT_ROUTE_17_TRAINER_3
+	const EVENT_BEAT_ROUTE_17_TRAINER_4
+	const EVENT_BEAT_ROUTE_17_TRAINER_5
+	const EVENT_BEAT_ROUTE_17_TRAINER_6
+	const EVENT_BEAT_ROUTE_17_TRAINER_7
+	const EVENT_BEAT_ROUTE_17_TRAINER_8
+	const EVENT_BEAT_ROUTE_17_TRAINER_9
+
+; Route 18 events
+	const_next $4E0
+	const_skip
+	const EVENT_BEAT_ROUTE_18_TRAINER_0
+	const EVENT_BEAT_ROUTE_18_TRAINER_1
+	const EVENT_BEAT_ROUTE_18_TRAINER_2
+
+; Route 19 events
+	const_next $4F0
+	const_skip
+	const EVENT_BEAT_ROUTE_19_TRAINER_0
+	const EVENT_BEAT_ROUTE_19_TRAINER_1
+	const EVENT_BEAT_ROUTE_19_TRAINER_2
+	const EVENT_BEAT_ROUTE_19_TRAINER_3
+	const EVENT_BEAT_ROUTE_19_TRAINER_4
+	const EVENT_BEAT_ROUTE_19_TRAINER_5
+	const EVENT_BEAT_ROUTE_19_TRAINER_6
+	const EVENT_BEAT_ROUTE_19_TRAINER_7
+	const EVENT_BEAT_ROUTE_19_TRAINER_8
+	const EVENT_BEAT_ROUTE_19_TRAINER_9
+
+; Route 20 events
+	const_next $500
+	const EVENT_IN_SEAFOAM_ISLANDS
+	const EVENT_BEAT_ROUTE_20_TRAINER_0
+	const EVENT_BEAT_ROUTE_20_TRAINER_1
+	const EVENT_BEAT_ROUTE_20_TRAINER_2
+	const EVENT_BEAT_ROUTE_20_TRAINER_3
+	const EVENT_BEAT_ROUTE_20_TRAINER_4
+	const EVENT_BEAT_ROUTE_20_TRAINER_5
+	const EVENT_BEAT_ROUTE_20_TRAINER_6
+	const EVENT_BEAT_ROUTE_20_TRAINER_7
+	const EVENT_BEAT_ROUTE_20_TRAINER_8
+	const EVENT_BEAT_ROUTE_20_TRAINER_9
+	const_skip 3
+	const EVENT_SEAFOAM1_BOULDER1_DOWN_HOLE
+	const EVENT_SEAFOAM1_BOULDER2_DOWN_HOLE
+
+; Route 21 events
+	const_next $510
+	const_skip
+	const EVENT_BEAT_ROUTE_21_TRAINER_0
+	const EVENT_BEAT_ROUTE_21_TRAINER_1
+	const EVENT_BEAT_ROUTE_21_TRAINER_2
+	const EVENT_BEAT_ROUTE_21_TRAINER_3
+	const EVENT_BEAT_ROUTE_21_TRAINER_4
+	const EVENT_BEAT_ROUTE_21_TRAINER_5
+	const EVENT_BEAT_ROUTE_21_TRAINER_6
+	const EVENT_BEAT_ROUTE_21_TRAINER_7
+	const EVENT_BEAT_ROUTE_21_TRAINER_8
+
+; Route 22 events
+	const_next $520
+	const EVENT_1ST_ROUTE22_RIVAL_BATTLE
+	const EVENT_2ND_ROUTE22_RIVAL_BATTLE
+	const_skip 3
+	const EVENT_BEAT_ROUTE22_RIVAL_1ST_BATTLE
+	const EVENT_BEAT_ROUTE22_RIVAL_2ND_BATTLE
+	const EVENT_ROUTE22_RIVAL_WANTS_BATTLE
+
+; Route 23 events
+	const_next $530
+	const EVENT_PASSED_CASCADEBADGE_CHECK
+	const EVENT_PASSED_THUNDERBADGE_CHECK
+	const EVENT_PASSED_RAINBOWBADGE_CHECK
+	const EVENT_PASSED_SOULBADGE_CHECK
+	const EVENT_PASSED_MARSHBADGE_CHECK
+	const EVENT_PASSED_VOLCANOBADGE_CHECK
+	const EVENT_PASSED_EARTHBADGE_CHECK
+	const_skip
+	const EVENT_VICTORY_ROAD_2_BOULDER_ON_SWITCH1
+	const EVENT_BEAT_VICTORY_ROAD_2_TRAINER_0
+	const EVENT_BEAT_VICTORY_ROAD_2_TRAINER_1
+	const EVENT_BEAT_VICTORY_ROAD_2_TRAINER_2
+	const EVENT_BEAT_VICTORY_ROAD_2_TRAINER_3
+	const EVENT_BEAT_VICTORY_ROAD_2_TRAINER_4
+	const EVENT_BEAT_MOLTRES
+	const EVENT_VICTORY_ROAD_2_BOULDER_ON_SWITCH2
+
+; Route 24 events
+	const_next $540
+	const EVENT_GOT_NUGGET
+	const EVENT_BEAT_ROUTE24_ROCKET
+	const EVENT_BEAT_ROUTE_24_TRAINER_0
+	const EVENT_BEAT_ROUTE_24_TRAINER_1
+	const EVENT_BEAT_ROUTE_24_TRAINER_2
+	const EVENT_BEAT_ROUTE_24_TRAINER_3
+	const EVENT_BEAT_ROUTE_24_TRAINER_4
+	const EVENT_BEAT_ROUTE_24_TRAINER_5
+	const_skip
+	const EVENT_NUGGET_REWARD_AVAILABLE
+
+; Route 25 events
+	const_next $550
+	const EVENT_MET_BILL
+	const EVENT_BEAT_ROUTE_25_TRAINER_0
+	const EVENT_BEAT_ROUTE_25_TRAINER_1
+	const EVENT_BEAT_ROUTE_25_TRAINER_2
+	const EVENT_BEAT_ROUTE_25_TRAINER_3
+	const EVENT_BEAT_ROUTE_25_TRAINER_4
+	const EVENT_BEAT_ROUTE_25_TRAINER_5
+	const EVENT_BEAT_ROUTE_25_TRAINER_6
+	const EVENT_BEAT_ROUTE_25_TRAINER_7
+	const EVENT_BEAT_ROUTE_25_TRAINER_8
+	const_skip
+	const EVENT_USED_CELL_SEPARATOR_ON_BILL
+	const EVENT_GOT_SS_TICKET
+	const EVENT_MET_BILL_2
+	const EVENT_BILL_SAID_USE_CELL_SEPARATOR
+	const EVENT_LEFT_BILLS_HOUSE_AFTER_HELPING
+
+; Viridian Forest events
+	const_next $560
+	const_skip 2
+	const EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_0
+	const EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_1
+	const EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_2
+
+; Mt. Moon events
+	const_next $570
+	const_skip
+	const EVENT_BEAT_MT_MOON_1_TRAINER_0
+	const EVENT_BEAT_MT_MOON_1_TRAINER_1
+	const EVENT_BEAT_MT_MOON_1_TRAINER_2
+	const EVENT_BEAT_MT_MOON_1_TRAINER_3
+	const EVENT_BEAT_MT_MOON_1_TRAINER_4
+	const EVENT_BEAT_MT_MOON_1_TRAINER_5
+	const EVENT_BEAT_MT_MOON_1_TRAINER_6
+	const_skip
+	const EVENT_BEAT_MT_MOON_EXIT_SUPER_NERD
+	const EVENT_BEAT_MT_MOON_3_TRAINER_0
+	const EVENT_BEAT_MT_MOON_3_TRAINER_1
+	const EVENT_BEAT_MT_MOON_3_TRAINER_2
+	const EVENT_BEAT_MT_MOON_3_TRAINER_3
+	const EVENT_GOT_DOME_FOSSIL
+	const EVENT_GOT_HELIX_FOSSIL
+
+; S.S. Anne events
+	const_next $5C0
+	const_skip 4
+	const EVENT_BEAT_SS_ANNE_5_TRAINER_0
+	const EVENT_BEAT_SS_ANNE_5_TRAINER_1
+	const_skip 26
+	const EVENT_GOT_HM01
+	const EVENT_RUBBED_CAPTAINS_BACK
+	const EVENT_SS_ANNE_LEFT
+	const EVENT_WALKED_PAST_GUARD_AFTER_SS_ANNE_LEFT
+	const EVENT_STARTED_WALKING_OUT_OF_DOCK
+	const EVENT_WALKED_OUT_OF_DOCK
+	const_skip 11
+	const EVENT_BEAT_SS_ANNE_8_TRAINER_0
+	const EVENT_BEAT_SS_ANNE_8_TRAINER_1
+	const EVENT_BEAT_SS_ANNE_8_TRAINER_2
+	const EVENT_BEAT_SS_ANNE_8_TRAINER_3
+	const_skip 12
+	const EVENT_BEAT_SS_ANNE_9_TRAINER_0
+	const EVENT_BEAT_SS_ANNE_9_TRAINER_1
+	const EVENT_BEAT_SS_ANNE_9_TRAINER_2
+	const EVENT_BEAT_SS_ANNE_9_TRAINER_3
+	const_skip 12
+	const EVENT_BEAT_SS_ANNE_10_TRAINER_0
+	const EVENT_BEAT_SS_ANNE_10_TRAINER_1
+	const EVENT_BEAT_SS_ANNE_10_TRAINER_2
+	const EVENT_BEAT_SS_ANNE_10_TRAINER_3
+	const EVENT_BEAT_SS_ANNE_10_TRAINER_4
+	const EVENT_BEAT_SS_ANNE_10_TRAINER_5
+
+; Victory Road 3F events
+	const_next $660
+	const EVENT_VICTORY_ROAD_3_BOULDER_ON_SWITCH1
+	const EVENT_BEAT_VICTORY_ROAD_3_TRAINER_0
+	const EVENT_BEAT_VICTORY_ROAD_3_TRAINER_1
+	const EVENT_BEAT_VICTORY_ROAD_3_TRAINER_2
+	const EVENT_BEAT_VICTORY_ROAD_3_TRAINER_3
+	const_skip
+	const EVENT_VICTORY_ROAD_3_BOULDER_ON_SWITCH2
+
+; Rocket Hideout events
+	const_next $670
+	const_skip
+	const EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_0
+	const EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_1
+	const EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_2
+	const EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_3
+	const EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_4
+	const_skip
+	const EVENT_677 ; ???
+	const_skip 7
+	const EVENT_67F ; ???
+	const_skip
+	const EVENT_BEAT_ROCKET_HIDEOUT_2_TRAINER_0
+	const_skip 15
+	const EVENT_BEAT_ROCKET_HIDEOUT_3_TRAINER_0
+	const EVENT_BEAT_ROCKET_HIDEOUT_3_TRAINER_1
+	const_skip 15
+	const EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_0
+	const EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_1
+	const EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_2
+	const EVENT_ROCKET_HIDEOUT_4_DOOR_UNLOCKED
+	const EVENT_ROCKET_DROPPED_LIFT_KEY
+	const EVENT_BEAT_ROCKET_HIDEOUT_GIOVANNI
+
+; Silph Co. events
+	const_next $6F0
+	const_skip 2
+	const EVENT_BEAT_SILPH_CO_2F_TRAINER_0
+	const EVENT_BEAT_SILPH_CO_2F_TRAINER_1
+	const EVENT_BEAT_SILPH_CO_2F_TRAINER_2
+	const EVENT_BEAT_SILPH_CO_2F_TRAINER_3
+	const_skip 7
+	const EVENT_SILPH_CO_2_UNLOCKED_DOOR1
+	const EVENT_SILPH_CO_2_UNLOCKED_DOOR2
+	const EVENT_GOT_TM36
+	const_skip 2
+	const EVENT_BEAT_SILPH_CO_3F_TRAINER_0
+	const EVENT_BEAT_SILPH_CO_3F_TRAINER_1
+	const_skip 4
+	const EVENT_SILPH_CO_3_UNLOCKED_DOOR1
+	const EVENT_SILPH_CO_3_UNLOCKED_DOOR2
+	const_skip 8
+	const EVENT_BEAT_SILPH_CO_4F_TRAINER_0
+	const EVENT_BEAT_SILPH_CO_4F_TRAINER_1
+	const EVENT_BEAT_SILPH_CO_4F_TRAINER_2
+	const_skip 3
+	const EVENT_SILPH_CO_4_UNLOCKED_DOOR1
+	const EVENT_SILPH_CO_4_UNLOCKED_DOOR2
+	const_skip 8
+	const EVENT_BEAT_SILPH_CO_5F_TRAINER_0
+	const EVENT_BEAT_SILPH_CO_5F_TRAINER_1
+	const EVENT_BEAT_SILPH_CO_5F_TRAINER_2
+	const EVENT_BEAT_SILPH_CO_5F_TRAINER_3
+	const_skip 2
+	const EVENT_SILPH_CO_5_UNLOCKED_DOOR1
+	const EVENT_SILPH_CO_5_UNLOCKED_DOOR2
+	const EVENT_SILPH_CO_5_UNLOCKED_DOOR3
+	const_skip 11
+	const EVENT_BEAT_SILPH_CO_6F_TRAINER_0
+	const EVENT_BEAT_SILPH_CO_6F_TRAINER_1
+	const EVENT_BEAT_SILPH_CO_6F_TRAINER_2
+	const_skip 6
+	const EVENT_SILPH_CO_6_UNLOCKED_DOOR
+	const EVENT_BEAT_SILPH_CO_RIVAL
+	const_skip 4
+	const EVENT_BEAT_SILPH_CO_7F_TRAINER_0
+	const EVENT_BEAT_SILPH_CO_7F_TRAINER_1
+	const EVENT_BEAT_SILPH_CO_7F_TRAINER_2
+	const EVENT_BEAT_SILPH_CO_7F_TRAINER_3
+	const_skip 3
+	const EVENT_SILPH_CO_7_UNLOCKED_DOOR1
+	const EVENT_SILPH_CO_7_UNLOCKED_DOOR2
+	const EVENT_SILPH_CO_7_UNLOCKED_DOOR3
+	const_skip 3
+	const EVENT_BEAT_SILPH_CO_8F_TRAINER_0
+	const EVENT_BEAT_SILPH_CO_8F_TRAINER_1
+	const EVENT_BEAT_SILPH_CO_8F_TRAINER_2
+	const_skip 3
+	const EVENT_SILPH_CO_8_UNLOCKED_DOOR
+	const_skip 9
+	const EVENT_BEAT_SILPH_CO_9F_TRAINER_0
+	const EVENT_BEAT_SILPH_CO_9F_TRAINER_1
+	const EVENT_BEAT_SILPH_CO_9F_TRAINER_2
+	const_skip 3
+	const EVENT_SILPH_CO_9_UNLOCKED_DOOR1
+	const EVENT_SILPH_CO_9_UNLOCKED_DOOR2
+	const EVENT_SILPH_CO_9_UNLOCKED_DOOR3
+	const EVENT_SILPH_CO_9_UNLOCKED_DOOR4
+	const_skip 5
+	const EVENT_BEAT_SILPH_CO_10F_TRAINER_0
+	const EVENT_BEAT_SILPH_CO_10F_TRAINER_1
+	const_skip 5
+	const EVENT_SILPH_CO_10_UNLOCKED_DOOR
+	const_skip 11
+	const EVENT_BEAT_SILPH_CO_11F_TRAINER_0
+	const EVENT_BEAT_SILPH_CO_11F_TRAINER_1
+	const_skip 2
+	const EVENT_SILPH_CO_11_UNLOCKED_DOOR
+	const_skip 4
+	const EVENT_GOT_MASTER_BALL
+	const_skip
+	const EVENT_BEAT_SILPH_CO_GIOVANNI
+
+; Pokémon Mansion events
+	const_next $800
+	const_skip
+	const EVENT_BEAT_MANSION_2_TRAINER_0
+	const_skip 15
+	const EVENT_BEAT_MANSION_3_TRAINER_0
+	const EVENT_BEAT_MANSION_3_TRAINER_1
+	const_skip 14
+	const EVENT_BEAT_MANSION_4_TRAINER_0
+	const EVENT_BEAT_MANSION_4_TRAINER_1
+
+; Safari Zone events
+	const_next $880
+	const EVENT_GOT_HM03
+
+; Cerulean Cave events
+	const_next $8C0
+	const_skip
+	const EVENT_BEAT_MEWTWO
+
+; Indigo Plateau events
+	const_next $8E0
+	const ELITE4_EVENTS_START
+	const EVENT_BEAT_LORELEIS_ROOM_TRAINER_0
+	const_skip 4
+	const EVENT_AUTOWALKED_INTO_LORELEIS_ROOM
+	const_skip 2
+	const EVENT_BEAT_BRUNOS_ROOM_TRAINER_0
+	const_skip 4
+	const EVENT_AUTOWALKED_INTO_BRUNOS_ROOM
+	const_skip 2
+	const EVENT_BEAT_AGATHAS_ROOM_TRAINER_0
+	const_skip 4
+	const EVENT_AUTOWALKED_INTO_AGATHAS_ROOM
+	const_skip 2
+	const EVENT_BEAT_LANCES_ROOM_TRAINER_0
+	const_skip 4
+	const EVENT_BEAT_LANCE
+	const EVENT_LANCES_ROOM_LOCK_DOOR
+	const_skip
+	const EVENT_BEAT_CHAMPION_RIVAL
+	const_skip 5
+	const ELITE4_CHAMPION_EVENTS_END
+
+; Victory Road 1F events
+	const_next $910
+	const_skip
+	const EVENT_BEAT_VICTORY_ROAD_1_TRAINER_0
+	const EVENT_BEAT_VICTORY_ROAD_1_TRAINER_1
+	const_skip 4
+	const EVENT_VICTORY_ROAD_1_BOULDER_ON_SWITCH
+
+; Rock Tunnel events
+	const_next $9B0
+	const_skip
+	const EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_0
+	const EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_1
+	const EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_2
+	const EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_3
+	const EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_4
+	const EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_5
+	const EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_6
+	const EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_7
+
+; Seafoam Islands events
+	const_next $9C0
+	const EVENT_SEAFOAM2_BOULDER1_DOWN_HOLE
+	const EVENT_SEAFOAM2_BOULDER2_DOWN_HOLE
+	const_skip 6
+	const EVENT_SEAFOAM3_BOULDER1_DOWN_HOLE
+	const EVENT_SEAFOAM3_BOULDER2_DOWN_HOLE
+	const_skip 6
+	const EVENT_SEAFOAM4_BOULDER1_DOWN_HOLE
+	const EVENT_SEAFOAM4_BOULDER2_DOWN_HOLE
+	const_skip 8
+	const EVENT_BEAT_ARTICUNO
+
+; End of events
+	const_next $A00
+NUM_EVENTS EQU const_value

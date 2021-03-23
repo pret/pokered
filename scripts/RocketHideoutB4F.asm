@@ -52,7 +52,7 @@ RocketHideout4Script3:
 	ld [wJoyIgnore], a
 	SetEvent EVENT_BEAT_ROCKET_HIDEOUT_GIOVANNI
 	ld a, $a
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	call GBFadeOutToBlack
 	ld a, HS_ROCKET_HIDEOUT_B4F_GIOVANNI
@@ -85,36 +85,15 @@ RocketHideoutB4F_TextPointers:
 	dw RocketHideout4Text10
 
 RocketHideout4TrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_0
-	db ($0 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_0
-	dw RocketHideout4BattleText2 ; TextBeforeBattle
-	dw RocketHideout4AfterBattleText2 ; TextAfterBattle
-	dw RocketHideout4EndBattleText2 ; TextEndBattle
-	dw RocketHideout4EndBattleText2 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_0, 0, RocketHideout4BattleText2, RocketHideout4EndBattleText2, RocketHideout4AfterBattleText2
 RocketHideout4TrainerHeader1:
-	dbEventFlagBit EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_1
-	db ($0 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_1
-	dw RocketHideout4BattleText3 ; TextBeforeBattle
-	dw RocketHideout4AfterBattleText3 ; TextAfterBattle
-	dw RocketHideout4EndBattleText3 ; TextEndBattle
-	dw RocketHideout4EndBattleText3 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_1, 0, RocketHideout4BattleText3, RocketHideout4EndBattleText3, RocketHideout4AfterBattleText3
 RocketHideout4TrainerHeader2:
-	dbEventFlagBit EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_2
-	db ($1 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_2
-	dw RocketHideout4BattleText4 ; TextBeforeBattle
-	dw RocketHideout4AfterBattleText4 ; TextAfterBattle
-	dw RocketHideout4EndBattleText4 ; TextEndBattle
-	dw RocketHideout4EndBattleText4 ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_2, 1, RocketHideout4BattleText4, RocketHideout4EndBattleText4, RocketHideout4AfterBattleText4
+	db -1 ; end
 
 RocketHideout4Text1:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_BEAT_ROCKET_HIDEOUT_GIOVANNI
 	jp nz, .asm_545571
 	ld hl, RocketHideout4Text_4557a
@@ -125,12 +104,12 @@ RocketHideout4Text1:
 	ld hl, RocketHideout4Text_4557f
 	ld de, RocketHideout4Text_4557f
 	call SaveEndBattleTextPointers
-	ld a, [H_SPRITEINDEX]
+	ldh a, [hSpriteIndex]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ld a, $3
 	ld [wRocketHideoutB4FCurScript], a
 	ld [wCurMapScript], a
@@ -142,69 +121,69 @@ RocketHideout4Text1:
 	jp TextScriptEnd
 
 RocketHideout4Text_4557a:
-	TX_FAR _RocketHideout4Text_4557a
-	db "@"
+	text_far _RocketHideout4Text_4557a
+	text_end
 
 RocketHideout4Text_4557f:
-	TX_FAR _RocketHideout4Text_4557f
-	db "@"
+	text_far _RocketHideout4Text_4557f
+	text_end
 
 RocketHideout4Text10:
-	TX_FAR _RocketHideout4Text_45584
-	db "@"
+	text_far _RocketHideout4Text_45584
+	text_end
 
 RocketHideout4Text2:
-	TX_ASM
+	text_asm
 	ld hl, RocketHideout4TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 RocketHideout4BattleText2:
-	TX_FAR _RocketHideout4BattleText2
-	db "@"
+	text_far _RocketHideout4BattleText2
+	text_end
 
 RocketHideout4EndBattleText2:
-	TX_FAR _RocketHideout4EndBattleText2
-	db "@"
+	text_far _RocketHideout4EndBattleText2
+	text_end
 
 RocketHideout4AfterBattleText2:
-	TX_FAR _RocketHide4AfterBattleText2
-	db "@"
+	text_far _RocketHide4AfterBattleText2
+	text_end
 
 RocketHideout4Text3:
-	TX_ASM
+	text_asm
 	ld hl, RocketHideout4TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 RocketHideout4BattleText3:
-	TX_FAR _RocketHideout4BattleText3
-	db "@"
+	text_far _RocketHideout4BattleText3
+	text_end
 
 RocketHideout4EndBattleText3:
-	TX_FAR _RocketHideout4EndBattleText3
-	db "@"
+	text_far _RocketHideout4EndBattleText3
+	text_end
 
 RocketHideout4AfterBattleText3:
-	TX_FAR _RocketHide4AfterBattleText3
-	db "@"
+	text_far _RocketHide4AfterBattleText3
+	text_end
 
 RocketHideout4Text4:
-	TX_ASM
+	text_asm
 	ld hl, RocketHideout4TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 RocketHideout4BattleText4:
-	TX_FAR _RocketHideout4BattleText4
-	db "@"
+	text_far _RocketHideout4BattleText4
+	text_end
 
 RocketHideout4EndBattleText4:
-	TX_FAR _RocketHideout4EndBattleText4
-	db "@"
+	text_far _RocketHideout4EndBattleText4
+	text_end
 
 RocketHideout4AfterBattleText4:
-	TX_ASM
+	text_asm
 	ld hl, RocketHideout4Text_455ec
 	call PrintText
 	CheckAndSetEvent EVENT_ROCKET_DROPPED_LIFT_KEY
@@ -216,5 +195,5 @@ RocketHideout4AfterBattleText4:
 	jp TextScriptEnd
 
 RocketHideout4Text_455ec:
-	TX_FAR _RocketHideout4Text_455ec
-	db "@"
+	text_far _RocketHideout4Text_455ec
+	text_end

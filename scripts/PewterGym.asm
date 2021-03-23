@@ -2,7 +2,7 @@ PewterGym_Script:
 	ld hl, wCurrentMapScriptFlags
 	bit 6, [hl]
 	res 6, [hl]
-	call nz, PewterGymScript_5c3a4
+	call nz, .LoadNames
 	call EnableAutoTextBoxDrawing
 	ld hl, PewterGymTrainerHeader0
 	ld de, PewterGym_ScriptPointers
@@ -11,15 +11,15 @@ PewterGym_Script:
 	ld [wPewterGymCurScript], a
 	ret
 
-PewterGymScript_5c3a4:
-	ld hl, Gym1CityName
-	ld de, Gym1LeaderName
+.LoadNames:
+	ld hl, .CityName
+	ld de, .LeaderName
 	jp LoadGymLeaderAndCityName
 
-Gym1CityName:
+.CityName:
 	db "PEWTER CITY@"
 
-Gym1LeaderName:
+.LeaderName:
 	db "BROCK@"
 
 PewterGymScript_5c3bf:
@@ -41,29 +41,28 @@ PewterGymScript3:
 	jp z, PewterGymScript_5c3bf
 	ld a, $f0
 	ld [wJoyIgnore], a
-
 PewterGymScript_5c3df:
 	ld a, $4
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_BEAT_BROCK
-	lb bc, TM_34, 1
+	lb bc, TM_BIDE, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $5
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_GOT_TM34
-	jr .asm_5c408
+	jr .gymVictory
 .BagFull
 	ld a, $6
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
-.asm_5c408
+.gymVictory
 	ld hl, wObtainedBadges
-	set 0, [hl]
+	set BIT_BOULDERBADGE, [hl]
 	ld hl, wBeatGymFlags
-	set 0, [hl]
+	set BIT_BOULDERBADGE, [hl]
 
 	ld a, HS_GYM_GUY
 	ld [wMissableObjectIndex], a
@@ -88,30 +87,23 @@ PewterGym_TextPointers:
 	dw PewterGymText6
 
 PewterGymTrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_PEWTER_GYM_TRAINER_0
-	db ($5 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_PEWTER_GYM_TRAINER_0
-	dw PewterGymBattleText1 ; TextBeforeBattle
-	dw PewterGymAfterBattleText1 ; TextAfterBattle
-	dw PewterGymEndBattleText1 ; TextEndBattle
-	dw PewterGymEndBattleText1 ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_PEWTER_GYM_TRAINER_0, 5, PewterGymBattleText1, PewterGymEndBattleText1, PewterGymAfterBattleText1
+	db -1 ; end
 
 PewterGymText1:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_BEAT_BROCK
-	jr z, .asm_5c46a
+	jr z, .beginBattle
 	CheckEventReuseA EVENT_GOT_TM34
-	jr nz, .asm_5c462
+	jr nz, .gymVictory
 	call z, PewterGymScript_5c3df
 	call DisableWaitingAfterTextDisplay
-	jr .asm_5c49b
-.asm_5c462
+	jr .done
+.gymVictory
 	ld hl, PewterGymText_5c4a3
 	call PrintText
-	jr .asm_5c49b
-.asm_5c46a
+	jr .done
+.beginBattle
 	ld hl, PewterGymText_5c49e
 	call PrintText
 	ld hl, wd72d
@@ -120,70 +112,70 @@ PewterGymText1:
 	ld hl, PewterGymText_5c4bc
 	ld de, PewterGymText_5c4bc
 	call SaveEndBattleTextPointers
-	ld a, [H_SPRITEINDEX]
+	ldh a, [hSpriteIndex]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $1
 	ld [wGymLeaderNo], a
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ld a, $3
 	ld [wPewterGymCurScript], a
 	ld [wCurMapScript], a
-.asm_5c49b
+.done
 	jp TextScriptEnd
 
 PewterGymText_5c49e:
-	TX_FAR _PewterGymText_5c49e
-	db "@"
+	text_far _PewterGymText_5c49e
+	text_end
 
 PewterGymText_5c4a3:
-	TX_FAR _PewterGymText_5c4a3
-	db "@"
+	text_far _PewterGymText_5c4a3
+	text_end
 
 PewterGymText4:
-	TX_FAR _TM34PreReceiveText
-	db "@"
+	text_far _TM34PreReceiveText
+	text_end
 
 PewterGymText5:
-	TX_FAR _ReceivedTM34Text
-	TX_SFX_ITEM_1
-	TX_FAR _TM34ExplanationText
-	db "@"
+	text_far _ReceivedTM34Text
+	sound_get_item_1
+	text_far _TM34ExplanationText
+	text_end
 
 PewterGymText6:
-	TX_FAR _TM34NoRoomText
-	db "@"
+	text_far _TM34NoRoomText
+	text_end
 
 PewterGymText_5c4bc:
-	TX_FAR _PewterGymText_5c4bc
-	TX_SFX_LEVEL_UP ; probably supposed to play SFX_GET_ITEM_1 but the wrong music bank is loaded
-	TX_FAR _PewterGymText_5c4c1
-	db "@"
+	text_far _PewterGymText_5c4bc
+	sound_level_up ; probably supposed to play SFX_GET_ITEM_1 but the wrong music bank is loaded
+	text_far _PewterGymText_5c4c1
+	text_end
 
 PewterGymText2:
-	TX_ASM
+	text_asm
 	ld hl, PewterGymTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 PewterGymBattleText1:
-	TX_FAR _PewterGymBattleText1
-	db "@"
+	text_far _PewterGymBattleText1
+	text_end
 
 PewterGymEndBattleText1:
-	TX_FAR _PewterGymEndBattleText1
-	db "@"
+	text_far _PewterGymEndBattleText1
+	text_end
 
 PewterGymAfterBattleText1:
-	TX_FAR _PewterGymAfterBattleText1
-	db "@"
+	text_far _PewterGymAfterBattleText1
+	text_end
 
 PewterGymText3:
-	TX_ASM
+	text_asm
 	ld a, [wBeatGymFlags]
-	bit 0, a
+	bit BIT_BOULDERBADGE, a
 	jr nz, .asm_5c50c
 	ld hl, PewterGymText_5c515
 	call PrintText
@@ -208,21 +200,21 @@ PewterGymText3:
 	jp TextScriptEnd
 
 PewterGymText_5c515:
-	TX_FAR _PewterGymText_5c515
-	db "@"
+	text_far _PewterGymText_5c515
+	text_end
 
 PewterGymText_5c51a:
-	TX_FAR _PewterGymText_5c51a
-	db "@"
+	text_far _PewterGymText_5c51a
+	text_end
 
 PewterGymText_5c51f:
-	TX_FAR _PewterGymText_5c51f
-	db "@"
+	text_far _PewterGymText_5c51f
+	text_end
 
 PewterGymText_5c524:
-	TX_FAR _PewterGymText_5c524
-	db "@"
+	text_far _PewterGymText_5c524
+	text_end
 
 PewterGymText_5c529:
-	TX_FAR _PewterGymText_5c529
-	db "@"
+	text_far _PewterGymText_5c529
+	text_end

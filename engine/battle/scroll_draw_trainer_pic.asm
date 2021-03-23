@@ -5,8 +5,8 @@ _ScrollTrainerPicAfterBattle:
 	ld [wEnemyMonSpecies2], a
 	ld b, SET_PAL_BATTLE
 	call RunPaletteCommand
-	callab _LoadTrainerPic
-	coord hl, 19, 0
+	callfar _LoadTrainerPic
+	hlcoord 19, 0
 	ld c, $0
 .scrollLoop
 	inc c

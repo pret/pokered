@@ -17,25 +17,25 @@ CinnabarIslandScript0:
 	call IsItemInBag
 	ret nz
 	ld a, [wYCoord]
-	cp $4
+	cp 4
 	ret nz
 	ld a, [wXCoord]
-	cp $12
+	cp 18
 	ret nz
 	ld a, PLAYER_DIR_UP
 	ld [wPlayerMovingDirection], a
 	ld a, $8
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
 	ld a, D_DOWN
 	ld [wSimulatedJoypadStatesEnd], a
 	call StartSimulatingJoypadStates
 	xor a
-	ld [wSpriteStateData1 + 9], a
+	ld [wSpritePlayerStateData1FacingDirection], a
 	ld [wJoyIgnore], a
 	ld a, $1
 	ld [wCinnabarIslandCurScript], a
@@ -61,25 +61,25 @@ CinnabarIsland_TextPointers:
 	dw CinnabarIslandText8
 
 CinnabarIslandText8:
-	TX_FAR _CinnabarIslandText8
-	db "@"
+	text_far _CinnabarIslandText8
+	text_end
 
 CinnabarIslandText1:
-	TX_FAR _CinnabarIslandText1
-	db "@"
+	text_far _CinnabarIslandText1
+	text_end
 
 CinnabarIslandText2:
-	TX_FAR _CinnabarIslandText2
-	db "@"
+	text_far _CinnabarIslandText2
+	text_end
 
 CinnabarIslandText3:
-	TX_FAR _CinnabarIslandText3
-	db "@"
+	text_far _CinnabarIslandText3
+	text_end
 
 CinnabarIslandText6:
-	TX_FAR _CinnabarIslandText6
-	db "@"
+	text_far _CinnabarIslandText6
+	text_end
 
 CinnabarIslandText7:
-	TX_FAR _CinnabarIslandText7
-	db "@"
+	text_far _CinnabarIslandText7
+	text_end

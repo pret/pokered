@@ -1,9 +1,9 @@
-GetMachinePrice:
+GetMachinePrice::
 ; Input:  [wcf91] = Item Id of a TM
 ; Output: Stores the TM price at hItemPrice
 	ld a, [wcf91] ; a contains TM item id
-	sub TM_01
-	ret c
+	sub TM01 ; underflows below 0 for HM items (before TM items)
+	ret c ; HMs are priceless
 	ld d, a
 	ld hl, TechnicalMachinePrices
 	srl a
@@ -16,10 +16,10 @@ GetMachinePrice:
 	swap a
 .highNybbleIsPrice
 	and $f0
-	ld [hItemPrice + 1], a
+	ldh [hItemPrice + 1], a
 	xor a
-	ld [hItemPrice], a
-	ld [hItemPrice + 2], a
+	ldh [hItemPrice], a
+	ldh [hItemPrice + 2], a
 	ret
 
-INCLUDE "data/tm_prices.asm"
+INCLUDE "data/items/tm_prices.asm"

@@ -7,68 +7,68 @@ Route12Gate2F_TextPointers:
 	dw Route12GateUpstairsText3
 
 Route12GateUpstairsText1:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_GOT_TM39, 1
-	jr c, .asm_0ad3c
+	jr c, .got_item
 	ld hl, TM39PreReceiveText
 	call PrintText
-	lb bc, TM_39, 1
+	lb bc, TM_SWIFT, 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, .bag_full
 	ld hl, ReceivedTM39Text
 	call PrintText
 	SetEvent EVENT_GOT_TM39
-	jr .asm_4ba56
-.BagFull
+	jr .done
+.bag_full
 	ld hl, TM39NoRoomText
 	call PrintText
-	jr .asm_4ba56
-.asm_0ad3c
+	jr .done
+.got_item
 	ld hl, TM39ExplanationText
 	call PrintText
-.asm_4ba56
+.done
 	jp TextScriptEnd
 
 TM39PreReceiveText:
-	TX_FAR _TM39PreReceiveText
-	db "@"
+	text_far _TM39PreReceiveText
+	text_end
 
 ReceivedTM39Text:
-	TX_FAR _ReceivedTM39Text
-	TX_SFX_ITEM_1
-	db "@"
+	text_far _ReceivedTM39Text
+	sound_get_item_1
+	text_end
 
 TM39ExplanationText:
-	TX_FAR _TM39ExplanationText
-	db "@"
+	text_far _TM39ExplanationText
+	text_end
 
 TM39NoRoomText:
-	TX_FAR _TM39NoRoomText
-	db "@"
+	text_far _TM39NoRoomText
+	text_end
 
 Route12GateUpstairsText2:
-	TX_ASM
+	text_asm
 	ld hl, Route12GateUpstairsText_495b8
 	jp GateUpstairsScript_PrintIfFacingUp
 
 Route12GateUpstairsText_495b8:
-	TX_FAR _Route12GateUpstairsText_495b8
-	db "@"
+	text_far _Route12GateUpstairsText_495b8
+	text_end
 
 Route12GateUpstairsText3:
-	TX_ASM
+	text_asm
 	ld hl, Route12GateUpstairsText_495c4
 	jp GateUpstairsScript_PrintIfFacingUp
 
 Route12GateUpstairsText_495c4:
-	TX_FAR _Route12GateUpstairsText_495c4
-	db "@"
+	text_far _Route12GateUpstairsText_495c4
+	text_end
 
 GateUpstairsScript_PrintIfFacingUp:
-	ld a, [wSpriteStateData1 + 9]
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
 	jr z, .up
-	ld a, $1
+	ld a, TRUE
 	jr .done
 .up
 	call PrintText

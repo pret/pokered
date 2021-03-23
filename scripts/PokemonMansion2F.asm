@@ -41,14 +41,14 @@ Mansion2Script_5202f:
 	ld [wNewTileBlockID], a
 	predef_jump ReplaceTileBlock
 
-Mansion2Script_Switches:
-	ld a, [wSpriteStateData1 + 9]
+Mansion2Script_Switches::
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
 	ret nz
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ld a, $5
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
 PokemonMansion2F_ScriptPointers:
@@ -64,45 +64,38 @@ PokemonMansion2F_TextPointers:
 	dw Mansion2Text5
 
 Mansion2TrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_MANSION_2_TRAINER_0
-	db ($0 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_MANSION_2_TRAINER_0
-	dw Mansion2BattleText1 ; TextBeforeBattle
-	dw Mansion2AfterBattleText1 ; TextAfterBattle
-	dw Mansion2EndBattleText1 ; TextEndBattle
-	dw Mansion2EndBattleText1 ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_MANSION_2_TRAINER_0, 0, Mansion2BattleText1, Mansion2EndBattleText1, Mansion2AfterBattleText1
+	db -1 ; end
 
 Mansion2Text1:
-	TX_ASM
+	text_asm
 	ld hl, Mansion2TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Mansion2BattleText1:
-	TX_FAR _Mansion2BattleText1
-	db "@"
+	text_far _Mansion2BattleText1
+	text_end
 
 Mansion2EndBattleText1:
-	TX_FAR _Mansion2EndBattleText1
-	db "@"
+	text_far _Mansion2EndBattleText1
+	text_end
 
 Mansion2AfterBattleText1:
-	TX_FAR _Mansion2AfterBattleText1
-	db "@"
+	text_far _Mansion2AfterBattleText1
+	text_end
 
 Mansion2Text3:
-	TX_FAR _Mansion2Text3
-	db "@"
+	text_far _Mansion2Text3
+	text_end
 
 Mansion2Text4:
-	TX_FAR _Mansion2Text4
-	db "@"
+	text_far _Mansion2Text4
+	text_end
 
 Mansion3Text6:
 Mansion2Text5:
-	TX_ASM
+	text_asm
 	ld hl, Mansion2Text_520c2
 	call PrintText
 	call YesNoChoice
@@ -128,13 +121,13 @@ Mansion2Text5:
 	jp TextScriptEnd
 
 Mansion2Text_520c2:
-	TX_FAR _Mansion2Text_520c2
-	db "@"
+	text_far _Mansion2Text_520c2
+	text_end
 
 Mansion2Text_520c7:
-	TX_FAR _Mansion2Text_520c7
-	db "@"
+	text_far _Mansion2Text_520c7
+	text_end
 
 Mansion2Text_520cc:
-	TX_FAR _Mansion2Text_520cc
-	db "@"
+	text_far _Mansion2Text_520cc
+	text_end

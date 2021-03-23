@@ -1,4 +1,4 @@
-HandleLedges:
+HandleLedges::
 	ld a, [wd736]
 	bit 6, a ; already jumping down ledge
 	ret nz
@@ -6,9 +6,9 @@ HandleLedges:
 	and a ; OVERWORLD
 	ret nz
 	predef GetTileAndCoordsInFrontOfPlayer
-	ld a, [wSpriteStateData1 + 9]
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	ld b, a
-	aCoord 8, 9
+	lda_coord 8, 9
 	ld c, a
 	ld a, [wTileInFrontOfPlayer]
 	ld d, a
@@ -36,7 +36,7 @@ HandleLedges:
 	inc hl
 	jr .loop
 .foundMatch
-	ld a, [hJoyHeld]
+	ldh a, [hJoyHeld]
 	and e
 	ret z
 	ld a, $ff
@@ -54,20 +54,10 @@ HandleLedges:
 	call PlaySound
 	ret
 
-	; (player direction) (tile player standing on) (ledge tile) (input required)
-LedgeTiles:
-	db SPRITE_FACING_DOWN, $2C,$37,D_DOWN
-	db SPRITE_FACING_DOWN, $39,$36,D_DOWN
-	db SPRITE_FACING_DOWN, $39,$37,D_DOWN
-	db SPRITE_FACING_LEFT, $2C,$27,D_LEFT
-	db SPRITE_FACING_LEFT, $39,$27,D_LEFT
-	db SPRITE_FACING_RIGHT,$2C,$0D,D_RIGHT
-	db SPRITE_FACING_RIGHT,$2C,$1D,D_RIGHT
-	db SPRITE_FACING_RIGHT,$39,$0D,D_RIGHT
-	db $FF
+INCLUDE "data/tilesets/ledge_tiles.asm"
 
 LoadHoppingShadowOAM:
-	ld hl, vChars1 + $7f0
+	ld hl, vChars1 tile $7f
 	ld de, LedgeHoppingShadow
 	lb bc, BANK(LedgeHoppingShadow), (LedgeHoppingShadowEnd - LedgeHoppingShadow) / $8
 	call CopyVideoDataDouble
@@ -78,9 +68,9 @@ LoadHoppingShadowOAM:
 	ret
 
 LedgeHoppingShadow:
-	INCBIN "gfx/ledge_hopping_shadow.1bpp"
+	INCBIN "gfx/overworld/shadow.1bpp"
 LedgeHoppingShadowEnd:
 
 LedgeHoppingShadowOAM:
-	db $FF,$10,$FF,$20
-	db $FF,$40,$FF,$60
+	dbsprite  2, -1,  0,  7, $ff, OAM_HFLIP
+	dbsprite  8, -1,  0,  7, $ff, OAM_HFLIP | OAM_VFLIP

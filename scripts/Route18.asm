@@ -20,92 +20,71 @@ Route18_TextPointers:
 	dw Route18Text5
 
 Route18TrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_ROUTE_18_TRAINER_0
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_18_TRAINER_0
-	dw Route18BattleText1 ; TextBeforeBattle
-	dw Route18AfterBattleText1 ; TextAfterBattle
-	dw Route18EndBattleText1 ; TextEndBattle
-	dw Route18EndBattleText1 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_18_TRAINER_0, 3, Route18BattleText1, Route18EndBattleText1, Route18AfterBattleText1
 Route18TrainerHeader1:
-	dbEventFlagBit EVENT_BEAT_ROUTE_18_TRAINER_1
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_18_TRAINER_1
-	dw Route18BattleText2 ; TextBeforeBattle
-	dw Route18AfterBattleText2 ; TextAfterBattle
-	dw Route18EndBattleText2 ; TextEndBattle
-	dw Route18EndBattleText2 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_18_TRAINER_1, 3, Route18BattleText2, Route18EndBattleText2, Route18AfterBattleText2
 Route18TrainerHeader2:
-	dbEventFlagBit EVENT_BEAT_ROUTE_18_TRAINER_2
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_18_TRAINER_2
-	dw Route18BattleText3 ; TextBeforeBattle
-	dw Route18AfterBattleText3 ; TextAfterBattle
-	dw Route18EndBattleText3 ; TextEndBattle
-	dw Route18EndBattleText3 ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_ROUTE_18_TRAINER_2, 4, Route18BattleText3, Route18EndBattleText3, Route18AfterBattleText3
+	db -1 ; end
 
 Route18Text1:
-	TX_ASM
+	text_asm
 	ld hl, Route18TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route18BattleText1:
-	TX_FAR _Route18BattleText1
-	db "@"
+	text_far _Route18BattleText1
+	text_end
 
 Route18EndBattleText1:
-	TX_FAR _Route18EndBattleText1
-	db "@"
+	text_far _Route18EndBattleText1
+	text_end
 
 Route18AfterBattleText1:
-	TX_FAR _Route18AfterBattleText1
-	db "@"
+	text_far _Route18AfterBattleText1
+	text_end
 
 Route18Text2:
-	TX_ASM
+	text_asm
 	ld hl, Route18TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route18BattleText2:
-	TX_FAR _Route18BattleText2
-	db "@"
+	text_far _Route18BattleText2
+	text_end
 
 Route18EndBattleText2:
-	TX_FAR _Route18EndBattleText2
-	db "@"
+	text_far _Route18EndBattleText2
+	text_end
 
 Route18AfterBattleText2:
-	TX_FAR _Route18AfterBattleText2
-	db "@"
+	text_far _Route18AfterBattleText2
+	text_end
 
 Route18Text3:
-	TX_ASM
+	text_asm
 	ld hl, Route18TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route18BattleText3:
-	TX_FAR _Route18BattleText3
-	db "@"
+	text_far _Route18BattleText3
+	text_end
 
 Route18EndBattleText3:
-	TX_FAR _Route18EndBattleText3
-	db "@"
+	text_far _Route18EndBattleText3
+	text_end
 
 Route18AfterBattleText3:
-	TX_FAR _Route18AfterBattleText3
-	db "@"
+	text_far _Route18AfterBattleText3
+	text_end
 
 Route18Text4:
-	TX_FAR _Route18Text4
-	db "@"
+	text_far _Route18Text4
+	text_end
 
 Route18Text5:
-	TX_FAR _Route18Text5
-	db "@"
+	text_far _Route18Text5
+	text_end

@@ -1,18 +1,19 @@
 Music_Vermilion::
-	musicheader 4, 1, Music_Vermilion_Ch0
-	musicheader 1, 2, Music_Vermilion_Ch1
-	musicheader 1, 3, Music_Vermilion_Ch2
-	musicheader 1, 4, Music_Vermilion_Ch3
+	channel_count 4
+	channel 1, Music_Vermilion_Ch1
+	channel 2, Music_Vermilion_Ch2
+	channel 3, Music_Vermilion_Ch3
+	channel 4, Music_Vermilion_Ch4
 
-Music_Vermilion_Ch0::
+Music_Vermilion_Ch1::
 	tempo 156
-	volume $77
-	dutycycle 3
-	vibrato 12, $34
-	;toggleperfectpitch
+	volume 7, 7
+	duty_cycle 3
+	vibrato 12, 3, 4
+	;toggle_perfect_pitch
 
 Music_Vermilion_branch_b9f6::
-	notetype 12, $b5
+	note_type 12, 11, 5
 	octave 3
 	note E_, 4
 	note C#, 1
@@ -114,15 +115,15 @@ Music_Vermilion_branch_b9f6::
 	note F#, 2
 	note G#, 2
 	note B_, 2
-	loopchannel 0, Music_Vermilion_branch_b9f6
+	sound_loop 0, Music_Vermilion_branch_b9f6
 
 
-Music_Vermilion_Ch1::
-	dutycycle 3
-	vibrato 10, $23
+Music_Vermilion_Ch2::
+	duty_cycle 3
+	vibrato 10, 2, 3
 
 Music_Vermilion_branch_ba66::
-	notetype 12, $c7
+	note_type 12, 12, 7
 	octave 3
 	note A_, 8
 	octave 4
@@ -181,11 +182,11 @@ Music_Vermilion_branch_ba66::
 	note E_, 4
 	note F#, 8
 	note E_, 8
-	loopchannel 0, Music_Vermilion_branch_ba66
+	sound_loop 0, Music_Vermilion_branch_ba66
 
 
-Music_Vermilion_Ch2::
-	notetype 12, $10
+Music_Vermilion_Ch3::
+	note_type 12, 1, 0
 
 Music_Vermilion_branch_baa8::
 	octave 4
@@ -285,46 +286,46 @@ Music_Vermilion_branch_baa8::
 	note E_, 2
 	note G#, 2
 	note E_, 2
-	loopchannel 0, Music_Vermilion_branch_baa8
+	sound_loop 0, Music_Vermilion_branch_baa8
 
 
-Music_Vermilion_Ch3::
-	togglenoise 0
-	notetype 12
+Music_Vermilion_Ch4::
+	toggle_noise 0
+	drum_speed 12
 
 Music_Vermilion_branch_bb0e::
-	callchannel Music_Vermilion_branch_bb3f
-	note F_, 2
-	note F_, 1
-	note F_, 1
-	note F_, 2
-	note F_, 1
-	note F_, 1
-	note F_, 2
-	note F_, 1
-	note F_, 1
-	note F_, 1
-	note F_, 1
-	note F_, 1
-	note F_, 1
-	loopchannel 4, Music_Vermilion_branch_bb0e
-	callchannel Music_Vermilion_branch_bb3f
-	callchannel Music_Vermilion_branch_bb3f
-	callchannel Music_Vermilion_branch_bb3f
-	callchannel Music_Vermilion_branch_bb3f
-	loopchannel 0, Music_Vermilion_branch_bb0e
+	sound_call Music_Vermilion_branch_bb3f
+	drum_note 6, 2
+	drum_note 6, 1
+	drum_note 6, 1
+	drum_note 6, 2
+	drum_note 6, 1
+	drum_note 6, 1
+	drum_note 6, 2
+	drum_note 6, 1
+	drum_note 6, 1
+	drum_note 6, 1
+	drum_note 6, 1
+	drum_note 6, 1
+	drum_note 6, 1
+	sound_loop 4, Music_Vermilion_branch_bb0e
+	sound_call Music_Vermilion_branch_bb3f
+	sound_call Music_Vermilion_branch_bb3f
+	sound_call Music_Vermilion_branch_bb3f
+	sound_call Music_Vermilion_branch_bb3f
+	sound_loop 0, Music_Vermilion_branch_bb0e
 
 Music_Vermilion_branch_bb3f::
-	note F_, 2
-	note F_, 1
-	note F_, 1
-	note F_, 2
-	note F_, 1
-	note F_, 1
-	note F_, 2
-	note F_, 1
-	note F_, 1
-	note F_, 2
-	note F_, 1
-	note F_, 1
-	endchannel
+	drum_note 6, 2
+	drum_note 6, 1
+	drum_note 6, 1
+	drum_note 6, 2
+	drum_note 6, 1
+	drum_note 6, 1
+	drum_note 6, 2
+	drum_note 6, 1
+	drum_note 6, 1
+	drum_note 6, 2
+	drum_note 6, 1
+	drum_note 6, 1
+	sound_ret

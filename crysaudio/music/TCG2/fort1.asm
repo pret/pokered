@@ -1,409 +1,568 @@
-Music_TCG2Fort1:
-	db $C0
-	dw Music_TCG2Fort1_Ch1
-	db $01
-	dw Music_TCG2Fort1_Ch2
-	db $02
-	dw Music_TCG2Fort1_Ch3
-	db $03
-	dw Music_TCG2Fort1_Ch4
+Music_Fort1:
+	channel_count 4
+	channel 1, Music_Fort1_Ch1
+	channel 2, Music_Fort1_Ch2
+	channel 3, Music_Fort1_Ch3
+	channel 4, Music_Fort1_Ch4
 
-Music_TCG2Fort1_Ch2: 
+Music_Fort1_Ch2: ; 1ed6cc (7b:56cc)
 	notetype1 10
 	notetype0 1
+	;musicdc 17
+	;musicf0 16
 	octave 2
 	note A#, 3
 	note B_, 3
 	inc_octave
 	note C_, 3
+	;musicf1 69
 	note C#, 6
 	note C#, 2
+	;tie
 	note C#, 16
-	note __, 7
+	rest 7
 	note E_, 6
 	note E_, 16
-	note __, 2
-	vibrato 16, $33
+	rest 2
+	;musicf1 70
+	;musicf0 2
+	;musicf3
+	vibrato 16, 3, 3
 	octave 4
 	note D#, 3
 	note E_, 4
 .MainLoop
-	callchannel Branch_1ed865
+	sound_call Branch_1ed865
+	;musicf3
 	note C#, 16
+	;tie
 	note C#, 15
 	note E_, 2
+	;musicf2
 	note F#, 14
+	;tie
 	note F#, 8
 	note F#, 7
-	callchannel Branch_1ed865
+	;musicf3
+	sound_call Branch_1ed865
+	;musicf3
 	note C#, 16
 	note D#, 15
 	note E_, 16
 	note F#, 15
-	callchannel Branch_1ed8a8
+	sound_call Branch_1ed8a8
 	note G_, 16
 	note F#, 15
 	note E_, 16
+	;musicf2
 	note D_, 8
 	note D_, 15
+	;tie
 	note D_, 8
 	dec_octave
 	note B_, 8
 	note B_, 15
+	;tie
 	note B_, 8
 	inc_octave
+	;musicf3
 	note D#, 3
+	;musicf2
 	note E_, 12
+	;tie
+	note E_, 16
+	;tie
+	note E_, 15
+	;tie
 	note E_, 16
 	note E_, 15
-	note E_, 16
-	note E_, 15
+	;musicf3
 	note D#, 2
 	note E_, 14
+	;tie
 	note E_, 15
 	note F#, 16
+	;tie
 	note F#, 15
-	callchannel Branch_1ed8a8
+	sound_call Branch_1ed8a8
 	note G_, 16
 	note F#, 15
 	note E_, 16
+	;musicf2
 	note D_, 8
 	note D_, 15
+	;tie
 	note D_, 8
 	dec_octave
 	note B_, 8
 	note B_, 7
 	inc_octave
+	;musicf3
 	note D#, 2
+	;musicf2
 	note E_, 14
+	;tie
 	note E_, 15
+	;tie
 	note E_, 16
+	;tie
 	note E_, 15
+	;tie
 	note E_, 16
+	;tie
 	note E_, 15
+	;tie
 	note E_, 16
+	;tie
 	note E_, 15
+	;tie
 	note E_, 16
+	;tie
 	note E_, 15
+	;tie
 	note E_, 16
+	;tie
 	note E_, 13
 	note E_, 2
+	;musicf1 53
 	note D#, 6
 	note D#, 16
-	note __, 9
+	rest 9
 	note D#, 6
 	note D#, 16
-	note __, 9
+	rest 9
+	;musicf1 70
+	;musicf3
 	note F#, 16
+	;musicf2
 	note G#, 8
 	note G#, 7
-	callchannel Branch_1edb5a
+	;musicec 255
+	sound_call Branch_1edb5a
 	octave 4
+	;musicf2
 	note B_, 8
 	note B_, 15
+	;tie
 	note B_, 8
 	note D#, 8
 	note D#, 7
-	callchannel Branch_1edb5a
+	;musicec 255
+	sound_call Branch_1edb5a
 	octave 4
+	;musicf2
 	note F#, 8
 	note F#, 7
+	;tie
 	note F#, 16
 	note E_, 8
 	note E_, 7
 	note E_, 16
+	;tie
 	note E_, 8
 	note E_, 7
+	;musicf3
 	note E_, 16
 	note D#, 15
 	note E_, 16
+	;musicf2
 	note F#, 8
 	note F#, 7
+	;musicf3
 	note F#, 16
+	;musicf2
 	note G#, 8
 	note G#, 7
-	callchannel Branch_1edb5a
+	;musicec 255
+	sound_call Branch_1edb5a
 	octave 4
+	;musicf2
 	note B_, 8
 	note B_, 15
+	;tie
 	note B_, 8
 	note D#, 8
 	note D#, 7
-	callchannel Branch_1edb5a
+	;musicec 255
+	sound_call Branch_1edb5a
 	octave 4
 	note D#, 2
 	note E_, 13
+	;tie
 	note E_, 16
+	;tie
 	note E_, 15
-	callchannel Branch_1edb5a
+	sound_call Branch_1edb5a
 	octave 4
 	note E_, 15
+	;tie
 	note E_, 16
 	note D#, 15
 	note E_, 16
+	;musicf2
 	note F#, 8
 	note F#, 7
+	;musicf3
 	note F#, 16
+	;musicf2
 	note G#, 8
 	note G#, 7
-	callchannel Branch_1edb5a
+	;musicec 255
+	sound_call Branch_1edb5a
 	octave 4
+	;musicf2
 	note B_, 8
 	note B_, 15
+	;tie
 	note B_, 8
 	note D#, 8
 	note D#, 7
-	callchannel Branch_1edb5a
+	;musicec 255
+	sound_call Branch_1edb5a
 	octave 4
+	;musicf2
 	note F#, 8
 	note F#, 7
+	;tie
 	note F#, 16
 	note E_, 8
 	note E_, 7
 	note E_, 16
+	;tie
 	note E_, 8
 	note E_, 7
+	;musicf3
 	note E_, 16
 	note D#, 15
 	note E_, 16
+	;musicf2
 	note F#, 8
 	note F#, 7
+	;musicf3
 	note F#, 16
+	;musicf2
 	note G#, 8
 	note G#, 7
-	callchannel Branch_1edb5a
+	;musicec 255
+	sound_call Branch_1edb5a
 	octave 4
+	;musicf2
 	note B_, 8
 	note B_, 15
+	;tie
 	note B_, 8
 	note D#, 8
 	note D#, 7
-	callchannel Branch_1edb5a
+	;musicec 255
+	sound_call Branch_1edb5a
 	octave 4
 	note D#, 2
 	note E_, 13
+	;tie
 	note E_, 16
+	;tie
 	note E_, 15
-	callchannel Branch_1edb5a
+	sound_call Branch_1edb5a
 	octave 4
 	note E_, 15
+	;tie
 	note E_, 16
 	note D#, 15
 	note E_, 16
+	;musicf2
 	note F#, 8
 	note F#, 7
+	;musicf3
 	note F#, 16
+	;musicf2
 	note G_, 8
 	note G_, 7
-	callchannel Branch_1edb5a
+	sound_call Branch_1edb5a
 	octave 4
+	;musicf2
 	note B_, 8
 	note B_, 15
+	;tie
 	note B_, 8
 	note G_, 8
 	note G_, 7
-	callchannel Branch_1edb5a
+	sound_call Branch_1edb5a
 	octave 4
 	note G_, 2
 	note A_, 13
+	;tie
 	note A_, 16
+	;tie
 	note A_, 15
-	callchannel Branch_1edb5a
+	;musicec 2
+	sound_call Branch_1edb5a
 	octave 4
 	note F#, 15
+	;tie
 	note F#, 16
+	;tie
 	note F#, 15
-	callchannel Branch_1edb5a
+	;musicec 2
+	sound_call Branch_1edb5a
 	octave 4
+	;musicf2
 	note F#, 8
 	note F#, 7
+	;musicf3
 	note G_, 16
+	;musicf2
 	note F#, 8
 	note F#, 7
 	note E_, 8
 	note E_, 8
 	note D_, 8
 	note D_, 15
+	;tie
 	note D_, 8
 	dec_octave
 	note B_, 8
 	note B_, 15
+	;tie
 	note B_, 8
+	;musicf3
 	inc_octave
 	note D#, 2
+	;musicf2
 	note E_, 13
+	;tie
+	note E_, 16
+	;tie
+	note E_, 15
+	;tie
+	note E_, 16
+	;tie
+	note E_, 15
+	;tie
+	note E_, 16
+	;tie
+	note E_, 15
+	;tie
+	note E_, 16
+	;tie
+	note E_, 15
+	;tie
+	note E_, 16
+	;tie
+	note E_, 15
+	;tie
 	note E_, 16
 	note E_, 15
-	note E_, 16
-	note E_, 15
-	note E_, 16
-	note E_, 15
-	note E_, 16
-	note E_, 15
-	note E_, 16
-	note E_, 15
-	note E_, 16
-	note E_, 15
+	;musicf1 53
 .Loop1
 	note D#, 6
 	note D#, 16
-	note __, 9
-	loopchannel 2, .Loop1
-	loopchannel 0, .MainLoop
+	rest 9
+	sound_loop 2, .Loop1
+	sound_loop 0, .MainLoop
 
 Branch_1ed865:
+	;musicf0 2
 	octave 4
+	;musicf1 70
+	;musicf3
 	note D#, 16
 	note C#, 15
 	note D#, 16
+	;musicf2
 	note G#, 8
 	note G#, 15
+	;tie
 	note G#, 8
 	dec_octave
 	note B_, 8
 	note B_, 15
+	;tie
 	note B_, 8
+	;musicf3
 	inc_octave
 	note D_, 2
+	;musicf2
 	note D#, 6
 	note D#, 7
+	;tie
 	note D#, 16
 	note C#, 8
 	note C#, 7
 	note C#, 16
+	;tie
 	note C#, 8
 	note C#, 7
+	;musicf3
 	note C#, 16
 	note D#, 15
 	note E_, 16
+	;musicf2
 	note F#, 8
 	note F#, 7
+	;musicf3
 	note D#, 16
 	note C#, 15
 	note D#, 16
+	;musicf2
 	note G#, 8
 	note G#, 15
+	;tie
 	note G#, 8
 	dec_octave
 	note B_, 8
 	note B_, 15
+	;tie
 	note B_, 8
 	inc_octave
+	;musicf3
 	note C_, 2
+	;musicf2
 	note C#, 13
+	;tie
+	note C#, 16
+	;tie
+	note C#, 15
+	;tie
 	note C#, 16
 	note C#, 15
-	note C#, 16
-	note C#, 15
-	endchannel
+	sound_ret
 
 Branch_1ed8a8:
+	;musicf0 2
 	octave 4
+	;musicf1 70
+	;musicf3
 	note G_, 16
 	note F#, 15
 	note G_, 16
+	;musicf2
 	note B_, 8
 	note B_, 15
+	;tie
 	note B_, 8
 	note G_, 8
 	note G_, 15
+	;tie
 	note G_, 8
+	;musicf3
 	note G#, 3
+	;musicf2
 	note A_, 12
+	;tie
 	note A_, 16
+	;tie
 	note A_, 15
 	note A_, 16
 	note F#, 15
+	;tie
 	note F#, 16
+	;tie
 	note F#, 15
 	note F#, 16
 	note F#, 8
 	note F#, 7
-	endchannel
+	;musicf3
+	sound_ret
 
 
-Music_TCG2Fort1_Ch1: 
+Music_Fort1_Ch1: ; 1ed8cd (7b:58cd)
 	notetype1 10
 	notetype0 1
-	dutycycle 0
+	duty_cycle 0
 	notetype1 9
-	vibrato 18, $33
+	;musicdc 17
+	;vibrato_type 10
+	vibrato 18, 3, 3
+	;musicf0 16
 	octave 2
-	note __, 9
+	rest 9
+	;musicf1 69
 	note A_, 6
 	note A_, 16
-	note __, 9
+	rest 9
 	inc_octave
 	note C#, 6
 	note C#, 10
-	note __, 8
-	note __, 7
+	rest 8
+	rest 7
+	;musicf1 70
 .MainLoop
+	;musicf0 16
 	octave 3
+	;musicf1 70
 .Loop1
-	note __, 16
-	note __, 15
+	rest 16
+	rest 15
 	note D#, 6
 	note D#, 10
-	note __, 15
-	loopchannel 2, .Loop1
+	rest 15
+	sound_loop 2, .Loop1
 .Loop2
-	note __, 16
-	note __, 15
+	rest 16
+	rest 15
 	note C#, 6
 	note C#, 10
-	note __, 15
-	loopchannel 2, .Loop2
+	rest 15
+	sound_loop 2, .Loop2
 .Loop3
-	note __, 16
-	note __, 15
+	rest 16
+	rest 15
 	note D#, 6
 	note D#, 10
-	note __, 15
-	loopchannel 2, .Loop3
-	note __, 16
-	note __, 15
+	rest 15
+	sound_loop 2, .Loop3
+	rest 16
+	rest 15
 	note C#, 6
 	note C#, 10
-	note __, 15
+	rest 15
+	;musicf3
 	notetype1 8
 	note D#, 3
 	note E_, 13
+	;tie
 	note E_, 15
 	note D#, 16
+	;tie
 	note D#, 15
 	dec_octave
 	note B_, 16
+	;tie
 	note B_, 15
+	;musicf0 16
+	;musicf1 70
 	octave 3
 	note D#, 6
 	note D#, 10
-	note __, 15
-	note __, 16
-	note __, 15
+	rest 15
+	rest 16
+	rest 15
 	note D#, 6
 	note D#, 10
-	note __, 15
+	rest 15
 .Loop4
-	note __, 16
-	note __, 15
+	rest 16
+	rest 15
 	note C#, 6
 	note C#, 10
-	note __, 15
-	loopchannel 2, .Loop4
+	rest 15
+	sound_loop 2, .Loop4
 .Loop5
-	note __, 16
-	note __, 15
+	rest 16
+	rest 15
 	note D#, 6
 	note D#, 10
-	note __, 15
-	loopchannel 2, .Loop5
-	note __, 16
-	note __, 15
+	rest 15
+	sound_loop 2, .Loop5
+	rest 16
+	rest 15
+	;musicf3
 	note C#, 6
 	note C#, 10
-	note __, 8
+	rest 8
+	;musicf0 30
 	octave 4
+	;musicf3
 	note D_, 3
 	note D#, 4
 	note E_, 16
@@ -414,96 +573,138 @@ Music_TCG2Fort1_Ch1:
 	note D#, 15
 	note E_, 16
 	note D_, 15
-	callchannel Branch_1edb4e
+	sound_call Branch_1edb4e
 	octave 4
+	;musicf2
 	note G_, 8
 	note G_, 15
+	;tie
 	note G_, 8
 	note E_, 8
 	note E_, 7
-	callchannel Branch_1edb4e
+	sound_call Branch_1edb4e
 	octave 4
 	note F#, 15
+	;tie
 	note F#, 16
+	;tie
 	note F#, 15
-	callchannel Branch_1edb4e
+	;musicec 254
+	sound_call Branch_1edb4e
 	inc_octave
 	note D_, 15
+	;tie
 	note D_, 16
+	;tie
 	note D_, 15
-	callchannel Branch_1edb4e
+	;musicec 254
+	sound_call Branch_1edb4e
 	octave 4
+	;musicf2
 	note D_, 8
 	note D_, 7
 	note E_, 16
 	note D_, 15
-	callchannel Branch_1edb4e
+	;musicec 252
+	sound_call Branch_1edb4e
+	;musicf2
 	note B_, 8
 	note B_, 15
+	;tie
 	note B_, 8
 	note G_, 8
 	note G_, 7
-	callchannel Branch_1edb4e
+	;musicec 254
+	sound_call Branch_1edb4e
 	octave 4
 	note C_, 15
+	;tie
 	note C_, 16
+	;tie
 	note C_, 15
-	callchannel Branch_1edb4e
+	;musicec 254
+	sound_call Branch_1edb4e
 	octave 4
-	note __, 15
+	rest 15
 	note C_, 16
+	;tie
 	note C_, 15
 	note D_, 16
+	;tie
 	note D_, 15
 	note E_, 16
 	note D_, 15
-	callchannel Branch_1edb4e
+	sound_call Branch_1edb4e
 	octave 4
+	;musicf2
 	note G_, 8
 	note G_, 15
+	;tie
 	note G_, 8
 	note E_, 8
 	note E_, 7
-	callchannel Branch_1edb4e
+	sound_call Branch_1edb4e
 	octave 4
 	note F#, 15
+	;tie
 	note F#, 16
+	;tie
 	note F#, 15
-	callchannel Branch_1edb4e
+	;musicec 254
+	sound_call Branch_1edb4e
 	octave 4
 	note D_, 15
+	;tie
 	note D_, 16
+	;tie
 	note D_, 15
-	callchannel Branch_1edb4e
+	;musicec 254
+	sound_call Branch_1edb4e
 	octave 4
+	;musicf2
 	note D_, 8
 	note D_, 7
+	;musicf3
 	note E_, 16
 	note D_, 15
 	note C_, 16
 	dec_octave
+	;musicf2
 	note B_, 8
 	note B_, 15
+	;tie
 	note B_, 8
+	;musicf0 16
 	octave 3
+	;musicf2
 	note D_, 6
 	note D_, 9
+	;musicf0 30
+	;musicf3
+	;musicef 2
+	;musicf2
 	inc_octave
 	note C_, 16
+	;tie
 	note C_, 15
 	note C_, 16
 	dec_octave
+	;musicf1 69
 	note G_, 8
 	note G_, 7
 	note A_, 16
+	;tie
 	note A_, 15
 	note A_, 16
 	note B_, 8
 	note B_, 7
+	;musicf3
 	inc_octave
 	note C_, 16
+	;tie
 	note C_, 15
 	dec_octave
+	;musicef 2
 	note D_, 4
 	note E_, 4
 	note F_, 4
@@ -514,173 +715,250 @@ Music_TCG2Fort1_Ch1:
 	note C_, 4
 	note D_, 3
 	dec_octave
+	;musicef 254
+	;musicf1 53
 	note A_, 6
 	note A_, 16
-	note __, 9
+	rest 9
 	note A_, 6
 	note A_, 16
-	note __, 9
+	rest 9
+	;musicf3
+	;musicef 254
+	;musicf1 70
 	inc_octave
 	note D#, 16
+	;musicf2
 	note E_, 8
 	note E_, 7
-	callchannel Branch_1edb4e
+	;musicec 251
+	sound_call Branch_1edb4e
 	octave 4
+	;musicf2
 	note G#, 8
 	note G#, 15
+	;tie
 	note G#, 8
 	dec_octave
 	note B_, 8
 	note B_, 7
-	callchannel Branch_1edb4e
+	;musicec 251
+	sound_call Branch_1edb4e
 	octave 4
+	;musicf2
 	note D#, 8
 	note D#, 7
+	;tie
 	note D#, 16
 	note C#, 8
 	note C#, 7
-	callchannel Branch_1edb4e
-	note __, 8
-	note __, 7
+	;musicec 253
+	sound_call Branch_1edb4e
+	rest 8
+	rest 7
 	octave 4
 	note C#, 16
 	dec_octave
 	note B_, 15
-	callchannel Branch_1edb4e
+	;musicec 253
+	sound_call Branch_1edb4e
 	octave 4
+	;musicf2
 	note D#, 8
 	note D#, 7
+	;musicf3
 	note D#, 16
+	;musicf2
 	note E_, 8
 	note E_, 7
-	callchannel Branch_1edb4e
+	;musicec 251
+	sound_call Branch_1edb4e
 	octave 4
+	;musicf2
 	note G#, 8
 	note G#, 15
+	;tie
 	note G#, 8
 	dec_octave
 	note B_, 8
 	note B_, 7
-	callchannel Branch_1edb4e
+	;musicec 251
+	sound_call Branch_1edb4e
 	octave 4
 	note C#, 15
+	;tie
 	note C#, 16
+	;tie
 	note C#, 15
-	callchannel Branch_1edb4e
+	;musicec 253
+	sound_call Branch_1edb4e
 	octave 3
+	;musicf2
 	note A_, 15
+	;tie
 	note A_, 8
 	note A_, 8
 	note A_, 15
-	callchannel Branch_1edb4e
+	;musicec 253
+	sound_call Branch_1edb4e
 	octave 4
+	;musicf2
 	note D#, 8
 	note D#, 7
+	;musicf3
 	note D#, 16
+	;musicf2
 	note E_, 8
 	note E_, 7
-	callchannel Branch_1edb4e
+	;musicec 251
+	sound_call Branch_1edb4e
 	octave 4
+	;musicf2
 	note G#, 8
 	note G#, 15
+	;tie
 	note G#, 8
 	dec_octave
 	note B_, 8
 	note B_, 7
-	callchannel Branch_1edb4e
+	;musicec 251
+	sound_call Branch_1edb4e
 	octave 4
+	;musicf2
 	note D#, 8
 	note D#, 7
+	;tie
 	note D#, 16
 	note C#, 8
 	note C#, 7
-	callchannel Branch_1edb4e
-	note __, 8
-	note __, 7
+	;musicec 253
+	sound_call Branch_1edb4e
+	rest 8
+	rest 7
 	octave 4
 	note C#, 16
 	dec_octave
 	note B_, 15
-	callchannel Branch_1edb4e
+	;musicec 253
+	sound_call Branch_1edb4e
 	octave 4
+	;musicf2
 	note D#, 8
 	note D#, 7
+	;musicf3
 	note D#, 16
+	;musicf2
 	note E_, 8
 	note E_, 7
-	callchannel Branch_1edb4e
+	;musicec 251
+	sound_call Branch_1edb4e
 	octave 4
+	;musicf2
 	note G#, 8
 	note G#, 15
+	;tie
 	note G#, 8
 	dec_octave
 	note B_, 8
 	note B_, 7
-	callchannel Branch_1edb4e
+	;musicec 251
+	sound_call Branch_1edb4e
 	octave 4
 	note C#, 15
+	;tie
 	note C#, 16
+	;tie
 	note C#, 15
-	callchannel Branch_1edb4e
+	;musicec 253
+	sound_call Branch_1edb4e
 	octave 3
+	;musicf2
 	note A_, 15
+	;tie
 	note A_, 8
 	note A_, 8
 	note A_, 15
-	callchannel Branch_1edb4e
+	;musicec 253
+	sound_call Branch_1edb4e
 	octave 3
 	note A_, 15
 	inc_octave
 	note D_, 16
+	;musicf2
 	note E_, 8
 	note E_, 7
-	callchannel Branch_1edb4e
+	;musicec 251
+	sound_call Branch_1edb4e
 	octave 4
+	;musicf2
 	note G_, 8
 	note G_, 15
+	;tie
 	note G_, 8
 	note E_, 8
 	note E_, 7
-	callchannel Branch_1edb4e
+	;musicec 251
+	sound_call Branch_1edb4e
 	octave 4
 	note F#, 15
+	;tie
 	note F#, 16
+	;tie
 	note F#, 15
-	callchannel Branch_1edb4e
+	;musicec 254
+	sound_call Branch_1edb4e
 	octave 4
 	note D_, 15
+	;tie
 	note D_, 16
+	;tie
 	note D_, 15
-	callchannel Branch_1edb4e
+	;musicec 254
+	sound_call Branch_1edb4e
 	octave 4
+	;musicf2
 	note D_, 8
 	note D_, 7
+	;musicf3
 	note E_, 16
+	;musicf2
 	note D_, 8
 	note D_, 7
-	callchannel Branch_1edb4e
+	;musicec 252
+	sound_call Branch_1edb4e
 	octave 3
+	;musicf2
 	note B_, 8
 	note B_, 15
+	;tie
 	note B_, 8
 	note G_, 8
 	note G_, 7
-	callchannel Branch_1edb4e
+	;musicec 254
+	sound_call Branch_1edb4e
 	octave 4
+	;musicf2
 	note C_, 15
+	;tie
 	note C_, 16
+	;tie
 	note C_, 15
 	note C_, 16
 	dec_octave
+	;musicef 2
+	;musicf1 69
 	note G_, 8
 	note G_, 7
 	note A_, 16
+	;tie
 	note A_, 15
 	note A_, 16
 	note B_, 8
 	note B_, 7
+	;musicf3
 	inc_octave
 	note C_, 16
+	;tie
 	note C_, 15
 	dec_octave
 	note D_, 4
@@ -692,46 +970,67 @@ Music_TCG2Fort1_Ch1:
 	inc_octave
 	note C_, 4
 	note D_, 3
+	;musicf1 53
 	dec_octave
 .Loop6
 	note A_, 6
 	note A_, 16
-	note __, 9
-	loopchannel 2, .Loop6
-	loopchannel 0, .MainLoop
+	rest 9
+	sound_loop 2, .Loop6
+	;musicef 254
+	sound_loop 0, .MainLoop
 
 Branch_1edb4e:
+	;musicf0 16
 	octave 3
+	;musicf2
 	note E_, 6
 	note E_, 10
-	endchannel
+	;musicf0 30
+	;musicf3
+	;musicec 0
+	sound_ret
 
 Branch_1edb5a:
+	;musicf0 16
 	octave 3
+	;musicf2
 	note E_, 6
 	note E_, 10
-	endchannel
+	;musicf0 2
+	;musicf3
+	;musicec 0
+	sound_ret
 
 
-Music_TCG2Fort1_Ch3: 
+Music_Fort1_Ch3: ; 1edb66 (7b:5b66)
 	notetype1 10
 	notetype0 1
 	notetype2 14
 	notetype1 1
+	;musice9 96
+	;musicdc 17
 	octave 2
-	note __, 9
+	;musice8 1
+	rest 9
 	note F#, 6
+	;tie
 	note F#, 16
-	note __, 9
+	rest 9
 	note B_, 6
+	;tie
 	note B_, 16
-	note __, 9
+	rest 9
 .MainLoop
 	octave 2
+	;musice8 7
 	note E_, 16
+	;tie
 	note E_, 15
 	inc_octave
+	;musice8 3
 	note G#, 16
+	;musice8 7
 	dec_octave
 	note B_, 15
 	inc_octave
@@ -739,23 +1038,32 @@ Music_TCG2Fort1_Ch3:
 	dec_octave
 	note E_, 15
 	inc_octave
+	;musice8 3
 	note G#, 16
+	;musice8 7
 	dec_octave
 	note E_, 15
 	note A_, 16
 	note A_, 15
 	inc_octave
+	;musice8 3
 	note G#, 16
+	;musice8 7
 	note A_, 15
-	note __, 16
+	rest 16
 	note E_, 15
+	;musice8 3
 	note G#, 16
+	;musice8 7
 	dec_octave
 	note A_, 15
 	note E_, 16
+	;tie
 	note E_, 15
 	inc_octave
+	;musice8 3
 	note G#, 16
+	;musice8 7
 	dec_octave
 	note B_, 15
 	inc_octave
@@ -763,47 +1071,32 @@ Music_TCG2Fort1_Ch3:
 	dec_octave
 	note E_, 15
 	inc_octave
+	;musice8 3
 	note G#, 16
+	;musice8 7
 	dec_octave
 	note E_, 15
 	note A_, 16
 	note A_, 15
 	inc_octave
+	;musice8 3
 	note G#, 16
+	;musice8 7
 	note A_, 15
 	dec_octave
 	note A_, 16
+	;tie
 	note A_, 15
 	note B_, 16
+	;tie
 	note B_, 15
 	note E_, 16
+	;tie
 	note E_, 15
 	inc_octave
+	;musice8 3
 	note G#, 16
-	dec_octave
-	note B_, 15
-	inc_octave
-	note E_, 16
-	dec_octave
-	note E_, 15
-	inc_octave
-	note G#, 16
-	dec_octave
-	note E_, 15
-	note A_, 16
-	note A_, 15
-	inc_octave
-	note G#, 16
-	note A_, 15
-	note __, 16
-	note E_, 15
-	note G#, 16
-	dec_octave
-	note A_, 15
-	note E_, 16
-	note E_, 15
-	inc_octave
-	note G#, 16
+	;musice8 7
 	dec_octave
 	note B_, 15
 	inc_octave
@@ -811,76 +1104,138 @@ Music_TCG2Fort1_Ch3:
 	dec_octave
 	note E_, 15
 	inc_octave
+	;musice8 3
 	note G#, 16
+	;musice8 7
 	dec_octave
 	note E_, 15
 	note A_, 16
 	note A_, 15
 	inc_octave
+	;musice8 3
 	note G#, 16
+	;musice8 7
+	note A_, 15
+	rest 16
+	note E_, 15
+	;musice8 3
+	note G#, 16
+	;musice8 7
+	dec_octave
+	note A_, 15
+	note E_, 16
+	;tie
+	note E_, 15
+	inc_octave
+	;musice8 3
+	note G#, 16
+	;musice8 7
+	dec_octave
+	note B_, 15
+	inc_octave
+	note E_, 16
+	dec_octave
+	note E_, 15
+	inc_octave
+	;musice8 3
+	note G#, 16
+	;musice8 7
+	dec_octave
+	note E_, 15
+	note A_, 16
+	note A_, 15
+	inc_octave
+	;musice8 3
+	note G#, 16
+	;musice8 7
 	note A_, 15
 	dec_octave
 	note A_, 16
+	;tie
 	note A_, 15
 	note B_, 16
+	;tie
 	note B_, 15
 	inc_octave
 	note C_, 16
+	;tie
 	note C_, 15
+	;musice8 3
 	note B_, 16
+	;musice8 7
 	dec_octave
 	note G_, 15
 	inc_octave
 	note C_, 16
 	dec_octave
 	note G_, 15
+	;musice8 3
 	inc_octave
 	note B_, 16
+	;musice8 7
 	dec_octave
 	note B_, 15
+	;tie
 	note B_, 8
-	note __, 8
+	rest 8
 	note B_, 15
 	inc_octave
+	;musice8 3
 	note A_, 16
+	;musice8 7
 	note B_, 15
-	note __, 16
+	rest 16
 	note F#, 15
+	;musice8 3
 	note A_, 16
+	;musice8 7
 	dec_octave
 	note B_, 15
 	note A_, 8
-	note __, 8
+	rest 8
 	note A_, 15
 	inc_octave
+	;musice8 3
 	note G_, 16
+	;musice8 7
 	dec_octave
 	note A_, 15
 	note B_, 8
-	note __, 8
+	rest 8
 	note B_, 15
 	inc_octave
+	;musice8 3
 	note A_, 16
+	;musice8 7
 	dec_octave
 	note B_, 4
+	;tie
 	inc_octave
 	note C_, 11
+	;tie
 	note C_, 16
 	note C_, 15
+	;musice8 3
 	note B_, 16
+	;musice8 7
 	dec_octave
 	note G_, 15
 	inc_octave
 	note C_, 16
+	;tie
 	note C_, 15
 	dec_octave
 	note B_, 16
+	;tie
 	note B_, 15
 	note A_, 16
+	;tie
 	note A_, 15
 	inc_octave
 	inc_octave
+	;musice8 3
 	note C_, 16
+	;musice8 7
 	dec_octave
 	dec_octave
 	note E_, 15
@@ -888,463 +1243,537 @@ Music_TCG2Fort1_Ch3:
 	note E_, 15
 	inc_octave
 	inc_octave
+	;musice8 3
 	note C_, 16
+	;musice8 7
 	dec_octave
 	dec_octave
 	note B_, 15
+	;tie
 	note B_, 8
-	note __, 8
+	rest 8
 	note B_, 15
 	inc_octave
+	;musice8 3
 	note A_, 16
+	;musice8 7
 	note B_, 15
-	note __, 16
+	rest 16
 	note F#, 15
+	;musice8 3
 	note A_, 16
+	;musice8 7
 	dec_octave
 	note B_, 15
 	inc_octave
 	note C_, 8
-	note __, 8
+	rest 8
 	note G_, 8
-	note __, 7
+	rest 7
 	inc_octave
+	;musice8 3
 	note G_, 16
+	;musice8 7
 	dec_octave
 	dec_octave
 	note B_, 8
-	note __, 7
+	rest 7
 	inc_octave
 	note F#, 8
-	note __, 8
+	rest 8
+	;musice8 6
 	note F#, 8
-	note __, 7
+	rest 7
+	;musice8 7
 	dec_octave
 	note F_, 8
-	note __, 8
+	rest 8
 	note F_, 8
-	note __, 7
+	rest 7
 	inc_octave
+	;musice8 3
 	note C_, 16
+	;musice8 7
 	dec_octave
 	note F_, 8
-	note __, 7
+	rest 7
 	note F_, 8
-	note __, 8
+	rest 8
 	note F_, 8
-	note __, 7
+	rest 7
 	inc_octave
+	;musice8 3
 	note C_, 16
+	;musice8 7
 	dec_octave
 	note F_, 8
-	note __, 7
+	rest 7
 	note F_, 8
-	note __, 8
+	rest 8
 	note F_, 8
-	note __, 7
+	rest 7
 	inc_octave
+	;musice8 3
 	note C_, 16
+	;musice8 8
 	note F_, 8
-	note __, 7
+	rest 7
 	dec_octave
 	note B_, 10
-	note __, 16
-	note __, 5
+	rest 16
+	rest 5
 	note B_, 10
-	note __, 16
-	note __, 5
+	rest 16
+	rest 5
 	note E_, 8
-	note __, 8
+	rest 8
 	note E_, 7
-	note __, 8
+	rest 8
 	inc_octave
+	;musice8 3
 	note G#, 16
+	;musice8 7
 	note E_, 8
-	note __, 7
+	rest 7
 	dec_octave
 	note E_, 8
-	note __, 8
+	rest 8
 	note E_, 7
-	note __, 8
+	rest 8
 	inc_octave
+	;musice8 3
 	note G#, 16
+	;musice8 7
 	note E_, 8
-	note __, 7
+	rest 7
 	dec_octave
 	note A_, 8
-	note __, 8
+	rest 8
 	note A_, 7
-	note __, 8
+	rest 8
 	inc_octave
+	;musice8 3
 	note G#, 16
+	;musice8 7
 	note E_, 8
-	note __, 7
+	rest 7
 	dec_octave
 	note A_, 8
-	note __, 8
+	rest 8
 	note A_, 7
-	note __, 8
+	rest 8
 	inc_octave
+	;musice8 3
 	note G#, 16
+	;musice8 7
 	note E_, 8
-	note __, 7
+	rest 7
 	dec_octave
 	note E_, 8
-	note __, 8
+	rest 8
 	note E_, 7
-	note __, 8
+	rest 8
 	inc_octave
+	;musice8 3
 	note G#, 16
+	;musice8 7
 	note E_, 8
-	note __, 7
+	rest 7
 	dec_octave
 	note E_, 8
-	note __, 8
+	rest 8
 	note E_, 7
-	note __, 8
+	rest 8
 	inc_octave
+	;musice8 3
 	note G#, 16
+	;musice8 7
 	note E_, 8
-	note __, 7
+	rest 7
 	dec_octave
 	note A_, 8
-	note __, 8
+	rest 8
 	note A_, 7
-	note __, 8
+	rest 8
 	inc_octave
+	;musice8 3
 	note G#, 16
+	;musice8 7
 	note E_, 8
-	note __, 7
+	rest 7
 	dec_octave
 	note B_, 8
-	note __, 8
+	rest 8
 	note B_, 7
-	note __, 8
+	rest 8
 	inc_octave
+	;musice8 3
 	note A_, 16
+	;musice8 7
 	note F#, 8
-	note __, 7
+	rest 7
 	dec_octave
 	note E_, 8
-	note __, 8
+	rest 8
 	note E_, 7
-	note __, 8
+	rest 8
 	inc_octave
+	;musice8 3
 	note G#, 16
+	;musice8 7
 	note E_, 8
-	note __, 7
+	rest 7
 	dec_octave
 	note E_, 8
-	note __, 8
+	rest 8
 	note E_, 7
-	note __, 8
+	rest 8
 	inc_octave
+	;musice8 3
 	note G#, 16
+	;musice8 7
 	note E_, 8
-	note __, 7
+	rest 7
 	dec_octave
 	note A_, 8
-	note __, 8
+	rest 8
 	note A_, 7
-	note __, 8
+	rest 8
 	inc_octave
+	;musice8 3
 	note G#, 16
+	;musice8 7
 	note E_, 8
-	note __, 7
+	rest 7
 	dec_octave
 	note A_, 8
-	note __, 8
+	rest 8
 	note A_, 7
-	note __, 8
+	rest 8
 	inc_octave
+	;musice8 3
 	note G#, 16
+	;musice8 7
 	note E_, 8
-	note __, 7
+	rest 7
 	dec_octave
 	note E_, 8
-	note __, 8
+	rest 8
 	note E_, 7
-	note __, 8
+	rest 8
 	inc_octave
+	;musice8 3
 	note G#, 16
+	;musice8 7
 	note E_, 8
-	note __, 7
+	rest 7
 	dec_octave
 	note E_, 8
-	note __, 8
+	rest 8
 	note E_, 7
-	note __, 8
+	rest 8
 	inc_octave
+	;musice8 3
 	note G#, 16
+	;musice8 7
 	note E_, 8
-	note __, 7
+	rest 7
 	dec_octave
 	note A_, 8
-	note __, 8
+	rest 8
 	note A_, 7
-	note __, 8
+	rest 8
 	inc_octave
+	;musice8 3
 	note G#, 16
+	;musice8 7
 	note E_, 8
-	note __, 7
+	rest 7
 	dec_octave
 	note B_, 8
-	note __, 8
+	rest 8
 	note B_, 7
-	note __, 8
+	rest 8
 	inc_octave
+	;musice8 3
 	note A_, 16
+	;musice8 7
 	note F#, 8
-	note __, 7
+	rest 7
 	note C_, 8
-	note __, 8
+	rest 8
 	note C_, 7
-	note __, 8
+	rest 8
+	;musice8 3
 	note G_, 16
+	;musice8 7
 	note G_, 8
-	note __, 7
+	rest 7
 	note C_, 8
-	note __, 8
+	rest 8
 	note C_, 7
-	note __, 8
+	rest 8
+	;musice8 3
 	note G_, 16
+	;musice8 7
 	note G_, 8
-	note __, 7
+	rest 7
 	dec_octave
 	note G_, 8
-	note __, 8
+	rest 8
 	note G_, 7
-	note __, 8
+	rest 8
 	inc_octave
+	;musice8 3
 	note B_, 16
+	;musice8 7
 	note D_, 8
-	note __, 7
+	rest 7
 	dec_octave
 	note G_, 8
-	note __, 8
+	rest 8
 	note G_, 7
-	note __, 8
+	rest 8
 	inc_octave
+	;musice8 3
 	note B_, 16
+	;musice8 7
 	note D_, 8
-	note __, 7
+	rest 7
 	dec_octave
 	note A_, 8
-	note __, 8
+	rest 8
 	inc_octave
 	note E_, 8
-	note __, 7
+	rest 7
+	;musice8 3
 	note G_, 16
+	;musice8 7
 	dec_octave
+	;musice8 2
 	note B_, 15
+	;tie
 	note B_, 16
+	;musice8 3
 	inc_octave
 	note A_, 15
+	;musice8 7
 	note F#, 8
-	note __, 8
+	rest 8
 	dec_octave
 	note B_, 8
-	note __, 7
+	rest 7
 	note F_, 8
-	note __, 8
+	rest 8
 	note F_, 8
-	note __, 7
+	rest 7
 	note F_, 8
-	note __, 8
+	rest 8
 	note F_, 8
-	note __, 7
+	rest 7
 	note F_, 8
-	note __, 8
+	rest 8
 	note F_, 8
-	note __, 7
+	rest 7
 	note F_, 8
-	note __, 8
+	rest 8
 	note F_, 8
-	note __, 7
+	rest 7
 	note F_, 8
-	note __, 8
+	rest 8
 	note F_, 8
-	note __, 7
+	rest 7
 	note F_, 8
-	note __, 8
+	rest 8
 	note F_, 8
-	note __, 7
+	rest 7
 .Loop1
+	;musice8 1
 	note B_, 7
+	;tie
 	note B_, 16
-	note __, 8
-	loopchannel 2, .Loop1
-	loopchannel 0, .MainLoop
+	rest 8
+	sound_loop 2, .Loop1
+	sound_loop 0, .MainLoop
 
 
-Music_TCG2Fort1_Ch4: 
-	togglenoise $06
-	notetype 1
-	note __, 1
+Music_Fort1_Ch4: ; 1ede26 (7b:5e26)
+	toggle_noise 6
+	drum_speed 1
+	rest 1
 	octave 1
-	note __, 9
-	note F#, 16
-	note __, 15
-	note F#, 16
-	note __, 15
+	rest 9
+	drum_note 7, 16
+	rest 15
+	drum_note 7, 16
+	rest 15
 .MainLoop
 .Loop1
-	callchannel Branch_1edebb
-	callchannel Branch_1edec8
-	loopchannel 3, .Loop1
-	callchannel Branch_1edebb
-	callchannel Branch_1eded5
-	callchannel Branch_1edebb
-	callchannel Branch_1edec8
-	callchannel Branch_1edebb
-	callchannel Branch_1eded5
-	callchannel Branch_1edebb
-	callchannel Branch_1edec8
-	note C_, 16
-	note D#, 15
-	note F#, 16
-	note C_, 15
-	note D#, 16
-	note F#, 15
-	note C_, 16
-	note D#, 15
-	note C_, 16
-	note D#, 8
-	note D#, 7
-	note C_, 16
-	note D#, 15
-	note C_, 16
-	note D#, 15
-	note C_, 16
-	note D#, 15
-	note C_, 16
-	note D_, 5
-	note D_, 5
-	note D_, 5
-	note D_, 16
-	note D#, 5
-	note D#, 5
-	note D#, 5
-	note D_, 16
-	note __, 15
+	sound_call Branch_1edebb
+	sound_call Branch_1edec8
+	sound_loop 3, .Loop1
+	sound_call Branch_1edebb
+	sound_call Branch_1eded5
+	sound_call Branch_1edebb
+	sound_call Branch_1edec8
+	sound_call Branch_1edebb
+	sound_call Branch_1eded5
+	sound_call Branch_1edebb
+	sound_call Branch_1edec8
+	drum_note 1, 16
+	drum_note 4, 15
+	drum_note 7, 16
+	drum_note 1, 15
+	drum_note 4, 16
+	drum_note 7, 15
+	drum_note 1, 16
+	drum_note 4, 15
+	drum_note 1, 16
+	drum_note 4, 8
+	drum_note 4, 7
+	drum_note 1, 16
+	drum_note 4, 15
+	drum_note 1, 16
+	drum_note 4, 15
+	drum_note 1, 16
+	drum_note 4, 15
+	drum_note 1, 16
+	drum_note 3, 5
+	drum_note 3, 5
+	drum_note 3, 5
+	drum_note 3, 16
+	;musicef 254
+	drum_note 4, 5
+	;musicef 255
+	drum_note 4, 5
+	;musicef 0
+	drum_note 4, 5
+	drum_note 3, 16
+	rest 15
 .Loop2
-	callchannel Branch_1edee2
-	callchannel Branch_1edeef
-	loopchannel 3, .Loop2
-	callchannel Branch_1edee2
-	note C_, 16
-	note D#, 15
-	note D_, 16
-	note D#, 8
-	note D#, 7
-	note C_, 16
-	note D#, 8
-	note D_, 7
-	note D_, 8
-	note D_, 8
-	note D_, 15
-	callchannel Branch_1edee2
-	callchannel Branch_1edee2
-	note C_, 16
-	note E_, 15
-	note D_, 16
-	note D_, 15
-	note C_, 16
-	note D_, 5
-	note D_, 5
-	note D_, 5
-	note D_, 16
-	note D#, 15
-	note D_, 16
-	note D#, 15
-	note D_, 16
-	note D#, 8
-	note D#, 7
-	note D_, 16
-	note D#, 15
-	note D_, 16
-	note D#, 15
-	note D_, 16
-	note D#, 15
-	note D_, 16
-	note D_, 5
-	note D_, 5
-	note D_, 5
-	note D_, 16
-	note D#, 5
-	note D#, 5
-	note D#, 5
-	note D_, 16
-	note __, 15
-	loopchannel 0, .MainLoop
+	sound_call Branch_1edee2
+	sound_call Branch_1edeef
+	sound_loop 3, .Loop2
+	sound_call Branch_1edee2
+	drum_note 1, 16
+	drum_note 4, 15
+	drum_note 3, 16
+	drum_note 4, 8
+	drum_note 4, 7
+	drum_note 1, 16
+	drum_note 4, 8
+	drum_note 3, 7
+	drum_note 3, 8
+	drum_note 3, 8
+	drum_note 3, 15
+	sound_call Branch_1edee2
+	sound_call Branch_1edee2
+	drum_note 1, 16
+	drum_note 5, 15
+	drum_note 3, 16
+	drum_note 3, 15
+	drum_note 1, 16
+	;musicef 254
+	drum_note 3, 5
+	;musicef 255
+	drum_note 3, 5
+	;musicef 0
+	drum_note 3, 5
+	drum_note 3, 16
+	drum_note 4, 15
+	drum_note 3, 16
+	drum_note 4, 15
+	drum_note 3, 16
+	drum_note 4, 8
+	drum_note 4, 7
+	drum_note 3, 16
+	drum_note 4, 15
+	drum_note 3, 16
+	drum_note 4, 15
+	drum_note 3, 16
+	drum_note 4, 15
+	drum_note 3, 16
+	drum_note 3, 5
+	drum_note 3, 5
+	drum_note 3, 5
+	drum_note 3, 16
+	;musicef 254
+	drum_note 4, 5
+	;musicef 255
+	drum_note 4, 5
+	;musicef 0
+	drum_note 4, 5
+	drum_note 3, 16
+	rest 15
+	sound_loop 0, .MainLoop
 
 Branch_1edebb:
 	octave 1
-	notetype 1
-	note C_, 16
-	note D#, 15
-	note F#, 16
-	note D#, 8
-	note D#, 7
-	note C_, 16
-	note D#, 15
-	note F#, 16
-	note D#, 15
-	endchannel
+	drum_speed 1
+	drum_note 1, 16
+	drum_note 4, 15
+	drum_note 7, 16
+	drum_note 4, 8
+	drum_note 4, 7
+	drum_note 1, 16
+	drum_note 4, 15
+	drum_note 7, 16
+	drum_note 4, 15
+	sound_ret
 
 Branch_1edec8:
 	octave 1
-	notetype 1
-	note C_, 16
-	note D#, 15
-	note F#, 16
-	note D#, 8
-	note D#, 7
-	note C_, 16
-	note D#, 15
-	note F#, 16
-	note E_, 15
-	endchannel
+	drum_speed 1
+	drum_note 1, 16
+	drum_note 4, 15
+	drum_note 7, 16
+	drum_note 4, 8
+	drum_note 4, 7
+	drum_note 1, 16
+	drum_note 4, 15
+	drum_note 7, 16
+	drum_note 5, 15
+	sound_ret
 
 Branch_1eded5:
 	octave 1
-	notetype 1
-	note C_, 16
-	note D#, 15
-	note F#, 16
-	note D#, 8
-	note D#, 7
-	note F#, 16
-	note C_, 15
-	note F#, 16
-	note C_, 15
-	endchannel
+	drum_speed 1
+	drum_note 1, 16
+	drum_note 4, 15
+	drum_note 7, 16
+	drum_note 4, 8
+	drum_note 4, 7
+	drum_note 7, 16
+	drum_note 1, 15
+	drum_note 7, 16
+	drum_note 1, 15
+	sound_ret
 
 Branch_1edee2:
 	octave 1
-	notetype 1
-	note C_, 16
-	note D#, 15
-	note D_, 16
-	note D#, 8
-	note D#, 7
-	note C_, 16
-	note D#, 15
-	note D_, 16
-	note D#, 15
-	endchannel
+	drum_speed 1
+	drum_note 1, 16
+	drum_note 4, 15
+	drum_note 3, 16
+	drum_note 4, 8
+	drum_note 4, 7
+	drum_note 1, 16
+	drum_note 4, 15
+	drum_note 3, 16
+	drum_note 4, 15
+	sound_ret
 
 Branch_1edeef:
 	octave 1
-	notetype 1
-	note C_, 16
-	note D#, 15
-	note D_, 16
-	note D#, 8
-	note D#, 7
-	note C_, 16
-	note D#, 15
-	note D_, 16
-	note E_, 15
-	endchannel
-
+	drum_speed 1
+	drum_note 1, 16
+	drum_note 4, 15
+	drum_note 3, 16
+	drum_note 4, 8
+	drum_note 4, 7
+	drum_note 1, 16
+	drum_note 4, 15
+	drum_note 3, 16
+	drum_note 5, 15
+	sound_ret
+; 0x1edefc

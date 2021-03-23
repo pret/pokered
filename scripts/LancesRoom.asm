@@ -18,23 +18,21 @@ LanceShowOrHideEntranceBlocks:
 	; open entrance
 	ld a, $31
 	ld b, $32
-	jp LanceSetEntranceBlocks
+	jp .setEntranceBlocks
 .closeEntrance
 	ld a, $72
 	ld b, $73
-
-LanceSetEntranceBlocks:
+.setEntranceBlocks
 ; Replaces the tile blocks so the player can't leave.
 	push bc
 	ld [wNewTileBlockID], a
 	lb bc, 6, 2
-	call LanceSetEntranceBlock
+	call .SetEntranceBlock
 	pop bc
 	ld a, b
 	ld [wNewTileBlockID], a
 	lb bc, 6, 3
-
-LanceSetEntranceBlock:
+.SetEntranceBlock:
 	predef_jump ReplaceTileBlock
 
 ResetLanceScript:
@@ -59,12 +57,12 @@ LanceScript0:
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ld a, [wCoordIndex]
 	cp $3  ; Is player standing next to Lance's sprite?
 	jr nc, .notStandingNextToLance
 	ld a, $1
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 .notStandingNextToLance
 	cp $5  ; Is player standing on the entrance staircase?
@@ -78,12 +76,12 @@ LanceScript0:
 	jp LanceShowOrHideEntranceBlocks
 
 LanceTriggerMovementCoords:
-	db $01,$05
-	db $02,$06
-	db $0B,$05
-	db $0B,$06
-	db $10,$18
-	db $FF
+	dbmapcoord  5,  1
+	dbmapcoord  6,  2
+	dbmapcoord  5, 11
+	dbmapcoord  6, 11
+	dbmapcoord 24, 16
+	db -1 ; end
 
 LanceScript2:
 	call EndTrainerBattle
@@ -91,7 +89,7 @@ LanceScript2:
 	cp $ff
 	jp z, ResetLanceScript
 	ld a, $1
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
 WalkToLance:
@@ -110,11 +108,11 @@ WalkToLance:
 	ret
 
 WalkToLance_RLEList:
-	db D_UP, $0C
-	db D_LEFT, $0C
-	db D_DOWN, $07
-	db D_LEFT, $06
-	db $FF
+	db D_UP, 12
+	db D_LEFT, 12
+	db D_DOWN, 7
+	db D_LEFT, 6
+	db -1 ; end
 
 LanceScript3:
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -131,32 +129,25 @@ LancesRoom_TextPointers:
 	dw LanceText1
 
 LanceTrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_LANCES_ROOM_TRAINER_0
-	db ($0 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_LANCES_ROOM_TRAINER_0
-	dw LanceBeforeBattleText ; TextBeforeBattle
-	dw LanceAfterBattleText ; TextAfterBattle
-	dw LanceEndBattleText ; TextEndBattle
-	dw LanceEndBattleText ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_LANCES_ROOM_TRAINER_0, 0, LanceBeforeBattleText, LanceEndBattleText, LanceAfterBattleText
+	db -1 ; end
 
 LanceText1:
-	TX_ASM
+	text_asm
 	ld hl, LanceTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 LanceBeforeBattleText:
-	TX_FAR _LanceBeforeBattleText
-	db "@"
+	text_far _LanceBeforeBattleText
+	text_end
 
 LanceEndBattleText:
-	TX_FAR _LanceEndBattleText
-	db "@"
+	text_far _LanceEndBattleText
+	text_end
 
 LanceAfterBattleText:
-	TX_FAR _LanceAfterBattleText
-	TX_ASM
+	text_far _LanceAfterBattleText
+	text_asm
 	SetEvent EVENT_BEAT_LANCE
 	jp TextScriptEnd

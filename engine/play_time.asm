@@ -1,4 +1,4 @@
-TrackPlayTime:
+TrackPlayTime::
 	call CountDownIgnoreInputBitReset
 	ld a, [wd732]
 	bit 0, a
@@ -56,6 +56,6 @@ CountDownIgnoreInputBitReset:
 	ld [wd730], a
 	ret z
 	xor a
-	ld [hJoyPressed], a
-	ld [hJoyHeld], a
+	ldh [hJoyPressed], a
+	ldh [hJoyHeld], a
 	ret

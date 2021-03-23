@@ -43,14 +43,14 @@ Mansion4Script_523cf:
 	call Mansion2Script_5202f
 	ret
 
-Mansion4Script_Switches:
-	ld a, [wSpriteStateData1 + 9]
+Mansion4Script_Switches::
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
 	ret nz
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ld a, $9
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
 PokemonMansionB1F_ScriptPointers:
@@ -70,61 +70,47 @@ PokemonMansionB1F_TextPointers:
 	dw Mansion3Text6
 
 Mansion4TrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_MANSION_4_TRAINER_0
-	db ($0 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_MANSION_4_TRAINER_0
-	dw Mansion4BattleText1 ; TextBeforeBattle
-	dw Mansion4AfterBattleText1 ; TextAfterBattle
-	dw Mansion4EndBattleText1 ; TextEndBattle
-	dw Mansion4EndBattleText1 ; TextEndBattle
-
+	trainer EVENT_BEAT_MANSION_4_TRAINER_0, 0, Mansion4BattleText1, Mansion4EndBattleText1, Mansion4AfterBattleText1
 Mansion4TrainerHeader1:
-	dbEventFlagBit EVENT_BEAT_MANSION_4_TRAINER_1
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_MANSION_4_TRAINER_1
-	dw Mansion4BattleText2 ; TextBeforeBattle
-	dw Mansion4AfterBattleText2 ; TextAfterBattle
-	dw Mansion4EndBattleText2 ; TextEndBattle
-	dw Mansion4EndBattleText2 ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_MANSION_4_TRAINER_1, 3, Mansion4BattleText2, Mansion4EndBattleText2, Mansion4AfterBattleText2
+	db -1 ; end
 
 Mansion4Text1:
-	TX_ASM
+	text_asm
 	ld hl, Mansion4TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Mansion4Text2:
-	TX_ASM
+	text_asm
 	ld hl, Mansion4TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Mansion4BattleText1:
-	TX_FAR _Mansion4BattleText1
-	db "@"
+	text_far _Mansion4BattleText1
+	text_end
 
 Mansion4EndBattleText1:
-	TX_FAR _Mansion4EndBattleText1
-	db "@"
+	text_far _Mansion4EndBattleText1
+	text_end
 
 Mansion4AfterBattleText1:
-	TX_FAR _Mansion4AfterBattleText1
-	db "@"
+	text_far _Mansion4AfterBattleText1
+	text_end
 
 Mansion4BattleText2:
-	TX_FAR _Mansion4BattleText2
-	db "@"
+	text_far _Mansion4BattleText2
+	text_end
 
 Mansion4EndBattleText2:
-	TX_FAR _Mansion4EndBattleText2
-	db "@"
+	text_far _Mansion4EndBattleText2
+	text_end
 
 Mansion4AfterBattleText2:
-	TX_FAR _Mansion4AfterBattleText2
-	db "@"
+	text_far _Mansion4AfterBattleText2
+	text_end
 
 Mansion4Text7:
-	TX_FAR _Mansion4Text7
-	db "@"
+	text_far _Mansion4Text7
+	text_end

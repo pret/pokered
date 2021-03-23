@@ -15,9 +15,9 @@ AnimCut:
 	ld [wCoordAdjustmentAmount], a
 	ld c, 2
 	call AdjustOAMBlockXPos2
-	ld a, [rOBP1]
+	ldh a, [rOBP1]
 	xor $64
-	ld [rOBP1], a
+	ldh [rOBP1], a
 	call DelayFrame
 	pop bc
 	dec c
@@ -65,9 +65,9 @@ AnimCutGrass_UpdateOAMEntries:
 	ld [wCoordAdjustmentAmount], a
 	ld c, 1
 	call AdjustOAMBlockXPos2
-	ld a, [rOBP1]
+	ldh a, [rOBP1]
 	xor $64
-	ld [rOBP1], a
+	ldh [rOBP1], a
 	call DelayFrame
 	pop bc
 	dec c

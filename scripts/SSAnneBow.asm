@@ -20,69 +20,55 @@ SSAnneBow_TextPointers:
 	dw SSAnne5Text5
 
 SSAnne5TrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_SS_ANNE_5_TRAINER_0
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_SS_ANNE_5_TRAINER_0
-	dw SSAnne5BattleText1 ; TextBeforeBattle
-	dw SSAnne5AfterBattleText1 ; TextAfterBattle
-	dw SSAnne5EndBattleText1 ; TextEndBattle
-	dw SSAnne5EndBattleText1 ; TextEndBattle
-
+	trainer EVENT_BEAT_SS_ANNE_5_TRAINER_0, 3, SSAnne5BattleText1, SSAnne5EndBattleText1, SSAnne5AfterBattleText1
 SSAnne5TrainerHeader1:
-	dbEventFlagBit EVENT_BEAT_SS_ANNE_5_TRAINER_1
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_SS_ANNE_5_TRAINER_1
-	dw SSAnne5BattleText2 ; TextBeforeBattle
-	dw SSAnne5AfterBattleText2 ; TextAfterBattle
-	dw SSAnne5EndBattleText2 ; TextEndBattle
-	dw SSAnne5EndBattleText2 ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_SS_ANNE_5_TRAINER_1, 3, SSAnne5BattleText2, SSAnne5EndBattleText2, SSAnne5AfterBattleText2
+	db -1 ; end
 
 SSAnne5Text1:
-	TX_FAR _SSAnne5Text1
-	db "@"
+	text_far _SSAnne5Text1
+	text_end
 
 SSAnne5Text2:
-	TX_FAR _SSAnne5Text2
-	db "@"
+	text_far _SSAnne5Text2
+	text_end
 
 SSAnne5Text3:
-	TX_FAR _SSAnne5Text3
-	db "@"
+	text_far _SSAnne5Text3
+	text_end
 
 SSAnne5Text4:
-	TX_ASM
+	text_asm
 	ld hl, SSAnne5TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SSAnne5BattleText1:
-	TX_FAR _SSAnne5BattleText1
-	db "@"
+	text_far _SSAnne5BattleText1
+	text_end
 
 SSAnne5EndBattleText1:
-	TX_FAR _SSAnne5EndBattleText1
-	db "@"
+	text_far _SSAnne5EndBattleText1
+	text_end
 
 SSAnne5AfterBattleText1:
-	TX_FAR _SSAnne5AfterBattleText1
-	db "@"
+	text_far _SSAnne5AfterBattleText1
+	text_end
 
 SSAnne5Text5:
-	TX_ASM
+	text_asm
 	ld hl, SSAnne5TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SSAnne5BattleText2:
-	TX_FAR _SSAnne5BattleText2
-	db "@"
+	text_far _SSAnne5BattleText2
+	text_end
 
 SSAnne5EndBattleText2:
-	TX_FAR _SSAnne5EndBattleText2
-	db "@"
+	text_far _SSAnne5EndBattleText2
+	text_end
 
 SSAnne5AfterBattleText2:
-	TX_FAR _SSAnne5AfterBattleText2
-	db "@"
+	text_far _SSAnne5AfterBattleText2
+	text_end

@@ -5,7 +5,7 @@ Daycare_TextPointers:
 	dw DayCareMText1
 
 DayCareMText1:
-	TX_ASM
+	text_asm
 	call SaveScreenTilesToBuffer2
 	ld a, [wDayCareInUse]
 	and a
@@ -35,7 +35,7 @@ DayCareMText1:
 	pop af
 	ld hl, DayCareAllRightThenText
 	jp c, .done
-	callab KnowsHMMove
+	callfar KnowsHMMove
 	ld hl, DayCareCantAcceptMonWithHMText
 	jp c, .done
 	xor a
@@ -65,19 +65,19 @@ DayCareMText1:
 	ld a, DAYCARE_DATA
 	ld [wMonDataLocation], a
 	call LoadMonData
-	callab CalcLevelFromExperience
+	callfar CalcLevelFromExperience
 	ld a, d
 	cp MAX_LEVEL
 	jr c, .skipCalcExp
 
 	ld d, MAX_LEVEL
-	callab CalcExperience
+	callfar CalcExperience
 	ld hl, wDayCareMonExp
-	ld a, [hExperience]
+	ldh a, [hExperience]
 	ld [hli], a
-	ld a, [hExperience + 1]
+	ldh a, [hExperience + 1]
 	ld [hli], a
-	ld a, [hExperience + 2]
+	ldh a, [hExperience + 2]
 	ld [hl], a
 	ld d, MAX_LEVEL
 
@@ -138,11 +138,11 @@ DayCareMText1:
 	and a
 	jp nz, .leaveMonInDayCare
 	ld hl, wDayCareTotalCost
-	ld [hMoney], a
+	ldh [hMoney], a
 	ld a, [hli]
-	ld [hMoney + 1], a
+	ldh [hMoney + 1], a
 	ld a, [hl]
-	ld [hMoney + 2], a
+	ldh [hMoney + 2], a
 	call HasEnoughMoney
 	jr nc, .enoughMoney
 	ld hl, DayCareNotEnoughMoneyText
@@ -211,59 +211,59 @@ DayCareMText1:
 	jp TextScriptEnd
 
 DayCareIntroText:
-	TX_FAR _DayCareIntroText
-	db "@"
+	text_far _DayCareIntroText
+	text_end
 
 DayCareWhichMonText:
-	TX_FAR _DayCareWhichMonText
-	db "@"
+	text_far _DayCareWhichMonText
+	text_end
 
 DayCareWillLookAfterMonText:
-	TX_FAR _DayCareWillLookAfterMonText
-	db "@"
+	text_far _DayCareWillLookAfterMonText
+	text_end
 
 DayCareComeSeeMeInAWhileText:
-	TX_FAR _DayCareComeSeeMeInAWhileText
-	db "@"
+	text_far _DayCareComeSeeMeInAWhileText
+	text_end
 
 DayCareMonHasGrownText:
-	TX_FAR _DayCareMonHasGrownText
-	db "@"
+	text_far _DayCareMonHasGrownText
+	text_end
 
 DayCareOweMoneyText:
-	TX_FAR _DayCareOweMoneyText
-	db "@"
+	text_far _DayCareOweMoneyText
+	text_end
 
 DayCareGotMonBackText:
-	TX_FAR _DayCareGotMonBackText
-	db "@"
+	text_far _DayCareGotMonBackText
+	text_end
 
 DayCareMonNeedsMoreTimeText:
-	TX_FAR _DayCareMonNeedsMoreTimeText
-	db "@"
+	text_far _DayCareMonNeedsMoreTimeText
+	text_end
 
 DayCareAllRightThenText:
-	TX_FAR _DayCareAllRightThenText
+	text_far _DayCareAllRightThenText
 DayCareComeAgainText:
-	TX_FAR _DayCareComeAgainText
-	db "@"
+	text_far _DayCareComeAgainText
+	text_end
 
 DayCareNoRoomForMonText:
-	TX_FAR _DayCareNoRoomForMonText
-	db "@"
+	text_far _DayCareNoRoomForMonText
+	text_end
 
 DayCareOnlyHaveOneMonText:
-	TX_FAR _DayCareOnlyHaveOneMonText
-	db "@"
+	text_far _DayCareOnlyHaveOneMonText
+	text_end
 
 DayCareCantAcceptMonWithHMText:
-	TX_FAR _DayCareCantAcceptMonWithHMText
-	db "@"
+	text_far _DayCareCantAcceptMonWithHMText
+	text_end
 
 DayCareHeresYourMonText:
-	TX_FAR _DayCareHeresYourMonText
-	db "@"
+	text_far _DayCareHeresYourMonText
+	text_end
 
 DayCareNotEnoughMoneyText:
-	TX_FAR _DayCareNotEnoughMoneyText
-	db "@"
+	text_far _DayCareNotEnoughMoneyText
+	text_end

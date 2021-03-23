@@ -12,7 +12,7 @@ CeladonGameCornerScript_48bcf:
 	res 6, [hl]
 	ret z
 	call Random
-	ld a, [hRandomAdd]
+	ldh a, [hRandomAdd]
 	cp $7
 	jr nc, .asm_48be2
 	ld a, $8
@@ -57,25 +57,25 @@ CeladonGameCornerScript1:
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $d
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $b
-	ld [H_SPRITEINDEX], a
+	ldh [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
 	ld de, MovementData_48c5a
 	ld a, [wYCoord]
-	cp $6
+	cp 6
 	jr nz, .asm_48c43
 	ld de, MovementData_48c63
 	jr .asm_48c4d
 .asm_48c43
 	ld a, [wXCoord]
-	cp $8
+	cp 8
 	jr nz, .asm_48c4d
 	ld de, MovementData_48c63
 .asm_48c4d
 	ld a, $b
-	ld [H_SPRITEINDEX], a
+	ldh [hSpriteIndex], a
 	call MoveSprite
 	ld a, $2
 	ld [wGameCornerCurScript], a
@@ -90,7 +90,7 @@ MovementData_48c5a:
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
-	db $FF
+	db -1 ; end
 
 MovementData_48c63:
 	db NPC_MOVEMENT_RIGHT
@@ -98,7 +98,7 @@ MovementData_48c63:
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
-	db $FF
+	db -1 ; end
 
 CeladonGameCornerScript2:
 	ld a, [wd730]
@@ -132,11 +132,11 @@ GameCorner_TextPointers:
 	dw CeladonGameCornerText13
 
 CeladonGameCornerText1:
-	TX_FAR _CeladonGameCornerText1
-	db "@"
+	text_far _CeladonGameCornerText1
+	text_end
 
 CeladonGameCornerText2:
-	TX_ASM
+	text_asm
 	call CeladonGameCornerScript_48f1e
 	ld hl, CeladonGameCornerText_48d22
 	call PrintText
@@ -150,29 +150,29 @@ CeladonGameCornerText2:
 	call Has9990Coins
 	jr nc, .asm_48d14
 	xor a
-	ld [hMoney], a
-	ld [hMoney + 2], a
+	ldh [hMoney], a
+	ldh [hMoney + 2], a
 	ld a, $10
-	ld [hMoney + 1], a
+	ldh [hMoney + 1], a
 	call HasEnoughMoney
 	jr nc, .asm_48cdb
 	ld hl, CeladonGameCornerText_48d31
 	jr .asm_48d1c
 .asm_48cdb
 	xor a
-	ld [hMoney], a
-	ld [hMoney + 2], a
+	ldh [hMoney], a
+	ldh [hMoney + 2], a
 	ld a, $10
-	ld [hMoney + 1], a
+	ldh [hMoney + 1], a
 	ld hl, hMoney + 2
 	ld de, wPlayerMoney + 2
 	ld c, $3
 	predef SubBCDPredef
 	xor a
-	ld [hUnusedCoinsByte], a
-	ld [hCoins], a
+	ldh [hUnusedCoinsByte], a
+	ldh [hCoins], a
 	ld a, $50
-	ld [hCoins + 1], a
+	ldh [hCoins + 1], a
 	ld de, wPlayerCoins + 1
 	ld hl, hCoins + 1
 	ld c, $2
@@ -193,39 +193,39 @@ CeladonGameCornerText2:
 	jp TextScriptEnd
 
 CeladonGameCornerText_48d22:
-	TX_FAR _CeladonGameCornerText_48d22
-	db "@"
+	text_far _CeladonGameCornerText_48d22
+	text_end
 
 CeladonGameCornerText_48d27:
-	TX_FAR _CeladonGameCornerText_48d27
-	db "@"
+	text_far _CeladonGameCornerText_48d27
+	text_end
 
 CeladonGameCornerText_48d2c:
-	TX_FAR _CeladonGameCornerText_48d2c
-	db "@"
+	text_far _CeladonGameCornerText_48d2c
+	text_end
 
 CeladonGameCornerText_48d31:
-	TX_FAR _CeladonGameCornerText_48d31
-	db "@"
+	text_far _CeladonGameCornerText_48d31
+	text_end
 
 CeladonGameCornerText_48d36:
-	TX_FAR _CeladonGameCornerText_48d36
-	db "@"
+	text_far _CeladonGameCornerText_48d36
+	text_end
 
 CeladonGameCornerText_48d3b:
-	TX_FAR _CeladonGameCornerText_48d3b
-	db "@"
+	text_far _CeladonGameCornerText_48d3b
+	text_end
 
 CeladonGameCornerText3:
-	TX_FAR _CeladonGameCornerText3
-	db "@"
+	text_far _CeladonGameCornerText3
+	text_end
 
 CeladonGameCornerText4:
-	TX_FAR _CeladonGameCornerText4
-	db "@"
+	text_far _CeladonGameCornerText4
+	text_end
 
 CeladonGameCornerText5:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_GOT_10_COINS
 	jr nz, .asm_48d89
 	ld hl, CeladonGameCornerText_48d9c
@@ -236,10 +236,10 @@ CeladonGameCornerText5:
 	call Has9990Coins
 	jr nc, .asm_48d8e
 	xor a
-	ld [hUnusedCoinsByte], a
-	ld [hCoins], a
+	ldh [hUnusedCoinsByte], a
+	ldh [hCoins], a
 	ld a, $10
-	ld [hCoins + 1], a
+	ldh [hCoins + 1], a
 	ld de, wPlayerCoins + 1
 	ld hl, hCoins + 1
 	ld c, $2
@@ -262,28 +262,28 @@ CeladonGameCornerText5:
 	jp TextScriptEnd
 
 CeladonGameCornerText_48d9c:
-	TX_FAR _CeladonGameCornerText_48d9c
-	db "@"
+	text_far _CeladonGameCornerText_48d9c
+	text_end
 
 Received10CoinsText:
-	TX_FAR _Received10CoinsText
-	TX_SFX_ITEM_1
-	db "@"
+	text_far _Received10CoinsText
+	sound_get_item_1
+	text_end
 
 CeladonGameCornerText_48da7:
-	TX_FAR _CeladonGameCornerText_48da7
-	db "@"
+	text_far _CeladonGameCornerText_48da7
+	text_end
 
 CeladonGameCornerText_48dac:
-	TX_FAR _CeladonGameCornerText_48dac
-	db "@"
+	text_far _CeladonGameCornerText_48dac
+	text_end
 
 CeladonGameCornerText6:
-	TX_FAR _CeladonGameCornerText6
-	db "@"
+	text_far _CeladonGameCornerText6
+	text_end
 
 CeladonGameCornerText7:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_BEAT_ERIKA
 	ld hl, CeladonGameCornerText_48dca
 	jr z, .asm_48dc4
@@ -293,19 +293,19 @@ CeladonGameCornerText7:
 	jp TextScriptEnd
 
 CeladonGameCornerText_48dca:
-	TX_FAR _CeladonGameCornerText_48dca
-	db "@"
+	text_far _CeladonGameCornerText_48dca
+	text_end
 
 CeladonGameCornerText_48dcf:
-	TX_FAR _CeladonGameCornerText_48dcf
-	db "@"
+	text_far _CeladonGameCornerText_48dcf
+	text_end
 
 CeladonGameCornerText8:
-	TX_FAR _CeladonGameCornerText8
-	db "@"
+	text_far _CeladonGameCornerText8
+	text_end
 
 CeladonGameCornerText9:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_GOT_20_COINS_2
 	jr nz, .asm_48e13
 	ld hl, CeladonGameCornerText_48e26
@@ -316,10 +316,10 @@ CeladonGameCornerText9:
 	call Has9990Coins
 	jr nc, .asm_48e18
 	xor a
-	ld [hUnusedCoinsByte], a
-	ld [hCoins], a
+	ldh [hUnusedCoinsByte], a
+	ldh [hCoins], a
 	ld a, $20
-	ld [hCoins + 1], a
+	ldh [hCoins + 1], a
 	ld de, wPlayerCoins + 1
 	ld hl, hCoins + 1
 	ld c, $2
@@ -340,24 +340,24 @@ CeladonGameCornerText9:
 	jp TextScriptEnd
 
 CeladonGameCornerText_48e26:
-	TX_FAR _CeladonGameCornerText_48e26
-	db "@"
+	text_far _CeladonGameCornerText_48e26
+	text_end
 
 Received20CoinsText:
-	TX_FAR _Received20CoinsText
-	TX_SFX_ITEM_1
-	db "@"
+	text_far _Received20CoinsText
+	sound_get_item_1
+	text_end
 
 CeladonGameCornerText_48e31:
-	TX_FAR _CeladonGameCornerText_48e31
-	db "@"
+	text_far _CeladonGameCornerText_48e31
+	text_end
 
 CeladonGameCornerText_48e36:
-	TX_FAR _CeladonGameCornerText_48e36
-	db "@"
+	text_far _CeladonGameCornerText_48e36
+	text_end
 
 CeladonGameCornerText10:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_GOT_20_COINS
 	jr nz, .asm_48e75
 	ld hl, CeladonGameCornerText_48e88
@@ -368,10 +368,10 @@ CeladonGameCornerText10:
 	call Has9990Coins
 	jr z, .asm_48e7a
 	xor a
-	ld [hUnusedCoinsByte], a
-	ld [hCoins], a
+	ldh [hUnusedCoinsByte], a
+	ldh [hCoins], a
 	ld a, $20
-	ld [hCoins + 1], a
+	ldh [hCoins + 1], a
 	ld de, wPlayerCoins + 1
 	ld hl, hCoins + 1
 	ld c, $2
@@ -392,24 +392,24 @@ CeladonGameCornerText10:
 	jp TextScriptEnd
 
 CeladonGameCornerText_48e88:
-	TX_FAR _CeladonGameCornerText_48e88
-	db "@"
+	text_far _CeladonGameCornerText_48e88
+	text_end
 
 CeladonGameCornerText_48e8d:
-	TX_FAR _CeladonGameCornerText_48e8d
-	TX_SFX_ITEM_1
-	db "@"
+	text_far _CeladonGameCornerText_48e8d
+	sound_get_item_1
+	text_end
 
 CeladonGameCornerText_48e93:
-	TX_FAR _CeladonGameCornerText_48e93
-	db "@"
+	text_far _CeladonGameCornerText_48e93
+	text_end
 
 CeladonGameCornerText_48e98:
-	TX_FAR _CeladonGameCornerText_48e98
-	db "@"
+	text_far _CeladonGameCornerText_48e98
+	text_end
 
 CeladonGameCornerText11:
-	TX_ASM
+	text_asm
 	ld hl, CeladonGameCornerText_48ece
 	call PrintText
 	ld hl, wd72d
@@ -418,32 +418,32 @@ CeladonGameCornerText11:
 	ld hl, CeladonGameCornerText_48ed3
 	ld de, CeladonGameCornerText_48ed3
 	call SaveEndBattleTextPointers
-	ld a, [H_SPRITEINDEX]
+	ldh a, [hSpriteIndex]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	xor a
-	ld [hJoyHeld], a
-	ld [hJoyPressed], a
-	ld [hJoyReleased], a
+	ldh [hJoyHeld], a
+	ldh [hJoyPressed], a
+	ldh [hJoyReleased], a
 	ld a, $1
 	ld [wGameCornerCurScript], a
 	jp TextScriptEnd
 
 CeladonGameCornerText_48ece:
-	TX_FAR _CeladonGameCornerText_48ece
-	db "@"
+	text_far _CeladonGameCornerText_48ece
+	text_end
 
 CeladonGameCornerText_48ed3:
-	TX_FAR _CeladonGameCornerText_48ed3
-	db "@"
+	text_far _CeladonGameCornerText_48ed3
+	text_end
 
 CeladonGameCornerText13:
-	TX_FAR _CeladonGameCornerText_48ed8
-	db "@"
+	text_far _CeladonGameCornerText_48ed8
+	text_end
 
 CeladonGameCornerText12:
-	TX_ASM
+	text_asm
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, CeladonGameCornerText_48f09
@@ -460,46 +460,46 @@ CeladonGameCornerText12:
 	jp TextScriptEnd
 
 CeladonGameCornerText_48f09:
-	TX_FAR _CeladonGameCornerText_48f09
-	TX_ASM
+	text_far _CeladonGameCornerText_48f09
+	text_asm
 	ld a, SFX_SWITCH
 	call PlaySound
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 
 CeladonGameCornerText_48f19:
-	TX_FAR _CeladonGameCornerText_48f19
-	db "@"
+	text_far _CeladonGameCornerText_48f19
+	text_end
 
 CeladonGameCornerScript_48f1e:
 	ld hl, wd730
 	set 6, [hl]
-	coord hl, 11, 0
-	ld b, $5
-	ld c, $7
+	hlcoord 11, 0
+	ld b, 5
+	ld c, 7
 	call TextBoxBorder
 	call UpdateSprites
-	coord hl, 12, 1
+	hlcoord 12, 1
 	ld b, 4
 	ld c, 7
 	call ClearScreenArea
-	coord hl, 12, 2
+	hlcoord 12, 2
 	ld de, GameCornerMoneyText
 	call PlaceString
-	coord hl, 12, 3
+	hlcoord 12, 3
 	ld de, GameCornerBlankText1
 	call PlaceString
-	coord hl, 12, 3
+	hlcoord 12, 3
 	ld de, wPlayerMoney
-	ld c, $a3
+	ld c, 3 | MONEY_SIGN | LEADING_ZEROES
 	call PrintBCDNumber
-	coord hl, 12, 4
+	hlcoord 12, 4
 	ld de, GameCornerCoinText
 	call PlaceString
-	coord hl, 12, 5
+	hlcoord 12, 5
 	ld de, GameCornerBlankText2
 	call PlaceString
-	coord hl, 15, 5
+	hlcoord 15, 5
 	ld de, wPlayerCoins
 	ld c, $82
 	call PrintBCDNumber
@@ -521,7 +521,7 @@ GameCornerBlankText2:
 
 Has9990Coins:
 	ld a, $99
-	ld [hCoins], a
+	ldh [hCoins], a
 	ld a, $90
-	ld [hCoins + 1], a
+	ldh [hCoins + 1], a
 	jp HasEnoughCoins

@@ -1,12 +1,13 @@
-Music_TCG2Diddly5:
-	db $40
-	dw Music_TCG2Diddly5_Ch1
-	db $01
-	dw Music_TCG2Diddly5_Ch2
+Music_Diddly5:
+	channel_count 2
+	channel 1, Music_Diddly5_Ch1
+	channel 2, Music_Diddly5_Ch2
 
-Music_TCG2Diddly5_Ch2: 
+Music_Diddly5_Ch2: ; 1ebefa (7a:7efa)
 	notetype1 10
+	;musicf0 2
 	notetype0 1
+	;musicdc 255
 	octave 3
 	note G_, 2
 	note B_, 3
@@ -30,13 +31,17 @@ Music_TCG2Diddly5_Ch2:
 	inc_octave
 	note D_, 3
 	note G_, 3
+	;musicef 252
 	note G_, 3
-	endchannel
+	sound_ret
 
 
-Music_TCG2Diddly5_Ch1: 
+Music_Diddly5_Ch1: ; 1ebf1b (7a:7f1b)
 	notetype1 10
+	;musicf0 2
 	notetype0 1
+	;musicdc 255
+	;musicef 254
 	octave 2
 	note B_, 2
 	inc_octave
@@ -60,6 +65,7 @@ Music_TCG2Diddly5_Ch1:
 	note D_, 3
 	note G_, 3
 	note B_, 3
+	;musicef 252
 	note B_, 3
-	endchannel
-
+	sound_ret
+; 0x1ebf3e

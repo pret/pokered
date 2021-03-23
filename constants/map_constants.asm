@@ -4,6 +4,16 @@ mapconst: MACRO
 \1_WIDTH EQU \3
 ENDM
 
+; map ids
+; indexes for:
+; - MapHeaderBanks (see data/maps/map_header_banks.asm)
+; - MapHeaderPointers (see data/maps/map_header_pointers.asm)
+; - MapSongBanks (see data/maps/songs.asm)
+; - MapHSPointers (see data/maps/hide_show_data.asm)
+; - MapSpriteSets (see data/maps/sprite_sets.asm)
+; - ExternalMapEntries (see data/maps/town_map_entries.asm)
+; Each map also has associated data in maps.asm.
+; Order: towns/cities, then routes, then indoor/dungeon maps
 	const_def
 	mapconst PALLET_TOWN,                    9, 10 ; $00
 	mapconst VIRIDIAN_CITY,                 18, 20 ; $01
@@ -16,7 +26,9 @@ ENDM
 	mapconst CINNABAR_ISLAND,                9, 10 ; $08
 	mapconst INDIGO_PLATEAU,                 9, 10 ; $09
 	mapconst SAFFRON_CITY,                  18, 20 ; $0A
+NUM_CITY_MAPS EQU const_value
 	mapconst UNUSED_MAP_0B,                  0,  0 ; $0B
+FIRST_ROUTE_MAP EQU const_value
 	mapconst ROUTE_1,                       18, 10 ; $0C
 	mapconst ROUTE_2,                       36, 10 ; $0D
 	mapconst ROUTE_3,                        9, 35 ; $0E
@@ -42,6 +54,7 @@ ENDM
 	mapconst ROUTE_23,                      72, 10 ; $22
 	mapconst ROUTE_24,                      18, 10 ; $23
 	mapconst ROUTE_25,                       9, 30 ; $24
+FIRST_INDOOR_MAP EQU const_value
 	mapconst REDS_HOUSE_1F,                  4,  4 ; $25
 	mapconst REDS_HOUSE_2F,                  4,  4 ; $26
 	mapconst BLUES_HOUSE,                    4,  4 ; $27
@@ -253,3 +266,7 @@ ENDM
 	mapconst LORELEIS_ROOM,                  6,  5 ; $F5
 	mapconst BRUNOS_ROOM,                    6,  5 ; $F6
 	mapconst AGATHAS_ROOM,                   6,  5 ; $F7
+
+; Indoor maps, such as houses, use this as the Map ID in their exit warps
+; This map ID takes the player back to the last outdoor map they were on, stored in wLastMap
+LAST_MAP EQU -1

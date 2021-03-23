@@ -1,4 +1,4 @@
-SFX_Battle_1B_Ch7:
-	noisenote 2, 15, 1, 34
-	noisenote 15, 15, 2, 18
-	endchannel
+SFX_Battle_1B_Ch8:
+	noise_note 2, 15, 1, 34
+	noise_note 15, 15, 2, 18
+	sound_ret

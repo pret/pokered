@@ -8,8 +8,8 @@ EmotionBubble:
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
-	ld hl, vChars1 + $780
-	lb bc, BANK(EmotionBubbles), $04
+	ld hl, vChars1 tile $78
+	lb bc, BANK(EmotionBubbles), 4
 	call CopyVideoData
 	ld a, [wUpdateSpritesEnabled]
 	push af
@@ -38,7 +38,7 @@ EmotionBubble:
 	jr nz, .loop
 
 ; get the screen coordinates of the sprite the bubble is to be displayed above
-	ld hl, wSpriteStateData1 + 4
+	ld hl, wSpritePlayerStateData1YPixels
 	ld a, [wEmotionBubbleSpriteIndex]
 	swap a
 	ld c, a
@@ -62,13 +62,16 @@ EmotionBubble:
 	jp UpdateSprites
 
 EmotionBubblesPointerTable:
-	dw EmotionBubbles
-	dw EmotionBubbles + $40
-	dw EmotionBubbles + $80
+; entries correspond to *_BUBBLE constants
+	dw ShockEmote
+	dw QuestionEmote
+	dw HappyEmote
 
 EmotionBubblesOAM:
-	db $F8,$00,$F9,$00
-	db $FA,$00,$FB,$00
+	dbsprite  0, -1,  0,  0, $f9, 0
+	dbsprite  0, -1,  0,  2, $fb, 0
 
 EmotionBubbles:
-	INCBIN "gfx/emotion_bubbles.2bpp"
+ShockEmote:    INCBIN "gfx/emotes/shock.2bpp"
+QuestionEmote: INCBIN "gfx/emotes/question.2bpp"
+HappyEmote:    INCBIN "gfx/emotes/happy.2bpp"

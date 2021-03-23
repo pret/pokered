@@ -55,15 +55,15 @@ GainExperience:
 	jr .gainStatExpLoop
 .statExpDone
 	xor a
-	ld [H_MULTIPLICAND], a
-	ld [H_MULTIPLICAND + 1], a
+	ldh [hMultiplicand], a
+	ldh [hMultiplicand + 1], a
 	ld a, [wEnemyMonBaseExp]
-	ld [H_MULTIPLICAND + 2], a
+	ldh [hMultiplicand + 2], a
 	ld a, [wEnemyMonLevel]
-	ld [H_MULTIPLIER], a
+	ldh [hMultiplier], a
 	call Multiply
 	ld a, 7
-	ld [H_DIVISOR], a
+	ldh [hDivisor], a
 	ld b, 4
 	call Divide
 	ld hl, wPartyMon1OTID - (wPartyMon1DVs - 1)
@@ -91,12 +91,12 @@ GainExperience:
 	inc hl
 ; add the gained exp to the party mon's exp
 	ld b, [hl]
-	ld a, [H_QUOTIENT + 3]
+	ldh a, [hQuotient + 3]
 	ld [wExpAmountGained + 1], a
 	add b
 	ld [hld], a
 	ld b, [hl]
-	ld a, [H_QUOTIENT + 2]
+	ldh a, [hQuotient + 2]
 	ld [wExpAmountGained], a
 	adc b
 	ld [hl], a
@@ -117,13 +117,13 @@ GainExperience:
 	ld [wd0b5], a
 	call GetMonHeader
 	ld d, MAX_LEVEL
-	callab CalcExperience ; get max exp
+	callfar CalcExperience ; get max exp
 ; compare max exp with current exp
-	ld a, [hExperience]
+	ldh a, [hExperience]
 	ld b, a
-	ld a, [hExperience + 1]
+	ldh a, [hExperience + 1]
 	ld c, a
-	ld a, [hExperience + 2]
+	ldh a, [hExperience + 2]
 	ld d, a
 	pop hl
 	ld a, [hld]
@@ -155,7 +155,7 @@ GainExperience:
 	ld bc, wPartyMon1Level - wPartyMon1Exp
 	add hl, bc
 	push hl
-	callba CalcLevelFromExperience
+	farcall CalcLevelFromExperience
 	pop hl
 	ld a, [hl] ; current level
 	cp d
@@ -233,11 +233,11 @@ GainExperience:
 .recalcStatChanges
 	xor a ; battle mon
 	ld [wCalculateWhoseStats], a
-	callab CalculateModifiedStats
-	callab ApplyBurnAndParalysisPenaltiesToPlayer
-	callab ApplyBadgeStatBoosts
-	callab DrawPlayerHUDAndHPBar
-	callab PrintEmptyString
+	callfar CalculateModifiedStats
+	callfar ApplyBurnAndParalysisPenaltiesToPlayer
+	callfar ApplyBadgeStatBoosts
+	callfar DrawPlayerHUDAndHPBar
+	callfar PrintEmptyString
 	call SaveScreenTilesToBuffer1
 .printGrewLevelText
 	ld hl, GrewLevelText
@@ -246,7 +246,7 @@ GainExperience:
 	ld [wMonDataLocation], a
 	call LoadMonData
 	ld d, $1
-	callab PrintStatsBox
+	callfar PrintStatsBox
 	call WaitForTextScrollButtonPress
 	call LoadScreenTilesFromBuffer1
 	xor a ; PLAYER_PARTY_DATA
@@ -311,14 +311,14 @@ DivideExpDataByNumMonsGainingExp:
 	ld c, wEnemyMonBaseExp + 1 - wEnemyMonBaseStats
 .divideLoop
 	xor a
-	ld [H_DIVIDEND], a
+	ldh [hDividend], a
 	ld a, [hl]
-	ld [H_DIVIDEND + 1], a
+	ldh [hDividend + 1], a
 	ld a, [wd11e]
-	ld [H_DIVISOR], a
+	ldh [hDivisor], a
 	ld b, $2
 	call Divide ; divide value by number of mons gaining exp
-	ld a, [H_QUOTIENT + 3]
+	ldh a, [hQuotient + 3]
 	ld [hli], a
 	dec c
 	jr nz, .divideLoop
@@ -326,22 +326,22 @@ DivideExpDataByNumMonsGainingExp:
 
 ; multiplies exp by 1.5
 BoostExp:
-	ld a, [H_QUOTIENT + 2]
+	ldh a, [hQuotient + 2]
 	ld b, a
-	ld a, [H_QUOTIENT + 3]
+	ldh a, [hQuotient + 3]
 	ld c, a
 	srl b
 	rr c
 	add c
-	ld [H_QUOTIENT + 3], a
-	ld a, [H_QUOTIENT + 2]
+	ldh [hQuotient + 3], a
+	ldh a, [hQuotient + 2]
 	adc b
-	ld [H_QUOTIENT + 2], a
+	ldh [hQuotient + 2], a
 	ret
 
 GainedText:
-	TX_FAR _GainedText
-	TX_ASM
+	text_far _GainedText
+	text_asm
 	ld a, [wBoostExpByExpAll]
 	ld hl, WithExpAllText
 	and a
@@ -354,19 +354,19 @@ GainedText:
 	ret
 
 WithExpAllText:
-	TX_FAR _WithExpAllText
-	TX_ASM
+	text_far _WithExpAllText
+	text_asm
 	ld hl, ExpPointsText
 	ret
 
 BoostedText:
-	TX_FAR _BoostedText
+	text_far _BoostedText
 
 ExpPointsText:
-	TX_FAR _ExpPointsText
-	db "@"
+	text_far _ExpPointsText
+	text_end
 
 GrewLevelText:
-	TX_FAR _GrewLevelText
-	TX_SFX_LEVEL_UP
-	db "@"
+	text_far _GrewLevelText
+	sound_level_up
+	text_end

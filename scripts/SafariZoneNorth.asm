@@ -11,21 +11,21 @@ SafariZoneNorth_TextPointers:
 	dw SafariZoneNorthText7
 
 SafariZoneNorthText3:
-	TX_FAR _SafariZoneNorthText3
-	db "@"
+	text_far _SafariZoneNorthText3
+	text_end
 
 SafariZoneNorthText4:
-	TX_FAR _SafariZoneNorthText4
-	db "@"
+	text_far _SafariZoneNorthText4
+	text_end
 
 SafariZoneNorthText5:
-	TX_FAR _SafariZoneNorthText5
-	db "@"
+	text_far _SafariZoneNorthText5
+	text_end
 
 SafariZoneNorthText6:
-	TX_FAR _SafariZoneNorthText6
-	db "@"
+	text_far _SafariZoneNorthText6
+	text_end
 
 SafariZoneNorthText7:
-	TX_FAR _SafariZoneNorthText7
-	db "@"
+	text_far _SafariZoneNorthText7
+	text_end

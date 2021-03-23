@@ -7,9 +7,9 @@ SSAnne1F_TextPointers:
 	dw SSAnne1Text2
 
 SSAnne1Text1:
-	TX_FAR _SSAnne1Text1
-	db "@"
+	text_far _SSAnne1Text1
+	text_end
 
 SSAnne1Text2:
-	TX_FAR _SSAnne1Text2
-	db "@"
+	text_far _SSAnne1Text2
+	text_end

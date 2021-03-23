@@ -1,5 +1,12 @@
-const_value = 1
-
+; item ids
+; indexes for:
+; - ItemNames (see data/items/names.asm)
+; - ItemPrices (see data/items/prices.asm)
+; - TechnicalMachinePrices (see data/items/tm_prices.asm)
+; - KeyItemBitfield (see data/items/key_items.asm)
+; - ItemUsePtrTable (see engine/items/item_effects.asm)
+	const_def
+	const NO_ITEM       ; $00
 	const MASTER_BALL   ; $01
 	const ULTRA_BALL    ; $02
 	const GREAT_BALL    ; $03
@@ -100,60 +107,121 @@ SAFARI_ROCK           EQU $16 ; overload
 	const FLOOR_11F     ; $60
 	const FLOOR_B4F     ; $61
 
-const_value = $C4
+	const_next $C4
 
-	const HM_01         ; $C4
-	const HM_02         ; $C5
-	const HM_03         ; $C6
-	const HM_04         ; $C7
-	const HM_05         ; $C8
-	const TM_01         ; $C9
-	const TM_02         ; $CA
-	const TM_03         ; $CB
-	const TM_04         ; $CC
-	const TM_05         ; $CD
-	const TM_06         ; $CE
-	const TM_07         ; $CF
-	const TM_08         ; $D0
-	const TM_09         ; $D1
-	const TM_10         ; $D2
-	const TM_11         ; $D3
-	const TM_12         ; $D4
-	const TM_13         ; $D5
-	const TM_14         ; $D6
-	const TM_15         ; $D7
-	const TM_16         ; $D8
-	const TM_17         ; $D9
-	const TM_18         ; $DA
-	const TM_19         ; $DB
-	const TM_20         ; $DC
-	const TM_21         ; $DD
-	const TM_22         ; $DE
-	const TM_23         ; $DF
-	const TM_24         ; $E0
-	const TM_25         ; $E1
-	const TM_26         ; $E2
-	const TM_27         ; $E3
-	const TM_28         ; $E4
-	const TM_29         ; $E5
-	const TM_30         ; $E6
-	const TM_31         ; $E7
-	const TM_32         ; $E8
-	const TM_33         ; $E9
-	const TM_34         ; $EA
-	const TM_35         ; $EB
-	const TM_36         ; $EC
-	const TM_37         ; $ED
-	const TM_38         ; $EE
-	const TM_39         ; $EF
-	const TM_40         ; $F0
-	const TM_41         ; $F1
-	const TM_42         ; $F2
-	const TM_43         ; $F3
-	const TM_44         ; $F4
-	const TM_45         ; $F5
-	const TM_46         ; $F6
-	const TM_47         ; $F7
-	const TM_48         ; $F8
-	const TM_49         ; $F9
-	const TM_50         ; $FA
+; HMs are defined before TMs, so the actual number of TM definitions
+; is not yet available. The TM quantity is hard-coded here and must
+; match the actual number below.
+NUM_TMS EQU 50
+
+add_hm: MACRO
+; Defines three constants:
+; - HM_\1: the item id, starting at $C4
+; - \1_TMNUM: the learnable TM/HM flag, starting at 51
+; - HM##_MOVE: alias for the move id, equal to the value of \1
+; The first usage also defines HM01 as the first HM item id.
+IF !DEF(HM01)
+HM01 EQU const_value
+__tmhm_value__ = NUM_TMS + 1
+ENDC
+HM_VALUE EQU __tmhm_value__ - NUM_TMS
+IF HM_VALUE < 10
+MOVE_FOR_HM EQUS "HM0{d:HM_VALUE}_MOVE"
+ELSE
+MOVE_FOR_HM EQUS "HM{d:HM_VALUE}_MOVE"
+ENDC
+MOVE_FOR_HM = \1
+PURGE MOVE_FOR_HM
+PURGE HM_VALUE
+	const HM_\1
+\1_TMNUM EQU __tmhm_value__
+__tmhm_value__ = __tmhm_value__ + 1
+ENDM
+
+	add_hm CUT          ; $C4
+	add_hm FLY          ; $C5
+	add_hm SURF         ; $C6
+	add_hm STRENGTH     ; $C7
+	add_hm FLASH        ; $C8
+NUM_HMS EQU const_value - HM01
+
+add_tm: MACRO
+; Defines three constants:
+; - TM_\1: the item id, starting at $C9
+; - \1_TMNUM: the learnable TM/HM flag, starting at 1
+; - TM##_MOVE: alias for the move id, equal to the value of \1
+; The first usage also defines TM01 as the first TM item id.
+IF !DEF(TM01)
+TM01 EQU const_value
+__tmhm_value__ = 1
+ENDC
+IF __tmhm_value__ < 10
+MOVE_FOR_TM EQUS "TM0{d:__tmhm_value__}_MOVE"
+ELSE
+MOVE_FOR_TM EQUS "TM{d:__tmhm_value__}_MOVE"
+ENDC
+MOVE_FOR_TM = \1
+PURGE MOVE_FOR_TM
+	const TM_\1
+\1_TMNUM EQU __tmhm_value__
+__tmhm_value__ = __tmhm_value__ + 1
+ENDM
+
+	add_tm MEGA_PUNCH   ; $C9
+	add_tm RAZOR_WIND   ; $CA
+	add_tm SWORDS_DANCE ; $CB
+	add_tm WHIRLWIND    ; $CC
+	add_tm MEGA_KICK    ; $CD
+	add_tm TOXIC        ; $CE
+	add_tm HORN_DRILL   ; $CF
+	add_tm BODY_SLAM    ; $D0
+	add_tm TAKE_DOWN    ; $D1
+	add_tm DOUBLE_EDGE  ; $D2
+	add_tm BUBBLEBEAM   ; $D3
+	add_tm WATER_GUN    ; $D4
+	add_tm ICE_BEAM     ; $D5
+	add_tm BLIZZARD     ; $D6
+	add_tm HYPER_BEAM   ; $D7
+	add_tm PAY_DAY      ; $D8
+	add_tm SUBMISSION   ; $D9
+	add_tm COUNTER      ; $DA
+	add_tm SEISMIC_TOSS ; $DB
+	add_tm RAGE         ; $DC
+	add_tm MEGA_DRAIN   ; $DD
+	add_tm SOLARBEAM    ; $DE
+	add_tm DRAGON_RAGE  ; $DF
+	add_tm THUNDERBOLT  ; $E0
+	add_tm THUNDER      ; $E1
+	add_tm EARTHQUAKE   ; $E2
+	add_tm FISSURE      ; $E3
+	add_tm DIG          ; $E4
+	add_tm PSYCHIC_M    ; $E5
+	add_tm TELEPORT     ; $E6
+	add_tm MIMIC        ; $E7
+	add_tm DOUBLE_TEAM  ; $E8
+	add_tm REFLECT      ; $E9
+	add_tm BIDE         ; $EA
+	add_tm METRONOME    ; $EB
+	add_tm SELFDESTRUCT ; $EC
+	add_tm EGG_BOMB     ; $ED
+	add_tm FIRE_BLAST   ; $EE
+	add_tm SWIFT        ; $EF
+	add_tm SKULL_BASH   ; $F0
+	add_tm SOFTBOILED   ; $F1
+	add_tm DREAM_EATER  ; $F2
+	add_tm SKY_ATTACK   ; $F3
+	add_tm REST         ; $F4
+	add_tm THUNDER_WAVE ; $F5
+	add_tm PSYWAVE      ; $F6
+	add_tm EXPLOSION    ; $F7
+	add_tm ROCK_SLIDE   ; $F8
+	add_tm TRI_ATTACK   ; $F9
+	add_tm SUBSTITUTE   ; $FA
+assert NUM_TMS == const_value - TM01, "NUM_TMS ({d:NUM_TMS}) does not match the number of add_tm definitions"
+
+NUM_TM_HM EQU NUM_TMS + NUM_HMS
+
+; 50 TMs + 5 HMs = 55 learnable TM/HM flags per Pokémon.
+; These fit in 7 bytes, with one unused bit left over.
+__tmhm_value__ = NUM_TM_HM + 1
+UNUSED_TMNUM EQU __tmhm_value__

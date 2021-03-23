@@ -41,7 +41,7 @@ NameRatersHouse_TextPointers:
 	dw NameRaterText1
 
 NameRaterText1:
-	TX_ASM
+	text_asm
 	call SaveScreenTilesToBuffer2
 	ld hl, NameRaterText_1dab3
 	call NameRaterScript_1da15
@@ -68,7 +68,7 @@ NameRaterText1:
 	jr nz, .asm_1daae
 	ld hl, NameRaterText_1dac2
 	call PrintText
-	callba DisplayNameRaterScreen
+	farcall DisplayNameRaterScreen
 	jr c, .asm_1daae
 	ld hl, NameRaterText_1dac7
 .asm_1daa8
@@ -79,29 +79,29 @@ NameRaterText1:
 	jr .asm_1daa8
 
 NameRaterText_1dab3:
-	TX_FAR _NameRaterText_1dab3
-	db "@"
+	text_far _NameRaterText_1dab3
+	text_end
 
 NameRaterText_1dab8:
-	TX_FAR _NameRaterText_1dab8
-	db "@"
+	text_far _NameRaterText_1dab8
+	text_end
 
 NameRaterText_1dabd:
-	TX_FAR _NameRaterText_1dabd
-	db "@"
+	text_far _NameRaterText_1dabd
+	text_end
 
 NameRaterText_1dac2:
-	TX_FAR _NameRaterText_1dac2
-	db "@"
+	text_far _NameRaterText_1dac2
+	text_end
 
 NameRaterText_1dac7:
-	TX_FAR _NameRaterText_1dac7
-	db "@"
+	text_far _NameRaterText_1dac7
+	text_end
 
 NameRaterText_1dacc:
-	TX_FAR _NameRaterText_1dacc
-	db "@"
+	text_far _NameRaterText_1dacc
+	text_end
 
 NameRaterText_1dad1:
-	TX_FAR _NameRaterText_1dad1
-	db "@"
+	text_far _NameRaterText_1dad1
+	text_end

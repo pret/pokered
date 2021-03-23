@@ -106,15 +106,3 @@ Music:
 	dba Music_SuicuneBattle
 	dba Music_BattleTowerLobby
 	dba Music_MobileCenter
-; remixes and custom songs
-	dba Music_JohtoGSC
-	dba Music_CeruleanGSC
-	dba Music_CinnabarGSC
-	dba Music_NuggetBridge
-	dba Music_Shop
-	dba Music_PokeathelonFinal
-	dba Music_PokeRadar
-	dba Music_NaljoWildBattle
-	dba Music_NaljoGymBattle
-	dba Music_PalletBattle
-	

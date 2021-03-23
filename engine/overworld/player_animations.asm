@@ -1,7 +1,7 @@
-EnterMapAnim:
+EnterMapAnim::
 	call InitFacingDirectionList
 	ld a, $ec
-	ld [wSpriteStateData1 + 4], a ; player's sprite Y screen position
+	ld [wSpritePlayerStateData1YPixels], a
 	call Delay3
 	push hl
 	call GBFadeInFromWhite
@@ -90,7 +90,7 @@ PlayerSpinWhileMovingDown:
 	ld [hl], a ; wPlayerSpinWhileMovingUpOrDownAnimFrameDelay
 	jp PlayerSpinWhileMovingUpOrDown
 
-_LeaveMapAnim:
+_LeaveMapAnim::
 	call InitFacingDirectionList
 	call IsPlayerStandingOnWarpPadOrHole
 	ld a, b
@@ -227,19 +227,19 @@ DoFlyAnimation:
 	ld a, [wFlyAnimBirdSpriteImageIndex]
 	xor $1 ; make the bird flap its wings
 	ld [wFlyAnimBirdSpriteImageIndex], a
-	ld [wSpriteStateData1 + 2], a
+	ld [wSpritePlayerStateData1ImageIndex], a
 	call Delay3
 	ld a, [wFlyAnimUsingCoordList]
 	cp $ff
 	jr z, .skipCopyingCoords ; if the bird is flapping its wings in place
-	ld hl, wSpriteStateData1 + 4
+	ld hl, wSpritePlayerStateData1YPixels
 	ld a, [de]
 	inc de
-	ld [hli], a
+	ld [hli], a ; y
 	inc hl
 	ld a, [de]
 	inc de
-	ld [hl], a
+	ld [hl], a ; x
 .skipCopyingCoords
 	ld a, [wFlyAnimCounter]
 	dec a
@@ -250,23 +250,23 @@ DoFlyAnimation:
 LoadBirdSpriteGraphics:
 	ld de, BirdSprite
 	ld hl, vNPCSprites
-	lb bc, BANK(BirdSprite), $0c
+	lb bc, BANK(BirdSprite), 12
 	call CopyVideoData
-	ld de, BirdSprite + $c0 ; moving animation sprite
+	ld de, BirdSprite tile 12 ; moving animation sprite
 	ld hl, vNPCSprites2
-	lb bc, BANK(BirdSprite), $0c
+	lb bc, BANK(BirdSprite), 12
 	jp CopyVideoData
 
 InitFacingDirectionList:
-	ld a, [wSpriteStateData1 + 2] ; player's sprite facing direction (image index is locked to standing images)
+	ld a, [wSpritePlayerStateData1ImageIndex] ; (image index is locked to standing images)
 	ld [wSavedPlayerFacingDirection], a
-	ld a, [wSpriteStateData1 + 4] ; player's sprite Y screen position
+	ld a, [wSpritePlayerStateData1YPixels]
 	ld [wSavedPlayerScreenY], a
 	ld hl, PlayerSpinningFacingOrder
 	ld de, wFacingDirectionList
 	ld bc, 4
 	call CopyData
-	ld a, [wSpriteStateData1 + 2] ; player's sprite facing direction (image index is locked to standing images)
+	ld a, [wSpritePlayerStateData1ImageIndex] ; (image index is locked to standing images)
 	ld hl, wFacingDirectionList
 ; find the place in the list that matches the current facing direction
 .loop
@@ -284,7 +284,7 @@ PlayerSpinningFacingOrder:
 SpinPlayerSprite:
 ; copy the current value from the list into the sprite data and rotate the list
 	ld a, [hl]
-	ld [wSpriteStateData1 + 2], a ; player's sprite facing direction (image index is locked to standing images)
+	ld [wSpritePlayerStateData1ImageIndex], a ; (image index is locked to standing images)
 	push hl
 	ld hl, wFacingDirectionList
 	ld de, wFacingDirectionList - 1
@@ -320,9 +320,9 @@ PlayerSpinWhileMovingUpOrDown:
 	call SpinPlayerSprite
 	ld a, [wPlayerSpinWhileMovingUpOrDownAnimDeltaY]
 	ld c, a
-	ld a, [wSpriteStateData1 + 4] ; player's sprite Y screen position
+	ld a, [wSpritePlayerStateData1YPixels]
 	add c
-	ld [wSpriteStateData1 + 4], a
+	ld [wSpritePlayerStateData1YPixels], a
 	ld c, a
 	ld a, [wPlayerSpinWhileMovingUpOrDownAnimMaxY]
 	cp c
@@ -334,9 +334,9 @@ PlayerSpinWhileMovingUpOrDown:
 
 RestoreFacingDirectionAndYScreenPos:
 	ld a, [wSavedPlayerScreenY]
-	ld [wSpriteStateData1 + 4], a
+	ld [wSpritePlayerStateData1YPixels], a
 	ld a, [wSavedPlayerFacingDirection]
-	ld [wSpriteStateData1 + 2], a
+	ld [wSpritePlayerStateData1ImageIndex], a ; (image index is locked to standing images)
 	ret
 
 ; if SGB, 2 frames, else 3 frames
@@ -347,9 +347,9 @@ GetPlayerTeleportAnimFrameDelay:
 	inc a
 	ret
 
-IsPlayerStandingOnWarpPadOrHole:
+IsPlayerStandingOnWarpPadOrHole::
 	ld b, 0
-	ld hl, .warpPadAndHoleData
+	ld hl, WarpPadAndHoleData
 	ld a, [wCurMapTileset]
 	ld c, a
 .loop
@@ -358,7 +358,7 @@ IsPlayerStandingOnWarpPadOrHole:
 	jr z, .done
 	cp c
 	jr nz, .nextEntry
-	aCoord 8, 9
+	lda_coord 8, 9
 	cp [hl]
 	jr z, .foundMatch
 .nextEntry
@@ -373,13 +373,7 @@ IsPlayerStandingOnWarpPadOrHole:
 	ld [wStandingOnWarpPadOrHole], a
 	ret
 
-; format: db tileset id, tile id, value to be put in [wStandingOnWarpPadOrHole]
-.warpPadAndHoleData:
-	db FACILITY, $20, 1 ; warp pad
-	db FACILITY, $11, 2 ; hole
-	db CAVERN,   $22, 2 ; hole
-	db INTERIOR, $55, 1 ; warp pad
-	db $FF
+INCLUDE "data/tilesets/warp_pad_hole_tile_ids.asm"
 
 FishingAnim:
 	ld c, 10
@@ -387,13 +381,13 @@ FishingAnim:
 	ld hl, wd736
 	set 6, [hl] ; reserve the last 4 OAM entries
 	ld de, RedSprite
-	ld hl, vNPCSprites
-	lb bc, BANK(RedSprite), $c
+	ld hl, vNPCSprites tile $00
+	lb bc, BANK(RedSprite), 12
 	call CopyVideoData
 	ld a, $4
 	ld hl, RedFishingTiles
 	call LoadAnimSpriteGfx
-	ld a, [wSpriteStateData1 + 2]
+	ld a, [wSpritePlayerStateData1ImageIndex]
 	ld c, a
 	ld b, $0
 	ld hl, FishingRodOAM
@@ -416,7 +410,7 @@ FishingAnim:
 ; shake the player's sprite vertically
 	ld b, 10
 .loop
-	ld hl, wSpriteStateData1 + 4 ; player's sprite Y screen position
+	ld hl, wSpritePlayerStateData1YPixels
 	call .ShakePlayerSprite
 	ld hl, wOAMBuffer + $9c
 	call .ShakePlayerSprite
@@ -426,7 +420,7 @@ FishingAnim:
 
 ; If the player is facing up, hide the fishing rod so it doesn't overlap with
 ; the exclamation bubble that will be shown next.
-	ld a, [wSpriteStateData1 + 2] ; player's sprite facing direction
+	ld a, [wSpritePlayerStateData1ImageIndex] ; (image index is locked to standing images)
 	cp SPRITE_FACING_UP
 	jr nz, .skipHidingFishingRod
 	ld a, $a0
@@ -440,7 +434,7 @@ FishingAnim:
 	predef EmotionBubble
 
 ; If the player is facing up, unhide the fishing rod.
-	ld a, [wSpriteStateData1 + 2] ; player's sprite facing direction
+	ld a, [wSpritePlayerStateData1ImageIndex] ; (image index is locked to standing images)
 	cp SPRITE_FACING_UP
 	jr nz, .skipUnhidingFishingRod
 	ld a, $44
@@ -463,46 +457,38 @@ FishingAnim:
 	ret
 
 NoNibbleText:
-	TX_FAR _NoNibbleText
-	db "@"
+	text_far _NoNibbleText
+	text_end
 
 NothingHereText:
-	TX_FAR _NothingHereText
-	db "@"
+	text_far _NothingHereText
+	text_end
 
 ItsABiteText:
-	TX_FAR _ItsABiteText
-	db "@"
+	text_far _ItsABiteText
+	text_end
 
 FishingRodOAM:
 ; specifies how the fishing rod should be drawn on the screen
-; first byte = screen y coordinate
-; second byte = screen x coordinate
-; third byte = tile number
-; fourth byte = sprite properties
-	db $5B, $4C, $FD, $00 ; player facing down
-	db $44, $4C, $FD, $00 ; player facing up
-	db $50, $40, $FE, $00 ; player facing left
-	db $50, $58, $FE, $20 ; player facing right ($20 means "horizontally flip the tile")
+	dbsprite  9, 11,  4,  3, $fd, 0         ; down
+	dbsprite  9,  8,  4,  4, $fd, 0         ; up
+	dbsprite  8, 10,  0,  0, $fe, 0         ; left
+	dbsprite 11, 10,  0,  0, $fe, OAM_HFLIP ; right
+
+fishing_gfx: MACRO
+	dw \1
+	db \2
+	db BANK(\1)
+	dw vNPCSprites tile \3
+ENDM
 
 RedFishingTiles:
-	dw RedFishingTilesFront
-	db 2, BANK(RedFishingTilesFront)
-	dw vNPCSprites + $20
+	fishing_gfx RedFishingTilesFront, 2, $02
+	fishing_gfx RedFishingTilesBack,  2, $06
+	fishing_gfx RedFishingTilesSide,  2, $0a
+	fishing_gfx RedFishingRodTiles,   3, $fd
 
-	dw RedFishingTilesBack
-	db 2, BANK(RedFishingTilesBack)
-	dw vNPCSprites + $60
-
-	dw RedFishingTilesSide
-	db 2, BANK(RedFishingTilesSide)
-	dw vNPCSprites + $a0
-
-	dw RedFishingRodTiles
-	db 3, BANK(RedFishingRodTiles)
-	dw vNPCSprites2 + $7d0
-
-_HandleMidJump:
+_HandleMidJump::
 	ld a, [wPlayerJumpingYScreenCoordsIndex]
 	ld c, a
 	inc a
@@ -513,7 +499,7 @@ _HandleMidJump:
 	ld hl, PlayerJumpingYScreenCoords
 	add hl, bc
 	ld a, [hl]
-	ld [wSpriteStateData1 + 4], a ; player's sprite y coordinate
+	ld [wSpritePlayerStateData1YPixels], a
 	ret
 .finishedJump
 	ld a, [wWalkCounter]
@@ -522,9 +508,9 @@ _HandleMidJump:
 	call UpdateSprites
 	call Delay3
 	xor a
-	ld [hJoyHeld], a
-	ld [hJoyPressed], a
-	ld [hJoyReleased], a
+	ldh [hJoyHeld], a
+	ldh [hJoyPressed], a
+	ldh [hJoyReleased], a
 	ld [wPlayerJumpingYScreenCoordsIndex], a
 	ld hl, wd736
 	res 6, [hl] ; not jumping down a ledge any more

@@ -17,12 +17,16 @@ PokemonTower2F_ScriptPointers:
 	dw PokemonTower2Script2
 
 PokemonTower2Script0:
+IF DEF(_DEBUG)
+	call DebugPressedOrHeldB
+	ret nz
+ENDC
 	CheckEvent EVENT_BEAT_POKEMON_TOWER_RIVAL
 	ret nz
 	ld hl, CoordsData_6055e
 	call ArePlayerCoordsInArray
 	ret nc
-	ld a, $ff
+	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
 	ld c, 0 ; BANK(Music_MeetRival)
@@ -41,22 +45,22 @@ PokemonTower2Script0:
 .asm_60544
 	ld [wPlayerMovingDirection], a
 	ld a, $1
-	ld [H_SPRITEINDEX], a
+	ldh [hSpriteIndex], a
 	ld a, b
-	ld [hSpriteFacingDirection], a
+	ldh [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, $1
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
-	ld [hJoyHeld], a
-	ld [hJoyPressed], a
+	ldh [hJoyHeld], a
+	ldh [hJoyPressed], a
 	ret
 
 CoordsData_6055e:
-	db $05,$0F
-	db $06,$0E
-	db $0F ; isn't this supposed to end in $ff?
+	dbmapcoord 15,  5
+	dbmapcoord 14,  6
+	db $0F ; end? (should be $ff?)
 
 PokemonTower2Script1:
 	ld a, [wIsInBattle]
@@ -66,7 +70,7 @@ PokemonTower2Script1:
 	ld [wJoyIgnore], a
 	SetEvent EVENT_BEAT_POKEMON_TOWER_RIVAL
 	ld a, $1
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld de, MovementData_605b2
 	CheckEvent EVENT_POKEMON_TOWER_RIVAL_ON_LEFT
@@ -74,12 +78,12 @@ PokemonTower2Script1:
 	ld de, MovementData_605a9
 .asm_60589
 	ld a, $1
-	ld [H_SPRITEINDEX], a
+	ldh [hSpriteIndex], a
 	call MoveSprite
-	ld a, $ff
+	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
-	callba Music_RivalAlternateStart
+	farcall Music_RivalAlternateStart
 	ld a, $2
 	ld [wPokemonTower2FCurScript], a
 	ld [wCurMapScript], a
@@ -94,7 +98,7 @@ MovementData_605a9:
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
-	db $FF
+	db -1 ; end
 
 MovementData_605b2:
 	db NPC_MOVEMENT_DOWN
@@ -105,7 +109,7 @@ MovementData_605b2:
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
-	db $FF
+	db -1 ; end
 
 PokemonTower2Script2:
 	ld a, [wd730]
@@ -127,7 +131,7 @@ PokemonTower2F_TextPointers:
 	dw PokemonTower2Text2
 
 PokemonTower2Text1:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_BEAT_POKEMON_TOWER_RIVAL
 	jr z, .asm_16f24
 	ld hl, PokemonTower2Text_6063c
@@ -142,7 +146,7 @@ PokemonTower2Text1:
 	ld hl, PokemonTower2Text_60632
 	ld de, PokemonTower2Text_60637
 	call SaveEndBattleTextPointers
-	ld a, OPP_SONY2
+	ld a, OPP_RIVAL2
 	ld [wCurOpponent], a
 
 	; select which team to use during the encounter
@@ -168,21 +172,21 @@ PokemonTower2Text1:
 	jp TextScriptEnd
 
 PokemonTower2Text_6062d:
-	TX_FAR _PokemonTower2Text_6062d
-	db "@"
+	text_far _PokemonTower2Text_6062d
+	text_end
 
 PokemonTower2Text_60632:
-	TX_FAR _PokemonTower2Text_60632
-	db "@"
+	text_far _PokemonTower2Text_60632
+	text_end
 
 PokemonTower2Text_60637:
-	TX_FAR _PokemonTower2Text_60637
-	db "@"
+	text_far _PokemonTower2Text_60637
+	text_end
 
 PokemonTower2Text_6063c:
-	TX_FAR _PokemonTower2Text_6063c
-	db "@"
+	text_far _PokemonTower2Text_6063c
+	text_end
 
 PokemonTower2Text2:
-	TX_FAR _PokemonTower2Text2
-	db "@"
+	text_far _PokemonTower2Text2
+	text_end

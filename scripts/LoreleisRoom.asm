@@ -65,8 +65,8 @@ LoreleiScript0:
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
 	xor a
-	ld [hJoyPressed], a
-	ld [hJoyHeld], a
+	ldh [hJoyPressed], a
+	ldh [hJoyHeld], a
 	ld [wSimulatedJoypadStatesEnd], a
 	ld [wSimulatedJoypadStatesIndex], a
 	ld a, [wCoordIndex]
@@ -76,7 +76,7 @@ LoreleiScript0:
 	jr z, LoreleiScriptWalkIntoRoom
 .stopPlayerFromLeaving
 	ld a, $2
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID  ; "Don't run away!"
 	ld a, D_UP
 	ld [wSimulatedJoypadStatesEnd], a
@@ -89,11 +89,11 @@ LoreleiScript0:
 	ret
 
 LoreleiEntranceCoords:
-	db $0A,$04
-	db $0A,$05
-	db $0B,$04
-	db $0B,$05
-	db $FF
+	dbmapcoord  4, 10
+	dbmapcoord  5, 10
+	dbmapcoord  4, 11
+	dbmapcoord  5, 11
+	db -1 ; end
 
 LoreleiScript3:
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -112,7 +112,7 @@ LoreleiScript2:
 	cp $ff
 	jp z, ResetLoreleiScript
 	ld a, $1
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
 LoreleisRoom_TextPointers:
@@ -120,34 +120,27 @@ LoreleisRoom_TextPointers:
 	dw LoreleiDontRunAwayText
 
 LoreleiTrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_LORELEIS_ROOM_TRAINER_0
-	db ($0 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_LORELEIS_ROOM_TRAINER_0
-	dw LoreleiBeforeBattleText ; TextBeforeBattle
-	dw LoreleiAfterBattleText ; TextAfterBattle
-	dw LoreleiEndBattleText ; TextEndBattle
-	dw LoreleiEndBattleText ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_LORELEIS_ROOM_TRAINER_0, 0, LoreleiBeforeBattleText, LoreleiEndBattleText, LoreleiAfterBattleText
+	db -1 ; end
 
 LoreleiText1:
-	TX_ASM
+	text_asm
 	ld hl, LoreleiTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 LoreleiBeforeBattleText:
-	TX_FAR _LoreleiBeforeBattleText
-	db "@"
+	text_far _LoreleiBeforeBattleText
+	text_end
 
 LoreleiEndBattleText:
-	TX_FAR _LoreleiEndBattleText
-	db "@"
+	text_far _LoreleiEndBattleText
+	text_end
 
 LoreleiAfterBattleText:
-	TX_FAR _LoreleiAfterBattleText
-	db "@"
+	text_far _LoreleiAfterBattleText
+	text_end
 
 LoreleiDontRunAwayText:
-	TX_FAR _LoreleiDontRunAwayText
-	db "@"
+	text_far _LoreleiDontRunAwayText
+	text_end

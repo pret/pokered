@@ -1,229 +1,221 @@
-Music_Pinballoptions: ; 49374
-	dbw $80, Music_Pinballoptions_Ch1
-	dbw $01, Music_Pinballoptions_Ch2
-	dbw $02, Music_Pinballoptions_Ch3
-; 4937d
+Music_Options:
+	channel_count 3
+	channel 1, Music_Options_Ch1
+	channel 2, Music_Options_Ch2
+	channel 3, Music_Options_Ch3
 
-Music_Pinballoptions_Ch1: ; 4937d
+Music_Options_Ch1:
 	tempo 272
-	volume $77
-	endchannel
-; 49383
+	volume 7, 7
+	sound_ret
 
-Music_Pinballoptions_Ch2: ; 49383
-	dutycycle $2
-	tone $0001
-Music_Pinballoptions_branch_49388: ; 49388
-	callchannel Music_Pinballoptions_branch_49406
-	intensity $a2
+Music_Options_Ch2:
+	duty_cycle 2
+	pitch_offset 1
+Music_Options_branch_49388:
+	sound_call Music_Options_branch_49406
+	volume_envelope 10, 2
 	note A_, 1
-	intensity $52
+	volume_envelope 5, 2
 	note A_, 1
-	intensity $22
+	volume_envelope 2, 2
 	note A_, 2
-	intensity $a2
+	volume_envelope 10, 2
 	note G#, 1
-	intensity $52
+	volume_envelope 5, 2
 	note G#, 1
-	callchannel Music_Pinballoptions_branch_49406
-	intensity $a2
+	sound_call Music_Options_branch_49406
+	volume_envelope 10, 2
 	note B_, 1
-	intensity $52
+	volume_envelope 5, 2
 	note B_, 1
-	intensity $22
+	volume_envelope 2, 2
 	note B_, 2
-	intensity $a2
+	volume_envelope 10, 2
 	octave 6
 	note C#, 1
-	intensity $52
+	volume_envelope 5, 2
 	note C#, 1
-	intensity $a2
+	volume_envelope 10, 2
 	note D#, 1
-	intensity $52
+	volume_envelope 5, 2
 	note D#, 1
-	intensity $a2
+	volume_envelope 10, 2
 	octave 5
 	note F#, 1
-	intensity $52
+	volume_envelope 5, 2
 	note F#, 1
-	intensity $a2
+	volume_envelope 10, 2
 	note G#, 1
-	intensity $52
+	volume_envelope 5, 2
 	note G#, 1
-	intensity $a2
+	volume_envelope 10, 2
 	note F#, 1
-	intensity $52
+	volume_envelope 5, 2
 	note F#, 1
-	intensity $22
+	volume_envelope 2, 2
 	note F#, 2
-	intensity $a2
+	volume_envelope 10, 2
 	note A#, 1
-	intensity $52
+	volume_envelope 5, 2
 	note A#, 1
-	intensity $a2
+	volume_envelope 10, 2
 	note G#, 1
-	intensity $52
+	volume_envelope 5, 2
 	note G#, 1
-	intensity $a2
+	volume_envelope 10, 2
 	note F#, 1
-	intensity $52
+	volume_envelope 5, 2
 	note F#, 1
-	intensity $a2
+	volume_envelope 10, 2
 	note F#, 1
-	intensity $52
+	volume_envelope 5, 2
 	note F#, 1
-	intensity $a2
+	volume_envelope 10, 2
 	note F_, 1
-	intensity $52
+	volume_envelope 5, 2
 	note F_, 1
-	intensity $a2
+	volume_envelope 10, 2
 	note E_, 1
-	intensity $52
+	volume_envelope 5, 2
 	note E_, 1
-	intensity $a2
+	volume_envelope 10, 2
 	note D#, 1
-	intensity $52
+	volume_envelope 5, 2
 	note D#, 1
-	intensity $a2
+	volume_envelope 10, 2
 	note C#, 1
-	intensity $52
+	volume_envelope 5, 2
 	note C#, 1
-	intensity $22
+	volume_envelope 2, 2
 	note C#, 4
-	intensity $a2
+	volume_envelope 10, 2
 	note A_, 1
-	intensity $52
+	volume_envelope 5, 2
 	note A_, 1
-	loopchannel 0, Music_Pinballoptions_branch_49388
-; 49406
+	sound_loop 0, Music_Options_branch_49388
 
-Music_Pinballoptions_branch_49406: ; 49406
-	notetype $c, $a2
+Music_Options_branch_49406:
+	note_type 12, 10, 2
 	octave 5
 	note A#, 1
-	intensity $52
+	volume_envelope 5, 2
 	note A#, 1
-	intensity $a2
+	volume_envelope 10, 2
 	note A_, 1
-	intensity $52
+	volume_envelope 5, 2
 	note A_, 1
-	intensity $a2
+	volume_envelope 10, 2
 	note G#, 1
-	intensity $52
+	volume_envelope 5, 2
 	note G#, 1
-	intensity $a2
+	volume_envelope 10, 2
 	note A#, 1
-	intensity $52
+	volume_envelope 5, 2
 	note A#, 1
-	intensity $22
+	volume_envelope 2, 2
 	note A#, 2
-	endchannel
-; 49424
+	sound_ret
 
-Music_Pinballoptions_Ch3: ; 49424
-Music_Pinballoptions_branch_49424: ; 49424
-	callchannel Music_Pinballoptions_branch_494ac
-	intensity $22
+Music_Options_Ch3:
+	sound_call Music_Options_branch_494ac
+	volume_envelope 2, 2
 	octave 5
 	note C#, 1
-	intensity $32
+	volume_envelope 3, 2
 	note C#, 1
-	note __, 2
-	callchannel Music_Pinballoptions_branch_494ac
-	intensity $22
+	rest 2
+	sound_call Music_Options_branch_494ac
+	volume_envelope 2, 2
 	octave 5
 	note D_, 1
-	intensity $32
+	volume_envelope 3, 2
 	note D_, 1
-	note __, 2
-	callchannel Music_Pinballoptions_branch_494ac
-	intensity $22
+	rest 2
+	sound_call Music_Options_branch_494ac
+	volume_envelope 2, 2
 	octave 5
 	note D#, 1
-	intensity $32
+	volume_envelope 3, 2
 	note D#, 1
-	note __, 2
-	callchannel Music_Pinballoptions_branch_494ac
-	intensity $22
+	rest 2
+	sound_call Music_Options_branch_494ac
+	volume_envelope 2, 2
 	octave 5
 	note E_, 1
-	intensity $32
+	volume_envelope 3, 2
 	note E_, 1
-	note __, 2
-	intensity $22
+	rest 2
+	volume_envelope 2, 2
 	octave 3
 	note B_, 1
-	intensity $32
+	volume_envelope 3, 2
 	note B_, 1
-	intensity $22
+	volume_envelope 2, 2
 	octave 4
 	note D#, 1
-	intensity $32
+	volume_envelope 3, 2
 	note D#, 1
-	intensity $22
+	volume_envelope 2, 2
 	note F#, 1
-	intensity $32
+	volume_envelope 3, 2
 	note F#, 1
-	note __, 2
-	intensity $22
+	rest 2
+	volume_envelope 2, 2
 	note C_, 1
-	intensity $32
+	volume_envelope 3, 2
 	note C_, 1
-	intensity $22
+	volume_envelope 2, 2
 	note D#, 1
-	intensity $32
+	volume_envelope 3, 2
 	note D#, 1
-	intensity $22
+	volume_envelope 2, 2
 	note F#, 1
-	intensity $32
+	volume_envelope 3, 2
 	note F#, 1
-	note __, 2
-	intensity $22
+	rest 2
+	volume_envelope 2, 2
 	note C#, 1
-	intensity $32
+	volume_envelope 3, 2
 	note C#, 1
-	intensity $22
+	volume_envelope 2, 2
 	note F_, 1
-	intensity $32
+	volume_envelope 3, 2
 	note F_, 1
-	intensity $22
+	volume_envelope 2, 2
 	note G#, 1
-	intensity $32
+	volume_envelope 3, 2
 	note G#, 1
-	intensity $22
+	volume_envelope 2, 2
 	note F_, 1
-	intensity $32
+	volume_envelope 3, 2
 	note F_, 1
-	intensity $22
+	volume_envelope 2, 2
 	note G#, 1
-	intensity $32
+	volume_envelope 3, 2
 	note G#, 1
-	intensity $22
+	volume_envelope 2, 2
 	note F_, 1
-	intensity $32
+	volume_envelope 3, 2
 	note F_, 1
-	intensity $22
+	volume_envelope 2, 2
 	note G#, 1
-	intensity $32
+	volume_envelope 3, 2
 	note G#, 1
-	intensity $22
+	volume_envelope 2, 2
 	note B_, 1
-	intensity $32
+	volume_envelope 3, 2
 	note B_, 1
-	loopchannel 0, Music_Pinballoptions_branch_49424
-; 494ac
+	sound_loop 0, Music_Options_Ch3
 
-Music_Pinballoptions_branch_494ac: ; 494ac
-	notetype $c, $22
+Music_Options_branch_494ac:
+	note_type 12, 2, 2
 	octave 4
 	note F#, 1
-	intensity $32
+	volume_envelope 3, 2
 	note F#, 1
-	intensity $22
+	volume_envelope 2, 2
 	note A#, 1
-	intensity $32
+	volume_envelope 3, 2
 	note A#, 1
-	endchannel
-; 494bb
-
-
+	sound_ret

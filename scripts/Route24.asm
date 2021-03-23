@@ -28,9 +28,9 @@ Route24Script0:
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ld a, $1
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	CheckAndResetEvent EVENT_NUGGET_REWARD_AVAILABLE
 	ret z
@@ -45,7 +45,8 @@ Route24Script0:
 	ret
 
 CoordsData_5140e:
-	db $0F,$0A,$FF
+	dbmapcoord 10, 15
+	db -1 ; end
 
 Route24Script4:
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -66,7 +67,7 @@ Route24Script3:
 	ld [wJoyIgnore], a
 	SetEvent EVENT_BEAT_ROUTE24_ROCKET
 	ld a, $1
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
 	ld [wJoyIgnore], a
@@ -86,71 +87,29 @@ Route24_TextPointers:
 	dw PickUpItemText
 
 Route24TrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_ROUTE_24_TRAINER_0
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_24_TRAINER_0
-	dw Route24BattleText1 ; TextBeforeBattle
-	dw Route24AfterBattleText1 ; TextAfterBattle
-	dw Route24EndBattleText1 ; TextEndBattle
-	dw Route24EndBattleText1 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_24_TRAINER_0, 4, Route24BattleText1, Route24EndBattleText1, Route24AfterBattleText1
 Route24TrainerHeader1:
-	dbEventFlagBit EVENT_BEAT_ROUTE_24_TRAINER_1
-	db ($1 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_24_TRAINER_1
-	dw Route24BattleText2 ; TextBeforeBattle
-	dw Route24AfterBattleText2 ; TextAfterBattle
-	dw Route24EndBattleText2 ; TextEndBattle
-	dw Route24EndBattleText2 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_24_TRAINER_1, 1, Route24BattleText2, Route24EndBattleText2, Route24AfterBattleText2
 Route24TrainerHeader2:
-	dbEventFlagBit EVENT_BEAT_ROUTE_24_TRAINER_2
-	db ($1 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_24_TRAINER_2
-	dw Route24BattleText3 ; TextBeforeBattle
-	dw Route24AfterBattleText3 ; TextAfterBattle
-	dw Route24EndBattleText3 ; TextEndBattle
-	dw Route24EndBattleText3 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_24_TRAINER_2, 1, Route24BattleText3, Route24EndBattleText3, Route24AfterBattleText3
 Route24TrainerHeader3:
-	dbEventFlagBit EVENT_BEAT_ROUTE_24_TRAINER_3
-	db ($1 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_24_TRAINER_3
-	dw Route24BattleText4 ; TextBeforeBattle
-	dw Route24AfterBattleText4 ; TextAfterBattle
-	dw Route24EndBattleText4 ; TextEndBattle
-	dw Route24EndBattleText4 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_24_TRAINER_3, 1, Route24BattleText4, Route24EndBattleText4, Route24AfterBattleText4
 Route24TrainerHeader4:
-	dbEventFlagBit EVENT_BEAT_ROUTE_24_TRAINER_4
-	db ($1 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_24_TRAINER_4
-	dw Route24BattleText5 ; TextBeforeBattle
-	dw Route24AfterBattleText5 ; TextAfterBattle
-	dw Route24EndBattleText5 ; TextEndBattle
-	dw Route24EndBattleText5 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_24_TRAINER_4, 1, Route24BattleText5, Route24EndBattleText5, Route24AfterBattleText5
 Route24TrainerHeader5:
-	dbEventFlagBit EVENT_BEAT_ROUTE_24_TRAINER_5
-	db ($1 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_24_TRAINER_5
-	dw Route24BattleText6 ; TextBeforeBattle
-	dw Route24AfterBattleText6 ; TextAfterBattle
-	dw Route24EndBattleText6 ; TextEndBattle
-	dw Route24EndBattleText6 ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_ROUTE_24_TRAINER_5, 1, Route24BattleText6, Route24EndBattleText6, Route24AfterBattleText6
+	db -1 ; end
 
 Route24Text1:
-	TX_ASM
+	text_asm
 	ResetEvent EVENT_NUGGET_REWARD_AVAILABLE
 	CheckEvent EVENT_GOT_NUGGET
-	jr nz, .asm_514f9
+	jr nz, .got_item
 	ld hl, Route24Text_51510
 	call PrintText
 	lb bc, NUGGET, 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, .bag_full
 	SetEvent EVENT_GOT_NUGGET
 	ld hl, Route24Text_5151a
 	call PrintText
@@ -162,158 +121,158 @@ Route24Text1:
 	ld hl, Route24Text_5152b
 	ld de, Route24Text_5152b
 	call SaveEndBattleTextPointers
-	ld a, [hSpriteIndexOrTextID]
+	ldh a, [hSpriteIndexOrTextID]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ld a, $3
 	ld [wRoute24CurScript], a
 	ld [wCurMapScript], a
 	jp TextScriptEnd
-.asm_514f9
+.got_item
 	ld hl, Route24Text_51530
 	call PrintText
 	jp TextScriptEnd
-.BagFull
+.bag_full
 	ld hl, Route24Text_51521
 	call PrintText
 	SetEvent EVENT_NUGGET_REWARD_AVAILABLE
 	jp TextScriptEnd
 
 Route24Text_51510:
-	TX_FAR _Route24Text_51510
-	TX_SFX_ITEM_1
-	TX_FAR _Route24Text_51515
-	db "@"
+	text_far _Route24Text_51510
+	sound_get_item_1
+	text_far _Route24Text_51515
+	text_end
 
 Route24Text_5151a:
-	TX_FAR _Route24Text_5151a
-	TX_SFX_ITEM_1
-	TX_BLINK
-	db "@"
+	text_far _Route24Text_5151a
+	sound_get_item_1
+	text_promptbutton
+	text_end
 
 Route24Text_51521:
-	TX_FAR _Route24Text_51521
-	db "@"
+	text_far _Route24Text_51521
+	text_end
 
 Route24Text_51526:
-	TX_FAR _Route24Text_51526
-	db "@"
+	text_far _Route24Text_51526
+	text_end
 
 Route24Text_5152b:
-	TX_FAR _Route24Text_5152b
-	db "@"
+	text_far _Route24Text_5152b
+	text_end
 
 Route24Text_51530:
-	TX_FAR _Route24Text_51530
-	db "@"
+	text_far _Route24Text_51530
+	text_end
 
 Route24Text2:
-	TX_ASM
+	text_asm
 	ld hl, Route24TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route24Text3:
-	TX_ASM
+	text_asm
 	ld hl, Route24TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route24Text4:
-	TX_ASM
+	text_asm
 	ld hl, Route24TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route24Text5:
-	TX_ASM
+	text_asm
 	ld hl, Route24TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route24Text6:
-	TX_ASM
+	text_asm
 	ld hl, Route24TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route24Text7:
-	TX_ASM
+	text_asm
 	ld hl, Route24TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route24BattleText1:
-	TX_FAR _Route24BattleText1
-	db "@"
+	text_far _Route24BattleText1
+	text_end
 
 Route24EndBattleText1:
-	TX_FAR _Route24EndBattleText1
-	db "@"
+	text_far _Route24EndBattleText1
+	text_end
 
 Route24AfterBattleText1:
-	TX_FAR _Route24AfterBattleText1
-	db "@"
+	text_far _Route24AfterBattleText1
+	text_end
 
 Route24BattleText2:
-	TX_FAR _Route24BattleText2
-	db "@"
+	text_far _Route24BattleText2
+	text_end
 
 Route24EndBattleText2:
-	TX_FAR _Route24EndBattleText2
-	db "@"
+	text_far _Route24EndBattleText2
+	text_end
 
 Route24AfterBattleText2:
-	TX_FAR _Route24AfterBattleText2
-	db "@"
+	text_far _Route24AfterBattleText2
+	text_end
 
 Route24BattleText3:
-	TX_FAR _Route24BattleText3
-	db "@"
+	text_far _Route24BattleText3
+	text_end
 
 Route24EndBattleText3:
-	TX_FAR _Route24EndBattleText3
-	db "@"
+	text_far _Route24EndBattleText3
+	text_end
 
 Route24AfterBattleText3:
-	TX_FAR _Route24AfterBattleText3
-	db "@"
+	text_far _Route24AfterBattleText3
+	text_end
 
 Route24BattleText4:
-	TX_FAR _Route24BattleText4
-	db "@"
+	text_far _Route24BattleText4
+	text_end
 
 Route24EndBattleText4:
-	TX_FAR _Route24EndBattleText4
-	db "@"
+	text_far _Route24EndBattleText4
+	text_end
 
 Route24AfterBattleText4:
-	TX_FAR _Route24AfterBattleText4
-	db "@"
+	text_far _Route24AfterBattleText4
+	text_end
 
 Route24BattleText5:
-	TX_FAR _Route24BattleText5
-	db "@"
+	text_far _Route24BattleText5
+	text_end
 
 Route24EndBattleText5:
-	TX_FAR _Route24EndBattleText5
-	db "@"
+	text_far _Route24EndBattleText5
+	text_end
 
 Route24AfterBattleText5:
-	TX_FAR _Route24AfterBattleText5
-	db "@"
+	text_far _Route24AfterBattleText5
+	text_end
 
 Route24BattleText6:
-	TX_FAR _Route24BattleText6
-	db "@"
+	text_far _Route24BattleText6
+	text_end
 
 Route24EndBattleText6:
-	TX_FAR _Route24EndBattleText6
-	db "@"
+	text_far _Route24EndBattleText6
+	text_end
 
 Route24AfterBattleText6:
-	TX_FAR _Route24AfterBattleText6
-	db "@"
+	text_far _Route24AfterBattleText6
+	text_end

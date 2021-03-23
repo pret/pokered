@@ -4,7 +4,7 @@ Route22Gate_Script:
 	ld a, [wRoute22GateCurScript]
 	call CallFunctionInTable
 	ld a, [wYCoord]
-	cp $4
+	cp 4
 	ld a, ROUTE_23
 	jr c, .asm_1e69a
 	ld a, ROUTE_22
@@ -22,22 +22,22 @@ Route22GateScript0:
 	call ArePlayerCoordsInArray
 	ret nc
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ld a, $1
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
 Route22GateScriptCoords:
-	db 2,4
-	db 2,5
-	db $ff
+	dbmapcoord  4,  2
+	dbmapcoord  5,  2
+	db -1 ; end
 
 Route22GateScript_1e6ba:
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
 	ld a, D_DOWN
 	ld [wSimulatedJoypadStatesEnd], a
-	ld [wSpriteStateData1 + 9], a
+	ld [wSpritePlayerStateData1FacingDirection], a
 	ld [wJoyIgnore], a
 	jp StartSimulatingJoypadStates
 
@@ -57,9 +57,9 @@ Route22Gate_TextPointers:
 	dw Route22GateText1
 
 Route22GateText1:
-	TX_ASM
+	text_asm
 	ld a, [wObtainedBadges]
-	bit 0, a
+	bit BIT_BOULDERBADGE, a
 	jr nz, .asm_1e6f6
 	ld hl, Route22GateText_1e704
 	call PrintText
@@ -75,8 +75,8 @@ Route22GateText1:
 	jp TextScriptEnd
 
 Route22GateText_1e704:
-	TX_FAR _Route22GateText_1e704
-	TX_ASM
+	text_far _Route22GateText_1e704
+	text_asm
 	ld a, SFX_DENIED
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
@@ -84,10 +84,10 @@ Route22GateText_1e704:
 	ret
 
 Route22GateText_1e715:
-	TX_FAR _Route22GateText_1e715
-	db "@"
+	text_far _Route22GateText_1e715
+	text_end
 
 Route22GateText_1e71a:
-	TX_FAR _Route22GateText_1e71a
-	TX_SFX_ITEM_1
-	db "@"
+	text_far _Route22GateText_1e71a
+	sound_get_item_1
+	text_end

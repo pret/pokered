@@ -21,28 +21,28 @@ rLCDC_DEFAULT EQU %11100011
 	di
 
 	xor a
-	ld [rIF], a
-	ld [rIE], a
-	ld [rSCX], a
-	ld [rSCY], a
-	ld [rSB], a
-	ld [rSC], a
-	ld [rWX], a
-	ld [rWY], a
-	ld [rTMA], a
-	ld [rTAC], a
-	ld [rBGP], a
-	ld [rOBP0], a
-	ld [rOBP1], a
+	ldh [rIF], a
+	ldh [rIE], a
+	ldh [rSCX], a
+	ldh [rSCY], a
+	ldh [rSB], a
+	ldh [rSC], a
+	ldh [rWX], a
+	ldh [rWY], a
+	ldh [rTMA], a
+	ldh [rTAC], a
+	ldh [rBGP], a
+	ldh [rOBP0], a
+	ldh [rOBP1], a
 
 	ld a, rLCDC_ENABLE_MASK
-	ld [rLCDC], a
+	ldh [rLCDC], a
 	call DisableLCD
 
 	ld sp, wStack
 
-	ld hl, $c000 ; start of WRAM
-	ld bc, $2000 ; size of WRAM
+	ld hl, WRAM0_Begin
+	ld bc, WRAM1_End - WRAM0_Begin
 .loop
 	ld [hl], 0
 	inc hl
@@ -53,44 +53,44 @@ rLCDC_DEFAULT EQU %11100011
 
 	call ClearVram
 
-	ld hl, $ff80
-	ld bc, $ffff - $ff80
+	ld hl, HRAM_Begin
+	ld bc, HRAM_End - HRAM_Begin
 	call FillMemory
 
 	call ClearSprites
 
-	ld a, Bank(WriteDMACodeToHRAM)
-	ld [H_LOADEDROMBANK], a
+	ld a, BANK(WriteDMACodeToHRAM)
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call WriteDMACodeToHRAM
 
 	xor a
-	ld [hTilesetType], a
-	ld [rSTAT], a
-	ld [hSCX], a
-	ld [hSCY], a
-	ld [rIF], a
+	ldh [hTileAnimations], a
+	ldh [rSTAT], a
+	ldh [hSCX], a
+	ldh [hSCY], a
+	ldh [rIF], a
 	ld a, 1 << VBLANK + 1 << TIMER + 1 << SERIAL
-	ld [rIE], a
+	ldh [rIE], a
 
 	ld a, 144 ; move the window off-screen
-	ld [hWY], a
-	ld [rWY], a
+	ldh [hWY], a
+	ldh [rWY], a
 	ld a, 7
-	ld [rWX], a
+	ldh [rWX], a
 
 	ld a, CONNECTION_NOT_ESTABLISHED
-	ld [hSerialConnectionStatus], a
+	ldh [hSerialConnectionStatus], a
 
-	ld h, vBGMap0 / $100
+	ld h, HIGH(vBGMap0)
 	call ClearBgMap
-	ld h, vBGMap1 / $100
+	ld h, HIGH(vBGMap1)
 	call ClearBgMap
 
 	ld a, rLCDC_DEFAULT
-	ld [rLCDC], a
+	ldh [rLCDC], a
 	ld a, 16
-	ld [hSoftReset], a
+	ldh [hSoftReset], a
 	call StopAllSounds
 
 	ei
@@ -101,9 +101,9 @@ rLCDC_DEFAULT EQU %11100011
 	ld [wAudioROMBank], a
 	ld [wAudioSavedROMBank], a
 	ld a, $9c
-	ld [H_AUTOBGTRANSFERDEST + 1], a
+	ldh [hAutoBGTransferDest + 1], a
 	xor a
-	ld [H_AUTOBGTRANSFERDEST], a
+	ldh [hAutoBGTransferDest], a
 	dec a
 	ld [wUpdateSpritesEnabled], a
 
@@ -114,13 +114,13 @@ rLCDC_DEFAULT EQU %11100011
 	call GBPalNormal
 	call ClearSprites
 	ld a, rLCDC_DEFAULT
-	ld [rLCDC], a
+	ldh [rLCDC], a
 
 	jp SetDefaultNamesBeforeTitlescreen
 
-ClearVram:
-	ld hl, $8000
-	ld bc, $2000
+ClearVram::
+	ld hl, VRAM_Begin
+	ld bc, VRAM_End - VRAM_Begin
 	xor a
 	jp FillMemory
 
@@ -128,7 +128,7 @@ ClearVram:
 StopAllSounds::
 	call OpenSRAMForSound
 
-	ld a, 0 ; BANK(Audio1_UpdateMusic)
+	ld a, 0 ; BANK("Audio Engine 1")
 	ld [wAudioROMBank], a
 	ld [wAudioSavedROMBank], a
 	xor a

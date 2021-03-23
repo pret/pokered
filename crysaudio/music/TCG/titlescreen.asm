@@ -1,24 +1,23 @@
 Music_TCGTitleScreen:
-	db $C0
-	dw Music_TCGTitleScreen_Ch1
-	db $01
-	dw Music_TCGTitleScreen_Ch2
-	db $02
-	dw Music_TCGTitleScreen_Ch3
-	db $03
-	dw Music_TCGTitleScreen_Ch4
+	channel_count 4
+	channel 1, Music_TCGTitleScreen_Ch1
+	channel 2, Music_TCGTitleScreen_Ch2
+	channel 3, Music_TCGTitleScreen_Ch3
+	channel 4, Music_TCGTitleScreen_Ch4
 
-Music_TCGTitleScreen_Ch1: 
+Music_TCGTitleScreen_Ch1: ; f5052 (3d:5052)
 	notetype0 7
-	dutycycle 0
-	vibrato 20, $33
+	duty_cycle 0
+	;stereo_panning 1, 1
+	;vibrato_type 1
+	vibrato 20, 3, 3
 	notetype1 10
 	notetype2 8
 	octave 3
 	note G_, 1
 	notetype1 3
 	note G_, 1
-	note __, 1
+	rest 1
 	notetype1 10
 	notetype2 6
 	note F_, 1
@@ -47,7 +46,7 @@ Music_TCGTitleScreen_Ch1:
 	note E_, 1
 	notetype1 3
 	note E_, 1
-	note __, 1
+	rest 1
 	notetype1 10
 	notetype2 6
 	note G_, 1
@@ -62,7 +61,9 @@ Music_TCGTitleScreen_Ch1:
 	note F_, 2
 	notetype0 1
 	note E_, 5
+	;tie
 	note F_, 4
+	;tie
 	note E_, 5
 	notetype0 7
 	note D_, 1
@@ -81,7 +82,7 @@ Music_TCGTitleScreen_Ch1:
 	note G_, 1
 	notetype1 3
 	note G_, 1
-	note __, 1
+	rest 1
 	notetype1 10
 	notetype2 6
 	note F_, 1
@@ -141,12 +142,12 @@ Music_TCGTitleScreen_Ch1:
 	note E_, 1
 	notetype1 3
 	note E_, 1
-	note __, 1
+	rest 1
 	notetype1 10
 	notetype2 6
 	note E_, 1
 	notetype2 8
-	loopchannel 2, .Loop1
+	sound_loop 2, .Loop1
 	note E_, 12
 	notetype1 3
 	note E_, 2
@@ -156,7 +157,7 @@ Music_TCGTitleScreen_Ch1:
 	note D_, 1
 	notetype1 3
 	note D_, 1
-	note __, 1
+	rest 1
 	notetype1 10
 	notetype2 6
 	note G_, 1
@@ -186,7 +187,7 @@ Music_TCGTitleScreen_Ch1:
 	note C_, 1
 	notetype1 3
 	note C_, 1
-	note __, 1
+	rest 1
 	notetype2 6
 	notetype1 10
 	note E_, 1
@@ -217,24 +218,28 @@ Music_TCGTitleScreen_Ch1:
 	note C_, 1
 	notetype2 8
 	note C_, 8
+	;tie
 	note C_, 8
+	;tie
 	note C_, 8
 	notetype1 3
 	note C_, 8
-	endchannel
+	sound_ret
 
 
-Music_TCGTitleScreen_Ch2: 
+Music_TCGTitleScreen_Ch2: ; f5193 (3d:5193)
 	notetype0 7
-	dutycycle 0
-	vibrato 20, $33
+	duty_cycle 0
+	;stereo_panning 1, 1
+	;vibrato_type 1
+	vibrato 20, 3, 3
 	notetype1 8
 	notetype2 8
 	octave 2
 	note B_, 1
 	notetype1 2
 	note B_, 1
-	note __, 1
+	rest 1
 	inc_octave
 	notetype1 8
 	notetype2 6
@@ -245,21 +250,21 @@ Music_TCGTitleScreen_Ch2:
 	note C_, 1
 	notetype1 8
 	note E_, 3
-	note __, 1
+	rest 1
 	note G_, 5
-	note __, 1
+	rest 1
 	notetype2 6
 	note G_, 2
 	notetype2 8
 	note E_, 10
-	note __, 2
+	rest 2
 	note C_, 1
-	note __, 2
+	rest 2
 	notetype2 6
 	note E_, 1
 	notetype2 8
 	note F_, 5
-	note __, 1
+	rest 1
 	notetype2 6
 	note C_, 2
 	notetype2 7
@@ -268,21 +273,21 @@ Music_TCGTitleScreen_Ch2:
 	note C_, 2
 	dec_octave
 	note G_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 1
+	rest 1
 	note F_, 4
 	note A_, 1
-	note __, 2
+	rest 2
 	inc_octave
 	notetype2 6
 	note C_, 1
 	dec_octave
 	notetype2 8
 	note B_, 3
-	note __, 1
+	rest 1
 	note B_, 1
-	note __, 2
+	rest 2
 	inc_octave
 	notetype2 6
 	note D_, 1
@@ -292,39 +297,39 @@ Music_TCGTitleScreen_Ch2:
 	note C_, 1
 	notetype1 8
 	note E_, 3
-	note __, 1
+	rest 1
 	note G_, 5
-	note __, 1
+	rest 1
 	notetype2 6
 	note G_, 2
 	notetype2 8
 	note E_, 8
-	note __, 2
+	rest 2
 	note C_, 2
 	note D_, 2
 	note E_, 2
 	note F_, 3
-	note __, 1
+	rest 1
 	note G#, 3
-	note __, 1
+	rest 1
 	note G#, 5
-	note __, 1
+	rest 1
 	notetype2 6
 	note F_, 2
 	notetype2 8
 	note G#, 9
-	note __, 1
+	rest 1
 	note G#, 2
 	note F_, 2
 	note G#, 2
 	inc_octave
 	note C_, 10
-	note __, 2
+	rest 2
 	dec_octave
 	note A_, 1
 	notetype1 2
 	note A_, 1
-	note __, 1
+	rest 1
 	notetype1 8
 	inc_octave
 	notetype2 6
@@ -332,11 +337,11 @@ Music_TCGTitleScreen_Ch2:
 	notetype2 8
 	dec_octave
 	note B_, 10
-	note __, 2
+	rest 2
 	note G_, 1
 	notetype1 2
 	note G_, 1
-	note __, 1
+	rest 1
 	notetype1 8
 	notetype2 6
 	note B_, 1
@@ -350,14 +355,14 @@ Music_TCGTitleScreen_Ch2:
 	note B_, 1
 	notetype1 2
 	note B_, 1
-	note __, 1
+	rest 1
 	notetype1 8
 	inc_octave
 	notetype2 6
 	note D_, 1
 	notetype2 8
 	note D_, 8
-	note __, 2
+	rest 2
 	notetype0 1
 	notetype2 7
 	note D_, 5
@@ -366,7 +371,7 @@ Music_TCGTitleScreen_Ch2:
 	notetype0 7
 	notetype2 8
 	note C_, 9
-	note __, 1
+	rest 1
 	note C_, 2
 	dec_octave
 	notetype2 7
@@ -374,49 +379,52 @@ Music_TCGTitleScreen_Ch2:
 	notetype2 8
 	note G#, 2
 	note G_, 10
-	note __, 2
+	rest 2
 	note G_, 1
-	note __, 2
+	rest 2
 	notetype2 6
 	note G_, 1
 	notetype2 8
 	note A_, 6
-	note __, 2
+	rest 2
 	note F#, 3
-	note __, 1
+	rest 1
 	note A_, 3
-	note __, 1
+	rest 1
 	note F_, 6
-	note __, 2
+	rest 2
 	note F_, 5
-	note __, 2
+	rest 2
 	notetype2 6
 	note F_, 1
 	notetype2 8
 	note F_, 7
-	note __, 1
+	rest 1
 	notetype0 1
 	notetype2 8
 	note F_, 14
-	note __, 5
+	rest 5
 	note D_, 13
-	note __, 5
+	rest 5
 	note F_, 14
-	note __, 5
+	rest 5
 	notetype0 7
 	note E_, 8
 	notetype1 2
 	note E_, 8
-	endchannel
+	sound_ret
 
 
-Music_TCGTitleScreen_Ch3: 
+Music_TCGTitleScreen_Ch3: ; f5286 (3d:5286)
 	notetype0 7
 	notetype2 14
 	notetype1 1
+	;echo 0
+	;stereo_panning 1, 1
+	;cutoff 6
 	octave 3
-	note __, 4
-	callchannel Branch_f52f0
+	rest 4
+	sound_call Branch_f52f0
 	note F_, 4
 	note F_, 4
 	note E_, 4
@@ -426,67 +434,71 @@ Music_TCGTitleScreen_Ch3:
 	note G_, 4
 	note G_, 4
 	inc_octave
-	callchannel Branch_f52f0
+	sound_call Branch_f52f0
 .Loop1
 	note F_, 4
-	loopchannel 4, .Loop1
+	sound_loop 4, .Loop1
 .Loop2
 	note A#, 4
-	loopchannel 4, .Loop2
+	sound_loop 4, .Loop2
 .Loop3
 	note A_, 2
 	note A_, 2
-	note __, 2
+	rest 2
 	note A_, 1
 	note A_, 1
-	loopchannel 2, .Loop3
+	sound_loop 2, .Loop3
 .Loop4
 	note G_, 2
 	note G_, 2
-	note __, 2
+	rest 2
 	note G_, 1
 	note G_, 1
-	loopchannel 2, .Loop4
+	sound_loop 2, .Loop4
 .Loop5
 	note F_, 2
 	note F_, 2
-	note __, 2
+	rest 2
 	note F_, 1
 	note F_, 1
-	loopchannel 2, .Loop5
+	sound_loop 2, .Loop5
 .Loop6
 	note E_, 2
 	note E_, 2
-	note __, 2
+	rest 2
 	note E_, 1
 	note E_, 1
-	loopchannel 2, .Loop6
+	sound_loop 2, .Loop6
 .Loop7
 	note G#, 4
-	loopchannel 4, .Loop7
+	sound_loop 4, .Loop7
 .Loop8
 	note G_, 4
-	loopchannel 4, .Loop8
+	sound_loop 4, .Loop8
 .Loop9
 	note F#, 4
-	loopchannel 4, .Loop9
+	sound_loop 4, .Loop9
 .Loop10
 	note G_, 4
-	loopchannel 4, .Loop10
+	sound_loop 4, .Loop10
 	inc_octave
 	note C_, 4
 	note C_, 4
 	notetype0 1
 	note C_, 9
+	;tie
 	note C_, 10
 	dec_octave
 	note G_, 9
+	;tie
 	note G_, 9
 	note G_, 9
+	;tie
 	note G_, 10
 	notetype0 7
+	;cutoff 8
 	note C_, 8
-	endchannel
+	sound_ret
 
 Branch_f52f0:
 	note C_, 4
@@ -498,47 +510,47 @@ Branch_f52f0:
 	note A_, 4
 	note G_, 4
 	note G_, 4
-	endchannel
+	sound_ret
 
 
-Music_TCGTitleScreen_Ch4: 
-	togglenoise $06
-	notetype 7
+Music_TCGTitleScreen_Ch4: ; f52fa (3d:52fa)
+	toggle_noise 6
+	drum_speed 7
 	octave 1
-	note __, 4
+	rest 4
 .Loop1
-	callchannel Branch_f5312
-	loopchannel 16, .Loop1
+	sound_call Branch_f5312
+	sound_loop 16, .Loop1
 .Loop2
-	callchannel Branch_f531e
-	loopchannel 8, .Loop2
+	sound_call Branch_f531e
+	sound_loop 8, .Loop2
 .Loop3
-	callchannel Branch_f5312
-	loopchannel 10, .Loop3
-	note C#, 8
-	endchannel
+	sound_call Branch_f5312
+	sound_loop 10, .Loop3
+	drum_note 2, 8
+	sound_ret
 
 Branch_f5312:
-	notetype 7
-	note C#, 2
-	note D_, 2
-	note C#, 2
-	notetype 1
-	note D_, 4
-	note D_, 3
-	note D_, 4
-	note D_, 3
-	endchannel
+	drum_speed 7
+	drum_note 2, 2
+	drum_note 3, 2
+	drum_note 2, 2
+	drum_speed 1
+	drum_note 3, 4
+	drum_note 3, 3
+	drum_note 3, 4
+	drum_note 3, 3
+	sound_ret
 
 Branch_f531e:
-	notetype 7
-	note C#, 2
-	note C#, 2
-	note __, 2
-	notetype 1
-	note C#, 4
-	note D_, 3
-	note D_, 4
-	note D_, 3
-	endchannel
-
+	drum_speed 7
+	drum_note 2, 2
+	drum_note 2, 2
+	rest 2
+	drum_speed 1
+	drum_note 2, 4
+	drum_note 3, 3
+	drum_note 3, 4
+	drum_note 3, 3
+	sound_ret
+; 0xf532a

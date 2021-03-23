@@ -33,273 +33,227 @@ RocketHideout2Script0:
 	ld [wCurMapScript], a
 	ret
 
-;format:
-;db y,x
-;dw pointer to movement
 RocketHideout2ArrowTilePlayerMovement:
-	db $9,$4
-	dw RocketHideout2ArrowMovement1
-	db $b,$4
-	dw RocketHideout2ArrowMovement2
-	db $f,$4
-	dw RocketHideout2ArrowMovement3
-	db $10,$4
-	dw RocketHideout2ArrowMovement4
-	db $13,$4
-	dw RocketHideout2ArrowMovement1
-	db $16,$4
-	dw RocketHideout2ArrowMovement5
-	db $e,$5
-	dw RocketHideout2ArrowMovement6
-	db $16,$6
-	dw RocketHideout2ArrowMovement7
-	db $18,$6
-	dw RocketHideout2ArrowMovement8
-	db $9,$8
-	dw RocketHideout2ArrowMovement9
-	db $c,$8
-	dw RocketHideout2ArrowMovement10
-	db $f,$8
-	dw RocketHideout2ArrowMovement8
-	db $13,$8
-	dw RocketHideout2ArrowMovement9
-	db $17,$8
-	dw RocketHideout2ArrowMovement11
-	db $e,$9
-	dw RocketHideout2ArrowMovement12
-	db $16,$9
-	dw RocketHideout2ArrowMovement12
-	db $9,$a
-	dw RocketHideout2ArrowMovement13
-	db $a,$a
-	dw RocketHideout2ArrowMovement14
-	db $f,$a
-	dw RocketHideout2ArrowMovement15
-	db $11,$a
-	dw RocketHideout2ArrowMovement16
-	db $13,$a
-	dw RocketHideout2ArrowMovement17
-	db $19,$a
-	dw RocketHideout2ArrowMovement2
-	db $e,$b
-	dw RocketHideout2ArrowMovement18
-	db $10,$b
-	dw RocketHideout2ArrowMovement19
-	db $12,$b
-	dw RocketHideout2ArrowMovement12
-	db $9,$c
-	dw RocketHideout2ArrowMovement20
-	db $b,$c
-	dw RocketHideout2ArrowMovement21
-	db $d,$c
-	dw RocketHideout2ArrowMovement22
-	db $11,$c
-	dw RocketHideout2ArrowMovement23
-	db $a,$d
-	dw RocketHideout2ArrowMovement24
-	db $c,$d
-	dw RocketHideout2ArrowMovement25
-	db $10,$d
-	dw RocketHideout2ArrowMovement26
-	db $12,$d
-	dw RocketHideout2ArrowMovement27
-	db $13,$d
-	dw RocketHideout2ArrowMovement28
-	db $16,$d
-	dw RocketHideout2ArrowMovement29
-	db $17,$d
-	dw RocketHideout2ArrowMovement30
-	db $11,$e
-	dw RocketHideout2ArrowMovement31
-	db $10,$f
-	dw RocketHideout2ArrowMovement12
-	db $e,$10
-	dw RocketHideout2ArrowMovement32
-	db $10,$10
-	dw RocketHideout2ArrowMovement33
-	db $12,$10
-	dw RocketHideout2ArrowMovement34
-	db $a,$11
-	dw RocketHideout2ArrowMovement35
-	db $b,$11
-	dw RocketHideout2ArrowMovement36
-	db $FF
+	map_coord_movement  4,  9, RocketHideout2ArrowMovement1
+	map_coord_movement  4, 11, RocketHideout2ArrowMovement2
+	map_coord_movement  4, 15, RocketHideout2ArrowMovement3
+	map_coord_movement  4, 16, RocketHideout2ArrowMovement4
+	map_coord_movement  4, 19, RocketHideout2ArrowMovement1
+	map_coord_movement  4, 22, RocketHideout2ArrowMovement5
+	map_coord_movement  5, 14, RocketHideout2ArrowMovement6
+	map_coord_movement  6, 22, RocketHideout2ArrowMovement7
+	map_coord_movement  6, 24, RocketHideout2ArrowMovement8
+	map_coord_movement  8,  9, RocketHideout2ArrowMovement9
+	map_coord_movement  8, 12, RocketHideout2ArrowMovement10
+	map_coord_movement  8, 15, RocketHideout2ArrowMovement8
+	map_coord_movement  8, 19, RocketHideout2ArrowMovement9
+	map_coord_movement  8, 23, RocketHideout2ArrowMovement11
+	map_coord_movement  9, 14, RocketHideout2ArrowMovement12
+	map_coord_movement  9, 22, RocketHideout2ArrowMovement12
+	map_coord_movement 10,  9, RocketHideout2ArrowMovement13
+	map_coord_movement 10, 10, RocketHideout2ArrowMovement14
+	map_coord_movement 10, 15, RocketHideout2ArrowMovement15
+	map_coord_movement 10, 17, RocketHideout2ArrowMovement16
+	map_coord_movement 10, 19, RocketHideout2ArrowMovement17
+	map_coord_movement 10, 25, RocketHideout2ArrowMovement2
+	map_coord_movement 11, 14, RocketHideout2ArrowMovement18
+	map_coord_movement 11, 16, RocketHideout2ArrowMovement19
+	map_coord_movement 11, 18, RocketHideout2ArrowMovement12
+	map_coord_movement 12,  9, RocketHideout2ArrowMovement20
+	map_coord_movement 12, 11, RocketHideout2ArrowMovement21
+	map_coord_movement 12, 13, RocketHideout2ArrowMovement22
+	map_coord_movement 12, 17, RocketHideout2ArrowMovement23
+	map_coord_movement 13, 10, RocketHideout2ArrowMovement24
+	map_coord_movement 13, 12, RocketHideout2ArrowMovement25
+	map_coord_movement 13, 16, RocketHideout2ArrowMovement26
+	map_coord_movement 13, 18, RocketHideout2ArrowMovement27
+	map_coord_movement 13, 19, RocketHideout2ArrowMovement28
+	map_coord_movement 13, 22, RocketHideout2ArrowMovement29
+	map_coord_movement 13, 23, RocketHideout2ArrowMovement30
+	map_coord_movement 14, 17, RocketHideout2ArrowMovement31
+	map_coord_movement 15, 16, RocketHideout2ArrowMovement12
+	map_coord_movement 16, 14, RocketHideout2ArrowMovement32
+	map_coord_movement 16, 16, RocketHideout2ArrowMovement33
+	map_coord_movement 16, 18, RocketHideout2ArrowMovement34
+	map_coord_movement 17, 10, RocketHideout2ArrowMovement35
+	map_coord_movement 17, 11, RocketHideout2ArrowMovement36
+	db -1 ; end
 
 ;format: direction, count
 ;each list is read starting from the $FF and working backwards
 RocketHideout2ArrowMovement1:
-	db D_LEFT,$02
-	db $FF
+	db D_LEFT, 2
+	db -1 ; end
 
 RocketHideout2ArrowMovement2:
-	db D_RIGHT,$04
-	db $FF
+	db D_RIGHT, 4
+	db -1 ; end
 
 RocketHideout2ArrowMovement3:
-	db D_UP,$04
-	db D_RIGHT,$04
-	db $FF
+	db D_UP, 4
+	db D_RIGHT, 4
+	db -1 ; end
 
 RocketHideout2ArrowMovement4:
-	db D_UP,$04
-	db D_RIGHT,$04
-	db D_UP,$01
-	db $FF
+	db D_UP, 4
+	db D_RIGHT, 4
+	db D_UP, 1
+	db -1 ; end
 
 RocketHideout2ArrowMovement5:
-	db D_LEFT,$02
-	db D_UP,$03
-	db $FF
+	db D_LEFT, 2
+	db D_UP, 3
+	db -1 ; end
 
 RocketHideout2ArrowMovement6:
-	db D_DOWN,$02
-	db D_RIGHT,$04
-	db $FF
+	db D_DOWN, 2
+	db D_RIGHT, 4
+	db -1 ; end
 
 RocketHideout2ArrowMovement7:
-	db D_UP,$02
-	db $FF
+	db D_UP, 2
+	db -1 ; end
 
 RocketHideout2ArrowMovement8:
-	db D_UP,$04
-	db $FF
+	db D_UP, 4
+	db -1 ; end
 
 RocketHideout2ArrowMovement9:
-	db D_LEFT,$06
-	db $FF
+	db D_LEFT, 6
+	db -1 ; end
 
 RocketHideout2ArrowMovement10:
-	db D_UP,$01
-	db $FF
+	db D_UP, 1
+	db -1 ; end
 
 RocketHideout2ArrowMovement11:
-	db D_LEFT,$06
-	db D_UP,$04
-	db $FF
+	db D_LEFT, 6
+	db D_UP, 4
+	db -1 ; end
 
 RocketHideout2ArrowMovement12:
-	db D_DOWN,$02
-	db $FF
+	db D_DOWN, 2
+	db -1 ; end
 
 RocketHideout2ArrowMovement13:
-	db D_LEFT,$08
-	db $FF
+	db D_LEFT, 8
+	db -1 ; end
 
 RocketHideout2ArrowMovement14:
-	db D_LEFT,$08
-	db D_UP,$01
-	db $FF
+	db D_LEFT, 8
+	db D_UP, 1
+	db -1 ; end
 
 RocketHideout2ArrowMovement15:
-	db D_LEFT,$08
-	db D_UP,$06
-	db $FF
+	db D_LEFT, 8
+	db D_UP, 6
+	db -1 ; end
 
 RocketHideout2ArrowMovement16:
-	db D_UP,$02
-	db D_RIGHT,$04
-	db $FF
+	db D_UP, 2
+	db D_RIGHT, 4
+	db -1 ; end
 
 RocketHideout2ArrowMovement17:
-	db D_UP,$02
-	db D_RIGHT,$04
-	db D_UP,$02
-	db $FF
+	db D_UP, 2
+	db D_RIGHT, 4
+	db D_UP, 2
+	db -1 ; end
 
 RocketHideout2ArrowMovement18:
-	db D_DOWN,$02
-	db D_RIGHT,$04
-	db D_DOWN,$02
-	db $FF
+	db D_DOWN, 2
+	db D_RIGHT, 4
+	db D_DOWN, 2
+	db -1 ; end
 
 RocketHideout2ArrowMovement19:
-	db D_DOWN,$02
-	db D_RIGHT,$04
-	db $FF
+	db D_DOWN, 2
+	db D_RIGHT, 4
+	db -1 ; end
 
 RocketHideout2ArrowMovement20:
-	db D_LEFT,$0A
-	db $FF
+	db D_LEFT, 10
+	db -1 ; end
 
 RocketHideout2ArrowMovement21:
-	db D_LEFT,$0A
-	db D_UP,$02
-	db $FF
+	db D_LEFT, 10
+	db D_UP, 2
+	db -1 ; end
 
 RocketHideout2ArrowMovement22:
-	db D_LEFT,$0A
-	db D_UP,$04
-	db $FF
+	db D_LEFT, 10
+	db D_UP, 4
+	db -1 ; end
 
 RocketHideout2ArrowMovement23:
-	db D_UP,$02
-	db D_RIGHT,$02
-	db $FF
+	db D_UP, 2
+	db D_RIGHT, 2
+	db -1 ; end
 
 RocketHideout2ArrowMovement24:
-	db D_RIGHT,$01
-	db D_DOWN,$02
-	db $FF
+	db D_RIGHT, 1
+	db D_DOWN, 2
+	db -1 ; end
 
 RocketHideout2ArrowMovement25:
-	db D_RIGHT,$01
-	db $FF
+	db D_RIGHT, 1
+	db -1 ; end
 
 RocketHideout2ArrowMovement26:
-	db D_DOWN,$02
-	db D_RIGHT,$02
-	db $FF
+	db D_DOWN, 2
+	db D_RIGHT, 2
+	db -1 ; end
 
 RocketHideout2ArrowMovement27:
-	db D_DOWN,$02
-	db D_LEFT,$02
-	db $FF
+	db D_DOWN, 2
+	db D_LEFT, 2
+	db -1 ; end
 
 RocketHideout2ArrowMovement28:
-	db D_UP,$02
-	db D_RIGHT,$04
-	db D_UP,$02
-	db D_LEFT,$03
-	db $FF
+	db D_UP, 2
+	db D_RIGHT, 4
+	db D_UP, 2
+	db D_LEFT, 3
+	db -1 ; end
 
 RocketHideout2ArrowMovement29:
-	db D_DOWN,$02
-	db D_LEFT,$04
-	db $FF
+	db D_DOWN, 2
+	db D_LEFT, 4
+	db -1 ; end
 
 RocketHideout2ArrowMovement30:
-	db D_LEFT,$06
-	db D_UP,$04
-	db D_LEFT,$05
-	db $FF
+	db D_LEFT, 6
+	db D_UP, 4
+	db D_LEFT, 5
+	db -1 ; end
 
 RocketHideout2ArrowMovement31:
-	db D_UP,$02
-	db $FF
+	db D_UP, 2
+	db -1 ; end
 
 RocketHideout2ArrowMovement32:
-	db D_UP,$01
-	db $FF
+	db D_UP, 1
+	db -1 ; end
 
 RocketHideout2ArrowMovement33:
-	db D_UP,$03
-	db $FF
+	db D_UP, 3
+	db -1 ; end
 
 RocketHideout2ArrowMovement34:
-	db D_UP,$05
-	db $FF
+	db D_UP, 5
+	db -1 ; end
 
 RocketHideout2ArrowMovement35:
-	db D_RIGHT,$01
-	db D_DOWN,$02
-	db D_LEFT,$04
-	db $FF
+	db D_RIGHT, 1
+	db D_DOWN, 2
+	db D_LEFT, 4
+	db -1 ; end
 
 RocketHideout2ArrowMovement36:
-	db D_LEFT,$0A
-	db D_UP,$02
-	db D_LEFT,$05
-	db $FF
+	db D_LEFT, 10
+	db D_UP, 2
+	db D_LEFT, 5
+	db -1 ; end
 
 RocketHideout2Script3:
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -313,105 +267,7 @@ RocketHideout2Script3:
 	ld [wCurMapScript], a
 	ret
 
-LoadSpinnerArrowTiles:
-	ld a, [wSpriteStateData1 + 2]
-	srl a
-	srl a
-	ld hl, SpinnerPlayerFacingDirections
-	ld c, a
-	ld b, $0
-	add hl, bc
-	ld a, [hl]
-	ld [wSpriteStateData1 + 2], a
-	ld a, [wCurMapTileset]
-	cp FACILITY
-	ld hl, FacilitySpinnerArrows
-	jr z, .asm_44ff6
-	ld hl, GymSpinnerArrows
-.asm_44ff6
-	ld a, [wSimulatedJoypadStatesIndex]
-	bit 0, a
-	jr nz, .asm_45001
-	ld de, $18
-	add hl, de
-.asm_45001
-	ld a, $4
-	ld bc, $0
-.asm_45006
-	push af
-	push hl
-	push bc
-	add hl, bc
-	ld a, [hli]
-	ld e, a
-	ld a, [hli]
-	ld d, a
-	ld a, [hli]
-	ld c, a
-	ld a, [hli]
-	ld b, a
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	call CopyVideoData
-	pop bc
-	ld a, $6
-	add c
-	ld c, a
-	pop hl
-	pop af
-	dec a
-	jr nz, .asm_45006
-	ret
-
-spinner: MACRO
-; \1: source
-; \2: offset (BANK() chokes on literals)
-; \3: length
-; \4: dest
-	dw \1 + \2
-	db \3, BANK(\1)
-	dw \4
-ENDM
-
-FacilitySpinnerArrows:
-FACILITY_SPINNER EQU $20 * $10
-vFacilitySpinner EQU vTileset + FACILITY_SPINNER
-
-	spinner SpinnerArrowAnimTiles, $00, 1, vFacilitySpinner
-	spinner SpinnerArrowAnimTiles, $10, 1, vFacilitySpinner + $10
-	spinner SpinnerArrowAnimTiles, $20, 1, vFacilitySpinner + $100
-	spinner SpinnerArrowAnimTiles, $30, 1, vFacilitySpinner + $110
-	spinner Facility_GFX, FACILITY_SPINNER + $000, 1, vFacilitySpinner
-	spinner Facility_GFX, FACILITY_SPINNER + $010, 1, vFacilitySpinner + $10
-	spinner Facility_GFX, FACILITY_SPINNER + $100, 1, vFacilitySpinner + $100
-	spinner Facility_GFX, FACILITY_SPINNER + $110, 1, vFacilitySpinner + $110
-
-GymSpinnerArrows:
-GYM_SPINNER EQU $3c * $10
-vGymSpinner EQU vTileset + GYM_SPINNER
-
-	spinner SpinnerArrowAnimTiles, $10, 1, vGymSpinner
-	spinner SpinnerArrowAnimTiles, $30, 1, vGymSpinner + $10
-	spinner SpinnerArrowAnimTiles, $00, 1, vGymSpinner + $100
-	spinner SpinnerArrowAnimTiles, $20, 1, vGymSpinner + $110
-	spinner Gym_GFX, GYM_SPINNER + $000, 1, vGymSpinner
-	spinner Gym_GFX, GYM_SPINNER + $010, 1, vGymSpinner + $10
-	spinner Gym_GFX, GYM_SPINNER + $100, 1, vGymSpinner + $100
-	spinner Gym_GFX, GYM_SPINNER + $110, 1, vGymSpinner + $110
-
-SpinnerPlayerFacingDirections:
-; This isn't the order of the facing directions.  Rather, it's a list of
-; the facing directions that come next. For example, when the player is
-; facing down (00), the next facing direction is left (08).
-	db $08 ; down -> left
-	db $0C ; up -> right
-	db $04 ; left -> up
-	db $00 ; right -> down
-
-; these tiles are the animation for the tiles that push the player in dungeons like Rocket HQ
-SpinnerArrowAnimTiles:
-	INCBIN "gfx/spinner_arrow.2bpp"
+INCLUDE "engine/overworld/spinners.asm"
 
 RocketHideoutB2F_TextPointers:
 	dw RocketHideout2Text1
@@ -421,30 +277,23 @@ RocketHideoutB2F_TextPointers:
 	dw PickUpItemText
 
 RocketHideout2TrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_ROCKET_HIDEOUT_2_TRAINER_0
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROCKET_HIDEOUT_2_TRAINER_0
-	dw RocketHideout2BattleText2 ; TextBeforeBattle
-	dw RocketHideout2AfterBattleTxt2 ; TextAfterBattle
-	dw RocketHideout2EndBattleText2 ; TextEndBattle
-	dw RocketHideout2EndBattleText2 ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_ROCKET_HIDEOUT_2_TRAINER_0, 4, RocketHideout2BattleText2, RocketHideout2EndBattleText2, RocketHideout2AfterBattleTxt2
+	db -1 ; end
 
 RocketHideout2Text1:
-	TX_ASM
+	text_asm
 	ld hl, RocketHideout2TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 RocketHideout2BattleText2:
-	TX_FAR _RocketHideout2BattleText2
-	db "@"
+	text_far _RocketHideout2BattleText2
+	text_end
 
 RocketHideout2EndBattleText2:
-	TX_FAR _RocketHideout2EndBattleText2
-	db "@"
+	text_far _RocketHideout2EndBattleText2
+	text_end
 
 RocketHideout2AfterBattleTxt2:
-	TX_FAR _RocketHideout2AfterBattleTxt2
-	db "@"
+	text_far _RocketHideout2AfterBattleTxt2
+	text_end

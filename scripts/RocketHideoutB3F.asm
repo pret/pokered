@@ -33,103 +33,84 @@ RocketHideout3Script0:
 	ld [wCurMapScript], a
 	ret
 
-;format:
-;db y,x
-;dw pointer to movement
 RocketHideout3ArrowTilePlayerMovement:
-	db $d,$a
-	dw RocketHideout3ArrowMovement6
-	db $13,$a
-	dw RocketHideout3ArrowMovement1
-	db $12,$b
-	dw RocketHideout3ArrowMovement2
-	db $b,$c
-	dw RocketHideout3ArrowMovement3
-	db $11,$c
-	dw RocketHideout3ArrowMovement4
-	db $14,$c
-	dw RocketHideout3ArrowMovement5
-	db $10,$d
-	dw RocketHideout3ArrowMovement6
-	db $b,$e
-	dw RocketHideout3ArrowMovement7
-	db $f,$e
-	dw RocketHideout3ArrowMovement6
-	db $11,$e
-	dw RocketHideout3ArrowMovement8
-	db $13,$e
-	dw RocketHideout3ArrowMovement9
-	db $10,$f
-	dw RocketHideout3ArrowMovement7
-	db $12,$f
-	dw RocketHideout3ArrowMovement10
-	db $d,$10
-	dw RocketHideout3ArrowMovement11
-	db $c,$11
-	dw RocketHideout3ArrowMovement10
-	db $10,$12
-	dw RocketHideout3ArrowMovement12
-	db $FF
+	map_coord_movement 10, 13, RocketHideout3ArrowMovement6
+	map_coord_movement 10, 19, RocketHideout3ArrowMovement1
+	map_coord_movement 11, 18, RocketHideout3ArrowMovement2
+	map_coord_movement 12, 11, RocketHideout3ArrowMovement3
+	map_coord_movement 12, 17, RocketHideout3ArrowMovement4
+	map_coord_movement 12, 20, RocketHideout3ArrowMovement5
+	map_coord_movement 13, 16, RocketHideout3ArrowMovement6
+	map_coord_movement 14, 11, RocketHideout3ArrowMovement7
+	map_coord_movement 14, 15, RocketHideout3ArrowMovement6
+	map_coord_movement 14, 17, RocketHideout3ArrowMovement8
+	map_coord_movement 14, 19, RocketHideout3ArrowMovement9
+	map_coord_movement 15, 16, RocketHideout3ArrowMovement7
+	map_coord_movement 15, 18, RocketHideout3ArrowMovement10
+	map_coord_movement 16, 13, RocketHideout3ArrowMovement11
+	map_coord_movement 17, 12, RocketHideout3ArrowMovement10
+	map_coord_movement 18, 16, RocketHideout3ArrowMovement12
+	db -1 ; end
 
 ;format: direction, count
 ;each list is read starting from the $FF and working backwards
 RocketHideout3ArrowMovement1:
-	db D_RIGHT,$04
-	db D_UP,$04
-	db D_RIGHT,$04
-	db $FF
+	db D_RIGHT, 4
+	db D_UP, 4
+	db D_RIGHT, 4
+	db -1 ; end
 
 RocketHideout3ArrowMovement2:
-	db D_DOWN,$04
-	db D_RIGHT,$04
-	db $FF
+	db D_DOWN, 4
+	db D_RIGHT, 4
+	db -1 ; end
 
 RocketHideout3ArrowMovement3:
-	db D_LEFT,$02
-	db $FF
+	db D_LEFT, 2
+	db -1 ; end
 
 RocketHideout3ArrowMovement4:
-	db D_RIGHT,$04
-	db D_UP,$02
-	db D_RIGHT,$02
-	db $FF
+	db D_RIGHT, 4
+	db D_UP, 2
+	db D_RIGHT, 2
+	db -1 ; end
 
 RocketHideout3ArrowMovement5:
-	db D_RIGHT,$04
-	db D_UP,$02
-	db D_RIGHT,$02
-	db D_UP,$03
-	db $FF
+	db D_RIGHT, 4
+	db D_UP, 2
+	db D_RIGHT, 2
+	db D_UP, 3
+	db -1 ; end
 
 RocketHideout3ArrowMovement6:
-	db D_RIGHT,$04
-	db $FF
+	db D_RIGHT, 4
+	db -1 ; end
 
 RocketHideout3ArrowMovement7:
-	db D_RIGHT,$02
-	db $FF
+	db D_RIGHT, 2
+	db -1 ; end
 
 RocketHideout3ArrowMovement8:
-	db D_RIGHT,$04
-	db D_UP,$02
-	db $FF
+	db D_RIGHT, 4
+	db D_UP, 2
+	db -1 ; end
 
 RocketHideout3ArrowMovement9:
-	db D_RIGHT,$04
-	db D_UP,$04
-	db $FF
+	db D_RIGHT, 4
+	db D_UP, 4
+	db -1 ; end
 
 RocketHideout3ArrowMovement10:
-	db D_DOWN,$04
-	db $FF
+	db D_DOWN, 4
+	db -1 ; end
 
 RocketHideout3ArrowMovement11:
-	db D_UP,$02
-	db $FF
+	db D_UP, 2
+	db -1 ; end
 
 RocketHideout3ArrowMovement12:
-	db D_UP,$01
-	db $FF
+	db D_UP, 1
+	db -1 ; end
 
 RocketHideout3Script3:
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -150,57 +131,43 @@ RocketHideoutB3F_TextPointers:
 	dw PickUpItemText
 
 RocketHideout3TrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_ROCKET_HIDEOUT_3_TRAINER_0
-	db ($2 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROCKET_HIDEOUT_3_TRAINER_0
-	dw RocketHideout3BattleText2 ; TextBeforeBattle
-	dw RocketHideout3AfterBattleTxt2 ; TextAfterBattle
-	dw RocketHideout3EndBattleText2 ; TextEndBattle
-	dw RocketHideout3EndBattleText2 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROCKET_HIDEOUT_3_TRAINER_0, 2, RocketHideout3BattleText2, RocketHideout3EndBattleText2, RocketHideout3AfterBattleTxt2
 RocketHideout3TrainerHeader1:
-	dbEventFlagBit EVENT_BEAT_ROCKET_HIDEOUT_3_TRAINER_1
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROCKET_HIDEOUT_3_TRAINER_1
-	dw RocketHideout3BattleTxt ; TextBeforeBattle
-	dw RocketHideout3AfterBattleText3 ; TextAfterBattle
-	dw RocketHideout3EndBattleText3 ; TextEndBattle
-	dw RocketHideout3EndBattleText3 ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_ROCKET_HIDEOUT_3_TRAINER_1, 4, RocketHideout3BattleTxt, RocketHideout3EndBattleText3, RocketHideout3AfterBattleText3
+	db -1 ; end
 
 RocketHideout3Text1:
-	TX_ASM
+	text_asm
 	ld hl, RocketHideout3TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 RocketHideout3BattleText2:
-	TX_FAR _RocketHideout3BattleText2
-	db "@"
+	text_far _RocketHideout3BattleText2
+	text_end
 
 RocketHideout3EndBattleText2:
-	TX_FAR _RocketHideout3EndBattleText2
-	db "@"
+	text_far _RocketHideout3EndBattleText2
+	text_end
 
 RocketHideout3AfterBattleTxt2:
-	TX_FAR _RocketHideout3AfterBattleTxt2
-	db "@"
+	text_far _RocketHideout3AfterBattleTxt2
+	text_end
 
 RocketHideout3Text2:
-	TX_ASM
+	text_asm
 	ld hl, RocketHideout3TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 RocketHideout3BattleTxt:
-	TX_FAR _RocketHideout3BattleTxt
-	db "@"
+	text_far _RocketHideout3BattleTxt
+	text_end
 
 RocketHideout3EndBattleText3:
-	TX_FAR _RocketHideout3EndBattleText3
-	db "@"
+	text_far _RocketHideout3EndBattleText3
+	text_end
 
 RocketHideout3AfterBattleText3:
-	TX_FAR _RocketHide3AfterBattleText3
-	db "@"
+	text_far _RocketHide3AfterBattleText3
+	text_end

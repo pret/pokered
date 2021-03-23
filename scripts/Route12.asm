@@ -27,7 +27,7 @@ Route12Script0:
 	ResetEventReuseHL EVENT_FIGHT_ROUTE12_SNORLAX
 	jp z, CheckFightingMapTrainers
 	ld a, $d
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, SNORLAX
 	ld [wCurOpponent], a
@@ -50,7 +50,7 @@ Route12Script3:
 	cp $2
 	jr z, .asm_59664
 	ld a, $e
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .asm_59664
 	SetEvent EVENT_BEAT_ROUTE12_SNORLAX
@@ -77,212 +77,163 @@ Route12_TextPointers:
 	dw Route12Text14
 
 Route12TrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_ROUTE_12_TRAINER_0
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_12_TRAINER_0
-	dw Route12BattleText1 ; TextBeforeBattle
-	dw Route12AfterBattleText1 ; TextAfterBattle
-	dw Route12EndBattleText1 ; TextEndBattle
-	dw Route12EndBattleText1 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_12_TRAINER_0, 4, Route12BattleText1, Route12EndBattleText1, Route12AfterBattleText1
 Route12TrainerHeader1:
-	dbEventFlagBit EVENT_BEAT_ROUTE_12_TRAINER_1
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_12_TRAINER_1
-	dw Route12BattleText2 ; TextBeforeBattle
-	dw Route12AfterBattleText2 ; TextAfterBattle
-	dw Route12EndBattleText2 ; TextEndBattle
-	dw Route12EndBattleText2 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_12_TRAINER_1, 4, Route12BattleText2, Route12EndBattleText2, Route12AfterBattleText2
 Route12TrainerHeader2:
-	dbEventFlagBit EVENT_BEAT_ROUTE_12_TRAINER_2
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_12_TRAINER_2
-	dw Route12BattleText3 ; TextBeforeBattle
-	dw Route12AfterBattleText3 ; TextAfterBattle
-	dw Route12EndBattleText3 ; TextEndBattle
-	dw Route12EndBattleText3 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_12_TRAINER_2, 4, Route12BattleText3, Route12EndBattleText3, Route12AfterBattleText3
 Route12TrainerHeader3:
-	dbEventFlagBit EVENT_BEAT_ROUTE_12_TRAINER_3
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_12_TRAINER_3
-	dw Route12BattleText4 ; TextBeforeBattle
-	dw Route12AfterBattleText4 ; TextAfterBattle
-	dw Route12EndBattleText4 ; TextEndBattle
-	dw Route12EndBattleText4 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_12_TRAINER_3, 4, Route12BattleText4, Route12EndBattleText4, Route12AfterBattleText4
 Route12TrainerHeader4:
-	dbEventFlagBit EVENT_BEAT_ROUTE_12_TRAINER_4
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_12_TRAINER_4
-	dw Route12BattleText5 ; TextBeforeBattle
-	dw Route12AfterBattleText5 ; TextAfterBattle
-	dw Route12EndBattleText5 ; TextEndBattle
-	dw Route12EndBattleText5 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_12_TRAINER_4, 4, Route12BattleText5, Route12EndBattleText5, Route12AfterBattleText5
 Route12TrainerHeader5:
-	dbEventFlagBit EVENT_BEAT_ROUTE_12_TRAINER_5
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_12_TRAINER_5
-	dw Route12BattleText6 ; TextBeforeBattle
-	dw Route12AfterBattleText6 ; TextAfterBattle
-	dw Route12EndBattleText6 ; TextEndBattle
-	dw Route12EndBattleText6 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_12_TRAINER_5, 4, Route12BattleText6, Route12EndBattleText6, Route12AfterBattleText6
 Route12TrainerHeader6:
-	dbEventFlagBit EVENT_BEAT_ROUTE_12_TRAINER_6, 1
-	db ($1 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_12_TRAINER_6, 1
-	dw Route12BattleText7 ; TextBeforeBattle
-	dw Route12AfterBattleText7 ; TextAfterBattle
-	dw Route12EndBattleText7 ; TextEndBattle
-	dw Route12EndBattleText7 ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_ROUTE_12_TRAINER_6, 1, 1, Route12BattleText7, Route12EndBattleText7, Route12AfterBattleText7
+	db -1 ; end
 
 Route12Text1:
-	TX_FAR _Route12Text1
-	db "@"
+	text_far _Route12Text1
+	text_end
 
 Route12Text13:
-	TX_FAR _Route12Text13
-	db "@"
+	text_far _Route12Text13
+	text_end
 
 Route12Text14:
-	TX_FAR _Route12Text14
-	db "@"
+	text_far _Route12Text14
+	text_end
 
 Route12Text2:
-	TX_ASM
+	text_asm
 	ld hl, Route12TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route12BattleText1:
-	TX_FAR _Route12BattleText1
-	db "@"
+	text_far _Route12BattleText1
+	text_end
 
 Route12EndBattleText1:
-	TX_FAR _Route12EndBattleText1
-	db "@"
+	text_far _Route12EndBattleText1
+	text_end
 
 Route12AfterBattleText1:
-	TX_FAR _Route12AfterBattleText1
-	db "@"
+	text_far _Route12AfterBattleText1
+	text_end
 
 Route12Text3:
-	TX_ASM
+	text_asm
 	ld hl, Route12TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route12BattleText2:
-	TX_FAR _Route12BattleText2
-	db "@"
+	text_far _Route12BattleText2
+	text_end
 
 Route12EndBattleText2:
-	TX_FAR _Route12EndBattleText2
-	db "@"
+	text_far _Route12EndBattleText2
+	text_end
 
 Route12AfterBattleText2:
-	TX_FAR _Route12AfterBattleText2
-	db "@"
+	text_far _Route12AfterBattleText2
+	text_end
 
 Route12Text4:
-	TX_ASM
+	text_asm
 	ld hl, Route12TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route12BattleText3:
-	TX_FAR _Route12BattleText3
-	db "@"
+	text_far _Route12BattleText3
+	text_end
 
 Route12EndBattleText3:
-	TX_FAR _Route12EndBattleText3
-	db "@"
+	text_far _Route12EndBattleText3
+	text_end
 
 Route12AfterBattleText3:
-	TX_FAR _Route12AfterBattleText3
-	db "@"
+	text_far _Route12AfterBattleText3
+	text_end
 
 Route12Text5:
-	TX_ASM
+	text_asm
 	ld hl, Route12TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route12BattleText4:
-	TX_FAR _Route12BattleText4
-	db "@"
+	text_far _Route12BattleText4
+	text_end
 
 Route12EndBattleText4:
-	TX_FAR _Route12EndBattleText4
-	db "@"
+	text_far _Route12EndBattleText4
+	text_end
 
 Route12AfterBattleText4:
-	TX_FAR _Route12AfterBattleText4
-	db "@"
+	text_far _Route12AfterBattleText4
+	text_end
 
 Route12Text6:
-	TX_ASM
+	text_asm
 	ld hl, Route12TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route12BattleText5:
-	TX_FAR _Route12BattleText5
-	db "@"
+	text_far _Route12BattleText5
+	text_end
 
 Route12EndBattleText5:
-	TX_FAR _Route12EndBattleText5
-	db "@"
+	text_far _Route12EndBattleText5
+	text_end
 
 Route12AfterBattleText5:
-	TX_FAR _Route12AfterBattleText5
-	db "@"
+	text_far _Route12AfterBattleText5
+	text_end
 
 Route12Text7:
-	TX_ASM
+	text_asm
 	ld hl, Route12TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route12BattleText6:
-	TX_FAR _Route12BattleText6
-	db "@"
+	text_far _Route12BattleText6
+	text_end
 
 Route12EndBattleText6:
-	TX_FAR _Route12EndBattleText6
-	db "@"
+	text_far _Route12EndBattleText6
+	text_end
 
 Route12AfterBattleText6:
-	TX_FAR _Route12AfterBattleText6
-	db "@"
+	text_far _Route12AfterBattleText6
+	text_end
 
 Route12Text8:
-	TX_ASM
+	text_asm
 	ld hl, Route12TrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route12BattleText7:
-	TX_FAR _Route12BattleText7
-	db "@"
+	text_far _Route12BattleText7
+	text_end
 
 Route12EndBattleText7:
-	TX_FAR _Route12EndBattleText7
-	db "@"
+	text_far _Route12EndBattleText7
+	text_end
 
 Route12AfterBattleText7:
-	TX_FAR _Route12AfterBattleText7
-	db "@"
+	text_far _Route12AfterBattleText7
+	text_end
 
 Route12Text11:
-	TX_FAR _Route12Text11
-	db "@"
+	text_far _Route12Text11
+	text_end
 
 Route12Text12:
-	TX_FAR _Route12Text12
-	db "@"
+	text_far _Route12Text12
+	text_end

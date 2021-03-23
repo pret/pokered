@@ -9,54 +9,54 @@ CinnabarLabMetronomeRoom_TextPointers:
 	dw Lab3Text5
 
 Lab3Text1:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_GOT_TM35
-	jr nz, .asm_e551a
+	jr nz, .got_item
 	ld hl, TM35PreReceiveText
 	call PrintText
-	lb bc, TM_35, 1
+	lb bc, TM_METRONOME, 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, .bag_full
 	ld hl, ReceivedTM35Text
 	call PrintText
 	SetEvent EVENT_GOT_TM35
-	jr .asm_eb896
-.BagFull
+	jr .done
+.bag_full
 	ld hl, TM35NoRoomText
 	call PrintText
-	jr .asm_eb896
-.asm_e551a
+	jr .done
+.got_item
 	ld hl, TM35ExplanationText
 	call PrintText
-.asm_eb896
+.done
 	jp TextScriptEnd
 
 TM35PreReceiveText:
-	TX_FAR _TM35PreReceiveText
-	db "@"
+	text_far _TM35PreReceiveText
+	text_end
 
 ReceivedTM35Text:
-	TX_FAR _ReceivedTM35Text
-	TX_SFX_ITEM_1
-	db "@"
+	text_far _ReceivedTM35Text
+	sound_get_item_1
+	text_end
 
 TM35ExplanationText:
-	TX_FAR _TM35ExplanationText
-	db "@"
+	text_far _TM35ExplanationText
+	text_end
 
 TM35NoRoomText:
-	TX_FAR _TM35NoRoomText
-	db "@"
+	text_far _TM35NoRoomText
+	text_end
 
 Lab3Text2:
-	TX_FAR _Lab3Text2
-	db "@"
+	text_far _Lab3Text2
+	text_end
 
 Lab3Text4:
 Lab3Text3:
-	TX_FAR _Lab3Text3
-	db "@"
+	text_far _Lab3Text3
+	text_end
 
 Lab3Text5:
-	TX_FAR _Lab3Text5
-	db "@"
+	text_far _Lab3Text5
+	text_end

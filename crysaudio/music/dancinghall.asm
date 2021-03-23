@@ -1,26 +1,27 @@
 Music_DancingHall:
-	musicheader 3, 1, Music_DancingHall_Ch1
-	musicheader 1, 2, Music_DancingHall_Ch2
-	musicheader 1, 3, Music_DancingHall_Ch3
+	channel_count 3
+	channel 1, Music_DancingHall_Ch1
+	channel 2, Music_DancingHall_Ch2
+	channel 3, Music_DancingHall_Ch3
 
-	db $3
+	db $3 ; unused
 
 Music_DancingHall_Ch1:
 	tempo 208
-	volume $77
-	stereopanning $f
-	notetype $6, $b7
-	note __, 3
-	dutycycle $0
-Music_DancingHall_branch_ef9d3:
-	notetype $c, $b7
-	callchannel Music_DancingHall_branch_efa17
-	note __, 16
-	callchannel Music_DancingHall_branch_efa17
-	note __, 16
-	note __, 16
-	note __, 16
-	intensity $b1
+	volume 7, 7
+	stereo_panning FALSE, TRUE
+	note_type 6, 11, 7
+	rest 3
+	duty_cycle 0
+.mainloop:
+	note_type 12, 11, 7
+	sound_call .sub1
+	rest 16
+	sound_call .sub1
+	rest 16
+	rest 16
+	rest 16
+	volume_envelope 11, 1
 	octave 2
 	note B_, 1
 	octave 3
@@ -33,75 +34,75 @@ Music_DancingHall_branch_ef9d3:
 	octave 4
 	note D_, 1
 	note F_, 2
-	notetype $8, $b1
+	note_type 8, 11, 1
 	note D_, 1
 	note E_, 1
 	note D_, 1
 	octave 3
 	note B_, 3
 	note A_, 3
-	notetype $c, $b1
+	note_type 12, 11, 1
 	note B_, 1
 	note A_, 1
 	note D_, 1
 	note E_, 1
 	octave 4
 	note F_, 2
-	notetype $8, $b1
+	note_type 8, 11, 1
 	octave 3
 	note B_, 1
 	octave 4
 	note D_, 1
 	octave 3
 	note B_, 1
-	notetype $c, $b5
+	note_type 12, 11, 5
 	note A_, 1
-	note __, 1
+	rest 1
 	note B_, 1
 	note B_, 1
 	note A_, 1
-	note __, 1
+	rest 1
 	note F_, 2
-	loopchannel 0, Music_DancingHall_branch_ef9d3
+	sound_loop 0, .mainloop
 
-Music_DancingHall_branch_efa17:
+.sub1:
 	octave 3
 	note B_, 1
-	note __, 1
+	rest 1
 	note A_, 1
-	note __, 1
+	rest 1
 	note B_, 1
-	note __, 1
+	rest 1
 	note A_, 1
-	note __, 1
+	rest 1
 	octave 4
 	note E_, 1
-	note __, 1
+	rest 1
 	note D_, 1
-	note __, 1
+	rest 1
 	octave 3
 	note B_, 1
-	note __, 1
+	rest 1
 	octave 4
 	note D_, 1
-	note __, 1
-	endchannel
+	rest 1
+	sound_ret
 
 Music_DancingHall_Ch2:
-	stereopanning $f0
-	notetype $6, $a1
-	dutycycle $0
-	vibrato $10, $24
-	note __, 3
-Music_DancingHall_branch_efa37:
-	notetype $6, $a2
-	callchannel Music_DancingHall_branch_efa7a
-	callchannel Music_DancingHall_branch_efa7a
-	intensity $a7
+	stereo_panning TRUE, FALSE
+	note_type 6, 10, 1
+	duty_cycle 0
+	vibrato 16, 2, 4
+	rest 3
+.mainloop:
+	note_type 6, 10, 2
+	sound_call .sub1
+	sound_call .sub1
+	volume_envelope 10, 7
 	octave 2
 	note D_, 16
 	note F_, 16
-	notetype $c, $a7
+	note_type 12, 10, 7
 	note E_, 16
 	octave 3
 	note F_, 1
@@ -114,13 +115,13 @@ Music_DancingHall_branch_efa37:
 	note E_, 1
 	note A_, 1
 	note B_, 2
-	notetype $8, $a7
+	note_type 8, 10, 7
 	note A_, 1
 	note B_, 1
 	note A_, 1
 	note F_, 3
 	note D_, 3
-	notetype $c, $a7
+	note_type 12, 10, 7
 	note E_, 1
 	note D_, 1
 	octave 3
@@ -128,22 +129,22 @@ Music_DancingHall_branch_efa37:
 	note B_, 1
 	octave 4
 	note A_, 2
-	notetype $8, $a7
+	note_type 8, 10, 7
 	note F_, 1
 	note A_, 1
 	note F_, 1
-	notetype $c, $a7
+	note_type 12, 10, 7
 	note E_, 1
-	note __, 1
+	rest 1
 	note F_, 1
 	note F_, 1
 	note E_, 1
-	note __, 1
+	rest 1
 	note D_, 2
-	loopchannel 0, Music_DancingHall_branch_efa37
+	sound_loop 0, .mainloop
 
-Music_DancingHall_branch_efa7a:
-	intensity $a1
+.sub1:
+	volume_envelope 10, 1
 	octave 4
 	note E_, 4
 	octave 2
@@ -157,88 +158,88 @@ Music_DancingHall_branch_efa7a:
 	note A_, 4
 	note F_, 4
 	note A_, 4
-	intensity $33
+	volume_envelope 3, 3
 	note D_, 1
 	note F_, 1
-	intensity $63
+	volume_envelope 6, 3
 	note D_, 1
 	note F_, 1
-	intensity $93
+	volume_envelope 9, 3
 	note D_, 1
 	note F_, 1
-	intensity $c3
+	volume_envelope 12, 3
 	note D_, 1
 	note F_, 1
-	intensity $e3
+	volume_envelope 14, 3
 	note D_, 1
 	note F_, 1
-	intensity $a3
+	volume_envelope 10, 3
 	note D_, 1
 	note F_, 1
-	intensity $83
+	volume_envelope 8, 3
 	note D_, 1
 	note F_, 1
-	intensity $53
+	volume_envelope 5, 3
 	note D_, 1
 	note F_, 1
-	intensity $73
+	volume_envelope 7, 3
 	octave 3
 	note B_, 1
 	octave 4
 	note E_, 1
-	intensity $a3
+	volume_envelope 10, 3
 	octave 3
 	note B_, 1
 	octave 4
 	note E_, 1
-	intensity $b3
+	volume_envelope 11, 3
 	octave 3
 	note A_, 1
 	octave 4
 	note D_, 1
-	intensity $c3
+	volume_envelope 12, 3
 	octave 3
 	note A_, 1
 	octave 4
 	note D_, 1
-	intensity $d3
+	volume_envelope 13, 3
 	octave 3
 	note E_, 1
 	note B_, 1
-	intensity $e3
+	volume_envelope 14, 3
 	note E_, 1
 	note B_, 1
-	intensity $f3
+	volume_envelope 15, 3
 	note A_, 1
 	octave 4
 	note D_, 1
-	intensity $f3
+	volume_envelope 15, 3
 	octave 3
 	note A_, 1
 	octave 4
 	note D_, 1
-	endchannel
+	sound_ret
 
 Music_DancingHall_Ch3:
-	stereopanning $ff
-	vibrato $16, $24
-	notetype $6, $10
+	stereo_panning TRUE, TRUE
+	vibrato 22, 2, 4
+	note_type 6, 1, 0
 	octave 5
 	note A_, 1
 	note B_, 1
 	octave 6
 	note D_, 1
-Music_DancingHall_branch_efae3:
+.mainloop:
 	note E_, 13
 	note D_, 1
 	note E_, 1
 	note A_, 1
 	note B_, 16
-	intensity $14
+	volume_envelope 1, 4
 	octave 3
 	note F_, 16
 	note E_, 14
-	intensity $10
+	volume_envelope 1, 0
 	octave 6
 	note E_, 1
 	note F_, 1
@@ -247,11 +248,11 @@ Music_DancingHall_branch_efae3:
 	note E_, 1
 	note A_, 1
 	note B_, 16
-	intensity $14
+	volume_envelope 1, 4
 	octave 3
 	note F_, 16
 	note E_, 16
-	intensity $13
+	volume_envelope 1, 3
 	octave 4
 	note F_, 2
 	note A_, 2
@@ -264,13 +265,13 @@ Music_DancingHall_branch_efae3:
 	note A_, 2
 	note A#, 1
 	note B_, 3
-	notetype $8, $13
+	note_type 8, 1, 3
 	note A_, 1
 	note B_, 1
 	note A_, 1
 	note F_, 3
 	note D_, 3
-	notetype $c, $13
+	note_type 12, 1, 3
 	note E_, 1
 	note D_, 1
 	octave 4
@@ -278,11 +279,11 @@ Music_DancingHall_branch_efae3:
 	note B_, 1
 	octave 5
 	note A_, 2
-	notetype $8, $13
+	note_type 8, 1, 3
 	note F_, 1
 	note A_, 1
 	note F_, 1
-	notetype $6, $13
+	note_type 6, 1, 3
 	note D#, 1
 	note E_, 3
 	note D_, 4
@@ -290,16 +291,16 @@ Music_DancingHall_branch_efae3:
 	note B_, 4
 	octave 5
 	note D_, 4
-	intensity $14
+	volume_envelope 1, 4
 	octave 3
 	note D_, 16
 	note F_, 16
 	note E_, 16
 	note E_, 13
-	intensity $10
+	volume_envelope 1, 0
 	octave 5
 	note A_, 1
 	note B_, 1
 	octave 6
 	note D_, 1
-	loopchannel 0, Music_DancingHall_branch_efae3
+	sound_loop 0, .mainloop

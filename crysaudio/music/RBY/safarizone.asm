@@ -1,116 +1,117 @@
 Music_SafariZone::
-	musicheader 3, 1, Music_SafariZone_Ch0
-	musicheader 1, 2, Music_SafariZone_Ch1
-	musicheader 1, 3, Music_SafariZone_Ch2
-
-Music_SafariZone_Ch0::
-	tempo 132
-	volume $77
-	vibrato 6, $34
-	;toggleperfectpitch
-	dutycycle 2
-	notetype 12, $92
-	octave 3
-	slidepitchto 1, 4, G#
-	note C_, 1
-	slidepitchto 1, 4, G#
-	note G_, 1
-	slidepitchto 1, 4, G#
-	note C_, 1
-	slidepitchto 1, 4, G#
-	note G_, 1
-	note __, 4
-	dutycycle 3
-
-Music_SafariZone_branch_bc4f::
-	callchannel Music_SafariZone_branch_bc5f
-	notetype 12, $a4
-	note F#, 4
-	callchannel Music_SafariZone_branch_bc5f
-	notetype 12, $a4
-	note F#, 4
-	loopchannel 0, Music_SafariZone_branch_bc4f
-
-Music_SafariZone_branch_bc5f::
-	notetype 12, $a2
-	octave 3
-	note C_, 4
-	note G_, 4
-	note C_, 4
-	note G_, 4
-	note C_, 4
-	note G_, 4
-	note C_, 4
-	endchannel
-
+	channel_count 3
+	channel 1, Music_SafariZone_Ch1
+	channel 2, Music_SafariZone_Ch2
+	channel 3, Music_SafariZone_Ch3
 
 Music_SafariZone_Ch1::
-	dutycycle 2
-	vibrato 8, $25
-	notetype 12, $a2
-	octave 4
-	note G_, 1
-	note D_, 1
-	note G_, 1
-	note D_, 1
-	note __, 4
-	dutycycle 3
-
-Music_SafariZone_branch_bc79::
-	callchannel Music_SafariZone_branch_bc89
-	notetype 12, $b5
-	note A_, 4
-	callchannel Music_SafariZone_branch_bc89
-	notetype 12, $b5
-	note B_, 4
-	loopchannel 0, Music_SafariZone_branch_bc79
-
-Music_SafariZone_branch_bc89::
-	notetype 12, $b2
+	tempo 132
+	volume 7, 7
+	vibrato 6, 3, 4
+	;toggle_perfect_pitch
+	duty_cycle 2
+	note_type 12, 9, 2
 	octave 3
+	pitch_slide 1, 4, A_
+	note C_, 1
+	pitch_slide 1, 4, A_
+	note G_, 1
+	pitch_slide 1, 4, A_
+	note C_, 1
+	pitch_slide 1, 4, A_
+	note G_, 1
+	rest 4
+	duty_cycle 3
+
+Music_SafariZone_branch_bc4f::
+	sound_call Music_SafariZone_branch_bc5f
+	note_type 12, 10, 4
+	note F#, 4
+	sound_call Music_SafariZone_branch_bc5f
+	note_type 12, 10, 4
+	note F#, 4
+	sound_loop 0, Music_SafariZone_branch_bc4f
+
+Music_SafariZone_branch_bc5f::
+	note_type 12, 10, 2
+	octave 3
+	note C_, 4
 	note G_, 4
-	note D_, 4
+	note C_, 4
 	note G_, 4
-	note D_, 4
+	note C_, 4
 	note G_, 4
-	note D_, 4
-	note G_, 4
-	endchannel
+	note C_, 4
+	sound_ret
 
 
 Music_SafariZone_Ch2::
-	notetype 12, $10
-	note __, 8
+	duty_cycle 2
+	vibrato 8, 2, 5
+	note_type 12, 10, 2
+	octave 4
+	note G_, 1
+	note D_, 1
+	note G_, 1
+	note D_, 1
+	rest 4
+	duty_cycle 3
+
+Music_SafariZone_branch_bc79::
+	sound_call Music_SafariZone_branch_bc89
+	note_type 12, 11, 5
+	note A_, 4
+	sound_call Music_SafariZone_branch_bc89
+	note_type 12, 11, 5
+	note B_, 4
+	sound_loop 0, Music_SafariZone_branch_bc79
+
+Music_SafariZone_branch_bc89::
+	note_type 12, 11, 2
+	octave 3
+	note G_, 4
+	note D_, 4
+	note G_, 4
+	note D_, 4
+	note G_, 4
+	note D_, 4
+	note G_, 4
+	sound_ret
+
+
+Music_SafariZone_Ch3::
+	note_type 12, 1, 0
+	rest 8
 
 Music_SafariZone_branch_bc97::
-	callchannel Music_SafariZone_branch_bca5
+	sound_call Music_SafariZone_branch_bca5
 	octave 4
 	note A_, 4
-	callchannel Music_SafariZone_branch_bca5
+	sound_call Music_SafariZone_branch_bca5
 	octave 4
 	note B_, 4
-	loopchannel 0, Music_SafariZone_branch_bc97
+	sound_loop 0, Music_SafariZone_branch_bc97
 
 Music_SafariZone_branch_bca5::
 	octave 3
 	note A_, 2
-	note __, 2
+	rest 2
 	octave 4
 	note D_, 2
-	note __, 2
+	rest 2
 	octave 3
 	note A_, 2
-	note __, 2
+	rest 2
 	octave 4
 	note D_, 2
-	note __, 2
+	rest 2
 	octave 3
 	note A_, 2
-	note __, 2
+	rest 2
 	octave 4
 	note D_, 2
-	note __, 2
+	rest 2
 	octave 3
 	note A_, 2
-	note __, 2
-	endchannel
+	rest 2
+	sound_ret

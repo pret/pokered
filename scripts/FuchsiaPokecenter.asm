@@ -9,15 +9,15 @@ FuchsiaPokecenter_TextPointers:
 	dw FuchsiaTradeNurseText
 
 FuchsiaHealNurseText:
-	TX_POKECENTER_NURSE
+	script_pokecenter_nurse
 
 FuchsiaPokecenterText2:
-	TX_FAR _FuchsiaPokecenterText1
-	db "@"
+	text_far _FuchsiaPokecenterText1
+	text_end
 
 FuchsiaPokecenterText3:
-	TX_FAR _FuchsiaPokecenterText3
-	db "@"
+	text_far _FuchsiaPokecenterText3
+	text_end
 
 FuchsiaTradeNurseText:
-	TX_CABLE_CLUB_RECEPTIONIST
+	script_cable_club_receptionist

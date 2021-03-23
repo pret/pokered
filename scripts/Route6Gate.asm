@@ -19,13 +19,13 @@ Route6GateScript0:
 	ld a, PLAYER_DIR_RIGHT
 	ld [wPlayerMovingDirection], a
 	xor a
-	ld [hJoyHeld], a
-	callba RemoveGuardDrink
-	ld a, [$ffdb]
+	ldh [hJoyHeld], a
+	farcall RemoveGuardDrink
+	ldh a, [hItemToRemoveID]
 	and a
 	jr nz, .asm_1e080
 	ld a, $2
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	call Route6GateScript_1e0a1
 	ld a, $1
@@ -35,12 +35,13 @@ Route6GateScript0:
 	ld hl, wd728
 	set 6, [hl]
 	ld a, $3
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
 CoordsData_1e08c:
-	db $02,$03
-	db $02,$04,$FF
+	dbmapcoord  3,  2
+	dbmapcoord  4,  2
+	db -1 ; end
 
 Route6GateScript1:
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -60,7 +61,7 @@ Route6GateScript_1e0a1:
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
 	xor a
-	ld [wSpriteStateData2 + $06], a
+	ld [wSpritePlayerStateData2MovementByte1], a
 	ld [wOverrideSimulatedJoypadStatesMask], a
 	ret
 

@@ -5,5 +5,5 @@ Colosseum_TextPointers:
 	dw ColosseumText1
 
 ColosseumText1:
-	TX_FAR _ColosseumText1
-	db "@"
+	text_far _ColosseumText1
+	text_end

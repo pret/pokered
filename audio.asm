@@ -1,21 +1,20 @@
 INCLUDE "constants.asm"
-INCLUDE "crysmacros.asm"
+INCLUDE "crysaudio/macros.asm"
 INCLUDE "crysaudio/audio_constants.asm"
 INCLUDE "crysaudio/cry_constants.asm"
 
 
-SECTION "Sound Effect Headers 1", ROMX ; BANK $02
+SECTION "Sound Effect Headers 1", ROMX
 INCLUDE "audio/headers/sfxheaders1.asm"
 
-SECTION "Sound Effect Headers 2", ROMX ; BANK $08
+SECTION "Sound Effect Headers 2", ROMX
 INCLUDE "audio/headers/sfxheaders2.asm"
 
-SECTION "Sound Effect Headers 3", ROMX ; BANK $1f
+SECTION "Sound Effect Headers 3", ROMX
 INCLUDE "audio/headers/sfxheaders3.asm"
 
-SECTION "Sound Effects 1", ROMX ; BANK $02
+SECTION "Sound Effects 1", ROMX
 
-SFX_02:
 INCLUDE "audio/sfx/get_item1_1.asm"
 INCLUDE "audio/sfx/get_item2_1.asm"
 INCLUDE "audio/sfx/tink_1.asm"
@@ -55,9 +54,8 @@ INCLUDE "audio/sfx/save_1.asm"
 INCLUDE "audio/sfx/pokeflute.asm"
 INCLUDE "audio/sfx/safari_zone_pa.asm"
 
-SECTION "Sound Effects 2", ROMX ; BANK $08
+SECTION "Sound Effects 2", ROMX
 
-SFX_08:
 INCLUDE "audio/sfx/level_up.asm"
 INCLUDE "audio/sfx/ball_toss.asm"
 INCLUDE "audio/sfx/ball_poof.asm"
@@ -115,9 +113,8 @@ INCLUDE "audio/sfx/battle_35.asm"
 INCLUDE "audio/sfx/battle_36.asm"
 INCLUDE "audio/sfx/silph_scope.asm"
 
-SECTION "Sound Effects 3", ROMX ; BANK $1f
+SECTION "Sound Effects 3", ROMX
 
-SFX_1F:
 INCLUDE "audio/sfx/intro_lunge.asm"
 INCLUDE "audio/sfx/intro_hip.asm"
 INCLUDE "audio/sfx/intro_hop.asm"
@@ -130,128 +127,19 @@ INCLUDE "audio/sfx/slots_new_spin.asm"
 INCLUDE "audio/sfx/shooting_star.asm"
 
 
-SECTION "Bill's PC", ROMX
-INCLUDE "engine/menu/bills_pc.asm"
-
 SECTION "Music Routines", ROMX
-PlayBattleMusic::
-	xor a
-	ld [wAudioFadeOutControl], a
-	ld [wLowHealthAlarm], a
-	ld [wMusicFade], a
-	dec a
-	ld [wNewSoundID], a
-	call PlayMusic ; stop music
-	call DelayFrame
-	;ld c, BANK(Music_GymLeaderBattle)
-	ld a, [wGymLeaderNo]
-	and a
-	jr z, .notGymLeaderBattle
-	ld a, MUSIC_GYM_LEADER_BATTLE
-	jr .playSong
-.notGymLeaderBattle
-	ld a, [wCurOpponent]
-	cp 200
-	jr c, .wildBattle
-	cp OPP_SONY3
-	jr z, .finalBattle
-	cp OPP_LANCE
-	jr nz, .normalTrainerBattle
-	ld a, MUSIC_GYM_LEADER_BATTLE ; lance also plays gym leader theme
-	jr .playSong
-.normalTrainerBattle
-	ld a, MUSIC_TRAINER_BATTLE
-	jr .playSong
-.finalBattle
-	ld a, MUSIC_FINAL_BATTLE
-	jr .playSong
-.wildBattle
-	ld a, MUSIC_WILD_BATTLE
-.playSong
-	jp PlayMusic
+
+INCLUDE "audio/play_battle_music.asm"
+
 
 SECTION "Alt Music Routines", ROMX
-; an alternate start for MeetRival which has a different first measure
-Music_RivalAlternateStart::
-	ld a, MUSIC_MEET_RIVAL
-	jp PlayMusic
-	;ld hl, wChannelCommandPointers
-	;ld de, Music_MeetRival_branch_b1a2
-	;call Audio1_OverwriteChannelPointer
-	;ld de, Music_MeetRival_branch_b21d
-	;call Audio1_OverwriteChannelPointer
-	;ld de, Music_MeetRival_branch_b2b5
 
-; an alternate tempo for MeetRival which is slightly slower
-Music_RivalAlternateTempo::
-	ld c, BANK(Music_MeetRival)
-	ld a, MUSIC_MEET_RIVAL
-	jp PlayMusic
-	;ld hl, wChannelCommandPointers
-	;ld de, Music_MeetRival_branch_b119
-	;jp Audio1_OverwriteChannelPointer
+INCLUDE "audio/alternate_tempo.asm"
 
-; applies both the alternate start and alternate tempo
-Music_RivalAlternateStartAndTempo::
-	jp Music_RivalAlternateStart
-	;ld hl, wChannelCommandPointers
-	;ld de, Music_MeetRival_branch_b19b
-	;jp Audio1_OverwriteChannelPointer
-
-; an alternate tempo for Cities1 which is used for the Hall of Fame room
-Music_Cities1AlternateTempo::
-	ld a, 10
-	ld [wAudioFadeOutCounterReloadValue], a
-	ld [wAudioFadeOutCounter], a
-	ld a, $ff ; stop playing music after the fade-out is finished
-	ld [wAudioFadeOutControl], a
-	ld c, 100
-	call DelayFrames ; wait for the fade-out to finish
-	ld c, BANK(Music_Cities1)
-	ld a, MUSIC_CITIES1
-	jp PlayMusic
-	;ld hl, wChannelCommandPointers
-	;ld de, Music_Cities1_branch_aa6f
-	;jp Audio1_OverwriteChannelPointer
 
 SECTION "Pokedex Rating SFX Routines", ROMX
-PlayPokedexRatingSfx::
-	ld a, [$ffdc]
-	ld c, $0
-	ld hl, OwnedMonValues
-.getSfxPointer
-	cp [hl]
-	jr c, .gotSfxPointer
-	inc c
-	inc hl
-	jr .getSfxPointer
-.gotSfxPointer
-	push bc
-	ld a, $ff
-	ld [wNewSoundID], a
-	call PlaySoundWaitForCurrent
-	pop bc
-	ld b, $0
-	ld hl, PokedexRatingSfxPointers
-	add hl, bc
-	add hl, bc
-	ld a, [hli]
-	ld c, [hl]
-	call PlaySound
-	call WaitForSoundToFinish
-	jp PlayDefaultMusic
 
-PokedexRatingSfxPointers:
-	db SFX_DENIED,         BANK(SFX_Denied_1)
-	db SFX_POKEDEX_RATING, BANK(SFX_Pokedex_Rating_1)
-	db SFX_GET_ITEM_1,     BANK(SFX_Get_Item1_1)
-	db SFX_CAUGHT_MON,     BANK(SFX_Caught_Mon)
-	db SFX_LEVEL_UP,       BANK(SFX_Level_Up)
-	db SFX_GET_KEY_ITEM,   BANK(SFX_Get_Key_Item_1)
-	db SFX_GET_ITEM_2,     BANK(SFX_Get_Item2_1)
-
-OwnedMonValues:
-	db 10, 40, 60, 90, 120, 150, $ff
+INCLUDE "audio/pokedex_rating_sfx.asm"
 
 ; crystal:
 
@@ -339,8 +227,9 @@ SECTION "Songs 4", ROMX
 
 	inc_section "crysaudio/music/viridiancity.asm"
 	inc_section "crysaudio/music/celadoncity.asm"
-	inc_section "crysaudio/music/wildpokemonvictory.asm"
-	inc_section "crysaudio/music/successfulcapture.asm"
+SECTION "Wild Pokemon Victory and Successful Capture", ROMX
+	INCLUDE "crysaudio/music/wildpokemonvictory.asm"
+	INCLUDE "crysaudio/music/successfulcapture.asm"
 	inc_section "crysaudio/music/gymleadervictory.asm"
 	inc_section "crysaudio/music/mtmoonsquare.asm"
 	inc_section "crysaudio/music/gym.asm"
@@ -488,7 +377,7 @@ SECTION "TCG Songs 2", ROMX
 	inc_section "crysaudio/music/TCG/matchstart3.asm"
 	inc_section "crysaudio/music/TCG/matchvictory.asm"
 	inc_section "crysaudio/music/TCG/matchloss.asm"
-	inc_section "crysaudio/music/TCG/darkdiddly.asm"
+	inc_section "crysaudio/music/TCG/matchdraw.asm"
 	inc_section "crysaudio/music/TCG/boosterpack.asm"
 	inc_section "crysaudio/music/TCG/medal.asm"
 
@@ -527,23 +416,25 @@ SECTION "TCG2 Songs 3", ROMX
 
 SECTION "Pinball Songs", ROMX
 	inc_section "crysaudio/music/pinball/redfield.asm"
-	inc_section "crysaudio/music/pinball/catchem_red.asm"
-	inc_section "crysaudio/music/pinball/hurryup_red.asm"
+	inc_section "crysaudio/music/pinball/catchemred.asm"
+	inc_section "crysaudio/music/pinball/hurryupred.asm"
 	inc_section "crysaudio/music/pinball/pokedex.asm"
-	inc_section "crysaudio/music/pinball/gengarstage_gastly.asm"
-	inc_section "crysaudio/music/pinball/gengarstage_hauntergengar.asm" ; the two songs are interleaved
+SECTION "Gastly and Haunter Graveyard", ROMX
+	INCLUDE "crysaudio/music/pinball/gastlyinthegraveyard.asm"
+	INCLUDE "crysaudio/music/pinball/haunterinthegraveyard.asm"
+	inc_section "crysaudio/music/pinball/gengarinthegraveyard.asm"
 	inc_section "crysaudio/music/pinball/bluefield.asm"
-	inc_section "crysaudio/music/pinball/catchem_blue.asm"
-	inc_section "crysaudio/music/pinball/hurryup_blue.asm"
-	inc_section "crysaudio/music/pinball/hiscorescreen.asm"
+	inc_section "crysaudio/music/pinball/catchemblue.asm"
+	inc_section "crysaudio/music/pinball/hurryupblue.asm"
+	inc_section "crysaudio/music/pinball/hiscore.asm"
 	inc_section "crysaudio/music/pinball/gameover.asm"
-	inc_section "crysaudio/music/pinball/diglettstage_digletts.asm"
-	inc_section "crysaudio/music/pinball/diglettstage_dugtrio.asm"
+	inc_section "crysaudio/music/pinball/whackthediglett.asm"
+	inc_section "crysaudio/music/pinball/whackthedugtrio.asm"
 
 
 SECTION "Pinball Songs 2", ROMX
 	inc_section "crysaudio/music/pinball/seelstage.asm"
-	inc_section "crysaudio/music/pinball/titlescreen.asm"
+	inc_section "crysaudio/music/pinball/title.asm"
 	inc_section "crysaudio/music/pinball/mewtwostage.asm"
 	inc_section "crysaudio/music/pinball/options.asm"
 	inc_section "crysaudio/music/pinball/fieldselect.asm"

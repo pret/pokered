@@ -32,15 +32,15 @@ SeafoamIslands1F_Script:
 	ld [wMissableObjectIndex], a
 	predef_jump ShowObject
 .asm_4483b
-	ld a, $9f
+	ld a, SEAFOAM_ISLANDS_B1F
 	ld [wDungeonWarpDestinationMap], a
 	ld hl, Seafoam1HolesCoords
 	jp IsPlayerOnDungeonWarp
 
 Seafoam1HolesCoords:
-	db $06,$11
-	db $06,$18
-	db $ff
+	dbmapcoord 17,  6
+	dbmapcoord 24,  6
+	db -1 ; end
 
 SeafoamIslands1F_TextPointers:
 	dw BoulderText

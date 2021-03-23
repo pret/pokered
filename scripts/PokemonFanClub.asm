@@ -23,7 +23,7 @@ PokemonFanClub_TextPointers:
 
 FanClubText1:
 ; pikachu fan
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_PIKACHU_FAN_BOAST
 	jr nz, .mineisbetter
 	ld hl, .normaltext
@@ -38,16 +38,16 @@ FanClubText1:
 	jp TextScriptEnd
 
 .normaltext
-	TX_FAR PikachuFanText
-	db "@"
+	text_far PikachuFanText
+	text_end
 
 .bettertext
-	TX_FAR PikachuFanBetterText
-	db "@"
+	text_far PikachuFanBetterText
+	text_end
 
 FanClubText2:
 ; seel fan
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_SEEL_FAN_BOAST
 	jr nz, .mineisbetter
 	ld hl, .normaltext
@@ -62,16 +62,16 @@ FanClubText2:
 	jp TextScriptEnd
 
 .normaltext
-	TX_FAR SeelFanText
-	db "@"
+	text_far SeelFanText
+	text_end
 
 .bettertext
-	TX_FAR SeelFanBetterText
-	db "@"
+	text_far SeelFanBetterText
+	text_end
 
 FanClubText3:
 ; pikachu
-	TX_ASM
+	text_asm
 	ld hl, .text
 	call PrintText
 	ld a, PIKACHU
@@ -80,12 +80,12 @@ FanClubText3:
 	jp TextScriptEnd
 
 .text
-	TX_FAR FanClubPikachuText
-	db "@"
+	text_far FanClubPikachuText
+	text_end
 
 FanClubText4:
 ; seel
-	TX_ASM
+	text_asm
 	ld hl, .text
 	call PrintText
 	ld a, SEEL
@@ -94,12 +94,12 @@ FanClubText4:
 	jp TextScriptEnd
 
 .text
-	TX_FAR FanClubSeelText
-	db "@"
+	text_far FanClubSeelText
+	text_end
 
 FanClubText5:
 ; chair
-	TX_ASM
+	text_asm
 	call FanClubBikeInBag
 	jr nz, .nothingleft
 
@@ -115,12 +115,12 @@ FanClubText5:
 	call PrintText
 	lb bc, BIKE_VOUCHER, 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, .bag_full
 	ld hl, .receivedvouchertext
 	call PrintText
 	SetEvent EVENT_GOT_BIKE_VOUCHER
 	jr .done
-.BagFull
+.bag_full
 	ld hl, .bagfulltext
 	call PrintText
 	jr .done
@@ -135,39 +135,39 @@ FanClubText5:
 	jp TextScriptEnd
 
 .meetchairtext
-	TX_FAR FanClubMeetChairText
-	db "@"
+	text_far FanClubMeetChairText
+	text_end
 
 .storytext
-	TX_FAR FanClubChairStoryText
-	db "@"
+	text_far FanClubChairStoryText
+	text_end
 
 .receivedvouchertext
-	TX_FAR ReceivedBikeVoucherText
-	TX_SFX_KEY_ITEM
-	TX_FAR ExplainBikeVoucherText
-	db "@"
+	text_far ReceivedBikeVoucherText
+	sound_get_key_item
+	text_far ExplainBikeVoucherText
+	text_end
 
 .nostorytext
-	TX_FAR FanClubNoStoryText
-	db "@"
+	text_far FanClubNoStoryText
+	text_end
 
 .finaltext
-	TX_FAR FanClubChairFinalText
-	db "@"
+	text_far FanClubChairFinalText
+	text_end
 
 .bagfulltext
-	TX_FAR FanClubBagFullText
-	db "@"
+	text_far FanClubBagFullText
+	text_end
 
 FanClubText6:
-	TX_FAR _FanClubText6
-	db "@"
+	text_far _FanClubText6
+	text_end
 
 FanClubText7:
-	TX_FAR _FanClubText7
-	db "@"
+	text_far _FanClubText7
+	text_end
 
 FanClubText8:
-	TX_FAR _FanClubText8
-	db "@"
+	text_far _FanClubText8
+	text_end

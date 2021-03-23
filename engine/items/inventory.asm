@@ -4,7 +4,7 @@
 ; [wcf91] = item ID
 ; [wItemQuantity] = item quantity
 ; sets carry flag if successful, unsets carry flag if unsuccessful
-AddItemToInventory_:
+AddItemToInventory_::
 	ld a, [wItemQuantity] ; a = item quantity
 	push af
 	push bc
@@ -12,10 +12,10 @@ AddItemToInventory_:
 	push hl
 	push hl
 	ld d, PC_ITEM_CAPACITY ; how many items the PC can hold
-	ld a, wNumBagItems & $FF
+	ld a, LOW(wNumBagItems)
 	cp l
 	jr nz, .checkIfInventoryFull
-	ld a, wNumBagItems >> 8
+	ld a, HIGH(wNumBagItems)
 	cp h
 	jr nz, .checkIfInventoryFull
 ; if the destination is the bag
@@ -27,7 +27,7 @@ AddItemToInventory_:
 	ld a, [hli]
 	and a
 	jr z, .addNewItem
-.loop
+.notAtEndOfInventory
 	ld a, [hli]
 	ld b, a ; b = ID of current item in table
 	ld a, [wcf91] ; a = ID of item being added
@@ -36,7 +36,7 @@ AddItemToInventory_:
 	inc hl
 	ld a, [hl]
 	cp $ff ; is it the end of the table?
-	jr nz, .loop
+	jr nz, .notAtEndOfInventory
 .addNewItem ; add an item not yet in the inventory
 	pop hl
 	ld a, d
@@ -73,7 +73,7 @@ AddItemToInventory_:
 ; if so, store 99 in the current slot and store the rest in a new slot
 	ld a, 99
 	ld [hli], a
-	jp .loop
+	jp .notAtEndOfInventory
 .increaseItemQuantityFailed
 	pop hl
 	and a
@@ -97,7 +97,7 @@ AddItemToInventory_:
 ; hl = address of inventory (either wNumBagItems or wNumBoxItems)
 ; [wWhichPokemon] = index (within the inventory) of the item to remove
 ; [wItemQuantity] = quantity to remove
-RemoveItemFromInventory_:
+RemoveItemFromInventory_::
 	push hl
 	inc hl
 	ld a, [wWhichPokemon] ; index (within the inventory) of the item being removed

@@ -1,16 +1,17 @@
 Music_GymLeaderVictory:
-	musicheader 4, 1, Music_GymLeaderVictory_Ch1
-	musicheader 1, 2, Music_GymLeaderVictory_Ch2
-	musicheader 1, 3, Music_GymLeaderVictory_Ch3
-	musicheader 1, 4, Music_GymLeaderVictory_Ch4
+	channel_count 4
+	channel 1, Music_GymLeaderVictory_Ch1
+	channel 2, Music_GymLeaderVictory_Ch2
+	channel 3, Music_GymLeaderVictory_Ch3
+	channel 4, Music_GymLeaderVictory_Ch4
 
 Music_GymLeaderVictory_Ch1:
 	tempo 116
-	volume $77
-	vibrato $12, $34
-	dutycycle $3
-	tone $0001
-	notetype $c, $b7
+	volume 7, 7
+	vibrato 18, 3, 4
+	duty_cycle 3
+	pitch_offset 1
+	note_type 12, 11, 7
 	octave 4
 	note D_, 6
 	octave 3
@@ -25,18 +26,19 @@ Music_GymLeaderVictory_Ch1:
 	note A_, 1
 	octave 5
 	note D_, 8
-	stereopanning $f
-Music_GymLeaderVictory_branch_f4658:
-	dutycycle $1
-	callchannel Music_GymLeaderVictory_branch_f4689
+	stereo_panning FALSE, TRUE
+.mainloop:
+.loop1:
+	duty_cycle 1
+	sound_call .sub1
 	octave 4
 	note C#, 4
 	note E_, 4
-	callchannel Music_GymLeaderVictory_branch_f4689
+	sound_call .sub1
 	note F#, 8
-	loopchannel 2, Music_GymLeaderVictory_branch_f4658
-	dutycycle $2
-	callchannel Music_GymLeaderVictory_branch_f46a0
+	sound_loop 2, .loop1
+	duty_cycle 2
+	sound_call .sub2
 	note A_, 4
 	note G_, 4
 	note F#, 6
@@ -46,8 +48,8 @@ Music_GymLeaderVictory_branch_f4658:
 	note E_, 2
 	note D_, 8
 	note C#, 8
-	dutycycle $3
-	callchannel Music_GymLeaderVictory_branch_f46a0
+	duty_cycle 3
+	sound_call .sub2
 	note C#, 4
 	note E_, 4
 	note G_, 6
@@ -55,12 +57,12 @@ Music_GymLeaderVictory_branch_f4658:
 	note G_, 1
 	note A_, 6
 	note G_, 2
-	intensity $87
+	volume_envelope 8, 7
 	note F#, 16
-	loopchannel 0, Music_GymLeaderVictory_branch_f4658
+	sound_loop 0, .mainloop
 
-Music_GymLeaderVictory_branch_f4689:
-	intensity $91
+.sub1:
+	volume_envelope 9, 1
 	octave 3
 	note F#, 2
 	note A_, 2
@@ -81,10 +83,10 @@ Music_GymLeaderVictory_branch_f4689:
 	note B_, 2
 	note G_, 1
 	note D_, 1
-	endchannel
+	sound_ret
 
-Music_GymLeaderVictory_branch_f46a0:
-	intensity $87
+.sub2:
+	volume_envelope 8, 7
 	octave 3
 	note F#, 14
 	note D_, 1
@@ -111,12 +113,12 @@ Music_GymLeaderVictory_branch_f46a0:
 	octave 4
 	note C#, 1
 	note E_, 8
-	endchannel
+	sound_ret
 
 Music_GymLeaderVictory_Ch2:
-	vibrato $12, $34
-	dutycycle $3
-	notetype $c, $d7
+	vibrato 18, 3, 4
+	duty_cycle 3
+	note_type 12, 13, 7
 	octave 4
 	note A_, 6
 	note F#, 1
@@ -128,51 +130,51 @@ Music_GymLeaderVictory_Ch2:
 	octave 5
 	note D_, 1
 	note F#, 16
-Music_GymLeaderVictory_branch_f46d0:
-	dutycycle $3
-	intensity $a1
-	callchannel Music_GymLeaderVictory_branch_f4711
+.mainloop:
+	duty_cycle 3
+	volume_envelope 10, 1
+	sound_call .sub1
 	note A_, 4
 	note A_, 4
-	callchannel Music_GymLeaderVictory_branch_f4711
+	sound_call .sub1
 	note D_, 6
-	dutycycle $2
+	duty_cycle 2
 	note B_, 1
 	octave 5
 	note C#, 1
-	callchannel Music_GymLeaderVictory_branch_f4711
+	sound_call .sub1
 	note A_, 4
 	note A_, 4
-	callchannel Music_GymLeaderVictory_branch_f4711
+	sound_call .sub1
 	note D_, 8
-	dutycycle $3
-	callchannel Music_GymLeaderVictory_branch_f4720
+	duty_cycle 3
+	sound_call .sub2
 	note F#, 4
 	note E_, 4
 	note D_, 14
 	octave 4
 	note B_, 2
-	intensity $a7
+	volume_envelope 10, 7
 	note A_, 16
-	dutycycle $2
-	callchannel Music_GymLeaderVictory_branch_f4720
+	duty_cycle 2
+	sound_call .sub2
 	octave 4
 	note A_, 4
 	octave 5
 	note C#, 4
 	note D_, 14
 	note E_, 2
-	intensity $a6
+	volume_envelope 10, 6
 	note D_, 12
-	note __, 2
-	dutycycle $3
+	rest 2
+	duty_cycle 3
 	octave 4
 	note B_, 1
 	octave 5
 	note C#, 1
-	loopchannel 0, Music_GymLeaderVictory_branch_f46d0
+	sound_loop 0, .mainloop
 
-Music_GymLeaderVictory_branch_f4711:
+.sub1:
 	octave 5
 	note D_, 2
 	note C#, 2
@@ -187,10 +189,10 @@ Music_GymLeaderVictory_branch_f4711:
 	note A_, 2
 	note G_, 2
 	note F#, 2
-	endchannel
+	sound_ret
 
-Music_GymLeaderVictory_branch_f4720:
-	intensity $98
+.sub2:
+	volume_envelope 9, 8
 	note A_, 6
 	note F#, 1
 	note A_, 1
@@ -211,10 +213,10 @@ Music_GymLeaderVictory_branch_f4720:
 	octave 5
 	note C#, 8
 	note C#, 8
-	endchannel
+	sound_ret
 
 Music_GymLeaderVictory_Ch3:
-	notetype $c, $25
+	note_type 12, 2, 5
 	octave 3
 	note F#, 16
 	note D_, 10
@@ -223,106 +225,107 @@ Music_GymLeaderVictory_Ch3:
 	note B_, 2
 	octave 3
 	note C#, 2
-	stereopanning $f0
-Music_GymLeaderVictory_branch_f4744:
+	stereo_panning TRUE, FALSE
+.mainloop:
+.loop1:
 	note D_, 2
-	note __, 4
+	rest 4
 	octave 2
 	note A_, 2
 	octave 3
 	note C#, 2
-	note __, 4
+	rest 4
 	octave 2
 	note A_, 2
 	note B_, 2
-	note __, 4
+	rest 4
 	note G_, 2
 	note A_, 2
-	note __, 2
+	rest 2
 	octave 3
 	note C#, 4
 	note D_, 2
-	note __, 4
+	rest 4
 	octave 2
 	note A_, 2
 	octave 3
 	note C#, 2
-	note __, 4
+	rest 4
 	octave 2
 	note A_, 2
 	note B_, 2
-	note __, 4
+	rest 4
 	note G_, 2
 	octave 3
 	note D_, 2
-	note __, 6
-	loopchannel 2, Music_GymLeaderVictory_branch_f4744
-	callchannel Music_GymLeaderVictory_branch_f479e
+	rest 6
+	sound_loop 2, .loop1
+	sound_call .sub1
 	octave 3
 	note D_, 2
-	note __, 2
+	rest 2
 	note D_, 2
 	octave 4
 	note D_, 2
-	note __, 2
+	rest 2
 	octave 3
 	note D_, 2
 	note F#, 2
 	note D_, 2
 	note A_, 2
-	note __, 2
+	rest 2
 	octave 2
 	note A_, 2
 	octave 3
 	note E_, 2
-	note __, 2
+	rest 2
 	octave 2
 	note A_, 2
 	octave 3
 	note C#, 2
 	octave 2
 	note A_, 2
-	callchannel Music_GymLeaderVictory_branch_f479e
+	sound_call .sub1
 	octave 3
 	note D_, 2
-	note __, 2
+	rest 2
 	note G_, 2
 	octave 4
 	note D_, 2
-	note __, 2
+	rest 2
 	octave 3
 	note D_, 2
 	note G_, 2
 	note E_, 2
 	note D_, 2
-	note __, 2
+	rest 2
 	note D_, 2
 	note A_, 2
-	note __, 2
+	rest 2
 	octave 2
 	note A_, 2
 	note B_, 2
 	octave 3
 	note C#, 2
-	loopchannel 0, Music_GymLeaderVictory_branch_f4744
+	sound_loop 0, .mainloop
 
-Music_GymLeaderVictory_branch_f479e:
+.sub1:
 	octave 3
 	note D_, 2
-	note __, 2
+	rest 2
 	note D_, 2
 	octave 4
 	note D_, 2
-	note __, 2
+	rest 2
 	octave 3
 	note D_, 2
 	note F#, 2
 	note D_, 2
 	note A_, 2
-	note __, 2
+	rest 2
 	note D_, 2
 	note F#, 2
-	note __, 2
+	rest 2
 	octave 2
 	note A_, 2
 	octave 3
@@ -331,20 +334,20 @@ Music_GymLeaderVictory_branch_f479e:
 	note A_, 2
 	octave 3
 	note E_, 2
-	note __, 2
+	rest 2
 	note E_, 2
 	octave 4
 	note E_, 2
-	note __, 2
+	rest 2
 	octave 3
 	note E_, 2
 	note G#, 2
 	note E_, 2
 	note B_, 2
-	note __, 2
+	rest 2
 	note E_, 2
 	note G#, 2
-	note __, 2
+	rest 2
 	octave 2
 	note B_, 2
 	octave 3
@@ -352,11 +355,11 @@ Music_GymLeaderVictory_branch_f479e:
 	octave 2
 	note B_, 2
 	note A_, 2
-	note __, 2
+	rest 2
 	note A_, 2
 	octave 3
 	note A_, 2
-	note __, 2
+	rest 2
 	octave 2
 	note A_, 2
 	octave 3
@@ -365,55 +368,56 @@ Music_GymLeaderVictory_branch_f479e:
 	note A_, 2
 	octave 3
 	note A_, 2
-	note __, 2
+	rest 2
 	octave 2
 	note A_, 2
 	octave 3
 	note E_, 2
-	note __, 2
+	rest 2
 	octave 2
 	note A_, 2
 	octave 3
 	note C#, 2
 	octave 2
 	note A_, 2
-	endchannel
+	sound_ret
 
 Music_GymLeaderVictory_Ch4:
-	togglenoise $4
-	notetype $c
-	note B_, 16
-	note B_, 16
-Music_GymLeaderVictory_branch_f47eb:
-	callchannel Music_GymLeaderVictory_branch_f480b
-	note D#, 6
-	note D#, 2
-	note D#, 8
-	callchannel Music_GymLeaderVictory_branch_f480b
-	note D#, 6
-	note D#, 2
-	note D#, 4
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-Music_GymLeaderVictory_branch_f47fb:
-	note D#, 2
-	note G_, 2
-	note D_, 2
-	note D#, 2
-	note G_, 2
-	note D#, 2
-	note D_, 2
-	note G_, 2
-	loopchannel 16, Music_GymLeaderVictory_branch_f47fb
-	loopchannel 0, Music_GymLeaderVictory_branch_f47eb
+	toggle_noise 4
+	drum_speed 12
+	drum_note 12, 16
+	drum_note 12, 16
+.mainloop:
+	sound_call .sub1
+	drum_note 4, 6
+	drum_note 4, 2
+	drum_note 4, 8
+	sound_call .sub1
+	drum_note 4, 6
+	drum_note 4, 2
+	drum_note 4, 4
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+.loop1:
+	drum_note 4, 2
+	drum_note 8, 2
+	drum_note 3, 2
+	drum_note 4, 2
+	drum_note 8, 2
+	drum_note 4, 2
+	drum_note 3, 2
+	drum_note 8, 2
+	sound_loop 16, .loop1
+	sound_loop 0, .mainloop
 
-Music_GymLeaderVictory_branch_f480b:
-	note D#, 6
-	note D#, 2
-	note D#, 4
-	note D_, 2
-	note D#, 2
-	loopchannel 3, Music_GymLeaderVictory_branch_f480b
-	endchannel
+.sub1:
+.sub1loop1:
+	drum_note 4, 6
+	drum_note 4, 2
+	drum_note 4, 4
+	drum_note 3, 2
+	drum_note 4, 2
+	sound_loop 3, .sub1loop1
+	sound_ret

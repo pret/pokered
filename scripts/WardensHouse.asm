@@ -9,93 +9,93 @@ WardensHouse_TextPointers:
 	dw FuchsiaHouse2Text5
 
 FuchsiaHouse2Text1:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_GOT_HM04
-	jr nz, .subtract
+	jr nz, .got_item
 	ld b, GOLD_TEETH
 	call IsItemInBag
-	jr nz, .asm_3f30f
+	jr nz, .have_gold_teeth
 	CheckEvent EVENT_GAVE_GOLD_TEETH
-	jr nz, .asm_60cba
+	jr nz, .gave_gold_teeth
 	ld hl, WardenGibberishText1
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
 	ld hl, WardenGibberishText3
-	jr nz, .asm_61238
+	jr nz, .refused
 	ld hl, WardenGibberishText2
-.asm_61238
+.refused
 	call PrintText
-	jr .asm_52039
-.asm_3f30f
+	jr .done
+.have_gold_teeth
 	ld hl, WardenTeethText1
 	call PrintText
 	ld a, GOLD_TEETH
-	ld [$ffdb], a
-	callba RemoveItemByID
+	ldh [hItemToRemoveID], a
+	farcall RemoveItemByID
 	SetEvent EVENT_GAVE_GOLD_TEETH
-.asm_60cba
+.gave_gold_teeth
 	ld hl, WardenThankYouText
 	call PrintText
-	lb bc, HM_04, 1
+	lb bc, HM_STRENGTH, 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, .bag_full
 	ld hl, ReceivedHM04Text
 	call PrintText
 	SetEvent EVENT_GOT_HM04
-	jr .asm_52039
-.subtract
+	jr .done
+.got_item
 	ld hl, HM04ExplanationText
 	call PrintText
-	jr .asm_52039
-.BagFull
+	jr .done
+.bag_full
 	ld hl, HM04NoRoomText
 	call PrintText
-.asm_52039
+.done
 	jp TextScriptEnd
 
 WardenGibberishText1:
-	TX_FAR _WardenGibberishText1
-	db "@"
+	text_far _WardenGibberishText1
+	text_end
 
 WardenGibberishText2:
-	TX_FAR _WardenGibberishText2
-	db "@"
+	text_far _WardenGibberishText2
+	text_end
 
 WardenGibberishText3:
-	TX_FAR _WardenGibberishText3
-	db "@"
+	text_far _WardenGibberishText3
+	text_end
 
 WardenTeethText1:
-	TX_FAR _WardenTeethText1
-	TX_SFX_ITEM_1
+	text_far _WardenTeethText1
+	sound_get_item_1
 
 WardenTeethText2:
-	TX_FAR _WardenTeethText2
-	db "@"
+	text_far _WardenTeethText2
+	text_end
 
 WardenThankYouText:
-	TX_FAR _WardenThankYouText
-	db "@"
+	text_far _WardenThankYouText
+	text_end
 
 ReceivedHM04Text:
-	TX_FAR _ReceivedHM04Text
-	TX_SFX_ITEM_1
-	db "@"
+	text_far _ReceivedHM04Text
+	sound_get_item_1
+	text_end
 
 HM04ExplanationText:
-	TX_FAR _HM04ExplanationText
-	db "@"
+	text_far _HM04ExplanationText
+	text_end
 
 HM04NoRoomText:
-	TX_FAR _HM04NoRoomText
-	db "@"
+	text_far _HM04NoRoomText
+	text_end
 
 FuchsiaHouse2Text5:
 FuchsiaHouse2Text4:
-	TX_ASM
-	ld a, [H_SPRITEINDEX]
+	text_asm
+	ldh a, [hSpriteIndex]
 	cp $4
 	ld hl, FuchsiaHouse2Text_7517b
 	jr nz, .asm_4c9a2
@@ -105,9 +105,9 @@ FuchsiaHouse2Text4:
 	jp TextScriptEnd
 
 FuchsiaHouse2Text_75176:
-	TX_FAR _FuchsiaHouse2Text_75176
-	db "@"
+	text_far _FuchsiaHouse2Text_75176
+	text_end
 
 FuchsiaHouse2Text_7517b:
-	TX_FAR _FuchsiaHouse2Text_7517b
-	db "@"
+	text_far _FuchsiaHouse2Text_7517b
+	text_end

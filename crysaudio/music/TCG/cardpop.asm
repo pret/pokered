@@ -1,23 +1,21 @@
-Music_TCGCardPop:
-	db $C0
-	dw Music_TCGCardPop_Ch1
-	db $01
-	dw Music_TCGCardPop_Ch2
-	db $02
-	dw Music_TCGCardPop_Ch3
-	db $03
-	dw Music_TCGCardPop_Ch4
+Music_CardPop:
+	channel_count 4
+	channel 1, Music_CardPop_Ch1
+	channel 2, Music_CardPop_Ch2
+	channel 3, Music_CardPop_Ch3
+	channel 4, Music_CardPop_Ch4
 
-Music_TCGCardPop_Ch1: 
+Music_CardPop_Ch1: ; f703a (3d:703a)
 	notetype0 4
+	;stereo_panning 1, 1
 	notetype2 8
-	dutycycle 2
+	duty_cycle 2
 	notetype1 9
 .MainLoop
 .Loop1
-	note __, 16
-	loopchannel 7, .Loop1
-	note __, 14
+	rest 16
+	sound_loop 7, .Loop1
+	rest 14
 .Loop2
 	octave 5
 	notetype2 8
@@ -65,11 +63,11 @@ Music_TCGCardPop_Ch1:
 	note F#, 1
 	notetype1 3
 	note G_, 1
-	note __, 1
+	rest 1
 	note F#, 1
-	note __, 12
-	note __, 16
-	note __, 14
+	rest 12
+	rest 16
+	rest 14
 	octave 5
 	notetype1 9
 	notetype2 8
@@ -117,21 +115,22 @@ Music_TCGCardPop_Ch1:
 	note E_, 1
 	notetype1 3
 	note F_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 12
-	note __, 16
+	rest 12
+	rest 16
 	notetype1 9
-	note __, 14
-	loopchannel 2, .Loop2
-	note __, 2
-	loopchannel 0, .MainLoop
+	rest 14
+	sound_loop 2, .Loop2
+	rest 2
+	sound_loop 0, .MainLoop
 
 
-Music_TCGCardPop_Ch2: 
+Music_CardPop_Ch2: ; f70df (3d:70df)
 	notetype0 4
+	;stereo_panning 1, 1
 	notetype2 8
-	dutycycle 2
+	duty_cycle 2
 	notetype1 6
 	notetype2 3
 .Loop1
@@ -171,7 +170,7 @@ Music_TCGCardPop_Ch2:
 	inc_octave
 	inc_octave
 	note A_, 2
-	loopchannel 2, .Loop1
+	sound_loop 2, .Loop1
 .Loop2
 	octave 2
 	note G_, 2
@@ -209,98 +208,101 @@ Music_TCGCardPop_Ch2:
 	inc_octave
 	inc_octave
 	note G_, 2
-	loopchannel 2, .Loop2
-	loopchannel 0, Music_TCGCardPop_Ch2
+	sound_loop 2, .Loop2
+	sound_loop 0, Music_CardPop_Ch2
 
 
-Music_TCGCardPop_Ch3: 
+Music_CardPop_Ch3: ; f713a (3d:713a)
 	notetype0 4
 	notetype2 11
+	;stereo_panning 1, 1
 	notetype1 1
-	callchannel Branch_f715b
+	;echo 0
+	;cutoff 8
+	sound_call Branch_f715b
 	note C_, 2
 	note C#, 2
-	callchannel Branch_f715b
+	sound_call Branch_f715b
 	note D_, 2
 	note C#, 2
-	callchannel Branch_f716c
+	sound_call Branch_f716c
 	note D_, 2
 	note C#, 2
-	callchannel Branch_f716c
+	sound_call Branch_f716c
 	note C_, 2
 	note C#, 2
-	loopchannel 0, Music_TCGCardPop_Ch3
+	sound_loop 0, Music_CardPop_Ch3
 
 Branch_f715b:
 	octave 2
 	note D_, 2
-	note __, 2
+	rest 2
 	note D_, 4
 	inc_octave
 	note D_, 2
 	dec_octave
 	note D_, 2
-	note __, 2
+	rest 2
 	note F#, 2
-	note __, 2
+	rest 2
 	note G_, 2
-	note __, 2
+	rest 2
 	note G#, 2
-	note __, 2
+	rest 2
 	note A_, 2
-	endchannel
+	sound_ret
 
 Branch_f716c:
 	octave 2
 	note C_, 2
-	note __, 2
+	rest 2
 	note C_, 4
 	inc_octave
 	note C_, 2
 	dec_octave
 	note C_, 2
-	note __, 2
+	rest 2
 	note E_, 2
-	note __, 2
+	rest 2
 	note F_, 2
-	note __, 2
+	rest 2
 	note F#, 2
-	note __, 2
+	rest 2
 	note G_, 2
-	endchannel
+	sound_ret
 
 
-Music_TCGCardPop_Ch4: 
-	togglenoise $06
+Music_CardPop_Ch4: ; f717d (3d:717d)
+	toggle_noise 6
 .MainLoop
-	notetype 4
+	drum_speed 4
 	octave 1
 .Loop1
-	callchannel Branch_f7196
-	note E_, 4
-	note C#, 2
-	note D#, 2
-	note E_, 2
-	note C#, 2
-	loopchannel 11, .Loop1
-	callchannel Branch_f7196
-	note E_, 2
-	note D_, 1
-	note D_, 1
+	sound_call Branch_f7196
+	drum_note 5, 4
+	drum_note 2, 2
+	drum_note 4, 2
+	drum_note 5, 2
+	drum_note 2, 2
+	sound_loop 11, .Loop1
+	sound_call Branch_f7196
+	drum_note 5, 2
+	drum_note 3, 1
+	drum_note 3, 1
 .Loop2
-	note C#, 2
-	loopchannel 4, .Loop2
-	loopchannel 0, .MainLoop
+	drum_note 2, 2
+	sound_loop 4, .Loop2
+	sound_loop 0, .MainLoop
 
 Branch_f7196:
-	note C_, 2
-	note D#, 2
-	note E_, 4
-	note C#, 2
-	note D#, 2
-	note E_, 2
-	note C#, 2
-	note C_, 2
-	note C#, 2
-	endchannel
-
+	drum_note 1, 2
+	drum_note 4, 2
+	drum_note 5, 4
+	drum_note 2, 2
+	drum_note 4, 2
+	drum_note 5, 2
+	drum_note 2, 2
+	drum_note 1, 2
+	drum_note 2, 2
+	sound_ret
+; 0xf71a0

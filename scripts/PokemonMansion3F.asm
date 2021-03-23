@@ -16,18 +16,18 @@ Mansion3Script_52204:
 	CheckEvent EVENT_MANSION_SWITCH_ON
 	jr nz, .asm_52224
 	ld a, $e
-	ld bc, $207
+	lb bc, 2, 7
 	call Mansion2Script_5202f
 	ld a, $5f
-	ld bc, $507
+	lb bc, 5, 7
 	call Mansion2Script_5202f
 	ret
 .asm_52224
 	ld a, $5f
-	ld bc, $207
+	lb bc, 2, 7
 	call Mansion2Script_5202f
 	ld a, $e
-	ld bc, $507
+	lb bc, 5, 7
 	call Mansion2Script_5202f
 	ret
 
@@ -43,18 +43,18 @@ Mansion3Script0:
 	and a
 	jp z, CheckFightingMapTrainers
 	cp $3
-	ld a, $a5
+	ld a, POKEMON_MANSION_1F
 	jr nz, .asm_52250
-	ld a, $d6
+	ld a, POKEMON_MANSION_2F
 .asm_52250
 	ld [wDungeonWarpDestinationMap], a
 	ret
 
 CoordsData_52254:
-	db $0E,$10
-	db $0E,$11
-	db $0E,$13
-	db $FF
+	dbmapcoord 16, 14
+	dbmapcoord 17, 14
+	dbmapcoord 19, 14
+	db -1 ; end
 
 Mansion3Script_5225b:
 	xor a
@@ -72,14 +72,14 @@ Mansion3Script_5225b:
 	set 4, [hl]
 	ret
 
-Mansion3Script_Switches:
-	ld a, [wSpriteStateData1 + 9]
+Mansion3Script_Switches::
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
 	ret nz
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ld a, $6
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
 PokemonMansion3F_TextPointers:
@@ -91,61 +91,47 @@ PokemonMansion3F_TextPointers:
 	dw Mansion3Text6
 
 Mansion3TrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_MANSION_3_TRAINER_0
-	db ($0 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_MANSION_3_TRAINER_0
-	dw Mansion3BattleText1 ; TextBeforeBattle
-	dw Mansion3AfterBattleText1 ; TextAfterBattle
-	dw Mansion3EndBattleText1 ; TextEndBattle
-	dw Mansion3EndBattleText1 ; TextEndBattle
-
+	trainer EVENT_BEAT_MANSION_3_TRAINER_0, 0, Mansion3BattleText1, Mansion3EndBattleText1, Mansion3AfterBattleText1
 Mansion3TrainerHeader1:
-	dbEventFlagBit EVENT_BEAT_MANSION_3_TRAINER_1
-	db ($2 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_MANSION_3_TRAINER_1
-	dw Mansion3BattleText2 ; TextBeforeBattle
-	dw Mansion3AfterBattleText2 ; TextAfterBattle
-	dw Mansion3EndBattleText2 ; TextEndBattle
-	dw Mansion3EndBattleText2 ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_MANSION_3_TRAINER_1, 2, Mansion3BattleText2, Mansion3EndBattleText2, Mansion3AfterBattleText2
+	db -1 ; end
 
 Mansion3Text1:
-	TX_ASM
+	text_asm
 	ld hl, Mansion3TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Mansion3Text2:
-	TX_ASM
+	text_asm
 	ld hl, Mansion3TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Mansion3BattleText1:
-	TX_FAR _Mansion3BattleText1
-	db "@"
+	text_far _Mansion3BattleText1
+	text_end
 
 Mansion3EndBattleText1:
-	TX_FAR _Mansion3EndBattleText1
-	db "@"
+	text_far _Mansion3EndBattleText1
+	text_end
 
 Mansion3AfterBattleText1:
-	TX_FAR _Mansion3AfterBattleText1
-	db "@"
+	text_far _Mansion3AfterBattleText1
+	text_end
 
 Mansion3BattleText2:
-	TX_FAR _Mansion3BattleText2
-	db "@"
+	text_far _Mansion3BattleText2
+	text_end
 
 Mansion3EndBattleText2:
-	TX_FAR _Mansion3EndBattleText2
-	db "@"
+	text_far _Mansion3EndBattleText2
+	text_end
 
 Mansion3AfterBattleText2:
-	TX_FAR _Mansion3AfterBattleText2
-	db "@"
+	text_far _Mansion3AfterBattleText2
+	text_end
 
 Mansion3Text5:
-	TX_FAR _Mansion3Text5
-	db "@"
+	text_far _Mansion3Text5
+	text_end

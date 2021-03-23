@@ -2,7 +2,7 @@ SaffronGym_Script:
 	ld hl, wCurrentMapScriptFlags
 	bit 6, [hl]
 	res 6, [hl]
-	call nz, .extra
+	call nz, .LoadNames
 	call EnableAutoTextBoxDrawing
 	ld hl, SaffronGymTrainerHeader0
 	ld de, SaffronGym_ScriptPointers
@@ -11,15 +11,15 @@ SaffronGym_Script:
 	ld [wSaffronGymCurScript], a
 	ret
 
-.extra
-	ld hl, Gym6CityName
-	ld de, Gym6LeaderName
+.LoadNames:
+	ld hl, .CityName
+	ld de, .LeaderName
 	jp LoadGymLeaderAndCityName
 
-Gym6CityName:
+.CityName:
 	db "SAFFRON CITY@"
 
-Gym6LeaderName:
+.LeaderName:
 	db "SABRINA@"
 
 SaffronGymText_5d048:
@@ -44,26 +44,26 @@ SaffronGymScript3:
 
 SaffronGymText_5d068:
 	ld a, $a
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_BEAT_SABRINA
-	lb bc, TM_46, 1
+	lb bc, TM_PSYWAVE, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $b
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_GOT_TM46
-	jr .asm_5d091
+	jr .gymVictory
 .BagFull
 	ld a, $c
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
-.asm_5d091
+.gymVictory
 	ld hl, wObtainedBadges
-	set 5, [hl]
+	set BIT_MARSHBADGE, [hl]
 	ld hl, wBeatGymFlags
-	set 5, [hl]
+	set BIT_MARSHBADGE, [hl]
 
 	; deactivate gym trainers
 	SetEventRange EVENT_BEAT_SAFFRON_GYM_TRAINER_0, EVENT_BEAT_SAFFRON_GYM_TRAINER_6
@@ -85,84 +85,35 @@ SaffronGym_TextPointers:
 	dw SaffronGymText12
 
 SaffronGymTrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_SAFFRON_GYM_TRAINER_0
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_SAFFRON_GYM_TRAINER_0
-	dw SaffronGymBattleText1 ; TextBeforeBattle
-	dw SaffronGymAfterBattleText1 ; TextAfterBattle
-	dw SaffronGymEndBattleText1 ; TextEndBattle
-	dw SaffronGymEndBattleText1 ; TextEndBattle
-
+	trainer EVENT_BEAT_SAFFRON_GYM_TRAINER_0, 3, SaffronGymBattleText1, SaffronGymEndBattleText1, SaffronGymAfterBattleText1
 SaffronGymTrainerHeader1:
-	dbEventFlagBit EVENT_BEAT_SAFFRON_GYM_TRAINER_1
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_SAFFRON_GYM_TRAINER_1
-	dw SaffronGymBattleText2 ; TextBeforeBattle
-	dw SaffronGymAfterBattleText2 ; TextAfterBattle
-	dw SaffronGymEndBattleText2 ; TextEndBattle
-	dw SaffronGymEndBattleText2 ; TextEndBattle
-
+	trainer EVENT_BEAT_SAFFRON_GYM_TRAINER_1, 3, SaffronGymBattleText2, SaffronGymEndBattleText2, SaffronGymAfterBattleText2
 SaffronGymTrainerHeader2:
-	dbEventFlagBit EVENT_BEAT_SAFFRON_GYM_TRAINER_2
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_SAFFRON_GYM_TRAINER_2
-	dw SaffronGymBattleText3 ; TextBeforeBattle
-	dw SaffronGymAfterBattleText3 ; TextAfterBattle
-	dw SaffronGymEndBattleText3 ; TextEndBattle
-	dw SaffronGymEndBattleText3 ; TextEndBattle
-
+	trainer EVENT_BEAT_SAFFRON_GYM_TRAINER_2, 3, SaffronGymBattleText3, SaffronGymEndBattleText3, SaffronGymAfterBattleText3
 SaffronGymTrainerHeader3:
-	dbEventFlagBit EVENT_BEAT_SAFFRON_GYM_TRAINER_3
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_SAFFRON_GYM_TRAINER_3
-	dw SaffronGymBattleText4 ; TextBeforeBattle
-	dw SaffronGymAfterBattleText4 ; TextAfterBattle
-	dw SaffronGymEndBattleText4 ; TextEndBattle
-	dw SaffronGymEndBattleText4 ; TextEndBattle
-
+	trainer EVENT_BEAT_SAFFRON_GYM_TRAINER_3, 3, SaffronGymBattleText4, SaffronGymEndBattleText4, SaffronGymAfterBattleText4
 SaffronGymTrainerHeader4:
-	dbEventFlagBit EVENT_BEAT_SAFFRON_GYM_TRAINER_4
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_SAFFRON_GYM_TRAINER_4
-	dw SaffronGymBattleText5 ; TextBeforeBattle
-	dw SaffronGymAfterBattleText5 ; TextAfterBattle
-	dw SaffronGymEndBattleText5 ; TextEndBattle
-	dw SaffronGymEndBattleText5 ; TextEndBattle
-
+	trainer EVENT_BEAT_SAFFRON_GYM_TRAINER_4, 3, SaffronGymBattleText5, SaffronGymEndBattleText5, SaffronGymAfterBattleText5
 SaffronGymTrainerHeader5:
-	dbEventFlagBit EVENT_BEAT_SAFFRON_GYM_TRAINER_5
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_SAFFRON_GYM_TRAINER_5
-	dw SaffronGymBattleText6 ; TextBeforeBattle
-	dw SaffronGymAfterBattleText6 ; TextAfterBattle
-	dw SaffronGymEndBattleText6 ; TextEndBattle
-	dw SaffronGymEndBattleText6 ; TextEndBattle
-
+	trainer EVENT_BEAT_SAFFRON_GYM_TRAINER_5, 3, SaffronGymBattleText6, SaffronGymEndBattleText6, SaffronGymAfterBattleText6
 SaffronGymTrainerHeader6:
-	dbEventFlagBit EVENT_BEAT_SAFFRON_GYM_TRAINER_6, 1
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_SAFFRON_GYM_TRAINER_6, 1
-	dw SaffronGymBattleText7 ; TextBeforeBattle
-	dw SaffronGymAfterBattleText7 ; TextAfterBattle
-	dw SaffronGymEndBattleText7 ; TextEndBattle
-	dw SaffronGymEndBattleText7 ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_SAFFRON_GYM_TRAINER_6, 1, 3, SaffronGymBattleText7, SaffronGymEndBattleText7, SaffronGymAfterBattleText7
+	db -1 ; end
 
 SaffronGymText1:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_BEAT_SABRINA
-	jr z, .asm_5d134
+	jr z, .beginBattle
 	CheckEventReuseA EVENT_GOT_TM46
-	jr nz, .asm_5d12c
+	jr nz, .afterVictory
 	call z, SaffronGymText_5d068
 	call DisableWaitingAfterTextDisplay
-	jr .asm_5d15f
-.asm_5d12c
+	jr .done
+.afterVictory
 	ld hl, SaffronGymText_5d16e
 	call PrintText
-	jr .asm_5d15f
-.asm_5d134
+	jr .done
+.beginBattle
 	ld hl, SaffronGymText_5d162
 	call PrintText
 	ld hl, wd72d
@@ -171,7 +122,7 @@ SaffronGymText1:
 	ld hl, SaffronGymText_5d167
 	ld de, SaffronGymText_5d167
 	call SaveEndBattleTextPointers
-	ld a, [H_SPRITEINDEX]
+	ldh a, [hSpriteIndex]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
@@ -179,81 +130,81 @@ SaffronGymText1:
 	ld [wGymLeaderNo], a
 	ld a, $3
 	ld [wSaffronGymCurScript], a
-.asm_5d15f
+.done
 	jp TextScriptEnd
 
 SaffronGymText_5d162:
-	TX_FAR _SaffronGymText_5d162
-	db "@"
+	text_far _SaffronGymText_5d162
+	text_end
 
 SaffronGymText_5d167:
-	TX_FAR _SaffronGymText_5d167
-	TX_SFX_KEY_ITEM ; actually plays the second channel of SFX_BALL_POOF due to the wrong music bank being loaded
-	TX_BLINK
-	db "@"
+	text_far _SaffronGymText_5d167
+	sound_get_key_item ; actually plays the second channel of SFX_BALL_POOF due to the wrong music bank being loaded
+	text_promptbutton
+	text_end
 
 SaffronGymText_5d16e:
-	TX_FAR _SaffronGymText_5d16e
-	db "@"
+	text_far _SaffronGymText_5d16e
+	text_end
 
 SaffronGymText10:
-	TX_FAR _SaffronGymText_5d173
-	db "@"
+	text_far _SaffronGymText_5d173
+	text_end
 
 SaffronGymText11:
-	TX_FAR ReceivedTM46Text
-	TX_SFX_ITEM_1
-	TX_FAR _TM46ExplanationText
-	db "@"
+	text_far ReceivedTM46Text
+	sound_get_item_1
+	text_far _TM46ExplanationText
+	text_end
 
 SaffronGymText12:
-	TX_FAR _TM46NoRoomText
-	db "@"
+	text_far _TM46NoRoomText
+	text_end
 
 SaffronGymText2:
-	TX_ASM
+	text_asm
 	ld hl, SaffronGymTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SaffronGymText3:
-	TX_ASM
+	text_asm
 	ld hl, SaffronGymTrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SaffronGymText4:
-	TX_ASM
+	text_asm
 	ld hl, SaffronGymTrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SaffronGymText5:
-	TX_ASM
+	text_asm
 	ld hl, SaffronGymTrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SaffronGymText6:
-	TX_ASM
+	text_asm
 	ld hl, SaffronGymTrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SaffronGymText7:
-	TX_ASM
+	text_asm
 	ld hl, SaffronGymTrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SaffronGymText8:
-	TX_ASM
+	text_asm
 	ld hl, SaffronGymTrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SaffronGymText9:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_BEAT_SABRINA
 	jr nz, .asm_5d1dd
 	ld hl, SaffronGymText_5d1e6
@@ -266,93 +217,93 @@ SaffronGymText9:
 	jp TextScriptEnd
 
 SaffronGymText_5d1e6:
-	TX_FAR _SaffronGymText_5d1e6
-	db "@"
+	text_far _SaffronGymText_5d1e6
+	text_end
 
 SaffronGymText_5d1eb:
-	TX_FAR _SaffronGymText_5d1eb
-	db "@"
+	text_far _SaffronGymText_5d1eb
+	text_end
 
 SaffronGymBattleText1:
-	TX_FAR _SaffronGymBattleText1
-	db "@"
+	text_far _SaffronGymBattleText1
+	text_end
 
 SaffronGymEndBattleText1:
-	TX_FAR _SaffronGymEndBattleText1
-	db "@"
+	text_far _SaffronGymEndBattleText1
+	text_end
 
 SaffronGymAfterBattleText1:
-	TX_FAR _SaffronGymAfterBattleText1
-	db "@"
+	text_far _SaffronGymAfterBattleText1
+	text_end
 
 SaffronGymBattleText2:
-	TX_FAR _SaffronGymBattleText2
-	db "@"
+	text_far _SaffronGymBattleText2
+	text_end
 
 SaffronGymEndBattleText2:
-	TX_FAR _SaffronGymEndBattleText2
-	db "@"
+	text_far _SaffronGymEndBattleText2
+	text_end
 
 SaffronGymAfterBattleText2:
-	TX_FAR _SaffronGymAfterBattleText2
-	db "@"
+	text_far _SaffronGymAfterBattleText2
+	text_end
 
 SaffronGymBattleText3:
-	TX_FAR _SaffronGymBattleText3
-	db "@"
+	text_far _SaffronGymBattleText3
+	text_end
 
 SaffronGymEndBattleText3:
-	TX_FAR _SaffronGymEndBattleText3
-	db "@"
+	text_far _SaffronGymEndBattleText3
+	text_end
 
 SaffronGymAfterBattleText3:
-	TX_FAR _SaffronGymAfterBattleText3
-	db "@"
+	text_far _SaffronGymAfterBattleText3
+	text_end
 
 SaffronGymBattleText4:
-	TX_FAR _SaffronGymBattleText4
-	db "@"
+	text_far _SaffronGymBattleText4
+	text_end
 
 SaffronGymEndBattleText4:
-	TX_FAR _SaffronGymEndBattleText4
-	db "@"
+	text_far _SaffronGymEndBattleText4
+	text_end
 
 SaffronGymAfterBattleText4:
-	TX_FAR _SaffronGymAfterBattleText4
-	db "@"
+	text_far _SaffronGymAfterBattleText4
+	text_end
 
 SaffronGymBattleText5:
-	TX_FAR _SaffronGymBattleText5
-	db "@"
+	text_far _SaffronGymBattleText5
+	text_end
 
 SaffronGymEndBattleText5:
-	TX_FAR _SaffronGymEndBattleText5
-	db "@"
+	text_far _SaffronGymEndBattleText5
+	text_end
 
 SaffronGymAfterBattleText5:
-	TX_FAR _SaffronGymAfterBattleText5
-	db "@"
+	text_far _SaffronGymAfterBattleText5
+	text_end
 
 SaffronGymBattleText6:
-	TX_FAR _SaffronGymBattleText6
-	db "@"
+	text_far _SaffronGymBattleText6
+	text_end
 
 SaffronGymEndBattleText6:
-	TX_FAR _SaffronGymEndBattleText6
-	db "@"
+	text_far _SaffronGymEndBattleText6
+	text_end
 
 SaffronGymAfterBattleText6:
-	TX_FAR _SaffronGymAfterBattleText6
-	db "@"
+	text_far _SaffronGymAfterBattleText6
+	text_end
 
 SaffronGymBattleText7:
-	TX_FAR _SaffronGymBattleText7
-	db "@"
+	text_far _SaffronGymBattleText7
+	text_end
 
 SaffronGymEndBattleText7:
-	TX_FAR _SaffronGymEndBattleText7
-	db "@"
+	text_far _SaffronGymEndBattleText7
+	text_end
 
 SaffronGymAfterBattleText7:
-	TX_FAR _SaffronGymAfterBattleText7
-	db "@"
+	text_far _SaffronGymAfterBattleText7
+	text_end

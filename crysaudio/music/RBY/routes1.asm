@@ -1,19 +1,20 @@
 Music_Routes1::
-	musicheader 4, 1, Music_Routes1_Ch0
-	musicheader 1, 2, Music_Routes1_Ch1
-	musicheader 1, 3, Music_Routes1_Ch2
-	musicheader 1, 4, Music_Routes1_Ch3
+	channel_count 4
+	channel 1, Music_Routes1_Ch1
+	channel 2, Music_Routes1_Ch2
+	channel 3, Music_Routes1_Ch3
+	channel 4, Music_Routes1_Ch4
 
-Music_Routes1_Ch0::
+Music_Routes1_Ch1::
 	tempo 152
-	volume $77
-	vibrato 4, $23
-	dutycycle 2
-	;toggleperfectpitch
+	volume 7, 7
+	vibrato 4, 2, 3
+	duty_cycle 2
+	;toggle_perfect_pitch
 
 Music_Routes1_branch_9be9::
-	notetype 12, $a1
-	note __, 4
+	note_type 12, 10, 1
+	rest 4
 	octave 4
 	note D_, 2
 	note D_, 6
@@ -69,12 +70,12 @@ Music_Routes1_branch_9be9::
 	note E_, 2
 	octave 3
 	note A_, 2
-	notetype 12, $a2
+	note_type 12, 10, 2
 	octave 4
 	note G_, 4
 	note E_, 4
 	note F#, 2
-	notetype 12, $a1
+	note_type 12, 10, 1
 	octave 3
 	note A_, 2
 	note A_, 6
@@ -108,20 +109,20 @@ Music_Routes1_branch_9be9::
 	octave 3
 	note A_, 2
 	note A_, 2
-	loopchannel 0, Music_Routes1_branch_9be9
-	endchannel
+	sound_loop 0, Music_Routes1_branch_9be9
+	sound_ret
 
 
-Music_Routes1_Ch1::
-	dutycycle 2
+Music_Routes1_Ch2::
+	duty_cycle 2
 
 Music_Routes1_branch_9c53::
-	notetype 12, $d1
-	callchannel Music_Routes1_branch_9c65
-	callchannel Music_Routes1_branch_9c78
-	callchannel Music_Routes1_branch_9c65
-	callchannel Music_Routes1_branch_9c8d
-	loopchannel 0, Music_Routes1_branch_9c53
+	note_type 12, 13, 1
+	sound_call Music_Routes1_branch_9c65
+	sound_call Music_Routes1_branch_9c78
+	sound_call Music_Routes1_branch_9c65
+	sound_call Music_Routes1_branch_9c8d
+	sound_loop 0, Music_Routes1_branch_9c53
 
 Music_Routes1_branch_9c65::
 	octave 4
@@ -142,7 +143,7 @@ Music_Routes1_branch_9c65::
 	note G_, 3
 	note F#, 1
 	note E_, 6
-	endchannel
+	sound_ret
 
 Music_Routes1_branch_9c78::
 	note C#, 1
@@ -165,7 +166,7 @@ Music_Routes1_branch_9c78::
 	note F#, 1
 	note D_, 4
 	note F#, 2
-	endchannel
+	sound_ret
 
 Music_Routes1_branch_9c8d::
 	note C#, 1
@@ -180,21 +181,21 @@ Music_Routes1_branch_9c8d::
 	note B_, 2
 	octave 4
 	note C#, 2
-	notetype 12, $d2
+	note_type 12, 13, 2
 	note B_, 4
-	notetype 6, $d1
+	note_type 6, 13, 1
 	octave 3
 	note B_, 1
 	octave 4
 	note C#, 1
-	notetype 12, $d1
+	note_type 12, 13, 1
 	octave 3
 	note B_, 1
 	note A_, 1
 	octave 4
 	note C#, 1
 	note D_, 6
-	notetype 12, $d2
+	note_type 12, 13, 2
 	note F#, 1
 	note G_, 1
 	note A_, 2
@@ -232,20 +233,20 @@ Music_Routes1_branch_9c8d::
 	note C#, 2
 	note E_, 2
 	note D_, 2
-	notetype 12, $d1
+	note_type 12, 13, 1
 	octave 4
 	note D_, 2
 	note D_, 2
-	endchannel
-	endchannel
+	sound_ret
+	sound_ret
 
 
-Music_Routes1_Ch2::
-	vibrato 8, $25
-	notetype 12, $13
+Music_Routes1_Ch3::
+	vibrato 8, 2, 5
+	note_type 12, 1, 3
 
 Music_Routes1_branch_9cdd::
-	note __, 2
+	rest 2
 	octave 4
 	note D_, 4
 	note C#, 4
@@ -311,101 +312,101 @@ Music_Routes1_branch_9cdd::
 	note A_, 8
 	octave 4
 	note D_, 6
-	loopchannel 0, Music_Routes1_branch_9cdd
-	endchannel
+	sound_loop 0, Music_Routes1_branch_9cdd
+	sound_ret
 
 
-Music_Routes1_Ch3::
-	togglenoise 1
-	notetype 12
-	note __, 4
-	note G_, 2
-	note __, 2
-	note G_, 2
-	note __, 2
-	note G_, 2
-	note __, 2
-	note G_, 2
-	note __, 2
-	note G_, 2
-	note __, 2
-	note G_, 2
-	note __, 2
-	note G_, 2
-	note G_, 2
-	note __, 4
-	note G_, 2
-	note __, 2
-	note G_, 2
-	note __, 2
-	note G_, 2
-	note __, 2
-	note G_, 2
-	note __, 2
-	note G_, 2
-	note __, 2
-	note G_, 2
-	note G_, 2
-	note G_, 2
-	note G_, 2
-	note __, 4
-	note G_, 2
-	note __, 2
-	note G_, 2
-	note __, 2
-	note G_, 2
-	note __, 2
-	note G_, 2
-	note __, 2
-	note G_, 2
-	note __, 2
-	note G_, 2
-	note __, 2
-	note G_, 2
-	note G_, 2
-	note __, 4
-	note G_, 2
-	note __, 2
-	note G_, 2
-	note __, 2
-	note G_, 2
-	note __, 2
-	note G_, 2
-	note __, 2
-	note G_, 2
-	note __, 2
-	note G_, 2
-	note __, 2
-	note G_, 2
-	note G_, 2
-	note G_, 2
-	note __, 2
-	note G_, 2
-	note G_, 2
-	note __, 4
-	note G_, 2
-	note G_, 2
-	note G_, 2
-	note __, 2
-	note G_, 2
-	note G_, 2
-	note __, 4
-	note G_, 2
-	note G_, 2
-	note G_, 2
-	note __, 2
-	note G_, 2
-	note G_, 2
-	note __, 4
-	note G_, 2
-	note G_, 2
-	note G_, 2
-	note __, 2
-	note G_, 2
-	note G_, 2
-	note G_, 2
-	note __, 2
-	note G_, 2
-	note G_, 2
-	loopchannel 0, Music_Routes1_Ch3
-	endchannel
+Music_Routes1_Ch4::
+	toggle_noise 1
+	drum_speed 12
+	rest 4
+	drum_note 8, 2
+	rest 2
+	drum_note 8, 2
+	rest 2
+	drum_note 8, 2
+	rest 2
+	drum_note 8, 2
+	rest 2
+	drum_note 8, 2
+	rest 2
+	drum_note 8, 2
+	rest 2
+	drum_note 8, 2
+	drum_note 8, 2
+	rest 4
+	drum_note 8, 2
+	rest 2
+	drum_note 8, 2
+	rest 2
+	drum_note 8, 2
+	rest 2
+	drum_note 8, 2
+	rest 2
+	drum_note 8, 2
+	rest 2
+	drum_note 8, 2
+	drum_note 8, 2
+	drum_note 8, 2
+	drum_note 8, 2
+	rest 4
+	drum_note 8, 2
+	rest 2
+	drum_note 8, 2
+	rest 2
+	drum_note 8, 2
+	rest 2
+	drum_note 8, 2
+	rest 2
+	drum_note 8, 2
+	rest 2
+	drum_note 8, 2
+	rest 2
+	drum_note 8, 2
+	drum_note 8, 2
+	rest 4
+	drum_note 8, 2
+	rest 2
+	drum_note 8, 2
+	rest 2
+	drum_note 8, 2
+	rest 2
+	drum_note 8, 2
+	rest 2
+	drum_note 8, 2
+	rest 2
+	drum_note 8, 2
+	rest 2
+	drum_note 8, 2
+	drum_note 8, 2
+	drum_note 8, 2
+	rest 2
+	drum_note 8, 2
+	drum_note 8, 2
+	rest 4
+	drum_note 8, 2
+	drum_note 8, 2
+	drum_note 8, 2
+	rest 2
+	drum_note 8, 2
+	drum_note 8, 2
+	rest 4
+	drum_note 8, 2
+	drum_note 8, 2
+	drum_note 8, 2
+	rest 2
+	drum_note 8, 2
+	drum_note 8, 2
+	rest 4
+	drum_note 8, 2
+	drum_note 8, 2
+	drum_note 8, 2
+	rest 2
+	drum_note 8, 2
+	drum_note 8, 2
+	drum_note 8, 2
+	rest 2
+	drum_note 8, 2
+	drum_note 8, 2
+	sound_loop 0, Music_Routes1_Ch4
+	sound_ret

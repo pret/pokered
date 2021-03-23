@@ -15,43 +15,43 @@ SSAnneCaptainsRoom_TextPointers:
 	dw SSAnne7Text3
 
 SSAnne7Text1:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_GOT_HM01
-	jr nz, .asm_797c4
+	jr nz, .got_item
 	ld hl, SSAnne7RubText
 	call PrintText
 	ld hl, ReceivingHM01Text
 	call PrintText
-	lb bc, HM_01, 1
+	lb bc, HM_CUT, 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, .bag_full
 	ld hl, ReceivedHM01Text
 	call PrintText
 	SetEvent EVENT_GOT_HM01
-	jr .asm_0faf5
-.BagFull
+	jr .done
+.bag_full
 	ld hl, HM01NoRoomText
 	call PrintText
 	ld hl, wd72d
 	set 5, [hl]
-	jr .asm_0faf5
-.asm_797c4
+	jr .done
+.got_item
 	ld hl, SSAnne7Text_61932
 	call PrintText
-.asm_0faf5
+.done
 	jp TextScriptEnd
 
 SSAnne7RubText:
-	TX_FAR _SSAnne7RubText
-	TX_ASM
+	text_far _SSAnne7RubText
+	text_asm
 	ld a, [wAudioROMBank]
-	cp $1f ; 0 ; BANK(Audio3_UpdateMusic) XXXXX
+	cp $1f ; BANK("Audio Engine 3")
 	ld [wAudioSavedROMBank], a
 	jr nz, .asm_61908
-	ld a, $ff
+	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
-	ld a, 0 ; Bank(Music_PkmnHealed)
+	ld a, 0 ; BANK(Music_PkmnHealed)
 	ld [wAudioROMBank], a
 .asm_61908
 	ld a, MUSIC_PKMN_HEALED
@@ -65,26 +65,26 @@ SSAnne7RubText:
 	jp TextScriptEnd
 
 ReceivingHM01Text:
-	TX_FAR _ReceivingHM01Text
-	db "@"
+	text_far _ReceivingHM01Text
+	text_end
 
 ReceivedHM01Text:
-	TX_FAR _ReceivedHM01Text
-	TX_SFX_KEY_ITEM
-	db "@"
+	text_far _ReceivedHM01Text
+	sound_get_key_item
+	text_end
 
 SSAnne7Text_61932:
-	TX_FAR _SSAnne7Text_61932
-	db "@"
+	text_far _SSAnne7Text_61932
+	text_end
 
 HM01NoRoomText:
-	TX_FAR _HM01NoRoomText
-	db "@"
+	text_far _HM01NoRoomText
+	text_end
 
 SSAnne7Text2:
-	TX_FAR _SSAnne7Text2
-	db "@"
+	text_far _SSAnne7Text2
+	text_end
 
 SSAnne7Text3:
-	TX_FAR _SSAnne7Text3
-	db "@"
+	text_far _SSAnne7Text3
+	text_end

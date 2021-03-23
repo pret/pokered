@@ -11,18 +11,18 @@ MtMoonPokecenter_TextPointers:
 	dw MtMoonTradeNurseText
 
 MtMoonHealNurseText:
-	db $ff
+	script_pokecenter_nurse
 
 MtMoonPokecenterText2:
-	TX_FAR _MtMoonPokecenterText1
-	db "@"
+	text_far _MtMoonPokecenterText1
+	text_end
 
 MtMoonPokecenterText3:
-	TX_FAR _MtMoonPokecenterText3
-	db "@"
+	text_far _MtMoonPokecenterText3
+	text_end
 
 MagikarpSalesmanText:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_BOUGHT_MAGIKARP, 1
 	jp c, .alreadyBoughtMagikarp
 	ld hl, .Text1
@@ -34,10 +34,10 @@ MagikarpSalesmanText:
 	ld a, [wCurrentMenuItem]
 	and a
 	jp nz, .choseNo
-	ld [hMoney], a
-	ld [hMoney + 2], a
+	ldh [hMoney], a
+	ldh [hMoney + 2], a
 	ld a, $5
-	ld [hMoney + 1], a
+	ldh [hMoney + 1], a
 	call HasEnoughMoney
 	jr nc, .enoughMoney
 	ld hl, .NoMoneyText
@@ -71,24 +71,24 @@ MagikarpSalesmanText:
 	jp TextScriptEnd
 
 .Text1
-	TX_FAR _MagikarpSalesmanText1
-	db "@"
+	text_far _MagikarpSalesmanText1
+	text_end
 
 .RefuseText
-	TX_FAR _MagikarpSalesmanNoText
-	db "@"
+	text_far _MagikarpSalesmanNoText
+	text_end
 
 .NoMoneyText
-	TX_FAR _MagikarpSalesmanNoMoneyText
-	db "@"
+	text_far _MagikarpSalesmanNoMoneyText
+	text_end
 
 .Text2
-	TX_FAR _MagikarpSalesmanText2
-	db "@"
+	text_far _MagikarpSalesmanText2
+	text_end
 
 MtMoonPokecenterText5:
-	TX_FAR _MtMoonPokecenterText5
-	db "@"
+	text_far _MtMoonPokecenterText5
+	text_end
 
 MtMoonTradeNurseText:
-	db $f6
+	script_cable_club_receptionist

@@ -1,5 +1,5 @@
 CeruleanBadgeHouse_Script:
-	ld a, $1
+	ld a, TRUE
 	ld [wAutoTextBoxDrawingControl], a
 	dec a
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
@@ -9,7 +9,7 @@ CeruleanBadgeHouse_TextPointers:
 	dw CeruleanHouse2Text1
 
 CeruleanHouse2Text1:
-	TX_ASM
+	text_asm
 	ld hl, CeruleanHouse2Text_74e77
 	call PrintText
 	xor a
@@ -34,7 +34,7 @@ CeruleanHouse2Text1:
 	jr c, .asm_74e60
 	ld hl, TextPointers_74e86
 	ld a, [wcf91]
-	sub $15
+	sub BOULDERBADGE
 	add a
 	ld d, $0
 	ld e, a
@@ -52,19 +52,28 @@ CeruleanHouse2Text1:
 	jp TextScriptEnd
 
 BadgeItemList:
-	db $8,BOULDERBADGE,CASCADEBADGE,THUNDERBADGE,RAINBOWBADGE,SOULBADGE,MARSHBADGE,VOLCANOBADGE,EARTHBADGE,$FF
+	db 8 ; #
+	db BOULDERBADGE
+	db CASCADEBADGE
+	db THUNDERBADGE
+	db RAINBOWBADGE
+	db SOULBADGE
+	db MARSHBADGE
+	db VOLCANOBADGE
+	db EARTHBADGE
+	db -1 ; end
 
 CeruleanHouse2Text_74e77:
-	TX_FAR _CeruleanHouse2Text_74e77
-	db "@"
+	text_far _CeruleanHouse2Text_74e77
+	text_end
 
 CeruleanHouse2Text_74e7c:
-	TX_FAR _CeruleanHouse2Text_74e7c
-	db "@"
+	text_far _CeruleanHouse2Text_74e7c
+	text_end
 
 CeruleanHouse2Text_74e81:
-	TX_FAR _CeruleanHouse2Text_74e81
-	db "@"
+	text_far _CeruleanHouse2Text_74e81
+	text_end
 
 TextPointers_74e86:
 	dw CeruleanHouse2Text_74e96
@@ -77,33 +86,33 @@ TextPointers_74e86:
 	dw CeruleanHouse2Text_74eb9
 
 CeruleanHouse2Text_74e96:
-	TX_FAR _CeruleanHouse2Text_74e96
-	db "@"
+	text_far _CeruleanHouse2Text_74e96
+	text_end
 
 CeruleanHouse2Text_74e9b:
-	TX_FAR _CeruleanHouse2Text_74e9b
-	db "@"
+	text_far _CeruleanHouse2Text_74e9b
+	text_end
 
 CeruleanHouse2Text_74ea0:
-	TX_FAR _CeruleanHouse2Text_74ea0
-	db "@"
+	text_far _CeruleanHouse2Text_74ea0
+	text_end
 
 CeruleanHouse2Text_74ea5:
-	TX_FAR _CeruleanHouse2Text_74ea5
-	db "@"
+	text_far _CeruleanHouse2Text_74ea5
+	text_end
 
 CeruleanHouse2Text_74eaa:
-	TX_FAR _CeruleanHouse2Text_74eaa
-	db "@"
+	text_far _CeruleanHouse2Text_74eaa
+	text_end
 
 CeruleanHouse2Text_74eaf:
-	TX_FAR _CeruleanHouse2Text_74eaf
-	db "@"
+	text_far _CeruleanHouse2Text_74eaf
+	text_end
 
 CeruleanHouse2Text_74eb4:
-	TX_FAR _CeruleanHouse2Text_74eb4
-	db "@"
+	text_far _CeruleanHouse2Text_74eb4
+	text_end
 
 CeruleanHouse2Text_74eb9:
-	TX_FAR _CeruleanHouse2Text_74eb9
-	db "@"
+	text_far _CeruleanHouse2Text_74eb9
+	text_end

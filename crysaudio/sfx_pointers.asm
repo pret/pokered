@@ -148,9 +148,9 @@ SFX:
 	dba Sfx_KeyItem
 	dba Sfx_Fanfare2
 	dba Sfx_RegisterPhoneNumber
-	dba Sfx_3RdPlace
-	dba Sfx_GetEggFromDayCareMan
-	dba Sfx_GetEggFromDayCareLady
+	dba Sfx_3rdPlace
+	dba Sfx_GetEgg
+	dba Sfx_GetEgg
 	dba Sfx_MoveDeleted
 	dba Sfx_2ndPlace
 	dba Sfx_1stPlace
@@ -188,9 +188,9 @@ SFX:
 	dba Sfx_TrainArrived
 	dba Sfx_StopSlot
 	dba Sfx_2Boops
+; new to Crystal
 	dba Sfx_GlassTing
 	dba Sfx_GlassTing2
-; new to Crystal
 	dba Sfx_IntroUnown1
 	dba Sfx_IntroUnown2
 	dba Sfx_IntroUnown3

@@ -23,53 +23,57 @@ PewterCityScript0:
 PewterCityScript_1925e:
 	CheckEvent EVENT_BEAT_BROCK
 	ret nz
+IF DEF(_DEBUG)
+	call DebugPressedOrHeldB
+	ret nz
+ENDC
 	ld hl, CoordsData_19277
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $5
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
 CoordsData_19277:
-	db $11,$23
-	db $11,$24
-	db $12,$25
-	db $13,$25
-	db $ff
+	dbmapcoord 35, 17
+	dbmapcoord 36, 17
+	dbmapcoord 37, 18
+	dbmapcoord 37, 19
+	db -1 ; end
 
 PewterCityScript1:
 	ld a, [wNPCMovementScriptPointerTableNum]
 	and a
 	ret nz
 	ld a, $3
-	ld [H_SPRITEINDEX], a
+	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_UP
-	ld [hSpriteFacingDirection], a
+	ldh [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, ($3 << 4) | SPRITE_FACING_UP
-	ld [hSpriteImageIndex], a
+	ldh [hSpriteImageIndex], a
 	call SetSpriteImageIndexAfterSettingFacingDirection
 	call PlayDefaultMusic
 	ld hl, wFlags_0xcd60
 	set 4, [hl]
 	ld a, $d
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $3c
-	ld [$ffeb], a
+	ldh [hSpriteScreenYCoord], a
 	ld a, $30
-	ld [$ffec], a
-	ld a, $c
-	ld [$ffed], a
-	ld a, $11
-	ld [$ffee], a
+	ldh [hSpriteScreenXCoord], a
+	ld a, 12
+	ldh [hSpriteMapYCoord], a
+	ld a, 17
+	ldh [hSpriteMapXCoord], a
 	ld a, $3
 	ld [wSpriteIndex], a
 	call SetSpritePosition1
 	ld a, $3
-	ld [H_SPRITEINDEX], a
+	ldh [hSpriteIndex], a
 	ld de, MovementData_PewterMuseumGuyExit
 	call MoveSprite
 	ld a, $2
@@ -81,7 +85,7 @@ MovementData_PewterMuseumGuyExit:
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
-	db $FF
+	db -1 ; end
 
 PewterCityScript2:
 	ld a, [wd730]
@@ -112,32 +116,32 @@ PewterCityScript4:
 	and a
 	ret nz
 	ld a, $5
-	ld [H_SPRITEINDEX], a
+	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_LEFT
-	ld [hSpriteFacingDirection], a
+	ldh [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, ($1 << 4) | SPRITE_FACING_LEFT
-	ld [hSpriteImageIndex], a
+	ldh [hSpriteImageIndex], a
 	call SetSpriteImageIndexAfterSettingFacingDirection
 	call PlayDefaultMusic
 	ld hl, wFlags_0xcd60
 	set 4, [hl]
 	ld a, $e
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $3c
-	ld [$ffeb], a
+	ldh [hSpriteScreenYCoord], a
 	ld a, $40
-	ld [$ffec], a
-	ld a, $16
-	ld [$ffed], a
-	ld a, $10
-	ld [$ffee], a
+	ldh [hSpriteScreenXCoord], a
+	ld a, 22
+	ldh [hSpriteMapYCoord], a
+	ld a, 16
+	ldh [hSpriteMapXCoord], a
 	ld a, $5
 	ld [wSpriteIndex], a
 	call SetSpritePosition1
 	ld a, $5
-	ld [H_SPRITEINDEX], a
+	ldh [hSpriteIndex], a
 	ld de, MovementData_PewterGymGuyExit
 	call MoveSprite
 	ld a, $5
@@ -150,7 +154,7 @@ MovementData_PewterGymGuyExit:
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
-	db $FF
+	db -1 ; end
 
 PewterCityScript5:
 	ld a, [wd730]
@@ -193,98 +197,98 @@ PewterCity_TextPointers:
 	dw PewterCityText14
 
 PewterCityText1:
-	TX_FAR _PewterCityText1
-	db "@"
+	text_far _PewterCityText1
+	text_end
 
 PewterCityText2:
-	TX_FAR _PewterCityText2
-	db "@"
+	text_far _PewterCityText2
+	text_end
 
 PewterCityText3:
-	TX_ASM
+	text_asm
 	ld hl, PewterCityText_193f1
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .asm_193c9
+	jr nz, .playerDidNotGoIntoMuseum
 	ld hl, PewterCityText_193f6
 	call PrintText
-	jr .asm_193ee
-.asm_193c9
+	jr .done
+.playerDidNotGoIntoMuseum
 	ld hl, PewterCityText_193fb
 	call PrintText
 	xor a
-	ld [hJoyPressed], a
-	ld [hJoyHeld], a
+	ldh [hJoyPressed], a
+	ldh [hJoyHeld], a
 	ld [wNPCMovementScriptFunctionNum], a
 	ld a, $2
 	ld [wNPCMovementScriptPointerTableNum], a
-	ld a, [H_LOADEDROMBANK]
+	ldh a, [hLoadedROMBank]
 	ld [wNPCMovementScriptBank], a
 	ld a, $3
 	ld [wSpriteIndex], a
 	call GetSpritePosition2
 	ld a, $1
 	ld [wPewterCityCurScript], a
-.asm_193ee
+.done
 	jp TextScriptEnd
 
 PewterCityText_193f1:
-	TX_FAR _PewterCityText_193f1
-	db "@"
+	text_far _PewterCityText_193f1
+	text_end
 
 PewterCityText_193f6:
-	TX_FAR _PewterCityText_193f6
-	db "@"
+	text_far _PewterCityText_193f6
+	text_end
 
 PewterCityText_193fb:
-	TX_FAR _PewterCityText_193fb
-	db "@"
+	text_far _PewterCityText_193fb
+	text_end
 
 PewterCityText13:
-	TX_FAR _PewterCityText13
-	db "@"
+	text_far _PewterCityText13
+	text_end
 
 PewterCityText4:
-	TX_ASM
+	text_asm
 	ld hl, PewterCityText_19427
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	cp $0
-	jr nz, .asm_1941e
+	jr nz, .playerDoesNotKnow
 	ld hl, PewterCityText_1942c
 	call PrintText
-	jr .asm_19424
-.asm_1941e
+	jr .done
+.playerDoesNotKnow
 	ld hl, PewterCityText_19431
 	call PrintText
-.asm_19424
+.done
 	jp TextScriptEnd
 
 PewterCityText_19427:
-	TX_FAR _PewterCityText_19427
-	db "@"
+	text_far _PewterCityText_19427
+	text_end
 
 PewterCityText_1942c:
-	TX_FAR _PewterCityText_1942c
-	db "@"
+	text_far _PewterCityText_1942c
+	text_end
 
 PewterCityText_19431:
-	TX_FAR _PewterCityText_19431
-	db "@"
+	text_far _PewterCityText_19431
+	text_end
 
 PewterCityText5:
-	TX_ASM
+	text_asm
 	ld hl, PewterCityText_1945d
 	call PrintText
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ld [wNPCMovementScriptFunctionNum], a
 	ld a, $3
 	ld [wNPCMovementScriptPointerTableNum], a
-	ld a, [H_LOADEDROMBANK]
+	ldh a, [hLoadedROMBank]
 	ld [wNPCMovementScriptBank], a
 	ld a, $5
 	ld [wSpriteIndex], a
@@ -294,29 +298,29 @@ PewterCityText5:
 	jp TextScriptEnd
 
 PewterCityText_1945d:
-	TX_FAR _PewterCityText_1945d
-	db "@"
+	text_far _PewterCityText_1945d
+	text_end
 
 PewterCityText14:
-	TX_FAR _PewterCityText14
-	db "@"
+	text_far _PewterCityText14
+	text_end
 
 PewterCityText6:
-	TX_FAR _PewterCityText6
-	db "@"
+	text_far _PewterCityText6
+	text_end
 
 PewterCityText7:
-	TX_FAR _PewterCityText7
-	db "@"
+	text_far _PewterCityText7
+	text_end
 
 PewterCityText10:
-	TX_FAR _PewterCityText10
-	db "@"
+	text_far _PewterCityText10
+	text_end
 
 PewterCityText11:
-	TX_FAR _PewterCityText11
-	db "@"
+	text_far _PewterCityText11
+	text_end
 
 PewterCityText12:
-	TX_FAR _PewterCityText12
-	db "@"
+	text_far _PewterCityText12
+	text_end

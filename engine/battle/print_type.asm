@@ -49,4 +49,4 @@ PrintType_:
 	pop hl
 	jp PlaceString
 
-INCLUDE "text/type_names.asm"
+INCLUDE "data/types/names.asm"

@@ -1,4 +1,4 @@
-LoadWildData:
+LoadWildData::
 	ld hl, WildDataPointers
 	ld a, [wCurMap]
 
@@ -16,10 +16,10 @@ LoadWildData:
 	jr z, .NoGrassData ; if no grass data, skip to surfing data
 	push hl
 	ld de, wGrassMons ; otherwise, load grass data
-	ld bc, $0014
+	ld bc, $14
 	call CopyData
 	pop hl
-	ld bc, $0014
+	ld bc, $14
 	add hl, bc
 .NoGrassData
 	ld a, [hli]
@@ -27,7 +27,7 @@ LoadWildData:
 	and a
 	ret z        ; if no water data, we're done
 	ld de, wWaterMons  ; otherwise, load surfing data
-	ld bc, $0014
+	ld bc, $14
 	jp CopyData
 
-INCLUDE "data/wild_mons.asm"
+INCLUDE "data/wild/grass_water.asm"

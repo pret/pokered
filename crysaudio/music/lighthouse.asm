@@ -1,18 +1,19 @@
 Music_Lighthouse:
-	musicheader 4, 1, Music_Lighthouse_Ch1
-	musicheader 1, 2, Music_Lighthouse_Ch2
-	musicheader 1, 3, Music_Lighthouse_Ch3
-	musicheader 1, 4, Music_Lighthouse_Ch4
+	channel_count 4
+	channel 1, Music_Lighthouse_Ch1
+	channel 2, Music_Lighthouse_Ch2
+	channel 3, Music_Lighthouse_Ch3
+	channel 4, Music_Lighthouse_Ch4
 
 Music_Lighthouse_Ch1:
 	tempo 144
-	volume $77
-	dutycycle $3
-	tone $0004
-	vibrato $8, $45
-	stereopanning $f
-Music_Lighthouse_branch_ee584:
-	notetype $c, $b3
+	volume 7, 7
+	duty_cycle 3
+	pitch_offset 4
+	vibrato 8, 4, 5
+	stereo_panning FALSE, TRUE
+.mainloop:
+	note_type 12, 11, 3
 	octave 3
 	note C#, 8
 	octave 2
@@ -27,29 +28,29 @@ Music_Lighthouse_branch_ee584:
 	note A_, 4
 	note B_, 4
 	note G#, 1
-	note __, 7
+	rest 7
 	octave 3
 	note C_, 4
 	octave 2
 	note G#, 1
-	note __, 1
+	rest 1
 	note G#, 1
-	note __, 1
+	rest 1
 	note G#, 1
-	note __, 1
+	rest 1
 	note C_, 2
 	note D#, 1
-	note __, 1
+	rest 1
 	note F#, 1
-	note __, 1
+	rest 1
 	note G#, 1
-	note __, 1
+	rest 1
 	note A_, 1
-	note __, 1
+	rest 1
 	note A_, 1
-	note __, 1
+	rest 1
 	note A_, 1
-	note __, 1
+	rest 1
 	octave 3
 	note C#, 8
 	octave 2
@@ -68,19 +69,19 @@ Music_Lighthouse_branch_ee584:
 	note F#, 2
 	note A_, 2
 	note G#, 1
-	note __, 7
+	rest 7
 	octave 3
 	note C_, 12
 	octave 2
 	note G#, 1
-	note __, 1
+	rest 1
 	note G#, 1
-	note __, 1
+	rest 1
 	note G#, 1
-	note __, 3
+	rest 3
 	octave 3
 	note C_, 1
-	note __, 3
+	rest 3
 	octave 2
 	note A_, 4
 	octave 3
@@ -126,14 +127,14 @@ Music_Lighthouse_branch_ee584:
 	note B_, 2
 	note A_, 2
 	note G#, 8
-	loopchannel 0, Music_Lighthouse_branch_ee584
+	sound_loop 0, .mainloop
 
 Music_Lighthouse_Ch2:
-	dutycycle $3
-	tone $0002
-	vibrato $10, $45
-Music_Lighthouse_branch_ee604:
-	notetype $c, $c5
+	duty_cycle 3
+	pitch_offset 2
+	vibrato 16, 4, 5
+.mainloop:
+	note_type 12, 12, 5
 	octave 3
 	note G#, 12
 	note F#, 2
@@ -142,18 +143,18 @@ Music_Lighthouse_branch_ee604:
 	octave 4
 	note C#, 8
 	note C_, 1
-	note __, 7
+	rest 7
 	octave 3
 	note G#, 16
-	intensity $c5
+	volume_envelope 12, 5
 	note C#, 1
-	note __, 1
+	rest 1
 	note C#, 1
-	note __, 1
+	rest 1
 	note C#, 1
-	note __, 1
+	rest 1
 	note C#, 1
-	note __, 1
+	rest 1
 	note G#, 12
 	note F#, 2
 	note G#, 2
@@ -161,17 +162,17 @@ Music_Lighthouse_branch_ee604:
 	octave 4
 	note C#, 8
 	note C_, 1
-	note __, 7
+	rest 7
 	note D#, 12
 	octave 3
 	note D#, 1
-	note __, 1
+	rest 1
 	note D#, 1
-	note __, 1
+	rest 1
 	note D#, 1
-	note __, 3
+	rest 3
 	note D#, 1
-	note __, 3
+	rest 3
 	octave 4
 	note E_, 12
 	note D#, 2
@@ -208,102 +209,102 @@ Music_Lighthouse_branch_ee604:
 	note D#, 2
 	note C#, 2
 	note C_, 8
-	loopchannel 0, Music_Lighthouse_branch_ee604
+	sound_loop 0, .mainloop
 
 Music_Lighthouse_Ch3:
-	notetype $c, $19
-	stereopanning $f0
-Music_Lighthouse_branch_ee65b:
+	note_type 12, 1, -1
+	stereo_panning TRUE, FALSE
+.mainloop:
 	octave 2
 	note G#, 2
-	note __, 2
+	rest 2
 	note D#, 2
-	note __, 2
+	rest 2
 	note F#, 2
-	note __, 2
+	rest 2
 	note G_, 2
-	note __, 2
-Music_Lighthouse_branch_ee664:
+	rest 2
+.loop1:
 	note G#, 2
-	note __, 2
+	rest 2
 	note D#, 2
-	note __, 2
+	rest 2
 	note F#, 2
-	note __, 2
+	rest 2
 	note A_, 2
-	note __, 2
-	loopchannel 2, Music_Lighthouse_branch_ee664
+	rest 2
+	sound_loop 2, .loop1
 	note G#, 2
-	note __, 2
+	rest 2
 	note D#, 2
-	note __, 2
+	rest 2
 	note F#, 2
-	note __, 2
+	rest 2
 	note A_, 2
 	octave 3
 	note C_, 2
 	note C#, 2
-	note __, 2
+	rest 2
 	octave 2
 	note G#, 2
-	note __, 2
+	rest 2
 	note A_, 2
-	note __, 2
+	rest 2
 	octave 3
 	note C_, 2
-	note __, 2
-Music_Lighthouse_branch_ee683:
+	rest 2
+.loop2:
 	note C#, 2
-	note __, 2
+	rest 2
 	octave 2
 	note G#, 2
-	note __, 2
+	rest 2
 	note A_, 2
-	note __, 2
+	rest 2
 	octave 3
 	note D_, 2
-	note __, 2
-	loopchannel 2, Music_Lighthouse_branch_ee683
+	rest 2
+	sound_loop 2, .loop2
 	note C#, 2
-	note __, 2
+	rest 2
 	octave 2
 	note G#, 2
-	note __, 2
+	rest 2
 	note A_, 2
-	note __, 2
+	rest 2
 	octave 3
 	note D#, 2
 	note F#, 2
-Music_Lighthouse_branch_ee69b:
+.loop3:
 	note E_, 2
-	note __, 2
+	rest 2
 	octave 2
 	note B_, 2
-	note __, 2
+	rest 2
 	octave 3
 	note C_, 2
-	note __, 2
+	rest 2
 	note F_, 2
-	note __, 2
-	loopchannel 8, Music_Lighthouse_branch_ee69b
-	loopchannel 0, Music_Lighthouse_branch_ee65b
+	rest 2
+	sound_loop 8, .loop3
+	sound_loop 0, .mainloop
 
 Music_Lighthouse_Ch4:
-	togglenoise $0
-	notetype $c
-Music_Lighthouse_branch_ee6b1:
-	stereopanning $f
-	note G#, 4
-	note F_, 2
-	note G#, 4
-	note F_, 2
-	note A_, 2
-	note A#, 2
-	stereopanning $ff
-	note G#, 2
-	note F_, 4
-	note G#, 2
-	note F_, 4
-	note G#, 2
-	note A_, 2
-	loopchannel 0, Music_Lighthouse_branch_ee6b1
+	toggle_noise 0
+	drum_speed 12
+.mainloop:
+	stereo_panning FALSE, TRUE
+	drum_note 9, 4
+	drum_note 6, 2
+	drum_note 9, 4
+	drum_note 6, 2
+	drum_note 10, 2
+	drum_note 11, 2
+	stereo_panning TRUE, TRUE
+	drum_note 9, 2
+	drum_note 6, 4
+	drum_note 9, 2
+	drum_note 6, 4
+	drum_note 9, 2
+	drum_note 10, 2
+	sound_loop 0, .mainloop

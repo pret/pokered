@@ -7,5 +7,5 @@ DiglettsCaveRoute2_TextPointers:
 	dw DiglettsCaveRoute2Text1
 
 DiglettsCaveRoute2Text1:
-	TX_FAR _DiglettsCaveRoute2Text1
-	db "@"
+	text_far _DiglettsCaveRoute2Text1
+	text_end

@@ -1,18 +1,18 @@
-Music_Pinballendcredits: ; 4ccb5
-	dbw $c0, Music_Pinballendcredits_Ch1
-	dbw $01, Music_Pinballendcredits_Ch2
-	dbw $02, Music_Pinballendcredits_Ch3
-	dbw $03, Music_Pinballendcredits_Ch4
-; 4ccc1
+Music_EndCredits:
+	channel_count 4
+	channel 1, Music_EndCredits_Ch1
+	channel 2, Music_EndCredits_Ch2
+	channel 3, Music_EndCredits_Ch3
+	channel 4, Music_EndCredits_Ch4
 
-Music_Pinballendcredits_Ch1: ; 4ccc1
+Music_EndCredits_Ch1:
 	tempo 144
-	volume $77
-	tone $0001
-	vibrato $14, $24
-	dutycycle $2
-	notetype $8, $93
-	note __, 3
+	volume 7, 7
+	pitch_offset 1
+	vibrato 20, 2, 4
+	duty_cycle 2
+	note_type 8, 9, 3
+	rest 3
 	octave 3
 	note F#, 3
 	octave 4
@@ -26,196 +26,196 @@ Music_Pinballendcredits_Ch1: ; 4ccc1
 	note B_, 2
 	note A_, 2
 	note G_, 2
-Music_Pinballendcredits_branch_4ccdf: ; 4ccdf
-	notetype $6, $48
+Music_EndCredits_branch_4ccdf:
+	note_type 6, 4, 8
 	octave 3
 	note A_, 1
-	intensity $18
+	volume_envelope 1, 8
 	note A_, 1
-	intensity $48
+	volume_envelope 4, 8
 	octave 4
 	note D_, 1
-	intensity $18
+	volume_envelope 1, 8
 	note D_, 1
-	loopchannel 2, Music_Pinballendcredits_branch_4ccdf
-Music_Pinballendcredits_branch_4ccf2: ; 4ccf2
-	intensity $68
+	sound_loop 2, Music_EndCredits_branch_4ccdf
+Music_EndCredits_branch_4ccf2:
+	volume_envelope 6, 8
 	octave 3
 	note A_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note A_, 1
-	intensity $68
+	volume_envelope 6, 8
 	octave 4
 	note D_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note D_, 1
-	loopchannel 2, Music_Pinballendcredits_branch_4ccf2
-Music_Pinballendcredits_branch_4cd04: ; 4cd04
-	intensity $88
+	sound_loop 2, Music_EndCredits_branch_4ccf2
+Music_EndCredits_branch_4cd04:
+	volume_envelope 8, 8
 	octave 3
 	note A_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note A_, 1
-	intensity $88
+	volume_envelope 8, 8
 	octave 4
 	note F#, 1
-	intensity $28
+	volume_envelope 2, 8
 	note F#, 1
-	loopchannel 2, Music_Pinballendcredits_branch_4cd04
-	intensity $a8
+	sound_loop 2, Music_EndCredits_branch_4cd04
+	volume_envelope 10, 8
 	octave 3
 	note A_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note A_, 1
-	intensity $a8
+	volume_envelope 10, 8
 	octave 4
 	note F#, 1
-	intensity $28
+	volume_envelope 2, 8
 	note F#, 1
-	intensity $88
+	volume_envelope 8, 8
 	note D_, 4
-	dutycycle $3
-	intensity $98
-	callchannel Music_Pinballendcredits_branch_4cef5
-Music_Pinballendcredits_branch_4cd2e: ; 4cd2e
-	pitchoffset 0, C#
-	callchannel Music_Pinballendcredits_branch_4cef5
-	pitchoffset 0, F_
-	callchannel Music_Pinballendcredits_branch_4cef5
-	pitchoffset 0, C_
+	duty_cycle 3
+	volume_envelope 9, 8
+	sound_call Music_EndCredits_branch_4cef5
+Music_EndCredits_branch_4cd2e:
+	transpose 0, 1
+	sound_call Music_EndCredits_branch_4cef5
+	transpose 0, 5
+	sound_call Music_EndCredits_branch_4cef5
+	transpose 0, 0
 	note D_, 2
-	note __, 2
+	rest 2
 	note D_, 4
-	note __, 4
+	rest 4
 	note D_, 1
-	note __, 1
+	rest 1
 	note D_, 1
-	note __, 1
+	rest 1
 	note D_, 1
-	note __, 1
+	rest 1
 	octave 3
 	note B_, 1
-	note __, 1
+	rest 1
 	note G_, 2
 	note D_, 2
 	octave 5
 	note D_, 6
-	note __, 2
+	rest 2
 	octave 3
 	note D_, 2
-	note __, 2
+	rest 2
 	note D_, 4
-	note __, 4
+	rest 4
 	note D_, 1
-	note __, 1
+	rest 1
 	note D_, 1
-	note __, 1
+	rest 1
 	note D#, 2
-	note __, 2
+	rest 2
 	note D#, 4
-	note __, 4
+	rest 4
 	note D#, 1
-	note __, 1
+	rest 1
 	note D#, 1
-	note __, 1
+	rest 1
 	note E_, 2
-	note __, 2
+	rest 2
 	note E_, 4
-	note __, 4
+	rest 4
 	note E_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 1
+	rest 1
 	note F_, 2
-	note __, 2
+	rest 2
 	note F_, 4
-	note __, 4
+	rest 4
 	note F_, 1
-	note __, 1
+	rest 1
 	note F_, 1
-	note __, 1
+	rest 1
 	octave 4
 	note C_, 1
-	note __, 1
+	rest 1
 	note C_, 2
 	octave 3
 	note E_, 4
 	note F#, 2
-	note __, 2
+	rest 2
 	note E_, 2
-	note __, 2
+	rest 2
 	note E_, 1
-	note __, 15
-	notetype $c, $b3
-	note __, 16
-	notetype $6, $88
+	rest 15
+	note_type 12, 11, 3
+	rest 16
+	note_type 6, 8, 8
 	octave 4
 	note D_, 1
-	note __, 1
+	rest 1
 	note D_, 1
-	note __, 1
+	rest 1
 	note D_, 4
-	note __, 4
+	rest 4
 	note D_, 1
-	note __, 1
+	rest 1
 	note D_, 1
-	note __, 1
+	rest 1
 	note D#, 2
-	note __, 2
+	rest 2
 	note D#, 2
-	note __, 2
+	rest 2
 	note G_, 8
 	note E_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 1
+	rest 1
 	note E_, 4
-	note __, 4
+	rest 4
 	note E_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 1
+	rest 1
 	note F_, 2
-	note __, 2
+	rest 2
 	note F_, 4
 	octave 3
 	note B_, 4
 	note F_, 4
 	note G_, 2
-	intensity $28
+	volume_envelope 2, 8
 	note G_, 2
-	notetype $8, $88
+	note_type 8, 8, 8
 	note C_, 1
 	note E_, 1
 	note G_, 1
-	notetype $c, $88
+	note_type 12, 8, 8
 	octave 4
 	note C_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note C_, 1
-	notetype $8, $88
+	note_type 8, 8, 8
 	octave 3
 	note E_, 1
 	note G_, 1
 	octave 4
 	note C_, 1
-	notetype $c, $88
+	note_type 12, 8, 8
 	note C#, 1
-	intensity $28
+	volume_envelope 2, 8
 	note C#, 1
-	notetype $8, $68
+	note_type 8, 6, 8
 	octave 3
 	note G_, 1
 	octave 4
 	note C#, 1
 	note F#, 1
-	notetype $c, $68
+	note_type 12, 6, 8
 	note G_, 1
 	note E_, 1
 	note C#, 1
 	octave 3
 	note A_, 1
-	intensity $88
+	volume_envelope 8, 8
 	octave 4
 	note D_, 1
 	octave 3
@@ -233,70 +233,70 @@ Music_Pinballendcredits_branch_4cd2e: ; 4cd2e
 	note D_, 1
 	octave 3
 	note A_, 1
-	notetype $6, $88
+	note_type 6, 8, 8
 	octave 4
 	note G#, 1
 	note A_, 7
-	dutycycle $2
-	vibrato $14, $4
-	note __, 8
-	notetype $8, $88
+	duty_cycle 2
+	vibrato 20, 0, 4
+	rest 8
+	note_type 8, 8, 8
 	note A_, 1
-	note __, 1
+	rest 1
 	note A_, 1
-	note __, 1
+	rest 1
 	note A_, 1
-	note __, 1
+	rest 1
 	note A#, 6
-	note __, 6
-	note __, 6
+	rest 6
+	rest 6
 	note A#, 1
-	note __, 1
+	rest 1
 	note A#, 1
-	note __, 1
+	rest 1
 	note A#, 1
-	note __, 1
+	rest 1
 	note A_, 6
-	note __, 6
-	note __, 6
+	rest 6
+	rest 6
 	note A_, 1
-	note __, 1
+	rest 1
 	note A_, 1
-	note __, 1
+	rest 1
 	note A_, 1
-	note __, 1
-	intensity $58
+	rest 1
+	volume_envelope 5, 8
 	note A#, 6
 	note A#, 1
-	note __, 1
+	rest 1
 	note A#, 1
-	note __, 1
+	rest 1
 	note A#, 1
-	note __, 1
+	rest 1
 	note B_, 6
 	note B_, 1
-	note __, 1
-	intensity $68
+	rest 1
+	volume_envelope 6, 8
 	note B_, 1
-	note __, 1
-	intensity $78
+	rest 1
+	volume_envelope 7, 8
 	note B_, 1
-	note __, 1
-	notetype $c, $88
+	rest 1
+	note_type 12, 8, 8
 	octave 5
 	note F#, 1
-	note __, 1
+	rest 1
 	note F#, 1
-	note __, 1
-	notetype $8, $98
+	rest 1
+	note_type 8, 9, 8
 	note F#, 1
-	note __, 1
+	rest 1
 	note F#, 1
-	note __, 1
+	rest 1
 	note F#, 1
-	note __, 1
-	vibrato $14, $24
-	notetype $c, $62
+	rest 1
+	vibrato 20, 2, 4
+	note_type 12, 6, 2
 	octave 3
 	note B_, 2
 	octave 4
@@ -306,7 +306,7 @@ Music_Pinballendcredits_branch_4cd2e: ; 4cd2e
 	octave 4
 	note C_, 2
 	note E_, 2
-	notetype $8, $62
+	note_type 8, 6, 2
 	note G_, 2
 	note F#, 2
 	note F_, 2
@@ -320,7 +320,7 @@ Music_Pinballendcredits_branch_4cd2e: ; 4cd2e
 	note B_, 2
 	note A#, 2
 	note A_, 2
-	notetype $c, $62
+	note_type 12, 6, 2
 	note G_, 1
 	note D_, 1
 	note G_, 1
@@ -337,9 +337,9 @@ Music_Pinballendcredits_branch_4cd2e: ; 4cd2e
 	note A_, 1
 	octave 5
 	note A_, 1
-	intensity $18
+	volume_envelope 1, 8
 	note A_, 1
-	intensity $62
+	volume_envelope 6, 2
 	note E_, 1
 	note C_, 1
 	octave 4
@@ -351,29 +351,29 @@ Music_Pinballendcredits_branch_4cd2e: ; 4cd2e
 	note C_, 1
 	octave 5
 	note A_, 1
-	intensity $18
+	volume_envelope 1, 8
 	note A_, 1
-	intensity $62
+	volume_envelope 6, 2
 	note F_, 1
 	note C_, 1
-	intensity $98
+	volume_envelope 9, 8
 	octave 3
 	note A_, 3
 	note G#, 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note A_, 2
-	note __, 2
+	rest 2
 	note B_, 2
-	notetype $8, $98
+	note_type 8, 9, 8
 	octave 4
 	note F#, 1
-	note __, 1
+	rest 1
 	note F#, 1
-	note __, 1
+	rest 1
 	note F#, 1
-	note __, 1
-	intensity $85
+	rest 1
+	volume_envelope 8, 5
 	octave 5
 	note E_, 6
 	note D#, 6
@@ -385,101 +385,99 @@ Music_Pinballendcredits_branch_4cd2e: ; 4cd2e
 	note B_, 6
 	octave 5
 	note D_, 6
-	dutycycle $3
-	notetype $6, $a8
+	duty_cycle 3
+	note_type 6, 10, 8
 	octave 4
 	note E_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 1
+	rest 1
 	note E_, 4
-	note __, 4
+	rest 4
 	note E_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 1
+	rest 1
 	note E_, 2
-	note __, 2
+	rest 2
 	note E_, 2
-	note __, 2
-	notetype $8, $a8
+	rest 2
+	note_type 8, 10, 8
 	note E_, 1
-	note __, 1
+	rest 1
 	note C#, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 1
-	notetype $c, $52
+	rest 1
+	note_type 12, 5, 2
 	note F#, 1
 	note A_, 1
-	intensity $72
+	volume_envelope 7, 2
 	note F#, 1
 	note A_, 1
-	intensity $92
+	volume_envelope 9, 2
 	note F#, 1
 	note A_, 1
-	intensity $b2
+	volume_envelope 11, 2
 	note F#, 1
 	note A_, 1
-	intensity $52
+	volume_envelope 5, 2
 	note F#, 1
 	octave 5
 	note D_, 1
-	intensity $72
+	volume_envelope 7, 2
 	octave 4
 	note A_, 1
 	octave 5
 	note D_, 1
-	intensity $92
+	volume_envelope 9, 2
 	octave 4
 	note A_, 1
 	octave 5
 	note D_, 1
-	intensity $b2
+	volume_envelope 11, 2
 	octave 4
 	note A_, 1
 	octave 5
 	note D_, 1
-	intensity $98
+	volume_envelope 9, 8
 	octave 3
 	note B_, 1
-	note __, 1
+	rest 1
 	note B_, 2
-	note __, 2
-	notetype $6, $98
+	rest 2
+	note_type 6, 9, 8
 	note B_, 1
-	note __, 1
+	rest 1
 	note B_, 1
-	note __, 1
+	rest 1
 	note B_, 2
-	note __, 2
+	rest 2
 	note B_, 2
-	note __, 10
-	loopchannel 0, Music_Pinballendcredits_branch_4cd2e
-; 4cef5
+	rest 10
+	sound_loop 0, Music_EndCredits_branch_4cd2e
 
-Music_Pinballendcredits_branch_4cef5: ; 4cef5
+Music_EndCredits_branch_4cef5:
 	octave 3
 	note B_, 2
-	note __, 2
+	rest 2
 	note B_, 4
-	note __, 4
+	rest 4
 	note B_, 1
-	note __, 1
+	rest 1
 	note B_, 1
-	note __, 1
+	rest 1
 	note B_, 2
-	note __, 2
+	rest 2
 	note B_, 2
-	note __, 10
-	endchannel
-; 4cf03
+	rest 10
+	sound_ret
 
-Music_Pinballendcredits_Ch2: ; 4cf03
-	vibrato $14, $24
-	dutycycle $2
-	notetype $c, $b3
-	note __, 2
+Music_EndCredits_Ch2:
+	vibrato 20, 2, 4
+	duty_cycle 2
+	note_type 12, 11, 3
+	rest 2
 	octave 4
 	note D_, 2
 	octave 5
@@ -487,82 +485,82 @@ Music_Pinballendcredits_Ch2: ; 4cf03
 	note C_, 2
 	octave 4
 	note B_, 2
-	notetype $8, $b3
+	note_type 8, 11, 3
 	note A_, 2
 	note G_, 2
 	note F#, 2
 	note G_, 2
 	note F#, 2
 	note F_, 2
-	intensity $57
+	volume_envelope 5, 7
 	note F#, 6
-	intensity $67
+	volume_envelope 6, 7
 	note G_, 6
-	intensity $87
+	volume_envelope 8, 7
 	note A_, 6
-	intensity $a7
+	volume_envelope 10, 7
 	octave 5
 	note C_, 6
-	dutycycle $3
-	notetype $6, $a8
+	duty_cycle 3
+	note_type 6, 10, 8
 	octave 4
 	note G_, 2
-	intensity $28
+	volume_envelope 2, 8
 	note G_, 2
-	callchannel Music_Pinballendcredits_branch_4d1f2
-Music_Pinballendcredits_branch_4cf36: ; 4cf36
-	pitchoffset 0, D_
-	callchannel Music_Pinballendcredits_branch_4d21e
+	sound_call Music_EndCredits_branch_4d1f2
+Music_EndCredits_branch_4cf36:
+	transpose 0, 2
+	sound_call Music_EndCredits_branch_4d21e
 	note A_, 2
-	intensity $28
+	volume_envelope 2, 8
 	note A_, 2
-	intensity $a8
+	volume_envelope 10, 8
 	octave 5
 	note G_, 2
-	intensity $88
+	volume_envelope 8, 8
 	octave 2
 	note A_, 1
 	note G#, 1
-	intensity $a8
+	volume_envelope 10, 8
 	note G_, 2
-	intensity $28
+	volume_envelope 2, 8
 	note G_, 2
-	intensity $a8
+	volume_envelope 10, 8
 	note G_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note G_, 1
-	intensity $a8
+	volume_envelope 10, 8
 	note G_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note G_, 1
-	pitchoffset 0, F_
-	callchannel Music_Pinballendcredits_branch_4d21e
+	transpose 0, 5
+	sound_call Music_EndCredits_branch_4d21e
 	octave 5
 	note C_, 2
-	intensity $28
+	volume_envelope 2, 8
 	note C_, 2
-	intensity $a8
+	volume_envelope 10, 8
 	note G_, 2
-	intensity $28
+	volume_envelope 2, 8
 	note G_, 2
-	intensity $a8
+	volume_envelope 10, 8
 	octave 4
 	note E_, 4
-	intensity $78
+	volume_envelope 7, 8
 	note D#, 1
 	note D_, 1
 	note C#, 1
 	note C_, 1
-	pitchoffset 0, E_
-	callchannel Music_Pinballendcredits_branch_4d21e
+	transpose 0, 4
+	sound_call Music_EndCredits_branch_4d21e
 	note G_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note G_, 1
-	intensity $a8
+	volume_envelope 10, 8
 	note D_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note D_, 1
-	intensity $a8
+	volume_envelope 10, 8
 	octave 3
 	note B_, 2
 	octave 4
@@ -576,96 +574,96 @@ Music_Pinballendcredits_branch_4cf36: ; 4cf36
 	note A#, 4
 	note A_, 4
 	note B_, 4
-	intensity $28
+	volume_envelope 2, 8
 	note B_, 2
-	note __, 2
-	dutycycle $2
-	intensity $a2
+	rest 2
+	duty_cycle 2
+	volume_envelope 10, 2
 	octave 4
 	note B_, 1
-	intensity $22
+	volume_envelope 2, 2
 	note B_, 1
-	intensity $a2
+	volume_envelope 10, 2
 	note B_, 2
 	note A#, 1
-	intensity $22
+	volume_envelope 2, 2
 	note A#, 1
-	intensity $a2
+	volume_envelope 10, 2
 	note A#, 2
 	note A_, 1
-	intensity $22
+	volume_envelope 2, 2
 	note A_, 1
-	intensity $a2
+	volume_envelope 10, 2
 	note A_, 2
-	dutycycle $3
-	intensity $a8
+	duty_cycle 3
+	volume_envelope 10, 8
 	octave 3
 	note B_, 4
 	note A#, 4
 	note A_, 4
 	note B_, 4
-	intensity $28
+	volume_envelope 2, 8
 	note B_, 2
-	note __, 2
-	dutycycle $2
-	intensity $a2
+	rest 2
+	duty_cycle 2
+	volume_envelope 10, 2
 	octave 4
 	note B_, 1
-	intensity $22
+	volume_envelope 2, 2
 	note B_, 1
-	intensity $a2
+	volume_envelope 10, 2
 	note B_, 2
 	octave 5
 	note C_, 1
-	intensity $22
+	volume_envelope 2, 2
 	note C_, 1
-	intensity $a2
+	volume_envelope 10, 2
 	note C_, 2
 	note D_, 1
-	intensity $22
+	volume_envelope 2, 2
 	note D_, 1
-	intensity $a2
+	volume_envelope 10, 2
 	note D_, 2
-	dutycycle $3
-	intensity $a8
+	duty_cycle 3
+	volume_envelope 10, 8
 	octave 4
 	note E_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note E_, 1
-	intensity $a8
+	volume_envelope 10, 8
 	note E_, 2
 	octave 3
 	note G_, 4
 	note A_, 2
-	intensity $28
+	volume_envelope 2, 8
 	note A_, 2
-	intensity $a8
+	volume_envelope 10, 8
 	note G_, 2
-	intensity $28
+	volume_envelope 2, 8
 	note G_, 2
-	intensity $a8
+	volume_envelope 10, 8
 	note G_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note G_, 2
-	note __, 1
-	intensity $a8
+	rest 1
+	volume_envelope 10, 8
 	note B_, 4
-	notetype $8, $a8
+	note_type 8, 10, 8
 	note A_, 2
 	note G#, 2
 	note G_, 2
-	notetype $6, $a8
+	note_type 6, 10, 8
 	note F_, 1
 	note F#, 3
 	note E_, 2
-	intensity $28
+	volume_envelope 2, 8
 	note E_, 2
-	intensity $a8
+	volume_envelope 10, 8
 	note D_, 2
-	intensity $28
+	volume_envelope 2, 8
 	note D_, 2
-	note __, 4
-	intensity $a8
+	rest 4
+	volume_envelope 10, 8
 	octave 4
 	note D_, 2
 	note F#, 2
@@ -674,16 +672,16 @@ Music_Pinballendcredits_branch_4cf36: ; 4cf36
 	note C_, 2
 	octave 4
 	note A#, 8
-	dutycycle $2
-	callchannel Music_Pinballendcredits_branch_4d24f
+	duty_cycle 2
+	sound_call Music_EndCredits_branch_4d24f
 	note B_, 2
-	intensity $28
+	volume_envelope 2, 8
 	note B_, 2
-	intensity $a8
+	volume_envelope 10, 8
 	octave 5
 	note C_, 4
 	note D_, 4
-	callchannel Music_Pinballendcredits_branch_4d24f
+	sound_call Music_EndCredits_branch_4d24f
 	note G_, 4
 	note A_, 4
 	note G_, 4
@@ -691,15 +689,15 @@ Music_Pinballendcredits_branch_4cf36: ; 4cf36
 	note E_, 4
 	octave 4
 	note G_, 2
-	intensity $28
+	volume_envelope 2, 8
 	note G_, 2
-	intensity $a8
+	volume_envelope 10, 8
 	note A_, 4
 	note G_, 2
-	intensity $28
+	volume_envelope 2, 8
 	note G_, 2
-	note __, 3
-	intensity $a8
+	rest 3
+	volume_envelope 10, 8
 	note A#, 1
 	note B_, 4
 	note A_, 4
@@ -707,9 +705,9 @@ Music_Pinballendcredits_branch_4cf36: ; 4cf36
 	note G#, 1
 	note A_, 11
 	note G_, 2
-	intensity $28
+	volume_envelope 2, 8
 	note G_, 2
-	intensity $a8
+	volume_envelope 10, 8
 	octave 5
 	note D_, 2
 	octave 4
@@ -719,491 +717,486 @@ Music_Pinballendcredits_branch_4cf36: ; 4cf36
 	octave 5
 	note F_, 1
 	note F#, 7
-	vibrato $14, $4
-	callchannel Music_Pinballendcredits_branch_4d23e
-	intensity $a8
+	vibrato 20, 0, 4
+	sound_call Music_EndCredits_branch_4d23e
+	volume_envelope 10, 8
 	note G_, 6
 	octave 2
 	note C#, 1
-	intensity $28
+	volume_envelope 2, 8
 	note C#, 1
-	intensity $a8
+	volume_envelope 10, 8
 	note A#, 1
-	intensity $28
+	volume_envelope 2, 8
 	note A#, 1
-	intensity $a8
+	volume_envelope 10, 8
 	octave 3
 	note C#, 1
-	intensity $28
+	volume_envelope 2, 8
 	note C#, 1
-	intensity $a8
+	volume_envelope 10, 8
 	octave 2
 	note D_, 6
-Music_Pinballendcredits_branch_4d073: ; 4d073
+Music_EndCredits_branch_4d073:
 	octave 5
 	note G_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note G_, 1
-	intensity $a8
-	loopchannel 3, Music_Pinballendcredits_branch_4d073
+	volume_envelope 10, 8
+	sound_loop 3, Music_EndCredits_branch_4d073
 	note F#, 6
 	octave 2
 	note D_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note D_, 1
-	intensity $a8
+	volume_envelope 10, 8
 	note A_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note A_, 1
-	intensity $a8
+	volume_envelope 10, 8
 	note C#, 1
-	intensity $28
+	volume_envelope 2, 8
 	note C#, 1
-	intensity $a8
-	callchannel Music_Pinballendcredits_branch_4d23e
-	intensity $68
+	volume_envelope 10, 8
+	sound_call Music_EndCredits_branch_4d23e
+	volume_envelope 6, 8
 	note G_, 6
-Music_Pinballendcredits_branch_4d098: ; 4d098
-	intensity $68
+Music_EndCredits_branch_4d098:
+	volume_envelope 6, 8
 	note G_, 1
-	intensity $18
+	volume_envelope 1, 8
 	note G_, 1
-	loopchannel 3, Music_Pinballendcredits_branch_4d098
-	intensity $88
+	sound_loop 3, Music_EndCredits_branch_4d098
+	volume_envelope 8, 8
 	note G#, 6
-Music_Pinballendcredits_branch_4d0a5: ; 4d0a5
-	intensity $78
+Music_EndCredits_branch_4d0a5:
+	volume_envelope 7, 8
 	note G#, 1
-	intensity $18
+	volume_envelope 1, 8
 	note G#, 1
-	loopchannel 3, Music_Pinballendcredits_branch_4d0a5
-Music_Pinballendcredits_branch_4d0af: ; 4d0af
-	notetype $c, $a8
+	sound_loop 3, Music_EndCredits_branch_4d0a5
+Music_EndCredits_branch_4d0af:
+	note_type 12, 10, 8
 	note A_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note A_, 1
-	loopchannel 2, Music_Pinballendcredits_branch_4d0af
-Music_Pinballendcredits_branch_4d0ba: ; 4d0ba
-	notetype $8, $b8
+	sound_loop 2, Music_EndCredits_branch_4d0af
+Music_EndCredits_branch_4d0ba:
+	note_type 8, 11, 8
 	note A_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note A_, 1
-	loopchannel 2, Music_Pinballendcredits_branch_4d0ba
-	intensity $b8
+	sound_loop 2, Music_EndCredits_branch_4d0ba
+	volume_envelope 11, 8
 	note A_, 1
-	vibrato $14, $24
-	dutycycle $2
-	intensity $78
+	vibrato 20, 2, 4
+	duty_cycle 2
+	volume_envelope 7, 8
 	octave 4
 	note D#, 1
-	notetype $c, $a8
+	note_type 12, 10, 8
 	note E_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note E_, 1
-	intensity $a8
+	volume_envelope 10, 8
 	note G_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note G_, 1
-	intensity $a8
+	volume_envelope 10, 8
 	note A_, 2
 	note G_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note G_, 1
-	intensity $a8
+	volume_envelope 10, 8
 	note A#, 2
 	note G_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note G_, 1
-	intensity $a8
+	volume_envelope 10, 8
 	note A_, 2
 	note G_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note G_, 1
-	intensity $a8
+	volume_envelope 10, 8
 	note B_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note B_, 1
-	intensity $a8
+	volume_envelope 10, 8
 	note B_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note B_, 1
-	intensity $a8
+	volume_envelope 10, 8
 	note A#, 2
 	note B_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note B_, 1
-	intensity $a8
+	volume_envelope 10, 8
 	octave 5
 	note D_, 2
 	note C_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note C_, 1
-	intensity $a8
+	volume_envelope 10, 8
 	octave 4
 	note B_, 2
 	octave 5
 	note D_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note D_, 1
-	intensity $a8
+	volume_envelope 10, 8
 	note C_, 2
 	octave 4
 	note E_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note E_, 1
-	intensity $a8
+	volume_envelope 10, 8
 	note F#, 2
 	note G_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note G_, 1
-	intensity $a8
+	volume_envelope 10, 8
 	note A_, 2
 	note B_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note B_, 1
-	intensity $a8
+	volume_envelope 10, 8
 	note A_, 2
 	note G_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note G_, 1
-	intensity $a8
+	volume_envelope 10, 8
 	note F#, 3
 	note F_, 1
 	note E_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note E_, 1
-	intensity $a8
+	volume_envelope 10, 8
 	note F#, 2
-	intensity $28
+	volume_envelope 2, 8
 	note F#, 1
-	note __, 1
-	intensity $a8
+	rest 1
+	volume_envelope 10, 8
 	note G_, 2
-	notetype $8, $a8
+	note_type 8, 10, 8
 	octave 5
 	note D_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note D_, 1
-	intensity $a8
+	volume_envelope 10, 8
 	note D_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note D_, 1
-	intensity $a8
+	volume_envelope 10, 8
 	note D_, 1
-	intensity $78
-	dutycycle $3
+	volume_envelope 7, 8
+	duty_cycle 3
 	octave 3
 	note D#, 1
-	notetype $6, $a8
+	note_type 6, 10, 8
 	note E_, 2
-	intensity $28
+	volume_envelope 2, 8
 	note E_, 2
-	intensity $a8
+	volume_envelope 10, 8
 	note G_, 2
-	intensity $28
+	volume_envelope 2, 8
 	note G_, 2
-	intensity $a8
+	volume_envelope 10, 8
 	note A_, 4
 	note G_, 2
-	intensity $28
+	volume_envelope 2, 8
 	note G_, 2
-	intensity $a8
+	volume_envelope 10, 8
 	note A#, 4
 	note G_, 2
-	intensity $28
+	volume_envelope 2, 8
 	note G_, 2
-	intensity $a8
+	volume_envelope 10, 8
 	note A_, 4
 	note G_, 2
-	intensity $28
+	volume_envelope 2, 8
 	note G_, 2
-	intensity $a8
+	volume_envelope 10, 8
 	note B_, 2
-	intensity $28
+	volume_envelope 2, 8
 	note B_, 2
-	intensity $a8
+	volume_envelope 10, 8
 	note B_, 2
-	intensity $28
+	volume_envelope 2, 8
 	note B_, 2
-	intensity $a8
+	volume_envelope 10, 8
 	note A#, 4
 	note B_, 2
-	intensity $28
+	volume_envelope 2, 8
 	note B_, 2
-	intensity $a8
+	volume_envelope 10, 8
 	octave 4
 	note D_, 4
 	note C_, 2
-	intensity $28
+	volume_envelope 2, 8
 	note C_, 2
-	intensity $a8
+	volume_envelope 10, 8
 	octave 3
 	note B_, 4
 	octave 4
 	note D_, 2
-	intensity $28
+	volume_envelope 2, 8
 	note D_, 2
-Music_Pinballendcredits_branch_4d1a3: ; 4d1a3
-	intensity $b8
+Music_EndCredits_branch_4d1a3:
+	volume_envelope 11, 8
 	octave 5
 	note C_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note C_, 1
-	loopchannel 2, Music_Pinballendcredits_branch_4d1a3
-	intensity $b8
+	sound_loop 2, Music_EndCredits_branch_4d1a3
+	volume_envelope 11, 8
 	note C_, 4
-	intensity $28
+	volume_envelope 2, 8
 	note C_, 2
-	note __, 2
-Music_Pinballendcredits_branch_4d1b5: ; 4d1b5
-	intensity $b8
+	rest 2
+Music_EndCredits_branch_4d1b5:
+	volume_envelope 11, 8
 	note C_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note C_, 1
-	loopchannel 2, Music_Pinballendcredits_branch_4d1b5
-Music_Pinballendcredits_branch_4d1bf: ; 4d1bf
-	intensity $b8
+	sound_loop 2, Music_EndCredits_branch_4d1b5
+Music_EndCredits_branch_4d1bf:
+	volume_envelope 11, 8
 	note C#, 2
-	intensity $28
+	volume_envelope 2, 8
 	note C#, 2
-	loopchannel 2, Music_Pinballendcredits_branch_4d1bf
-	notetype $8, $b8
+	sound_loop 2, Music_EndCredits_branch_4d1bf
+	note_type 8, 11, 8
 	note C#, 1
-	intensity $28
+	volume_envelope 2, 8
 	note C#, 1
-	intensity $b8
+	volume_envelope 11, 8
 	octave 4
 	note B_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note B_, 1
-	intensity $b8
+	volume_envelope 11, 8
 	octave 5
 	note C#, 1
-	intensity $28
+	volume_envelope 2, 8
 	note C#, 1
-	intensity $a8
+	volume_envelope 10, 8
 	note D_, 12
-	intensity $b8
+	volume_envelope 11, 8
 	note F#, 12
-	notetype $6, $a8
+	note_type 6, 10, 8
 	note G_, 2
-	intensity $28
+	volume_envelope 2, 8
 	note G_, 2
-	callchannel Music_Pinballendcredits_branch_4d1f2
-	loopchannel 0, Music_Pinballendcredits_branch_4cf36
-; 4d1f2
+	sound_call Music_EndCredits_branch_4d1f2
+	sound_loop 0, Music_EndCredits_branch_4cf36
 
-Music_Pinballendcredits_branch_4d1f2: ; 4d1f2
-	intensity $a8
+Music_EndCredits_branch_4d1f2:
+	volume_envelope 10, 8
 	octave 4
 	note G_, 4
-	intensity $28
+	volume_envelope 2, 8
 	note G_, 2
-	note __, 2
-	intensity $a8
+	rest 2
+	volume_envelope 10, 8
 	note G_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note G_, 1
-	intensity $a8
+	volume_envelope 10, 8
 	note G_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note G_, 1
-	intensity $a8
-	pitchoffset 0, C_
+	volume_envelope 10, 8
+	transpose 0, 0
 	note G_, 2
-	intensity $28
+	volume_envelope 2, 8
 	note G_, 2
-	intensity $a8
+	volume_envelope 10, 8
 	octave 5
 	note G_, 2
-	intensity $28
+	volume_envelope 2, 8
 	note G_, 2
-	intensity $a8
+	volume_envelope 10, 8
 	octave 2
 	note G_, 2
-	intensity $28
+	volume_envelope 2, 8
 	note G_, 2
-	note __, 4
-	endchannel
-; 4d21e
+	rest 4
+	sound_ret
 
-Music_Pinballendcredits_branch_4d21e: ; 4d21e
-	notetype $6, $a8
+Music_EndCredits_branch_4d21e:
+	note_type 6, 10, 8
 	octave 4
 	note G_, 2
-	intensity $28
+	volume_envelope 2, 8
 	note G_, 2
-	intensity $a8
+	volume_envelope 10, 8
 	note G_, 4
-	intensity $28
+	volume_envelope 2, 8
 	note G_, 2
-	note __, 2
-	intensity $a8
+	rest 2
+	volume_envelope 10, 8
 	note G_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note G_, 1
-	intensity $a8
+	volume_envelope 10, 8
 	note G_, 1
-	intensity $28
+	volume_envelope 2, 8
 	note G_, 1
-	intensity $a8
-	pitchoffset 0, C_
-	endchannel
-; 4d23e
+	volume_envelope 10, 8
+	transpose 0, 0
+	sound_ret
 
-Music_Pinballendcredits_branch_4d23e: ; 4d23e
-	notetype $8, $a8
+Music_EndCredits_branch_4d23e:
+	note_type 8, 10, 8
 	octave 2
 	note D_, 6
-Music_Pinballendcredits_branch_4d243: ; 4d243
-	intensity $a8
+Music_EndCredits_branch_4d243:
+	volume_envelope 10, 8
 	octave 5
 	note F#, 1
-	intensity $28
+	volume_envelope 2, 8
 	note F#, 1
-	loopchannel 3, Music_Pinballendcredits_branch_4d243
-	endchannel
-; 4d24f
+	sound_loop 3, Music_EndCredits_branch_4d243
+	sound_ret
 
-Music_Pinballendcredits_branch_4d24f: ; 4d24f
+Music_EndCredits_branch_4d24f:
 	octave 4
 	note B_, 4
 	note A#, 4
 	note A_, 4
 	note B_, 2
-	intensity $28
+	volume_envelope 2, 8
 	note B_, 2
-	note __, 4
-	intensity $a8
-	endchannel
-; 4d25b
+	rest 4
+	volume_envelope 10, 8
+	sound_ret
 
-Music_Pinballendcredits_Ch3: ; 4d25b
-	notetype $8, $12
+Music_EndCredits_Ch3:
+	note_type 8, 1, 2
 	octave 1
 	note D_, 1
-	intensity $22
+	volume_envelope 2, 2
 	note D_, 1
 	note D_, 1
-	notetype $c, $22
+	note_type 12, 2, 2
 	octave 2
 	note D_, 16
-	notetype $6, $32
+	note_type 6, 3, 2
 	octave 1
 	note D_, 5
-	note __, 3
+	rest 3
 	note D_, 5
-	note __, 3
-	intensity $22
+	rest 3
+	volume_envelope 2, 2
 	note D_, 3
-	note __, 1
-	notetype $8, $12
+	rest 1
+	note_type 8, 1, 2
 	octave 3
 	note D_, 1
-	intensity $32
+	volume_envelope 3, 2
 	note D_, 1
 	note D_, 1
-	intensity $12
+	volume_envelope 1, 2
 	note D_, 3
 	octave 2
 	note D_, 1
-	intensity $22
+	volume_envelope 2, 2
 	note D_, 1
 	note D_, 1
-	callchannel Music_Pinballendcredits_branch_4d401
-	note __, 2
+	sound_call Music_EndCredits_branch_4d401
+	rest 2
 	octave 1
 	note G_, 2
-	note __, 6
-Music_Pinballendcredits_branch_4d28e: ; 4d28e
-	callchannel Music_Pinballendcredits_branch_4d401
-	intensity $32
+	rest 6
+Music_EndCredits_branch_4d28e:
+	sound_call Music_EndCredits_branch_4d401
+	volume_envelope 3, 2
 	octave 1
 	note A_, 1
 	note G#, 1
-	intensity $22
+	volume_envelope 2, 2
 	note G_, 2
-	note __, 2
+	rest 2
 	note G_, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
-	callchannel Music_Pinballendcredits_branch_4d401
-	note __, 2
-	intensity $32
+	rest 1
+	sound_call Music_EndCredits_branch_4d401
+	rest 2
+	volume_envelope 3, 2
 	note G_, 4
 	note F#, 1
 	note F_, 1
 	note E_, 1
 	note D#, 1
-	intensity $22
+	volume_envelope 2, 2
 	octave 2
 	note G_, 2
-	note __, 2
+	rest 2
 	note G_, 4
-	note __, 4
+	rest 4
 	note G_, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note B_, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note D_, 2
 	note G_, 2
 	octave 4
 	note B_, 6
-	note __, 2
-Music_Pinballendcredits_branch_4d2bd: ; 4d2bd
+	rest 2
+Music_EndCredits_branch_4d2bd:
 	octave 1
 	note G_, 2
-	note __, 2
+	rest 2
 	note G_, 4
-	note __, 4
+	rest 4
 	note G_, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note G_, 2
-	note __, 2
+	rest 2
 	octave 2
 	note G_, 4
-	note __, 4
+	rest 4
 	octave 1
 	note G_, 1
-	note __, 1
-	intensity $32
+	rest 1
+	volume_envelope 3, 2
 	note G_, 1
-	note __, 1
-	intensity $22
-	loopchannel 2, Music_Pinballendcredits_branch_4d2bd
+	rest 1
+	volume_envelope 2, 2
+	sound_loop 2, Music_EndCredits_branch_4d2bd
 	octave 2
 	note C_, 1
-	note __, 1
+	rest 1
 	note G_, 2
 	note C_, 2
 	octave 1
 	note G_, 2
 	octave 2
 	note C_, 6
-	note __, 2
+	rest 2
 	note C#, 1
-	note __, 3
+	rest 3
 	note G_, 4
-	notetype $8, $22
+	note_type 8, 2, 2
 	note C#, 2
 	note G_, 2
 	octave 3
 	note C#, 2
-	notetype $6, $22
+	note_type 6, 2, 2
 	octave 2
 	note C#, 1
 	note D_, 3
 	note D_, 2
-	note __, 2
+	rest 2
 	note A_, 2
-	note __, 6
+	rest 6
 	octave 3
 	note D_, 2
 	note F#, 2
@@ -1211,514 +1204,507 @@ Music_Pinballendcredits_branch_4d2bd: ; 4d2bd
 	note C_, 2
 	note D_, 2
 	note C#, 8
-	callchannel Music_Pinballendcredits_branch_4d412
+	sound_call Music_EndCredits_branch_4d412
 	octave 2
 	note B_, 2
-	note __, 2
+	rest 2
 	note B_, 2
 	note D#, 2
 	octave 1
 	note G_, 2
 	note G_, 2
-	callchannel Music_Pinballendcredits_branch_4d412
+	sound_call Music_EndCredits_branch_4d412
 	octave 2
 	note B_, 4
-	note __, 4
+	rest 4
 	octave 1
 	note G_, 2
 	note G_, 2
 	octave 2
 	note C_, 2
-	note __, 2
+	rest 2
 	octave 1
 	note G_, 2
-	note __, 6
+	rest 6
 	octave 2
 	note C_, 1
-	note __, 1
+	rest 1
 	note C_, 1
-	note __, 1
+	rest 1
 	note C#, 2
-	note __, 2
+	rest 2
 	note G_, 2
-	note __, 2
+	rest 2
 	octave 3
 	note C#, 8
 	octave 2
 	note D_, 2
-	note __, 2
+	rest 2
 	note D_, 2
-	note __, 6
+	rest 6
 	note D_, 1
-	note __, 1
+	rest 1
 	note D_, 1
-	note __, 13
-	notetype $8, $32
+	rest 13
+	note_type 8, 3, 2
 	octave 3
 	note D_, 1
 	note D_, 1
 	note D_, 1
-	intensity $22
+	volume_envelope 2, 2
 	octave 1
 	note D_, 6
 	octave 2
 	note D_, 1
-	note __, 1
+	rest 1
 	octave 3
 	note D_, 1
-	note __, 1
+	rest 1
 	octave 2
 	note D_, 1
-	note __, 1
-	intensity $32
+	rest 1
+	volume_envelope 3, 2
 	octave 3
 	note D#, 6
-	intensity $22
+	volume_envelope 2, 2
 	octave 1
 	note C#, 1
-	note __, 1
+	rest 1
 	note A#, 1
-	note __, 1
+	rest 1
 	octave 2
 	note C#, 1
-	note __, 1
+	rest 1
 	octave 1
 	note D_, 6
 	octave 2
 	note D#, 1
-	note __, 1
+	rest 1
 	note D#, 1
-	note __, 1
+	rest 1
 	note D#, 1
-	note __, 1
-	intensity $32
+	rest 1
+	volume_envelope 3, 2
 	octave 3
 	note D_, 6
-	intensity $22
+	volume_envelope 2, 2
 	octave 1
 	note D_, 1
-	note __, 1
+	rest 1
 	note A_, 1
-	note __, 1
+	rest 1
 	note C#, 1
-	note __, 1
+	rest 1
 	note D_, 6
 	octave 2
 	note D_, 1
-	note __, 1
+	rest 1
 	octave 3
 	note D_, 1
-	note __, 1
+	rest 1
 	octave 2
 	note D_, 1
-	note __, 1
-	intensity $32
+	rest 1
+	volume_envelope 3, 2
 	note D_, 6
 	note D_, 1
-	note __, 1
+	rest 1
 	octave 3
 	note D_, 1
-	note __, 1
+	rest 1
 	octave 2
 	note D_, 1
-	note __, 1
+	rest 1
 	note D_, 6
 	note D_, 1
-	note __, 1
+	rest 1
 	octave 3
 	note D_, 1
-	note __, 1
+	rest 1
 	octave 2
 	note D_, 1
-	note __, 1
-	notetype $c, $12
+	rest 1
+	note_type 12, 1, 2
 	octave 3
 	note D_, 1
-	note __, 1
+	rest 1
 	note D_, 1
-	note __, 1
-	notetype $8, $12
+	rest 1
+	note_type 8, 1, 2
 	note D_, 1
-	note __, 1
+	rest 1
 	octave 4
 	note D_, 1
-	note __, 1
+	rest 1
 	octave 3
 	note D_, 1
-	note __, 1
-	notetype $c, $22
+	rest 1
+	note_type 12, 2, 2
 	octave 2
 	note C_, 1
-	note __, 1
+	rest 1
 	note C_, 2
-	note __, 2
+	rest 2
 	note G_, 2
 	note C#, 1
-	note __, 1
+	rest 1
 	note C#, 2
 	note G_, 2
 	note C#, 2
 	note D_, 1
-	note __, 1
+	rest 1
 	note D_, 2
-	note __, 2
+	rest 2
 	note G_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 1
+	rest 1
 	note B_, 2
 	note E_, 2
 	note A_, 1
-	note __, 1
+	rest 1
 	note A_, 1
-	note __, 3
+	rest 3
 	octave 3
 	note E_, 2
 	octave 2
 	note F_, 1
-	note __, 1
+	rest 1
 	note F_, 1
-	note __, 1
+	rest 1
 	octave 3
 	note C_, 4
 	octave 2
 	note D_, 1
-	note __, 1
+	rest 1
 	note D_, 1
-	note __, 1
+	rest 1
 	note A_, 2
 	note D_, 1
-	note __, 1
+	rest 1
 	note D_, 1
-	note __, 1
+	rest 1
 	note F#, 2
-	notetype $8, $22
+	note_type 8, 2, 2
 	note A_, 1
-	note __, 1
+	rest 1
 	note A_, 1
-	note __, 1
+	rest 1
 	note A_, 1
-	intensity $32
+	volume_envelope 3, 2
 	note B_, 1
 	octave 3
 	note C_, 12
 	note C#, 12
 	note D_, 12
 	note E_, 12
-	notetype $6, $12
+	note_type 6, 1, 2
 	octave 2
 	note C_, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note C_, 4
-	note __, 4
+	rest 4
 	note C_, 1
-	note __, 1
+	rest 1
 	note C_, 1
-	note __, 1
+	rest 1
 	note C#, 2
-	note __, 2
+	rest 2
 	note C#, 2
-	note __, 2
-	notetype $8, $12
+	rest 2
+	note_type 8, 1, 2
 	note C#, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note C#, 1
-	note __, 1
-	intensity $22
+	rest 1
+	volume_envelope 2, 2
 	note A_, 12
 	octave 3
 	note D_, 12
-	callchannel Music_Pinballendcredits_branch_4d401
-	note __, 2
+	sound_call Music_EndCredits_branch_4d401
+	rest 2
 	octave 1
 	note G_, 2
-	note __, 6
-	loopchannel 0, Music_Pinballendcredits_branch_4d28e
-; 4d401
+	rest 6
+	sound_loop 0, Music_EndCredits_branch_4d28e
 
-Music_Pinballendcredits_branch_4d401: ; 4d401
-	notetype $6, $22
+Music_EndCredits_branch_4d401:
+	note_type 6, 2, 2
 	octave 2
 	note G_, 2
-	note __, 2
+	rest 2
 	note G_, 4
-	note __, 4
+	rest 4
 	note G_, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note G_, 2
-	note __, 2
+	rest 2
 	octave 3
 	note G_, 2
-	endchannel
-; 4d412
+	sound_ret
 
-Music_Pinballendcredits_branch_4d412: ; 4d412
+Music_EndCredits_branch_4d412:
 	octave 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	octave 2
 	note B_, 4
-	note __, 4
+	rest 4
 	octave 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
-	endchannel
-; 4d424
+	rest 1
+	sound_ret
 
-Music_Pinballendcredits_Ch4: ; 4d424
-	togglenoise $1
-	notetype $8
-	note D_, 1
-	note C#, 1
-	note C#, 1
-	notetype $c
-	note B_, 16
-	note __, 15
-	notetype $6
-	note C#, 1
-	note C#, 1
-Music_Pinballendcredits_branch_4d433: ; 4d433
-	notetype $6
-	callchannel Music_Pinballendcredits_branch_4d51d
-	loopchannel 4, Music_Pinballendcredits_branch_4d433
-	note E_, 4
-	note C#, 8
-	note D_, 2
-	note C#, 2
-	note E_, 4
-	note D_, 8
-	note D_, 2
-	note C#, 2
-	note E_, 4
-	note C#, 8
-	note D_, 2
-	note C#, 2
-	note E_, 4
-	note C#, 4
-	note D_, 4
-	note D_, 2
-	note D_, 2
-	note E_, 2
-	note C#, 2
-	note D_, 4
-	note E_, 8
-	note E_, 4
-	note D_, 4
-	notetype $8
-	note E_, 2
-	note D_, 2
-	note E_, 2
-	notetype $c
-	note D_, 1
-	note C#, 1
-	note D_, 2
-	note D_, 4
-	note D_, 1
-	note C#, 1
-	note D_, 1
-	note C#, 1
-	notetype $6
-	note D_, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note E_, 2
-	note D_, 2
-	note C#, 8
-	note D_, 2
-	note C#, 2
-	note E_, 4
-	note D_, 4
-	note D_, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note E_, 4
-	note D_, 8
-	note D_, 2
-	note C#, 2
-	note E_, 2
-	note D_, 2
-	note E_, 4
-	note D_, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note E_, 4
-	note D_, 8
-	note D_, 2
-	note C#, 2
-	note E_, 4
-	note D_, 12
-	callchannel Music_Pinballendcredits_branch_4d51d
-Music_Pinballendcredits_branch_4d493: ; 4d493
-	note B_, 8
-	notetype $8
-	note E_, 2
-	note C#, 2
-	note D_, 2
-	note E_, 3
-	note D_, 3
-	notetype $6
-	note D_, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	loopchannel 3, Music_Pinballendcredits_branch_4d493
-	note D_, 4
-	note C#, 4
-	notetype $8
-	note E_, 2
-	note C#, 2
-	note D_, 2
-	note E_, 3
-	note D_, 3
-	note E_, 2
-	note C#, 2
-	note D_, 2
-	note D_, 3
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note E_, 3
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note E_, 3
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	notetype $6
-	note D_, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note D_, 4
-	note C#, 4
-	note E_, 2
-	note C#, 2
-	note D_, 2
-	note C#, 2
-	note E_, 4
-	note C#, 4
-	note D_, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note E_, 4
-	note C#, 2
-	note D_, 2
-	note B_, 8
-	note E_, 4
-	notetype $8
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	notetype $c
-	note B_, 4
-	note E_, 2
-	note C#, 2
-	note E_, 1
-	note C#, 1
-	note D_, 1
-	note C#, 1
-	note E_, 2
-	note C#, 2
-	notetype $8
-	note E_, 2
-	note C#, 2
-	note D_, 2
-	notetype $c
-	note B_, 16
-	note __, 16
-	note E_, 1
-	note D_, 1
-	note E_, 4
-	note E_, 1
-	note D_, 1
-	note E_, 2
-	note E_, 2
-	notetype $8
-	note E_, 2
-	note D_, 2
-	note E_, 2
-	notetype $6
-	note D_, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	notetype $8
-	note E_, 1
-	note D_, 1
-	note D_, 1
-	note B_, 12
-	loopchannel 0, Music_Pinballendcredits_branch_4d433
-; 4d51d
+Music_EndCredits_Ch4:
+	toggle_noise 1
+	drum_speed 8
+	drum_note 3, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_speed 12
+	drum_note 12, 16
+	rest 15
+	drum_speed 6
+	drum_note 2, 1
+	drum_note 2, 1
+Music_EndCredits_branch_4d433:
+	drum_speed 6
+	sound_call Music_EndCredits_branch_4d51d
+	sound_loop 4, Music_EndCredits_branch_4d433
+	drum_note 5, 4
+	drum_note 2, 8
+	drum_note 3, 2
+	drum_note 2, 2
+	drum_note 5, 4
+	drum_note 3, 8
+	drum_note 3, 2
+	drum_note 2, 2
+	drum_note 5, 4
+	drum_note 2, 8
+	drum_note 3, 2
+	drum_note 2, 2
+	drum_note 5, 4
+	drum_note 2, 4
+	drum_note 3, 4
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 5, 2
+	drum_note 2, 2
+	drum_note 3, 4
+	drum_note 5, 8
+	drum_note 5, 4
+	drum_note 3, 4
+	drum_speed 8
+	drum_note 5, 2
+	drum_note 3, 2
+	drum_note 5, 2
+	drum_speed 12
+	drum_note 3, 1
+	drum_note 2, 1
+	drum_note 3, 2
+	drum_note 3, 4
+	drum_note 3, 1
+	drum_note 2, 1
+	drum_note 3, 1
+	drum_note 2, 1
+	drum_speed 6
+	drum_note 3, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 5, 2
+	drum_note 3, 2
+	drum_note 2, 8
+	drum_note 3, 2
+	drum_note 2, 2
+	drum_note 5, 4
+	drum_note 3, 4
+	drum_note 3, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 5, 4
+	drum_note 3, 8
+	drum_note 3, 2
+	drum_note 2, 2
+	drum_note 5, 2
+	drum_note 3, 2
+	drum_note 5, 4
+	drum_note 3, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 5, 4
+	drum_note 3, 8
+	drum_note 3, 2
+	drum_note 2, 2
+	drum_note 5, 4
+	drum_note 3, 12
+	sound_call Music_EndCredits_branch_4d51d
+Music_EndCredits_branch_4d493:
+	drum_note 12, 8
+	drum_speed 8
+	drum_note 5, 2
+	drum_note 2, 2
+	drum_note 3, 2
+	drum_note 5, 3
+	drum_note 3, 3
+	drum_speed 6
+	drum_note 3, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	sound_loop 3, Music_EndCredits_branch_4d493
+	drum_note 3, 4
+	drum_note 2, 4
+	drum_speed 8
+	drum_note 5, 2
+	drum_note 2, 2
+	drum_note 3, 2
+	drum_note 5, 3
+	drum_note 3, 3
+	drum_note 5, 2
+	drum_note 2, 2
+	drum_note 3, 2
+	drum_note 3, 3
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 5, 3
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 5, 3
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_speed 6
+	drum_note 3, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 3, 4
+	drum_note 2, 4
+	drum_note 5, 2
+	drum_note 2, 2
+	drum_note 3, 2
+	drum_note 2, 2
+	drum_note 5, 4
+	drum_note 2, 4
+	drum_note 3, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 5, 4
+	drum_note 2, 2
+	drum_note 3, 2
+	drum_note 12, 8
+	drum_note 5, 4
+	drum_speed 8
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_speed 12
+	drum_note 12, 4
+	drum_note 5, 2
+	drum_note 2, 2
+	drum_note 5, 1
+	drum_note 2, 1
+	drum_note 3, 1
+	drum_note 2, 1
+	drum_note 5, 2
+	drum_note 2, 2
+	drum_speed 8
+	drum_note 5, 2
+	drum_note 2, 2
+	drum_note 3, 2
+	drum_speed 12
+	drum_note 12, 16
+	rest 16
+	drum_note 5, 1
+	drum_note 3, 1
+	drum_note 5, 4
+	drum_note 5, 1
+	drum_note 3, 1
+	drum_note 5, 2
+	drum_note 5, 2
+	drum_speed 8
+	drum_note 5, 2
+	drum_note 3, 2
+	drum_note 5, 2
+	drum_speed 6
+	drum_note 3, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_speed 8
+	drum_note 5, 1
+	drum_note 3, 1
+	drum_note 3, 1
+	drum_note 12, 12
+	sound_loop 0, Music_EndCredits_branch_4d433
 
-Music_Pinballendcredits_branch_4d51d: ; 4d51d
-	note E_, 4
-	note C#, 8
-	note D_, 2
-	note C#, 2
-	note E_, 4
-	note D_, 4
-	note D_, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	note C#, 1
-	endchannel
-; 4d52c
-
-
+Music_EndCredits_branch_4d51d:
+	drum_note 5, 4
+	drum_note 2, 8
+	drum_note 3, 2
+	drum_note 2, 2
+	drum_note 5, 4
+	drum_note 3, 4
+	drum_note 3, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	sound_ret

@@ -8,13 +8,13 @@ SafariZoneNorthRestHouse_TextPointers:
 	dw SafariZoneRestHouse4Text3
 
 SafariZoneRestHouse4Text1:
-	TX_FAR _SafariZoneRestHouse4Text1
-	db "@"
+	text_far _SafariZoneRestHouse4Text1
+	text_end
 
 SafariZoneRestHouse4Text2:
-	TX_FAR _SafariZoneRestHouse4Text2
-	db "@"
+	text_far _SafariZoneRestHouse4Text2
+	text_end
 
 SafariZoneRestHouse4Text3:
-	TX_FAR _SafariZoneRestHouse4Text3
-	db "@"
+	text_far _SafariZoneRestHouse4Text3
+	text_end

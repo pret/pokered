@@ -1,131 +1,131 @@
-Music_Pinballseelstage: ; 45601
-	dbw $c0, Music_Pinballseelstage_Ch1
-	dbw $01, Music_Pinballseelstage_Ch2
-	dbw $02, Music_Pinballseelstage_Ch3
-	dbw $03, Music_Pinballseelstage_Ch4
-; 4560d
+Music_SeelStage:
+	channel_count 4
+	channel 1, Music_SeelStage_Ch1
+	channel 2, Music_SeelStage_Ch2
+	channel 3, Music_SeelStage_Ch3
+	channel 4, Music_SeelStage_Ch4
 
-Music_Pinballseelstage_Ch1: ; 4560d
+Music_SeelStage_Ch1:
 	tempo 153
-	volume $77
-	tone $0001
-Music_Pinballseelstage_branch_45615: ; 45615
-	dutycycle $1
-	notetype $c, $b3
-	note __, 16
-	notetype $6, $54
-	note __, 4
+	volume 7, 7
+	pitch_offset 1
+Music_SeelStage_branch_45615:
+	duty_cycle 1
+	note_type 12, 11, 3
+	rest 16
+	note_type 6, 5, 4
+	rest 4
 	octave 4
 	note D#, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 16
-	note __, 5
-	notetype $c, $b3
-	note __, 16
-	note __, 2
-	notetype $6, $54
+	rest 16
+	rest 5
+	note_type 12, 11, 3
+	rest 16
+	rest 2
+	note_type 6, 5, 4
 	note D#, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 3
+	rest 3
 	note E_, 1
-	note __, 16
-	note __, 1
-	notetype $c, $b3
-	note __, 16
-	note __, 16
-	note __, 16
-	note __, 16
-	note __, 16
-	note __, 16
-	note __, 16
-	note __, 16
-	note __, 16
-	note __, 2
-	notetype $6, $54
+	rest 16
+	rest 1
+	note_type 12, 11, 3
+	rest 16
+	rest 16
+	rest 16
+	rest 16
+	rest 16
+	rest 16
+	rest 16
+	rest 16
+	rest 16
+	rest 2
+	note_type 6, 5, 4
 	note D#, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 16
-	note __, 5
-	notetype $c, $b3
-	note __, 16
-	note __, 2
-	notetype $6, $54
+	rest 16
+	rest 5
+	note_type 12, 11, 3
+	rest 16
+	rest 2
+	note_type 6, 5, 4
 	note D#, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 3
+	rest 3
 	note E_, 1
-	note __, 16
-	note __, 1
-	dutycycle $2
-	pitchoffset 0, G_
-	callchannel Music_Pinballseelstage_branch_4570a
-	pitchoffset 0, C_
-	callchannel Music_Pinballseelstage_branch_456f0
-	pitchoffset 0, E_
-	callchannel Music_Pinballseelstage_branch_4570a
-	pitchoffset 0, C_
-	callchannel Music_Pinballseelstage_branch_4570a
-	pitchoffset 0, G_
-	callchannel Music_Pinballseelstage_branch_4570a
-	notetype $8, $b3
-	note __, 12
-	note __, 12
-	note __, 12
-	pitchoffset 0, G_
-	callchannel Music_Pinballseelstage_branch_4570a
-	pitchoffset 0, C_
-	callchannel Music_Pinballseelstage_branch_456f0
-	pitchoffset 0, CC
-	callchannel Music_Pinballseelstage_branch_4570a
-	pitchoffset 0, E_
-	callchannel Music_Pinballseelstage_branch_4570a
-	pitchoffset 0, C_
-	notetype $c, $b3
-	note __, 16
-	note __, 9
-	notetype $6, $b1
+	rest 16
+	rest 1
+	duty_cycle 2
+	transpose 0, 7
+	sound_call Music_SeelStage_branch_4570a
+	transpose 0, 0
+	sound_call Music_SeelStage_branch_456f0
+	transpose 0, 4
+	sound_call Music_SeelStage_branch_4570a
+	transpose 0, 0
+	sound_call Music_SeelStage_branch_4570a
+	transpose 0, 7
+	sound_call Music_SeelStage_branch_4570a
+	note_type 8, 11, 3
+	rest 12
+	rest 12
+	rest 12
+	transpose 0, 7
+	sound_call Music_SeelStage_branch_4570a
+	transpose 0, 0
+	sound_call Music_SeelStage_branch_456f0
+	transpose 0, 12
+	sound_call Music_SeelStage_branch_4570a
+	transpose 0, 4
+	sound_call Music_SeelStage_branch_4570a
+	transpose 0, 0
+	note_type 12, 11, 3
+	rest 16
+	rest 9
+	note_type 6, 11, 1
 	octave 2
 	note F#, 1
-	note __, 1
+	rest 1
 	note F_, 1
-	note __, 1
+	rest 1
 	note F#, 1
-	note __, 1
+	rest 1
 	octave 4
 	note F#, 1
-	note __, 1
+	rest 1
 	note B_, 1
-	note __, 1
+	rest 1
 	octave 5
 	note D#, 1
-	note __, 1
-	intensity $c2
+	rest 1
+	volume_envelope 12, 2
 	note F#, 2
-	callchannel Music_Pinballseelstage_branch_45725
-	note __, 8
-	intensity $52
+	sound_call Music_SeelStage_branch_45725
+	rest 8
+	volume_envelope 5, 2
 	note F_, 2
-	intensity $51
+	volume_envelope 5, 1
 	note F#, 6
 	note B_, 2
 	octave 5
@@ -133,142 +133,137 @@ Music_Pinballseelstage_branch_45615: ; 45615
 	note C_, 4
 	note F#, 4
 	note F#, 2
-	callchannel Music_Pinballseelstage_branch_45725
-	note __, 8
-	intensity $52
+	sound_call Music_SeelStage_branch_45725
+	rest 8
+	volume_envelope 5, 2
 	note F_, 2
-	intensity $51
+	volume_envelope 5, 1
 	note F#, 16
-	note __, 2
-	intensity $62
+	rest 2
+	volume_envelope 6, 2
 	octave 3
 	note D#, 2
 	note C_, 2
-	callchannel Music_Pinballseelstage_branch_45725
-	dutycycle $1
-	intensity $73
+	sound_call Music_SeelStage_branch_45725
+	duty_cycle 1
+	volume_envelope 7, 3
 	octave 1
 	note B_, 1
-	note __, 3
+	rest 3
 	note B_, 1
-	note __, 3
+	rest 3
 	note G#, 2
 	note A_, 1
-	note __, 3
+	rest 3
 	note A#, 1
-	note __, 1
+	rest 1
 	note B_, 1
-	note __, 15
-	loopchannel 0, Music_Pinballseelstage_branch_45615
-; 456f0
+	rest 15
+	sound_loop 0, Music_SeelStage_branch_45615
 
-Music_Pinballseelstage_branch_456f0: ; 456f0
-	intensity $a4
+Music_SeelStage_branch_456f0:
+	volume_envelope 10, 4
 	octave 3
 	note F#, 2
-	intensity $24
+	volume_envelope 2, 4
 	note F#, 2
-	intensity $64
+	volume_envelope 6, 4
 	note F#, 2
-	intensity $14
+	volume_envelope 1, 4
 	note F#, 2
-	intensity $44
+	volume_envelope 4, 4
 	note F#, 2
-	intensity $14
+	volume_envelope 1, 4
 	note F#, 2
-	intensity $a4
+	volume_envelope 10, 4
 	note B_, 2
-	intensity $14
+	volume_envelope 1, 4
 	note B_, 2
-	endchannel
-; 4570a
+	sound_ret
 
-Music_Pinballseelstage_branch_4570a: ; 4570a
-	notetype $6, $a4
+Music_SeelStage_branch_4570a:
+	note_type 6, 10, 4
 	octave 3
 	note E_, 2
-	intensity $24
+	volume_envelope 2, 4
 	note E_, 2
-	intensity $64
+	volume_envelope 6, 4
 	note E_, 2
-	intensity $14
+	volume_envelope 1, 4
 	note E_, 2
-	intensity $44
+	volume_envelope 4, 4
 	note E_, 2
-	intensity $14
+	volume_envelope 1, 4
 	note E_, 2
-	intensity $24
+	volume_envelope 2, 4
 	note E_, 2
-	intensity $14
+	volume_envelope 1, 4
 	note E_, 2
-	endchannel
-; 45725
+	sound_ret
 
-Music_Pinballseelstage_branch_45725: ; 45725
-	note __, 8
-	intensity $52
+Music_SeelStage_branch_45725:
+	rest 8
+	volume_envelope 5, 2
 	octave 4
 	note A#, 2
-	intensity $51
+	volume_envelope 5, 1
 	note B_, 6
-	note __, 16
-	note __, 8
-	intensity $52
+	rest 16
+	rest 8
+	volume_envelope 5, 2
 	note A_, 2
-	intensity $51
+	volume_envelope 5, 1
 	note A#, 6
-	note __, 16
-	note __, 8
-	intensity $52
+	rest 16
+	rest 8
+	volume_envelope 5, 2
 	note G_, 2
-	intensity $51
+	volume_envelope 5, 1
 	note G#, 6
-	note __, 16
-	endchannel
-; 4573f
+	rest 16
+	sound_ret
 
-Music_Pinballseelstage_Ch2: ; 4573f
-Music_Pinballseelstage_branch_4573f: ; 4573f
-	dutycycle $2
-	notetype $6, $a1
-	callchannel Music_Pinballseelstage_branch_45924
-	note __, 15
-	note __, 9
-	callchannel Music_Pinballseelstage_branch_45924
-	note __, 6
-	intensity $54
+Music_SeelStage_Ch2:
+	duty_cycle 2
+	note_type 6, 10, 1
+	sound_call Music_SeelStage_branch_45924
+	rest 15
+	rest 9
+	sound_call Music_SeelStage_branch_45924
+	rest 6
+	volume_envelope 5, 4
 	octave 4
 	note G#, 1
-	note __, 15
-	note __, 2
-	pitchoffset 0, F_
-	callchannel Music_Pinballseelstage_branch_4594f
-	pitchoffset 0, C_
-	callchannel Music_Pinballseelstage_branch_45935
-	pitchoffset 0, D#
-	callchannel Music_Pinballseelstage_branch_4594f
-	pitchoffset 0, C_
-	callchannel Music_Pinballseelstage_branch_4594f
-	pitchoffset 0, C_
-	callchannel Music_Pinballseelstage_branch_45969
-	intensity $b2
+	rest 15
+	rest 2
+	transpose 0, 5
+	sound_call Music_SeelStage_branch_4594f
+	transpose 0, 0
+	sound_call Music_SeelStage_branch_45935
+	transpose 0, 3
+	sound_call Music_SeelStage_branch_4594f
+	transpose 0, 0
+	sound_call Music_SeelStage_branch_4594f
+	transpose 0, 0
+	sound_call Music_SeelStage_branch_45969
+	volume_envelope 11, 2
 	octave 3
 	note C_, 2
-	intensity $43
-	callchannel Music_Pinballseelstage_branch_45980
-	pitchoffset 0, F_
-	callchannel Music_Pinballseelstage_branch_4594f
-	pitchoffset 0, C_
-	callchannel Music_Pinballseelstage_branch_45935
-	pitchoffset 0, G_
-	callchannel Music_Pinballseelstage_branch_4594f
-	pitchoffset 0, C_
-	callchannel Music_Pinballseelstage_branch_45969
-	intensity $42
+	volume_envelope 4, 3
+	sound_call Music_SeelStage_branch_45980
+	transpose 0, 5
+	sound_call Music_SeelStage_branch_4594f
+	transpose 0, 0
+	sound_call Music_SeelStage_branch_45935
+	transpose 0, 7
+	sound_call Music_SeelStage_branch_4594f
+	transpose 0, 0
+	sound_call Music_SeelStage_branch_45969
+	volume_envelope 4, 2
 	octave 3
 	note G_, 2
-	callchannel Music_Pinballseelstage_branch_459b6
-	intensity $52
+	sound_call Music_SeelStage_branch_459b6
+	volume_envelope 5, 2
 	note F#, 2
 	note D#, 2
 	octave 2
@@ -279,248 +274,248 @@ Music_Pinballseelstage_branch_4573f: ; 4573f
 	note B_, 2
 	note A#, 2
 	note B_, 2
-	notetype $6, $91
-	callchannel Music_Pinballseelstage_branch_45924
-	note __, 15
-	note __, 9
-	callchannel Music_Pinballseelstage_branch_45924
-	note __, 6
-	intensity $54
+	note_type 6, 9, 1
+	sound_call Music_SeelStage_branch_45924
+	rest 15
+	rest 9
+	sound_call Music_SeelStage_branch_45924
+	rest 6
+	volume_envelope 5, 4
 	octave 4
 	note G#, 1
-	note __, 15
-	note __, 2
-	intensity $b1
-	pitchoffset 0, F_
-	callchannel Music_Pinballseelstage_branch_4594f
-	pitchoffset 0, C_
-	callchannel Music_Pinballseelstage_branch_45935
-	pitchoffset 0, D#
-	callchannel Music_Pinballseelstage_branch_4594f
-	pitchoffset 0, C_
-	callchannel Music_Pinballseelstage_branch_4594f
-	pitchoffset 0, C_
-	callchannel Music_Pinballseelstage_branch_45969
-	pitchoffset 0, CC
-	intensity $a3
+	rest 15
+	rest 2
+	volume_envelope 11, 1
+	transpose 0, 5
+	sound_call Music_SeelStage_branch_4594f
+	transpose 0, 0
+	sound_call Music_SeelStage_branch_45935
+	transpose 0, 3
+	sound_call Music_SeelStage_branch_4594f
+	transpose 0, 0
+	sound_call Music_SeelStage_branch_4594f
+	transpose 0, 0
+	sound_call Music_SeelStage_branch_45969
+	transpose 0, 12
+	volume_envelope 10, 3
 	octave 3
 	note C_, 2
-	callchannel Music_Pinballseelstage_branch_45980
-	pitchoffset 0, F_
-	callchannel Music_Pinballseelstage_branch_4594f
-	pitchoffset 0, C_
-	callchannel Music_Pinballseelstage_branch_45935
-	pitchoffset 0, G_
-	callchannel Music_Pinballseelstage_branch_4594f
-	pitchoffset 0, C_
-	callchannel Music_Pinballseelstage_branch_45969
-	intensity $32
-	pitchoffset 0, CC
+	sound_call Music_SeelStage_branch_45980
+	transpose 0, 5
+	sound_call Music_SeelStage_branch_4594f
+	transpose 0, 0
+	sound_call Music_SeelStage_branch_45935
+	transpose 0, 7
+	sound_call Music_SeelStage_branch_4594f
+	transpose 0, 0
+	sound_call Music_SeelStage_branch_45969
+	volume_envelope 3, 2
+	transpose 0, 12
 	octave 2
 	note G_, 2
-	callchannel Music_Pinballseelstage_branch_459b6
-	pitchoffset 0, C_
-	intensity $b1
+	sound_call Music_SeelStage_branch_459b6
+	transpose 0, 0
+	volume_envelope 11, 1
 	octave 2
 	note B_, 1
-	intensity $18
+	volume_envelope 1, 8
 	note B_, 1
-	intensity $b1
+	volume_envelope 11, 1
 	note A#, 1
-	intensity $18
+	volume_envelope 1, 8
 	note A#, 1
-	intensity $b1
+	volume_envelope 11, 1
 	note B_, 1
-	intensity $18
+	volume_envelope 1, 8
 	note B_, 1
-	intensity $b1
+	volume_envelope 11, 1
 	octave 4
 	note B_, 1
-	intensity $18
+	volume_envelope 1, 8
 	note B_, 1
-	intensity $81
+	volume_envelope 8, 1
 	octave 5
 	note D#, 1
-	intensity $18
+	volume_envelope 1, 8
 	note D#, 1
-	intensity $91
+	volume_envelope 9, 1
 	note F#, 1
-	intensity $18
+	volume_envelope 1, 8
 	note F#, 1
-	intensity $b2
+	volume_envelope 11, 2
 	note B_, 2
-	callchannel Music_Pinballseelstage_branch_459ef
-	note __, 10
-	intensity $82
+	sound_call Music_SeelStage_branch_459ef
+	rest 10
+	volume_envelope 8, 2
 	note G_, 2
-	intensity $a4
+	volume_envelope 10, 4
 	note G#, 4
-	callchannel Music_Pinballseelstage_branch_45a01
-	note __, 10
-	intensity $82
+	sound_call Music_SeelStage_branch_45a01
+	rest 10
+	volume_envelope 8, 2
 	note A#, 2
-	intensity $a4
+	volume_envelope 10, 4
 	note B_, 4
-	callchannel Music_Pinballseelstage_branch_45a14
-	note __, 10
-	intensity $82
+	sound_call Music_SeelStage_branch_45a14
+	rest 10
+	volume_envelope 8, 2
 	note A_, 2
-	intensity $a4
+	volume_envelope 10, 4
 	note A#, 4
-	callchannel Music_Pinballseelstage_branch_45a25
-	intensity $51
+	sound_call Music_SeelStage_branch_45a25
+	volume_envelope 5, 1
 	octave 5
 	note F_, 2
 	note F#, 4
 	note F#, 4
-	intensity $82
+	volume_envelope 8, 2
 	octave 4
 	note A#, 2
-	intensity $a4
+	volume_envelope 10, 4
 	note B_, 4
 	octave 5
-	callchannel Music_Pinballseelstage_branch_459ef
-	intensity $32
+	sound_call Music_SeelStage_branch_459ef
+	volume_envelope 3, 2
 	octave 3
 	note A#, 2
-	intensity $42
+	volume_envelope 4, 2
 	octave 4
 	note C#, 2
-	intensity $52
+	volume_envelope 5, 2
 	octave 3
 	note A#, 2
-	intensity $62
+	volume_envelope 6, 2
 	octave 4
 	note C#, 2
-	intensity $72
+	volume_envelope 7, 2
 	note E_, 2
-	intensity $92
+	volume_envelope 9, 2
 	note G_, 2
-	intensity $a4
+	volume_envelope 10, 4
 	note G#, 4
-	callchannel Music_Pinballseelstage_branch_45a01
-	intensity $32
+	sound_call Music_SeelStage_branch_45a01
+	volume_envelope 3, 2
 	octave 3
 	note G#, 2
-	intensity $42
+	volume_envelope 4, 2
 	note B_, 2
-	intensity $52
+	volume_envelope 5, 2
 	note G#, 2
-	intensity $62
+	volume_envelope 6, 2
 	note B_, 2
-	intensity $72
+	volume_envelope 7, 2
 	octave 4
 	note F#, 2
-	intensity $92
+	volume_envelope 9, 2
 	note A#, 2
-	intensity $a4
+	volume_envelope 10, 4
 	note B_, 4
-	callchannel Music_Pinballseelstage_branch_45a14
-	intensity $32
+	sound_call Music_SeelStage_branch_45a14
+	volume_envelope 3, 2
 	octave 3
 	note F#, 2
-	intensity $42
+	volume_envelope 4, 2
 	note A#, 2
-	intensity $52
+	volume_envelope 5, 2
 	note F#, 2
-	intensity $62
+	volume_envelope 6, 2
 	note A#, 2
-	intensity $72
+	volume_envelope 7, 2
 	octave 4
 	note C#, 2
-	intensity $92
+	volume_envelope 9, 2
 	note A_, 2
-	intensity $a4
+	volume_envelope 10, 4
 	note A#, 4
-	callchannel Music_Pinballseelstage_branch_45a25
-	intensity $71
+	sound_call Music_SeelStage_branch_45a25
+	volume_envelope 7, 1
 	octave 4
 	note A_, 2
-	intensity $61
+	volume_envelope 6, 1
 	note F#, 2
-	intensity $51
+	volume_envelope 5, 1
 	note D#, 2
 	note C_, 2
 	octave 3
 	note A_, 2
 	note F#, 2
-	intensity $74
+	volume_envelope 7, 4
 	octave 4
 	note B_, 4
-	intensity $72
+	volume_envelope 7, 2
 	octave 5
 	note C#, 2
-	intensity $71
+	volume_envelope 7, 1
 	octave 4
 	note G#, 2
-	intensity $72
+	volume_envelope 7, 2
 	note B_, 2
-	intensity $71
+	volume_envelope 7, 1
 	note E_, 6
-	intensity $72
+	volume_envelope 7, 2
 	note E_, 2
 	note G#, 2
-	note __, 10
+	rest 10
 	note G_, 2
-	intensity $74
+	volume_envelope 7, 4
 	note G#, 4
-	intensity $72
+	volume_envelope 7, 2
 	note F#, 2
-	intensity $71
+	volume_envelope 7, 1
 	note C#, 2
-	intensity $72
+	volume_envelope 7, 2
 	note F_, 2
-	intensity $71
+	volume_envelope 7, 1
 	octave 3
 	note A#, 6
-	intensity $72
+	volume_envelope 7, 2
 	octave 4
 	note F#, 2
 	note B_, 2
-	note __, 10
+	rest 10
 	note A#, 2
-	intensity $74
+	volume_envelope 7, 4
 	note B_, 4
-	intensity $72
+	volume_envelope 7, 2
 	note A#, 2
-	intensity $71
+	volume_envelope 7, 1
 	note E_, 2
-	intensity $72
+	volume_envelope 7, 2
 	note G#, 2
-	intensity $71
+	volume_envelope 7, 1
 	note C#, 6
-	intensity $72
+	volume_envelope 7, 2
 	note F#, 2
 	note A#, 2
-	note __, 10
+	rest 10
 	note A_, 2
-	intensity $74
+	volume_envelope 7, 4
 	note A#, 4
-	intensity $b3
+	volume_envelope 11, 3
 	note B_, 1
-	intensity $63
+	volume_envelope 6, 3
 	note D#, 1
-	note __, 2
-	intensity $b3
+	rest 2
+	volume_envelope 11, 3
 	note B_, 1
 	note D#, 1
-	note __, 2
-	intensity $63
+	rest 2
+	volume_envelope 6, 3
 	note G#, 2
-	intensity $b3
+	volume_envelope 11, 3
 	note A_, 1
-	intensity $63
+	volume_envelope 6, 3
 	note C#, 1
-	note __, 2
-	intensity $b3
+	rest 2
+	volume_envelope 11, 3
 	note A#, 1
-	intensity $63
+	volume_envelope 6, 3
 	note D_, 1
-	intensity $b3
+	volume_envelope 11, 3
 	note B_, 1
 	note D#, 1
-	note __, 6
-	intensity $61
+	rest 6
+	volume_envelope 6, 1
 	octave 5
 	note F#, 1
 	note E_, 1
@@ -532,17 +527,16 @@ Music_Pinballseelstage_branch_4573f: ; 4573f
 	note C#, 1
 	octave 3
 	note A#, 1
-	loopchannel 0, Music_Pinballseelstage_branch_4573f
-; 45924
+	sound_loop 0, Music_SeelStage_Ch2
 
-Music_Pinballseelstage_branch_45924: ; 45924
+Music_SeelStage_branch_45924:
 	octave 2
 	note B_, 2
 	note F#, 2
 	note A#, 2
 	note B_, 2
-	note __, 15
-	note __, 1
+	rest 15
+	rest 1
 	octave 3
 	note F#, 2
 	note D#, 2
@@ -552,89 +546,85 @@ Music_Pinballseelstage_branch_45924: ; 45924
 	note G#, 2
 	note G_, 2
 	note G#, 2
-	endchannel
-; 45935
+	sound_ret
 
-Music_Pinballseelstage_branch_45935: ; 45935
-	intensity $a4
+Music_SeelStage_branch_45935:
+	volume_envelope 10, 4
 	octave 4
 	note D#, 2
-	intensity $24
+	volume_envelope 2, 4
 	note D#, 2
-	intensity $74
+	volume_envelope 7, 4
 	note D#, 2
-	intensity $24
+	volume_envelope 2, 4
 	note D#, 2
-	intensity $54
+	volume_envelope 5, 4
 	note D#, 2
-	intensity $14
+	volume_envelope 1, 4
 	note D#, 2
-	intensity $a4
+	volume_envelope 10, 4
 	note F#, 2
-	intensity $24
+	volume_envelope 2, 4
 	note F#, 2
-	endchannel
-; 4594f
+	sound_ret
 
-Music_Pinballseelstage_branch_4594f: ; 4594f
-	intensity $a4
+Music_SeelStage_branch_4594f:
+	volume_envelope 10, 4
 	octave 4
 	note C#, 2
-	intensity $24
+	volume_envelope 2, 4
 	note C#, 2
-	intensity $74
+	volume_envelope 7, 4
 	note C#, 2
-	intensity $24
+	volume_envelope 2, 4
 	note C#, 2
-	intensity $54
+	volume_envelope 5, 4
 	note C#, 2
-	intensity $14
+	volume_envelope 1, 4
 	note C#, 2
-	intensity $34
+	volume_envelope 3, 4
 	note C#, 2
-	intensity $14
+	volume_envelope 1, 4
 	note C#, 2
-	endchannel
-; 45969
+	sound_ret
 
-Music_Pinballseelstage_branch_45969: ; 45969
-	intensity $a4
+Music_SeelStage_branch_45969:
+	volume_envelope 10, 4
 	octave 4
 	note E_, 2
-	intensity $24
+	volume_envelope 2, 4
 	note E_, 2
-	intensity $74
+	volume_envelope 7, 4
 	note E_, 2
-	intensity $24
+	volume_envelope 2, 4
 	note E_, 2
-	intensity $54
+	volume_envelope 5, 4
 	note E_, 2
-	intensity $14
+	volume_envelope 1, 4
 	note E_, 2
-	intensity $34
+	volume_envelope 3, 4
 	note E_, 2
-	endchannel
-; 45980
+	sound_ret
 
-Music_Pinballseelstage_branch_45980: ; 45980
-	intensity $52
+Music_SeelStage_branch_45980:
+	volume_envelope 5, 2
 	note C#, 2
 	octave 2
 	note G#, 2
-	intensity $b2
+	volume_envelope 11, 2
 	octave 3
 	note G#, 2
-	intensity $52
+	volume_envelope 5, 2
 	note C#, 2
-	intensity $b2
+	volume_envelope 11, 2
 	note C_, 2
-	intensity $52
+	volume_envelope 5, 2
 	note C#, 2
-	intensity $b2
+	volume_envelope 11, 2
 	note E_, 2
 	note C#, 2
 	note F#, 2
-	intensity $52
+	volume_envelope 5, 2
 	octave 2
 	note A#, 2
 	note B_, 2
@@ -642,30 +632,29 @@ Music_Pinballseelstage_branch_45980: ; 45980
 	note B_, 2
 	note A#, 2
 	note B_, 2
-	intensity $92
+	volume_envelope 9, 2
 	octave 3
 	note C#, 2
-	intensity $b2
+	volume_envelope 11, 2
 	note D#, 2
-	intensity $52
+	volume_envelope 5, 2
 	octave 2
 	note F#, 2
 	note G#, 2
 	note F#, 2
 	note G#, 2
 	note F#, 2
-	intensity $82
+	volume_envelope 8, 2
 	note G#, 2
-	intensity $92
+	volume_envelope 9, 2
 	note A#, 2
-	endchannel
-; 459b6
+	sound_ret
 
-Music_Pinballseelstage_branch_459b6: ; 459b6
-	intensity $b2
+Music_SeelStage_branch_459b6:
+	volume_envelope 11, 2
 	octave 3
 	note G#, 2
-	intensity $52
+	volume_envelope 5, 2
 	octave 2
 	note B_, 2
 	octave 3
@@ -679,25 +668,25 @@ Music_Pinballseelstage_branch_459b6: ; 459b6
 	octave 3
 	note E_, 2
 	note G#, 2
-	intensity $b2
+	volume_envelope 11, 2
 	note F#, 2
-	intensity $52
+	volume_envelope 5, 2
 	note E_, 2
-	intensity $b2
+	volume_envelope 11, 2
 	note G#, 2
-	intensity $52
+	volume_envelope 5, 2
 	octave 2
 	note F#, 2
 	note A#, 2
 	octave 3
 	note C#, 2
-	intensity $b2
+	volume_envelope 11, 2
 	note F#, 2
-	intensity $52
+	volume_envelope 5, 2
 	note A#, 2
-	intensity $b2
+	volume_envelope 11, 2
 	note B_, 2
-	intensity $52
+	volume_envelope 5, 2
 	note C#, 2
 	note E_, 2
 	note G#, 2
@@ -705,364 +694,358 @@ Music_Pinballseelstage_branch_459b6: ; 459b6
 	note E_, 2
 	note G_, 2
 	note A#, 2
-	intensity $b2
+	volume_envelope 11, 2
 	note B_, 2
-	endchannel
-; 459ef
+	sound_ret
 
-Music_Pinballseelstage_branch_459ef: ; 459ef
-	intensity $b2
+Music_SeelStage_branch_459ef:
+	volume_envelope 11, 2
 	note C#, 2
-	intensity $51
+	volume_envelope 5, 1
 	octave 4
 	note G#, 2
-	intensity $b2
+	volume_envelope 11, 2
 	note B_, 2
-	intensity $51
+	volume_envelope 5, 1
 	note E_, 6
-	intensity $b2
+	volume_envelope 11, 2
 	note E_, 2
 	note G#, 2
-	endchannel
-; 45a01
+	sound_ret
 
-Music_Pinballseelstage_branch_45a01: ; 45a01
-	intensity $b2
+Music_SeelStage_branch_45a01:
+	volume_envelope 11, 2
 	note F#, 2
-	intensity $51
+	volume_envelope 5, 1
 	note C#, 2
-	intensity $b2
+	volume_envelope 11, 2
 	note F_, 2
-	intensity $51
+	volume_envelope 5, 1
 	octave 3
 	note A#, 6
-	intensity $b2
+	volume_envelope 11, 2
 	octave 4
 	note F#, 2
 	note B_, 2
-	endchannel
-; 45a14
+	sound_ret
 
-Music_Pinballseelstage_branch_45a14: ; 45a14
-	intensity $b2
+Music_SeelStage_branch_45a14:
+	volume_envelope 11, 2
 	note A#, 2
-	intensity $51
+	volume_envelope 5, 1
 	note E_, 2
-	intensity $b2
+	volume_envelope 11, 2
 	note G#, 2
-	intensity $51
+	volume_envelope 5, 1
 	note C#, 6
-	intensity $b2
+	volume_envelope 11, 2
 	note F#, 2
 	note A#, 2
-	endchannel
-; 45a25
+	sound_ret
 
-Music_Pinballseelstage_branch_45a25: ; 45a25
-	intensity $b2
+Music_SeelStage_branch_45a25:
+	volume_envelope 11, 2
 	note B_, 2
-	intensity $51
+	volume_envelope 5, 1
 	note F#, 2
-	intensity $b2
+	volume_envelope 11, 2
 	note A#, 2
-	intensity $51
+	volume_envelope 5, 1
 	note D#, 6
-	intensity $b2
+	volume_envelope 11, 2
 	note B_, 2
 	octave 5
 	note D#, 2
-	endchannel
-; 45a37
+	sound_ret
 
-Music_Pinballseelstage_Ch3: ; 45a37
-Music_Pinballseelstage_branch_45a37: ; 45a37
-	callchannel Music_Pinballseelstage_branch_45baa
-	callchannel Music_Pinballseelstage_branch_45bb9
-	callchannel Music_Pinballseelstage_branch_45baa
-	callchannel Music_Pinballseelstage_branch_45bb9
-	callchannel Music_Pinballseelstage_branch_45baa
-	notetype $6, $22
+Music_SeelStage_Ch3:
+	sound_call Music_SeelStage_branch_45baa
+	sound_call Music_SeelStage_branch_45bb9
+	sound_call Music_SeelStage_branch_45baa
+	sound_call Music_SeelStage_branch_45bb9
+	sound_call Music_SeelStage_branch_45baa
+	note_type 6, 2, 2
 	note E_, 2
-	note __, 12
+	rest 12
 	octave 1
 	note F#, 2
 	note A_, 2
-	note __, 6
+	rest 6
 	note A#, 2
-	note __, 6
+	rest 6
 	octave 2
 	note C#, 2
-	note __, 12
+	rest 12
 	octave 1
 	note F#, 2
 	note A#, 2
-	note __, 2
+	rest 2
 	octave 2
 	note F#, 2
-	note __, 6
+	rest 6
 	note F#, 2
-	note __, 2
+	rest 2
 	note D#, 2
-	note __, 12
+	rest 12
 	octave 1
 	note F#, 2
 	note G#, 2
-	note __, 6
+	rest 6
 	note A#, 2
-	note __, 6
-	callchannel Music_Pinballseelstage_branch_45baa
-	notetype $6, $22
+	rest 6
+	sound_call Music_SeelStage_branch_45baa
+	note_type 6, 2, 2
 	note E_, 2
-	note __, 12
+	rest 12
 	octave 1
 	note G#, 2
 	note B_, 2
-	note __, 6
+	rest 6
 	octave 2
 	note E_, 2
-	note __, 6
+	rest 6
 	note E_, 2
-	note __, 12
+	rest 12
 	note C#, 2
 	note F#, 2
-	note __, 2
+	rest 2
 	note A#, 2
-	note __, 6
+	rest 6
 	note A#, 2
-	note __, 2
+	rest 2
 	note B_, 2
-	note __, 14
+	rest 14
 	octave 1
 	note B_, 2
-	note __, 14
-	callchannel Music_Pinballseelstage_branch_45baa
-	callchannel Music_Pinballseelstage_branch_45bb9
-	callchannel Music_Pinballseelstage_branch_45baa
-	notetype $6, $22
+	rest 14
+	sound_call Music_SeelStage_branch_45baa
+	sound_call Music_SeelStage_branch_45bb9
+	sound_call Music_SeelStage_branch_45baa
+	note_type 6, 2, 2
 	note E_, 2
-	note __, 2
-	notetype $6, $32
+	rest 2
+	note_type 6, 3, 2
 	octave 4
 	note G_, 1
-	note __, 1
+	rest 1
 	note G#, 1
-	note __, 1
+	rest 1
 	note G#, 1
-	note __, 1
+	rest 1
 	note G#, 1
-	note __, 3
-	notetype $6, $22
+	rest 3
+	note_type 6, 2, 2
 	octave 1
 	note F#, 2
 	note A_, 2
-	note __, 6
-	notetype $6, $32
+	rest 6
+	note_type 6, 3, 2
 	octave 4
 	note F_, 8
-	notetype $6, $22
-	callchannel Music_Pinballseelstage_branch_45bd1
+	note_type 6, 2, 2
+	sound_call Music_SeelStage_branch_45bd1
 	octave 2
 	note E_, 2
-	note __, 2
-	notetype $6, $32
+	rest 2
+	note_type 6, 3, 2
 	octave 5
 	note D#, 2
 	note E_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 3
-	notetype $6, $22
+	rest 3
+	note_type 6, 2, 2
 	octave 1
 	note F#, 2
 	note A_, 2
-	note __, 6
+	rest 6
 	note A#, 2
-	note __, 6
+	rest 6
 	octave 2
 	note C#, 2
-	note __, 2
-	notetype $6, $32
+	rest 2
+	note_type 6, 3, 2
 	octave 5
 	note D#, 2
 	note E_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 3
-	notetype $6, $22
+	rest 3
+	note_type 6, 2, 2
 	octave 1
 	note F#, 2
 	note A#, 2
-	note __, 2
+	rest 2
 	octave 2
 	note F#, 2
-	note __, 6
+	rest 6
 	note F#, 2
-	note __, 2
+	rest 2
 	note D#, 2
-	note __, 2
-	notetype $6, $32
+	rest 2
+	note_type 6, 3, 2
 	octave 5
 	note D_, 2
 	note D#, 1
-	note __, 1
+	rest 1
 	note D#, 1
-	note __, 1
+	rest 1
 	note D#, 1
-	note __, 3
-	notetype $6, $22
+	rest 3
+	note_type 6, 2, 2
 	octave 1
 	note F#, 2
 	note G#, 2
-	note __, 6
+	rest 6
 	note A#, 2
-	note __, 6
-	callchannel Music_Pinballseelstage_branch_45bd1
+	rest 6
+	sound_call Music_SeelStage_branch_45bd1
 	note E_, 2
-	note __, 2
-	notetype $6, $32
+	rest 2
+	note_type 6, 3, 2
 	octave 5
 	note D#, 2
 	note E_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 3
-	notetype $6, $22
+	rest 3
+	note_type 6, 2, 2
 	octave 1
 	note G#, 2
 	note B_, 2
-	note __, 6
+	rest 6
 	octave 2
 	note E_, 2
-	note __, 6
+	rest 6
 	note E_, 2
-	note __, 2
-	notetype $6, $32
+	rest 2
+	note_type 6, 3, 2
 	octave 5
 	note D#, 2
 	note E_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 3
-	notetype $6, $22
+	rest 3
+	note_type 6, 2, 2
 	octave 2
 	note C#, 2
 	note F#, 2
-	note __, 2
+	rest 2
 	note A#, 2
-	note __, 6
+	rest 6
 	note A#, 2
-	note __, 2
+	rest 2
 	note B_, 2
-	note __, 2
-	notetype $6, $32
+	rest 2
+	note_type 6, 3, 2
 	octave 5
 	note D_, 2
 	note D#, 1
-	note __, 1
+	rest 1
 	note D#, 1
-	note __, 1
+	rest 1
 	note D#, 1
-	note __, 3
+	rest 3
 	note D#, 1
-	note __, 1
+	rest 1
 	octave 1
 	note B_, 2
 	octave 5
 	note D#, 1
-	note __, 3
-	notetype $6, $22
+	rest 3
+	note_type 6, 2, 2
 	note D#, 1
-	note __, 3
+	rest 3
 	note D#, 1
-	note __, 3
+	rest 3
 	note D#, 1
-	note __, 1
-	callchannel Music_Pinballseelstage_branch_45bec
-	callchannel Music_Pinballseelstage_branch_45c23
-	callchannel Music_Pinballseelstage_branch_45bec
-	callchannel Music_Pinballseelstage_branch_45c23
-	notetype $6, $32
+	rest 1
+	sound_call Music_SeelStage_branch_45bec
+	sound_call Music_SeelStage_branch_45c23
+	sound_call Music_SeelStage_branch_45bec
+	sound_call Music_SeelStage_branch_45c23
+	note_type 6, 3, 2
 	octave 2
 	note E_, 2
-	note __, 6
+	rest 6
 	octave 5
 	note G_, 2
 	note G#, 1
-	note __, 3
+	rest 3
 	octave 2
 	note E_, 2
-	note __, 2
+	rest 2
 	octave 1
 	note B_, 2
-	note __, 2
+	rest 2
 	octave 3
 	note D#, 2
 	note E_, 2
-	note __, 2
+	rest 2
 	octave 2
 	note E_, 2
 	octave 3
 	note E_, 2
 	octave 2
 	note D#, 2
-	note __, 6
+	rest 6
 	octave 5
 	note F_, 2
 	note F#, 1
-	note __, 3
+	rest 3
 	octave 2
 	note D#, 2
-	note __, 2
+	rest 2
 	octave 1
 	note G#, 2
-	note __, 2
+	rest 2
 	octave 3
 	note D_, 2
 	note D#, 2
-	note __, 2
+	rest 2
 	octave 2
 	note D#, 2
 	octave 3
 	note D#, 2
 	octave 2
 	note C#, 2
-	note __, 6
+	rest 6
 	octave 5
 	note D#, 2
 	note E_, 1
-	note __, 3
+	rest 3
 	octave 2
 	note C#, 2
-	note __, 2
+	rest 2
 	note F#, 2
-	note __, 2
+	rest 2
 	octave 3
 	note C_, 2
 	note C#, 2
-	note __, 2
+	rest 2
 	octave 2
 	note F#, 2
 	octave 3
 	note C#, 2
 	note D#, 1
-	note __, 3
+	rest 3
 	note D#, 1
-	note __, 3
+	rest 3
 	note C_, 2
 	note C#, 1
-	note __, 3
+	rest 3
 	note D_, 1
-	note __, 1
+	rest 1
 	note D#, 1
-	note __, 7
+	rest 7
 	octave 4
 	note A#, 1
 	note F#, 1
@@ -1073,362 +1056,349 @@ Music_Pinballseelstage_branch_45a37: ; 45a37
 	note F#, 1
 	note E_, 1
 	note C#, 1
-	loopchannel 0, Music_Pinballseelstage_branch_45a37
-; 45baa
+	sound_loop 0, Music_SeelStage_Ch3
 
-Music_Pinballseelstage_branch_45baa: ; 45baa
-	notetype $c, $22
+Music_SeelStage_branch_45baa:
+	note_type 12, 2, 2
 	octave 1
 	note B_, 1
-	note __, 6
+	rest 6
 	note F#, 1
 	note A_, 1
-	note __, 1
+	rest 1
 	octave 2
 	note F#, 1
-	note __, 3
+	rest 3
 	note F#, 1
-	note __, 1
-	endchannel
-; 45bb9
+	rest 1
+	sound_ret
 
-Music_Pinballseelstage_branch_45bb9: ; 45bb9
+Music_SeelStage_branch_45bb9:
 	note E_, 1
-	note __, 1
-	notetype $6, $32
+	rest 1
+	note_type 6, 3, 2
 	octave 4
 	note G_, 1
-	note __, 1
+	rest 1
 	note G#, 1
-	note __, 1
+	rest 1
 	note G#, 1
-	note __, 1
+	rest 1
 	note G#, 1
-	note __, 3
-	notetype $6, $22
+	rest 3
+	note_type 6, 2, 2
 	octave 1
 	note F#, 2
 	note A_, 2
-	note __, 6
+	rest 6
 	note A#, 2
-	note __, 6
-	endchannel
-; 45bd1
+	rest 6
+	sound_ret
 
-Music_Pinballseelstage_branch_45bd1: ; 45bd1
+Music_SeelStage_branch_45bd1:
 	octave 1
 	note B_, 2
-	note __, 2
-	notetype $6, $32
+	rest 2
+	note_type 6, 3, 2
 	octave 5
 	note D_, 2
 	note D#, 1
-	note __, 1
+	rest 1
 	note D#, 1
-	note __, 1
+	rest 1
 	note D#, 1
-	note __, 3
-	notetype $6, $22
+	rest 3
+	note_type 6, 2, 2
 	octave 1
 	note F#, 2
 	note A_, 2
-	note __, 2
+	rest 2
 	octave 2
 	note F#, 2
-	note __, 6
+	rest 6
 	note F#, 2
-	note __, 2
-	endchannel
-; 45bec
+	rest 2
+	sound_ret
 
-Music_Pinballseelstage_branch_45bec: ; 45bec
+Music_SeelStage_branch_45bec:
 	octave 2
 	note E_, 2
-	note __, 6
-	notetype $6, $32
+	rest 6
+	note_type 6, 3, 2
 	octave 5
 	note G_, 2
-	notetype $6, $22
+	note_type 6, 2, 2
 	note G#, 1
-	note __, 3
+	rest 3
 	octave 2
 	note E_, 2
-	note __, 2
+	rest 2
 	octave 1
 	note B_, 2
-	note __, 2
+	rest 2
 	octave 3
 	note D#, 2
 	note E_, 2
-	note __, 2
+	rest 2
 	octave 2
 	note E_, 2
 	octave 3
 	note E_, 2
 	octave 2
 	note D#, 2
-	note __, 6
-	notetype $6, $32
+	rest 6
+	note_type 6, 3, 2
 	octave 5
 	note F_, 2
-	notetype $6, $22
+	note_type 6, 2, 2
 	note F#, 1
-	note __, 3
+	rest 3
 	octave 2
 	note D#, 2
-	note __, 2
+	rest 2
 	octave 1
 	note G#, 2
-	note __, 2
+	rest 2
 	octave 3
 	note D_, 2
 	note D#, 2
-	note __, 2
+	rest 2
 	octave 2
 	note D#, 2
 	octave 3
 	note D#, 2
-	endchannel
-; 45c23
+	sound_ret
 
-Music_Pinballseelstage_branch_45c23: ; 45c23
+Music_SeelStage_branch_45c23:
 	octave 2
 	note C#, 2
-	note __, 6
-	notetype $6, $32
+	rest 6
+	note_type 6, 3, 2
 	octave 5
 	note D#, 2
-	notetype $6, $22
+	note_type 6, 2, 2
 	note E_, 1
-	note __, 3
+	rest 3
 	octave 2
 	note C#, 2
-	note __, 2
+	rest 2
 	octave 1
 	note F#, 2
-	note __, 2
+	rest 2
 	octave 3
 	note C_, 2
 	note C#, 2
-	note __, 2
+	rest 2
 	octave 2
 	note F#, 2
 	octave 3
 	note C#, 2
 	octave 1
 	note B_, 2
-	note __, 6
-	notetype $6, $32
+	rest 6
+	note_type 6, 3, 2
 	octave 5
 	note D_, 2
-	notetype $6, $22
+	note_type 6, 2, 2
 	note D#, 1
-	note __, 3
+	rest 3
 	octave 1
 	note B_, 2
-	note __, 2
+	rest 2
 	octave 2
 	note F#, 2
-	note __, 2
+	rest 2
 	note F#, 2
 	note A_, 2
-	note __, 2
+	rest 2
 	note F#, 2
 	note A_, 2
-	endchannel
-; 45c57
+	sound_ret
 
-Music_Pinballseelstage_Ch4: ; 45c57
-	togglenoise $2
-Music_Pinballseelstage_branch_45c59: ; 45c59
-	notetype $c
-	callchannel Music_Pinballseelstage_branch_45d1b
-	callchannel Music_Pinballseelstage_branch_45d26
-	callchannel Music_Pinballseelstage_branch_45d1b
-	callchannel Music_Pinballseelstage_branch_45d26
-	callchannel Music_Pinballseelstage_branch_45d1b
-	callchannel Music_Pinballseelstage_branch_45d32
-	callchannel Music_Pinballseelstage_branch_45d1b
-	callchannel Music_Pinballseelstage_branch_45d32
-	callchannel Music_Pinballseelstage_branch_45d1b
-	callchannel Music_Pinballseelstage_branch_45d32
-	callchannel Music_Pinballseelstage_branch_45d1b
-	note D#, 2
-	note G_, 1
-	note G_, 1
-	note D_, 4
-	note D#, 1
-	note G_, 1
-	note D_, 2
-	note D_, 1
-	note D#, 1
-	note D_, 1
-	note D_, 1
-	callchannel Music_Pinballseelstage_branch_45d1b
-	callchannel Music_Pinballseelstage_branch_45d26
-	callchannel Music_Pinballseelstage_branch_45d1b
-	callchannel Music_Pinballseelstage_branch_45d26
-	callchannel Music_Pinballseelstage_branch_45d1b
-	callchannel Music_Pinballseelstage_branch_45d32
-	callchannel Music_Pinballseelstage_branch_45d1b
-	callchannel Music_Pinballseelstage_branch_45d32
-	callchannel Music_Pinballseelstage_branch_45d1b
-	callchannel Music_Pinballseelstage_branch_45d32
-	callchannel Music_Pinballseelstage_branch_45d1b
-	note D#, 2
-	note G_, 1
-	note G_, 1
-	note D_, 4
-	note D#, 1
-	note D#, 1
-	note G_, 1
-	note D_, 1
-	note D#, 1
-	note D_, 1
-	note D_, 1
-	note D_, 1
-	callchannel Music_Pinballseelstage_branch_45d3e
-	note D_, 1
-	note G_, 1
-	note G#, 1
-	note G#, 1
-	callchannel Music_Pinballseelstage_branch_45d3e
-	note D_, 1
-	note D_, 1
-	note G#, 1
-	note G_, 1
-	callchannel Music_Pinballseelstage_branch_45d3e
-	note D_, 1
-	note G_, 1
-	note G#, 1
-	note G#, 1
-	callchannel Music_Pinballseelstage_branch_45d3e
-	note D_, 1
-	note G_, 1
-	note D_, 1
-	note D_, 1
-	callchannel Music_Pinballseelstage_branch_45d3e
-	note D_, 1
-	note G_, 1
-	note G#, 1
-	note G#, 1
-	callchannel Music_Pinballseelstage_branch_45d3e
-	note D_, 1
-	note D_, 1
-	note G#, 1
-	note G_, 1
-	callchannel Music_Pinballseelstage_branch_45d3e
-	note D_, 1
-	note G_, 1
-	note G#, 1
-	note G#, 1
-	callchannel Music_Pinballseelstage_branch_45d3e
-	note D_, 1
-	note D_, 1
-	note G_, 1
-	note D_, 1
-	notetype $c
-	note C_, 2
-	note C#, 2
-	note E_, 2
-	note F_, 2
-	note F#, 2
-	note A_, 2
-	note A#, 2
-	note B_, 4
-	note A#, 2
-	note A_, 2
-	note F#, 2
-	note F_, 2
-	note E_, 2
-	note C#, 2
-	note C_, 2
-	note C_, 1
-	note C#, 1
-	note E_, 1
-	note F_, 1
-	note F#, 1
-	note A_, 1
-	note A#, 1
-	note B_, 2
-	note A#, 1
-	note A_, 1
-	note F#, 1
-	note F_, 1
-	note E_, 1
-	note C#, 1
-	note C_, 1
-	notetype $6
-	note D_, 4
-	note D_, 4
-	note D#, 2
-	note D_, 4
-	note D_, 2
-	note D_, 8
-	note D#, 4
-	note D#, 2
-	note D_, 2
-	loopchannel 0, Music_Pinballseelstage_branch_45c59
-; 45d1b
+Music_SeelStage_Ch4:
+	toggle_noise 2
+Music_SeelStage_branch_45c59:
+	drum_speed 12
+	sound_call Music_SeelStage_branch_45d1b
+	sound_call Music_SeelStage_branch_45d26
+	sound_call Music_SeelStage_branch_45d1b
+	sound_call Music_SeelStage_branch_45d26
+	sound_call Music_SeelStage_branch_45d1b
+	sound_call Music_SeelStage_branch_45d32
+	sound_call Music_SeelStage_branch_45d1b
+	sound_call Music_SeelStage_branch_45d32
+	sound_call Music_SeelStage_branch_45d1b
+	sound_call Music_SeelStage_branch_45d32
+	sound_call Music_SeelStage_branch_45d1b
+	drum_note 4, 2
+	drum_note 8, 1
+	drum_note 8, 1
+	drum_note 3, 4
+	drum_note 4, 1
+	drum_note 8, 1
+	drum_note 3, 2
+	drum_note 3, 1
+	drum_note 4, 1
+	drum_note 3, 1
+	drum_note 3, 1
+	sound_call Music_SeelStage_branch_45d1b
+	sound_call Music_SeelStage_branch_45d26
+	sound_call Music_SeelStage_branch_45d1b
+	sound_call Music_SeelStage_branch_45d26
+	sound_call Music_SeelStage_branch_45d1b
+	sound_call Music_SeelStage_branch_45d32
+	sound_call Music_SeelStage_branch_45d1b
+	sound_call Music_SeelStage_branch_45d32
+	sound_call Music_SeelStage_branch_45d1b
+	sound_call Music_SeelStage_branch_45d32
+	sound_call Music_SeelStage_branch_45d1b
+	drum_note 4, 2
+	drum_note 8, 1
+	drum_note 8, 1
+	drum_note 3, 4
+	drum_note 4, 1
+	drum_note 4, 1
+	drum_note 8, 1
+	drum_note 3, 1
+	drum_note 4, 1
+	drum_note 3, 1
+	drum_note 3, 1
+	drum_note 3, 1
+	sound_call Music_SeelStage_branch_45d3e
+	drum_note 3, 1
+	drum_note 8, 1
+	drum_note 9, 1
+	drum_note 9, 1
+	sound_call Music_SeelStage_branch_45d3e
+	drum_note 3, 1
+	drum_note 3, 1
+	drum_note 9, 1
+	drum_note 8, 1
+	sound_call Music_SeelStage_branch_45d3e
+	drum_note 3, 1
+	drum_note 8, 1
+	drum_note 9, 1
+	drum_note 9, 1
+	sound_call Music_SeelStage_branch_45d3e
+	drum_note 3, 1
+	drum_note 8, 1
+	drum_note 3, 1
+	drum_note 3, 1
+	sound_call Music_SeelStage_branch_45d3e
+	drum_note 3, 1
+	drum_note 8, 1
+	drum_note 9, 1
+	drum_note 9, 1
+	sound_call Music_SeelStage_branch_45d3e
+	drum_note 3, 1
+	drum_note 3, 1
+	drum_note 9, 1
+	drum_note 8, 1
+	sound_call Music_SeelStage_branch_45d3e
+	drum_note 3, 1
+	drum_note 8, 1
+	drum_note 9, 1
+	drum_note 9, 1
+	sound_call Music_SeelStage_branch_45d3e
+	drum_note 3, 1
+	drum_note 3, 1
+	drum_note 8, 1
+	drum_note 3, 1
+	drum_speed 12
+	drum_note 1, 2
+	drum_note 2, 2
+	drum_note 5, 2
+	drum_note 6, 2
+	drum_note 7, 2
+	drum_note 10, 2
+	drum_note 11, 2
+	drum_note 12, 4
+	drum_note 11, 2
+	drum_note 10, 2
+	drum_note 7, 2
+	drum_note 6, 2
+	drum_note 5, 2
+	drum_note 2, 2
+	drum_note 1, 2
+	drum_note 1, 1
+	drum_note 2, 1
+	drum_note 5, 1
+	drum_note 6, 1
+	drum_note 7, 1
+	drum_note 10, 1
+	drum_note 11, 1
+	drum_note 12, 2
+	drum_note 11, 1
+	drum_note 10, 1
+	drum_note 7, 1
+	drum_note 6, 1
+	drum_note 5, 1
+	drum_note 2, 1
+	drum_note 1, 1
+	drum_speed 6
+	drum_note 3, 4
+	drum_note 3, 4
+	drum_note 4, 2
+	drum_note 3, 4
+	drum_note 3, 2
+	drum_note 3, 8
+	drum_note 4, 4
+	drum_note 4, 2
+	drum_note 3, 2
+	sound_loop 0, Music_SeelStage_branch_45c59
 
-Music_Pinballseelstage_branch_45d1b: ; 45d1b
-	note D#, 2
-	note G_, 1
-	note G_, 1
-	note D_, 3
-	note D#, 1
-	note D#, 2
-	note D#, 1
-	note G_, 1
-	note D_, 3
-	note D#, 1
-	endchannel
-; 45d26
+Music_SeelStage_branch_45d1b:
+	drum_note 4, 2
+	drum_note 8, 1
+	drum_note 8, 1
+	drum_note 3, 3
+	drum_note 4, 1
+	drum_note 4, 2
+	drum_note 4, 1
+	drum_note 8, 1
+	drum_note 3, 3
+	drum_note 4, 1
+	sound_ret
 
-Music_Pinballseelstage_branch_45d26: ; 45d26
-	note D#, 2
-	note G_, 1
-	note G_, 1
-	note D_, 4
-	note D#, 1
-	note G_, 1
-	note D_, 2
-	note D#, 1
-	note D#, 1
-	note D_, 1
-	note G_, 1
-	endchannel
-; 45d32
+Music_SeelStage_branch_45d26:
+	drum_note 4, 2
+	drum_note 8, 1
+	drum_note 8, 1
+	drum_note 3, 4
+	drum_note 4, 1
+	drum_note 8, 1
+	drum_note 3, 2
+	drum_note 4, 1
+	drum_note 4, 1
+	drum_note 3, 1
+	drum_note 8, 1
+	sound_ret
 
-Music_Pinballseelstage_branch_45d32: ; 45d32
-	note D#, 2
-	note G_, 1
-	note G_, 1
-	note D_, 4
-	note D#, 1
-	note G_, 1
-	note D_, 2
-	note D#, 1
-	note D#, 1
-	note D_, 1
-	note D_, 1
-	endchannel
-; 45d3e
+Music_SeelStage_branch_45d32:
+	drum_note 4, 2
+	drum_note 8, 1
+	drum_note 8, 1
+	drum_note 3, 4
+	drum_note 4, 1
+	drum_note 8, 1
+	drum_note 3, 2
+	drum_note 4, 1
+	drum_note 4, 1
+	drum_note 3, 1
+	drum_note 3, 1
+	sound_ret
 
-Music_Pinballseelstage_branch_45d3e: ; 45d3e
-	note G#, 1
-	note G#, 1
-	note G_, 1
-	note G_, 1
-	note D_, 1
-	note G#, 1
-	note G_, 1
-	note G_, 1
-	note G_, 1
-	note G_, 1
-	note G#, 1
-	note G_, 1
-	endchannel
-; 45d4b
-
-
+Music_SeelStage_branch_45d3e:
+	drum_note 9, 1
+	drum_note 9, 1
+	drum_note 8, 1
+	drum_note 8, 1
+	drum_note 3, 1
+	drum_note 9, 1
+	drum_note 8, 1
+	drum_note 8, 1
+	drum_note 8, 1
+	drum_note 8, 1
+	drum_note 9, 1
+	drum_note 8, 1
+	sound_ret

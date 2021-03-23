@@ -6,28 +6,28 @@ ReadJoypad::
 	ld a, 1 << 5 ; select direction keys
 	ld c, 0
 
-	ld [rJOYP], a
-	rept 6
-	ld a, [rJOYP]
-	endr
+	ldh [rJOYP], a
+REPT 6
+	ldh a, [rJOYP]
+ENDR
 	cpl
 	and %1111
 	swap a
 	ld b, a
 
 	ld a, 1 << 4 ; select button keys
-	ld [rJOYP], a
-	rept 10
-	ld a, [rJOYP]
-	endr
+	ldh [rJOYP], a
+REPT 10
+	ldh a, [rJOYP]
+ENDR
 	cpl
 	and %1111
 	or b
 
-	ld [hJoyInput], a
+	ldh [hJoyInput], a
 
 	ld a, 1 << 4 + 1 << 5 ; deselect keys
-	ld [rJOYP], a
+	ldh [rJOYP], a
 	ret
 
 Joypad::

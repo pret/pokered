@@ -8,15 +8,15 @@ ViridianNicknameHouse_TextPointers:
 	dw ViridianHouseText4
 
 ViridianHouseText1:
-	TX_FAR _ViridianHouseText1
-	db "@"
+	text_far _ViridianHouseText1
+	text_end
 
 ViridianHouseText2:
-	TX_FAR _ViridianHouseText2
-	db "@"
+	text_far _ViridianHouseText2
+	text_end
 
 ViridianHouseText3:
-	TX_ASM
+	text_asm
 	ld hl, ViridianHouseText_1d5b1
 	call PrintText
 	ld a, SPEAROW
@@ -25,9 +25,9 @@ ViridianHouseText3:
 	jp TextScriptEnd
 
 ViridianHouseText_1d5b1:
-	TX_FAR _ViridianHouseText_1d5b1
-	db "@"
+	text_far _ViridianHouseText_1d5b1
+	text_end
 
 ViridianHouseText4:
-	TX_FAR _ViridianHouseText4
-	db "@"
+	text_far _ViridianHouseText4
+	text_end

@@ -1,20 +1,24 @@
-; list menu ID's
-PCPOKEMONLISTMENU  EQU $00 ; PC pokemon withdraw/deposit lists
-MOVESLISTMENU      EQU $01 ; XXX where is this used?
-PRICEDITEMLISTMENU EQU $02 ; Pokemart buy menu / Pokemart buy/sell choose quantity menu
-ITEMLISTMENU       EQU $03 ; Start menu Item menu / Pokemart sell menu
-SPECIALLISTMENU    EQU $04 ; list of special "items" e.g. floor list in elevators / list of badges
+; list menu IDs
+	const_def
+	const PCPOKEMONLISTMENU  ; $00 ; PC pokemon withdraw/deposit lists
+	const MOVESLISTMENU      ; $01 ; XXX where is this used?
+	const PRICEDITEMLISTMENU ; $02 ; Pokemart buy menu / Pokemart buy/sell choose quantity menu
+	const ITEMLISTMENU       ; $03 ; Start menu Item menu / Pokemart sell menu
+	const SPECIALLISTMENU    ; $04 ; list of special "items" e.g. floor list in elevators / list of badges
 
-MONSTER_NAME  EQU 1
-MOVE_NAME     EQU 2
-; ???_NAME    EQU 3
-ITEM_NAME     EQU 4
-PLAYEROT_NAME EQU 5
-ENEMYOT_NAME  EQU 6
-TRAINER_NAME  EQU 7
+; NamePointers indexes (see home/names2.asm)
+	const_def 1
+	const MONSTER_NAME  ; 1
+	const MOVE_NAME     ; 2
+	const UNUSED_NAME   ; 3
+	const ITEM_NAME     ; 4
+	const PLAYEROT_NAME ; 5
+	const ENEMYOT_NAME  ; 6
+	const TRAINER_NAME  ; 7
 
-INIT_ENEMYOT_LIST    EQU 1
-INIT_BAG_ITEM_LIST   EQU 2
-INIT_OTHER_ITEM_LIST EQU 3
-INIT_PLAYEROT_LIST   EQU 4
-INIT_MON_LIST        EQU 5
+	const_def 1
+	const INIT_ENEMYOT_LIST    ; 1
+	const INIT_BAG_ITEM_LIST   ; 2
+	const INIT_OTHER_ITEM_LIST ; 3
+	const INIT_PLAYEROT_LIST   ; 4
+	const INIT_MON_LIST        ; 5

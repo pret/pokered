@@ -16,14 +16,14 @@ BillsHouseScript0:
 	ret
 
 BillsHouseScript1:
-	ld a, [wSpriteStateData1 + 9]
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	and a ; cp SPRITE_FACING_DOWN
 	ld de, MovementData_1e79c
 	jr nz, .notDown
 	ld de, MovementData_1e7a0
 .notDown
 	ld a, $1
-	ld [H_SPRITEINDEX], a
+	ldh [hSpriteIndex], a
 	call MoveSprite
 	ld a, $2
 	ld [wBillsHouseCurScript], a
@@ -33,7 +33,7 @@ MovementData_1e79c:
 	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_UP
-	db $FF
+	db -1 ; end
 
 ; make Bill walk around the player
 MovementData_1e7a0:
@@ -42,7 +42,7 @@ MovementData_1e7a0:
 	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_LEFT
 	db NPC_MOVEMENT_UP
-	db $FF
+	db -1 ; end
 
 BillsHouseScript2:
 	ld a, [wd730]
@@ -66,13 +66,13 @@ BillsHouseScript3:
 	ld a, $2
 	ld [wSpriteIndex], a
 	ld a, $c
-	ld [$ffeb], a
+	ldh [hSpriteScreenYCoord], a
 	ld a, $40
-	ld [$ffec], a
-	ld a, $6
-	ld [$ffed], a
-	ld a, $5
-	ld [$ffee], a
+	ldh [hSpriteScreenXCoord], a
+	ld a, 6
+	ldh [hSpriteMapYCoord], a
+	ld a, 5
+	ldh [hSpriteMapXCoord], a
 	call SetSpritePosition1
 	ld a, HS_BILL_1
 	ld [wMissableObjectIndex], a
@@ -80,7 +80,7 @@ BillsHouseScript3:
 	ld c, 8
 	call DelayFrames
 	ld a, $2
-	ld [H_SPRITEINDEX], a
+	ldh [hSpriteIndex], a
 	ld de, MovementData_1e807
 	call MoveSprite
 	ld a, $4
@@ -93,7 +93,7 @@ MovementData_1e807:
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_DOWN
-	db $FF
+	db -1 ; end
 
 BillsHouseScript4:
 	ld a, [wd730]
@@ -109,7 +109,7 @@ BillsHouseScript4:
 
 BillsHouseScript5:
 	ld a, $4
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $0
 	ld [wBillsHouseCurScript], a
@@ -122,10 +122,10 @@ BillsHouse_TextPointers:
 	dw BillsHouseText4
 
 BillsHouseText4:
-	TX_BILLS_PC
+	script_bills_pc
 
 BillsHouseText1:
-	TX_ASM
+	text_asm
 	ld hl, BillsHouseText_1e865
 	call PrintText
 	call YesNoChoice
@@ -146,19 +146,19 @@ BillsHouseText1:
 	jp TextScriptEnd
 
 BillsHouseText_1e865:
-	TX_FAR _BillsHouseText_1e865
-	db "@"
+	text_far _BillsHouseText_1e865
+	text_end
 
 BillsHouseText_1e86a:
-	TX_FAR _BillsHouseText_1e86a
-	db "@"
+	text_far _BillsHouseText_1e86a
+	text_end
 
 BillsHouseText_1e86f:
-	TX_FAR _BillsHouseText_1e86f
-	db "@"
+	text_far _BillsHouseText_1e86f
+	text_end
 
 BillsHouseText2:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_GOT_SS_TICKET
 	jr nz, .asm_1e8a9
 	ld hl, BillThankYouText
@@ -186,29 +186,29 @@ BillsHouseText2:
 	jp TextScriptEnd
 
 BillThankYouText:
-	TX_FAR _BillThankYouText
-	db "@"
+	text_far _BillThankYouText
+	text_end
 
 SSTicketReceivedText:
-	TX_FAR _SSTicketReceivedText
-	TX_SFX_KEY_ITEM
-	TX_BLINK
-	db "@"
+	text_far _SSTicketReceivedText
+	sound_get_key_item
+	text_promptbutton
+	text_end
 
 SSTicketNoRoomText:
-	TX_FAR _SSTicketNoRoomText
-	db "@"
+	text_far _SSTicketNoRoomText
+	text_end
 
 BillsHouseText_1e8cb:
-	TX_FAR _BillsHouseText_1e8cb
-	db "@"
+	text_far _BillsHouseText_1e8cb
+	text_end
 
 BillsHouseText3:
-	TX_ASM
+	text_asm
 	ld hl, BillsHouseText_1e8da
 	call PrintText
 	jp TextScriptEnd
 
 BillsHouseText_1e8da:
-	TX_FAR _BillsHouseText_1e8da
-	db "@"
+	text_far _BillsHouseText_1e8da
+	text_end

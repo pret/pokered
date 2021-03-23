@@ -32,7 +32,7 @@ SeafoamIslandsB3F_Script:
 	predef ShowObject
 	jr .asm_465ed
 .asm_465dc
-	ld a, $a2
+	ld a, SEAFOAM_ISLANDS_B4F
 	ld [wDungeonWarpDestinationMap], a
 	ld hl, Seafoam4HolesCoords
 	call IsPlayerOnDungeonWarp
@@ -45,9 +45,9 @@ SeafoamIslandsB3F_Script:
 	jp CallFunctionInTable
 
 Seafoam4HolesCoords:
-	db $10,$03
-	db $10,$06
-	db $ff
+	dbmapcoord  3, 16
+	dbmapcoord  6, 16
+	db -1 ; end
 
 SeafoamIslandsB3F_ScriptPointers:
 	dw SeafoamIslands4Script0
@@ -59,10 +59,10 @@ SeafoamIslands4Script0:
 	CheckBothEventsSet EVENT_SEAFOAM3_BOULDER1_DOWN_HOLE, EVENT_SEAFOAM3_BOULDER2_DOWN_HOLE
 	ret z
 	ld a, [wYCoord]
-	cp $8
+	cp 8
 	ret nz
 	ld a, [wXCoord]
-	cp $f
+	cp 15
 	ret nz
 	ld hl, wSimulatedJoypadStatesEnd
 	ld de, RLEMovement46632
@@ -77,10 +77,10 @@ SeafoamIslands4Script0:
 	ret
 
 RLEMovement46632:
-	db D_DOWN,6
-	db D_RIGHT,5
-	db D_DOWN,3
-	db $ff
+	db D_DOWN, 6
+	db D_RIGHT, 5
+	db D_DOWN, 3
+	db -1 ; end
 
 SeafoamIslands4Script1:
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -94,9 +94,9 @@ SeafoamIslands4Script2:
 	CheckBothEventsSet EVENT_SEAFOAM3_BOULDER1_DOWN_HOLE, EVENT_SEAFOAM3_BOULDER2_DOWN_HOLE
 	ret z
 	ld a, [wXCoord]
-	cp $12
+	cp 18
 	jr z, .asm_4665e
-	cp $13
+	cp 19
 	ld a, $0
 	jr nz, .asm_4667b
 	ld de, RLEData_4667f
@@ -109,7 +109,7 @@ SeafoamIslands4Script2:
 	dec a
 	ld [wSimulatedJoypadStatesIndex], a
 	xor a
-	ld [wSpriteStateData2 + $06], a
+	ld [wSpritePlayerStateData2MovementByte1], a
 	ld hl, wd730
 	set 7, [hl]
 	ld hl, wFlags_D733
@@ -120,17 +120,17 @@ SeafoamIslands4Script2:
 	ret
 
 RLEData_4667f:
-	db D_DOWN,$06
-	db D_RIGHT,$02
-	db D_DOWN,$04
-	db D_LEFT,$01
-	db $FF
+	db D_DOWN, 6
+	db D_RIGHT, 2
+	db D_DOWN, 4
+	db D_LEFT, 1
+	db -1 ; end
 
 RLEData_46688:
-	db D_DOWN,$06
-	db D_RIGHT,$02
-	db D_DOWN,$04
-	db $FF
+	db D_DOWN, 6
+	db D_RIGHT, 2
+	db D_DOWN, 4
+	db -1 ; end
 
 SeafoamIslands4Script3:
 	ld a, [wSimulatedJoypadStatesIndex]

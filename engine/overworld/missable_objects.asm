@@ -1,6 +1,6 @@
-MarkTownVisitedAndLoadMissableObjects:
+MarkTownVisitedAndLoadMissableObjects::
 	ld a, [wCurMap]
-	cp ROUTE_1
+	cp FIRST_ROUTE_MAP
 	jr nc, .notInTown
 	ld c, a
 	ld b, FLAG_SET
@@ -20,7 +20,7 @@ MarkTownVisitedAndLoadMissableObjects:
 LoadMissableObjects:
 	ld l, a
 	push hl
-	ld de, MapHS00             ; calculate difference between out pointer and the base pointer
+	ld de, MissableObjects     ; calculate difference between out pointer and the base pointer
 	ld a, l
 	sub e
 	jr nc, .asm_f13c
@@ -31,25 +31,25 @@ LoadMissableObjects:
 	sub d
 	ld h, a
 	ld a, h
-	ld [H_DIVIDEND], a
+	ldh [hDividend], a
 	ld a, l
-	ld [H_DIVIDEND+1], a
+	ldh [hDividend+1], a
 	xor a
-	ld [H_DIVIDEND+2], a
-	ld [H_DIVIDEND+3], a
+	ldh [hDividend+2], a
+	ldh [hDividend+3], a
 	ld a, $3
-	ld [H_DIVISOR], a
+	ldh [hDivisor], a
 	ld b, $2
 	call Divide                ; divide difference by 3, resulting in the global offset (number of missable items before ours)
 	ld a, [wCurMap]
 	ld b, a
-	ld a, [H_DIVIDEND+3]
+	ldh a, [hDividend+3]
 	ld c, a                    ; store global offset in c
 	ld de, wMissableObjectList
 	pop hl
 .writeMissableObjectsListLoop
 	ld a, [hli]
-	cp $ff
+	cp -1
 	jr z, .done     ; end of list
 	cp b
 	jr nz, .done    ; not for current map anymore
@@ -63,7 +63,7 @@ LoadMissableObjects:
 	inc de
 	jr .writeMissableObjectsListLoop
 .done
-	ld a, $ff
+	ld a, -1
 	ld [de], a                 ; write sentinel
 	ret
 
@@ -72,17 +72,17 @@ InitializeMissableObjectsFlags:
 	ld bc, wMissableObjectFlagsEnd - wMissableObjectFlags
 	xor a
 	call FillMemory ; clear missable objects flags
-	ld hl, MapHS00
+	ld hl, MissableObjects
 	xor a
 	ld [wMissableObjectCounter], a
 .missableObjectsLoop
 	ld a, [hli]
-	cp $ff          ; end of list
+	cp -1           ; end of list
 	ret z
 	push hl
 	inc hl
 	ld a, [hl]
-	cp Hide
+	cp HIDE
 	jr nz, .skip
 	ld hl, wMissableObjectFlags
 	ld a, [wMissableObjectCounter]
@@ -99,13 +99,13 @@ InitializeMissableObjectsFlags:
 
 ; tests if current sprite is a missable object that is hidden/has been removed
 IsObjectHidden:
-	ld a, [H_CURRENTSPRITEOFFSET]
+	ldh a, [hCurrentSpriteOffset]
 	swap a
 	ld b, a
 	ld hl, wMissableObjectList
 .loop
 	ld a, [hli]
-	cp $ff
+	cp -1
 	jr z, .notHidden ; not missable -> not hidden
 	cp b
 	ld a, [hli]
@@ -120,7 +120,7 @@ IsObjectHidden:
 .notHidden
 	xor a
 .hidden
-	ld [$ffe5], a
+	ldh [hIsHiddenMissableObject], a
 	ret
 
 ; adds missable object (items, leg. pokemon, etc.) to the map

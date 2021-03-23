@@ -1,30 +1,31 @@
 Music_Bicycle:
-	musicheader 4, 1, Music_Bicycle_Ch1
-	musicheader 1, 2, Music_Bicycle_Ch2
-	musicheader 1, 3, Music_Bicycle_Ch3
-	musicheader 1, 4, Music_Bicycle_Ch4
+	channel_count 4
+	channel 1, Music_Bicycle_Ch1
+	channel 2, Music_Bicycle_Ch2
+	channel 3, Music_Bicycle_Ch3
+	channel 4, Music_Bicycle_Ch4
 
 Music_Bicycle_Ch1:
 	tempo 140
-	volume $77
-	dutycycle $3
-	tone $0001
-	stereopanning $f
-	vibrato $8, $15
-	notetype $c, $b4
+	volume 7, 7
+	duty_cycle 3
+	pitch_offset 1
+	stereo_panning FALSE, TRUE
+	vibrato 8, 1, 5
+	note_type 12, 11, 4
 	octave 3
 	note B_, 6
 	note A_, 6
 	note G_, 4
-	intensity $b0
+	volume_envelope 11, 0
 	note A_, 6
-	intensity $b6
+	volume_envelope 11, 6
 	note A_, 8
-	intensity $b2
+	volume_envelope 11, 2
 	note F#, 2
-Music_Bicycle_branch_ee144:
-	stereopanning $f
-	intensity $b2
+.mainloop:
+	stereo_panning FALSE, TRUE
+	volume_envelope 11, 2
 	note G_, 2
 	note G_, 2
 	note E_, 2
@@ -90,17 +91,17 @@ Music_Bicycle_branch_ee144:
 	note F#, 2
 	note G_, 2
 	note F#, 2
-	intensity $82
+	volume_envelope 8, 2
 	note F#, 2
-	intensity $b2
+	volume_envelope 11, 2
 	note A_, 2
 	note G_, 2
 	note F#, 2
 	note G_, 2
 	note G#, 2
 	note A_, 2
-	stereopanning $f0
-	intensity $b6
+	stereo_panning TRUE, FALSE
+	volume_envelope 11, 6
 	note B_, 4
 	note G_, 4
 	octave 4
@@ -167,19 +168,19 @@ Music_Bicycle_branch_ee144:
 	note G_, 2
 	note G#, 2
 	note A_, 2
-	loopchannel 0, Music_Bicycle_branch_ee144
+	sound_loop 0, .mainloop
 
 Music_Bicycle_Ch2:
-	dutycycle $2
-	vibrato $10, $24
-	stereopanning $f0
-	notetype $c, $c6
+	duty_cycle 2
+	vibrato 16, 2, 4
+	stereo_panning TRUE, FALSE
+	note_type 12, 12, 6
 	octave 4
 	note D_, 6
 	note C_, 6
 	octave 3
 	note B_, 4
-	intensity $c2
+	volume_envelope 12, 2
 	octave 4
 	note D_, 2
 	note D_, 1
@@ -188,31 +189,31 @@ Music_Bicycle_Ch2:
 	note D_, 1
 	note E_, 1
 	note D_, 2
-	intensity $c3
+	volume_envelope 12, 3
 	note C_, 2
 	octave 3
 	note B_, 2
 	note A_, 2
-Music_Bicycle_branch_ee1fd:
-	stereopanning $ff
-	dutycycle $2
-	intensity $c3
+.mainloop:
+	stereo_panning TRUE, TRUE
+	duty_cycle 2
+	volume_envelope 12, 3
 	octave 3
 	note B_, 4
 	note G_, 4
 	note A_, 4
 	note F#, 4
-	intensity $c2
+	volume_envelope 12, 2
 	note G_, 2
 	note F#, 2
 	note E_, 2
 	note F#, 2
-	intensity $c5
+	volume_envelope 12, 5
 	note D_, 8
-	intensity $c4
+	volume_envelope 12, 4
 	note E_, 4
 	note G_, 4
-	intensity $c2
+	volume_envelope 12, 2
 	note E_, 2
 	note B_, 2
 	note A_, 2
@@ -221,24 +222,24 @@ Music_Bicycle_branch_ee1fd:
 	note G_, 2
 	note A_, 2
 	note G_, 2
-	intensity $c5
+	volume_envelope 12, 5
 	note F#, 8
-	intensity $c3
+	volume_envelope 12, 3
 	note B_, 4
 	note G_, 4
 	note A_, 4
 	note F#, 4
-	intensity $c2
+	volume_envelope 12, 2
 	note G_, 2
 	note F#, 2
 	note E_, 2
 	note F#, 2
-	intensity $c5
+	volume_envelope 12, 5
 	note D_, 8
-	intensity $c4
+	volume_envelope 12, 4
 	note E_, 4
 	note G_, 4
-	intensity $c2
+	volume_envelope 12, 2
 	note E_, 2
 	octave 4
 	note E_, 2
@@ -250,29 +251,29 @@ Music_Bicycle_branch_ee1fd:
 	note C_, 2
 	note D_, 2
 	note E_, 2
-	intensity $c7
+	volume_envelope 12, 7
 	note F#, 8
-	stereopanning $f
-	callchannel Music_Bicycle_branch_ee263
+	stereo_panning FALSE, TRUE
+	sound_call .sub1
 	note F#, 4
-	intensity $c3
+	volume_envelope 12, 3
 	note A_, 2
 	note D_, 2
 	note E_, 2
 	note F_, 2
 	note F#, 4
-	intensity $c7
-	callchannel Music_Bicycle_branch_ee263
+	volume_envelope 12, 7
+	sound_call .sub1
 	note F#, 4
-	intensity $c3
+	volume_envelope 12, 3
 	note A_, 2
 	note B_, 2
 	note A_, 2
 	note G_, 2
 	note F#, 4
-	loopchannel 0, Music_Bicycle_branch_ee1fd
+	sound_loop 0, .mainloop
 
-Music_Bicycle_branch_ee263:
+.sub1:
 	note G_, 6
 	note B_, 6
 	note G_, 4
@@ -282,11 +283,11 @@ Music_Bicycle_branch_ee263:
 	note E_, 6
 	note G_, 6
 	note E_, 4
-	endchannel
+	sound_ret
 
 Music_Bicycle_Ch3:
-	notetype $c, $14
-	note __, 16
+	note_type 12, 1, 4
+	rest 16
 	octave 3
 	note A_, 2
 	octave 4
@@ -300,215 +301,215 @@ Music_Bicycle_Ch3:
 	note D_, 2
 	octave 3
 	note A_, 1
-	note __, 1
-Music_Bicycle_branch_ee27f:
-	callchannel Music_Bicycle_branch_ee333
+	rest 1
+.mainloop:
+	sound_call .sub1
 	note E_, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note D_, 1
-	note __, 1
+	rest 1
 	octave 2
 	note B_, 1
-	note __, 1
+	rest 1
 	octave 3
 	note C_, 1
-	note __, 1
+	rest 1
 	note D_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note C_, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note C_, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note F#, 1
-	note __, 1
+	rest 1
 	note A_, 1
-	note __, 1
+	rest 1
 	note D_, 1
-	note __, 1
+	rest 1
 	note A_, 1
-	note __, 1
+	rest 1
 	note F#, 1
-	note __, 1
+	rest 1
 	note D_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 1
+	rest 1
 	note F#, 1
-	note __, 1
-	callchannel Music_Bicycle_branch_ee333
+	rest 1
+	sound_call .sub1
 	note E_, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note D_, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note F#, 1
-	note __, 1
+	rest 1
 	note F_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note C_, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note C_, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note F#, 1
-	note __, 1
+	rest 1
 	note A_, 1
-	note __, 1
+	rest 1
 	note D_, 1
-	note __, 1
+	rest 1
 	note A_, 1
-	note __, 1
+	rest 1
 	octave 4
 	note D_, 1
-	note __, 1
+	rest 1
 	note C_, 1
-	note __, 1
+	rest 1
 	octave 3
 	note B_, 1
-	note __, 1
+	rest 1
 	note A_, 1
-	note __, 1
-Music_Bicycle_branch_ee2e9:
+	rest 1
+.loop1:
 	note G_, 1
-	note __, 1
+	rest 1
 	note B_, 1
-	note __, 1
+	rest 1
 	note D_, 1
-	note __, 1
+	rest 1
 	note B_, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note B_, 1
-	note __, 1
+	rest 1
 	note D_, 1
-	note __, 1
+	rest 1
 	note B_, 1
-	note __, 1
+	rest 1
 	note F#, 1
-	note __, 1
+	rest 1
 	note A_, 1
-	note __, 1
+	rest 1
 	note D_, 1
-	note __, 1
+	rest 1
 	note A_, 1
-	note __, 1
+	rest 1
 	note F#, 1
-	note __, 1
+	rest 1
 	note A_, 1
-	note __, 1
+	rest 1
 	note D_, 1
-	note __, 1
+	rest 1
 	note A_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note C_, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note C_, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note F#, 1
-	note __, 1
+	rest 1
 	note A_, 1
-	note __, 1
+	rest 1
 	note D_, 1
-	note __, 1
+	rest 1
 	note A_, 1
-	note __, 1
+	rest 1
 	note F#, 1
-	note __, 1
+	rest 1
 	octave 4
 	note C_, 1
-	note __, 1
+	rest 1
 	octave 3
 	note B_, 1
-	note __, 1
+	rest 1
 	note A_, 1
-	note __, 1
-	loopchannel 2, Music_Bicycle_branch_ee2e9
-	loopchannel 0, Music_Bicycle_branch_ee27f
+	rest 1
+	sound_loop 2, .loop1
+	sound_loop 0, .mainloop
 
-Music_Bicycle_branch_ee333:
+.sub1:
 	octave 3
 	note G_, 1
-	note __, 1
+	rest 1
 	note B_, 1
-	note __, 1
+	rest 1
 	note D_, 1
-	note __, 1
+	rest 1
 	note B_, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note B_, 1
-	note __, 1
+	rest 1
 	note D_, 1
-	note __, 1
+	rest 1
 	note B_, 1
-	note __, 1
-	endchannel
+	rest 1
+	sound_ret
 
 Music_Bicycle_Ch4:
-	togglenoise $0
-	notetype $c
-	note __, 16
-	note __, 16
-Music_Bicycle_branch_ee34b:
-	note __, 2
-Music_Bicycle_branch_ee34c:
-	stereopanning $f0
-	note F_, 4
-	loopchannel 12, Music_Bicycle_branch_ee34c
-	note F_, 4
-	note F_, 4
-	stereopanning $ff
-	note F_, 2
-	note F_, 2
-	note F_, 2
-	loopchannel 0, Music_Bicycle_branch_ee34b
+	toggle_noise 0
+	drum_speed 12
+	rest 16
+	rest 16
+.mainloop:
+	rest 2
+.loop1:
+	stereo_panning TRUE, FALSE
+	drum_note 6, 4
+	sound_loop 12, .loop1
+	drum_note 6, 4
+	drum_note 6, 4
+	stereo_panning TRUE, TRUE
+	drum_note 6, 2
+	drum_note 6, 2
+	drum_note 6, 2
+	sound_loop 0, .mainloop

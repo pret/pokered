@@ -1,265 +1,386 @@
-charmap "ガ", $05
-charmap "ギ", $06
-charmap "グ", $07
-charmap "ゲ", $08
-charmap "ゴ", $09
-charmap "ザ", $0A
-charmap "ジ", $0B
-charmap "ズ", $0C
-charmap "ゼ", $0D
-charmap "ゾ", $0E
-charmap "ダ", $0F
-charmap "ヂ", $10
-charmap "ヅ", $11
-charmap "デ", $12
-charmap "ド", $13
-charmap "バ", $19
-charmap "ビ", $1A
-charmap "ブ", $1B
-charmap "ボ", $1C
-charmap "が", $26
-charmap "ぎ", $27
-charmap "ぐ", $28
-charmap "げ", $29
-charmap "ご", $2A
-charmap "ざ", $2B
-charmap "じ", $2C
-charmap "ず", $2D
-charmap "ぜ", $2E
-charmap "ぞ", $2F
-charmap "だ", $30
-charmap "ぢ", $31
-charmap "づ", $32
-charmap "で", $33
-charmap "ど", $34
-charmap "ば", $3A
-charmap "び", $3B
-charmap "ぶ", $3C
-charmap "べ", $3D
-charmap "ぼ", $3E
-charmap "パ", $40
-charmap "ピ", $41
-charmap "プ", $42
-charmap "ポ", $43
-charmap "ぱ", $44
-charmap "ぴ", $45
-charmap "ぷ", $46
-charmap "ぺ", $47
-charmap "ぽ", $48
-charmap "ア", $80
-charmap "イ", $81
-charmap "ウ", $82
-charmap "エ", $83
-charmap "ォ", $84
-charmap "カ", $85
-charmap "キ", $86
-charmap "ク", $87
-charmap "ケ", $88
-charmap "コ", $89
-charmap "サ", $8A
-charmap "シ", $8B
-charmap "ス", $8C
-charmap "セ", $8D
-charmap "ソ", $8E
-charmap "タ", $8F
-charmap "チ", $90
-charmap "ツ", $91
-charmap "テ", $92
-charmap "ト", $93
-charmap "ナ", $94
-charmap "ニ", $95
-charmap "ヌ", $96
-charmap "ネ", $97
-charmap "ノ", $98
-charmap "ハ", $99
-charmap "ヒ", $9A
-charmap "フ", $9B
-charmap "ホ", $9C
-charmap "マ", $9D
-charmap "ミ", $9E
-charmap "ム", $9F
-charmap "メ", $A0
-charmap "モ", $A1
-charmap "ヤ", $A2
-charmap "ユ", $A3
-charmap "ヨ", $A4
-charmap "ラ", $A5
-charmap "ル", $A6
-charmap "レ", $A7
-charmap "ロ", $A8
-charmap "ワ", $A9
-charmap "ヲ", $AA
-charmap "ン", $AB
-charmap "ッ", $AC
-charmap "ャ", $AD
-charmap "ュ", $AE
-charmap "ョ", $AF
-charmap "ィ", $B0
-charmap "あ", $B1
-charmap "い", $B2
-charmap "う", $B3
-charmap "え", $B4
-charmap "お", $B5
-charmap "か", $B6
-charmap "き", $B7
-charmap "く", $B8
-charmap "け", $B9
-charmap "こ", $BA
-charmap "さ", $BB
-charmap "し", $BC
-charmap "す", $BD
-charmap "せ", $BE
-charmap "そ", $BF
-charmap "た", $C0
-charmap "ち", $C1
-charmap "つ", $C2
-charmap "て", $C3
-charmap "と", $C4
-charmap "な", $C5
-charmap "に", $C6
-charmap "ぬ", $C7
-charmap "ね", $C8
-charmap "の", $C9
-charmap "は", $CA
-charmap "ひ", $CB
-charmap "ふ", $CC
-charmap "へ", $CD
-charmap "ほ", $CE
-charmap "ま", $CF
-charmap "み", $D0
-charmap "む", $D1
-charmap "め", $D2
-charmap "も", $D3
-charmap "や", $D4
-charmap "ゆ", $D5
-charmap "よ", $D6
-charmap "ら", $D7
-charmap "り", $D8
-charmap "る", $D9
-charmap "れ", $DA
-charmap "ろ", $DB
-charmap "わ", $DC
-charmap "を", $DD
-charmap "ん", $DE
-charmap "っ", $DF
-charmap "ゃ", $E0
-charmap "ゅ", $E1
-charmap "ょ", $E2
-charmap "ー", $E3
+; $00-$17 are TX_* constants (see macros/scripts/text.asm)
 
-charmap "<pkmn>", $4A ; PkMn
-charmap "@", $50
-charmap "<PLAYER>", $52
-charmap "<RIVAL>", $53
-charmap "#", $54
-;charmap "POKé", $54
-charmap "<TARGET>", $59
-charmap "<USER>", $5A
-charmap "′", $71
-charmap "″", $73
-charmap "№", $74
-charmap "…", $75
+; Control characters (see home/text.asm)
 
-charmap "┌", $79
-charmap "─", $7A
-charmap "┐", $7B
-charmap "│", $7C
-charmap "└", $7D
-charmap "┘", $7E
+	charmap "<NULL>",    $00
+	charmap "<PAGE>",    $49
+	charmap "<PKMN>",    $4a ; "<PK><MN>"
+	charmap "<_CONT>",   $4b ; implements "<CONT>"
+	charmap "<SCROLL>",  $4c
+	charmap "<NEXT>",    $4e
+	charmap "<LINE>",    $4f
+	charmap "@",         $50 ; string terminator
+	charmap "<PARA>",    $51
+	charmap "<PLAYER>",  $52 ; wPlayerName
+	charmap "<RIVAL>",   $53 ; wRivalName
+	charmap "#",         $54 ; "POKé"
+	charmap "<CONT>",    $55
+	charmap "<……>",      $56 ; "……"
+	charmap "<DONE>",    $57
+	charmap "<PROMPT>",  $58
+	charmap "<TARGET>",  $59
+	charmap "<USER>",    $5a
+	charmap "<PC>",      $5b ; "PC"
+	charmap "<TM>",      $5c ; "TM"
+	charmap "<TRAINER>", $5d ; "TRAINER"
+	charmap "<ROCKET>",  $5e ; "ROCKET"
+	charmap "<DEXEND>",  $5f
 
-charmap " ", $7F
-charmap "A", $80
-charmap "B", $81
-charmap "C", $82
-charmap "D", $83
-charmap "E", $84
-charmap "F", $85
-charmap "G", $86
-charmap "H", $87
-charmap "I", $88
-charmap "J", $89
-charmap "K", $8A
-charmap "L", $8B
-charmap "M", $8C
-charmap "N", $8D
-charmap "O", $8E
-charmap "P", $8F
-charmap "Q", $90
-charmap "R", $91
-charmap "S", $92
-charmap "T", $93
-charmap "U", $94
-charmap "V", $95
-charmap "W", $96
-charmap "X", $97
-charmap "Y", $98
-charmap "Z", $99
-charmap "(", $9A
-charmap ")", $9B
-charmap ":", $9C
-charmap ";", $9D
-charmap "[", $9E
-charmap "]", $9F
-charmap "a", $A0
-charmap "b", $A1
-charmap "c", $A2
-charmap "d", $A3
-charmap "e", $A4
-charmap "f", $A5
-charmap "g", $A6
-charmap "h", $A7
-charmap "i", $A8
-charmap "j", $A9
-charmap "k", $AA
-charmap "l", $AB
-charmap "m", $AC
-charmap "n", $AD
-charmap "o", $AE
-charmap "p", $AF
-charmap "q", $B0
-charmap "r", $B1
-charmap "s", $B2
-charmap "t", $B3
-charmap "u", $B4
-charmap "v", $B5
-charmap "w", $B6
-charmap "x", $B7
-charmap "y", $B8
-charmap "z", $B9
-charmap "é", $BA
-charmap "'d", $BB
-charmap "'l", $BC
-charmap "'s", $BD
-charmap "'t", $BE
-charmap "'v", $BF
+; Actual characters (from gfx/font/font_extra.png)
 
-charmap "'", $E0
+	charmap "<BOLD_A>",  $60 ; unused
+	charmap "<BOLD_B>",  $61 ; unused
+	charmap "<BOLD_C>",  $62 ; unused
+	charmap "<BOLD_D>",  $63 ; unused
+	charmap "<BOLD_E>",  $64 ; unused
+	charmap "<BOLD_F>",  $65 ; unused
+	charmap "<BOLD_G>",  $66 ; unused
+	charmap "<BOLD_H>",  $67 ; unused
+	charmap "<BOLD_I>",  $68 ; unused
+	charmap "<BOLD_V>",  $69
+	charmap "<BOLD_S>",  $6a
+	charmap "<BOLD_L>",  $6b ; unused
+	charmap "<BOLD_M>",  $6c ; unused
+	charmap "<COLON>",   $6d ; colon with tinier dots than ":"
+	charmap "ぃ",         $6e ; hiragana small i, unused
+	charmap "ぅ",         $6f ; hiragana small u, unused
+	charmap "‘",         $70 ; opening single quote
+	charmap "’",         $71 ; closing single quote
+	charmap "“",         $72 ; opening quote
+	charmap "”",         $73 ; closing quote
+	charmap "·",         $74 ; middle dot, unused
+	charmap "…",         $75 ; ellipsis
+	charmap "ぁ",         $76 ; hiragana small a, unused
+	charmap "ぇ",         $77 ; hiragana small e, unused
+	charmap "ぉ",         $78 ; hiragana small o, unused
 
-charmap "-", $E3
-charmap "'r", $E4
-charmap "'m", $E5
-charmap "?", $E6
-charmap "!", $E7
-charmap ".", $E8
+	charmap "┌",         $79
+	charmap "─",         $7a
+	charmap "┐",         $7b
+	charmap "│",         $7c
+	charmap "└",         $7d
+	charmap "┘",         $7e
+	charmap " ",         $7f
 
-charmap "▷", $EC
-charmap "▶", $ED
-charmap "▲", $ED
-charmap "▼", $EE
-charmap "♂", $EF
-charmap "¥", $F0
-charmap "×", $F1
-charmap "⠄", $F2
-charmap "/", $F3
-charmap ",", $F4
-charmap "♀", $F5
-charmap "0", $F6
-charmap "1", $F7
-charmap "2", $F8
-charmap "3", $F9
-charmap "4", $FA
-charmap "5", $FB
-charmap "6", $FC
-charmap "7", $FD
-charmap "8", $FE
-charmap "9", $FF
+; Actual characters (from gfx/font/font_battle_extra.png)
+
+	charmap "<LV>",      $6e
+
+	charmap "<to>",      $70 ; narrow "to"
+
+	charmap "『",         $72 ; Japanese opening quote, unused
+	charmap "<ID>",      $73
+	charmap "№",         $74
+
+; Actual characters (from other graphics files)
+
+	; needed for ShowPokedexDataInternal (see engine/menus/pokedex.asm)
+	charmap "′",         $60 ; gfx/pokedex/pokedex.png
+	charmap "″",         $61 ; gfx/pokedex/pokedex.png
+
+	; needed for StatusScreen (see engine/pokemon/status_screen.asm)
+	charmap "<BOLD_P>",  $72 ; gfx/font/P.1bpp
+
+	; needed for LoadTownMap_Fly (see engine/items/town_map.asm)
+	charmap "▲",         $ed ; gfx/town_map/up_arrow.1bpp
+
+	; needed for PrintAlphabet (see engine/menus/naming_screen.asm)
+	charmap "<ED>",      $f0 ; gfx/font/ED.1bpp
+
+; Actual characters (from gfx/font/font.png)
+
+	charmap "A",         $80
+	charmap "B",         $81
+	charmap "C",         $82
+	charmap "D",         $83
+	charmap "E",         $84
+	charmap "F",         $85
+	charmap "G",         $86
+	charmap "H",         $87
+	charmap "I",         $88
+	charmap "J",         $89
+	charmap "K",         $8a
+	charmap "L",         $8b
+	charmap "M",         $8c
+	charmap "N",         $8d
+	charmap "O",         $8e
+	charmap "P",         $8f
+	charmap "Q",         $90
+	charmap "R",         $91
+	charmap "S",         $92
+	charmap "T",         $93
+	charmap "U",         $94
+	charmap "V",         $95
+	charmap "W",         $96
+	charmap "X",         $97
+	charmap "Y",         $98
+	charmap "Z",         $99
+
+	charmap "(",         $9a
+	charmap ")",         $9b
+	charmap ":",         $9c
+	charmap ";",         $9d
+	charmap "[",         $9e
+	charmap "]",         $9f
+
+	charmap "a",         $a0
+	charmap "b",         $a1
+	charmap "c",         $a2
+	charmap "d",         $a3
+	charmap "e",         $a4
+	charmap "f",         $a5
+	charmap "g",         $a6
+	charmap "h",         $a7
+	charmap "i",         $a8
+	charmap "j",         $a9
+	charmap "k",         $aa
+	charmap "l",         $ab
+	charmap "m",         $ac
+	charmap "n",         $ad
+	charmap "o",         $ae
+	charmap "p",         $af
+	charmap "q",         $b0
+	charmap "r",         $b1
+	charmap "s",         $b2
+	charmap "t",         $b3
+	charmap "u",         $b4
+	charmap "v",         $b5
+	charmap "w",         $b6
+	charmap "x",         $b7
+	charmap "y",         $b8
+	charmap "z",         $b9
+
+	charmap "é",         $ba
+	charmap "'d",        $bb
+	charmap "'l",        $bc
+	charmap "'s",        $bd
+	charmap "'t",        $be
+	charmap "'v",        $bf
+
+	charmap "'",         $e0
+	charmap "<PK>",      $e1
+	charmap "<MN>",      $e2
+	charmap "-",         $e3
+
+	charmap "'r",        $e4
+	charmap "'m",        $e5
+
+	charmap "?",         $e6
+	charmap "!",         $e7
+	charmap ".",         $e8
+
+	charmap "ァ",         $e9 ; katakana small a, unused
+	charmap "ゥ",         $ea ; katakana small u, unused
+	charmap "ェ",         $eb ; katakana small e, unused
+
+	charmap "▷",         $ec
+	charmap "▶",         $ed
+	charmap "▼",         $ee
+	charmap "♂",         $ef
+	charmap "¥",         $f0
+	charmap "×",         $f1
+	charmap "<DOT>",     $f2 ; decimal point; same as "." in English
+	charmap "/",         $f3
+	charmap ",",         $f4
+	charmap "♀",         $f5
+
+	charmap "0",         $f6
+	charmap "1",         $f7
+	charmap "2",         $f8
+	charmap "3",         $f9
+	charmap "4",         $fa
+	charmap "5",         $fb
+	charmap "6",         $fc
+	charmap "7",         $fd
+	charmap "8",         $fe
+	charmap "9",         $ff
+
+
+; Japanese kana, for those bits of text that were not translated to English
+
+	charmap "ガ", $05
+	charmap "ギ", $06
+	charmap "グ", $07
+	charmap "ゲ", $08
+	charmap "ゴ", $09
+	charmap "ザ", $0a
+	charmap "ジ", $0b
+	charmap "ズ", $0c
+	charmap "ゼ", $0d
+	charmap "ゾ", $0e
+	charmap "ダ", $0f
+	charmap "ヂ", $10
+	charmap "ヅ", $11
+	charmap "デ", $12
+	charmap "ド", $13
+
+	charmap "バ", $19
+	charmap "ビ", $1a
+	charmap "ブ", $1b
+	charmap "ボ", $1c
+
+	charmap "が", $26
+	charmap "ぎ", $27
+	charmap "ぐ", $28
+	charmap "げ", $29
+	charmap "ご", $2a
+	charmap "ざ", $2b
+	charmap "じ", $2c
+	charmap "ず", $2d
+	charmap "ぜ", $2e
+	charmap "ぞ", $2f
+	charmap "だ", $30
+	charmap "ぢ", $31
+	charmap "づ", $32
+	charmap "で", $33
+	charmap "ど", $34
+
+	charmap "ば", $3a
+	charmap "び", $3b
+	charmap "ぶ", $3c
+	charmap "べ", $3d
+	charmap "ぼ", $3e
+
+	charmap "パ", $40
+	charmap "ピ", $41
+	charmap "プ", $42
+	charmap "ポ", $43
+	charmap "ぱ", $44
+	charmap "ぴ", $45
+	charmap "ぷ", $46
+	charmap "ぺ", $47
+	charmap "ぽ", $48
+
+	charmap "「", $70
+	charmap "」", $71
+	charmap "』", $73
+	charmap "⋯", $75
+
+	charmap "　", $7f
+
+	charmap "ア", $80
+	charmap "イ", $81
+	charmap "ウ", $82
+	charmap "エ", $83
+	charmap "オ", $84
+	charmap "カ", $85
+	charmap "キ", $86
+	charmap "ク", $87
+	charmap "ケ", $88
+	charmap "コ", $89
+	charmap "サ", $8a
+	charmap "シ", $8b
+	charmap "ス", $8c
+	charmap "セ", $8d
+	charmap "ソ", $8e
+	charmap "タ", $8f
+	charmap "チ", $90
+	charmap "ツ", $91
+	charmap "テ", $92
+	charmap "ト", $93
+	charmap "ナ", $94
+	charmap "ニ", $95
+	charmap "ヌ", $96
+	charmap "ネ", $97
+	charmap "ノ", $98
+	charmap "ハ", $99
+	charmap "ヒ", $9a
+	charmap "フ", $9b
+	charmap "ホ", $9c
+	charmap "マ", $9d
+	charmap "ミ", $9e
+	charmap "ム", $9f
+	charmap "メ", $a0
+	charmap "モ", $a1
+	charmap "ヤ", $a2
+	charmap "ユ", $a3
+	charmap "ヨ", $a4
+	charmap "ラ", $a5
+	charmap "ル", $a6
+	charmap "レ", $a7
+	charmap "ロ", $a8
+	charmap "ワ", $a9
+	charmap "ヲ", $aa
+	charmap "ン", $ab
+	charmap "ッ", $ac
+	charmap "ャ", $ad
+	charmap "ュ", $ae
+	charmap "ョ", $af
+	charmap "ィ", $b0
+
+	charmap "あ", $b1
+	charmap "い", $b2
+	charmap "う", $b3
+	charmap "え", $b4
+	charmap "お", $b5
+	charmap "か", $b6
+	charmap "き", $b7
+	charmap "く", $b8
+	charmap "け", $b9
+	charmap "こ", $ba
+	charmap "さ", $bb
+	charmap "し", $bc
+	charmap "す", $bd
+	charmap "せ", $be
+	charmap "そ", $bf
+	charmap "た", $c0
+	charmap "ち", $c1
+	charmap "つ", $c2
+	charmap "て", $c3
+	charmap "と", $c4
+	charmap "な", $c5
+	charmap "に", $c6
+	charmap "ぬ", $c7
+	charmap "ね", $c8
+	charmap "の", $c9
+	charmap "は", $ca
+	charmap "ひ", $cb
+	charmap "ふ", $cc
+	charmap "へ", $cd
+	charmap "ほ", $ce
+	charmap "ま", $cf
+	charmap "み", $d0
+	charmap "む", $d1
+	charmap "め", $d2
+	charmap "も", $d3
+	charmap "や", $d4
+	charmap "ゆ", $d5
+	charmap "よ", $d6
+	charmap "ら", $d7
+	charmap "り", $d8
+	charmap "る", $d9
+	charmap "れ", $da
+	charmap "ろ", $db
+	charmap "わ", $dc
+	charmap "を", $dd
+	charmap "ん", $de
+	charmap "っ", $df
+	charmap "ゃ", $e0
+	charmap "ゅ", $e1
+	charmap "ょ", $e2
+
+	charmap "ー", $e3
+	charmap "ﾟ", $e4
+	charmap "ﾞ", $e5
+
+	charmap "？", $e6
+	charmap "！", $e7
+	charmap "。", $e8
+
+	charmap "円", $f0
+
+	charmap "．", $f2
+	charmap "／", $f3
+
+	charmap "ォ", $f4
+
+	charmap "０", $f6
+	charmap "１", $f7
+	charmap "２", $f8
+	charmap "３", $f9
+	charmap "４", $fa
+	charmap "５", $fb
+	charmap "６", $fc
+	charmap "７", $fd
+	charmap "８", $fe
+	charmap "９", $ff

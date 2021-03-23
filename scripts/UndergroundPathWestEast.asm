@@ -2,4 +2,5 @@ UndergroundPathWestEast_Script:
 	jp EnableAutoTextBoxDrawing
 
 UndergroundPathWestEast_TextPointers:
-	db "@"
+
+	text_end ; unused

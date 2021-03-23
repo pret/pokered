@@ -9,13 +9,13 @@ CeladonMart5F_TextPointers:
 	dw CeladonMart5Text5
 
 CeladonMart5Text1:
-	TX_FAR _CeladonMart5Text1
-	db "@"
+	text_far _CeladonMart5Text1
+	text_end
 
 CeladonMart5Text2:
-	TX_FAR _CeladonMart5Text2
-	db "@"
+	text_far _CeladonMart5Text2
+	text_end
 
 CeladonMart5Text5:
-	TX_FAR _CeladonMart5Text5
-	db "@"
+	text_far _CeladonMart5Text5
+	text_end

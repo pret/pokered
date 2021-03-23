@@ -2,7 +2,7 @@ CeruleanGym_Script:
 	ld hl, wCurrentMapScriptFlags
 	bit 6, [hl]
 	res 6, [hl]
-	call nz, CeruleanGymScript_5c6d0
+	call nz, .LoadNames
 	call EnableAutoTextBoxDrawing
 	ld hl, CeruleanGymTrainerHeader0
 	ld de, CeruleanGym_ScriptPointers
@@ -11,15 +11,15 @@ CeruleanGym_Script:
 	ld [wCeruleanGymCurScript], a
 	ret
 
-CeruleanGymScript_5c6d0:
-	ld hl, Gym2CityName
-	ld de, Gym2LeaderName
+.LoadNames:
+	ld hl, .CityName
+	ld de, .LeaderName
 	jp LoadGymLeaderAndCityName
 
-Gym2CityName:
+.CityName:
 	db "CERULEAN CITY@"
 
-Gym2LeaderName:
+.LeaderName:
 	db "MISTY@"
 
 CeruleanGymScript_5c6ed:
@@ -44,26 +44,26 @@ CeruleanGymScript3:
 
 CeruleanGymScript_5c70d:
 	ld a, $5
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_BEAT_MISTY
-	lb bc, TM_11, 1
+	lb bc, TM_BUBBLEBEAM, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $6
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_GOT_TM11
-	jr .asm_5c736
+	jr .gymVictory
 .BagFull
 	ld a, $7
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
-.asm_5c736
+.gymVictory
 	ld hl, wObtainedBadges
-	set 1, [hl]
+	set BIT_CASCADEBADGE, [hl]
 	ld hl, wBeatGymFlags
-	set 1, [hl]
+	set BIT_CASCADEBADGE, [hl]
 
 	; deactivate gym trainers
 	SetEvents EVENT_BEAT_CERULEAN_GYM_TRAINER_0, EVENT_BEAT_CERULEAN_GYM_TRAINER_1
@@ -80,39 +80,25 @@ CeruleanGym_TextPointers:
 	dw CeruleanGymText7
 
 CeruleanGymTrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_CERULEAN_GYM_TRAINER_0
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_CERULEAN_GYM_TRAINER_0
-	dw CeruleanGymBattleText1 ; TextBeforeBattle
-	dw CeruleanGymAfterBattleText1 ; TextAfterBattle
-	dw CeruleanGymEndBattleText1 ; TextEndBattle
-	dw CeruleanGymEndBattleText1 ; TextEndBattle
-
+	trainer EVENT_BEAT_CERULEAN_GYM_TRAINER_0, 3, CeruleanGymBattleText1, CeruleanGymEndBattleText1, CeruleanGymAfterBattleText1
 CeruleanGymTrainerHeader1:
-	dbEventFlagBit EVENT_BEAT_CERULEAN_GYM_TRAINER_1
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_CERULEAN_GYM_TRAINER_1
-	dw CeruleanGymBattleText2 ; TextBeforeBattle
-	dw CeruleanGymAfterBattleText2 ; TextAfterBattle
-	dw CeruleanGymEndBattleText2 ; TextEndBattle
-	dw CeruleanGymEndBattleText2 ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_CERULEAN_GYM_TRAINER_1, 3, CeruleanGymBattleText2, CeruleanGymEndBattleText2, CeruleanGymAfterBattleText2
+	db -1 ; end
 
 CeruleanGymText1:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_BEAT_MISTY
-	jr z, .asm_5c78d
+	jr z, .beginBattle
 	CheckEventReuseA EVENT_GOT_TM11
-	jr nz, .asm_5c785
+	jr nz, .afterVictory
 	call z, CeruleanGymScript_5c70d
 	call DisableWaitingAfterTextDisplay
-	jr .asm_5c7bb
-.asm_5c785
+	jr .done
+.afterVictory
 	ld hl, CeruleanGymText_5c7c3
 	call PrintText
-	jr .asm_5c7bb
-.asm_5c78d
+	jr .done
+.beginBattle
 	ld hl, CeruleanGymText_5c7be
 	call PrintText
 	ld hl, wd72d
@@ -121,84 +107,84 @@ CeruleanGymText1:
 	ld hl, CeruleanGymText_5c7d8
 	ld de, CeruleanGymText_5c7d8
 	call SaveEndBattleTextPointers
-	ld a, [H_SPRITEINDEX]
+	ldh a, [hSpriteIndex]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $2
 	ld [wGymLeaderNo], a
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ld a, $3
 	ld [wCeruleanGymCurScript], a
-.asm_5c7bb
+.done
 	jp TextScriptEnd
 
 CeruleanGymText_5c7be:
-	TX_FAR _CeruleanGymText_5c7be
-	db "@"
+	text_far _CeruleanGymText_5c7be
+	text_end
 
 CeruleanGymText_5c7c3:
-	TX_FAR _CeruleanGymText_5c7c3
-	db "@"
+	text_far _CeruleanGymText_5c7c3
+	text_end
 
 CeruleanGymText5:
-	TX_FAR _CeruleanGymText_5c7c8
-	db "@"
+	text_far _CeruleanGymText_5c7c8
+	text_end
 
 CeruleanGymText6:
-	TX_FAR _ReceivedTM11Text
-	TX_SFX_ITEM_1
-	db "@"
+	text_far _ReceivedTM11Text
+	sound_get_item_1
+	text_end
 
 CeruleanGymText7:
-	TX_FAR _CeruleanGymText_5c7d3
-	db "@"
+	text_far _CeruleanGymText_5c7d3
+	text_end
 
 CeruleanGymText_5c7d8:
-	TX_FAR _CeruleanGymText_5c7d8
-	TX_SFX_KEY_ITEM ; actually plays the second channel of SFX_BALL_POOF due to the wrong music bank being loaded
-	TX_BLINK
-	db "@"
+	text_far _CeruleanGymText_5c7d8
+	sound_get_key_item ; actually plays the second channel of SFX_BALL_POOF due to the wrong music bank being loaded
+	text_promptbutton
+	text_end
 
 CeruleanGymText2:
-	TX_ASM
+	text_asm
 	ld hl, CeruleanGymTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 CeruleanGymBattleText1:
-	TX_FAR _CeruleanGymBattleText1
-	db "@"
+	text_far _CeruleanGymBattleText1
+	text_end
 
 CeruleanGymEndBattleText1:
-	TX_FAR _CeruleanGymEndBattleText1
-	db "@"
+	text_far _CeruleanGymEndBattleText1
+	text_end
 
 CeruleanGymAfterBattleText1:
-	TX_FAR _CeruleanGymAfterBattleText1
-	db "@"
+	text_far _CeruleanGymAfterBattleText1
+	text_end
 
 CeruleanGymText3:
-	TX_ASM
+	text_asm
 	ld hl, CeruleanGymTrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 CeruleanGymBattleText2:
-	TX_FAR _CeruleanGymBattleText2
-	db "@"
+	text_far _CeruleanGymBattleText2
+	text_end
 
 CeruleanGymEndBattleText2:
-	TX_FAR _CeruleanGymEndBattleText2
-	db "@"
+	text_far _CeruleanGymEndBattleText2
+	text_end
 
 CeruleanGymAfterBattleText2:
-	TX_FAR _CeruleanGymAfterBattleText2
-	db "@"
+	text_far _CeruleanGymAfterBattleText2
+	text_end
 
 CeruleanGymText4:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_BEAT_MISTY
 	jr nz, .asm_5c821
 	ld hl, CeruleanGymText_5c82a
@@ -211,9 +197,9 @@ CeruleanGymText4:
 	jp TextScriptEnd
 
 CeruleanGymText_5c82a:
-	TX_FAR _CeruleanGymText_5c82a
-	db "@"
+	text_far _CeruleanGymText_5c82a
+	text_end
 
 CeruleanGymText_5c82f:
-	TX_FAR _CeruleanGymText_5c82f
-	db "@"
+	text_far _CeruleanGymText_5c82f
+	text_end

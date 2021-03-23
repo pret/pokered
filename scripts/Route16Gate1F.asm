@@ -19,10 +19,10 @@ Route16GateScript0:
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $3
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ld a, [wCoordIndex]
 	cp $1
 	jr z, .asm_4970e
@@ -44,11 +44,11 @@ Route16GateScript0:
 	ret
 
 CoordsData_49714:
-	db $07,$04
-	db $08,$04
-	db $09,$04
-	db $0A,$04
-	db $FF
+	dbmapcoord  4,  7
+	dbmapcoord  4,  8
+	dbmapcoord  4,  9
+	dbmapcoord  4, 10
+	db -1 ; end
 
 Route16GateScript1:
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -59,7 +59,7 @@ Route16GateScript1:
 
 Route16GateScript2:
 	ld a, $1
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
@@ -92,7 +92,7 @@ Route16Gate1F_TextPointers:
 	dw Route16GateText3
 
 Route16GateText1:
-	TX_ASM
+	text_asm
 	call Route16GateScript_49755
 	jr z, .asm_0bdf3
 	ld hl, Route16GateText_4977c
@@ -105,17 +105,17 @@ Route16GateText1:
 	jp TextScriptEnd
 
 Route16GateText_49777:
-	TX_FAR _Route16GateText_49777
-	db "@"
+	text_far _Route16GateText_49777
+	text_end
 
 Route16GateText_4977c:
-	TX_FAR _Route16GateText_4977c
-	db "@"
+	text_far _Route16GateText_4977c
+	text_end
 
 Route16GateText3:
-	TX_FAR _Route16GateText_49781
-	db "@"
+	text_far _Route16GateText_49781
+	text_end
 
 Route16GateText2:
-	TX_FAR _Route16GateText2
-	db "@"
+	text_far _Route16GateText2
+	text_end

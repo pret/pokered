@@ -50,20 +50,20 @@ RedrawMapView:
 	ld a, [wIsInBattle]
 	inc a
 	ret z
-	ld a, [H_AUTOBGTRANSFERENABLED]
+	ldh a, [hAutoBGTransferEnabled]
 	push af
-	ld a, [hTilesetType]
+	ldh a, [hTileAnimations]
 	push af
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
-	ld [hTilesetType], a ; no flower/water BG tile animations
+	ldh [hAutoBGTransferEnabled], a
+	ldh [hTileAnimations], a
 	call LoadCurrentMapView
 	call RunDefaultPaletteCommand
 	ld hl, wMapViewVRAMPointer
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld de, -2 * 32
+	ld de, -2 * BG_MAP_WIDTH
 	add hl, de
 	ld a, h
 	and $3
@@ -73,23 +73,23 @@ RedrawMapView:
 	ld a, h
 	ld [wBuffer + 1], a ; this copy of the address is not used
 	ld a, 2
-	ld [$ffbe], a
-	ld c, 9 ; number of rows of 2x2 tiles (this covers the whole screen)
+	ldh [hRedrawMapViewRowOffset], a
+	ld c, SCREEN_HEIGHT / 2 ; number of rows of 2x2 tiles (this covers the whole screen)
 .redrawRowLoop
 	push bc
 	push hl
 	push hl
 	ld hl, wTileMap - 2 * SCREEN_WIDTH
 	ld de, SCREEN_WIDTH
-	ld a, [$ffbe]
+	ldh a, [hRedrawMapViewRowOffset]
 .calcWRAMAddrLoop
 	add hl, de
 	dec a
 	jr nz, .calcWRAMAddrLoop
 	call CopyToRedrawRowOrColumnSrcTiles
 	pop hl
-	ld de, $20
-	ld a, [$ffbe]
+	ld de, BG_MAP_WIDTH
+	ldh a, [hRedrawMapViewRowOffset]
 	ld c, a
 .calcVRAMAddrLoop
 	add hl, de
@@ -98,13 +98,13 @@ RedrawMapView:
 	or $98
 	dec c
 	jr nz, .calcVRAMAddrLoop
-	ld [hRedrawRowOrColumnDest + 1], a
+	ldh [hRedrawRowOrColumnDest + 1], a
 	ld a, l
-	ld [hRedrawRowOrColumnDest], a
+	ldh [hRedrawRowOrColumnDest], a
 	ld a, REDRAW_ROW
-	ld [hRedrawRowOrColumnMode], a
+	ldh [hRedrawRowOrColumnMode], a
 	call DelayFrame
-	ld hl, $ffbe
+	ld hl, hRedrawMapViewRowOffset
 	inc [hl]
 	inc [hl]
 	pop hl
@@ -112,9 +112,9 @@ RedrawMapView:
 	dec c
 	jr nz, .redrawRowLoop
 	pop af
-	ld [hTilesetType], a
+	ldh [hTileAnimations], a
 	pop af
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ldh [hAutoBGTransferEnabled], a
 	ret
 
 CompareHLWithBC:

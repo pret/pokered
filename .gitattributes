@@ -10,9 +10,8 @@
 *.2bpp binary
 *.1bpp binary
 *.rle binary
-*.tilecoll binary
 *.bst binary
-*.map binary
+*.tilemap binary
 *.wav binary
 *.blk binary
 *.pic binary

@@ -30,25 +30,25 @@ FightingDojoScript1:
 	CheckEvent EVENT_BEAT_KARATE_MASTER
 	ret nz
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ld [wcf0d], a
 	ld a, [wYCoord]
-	cp $3
+	cp 3
 	ret nz
 	ld a, [wXCoord]
-	cp $4
+	cp 4
 	ret nz
 	ld a, $1
 	ld [wcf0d], a
 	ld a, PLAYER_DIR_RIGHT
 	ld [wPlayerMovingDirection], a
 	ld a, $1
-	ld [H_SPRITEINDEX], a
+	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_LEFT
-	ld [hSpriteFacingDirection], a
+	ldh [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, $1
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ret
 
@@ -62,9 +62,9 @@ FightingDojoScript3:
 	ld a, PLAYER_DIR_RIGHT
 	ld [wPlayerMovingDirection], a
 	ld a, $1
-	ld [H_SPRITEINDEX], a
+	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_LEFT
-	ld [hSpriteFacingDirection], a
+	ldh [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 
 .asm_5cde4
@@ -72,7 +72,7 @@ FightingDojoScript3:
 	ld [wJoyIgnore], a
 	SetEventRange EVENT_BEAT_KARATE_MASTER, EVENT_BEAT_FIGHTING_DOJO_TRAINER_3
 	ld a, $8
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
 	ld [wJoyIgnore], a
@@ -91,45 +91,17 @@ FightingDojo_TextPointers:
 	dw FightingDojoText8
 
 FightingDojoTrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_FIGHTING_DOJO_TRAINER_0
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_FIGHTING_DOJO_TRAINER_0
-	dw FightingDojoBattleText1 ; TextBeforeBattle
-	dw FightingDojoAfterBattleText1 ; TextAfterBattle
-	dw FightingDojoEndBattleText1 ; TextEndBattle
-	dw FightingDojoEndBattleText1 ; TextEndBattle
-
+	trainer EVENT_BEAT_FIGHTING_DOJO_TRAINER_0, 4, FightingDojoBattleText1, FightingDojoEndBattleText1, FightingDojoAfterBattleText1
 FightingDojoTrainerHeader1:
-	dbEventFlagBit EVENT_BEAT_FIGHTING_DOJO_TRAINER_1
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_FIGHTING_DOJO_TRAINER_1
-	dw FightingDojoBattleText2 ; TextBeforeBattle
-	dw FightingDojoAfterBattleText2 ; TextAfterBattle
-	dw FightingDojoEndBattleText2 ; TextEndBattle
-	dw FightingDojoEndBattleText2 ; TextEndBattle
-
+	trainer EVENT_BEAT_FIGHTING_DOJO_TRAINER_1, 4, FightingDojoBattleText2, FightingDojoEndBattleText2, FightingDojoAfterBattleText2
 FightingDojoTrainerHeader2:
-	dbEventFlagBit EVENT_BEAT_FIGHTING_DOJO_TRAINER_2
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_FIGHTING_DOJO_TRAINER_2
-	dw FightingDojoBattleText3 ; TextBeforeBattle
-	dw FightingDojoAfterBattleText3 ; TextAfterBattle
-	dw FightingDojoEndBattleText3 ; TextEndBattle
-	dw FightingDojoEndBattleText3 ; TextEndBattle
-
+	trainer EVENT_BEAT_FIGHTING_DOJO_TRAINER_2, 3, FightingDojoBattleText3, FightingDojoEndBattleText3, FightingDojoAfterBattleText3
 FightingDojoTrainerHeader3:
-	dbEventFlagBit EVENT_BEAT_FIGHTING_DOJO_TRAINER_3
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_FIGHTING_DOJO_TRAINER_3
-	dw FightingDojoBattleText4 ; TextBeforeBattle
-	dw FightingDojoAfterBattleText4 ; TextAfterBattle
-	dw FightingDojoEndBattleText4 ; TextEndBattle
-	dw FightingDojoEndBattleText4 ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_FIGHTING_DOJO_TRAINER_3, 3, FightingDojoBattleText4, FightingDojoEndBattleText4, FightingDojoAfterBattleText4
+	db -1 ; end
 
 FightingDojoText1:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_DEFEATED_FIGHTING_DOJO
 	jp nz, .continue1
 	CheckEventReuseA EVENT_BEAT_KARATE_MASTER
@@ -142,7 +114,7 @@ FightingDojoText1:
 	ld hl, FightingDojoText_5ce93
 	ld de, FightingDojoText_5ce93
 	call SaveEndBattleTextPointers
-	ld a, [hSpriteIndexOrTextID]
+	ldh a, [hSpriteIndexOrTextID]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
@@ -161,96 +133,96 @@ FightingDojoText1:
 	jp TextScriptEnd
 
 FightingDojoText_5ce8e:
-	TX_FAR _FightingDojoText_5ce8e
-	db "@"
+	text_far _FightingDojoText_5ce8e
+	text_end
 
 FightingDojoText_5ce93:
-	TX_FAR _FightingDojoText_5ce93
-	db "@"
+	text_far _FightingDojoText_5ce93
+	text_end
 
 FightingDojoText8:
-	TX_FAR _FightingDojoText_5ce98
-	db "@"
+	text_far _FightingDojoText_5ce98
+	text_end
 
 FightingDojoText_5ce9d:
-	TX_FAR _FightingDojoText_5ce9d
-	db "@"
+	text_far _FightingDojoText_5ce9d
+	text_end
 
 FightingDojoText2:
-	TX_ASM
+	text_asm
 	ld hl, FightingDojoTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 FightingDojoBattleText1:
-	TX_FAR _FightingDojoBattleText1
-	db "@"
+	text_far _FightingDojoBattleText1
+	text_end
 
 FightingDojoEndBattleText1:
-	TX_FAR _FightingDojoEndBattleText1
-	db "@"
+	text_far _FightingDojoEndBattleText1
+	text_end
 
 FightingDojoAfterBattleText1:
-	TX_FAR _FightingDojoAfterBattleText1
-	db "@"
+	text_far _FightingDojoAfterBattleText1
+	text_end
 
 FightingDojoText3:
-	TX_ASM
+	text_asm
 	ld hl, FightingDojoTrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 FightingDojoBattleText2:
-	TX_FAR _FightingDojoBattleText2
-	db "@"
+	text_far _FightingDojoBattleText2
+	text_end
 
 FightingDojoEndBattleText2:
-	TX_FAR _FightingDojoEndBattleText2
-	db "@"
+	text_far _FightingDojoEndBattleText2
+	text_end
 
 FightingDojoAfterBattleText2:
-	TX_FAR _FightingDojoAfterBattleText2
-	db "@"
+	text_far _FightingDojoAfterBattleText2
+	text_end
 
 FightingDojoText4:
-	TX_ASM
+	text_asm
 	ld hl, FightingDojoTrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 FightingDojoBattleText3:
-	TX_FAR _FightingDojoBattleText3
-	db "@"
+	text_far _FightingDojoBattleText3
+	text_end
 
 FightingDojoEndBattleText3:
-	TX_FAR _FightingDojoEndBattleText3
-	db "@"
+	text_far _FightingDojoEndBattleText3
+	text_end
 
 FightingDojoAfterBattleText3:
-	TX_FAR _FightingDojoAfterBattleText3
-	db "@"
+	text_far _FightingDojoAfterBattleText3
+	text_end
 
 FightingDojoText5:
-	TX_ASM
+	text_asm
 	ld hl, FightingDojoTrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 FightingDojoBattleText4:
-	TX_FAR _FightingDojoBattleText4
-	db "@"
+	text_far _FightingDojoBattleText4
+	text_end
 
 FightingDojoEndBattleText4:
-	TX_FAR _FightingDojoEndBattleText4
-	db "@"
+	text_far _FightingDojoEndBattleText4
+	text_end
 
 FightingDojoAfterBattleText4:
-	TX_FAR _FightingDojoAfterBattleText4
-	db "@"
+	text_far _FightingDojoAfterBattleText4
+	text_end
 
 FightingDojoText6:
 ; Hitmonlee Poké Ball
-	TX_ASM
+	text_asm
 	CheckEitherEventSet EVENT_GOT_HITMONLEE, EVENT_GOT_HITMONCHAN
 	jr z, .GetMon
 	ld hl, OtherHitmonText
@@ -280,12 +252,12 @@ FightingDojoText6:
 	jp TextScriptEnd
 
 WantHitmonleeText:
-	TX_FAR _WantHitmonleeText
-	db "@"
+	text_far _WantHitmonleeText
+	text_end
 
 FightingDojoText7:
 ; Hitmonchan Poké Ball
-	TX_ASM
+	text_asm
 	CheckEitherEventSet EVENT_GOT_HITMONLEE, EVENT_GOT_HITMONCHAN
 	jr z, .GetMon
 	ld hl, OtherHitmonText
@@ -315,9 +287,9 @@ FightingDojoText7:
 	jp TextScriptEnd
 
 WantHitmonchanText:
-	TX_FAR _WantHitmonchanText
-	db "@"
+	text_far _WantHitmonchanText
+	text_end
 
 OtherHitmonText:
-	TX_FAR _OtherHitmonText
-	db "@"
+	text_far _OtherHitmonText
+	text_end

@@ -1,26 +1,25 @@
-Music_TCGOverworld:
-	db $C0
-	dw Music_TCGOverworld_Ch1
-	db $01
-	dw Music_TCGOverworld_Ch2
-	db $02
-	dw Music_TCGOverworld_Ch3
-	db $03
-	dw Music_TCGOverworld_Ch4
+Music_Overworld:
+	channel_count 4
+	channel 1, Music_Overworld_Ch1
+	channel 2, Music_Overworld_Ch2
+	channel 3, Music_Overworld_Ch3
+	channel 4, Music_Overworld_Ch4
 
-Music_TCGOverworld_Ch1: 
+Music_Overworld_Ch1: ; f71a0 (3d:71a0)
 	notetype0 7
-	dutycycle 0
-	vibrato 25, $33
+	duty_cycle 0
+	;stereo_panning 1, 1
+	;vibrato_type 9
+	vibrato 25, 3, 3
 	notetype1 10
 	notetype2 7
 	octave 3
-	note __, 3
-	callchannel Branch_f72ba
-	note __, 3
+	rest 3
+	sound_call Branch_f72ba
+	rest 3
 .MainLoop
-	callchannel Branch_f72ba
-	dutycycle 1
+	sound_call Branch_f72ba
+	duty_cycle 1
 	notetype2 8
 	octave 3
 	notetype1 10
@@ -50,17 +49,17 @@ Music_TCGOverworld_Ch1:
 	note C_, 12
 	notetype1 3
 	note C_, 2
-	dutycycle 0
+	duty_cycle 0
 	notetype1 9
 	notetype2 7
 	octave 3
 	note E_, 4
 	note E_, 3
 	note E_, 3
-	dutycycle 1
+	duty_cycle 1
 	notetype1 10
 	notetype2 8
-	callchannel Branch_f72fb
+	sound_call Branch_f72fb
 	note C_, 6
 	notetype1 3
 	note C_, 6
@@ -128,21 +127,26 @@ Music_TCGOverworld_Ch1:
 	note C_, 12
 	notetype1 3
 	note C_, 6
-	dutycycle 2
+	duty_cycle 2
 	notetype2 8
 	notetype1 6
 	octave 4
 	note G_, 1
+	;tie
 	note E_, 1
+	;tie
 	note C_, 1
+	;tie
 	dec_octave
 	note G_, 1
+	;tie
 	note E_, 1
+	;tie
 	note C_, 1
-	dutycycle 1
+	duty_cycle 1
 	notetype1 10
 	notetype2 8
-	callchannel Branch_f72fb
+	sound_call Branch_f72fb
 	note C_, 6
 	notetype1 3
 	note C_, 6
@@ -179,17 +183,22 @@ Music_TCGOverworld_Ch1:
 	note G_, 1
 	notetype1 9
 	note F_, 8
+	;tie
 	note F_, 8
+	;tie
 	note F_, 8
+	;tie
 	note F_, 8
+	;tie
 	note F_, 8
+	;tie
 	note F_, 8
 	notetype1 3
 	note F_, 3
-	dutycycle 0
+	duty_cycle 0
 	notetype1 10
 	notetype2 7
-	loopchannel 0, .MainLoop
+	sound_loop 0, .MainLoop
 
 Branch_f72ba:
 	octave 3
@@ -200,7 +209,7 @@ Branch_f72ba:
 	notetype1 10
 	notetype2 4
 	note C_, 1
-	note __, 1
+	rest 1
 	dec_octave
 	notetype1 9
 	notetype2 7
@@ -210,13 +219,13 @@ Branch_f72ba:
 	notetype1 10
 	notetype2 4
 	note D_, 1
-	note __, 2
+	rest 2
 	dec_octave
 	notetype1 9
 	notetype2 7
 	note G_, 3
 	note A#, 3
-	note __, 3
+	rest 3
 	note A_, 3
 	note A_, 2
 	inc_octave
@@ -224,7 +233,7 @@ Branch_f72ba:
 	notetype1 10
 	notetype2 4
 	note C_, 1
-	note __, 1
+	rest 1
 	dec_octave
 	notetype1 9
 	notetype2 7
@@ -234,13 +243,13 @@ Branch_f72ba:
 	notetype1 10
 	notetype2 4
 	note D_, 1
-	note __, 2
+	rest 2
 	notetype1 9
 	notetype2 7
 	note C_, 3
 	dec_octave
 	note A#, 3
-	endchannel
+	sound_ret
 
 Branch_f72fb:
 	octave 4
@@ -280,49 +289,51 @@ Branch_f72fb:
 	note C#, 10
 	notetype1 10
 	notetype0 7
-	endchannel
+	sound_ret
 
 
-Music_TCGOverworld_Ch2: 
+Music_Overworld_Ch2: ; f7334 (3d:7334)
 	notetype0 7
-	dutycycle 0
-	vibrato 30, $33
+	duty_cycle 0
+	;stereo_panning 1, 1
+	;vibrato_type 9
+	vibrato 30, 3, 3
 	notetype2 7
 	octave 3
-	callchannel Branch_f7535
+	sound_call Branch_f7535
 .MainLoop
-	callchannel Branch_f7535
+	sound_call Branch_f7535
 	notetype1 9
 	notetype2 7
-	note __, 3
+	rest 3
 	note C_, 5
 	note C_, 3
 	notetype1 9
 	notetype2 4
 	inc_octave
 	note F_, 1
-	note __, 2
+	rest 2
 	dec_octave
 	notetype1 9
 	notetype2 7
 	note C_, 4
 	note C_, 3
 	note C_, 3
-	note __, 3
+	rest 3
 	note C_, 5
 	note C_, 3
 	notetype1 9
 	notetype2 4
 	inc_octave
 	note G_, 1
-	note __, 2
+	rest 2
 	dec_octave
 	notetype1 9
 	notetype2 7
 	note D_, 4
 	note D_, 3
 	note C_, 3
-	note __, 3
+	rest 3
 	dec_octave
 	note A#, 5
 	inc_octave
@@ -331,7 +342,7 @@ Music_TCGOverworld_Ch2:
 	notetype2 4
 	inc_octave
 	note F_, 1
-	note __, 2
+	rest 2
 	dec_octave
 	notetype1 9
 	notetype2 7
@@ -339,7 +350,7 @@ Music_TCGOverworld_Ch2:
 	note C_, 3
 	dec_octave
 	note A#, 3
-	note __, 3
+	rest 3
 	note A#, 5
 	inc_octave
 	note C#, 3
@@ -347,7 +358,7 @@ Music_TCGOverworld_Ch2:
 	notetype2 4
 	inc_octave
 	note F_, 1
-	note __, 2
+	rest 2
 	dec_octave
 	notetype1 9
 	notetype2 7
@@ -355,7 +366,7 @@ Music_TCGOverworld_Ch2:
 	dec_octave
 	note F_, 3
 	note A#, 3
-	note __, 3
+	rest 3
 	inc_octave
 	note C_, 3
 	note E_, 2
@@ -391,14 +402,14 @@ Music_TCGOverworld_Ch2:
 	notetype2 4
 	note F_, 1
 	dec_octave
-	note __, 2
+	rest 2
 	notetype1 9
 	notetype2 7
 	note D_, 4
 	note D_, 3
 	dec_octave
 	note A_, 3
-	note __, 3
+	rest 3
 	note A#, 3
 	inc_octave
 	note D_, 2
@@ -409,7 +420,7 @@ Music_TCGOverworld_Ch2:
 	inc_octave
 	inc_octave
 	note F_, 1
-	note __, 2
+	rest 2
 	dec_octave
 	dec_octave
 	notetype1 9
@@ -417,7 +428,7 @@ Music_TCGOverworld_Ch2:
 	note A#, 4
 	note A#, 3
 	note A#, 3
-	note __, 3
+	rest 3
 	note A#, 3
 	inc_octave
 	note D_, 2
@@ -427,7 +438,7 @@ Music_TCGOverworld_Ch2:
 	notetype2 4
 	inc_octave
 	note A_, 1
-	note __, 2
+	rest 2
 	dec_octave
 	notetype1 9
 	notetype2 7
@@ -436,7 +447,7 @@ Music_TCGOverworld_Ch2:
 	note D_, 1
 	dec_octave
 	note A#, 3
-	note __, 3
+	rest 3
 	inc_octave
 	note C_, 5
 	note C_, 3
@@ -444,42 +455,47 @@ Music_TCGOverworld_Ch2:
 	notetype2 4
 	inc_octave
 	note F_, 1
-	note __, 2
+	rest 2
 	notetype1 9
 	notetype2 7
 	dec_octave
 	note C_, 4
 	note C_, 3
 	note C_, 3
-	note __, 3
+	rest 3
 	note C_, 5
 	note C_, 3
 	notetype1 9
 	notetype2 4
 	inc_octave
 	note G_, 1
-	note __, 2
+	rest 2
 	dec_octave
 	notetype1 9
 	notetype2 7
 	note D_, 4
-	dutycycle 2
+	duty_cycle 2
 	notetype1 6
 	notetype2 8
 	octave 4
 	note C_, 1
+	;tie
 	dec_octave
 	note G_, 1
+	;tie
 	note E_, 1
+	;tie
 	note C_, 1
+	;tie
 	dec_octave
 	note G_, 1
+	;tie
 	note E_, 1
-	dutycycle 0
+	duty_cycle 0
 	notetype1 9
 	notetype2 7
 	octave 2
-	note __, 3
+	rest 3
 	note A#, 5
 	inc_octave
 	note D_, 3
@@ -487,7 +503,7 @@ Music_TCGOverworld_Ch2:
 	notetype2 4
 	inc_octave
 	note F_, 1
-	note __, 2
+	rest 2
 	dec_octave
 	notetype1 9
 	notetype2 7
@@ -495,7 +511,7 @@ Music_TCGOverworld_Ch2:
 	note C_, 3
 	dec_octave
 	note A#, 3
-	note __, 3
+	rest 3
 	note A#, 5
 	inc_octave
 	note C#, 3
@@ -503,14 +519,14 @@ Music_TCGOverworld_Ch2:
 	notetype2 4
 	inc_octave
 	note F_, 1
-	note __, 2
+	rest 2
 	dec_octave
 	notetype1 9
 	notetype2 7
 	note C#, 4
 	note C#, 3
 	note C#, 3
-	note __, 3
+	rest 3
 	note C_, 3
 	dec_octave
 	note A_, 2
@@ -520,14 +536,14 @@ Music_TCGOverworld_Ch2:
 	notetype2 4
 	inc_octave
 	note G_, 1
-	note __, 2
+	rest 2
 	dec_octave
 	notetype1 9
 	notetype2 7
 	note C_, 4
 	note E_, 3
 	note C_, 3
-	note __, 3
+	rest 3
 	note D_, 6
 	dec_octave
 	note B_, 2
@@ -536,7 +552,7 @@ Music_TCGOverworld_Ch2:
 	notetype1 9
 	notetype2 4
 	note F_, 1
-	note __, 2
+	rest 2
 	dec_octave
 	notetype1 9
 	notetype2 7
@@ -557,7 +573,7 @@ Music_TCGOverworld_Ch2:
 	notetype1 9
 	notetype2 4
 	note F_, 1
-	note __, 2
+	rest 2
 	dec_octave
 	dec_octave
 	notetype1 9
@@ -595,7 +611,7 @@ Music_TCGOverworld_Ch2:
 	notetype1 9
 	notetype2 7
 	octave 3
-	note __, 3
+	rest 3
 	note F_, 3
 	note C_, 2
 	note F_, 1
@@ -603,7 +619,7 @@ Music_TCGOverworld_Ch2:
 	notetype2 4
 	inc_octave
 	note F_, 1
-	note __, 1
+	rest 1
 	dec_octave
 	notetype1 9
 	notetype2 7
@@ -628,7 +644,7 @@ Music_TCGOverworld_Ch2:
 	notetype1 9
 	notetype2 7
 	dec_octave
-	note __, 3
+	rest 3
 	note A_, 3
 	note F_, 2
 	note A_, 1
@@ -636,7 +652,7 @@ Music_TCGOverworld_Ch2:
 	notetype1 9
 	notetype2 4
 	note F_, 1
-	note __, 1
+	rest 1
 	dec_octave
 	notetype1 9
 	notetype2 7
@@ -658,13 +674,13 @@ Music_TCGOverworld_Ch2:
 	notetype1 9
 	notetype2 4
 	note F_, 1
-	loopchannel 0, .MainLoop
+	sound_loop 0, .MainLoop
 
 Branch_f7535:
 	octave 3
 	notetype1 9
 	notetype2 7
-	note __, 3
+	rest 3
 	note C_, 3
 	note C_, 2
 	note F_, 1
@@ -672,7 +688,7 @@ Branch_f7535:
 	notetype2 4
 	inc_octave
 	note F_, 1
-	note __, 1
+	rest 1
 	dec_octave
 	notetype1 9
 	notetype2 7
@@ -682,7 +698,7 @@ Branch_f7535:
 	notetype2 4
 	inc_octave
 	note F_, 1
-	note __, 1
+	rest 1
 	dec_octave
 	notetype2 8
 	notetype0 1
@@ -700,7 +716,7 @@ Branch_f7535:
 	inc_octave
 	note F_, 1
 	dec_octave
-	note __, 3
+	rest 3
 	notetype1 9
 	notetype2 8
 	note F_, 3
@@ -710,7 +726,7 @@ Branch_f7535:
 	notetype2 4
 	inc_octave
 	note F_, 1
-	note __, 1
+	rest 1
 	dec_octave
 	notetype1 9
 	notetype2 7
@@ -720,7 +736,7 @@ Branch_f7535:
 	notetype2 4
 	inc_octave
 	note F_, 1
-	note __, 1
+	rest 1
 	dec_octave
 	notetype2 8
 	notetype0 1
@@ -738,75 +754,96 @@ Branch_f7535:
 	inc_octave
 	note F_, 1
 	dec_octave
-	endchannel
+	sound_ret
 
 
-Music_TCGOverworld_Ch3: 
+Music_Overworld_Ch3: ; f75a1 (3d:75a1)
 	notetype0 7
+	;stereo_panning 1, 1
 	notetype1 1
 	notetype2 11
+	;echo 64
+	;cutoff 7
 	octave 2
-	callchannel Branch_f77f8
+	sound_call Branch_f77f8
 	note F_, 2
 	inc_octave
 	note C_, 1
 .MainLoop
-	callchannel Branch_f77f8
+	sound_call Branch_f77f8
 	note F_, 3
-	callchannel Branch_f7826
+	sound_call Branch_f7826
 	octave 2
+	;cutoff 8
 	note F_, 1
 	note A#, 2
-	note __, 1
+	rest 1
 	octave 4
+	;cutoff 3
 	note C#, 2
 	dec_octave
+	;cutoff 8
 	note F_, 1
 	note A#, 1
-	note __, 1
+	rest 1
 	inc_octave
+	;cutoff 3
 	note F_, 2
-	note __, 1
+	rest 1
 	inc_octave
 	note C#, 1
 	octave 2
+	;cutoff 8
 	note A#, 1
-	note __, 1
+	rest 1
 	octave 4
+	;cutoff 7
 	note G_, 1
 	octave 2
+	;cutoff 8
 	note A#, 1
-	note __, 1
+	rest 1
 	note F_, 1
 	inc_octave
+	;cutoff 3
 	note A#, 2
 	dec_octave
+	;cutoff 8
 	note A#, 1
 	octave 4
+	;cutoff 3
 	note C#, 2
 	octave 2
+	;cutoff 8
 	note F_, 1
 	note A_, 2
-	note __, 1
+	rest 1
 	octave 4
+	;cutoff 3
 	note E_, 2
 	octave 2
+	;cutoff 8
 	note A_, 1
 	octave 4
+	;cutoff 3
 	note G_, 2
+	;cutoff 7
 	note E_, 1
+	;cutoff 8
 	dec_octave
 	note E_, 1
-	note __, 1
+	rest 1
 	inc_octave
 	inc_octave
+	;cutoff 3
 	note E_, 1
 	octave 2
+	;cutoff 8
 	note A_, 1
-	note __, 1
+	rest 1
 	inc_octave
 	note A_, 1
-	note __, 2
+	rest 2
 	dec_octave
 	note A_, 1
 	inc_octave
@@ -815,235 +852,314 @@ Music_TCGOverworld_Ch3:
 	note C_, 1
 	dec_octave
 	note A_, 1
-	note __, 1
+	rest 1
 	inc_octave
 	note A_, 1
 	dec_octave
 	note D_, 2
-	note __, 1
+	rest 1
 	octave 4
+	;cutoff 3
 	note F_, 2
 	octave 2
+	;cutoff 8
 	note A_, 1
 	inc_octave
 	note D_, 2
 	dec_octave
 	note A_, 1
 	octave 4
+	;cutoff 3
 	note D_, 2
 	inc_octave
 	note C_, 1
 	octave 2
+	;cutoff 8
 	note D_, 2
 	octave 4
+	;cutoff 3
 	note F_, 2
-	note __, 1
+	rest 1
 	octave 2
+	;cutoff 8
 	note A_, 1
 	octave 4
+	;cutoff 3
 	note F_, 2
 	octave 2
+	;cutoff 8
 	note D_, 1
 	octave 4
+	;cutoff 3
 	note D_, 2
+	;cutoff 8
 	octave 2
 	note A_, 1
 	note G_, 2
-	note __, 1
+	rest 1
 	octave 4
+	;cutoff 3
 	note D_, 2
 	octave 2
+	;cutoff 8
 	note G_, 1
 	octave 4
+	;cutoff 3
 	note F_, 2
+	;cutoff 7
 	note D_, 1
 	dec_octave
+	;cutoff 8
 	note D_, 1
-	note __, 1
+	rest 1
+	;cutoff 3
 	inc_octave
 	note A#, 1
 	octave 2
+	;cutoff 8
 	note G_, 1
-	note __, 1
+	rest 1
 	octave 4
+	;cutoff 3
 	note D_, 2
-	note __, 1
+	rest 1
 	dec_octave
+	;cutoff 8
 	note D_, 1
 	inc_octave
+	;cutoff 3
 	note F_, 2
 	octave 2
+	;cutoff 8
 	note G_, 1
 	octave 4
+	;cutoff 3
 	note D_, 2
+	;cutoff 8
 	dec_octave
 	note D_, 1
 	note C_, 2
-	note __, 1
+	rest 1
 	inc_octave
+	;cutoff 3
 	note D_, 2
 	octave 2
+	;cutoff 8
 	note G_, 1
 	octave 4
+	;cutoff 3
 	note F_, 2
+	;cutoff 7
 	note D_, 1
 	octave 2
+	;cutoff 8
 	note C_, 1
-	note __, 1
+	rest 1
 	octave 4
+	;cutoff 3
 	note F_, 1
 	dec_octave
+	;cutoff 8
 	note C_, 1
-	note __, 1
+	rest 1
 	inc_octave
+	;cutoff 3
 	note D_, 2
-	note __, 1
+	rest 1
 	octave 2
+	;cutoff 8
 	note E_, 1
 	inc_octave
 	note C_, 1
-	note __, 1
+	rest 1
 	inc_octave
+	;cutoff 7
 	note F_, 1
+	;cutoff 3
 	note E_, 2
+	;cutoff 8
 	octave 2
 	note E_, 1
-	callchannel Branch_f7826
+	sound_call Branch_f7826
+	;cutoff 8
 	octave 3
 	note C_, 1
 	note C#, 2
-	note __, 1
+	rest 1
 	inc_octave
+	;cutoff 3
 	note C#, 2
 	octave 2
+	;cutoff 8
 	note G#, 1
 	inc_octave
 	note C#, 1
-	note __, 1
+	rest 1
 	inc_octave
+	;cutoff 3
 	note F_, 2
-	note __, 1
+	rest 1
 	inc_octave
 	note C#, 1
 	octave 3
+	;cutoff 8
 	note C#, 1
-	note __, 1
+	rest 1
 	inc_octave
 	note G_, 1
 	dec_octave
+	;cutoff 8
 	note C#, 1
-	note __, 1
+	rest 1
 	dec_octave
 	note G#, 1
 	octave 4
+	;cutoff 3
 	note G_, 2
 	dec_octave
+	;cutoff 8
 	note C#, 1
 	inc_octave
+	;cutoff 3
 	note F_, 2
 	octave 2
+	;cutoff 8
 	note G#, 1
 	inc_octave
 	note C_, 2
-	note __, 1
+	rest 1
 	inc_octave
+	;cutoff 3
 	note E_, 2
 	dec_octave
+	;cutoff 8
 	note G_, 1
 	inc_octave
+	;cutoff 3
 	note C_, 2
+	;cutoff 7
 	note E_, 1
 	dec_octave
+	;cutoff 8
 	note E_, 1
-	note __, 1
+	rest 1
 	octave 5
+	;cutoff 3
 	note E_, 1
 	octave 3
+	;cutoff 8
 	note C_, 1
-	note __, 1
+	rest 1
 	inc_octave
+	;cutoff 3
 	note E_, 2
-	note __, 1
+	rest 1
 	octave 2
+	;cutoff 8
 	note G_, 1
 	octave 4
+	;cutoff 3
 	note G_, 2
 	dec_octave
+	;cutoff 8
 	note C_, 1
 	inc_octave
+	;cutoff 3
 	note E_, 2
 	octave 2
+	;cutoff 8
 	note G_, 1
 	note B_, 2
-	note __, 1
+	rest 1
 	octave 4
+	;cutoff 3
 	note F_, 2
 	dec_octave
+	;cutoff 8
 	note F_, 1
 	note B_, 2
 	note F_, 1
 	inc_octave
+	;cutoff 3
 	note D_, 2
 	inc_octave
 	note D_, 1
 	octave 2
+	;cutoff 8
 	note B_, 2
 	octave 4
+	;cutoff 3
 	note F_, 2
-	note __, 1
+	rest 1
 	dec_octave
+	;cutoff 8
 	note F_, 1
 	note B_, 2
 	note F_, 1
 	dec_octave
 	note B_, 2
-	note __, 1
+	rest 1
 	note A#, 2
-	note __, 1
+	rest 1
 	octave 4
+	;cutoff 3
 	note D_, 2
 	dec_octave
+	;cutoff 8
 	note F_, 1
 	note A#, 2
 	note F_, 1
 	inc_octave
+	;cutoff 3
 	note F_, 2
 	inc_octave
 	note D_, 1
 	octave 2
+	;cutoff 8
 	note A#, 1
-	note __, 1
+	rest 1
 	octave 4
+	;cutoff 7
 	note D_, 1
 	octave 2
+	;cutoff 8
 	note A#, 1
-	note __, 2
+	rest 2
 	note A#, 2
 	inc_octave
 	note F_, 1
 	note A#, 1
-	note __, 2
+	rest 2
 	note C_, 2
-	note __, 1
+	rest 1
 	inc_octave
+	;cutoff 3
 	note D_, 2
 	octave 2
+	;cutoff 8
 	note G_, 1
 	octave 4
+	;cutoff 3
 	note F_, 2
+	;cutoff 7
 	note D_, 1
 	octave 2
+	;cutoff 8
 	note C_, 1
-	note __, 1
+	rest 1
 	octave 5
+	;cutoff 3
 	note D_, 1
 	octave 3
+	;cutoff 8
 	note C_, 1
-	note __, 1
+	rest 1
 	inc_octave
+	;cutoff 3
 	note D_, 2
-	note __, 1
+	rest 1
 	octave 2
+	;cutoff 8
 	note E_, 1
 	inc_octave
 	note C_, 1
@@ -1051,76 +1167,90 @@ Music_TCGOverworld_Ch3:
 	note G_, 1
 	note E_, 1
 	note C_, 1
-	note __, 1
+	rest 1
 	note E_, 1
 	note F_, 3
 	octave 4
+	;cutoff 3
 	note A_, 2
 	dec_octave
+	;cutoff 8
 	note C_, 1
 	inc_octave
+	;cutoff 5
 	note F_, 2
 	note A_, 1
 	inc_octave
 	note C_, 1
 	dec_octave
-	note __, 1
+	rest 1
 	note A#, 2
-	note __, 1
+	rest 1
 	note A#, 1
 	inc_octave
 	note D_, 1
 	dec_octave
-	note __, 2
+	rest 2
 	note G_, 2
 	dec_octave
+	;cutoff 8
 	note C_, 1
 	inc_octave
+	;cutoff 5
 	note A#, 2
 	inc_octave
 	note C_, 1
 	octave 2
+	;cutoff 8
 	note F_, 3
 	octave 5
+	;cutoff 3
 	note C_, 2
 	octave 3
+	;cutoff 8
 	note C_, 1
 	inc_octave
+	;cutoff 5
 	note A_, 2
 	inc_octave
 	note C_, 1
 	note C_, 1
-	note __, 1
+	rest 1
 	dec_octave
 	note A#, 2
-	note __, 1
+	rest 1
 	note A#, 1
 	inc_octave
 	note D_, 1
-	note __, 2
+	rest 2
 	note C_, 2
 	octave 3
+	;cutoff 8
 	note C_, 1
 	inc_octave
+	;cutoff 5
 	note A#, 2
 	dec_octave
+	;cutoff 8
 	note C_, 1
-	loopchannel 0, .MainLoop
+	sound_loop 0, .MainLoop
 
 Branch_f77f8:
 	octave 2
 	note F_, 3
 	octave 4
+	;cutoff 3
 	note A_, 2
 	dec_octave
+	;cutoff 8
 	note C_, 1
 	note F_, 2
 	note C_, 1
-	note __, 2
+	rest 2
 	note F_, 1
-	note __, 2
+	rest 2
 	note F_, 1
-	note __, 2
+	rest 2
 	note C_, 1
 	note F_, 2
 	note C_, 1
@@ -1131,194 +1261,221 @@ Branch_f77f8:
 	dec_octave
 	note F_, 3
 	octave 5
+	;cutoff 3
 	note C_, 2
 	octave 3
+	;cutoff 8
 	note C_, 1
 	note F_, 2
 	note C_, 1
-	note __, 2
+	rest 2
 	note F_, 1
-	note __, 2
+	rest 2
 	note F_, 1
-	note __, 2
+	rest 2
 	note C_, 1
 	note F_, 2
 	note C_, 1
 	dec_octave
-	endchannel
+	sound_ret
 
 Branch_f7826:
 	octave 2
 	note F_, 2
-	note __, 1
+	rest 1
 	octave 4
+	;cutoff 3
 	note F_, 2
 	dec_octave
+	;cutoff 8
 	note C_, 1
 	note F_, 1
-	note __, 1
+	rest 1
 	inc_octave
+	;cutoff 3
 	note F_, 2
-	note __, 1
+	rest 1
 	inc_octave
 	note C_, 1
 	octave 2
+	;cutoff 8
 	note F_, 1
-	note __, 1
+	rest 1
 	octave 4
+	;cutoff 7
 	note G_, 1
 	octave 2
+	;cutoff 8
 	note F_, 1
-	note __, 1
+	rest 1
 	note C_, 1
 	octave 4
+	;cutoff 3
 	note G_, 2
 	octave 2
+	;cutoff 8
 	note F_, 1
 	octave 4
+	;cutoff 7
 	note F_, 2
 	octave 2
+	;cutoff 8
 	note G_, 1
 	note A_, 2
-	note __, 1
+	rest 1
 	octave 4
+	;cutoff 3
 	note E_, 2
 	dec_octave
+	;cutoff 8
 	note E_, 1
 	note A_, 1
-	note __, 1
+	rest 1
 	inc_octave
+	;cutoff 3
 	note E_, 2
-	note __, 1
+	rest 1
 	inc_octave
 	note C_, 1
 	octave 2
+	;cutoff 8
 	note A_, 1
-	note __, 1
+	rest 1
 	octave 4
+	;cutoff 7
 	note E_, 1
 	octave 2
+	;cutoff 8
 .Loop1
 	note A_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	loopchannel 2, .Loop1
+	sound_loop 2, .Loop1
 	note A_, 2
-	note __, 1
+	rest 1
 	note A#, 2
-	note __, 1
+	rest 1
 	octave 4
+	;cutoff 3
 	note D_, 2
 	dec_octave
+	;cutoff 8
 	note F_, 1
 	note A#, 1
-	note __, 1
+	rest 1
 	inc_octave
+	;cutoff 3
 	note F_, 2
-	note __, 1
+	rest 1
 	inc_octave
 	note D_, 1
 	octave 2
+	;cutoff 8
 	note A#, 1
-	note __, 1
+	rest 1
 	octave 4
+	;cutoff 7
 	note D_, 1
 	octave 2
+	;cutoff 8
 	note A#, 1
-	note __, 1
+	rest 1
 	note F_, 1
 	octave 4
+	;cutoff 3
 	note D_, 2
 	octave 2
+	;cutoff 8
 	note A#, 1
 	octave 4
+	;cutoff 3
 	note D_, 2
-	endchannel
+	sound_ret
 
 
-Music_TCGOverworld_Ch4: 
-	togglenoise $06
-	notetype 7
+Music_Overworld_Ch4: ; f78af (3d:78af)
+	toggle_noise 6
+	drum_speed 7
 	octave 1
-	callchannel Branch_f78ee
-	callchannel Branch_f78fb
+	sound_call Branch_f78ee
+	sound_call Branch_f78fb
 .MainLoop
-	callchannel Branch_f78ee
-	note C_, 3
-	note D#, 2
-	note C_, 1
-	note C#, 3
-	note D#, 2
-	note E_, 1
-	note C_, 2
-	note D#, 1
-	note D#, 3
-	note C#, 1
-	note D#, 1
-	note D#, 1
-	note C#, 3
+	sound_call Branch_f78ee
+	drum_note 1, 3
+	drum_note 4, 2
+	drum_note 1, 1
+	drum_note 2, 3
+	drum_note 4, 2
+	drum_note 5, 1
+	drum_note 1, 2
+	drum_note 4, 1
+	drum_note 4, 3
+	drum_note 2, 1
+	drum_note 4, 1
+	drum_note 4, 1
+	drum_note 2, 3
 .Loop1
-	callchannel Branch_f78ee
-	callchannel Branch_f78fb
-	loopchannel 3, .Loop1
-	callchannel Branch_f78ee
-	callchannel Branch_f790a
+	sound_call Branch_f78ee
+	sound_call Branch_f78fb
+	sound_loop 3, .Loop1
+	sound_call Branch_f78ee
+	sound_call Branch_f790a
 .Loop2
-	callchannel Branch_f78ee
-	callchannel Branch_f78fb
-	loopchannel 3, .Loop2
-	callchannel Branch_f78ee
-	callchannel Branch_f790a
-	callchannel Branch_f78ee
-	callchannel Branch_f78fb
-	loopchannel 0, .MainLoop
+	sound_call Branch_f78ee
+	sound_call Branch_f78fb
+	sound_loop 3, .Loop2
+	sound_call Branch_f78ee
+	sound_call Branch_f790a
+	sound_call Branch_f78ee
+	sound_call Branch_f78fb
+	sound_loop 0, .MainLoop
 
 Branch_f78ee:
-	note C_, 3
-	note D#, 2
-	note C_, 1
-	note C#, 3
-	note D#, 2
-	note E_, 1
-	note C_, 2
-	note D#, 1
-	note D#, 3
-	note C#, 3
-	note D#, 2
-	note E_, 1
-	endchannel
+	drum_note 1, 3
+	drum_note 4, 2
+	drum_note 1, 1
+	drum_note 2, 3
+	drum_note 4, 2
+	drum_note 5, 1
+	drum_note 1, 2
+	drum_note 4, 1
+	drum_note 4, 3
+	drum_note 2, 3
+	drum_note 4, 2
+	drum_note 5, 1
+	sound_ret
 
 Branch_f78fb:
-	note C_, 3
-	note D#, 2
-	note C_, 1
-	note C#, 3
-	note D#, 2
-	note E_, 1
-	note C_, 2
-	note D#, 1
-	note D#, 3
-	note C#, 1
-	note D#, 1
-	note D#, 1
-	note D#, 2
-	note E_, 1
-	endchannel
+	drum_note 1, 3
+	drum_note 4, 2
+	drum_note 1, 1
+	drum_note 2, 3
+	drum_note 4, 2
+	drum_note 5, 1
+	drum_note 1, 2
+	drum_note 4, 1
+	drum_note 4, 3
+	drum_note 2, 1
+	drum_note 4, 1
+	drum_note 4, 1
+	drum_note 4, 2
+	drum_note 5, 1
+	sound_ret
 
 Branch_f790a:
-	note C_, 3
-	note D#, 2
-	note C_, 1
-	note C#, 3
-	note D#, 2
-	note E_, 1
-	note C_, 2
-	note D#, 1
-	note D#, 3
-	note C#, 1
-	note D#, 1
-	note D#, 1
-	note C#, 2
-	note C#, 1
-	endchannel
-
+	drum_note 1, 3
+	drum_note 4, 2
+	drum_note 1, 1
+	drum_note 2, 3
+	drum_note 4, 2
+	drum_note 5, 1
+	drum_note 1, 2
+	drum_note 4, 1
+	drum_note 4, 3
+	drum_note 2, 1
+	drum_note 4, 1
+	drum_note 4, 1
+	drum_note 2, 2
+	drum_note 2, 1
+	sound_ret
+; 0xf7919

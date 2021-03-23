@@ -1,21 +1,22 @@
 Music_GoldSilverOpening:
-	musicheader 3, 1, Music_GoldSilverOpening_Ch1
-	musicheader 1, 2, Music_GoldSilverOpening_Ch2
-	musicheader 1, 3, Music_GoldSilverOpening_Ch3
+	channel_count 3
+	channel 1, Music_GoldSilverOpening_Ch1
+	channel 2, Music_GoldSilverOpening_Ch2
+	channel 3, Music_GoldSilverOpening_Ch3
 
 Music_GoldSilverOpening_Ch1:
 	tempo 256
-	volume $77
-	tone $0001
-	dutycycle $2
-	stereopanning $f0
-	notetype $c, $b7
+	volume 7, 7
+	pitch_offset 1
+	duty_cycle 2
+	stereo_panning TRUE, FALSE
+	note_type 12, 11, 7
 	octave 1
 	note G#, 16
 	note G#, 16
 	tempo 168
-	dutycycle $3
-	notetype $6, $c7
+	duty_cycle 3
+	note_type 6, 12, 7
 	octave 3
 	note F_, 12
 	note A_, 4
@@ -30,7 +31,7 @@ Music_GoldSilverOpening_Ch1:
 	note D#, 12
 	note D_, 2
 	note C#, 2
-	notetype $6, $b5
+	note_type 6, 11, 5
 	note C_, 8
 	octave 3
 	note F_, 8
@@ -38,7 +39,7 @@ Music_GoldSilverOpening_Ch1:
 	note B_, 4
 	octave 4
 	note C_, 4
-	notetype $6, $b3
+	note_type 6, 11, 3
 	octave 3
 	note A#, 8
 	note C#, 8
@@ -46,8 +47,8 @@ Music_GoldSilverOpening_Ch1:
 	note F#, 8
 	octave 1
 	note B_, 8
-	notetype $6, $b2
-	note __, 4
+	note_type 6, 11, 2
+	rest 4
 	octave 3
 	note A#, 4
 	note A#, 8
@@ -73,7 +74,7 @@ Music_GoldSilverOpening_Ch1:
 	note F#, 4
 	note G_, 4
 	note F_, 4
-	notetype $8, $b3
+	note_type 8, 11, 3
 	octave 4
 	note F_, 1
 	note G_, 1
@@ -82,8 +83,8 @@ Music_GoldSilverOpening_Ch1:
 	note B_, 1
 	octave 5
 	note C_, 1
-	dutycycle $2
-	notetype $c, $b3
+	duty_cycle 2
+	note_type 12, 11, 3
 	note D_, 1
 	note C#, 1
 	note D_, 4
@@ -101,8 +102,8 @@ Music_GoldSilverOpening_Ch1:
 	note C_, 2
 	note D#, 4
 	note F#, 2
-	dutycycle $3
-	notetype $8, $92
+	duty_cycle 3
+	note_type 8, 9, 2
 	note A_, 1
 	note F_, 1
 	note D#, 1
@@ -115,31 +116,31 @@ Music_GoldSilverOpening_Ch1:
 	note C_, 1
 	octave 3
 	note A_, 3
-	notetype $c, $b2
+	note_type 12, 11, 2
 	note A#, 2
 	note B_, 2
 	octave 4
 	note C_, 2
 	note D_, 2
 	note D#, 2
-	intensity $c2
+	volume_envelope 12, 2
 	note F_, 2
 	note G_, 2
 	note A_, 16
-	endchannel
+	sound_ret
 
 Music_GoldSilverOpening_Ch2:
-	tone $0001
-	stereopanning $f
-	notetype $c, $b7
-	dutycycle $2
+	pitch_offset 1
+	stereo_panning FALSE, TRUE
+	note_type 12, 11, 7
+	duty_cycle 2
 	octave 2
 	note C_, 16
 	note C_, 16
-	dutycycle $3
-	notetype $c, $b2
-	note __, 2
-	notetype $6, $62
+	duty_cycle 3
+	note_type 12, 11, 2
+	rest 2
+	note_type 6, 6, 2
 	octave 1
 	note F_, 2
 	note A_, 2
@@ -179,33 +180,33 @@ Music_GoldSilverOpening_Ch2:
 	note D_, 2
 	note D#, 2
 	note G_, 2
-	notetype $c, $b7
+	note_type 12, 11, 7
 	octave 1
 	note F_, 16
-	intensity $83
+	volume_envelope 8, 3
 	octave 4
 	note F_, 2
-	intensity $81
+	volume_envelope 8, 1
 	note D_, 2
-	intensity $93
+	volume_envelope 9, 3
 	note G#, 2
-	intensity $91
+	volume_envelope 9, 1
 	note F_, 2
-	intensity $a3
+	volume_envelope 10, 3
 	octave 5
 	note C#, 2
-	intensity $a1
+	volume_envelope 10, 1
 	octave 4
 	note A#, 2
-	intensity $b3
+	volume_envelope 11, 3
 	octave 5
 	note F#, 2
-	intensity $c1
+	volume_envelope 12, 1
 	note D#, 2
-	intensity $b3
+	volume_envelope 11, 3
 	octave 1
 	note A#, 2
-	notetype $6, $b2
+	note_type 6, 11, 2
 	octave 4
 	note D_, 4
 	note D_, 4
@@ -291,146 +292,146 @@ Music_GoldSilverOpening_Ch2:
 	octave 3
 	note D#, 4
 	note D#, 16
-	notetype $6, $a2
+	note_type 6, 10, 2
 	note F_, 4
 	note G_, 4
 	note G#, 4
-	notetype $6, $c2
+	note_type 6, 12, 2
 	note A_, 4
 	note A#, 4
 	octave 4
 	note C_, 4
-	notetype $6, $d2
+	note_type 6, 13, 2
 	octave 3
 	note A_, 4
 	octave 4
 	note C_, 4
 	note D#, 16
-	endchannel
+	sound_ret
 
 Music_GoldSilverOpening_Ch3:
-	notetype $6, $10
+	note_type 6, 1, 0
 	octave 2
 	note D_, 4
-	notetype $6, $20
+	note_type 6, 2, 0
 	note D_, 4
-	notetype $6, $30
+	note_type 6, 3, 0
 	note D_, 4
-	note __, 12
-	note __, 8
-	notetype $6, $10
+	rest 12
+	rest 8
+	note_type 6, 1, 0
 	octave 2
 	note D#, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note A#, 1
-	note __, 1
+	rest 1
 	octave 3
 	note D_, 1
-	note __, 1
+	rest 1
 	note D#, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note A#, 1
-	note __, 1
+	rest 1
 	octave 4
 	note D_, 1
-	note __, 1
+	rest 1
 	note D#, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note A#, 1
-	note __, 1
+	rest 1
 	octave 5
 	note D_, 1
-	note __, 1
+	rest 1
 	note D#, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note A#, 1
-	note __, 1
+	rest 1
 	octave 6
 	note D_, 1
-	note __, 1
+	rest 1
 	octave 2
 	note F_, 1
-	note __, 1
+	rest 1
 	note A_, 1
-	note __, 1
+	rest 1
 	octave 3
 	note C_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 1
+	rest 1
 	note F_, 1
-	note __, 1
+	rest 1
 	note A_, 1
-	note __, 1
+	rest 1
 	octave 4
 	note C_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 1
+	rest 1
 	note F_, 1
-	note __, 1
+	rest 1
 	note A_, 1
-	note __, 1
+	rest 1
 	octave 5
 	note C_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 1
+	rest 1
 	note F_, 1
-	note __, 1
+	rest 1
 	note A_, 1
-	note __, 1
+	rest 1
 	octave 6
 	note C_, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 1
+	rest 1
 	octave 2
 	note D#, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note A#, 1
-	note __, 1
+	rest 1
 	octave 3
 	note D_, 1
-	note __, 1
+	rest 1
 	note D#, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note A#, 1
-	note __, 1
+	rest 1
 	octave 4
 	note D_, 1
-	note __, 1
+	rest 1
 	note D#, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note A#, 1
-	note __, 1
+	rest 1
 	octave 5
 	note D_, 1
-	note __, 1
+	rest 1
 	note D#, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note A#, 1
-	note __, 1
+	rest 1
 	octave 6
 	note D_, 1
-	note __, 1
-	notetype $8, $10
+	rest 1
+	note_type 8, 1, 0
 	note F_, 1
 	octave 5
 	note B_, 1
@@ -464,29 +465,29 @@ Music_GoldSilverOpening_Ch3:
 	note F_, 1
 	octave 5
 	note A_, 3
-	notetype $c, $10
+	note_type 12, 1, 0
 	note G_, 1
-	note __, 1
+	rest 1
 	octave 6
 	note C_, 2
 	octave 5
 	note A#, 1
-	note __, 1
+	rest 1
 	octave 6
 	note F_, 2
 	note D#, 1
-	note __, 1
+	rest 1
 	note A#, 2
 	note G#, 1
-	note __, 1
-	note __, 16
-	note __, 4
-	notetype $6, $10
+	rest 1
+	rest 16
+	rest 4
+	note_type 6, 1, 0
 	octave 2
 	note G_, 1
-	note __, 3
+	rest 3
 	note A_, 2
-	note __, 2
+	rest 2
 	octave 5
 	note F_, 12
 	note D_, 4
@@ -494,122 +495,122 @@ Music_GoldSilverOpening_Ch3:
 	note F_, 2
 	note D#, 12
 	note G#, 2
-	note __, 2
+	rest 2
 	note F#, 6
 	note D#, 2
 	note F_, 12
 	note D_, 2
-	note __, 2
+	rest 2
 	note D#, 6
 	note F_, 2
 	note G_, 2
-	note __, 2
+	rest 2
 	note F#, 2
-	note __, 2
+	rest 2
 	note G_, 2
-	note __, 2
+	rest 2
 	note A_, 4
 	note D#, 4
 	note F_, 2
-	note __, 2
+	rest 2
 	octave 4
 	note A#, 1
-	note __, 1
+	rest 1
 	octave 5
 	note D_, 1
-	note __, 1
+	rest 1
 	octave 4
 	note A#, 1
-	note __, 1
+	rest 1
 	octave 5
 	note D_, 1
-	note __, 1
+	rest 1
 	octave 4
 	note A#, 1
-	note __, 1
+	rest 1
 	octave 5
 	note D_, 1
-	note __, 1
+	rest 1
 	octave 4
 	note A#, 1
-	note __, 1
+	rest 1
 	octave 5
 	note C_, 1
-	note __, 1
+	rest 1
 	octave 4
 	note A#, 1
-	note __, 1
+	rest 1
 	octave 5
 	note C_, 1
-	note __, 1
+	rest 1
 	octave 4
 	note A#, 1
-	note __, 1
+	rest 1
 	octave 5
 	note C_, 1
-	note __, 1
+	rest 1
 	octave 4
 	note A#, 1
-	note __, 1
+	rest 1
 	octave 5
 	note D_, 1
-	note __, 1
+	rest 1
 	octave 4
 	note A#, 1
-	note __, 1
+	rest 1
 	octave 5
 	note D_, 1
-	note __, 1
+	rest 1
 	octave 4
 	note A#, 1
-	note __, 1
+	rest 1
 	octave 5
 	note D_, 1
-	note __, 1
+	rest 1
 	octave 4
 	note A#, 1
-	note __, 1
+	rest 1
 	octave 5
 	note C_, 1
-	note __, 1
+	rest 1
 	note D_, 1
-	note __, 1
+	rest 1
 	note F_, 1
-	note __, 1
+	rest 1
 	note D_, 1
-	note __, 1
+	rest 1
 	note F_, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note A#, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note A#, 1
-	note __, 1
+	rest 1
 	note G_, 1
-	note __, 1
+	rest 1
 	note A#, 1
-	note __, 1
+	rest 1
 	note F#, 1
-	note __, 1
+	rest 1
 	note A#, 1
-	note __, 1
+	rest 1
 	note F#, 1
-	note __, 1
+	rest 1
 	note A#, 1
-	note __, 1
+	rest 1
 	note F#, 1
-	note __, 1
+	rest 1
 	note A#, 1
-	note __, 9
-	notetype $c, $10
-	note __, 14
+	rest 9
+	note_type 12, 1, 0
+	rest 14
 	octave 3
 	note F_, 2
 	note D#, 1
-	note __, 1
+	rest 1
 	note C_, 1
-	note __, 13
-	endchannel
+	rest 13
+	sound_ret

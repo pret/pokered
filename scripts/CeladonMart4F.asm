@@ -8,13 +8,13 @@ CeladonMart4F_TextPointers:
 	dw CeladonMart4Text4
 
 CeladonMart4Text2:
-	TX_FAR _CeladonMart4Text2
-	db "@"
+	text_far _CeladonMart4Text2
+	text_end
 
 CeladonMart4Text3:
-	TX_FAR _CeladonMart4Text3
-	db "@"
+	text_far _CeladonMart4Text3
+	text_end
 
 CeladonMart4Text4:
-	TX_FAR _CeladonMart4Text4
-	db "@"
+	text_far _CeladonMart4Text4
+	text_end

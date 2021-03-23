@@ -1,15 +1,15 @@
-Music_TCGMatchStart3:
-	db $40
-	dw Music_TCGMatchStart3_Ch1
-	db $01
-	dw Music_TCGMatchStart3_Ch2
+Music_MatchStart3:
+	channel_count 2
+	channel 1, Music_MatchStart3_Ch1
+	channel 2, Music_MatchStart3_Ch2
 
-Music_TCGMatchStart3_Ch1: 
+Music_MatchStart3_Ch1: ; f7a0f (3d:7a0f)
 	notetype0 1
+	;stereo_panning 1, 1
 	notetype2 8
 	octave 2
 	notetype1 15
-	dutycycle 1
+	duty_cycle 1
 	note C_, 1
 	note E_, 1
 	note G_, 1
@@ -48,7 +48,7 @@ Music_TCGMatchStart3_Ch1:
 	note G_, 1
 	note B_, 1
 	octave 2
-	dutycycle 3
+	duty_cycle 3
 	note D_, 1
 	note F_, 1
 	note A_, 1
@@ -97,7 +97,7 @@ Music_TCGMatchStart3_Ch1:
 	inc_octave
 	note C_, 1
 	octave 2
-	dutycycle 1
+	duty_cycle 1
 	note E_, 1
 	note G_, 1
 	note B_, 1
@@ -165,16 +165,18 @@ Music_TCGMatchStart3_Ch1:
 	note B_, 1
 	inc_octave
 	note D_, 1
-	endchannel
+	sound_ret
 
 
-Music_TCGMatchStart3_Ch2: 
+Music_MatchStart3_Ch2: ; f7aba (3d:7aba)
 	notetype0 1
+	;stereo_panning 1, 1
 	notetype2 8
-	note __, 4
+	;frequency_offset 6
+	rest 4
 	octave 2
 	notetype1 6
-	dutycycle 1
+	duty_cycle 1
 	note C_, 1
 	note E_, 1
 	note G_, 1
@@ -213,7 +215,7 @@ Music_TCGMatchStart3_Ch2:
 	note G_, 1
 	note B_, 1
 	octave 2
-	dutycycle 3
+	duty_cycle 3
 	note D_, 1
 	note F_, 1
 	note A_, 1
@@ -262,7 +264,7 @@ Music_TCGMatchStart3_Ch2:
 	inc_octave
 	note C_, 1
 	octave 2
-	dutycycle 1
+	duty_cycle 1
 	note E_, 1
 	note G_, 1
 	note B_, 1
@@ -324,5 +326,5 @@ Music_TCGMatchStart3_Ch2:
 	inc_octave
 	note C_, 1
 	dec_octave
-	endchannel
-
+	sound_ret
+; 0xf7b61

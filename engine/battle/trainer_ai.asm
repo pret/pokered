@@ -134,7 +134,7 @@ AIMoveChoiceModification1:
 	push de
 	push bc
 	ld hl, StatusAilmentMoveEffects
-	ld de, $0001
+	ld de, 1
 	call IsInArray
 	pop bc
 	pop de
@@ -146,11 +146,11 @@ AIMoveChoiceModification1:
 	jr .nextMove
 
 StatusAilmentMoveEffects:
-	db $01 ; unused sleep effect
+	db EFFECT_01 ; unused sleep effect
 	db SLEEP_EFFECT
 	db POISON_EFFECT
 	db PARALYZE_EFFECT
-	db $FF
+	db -1 ; end
 
 ; slightly encourage moves with specific effects.
 ; in particular, stat-modifying moves and other move effects
@@ -204,7 +204,7 @@ AIMoveChoiceModification3:
 	push hl
 	push bc
 	push de
-	callab AIGetTypeEffectiveness
+	callfar AIGetTypeEffectiveness
 	pop de
 	pop bc
 	pop hl
@@ -273,68 +273,19 @@ ReadMove:
 	pop hl
 	ret
 
-; move choice modification methods that are applied for each trainer class
-; 0 is sentinel value
-TrainerClassMoveChoiceModifications:
-	db 0      ; YOUNGSTER
-	db 1,0    ; BUG CATCHER
-	db 1,0    ; LASS
-	db 1,3,0  ; SAILOR
-	db 1,0    ; JR_TRAINER_M
-	db 1,0    ; JR_TRAINER_F
-	db 1,2,3,0; POKEMANIAC
-	db 1,2,0  ; SUPER_NERD
-	db 1,0    ; HIKER
-	db 1,0    ; BIKER
-	db 1,3,0  ; BURGLAR
-	db 1,0    ; ENGINEER
-	db 1,2,0  ; JUGGLER_X
-	db 1,3,0  ; FISHER
-	db 1,3,0  ; SWIMMER
-	db 0      ; CUE_BALL
-	db 1,0    ; GAMBLER
-	db 1,3,0  ; BEAUTY
-	db 1,2,0  ; PSYCHIC_TR
-	db 1,3,0  ; ROCKER
-	db 1,0    ; JUGGLER
-	db 1,0    ; TAMER
-	db 1,0    ; BIRD_KEEPER
-	db 1,0    ; BLACKBELT
-	db 1,0    ; SONY1
-	db 1,3,0  ; PROF_OAK
-	db 1,2,0  ; CHIEF
-	db 1,2,0  ; SCIENTIST
-	db 1,3,0  ; GIOVANNI
-	db 1,0    ; ROCKET
-	db 1,3,0  ; COOLTRAINER_M
-	db 1,3,0  ; COOLTRAINER_F
-	db 1,0    ; BRUNO
-	db 1,0    ; BROCK
-	db 1,3,0  ; MISTY
-	db 1,3,0  ; LT_SURGE
-	db 1,3,0  ; ERIKA
-	db 1,3,0  ; KOGA
-	db 1,3,0  ; BLAINE
-	db 1,3,0  ; SABRINA
-	db 1,2,0  ; GENTLEMAN
-	db 1,3,0  ; SONY2
-	db 1,3,0  ; SONY3
-	db 1,2,3,0; LORELEI
-	db 1,0    ; CHANNELER
-	db 1,0    ; AGATHA
-	db 1,3,0  ; LANCE
+INCLUDE "data/trainers/move_choices.asm"
 
-INCLUDE "engine/battle/trainer_pic_money_pointers.asm"
+INCLUDE "data/trainers/pic_pointers_money.asm"
 
-INCLUDE "text/trainer_names.asm"
+INCLUDE "data/trainers/names.asm"
 
-INCLUDE "engine/battle/bank_e_misc.asm"
+INCLUDE "engine/battle/misc.asm"
 
 INCLUDE "engine/battle/read_trainer_party.asm"
 
-INCLUDE "data/trainer_moves.asm"
+INCLUDE "data/trainers/special_moves.asm"
 
-INCLUDE "data/trainer_parties.asm"
+INCLUDE "data/trainers/parties.asm"
 
 TrainerAI:
 	and a
@@ -343,7 +294,7 @@ TrainerAI:
 	ret z ; if not a trainer, we're done here
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
-	ret z
+	ret z ; if in a link battle, we're done as well
 	ld a, [wTrainerClass] ; what trainer class is this?
 	dec a
 	ld c, a
@@ -368,81 +319,31 @@ TrainerAI:
 	call Random
 	jp hl
 
-TrainerAIPointers:
-; one entry per trainer class
-; first byte, number of times (per Pokémon) it can occur
-; next two bytes, pointer to AI subroutine for trainer class
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,JugglerAI ; juggler_x
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,JugglerAI ; juggler
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 2,BlackbeltAI ; blackbelt
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 1,GenericAI ; chief
-	dbw 3,GenericAI
-	dbw 1,GiovanniAI ; giovanni
-	dbw 3,GenericAI
-	dbw 2,CooltrainerMAI ; cooltrainerm
-	dbw 1,CooltrainerFAI ; cooltrainerf
-	dbw 2,BrunoAI ; bruno
-	dbw 5,BrockAI ; brock
-	dbw 1,MistyAI ; misty
-	dbw 1,LtSurgeAI ; surge
-	dbw 1,ErikaAI ; erika
-	dbw 2,KogaAI ; koga
-	dbw 2,BlaineAI ; blaine
-	dbw 1,SabrinaAI ; sabrina
-	dbw 3,GenericAI
-	dbw 1,Sony2AI ; sony2
-	dbw 1,Sony3AI ; sony3
-	dbw 2,LoreleiAI ; lorelei
-	dbw 3,GenericAI
-	dbw 2,AgathaAI ; agatha
-	dbw 1,LanceAI ; lance
+INCLUDE "data/trainers/ai_pointers.asm"
 
 JugglerAI:
-	cp $40
+	cp 25 percent + 1
 	ret nc
 	jp AISwitchIfEnoughMons
 
 BlackbeltAI:
-	cp $20
+	cp 13 percent - 1
 	ret nc
 	jp AIUseXAttack
 
 GiovanniAI:
-	cp $40
+	cp 25 percent + 1
 	ret nc
 	jp AIUseGuardSpec
 
 CooltrainerMAI:
-	cp $40
+	cp 25 percent + 1
 	ret nc
 	jp AIUseXAttack
 
 CooltrainerFAI:
-	cp $40
-	ld a, $A
+	cp 25 percent + 1
+	ld a, 10
 	call AICheckIfHPBelowFraction
 	jp c, AIUseHyperPotion
 	ld a, 5
@@ -458,51 +359,51 @@ BrockAI:
 	jp AIUseFullHeal
 
 MistyAI:
-	cp $40
+	cp 25 percent + 1
 	ret nc
 	jp AIUseXDefend
 
 LtSurgeAI:
-	cp $40
+	cp 25 percent + 1
 	ret nc
 	jp AIUseXSpeed
 
 ErikaAI:
-	cp $80
+	cp 50 percent + 1
 	ret nc
-	ld a, $A
+	ld a, 10
 	call AICheckIfHPBelowFraction
 	ret nc
 	jp AIUseSuperPotion
 
 KogaAI:
-	cp $40
+	cp 25 percent + 1
 	ret nc
 	jp AIUseXAttack
 
 BlaineAI:
-	cp $40
+	cp 25 percent + 1
 	ret nc
 	jp AIUseSuperPotion
 
 SabrinaAI:
-	cp $40
+	cp 25 percent + 1
 	ret nc
-	ld a, $A
+	ld a, 10
 	call AICheckIfHPBelowFraction
 	ret nc
 	jp AIUseHyperPotion
 
-Sony2AI:
-	cp $20
+Rival2AI:
+	cp 13 percent - 1
 	ret nc
 	ld a, 5
 	call AICheckIfHPBelowFraction
 	ret nc
 	jp AIUsePotion
 
-Sony3AI:
-	cp $20
+Rival3AI:
+	cp 13 percent - 1
 	ret nc
 	ld a, 5
 	call AICheckIfHPBelowFraction
@@ -510,7 +411,7 @@ Sony3AI:
 	jp AIUseFullRestore
 
 LoreleiAI:
-	cp $80
+	cp 50 percent + 1
 	ret nc
 	ld a, 5
 	call AICheckIfHPBelowFraction
@@ -518,14 +419,14 @@ LoreleiAI:
 	jp AIUseSuperPotion
 
 BrunoAI:
-	cp $40
+	cp 25 percent + 1
 	ret nc
 	jp AIUseXDefend
 
 AgathaAI:
-	cp $14
+	cp 8 percent
 	jp c, AISwitchIfEnoughMons
-	cp $80
+	cp 50 percent + 1
 	ret nc
 	ld a, 4
 	call AICheckIfHPBelowFraction
@@ -533,7 +434,7 @@ AgathaAI:
 	jp AIUseSuperPotion
 
 LanceAI:
-	cp $80
+	cp 50 percent + 1
 	ret nc
 	ld a, 5
 	call AICheckIfHPBelowFraction
@@ -641,14 +542,14 @@ AIRecoverHP:
 
 AIPrintItemUseAndUpdateHPBar:
 	call AIPrintItemUse_
-	coord hl, 2, 2
+	hlcoord 2, 2
 	xor a
 	ld [wHPBarType], a
 	predef UpdateHPBar2
 	jp DecrementAICount
 
 AISwitchIfEnoughMons:
-; enemy trainer switches if there are 3 or more unfainted mons in party
+; enemy trainer switches if there are 2 or more unfainted mons in party
 	ld a, [wEnemyPartyCount]
 	ld c, a
 	ld hl, wEnemyMon1HP
@@ -672,7 +573,7 @@ AISwitchIfEnoughMons:
 	jr nz, .loop
 
 	ld a, d ; how many available monsters are there?
-	cp 2 ; don't bother if only 1 or 2
+	cp 2    ; don't bother if only 1
 	jp nc, SwitchEnemyMon
 	and a
 	ret
@@ -698,7 +599,7 @@ SwitchEnemyMon:
 	; switching in a new mon in response to this switch.
 	ld a, 1
 	ld [wFirstMonsNotOutYet], a
-	callab EnemySendOut
+	callfar EnemySendOut
 	xor a
 	ld [wFirstMonsNotOutYet], a
 
@@ -709,8 +610,8 @@ SwitchEnemyMon:
 	ret
 
 AIBattleWithdrawText:
-	TX_FAR _AIBattleWithdrawText
-	db "@"
+	text_far _AIBattleWithdrawText
+	text_end
 
 AIUseFullHeal:
 	call AIPlayRestoringSFX
@@ -754,17 +655,17 @@ AIUseDireHit: ; unused
 
 AICheckIfHPBelowFraction:
 ; return carry if enemy trainer's current HP is below 1 / a of the maximum
-	ld [H_DIVISOR], a
+	ldh [hDivisor], a
 	ld hl, wEnemyMonMaxHP
 	ld a, [hli]
-	ld [H_DIVIDEND], a
+	ldh [hDividend], a
 	ld a, [hl]
-	ld [H_DIVIDEND + 1], a
+	ldh [hDividend + 1], a
 	ld b, 2
 	call Divide
-	ld a, [H_QUOTIENT + 3]
+	ldh a, [hQuotient + 3]
 	ld c, a
-	ld a, [H_QUOTIENT + 2]
+	ldh a, [hQuotient + 2]
 	ld b, a
 	ld hl, wEnemyMonHP + 1
 	ld a, [hld]
@@ -812,7 +713,7 @@ AIIncreaseStat:
 	ld a, ANIM_AF
 	ld [hli], a
 	ld [hl], b
-	callab StatModifierUpEffect
+	callfar StatModifierUpEffect
 	pop hl
 	pop af
 	ld [hli], a
@@ -834,5 +735,5 @@ AIPrintItemUse_:
 	jp PrintText
 
 AIBattleUseItemText:
-	TX_FAR _AIBattleUseItemText
-	db "@"
+	text_far _AIBattleUseItemText
+	text_end

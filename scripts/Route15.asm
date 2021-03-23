@@ -27,269 +27,199 @@ Route15_TextPointers:
 	dw Route15Text12
 
 Route15TrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_ROUTE_15_TRAINER_0
-	db ($2 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_15_TRAINER_0
-	dw Route15BattleText1 ; TextBeforeBattle
-	dw Route15AfterBattleText1 ; TextAfterBattle
-	dw Route15EndBattleText1 ; TextEndBattle
-	dw Route15EndBattleText1 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_15_TRAINER_0, 2, Route15BattleText1, Route15EndBattleText1, Route15AfterBattleText1
 Route15TrainerHeader1:
-	dbEventFlagBit EVENT_BEAT_ROUTE_15_TRAINER_1
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_15_TRAINER_1
-	dw Route15BattleText2 ; TextBeforeBattle
-	dw Route15AfterBattleText2 ; TextAfterBattle
-	dw Route15EndBattleText2 ; TextEndBattle
-	dw Route15EndBattleText2 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_15_TRAINER_1, 3, Route15BattleText2, Route15EndBattleText2, Route15AfterBattleText2
 Route15TrainerHeader2:
-	dbEventFlagBit EVENT_BEAT_ROUTE_15_TRAINER_2
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_15_TRAINER_2
-	dw Route15BattleText3 ; TextBeforeBattle
-	dw Route15AfterBattleText3 ; TextAfterBattle
-	dw Route15EndBattleText3 ; TextEndBattle
-	dw Route15EndBattleText3 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_15_TRAINER_2, 3, Route15BattleText3, Route15EndBattleText3, Route15AfterBattleText3
 Route15TrainerHeader3:
-	dbEventFlagBit EVENT_BEAT_ROUTE_15_TRAINER_3
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_15_TRAINER_3
-	dw Route15BattleText4 ; TextBeforeBattle
-	dw Route15AfterBattleText4 ; TextAfterBattle
-	dw Route15EndBattleText4 ; TextEndBattle
-	dw Route15EndBattleText4 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_15_TRAINER_3, 3, Route15BattleText4, Route15EndBattleText4, Route15AfterBattleText4
 Route15TrainerHeader4:
-	dbEventFlagBit EVENT_BEAT_ROUTE_15_TRAINER_4
-	db ($2 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_15_TRAINER_4
-	dw Route15BattleText5 ; TextBeforeBattle
-	dw Route15AfterBattleText5 ; TextAfterBattle
-	dw Route15EndBattleText5 ; TextEndBattle
-	dw Route15EndBattleText5 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_15_TRAINER_4, 2, Route15BattleText5, Route15EndBattleText5, Route15AfterBattleText5
 Route15TrainerHeader5:
-	dbEventFlagBit EVENT_BEAT_ROUTE_15_TRAINER_5
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_15_TRAINER_5
-	dw Route15BattleText6 ; TextBeforeBattle
-	dw Route15AfterBattleText6 ; TextAfterBattle
-	dw Route15EndBattleText6 ; TextEndBattle
-	dw Route15EndBattleText6 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_15_TRAINER_5, 3, Route15BattleText6, Route15EndBattleText6, Route15AfterBattleText6
 Route15TrainerHeader6:
-	dbEventFlagBit EVENT_BEAT_ROUTE_15_TRAINER_6
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_15_TRAINER_6
-	dw Route15BattleText7 ; TextBeforeBattle
-	dw Route15AfterBattleText7 ; TextAfterBattle
-	dw Route15EndBattleText7 ; TextEndBattle
-	dw Route15EndBattleText7 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_15_TRAINER_6, 3, Route15BattleText7, Route15EndBattleText7, Route15AfterBattleText7
 Route15TrainerHeader7:
-	dbEventFlagBit EVENT_BEAT_ROUTE_15_TRAINER_7, 1
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_15_TRAINER_7, 1
-	dw Route15BattleText8 ; TextBeforeBattle
-	dw Route15AfterBattleText8 ; TextAfterBattle
-	dw Route15EndBattleText8 ; TextEndBattle
-	dw Route15EndBattleText8 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_15_TRAINER_7, 1, 3, Route15BattleText8, Route15EndBattleText8, Route15AfterBattleText8
 Route15TrainerHeader8:
-	dbEventFlagBit EVENT_BEAT_ROUTE_15_TRAINER_8, 1
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_15_TRAINER_8, 1
-	dw Route15BattleText9 ; TextBeforeBattle
-	dw Route15AfterBattleText9 ; TextAfterBattle
-	dw Route15EndBattleText9 ; TextEndBattle
-	dw Route15EndBattleText9 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_15_TRAINER_8, 1, 3, Route15BattleText9, Route15EndBattleText9, Route15AfterBattleText9
 Route15TrainerHeader9:
-	dbEventFlagBit EVENT_BEAT_ROUTE_15_TRAINER_9, 1
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_15_TRAINER_9, 1
-	dw Route15BattleText10 ; TextBeforeBattle
-	dw Route15AfterBattleText10 ; TextAfterBattle
-	dw Route15EndBattleText10 ; TextEndBattle
-	dw Route15EndBattleText10 ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_ROUTE_15_TRAINER_9, 1, 3, Route15BattleText10, Route15EndBattleText10, Route15AfterBattleText10
+	db -1 ; end
 
 Route15Text1:
-	TX_ASM
+	text_asm
 	ld hl, Route15TrainerHeader0
 	jr Route15TalkToTrainer
 
 Route15Text2:
-	TX_ASM
+	text_asm
 	ld hl, Route15TrainerHeader1
 	jr Route15TalkToTrainer
 
 Route15Text3:
-	TX_ASM
+	text_asm
 	ld hl, Route15TrainerHeader2
 	jr Route15TalkToTrainer
 
 Route15Text4:
-	TX_ASM
+	text_asm
 	ld hl, Route15TrainerHeader3
 	jr Route15TalkToTrainer
 
 Route15Text5:
-	TX_ASM
+	text_asm
 	ld hl, Route15TrainerHeader4
 	jr Route15TalkToTrainer
 
 Route15Text6:
-	TX_ASM
+	text_asm
 	ld hl, Route15TrainerHeader5
 	jr Route15TalkToTrainer
 
 Route15Text7:
-	TX_ASM
+	text_asm
 	ld hl, Route15TrainerHeader6
 	jr Route15TalkToTrainer
 
 Route15Text8:
-	TX_ASM
+	text_asm
 	ld hl, Route15TrainerHeader7
 	jr Route15TalkToTrainer
 
 Route15Text9:
-	TX_ASM
+	text_asm
 	ld hl, Route15TrainerHeader8
 	jr Route15TalkToTrainer
 
 Route15Text10:
-	TX_ASM
+	text_asm
 	ld hl, Route15TrainerHeader9
 Route15TalkToTrainer:
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route15BattleText1:
-	TX_FAR _Route15BattleText1
-	db "@"
+	text_far _Route15BattleText1
+	text_end
 
 Route15EndBattleText1:
-	TX_FAR _Route15EndBattleText1
-	db "@"
+	text_far _Route15EndBattleText1
+	text_end
 
 Route15AfterBattleText1:
-	TX_FAR _Route15AfterBattleText1
-	db "@"
+	text_far _Route15AfterBattleText1
+	text_end
 
 Route15BattleText2:
-	TX_FAR _Route15BattleText2
-	db "@"
+	text_far _Route15BattleText2
+	text_end
 
 Route15EndBattleText2:
-	TX_FAR _Route15EndBattleText2
-	db "@"
+	text_far _Route15EndBattleText2
+	text_end
 
 Route15AfterBattleText2:
-	TX_FAR _Route15AfterBattleText2
-	db "@"
+	text_far _Route15AfterBattleText2
+	text_end
 
 Route15BattleText3:
-	TX_FAR _Route15BattleText3
-	db "@"
+	text_far _Route15BattleText3
+	text_end
 
 Route15EndBattleText3:
-	TX_FAR _Route15EndBattleText3
-	db "@"
+	text_far _Route15EndBattleText3
+	text_end
 
 Route15AfterBattleText3:
-	TX_FAR _Route15AfterBattleText3
-	db "@"
+	text_far _Route15AfterBattleText3
+	text_end
 
 Route15BattleText4:
-	TX_FAR _Route15BattleText4
-	db "@"
+	text_far _Route15BattleText4
+	text_end
 
 Route15EndBattleText4:
-	TX_FAR _Route15EndBattleText4
-	db "@"
+	text_far _Route15EndBattleText4
+	text_end
 
 Route15AfterBattleText4:
-	TX_FAR _Route15AfterBattleText4
-	db "@"
+	text_far _Route15AfterBattleText4
+	text_end
 
 Route15BattleText5:
-	TX_FAR _Route15BattleText5
-	db "@"
+	text_far _Route15BattleText5
+	text_end
 
 Route15EndBattleText5:
-	TX_FAR _Route15EndBattleText5
-	db "@"
+	text_far _Route15EndBattleText5
+	text_end
 
 Route15AfterBattleText5:
-	TX_FAR _Route15AfterBattleText5
-	db "@"
+	text_far _Route15AfterBattleText5
+	text_end
 
 Route15BattleText6:
-	TX_FAR _Route15BattleText6
-	db "@"
+	text_far _Route15BattleText6
+	text_end
 
 Route15EndBattleText6:
-	TX_FAR _Route15EndBattleText6
-	db "@"
+	text_far _Route15EndBattleText6
+	text_end
 
 Route15AfterBattleText6:
-	TX_FAR _Route15AfterBattleText6
-	db "@"
+	text_far _Route15AfterBattleText6
+	text_end
 
 Route15BattleText7:
-	TX_FAR _Route15BattleText7
-	db "@"
+	text_far _Route15BattleText7
+	text_end
 
 Route15EndBattleText7:
-	TX_FAR _Route15EndBattleText7
-	db "@"
+	text_far _Route15EndBattleText7
+	text_end
 
 Route15AfterBattleText7:
-	TX_FAR _Route15AfterBattleText7
-	db "@"
+	text_far _Route15AfterBattleText7
+	text_end
 
 Route15BattleText8:
-	TX_FAR _Route15BattleText8
-	db "@"
+	text_far _Route15BattleText8
+	text_end
 
 Route15EndBattleText8:
-	TX_FAR _Route15EndBattleText8
-	db "@"
+	text_far _Route15EndBattleText8
+	text_end
 
 Route15AfterBattleText8:
-	TX_FAR _Route15AfterBattleText8
-	db "@"
+	text_far _Route15AfterBattleText8
+	text_end
 
 Route15BattleText9:
-	TX_FAR _Route15BattleText9
-	db "@"
+	text_far _Route15BattleText9
+	text_end
 
 Route15EndBattleText9:
-	TX_FAR _Route15EndBattleText9
-	db "@"
+	text_far _Route15EndBattleText9
+	text_end
 
 Route15AfterBattleText9:
-	TX_FAR _Route15AfterBattleText9
-	db "@"
+	text_far _Route15AfterBattleText9
+	text_end
 
 Route15BattleText10:
-	TX_FAR _Route15BattleText10
-	db "@"
+	text_far _Route15BattleText10
+	text_end
 
 Route15EndBattleText10:
-	TX_FAR _Route15EndBattleText10
-	db "@"
+	text_far _Route15EndBattleText10
+	text_end
 
 Route15AfterBattleText10:
-	TX_FAR _Route15AfterBattleText10
-	db "@"
+	text_far _Route15AfterBattleText10
+	text_end
 
 Route15Text12:
-	TX_FAR _Route15Text12
-	db "@"
+	text_far _Route15Text12
+	text_end

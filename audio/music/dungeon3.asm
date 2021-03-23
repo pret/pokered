@@ -1,614 +1,614 @@
-Music_Dungeon3_Ch0::
+Music_Dungeon3_Ch1::
 	tempo 160
 	volume 7, 7
-	duty 3
-	toggleperfectpitch
+	duty_cycle 3
+	toggle_perfect_pitch
 	vibrato 8, 1, 4
 
 Music_Dungeon3_branch_7e9fc::
-	notetype 12, 12, 3
+	note_type 12, 12, 3
 
 Music_Dungeon3_branch_7e9fe::
-	callchannel Music_Dungeon3_branch_7eab2
-	loopchannel 3, Music_Dungeon3_branch_7e9fe
+	sound_call Music_Dungeon3_branch_7eab2
+	sound_loop 3, Music_Dungeon3_branch_7e9fe
 	octave 2
-	B_ 2
+	note B_, 2
 	octave 3
-	D# 2
-	G_ 2
+	note D#, 2
+	note G_, 2
 	octave 2
-	B_ 2
+	note B_, 2
 	octave 3
-	D# 2
-	G_ 2
-	D# 2
-	E_ 2
+	note D#, 2
+	note G_, 2
+	note D#, 2
+	note E_, 2
 
 Music_Dungeon3_branch_7ea11::
-	callchannel Music_Dungeon3_branch_7eac1
-	loopchannel 4, Music_Dungeon3_branch_7ea11
+	sound_call Music_Dungeon3_branch_7eac1
+	sound_loop 4, Music_Dungeon3_branch_7ea11
 
 Music_Dungeon3_branch_7ea18::
-	callchannel Music_Dungeon3_branch_7eab2
-	loopchannel 4, Music_Dungeon3_branch_7ea18
+	sound_call Music_Dungeon3_branch_7eab2
+	sound_loop 4, Music_Dungeon3_branch_7ea18
 	octave 4
-	F_ 2
-	F_ 2
+	note F_, 2
+	note F_, 2
 	rest 2
-	F_ 2
-	E_ 2
-	E_ 2
-	D# 2
-	D# 2
+	note F_, 2
+	note E_, 2
+	note E_, 2
+	note D#, 2
+	note D#, 2
 	rest 2
-	D# 2
-	D_ 2
-	D_ 2
-	callchannel Music_Dungeon3_branch_7eafc
+	note D#, 2
+	note D_, 2
+	note D_, 2
+	sound_call Music_Dungeon3_branch_7eafc
 	octave 4
-	D_ 2
-	D_ 2
+	note D_, 2
+	note D_, 2
 	rest 2
-	D_ 2
-	D# 2
-	D# 2
-	E_ 2
-	E_ 2
+	note D_, 2
+	note D#, 2
+	note D#, 2
+	note E_, 2
+	note E_, 2
 	rest 2
-	E_ 2
-	F_ 2
-	F_ 2
+	note E_, 2
+	note F_, 2
+	note F_, 2
 
 Music_Dungeon3_branch_7ea3c::
-	callchannel Music_Dungeon3_branch_7eace
-	loopchannel 4, Music_Dungeon3_branch_7ea3c
+	sound_call Music_Dungeon3_branch_7eace
+	sound_loop 4, Music_Dungeon3_branch_7ea3c
 
 Music_Dungeon3_branch_7ea43::
-	callchannel Music_Dungeon3_branch_7eadd
-	loopchannel 3, Music_Dungeon3_branch_7ea43
+	sound_call Music_Dungeon3_branch_7eadd
+	sound_loop 3, Music_Dungeon3_branch_7ea43
 	octave 3
-	C# 2
+	note C#, 2
 	octave 2
-	A_ 2
-	F_ 2
+	note A_, 2
+	note F_, 2
 	octave 3
-	C# 2
+	note C#, 2
 	octave 2
-	A_ 2
-	F_ 2
+	note A_, 2
+	note F_, 2
 	octave 3
-	A_ 2
-	F_ 2
+	note A_, 2
+	note F_, 2
 	octave 4
-	C# 2
+	note C#, 2
 	octave 3
-	A_ 2
-	F_ 2
+	note A_, 2
+	note F_, 2
 	octave 4
-	C# 2
+	note C#, 2
 	octave 3
-	A_ 2
-	F_ 2
-	A_ 2
-	F_ 2
+	note A_, 2
+	note F_, 2
+	note A_, 2
+	note F_, 2
 	octave 4
-	C# 2
+	note C#, 2
 	octave 3
-	A_ 2
-	F_ 2
+	note A_, 2
+	note F_, 2
 	octave 4
-	C# 2
+	note C#, 2
 	octave 3
-	A_ 2
-	F_ 2
+	note A_, 2
+	note F_, 2
 	octave 4
-	C# 2
+	note C#, 2
 	octave 3
-	A_ 2
-	F_ 2
+	note A_, 2
+	note F_, 2
 	octave 4
-	C# 2
+	note C#, 2
 	octave 3
-	A_ 2
-	F_ 2
+	note A_, 2
+	note F_, 2
 	octave 4
-	C# 2
+	note C#, 2
 	octave 3
-	A_ 2
-	F_ 2
+	note A_, 2
+	note F_, 2
 	octave 4
-	C# 2
+	note C#, 2
 	octave 3
-	A_ 2
-	F_ 2
-	G# 2
-	E_ 2
+	note A_, 2
+	note F_, 2
+	note G#, 2
+	note E_, 2
 	octave 4
-	C_ 2
+	note C_, 2
 	octave 3
-	G# 2
-	E_ 2
+	note G#, 2
+	note E_, 2
 	octave 4
-	C_ 2
-	callchannel Music_Dungeon3_branch_7eaea
-	callchannel Music_Dungeon3_branch_7eaea
+	note C_, 2
+	sound_call Music_Dungeon3_branch_7eaea
+	sound_call Music_Dungeon3_branch_7eaea
 	octave 3
-	G# 2
-	E_ 2
+	note G#, 2
+	note E_, 2
 	octave 4
-	C_ 2
+	note C_, 2
 	octave 3
-	G# 2
-	E_ 2
+	note G#, 2
+	note E_, 2
 	octave 4
-	C_ 2
+	note C_, 2
 	octave 3
-	G# 2
-	E_ 2
+	note G#, 2
+	note E_, 2
 	rest 16
 	rest 8
-	callchannel Music_Dungeon3_branch_7eaf7
-	callchannel Music_Dungeon3_branch_7eaf7
-	callchannel Music_Dungeon3_branch_7eaf7
-	callchannel Music_Dungeon3_branch_7eaf7
-	D# 2
+	sound_call Music_Dungeon3_branch_7eaf7
+	sound_call Music_Dungeon3_branch_7eaf7
+	sound_call Music_Dungeon3_branch_7eaf7
+	sound_call Music_Dungeon3_branch_7eaf7
+	note D#, 2
 	rest 16
 	rest 16
-	loopchannel 0, Music_Dungeon3_branch_7e9fc
+	sound_loop 0, Music_Dungeon3_branch_7e9fc
 
 Music_Dungeon3_branch_7eab2::
 	octave 2
-	B_ 2
+	note B_, 2
 	octave 3
-	D# 2
-	G_ 2
+	note D#, 2
+	note G_, 2
 	octave 2
-	B_ 2
+	note B_, 2
 	octave 3
-	D# 2
-	G_ 2
+	note D#, 2
+	note G_, 2
 	octave 2
-	B_ 2
+	note B_, 2
 	octave 3
-	D# 2
-	endchannel
+	note D#, 2
+	sound_ret
 
 Music_Dungeon3_branch_7eac1::
-	E_ 2
-	G# 2
+	note E_, 2
+	note G#, 2
 	octave 4
-	C_ 2
+	note C_, 2
 	octave 3
-	E_ 2
-	G# 2
+	note E_, 2
+	note G#, 2
 	octave 4
-	C_ 2
+	note C_, 2
 	octave 3
-	E_ 2
-	G# 2
-	endchannel
+	note E_, 2
+	note G#, 2
+	sound_ret
 
 Music_Dungeon3_branch_7eace::
 	octave 3
-	D# 2
+	note D#, 2
 	octave 2
-	B_ 2
+	note B_, 2
 	octave 3
-	G_ 2
-	D# 2
+	note G_, 2
+	note D#, 2
 	octave 2
-	B_ 2
+	note B_, 2
 	octave 3
-	G_ 2
-	D# 2
+	note G_, 2
+	note D#, 2
 	octave 2
-	B_ 2
-	endchannel
+	note B_, 2
+	sound_ret
 
 Music_Dungeon3_branch_7eadd::
-	A_ 2
-	F_ 2
+	note A_, 2
+	note F_, 2
 	octave 3
-	C# 2
+	note C#, 2
 	octave 2
-	A_ 2
-	F_ 2
+	note A_, 2
+	note F_, 2
 	octave 3
-	C# 2
+	note C#, 2
 	octave 2
-	A_ 2
-	F_ 2
-	endchannel
+	note A_, 2
+	note F_, 2
+	sound_ret
 
 Music_Dungeon3_branch_7eaea::
 	octave 3
-	G# 2
-	E_ 2
-	G# 2
-	E_ 2
+	note G#, 2
+	note E_, 2
+	note G#, 2
+	note E_, 2
 	octave 4
-	C_ 2
+	note C_, 2
 	octave 3
-	G# 2
-	E_ 2
+	note G#, 2
+	note E_, 2
 	octave 4
-	C_ 2
-	endchannel
+	note C_, 2
+	sound_ret
 
 Music_Dungeon3_branch_7eaf7::
-	D# 2
-	G_ 2
-	D# 2
-	C# 6
-	endchannel
+	note D#, 2
+	note G_, 2
+	note D#, 2
+	note C#, 6
+	sound_ret
 
 Music_Dungeon3_branch_7eafc::
 	tempo 168
 	octave 1
-	A# 1
-	B_ 1
+	note A#, 1
+	note B_, 1
 	octave 2
-	C_ 1
-	C# 1
-	D_ 1
-	D# 1
-	E_ 1
-	F_ 1
+	note C_, 1
+	note C#, 1
+	note D_, 1
+	note D#, 1
+	note E_, 1
+	note F_, 1
 	tempo 176
 	octave 1
-	A# 1
-	B_ 1
+	note A#, 1
+	note B_, 1
 	octave 2
-	C_ 1
-	C# 1
-	D_ 1
-	D# 1
-	E_ 1
-	F_ 1
+	note C_, 1
+	note C#, 1
+	note D_, 1
+	note D#, 1
+	note E_, 1
+	note F_, 1
 	tempo 184
 	octave 1
-	A# 1
-	B_ 1
+	note A#, 1
+	note B_, 1
 	octave 2
-	C_ 1
-	C# 1
-	D_ 1
-	D# 1
-	E_ 1
-	F_ 1
+	note C_, 1
+	note C#, 1
+	note D_, 1
+	note D#, 1
+	note E_, 1
+	note F_, 1
 	tempo 192
 	octave 1
-	A_ 1
-	A# 1
-	B_ 1
+	note A_, 1
+	note A#, 1
+	note B_, 1
 	octave 2
-	C_ 1
-	C# 1
-	D_ 1
-	D# 1
-	E_ 1
+	note C_, 1
+	note C#, 1
+	note D_, 1
+	note D#, 1
+	note E_, 1
 	tempo 200
 	octave 1
-	G# 1
-	A_ 1
-	A# 1
-	B_ 1
+	note G#, 1
+	note A_, 1
+	note A#, 1
+	note B_, 1
 	octave 2
-	C_ 1
-	C# 1
-	D_ 1
-	D# 1
+	note C_, 1
+	note C#, 1
+	note D_, 1
+	note D#, 1
 	tempo 208
 	octave 1
-	G_ 1
-	G# 1
-	A_ 1
-	A# 1
-	B_ 1
+	note G_, 1
+	note G#, 1
+	note A_, 1
+	note A#, 1
+	note B_, 1
 	octave 2
-	C_ 1
-	C# 1
-	D_ 1
+	note C_, 1
+	note C#, 1
+	note D_, 1
 	tempo 216
 	octave 1
-	F# 1
-	G_ 1
-	G# 1
-	A_ 1
-	A# 1
-	B_ 1
+	note F#, 1
+	note G_, 1
+	note G#, 1
+	note A_, 1
+	note A#, 1
+	note B_, 1
 	octave 2
-	C_ 1
-	C# 1
+	note C_, 1
+	note C#, 1
 	tempo 224
 	octave 1
-	F_ 1
-	F# 1
-	G_ 1
-	G# 1
-	A_ 1
-	A# 1
-	B_ 1
+	note F_, 1
+	note F#, 1
+	note G_, 1
+	note G#, 1
+	note A_, 1
+	note A#, 1
+	note B_, 1
 	octave 2
-	C_ 1
+	note C_, 1
 	tempo 160
-	endchannel
-
-
-Music_Dungeon3_Ch1::
-	vibrato 11, 1, 5
-	duty 3
-
-Music_Dungeon3_branch_7eb6d::
-	notetype 12, 13, 3
-	octave 4
-	D# 6
-	C# 6
-	octave 3
-	B_ 2
-	octave 4
-	C# 2
-	D# 2
-	G_ 2
-	D# 2
-	C# 6
-	octave 3
-	B_ 2
-	octave 4
-	C# 2
-	D# 2
-	G_ 2
-	D# 2
-	C# 6
-	octave 3
-	B_ 2
-	A# 2
-	B_ 6
-	octave 4
-	C# 8
-	rest 2
-	G# 6
-	F# 6
-	E_ 2
-	F# 2
-	G# 2
-	octave 5
-	C_ 2
-	octave 4
-	G# 2
-	F# 6
-	E_ 2
-	F# 2
-	G# 2
-	octave 5
-	C_ 2
-	octave 4
-	G# 2
-	F# 6
-	E_ 2
-	D# 2
-	E_ 6
-	F# 6
-	E_ 4
-	D# 6
-	C# 6
-	octave 3
-	B_ 2
-	octave 4
-	C# 2
-	D# 2
-	G_ 2
-	D# 2
-	C# 6
-	octave 3
-	B_ 2
-	octave 4
-	C# 2
-	D# 2
-	G_ 2
-	D# 2
-	C# 6
-	octave 3
-	B_ 2
-	A# 2
-	B_ 6
-	octave 4
-	C# 8
-	rest 2
-	G# 2
-	G# 2
-	rest 2
-	G# 2
-	A_ 2
-	A_ 2
-	A# 2
-	A# 2
-	rest 2
-	A# 2
-	B_ 2
-	B_ 2
-	rest 8
-	rest 8
-	rest 8
-	rest 8
-	rest 8
-	rest 8
-	rest 8
-	rest 8
-	octave 4
-	B_ 2
-	B_ 2
-	rest 2
-	B_ 2
-	A# 2
-	A# 2
-	A_ 2
-	A_ 2
-	rest 2
-	A_ 2
-	G# 2
-	G# 2
-	C# 8
-	rest 2
-	octave 3
-	B_ 6
-	A# 2
-	B_ 2
-	octave 4
-	D# 2
-	G_ 2
-	D# 2
-	C# 6
-	octave 3
-	B_ 2
-	octave 4
-	C# 2
-	D# 2
-	G_ 2
-	D# 2
-	C# 6
-	octave 3
-	B_ 2
-	octave 4
-	C# 2
-	D# 6
-	G_ 6
-	octave 3
-	G_ 8
-	rest 2
-	F_ 6
-	E_ 2
-	F_ 2
-	A_ 2
-	octave 4
-	C# 2
-	octave 3
-	A_ 2
-	G_ 6
-	F_ 2
-	G_ 2
-	A_ 2
-	octave 4
-	C# 2
-	octave 3
-	A_ 2
-	G_ 6
-	A_ 6
-	octave 4
-	C# 6
-	G_ 8
-	rest 2
-	F_ 6
-	E_ 2
-	F_ 2
-	A_ 2
-	octave 5
-	C# 2
-	octave 4
-	A_ 2
-	G_ 6
-	A_ 2
-	octave 5
-	C# 2
-	octave 4
-	A_ 2
-	G_ 6
-	A_ 6
-	octave 5
-	C# 6
-	octave 4
-	F# 8
-	rest 2
-	E_ 6
-	D# 2
-	E_ 2
-	G# 2
-	octave 5
-	C_ 2
-	octave 4
-	G# 2
-	F# 6
-	E_ 2
-	F# 2
-	G# 2
-	octave 5
-	C_ 2
-	octave 4
-	G# 2
-	F# 6
-	G# 6
-	octave 5
-	C_ 6
-	octave 3
-	D# 2
-	G_ 2
-	D# 2
-	C# 6
-	D# 2
-	G_ 2
-	D# 2
-	C# 6
-	octave 2
-	E_ 2
-	G# 2
-	octave 3
-	C_ 2
-	E_ 2
-	G# 2
-	octave 4
-	C_ 2
-	E_ 2
-	G# 2
-	C_ 2
-	E_ 2
-	G# 2
-	C_ 2
-	E_ 2
-	G# 2
-	C_ 2
-	E_ 2
-	G# 2
-	C_ 2
-	E_ 2
-	G# 2
-	C_ 2
-	E_ 2
-	G# 2
-	C_ 2
-	D# 2
-	octave 2
-	B_ 2
-	octave 3
-	D# 2
-	G_ 2
-	octave 2
-	B_ 2
-	octave 3
-	D# 2
-	G_ 2
-	octave 2
-	B_ 2
-	octave 3
-	D# 2
-	octave 2
-	B_ 2
-	octave 3
-	D# 2
-	G_ 2
-	octave 2
-	B_ 2
-	octave 3
-	D# 2
-	G_ 2
-	octave 2
-	B_ 2
-	octave 3
-	D# 2
-	loopchannel 0, Music_Dungeon3_branch_7eb6d
+	sound_ret
 
 
 Music_Dungeon3_Ch2::
-	notetype 12, 1, 2
+	vibrato 11, 1, 5
+	duty_cycle 3
+
+Music_Dungeon3_branch_7eb6d::
+	note_type 12, 13, 3
+	octave 4
+	note D#, 6
+	note C#, 6
+	octave 3
+	note B_, 2
+	octave 4
+	note C#, 2
+	note D#, 2
+	note G_, 2
+	note D#, 2
+	note C#, 6
+	octave 3
+	note B_, 2
+	octave 4
+	note C#, 2
+	note D#, 2
+	note G_, 2
+	note D#, 2
+	note C#, 6
+	octave 3
+	note B_, 2
+	note A#, 2
+	note B_, 6
+	octave 4
+	note C#, 8
+	rest 2
+	note G#, 6
+	note F#, 6
+	note E_, 2
+	note F#, 2
+	note G#, 2
+	octave 5
+	note C_, 2
+	octave 4
+	note G#, 2
+	note F#, 6
+	note E_, 2
+	note F#, 2
+	note G#, 2
+	octave 5
+	note C_, 2
+	octave 4
+	note G#, 2
+	note F#, 6
+	note E_, 2
+	note D#, 2
+	note E_, 6
+	note F#, 6
+	note E_, 4
+	note D#, 6
+	note C#, 6
+	octave 3
+	note B_, 2
+	octave 4
+	note C#, 2
+	note D#, 2
+	note G_, 2
+	note D#, 2
+	note C#, 6
+	octave 3
+	note B_, 2
+	octave 4
+	note C#, 2
+	note D#, 2
+	note G_, 2
+	note D#, 2
+	note C#, 6
+	octave 3
+	note B_, 2
+	note A#, 2
+	note B_, 6
+	octave 4
+	note C#, 8
+	rest 2
+	note G#, 2
+	note G#, 2
+	rest 2
+	note G#, 2
+	note A_, 2
+	note A_, 2
+	note A#, 2
+	note A#, 2
+	rest 2
+	note A#, 2
+	note B_, 2
+	note B_, 2
+	rest 8
+	rest 8
+	rest 8
+	rest 8
+	rest 8
+	rest 8
+	rest 8
+	rest 8
+	octave 4
+	note B_, 2
+	note B_, 2
+	rest 2
+	note B_, 2
+	note A#, 2
+	note A#, 2
+	note A_, 2
+	note A_, 2
+	rest 2
+	note A_, 2
+	note G#, 2
+	note G#, 2
+	note C#, 8
+	rest 2
+	octave 3
+	note B_, 6
+	note A#, 2
+	note B_, 2
+	octave 4
+	note D#, 2
+	note G_, 2
+	note D#, 2
+	note C#, 6
+	octave 3
+	note B_, 2
+	octave 4
+	note C#, 2
+	note D#, 2
+	note G_, 2
+	note D#, 2
+	note C#, 6
+	octave 3
+	note B_, 2
+	octave 4
+	note C#, 2
+	note D#, 6
+	note G_, 6
+	octave 3
+	note G_, 8
+	rest 2
+	note F_, 6
+	note E_, 2
+	note F_, 2
+	note A_, 2
+	octave 4
+	note C#, 2
+	octave 3
+	note A_, 2
+	note G_, 6
+	note F_, 2
+	note G_, 2
+	note A_, 2
+	octave 4
+	note C#, 2
+	octave 3
+	note A_, 2
+	note G_, 6
+	note A_, 6
+	octave 4
+	note C#, 6
+	note G_, 8
+	rest 2
+	note F_, 6
+	note E_, 2
+	note F_, 2
+	note A_, 2
+	octave 5
+	note C#, 2
+	octave 4
+	note A_, 2
+	note G_, 6
+	note A_, 2
+	octave 5
+	note C#, 2
+	octave 4
+	note A_, 2
+	note G_, 6
+	note A_, 6
+	octave 5
+	note C#, 6
+	octave 4
+	note F#, 8
+	rest 2
+	note E_, 6
+	note D#, 2
+	note E_, 2
+	note G#, 2
+	octave 5
+	note C_, 2
+	octave 4
+	note G#, 2
+	note F#, 6
+	note E_, 2
+	note F#, 2
+	note G#, 2
+	octave 5
+	note C_, 2
+	octave 4
+	note G#, 2
+	note F#, 6
+	note G#, 6
+	octave 5
+	note C_, 6
+	octave 3
+	note D#, 2
+	note G_, 2
+	note D#, 2
+	note C#, 6
+	note D#, 2
+	note G_, 2
+	note D#, 2
+	note C#, 6
+	octave 2
+	note E_, 2
+	note G#, 2
+	octave 3
+	note C_, 2
+	note E_, 2
+	note G#, 2
+	octave 4
+	note C_, 2
+	note E_, 2
+	note G#, 2
+	note C_, 2
+	note E_, 2
+	note G#, 2
+	note C_, 2
+	note E_, 2
+	note G#, 2
+	note C_, 2
+	note E_, 2
+	note G#, 2
+	note C_, 2
+	note E_, 2
+	note G#, 2
+	note C_, 2
+	note E_, 2
+	note G#, 2
+	note C_, 2
+	note D#, 2
+	octave 2
+	note B_, 2
+	octave 3
+	note D#, 2
+	note G_, 2
+	octave 2
+	note B_, 2
+	octave 3
+	note D#, 2
+	note G_, 2
+	octave 2
+	note B_, 2
+	octave 3
+	note D#, 2
+	octave 2
+	note B_, 2
+	octave 3
+	note D#, 2
+	note G_, 2
+	octave 2
+	note B_, 2
+	octave 3
+	note D#, 2
+	note G_, 2
+	octave 2
+	note B_, 2
+	octave 3
+	note D#, 2
+	sound_loop 0, Music_Dungeon3_branch_7eb6d
+
+
+Music_Dungeon3_Ch3::
+	note_type 12, 1, 2
 	rest 16
 	rest 16
 	rest 16
@@ -621,71 +621,71 @@ Music_Dungeon3_Ch2::
 	rest 16
 	rest 16
 	rest 12
-	notetype 6, 1, 0
+	note_type 6, 1, 0
 	octave 3
-	B_ 1
+	note B_, 1
 	octave 4
-	C_ 1
-	C# 1
-	D_ 1
-	D# 1
-	E_ 1
+	note C_, 1
+	note C#, 1
+	note D_, 1
+	note D#, 1
+	note E_, 1
 	rest 2
-	C_ 1
-	C# 1
-	D_ 1
-	D# 1
-	E_ 1
-	F_ 1
+	note C_, 1
+	note C#, 1
+	note D_, 1
+	note D#, 1
+	note E_, 1
+	note F_, 1
 	rest 16
 	rest 16
 	rest 10
 	octave 5
-	E_ 8
+	note E_, 8
 	octave 4
-	B_ 8
+	note B_, 8
 	octave 5
-	D# 8
+	note D#, 8
 	octave 4
-	A# 8
+	note A#, 8
 	octave 5
-	D_ 8
+	note D_, 8
 	octave 4
-	A_ 8
+	note A_, 8
 	octave 5
-	C# 8
+	note C#, 8
 	octave 4
-	G# 8
+	note G#, 8
 	octave 5
-	C_ 8
+	note C_, 8
 	octave 4
-	G_ 8
-	B_ 8
-	F# 8
-	A# 8
-	F_ 8
-	A_ 8
-	E_ 8
+	note G_, 8
+	note B_, 8
+	note F#, 8
+	note A#, 8
+	note F_, 8
+	note A_, 8
+	note E_, 8
 	rest 16
 	rest 16
 	rest 8
-	F_ 1
-	E_ 1
-	D# 1
-	D_ 1
-	C# 1
-	C_ 1
+	note F_, 1
+	note E_, 1
+	note D#, 1
+	note D_, 1
+	note C#, 1
+	note C_, 1
 	rest 2
-	E_ 1
-	D# 1
-	D_ 1
-	C# 1
-	C_ 1
+	note E_, 1
+	note D#, 1
+	note D_, 1
+	note C#, 1
+	note C_, 1
 	octave 3
-	B_ 1
+	note B_, 1
 	rest 10
 	rest 16
-	notetype 12, 1, 0
+	note_type 12, 1, 0
 	rest 16
 	rest 16
 	rest 16
@@ -707,11 +707,11 @@ Music_Dungeon3_Ch2::
 	rest 16
 	rest 16
 	rest 10
-	loopchannel 0, Music_Dungeon3_Ch2
+	sound_loop 0, Music_Dungeon3_Ch3
 
 
-Music_Dungeon3_Ch3::
-	dspeed 12
+Music_Dungeon3_Ch4::
+	drum_speed 12
 	rest 16
 	rest 16
 	rest 16
@@ -753,4 +753,4 @@ Music_Dungeon3_Ch3::
 	rest 16
 	rest 16
 	rest 10
-	endchannel
+	sound_ret

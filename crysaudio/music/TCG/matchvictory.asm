@@ -1,19 +1,20 @@
-Music_TCGMatchVictory:
-	db $80
-	dw Music_TCGMatchVictory_Ch1
-	db $01
-	dw Music_TCGMatchVictory_Ch2
-	db $02
-	dw Music_TCGMatchVictory_Ch3
+Music_MatchVictory:
+	channel_count 3
+	channel 1, Music_MatchVictory_Ch1
+	channel 2, Music_MatchVictory_Ch2
+	channel 3, Music_MatchVictory_Ch3
 
-Music_TCGMatchVictory_Ch1: 
-	vibrato 20, $33
+Music_MatchVictory_Ch1: ; f7b61 (3d:7b61)
+	;stereo_panning 1, 1
+	;vibrato_type 1
+	vibrato 20, 3, 3
 	notetype2 8
 	octave 3
-	dutycycle 0
+	duty_cycle 0
 	notetype1 11
 	notetype0 1
 	note A_, 15
+	;tie
 	note A_, 9
 	notetype1 2
 	note A_, 5
@@ -55,14 +56,16 @@ Music_TCGMatchVictory_Ch1:
 	note E_, 12
 	notetype1 2
 	note E_, 4
-	endchannel
+	sound_ret
 
 
-Music_TCGMatchVictory_Ch2: 
-	vibrato 20, $33
+Music_MatchVictory_Ch2: ; f7bb0 (3d:7bb0)
+	;stereo_panning 1, 1
+	;vibrato_type 1
+	vibrato 20, 3, 3
 	notetype2 8
 	octave 3
-	dutycycle 0
+	duty_cycle 0
 	notetype1 11
 	notetype0 1
 	note F_, 5
@@ -116,34 +119,38 @@ Music_TCGMatchVictory_Ch2:
 	note C#, 12
 	notetype1 2
 	note C#, 4
-	endchannel
+	sound_ret
 
 
-Music_TCGMatchVictory_Ch3: 
+Music_MatchVictory_Ch3: ; f7c09 (3d:7c09)
+	;stereo_panning 1, 1
 	notetype2 11
 	notetype1 1
+	;cutoff 8
+	;echo 0
 	octave 2
 	notetype0 1
 	note F_, 15
+	;tie
 	note F_, 9
-	note __, 5
+	rest 5
 	note F_, 7
-	note __, 3
+	rest 3
 	note F_, 7
-	note __, 3
+	rest 3
 	note F_, 7
-	note __, 2
+	rest 2
 	note G_, 11
-	note __, 10
+	rest 10
 	note G_, 11
-	note __, 10
+	rest 10
 	note G_, 10
-	note __, 10
+	rest 10
 	note A_, 8
-	note __, 13
+	rest 13
 	note E_, 5
-	note __, 6
+	rest 6
 	notetype0 8
 	note A_, 12
-	endchannel
-
+	sound_ret
+; 0xf7c2e

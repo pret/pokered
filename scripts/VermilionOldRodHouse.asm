@@ -5,53 +5,53 @@ VermilionOldRodHouse_TextPointers:
 	dw VermilionHouse2Text1
 
 VermilionHouse2Text1:
-	TX_ASM
+	text_asm
 	ld a, [wd728]
-	bit 3, a
-	jr nz, .asm_03ef5
+	bit 3, a ; got old rod?
+	jr nz, .got_item
 	ld hl, VermilionHouse2Text_560b1
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .asm_eb1b7
+	jr nz, .refused
 	lb bc, OLD_ROD, 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, .bag_full
 	ld hl, wd728
-	set 3, [hl]
+	set 3, [hl] ; got old rod
 	ld hl, VermilionHouse2Text_560b6
-	jr .asm_5dd95
-.BagFull
+	jr .done
+.bag_full
 	ld hl, VermilionHouse2Text_560ca
-	jr .asm_5dd95
-.asm_eb1b7
+	jr .done
+.refused
 	ld hl, VermilionHouse2Text_560c0
-	jr .asm_5dd95
-.asm_03ef5
+	jr .done
+.got_item
 	ld hl, VermilionHouse2Text_560c5
-.asm_5dd95
+.done
 	call PrintText
 	jp TextScriptEnd
 
 VermilionHouse2Text_560b1:
-	TX_FAR _VermilionHouse2Text_560b1
-	db "@"
+	text_far _VermilionHouse2Text_560b1
+	text_end
 
 VermilionHouse2Text_560b6:
-	TX_FAR _VermilionHouse2Text_560b6
-	TX_SFX_ITEM_1
-	TX_FAR _VermilionHouse2Text_560bb
-	db "@"
+	text_far _VermilionHouse2Text_560b6
+	sound_get_item_1
+	text_far _VermilionHouse2Text_560bb
+	text_end
 
 VermilionHouse2Text_560c0:
-	TX_FAR _VermilionHouse2Text_560c0
-	db "@"
+	text_far _VermilionHouse2Text_560c0
+	text_end
 
 VermilionHouse2Text_560c5:
-	TX_FAR _VermilionHouse2Text_560c5
-	db "@"
+	text_far _VermilionHouse2Text_560c5
+	text_end
 
 VermilionHouse2Text_560ca:
-	TX_FAR _VermilionHouse2Text_560ca
-	db "@"
+	text_far _VermilionHouse2Text_560ca
+	text_end

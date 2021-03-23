@@ -8,13 +8,13 @@ FuchsiaBillsGrandpasHouse_TextPointers:
 	dw FuchsiaHouse1Text3
 
 FuchsiaHouse1Text1:
-	TX_FAR _FuchsiaHouse1Text1
-	db "@"
+	text_far _FuchsiaHouse1Text1
+	text_end
 
 FuchsiaHouse1Text2:
-	TX_FAR _FuchsiaHouse1Text2
-	db "@"
+	text_far _FuchsiaHouse1Text2
+	text_end
 
 FuchsiaHouse1Text3:
-	TX_FAR _FuchsiaHouse1Text3
-	db "@"
+	text_far _FuchsiaHouse1Text3
+	text_end

@@ -63,8 +63,8 @@ BrunoScript0:
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
 	xor a
-	ld [hJoyPressed], a
-	ld [hJoyHeld], a
+	ldh [hJoyPressed], a
+	ldh [hJoyHeld], a
 	ld [wSimulatedJoypadStatesEnd], a
 	ld [wSimulatedJoypadStatesIndex], a
 	ld a, [wCoordIndex]
@@ -74,7 +74,7 @@ BrunoScript0:
 	jr z, BrunoScriptWalkIntoRoom
 .stopPlayerFromLeaving
 	ld a, $2
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID  ; "Don't run away!"
 	ld a, D_UP
 	ld [wSimulatedJoypadStatesEnd], a
@@ -87,11 +87,11 @@ BrunoScript0:
 	ret
 
 BrunoEntranceCoords:
-	db $0A,$04
-	db $0A,$05
-	db $0B,$04
-	db $0B,$05
-	db $FF
+	dbmapcoord  4, 10
+	dbmapcoord  5, 10
+	dbmapcoord  4, 11
+	dbmapcoord  5, 11
+	db -1 ; end
 
 BrunoScript3:
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -110,7 +110,7 @@ BrunoScript2:
 	cp $ff
 	jp z, ResetBrunoScript
 	ld a, $1
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
 BrunosRoom_TextPointers:
@@ -118,34 +118,27 @@ BrunosRoom_TextPointers:
 	dw BrunoDontRunAwayText
 
 BrunoTrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_BRUNOS_ROOM_TRAINER_0
-	db ($0 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_BRUNOS_ROOM_TRAINER_0
-	dw BrunoBeforeBattleText ; TextBeforeBattle
-	dw BrunoAfterBattleText ; TextAfterBattle
-	dw BrunoEndBattleText ; TextEndBattle
-	dw BrunoEndBattleText ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_BRUNOS_ROOM_TRAINER_0, 0, BrunoBeforeBattleText, BrunoEndBattleText, BrunoAfterBattleText
+	db -1 ; end
 
 BrunoText1:
-	TX_ASM
+	text_asm
 	ld hl, BrunoTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 BrunoBeforeBattleText:
-	TX_FAR _BrunoBeforeBattleText
-	db "@"
+	text_far _BrunoBeforeBattleText
+	text_end
 
 BrunoEndBattleText:
-	TX_FAR _BrunoEndBattleText
-	db "@"
+	text_far _BrunoEndBattleText
+	text_end
 
 BrunoAfterBattleText:
-	TX_FAR _BrunoAfterBattleText
-	db "@"
+	text_far _BrunoAfterBattleText
+	text_end
 
 BrunoDontRunAwayText:
-	TX_FAR _BrunoDontRunAwayText
-	db "@"
+	text_far _BrunoDontRunAwayText
+	text_end

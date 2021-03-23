@@ -1,385 +1,377 @@
-Music_Pinballmewtwostage: ; 48cb9
-	dbw $c0, Music_Pinballmewtwostage_Ch1
-	dbw $01, Music_Pinballmewtwostage_Ch2
-	dbw $02, Music_Pinballmewtwostage_Ch3
-	dbw $03, Music_Pinballmewtwostage_Ch4
-; 48cc5
+Music_MewtwoStage:
+	channel_count 4
+	channel 1, Music_MewtwoStage_Ch1
+	channel 2, Music_MewtwoStage_Ch2
+	channel 3, Music_MewtwoStage_Ch3
+	channel 4, Music_MewtwoStage_Ch4
 
-Music_Pinballmewtwostage_Ch1: ; 48cc5
+Music_MewtwoStage_Ch1:
 	tempo 112
-	volume $77
-	dutycycle $2
-	notetype $c, $48
-	note __, 16
-	note __, 16
-	note __, 16
-	note __, 16
-Music_Pinballmewtwostage_branch_48cd3: ; 48cd3
-	notetype $c, $48
-	soundinput $88
-	intensity $48
+	volume 7, 7
+	duty_cycle 2
+	note_type 12, 4, 8
+	rest 16
+	rest 16
+	rest 16
+	rest 16
+Music_MewtwoStage_branch_48cd3:
+	note_type 12, 4, 8
+	pitch_sweep 8, 8
+	volume_envelope 4, 8
 	octave 4
 	note C_, 1
 	note D_, 1
 	note C_, 1
 	note D_, 1
-	intensity $58
+	volume_envelope 5, 8
 	note C_, 1
 	note D_, 1
-	intensity $68
+	volume_envelope 6, 8
 	note C_, 1
 	note D_, 1
-	intensity $78
+	volume_envelope 7, 8
 	note C_, 1
 	note D_, 1
-	intensity $88
+	volume_envelope 8, 8
 	note C_, 1
 	note D_, 1
-	intensity $98
+	volume_envelope 9, 8
 	note C_, 1
 	note D_, 1
-	intensity $b8
+	volume_envelope 11, 8
 	note C_, 1
 	note D_, 1
-	intensity $c1
-	callchannel Music_Pinballmewtwostage_branch_48e46
-	callchannel Music_Pinballmewtwostage_branch_48e5c
-	callchannel Music_Pinballmewtwostage_branch_48e46
-	soundinput $ab
+	volume_envelope 12, 1
+	sound_call Music_MewtwoStage_branch_48e46
+	sound_call Music_MewtwoStage_branch_48e5c
+	sound_call Music_MewtwoStage_branch_48e46
+	pitch_sweep 10, -3
 	octave 2
 	note F_, 1
-	note __, 3
-	soundinput $ab
+	rest 3
+	pitch_sweep 10, -3
 	note F_, 1
-	note __, 3
-	soundinput $ab
+	rest 3
+	pitch_sweep 10, -3
 	note F_, 1
-	note __, 3
-	callchannel Music_Pinballmewtwostage_branch_48dc4
-	intensity $c1
-	callchannel Music_Pinballmewtwostage_branch_48e46
-	callchannel Music_Pinballmewtwostage_branch_48ddc
-	callchannel Music_Pinballmewtwostage_branch_48df4
-	callchannel Music_Pinballmewtwostage_branch_48e11
-	callchannel Music_Pinballmewtwostage_branch_48ddc
-	callchannel Music_Pinballmewtwostage_branch_48e20
-	callchannel Music_Pinballmewtwostage_branch_48dc4
-	intensity $c1
-	callchannel Music_Pinballmewtwostage_branch_48e46
-	intensity $c1
-	soundinput $ab
+	rest 3
+	sound_call Music_MewtwoStage_branch_48dc4
+	volume_envelope 12, 1
+	sound_call Music_MewtwoStage_branch_48e46
+	sound_call Music_MewtwoStage_branch_48ddc
+	sound_call Music_MewtwoStage_branch_48df4
+	sound_call Music_MewtwoStage_branch_48e11
+	sound_call Music_MewtwoStage_branch_48ddc
+	sound_call Music_MewtwoStage_branch_48e20
+	sound_call Music_MewtwoStage_branch_48dc4
+	volume_envelope 12, 1
+	sound_call Music_MewtwoStage_branch_48e46
+	volume_envelope 12, 1
+	pitch_sweep 10, -3
 	note F_, 1
-	note __, 3
-	soundinput $ab
+	rest 3
+	pitch_sweep 10, -3
 	note F_, 1
-	note __, 3
-	soundinput $ab
+	rest 3
+	pitch_sweep 10, -3
 	note F_, 1
-	note __, 1
-	intensity $a1
-	soundinput $ad
+	rest 1
+	volume_envelope 10, 1
+	pitch_sweep 10, -5
 	octave 4
 	note F_, 1
-	soundinput $ad
+	pitch_sweep 10, -5
 	note F_, 1
-	soundinput $ad
+	pitch_sweep 10, -5
 	note C#, 1
-	note __, 1
-	soundinput $ad
+	rest 1
+	pitch_sweep 10, -5
 	octave 3
 	note G_, 1
-	intensity $c1
-	soundinput $ab
+	volume_envelope 12, 1
+	pitch_sweep 10, -3
 	octave 2
 	note F_, 1
-	callchannel Music_Pinballmewtwostage_branch_48e46
-	soundinput $ab
+	sound_call Music_MewtwoStage_branch_48e46
+	pitch_sweep 10, -3
 	note F_, 1
-	note __, 3
-	soundinput $ab
+	rest 3
+	pitch_sweep 10, -3
 	note F_, 1
-	note __, 3
-	intensity $b1
-	soundinput $ad
+	rest 3
+	volume_envelope 11, 1
+	pitch_sweep 10, -5
 	octave 4
 	note C#, 1
-	note __, 1
-	soundinput $ad
+	rest 1
+	pitch_sweep 10, -5
 	octave 3
 	note G_, 1
-	note __, 1
-	callchannel Music_Pinballmewtwostage_branch_48dc4
-	intensity $c1
-	callchannel Music_Pinballmewtwostage_branch_48e46
-	callchannel Music_Pinballmewtwostage_branch_48e5c
-	callchannel Music_Pinballmewtwostage_branch_48e46
-	soundinput $ab
+	rest 1
+	sound_call Music_MewtwoStage_branch_48dc4
+	volume_envelope 12, 1
+	sound_call Music_MewtwoStage_branch_48e46
+	sound_call Music_MewtwoStage_branch_48e5c
+	sound_call Music_MewtwoStage_branch_48e46
+	pitch_sweep 10, -3
 	note F_, 1
-	note __, 3
-	soundinput $ab
+	rest 3
+	pitch_sweep 10, -3
 	note F_, 1
-	note __, 3
-	soundinput $ab
+	rest 3
+	pitch_sweep 10, -3
 	note F_, 1
-	intensity $b1
-	soundinput $ad
+	volume_envelope 11, 1
+	pitch_sweep 10, -5
 	octave 4
 	note D#, 1
-	soundinput $ad
+	pitch_sweep 10, -5
 	note D#, 1
-	soundinput $ad
+	pitch_sweep 10, -5
 	note C#, 1
-	soundinput $ad
+	pitch_sweep 10, -5
 	note C#, 1
-	soundinput $ad
+	pitch_sweep 10, -5
 	octave 3
 	note A#, 1
-	soundinput $ad
+	pitch_sweep 10, -5
 	note A#, 1
-	intensity $c1
-	soundinput $ab
+	volume_envelope 12, 1
+	pitch_sweep 10, -3
 	octave 2
 	note F_, 1
-	callchannel Music_Pinballmewtwostage_branch_48e46
-	callchannel Music_Pinballmewtwostage_branch_48e5c
-	callchannel Music_Pinballmewtwostage_branch_48e46
-	callchannel Music_Pinballmewtwostage_branch_48e5c
-	callchannel Music_Pinballmewtwostage_branch_48e46
-	callchannel Music_Pinballmewtwostage_branch_48ddc
-	callchannel Music_Pinballmewtwostage_branch_48df4
-	callchannel Music_Pinballmewtwostage_branch_48e11
-	callchannel Music_Pinballmewtwostage_branch_48ddc
-	callchannel Music_Pinballmewtwostage_branch_48e20
-	callchannel Music_Pinballmewtwostage_branch_48dc4
-	loopchannel 0, Music_Pinballmewtwostage_branch_48cd3
-; 48dc4
+	sound_call Music_MewtwoStage_branch_48e46
+	sound_call Music_MewtwoStage_branch_48e5c
+	sound_call Music_MewtwoStage_branch_48e46
+	sound_call Music_MewtwoStage_branch_48e5c
+	sound_call Music_MewtwoStage_branch_48e46
+	sound_call Music_MewtwoStage_branch_48ddc
+	sound_call Music_MewtwoStage_branch_48df4
+	sound_call Music_MewtwoStage_branch_48e11
+	sound_call Music_MewtwoStage_branch_48ddc
+	sound_call Music_MewtwoStage_branch_48e20
+	sound_call Music_MewtwoStage_branch_48dc4
+	sound_loop 0, Music_MewtwoStage_branch_48cd3
 
-Music_Pinballmewtwostage_branch_48dc4: ; 48dc4
-	notetype $8, $b1
-	soundinput $ad
+Music_MewtwoStage_branch_48dc4:
+	note_type 8, 11, 1
+	pitch_sweep 10, -5
 	octave 4
 	note D#, 1
-	soundinput $ad
+	pitch_sweep 10, -5
 	note D#, 1
-	soundinput $ad
+	pitch_sweep 10, -5
 	note D#, 1
-	notetype $c, $b1
-	soundinput $ad
+	note_type 12, 11, 1
+	pitch_sweep 10, -5
 	octave 3
 	note B_, 1
-	soundinput $ad
+	pitch_sweep 10, -5
 	note F#, 1
-	endchannel
-; 48ddc
+	sound_ret
 
-Music_Pinballmewtwostage_branch_48ddc: ; 48ddc
-	intensity $c1
-	soundinput $ab
+Music_MewtwoStage_branch_48ddc:
+	volume_envelope 12, 1
+	pitch_sweep 10, -3
 	octave 2
 	note F_, 1
-	note __, 1
-	intensity $b1
-	soundinput $ad
+	rest 1
+	volume_envelope 11, 1
+	pitch_sweep 10, -5
 	octave 4
 	note F_, 1
-	note __, 1
-	soundinput $ad
+	rest 1
+	pitch_sweep 10, -5
 	octave 3
 	note G_, 1
-	note __, 1
-	soundinput $ad
+	rest 1
+	pitch_sweep 10, -5
 	note C_, 1
-	note __, 1
-	endchannel
-; 48df4
+	rest 1
+	sound_ret
 
-Music_Pinballmewtwostage_branch_48df4: ; 48df4
-	intensity $c1
-	soundinput $ab
+Music_MewtwoStage_branch_48df4:
+	volume_envelope 12, 1
+	pitch_sweep 10, -3
 	octave 2
 	note F_, 1
-	note __, 1
-	dutycycle $0
-	intensity $a8
-	soundinput $88
+	rest 1
+	duty_cycle 0
+	volume_envelope 10, 8
+	pitch_sweep 8, 8
 	octave 3
 	note C#, 1
-	note __, 1
-	dutycycle $2
-	intensity $c1
-	soundinput $ab
+	rest 1
+	duty_cycle 2
+	volume_envelope 12, 1
+	pitch_sweep 10, -3
 	octave 2
 	note F_, 1
-	note __, 2
-	soundinput $ab
+	rest 2
+	pitch_sweep 10, -3
 	note F_, 1
-	endchannel
-; 48e11
+	sound_ret
 
-Music_Pinballmewtwostage_branch_48e11: ; 48e11
-	intensity $c1
-	soundinput $ab
+Music_MewtwoStage_branch_48e11:
+	volume_envelope 12, 1
+	pitch_sweep 10, -3
 	note F_, 1
-	note __, 1
-	soundinput $ab
+	rest 1
+	pitch_sweep 10, -3
 	note F_, 1
-	note __, 1
-	soundinput $ab
+	rest 1
+	pitch_sweep 10, -3
 	note F_, 1
-	note __, 3
-	endchannel
-; 48e20
+	rest 3
+	sound_ret
 
-Music_Pinballmewtwostage_branch_48e20: ; 48e20
-	intensity $c1
-	soundinput $ab
+Music_MewtwoStage_branch_48e20:
+	volume_envelope 12, 1
+	pitch_sweep 10, -3
 	note F_, 1
-	note __, 1
-	dutycycle $0
-	intensity $a8
-	soundinput $88
+	rest 1
+	duty_cycle 0
+	volume_envelope 10, 8
+	pitch_sweep 8, 8
 	octave 3
 	note C#, 1
-	note __, 1
-	dutycycle $2
-	intensity $c1
-	soundinput $ab
+	rest 1
+	duty_cycle 2
+	volume_envelope 12, 1
+	pitch_sweep 10, -3
 	octave 2
 	note F_, 1
-	note __, 3
-	dutycycle $0
-	intensity $a8
-	soundinput $88
+	rest 3
+	duty_cycle 0
+	volume_envelope 10, 8
+	pitch_sweep 8, 8
 	octave 3
 	note C#, 1
-	note __, 1
+	rest 1
 	note E_, 1
-	note __, 1
-	dutycycle $2
-	endchannel
-; 48e46
+	rest 1
+	duty_cycle 2
+	sound_ret
 
-Music_Pinballmewtwostage_branch_48e46: ; 48e46
-	soundinput $ab
+Music_MewtwoStage_branch_48e46:
+	pitch_sweep 10, -3
 	octave 2
 	note F_, 1
-	note __, 3
-	soundinput $ab
+	rest 3
+	pitch_sweep 10, -3
 	note F_, 1
-	note __, 3
-	soundinput $ab
+	rest 3
+	pitch_sweep 10, -3
 	note F_, 1
-	note __, 3
-	soundinput $ab
+	rest 3
+	pitch_sweep 10, -3
 	note F_, 1
-	note __, 1
-	soundinput $ab
+	rest 1
+	pitch_sweep 10, -3
 	note F_, 1
-	note __, 1
-	endchannel
-; 48e5c
+	rest 1
+	sound_ret
 
-Music_Pinballmewtwostage_branch_48e5c: ; 48e5c
-	soundinput $ab
+Music_MewtwoStage_branch_48e5c:
+	pitch_sweep 10, -3
 	octave 2
 	note F_, 1
-	note __, 3
-	soundinput $ab
+	rest 3
+	pitch_sweep 10, -3
 	note F_, 1
-	note __, 3
-	soundinput $ab
+	rest 3
+	pitch_sweep 10, -3
 	note F_, 1
-	note __, 3
-	soundinput $ab
+	rest 3
+	pitch_sweep 10, -3
 	note F_, 1
-	note __, 2
-	soundinput $ab
+	rest 2
+	pitch_sweep 10, -3
 	note F_, 1
-	endchannel
-; 48e71
+	sound_ret
 
-Music_Pinballmewtwostage_Ch2: ; 48e71
-	dutycycle $2
-	callchannel Music_Pinballmewtwostage_branch_49033
-	note __, 4
-	callchannel Music_Pinballmewtwostage_branch_49033
-	note __, 4
-	callchannel Music_Pinballmewtwostage_branch_49062
-	callchannel Music_Pinballmewtwostage_branch_49033
-	note __, 4
-	callchannel Music_Pinballmewtwostage_branch_49033
-	callchannel Music_Pinballmewtwostage_branch_49043
-	callchannel Music_Pinballmewtwostage_branch_49043
-	callchannel Music_Pinballmewtwostage_branch_49043
-	callchannel Music_Pinballmewtwostage_branch_49043
-	callchannel Music_Pinballmewtwostage_branch_49062
-	note __, 4
-	intensity $c8
+Music_MewtwoStage_Ch2:
+	duty_cycle 2
+	sound_call Music_MewtwoStage_branch_49033
+	rest 4
+	sound_call Music_MewtwoStage_branch_49033
+	rest 4
+	sound_call Music_MewtwoStage_branch_49062
+	sound_call Music_MewtwoStage_branch_49033
+	rest 4
+	sound_call Music_MewtwoStage_branch_49033
+	sound_call Music_MewtwoStage_branch_49043
+	sound_call Music_MewtwoStage_branch_49043
+	sound_call Music_MewtwoStage_branch_49043
+	sound_call Music_MewtwoStage_branch_49043
+	sound_call Music_MewtwoStage_branch_49062
+	rest 4
+	volume_envelope 12, 8
 	octave 3
 	note C_, 1
-	intensity $a8
+	volume_envelope 10, 8
 	octave 2
 	note A_, 1
-	intensity $78
+	volume_envelope 7, 8
 	note F_, 1
-	intensity $48
+	volume_envelope 4, 8
 	note D_, 1
-	callchannel Music_Pinballmewtwostage_branch_49033
-Music_Pinballmewtwostage_branch_48ea6: ; 48ea6
-	callchannel Music_Pinballmewtwostage_branch_49033
-	note __, 12
-	loopchannel 3, Music_Pinballmewtwostage_branch_48ea6
-	callchannel Music_Pinballmewtwostage_branch_49033
-	note __, 4
-	callchannel Music_Pinballmewtwostage_branch_49033
-	note __, 4
-Music_Pinballmewtwostage_branch_48eb6: ; 48eb6
-	callchannel Music_Pinballmewtwostage_branch_49033
-	note __, 12
-	loopchannel 3, Music_Pinballmewtwostage_branch_48eb6
-	callchannel Music_Pinballmewtwostage_branch_49033
-	note __, 8
-	callchannel Music_Pinballmewtwostage_branch_49033
-Music_Pinballmewtwostage_branch_48ec5: ; 48ec5
-	callchannel Music_Pinballmewtwostage_branch_49033
-	note __, 12
-	loopchannel 3, Music_Pinballmewtwostage_branch_48ec5
-	callchannel Music_Pinballmewtwostage_branch_49033
-	note __, 4
-	callchannel Music_Pinballmewtwostage_branch_49033
-	note __, 4
-Music_Pinballmewtwostage_branch_48ed5: ; 48ed5
-	vibrato $12, $4
-	notetype $c, $1e
+	sound_call Music_MewtwoStage_branch_49033
+Music_MewtwoStage_branch_48ea6:
+	sound_call Music_MewtwoStage_branch_49033
+	rest 12
+	sound_loop 3, Music_MewtwoStage_branch_48ea6
+	sound_call Music_MewtwoStage_branch_49033
+	rest 4
+	sound_call Music_MewtwoStage_branch_49033
+	rest 4
+Music_MewtwoStage_branch_48eb6:
+	sound_call Music_MewtwoStage_branch_49033
+	rest 12
+	sound_loop 3, Music_MewtwoStage_branch_48eb6
+	sound_call Music_MewtwoStage_branch_49033
+	rest 8
+	sound_call Music_MewtwoStage_branch_49033
+Music_MewtwoStage_branch_48ec5:
+	sound_call Music_MewtwoStage_branch_49033
+	rest 12
+	sound_loop 3, Music_MewtwoStage_branch_48ec5
+	sound_call Music_MewtwoStage_branch_49033
+	rest 4
+	sound_call Music_MewtwoStage_branch_49033
+	rest 4
+Music_MewtwoStage_branch_48ed5:
+	vibrato 18, 0, 4
+	note_type 12, 1, -6
 	octave 4
 	note G_, 16
-	vibrato $12, $43
-	callchannel Music_Pinballmewtwostage_branch_48f3f
-	callchannel Music_Pinballmewtwostage_branch_48fd6
-	callchannel Music_Pinballmewtwostage_branch_48fe4
-	callchannel Music_Pinballmewtwostage_branch_48fd6
-	callchannel Music_Pinballmewtwostage_branch_48ff6
-	callchannel Music_Pinballmewtwostage_branch_48f3f
-	dutycycle $3
-	intensity $98
-	callchannel Music_Pinballmewtwostage_branch_49018
-	notetype $c, $98
+	vibrato 18, 4, 3
+	sound_call Music_MewtwoStage_branch_48f3f
+	sound_call Music_MewtwoStage_branch_48fd6
+	sound_call Music_MewtwoStage_branch_48fe4
+	sound_call Music_MewtwoStage_branch_48fd6
+	sound_call Music_MewtwoStage_branch_48ff6
+	sound_call Music_MewtwoStage_branch_48f3f
+	duty_cycle 3
+	volume_envelope 9, 8
+	sound_call Music_MewtwoStage_branch_49018
+	note_type 12, 9, 8
 	note F#, 12
 	note A_, 4
 	note A#, 3
-	notetype $6, $98
+	note_type 6, 9, 8
 	note D#, 1
 	note D_, 1
-	notetype $c, $98
+	note_type 12, 9, 8
 	note C#, 2
 	note D_, 2
-	intensity $28
+	volume_envelope 2, 8
 	note D_, 2
-	intensity $18
+	volume_envelope 1, 8
 	note D_, 2
-	note __, 4
-	notetype $6, $98
-	callchannel Music_Pinballmewtwostage_branch_49018
+	rest 4
+	note_type 6, 9, 8
+	sound_call Music_MewtwoStage_branch_49018
 	note F#, 14
 	note F_, 1
 	note F#, 1
@@ -403,68 +395,67 @@ Music_Pinballmewtwostage_branch_48ed5: ; 48ed5
 	note D_, 2
 	octave 2
 	note A_, 2
-	dutycycle $2
-	callchannel Music_Pinballmewtwostage_branch_48fd6
-	callchannel Music_Pinballmewtwostage_branch_48fe4
-	callchannel Music_Pinballmewtwostage_branch_48fd6
-	callchannel Music_Pinballmewtwostage_branch_48ff6
-	loopchannel 0, Music_Pinballmewtwostage_branch_48ed5
-; 48f3f
+	duty_cycle 2
+	sound_call Music_MewtwoStage_branch_48fd6
+	sound_call Music_MewtwoStage_branch_48fe4
+	sound_call Music_MewtwoStage_branch_48fd6
+	sound_call Music_MewtwoStage_branch_48ff6
+	sound_loop 0, Music_MewtwoStage_branch_48ed5
 
-Music_Pinballmewtwostage_branch_48f3f: ; 48f3f
-	notetype $6, $b8
+Music_MewtwoStage_branch_48f3f:
+	note_type 6, 11, 8
 	octave 1
 	note G_, 2
-	intensity $98
+	volume_envelope 9, 8
 	octave 4
 	note F_, 1
 	note F#, 1
 	note G_, 2
-	intensity $18
+	volume_envelope 1, 8
 	note G_, 2
-	intensity $98
+	volume_envelope 9, 8
 	note A#, 2
-	intensity $18
+	volume_envelope 1, 8
 	note A#, 2
-	intensity $98
+	volume_envelope 9, 8
 	note E_, 4
-	intensity $b8
+	volume_envelope 11, 8
 	octave 1
 	note G_, 2
-	note __, 2
-	intensity $98
+	rest 2
+	volume_envelope 9, 8
 	octave 3
 	note A#, 2
-	intensity $18
+	volume_envelope 1, 8
 	note A#, 2
-	intensity $98
+	volume_envelope 9, 8
 	note A_, 2
-	intensity $18
+	volume_envelope 1, 8
 	note A_, 2
-	intensity $98
+	volume_envelope 9, 8
 	note A#, 4
 	octave 4
 	note G_, 2
-	intensity $18
+	volume_envelope 1, 8
 	note G_, 2
-	intensity $98
+	volume_envelope 9, 8
 	note A#, 2
-	intensity $18
+	volume_envelope 1, 8
 	note A#, 2
-	intensity $98
+	volume_envelope 9, 8
 	octave 5
 	note F_, 2
-	intensity $18
+	volume_envelope 1, 8
 	note F_, 2
-	intensity $98
+	volume_envelope 9, 8
 	note E_, 2
-	intensity $18
+	volume_envelope 1, 8
 	note E_, 2
-	intensity $b8
+	volume_envelope 11, 8
 	octave 1
 	note G_, 2
-	note __, 2
-	intensity $98
+	rest 2
+	volume_envelope 9, 8
 	octave 5
 	note C#, 12
 	octave 4
@@ -473,127 +464,123 @@ Music_Pinballmewtwostage_branch_48f3f: ; 48f3f
 	note A_, 1
 	note G#, 1
 	note G_, 2
-	note __, 2
+	rest 2
 	note A#, 2
-	intensity $18
+	volume_envelope 1, 8
 	note A#, 2
-	intensity $98
+	volume_envelope 9, 8
 	note E_, 4
-	intensity $b8
+	volume_envelope 11, 8
 	octave 1
 	note G_, 2
-	note __, 2
-	intensity $98
+	rest 2
+	volume_envelope 9, 8
 	octave 3
 	note A#, 2
-	intensity $18
+	volume_envelope 1, 8
 	note A#, 2
-	intensity $98
+	volume_envelope 9, 8
 	note A_, 2
-	intensity $18
+	volume_envelope 1, 8
 	note A_, 2
-	intensity $98
+	volume_envelope 9, 8
 	note A#, 4
 	octave 4
 	note G_, 2
-	intensity $18
+	volume_envelope 1, 8
 	note G_, 2
-	intensity $98
+	volume_envelope 9, 8
 	note A#, 2
-	intensity $b8
+	volume_envelope 11, 8
 	octave 1
 	note G_, 2
-	intensity $98
+	volume_envelope 9, 8
 	octave 5
 	note F_, 2
-	intensity $18
+	volume_envelope 1, 8
 	note F_, 2
-	intensity $98
+	volume_envelope 9, 8
 	note E_, 2
-	intensity $18
+	volume_envelope 1, 8
 	note E_, 2
-	intensity $b8
+	volume_envelope 11, 8
 	octave 1
 	note G_, 2
-	note __, 2
-	intensity $98
+	rest 2
+	volume_envelope 9, 8
 	octave 5
 	note G_, 8
 	note F#, 1
 	note F_, 1
 	note E_, 1
 	note D#, 1
-	endchannel
-; 48fd6
+	sound_ret
 
-Music_Pinballmewtwostage_branch_48fd6: ; 48fd6
-	intensity $b8
+Music_MewtwoStage_branch_48fd6:
+	volume_envelope 11, 8
 	octave 1
 	note G_, 2
-	note __, 6
+	rest 6
 	note G_, 2
-	note __, 6
+	rest 6
 	note G_, 2
-	note __, 6
+	rest 6
 	note G_, 2
-	note __, 2
+	rest 2
 	note G_, 2
-	note __, 2
-	endchannel
-; 48fe4
+	rest 2
+	sound_ret
 
-Music_Pinballmewtwostage_branch_48fe4: ; 48fe4
+Music_MewtwoStage_branch_48fe4:
 	note G_, 2
-	note __, 6
+	rest 6
 	note G_, 2
-	note __, 6
+	rest 6
 	note G_, 2
-	note __, 2
-	dutycycle $0
+	rest 2
+	duty_cycle 0
 	octave 3
 	note G_, 2
-	note __, 2
-	dutycycle $2
+	rest 2
+	duty_cycle 2
 	octave 1
 	note G_, 2
-	note __, 4
+	rest 4
 	note G_, 2
-	endchannel
-; 48ff6
+	sound_ret
 
-Music_Pinballmewtwostage_branch_48ff6: ; 48ff6
+Music_MewtwoStage_branch_48ff6:
 	note G_, 2
-	note __, 2
-	dutycycle $0
+	rest 2
+	duty_cycle 0
 	octave 3
 	note G_, 2
-	dutycycle $2
+	duty_cycle 2
 	octave 1
 	note G_, 2
 	note G_, 2
-	note __, 6
-	dutycycle $0
+	rest 6
+	duty_cycle 0
 	octave 3
 	note G_, 2
-	note __, 2
+	rest 2
 	note A#, 2
-	note __, 2
-	dutycycle $2
-	intensity $68
+	rest 2
+	duty_cycle 2
+	volume_envelope 6, 8
 	octave 5
 	note G_, 1
-	note __, 1
+	rest 1
 	octave 6
 	note C#, 2
 	octave 5
 	note A#, 1
-	note __, 1
+	rest 1
 	octave 6
 	note F_, 2
-	endchannel
-; 49018
+	sound_ret
 
-Music_Pinballmewtwostage_branch_49018: ; 49018
+Music_MewtwoStage_branch_49018:
 	octave 3
 	note A#, 2
 	octave 4
@@ -610,64 +597,70 @@ Music_Pinballmewtwostage_branch_49018: ; 49018
 	note A_, 3
 	note G#, 1
 	note G_, 12
-	intensity $28
+	volume_envelope 2, 8
 	note G_, 2
-	note __, 2
-	intensity $98
+	rest 2
+	volume_envelope 9, 8
 	note D_, 1
 	note D#, 1
 	note E_, 1
 	note F_, 1
-	endchannel
-; 49033
+	sound_ret
 
-Music_Pinballmewtwostage_branch_49033: ; 49033
-	notetype $3, $c8
+Music_MewtwoStage_branch_49033:
+	note_type 3, 12, 8
 	octave 2
 	note F_, 1
-	intensity $b8
+	volume_envelope 11, 8
 	note C#, 1
-	intensity $98
+	volume_envelope 9, 8
 	octave 1
 	note A_, 1
-	intensity $58
+	volume_envelope 5, 8
 	note F#, 1
-	endchannel
-; 49043
+	sound_ret
 
-Music_Pinballmewtwostage_branch_49043: ; 49043
-	notetype $3, $c8
+Music_MewtwoStage_branch_49043:
+	note_type 3, 12, 8
 	octave 3
 	note A#, 1
-	intensity $a8
+	volume_envelope 10, 8
 	note F#, 1
-	intensity $88
+	volume_envelope 8, 8
 	note D#, 1
-	intensity $78
+	volume_envelope 7, 8
 	note C#, 1
-	endchannel
-; 49052
+	sound_ret
 
+; unreferenced
+;	note_type 2, 12, 8
+;	octave 3
+;	note B_, 1
+;	volume_envelope 10, 8
+;	note G_, 1
+;	volume_envelope 7, 8
+;	note D#, 1
+;	volume_envelope 4, 8
+;	octave 2
+;	note B_, 1
+;	sound_ret
 
-
-
-Music_Pinballmewtwostage_branch_49062: ; 49062
-	notetype $3, $c8
+Music_MewtwoStage_branch_49062:
+	note_type 3, 12, 8
 	octave 3
 	note F#, 1
-	intensity $a8
+	volume_envelope 10, 8
 	note D_, 1
-	intensity $78
+	volume_envelope 7, 8
 	octave 2
 	note B_, 1
-	intensity $48
+	volume_envelope 4, 8
 	note A#, 1
-	endchannel
-; 49072
+	sound_ret
 
-Music_Pinballmewtwostage_Ch3: ; 49072
-	notetype $c, $22
-	note __, 16
+Music_MewtwoStage_Ch3:
+	note_type 12, 2, 2
+	rest 16
 	octave 1
 	note G_, 1
 	octave 3
@@ -697,46 +690,46 @@ Music_Pinballmewtwostage_Ch3: ; 49072
 	note A_, 1
 	octave 1
 	note G_, 1
-	notetype $6, $32
+	note_type 6, 3, 2
 	octave 5
 	note G_, 1
-	note __, 1
+	rest 1
 	octave 6
 	note G_, 1
-	note __, 1
+	rest 1
 	note D_, 1
-	note __, 1
-	intensity $22
+	rest 1
+	volume_envelope 2, 2
 	octave 1
 	note G_, 2
-	note __, 2
-	intensity $32
+	rest 2
+	volume_envelope 3, 2
 	octave 6
 	note G_, 1
-	note __, 3
-	intensity $22
+	rest 3
+	volume_envelope 2, 2
 	octave 1
 	note G_, 2
-	intensity $32
+	volume_envelope 3, 2
 	octave 6
 	note D_, 1
-	note __, 1
+	rest 1
 	octave 1
 	note G_, 2
 	octave 6
 	note G_, 1
-	note __, 1
-	intensity $22
+	rest 1
+	volume_envelope 2, 2
 	octave 1
 	note G_, 2
-	intensity $32
+	volume_envelope 3, 2
 	octave 5
 	note G_, 1
-	note __, 1
+	rest 1
 	octave 6
 	note G_, 1
-	note __, 1
-	intensity $22
+	rest 1
+	volume_envelope 2, 2
 	octave 1
 	note G_, 2
 	note G_, 2
@@ -765,40 +758,40 @@ Music_Pinballmewtwostage_Ch3: ; 49072
 	note G_, 2
 	octave 3
 	note F_, 2
-Music_Pinballmewtwostage_branch_490e0: ; 490e0
-	notetype $c, $32
+Music_MewtwoStage_branch_490e0:
+	note_type 12, 3, 2
 	octave 3
 	note G#, 8
-	notetype $6, $22
+	note_type 6, 2, 2
 	note G#, 8
-	intensity $12
+	volume_envelope 1, 2
 	note G#, 8
-	callchannel Music_Pinballmewtwostage_branch_49156
-	callchannel Music_Pinballmewtwostage_branch_491e6
-	callchannel Music_Pinballmewtwostage_branch_49156
-	intensity $22
-	callchannel Music_Pinballmewtwostage_branch_49237
+	sound_call Music_MewtwoStage_branch_49156
+	sound_call Music_MewtwoStage_branch_491e6
+	sound_call Music_MewtwoStage_branch_49156
+	volume_envelope 2, 2
+	sound_call Music_MewtwoStage_branch_49237
 	octave 2
 	note D_, 2
-	note __, 2
+	rest 2
 	note A_, 2
 	octave 3
 	note D_, 2
 	octave 2
 	note D_, 2
-	note __, 2
+	rest 2
 	note A_, 2
 	octave 3
 	note D_, 2
 	octave 2
 	note D_, 2
-	note __, 2
+	rest 2
 	note A_, 2
 	octave 3
 	note D_, 2
 	octave 2
 	note D_, 2
-	note __, 2
+	rest 2
 	note A_, 2
 	octave 3
 	note C#, 2
@@ -810,7 +803,7 @@ Music_Pinballmewtwostage_branch_490e0: ; 490e0
 	note A_, 2
 	octave 2
 	note D_, 2
-	note __, 2
+	rest 2
 	note A_, 2
 	octave 3
 	note D_, 2
@@ -824,7 +817,7 @@ Music_Pinballmewtwostage_branch_490e0: ; 490e0
 	note D_, 2
 	octave 1
 	note A_, 2
-	callchannel Music_Pinballmewtwostage_branch_49237
+	sound_call Music_MewtwoStage_branch_49237
 	octave 2
 	note D_, 2
 	note A_, 2
@@ -861,12 +854,11 @@ Music_Pinballmewtwostage_branch_490e0: ; 490e0
 	note F#, 4
 	octave 1
 	note A_, 4
-	callchannel Music_Pinballmewtwostage_branch_491e6
-	loopchannel 0, Music_Pinballmewtwostage_branch_490e0
-; 49156
+	sound_call Music_MewtwoStage_branch_491e6
+	sound_loop 0, Music_MewtwoStage_branch_490e0
 
-Music_Pinballmewtwostage_branch_49156: ; 49156
-	notetype $6, $32
+Music_MewtwoStage_branch_49156:
+	note_type 6, 3, 2
 	octave 4
 	note C#, 1
 	octave 3
@@ -899,7 +891,7 @@ Music_Pinballmewtwostage_branch_49156: ; 49156
 	note C#, 1
 	octave 3
 	note E_, 1
-	intensity $22
+	volume_envelope 2, 2
 	octave 4
 	note C#, 1
 	octave 3
@@ -932,7 +924,7 @@ Music_Pinballmewtwostage_branch_49156: ; 49156
 	note C#, 1
 	octave 3
 	note E_, 1
-	intensity $12
+	volume_envelope 1, 2
 	octave 4
 	note D_, 1
 	octave 3
@@ -965,7 +957,7 @@ Music_Pinballmewtwostage_branch_49156: ; 49156
 	note D_, 1
 	octave 3
 	note F_, 1
-	intensity $22
+	volume_envelope 2, 2
 	octave 4
 	note D_, 1
 	octave 3
@@ -982,7 +974,7 @@ Music_Pinballmewtwostage_branch_49156: ; 49156
 	note D_, 1
 	octave 3
 	note F_, 1
-	intensity $32
+	volume_envelope 3, 2
 	octave 4
 	note D_, 1
 	octave 3
@@ -999,12 +991,11 @@ Music_Pinballmewtwostage_branch_49156: ; 49156
 	note D_, 1
 	octave 3
 	note F_, 1
-	loopchannel 2, Music_Pinballmewtwostage_branch_49156
-	endchannel
-; 491e6
+	sound_loop 2, Music_MewtwoStage_branch_49156
+	sound_ret
 
-Music_Pinballmewtwostage_branch_491e6: ; 491e6
-	notetype $6, $32
+Music_MewtwoStage_branch_491e6:
+	note_type 6, 3, 2
 	octave 4
 	note A_, 1
 	note C#, 1
@@ -1022,7 +1013,7 @@ Music_Pinballmewtwostage_branch_491e6: ; 491e6
 	note C#, 1
 	note A_, 1
 	note C#, 1
-	intensity $22
+	volume_envelope 2, 2
 	note A_, 1
 	note C#, 1
 	note A_, 1
@@ -1039,7 +1030,7 @@ Music_Pinballmewtwostage_branch_491e6: ; 491e6
 	note C#, 1
 	note A_, 1
 	note C#, 1
-	intensity $12
+	volume_envelope 1, 2
 	note A#, 1
 	note D_, 1
 	note A#, 1
@@ -1056,7 +1047,7 @@ Music_Pinballmewtwostage_branch_491e6: ; 491e6
 	note D_, 1
 	note A#, 1
 	note D_, 1
-	intensity $22
+	volume_envelope 2, 2
 	note A#, 1
 	note D_, 1
 	note A#, 1
@@ -1065,7 +1056,7 @@ Music_Pinballmewtwostage_branch_491e6: ; 491e6
 	note D_, 1
 	note A#, 1
 	note D_, 1
-	intensity $32
+	volume_envelope 3, 2
 	note A#, 1
 	note D_, 1
 	note A#, 1
@@ -1074,32 +1065,31 @@ Music_Pinballmewtwostage_branch_491e6: ; 491e6
 	note D_, 1
 	note A#, 1
 	note D_, 1
-	loopchannel 2, Music_Pinballmewtwostage_branch_491e6
-	endchannel
-; 49237
+	sound_loop 2, Music_MewtwoStage_branch_491e6
+	sound_ret
 
-Music_Pinballmewtwostage_branch_49237: ; 49237
+Music_MewtwoStage_branch_49237:
 	octave 2
 	note D#, 2
-	note __, 2
+	rest 2
 	note A#, 2
 	octave 3
 	note D#, 2
 	octave 2
 	note D#, 2
-	note __, 2
+	rest 2
 	note A#, 2
 	octave 3
 	note D#, 2
 	octave 2
 	note D#, 2
-	note __, 2
+	rest 2
 	note A#, 2
 	octave 3
 	note D#, 2
 	octave 2
 	note D#, 2
-	note __, 2
+	rest 2
 	note A#, 2
 	octave 3
 	note D_, 2
@@ -1111,259 +1101,248 @@ Music_Pinballmewtwostage_branch_49237: ; 49237
 	note A#, 2
 	octave 2
 	note D#, 2
-	note __, 2
+	rest 2
 	note A#, 2
 	octave 3
 	note D#, 2
 	octave 2
 	note D#, 2
-	note __, 2
+	rest 2
 	note A#, 2
 	octave 3
 	note D#, 2
 	octave 2
 	note D#, 2
-	note __, 2
+	rest 2
 	note D_, 2
 	note F#, 2
-	endchannel
-; 49267
+	sound_ret
 
-Music_Pinballmewtwostage_Ch4: ; 49267
-	togglenoise $0
-	notetype $c
-	note G#, 2
-	note G#, 2
-	note G#, 1
-	note G#, 2
-	note G#, 1
-	notetype $8
-	note D_, 1
-	note D_, 1
-	note D_, 1
-	notetype $c
-	note D_, 1
-	note D_, 1
-	note D_, 2
-	note D_, 1
-	note D_, 1
-	callchannel Music_Pinballmewtwostage_branch_492e5
-	callchannel Music_Pinballmewtwostage_branch_492f6
-	note G#, 1
-	note G_, 1
-	note D_, 1
-	note G_, 1
-	note G#, 1
-	note G_, 1
-	note G#, 1
-	note C#, 1
-	note G#, 1
-	note G_, 1
-	note D_, 1
-	note G_, 1
-	note G#, 1
-	note G_, 1
-	note G#, 1
-	note G_, 1
-Music_Pinballmewtwostage_branch_49292: ; 49292
-	note __, 16
-	callchannel Music_Pinballmewtwostage_branch_49306
-	callchannel Music_Pinballmewtwostage_branch_492f6
-	callchannel Music_Pinballmewtwostage_branch_492e5
-	callchannel Music_Pinballmewtwostage_branch_49317
-	callchannel Music_Pinballmewtwostage_branch_49306
-	callchannel Music_Pinballmewtwostage_branch_4932d
-	callchannel Music_Pinballmewtwostage_branch_4934d
-	callchannel Music_Pinballmewtwostage_branch_49306
-	note G#, 1
-	note G_, 1
-	note D_, 1
-	note G_, 1
-	note G#, 1
-	note G_, 1
-	note G#, 1
-	note C#, 1
-	note G#, 1
-	note G_, 1
-	note D_, 1
-	note C#, 1
-	note G#, 2
-	note D_, 1
-	note D_, 1
-	callchannel Music_Pinballmewtwostage_branch_492e5
-	callchannel Music_Pinballmewtwostage_branch_49317
-	callchannel Music_Pinballmewtwostage_branch_492e5
-	callchannel Music_Pinballmewtwostage_branch_49363
-	callchannel Music_Pinballmewtwostage_branch_492e5
-	callchannel Music_Pinballmewtwostage_branch_49363
-	callchannel Music_Pinballmewtwostage_branch_492e5
-	callchannel Music_Pinballmewtwostage_branch_49363
-	callchannel Music_Pinballmewtwostage_branch_492e5
-	callchannel Music_Pinballmewtwostage_branch_49363
-	callchannel Music_Pinballmewtwostage_branch_49306
-	callchannel Music_Pinballmewtwostage_branch_4932d
-	callchannel Music_Pinballmewtwostage_branch_4934d
-	loopchannel 0, Music_Pinballmewtwostage_branch_49292
-; 492e5
+Music_MewtwoStage_Ch4:
+	toggle_noise 0
+	drum_speed 12
+	drum_note 9, 2
+	drum_note 9, 2
+	drum_note 9, 1
+	drum_note 9, 2
+	drum_note 9, 1
+	drum_speed 8
+	drum_note 3, 1
+	drum_note 3, 1
+	drum_note 3, 1
+	drum_speed 12
+	drum_note 3, 1
+	drum_note 3, 1
+	drum_note 3, 2
+	drum_note 3, 1
+	drum_note 3, 1
+	sound_call Music_MewtwoStage_branch_492e5
+	sound_call Music_MewtwoStage_branch_492f6
+	drum_note 9, 1
+	drum_note 8, 1
+	drum_note 3, 1
+	drum_note 8, 1
+	drum_note 9, 1
+	drum_note 8, 1
+	drum_note 9, 1
+	drum_note 2, 1
+	drum_note 9, 1
+	drum_note 8, 1
+	drum_note 3, 1
+	drum_note 8, 1
+	drum_note 9, 1
+	drum_note 8, 1
+	drum_note 9, 1
+	drum_note 8, 1
+Music_MewtwoStage_branch_49292:
+	rest 16
+	sound_call Music_MewtwoStage_branch_49306
+	sound_call Music_MewtwoStage_branch_492f6
+	sound_call Music_MewtwoStage_branch_492e5
+	sound_call Music_MewtwoStage_branch_49317
+	sound_call Music_MewtwoStage_branch_49306
+	sound_call Music_MewtwoStage_branch_4932d
+	sound_call Music_MewtwoStage_branch_4934d
+	sound_call Music_MewtwoStage_branch_49306
+	drum_note 9, 1
+	drum_note 8, 1
+	drum_note 3, 1
+	drum_note 8, 1
+	drum_note 9, 1
+	drum_note 8, 1
+	drum_note 9, 1
+	drum_note 2, 1
+	drum_note 9, 1
+	drum_note 8, 1
+	drum_note 3, 1
+	drum_note 2, 1
+	drum_note 9, 2
+	drum_note 3, 1
+	drum_note 3, 1
+	sound_call Music_MewtwoStage_branch_492e5
+	sound_call Music_MewtwoStage_branch_49317
+	sound_call Music_MewtwoStage_branch_492e5
+	sound_call Music_MewtwoStage_branch_49363
+	sound_call Music_MewtwoStage_branch_492e5
+	sound_call Music_MewtwoStage_branch_49363
+	sound_call Music_MewtwoStage_branch_492e5
+	sound_call Music_MewtwoStage_branch_49363
+	sound_call Music_MewtwoStage_branch_492e5
+	sound_call Music_MewtwoStage_branch_49363
+	sound_call Music_MewtwoStage_branch_49306
+	sound_call Music_MewtwoStage_branch_4932d
+	sound_call Music_MewtwoStage_branch_4934d
+	sound_loop 0, Music_MewtwoStage_branch_49292
 
-Music_Pinballmewtwostage_branch_492e5: ; 492e5
-	note G#, 1
-	note G_, 1
-	note D_, 1
-	note G_, 1
-	note G#, 1
-	note G_, 1
-	note G#, 1
-	note C#, 1
-	note G#, 1
-	note G_, 1
-	note D_, 1
-	note G_, 1
-	note G#, 1
-	note C#, 1
-	note G#, 1
-	note D_, 1
-	endchannel
-; 492f6
+Music_MewtwoStage_branch_492e5:
+	drum_note 9, 1
+	drum_note 8, 1
+	drum_note 3, 1
+	drum_note 8, 1
+	drum_note 9, 1
+	drum_note 8, 1
+	drum_note 9, 1
+	drum_note 2, 1
+	drum_note 9, 1
+	drum_note 8, 1
+	drum_note 3, 1
+	drum_note 8, 1
+	drum_note 9, 1
+	drum_note 2, 1
+	drum_note 9, 1
+	drum_note 3, 1
+	sound_ret
 
-Music_Pinballmewtwostage_branch_492f6: ; 492f6
-	note G#, 1
-	note G_, 1
-	note D_, 1
-	note G_, 1
-	note G#, 1
-	note G_, 1
-	note G#, 1
-	note C#, 1
-	note G#, 1
-	note G_, 1
-	note D_, 1
-	note G_, 1
-	note D_, 2
-	note D_, 1
-	note D_, 1
-	endchannel
-; 49306
+Music_MewtwoStage_branch_492f6:
+	drum_note 9, 1
+	drum_note 8, 1
+	drum_note 3, 1
+	drum_note 8, 1
+	drum_note 9, 1
+	drum_note 8, 1
+	drum_note 9, 1
+	drum_note 2, 1
+	drum_note 9, 1
+	drum_note 8, 1
+	drum_note 3, 1
+	drum_note 8, 1
+	drum_note 3, 2
+	drum_note 3, 1
+	drum_note 3, 1
+	sound_ret
 
-Music_Pinballmewtwostage_branch_49306: ; 49306
-	note D_, 1
-	note G_, 1
-	note D_, 1
-	note G_, 1
-	note G#, 1
-	note G_, 1
-	note G#, 1
-	note C#, 1
-	note G#, 1
-	note G_, 1
-	note D_, 1
-	note G_, 1
-	note G#, 1
-	note C#, 1
-	note G#, 1
-	note D_, 1
-	endchannel
-; 49317
+Music_MewtwoStage_branch_49306:
+	drum_note 3, 1
+	drum_note 8, 1
+	drum_note 3, 1
+	drum_note 8, 1
+	drum_note 9, 1
+	drum_note 8, 1
+	drum_note 9, 1
+	drum_note 2, 1
+	drum_note 9, 1
+	drum_note 8, 1
+	drum_note 3, 1
+	drum_note 8, 1
+	drum_note 9, 1
+	drum_note 2, 1
+	drum_note 9, 1
+	drum_note 3, 1
+	sound_ret
 
-Music_Pinballmewtwostage_branch_49317: ; 49317
-	note G#, 1
-	note G_, 1
-	note D_, 1
-	note G_, 1
-	note G#, 1
-	note G_, 1
-	note G#, 1
-	note C#, 1
-	note G#, 1
-	note G_, 1
-	note D_, 1
-	note G_, 1
-	notetype $8
-	note D_, 1
-	note D_, 1
-	note D_, 1
-	notetype $c
-	note D_, 1
-	note D_, 1
-	endchannel
-; 4932d
+Music_MewtwoStage_branch_49317:
+	drum_note 9, 1
+	drum_note 8, 1
+	drum_note 3, 1
+	drum_note 8, 1
+	drum_note 9, 1
+	drum_note 8, 1
+	drum_note 9, 1
+	drum_note 2, 1
+	drum_note 9, 1
+	drum_note 8, 1
+	drum_note 3, 1
+	drum_note 8, 1
+	drum_speed 8
+	drum_note 3, 1
+	drum_note 3, 1
+	drum_note 3, 1
+	drum_speed 12
+	drum_note 3, 1
+	drum_note 3, 1
+	sound_ret
 
-Music_Pinballmewtwostage_branch_4932d: ; 4932d
-	note G#, 1
-	note G_, 1
-	note D_, 1
-	note G_, 1
-	note D_, 1
-	note G_, 1
-	note D_, 1
-	note C#, 1
-	note G#, 1
-	note G_, 1
-	note D_, 1
-	note G_, 1
-	note D_, 2
-	note D_, 1
-	note D_, 1
-	note G#, 1
-	note G_, 1
-	note D_, 1
-	note G_, 1
-	note G#, 1
-	note G_, 1
-	note G#, 1
-	note C#, 1
-	note G#, 1
-	note G_, 1
-	note D_, 1
-	note G_, 1
-	note D_, 1
-	note C#, 1
-	note D_, 1
-	note D_, 1
-	endchannel
-; 4934d
+Music_MewtwoStage_branch_4932d:
+	drum_note 9, 1
+	drum_note 8, 1
+	drum_note 3, 1
+	drum_note 8, 1
+	drum_note 3, 1
+	drum_note 8, 1
+	drum_note 3, 1
+	drum_note 2, 1
+	drum_note 9, 1
+	drum_note 8, 1
+	drum_note 3, 1
+	drum_note 8, 1
+	drum_note 3, 2
+	drum_note 3, 1
+	drum_note 3, 1
+	drum_note 9, 1
+	drum_note 8, 1
+	drum_note 3, 1
+	drum_note 8, 1
+	drum_note 9, 1
+	drum_note 8, 1
+	drum_note 9, 1
+	drum_note 2, 1
+	drum_note 9, 1
+	drum_note 8, 1
+	drum_note 3, 1
+	drum_note 8, 1
+	drum_note 3, 1
+	drum_note 2, 1
+	drum_note 3, 1
+	drum_note 3, 1
+	sound_ret
 
-Music_Pinballmewtwostage_branch_4934d: ; 4934d
-	note G#, 1
-	note G_, 1
-	note D_, 1
-	note G_, 1
-	note G#, 1
-	note G_, 1
-	note G#, 1
-	note C#, 1
-	note D_, 1
-	note G_, 1
-	note D_, 1
-	note G_, 1
-	notetype $8
-	note D_, 1
-	note D_, 1
-	note D_, 1
-	notetype $c
-	note D_, 1
-	note D_, 1
-	endchannel
-; 49363
+Music_MewtwoStage_branch_4934d:
+	drum_note 9, 1
+	drum_note 8, 1
+	drum_note 3, 1
+	drum_note 8, 1
+	drum_note 9, 1
+	drum_note 8, 1
+	drum_note 9, 1
+	drum_note 2, 1
+	drum_note 3, 1
+	drum_note 8, 1
+	drum_note 3, 1
+	drum_note 8, 1
+	drum_speed 8
+	drum_note 3, 1
+	drum_note 3, 1
+	drum_note 3, 1
+	drum_speed 12
+	drum_note 3, 1
+	drum_note 3, 1
+	sound_ret
 
-Music_Pinballmewtwostage_branch_49363: ; 49363
-	note G#, 1
-	note G_, 1
-	note D_, 1
-	note G_, 1
-	note G#, 1
-	note G_, 1
-	note G#, 1
-	note C#, 1
-	note G#, 1
-	note G_, 1
-	note D_, 1
-	note G_, 1
-	note D_, 1
-	note G#, 1
-	note D_, 1
-	note G#, 1
-	endchannel
-; 49374
-
-
+Music_MewtwoStage_branch_49363:
+	drum_note 9, 1
+	drum_note 8, 1
+	drum_note 3, 1
+	drum_note 8, 1
+	drum_note 9, 1
+	drum_note 8, 1
+	drum_note 9, 1
+	drum_note 2, 1
+	drum_note 9, 1
+	drum_note 8, 1
+	drum_note 3, 1
+	drum_note 8, 1
+	drum_note 3, 1
+	drum_note 9, 1
+	drum_note 3, 1
+	drum_note 9, 1
+	sound_ret

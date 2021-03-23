@@ -1,13 +1,14 @@
 Music_RBYPalletTown::
-	musicheader 3, 1, Music_RBYPalletTown_Ch0
-	musicheader 1, 2, Music_RBYPalletTown_Ch1
-	musicheader 1, 3, Music_RBYPalletTown_Ch2
+	channel_count 3
+	channel 1, Music_RBYPalletTown_Ch1
+	channel 2, Music_RBYPalletTown_Ch2
+	channel 3, Music_RBYPalletTown_Ch3
 
-Music_RBYPalletTown_Ch0::
+Music_RBYPalletTown_Ch1::
 	tempo 160
-	volume $77
-	dutycycle 2
-	notetype 12, $c3
+	volume 7, 7
+	duty_cycle 2
+	note_type 12, 12, 3
 
 Music_RBYPalletTown_branch_a7ce::
 	octave 3
@@ -27,7 +28,7 @@ Music_RBYPalletTown_branch_a7ce::
 	note C_, 2
 	octave 3
 	note B_, 2
-	note __, 2
+	rest 2
 	note B_, 2
 	octave 4
 	note C_, 2
@@ -35,7 +36,7 @@ Music_RBYPalletTown_branch_a7ce::
 	note B_, 2
 	octave 4
 	note C_, 8
-	note __, 2
+	rest 2
 	octave 3
 	note B_, 2
 	octave 4
@@ -88,7 +89,7 @@ Music_RBYPalletTown_branch_a7ce::
 	note A_, 2
 	note F#, 2
 	note A_, 2
-	notetype 12, $b3
+	note_type 12, 11, 3
 	note B_, 2
 	note G_, 2
 	note D_, 2
@@ -149,30 +150,30 @@ Music_RBYPalletTown_branch_a7ce::
 	note D_, 2
 	note C_, 2
 	note D_, 2
-	loopchannel 0, Music_RBYPalletTown_branch_a7ce
-	endchannel
+	sound_loop 0, Music_RBYPalletTown_branch_a7ce
+	sound_ret
 
 
-Music_RBYPalletTown_Ch1::
-	dutycycle 2
+Music_RBYPalletTown_Ch2::
+	duty_cycle 2
 
 Music_RBYPalletTown_branch_a861::
-	notetype 12, $d3
+	note_type 12, 13, 3
 	octave 5
 	note D_, 2
-	notetype 12, $a3
+	note_type 12, 10, 3
 	note C_, 2
-	notetype 12, $d3
+	note_type 12, 13, 3
 	octave 4
 	note B_, 2
-	notetype 12, $b3
+	note_type 12, 11, 3
 	note A_, 2
-	notetype 12, $d3
+	note_type 12, 13, 3
 	octave 5
 	note G_, 2
-	notetype 12, $b3
+	note_type 12, 11, 3
 	note E_, 2
-	notetype 12, $d3
+	note_type 12, 13, 3
 	note F#, 2
 	note E_, 2
 	note D_, 6
@@ -196,21 +197,21 @@ Music_RBYPalletTown_branch_a861::
 	note A_, 8
 	octave 5
 	note D_, 2
-	notetype 12, $a3
+	note_type 12, 10, 3
 	note C_, 2
-	notetype 12, $d3
+	note_type 12, 13, 3
 	octave 4
 	note B_, 2
-	notetype 12, $b3
+	note_type 12, 11, 3
 	octave 5
 	note D_, 2
-	notetype 12, $d3
+	note_type 12, 13, 3
 	note G_, 2
-	notetype 12, $a3
+	note_type 12, 10, 3
 	note F#, 2
-	notetype 12, $b3
+	note_type 12, 11, 3
 	note F#, 2
-	notetype 12, $d3
+	note_type 12, 13, 3
 	note G_, 2
 	note E_, 6
 	note D_, 2
@@ -236,7 +237,7 @@ Music_RBYPalletTown_branch_a861::
 	note C_, 2
 	octave 4
 	note B_, 8
-	note __, 2
+	rest 2
 	note G_, 2
 	note A_, 2
 	note B_, 2
@@ -248,7 +249,7 @@ Music_RBYPalletTown_branch_a861::
 	note D_, 1
 	octave 4
 	note B_, 8
-	note __, 2
+	rest 2
 	note B_, 2
 	note A_, 2
 	note G_, 2
@@ -263,13 +264,13 @@ Music_RBYPalletTown_branch_a861::
 	note B_, 4
 	note B_, 8
 	note A_, 8
-	loopchannel 0, Music_RBYPalletTown_branch_a861
-	endchannel
+	sound_loop 0, Music_RBYPalletTown_branch_a861
+	sound_ret
 
 
-Music_RBYPalletTown_Ch2::
-	vibrato 24, $28
-	notetype 12, $12
+Music_RBYPalletTown_Ch3::
+	vibrato 24, 2, 8
+	note_type 12, 1, 2
 
 Music_RBYPalletTown_branch_a8e3::
 	octave 4
@@ -315,5 +316,5 @@ Music_RBYPalletTown_branch_a8e3::
 	note E_, 8
 	note E_, 8
 	note F#, 8
-	loopchannel 0, Music_RBYPalletTown_branch_a8e3
-	endchannel
+	sound_loop 0, Music_RBYPalletTown_branch_a8e3
+	sound_ret

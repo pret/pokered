@@ -108,16 +108,16 @@ OpenSRAMForSound::
 ;
 ;	call OpenSRAMForSound
 ;
-;	ldh a, [hROMBank]
+;	ldh a, [hLoadedROMBank]
 ;	push af
 ;	ld a, BANK(_MapSetup_Sound_Off)
-;	ldh [hROMBank], a
+;	ldh [hLoadedROMBank], a
 ;	ld [MBC1RomBank], a
 ;
 ;	call _MapSetup_Sound_Off
 ;
 ;	pop af
-;	ldh [hROMBank], a
+;	ldh [hLoadedROMBank], a
 ;	ld [MBC1RomBank], a
 ;
 ;	pop af
@@ -136,16 +136,16 @@ UpdateSound::
 	and a
 	ret nz
 
-	ldh a, [hROMBank]
+	ldh a, [hLoadedROMBank]
 	push af
 	ld a, BANK(_UpdateSound)
-	ldh [hROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 
 	call _UpdateSound
 
 	pop af
-	ldh [hROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 
 ;	pop af
@@ -156,14 +156,14 @@ UpdateSound::
 
 _LoadMusicByte::
 ; wCurMusicByte = [a:de]
-	ldh [hROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 
 	ld a, [de]
 	ld [wCurMusicByte], a
 	ld a, BANK(LoadMusicByte)
 
-	ldh [hROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret
 
@@ -178,10 +178,10 @@ PlayMusic::
 	push bc
 	push af
 
-	ldh a, [hROMBank]
+	ldh a, [hLoadedROMBank]
 	push af
-	ld a, BANK(_PlayMusic) ; aka BANK(_MapSetup_Sound_Off)
-	ldh [hROMBank], a
+	ld a, BANK(_PlayMusic) ; aka BANK(_InitSound)
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 
 	ld a, e
@@ -192,11 +192,11 @@ PlayMusic::
 	jr .end
 
 .nomusic
-	call _MapSetup_Sound_Off
+	call _InitSound
 
 .end
 	pop af
-	ldh [hROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	pop af
 	pop bc
@@ -215,10 +215,10 @@ PlayMusic::
 ;	push bc
 ;	push af
 ;
-;	ldh a, [hROMBank]
+;	ldh a, [hLoadedROMBank]
 ;	push af
 ;	ld a, BANK(_PlayMusic)
-;	ldh [hROMBank], a
+;	ldh [hLoadedROMBank], a
 ;	ld [MBC1RomBank], a
 ;
 ;	push de
@@ -229,7 +229,7 @@ PlayMusic::
 ;	call _PlayMusic
 ;
 ;	pop af
-;	ldh [hROMBank], a
+;	ldh [hLoadedROMBank], a
 ;	ld [MBC1RomBank], a
 ;
 ;	pop af
@@ -253,12 +253,12 @@ PlayCry::
 	ld e, a
 	ld d, 0
 
-	ldh a, [hROMBank]
+	ldh a, [hLoadedROMBank]
 	push af
 
 	; Cries are stuck in one bank.
 	ld a, BANK(PokemonCries)
-	ldh [hROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 
 	ld hl, PokemonCries
@@ -281,13 +281,13 @@ endr
 	ld [wCryLength + 1], a
 
 	ld a, BANK(_PlayCry)
-	ldh [hROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 
 	call _PlayCry
 
 	pop af
-	ldh [hROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	
 	call WaitForSoundToFinish
@@ -317,10 +317,10 @@ PlaySFX::
 ;	jr c, .done
 
 .play
-	ldh a, [hROMBank]
+	ldh a, [hLoadedROMBank]
 	push af
 	ld a, BANK(_PlaySFX)
-	ldh [hROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 
 	ld a, e
@@ -328,7 +328,7 @@ PlaySFX::
 	call _PlaySFX
 
 	pop af
-	ldh [hROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 
 .done

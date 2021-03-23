@@ -12,61 +12,61 @@ SSAnneKitchen_TextPointers:
 	dw SSAnne6Text7
 
 SSAnne6Text1:
-	TX_FAR _SSAnne6Text1
-	db "@"
+	text_far _SSAnne6Text1
+	text_end
 
 SSAnne6Text2:
-	TX_FAR _SSAnne6Text2
-	db "@"
+	text_far _SSAnne6Text2
+	text_end
 
 SSAnne6Text3:
-	TX_FAR _SSAnne6Text3
-	db "@"
+	text_far _SSAnne6Text3
+	text_end
 
 SSAnne6Text4:
-	TX_FAR _SSAnne6Text4
-	db "@"
+	text_far _SSAnne6Text4
+	text_end
 
 SSAnne6Text5:
-	TX_FAR _SSAnne6Text5
-	db "@"
+	text_far _SSAnne6Text5
+	text_end
 
 SSAnne6Text6:
-	TX_FAR _SSAnne6Text6
-	db "@"
+	text_far _SSAnne6Text6
+	text_end
 
 SSAnne6Text7:
-	TX_ASM
+	text_asm
 	ld hl, SSAnne6Text_61807
 	call PrintText
-	ld a, [hRandomAdd]
+	ldh a, [hRandomAdd]
 	bit 7, a
-	jr z, .asm_93eb1
+	jr z, .not_dialog_1
 	ld hl, SSAnne6Text_6180c
-	jr .asm_63292
-.asm_93eb1
+	jr .done
+.not_dialog_1
 	bit 4, a
-	jr z, .asm_7436c
+	jr z, .not_dialog_2
 	ld hl, SSAnne6Text_61811
-	jr .asm_63292
-.asm_7436c
+	jr .done
+.not_dialog_2
 	ld hl, SSAnne6Text_61816
-.asm_63292
+.done
 	call PrintText
 	jp TextScriptEnd
 
 SSAnne6Text_61807:
-	TX_FAR _SSAnne6Text_61807
-	db "@"
+	text_far _SSAnne6Text_61807
+	text_end
 
 SSAnne6Text_6180c:
-	TX_FAR _SSAnne6Text_6180c
-	db "@"
+	text_far _SSAnne6Text_6180c
+	text_end
 
 SSAnne6Text_61811:
-	TX_FAR _SSAnne6Text_61811
-	db "@"
+	text_far _SSAnne6Text_61811
+	text_end
 
 SSAnne6Text_61816:
-	TX_FAR _SSAnne6Text_61816
-	db "@"
+	text_far _SSAnne6Text_61816
+	text_end

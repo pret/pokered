@@ -3,25 +3,25 @@ AnimateHealingMachine:
 	call PlayMusic
 
 	ld de, PokeCenterFlashingMonitorAndHealBall
-	ld hl, vChars0 + $7c0
-	lb bc, BANK(PokeCenterFlashingMonitorAndHealBall), $03 ; loads one too many tiles
+	ld hl, vChars0 tile $7c
+	lb bc, BANK(PokeCenterFlashingMonitorAndHealBall), 3 ; should be 2
 	call CopyVideoData
 	ld hl, wUpdateSpritesEnabled
 	ld a, [hl]
 	push af
 	ld [hl], $ff
 	push hl
-	ld a, [rOBP1]
+	ldh a, [rOBP1]
 	push af
 	ld a, $e0
-	ld [rOBP1], a
+	ldh [rOBP1], a
 	ld hl, wOAMBuffer + $84
 	ld de, PokeCenterOAMData
 	call CopyHealingMachineOAM
 
 ;	ld a, 4
 ;	ld [wAudioFadeOutControl], a
-;	ld a, $ff
+;	ld a, SFX_STOP_ALL_MUSIC
 ;	ld [wNewSoundID], a
 ;	call PlaySound
 ;.waitLoop
@@ -40,10 +40,10 @@ AnimateHealingMachine:
 	dec b
 	jr nz, .partyLoop
 	ld a, [wAudioROMBank]
-	cp $1f ; 0 ; BANK(Audio3_UpdateMusic) XXXXX
+	cp $1f ; BANK("Audio Engine 3")
 	ld [wAudioSavedROMBank], a
 	jr nz, .next
-	ld a, $ff
+	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
 	ld a, 0 ; BANK(Music_PkmnHealed)
@@ -62,33 +62,33 @@ AnimateHealingMachine:
 	ld c, 32
 	call DelayFrames
 	pop af
-	ld [rOBP1], a
+	ldh [rOBP1], a
 	pop hl
 	pop af
 	ld [hl], a
-	
-	
 	jp UpdateSprites
 
 PokeCenterFlashingMonitorAndHealBall:
-	INCBIN "gfx/pokecenter_ball.2bpp"
+	INCBIN "gfx/overworld/heal_machine.2bpp"
 
 PokeCenterOAMData:
-	db $24,$34,$7C,$10 ; heal machine monitor
-	db $2B,$30,$7D,$10 ; pokeballs 1-6
-	db $2B,$38,$7D,$30
-	db $30,$30,$7D,$10
-	db $30,$38,$7D,$30
-	db $35,$30,$7D,$10
-	db $35,$38,$7D,$30
+	; heal machine monitor
+	dbsprite  6,  4,  4,  4, $7c, OAM_OBP1
+	; poke balls 1-6
+	dbsprite  6,  5,  0,  3, $7d, OAM_OBP1
+	dbsprite  7,  5,  0,  3, $7d, OAM_OBP1 | OAM_HFLIP
+	dbsprite  6,  6,  0,  0, $7d, OAM_OBP1
+	dbsprite  7,  6,  0,  0, $7d, OAM_OBP1 | OAM_HFLIP
+	dbsprite  6,  6,  0,  5, $7d, OAM_OBP1
+	dbsprite  7,  6,  0,  5, $7d, OAM_OBP1 | OAM_HFLIP
 
 ; d = value to xor with palette
 FlashSprite8Times:
 	ld b, 8
 .loop
-	ld a, [rOBP1]
+	ldh a, [rOBP1]
 	xor d
-	ld [rOBP1], a
+	ldh [rOBP1], a
 	ld c, 10
 	call DelayFrames
 	dec b
@@ -97,16 +97,9 @@ FlashSprite8Times:
 
 CopyHealingMachineOAM:
 ; copy one OAM entry and advance the pointers
+	REPT 4
 	ld a, [de]
 	inc de
 	ld [hli], a
-	ld a, [de]
-	inc de
-	ld [hli], a
-	ld a, [de]
-	inc de
-	ld [hli], a
-	ld a, [de]
-	inc de
-	ld [hli], a
+	ENDR
 	ret

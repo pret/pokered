@@ -21,42 +21,35 @@ Route4_TextPointers:
 	dw Route4Text6
 
 Route4TrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_ROUTE_4_TRAINER_0
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_4_TRAINER_0
-	dw Route4BattleText1 ; TextBeforeBattle
-	dw Route4AfterBattleText1 ; TextAfterBattle
-	dw Route4EndBattleText1 ; TextEndBattle
-	dw Route4EndBattleText1 ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_ROUTE_4_TRAINER_0, 3, Route4BattleText1, Route4EndBattleText1, Route4AfterBattleText1
+	db -1 ; end
 
 Route4Text1:
-	TX_FAR _Route4Text1
-	db "@"
+	text_far _Route4Text1
+	text_end
 
 Route4Text2:
-	TX_ASM
+	text_asm
 	ld hl, Route4TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route4BattleText1:
-	TX_FAR _Route4BattleText1
-	db "@"
+	text_far _Route4BattleText1
+	text_end
 
 Route4EndBattleText1:
-	TX_FAR _Route4EndBattleText1
-	db "@"
+	text_far _Route4EndBattleText1
+	text_end
 
 Route4AfterBattleText1:
-	TX_FAR _Route4AfterBattleText1
-	db "@"
+	text_far _Route4AfterBattleText1
+	text_end
 
 Route4Text5:
-	TX_FAR _Route4Text5
-	db "@"
+	text_far _Route4Text5
+	text_end
 
 Route4Text6:
-	TX_FAR _Route4Text6
-	db "@"
+	text_far _Route4Text6
+	text_end

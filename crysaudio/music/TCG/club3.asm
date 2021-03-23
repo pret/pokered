@@ -1,23 +1,22 @@
-Music_TCGClub3:
-	db $C0
-	dw Music_TCGClub3_Ch1
-	db $01
-	dw Music_TCGClub3_Ch2
-	db $02
-	dw Music_TCGClub3_Ch3
-	db $03
-	dw Music_TCGClub3_Ch4
+Music_Club3:
+	channel_count 4
+	channel 1, Music_Club3_Ch1
+	channel 2, Music_Club3_Ch2
+	channel 3, Music_Club3_Ch3
+	channel 4, Music_Club3_Ch4
 
-Music_TCGClub3_Ch1: 
+Music_Club3_Ch1: ; fa210 (3e:6210)
 	notetype0 9
-	vibrato 20, $33
+	;stereo_panning 1, 1
+	;vibrato_type 5
+	vibrato 20, 3, 3
 	notetype2 8
 .MainLoop
-	dutycycle 0
+	duty_cycle 0
 .Loop1
 	octave 2
 	notetype1 9
-	note __, 4
+	rest 4
 	note G_, 2
 	notetype1 3
 	note G_, 1
@@ -29,10 +28,11 @@ Music_TCGClub3_Ch1:
 	dec_octave
 	notetype1 9
 	note A#, 6
+	;tie
 	note A#, 12
 	notetype1 3
 	note A#, 4
-	note __, 4
+	rest 4
 	notetype1 9
 	note G_, 2
 	notetype1 3
@@ -41,7 +41,9 @@ Music_TCGClub3_Ch1:
 	notetype1 9
 	notetype0 1
 	note C_, 5
+	;tie
 	note C#, 4
+	;tie
 	notetype0 9
 	note C_, 1
 	notetype1 3
@@ -49,15 +51,16 @@ Music_TCGClub3_Ch1:
 	dec_octave
 	notetype1 9
 	note A#, 6
+	;tie
 	note A#, 12
 	notetype1 3
 	note A#, 4
-	loopchannel 2, .Loop1
-	dutycycle 1
+	sound_loop 2, .Loop1
+	duty_cycle 1
 	notetype1 9
 	notetype2 7
-	callchannel Branch_fa330
-	callchannel Branch_fa403
+	sound_call Branch_fa330
+	sound_call Branch_fa403
 	note A#, 1
 	note F_, 1
 	note F#, 1
@@ -96,8 +99,8 @@ Music_TCGClub3_Ch1:
 	note A#, 1
 	notetype1 9
 	notetype2 7
-	callchannel Branch_fa330
-	callchannel Branch_fa403
+	sound_call Branch_fa330
+	sound_call Branch_fa403
 	inc_octave
 	note D_, 1
 	dec_octave
@@ -125,7 +128,7 @@ Music_TCGClub3_Ch1:
 	octave 2
 	note G_, 1
 	octave 4
-	dutycycle 2
+	duty_cycle 2
 	notetype1 7
 	notetype0 1
 	notetype2 8
@@ -139,11 +142,11 @@ Music_TCGClub3_Ch1:
 	note C_, 5
 	dec_octave
 	note A#, 4
-	dutycycle 1
+	duty_cycle 1
 	notetype2 7
 	notetype0 9
-	callchannel Branch_fa370
-	callchannel Branch_fa403
+	sound_call Branch_fa370
+	sound_call Branch_fa403
 	note A#, 1
 	note F_, 1
 	note F#, 1
@@ -180,8 +183,8 @@ Music_TCGClub3_Ch1:
 	note C_, 1
 	dec_octave
 	note A#, 1
-	callchannel Branch_fa370
-	callchannel Branch_fa403
+	sound_call Branch_fa370
+	sound_call Branch_fa403
 	inc_octave
 	note D_, 1
 	dec_octave
@@ -209,7 +212,7 @@ Music_TCGClub3_Ch1:
 	dec_octave
 	note A#, 1
 	inc_octave
-	dutycycle 2
+	duty_cycle 2
 	notetype0 1
 	notetype2 8
 	notetype1 7
@@ -225,7 +228,7 @@ Music_TCGClub3_Ch1:
 	note A#, 4
 	notetype0 9
 	notetype2 8
-	loopchannel 0, .MainLoop
+	sound_loop 0, .MainLoop
 
 Branch_fa330:
 	octave 2
@@ -287,7 +290,7 @@ Branch_fa330:
 	dec_octave
 	note F_, 1
 	note F#, 1
-	endchannel
+	sound_ret
 
 Branch_fa370:
 	octave 2
@@ -317,7 +320,7 @@ Branch_fa370:
 	note F_, 5
 	note F#, 4
 	octave 4
-	dutycycle 2
+	duty_cycle 2
 	notetype1 7
 	note G_, 3
 	notetype1 1
@@ -358,7 +361,7 @@ Branch_fa370:
 	notetype1 1
 	note G_, 2
 	notetype0 9
-	dutycycle 1
+	duty_cycle 1
 	notetype2 7
 	notetype1 9
 	octave 2
@@ -384,7 +387,7 @@ Branch_fa370:
 	octave 2
 	note G_, 1
 	octave 5
-	dutycycle 2
+	duty_cycle 2
 	notetype0 1
 	notetype2 8
 	notetype1 7
@@ -400,10 +403,10 @@ Branch_fa370:
 	dec_octave
 	note A#, 4
 	notetype0 9
-	dutycycle 1
+	duty_cycle 1
 	notetype2 7
 	notetype1 9
-	endchannel
+	sound_ret
 
 Branch_fa403:
 	octave 2
@@ -433,19 +436,21 @@ Branch_fa403:
 	notetype0 9
 	notetype2 7
 	note G_, 1
-	endchannel
+	sound_ret
 
 
-Music_TCGClub3_Ch2: 
+Music_Club3_Ch2: ; fa423 (3e:6423)
 	notetype0 9
-	vibrato 20, $33
+	;stereo_panning 1, 1
+	;vibrato_type 5
+	vibrato 20, 3, 3
 	notetype2 8
 .MainLoop
-	dutycycle 0
+	duty_cycle 0
 .Loop1
 	octave 2
 	notetype1 7
-	note __, 4
+	rest 4
 	note D_, 2
 	notetype1 3
 	note D_, 1
@@ -455,10 +460,11 @@ Music_TCGClub3_Ch2:
 	note F_, 2
 	notetype1 7
 	note E_, 6
+	;tie
 	note E_, 12
 	notetype1 3
 	note E_, 4
-	note __, 4
+	rest 4
 	notetype1 7
 	note D_, 2
 	notetype1 3
@@ -466,6 +472,7 @@ Music_TCGClub3_Ch2:
 	notetype1 7
 	notetype0 1
 	note F_, 5
+	;tie
 	note F#, 4
 	notetype0 9
 	note F_, 1
@@ -473,15 +480,16 @@ Music_TCGClub3_Ch2:
 	note F_, 1
 	notetype1 7
 	note E_, 6
+	;tie
 	note E_, 12
 	notetype1 3
 	note E_, 4
-	loopchannel 2, .Loop1
-	dutycycle 1
+	sound_loop 2, .Loop1
+	duty_cycle 1
 .Loop2
-	callchannel Branch_fa5a6
+	sound_call Branch_fa5a6
 	notetype0 9
-	note __, 1
+	rest 1
 	inc_octave
 	notetype1 8
 	notetype0 1
@@ -522,7 +530,7 @@ Music_TCGClub3_Ch2:
 	note D_, 4
 	notetype1 9
 	notetype0 9
-	note __, 1
+	rest 1
 	dec_octave
 	notetype0 1
 	notetype2 8
@@ -540,7 +548,7 @@ Music_TCGClub3_Ch2:
 	note D_, 4
 	notetype0 9
 	notetype1 8
-	note __, 1
+	rest 1
 	dec_octave
 	notetype0 1
 	note D_, 5
@@ -580,7 +588,7 @@ Music_TCGClub3_Ch2:
 	notetype1 3
 	note C_, 4
 	notetype0 9
-	note __, 1
+	rest 1
 	dec_octave
 	notetype1 8
 	notetype2 8
@@ -588,9 +596,9 @@ Music_TCGClub3_Ch2:
 	note B_, 1
 	inc_octave
 	note C_, 1
-	callchannel Branch_fa5a6
+	sound_call Branch_fa5a6
 	notetype0 9
-	note __, 1
+	rest 1
 	inc_octave
 	notetype0 1
 	notetype1 8
@@ -628,7 +636,7 @@ Music_TCGClub3_Ch2:
 	notetype1 3
 	note G_, 4
 	notetype0 9
-	note __, 1
+	rest 1
 	dec_octave
 	dec_octave
 	notetype0 1
@@ -642,8 +650,8 @@ Music_TCGClub3_Ch2:
 	notetype1 3
 	note D_, 4
 	notetype0 9
-	note __, 1
-	note __, 1
+	rest 1
+	rest 1
 	notetype0 1
 	notetype1 8
 	note D_, 5
@@ -683,18 +691,18 @@ Music_TCGClub3_Ch2:
 	note F_, 4
 	notetype1 8
 	notetype0 9
-	note __, 1
+	rest 1
 	dec_octave
 	notetype2 8
 	note D_, 1
 	note D#, 1
 	note E_, 1
-	loopchannel 2, .Loop2
-	loopchannel 0, .MainLoop
+	sound_loop 2, .Loop2
+	sound_loop 0, .MainLoop
 
 Branch_fa5a6:
 	octave 3
-	note __, 1
+	rest 1
 	notetype1 8
 	notetype0 1
 	note D_, 5
@@ -733,7 +741,7 @@ Branch_fa5a6:
 	note D_, 4
 	notetype1 8
 	notetype0 9
-	note __, 1
+	rest 1
 	dec_octave
 	notetype0 1
 	notetype2 8
@@ -750,7 +758,7 @@ Branch_fa5a6:
 	notetype1 3
 	note D_, 4
 	notetype0 9
-	note __, 1
+	rest 1
 	dec_octave
 	notetype0 1
 	notetype1 8
@@ -794,267 +802,309 @@ Branch_fa5a6:
 	note A#, 1
 	notetype1 3
 	note A#, 2
-	endchannel
+	sound_ret
 
 
-Music_TCGClub3_Ch3: 
+Music_Club3_Ch3: ; fa63e (3e:663e)
 	notetype0 9
+	;stereo_panning 1, 1
 	notetype1 1
 	notetype2 11
+	;echo 0
+	;cutoff 8
 .Loop1
 	octave 2
 	note G_, 1
-	note __, 1
+	rest 1
 	note G_, 14
-	note __, 1
+	rest 1
 	inc_octave
 	note F_, 1
-	note __, 2
+	rest 2
 	note G_, 1
-	note __, 2
+	rest 2
 	dec_octave
 	note G_, 1
-	note __, 1
+	rest 1
 	note E_, 3
 	note F_, 1
-	note __, 1
+	rest 1
 	note F#, 1
-	note __, 1
-	loopchannel 4, .Loop1
+	rest 1
+	sound_loop 4, .Loop1
 .Loop2
 	octave 2
 	note G_, 1
 	octave 4
+	;cutoff 4
 	note G_, 1
-	note __, 1
+	rest 1
 	octave 2
+	;cutoff 8
 	note G_, 1
 	inc_octave
 	note F_, 1
 	note G_, 1
-	note __, 1
+	rest 1
 	dec_octave
 	note G_, 1
-	note __, 1
+	rest 1
 	inc_octave
 	note G_, 1
-	note __, 1
+	rest 1
 	octave 5
+	;cutoff 4
 	note G_, 1
-	note __, 1
+	rest 1
 	octave 2
+	;cutoff 8
 	note E_, 1
 	note F_, 1
 	octave 5
+	;cutoff 4
 	note G_, 1
 	octave 2
+	;cutoff 8
 	note G_, 1
 	octave 4
+	;cutoff 4
 	note G_, 1
-	note __, 1
+	rest 1
 	octave 2
+	;cutoff 8
 	note G_, 1
 	inc_octave
 	note F_, 1
 	note G_, 1
-	note __, 1
+	rest 1
 	dec_octave
 	note G_, 1
-	note __, 1
+	rest 1
 	inc_octave
 	note G_, 1
-	note __, 1
+	rest 1
 	inc_octave
+	;cutoff 4
 	note F_, 1
-	note __, 1
+	rest 1
+	;cutoff 8
 	note E_, 1
 	octave 2
 	note F_, 1
 	note F#, 1
 	note D#, 1
 	octave 4
+	;cutoff 4
 	note G_, 1
-	note __, 1
+	rest 1
 	octave 2
+	;cutoff 8
 	note D#, 1
 	inc_octave
 	note D_, 1
 	note D#, 1
-	note __, 1
+	rest 1
 	dec_octave
 	note D#, 1
-	note __, 1
+	rest 1
 	inc_octave
 	note D#, 1
-	note __, 1
+	rest 1
 	octave 5
+	;cutoff 4
 	note G_, 1
-	note __, 1
+	rest 1
 	octave 2
+	;cutoff 8
 	note C_, 1
 	note C#, 1
 	octave 5
+	;cutoff 4
 	note G_, 1
 	octave 2
+	;cutoff 8
 	note D#, 1
 	octave 4
+	;cutoff 4
 	note G_, 1
-	note __, 1
+	rest 1
 	octave 2
+	;cutoff 8
 	note D#, 1
 	inc_octave
 	note D_, 1
 	note D#, 1
-	note __, 1
+	rest 1
 	dec_octave
 	note D#, 1
-	note __, 1
+	rest 1
 	inc_octave
 	note D#, 1
-	note __, 1
+	rest 1
 	inc_octave
+	;cutoff 4
 	note F_, 1
-	note __, 1
+	rest 1
 	dec_octave
+	;cutoff 8
 	note D_, 1
 	note D#, 1
 	note E_, 1
 	dec_octave
 	note C_, 1
 	octave 4
+	;cutoff 4
 	note G_, 1
-	note __, 1
+	rest 1
 	octave 2
+	;cutoff 8
 	note C_, 1
 	note A#, 1
 	inc_octave
 	note C_, 1
-	note __, 1
+	rest 1
 	dec_octave
 	note C_, 1
-	note __, 1
+	rest 1
 	inc_octave
 	note C_, 1
-	note __, 1
+	rest 1
 	octave 5
+	;cutoff 4
 	note G_, 1
-	note __, 1
+	rest 1
 	octave 2
+	;cutoff 8
 	note A_, 1
 	note A#, 1
 	octave 5
+	;cutoff 4
 	note G_, 1
 	octave 2
+	;cutoff 8
 	note C_, 1
 	octave 4
+	;cutoff 4
 	note G_, 1
-	note __, 1
+	rest 1
 	octave 2
+	;cutoff 8
 	note C_, 1
 	note A#, 1
 	inc_octave
 	note C_, 1
-	note __, 1
+	rest 1
 	dec_octave
 	note C_, 1
-	note __, 1
+	rest 1
 	inc_octave
 	note C_, 1
-	note __, 1
+	rest 1
 	inc_octave
+	;cutoff 4
 	note F_, 1
-	note __, 1
+	rest 1
+	;cutoff 8
 	note E_, 1
 	octave 2
 	note A#, 1
 	note B_, 1
 	note D_, 1
 	octave 4
+	;cutoff 4
 	note G_, 1
-	note __, 1
+	rest 1
 	octave 2
+	;cutoff 8
 	note D_, 1
 	inc_octave
 	note C_, 1
 	note D_, 1
-	note __, 1
+	rest 1
 	dec_octave
 	note D_, 1
-	note __, 1
+	rest 1
 	inc_octave
 	note D_, 1
-	note __, 1
+	rest 1
 	octave 5
+	;cutoff 4
 	note C_, 1
-	note __, 1
+	rest 1
 	octave 3
+	;cutoff 6
 	note A#, 1
 	dec_octave
+	;cutoff 8
 	note C_, 1
 	note C#, 1
 	note D_, 1
 	octave 4
+	;cutoff 4
 	note G_, 1
-	note __, 1
+	rest 1
 	octave 2
+	;cutoff 8
 	note D_, 1
 	inc_octave
 	note C_, 1
 	note D_, 1
-	note __, 1
+	rest 1
 	dec_octave
 	note D_, 1
-	note __, 1
+	rest 1
 	note F_, 1
-	note __, 1
+	rest 1
 	inc_octave
+	;cutoff 4
 	note A#, 1
-	note __, 1
+	rest 1
 	dec_octave
+	;cutoff 8
 	note A#, 1
 	note B_, 1
 	inc_octave
 	note C_, 1
-	loopchannel 2, .Loop2
-	loopchannel 0, Music_TCGClub3_Ch3
+	sound_loop 2, .Loop2
+	sound_loop 0, Music_Club3_Ch3
 
 
-Music_TCGClub3_Ch4: 
-	togglenoise $06
-	notetype 9
+Music_Club3_Ch4: ; fa772 (3e:6772)
+	toggle_noise 6
+	drum_speed 9
 	octave 1
 .MainLoop
 .Loop1
-	callchannel Branch_fa796
-	note C#, 2
-	note E_, 2
-	callchannel Branch_fa796
-	note C#, 2
-	note D#, 1
-	note C#, 1
-	loopchannel 3, .Loop1
-	callchannel Branch_fa796
-	note C#, 2
-	note E_, 2
-	callchannel Branch_fa796
-	note C#, 1
-	notetype 1
-	note D#, 5
-	note C#, 4
-	notetype 9
-	note C#, 1
-	note C#, 1
-	loopchannel 0, .MainLoop
+	sound_call Branch_fa796
+	drum_note 2, 2
+	drum_note 5, 2
+	sound_call Branch_fa796
+	drum_note 2, 2
+	drum_note 4, 1
+	drum_note 2, 1
+	sound_loop 3, .Loop1
+	sound_call Branch_fa796
+	drum_note 2, 2
+	drum_note 5, 2
+	sound_call Branch_fa796
+	drum_note 2, 1
+	drum_speed 1
+	drum_note 4, 5
+	drum_note 2, 4
+	drum_speed 9
+	drum_note 2, 1
+	drum_note 2, 1
+	sound_loop 0, .MainLoop
 
 Branch_fa796:
-	note C_, 2
-	note D#, 2
-	note C#, 2
-	note D#, 1
-	note C#, 1
-	note D#, 1
-	note C_, 1
-	note E_, 1
-	note C_, 1
-	endchannel
-
+	drum_note 1, 2
+	drum_note 4, 2
+	drum_note 2, 2
+	drum_note 4, 1
+	drum_note 2, 1
+	drum_note 4, 1
+	drum_note 1, 1
+	drum_note 5, 1
+	drum_note 1, 1
+	sound_ret
+; 0xfa7a0

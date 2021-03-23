@@ -10,21 +10,21 @@ CinnabarLab_TextPointers:
 	dw Lab1Text5
 
 Lab1Text1:
-	TX_FAR _Lab1Text1
-	db "@"
+	text_far _Lab1Text1
+	text_end
 
 Lab1Text2:
-	TX_FAR _Lab1Text2
-	db "@"
+	text_far _Lab1Text2
+	text_end
 
 Lab1Text3:
-	TX_FAR _Lab1Text3
-	db "@"
+	text_far _Lab1Text3
+	text_end
 
 Lab1Text4:
-	TX_FAR _Lab1Text4
-	db "@"
+	text_far _Lab1Text4
+	text_end
 
 Lab1Text5:
-	TX_FAR _Lab1Text5
-	db "@"
+	text_far _Lab1Text5
+	text_end

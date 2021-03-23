@@ -10,7 +10,7 @@ RedsHouse2F_ScriptPointers:
 
 RedsHouse2FScript0:
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ld a, PLAYER_DIR_UP
 	ld [wPlayerMovingDirection], a
 	ld a, 1
@@ -21,4 +21,5 @@ RedsHouse2FScript1:
 	ret
 
 RedsHouse2F_TextPointers:
-	db "@"
+
+	text_end ; unused

@@ -1,35 +1,30 @@
-# precompiled python
-*.pyc
-
-# compiled object file
+# compiled objects
 *.o
 
-# no binaries
-*.exe
+# compiled graphics
+*.1bpp
+*.2bpp
+*.pic
 
-# roms
+# compiled roms
 *.gbc
 *.gb
 
 # rgbds extras
+*.map
 *.sym
 
-# converted image data
-*.2bpp
-*.1bpp
-*.pic
+# tool binaries
+*.exe
 
-# swap files for vim
-.*.swp
+# precompiled python
+*.pyc
+*$py.class
 
-# no data from extras/
-*.json
-
-# for any of the poor souls with save game files in their working directory
+# save game files
 *.sgm
 *.sav
-*.sys
-
-# for vim configuration
-# url: http://www.vim.org/scripts/script.php?script_id=441
-.lvimrc
+*.rtc
+*.sn*
+*.sa*
+*.sg1

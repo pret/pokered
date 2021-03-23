@@ -9,21 +9,21 @@ PokemonTower1F_TextPointers:
 	dw PokemonTower1Text5
 
 PokemonTower1Text1:
-	TX_FAR _PokemonTower1Text1
-	db "@"
+	text_far _PokemonTower1Text1
+	text_end
 
 PokemonTower1Text2:
-	TX_FAR _PokemonTower1Text2
-	db "@"
+	text_far _PokemonTower1Text2
+	text_end
 
 PokemonTower1Text3:
-	TX_FAR _PokemonTower1Text3
-	db "@"
+	text_far _PokemonTower1Text3
+	text_end
 
 PokemonTower1Text4:
-	TX_FAR _PokemonTower1Text4
-	db "@"
+	text_far _PokemonTower1Text4
+	text_end
 
 PokemonTower1Text5:
-	TX_FAR _PokemonTower1Text5
-	db "@"
+	text_far _PokemonTower1Text5
+	text_end

@@ -1,7 +1,7 @@
 ; These routines manage gradual fading
 ; (e.g., entering a doorway)
 LoadGBPal::
-	ld a, [wMapPalOffset] ;tells if wCurMap is dark (requires HM5_FLASH?)
+	ld a, [wMapPalOffset] ; tells if wCurMap is dark (requires HM5_FLASH?)
 	ld b, a
 	ld hl, FadePal4
 	ld a, l
@@ -11,11 +11,11 @@ LoadGBPal::
 	dec h
 .ok
 	ld a, [hli]
-	ld [rBGP], a
+	ldh [rBGP], a
 	ld a, [hli]
-	ld [rOBP0], a
+	ldh [rOBP0], a
 	ld a, [hli]
-	ld [rOBP1], a
+	ldh [rOBP1], a
 	ret
 
 GBFadeInFromBlack::
@@ -29,11 +29,11 @@ GBFadeOutToWhite::
 
 GBFadeIncCommon:
 	ld a, [hli]
-	ld [rBGP], a
+	ldh [rBGP], a
 	ld a, [hli]
-	ld [rOBP0], a
+	ldh [rOBP0], a
 	ld a, [hli]
-	ld [rOBP1], a
+	ldh [rOBP1], a
 	ld c, 8
 	call DelayFrames
 	dec b
@@ -51,11 +51,11 @@ GBFadeInFromWhite::
 
 GBFadeDecCommon:
 	ld a, [hld]
-	ld [rOBP1], a
+	ldh [rOBP1], a
 	ld a, [hld]
-	ld [rOBP0], a
+	ldh [rOBP0], a
 	ld a, [hld]
-	ld [rBGP], a
+	ldh [rBGP], a
 	ld c, 8
 	call DelayFrames
 	dec b

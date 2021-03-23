@@ -1,95 +1,96 @@
 Music_LavenderTown:
-	musicheader 3, 1, Music_LavenderTown_Ch1
-	musicheader 1, 2, Music_LavenderTown_Ch2
-	musicheader 1, 3, Music_LavenderTown_Ch3
+	channel_count 3
+	channel 1, Music_LavenderTown_Ch1
+	channel 2, Music_LavenderTown_Ch2
+	channel 3, Music_LavenderTown_Ch3
 
-	db $3
+	db $3 ; unused
 
 Music_LavenderTown_Ch1:
 	tempo 160
-	volume $77
-	stereopanning $f
-	vibrato $6, $24
-	dutycycle $0
-	notetype $c, $b3
-	note __, 16
-	note __, 16
-	note __, 16
-	note __, 16
-Music_LavenderTown_branch_ef74c:
-	callchannel Music_LavenderTown_branch_ef7fd
-	intensity $93
+	volume 7, 7
+	stereo_panning FALSE, TRUE
+	vibrato 6, 2, 4
+	duty_cycle 0
+	note_type 12, 11, 3
+	rest 16
+	rest 16
+	rest 16
+	rest 16
+.mainloop:
+	sound_call .sub1
+	volume_envelope 9, 3
 	octave 5
 	note D_, 2
-	intensity $43
+	volume_envelope 4, 3
 	note D_, 2
-	intensity $93
+	volume_envelope 9, 3
 	note F#, 2
-	intensity $43
+	volume_envelope 4, 3
 	note F#, 2
-	intensity $93
+	volume_envelope 9, 3
 	note B_, 2
-	intensity $43
+	volume_envelope 4, 3
 	note B_, 2
-	intensity $93
+	volume_envelope 9, 3
 	note A_, 2
-	intensity $43
+	volume_envelope 4, 3
 	note A_, 2
-	callchannel Music_LavenderTown_branch_ef87f
-	intensity $93
-	intensity $93
+	sound_call .sub2
+	volume_envelope 9, 3
+	volume_envelope 9, 3
 	note F_, 2
-	intensity $83
+	volume_envelope 8, 3
 	note F_, 2
-	intensity $93
+	volume_envelope 9, 3
 	note D_, 2
-	intensity $43
+	volume_envelope 4, 3
 	note D_, 2
-	intensity $93
+	volume_envelope 9, 3
 	octave 4
 	note B_, 2
-	intensity $43
+	volume_envelope 4, 3
 	note B_, 2
-	intensity $93
+	volume_envelope 9, 3
 	note G_, 2
-	intensity $43
+	volume_envelope 4, 3
 	note G_, 2
-	callchannel Music_LavenderTown_branch_ef7fd
-	intensity $93
+	sound_call .sub1
+	volume_envelope 9, 3
 	octave 5
 	note D_, 2
-	intensity $43
+	volume_envelope 4, 3
 	note D_, 2
-	intensity $93
+	volume_envelope 9, 3
 	note G_, 2
-	intensity $43
+	volume_envelope 4, 3
 	note G_, 2
-	intensity $93
+	volume_envelope 9, 3
 	note B_, 2
-	intensity $43
+	volume_envelope 4, 3
 	note B_, 2
-	intensity $93
+	volume_envelope 9, 3
 	note G_, 2
-	intensity $43
+	volume_envelope 4, 3
 	note G_, 2
-	callchannel Music_LavenderTown_branch_ef87f
-	intensity $93
+	sound_call .sub2
+	volume_envelope 9, 3
 	octave 6
 	note C_, 2
-	intensity $43
+	volume_envelope 4, 3
 	note C_, 2
-	intensity $93
+	volume_envelope 9, 3
 	octave 5
 	note G_, 2
-	intensity $43
+	volume_envelope 4, 3
 	note G_, 2
-	intensity $93
+	volume_envelope 9, 3
 	note E_, 2
-	intensity $43
+	volume_envelope 4, 3
 	note E_, 2
-	intensity $93
+	volume_envelope 9, 3
 	note C_, 2
-	intensity $43
+	volume_envelope 4, 3
 	note C_, 2
 	octave 3
 	note F_, 2
@@ -102,7 +103,7 @@ Music_LavenderTown_branch_ef74c:
 	octave 3
 	note A_, 2
 	note F_, 2
-Music_LavenderTown_branch_ef7ca:
+.loop1:
 	octave 3
 	note C_, 2
 	note E_, 2
@@ -124,7 +125,7 @@ Music_LavenderTown_branch_ef7ca:
 	octave 3
 	note A_, 2
 	note F_, 2
-	loopchannel 2, Music_LavenderTown_branch_ef7ca
+	sound_loop 2, .loop1
 	note F#, 2
 	note A_, 2
 	octave 4
@@ -147,163 +148,163 @@ Music_LavenderTown_branch_ef7ca:
 	octave 3
 	note B_, 8
 	note B_, 8
-	loopchannel 0, Music_LavenderTown_branch_ef74c
+	sound_loop 0, .mainloop
 
-Music_LavenderTown_branch_ef7fd:
-	intensity $83
+.sub1:
+	volume_envelope 8, 3
 	octave 5
 	note C_, 2
-	intensity $43
+	volume_envelope 4, 3
 	note C_, 2
-	intensity $83
+	volume_envelope 8, 3
 	note G_, 2
-	intensity $43
+	volume_envelope 4, 3
 	note G_, 2
-	intensity $83
+	volume_envelope 8, 3
 	octave 6
 	note C_, 2
-	intensity $43
+	volume_envelope 4, 3
 	note C_, 2
-	intensity $83
+	volume_envelope 8, 3
 	octave 5
 	note G_, 2
-	intensity $43
+	volume_envelope 4, 3
 	note G_, 2
-	intensity $83
+	volume_envelope 8, 3
 	note D_, 2
-	intensity $43
+	volume_envelope 4, 3
 	note D_, 2
-	intensity $83
+	volume_envelope 8, 3
 	note A_, 2
-	intensity $43
+	volume_envelope 4, 3
 	note A_, 2
-	intensity $83
+	volume_envelope 8, 3
 	octave 6
 	note D_, 2
-	intensity $43
+	volume_envelope 4, 3
 	note D_, 2
-	intensity $83
+	volume_envelope 8, 3
 	octave 5
 	note A_, 2
-	intensity $43
+	volume_envelope 4, 3
 	note A_, 2
-	intensity $83
+	volume_envelope 8, 3
 	note E_, 2
-	intensity $43
+	volume_envelope 4, 3
 	note E_, 2
-	intensity $83
+	volume_envelope 8, 3
 	note B_, 2
-	intensity $43
+	volume_envelope 4, 3
 	note B_, 2
-	intensity $83
+	volume_envelope 8, 3
 	octave 6
 	note E_, 2
-	intensity $43
+	volume_envelope 4, 3
 	note E_, 2
-	intensity $83
+	volume_envelope 8, 3
 	octave 5
 	note B_, 2
-	intensity $43
+	volume_envelope 4, 3
 	note B_, 2
-	intensity $83
+	volume_envelope 8, 3
 	note C#, 2
-	intensity $43
+	volume_envelope 4, 3
 	note C#, 2
-	intensity $83
+	volume_envelope 8, 3
 	note G_, 2
-	intensity $43
+	volume_envelope 4, 3
 	note G_, 2
-	intensity $83
+	volume_envelope 8, 3
 	note A#, 2
-	intensity $43
+	volume_envelope 4, 3
 	note A#, 2
-	intensity $83
+	volume_envelope 8, 3
 	note G_, 2
-	intensity $43
+	volume_envelope 4, 3
 	note G_, 2
-	intensity $83
+	volume_envelope 8, 3
 	note C_, 2
-	intensity $43
+	volume_envelope 4, 3
 	note C_, 2
-	intensity $83
+	volume_envelope 8, 3
 	note F_, 2
-	intensity $43
+	volume_envelope 4, 3
 	note F_, 2
-	intensity $83
+	volume_envelope 8, 3
 	octave 6
 	note C_, 2
-	intensity $43
+	volume_envelope 4, 3
 	note C_, 2
-	intensity $83
+	volume_envelope 8, 3
 	octave 5
 	note F_, 2
-	intensity $43
+	volume_envelope 4, 3
 	note F_, 2
-	endchannel
+	sound_ret
 
-Music_LavenderTown_branch_ef87f:
-	intensity $93
+.sub2:
+	volume_envelope 9, 3
 	octave 5
 	note G_, 2
-	intensity $83
+	volume_envelope 8, 3
 	note G_, 2
-	intensity $83
+	volume_envelope 8, 3
 	note F_, 2
-	intensity $43
+	volume_envelope 4, 3
 	note F_, 2
-	intensity $83
+	volume_envelope 8, 3
 	note D_, 2
-	intensity $43
+	volume_envelope 4, 3
 	note D_, 2
-	intensity $83
+	volume_envelope 8, 3
 	note G_, 2
-	intensity $43
+	volume_envelope 4, 3
 	note G_, 2
-	endchannel
+	sound_ret
 
 Music_LavenderTown_Ch2:
-	dutycycle $1
-	vibrato $8, $24
-	stereopanning $ff
-Music_LavenderTown_branch_ef8a0:
-	notetype $c, $a3
+	duty_cycle 1
+	vibrato 8, 2, 4
+	stereo_panning TRUE, TRUE
+.loop1:
+	note_type 12, 10, 3
 	octave 5
 	note C_, 2
-	intensity $63
+	volume_envelope 6, 3
 	note C_, 2
-	intensity $a3
+	volume_envelope 10, 3
 	note G_, 2
-	intensity $63
+	volume_envelope 6, 3
 	note G_, 2
-	intensity $a3
+	volume_envelope 10, 3
 	note B_, 2
-	intensity $63
+	volume_envelope 6, 3
 	note B_, 2
-	intensity $a3
+	volume_envelope 10, 3
 	note F#, 2
-	intensity $63
+	volume_envelope 6, 3
 	note F#, 2
-	loopchannel 3, Music_LavenderTown_branch_ef8a0
-	intensity $a3
+	sound_loop 3, .loop1
+	volume_envelope 10, 3
 	note C_, 2
-	intensity $63
+	volume_envelope 6, 3
 	note C_, 2
-	intensity $a3
+	volume_envelope 10, 3
 	note G_, 2
-	intensity $63
+	volume_envelope 6, 3
 	note G_, 2
-	intensity $a3
+	volume_envelope 10, 3
 	note B_, 2
-	intensity $63
+	volume_envelope 6, 3
 	note B_, 2
-	intensity $a3
+	volume_envelope 10, 3
 	octave 6
 	note D_, 2
-	intensity $63
+	volume_envelope 6, 3
 	note D_, 2
-Music_LavenderTown_branch_ef8d7:
-	intensity $b5
-	callchannel Music_LavenderTown_branch_ef915
+.mainloop:
+	volume_envelope 11, 5
+	sound_call .sub1
 	octave 2
 	note F#, 4
 	octave 3
@@ -321,7 +322,7 @@ Music_LavenderTown_branch_ef8d7:
 	octave 2
 	note B_, 4
 	note G_, 4
-	callchannel Music_LavenderTown_branch_ef915
+	sound_call .sub1
 	octave 2
 	note G_, 4
 	octave 3
@@ -337,7 +338,7 @@ Music_LavenderTown_branch_ef8d7:
 	note G_, 4
 	octave 4
 	note C_, 4
-	intensity $b7
+	volume_envelope 11, 7
 	octave 2
 	note F_, 16
 	note C_, 16
@@ -348,14 +349,14 @@ Music_LavenderTown_branch_ef8d7:
 	note G_, 16
 	octave 1
 	note G_, 8
-	intensity $57
+	volume_envelope 5, 7
 	octave 5
 	note D_, 1
 	note F_, 1
 	note G_, 6
-	loopchannel 0, Music_LavenderTown_branch_ef8d7
+	sound_loop 0, .mainloop
 
-Music_LavenderTown_branch_ef915:
+.sub1:
 	octave 2
 	note C_, 4
 	note G_, 4
@@ -384,28 +385,28 @@ Music_LavenderTown_branch_ef915:
 	note C_, 4
 	note A_, 4
 	note C_, 4
-	endchannel
+	sound_ret
 
 Music_LavenderTown_Ch3:
-	vibrato $12, $24
-	notetype $c, $13
-	stereopanning $f0
-	note __, 16
-	note __, 16
-	note __, 16
-	note __, 8
+	vibrato 18, 2, 4
+	note_type 12, 1, 3
+	stereo_panning TRUE, FALSE
+	rest 16
+	rest 16
+	rest 16
+	rest 8
 	octave 5
 	note E_, 4
 	note F_, 4
-Music_LavenderTown_branch_ef941:
-	intensity $12
+.mainloop:
+	volume_envelope 1, 2
 	octave 5
 	note G_, 4
-	note __, 4
+	rest 4
 	note G_, 4
-	note __, 4
+	rest 4
 	note E_, 4
-	note __, 4
+	rest 4
 	note E_, 4
 	note F_, 4
 	note G_, 4
@@ -413,7 +414,7 @@ Music_LavenderTown_branch_ef941:
 	note E_, 4
 	note B_, 4
 	note C#, 8
-	note __, 2
+	rest 2
 	note C#, 2
 	note D_, 2
 	note E_, 2
@@ -433,11 +434,11 @@ Music_LavenderTown_branch_ef941:
 	note E_, 2
 	note F_, 2
 	note G_, 4
-	note __, 4
+	rest 4
 	note G_, 4
-	note __, 4
+	rest 4
 	note E_, 4
-	note __, 4
+	rest 4
 	note E_, 4
 	note F_, 4
 	note G_, 4
@@ -445,7 +446,7 @@ Music_LavenderTown_branch_ef941:
 	note E_, 4
 	note B_, 4
 	note C#, 8
-	note __, 2
+	rest 2
 	note C#, 2
 	note D_, 2
 	note E_, 2
@@ -458,8 +459,8 @@ Music_LavenderTown_branch_ef941:
 	note D_, 2
 	note C_, 16
 	note C_, 12
-	note __, 4
-	intensity $24
+	rest 4
+	volume_envelope 2, 4
 	note A_, 2
 	note G_, 2
 	note A_, 2
@@ -482,11 +483,11 @@ Music_LavenderTown_branch_ef941:
 	note G_, 4
 	octave 6
 	note F_, 4
-	notetype $8, $24
+	note_type 8, 2, 4
 	note E_, 2
 	note F_, 2
 	note E_, 2
-	notetype $c, $24
+	note_type 12, 2, 4
 	note D_, 4
 	note C_, 4
 	octave 5
@@ -511,4 +512,4 @@ Music_LavenderTown_branch_ef941:
 	note B_, 12
 	note E_, 2
 	note F_, 2
-	loopchannel 0, Music_LavenderTown_branch_ef941
+	sound_loop 0, .mainloop

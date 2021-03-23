@@ -13,51 +13,51 @@ LavenderTown_TextPointers:
 	dw LavenderTownText9
 
 LavenderTownText1:
-	TX_ASM
+	text_asm
 	ld hl, LavenderTownText_4413c
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
 	ld hl, LavenderTownText_44146
-	jr nz, .asm_40831
+	jr nz, .got_text
 	ld hl, LavenderTownText_44141
-.asm_40831
+.got_text
 	call PrintText
 	jp TextScriptEnd
 
 LavenderTownText_4413c:
-	TX_FAR _LavenderTownText_4413c
-	db "@"
+	text_far _LavenderTownText_4413c
+	text_end
 
 LavenderTownText_44141:
-	TX_FAR _LavenderTownText_44141
-	db "@"
+	text_far _LavenderTownText_44141
+	text_end
 
 LavenderTownText_44146:
-	TX_FAR _LavenderTownText_44146
-	db "@"
+	text_far _LavenderTownText_44146
+	text_end
 
 LavenderTownText2:
-	TX_FAR _LavenderTownText2
-	db "@"
+	text_far _LavenderTownText2
+	text_end
 
 LavenderTownText3:
-	TX_FAR _LavenderTownText3
-	db "@"
+	text_far _LavenderTownText3
+	text_end
 
 LavenderTownText4:
-	TX_FAR _LavenderTownText4
-	db "@"
+	text_far _LavenderTownText4
+	text_end
 
 LavenderTownText5:
-	TX_FAR _LavenderTownText5
-	db "@"
+	text_far _LavenderTownText5
+	text_end
 
 LavenderTownText8:
-	TX_FAR _LavenderTownText8
-	db "@"
+	text_far _LavenderTownText8
+	text_end
 
 LavenderTownText9:
-	TX_FAR _LavenderTownText9
-	db "@"
+	text_far _LavenderTownText9
+	text_end
