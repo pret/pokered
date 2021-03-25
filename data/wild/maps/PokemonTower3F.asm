@@ -1,5 +1,5 @@
 TowerMons3:
-	db 10 ; grass encounter rate
+	def_grass_wildmons 10 ; encounter rate
 	db 20, GASTLY
 	db 21, GASTLY
 	db 22, GASTLY
@@ -10,5 +10,7 @@ TowerMons3:
 	db 20, CUBONE
 	db 22, CUBONE
 	db 25, HAUNTER
+	end_grass_wildmons
 
-	db 0 ; water encounter rate
+	def_water_wildmons 0 ; encounter rate
+	end_water_wildmons

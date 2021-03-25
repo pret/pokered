@@ -5,6 +5,7 @@ ENDM
 
 ; the appearance of towns and routes in the town map
 ExternalMapEntries:
+	table_width 3, ExternalMapEntries
 	; x, y, name
 	external_map  2, 11, PalletTownName
 	external_map  2,  8, ViridianCityName
@@ -43,6 +44,7 @@ ExternalMapEntries:
 	external_map  0,  6, Route23Name
 	external_map 10,  1, Route24Name
 	external_map 11,  0, Route25Name
+	assert_table_length FIRST_INDOOR_MAP
 
 
 internal_map: MACRO

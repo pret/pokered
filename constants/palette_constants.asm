@@ -70,3 +70,4 @@ SET_PAL_DEFAULT EQU $ff
 	const PAL_BADGE     ; $22
 	const PAL_CAVE      ; $23
 	const PAL_GAMEFREAK ; $24
+NUM_SGB_PALS EQU const_value

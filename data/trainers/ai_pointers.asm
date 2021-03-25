@@ -1,4 +1,5 @@
 TrainerAIPointers:
+	table_width 3, TrainerAIPointers
 	; one entry per trainer class
 	; first byte, number of times (per Pokémon) it can occur
 	; next two bytes, pointer to AI subroutine for trainer class
@@ -50,3 +51,4 @@ TrainerAIPointers:
 	dbw 3, GenericAI
 	dbw 2, AgathaAI ; agatha
 	dbw 1, LanceAI ; lance
+	assert_table_length NUM_TRAINERS

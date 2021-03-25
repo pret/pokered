@@ -7,6 +7,7 @@ tileset: MACRO
 ENDM
 
 Tilesets:
+	table_width 12, Tilesets
 	; block, gfx, coll, 3 counter tiles, grass tile, animations
 	tileset Overworld_Block,   Overworld_GFX,   Overworld_Coll,   $FF,$FF,$FF, $52, TILEANIM_WATER_FLOWER
 	tileset RedsHouse1_Block,  RedsHouse1_GFX,  RedsHouse1_Coll,  $FF,$FF,$FF, $FF, TILEANIM_NONE
@@ -32,3 +33,4 @@ Tilesets:
 	tileset Club_Block,        Club_GFX,        Club_Coll,        $07,$17,$FF, $FF, TILEANIM_NONE
 	tileset Facility_Block,    Facility_GFX,    Facility_Coll,    $12,$FF,$FF, $FF, TILEANIM_WATER
 	tileset Plateau_Block,     Plateau_GFX,     Plateau_Coll,     $FF,$FF,$FF, $45, TILEANIM_WATER
+	assert_table_length NUM_TILESETS

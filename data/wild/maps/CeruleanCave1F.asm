@@ -1,5 +1,5 @@
 DungeonMons1:
-	db 10 ; grass encounter rate
+	def_grass_wildmons 10 ; encounter rate
 	db 46, GOLBAT
 	db 46, HYPNO
 	db 46, MAGNETON
@@ -15,5 +15,7 @@ ENDC
 	db 52, PARASECT
 	db 53, RAICHU
 	db 53, DITTO
+	end_grass_wildmons
 
-	db 0 ; water encounter rate
+	def_water_wildmons 0 ; encounter rate
+	end_water_wildmons

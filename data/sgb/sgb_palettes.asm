@@ -1,5 +1,6 @@
 SuperPalettes:
 ; entries correspond to PAL_* constants
+	table_width 2 * 4, SuperPalettes
 	RGB 31,29,31, 21,28,11, 20,26,31, 03,02,02 ; PAL_ROUTE
 	RGB 31,29,31, 25,28,27, 20,26,31, 03,02,02 ; PAL_PALLET
 	RGB 31,29,31, 17,26,03, 20,26,31, 03,02,02 ; PAL_VIRIDIAN
@@ -49,3 +50,4 @@ ENDC
 	RGB 31,29,31, 30,22,17, 11,15,23, 03,02,02 ; PAL_BADGE
 	RGB 31,29,31, 21,14,09, 18,24,22, 03,02,02 ; PAL_CAVE
 	RGB 31,29,31, 31,28,14, 24,20,10, 03,02,02 ; PAL_GAMEFREAK
+	assert_table_length NUM_SGB_PALS

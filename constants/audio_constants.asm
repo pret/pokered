@@ -13,6 +13,7 @@
 	const A_ ; 9
 	const A# ; A
 	const B_ ; B
+NUM_NOTES EQU const_value
 
 ; channel
 ; Audio[1|2|3]_HWChannelBaseAddresses, Audio[1|2|3]_HWChannelDisableMasks,

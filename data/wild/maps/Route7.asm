@@ -1,5 +1,5 @@
 Route7Mons:
-	db 15 ; grass encounter rate
+	def_grass_wildmons 15 ; encounter rate
 	db 19, PIDGEY
 IF DEF(_RED)
 	db 19, ODDISH
@@ -23,5 +23,7 @@ IF DEF(_BLUE)
 	db 19, MEOWTH
 	db 20, MEOWTH
 ENDC
+	end_grass_wildmons
 
-	db 0 ; water encounter rate
+	def_water_wildmons 0 ; encounter rate
+	end_water_wildmons

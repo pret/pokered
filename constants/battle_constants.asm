@@ -1,9 +1,36 @@
 MAX_LEVEL EQU 100
 
-NUM_MOVES     EQU 4
-NUM_STATS     EQU 5
-NUM_STAT_MODS EQU 8
-NUM_DVS       EQU 2
+NUM_MOVES EQU 4
+
+; VitaminStats indexes (see data/battle/stat_names.asm)
+	const_def
+	const STAT_HEALTH
+	const STAT_ATTACK
+	const STAT_DEFENSE
+	const STAT_SPEED
+	const STAT_SPECIAL
+NUM_STATS EQU const_value
+
+; StatModTextStrings indexes (see data/battle/stat_mod_names.asm)
+	const_def
+	const MOD_ATTACK
+	const MOD_DEFENSE
+	const MOD_SPEED
+	const MOD_SPECIAL
+	const MOD_ACCURACY
+	const MOD_EVASION
+	const_skip 2
+NUM_STAT_MODS EQU const_value
+
+; Moves struct fields (see data/moves/moves.asm)
+rsreset
+MOVE_ANIM   rb
+MOVE_EFFECT rb
+MOVE_POWER  rb
+MOVE_TYPE   rb
+MOVE_ACC    rb
+MOVE_PP     rb
+MOVE_LENGTH EQU _RS
 
 ; D733 flags
 BIT_TEST_BATTLE EQU 0

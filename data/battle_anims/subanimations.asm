@@ -1,4 +1,5 @@
 SubanimationPointers:
+	table_width 2, SubanimationPointers
 	dw Subanimation00
 	dw Subanimation01
 	dw Subanimation02
@@ -85,6 +86,7 @@ SubanimationPointers:
 	dw Subanimation53
 	dw Subanimation54
 	dw Subanimation55
+	assert_table_length NUM_SUBANIMS
 
 ; format:
 ; subanim type, count

@@ -259,7 +259,7 @@ AddPartyMon_WriteMovePP:
 	push de
 	push bc
 	ld hl, Moves
-	ld bc, MoveEnd - Moves
+	ld bc, MOVE_LENGTH
 	call AddNTimes
 	ld de, wcd6d
 	ld a, BANK(Moves)

@@ -1,5 +1,5 @@
 Route22Mons:
-	db 25 ; grass encounter rate
+	def_grass_wildmons 25 ; encounter rate
 	db  3, RATTATA
 IF DEF(_RED)
 	db  3, NIDORAN_M
@@ -23,5 +23,7 @@ IF DEF(_BLUE)
 	db  3, NIDORAN_M
 	db  4, NIDORAN_M
 ENDC
+	end_grass_wildmons
 
-	db 0 ; water encounter rate
+	def_water_wildmons 0 ; encounter rate
+	end_water_wildmons

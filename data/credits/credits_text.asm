@@ -1,5 +1,6 @@
 CreditsTextPointers:
 ; entries correspond to CRED_* constants
+	table_width 2, CreditsTextPointers
 	dw CredVersion
 	dw CredTajiri
 	dw CredTaOota
@@ -64,6 +65,7 @@ CreditsTextPointers:
 	dw CredFukui
 	dw CredClub
 	dw CredPAAD
+	assert_table_length NUM_CRED_STRINGS
 
 CredVersion: ; this 1 byte difference makes all bank addresses offset by 1 in the blue version
 IF DEF(_RED)

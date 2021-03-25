@@ -1,4 +1,5 @@
 MapSongBanks::
+	table_width 2, MapSongBanks
 	db MUSIC_PALLET_TOWN, BANK(Music_PalletTown) ; PALLET_TOWN
 	db MUSIC_CITIES1, BANK(Music_Cities1) ; VIRIDIAN_CITY
 	db MUSIC_CITIES1, BANK(Music_Cities1) ; PEWTER_CITY
@@ -247,3 +248,4 @@ MapSongBanks::
 	db MUSIC_GYM, BANK(Music_Gym) ; LORELEIS_ROOM
 	db MUSIC_DUNGEON1, BANK(Music_Dungeon1) ; BRUNOS_ROOM
 	db MUSIC_POKEMON_TOWER, BANK(Music_PokemonTower) ; AGATHAS_ROOM
+	assert_table_length NUM_MAPS

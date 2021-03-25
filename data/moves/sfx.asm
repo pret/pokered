@@ -1,4 +1,5 @@
 MoveSoundTable:
+	table_width 3, MoveSoundTable
 	; ID, pitch mod, tempo mod
 	db SFX_POUND,              $00, $80 ; POUND
 	db SFX_BATTLE_0C,          $10, $80 ; KARATE_CHOP
@@ -165,4 +166,5 @@ MoveSoundTable:
 	db SFX_NOT_VERY_EFFECTIVE, $01, $ff ; SLASH
 	db SFX_BATTLE_2C,          $d8, $04 ; SUBSTITUTE
 	db SFX_BATTLE_0B,          $00, $80 ; STRUGGLE
+	assert_table_length NUM_ATTACKS
 	db SFX_BATTLE_0B,          $00, $80

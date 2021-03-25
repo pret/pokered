@@ -1,4 +1,5 @@
 MonPartyData:
+	table_width 1, MonPartyData
 	dn ICON_GRASS,     ICON_GRASS     ; Bulbasaur / Ivysaur
 	dn ICON_GRASS,     ICON_MON       ; Venusaur / Charmander
 	dn ICON_MON,       ICON_MON       ; Charmeleon / Charizard
@@ -75,3 +76,4 @@ MonPartyData:
 	dn ICON_SNAKE,     ICON_SNAKE     ; Dratini / Dragonair
 	dn ICON_SNAKE,     ICON_MON       ; Dragonite / Mewtwo
 	dn ICON_MON,       0              ; Mew / padding
+	assert_table_length (NUM_POKEMON + 1) / 2

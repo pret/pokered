@@ -92,6 +92,9 @@ SAFARI_ROCK           EQU $16 ; overload
 	const MAX_ETHER     ; $51
 	const ELIXER        ; $52
 	const MAX_ELIXER    ; $53
+NUM_ITEMS EQU const_value - 1
+
+; elevator floors use item IDs
 	const FLOOR_B2F     ; $54
 	const FLOOR_B1F     ; $55
 	const FLOOR_1F      ; $56
@@ -106,6 +109,7 @@ SAFARI_ROCK           EQU $16 ; overload
 	const FLOOR_10F     ; $5F
 	const FLOOR_11F     ; $60
 	const FLOOR_B4F     ; $61
+NUM_FLOORS EQU const_value - 1 - NUM_ITEMS
 
 	const_next $C4
 

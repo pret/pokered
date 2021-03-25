@@ -1,5 +1,5 @@
 TunnelMonsB1:
-	db 15 ; grass encounter rate
+	def_grass_wildmons 15 ; encounter rate
 	db 16, ZUBAT
 	db 17, ZUBAT
 	db 17, GEODUDE
@@ -10,5 +10,7 @@ TunnelMonsB1:
 	db 17, MACHOP
 	db 13, ONIX
 	db 15, ONIX
+	end_grass_wildmons
 
-	db 0 ; water encounter rate
+	def_water_wildmons 0 ; encounter rate
+	end_water_wildmons

@@ -1,5 +1,5 @@
 Route24Mons:
-	db 25 ; grass encounter rate
+	def_grass_wildmons 25 ; encounter rate
 IF DEF(_RED)
 	db  7, WEEDLE
 	db  8, KAKUNA
@@ -21,5 +21,7 @@ ENDC
 	db 13, PIDGEY
 	db  8, ABRA
 	db 12, ABRA
+	end_grass_wildmons
 
-	db 0 ; water encounter rate
+	def_water_wildmons 0 ; encounter rate
+	end_water_wildmons

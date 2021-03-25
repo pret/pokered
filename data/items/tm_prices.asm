@@ -1,5 +1,6 @@
 TechnicalMachinePrices:
 ; In thousands (nybbles).
+	table_width 1, TechnicalMachinePrices
 	dn 3, 2  ; TM01, TM02
 	dn 2, 1  ; TM03, TM04
 	dn 3, 4  ; TM05, TM06
@@ -25,3 +26,4 @@ TechnicalMachinePrices:
 	dn 2, 4  ; TM45, TM46
 	dn 3, 4  ; TM47, TM48
 	dn 4, 2  ; TM49, TM50
+	assert_table_length (NUM_TMS + 1) / 2

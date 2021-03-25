@@ -1,5 +1,5 @@
 ForestMons:
-	db 8 ; grass encounter rate
+	def_grass_wildmons 8 ; encounter rate
 IF DEF(_RED)
 	db  4, WEEDLE
 	db  5, KAKUNA
@@ -22,5 +22,7 @@ IF DEF(_BLUE)
 ENDC
 	db  3, PIKACHU
 	db  5, PIKACHU
+	end_grass_wildmons
 
-	db 0 ; water encounter rate
+	def_water_wildmons 0 ; encounter rate
+	end_water_wildmons

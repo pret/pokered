@@ -1,3 +1,29 @@
+; base data struct members (see data/pokemon/base_stats/*.asm)
+rsreset
+BASE_DEX_NO      rb
+BASE_STATS       rb NUM_STATS
+rsset BASE_STATS
+BASE_HP          rb
+BASE_ATK         rb
+BASE_DEF         rb
+BASE_SPD         rb
+BASE_SPC         rb
+BASE_TYPES       rw
+rsset BASE_TYPES
+BASE_TYPE_1      rb
+BASE_TYPE_2      rb
+BASE_CATCH_RATE  rb
+BASE_EXP         rb
+BASE_PIC_SIZE    rb
+BASE_FRONTPIC    rw
+BASE_BACKPIC     rw
+BASE_MOVES       rb NUM_MOVES
+BASE_GROWTH_RATE rb
+BASE_TMHM        rb (NUM_TM_HM + 7) / 8
+                 rb_skip
+BASE_DATA_SIZE EQU _RS
+
+
 PARTY_LENGTH EQU 6
 
 MONS_PER_BOX EQU 20
@@ -39,3 +65,8 @@ EVOLUTION_SIZE EQU 4
 	const GROWTH_MEDIUM_SLOW
 	const GROWTH_FAST
 	const GROWTH_SLOW
+NUM_GROWTH_RATES EQU const_value
+
+; wild data (see data/wild/maps/*.asm)
+NUM_WILDMONS EQU 10
+WILDDATA_LENGTH EQU 1 + NUM_WILDMONS * 2

@@ -1,5 +1,5 @@
 IslandMonsB2:
-	db 10 ; grass encounter rate
+	def_grass_wildmons 10 ; encounter rate
 	db 30, SEEL
 IF DEF(_RED)
 	db 30, SLOWPOKE
@@ -23,5 +23,7 @@ IF DEF(_BLUE)
 	db 30, GOLBAT
 	db 37, GOLDUCK
 ENDC
+	end_grass_wildmons
 
-	db 0 ; water encounter rate
+	def_water_wildmons 0 ; encounter rate
+	end_water_wildmons

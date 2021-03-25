@@ -1,7 +1,8 @@
 WaterMons:
-	db 0 ; grass encounter rate
+	def_grass_wildmons 0 ; encounter rate
+	end_grass_wildmons
 
-	db 5 ; water encounter rate
+	def_water_wildmons 5 ; encounter rate
 	db  5, TENTACOOL
 	db 10, TENTACOOL
 	db 15, TENTACOOL
