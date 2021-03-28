@@ -633,17 +633,17 @@ Music_MewtwoStage_branch_49043:
 	sound_ret
 
 ; unreferenced
-;	note_type 2, 12, 8
-;	octave 3
-;	note B_, 1
-;	volume_envelope 10, 8
-;	note G_, 1
-;	volume_envelope 7, 8
-;	note D#, 1
-;	volume_envelope 4, 8
-;	octave 2
-;	note B_, 1
-;	sound_ret
+	note_type 2, 12, 8
+	octave 3
+	note B_, 1
+	volume_envelope 10, 8
+	note G_, 1
+	volume_envelope 7, 8
+	note D#, 1
+	volume_envelope 4, 8
+	octave 2
+	note B_, 1
+	sound_ret
 
 Music_MewtwoStage_branch_49062:
 	note_type 3, 12, 8

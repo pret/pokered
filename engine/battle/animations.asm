@@ -2618,7 +2618,7 @@ PlayApplyingAttackSound:
 ; play a different sound depending if move is not very effective, neutral, or super-effective
 ; don't play any sound at all if move is ineffective
 	call WaitForSoundToFinish
-	ld a, [wDamageMultipliers] ; effectiveness
+	ld a, [wDamageMultipliers]
 	and $7f
 	ret z
 	cp 10

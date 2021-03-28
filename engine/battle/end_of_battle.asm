@@ -45,7 +45,7 @@ EndOfBattle:
 	predef EvolutionAfterBattle
 .resetVariables
 	xor a
-	ld [wDanger], a ;disable low health alarm
+	ld [wLowHealthAlarm], a ;disable low health alarm
 	ld [wChannelSoundIDs + Ch5], a
 	ld [wIsInBattle], a
 	ld [wBattleType], a

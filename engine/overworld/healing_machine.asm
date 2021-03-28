@@ -1,7 +1,4 @@
 AnimateHealingMachine:
-	xor a
-	call PlayMusic
-
 	ld de, PokeCenterFlashingMonitorAndHealBall
 	ld hl, vChars0 tile $7c
 	lb bc, BANK(PokeCenterFlashingMonitorAndHealBall), 3 ; should be 2
@@ -19,6 +16,9 @@ AnimateHealingMachine:
 	ld de, PokeCenterOAMData
 	call CopyHealingMachineOAM
 
+	ld a, 4
+	call StopMusic
+	call WaitForSongToFinish
 ;	ld a, 4
 ;	ld [wAudioFadeOutControl], a
 ;	ld a, SFX_STOP_ALL_MUSIC

@@ -131,11 +131,15 @@ OakSpeech:
 	ld a, 0 ; BANK(Music_PalletTown)
 	ld [wAudioROMBank], a
 	ld [wAudioSavedROMBank], a
+
 	ld a, 10
-	ld [wAudioFadeOutControl], a
-	ld a, SFX_STOP_ALL_MUSIC
-	ld [wNewSoundID], a
-	call PlaySound
+	call StopMusic
+;	ld a, 10
+;	ld [wAudioFadeOutControl], a
+;	ld a, SFX_STOP_ALL_MUSIC
+;	ld [wNewSoundID], a
+;	call PlaySound
+
 	pop af
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a

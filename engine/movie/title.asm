@@ -182,9 +182,6 @@ ENDC
 	ret
 
 .finishedBouncingPokemonLogo
-	xor a
-	ldh [hSCY], a
-
 	call LoadScreenTilesFromBuffer1
 	ld c, 36
 	call DelayFrames

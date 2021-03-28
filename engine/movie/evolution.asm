@@ -7,7 +7,7 @@ EvolveMon:
 	ld a, [wd0b5]
 	push af
 	xor a
-	ld [wDanger], a
+	ld [wLowHealthAlarm], a
 	ld [wChannelSoundIDs + Ch5], a
 	dec a ; SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a

@@ -771,10 +771,9 @@ HandleBlackOut::
 	jp SpecialEnterMap
 
 StopMusic::
+	ld [wMusicFade], a
 	xor a
 	ld [wMusicFadeID], a
-	ld a, 1
-	ld [wMusicFade], a
 .wait0
 	ld a, [wMusicFadeCount]
 	and a

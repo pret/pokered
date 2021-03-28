@@ -236,7 +236,7 @@ UpdateChannels:
 	dw .Channel8
 
 .Channel1:
-	ld a, [wDanger] ; XXX
+	ld a, [wLowHealthAlarm]
 	bit DANGER_ON_F, a
 	ret nz
 .Channel5:
@@ -527,7 +527,7 @@ _CheckSFX:
 	ret
 
 PlayDanger:
-	ld a, [wDanger] ; XXX
+	ld a, [wLowHealthAlarm]
 	bit DANGER_ON_F, a
 	ret z
 
@@ -575,7 +575,7 @@ PlayDanger:
 .noreset
 	; Make sure the danger sound is kept on
 	or 1 << DANGER_ON_F
-	ld [wDanger], a ; XXX
+	ld [wLowHealthAlarm], a
 
 	; Enable channel 1 if it's off
 	ld a, [wSoundOutput]

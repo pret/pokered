@@ -51,7 +51,7 @@ PlayDefaultMusicCommon::
 	ld a, [wMapMusicSoundID]
 	ld b, a
 ;	call CompareMapMusicBankWithCurrentBank
-	jr c, .next4
+;	jr c, .next4
 
 .next3
 	ld a, [wLastMusicSoundID]
@@ -100,7 +100,7 @@ OpenSRAMForSound::
 	ld [MBC1SRamBank], a
 	ret
 
-;MapSetup_Sound_Off::
+;InitSound::
 ;	push hl
 ;	push de
 ;	push bc
@@ -110,11 +110,11 @@ OpenSRAMForSound::
 ;
 ;	ldh a, [hLoadedROMBank]
 ;	push af
-;	ld a, BANK(_MapSetup_Sound_Off)
+;	ld a, BANK(_InitSound)
 ;	ldh [hLoadedROMBank], a
 ;	ld [MBC1RomBank], a
 ;
-;	call _MapSetup_Sound_Off
+;	call _InitSound
 ;
 ;	pop af
 ;	ldh [hLoadedROMBank], a
@@ -155,7 +155,7 @@ UpdateSound::
 	ret
 
 _LoadMusicByte::
-; wCurMusicByte = [a:de]
+; [wCurMusicByte] = [a:de]
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 
@@ -300,7 +300,7 @@ endr
 
 PlaySFX::
 ; Play sound effect de.
-; Sound effects are ordered by priority (lowest to highest)
+; Sound effects are ordered by priority (highest to lowest)
 
 	push hl
 	push de
@@ -348,7 +348,7 @@ WaitPlaySFX::
 ; Wait for sound to finish playing
 WaitForSoundToFinish::
 WaitSFX::
-	ld a, [wDanger]
+	ld a, [wLowHealthAlarm]
 	and a
 	ret nz
 	ld a, [wSFXDontWait]

@@ -13,18 +13,24 @@ INCLUDE "audio/headers/sfxheaders2.asm"
 SECTION "Sound Effect Headers 3", ROMX
 INCLUDE "audio/headers/sfxheaders3.asm"
 
+
 SECTION "Sound Effects 1", ROMX
 
-INCLUDE "audio/sfx/get_item1_1.asm"
-INCLUDE "audio/sfx/get_item2_1.asm"
-INCLUDE "audio/sfx/tink_1.asm"
-INCLUDE "audio/sfx/heal_hp_1.asm"
-INCLUDE "audio/sfx/heal_ailment_1.asm"
 INCLUDE "audio/sfx/start_menu_1.asm"
+INCLUDE "audio/sfx/pokeflute.asm"
+INCLUDE "audio/sfx/cut_1.asm"
+INCLUDE "audio/sfx/go_inside_1.asm"
+INCLUDE "audio/sfx/swap_1.asm"
+INCLUDE "audio/sfx/tink_1.asm"
+INCLUDE "audio/sfx/59_1.asm"
+INCLUDE "audio/sfx/purchase_1.asm"
+INCLUDE "audio/sfx/collision_1.asm"
+INCLUDE "audio/sfx/go_outside_1.asm"
 INCLUDE "audio/sfx/press_ab_1.asm"
-INCLUDE "audio/sfx/pokedex_rating_1.asm"
-INCLUDE "audio/sfx/get_key_item_1.asm"
+INCLUDE "audio/sfx/save_1.asm"
+INCLUDE "audio/sfx/heal_hp_1.asm"
 INCLUDE "audio/sfx/poisoned_1.asm"
+INCLUDE "audio/sfx/heal_ailment_1.asm"
 INCLUDE "audio/sfx/trade_machine_1.asm"
 INCLUDE "audio/sfx/turn_on_pc_1.asm"
 INCLUDE "audio/sfx/turn_off_pc_1.asm"
@@ -43,26 +49,22 @@ INCLUDE "audio/sfx/arrow_tiles_1.asm"
 INCLUDE "audio/sfx/push_boulder_1.asm"
 INCLUDE "audio/sfx/ss_anne_horn_1.asm"
 INCLUDE "audio/sfx/withdraw_deposit_1.asm"
-INCLUDE "audio/sfx/cut_1.asm"
-INCLUDE "audio/sfx/go_inside_1.asm"
-INCLUDE "audio/sfx/swap_1.asm"
-INCLUDE "audio/sfx/59_1.asm"
-INCLUDE "audio/sfx/purchase_1.asm"
-INCLUDE "audio/sfx/collision_1.asm"
-INCLUDE "audio/sfx/go_outside_1.asm"
-INCLUDE "audio/sfx/save_1.asm"
-INCLUDE "audio/sfx/pokeflute.asm"
 INCLUDE "audio/sfx/safari_zone_pa.asm"
+
+INCLUDE "audio/sfx/get_item1_1.asm"
+INCLUDE "audio/sfx/pokedex_rating_1.asm"
+INCLUDE "audio/sfx/get_item2_1.asm"
+INCLUDE "audio/sfx/get_key_item_1.asm"
+
 
 SECTION "Sound Effects 2", ROMX
 
-INCLUDE "audio/sfx/level_up.asm"
+INCLUDE "audio/sfx/silph_scope.asm"
 INCLUDE "audio/sfx/ball_toss.asm"
 INCLUDE "audio/sfx/ball_poof.asm"
 INCLUDE "audio/sfx/faint_thud.asm"
 INCLUDE "audio/sfx/run.asm"
 INCLUDE "audio/sfx/dex_page_added.asm"
-INCLUDE "audio/sfx/caught_mon.asm"
 INCLUDE "audio/sfx/peck.asm"
 INCLUDE "audio/sfx/faint_fall.asm"
 INCLUDE "audio/sfx/battle_09.asm"
@@ -111,7 +113,10 @@ INCLUDE "audio/sfx/battle_33.asm"
 INCLUDE "audio/sfx/battle_34.asm"
 INCLUDE "audio/sfx/battle_35.asm"
 INCLUDE "audio/sfx/battle_36.asm"
-INCLUDE "audio/sfx/silph_scope.asm"
+
+INCLUDE "audio/sfx/level_up.asm"
+INCLUDE "audio/sfx/caught_mon.asm"
+
 
 SECTION "Sound Effects 3", ROMX
 
@@ -184,6 +189,7 @@ SECTION "Songs 2", ROMX
 	inc_section "crysaudio/music/route3.asm"
 	inc_section "crysaudio/music/route12.asm"
 	inc_section "crysaudio/music/kantogymbattle.asm"
+	inc_section "crysaudio/music/kantotrainerbattle.asm"
 	inc_section "crysaudio/music/kantowildbattle.asm"
 	inc_section "crysaudio/music/pokemoncenter.asm"
 	inc_section "crysaudio/music/looklass.asm"
@@ -278,7 +284,6 @@ SECTION "Songs 5", ROMX
 	inc_section "crysaudio/music/suicunebattle.asm"
 	inc_section "crysaudio/music/battletowerlobby.asm"
 	inc_section "crysaudio/music/mobilecenter.asm"
-	inc_section "crysaudio/music/kantotrainerbattle.asm"
 
 
 SECTION "Extra Songs 1", ROMX
@@ -287,6 +292,7 @@ SECTION "Extra Songs 1", ROMX
 	inc_section "crysaudio/music/clair.asm"
 	inc_section "crysaudio/music/mobileadapter.asm"
 
+
 SECTION "Extra Songs 2", ROMX
 
 	inc_section "crysaudio/music/postcredits.asm"
@@ -294,35 +300,6 @@ SECTION "Extra Songs 2", ROMX
 
 SECTION "RBY Songs 1", ROMX
 
-	inc_section "crysaudio/music/RBY/bikeriding.asm"
-	inc_section "crysaudio/music/RBY/dungeon1.asm"
-	inc_section "crysaudio/music/RBY/gamecorner.asm"
-	inc_section "crysaudio/music/RBY/titlescreen.asm"
-	inc_section "crysaudio/music/RBY/dungeon2.asm"
-	inc_section "crysaudio/music/RBY/dungeon3.asm"
-	inc_section "crysaudio/music/RBY/cinnabarmansion.asm"
-	inc_section "crysaudio/music/RBY/oakslab.asm"
-	inc_section "crysaudio/music/RBY/pokemontower.asm"
-	inc_section "crysaudio/music/RBY/silphco.asm"
-	inc_section "crysaudio/music/RBY/meeteviltrainer.asm"
-	inc_section "crysaudio/music/RBY/meetfemaletrainer.asm"
-	inc_section "crysaudio/music/RBY/meetmaletrainer.asm"
-	inc_section "crysaudio/music/RBY/introbattle.asm"
-	inc_section "crysaudio/music/RBY/surfing.asm"
-	inc_section "crysaudio/music/RBY/jigglypuffsong.asm"
-	inc_section "crysaudio/music/RBY/halloffame.asm"
-	inc_section "crysaudio/music/RBY/credits.asm"
-	inc_section "crysaudio/music/RBY/gymleaderbattle.asm"
-	inc_section "crysaudio/music/RBY/trainerbattle.asm"
-	inc_section "crysaudio/music/RBY/wildbattle.asm"
-	inc_section "crysaudio/music/RBY/finalbattle.asm"
-
-
-SECTION "RBY Songs 2", ROMX
-
-	inc_section "crysaudio/music/RBY/defeatedtrainer.asm"
-	inc_section "crysaudio/music/RBY/defeatedwildmon.asm"
-	inc_section "crysaudio/music/RBY/defeatedgymleader.asm"
 	inc_section "crysaudio/music/RBY/pkmnhealed.asm"
 	inc_section "crysaudio/music/RBY/routes1.asm"
 	inc_section "crysaudio/music/RBY/routes2.asm"
@@ -344,13 +321,51 @@ SECTION "RBY Songs 2", ROMX
 	inc_section "crysaudio/music/RBY/safarizone.asm"
 	inc_section "crysaudio/music/RBY/gym.asm"
 	inc_section "crysaudio/music/RBY/pokecenter.asm"
+
+
+SECTION "RBY Songs 2", ROMX
+
+	inc_section "crysaudio/music/RBY/gymleaderbattle.asm"
+	inc_section "crysaudio/music/RBY/trainerbattle.asm"
+	inc_section "crysaudio/music/RBY/wildbattle.asm"
+	inc_section "crysaudio/music/RBY/finalbattle.asm"
+	inc_section "crysaudio/music/RBY/defeatedtrainer.asm"
+	inc_section "crysaudio/music/RBY/defeatedwildmon.asm"
+	inc_section "crysaudio/music/RBY/defeatedgymleader.asm"
+
+
+SECTION "RBY Songs 3", ROMX
+
+	inc_section "crysaudio/music/RBY/bikeriding.asm"
+	inc_section "crysaudio/music/RBY/dungeon1.asm"
+	inc_section "crysaudio/music/RBY/gamecorner.asm"
+	inc_section "crysaudio/music/RBY/titlescreen.asm"
+	inc_section "crysaudio/music/RBY/dungeon2.asm"
+	inc_section "crysaudio/music/RBY/dungeon3.asm"
+	inc_section "crysaudio/music/RBY/cinnabarmansion.asm"
+	inc_section "crysaudio/music/RBY/oakslab.asm"
+	inc_section "crysaudio/music/RBY/pokemontower.asm"
+	inc_section "crysaudio/music/RBY/silphco.asm"
+	inc_section "crysaudio/music/RBY/meeteviltrainer.asm"
+	inc_section "crysaudio/music/RBY/meetfemaletrainer.asm"
+	inc_section "crysaudio/music/RBY/meetmaletrainer.asm"
+	inc_section "crysaudio/music/RBY/introbattle.asm"
+	inc_section "crysaudio/music/RBY/surfing.asm"
+	inc_section "crysaudio/music/RBY/jigglypuffsong.asm"
+	inc_section "crysaudio/music/RBY/halloffame.asm"
+	inc_section "crysaudio/music/RBY/credits.asm"
+
+
+SECTION "RBY Songs 4", ROMX
+
 	inc_section "crysaudio/music/RBY/yellowintro.asm"
 	inc_section "crysaudio/music/RBY/surfingpikachu.asm"
-	inc_section "crysaudio/music/RBY/meetjessiejames.asm"
 	inc_section "crysaudio/music/RBY/yellowunusedsong.asm"
+	inc_section "crysaudio/music/RBY/meetjessiejames.asm"
 
 
 SECTION "TCG Songs 1", ROMX
+
 	inc_section "crysaudio/music/TCG/titlescreen.asm"
 	inc_section "crysaudio/music/TCG/dueltheme1.asm"
 	inc_section "crysaudio/music/TCG/dueltheme2.asm"
@@ -368,6 +383,7 @@ SECTION "TCG Songs 1", ROMX
 
 
 SECTION "TCG Songs 2", ROMX
+
 	inc_section "crysaudio/music/TCG/ronald.asm"
 	inc_section "crysaudio/music/TCG/imakuni.asm"
 	inc_section "crysaudio/music/TCG/hallofhonor.asm"
@@ -383,6 +399,7 @@ SECTION "TCG Songs 2", ROMX
 
 
 SECTION "TCG2 Songs 1", ROMX
+
 	inc_section "crysaudio/music/TCG2/titlescreen.asm"
 	inc_section "crysaudio/music/TCG2/herecomesgr.asm"
 	inc_section "crysaudio/music/TCG2/groverworld.asm"
@@ -395,6 +412,7 @@ SECTION "TCG2 Songs 1", ROMX
 
 
 SECTION "TCG2 Songs 2", ROMX
+
 	inc_section "crysaudio/music/TCG2/gamecorner.asm"
 	inc_section "crysaudio/music/TCG2/grblimp.asm"
 	inc_section "crysaudio/music/TCG2/grdueltheme1.asm"
@@ -404,6 +422,7 @@ SECTION "TCG2 Songs 2", ROMX
 
 
 SECTION "TCG2 Songs 3", ROMX
+
 	inc_section "crysaudio/music/TCG2/imakuni2.asm"
 	inc_section "crysaudio/music/TCG2/credits.asm"
 	inc_section "crysaudio/music/TCG2/diddly1.asm"
@@ -414,7 +433,8 @@ SECTION "TCG2 Songs 3", ROMX
 	inc_section "crysaudio/music/TCG2/diddly6.asm"
 
 
-SECTION "Pinball Songs", ROMX
+SECTION "Pinball Songs 1", ROMX
+
 	inc_section "crysaudio/music/pinball/redfield.asm"
 	inc_section "crysaudio/music/pinball/catchemred.asm"
 	inc_section "crysaudio/music/pinball/hurryupred.asm"
@@ -423,22 +443,35 @@ SECTION "Gastly and Haunter Graveyard", ROMX
 	INCLUDE "crysaudio/music/pinball/gastlyinthegraveyard.asm"
 	INCLUDE "crysaudio/music/pinball/haunterinthegraveyard.asm"
 	inc_section "crysaudio/music/pinball/gengarinthegraveyard.asm"
+
+
+SECTION "Pinball Songs 2", ROMX
+
 	inc_section "crysaudio/music/pinball/bluefield.asm"
 	inc_section "crysaudio/music/pinball/catchemblue.asm"
 	inc_section "crysaudio/music/pinball/hurryupblue.asm"
 	inc_section "crysaudio/music/pinball/hiscore.asm"
 	inc_section "crysaudio/music/pinball/gameover.asm"
+
+
+SECTION "Pinball Songs 3", ROMX
+
 	inc_section "crysaudio/music/pinball/whackthediglett.asm"
 	inc_section "crysaudio/music/pinball/whackthedugtrio.asm"
-
-
-SECTION "Pinball Songs 2", ROMX
 	inc_section "crysaudio/music/pinball/seelstage.asm"
 	inc_section "crysaudio/music/pinball/title.asm"
+
+
+SECTION "Pinball Songs 4", ROMX
+
 	inc_section "crysaudio/music/pinball/mewtwostage.asm"
 	inc_section "crysaudio/music/pinball/options.asm"
 	inc_section "crysaudio/music/pinball/fieldselect.asm"
 	inc_section "crysaudio/music/pinball/meowthstage.asm"
+
+
+SECTION "Pinball Songs 5", ROMX
+
 	inc_section "crysaudio/music/pinball/endcredits.asm"
 	inc_section "crysaudio/music/pinball/nameentry.asm"
 

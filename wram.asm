@@ -1756,7 +1756,7 @@ wBaseCoordY::
 
 ; low health alarm counter/enable
 ; high bit = enable, others = timer to cycle frequencies
-wLowHealthAlarm:: ds 1
+wLowHealthAlarmOrig:: ds 1
 
 wFBTileCounter::
 ; counts how many tiles of the current frame block have been drawn
@@ -3254,8 +3254,7 @@ wNoiseSampleDelay:: db
 wMusicNoiseSampleSet:: db
 wSFXNoiseSampleSet:: db
 
-;wLowHealthAlarm::
-wDanger::
+wLowHealthAlarm::
 ; bit 7: on/off
 ; bit 4: pitch
 ; bit 0-3: counter

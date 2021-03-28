@@ -1,5 +1,5 @@
 Music_DoLowHealthAlarm::
-	ld a, [wLowHealthAlarm]
+	ld a, [wLowHealthAlarmOrig]
 	cp $ff
 	jr z, .disableAlarm
 
@@ -21,19 +21,19 @@ Music_DoLowHealthAlarm::
 .asm_2138a
 	ld a, $86
 	ld [wChannelSoundIDs + Ch5], a ;disable sound channel?
-	ld a, [wLowHealthAlarm]
+	ld a, [wLowHealthAlarmOrig]
 	and $7f ;decrement alarm timer.
 	dec a
 
 .asm_21395
 	; reset the timer and enable flag.
 	set 7, a
-	ld [wLowHealthAlarm], a
+	ld [wLowHealthAlarmOrig], a
 	ret
 
 .disableAlarm
 	xor a
-	ld [wLowHealthAlarm], a  ;disable alarm
+	ld [wLowHealthAlarmOrig], a  ;disable alarm
 	ld [wChannelSoundIDs + Ch5], a  ;re-enable sound channel?
 	ld de, .toneDataSilence
 	jr .playTone

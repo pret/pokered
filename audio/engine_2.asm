@@ -163,7 +163,7 @@ Audio2_PlayNextNote:
 	ld a, c
 	cp Ch5
 	jr nz, .beginChecks
-	ld a, [wLowHealthAlarm] ; low health alarm enabled?
+	ld a, [wLowHealthAlarmOrig] ; low health alarm enabled?
 	bit 7, a
 	ret nz
 .beginChecks
@@ -976,7 +976,7 @@ Audio2_ResetCryModifiers:
 	ld a, c
 	cp Ch5
 	jr nz, .skip
-	ld a, [wLowHealthAlarm]
+	ld a, [wLowHealthAlarmOrig]
 	bit 7, a
 	jr z, .skip
 	xor a
