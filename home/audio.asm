@@ -92,21 +92,11 @@ PlaySound::
 	pop de
 	ret
 
-OpenSRAMForSound::
-	ld a, SRAM_ENABLE
-	ld [MBC1SRamEnable], a
-	xor a
-	ld [MBC1SRamBankingMode], a
-	ld [MBC1SRamBank], a
-	ret
-
 ;InitSound::
 ;	push hl
 ;	push de
 ;	push bc
 ;	push af
-;
-;	call OpenSRAMForSound
 ;
 ;	ldh a, [hLoadedROMBank]
 ;	push af
@@ -131,10 +121,6 @@ UpdateSound::
 ;	push de
 ;	push bc
 ;	push af
-
-	ld a, [wHaltAudio]
-	and a
-	ret nz
 
 	ldh a, [hLoadedROMBank]
 	push af

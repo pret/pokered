@@ -126,8 +126,6 @@ ClearVram::
 
 
 StopAllSounds::
-	call OpenSRAMForSound
-
 	ld a, 0 ; BANK("Audio Engine 1")
 	ld [wAudioROMBank], a
 	ld [wAudioSavedROMBank], a

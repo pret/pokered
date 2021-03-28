@@ -32,10 +32,10 @@ ShakeElevator::
 	ld c, 0 ; BANK(SFX_Safari_Zone_PA)
 	ld a, SFX_SAFARI_ZONE_PA
 	call PlaySound
-.musicLoop
-	ld a, [wChannelSoundIDs + Ch5]
-	cp SFX_SAFARI_ZONE_PA
-	jr z, .musicLoop
+;.musicLoop
+;	ld a, [wChannelSoundIDs + Ch5]
+;	cp SFX_SAFARI_ZONE_PA
+;	jr z, .musicLoop
 	call UpdateSprites
 	jp PlayDefaultMusic
 

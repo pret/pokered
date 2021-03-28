@@ -411,7 +411,7 @@ SlotMachine_CheckForMatches:
 	call PrintText
 .done
 	xor a
-	ld [wMuteAudioAndPauseMusic], a
+;	ld [wMuteAudioAndPauseMusic], a
 	ret
 .rollWheel3DownByOneSymbol
 	call SlotMachine_AnimWheel3
@@ -655,7 +655,7 @@ SlotMachine_PrintPayoutCoins:
 
 SlotMachine_PayCoinsToPlayer:
 	ld a, $1
-	ld [wMuteAudioAndPauseMusic], a
+;	ld [wMuteAudioAndPauseMusic], a
 	call WaitForSoundToFinish
 
 ; Put 1 in the temp coins variable. This value is added to the player's coins

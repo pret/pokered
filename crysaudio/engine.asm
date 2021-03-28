@@ -48,6 +48,28 @@ _InitSound::
 	or d
 	jr nz, .clearaudio
 
+; channels 5 and 6
+	ld hl, wChannel5
+	ld de, CHANNEL_STRUCT_LENGTH * 2
+.clearaudio2
+	xor a
+	ld [hli], a
+	dec de
+	ld a, e
+	or d
+	jr nz, .clearaudio2
+
+; channels 7 and 8
+	ld hl, wChannel7
+	ld de, CHANNEL_STRUCT_LENGTH * 2
+.clearaudio3
+	xor a
+	ld [hli], a
+	dec de
+	ld a, e
+	or d
+	jr nz, .clearaudio3
+
 	ld a, MAX_VOLUME
 	ld [wVolume], a
 	call MusicOn
@@ -81,7 +103,6 @@ MusicOff:
 	ret
 
 _UpdateSound::
-	call OpenSRAMForSound
 ; called once per frame
 	; no use updating audio if it's not playing
 	ld a, [wMusicPlaying]
@@ -170,8 +191,25 @@ _UpdateSound::
 	ld a, [wCurChannel]
 	cp NUM_MUSIC_CHANS
 	jr nc, .sfx_channel
-	ld hl, CHANNEL_STRUCT_LENGTH * NUM_MUSIC_CHANS + CHANNEL_FLAGS1
+
+	push af
+	push bc
+	add 4 ; corresponding sfx channel
+	ld c, a
+	ld b, 0
+	ld hl, ChannelPointers
 	add hl, bc
+	add hl, bc
+	ld c, [hl]
+	inc hl
+	ld b, [hl] ; bc = channel pointer
+	ld hl, CHANNEL_FLAGS1
+	add hl, bc
+	pop bc
+	pop af
+;	ld hl, CHANNEL_STRUCT_LENGTH * NUM_MUSIC_CHANS + CHANNEL_FLAGS1
+;	add hl, bc
+
 	bit SOUND_CHANNEL_ON, [hl]
 	jr nz, .sound_channel_on
 .sfx_channel
@@ -189,12 +227,22 @@ _UpdateSound::
 	ld [hl], a
 .nextchannel
 	; next channel
-	ld hl, CHANNEL_STRUCT_LENGTH
-	add hl, bc
-	ld c, l
-	ld b, h
+;	ld hl, CHANNEL_STRUCT_LENGTH
+;	add hl, bc
+;	ld c, l
+;	ld b, h
 	ld a, [wCurChannel]
 	inc a
+
+	ld c, a
+	ld b, 0
+	ld hl, ChannelPointers
+	add hl, bc
+	add hl, bc
+	ld c, [hl]
+	inc hl
+	ld b, [hl] ; bc = channel pointer
+
 	ld [wCurChannel], a
 	cp NUM_CHANNELS ; are we done?
 	jp nz, .loop ; do it all again
@@ -1210,8 +1258,25 @@ ParseMusic:
 	cp CHAN5
 	jr nc, .chan_5to8
 	; ????
-	ld hl, CHANNEL_STRUCT_LENGTH * NUM_MUSIC_CHANS + CHANNEL_FLAGS1
+
+	push af
+	push bc
+	add 4 ; corresponding sfx channel
+	ld c, a
+	ld b, 0
+	ld hl, ChannelPointers
 	add hl, bc
+	add hl, bc
+	ld c, [hl]
+	inc hl
+	ld b, [hl] ; bc = channel pointer
+	ld hl, CHANNEL_FLAGS1
+	add hl, bc
+	pop bc
+	pop af
+;	ld hl, CHANNEL_STRUCT_LENGTH * NUM_MUSIC_CHANS + CHANNEL_FLAGS1
+;	add hl, bc
+
 	bit SOUND_CHANNEL_ON, [hl]
 	jr nz, .ok
 .chan_5to8
@@ -2377,7 +2442,6 @@ SetLRTracks:
 	ret
 
 _PlayMusic::
-	call OpenSRAMForSound
 	cp NUM_SONGS
 	ret nc ; sfx
 ; load music

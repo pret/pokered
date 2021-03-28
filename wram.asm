@@ -8,130 +8,6 @@ INCLUDE "vram.asm"
 
 SECTION "WRAM", WRAM0
 
-wUnusedC000::
-	ds 1
-
-wSoundID::
-	ds 1
-
-wMuteAudioAndPauseMusic::
-; bit 7: whether sound has been muted
-; all bits: whether the effective is active
-; Store 1 to activate effect (any value in the range [1, 127] works).
-; All audio is muted and music is paused. Sfx continues playing until it
-; ends normally.
-; Store 0 to resume music.
-	ds 1
-
-wDisableChannelOutputWhenSfxEnds::
-	ds 1
-
-wStereoPanning::
-	ds 1
-
-wSavedVolume::
-	ds 1
-
-wChannelCommandPointers::
-	ds 16
-
-wChannelReturnAddresses::
-	ds 16
-
-wChannelSoundIDs::
-	ds 8
-
-wChannelFlags1::
-	ds 8
-
-wChannelFlags2::
-	ds 8
-
-wChannelDutyCycles::
-	ds 8
-
-wChannelDutyCyclePatterns::
-	ds 8
-
-wChannelVibratoDelayCounters::
-; reloaded at the beginning of a note. counts down until the vibrato begins.
-	ds 8
-
-wChannelVibratoExtents::
-	ds 8
-
-wChannelVibratoRates::
-; high nybble is rate (counter reload value) and low nybble is counter.
-; time between applications of vibrato.
-	ds 8
-
-wChannelFrequencyLowBytes::
-	ds 8
-
-wChannelVibratoDelayCounterReloadValues::
-; delay of the beginning of the vibrato from the start of the note
-	ds 8
-
-wChannelPitchSlideLengthModifiers::
-	ds 8
-
-wChannelPitchSlideFrequencySteps::
-	ds 8
-
-wChannelPitchSlideFrequencyStepsFractionalPart::
-	ds 8
-
-wChannelPitchSlideCurrentFrequencyFractionalPart::
-	ds 8
-
-wChannelPitchSlideCurrentFrequencyHighBytes::
-	ds 8
-
-wChannelPitchSlideCurrentFrequencyLowBytes::
-	ds 8
-
-wChannelPitchSlideTargetFrequencyHighBytes::
-	ds 8
-
-wChannelPitchSlideTargetFrequencyLowBytes::
-	ds 8
-
-wChannelNoteDelayCounters::
-; Note delays are stored as 16-bit fixed-point numbers where the integer part
-; is 8 bits and the fractional part is 8 bits.
-	ds 8
-
-wChannelLoopCounters::
-	ds 8
-
-wChannelNoteSpeeds::
-	ds 8
-
-wChannelNoteDelayCountersFractionalPart::
-	ds 8
-
-wChannelOctaves::
-	ds 8
-
-wChannelVolumes::
-; also includes fade for hardware channels that support it
-	ds 8
-
-wMusicWaveInstrument::
-	ds 1
-
-wSfxWaveInstrument::
-	ds 1
-
-wMusicTempo::
-	ds 2
-
-wSfxTempo::
-	ds 2
-
-wSfxHeaderPointer::
-	ds 2
-
 wNewSoundID::
 	ds 1
 
@@ -147,10 +23,111 @@ wFrequencyModifier::
 wTempoModifier::
 	ds 1
 
-	ds 11
-
-wHaltAudio:: ds 1
 wSFXDontWait:: ds 1
+
+wMusic::
+
+; nonzero if playing
+wMusicPlaying:: db
+
+wAudio::
+wChannel1:: channel_struct wChannel1
+wChannel2:: channel_struct wChannel2
+wChannel3:: channel_struct wChannel3
+wChannel4:: channel_struct wChannel4
+
+	ds 1
+
+wCurTrackDuty:: db
+wCurTrackVolumeEnvelope:: db
+wCurTrackFrequency:: dw
+wUnusedBCDNumber:: db ; BCD value, dummied out
+wCurNoteDuration:: db ; used in MusicE0 and LoadNote
+
+wCurMusicByte:: db
+wCurChannel:: db
+wVolume::
+; corresponds to rNR50
+; Channel control / ON-OFF / Volume (R/W)
+;   bit 7 - Vin->SO2 ON/OFF
+;   bit 6-4 - SO2 output level (volume) (# 0-7)
+;   bit 3 - Vin->SO1 ON/OFF
+;   bit 2-0 - SO1 output level (volume) (# 0-7)
+	db
+wSoundOutput::
+; corresponds to rNR51
+; bit 4-7: ch1-4 so2 on/off
+; bit 0-3: ch1-4 so1 on/off
+	db
+wPitchSweep::
+; corresponds to rNR10
+; bit 7:   unused
+; bit 4-6: sweep time
+; bit 3:   sweep direction
+; but 0-2: sweep shift
+	db
+
+wMusicID:: dw
+wMusicBank:: db
+wNoiseSampleAddress:: dw
+wNoiseSampleDelay:: db
+	ds 1
+wMusicNoiseSampleSet:: db
+wSFXNoiseSampleSet:: db
+
+wLowHealthAlarm::
+; bit 7: on/off
+; bit 4: pitch
+; bit 0-3: counter
+	db
+
+wMusicFade::
+; fades volume over x frames
+; bit 7: fade in/out
+; bit 0-5: number of frames for each volume level
+; $00 = none (default)
+	db
+wMusicFadeCount:: db
+wMusicFadeID:: dw
+
+	ds 5
+
+wCryPitch:: dw
+wCryLength:: dw
+
+wLastVolume:: db
+wUnusedMusicF9Flag:: db
+
+wSFXPriority::
+; if nonzero, turn off music when playing sfx
+	db
+
+	ds 1
+
+wChannel1JumpCondition:: db
+wChannel2JumpCondition:: db
+wChannel3JumpCondition:: db
+wChannel4JumpCondition:: db
+
+wStereoPanningMask:: db
+
+wCryTracks::
+; plays only in left or right track depending on what side the monster is on
+; both tracks active outside of battle
+	db
+
+wSFXDuration:: db
+wCurSFX::
+; id of sfx currently playing
+	db
+
+wAudioEnd::
+
+wMapMusic:: db
+
+;wDontPlayMapMusicOnReload:: db
+wMusicEnd::
+
 
 SECTION "Sprite State Data", WRAM0
 
@@ -2485,7 +2462,12 @@ wDestinationWarpID::
 ; if $ff, the player's coordinates are not updated when entering the map
 	ds 1
 
+UNION
 	ds 128
+NEXTU
+wChannel5:: channel_struct wChannel5
+wChannel6:: channel_struct wChannel6
+ENDU
 
 wNumSigns::
 ; number of signs in the current map (up to 16)
@@ -2609,7 +2591,7 @@ wMissableObjectList::
 	ds 17 * 2
 
 wGameProgressFlags::
-; $c8 bytes
+; $80 bytes
 wOaksLabCurScript::
 	ds 1
 wPalletTownCurScript::
@@ -2819,10 +2801,15 @@ wSeafoamIslandsB4FCurScript::
 wRoute18Gate1FCurScript::
 	ds 1
 
-	ds 78
+	ds 6
 wGameProgressFlagsEnd::
 
-	ds 56
+UNION
+	ds 128
+NEXTU
+wChannel7:: channel_struct wChannel7
+wChannel8:: channel_struct wChannel8
+ENDU
 
 wObtainedHiddenItemsFlags::
 	ds 14
@@ -3152,157 +3139,3 @@ wStack::
 INCLUDE "sram.asm"
 
 INCLUDE "hram.asm"
-
-
-SECTION "crysaudio", SRAM, BANK[0]
-
-channel_struct: MACRO
-\1MusicID::           dw
-\1MusicBank::         db
-\1Flags1::            db ; 0:on/off 1:subroutine 2:looping 3:sfx 4:noise 5:rest
-\1Flags2::            db ; 0:vibrato on/off 1:pitch slide 2:duty cycle pattern 4:pitch offset
-\1Flags3::            db ; 0:vibrato up/down 1:pitch slide direction
-\1MusicAddress::      dw
-\1LastMusicAddress::  dw
-                      dw
-\1NoteFlags::         db ; 5:rest
-\1Condition::         db ; conditional jumps
-\1DutyCycle::         db ; bits 6-7 (0:12.5% 1:25% 2:50% 3:75%)
-\1VolumeEnvelope::    db ; hi:volume lo:fade
-\1Frequency::         dw ; 11 bits
-\1Pitch::             db ; 0:rest 1-c:note
-\1Octave::            db ; 7-0 (0 is highest)
-\1Transposition::     db ; raises existing octaves (to repeat phrases)
-\1NoteDuration::      db ; frames remaining for the current note
-\1Field16::           ds 1
-                      ds 1
-\1LoopCount::         db
-\1Tempo::             dw
-\1Tracks::            db ; hi:left lo:right
-\1DutyCyclePattern::  db
-\1VibratoDelayCount:: db ; initialized by \1VibratoDelay
-\1VibratoDelay::      db ; number of frames a note plays until vibrato starts
-\1VibratoExtent::     db
-\1VibratoRate::       db ; hi:frames for each alt lo:frames to the next alt
-\1PitchSlideTarget::  dw ; frequency endpoint for pitch slide
-\1PitchSlideAmount::  db
-\1PitchSlideAmountFraction::   db
-\1Field25::           db
-                      ds 1
-\1PitchOffset::       dw
-\1Field29::           ds 1
-\1Field2a::           ds 2
-\1Field2c::           ds 1
-\1NoteLength::        db ; frames per 16th note
-\1Field2e::           ds 1
-\1Field2f::           ds 1
-\1Field30::           ds 1
-                      ds 1
-ENDM
-
-wMusic::
-
-; nonzero if playing
-wMusicPlaying:: db
-
-wAudio::
-wChannel1:: channel_struct wChannel1
-wChannel2:: channel_struct wChannel2
-wChannel3:: channel_struct wChannel3
-wChannel4:: channel_struct wChannel4
-wChannel5:: channel_struct wChannel5
-wChannel6:: channel_struct wChannel6
-wChannel7:: channel_struct wChannel7
-wChannel8:: channel_struct wChannel8
-
-	ds 1
-
-wCurTrackDuty:: db
-wCurTrackVolumeEnvelope:: db
-wCurTrackFrequency:: dw
-wUnusedBCDNumber:: db ; BCD value, dummied out
-wCurNoteDuration:: db ; used in MusicE0 and LoadNote
-
-wCurMusicByte:: db
-wCurChannel:: db
-wVolume::
-; corresponds to rNR50
-; Channel control / ON-OFF / Volume (R/W)
-;   bit 7 - Vin->SO2 ON/OFF
-;   bit 6-4 - SO2 output level (volume) (# 0-7)
-;   bit 3 - Vin->SO1 ON/OFF
-;   bit 2-0 - SO1 output level (volume) (# 0-7)
-	db
-wSoundOutput::
-; corresponds to rNR51
-; bit 4-7: ch1-4 so2 on/off
-; bit 0-3: ch1-4 so1 on/off
-	db
-wPitchSweep::
-; corresponds to rNR10
-; bit 7:   unused
-; bit 4-6: sweep time
-; bit 3:   sweep direction
-; but 0-2: sweep shift
-	db
-
-wMusicID:: dw
-wMusicBank:: db
-wNoiseSampleAddress:: dw
-wNoiseSampleDelay:: db
-	ds 1
-wMusicNoiseSampleSet:: db
-wSFXNoiseSampleSet:: db
-
-wLowHealthAlarm::
-; bit 7: on/off
-; bit 4: pitch
-; bit 0-3: counter
-	db
-
-wMusicFade::
-; fades volume over x frames
-; bit 7: fade in/out
-; bit 0-5: number of frames for each volume level
-; $00 = none (default)
-	db
-wMusicFadeCount:: db
-wMusicFadeID:: dw
-
-	ds 5
-
-wCryPitch:: dw
-wCryLength:: dw
-
-wLastVolume:: db
-wUnusedMusicF9Flag:: db
-
-wSFXPriority::
-; if nonzero, turn off music when playing sfx
-	db
-
-	ds 1
-
-wChannel1JumpCondition:: db
-wChannel2JumpCondition:: db
-wChannel3JumpCondition:: db
-wChannel4JumpCondition:: db
-
-wStereoPanningMask:: db
-
-wCryTracks::
-; plays only in left or right track depending on what side the monster is on
-; both tracks active outside of battle
-	db
-
-wSFXDuration:: db
-wCurSFX::
-; id of sfx currently playing
-	db
-
-wAudioEnd::
-
-wMapMusic:: db
-
-;wDontPlayMapMusicOnReload:: db
-wMusicEnd::
