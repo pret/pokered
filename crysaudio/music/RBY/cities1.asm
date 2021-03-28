@@ -588,6 +588,7 @@ Music_Cities1_branch_acce::
 
 Music_Cities1_Ch4::
 	toggle_noise 0
+Music_Cities1_Ch4_MainLoop::
 	drum_speed 12
 	sound_call Music_Cities1_branch_ad36
 
@@ -617,7 +618,7 @@ Music_Cities1_branch_acf3::
 	drum_note 6, 6
 	drum_note 8, 6
 	drum_note 8, 4
-	sound_loop 0, Music_Cities1_Ch4
+	sound_loop 0, Music_Cities1_Ch4_MainLoop
 
 Music_Cities1_branch_ad36::
 	drum_note 8, 6

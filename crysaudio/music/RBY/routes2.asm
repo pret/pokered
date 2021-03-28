@@ -333,6 +333,7 @@ Music_Routes2_branch_9e9e::
 
 Music_Routes2_Ch4::
 	toggle_noise 0
+Music_Routes2_Ch4_MainLoop::
 	drum_speed 12
 	drum_note 3, 2
 	rest 2
@@ -429,5 +430,5 @@ Music_Routes2_Ch4::
 	rest 3
 	drum_note 3, 3
 	rest 3
-	sound_loop 0, Music_Routes2_Ch4
+	sound_loop 0, Music_Routes2_Ch4_MainLoop
 	sound_ret

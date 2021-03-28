@@ -318,6 +318,7 @@ Music_Routes1_branch_9cdd::
 
 Music_Routes1_Ch4::
 	toggle_noise 1
+Music_Routes1_Ch4_MainLoop::
 	drum_speed 12
 	rest 4
 	drum_note 8, 2
@@ -408,5 +409,5 @@ Music_Routes1_Ch4::
 	rest 2
 	drum_note 8, 2
 	drum_note 8, 2
-	sound_loop 0, Music_Routes1_Ch4
+	sound_loop 0, Music_Routes1_Ch4_MainLoop
 	sound_ret
