@@ -32,19 +32,19 @@ PlayDefaultMusicCommon::
 
 .next
 	ld b, a
-	ld a, d
-	and a ; should current music be faded out first?
-	ld a, 0 ; BANK(Music_BikeRiding)
-	jr nz, .next2
+;	ld a, d
+;	and a ; should current music be faded out first?
+;	ld a, 0 ; BANK(Music_BikeRiding)
+;	jr nz, .next2
 
 ; Only change the audio ROM bank if the current music isn't going to be faded
 ; out before the default music begins.
-	ld [wAudioROMBank], a
+;	ld [wAudioROMBank], a
 
-.next2
+;.next2
 ; [wAudioSavedROMBank] will be copied to [wAudioROMBank] after fading out the
 ; current music (if the current music is faded out).
-	ld [wAudioSavedROMBank], a
+;	ld [wAudioSavedROMBank], a
 	jr .next3
 
 .walking
@@ -69,7 +69,7 @@ PlayDefaultMusicCommon::
 
 	ld a, b
 	ld [wLastMusicSoundID], a
-	ld [wNewSoundID], a
+;	ld [wNewSoundID], a
 	ld [wMusicFadeID], a
 	ret
 

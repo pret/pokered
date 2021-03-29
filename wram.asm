@@ -8,23 +8,6 @@ INCLUDE "vram.asm"
 
 SECTION "WRAM", WRAM0
 
-wNewSoundID::
-	ds 1
-
-wAudioROMBank::
-	ds 1
-
-wAudioSavedROMBank::
-	ds 1
-
-wFrequencyModifier::
-	ds 1
-
-wTempoModifier::
-	ds 1
-
-wSFXDontWait:: ds 1
-
 ; crysaudio start
 
 ; nonzero if playing
@@ -120,6 +103,8 @@ wSFXDuration:: db
 wCurSFX::
 ; id of sfx currently playing
 	db
+
+wSFXDontWait:: ds 1
 
 wAudioEnd::
 

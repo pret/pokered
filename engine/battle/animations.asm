@@ -2208,10 +2208,11 @@ GetMoveSound:
 ;	jr .done
 
 .NotCryMove
+; todo: fix sound modifiers
 	ld a, [hli]
-	ld [wFrequencyModifier], a
+;	ld [wFrequencyModifier], a
 	ld a, [hli]
-	ld [wTempoModifier], a
+;	ld [wTempoModifier], a
 .done
 	ld a, b
 	ret
@@ -2636,8 +2637,9 @@ PlayApplyingAttackSound:
 	ld b, $1
 	ld c, GSSFX_NOT_VERY_EFFECTIVE ; SFX_NOT_VERY_EFFECTIVE
 .playSound
-	ld [wFrequencyModifier], a
+; todo: fix sound modifiers
+;	ld [wFrequencyModifier], a
 	ld a, b
-	ld [wTempoModifier], a
+;	ld [wTempoModifier], a
 	ld a, c
 	jp PlaySound

@@ -44,18 +44,18 @@ SSAnne7Text1:
 SSAnne7RubText:
 	text_far _SSAnne7RubText
 	text_asm
-	ld a, [wAudioROMBank]
-	cp $1f ; BANK("Audio Engine 3")
-	ld [wAudioSavedROMBank], a
-	jr nz, .asm_61908
-	ld a, SFX_STOP_ALL_MUSIC
-	ld [wNewSoundID], a
-	call PlaySound
-	ld a, 0 ; BANK(Music_PkmnHealed)
-	ld [wAudioROMBank], a
-.asm_61908
+;	ld a, [wAudioROMBank]
+;	cp BANK("Audio Engine 3")
+;	ld [wAudioSavedROMBank], a
+;	jr nz, .asm_61908
+;	ld a, SFX_STOP_ALL_MUSIC
+;	ld [wNewSoundID], a
+;	call PlaySound
+;	ld a, 0 ; BANK(Music_PkmnHealed)
+;	ld [wAudioROMBank], a
+;.asm_61908
 	ld a, MUSIC_PKMN_HEALED
-	ld [wNewSoundID], a
+;	ld [wNewSoundID], a
 	call PlayMusic
 
 	call WaitForSongToFinish

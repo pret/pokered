@@ -776,9 +776,9 @@ FaintEnemyPokemon:
 	ld a, [wIsInBattle]
 	dec a
 	jr z, .wild_win
-	xor a
-	ld [wFrequencyModifier], a
-	ld [wTempoModifier], a
+;	xor a
+;	ld [wFrequencyModifier], a
+;	ld [wTempoModifier], a
 	ld a, SFX_FAINT_FALL
 	call PlaySoundWaitForCurrent
 
@@ -965,7 +965,7 @@ TrainerDefeatedText:
 PlayBattleVictoryMusic:
 	push af
 	ld a, SFX_STOP_ALL_MUSIC
-	ld [wNewSoundID], a
+;	ld [wNewSoundID], a
 	call PlaySoundWaitForCurrent
 	ld c, 0 ; BANK(Music_DefeatedTrainer)
 	pop af
@@ -6899,8 +6899,8 @@ _LoadTrainerPic:
 ; unreferenced
 ResetCryModifiers:
 	xor a
-	ld [wFrequencyModifier], a
-	ld [wTempoModifier], a
+;	ld [wFrequencyModifier], a
+;	ld [wTempoModifier], a
 	jp PlaySound
 
 ; animates the mon "growing" out of the pokeball

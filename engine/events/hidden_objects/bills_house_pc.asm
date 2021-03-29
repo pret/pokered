@@ -53,7 +53,7 @@ BillsHouseInitiatedText::
 	text_promptbutton
 	text_asm
 	ld a, SFX_STOP_ALL_MUSIC
-	ld [wNewSoundID], a
+;	ld [wNewSoundID], a
 	call PlaySound
 	ld c, 16
 	call DelayFrames

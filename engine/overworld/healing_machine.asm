@@ -39,18 +39,18 @@ AnimateHealingMachine:
 	call DelayFrames
 	dec b
 	jr nz, .partyLoop
-	ld a, [wAudioROMBank]
-	cp $1f ; BANK("Audio Engine 3")
-	ld [wAudioSavedROMBank], a
-	jr nz, .next
-	ld a, SFX_STOP_ALL_MUSIC
-	ld [wNewSoundID], a
-	call PlaySound
-	ld a, 0 ; BANK(Music_PkmnHealed)
-	ld [wAudioROMBank], a
-.next
+;	ld a, [wAudioROMBank]
+;	cp BANK("Audio Engine 3")
+;	ld [wAudioSavedROMBank], a
+;	jr nz, .next
+;	ld a, SFX_STOP_ALL_MUSIC
+;	ld [wNewSoundID], a
+;	call PlaySound
+;	ld a, 0 ; BANK(Music_PkmnHealed)
+;	ld [wAudioROMBank], a
+;.next
 	ld a, MUSIC_PKMN_HEALED
-	ld [wNewSoundID], a
+;	ld [wNewSoundID], a
 	call PlayMusic
 	ld d, $28
 	call FlashSprite8Times

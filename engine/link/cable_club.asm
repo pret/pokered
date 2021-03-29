@@ -826,10 +826,10 @@ TradeCenter_Trade:
 	ld [wTradedEnemyMonSpecies], a
 	ld a, 10
 	ld [wAudioFadeOutControl], a
-	ld a, 0 ; BANK(Music_SafariZone)
-	ld [wAudioSavedROMBank], a
+;	ld a, 0 ; BANK(Music_SafariZone)
+;	ld [wAudioSavedROMBank], a
 	ld a, MUSIC_SAFARI_ZONE
-	ld [wNewSoundID], a
+;	ld [wNewSoundID], a
 	call PlayMusic
 	ld c, 100
 	call DelayFrames
@@ -917,10 +917,10 @@ CableClub_Run:
 	ldh [hJoy5], a
 	ld a, 10
 	ld [wAudioFadeOutControl], a
-	ld a, 0 ; BANK(Music_Celadon)
-	ld [wAudioSavedROMBank], a
+;	ld a, 0 ; BANK(Music_Celadon)
+;	ld [wAudioSavedROMBank], a
 	ld a, MUSIC_CELADON
-	ld [wNewSoundID], a
+;	ld [wNewSoundID], a
 	jp PlayMusic
 
 EmptyFunc:
