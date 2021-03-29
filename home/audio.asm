@@ -61,14 +61,16 @@ PlayDefaultMusicCommon::
 .next4
 	ld a, c
 	ld [wAudioFadeOutControl], a
+	and a
+	jr nz, .next5
+	inc a
+.next5
+	ld [wMusicFade], a
+
 	ld a, b
 	ld [wLastMusicSoundID], a
 	ld [wNewSoundID], a
-
 	ld [wMusicFadeID], a
-	ld a, 8
-	ld [wMusicFade], a
-	;call FadeMusic ; called in updatemusic
 	ret
 
 ;UpdateMusic6Times::

@@ -147,6 +147,8 @@ HandlePokedexSideMenu:
 	call PlayCry
 	pop af
 	ld [wd11e], a
+;	call GetCryData
+;	call PlaySound
 	jr .handleMenuInput
 
 .choseArea

@@ -25,7 +25,7 @@ wTempoModifier::
 
 wSFXDontWait:: ds 1
 
-wMusic::
+; crysaudio start
 
 ; nonzero if playing
 wMusicPlaying:: db
@@ -123,10 +123,7 @@ wCurSFX::
 
 wAudioEnd::
 
-wMapMusic:: db
-
-;wDontPlayMapMusicOnReload:: db
-wMusicEnd::
+; crysaudio end
 
 
 SECTION "Sprite State Data", WRAM0

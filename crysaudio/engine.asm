@@ -692,9 +692,9 @@ FadeMusic:
 	xor a
 	ld [wVolume], a
 	; did we just get on a bike?
-	ld a, [wWalkBikeSurfState] ; XXX
-	cp 1 ; PLAYER_BIKE
-	jr z, .bicycle
+;	ld a, [wPlayerState]
+;	cp PLAYER_BIKE
+;	jr z, .bicycle
 	push bc
 	; restart sound
 	call MusicFadeRestart

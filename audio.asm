@@ -117,6 +117,9 @@ INCLUDE "audio/sfx/battle_36.asm"
 INCLUDE "audio/sfx/level_up.asm"
 INCLUDE "audio/sfx/caught_mon.asm"
 
+INCLUDE "audio/sfx/pokeflute_ch5_ch6.asm"
+INCLUDE "audio/sfx/pokeflute_ch7.asm"
+
 
 SECTION "Sound Effects 3", ROMX
 
@@ -151,16 +154,15 @@ INCLUDE "audio/pokedex_rating_sfx.asm"
 SECTION "Audio Engine 1", ROMX
 
 INCLUDE "crysaudio/engine.asm"
-;INCLUDE "crysaudio/trainer_encounters.asm"
 
-INCLUDE "crysaudio/red_pointers.asm"
+INCLUDE "crysaudio/music_pointers_red.asm"
 ;INCLUDE "crysaudio/music_pointers.asm"
 
 INCLUDE "crysaudio/music/nothing.asm"
 
 INCLUDE "crysaudio/cry_pointers.asm"
 
-INCLUDE "crysaudio/rbsfx.asm"
+INCLUDE "crysaudio/sfx_pointers_red.asm"
 ;INCLUDE "crysaudio/sfx_pointers.asm"
 
 

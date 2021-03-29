@@ -165,3 +165,6 @@ SFX_Battle_36::
 
 SFX_Silph_Scope::
 	audio_header SFX_Silph_Scope, Ch5
+
+SFX_PokefluteInBattle::
+	audio_header SFX_PokefluteInBattle, Ch5, Ch6, Ch7

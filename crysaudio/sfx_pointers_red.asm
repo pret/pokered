@@ -112,6 +112,8 @@ SFX:
 	dba SFX_Slots_New_Spin
 	dba SFX_Shooting_Star
 
+	dba SFX_PokefluteInBattle
+
 	dba Sfx_NotVeryEffective
 	dba Sfx_Damage
 	dba Sfx_SuperEffective

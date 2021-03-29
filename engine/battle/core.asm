@@ -781,10 +781,16 @@ FaintEnemyPokemon:
 	ld [wTempoModifier], a
 	ld a, SFX_FAINT_FALL
 	call PlaySoundWaitForCurrent
+
+; using WaitForSoundToFinish causes a noticeable delay
+; so use a smaller hard-coded delay for now
+	ld c, 10
+	call DelayFrames
 ;.sfxwait
 ;	ld a, [wChannelSoundIDs + Ch5]
 ;	cp SFX_FAINT_FALL
 ;	jr z, .sfxwait
+
 	ld a, SFX_FAINT_THUD
 	call PlaySound
 	call WaitForSoundToFinish

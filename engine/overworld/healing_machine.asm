@@ -58,6 +58,9 @@ AnimateHealingMachine:
 	ld a, [wChannel1MusicID]
 	and a
 	jr nz, .waitLoop2
+;	ld a, [wChannelSoundIDs]
+;	cp MUSIC_PKMN_HEALED ; is the healed music still playing?
+;	jr z, .waitLoop2 ; if so, check gain
 
 	ld c, 32
 	call DelayFrames

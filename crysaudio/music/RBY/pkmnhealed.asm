@@ -11,7 +11,6 @@ Music_PkmnHealed_Ch1::
 	;toggle_perfect_pitch
 	note_type 12, 8, 1
 	rest 2
-	octave 3
 	pitch_slide 1, 4, B_
 	note B_, 2
 	pitch_slide 1, 3, E_

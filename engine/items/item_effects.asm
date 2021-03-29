@@ -1735,11 +1735,16 @@ ItemUsePokeflute:
 	and $80
 	jr nz, .skipMusic
 	call WaitForSoundToFinish ; wait for sound to end
-	;farcall Music_PokeFluteInBattle ; play in-battle pokeflute music ; XXX
+
+	ld a, SFX_POKEFLUTE_IN_BATTLE
+	call PlaySound
+	call WaitForSoundToFinish
+;	farcall Music_PokeFluteInBattle ; play in-battle pokeflute music
 ;.musicWaitLoop ; wait for music to finish playing
 ;	ld a, [wChannelSoundIDs + Ch7]
 ;	and a ; music off?
 ;	jr nz, .musicWaitLoop
+
 .skipMusic
 	ld hl, FluteWokeUpText
 	jp PrintText

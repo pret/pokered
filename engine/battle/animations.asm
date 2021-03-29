@@ -2183,6 +2183,7 @@ GetMoveSound:
 .next
 	ld a, [wEnemyMonSpecies]
 .Continue
+
 	push af
 	ld a, 1
 	ld [wSFXDontWait], a
@@ -2193,18 +2194,19 @@ GetMoveSound:
 	ld a, b
 	scf
 	ret
-	;push hl
-	;call GetCryData
-	;ld b, a
-	;pop hl
-	;ld a, [wFrequencyModifier]
-	;add [hl]
-	;ld [wFrequencyModifier], a
-	;inc hl
-	;ld a, [wTempoModifier]
-	;add [hl]
-	;ld [wTempoModifier], a
-	;jr .done
+;	push hl
+;	call GetCryData
+;	ld b, a
+;	pop hl
+;	ld a, [wFrequencyModifier]
+;	add [hl]
+;	ld [wFrequencyModifier], a
+;	inc hl
+;	ld a, [wTempoModifier]
+;	add [hl]
+;	ld [wTempoModifier], a
+;	jr .done
+
 .NotCryMove
 	ld a, [hli]
 	ld [wFrequencyModifier], a

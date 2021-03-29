@@ -36,7 +36,12 @@ SafariZoneGameOver:
 	ld c, 0 ; BANK(SFX_Safari_Zone_PA)
 	ld a, SFX_SAFARI_ZONE_PA
 	call PlaySound
+
 	call WaitForSoundToFinish
+;.waitForMusicToPlay
+;	ld a, [wChannelSoundIDs + Ch5]
+;	cp SFX_SAFARI_ZONE_PA
+;	jr nz, .waitForMusicToPlay
 
 	ld a, TEXT_SAFARI_GAME_OVER
 	ldh [hSpriteIndexOrTextID], a

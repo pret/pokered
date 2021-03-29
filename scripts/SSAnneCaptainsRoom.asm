@@ -57,7 +57,13 @@ SSAnne7RubText:
 	ld a, MUSIC_PKMN_HEALED
 	ld [wNewSoundID], a
 	call PlayMusic
+
 	call WaitForSongToFinish
+;.asm_61910
+;	ld a, [wChannelSoundIDs]
+;	cp MUSIC_PKMN_HEALED
+;	jr z, .asm_61910
+
 	call PlayDefaultMusic
 	SetEvent EVENT_RUBBED_CAPTAINS_BACK
 	ld hl, wd72d

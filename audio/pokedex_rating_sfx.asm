@@ -21,7 +21,6 @@ PlayPokedexRatingSfx::
 	ld a, [hli]
 	ld c, [hl]
 	call PlaySound
-	call WaitForSoundToFinish
 	jp PlayDefaultMusic
 
 PokedexRatingSfxPointers:
