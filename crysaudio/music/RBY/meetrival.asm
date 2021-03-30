@@ -4,12 +4,6 @@ Music_MeetRival::
 	channel 2, Music_MeetRival_Ch2
 	channel 3, Music_MeetRival_Ch3
 
-Music_FarewellRival:
-	channel_count 3
-	channel 1, Music_MeetRival_branch_b1a2
-	channel 2, Music_MeetRival_branch_b21d
-	channel 3, Music_MeetRival_branch_b2b5
-
 Music_MeetRival_branch_b119::
 	tempo 100
 	sound_loop 0, Music_MeetRival_branch_b123
