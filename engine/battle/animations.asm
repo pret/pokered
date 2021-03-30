@@ -875,7 +875,7 @@ TradeJumpPokeball:
 	cp $ff
 	jr nz, .skipPlayingSound
 .playSound ; play sound if next move distance is 12 or this is the last one
-	ld a, SFX_BATTLE_18
+	ld a, SFX_SWAP
 	call PlaySound
 .skipPlayingSound
 	push bc
