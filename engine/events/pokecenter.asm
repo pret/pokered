@@ -24,7 +24,7 @@ DisplayPokemonCenterDialogue_::
 	predef HealParty
 	farcall AnimateHealingMachine ; do the healing machine animation
 	xor a
-	ld [wAudioFadeOutControl], a
+	ld [wMusicFade], a
 ;	ld a, [wAudioSavedROMBank]
 ;	ld [wAudioROMBank], a
 	ld a, [wMapMusicSoundID]

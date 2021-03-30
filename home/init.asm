@@ -130,8 +130,8 @@ StopAllSounds::
 ;	ld [wAudioROMBank], a
 ;	ld [wAudioSavedROMBank], a
 	xor a
-	ld [wAudioFadeOutControl], a
-;	ld [wNewSoundID], a
+	ld [wMusicFade], a
+	ld [wMusicFadeID], a
 	ld [wLastMusicSoundID], a
 	dec a
 	jp PlaySound

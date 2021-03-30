@@ -133,12 +133,9 @@ OakSpeech:
 ;	ld [wAudioSavedROMBank], a
 
 	ld a, 10
-	call StopMusic
-;	ld a, 10
-;	ld [wAudioFadeOutControl], a
-;	ld a, SFX_STOP_ALL_MUSIC
-;	ld [wNewSoundID], a
-;	call PlaySound
+	ld [wMusicFade], a
+	xor a
+	ld [wMusicFadeID], a
 
 	pop af
 	ldh [hLoadedROMBank], a

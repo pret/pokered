@@ -406,7 +406,7 @@ PlayTrainerMusic::
 	and a
 	ret nz
 	xor a
-	ld [wAudioFadeOutControl], a
+	ld [wMusicFade], a
 	ld a, SFX_STOP_ALL_MUSIC
 	call PlaySound
 ;	ld a, 0 ; BANK(Music_MeetEvilTrainer)

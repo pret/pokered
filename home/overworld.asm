@@ -760,7 +760,6 @@ HandleBlackOut::
 	call GBFadeOutToBlack
 	ld a, $08
 	call StopMusic
-	call WaitForSongToFinish
 	ld hl, wd72e
 	res 5, [hl]
 	ld a, BANK(ResetStatusAndHalveMoneyOnBlackout) ; also BANK(SpecialWarpIn) and BANK(SpecialEnterMap)
@@ -775,24 +774,11 @@ StopMusic::
 	ld [wMusicFade], a
 	xor a
 	ld [wMusicFadeID], a
-.wait0
-	ld a, [wMusicFadeCount]
+.wait
+	ld a, [wMusicFade]
 	and a
-	jr z, .wait0
-.wait1
-	ld a, [wMusicFadeCount]
-	and a
-	jr nz, .wait1
-	ret
-;	ld [wAudioFadeOutControl], a
-;	ld a, SFX_STOP_ALL_MUSIC
-;	ld [wNewSoundID], a
-;	call PlaySound
-;.wait
-;	ld a, [wAudioFadeOutControl]
-;	and a
-;	jr nz, .wait
-;	jp StopAllSounds
+	jr nz, .wait
+	jp StopAllSounds
 
 HandleFlyWarpOrDungeonWarp::
 	call UpdateSprites

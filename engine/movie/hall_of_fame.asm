@@ -281,8 +281,7 @@ HoFRecordMonInfo:
 
 HoFFadeOutScreenAndMusic:
 	ld a, 10
-	ld [wAudioFadeOutCounterReloadValue], a
-	ld [wAudioFadeOutCounter], a
-	ld a, $ff
-	ld [wAudioFadeOutControl], a
+	ld [wMusicFade], a
+	xor a
+	ld [wMusicFadeID], a
 	jp GBFadeOutToWhite

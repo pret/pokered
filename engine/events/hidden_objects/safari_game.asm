@@ -30,7 +30,7 @@ SafariZoneGameStillGoing:
 SafariZoneGameOver:
 	call EnableAutoTextBoxDrawing
 	xor a
-	ld [wAudioFadeOutControl], a
+	ld [wMusicFade], a
 	dec a ; SFX_STOP_ALL_MUSIC
 	call PlaySound
 	ld c, 0 ; BANK(SFX_Safari_Zone_PA)

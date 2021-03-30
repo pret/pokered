@@ -122,7 +122,6 @@ _LeaveMapAnim::
 .playerNotStandingOnWarpPadOrHole
 	ld a, $4
 	call StopMusic
-	call WaitForSongToFinish
 	ld a, [wd732]
 	bit 6, a ; is the last used pokemon center the destination?
 	jr z, .flyAnimation

@@ -1,8 +1,7 @@
 PlayBattleMusic::
 	xor a
-	ld [wAudioFadeOutControl], a
-	ld [wLowHealthAlarm], a
 	ld [wMusicFade], a
+	ld [wLowHealthAlarm], a
 	dec a ; SFX_STOP_ALL_MUSIC
 ;	ld [wNewSoundID], a
 	call PlayMusic
