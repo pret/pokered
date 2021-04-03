@@ -411,6 +411,7 @@ SlotMachine_CheckForMatches:
 	call PrintText
 .done
 	xor a
+	ld [wSFXPriority], a
 ;	ld [wMuteAudioAndPauseMusic], a
 	ret
 .rollWheel3DownByOneSymbol
@@ -692,6 +693,8 @@ SlotMachine_PayCoinsToPlayer:
 	call SlotMachine_PrintPayoutCoins
 	ld a, SFX_SLOTS_REWARD
 	call PlaySound
+	ld a, 1
+	ld [wSFXPriority], a
 	ld a, [wAnimCounter]
 	dec a
 	jr nz, .skip1
