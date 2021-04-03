@@ -776,16 +776,19 @@ FaintEnemyPokemon:
 	ld a, [wIsInBattle]
 	dec a
 	jr z, .wild_win
+
+	call WaitForSoundToFinish
+	ld bc, $00
+	ld de, $80
+	ld a, SFX_FAINT_FALL
+	call PlayBattleSound
 ;	xor a
 ;	ld [wFrequencyModifier], a
 ;	ld [wTempoModifier], a
-	ld a, SFX_FAINT_FALL
-	call PlaySoundWaitForCurrent
+;	ld a, SFX_FAINT_FALL
+;	call PlaySoundWaitForCurrent
 
-; using WaitForSoundToFinish causes a noticeable delay
-; so use a smaller hard-coded delay for now
-	ld c, 10
-	call DelayFrames
+	call WaitForSoundToFinish
 ;.sfxwait
 ;	ld a, [wChannelSoundIDs + Ch5]
 ;	cp SFX_FAINT_FALL

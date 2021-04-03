@@ -288,6 +288,48 @@ endr
 	pop hl
 	ret
 
+PlayBattleSound::
+	push hl
+	push de
+	push bc
+	push af
+
+	push af
+	ld a, c
+	ld [wCryPitch], a
+	ld a, b
+	ld [wCryPitch + 1], a
+	ld a, e
+	ld [wCryLength], a
+	ld a, d
+	ld [wCryLength + 1], a
+	pop af
+
+	ld e, a
+	xor a
+	ld d, a
+
+	ldh a, [hLoadedROMBank]
+	push af
+
+	ld a, BANK(_PlayBattleSound)
+	ldh [hLoadedROMBank], a
+	ld [MBC1RomBank], a
+
+	ld a, e
+	ld [wCurSFX], a
+	call _PlayBattleSound
+
+	pop af
+	ldh [hLoadedROMBank], a
+	ld [MBC1RomBank], a
+
+	pop af
+	pop bc
+	pop de
+	pop hl
+	ret
+
 PlaySFX::
 ; Play sound effect de.
 ; Sound effects are ordered by priority (highest to lowest)

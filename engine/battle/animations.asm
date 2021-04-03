@@ -200,7 +200,7 @@ PlayAnimation:
 	push hl
 	push de
 	call GetMoveSound
-	call nc, AnimPlaySFX
+	call nc, PlayBattleSound
 	pop de
 	pop hl
 .skipPlayingSound
@@ -254,15 +254,6 @@ PlayAnimation:
 	pop hl
 	jr .animationLoop
 .AnimationOver
-	ret
-
-AnimPlaySFX:
-	push de
-	ld e, a
-	xor a
-	ld d, a
-	call PlaySFX
-	pop de
 	ret
 
 LoadSubanimation:
@@ -560,7 +551,7 @@ PlaySubanimation:
 	cp NO_MOVE - 1
 	jr z, .skipPlayingSound
 	call GetMoveSound
-	call nc, AnimPlaySFX
+	call nc, PlayBattleSound
 .skipPlayingSound
 	ld hl, wOAMBuffer ; base address of OAM buffer
 	ld a, l
@@ -2208,13 +2199,19 @@ GetMoveSound:
 ;	jr .done
 
 .NotCryMove
-; todo: fix sound modifiers
+	push bc
 	ld a, [hli]
-;	ld [wFrequencyModifier], a
+	ld c, a
+	ld b, 0
 	ld a, [hli]
-;	ld [wTempoModifier], a
+	add $80
+	ld e, a
+	ld a, 0
+	adc 0
+	ld d, a
+	pop af
 .done
-	ld a, b
+	and a
 	ret
 
 IsCryMove:
@@ -2625,21 +2622,20 @@ PlayApplyingAttackSound:
 	and $7f
 	ret z
 	cp 10
-	ld a, $20
-	ld b, $30
-	ld c, GSSFX_DAMAGE ; SFX_DAMAGE
+	ld bc, $20
+	ld de, $30 + $80
+	ld a, SFX_DAMAGE
 	jr z, .playSound
-	ld a, $e0
-	ld b, $ff
-	ld c, GSSFX_SUPER_EFFECTIVE ; SFX_SUPER_EFFECTIVE
+	ld bc, $e0
+	ld de, $ff + $80
+	ld a, SFX_SUPER_EFFECTIVE
 	jr nc, .playSound
-	ld a, $50
-	ld b, $1
-	ld c, GSSFX_NOT_VERY_EFFECTIVE ; SFX_NOT_VERY_EFFECTIVE
+	ld bc, $50
+	ld de, $1 + $80
+	ld a, SFX_NOT_VERY_EFFECTIVE
 .playSound
-; todo: fix sound modifiers
 ;	ld [wFrequencyModifier], a
-	ld a, b
+;	ld a, b
 ;	ld [wTempoModifier], a
-	ld a, c
-	jp PlaySound
+;	ld a, c
+	jp PlayBattleSound
