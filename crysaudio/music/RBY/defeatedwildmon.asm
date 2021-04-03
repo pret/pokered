@@ -10,7 +10,7 @@ Music_DefeatedWildMon_Ch1::
 	;execute_music
 	duty_cycle 3
 	vibrato 6, 3, 4
-	;toggle_perfect_pitch
+	toggle_perfect_pitch
 	tempo 112
 	note_type 12, 11, 7
 	octave 3

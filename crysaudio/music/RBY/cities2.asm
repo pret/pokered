@@ -9,7 +9,7 @@ Music_Cities2_Ch1::
 	volume 7, 7
 	duty_cycle 3
 	vibrato 8, 3, 2
-	;toggle_perfect_pitch
+	toggle_perfect_pitch
 	note_type 12, 11, 6
 	rest 8
 	octave 3

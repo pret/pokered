@@ -9,7 +9,7 @@ Music_Pokecenter_Ch1::
 	volume 7, 7
 	duty_cycle 3
 	vibrato 10, 2, 2
-	;toggle_perfect_pitch
+	toggle_perfect_pitch
 
 Music_Pokecenter_branch_be61::
 	note_type 12, 10, 3

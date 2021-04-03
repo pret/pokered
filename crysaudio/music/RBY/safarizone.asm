@@ -8,7 +8,7 @@ Music_SafariZone_Ch1::
 	tempo 132
 	volume 7, 7
 	vibrato 6, 3, 4
-	;toggle_perfect_pitch
+	toggle_perfect_pitch
 	duty_cycle 2
 	note_type 12, 9, 2
 	octave 3

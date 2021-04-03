@@ -9,7 +9,7 @@ Music_Dungeon2_Ch1::
 	tempo 144
 	volume 7, 7
 	duty_cycle 3
-	;toggle_perfect_pitch
+	toggle_perfect_pitch
 	vibrato 10, 1, 4
 
 Music_Dungeon2_branch_7e892::

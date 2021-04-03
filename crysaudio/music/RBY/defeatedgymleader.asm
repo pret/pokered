@@ -9,7 +9,7 @@ Music_DefeatedGymLeader_Ch1::
 	volume 7, 7
 	duty_cycle 3
 	vibrato 18, 3, 1
-	;toggle_perfect_pitch
+	toggle_perfect_pitch
 	tempo 112
 	note_type 12, 10, 6
 	octave 4

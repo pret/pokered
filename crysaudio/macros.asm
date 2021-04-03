@@ -233,6 +233,7 @@ pitch_offset: MACRO
 	db pitch_offset_cmd
 	bigdw \1 ; pitch offset
 ENDM
+toggle_perfect_pitch EQUS "pitch_offset 1"
 
 	const unknownmusic0xe7_cmd ; $e7
 unknownmusic0xe7: MACRO
@@ -412,9 +413,4 @@ ENDM
 
 notetype2: MACRO
 	db $f8, \1
-ENDM
-
-
-; not reimplemented yet
-toggle_perfect_pitch: MACRO
 ENDM

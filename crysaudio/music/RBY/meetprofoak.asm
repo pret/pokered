@@ -8,7 +8,7 @@ Music_MeetProfOak_Ch1::
 	tempo 112
 	volume 7, 7
 	duty_cycle 3
-	;toggle_perfect_pitch
+	toggle_perfect_pitch
 	note_type 12, 11, 4
 	octave 3
 	note F#, 1

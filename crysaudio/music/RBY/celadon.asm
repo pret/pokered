@@ -8,7 +8,7 @@ Music_Celadon_Ch1::
 	tempo 144
 	volume 7, 7
 	duty_cycle 3
-	;toggle_perfect_pitch
+	toggle_perfect_pitch
 	note_type 12, 2, -7
 	rest 8
 	octave 3

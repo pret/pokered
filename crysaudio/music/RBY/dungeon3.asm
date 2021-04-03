@@ -9,7 +9,7 @@ Music_Dungeon3_Ch1::
 	tempo 160
 	volume 7, 7
 	duty_cycle 3
-	;toggle_perfect_pitch
+	toggle_perfect_pitch
 	vibrato 8, 1, 4
 
 Music_Dungeon3_branch_7e9fc::

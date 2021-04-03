@@ -410,7 +410,7 @@ Music_Cities1_branch_ac00::
 
 Music_Cities1_Ch3::
 	note_type 12, 1, 1
-	;toggle_perfect_pitch
+	toggle_perfect_pitch
 
 Music_Cities1_branch_ac35::
 	vibrato 0, 0, 0

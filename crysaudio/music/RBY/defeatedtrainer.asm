@@ -8,7 +8,7 @@ Music_DefeatedTrainer_Ch1::
 	tempo 224
 	volume 7, 7
 	duty_cycle 2
-	;toggle_perfect_pitch
+	toggle_perfect_pitch
 	tempo 224
 	note_type 4, 10, 2
 	octave 4

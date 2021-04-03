@@ -54,7 +54,7 @@ Music_BikeRiding_branch_7dbc9::
 	note D_, 2
 	note E_, 2
 	note F_, 6
-	;toggle_perfect_pitch
+	toggle_perfect_pitch
 	note_type 12, 11, 3
 	note E_, 2
 	note D_, 2
@@ -64,6 +64,7 @@ Music_BikeRiding_branch_7dbc9::
 	note E_, 1
 	note F_, 1
 	;toggle_perfect_pitch
+	pitch_offset 0
 	note_type 12, 11, 5
 	note G_, 6
 	note G_, 6

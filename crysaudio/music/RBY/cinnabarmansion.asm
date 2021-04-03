@@ -47,7 +47,7 @@ Music_CinnabarMansion_branch_7ed19::
 
 Music_CinnabarMansion_Ch2::
 	duty_cycle 2
-	;toggle_perfect_pitch
+	toggle_perfect_pitch
 	vibrato 10, 2, 4
 	note_type 12, 12, 2
 

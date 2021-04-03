@@ -9,7 +9,7 @@ Music_WildBattle_Ch1::
 	volume 7, 7
 	duty_cycle 3
 	vibrato 6, 3, 4
-	;toggle_perfect_pitch
+	toggle_perfect_pitch
 	note_type 12, 11, 3
 	octave 4
 	note C_, 1

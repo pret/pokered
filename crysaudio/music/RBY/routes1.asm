@@ -10,7 +10,7 @@ Music_Routes1_Ch1::
 	volume 7, 7
 	vibrato 4, 2, 3
 	duty_cycle 2
-	;toggle_perfect_pitch
+	toggle_perfect_pitch
 
 Music_Routes1_branch_9be9::
 	note_type 12, 10, 1

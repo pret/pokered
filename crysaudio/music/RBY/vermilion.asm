@@ -10,7 +10,7 @@ Music_Vermilion_Ch1::
 	volume 7, 7
 	duty_cycle 3
 	vibrato 12, 3, 4
-	;toggle_perfect_pitch
+	toggle_perfect_pitch
 
 Music_Vermilion_branch_b9f6::
 	note_type 12, 11, 5

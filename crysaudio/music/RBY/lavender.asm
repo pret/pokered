@@ -9,7 +9,7 @@ Music_Lavender_Ch1::
 	tempo 152
 	volume 7, 7
 	duty_cycle 1
-	;toggle_perfect_pitch
+	toggle_perfect_pitch
 	vibrato 0, 8, 8
 	note_type 12, 8, 7
 	rest 16

@@ -8,7 +8,7 @@ Music_PkmnHealed_Ch1::
 	tempo 144
 	volume 7, 7
 	duty_cycle 2
-	;toggle_perfect_pitch
+	toggle_perfect_pitch
 	note_type 12, 8, 1
 	rest 2
 	pitch_slide 1, 4, B_

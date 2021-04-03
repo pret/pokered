@@ -15,7 +15,7 @@ Music_MeetRival_branch_b123::
 	volume 7, 7
 	duty_cycle 3
 	vibrato 6, 3, 4
-	;toggle_perfect_pitch
+	toggle_perfect_pitch
 	note_type 12, 11, 3
 	octave 4
 	note D_, 1
@@ -136,7 +136,7 @@ Music_MeetRival_branch_b1a5::
 	volume 7, 7
 	duty_cycle 3
 	vibrato 6, 3, 4
-	;toggle_perfect_pitch
+	toggle_perfect_pitch
 	note_type 12, 11, 3
 	octave 3
 	note D_, 1

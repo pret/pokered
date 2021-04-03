@@ -10,7 +10,7 @@ Music_Routes4_Ch1::
 	volume 7, 7
 	duty_cycle 3
 	vibrato 10, 3, 4
-	;toggle_perfect_pitch
+	toggle_perfect_pitch
 	note_type 12, 10, 2
 	octave 2
 	note G#, 4

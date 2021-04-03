@@ -8,7 +8,7 @@ Music_PokemonTower_Ch1::
 	tempo 152
 	volume 7, 7
 	duty_cycle 3
-	;toggle_perfect_pitch
+	toggle_perfect_pitch
 	vibrato 12, 2, 3
 	note_type 12, 8, 0
 	rest 4

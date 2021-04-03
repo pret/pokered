@@ -9,7 +9,7 @@ Music_MuseumGuy_Ch1::
 	tempo 128
 	volume 7, 7
 	duty_cycle 2
-	;toggle_perfect_pitch
+	toggle_perfect_pitch
 	note_type 12, 11, 1
 	octave 3
 	note B_, 2

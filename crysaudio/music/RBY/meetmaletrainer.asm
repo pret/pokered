@@ -9,7 +9,7 @@ Music_MeetMaleTrainer_Ch1::
 	volume 7, 7
 	duty_cycle 3
 	vibrato 20, 3, 3
-	;toggle_perfect_pitch
+	toggle_perfect_pitch
 	note_type 12, 11, 4
 	octave 3
 	note C#, 1

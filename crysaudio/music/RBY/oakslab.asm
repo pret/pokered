@@ -9,7 +9,7 @@ Music_OaksLab_Ch1::
 	volume 7, 7
 	duty_cycle 3
 	vibrato 16, 1, 2
-	;toggle_perfect_pitch
+	toggle_perfect_pitch
 	note_type 12, 11, 3
 	octave 2
 	note B_, 1

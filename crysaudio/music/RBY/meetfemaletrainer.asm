@@ -8,7 +8,7 @@ Music_MeetFemaleTrainer_Ch1::
 	tempo 124
 	volume 7, 7
 	duty_cycle 1
-	;toggle_perfect_pitch
+	toggle_perfect_pitch
 	note_type 12, 11, 2
 	octave 3
 	note G#, 6

@@ -8,7 +8,7 @@ Music_SilphCo_Ch1::
 	tempo 160
 	volume 7, 7
 	duty_cycle 3
-	;toggle_perfect_pitch
+	toggle_perfect_pitch
 	vibrato 8, 2, 2
 	note_type 6, 11, 3
 	octave 2
