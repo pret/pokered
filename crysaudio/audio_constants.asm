@@ -29,6 +29,15 @@ NUM_MUSIC_CHANS EQU const_value
 NUM_NOISE_CHANS EQU const_value - NUM_MUSIC_CHANS
 NUM_CHANNELS EQU const_value
 
+Ch1 EQU CHAN1
+Ch2 EQU CHAN2
+Ch3 EQU CHAN3
+Ch4 EQU CHAN4
+Ch5 EQU CHAN5
+Ch6 EQU CHAN6
+Ch7 EQU CHAN7
+Ch8 EQU CHAN8
+
 ; channel_struct members (see macros/wram.asm)
 CHANNEL_MUSIC_ID                    EQUS "(wChannel1MusicID - wChannel1)"
 CHANNEL_MUSIC_BANK                  EQUS "(wChannel1MusicBank - wChannel1)"

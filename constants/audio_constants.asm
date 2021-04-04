@@ -1,18 +1,18 @@
 ; pitch
 ; Audio[1|2|3]_Pitches indexes (see audio/notes.asm)
-;	const_def
-;	const C_ ; 0
-;	const C# ; 1
-;	const D_ ; 2
-;	const D# ; 3
-;	const E_ ; 4
-;	const F_ ; 5
-;	const F# ; 6
-;	const G_ ; 7
-;	const G# ; 8
-;	const A_ ; 9
-;	const A# ; A
-;	const B_ ; B
+	const_def
+	const C_ ; 0
+	const C# ; 1
+	const D_ ; 2
+	const D# ; 3
+	const E_ ; 4
+	const F_ ; 5
+	const F# ; 6
+	const G_ ; 7
+	const G# ; 8
+	const A_ ; 9
+	const A# ; A
+	const B_ ; B
 
 ; channel
 ; Audio[1|2|3]_HWChannelBaseAddresses, Audio[1|2|3]_HWChannelDisableMasks,
@@ -22,13 +22,13 @@
 	const Ch2 ; 1
 	const Ch3 ; 2
 	const Ch4 ; 3
-;NUM_MUSIC_CHANS EQU const_value
+NUM_MUSIC_CHANS EQU const_value
 	const Ch5 ; 4
 	const Ch6 ; 5
 	const Ch7 ; 6
 	const Ch8 ; 7
-;NUM_NOISE_CHANS EQU const_value - NUM_MUSIC_CHANS
-;NUM_CHANNELS EQU const_value
+NUM_NOISE_CHANS EQU const_value - NUM_MUSIC_CHANS
+NUM_CHANNELS EQU const_value
 
 ; HW sound channel register base addresses
 HW_CH1_BASE EQU LOW(rNR10)

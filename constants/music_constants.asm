@@ -2,9 +2,10 @@
 ; SFX_Headers_(1|2|3) indexes (see audio/headers/*.asm)
 
 ;music_const: MACRO
-;\1 EQUS "RB(\2)"
+;\1 EQUS "((\2 - SFX_Headers_1) / 3)"
 ;ENDM
-const_value = 1
+
+	const_def 1
 
 	const MUSIC_PALLET_TOWN
 	const MUSIC_POKECENTER
@@ -57,6 +58,7 @@ const_value = 1
 	const NUM_SONGS
 
 	const_def
+
 	const SFX_CRY_00
 	const SFX_CRY_01
 	const SFX_CRY_02
@@ -96,7 +98,8 @@ const_value = 1
 	const SFX_CRY_24
 	const SFX_CRY_25
 
-const_value = 1
+	const_def 1
+
 	; AUDIO_1 AUDIO_3
 	const SFX_GET_ITEM_1
 
