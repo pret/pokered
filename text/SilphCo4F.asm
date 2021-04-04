@@ -25,13 +25,13 @@ _SilphCo4AfterBattleText2::
 	done
 
 _SilphCo4BattleText3::
-	text "My #MON are my"
+	text "My POKéMON are my"
 	line "loyal soldiers!"
 	done
 
 _SilphCo4EndBattleText3::
 	text "Darn!"
-	line "You weak #MON!"
+	line "You weak POKéMON!"
 	prompt
 
 _SilphCo4AfterBattleText3::

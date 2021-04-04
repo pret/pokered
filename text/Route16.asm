@@ -70,7 +70,7 @@ _Route16EndBattleText5::
 	prompt
 
 _Route16AfterBattleText5::
-	text "I like my #MON"
+	text "I like my POKéMON"
 	line "ferocious! They"
 	cont "tear up enemies!"
 	done
@@ -87,11 +87,11 @@ _Route16EndBattleText6::
 _Route16AfterBattleText6::
 	text "I like harassing"
 	line "people with my"
-	cont "vicious #MON!"
+	cont "vicious POKéMON!"
 	done
 
 _Route16Text7::
-	text "A sleeping #MON"
+	text "A sleeping POKéMON"
 	line "blocks the way!"
 	done
 

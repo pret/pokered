@@ -31,7 +31,7 @@ _SaffronCityText6::
 _SaffronCityText7::
 	text "With SILPH under"
 	line "control, we can"
-	cont "exploit #MON"
+	cont "exploit POKéMON"
 	cont "around the world!"
 	done
 
@@ -102,11 +102,11 @@ _SaffronCityText17::
 
 _SaffronCityText18::
 	text "SAFFRON CITY"
-	line "#MON GYM"
+	line "POKéMON GYM"
 	cont "LEADER: SABRINA"
 
 	para "The Master of"
-	line "Psychic #MON!"
+	line "Psychic POKéMON!"
 	done
 
 _SaffronCityText20::
@@ -130,7 +130,7 @@ _SaffronCityText21::
 
 	para "Try it on those"
 	line "hard-to-catch"
-	cont "#MON."
+	cont "POKéMON."
 	done
 
 _SaffronCityText22::

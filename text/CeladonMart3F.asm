@@ -1,6 +1,6 @@
 _TM18PreReceiveText::
 	text "Oh, hi! I finally"
-	line "finished #MON!"
+	line "finished POKéMON!"
 
 	para "Not done yet?"
 	line "This might be"
@@ -27,7 +27,7 @@ _TM18NoRoomText::
 	done
 
 _CeladonMart3Text2::
-	text "Captured #MON"
+	text "Captured POKéMON"
 	line "are registered"
 	cont "with an ID No."
 	cont "and OT, the name"
@@ -55,12 +55,12 @@ _CeladonMart3Text4::
 
 	para "GRAVELER turned"
 	line "into a different"
-	cont "#MON!"
+	cont "POKéMON!"
 	done
 
 _CeladonMart3Text5::
 	text "You can identify"
-	line "#MON you got"
+	line "POKéMON you got"
 	cont "in trades by"
 	cont "their ID Numbers!"
 	done
@@ -95,5 +95,5 @@ _CeladonMart3Text14::
 
 _CeladonMart3Text15::
 	text "Red and Blue!"
-	line "Both are #MON!"
+	line "Both are POKéMON!"
 	done

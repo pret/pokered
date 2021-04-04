@@ -6,6 +6,6 @@ _SafariZoneRestHouse1Text1::
 
 _SafariZoneRestHouse1Text2::
 	text "I'm catching"
-	line "#MON to take"
+	line "POKéMON to take"
 	cont "home as gifts!"
 	done

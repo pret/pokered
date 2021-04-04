@@ -4,15 +4,15 @@ _HallofFameRoomText1::
 	cont "<PLAYER>!"
 
 	para "This floor is the"
-	line "#MON HALL OF"
+	line "POKéMON HALL OF"
 	cont "FAME!"
 
-	para "#MON LEAGUE"
+	para "POKéMON LEAGUE"
 	line "champions are"
 	cont "honored for their"
 	cont "exploits here!"
 
-	para "Their #MON are"
+	para "Their POKéMON are"
 	line "also recorded in"
 	cont "the HALL OF FAME!"
 
@@ -23,6 +23,6 @@ _HallofFameRoomText1::
 
 	para "Congratulations,"
 	line "<PLAYER>, you and"
-	cont "your #MON are"
+	cont "your POKéMON are"
 	cont "HALL OF FAMERs!"
 	done

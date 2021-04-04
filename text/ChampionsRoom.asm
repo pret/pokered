@@ -10,18 +10,18 @@ _GaryChampionIntroText::
 	cont "me sharp!"
 
 	para "While working on"
-	line "#DEX, I looked"
+	line "POKéDEX, I looked"
 	cont "all over for"
-	cont "powerful #MON!"
+	cont "powerful POKéMON!"
 
 	para "Not only that, I"
 	line "assembled teams"
 	cont "that would beat"
-	cont "any #MON type!"
+	cont "any POKéMON type!"
 
 	para "And now!"
 
-	para "I'm the #MON"
+	para "I'm the POKéMON"
 	line "LEAGUE champion!"
 
 	para "<PLAYER>! Do you"
@@ -59,7 +59,7 @@ _GaryVictoryText::
 	para "You did well to"
 	line "even reach me,"
 	cont "<RIVAL>, the"
-	cont "#MON genius!"
+	cont "POKéMON genius!"
 
 	para "Nice try, loser!"
 	line "Hahaha!"
@@ -71,10 +71,10 @@ _GaryText_76103::
 
 	para "I never made any"
 	line "mistakes raising"
-	cont "my #MON..."
+	cont "my POKéMON..."
 
 	para "Darn it! You're"
-	line "the new #MON"
+	line "the new POKéMON"
 	cont "LEAGUE champion!"
 
 	para "Although I don't"
@@ -89,7 +89,7 @@ _GaryText_76120::
 	text "OAK: So, you won!"
 	line "Congratulations!"
 	cont "You're the new"
-	cont "#MON LEAGUE"
+	cont "POKéMON LEAGUE"
 	cont "champion!"
 
 	para "You've grown up so"
@@ -121,7 +121,7 @@ _GaryText_76125::
 
 	para "You have forgotten"
 	line "to treat your"
-	cont "#MON with"
+	cont "POKéMON with"
 	cont "trust and love!"
 
 	para "Without them, you"
@@ -138,7 +138,7 @@ _GaryText_7612a::
 	cont "own doing!"
 
 	para "The bond you share"
-	line "with your #MON"
+	line "with your POKéMON"
 	cont "is marvelous!"
 
 	para "<PLAYER>!"

@@ -5,11 +5,11 @@ _OakAppearsText::
 
 _OakWalksUpText::
 	text "OAK: It's unsafe!"
-	line "Wild #MON live"
+	line "Wild POKéMON live"
 	cont "in tall grass!"
 
 	para "You need your own"
-	line "#MON for your"
+	line "POKéMON for your"
 	cont "protection."
 	cont "I know!"
 
@@ -19,7 +19,7 @@ _OakWalksUpText::
 
 _PalletTownText2::
 	text "I'm raising"
-	line "#MON too!"
+	line "POKéMON too!"
 
 	para "When they get"
 	line "strong, they can"
@@ -32,12 +32,12 @@ _PalletTownText3::
 
 	para "You can now store"
 	line "and recall items"
-	cont "and #MON as"
+	cont "and POKéMON as"
 	cont "data via PC!"
 	done
 
 _PalletTownText4::
-	text "OAK #MON"
+	text "OAK POKéMON"
 	line "RESEARCH LAB"
 	done
 

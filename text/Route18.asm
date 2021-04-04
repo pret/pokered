@@ -1,7 +1,7 @@
 _Route18BattleText1::
 	text "I always check"
 	line "every grassy area"
-	cont "for new #MON."
+	cont "for new POKéMON."
 	done
 
 _Route18EndBattleText1::
@@ -26,7 +26,7 @@ _Route18EndBattleText2::
 
 _Route18AfterBattleText2::
 	text "I also collect sea"
-	line "#MON on"
+	line "POKéMON on"
 	cont "weekends!"
 	done
 
@@ -41,7 +41,7 @@ _Route18EndBattleText3::
 
 _Route18AfterBattleText3::
 	text "This is my fave"
-	line "#MON hunting"
+	line "POKéMON hunting"
 	cont "area!"
 	done
 

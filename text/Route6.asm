@@ -53,7 +53,7 @@ _Route6EndBattleText4::
 
 _Route6AfterBattleText4::
 	text "I should carry"
-	line "more #MON with"
+	line "more POKéMON with"
 	cont "me for safety."
 	done
 
@@ -85,7 +85,7 @@ _Route6EndBattleText6::
 	prompt
 
 _Route6AfterBattleText6::
-	text "Are my #MON"
+	text "Are my POKéMON"
 	line "weak? Or, am I"
 	cont "just bad?"
 	done

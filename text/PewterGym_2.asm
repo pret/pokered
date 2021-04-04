@@ -5,7 +5,7 @@ _PewterGymText_5c4a3::
 
 	para "You appear to be"
 	line "very gifted as a"
-	cont "#MON trainer!"
+	cont "POKéMON trainer!"
 
 	para "Go to the GYM in"
 	line "CERULEAN and test"
@@ -28,19 +28,19 @@ _TM34ExplanationText::
 	para "A TM contains a"
 	line "technique that"
 	cont "can be taught to"
-	cont "#MON!"
+	cont "POKéMON!"
 
 	para "A TM is good only"
 	line "once! So when you"
 	cont "use one to teach"
 	cont "a new technique,"
-	cont "pick the #MON"
+	cont "pick the POKéMON"
 	cont "carefully!"
 
 	para "TM34 contains"
 	line "BIDE!"
 
-	para "Your #MON will"
+	para "Your POKéMON will"
 	line "absorb damage in"
 	cont "battle then pay"
 	cont "it back double!"
@@ -67,11 +67,11 @@ _PewterGymText_5c4c1::
 	text_start
 
 	para "That's an official"
-	line "#MON LEAGUE"
+	line "POKéMON LEAGUE"
 	cont "BADGE!"
 
 	para "Its bearer's"
-	line "#MON become"
+	line "POKéMON become"
 	cont "more powerful!"
 
 	para "The technique"
@@ -106,7 +106,7 @@ _PewterGymText_5c515::
 	text "Hiya! I can tell"
 	line "you have what it"
 	cont "takes to become a"
-	cont "#MON champ!"
+	cont "POKéMON champ!"
 
 	para "I'm no trainer,"
 	line "but I can tell"
@@ -122,13 +122,13 @@ _PewterGymText_5c51a::
 	prompt
 
 _PewterGymText_5c51f::
-	text "The 1st #MON"
+	text "The 1st POKéMON"
 	line "out in a match is"
 	cont "at the top of the"
-	cont "#MON LIST!"
+	cont "POKéMON LIST!"
 
 	para "By changing the"
-	line "order of #MON,"
+	line "order of POKéMON,"
 	cont "matches could be"
 	cont "made easier!"
 	done
@@ -141,6 +141,6 @@ _PewterGymText_5c524::
 
 _PewterGymText_5c529::
 	text "Just as I thought!"
-	line "You're #MON"
+	line "You're POKéMON"
 	cont "champ material!"
 	done

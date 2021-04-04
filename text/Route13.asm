@@ -1,5 +1,5 @@
 _Route13BattleText2::
-	text "My bird #MON"
+	text "My bird POKéMON"
 	line "want to scrap!"
 	done
 
@@ -9,7 +9,7 @@ _Route13EndBattleText2::
 	prompt
 
 _Route13AfterBattleText2::
-	text "My #MON look"
+	text "My POKéMON look"
 	line "happy even though"
 	cont "they lost."
 	done
@@ -47,7 +47,7 @@ _Route13AfterBattleText4::
 	done
 
 _Route13BattleText5::
-	text "My cute #MON"
+	text "My cute POKéMON"
 	line "wish to make your"
 	cont "acquaintance."
 	done
@@ -59,7 +59,7 @@ _Route13EndBattleText5::
 
 _Route13AfterBattleText5::
 	text "You have to make"
-	line "#MON fight to"
+	line "POKéMON fight to"
 	cont "toughen them up!"
 	done
 
@@ -76,7 +76,7 @@ _Route13EndBattleText6::
 _Route13AfterBattleText6::
 	text "CARBOS boosted"
 	line "the SPEED of my"
-	cont "#MON."
+	cont "POKéMON."
 	done
 
 _Route13BattleText7::
@@ -107,12 +107,12 @@ _Route13EndBattleText8::
 _Route13AfterBattleText8::
 	text "I wonder which is"
 	line "stronger, male or"
-	cont "female #MON?"
+	cont "female POKéMON?"
 	done
 
 _Route13BattleText9::
 	text "Do you want to"
-	line "#MON with me?"
+	line "POKéMON with me?"
 	done
 
 _Route13EndBattleText9::
@@ -123,7 +123,7 @@ _Route13EndBattleText9::
 _Route13AfterBattleText9::
 	text "I don't know"
 	line "anything about"
-	cont "#MON. I just"
+	cont "POKéMON. I just"
 	cont "like cool ones!"
 	done
 
@@ -143,7 +143,7 @@ _Route13AfterBattleText10::
 
 _Route13BattleText11::
 	text "I always go with"
-	line "bird #MON!"
+	line "bird POKéMON!"
 	done
 
 _Route13EndBattleText11::

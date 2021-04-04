@@ -2,17 +2,17 @@ _ItemUseBallText00::
 	text "It dodged the"
 	line "thrown BALL!"
 
-	para "This #MON"
+	para "This POKéMON"
 	line "can't be caught!"
 	prompt
 
 _ItemUseBallText01::
 	text "You missed the"
-	line "#MON!"
+	line "POKéMON!"
 	prompt
 
 _ItemUseBallText02::
-	text "Darn! The #MON"
+	text "Darn! The POKéMON"
 	line "broke free!"
 	prompt
 
@@ -49,7 +49,7 @@ _ItemUseBallText08::
 	prompt
 
 _ItemUseBallText06::
-	text "New #DEX data"
+	text "New POKéDEX data"
 	line "will be added for"
 	cont "@"
 	text_ram wEnemyMonNick
@@ -92,7 +92,7 @@ _ThrewRockText::
 	done
 
 _PlayedFluteNoEffectText::
-	text "Played the #"
+	text "Played the POKé"
 	line "FLUTE."
 
 	para "Now, that's a"
@@ -101,12 +101,12 @@ _PlayedFluteNoEffectText::
 
 _FluteWokeUpText::
 	text "All sleeping"
-	line "#MON woke up."
+	line "POKéMON woke up."
 	prompt
 
 _PlayedFluteHadEffectText::
 	text "<PLAYER> played the"
-	line "# FLUTE.@"
+	line "POKé FLUTE.@"
 	text_end
 
 _CoinCaseNumCoinsText::
@@ -170,7 +170,7 @@ _TeachMachineMoveText::
 	para "Teach @"
 	text_ram wcf4b
 	text_start
-	line "to a #MON?"
+	line "to a POKéMON?"
 	done
 
 _MonCannotLearnMachineMoveText::
@@ -225,7 +225,7 @@ _NoSurfingHereText::
 	prompt
 
 _BoxFullCannotThrowBallText::
-	text "The #MON BOX"
+	text "The POKéMON BOX"
 	line "is full! Can't"
 	cont "use that item!"
 	prompt

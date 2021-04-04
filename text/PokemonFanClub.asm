@@ -36,20 +36,20 @@ FanClubSeelText::
 
 FanClubMeetChairText::
 	text "I chair the"
-	line "#MON Fan Club!"
+	line "POKéMON Fan Club!"
 
 	para "I have collected"
-	line "over 100 #MON!"
+	line "over 100 POKéMON!"
 
 	para "I'm very fussy"
 	line "when it comes to"
-	cont "#MON!"
+	cont "POKéMON!"
 
 	para "So..."
 
 	para "Did you come"
 	line "visit to hear"
-	cont "about my #MON?"
+	cont "about my POKéMON?"
 	done
 
 FanClubChairStoryText::
@@ -116,7 +116,7 @@ FanClubChairFinalText::
 
 	para "Did you come see"
 	line "me about my"
-	cont "#MON again?"
+	cont "POKéMON again?"
 
 	para "No? Too bad!"
 	done
@@ -129,7 +129,7 @@ FanClubBagFullText::
 _FanClubText6::
 	text "Our Chairman is"
 	line "very vocal about"
-	cont "#MON."
+	cont "POKéMON."
 	done
 
 _FanClubText7::

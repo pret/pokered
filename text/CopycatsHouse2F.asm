@@ -1,6 +1,6 @@
 _CopycatsHouse2FText_5ccd4::
 	text "<PLAYER>: Hi! Do"
-	line "you like #MON?"
+	line "you like POKéMON?"
 
 	para "<PLAYER>: Uh no, I"
 	line "just asked you."
@@ -17,7 +17,7 @@ _CopycatsHouse2FText_5ccd4::
 
 _TM31PreReceiveText::
 	text "Oh wow!"
-	line "A # DOLL!"
+	line "A POKé DOLL!"
 
 	para "For me?"
 	line "Thank you!"
@@ -40,7 +40,7 @@ _TM31ExplanationText1::
 	line "favorite, MIMIC!"
 
 	para "Use it on a good"
-	line "#MON!@"
+	line "POKéMON!@"
 	text_end
 
 _TM31ExplanationText2::
@@ -73,7 +73,7 @@ _CopycatsHouse2FText2::
 
 _CopycatsHouse2FText3::
 	text "This is a rare"
-	line "#MON! Huh?"
+	line "POKéMON! Huh?"
 	cont "It's only a doll!"
 	done
 
@@ -91,7 +91,7 @@ _CopycatsHouse2FText_5cd17::
 	para "Skill: Mimicry!"
 	line "Hobby: Collecting"
 	cont "dolls!"
-	cont "Favorite #MON:"
+	cont "Favorite POKéMON:"
 	cont "CLEFAIRY!"
 	done
 

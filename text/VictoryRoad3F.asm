@@ -41,7 +41,7 @@ _VictoryRoad3EndBattleText4::
 _VictoryRoad3AfterBattleText4::
 	text "All trainers here"
 	line "are headed to the"
-	cont "#MON LEAGUE!"
+	cont "POKéMON LEAGUE!"
 	cont "Be careful!"
 	done
 

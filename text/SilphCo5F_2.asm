@@ -27,29 +27,29 @@ _SilphCo5AfterBattleText5::
 	done
 
 _SilphCo5Text9::
-	text "It's a #MON"
+	text "It's a POKéMON"
 	line "REPORT!"
 
-	para "#MON LAB"
+	para "POKéMON LAB"
 	line "created PORYGON,"
 	cont "the first virtual"
-	cont "reality #MON."
+	cont "reality POKéMON."
 	done
 
 _SilphCo5Text10::
-	text "It's a #MON"
+	text "It's a POKéMON"
 	line "REPORT!"
 
-	para "Over 160 #MON"
+	para "Over 160 POKéMON"
 	line "techniques have"
 	cont "been confirmed."
 	done
 
 _SilphCo5Text11::
-	text "It's a #MON"
+	text "It's a POKéMON"
 	line "REPORT!"
 
-	para "4 #MON evolve"
+	para "4 POKéMON evolve"
 	line "only when traded"
 	cont "by link-cable."
 	done

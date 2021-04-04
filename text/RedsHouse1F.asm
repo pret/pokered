@@ -18,7 +18,7 @@ _MomHealText1::
 _MomHealText2::
 	text "MOM: Oh good!"
 	line "You and your"
-	cont "#MON are"
+	cont "POKéMON are"
 	cont "looking great!"
 	cont "Take care now!"
 	done

@@ -47,7 +47,7 @@ _Route12HouseText_564d4::
 	line "in any water!"
 	cont "You can catch"
 	cont "different kinds"
-	cont "of #MON."
+	cont "of POKéMON."
 
 	para "Try fishing"
 	line "wherever you can!"

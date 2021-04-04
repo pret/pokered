@@ -19,7 +19,7 @@ _TM35ExplanationText::
 	cont "of a METRONOME!"
 
 	para "It tweaks your"
-	line "#MON's brain"
+	line "POKéMON's brain"
 	cont "into using moves"
 	cont "it doesn't know!"
 	done
@@ -32,7 +32,7 @@ _TM35NoRoomText::
 _Lab3Text2::
 	text "EEVEE can evolve"
 	line "into 1 of 3 kinds"
-	cont "of #MON."
+	cont "of POKéMON."
 	done
 
 _Lab3Text3::
@@ -42,7 +42,7 @@ _Lab3Text3::
 	para "..."
 
 	para "The 3 legendary"
-	line "bird #MON are"
+	line "bird POKéMON are"
 	cont "ARTICUNO, ZAPDOS"
 	cont "and MOLTRES."
 
@@ -53,7 +53,7 @@ _Lab3Text3::
 	line "the cavern close"
 	cont "to CERULEAN."
 
-	para "From: #MON"
+	para "From: POKéMON"
 	line "RESEARCH TEAM"
 
 	para "..."

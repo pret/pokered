@@ -26,7 +26,7 @@ _ReceivingHM01Text::
 	line "have this!"
 
 	para "Teach it to your"
-	line "#MON and you"
+	line "POKéMON and you"
 	cont "can see it CUT"
 	cont "any time!"
 	prompt

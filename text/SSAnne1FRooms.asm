@@ -7,7 +7,7 @@ _SSAnne8BattleText1::
 	text "I travel alone"
 	line "on my journeys!"
 
-	para "My #MON are my"
+	para "My POKéMON are my"
 	line "only friends!"
 	done
 
@@ -37,7 +37,7 @@ _SSAnne8AfterBattleText2::
 	done
 
 _SSAnne8BattleText3::
-	text "I love #MON!"
+	text "I love POKéMON!"
 	line "Do you?"
 	done
 
@@ -51,12 +51,12 @@ _SSAnne8AfterBattleText3::
 	line "friend, OK?"
 
 	para "Then we can trade"
-	line "#MON!"
+	line "POKéMON!"
 	done
 
 _SSAnne8BattleText4::
 	text "I collected these"
-	line "#MON from all"
+	line "POKéMON from all"
 	cont "around the world!"
 	done
 
@@ -68,11 +68,11 @@ _SSAnne8EndBattleText4::
 
 _SSAnne8AfterBattleText4::
 	text "You hurt my poor"
-	line "worldly #MON!"
+	line "worldly POKéMON!"
 
 	para "I demand that you"
 	line "heal them at a"
-	cont "#MON CENTER!"
+	cont "POKéMON CENTER!"
 	done
 
 _SSAnne8Text5::

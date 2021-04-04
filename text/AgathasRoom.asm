@@ -13,8 +13,8 @@ _AgathaBeforeBattleText::
 
 	para "Now he just wants"
 	line "to fiddle with"
-	cont "his #DEX! He's"
-	cont "wrong! #MON"
+	cont "his POKéDEX! He's"
+	cont "wrong! POKéMON"
 	cont "are for fighting!"
 
 	para "<PLAYER>! I'll show"

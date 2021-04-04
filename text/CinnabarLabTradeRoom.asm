@@ -5,5 +5,5 @@ _Lab2Text1::
 
 	para "I think it's a"
 	line "rare, prehistoric"
-	cont "#MON!"
+	cont "POKéMON!"
 	done

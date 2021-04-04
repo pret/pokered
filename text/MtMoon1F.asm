@@ -54,12 +54,12 @@ _MtMoon1BattleText5::
 
 _MtMoon1EndBattleText5::
 	text "My"
-	line "#MON won't do!"
+	line "POKéMON won't do!"
 	prompt
 
 _MtMoon1AfterBattleText5::
 	text "I have to find"
-	line "stronger #MON."
+	line "stronger POKéMON."
 	done
 
 _MtMoon1BattleText6::

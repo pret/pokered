@@ -1,10 +1,10 @@
 _CeladonMansion5Text1::
 	text "I know everything"
 	line "about the world"
-	cont "of #MON in"
+	cont "of POKéMON in"
 	cont "your GAME BOY!"
 
 	para "Get together with"
 	line "your friends and"
-	cont "trade #MON!"
+	cont "trade POKéMON!"
 	done

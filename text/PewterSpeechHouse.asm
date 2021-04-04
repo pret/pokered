@@ -1,5 +1,5 @@
 _PewterHouse2Text1::
-	text "#MON learn new"
+	text "POKéMON learn new"
 	line "techniques as"
 	cont "they grow!"
 
@@ -9,7 +9,7 @@ _PewterHouse2Text1::
 	done
 
 _PewterHouse2Text2::
-	text "#MON become"
+	text "POKéMON become"
 	line "easier to catch"
 	cont "when they are"
 	cont "hurt or asleep!"

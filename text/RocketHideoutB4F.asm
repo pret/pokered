@@ -11,7 +11,7 @@ _RocketHideout4Text_4557f::
 
 _RocketHideout4Text_45584::
 	text "I see that you"
-	line "raise #MON"
+	line "raise POKéMON"
 	cont "with utmost care."
 
 	para "A child like you"

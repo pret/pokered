@@ -20,7 +20,7 @@ _FuchsiaHouse1Text2::
 
 _FuchsiaHouse1Text3::
 	text "BILL files his"
-	line "own #MON data"
+	line "own POKéMON data"
 	cont "on his PC!"
 
 	para "Did he show you?"

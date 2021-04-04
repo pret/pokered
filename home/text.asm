@@ -90,7 +90,7 @@ PlaceNextChar::
 	dict "<PAGE>",    PageChar
 	dict "<PLAYER>",  PrintPlayerName
 	dict "<RIVAL>",   PrintRivalName
-	dict "#",         PlacePOKe
+	dict "POKé",      PlacePOKe
 	dict "<PC>",      PCChar
 	dict "<ROCKET>",  RocketChar
 	dict "<TM>",      TMChar
@@ -176,7 +176,7 @@ TMCharText::      db "TM@"
 TrainerCharText:: db "TRAINER@"
 PCCharText::      db "PC@"
 RocketCharText::  db "ROCKET@"
-PlacePOKeText::   db "POKé@"
+PlacePOKeText::   db "P","O","K","é","@"
 SixDotsCharText:: db "……@"
 EnemyText::       db "Enemy @"
 PlacePKMNText::   db "<PK><MN>@"

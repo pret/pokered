@@ -1,5 +1,5 @@
 _Route9BattleText1::
-	text "You have #MON"
+	text "You have POKéMON"
 	line "with you!"
 	cont "You're mine!"
 	done
@@ -18,7 +18,7 @@ _Route9AfterBattleText1::
 _Route9BattleText2::
 	text "Who's that walking"
 	line "with those good"
-	cont "looking #MON?"
+	cont "looking POKéMON?"
 	done
 
 _Route9EndBattleText2::
@@ -73,7 +73,7 @@ _Route9EndBattleText5::
 	line "coming, eh!"
 
 	para "Oh wait. I'm out"
-	line "of #MON!"
+	line "of POKéMON!"
 	prompt
 
 _Route9AfterBattleText5::
@@ -101,7 +101,7 @@ _Route9AfterBattleText6::
 _Route9BattleText7::
 	text "I got up early"
 	line "every day to"
-	cont "raise my #MON"
+	cont "raise my POKéMON"
 	cont "from cocoons!"
 	done
 
@@ -136,7 +136,7 @@ _Route9AfterBattleText8::
 
 _Route9BattleText9::
 	text "Go, my super bug"
-	line "#MON!"
+	line "POKéMON!"
 	done
 
 _Route9EndBattleText9::
@@ -146,7 +146,7 @@ _Route9EndBattleText9::
 
 _Route9AfterBattleText9::
 	text "If you don't like"
-	line "bug #MON, you"
+	line "bug POKéMON, you"
 	cont "bug me!"
 	done
 

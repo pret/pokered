@@ -5,7 +5,7 @@ _MeetLaprasGuyText::
 	cont "Why, thank you!"
 
 	para "I want you to"
-	line "have this #MON"
+	line "have this POKéMON"
 	cont "for saving us."
 	prompt
 
@@ -43,7 +43,7 @@ _SilphCo7Text_51e00::
 	text "TEAM ROCKET was"
 	line "after the MASTER"
 	cont "BALL which will"
-	cont "catch any #MON!"
+	cont "catch any POKéMON!"
 	done
 
 _CanceledMasterBallText::
@@ -57,7 +57,7 @@ _SilphCo7Text_51e23::
 	text "It would be bad"
 	line "if TEAM ROCKET"
 	cont "took over SILPH"
-	cont "or our #MON!"
+	cont "or our POKéMON!"
 	done
 
 _SilphCo7Text_51e28::
@@ -188,13 +188,13 @@ _SilphCo7Text_51ed2::
 	line "and ahead!"
 
 	para "By checking my"
-	line "#DEX, I'm"
+	line "POKéDEX, I'm"
 	cont "starting to see"
 	cont "what's strong and"
 	cont "how they evolve!"
 
 	para "I'm going to the"
-	line "#MON LEAGUE"
+	line "POKéMON LEAGUE"
 	cont "to boot out the"
 	cont "ELITE FOUR!"
 

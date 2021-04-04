@@ -5,11 +5,11 @@ _NameRaterText_1dab3::
 
 	para "Want me to rate"
 	line "the nicknames of"
-	cont "your #MON?"
+	cont "your POKéMON?"
 	done
 
 _NameRaterText_1dab8::
-	text "Which #MON"
+	text "Which POKéMON"
 	line "should I look at?"
 	prompt
 
@@ -32,7 +32,7 @@ _NameRaterText_1dac2::
 	prompt
 
 _NameRaterText_1dac7::
-	text "OK! This #MON"
+	text "OK! This POKéMON"
 	line "has been renamed"
 	cont "@"
 	text_ram wBuffer

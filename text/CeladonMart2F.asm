@@ -1,6 +1,6 @@
 _CeladonMart2Text3::
 	text "SUPER REPEL keeps"
-	line "weak #MON at"
+	line "weak POKéMON at"
 	cont "bay..."
 
 	para "Hmm, it's a more"

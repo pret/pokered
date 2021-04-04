@@ -33,7 +33,7 @@ _Museum1FText_5c233::
 	text "There's a lab"
 	line "somewhere trying"
 	cont "to resurrect"
-	cont "ancient #MON"
+	cont "ancient POKéMON"
 	cont "from AMBER."
 	done
 
@@ -62,10 +62,10 @@ _Museum1FText_5c28e::
 	text "Ssh! I think that"
 	line "this chunk of"
 	cont "AMBER contains"
-	cont "#MON DNA!"
+	cont "POKéMON DNA!"
 
 	para "It would be great"
-	line "if #MON could"
+	line "if POKéMON could"
 	cont "be resurrected"
 	cont "from it!"
 
@@ -76,7 +76,7 @@ _Museum1FText_5c28e::
 	line "to ask!"
 
 	para "Take this to a"
-	line "#MON LAB and"
+	line "POKéMON LAB and"
 	cont "get it examined!"
 	prompt
 
@@ -99,7 +99,7 @@ _Museum1FText_5c2ad::
 	text "We are proud of 2"
 	line "fossils of very"
 	cont "rare, prehistoric"
-	cont "#MON!"
+	cont "POKéMON!"
 	done
 
 _Museum1FText_5c2bc::

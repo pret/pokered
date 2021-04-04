@@ -595,7 +595,7 @@ HeightWeightText:
 
 ; XXX does anything point to this?
 PokeText:
-	db "#@"
+	db "POKé@"
 
 ; horizontal line that divides the pokedex text description from the rest of the data
 PokedexDataDividerLine:

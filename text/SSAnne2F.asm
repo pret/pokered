@@ -19,7 +19,7 @@ _SSAnneRivalBeforeBattleText::
 	line "really invited?"
 
 	para "So how's your"
-	line "#DEX coming?"
+	line "POKéDEX coming?"
 
 	para "I already caught"
 	line "40 kinds, pal!"
@@ -36,7 +36,7 @@ _SSAnneRivalDefeatedText::
 
 	para "At least you're"
 	line "raising your"
-	cont "#MON!"
+	cont "POKéMON!"
 	prompt
 
 _SSAnneRivalWonText::

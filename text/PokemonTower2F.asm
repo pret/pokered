@@ -2,7 +2,7 @@ _PokemonTower2Text_6062d::
 	text "<RIVAL>: Hey,"
 	line "<PLAYER>! What"
 	cont "brings you here?"
-	cont "Your #MON"
+	cont "Your POKéMON"
 	cont "don't look dead!"
 
 	para "I can at least"
@@ -21,14 +21,14 @@ _PokemonTower2Text_60632::
 _PokemonTower2Text_60637::
 	text "<RIVAL>: Well,"
 	line "look at all your"
-	cont "wimpy #MON!"
+	cont "wimpy POKéMON!"
 
 	para "Toughen them up a"
 	line "bit more!"
 	prompt
 
 _PokemonTower2Text_6063c::
-	text "How's your #DEX"
+	text "How's your POKéDEX"
 	line "coming, pal?"
 	cont "I just caught a"
 	cont "CUBONE!"

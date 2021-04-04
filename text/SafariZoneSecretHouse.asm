@@ -24,7 +24,7 @@ _ReceivedHM03Text::
 _HM03ExplanationText::
 	text "HM03 is SURF!"
 
-	para "#MON will be"
+	para "POKéMON will be"
 	line "able to ferry you"
 	cont "across water!"
 

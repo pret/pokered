@@ -27,7 +27,7 @@ _RockTunnel1EndBattleText2::
 
 _RockTunnel1AfterBattleText2::
 	text "That sleeping"
-	line "#MON on ROUTE"
+	line "POKéMON on ROUTE"
 	cont "12 forced me to"
 	cont "take this detour."
 	done
@@ -48,7 +48,7 @@ _RockTunnel1AfterBattleText3::
 	done
 
 _RockTunnel1BattleText4::
-	text "#MON fight!"
+	text "POKéMON fight!"
 	line "Ready, go!"
 	done
 
@@ -80,12 +80,12 @@ _RockTunnel1AfterBattleText5::
 
 _RockTunnel1BattleText6::
 	text "I came this far"
-	line "for #MON!"
+	line "for POKéMON!"
 	done
 
 _RockTunnel1EndBattleText6::
 	text "I'm"
-	line "out of #MON!"
+	line "out of POKéMON!"
 	prompt
 
 _RockTunnel1AfterBattleText6::
@@ -94,7 +94,7 @@ _RockTunnel1AfterBattleText6::
 	done
 
 _RockTunnel1BattleText7::
-	text "You have #MON!"
+	text "You have POKéMON!"
 	line "Let's start!"
 	done
 

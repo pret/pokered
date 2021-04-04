@@ -9,7 +9,7 @@ _LanceBeforeBattleText::
 
 	para "You know that"
 	line "dragons are"
-	cont "mythical #MON!"
+	cont "mythical POKéMON!"
 
 	para "They're hard to"
 	line "catch and raise,"
@@ -32,7 +32,7 @@ _LanceEndBattleText::
 
 	para "I hate to admit"
 	line "it, but you are a"
-	cont "#MON master!"
+	cont "POKéMON master!"
 	prompt
 
 _LanceAfterBattleText::
@@ -42,7 +42,7 @@ _LanceAfterBattleText::
 	cont "you, <PLAYER>!"
 
 	para "You are now the"
-	line "#MON LEAGUE"
+	line "POKéMON LEAGUE"
 	cont "champion!"
 
 	para "...Or, you would"
@@ -59,6 +59,6 @@ _LanceAfterBattleText::
 	cont "FOUR before you!"
 
 	para "He is the real"
-	line "#MON LEAGUE"
+	line "POKéMON LEAGUE"
 	cont "champion!@"
 	text_end

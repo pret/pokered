@@ -6,7 +6,7 @@ _CeladonDinerText1::
 	done
 
 _CeladonDinerText2::
-	text "My #MON are"
+	text "My POKéMON are"
 	line "weak, so I often"
 	cont "have to go to the"
 	cont "DRUG STORE."

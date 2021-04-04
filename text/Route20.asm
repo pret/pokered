@@ -9,7 +9,7 @@ _Route20EndBattleText1::
 
 _Route20AfterBattleText1::
 	text "I wish I could"
-	line "ride my #MON."
+	line "ride my POKéMON."
 	done
 
 _Route20BattleText2::
@@ -68,12 +68,12 @@ _Route20EndBattleText5::
 _Route20AfterBattleText5::
 	text "I should've been"
 	line "buffing up my"
-	cont "#MON, not me!"
+	cont "POKéMON, not me!"
 	done
 
 _Route20BattleText6::
 	text "Why are you"
-	line "riding a #MON?"
+	line "riding a POKéMON?"
 	cont "Can't you swim?"
 	done
 
@@ -83,13 +83,13 @@ _Route20EndBattleText6::
 	prompt
 
 _Route20AfterBattleText6::
-	text "Riding a #MON"
+	text "Riding a POKéMON"
 	line "sure looks fun!"
 	done
 
 _Route20BattleText7::
 	text "I rode my bird"
-	line "#MON here!"
+	line "POKéMON here!"
 	done
 
 _Route20EndBattleText7::
@@ -129,7 +129,7 @@ _Route20EndBattleText9::
 	prompt
 
 _Route20AfterBattleText9::
-	text "#MON have"
+	text "POKéMON have"
 	line "taken over an"
 	cont "abandoned mansion"
 	cont "on CINNABAR!"
@@ -138,7 +138,7 @@ _Route20AfterBattleText9::
 _Route20BattleText10::
 	text "CINNABAR, in the"
 	line "west, has a LAB"
-	cont "for #MON."
+	cont "for POKéMON."
 	done
 
 _Route20EndBattleText10::

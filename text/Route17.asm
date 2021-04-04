@@ -75,7 +75,7 @@ _Route17AfterBattleText5::
 	done
 
 _Route17BattleText6::
-	text "My #MON won't"
+	text "My POKéMON won't"
 	line "evolve! Why?"
 	done
 
@@ -85,7 +85,7 @@ _Route17EndBattleText6::
 	prompt
 
 _Route17AfterBattleText6::
-	text "Maybe some #MON"
+	text "Maybe some POKéMON"
 	line "need element"
 	cont "STONEs to evolve."
 	done
@@ -157,10 +157,10 @@ _Route17Text11::
 _Route17Text12::
 	text "TRAINER TIPS"
 
-	para "All #MON are"
+	para "All POKéMON are"
 	line "unique."
 
-	para "Even #MON of"
+	para "Even POKéMON of"
 	line "the same type and"
 	cont "level grow at"
 	cont "different rates."
@@ -185,7 +185,7 @@ _Route17Text15::
 	text "It's a notice!"
 
 	para "Don't throw the"
-	line "game, throw #"
+	line "game, throw POKé"
 	cont "BALLs instead!"
 	done
 

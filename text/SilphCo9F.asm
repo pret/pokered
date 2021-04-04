@@ -14,7 +14,7 @@ _SilphCo9Text_5d8ef::
 	done
 
 _SilphCo9BattleText1::
-	text "Your #MON seem"
+	text "Your POKéMON seem"
 	line "to adore you, kid!"
 	done
 
@@ -29,7 +29,7 @@ _SilphCo9AfterBattleText1::
 	done
 
 _SilphCo9BattleText2::
-	text "Your #MON have"
+	text "Your POKéMON have"
 	line "weak points! I"
 	cont "can nail them!"
 	done

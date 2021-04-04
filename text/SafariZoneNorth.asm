@@ -16,7 +16,7 @@ _SafariZoneNorthText5::
 _SafariZoneNorthText6::
 	text "TRAINER TIPS"
 
-	para "#MON hide in"
+	para "POKéMON hide in"
 	line "tall grass!"
 
 	para "Zigzag through"

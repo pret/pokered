@@ -24,12 +24,12 @@ _CinnabarIslandText3::
 	done
 
 _CinnabarIslandText6::
-	text "#MON LAB"
+	text "POKéMON LAB"
 	done
 
 _CinnabarIslandText7::
 	text "CINNABAR ISLAND"
-	line "#MON GYM"
+	line "POKéMON GYM"
 	cont "LEADER: BLAINE"
 
 	para "The Hot-Headed"

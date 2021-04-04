@@ -21,7 +21,7 @@ _TM36ExplanationText::
 	line "SELFDESTRUCT!"
 
 	para "It's powerful, but"
-	line "the #MON that"
+	line "the POKéMON that"
 	cont "uses it faints!"
 	cont "Be careful."
 	done

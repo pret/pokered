@@ -15,36 +15,36 @@ _OaksLabText40::
 
 _OaksLabText41::
 	text "<RIVAL>: My"
-	line "#MON looks a"
+	line "POKéMON looks a"
 	cont "lot stronger."
 	done
 
 _OaksLabText39::
-	text "Those are #"
+	text "Those are POKé"
 	line "BALLs. They"
-	cont "contain #MON!"
+	cont "contain POKéMON!"
 	done
 
 _OaksLabCharmanderText::
 	text "So! You want the"
-	line "fire #MON,"
+	line "fire POKéMON,"
 	cont "CHARMANDER?"
 	done
 
 _OaksLabSquirtleText::
 	text "So! You want the"
-	line "water #MON,"
+	line "water POKéMON,"
 	cont "SQUIRTLE?"
 	done
 
 _OaksLabBulbasaurText::
 	text "So! You want the"
-	line "plant #MON,"
+	line "plant POKéMON,"
 	cont "BULBASAUR?"
 	done
 
 _OaksLabMonEnergeticText::
-	text "This #MON is"
+	text "This POKéMON is"
 	line "really energetic!"
 	prompt
 
@@ -57,26 +57,26 @@ _OaksLabReceivedMonText::
 
 _OaksLabLastMonText::
 	text "That's PROF.OAK's"
-	line "last #MON!"
+	line "last POKéMON!"
 	done
 
 _OaksLabText_1d2f0::
 	text "OAK: Now, <PLAYER>,"
-	line "which #MON do"
+	line "which POKéMON do"
 	cont "you want?"
 	done
 
 _OaksLabText_1d2f5::
 	text "OAK: If a wild"
-	line "#MON appears,"
-	cont "your #MON can"
+	line "POKéMON appears,"
+	cont "your POKéMON can"
 	cont "fight against it!"
 	done
 
 _OaksLabText_1d2fa::
 	text "OAK: <PLAYER>,"
 	line "raise your young"
-	cont "#MON by making"
+	cont "POKéMON by making"
 	cont "it fight!"
 	done
 
@@ -84,14 +84,14 @@ _OaksLabDeliverParcelText1::
 	text "OAK: Oh, <PLAYER>!"
 
 	para "How is my old"
-	line "#MON?"
+	line "POKéMON?"
 
 	para "Well, it seems to"
 	line "like you a lot."
 
 	para "You must be"
 	line "talented as a"
-	cont "#MON trainer!"
+	cont "POKéMON trainer!"
 
 	para "What? You have"
 	line "something for me?"
@@ -103,13 +103,13 @@ _OaksLabDeliverParcelText1::
 _OaksLabDeliverParcelText2::
 	text_start
 	para "Ah! This is the"
-	line "custom # BALL"
+	line "custom POKé BALL"
 	cont "I ordered!"
 	cont "Thank you!"
 	done
 
 _OaksLabAroundWorldText::
-	text "#MON around the"
+	text "POKéMON around the"
 	line "world wait for"
 	cont "you, <PLAYER>!"
 	done
@@ -117,32 +117,32 @@ _OaksLabAroundWorldText::
 _OaksLabGivePokeballsText1::
 	text "OAK: You can't get"
 	line "detailed data on"
-	cont "#MON by just"
+	cont "POKéMON by just"
 	cont "seeing them."
 
 	para "You must catch"
 	line "them! Use these"
 	cont "to capture wild"
-	cont "#MON."
+	cont "POKéMON."
 
 	para "<PLAYER> got 5"
-	line "# BALLs!@"
+	line "POKé BALLs!@"
 	text_end
 
 _OaksLabGivePokeballsText2::
 	text_start
 	para "When a wild"
-	line "#MON appears,"
+	line "POKéMON appears,"
 	cont "it's fair game."
 
-	para "Just throw a #"
+	para "Just throw a POKé"
 	line "BALL at it and try"
 	line "to catch it!"
 
 	para "This won't always"
 	line "work, though."
 
-	para "A healthy #MON"
+	para "A healthy POKéMON"
 	line "could escape. You"
 	cont "have to be lucky!"
 	done
@@ -152,14 +152,14 @@ _OaksLabPleaseVisitText::
 	line "sometimes."
 
 	para "I want to know how"
-	line "your #DEX is"
+	line "your POKéDEX is"
 	cont "coming along."
 	done
 
 _OaksLabText_1d31d::
 	text "OAK: Good to see "
 	line "you! How is your "
-	cont "#DEX coming? "
+	cont "POKéDEX coming? "
 	cont "Here, let me take"
 	cont "a look!"
 	prompt
@@ -177,9 +177,9 @@ _OaksLabText8::
 _OaksLabText_1d340::
 	text "PROF.OAK is the"
 	line "authority on"
-	cont "#MON!"
+	cont "POKéMON!"
 
-	para "Many #MON"
+	para "Many POKéMON"
 	line "trainers hold him"
 	cont "in high regard!"
 	done
@@ -201,16 +201,16 @@ _OaksLabChooseMonText::
 	para "Here, <PLAYER>!"
 
 	para "There are 3"
-	line "#MON here!"
+	line "POKéMON here!"
 
 	para "Haha!"
 
 	para "They are inside"
-	line "the # BALLs."
+	line "the POKé BALLs."
 
 	para "When I was young,"
 	line "I was a serious"
-	cont "#MON trainer!"
+	cont "POKéMON trainer!"
 
 	para "In my old age, I"
 	line "have only 3 left,"
@@ -251,7 +251,7 @@ _OaksLabRivalChallengeText::
 	text "<RIVAL>: Wait"
 	line "<PLAYER>!"
 	cont "Let's check out"
-	cont "our #MON!"
+	cont "our POKéMON!"
 
 	para "Come on, I'll take"
 	line "you on!"
@@ -261,7 +261,7 @@ _OaksLabText_1d3be::
 	text "WHAT?"
 	line "Unbelievable!"
 	cont "I picked the"
-	cont "wrong #MON!"
+	cont "wrong POKéMON!"
 	prompt
 
 _OaksLabText_1d3c3::
@@ -272,7 +272,7 @@ _OaksLabText_1d3c3::
 _OaksLabRivalToughenUpText::
 	text "<RIVAL>: Okay!"
 	line "I'll make my"
-	cont "#MON fight to"
+	cont "POKéMON fight to"
 	cont "toughen it up!"
 
 	para "<PLAYER>! Gramps!"
@@ -297,11 +297,11 @@ _OaksLabText23::
 _OaksLabText24::
 	text "On the desk there"
 	line "is my invention,"
-	cont "#DEX!"
+	cont "POKéDEX!"
 
 	para "It automatically"
 	line "records data on"
-	cont "#MON you've"
+	cont "POKéMON you've"
 	cont "seen or caught!"
 
 	para "It's a hi-tech"
@@ -314,13 +314,13 @@ _OaksLabText25::
 	cont "these with you!"
 
 	para "<PLAYER> got"
-	line "#DEX from OAK!@"
+	line "POKéDEX from OAK!@"
 	text_end
 
 _OaksLabText26::
 	text "To make a complete"
 	line "guide on all the"
-	cont "#MON in the"
+	cont "POKéMON in the"
 	cont "world..."
 
 	para "That was my dream!"
@@ -337,7 +337,7 @@ _OaksLabText26::
 
 	para "This is a great"
 	line "undertaking in"
-	cont "#MON history!"
+	cont "POKéMON history!"
 	done
 
 _OaksLabText27::
@@ -359,20 +359,20 @@ _OaksLabText27::
 	done
 
 _OaksLabText_1d405::
-	text "I study #MON as"
+	text "I study POKéMON as"
 	line "PROF.OAK's AIDE."
 	done
 
 _OaksLabText_441cc::
-	text "#DEX comp-"
+	text "POKéDEX comp-"
 	line "letion is:"
 
 	para "@"
 	text_decimal hDexRatingNumMonsSeen, 1, 3
-	text " #MON seen"
+	text " POKéMON seen"
 	line "@"
 	text_decimal hDexRatingNumMonsOwned, 1, 3
-	text " #MON owned"
+	text " POKéMON owned"
 
 	para "PROF.OAK's"
 	line "Rating:"
@@ -381,7 +381,7 @@ _OaksLabText_441cc::
 _OaksLabText_44201::
 	text "You still have"
 	line "lots to do."
-	cont "Look for #MON"
+	cont "Look for POKéMON"
 	cont "in grassy areas!"
 	done
 
@@ -394,7 +394,7 @@ _OaksLabText_44206::
 
 _OaksLabText_4420b::
 	text "You still need"
-	line "more #MON!"
+	line "more POKéMON!"
 	cont "Try to catch"
 	cont "other species!"
 	done
@@ -428,7 +428,7 @@ _OaksLabText_4421f::
 _OaksLabText_44224::
 	text "Very good!"
 	line "Go fish for some"
-	cont "marine #MON!"
+	cont "marine POKéMON!"
 	done
 
 _OaksLabText_44229::
@@ -453,7 +453,7 @@ _OaksLabText_44233::
 _OaksLabText_44238::
 	text "You even have the"
 	line "evolved forms of"
-	cont "#MON! Super!"
+	cont "POKéMON! Super!"
 	done
 
 _OaksLabText_4423d::
@@ -476,7 +476,7 @@ _OaksLabText_44247::
 	done
 
 _OaksLabText_4424c::
-	text "Your #DEX is"
+	text "Your POKéDEX is"
 	line "entirely complete!"
 	cont "Congratulations!"
 	done

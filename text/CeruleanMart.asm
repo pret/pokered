@@ -1,10 +1,10 @@
 _CeruleanMartText2::
 	text "Use REPEL to keep"
 	line "bugs and weak"
-	cont "#MON away."
+	cont "POKéMON away."
 
 	para "Put your strongest"
-	line "#MON at the"
+	line "POKéMON at the"
 	cont "top of the list"
 	cont "for best results!"
 	done
@@ -14,6 +14,6 @@ _CeruleanMartText3::
 	line "RARE CANDY?"
 
 	para "It's supposed to"
-	line "make #MON go"
+	line "make POKéMON go"
 	cont "up one level!"
 	done

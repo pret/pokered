@@ -53,7 +53,7 @@ TrainerNamePointers:
 .LassName:          db "LASS@"
 .JrTrainerMName:    db "JR.TRAINER♂@"
 .JrTrainerFName:    db "JR.TRAINER♀@"
-.PokemaniacName:    db "POKéMANIAC@"
+.PokemaniacName:    db "POKéMANIAC@"
 .SuperNerdName:     db "SUPER NERD@"
 .BurglarName:       db "BURGLAR@"
 .EngineerName:      db "ENGINEER@"

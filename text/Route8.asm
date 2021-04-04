@@ -1,6 +1,6 @@
 _Route8BattleText1::
 	text "You look good at"
-	line "#MON, but"
+	line "POKéMON, but"
 	cont "how's your chem?"
 	done
 
@@ -55,7 +55,7 @@ _Route8EndBattleText4::
 	prompt
 
 _Route8AfterBattleText4::
-	text "When #MON grow"
+	text "When POKéMON grow"
 	line "up they get ugly!"
 	cont "They shouldn't"
 	cont "evolve!"
@@ -63,7 +63,7 @@ _Route8AfterBattleText4::
 
 _Route8BattleText5::
 	text "School is fun, but"
-	line "so are #MON."
+	line "so are POKéMON."
 	done
 
 _Route8EndBattleText5::
@@ -122,7 +122,7 @@ _Route8EndBattleText8::
 
 _Route8AfterBattleText8::
 	text "Gambling and"
-	line "#MON are like"
+	line "POKéMON are like"
 	cont "eating peanuts!"
 	cont "Just can't stop!"
 	done
@@ -130,7 +130,7 @@ _Route8AfterBattleText8::
 _Route8BattleText9::
 	text "What's a cute,"
 	line "round and fluffy"
-	cont "#MON?"
+	cont "POKéMON?"
 	done
 
 _Route8EndBattleText9::

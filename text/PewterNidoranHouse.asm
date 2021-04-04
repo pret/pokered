@@ -7,12 +7,12 @@ _PewterHouse1Text2::
 	done
 
 _PewterHouse1Text3::
-	text "Our #MON's an"
+	text "Our POKéMON's an"
 	line "outsider, so it's"
 	cont "hard to handle."
 
 	para "An outsider is a"
-	line "#MON that you"
+	line "POKéMON that you"
 	cont "get in a trade."
 
 	para "It grows fast, but"

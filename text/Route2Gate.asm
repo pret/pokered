@@ -5,7 +5,7 @@ _Route2GateText_5d616::
 	done
 
 _Route2GateText2::
-	text "Once a #MON"
+	text "Once a POKéMON"
 	line "learns FLASH, you"
 	cont "can get through"
 	cont "ROCK TUNNEL."

@@ -14,6 +14,7 @@
 	charmap "<PLAYER>",  $52 ; wPlayerName
 	charmap "<RIVAL>",   $53 ; wRivalName
 	charmap "#",         $54 ; "POKé"
+	charmap "POKé",      $54
 	charmap "<CONT>",    $55
 	charmap "<……>",      $56 ; "……"
 	charmap "<DONE>",    $57
@@ -151,6 +152,7 @@
 	charmap "z",         $b9
 
 	charmap "é",         $ba
+	charmap "é",   $ba
 	charmap "'d",        $bb
 	charmap "'l",        $bc
 	charmap "'s",        $bd

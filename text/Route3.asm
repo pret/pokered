@@ -20,7 +20,7 @@ _Route3EndBattleText1::
 
 _Route3AfterBattleText1::
 	text "There are other"
-	line "kinds of #MON"
+	line "kinds of POKéMON"
 	cont "than those found"
 	cont "in the forest!"
 	done
@@ -38,9 +38,9 @@ _Route3EndBattleText2::
 
 _Route3AfterBattleText2::
 	text "Are you storing"
-	line "your #MON on"
+	line "your POKéMON on"
 	cont "PC? Each BOX can"
-	cont "hold 20 #MON!"
+	cont "hold 20 POKéMON!"
 	done
 
 _Route3BattleText3::
@@ -66,12 +66,12 @@ _Route3BattleText4::
 
 _Route3EndBattleText4::
 	text "If I"
-	line "had new #MON I"
+	line "had new POKéMON I"
 	cont "would've won!"
 	prompt
 
 _Route3AfterBattleText4::
-	text "If a #MON BOX"
+	text "If a POKéMON BOX"
 	line "on the PC gets"
 	cont "full, just switch"
 	cont "to another BOX!"
@@ -111,7 +111,7 @@ _Route3AfterBattleText6::
 
 _Route3BattleText7::
 	text "You can fight my"
-	line "new #MON!"
+	line "new POKéMON!"
 	done
 
 _Route3EndBattleText7::
@@ -120,7 +120,7 @@ _Route3EndBattleText7::
 	prompt
 
 _Route3AfterBattleText7::
-	text "Trained #MON"
+	text "Trained POKéMON"
 	line "are stronger than"
 	cont "the wild ones!"
 	done

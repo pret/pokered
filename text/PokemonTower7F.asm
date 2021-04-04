@@ -19,7 +19,7 @@ _TowerRescueFujiText::
 	cont "concern!"
 
 	para "Follow me to my"
-	line "home, #MON"
+	line "home, POKéMON"
 	cont "HOUSE at the foot"
 	cont "of this tower."
 	done
@@ -42,7 +42,7 @@ _PokemonTower7BattleText2::
 	text "This old guy came"
 	line "and complained"
 	cont "about us harming"
-	cont "useless #MON!"
+	cont "useless POKéMON!"
 
 	para "We're talking it"
 	line "over as adults!"
@@ -54,7 +54,7 @@ _PokemonTower7EndBattleText2::
 	prompt
 
 _PokemonTower7AfterBattleText2::
-	text "#MON are only"
+	text "POKéMON are only"
 	line "good for making"
 	cont "money!"
 

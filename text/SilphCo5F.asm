@@ -27,7 +27,7 @@ _SilphCo5AfterBattleText2::
 	done
 
 _SilphCo5BattleText3::
-	text "We study #"
+	text "We study POKé"
 	line "BALL technology"
 	cont "on this floor!"
 	done
@@ -39,7 +39,7 @@ _SilphCo5EndBattleText3::
 
 _SilphCo5AfterBattleText3::
 	text "We worked on the"
-	line "ultimate #"
+	line "ultimate POKé"
 	cont "BALL which would"
 	cont "catch anything!"
 	done

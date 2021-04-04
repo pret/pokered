@@ -53,7 +53,7 @@ _VoltorbDexEntry::
 	next "power plants."
 	next "Easily mistaken"
 
-	page "for a # BALL,"
+	page "for a POKé BALL,"
 	next "they have zapped"
 	next "many people"
 	dex
@@ -130,7 +130,7 @@ _GrimerDexEntry::
 
 _GengarDexEntry::
 	text "Under a full moon,"
-	next "this #MON"
+	next "this POKéMON"
 	next "likes to mimic"
 
 	page "the shadows of"
@@ -143,7 +143,7 @@ _NidoranFDexEntry::
 	next "its venomous"
 	next "barbs render this"
 
-	page "#MON dangerous."
+	page "POKéMON dangerous."
 	next "The female has"
 	next "smaller horns"
 	dex
@@ -164,7 +164,7 @@ _CuboneDexEntry::
 	next "helmet, no one"
 
 	page "has ever seen"
-	next "this #MON's"
+	next "this POKéMON's"
 	next "real face"
 	dex
 
@@ -179,7 +179,7 @@ _RhyhornDexEntry::
 	dex
 
 _LaprasDexEntry::
-	text "A #MON that"
+	text "A POKéMON that"
 	next "has been over-"
 	next "hunted almost to"
 
@@ -189,7 +189,7 @@ _LaprasDexEntry::
 	dex
 
 _ArcanineDexEntry::
-	text "A #MON that"
+	text "A POKéMON that"
 	next "has been admired"
 	next "since the past"
 
@@ -241,7 +241,7 @@ _TentacoolDexEntry::
 _GastlyDexEntry::
 	text "Almost invisible,"
 	next "this gaseous"
-	next "#MON cloaks"
+	next "POKéMON cloaks"
 
 	page "the target and"
 	next "puts it to sleep"
@@ -260,7 +260,7 @@ _ScytherDexEntry::
 
 _StaryuDexEntry::
 	text "An enigmatic"
-	next "#MON that can"
+	next "POKéMON that can"
 	next "effortlessly"
 
 	page "regenerate any"
@@ -269,7 +269,7 @@ _StaryuDexEntry::
 	dex
 
 _BlastoiseDexEntry::
-	text "A brutal #MON"
+	text "A brutal POKéMON"
 	next "with pressurized"
 	next "water jets on its"
 
@@ -370,7 +370,7 @@ _GravelerDexEntry::
 
 _ChanseyDexEntry::
 	text "A rare and elusive"
-	next "#MON that is"
+	next "POKéMON that is"
 	next "said to bring"
 
 	page "happiness to those"
@@ -443,7 +443,7 @@ _PsyduckDexEntry::
 	next "enemies with its"
 	next "vacant look, this"
 
-	page "wily #MON will"
+	page "wily POKéMON will"
 	next "use psychokinetic"
 	next "powers"
 	dex
@@ -571,7 +571,7 @@ _VenonatDexEntry::
 _DragoniteDexEntry::
 	text "An extremely"
 	next "rarely seen"
-	next "marine #MON."
+	next "marine POKéMON."
 
 	page "Its intelligence"
 	next "is said to match"
@@ -620,7 +620,7 @@ _MoltresDexEntry::
 
 _ArticunoDexEntry::
 	text "A legendary bird"
-	next "#MON that is"
+	next "POKéMON that is"
 	next "said to appear to"
 
 	page "doomed people who"
@@ -630,7 +630,7 @@ _ArticunoDexEntry::
 
 _ZapdosDexEntry::
 	text "A legendary bird"
-	next "#MON that is"
+	next "POKéMON that is"
 	next "said to appear"
 
 	page "from clouds while"
@@ -690,7 +690,7 @@ _NinetalesDexEntry::
 
 _PikachuDexEntry::
 	text "When several of"
-	next "these #MON"
+	next "these POKéMON"
 	next "gather, their"
 
 	page "electricity could"
@@ -710,7 +710,7 @@ _RaichuDexEntry::
 
 _DratiniDexEntry::
 	text "Long considered a"
-	next "mythical #MON"
+	next "mythical POKéMON"
 	next "until recently"
 
 	page "when a small"
@@ -719,7 +719,7 @@ _DratiniDexEntry::
 	dex
 
 _DragonairDexEntry::
-	text "A mystical #MON"
+	text "A mystical POKéMON"
 	next "that exudes a"
 	next "gentle aura."
 
@@ -729,7 +729,7 @@ _DragonairDexEntry::
 	dex
 
 _KabutoDexEntry::
-	text "A #MON that"
+	text "A POKéMON that"
 	next "was resurrected"
 	next "from a fossil"
 
@@ -800,7 +800,7 @@ _OmanyteDexEntry::
 
 _OmastarDexEntry::
 	text "A prehistoric"
-	next "#MON that died"
+	next "POKéMON that died"
 	next "out when its"
 
 	page "heavy shell made"
@@ -941,7 +941,7 @@ _WeedleDexEntry::
 _KakunaDexEntry::
 	text "Almost incapable"
 	next "of moving, this"
-	next "#MON can only"
+	next "POKéMON can only"
 
 	page "harden its shell"
 	next "to protect itself"
@@ -1019,7 +1019,7 @@ _CaterpieDexEntry::
 	dex
 
 _MetapodDexEntry::
-	text "This #MON is"
+	text "This POKéMON is"
 	next "vulnerable to"
 	next "attack while its"
 
@@ -1150,7 +1150,7 @@ _ElectrodeDexEntry::
 
 _ClefableDexEntry::
 	text "A timid fairy"
-	next "#MON that is"
+	next "POKéMON that is"
 	next "rarely seen. It"
 
 	page "will run and hide"
@@ -1223,7 +1223,7 @@ _PidgeottoDexEntry::
 	next "of its sprawling"
 	next "territorial area,"
 
-	page "this #MON will"
+	page "this POKéMON will"
 	next "fiercely peck at"
 	next "any intruder"
 	dex
@@ -1255,7 +1255,7 @@ _BulbasaurDexEntry::
 
 	page "The plant sprouts"
 	next "and grows with"
-	next "this #MON"
+	next "this POKéMON"
 	dex
 
 _VenusaurDexEntry::
@@ -1310,7 +1310,7 @@ _PonytaDexEntry::
 
 _RapidashDexEntry::
 	text "Very competitive,"
-	next "this #MON will"
+	next "this POKéMON will"
 	next "chase anything"
 
 	page "that moves fast"
@@ -1340,7 +1340,7 @@ _RaticateDexEntry::
 
 _NidorinoDexEntry::
 	text "An aggressive"
-	next "#MON that is"
+	next "POKéMON that is"
 	next "quick to attack."
 
 	page "The horn on its"
@@ -1369,7 +1369,7 @@ _GeodudeDexEntry::
 	dex
 
 _PorygonDexEntry::
-	text "A #MON that"
+	text "A POKéMON that"
 	next "consists entirely"
 	next "of programming"
 
@@ -1380,7 +1380,7 @@ _PorygonDexEntry::
 
 _AerodactylDexEntry::
 	text "A ferocious, pre-"
-	next "historic #MON"
+	next "historic POKéMON"
 	next "that goes for the"
 
 	page "enemy's throat"
@@ -1480,7 +1480,7 @@ _VileplumeDexEntry::
 
 _BellsproutDexEntry::
 	text "A carnivorous"
-	next "#MON that traps"
+	next "POKéMON that traps"
 	next "and eats bugs."
 
 	page "It uses its root"

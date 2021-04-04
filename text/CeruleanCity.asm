@@ -9,7 +9,7 @@ _CeruleanCityText_19668::
 	para "I'm doing great!"
 	line "I caught a bunch"
 	cont "of strong and"
-	cont "smart #MON!"
+	cont "smart POKéMON!"
 
 	para "Here, let me see"
 	line "what you caught,"
@@ -35,18 +35,18 @@ _CeruleanCityText_19677::
 	para "I went to BILL's"
 	line "and got him to"
 	cont "show me his rare"
-	cont "#MON!"
+	cont "POKéMON!"
 
 	para "That added a lot"
 	line "of pages to my"
-	cont "#DEX!"
+	cont "POKéDEX!"
 
 	para "After all, BILL's"
 	line "world famous as a"
-	cont "#MANIAC!"
+	cont "POKéMANIAC!"
 
 	para "He invented the"
-	line "#MON Storage"
+	line "POKéMON Storage"
 	cont "System on PC!"
 
 	para "Since you're using"
@@ -118,7 +118,7 @@ _CeruleanCityText4::
 _CeruleanCityText5::
 	text "You're making an"
 	line "encyclopedia on"
-	cont "#MON? That"
+	cont "POKéMON? That"
 	cont "sounds amusing."
 	done
 
@@ -154,9 +154,9 @@ _CeruleanCityText_1973a::
 	line "No! That's wrong!"
 
 	para "It's so hard to"
-	line "control #MON!"
+	line "control POKéMON!"
 
-	para "Your #MON's"
+	para "Your POKéMON's"
 	line "obedience depends"
 	cont "on your abilities"
 	cont "as a trainer!"
@@ -194,10 +194,10 @@ _CeruleanCityText9::
 _CeruleanCityText10::
 	text "This is CERULEAN"
 	line "CAVE! Horribly"
-	cont "strong #MON"
+	cont "strong POKéMON"
 	cont "live in there!"
 
-	para "The #MON LEAGUE"
+	para "The POKéMON LEAGUE"
 	line "champion is the"
 	cont "only person who"
 	cont "is allowed in!"
@@ -227,7 +227,7 @@ _CeruleanCityText16::
 
 _CeruleanCityText17::
 	text "CERULEAN CITY"
-	line "#MON GYM"
+	line "POKéMON GYM"
 	cont "LEADER: MISTY"
 
 	para "The Tomboyish"

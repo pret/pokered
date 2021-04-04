@@ -42,7 +42,7 @@ _MtMoon3Text_49f8f::
 _MtMoon3Text_49f94::
 	text "Far away, on"
 	line "CINNABAR ISLAND,"
-	cont "there's a #MON"
+	cont "there's a POKéMON"
 	cont "LAB."
 
 	para "They do research"
@@ -75,7 +75,7 @@ _MtMoon3AfterBattleText2::
 
 _MtMoon3BattleText3::
 	text "We, TEAM ROCKET,"
-	line "are #MON"
+	line "are POKéMON"
 	cont "gangsters!"
 	done
 
@@ -119,7 +119,7 @@ _MtMoon3EndBattleText5::
 	prompt
 
 _MtMoon3AfterBattleText5::
-	text "#MON lived"
+	text "POKéMON lived"
 	line "here long before"
 	cont "people came."
 	done

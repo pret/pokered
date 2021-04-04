@@ -1,6 +1,6 @@
 _CeruleanHouse1Text1::
 	text "My husband likes"
-	line "trading #MON."
+	line "trading POKéMON."
 
 	para "If you are a"
 	line "collector, would"

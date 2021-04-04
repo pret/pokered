@@ -5,7 +5,7 @@ _SilphCo3Text_59ff9::
 
 _SilphCo3Text_59ffe::
 	text "<PLAYER>! You and"
-	line "your #MON"
+	line "your POKéMON"
 	cont "saved us!"
 	done
 
@@ -42,5 +42,5 @@ _SilphCo3AfterBattleText2::
 	para "TEAM ROCKET said"
 	line "that if I helped"
 	cont "them, they'd let"
-	cont "me study #MON!"
+	cont "me study POKéMON!"
 	done

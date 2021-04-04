@@ -50,10 +50,10 @@ _TM41ExplanationText::
 	text "TM41 teaches"
 	line "SOFTBOILED!"
 
-	para "Only one #MON"
+	para "Only one POKéMON"
 	line "can use it!"
 
-	para "That #MON is"
+	para "That POKéMON is"
 	line "CHANSEY!"
 	done
 
@@ -110,7 +110,7 @@ _CeladonCityText11::
 
 _CeladonCityText13::
 	text "CELADON CITY"
-	line "#MON GYM"
+	line "POKéMON GYM"
 	cont "LEADER: ERIKA"
 
 	para "The Nature Loving"
@@ -131,7 +131,7 @@ _CeladonCityText16::
 	text "TRAINER TIPS"
 
 	para "GUARD SPEC."
-	line "protects #MON"
+	line "protects POKéMON"
 	cont "against SPECIAL"
 	cont "attacks such as"
 	cont "fire and water!"

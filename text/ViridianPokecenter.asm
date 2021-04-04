@@ -7,7 +7,7 @@ _ViridianPokeCenterText2::
 	done
 
 _ViridianPokeCenterText3::
-	text "There's a #MON"
+	text "There's a POKéMON"
 	line "CENTER in every"
 	cont "town ahead."
 

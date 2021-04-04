@@ -10,7 +10,7 @@ _ViridianHouseText1::
 
 _ViridianHouseText2::
 	text "My Daddy loves"
-	line "#MON too."
+	line "POKéMON too."
 	done
 
 _ViridianHouseText_1d5b1::

@@ -20,20 +20,20 @@ _LavenderTownText_44146::
 _LavenderTownText2::
 	text "This town is known"
 	line "as the grave site"
-	cont "of #MON."
+	cont "of POKéMON."
 
 	para "Memorial services"
 	line "are held in"
-	cont "#MON TOWER."
+	cont "POKéMON TOWER."
 	done
 
 _LavenderTownText3::
 	text "GHOSTs appeared"
-	line "in #MON TOWER."
+	line "in POKéMON TOWER."
 
 	para "I think they're"
 	line "the spirits of"
-	cont "#MON that the"
+	cont "POKéMON that the"
 	cont "ROCKETs killed."
 	done
 
@@ -54,11 +54,11 @@ _LavenderTownText5::
 
 _LavenderTownText8::
 	text "LAVENDER VOLUNTEER"
-	line "#MON HOUSE"
+	line "POKéMON HOUSE"
 	done
 
 _LavenderTownText9::
 	text "May the Souls of"
-	line "#MON Rest Easy"
-	cont "#MON TOWER"
+	line "POKéMON Rest Easy"
+	cont "POKéMON TOWER"
 	done

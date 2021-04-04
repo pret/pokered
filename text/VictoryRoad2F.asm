@@ -66,7 +66,7 @@ _VictoryRoad2AfterBattleText4::
 	text "I can beat you"
 	line "when it comes to"
 	cont "knowledge about"
-	cont "#MON!"
+	cont "POKéMON!"
 	done
 
 _VictoryRoad2BattleText5::

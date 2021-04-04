@@ -4,7 +4,7 @@ _CeruleanPokecenterText2::
 	para "I heard that"
 	line "he'll do whatever"
 	cont "it takes to get"
-	cont "rare #MON!"
+	cont "rare POKéMON!"
 	done
 
 _CeruleanPokecenterText3::
@@ -12,7 +12,7 @@ _CeruleanPokecenterText3::
 	line "about BILL?"
 
 	para "Everyone calls"
-	line "him a #MANIAC!"
+	line "him a POKéMANIAC!"
 
 	para "I think people"
 	line "are just jealous"
@@ -20,5 +20,5 @@ _CeruleanPokecenterText3::
 
 	para "Who wouldn't want"
 	line "to boast about"
-	cont "their #MON?"
+	cont "their POKéMON?"
 	done

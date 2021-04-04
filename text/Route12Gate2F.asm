@@ -1,7 +1,7 @@
 _TM39PreReceiveText::
-	text "My #MON's"
+	text "My POKéMON's"
 	line "ashes are stored"
-	cont "in #MON TOWER."
+	cont "in POKéMON TOWER."
 
 	para "You can have this"
 	line "TM. I don't need"
@@ -39,5 +39,5 @@ _Route12GateUpstairsText_495c4::
 	text "Looked into the"
 	line "binoculars."
 
-	para "It's #MON TOWER!"
+	para "It's POKéMON TOWER!"
 	done

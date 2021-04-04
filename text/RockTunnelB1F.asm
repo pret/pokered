@@ -31,7 +31,7 @@ _RockTunnel2AfterBattleText3::
 
 _RockTunnel2BattleText4::
 	text "You have a"
-	line "#DEX?"
+	line "POKéDEX?"
 	cont "I want one too!"
 	done
 
@@ -42,7 +42,7 @@ _RockTunnel2EndBattleText4::
 
 _RockTunnel2AfterBattleText4::
 	text "When you finish"
-	line "your #DEX, can"
+	line "your POKéDEX, can"
 	cont "I have it?"
 	done
 
@@ -59,11 +59,11 @@ _RockTunnel2EndBattleText5::
 _RockTunnel2AfterBattleText5::
 	text "Costume players"
 	line "dress up as"
-	cont "#MON for fun."
+	cont "POKéMON for fun."
 	done
 
 _RockTunnel2BattleText6::
-	text "My #MON"
+	text "My POKéMON"
 	line "techniques will"
 	cont "leave you crying!"
 	done
@@ -77,7 +77,7 @@ _RockTunnel2EndBattleText6::
 _RockTunnel2AfterBattleText6::
 	text "In mountains,"
 	line "you'll often find"
-	cont "rock-type #MON."
+	cont "rock-type POKéMON."
 	done
 
 _RockTunnel2BattleText7::
@@ -93,7 +93,7 @@ _RockTunnel2EndBattleText7::
 
 _RockTunnel2AfterBattleText7::
 	text "I like tiny"
-	line "#MON, big ones"
+	line "POKéMON, big ones"
 	cont "are too scary!"
 	done
 

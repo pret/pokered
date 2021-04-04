@@ -2,7 +2,7 @@ _LavenderMartText2::
 	text "I'm searching for"
 	line "items that raise"
 	cont "the abilities of"
-	cont "#MON during a"
+	cont "POKéMON during a"
 	cont "single battle."
 
 	para "X ATTACK, X"
@@ -17,7 +17,7 @@ _LavenderMartText2::
 _LavenderMartReviveText::
 	text "You know REVIVE?"
 	line "It revives any"
-	cont "fainted #MON!"
+	cont "fainted POKéMON!"
 	done
 
 _LavenderMartNuggetText::

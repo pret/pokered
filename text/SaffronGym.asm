@@ -39,16 +39,16 @@ _SaffronGymText_5d16e::
 
 _SaffronGymText_5d173::
 	text "The MARSHBADGE"
-	line "makes #MON up"
+	line "makes POKéMON up"
 	cont "to L70 obey you!"
 
-	para "Stronger #MON"
+	para "Stronger POKéMON"
 	line "will become wild,"
 	cont "ignoring your"
 	cont "orders in battle!"
 
 	para "Just don't raise"
-	line "your #MON too"
+	line "your POKéMON too"
 	cont "much!"
 
 	para "Wait, please take"
@@ -78,13 +78,13 @@ _SaffronGymText_5d1e6::
 	text "Yo! Champ in"
 	line "making!"
 
-	para "SABRINA's #MON"
+	para "SABRINA's POKéMON"
 	line "use psychic power"
 	cont "instead of force!"
 
-	para "Fighting #MON"
+	para "Fighting POKéMON"
 	line "are weak against"
-	cont "psychic #MON!"
+	cont "psychic POKéMON!"
 
 	para "They get creamed"
 	line "before they can"
@@ -133,17 +133,17 @@ _SaffronGymEndBattleText2::
 	prompt
 
 _SaffronGymAfterBattleText2::
-	text "Psychic #MON"
+	text "Psychic POKéMON"
 	line "fear only ghosts"
 	cont "and bugs!"
 	done
 
 _SaffronGymBattleText3::
-	text "#MON take on"
+	text "POKéMON take on"
 	line "the appearance of"
 	cont "their trainers."
 
-	para "Your #MON must"
+	para "Your POKéMON must"
 	line "be tough, then!"
 	done
 
@@ -155,7 +155,7 @@ _SaffronGymEndBattleText3::
 _SaffronGymAfterBattleText3::
 	text "I must teach"
 	line "better techniques"
-	cont "to my #MON!"
+	cont "to my POKéMON!"
 	done
 
 _SaffronGymBattleText4::
@@ -177,7 +177,7 @@ _SaffronGymAfterBattleText4::
 
 _SaffronGymBattleText5::
 	text "You and I, our"
-	line "#MON shall"
+	line "POKéMON shall"
 	cont "fight!"
 	done
 
@@ -208,7 +208,7 @@ _SaffronGymEndBattleText6::
 
 _SaffronGymAfterBattleText6::
 	text "There used to be"
-	line "2 #MON GYMs in"
+	line "2 POKéMON GYMs in"
 	cont "SAFFRON."
 
 	para "The FIGHTING DOJO"
@@ -219,7 +219,7 @@ _SaffronGymAfterBattleText6::
 	done
 
 _SaffronGymBattleText7::
-	text "SAFFRON #MON"
+	text "SAFFRON POKéMON"
 	line "GYM is famous for"
 	cont "its psychics!"
 

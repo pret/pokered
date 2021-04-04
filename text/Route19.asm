@@ -39,7 +39,7 @@ _Route19EndBattleText3::
 	prompt
 
 _Route19AfterBattleText3::
-	text "I can beat #MON"
+	text "I can beat POKéMON"
 	line "at swimming!"
 	done
 
@@ -59,7 +59,7 @@ _Route19AfterBattleText4::
 
 _Route19BattleText5::
 	text "I tried diving"
-	line "for #MON, but"
+	line "for POKéMON, but"
 	cont "it was a no go!"
 	done
 
@@ -69,7 +69,7 @@ _Route19EndBattleText5::
 
 _Route19AfterBattleText5::
 	text "You have to fish"
-	line "for sea #MON!"
+	line "for sea POKéMON!"
 	done
 
 _Route19BattleText6::
