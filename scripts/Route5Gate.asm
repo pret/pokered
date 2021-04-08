@@ -113,5 +113,3 @@ Route5GateText3:
 SaffronGateText_1dff6:
 	text_far _SaffronGateText_1dff6
 	text_end
-
-

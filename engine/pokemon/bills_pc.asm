@@ -546,4 +546,3 @@ JustAMomentText::
 
 OpenBillsPCText::
 	script_bills_pc
-
