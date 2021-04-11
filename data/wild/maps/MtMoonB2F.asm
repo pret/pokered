@@ -1,5 +1,5 @@
 MoonMonsB2:
-	db 10 ; grass encounter rate
+	def_grass_wildmons 10 ; encounter rate
 	db  9, ZUBAT
 	db  9, GEODUDE
 	db 10, ZUBAT
@@ -10,5 +10,7 @@ MoonMonsB2:
 	db 10, CLEFAIRY
 	db 12, ZUBAT
 	db 12, CLEFAIRY
+	end_grass_wildmons
 
-	db 0 ; water encounter rate
+	def_water_wildmons 0 ; encounter rate
+	end_water_wildmons

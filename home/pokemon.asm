@@ -401,11 +401,11 @@ GetMonHeader::
 	predef IndexToPokedex   ; convert pokemon ID in [wd11e] to pokedex number
 	ld a, [wd11e]
 	dec a
-	ld bc, MonBaseStatsEnd - MonBaseStats
+	ld bc, BASE_DATA_SIZE
 	ld hl, BaseStats
 	call AddNTimes
 	ld de, wMonHeader
-	ld bc, MonBaseStatsEnd - MonBaseStats
+	ld bc, BASE_DATA_SIZE
 	call CopyData
 	jr .done
 .specialID
@@ -419,7 +419,7 @@ GetMonHeader::
 .mew
 	ld hl, MewBaseStats
 	ld de, wMonHeader
-	ld bc, MonBaseStatsEnd - MonBaseStats
+	ld bc, BASE_DATA_SIZE
 	ld a, BANK(MewBaseStats)
 	call FarCopyData
 .done

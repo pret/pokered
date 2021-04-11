@@ -1,5 +1,5 @@
 IslandMonsB4:
-	db 10 ; grass encounter rate
+	def_grass_wildmons 10 ; encounter rate
 IF DEF(_RED)
 	db 31, HORSEA
 	db 31, SHELLDER
@@ -23,5 +23,7 @@ IF DEF(_BLUE)
 	db 39, GOLDUCK
 ENDC
 	db 32, GOLBAT
+	end_grass_wildmons
 
-	db 0 ; water encounter rate
+	def_water_wildmons 0 ; encounter rate
+	end_water_wildmons

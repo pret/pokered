@@ -2,6 +2,7 @@
 ; The max number of evolutions per monster is MAX_EVOLUTIONS
 
 EvosMovesPointerTable:
+	table_width 2, EvosMovesPointerTable
 	dw RhydonEvosMoves
 	dw KangaskhanEvosMoves
 	dw NidoranMEvosMoves
@@ -192,6 +193,7 @@ EvosMovesPointerTable:
 	dw BellsproutEvosMoves
 	dw WeepinbellEvosMoves
 	dw VictreebelEvosMoves
+	assert_table_length NUM_POKEMON_INDEXES
 
 RhydonEvosMoves:
 ; Evolutions

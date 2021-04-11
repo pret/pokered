@@ -1,4 +1,5 @@
 MapSpriteSets:
+	table_width 1, MapSpriteSets
 	db $01 ; PALLET_TOWN
 	db $01 ; VIRIDIAN_CITY
 	db $02 ; PEWTER_CITY
@@ -36,6 +37,7 @@ MapSpriteSets:
 	db $06 ; ROUTE_23
 	db $02 ; ROUTE_24
 	db $02 ; ROUTE_25
+	assert_table_length FIRST_INDOOR_MAP
 
 EAST_WEST   EQU 1
 NORTH_SOUTH EQU 2
@@ -60,7 +62,12 @@ SplitMapSpriteSets:
 	db EAST_WEST,    3, $07, $03 ; $fc
 
 SpriteSets:
+
+; each sprite set has 9 walking sprites and 2 still sprites
+SPRITE_SET_LENGTH EQU 9 + 2
+
 ; sprite set $01
+	table_width 1
 	db SPRITE_BLUE
 	db SPRITE_YOUNGSTER
 	db SPRITE_GIRL
@@ -72,8 +79,10 @@ SpriteSets:
 	db SPRITE_SWIMMER
 	db SPRITE_POKE_BALL
 	db SPRITE_GAMBLER_ASLEEP
+	assert_table_length SPRITE_SET_LENGTH
 
 ; sprite set $02
+	table_width 1
 	db SPRITE_YOUNGSTER
 	db SPRITE_ROCKET
 	db SPRITE_SUPER_NERD
@@ -85,8 +94,10 @@ SpriteSets:
 	db SPRITE_COOLTRAINER_M
 	db SPRITE_POKE_BALL
 	db SPRITE_UNUSED_GAMBLER_ASLEEP_2
+	assert_table_length SPRITE_SET_LENGTH
 
 ; sprite set $03
+	table_width 1
 	db SPRITE_LITTLE_GIRL
 	db SPRITE_GIRL
 	db SPRITE_SUPER_NERD
@@ -98,8 +109,10 @@ SpriteSets:
 	db SPRITE_GUARD
 	db SPRITE_POKE_BALL
 	db SPRITE_UNUSED_GAMBLER_ASLEEP_2
+	assert_table_length SPRITE_SET_LENGTH
 
 ; sprite set $04
+	table_width 1
 	db SPRITE_BEAUTY
 	db SPRITE_SUPER_NERD
 	db SPRITE_YOUNGSTER
@@ -111,8 +124,10 @@ SpriteSets:
 	db SPRITE_COOLTRAINER_M
 	db SPRITE_POKE_BALL
 	db SPRITE_UNUSED_GAMBLER_ASLEEP_2
+	assert_table_length SPRITE_SET_LENGTH
 
 ; sprite set $05
+	table_width 1
 	db SPRITE_LITTLE_GIRL
 	db SPRITE_LITTLE_BOY
 	db SPRITE_GIRL
@@ -124,8 +139,10 @@ SpriteSets:
 	db SPRITE_ROCKET
 	db SPRITE_POKE_BALL
 	db SPRITE_SNORLAX
+	assert_table_length SPRITE_SET_LENGTH
 
 ; sprite set $06
+	table_width 1
 	db SPRITE_YOUNGSTER
 	db SPRITE_GYM_GUIDE
 	db SPRITE_MONSTER
@@ -137,8 +154,10 @@ SpriteSets:
 	db SPRITE_GAMBLER
 	db SPRITE_POKE_BALL
 	db SPRITE_UNUSED_GAMBLER_ASLEEP_2
+	assert_table_length SPRITE_SET_LENGTH
 
 ; sprite set $07
+	table_width 1
 	db SPRITE_ROCKET
 	db SPRITE_SCIENTIST
 	db SPRITE_SILPH_WORKER
@@ -150,8 +169,10 @@ SpriteSets:
 	db SPRITE_MONSTER
 	db SPRITE_POKE_BALL
 	db SPRITE_UNUSED_GAMBLER_ASLEEP_2
+	assert_table_length SPRITE_SET_LENGTH
 
 ; sprite set $08
+	table_width 1
 	db SPRITE_BIKER
 	db SPRITE_SUPER_NERD
 	db SPRITE_MIDDLE_AGED_MAN
@@ -163,8 +184,10 @@ SpriteSets:
 	db SPRITE_MONSTER
 	db SPRITE_POKE_BALL
 	db SPRITE_SNORLAX
+	assert_table_length SPRITE_SET_LENGTH
 
 ; sprite set $09
+	table_width 1
 	db SPRITE_BIKER
 	db SPRITE_COOLTRAINER_M
 	db SPRITE_SILPH_WORKER
@@ -176,8 +199,10 @@ SpriteSets:
 	db SPRITE_SUPER_NERD
 	db SPRITE_POKE_BALL
 	db SPRITE_SNORLAX
+	assert_table_length SPRITE_SET_LENGTH
 
 ; sprite set $0a
+	table_width 1
 	db SPRITE_BIRD
 	db SPRITE_COOLTRAINER_M
 	db SPRITE_FAIRY
@@ -189,3 +214,4 @@ SpriteSets:
 	db SPRITE_YOUNGSTER
 	db SPRITE_POKE_BALL
 	db SPRITE_FOSSIL
+	assert_table_length SPRITE_SET_LENGTH

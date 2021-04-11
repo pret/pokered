@@ -17,6 +17,7 @@ ENDC
 ENDM
 
 KeyItemBitfield:
+	table_width 1, KeyItemBitfield
 	key_item_bits \
 	FALSE, \ ; MASTER_BALL
 	FALSE, \ ; ULTRA_BALL
@@ -101,3 +102,4 @@ KeyItemBitfield:
 	FALSE, \ ; MAX_ETHER
 	FALSE, \ ; ELIXER
 	FALSE    ; MAX_ELIXER
+	assert_table_length (NUM_ITEMS + 7) / 8

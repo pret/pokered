@@ -1,5 +1,5 @@
 Route23Mons:
-	db 10 ; grass encounter rate
+	def_grass_wildmons 10 ; encounter rate
 IF DEF(_RED)
 	db 26, EKANS
 ENDC
@@ -20,5 +20,7 @@ ENDC
 	db 43, DITTO
 	db 41, FEAROW
 	db 43, FEAROW
+	end_grass_wildmons
 
-	db 0 ; water encounter rate
+	def_water_wildmons 0 ; encounter rate
+	end_water_wildmons

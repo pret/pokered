@@ -1,4 +1,5 @@
 FrameBlockPointers:
+	table_width 2, FrameBlockPointers
 	dw FrameBlock00
 	dw FrameBlock01
 	dw FrameBlock02
@@ -121,6 +122,7 @@ FrameBlockPointers:
 	dw FrameBlock77
 	dw FrameBlock78
 	dw FrameBlock79
+	assert_table_length NUM_FRAMEBLOCKS
 
 FrameBlock01:
 	db 9 ; #

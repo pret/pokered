@@ -1292,7 +1292,7 @@ ItemUseMedicine:
 	ld [hl], a
 	pop hl
 	call .recalculateStats
-	ld hl, VitaminText
+	ld hl, VitaminStats
 	ld a, [wcf91]
 	sub HP_UP - 1
 	ld c, a
@@ -1425,12 +1425,7 @@ VitaminNoEffectText:
 	text_far _VitaminNoEffectText
 	text_end
 
-VitaminText:
-	db "HEALTH@"
-	db "ATTACK@"
-	db "DEFENSE@"
-	db "SPEED@"
-	db "SPECIAL@"
+INCLUDE "data/battle/stat_names.asm"
 
 ItemUseBait:
 	ld hl, ThrewBaitText
@@ -2495,7 +2490,7 @@ GetMaxPP:
 	dec a
 	push hl
 	ld hl, Moves
-	ld bc, MoveEnd - Moves
+	ld bc, MOVE_LENGTH
 	call AddNTimes
 	ld de, wcd6d
 	ld a, BANK(Moves)

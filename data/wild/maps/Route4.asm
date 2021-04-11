@@ -1,5 +1,5 @@
 Route4Mons:
-	db 20 ; grass encounter rate
+	def_grass_wildmons 20 ; encounter rate
 	db 10, RATTATA
 	db 10, SPEAROW
 	db  8, RATTATA
@@ -21,4 +21,7 @@ IF DEF(_BLUE)
 	db  8, SANDSHREW
 	db 12, SANDSHREW
 ENDC
-	db 0 ; water encounter rate
+	end_grass_wildmons
+
+	def_water_wildmons 0 ; encounter rate
+	end_water_wildmons

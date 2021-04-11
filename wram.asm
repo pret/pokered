@@ -664,7 +664,10 @@ wPlayerMonAccuracyMod::
 wPlayerMonEvasionMod::
 	ds 1
 
-	ds 3
+	ds 2
+wPlayerMonStatModsEnd::
+
+	ds 1
 
 wEnemyMonUnmodifiedLevel::
 	ds 1
@@ -709,7 +712,10 @@ wEnemyMonEvasionMod::
 wInGameTradeReceiveMonSpecies::
 	ds 1
 
-	ds 2
+	ds 1
+wEnemyMonStatModsEnd::
+
+	ds 1
 
 wNPCMovementDirections2Index::
 
@@ -1958,6 +1964,7 @@ wMonHGrowthRate::
 wMonHLearnset::
 ; bit field
 	flag_array NUM_TMS + NUM_HMS
+
 	ds 1
 wMonHeaderEnd::
 

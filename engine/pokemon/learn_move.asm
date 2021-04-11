@@ -44,7 +44,7 @@ DontAbandonLearning:
 	push de
 	dec a
 	ld hl, Moves
-	ld bc, MoveEnd - Moves
+	ld bc, MOVE_LENGTH
 	call AddNTimes
 	ld de, wBuffer
 	ld a, BANK(Moves)

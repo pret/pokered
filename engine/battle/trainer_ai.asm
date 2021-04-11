@@ -264,7 +264,7 @@ ReadMove:
 	push bc
 	dec a
 	ld hl, Moves
-	ld bc, MoveEnd - Moves
+	ld bc, MOVE_LENGTH
 	call AddNTimes
 	ld de, wEnemyMoveNum
 	call CopyData

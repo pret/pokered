@@ -1,4 +1,5 @@
 AttackAnimationPointers:
+	table_width 2, AttackAnimationPointers
 	dw PoundAnim
 	dw KarateChopAnim
 	dw DoubleSlapAnim
@@ -164,6 +165,7 @@ AttackAnimationPointers:
 	dw SlashAnim
 	dw SubstituteAnim
 	dw StruggleAnim
+	assert_table_length NUM_ATTACKS
 	dw ShowPicAnim
 	dw EnemyFlashAnim
 	dw PlayerFlashAnim
@@ -201,6 +203,7 @@ AttackAnimationPointers:
 	dw HidePicAnim
 	dw ThrowRockAnim
 	dw ThrowBaitAnim
+	assert_table_length NUM_ATTACK_ANIMS
 	dw ZigZagScreenAnim
 
 ; each animation is a list of subanimations

@@ -1,4 +1,5 @@
 PokedexOrder:
+	table_width 1, PokedexOrder
 	db DEX_RHYDON
 	db DEX_KANGASKHAN
 	db DEX_NIDORAN_M
@@ -189,3 +190,4 @@ PokedexOrder:
 	db DEX_BELLSPROUT
 	db DEX_WEEPINBELL
 	db DEX_VICTREEBEL
+	assert_table_length NUM_POKEMON_INDEXES

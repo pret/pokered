@@ -1,5 +1,5 @@
 CaveMons:
-	db 20 ; grass encounter rate
+	def_grass_wildmons 20 ; encounter rate
 	db 18, DIGLETT
 	db 19, DIGLETT
 	db 17, DIGLETT
@@ -10,5 +10,7 @@ CaveMons:
 	db 22, DIGLETT
 	db 29, DUGTRIO
 	db 31, DUGTRIO
+	end_grass_wildmons
 
-	db 0 ; water encounter rate
+	def_water_wildmons 0 ; encounter rate
+	end_water_wildmons

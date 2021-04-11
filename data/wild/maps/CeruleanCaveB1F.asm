@@ -1,5 +1,5 @@
 DungeonMonsB1:
-	db 25 ; grass encounter rate
+	def_grass_wildmons 25 ; encounter rate
 	db 55, RHYDON
 	db 55, MAROWAK
 	db 55, ELECTRODE
@@ -15,5 +15,7 @@ ENDC
 	db 65, DITTO
 	db 63, DITTO
 	db 67, DITTO
+	end_grass_wildmons
 
-	db 0 ; water encounter rate
+	def_water_wildmons 0 ; encounter rate
+	end_water_wildmons

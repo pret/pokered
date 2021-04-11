@@ -5,6 +5,7 @@ ENDM
 
 TileIDListPointerTable:
 ; entries correspond to TILEMAP_* constants (see constants/gfx_constants.asm)
+	table_width 3, TileIDListPointerTable
 	; tilemap pointer, width, height
 	tile_ids MonTiles,               7,  7
 	tile_ids SlideDownMonTiles_7x5,  7,  5
@@ -14,6 +15,7 @@ TileIDListPointerTable:
 	tile_ids GengarIntroTiles3,      7,  7
 	tile_ids GameBoyTiles,           6,  8
 	tile_ids LinkCableTiles,        12,  3
+	assert_table_length NUM_TILEMAPS
 
 DownscaledMonTiles_5x5:
 	INCBIN "gfx/pokemon/downscaled_5x5.tilemap"

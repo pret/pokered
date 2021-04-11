@@ -1,5 +1,5 @@
 ZoneMons1:
-	db 30 ; grass encounter rate
+	def_grass_wildmons 30 ; encounter rate
 IF DEF(_RED)
 	db 24, NIDORAN_M
 	db 26, DODUO
@@ -24,5 +24,7 @@ IF DEF(_BLUE)
 	db 25, KANGASKHAN
 	db 28, PINSIR
 ENDC
+	end_grass_wildmons
 
-	db 0 ; water encounter rate
+	def_water_wildmons 0 ; encounter rate
+	end_water_wildmons

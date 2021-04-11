@@ -1,4 +1,5 @@
 ItemPrices::
+	table_width 3, ItemPrices
 	money 0     ; MASTER_BALL
 	money 1200  ; ULTRA_BALL
 	money 600   ; GREAT_BALL
@@ -82,6 +83,7 @@ ItemPrices::
 	money 0     ; MAX_ETHER
 	money 0     ; ELIXER
 	money 0     ; MAX_ELIXER
+	assert_table_length NUM_ITEMS
 	money 0     ; FLOOR_B2F
 	money 0     ; FLOOR_B1F
 	money 0     ; FLOOR_1F
@@ -96,3 +98,4 @@ ItemPrices::
 	money 0     ; FLOOR_10F
 	money 0     ; FLOOR_11F
 	money 0     ; FLOOR_B4F
+	assert_table_length NUM_ITEMS + NUM_FLOORS

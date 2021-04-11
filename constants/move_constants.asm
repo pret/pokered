@@ -170,10 +170,8 @@
 	const SUPER_FANG   ; a2
 	const SLASH        ; a3
 	const SUBSTITUTE   ; a4
-
-NUM_ATTACKS EQU const_value - 1
-
 	const STRUGGLE     ; a5
+NUM_ATTACKS EQU const_value - 1
 
 	; Moves do double duty as animation identifiers.
 
@@ -214,3 +212,5 @@ NUM_ATTACKS EQU const_value - 1
 	const HIDEPIC_ANIM ; monster disappears
 	const ROCK_ANIM ; throw rock
 	const BAIT_ANIM ; throw bait
+
+NUM_ATTACK_ANIMS EQU const_value - 1

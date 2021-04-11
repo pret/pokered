@@ -1,4 +1,5 @@
 WildDataPointers:
+	table_width 2, WildDataPointers
 	dw NoMons      ; PALLET_TOWN
 	dw NoMons      ; VIRIDIAN_CITY
 	dw NoMons      ; PEWTER_CITY
@@ -247,6 +248,7 @@ WildDataPointers:
 	dw NoMons
 	dw NoMons
 	dw NoMons
+	assert_table_length NUM_MAPS
 	dw -1 ; end
 
 ; wild pokemon data is divided into two parts.

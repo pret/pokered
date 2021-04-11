@@ -1,4 +1,5 @@
 TypeNames:
+	table_width 2, TypeNames
 
 	dw .Normal
 	dw .Fighting
@@ -21,6 +22,8 @@ ENDR
 	dw .Psychic
 	dw .Ice
 	dw .Dragon
+
+	assert_table_length NUM_TYPES
 
 .Normal:   db "NORMAL@"
 .Fighting: db "FIGHTING@"
