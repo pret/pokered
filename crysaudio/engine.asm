@@ -2442,8 +2442,6 @@ SetLRTracks:
 	ret
 
 _PlayMusic::
-	cp NUM_SONGS
-	ret nc ; sfx
 ; load music
 	call MusicOff
 	ld hl, wMusicID
