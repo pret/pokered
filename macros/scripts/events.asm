@@ -242,28 +242,6 @@ ResetEvents: MACRO
 ENDM
 
 
-;\1 = event index
-;\2 = number of bytes away from the base address (optional, for matching the ROM)
-dbEventFlagBit: MACRO
-	IF _NARG > 1
-		db ((\1) % 8) + ((\2) * 8)
-	ELSE
-		db ((\1) % 8)
-	ENDC
-ENDM
-
-
-;\1 = event index
-;\2 = number of bytes away from the base address (optional, for matching the ROM)
-dwEventFlagAddress: MACRO
-	IF _NARG > 1
-		dw wEventFlags + ((\1) / 8) - (\2)
-	ELSE
-		dw wEventFlags + ((\1) / 8)
-	ENDC
-ENDM
-
-
 ;\1 = start
 ;\2 = end
 SetEventRange: MACRO

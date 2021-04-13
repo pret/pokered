@@ -1,7 +1,7 @@
 PokemonMansion1F_Script:
 	call Mansion1Subscript1
 	call EnableAutoTextBoxDrawing
-	ld hl, Mansion1TrainerHeader0
+	ld hl, Mansion1TrainerHeaders
 	ld de, PokemonMansion1F_ScriptPointers
 	ld a, [wPokemonMansion1FCurScript]
 	call ExecuteCurMapScriptInTable
@@ -66,6 +66,8 @@ PokemonMansion1F_TextPointers:
 	dw PickUpItemText
 	dw Mansion1Text4
 
+Mansion1TrainerHeaders:
+	def_trainers
 Mansion1TrainerHeader0:
 	trainer EVENT_BEAT_MANSION_1_TRAINER_0, 3, Mansion1BattleText2, Mansion1EndBattleText2, Mansion1AfterBattleText2
 	db -1 ; end

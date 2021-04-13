@@ -1,6 +1,6 @@
 Route18_Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, Route18TrainerHeader0
+	ld hl, Route18TrainerHeaders
 	ld de, Route18_ScriptPointers
 	ld a, [wRoute18CurScript]
 	call ExecuteCurMapScriptInTable
@@ -19,6 +19,8 @@ Route18_TextPointers:
 	dw Route18Text4
 	dw Route18Text5
 
+Route18TrainerHeaders:
+	def_trainers
 Route18TrainerHeader0:
 	trainer EVENT_BEAT_ROUTE_18_TRAINER_0, 3, Route18BattleText1, Route18EndBattleText1, Route18AfterBattleText1
 Route18TrainerHeader1:

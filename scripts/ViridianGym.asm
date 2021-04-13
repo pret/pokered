@@ -3,7 +3,7 @@ ViridianGym_Script:
 	ld de, .LeaderName
 	call LoadGymLeaderAndCityName
 	call EnableAutoTextBoxDrawing
-	ld hl, ViridianGymTrainerHeader0
+	ld hl, ViridianGymTrainerHeaders
 	ld de, ViridianGym_ScriptPointers
 	ld a, [wViridianGymCurScript]
 	call ExecuteCurMapScriptInTable
@@ -181,6 +181,8 @@ ViridianGym_TextPointers:
 	dw ViridianGymText13
 	dw ViridianGymText14
 
+ViridianGymTrainerHeaders:
+	def_trainers 2
 ViridianGymTrainerHeader0:
 	trainer EVENT_BEAT_VIRIDIAN_GYM_TRAINER_0, 4, ViridianGymBattleText1, ViridianGymEndBattleText1, ViridianGymAfterBattleText1
 ViridianGymTrainerHeader1:
@@ -194,9 +196,9 @@ ViridianGymTrainerHeader4:
 ViridianGymTrainerHeader5:
 	trainer EVENT_BEAT_VIRIDIAN_GYM_TRAINER_5, 4, ViridianGymBattleText6, ViridianGymEndBattleText6, ViridianGymAfterBattleText6
 ViridianGymTrainerHeader6:
-	trainer EVENT_BEAT_VIRIDIAN_GYM_TRAINER_6, 1, 3, ViridianGymBattleText7, ViridianGymEndBattleText7, ViridianGymAfterBattleText7
+	trainer EVENT_BEAT_VIRIDIAN_GYM_TRAINER_6, 3, ViridianGymBattleText7, ViridianGymEndBattleText7, ViridianGymAfterBattleText7
 ViridianGymTrainerHeader7:
-	trainer EVENT_BEAT_VIRIDIAN_GYM_TRAINER_7, 1, 4, ViridianGymBattleText8, ViridianGymEndBattleText8, ViridianGymAfterBattleText8
+	trainer EVENT_BEAT_VIRIDIAN_GYM_TRAINER_7, 4, ViridianGymBattleText8, ViridianGymEndBattleText8, ViridianGymAfterBattleText8
 	db -1 ; end
 
 ViridianGymText1:

@@ -1,7 +1,7 @@
 FuchsiaGym_Script:
 	call .LoadNames
 	call EnableAutoTextBoxDrawing
-	ld hl, FuchsiaGymTrainerHeader0
+	ld hl, FuchsiaGymTrainerHeaders
 	ld de, FuchsiaGym_ScriptPointers
 	ld a, [wFuchsiaGymCurScript]
 	call ExecuteCurMapScriptInTable
@@ -84,6 +84,8 @@ FuchsiaGym_TextPointers:
 	dw FuchsiaGymText10
 	dw FuchsiaGymText11
 
+FuchsiaGymTrainerHeaders:
+	def_trainers 2
 FuchsiaGymTrainerHeader0:
 	trainer EVENT_BEAT_FUCHSIA_GYM_TRAINER_0, 2, FuchsiaGymBattleText1, FuchsiaGymEndBattleText1, FuchsiaGymAfterBattleText1
 FuchsiaGymTrainerHeader1:

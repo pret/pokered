@@ -1,7 +1,7 @@
 SilphCo8F_Script:
 	call SilphCo8Script_5651a
 	call EnableAutoTextBoxDrawing
-	ld hl, SilphCo8TrainerHeader0
+	ld hl, SilphCo8TrainerHeaders
 	ld de, SilphCo8F_ScriptPointers
 	ld a, [wSilphCo8FCurScript]
 	call ExecuteCurMapScriptInTable
@@ -81,6 +81,8 @@ SilphCo8F_TextPointers:
 	dw SilphCo8Text3
 	dw SilphCo8Text4
 
+SilphCo8TrainerHeaders:
+	def_trainers 2
 SilphCo8TrainerHeader0:
 	trainer EVENT_BEAT_SILPH_CO_8F_TRAINER_0, 4, SilphCo8BattleText1, SilphCo8EndBattleText1, SilphCo8AfterBattleText1
 SilphCo8TrainerHeader1:

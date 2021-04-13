@@ -1,6 +1,6 @@
 Route14_Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, Route14TrainerHeader0
+	ld hl, Route14TrainerHeaders
 	ld de, Route14_ScriptPointers
 	ld a, [wRoute14CurScript]
 	call ExecuteCurMapScriptInTable
@@ -25,6 +25,8 @@ Route14_TextPointers:
 	dw Route14Text10
 	dw Route14Text11
 
+Route14TrainerHeaders:
+	def_trainers
 Route14TrainerHeader0:
 	trainer EVENT_BEAT_ROUTE_14_TRAINER_0, 2, Route14BattleText1, Route14EndBattleText1, Route14AfterBattleText1
 Route14TrainerHeader1:
@@ -40,11 +42,11 @@ Route14TrainerHeader5:
 Route14TrainerHeader6:
 	trainer EVENT_BEAT_ROUTE_14_TRAINER_6, 4, Route14BattleText7, Route14EndBattleText7, Route14AfterBattleText7
 Route14TrainerHeader7:
-	trainer EVENT_BEAT_ROUTE_14_TRAINER_7, 1, 4, Route14BattleText8, Route14EndBattleText8, Route14AfterBattleText8
+	trainer EVENT_BEAT_ROUTE_14_TRAINER_7, 4, Route14BattleText8, Route14EndBattleText8, Route14AfterBattleText8
 Route14TrainerHeader8:
-	trainer EVENT_BEAT_ROUTE_14_TRAINER_8, 1, 3, Route14BattleText9, Route14EndBattleText9, Route14AfterBattleText9
+	trainer EVENT_BEAT_ROUTE_14_TRAINER_8, 3, Route14BattleText9, Route14EndBattleText9, Route14AfterBattleText9
 Route14TrainerHeader9:
-	trainer EVENT_BEAT_ROUTE_14_TRAINER_9, 1, 4, Route14BattleText10, Route14EndBattleText10, Route14AfterBattleText10
+	trainer EVENT_BEAT_ROUTE_14_TRAINER_9, 4, Route14BattleText10, Route14EndBattleText10, Route14AfterBattleText10
 	db -1 ; end
 
 Route14Text1:

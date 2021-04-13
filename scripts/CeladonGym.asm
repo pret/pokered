@@ -4,7 +4,7 @@ CeladonGym_Script:
 	res 6, [hl]
 	call nz, .LoadNames
 	call EnableAutoTextBoxDrawing
-	ld hl, CeladonGymTrainerHeader0
+	ld hl, CeladonGymTrainerHeaders
 	ld de, CeladonGym_ScriptPointers
 	ld a, [wCeladonGymCurScript]
 	call ExecuteCurMapScriptInTable
@@ -83,6 +83,8 @@ CeladonGym_TextPointers:
 	dw TM21Text
 	dw TM21NoRoomText
 
+CeladonGymTrainerHeaders:
+	def_trainers 2
 CeladonGymTrainerHeader0:
 	trainer EVENT_BEAT_CELADON_GYM_TRAINER_0, 2, CeladonGymBattleText2, CeladonGymEndBattleText2, CeladonGymAfterBattleText2
 CeladonGymTrainerHeader1:
@@ -96,7 +98,7 @@ CeladonGymTrainerHeader4:
 CeladonGymTrainerHeader5:
 	trainer EVENT_BEAT_CELADON_GYM_TRAINER_5, 2, CeladonGymBattleText7, CeladonGymEndBattleText7, CeladonGymAfterBattleText7
 CeladonGymTrainerHeader6:
-	trainer EVENT_BEAT_CELADON_GYM_TRAINER_6, 1, 3, CeladonGymBattleText8, CeladonGymEndBattleText8, CeladonGymAfterBattleText8
+	trainer EVENT_BEAT_CELADON_GYM_TRAINER_6, 3, CeladonGymBattleText8, CeladonGymEndBattleText8, CeladonGymAfterBattleText8
 	db -1 ; end
 
 CeladonGymText1:

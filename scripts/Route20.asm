@@ -2,7 +2,7 @@ Route20_Script:
 	CheckAndResetEvent EVENT_IN_SEAFOAM_ISLANDS
 	call nz, Route20Script_50cc6
 	call EnableAutoTextBoxDrawing
-	ld hl, Route20TrainerHeader0
+	ld hl, Route20TrainerHeaders
 	ld de, Route20_ScriptPointers
 	ld a, [wRoute20CurScript]
 	call ExecuteCurMapScriptInTable
@@ -75,6 +75,8 @@ Route20_TextPointers:
 	dw Route20Text11
 	dw Route20Text12
 
+Route20TrainerHeaders:
+	def_trainers
 Route20TrainerHeader0:
 	trainer EVENT_BEAT_ROUTE_20_TRAINER_0, 4, Route20BattleText1, Route20EndBattleText1, Route20AfterBattleText1
 Route20TrainerHeader1:
@@ -90,11 +92,11 @@ Route20TrainerHeader5:
 Route20TrainerHeader6:
 	trainer EVENT_BEAT_ROUTE_20_TRAINER_6, 2, Route20BattleText7, Route20EndBattleText7, Route20AfterBattleText7
 Route20TrainerHeader7:
-	trainer EVENT_BEAT_ROUTE_20_TRAINER_7, 1, 4, Route20BattleText8, Route20EndBattleText8, Route20AfterBattleText8
+	trainer EVENT_BEAT_ROUTE_20_TRAINER_7, 4, Route20BattleText8, Route20EndBattleText8, Route20AfterBattleText8
 Route20TrainerHeader8:
-	trainer EVENT_BEAT_ROUTE_20_TRAINER_8, 1, 3, Route20BattleText9, Route20EndBattleText9, Route20AfterBattleText9
+	trainer EVENT_BEAT_ROUTE_20_TRAINER_8, 3, Route20BattleText9, Route20EndBattleText9, Route20AfterBattleText9
 Route20TrainerHeader9:
-	trainer EVENT_BEAT_ROUTE_20_TRAINER_9, 1, 4, Route20BattleText10, Route20EndBattleText10, Route20AfterBattleText10
+	trainer EVENT_BEAT_ROUTE_20_TRAINER_9, 4, Route20BattleText10, Route20EndBattleText10, Route20AfterBattleText10
 	db -1 ; end
 
 Route20Text1:

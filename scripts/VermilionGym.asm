@@ -9,7 +9,7 @@ VermilionGym_Script:
 	res 6, [hl]
 	call nz, VermilionGymSetDoorTile
 	call EnableAutoTextBoxDrawing
-	ld hl, VermilionGymTrainerHeader0
+	ld hl, VermilionGymTrainerHeaders
 	ld de, VermilionGym_ScriptPointers
 	ld a, [wVermilionGymCurScript]
 	call ExecuteCurMapScriptInTable
@@ -99,6 +99,8 @@ VermilionGym_TextPointers:
 	dw ReceivedTM24Text
 	dw TM24NoRoomText
 
+VermilionGymTrainerHeaders:
+	def_trainers 2
 VermilionGymTrainerHeader0:
 	trainer EVENT_BEAT_VERMILION_GYM_TRAINER_0, 3, VermilionGymBattleText1, VermilionGymEndBattleText1, VermilionGymAfterBattleText1
 VermilionGymTrainerHeader1:
