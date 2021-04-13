@@ -1,6 +1,6 @@
 SSAnneBow_Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, SSAnne5TrainerHeader0
+	ld hl, SSAnne5TrainerHeaders
 	ld de, SSAnneBow_ScriptPointers
 	ld a, [wSSAnneBowCurScript]
 	call ExecuteCurMapScriptInTable
@@ -19,6 +19,8 @@ SSAnneBow_TextPointers:
 	dw SSAnne5Text4
 	dw SSAnne5Text5
 
+SSAnne5TrainerHeaders:
+	def_trainers 4
 SSAnne5TrainerHeader0:
 	trainer EVENT_BEAT_SS_ANNE_5_TRAINER_0, 3, SSAnne5BattleText1, SSAnne5EndBattleText1, SSAnne5AfterBattleText1
 SSAnne5TrainerHeader1:

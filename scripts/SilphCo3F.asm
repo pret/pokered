@@ -1,7 +1,7 @@
 SilphCo3F_Script:
 	call SilphCo3Script_59f71
 	call EnableAutoTextBoxDrawing
-	ld hl, SilphCo3TrainerHeader0
+	ld hl, SilphCo3TrainerHeaders
 	ld de, SilphCo3F_ScriptPointers
 	ld a, [wSilphCo3FCurScript]
 	call ExecuteCurMapScriptInTable
@@ -61,6 +61,8 @@ SilphCo3F_TextPointers:
 	dw SilphCo3Text3
 	dw PickUpItemText
 
+SilphCo3TrainerHeaders:
+	def_trainers 2
 SilphCo3TrainerHeader0:
 	trainer EVENT_BEAT_SILPH_CO_3F_TRAINER_0, 2, SilphCo3BattleText1, SilphCo3EndBattleText1, SilphCo3AfterBattleText1
 SilphCo3TrainerHeader1:

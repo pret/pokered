@@ -1,7 +1,7 @@
 PokemonMansion2F_Script:
 	call Mansion2Script_51fee
 	call EnableAutoTextBoxDrawing
-	ld hl, Mansion2TrainerHeader0
+	ld hl, Mansion2TrainerHeaders
 	ld de, PokemonMansion2F_ScriptPointers
 	ld a, [wPokemonMansion2FCurScript]
 	call ExecuteCurMapScriptInTable
@@ -63,6 +63,8 @@ PokemonMansion2F_TextPointers:
 	dw Mansion2Text4
 	dw Mansion2Text5
 
+Mansion2TrainerHeaders:
+	def_trainers
 Mansion2TrainerHeader0:
 	trainer EVENT_BEAT_MANSION_2_TRAINER_0, 0, Mansion2BattleText1, Mansion2EndBattleText1, Mansion2AfterBattleText1
 	db -1 ; end

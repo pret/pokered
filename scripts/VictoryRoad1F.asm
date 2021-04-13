@@ -4,7 +4,7 @@ VictoryRoad1F_Script:
 	res 5, [hl]
 	call nz, .next
 	call EnableAutoTextBoxDrawing
-	ld hl, VictoryRoad1TrainerHeader0
+	ld hl, VictoryRoad1TrainerHeaders
 	ld de, VictoryRoad1F_ScriptPointers
 	ld a, [wVictoryRoad1FCurScript]
 	call ExecuteCurMapScriptInTable
@@ -47,6 +47,8 @@ VictoryRoad1F_TextPointers:
 	dw BoulderText
 	dw BoulderText
 
+VictoryRoad1TrainerHeaders:
+	def_trainers
 VictoryRoad1TrainerHeader0:
 	trainer EVENT_BEAT_VICTORY_ROAD_1_TRAINER_0, 2, VictoryRoad1BattleText1, VictoryRoad1EndBattleText1, VictoryRoad1AfterBattleText1
 VictoryRoad1TrainerHeader1:

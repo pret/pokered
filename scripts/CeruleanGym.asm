@@ -4,7 +4,7 @@ CeruleanGym_Script:
 	res 6, [hl]
 	call nz, .LoadNames
 	call EnableAutoTextBoxDrawing
-	ld hl, CeruleanGymTrainerHeader0
+	ld hl, CeruleanGymTrainerHeaders
 	ld de, CeruleanGym_ScriptPointers
 	ld a, [wCeruleanGymCurScript]
 	call ExecuteCurMapScriptInTable
@@ -79,6 +79,8 @@ CeruleanGym_TextPointers:
 	dw CeruleanGymText6
 	dw CeruleanGymText7
 
+CeruleanGymTrainerHeaders:
+	def_trainers 2
 CeruleanGymTrainerHeader0:
 	trainer EVENT_BEAT_CERULEAN_GYM_TRAINER_0, 3, CeruleanGymBattleText1, CeruleanGymEndBattleText1, CeruleanGymAfterBattleText1
 CeruleanGymTrainerHeader1:

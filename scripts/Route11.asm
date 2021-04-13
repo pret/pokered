@@ -1,6 +1,6 @@
 Route11_Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, Route11TrainerHeader0
+	ld hl, Route11TrainerHeaders
 	ld de, Route11_ScriptPointers
 	ld a, [wRoute11CurScript]
 	call ExecuteCurMapScriptInTable
@@ -25,6 +25,8 @@ Route11_TextPointers:
 	dw Route11Text10
 	dw Route11Text11
 
+Route11TrainerHeaders:
+	def_trainers
 Route11TrainerHeader0:
 	trainer EVENT_BEAT_ROUTE_11_TRAINER_0, 3, Route11BattleText1, Route11EndBattleText1, Route11AfterBattleText1
 Route11TrainerHeader1:
@@ -40,11 +42,11 @@ Route11TrainerHeader5:
 Route11TrainerHeader6:
 	trainer EVENT_BEAT_ROUTE_11_TRAINER_6, 3, Route11BattleText7, Route11EndBattleText7, Route11AfterBattleText7
 Route11TrainerHeader7:
-	trainer EVENT_BEAT_ROUTE_11_TRAINER_7, 1, 4, Route11BattleText8, Route11EndBattleText8, Route11AfterBattleText8
+	trainer EVENT_BEAT_ROUTE_11_TRAINER_7, 4, Route11BattleText8, Route11EndBattleText8, Route11AfterBattleText8
 Route11TrainerHeader8:
-	trainer EVENT_BEAT_ROUTE_11_TRAINER_8, 1, 3, Route11BattleText9, Route11EndBattleText9, Route11AfterBattleText9
+	trainer EVENT_BEAT_ROUTE_11_TRAINER_8, 3, Route11BattleText9, Route11EndBattleText9, Route11AfterBattleText9
 Route11TrainerHeader9:
-	trainer EVENT_BEAT_ROUTE_11_TRAINER_9, 1, 4, Route11BattleText10, Route11EndBattleText10, Route11AfterBattleText10
+	trainer EVENT_BEAT_ROUTE_11_TRAINER_9, 4, Route11BattleText10, Route11EndBattleText10, Route11AfterBattleText10
 	db -1 ; end
 
 Route11Text1:

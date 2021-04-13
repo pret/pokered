@@ -1,6 +1,6 @@
 FightingDojo_Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, FightingDojoTrainerHeader0
+	ld hl, FightingDojoTrainerHeaders
 	ld de, FightingDojo_ScriptPointers
 	ld a, [wFightingDojoCurScript]
 	call ExecuteCurMapScriptInTable
@@ -90,6 +90,8 @@ FightingDojo_TextPointers:
 	dw FightingDojoText7
 	dw FightingDojoText8
 
+FightingDojoTrainerHeaders:
+	def_trainers 2
 FightingDojoTrainerHeader0:
 	trainer EVENT_BEAT_FIGHTING_DOJO_TRAINER_0, 4, FightingDojoBattleText1, FightingDojoEndBattleText1, FightingDojoAfterBattleText1
 FightingDojoTrainerHeader1:

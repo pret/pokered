@@ -1,7 +1,7 @@
 SilphCo2F_Script:
 	call SilphCo2Script_59d07
 	call EnableAutoTextBoxDrawing
-	ld hl, SilphCo2TrainerHeader0
+	ld hl, SilphCo2TrainerHeaders
 	ld de, SilphCo2F_ScriptPointers
 	ld a, [wSilphCo2FCurScript]
 	call ExecuteCurMapScriptInTable
@@ -98,6 +98,8 @@ SilphCo2F_TextPointers:
 	dw SilphCo2Text4
 	dw SilphCo2Text5
 
+SilphCo2TrainerHeaders:
+	def_trainers 2
 SilphCo2TrainerHeader0:
 	trainer EVENT_BEAT_SILPH_CO_2F_TRAINER_0, 3, SilphCo2BattleText1, SilphCo2EndBattleText1, SilphCo2AfterBattleText1
 SilphCo2TrainerHeader1:

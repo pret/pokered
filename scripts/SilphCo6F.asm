@@ -1,7 +1,7 @@
 SilphCo6F_Script:
 	call SilphCo6Script_1a1bf
 	call EnableAutoTextBoxDrawing
-	ld hl, SilphCo6TrainerHeader0
+	ld hl, SilphCo6TrainerHeaders
 	ld de, SilphCo6F_ScriptPointers
 	ld a, [wSilphCo6FCurScript]
 	call ExecuteCurMapScriptInTable
@@ -51,12 +51,14 @@ SilphCo6F_TextPointers:
 	dw PickUpItemText
 	dw PickUpItemText
 
+SilphCo6TrainerHeaders:
+	def_trainers 6
 SilphCo6TrainerHeader0:
 	trainer EVENT_BEAT_SILPH_CO_6F_TRAINER_0, 2, SilphCo6BattleText2, SilphCo6EndBattleText2, SilphCo6AfterBattleText2
 SilphCo6TrainerHeader1:
 	trainer EVENT_BEAT_SILPH_CO_6F_TRAINER_1, 3, SilphCo6BattleText3, SilphCo6EndBattleText3, SilphCo6AfterBattleText3
 SilphCo6TrainerHeader2:
-	trainer EVENT_BEAT_SILPH_CO_6F_TRAINER_2, 1, 2, SilphCo6BattleText4, SilphCo6EndBattleText4, SilphCo6AfterBattleText4
+	trainer EVENT_BEAT_SILPH_CO_6F_TRAINER_2, 2, SilphCo6BattleText4, SilphCo6EndBattleText4, SilphCo6AfterBattleText4
 	db -1 ; end
 
 SilphCo6Script_1a22f:

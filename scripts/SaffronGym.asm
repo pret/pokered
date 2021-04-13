@@ -4,7 +4,7 @@ SaffronGym_Script:
 	res 6, [hl]
 	call nz, .LoadNames
 	call EnableAutoTextBoxDrawing
-	ld hl, SaffronGymTrainerHeader0
+	ld hl, SaffronGymTrainerHeaders
 	ld de, SaffronGym_ScriptPointers
 	ld a, [wSaffronGymCurScript]
 	call ExecuteCurMapScriptInTable
@@ -84,6 +84,8 @@ SaffronGym_TextPointers:
 	dw SaffronGymText11
 	dw SaffronGymText12
 
+SaffronGymTrainerHeaders:
+	def_trainers 2
 SaffronGymTrainerHeader0:
 	trainer EVENT_BEAT_SAFFRON_GYM_TRAINER_0, 3, SaffronGymBattleText1, SaffronGymEndBattleText1, SaffronGymAfterBattleText1
 SaffronGymTrainerHeader1:
@@ -97,7 +99,7 @@ SaffronGymTrainerHeader4:
 SaffronGymTrainerHeader5:
 	trainer EVENT_BEAT_SAFFRON_GYM_TRAINER_5, 3, SaffronGymBattleText6, SaffronGymEndBattleText6, SaffronGymAfterBattleText6
 SaffronGymTrainerHeader6:
-	trainer EVENT_BEAT_SAFFRON_GYM_TRAINER_6, 1, 3, SaffronGymBattleText7, SaffronGymEndBattleText7, SaffronGymAfterBattleText7
+	trainer EVENT_BEAT_SAFFRON_GYM_TRAINER_6, 3, SaffronGymBattleText7, SaffronGymEndBattleText7, SaffronGymAfterBattleText7
 	db -1 ; end
 
 SaffronGymText1:

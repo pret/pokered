@@ -1,6 +1,6 @@
 PowerPlant_Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, Voltorb0TrainerHeader
+	ld hl, PowerPlantTrainerHeaders
 	ld de, PowerPlant_ScriptPointers
 	ld a, [wPowerPlantCurScript]
 	call ExecuteCurMapScriptInTable
@@ -28,6 +28,8 @@ PowerPlant_TextPointers:
 	dw PickUpItemText
 	dw PickUpItemText
 
+PowerPlantTrainerHeaders:
+	def_trainers
 Voltorb0TrainerHeader:
 	trainer EVENT_BEAT_POWER_PLANT_VOLTORB_0, 0, VoltorbBattleText, VoltorbBattleText, VoltorbBattleText
 Voltorb1TrainerHeader:
@@ -43,9 +45,9 @@ Voltorb5TrainerHeader:
 Voltorb6TrainerHeader:
 	trainer EVENT_BEAT_POWER_PLANT_VOLTORB_6, 0, VoltorbBattleText, VoltorbBattleText, VoltorbBattleText
 Voltorb7TrainerHeader:
-	trainer EVENT_BEAT_POWER_PLANT_VOLTORB_7, 1, 0, VoltorbBattleText, VoltorbBattleText, VoltorbBattleText
+	trainer EVENT_BEAT_POWER_PLANT_VOLTORB_7, 0, VoltorbBattleText, VoltorbBattleText, VoltorbBattleText
 ZapdosTrainerHeader:
-	trainer EVENT_BEAT_ZAPDOS, 1, 0, ZapdosBattleText, ZapdosBattleText, ZapdosBattleText
+	trainer EVENT_BEAT_ZAPDOS, 0, ZapdosBattleText, ZapdosBattleText, ZapdosBattleText
 	db -1 ; end
 
 InitVoltorbBattle:

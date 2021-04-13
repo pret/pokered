@@ -1,6 +1,6 @@
 Route8_Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, Route8TrainerHeader0
+	ld hl, Route8TrainerHeaders
 	ld de, Route8_ScriptPointers
 	ld a, [wRoute8CurScript]
 	call ExecuteCurMapScriptInTable
@@ -24,6 +24,8 @@ Route8_TextPointers:
 	dw Route8Text9
 	dw Route8Text10
 
+Route8TrainerHeaders:
+	def_trainers
 Route8TrainerHeader0:
 	trainer EVENT_BEAT_ROUTE_8_TRAINER_0, 4, Route8BattleText1, Route8EndBattleText1, Route8AfterBattleText1
 Route8TrainerHeader1:
@@ -39,9 +41,9 @@ Route8TrainerHeader5:
 Route8TrainerHeader6:
 	trainer EVENT_BEAT_ROUTE_8_TRAINER_6, 2, Route8BattleText7, Route8EndBattleText7, Route8AfterBattleText7
 Route8TrainerHeader7:
-	trainer EVENT_BEAT_ROUTE_8_TRAINER_7, 1, 2, Route8BattleText8, Route8EndBattleText8, Route8AfterBattleText8
+	trainer EVENT_BEAT_ROUTE_8_TRAINER_7, 2, Route8BattleText8, Route8EndBattleText8, Route8AfterBattleText8
 Route8TrainerHeader8:
-	trainer EVENT_BEAT_ROUTE_8_TRAINER_8, 1, 4, Route8BattleText9, Route8EndBattleText9, Route8AfterBattleText9
+	trainer EVENT_BEAT_ROUTE_8_TRAINER_8, 4, Route8BattleText9, Route8EndBattleText9, Route8AfterBattleText9
 	db -1 ; end
 
 Route8Text1:

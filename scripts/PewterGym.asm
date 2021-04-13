@@ -4,7 +4,7 @@ PewterGym_Script:
 	res 6, [hl]
 	call nz, .LoadNames
 	call EnableAutoTextBoxDrawing
-	ld hl, PewterGymTrainerHeader0
+	ld hl, PewterGymTrainerHeaders
 	ld de, PewterGym_ScriptPointers
 	ld a, [wPewterGymCurScript]
 	call ExecuteCurMapScriptInTable
@@ -86,6 +86,8 @@ PewterGym_TextPointers:
 	dw PewterGymText5
 	dw PewterGymText6
 
+PewterGymTrainerHeaders:
+	def_trainers 2
 PewterGymTrainerHeader0:
 	trainer EVENT_BEAT_PEWTER_GYM_TRAINER_0, 5, PewterGymBattleText1, PewterGymEndBattleText1, PewterGymAfterBattleText1
 	db -1 ; end
