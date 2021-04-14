@@ -210,7 +210,7 @@ GetDefaultName:
 	ld h, d
 	ld l, e
 	ld de, wcd6d
-	ld bc, $14
+	ld bc, NAME_BUFFER_LENGTH
 	jp CopyData
 
 INCLUDE "data/player_names_list.asm"

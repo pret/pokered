@@ -1173,7 +1173,11 @@ wNumMovesMinusOne::
 
 UNION
 
-wcd6d:: ds 4 ; buffer for various data
+wcd6d:: ds NAME_BUFFER_LENGTH ; buffer for various data
+
+NEXTU
+
+	ds 4
 
 wStatusScreenCurrentPP::
 ; temp variable used to print a move's current PP on the status screen
