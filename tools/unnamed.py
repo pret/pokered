@@ -89,7 +89,7 @@ for objfile in objects:
     num_symbols = unpack_file("<I", f)[0]
     unpack_file("<I", f) # skip num sections
 
-    if obj_ver in [16]:
+    if obj_ver in [16, 17]:
         node_filenames = []
         num_nodes = unpack_file("<I", f)[0]
         for x in range(num_nodes):
@@ -109,7 +109,7 @@ for objfile in objects:
         sym_type = symtype(unpack_file("<B", f)[0] & 0x7f)
         if sym_type == symtype.IMPORT:
             continue
-        if obj_ver in [16]:
+        if obj_ver in [16, 17]:
             sym_fileno = unpack_file("<I", f)[0]
             sym_filename = node_filenames[sym_fileno]
         else:
