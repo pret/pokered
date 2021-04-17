@@ -91,9 +91,9 @@ FlashSprite8Times:
 
 CopyHealingMachineOAM:
 ; copy one OAM entry and advance the pointers
-	REPT 4
+REPT 4
 	ld a, [de]
 	inc de
 	ld [hli], a
-	ENDR
+ENDR
 	ret

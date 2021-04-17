@@ -184,8 +184,8 @@ ENDM
 SetEvents: MACRO
 	SetEvent \1
 	REPT _NARG - 1
-	SetEventReuseHL \2
-	SHIFT
+		SetEventReuseHL \2
+		SHIFT
 	ENDR
 ENDM
 
@@ -236,8 +236,8 @@ ENDM
 ResetEvents: MACRO
 	ResetEvent \1
 	REPT _NARG - 1
-	ResetEventReuseHL \2
-	SHIFT
+		ResetEventReuseHL \2
+		SHIFT
 	ENDR
 ENDM
 

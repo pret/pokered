@@ -29,8 +29,8 @@
 	const POTION        ; $14
 	const BOULDERBADGE  ; $15
 	const CASCADEBADGE  ; $16
-SAFARI_BAIT           EQU $15 ; overload
-SAFARI_ROCK           EQU $16 ; overload
+SAFARI_BAIT EQU $15 ; overload
+SAFARI_ROCK EQU $16 ; overload
 	const THUNDERBADGE  ; $17
 	const RAINBOWBADGE  ; $18
 	const SOULBADGE     ; $19
@@ -128,17 +128,10 @@ IF !DEF(HM01)
 HM01 EQU const_value
 __tmhm_value__ = NUM_TMS + 1
 ENDC
-HM_VALUE EQU __tmhm_value__ - NUM_TMS
-IF HM_VALUE < 10
-MOVE_FOR_HM EQUS "HM0{d:HM_VALUE}_MOVE"
-ELSE
-MOVE_FOR_HM EQUS "HM{d:HM_VALUE}_MOVE"
-ENDC
-MOVE_FOR_HM = \1
-PURGE MOVE_FOR_HM
-PURGE HM_VALUE
 	const HM_\1
 \1_TMNUM EQU __tmhm_value__
+__HM_VALUE = __tmhm_value__ - NUM_TMS
+HM{02d:__HM_VALUE}_MOVE EQU \1
 __tmhm_value__ = __tmhm_value__ + 1
 ENDM
 
@@ -159,15 +152,9 @@ IF !DEF(TM01)
 TM01 EQU const_value
 __tmhm_value__ = 1
 ENDC
-IF __tmhm_value__ < 10
-MOVE_FOR_TM EQUS "TM0{d:__tmhm_value__}_MOVE"
-ELSE
-MOVE_FOR_TM EQUS "TM{d:__tmhm_value__}_MOVE"
-ENDC
-MOVE_FOR_TM = \1
-PURGE MOVE_FOR_TM
 	const TM_\1
 \1_TMNUM EQU __tmhm_value__
+TM{02d:__tmhm_value__}_MOVE EQU \1
 __tmhm_value__ = __tmhm_value__ + 1
 ENDM
 

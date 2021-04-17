@@ -19,33 +19,23 @@ money EQUS "bcd3"
 ; used in data/pokemon/base_stats/*.asm
 tmhm: MACRO
 ; initialize bytes to 0
-n = 0
-REPT (NUM_TM_HM + 7) / 8
-_TM_BYTE EQUS "_tm{d:n}"
-_TM_BYTE = 0
-PURGE _TM_BYTE
-n = n + 1
+FOR n, (NUM_TM_HM + 7) / 8
+_tm{d:n} = 0
 ENDR
 ; set bits of bytes
 REPT _NARG
 	IF DEF(\1_TMNUM)
 n = (\1_TMNUM - 1) / 8
 i = (\1_TMNUM - 1) % 8
-_TM_BYTE EQUS "_tm{d:n}"
-_TM_BYTE = _TM_BYTE | (1 << i)
-PURGE _TM_BYTE
+_tm{d:n} = _tm{d:n} | (1 << i)
 	ELSE
 		FAIL "\1 is not a TM or HM move"
 	ENDC
 	SHIFT
 ENDR
 ; output bytes
-n = 0
-REPT (NUM_TM_HM + 7) / 8
-_TM_BYTE EQUS "_tm{d:n}"
-	db _TM_BYTE
-PURGE _TM_BYTE
-n = n + 1
+FOR n, (NUM_TM_HM + 7) / 8
+	db _tm{d:n}
 ENDR
 ENDM
 

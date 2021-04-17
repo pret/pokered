@@ -27,10 +27,9 @@ WarpTileIDPointers:
 	assert_table_length NUM_TILESETS
 
 warp_tiles: MACRO
-REPT _NARG
-	db \1
-	shift
-ENDR
+	IF _NARG
+		db \# ; all args
+	ENDC
 	db -1 ; end
 ENDM
 
