@@ -5,13 +5,13 @@ os:
 install:
   - |-
     ( cd
-        if [ $TRAVIS_OS_NAME = linux ]; then
-          git clone -b v0.5.0 --depth=1 https://github.com/gbdev/rgbds;
-          sudo make -C rgbds install;
-          rm -rf rgbds;
-        else
-          HOMEBREW_NO_AUTO_UPDATE=1 brew install rgbds;
+        if [ "$TRAVIS_OS_NAME" = osx ]; then
+          HOMEBREW_NO_AUTO_UPDATE=1 brew install bison
+          export PATH="/usr/local/opt/bison/bin:$PATH"
         fi
+        git clone -b v0.5.0 --depth=1 https://github.com/gbdev/rgbds
+        sudo make -C rgbds install
+        rm -rf rgbds
     )
 before_script:
   - |-
