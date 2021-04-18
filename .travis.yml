@@ -5,9 +5,13 @@ os:
 install:
   - |-
     ( cd
-        git clone -b v0.5.0 --depth=1 https://github.com/gbdev/rgbds
-        sudo make -C rgbds install
-        rm -rf rgbds
+        if [ $TRAVIS_OS_NAME = linux ]; then
+          git clone -b v0.5.0 --depth=1 https://github.com/gbdev/rgbds;
+          sudo make -C rgbds install;
+          rm -rf rgbds;
+        else
+          brew install rgbds;
+        fi
     )
 before_script:
   - |-
