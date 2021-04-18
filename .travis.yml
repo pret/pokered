@@ -10,7 +10,7 @@ install:
           sudo make -C rgbds install;
           rm -rf rgbds;
         else
-          brew install rgbds;
+          HOMEBREW_NO_AUTO_UPDATE=1 brew install rgbds;
         fi
     )
 before_script:
