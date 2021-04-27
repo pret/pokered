@@ -113,7 +113,7 @@ GetMonSpecies:
 	ld hl, wBoxSpecies
 	jr .getSpecies
 .enemyParty
-	ld hl, wEnemyPartyMons
+	ld hl, wEnemyPartySpecies
 .getSpecies
 	ld d, 0
 	add hl, de

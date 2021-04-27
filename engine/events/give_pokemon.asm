@@ -7,7 +7,7 @@ _GivePokemon::
 	ld a, [wPartyCount]
 	cp PARTY_LENGTH
 	jr c, .addToParty
-	ld a, [wNumInBox]
+	ld a, [wBoxCount]
 	cp MONS_PER_BOX
 	jr nc, .boxFull
 ; add to box

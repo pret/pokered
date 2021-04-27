@@ -2,30 +2,30 @@ SECTION "VRAM", VRAM
 
 UNION
 ; generic
-vChars0:: ds $800
-vChars1:: ds $800
-vChars2:: ds $800
-vBGMap0:: ds $400
-vBGMap1:: ds $400
+vChars0:: ds $80 tiles
+vChars1:: ds $80 tiles
+vChars2:: ds $80 tiles
+vBGMap0:: ds BG_MAP_WIDTH * BG_MAP_HEIGHT
+vBGMap1:: ds BG_MAP_WIDTH * BG_MAP_HEIGHT
 
 NEXTU
 ; battle/menu
-vSprites::  ds $800
-vFont::     ds $800
-vFrontPic:: ds 7 * 7 * $10
-vBackPic::  ds 7 * 7 * $10
+vSprites::  ds $80 tiles
+vFont::     ds $80 tiles
+vFrontPic:: ds 7 * 7 tiles
+vBackPic::  ds 7 * 7 tiles
 
 NEXTU
 ; overworld
-vNPCSprites::  ds $800
-vNPCSprites2:: ds $800
-vTileset::     ds $800
+vNPCSprites::  ds $80 tiles
+vNPCSprites2:: ds $80 tiles
+vTileset::     ds $80 tiles
 
 NEXTU
 ; title
-	ds $800
-vTitleLogo::  ds $800
-	ds 7 * 7 * $10
-vTitleLogo2:: ds $1e0
+	ds $80 tiles
+vTitleLogo::  ds $80 tiles
+	ds 7 * 7 tiles
+vTitleLogo2:: ds 30 tiles
 
 ENDU

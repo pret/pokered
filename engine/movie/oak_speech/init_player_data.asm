@@ -14,7 +14,7 @@ InitPlayerData2:
 
 	ld hl, wPartyCount
 	call InitializeEmptyList
-	ld hl, wNumInBox
+	ld hl, wBoxCount
 	call InitializeEmptyList
 	ld hl, wNumBagItems
 	call InitializeEmptyList

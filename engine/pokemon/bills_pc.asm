@@ -212,7 +212,7 @@ BillsPCDeposit:
 	call PrintText
 	jp BillsPCMenu
 .partyLargeEnough
-	ld a, [wNumInBox]
+	ld a, [wBoxCount]
 	cp MONS_PER_BOX
 	jr nz, .boxNotFull
 	ld hl, BoxFullText
@@ -254,7 +254,7 @@ BillsPCDeposit:
 	jp BillsPCMenu
 
 BillsPCWithdraw:
-	ld a, [wNumInBox]
+	ld a, [wBoxCount]
 	and a
 	jr nz, .boxNotEmpty
 	ld hl, NoMonText
@@ -268,7 +268,7 @@ BillsPCWithdraw:
 	call PrintText
 	jp BillsPCMenu
 .partyNotFull
-	ld hl, wNumInBox
+	ld hl, wBoxCount
 	call DisplayMonListMenu
 	jp c, BillsPCMenu
 	call DisplayDepositWithdrawMenu
@@ -291,14 +291,14 @@ BillsPCWithdraw:
 	jp BillsPCMenu
 
 BillsPCRelease:
-	ld a, [wNumInBox]
+	ld a, [wBoxCount]
 	and a
 	jr nz, .loop
 	ld hl, NoMonText
 	call PrintText
 	jp BillsPCMenu
 .loop
-	ld hl, wNumInBox
+	ld hl, wBoxCount
 	call DisplayMonListMenu
 	jp c, BillsPCMenu
 	ld hl, OnceReleasedText

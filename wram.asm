@@ -175,22 +175,11 @@ wSpriteStateData1::
 ; - D
 ; - E
 ; - F
-wSpritePlayerStateData1::  spritestatedata1 wSpritePlayerStateData1
-wSprite01StateData1::      spritestatedata1 wSprite01StateData1
-wSprite02StateData1::      spritestatedata1 wSprite02StateData1
-wSprite03StateData1::      spritestatedata1 wSprite03StateData1
-wSprite04StateData1::      spritestatedata1 wSprite04StateData1
-wSprite05StateData1::      spritestatedata1 wSprite05StateData1
-wSprite06StateData1::      spritestatedata1 wSprite06StateData1
-wSprite07StateData1::      spritestatedata1 wSprite07StateData1
-wSprite08StateData1::      spritestatedata1 wSprite08StateData1
-wSprite09StateData1::      spritestatedata1 wSprite09StateData1
-wSprite10StateData1::      spritestatedata1 wSprite10StateData1
-wSprite11StateData1::      spritestatedata1 wSprite11StateData1
-wSprite12StateData1::      spritestatedata1 wSprite12StateData1
-wSprite13StateData1::      spritestatedata1 wSprite13StateData1
-wSprite14StateData1::      spritestatedata1 wSprite14StateData1
-wSprite15StateData1::      spritestatedata1 wSprite15StateData1
+wSpritePlayerStateData1::  spritestatedata1 wSpritePlayerStateData1 ; player is struct 0
+; wSprite02StateData1 - wSprite15StateData1
+for n, 1, NUM_SPRITESTATEDATA_STRUCTS
+wSprite{02d:n}StateData1:: spritestatedata1 wSprite{02d:n}StateData1
+endr
 
 wSpriteStateData2::
 ; more data for all sprites on the current map
@@ -213,23 +202,16 @@ wSpriteStateData2::
 ; - D: picture ID
 ; - E: sprite image base offset (in video ram, player always has value 1, used to compute sprite image index)
 ; - F
-wSpritePlayerStateData2::  spritestatedata2 wSpritePlayerStateData2
-wSprite01StateData2::      spritestatedata2 wSprite01StateData2
-wSprite02StateData2::      spritestatedata2 wSprite02StateData2
-wSprite03StateData2::      spritestatedata2 wSprite03StateData2
-wSprite04StateData2::      spritestatedata2 wSprite04StateData2
-wSprite05StateData2::      spritestatedata2 wSprite05StateData2
-wSprite06StateData2::      spritestatedata2 wSprite06StateData2
-wSprite07StateData2::      spritestatedata2 wSprite07StateData2
-wSprite08StateData2::      spritestatedata2 wSprite08StateData2
-wSprite09StateData2::      spritestatedata2 wSprite09StateData2
-wSprite10StateData2::      spritestatedata2 wSprite10StateData2
-wSprite11StateData2::      spritestatedata2 wSprite11StateData2
-wSprite12StateData2::      spritestatedata2 wSprite12StateData2
-wSprite13StateData2::      spritestatedata2 wSprite13StateData2
-wSprite14StateData2::      spritestatedata2 wSprite14StateData2
-wSprite15StateData2::      spritestatedata2 wSprite15StateData2
+wSpritePlayerStateData2::  spritestatedata2 wSpritePlayerStateData2 ; player is struct 0
+; wSprite02StateData2 - wSprite15StateData2
+for n, 1, NUM_SPRITESTATEDATA_STRUCTS
+wSprite{02d:n}StateData2:: spritestatedata2 wSprite{02d:n}StateData2
+endr
 
+; The high byte of a pointer to anywhere within wSpriteStateData1 can be incremented
+; to reach within wSpriteStateData2, and vice-versa for decrementing.
+assert HIGH(wSpriteStateData1) + 1 == HIGH(wSpriteStateData2)
+assert LOW(wSpriteStateData1) == 0
 
 wSpriteDataEnd::
 
@@ -238,7 +220,10 @@ SECTION "OAM Buffer", WRAM0
 
 wOAMBuffer::
 ; buffer for OAM data. Copied to OAM by DMA
-	ds 4 * 40
+; wOAMBufferSprite00 - wOAMBufferSprite39
+for n, NUM_SPRITE_OAM_STRUCTS
+wOAMBufferSprite{02d:n}:: ds 4
+endr
 wOAMBufferEnd::
 
 wTileMap::
@@ -2027,7 +2012,7 @@ wRepelRemainingSteps::
 
 wMoves::
 ; list of moves for FormatMovesString
-	ds 4
+	ds NUM_MOVES
 
 wMoveNum::
 	ds 1
@@ -2236,20 +2221,26 @@ wPlayerName::
 
 wPartyDataStart::
 
-wPartyCount::   ds 1
-wPartySpecies:: ds PARTY_LENGTH
-wPartyEnd::     ds 1
+wPartyCount:: ds 1
+wPartySpecies:: ds PARTY_LENGTH + 1
 
 wPartyMons::
-wPartyMon1:: party_struct wPartyMon1
-wPartyMon2:: party_struct wPartyMon2
-wPartyMon3:: party_struct wPartyMon3
-wPartyMon4:: party_struct wPartyMon4
-wPartyMon5:: party_struct wPartyMon5
-wPartyMon6:: party_struct wPartyMon6
+; wPartyMon1 - wPartyMon6
+for n, 1, PARTY_LENGTH + 1
+wPartyMon{d:n}:: party_struct wPartyMon{d:n}
+endr
 
-wPartyMonOT::    ds NAME_LENGTH * PARTY_LENGTH
-wPartyMonNicks:: ds NAME_LENGTH * PARTY_LENGTH
+wPartyMonOT::
+; wPartyMon1OT - wPartyMon6OT
+for n, 1, PARTY_LENGTH + 1
+wPartyMon{d:n}OT:: ds NAME_LENGTH
+endr
+
+wPartyMonNicks::
+; wPartyMon1Nick - wPartyMon6Nick
+for n, 1, PARTY_LENGTH + 1
+wPartyMon{d:n}Nick:: ds NAME_LENGTH
+endr
 wPartyMonNicksEnd::
 
 wPartyDataEnd::
@@ -3071,18 +3062,25 @@ wSerialEnemyDataBlock::
 	ds 9
 
 wEnemyPartyCount:: ds 1
-wEnemyPartyMons::  ds PARTY_LENGTH + 1
+wEnemyPartySpecies:: ds PARTY_LENGTH + 1
 
 wEnemyMons::
-wEnemyMon1:: party_struct wEnemyMon1
-wEnemyMon2:: party_struct wEnemyMon2
-wEnemyMon3:: party_struct wEnemyMon3
-wEnemyMon4:: party_struct wEnemyMon4
-wEnemyMon5:: party_struct wEnemyMon5
-wEnemyMon6:: party_struct wEnemyMon6
+; wEnemyMon1 - wEnemyMon6
+for n, 1, PARTY_LENGTH + 1
+wEnemyMon{d:n}:: party_struct wEnemyMon{d:n}
+endr
 
-wEnemyMonOT::    ds NAME_LENGTH * PARTY_LENGTH
-wEnemyMonNicks:: ds NAME_LENGTH * PARTY_LENGTH
+wEnemyMonOT::
+; wEnemyMon1OT - wEnemyMon6OT
+for n, 1, PARTY_LENGTH + 1
+wEnemyMon{d:n}OT:: ds NAME_LENGTH
+endr
+
+wEnemyMonNicks::
+; wEnemyMon1Nick - wEnemyMon6Nick
+for n, 1, PARTY_LENGTH + 1
+wEnemyMon{d:n}Nick:: ds NAME_LENGTH
+endr
 
 ENDU
 
@@ -3139,15 +3137,27 @@ wMainDataEnd::
 
 wBoxDataStart::
 
-wNumInBox::  ds 1
+wBoxCount:: ds 1
 wBoxSpecies:: ds MONS_PER_BOX + 1
 
 wBoxMons::
-wBoxMon1:: box_struct wBoxMon1
-wBoxMon2:: ds BOX_STRUCT_LENGTH * (MONS_PER_BOX - 1)
 
-wBoxMonOT::    ds NAME_LENGTH * MONS_PER_BOX
-wBoxMonNicks:: ds NAME_LENGTH * MONS_PER_BOX
+; wBoxMon1 - wBoxMon20
+for n, 1, MONS_PER_BOX + 1
+wBoxMon{d:n}:: box_struct wBoxMon{d:n}
+endr
+
+wBoxMonOT::
+; wBoxMon1OT - wBoxMon20OT
+for n, 1, MONS_PER_BOX + 1
+wBoxMon{d:n}OT:: ds NAME_LENGTH
+endr
+
+wBoxMonNicks::
+; wBoxMon1Nick - wBoxMon20Nick
+for n, 1, MONS_PER_BOX + 1
+wBoxMon{d:n}Nick:: ds NAME_LENGTH
+endr
 wBoxMonNicksEnd::
 
 wBoxDataEnd::

@@ -3,7 +3,7 @@ _RemovePokemon::
 	ld a, [wRemoveMonFromBox]
 	and a
 	jr z, .usePartyCount
-	ld hl, wNumInBox
+	ld hl, wBoxCount
 .usePartyCount
 	ld a, [hl]
 	dec a

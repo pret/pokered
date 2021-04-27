@@ -580,7 +580,7 @@ GetMonCountsForAllBoxes:
 	ld c, a
 	ld b, 0
 	add hl, bc
-	ld a, [wNumInBox]
+	ld a, [wBoxCount]
 	ld [hl], a
 
 	ret

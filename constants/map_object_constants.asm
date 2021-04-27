@@ -38,6 +38,8 @@ SPRITESTATEDATA1_LENGTH EQU const_value
 	const SPRITESTATEDATA2_0F                   ; f
 SPRITESTATEDATA2_LENGTH EQU const_value
 
+NUM_SPRITESTATEDATA_STRUCTS EQU 16
+
 ; different kinds of people events
 ITEM    EQU $80
 TRAINER EQU $40
