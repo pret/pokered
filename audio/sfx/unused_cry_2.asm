@@ -1,4 +1,5 @@
-SFX_Unused_1_Ch5:
+; This corresponds to Cry_Unused_Ch5, Cry_Unused_Ch6, and Cry_Unused_Ch8 in pokegold and pokecrystal.
+SFX_UnusedCry_2_Ch5: ; unreferenced
 	duty_cycle_pattern 3, 3, 0, 0
 	square_note 15, 14, 0, 1920
 	square_note 15, 15, 0, 1924
@@ -9,7 +10,7 @@ SFX_Unused_1_Ch5:
 	sound_ret
 
 
-SFX_Unused_1_Ch6:
+SFX_UnusedCry_2_Ch6: ; unreferenced
 	duty_cycle_pattern 0, 0, 1, 1
 	square_note 15, 10, 0, 1857
 	square_note 15, 11, 0, 1859
@@ -20,7 +21,7 @@ SFX_Unused_1_Ch6:
 	sound_ret
 
 
-SFX_Unused_1_Ch8:
+SFX_UnusedCry_2_Ch8: ; unreferenced
 	noise_note 2, 15, 2, 76
 	noise_note 6, 14, 0, 58
 	noise_note 15, 13, 0, 58
