@@ -82,14 +82,14 @@ for objfile in objects:
     elif magic == b'RGB9':
         obj_ver = 10 + unpack_file("<I", f)[0]
 
-    if obj_ver not in [6, 10, 11, 12, 13, 15, 16, 17]:
+    if obj_ver not in [6, 10, 11, 12, 13, 15, 16, 17, 18]:
         print("Error: File '%s' is of an unknown format." % objfile, file=stderr)
         exit(1)
 
     num_symbols = unpack_file("<I", f)[0]
     unpack_file("<I", f) # skip num sections
 
-    if obj_ver in [16, 17]:
+    if obj_ver in [16, 17, 18]:
         node_filenames = []
         num_nodes = unpack_file("<I", f)[0]
         for x in range(num_nodes):
@@ -109,7 +109,7 @@ for objfile in objects:
         sym_type = symtype(unpack_file("<B", f)[0] & 0x7f)
         if sym_type == symtype.IMPORT:
             continue
-        if obj_ver in [16, 17]:
+        if obj_ver in [16, 17, 18]:
             sym_fileno = unpack_file("<I", f)[0]
             sym_filename = node_filenames[sym_fileno]
         else:

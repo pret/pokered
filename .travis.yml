@@ -9,7 +9,7 @@ install:
           HOMEBREW_NO_AUTO_UPDATE=1 brew install bison
           export PATH="/usr/local/opt/bison/bin:$PATH"
         fi
-        git clone -b v0.5.0 --depth=1 https://github.com/gbdev/rgbds
+        git clone -b v0.5.1 --depth=1 https://github.com/gbdev/rgbds
         sudo make -C rgbds install
         rm -rf rgbds
     )
