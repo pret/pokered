@@ -1,4 +1,4 @@
-_ViridianGymText_74ace::
+_GiovanniPreBattleText::
 	text "Fwahahaha! This is"
 	line "my hideout!"
 
@@ -18,7 +18,7 @@ _ViridianGymText_74ace::
 	cont "greatest trainer!"
 	done
 
-_ViridianGymText_74ad3::
+_ReceivedEarthBadgeText::
 	text "Ha!"
 	line "That was a truly"
 	cont "intense fight!"
@@ -27,7 +27,7 @@ _ViridianGymText_74ad3::
 	cont "the EARTHBADGE!@"
 	text_end
 
-_ViridianGymText_74ad9::
+_GiovanniPostBattleAdviceText::
 	text "Having lost, I"
 	line "cannot face my"
 	cont "underlings!"
@@ -43,7 +43,7 @@ _ViridianGymText_74ad9::
 	cont "Farewell!@"
 	text_end
 
-_ViridianGymText12::
+_GiovanniEarthBadgeInfoText::
 	text "The EARTHBADGE"
 	line "makes #MON of"
 	cont "any level obey!"
@@ -215,7 +215,7 @@ _ViridianGymAfterBattleText8::
 	cont "our GYM LEADER!"
 	done
 
-_ViridianGymText_74bd4::
+_ViridianGymGuidePreBattleText::
 	text "Yo! Champ in"
 	line "making!"
 
@@ -233,7 +233,7 @@ _ViridianGymText_74bd4::
 	cont "#MON!"
 	done
 
-_ViridianGymText_74bd9::
+_ViridianGymGuidePostBattleText::
 	text "Blow me away!"
 	line "GIOVANNI was the"
 	cont "GYM LEADER here?"

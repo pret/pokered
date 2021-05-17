@@ -1,11 +1,11 @@
 CinnabarGym_Script:
-	call CinnabarGymScript_75759
+	call CinnabarGymSetMapAndTiles
 	call EnableAutoTextBoxDrawing
 	ld hl, CinnabarGym_ScriptPointers
 	ld a, [wCinnabarGymCurScript]
 	jp CallFunctionInTable
 
-CinnabarGymScript_75759:
+CinnabarGymSetMapAndTiles:
 	ld hl, wCurrentMapScriptFlags
 	bit 6, [hl]
 	res 6, [hl]
@@ -29,7 +29,7 @@ CinnabarGymScript_75759:
 .LeaderName:
 	db "BLAINE@"
 
-CinnabarGymScript_75792:
+CinnabarGymResetScripts:
 	xor a
 	ld [wJoyIgnore], a
 	ld [wCinnabarGymCurScript], a
@@ -37,7 +37,7 @@ CinnabarGymScript_75792:
 	ld [wOpponentAfterWrongAnswer], a
 	ret
 
-CinnabarGymScript_757a0:
+CinnabarGymSetTrainerHeader:
 	ldh a, [hSpriteIndexOrTextID]
 	ld [wTrainerHeaderFlagBit], a
 	ret
@@ -46,7 +46,7 @@ CinnabarGym_ScriptPointers:
 	dw CinnabarGymScript0
 	dw CinnabarGymScript1
 	dw CinnabarGymScript2
-	dw CinnabarGymScript3
+	dw CinnabarGymBlainePostBattle
 
 CinnabarGymScript0:
 	ld a, [wOpponentAfterWrongAnswer]
@@ -57,25 +57,25 @@ CinnabarGymScript0:
 	jr nz, .asm_757c3
 	ld a, PLAYER_DIR_DOWN
 	ld [wPlayerMovingDirection], a
-	ld de, MovementData_757d7
-	jr .asm_757cb
+	ld de, MovementNpcToLeftAndUp
+	jr .MoveSprite
 .asm_757c3
-	ld de, MovementData_757da
+	ld de, MovementNpcToLeft
 	ld a, PLAYER_DIR_RIGHT
 	ld [wPlayerMovingDirection], a
-.asm_757cb
+.MoveSprite
 	call MoveSprite
 	ld a, $1
 	ld [wCinnabarGymCurScript], a
 	ld [wCurMapScript], a
 	ret
 
-MovementData_757d7:
+MovementNpcToLeftAndUp:
 	db NPC_MOVEMENT_LEFT
 	db NPC_MOVEMENT_UP
 	db -1 ; end
 
-MovementData_757da:
+MovementNpcToLeft:
 	db NPC_MOVEMENT_LEFT
 	db -1 ; end
 
@@ -96,7 +96,7 @@ CinnabarGymFlagAction:
 CinnabarGymScript2:
 	ld a, [wIsInBattle]
 	cp $ff
-	jp z, CinnabarGymScript_75792
+	jp z, CinnabarGymResetScripts
 	ld a, [wTrainerHeaderFlagBit]
 	ldh [hGymGateIndex], a
 	AdjustEventBit EVENT_BEAT_CINNABAR_GYM_TRAINER_0, 2
@@ -135,13 +135,14 @@ CinnabarGymScript2:
 	ld [wCurMapScript], a
 	ret
 
-CinnabarGymScript3:
+CinnabarGymBlainePostBattle:
 	ld a, [wIsInBattle]
 	cp $ff
-	jp z, CinnabarGymScript_75792
+	jp z, CinnabarGymResetScripts
 	ld a, $f0
 	ld [wJoyIgnore], a
-CinnabarGymScript3_75857:
+; fallthrough
+CinnabarGymReceiveTM38:
 	ld a, $a
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
@@ -170,19 +171,19 @@ CinnabarGymScript3_75857:
 	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
 
-	jp CinnabarGymScript_75792
+	jp CinnabarGymResetScripts
 
 CinnabarGym_TextPointers:
-	dw CinnabarGymText1
-	dw CinnabarGymText2
-	dw CinnabarGymText3
-	dw CinnabarGymText4
-	dw CinnabarGymText5
-	dw CinnabarGymText6
-	dw CinnabarGymText7
-	dw CinnabarGymText8
-	dw CinnabarGymText9
-	dw BlaineBadgeText
+	dw BlaineText
+	dw CinnabarGymTrainerText1
+	dw CinnabarGymTrainerText2
+	dw CinnabarGymTrainerText3
+	dw CinnabarGymTrainerText4
+	dw CinnabarGymTrainerText5
+	dw CinnabarGymTrainerText6
+	dw CinnabarGymTrainerText7
+	dw CinnabarGymGuideText
+	dw BlaineVolcanoBadgeInfoText
 	dw ReceivedTM38Text
 	dw TM38NoRoomText
 
@@ -206,45 +207,45 @@ CinnabarGymScript_758b7:
 	ld [wCurMapScript], a
 	jp TextScriptEnd
 
-CinnabarGymText1:
+BlaineText:
 	text_asm
 	CheckEvent EVENT_BEAT_BLAINE
-	jr z, .beginBattle
+	jr z, .beforeBeat
 	CheckEventReuseA EVENT_GOT_TM38
-	jr nz, .afterVictory
-	call z, CinnabarGymScript3_75857
+	jr nz, .afterBeat
+	call z, CinnabarGymReceiveTM38
 	call DisableWaitingAfterTextDisplay
 	jp TextScriptEnd
-.afterVictory
-	ld hl, BlaineFireBlastText
+.afterBeat
+	ld hl, BlainePostBattleAdviceText
 	call PrintText
 	jp TextScriptEnd
-.beginBattle
-	ld hl, BlaineBattleText
+.beforeBeat
+	ld hl, BlainePreBattleText
 	call PrintText
-	ld hl, BlaineEndBattleText
-	ld de, BlaineEndBattleText
+	ld hl, ReceivedVolcanoBadgeText
+	ld de, ReceivedVolcanoBadgeText
 	call SaveEndBattleTextPointers
 	ld a, $7
 	ld [wGymLeaderNo], a
 	jp CinnabarGymScript_758b7
 
-BlaineBattleText:
-	text_far _BlaineBattleText
+BlainePreBattleText:
+	text_far _BlainePreBattleText
 	text_end
 
-BlaineEndBattleText:
-	text_far _BlaineEndBattleText
+ReceivedVolcanoBadgeText:
+	text_far _ReceivedVolcanoBadgeText
 	sound_get_key_item ; actually plays the second channel of SFX_BALL_POOF due to the wrong music bank being loaded
 	text_waitbutton
 	text_end
 
-BlaineFireBlastText:
-	text_far _BlaineFireBlastText
+BlainePostBattleAdviceText:
+	text_far _BlainePostBattleAdviceText
 	text_end
 
-BlaineBadgeText:
-	text_far _BlaineBadgeText
+BlaineVolcanoBadgeInfoText:
+	text_far _BlaineVolcanoBadgeInfoText
 	text_end
 
 ReceivedTM38Text:
@@ -257,218 +258,218 @@ TM38NoRoomText:
 	text_far _TM38NoRoomText
 	text_end
 
-CinnabarGymText2:
+CinnabarGymTrainerText1:
 	text_asm
-	call CinnabarGymScript_757a0
+	call CinnabarGymSetTrainerHeader
 	CheckEvent EVENT_BEAT_CINNABAR_GYM_TRAINER_0
 	jr nz, .asm_46bb4
-	ld hl, CinnabarGymText_7595f
+	ld hl, CinnabarGymBattleText2
 	call PrintText
-	ld hl, CinnabarGymText_75964
-	ld de, CinnabarGymText_75964
+	ld hl, CinnabarGymEndBattleText2
+	ld de, CinnabarGymEndBattleText2
 	call SaveEndBattleTextPointers
 	jp CinnabarGymScript_758b7
 .asm_46bb4
-	ld hl, CinnabarGymText_75969
+	ld hl, CinnabarGymAfterBattleText2
 	call PrintText
 	jp TextScriptEnd
 
-CinnabarGymText_7595f:
-	text_far _CinnabarGymText_7595f
+CinnabarGymBattleText2:
+	text_far _CinnabarGymBattleText2
 	text_end
 
-CinnabarGymText_75964:
-	text_far _CinnabarGymText_75964
+CinnabarGymEndBattleText2:
+	text_far _CinnabarGymEndBattleText2
 	text_end
 
-CinnabarGymText_75969:
-	text_far _CinnabarGymText_75969
+CinnabarGymAfterBattleText2:
+	text_far _CinnabarGymAfterBattleText2
 	text_end
 
-CinnabarGymText3:
+CinnabarGymTrainerText2:
 	text_asm
-	call CinnabarGymScript_757a0
+	call CinnabarGymSetTrainerHeader
 	CheckEvent EVENT_BEAT_CINNABAR_GYM_TRAINER_1
 	jr nz, .asm_4b406
-	ld hl, CinnabarGymText_75994
+	ld hl, CinnabarGymBattleText1
 	call PrintText
-	ld hl, CinnabarGymText_75999
-	ld de, CinnabarGymText_75999
+	ld hl, CinnabarGymEndBattleText1
+	ld de, CinnabarGymEndBattleText1
 	call SaveEndBattleTextPointers
 	jp CinnabarGymScript_758b7
 .asm_4b406
-	ld hl, CinnabarGymText_7599e
+	ld hl, CinnabarGymAfterBattleText1
 	call PrintText
 	jp TextScriptEnd
 
-CinnabarGymText_75994:
-	text_far _CinnabarGymText_75994
+CinnabarGymBattleText1:
+	text_far _CinnabarGymBattleText1
 	text_end
 
-CinnabarGymText_75999:
-	text_far _CinnabarGymText_75999
+CinnabarGymEndBattleText1:
+	text_far _CinnabarGymEndBattleText1
 	text_end
 
-CinnabarGymText_7599e:
-	text_far _CinnabarGymText_7599e
+CinnabarGymAfterBattleText1:
+	text_far _CinnabarGymAfterBattleText1
 	text_end
 
-CinnabarGymText4:
+CinnabarGymTrainerText3:
 	text_asm
-	call CinnabarGymScript_757a0
+	call CinnabarGymSetTrainerHeader
 	CheckEvent EVENT_BEAT_CINNABAR_GYM_TRAINER_2
-	jr nz, .asm_c0673
-	ld hl, CinnabarGymText_759c9
+	jr nz, .afterBeat
+	ld hl, CinnabarGymBattleText3
 	call PrintText
-	ld hl, CinnabarGymText_759ce
-	ld de, CinnabarGymText_759ce
+	ld hl, CinnabarGymEndBattleText3
+	ld de, CinnabarGymEndBattleText3
 	call SaveEndBattleTextPointers
 	jp CinnabarGymScript_758b7
-.asm_c0673
-	ld hl, CinnabarGymText_759d3
+.afterBeat
+	ld hl, CinnabarGymAfterBattleText3
 	call PrintText
 	jp TextScriptEnd
 
-CinnabarGymText_759c9:
-	text_far _CinnabarGymText_759c9
+CinnabarGymBattleText3:
+	text_far _CinnabarGymBattleText3
 	text_end
 
-CinnabarGymText_759ce:
-	text_far _CinnabarGymText_759ce
+CinnabarGymEndBattleText3:
+	text_far _CinnabarGymEndBattleText3
 	text_end
 
-CinnabarGymText_759d3:
-	text_far _CinnabarGymText_759d3
+CinnabarGymAfterBattleText3:
+	text_far _CinnabarGymAfterBattleText3
 	text_end
 
-CinnabarGymText5:
+CinnabarGymTrainerText4:
 	text_asm
-	call CinnabarGymScript_757a0
+	call CinnabarGymSetTrainerHeader
 	CheckEvent EVENT_BEAT_CINNABAR_GYM_TRAINER_3
-	jr nz, .asm_5cfd7
-	ld hl, CinnabarGymText_759fe
+	jr nz, .afterBeat
+	ld hl, CinnabarGymBattleText4
 	call PrintText
-	ld hl, CinnabarGymText_75a03
-	ld de, CinnabarGymText_75a03
+	ld hl, CinnabarGymEndBattleText4
+	ld de, CinnabarGymEndBattleText4
 	call SaveEndBattleTextPointers
 	jp CinnabarGymScript_758b7
-.asm_5cfd7
-	ld hl, CinnabarGymText_75a08
+.afterBeat
+	ld hl, CinnabarGymAfterBattleText4
 	call PrintText
 	jp TextScriptEnd
 
-CinnabarGymText_759fe:
-	text_far _CinnabarGymText_759fe
+CinnabarGymBattleText4:
+	text_far _CinnabarGymBattleText4
 	text_end
 
-CinnabarGymText_75a03:
-	text_far _CinnabarGymText_75a03
+CinnabarGymEndBattleText4:
+	text_far _CinnabarGymEndBattleText4
 	text_end
 
-CinnabarGymText_75a08:
-	text_far _CinnabarGymText_75a08
+CinnabarGymAfterBattleText4:
+	text_far _CinnabarGymAfterBattleText4
 	text_end
 
-CinnabarGymText6:
+CinnabarGymTrainerText5:
 	text_asm
-	call CinnabarGymScript_757a0
+	call CinnabarGymSetTrainerHeader
 	CheckEvent EVENT_BEAT_CINNABAR_GYM_TRAINER_4
-	jr nz, .asm_776b4
-	ld hl, CinnabarGymText_75a33
+	jr nz, .afterBeat
+	ld hl, CinnabarGymBattleText5
 	call PrintText
-	ld hl, CinnabarGymText_75a38
-	ld de, CinnabarGymText_75a38
+	ld hl, CinnabarGymEndBattleText5
+	ld de, CinnabarGymEndBattleText5
 	call SaveEndBattleTextPointers
 	jp CinnabarGymScript_758b7
-.asm_776b4
-	ld hl, CinnabarGymText_75a3d
+.afterBeat
+	ld hl, CinnabarGymAfterBattleText5
 	call PrintText
 	jp TextScriptEnd
 
-CinnabarGymText_75a33:
-	text_far _CinnabarGymText_75a33
+CinnabarGymBattleText5:
+	text_far _CinnabarGymBattleText5
 	text_end
 
-CinnabarGymText_75a38:
-	text_far _CinnabarGymText_75a38
+CinnabarGymEndBattleText5:
+	text_far _CinnabarGymEndBattleText5
 	text_end
 
-CinnabarGymText_75a3d:
-	text_far _CinnabarGymText_75a3d
+CinnabarGymAfterBattleText5:
+	text_far _CinnabarGymAfterBattleText5
 	text_end
 
-CinnabarGymText7:
+CinnabarGymTrainerText6:
 	text_asm
-	call CinnabarGymScript_757a0
+	call CinnabarGymSetTrainerHeader
 	CheckEvent EVENT_BEAT_CINNABAR_GYM_TRAINER_5
-	jr nz, .asm_2f755
-	ld hl, CinnabarGymText_75a68
+	jr nz, .afterBeat
+	ld hl, CinnabarGymBattleText6
 	call PrintText
-	ld hl, CinnabarGymText_75a6d
-	ld de, CinnabarGymText_75a6d
+	ld hl, CinnabarGymEndBattleText6
+	ld de, CinnabarGymEndBattleText6
 	call SaveEndBattleTextPointers
 	jp CinnabarGymScript_758b7
-.asm_2f755
-	ld hl, CinnabarGymText_75a72
+.afterBeat
+	ld hl, CinnabarGymAfterBattleText6
 	call PrintText
 	jp TextScriptEnd
 
-CinnabarGymText_75a68:
-	text_far _CinnabarGymText_75a68
+CinnabarGymBattleText6:
+	text_far _CinnabarGymBattleText6
 	text_end
 
-CinnabarGymText_75a6d:
-	text_far _CinnabarGymText_75a6d
+CinnabarGymEndBattleText6:
+	text_far _CinnabarGymEndBattleText6
 	text_end
 
-CinnabarGymText_75a72:
-	text_far _CinnabarGymText_75a72
+CinnabarGymAfterBattleText6:
+	text_far _CinnabarGymAfterBattleText6
 	text_end
 
-CinnabarGymText8:
+CinnabarGymTrainerText7:
 	text_asm
-	call CinnabarGymScript_757a0
+	call CinnabarGymSetTrainerHeader
 	CheckEvent EVENT_BEAT_CINNABAR_GYM_TRAINER_6
-	jr nz, .asm_d87be
-	ld hl, CinnabarGymText_75a9d
+	jr nz, .afterBeat
+	ld hl, CinnabarGymBattleText7
 	call PrintText
-	ld hl, CinnabarGymText_75aa2
-	ld de, CinnabarGymText_75aa2
+	ld hl, CinnabarGymEndBattleText7
+	ld de, CinnabarGymEndBattleText7
 	call SaveEndBattleTextPointers
 	jp CinnabarGymScript_758b7
-.asm_d87be
-	ld hl, CinnabarGymText_75aa7
+.afterBeat
+	ld hl, CinnabarGymAfterBattleText7
 	call PrintText
 	jp TextScriptEnd
 
-CinnabarGymText_75a9d:
-	text_far _CinnabarGymText_75a9d
+CinnabarGymBattleText7:
+	text_far _CinnabarGymBattleText7
 	text_end
 
-CinnabarGymText_75aa2:
-	text_far _CinnabarGymText_75aa2
+CinnabarGymEndBattleText7:
+	text_far _CinnabarGymEndBattleText7
 	text_end
 
-CinnabarGymText_75aa7:
-	text_far _CinnabarGymText_75aa7
+CinnabarGymAfterBattleText7:
+	text_far _CinnabarGymAfterBattleText7
 	text_end
 
-CinnabarGymText9:
+CinnabarGymGuideText:
 	text_asm
 	CheckEvent EVENT_BEAT_BLAINE
-	jr nz, .asm_627d9
-	ld hl, CinnabarGymText_75ac2
-	jr .asm_0b11d
-.asm_627d9
-	ld hl, CinnabarGymText_75ac7
-.asm_0b11d
+	jr nz, .afterBeat
+	ld hl, CinnabarGymGuidePreBattleText
+	jr .done
+.afterBeat
+	ld hl, CinnabarGymGuidePostBattleText
+.done
 	call PrintText
 	jp TextScriptEnd
 
-CinnabarGymText_75ac2:
-	text_far _CinnabarGymText_75ac2
+CinnabarGymGuidePreBattleText:
+	text_far _CinnabarGymGuidePreBattleText
 	text_end
 
-CinnabarGymText_75ac7:
-	text_far _CinnabarGymText_75ac7
+CinnabarGymGuidePostBattleText:
+	text_far _CinnabarGymGuidePostBattleText
 	text_end

@@ -16,7 +16,7 @@ _KogaBeforeBattleText::
 	cont "techniques!"
 	done
 
-_KogaAfterBattleText::
+_ReceivedSoulBadgeText::
 	text "Humph!"
 	line "You have proven"
 	cont "your worth!"
