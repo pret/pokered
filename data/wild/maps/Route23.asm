@@ -1,4 +1,4 @@
-Route23Mons:
+Route23WildMons:
 	def_grass_wildmons 10 ; encounter rate
 IF DEF(_RED)
 	db 26, EKANS

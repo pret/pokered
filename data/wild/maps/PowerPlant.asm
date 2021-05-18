@@ -1,4 +1,4 @@
-PowerPlantMons:
+PowerPlantWildMons:
 	def_grass_wildmons 10 ; encounter rate
 	db 21, VOLTORB
 	db 21, MAGNEMITE

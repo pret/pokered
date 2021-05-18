@@ -1,4 +1,4 @@
-Route17Mons:
+Route17WildMons:
 	def_grass_wildmons 25 ; encounter rate
 	db 20, SPEAROW
 	db 22, SPEAROW

@@ -1,4 +1,4 @@
-ForestMons:
+ViridianForestWildMons:
 	def_grass_wildmons 8 ; encounter rate
 IF DEF(_RED)
 	db  4, WEEDLE

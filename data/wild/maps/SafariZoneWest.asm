@@ -1,4 +1,4 @@
-ZoneMons3:
+SafariZoneWestWildMons:
 	def_grass_wildmons 30 ; encounter rate
 IF DEF(_RED)
 	db 25, NIDORAN_M

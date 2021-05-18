@@ -1,4 +1,4 @@
-Route9Mons:
+Route9WildMons:
 	def_grass_wildmons 15 ; encounter rate
 	db 16, RATTATA
 	db 16, SPEAROW

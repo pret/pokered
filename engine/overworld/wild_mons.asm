@@ -26,7 +26,7 @@ LoadWildData::
 	ld [wWaterRate], a
 	and a
 	ret z        ; if no water data, we're done
-	ld de, wWaterMons  ; otherwise, load surfing data
+	ld de, wSeaRoutesWildMons  ; otherwise, load surfing data
 	ld bc, $14
 	jp CopyData
 

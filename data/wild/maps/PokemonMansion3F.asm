@@ -1,4 +1,4 @@
-MansionMons3:
+PokemonMansion3FWildMons:
 	def_grass_wildmons 10 ; encounter rate
 IF DEF(_RED)
 	db 31, KOFFING
