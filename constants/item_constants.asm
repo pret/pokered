@@ -3,7 +3,7 @@
 ; - ItemNames (see data/items/names.asm)
 ; - ItemPrices (see data/items/prices.asm)
 ; - TechnicalMachinePrices (see data/items/tm_prices.asm)
-; - KeyItemBitfield (see data/items/key_items.asm)
+; - KeyItemFlags (see data/items/key_items.asm)
 ; - ItemUsePtrTable (see engine/items/item_effects.asm)
 	const_def
 	const NO_ITEM       ; $00
