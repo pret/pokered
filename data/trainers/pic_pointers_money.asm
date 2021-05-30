@@ -1,6 +1,6 @@
 pic_money: MACRO
 	dw \1
-	money \2
+	bcd3 \2
 ENDM
 
 TrainerPicAndMoneyPointers::

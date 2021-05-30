@@ -13,9 +13,6 @@ bcd3: MACRO
 	dn ((\1) / 10) % 10, (\1) % 10
 ENDM
 
-coins EQUS "bcd2"
-money EQUS "bcd3"
-
 ; used in data/pokemon/base_stats/*.asm
 tmhm: MACRO
 ; initialize bytes to 0
@@ -62,9 +59,4 @@ ENDM
 
 dab: MACRO
 	dwb \1, BANK(\1)
-ENDM
-
-dbbw: MACRO
-	db \1, \2
-	dw \3
 ENDM

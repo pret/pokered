@@ -1,6 +1,6 @@
 vend_item: MACRO
 	db \1
-	money \2
+	bcd3 \2
 ENDM
 
 VendingPrices:
