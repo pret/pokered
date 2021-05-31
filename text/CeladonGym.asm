@@ -1,4 +1,4 @@
-_CeladonGymText_48a5e::
+_ErikaPreBattleText::
 	text "Hello. Lovely"
 	line "weather isn't it?"
 	cont "It's so pleasant."
@@ -25,7 +25,7 @@ _CeladonGymText_48a5e::
 	line "shall not lose."
 	done
 
-_CeladonGymText_48a63::
+_ReceivedRainbowBadgeText::
 	text "Oh!"
 	line "I concede defeat."
 
@@ -36,7 +36,7 @@ _CeladonGymText_48a63::
 	line "the RAINBOWBADGE."
 	prompt
 
-_CeladonGymText_48a68::
+_ErikaPostBattleAdviceText::
 	text "You are cataloging"
 	line "#MON? I must"
 	cont "say I'm impressed."
@@ -47,7 +47,7 @@ _CeladonGymText_48a68::
 	cont "unattractive."
 	done
 
-_CeladonGymText9::
+_ErikaRainbowBadgeInfoText::
 	text "The RAINBOWBADGE"
 	line "will make #MON"
 	cont "up to L50 obey."
