@@ -1,4 +1,4 @@
-NotingWildMons:
+NothingWildMons:
 	def_grass_wildmons 0 ; encounter rate
 	end_grass_wildmons
 
