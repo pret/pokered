@@ -578,42 +578,240 @@ wOverrideSimulatedJoypadStatesMask:: db
 
 	ds 1
 
+; This union spans 30 bytes.
+UNION
+wTradedPlayerMonSpecies:: db
+wTradedEnemyMonSpecies:: db
+	ds 2
+wTradedPlayerMonOT:: ds NAME_LENGTH
+wTradedPlayerMonOTID:: dw
+wTradedEnemyMonOT:: ds NAME_LENGTH
+wTradedEnemyMonOTID:: dw
+
+NEXTU
+wTradingWhichPlayerMon:: db
+wTradingWhichEnemyMon:: db
+wNameOfPlayerMonToBeTraded:: ds NAME_LENGTH
+
+NEXTU
 ; one byte for each falling object
-wFallingObjectsMovementData:: ; ds 20
+wFallingObjectsMovementData:: ds 20
 
+NEXTU
 ; array of the number of mons in each box
-wBoxMonCounts:: ; ds NUM_BOXES
+wBoxMonCounts:: ds NUM_BOXES
 
-; BCD number
-wPriceTemp:: ; ds 3
+NEXTU
+wPriceTemp:: ds 3 ; BCD
 
+NEXTU
 ; the current mon's field moves
-wFieldMoves:: ; ds NUM_MOVES
+wFieldMoves:: ds NUM_MOVES
+wNumFieldMoves:: db
+wFieldMovesLeftmostXCoord:: db
+wLastFieldMoveID:: db ; unused
 
-wBoxNumString:: ; ds 3
+NEXTU
+wBoxNumString:: ds 3
 
-wSavedY::
-wTempSCX::
+NEXTU
 ; 0 = upper half (Y < 9)
 ; 1 = lower half (Y >= 9)
-wBattleTransitionCircleScreenQuadrantY::
-; 2 bytes
+wBattleTransitionCircleScreenQuadrantY:: db
+wBattleTransitionCircleScreenQuadrantX:: db
+
+NEXTU
 ; after 1 row/column has been copied, the offset to the next one to copy from
-wBattleTransitionCopyTilesOffset::
+wBattleTransitionCopyTilesOffset:: dw
+
+NEXTU
 ; counts down from 7 so that every time 7 more tiles of the spiral have been
 ; placed, the tile map buffer is copied to VRAM so that progress is visible
-wInwardSpiralUpdateScreenCounter::
-wHoFTeamIndex::
+wInwardSpiralUpdateScreenCounter:: db
+	ds 9
+; 0 = outward, 1 = inward
+wBattleTransitionSpiralDirection:: db
+
+NEXTU
 ; multiplied by 16 to get the number of times to go right by 2 pixels
-wSSAnneSmokeDriftAmount::
-wRivalStarterTemp::
+wSSAnneSmokeDriftAmount:: db
+; 0 = left half (X < 10)
+; 1 = right half (X >= 10)
+wSSAnneSmokeX:: db
+
+NEXTU
+wHoFMonSpecies::
+wHoFTeamIndex:: db
+wHoFPartyMonIndex:: db
+wHoFMonLevel:: db
+; 0 = mon, 1 = player
+wHoFMonOrPlayer:: db
+wHoFTeamIndex2:: db
+wHoFTeamNo:: db
+
+NEXTU
+wRivalStarterTemp:: db
+wRivalStarterBallSpriteIndex:: db
+
+NEXTU
+wFlyAnimUsingCoordList:: db
+; $ff sentinel values at each end
+wFlyLocationsList:: ds NUM_CITY_MAPS + 2
+
+NEXTU
+wWhichTownMapLocation:: db
+wFlyAnimCounter:: db
+wFlyAnimBirdSpriteImageIndex:: db
+
+NEXTU
+	ds 1
+; difference in X between the next ball and the current one
+wHUDPokeballGfxOffsetX:: db
+wHUDGraphicsTiles:: ds 3
+
+NEXTU
+; the level of the mon at the time it entered day care
+wDayCareStartLevel:: db
+wDayCareNumLevelsGrown:: db
+wDayCareTotalCost:: dw ; BCD
+wDayCarePerLevelCost:: dw ; BCD (always $100)
+
+NEXTU
+; which wheel the player is trying to stop
+; 0 = none, 1 = wheel 1, 2 = wheel 2, 3 or greater = wheel 3
+wStoppingWhichSlotMachineWheel:: db
+wSlotMachineWheel1Offset:: db
+wSlotMachineWheel2Offset:: db
+wSlotMachineWheel3Offset:: db
+; the OAM tile number of the upper left corner of the winning symbol minus 2
+wSlotMachineWinningSymbol::
+wSlotMachineWheel1BottomTile:: db
+wSlotMachineWheel1MiddleTile:: db
+wSlotMachineWheel1TopTile:: db
+wSlotMachineWheel2BottomTile:: db
+wSlotMachineWheel2MiddleTile:: db
+wSlotMachineWheel2TopTile:: db
+wSlotMachineWheel3BottomTile:: db
+wSlotMachineWheel3MiddleTile:: db
+wSlotMachineWheel3TopTile:: db
+wPayoutCoins:: dw
+; These flags are set randomly and control when the wheels stop.
+; bit 6: allow the player to win in general
+; bit 7: allow the player to win with 7 or bar (plus the effect of bit 6)
+wSlotMachineFlags:: db
+; wheel 1 can "slip" while this is non-zero
+wSlotMachineWheel1SlipCounter:: db
+; wheel 2 can "slip" while this is non-zero
+wSlotMachineWheel2SlipCounter:: db
+; The remaining number of times wheel 3 will roll down a symbol until a match is
+; found, when winning is enabled. It's initialized to 4 each bet.
+wSlotMachineRerollCounter:: db
+; how many coins the player bet on the slot machine (1 to 3)
+wSlotMachineBet:: db
+
+NEXTU
+wCanPlaySlots:: db
+	ds 8
+; temporary variable used to add payout amount to the player's coins
+wTempCoins1:: dw
+	ds 2
+; temporary variable used to subtract the bet amount from the player's coins
+wTempCoins2:: dw
+
+NEXTU
+wHiddenObjectFunctionArgument:: db
+wHiddenObjectFunctionRomBank:: db
+wHiddenObjectIndex:: db
+wHiddenObjectY:: db
+wHiddenItemOrCoinsIndex::
+wHiddenObjectX:: db
+
+NEXTU
+wPlayerSpinInPlaceAnimFrameDelay:: db
+wPlayerSpinInPlaceAnimFrameDelayDelta:: db
+wPlayerSpinInPlaceAnimFrameDelayEndValue:: db
+wPlayerSpinInPlaceAnimSoundID:: db
+	ds 6
+	db ; temporary space used when wFacingDirectionList is rotated
+; used when spinning the player's sprite
+wFacingDirectionList:: ds 4
+	ds 3
+wSavedPlayerScreenY:: db
+wSavedPlayerFacingDirection:: db
+
+NEXTU
+wPlayerSpinWhileMovingUpOrDownAnimDeltaY:: db
+wPlayerSpinWhileMovingUpOrDownAnimMaxY:: db
+wPlayerSpinWhileMovingUpOrDownAnimFrameDelay:: db
+
+NEXTU
+wTrainerSpriteOffset:: db
+wTrainerEngageDistance:: db
+wTrainerFacingDirection:: db
+wTrainerScreenY:: db
+wTrainerScreenX:: db
+
+NEXTU
+wTrainerInfoTextBoxWidthPlus1:: db
+wTrainerInfoTextBoxWidth:: db
+wTrainerInfoTextBoxNextRowOffset:: db
+
+NEXTU
+wOptionsTextSpeedCursorX:: db
+wOptionsBattleAnimCursorX:: db
+wOptionsBattleStyleCursorX:: db
+wOptionsCancelCursorX:: db
+
+NEXTU
+; tile ID of the badge number being drawn
+wBadgeNumberTile:: db
+; first tile ID of the name being drawn
+wBadgeNameTile:: db
+; a list of the first tile IDs of each badge or face (depending on whether the
+; badge is owned) to be drawn on the trainer screen
+; the byte after the list gets read when shifting back one byte
+wBadgeOrFaceTiles:: ds NUM_BADGES + 1
+	ds 1
+; temporary list created when displaying the badges on the trainer screen
+; one byte for each badge; 0 = not obtained, 1 = obtained
+wTempObtainedBadgesBooleans:: ds NUM_BADGES
+
+NEXTU
+wUnusedCD3D:: db
+; the number of credits mons that have been displayed so far
+wNumCreditsMonsDisplayed:: db
+
+NEXTU
+	ds 1
+	db ; temporary space used when wJigglypuffFacingDirections is rotated
+wJigglypuffFacingDirections:: ds 4
+
+NEXTU
+	ds 16
+; $3d = tree tile, $52 = grass tile
+wCutTile:: db
+	ds 2
+; 0 = cut animation, 1 = boulder dust animation
+wWhichAnimationOffsets:: db
+
+NEXTU
+	ds 18
+; the index of the sprite the emotion bubble is to be displayed above
+wEmotionBubbleSpriteIndex:: db
+wWhichEmotionBubble:: db
+
+NEXTU
+wChangeBoxSavedMapTextPointer:: dw
+
+NEXTU
+wSavedY::
+wTempSCX::
+; which entry from TradeMons to select
+wWhichTrade::
 wDexMaxSeenMon::
 wPPRestoreItem::
 wWereAnyMonsAsleep::
-wCanPlaySlots::
 wNumShakes::
-; the level of the mon at the time it entered day care
-wDayCareStartLevel::
 wWhichBadge::
 wTitleMonSpecies::
 wPlayerCharacterOAMTile::
@@ -621,184 +819,13 @@ wPlayerCharacterOAMTile::
 wMoveDownSmallStarsOAMCount::
 wChargeMoveNum::
 wCoordIndex::
-wOptionsTextSpeedCursorX::
-wTrainerInfoTextBoxWidthPlus1::
 wSwappedMenuItem::
-wHoFMonSpecies::
-; tile ID of the badge number being drawn
-wBadgeNumberTile::
 ; 0 = no bite
 ; 1 = bite
 ; 2 = no fish on map
 wRodResponse::
-wWhichTownMapLocation::
-; which wheel the player is trying to stop
-; 0 = none, 1 = wheel 1, 2 = wheel 2, 3 or greater = wheel 3
-wStoppingWhichSlotMachineWheel::
-wTradedPlayerMonSpecies::
-wTradingWhichPlayerMon::
-wChangeBoxSavedMapTextPointer::
-wFlyAnimUsingCoordList::
-wPlayerSpinInPlaceAnimFrameDelay::
-wPlayerSpinWhileMovingUpOrDownAnimDeltaY::
-wHiddenObjectFunctionArgument::
-; which entry from TradeMons to select
-wWhichTrade::
-wTrainerSpriteOffset::
-wUnusedCD3D::
 	db
-
-; $ff sentinel values at each end
-wFlyLocationsList:: ; ds NUM_CITY_MAPS + 2
-
-; difference in X between the next ball and the current one
-wHUDPokeballGfxOffsetX::
-; 0 = left half (X < 10)
-; 1 = right half (X >= 10)
-wBattleTransitionCircleScreenQuadrantX::
-wSSAnneSmokeX::
-wRivalStarterBallSpriteIndex::
-wDayCareNumLevelsGrown::
-wOptionsBattleAnimCursorX::
-wTrainerInfoTextBoxWidth::
-wHoFPartyMonIndex::
-; the number of credits mons that have been displayed so far
-wNumCreditsMonsDisplayed::
-; first tile ID of the name being drawn
-wBadgeNameTile::
-wSlotMachineWheel1Offset::
-wTradedEnemyMonSpecies::
-wTradingWhichEnemyMon::
-wFlyAnimCounter::
-wPlayerSpinInPlaceAnimFrameDelayDelta::
-wPlayerSpinWhileMovingUpOrDownAnimMaxY::
-wHiddenObjectFunctionRomBank::
-wTrainerEngageDistance::
-	db
-
-wHUDGraphicsTiles:: ; ds 3
-
-; BCD number
-wDayCareTotalCost:: ; ds 2
-
-; a list of the first tile IDs of each badge or face (depending on whether the
-; badge is owned) to be drawn on the trainer screen
-wBadgeOrFaceTiles:: ; ds NUM_BADGES
-
-wNameOfPlayerMonToBeTraded:: ; ds NAME_LENGTH
-
-wJigglypuffFacingDirections::
-wOptionsBattleStyleCursorX::
-wTrainerInfoTextBoxNextRowOffset::
-wHoFMonLevel::
-wSlotMachineWheel2Offset::
-wFlyAnimBirdSpriteImageIndex::
-wPlayerSpinInPlaceAnimFrameDelayEndValue::
-wPlayerSpinWhileMovingUpOrDownAnimFrameDelay::
-wHiddenObjectIndex::
-wTrainerFacingDirection::
-	db
-
-; show mon or show player?
-; 0 = mon
-; 1 = player
-wHoFMonOrPlayer::
-wSlotMachineWheel3Offset::
-wPlayerSpinInPlaceAnimSoundID::
-wHiddenObjectY::
-wTrainerScreenY::
-wOptionsCancelCursorX::
-	db
-
-; BCD number (always set to $100)
-wDayCarePerLevelCost:: ; ds 2
-
-wTradedPlayerMonOT:: ; ds NAME_LENGTH
-
-wHoFTeamIndex2::
-wHiddenItemOrCoinsIndex::
-wHiddenObjectX::
-; the OAM tile number of the upper left corner of the winning symbol minus 2
-wSlotMachineWinningSymbol::
-wNumFieldMoves::
-wSlotMachineWheel1BottomTile::
-wTrainerScreenX::
-	db
-
-wHoFTeamNo::
-wSlotMachineWheel1MiddleTile::
-wFieldMovesLeftmostXCoord::
-	db
-
-wLastFieldMoveID:: ; unused
-wSlotMachineWheel1TopTile::
-	db
-
-wSlotMachineWheel2BottomTile:: db
-
-wSlotMachineWheel2MiddleTile:: db
-
-; temporary variable used to add payout amount to the player's coins
-wTempCoins1:: ; ds 2
-
-wSlotMachineWheel2TopTile:: db
-
-; 0 = outward, 1 = inward
-wBattleTransitionSpiralDirection::
-wSlotMachineWheel3BottomTile:: db
-
-; used when spinning the player's sprite
-; also, the byte before the start of the list is
-; used as a temp variable when the list is rotated
-wFacingDirectionList:: ; ds 4
-
-wSlotMachineWheel3MiddleTile:: db
-
-; temporary list created when displaying the badges on the trainer screen
-; one byte for each badge; 0 = not obtained, 1 = obtained
-wTempObtainedBadgesBooleans:: ; ds NUM_BADGES
-
-wSlotMachineWheel3TopTile:: db
-
-; temporary variable used to subtract the bet amount from the player's coins
-wTempCoins2::
-wPayoutCoins:: dw
-
-wTradedPlayerMonOTID:: ; dw
-
-; These flags are set randomly and control when the wheels stop.
-; bit 6: allow the player to win in general
-; bit 7: allow the player to win with 7 or bar (plus the effect of bit 6)
-wSlotMachineFlags:: db
-
-; wheel 1 can "slip" while this is non-zero
-wSlotMachineWheel1SlipCounter::
-; $3d = tree tile
-; $52 = grass tile
-wCutTile:: db
-
-wTradedEnemyMonOT:: ; ds NAME_LENGTH
-
-; wheel 2 can "slip" while this is non-zero
-wSlotMachineWheel2SlipCounter:: db
-
-wSavedPlayerScreenY::
-; The remaining number of times wheel 3 will roll down a symbol until a match is
-; found, when winning is enabled. It's initialized to 4 each bet.
-wSlotMachineRerollCounter::
-; the index of the sprite the emotion bubble is to be displayed above
-wEmotionBubbleSpriteIndex:: db
-
-wWhichEmotionBubble::
-; how many coins the player bet on the slot machine (1 to 3)
-wSlotMachineBet::
-wSavedPlayerFacingDirection::
-; 0 = cut animation, 1 = boulder dust animation
-wWhichAnimationOffsets:: db
-
-	ds 8
-
-wTradedEnemyMonOTID:: dw
+ENDU
 
 ; 0 = neither
 ; 1 = warp pad
@@ -1144,9 +1171,8 @@ wLearnMoveMonName:: ; ds NAME_LENGTH
 
 	ds 16
 
-; BCD number
 ; money received after battle = base money × level of highest-level enemy mon
-wTrainerBaseMoney:: dw
+wTrainerBaseMoney:: dw ; BCD
 
 wMissableObjectCounter:: db
 
@@ -1611,8 +1637,7 @@ wPrize3:: db
 
 	ds 1
 
-; the first 7 bytes are the preamble
-wSerialRandomNumberListBlock::
+wSerialRandomNumberListBlock:: ; ds $11
 
 wPrize1Price:: dw
 wPrize2Price:: dw
@@ -1623,7 +1648,7 @@ wPrize3Price:: dw
 ; shared list of 9 random numbers, indexed by wLinkBattleRandomNumberListIndex
 wLinkBattleRandomNumberList:: ds 10
 
-wSerialPlayerDataBlock:: ; ds ...
+wSerialPlayerDataBlock:: ; ds $1a8
 
 ; When a real item is being used, this is 0.
 ; When a move is acting as an item, this is the ID of the item it's acting as.
