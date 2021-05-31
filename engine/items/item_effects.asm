@@ -2617,7 +2617,7 @@ IsKeyItem_::
 	ld hl, KeyItemFlags
 	ld de, wBuffer
 	ld bc, 15 ; only 11 bytes are actually used
-	assert 15 >= (NUM_ITEMS + 7) / 8
+	ASSERT 15 >= (NUM_ITEMS + 7) / 8
 	call CopyData
 	pop af
 	dec a

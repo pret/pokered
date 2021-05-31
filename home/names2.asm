@@ -20,11 +20,11 @@ GetName::
 
 	; TM names are separate from item names.
 	; BUG: This applies to all names instead of just items.
-	assert NUM_POKEMON_INDEXES < HM01, \
+	ASSERT NUM_POKEMON_INDEXES < HM01, \
 		"A bug in GetName will get TM/HM names for Pokémon above ${x:HM01}."
-	assert NUM_ATTACKS < HM01, \
+	ASSERT NUM_ATTACKS < HM01, \
 		"A bug in GetName will get TM/HM names for moves above ${x:HM01}."
-	assert NUM_TRAINERS < HM01, \
+	ASSERT NUM_TRAINERS < HM01, \
 		"A bug in GetName will get TM/HM names for trainers above ${x:HM01}."
 	cp HM01
 	jp nc, GetMachineName

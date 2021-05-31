@@ -207,7 +207,7 @@ TM01 EQU const_value
 	add_tm ROCK_SLIDE   ; $F8
 	add_tm TRI_ATTACK   ; $F9
 	add_tm SUBSTITUTE   ; $FA
-assert NUM_TMS == const_value - TM01, "NUM_TMS ({d:NUM_TMS}) does not match the number of add_tm definitions"
+ASSERT NUM_TMS == const_value - TM01, "NUM_TMS ({d:NUM_TMS}) does not match the number of add_tm definitions"
 
 NUM_TM_HM EQU NUM_TMS + NUM_HMS
 

@@ -1,4 +1,4 @@
-SECTION "Sprite Buffers", SRAM ; BANK 0
+SECTION "Sprite Buffers", SRAM
 
 sSpriteBuffer0:: ds SPRITEBUFFERSIZE
 sSpriteBuffer1:: ds SPRITEBUFFERSIZE
@@ -9,42 +9,43 @@ sSpriteBuffer2:: ds SPRITEBUFFERSIZE
 sHallOfFame:: ds HOF_TEAM * HOF_TEAM_CAPACITY
 
 
-SECTION "Save Data", SRAM ; BANK 1
+SECTION "Save Data", SRAM
+
 	ds $598
 
 sPlayerName::  ds NAME_LENGTH
-sMainData::    ds wMainDataEnd   - wMainDataStart
+sMainData::    ds wMainDataEnd - wMainDataStart
 sSpriteData::  ds wSpriteDataEnd - wSpriteDataStart
-sPartyData::   ds wPartyDataEnd  - wPartyDataStart
-sCurBoxData::  ds wBoxDataEnd    - wBoxDataStart
-sTileAnimations:: ds 1
-sMainDataCheckSum:: ds 1
+sPartyData::   ds wPartyDataEnd - wPartyDataStart
+sCurBoxData::  ds wBoxDataEnd - wBoxDataStart
+sTileAnimations:: db
+sMainDataCheckSum:: db
 
 
 ; The PC boxes will not fit into one SRAM bank,
 ; so they use multiple SECTIONs
 box_n = 0
 boxes: MACRO
-rept \1
+REPT \1
 box_n = box_n + 1
 sBox{d:box_n}:: ds wBoxDataEnd - wBoxDataStart
-endr
+ENDR
 ENDM
 
-SECTION "Saved Boxes 1", SRAM ; BANK 2
+SECTION "Saved Boxes 1", SRAM
 
 ; sBox1 - sBox6
 	boxes 6
-sBank2AllBoxesChecksum:: ds 1
+sBank2AllBoxesChecksum:: db
 sBank2IndividualBoxChecksums:: ds 6
 
-SECTION "Saved Boxes 2", SRAM ; BANK 3
+SECTION "Saved Boxes 2", SRAM
 
 ; sBox7 - sBox12
 	boxes 6
-sBank3AllBoxesChecksum:: ds 1
+sBank3AllBoxesChecksum:: db
 sBank3IndividualBoxChecksums:: ds 6
 
 ; All 12 boxes fit within 2 SRAM banks
-	assert box_n == NUM_BOXES, \
+	ASSERT box_n == NUM_BOXES, \
 		"boxes: Expected {d:NUM_BOXES} total boxes, got {d:box_n}"

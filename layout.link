@@ -182,7 +182,7 @@ WRAM0
 	org $c100
 	"Sprite State Data"
 	"OAM Buffer"
-	org $dfff
+	org $df00
 	"Stack"
 VRAM
 	"VRAM"
