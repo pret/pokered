@@ -1,4 +1,4 @@
-TunnelMonsB2:
+RockTunnelB1FWildMons:
 	def_grass_wildmons 15 ; encounter rate
 	db 16, ZUBAT
 	db 17, ZUBAT

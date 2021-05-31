@@ -1,4 +1,4 @@
-Route22Mons:
+Route22WildMons:
 	def_grass_wildmons 25 ; encounter rate
 	db  3, RATTATA
 IF DEF(_RED)

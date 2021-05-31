@@ -1,4 +1,4 @@
-DungeonMons2:
+CeruleanCave2FWildMons:
 	def_grass_wildmons 15 ; encounter rate
 	db 51, DODRIO
 	db 51, VENOMOTH

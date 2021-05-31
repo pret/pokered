@@ -1,4 +1,4 @@
-PlateauMons3:
+VictoryRoad3FWildMons:
 	def_grass_wildmons 15 ; encounter rate
 	db 24, MACHOP
 	db 26, GEODUDE

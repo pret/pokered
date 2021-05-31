@@ -1,4 +1,4 @@
-Route5Mons:
+Route5WildMons:
 	def_grass_wildmons 15 ; encounter rate
 IF DEF(_RED)
 	db 13, ODDISH
