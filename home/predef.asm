@@ -35,16 +35,16 @@ Predef::
 GetPredefRegisters::
 ; Restore the contents of register pairs
 ; when GetPredefPointer was called.
-	ld a, [wPredefRegisters + 0]
+	ld a, [wPredefHL]
 	ld h, a
-	ld a, [wPredefRegisters + 1]
+	ld a, [wPredefHL + 1]
 	ld l, a
-	ld a, [wPredefRegisters + 2]
+	ld a, [wPredefDE]
 	ld d, a
-	ld a, [wPredefRegisters + 3]
+	ld a, [wPredefDE + 1]
 	ld e, a
-	ld a, [wPredefRegisters + 4]
+	ld a, [wPredefBC]
 	ld b, a
-	ld a, [wPredefRegisters + 5]
+	ld a, [wPredefBC + 1]
 	ld c, a
 	ret

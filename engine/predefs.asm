@@ -1,20 +1,20 @@
 GetPredefPointer::
-; Store the contents of the register
-; pairs (hl, de, bc) at wPredefRegisters.
+; Back up the contents of the registers (hl, de, bc).
 ; Then put the bank and address of predef
 ; wPredefID in [wPredefBank] and hl.
 
 	ld a, h
-	ld [wPredefRegisters], a
+	ld [wPredefHL], a
 	ld a, l
-	ld [wPredefRegisters + 1], a
+	ld [wPredefHL + 1], a
 
-	ld hl, wPredefRegisters + 2
+	ld hl, wPredefDE
 	ld a, d
 	ld [hli], a
 	ld a, e
 	ld [hli], a
 
+	ASSERT wPredefDE + 2 == wPredefBC
 	ld a, b
 	ld [hli], a
 	ld [hl], c

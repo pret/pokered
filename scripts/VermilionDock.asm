@@ -182,12 +182,12 @@ VermilionDock_1dc7c:
 VermilionDock_EraseSSAnne:
 ; Fill the area the S.S. Anne occupies in BG map 0 with water tiles.
 	ld hl, wVermilionDockTileMapBuffer
-	ld bc, (5 * BG_MAP_WIDTH) + SCREEN_WIDTH
+	ld bc, wVermilionDockTileMapBufferEnd - wVermilionDockTileMapBuffer
 	ld a, $14 ; water tile
 	call FillMemory
 	hlbgcoord 0, 10
 	ld de, wVermilionDockTileMapBuffer
-	ld bc, (6 * BG_MAP_WIDTH) / 16
+	lb bc, BANK(wVermilionDockTileMapBuffer), 12
 	call CopyVideoData
 
 ; Replace the blocks of the lower half of the ship with water blocks. This

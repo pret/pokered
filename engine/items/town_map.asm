@@ -249,7 +249,7 @@ ToText:
 	db "To@"
 
 BuildFlyLocationsList:
-	ld hl, wFlyLocationsList - 1
+	ld hl, wFlyAnimUsingCoordList
 	ld [hl], $ff
 	inc hl
 	ld a, [wTownVisitedFlag]

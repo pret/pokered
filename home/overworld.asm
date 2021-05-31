@@ -550,7 +550,7 @@ CheckMapConnections::
 	ld a, [wXCoord]
 	cp $ff
 	jr nz, .checkEastMap
-	ld a, [wMapConn3Ptr]
+	ld a, [wWestConnectedMap]
 	ld [wCurMap], a
 	ld a, [wWestConnectedMapXAlignment] ; new X coordinate upon entering west map
 	ld [wXCoord], a
@@ -587,7 +587,7 @@ CheckMapConnections::
 	ld a, [wCurrentMapWidth2] ; map width
 	cp b
 	jr nz, .checkNorthMap
-	ld a, [wMapConn4Ptr]
+	ld a, [wEastConnectedMap]
 	ld [wCurMap], a
 	ld a, [wEastConnectedMapXAlignment] ; new X coordinate upon entering east map
 	ld [wXCoord], a
@@ -623,7 +623,7 @@ CheckMapConnections::
 	ld a, [wYCoord]
 	cp $ff
 	jr nz, .checkSouthMap
-	ld a, [wMapConn1Ptr]
+	ld a, [wNorthConnectedMap]
 	ld [wCurMap], a
 	ld a, [wNorthConnectedMapYAlignment] ; new Y coordinate upon entering north map
 	ld [wYCoord], a
@@ -651,7 +651,7 @@ CheckMapConnections::
 	ld a, [wCurrentMapHeight2]
 	cp b
 	jr nz, .didNotEnterConnectedMap
-	ld a, [wMapConn2Ptr]
+	ld a, [wSouthConnectedMap]
 	ld [wCurMap], a
 	ld a, [wSouthConnectedMapYAlignment] ; new Y coordinate upon entering south map
 	ld [wYCoord], a
@@ -937,7 +937,7 @@ LoadTileBlockMap::
 	dec b
 	jr nz, .rowLoop
 .northConnection
-	ld a, [wMapConn1Ptr]
+	ld a, [wNorthConnectedMap]
 	cp $ff
 	jr z, .southConnection
 	call SwitchToMapRomBank
@@ -949,13 +949,13 @@ LoadTileBlockMap::
 	ld e, a
 	ld a, [wNorthConnectionStripDest + 1]
 	ld d, a
-	ld a, [wNorthConnectionStripWidth]
+	ld a, [wNorthConnectionStripLength]
 	ldh [hNorthSouthConnectionStripWidth], a
 	ld a, [wNorthConnectedMapWidth]
 	ldh [hNorthSouthConnectedMapWidth], a
 	call LoadNorthSouthConnectionsTileMap
 .southConnection
-	ld a, [wMapConn2Ptr]
+	ld a, [wSouthConnectedMap]
 	cp $ff
 	jr z, .westConnection
 	call SwitchToMapRomBank
@@ -967,13 +967,13 @@ LoadTileBlockMap::
 	ld e, a
 	ld a, [wSouthConnectionStripDest + 1]
 	ld d, a
-	ld a, [wSouthConnectionStripWidth]
+	ld a, [wSouthConnectionStripLength]
 	ldh [hNorthSouthConnectionStripWidth], a
 	ld a, [wSouthConnectedMapWidth]
 	ldh [hNorthSouthConnectedMapWidth], a
 	call LoadNorthSouthConnectionsTileMap
 .westConnection
-	ld a, [wMapConn3Ptr]
+	ld a, [wWestConnectedMap]
 	cp $ff
 	jr z, .eastConnection
 	call SwitchToMapRomBank
@@ -985,13 +985,13 @@ LoadTileBlockMap::
 	ld e, a
 	ld a, [wWestConnectionStripDest + 1]
 	ld d, a
-	ld a, [wWestConnectionStripHeight]
+	ld a, [wWestConnectionStripLength]
 	ld b, a
 	ld a, [wWestConnectedMapWidth]
 	ldh [hEastWestConnectedMapWidth], a
 	call LoadEastWestConnectionsTileMap
 .eastConnection
-	ld a, [wMapConn4Ptr]
+	ld a, [wEastConnectedMap]
 	cp $ff
 	jr z, .done
 	call SwitchToMapRomBank
@@ -1003,7 +1003,7 @@ LoadTileBlockMap::
 	ld e, a
 	ld a, [wEastConnectionStripDest + 1]
 	ld d, a
-	ld a, [wEastConnectionStripHeight]
+	ld a, [wEastConnectionStripLength]
 	ld b, a
 	ld a, [wEastConnectedMapWidth]
 	ldh [hEastWestConnectedMapWidth], a
@@ -2046,32 +2046,32 @@ LoadMapHeader::
 	jr nz, .copyFixedHeaderLoop
 ; initialize all the connected maps to disabled at first, before loading the actual values
 	ld a, $ff
-	ld [wMapConn1Ptr], a
-	ld [wMapConn2Ptr], a
-	ld [wMapConn3Ptr], a
-	ld [wMapConn4Ptr], a
+	ld [wNorthConnectedMap], a
+	ld [wSouthConnectedMap], a
+	ld [wWestConnectedMap], a
+	ld [wEastConnectedMap], a
 ; copy connection data (if any) to WRAM
 	ld a, [wMapConnections]
 	ld b, a
 .checkNorth
 	bit 3, b
 	jr z, .checkSouth
-	ld de, wMapConn1Ptr
+	ld de, wNorthConnectionHeader
 	call CopyMapConnectionHeader
 .checkSouth
 	bit 2, b
 	jr z, .checkWest
-	ld de, wMapConn2Ptr
+	ld de, wSouthConnectionHeader
 	call CopyMapConnectionHeader
 .checkWest
 	bit 1, b
 	jr z, .checkEast
-	ld de, wMapConn3Ptr
+	ld de, wWestConnectionHeader
 	call CopyMapConnectionHeader
 .checkEast
 	bit 0, b
 	jr z, .getObjectDataPointer
-	ld de, wMapConn4Ptr
+	ld de, wEastConnectionHeader
 	call CopyMapConnectionHeader
 .getObjectDataPointer
 	ld a, [hli]
@@ -2094,7 +2094,7 @@ LoadMapHeader::
 	ld c, a
 	ld de, wWarpEntries
 .warpLoop ; one warp per loop iteration
-	ld b, $04
+	ld b, 4
 .warpInnerLoop
 	ld a, [hli]
 	ld [de], a
