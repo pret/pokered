@@ -3046,7 +3046,7 @@ wGrassMons::
 	ds 8
 
 wWaterRate:: db
-wSeaRoutesWildMons::
+wWaterMons::
 	ds 10 * 2
 
 NEXTU
