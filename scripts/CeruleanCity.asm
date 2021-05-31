@@ -80,7 +80,7 @@ ENDC
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, [wXCoord]
-	cp 20 ;is the player standing on the right side of the bridge?
+	cp 20 ; is the player standing on the right side of the bridge?
 	jr z, .playerOnRightSideOfBridge
 	ld a, $1
 	ldh [hSpriteIndex], a
@@ -183,7 +183,7 @@ CeruleanCityScript2:
 	ldh [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
 	ld a, [wXCoord]
-	cp 20 ;is the player standing on the right side of the bridge?
+	cp 20 ; is the player standing on the right side of the bridge?
 	jr nz, .playerOnRightSideOfBridge
 	ld de, CeruleanCityMovement4
 	jr .skip
@@ -361,19 +361,19 @@ CeruleanCityText6:
 CeruleanCityText7:
 	text_asm
 	ldh a, [hRandomAdd]
-	cp 180 ;76/256 chance of 1st dialogue
+	cp 180 ; 76/256 chance of 1st dialogue
 	jr c, .notFirstText
 	ld hl, CeruleanCityText_19730
 	call PrintText
 	jr .end
 .notFirstText
-	cp 100 ;80/256 chance of 2nd dialogue
+	cp 100 ; 80/256 chance of 2nd dialogue
 	jr c, .notSecondText
 	ld hl, CeruleanCityText_19735
 	call PrintText
 	jr .end
 .notSecondText
-	;100/256 chance of 3rd dialogue
+	; 100/256 chance of 3rd dialogue
 	ld hl, CeruleanCityText_1973a
 	call PrintText
 .end
@@ -394,25 +394,25 @@ CeruleanCityText_1973a:
 CeruleanCityText8:
 	text_asm
 	ldh a, [hRandomAdd]
-	cp 180 ;76/256 chance of 1st dialogue
+	cp 180 ; 76/256 chance of 1st dialogue
 	jr c, .notFirstText
 	ld hl, CeruleanCityText_1976f
 	call PrintText
 	jr .end
 .notFirstText
-	cp 120 ;60/256 chance of 2nd dialogue
+	cp 120 ; 60/256 chance of 2nd dialogue
 	jr c, .notSecondText
 	ld hl, CeruleanCityText_19774
 	call PrintText
 	jr .end
 .notSecondText
-	cp 60 ;60/256 chance of 3rd dialogue
+	cp 60 ; 60/256 chance of 3rd dialogue
 	jr c, .notThirdText
 	ld hl, CeruleanCityText_19779
 	call PrintText
 	jr .end
 .notThirdText
-	;60/256 chance of 4th dialogue
+	; 60/256 chance of 4th dialogue
 	ld hl, CeruleanCityText_1977e
 	call PrintText
 .end
