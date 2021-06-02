@@ -1,15 +1,15 @@
 DungeonMons2:
 	def_grass_wildmons 15 ; encounter rate
-	db 51, DODRIO
-	db 51, VENOMOTH
-	db 51, KADABRA
-	db 52, RHYDON
-	db 52, MAROWAK
-	db 52, ELECTRODE
-	db 56, CHANSEY
-	db 54, WIGGLYTUFF
-	db 55, DITTO
-	db 60, DITTO
+	db 5, DODUO
+	db 5, VENONAT
+	db 5, ABRA
+	db 5, RHYHORN
+	db 5, CUBONE
+	db 5, VOLTORB
+	db 5, JIGGLYPUFF
+	db 5, PORYGON
+	db 5, LICKITUNG
+	db 5, LICKITUNG
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate
