@@ -8,21 +8,21 @@ SuperRodData:
 	dbw CELADON_CITY,        .Group5
 	dbw FUCHSIA_CITY,        .Group10
 	dbw CINNABAR_ISLAND,     .Group8
-	dbw ROUTE_4,             .Group3
-	dbw ROUTE_6,             .Group4
-	dbw ROUTE_10,            .Group5
-	dbw ROUTE_11,            .Group4
-	dbw ROUTE_12,            .Group7
-	dbw ROUTE_13,            .Group7
-	dbw ROUTE_17,            .Group7
-	dbw ROUTE_18,            .Group7
-	dbw ROUTE_19,            .Group8
-	dbw ROUTE_20,            .Group8
-	dbw ROUTE_21,            .Group8
-	dbw ROUTE_22,            .Group2
-	dbw ROUTE_23,            .Group9
-	dbw ROUTE_24,            .Group3
-	dbw ROUTE_25,            .Group3
+	dbw ROUTE_5,             .Group3
+	dbw ROUTE_5,             .Group4
+	dbw ROUTE_5,            .Group5
+	dbw ROUTE_5,            .Group4
+	dbw ROUTE_5,            .Group7
+	dbw ROUTE_5,            .Group7
+	dbw ROUTE_5,            .Group7
+	dbw ROUTE_5,            .Group7
+	dbw ROUTE_5,            .Group8
+	dbw ROUTE_5,            .Group8
+	dbw ROUTE_5,            .Group8
+	dbw ROUTE_5,            .Group2
+	dbw ROUTE_5,            .Group9
+	dbw ROUTE_5,            .Group3
+	dbw ROUTE_5,            .Group3
 	dbw CERULEAN_GYM,        .Group3
 	dbw VERMILION_DOCK,      .Group4
 	dbw SEAFOAM_ISLANDS_B3F, .Group8
@@ -41,61 +41,61 @@ SuperRodData:
 
 .Group1:
 	db 2
-	db 15, TENTACOOL
-	db 15, POLIWAG
+	db 5, TENTACOOL
+	db 5, POLIWAG
 
 .Group2:
 	db 2
-	db 15, GOLDEEN
-	db 15, POLIWAG
+	db 5, GOLDEEN
+	db 5, POLIWAG
 
 .Group3:
 	db 3
-	db 15, PSYDUCK
-	db 15, GOLDEEN
-	db 15, KRABBY
+	db 5, PSYDUCK
+	db 5, GOLDEEN
+	db 5, KRABBY
 
 .Group4:
 	db 2
-	db 15, KRABBY
-	db 15, SHELLDER
+	db 5, KRABBY
+	db 5, SHELLDER
 
 .Group5:
 	db 2
-	db 23, POLIWHIRL
-	db 15, SLOWPOKE
+	db 5, POLIWAG
+	db 5, SLOWPOKE
 
 .Group6:
 	db 4
-	db 15, DRATINI
-	db 15, KRABBY
-	db 15, PSYDUCK
-	db 15, SLOWPOKE
+	db 5, DRATINI
+	db 5, KRABBY
+	db 5, PSYDUCK
+	db 5, SLOWPOKE
 
 .Group7:
 	db 4
 	db 5, TENTACOOL
-	db 15, KRABBY
-	db 15, GOLDEEN
-	db 15, MAGIKARP
+	db 5, KRABBY
+	db 5, GOLDEEN
+	db 5, MAGIKARP
 
 .Group8:
 	db 4
-	db 15, STARYU
-	db 15, HORSEA
-	db 15, SHELLDER
-	db 15, GOLDEEN
+	db 5, STARYU
+	db 5, HORSEA
+	db 5, SHELLDER
+	db 5, GOLDEEN
 
 .Group9:
 	db 4
-	db 23, SLOWBRO
-	db 23, SEAKING
-	db 23, KINGLER
-	db 23, SEADRA
+	db 5, SLOWPOKE
+	db 5, GOLDEEN
+	db 5, KRABBY
+	db 5, HORSEA
 
 .Group10:
 	db 4
-	db 23, SEAKING
-	db 15, KRABBY
-	db 15, GOLDEEN
-	db 15, MAGIKARP
+	db 5, GOLDEEN
+	db 5, KRABBY
+	db 5, GOLDEEN
+	db 5, MAGIKARP
