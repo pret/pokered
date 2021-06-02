@@ -1,29 +1,15 @@
 MansionMons1:
 	def_grass_wildmons 10 ; encounter rate
-IF DEF(_RED)
-	db 32, KOFFING
-	db 30, KOFFING
-	db 34, PONYTA
-	db 30, PONYTA
-	db 34, GROWLITHE
-	db 32, PONYTA
-	db 30, GRIMER
-	db 28, PONYTA
-	db 37, WEEZING
-	db 39, MUK
-ENDC
-IF DEF(_BLUE)
-	db 32, GRIMER
-	db 30, GRIMER
-	db 34, PONYTA
-	db 30, PONYTA
-	db 34, VULPIX
-	db 32, PONYTA
-	db 30, KOFFING
-	db 28, PONYTA
-	db 37, MUK
-	db 39, WEEZING
-ENDC
+	db 5, GRIMER ; 20%
+	db 5, PONYTA ; 20%
+	db 5, KOFFING ; 15%
+	db 5, KOFFING ; 10%
+	db 5, PONYTA ; 10%
+	db 5, PONYTA ; 10%
+	db 5, GROWLITHE ; 5%
+	db 5, VULPIX ; 5%
+	db 5, GRIMER ; 4%
+	db 5, GRIMER ; 1%
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate
