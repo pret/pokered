@@ -533,7 +533,7 @@ ScientistData:
 
 GiovanniData:
 ; Rocket Hideout B4F
-	db $FF, 5, KABUTO, 5, RHYHORN, 5, MEOWTH, 0
+	db $FF, 5, KABUTO, 5, RHYHORN, 5, MEOWTH, 5, PORYGON, 0
 ; Silph Co. 11F
 	db $FF, 5, NIDORAN_M, 5, MEOWTH, 5, RHYHORN, 5, NIDORAN_F, 5, LICKITUNG, 0
 ; Viridian Gym
