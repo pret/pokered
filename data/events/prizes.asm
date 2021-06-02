@@ -9,53 +9,29 @@ NoThanksText:
 PrizeMenuMon1Entries:
 	db ABRA
 	db CLEFAIRY
-IF DEF(_RED)
-	db NIDORINA
-ENDC
-IF DEF(_BLUE)
-	db NIDORINO
-ENDC
+	db NIDORAN_F
 	db "@"
 
 PrizeMenuMon1Cost:
-IF DEF(_RED)
-	coins 180
-	coins 500
-ENDC
-IF DEF(_BLUE)
 	coins 120
-	coins 750
-ENDC
-	coins 1200
+	coins 500
+	coins 120
 	db "@"
 
 PrizeMenuMon2Entries:
-IF DEF(_RED)
 	db DRATINI
-	db SCYTHER
-ENDC
-IF DEF(_BLUE)
-	db PINSIR
 	db DRATINI
-ENDC
 	db PORYGON
 	db "@"
 
 PrizeMenuMon2Cost:
-IF DEF(_RED)
-	coins 2800
-	coins 5500
-	coins 9999
-ENDC
-IF DEF(_BLUE)
 	coins 2500
-	coins 4600
-	coins 6500
-ENDC
+	coins 2500
+	coins 9999
 	db "@"
 
 PrizeMenuTMsEntries:
-	db TM_DRAGON_RAGE
+	db TM_DOUBLE_TEAM
 	db TM_HYPER_BEAM
 	db TM_SUBSTITUTE
 	db "@"
