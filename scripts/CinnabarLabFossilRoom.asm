@@ -43,7 +43,7 @@ Lab4Script_GetFossilsInBag:
 FossilsList:
 	db DOME_FOSSIL
 	db HELIX_FOSSIL
-	db OLD_AMBER
+;	db OLD_AMBER
 	db 0 ; end
 
 Lab4Text1:
@@ -76,7 +76,7 @@ Lab4Text1:
 	SetEvent EVENT_LAB_HANDING_OVER_FOSSIL_MON
 	ld a, [wFossilMon]
 	ld b, a
-	ld c, 30
+	ld c, 5
 	call GivePokemon
 	jr nc, .asm_75d93
 	ResetEvents EVENT_GAVE_FOSSIL_TO_LAB, EVENT_LAB_STILL_REVIVING_FOSSIL, EVENT_LAB_HANDING_OVER_FOSSIL_MON
