@@ -535,9 +535,9 @@ GiovanniData:
 ; Rocket Hideout B4F
 	db $FF, 5, KABUTO, 5, RHYHORN, 5, MEOWTH, 0
 ; Silph Co. 11F
-	db $FF, 5, NIDORAN_M, 5, MEOWTH, 5, RHYHORN, 5, NIDORAN_F, 0
+	db $FF, 5, NIDORAN_M, 5, MEOWTH, 5, RHYHORN, 5, NIDORAN_F, 5, LICKITUNG, 0
 ; Viridian Gym
-	db $FF, 5, RHYHORN, 5, DIGLETT, 5, NIDORAN_F, 5, NIDORAN_M, 5, RHYHORN, 0
+	db $FF, 5, RHYHORN, 5, DIGLETT, 5, NIDORAN_F, 5, NIDORAN_M, 5, RHYHORN, 5, SCYTHER, 0
 
 RocketData:
 ; Mt. Moon B2F
@@ -600,7 +600,7 @@ RocketData:
 	db 5, MACHOP, 0
 ; Silph Co. 11F
 	db 5, RATTATA, RATTATA, ZUBAT, RATTATA, EKANS, 0
-	db 5, CUBONE, DROWZEE, MAROWAK, 0
+	db 5, CUBONE, DROWZEE, CUBONE, 0
 
 CooltrainerMData:
 ; Viridian Gym
@@ -651,13 +651,13 @@ ErikaData:
 	db $FF, 5, BELLSPROUT, 5, ODDISH, 5, TANGELA, 0
 
 KogaData:
-	db $FF, 5, KOFFING, 5, GRIMER, 5, KOFFING, 5, KOFFING, 0
+	db $FF, 5, KOFFING, 5, GRIMER, 5, KOFFING, 5, EKANS, 0
 
 BlaineData:
 	db $FF, 5, GROWLITHE, 5, PONYTA, 5, PONYTA, 5, GROWLITHE, 0
 
 SabrinaData:
-	db $FF, 5, ABRA, 5, DROWZEE, 5, VENONAT, 5, ABRA, 0
+	db $FF, 5, ABRA, 5, DROWZEE, 5, GASTLY, 5, ABRA, 0
 
 GentlemanData:
 ; SS Anne 1F Rooms
@@ -694,7 +694,7 @@ Green3Data:
 	db $FF, 5, PIDGEY, 5, ABRA, 5, RHYDON, 5, EXEGGCUTE, 5, SHELLDER, 5, CHARMANDER, 0
 
 LoreleiData:
-	db $FF, 5, SEEL, 5, SHELLDER, 5, SLOWPOKE, 5, JYNX, 5, LAPRAS, 0
+	db $FF, 5, SHELLDER, 5, SANDSHREW, 5, SLOWPOKE, 5, VULPIX, 5, SEEL, 0
 
 ChannelerData:
 ; Unused
@@ -736,7 +736,7 @@ ChannelerData:
 	db 5, GASTLY, GASTLY, GASTLY, 0
 
 AgathaData:
-	db $FF, 5, GENGAR, 5, ZUBAT, 5, GASTLY, 5, EKANS, 5, GASTLY, 0
+	db $FF, 5, GASTLY, 5, ZUBAT, 5, GASTLY, 5, EKANS, 5, GASTLY, 0
 
 LanceData:
-	db $FF, 5, DRATINI, 5, CHARMANDER, 5, DRATINI, 5, DRATINI, 5, MAGIKARP, 0
+	db $FF, 5, DRATINI, 5, DRATINI, 5, DRATINI, 5, DRATINI, 5, DRATINI, 0
