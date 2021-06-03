@@ -1528,7 +1528,7 @@ ItemUseEscapeRope:
 INCLUDE "data/tilesets/escape_rope_tilesets.asm"
 
 ItemUseRepel:
-	ld b, 100
+	ld b, 50
 
 ItemUseRepelCommon:
 	ld a, [wIsInBattle]
@@ -1618,11 +1618,11 @@ ItemUseGuardSpec:
 	jp PrintItemUseTextAndRemoveItem
 
 ItemUseSuperRepel:
-	ld b, 200
+	ld b, 100
 	jp ItemUseRepelCommon
 
 ItemUseMaxRepel:
-	ld b, 250
+	ld b, 125
 	jp ItemUseRepelCommon
 
 ItemUseDireHit:
