@@ -1508,6 +1508,8 @@ TryRunningFromBattle:
 	ld a, [wNumRunAttempts]
 	inc a
 	ld [wNumRunAttempts], a
+	cp $2
+	jp c, .cantEscape
 	ld a, [hli]
 	ldh [hMultiplicand + 1], a
 	ld a, [hl]
@@ -1522,7 +1524,7 @@ TryRunningFromBattle:
 	ld hl, hEnemySpeed
 	ld c, 2
 	call StringCmp
-	jr nc, .canEscape ; jump if player speed greater than enemy speed
+;	jr nc, .canEscape ; jump if player speed greater than enemy speed
 	xor a
 	ldh [hMultiplicand], a
 	ld a, 32
@@ -1567,7 +1569,7 @@ TryRunningFromBattle:
 	cp b
 	jr nc, .canEscape ; if the random value was less than or equal to the quotient
 	                  ; plus 30 times the number of attempts, the player can escape
-; can't escape
+.cantEscape
 	ld a, $1
 	ld [wActionResultOrTookBattleTurn], a ; you lose your turn when you can't escape
 	ld hl, CantEscapeText
