@@ -105,12 +105,12 @@ LassData:
 ; Route 3
 	db 5, PIDGEY, PIDGEY, 0
 	db 5, RATTATA, NIDORAN_M, 0
-	db 5, JIGGLYPUFF, 0
+	db $FF, 5, JIGGLYPUFF, 0
 ; Route 4
 	db 5, PARAS, PARAS, PARAS, 0
 ; Mt. Moon 1F
 	db 5, ODDISH, BELLSPROUT, 0
-	db 5, CLEFAIRY, 0
+	db $FF, 5, CLEFAIRY, 0
 ; Route 24
 	db 5, PIDGEY, NIDORAN_F, 0
 	db 5, PIDGEY, NIDORAN_F, 0
@@ -163,7 +163,7 @@ JrTrainerMData:
 
 JrTrainerFData:
 ; Cerulean Gym
-	db 5, GOLDEEN, 0
+	db $FF, 5, GOLDEEN, 0
 ; Route 6
 	db 5, RATTATA, PIKACHU, 0
 	db 5, PIDGEY, PIDGEY, PIDGEY, 0
@@ -544,7 +544,7 @@ RocketData:
 	db 5, RATTATA, ZUBAT, 0
 	db 5, SANDSHREW, RATTATA, ZUBAT, 0
 	db 5, ZUBAT, EKANS, 0
-	db 5, RATTATA, 0
+	db $FF, 5, RATTATA, 0
 ; Cerulean City
 	db 5, MACHOP, DROWZEE, 0
 ; Route 24
