@@ -24,8 +24,9 @@ _CeladonMart5Text2::
 	done
 
 _CeladonMart5Text3::
-	text "I'm sorry, but we"
-	line "are sold out."
+	text "My potions are too"
+	line "strong for you,"
+	cont "traveller."
 	done
 
 _CeladonMart5Text5::
