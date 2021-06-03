@@ -23,6 +23,11 @@ _CeladonMart5Text2::
 	line "DEFENSE!"
 	done
 
+_CeladonMart5Text3::
+	text "I'm sorry, but we"
+	line "are sold out."
+	done
+
 _CeladonMart5Text5::
 	text "5F: DRUG STORE"
 	done
