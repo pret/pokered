@@ -546,10 +546,10 @@ StatModifierDownEffect:
 	ld bc, wPlayerBattleStatus1
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
-	jr z, .statModifierDownEffect
-	call BattleRandom
-	cp $40 ; 1/4 chance to miss by in regular battle
-	jp c, MoveMissed
+;	jr z, .statModifierDownEffect
+;	call BattleRandom
+;	cp $40 ; 1/4 chance to miss by in regular battle
+;	jp c, MoveMissed
 .statModifierDownEffect
 	call CheckTargetSubstitute ; can't hit through substitute
 	jp nz, MoveMissed
