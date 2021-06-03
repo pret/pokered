@@ -1372,21 +1372,22 @@ EnemySendOutFirstMon:
 	cp LINK_STATE_BATTLING
 	jr z, .next4
 	ld a, [wOptions]
-	bit 6, a
-	jr nz, .next4
-	ld hl, TrainerAboutToUseText
-	call PrintText
-	hlcoord 0, 7
-	lb bc, 8, 1
-	ld a, TWO_OPTION_MENU
-	ld [wTextBoxID], a
-	call DisplayTextBoxID
-	ld a, [wCurrentMenuItem]
-	and a
-	jr nz, .next4
-	ld a, BATTLE_PARTY_MENU
-	ld [wPartyMenuTypeOrMessageID], a
-	call DisplayPartyMenu
+;	bit 6, a
+;	jr nz, .next4
+	jr .next4
+;	ld hl, TrainerAboutToUseText
+;	call PrintText
+;	hlcoord 0, 7
+;	lb bc, 8, 1
+;	ld a, TWO_OPTION_MENU
+;	ld [wTextBoxID], a
+;	call DisplayTextBoxID
+;	ld a, [wCurrentMenuItem]
+;	and a
+;	jr nz, .next4
+;	ld a, BATTLE_PARTY_MENU
+;	ld [wPartyMenuTypeOrMessageID], a
+;	call DisplayPartyMenu
 .next9
 	ld a, 1
 	ld [wCurrentMenuItem], a
