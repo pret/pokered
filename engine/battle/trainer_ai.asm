@@ -157,7 +157,7 @@ StatusAilmentMoveEffects:
 ; that fall in-between
 AIMoveChoiceModification2:
 	ld a, [wAILayer2Encouragement]
-	cp $1
+	and a ; turn 1, not 2
 	ret nz
 	ld hl, wBuffer - 1 ; temp move selection array (-1 byte offset)
 	ld de, wEnemyMonMoves ; enemy moves
@@ -172,13 +172,17 @@ AIMoveChoiceModification2:
 	inc de
 	call ReadMove
 	ld a, [wEnemyMoveEffect]
+	cp HEAL_EFFECT ;don't heal on move one, literally worst thing to be in range
+	jr z, .nextMove
+	cp SLEEP_EFFECT ;fun is subjective
+	jr z, .preferMove
 	cp ATTACK_UP1_EFFECT
 	jr c, .nextMove
 	cp BIDE_EFFECT
 	jr c, .preferMove
-	cp ATTACK_UP2_EFFECT
+	cp CONFUSION_EFFECT ; adding confusion
 	jr c, .nextMove
-	cp POISON_EFFECT
+	cp ATTACK_DOWN_SIDE_EFFECT ; adding poison and paralyze
 	jr c, .preferMove
 	jr .nextMove
 .preferMove
@@ -201,6 +205,9 @@ AIMoveChoiceModification3:
 	ret z ; no more moves in move set
 	inc de
 	call ReadMove
+	ld a, [wEnemyMovePower] ; type effectiveness only matters for damaging moves
+	and a
+	jr z, .nextMove
 	push hl
 	push bc
 	push de
@@ -230,16 +237,19 @@ AIMoveChoiceModification3:
 	and a
 	jr z, .done
 	call ReadMove
-	ld a, [wEnemyMoveEffect]
-	cp SUPER_FANG_EFFECT
-	jr z, .betterMoveFound ; Super Fang is considered to be a better move
-	cp SPECIAL_DAMAGE_EFFECT
-	jr z, .betterMoveFound ; any special damage moves are considered to be better moves
-	cp FLY_EFFECT
-	jr z, .betterMoveFound ; Fly is considered to be a better move
 	ld a, [wEnemyMoveType]
 	cp d
 	jr z, .loopMoves
+	push hl
+	push bc
+	push de
+	callfar AIGetTypeEffectiveness
+	pop de
+	pop bc
+	pop hl
+	ld a, [wTypeEffectiveness]
+	cp $10
+	jr c, .loopMoves ; if not neutral or super-effective, not a better move
 	ld a, [wEnemyMovePower]
 	and a
 	jr nz, .betterMoveFound ; damaging moves of a different type are considered to be better moves
@@ -255,8 +265,142 @@ AIMoveChoiceModification3:
 	jr z, .nextMove
 	inc [hl] ; slightly discourage this move
 	jr .nextMove
+
 AIMoveChoiceModification4:
-	ret
+	ld hl, wBuffer - 1 ; temp move selection array (-1 byte offset)
+	ld de, wEnemyMonMoves ; enemy moves
+	ld b, NUM_MOVES + 1
+.nextMove
+	dec b
+	ret z ; processed all 4 moves
+	inc hl
+	ld a, [de]
+	and a
+	ret z ; no more moves in move set
+	inc de
+	call ReadMove
+	ld a, [wEnemyMoveType] ; always discourage electric attacks vs ground types
+	cp ELECTRIC
+	jr nz, .uselessCheck
+	ld a, [wBattleMonType1]
+	cp GROUND
+	jp z, .neverUse
+	ld a, [wBattleMonType2]
+	cp GROUND
+	jp z, .neverUse
+.uselessCheck ; never use whirlwind, roar, teleport, splash or focus energy
+	ld a, [wEnemyMoveEffect]
+	cp SWITCH_AND_TELEPORT_EFFECT
+	jp z, .neverUse
+	cp SPLASH_EFFECT
+	jp z, .neverUse
+	cp FOCUS_ENERGY_EFFECT
+	jp z, .neverUse
+	cp HEAL_EFFECT  ; never use healing moves when above half health
+	jr nz, .substituteCheck
+	push hl
+	push de
+	push bc
+	ld a, 2
+	call AICheckIfHPBelowFraction
+	pop bc
+	pop de
+	pop hl
+	jp nc, .neverUse
+	jr .nextMove
+.substituteCheck:
+	cp SUBSTITUTE_EFFECT
+	jr nz, .reflectCheck
+	ld a, [wEnemyBattleStatus2]
+	bit HAS_SUBSTITUTE_UP, a
+	jp nz, .neverUse
+	push hl
+	push de
+	push bc
+	ld a, 4
+	call AICheckIfHPBelowFraction
+	pop bc
+	pop de
+	pop hl
+	jp c, .neverUse
+	jp .nextMove
+.reflectCheck ; don't use reflect when it's already up
+;	ld a, [wEnemyMoveEffect]
+	cp REFLECT_EFFECT
+	jr nz, .lightScreenCheck
+	ld a, [wEnemyBattleStatus3]
+	bit HAS_REFLECT_UP, a
+	jp nz, .neverUse
+	jp .nextMove
+.lightScreenCheck
+;	ld a, [wEnemyMoveEffect]
+	cp LIGHT_SCREEN_EFFECT ; don't use light screen when it's already up
+	jr nz, .poisonCheck
+	ld a, [wEnemyBattleStatus3]
+	bit HAS_LIGHT_SCREEN_UP, a
+	jp nz, .neverUse
+	jp .nextMove
+.poisonCheck ; don't use pPowder/toxic on poison types.
+;	ld a, [wEnemyMoveEffect]
+	cp POISON_EFFECT
+	jr nz, .confuseCheck
+	ld a, [wBattleMonType1]
+	cp POISON
+	jp z, .neverUse
+	ld a, [wBattleMonType2]
+	cp POISON
+	jp z, .neverUse
+	jp .nextMove
+.confuseCheck
+; ld a, [wEnemyMoveEffect]
+	cp CONFUSION_EFFECT
+	jr nz, .leechSeedCheck
+	ld a, [wPlayerBattleStatus1]
+	bit CONFUSED, a
+	jr nz, .neverUse
+	jp .nextMove
+.leechSeedCheck ; don't use leech seed on seeded/grass type enemies
+;	ld a, [wEnemyMoveEffect]
+	cp LEECH_SEED_EFFECT
+	jr nz, .dreamEaterCheck
+	ld a, [wBattleMonType1]
+	cp GRASS
+	jp z, .neverUse
+	ld a, [wBattleMonType2]
+	cp GRASS
+	jr z, .neverUse
+	ld a, [wPlayerBattleStatus2]
+	bit SEEDED, a
+	jr nz, .neverUse
+	jp .nextMove
+.dreamEaterCheck
+	cp DREAM_EATER_EFFECT
+	jr nz, .mistCheck
+	ld a, [wBattleMonStatus]
+	and SLP
+	jr z, .neverUse
+	dec [hl] ; slightly encourage this move
+	jp .nextMove
+.mistCheck
+	ld a, [wPlayerBattleStatus2]
+	bit PROTECTED_BY_MIST, a
+	jp z, .nextMove
+	ld a, [wEnemyMoveEffect]
+	cp ATTACK_DOWN1_EFFECT
+	jp c, .nextMove ; Before A1D in move effect list
+	cp CONVERSION_EFFECT
+	jp c, .neverUse ; Lower opponent's stat by 1
+	cp ATTACK_DOWN2_EFFECT
+	jp c, .nextMove ; From Conversion to before A2D
+	cp LIGHT_SCREEN_EFFECT
+	jp nc, .nextMove ; Light screen and later
+; Lower stat by 2 falls through into never use
+.neverUse
+	ld a, [hl]
+	add $5 ; heavily discourage move
+	ld [hl], a
+	jp .nextMove
+
 
 ReadMove:
 	push hl

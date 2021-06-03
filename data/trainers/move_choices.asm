@@ -16,45 +16,45 @@ TrainerClassMoveChoiceModifications:
 	move_choices 1, 3    ; SAILOR
 	move_choices 1       ; JR_TRAINER_M
 	move_choices 1       ; JR_TRAINER_F
-	move_choices 1, 2, 3 ; POKEMANIAC
-	move_choices 1, 2    ; SUPER_NERD
-	move_choices 1       ; HIKER
-	move_choices 1       ; BIKER
-	move_choices 1, 3    ; BURGLAR
+	move_choices 1, 2, 3, 4 ; POKEMANIAC
+	move_choices 1, 2, 3, 4 ; SUPER_NERD
+	move_choices 1, 4    ; HIKER
+	move_choices 1, 3, 4 ; BIKER
+	move_choices 1, 3, 4 ; BURGLAR
 	move_choices 1       ; ENGINEER
 	move_choices 1, 2    ; UNUSED_JUGGLER
-	move_choices 1, 3    ; FISHER
-	move_choices 1, 3    ; SWIMMER
+	move_choices 1, 3, 4 ; FISHER
+	move_choices 1, 3, 4 ; SWIMMER
 	move_choices         ; CUE_BALL
 	move_choices 1       ; GAMBLER
-	move_choices 1, 3    ; BEAUTY
-	move_choices 1, 2    ; PSYCHIC_TR
-	move_choices 1, 3    ; ROCKER
+	move_choices 1, 3, 4 ; BEAUTY
+	move_choices 1, 2, 3, 4 ; PSYCHIC_TR
+	move_choices 1, 3, 4 ; ROCKER
 	move_choices 1       ; JUGGLER
-	move_choices 1       ; TAMER
-	move_choices 1       ; BIRD_KEEPER
-	move_choices 1       ; BLACKBELT
-	move_choices 1       ; RIVAL1
-	move_choices 1, 3    ; PROF_OAK
+	move_choices 1, 3, 4 ; TAMER
+	move_choices 1, 3, 4 ; BIRD_KEEPER
+	move_choices 1, 3, 4 ; BLACKBELT
+	move_choices 1, 3, 4 ; RIVAL1
+	move_choices 1, 3, 4 ; PROF_OAK
 	move_choices 1, 2    ; CHIEF
-	move_choices 1, 2    ; SCIENTIST
-	move_choices 1, 3    ; GIOVANNI
-	move_choices 1       ; ROCKET
-	move_choices 1, 3    ; COOLTRAINER_M
-	move_choices 1, 3    ; COOLTRAINER_F
-	move_choices 1       ; BRUNO
+	move_choices 1, 2, 3, 4 ; SCIENTIST
+	move_choices 1, 3, 4 ; GIOVANNI
+	move_choices 1, 3, 4 ; ROCKET
+	move_choices 1, 3, 4 ; COOLTRAINER_M
+	move_choices 1, 3, 4 ; COOLTRAINER_F
+	move_choices 1, 3, 4 ; BRUNO
 	move_choices 1       ; BROCK
-	move_choices 1, 3    ; MISTY
-	move_choices 1, 3    ; LT_SURGE
-	move_choices 1, 3    ; ERIKA
-	move_choices 1, 3    ; KOGA
-	move_choices 1, 3    ; BLAINE
-	move_choices 1, 3    ; SABRINA
-	move_choices 1, 2    ; GENTLEMAN
-	move_choices 1, 3    ; RIVAL2
-	move_choices 1, 3    ; RIVAL3
-	move_choices 1, 2, 3 ; LORELEI
+	move_choices 1, 3, 4 ; MISTY
+	move_choices 1, 3, 4 ; LT_SURGE
+	move_choices 1, 3, 4 ; ERIKA
+	move_choices 1, 3, 4 ; KOGA
+	move_choices 1, 3, 4 ; BLAINE
+	move_choices 1, 3, 4 ; SABRINA
+	move_choices 1, 2, 3, 4 ; GENTLEMAN
+	move_choices 1, 3, 4 ; RIVAL2
+	move_choices 1, 3, 4 ; RIVAL3
+	move_choices 1, 2, 3, 4 ; LORELEI
 	move_choices 1       ; CHANNELER
 	move_choices 1       ; AGATHA
-	move_choices 1, 3    ; LANCE
+	move_choices 1, 3, 4 ; LANCE
 	assert_list_length NUM_TRAINERS
