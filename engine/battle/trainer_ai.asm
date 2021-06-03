@@ -326,120 +326,16 @@ JugglerAI:
 	ret nc
 	jp AISwitchIfEnoughMons
 
-BlackbeltAI:
-	cp 13 percent - 1
-	ret nc
-	jp AIUseXAttack
-
-GiovanniAI:
-	cp 25 percent + 1
-	ret nc
-	jp AIUseGuardSpec
-
-CooltrainerMAI:
-	cp 25 percent + 1
-	ret nc
-	jp AIUseXAttack
-
 CooltrainerFAI:
 	cp 25 percent + 1
-	ld a, 10
-	call AICheckIfHPBelowFraction
-	jp c, AIUseHyperPotion
 	ld a, 5
 	call AICheckIfHPBelowFraction
 	ret nc
 	jp AISwitchIfEnoughMons
 
-BrockAI:
-; if his active monster has a status condition, use a full heal
-	ld a, [wEnemyMonStatus]
-	and a
-	ret z
-	jp AIUseFullHeal
-
-MistyAI:
-	cp 25 percent + 1
-	ret nc
-	jp AIUseXDefend
-
-LtSurgeAI:
-	cp 25 percent + 1
-	ret nc
-	jp AIUseXSpeed
-
-ErikaAI:
-	cp 50 percent + 1
-	ret nc
-	ld a, 10
-	call AICheckIfHPBelowFraction
-	ret nc
-	jp AIUseSuperPotion
-
-KogaAI:
-	cp 25 percent + 1
-	ret nc
-	jp AIUseXAttack
-
-BlaineAI:
-	cp 25 percent + 1
-	ret nc
-	jp AIUseSuperPotion
-
-SabrinaAI:
-	cp 25 percent + 1
-	ret nc
-	ld a, 10
-	call AICheckIfHPBelowFraction
-	ret nc
-	jp AIUseHyperPotion
-
-Rival2AI:
-	cp 13 percent - 1
-	ret nc
-	ld a, 5
-	call AICheckIfHPBelowFraction
-	ret nc
-	jp AIUsePotion
-
-Rival3AI:
-	cp 13 percent - 1
-	ret nc
-	ld a, 5
-	call AICheckIfHPBelowFraction
-	ret nc
-	jp AIUseFullRestore
-
-LoreleiAI:
-	cp 50 percent + 1
-	ret nc
-	ld a, 5
-	call AICheckIfHPBelowFraction
-	ret nc
-	jp AIUseSuperPotion
-
-BrunoAI:
-	cp 25 percent + 1
-	ret nc
-	jp AIUseXDefend
-
 AgathaAI:
 	cp 8 percent
 	jp c, AISwitchIfEnoughMons
-	cp 50 percent + 1
-	ret nc
-	ld a, 4
-	call AICheckIfHPBelowFraction
-	ret nc
-	jp AIUseSuperPotion
-
-LanceAI:
-	cp 50 percent + 1
-	ret nc
-	ld a, 5
-	call AICheckIfHPBelowFraction
-	ret nc
-	jp AIUseHyperPotion
 
 GenericAI:
 	and a ; clear carry
