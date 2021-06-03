@@ -29,9 +29,9 @@ Route16Script0:
 	ld a, $a
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld a, SNORLAX
+	ld a, SLOWPOKE
 	ld [wCurOpponent], a
-	ld a, 30
+	ld a, 5
 	ld [wCurEnemyLVL], a
 	ld a, HS_ROUTE_16_SNORLAX
 	ld [wMissableObjectIndex], a

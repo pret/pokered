@@ -14,6 +14,6 @@ SeafoamIslandsB4F_Object:
 	def_objects
 	object SPRITE_BOULDER, 4, 15, STAY, NONE, 1 ; person
 	object SPRITE_BOULDER, 5, 15, STAY, NONE, 2 ; person
-	object SPRITE_BIRD, 6, 1, STAY, DOWN, 3, ARTICUNO, 50
+	object SPRITE_MONSTER, 6, 1, STAY, DOWN, 3, KRABBY, 5
 
 	def_warps_to SEAFOAM_ISLANDS_B4F
