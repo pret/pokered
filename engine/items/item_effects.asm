@@ -48,22 +48,22 @@ ItemUsePtrTable:
 	dw ItemUseEscapeRope ; ESCAPE_ROPE
 	dw ItemUseRepel      ; REPEL
 	dw UnusableItem      ; OLD_AMBER
-	dw ItemUseEvoStone   ; FIRE_STONE
-	dw ItemUseEvoStone   ; THUNDER_STONE
-	dw ItemUseEvoStone   ; WATER_STONE
-	dw ItemUseVitamin    ; HP_UP
-	dw ItemUseVitamin    ; PROTEIN
-	dw ItemUseVitamin    ; IRON
-	dw ItemUseVitamin    ; CARBOS
-	dw ItemUseVitamin    ; CALCIUM
-	dw ItemUseVitamin    ; RARE_CANDY
+	dw UnusableItem      ; FIRE_STONE
+	dw UnusableItem      ; THUNDER_STONE
+	dw UnusableItem      ; WATER_STONE
+	dw UnusableItem      ; HP_UP
+	dw UnusableItem      ; PROTEIN
+	dw UnusableItem      ; IRON
+	dw UnusableItem      ; CARBOS
+	dw UnusableItem      ; CALCIUM
+	dw UnusableItem      ; RARE_CANDY
 	dw UnusableItem      ; DOME_FOSSIL
 	dw UnusableItem      ; HELIX_FOSSIL
 	dw UnusableItem      ; SECRET_KEY
 	dw UnusableItem
 	dw UnusableItem      ; BIKE_VOUCHER
-	dw ItemUseXAccuracy  ; X_ACCURACY
-	dw ItemUseEvoStone   ; LEAF_STONE
+	dw UnusableItem      ; X_ACCURACY
+	dw UnusableItem      ; LEAF_STONE
 	dw ItemUseCardKey    ; CARD_KEY
 	dw UnusableItem      ; NUGGET
 	dw UnusableItem      ; ??? PP_UP
@@ -71,20 +71,20 @@ ItemUsePtrTable:
 	dw ItemUseMedicine   ; FULL_HEAL
 	dw ItemUseMedicine   ; REVIVE
 	dw ItemUseMedicine   ; MAX_REVIVE
-	dw ItemUseGuardSpec  ; GUARD_SPEC
+	dw UnusableItem      ; GUARD_SPEC
 	dw ItemUseSuperRepel ; SUPER_REPL
 	dw ItemUseMaxRepel   ; MAX_REPEL
-	dw ItemUseDireHit    ; DIRE_HIT
+	dw UnusableItem      ; DIRE_HIT
 	dw UnusableItem      ; COIN
 	dw ItemUseMedicine   ; FRESH_WATER
 	dw ItemUseMedicine   ; SODA_POP
 	dw ItemUseMedicine   ; LEMONADE
 	dw UnusableItem      ; S_S_TICKET
 	dw UnusableItem      ; GOLD_TEETH
-	dw ItemUseXStat      ; X_ATTACK
-	dw ItemUseXStat      ; X_DEFEND
-	dw ItemUseXStat      ; X_SPEED
-	dw ItemUseXStat      ; X_SPECIAL
+	dw UnusableItem      ; X_ATTACK
+	dw UnusableItem      ; X_DEFEND
+	dw UnusableItem      ; X_SPEED
+	dw UnusableItem      ; X_SPECIAL
 	dw ItemUseCoinCase   ; COIN_CASE
 	dw ItemUseOaksParcel ; OAKS_PARCEL
 	dw ItemUseItemfinder ; ITEMFINDER
@@ -803,6 +803,9 @@ ItemUseVitamin:
 	jp nz, ItemUseNotTime
 
 ItemUseMedicine:
+	ld a, [wIsInBattle]
+	and a
+	jp nz, ItemUseNotTime ; can't use medicine in battle
 	ld a, [wPartyCount]
 	and a
 	jp z, .emptyParty
@@ -853,7 +856,7 @@ ItemUseMedicine:
 ; if using softboiled
 	ld a, [wWhichPokemon]
 	cp d ; is the pokemon trying to use softboiled on itself?
-	jr z, ItemUseMedicine ; if so, force another choice
+	jp z, ItemUseMedicine ; if so, force another choice
 .checkItemType
 	ld a, [wcf91]
 	cp REVIVE
