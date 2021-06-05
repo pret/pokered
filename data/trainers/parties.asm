@@ -233,7 +233,7 @@ SuperNerdData:
 
 HikerData:
 ; Mt. Moon 1F
-	db 5, GEODUDE, GEODUDE, ZUBAT, 0 ; geodude, geodude, onix
+	db 5, GEODUDE, GEODUDE, GEODUDE, 0 ; geodude, geodude, onix
 ; Route 25
 	db 5, MACHOP, GEODUDE, 0
 	db 5, GEODUDE, GEODUDE, MACHOP, GEODUDE, 0
@@ -245,8 +245,8 @@ HikerData:
 	db 5, GEODUDE, ZUBAT, 0 ; geodude, onix
 	db 5, ZUBAT, GEODUDE, 0 ; onix, graveler
 ; Rock Tunnel B1F
-	db 5, GEODUDE, GEODUDE, GEODUDE, 0
-	db 5, GEODUDE, 0
+	db $FF, 5, GEODUDE, 5, GEODUDE, 5, GEODUDE, 0
+	db $FF, 5, GEODUDE, 0
 ; Route 9/Rock Tunnel B1F
 	db 5, MACHOP, ZUBAT, 0 ; machop, onix
 ; Rock Tunnel 1F
@@ -533,7 +533,7 @@ ScientistData:
 
 GiovanniData:
 ; Rocket Hideout B4F
-	db $FF, 5, KABUTO, 5, RHYHORN, 5, MEOWTH, 5, PORYGON, 0
+	db $FF, 5, KABUTO, 5, RHYHORN, 5, PORYGON, 0
 ; Silph Co. 11F
 	db $FF, 5, NIDORAN_M, 5, MEOWTH, 5, RHYHORN, 5, NIDORAN_F, 5, LICKITUNG, 0
 ; Viridian Gym
@@ -546,7 +546,7 @@ RocketData:
 	db 5, ZUBAT, EKANS, 0
 	db $FF, 5, RATTATA, 0
 ; Cerulean City
-	db 5, MACHOP, DROWZEE, 0
+	db $FF, 5, MACHOP, 5, DROWZEE, 5, DIGLETT, 0
 ; Route 24
 	db 5, EKANS, ZUBAT, 0
 ; Game Corner
@@ -563,9 +563,9 @@ RocketData:
 	db 5, RATTATA, RATTATA, DROWZEE, 0
 	db 5, MACHOP, MACHOP, 0
 ; Rocket Hideout B4F
-	db 5, SANDSHREW, EKANS, SANDSHREW, 0
-	db 5, EKANS, SANDSHREW, EKANS, 0
-	db 5, KOFFING, ZUBAT, 0
+	db $FF, 5, SANDSHREW, 5, EKANS, 5, SANDSHREW, 0
+	db $FF, 5, EKANS, 5, SANDSHREW, 5, DRATINI, 0
+	db 5, KOFFING, ZUBAT, 0 ; lift key
 ; Pokémon Tower 7F
 	db 5, ZUBAT, ZUBAT, ZUBAT, 0
 	db 5, KOFFING, DROWZEE, 0
@@ -648,7 +648,7 @@ LtSurgeData:
 	db $FF, 5, VOLTORB, 5, VOLTORB, 5, VOLTORB, 5, PIKACHU, 5, PIKACHU, 5, PIKACHU, 0
 
 ErikaData:
-	db $FF, 5, BELLSPROUT, 5, ODDISH, 5, TANGELA, 0
+	db $FF, 5, EXEGGCUTE, 5, BELLSPROUT, 5, ODDISH, 5, JIGGLYPUFF, 5, DRATINI, 5, TANGELA, 0
 
 KogaData:
 	db $FF, 5, KOFFING, 5, GRIMER, 5, KOFFING, 5, EKANS, 0
@@ -676,9 +676,9 @@ Green2Data:
 	db $FF, 5, PIDGEY, 5, RATTATA, 5, ABRA, 5, EKANS, 5, SANDSHREW, 5, BULBASAUR, 0
 	db $FF, 5, PIDGEY, 5, RATTATA, 5, ABRA, 5, EKANS, 5, BELLSPROUT, 5, CHARMANDER, 0
 ; Pokémon Tower 2F
-	db $FF, 5, PIDGEY, 5, GROWLITHE, 5, EXEGGCUTE, 5, ABRA, 5, SQUIRTLE, 0
-	db $FF, 5, PIDGEY, 5, SHELLDER, 5, GROWLITHE, 5, ABRA, 5, BULBASAUR, 0
-	db $FF, 5, PIDGEY, 5, EXEGGCUTE, 5, SHELLDER, 5, ABRA, 5, CHARMANDER, 0
+	db $FF, 5, PIDGEY, 5, GASTLY, 5, ABRA, 5, VULPIX, 5, EXEGGCUTE, 5, SQUIRTLE, 0
+	db $FF, 5, PIDGEY, 5, GASTLY, 5, ABRA, 5, SHELLDER, 5, VULPIX, 5, BULBASAUR, 0
+	db $FF, 5, PIDGEY, 5, GASTLY, 5, ABRA, 5, EXEGGCUTE, 5, SHELLDER, 5, CHARMANDER, 0
 ; Silph Co. 7F
 	db $FF, 5, PIDGEY, 5, GROWLITHE, 5, EXEGGCUTE, 5, ABRA, 5, SQUIRTLE, 0
 	db $FF, 5, PIDGEY, 5, SHELLDER, 5, GROWLITHE, 5, ABRA, 5, BULBASAUR, 0

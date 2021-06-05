@@ -51,17 +51,21 @@ SpecialTrainerMoves:
 	; abra
 	db 2, THUNDER_WAVE, SEISMIC_TOSS, NO_MOVE, NO_MOVE
 	; rattata
-	db 3, TACKLE, BUBBLEBEAM, NO_MOVE, NO_MOVE
+	db 3, TACKLE, WATER_GUN, NO_MOVE, NO_MOVE
 	db 0
 
 	db RIVAL1, 9
 	; abra
 	db 2, THUNDER_WAVE, SEISMIC_TOSS, NO_MOVE, NO_MOVE
 	; rattata
-	db 3, TACKLE, BUBBLEBEAM, NO_MOVE, NO_MOVE
+	db 3, TACKLE, WATER_GUN, NO_MOVE, NO_MOVE
 	; charmander
 	db 4, SCRATCH, MEGA_PUNCH, NO_MOVE, NO_MOVE
 	db 0
+
+	db ROCKET, 5
+	; diglett
+	db 3, DIG, SCRATCH, NO_MOVE, NO_MOVE
 
 	db BUG_CATCHER, 11
 	; venonat
@@ -85,7 +89,7 @@ SpecialTrainerMoves:
 
 	db Rival2, 2 ; bulbasaur
 	; rattata
-	db 2, TACKLE, BUBBLEBEAM, NO_MOVE, NO_MOVE
+	db 2, TACKLE, WATER_GUN, NO_MOVE, NO_MOVE
 	; abra
 	db 3, THUNDER_WAVE, SEISMIC_TOSS, NO_MOVE, NO_MOVE
 	; ekans
@@ -98,7 +102,7 @@ SpecialTrainerMoves:
 
 	db Rival2, 3 ; charmander
 	; rattata
-	db 2, TACKLE, BUBBLEBEAM, NO_MOVE, NO_MOVE
+	db 2, TACKLE, WATER_GUN, NO_MOVE, NO_MOVE
 	; abra
 	db 3, THUNDER_WAVE, SEISMIC_TOSS, NO_MOVE, NO_MOVE
 	; ekans
@@ -120,4 +124,100 @@ SpecialTrainerMoves:
 	db 5, THUNDERBOLT, SURF, BODY_SLAM, DOUBLE_TEAM
 	; pikachu
 	db 6, THUNDERBOLT, SURF, MEGA_KICK, DOUBLE_TEAM
+	db 0
+
+	db HIKER, 9
+	; geodude
+	db 1, DIG, SELFDESTRUCT, STRENGTH, NO_MOVE
+	; geodude
+	db 1, DIG, SELFDESTRUCT, STRENGTH, NO_MOVE
+	; geodude
+	db 1, EXPLOSION, NO_MOVE, NO_MOVE, NO_MOVE
+	db 0
+
+	db HIKER, 10
+	; geodude
+	db 1, EARTHQUAKE, ROCK_SLIDE, EXPLOSION, NO_MOVE
+	db 0
+
+	db ERIKA, 1
+	; exeggcute
+	db 1, HYPNOSIS, PSYCHIC_M, SUBSTITUTE, NO_MOVE
+	; bellsprout
+	db 2, GROWTH, MEGA_DRAIN, NO_MOVE, NO_MOVE
+	; oddish
+	db 3, SWORDS_DANCE, DOUBLE_EDGE, REFLECT, NO_MOVE
+	; jigglypuff
+	db 4, SING, THUNDER_WAVE, BODY_SLAM, ICE_BEAM
+	; dratini
+	db 5, THUNDER_WAVE, WRAP, SURF, NO_MOVE
+	; tangela
+	db 6, BIND, TOXIC, MEGA_DRAIN, BODY_SLAM
+	db 0
+
+	db ROCKET, 16
+	; sandshrew
+	db 3, SWORDS_DANCE, EARTHQUAKE, ROCK_SLIDE, NO_MOVE
+	db 0
+
+	db ROCKET, 17
+	; dratini
+	db 3, THUNDER_WAVE, WRAP, BUBBLEBEAM, NO_MOVE
+	db 0
+
+	db GIOVANNI, 1
+	; kabuto
+	db 1, SURF, BLIZZARD, DOUBLE_EDGE, HARDEN
+	; rhyhorn
+	db 2, EARTHQUAKE, ROCK_SLIDE, DOUBLE_EDGE, NO_MOVE
+	; porygon
+	db 3, THUNDERBOLT, ICE_BEAM, PSYCHIC_M, HYPER_BEAM
+	db 0
+
+	db RIVAL2, 1 ; squirtle
+	; pidgey
+	db 1, SAND_ATTACK, DOUBLE_TEAM, SUBSTITUTE, SWIFT
+	; gastly
+	db 2, LICK, CONFUSE_RAY, THUNDERBOLT, NO_MOVE
+	; abra
+	db 3, PSYCHIC_M, THUNDER_WAVE, NO_MOVE, NO_MOVE
+	; vulpix
+	db 4, EMBER, DOUBLE_EDGE, REFLECT, NO_MOVE
+	; exeggcute
+	db 5, HYPNOSIS, BARRAGE, EGG_BOMB, NO_MOVE
+	; squirtle
+	db 6, BUBBLEBEAM, BODY_SLAM, DIG, ICE_BEAM
+	db 0
+
+	db RIVAL2, 2 ; bulbasaur
+	; pidgey
+	db 1, SAND_ATTACK, DOUBLE_TEAM, SUBSTITUTE, SWIFT
+	; gastly
+	db 2, LICK, CONFUSE_RAY, THUNDERBOLT, NO_MOVE
+	; abra
+	db 3, PSYCHIC_M, THUNDER_WAVE, NO_MOVE, NO_MOVE
+	; shellder
+	db 4, BUBBLEBEAM, ICE_BEAM, TRI_ATTACK, WITHDRAW
+	; vulpix
+	db 5, EMBER, DOUBLE_EDGE, REFLECT, NO_MOVE
+	; bulbasaur
+	db 6, BODY_SLAM, DIG, NO_MOVE, NO_MOVE
+	db 0
+
+	db RIVAL2, 3 ; charmander
+	; pidgey
+	db 1, SAND_ATTACK, DOUBLE_TEAM, SUBSTITUTE, SWIFT
+	; gastly
+	db 2, LICK, CONFUSE_RAY, THUNDERBOLT, NO_MOVE
+	; abra
+	db 3, PSYCHIC_M, THUNDER_WAVE, NO_MOVE, NO_MOVE
+	; exeggcute
+	db 4, HYPNOSIS, BARRAGE, EGG_BOMB, NO_MOVE
+	; shellder
+	db 5, BUBBLEBEAM, ICE_BEAM, TRI_ATTACK, WITHDRAW
+	; charmander
+	db 6, BODY_SLAM, DIG, SUBMISSION, NO_MOVE
+	db 0
+
+
 	db -1 ; end
