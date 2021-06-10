@@ -17,7 +17,7 @@ _OakWalksUpText::
 	line "me!"
 	done
 
-_PalletTownText2::
+_PalletTownGirlText::
 	text "I'm raising"
 	line "#MON too!"
 
@@ -26,7 +26,7 @@ _PalletTownText2::
 	cont "protect me!"
 	done
 
-_PalletTownText3::
+_PalletTownFatManText::
 	text "Technology is"
 	line "incredible!"
 
@@ -36,21 +36,21 @@ _PalletTownText3::
 	cont "data via PC!"
 	done
 
-_PalletTownText4::
+_PalletTownLabSignText::
 	text "OAK #MON"
 	line "RESEARCH LAB"
 	done
 
-_PalletTownText5::
+_PalletTownFenceSignText::
 	text "PALLET TOWN"
 	line "Shades of your"
 	cont "journey await!"
 	done
 
-_PalletTownText6::
+_PalletTownRedSignText::
 	text "<PLAYER>'s house "
 	done
 
-_PalletTownText7::
+_PalletTownBlueSignText::
 	text "<RIVAL>'s house "
 	done

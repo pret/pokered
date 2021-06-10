@@ -42,7 +42,7 @@ PewterGymBrockPostBattle:
 	ld a, $f0
 	ld [wJoyIgnore], a
 ; fallthrough
-PewterGymScriptReceiveTM34:
+PewterGymReceiveTM34:
 	ld a, $4
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
@@ -99,7 +99,7 @@ BrockText:
 	jr z, .beforeBeat
 	CheckEventReuseA EVENT_GOT_TM34
 	jr nz, .afterBeat
-	call z, PewterGymScriptReceiveTM34
+	call z, PewterGymReceiveTM34
 	call DisableWaitingAfterTextDisplay
 	jr .done
 .afterBeat

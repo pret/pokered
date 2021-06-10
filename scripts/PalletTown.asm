@@ -9,15 +9,15 @@ PalletTown_Script:
 	jp CallFunctionInTable
 
 PalletTown_ScriptPointers:
-	dw PalletTownScript0
+	dw PalletTownMeetOak
 	dw PalletTownScript1
 	dw PalletTownScript2
-	dw PalletTownScript3
+	dw PalletTownFollowOak
 	dw PalletTownScript4
-	dw PalletTownScript5
-	dw PalletTownScript6
+	dw PalletTownReceiveTownMap
+	dw PalletTownNothing
 
-PalletTownScript0:
+PalletTownMeetOak:
 	CheckEvent EVENT_FOLLOWED_OAK_INTO_LAB
 	ret nz
 	ld a, [wYCoord]
@@ -89,7 +89,7 @@ PalletTownScript2:
 	ld [wPalletTownCurScript], a
 	ret
 
-PalletTownScript3:
+PalletTownFollowOak:
 	ld a, [wd730]
 	bit 0, a
 	ret nz
@@ -129,7 +129,7 @@ PalletTownScript4:
 	ld [wPalletTownCurScript], a
 	ret
 
-PalletTownScript5:
+PalletTownReceiveTownMap:
 	CheckEvent EVENT_DAISY_WALKING
 	jr nz, .next
 	CheckBothEventsSet EVENT_GOT_TOWN_MAP, EVENT_ENTERED_BLUES_HOUSE, 1
@@ -145,19 +145,19 @@ PalletTownScript5:
 	CheckEvent EVENT_GOT_POKEBALLS_FROM_OAK
 	ret z
 	SetEvent EVENT_PALLET_AFTER_GETTING_POKEBALLS_2
-PalletTownScript6:
+PalletTownNothing:
 	ret
 
 PalletTown_TextPointers:
-	dw PalletTownText1
-	dw PalletTownText2
-	dw PalletTownText3
-	dw PalletTownText4
-	dw PalletTownText5
-	dw PalletTownText6
-	dw PalletTownText7
+	dw PalletTownOakText
+	dw PalletTownGirlText
+	dw PalletTownFatManText
+	dw PalletTownLabSignText
+	dw PalletTownFenceSignText
+	dw PalletTownRedSignText
+	dw PalletTownBlueSignText
 
-PalletTownText1:
+PalletTownOakText:
 	text_asm
 	ld a, [wcf0d]
 	and a
@@ -189,26 +189,26 @@ OakWalksUpText:
 	text_far _OakWalksUpText
 	text_end
 
-PalletTownText2: ; girl
-	text_far _PalletTownText2
+PalletTownGirlText:
+	text_far _PalletTownGirlText
 	text_end
 
-PalletTownText3: ; fat man
-	text_far _PalletTownText3
+PalletTownFatManText:
+	text_far _PalletTownFatManText
 	text_end
 
-PalletTownText4: ; sign by lab
-	text_far _PalletTownText4
+PalletTownLabSignText:
+	text_far _PalletTownLabSignText
 	text_end
 
-PalletTownText5: ; sign by fence
-	text_far _PalletTownText5
+PalletTownFenceSignText:
+	text_far _PalletTownFenceSignText
 	text_end
 
-PalletTownText6: ; sign by Red's house
-	text_far _PalletTownText6
+PalletTownRedSignText:
+	text_far _PalletTownRedSignText
 	text_end
 
-PalletTownText7: ; sign by Blue's house
-	text_far _PalletTownText7
+PalletTownBlueSignText:
+	text_far _PalletTownBlueSignText
 	text_end
