@@ -819,14 +819,14 @@ SwitchAndTeleportEffect:
 	jr nc, .playerMoveWasSuccessful ; if so, teleport will always succeed
 	add b
 	ld c, a
-	inc c ; c = sum of player level and enemy level
+	inc c ; c = playerLevel + enemyLevel + 1
 .rejectionSampleLoop1
 	call BattleRandom
 	cp c ; get a random number between 0 and c
 	jr nc, .rejectionSampleLoop1
 	srl b
 	srl b  ; b = enemyLevel / 4
-	cp b ; is rand[0, playerLevel + enemyLevel) >= (enemyLevel / 4)?
+	cp b ; is rand[0, playerLevel + enemyLevel] >= (enemyLevel / 4)?
 	jr nc, .playerMoveWasSuccessful ; if so, allow teleporting
 	ld c, 50
 	call DelayFrames
