@@ -1,4 +1,4 @@
-# Pokémon Red and Blue [![Build Status][travis-badge]][travis]
+# Pokémon Red and Blue [![Build Status][ci-badge]][ci]
 
 This is a disassembly of Pokémon Red and Blue.
 
@@ -37,5 +37,5 @@ Other disassembly projects:
 [pokeemerald]: https://github.com/pret/pokeemerald
 [discord]: https://discord.gg/d5dubZ3
 [irc]: https://kiwiirc.com/client/irc.freenode.net/?#pret
-[travis]: https://travis-ci.org/pret/pokered
-[travis-badge]: https://travis-ci.org/pret/pokered.svg?branch=master
+[ci]: https://github.com/pret/pokered/actions
+[ci-badge]: https://github.com/pret/pokered/actions/workflows/main.yml/badge.svg
