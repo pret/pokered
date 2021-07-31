@@ -1,7 +1,7 @@
 _OaksLabGaryText1::
-	text "<RIVAL>: Yo"
-	line "<PLAYER>! Gramps"
-	cont "isn't around!"
+	text "<RIVAL>: ¡Hola"
+	line "<PLAYER>! ¡El"
+	cont "abuelo no está!"
 	done
 
 _OaksLabText40::
