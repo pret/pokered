@@ -150,12 +150,27 @@
 	charmap "y",         $b8
 	charmap "z",         $b9
 
-	charmap "é",         $ba
+	charmap "'e",        $ba ; Changed "é" to "'e"
 	charmap "'d",        $bb
 	charmap "'l",        $bc
 	charmap "'s",        $bd
 	charmap "'t",        $be
 	charmap "'v",        $bf
+
+; Added characters for spanish translation (from gfx/font/font.png)
+	charmap "Á",         $c0
+	charmap "É",         $c1
+	charmap "Í",         $c2
+	charmap "Ó",         $c3
+	charmap "Ú",         $c4
+	charmap "Ñ",         $c5
+
+	charmap "á",         $d0
+	charmap "é",         $d1
+	charmap "í",         $d2
+	charmap "ó",         $d3
+	charmap "ú",         $d4
+	charmap "ñ",         $d5
 
 	charmap "'",         $e0
 	charmap "<PK>",      $e1
