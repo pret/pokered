@@ -164,6 +164,7 @@
 	charmap "Ó",         $c3
 	charmap "Ú",         $c4
 	charmap "Ñ",         $c5
+	charmap "Ü",         $c6
 
 	charmap "á",         $d0
 	charmap "é",         $d1
