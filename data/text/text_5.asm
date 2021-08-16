@@ -1,104 +1,110 @@
-_CableClubNPCPleaseComeAgainText::
-	text "Please come again!"
+_CableClubNPCPleaseComeAgainText:: ;Cable Club
+	text "¡Vuelve otra vez"
+	line "cuando quieras!"
 	done
 
 _CableClubNPCMakingPreparationsText::
-	text "We're making"
-	line "preparations."
-	cont "Please wait."
+	text "Estamos haciendo"
+	line "los preparativos."
+	cont "Espera por favor."
 	done
 
-_UsedStrengthText::
+_UsedStrengthText:: ;Usar fuerza
 	text_ram wcd6d
-	text " used"
-	line "STRENGTH.@"
+	text " usó"
+	line "la FUERZA.@"
 	text_end
 
 _CanMoveBouldersText::
 	text_ram wcd6d
-	text " can"
-	line "move boulders."
+	text " "
+	line "mueve rocas."
 	prompt
 
-_CurrentTooFastText::
-	text "The current is"
-	line "much too fast!"
+_CurrentTooFastText:: ;Corriente rápida
+	text "¡La corriente es"
+	line "demasiado rápida!"
 	prompt
 
-_CyclingIsFunText::
-	text "Cycling is fun!"
-	line "Forget SURFing!"
+_CyclingIsFunText:: ;???
+	text "¡Pedalear es"
+	line "genial! ¡Olvida"
+	cont "el SURF!"
 	prompt
 
-_FlashLightsAreaText::
-	text "A blinding FLASH"
-	line "lights the area!"
+_FlashLightsAreaText:: ;Usar DESTELLO
+	text "¡Un cegador"
+	line "DESTELLO iluminó"
+	cont "la zona!"
 	prompt
 
-_WarpToLastPokemonCenterText::
-	text "Warp to the last"
-	line "#MON CENTER."
+_WarpToLastPokemonCenterText:: ;Volver Centro Pokemon
+	text "Vuelve al último"
+	line "CENTRO #MON."
 	done
 
-_CannotUseTeleportNowText::
+_CannotUseTeleportNowText:: ;No puede usar TELETRANP. o VUELO
 	text_ram wcd6d
-	text " can't"
-	line "use TELEPORT now."
+	text " no"
+	line "puede usar ahora"
+	cont "el teletransporte."
 	prompt
 
 _CannotFlyHereText::
 	text_ram wcd6d
-	text " can't"
-	line "FLY here."
+	text " no"
+	line "puede VOLAR aquí."
 	prompt
 
-_NotHealthyEnoughText::
-	text "Not healthy"
-	line "enough."
+_NotHealthyEnoughText:: ;???
+	text "No está lo"
+	line "bastante sano."
 	prompt
 
-_NewBadgeRequiredText::
-	text "No! A new BADGE"
-	line "is required."
+_NewBadgeRequiredText:: ;Se requiere medalla
+	text "¡No! ¡Se requiere"
+	line "una nueva"
+	cont "MEDALLA!"
 	prompt
 
-_CannotUseItemsHereText::
-	text "You can't use items"
-	line "here."
+_CannotUseItemsHereText:: ;No puedes...
+	text "No puedes usar"
+	line "objetos aquí."
 	prompt
 
 _CannotGetOffHereText::
-	text "You can't get off"
-	line "here."
+	text "No puedes bajarte"
+	line "aquí."
 	prompt
 
-_GotMonText::
-	text "<PLAYER> got"
+_GotMonText:: ;Conseguir Pokémon
+	text "¡<PLAYER> obtiene"
 	line "@"
 	text_ram wcd6d
 	text "!@"
 	text_end
 
 _SentToBoxText::
-	text "There's no more"
-	line "room for #MON!"
-	cont "@"
+	text "¡No tienes sitio"
+	line "para más #MON!"
+	cont "¡@"
 	text_ram wBoxMonNicks
-	text " was"
-	cont "sent to #MON"
-	cont "BOX @"
+	cont "fue enviado a la"
+	cont "CAJA #MON"
+	cont "@"
 	text_ram wcf4b
-	text " on PC!"
+	text " del PC!"
 	done
 
-_BoxIsFullText::
-	text "There's no more"
-	line "room for #MON!"
+_BoxIsFullText:: ;CAJA PC llena
+	text "¡No tienes sitio"
+	line "para más #MON!"
 
-	para "The #MON BOX"
-	line "is full and can't"
-	cont "accept any more!"
+	para "¡La CAJA #MON"
+	line "está llena y no"
+	cont "caben más!"
 
-	para "Change the BOX at"
-	line "a #MON CENTER!"
+	para "¡Cambia la CAJA"
+	line "en un CENTRO"
+	cont "#MON!"
 	done
