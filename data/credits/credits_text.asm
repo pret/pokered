@@ -199,17 +199,17 @@ CredAlcami:
 CredGreppi:
 	db -6, "ANTONIO GREPPI@" ;nuevo
 CredIwata:
-	db -5, "SATORU IWATA@" ;si
+	db -5, "SATORU IWATA@"
 CredIzushi:
-	db -7, "TAKEHIRO IZUSHI@" ;si
+	db -7, "TAKEHIRO IZUSHI@"
 CredHarada:
-	db -7, "TAKAHIRO HARADA@" ;si
+	db -7, "TAKAHIRO HARADA@"
 CredNakamichi:
 	db -7, "KIMIKO NAKAMICHI@" ;nuevo
 CredMurakawa:
-	db -7, "TERUKI MURAKAWA@" ;si
+	db -7, "TERUKI MURAKAWA@"
 CredFukui:
-	db -5, "KOHTA FUKUI@" ;si
+	db -5, "KOHTA FUKUI@"
 CredNOE:
 	db -9, "NOE PRODUCT TESTING@" ;editado
 CredZehFei:
