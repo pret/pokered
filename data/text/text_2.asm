@@ -939,8 +939,7 @@ _MoneyForWinningText::
 	text "¡<PLAYER> ganó"
 	line "@"
 	text_bcd wAmountMoneyWon, 3 | LEADING_ZEROES | LEFT_ALIGN
-	text_start
-	line "¥!"
+	text "¥!"
 	prompt
 
 _TrainerDefeatedText::
@@ -999,7 +998,7 @@ _TrainerSentOutText::
 	text "¡@"
 	text_ram wTrainerName
 	text " envió a"
-	cont "@"
+	line "@"
 	text_ram wEnemyMonNick
 	text "!"
 	done
@@ -1342,6 +1341,7 @@ _EnemyAppearedText::
 _TrainerWantsToFightText::
 	text "¡@"
 	text_ram wTrainerName
+	text_start
 	line "quiere luchar!"
 	prompt
 
