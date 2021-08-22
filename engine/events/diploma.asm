@@ -100,17 +100,17 @@ DiplomaText:
 	db CIRCLE_TILE_ID, "Diploma", CIRCLE_TILE_ID, "@"
 
 DiplomaPlayer:
-	db "Player@"
+	db "Jugador@"
 
 DiplomaEmptyText:
 	db "@"
 
 DiplomaCongrats:
-	db   "Congrats! This"
-	next "diploma certifies"
-	next "that you have"
-	next "completed your"
-	next "#DEX.@"
+	db   "¡Felicidades! Se"
+	next "certifica que has"
+	next "completado"
+	next "con éxito"
+	next "tu #DEX.@"
 
 DiplomaGameFreak:
 	db "GAME FREAK@"
