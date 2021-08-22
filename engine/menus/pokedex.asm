@@ -360,19 +360,19 @@ DrawPokedexVerticalLine:
 	ret
 
 PokedexSeenText:
-	db "SEEN@"
+	db "VIST@"
 
 PokedexOwnText:
-	db "OWN@"
+	db "TIEN@"
 
 PokedexContentsText:
-	db "CONTENTS@"
+	db "CONTENIDO@"
 
 PokedexMenuItemsText:
-	db   "DATA"
-	next "CRY"
-	next "AREA"
-	next "QUIT@"
+	db   "INFO"
+	next "GRIT"
+	next "ÁREA"
+	next "SALE@"
 
 ; tests if a pokemon's bit is set in the seen or owned pokemon bit fields
 ; INPUT:
@@ -590,8 +590,8 @@ ShowPokedexDataInternal:
 	ret
 
 HeightWeightText:
-	db   "HT  ?′??″"
-	next "WT   ???lb@"
+	db   "AL   ???m"
+	next "PE   ???kg@"
 
 ; XXX does anything point to this?
 PokeText:

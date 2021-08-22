@@ -10,32 +10,32 @@ PrintStatusAilment::
 	jr nz, .par
 	and SLP
 	ret z
-	ld a, "S"
+	ld a, "D"
 	ld [hli], a
-	ld a, "L"
+	ld a, "O"
 	ld [hli], a
-	ld [hl], "P"
+	ld [hl], "R"
 	ret
 .psn
-	ld a, "P"
+	ld a, "E"
 	ld [hli], a
-	ld a, "S"
+	ld a, "N"
 	ld [hli], a
-	ld [hl], "N"
+	ld [hl], "V"
 	ret
 .brn
-	ld a, "B"
+	ld a, "Q"
 	ld [hli], a
-	ld a, "R"
+	ld a, "U"
 	ld [hli], a
-	ld [hl], "N"
+	ld [hl], "E"
 	ret
 .frz
-	ld a, "F"
+	ld a, "C"
 	ld [hli], a
-	ld a, "R"
+	ld a, "O"
 	ld [hli], a
-	ld [hl], "Z"
+	ld [hl], "N"
 	ret
 .par
 	ld a, "P"
