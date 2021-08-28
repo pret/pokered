@@ -1307,9 +1307,9 @@ ItemUseMedicine:
 	jr nz, .statNameInnerLoop
 	jr .statNameLoop
 .gotStatName
-	ld de, wcf4b
+	ld de, wStringBuffer
 	ld bc, 10
-	call CopyData ; copy the stat's name to wcf4b
+	call CopyData ; copy the stat's name to wStringBuffer
 	ld a, SFX_HEAL_AILMENT
 	call PlaySound
 	ld hl, VitaminStatRoseText
@@ -1984,7 +1984,7 @@ ItemUsePPRestore:
 	ld a, [hl]
 	ld [wd11e], a
 	call GetMoveName
-	call CopyStringToCF4B ; copy name to wcf4b
+	call CopyToStringBuffer
 	pop hl
 	ld a, [wPPRestoreItem]
 	cp ETHER
@@ -2161,7 +2161,7 @@ ItemUseTMHM:
 	ld a, [wd11e]
 	ld [wMoveNum], a
 	call GetMoveName
-	call CopyStringToCF4B ; copy name to wcf4b
+	call CopyToStringBuffer
 	pop af
 	ld hl, BootedUpTMText
 	jr nc, .printBootedUpMachineText
@@ -2187,7 +2187,7 @@ ItemUseTMHM:
 	ld a, [wcf91]
 	push af
 .chooseMon
-	ld hl, wcf4b
+	ld hl, wStringBuffer
 	ld de, wTempMoveNameBuffer
 	ld bc, 14
 	call CopyData ; save the move name because DisplayPartyMenu will overwrite it
@@ -2198,7 +2198,7 @@ ItemUseTMHM:
 	call DisplayPartyMenu
 	push af
 	ld hl, wTempMoveNameBuffer
-	ld de, wcf4b
+	ld de, wStringBuffer
 	ld bc, 14
 	call CopyData
 	pop af
@@ -2553,7 +2553,7 @@ TossItem_::
 	ld a, [wcf91]
 	ld [wd11e], a
 	call GetItemName
-	call CopyStringToCF4B ; copy name to wcf4b
+	call CopyToStringBuffer
 	ld hl, IsItOKToTossItemText
 	call PrintText
 	hlcoord 14, 7
@@ -2573,7 +2573,7 @@ TossItem_::
 	ld a, [wcf91]
 	ld [wd11e], a
 	call GetItemName
-	call CopyStringToCF4B ; copy name to wcf4b
+	call CopyToStringBuffer
 	ld hl, ThrewAwayItemText
 	call PrintText
 	pop hl

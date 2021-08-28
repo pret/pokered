@@ -1055,7 +1055,7 @@ wPartyMenuBlkPacket:: ds $30
 NEXTU
 	ds 29
 ; storage buffer for various strings
-wcf4b:: ds 20
+wStringBuffer:: ds 20
 
 NEXTU
 	ds 29

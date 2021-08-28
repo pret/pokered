@@ -1,9 +1,9 @@
-; copies a string from [de] to [wcf4b]
-CopyStringToCF4B::
-	ld hl, wcf4b
+; copies a string from de to wStringBuffer
+CopyToStringBuffer::
+	ld hl, wStringBuffer
 	; fall through
 
-; copies a string from [de] to [hl]
+; copies a string from de to hl
 CopyString::
 	ld a, [de]
 	inc de

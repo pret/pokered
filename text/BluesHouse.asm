@@ -14,7 +14,7 @@ _DaisyOfferMapText::
 _GotMapText::
 	text "<PLAYER> got a"
 	line "@"
-	text_ram wcf4b
+	text_ram wStringBuffer
 	text "!@"
 	text_end
 

@@ -18,7 +18,7 @@ _AIBattleUseItemText::
 	prompt
 
 _TradeWentToText::
-	text_ram wcf4b
+	text_ram wStringBuffer
 	text " went"
 	line "to @"
 	text_ram wLinkEnemyTrainerName
@@ -28,7 +28,7 @@ _TradeWentToText::
 _TradeForText::
 	text "For <PLAYER>'s"
 	line "@"
-	text_ram wcf4b
+	text_ram wStringBuffer
 	text ","
 	done
 
@@ -70,7 +70,7 @@ _TradeWillTradeText::
 _TradeforText::
 	text "for <PLAYER>'s"
 	line "@"
-	text_ram wcf4b
+	text_ram wStringBuffer
 	text "."
 	done
 
@@ -106,7 +106,7 @@ _OneMoreGoSlotMachineText::
 _LinedUpText::
 	text " lined up!"
 	line "Scored @"
-	text_ram wcf4b
+	text_ram wStringBuffer
 	text " coins!"
 	done
 
@@ -1094,8 +1094,8 @@ _InsteadText::
 	cont "@"
 	text_end
 
-_CF4BText::
-	text_ram wcf4b
+_MoveNameText::
+	text_ram wStringBuffer
 	text "@"
 
 _ExclamationPoint1Text::
@@ -1559,7 +1559,7 @@ _DepositWhichMonText::
 	done
 
 _MonWasStoredText::
-	text_ram wcf4b
+	text_ram wStringBuffer
 	text " was"
 	line "stored in Box @"
 	text_ram wBoxNumString
@@ -1577,11 +1577,11 @@ _BoxFullText::
 	prompt
 
 _MonIsTakenOutText::
-	text_ram wcf4b
+	text_ram wStringBuffer
 	text " is"
 	line "taken out."
 	cont "Got @"
-	text_ram wcf4b
+	text_ram wStringBuffer
 	text "."
 	prompt
 
@@ -1606,19 +1606,17 @@ _ReleaseWhichMonText::
 _OnceReleasedText::
 	text "Once released,"
 	line "@"
-	text_ram wcf4b
+	text_ram wStringBuffer
 	text " is"
 	cont "gone forever. OK?"
 	done
 
 _MonWasReleasedText::
-	text_ram wcf4b
+	text_ram wStringBuffer
 	text " was"
 	line "released outside."
 	cont "Bye @"
-
-_CF4BExclamationText::
-	text_ram wcf4b
+	text_ram wStringBuffer
 	text "!"
 	prompt
 

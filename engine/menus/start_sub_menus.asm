@@ -367,7 +367,7 @@ StartMenu_Item::
 	ld a, [wcf91]
 	ld [wd11e], a
 	call GetItemName
-	call CopyStringToCF4B ; copy name to wcf4b
+	call CopyToStringBuffer
 	ld a, [wcf91]
 	cp BICYCLE
 	jr nz, .notBicycle2

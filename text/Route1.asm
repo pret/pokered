@@ -15,7 +15,7 @@ _Route1ViridianMartSampleText::
 _Route1Text_1cae8::
 	text "<PLAYER> got"
 	line "@"
-	text_ram wcf4b
+	text_ram wStringBuffer
 	text "!@"
 	text_end
 

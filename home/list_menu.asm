@@ -157,7 +157,7 @@ DisplayListMenuIDLoop::
 	call GetPartyMonName
 .storeChosenEntry ; store the menu entry that the player chose and return
 	ld de, wcd6d
-	call CopyStringToCF4B ; copy name to wcf4b
+	call CopyToStringBuffer
 	ld a, CHOSE_MENU_ITEM
 	ld [wMenuExitMethod], a
 	ld a, [wCurrentMenuItem]

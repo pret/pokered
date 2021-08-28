@@ -19,7 +19,7 @@ _FuchsiaHouse3Text_561c2::
 
 	para "<PLAYER> received"
 	line "a @"
-	text_ram wcf4b
+	text_ram wStringBuffer
 	text "!@"
 	text_end
 

@@ -18,7 +18,7 @@ _VermilionHouse2Text_560b6::
 
 	para "<PLAYER> received"
 	line "an @"
-	text_ram wcf4b
+	text_ram wStringBuffer
 	text "!@"
 	text_end
 

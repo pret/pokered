@@ -12,7 +12,7 @@ _SilphCo2Text_59ded::
 _ReceivedTM36Text::
 	text "<PLAYER> got"
 	line "@"
-	text_ram wcf4b
+	text_ram wStringBuffer
 	text "!@"
 	text_end
 

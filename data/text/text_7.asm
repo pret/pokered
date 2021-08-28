@@ -3,7 +3,7 @@ _ItemUseText001::
 	text_end
 
 _ItemUseText002::
-	text_ram wcf4b
+	text_ram wStringBuffer
 	text "!"
 	done
 
@@ -12,7 +12,7 @@ _GotOnBicycleText1::
 	text_end
 
 _GotOnBicycleText2::
-	text_ram wcf4b
+	text_ram wStringBuffer
 	text "!"
 	prompt
 
@@ -22,7 +22,7 @@ _GotOffBicycleText1::
 
 _GotOffBicycleText2::
 	text "the @"
-	text_ram wcf4b
+	text_ram wStringBuffer
 	text "."
 	prompt
 
@@ -36,7 +36,7 @@ _ThrewAwayItemText::
 _IsItOKToTossItemText::
 	text "Is it OK to toss"
 	line "@"
-	text_ram wcf4b
+	text_ram wStringBuffer
 	text "?"
 	prompt
 
@@ -49,7 +49,7 @@ _AlreadyKnowsText::
 	text_ram wcd6d
 	text " knows"
 	line "@"
-	text_ram wcf4b
+	text_ram wStringBuffer
 	text "!"
 	prompt
 

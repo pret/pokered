@@ -751,7 +751,7 @@ PrintStatText:
 	jr z, .findStatName_outer
 	jr .findStatName_inner
 .foundStatName
-	ld de, wcf4b
+	ld de, wStringBuffer
 	ld bc, $a
 	jp CopyData
 
