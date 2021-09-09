@@ -143,7 +143,7 @@ ENDR
 ; The high byte of a pointer to anywhere within wSpriteStateData1 can be incremented
 ; to reach within wSpriteStateData2, and vice-versa for decrementing.
 ASSERT HIGH(wSpriteStateData1) + 1 == HIGH(wSpriteStateData2)
-ASSERT LOW(wSpriteStateData1) == 0
+ASSERT LOW(wSpriteStateData1) == 0 && LOW(wSpriteStateData2) == 0
 
 wSpriteDataEnd::
 
