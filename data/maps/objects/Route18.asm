@@ -7,9 +7,9 @@ Route18_Object:
 	warp 40,  8, 2, ROUTE_18_GATE_1F
 	warp 40,  9, 3, ROUTE_18_GATE_1F
 
-	def_signs
-	sign 43,  7, 4 ; Route18Text4
-	sign 33,  5, 5 ; Route18Text5
+	def_bg_events
+	bg_event 43,  7, 4 ; Route18Text4
+	bg_event 33,  5, 5 ; Route18Text5
 
 	def_objects
 	object SPRITE_COOLTRAINER_M, 36, 11, STAY, RIGHT, 1, OPP_BIRD_KEEPER, 8

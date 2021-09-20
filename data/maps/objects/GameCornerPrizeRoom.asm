@@ -5,10 +5,10 @@ GameCornerPrizeRoom_Object:
 	warp  4,  7, 9, LAST_MAP
 	warp  5,  7, 9, LAST_MAP
 
-	def_signs
-	sign  2,  2, 3 ; CeladonPrizeRoomText3
-	sign  4,  2, 4 ; CeladonPrizeRoomText4
-	sign  6,  2, 5 ; CeladonPrizeRoomText5
+	def_bg_events
+	bg_event  2,  2, 3 ; CeladonPrizeRoomText3
+	bg_event  4,  2, 4 ; CeladonPrizeRoomText4
+	bg_event  6,  2, 5 ; CeladonPrizeRoomText5
 
 	def_objects
 	object SPRITE_BALDING_GUY, 1, 4, STAY, NONE, 1 ; person

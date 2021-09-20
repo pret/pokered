@@ -6,7 +6,7 @@ VictoryRoad1F_Object:
 	warp  9, 17, 2, LAST_MAP
 	warp  1,  1, 0, VICTORY_ROAD_2F
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_COOLTRAINER_F, 7, 5, STAY, RIGHT, 1, OPP_COOLTRAINER_F, 5

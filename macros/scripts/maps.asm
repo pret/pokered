@@ -49,7 +49,7 @@ _WARP_{d:{_NUM_WARPS}}_Y = \2
 {_NUM_WARPS} = {_NUM_WARPS} + 1
 ENDM
 
-def_signs: MACRO
+def_bg_events: MACRO
 REDEF _NUM_SIGNS EQUS "_NUM_SIGNS_\@"
 	db {_NUM_SIGNS}
 {_NUM_SIGNS} = 0
@@ -58,7 +58,7 @@ ENDM
 ;\1 x position
 ;\2 y position
 ;\3 sign id
-sign: MACRO
+bg_event: MACRO
 	db \2, \1, \3
 {_NUM_SIGNS} = {_NUM_SIGNS} + 1
 ENDM

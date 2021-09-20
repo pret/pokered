@@ -3,7 +3,7 @@ Route24_Object:
 
 	def_warps
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_COOLTRAINER_M, 11, 15, STAY, LEFT, 1, OPP_ROCKET, 6

@@ -5,7 +5,7 @@ VermilionDock_Object:
 	warp 14,  0, 5, LAST_MAP
 	warp 14,  2, 1, SS_ANNE_1F
 
-	def_signs
+	def_bg_events
 
 	def_objects
 

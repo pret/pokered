@@ -5,7 +5,7 @@ BikeShop_Object:
 	warp  2,  7, 4, LAST_MAP
 	warp  3,  7, 4, LAST_MAP
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_BIKE_SHOP_CLERK, 6, 2, STAY, NONE, 1 ; person

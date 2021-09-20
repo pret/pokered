@@ -6,7 +6,7 @@ CopycatsHouse1F_Object:
 	warp  3,  7, 0, LAST_MAP
 	warp  7,  1, 0, COPYCATS_HOUSE_2F
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_MIDDLE_AGED_WOMAN, 2, 2, STAY, DOWN, 1 ; person

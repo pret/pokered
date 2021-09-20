@@ -14,7 +14,7 @@ SSAnne1F_Object:
 	warp 37, 15, 5, SS_ANNE_B1F
 	warp  3, 16, 0, SS_ANNE_KITCHEN
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_WAITER, 12, 6, WALK, LEFT_RIGHT, 1 ; person

@@ -7,7 +7,7 @@ SafariZoneGate_Object:
 	warp  3,  0, 0, SAFARI_ZONE_CENTER
 	warp  4,  0, 1, SAFARI_ZONE_CENTER
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_SAFARI_ZONE_WORKER, 6, 2, STAY, LEFT, 1 ; person

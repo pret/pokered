@@ -8,7 +8,7 @@ RocketHideoutB2F_Object:
 	warp 21, 22, 3, ROCKET_HIDEOUT_B1F
 	warp 25, 19, 1, ROCKET_HIDEOUT_ELEVATOR
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_ROCKET, 20, 12, STAY, DOWN, 1, OPP_ROCKET, 13

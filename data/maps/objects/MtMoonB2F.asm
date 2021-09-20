@@ -7,7 +7,7 @@ MtMoonB2F_Object:
 	warp 15, 27, 5, MT_MOON_B1F
 	warp  5,  7, 6, MT_MOON_B1F
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_SUPER_NERD, 12, 8, STAY, RIGHT, 1, OPP_SUPER_NERD, 2

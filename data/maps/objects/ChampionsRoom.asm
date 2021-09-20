@@ -7,7 +7,7 @@ ChampionsRoom_Object:
 	warp  3,  0, 0, HALL_OF_FAME
 	warp  4,  0, 0, HALL_OF_FAME
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_BLUE, 4, 2, STAY, DOWN, 1 ; person

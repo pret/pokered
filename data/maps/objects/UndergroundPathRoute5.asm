@@ -6,7 +6,7 @@ UndergroundPathRoute5_Object:
 	warp  4,  7, 3, LAST_MAP
 	warp  4,  4, 0, UNDERGROUND_PATH_NORTH_SOUTH
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_LITTLE_GIRL, 2, 3, STAY, NONE, 1 ; person

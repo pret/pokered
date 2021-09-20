@@ -8,8 +8,8 @@ Route7_Object:
 	warp 11, 10, 1, ROUTE_7_GATE
 	warp  5, 13, 0, UNDERGROUND_PATH_ROUTE_7
 
-	def_signs
-	sign  3, 13, 1 ; Route7Text1
+	def_bg_events
+	bg_event  3, 13, 1 ; Route7Text1
 
 	def_objects
 

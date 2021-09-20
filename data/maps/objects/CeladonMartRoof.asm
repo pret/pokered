@@ -4,11 +4,11 @@ CeladonMartRoof_Object:
 	def_warps
 	warp 15,  2, 0, CELADON_MART_5F
 
-	def_signs
-	sign 10,  1, 3 ; CeladonMartRoofText3
-	sign 11,  1, 4 ; CeladonMartRoofText4
-	sign 12,  2, 5 ; CeladonMartRoofText5
-	sign 13,  2, 6 ; CeladonMartRoofText6
+	def_bg_events
+	bg_event 10,  1, 3 ; CeladonMartRoofText3
+	bg_event 11,  1, 4 ; CeladonMartRoofText4
+	bg_event 12,  2, 5 ; CeladonMartRoofText5
+	bg_event 13,  2, 6 ; CeladonMartRoofText6
 
 	def_objects
 	object SPRITE_SUPER_NERD, 10, 4, STAY, LEFT, 1 ; person

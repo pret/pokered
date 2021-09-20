@@ -4,8 +4,8 @@ Route22_Object:
 	def_warps
 	warp  8,  5, 0, ROUTE_22_GATE
 
-	def_signs
-	sign  7, 11, 3 ; Route22FrontGateText
+	def_bg_events
+	bg_event  7, 11, 3 ; Route22FrontGateText
 
 	def_objects
 	object SPRITE_BLUE, 25, 5, STAY, NONE, 1 ; person

@@ -5,8 +5,8 @@ RocketHideoutElevator_Object:
 	warp  2,  1, 2, ROCKET_HIDEOUT_B1F
 	warp  3,  1, 4, ROCKET_HIDEOUT_B1F
 
-	def_signs
-	sign  1,  1, 1 ; RocketHideoutElevatorText1
+	def_bg_events
+	bg_event  1,  1, 1 ; RocketHideoutElevatorText1
 
 	def_objects
 

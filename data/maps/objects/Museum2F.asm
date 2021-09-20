@@ -4,9 +4,9 @@ Museum2F_Object:
 	def_warps
 	warp  7,  7, 4, MUSEUM_1F
 
-	def_signs
-	sign 11,  2, 6 ; Museum2FText6
-	sign  2,  5, 7 ; Museum2FText7
+	def_bg_events
+	bg_event 11,  2, 6 ; Museum2FText6
+	bg_event  2,  5, 7 ; Museum2FText7
 
 	def_objects
 	object SPRITE_YOUNGSTER, 1, 7, WALK, LEFT_RIGHT, 1 ; person

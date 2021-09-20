@@ -5,7 +5,7 @@ PokemonTower4F_Object:
 	warp  3,  9, 0, POKEMON_TOWER_5F
 	warp 18,  9, 1, POKEMON_TOWER_3F
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_CHANNELER, 5, 10, STAY, RIGHT, 1, OPP_CHANNELER, 9

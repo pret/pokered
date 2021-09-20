@@ -11,7 +11,7 @@ PokemonMansion1F_Object:
 	warp 26, 27, 0, LAST_MAP
 	warp 27, 27, 0, LAST_MAP
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_SCIENTIST, 17, 17, STAY, LEFT, 1, OPP_SCIENTIST, 4

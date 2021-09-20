@@ -5,7 +5,7 @@ FuchsiaBillsGrandpasHouse_Object:
 	warp  2,  7, 1, LAST_MAP
 	warp  3,  7, 1, LAST_MAP
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_MIDDLE_AGED_WOMAN, 2, 3, STAY, RIGHT, 1 ; person

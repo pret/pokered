@@ -105,7 +105,7 @@ OverworldLoopLessDelay::
 	jr nz, .checkForOpponent
 	lda_coord 8, 9
 	ld [wTilePlayerStandingOn], a ; unused?
-	call DisplayTextID ; display either the start menu or the NPC/sign text
+	call DisplayTextID ; display either the start menu or the NPC/bg_event text
 	ld a, [wEnteringCableClub]
 	and a
 	jr z, .checkForOpponent
@@ -1072,7 +1072,7 @@ LoadEastWestConnectionsTileMap::
 	jr nz, LoadEastWestConnectionsTileMap
 	ret
 
-; function to check if there is a sign or sprite in front of the player
+; function to check if there is a bg_event or sprite in front of the player
 ; if so, it is stored in [hSpriteIndexOrTextID]
 ; if not, [hSpriteIndexOrTextID] is set to 0
 IsSpriteOrSignInFrontOfPlayer::
@@ -1089,17 +1089,17 @@ IsSpriteOrSignInFrontOfPlayer::
 	ld c, 0
 .signLoop
 	inc c
-	ld a, [hli] ; sign Y
+	ld a, [hli] ; bg_event Y
 	cp d
 	jr z, .yCoordMatched
 	inc hl
 	jr .retry
 .yCoordMatched
-	ld a, [hli] ; sign X
+	ld a, [hli] ; bg_event X
 	cp e
 	jr nz, .retry
 .xCoordMatched
-; found sign
+; found bg_event
 	push hl
 	push bc
 	ld hl, wSignTextIDs
@@ -1107,7 +1107,7 @@ IsSpriteOrSignInFrontOfPlayer::
 	dec c
 	add hl, bc
 	ld a, [hl]
-	ldh [hSpriteIndexOrTextID], a ; store sign text ID
+	ldh [hSpriteIndexOrTextID], a ; store bg_event text ID
 	pop bc
 	pop hl
 	ret
@@ -2258,7 +2258,7 @@ LoadMapHeader::
 .finishUp
 	predef LoadTilesetHeader
 	callfar LoadWildData
-	pop hl ; restore hl from before going to the warp/sign/sprite data (this value was saved for seemingly no purpose)
+	pop hl ; restore hl from before going to the warp/bg_event/sprite data (this value was saved for seemingly no purpose)
 	ld a, [wCurMapHeight] ; map height in 4x4 tile blocks
 	add a ; double it
 	ld [wCurrentMapHeight2], a ; store map height in 2x2 tile blocks

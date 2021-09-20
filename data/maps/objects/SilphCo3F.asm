@@ -13,7 +13,7 @@ SilphCo3F_Object:
 	warp 11, 11, 4, SILPH_CO_7F
 	warp 27, 15, 3, SILPH_CO_3F
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_SILPH_WORKER, 24, 8, STAY, NONE, 1 ; person

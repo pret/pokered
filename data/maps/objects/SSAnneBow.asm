@@ -5,7 +5,7 @@ SSAnneBow_Object:
 	warp 13,  6, 0, SS_ANNE_3F
 	warp 13,  7, 0, SS_ANNE_3F
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_SUPER_NERD, 5, 2, STAY, UP, 1 ; person

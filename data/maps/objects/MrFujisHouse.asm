@@ -5,7 +5,7 @@ MrFujisHouse_Object:
 	warp  2,  7, 2, LAST_MAP
 	warp  3,  7, 2, LAST_MAP
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_SUPER_NERD, 3, 5, STAY, NONE, 1 ; person

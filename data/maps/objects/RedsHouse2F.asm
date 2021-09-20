@@ -4,7 +4,7 @@ RedsHouse2F_Object:
 	def_warps
 	warp  7,  1, 2, REDS_HOUSE_1F
 
-	def_signs
+	def_bg_events
 
 	def_objects
 

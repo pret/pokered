@@ -4,9 +4,9 @@ CopycatsHouse2F_Object:
 	def_warps
 	warp  7,  1, 2, COPYCATS_HOUSE_1F
 
-	def_signs
-	sign  3,  5, 6 ; CopycatsHouse2FText6
-	sign  0,  1, 7 ; CopycatsHouse2FText7
+	def_bg_events
+	bg_event  3,  5, 6 ; CopycatsHouse2FText6
+	bg_event  0,  1, 7 ; CopycatsHouse2FText7
 
 	def_objects
 	object SPRITE_BRUNETTE_GIRL, 4, 3, WALK, ANY_DIR, 1 ; person

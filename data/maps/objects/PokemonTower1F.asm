@@ -6,7 +6,7 @@ PokemonTower1F_Object:
 	warp 11, 17, 1, LAST_MAP
 	warp 18,  9, 1, POKEMON_TOWER_2F
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_LINK_RECEPTIONIST, 15, 13, STAY, UP, 1 ; person

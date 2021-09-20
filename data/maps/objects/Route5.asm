@@ -8,8 +8,8 @@ Route5_Object:
 	warp 17, 27, 0, UNDERGROUND_PATH_ROUTE_5
 	warp 10, 21, 0, DAYCARE
 
-	def_signs
-	sign 17, 29, 1 ; Route5Text1
+	def_bg_events
+	bg_event 17, 29, 1 ; Route5Text1
 
 	def_objects
 

@@ -7,7 +7,7 @@ LoreleisRoom_Object:
 	warp  4,  0, 0, BRUNOS_ROOM
 	warp  5,  0, 1, BRUNOS_ROOM
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_LORELEI, 5, 2, STAY, DOWN, 1, OPP_LORELEI, 1

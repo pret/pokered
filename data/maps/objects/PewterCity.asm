@@ -10,14 +10,14 @@ PewterCity_Object:
 	warp  7, 29, 0, PEWTER_SPEECH_HOUSE
 	warp 13, 25, 0, PEWTER_POKECENTER
 
-	def_signs
-	sign 19, 29,  6 ; PewterCityText6
-	sign 33, 19,  7 ; PewterCityText7
-	sign 24, 17,  8 ; MartSignText
-	sign 14, 25,  9 ; PokeCenterSignText
-	sign 15,  9, 10 ; PewterCityText10
-	sign 11, 17, 11 ; PewterCityText11
-	sign 25, 23, 12 ; PewterCityText12
+	def_bg_events
+	bg_event 19, 29,  6 ; PewterCityText6
+	bg_event 33, 19,  7 ; PewterCityText7
+	bg_event 24, 17,  8 ; MartSignText
+	bg_event 14, 25,  9 ; PokeCenterSignText
+	bg_event 15,  9, 10 ; PewterCityText10
+	bg_event 11, 17, 11 ; PewterCityText11
+	bg_event 25, 23, 12 ; PewterCityText12
 
 	def_objects
 	object SPRITE_COOLTRAINER_F, 8, 15, STAY, NONE, 1 ; person

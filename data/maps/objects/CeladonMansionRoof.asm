@@ -6,8 +6,8 @@ CeladonMansionRoof_Object:
 	warp  2,  1, 2, CELADON_MANSION_3F
 	warp  2,  7, 0, CELADON_MANSION_ROOF_HOUSE
 
-	def_signs
-	sign  3,  7, 1 ; CeladonMansion4Text1
+	def_bg_events
+	bg_event  3,  7, 1 ; CeladonMansion4Text1
 
 	def_objects
 

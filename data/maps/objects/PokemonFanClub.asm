@@ -5,9 +5,9 @@ PokemonFanClub_Object:
 	warp  2,  7, 1, LAST_MAP
 	warp  3,  7, 1, LAST_MAP
 
-	def_signs
-	sign  1,  0, 7 ; FanClubText7
-	sign  6,  0, 8 ; FanClubText8
+	def_bg_events
+	bg_event  1,  0, 7 ; FanClubText7
+	bg_event  6,  0, 8 ; FanClubText8
 
 	def_objects
 	object SPRITE_FISHER, 6, 3, STAY, LEFT, 1 ; person

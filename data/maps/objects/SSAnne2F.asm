@@ -12,7 +12,7 @@ SSAnne2F_Object:
 	warp  2, 12,  1, SS_ANNE_3F
 	warp 36,  4,  0, SS_ANNE_CAPTAINS_ROOM
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_WAITER, 3, 7, WALK, UP_DOWN, 1 ; person

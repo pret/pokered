@@ -7,9 +7,9 @@ Route12_Object:
 	warp 10, 21, 2, ROUTE_12_GATE_1F
 	warp 11, 77, 0, ROUTE_12_SUPER_ROD_HOUSE
 
-	def_signs
-	sign 13, 13, 11 ; Route12Text11
-	sign 11, 63, 12 ; Route12Text12
+	def_bg_events
+	bg_event 13, 13, 11 ; Route12Text11
+	bg_event 11, 63, 12 ; Route12Text12
 
 	def_objects
 	object SPRITE_SNORLAX, 10, 62, STAY, DOWN, 1 ; person

@@ -5,7 +5,7 @@ PewterGym_Object:
 	warp  4, 13, 2, LAST_MAP
 	warp  5, 13, 2, LAST_MAP
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_SUPER_NERD, 4, 1, STAY, DOWN, 1, OPP_BROCK, 1

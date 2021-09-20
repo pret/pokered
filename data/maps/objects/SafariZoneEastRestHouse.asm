@@ -5,7 +5,7 @@ SafariZoneEastRestHouse_Object:
 	warp  2,  7, 4, SAFARI_ZONE_EAST
 	warp  3,  7, 4, SAFARI_ZONE_EAST
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_SCIENTIST, 1, 3, WALK, UP_DOWN, 1 ; person

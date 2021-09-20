@@ -5,7 +5,7 @@ PokemonTower2F_Object:
 	warp  3,  9, 0, POKEMON_TOWER_3F
 	warp 18,  9, 2, POKEMON_TOWER_1F
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_BLUE, 14, 5, STAY, NONE, 1 ; person

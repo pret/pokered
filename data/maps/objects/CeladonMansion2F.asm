@@ -7,8 +7,8 @@ CeladonMansion2F_Object:
 	warp  2,  1, 4, CELADON_MANSION_1F
 	warp  4,  1, 3, CELADON_MANSION_3F
 
-	def_signs
-	sign  4,  9, 1 ; CeladonMansion2Text1
+	def_bg_events
+	bg_event  4,  9, 1 ; CeladonMansion2Text1
 
 	def_objects
 

@@ -5,7 +5,7 @@ FuchsiaGym_Object:
 	warp  4, 17, 5, LAST_MAP
 	warp  5, 17, 5, LAST_MAP
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_KOGA, 4, 10, STAY, DOWN, 1, OPP_KOGA, 1

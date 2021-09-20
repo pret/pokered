@@ -6,7 +6,7 @@ PowerPlant_Object:
 	warp  5, 35, 3, LAST_MAP
 	warp  0, 11, 3, LAST_MAP
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_POKE_BALL, 9, 20, STAY, NONE, 1, VOLTORB, 40

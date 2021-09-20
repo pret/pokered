@@ -7,7 +7,7 @@ SilphCo11F_Object:
 	warp  5,  5, 9, LAST_MAP
 	warp  3,  2, 3, SILPH_CO_7F
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_SILPH_PRESIDENT, 7, 5, STAY, DOWN, 1 ; person

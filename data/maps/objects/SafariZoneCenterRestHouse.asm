@@ -5,7 +5,7 @@ SafariZoneCenterRestHouse_Object:
 	warp  2,  7, 8, SAFARI_ZONE_CENTER
 	warp  3,  7, 8, SAFARI_ZONE_CENTER
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_GIRL, 3, 2, STAY, DOWN, 1 ; person

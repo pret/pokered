@@ -5,7 +5,7 @@ PokemonTower5F_Object:
 	warp  3,  9, 0, POKEMON_TOWER_4F
 	warp 18,  9, 0, POKEMON_TOWER_6F
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_CHANNELER, 12, 8, STAY, NONE, 1 ; person

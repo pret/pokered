@@ -7,7 +7,7 @@ VictoryRoad3F_Object:
 	warp 27, 15, 4, VICTORY_ROAD_2F
 	warp  2,  0, 6, VICTORY_ROAD_2F
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_COOLTRAINER_M, 28, 5, STAY, LEFT, 1, OPP_COOLTRAINER_M, 2

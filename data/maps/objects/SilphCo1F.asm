@@ -8,7 +8,7 @@ SilphCo1F_Object:
 	warp 20,  0, 0, SILPH_CO_ELEVATOR
 	warp 16, 10, 6, SILPH_CO_3F
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_LINK_RECEPTIONIST, 4, 2, STAY, DOWN, 1 ; person

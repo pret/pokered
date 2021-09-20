@@ -5,7 +5,7 @@ CeruleanGym_Object:
 	warp  4, 13, 3, LAST_MAP
 	warp  5, 13, 3, LAST_MAP
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_BRUNETTE_GIRL, 4, 2, STAY, DOWN, 1, OPP_MISTY, 1

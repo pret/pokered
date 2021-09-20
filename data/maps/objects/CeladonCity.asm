@@ -16,16 +16,16 @@ CeladonCity_Object:
 	warp 35, 27, 0, CELADON_CHIEF_HOUSE
 	warp 43, 27, 0, CELADON_HOTEL
 
-	def_signs
-	sign 27, 15, 10 ; CeladonCityText10
-	sign 19, 15, 11 ; CeladonCityText11
-	sign 42,  9, 12 ; PokeCenterSignText
-	sign 13, 29, 13 ; CeladonCityText13
-	sign 21,  9, 14 ; CeladonCityText14
-	sign 12, 13, 15 ; CeladonCityText15
-	sign 39, 21, 16 ; CeladonCityText16
-	sign 33, 21, 17 ; CeladonCityText17
-	sign 27, 21, 18 ; CeladonCityText18
+	def_bg_events
+	bg_event 27, 15, 10 ; CeladonCityText10
+	bg_event 19, 15, 11 ; CeladonCityText11
+	bg_event 42,  9, 12 ; PokeCenterSignText
+	bg_event 13, 29, 13 ; CeladonCityText13
+	bg_event 21,  9, 14 ; CeladonCityText14
+	bg_event 12, 13, 15 ; CeladonCityText15
+	bg_event 39, 21, 16 ; CeladonCityText16
+	bg_event 33, 21, 17 ; CeladonCityText17
+	bg_event 27, 21, 18 ; CeladonCityText18
 
 	def_objects
 	object SPRITE_LITTLE_GIRL, 8, 17, WALK, ANY_DIR, 1 ; person

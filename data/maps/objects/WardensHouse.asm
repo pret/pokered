@@ -5,9 +5,9 @@ WardensHouse_Object:
 	warp  4,  7, 3, LAST_MAP
 	warp  5,  7, 3, LAST_MAP
 
-	def_signs
-	sign  4,  3, 4 ; FuchsiaHouse2Text4
-	sign  5,  3, 5 ; FuchsiaHouse2Text5
+	def_bg_events
+	bg_event  4,  3, 4 ; FuchsiaHouse2Text4
+	bg_event  5,  3, 5 ; FuchsiaHouse2Text5
 
 	def_objects
 	object SPRITE_WARDEN, 2, 3, STAY, NONE, 1 ; person

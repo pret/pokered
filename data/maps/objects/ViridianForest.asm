@@ -9,13 +9,13 @@ ViridianForest_Object:
 	warp 17, 47, 1, VIRIDIAN_FOREST_SOUTH_GATE
 	warp 18, 47, 1, VIRIDIAN_FOREST_SOUTH_GATE
 
-	def_signs
-	sign 24, 40,  9 ; ViridianForestText9
-	sign 16, 32, 10 ; ViridianForestText10
-	sign 26, 17, 11 ; ViridianForestText11
-	sign  4, 24, 12 ; ViridianForestText12
-	sign 18, 45, 13 ; ViridianForestText13
-	sign  2,  1, 14 ; ViridianForestText14
+	def_bg_events
+	bg_event 24, 40,  9 ; ViridianForestText9
+	bg_event 16, 32, 10 ; ViridianForestText10
+	bg_event 26, 17, 11 ; ViridianForestText11
+	bg_event  4, 24, 12 ; ViridianForestText12
+	bg_event 18, 45, 13 ; ViridianForestText13
+	bg_event  2,  1, 14 ; ViridianForestText14
 
 	def_objects
 	object SPRITE_YOUNGSTER, 16, 43, STAY, NONE, 1 ; person

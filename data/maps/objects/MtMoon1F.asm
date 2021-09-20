@@ -8,8 +8,8 @@ MtMoon1F_Object:
 	warp 17, 11, 2, MT_MOON_B1F
 	warp 25, 15, 3, MT_MOON_B1F
 
-	def_signs
-	sign 15, 23, 14 ; MtMoon1Text14
+	def_bg_events
+	bg_event 15, 23, 14 ; MtMoon1Text14
 
 	def_objects
 	object SPRITE_HIKER, 5, 6, STAY, DOWN, 1, OPP_HIKER, 1

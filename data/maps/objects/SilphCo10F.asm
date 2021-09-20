@@ -9,7 +9,7 @@ SilphCo10F_Object:
 	warp 13, 15, 5, SILPH_CO_4F
 	warp 13,  7, 6, SILPH_CO_4F
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_ROCKET, 1, 9, STAY, RIGHT, 1, OPP_ROCKET, 39

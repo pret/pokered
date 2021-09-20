@@ -5,7 +5,7 @@ ViridianGym_Object:
 	warp 16, 17, 4, LAST_MAP
 	warp 17, 17, 4, LAST_MAP
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_GIOVANNI, 2, 1, STAY, DOWN, 1, OPP_GIOVANNI, 3

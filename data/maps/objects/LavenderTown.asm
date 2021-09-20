@@ -9,13 +9,13 @@ LavenderTown_Object:
 	warp  3, 13, 0, LAVENDER_CUBONE_HOUSE
 	warp  7, 13, 0, NAME_RATERS_HOUSE
 
-	def_signs
-	sign 11,  9, 4 ; LavenderTownText4
-	sign  9,  3, 5 ; LavenderTownText5
-	sign 16, 13, 6 ; MartSignText
-	sign  4,  5, 7 ; PokeCenterSignText
-	sign  5,  9, 8 ; LavenderTownText8
-	sign 17,  7, 9 ; LavenderTownText9
+	def_bg_events
+	bg_event 11,  9, 4 ; LavenderTownText4
+	bg_event  9,  3, 5 ; LavenderTownText5
+	bg_event 16, 13, 6 ; MartSignText
+	bg_event  4,  5, 7 ; PokeCenterSignText
+	bg_event  5,  9, 8 ; LavenderTownText8
+	bg_event 17,  7, 9 ; LavenderTownText9
 
 	def_objects
 	object SPRITE_LITTLE_GIRL, 15, 9, WALK, ANY_DIR, 1 ; person

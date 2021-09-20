@@ -7,7 +7,7 @@ PokemonMansion2F_Object:
 	warp 25, 14, 2, POKEMON_MANSION_3F
 	warp  6,  1, 1, POKEMON_MANSION_3F
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_SUPER_NERD, 3, 17, WALK, LEFT_RIGHT, 1, OPP_BURGLAR, 7

@@ -7,7 +7,7 @@ AgathasRoom_Object:
 	warp  4,  0, 0, LANCES_ROOM
 	warp  5,  0, 0, LANCES_ROOM
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_AGATHA, 5, 2, STAY, DOWN, 1, OPP_AGATHA, 1

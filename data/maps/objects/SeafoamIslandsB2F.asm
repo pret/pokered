@@ -10,7 +10,7 @@ SeafoamIslandsB2F_Object:
 	warp 25, 11, 5, SEAFOAM_ISLANDS_B1F
 	warp 25, 14, 4, SEAFOAM_ISLANDS_B3F
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_BOULDER, 18, 6, STAY, BOULDER_MOVEMENT_BYTE_2, 1 ; person

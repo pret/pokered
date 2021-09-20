@@ -8,7 +8,7 @@ SilphCo9F_Object:
 	warp  9,  3, 7, SILPH_CO_3F
 	warp 17, 15, 4, SILPH_CO_5F
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_NURSE, 3, 14, STAY, DOWN, 1 ; person

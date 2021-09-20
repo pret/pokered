@@ -5,7 +5,7 @@ CeladonMansionRoofHouse_Object:
 	warp  2,  7, 2, CELADON_MANSION_ROOF
 	warp  3,  7, 2, CELADON_MANSION_ROOF
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_HIKER, 2, 2, STAY, DOWN, 1 ; person

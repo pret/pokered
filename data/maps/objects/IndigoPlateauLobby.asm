@@ -6,7 +6,7 @@ IndigoPlateauLobby_Object:
 	warp  8, 11, 1, LAST_MAP
 	warp  8,  0, 0, LORELEIS_ROOM
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_NURSE, 7, 5, STAY, DOWN, 1 ; person

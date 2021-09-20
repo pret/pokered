@@ -8,7 +8,7 @@ Museum1F_Object:
 	warp 17,  7, 1, LAST_MAP
 	warp  7,  7, 0, MUSEUM_2F
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_SCIENTIST, 12, 4, STAY, LEFT, 1 ; person

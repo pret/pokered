@@ -6,7 +6,7 @@ FuchsiaGoodRodHouse_Object:
 	warp  2,  7, 7, LAST_MAP
 	warp  3,  7, 7, LAST_MAP
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_FISHING_GURU, 5, 3, STAY, RIGHT, 1 ; person

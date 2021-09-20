@@ -5,7 +5,7 @@ PewterNidoranHouse_Object:
 	warp  2,  7, 3, LAST_MAP
 	warp  3,  7, 3, LAST_MAP
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_MONSTER, 4, 5, STAY, LEFT, 1 ; person

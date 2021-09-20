@@ -8,8 +8,8 @@ Route11_Object:
 	warp 58,  9, 3, ROUTE_11_GATE_1F
 	warp  4,  5, 0, DIGLETTS_CAVE_ROUTE_11
 
-	def_signs
-	sign  1,  5, 11 ; Route11Text11
+	def_bg_events
+	bg_event  1,  5, 11 ; Route11Text11
 
 	def_objects
 	object SPRITE_GAMBLER, 10, 14, STAY, DOWN, 1, OPP_GAMBLER, 1

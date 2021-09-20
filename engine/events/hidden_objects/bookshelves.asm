@@ -1,4 +1,4 @@
-; prints text for bookshelves in buildings without sign events
+; prints text for bookshelves in buildings without bg_event events
 PrintBookshelfText::
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP

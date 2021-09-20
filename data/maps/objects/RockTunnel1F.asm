@@ -11,8 +11,8 @@ RockTunnel1F_Object:
 	warp 17, 11, 2, ROCK_TUNNEL_B1F
 	warp 37, 17, 3, ROCK_TUNNEL_B1F
 
-	def_signs
-	sign 11, 29, 8 ; RockTunnel1Text8
+	def_bg_events
+	bg_event 11, 29, 8 ; RockTunnel1Text8
 
 	def_objects
 	object SPRITE_HIKER, 7, 5, STAY, DOWN, 1, OPP_HIKER, 12

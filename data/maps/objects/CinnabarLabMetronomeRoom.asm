@@ -5,10 +5,10 @@ CinnabarLabMetronomeRoom_Object:
 	warp  2,  7, 3, CINNABAR_LAB
 	warp  3,  7, 3, CINNABAR_LAB
 
-	def_signs
-	sign  0,  4, 3 ; Lab3Text3
-	sign  1,  4, 4 ; Lab3Text4
-	sign  2,  1, 5 ; Lab3Text5
+	def_bg_events
+	bg_event  0,  4, 3 ; Lab3Text3
+	bg_event  1,  4, 4 ; Lab3Text4
+	bg_event  2,  1, 5 ; Lab3Text5
 
 	def_objects
 	object SPRITE_SCIENTIST, 7, 2, STAY, DOWN, 1 ; person

@@ -12,12 +12,12 @@ SafariZoneNorth_Object:
 	warp 39, 31, 1, SAFARI_ZONE_EAST
 	warp 35,  3, 0, SAFARI_ZONE_NORTH_REST_HOUSE
 
-	def_signs
-	sign 36,  4, 3 ; SafariZoneNorthText3
-	sign  4, 25, 4 ; SafariZoneNorthText4
-	sign 13, 31, 5 ; SafariZoneNorthText5
-	sign 19, 33, 6 ; SafariZoneNorthText6
-	sign 26, 28, 7 ; SafariZoneNorthText7
+	def_bg_events
+	bg_event 36,  4, 3 ; SafariZoneNorthText3
+	bg_event  4, 25, 4 ; SafariZoneNorthText4
+	bg_event 13, 31, 5 ; SafariZoneNorthText5
+	bg_event 19, 33, 6 ; SafariZoneNorthText6
+	bg_event 26, 28, 7 ; SafariZoneNorthText7
 
 	def_objects
 	object SPRITE_POKE_BALL, 25, 1, STAY, NONE, 1, PROTEIN

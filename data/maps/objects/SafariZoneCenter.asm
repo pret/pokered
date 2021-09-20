@@ -12,9 +12,9 @@ SafariZoneCenter_Object:
 	warp 29, 11, 3, SAFARI_ZONE_EAST
 	warp 17, 19, 0, SAFARI_ZONE_CENTER_REST_HOUSE
 
-	def_signs
-	sign 18, 20, 2 ; SafariZoneCenterText2
-	sign 14, 22, 3 ; SafariZoneCenterText3
+	def_bg_events
+	bg_event 18, 20, 2 ; SafariZoneCenterText2
+	bg_event 14, 22, 3 ; SafariZoneCenterText3
 
 	def_objects
 	object SPRITE_POKE_BALL, 14, 10, STAY, NONE, 1, NUGGET

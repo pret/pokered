@@ -5,7 +5,7 @@ CeladonPokecenter_Object:
 	warp  3,  7, 5, LAST_MAP
 	warp  4,  7, 5, LAST_MAP
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_NURSE, 3, 1, STAY, DOWN, 1 ; person

@@ -7,7 +7,7 @@ ViridianForestSouthGate_Object:
 	warp  4,  7, 5, LAST_MAP
 	warp  5,  7, 5, LAST_MAP
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_GIRL, 8, 4, STAY, LEFT, 1 ; person

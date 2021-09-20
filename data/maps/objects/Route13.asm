@@ -3,10 +3,10 @@ Route13_Object:
 
 	def_warps
 
-	def_signs
-	sign 15, 13, 11 ; Route13Text11
-	sign 33,  5, 12 ; Route13Text12
-	sign 31, 11, 13 ; Route13Text13
+	def_bg_events
+	bg_event 15, 13, 11 ; Route13Text11
+	bg_event 33,  5, 12 ; Route13Text12
+	bg_event 31, 11, 13 ; Route13Text13
 
 	def_objects
 	object SPRITE_COOLTRAINER_M, 49, 10, STAY, RIGHT, 1, OPP_BIRD_KEEPER, 1

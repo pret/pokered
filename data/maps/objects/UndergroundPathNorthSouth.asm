@@ -5,7 +5,7 @@ UndergroundPathNorthSouth_Object:
 	warp  5,  4, 2, UNDERGROUND_PATH_ROUTE_5
 	warp  2, 41, 2, UNDERGROUND_PATH_ROUTE_6
 
-	def_signs
+	def_bg_events
 
 	def_objects
 

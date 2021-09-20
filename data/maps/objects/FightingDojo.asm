@@ -5,7 +5,7 @@ FightingDojo_Object:
 	warp  4, 11, 1, LAST_MAP
 	warp  5, 11, 1, LAST_MAP
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_HIKER, 5, 3, STAY, DOWN, 1, OPP_BLACKBELT, 1

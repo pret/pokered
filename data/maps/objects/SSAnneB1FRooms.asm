@@ -13,7 +13,7 @@ SSAnneB1FRooms_Object:
 	warp 12, 15, 0, SS_ANNE_B1F
 	warp 13, 15, 0, SS_ANNE_B1F
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_SAILOR, 0, 13, STAY, DOWN, 1, OPP_SAILOR, 3

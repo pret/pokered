@@ -5,7 +5,7 @@ CeladonDiner_Object:
 	warp  3,  7, 10, LAST_MAP
 	warp  4,  7, 10, LAST_MAP
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_COOK, 8, 5, WALK, LEFT_RIGHT, 1 ; person

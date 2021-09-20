@@ -5,7 +5,7 @@ VermilionGym_Object:
 	warp  4, 17, 3, LAST_MAP
 	warp  5, 17, 3, LAST_MAP
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_ROCKER, 5, 1, STAY, DOWN, 1, OPP_LT_SURGE, 1

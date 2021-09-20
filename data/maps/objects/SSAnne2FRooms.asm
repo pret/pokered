@@ -15,7 +15,7 @@ SSAnne2FRooms_Object:
 	warp 22, 15, 5, SS_ANNE_2F
 	warp 23, 15, 5, SS_ANNE_2F
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_GENTLEMAN, 10, 2, STAY, RIGHT, 1, OPP_GENTLEMAN, 3

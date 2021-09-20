@@ -6,7 +6,7 @@ LancesRoom_Object:
 	warp  5,  0, 0, CHAMPIONS_ROOM
 	warp  6,  0, 0, CHAMPIONS_ROOM
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_LANCE, 6, 1, STAY, DOWN, 1, OPP_LANCE, 1

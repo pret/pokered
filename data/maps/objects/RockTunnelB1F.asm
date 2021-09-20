@@ -7,7 +7,7 @@ RockTunnelB1F_Object:
 	warp 23, 11, 6, ROCK_TUNNEL_1F
 	warp  3,  3, 7, ROCK_TUNNEL_1F
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_COOLTRAINER_F, 11, 13, STAY, DOWN, 1, OPP_JR_TRAINER_F, 9

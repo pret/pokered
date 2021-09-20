@@ -5,7 +5,7 @@ ViridianNicknameHouse_Object:
 	warp  2,  7, 3, LAST_MAP
 	warp  3,  7, 3, LAST_MAP
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_BALDING_GUY, 5, 3, STAY, NONE, 1 ; person

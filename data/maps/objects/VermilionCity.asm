@@ -12,14 +12,14 @@ VermilionCity_Object:
 	warp 15, 13, 0, VERMILION_TRADE_HOUSE
 	warp  7,  3, 0, VERMILION_OLD_ROD_HOUSE
 
-	def_signs
-	sign 27,  3,  7 ; VermilionCityText7
-	sign 37, 13,  8 ; VermilionCityText8
-	sign 24, 13,  9 ; MartSignText
-	sign 12,  3, 10 ; PokeCenterSignText
-	sign  7, 13, 11 ; VermilionCityText11
-	sign  7, 19, 12 ; VermilionCityText12
-	sign 29, 15, 13 ; VermilionCityText13
+	def_bg_events
+	bg_event 27,  3,  7 ; VermilionCityText7
+	bg_event 37, 13,  8 ; VermilionCityText8
+	bg_event 24, 13,  9 ; MartSignText
+	bg_event 12,  3, 10 ; PokeCenterSignText
+	bg_event  7, 13, 11 ; VermilionCityText11
+	bg_event  7, 19, 12 ; VermilionCityText12
+	bg_event 29, 15, 13 ; VermilionCityText13
 
 	def_objects
 	object SPRITE_BEAUTY, 19, 7, WALK, LEFT_RIGHT, 1 ; person

@@ -9,7 +9,7 @@ SSAnneB1F_Object:
 	warp  7,  3, 0, SS_ANNE_B1F_ROOMS
 	warp 27,  5, 9, SS_ANNE_1F
 
-	def_signs
+	def_bg_events
 
 	def_objects
 

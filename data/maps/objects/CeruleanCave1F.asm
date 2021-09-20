@@ -12,7 +12,7 @@ CeruleanCave1F_Object:
 	warp  3, 11, 5, CERULEAN_CAVE_2F
 	warp  0,  6, 0, CERULEAN_CAVE_B1F
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_POKE_BALL, 7, 13, STAY, NONE, 1, FULL_RESTORE

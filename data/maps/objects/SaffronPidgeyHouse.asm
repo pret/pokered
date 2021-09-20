@@ -5,7 +5,7 @@ SaffronPidgeyHouse_Object:
 	warp  2,  7, 3, LAST_MAP
 	warp  3,  7, 3, LAST_MAP
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_BRUNETTE_GIRL, 2, 3, STAY, RIGHT, 1 ; person

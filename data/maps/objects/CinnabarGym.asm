@@ -5,7 +5,7 @@ CinnabarGym_Object:
 	warp 16, 17, 1, LAST_MAP
 	warp 17, 17, 1, LAST_MAP
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_MIDDLE_AGED_MAN, 3, 3, STAY, DOWN, 1, OPP_BLAINE, 1

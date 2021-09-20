@@ -10,7 +10,7 @@ SilphCo4F_Object:
 	warp  3, 15, 4, SILPH_CO_10F
 	warp 17, 11, 5, SILPH_CO_10F
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_SILPH_WORKER, 6, 2, STAY, NONE, 1 ; person

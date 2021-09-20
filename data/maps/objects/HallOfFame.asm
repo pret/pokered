@@ -5,7 +5,7 @@ HallOfFame_Object:
 	warp  4,  7, 2, CHAMPIONS_ROOM
 	warp  5,  7, 3, CHAMPIONS_ROOM
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_OAK, 5, 2, STAY, DOWN, 1 ; person

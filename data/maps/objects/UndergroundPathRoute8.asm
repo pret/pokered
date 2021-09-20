@@ -6,7 +6,7 @@ UndergroundPathRoute8_Object:
 	warp  4,  7, 4, LAST_MAP
 	warp  4,  4, 1, UNDERGROUND_PATH_WEST_EAST
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_GIRL, 3, 4, STAY, NONE, 1 ; person

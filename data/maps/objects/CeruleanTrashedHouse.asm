@@ -6,8 +6,8 @@ CeruleanTrashedHouse_Object:
 	warp  3,  7, 0, LAST_MAP
 	warp  3,  0, 7, LAST_MAP
 
-	def_signs
-	sign  3,  0, 3 ; CeruleanHouseTrashedText3
+	def_bg_events
+	bg_event  3,  0, 3 ; CeruleanHouseTrashedText3
 
 	def_objects
 	object SPRITE_FISHING_GURU, 2, 1, STAY, DOWN, 1 ; person

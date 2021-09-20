@@ -35,7 +35,7 @@ SaffronGym_Object:
 	warp 15, 17, 11, SAFFRON_GYM
 	warp 19, 17, 19, SAFFRON_GYM
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_GIRL, 9, 8, STAY, DOWN, 1, OPP_SABRINA, 1

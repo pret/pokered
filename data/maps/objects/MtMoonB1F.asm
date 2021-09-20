@@ -11,7 +11,7 @@ MtMoonB1F_Object:
 	warp 23,  3, 3, MT_MOON_B2F
 	warp 27,  3, 2, LAST_MAP
 
-	def_signs
+	def_bg_events
 
 	def_objects
 

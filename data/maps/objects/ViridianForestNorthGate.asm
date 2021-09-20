@@ -7,7 +7,7 @@ ViridianForestNorthGate_Object:
 	warp  4,  7, 0, VIRIDIAN_FOREST
 	warp  5,  7, 0, VIRIDIAN_FOREST
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_SUPER_NERD, 3, 2, STAY, NONE, 1 ; person

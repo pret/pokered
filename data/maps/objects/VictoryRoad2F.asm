@@ -10,7 +10,7 @@ VictoryRoad2F_Object:
 	warp 27,  7, 1, VICTORY_ROAD_3F
 	warp  1,  1, 3, VICTORY_ROAD_3F
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_HIKER, 12, 9, STAY, LEFT, 1, OPP_BLACKBELT, 9

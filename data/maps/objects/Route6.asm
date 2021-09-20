@@ -7,8 +7,8 @@ Route6_Object:
 	warp 10,  7, 0, ROUTE_6_GATE
 	warp 17, 13, 0, UNDERGROUND_PATH_ROUTE_6
 
-	def_signs
-	sign 19, 15, 7 ; Route6Text7
+	def_bg_events
+	bg_event 19, 15, 7 ; Route6Text7
 
 	def_objects
 	object SPRITE_COOLTRAINER_M, 10, 21, STAY, RIGHT, 1, OPP_JR_TRAINER_M, 4

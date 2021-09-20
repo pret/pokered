@@ -5,9 +5,9 @@ Route20_Object:
 	warp 48,  5, 0, SEAFOAM_ISLANDS_1F
 	warp 58,  9, 2, SEAFOAM_ISLANDS_1F
 
-	def_signs
-	sign 51,  7, 11 ; Route20Text11
-	sign 57, 11, 12 ; Route20Text12
+	def_bg_events
+	bg_event 51,  7, 11 ; Route20Text11
+	bg_event 57, 11, 12 ; Route20Text12
 
 	def_objects
 	object SPRITE_SWIMMER, 87, 8, STAY, UP, 1, OPP_SWIMMER, 9

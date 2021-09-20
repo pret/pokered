@@ -3,7 +3,7 @@ Route21_Object:
 
 	def_warps
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_FISHER, 4, 24, STAY, LEFT, 1, OPP_FISHER, 7

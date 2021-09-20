@@ -11,11 +11,11 @@ SafariZoneWest_Object:
 	warp  3,  3, 0, SAFARI_ZONE_SECRET_HOUSE
 	warp 11, 11, 0, SAFARI_ZONE_WEST_REST_HOUSE
 
-	def_signs
-	sign 12, 12, 5 ; SafariZoneWestText5
-	sign 17,  3, 6 ; SafariZoneWestText6
-	sign 26,  4, 7 ; SafariZoneWestText7
-	sign 24, 22, 8 ; SafariZoneWestText8
+	def_bg_events
+	bg_event 12, 12, 5 ; SafariZoneWestText5
+	bg_event 17,  3, 6 ; SafariZoneWestText6
+	bg_event 26,  4, 7 ; SafariZoneWestText7
+	bg_event 24, 22, 8 ; SafariZoneWestText8
 
 	def_objects
 	object SPRITE_POKE_BALL, 8, 20, STAY, NONE, 1, MAX_POTION

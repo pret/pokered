@@ -4,7 +4,7 @@ PokemonTower7F_Object:
 	def_warps
 	warp  9, 16, 1, POKEMON_TOWER_6F
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_ROCKET, 9, 11, STAY, RIGHT, 1, OPP_ROCKET, 19

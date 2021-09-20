@@ -8,7 +8,7 @@ Route12Gate1F_Object:
 	warp  5,  7, 2, LAST_MAP
 	warp  8,  6, 0, ROUTE_12_GATE_2F
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_GUARD, 1, 3, STAY, NONE, 1 ; person

@@ -6,8 +6,8 @@ CeladonMart4F_Object:
 	warp 16,  1, 1, CELADON_MART_5F
 	warp  1,  1, 0, CELADON_MART_ELEVATOR
 
-	def_signs
-	sign 14,  1, 4 ; CeladonMart4Text4
+	def_bg_events
+	bg_event 14,  1, 4 ; CeladonMart4Text4
 
 	def_objects
 	object SPRITE_CLERK, 5, 7, STAY, NONE, 1 ; person

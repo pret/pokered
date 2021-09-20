@@ -5,7 +5,7 @@ FuchsiaMeetingRoom_Object:
 	warp  4,  7, 6, LAST_MAP
 	warp  5,  7, 6, LAST_MAP
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_SAFARI_ZONE_WORKER, 4, 1, STAY, DOWN, 1 ; person

@@ -10,7 +10,7 @@ SilphCo2F_Object:
 	warp 27, 15, 5, SILPH_CO_8F
 	warp  9, 15, 4, SILPH_CO_6F
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_ERIKA, 10, 1, STAY, UP, 1 ; person

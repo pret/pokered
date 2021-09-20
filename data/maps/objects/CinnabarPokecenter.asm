@@ -5,7 +5,7 @@ CinnabarPokecenter_Object:
 	warp  3,  7, 3, LAST_MAP
 	warp  4,  7, 3, LAST_MAP
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_NURSE, 3, 1, STAY, DOWN, 1 ; person

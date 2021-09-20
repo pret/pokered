@@ -8,8 +8,8 @@ CeladonMansion1F_Object:
 	warp  7,  1, 1, CELADON_MANSION_2F
 	warp  2,  1, 2, CELADON_MANSION_2F
 
-	def_signs
-	sign  4,  9, 5 ; CeladonMansion1Text5
+	def_bg_events
+	bg_event  4,  9, 5 ; CeladonMansion1Text5
 
 	def_objects
 	object SPRITE_MONSTER, 0, 5, STAY, RIGHT, 1 ; person

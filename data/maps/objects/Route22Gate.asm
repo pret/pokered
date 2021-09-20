@@ -7,7 +7,7 @@ Route22Gate_Object:
 	warp  4,  0, 0, LAST_MAP
 	warp  5,  0, 1, LAST_MAP
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_GUARD, 6, 2, STAY, LEFT, 1 ; person

@@ -6,7 +6,7 @@ RocketHideoutB4F_Object:
 	warp 24, 15, 0, ROCKET_HIDEOUT_ELEVATOR
 	warp 25, 15, 1, ROCKET_HIDEOUT_ELEVATOR
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_GIOVANNI, 25, 3, STAY, DOWN, 1, OPP_GIOVANNI, 1

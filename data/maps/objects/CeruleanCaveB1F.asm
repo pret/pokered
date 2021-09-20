@@ -4,7 +4,7 @@ CeruleanCaveB1F_Object:
 	def_warps
 	warp  3,  6, 8, CERULEAN_CAVE_1F
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_MONSTER, 27, 13, STAY, DOWN, 1, MEWTWO, 70

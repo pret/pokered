@@ -5,7 +5,7 @@ CeladonGym_Object:
 	warp  4, 17, 6, LAST_MAP
 	warp  5, 17, 6, LAST_MAP
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_ERIKA, 4, 3, STAY, DOWN, 1, OPP_ERIKA, 1

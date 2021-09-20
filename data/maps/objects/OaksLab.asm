@@ -5,7 +5,7 @@ OaksLab_Object:
 	warp  4, 11, 2, LAST_MAP
 	warp  5, 11, 2, LAST_MAP
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_BLUE, 4, 3, STAY, NONE, 1, OPP_RIVAL1, 1

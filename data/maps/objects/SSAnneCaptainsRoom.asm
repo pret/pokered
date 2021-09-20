@@ -4,9 +4,9 @@ SSAnneCaptainsRoom_Object:
 	def_warps
 	warp  0,  7, 8, SS_ANNE_2F
 
-	def_signs
-	sign  4,  1, 2 ; SSAnne7Text2
-	sign  1,  2, 3 ; SSAnne7Text3
+	def_bg_events
+	bg_event  4,  1, 2 ; SSAnne7Text2
+	bg_event  1,  2, 3 ; SSAnne7Text3
 
 	def_objects
 	object SPRITE_CAPTAIN, 4, 2, STAY, UP, 1 ; person

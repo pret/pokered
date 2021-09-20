@@ -11,17 +11,17 @@ SaffronCity_Object:
 	warp  9, 29, 0, SAFFRON_POKECENTER
 	warp 29, 29, 0, MR_PSYCHICS_HOUSE
 
-	def_signs
-	sign 17,  5, 16 ; SaffronCityText16
-	sign 27,  5, 17 ; SaffronCityText17
-	sign 35,  5, 18 ; SaffronCityText18
-	sign 26, 11, 19 ; MartSignText
-	sign 39, 19, 20 ; SaffronCityText20
-	sign  5, 21, 21 ; SaffronCityText21
-	sign 15, 21, 22 ; SaffronCityText22
-	sign 10, 29, 23 ; PokeCenterSignText
-	sign 27, 29, 24 ; SaffronCityText24
-	sign  1, 19, 25 ; SaffronCityText25
+	def_bg_events
+	bg_event 17,  5, 16 ; SaffronCityText16
+	bg_event 27,  5, 17 ; SaffronCityText17
+	bg_event 35,  5, 18 ; SaffronCityText18
+	bg_event 26, 11, 19 ; MartSignText
+	bg_event 39, 19, 20 ; SaffronCityText20
+	bg_event  5, 21, 21 ; SaffronCityText21
+	bg_event 15, 21, 22 ; SaffronCityText22
+	bg_event 10, 29, 23 ; PokeCenterSignText
+	bg_event 27, 29, 24 ; SaffronCityText24
+	bg_event  1, 19, 25 ; SaffronCityText25
 
 	def_objects
 	object SPRITE_ROCKET, 7, 6, STAY, NONE, 1 ; person

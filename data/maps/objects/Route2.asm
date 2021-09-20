@@ -9,9 +9,9 @@ Route2_Object:
 	warp 15, 39, 2, ROUTE_2_GATE
 	warp  3, 43, 2, VIRIDIAN_FOREST_SOUTH_GATE
 
-	def_signs
-	sign  5, 65, 3 ; Route2Text3
-	sign 11, 11, 4 ; Route2Text4
+	def_bg_events
+	bg_event  5, 65, 3 ; Route2Text3
+	bg_event 11, 11, 4 ; Route2Text4
 
 	def_objects
 	object SPRITE_POKE_BALL, 13, 54, STAY, NONE, 1, MOON_STONE

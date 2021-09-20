@@ -13,13 +13,13 @@ CeruleanCity_Object:
 	warp  9, 11, 1, CERULEAN_BADGE_HOUSE
 	warp  9,  9, 0, CERULEAN_BADGE_HOUSE
 
-	def_signs
-	sign 23, 19, 12 ; CeruleanCityText12
-	sign 17, 29, 13 ; CeruleanCityText13
-	sign 26, 25, 14 ; MartSignText
-	sign 20, 17, 15 ; PokeCenterSignText
-	sign 11, 25, 16 ; CeruleanCityText16
-	sign 27, 21, 17 ; CeruleanCityText17
+	def_bg_events
+	bg_event 23, 19, 12 ; CeruleanCityText12
+	bg_event 17, 29, 13 ; CeruleanCityText13
+	bg_event 26, 25, 14 ; MartSignText
+	bg_event 20, 17, 15 ; PokeCenterSignText
+	bg_event 11, 25, 16 ; CeruleanCityText16
+	bg_event 27, 21, 17 ; CeruleanCityText17
 
 	def_objects
 	object SPRITE_BLUE, 20, 2, STAY, DOWN, 1 ; person

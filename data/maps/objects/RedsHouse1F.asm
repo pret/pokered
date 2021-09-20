@@ -6,8 +6,8 @@ RedsHouse1F_Object:
 	warp  3,  7, 0, LAST_MAP ; exit2
 	warp  7,  1, 0, REDS_HOUSE_2F ; staircase
 
-	def_signs
-	sign  3,  1, 2 ; TV
+	def_bg_events
+	bg_event  3,  1, 2 ; TV
 
 	def_objects
 	object SPRITE_MOM, 5, 4, STAY, LEFT, 1 ; Mom

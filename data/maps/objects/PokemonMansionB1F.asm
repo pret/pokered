@@ -4,7 +4,7 @@ PokemonMansionB1F_Object:
 	def_warps
 	warp 23, 22, 5, POKEMON_MANSION_1F
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_SUPER_NERD, 16, 23, STAY, NONE, 1, OPP_BURGLAR, 9

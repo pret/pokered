@@ -8,13 +8,13 @@ ViridianCity_Object:
 	warp 21,  9, 0, VIRIDIAN_NICKNAME_HOUSE
 	warp 32,  7, 0, VIRIDIAN_GYM
 
-	def_signs
-	sign 17, 17,  8 ; ViridianCityText8
-	sign 19,  1,  9 ; ViridianCityText9
-	sign 21, 29, 10 ; ViridianCityText10
-	sign 30, 19, 11 ; MartSignText
-	sign 24, 25, 12 ; PokeCenterSignText
-	sign 27,  7, 13 ; ViridianCityText13
+	def_bg_events
+	bg_event 17, 17,  8 ; ViridianCityText8
+	bg_event 19,  1,  9 ; ViridianCityText9
+	bg_event 21, 29, 10 ; ViridianCityText10
+	bg_event 30, 19, 11 ; MartSignText
+	bg_event 24, 25, 12 ; PokeCenterSignText
+	bg_event 27,  7, 13 ; ViridianCityText13
 
 	def_objects
 	object SPRITE_YOUNGSTER, 13, 20, WALK, ANY_DIR, 1 ; person

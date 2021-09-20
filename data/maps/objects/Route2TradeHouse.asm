@@ -5,7 +5,7 @@ Route2TradeHouse_Object:
 	warp  2,  7, 2, LAST_MAP
 	warp  3,  7, 2, LAST_MAP
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_SCIENTIST, 2, 4, STAY, RIGHT, 1 ; person

@@ -4,8 +4,8 @@ Route25_Object:
 	def_warps
 	warp 45,  3, 0, BILLS_HOUSE
 
-	def_signs
-	sign 43,  3, 11 ; Route25Text11
+	def_bg_events
+	bg_event 43,  3, 11 ; Route25Text11
 
 	def_objects
 	object SPRITE_YOUNGSTER, 14, 2, STAY, DOWN, 1, OPP_YOUNGSTER, 5

@@ -9,7 +9,7 @@ SSAnne1FRooms_Object:
 	warp 10, 10, 6, SS_ANNE_1F
 	warp 20, 10, 7, SS_ANNE_1F
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_GENTLEMAN, 2, 3, STAY, LEFT, 1, OPP_GENTLEMAN, 1

@@ -12,21 +12,21 @@ FuchsiaCity_Object:
 	warp 31, 27, 1, FUCHSIA_GOOD_ROD_HOUSE
 	warp 31, 24, 0, FUCHSIA_GOOD_ROD_HOUSE
 
-	def_signs
-	sign 15, 23, 11 ; FuchsiaCityText11
-	sign 25, 15, 12 ; FuchsiaCityText12
-	sign 17,  5, 13 ; FuchsiaCityText13
-	sign  6, 13, 14 ; MartSignText
-	sign 20, 27, 15 ; PokeCenterSignText
-	sign 27, 29, 16 ; FuchsiaCityText16
-	sign 21, 15, 17 ; FuchsiaCityText17
-	sign  5, 29, 18 ; FuchsiaCityText18
-	sign 33,  7, 19 ; FuchsiaCityText19
-	sign 27,  7, 20 ; FuchsiaCityText20
-	sign 13,  7, 21 ; FuchsiaCityText21
-	sign 31, 13, 22 ; FuchsiaCityText22
-	sign 13, 15, 23 ; FuchsiaCityText23
-	sign  7,  7, 24 ; FuchsiaCityText24
+	def_bg_events
+	bg_event 15, 23, 11 ; FuchsiaCityText11
+	bg_event 25, 15, 12 ; FuchsiaCityText12
+	bg_event 17,  5, 13 ; FuchsiaCityText13
+	bg_event  6, 13, 14 ; MartSignText
+	bg_event 20, 27, 15 ; PokeCenterSignText
+	bg_event 27, 29, 16 ; FuchsiaCityText16
+	bg_event 21, 15, 17 ; FuchsiaCityText17
+	bg_event  5, 29, 18 ; FuchsiaCityText18
+	bg_event 33,  7, 19 ; FuchsiaCityText19
+	bg_event 27,  7, 20 ; FuchsiaCityText20
+	bg_event 13,  7, 21 ; FuchsiaCityText21
+	bg_event 31, 13, 22 ; FuchsiaCityText22
+	bg_event 13, 15, 23 ; FuchsiaCityText23
+	bg_event  7,  7, 24 ; FuchsiaCityText24
 
 	def_objects
 	object SPRITE_YOUNGSTER, 10, 12, WALK, LEFT_RIGHT, 1 ; person

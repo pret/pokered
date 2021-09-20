@@ -7,9 +7,9 @@ SeafoamIslandsB4F_Object:
 	warp 11,  7, 1, SEAFOAM_ISLANDS_B3F
 	warp 25,  4, 2, SEAFOAM_ISLANDS_B3F
 
-	def_signs
-	sign  9, 15, 4 ; SeafoamIslands5Text4
-	sign 23,  1, 5 ; SeafoamIslands5Text5
+	def_bg_events
+	bg_event  9, 15, 4 ; SeafoamIslands5Text4
+	bg_event 23,  1, 5 ; SeafoamIslands5Text5
 
 	def_objects
 	object SPRITE_BOULDER, 4, 15, STAY, NONE, 1 ; person

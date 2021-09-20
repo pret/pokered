@@ -94,7 +94,7 @@ CalcExperience::
 ; term and adding the cubed term.
 	pop af
 	and $80
-	jr nz, .subtractSquaredTerm ; check sign
+	jr nz, .subtractSquaredTerm ; check bg_event
 	pop bc
 	ldh a, [hExperience + 2]
 	add b

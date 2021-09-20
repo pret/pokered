@@ -4,7 +4,7 @@ SSAnneKitchen_Object:
 	def_warps
 	warp  6,  0, 10, SS_ANNE_1F
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_COOK, 1, 8, WALK, UP_DOWN, 1 ; person

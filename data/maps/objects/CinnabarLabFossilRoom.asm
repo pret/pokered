@@ -5,7 +5,7 @@ CinnabarLabFossilRoom_Object:
 	warp  2,  7, 4, CINNABAR_LAB
 	warp  3,  7, 4, CINNABAR_LAB
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_SCIENTIST, 5, 2, WALK, LEFT_RIGHT, 1 ; person

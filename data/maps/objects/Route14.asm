@@ -3,8 +3,8 @@ Route14_Object:
 
 	def_warps
 
-	def_signs
-	sign 17, 13, 11 ; Route14Text11
+	def_bg_events
+	bg_event 17, 13, 11 ; Route14Text11
 
 	def_objects
 	object SPRITE_COOLTRAINER_M, 4, 4, STAY, DOWN, 1, OPP_BIRD_KEEPER, 14

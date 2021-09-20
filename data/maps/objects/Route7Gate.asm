@@ -7,7 +7,7 @@ Route7Gate_Object:
 	warp  5,  3, 0, LAST_MAP
 	warp  5,  4, 1, LAST_MAP
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_GUARD, 3, 1, STAY, DOWN, 1 ; person

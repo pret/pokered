@@ -5,7 +5,7 @@ CinnabarLabTradeRoom_Object:
 	warp  2,  7, 2, CINNABAR_LAB
 	warp  3,  7, 2, CINNABAR_LAB
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_SUPER_NERD, 3, 2, STAY, DOWN, 1 ; person

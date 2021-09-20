@@ -8,10 +8,10 @@ SafariZoneEast_Object:
 	warp  0, 23, 6, SAFARI_ZONE_CENTER
 	warp 25,  9, 0, SAFARI_ZONE_EAST_REST_HOUSE
 
-	def_signs
-	sign 26, 10, 5 ; SafariZoneEastText5
-	sign  6,  4, 6 ; SafariZoneEastText6
-	sign  5, 23, 7 ; SafariZoneEastText7
+	def_bg_events
+	bg_event 26, 10, 5 ; SafariZoneEastText5
+	bg_event  6,  4, 6 ; SafariZoneEastText6
+	bg_event  5, 23, 7 ; SafariZoneEastText7
 
 	def_objects
 	object SPRITE_POKE_BALL, 21, 10, STAY, NONE, 1, FULL_RESTORE

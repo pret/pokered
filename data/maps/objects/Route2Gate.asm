@@ -7,7 +7,7 @@ Route2Gate_Object:
 	warp  4,  7, 4, LAST_MAP
 	warp  5,  7, 4, LAST_MAP
 
-	def_signs
+	def_bg_events
 
 	def_objects
 	object SPRITE_SCIENTIST, 1, 4, STAY, LEFT, 1 ; person
