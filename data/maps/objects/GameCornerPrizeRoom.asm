@@ -1,9 +1,9 @@
 GameCornerPrizeRoom_Object:
 	db $f ; border block
 
-	def_warps
-	warp  4,  7, 9, LAST_MAP
-	warp  5,  7, 9, LAST_MAP
+	def_warp_events
+	warp_event  4,  7, 9, LAST_MAP
+	warp_event  5,  7, 9, LAST_MAP
 
 	def_bg_events
 	bg_event  2,  2, 3 ; CeladonPrizeRoomText3

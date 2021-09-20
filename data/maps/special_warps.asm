@@ -1,6 +1,6 @@
 ; Format: (size 2 bytes)
 ; 00: target map ID
-; 01: which dungeon warp in the source map was used
+; 01: which dungeon warp_event in the source map was used
 DungeonWarpList:
 	db SEAFOAM_ISLANDS_B1F, 1
 	db SEAFOAM_ISLANDS_B1F, 2

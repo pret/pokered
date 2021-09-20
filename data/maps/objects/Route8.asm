@@ -1,12 +1,12 @@
 Route8_Object:
 	db $2c ; border block
 
-	def_warps
-	warp  1,  9, 0, ROUTE_8_GATE
-	warp  1, 10, 1, ROUTE_8_GATE
-	warp  8,  9, 2, ROUTE_8_GATE
-	warp  8, 10, 3, ROUTE_8_GATE
-	warp 13,  3, 0, UNDERGROUND_PATH_ROUTE_8
+	def_warp_events
+	warp_event  1,  9, 0, ROUTE_8_GATE
+	warp_event  1, 10, 1, ROUTE_8_GATE
+	warp_event  8,  9, 2, ROUTE_8_GATE
+	warp_event  8, 10, 3, ROUTE_8_GATE
+	warp_event 13,  3, 0, UNDERGROUND_PATH_ROUTE_8
 
 	def_bg_events
 	bg_event 17,  3, 10 ; Route8Text10

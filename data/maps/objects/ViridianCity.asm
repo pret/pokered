@@ -1,12 +1,12 @@
 ViridianCity_Object:
 	db $f ; border block
 
-	def_warps
-	warp 23, 25, 0, VIRIDIAN_POKECENTER
-	warp 29, 19, 0, VIRIDIAN_MART
-	warp 21, 15, 0, VIRIDIAN_SCHOOL_HOUSE
-	warp 21,  9, 0, VIRIDIAN_NICKNAME_HOUSE
-	warp 32,  7, 0, VIRIDIAN_GYM
+	def_warp_events
+	warp_event 23, 25, 0, VIRIDIAN_POKECENTER
+	warp_event 29, 19, 0, VIRIDIAN_MART
+	warp_event 21, 15, 0, VIRIDIAN_SCHOOL_HOUSE
+	warp_event 21,  9, 0, VIRIDIAN_NICKNAME_HOUSE
+	warp_event 32,  7, 0, VIRIDIAN_GYM
 
 	def_bg_events
 	bg_event 17, 17,  8 ; ViridianCityText8

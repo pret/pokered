@@ -1,9 +1,9 @@
 PokemonTower3F_Object:
 	db $1 ; border block
 
-	def_warps
-	warp  3,  9, 0, POKEMON_TOWER_2F
-	warp 18,  9, 1, POKEMON_TOWER_4F
+	def_warp_events
+	warp_event  3,  9, 0, POKEMON_TOWER_2F
+	warp_event 18,  9, 1, POKEMON_TOWER_4F
 
 	def_bg_events
 

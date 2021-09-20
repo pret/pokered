@@ -1,7 +1,7 @@
 Route13_Object:
 	db $43 ; border block
 
-	def_warps
+	def_warp_events
 
 	def_bg_events
 	bg_event 15, 13, 11 ; Route13Text11

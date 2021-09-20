@@ -1,13 +1,13 @@
 SSAnne1FRooms_Object:
 	db $c ; border block
 
-	def_warps
-	warp  0,  0, 2, SS_ANNE_1F
-	warp 10,  0, 3, SS_ANNE_1F
-	warp 20,  0, 4, SS_ANNE_1F
-	warp  0, 10, 5, SS_ANNE_1F
-	warp 10, 10, 6, SS_ANNE_1F
-	warp 20, 10, 7, SS_ANNE_1F
+	def_warp_events
+	warp_event  0,  0, 2, SS_ANNE_1F
+	warp_event 10,  0, 3, SS_ANNE_1F
+	warp_event 20,  0, 4, SS_ANNE_1F
+	warp_event  0, 10, 5, SS_ANNE_1F
+	warp_event 10, 10, 6, SS_ANNE_1F
+	warp_event 20, 10, 7, SS_ANNE_1F
 
 	def_bg_events
 

@@ -49,7 +49,7 @@ RocketHideoutElavatorFloors:
 
 ; These specify where the player goes after getting out of the elevator.
 RocketHideoutElevatorWarpMaps:
-	; warp number, map id
+	; warp_event number, map id
 	db 4, ROCKET_HIDEOUT_B1F
 	db 4, ROCKET_HIDEOUT_B2F
 	db 2, ROCKET_HIDEOUT_B4F

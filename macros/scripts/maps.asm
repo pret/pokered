@@ -32,7 +32,7 @@ object: MACRO
 {_NUM_OBJECTS} = {_NUM_OBJECTS} + 1
 ENDM
 
-def_warps: MACRO
+def_warp_events: MACRO
 REDEF _NUM_WARPS EQUS "_NUM_WARPS_\@"
 	db {_NUM_WARPS}
 {_NUM_WARPS} = 0
@@ -40,10 +40,10 @@ ENDM
 
 ;\1 x position
 ;\2 y position
-;\3 destination warp id
-;\4 destination map (-1 = wLastMap)
-warp: MACRO
-	db \2, \1, \3, \4
+;\3 destination map (-1 = wLastMap)
+;\4 destination warp_event id
+warp_event: MACRO
+	db \2, \1, \4, \3
 _WARP_{d:{_NUM_WARPS}}_X = \1
 _WARP_{d:{_NUM_WARPS}}_Y = \2
 {_NUM_WARPS} = {_NUM_WARPS} + 1

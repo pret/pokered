@@ -1,15 +1,15 @@
 SaffronCity_Object:
 	db $f ; border block
 
-	def_warps
-	warp  7,  5, 0, COPYCATS_HOUSE_1F
-	warp 26,  3, 0, FIGHTING_DOJO
-	warp 34,  3, 0, SAFFRON_GYM
-	warp 13, 11, 0, SAFFRON_PIDGEY_HOUSE
-	warp 25, 11, 0, SAFFRON_MART
-	warp 18, 21, 0, SILPH_CO_1F
-	warp  9, 29, 0, SAFFRON_POKECENTER
-	warp 29, 29, 0, MR_PSYCHICS_HOUSE
+	def_warp_events
+	warp_event  7,  5, 0, COPYCATS_HOUSE_1F
+	warp_event 26,  3, 0, FIGHTING_DOJO
+	warp_event 34,  3, 0, SAFFRON_GYM
+	warp_event 13, 11, 0, SAFFRON_PIDGEY_HOUSE
+	warp_event 25, 11, 0, SAFFRON_MART
+	warp_event 18, 21, 0, SILPH_CO_1F
+	warp_event  9, 29, 0, SAFFRON_POKECENTER
+	warp_event 29, 29, 0, MR_PSYCHICS_HOUSE
 
 	def_bg_events
 	bg_event 17,  5, 16 ; SaffronCityText16

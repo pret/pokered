@@ -1,13 +1,13 @@
 LavenderTown_Object:
 	db $2c ; border block
 
-	def_warps
-	warp  3,  5, 0, LAVENDER_POKECENTER
-	warp 14,  5, 0, POKEMON_TOWER_1F
-	warp  7,  9, 0, MR_FUJIS_HOUSE
-	warp 15, 13, 0, LAVENDER_MART
-	warp  3, 13, 0, LAVENDER_CUBONE_HOUSE
-	warp  7, 13, 0, NAME_RATERS_HOUSE
+	def_warp_events
+	warp_event  3,  5, 0, LAVENDER_POKECENTER
+	warp_event 14,  5, 0, POKEMON_TOWER_1F
+	warp_event  7,  9, 0, MR_FUJIS_HOUSE
+	warp_event 15, 13, 0, LAVENDER_MART
+	warp_event  3, 13, 0, LAVENDER_CUBONE_HOUSE
+	warp_event  7, 13, 0, NAME_RATERS_HOUSE
 
 	def_bg_events
 	bg_event 11,  9, 4 ; LavenderTownText4

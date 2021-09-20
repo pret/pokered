@@ -1,12 +1,12 @@
 Museum1F_Object:
 	db $a ; border block
 
-	def_warps
-	warp 10,  7, 0, LAST_MAP
-	warp 11,  7, 0, LAST_MAP
-	warp 16,  7, 1, LAST_MAP
-	warp 17,  7, 1, LAST_MAP
-	warp  7,  7, 0, MUSEUM_2F
+	def_warp_events
+	warp_event 10,  7, 0, LAST_MAP
+	warp_event 11,  7, 0, LAST_MAP
+	warp_event 16,  7, 1, LAST_MAP
+	warp_event 17,  7, 1, LAST_MAP
+	warp_event  7,  7, 0, MUSEUM_2F
 
 	def_bg_events
 

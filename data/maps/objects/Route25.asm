@@ -1,8 +1,8 @@
 Route25_Object:
 	db $2c ; border block
 
-	def_warps
-	warp 45,  3, 0, BILLS_HOUSE
+	def_warp_events
+	warp_event 45,  3, 0, BILLS_HOUSE
 
 	def_bg_events
 	bg_event 43,  3, 11 ; Route25Text11

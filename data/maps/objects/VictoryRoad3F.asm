@@ -1,11 +1,11 @@
 VictoryRoad3F_Object:
 	db $7d ; border block
 
-	def_warps
-	warp 23,  7, 3, VICTORY_ROAD_2F
-	warp 26,  8, 5, VICTORY_ROAD_2F
-	warp 27, 15, 4, VICTORY_ROAD_2F
-	warp  2,  0, 6, VICTORY_ROAD_2F
+	def_warp_events
+	warp_event 23,  7, 3, VICTORY_ROAD_2F
+	warp_event 26,  8, 5, VICTORY_ROAD_2F
+	warp_event 27, 15, 4, VICTORY_ROAD_2F
+	warp_event  2,  0, 6, VICTORY_ROAD_2F
 
 	def_bg_events
 

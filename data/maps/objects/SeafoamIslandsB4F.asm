@@ -1,11 +1,11 @@
 SeafoamIslandsB4F_Object:
 	db $7d ; border block
 
-	def_warps
-	warp 20, 17, 5, SEAFOAM_ISLANDS_B3F
-	warp 21, 17, 6, SEAFOAM_ISLANDS_B3F
-	warp 11,  7, 1, SEAFOAM_ISLANDS_B3F
-	warp 25,  4, 2, SEAFOAM_ISLANDS_B3F
+	def_warp_events
+	warp_event 20, 17, 5, SEAFOAM_ISLANDS_B3F
+	warp_event 21, 17, 6, SEAFOAM_ISLANDS_B3F
+	warp_event 11,  7, 1, SEAFOAM_ISLANDS_B3F
+	warp_event 25,  4, 2, SEAFOAM_ISLANDS_B3F
 
 	def_bg_events
 	bg_event  9, 15, 4 ; SeafoamIslands5Text4

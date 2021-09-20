@@ -1,8 +1,8 @@
 CopycatsHouse2F_Object:
 	db $a ; border block
 
-	def_warps
-	warp  7,  1, 2, COPYCATS_HOUSE_1F
+	def_warp_events
+	warp_event  7,  1, 2, COPYCATS_HOUSE_1F
 
 	def_bg_events
 	bg_event  3,  5, 6 ; CopycatsHouse2FText6

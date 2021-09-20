@@ -1,9 +1,9 @@
 LavenderCuboneHouse_Object:
 	db $a ; border block
 
-	def_warps
-	warp  2,  7, 4, LAST_MAP
-	warp  3,  7, 4, LAST_MAP
+	def_warp_events
+	warp_event  2,  7, 4, LAST_MAP
+	warp_event  3,  7, 4, LAST_MAP
 
 	def_bg_events
 

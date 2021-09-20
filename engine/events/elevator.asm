@@ -38,7 +38,7 @@ DisplayElevatorFloorMenu:
 	inc hl
 	inc hl
 	ld a, b
-	ld [hli], a ; destination warp ID
+	ld [hli], a ; destination warp_event ID
 	ld a, c
 	ld [hli], a ; destination map ID
 	ret

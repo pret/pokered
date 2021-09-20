@@ -1,7 +1,7 @@
 Colosseum_Object:
 	db $e ; border block
 
-	def_warps
+	def_warp_events
 
 	def_bg_events
 

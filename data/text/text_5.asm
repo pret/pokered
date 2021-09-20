@@ -36,7 +36,7 @@ _FlashLightsAreaText::
 	prompt
 
 _WarpToLastPokemonCenterText::
-	text "Warp to the last"
+	text "warp_event to the last"
 	line "#MON CENTER."
 	done
 

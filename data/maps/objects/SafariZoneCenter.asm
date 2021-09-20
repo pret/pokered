@@ -1,16 +1,16 @@
 SafariZoneCenter_Object:
 	db $0 ; border block
 
-	def_warps
-	warp 14, 25, 2, SAFARI_ZONE_GATE
-	warp 15, 25, 3, SAFARI_ZONE_GATE
-	warp  0, 10, 4, SAFARI_ZONE_WEST
-	warp  0, 11, 5, SAFARI_ZONE_WEST
-	warp 14,  0, 4, SAFARI_ZONE_NORTH
-	warp 15,  0, 5, SAFARI_ZONE_NORTH
-	warp 29, 10, 2, SAFARI_ZONE_EAST
-	warp 29, 11, 3, SAFARI_ZONE_EAST
-	warp 17, 19, 0, SAFARI_ZONE_CENTER_REST_HOUSE
+	def_warp_events
+	warp_event 14, 25, 2, SAFARI_ZONE_GATE
+	warp_event 15, 25, 3, SAFARI_ZONE_GATE
+	warp_event  0, 10, 4, SAFARI_ZONE_WEST
+	warp_event  0, 11, 5, SAFARI_ZONE_WEST
+	warp_event 14,  0, 4, SAFARI_ZONE_NORTH
+	warp_event 15,  0, 5, SAFARI_ZONE_NORTH
+	warp_event 29, 10, 2, SAFARI_ZONE_EAST
+	warp_event 29, 11, 3, SAFARI_ZONE_EAST
+	warp_event 17, 19, 0, SAFARI_ZONE_CENTER_REST_HOUSE
 
 	def_bg_events
 	bg_event 18, 20, 2 ; SafariZoneCenterText2

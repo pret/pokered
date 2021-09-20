@@ -1,7 +1,7 @@
 Route9_Object:
 	db $2c ; border block
 
-	def_warps
+	def_warp_events
 
 	def_bg_events
 	bg_event 25,  7, 11 ; Route9Text11

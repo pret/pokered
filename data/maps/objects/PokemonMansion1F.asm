@@ -1,15 +1,15 @@
 PokemonMansion1F_Object:
 	db $2e ; border block
 
-	def_warps
-	warp  4, 27, 0, LAST_MAP
-	warp  5, 27, 0, LAST_MAP
-	warp  6, 27, 0, LAST_MAP
-	warp  7, 27, 0, LAST_MAP
-	warp  5, 10, 0, POKEMON_MANSION_2F
-	warp 21, 23, 0, POKEMON_MANSION_B1F
-	warp 26, 27, 0, LAST_MAP
-	warp 27, 27, 0, LAST_MAP
+	def_warp_events
+	warp_event  4, 27, 0, LAST_MAP
+	warp_event  5, 27, 0, LAST_MAP
+	warp_event  6, 27, 0, LAST_MAP
+	warp_event  7, 27, 0, LAST_MAP
+	warp_event  5, 10, 0, POKEMON_MANSION_2F
+	warp_event 21, 23, 0, POKEMON_MANSION_B1F
+	warp_event 26, 27, 0, LAST_MAP
+	warp_event 27, 27, 0, LAST_MAP
 
 	def_bg_events
 

@@ -1,9 +1,9 @@
 HallOfFame_Object:
 	db $3 ; border block
 
-	def_warps
-	warp  4,  7, 2, CHAMPIONS_ROOM
-	warp  5,  7, 3, CHAMPIONS_ROOM
+	def_warp_events
+	warp_event  4,  7, 2, CHAMPIONS_ROOM
+	warp_event  5,  7, 3, CHAMPIONS_ROOM
 
 	def_bg_events
 

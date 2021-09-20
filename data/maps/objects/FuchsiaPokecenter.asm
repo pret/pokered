@@ -1,9 +1,9 @@
 FuchsiaPokecenter_Object:
 	db $0 ; border block
 
-	def_warps
-	warp  3,  7, 2, LAST_MAP
-	warp  4,  7, 2, LAST_MAP
+	def_warp_events
+	warp_event  3,  7, 2, LAST_MAP
+	warp_event  4,  7, 2, LAST_MAP
 
 	def_bg_events
 

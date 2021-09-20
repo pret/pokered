@@ -1,7 +1,7 @@
 Route24_Object:
 	db $2c ; border block
 
-	def_warps
+	def_warp_events
 
 	def_bg_events
 

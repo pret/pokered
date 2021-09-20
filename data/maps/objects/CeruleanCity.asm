@@ -1,17 +1,17 @@
 CeruleanCity_Object:
 	db $f ; border block
 
-	def_warps
-	warp 27, 11, 0, CERULEAN_TRASHED_HOUSE
-	warp 13, 15, 0, CERULEAN_TRADE_HOUSE
-	warp 19, 17, 0, CERULEAN_POKECENTER
-	warp 30, 19, 0, CERULEAN_GYM
-	warp 13, 25, 0, BIKE_SHOP
-	warp 25, 25, 0, CERULEAN_MART
-	warp  4, 11, 0, CERULEAN_CAVE_1F
-	warp 27,  9, 2, CERULEAN_TRASHED_HOUSE
-	warp  9, 11, 1, CERULEAN_BADGE_HOUSE
-	warp  9,  9, 0, CERULEAN_BADGE_HOUSE
+	def_warp_events
+	warp_event 27, 11, 0, CERULEAN_TRASHED_HOUSE
+	warp_event 13, 15, 0, CERULEAN_TRADE_HOUSE
+	warp_event 19, 17, 0, CERULEAN_POKECENTER
+	warp_event 30, 19, 0, CERULEAN_GYM
+	warp_event 13, 25, 0, BIKE_SHOP
+	warp_event 25, 25, 0, CERULEAN_MART
+	warp_event  4, 11, 0, CERULEAN_CAVE_1F
+	warp_event 27,  9, 2, CERULEAN_TRASHED_HOUSE
+	warp_event  9, 11, 1, CERULEAN_BADGE_HOUSE
+	warp_event  9,  9, 0, CERULEAN_BADGE_HOUSE
 
 	def_bg_events
 	bg_event 23, 19, 12 ; CeruleanCityText12

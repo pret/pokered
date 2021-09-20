@@ -1,12 +1,12 @@
 RocketHideoutB1F_Object:
 	db $2e ; border block
 
-	def_warps
-	warp 23,  2, 0, ROCKET_HIDEOUT_B2F
-	warp 21,  2, 2, GAME_CORNER
-	warp 24, 19, 0, ROCKET_HIDEOUT_ELEVATOR
-	warp 21, 24, 3, ROCKET_HIDEOUT_B2F
-	warp 25, 19, 1, ROCKET_HIDEOUT_ELEVATOR
+	def_warp_events
+	warp_event 23,  2, 0, ROCKET_HIDEOUT_B2F
+	warp_event 21,  2, 2, GAME_CORNER
+	warp_event 24, 19, 0, ROCKET_HIDEOUT_ELEVATOR
+	warp_event 21, 24, 3, ROCKET_HIDEOUT_B2F
+	warp_event 25, 19, 1, ROCKET_HIDEOUT_ELEVATOR
 
 	def_bg_events
 

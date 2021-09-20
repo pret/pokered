@@ -50,7 +50,7 @@ CeladonMartElevatorFloors:
 
 ; These specify where the player goes after getting out of the elevator.
 CeladonMartElevatorWarpMaps:
-	; warp number, map id
+	; warp_event number, map id
 	db 5, CELADON_MART_1F
 	db 2, CELADON_MART_2F
 	db 2, CELADON_MART_3F

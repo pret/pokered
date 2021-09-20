@@ -1,10 +1,10 @@
 PokemonTower1F_Object:
 	db $1 ; border block
 
-	def_warps
-	warp 10, 17, 1, LAST_MAP
-	warp 11, 17, 1, LAST_MAP
-	warp 18,  9, 1, POKEMON_TOWER_2F
+	def_warp_events
+	warp_event 10, 17, 1, LAST_MAP
+	warp_event 11, 17, 1, LAST_MAP
+	warp_event 18,  9, 1, POKEMON_TOWER_2F
 
 	def_bg_events
 

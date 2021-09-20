@@ -1,12 +1,12 @@
 MtMoon1F_Object:
 	db $3 ; border block
 
-	def_warps
-	warp 14, 35, 1, LAST_MAP
-	warp 15, 35, 1, LAST_MAP
-	warp  5,  5, 0, MT_MOON_B1F
-	warp 17, 11, 2, MT_MOON_B1F
-	warp 25, 15, 3, MT_MOON_B1F
+	def_warp_events
+	warp_event 14, 35, 1, LAST_MAP
+	warp_event 15, 35, 1, LAST_MAP
+	warp_event  5,  5, 0, MT_MOON_B1F
+	warp_event 17, 11, 2, MT_MOON_B1F
+	warp_event 25, 15, 3, MT_MOON_B1F
 
 	def_bg_events
 	bg_event 15, 23, 14 ; MtMoon1Text14

@@ -1,9 +1,9 @@
 WardensHouse_Object:
 	db $17 ; border block
 
-	def_warps
-	warp  4,  7, 3, LAST_MAP
-	warp  5,  7, 3, LAST_MAP
+	def_warp_events
+	warp_event  4,  7, 3, LAST_MAP
+	warp_event  5,  7, 3, LAST_MAP
 
 	def_bg_events
 	bg_event  4,  3, 4 ; FuchsiaHouse2Text4

@@ -1,8 +1,8 @@
 SSAnneCaptainsRoom_Object:
 	db $c ; border block
 
-	def_warps
-	warp  0,  7, 8, SS_ANNE_2F
+	def_warp_events
+	warp_event  0,  7, 8, SS_ANNE_2F
 
 	def_bg_events
 	bg_event  4,  1, 2 ; SSAnne7Text2

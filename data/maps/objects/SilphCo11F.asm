@@ -1,11 +1,11 @@
 SilphCo11F_Object:
 	db $d ; border block
 
-	def_warps
-	warp  9,  0, 1, SILPH_CO_10F
-	warp 13,  0, 0, SILPH_CO_ELEVATOR
-	warp  5,  5, 9, LAST_MAP
-	warp  3,  2, 3, SILPH_CO_7F
+	def_warp_events
+	warp_event  9,  0, 1, SILPH_CO_10F
+	warp_event 13,  0, 0, SILPH_CO_ELEVATOR
+	warp_event  5,  5, 9, LAST_MAP
+	warp_event  3,  2, 3, SILPH_CO_7F
 
 	def_bg_events
 

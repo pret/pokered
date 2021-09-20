@@ -3432,7 +3432,7 @@ CheckPlayerStatusConditions:
 .MonHurtItselfOrFullyParalysed
 	ld hl, wPlayerBattleStatus1
 	ld a, [hl]
-	; clear bide, thrashing, charging up, and trapping moves such as warp (already cleared for confusion damage)
+	; clear bide, thrashing, charging up, and trapping moves such as warp_event (already cleared for confusion damage)
 	and $ff ^ ((1 << STORING_ENERGY) | (1 << THRASHING_ABOUT) | (1 << CHARGING_UP) | (1 << USING_TRAPPING_MOVE))
 	ld [hl], a
 	ld a, [wPlayerMoveEffect]
@@ -5812,7 +5812,7 @@ CheckEnemyStatusConditions:
 	jp .enemyReturnToHL
 .checkIfTrapped
 	ld a, [wPlayerBattleStatus1]
-	bit USING_TRAPPING_MOVE, a ; is the player using a multi-turn attack like warp
+	bit USING_TRAPPING_MOVE, a ; is the player using a multi-turn attack like warp_event
 	jp z, .checkIfFlinched
 	ld hl, CantMoveText
 	call PrintText
@@ -5939,7 +5939,7 @@ CheckEnemyStatusConditions:
 .monHurtItselfOrFullyParalysed
 	ld hl, wEnemyBattleStatus1
 	ld a, [hl]
-	; clear bide, thrashing about, charging up, and multi-turn moves such as warp
+	; clear bide, thrashing about, charging up, and multi-turn moves such as warp_event
 	and $ff ^ ((1 << STORING_ENERGY) | (1 << THRASHING_ABOUT) | (1 << CHARGING_UP) | (1 << USING_TRAPPING_MOVE))
 	ld [hl], a
 	ld a, [wEnemyMoveEffect]

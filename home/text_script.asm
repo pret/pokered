@@ -129,7 +129,7 @@ CloseTextDisplay::
 	ld hl, wFontLoaded
 	res 0, [hl]
 	ld a, [wd732]
-	bit 3, a ; used fly warp
+	bit 3, a ; used fly warp_event
 	call z, LoadPlayerSpriteGraphics
 	call LoadCurrentMapView
 	pop af
