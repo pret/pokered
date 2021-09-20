@@ -9,8 +9,8 @@ Route2Gate_Object:
 
 	def_bg_events
 
-	def_objects
-	object SPRITE_SCIENTIST, 1, 4, STAY, LEFT, 1 ; person
-	object SPRITE_YOUNGSTER, 5, 4, WALK, LEFT_RIGHT, 2 ; person
+	def_object_events
+	object_event SPRITE_SCIENTIST, 1, 4, STAY, LEFT, 1 ; person
+	object_event SPRITE_YOUNGSTER, 5, 4, WALK, LEFT_RIGHT, 2 ; person
 
 	def_warps_to ROUTE_2_GATE

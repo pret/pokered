@@ -14,7 +14,7 @@ CinnabarLab_Object:
 	bg_event 13,  4, 4 ; Lab1Text4
 	bg_event 17,  4, 5 ; Lab1Text5
 
-	def_objects
-	object SPRITE_FISHING_GURU, 1, 3, STAY, NONE, 1 ; person
+	def_object_events
+	object_event SPRITE_FISHING_GURU, 1, 3, STAY, NONE, 1 ; person
 
 	def_warps_to CINNABAR_LAB

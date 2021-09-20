@@ -8,11 +8,11 @@ PokemonMansion3F_Object:
 
 	def_bg_events
 
-	def_objects
-	object SPRITE_SUPER_NERD, 5, 11, WALK, LEFT_RIGHT, 1, OPP_BURGLAR, 8
-	object SPRITE_SCIENTIST, 20, 11, STAY, LEFT, 2, OPP_SCIENTIST, 12
-	object SPRITE_POKE_BALL, 1, 16, STAY, NONE, 3, MAX_POTION
-	object SPRITE_POKE_BALL, 25, 5, STAY, NONE, 4, IRON
-	object SPRITE_POKEDEX, 6, 12, STAY, NONE, 5 ; person
+	def_object_events
+	object_event SPRITE_SUPER_NERD, 5, 11, WALK, LEFT_RIGHT, 1, OPP_BURGLAR, 8
+	object_event SPRITE_SCIENTIST, 20, 11, STAY, LEFT, 2, OPP_SCIENTIST, 12
+	object_event SPRITE_POKE_BALL, 1, 16, STAY, NONE, 3, MAX_POTION
+	object_event SPRITE_POKE_BALL, 25, 5, STAY, NONE, 4, IRON
+	object_event SPRITE_POKEDEX, 6, 12, STAY, NONE, 5 ; person
 
 	def_warps_to POKEMON_MANSION_3F

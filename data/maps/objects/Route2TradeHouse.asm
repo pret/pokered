@@ -7,8 +7,8 @@ Route2TradeHouse_Object:
 
 	def_bg_events
 
-	def_objects
-	object SPRITE_SCIENTIST, 2, 4, STAY, RIGHT, 1 ; person
-	object SPRITE_GAMEBOY_KID, 4, 1, STAY, DOWN, 2 ; person
+	def_object_events
+	object_event SPRITE_SCIENTIST, 2, 4, STAY, RIGHT, 1 ; person
+	object_event SPRITE_GAMEBOY_KID, 4, 1, STAY, DOWN, 2 ; person
 
 	def_warps_to ROUTE_2_TRADE_HOUSE

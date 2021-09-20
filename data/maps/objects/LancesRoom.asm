@@ -8,7 +8,7 @@ LancesRoom_Object:
 
 	def_bg_events
 
-	def_objects
-	object SPRITE_LANCE, 6, 1, STAY, DOWN, 1, OPP_LANCE, 1
+	def_object_events
+	object_event SPRITE_LANCE, 6, 1, STAY, DOWN, 1, OPP_LANCE, 1
 
 	def_warps_to LANCES_ROOM

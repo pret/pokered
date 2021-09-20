@@ -7,6 +7,6 @@ UndergroundPathWestEast_Object:
 
 	def_bg_events
 
-	def_objects
+	def_object_events
 
 	def_warps_to UNDERGROUND_PATH_WEST_EAST

@@ -7,6 +7,6 @@ VermilionDock_Object:
 
 	def_bg_events
 
-	def_objects
+	def_object_events
 
 	def_warps_to VERMILION_DOCK

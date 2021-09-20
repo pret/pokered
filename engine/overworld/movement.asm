@@ -704,7 +704,7 @@ GetTileSpriteStandsOn:
 	ld l, a
 	ld a, [hli]     ; x#SPRITESTATEDATA1_YPIXELS
 	add $4          ; align to 2*2 tile blocks (Y position is always off 4 pixels to the top)
-	and $f0         ; in case object is currently moving
+	and $f0         ; in case object_event is currently moving
 	srl a           ; screen Y tile * 4
 	ld c, a
 	ld b, $0

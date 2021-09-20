@@ -13,9 +13,9 @@ Route2_Object:
 	bg_event  5, 65, 3 ; Route2Text3
 	bg_event 11, 11, 4 ; Route2Text4
 
-	def_objects
-	object SPRITE_POKE_BALL, 13, 54, STAY, NONE, 1, MOON_STONE
-	object SPRITE_POKE_BALL, 13, 45, STAY, NONE, 2, HP_UP
+	def_object_events
+	object_event SPRITE_POKE_BALL, 13, 54, STAY, NONE, 1, MOON_STONE
+	object_event SPRITE_POKE_BALL, 13, 45, STAY, NONE, 2, HP_UP
 
 	def_warps_to ROUTE_2
 

@@ -9,6 +9,6 @@ CeladonMansionRoof_Object:
 	def_bg_events
 	bg_event  3,  7, 1 ; CeladonMansion4Text1
 
-	def_objects
+	def_object_events
 
 	def_warps_to CELADON_MANSION_ROOF

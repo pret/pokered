@@ -103,8 +103,8 @@ rLY         EQU $ff44 ; LCDC Y-Coordinate (R)
 rLYC        EQU $ff45 ; LY Compare (R/W)
 rDMA        EQU $ff46 ; DMA Transfer and Start Address (W)
 rBGP        EQU $ff47 ; BG Palette Data (R/W) - Non CGB Mode Only
-rOBP0       EQU $ff48 ; Object Palette 0 Data (R/W) - Non CGB Mode Only
-rOBP1       EQU $ff49 ; Object Palette 1 Data (R/W) - Non CGB Mode Only
+rOBP0       EQU $ff48 ; object_event Palette 0 Data (R/W) - Non CGB Mode Only
+rOBP1       EQU $ff49 ; object_event Palette 1 Data (R/W) - Non CGB Mode Only
 rWY         EQU $ff4a ; Window Y Position (R/W)
 rWX         EQU $ff4b ; Window X Position minus 7 (R/W)
 rKEY1       EQU $ff4d ; CGB Mode Only - Prepare Speed Switch

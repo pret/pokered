@@ -16,7 +16,7 @@ SafariZoneCenter_Object:
 	bg_event 18, 20, 2 ; SafariZoneCenterText2
 	bg_event 14, 22, 3 ; SafariZoneCenterText3
 
-	def_objects
-	object SPRITE_POKE_BALL, 14, 10, STAY, NONE, 1, NUGGET
+	def_object_events
+	object_event SPRITE_POKE_BALL, 14, 10, STAY, NONE, 1, NUGGET
 
 	def_warps_to SAFARI_ZONE_CENTER

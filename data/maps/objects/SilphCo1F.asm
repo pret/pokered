@@ -10,7 +10,7 @@ SilphCo1F_Object:
 
 	def_bg_events
 
-	def_objects
-	object SPRITE_LINK_RECEPTIONIST, 4, 2, STAY, DOWN, 1 ; person
+	def_object_events
+	object_event SPRITE_LINK_RECEPTIONIST, 4, 2, STAY, DOWN, 1 ; person
 
 	def_warps_to SILPH_CO_1F

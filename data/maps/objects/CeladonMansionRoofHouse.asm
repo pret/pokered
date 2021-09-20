@@ -7,8 +7,8 @@ CeladonMansionRoofHouse_Object:
 
 	def_bg_events
 
-	def_objects
-	object SPRITE_HIKER, 2, 2, STAY, DOWN, 1 ; person
-	object SPRITE_POKE_BALL, 4, 3, STAY, NONE, 2 ; person
+	def_object_events
+	object_event SPRITE_HIKER, 2, 2, STAY, DOWN, 1 ; person
+	object_event SPRITE_POKE_BALL, 4, 3, STAY, NONE, 2 ; person
 
 	def_warps_to CELADON_MANSION_ROOF_HOUSE

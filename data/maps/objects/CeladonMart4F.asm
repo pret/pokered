@@ -9,9 +9,9 @@ CeladonMart4F_Object:
 	def_bg_events
 	bg_event 14,  1, 4 ; CeladonMart4Text4
 
-	def_objects
-	object SPRITE_CLERK, 5, 7, STAY, NONE, 1 ; person
-	object SPRITE_SUPER_NERD, 15, 5, WALK, LEFT_RIGHT, 2 ; person
-	object SPRITE_YOUNGSTER, 5, 2, WALK, LEFT_RIGHT, 3 ; person
+	def_object_events
+	object_event SPRITE_CLERK, 5, 7, STAY, NONE, 1 ; person
+	object_event SPRITE_SUPER_NERD, 15, 5, WALK, LEFT_RIGHT, 2 ; person
+	object_event SPRITE_YOUNGSTER, 5, 2, WALK, LEFT_RIGHT, 3 ; person
 
 	def_warps_to CELADON_MART_4F

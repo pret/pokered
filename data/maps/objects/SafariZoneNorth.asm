@@ -19,8 +19,8 @@ SafariZoneNorth_Object:
 	bg_event 19, 33, 6 ; SafariZoneNorthText6
 	bg_event 26, 28, 7 ; SafariZoneNorthText7
 
-	def_objects
-	object SPRITE_POKE_BALL, 25, 1, STAY, NONE, 1, PROTEIN
-	object SPRITE_POKE_BALL, 19, 7, STAY, NONE, 2, TM_SKULL_BASH
+	def_object_events
+	object_event SPRITE_POKE_BALL, 25, 1, STAY, NONE, 1, PROTEIN
+	object_event SPRITE_POKE_BALL, 19, 7, STAY, NONE, 2, TM_SKULL_BASH
 
 	def_warps_to SAFARI_ZONE_NORTH

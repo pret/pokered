@@ -9,8 +9,8 @@ CeruleanTrashedHouse_Object:
 	def_bg_events
 	bg_event  3,  0, 3 ; CeruleanHouseTrashedText3
 
-	def_objects
-	object SPRITE_FISHING_GURU, 2, 1, STAY, DOWN, 1 ; person
-	object SPRITE_GIRL, 5, 6, WALK, LEFT_RIGHT, 2 ; person
+	def_object_events
+	object_event SPRITE_FISHING_GURU, 2, 1, STAY, DOWN, 1 ; person
+	object_event SPRITE_GIRL, 5, 6, WALK, LEFT_RIGHT, 2 ; person
 
 	def_warps_to CERULEAN_TRASHED_HOUSE

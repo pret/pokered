@@ -9,8 +9,8 @@ ViridianForestSouthGate_Object:
 
 	def_bg_events
 
-	def_objects
-	object SPRITE_GIRL, 8, 4, STAY, LEFT, 1 ; person
-	object SPRITE_LITTLE_GIRL, 2, 4, WALK, UP_DOWN, 2 ; person
+	def_object_events
+	object_event SPRITE_GIRL, 8, 4, STAY, LEFT, 1 ; person
+	object_event SPRITE_LITTLE_GIRL, 2, 4, WALK, UP_DOWN, 2 ; person
 
 	def_warps_to VIRIDIAN_FOREST_SOUTH_GATE

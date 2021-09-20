@@ -9,7 +9,7 @@ BrunosRoom_Object:
 
 	def_bg_events
 
-	def_objects
-	object SPRITE_BRUNO, 5, 2, STAY, DOWN, 1, OPP_BRUNO, 1
+	def_object_events
+	object_event SPRITE_BRUNO, 5, 2, STAY, DOWN, 1, OPP_BRUNO, 1
 
 	def_warps_to BRUNOS_ROOM

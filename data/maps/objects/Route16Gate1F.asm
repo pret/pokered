@@ -14,8 +14,8 @@ Route16Gate1F_Object:
 
 	def_bg_events
 
-	def_objects
-	object SPRITE_GUARD, 4, 5, STAY, DOWN, 1 ; person
-	object SPRITE_GAMBLER, 4, 3, STAY, NONE, 2 ; person
+	def_object_events
+	object_event SPRITE_GUARD, 4, 5, STAY, DOWN, 1 ; person
+	object_event SPRITE_GAMBLER, 4, 3, STAY, NONE, 2 ; person
 
 	def_warps_to ROUTE_16_GATE_1F

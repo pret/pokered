@@ -16,13 +16,13 @@ ViridianCity_Object:
 	bg_event 24, 25, 12 ; PokeCenterSignText
 	bg_event 27,  7, 13 ; ViridianCityText13
 
-	def_objects
-	object SPRITE_YOUNGSTER, 13, 20, WALK, ANY_DIR, 1 ; person
-	object SPRITE_GAMBLER, 30, 8, STAY, NONE, 2 ; person
-	object SPRITE_YOUNGSTER, 30, 25, WALK, ANY_DIR, 3 ; person
-	object SPRITE_GIRL, 17, 9, STAY, RIGHT, 4 ; person
-	object SPRITE_GAMBLER_ASLEEP, 18, 9, STAY, NONE, 5 ; person
-	object SPRITE_FISHER, 6, 23, STAY, DOWN, 6 ; person
-	object SPRITE_GAMBLER, 17, 5, WALK, LEFT_RIGHT, 7 ; person
+	def_object_events
+	object_event SPRITE_YOUNGSTER, 13, 20, WALK, ANY_DIR, 1 ; person
+	object_event SPRITE_GAMBLER, 30, 8, STAY, NONE, 2 ; person
+	object_event SPRITE_YOUNGSTER, 30, 25, WALK, ANY_DIR, 3 ; person
+	object_event SPRITE_GIRL, 17, 9, STAY, RIGHT, 4 ; person
+	object_event SPRITE_GAMBLER_ASLEEP, 18, 9, STAY, NONE, 5 ; person
+	object_event SPRITE_FISHER, 6, 23, STAY, DOWN, 6 ; person
+	object_event SPRITE_GAMBLER, 17, 5, WALK, LEFT_RIGHT, 7 ; person
 
 	def_warps_to VIRIDIAN_CITY

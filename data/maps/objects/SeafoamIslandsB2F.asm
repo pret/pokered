@@ -12,8 +12,8 @@ SeafoamIslandsB2F_Object:
 
 	def_bg_events
 
-	def_objects
-	object SPRITE_BOULDER, 18, 6, STAY, BOULDER_MOVEMENT_BYTE_2, 1 ; person
-	object SPRITE_BOULDER, 23, 6, STAY, BOULDER_MOVEMENT_BYTE_2, 2 ; person
+	def_object_events
+	object_event SPRITE_BOULDER, 18, 6, STAY, BOULDER_MOVEMENT_BYTE_2, 1 ; person
+	object_event SPRITE_BOULDER, 23, 6, STAY, BOULDER_MOVEMENT_BYTE_2, 2 ; person
 
 	def_warps_to SEAFOAM_ISLANDS_B2F

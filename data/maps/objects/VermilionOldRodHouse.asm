@@ -7,7 +7,7 @@ VermilionOldRodHouse_Object:
 
 	def_bg_events
 
-	def_objects
-	object SPRITE_FISHING_GURU, 2, 4, STAY, RIGHT, 1 ; person
+	def_object_events
+	object_event SPRITE_FISHING_GURU, 2, 4, STAY, RIGHT, 1 ; person
 
 	def_warps_to VERMILION_OLD_ROD_HOUSE

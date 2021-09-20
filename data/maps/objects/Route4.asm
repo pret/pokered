@@ -11,9 +11,9 @@ Route4_Object:
 	bg_event 17,  7, 5 ; Route4Text5
 	bg_event 27,  7, 6 ; Route4Text6
 
-	def_objects
-	object SPRITE_COOLTRAINER_F, 9, 8, WALK, ANY_DIR, 1 ; person
-	object SPRITE_COOLTRAINER_F, 63, 3, STAY, RIGHT, 2, OPP_LASS, 4
-	object SPRITE_POKE_BALL, 57, 3, STAY, NONE, 3, TM_WHIRLWIND
+	def_object_events
+	object_event SPRITE_COOLTRAINER_F, 9, 8, WALK, ANY_DIR, 1 ; person
+	object_event SPRITE_COOLTRAINER_F, 63, 3, STAY, RIGHT, 2, OPP_LASS, 4
+	object_event SPRITE_POKE_BALL, 57, 3, STAY, NONE, 3, TM_WHIRLWIND
 
 	def_warps_to ROUTE_4

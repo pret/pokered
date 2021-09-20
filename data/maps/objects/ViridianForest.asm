@@ -17,14 +17,14 @@ ViridianForest_Object:
 	bg_event 18, 45, 13 ; ViridianForestText13
 	bg_event  2,  1, 14 ; ViridianForestText14
 
-	def_objects
-	object SPRITE_YOUNGSTER, 16, 43, STAY, NONE, 1 ; person
-	object SPRITE_YOUNGSTER, 30, 33, STAY, LEFT, 2, OPP_BUG_CATCHER, 1
-	object SPRITE_YOUNGSTER, 30, 19, STAY, LEFT, 3, OPP_BUG_CATCHER, 2
-	object SPRITE_YOUNGSTER, 2, 18, STAY, LEFT, 4, OPP_BUG_CATCHER, 3
-	object SPRITE_POKE_BALL, 25, 11, STAY, NONE, 5, ANTIDOTE
-	object SPRITE_POKE_BALL, 12, 29, STAY, NONE, 6, POTION
-	object SPRITE_POKE_BALL, 1, 31, STAY, NONE, 7, POKE_BALL
-	object SPRITE_YOUNGSTER, 27, 40, STAY, NONE, 8 ; person
+	def_object_events
+	object_event SPRITE_YOUNGSTER, 16, 43, STAY, NONE, 1 ; person
+	object_event SPRITE_YOUNGSTER, 30, 33, STAY, LEFT, 2, OPP_BUG_CATCHER, 1
+	object_event SPRITE_YOUNGSTER, 30, 19, STAY, LEFT, 3, OPP_BUG_CATCHER, 2
+	object_event SPRITE_YOUNGSTER, 2, 18, STAY, LEFT, 4, OPP_BUG_CATCHER, 3
+	object_event SPRITE_POKE_BALL, 25, 11, STAY, NONE, 5, ANTIDOTE
+	object_event SPRITE_POKE_BALL, 12, 29, STAY, NONE, 6, POTION
+	object_event SPRITE_POKE_BALL, 1, 31, STAY, NONE, 7, POKE_BALL
+	object_event SPRITE_YOUNGSTER, 27, 40, STAY, NONE, 8 ; person
 
 	def_warps_to VIRIDIAN_FOREST

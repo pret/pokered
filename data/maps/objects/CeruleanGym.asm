@@ -7,10 +7,10 @@ CeruleanGym_Object:
 
 	def_bg_events
 
-	def_objects
-	object SPRITE_BRUNETTE_GIRL, 4, 2, STAY, DOWN, 1, OPP_MISTY, 1
-	object SPRITE_COOLTRAINER_F, 2, 3, STAY, RIGHT, 2, OPP_JR_TRAINER_F, 1
-	object SPRITE_SWIMMER, 8, 7, STAY, LEFT, 3, OPP_SWIMMER, 1
-	object SPRITE_GYM_GUIDE, 7, 10, STAY, DOWN, 4 ; person
+	def_object_events
+	object_event SPRITE_BRUNETTE_GIRL, 4, 2, STAY, DOWN, 1, OPP_MISTY, 1
+	object_event SPRITE_COOLTRAINER_F, 2, 3, STAY, RIGHT, 2, OPP_JR_TRAINER_F, 1
+	object_event SPRITE_SWIMMER, 8, 7, STAY, LEFT, 3, OPP_SWIMMER, 1
+	object_event SPRITE_GYM_GUIDE, 7, 10, STAY, DOWN, 4 ; person
 
 	def_warps_to CERULEAN_GYM

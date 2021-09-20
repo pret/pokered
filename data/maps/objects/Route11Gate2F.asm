@@ -8,8 +8,8 @@ Route11Gate2F_Object:
 	bg_event  1,  2, 3 ; Route11GateUpstairsText3
 	bg_event  6,  2, 4 ; Route11GateUpstairsText4
 
-	def_objects
-	object SPRITE_YOUNGSTER, 4, 2, WALK, LEFT_RIGHT, 1 ; person
-	object SPRITE_SCIENTIST, 2, 6, STAY, NONE, 2 ; person
+	def_object_events
+	object_event SPRITE_YOUNGSTER, 4, 2, WALK, LEFT_RIGHT, 1 ; person
+	object_event SPRITE_SCIENTIST, 2, 6, STAY, NONE, 2 ; person
 
 	def_warps_to ROUTE_11_GATE_2F

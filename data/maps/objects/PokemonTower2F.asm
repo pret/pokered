@@ -7,8 +7,8 @@ PokemonTower2F_Object:
 
 	def_bg_events
 
-	def_objects
-	object SPRITE_BLUE, 14, 5, STAY, NONE, 1 ; person
-	object SPRITE_CHANNELER, 3, 7, STAY, RIGHT, 2 ; person
+	def_object_events
+	object_event SPRITE_BLUE, 14, 5, STAY, NONE, 1 ; person
+	object_event SPRITE_CHANNELER, 3, 7, STAY, RIGHT, 2 ; person
 
 	def_warps_to POKEMON_TOWER_2F

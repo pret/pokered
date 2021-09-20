@@ -16,8 +16,8 @@ SSAnne1F_Object:
 
 	def_bg_events
 
-	def_objects
-	object SPRITE_WAITER, 12, 6, WALK, LEFT_RIGHT, 1 ; person
-	object SPRITE_SAILOR, 27, 5, STAY, NONE, 2 ; person
+	def_object_events
+	object_event SPRITE_WAITER, 12, 6, WALK, LEFT_RIGHT, 1 ; person
+	object_event SPRITE_SAILOR, 27, 5, STAY, NONE, 2 ; person
 
 	def_warps_to SS_ANNE_1F

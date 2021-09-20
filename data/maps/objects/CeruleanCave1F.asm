@@ -14,9 +14,9 @@ CeruleanCave1F_Object:
 
 	def_bg_events
 
-	def_objects
-	object SPRITE_POKE_BALL, 7, 13, STAY, NONE, 1, FULL_RESTORE
-	object SPRITE_POKE_BALL, 19, 3, STAY, NONE, 2, MAX_ELIXER
-	object SPRITE_POKE_BALL, 5, 0, STAY, NONE, 3, NUGGET
+	def_object_events
+	object_event SPRITE_POKE_BALL, 7, 13, STAY, NONE, 1, FULL_RESTORE
+	object_event SPRITE_POKE_BALL, 19, 3, STAY, NONE, 2, MAX_ELIXER
+	object_event SPRITE_POKE_BALL, 5, 0, STAY, NONE, 3, NUGGET
 
 	def_warps_to CERULEAN_CAVE_1F

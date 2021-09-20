@@ -14,7 +14,7 @@ IsPlayerOnDungeonWarp::
 	set 4, [hl]
 	ret
 
-; if a hidden object was found, stores $00 in [hDidntFindAnyHiddenObject], else stores $ff
+; if a hidden object_event was found, stores $00 in [hDidntFindAnyHiddenObject], else stores $ff
 CheckForHiddenObject::
 	ld hl, hItemAlreadyFound
 	xor a

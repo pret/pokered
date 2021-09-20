@@ -7,7 +7,7 @@ MrPsychicsHouse_Object:
 
 	def_bg_events
 
-	def_objects
-	object SPRITE_FISHING_GURU, 5, 3, STAY, LEFT, 1 ; person
+	def_object_events
+	object_event SPRITE_FISHING_GURU, 5, 3, STAY, LEFT, 1 ; person
 
 	def_warps_to MR_PSYCHICS_HOUSE

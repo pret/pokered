@@ -7,8 +7,8 @@ Route16FlyHouse_Object:
 
 	def_bg_events
 
-	def_objects
-	object SPRITE_BRUNETTE_GIRL, 2, 3, STAY, RIGHT, 1 ; person
-	object SPRITE_BIRD, 6, 4, WALK, ANY_DIR, 2 ; person
+	def_object_events
+	object_event SPRITE_BRUNETTE_GIRL, 2, 3, STAY, RIGHT, 1 ; person
+	object_event SPRITE_BIRD, 6, 4, WALK, ANY_DIR, 2 ; person
 
 	def_warps_to ROUTE_16_FLY_HOUSE

@@ -6,9 +6,9 @@ Route1_Object:
 	def_bg_events
 	bg_event  9, 27, 3 ; Route1Text3
 
-	def_objects
-	object SPRITE_YOUNGSTER, 5, 24, WALK, UP_DOWN, 1 ; person
-	object SPRITE_YOUNGSTER, 15, 13, WALK, LEFT_RIGHT, 2 ; person
+	def_object_events
+	object_event SPRITE_YOUNGSTER, 5, 24, WALK, UP_DOWN, 1 ; person
+	object_event SPRITE_YOUNGSTER, 15, 13, WALK, LEFT_RIGHT, 2 ; person
 
 	def_warps_to ROUTE_1
 

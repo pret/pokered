@@ -8,8 +8,8 @@ Route16Gate2F_Object:
 	bg_event  1,  2, 3 ; Route16GateUpstairsText3
 	bg_event  6,  2, 4 ; Route16GateUpstairsText4
 
-	def_objects
-	object SPRITE_LITTLE_BOY, 4, 2, STAY, NONE, 1 ; person
-	object SPRITE_LITTLE_GIRL, 2, 5, WALK, LEFT_RIGHT, 2 ; person
+	def_object_events
+	object_event SPRITE_LITTLE_BOY, 4, 2, STAY, NONE, 1 ; person
+	object_event SPRITE_LITTLE_GIRL, 2, 5, WALK, LEFT_RIGHT, 2 ; person
 
 	def_warps_to ROUTE_16_GATE_2F

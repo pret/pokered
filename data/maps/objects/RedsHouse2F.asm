@@ -6,6 +6,6 @@ RedsHouse2F_Object:
 
 	def_bg_events
 
-	def_objects
+	def_object_events
 
 	def_warps_to REDS_HOUSE_2F

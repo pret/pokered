@@ -10,10 +10,10 @@ SilphCo9F_Object:
 
 	def_bg_events
 
-	def_objects
-	object SPRITE_NURSE, 3, 14, STAY, DOWN, 1 ; person
-	object SPRITE_ROCKET, 2, 4, STAY, UP, 2, OPP_ROCKET, 37
-	object SPRITE_SCIENTIST, 21, 13, STAY, DOWN, 3, OPP_SCIENTIST, 10
-	object SPRITE_ROCKET, 13, 16, STAY, UP, 4, OPP_ROCKET, 38
+	def_object_events
+	object_event SPRITE_NURSE, 3, 14, STAY, DOWN, 1 ; person
+	object_event SPRITE_ROCKET, 2, 4, STAY, UP, 2, OPP_ROCKET, 37
+	object_event SPRITE_SCIENTIST, 21, 13, STAY, DOWN, 3, OPP_SCIENTIST, 10
+	object_event SPRITE_ROCKET, 13, 16, STAY, UP, 4, OPP_ROCKET, 38
 
 	def_warps_to SILPH_CO_9F

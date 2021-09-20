@@ -8,6 +8,6 @@ RocketHideoutElevator_Object:
 	def_bg_events
 	bg_event  1,  1, 1 ; RocketHideoutElevatorText1
 
-	def_objects
+	def_object_events
 
 	def_warps_to ROCKET_HIDEOUT_ELEVATOR

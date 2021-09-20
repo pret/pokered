@@ -7,9 +7,9 @@ SafariZoneWestRestHouse_Object:
 
 	def_bg_events
 
-	def_objects
-	object SPRITE_SCIENTIST, 4, 4, WALK, ANY_DIR, 1 ; person
-	object SPRITE_COOLTRAINER_M, 0, 2, STAY, RIGHT, 2 ; person
-	object SPRITE_ERIKA, 6, 2, STAY, DOWN, 3 ; person
+	def_object_events
+	object_event SPRITE_SCIENTIST, 4, 4, WALK, ANY_DIR, 1 ; person
+	object_event SPRITE_COOLTRAINER_M, 0, 2, STAY, RIGHT, 2 ; person
+	object_event SPRITE_ERIKA, 6, 2, STAY, DOWN, 3 ; person
 
 	def_warps_to SAFARI_ZONE_WEST_REST_HOUSE

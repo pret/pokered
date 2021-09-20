@@ -13,6 +13,6 @@ MtMoonB1F_Object:
 
 	def_bg_events
 
-	def_objects
+	def_object_events
 
 	def_warps_to MT_MOON_B1F

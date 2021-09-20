@@ -9,8 +9,8 @@ ChampionsRoom_Object:
 
 	def_bg_events
 
-	def_objects
-	object SPRITE_BLUE, 4, 2, STAY, DOWN, 1 ; person
-	object SPRITE_OAK, 3, 7, STAY, UP, 2 ; person
+	def_object_events
+	object_event SPRITE_BLUE, 4, 2, STAY, DOWN, 1 ; person
+	object_event SPRITE_OAK, 3, 7, STAY, UP, 2 ; person
 
 	def_warps_to CHAMPIONS_ROOM

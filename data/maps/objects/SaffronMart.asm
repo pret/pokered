@@ -7,9 +7,9 @@ SaffronMart_Object:
 
 	def_bg_events
 
-	def_objects
-	object SPRITE_CLERK, 0, 5, STAY, RIGHT, 1 ; person
-	object SPRITE_SUPER_NERD, 4, 2, STAY, NONE, 2 ; person
-	object SPRITE_COOLTRAINER_F, 6, 5, WALK, ANY_DIR, 3 ; person
+	def_object_events
+	object_event SPRITE_CLERK, 0, 5, STAY, RIGHT, 1 ; person
+	object_event SPRITE_SUPER_NERD, 4, 2, STAY, NONE, 2 ; person
+	object_event SPRITE_COOLTRAINER_F, 6, 5, WALK, ANY_DIR, 3 ; person
 
 	def_warps_to SAFFRON_MART

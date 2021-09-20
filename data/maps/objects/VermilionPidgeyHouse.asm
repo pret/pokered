@@ -7,9 +7,9 @@ VermilionPidgeyHouse_Object:
 
 	def_bg_events
 
-	def_objects
-	object SPRITE_YOUNGSTER, 5, 3, STAY, LEFT, 1 ; person
-	object SPRITE_BIRD, 3, 5, WALK, LEFT_RIGHT, 2 ; person
-	object SPRITE_PAPER, 4, 3, STAY, NONE, 3 ; person
+	def_object_events
+	object_event SPRITE_YOUNGSTER, 5, 3, STAY, LEFT, 1 ; person
+	object_event SPRITE_BIRD, 3, 5, WALK, LEFT_RIGHT, 2 ; person
+	object_event SPRITE_PAPER, 4, 3, STAY, NONE, 3 ; person
 
 	def_warps_to VERMILION_PIDGEY_HOUSE

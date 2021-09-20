@@ -13,7 +13,7 @@ CeladonMart1F_Object:
 	bg_event 11,  4, 2 ; CeladonMart1Text2
 	bg_event 14,  1, 3 ; CeladonMart1Text3
 
-	def_objects
-	object SPRITE_LINK_RECEPTIONIST, 8, 3, STAY, DOWN, 1 ; person
+	def_object_events
+	object_event SPRITE_LINK_RECEPTIONIST, 8, 3, STAY, DOWN, 1 ; person
 
 	def_warps_to CELADON_MART_1F

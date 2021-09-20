@@ -11,9 +11,9 @@ Route18_Object:
 	bg_event 43,  7, 4 ; Route18Text4
 	bg_event 33,  5, 5 ; Route18Text5
 
-	def_objects
-	object SPRITE_COOLTRAINER_M, 36, 11, STAY, RIGHT, 1, OPP_BIRD_KEEPER, 8
-	object SPRITE_COOLTRAINER_M, 40, 15, STAY, LEFT, 2, OPP_BIRD_KEEPER, 9
-	object SPRITE_COOLTRAINER_M, 42, 13, STAY, LEFT, 3, OPP_BIRD_KEEPER, 10
+	def_object_events
+	object_event SPRITE_COOLTRAINER_M, 36, 11, STAY, RIGHT, 1, OPP_BIRD_KEEPER, 8
+	object_event SPRITE_COOLTRAINER_M, 40, 15, STAY, LEFT, 2, OPP_BIRD_KEEPER, 9
+	object_event SPRITE_COOLTRAINER_M, 42, 13, STAY, LEFT, 3, OPP_BIRD_KEEPER, 10
 
 	def_warps_to ROUTE_18

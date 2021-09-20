@@ -10,7 +10,7 @@ Route18Gate1F_Object:
 
 	def_bg_events
 
-	def_objects
-	object SPRITE_GUARD, 4, 1, STAY, DOWN, 1 ; person
+	def_object_events
+	object_event SPRITE_GUARD, 4, 1, STAY, DOWN, 1 ; person
 
 	def_warps_to ROUTE_18_GATE_1F

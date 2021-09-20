@@ -59,7 +59,7 @@ LoadMissableObjects:
 	inc de
 	ld a, c
 	inc c
-	ld [de], a                 ; write (global) missable object index
+	ld [de], a                 ; write (global) missable object_event index
 	inc de
 	jr .writeMissableObjectsListLoop
 .done
@@ -97,7 +97,7 @@ InitializeMissableObjectsFlags:
 	inc hl
 	jr .missableObjectsLoop
 
-; tests if current sprite is a missable object that is hidden/has been removed
+; tests if current sprite is a missable object_event that is hidden/has been removed
 IsObjectHidden:
 	ldh a, [hCurrentSpriteOffset]
 	swap a
@@ -123,8 +123,8 @@ IsObjectHidden:
 	ldh [hIsHiddenMissableObject], a
 	ret
 
-; adds missable object (items, leg. pokemon, etc.) to the map
-; [wMissableObjectIndex]: index of the missable object to be added (global index)
+; adds missable object_event (items, leg. pokemon, etc.) to the map
+; [wMissableObjectIndex]: index of the missable object_event to be added (global index)
 ShowObject:
 ShowObject2:
 	ld hl, wMissableObjectFlags
@@ -134,8 +134,8 @@ ShowObject2:
 	call MissableObjectFlagAction   ; reset "removed" flag
 	jp UpdateSprites
 
-; removes missable object (items, leg. pokemon, etc.) from the map
-; [wMissableObjectIndex]: index of the missable object to be removed (global index)
+; removes missable object_event (items, leg. pokemon, etc.) from the map
+; [wMissableObjectIndex]: index of the missable object_event to be removed (global index)
 HideObject:
 	ld hl, wMissableObjectFlags
 	ld a, [wMissableObjectIndex]

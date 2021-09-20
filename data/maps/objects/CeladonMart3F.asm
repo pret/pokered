@@ -20,11 +20,11 @@ CeladonMart3F_Object:
 	bg_event  6,  1, 16 ; CeladonMart3Text16
 	bg_event 10,  1, 17 ; CeladonMart3Text17
 
-	def_objects
-	object SPRITE_CLERK, 16, 5, STAY, NONE, 1 ; person
-	object SPRITE_GAMEBOY_KID, 11, 6, STAY, RIGHT, 2 ; person
-	object SPRITE_GAMEBOY_KID, 7, 2, STAY, DOWN, 3 ; person
-	object SPRITE_GAMEBOY_KID, 8, 2, STAY, DOWN, 4 ; person
-	object SPRITE_LITTLE_BOY, 2, 5, STAY, UP, 5 ; person
+	def_object_events
+	object_event SPRITE_CLERK, 16, 5, STAY, NONE, 1 ; person
+	object_event SPRITE_GAMEBOY_KID, 11, 6, STAY, RIGHT, 2 ; person
+	object_event SPRITE_GAMEBOY_KID, 7, 2, STAY, DOWN, 3 ; person
+	object_event SPRITE_GAMEBOY_KID, 8, 2, STAY, DOWN, 4 ; person
+	object_event SPRITE_LITTLE_BOY, 2, 5, STAY, UP, 5 ; person
 
 	def_warps_to CELADON_MART_3F

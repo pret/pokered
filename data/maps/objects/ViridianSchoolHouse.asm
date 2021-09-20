@@ -7,8 +7,8 @@ ViridianSchoolHouse_Object:
 
 	def_bg_events
 
-	def_objects
-	object SPRITE_BRUNETTE_GIRL, 3, 5, STAY, UP, 1 ; person
-	object SPRITE_COOLTRAINER_F, 4, 1, STAY, DOWN, 2 ; person
+	def_object_events
+	object_event SPRITE_BRUNETTE_GIRL, 3, 5, STAY, UP, 1 ; person
+	object_event SPRITE_COOLTRAINER_F, 4, 1, STAY, DOWN, 2 ; person
 
 	def_warps_to VIRIDIAN_SCHOOL_HOUSE

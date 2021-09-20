@@ -610,7 +610,7 @@ wTradingWhichEnemyMon:: db
 wNameOfPlayerMonToBeTraded:: ds NAME_LENGTH
 
 NEXTU
-; one byte for each falling object
+; one byte for each falling object_event
 wFallingObjectsMovementData:: ds 20
 
 NEXTU
@@ -1781,7 +1781,7 @@ wPlayerID:: dw
 wMapMusicSoundID:: db
 wMapMusicROMBank:: db
 
-; offset subtracted from FadePal4 to get the background and object palettes for the current map
+; offset subtracted from FadePal4 to get the background and object_event palettes for the current map
 ; normally, it is 0. it is 6 when Flash is needed, causing FadePal2 to be used instead of FadePal4
 wMapPalOffset:: db
 
@@ -1924,7 +1924,7 @@ wd5cd:: db
 
 ; each entry consists of 2 bytes
 ; * the sprite ID (depending on the current map)
-; * the missable object index (global, used for wMissableObjectFlags)
+; * the missable object_event index (global, used for wMissableObjectFlags)
 ; terminated with $FF
 wMissableObjectList:: ds 16 * 2 + 1
 

@@ -16,13 +16,13 @@ Route16_Object:
 	bg_event 27, 11, 8 ; Route16Text8
 	bg_event  5, 17, 9 ; Route16Text9
 
-	def_objects
-	object SPRITE_BIKER, 17, 12, STAY, LEFT, 1, OPP_BIKER, 5
-	object SPRITE_BIKER, 14, 13, STAY, RIGHT, 2, OPP_CUE_BALL, 1
-	object SPRITE_BIKER, 11, 12, STAY, UP, 3, OPP_CUE_BALL, 2
-	object SPRITE_BIKER, 9, 11, STAY, LEFT, 4, OPP_BIKER, 6
-	object SPRITE_BIKER, 6, 10, STAY, RIGHT, 5, OPP_CUE_BALL, 3
-	object SPRITE_BIKER, 3, 12, STAY, RIGHT, 6, OPP_BIKER, 7
-	object SPRITE_SNORLAX, 26, 10, STAY, DOWN, 7 ; person
+	def_object_events
+	object_event SPRITE_BIKER, 17, 12, STAY, LEFT, 1, OPP_BIKER, 5
+	object_event SPRITE_BIKER, 14, 13, STAY, RIGHT, 2, OPP_CUE_BALL, 1
+	object_event SPRITE_BIKER, 11, 12, STAY, UP, 3, OPP_CUE_BALL, 2
+	object_event SPRITE_BIKER, 9, 11, STAY, LEFT, 4, OPP_BIKER, 6
+	object_event SPRITE_BIKER, 6, 10, STAY, RIGHT, 5, OPP_CUE_BALL, 3
+	object_event SPRITE_BIKER, 3, 12, STAY, RIGHT, 6, OPP_BIKER, 7
+	object_event SPRITE_SNORLAX, 26, 10, STAY, DOWN, 7 ; person
 
 	def_warps_to ROUTE_16

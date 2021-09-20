@@ -8,8 +8,8 @@ UndergroundPathRoute7Copy_Object:
 
 	def_bg_events
 
-	def_objects
-	object SPRITE_GIRL, 3, 2, STAY, NONE, 1 ; person
-	object SPRITE_MIDDLE_AGED_MAN, 2, 4, STAY, NONE, 2 ; person
+	def_object_events
+	object_event SPRITE_GIRL, 3, 2, STAY, NONE, 1 ; person
+	object_event SPRITE_MIDDLE_AGED_MAN, 2, 4, STAY, NONE, 2 ; person
 
 	def_warps_to UNDERGROUND_PATH_ROUTE_7_COPY

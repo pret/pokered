@@ -21,12 +21,12 @@ VermilionCity_Object:
 	bg_event  7, 19, 12 ; VermilionCityText12
 	bg_event 29, 15, 13 ; VermilionCityText13
 
-	def_objects
-	object SPRITE_BEAUTY, 19, 7, WALK, LEFT_RIGHT, 1 ; person
-	object SPRITE_GAMBLER, 14, 6, STAY, NONE, 2 ; person
-	object SPRITE_SAILOR, 19, 30, STAY, UP, 3 ; person
-	object SPRITE_GAMBLER, 30, 7, STAY, NONE, 4 ; person
-	object SPRITE_MONSTER, 29, 9, WALK, UP_DOWN, 5 ; person
-	object SPRITE_SAILOR, 25, 27, WALK, LEFT_RIGHT, 6 ; person
+	def_object_events
+	object_event SPRITE_BEAUTY, 19, 7, WALK, LEFT_RIGHT, 1 ; person
+	object_event SPRITE_GAMBLER, 14, 6, STAY, NONE, 2 ; person
+	object_event SPRITE_SAILOR, 19, 30, STAY, UP, 3 ; person
+	object_event SPRITE_GAMBLER, 30, 7, STAY, NONE, 4 ; person
+	object_event SPRITE_MONSTER, 29, 9, WALK, UP_DOWN, 5 ; person
+	object_event SPRITE_SAILOR, 25, 27, WALK, LEFT_RIGHT, 6 ; person
 
 	def_warps_to VERMILION_CITY

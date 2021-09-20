@@ -12,17 +12,17 @@ SilphCo5F_Object:
 
 	def_bg_events
 
-	def_objects
-	object SPRITE_SILPH_WORKER, 13, 9, STAY, NONE, 1 ; person
-	object SPRITE_ROCKET, 8, 16, STAY, RIGHT, 2, OPP_ROCKET, 28
-	object SPRITE_SCIENTIST, 8, 3, STAY, RIGHT, 3, OPP_SCIENTIST, 6
-	object SPRITE_ROCKER, 18, 10, STAY, UP, 4, OPP_JUGGLER, 1
-	object SPRITE_ROCKET, 28, 4, STAY, UP, 5, OPP_ROCKET, 29
-	object SPRITE_POKE_BALL, 2, 13, STAY, NONE, 6, TM_TAKE_DOWN
-	object SPRITE_POKE_BALL, 4, 6, STAY, NONE, 7, PROTEIN
-	object SPRITE_POKE_BALL, 21, 16, STAY, NONE, 8, CARD_KEY
-	object SPRITE_CLIPBOARD, 22, 12, STAY, NONE, 9 ; person
-	object SPRITE_CLIPBOARD, 25, 10, STAY, NONE, 10 ; person
-	object SPRITE_CLIPBOARD, 24, 6, STAY, NONE, 11 ; person
+	def_object_events
+	object_event SPRITE_SILPH_WORKER, 13, 9, STAY, NONE, 1 ; person
+	object_event SPRITE_ROCKET, 8, 16, STAY, RIGHT, 2, OPP_ROCKET, 28
+	object_event SPRITE_SCIENTIST, 8, 3, STAY, RIGHT, 3, OPP_SCIENTIST, 6
+	object_event SPRITE_ROCKER, 18, 10, STAY, UP, 4, OPP_JUGGLER, 1
+	object_event SPRITE_ROCKET, 28, 4, STAY, UP, 5, OPP_ROCKET, 29
+	object_event SPRITE_POKE_BALL, 2, 13, STAY, NONE, 6, TM_TAKE_DOWN
+	object_event SPRITE_POKE_BALL, 4, 6, STAY, NONE, 7, PROTEIN
+	object_event SPRITE_POKE_BALL, 21, 16, STAY, NONE, 8, CARD_KEY
+	object_event SPRITE_CLIPBOARD, 22, 12, STAY, NONE, 9 ; person
+	object_event SPRITE_CLIPBOARD, 25, 10, STAY, NONE, 10 ; person
+	object_event SPRITE_CLIPBOARD, 24, 6, STAY, NONE, 11 ; person
 
 	def_warps_to SILPH_CO_5F

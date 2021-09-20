@@ -8,6 +8,6 @@ SilphCoElevator_Object:
 	def_bg_events
 	bg_event  3,  0, 1 ; SilphCoElevatorText1
 
-	def_objects
+	def_object_events
 
 	def_warps_to SILPH_CO_ELEVATOR

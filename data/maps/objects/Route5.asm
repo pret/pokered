@@ -11,6 +11,6 @@ Route5_Object:
 	def_bg_events
 	bg_event 17, 29, 1 ; Route5Text1
 
-	def_objects
+	def_object_events
 
 	def_warps_to ROUTE_5

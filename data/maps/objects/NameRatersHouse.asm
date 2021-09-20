@@ -7,7 +7,7 @@ NameRatersHouse_Object:
 
 	def_bg_events
 
-	def_objects
-	object SPRITE_SILPH_PRESIDENT, 5, 3, STAY, LEFT, 1 ; person
+	def_object_events
+	object_event SPRITE_SILPH_PRESIDENT, 5, 3, STAY, LEFT, 1 ; person
 
 	def_warps_to NAME_RATERS_HOUSE

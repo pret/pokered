@@ -7,10 +7,10 @@ ViridianNicknameHouse_Object:
 
 	def_bg_events
 
-	def_objects
-	object SPRITE_BALDING_GUY, 5, 3, STAY, NONE, 1 ; person
-	object SPRITE_LITTLE_GIRL, 1, 4, WALK, UP_DOWN, 2 ; person
-	object SPRITE_BIRD, 5, 5, WALK, LEFT_RIGHT, 3 ; person
-	object SPRITE_CLIPBOARD, 4, 0, STAY, NONE, 4 ; person
+	def_object_events
+	object_event SPRITE_BALDING_GUY, 5, 3, STAY, NONE, 1 ; person
+	object_event SPRITE_LITTLE_GIRL, 1, 4, WALK, UP_DOWN, 2 ; person
+	object_event SPRITE_BIRD, 5, 5, WALK, LEFT_RIGHT, 3 ; person
+	object_event SPRITE_CLIPBOARD, 4, 0, STAY, NONE, 4 ; person
 
 	def_warps_to VIRIDIAN_NICKNAME_HOUSE

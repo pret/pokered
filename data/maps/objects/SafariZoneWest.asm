@@ -17,10 +17,10 @@ SafariZoneWest_Object:
 	bg_event 26,  4, 7 ; SafariZoneWestText7
 	bg_event 24, 22, 8 ; SafariZoneWestText8
 
-	def_objects
-	object SPRITE_POKE_BALL, 8, 20, STAY, NONE, 1, MAX_POTION
-	object SPRITE_POKE_BALL, 9, 7, STAY, NONE, 2, TM_DOUBLE_TEAM
-	object SPRITE_POKE_BALL, 18, 18, STAY, NONE, 3, MAX_REVIVE
-	object SPRITE_POKE_BALL, 19, 7, STAY, NONE, 4, GOLD_TEETH
+	def_object_events
+	object_event SPRITE_POKE_BALL, 8, 20, STAY, NONE, 1, MAX_POTION
+	object_event SPRITE_POKE_BALL, 9, 7, STAY, NONE, 2, TM_DOUBLE_TEAM
+	object_event SPRITE_POKE_BALL, 18, 18, STAY, NONE, 3, MAX_REVIVE
+	object_event SPRITE_POKE_BALL, 19, 7, STAY, NONE, 4, GOLD_TEETH
 
 	def_warps_to SAFARI_ZONE_WEST

@@ -90,7 +90,7 @@ OverworldLoopLessDelay::
 	call CheckForHiddenObjectOrBookshelfOrCardKeyDoor
 	ldh a, [hItemAlreadyFound]
 	and a
-	jp z, OverworldLoop ; jump if a hidden object or bookshelf was found, but not if a card key door was found
+	jp z, OverworldLoop ; jump if a hidden object_event or bookshelf was found, but not if a card key door was found
 	call IsSpriteOrSignInFrontOfPlayer
 	ldh a, [hSpriteIndexOrTextID]
 	and a
@@ -2082,7 +2082,7 @@ LoadMapHeader::
 	ld a, [wObjectDataPointerTemp]
 	ld l, a
 	ld a, [wObjectDataPointerTemp + 1]
-	ld h, a ; hl = base of object data
+	ld h, a ; hl = base of object_event data
 	ld de, wMapBackgroundTile
 	ld a, [hli]
 	ld [de], a

@@ -11,6 +11,6 @@ Route7_Object:
 	def_bg_events
 	bg_event  3, 13, 1 ; Route7Text1
 
-	def_objects
+	def_object_events
 
 	def_warps_to ROUTE_7

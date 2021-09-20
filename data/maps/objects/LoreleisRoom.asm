@@ -9,7 +9,7 @@ LoreleisRoom_Object:
 
 	def_bg_events
 
-	def_objects
-	object SPRITE_LORELEI, 5, 2, STAY, DOWN, 1, OPP_LORELEI, 1
+	def_object_events
+	object_event SPRITE_LORELEI, 5, 2, STAY, DOWN, 1, OPP_LORELEI, 1
 
 	def_warps_to LORELEIS_ROOM

@@ -17,9 +17,9 @@ LavenderTown_Object:
 	bg_event  5,  9, 8 ; LavenderTownText8
 	bg_event 17,  7, 9 ; LavenderTownText9
 
-	def_objects
-	object SPRITE_LITTLE_GIRL, 15, 9, WALK, ANY_DIR, 1 ; person
-	object SPRITE_COOLTRAINER_M, 9, 10, STAY, NONE, 2 ; person
-	object SPRITE_SUPER_NERD, 8, 7, WALK, LEFT_RIGHT, 3 ; person
+	def_object_events
+	object_event SPRITE_LITTLE_GIRL, 15, 9, WALK, ANY_DIR, 1 ; person
+	object_event SPRITE_COOLTRAINER_M, 9, 10, STAY, NONE, 2 ; person
+	object_event SPRITE_SUPER_NERD, 8, 7, WALK, LEFT_RIGHT, 3 ; person
 
 	def_warps_to LAVENDER_TOWN

@@ -9,8 +9,8 @@ ViridianForestNorthGate_Object:
 
 	def_bg_events
 
-	def_objects
-	object SPRITE_SUPER_NERD, 3, 2, STAY, NONE, 1 ; person
-	object SPRITE_GRAMPS, 2, 5, STAY, NONE, 2 ; person
+	def_object_events
+	object_event SPRITE_SUPER_NERD, 3, 2, STAY, NONE, 1 ; person
+	object_event SPRITE_GRAMPS, 2, 5, STAY, NONE, 2 ; person
 
 	def_warps_to VIRIDIAN_FOREST_NORTH_GATE

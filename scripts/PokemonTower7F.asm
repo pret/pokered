@@ -51,7 +51,7 @@ PokemonTower7Script3:
 	cp b            ; search for sprite ID in missing objects list
 	ld a, [hli]
 	jr nz, .missableObjectsListLoop
-	ld [wMissableObjectIndex], a   ; remove missable object
+	ld [wMissableObjectIndex], a   ; remove missable object_event
 	predef HideObject
 	xor a
 	ld [wJoyIgnore], a

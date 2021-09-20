@@ -8,7 +8,7 @@ DiglettsCaveRoute2_Object:
 
 	def_bg_events
 
-	def_objects
-	object SPRITE_FISHING_GURU, 3, 3, STAY, NONE, 1 ; person
+	def_object_events
+	object_event SPRITE_FISHING_GURU, 3, 3, STAY, NONE, 1 ; person
 
 	def_warps_to DIGLETTS_CAVE_ROUTE_2

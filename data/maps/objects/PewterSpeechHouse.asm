@@ -7,8 +7,8 @@ PewterSpeechHouse_Object:
 
 	def_bg_events
 
-	def_objects
-	object SPRITE_GAMBLER, 2, 3, STAY, RIGHT, 1 ; person
-	object SPRITE_YOUNGSTER, 4, 5, STAY, NONE, 2 ; person
+	def_object_events
+	object_event SPRITE_GAMBLER, 2, 3, STAY, RIGHT, 1 ; person
+	object_event SPRITE_YOUNGSTER, 4, 5, STAY, NONE, 2 ; person
 
 	def_warps_to PEWTER_SPEECH_HOUSE

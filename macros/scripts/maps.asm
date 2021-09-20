@@ -1,4 +1,4 @@
-def_objects: MACRO
+def_object_events: MACRO
 REDEF _NUM_OBJECTS EQUS "_NUM_OBJECTS_\@"
 	db {_NUM_OBJECTS}
 {_NUM_OBJECTS} = 0
@@ -13,7 +13,7 @@ ENDM
 ;\7 items only: item id
 ;\7 trainers only: trainer class/pokemon id
 ;\8 trainers only: trainer number/pokemon level
-object: MACRO
+object_event: MACRO
 	db \1
 	db \3 + 4
 	db \2 + 4
@@ -78,7 +78,7 @@ warp_to: MACRO
 ENDM
 
 
-;\1 first bit offset / first object id
+;\1 first bit offset / first object_event id
 def_trainers: MACRO
 IF _NARG == 1
 CURRENT_TRAINER_BIT = \1

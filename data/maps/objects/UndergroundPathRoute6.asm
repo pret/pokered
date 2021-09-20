@@ -8,7 +8,7 @@ UndergroundPathRoute6_Object:
 
 	def_bg_events
 
-	def_objects
-	object SPRITE_GIRL, 2, 3, STAY, NONE, 1 ; person
+	def_object_events
+	object_event SPRITE_GIRL, 2, 3, STAY, NONE, 1 ; person
 
 	def_warps_to UNDERGROUND_PATH_ROUTE_6
