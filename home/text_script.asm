@@ -1,4 +1,4 @@
-; this function is used to display bg_event messages, sprite dialog, etc.
+; this function is used to display sign messages, sprite dialog, etc.
 ; INPUT: [hSpriteIndexOrTextID] = sprite ID or text ID
 DisplayTextID::
 	ldh a, [hLoadedROMBank]
@@ -129,7 +129,7 @@ CloseTextDisplay::
 	ld hl, wFontLoaded
 	res 0, [hl]
 	ld a, [wd732]
-	bit 3, a ; used fly warp_event
+	bit 3, a ; used fly warp
 	call z, LoadPlayerSpriteGraphics
 	call LoadCurrentMapView
 	pop af

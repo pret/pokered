@@ -2,8 +2,8 @@ GameCornerPrizeRoom_Object:
 	db $f ; border block
 
 	def_warp_events
-	warp_event  4,  7, 9, LAST_MAP
-	warp_event  5,  7, 9, LAST_MAP
+	warp_event  4,  7, LAST_MAP, 9
+	warp_event  5,  7, LAST_MAP, 9
 
 	def_bg_events
 	bg_event  2,  2, 3 ; CeladonPrizeRoomText3
@@ -11,7 +11,7 @@ GameCornerPrizeRoom_Object:
 	bg_event  6,  2, 5 ; CeladonPrizeRoomText5
 
 	def_object_events
-	object_event SPRITE_BALDING_GUY, 1, 4, STAY, NONE, 1 ; person
-	object_event SPRITE_GAMBLER, 7, 3, WALK, LEFT_RIGHT, 2 ; person
+	object_event 1, 4, SPRITE_BALDING_GUY, STAY, NONE, 1 ; person
+	object_event 7, 3, SPRITE_GAMBLER, WALK, LEFT_RIGHT, 2 ; person
 
 	def_warps_to GAME_CORNER_PRIZE_ROOM

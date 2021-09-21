@@ -2,20 +2,20 @@ Route16Gate1F_Object:
 	db $a ; border block
 
 	def_warp_events
-	warp_event  0,  8, 0, LAST_MAP
-	warp_event  0,  9, 1, LAST_MAP
-	warp_event  7,  8, 2, LAST_MAP
-	warp_event  7,  9, 2, LAST_MAP
-	warp_event  0,  2, 4, LAST_MAP
-	warp_event  0,  3, 5, LAST_MAP
-	warp_event  7,  2, 6, LAST_MAP
-	warp_event  7,  3, 7, LAST_MAP
-	warp_event  6, 12, 0, ROUTE_16_GATE_2F
+	warp_event  0,  8, LAST_MAP, 0
+	warp_event  0,  9, LAST_MAP, 1
+	warp_event  7,  8, LAST_MAP, 2
+	warp_event  7,  9, LAST_MAP, 2
+	warp_event  0,  2, LAST_MAP, 4
+	warp_event  0,  3, LAST_MAP, 5
+	warp_event  7,  2, LAST_MAP, 6
+	warp_event  7,  3, LAST_MAP, 7
+	warp_event  6, 12, ROUTE_16_GATE_2F, 0
 
 	def_bg_events
 
 	def_object_events
-	object_event SPRITE_GUARD, 4, 5, STAY, DOWN, 1 ; person
-	object_event SPRITE_GAMBLER, 4, 3, STAY, NONE, 2 ; person
+	object_event 4, 5, SPRITE_GUARD, STAY, DOWN, 1 ; person
+	object_event 4, 3, SPRITE_GAMBLER, STAY, NONE, 2 ; person
 
 	def_warps_to ROUTE_16_GATE_1F

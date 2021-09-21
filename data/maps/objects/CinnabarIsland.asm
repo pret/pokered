@@ -2,11 +2,11 @@ CinnabarIsland_Object:
 	db $43 ; border block
 
 	def_warp_events
-	warp_event  6,  3, 1, POKEMON_MANSION_1F
-	warp_event 18,  3, 0, CINNABAR_GYM
-	warp_event  6,  9, 0, CINNABAR_LAB
-	warp_event 11, 11, 0, CINNABAR_POKECENTER
-	warp_event 15, 11, 0, CINNABAR_MART
+	warp_event  6,  3, POKEMON_MANSION_1F, 1
+	warp_event 18,  3, CINNABAR_GYM, 0
+	warp_event  6,  9, CINNABAR_LAB, 0
+	warp_event 11, 11, CINNABAR_POKECENTER, 0
+	warp_event 15, 11, CINNABAR_MART, 0
 
 	def_bg_events
 	bg_event  9,  5, 3 ; CinnabarIslandText3
@@ -16,7 +16,7 @@ CinnabarIsland_Object:
 	bg_event 13,  3, 7 ; CinnabarIslandText7
 
 	def_object_events
-	object_event SPRITE_GIRL, 12, 5, WALK, LEFT_RIGHT, 1 ; person
-	object_event SPRITE_GAMBLER, 14, 6, STAY, NONE, 2 ; person
+	object_event 12, 5, SPRITE_GIRL, WALK, LEFT_RIGHT, 1 ; person
+	object_event 14, 6, SPRITE_GAMBLER, STAY, NONE, 2 ; person
 
 	def_warps_to CINNABAR_ISLAND

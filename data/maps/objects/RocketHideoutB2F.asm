@@ -2,19 +2,19 @@ RocketHideoutB2F_Object:
 	db $2e ; border block
 
 	def_warp_events
-	warp_event 27,  8, 0, ROCKET_HIDEOUT_B1F
-	warp_event 21,  8, 0, ROCKET_HIDEOUT_B3F
-	warp_event 24, 19, 0, ROCKET_HIDEOUT_ELEVATOR
-	warp_event 21, 22, 3, ROCKET_HIDEOUT_B1F
-	warp_event 25, 19, 1, ROCKET_HIDEOUT_ELEVATOR
+	warp_event 27,  8, ROCKET_HIDEOUT_B1F, 0
+	warp_event 21,  8, ROCKET_HIDEOUT_B3F, 0
+	warp_event 24, 19, ROCKET_HIDEOUT_ELEVATOR, 0
+	warp_event 21, 22, ROCKET_HIDEOUT_B1F, 3
+	warp_event 25, 19, ROCKET_HIDEOUT_ELEVATOR, 1
 
 	def_bg_events
 
 	def_object_events
-	object_event SPRITE_ROCKET, 20, 12, STAY, DOWN, 1, OPP_ROCKET, 13
-	object_event SPRITE_POKE_BALL, 1, 11, STAY, NONE, 2, MOON_STONE
-	object_event SPRITE_POKE_BALL, 16, 8, STAY, NONE, 3, NUGGET
-	object_event SPRITE_POKE_BALL, 6, 12, STAY, NONE, 4, TM_HORN_DRILL
-	object_event SPRITE_POKE_BALL, 3, 21, STAY, NONE, 5, SUPER_POTION
+	object_event 20, 12, SPRITE_ROCKET, STAY, DOWN, 1, OPP_ROCKET, 13
+	object_event 1, 11, SPRITE_POKE_BALL, STAY, NONE, 2, MOON_STONE
+	object_event 16, 8, SPRITE_POKE_BALL, STAY, NONE, 3, NUGGET
+	object_event 6, 12, SPRITE_POKE_BALL, STAY, NONE, 4, TM_HORN_DRILL
+	object_event 3, 21, SPRITE_POKE_BALL, STAY, NONE, 5, SUPER_POTION
 
 	def_warps_to ROCKET_HIDEOUT_B2F

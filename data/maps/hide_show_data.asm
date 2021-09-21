@@ -260,7 +260,7 @@ NoHS:
 MissableObjects:
 ; entries correspond to HS_* constants (see constants/hide_show_constants)
 	table_width 3, MissableObjects
-; format: map id, object_event id, HIDE/SHOW
+; format: map id, object id, HIDE/SHOW
 
 PalletTownHS:
 	db PALLET_TOWN, $01, HIDE

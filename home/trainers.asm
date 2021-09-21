@@ -206,7 +206,7 @@ EndTrainerBattle::
 	call IsInArray              ; search for sprite ID
 	inc hl
 	ld a, [hl]
-	ld [wMissableObjectIndex], a               ; load corresponding missable object_event index and remove it
+	ld [wMissableObjectIndex], a               ; load corresponding missable object index and remove it
 	predef HideObject
 .skipRemoveSprite
 	ld hl, wd730

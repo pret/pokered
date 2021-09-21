@@ -2,15 +2,15 @@ FuchsiaCity_Object:
 	db $f ; border block
 
 	def_warp_events
-	warp_event  5, 13, 0, FUCHSIA_MART
-	warp_event 11, 27, 0, FUCHSIA_BILLS_GRANDPAS_HOUSE
-	warp_event 19, 27, 0, FUCHSIA_POKECENTER
-	warp_event 27, 27, 0, WARDENS_HOUSE
-	warp_event 18,  3, 0, SAFARI_ZONE_GATE
-	warp_event  5, 27, 0, FUCHSIA_GYM
-	warp_event 22, 13, 0, FUCHSIA_MEETING_ROOM
-	warp_event 31, 27, 1, FUCHSIA_GOOD_ROD_HOUSE
-	warp_event 31, 24, 0, FUCHSIA_GOOD_ROD_HOUSE
+	warp_event  5, 13, FUCHSIA_MART, 0
+	warp_event 11, 27, FUCHSIA_BILLS_GRANDPAS_HOUSE, 0
+	warp_event 19, 27, FUCHSIA_POKECENTER, 0
+	warp_event 27, 27, WARDENS_HOUSE, 0
+	warp_event 18,  3, SAFARI_ZONE_GATE, 0
+	warp_event  5, 27, FUCHSIA_GYM, 0
+	warp_event 22, 13, FUCHSIA_MEETING_ROOM, 0
+	warp_event 31, 27, FUCHSIA_GOOD_ROD_HOUSE, 1
+	warp_event 31, 24, FUCHSIA_GOOD_ROD_HOUSE, 0
 
 	def_bg_events
 	bg_event 15, 23, 11 ; FuchsiaCityText11
@@ -29,15 +29,15 @@ FuchsiaCity_Object:
 	bg_event  7,  7, 24 ; FuchsiaCityText24
 
 	def_object_events
-	object_event SPRITE_YOUNGSTER, 10, 12, WALK, LEFT_RIGHT, 1 ; person
-	object_event SPRITE_GAMBLER, 28, 17, WALK, LEFT_RIGHT, 2 ; person
-	object_event SPRITE_FISHER, 30, 14, STAY, DOWN, 3 ; person
-	object_event SPRITE_YOUNGSTER, 24, 8, STAY, UP, 4 ; person
-	object_event SPRITE_FAIRY, 31, 5, WALK, ANY_DIR, 5 ; person
-	object_event SPRITE_POKE_BALL, 25, 6, STAY, NONE, 6 ; person
-	object_event SPRITE_MONSTER, 12, 6, WALK, LEFT_RIGHT, 7 ; person
-	object_event SPRITE_MONSTER, 30, 12, WALK, LEFT_RIGHT, 8 ; person
-	object_event SPRITE_SEEL, 8, 17, WALK, ANY_DIR, 9 ; person
-	object_event SPRITE_FOSSIL, 6, 5, STAY, NONE, 10 ; person
+	object_event 10, 12, SPRITE_YOUNGSTER, WALK, LEFT_RIGHT, 1 ; person
+	object_event 28, 17, SPRITE_GAMBLER, WALK, LEFT_RIGHT, 2 ; person
+	object_event 30, 14, SPRITE_FISHER, STAY, DOWN, 3 ; person
+	object_event 24, 8, SPRITE_YOUNGSTER, STAY, UP, 4 ; person
+	object_event 31, 5, SPRITE_FAIRY, WALK, ANY_DIR, 5 ; person
+	object_event 25, 6, SPRITE_POKE_BALL, STAY, NONE, 6 ; person
+	object_event 12, 6, SPRITE_MONSTER, WALK, LEFT_RIGHT, 7 ; person
+	object_event 30, 12, SPRITE_MONSTER, WALK, LEFT_RIGHT, 8 ; person
+	object_event 8, 17, SPRITE_SEEL, WALK, ANY_DIR, 9 ; person
+	object_event 6, 5, SPRITE_FOSSIL, STAY, NONE, 10 ; person
 
 	def_warps_to FUCHSIA_CITY

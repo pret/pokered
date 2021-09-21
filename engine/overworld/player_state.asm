@@ -14,12 +14,12 @@ IsPlayerStandingOnWarp::
 	cp [hl]
 	jr nz, .nextWarp2
 	inc hl
-	ld a, [hli] ; target warp_event
+	ld a, [hli] ; target warp
 	ld [wDestinationWarpID], a
 	ld a, [hl] ; target map
 	ldh [hWarpDestinationMap], a
 	ld hl, wd736
-	set 2, [hl] ; standing on warp_event flag
+	set 2, [hl] ; standing on warp flag
 	ret
 .nextWarp1
 	inc hl

@@ -2,16 +2,16 @@ CeruleanCity_Object:
 	db $f ; border block
 
 	def_warp_events
-	warp_event 27, 11, 0, CERULEAN_TRASHED_HOUSE
-	warp_event 13, 15, 0, CERULEAN_TRADE_HOUSE
-	warp_event 19, 17, 0, CERULEAN_POKECENTER
-	warp_event 30, 19, 0, CERULEAN_GYM
-	warp_event 13, 25, 0, BIKE_SHOP
-	warp_event 25, 25, 0, CERULEAN_MART
-	warp_event  4, 11, 0, CERULEAN_CAVE_1F
-	warp_event 27,  9, 2, CERULEAN_TRASHED_HOUSE
-	warp_event  9, 11, 1, CERULEAN_BADGE_HOUSE
-	warp_event  9,  9, 0, CERULEAN_BADGE_HOUSE
+	warp_event 27, 11, CERULEAN_TRASHED_HOUSE, 0
+	warp_event 13, 15, CERULEAN_TRADE_HOUSE, 0
+	warp_event 19, 17, CERULEAN_POKECENTER, 0
+	warp_event 30, 19, CERULEAN_GYM, 0
+	warp_event 13, 25, BIKE_SHOP, 0
+	warp_event 25, 25, CERULEAN_MART, 0
+	warp_event  4, 11, CERULEAN_CAVE_1F, 0
+	warp_event 27,  9, CERULEAN_TRASHED_HOUSE, 2
+	warp_event  9, 11, CERULEAN_BADGE_HOUSE, 1
+	warp_event  9,  9, CERULEAN_BADGE_HOUSE, 0
 
 	def_bg_events
 	bg_event 23, 19, 12 ; CeruleanCityText12
@@ -22,16 +22,16 @@ CeruleanCity_Object:
 	bg_event 27, 21, 17 ; CeruleanCityText17
 
 	def_object_events
-	object_event SPRITE_BLUE, 20, 2, STAY, DOWN, 1 ; person
-	object_event SPRITE_ROCKET, 30, 8, STAY, NONE, 2, OPP_ROCKET, 5
-	object_event SPRITE_COOLTRAINER_M, 31, 20, STAY, DOWN, 3 ; person
-	object_event SPRITE_SUPER_NERD, 15, 18, WALK, UP_DOWN, 4 ; person
-	object_event SPRITE_SUPER_NERD, 9, 21, WALK, LEFT_RIGHT, 5 ; person
-	object_event SPRITE_GUARD, 28, 12, STAY, DOWN, 6 ; person
-	object_event SPRITE_COOLTRAINER_F, 29, 26, STAY, LEFT, 7 ; person
-	object_event SPRITE_MONSTER, 28, 26, STAY, DOWN, 8 ; person
-	object_event SPRITE_COOLTRAINER_F, 9, 27, WALK, LEFT_RIGHT, 9 ; person
-	object_event SPRITE_SUPER_NERD, 4, 12, STAY, DOWN, 10 ; person
-	object_event SPRITE_GUARD, 27, 12, STAY, DOWN, 11 ; person
+	object_event 20, 2, SPRITE_BLUE, STAY, DOWN, 1 ; person
+	object_event 30, 8, SPRITE_ROCKET, STAY, NONE, 2, OPP_ROCKET, 5
+	object_event 31, 20, SPRITE_COOLTRAINER_M, STAY, DOWN, 3 ; person
+	object_event 15, 18, SPRITE_SUPER_NERD, WALK, UP_DOWN, 4 ; person
+	object_event 9, 21, SPRITE_SUPER_NERD, WALK, LEFT_RIGHT, 5 ; person
+	object_event 28, 12, SPRITE_GUARD, STAY, DOWN, 6 ; person
+	object_event 29, 26, SPRITE_COOLTRAINER_F, STAY, LEFT, 7 ; person
+	object_event 28, 26, SPRITE_MONSTER, STAY, DOWN, 8 ; person
+	object_event 9, 27, SPRITE_COOLTRAINER_F, WALK, LEFT_RIGHT, 9 ; person
+	object_event 4, 12, SPRITE_SUPER_NERD, STAY, DOWN, 10 ; person
+	object_event 27, 12, SPRITE_GUARD, STAY, DOWN, 11 ; person
 
 	def_warps_to CERULEAN_CITY

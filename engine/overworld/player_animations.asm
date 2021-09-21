@@ -12,7 +12,7 @@ EnterMapAnim::
 	ld a, SFX_TELEPORT_ENTER_1
 	call PlaySound
 	ld hl, wd732
-	bit 4, [hl] ; used dungeon warp_event?
+	bit 4, [hl] ; used dungeon warp?
 	res 4, [hl]
 	pop hl
 	jr nz, .dungeonWarpAnimation
@@ -23,7 +23,7 @@ EnterMapAnim::
 	ld a, b
 	and a
 	jr nz, .done
-; if the player is not standing on a warp_event pad or hole
+; if the player is not standing on a warp pad or hole
 	ld hl, wPlayerSpinInPlaceAnimFrameDelay
 	xor a
 	ld [hli], a ; wPlayerSpinInPlaceAnimFrameDelay
@@ -113,7 +113,7 @@ _LeaveMapAnim::
 	ld a, b
 	dec a
 	jr z, .playerStandingOnWarpPad
-; if not standing on a warp_event pad, there is an extra delay
+; if not standing on a warp pad, there is an extra delay
 	ld c, 10
 	call DelayFrames
 .playerStandingOnWarpPad

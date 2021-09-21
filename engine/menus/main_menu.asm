@@ -120,7 +120,7 @@ MainMenu:
 	xor a
 	ld [wDestinationMap], a
 	ld hl, wd732
-	set 2, [hl] ; fly warp_event or dungeon warp_event
+	set 2, [hl] ; fly warp or dungeon warp
 	call SpecialWarpIn
 	jp SpecialEnterMap
 
@@ -312,7 +312,7 @@ StartNewGameDebug:
 	ld c, 20
 	call DelayFrames
 
-; enter map after using a special warp_event or loading the game from the main menu
+; enter map after using a special warp or loading the game from the main menu
 SpecialEnterMap::
 	xor a
 	ldh [hJoyPressed], a

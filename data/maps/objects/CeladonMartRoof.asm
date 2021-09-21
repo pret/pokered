@@ -2,7 +2,7 @@ CeladonMartRoof_Object:
 	db $42 ; border block
 
 	def_warp_events
-	warp_event 15,  2, 0, CELADON_MART_5F
+	warp_event 15,  2, CELADON_MART_5F, 0
 
 	def_bg_events
 	bg_event 10,  1, 3 ; CeladonMartRoofText3
@@ -11,7 +11,7 @@ CeladonMartRoof_Object:
 	bg_event 13,  2, 6 ; CeladonMartRoofText6
 
 	def_object_events
-	object_event SPRITE_SUPER_NERD, 10, 4, STAY, LEFT, 1 ; person
-	object_event SPRITE_LITTLE_GIRL, 5, 5, WALK, ANY_DIR, 2 ; person
+	object_event 10, 4, SPRITE_SUPER_NERD, STAY, LEFT, 1 ; person
+	object_event 5, 5, SPRITE_LITTLE_GIRL, WALK, ANY_DIR, 2 ; person
 
 	def_warps_to CELADON_MART_ROOF

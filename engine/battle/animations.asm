@@ -2326,12 +2326,12 @@ AnimationFallingObjects:
 	call Delay3
 	ld hl, wOAMBuffer
 	ld a, [hl] ; Y
-	cp 104 ; has the top falling object_event reached 104 yet?
+	cp 104 ; has the top falling object reached 104 yet?
 	jr nz, .loop ; keep moving the falling objects down until it does
 	ret
 
 FallingObjects_UpdateOAMEntry:
-; Increases Y by 2 pixels and adjusts X and X flip based on the falling object_event's
+; Increases Y by 2 pixels and adjusts X and X flip based on the falling object's
 ; movement byte.
 	ld hl, wOAMBuffer
 	add hl, de

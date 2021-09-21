@@ -2,20 +2,20 @@ Route2_Object:
 	db $f ; border block
 
 	def_warp_events
-	warp_event 12,  9, 0, DIGLETTS_CAVE_ROUTE_2
-	warp_event  3, 11, 1, VIRIDIAN_FOREST_NORTH_GATE
-	warp_event 15, 19, 0, ROUTE_2_TRADE_HOUSE
-	warp_event 16, 35, 1, ROUTE_2_GATE
-	warp_event 15, 39, 2, ROUTE_2_GATE
-	warp_event  3, 43, 2, VIRIDIAN_FOREST_SOUTH_GATE
+	warp_event 12,  9, DIGLETTS_CAVE_ROUTE_2, 0
+	warp_event  3, 11, VIRIDIAN_FOREST_NORTH_GATE, 1
+	warp_event 15, 19, ROUTE_2_TRADE_HOUSE, 0
+	warp_event 16, 35, ROUTE_2_GATE, 1
+	warp_event 15, 39, ROUTE_2_GATE, 2
+	warp_event  3, 43, VIRIDIAN_FOREST_SOUTH_GATE, 2
 
 	def_bg_events
 	bg_event  5, 65, 3 ; Route2Text3
 	bg_event 11, 11, 4 ; Route2Text4
 
 	def_object_events
-	object_event SPRITE_POKE_BALL, 13, 54, STAY, NONE, 1, MOON_STONE
-	object_event SPRITE_POKE_BALL, 13, 45, STAY, NONE, 2, HP_UP
+	object_event 13, 54, SPRITE_POKE_BALL, STAY, NONE, 1, MOON_STONE
+	object_event 13, 45, SPRITE_POKE_BALL, STAY, NONE, 2, HP_UP
 
 	def_warps_to ROUTE_2
 

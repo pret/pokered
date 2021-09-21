@@ -2,13 +2,13 @@ PewterCity_Object:
 	db $a ; border block
 
 	def_warp_events
-	warp_event 14,  7, 0, MUSEUM_1F
-	warp_event 19,  5, 2, MUSEUM_1F
-	warp_event 16, 17, 0, PEWTER_GYM
-	warp_event 29, 13, 0, PEWTER_NIDORAN_HOUSE
-	warp_event 23, 17, 0, PEWTER_MART
-	warp_event  7, 29, 0, PEWTER_SPEECH_HOUSE
-	warp_event 13, 25, 0, PEWTER_POKECENTER
+	warp_event 14,  7, MUSEUM_1F, 0
+	warp_event 19,  5, MUSEUM_1F, 2
+	warp_event 16, 17, PEWTER_GYM, 0
+	warp_event 29, 13, PEWTER_NIDORAN_HOUSE, 0
+	warp_event 23, 17, PEWTER_MART, 0
+	warp_event  7, 29, PEWTER_SPEECH_HOUSE, 0
+	warp_event 13, 25, PEWTER_POKECENTER, 0
 
 	def_bg_events
 	bg_event 19, 29,  6 ; PewterCityText6
@@ -20,10 +20,10 @@ PewterCity_Object:
 	bg_event 25, 23, 12 ; PewterCityText12
 
 	def_object_events
-	object_event SPRITE_COOLTRAINER_F, 8, 15, STAY, NONE, 1 ; person
-	object_event SPRITE_COOLTRAINER_M, 17, 25, STAY, NONE, 2 ; person
-	object_event SPRITE_SUPER_NERD, 27, 17, STAY, NONE, 3 ; person
-	object_event SPRITE_SUPER_NERD, 26, 25, WALK, LEFT_RIGHT, 4 ; person
-	object_event SPRITE_YOUNGSTER, 35, 16, STAY, DOWN, 5 ; person
+	object_event 8, 15, SPRITE_COOLTRAINER_F, STAY, NONE, 1 ; person
+	object_event 17, 25, SPRITE_COOLTRAINER_M, STAY, NONE, 2 ; person
+	object_event 27, 17, SPRITE_SUPER_NERD, STAY, NONE, 3 ; person
+	object_event 26, 25, SPRITE_SUPER_NERD, WALK, LEFT_RIGHT, 4 ; person
+	object_event 35, 16, SPRITE_YOUNGSTER, STAY, DOWN, 5 ; person
 
 	def_warps_to PEWTER_CITY

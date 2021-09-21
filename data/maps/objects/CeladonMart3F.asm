@@ -2,9 +2,9 @@ CeladonMart3F_Object:
 	db $f ; border block
 
 	def_warp_events
-	warp_event 12,  1, 0, CELADON_MART_4F
-	warp_event 16,  1, 1, CELADON_MART_2F
-	warp_event  1,  1, 0, CELADON_MART_ELEVATOR
+	warp_event 12,  1, CELADON_MART_4F, 0
+	warp_event 16,  1, CELADON_MART_2F, 1
+	warp_event  1,  1, CELADON_MART_ELEVATOR, 0
 
 	def_bg_events
 	bg_event  2,  4, 6 ; CeladonMart3Text6
@@ -21,10 +21,10 @@ CeladonMart3F_Object:
 	bg_event 10,  1, 17 ; CeladonMart3Text17
 
 	def_object_events
-	object_event SPRITE_CLERK, 16, 5, STAY, NONE, 1 ; person
-	object_event SPRITE_GAMEBOY_KID, 11, 6, STAY, RIGHT, 2 ; person
-	object_event SPRITE_GAMEBOY_KID, 7, 2, STAY, DOWN, 3 ; person
-	object_event SPRITE_GAMEBOY_KID, 8, 2, STAY, DOWN, 4 ; person
-	object_event SPRITE_LITTLE_BOY, 2, 5, STAY, UP, 5 ; person
+	object_event 16, 5, SPRITE_CLERK, STAY, NONE, 1 ; person
+	object_event 11, 6, SPRITE_GAMEBOY_KID, STAY, RIGHT, 2 ; person
+	object_event 7, 2, SPRITE_GAMEBOY_KID, STAY, DOWN, 3 ; person
+	object_event 8, 2, SPRITE_GAMEBOY_KID, STAY, DOWN, 4 ; person
+	object_event 2, 5, SPRITE_LITTLE_BOY, STAY, UP, 5 ; person
 
 	def_warps_to CELADON_MART_3F

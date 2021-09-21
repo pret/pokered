@@ -2,19 +2,19 @@ SeafoamIslands1F_Object:
 	db $7d ; border block
 
 	def_warp_events
-	warp_event  4, 17, 0, LAST_MAP
-	warp_event  5, 17, 0, LAST_MAP
-	warp_event 26, 17, 1, LAST_MAP
-	warp_event 27, 17, 1, LAST_MAP
-	warp_event  7,  5, 1, SEAFOAM_ISLANDS_B1F
-	warp_event 25,  3, 6, SEAFOAM_ISLANDS_B1F
-	warp_event 23, 15, 4, SEAFOAM_ISLANDS_B1F
+	warp_event  4, 17, LAST_MAP, 0
+	warp_event  5, 17, LAST_MAP, 0
+	warp_event 26, 17, LAST_MAP, 1
+	warp_event 27, 17, LAST_MAP, 1
+	warp_event  7,  5, SEAFOAM_ISLANDS_B1F, 1
+	warp_event 25,  3, SEAFOAM_ISLANDS_B1F, 6
+	warp_event 23, 15, SEAFOAM_ISLANDS_B1F, 4
 
 	def_bg_events
 
 	def_object_events
-	object_event SPRITE_BOULDER, 18, 10, STAY, BOULDER_MOVEMENT_BYTE_2, 1 ; person
-	object_event SPRITE_BOULDER, 26, 7, STAY, BOULDER_MOVEMENT_BYTE_2, 2 ; person
+	object_event 18, 10, SPRITE_BOULDER, STAY, BOULDER_MOVEMENT_BYTE_2, 1 ; person
+	object_event 26, 7, SPRITE_BOULDER, STAY, BOULDER_MOVEMENT_BYTE_2, 2 ; person
 
 	def_warps_to SEAFOAM_ISLANDS_1F
 

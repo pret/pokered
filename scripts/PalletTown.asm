@@ -197,18 +197,18 @@ PalletTownText3: ; fat man
 	text_far _PalletTownText3
 	text_end
 
-PalletTownText4: ; bg_event by lab
+PalletTownText4: ; sign by lab
 	text_far _PalletTownText4
 	text_end
 
-PalletTownText5: ; bg_event by fence
+PalletTownText5: ; sign by fence
 	text_far _PalletTownText5
 	text_end
 
-PalletTownText6: ; bg_event by Red's house
+PalletTownText6: ; sign by Red's house
 	text_far _PalletTownText6
 	text_end
 
-PalletTownText7: ; bg_event by Blue's house
+PalletTownText7: ; sign by Blue's house
 	text_far _PalletTownText7
 	text_end

@@ -610,7 +610,7 @@ wTradingWhichEnemyMon:: db
 wNameOfPlayerMonToBeTraded:: ds NAME_LENGTH
 
 NEXTU
-; one byte for each falling object_event
+; one byte for each falling object
 wFallingObjectsMovementData:: ds 20
 
 NEXTU
@@ -844,7 +844,7 @@ wRodResponse::
 ENDU
 
 ; 0 = neither
-; 1 = warp_event pad
+; 1 = warp pad
 ; 2 = hole
 wStandingOnWarpPadOrHole::
 wOAMBaseTile::
@@ -1781,7 +1781,7 @@ wPlayerID:: dw
 wMapMusicSoundID:: db
 wMapMusicROMBank:: db
 
-; offset subtracted from FadePal4 to get the background and object_event palettes for the current map
+; offset subtracted from FadePal4 to get the background and object palettes for the current map
 ; normally, it is 0. it is 6 when Flash is needed, causing FadePal2 to be used instead of FadePal4
 wMapPalOffset:: db
 
@@ -1833,8 +1833,8 @@ wMapBackgroundTile:: db
 ; number of warps in current map (up to 32)
 wNumberOfWarps:: db
 
-; current map warp_event entries
-wWarpEntries:: ds 32 * 4 ; Y, X, warp_event ID, map ID
+; current map warp entries
+wWarpEntries:: ds 32 * 4 ; Y, X, warp ID, map ID
 
 ; if $ff, the player's coordinates are not updated when entering the map
 wDestinationWarpID:: db
@@ -1850,7 +1850,7 @@ wSignTextIDs:: ds 16
 ; number of sprites on the current map (up to 16)
 wNumSprites:: db
 
-; these two variables track the X and Y offset in blocks from the last special warp_event used
+; these two variables track the X and Y offset in blocks from the last special warp used
 ; they don't seem to be used for anything
 wYOffsetSinceLastSpecialWarp:: db
 wXOffsetSinceLastSpecialWarp:: db
@@ -1924,7 +1924,7 @@ wd5cd:: db
 
 ; each entry consists of 2 bytes
 ; * the sprite ID (depending on the current map)
-; * the missable object_event index (global, used for wMissableObjectFlags)
+; * the missable object index (global, used for wMissableObjectFlags)
 ; terminated with $FF
 wMissableObjectList:: ds 16 * 2 + 1
 
@@ -2100,7 +2100,7 @@ wTileInFrontOfBoulderAndBoulderCollisionResult:: db
 ; destination map for dungeon warps
 wDungeonWarpDestinationMap:: db
 
-; which dungeon warp_event within the source map was used
+; which dungeon warp within the source map was used
 wWhichDungeonWarp:: db
 
 wUnusedD71F:: db
@@ -2131,8 +2131,8 @@ wd72c:: db
 ; This variable is used for temporary flags and as the destination map when
 ; warping to the Trade Center or Colosseum.
 ; bit 0: sprite facing directions have been initialised in the Trade Center
-; bit 3: do scripted warp_event (used to warp_event back to Lavender Town from the top of the pokemon tower)
-; bit 4: on a dungeon warp_event
+; bit 3: do scripted warp (used to warp back to Lavender Town from the top of the pokemon tower)
+; bit 4: on a dungeon warp
 ; bit 5: don't make NPCs face the player when spoken to
 ; Bits 6 and 7 are set by scripts when starting major battles in the storyline,
 ; but they do not appear to affect anything. Bit 6 is reset after all battles
@@ -2172,16 +2172,16 @@ wd730:: db
 ; 6. skips the NPC who blocks Route 3 before beating Brock by holding down B
 ; 7. skips Cerulean City rival battle by holding down B
 ; 8. skips Pokémon Tower rival battle by holding down B
-; bit 2: the target warp_event is a fly warp_event (bit 3 set or blacked out) or a dungeon warp_event (bit 4 set)
-; bit 3: used warp_event pad, escape rope, dig, teleport, or fly, so the target warp_event is a "fly warp_event"
-; bit 4: jumped into hole (Pokemon Mansion, Seafoam Islands, Victory Road) or went down waterfall (Seafoam Islands), so the target warp_event is a "dungeon warp_event"
+; bit 2: the target warp is a fly warp (bit 3 set or blacked out) or a dungeon warp (bit 4 set)
+; bit 3: used warp pad, escape rope, dig, teleport, or fly, so the target warp is a "fly warp"
+; bit 4: jumped into hole (Pokemon Mansion, Seafoam Islands, Victory Road) or went down waterfall (Seafoam Islands), so the target warp is a "dungeon warp"
 ; bit 5: currently being forced to ride bike (cycling road)
 ; bit 6: map destination is [wLastBlackoutMap] (usually the last used pokemon center, but could be the player's house)
 wd732:: db
 
 ; bit 0: running a test battle
 ; bit 1: prevent music from changing when entering new map
-; bit 2: skip the joypad check in CheckWarpsNoCollision (used for the forced warp_event down the waterfall in the Seafoam Islands)
+; bit 2: skip the joypad check in CheckWarpsNoCollision (used for the forced warp down the waterfall in the Seafoam Islands)
 ; bit 3: trainer wants to battle
 ; bit 4: use variable [wCurMapScript] instead of the provided index for next frame's map script (used to start battle when talking to trainers)
 ; bit 7: used fly out of battle
@@ -2195,7 +2195,7 @@ wBeatLorelei:: db
 
 ; bit 0: check if the player is standing on a door and make him walk down a step if so
 ; bit 1: the player is currently stepping down from a door
-; bit 2: standing on a warp_event
+; bit 2: standing on a warp
 ; bit 6: jumping down a ledge / fishing animation
 ; bit 7: player sprite spinning due to spin tiles (Rocket hideout / Viridian Gym)
 wd736:: db

@@ -2,10 +2,10 @@ SpecialWarpIn::
 	call LoadSpecialWarpData
 	predef LoadTilesetHeader
 	ld hl, wd732
-	bit 2, [hl] ; dungeon warp_event or fly warp_event?
+	bit 2, [hl] ; dungeon warp or fly warp?
 	res 2, [hl]
 	jr z, .next
-; if dungeon warp_event or fly warp_event
+; if dungeon warp or fly warp
 	ld a, [wDestinationMap]
 	jr .next2
 .next
@@ -22,9 +22,9 @@ SpecialWarpIn::
 	ld a, b
 .next4
 	ld hl, wd732
-	bit 4, [hl] ; dungeon warp_event?
+	bit 4, [hl] ; dungeon warp?
 	ret nz
-; if not dungeon warp_event
+; if not dungeon warp
 	ld [wLastMap], a
 	ret
 
@@ -71,7 +71,7 @@ LoadSpecialWarpData:
 .notFirstMap
 	ld a, [wLastMap] ; this value is overwritten before it's ever read
 	ld hl, wd732
-	bit 4, [hl] ; used dungeon warp_event (jumped down hole/waterfall)?
+	bit 4, [hl] ; used dungeon warp (jumped down hole/waterfall)?
 	jr nz, .usedDunegonWarp
 	bit 6, [hl] ; return to last pokemon center (or player's house)?
 	res 6, [hl]
@@ -142,7 +142,7 @@ LoadSpecialWarpData:
 .done
 	ld [wYOffsetSinceLastSpecialWarp], a
 	ld [wXOffsetSinceLastSpecialWarp], a
-	ld a, $ff ; the player's coordinates have already been updated using a special warp_event, so don't use any of the normal warps
+	ld a, $ff ; the player's coordinates have already been updated using a special warp, so don't use any of the normal warps
 	ld [wDestinationWarpID], a
 	ret
 

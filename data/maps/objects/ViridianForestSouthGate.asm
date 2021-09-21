@@ -2,15 +2,15 @@ ViridianForestSouthGate_Object:
 	db $a ; border block
 
 	def_warp_events
-	warp_event  4,  0, 3, VIRIDIAN_FOREST
-	warp_event  5,  0, 4, VIRIDIAN_FOREST
-	warp_event  4,  7, 5, LAST_MAP
-	warp_event  5,  7, 5, LAST_MAP
+	warp_event  4,  0, VIRIDIAN_FOREST, 3
+	warp_event  5,  0, VIRIDIAN_FOREST, 4
+	warp_event  4,  7, LAST_MAP, 5
+	warp_event  5,  7, LAST_MAP, 5
 
 	def_bg_events
 
 	def_object_events
-	object_event SPRITE_GIRL, 8, 4, STAY, LEFT, 1 ; person
-	object_event SPRITE_LITTLE_GIRL, 2, 4, WALK, UP_DOWN, 2 ; person
+	object_event 8, 4, SPRITE_GIRL, STAY, LEFT, 1 ; person
+	object_event 2, 4, SPRITE_LITTLE_GIRL, WALK, UP_DOWN, 2 ; person
 
 	def_warps_to VIRIDIAN_FOREST_SOUTH_GATE

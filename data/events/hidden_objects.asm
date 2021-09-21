@@ -178,14 +178,14 @@ hidden_object: MACRO
 	db \2 ; y coord
 	db \1 ; x coord
 	db \3 ; item id
-	dba \4 ; object_event routine
+	dba \4 ; object routine
 ENDM
 
 hidden_text_predef: MACRO
 	db \2 ; y coord
 	db \1 ; x coord
 	db_tx_pre \3 ; text id
-	dba \4 ; object_event routine
+	dba \4 ; object routine
 ENDM
 
 ; Some hidden objects use SPRITE_FACING_* values,

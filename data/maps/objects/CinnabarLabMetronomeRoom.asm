@@ -2,8 +2,8 @@ CinnabarLabMetronomeRoom_Object:
 	db $17 ; border block
 
 	def_warp_events
-	warp_event  2,  7, 3, CINNABAR_LAB
-	warp_event  3,  7, 3, CINNABAR_LAB
+	warp_event  2,  7, CINNABAR_LAB, 3
+	warp_event  3,  7, CINNABAR_LAB, 3
 
 	def_bg_events
 	bg_event  0,  4, 3 ; Lab3Text3
@@ -11,7 +11,7 @@ CinnabarLabMetronomeRoom_Object:
 	bg_event  2,  1, 5 ; Lab3Text5
 
 	def_object_events
-	object_event SPRITE_SCIENTIST, 7, 2, STAY, DOWN, 1 ; person
-	object_event SPRITE_SCIENTIST, 2, 3, WALK, LEFT_RIGHT, 2 ; person
+	object_event 7, 2, SPRITE_SCIENTIST, STAY, DOWN, 1 ; person
+	object_event 2, 3, SPRITE_SCIENTIST, WALK, LEFT_RIGHT, 2 ; person
 
 	def_warps_to CINNABAR_LAB_METRONOME_ROOM

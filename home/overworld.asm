@@ -22,7 +22,7 @@ EnterMap::
 	call nz, MapEntryAfterBattle
 	ld hl, wd732
 	ld a, [hl]
-	and 1 << 4 | 1 << 3 ; fly warp_event or dungeon warp_event
+	and 1 << 4 | 1 << 3 ; fly warp or dungeon warp
 	jr z, .didNotEnterUsingFlyWarpOrDungeonWarp
 	res 3, [hl]
 	farcall EnterMapAnim
@@ -59,7 +59,7 @@ OverworldLoopLessDelay::
 	res 3, [hl]
 	jp nz, WarpFound2
 	ld a, [wd732]
-	and 1 << 4 | 1 << 3 ; fly warp_event or dungeon warp_event
+	and 1 << 4 | 1 << 3 ; fly warp or dungeon warp
 	jp nz, HandleFlyWarpOrDungeonWarp
 	ld a, [wCurOpponent]
 	and a
@@ -90,7 +90,7 @@ OverworldLoopLessDelay::
 	call CheckForHiddenObjectOrBookshelfOrCardKeyDoor
 	ldh a, [hItemAlreadyFound]
 	and a
-	jp z, OverworldLoop ; jump if a hidden object_event or bookshelf was found, but not if a card key door was found
+	jp z, OverworldLoop ; jump if a hidden object or bookshelf was found, but not if a card key door was found
 	call IsSpriteOrSignInFrontOfPlayer
 	ldh a, [hSpriteIndexOrTextID]
 	and a
@@ -105,7 +105,7 @@ OverworldLoopLessDelay::
 	jr nz, .checkForOpponent
 	lda_coord 8, 9
 	ld [wTilePlayerStandingOn], a ; unused?
-	call DisplayTextID ; display either the start menu or the NPC/bg_event text
+	call DisplayTextID ; display either the start menu or the NPC/sign text
 	ld a, [wEnteringCableClub]
 	and a
 	jr z, .checkForOpponent
@@ -246,12 +246,12 @@ OverworldLoopLessDelay::
 ; collision occurred
 	push hl
 	ld hl, wd736
-	bit 2, [hl] ; standing on warp_event flag
+	bit 2, [hl] ; standing on warp flag
 	pop hl
 	jp z, OverworldLoop
-; collision occurred while standing on a warp_event
+; collision occurred while standing on a warp
 	push hl
-	call ExtraWarpCheck ; sets carry if there is a potential to warp_event
+	call ExtraWarpCheck ; sets carry if there is a potential to warp
 	pop hl
 	jp c, CheckWarpsCollision
 	jp OverworldLoop
@@ -321,7 +321,7 @@ OverworldLoopLessDelay::
 .newBattle
 	call NewBattle
 	ld hl, wd736
-	res 2, [hl] ; standing on warp_event flag
+	res 2, [hl] ; standing on warp flag
 	jp nc, CheckWarpsNoCollision ; check for warps if there was no battle
 .battleOccurred
 	ld hl, wd72d
@@ -387,7 +387,7 @@ DoBikeSpeedup::
 .goFaster
 	jp AdvancePlayerSprite
 
-; check if the player has stepped onto a warp_event after having not collided
+; check if the player has stepped onto a warp after having not collided
 CheckWarpsNoCollision::
 	ld a, [wNumberOfWarps]
 	and a
@@ -401,21 +401,21 @@ CheckWarpsNoCollision::
 	ld e, a
 	ld hl, wWarpEntries
 CheckWarpsNoCollisionLoop::
-	ld a, [hli] ; check if the warp_event's Y position matches
+	ld a, [hli] ; check if the warp's Y position matches
 	cp d
 	jr nz, CheckWarpsNoCollisionRetry1
-	ld a, [hli] ; check if the warp_event's X position matches
+	ld a, [hli] ; check if the warp's X position matches
 	cp e
 	jr nz, CheckWarpsNoCollisionRetry2
 ; if a match was found
 	push hl
 	push bc
 	ld hl, wd736
-	set 2, [hl] ; standing on warp_event flag
+	set 2, [hl] ; standing on warp flag
 	farcall IsPlayerStandingOnDoorTileOrWarpTile
 	pop bc
 	pop hl
-	jr c, WarpFound1 ; jump if standing on door or warp_event
+	jr c, WarpFound1 ; jump if standing on door or warp
 	push hl
 	push bc
 	call ExtraWarpCheck
@@ -433,21 +433,21 @@ CheckWarpsNoCollisionLoop::
 	pop de
 	ldh a, [hJoyHeld]
 	and D_DOWN | D_UP | D_LEFT | D_RIGHT
-	jr z, CheckWarpsNoCollisionRetry2 ; if directional buttons aren't being pressed, do not pass through the warp_event
+	jr z, CheckWarpsNoCollisionRetry2 ; if directional buttons aren't being pressed, do not pass through the warp
 	jr WarpFound1
 
-; check if the player has stepped onto a warp_event after having collided
+; check if the player has stepped onto a warp after having collided
 CheckWarpsCollision::
 	ld a, [wNumberOfWarps]
 	ld c, a
 	ld hl, wWarpEntries
 .loop
-	ld a, [hli] ; Y coordinate of warp_event
+	ld a, [hli] ; Y coordinate of warp
 	ld b, a
 	ld a, [wYCoord]
 	cp b
 	jr nz, .retry1
-	ld a, [hli] ; X coordinate of warp_event
+	ld a, [hli] ; X coordinate of warp
 	ld b, a
 	ld a, [wXCoord]
 	cp b
@@ -482,7 +482,7 @@ WarpFound1::
 WarpFound2::
 	ld a, [wNumberOfWarps]
 	sub c
-	ld [wWarpedFromWhichWarp], a ; save ID of used warp_event
+	ld [wWarpedFromWhichWarp], a ; save ID of used warp
 	ld a, [wCurMap]
 	ld [wWarpedFromWhichMap], a
 	call CheckIfInOutsideMap
@@ -513,9 +513,9 @@ WarpFound2::
 	ld [wCurMap], a
 	farcall IsPlayerStandingOnWarpPadOrHole
 	ld a, [wStandingOnWarpPadOrHole]
-	dec a ; is the player on a warp_event pad?
+	dec a ; is the player on a warp pad?
 	jr nz, .notWarpPad
-; if the player is on a warp_event pad
+; if the player is on a warp pad
 	ld hl, wd732
 	set 3, [hl]
 	call LeaveMapAnim
@@ -540,11 +540,11 @@ WarpFound2::
 	jp EnterMap
 
 ContinueCheckWarpsNoCollisionLoop::
-	inc b ; increment warp_event number
+	inc b ; increment warp number
 	dec c ; decrement number of warps
 	jp nz, CheckWarpsNoCollisionLoop
 
-; if no matching warp_event was found
+; if no matching warp was found
 CheckMapConnections::
 .checkWestMap
 	ld a, [wXCoord]
@@ -710,7 +710,7 @@ CheckIfInOutsideMap::
 	cp PLATEAU ; Route 23 / Indigo Plateau
 	ret
 
-; this function is an extra check that sometimes has to pass in order to warp_event, beyond just standing on a warp_event
+; this function is an extra check that sometimes has to pass in order to warp, beyond just standing on a warp
 ; the "sometimes" qualification is necessary because of CheckWarpsNoCollision's behavior
 ; depending on the map, either "function 1" or "function 2" is used for the check
 ; "function 1" passes when the player is at the edge of the map and is facing towards the outside of the map
@@ -747,7 +747,7 @@ ExtraWarpCheck::
 	jp Bankswitch
 
 MapEntryAfterBattle::
-	farcall IsPlayerStandingOnWarp ; for enabling warp_event testing after collisions
+	farcall IsPlayerStandingOnWarp ; for enabling warp testing after collisions
 	ld a, [wMapPalOffset]
 	and a
 	jp z, GBFadeInFromWhite
@@ -790,7 +790,7 @@ HandleFlyWarpOrDungeonWarp::
 	ld [wIsInBattle], a
 	ld [wMapPalOffset], a
 	ld hl, wd732
-	set 2, [hl] ; fly warp_event or dungeon warp_event
+	set 2, [hl] ; fly warp or dungeon warp
 	res 5, [hl] ; forced to ride bike
 	call LeaveMapAnim
 	ld a, BANK(SpecialWarpIn)
@@ -1072,7 +1072,7 @@ LoadEastWestConnectionsTileMap::
 	jr nz, LoadEastWestConnectionsTileMap
 	ret
 
-; function to check if there is a bg_event or sprite in front of the player
+; function to check if there is a sign or sprite in front of the player
 ; if so, it is stored in [hSpriteIndexOrTextID]
 ; if not, [hSpriteIndexOrTextID] is set to 0
 IsSpriteOrSignInFrontOfPlayer::
@@ -1089,17 +1089,17 @@ IsSpriteOrSignInFrontOfPlayer::
 	ld c, 0
 .signLoop
 	inc c
-	ld a, [hli] ; bg_event Y
+	ld a, [hli] ; sign Y
 	cp d
 	jr z, .yCoordMatched
 	inc hl
 	jr .retry
 .yCoordMatched
-	ld a, [hli] ; bg_event X
+	ld a, [hli] ; sign X
 	cp e
 	jr nz, .retry
 .xCoordMatched
-; found bg_event
+; found sign
 	push hl
 	push bc
 	ld hl, wSignTextIDs
@@ -1107,7 +1107,7 @@ IsSpriteOrSignInFrontOfPlayer::
 	dec c
 	add hl, bc
 	ld a, [hl]
-	ldh [hSpriteIndexOrTextID], a ; store bg_event text ID
+	ldh [hSpriteIndexOrTextID], a ; store sign text ID
 	pop bc
 	pop hl
 	ret
@@ -2082,7 +2082,7 @@ LoadMapHeader::
 	ld a, [wObjectDataPointerTemp]
 	ld l, a
 	ld a, [wObjectDataPointerTemp + 1]
-	ld h, a ; hl = base of object_event data
+	ld h, a ; hl = base of object data
 	ld de, wMapBackgroundTile
 	ld a, [hli]
 	ld [de], a
@@ -2093,7 +2093,7 @@ LoadMapHeader::
 	jr z, .loadSignData
 	ld c, a
 	ld de, wWarpEntries
-.warpLoop ; one warp_event per loop iteration
+.warpLoop ; one warp per loop iteration
 	ld b, 4
 .warpInnerLoop
 	ld a, [hli]
@@ -2258,7 +2258,7 @@ LoadMapHeader::
 .finishUp
 	predef LoadTilesetHeader
 	callfar LoadWildData
-	pop hl ; restore hl from before going to the warp_event/bg_event/sprite data (this value was saved for seemingly no purpose)
+	pop hl ; restore hl from before going to the warp/sign/sprite data (this value was saved for seemingly no purpose)
 	ld a, [wCurMapHeight] ; map height in 4x4 tile blocks
 	add a ; double it
 	ld [wCurrentMapHeight2], a ; store map height in 2x2 tile blocks
@@ -2345,7 +2345,7 @@ LoadMapData::
 	call RunPaletteCommand
 	call LoadPlayerSpriteGraphics
 	ld a, [wd732]
-	and 1 << 4 | 1 << 3 ; fly warp_event or dungeon warp_event
+	and 1 << 4 | 1 << 3 ; fly warp or dungeon warp
 	jr nz, .restoreRomBank
 	ld a, [wFlags_D733]
 	bit 1, a
@@ -2430,9 +2430,9 @@ ENDC
 	scf
 	ret
 
-; function to load position data for destination warp_event when switching maps
+; function to load position data for destination warp when switching maps
 ; INPUT:
-; a = ID of destination warp_event within destination map
+; a = ID of destination warp within destination map
 LoadDestinationWarpPosition::
 	ld b, a
 	ldh a, [hLoadedROMBank]

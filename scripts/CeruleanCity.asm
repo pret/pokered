@@ -121,7 +121,7 @@ CeruleanCityScript_1955d:
 	ldh [hSpriteIndex], a
 	xor a ; SPRITE_FACING_DOWN
 	ldh [hSpriteFacingDirection], a
-	jp SetSpriteFacingDirectionAndDelay ; face object_event
+	jp SetSpriteFacingDirectionAndDelay ; face object
 
 CeruleanCityScript1:
 	ld a, [wd730]
