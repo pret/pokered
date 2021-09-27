@@ -1,14 +1,14 @@
 PewterSpeechHouse_Object:
 	db $a ; border block
 
-	def_warps
-	warp  2,  7, 5, LAST_MAP
-	warp  3,  7, 5, LAST_MAP
+	def_warp_events
+	warp_event  2,  7, LAST_MAP, 5
+	warp_event  3,  7, LAST_MAP, 5
 
-	def_signs
+	def_bg_events
 
-	def_objects
-	object SPRITE_GAMBLER, 2, 3, STAY, RIGHT, 1 ; person
-	object SPRITE_YOUNGSTER, 4, 5, STAY, NONE, 2 ; person
+	def_object_events
+	object_event 2, 3, SPRITE_GAMBLER, STAY, RIGHT, 1 ; person
+	object_event 4, 5, SPRITE_YOUNGSTER, STAY, NONE, 2 ; person
 
 	def_warps_to PEWTER_SPEECH_HOUSE

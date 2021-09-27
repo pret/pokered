@@ -1,41 +1,41 @@
 CeladonCity_Object:
 	db $f ; border block
 
-	def_warps
-	warp  8, 13, 0, CELADON_MART_1F
-	warp 10, 13, 2, CELADON_MART_1F
-	warp 24,  9, 0, CELADON_MANSION_1F
-	warp 24,  3, 2, CELADON_MANSION_1F
-	warp 25,  3, 2, CELADON_MANSION_1F
-	warp 41,  9, 0, CELADON_POKECENTER
-	warp 12, 27, 0, CELADON_GYM
-	warp 28, 19, 0, GAME_CORNER
-	warp 39, 19, 0, CELADON_MART_5F ; beta warp! no longer used
-	warp 33, 19, 0, GAME_CORNER_PRIZE_ROOM
-	warp 31, 27, 0, CELADON_DINER
-	warp 35, 27, 0, CELADON_CHIEF_HOUSE
-	warp 43, 27, 0, CELADON_HOTEL
+	def_warp_events
+	warp_event  8, 13, CELADON_MART_1F, 0
+	warp_event 10, 13, CELADON_MART_1F, 2
+	warp_event 24,  9, CELADON_MANSION_1F, 0
+	warp_event 24,  3, CELADON_MANSION_1F, 2
+	warp_event 25,  3, CELADON_MANSION_1F, 2
+	warp_event 41,  9, CELADON_POKECENTER, 0
+	warp_event 12, 27, CELADON_GYM, 0
+	warp_event 28, 19, GAME_CORNER, 0
+	warp_event 39, 19, CELADON_MART_5F, 0 ; beta warp_event! no longer used
+	warp_event 33, 19, GAME_CORNER_PRIZE_ROOM, 0
+	warp_event 31, 27, CELADON_DINER, 0
+	warp_event 35, 27, CELADON_CHIEF_HOUSE, 0
+	warp_event 43, 27, CELADON_HOTEL, 0
 
-	def_signs
-	sign 27, 15, 10 ; CeladonCityText10
-	sign 19, 15, 11 ; CeladonCityText11
-	sign 42,  9, 12 ; PokeCenterSignText
-	sign 13, 29, 13 ; CeladonCityText13
-	sign 21,  9, 14 ; CeladonCityText14
-	sign 12, 13, 15 ; CeladonCityText15
-	sign 39, 21, 16 ; CeladonCityText16
-	sign 33, 21, 17 ; CeladonCityText17
-	sign 27, 21, 18 ; CeladonCityText18
+	def_bg_events
+	bg_event 27, 15, 10 ; CeladonCityText10
+	bg_event 19, 15, 11 ; CeladonCityText11
+	bg_event 42,  9, 12 ; PokeCenterSignText
+	bg_event 13, 29, 13 ; CeladonCityText13
+	bg_event 21,  9, 14 ; CeladonCityText14
+	bg_event 12, 13, 15 ; CeladonCityText15
+	bg_event 39, 21, 16 ; CeladonCityText16
+	bg_event 33, 21, 17 ; CeladonCityText17
+	bg_event 27, 21, 18 ; CeladonCityText18
 
-	def_objects
-	object SPRITE_LITTLE_GIRL, 8, 17, WALK, ANY_DIR, 1 ; person
-	object SPRITE_GRAMPS, 11, 28, STAY, UP, 2 ; person
-	object SPRITE_GIRL, 14, 19, WALK, UP_DOWN, 3 ; person
-	object SPRITE_GRAMPS, 25, 22, STAY, DOWN, 4 ; person
-	object SPRITE_GRAMPS, 22, 16, STAY, DOWN, 5 ; person
-	object SPRITE_FISHER, 32, 12, STAY, LEFT, 6 ; person
-	object SPRITE_MONSTER, 30, 12, STAY, RIGHT, 7 ; person
-	object SPRITE_ROCKET, 32, 29, WALK, LEFT_RIGHT, 8 ; person
-	object SPRITE_ROCKET, 42, 14, WALK, LEFT_RIGHT, 9 ; person
+	def_object_events
+	object_event 8, 17, SPRITE_LITTLE_GIRL, WALK, ANY_DIR, 1 ; person
+	object_event 11, 28, SPRITE_GRAMPS, STAY, UP, 2 ; person
+	object_event 14, 19, SPRITE_GIRL, WALK, UP_DOWN, 3 ; person
+	object_event 25, 22, SPRITE_GRAMPS, STAY, DOWN, 4 ; person
+	object_event 22, 16, SPRITE_GRAMPS, STAY, DOWN, 5 ; person
+	object_event 32, 12, SPRITE_FISHER, STAY, LEFT, 6 ; person
+	object_event 30, 12, SPRITE_MONSTER, STAY, RIGHT, 7 ; person
+	object_event 32, 29, SPRITE_ROCKET, WALK, LEFT_RIGHT, 8 ; person
+	object_event 42, 14, SPRITE_ROCKET, WALK, LEFT_RIGHT, 9 ; person
 
 	def_warps_to CELADON_CITY

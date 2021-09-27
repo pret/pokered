@@ -1,15 +1,15 @@
 ViridianMart_Object:
 	db $0 ; border block
 
-	def_warps
-	warp  3,  7, 1, LAST_MAP
-	warp  4,  7, 1, LAST_MAP
+	def_warp_events
+	warp_event  3,  7, LAST_MAP, 1
+	warp_event  4,  7, LAST_MAP, 1
 
-	def_signs
+	def_bg_events
 
-	def_objects
-	object SPRITE_CLERK, 0, 5, STAY, RIGHT, 1 ; person
-	object SPRITE_YOUNGSTER, 5, 5, WALK, UP_DOWN, 2 ; person
-	object SPRITE_COOLTRAINER_M, 3, 3, STAY, NONE, 3 ; person
+	def_object_events
+	object_event 0, 5, SPRITE_CLERK, STAY, RIGHT, 1 ; person
+	object_event 5, 5, SPRITE_YOUNGSTER, WALK, UP_DOWN, 2 ; person
+	object_event 3, 3, SPRITE_COOLTRAINER_M, STAY, NONE, 3 ; person
 
 	def_warps_to VIRIDIAN_MART

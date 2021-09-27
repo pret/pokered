@@ -1,15 +1,15 @@
 BillsHouse_Object:
 	db $d ; border block
 
-	def_warps
-	warp  2,  7, 0, LAST_MAP
-	warp  3,  7, 0, LAST_MAP
+	def_warp_events
+	warp_event  2,  7, LAST_MAP, 0
+	warp_event  3,  7, LAST_MAP, 0
 
-	def_signs
+	def_bg_events
 
-	def_objects
-	object SPRITE_MONSTER, 6, 5, STAY, NONE, 1 ; person
-	object SPRITE_SUPER_NERD, 4, 4, STAY, NONE, 2 ; person
-	object SPRITE_SUPER_NERD, 6, 5, STAY, NONE, 3 ; person
+	def_object_events
+	object_event 6, 5, SPRITE_MONSTER, STAY, NONE, 1 ; person
+	object_event 4, 4, SPRITE_SUPER_NERD, STAY, NONE, 2 ; person
+	object_event 6, 5, SPRITE_SUPER_NERD, STAY, NONE, 3 ; person
 
 	def_warps_to BILLS_HOUSE

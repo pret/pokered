@@ -1,20 +1,20 @@
 CeladonMansion1F_Object:
 	db $f ; border block
 
-	def_warps
-	warp  4, 11, 2, LAST_MAP
-	warp  5, 11, 2, LAST_MAP
-	warp  4,  0, 4, LAST_MAP
-	warp  7,  1, 1, CELADON_MANSION_2F
-	warp  2,  1, 2, CELADON_MANSION_2F
+	def_warp_events
+	warp_event  4, 11, LAST_MAP, 2
+	warp_event  5, 11, LAST_MAP, 2
+	warp_event  4,  0, LAST_MAP, 4
+	warp_event  7,  1, CELADON_MANSION_2F, 1
+	warp_event  2,  1, CELADON_MANSION_2F, 2
 
-	def_signs
-	sign  4,  9, 5 ; CeladonMansion1Text5
+	def_bg_events
+	bg_event  4,  9, 5 ; CeladonMansion1Text5
 
-	def_objects
-	object SPRITE_MONSTER, 0, 5, STAY, RIGHT, 1 ; person
-	object SPRITE_GRANNY, 1, 5, STAY, DOWN, 2 ; person
-	object SPRITE_FAIRY, 1, 8, WALK, LEFT_RIGHT, 3 ; person
-	object SPRITE_MONSTER, 4, 4, WALK, UP_DOWN, 4 ; person
+	def_object_events
+	object_event 0, 5, SPRITE_MONSTER, STAY, RIGHT, 1 ; person
+	object_event 1, 5, SPRITE_GRANNY, STAY, DOWN, 2 ; person
+	object_event 1, 8, SPRITE_FAIRY, WALK, LEFT_RIGHT, 3 ; person
+	object_event 4, 4, SPRITE_MONSTER, WALK, UP_DOWN, 4 ; person
 
 	def_warps_to CELADON_MANSION_1F

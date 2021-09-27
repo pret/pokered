@@ -1,13 +1,13 @@
 Route12SuperRodHouse_Object:
 	db $a ; border block
 
-	def_warps
-	warp  2,  7, 3, LAST_MAP
-	warp  3,  7, 3, LAST_MAP
+	def_warp_events
+	warp_event  2,  7, LAST_MAP, 3
+	warp_event  3,  7, LAST_MAP, 3
 
-	def_signs
+	def_bg_events
 
-	def_objects
-	object SPRITE_FISHING_GURU, 2, 4, STAY, RIGHT, 1 ; person
+	def_object_events
+	object_event 2, 4, SPRITE_FISHING_GURU, STAY, RIGHT, 1 ; person
 
 	def_warps_to ROUTE_12_SUPER_ROD_HOUSE

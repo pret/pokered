@@ -1,12 +1,12 @@
 VermilionDock_Object:
 	db $f ; border block
 
-	def_warps
-	warp 14,  0, 5, LAST_MAP
-	warp 14,  2, 1, SS_ANNE_1F
+	def_warp_events
+	warp_event 14,  0, LAST_MAP, 5
+	warp_event 14,  2, SS_ANNE_1F, 1
 
-	def_signs
+	def_bg_events
 
-	def_objects
+	def_object_events
 
 	def_warps_to VERMILION_DOCK

@@ -1,22 +1,22 @@
 SafariZoneEast_Object:
 	db $0 ; border block
 
-	def_warps
-	warp  0,  4, 6, SAFARI_ZONE_NORTH
-	warp  0,  5, 7, SAFARI_ZONE_NORTH
-	warp  0, 22, 6, SAFARI_ZONE_CENTER
-	warp  0, 23, 6, SAFARI_ZONE_CENTER
-	warp 25,  9, 0, SAFARI_ZONE_EAST_REST_HOUSE
+	def_warp_events
+	warp_event  0,  4, SAFARI_ZONE_NORTH, 6
+	warp_event  0,  5, SAFARI_ZONE_NORTH, 7
+	warp_event  0, 22, SAFARI_ZONE_CENTER, 6
+	warp_event  0, 23, SAFARI_ZONE_CENTER, 6
+	warp_event 25,  9, SAFARI_ZONE_EAST_REST_HOUSE, 0
 
-	def_signs
-	sign 26, 10, 5 ; SafariZoneEastText5
-	sign  6,  4, 6 ; SafariZoneEastText6
-	sign  5, 23, 7 ; SafariZoneEastText7
+	def_bg_events
+	bg_event 26, 10, 5 ; SafariZoneEastText5
+	bg_event  6,  4, 6 ; SafariZoneEastText6
+	bg_event  5, 23, 7 ; SafariZoneEastText7
 
-	def_objects
-	object SPRITE_POKE_BALL, 21, 10, STAY, NONE, 1, FULL_RESTORE
-	object SPRITE_POKE_BALL, 3, 7, STAY, NONE, 2, MAX_POTION
-	object SPRITE_POKE_BALL, 20, 13, STAY, NONE, 3, CARBOS
-	object SPRITE_POKE_BALL, 15, 12, STAY, NONE, 4, TM_EGG_BOMB
+	def_object_events
+	object_event 21, 10, SPRITE_POKE_BALL, STAY, NONE, 1, FULL_RESTORE
+	object_event 3, 7, SPRITE_POKE_BALL, STAY, NONE, 2, MAX_POTION
+	object_event 20, 13, SPRITE_POKE_BALL, STAY, NONE, 3, CARBOS
+	object_event 15, 12, SPRITE_POKE_BALL, STAY, NONE, 4, TM_EGG_BOMB
 
 	def_warps_to SAFARI_ZONE_EAST

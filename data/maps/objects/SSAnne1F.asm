@@ -1,23 +1,23 @@
 SSAnne1F_Object:
 	db $c ; border block
 
-	def_warps
-	warp 26,  0, 1, VERMILION_DOCK
-	warp 27,  0, 1, VERMILION_DOCK
-	warp 31,  8, 0, SS_ANNE_1F_ROOMS
-	warp 23,  8, 1, SS_ANNE_1F_ROOMS
-	warp 19,  8, 2, SS_ANNE_1F_ROOMS
-	warp 15,  8, 3, SS_ANNE_1F_ROOMS
-	warp 11,  8, 4, SS_ANNE_1F_ROOMS
-	warp  7,  8, 5, SS_ANNE_1F_ROOMS
-	warp  2,  6, 6, SS_ANNE_2F
-	warp 37, 15, 5, SS_ANNE_B1F
-	warp  3, 16, 0, SS_ANNE_KITCHEN
+	def_warp_events
+	warp_event 26,  0, VERMILION_DOCK, 1
+	warp_event 27,  0, VERMILION_DOCK, 1
+	warp_event 31,  8, SS_ANNE_1F_ROOMS, 0
+	warp_event 23,  8, SS_ANNE_1F_ROOMS, 1
+	warp_event 19,  8, SS_ANNE_1F_ROOMS, 2
+	warp_event 15,  8, SS_ANNE_1F_ROOMS, 3
+	warp_event 11,  8, SS_ANNE_1F_ROOMS, 4
+	warp_event  7,  8, SS_ANNE_1F_ROOMS, 5
+	warp_event  2,  6, SS_ANNE_2F, 6
+	warp_event 37, 15, SS_ANNE_B1F, 5
+	warp_event  3, 16, SS_ANNE_KITCHEN, 0
 
-	def_signs
+	def_bg_events
 
-	def_objects
-	object SPRITE_WAITER, 12, 6, WALK, LEFT_RIGHT, 1 ; person
-	object SPRITE_SAILOR, 27, 5, STAY, NONE, 2 ; person
+	def_object_events
+	object_event 12, 6, SPRITE_WAITER, WALK, LEFT_RIGHT, 1 ; person
+	object_event 27, 5, SPRITE_SAILOR, STAY, NONE, 2 ; person
 
 	def_warps_to SS_ANNE_1F

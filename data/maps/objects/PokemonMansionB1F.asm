@@ -1,19 +1,19 @@
 PokemonMansionB1F_Object:
 	db $1 ; border block
 
-	def_warps
-	warp 23, 22, 5, POKEMON_MANSION_1F
+	def_warp_events
+	warp_event 23, 22, POKEMON_MANSION_1F, 5
 
-	def_signs
+	def_bg_events
 
-	def_objects
-	object SPRITE_SUPER_NERD, 16, 23, STAY, NONE, 1, OPP_BURGLAR, 9
-	object SPRITE_SCIENTIST, 27, 11, STAY, DOWN, 2, OPP_SCIENTIST, 13
-	object SPRITE_POKE_BALL, 10, 2, STAY, NONE, 3, RARE_CANDY
-	object SPRITE_POKE_BALL, 1, 22, STAY, NONE, 4, FULL_RESTORE
-	object SPRITE_POKE_BALL, 19, 25, STAY, NONE, 5, TM_BLIZZARD
-	object SPRITE_POKE_BALL, 5, 4, STAY, NONE, 6, TM_SOLARBEAM
-	object SPRITE_POKEDEX, 16, 20, STAY, NONE, 7 ; person
-	object SPRITE_POKE_BALL, 5, 13, STAY, NONE, 8, SECRET_KEY
+	def_object_events
+	object_event 16, 23, SPRITE_SUPER_NERD, STAY, NONE, 1, OPP_BURGLAR, 9
+	object_event 27, 11, SPRITE_SCIENTIST, STAY, DOWN, 2, OPP_SCIENTIST, 13
+	object_event 10, 2, SPRITE_POKE_BALL, STAY, NONE, 3, RARE_CANDY
+	object_event 1, 22, SPRITE_POKE_BALL, STAY, NONE, 4, FULL_RESTORE
+	object_event 19, 25, SPRITE_POKE_BALL, STAY, NONE, 5, TM_BLIZZARD
+	object_event 5, 4, SPRITE_POKE_BALL, STAY, NONE, 6, TM_SOLARBEAM
+	object_event 16, 20, SPRITE_POKEDEX, STAY, NONE, 7 ; person
+	object_event 5, 13, SPRITE_POKE_BALL, STAY, NONE, 8, SECRET_KEY
 
 	def_warps_to POKEMON_MANSION_B1F

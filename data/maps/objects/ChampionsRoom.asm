@@ -1,16 +1,16 @@
 ChampionsRoom_Object:
 	db $3 ; border block
 
-	def_warps
-	warp  3,  7, 1, LANCES_ROOM
-	warp  4,  7, 2, LANCES_ROOM
-	warp  3,  0, 0, HALL_OF_FAME
-	warp  4,  0, 0, HALL_OF_FAME
+	def_warp_events
+	warp_event  3,  7, LANCES_ROOM, 1
+	warp_event  4,  7, LANCES_ROOM, 2
+	warp_event  3,  0, HALL_OF_FAME, 0
+	warp_event  4,  0, HALL_OF_FAME, 0
 
-	def_signs
+	def_bg_events
 
-	def_objects
-	object SPRITE_BLUE, 4, 2, STAY, DOWN, 1 ; person
-	object SPRITE_OAK, 3, 7, STAY, UP, 2 ; person
+	def_object_events
+	object_event 4, 2, SPRITE_BLUE, STAY, DOWN, 1 ; person
+	object_event 3, 7, SPRITE_OAK, STAY, UP, 2 ; person
 
 	def_warps_to CHAMPIONS_ROOM

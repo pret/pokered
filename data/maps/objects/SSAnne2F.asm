@@ -1,21 +1,21 @@
 SSAnne2F_Object:
 	db $c ; border block
 
-	def_warps
-	warp  9, 11,  0, SS_ANNE_2F_ROOMS
-	warp 13, 11,  2, SS_ANNE_2F_ROOMS
-	warp 17, 11,  4, SS_ANNE_2F_ROOMS
-	warp 21, 11,  6, SS_ANNE_2F_ROOMS
-	warp 25, 11,  8, SS_ANNE_2F_ROOMS
-	warp 29, 11, 10, SS_ANNE_2F_ROOMS
-	warp  2,  4,  8, SS_ANNE_1F
-	warp  2, 12,  1, SS_ANNE_3F
-	warp 36,  4,  0, SS_ANNE_CAPTAINS_ROOM
+	def_warp_events
+	warp_event  9, 11, SS_ANNE_2F_ROOMS, 0
+	warp_event 13, 11, SS_ANNE_2F_ROOMS, 2
+	warp_event 17, 11, SS_ANNE_2F_ROOMS, 4
+	warp_event 21, 11, SS_ANNE_2F_ROOMS, 6
+	warp_event 25, 11, SS_ANNE_2F_ROOMS, 8
+	warp_event 29, 11, SS_ANNE_2F_ROOMS, 10
+	warp_event  2,  4, SS_ANNE_1F, 8
+	warp_event  2, 12, SS_ANNE_3F, 1
+	warp_event 36,  4, SS_ANNE_CAPTAINS_ROOM, 0
 
-	def_signs
+	def_bg_events
 
-	def_objects
-	object SPRITE_WAITER, 3, 7, WALK, UP_DOWN, 1 ; person
-	object SPRITE_BLUE, 36, 4, STAY, DOWN, 2, OPP_RIVAL1, 1
+	def_object_events
+	object_event 3, 7, SPRITE_WAITER, WALK, UP_DOWN, 1 ; person
+	object_event 36, 4, SPRITE_BLUE, STAY, DOWN, 2, OPP_RIVAL1, 1
 
 	def_warps_to SS_ANNE_2F

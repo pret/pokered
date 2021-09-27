@@ -1,18 +1,18 @@
 PokemonTower5F_Object:
 	db $1 ; border block
 
-	def_warps
-	warp  3,  9, 0, POKEMON_TOWER_4F
-	warp 18,  9, 0, POKEMON_TOWER_6F
+	def_warp_events
+	warp_event  3,  9, POKEMON_TOWER_4F, 0
+	warp_event 18,  9, POKEMON_TOWER_6F, 0
 
-	def_signs
+	def_bg_events
 
-	def_objects
-	object SPRITE_CHANNELER, 12, 8, STAY, NONE, 1 ; person
-	object SPRITE_CHANNELER, 17, 7, STAY, LEFT, 2, OPP_CHANNELER, 14
-	object SPRITE_CHANNELER, 14, 3, STAY, LEFT, 3, OPP_CHANNELER, 16
-	object SPRITE_CHANNELER, 6, 10, STAY, RIGHT, 4, OPP_CHANNELER, 17
-	object SPRITE_CHANNELER, 9, 16, STAY, RIGHT, 5, OPP_CHANNELER, 18
-	object SPRITE_POKE_BALL, 6, 14, STAY, NONE, 6, NUGGET
+	def_object_events
+	object_event 12, 8, SPRITE_CHANNELER, STAY, NONE, 1 ; person
+	object_event 17, 7, SPRITE_CHANNELER, STAY, LEFT, 2, OPP_CHANNELER, 14
+	object_event 14, 3, SPRITE_CHANNELER, STAY, LEFT, 3, OPP_CHANNELER, 16
+	object_event 6, 10, SPRITE_CHANNELER, STAY, RIGHT, 4, OPP_CHANNELER, 17
+	object_event 9, 16, SPRITE_CHANNELER, STAY, RIGHT, 5, OPP_CHANNELER, 18
+	object_event 6, 14, SPRITE_POKE_BALL, STAY, NONE, 6, NUGGET
 
 	def_warps_to POKEMON_TOWER_5F

@@ -1,20 +1,20 @@
 Museum1F_Object:
 	db $a ; border block
 
-	def_warps
-	warp 10,  7, 0, LAST_MAP
-	warp 11,  7, 0, LAST_MAP
-	warp 16,  7, 1, LAST_MAP
-	warp 17,  7, 1, LAST_MAP
-	warp  7,  7, 0, MUSEUM_2F
+	def_warp_events
+	warp_event 10,  7, LAST_MAP, 0
+	warp_event 11,  7, LAST_MAP, 0
+	warp_event 16,  7, LAST_MAP, 1
+	warp_event 17,  7, LAST_MAP, 1
+	warp_event  7,  7, MUSEUM_2F, 0
 
-	def_signs
+	def_bg_events
 
-	def_objects
-	object SPRITE_SCIENTIST, 12, 4, STAY, LEFT, 1 ; person
-	object SPRITE_GAMBLER, 1, 4, STAY, NONE, 2 ; person
-	object SPRITE_SCIENTIST, 15, 2, STAY, DOWN, 3 ; person
-	object SPRITE_SCIENTIST, 17, 4, STAY, NONE, 4 ; person
-	object SPRITE_OLD_AMBER, 16, 2, STAY, NONE, 5 ; person
+	def_object_events
+	object_event 12, 4, SPRITE_SCIENTIST, STAY, LEFT, 1 ; person
+	object_event 1, 4, SPRITE_GAMBLER, STAY, NONE, 2 ; person
+	object_event 15, 2, SPRITE_SCIENTIST, STAY, DOWN, 3 ; person
+	object_event 17, 4, SPRITE_SCIENTIST, STAY, NONE, 4 ; person
+	object_event 16, 2, SPRITE_OLD_AMBER, STAY, NONE, 5 ; person
 
 	def_warps_to MUSEUM_1F

@@ -1,22 +1,22 @@
 SafariZoneCenter_Object:
 	db $0 ; border block
 
-	def_warps
-	warp 14, 25, 2, SAFARI_ZONE_GATE
-	warp 15, 25, 3, SAFARI_ZONE_GATE
-	warp  0, 10, 4, SAFARI_ZONE_WEST
-	warp  0, 11, 5, SAFARI_ZONE_WEST
-	warp 14,  0, 4, SAFARI_ZONE_NORTH
-	warp 15,  0, 5, SAFARI_ZONE_NORTH
-	warp 29, 10, 2, SAFARI_ZONE_EAST
-	warp 29, 11, 3, SAFARI_ZONE_EAST
-	warp 17, 19, 0, SAFARI_ZONE_CENTER_REST_HOUSE
+	def_warp_events
+	warp_event 14, 25, SAFARI_ZONE_GATE, 2
+	warp_event 15, 25, SAFARI_ZONE_GATE, 3
+	warp_event  0, 10, SAFARI_ZONE_WEST, 4
+	warp_event  0, 11, SAFARI_ZONE_WEST, 5
+	warp_event 14,  0, SAFARI_ZONE_NORTH, 4
+	warp_event 15,  0, SAFARI_ZONE_NORTH, 5
+	warp_event 29, 10, SAFARI_ZONE_EAST, 2
+	warp_event 29, 11, SAFARI_ZONE_EAST, 3
+	warp_event 17, 19, SAFARI_ZONE_CENTER_REST_HOUSE, 0
 
-	def_signs
-	sign 18, 20, 2 ; SafariZoneCenterText2
-	sign 14, 22, 3 ; SafariZoneCenterText3
+	def_bg_events
+	bg_event 18, 20, 2 ; SafariZoneCenterText2
+	bg_event 14, 22, 3 ; SafariZoneCenterText3
 
-	def_objects
-	object SPRITE_POKE_BALL, 14, 10, STAY, NONE, 1, NUGGET
+	def_object_events
+	object_event 14, 10, SPRITE_POKE_BALL, STAY, NONE, 1, NUGGET
 
 	def_warps_to SAFARI_ZONE_CENTER

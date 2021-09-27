@@ -1,22 +1,22 @@
 RocketHideoutB1F_Object:
 	db $2e ; border block
 
-	def_warps
-	warp 23,  2, 0, ROCKET_HIDEOUT_B2F
-	warp 21,  2, 2, GAME_CORNER
-	warp 24, 19, 0, ROCKET_HIDEOUT_ELEVATOR
-	warp 21, 24, 3, ROCKET_HIDEOUT_B2F
-	warp 25, 19, 1, ROCKET_HIDEOUT_ELEVATOR
+	def_warp_events
+	warp_event 23,  2, ROCKET_HIDEOUT_B2F, 0
+	warp_event 21,  2, GAME_CORNER, 2
+	warp_event 24, 19, ROCKET_HIDEOUT_ELEVATOR, 0
+	warp_event 21, 24, ROCKET_HIDEOUT_B2F, 3
+	warp_event 25, 19, ROCKET_HIDEOUT_ELEVATOR, 1
 
-	def_signs
+	def_bg_events
 
-	def_objects
-	object SPRITE_ROCKET, 26, 8, STAY, LEFT, 1, OPP_ROCKET, 8
-	object SPRITE_ROCKET, 12, 6, STAY, RIGHT, 2, OPP_ROCKET, 9
-	object SPRITE_ROCKET, 18, 17, STAY, DOWN, 3, OPP_ROCKET, 10
-	object SPRITE_ROCKET, 15, 25, STAY, RIGHT, 4, OPP_ROCKET, 11
-	object SPRITE_ROCKET, 28, 18, STAY, LEFT, 5, OPP_ROCKET, 12
-	object SPRITE_POKE_BALL, 11, 14, STAY, NONE, 6, ESCAPE_ROPE
-	object SPRITE_POKE_BALL, 9, 17, STAY, NONE, 7, HYPER_POTION
+	def_object_events
+	object_event 26, 8, SPRITE_ROCKET, STAY, LEFT, 1, OPP_ROCKET, 8
+	object_event 12, 6, SPRITE_ROCKET, STAY, RIGHT, 2, OPP_ROCKET, 9
+	object_event 18, 17, SPRITE_ROCKET, STAY, DOWN, 3, OPP_ROCKET, 10
+	object_event 15, 25, SPRITE_ROCKET, STAY, RIGHT, 4, OPP_ROCKET, 11
+	object_event 28, 18, SPRITE_ROCKET, STAY, LEFT, 5, OPP_ROCKET, 12
+	object_event 11, 14, SPRITE_POKE_BALL, STAY, NONE, 6, ESCAPE_ROPE
+	object_event 9, 17, SPRITE_POKE_BALL, STAY, NONE, 7, HYPER_POTION
 
 	def_warps_to ROCKET_HIDEOUT_B1F

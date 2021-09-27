@@ -1,18 +1,18 @@
 PokemonMansion3F_Object:
 	db $1 ; border block
 
-	def_warps
-	warp  7, 10, 1, POKEMON_MANSION_2F
-	warp  6,  1, 3, POKEMON_MANSION_2F
-	warp 25, 14, 2, POKEMON_MANSION_2F
+	def_warp_events
+	warp_event  7, 10, POKEMON_MANSION_2F, 1
+	warp_event  6,  1, POKEMON_MANSION_2F, 3
+	warp_event 25, 14, POKEMON_MANSION_2F, 2
 
-	def_signs
+	def_bg_events
 
-	def_objects
-	object SPRITE_SUPER_NERD, 5, 11, WALK, LEFT_RIGHT, 1, OPP_BURGLAR, 8
-	object SPRITE_SCIENTIST, 20, 11, STAY, LEFT, 2, OPP_SCIENTIST, 12
-	object SPRITE_POKE_BALL, 1, 16, STAY, NONE, 3, MAX_POTION
-	object SPRITE_POKE_BALL, 25, 5, STAY, NONE, 4, IRON
-	object SPRITE_POKEDEX, 6, 12, STAY, NONE, 5 ; person
+	def_object_events
+	object_event 5, 11, SPRITE_SUPER_NERD, WALK, LEFT_RIGHT, 1, OPP_BURGLAR, 8
+	object_event 20, 11, SPRITE_SCIENTIST, STAY, LEFT, 2, OPP_SCIENTIST, 12
+	object_event 1, 16, SPRITE_POKE_BALL, STAY, NONE, 3, MAX_POTION
+	object_event 25, 5, SPRITE_POKE_BALL, STAY, NONE, 4, IRON
+	object_event 6, 12, SPRITE_POKEDEX, STAY, NONE, 5 ; person
 
 	def_warps_to POKEMON_MANSION_3F

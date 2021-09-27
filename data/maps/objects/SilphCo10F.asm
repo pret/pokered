@@ -1,22 +1,22 @@
 SilphCo10F_Object:
 	db $2e ; border block
 
-	def_warps
-	warp  8,  0, 0, SILPH_CO_9F
-	warp 10,  0, 0, SILPH_CO_11F
-	warp 12,  0, 0, SILPH_CO_ELEVATOR
-	warp  9, 11, 3, SILPH_CO_4F
-	warp 13, 15, 5, SILPH_CO_4F
-	warp 13,  7, 6, SILPH_CO_4F
+	def_warp_events
+	warp_event  8,  0, SILPH_CO_9F, 0
+	warp_event 10,  0, SILPH_CO_11F, 0
+	warp_event 12,  0, SILPH_CO_ELEVATOR, 0
+	warp_event  9, 11, SILPH_CO_4F, 3
+	warp_event 13, 15, SILPH_CO_4F, 5
+	warp_event 13,  7, SILPH_CO_4F, 6
 
-	def_signs
+	def_bg_events
 
-	def_objects
-	object SPRITE_ROCKET, 1, 9, STAY, RIGHT, 1, OPP_ROCKET, 39
-	object SPRITE_SCIENTIST, 10, 2, STAY, LEFT, 2, OPP_SCIENTIST, 11
-	object SPRITE_ERIKA, 9, 15, WALK, ANY_DIR, 3 ; person
-	object SPRITE_POKE_BALL, 2, 12, STAY, NONE, 4, TM_EARTHQUAKE
-	object SPRITE_POKE_BALL, 4, 14, STAY, NONE, 5, RARE_CANDY
-	object SPRITE_POKE_BALL, 5, 11, STAY, NONE, 6, CARBOS
+	def_object_events
+	object_event 1, 9, SPRITE_ROCKET, STAY, RIGHT, 1, OPP_ROCKET, 39
+	object_event 10, 2, SPRITE_SCIENTIST, STAY, LEFT, 2, OPP_SCIENTIST, 11
+	object_event 9, 15, SPRITE_ERIKA, WALK, ANY_DIR, 3 ; person
+	object_event 2, 12, SPRITE_POKE_BALL, STAY, NONE, 4, TM_EARTHQUAKE
+	object_event 4, 14, SPRITE_POKE_BALL, STAY, NONE, 5, RARE_CANDY
+	object_event 5, 11, SPRITE_POKE_BALL, STAY, NONE, 6, CARBOS
 
 	def_warps_to SILPH_CO_10F

@@ -1,15 +1,15 @@
 PewterNidoranHouse_Object:
 	db $a ; border block
 
-	def_warps
-	warp  2,  7, 3, LAST_MAP
-	warp  3,  7, 3, LAST_MAP
+	def_warp_events
+	warp_event  2,  7, LAST_MAP, 3
+	warp_event  3,  7, LAST_MAP, 3
 
-	def_signs
+	def_bg_events
 
-	def_objects
-	object SPRITE_MONSTER, 4, 5, STAY, LEFT, 1 ; person
-	object SPRITE_LITTLE_BOY, 3, 5, STAY, RIGHT, 2 ; person
-	object SPRITE_MIDDLE_AGED_MAN, 1, 2, STAY, NONE, 3 ; person
+	def_object_events
+	object_event 4, 5, SPRITE_MONSTER, STAY, LEFT, 1 ; person
+	object_event 3, 5, SPRITE_LITTLE_BOY, STAY, RIGHT, 2 ; person
+	object_event 1, 2, SPRITE_MIDDLE_AGED_MAN, STAY, NONE, 3 ; person
 
 	def_warps_to PEWTER_NIDORAN_HOUSE

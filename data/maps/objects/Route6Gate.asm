@@ -1,15 +1,15 @@
 Route6Gate_Object:
 	db $a ; border block
 
-	def_warps
-	warp  3,  5, 2, LAST_MAP
-	warp  4,  5, 2, LAST_MAP
-	warp  3,  0, 1, LAST_MAP
-	warp  4,  0, 1, LAST_MAP
+	def_warp_events
+	warp_event  3,  5, LAST_MAP, 2
+	warp_event  4,  5, LAST_MAP, 2
+	warp_event  3,  0, LAST_MAP, 1
+	warp_event  4,  0, LAST_MAP, 1
 
-	def_signs
+	def_bg_events
 
-	def_objects
-	object SPRITE_GUARD, 6, 2, STAY, LEFT, 1 ; person
+	def_object_events
+	object_event 6, 2, SPRITE_GUARD, STAY, LEFT, 1 ; person
 
 	def_warps_to ROUTE_6_GATE

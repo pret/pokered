@@ -1,15 +1,15 @@
 SafariZoneNorthRestHouse_Object:
 	db $a ; border block
 
-	def_warps
-	warp  2,  7, 8, SAFARI_ZONE_NORTH
-	warp  3,  7, 8, SAFARI_ZONE_NORTH
+	def_warp_events
+	warp_event  2,  7, SAFARI_ZONE_NORTH, 8
+	warp_event  3,  7, SAFARI_ZONE_NORTH, 8
 
-	def_signs
+	def_bg_events
 
-	def_objects
-	object SPRITE_SCIENTIST, 6, 3, WALK, LEFT_RIGHT, 1 ; person
-	object SPRITE_SAFARI_ZONE_WORKER, 3, 4, STAY, NONE, 2 ; person
-	object SPRITE_GENTLEMAN, 1, 5, WALK, UP_DOWN, 3 ; person
+	def_object_events
+	object_event 6, 3, SPRITE_SCIENTIST, WALK, LEFT_RIGHT, 1 ; person
+	object_event 3, 4, SPRITE_SAFARI_ZONE_WORKER, STAY, NONE, 2 ; person
+	object_event 1, 5, SPRITE_GENTLEMAN, WALK, UP_DOWN, 3 ; person
 
 	def_warps_to SAFARI_ZONE_NORTH_REST_HOUSE

@@ -1,14 +1,14 @@
 CeruleanBadgeHouse_Object:
 	db $c ; border block
 
-	def_warps
-	warp  2,  0, 9, LAST_MAP
-	warp  2,  7, 8, LAST_MAP
-	warp  3,  7, 8, LAST_MAP
+	def_warp_events
+	warp_event  2,  0, LAST_MAP, 9
+	warp_event  2,  7, LAST_MAP, 8
+	warp_event  3,  7, LAST_MAP, 8
 
-	def_signs
+	def_bg_events
 
-	def_objects
-	object SPRITE_MIDDLE_AGED_MAN, 5, 3, STAY, RIGHT, 1 ; person
+	def_object_events
+	object_event 5, 3, SPRITE_MIDDLE_AGED_MAN, STAY, RIGHT, 1 ; person
 
 	def_warps_to CERULEAN_BADGE_HOUSE

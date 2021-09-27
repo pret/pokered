@@ -1,16 +1,16 @@
 RocketHideoutB3F_Object:
 	db $2e ; border block
 
-	def_warps
-	warp 25,  6, 1, ROCKET_HIDEOUT_B2F
-	warp 19, 18, 0, ROCKET_HIDEOUT_B4F
+	def_warp_events
+	warp_event 25,  6, ROCKET_HIDEOUT_B2F, 1
+	warp_event 19, 18, ROCKET_HIDEOUT_B4F, 0
 
-	def_signs
+	def_bg_events
 
-	def_objects
-	object SPRITE_ROCKET, 10, 22, STAY, RIGHT, 1, OPP_ROCKET, 14
-	object SPRITE_ROCKET, 26, 12, STAY, UP, 2, OPP_ROCKET, 15
-	object SPRITE_POKE_BALL, 26, 17, STAY, NONE, 3, TM_DOUBLE_EDGE
-	object SPRITE_POKE_BALL, 20, 14, STAY, NONE, 4, RARE_CANDY
+	def_object_events
+	object_event 10, 22, SPRITE_ROCKET, STAY, RIGHT, 1, OPP_ROCKET, 14
+	object_event 26, 12, SPRITE_ROCKET, STAY, UP, 2, OPP_ROCKET, 15
+	object_event 26, 17, SPRITE_POKE_BALL, STAY, NONE, 3, TM_DOUBLE_EDGE
+	object_event 20, 14, SPRITE_POKE_BALL, STAY, NONE, 4, RARE_CANDY
 
 	def_warps_to ROCKET_HIDEOUT_B3F
