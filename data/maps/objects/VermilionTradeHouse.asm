@@ -8,6 +8,6 @@ VermilionTradeHouse_Object:
 	def_bg_events
 
 	def_object_events
-	object_event 3, 5, SPRITE_LITTLE_GIRL, STAY, UP, 1 ; person
+	object_event  3,  5, SPRITE_LITTLE_GIRL, STAY, UP, 1 ; person
 
 	def_warps_to VERMILION_TRADE_HOUSE

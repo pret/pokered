@@ -11,7 +11,7 @@ CeladonMartRoof_Object:
 	bg_event 13,  2, 6 ; CeladonMartRoofText6
 
 	def_object_events
-	object_event 10, 4, SPRITE_SUPER_NERD, STAY, LEFT, 1 ; person
-	object_event 5, 5, SPRITE_LITTLE_GIRL, WALK, ANY_DIR, 2 ; person
+	object_event 10,  4, SPRITE_SUPER_NERD, STAY, LEFT, 1 ; person
+	object_event  5,  5, SPRITE_LITTLE_GIRL, WALK, ANY_DIR, 2 ; person
 
 	def_warps_to CELADON_MART_ROOF

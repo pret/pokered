@@ -10,6 +10,6 @@ RedsHouse1F_Object:
 	bg_event  3,  1, 2 ; TV
 
 	def_object_events
-	object_event 5, 4, SPRITE_MOM, STAY, LEFT, 1 ; Mom
+	object_event  5,  4, SPRITE_MOM, STAY, LEFT, 1 ; Mom
 
 	def_warps_to REDS_HOUSE_1F

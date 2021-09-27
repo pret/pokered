@@ -10,7 +10,7 @@ SafariZoneGate_Object:
 	def_bg_events
 
 	def_object_events
-	object_event 6, 2, SPRITE_SAFARI_ZONE_WORKER, STAY, LEFT, 1 ; person
-	object_event 1, 4, SPRITE_SAFARI_ZONE_WORKER, STAY, RIGHT, 2 ; person
+	object_event  6,  2, SPRITE_SAFARI_ZONE_WORKER, STAY, LEFT, 1 ; person
+	object_event  1,  4, SPRITE_SAFARI_ZONE_WORKER, STAY, RIGHT, 2 ; person
 
 	def_warps_to SAFARI_ZONE_GATE

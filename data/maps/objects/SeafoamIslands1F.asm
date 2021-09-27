@@ -14,7 +14,7 @@ SeafoamIslands1F_Object:
 
 	def_object_events
 	object_event 18, 10, SPRITE_BOULDER, STAY, BOULDER_MOVEMENT_BYTE_2, 1 ; person
-	object_event 26, 7, SPRITE_BOULDER, STAY, BOULDER_MOVEMENT_BYTE_2, 2 ; person
+	object_event 26,  7, SPRITE_BOULDER, STAY, BOULDER_MOVEMENT_BYTE_2, 2 ; person
 
 	def_warps_to SEAFOAM_ISLANDS_1F
 

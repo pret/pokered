@@ -8,8 +8,8 @@ FuchsiaMeetingRoom_Object:
 	def_bg_events
 
 	def_object_events
-	object_event 4, 1, SPRITE_SAFARI_ZONE_WORKER, STAY, DOWN, 1 ; person
-	object_event 0, 2, SPRITE_SAFARI_ZONE_WORKER, STAY, UP, 2 ; person
-	object_event 10, 1, SPRITE_SAFARI_ZONE_WORKER, STAY, DOWN, 3 ; person
+	object_event  4,  1, SPRITE_SAFARI_ZONE_WORKER, STAY, DOWN, 1 ; person
+	object_event  0,  2, SPRITE_SAFARI_ZONE_WORKER, STAY, UP, 2 ; person
+	object_event 10,  1, SPRITE_SAFARI_ZONE_WORKER, STAY, DOWN, 3 ; person
 
 	def_warps_to FUCHSIA_MEETING_ROOM

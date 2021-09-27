@@ -8,6 +8,6 @@ HallOfFame_Object:
 	def_bg_events
 
 	def_object_events
-	object_event 5, 2, SPRITE_OAK, STAY, DOWN, 1 ; person
+	object_event  5,  2, SPRITE_OAK, STAY, DOWN, 1 ; person
 
 	def_warps_to HALL_OF_FAME

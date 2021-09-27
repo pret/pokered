@@ -8,7 +8,7 @@ Route22_Object:
 	bg_event  7, 11, 3 ; Route22FrontGateText
 
 	def_object_events
-	object_event 25, 5, SPRITE_BLUE, STAY, NONE, 1 ; person
-	object_event 25, 5, SPRITE_BLUE, STAY, NONE, 2 ; person
+	object_event 25,  5, SPRITE_BLUE, STAY, NONE, 1 ; person
+	object_event 25,  5, SPRITE_BLUE, STAY, NONE, 2 ; person
 
 	def_warps_to ROUTE_22

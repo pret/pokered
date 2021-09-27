@@ -10,6 +10,6 @@ AgathasRoom_Object:
 	def_bg_events
 
 	def_object_events
-	object_event 5, 2, SPRITE_AGATHA, STAY, DOWN, 1, OPP_AGATHA, 1
+	object_event  5,  2, SPRITE_AGATHA, STAY, DOWN, 1, OPP_AGATHA, 1
 
 	def_warps_to AGATHAS_ROOM

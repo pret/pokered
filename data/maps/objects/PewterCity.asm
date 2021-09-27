@@ -20,7 +20,7 @@ PewterCity_Object:
 	bg_event 25, 23, 12 ; PewterCityText12
 
 	def_object_events
-	object_event 8, 15, SPRITE_COOLTRAINER_F, STAY, NONE, 1 ; person
+	object_event  8, 15, SPRITE_COOLTRAINER_F, STAY, NONE, 1 ; person
 	object_event 17, 25, SPRITE_COOLTRAINER_M, STAY, NONE, 2 ; person
 	object_event 27, 17, SPRITE_SUPER_NERD, STAY, NONE, 3 ; person
 	object_event 26, 25, SPRITE_SUPER_NERD, WALK, LEFT_RIGHT, 4 ; person

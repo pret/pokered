@@ -15,7 +15,7 @@ SSAnne2F_Object:
 	def_bg_events
 
 	def_object_events
-	object_event 3, 7, SPRITE_WAITER, WALK, UP_DOWN, 1 ; person
-	object_event 36, 4, SPRITE_BLUE, STAY, DOWN, 2, OPP_RIVAL1, 1
+	object_event  3,  7, SPRITE_WAITER, WALK, UP_DOWN, 1 ; person
+	object_event 36,  4, SPRITE_BLUE, STAY, DOWN, 2, OPP_RIVAL1, 1
 
 	def_warps_to SS_ANNE_2F

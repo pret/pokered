@@ -16,9 +16,9 @@ SilphCo3F_Object:
 	def_bg_events
 
 	def_object_events
-	object_event 24, 8, SPRITE_SILPH_WORKER, STAY, NONE, 1 ; person
-	object_event 20, 7, SPRITE_ROCKET, STAY, LEFT, 2, OPP_ROCKET, 25
-	object_event 7, 9, SPRITE_SCIENTIST, STAY, DOWN, 3, OPP_SCIENTIST, 4
-	object_event 8, 5, SPRITE_POKE_BALL, STAY, NONE, 4, HYPER_POTION
+	object_event 24,  8, SPRITE_SILPH_WORKER, STAY, NONE, 1 ; person
+	object_event 20,  7, SPRITE_ROCKET, STAY, LEFT, 2, OPP_ROCKET, 25
+	object_event  7,  9, SPRITE_SCIENTIST, STAY, DOWN, 3, OPP_SCIENTIST, 4
+	object_event  8,  5, SPRITE_POKE_BALL, STAY, NONE, 4, HYPER_POTION
 
 	def_warps_to SILPH_CO_3F

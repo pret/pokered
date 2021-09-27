@@ -28,7 +28,7 @@ CeladonCity_Object:
 	bg_event 27, 21, 18 ; CeladonCityText18
 
 	def_object_events
-	object_event 8, 17, SPRITE_LITTLE_GIRL, WALK, ANY_DIR, 1 ; person
+	object_event  8, 17, SPRITE_LITTLE_GIRL, WALK, ANY_DIR, 1 ; person
 	object_event 11, 28, SPRITE_GRAMPS, STAY, UP, 2 ; person
 	object_event 14, 19, SPRITE_GIRL, WALK, UP_DOWN, 3 ; person
 	object_event 25, 22, SPRITE_GRAMPS, STAY, DOWN, 4 ; person

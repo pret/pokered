@@ -9,6 +9,6 @@ DiglettsCaveRoute11_Object:
 	def_bg_events
 
 	def_object_events
-	object_event 2, 3, SPRITE_GAMBLER, STAY, NONE, 1 ; person
+	object_event  2,  3, SPRITE_GAMBLER, STAY, NONE, 1 ; person
 
 	def_warps_to DIGLETTS_CAVE_ROUTE_11

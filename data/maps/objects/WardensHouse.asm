@@ -10,8 +10,8 @@ WardensHouse_Object:
 	bg_event  5,  3, 5 ; FuchsiaHouse2Text5
 
 	def_object_events
-	object_event 2, 3, SPRITE_WARDEN, STAY, NONE, 1 ; person
-	object_event 8, 3, SPRITE_POKE_BALL, STAY, NONE, 2, RARE_CANDY
-	object_event 8, 4, SPRITE_BOULDER, STAY, BOULDER_MOVEMENT_BYTE_2, 3 ; person
+	object_event  2,  3, SPRITE_WARDEN, STAY, NONE, 1 ; person
+	object_event  8,  3, SPRITE_POKE_BALL, STAY, NONE, 2, RARE_CANDY
+	object_event  8,  4, SPRITE_BOULDER, STAY, BOULDER_MOVEMENT_BYTE_2, 3 ; person
 
 	def_warps_to WARDENS_HOUSE

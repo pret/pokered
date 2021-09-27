@@ -9,6 +9,6 @@ Route12Gate2F_Object:
 	bg_event  6,  2, 3 ; Route12GateUpstairsText3
 
 	def_object_events
-	object_event 3, 4, SPRITE_BRUNETTE_GIRL, WALK, UP_DOWN, 1 ; person
+	object_event  3,  4, SPRITE_BRUNETTE_GIRL, WALK, UP_DOWN, 1 ; person
 
 	def_warps_to ROUTE_12_GATE_2F

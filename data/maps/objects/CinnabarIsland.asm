@@ -16,7 +16,7 @@ CinnabarIsland_Object:
 	bg_event 13,  3, 7 ; CinnabarIslandText7
 
 	def_object_events
-	object_event 12, 5, SPRITE_GIRL, WALK, LEFT_RIGHT, 1 ; person
-	object_event 14, 6, SPRITE_GAMBLER, STAY, NONE, 2 ; person
+	object_event 12,  5, SPRITE_GIRL, WALK, LEFT_RIGHT, 1 ; person
+	object_event 14,  6, SPRITE_GAMBLER, STAY, NONE, 2 ; person
 
 	def_warps_to CINNABAR_ISLAND

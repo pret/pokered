@@ -10,6 +10,6 @@ Route22Gate_Object:
 	def_bg_events
 
 	def_object_events
-	object_event 6, 2, SPRITE_GUARD, STAY, LEFT, 1 ; person
+	object_event  6,  2, SPRITE_GUARD, STAY, LEFT, 1 ; person
 
 	def_warps_to ROUTE_22_GATE

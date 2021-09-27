@@ -8,7 +8,7 @@ LavenderCuboneHouse_Object:
 	def_bg_events
 
 	def_object_events
-	object_event 3, 5, SPRITE_MONSTER, STAY, UP, 1 ; person
-	object_event 2, 4, SPRITE_BRUNETTE_GIRL, STAY, RIGHT, 2 ; person
+	object_event  3,  5, SPRITE_MONSTER, STAY, UP, 1 ; person
+	object_event  2,  4, SPRITE_BRUNETTE_GIRL, STAY, RIGHT, 2 ; person
 
 	def_warps_to LAVENDER_CUBONE_HOUSE

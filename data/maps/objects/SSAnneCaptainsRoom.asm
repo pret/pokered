@@ -9,6 +9,6 @@ SSAnneCaptainsRoom_Object:
 	bg_event  1,  2, 3 ; SSAnne7Text3
 
 	def_object_events
-	object_event 4, 2, SPRITE_CAPTAIN, STAY, UP, 1 ; person
+	object_event  4,  2, SPRITE_CAPTAIN, STAY, UP, 1 ; person
 
 	def_warps_to SS_ANNE_CAPTAINS_ROOM

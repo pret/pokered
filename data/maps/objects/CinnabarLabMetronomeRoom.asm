@@ -11,7 +11,7 @@ CinnabarLabMetronomeRoom_Object:
 	bg_event  2,  1, 5 ; Lab3Text5
 
 	def_object_events
-	object_event 7, 2, SPRITE_SCIENTIST, STAY, DOWN, 1 ; person
-	object_event 2, 3, SPRITE_SCIENTIST, WALK, LEFT_RIGHT, 2 ; person
+	object_event  7,  2, SPRITE_SCIENTIST, STAY, DOWN, 1 ; person
+	object_event  2,  3, SPRITE_SCIENTIST, WALK, LEFT_RIGHT, 2 ; person
 
 	def_warps_to CINNABAR_LAB_METRONOME_ROOM

@@ -20,9 +20,9 @@ Route16_Object:
 	object_event 17, 12, SPRITE_BIKER, STAY, LEFT, 1, OPP_BIKER, 5
 	object_event 14, 13, SPRITE_BIKER, STAY, RIGHT, 2, OPP_CUE_BALL, 1
 	object_event 11, 12, SPRITE_BIKER, STAY, UP, 3, OPP_CUE_BALL, 2
-	object_event 9, 11, SPRITE_BIKER, STAY, LEFT, 4, OPP_BIKER, 6
-	object_event 6, 10, SPRITE_BIKER, STAY, RIGHT, 5, OPP_CUE_BALL, 3
-	object_event 3, 12, SPRITE_BIKER, STAY, RIGHT, 6, OPP_BIKER, 7
+	object_event  9, 11, SPRITE_BIKER, STAY, LEFT, 4, OPP_BIKER, 6
+	object_event  6, 10, SPRITE_BIKER, STAY, RIGHT, 5, OPP_CUE_BALL, 3
+	object_event  3, 12, SPRITE_BIKER, STAY, RIGHT, 6, OPP_BIKER, 7
 	object_event 26, 10, SPRITE_SNORLAX, STAY, DOWN, 7 ; person
 
 	def_warps_to ROUTE_16

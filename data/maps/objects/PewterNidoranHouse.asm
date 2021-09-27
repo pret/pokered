@@ -8,8 +8,8 @@ PewterNidoranHouse_Object:
 	def_bg_events
 
 	def_object_events
-	object_event 4, 5, SPRITE_MONSTER, STAY, LEFT, 1 ; person
-	object_event 3, 5, SPRITE_LITTLE_BOY, STAY, RIGHT, 2 ; person
-	object_event 1, 2, SPRITE_MIDDLE_AGED_MAN, STAY, NONE, 3 ; person
+	object_event  4,  5, SPRITE_MONSTER, STAY, LEFT, 1 ; person
+	object_event  3,  5, SPRITE_LITTLE_BOY, STAY, RIGHT, 2 ; person
+	object_event  1,  2, SPRITE_MIDDLE_AGED_MAN, STAY, NONE, 3 ; person
 
 	def_warps_to PEWTER_NIDORAN_HOUSE
