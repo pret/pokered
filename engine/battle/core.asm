@@ -3337,7 +3337,7 @@ CheckPlayerStatusConditions:
 
 .HeldInPlaceCheck
 	ld a, [wEnemyBattleStatus1]
-	bit USING_TRAPPING_MOVE, a ; is enemy using a mult-turn move like wrap?
+	bit USING_TRAPPING_MOVE, a ; is enemy using a multi-turn move like wrap?
 	jp z, .FlinchedCheck
 	ld hl, CantMoveText
 	call PrintText

@@ -127,7 +127,7 @@ AutoBgMapTransfer::
 	ld a, h
 	ldh [hSPTemp], a
 	ld a, l
-	ldh [hSPTemp + 1], a ; save stack pinter
+	ldh [hSPTemp + 1], a ; save stack pointer
 	ldh a, [hAutoBGTransferPortion]
 	and a
 	jr z, .transferTopThird
