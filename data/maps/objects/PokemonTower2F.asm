@@ -2,8 +2,8 @@ PokemonTower2F_Object:
 	db $1 ; border block
 
 	def_warp_events
-	warp_event  3,  9, POKEMON_TOWER_3F, 0
-	warp_event 18,  9, POKEMON_TOWER_1F, 2
+	warp_event  3,  9, POKEMON_TOWER_3F, 1
+	warp_event 18,  9, POKEMON_TOWER_1F, 3
 
 	def_bg_events
 

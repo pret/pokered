@@ -2,9 +2,9 @@ LancesRoom_Object:
 	db $3 ; border block
 
 	def_warp_events
-	warp_event 24, 16, AGATHAS_ROOM, 2
-	warp_event  5,  0, CHAMPIONS_ROOM, 0
-	warp_event  6,  0, CHAMPIONS_ROOM, 0
+	warp_event 24, 16, AGATHAS_ROOM, 3
+	warp_event  5,  0, CHAMPIONS_ROOM, 1
+	warp_event  6,  0, CHAMPIONS_ROOM, 1
 
 	def_bg_events
 

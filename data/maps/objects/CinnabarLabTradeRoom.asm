@@ -2,8 +2,8 @@ CinnabarLabTradeRoom_Object:
 	db $17 ; border block
 
 	def_warp_events
-	warp_event  2,  7, CINNABAR_LAB, 2
-	warp_event  3,  7, CINNABAR_LAB, 2
+	warp_event  2,  7, CINNABAR_LAB, 3
+	warp_event  3,  7, CINNABAR_LAB, 3
 
 	def_bg_events
 

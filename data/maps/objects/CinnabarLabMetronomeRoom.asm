@@ -2,8 +2,8 @@ CinnabarLabMetronomeRoom_Object:
 	db $17 ; border block
 
 	def_warp_events
-	warp_event  2,  7, CINNABAR_LAB, 3
-	warp_event  3,  7, CINNABAR_LAB, 3
+	warp_event  2,  7, CINNABAR_LAB, 4
+	warp_event  3,  7, CINNABAR_LAB, 4
 
 	def_bg_events
 	bg_event  0,  4, 3 ; Lab3Text3

@@ -2,8 +2,8 @@ PewterSpeechHouse_Object:
 	db $a ; border block
 
 	def_warp_events
-	warp_event  2,  7, LAST_MAP, 5
-	warp_event  3,  7, LAST_MAP, 5
+	warp_event  2,  7, LAST_MAP, 6
+	warp_event  3,  7, LAST_MAP, 6
 
 	def_bg_events
 

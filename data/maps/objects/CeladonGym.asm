@@ -2,8 +2,8 @@ CeladonGym_Object:
 	db $3 ; border block
 
 	def_warp_events
-	warp_event  4, 17, LAST_MAP, 6
-	warp_event  5, 17, LAST_MAP, 6
+	warp_event  4, 17, LAST_MAP, 7
+	warp_event  5, 17, LAST_MAP, 7
 
 	def_bg_events
 

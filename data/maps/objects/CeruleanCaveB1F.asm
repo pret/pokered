@@ -2,7 +2,7 @@ CeruleanCaveB1F_Object:
 	db $7d ; border block
 
 	def_warp_events
-	warp_event  3,  6, CERULEAN_CAVE_1F, 8
+	warp_event  3,  6, CERULEAN_CAVE_1F, 9
 
 	def_bg_events
 

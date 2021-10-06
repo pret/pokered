@@ -2,9 +2,9 @@ DiglettsCaveRoute2_Object:
 	db $7d ; border block
 
 	def_warp_events
-	warp_event  2,  7, LAST_MAP, 0
-	warp_event  3,  7, LAST_MAP, 0
-	warp_event  4,  4, DIGLETTS_CAVE, 0
+	warp_event  2,  7, LAST_MAP, 1
+	warp_event  3,  7, LAST_MAP, 1
+	warp_event  4,  4, DIGLETTS_CAVE, 1
 
 	def_bg_events
 

@@ -2,9 +2,9 @@ GameCorner_Object:
 	db $f ; border block
 
 	def_warp_events
-	warp_event 15, 17, LAST_MAP, 7
-	warp_event 16, 17, LAST_MAP, 7
-	warp_event 17,  4, ROCKET_HIDEOUT_B1F, 1
+	warp_event 15, 17, LAST_MAP, 8
+	warp_event 16, 17, LAST_MAP, 8
+	warp_event 17,  4, ROCKET_HIDEOUT_B1F, 2
 
 	def_bg_events
 	bg_event  9,  4, 12 ; CeladonGameCornerText12

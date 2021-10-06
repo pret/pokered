@@ -2,10 +2,10 @@ CeladonMansion3F_Object:
 	db $f ; border block
 
 	def_warp_events
-	warp_event  6,  1, CELADON_MANSION_2F, 0
-	warp_event  7,  1, CELADON_MANSION_ROOF, 0
-	warp_event  2,  1, CELADON_MANSION_ROOF, 1
-	warp_event  4,  1, CELADON_MANSION_2F, 3
+	warp_event  6,  1, CELADON_MANSION_2F, 1
+	warp_event  7,  1, CELADON_MANSION_ROOF, 1
+	warp_event  2,  1, CELADON_MANSION_ROOF, 2
+	warp_event  4,  1, CELADON_MANSION_2F, 4
 
 	def_bg_events
 	bg_event  1,  3, 5 ; CeladonMansion3Text5

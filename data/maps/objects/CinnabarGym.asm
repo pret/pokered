@@ -2,8 +2,8 @@ CinnabarGym_Object:
 	db $2e ; border block
 
 	def_warp_events
-	warp_event 16, 17, LAST_MAP, 1
-	warp_event 17, 17, LAST_MAP, 1
+	warp_event 16, 17, LAST_MAP, 2
+	warp_event 17, 17, LAST_MAP, 2
 
 	def_bg_events
 

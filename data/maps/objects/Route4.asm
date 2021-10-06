@@ -2,9 +2,9 @@ Route4_Object:
 	db $2c ; border block
 
 	def_warp_events
-	warp_event 11,  5, MT_MOON_POKECENTER, 0
-	warp_event 18,  5, MT_MOON_1F, 0
-	warp_event 24,  5, MT_MOON_B1F, 7
+	warp_event 11,  5, MT_MOON_POKECENTER, 1
+	warp_event 18,  5, MT_MOON_1F, 1
+	warp_event 24,  5, MT_MOON_B1F, 8
 
 	def_bg_events
 	bg_event 12,  5, 4 ; PokeCenterSignText

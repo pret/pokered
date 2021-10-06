@@ -2,8 +2,8 @@ SSAnne3F_Object:
 	db $c ; border block
 
 	def_warp_events
-	warp_event  0,  3, SS_ANNE_BOW, 0
-	warp_event 19,  3, SS_ANNE_2F, 7
+	warp_event  0,  3, SS_ANNE_BOW, 1
+	warp_event 19,  3, SS_ANNE_2F, 8
 
 	def_bg_events
 

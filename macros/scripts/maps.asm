@@ -41,9 +41,9 @@ ENDM
 ;\1 x position
 ;\2 y position
 ;\3 destination map (-1 = wLastMap)
-;\4 destination warp id
+;\4 destination warp id; starts at 1 (internally at 0)
 warp_event: MACRO
-	db \2, \1, \4, \3
+	db \2, \1, \4 - 1, \3
 _WARP_{d:{_NUM_WARP_EVENTS}}_X = \1
 _WARP_{d:{_NUM_WARP_EVENTS}}_Y = \2
 {_NUM_WARP_EVENTS} = {_NUM_WARP_EVENTS} + 1

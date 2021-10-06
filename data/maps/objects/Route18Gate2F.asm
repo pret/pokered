@@ -2,7 +2,7 @@ Route18Gate2F_Object:
 	db $a ; border block
 
 	def_warp_events
-	warp_event  7,  7, ROUTE_18_GATE_1F, 4
+	warp_event  7,  7, ROUTE_18_GATE_1F, 5
 
 	def_bg_events
 	bg_event  1,  2, 2 ; Route18GateUpstairsText2
