@@ -402,12 +402,12 @@ MainInBattleLoop:
 	cp USING_INTERNAL_CLOCK
 	jr z, .invertOutcome
 	call BattleRandom
-	cp $80
+	cp 50 percent + 1
 	jr c, .playerMovesFirst
 	jr .enemyMovesFirst
 .invertOutcome
 	call BattleRandom
-	cp $80
+	cp 50 percent + 1
 	jr c, .enemyMovesFirst
 	jr .playerMovesFirst
 .enemyMovesFirst
@@ -1319,7 +1319,7 @@ EnemySendOutFirstMon:
 	ld [wWhichPokemon], a
 	jr .next3
 .next
-	ld b, $FF
+	ld b, $ff
 .next2
 	inc b
 	ld a, [wEnemyMonPartyPos]
@@ -2962,19 +2962,19 @@ SelectEnemyMove:
 .chooseRandomMove
 	push hl
 	call BattleRandom
-	ld b, $1
-	cp $3f ; select move 1, [0,3e] (63/256 chance)
+	ld b, 1 ; 25% chance to select move 1
+	cp 25 percent
 	jr c, .moveChosen
 	inc hl
-	inc b
-	cp $7f ; select move 2, [3f,7e] (64/256 chance)
+	inc b ; 25% chance to select move 2
+	cp 50 percent
 	jr c, .moveChosen
 	inc hl
-	inc b
-	cp $be ; select move 3, [7f,bd] (63/256 chance)
+	inc b ; 25% chance to select move 3
+	cp 75 percent - 1
 	jr c, .moveChosen
 	inc hl
-	inc b ; select move 4, [be,ff] (66/256 chance)
+	inc b ; 25% chance to select move 4
 .moveChosen
 	ld a, b
 	dec a
@@ -3398,7 +3398,7 @@ CheckPlayerStatusConditions:
 	ld a, CONF_ANIM - 1
 	call PlayMoveAnimation
 	call BattleRandom
-	cp $80 ; 50% chance to hurt itself
+	cp 50 percent + 1 ; chance to hurt itself
 	jr c, .TriedToUseDisabledMoveCheck
 	ld hl, wPlayerBattleStatus1
 	ld a, [hl]
@@ -4607,7 +4607,7 @@ CriticalHitTest:
 	dec hl
 	ld c, [hl]                   ; read move id
 	ld a, [de]
-	bit GETTING_PUMPED, a         ; test for focus energy
+	bit GETTING_PUMPED, a        ; test for focus energy
 	jr nz, .focusEnergyUsed      ; bug: using focus energy causes a shift to the right instead of left,
 	                             ; resulting in 1/4 the usual crit chance
 	sla b                        ; (effective (base speed/2)*2)
@@ -5932,7 +5932,7 @@ CheckEnemyStatusConditions:
 	bit PAR, [hl]
 	jr z, .checkIfUsingBide
 	call BattleRandom
-	cp $3f ; 25% to be fully paralysed
+	cp 25 percent ; chance to be fully paralysed
 	jr nc, .checkIfUsingBide
 	ld hl, FullyParalyzedText
 	call PrintText

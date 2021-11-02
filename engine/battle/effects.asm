@@ -98,10 +98,10 @@ PoisonEffect:
 	jr z, .noEffect
 	ld a, [de]
 	cp POISON_SIDE_EFFECT1
-	ld b, $34 ; ~20% chance of poisoning
+	ld b, 20 percent + 1 ; chance of poisoning
 	jr z, .sideEffectTest
 	cp POISON_SIDE_EFFECT2
-	ld b, $67 ; ~40% chance of poisoning
+	ld b, 40 percent + 1 ; chance of poisoning
 	jr z, .sideEffectTest
 	push hl
 	push de
@@ -548,7 +548,7 @@ StatModifierDownEffect:
 	cp LINK_STATE_BATTLING
 	jr z, .statModifierDownEffect
 	call BattleRandom
-	cp $40 ; 1/4 chance to miss by in regular battle
+	cp 25 percent + 1 ; chance to miss by in regular battle
 	jp c, MoveMissed
 .statModifierDownEffect
 	call CheckTargetSubstitute ; can't hit through substitute
@@ -557,7 +557,7 @@ StatModifierDownEffect:
 	cp ATTACK_DOWN_SIDE_EFFECT
 	jr c, .nonSideEffect
 	call BattleRandom
-	cp $55 ; 85/256 chance for side effects
+	cp 33 percent + 1 ; chance for side effects
 	jp nc, CantLowerAnymore
 	ld a, [de]
 	sub ATTACK_DOWN_SIDE_EFFECT ; map each stat to 0-3
@@ -979,9 +979,9 @@ FlinchSideEffect:
 .flinchSideEffect
 	ld a, [de]
 	cp FLINCH_SIDE_EFFECT1
-	ld b, $1a ; ~10% chance of flinch
+	ld b, 10 percent + 1 ; chance of flinch (FLINCH_SIDE_EFFECT1)
 	jr z, .gotEffectChance
-	ld b, $4d ; ~30% chance of flinch
+	ld b, 30 percent + 1 ; chance of flinch otherwise
 .gotEffectChance
 	call BattleRandom
 	cp b
@@ -1111,7 +1111,7 @@ RecoilEffect:
 
 ConfusionSideEffect:
 	call BattleRandom
-	cp $19 ; ~10% chance
+	cp 10 percent ; chance of confusion
 	ret nc
 	jr ConfusionSideEffectSuccess
 
