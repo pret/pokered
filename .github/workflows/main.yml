@@ -37,7 +37,8 @@ jobs:
             git diff-index HEAD --
             return 1
           fi
-      - name: Make
+
+            - name: Make
         if: ${{ github.repository_owner != 'pret' }}
         run: |
           make -j$(nproc)
