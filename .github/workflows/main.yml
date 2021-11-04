@@ -29,8 +29,19 @@ jobs:
           rm -rf rgbds
 
       - name: Compare
+        if: ${{ github.repository_owner == 'pret' }}
         run: |
           make DEBUG=1 -j$(nproc) compare
+          if ! git diff-index --quiet HEAD --; then
+            echo 'Uncommitted changes detected:'
+            git diff-index HEAD --
+            return 1
+          fi
+
+      - name: Make
+        if: ${{ github.repository_owner != 'pret' }}
+        run: |
+          make -j$(nproc)
           if ! git diff-index --quiet HEAD --; then
             echo 'Uncommitted changes detected:'
             git diff-index HEAD --
