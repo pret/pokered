@@ -2087,7 +2087,7 @@ DisplayBattleMenu::
 	ld [hli], a ; wMaxMenuItem
 	ld [hl], D_RIGHT | A_BUTTON ; wMenuWatchedKeys
 	call HandleMenuInput
-	bit 4, a ; check if right was pressed
+	bit BIT_D_RIGHT, a
 	jr nz, .rightColumn
 	jr .AButtonPressed ; the A button was pressed
 .rightColumn ; put cursor in right column of menu
@@ -2350,7 +2350,7 @@ PartyMenuOrRockOrRun:
 	xor a
 	ld [hl], a ; wLastMenuItem
 	call HandleMenuInput
-	bit 1, a ; was A pressed?
+	bit BIT_B_BUTTON, a
 	jr nz, .partyMonDeselected ; if B was pressed, jump
 ; A was pressed
 	call PlaceUnfilledArrowMenuCursor
@@ -6745,7 +6745,7 @@ DetermineWildOpponent:
 	bit 1, a
 	jr z, .asm_3ef2f
 	ldh a, [hJoyHeld]
-	bit 1, a ; B button pressed?
+	bit BIT_B_BUTTON, a
 	ret nz
 .asm_3ef2f
 	ld a, [wNumberOfNoRandomBattleStepsLeft]

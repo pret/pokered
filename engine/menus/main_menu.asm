@@ -66,7 +66,7 @@ MainMenu:
 	ld a, [wSaveFileStatus]
 	ld [wMaxMenuItem], a
 	call HandleMenuInput
-	bit 1, a ; pressed B?
+	bit BIT_B_BUTTON, a
 	jp nz, DisplayTitleScreen ; if so, go back to the title screen
 	ld c, 20
 	call DelayFrames
@@ -477,11 +477,11 @@ DisplayOptionMenu:
 	ld b, a
 	and A_BUTTON | B_BUTTON | START | D_RIGHT | D_LEFT | D_UP | D_DOWN ; any key besides select pressed?
 	jr z, .getJoypadStateLoop
-	bit 1, b ; B button pressed?
+	bit BIT_B_BUTTON, b
 	jr nz, .exitMenu
-	bit 3, b ; Start button pressed?
+	bit BIT_START, b
 	jr nz, .exitMenu
-	bit 0, b ; A button pressed?
+	bit BIT_A_BUTTON, b
 	jr z, .checkDirectionKeys
 	ld a, [wTopMenuItemY]
 	cp 16 ; is the cursor on Cancel?
@@ -496,9 +496,9 @@ DisplayOptionMenu:
 	jp .loop
 .checkDirectionKeys
 	ld a, [wTopMenuItemY]
-	bit 7, b ; Down pressed?
+	bit BIT_D_DOWN, b
 	jr nz, .downPressed
-	bit 6, b ; Up pressed?
+	bit BIT_D_UP, b
 	jr nz, .upPressed
 	cp 8 ; cursor in Battle Animation section?
 	jr z, .cursorInBattleAnimation
@@ -507,7 +507,7 @@ DisplayOptionMenu:
 	cp 16 ; cursor on Cancel?
 	jr z, .loop
 .cursorInTextSpeed
-	bit 5, b ; Left pressed?
+	bit BIT_D_LEFT, b
 	jp nz, .pressedLeftInTextSpeed
 	jp .pressedRightInTextSpeed
 .downPressed

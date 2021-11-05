@@ -356,7 +356,7 @@ ChangeBox::
 	call HandleMenuInput
 	ld hl, hUILayoutFlags
 	res 1, [hl]
-	bit 1, a ; pressed b
+	bit BIT_B_BUTTON, a
 	ret nz
 	call GetBoxSRAMLocation
 	ld e, l

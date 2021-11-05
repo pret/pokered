@@ -27,7 +27,7 @@ GiveFossilToCinnabarLab::
 	ld hl, wd730
 	res 6, [hl]
 	call HandleMenuInput
-	bit 1, a ; pressed B?
+	bit BIT_B_BUTTON, a
 	jr nz, .cancelledGivingFossil
 	ld hl, wFilteredBagItems
 	ld a, [wCurrentMenuItem]
