@@ -297,7 +297,7 @@ DisplayTwoOptionMenu:
 .noYesMenuInputLoop
 	call HandleMenuInput
 	bit BIT_B_BUTTON, a
-	jr nz, .noYesMenuInputLoop ; try again if A was not pressed
+	jr nz, .noYesMenuInputLoop ; try again if B was not pressed
 	pop af
 	pop hl
 	ld [wFlags_0xcd60], a
