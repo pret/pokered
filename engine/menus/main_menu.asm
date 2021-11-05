@@ -125,9 +125,9 @@ MainMenu:
 	jp SpecialEnterMap
 
 InitOptions:
-	ld a, 1 ; no delay
+	ld a, TEXT_DELAY_FAST
 	ld [wLetterPrintingDelayFlags], a
-	ld a, 3 ; medium speed
+	ld a, TEXT_DELAY_MEDIUM
 	ld [wOptions], a
 	ret
 
@@ -678,11 +678,10 @@ SetCursorPositionsFromOptions:
 ; 00: X coordinate of menu cursor
 ; 01: delay after printing a letter (in frames)
 TextSpeedOptionData:
-	db 14, 5 ; Slow
-	db  7, 3 ; Medium
-	db  1, 1 ; Fast
-	db 7 ; default X coordinate (Medium)
-	db -1 ; end
+	db 14, TEXT_DELAY_SLOW
+	db  7, TEXT_DELAY_MEDIUM
+	db  1, TEXT_DELAY_FAST
+	db  7, -1 ; end (default X coordinate)
 
 CheckForPlayerNameInSRAM:
 ; Check if the player name data in SRAM has a string terminator character
