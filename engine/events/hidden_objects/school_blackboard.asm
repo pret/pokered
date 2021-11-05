@@ -36,7 +36,7 @@ LinkCableHelp::
 	ld hl, LinkCableHelpText2
 	call PrintText
 	call HandleMenuInput
-	bit 1, a ; pressed b
+	bit BIT_B_BUTTON, a
 	jr nz, .exit
 	ld a, [wCurrentMenuItem]
 	cp 3 ; pressed a on "STOP READING"
@@ -122,9 +122,9 @@ ViridianSchoolBlackboard::
 	ld hl, ViridianSchoolBlackboardText2
 	call PrintText
 	call HandleMenuInput ; pressing up and down is handled in here
-	bit 1, a ; pressed b
+	bit BIT_B_BUTTON, a ; pressed b
 	jr nz, .exitBlackboard
-	bit 4, a ; pressed right
+	bit BIT_D_RIGHT, a
 	jr z, .didNotPressRight
 	; move cursor to right column
 	ld a, 2
@@ -137,7 +137,7 @@ ViridianSchoolBlackboard::
 	ld [wMenuItemOffset], a
 	jr .blackboardLoop
 .didNotPressRight
-	bit 5, a ; pressed left
+	bit BIT_D_LEFT, a
 	jr z, .didNotPressLeftOrRight
 	; move cursor to left column
 	ld a, 2

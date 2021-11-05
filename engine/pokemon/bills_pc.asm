@@ -171,8 +171,8 @@ BillsPCMenu:
 	ldh [hAutoBGTransferEnabled], a
 	call Delay3
 	call HandleMenuInput
-	bit 1, a
-	jp nz, ExitBillsPC ; b button
+	bit BIT_B_BUTTON, a
+	jp nz, ExitBillsPC
 	call PlaceUnfilledArrowMenuCursor
 	ld a, [wCurrentMenuItem]
 	ld [wParentMenuItem], a
@@ -416,7 +416,7 @@ DisplayDepositWithdrawMenu:
 	ld [wPartyAndBillsPCSavedMenuItem], a
 .loop
 	call HandleMenuInput
-	bit 1, a ; pressed B?
+	bit BIT_B_BUTTON, a
 	jr nz, .exit
 	ld a, [wCurrentMenuItem]
 	and a

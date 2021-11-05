@@ -98,7 +98,7 @@ AfterDisplayingTextID::
 HoldTextDisplayOpen::
 	call Joypad
 	ldh a, [hJoyHeld]
-	bit 0, a ; is the A button being pressed?
+	bit BIT_A_BUTTON, a
 	jr nz, HoldTextDisplayOpen
 
 CloseTextDisplay::

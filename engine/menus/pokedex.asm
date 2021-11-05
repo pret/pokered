@@ -95,7 +95,7 @@ HandlePokedexSideMenu:
 	ld [wMenuWatchMovingOutOfBounds], a
 .handleMenuInput
 	call HandleMenuInput
-	bit 1, a ; was the B button pressed?
+	bit BIT_B_BUTTON, a
 	ld b, 2
 	jr nz, .buttonBPressed
 	ld a, [wCurrentMenuItem]
@@ -284,10 +284,10 @@ HandlePokedexListMenu:
 	call Delay3
 	call GBPalNormal
 	call HandleMenuInput
-	bit 1, a ; was the B button pressed?
+	bit BIT_B_BUTTON, a
 	jp nz, .buttonBPressed
 .checkIfUpPressed
-	bit 6, a ; was Up pressed?
+	bit BIT_D_UP, a
 	jr z, .checkIfDownPressed
 .upPressed ; scroll up one row
 	ld a, [wListScrollOffset]
@@ -297,7 +297,7 @@ HandlePokedexListMenu:
 	ld [wListScrollOffset], a
 	jp .loop
 .checkIfDownPressed
-	bit 7, a ; was Down pressed?
+	bit BIT_D_DOWN, a
 	jr z, .checkIfRightPressed
 .downPressed ; scroll down one row
 	ld a, [wDexMaxSeenMon]
@@ -312,7 +312,7 @@ HandlePokedexListMenu:
 	ld [wListScrollOffset], a
 	jp .loop
 .checkIfRightPressed
-	bit 4, a ; was Right pressed?
+	bit BIT_D_RIGHT, a
 	jr z, .checkIfLeftPressed
 .rightPressed ; scroll down 7 rows
 	ld a, [wDexMaxSeenMon]
@@ -330,7 +330,7 @@ HandlePokedexListMenu:
 	ld [wListScrollOffset], a
 	jp .loop
 .checkIfLeftPressed ; scroll up 7 rows
-	bit 5, a ; was Left pressed?
+	bit BIT_D_LEFT, a
 	jr z, .buttonAPressed
 .leftPressed
 	ld a, [wListScrollOffset]

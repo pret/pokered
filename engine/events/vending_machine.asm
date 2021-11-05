@@ -31,7 +31,7 @@ VendingMachineMenu::
 	ld hl, wd730
 	res 6, [hl]
 	call HandleMenuInput
-	bit 1, a ; pressed B?
+	bit BIT_B_BUTTON, a
 	jr nz, .notThirsty
 	ld a, [wCurrentMenuItem]
 	cp 3 ; chose Cancel?

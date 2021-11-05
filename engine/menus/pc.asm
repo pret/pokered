@@ -14,7 +14,7 @@ PCMainMenu:
 	ld hl, wFlags_0xcd60
 	set 5, [hl]
 	call HandleMenuInput
-	bit 1, a              ;if player pressed B
+	bit BIT_B_BUTTON, a
 	jp nz, LogOff
 	ld a, [wMaxMenuItem]
 	cp 2

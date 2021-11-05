@@ -5,7 +5,7 @@ CheckForHiddenObjectOrBookshelfOrCardKeyDoor::
 	ldh a, [hLoadedROMBank]
 	push af
 	ldh a, [hJoyHeld]
-	bit 0, a ; A button
+	bit BIT_A_BUTTON, a
 	jr z, .nothingFound
 ; A button is pressed
 	ld a, BANK(CheckForHiddenObject)

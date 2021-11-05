@@ -31,7 +31,7 @@ CeladonPrizeMenu::
 	ld hl, WhichPrizeTextPtr
 	call PrintText
 	call HandleMenuInput ; menu choice handler
-	bit 1, a ; keypress = B (Cancel)
+	bit BIT_B_BUTTON, a
 	jr nz, .noChoice
 	ld a, [wCurrentMenuItem]
 	cp 3 ; "NO,THANKS" choice
