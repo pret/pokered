@@ -26,7 +26,7 @@ IF DEF(_DEBUG)
 	ld de, DebugMenuOptions
 	call PlaceString
 
-	ld a, 3 ; medium speed
+	ld a, TEXT_DELAY_MEDIUM
 	ld [wOptions], a
 
 	ld a, A_BUTTON | B_BUTTON | START

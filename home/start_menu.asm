@@ -33,7 +33,7 @@ RedisplayStartMenu::
 	call EraseMenuCursor
 	jr .loop
 .checkIfDownPressed
-	bit 7, a
+	bit BIT_D_DOWN, a
 	jr z, .buttonPressed
 ; if the player pressed tried to go past the bottom item, wrap around to the top
 	CheckEvent EVENT_GOT_POKEDEX
