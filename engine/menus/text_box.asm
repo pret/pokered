@@ -176,7 +176,7 @@ DoBuySellQuitMenu:
 	call PlaceUnfilledArrowMenuCursor
 	bit BIT_A_BUTTON, a
 	jr nz, .pressedA
-	bit BIT_B_BUTTON, a
+	bit BIT_B_BUTTON, a ; always true since only A/B are watched
 	jr z, .pressedA
 	ld a, CANCELLED_MENU
 	ld [wMenuExitMethod], a
