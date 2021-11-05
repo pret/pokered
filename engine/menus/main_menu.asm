@@ -681,8 +681,7 @@ TextSpeedOptionData:
 	db 14, TEXT_DELAY_SLOW
 	db  7, TEXT_DELAY_MEDIUM
 	db  1, TEXT_DELAY_FAST
-	db 7 ; default X coordinate (Medium)
-	db -1 ; end
+	db  7, -1 ; end (default X coordinate)
 
 CheckForPlayerNameInSRAM:
 ; Check if the player name data in SRAM has a string terminator character
