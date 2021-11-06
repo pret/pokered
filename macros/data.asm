@@ -39,17 +39,9 @@ ENDM
 
 ; Constant data (db, dw, dl) macros
 
-dn: MACRO ; nybbles
-	db (\1 << 4 | \2)
-ENDM
-
 dbw: MACRO
 	db \1
 	dw \2
-ENDM
-
-dba: MACRO
-	dbw BANK(\1), \1
 ENDM
 
 dwb: MACRO
@@ -57,6 +49,23 @@ dwb: MACRO
 	db \2
 ENDM
 
-dab: MACRO
+dn: MACRO ; nybbles
+REPT _NARG / 2
+	db ((\1) << 4) | (\2)
+	SHIFT 2
+ENDR
+ENDM
+
+dba: MACRO ; dbw bank, address
+REPT _NARG
+	dbw BANK(\1), \1
+	SHIFT
+ENDR
+ENDM
+
+dab: MACRO ; dwb address, bank
+REPT _NARG
 	dwb \1, BANK(\1)
+	SHIFT
+ENDR
 ENDM
