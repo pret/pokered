@@ -29,7 +29,7 @@ object_event: MACRO
 	ELSE
 		db \6
 	ENDC
-{_NUM_OBJECT_EVENTS} = {_NUM_OBJECT_EVENTS} + 1
+{_NUM_OBJECT_EVENTS} += 1
 ENDM
 
 def_warp_events: MACRO
@@ -46,7 +46,7 @@ warp_event: MACRO
 	db \2, \1, \4 - 1, \3
 _WARP_{d:{_NUM_WARP_EVENTS}}_X = \1
 _WARP_{d:{_NUM_WARP_EVENTS}}_Y = \2
-{_NUM_WARP_EVENTS} = {_NUM_WARP_EVENTS} + 1
+{_NUM_WARP_EVENTS} += 1
 ENDM
 
 def_bg_events: MACRO
@@ -60,7 +60,7 @@ ENDM
 ;\3 sign id
 bg_event: MACRO
 	db \2, \1, \3
-{_NUM_BG_EVENTS} = {_NUM_BG_EVENTS} + 1
+{_NUM_BG_EVENTS} += 1
 ENDM
 
 ;\1 source map
@@ -101,7 +101,7 @@ _cur_bit = CURRENT_TRAINER_BIT % 8
 	db \2 << 4
 	dw wEventFlags + (\1 - CURRENT_TRAINER_BIT) / 8
 	dw \3, \5, \4, \4
-CURRENT_TRAINER_BIT = CURRENT_TRAINER_BIT + 1
+CURRENT_TRAINER_BIT += 1
 ENDM
 
 ;\1 x position

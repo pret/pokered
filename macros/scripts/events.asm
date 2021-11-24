@@ -261,8 +261,8 @@ event_fill_start = event_start_byte + 1
 event_fill_count = event_end_byte - event_start_byte - 1
 
 		IF ((\1) % 8) == 0
-event_fill_start = event_fill_start - 1
-event_fill_count = event_fill_count + 1
+event_fill_start -= 1
+event_fill_count += 1
 		ELSE
 			ld a, [wEventFlags + event_start_byte]
 			or $ff - ((1 << ((\1) % 8)) - 1)
@@ -270,7 +270,7 @@ event_fill_count = event_fill_count + 1
 		ENDC
 
 		IF ((\2) % 8) == 7
-event_fill_count = event_fill_count + 1
+event_fill_count += 1
 		ENDC
 
 		IF event_fill_count == 1
@@ -323,8 +323,8 @@ event_fill_start = event_start_byte + 1
 event_fill_count = event_end_byte - event_start_byte - 1
 
 		IF ((\1) % 8) == 0
-event_fill_start = event_fill_start - 1
-event_fill_count = event_fill_count + 1
+event_fill_start -= 1
+event_fill_count += 1
 		ELSE
 			ld a, [wEventFlags + event_start_byte]
 			and ~($ff - ((1 << ((\1) % 8)) - 1)) & $ff
@@ -332,7 +332,7 @@ event_fill_count = event_fill_count + 1
 		ENDC
 
 		IF ((\2) % 8) == 7
-event_fill_count = event_fill_count + 1
+event_fill_count += 1
 		ENDC
 
 		IF event_fill_count == 1

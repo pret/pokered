@@ -15,19 +15,19 @@ ENDM
 
 const: MACRO
 \1 EQU const_value
-const_value = const_value + const_inc
+const_value += const_inc
 ENDM
 
 shift_const: MACRO
-\1 EQU (1 << const_value)
-const_value = const_value + const_inc
+\1 EQU 1 << const_value
+const_value += const_inc
 ENDM
 
 const_skip: MACRO
 if _NARG >= 1
-const_value = const_value + const_inc * (\1)
+const_value += const_inc * (\1)
 else
-const_value = const_value + const_inc
+const_value += const_inc
 endc
 ENDM
 

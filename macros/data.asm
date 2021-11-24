@@ -24,7 +24,7 @@ REPT _NARG
 	IF DEF(\1_TMNUM)
 n = (\1_TMNUM - 1) / 8
 i = (\1_TMNUM - 1) % 8
-_tm{d:n} = _tm{d:n} | (1 << i)
+_tm{d:n} |= 1 << i
 	ELSE
 		FAIL "\1 is not a TM or HM move"
 	ENDC

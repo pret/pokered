@@ -27,7 +27,7 @@ sMainDataCheckSum:: db
 box_n = 0
 boxes: MACRO
 REPT \1
-box_n = box_n + 1
+box_n += 1
 sBox{d:box_n}:: ds wBoxDataEnd - wBoxDataStart
 ENDR
 ENDM

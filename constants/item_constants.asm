@@ -122,7 +122,7 @@ __tmhm_value__ = NUM_TMS + 1
 
 add_tmnum: MACRO
 \1_TMNUM EQU __tmhm_value__
-__tmhm_value__ = __tmhm_value__ + 1
+__tmhm_value__ += 1
 ENDM
 
 add_hm: MACRO
