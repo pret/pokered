@@ -4,7 +4,7 @@
 
 	charmap "<NULL>",    $00
 	charmap "<PAGE>",    $49
-	charmap "<PKMN>",    $4a ; "<PK><MN>"
+	charmap "<ANIM>",    $4a ; "<AN><IM>"
 	charmap "<_CONT>",   $4b ; implements "<CONT>"
 	charmap "<SCROLL>",  $4c
 	charmap "<NEXT>",    $4e
@@ -13,7 +13,7 @@
 	charmap "<PARA>",    $51
 	charmap "<PLAYER>",  $52 ; wPlayerName
 	charmap "<RIVAL>",   $53 ; wRivalName
-	charmap "#",         $54 ; "POKé"
+	charmap "$",         $54 ; "Animal"
 	charmap "<CONT>",    $55
 	charmap "<……>",      $56 ; "……"
 	charmap "<DONE>",    $57
@@ -23,7 +23,7 @@
 	charmap "<PC>",      $5b ; "PC"
 	charmap "<TM>",      $5c ; "TM"
 	charmap "<TRAINER>", $5d ; "TRAINER"
-	charmap "<ROCKET>",  $5e ; "ROCKET"
+	charmap "<ASTROS>",  $5e ; "ASTRO"
 	charmap "<DEXEND>",  $5f
 
 ; Actual characters (from gfx/font/font_extra.png)
@@ -158,8 +158,8 @@
 	charmap "'v",        $bf
 
 	charmap "'",         $e0
-	charmap "<PK>",      $e1
-	charmap "<MN>",      $e2
+	charmap "<AN>",      $e1
+	charmap "<IM>",      $e2
 	charmap "-",         $e3
 
 	charmap "'r",        $e4
@@ -169,15 +169,11 @@
 	charmap "!",         $e7
 	charmap ".",         $e8
 
-	charmap "ァ",         $e9 ; katakana small a, unused
-	charmap "ゥ",         $ea ; katakana small u, unused
-	charmap "ェ",         $eb ; katakana small e, unused
-
 	charmap "▷",         $ec
 	charmap "▶",         $ed
 	charmap "▼",         $ee
 	charmap "♂",         $ef
-	charmap "¥",         $f0
+	charmap "৳",         $f0
 	charmap "×",         $f1
 	charmap "<DOT>",     $f2 ; decimal point; same as "." in English
 	charmap "/",         $f3
