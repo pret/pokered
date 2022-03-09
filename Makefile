@@ -48,7 +48,7 @@ clean: tidy
 	find gfx \( -iname '*.1bpp' -o -iname '*.2bpp' -o -iname '*.pic' \) -delete
 
 tidy:
-	rm -f $(roms) $(pokered_obj) $(pokeblue_obj) $(pokeblue_debug_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym) rgbdscheck.o
+	$(RM) $(roms) $(pokered_obj) $(pokeblue_obj) $(pokeblue_debug_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym) rgbdscheck.o
 	$(MAKE) clean -C tools/
 
 compare: $(roms)
