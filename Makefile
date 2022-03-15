@@ -75,7 +75,6 @@ tidy:
 	      $(pokered_vc_obj) \
 	      $(pokeblue_vc_obj) \
 	      $(pokeblue_debug_obj) \
-	      $(roms:.gbc=.map) \
 	      rgbdscheck.o
 	$(MAKE) clean -C tools/
 
