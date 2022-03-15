@@ -38,72 +38,72 @@ Address = {hex @}
 
 [send_send_buf2]
 Mode = 2
-Address = 0x227F
+Address = {HEX @}
 Type = 29
 
 [send_send_buf2_ret]
 Mode = 2
-Address = 0x22C2
+Address = {HEX @}
 Type = 30
 
 [send_byt2]
 Mode = 2
-Address = 0x3D638
+Address = {HEX @+5}
 Type = 31
 
 [send_byt2_ret]
 Mode = 2
-Address = 0x3D647
+Address = {HEX @}
 Type = 32
 
 [send_dummy]
 Mode = 2
-Address = 0x3D652
+Address = {HEX @}
 Type = 33
 
 [send_dummy_end]
 Mode = 2
-Address = 0x3D65D
+Address = {HEX @}
 Type = 34
 
 [FIGHT]
 Mode = 1
-Address = 0x3D648
-Fixcode = 0x1A
+Address = {HEX @+1}
+Fixcode = {PATCH +1}
 
 [FIGHT2]
 Mode = 1
-Address = 0x3D653
-Fixcode = 0x1A
+Address = {HEX @+1}
+Fixcode = {PATCH +1}
 
 [Network10]
 Mode = 1
-Address = 0x22A7
-Fixcode = 0x1A
+Address = {HEX @+1}
+Fixcode = {PATCH +1}
 
 [Network11]
 Mode = 1
-Address = 0x22B2
-Fixcode = 0x1A
+Address = {HEX @+1}
+Fixcode = {PATCH +1}
 
 [Network17]
 Mode = 2
-Address = 0x53E2
+Address = {HEX @}
 Type = 5
 
 [Network424]
 Mode = 2
-Address = 0x53F1
+Address = {HEX @}
 Type = 4
 
 [Network200]
 Mode = 2
-Address = 0x5400
+Address = {HEX @}
 Type = 4
 
 [Network_RECHECK]
 Mode = 2
-Address = 0x7266
+Address = {HEX @}
 Type = 7
 
 [Network_STOP]

@@ -136,6 +136,8 @@ endif
 
 pokered_pad        = 0x00
 pokeblue_pad       = 0x00
+pokered_vc_pad     = 0x00
+pokeblue_vc_pad    = 0x00
 pokeblue_debug_pad = 0xff
 
 pokered_opt        = -jsv -n 0 -k 01 -l 0x33 -m 0x13 -r 03 -t "POKEMON RED"

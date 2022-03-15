@@ -3023,6 +3023,7 @@ LinkBattleExchangeData:
 	ld a, b
 .doExchange
 	ld [wSerialExchangeNybbleSendData], a
+	vc_hook send_byt2
 	callfar PrintWaitingText
 .syncLoop1
 	call Serial_ExchangeNybble
@@ -3030,18 +3031,33 @@ LinkBattleExchangeData:
 	ld a, [wSerialExchangeNybbleReceiveData]
 	inc a
 	jr z, .syncLoop1
+	vc_hook send_byt2_ret
+	vc_patch FIGHT
+if DEF(_RED_VC) || DEF(_BLUE_VC)
+	ld b, 26
+else
 	ld b, 10
+endc
+	vc_patch_end
 .syncLoop2
 	call DelayFrame
 	call Serial_ExchangeNybble
 	dec b
 	jr nz, .syncLoop2
+	vc_hook send_dummy
+	vc_patch FIGHT2
+if DEF(_RED_VC) || DEF(_BLUE_VC)
+	ld b, 26
+else
 	ld b, 10
+endc
+	vc_patch_end
 .syncLoop3
 	call DelayFrame
 	call Serial_SendZeroByte
 	dec b
 	jr nz, .syncLoop3
+	vc_hook send_dummy_end
 	ret
 
 ExecutePlayerMove:

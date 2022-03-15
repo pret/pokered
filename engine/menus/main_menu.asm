@@ -284,6 +284,7 @@ LinkMenu:
 .choseCancel
 	xor a
 	ld [wMenuJoypadPollCount], a
+	vc_hook Network_STOP
 	call Delay3
 	call CloseLinkConnection
 	ld hl, LinkCanceledText

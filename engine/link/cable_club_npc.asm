@@ -68,6 +68,7 @@ CableClubNPC::
 	ldh [hSerialReceivedNewData], a
 	ld [wSerialExchangeNybbleSendData], a
 	call Serial_SyncAndExchangeNybble
+	vc_hook Network_RECHECK
 	ld hl, wUnknownSerialCounter
 	ld a, [hli]
 	inc a
