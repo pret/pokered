@@ -193,6 +193,7 @@ DecodeRLEList::
 	ld a, [wRLEByteCount]
 	add c
 	ld [wRLEByteCount], a     ; update total number of written bytes
+	vc_hook SaveLimit
 	ldh a, [hRLEByteValue]
 	call FillMemory              ; write a c-times to output
 	inc de

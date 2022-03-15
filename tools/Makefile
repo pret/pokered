@@ -5,6 +5,7 @@ CFLAGS := -O3 -std=c11 -Wall -Wextra -pedantic -Wno-missing-field-initializers
 
 tools := \
 	gfx \
+	make_patch \
 	pkmncompress \
 	scan_includes
 
