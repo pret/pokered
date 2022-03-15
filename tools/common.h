@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <stddef.h>
+#include <stdnoreturn.h>
 #include <inttypes.h>
 #include <string.h>
 #include <errno.h>
