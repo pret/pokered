@@ -176,8 +176,13 @@ PlayAnimation:
 	ld h, [hl]
 	ld l, a
 .animationLoop
+	vc_hook FPA_006_End
+	vc_blue_hook FPA_007_End
 	ld a, [hli]
+	vc_red_hook FPA_007_End
+	vc_blue_hook FPA_009_End
 	cp -1
+	vc_blue_hook FPA_008_End
 	jr z, .AnimationOver
 	cp FIRST_SE_ID ; is this subanimation or a special effect?
 	jr c, .playSubanimation
@@ -246,37 +251,59 @@ PlayAnimation:
 	ld a, [wAnimPalette]
 	ldh [rOBP0], a
 	call LoadAnimationTileset
+	vc_hook FPA_001_Begin
 	call LoadSubanimation
 	call PlaySubanimation
+	vc_hook FPA_001_End
 	pop af
+	vc_red_hook FPA_008_End
 	ldh [rOBP0], a
 .nextAnimationCommand
+	vc_hook FPA_005_End
 	pop hl
+	vc_hook FPA_002_End
 	jr .animationLoop
 .AnimationOver
 	ret
 
 LoadSubanimation:
+	vc_hook FPA_002_Begin
 	ld a, [wSubAnimAddrPtr + 1]
+	vc_hook FPA_003_Begin
 	ld h, a
+	vc_hook FPA_131_Begin
 	ld a, [wSubAnimAddrPtr]
+	vc_hook FPA_56_Begin
 	ld l, a
 	ld a, [hli]
 	ld e, a
+	vc_hook FPA_76_Begin
 	ld a, [hl]
+	vc_red_hook FPA_006_Begin
+	vc_blue_hook FPA_007_Begin
 	ld d, a ; de = address of subanimation
 	ld a, [de]
+	vc_blue_hook FPA_012_Begin
 	ld b, a
+	vc_red_hook FPA_009_Begin
+	vc_blue_hook FPA_011_Begin
 	and %00011111
+	vc_red_hook FPA_004_Begin
+	vc_blue_hook FPA_005_Begin
 	ld [wSubAnimCounter], a ; number of frame blocks
+	vc_red_hook FPA_010_Begin
+	vc_blue_hook FPA_009_Begin
 	ld a, b
 	and %11100000
 	cp SUBANIMTYPE_ENEMY << 5
+	vc_blue_hook FPA_004_Begin
 	jr nz, .isNotType5
 .isType5
 	call GetSubanimationTransform2
 	jr .saveTransformation
 .isNotType5
+	vc_red_hook FPA_005_Begin
+	vc_blue_hook FPA_006_Begin
 	call GetSubanimationTransform1
 .saveTransformation
 ; place the upper 3 bits of a into bits 0-2 of a before storing
@@ -307,6 +334,8 @@ LoadSubanimation:
 ; sets the transform to SUBANIMTYPE_NORMAL if it's the player's turn
 ; sets the transform to the subanimation type if it's the enemy's turn
 GetSubanimationTransform1:
+	vc_red_hook FPA_007_Begin
+	vc_blue_hook FPA_008_Begin
 	ld b, a
 	ldh a, [hWhoseTurn]
 	and a
@@ -399,11 +428,15 @@ MoveAnimation:
 	jr nz, .animationsDisabled
 	call ShareMoveAnimations
 	call PlayAnimation
+	vc_hook FPA_004_End
+	vc_blue_hook FPA_011_End
 	jr .next4
 .animationsDisabled
 	ld c, 30
 	call DelayFrames
 .next4
+	vc_hook FPA_010_End
+	vc_blue_hook FPA_012_End
 	call PlayApplyingAttackAnimation ; shake the screen or flash the pic in and out (to show damage)
 .animationFinished
 	call WaitForSoundToFinish
@@ -541,6 +574,8 @@ SetAnimationPalette:
 .notSGB
 	ld a, $e4
 	ld [wAnimPalette], a
+	vc_red_hook FPA_008_Begin
+	vc_blue_hook FPA_010_Begin
 	ldh [rOBP0], a
 	ld a, $6c
 	ldh [rOBP1], a
@@ -956,6 +991,7 @@ AnimationFlashScreenLong:
 	ld [wFlashScreenLongCounter], a
 	pop hl
 	jr nz, .loop
+	vc_hook FPA_phy_End
 	ret
 
 ; BG palettes

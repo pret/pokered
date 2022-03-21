@@ -288,6 +288,7 @@ LinkMenu:
 	call Delay3
 	call CloseLinkConnection
 	ld hl, LinkCanceledText
+	vc_hook Network_END
 	call PrintText
 	ld hl, wd72e
 	res 6, [hl]

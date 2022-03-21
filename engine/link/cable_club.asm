@@ -862,6 +862,7 @@ TradeCenter_Trade:
 	ld de, TradeCompleted
 	call PlaceString
 	predef SaveSAVtoSRAM2
+	vc_hook save_game_end
 	ld c, 50
 	call DelayFrames
 	xor a

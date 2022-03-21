@@ -50,7 +50,9 @@ void symbol_append(struct Symbol **symbols, const char *name, int bank, int addr
 	size_t name_len = strlen(name) + 1;
 	struct Symbol *symbol = xmalloc(sizeof(*symbol) + name_len);
 	symbol->address = address;
-	symbol->offset = bank > 0 && address < 0x8000 ? address + (bank - 1) * 0x4000 : address;
+	symbol->offset = address < 0x8000
+	    ? (bank > 0 ? address + (bank - 1) * 0x4000 : address) // ROM addresses are relative to their bank
+	    : address - 0x8000; // RAM addresses are relative to the start of all RAM
 	memcpy(symbol->name, name, name_len);
 	symbol->next = *symbols;
 	*symbols = symbol;
@@ -213,7 +215,7 @@ void interpret_command(char *command, const struct Symbol *current_hook, const s
 	}
 
 	// Use the arguments
-	if (!strcmp(command, "patch") || !strcmp(command, "PATCH") || !strcmp(command, "patch_") || !strcmp(command, "PATCH_")) {
+	if (!strcmp(command, "patch") || !strcmp(command, "PATCH") || !strcmp(command, "patch_") || !strcmp(command, "PATCH_") || !strcmp(command, "patch/") || !strcmp(command, "PATCH/")) {
 		if (argc > 2) {
 			error_exit("Error: Invalid arguments for command: \"%s\"\n", command);
 		}
@@ -241,7 +243,7 @@ void interpret_command(char *command, const struct Symbol *current_hook, const s
 			modified = c != getc(orig_rom);
 			fprintf(output, isupper((unsigned)command[0]) ? "0x%02X" : "0x%02x", c);
 		} else {
-			fprintf(output, command[strlen(command) - 1] == '_' ? "a%d: " : "a%d:", length);
+			if (command[strlen(command) - 1] != '/') {fprintf(output, command[strlen(command) - 1] == '_' ? "a%d: " : "a%d:", length);}
 			for (int i = 0; i < length; i++) {
 				if (i) {
 					putc(' ', output);
@@ -255,11 +257,11 @@ void interpret_command(char *command, const struct Symbol *current_hook, const s
 			fprintf(stderr, PROGRAM_NAME ": Warning: \"vc_patch %s\" doesn't alter the ROM\n", current_hook->name);
 		}
 
-	} else if (!strcmp(command, "dws") || !strcmp(command, "DWS") || !strcmp(command, "dws_") || !strcmp(command, "DWS_")) {
+	} else if (!strcmp(command, "dws") || !strcmp(command, "DWS") || !strcmp(command, "dws_") || !strcmp(command, "DWS_") || !strcmp(command, "dws/") || !strcmp(command, "DWS/")) {
 		if (argc < 1) {
 			error_exit("Error: Invalid arguments for command: \"%s\"\n", command);
 		}
-		fprintf(output, command[strlen(command) - 1] == '_' ? "a%d: " : "a%d:", argc * 2);
+		if (command[strlen(command) - 1] != '/') {fprintf(output, command[strlen(command) - 1] == '_' ? "a%d: " : "a%d:", argc * 2);}
 		for (int i = 0; i < argc; i++) {
 			int value = parse_arg_value(argv[i], false, symbols, current_hook->name);
 			if (value > 0xffff) {
@@ -271,7 +273,7 @@ void interpret_command(char *command, const struct Symbol *current_hook, const s
 			fprintf(output, isupper((unsigned)command[0]) ? "%02X %02X": "%02x %02x", value & 0xff, value >> 8);
 		}
 
-	} else if (!strcmp(command, "db") || !strcmp(command, "DB") || !strcmp(command, "db_") || !strcmp(command, "DB_")) {
+	} else if (!strcmp(command, "db") || !strcmp(command, "DB") || !strcmp(command, "db_") || !strcmp(command, "DB_") || !strcmp(command, "db/") || !strcmp(command, "DB/")) {
 		if (argc != 1) {
 			error_exit("Error: Invalid arguments for command: \"%s\"\n", command);
 		}
@@ -279,7 +281,7 @@ void interpret_command(char *command, const struct Symbol *current_hook, const s
 		if (value > 0xff) {
 			error_exit("Error: Invalid value for \"%s\" argument: 0x%x\n", command, value);
 		}
-		fputs(command[strlen(command) - 1] == '_' ? "a1: " : "a1:", output);
+		if (command[strlen(command) - 1] != '/') {fputs(command[strlen(command) - 1] == '_' ? "a1: " : "a1:", output);}
 		fprintf(output, isupper((unsigned)command[0]) ? "%02X" : "%02x", value);
 
 	} else if (!strcmp(command, "hex") || !strcmp(command, "HEX") || !strcmp(command, "HEx") || !strcmp(command, "Hex") || !strcmp(command, "heX") || !strcmp(command, "hEX")) {
