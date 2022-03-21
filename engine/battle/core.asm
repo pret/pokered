@@ -6677,7 +6677,6 @@ BattleRandom:
 	ld a, [hl]
 	pop bc
 	pop hl
-	
 	vc_hook fight_ret_c
 	vc_patch fight_ret
 if DEF(_RED_VC) || DEF(_BLUE_VC)
