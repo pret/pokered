@@ -215,22 +215,17 @@ _CableClubNPCLinkClosedBecauseOfInactivityText::
 if DEF(_RED_VC) || DEF(_BLUE_VC)
 	text "Please come again!"
 	done
-	nop
+	text_start
 	text "sed because of"
 	cont "inactivity."
-
-	para "Please contact"
-	line "your friend and"
-	cont "come again!"
-	done
 else
 	text "The link has been"
 	line "closed because of"
 	cont "inactivity."
+endc
+	vc_patch_end
 
 	para "Please contact"
 	line "your friend and"
 	cont "come again!"
 	done
-endc
-	vc_patch_end
