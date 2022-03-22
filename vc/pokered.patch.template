@@ -192,9 +192,9 @@ MotionBlur0 = 21
 MotionBEnable1 = 3 
 MotionBlur1 = 21                
 ConditionType = 11             
-ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wStringBuffer+5 wAnimationID 0x00 wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wStringBuffer+4 wAnimationID 0x00 wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID}  
-ConditionValueB = {dws_ ==            ==              ==              ==              ==              ==           ||   ==            ==              ==              ==              ==              ==           ||   ==            ==              ==              ==              ==          }  
-ConditionValueC = {dws_ "M"           "E"             "G"             "A"             "P"             MEGA_PUNCH   0x00 "S"           "E"             "L"             "F"             "D"             MEGA_PUNCH   0x00 "E"           "X"             "P"             "L"             MEGA_PUNCH  }  
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wStringBuffer+5 wAnimationID  00  wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wStringBuffer+4 wAnimationID  00  wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID}  
+ConditionValueB = {dws_ ==            ==              ==              ==              ==              ==            ||  ==            ==              ==              ==              ==              ==            ||  ==            ==              ==              ==              ==          }  
+ConditionValueC = {dws_ "M"           "E"             "G"             "A"             "P"             MEGA_PUNCH    00  "S"           "E"             "L"             "F"             "D"             MEGA_PUNCH    00  "E"           "X"             "P"             "L"             MEGA_PUNCH  }  
 
 
 [FPA 001 End]                                               
@@ -266,9 +266,9 @@ Mode = 3
 Type = 1                              
 Address = {hex @}                     
 ConditionType = 11                     
-ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID 0x00 wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wStringBuffer+5 wAnimationID}  
-ConditionValueB = {dws_ ==            ==              ==              ==              ==           ||   ==            ==              ==              ==              ==              ==          } 
-ConditionValueC = {dws_ "B"           "U"             "B"             "B"             BUBBLEBEAM   0x00 "M"           "E"             "G"             "A"             "K"             MEGA_KICK   } 
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID  00  wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wStringBuffer+5 wAnimationID}  
+ConditionValueB = {dws_ ==            ==              ==              ==              ==            ||  ==            ==              ==              ==              ==              ==          } 
+ConditionValueC = {dws_ "B"           "U"             "B"             "B"             BUBBLEBEAM    00  "M"           "E"             "G"             "A"             "K"             MEGA_KICK   } 
  
 
 ;rsm103658 
@@ -401,9 +401,9 @@ Mode = 3
 Type = 1                              
 Address = {HEX @}                    
 ConditionType = 11                     
-ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID 0x00 wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID 0x00 wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID 0x00 wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wStringBuffer+4 wAnimationID 0x00 wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wStringBuffer+4 wAnimationID 0x00 wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wStringBuffer+5 wAnimationID 0x00 wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID 0x00 wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID}  
-ConditionValueB = {dws_ ==            ==              ==              ==              ==           ||   ==            ==              ==              ==              ==           ||   ==            ==              ==              ==              ==           ||   ==            ==              ==              ==              ==              ==           ||   ==            ==              ==              ==              ==              ==           ||   ==            ==              ==              ==              ==              ==           ||   ==            ==              ==              ==              ==           ||   ==            ==              ==              ==              ==          }
-ConditionValueC = {dws_ "D"           "R"             "E"             "A"             DREAM_EATER  0x00 "R"           "O"             "C"             "K"             ROCK_SLIDE   0x00 "S"           "P"             "O"             "R"             SPORE        0x00 "S"           "E"             "L"             "F"             "D"             MEGA_PUNCH   0x00 "S"           "E"             "L"             "F"             "D"             SELFDESTRUCT 0x00 "C"           "O"             "N"             "F"             "S"             CONFUSION    0x00 "E"           "X"             "P"             "L"             EXPLOSION    0x00 "E"           "X"             "P"             "L"             MEGA_PUNCH  }
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID  00  wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID  00  wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID  00  wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wStringBuffer+4 wAnimationID  00  wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wStringBuffer+4 wAnimationID  00  wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wStringBuffer+5 wAnimationID  00  wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID  00  wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID}  
+ConditionValueB = {dws_ ==            ==              ==              ==              ==            ||  ==            ==              ==              ==              ==            ||  ==            ==              ==              ==              ==            ||  ==            ==              ==              ==              ==              ==            ||  ==            ==              ==              ==              ==              ==            ||  ==            ==              ==              ==              ==              ==            ||  ==            ==              ==              ==              ==            ||  ==            ==              ==              ==              ==          }
+ConditionValueC = {dws_ "D"           "R"             "E"             "A"             DREAM_EATER   00  "R"           "O"             "C"             "K"             ROCK_SLIDE    00  "S"           "P"             "O"             "R"             SPORE         00  "S"           "E"             "L"             "F"             "D"             MEGA_PUNCH    00  "S"           "E"             "L"             "F"             "D"             SELFDESTRUCT  00  "C"           "O"             "N"             "F"             "S"             CONFUSION     00  "E"           "X"             "P"             "L"             EXPLOSION     00  "E"           "X"             "P"             "L"             MEGA_PUNCH  }
 
 
 ;explosion  
