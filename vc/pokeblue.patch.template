@@ -28,8 +28,8 @@
 [SaveLimit]
 Mode = 12
 Type = 1
-Index = {hex sPlayerName}
-Address = {hex sMainDataCheckSum}
+Index = {hex sGameData}
+Address = {hex sGameDataEnd}
 
 [send_send_buf2]
 Mode = 2
