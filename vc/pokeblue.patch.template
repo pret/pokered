@@ -167,7 +167,7 @@ MotionBlur0 = 27
 ConditionType = 11             
 ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wStringBuffer+5 wAnimationID 0x00 wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID 0x00 wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID}     
 ConditionValueB = {dws_ ==            ==              ==              ==              ==              ==           ||   ==            ==              ==              ==              ==           ||   ==            ==              ==              ==              ==          }     
-ConditionValueC = {dws_ "M"           "E"             "G"             "A"             "P"             MEGA_PUNCH   0x00 "S"           "E"             "L"             "F"             SUBANIM_05   0x00 "E"           "X"             "P"             "L"             SUBANIM_05  }     
+ConditionValueC = {dws_ "M"           "E"             "G"             "A"             "P"             MEGA_PUNCH   0x00 "S"           "E"             "L"             "F"             MEGA_PUNCH   0x00 "E"           "X"             "P"             "L"             MEGA_PUNCH  }     
 
 [FPA 001 End]               
 Mode = 3                    
@@ -176,7 +176,7 @@ Address = {HEX @}
 ConditionType = 11           
 ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wStringBuffer+5 wAnimationID 0x00 wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID 0x00 wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID}              
 ConditionValueB = {dws_ ==            ==              ==              ==              ==              ==           ||   ==            ==              ==              ==              ==           ||   ==            ==              ==              ==              ==          }              
-ConditionValueC = {dws_ "M"           "E"             "G"             "A"             "P"             MEGA_PUNCH   0x00 "E"           "X"             "P"             "L"             EXPLOSION    0x00 "E"           "X"             "P"             "L"             SUBANIM_05  }              
+ConditionValueC = {dws_ "M"           "E"             "G"             "A"             "P"             MEGA_PUNCH   0x00 "E"           "X"             "P"             "L"             EXPLOSION    0x00 "E"           "X"             "P"             "L"             MEGA_PUNCH  }              
 
                                     
                                     
@@ -346,7 +346,7 @@ Address = {HEX @}
 ConditionType = 11               
 ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID 0x00 wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID}     
 ConditionValueB = {dws_ ==            ==              ==              ==              ==           ||   ==            ==              ==              ==              ==          }     
-ConditionValueC = {dws_ "S"           "E"             "L"             "F"             SUBANIM_05   0x00 "S"           "E"             "L"             "F"             SELFDESTRUCT}  
+ConditionValueC = {dws_ "S"           "E"             "L"             "F"             MEGA_PUNCH   0x00 "S"           "E"             "L"             "F"             SELFDESTRUCT}  
 
 ;rsm150211 
 ;No156                              
