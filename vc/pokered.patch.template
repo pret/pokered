@@ -250,7 +250,7 @@ ConditionValueC = {dws_ "M"           "E"             "G"             "A"       
 
 ;rsm001929 
 ;no123 bubble beam
-[FPA 004 Begin]                           
+[FPA 004 Begin@FPA_Bubblebeam_Begin]                           
 Mode = 3                                   
 Type = 0                                   
 Address = {hex @}                         
@@ -273,7 +273,7 @@ ConditionValueC = {dws_ "B"           "U"             "B"             "B"       
 
 ;rsm103658 
 ;no116 hyper beam
-[FPA 005 Begin]                                                 
+[FPA 005 Begin@FPA_Hyper_Beam_Begin]                                                 
 Mode = 3               
 Type = 0               
 Address = {HEX @}         
@@ -298,7 +298,7 @@ ConditionValueC = {dws_ "H"           "Y"             "P"             "E"       
 
 ;rsm133358
 ;no57 thunderbolt
-[FPA 006 Begin]                                                 
+[FPA 006 Begin@FPA_Thunderbolt_Begin]                                                 
 Mode = 3               
 Type = 0               
 Address = {HEX @}       
@@ -310,7 +310,7 @@ ConditionValueB = {dws_ ==            ==              ==              ==        
 ConditionValueC = {dws_ "T"           "H"             "U"             "N"             THUNDERBOLT }  
    
                          
-[FPA 006 End]       
+[FPA 006 End@FPA_Thunderbolt_End]       
 Mode = 3                 
 Type = 1                 
 Address = {HEX @}
@@ -321,7 +321,7 @@ ConditionValueC = {dws_ "T"           "H"             "U"             "N"       
 
 ;rsm152340  
 ;no159 reflect                                  
-[FPA 007 Begin]                                                   
+[FPA 007 Begin@FPA_Reflect_Begin]                                                   
 Mode = 3                 
 Type = 0                 
 Address = {hex @}        
@@ -345,7 +345,7 @@ ConditionValueC = {dws_ "R"           "E"             "F"             "L"       
 
 ;rsm171812  
 ;no156 dream eater                               
-[FPA 008 Begin]                                                   
+[FPA 008 Begin@FPA_Dream_Eater_Begin]                                                   
 Mode = 3                 
 Type = 0                 
 Address = {hex @} 
@@ -369,7 +369,7 @@ ConditionValueC = {dws_ "B"           "L"             "I"             "Z"       
 
 ;rsm174650   
 ;no36 spore                       
-[FPA 009 Begin]                       
+[FPA 009 Begin@FPA_Spore_Begin]                       
 Mode = 3                              
 Type = 0                              
 Address = {HEX @}                     

@@ -6749,9 +6749,9 @@ HandleExplodingAnimation:
 
 PlayMoveAnimation:
 	ld [wAnimationID], a
-	vc_hook FPA_conf_Begin
+	vc_red_hook FPA_conf_Begin
 	call Delay3
-	vc_hook FPA_phy_Begin
+	vc_red_hook FPA_phy_Begin
 	predef_jump MoveAnimation
 
 InitBattle::

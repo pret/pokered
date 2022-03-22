@@ -176,8 +176,7 @@ PlayAnimation:
 	ld h, [hl]
 	ld l, a
 .animationLoop
-	vc_hook FPA_006_End
-	vc_blue_hook FPA_007_End
+	vc_hook FPA_Thunderbolt_End
 	ld a, [hli]
 	vc_red_hook FPA_007_End
 	vc_blue_hook FPA_009_End
@@ -271,25 +270,22 @@ LoadSubanimation:
 	ld a, [wSubAnimAddrPtr + 1]
 	vc_hook FPA_003_Begin
 	ld h, a
-	vc_hook FPA_131_Begin
+	vc_red_hook FPA_131_Begin
 	ld a, [wSubAnimAddrPtr]
-	vc_hook FPA_56_Begin
+	vc_red_hook FPA_56_Begin
 	ld l, a
 	ld a, [hli]
 	ld e, a
 	vc_hook FPA_76_Begin
 	ld a, [hl]
-	vc_red_hook FPA_006_Begin
-	vc_blue_hook FPA_007_Begin
+	vc_hook FPA_Thunderbolt_Begin
 	ld d, a ; de = address of subanimation
 	ld a, [de]
 	vc_blue_hook FPA_012_Begin
 	ld b, a
-	vc_red_hook FPA_009_Begin
-	vc_blue_hook FPA_011_Begin
+	vc_hook FPA_Spore_Begin
 	and %00011111
-	vc_red_hook FPA_004_Begin
-	vc_blue_hook FPA_005_Begin
+	vc_hook FPA_Bubblebeam_Begin
 	ld [wSubAnimCounter], a ; number of frame blocks
 	vc_red_hook FPA_010_Begin
 	vc_blue_hook FPA_009_Begin
@@ -302,8 +298,7 @@ LoadSubanimation:
 	call GetSubanimationTransform2
 	jr .saveTransformation
 .isNotType5
-	vc_red_hook FPA_005_Begin
-	vc_blue_hook FPA_006_Begin
+	vc_hook FPA_Hyper_Beam_Begin
 	call GetSubanimationTransform1
 .saveTransformation
 ; place the upper 3 bits of a into bits 0-2 of a before storing
@@ -334,8 +329,7 @@ LoadSubanimation:
 ; sets the transform to SUBANIMTYPE_NORMAL if it's the player's turn
 ; sets the transform to the subanimation type if it's the enemy's turn
 GetSubanimationTransform1:
-	vc_red_hook FPA_007_Begin
-	vc_blue_hook FPA_008_Begin
+	vc_hook FPA_Reflect_Begin
 	ld b, a
 	ldh a, [hWhoseTurn]
 	and a
@@ -428,14 +422,14 @@ MoveAnimation:
 	jr nz, .animationsDisabled
 	call ShareMoveAnimations
 	call PlayAnimation
-	vc_hook FPA_004_End
+	vc_red_hook FPA_004_End
 	vc_blue_hook FPA_011_End
 	jr .next4
 .animationsDisabled
 	ld c, 30
 	call DelayFrames
 .next4
-	vc_hook FPA_010_End
+	vc_red_hook FPA_010_End
 	vc_blue_hook FPA_012_End
 	call PlayApplyingAttackAnimation ; shake the screen or flash the pic in and out (to show damage)
 .animationFinished
@@ -574,8 +568,7 @@ SetAnimationPalette:
 .notSGB
 	ld a, $e4
 	ld [wAnimPalette], a
-	vc_red_hook FPA_008_Begin
-	vc_blue_hook FPA_010_Begin
+	vc_hook FPA_Dream_Eater_Begin
 	ldh [rOBP0], a
 	ld a, $6c
 	ldh [rOBP1], a
@@ -991,7 +984,7 @@ AnimationFlashScreenLong:
 	ld [wFlashScreenLongCounter], a
 	pop hl
 	jr nz, .loop
-	vc_hook FPA_phy_End
+	vc_red_hook FPA_phy_End
 	ret
 
 ; BG palettes
