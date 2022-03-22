@@ -4,7 +4,7 @@ INCLUDE "constants.asm"
 
 vc_const: MACRO
 x = \1
-	println "00:{04x:x} \1" ; same format as rgblink's .sym file
+	PRINTLN "00:{04x:x} \1" ; same format as rgblink's .sym file
 ENDM
 
 ; [FPA 001 Begin]
