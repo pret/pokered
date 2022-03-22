@@ -37,7 +37,9 @@ LoadSAV0:
 	ld a, $1
 	ld [MBC1SRamBankingMode], a
 	ld [MBC1SRamBank], a
-	vc_hook SaveLimit ; This hook is ambigiously located here. Can be Moved.
+; This vc_hook does not have to be in any particular location.
+; It is defined here because it refers to the same labels as the two lines below.
+	vc_hook SaveLimit
 	ld hl, sPlayerName ; hero name located in SRAM
 	ld bc, sMainDataCheckSum - sPlayerName ; but here checks the full SAV
 	call SAVCheckSum

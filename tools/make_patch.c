@@ -51,8 +51,8 @@ void symbol_append(struct Symbol **symbols, const char *name, int bank, int addr
 	struct Symbol *symbol = xmalloc(sizeof(*symbol) + name_len);
 	symbol->address = address;
 	symbol->offset = address < 0x8000
-	    ? (bank > 0 ? address + (bank - 1) * 0x4000 : address) // ROM addresses are relative to their bank
-	    : address - 0x8000; // RAM addresses are relative to the start of all RAM
+		? (bank > 0 ? address + (bank - 1) * 0x4000 : address) // ROM addresses are relative to their bank
+		: address - 0x8000; // RAM addresses are relative to the start of all RAM
 	memcpy(symbol->name, name, name_len);
 	symbol->next = *symbols;
 	*symbols = symbol;
@@ -243,7 +243,9 @@ void interpret_command(char *command, const struct Symbol *current_hook, const s
 			modified = c != getc(orig_rom);
 			fprintf(output, isupper((unsigned)command[0]) ? "0x%02X" : "0x%02x", c);
 		} else {
-			if (command[strlen(command) - 1] != '/') {fprintf(output, command[strlen(command) - 1] == '_' ? "a%d: " : "a%d:", length);}
+			if (command[strlen(command) - 1] != '/') {
+				fprintf(output, command[strlen(command) - 1] == '_' ? "a%d: " : "a%d:", length);
+			}
 			for (int i = 0; i < length; i++) {
 				if (i) {
 					putc(' ', output);
@@ -261,7 +263,9 @@ void interpret_command(char *command, const struct Symbol *current_hook, const s
 		if (argc < 1) {
 			error_exit("Error: Invalid arguments for command: \"%s\"\n", command);
 		}
-		if (command[strlen(command) - 1] != '/') {fprintf(output, command[strlen(command) - 1] == '_' ? "a%d: " : "a%d:", argc * 2);}
+		if (command[strlen(command) - 1] != '/') {
+			fprintf(output, command[strlen(command) - 1] == '_' ? "a%d: " : "a%d:", argc * 2);
+		}
 		for (int i = 0; i < argc; i++) {
 			int value = parse_arg_value(argv[i], false, symbols, current_hook->name);
 			if (value > 0xffff) {
@@ -281,7 +285,9 @@ void interpret_command(char *command, const struct Symbol *current_hook, const s
 		if (value > 0xff) {
 			error_exit("Error: Invalid value for \"%s\" argument: 0x%x\n", command, value);
 		}
-		if (command[strlen(command) - 1] != '/') {fputs(command[strlen(command) - 1] == '_' ? "a1: " : "a1:", output);}
+		if (command[strlen(command) - 1] != '/') {
+			fputs(command[strlen(command) - 1] == '_' ? "a1: " : "a1:", output);
+		}
 		fprintf(output, isupper((unsigned)command[0]) ? "%02X" : "%02x", value);
 
 	} else if (!strcmp(command, "hex") || !strcmp(command, "HEX") || !strcmp(command, "HEx") || !strcmp(command, "Hex") || !strcmp(command, "heX") || !strcmp(command, "hEX")) {
