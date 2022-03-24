@@ -255,11 +255,11 @@ Serial_SyncAndExchangeNybble::
 	inc a
 	jr z, .loop1
 	vc_patch Network10
-if DEF(_RED_VC) || DEF(_BLUE_VC)
+IF DEF(_RED_VC) || DEF(_BLUE_VC)
 	ld b, 26
-else
+ELSE
 	ld b, 10
-endc
+ENDC
 	vc_patch_end
 .loop2
 	call DelayFrame
@@ -267,11 +267,11 @@ endc
 	dec b
 	jr nz, .loop2
 	vc_patch Network11
-if DEF(_RED_VC) || DEF(_BLUE_VC)
+IF DEF(_RED_VC) || DEF(_BLUE_VC)
 	ld b, 26
-else
+ELSE
 	ld b, 10
-endc
+ENDC
 	vc_patch_end
 .loop3
 	call DelayFrame

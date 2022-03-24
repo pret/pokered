@@ -212,17 +212,17 @@ _CableClubNPCPleaseWaitText::
 
 _CableClubNPCLinkClosedBecauseOfInactivityText::
 	vc_patch Change_MSG
-if DEF(_RED_VC) || DEF(_BLUE_VC)
+IF DEF(_RED_VC) || DEF(_BLUE_VC)
 	text "Please come again!"
 	done
 	text_start
 	text "sed because of"
 	cont "inactivity."
-else
+ELSE
 	text "The link has been"
 	line "closed because of"
 	cont "inactivity."
-endc
+ENDC
 	vc_patch_end
 
 	para "Please contact"

@@ -3033,11 +3033,11 @@ LinkBattleExchangeData:
 	jr z, .syncLoop1
 	vc_hook send_byt2_ret
 	vc_patch FIGHT
-if DEF(_RED_VC) || DEF(_BLUE_VC)
+IF DEF(_RED_VC) || DEF(_BLUE_VC)
 	ld b, 26
-else
+ELSE
 	ld b, 10
-endc
+ENDC
 	vc_patch_end
 .syncLoop2
 	call DelayFrame
@@ -3046,11 +3046,11 @@ endc
 	jr nz, .syncLoop2
 	vc_hook send_dummy
 	vc_patch FIGHT2
-if DEF(_RED_VC) || DEF(_BLUE_VC)
+IF DEF(_RED_VC) || DEF(_BLUE_VC)
 	ld b, 26
-else
+ELSE
 	ld b, 10
-endc
+ENDC
 	vc_patch_end
 .syncLoop3
 	call DelayFrame
@@ -6679,11 +6679,11 @@ BattleRandom:
 	pop hl
 	vc_hook fight_ret_c
 	vc_patch fight_ret
-if DEF(_RED_VC) || DEF(_BLUE_VC)
+IF DEF(_RED_VC) || DEF(_BLUE_VC)
 	ret
-else
+ELSE
 	ret c
-endc
+ENDC
 	vc_patch_end
 
 ; if we picked the last seed, we need to recalculate the nine seeds
