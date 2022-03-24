@@ -18,7 +18,6 @@ ENDM
 	vc_const "F"
 	vc_const "X"
 	vc_const MEGA_PUNCH
-	vc_const SUBANIM_05
 
 ; [FPA 001 End]
 	vc_const EXPLOSION

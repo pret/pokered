@@ -19,7 +19,6 @@ ENDM
 	vc_const "D"
 	vc_const "X"
 	vc_const MEGA_PUNCH
-	vc_const SUBANIM_05
 
 ; [FPA 002 Begin]
 	vc_const "U"
