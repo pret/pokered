@@ -4,13 +4,13 @@ IF DEF(_RED_VC) || DEF(_BLUE_VC)
 ENDC
 ENDM
 
-vc_red_hook: MACRO
+vc_hook_red: MACRO
 IF DEF(_RED_VC)
 .VC_\1::
 ENDC
 ENDM
 
-vc_blue_hook: MACRO
+vc_hook_blue: MACRO
 IF DEF(_BLUE_VC)
 .VC_\1::
 ENDC
