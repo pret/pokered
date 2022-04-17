@@ -33,7 +33,7 @@ CableClubNPC::
 ; its original address.
 	vc_hook linkCable_fake_begin
 	vc_assert hSerialConnectionStatus == $ffaa, \
-		"hSerialConnectionStatus is no longer located at 00:ffcd"
+		"hSerialConnectionStatus is no longer located at 00:ffaa"
 	vc_assert USING_INTERNAL_CLOCK == $02, \
 		"USING_INTERNAL_CLOCK is no longer equal to $02."
 	ldh [rSC], a
