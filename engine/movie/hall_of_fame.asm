@@ -195,10 +195,11 @@ HoFLoadPlayerPics:
 	ld de, RedPicBack
 	ld a, BANK(RedPicBack)
 	call UncompressSpriteFromDE
-	predef ScaleSpriteByTwo
-	ld de, vBackPic
-	call InterlaceMergeSpriteBuffers
-	ld c, $1
+	;predef ScaleSpriteByTwo
+	;ld de, vBackPic
+	;call InterlaceMergeSpriteBuffers
+	;ld c, $1
+	callba LoadBackSpriteUnzoomed
 
 HoFLoadMonPlayerPicTileIDs:
 ; c = base tile ID
