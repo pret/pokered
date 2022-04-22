@@ -21,4 +21,4 @@
 	     SUBSTITUTE,   FLASH
 	; end
 
-	db 0 ; padding
+	db BANK(PikachuPicFront)

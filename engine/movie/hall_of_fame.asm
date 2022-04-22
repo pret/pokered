@@ -199,7 +199,7 @@ HoFLoadPlayerPics:
 	;ld de, vBackPic
 	;call InterlaceMergeSpriteBuffers
 	;ld c, $1
-	callba LoadBackSpriteUnzoomed
+	farcall LoadBackSpriteUnzoomed
 
 HoFLoadMonPlayerPicTileIDs:
 ; c = base tile ID

@@ -7041,7 +7041,7 @@ LoadMonBackPic:
 	jp CopyVideoData
 
 LoadBackSpriteUnzoomed:
-   ld a, $44
-   ld de, vBackPic
-   push de
-   jp LoadUncompressedBackSprite
+	ld a, $66
+	ld de, vBackPic
+	push de
+	jp LoadUncompressedBackSprite

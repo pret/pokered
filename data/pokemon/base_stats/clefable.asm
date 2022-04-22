@@ -23,4 +23,4 @@
 	     TRI_ATTACK,   SUBSTITUTE,   STRENGTH,     FLASH
 	; end
 
-	db 0 ; padding
+	db BANK(ClefablePicFront)

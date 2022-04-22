@@ -20,4 +20,4 @@
 	     REST,         THUNDER_WAVE, SUBSTITUTE,   FLY,          FLASH
 	; end
 
-	db 0 ; padding
+	db BANK(ZapdosPicFront)

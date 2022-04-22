@@ -22,4 +22,4 @@
 	     TRI_ATTACK,   SUBSTITUTE,   SURF,         STRENGTH,     FLASH
 	; end
 
-	db 0 ; padding
+	db BANK(SlowpokePicFront)

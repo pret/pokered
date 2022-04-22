@@ -21,4 +21,4 @@
 	     SURF
 	; end
 
-	db 0 ; padding
+	db BANK(OmastarPicFront)

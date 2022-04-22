@@ -17,4 +17,4 @@
 	tmhm
 	; end
 
-	db 0 ; padding
+	db BANK(KakunaPicFront)

@@ -24,4 +24,4 @@
 	     STRENGTH
 	; end
 
-	db 0 ; padding
+	db BANK(SnorlaxPicFront)
