@@ -560,32 +560,32 @@ DisplayOptionMenu:
 	jp .eraseOldMenuCursor
 .pressedLeftInTextSpeed
 	ld a, [wOptionsTextSpeedCursorX] ; text speed cursor X coordinate
-	cp 1
-	jr z, .updateTextSpeedXCoord
-	cp 7
-	jr nz, .fromSlowToMedium
-	sub 6
+	cp 1                             ; leftmost position
+	jr z, .updateTextSpeedXCoord     ; don't do anything
+	cp 9                             ; middle position
+	jr nz, .fromSlowToMedium         ; not in middle, go from slow to medium
+	sub 8                            ; subtract from accumulator to go from medium to fast
 	jr .updateTextSpeedXCoord
 .fromSlowToMedium
-	sub 7
+	sub 5
 	jr .updateTextSpeedXCoord
 .pressedRightInTextSpeed
 	ld a, [wOptionsTextSpeedCursorX] ; text speed cursor X coordinate
-	cp 14
-	jr z, .updateTextSpeedXCoord
-	cp 7
-	jr nz, .fromFastToMedium
-	add 7
+	cp 14                            ; rightmost position
+	jr z, .updateTextSpeedXCoord     ; don't do anything if rightmost
+	cp 9                             ; middle position
+	jr nz, .fromFastToMedium         ; not middle, go from leftmost to middle
+	add 5                            ; add to accumulator to go from medium to slow
 	jr .updateTextSpeedXCoord
 .fromFastToMedium
-	add 6
+	add 8
 .updateTextSpeedXCoord
 	ld [wOptionsTextSpeedCursorX], a ; text speed cursor X coordinate
 	jp .eraseOldMenuCursor
 
 TextSpeedOptionText:
 	db   "TEXT SPEED"
-	next " FAST  MEDIUM SLOW@"
+	next " INSTANT FAST SLOW@"
 
 BattleAnimationOptionText:
 	db   "BATTLE ANIMATION"
@@ -681,9 +681,9 @@ SetCursorPositionsFromOptions:
 ; 01: delay after printing a letter (in frames)
 TextSpeedOptionData:
 	db 14, TEXT_DELAY_SLOW
-	db  7, TEXT_DELAY_MEDIUM
+	db  9, TEXT_DELAY_MEDIUM
 	db  1, TEXT_DELAY_FAST
-	db  7, -1 ; end (default X coordinate)
+	db  9, -1 ; end (default X coordinate)
 
 CheckForPlayerNameInSRAM:
 ; Check if the player name data in SRAM has a string terminator character
