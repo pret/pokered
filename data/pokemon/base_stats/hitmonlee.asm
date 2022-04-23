@@ -8,7 +8,7 @@
 	db 139 ; base exp
 
 	INCBIN "gfx/pokemon/front/hitmonlee.pic", 0, 1 ; sprite dimensions
-	dw HitmonleePicFront, HitmonleePicBack
+	dw HitmonleePicFront, HitmonleePicBackSW
 
 	db DOUBLE_KICK, MEDITATE, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -20,4 +20,6 @@
 	     SKULL_BASH,   REST,         SUBSTITUTE,   STRENGTH
 	; end
 
-	db BANK(HitmonleePicFront)
+	dw BANK(HitmonleePicFront), BANK(HitmonleePicBack)
+
+	dw 0000, HitmonleePicBack

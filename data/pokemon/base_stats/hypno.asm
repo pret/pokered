@@ -8,7 +8,7 @@
 	db 165 ; base exp
 
 	INCBIN "gfx/pokemon/front/hypno.pic", 0, 1 ; sprite dimensions
-	dw HypnoPicFront, HypnoPicBack
+	dw HypnoPicFront, HypnoPicBackSW
 
 	db POUND, HYPNOSIS, DISABLE, CONFUSION ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -22,4 +22,6 @@
 	     FLASH
 	; end
 
-	db BANK(HypnoPicFront)
+	dw BANK(HypnoPicFront), BANK(HypnoPicBack)
+
+	dw 0000, HypnoPicBack

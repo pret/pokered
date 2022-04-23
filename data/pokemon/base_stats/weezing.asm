@@ -8,7 +8,7 @@
 	db 173 ; base exp
 
 	INCBIN "gfx/pokemon/front/weezing.pic", 0, 1 ; sprite dimensions
-	dw WeezingPicFront, WeezingPicBack
+	dw WeezingPicFront, WeezingPicBackSW
 
 	db TACKLE, SMOG, SLUDGE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -19,4 +19,6 @@
 	     REST,         EXPLOSION,    SUBSTITUTE
 	; end
 
-	db BANK(WeezingPicFront)
+	dw BANK(WeezingPicFront), BANK(WeezingPicBack)
+
+	dw 0000, WeezingPicBack

@@ -8,7 +8,7 @@
 	db 84 ; base exp
 
 	INCBIN "gfx/pokemon/front/bellsprout.pic", 0, 1 ; sprite dimensions
-	dw BellsproutPicFront, BellsproutPicBack
+	dw BellsproutPicFront, BellsproutPicBackSW
 
 	db VINE_WHIP, GROWTH, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_SLOW ; growth rate
@@ -19,4 +19,6 @@
 	     BIDE,         REST,         SUBSTITUTE,   CUT
 	; end
 
-	db BANK(BellsproutPicFront)
+	dw BANK(BellsproutPicFront), BANK(BellsproutPicBack)
+
+	dw 0000, BellsproutPicBack

@@ -8,7 +8,7 @@
 	db 78 ; base exp
 
 	INCBIN "gfx/pokemon/front/oddish.pic", 0, 1 ; sprite dimensions
-	dw OddishPicFront, OddishPicBack
+	dw OddishPicFront, OddishPicBackSW
 
 	db ABSORB, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_SLOW ; growth rate
@@ -19,4 +19,6 @@
 	     BIDE,         REST,         SUBSTITUTE,   CUT
 	; end
 
-	db BANK(OddishPicFront)
+	dw BANK(OddishPicFront), BANK(OddishPicBack)
+
+	dw 0000, OddishPicBack

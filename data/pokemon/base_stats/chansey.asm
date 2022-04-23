@@ -8,7 +8,7 @@
 	db 255 ; base exp
 
 	INCBIN "gfx/pokemon/front/chansey.pic", 0, 1 ; sprite dimensions
-	dw ChanseyPicFront, ChanseyPicBack
+	dw ChanseyPicFront, ChanseyPicBackSW
 
 	db POUND, DOUBLESLAP, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_FAST ; growth rate
@@ -24,4 +24,6 @@
 	     FLASH
 	; end
 
-	db BANK(ChanseyPicFront)
+	dw BANK(ChanseyPicFront), BANK(ChanseyPicBack)
+
+	dw 0000, ChanseyPicBack

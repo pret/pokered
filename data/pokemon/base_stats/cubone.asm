@@ -8,7 +8,7 @@
 	db 87 ; base exp
 
 	INCBIN "gfx/pokemon/front/cubone.pic", 0, 1 ; sprite dimensions
-	dw CubonePicFront, CubonePicBack
+	dw CubonePicFront, CubonePicBackSW
 
 	db BONE_CLUB, GROWL, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -21,4 +21,6 @@
 	     FIRE_BLAST,   SKULL_BASH,   REST,         SUBSTITUTE,   STRENGTH
 	; end
 
-	db BANK(CubonePicFront)
+	dw BANK(CubonePicFront), BANK(CubonePicBack)
+
+	dw 0000, CubonePicBack

@@ -8,7 +8,7 @@
 	db 140 ; base exp
 
 	INCBIN "gfx/pokemon/front/hitmonchan.pic", 0, 1 ; sprite dimensions
-	dw HitmonchanPicFront, HitmonchanPicBack
+	dw HitmonchanPicFront, HitmonchanPicBackSW
 
 	db COMET_PUNCH, AGILITY, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -20,4 +20,6 @@
 	     SKULL_BASH,   REST,         SUBSTITUTE,   STRENGTH
 	; end
 
-	db BANK(HitmonchanPicFront)
+	dw BANK(HitmonchanPicFront), BANK(HitmonchanPicBack)
+
+	dw 0000, HitmonchanPicBack

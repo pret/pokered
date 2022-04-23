@@ -8,7 +8,7 @@
 	db 209 ; base exp
 
 	INCBIN "gfx/pokemon/front/charizard.pic", 0, 1 ; sprite dimensions
-	dw CharizardPicFront, CharizardPicBack
+	dw CharizardPicFront, CharizardPicBackSW
 
 	db SCRATCH, GROWL, EMBER, LEER ; level 1 learnset
 	db GROWTH_MEDIUM_SLOW ; growth rate
@@ -22,4 +22,6 @@
 	     CUT,          STRENGTH
 	; end
 
-	db BANK(CharizardPicFront)
+	dw BANK(CharizardPicFront), BANK(CharizardPicBack)
+
+	dw 0000, CharizardPicBack

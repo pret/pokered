@@ -8,7 +8,7 @@
 	db 81 ; base exp
 
 	INCBIN "gfx/pokemon/front/diglett.pic", 0, 1 ; sprite dimensions
-	dw DiglettPicFront, DiglettPicBack
+	dw DiglettPicFront, DiglettPicBackSW
 
 	db SCRATCH, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -19,4 +19,6 @@
 	     BIDE,         REST,         ROCK_SLIDE,   SUBSTITUTE
 	; end
 
-	db BANK(DiglettPicFront)
+	dw BANK(DiglettPicFront), BANK(DiglettPicBack)
+
+	dw 0000, DiglettPicBack

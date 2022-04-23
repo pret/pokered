@@ -8,7 +8,7 @@
 	db 105 ; base exp
 
 	INCBIN "gfx/pokemon/front/tentacool.pic", 0, 1 ; sprite dimensions
-	dw TentacoolPicFront, TentacoolPicBack
+	dw TentacoolPicFront, TentacoolPicBackSW
 
 	db ACID, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_SLOW ; growth rate
@@ -20,4 +20,6 @@
 	     REST,         SUBSTITUTE,   CUT,          SURF
 	; end
 
-	db BANK(TentacoolPicFront)
+	dw BANK(TentacoolPicFront), BANK(TentacoolPicBack)
+
+	dw 0000, TentacoolPicBack

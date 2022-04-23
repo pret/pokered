@@ -8,7 +8,7 @@
 	db 76 ; base exp
 
 	INCBIN "gfx/pokemon/front/jigglypuff.pic", 0, 1 ; sprite dimensions
-	dw JigglypuffPicFront, JigglypuffPicBack
+	dw JigglypuffPicFront, JigglypuffPicBackSW
 
 	db SING, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_FAST ; growth rate
@@ -23,4 +23,6 @@
 	     STRENGTH,     FLASH
 	; end
 
-	db BANK(JigglypuffPicFront)
+	dw BANK(JigglypuffPicFront), BANK(JigglypuffPicBack)
+
+	dw 0000, JigglypuffPicBack

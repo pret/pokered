@@ -8,7 +8,7 @@
 	db 113 ; base exp
 
 	INCBIN "gfx/pokemon/front/pidgeotto.pic", 0, 1 ; sprite dimensions
-	dw PidgeottoPicFront, PidgeottoPicBack
+	dw PidgeottoPicFront, PidgeottoPicBackSW
 
 	db GUST, SAND_ATTACK, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_SLOW ; growth rate
@@ -19,4 +19,6 @@
 	     SWIFT,        SKY_ATTACK,   REST,         SUBSTITUTE,   FLY
 	; end
 
-	db BANK(PidgeottoPicFront)
+	dw BANK(PidgeottoPicFront), BANK(PidgeottoPicBack)
+
+	dw 0000, PidgeottoPicBack

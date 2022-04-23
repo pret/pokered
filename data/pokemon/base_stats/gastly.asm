@@ -8,7 +8,7 @@
 	db 95 ; base exp
 
 	INCBIN "gfx/pokemon/front/gastly.pic", 0, 1 ; sprite dimensions
-	dw GastlyPicFront, GastlyPicBack
+	dw GastlyPicFront, GastlyPicBackSW
 
 	db LICK, CONFUSE_RAY, NIGHT_SHADE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_SLOW ; growth rate
@@ -19,4 +19,6 @@
 	     DREAM_EATER,  REST,         PSYWAVE,      EXPLOSION,    SUBSTITUTE
 	; end
 
-	db BANK(GastlyPicFront)
+	dw BANK(GastlyPicFront), BANK(GastlyPicBack)
+
+	dw 0000, GastlyPicBack

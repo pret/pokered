@@ -8,7 +8,7 @@
 	db 98 ; base exp
 
 	INCBIN "gfx/pokemon/front/exeggcute.pic", 0, 1 ; sprite dimensions
-	dw ExeggcutePicFront, ExeggcutePicBack
+	dw ExeggcutePicFront, ExeggcutePicBackSW
 
 	db BARRAGE, HYPNOSIS, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_SLOW ; growth rate
@@ -20,4 +20,6 @@
 	     SUBSTITUTE
 	; end
 
-	db BANK(ExeggcutePicFront)
+	dw BANK(ExeggcutePicFront), BANK(ExeggcutePicBack)
+
+	dw 0000, ExeggcutePicBack

@@ -8,7 +8,7 @@
 	db 162 ; base exp
 
 	INCBIN "gfx/pokemon/front/fearow.pic", 0, 1 ; sprite dimensions
-	dw FearowPicFront, FearowPicBack
+	dw FearowPicFront, FearowPicBackSW
 
 	db PECK, GROWL, LEER, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -19,4 +19,6 @@
 	     SWIFT,        SKY_ATTACK,   REST,         SUBSTITUTE,   FLY
 	; end
 
-	db BANK(FearowPicFront)
+	dw BANK(FearowPicFront), BANK(FearowPicBack)
+
+	dw 0000, FearowPicBack

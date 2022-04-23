@@ -8,7 +8,7 @@
 	db 116 ; base exp
 
 	INCBIN "gfx/pokemon/front/raticate.pic", 0, 1 ; sprite dimensions
-	dw RaticatePicFront, RaticatePicBack
+	dw RaticatePicFront, RaticatePicBackSW
 
 	db TACKLE, TAIL_WHIP, QUICK_ATTACK, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -20,4 +20,6 @@
 	     BIDE,         SWIFT,        SKULL_BASH,   REST,         SUBSTITUTE
 	; end
 
-	db BANK(RaticatePicFront)
+	dw BANK(RaticatePicFront), BANK(RaticatePicBack)
+
+	dw 0000, RaticatePicBack

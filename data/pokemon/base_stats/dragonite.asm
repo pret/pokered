@@ -8,7 +8,7 @@
 	db 218 ; base exp
 
 	INCBIN "gfx/pokemon/front/dragonite.pic", 0, 1 ; sprite dimensions
-	dw DragonitePicFront, DragonitePicBack
+	dw DragonitePicFront, DragonitePicBackSW
 
 	db WRAP, LEER, THUNDER_WAVE, AGILITY ; level 1 learnset
 	db GROWTH_SLOW ; growth rate
@@ -22,4 +22,6 @@
 	     SURF,         STRENGTH
 	; end
 
-	db BANK(DragonitePicFront)
+	dw BANK(DragonitePicFront), BANK(DragonitePicBack)
+
+	dw 0000, DragonitePicBack

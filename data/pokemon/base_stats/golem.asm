@@ -8,7 +8,7 @@
 	db 177 ; base exp
 
 	INCBIN "gfx/pokemon/front/golem.pic", 0, 1 ; sprite dimensions
-	dw GolemPicFront, GolemPicBack
+	dw GolemPicFront, GolemPicBackSW
 
 	db TACKLE, DEFENSE_CURL, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_SLOW ; growth rate
@@ -21,4 +21,6 @@
 	     REST,         EXPLOSION,    ROCK_SLIDE,   SUBSTITUTE,   STRENGTH
 	; end
 
-	db BANK(GolemPicFront)
+	dw BANK(GolemPicFront), BANK(GolemPicBack)
+
+	dw 0000, GolemPicBack

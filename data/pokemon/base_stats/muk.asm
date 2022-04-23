@@ -8,7 +8,7 @@
 	db 157 ; base exp
 
 	INCBIN "gfx/pokemon/front/muk.pic", 0, 1 ; sprite dimensions
-	dw MukPicFront, MukPicBack
+	dw MukPicFront, MukPicBackSW
 
 	db POUND, DISABLE, POISON_GAS, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -19,4 +19,6 @@
 	     SELFDESTRUCT, FIRE_BLAST,   REST,         EXPLOSION,    SUBSTITUTE
 	; end
 
-	db BANK(MukPicFront)
+	dw BANK(MukPicFront), BANK(MukPicBack)
+
+	dw 0000, MukPicBack

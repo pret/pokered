@@ -8,7 +8,7 @@
 	db 143 ; base exp
 
 	INCBIN "gfx/pokemon/front/wartortle.pic", 0, 1 ; sprite dimensions
-	dw WartortlePicFront, WartortlePicBack
+	dw WartortlePicFront, WartortlePicBackSW
 
 	db TACKLE, TAIL_WHIP, BUBBLE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_SLOW ; growth rate
@@ -21,4 +21,6 @@
 	     REST,         SUBSTITUTE,   SURF,         STRENGTH
 	; end
 
-	db BANK(WartortlePicFront)
+	dw BANK(WartortlePicFront), BANK(WartortlePicBack)
+
+	dw 0000, WartortlePicBack

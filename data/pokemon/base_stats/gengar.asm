@@ -8,7 +8,7 @@
 	db 190 ; base exp
 
 	INCBIN "gfx/pokemon/front/gengar.pic", 0, 1 ; sprite dimensions
-	dw GengarPicFront, GengarPicBack
+	dw GengarPicFront, GengarPicBackSW
 
 	db LICK, CONFUSE_RAY, NIGHT_SHADE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_SLOW ; growth rate
@@ -22,4 +22,6 @@
 	     SUBSTITUTE,   STRENGTH
 	; end
 
-	db BANK(GengarPicFront)
+	dw BANK(GengarPicFront), BANK(GengarPicBack)
+
+	dw 0000, GengarPicBack

@@ -8,7 +8,7 @@
 	db 120 ; base exp
 
 	INCBIN "gfx/pokemon/front/omanyte.pic", 0, 1 ; sprite dimensions
-	dw OmanytePicFront, OmanytePicBack
+	dw OmanytePicFront, OmanytePicBackSW
 
 	db WATER_GUN, WITHDRAW, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -20,4 +20,6 @@
 	     SURF
 	; end
 
-	db BANK(OmanytePicFront)
+	dw BANK(OmanytePicFront), BANK(OmanytePicBack)
+
+	dw 0000, OmanytePicBack

@@ -8,7 +8,7 @@
 	db 54 ; base exp
 
 	INCBIN "gfx/pokemon/front/zubat.pic", 0, 1 ; sprite dimensions
-	dw ZubatPicFront, ZubatPicBack
+	dw ZubatPicFront, ZubatPicBackSW
 
 	db LEECH_LIFE, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -19,4 +19,6 @@
 	     SWIFT,        REST,         SUBSTITUTE
 	; end
 
-	db BANK(ZubatPicFront)
+	dw BANK(ZubatPicFront), BANK(ZubatPicBack)
+
+	dw 0000, ZubatPicBack

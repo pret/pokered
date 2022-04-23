@@ -8,7 +8,7 @@
 	db 106 ; base exp
 
 	INCBIN "gfx/pokemon/front/staryu.pic", 0, 1 ; sprite dimensions
-	dw StaryuPicFront, StaryuPicBack
+	dw StaryuPicFront, StaryuPicBackSW
 
 	db TACKLE, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_SLOW ; growth rate
@@ -21,4 +21,6 @@
 	     PSYWAVE,      TRI_ATTACK,   SUBSTITUTE,   SURF,         FLASH
 	; end
 
-	db BANK(StaryuPicFront)
+	dw BANK(StaryuPicFront), BANK(StaryuPicBack)
+
+	dw 0000, StaryuPicBack

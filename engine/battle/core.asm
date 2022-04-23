@@ -6317,17 +6317,36 @@ SwapPlayerAndEnemyLevels:
 ; also writes OAM data and loads tile patterns for the Red or Old Man back sprite's head
 ; (for use when scrolling the player sprite and enemy's silhouettes on screen)
 LoadPlayerBackPic:
+	ld a, [wSpriteOptions]
+	bit BIT_BACK_SPRITES, a
+	jr z, .ogBackSprite
+	ld a, [wBattleType]
+	dec a ; is it the old man tutorial?
+	ld de, RedPicBackSW
+	jr nz, .next
+	ld de, OldManPicBackSW
+	jr z, .next
+.ogBackSprite
 	ld a, [wBattleType]
 	dec a ; is it the old man tutorial?
 	ld de, RedPicBack
 	jr nz, .next
 	ld de, OldManPicBack
 .next
+	ld a, [wSpriteOptions]
+	bit BIT_BACK_SPRITES, a
+	jr z, .ogBackSpriteBank
+	ld a, BANK(RedPicBackSW)
+	ASSERT BANK(RedPicBackSW) == BANK(OldManPicBackSW)
+	call UncompressSpriteFromDE
+	call LoadBackSpriteUnzoomed
+	jr .nextAgain
+.ogBackSpriteBank
 	ld a, BANK(RedPicBack)
 	ASSERT BANK(RedPicBack) == BANK(OldManPicBack)
 	call UncompressSpriteFromDE
-	;predef ScaleSpriteByTwo
-	call LoadBackSpriteUnzoomed
+	predef ScaleSpriteByTwo
+.nextAgain	
 	ld hl, wOAMBuffer
 	xor a
 	ldh [hOAMTile], a ; initial tile number
@@ -6359,8 +6378,13 @@ LoadPlayerBackPic:
 	ld e, a
 	dec b
 	jr nz, .loop
-	;ld de, vBackPic
-	;call InterlaceMergeSpriteBuffers
+	ld a, [wSpriteOptions]
+	bit BIT_BACK_SPRITES, a
+	jr nz, .nextFinish
+.ogSpriteRoutine
+	ld de, vBackPic
+	call InterlaceMergeSpriteBuffers
+.nextFinish
 	ld a, $a
 	ld [MBC1SRamEnable], a
 	xor a
@@ -7027,18 +7051,37 @@ LoadMonBackPic:
 	ld b, 7
 	ld c, 8
 	call ClearScreenArea
+	ld a, [wSpriteOptions]
+	bit BIT_BACK_SPRITES, a
+	jr nz, .swSpriteHeader
+.ogSpriteHeader
+	ld hl,  wMonHAltBackSprite - wMonHeader
+	jr .next
+.swSpriteHeader
 	ld hl,  wMonHBackSprite - wMonHeader
-	call UncompressMonSprite
-	;predef ScaleSpriteByTwo
-	;ld de, vBackPic
-	;call InterlaceMergeSpriteBuffers ; combine the two buffers to a single 2bpp sprite
+.next
+	call UncompressMonBackSprite
+	ld a, [wSpriteOptions]
+	bit BIT_BACK_SPRITES, a
+	jr nz, .swSprites
+.ogSprites
+	call LoadBackSpriteZoomed
+	jr .nextb
+.swSprites
 	call LoadBackSpriteUnzoomed
+.nextb
 	ld hl, vSprites
 	ld de, vBackPic
 	ld c, (2*SPRITEBUFFERSIZE)/16 ; count of 16-byte chunks to be copied
 	ldh a, [hLoadedROMBank]
 	ld b, a
 	jp CopyVideoData
+
+LoadBackSpriteZoomed:
+	predef ScaleSpriteByTwo
+	ld de, vBackPic
+	call InterlaceMergeSpriteBuffers ; combine the two buffers to a single 2bpp sprite
+	ret
 
 LoadBackSpriteUnzoomed:
 	ld a, $66

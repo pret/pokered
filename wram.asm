@@ -777,6 +777,9 @@ wOptionsTextSpeedCursorX:: db
 wOptionsBattleAnimCursorX:: db
 wOptionsBattleStyleCursorX:: db
 wOptionsCancelCursorX:: db
+wOptionsBackSpritesCursorX:: db
+wOptionsBulbasaurSpriteCursorX:: db
+wOptionsBlastoiseSpriteCursorX:: db
 
 NEXTU
 ; tile ID of the badge number being drawn
@@ -1540,7 +1543,10 @@ wMonHBackSprite:: dw
 wMonHMoves:: ds NUM_MOVES
 wMonHGrowthRate:: db
 wMonHLearnset:: flag_array NUM_TMS + NUM_HMS
-wMonHPicBank:: ; d0d3
+wMonHPicBank:: dw
+wMonHBackPicBank:: dw
+wMonHAltFrontSprite:: dw
+wMonHAltBackSprite:: dw
     ds 1
 wMonHeaderEnd::
 
@@ -2300,6 +2306,11 @@ wDayCareMonName:: ds NAME_LENGTH
 wDayCareMonOT::   ds NAME_LENGTH
 
 wDayCareMon:: box_struct wDayCareMon
+
+; bit 0 -> Back sprites: 0 = RB, 1 = Space World
+; bit 1 -> Bulbasaur sprite version: 0 = RB, 1 = RG
+; bit 2 -> Blastoise sprite version: 0 = RB, 1 = RG
+wSpriteOptions:: db
 
 wMainDataEnd::
 

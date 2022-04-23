@@ -8,7 +8,7 @@
 	db 153 ; base exp
 
 	INCBIN "gfx/pokemon/front/dugtrio.pic", 0, 1 ; sprite dimensions
-	dw DugtrioPicFront, DugtrioPicBack
+	dw DugtrioPicFront, DugtrioPicBackSW
 
 	db SCRATCH, GROWL, DIG, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -19,4 +19,6 @@
 	     DOUBLE_TEAM,  BIDE,         REST,         ROCK_SLIDE,   SUBSTITUTE
 	; end
 
-	db BANK(DugtrioPicFront)
+	dw BANK(DugtrioPicFront), BANK(DugtrioPicBack)
+
+	dw 0000, DugtrioPicBack

@@ -8,7 +8,7 @@
 	db 210 ; base exp
 
 	INCBIN "gfx/pokemon/front/blastoise.pic", 0, 1 ; sprite dimensions
-	dw BlastoisePicFront, BlastoisePicBack
+	dw BlastoisePicFront, BlastoisePicBackSW
 
 	db TACKLE, TAIL_WHIP, BUBBLE, WATER_GUN ; level 1 learnset
 	db GROWTH_MEDIUM_SLOW ; growth rate
@@ -22,4 +22,6 @@
 	     SURF,         STRENGTH
 	; end
 
-	db BANK(BlastoisePicFront)
+	dw BANK(BlastoisePicFront), BANK(BlastoisePicBack)
+
+	dw BlastoisePicRGFront, BlastoisePicBack

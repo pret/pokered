@@ -1,6 +1,25 @@
 ; uncompresses the front or back sprite of the specified mon
 ; assumes the corresponding mon header is already loaded
 ; hl contains offset to sprite pointer ($b for front or $d for back)
+UncompressMonBackSprite::
+	ld bc,wMonHeader
+    add hl,bc
+    ld a,[hli]
+    ld [wSpriteInputPtr],a    ; fetch sprite input pointer
+    ld a,[hl]
+    ld [wSpriteInputPtr+1],a
+    ld a, [wSpriteOptions]
+    bit BIT_BACK_SPRITES, a
+    jr nz, .swSprites
+.ogSprites
+    ld a,[wMonHBackPicBank]
+    jr .GotBank
+.swSprites
+    ld a,[wMonHPicBank]
+.GotBank
+    jp UncompressSpriteData
+
+
 UncompressMonSprite::
     ld bc,wMonHeader
     add hl,bc
@@ -15,6 +34,7 @@ UncompressMonSprite::
     jr z,.RecallBank
     cp MON_GHOST
     jr z,.RecallBank
+    ld a, b
     ld a,[wMonHPicBank]
     jr .GotBank
 .RecallBank
@@ -25,7 +45,27 @@ UncompressMonSprite::
 ; de: destination location
 LoadMonFrontSprite::
 	push de
+	ld a,[wcf91]
+	cp BULBASAUR
+	jr z,.bulbasaurOptionCheck
+	cp BLASTOISE
+	jr z,.blastoiseOptionCheck
+	jr .defaultSprite
+.bulbasaurOptionCheck
+	ld a, [wSpriteOptions]
+	bit BIT_BULBASAUR_SPRITE, a
+	jr nz,.optionSprite
+	jr .defaultSprite
+.blastoiseOptionCheck
+	ld a, [wSpriteOptions]
+	bit BIT_BLASTOISE_SPRITE, a
+	jr nz,.optionSprite
+.defaultSprite
 	ld hl, wMonHFrontSprite - wMonHeader
+	jr .load
+.optionSprite
+	ld hl, wMonHAltFrontSprite - wMonHeader
+.load
 	call UncompressMonSprite
 	ld hl, wMonHSpriteDim
 	ld a, [hli]

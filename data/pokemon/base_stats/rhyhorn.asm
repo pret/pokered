@@ -8,7 +8,7 @@
 	db 135 ; base exp
 
 	INCBIN "gfx/pokemon/front/rhyhorn.pic", 0, 1 ; sprite dimensions
-	dw RhyhornPicFront, RhyhornPicBack
+	dw RhyhornPicFront, RhyhornPicBackSW
 
 	db HORN_ATTACK, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_SLOW ; growth rate
@@ -20,4 +20,6 @@
 	     SKULL_BASH,   REST,         ROCK_SLIDE,   SUBSTITUTE,   STRENGTH
 	; end
 
-	db BANK(RhyhornPicFront)
+	dw BANK(RhyhornPicFront), BANK(RhyhornPicBack)
+
+	dw 0000, RhyhornPicBack

@@ -8,7 +8,7 @@
 	db 65 ; base exp
 
 	INCBIN "gfx/pokemon/front/charmander.pic", 0, 1 ; sprite dimensions
-	dw CharmanderPicFront, CharmanderPicBack
+	dw CharmanderPicFront, CharmanderPicBackSW
 
 	db SCRATCH, GROWL, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_SLOW ; growth rate
@@ -21,4 +21,6 @@
 	     REST,         SUBSTITUTE,   CUT,          STRENGTH
 	; end
 
-	db BANK(CharmanderPicFront)
+	dw BANK(CharmanderPicFront), BANK(CharmanderPicBack)
+
+	dw 0000, CharmanderPicBack

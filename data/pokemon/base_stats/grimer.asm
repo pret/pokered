@@ -8,7 +8,7 @@
 	db 90 ; base exp
 
 	INCBIN "gfx/pokemon/front/grimer.pic", 0, 1 ; sprite dimensions
-	dw GrimerPicFront, GrimerPicBack
+	dw GrimerPicFront, GrimerPicBackSW
 
 	db POUND, DISABLE, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -19,4 +19,6 @@
 	     FIRE_BLAST,   REST,         EXPLOSION,    SUBSTITUTE
 	; end
 
-	db BANK(GrimerPicFront)
+	dw BANK(GrimerPicFront), BANK(GrimerPicBack)
+
+	dw 0000, GrimerPicBack

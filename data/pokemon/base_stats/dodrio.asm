@@ -8,7 +8,7 @@
 	db 158 ; base exp
 
 	INCBIN "gfx/pokemon/front/dodrio.pic", 0, 1 ; sprite dimensions
-	dw DodrioPicFront, DodrioPicBack
+	dw DodrioPicFront, DodrioPicBackSW
 
 	db PECK, GROWL, FURY_ATTACK, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -20,4 +20,6 @@
 	     SUBSTITUTE,   FLY
 	; end
 
-	db BANK(DodrioPicFront)
+	dw BANK(DodrioPicFront), BANK(DodrioPicBack)
+
+	dw 0000, DodrioPicBack

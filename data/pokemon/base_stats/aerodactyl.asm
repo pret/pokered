@@ -8,7 +8,7 @@
 	db 202 ; base exp
 
 	INCBIN "gfx/pokemon/front/aerodactyl.pic", 0, 1 ; sprite dimensions
-	dw AerodactylPicFront, AerodactylPicBack
+	dw AerodactylPicFront, AerodactylPicBackSW
 
 	db WING_ATTACK, AGILITY, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_SLOW ; growth rate
@@ -20,4 +20,6 @@
 	     REST,         SUBSTITUTE,   FLY
 	; end
 
-	db BANK(AerodactylPicFront)
+	dw BANK(AerodactylPicFront), BANK(AerodactylPicBack)
+
+	dw 0000, AerodactylPicBack

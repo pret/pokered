@@ -8,7 +8,7 @@
 	db 192 ; base exp
 
 	INCBIN "gfx/pokemon/front/rapidash.pic", 0, 1 ; sprite dimensions
-	dw RapidashPicFront, RapidashPicBack
+	dw RapidashPicFront, RapidashPicBackSW
 
 	db EMBER, TAIL_WHIP, STOMP, GROWL ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -20,4 +20,6 @@
 	     SUBSTITUTE
 	; end
 
-	db BANK(RapidashPicFront)
+	dw BANK(RapidashPicFront), BANK(RapidashPicBack)
+
+	dw 0000, RapidashPicBack

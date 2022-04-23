@@ -8,7 +8,7 @@
 	db 220 ; base exp
 
 	INCBIN "gfx/pokemon/front/mewtwo.pic", 0, 1 ; sprite dimensions
-	dw MewtwoPicFront, MewtwoPicBack
+	dw MewtwoPicFront, MewtwoPicBackSW
 
 	db CONFUSION, DISABLE, SWIFT, PSYCHIC_M ; level 1 learnset
 	db GROWTH_SLOW ; growth rate
@@ -24,4 +24,6 @@
 	     FLASH
 	; end
 
-	db BANK(MewtwoPicFront)
+	dw BANK(MewtwoPicFront), BANK(MewtwoPicBack)
+
+	dw 0000, MewtwoPicBack

@@ -8,7 +8,7 @@
 	db 204 ; base exp
 
 	INCBIN "gfx/pokemon/front/rhydon.pic", 0, 1 ; sprite dimensions
-	dw RhydonPicFront, RhydonPicBack
+	dw RhydonPicFront, RhydonPicBackSW
 
 	db HORN_ATTACK, STOMP, TAIL_WHIP, FURY_ATTACK ; level 1 learnset
 	db GROWTH_SLOW ; growth rate
@@ -23,4 +23,6 @@
 	     SURF,         STRENGTH
 	; end
 
-	db BANK(RhydonPicFront)
+	dw BANK(RhydonPicFront), BANK(RhydonPicBack)
+
+	dw 0000, RhydonPicBack

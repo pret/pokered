@@ -8,7 +8,7 @@
 	db 80 ; base exp
 
 	INCBIN "gfx/pokemon/front/psyduck.pic", 0, 1 ; sprite dimensions
-	dw PsyduckPicFront, PsyduckPicBack
+	dw PsyduckPicFront, PsyduckPicBackSW
 
 	db SCRATCH, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -21,4 +21,6 @@
 	     SKULL_BASH,   REST,         SUBSTITUTE,   SURF,         STRENGTH
 	; end
 
-	db BANK(PsyduckPicFront)
+	dw BANK(PsyduckPicFront), BANK(PsyduckPicBack)
+
+	dw 0000, PsyduckPicBack

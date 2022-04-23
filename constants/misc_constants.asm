@@ -16,3 +16,9 @@ TEXT_DELAY_SLOW    EQU %101 ; 5
 	const_def 6
 	const BIT_BATTLE_SHIFT     ; 6
 	const BIT_BATTLE_ANIMATION ; 7
+
+	const_def
+	const BIT_BACK_SPRITES     ; 0
+	const BIT_BULBASAUR_SPRITE ; 1
+	const BIT_BLASTOISE_SPRITE ; 2
+	

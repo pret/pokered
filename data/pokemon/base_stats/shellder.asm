@@ -8,7 +8,7 @@
 	db 97 ; base exp
 
 	INCBIN "gfx/pokemon/front/shellder.pic", 0, 1 ; sprite dimensions
-	dw ShellderPicFront, ShellderPicBack
+	dw ShellderPicFront, ShellderPicBackSW
 
 	db TACKLE, WITHDRAW, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_SLOW ; growth rate
@@ -20,4 +20,6 @@
 	     REST,         EXPLOSION,    TRI_ATTACK,   SUBSTITUTE,   SURF
 	; end
 
-	db BANK(ShellderPicFront)
+	dw BANK(ShellderPicFront), BANK(ShellderPicBack)
+
+	dw 0000, ShellderPicBack

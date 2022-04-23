@@ -8,7 +8,7 @@
 	db 146 ; base exp
 
 	INCBIN "gfx/pokemon/front/machoke.pic", 0, 1 ; sprite dimensions
-	dw MachokePicFront, MachokePicBack
+	dw MachokePicFront, MachokePicBackSW
 
 	db KARATE_CHOP, LOW_KICK, LEER, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_SLOW ; growth rate
@@ -21,4 +21,6 @@
 	     ROCK_SLIDE,   SUBSTITUTE,   STRENGTH
 	; end
 
-	db BANK(MachokePicFront)
+	dw BANK(MachokePicFront), BANK(MachokePicBack)
+
+	dw 0000, MachokePicBack
