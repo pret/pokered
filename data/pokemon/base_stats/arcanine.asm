@@ -22,4 +22,4 @@
 
 	dw BANK(ArcaninePicFront), BANK(ArcaninePicBack)
 
-	dw 0000, ArcaninePicBack
+	dw ArcaninePicFrontRG, ArcaninePicBack

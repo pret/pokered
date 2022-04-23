@@ -8,7 +8,7 @@ UncompressMonBackSprite::
     ld [wSpriteInputPtr],a    ; fetch sprite input pointer
     ld a,[hl]
     ld [wSpriteInputPtr+1],a
-    ld a, [wSpriteOptions]
+    ld a, [wOptions]
     bit BIT_BACK_SPRITES, a
     jr nz, .swSprites
 .ogSprites
@@ -45,27 +45,7 @@ UncompressMonSprite::
 ; de: destination location
 LoadMonFrontSprite::
 	push de
-	ld a,[wcf91]
-	cp BULBASAUR
-	jr z,.bulbasaurOptionCheck
-	cp BLASTOISE
-	jr z,.blastoiseOptionCheck
-	jr .defaultSprite
-.bulbasaurOptionCheck
-	ld a, [wSpriteOptions]
-	bit BIT_BULBASAUR_SPRITE, a
-	jr nz,.optionSprite
-	jr .defaultSprite
-.blastoiseOptionCheck
-	ld a, [wSpriteOptions]
-	bit BIT_BLASTOISE_SPRITE, a
-	jr nz,.optionSprite
-.defaultSprite
-	ld hl, wMonHFrontSprite - wMonHeader
-	jr .load
-.optionSprite
-	ld hl, wMonHAltFrontSprite - wMonHeader
-.load
+	callfar CheckSpriteOptions
 	call UncompressMonSprite
 	ld hl, wMonHSpriteDim
 	ld a, [hli]

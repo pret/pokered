@@ -23,4 +23,4 @@
 
 	dw BANK(SquirtlePicFront), BANK(SquirtlePicBack)
 
-	dw 0000, SquirtlePicBack
+	dw SquirtlePicFrontRG, SquirtlePicBack

@@ -779,7 +779,15 @@ wOptionsBattleStyleCursorX:: db
 wOptionsCancelCursorX:: db
 wOptionsBackSpritesCursorX:: db
 wOptionsBulbasaurSpriteCursorX:: db
+wOptionsSquirtleSpriteCursorX:: db
 wOptionsBlastoiseSpriteCursorX:: db
+wOptionsPidgeotSpriteCursorX:: db
+wOptionsNidorinoSpriteCursorX:: db
+wOptionsGolbatSpriteCursorX:: db
+wOptionsMankeySpriteCursorX:: db
+wOptionsArcanineSpriteCursorX:: db
+wOptionsExeggutorSpriteCursorX:: db
+wOptionsMewtwoSpriteCursorX:: db
 
 NEXTU
 ; tile ID of the badge number being drawn
@@ -1761,16 +1769,17 @@ wPlayerMoney:: ds 3 ; BCD
 
 wRivalName:: ds NAME_LENGTH
 
-; bit 7 = battle animation
-; 0: On
-; 1: Off
-; bit 6 = battle style
-; 0: Shift
-; 1: Set
 ; bits 0-3 = text speed (number of frames to delay after printing a letter)
 ; 1: Fast
 ; 3: Medium
 ; 5: Slow
+; bits 4-5 = padding
+; bit 6 = battle style
+; 0: Shift
+; 1: Set
+; bit 7 = battle animation
+; 0: On
+; 1: Off
 wOptions:: db
 
 wObtainedBadges:: flag_array NUM_BADGES
@@ -2307,10 +2316,21 @@ wDayCareMonOT::   ds NAME_LENGTH
 
 wDayCareMon:: box_struct wDayCareMon
 
+
+; bit 0 -> Squirtle sprite version: 0 = RB, 1 = RG
+; bit 1 -> Blastoise sprite version: 0 = RB, 1 = RG
+; bit 2 -> Pidgeot sprite version: 0 = RB, 1 = RG
+; bit 3 -> Nidorino sprite version: 0 = RB, 1 = RG
+; bit 4 -> Golbat sprite version: 0 = Y, 1 = RB
+; bit 5 -> Mankey sprite version: 0 = RB, 1 = RG
+; bit 6 -> Arcanine sprite version: 0 = RB, 1 = RG
+; bit 7 -> Mewtwo sprite version: 0 = RB, 1 = RG
+wSpriteOptions:: db
+
 ; bit 0 -> Back sprites: 0 = RB, 1 = Space World
 ; bit 1 -> Bulbasaur sprite version: 0 = RB, 1 = RG
-; bit 2 -> Blastoise sprite version: 0 = RB, 1 = RG
-wSpriteOptions:: db
+; bit 2 -> Exeggutor sprite version: 0 = Y, 1 = RB
+wSpriteOptions2:: db
 
 wMainDataEnd::
 

@@ -23,4 +23,4 @@
 
 	dw BANK(MankeyPicFront), BANK(MankeyPicBack)
 
-	dw 0000, MankeyPicBack
+	dw MankeyPicFrontRG, MankeyPicBack

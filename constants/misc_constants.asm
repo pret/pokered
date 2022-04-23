@@ -17,8 +17,23 @@ TEXT_DELAY_SLOW    EQU %011 ; 3
 	const BIT_BATTLE_SHIFT     ; 6
 	const BIT_BATTLE_ANIMATION ; 7
 
+; wSpriteOptions
 	const_def
+	const BIT_SQUIRTLE_SPRITE  ; 0
+	const BIT_BLASTOISE_SPRITE ; 1
+	const BIT_PIDGEOT_SPRITE   ; 2
+	const BIT_NIDORINO_SPRITE  ; 3
+	const BIT_GOLBAT_SPRITE    ; 4
+	const BIT_MANKEY_SPRITE    ; 5
+	const BIT_ARCANINE_SPRITE  ; 6
+	const BIT_MEWTWO_SPRITE    ; 7
+
+; wSpriteOptions2
+	const_def  
 	const BIT_BACK_SPRITES     ; 0
 	const BIT_BULBASAUR_SPRITE ; 1
-	const BIT_BLASTOISE_SPRITE ; 2
+	const BIT_EXEGGUTOR_SPRITE ; 2
+	;const BIT_CHARIZARD_SPRITE ; 3
+
+
 	

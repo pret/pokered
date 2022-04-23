@@ -360,4 +360,6 @@ INCLUDE "engine/items/tm_prices.asm"
 
 
 SECTION "newMenus", ROMX
+INCLUDE "engine/gfx/front_sprite_options.asm"
 INCLUDE "engine/menus/sprite_options_menu.asm"
+INCLUDE "engine/menus/sprite_options_menu2.asm"

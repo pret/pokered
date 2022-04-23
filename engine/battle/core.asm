@@ -6317,7 +6317,7 @@ SwapPlayerAndEnemyLevels:
 ; also writes OAM data and loads tile patterns for the Red or Old Man back sprite's head
 ; (for use when scrolling the player sprite and enemy's silhouettes on screen)
 LoadPlayerBackPic:
-	ld a, [wSpriteOptions]
+	ld a, [wSpriteOptions2]
 	bit BIT_BACK_SPRITES, a
 	jr z, .ogBackSprite
 	ld a, [wBattleType]
@@ -6333,7 +6333,7 @@ LoadPlayerBackPic:
 	jr nz, .next
 	ld de, OldManPicBack
 .next
-	ld a, [wSpriteOptions]
+	ld a, [wSpriteOptions2]
 	bit BIT_BACK_SPRITES, a
 	jr z, .ogBackSpriteBank
 	ld a, BANK(RedPicBackSW)
@@ -6378,7 +6378,7 @@ LoadPlayerBackPic:
 	ld e, a
 	dec b
 	jr nz, .loop
-	ld a, [wSpriteOptions]
+	ld a, [wSpriteOptions2]
 	bit BIT_BACK_SPRITES, a
 	jr nz, .nextFinish
 .ogSpriteRoutine
@@ -7051,7 +7051,7 @@ LoadMonBackPic:
 	ld b, 7
 	ld c, 8
 	call ClearScreenArea
-	ld a, [wSpriteOptions]
+	ld a, [wSpriteOptions2]
 	bit BIT_BACK_SPRITES, a
 	jr nz, .swSpriteHeader
 .ogSpriteHeader
@@ -7061,7 +7061,7 @@ LoadMonBackPic:
 	ld hl,  wMonHBackSprite - wMonHeader
 .next
 	call UncompressMonBackSprite
-	ld a, [wSpriteOptions]
+	ld a, [wSpriteOptions2]
 	bit BIT_BACK_SPRITES, a
 	jr nz, .swSprites
 .ogSprites

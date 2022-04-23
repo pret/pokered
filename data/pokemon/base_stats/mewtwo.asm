@@ -26,4 +26,4 @@
 
 	dw BANK(MewtwoPicFront), BANK(MewtwoPicBack)
 
-	dw 0000, MewtwoPicBack
+	dw MewtwoPicFrontRG, MewtwoPicBack
