@@ -8,7 +8,7 @@
 	db 91 ; base exp
 
 	INCBIN "gfx/pokemon/front/growlithe.pic", 0, 1 ; sprite dimensions
-	dw GrowlithePicFront, GrowlithePicBack
+	dw GrowlithePicFront, GrowlithePicBackSW
 
 	db BITE, ROAR, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_SLOW ; growth rate
@@ -20,4 +20,6 @@
 	     SUBSTITUTE
 	; end
 
-	db 0 ; padding
+	dw BANK(GrowlithePicFront), BANK(GrowlithePicBack)
+
+	dw 0000, GrowlithePicBack

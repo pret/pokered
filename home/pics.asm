@@ -1,57 +1,77 @@
 ; uncompresses the front or back sprite of the specified mon
 ; assumes the corresponding mon header is already loaded
 ; hl contains offset to sprite pointer ($b for front or $d for back)
-UncompressMonSprite::
-	ld bc, wMonHeader
-	add hl, bc
-	ld a, [hli]
-	ld [wSpriteInputPtr], a    ; fetch sprite input pointer
-	ld a, [hl]
-	ld [wSpriteInputPtr+1], a
-; define (by index number) the bank that a pokemon's image is in
-; index = MEW:             bank $1
-; index = FOSSIL_KABUTOPS: bank $B
-;       index < $1F:       bank $9 ("Pics 1")
-; $1F ≤ index < $4A:       bank $A ("Pics 2")
-; $4A ≤ index < $74:       bank $B ("Pics 3")
-; $74 ≤ index < $99:       bank $C ("Pics 4")
-; $99 ≤ index:             bank $D ("Pics 5")
-	ld a, [wcf91]
-	ld b, a
-	cp MEW
-	ld a, BANK(MewPicFront)
-	jr z, .GotBank
-	ld a, b
-	cp FOSSIL_KABUTOPS
-	ld a, BANK(FossilKabutopsPic)
-	jr z, .GotBank
-	ld a, b
-	cp TANGELA + 1
-	ld a, BANK("Pics 1")
-	jr c, .GotBank
-	ld a, b
-	cp MOLTRES + 1
-	ld a, BANK("Pics 2")
-	jr c, .GotBank
-	ld a, b
-	cp BEEDRILL + 2
-	ld a, BANK("Pics 3")
-	jr c, .GotBank
-	ld a, b
-	cp STARMIE + 1
-	ld a, BANK("Pics 4")
-	jr c, .GotBank
-	ld a, BANK("Pics 5")
+UncompressMonBackSprite::
+	ld bc,wMonHeader
+    add hl,bc
+    ld a,[hli]
+    ld [wSpriteInputPtr],a    ; fetch sprite input pointer
+    ld a,[hl]
+    ld [wSpriteInputPtr+1],a
+    ld a, [wSpriteOptions]
+    bit BIT_BACK_SPRITES, a
+    jr nz, .swSprites
+.ogSprites
+    ld a,[wMonHBackPicBank]
+    jr .GotBank
+.swSprites
+    ld a,[wMonHPicBank]
 .GotBank
-	jp UncompressSpriteData
+    jp UncompressSpriteData
+
+
+UncompressMonSprite::
+    ld bc,wMonHeader
+    add hl,bc
+    ld a,[hli]
+    ld [wSpriteInputPtr],a    ; fetch sprite input pointer
+    ld a,[hl]
+    ld [wSpriteInputPtr+1],a
+    ld a,[wcf91] ; XXX name for this ram location
+    cp FOSSIL_KABUTOPS
+    jr z,.RecallBank
+    cp FOSSIL_AERODACTYL
+    jr z,.RecallBank
+    cp MON_GHOST
+    jr z,.RecallBank
+    ld a, b
+    ld a,[wMonHPicBank]
+    jr .GotBank
+.RecallBank
+    ld a,BANK(FossilKabutopsPic)
+.GotBank
+    jp UncompressSpriteData
 
 ; de: destination location
 LoadMonFrontSprite::
 	push de
+	ld a,[wcf91]
+	cp BULBASAUR
+	jr z,.bulbasaurOptionCheck
+	cp BLASTOISE
+	jr z,.blastoiseOptionCheck
+	jr .defaultSprite
+.bulbasaurOptionCheck
+	ld a, [wSpriteOptions]
+	bit BIT_BULBASAUR_SPRITE, a
+	jr nz,.optionSprite
+	jr .defaultSprite
+.blastoiseOptionCheck
+	ld a, [wSpriteOptions]
+	bit BIT_BLASTOISE_SPRITE, a
+	jr nz,.optionSprite
+.defaultSprite
 	ld hl, wMonHFrontSprite - wMonHeader
+	jr .load
+.optionSprite
+	ld hl, wMonHAltFrontSprite - wMonHeader
+.load
 	call UncompressMonSprite
 	ld hl, wMonHSpriteDim
 	ld a, [hli]
+	; fall through
+
+LoadUncompressedBackSprite::
 	ld c, a
 	pop de
 	; fall through

@@ -177,6 +177,16 @@ ROMX $2B
 	"Pokédex Text"
 ROMX $2C
 	"Move Names"
+ROMX $2D
+	"Pics 7"
+ROMX $2E
+	"Pics 8"
+ROMX $2F
+	"Pics 9"
+ROMX $30
+	"Pics 10"
+ROMX $31
+    "newMenus"
 WRAM0
 	"Audio RAM"
 	org $c100

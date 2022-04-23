@@ -8,7 +8,7 @@
 	db 64 ; base exp
 
 	INCBIN "gfx/pokemon/front/mew.pic", 0, 1 ; sprite dimensions
-	dw MewPicFront, MewPicBack
+	dw MewPicFront, MewPicBackSW
 
 	db POUND, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_SLOW ; growth rate
@@ -28,4 +28,6 @@
 	     UNUSED
 	; end
 
-	db %11111111 ; padding
+	dw BANK(MewPicFront), BANK(MewPicBack)
+
+	dw 0000, MewPicBack

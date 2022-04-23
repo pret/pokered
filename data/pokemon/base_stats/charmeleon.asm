@@ -8,7 +8,7 @@
 	db 142 ; base exp
 
 	INCBIN "gfx/pokemon/front/charmeleon.pic", 0, 1 ; sprite dimensions
-	dw CharmeleonPicFront, CharmeleonPicBack
+	dw CharmeleonPicFront, CharmeleonPicBackSW
 
 	db SCRATCH, GROWL, EMBER, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_SLOW ; growth rate
@@ -21,4 +21,6 @@
 	     REST,         SUBSTITUTE,   CUT,          STRENGTH
 	; end
 
-	db 0 ; padding
+	dw BANK(CharmeleonPicFront), BANK(CharmeleonPicBack)
+
+	dw 0000, CharmeleonPicBack

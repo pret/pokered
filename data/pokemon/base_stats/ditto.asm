@@ -8,7 +8,7 @@
 	db 61 ; base exp
 
 	INCBIN "gfx/pokemon/front/ditto.pic", 0, 1 ; sprite dimensions
-	dw DittoPicFront, DittoPicBack
+	dw DittoPicFront, DittoPicBackSW
 
 	db TRANSFORM, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -17,4 +17,6 @@
 	tmhm
 	; end
 
-	db 0 ; padding
+	dw BANK(DittoPicFront), BANK(DittoPicBack)
+
+	dw 0000, DittoPicBack

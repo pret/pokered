@@ -8,7 +8,7 @@
 	db 73 ; base exp
 
 	INCBIN "gfx/pokemon/front/abra.pic", 0, 1 ; sprite dimensions
-	dw AbraPicFront, AbraPicBack
+	dw AbraPicFront, AbraPicBackSW
 
 	db TELEPORT, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_SLOW ; growth rate
@@ -21,4 +21,6 @@
 	     PSYWAVE,      TRI_ATTACK,   SUBSTITUTE,   FLASH
 	; end
 
-	db 0 ; padding
+	dw BANK(AbraPicFront), BANK(AbraPicBack)
+
+	dw 0000, AbraPicBack

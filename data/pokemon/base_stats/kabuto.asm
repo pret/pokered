@@ -8,7 +8,7 @@
 	db 119 ; base exp
 
 	INCBIN "gfx/pokemon/front/kabuto.pic", 0, 1 ; sprite dimensions
-	dw KabutoPicFront, KabutoPicBack
+	dw KabutoPicFront, KabutoPicBackSW
 
 	db SCRATCH, HARDEN, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -20,4 +20,6 @@
 	     SURF
 	; end
 
-	db 0 ; padding
+	dw BANK(KabutoPicFront), BANK(KabutoPicBack)
+
+	dw 0000, KabutoPicBack

@@ -8,7 +8,7 @@
 	db 145 ; base exp
 
 	INCBIN "gfx/pokemon/front/kadabra.pic", 0, 1 ; sprite dimensions
-	dw KadabraPicFront, KadabraPicBack
+	dw KadabraPicFront, KadabraPicBackSW
 
 	db TELEPORT, CONFUSION, DISABLE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_SLOW ; growth rate
@@ -21,4 +21,6 @@
 	     THUNDER_WAVE, PSYWAVE,      TRI_ATTACK,   SUBSTITUTE,   FLASH
 	; end
 
-	db 0 ; padding
+	dw BANK(KadabraPicFront), BANK(KadabraPicBack)
+
+	dw 0000, KadabraPicBack

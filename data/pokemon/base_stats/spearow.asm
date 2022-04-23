@@ -8,7 +8,7 @@
 	db 58 ; base exp
 
 	INCBIN "gfx/pokemon/front/spearow.pic", 0, 1 ; sprite dimensions
-	dw SpearowPicFront, SpearowPicBack
+	dw SpearowPicFront, SpearowPicBackSW
 
 	db PECK, GROWL, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -19,4 +19,6 @@
 	     SKY_ATTACK,   REST,         SUBSTITUTE,   FLY
 	; end
 
-	db 0 ; padding
+	dw BANK(SpearowPicFront), BANK(SpearowPicBack)
+
+	dw 0000, SpearowPicBack

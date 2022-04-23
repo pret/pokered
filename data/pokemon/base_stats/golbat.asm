@@ -8,7 +8,7 @@
 	db 171 ; base exp
 
 	INCBIN "gfx/pokemon/front/golbat.pic", 0, 1 ; sprite dimensions
-	dw GolbatPicFront, GolbatPicBack
+	dw GolbatPicFront, GolbatPicBackSW
 
 	db LEECH_LIFE, SCREECH, BITE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -19,4 +19,6 @@
 	     BIDE,         SWIFT,        REST,         SUBSTITUTE
 	; end
 
-	db 0 ; padding
+	dw BANK(GolbatPicFront), BANK(GolbatPicBack)
+
+	dw 0000, GolbatPicBack

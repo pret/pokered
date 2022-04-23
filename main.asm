@@ -357,3 +357,7 @@ INCLUDE "data/battle_anims/frame_blocks.asm"
 INCLUDE "engine/movie/evolution.asm"
 INCLUDE "engine/overworld/elevator.asm"
 INCLUDE "engine/items/tm_prices.asm"
+
+
+SECTION "newMenus", ROMX
+INCLUDE "engine/menus/sprite_options_menu.asm"

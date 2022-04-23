@@ -8,7 +8,7 @@
 	db 92 ; base exp
 
 	INCBIN "gfx/pokemon/front/eevee.pic", 0, 1 ; sprite dimensions
-	dw EeveePicFront, EeveePicBack
+	dw EeveePicFront, EeveePicBackSW
 
 	db TACKLE, SAND_ATTACK, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -19,4 +19,6 @@
 	     SKULL_BASH,   REST,         SUBSTITUTE
 	; end
 
-	db 0 ; padding
+	dw BANK(EeveePicFront), BANK(EeveePicBack)
+
+	dw 0000, EeveePicBack

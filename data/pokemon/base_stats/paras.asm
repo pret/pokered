@@ -8,7 +8,7 @@
 	db 70 ; base exp
 
 	INCBIN "gfx/pokemon/front/paras.pic", 0, 1 ; sprite dimensions
-	dw ParasPicFront, ParasPicBack
+	dw ParasPicFront, ParasPicBackSW
 
 	db SCRATCH, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -20,4 +20,6 @@
 	     SUBSTITUTE,   CUT
 	; end
 
-	db 0 ; padding
+	dw BANK(ParasPicFront), BANK(ParasPicBack)
+
+	dw 0000, ParasPicBack

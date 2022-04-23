@@ -8,7 +8,7 @@
 	db 115 ; base exp
 
 	INCBIN "gfx/pokemon/front/krabby.pic", 0, 1 ; sprite dimensions
-	dw KrabbyPicFront, KrabbyPicBack
+	dw KrabbyPicFront, KrabbyPicBackSW
 
 	db BUBBLE, LEER, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -20,4 +20,6 @@
 	     CUT,          SURF,         STRENGTH
 	; end
 
-	db 0 ; padding
+	dw BANK(KrabbyPicFront), BANK(KrabbyPicBack)
+
+	dw 0000, KrabbyPicBack

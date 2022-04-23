@@ -8,7 +8,7 @@
 	db 86 ; base exp
 
 	INCBIN "gfx/pokemon/front/geodude.pic", 0, 1 ; sprite dimensions
-	dw GeodudePicFront, GeodudePicBack
+	dw GeodudePicFront, GeodudePicBackSW
 
 	db TACKLE, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_SLOW ; growth rate
@@ -21,4 +21,6 @@
 	     ROCK_SLIDE,   SUBSTITUTE,   STRENGTH
 	; end
 
-	db 0 ; padding
+	dw BANK(GeodudePicFront), BANK(GeodudePicBack)
+
+	dw 0000, GeodudePicBack

@@ -8,7 +8,7 @@
 	db 126 ; base exp
 
 	INCBIN "gfx/pokemon/front/haunter.pic", 0, 1 ; sprite dimensions
-	dw HaunterPicFront, HaunterPicBack
+	dw HaunterPicFront, HaunterPicBackSW
 
 	db LICK, CONFUSE_RAY, NIGHT_SHADE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_SLOW ; growth rate
@@ -19,4 +19,6 @@
 	     DREAM_EATER,  REST,         PSYWAVE,      EXPLOSION,    SUBSTITUTE
 	; end
 
-	db 0 ; padding
+	dw BANK(HaunterPicFront), BANK(HaunterPicBack)
+
+	dw 0000, HaunterPicBack

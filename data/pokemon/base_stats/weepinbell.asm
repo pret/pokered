@@ -8,7 +8,7 @@
 	db 151 ; base exp
 
 	INCBIN "gfx/pokemon/front/weepinbell.pic", 0, 1 ; sprite dimensions
-	dw WeepinbellPicFront, WeepinbellPicBack
+	dw WeepinbellPicFront, WeepinbellPicBackSW
 
 	db VINE_WHIP, GROWTH, WRAP, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_SLOW ; growth rate
@@ -19,4 +19,6 @@
 	     BIDE,         REST,         SUBSTITUTE,   CUT
 	; end
 
-	db 0 ; padding
+	dw BANK(WeepinbellPicFront), BANK(WeepinbellPicBack)
+
+	dw 0000, WeepinbellPicBack

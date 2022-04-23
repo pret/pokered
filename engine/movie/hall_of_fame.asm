@@ -192,6 +192,10 @@ HoFLoadPlayerPics:
 	call CopyData
 	ld de, vFrontPic
 	call InterlaceMergeSpriteBuffers
+	ld a, [wSpriteOptions]
+	bit BIT_BACK_SPRITES, a
+	jr nz, .swSprite
+.ogSprite
 	ld de, RedPicBack
 	ld a, BANK(RedPicBack)
 	call UncompressSpriteFromDE
@@ -199,6 +203,11 @@ HoFLoadPlayerPics:
 	ld de, vBackPic
 	call InterlaceMergeSpriteBuffers
 	ld c, $1
+.swSprite
+	ld de, RedPicBackSW
+	ld a, BANK(RedPicBackSW)
+	call UncompressSpriteFromDE
+	farcall LoadBackSpriteUnzoomed
 
 HoFLoadMonPlayerPicTileIDs:
 ; c = base tile ID

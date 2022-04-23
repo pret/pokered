@@ -8,7 +8,7 @@
 	db 212 ; base exp
 
 	INCBIN "gfx/pokemon/front/exeggutor.pic", 0, 1 ; sprite dimensions
-	dw ExeggutorPicFront, ExeggutorPicBack
+	dw ExeggutorPicFront, ExeggutorPicBackSW
 
 	db BARRAGE, HYPNOSIS, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_SLOW ; growth rate
@@ -20,4 +20,6 @@
 	     REST,         PSYWAVE,      EXPLOSION,    SUBSTITUTE,   STRENGTH
 	; end
 
-	db 0 ; padding
+	dw BANK(ExeggutorPicFront), BANK(ExeggutorPicBack)
+
+	dw 0000, ExeggutorPicBack

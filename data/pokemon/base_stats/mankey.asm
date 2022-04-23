@@ -8,7 +8,7 @@
 	db 74 ; base exp
 
 	INCBIN "gfx/pokemon/front/mankey.pic", 0, 1 ; sprite dimensions
-	dw MankeyPicFront, MankeyPicBack
+	dw MankeyPicFront, MankeyPicBackSW
 
 	db SCRATCH, LEER, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -21,4 +21,6 @@
 	     REST,         ROCK_SLIDE,   SUBSTITUTE,   STRENGTH
 	; end
 
-	db 0 ; padding
+	dw BANK(MankeyPicFront), BANK(MankeyPicBack)
+
+	dw 0000, MankeyPicBack

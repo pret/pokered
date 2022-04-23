@@ -8,7 +8,7 @@
 	db 214 ; base exp
 
 	INCBIN "gfx/pokemon/front/gyarados.pic", 0, 1 ; sprite dimensions
-	dw GyaradosPicFront, GyaradosPicBack
+	dw GyaradosPicFront, GyaradosPicBackSW
 
 	db BITE, DRAGON_RAGE, LEER, HYDRO_PUMP ; level 1 learnset
 	db GROWTH_SLOW ; growth rate
@@ -21,4 +21,6 @@
 	     SUBSTITUTE,   SURF,         STRENGTH
 	; end
 
-	db 0 ; padding
+	dw BANK(GyaradosPicFront), BANK(GyaradosPicBack)
+
+	dw 0000, GyaradosPicBack

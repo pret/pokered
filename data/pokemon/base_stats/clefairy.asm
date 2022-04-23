@@ -8,7 +8,7 @@
 	db 68 ; base exp
 
 	INCBIN "gfx/pokemon/front/clefairy.pic", 0, 1 ; sprite dimensions
-	dw ClefairyPicFront, ClefairyPicBack
+	dw ClefairyPicFront, ClefairyPicBackSW
 
 	db POUND, GROWL, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_FAST ; growth rate
@@ -23,4 +23,6 @@
 	     SUBSTITUTE,   STRENGTH,     FLASH
 	; end
 
-	db 0 ; padding
+	dw BANK(ClefairyPicFront), BANK(ClefairyPicBack)
+
+	dw 0000, ClefairyPicBack

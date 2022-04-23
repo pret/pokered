@@ -8,7 +8,7 @@
 	db 67 ; base exp
 
 	INCBIN "gfx/pokemon/front/dratini.pic", 0, 1 ; sprite dimensions
-	dw DratiniPicFront, DratiniPicBack
+	dw DratiniPicFront, DratiniPicBackSW
 
 	db WRAP, LEER, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_SLOW ; growth rate
@@ -21,4 +21,6 @@
 	     THUNDER_WAVE, SUBSTITUTE,   SURF
 	; end
 
-	db 0 ; padding
+	dw BANK(DratiniPicFront), BANK(DratiniPicBack)
+
+	dw 0000, DratiniPicBack

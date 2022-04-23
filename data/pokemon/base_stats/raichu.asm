@@ -8,7 +8,7 @@
 	db 122 ; base exp
 
 	INCBIN "gfx/pokemon/front/raichu.pic", 0, 1 ; sprite dimensions
-	dw RaichuPicFront, RaichuPicBack
+	dw RaichuPicFront, RaichuPicBackSW
 
 	db THUNDERSHOCK, GROWL, THUNDER_WAVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -21,4 +21,6 @@
 	     THUNDER_WAVE, SUBSTITUTE,   FLASH
 	; end
 
-	db 0 ; padding
+	dw BANK(RaichuPicFront), BANK(RaichuPicBack)
+
+	dw 0000, RaichuPicBack

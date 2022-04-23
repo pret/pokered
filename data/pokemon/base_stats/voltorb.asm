@@ -8,7 +8,7 @@
 	db 103 ; base exp
 
 	INCBIN "gfx/pokemon/front/voltorb.pic", 0, 1 ; sprite dimensions
-	dw VoltorbPicFront, VoltorbPicBack
+	dw VoltorbPicFront, VoltorbPicBackSW
 
 	db TACKLE, SCREECH, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -20,4 +20,6 @@
 	     SUBSTITUTE,   FLASH
 	; end
 
-	db 0 ; padding
+	dw BANK(VoltorbPicFront), BANK(VoltorbPicBack)
+
+	dw 0000, VoltorbPicBack

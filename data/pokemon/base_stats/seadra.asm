@@ -8,7 +8,7 @@
 	db 155 ; base exp
 
 	INCBIN "gfx/pokemon/front/seadra.pic", 0, 1 ; sprite dimensions
-	dw SeadraPicFront, SeadraPicBack
+	dw SeadraPicFront, SeadraPicBackSW
 
 	db BUBBLE, SMOKESCREEN, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -20,4 +20,6 @@
 	     SUBSTITUTE,   SURF
 	; end
 
-	db 0 ; padding
+	dw BANK(SeadraPicFront), BANK(SeadraPicBack)
+
+	dw 0000, SeadraPicBack

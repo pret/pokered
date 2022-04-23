@@ -8,7 +8,7 @@
 	db 109 ; base exp
 
 	INCBIN "gfx/pokemon/front/wigglytuff.pic", 0, 1 ; sprite dimensions
-	dw WigglytuffPicFront, WigglytuffPicBack
+	dw WigglytuffPicFront, WigglytuffPicBackSW
 
 	db SING, DISABLE, DEFENSE_CURL, DOUBLESLAP ; level 1 learnset
 	db GROWTH_FAST ; growth rate
@@ -23,4 +23,6 @@
 	     SUBSTITUTE,   STRENGTH,     FLASH
 	; end
 
-	db 0 ; padding
+	dw BANK(WigglytuffPicFront), BANK(WigglytuffPicBack)
+
+	dw 0000, WigglytuffPicBack

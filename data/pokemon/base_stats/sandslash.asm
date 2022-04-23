@@ -8,7 +8,7 @@
 	db 163 ; base exp
 
 	INCBIN "gfx/pokemon/front/sandslash.pic", 0, 1 ; sprite dimensions
-	dw SandslashPicFront, SandslashPicBack
+	dw SandslashPicFront, SandslashPicBackSW
 
 	db SCRATCH, SAND_ATTACK, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -21,4 +21,6 @@
 	     CUT,          STRENGTH
 	; end
 
-	db 0 ; padding
+	dw BANK(SandslashPicFront), BANK(SandslashPicBack)
+
+	dw 0000, SandslashPicBack

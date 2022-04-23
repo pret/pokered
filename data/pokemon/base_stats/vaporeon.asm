@@ -8,7 +8,7 @@
 	db 196 ; base exp
 
 	INCBIN "gfx/pokemon/front/vaporeon.pic", 0, 1 ; sprite dimensions
-	dw VaporeonPicFront, VaporeonPicBack
+	dw VaporeonPicFront, VaporeonPicBackSW
 
 	db TACKLE, SAND_ATTACK, QUICK_ATTACK, WATER_GUN ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -20,4 +20,6 @@
 	     SKULL_BASH,   REST,         SUBSTITUTE,   SURF
 	; end
 
-	db 0 ; padding
+	dw BANK(VaporeonPicFront), BANK(VaporeonPicBack)
+
+	dw 0000, VaporeonPicBack

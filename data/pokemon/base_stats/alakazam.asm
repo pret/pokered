@@ -8,7 +8,7 @@
 	db 186 ; base exp
 
 	INCBIN "gfx/pokemon/front/alakazam.pic", 0, 1 ; sprite dimensions
-	dw AlakazamPicFront, AlakazamPicBack
+	dw AlakazamPicFront, AlakazamPicBackSW
 
 	db TELEPORT, CONFUSION, DISABLE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_SLOW ; growth rate
@@ -22,4 +22,6 @@
 	     FLASH
 	; end
 
-	db 0 ; padding
+	dw BANK(AlakazamPicFront), BANK(AlakazamPicBack)
+
+	dw 0000, AlakazamPicBack

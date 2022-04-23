@@ -8,7 +8,7 @@
 	db 124 ; base exp
 
 	INCBIN "gfx/pokemon/front/marowak.pic", 0, 1 ; sprite dimensions
-	dw MarowakPicFront, MarowakPicBack
+	dw MarowakPicFront, MarowakPicBackSW
 
 	db BONE_CLUB, GROWL, LEER, FOCUS_ENERGY ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -22,4 +22,6 @@
 	     STRENGTH
 	; end
 
-	db 0 ; padding
+	dw BANK(MarowakPicFront), BANK(MarowakPicBack)
+
+	dw 0000, MarowakPicBack

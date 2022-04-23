@@ -8,7 +8,7 @@
 	db 83 ; base exp
 
 	INCBIN "gfx/pokemon/front/horsea.pic", 0, 1 ; sprite dimensions
-	dw HorseaPicFront, HorseaPicBack
+	dw HorseaPicFront, HorseaPicBackSW
 
 	db BUBBLE, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -20,4 +20,6 @@
 	     SURF
 	; end
 
-	db 0 ; padding
+	dw BANK(HorseaPicFront), BANK(HorseaPicBack)
+
+	dw 0000, HorseaPicBack

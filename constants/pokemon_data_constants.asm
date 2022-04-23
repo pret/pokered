@@ -20,7 +20,11 @@ BASE_BACKPIC     rw
 BASE_MOVES       rb NUM_MOVES
 BASE_GROWTH_RATE rb
 BASE_TMHM        rb (NUM_TM_HM + 7) / 8
-                 rb_skip
+BASE_PICBANK     rw
+BASE_BACKPICBANK rw
+BASE_ALTFRONTPIC rw
+BASE_ALTBACKPIC  rw
+          
 BASE_DATA_SIZE EQU _RS
 
 

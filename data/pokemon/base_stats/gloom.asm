@@ -8,7 +8,7 @@
 	db 132 ; base exp
 
 	INCBIN "gfx/pokemon/front/gloom.pic", 0, 1 ; sprite dimensions
-	dw GloomPicFront, GloomPicBack
+	dw GloomPicFront, GloomPicBackSW
 
 	db ABSORB, POISONPOWDER, STUN_SPORE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_SLOW ; growth rate
@@ -19,4 +19,6 @@
 	     BIDE,         REST,         SUBSTITUTE,   CUT
 	; end
 
-	db 0 ; padding
+	dw BANK(GloomPicFront), BANK(GloomPicBack)
+
+	dw 0000, GloomPicBack

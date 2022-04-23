@@ -8,7 +8,7 @@
 	db 195 ; base exp
 
 	INCBIN "gfx/pokemon/front/nidoking.pic", 0, 1 ; sprite dimensions
-	dw NidokingPicFront, NidokingPicBack
+	dw NidokingPicFront, NidokingPicBackSW
 
 	db TACKLE, HORN_ATTACK, POISON_STING, THRASH ; level 1 learnset
 	db GROWTH_MEDIUM_SLOW ; growth rate
@@ -23,4 +23,6 @@
 	     SURF,         STRENGTH
 	; end
 
-	db 0 ; padding
+	dw BANK(NidokingPicFront), BANK(NidokingPicBack)
+
+	dw 0000, NidokingPicBack

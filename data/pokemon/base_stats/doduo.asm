@@ -8,7 +8,7 @@
 	db 96 ; base exp
 
 	INCBIN "gfx/pokemon/front/doduo.pic", 0, 1 ; sprite dimensions
-	dw DoduoPicFront, DoduoPicBack
+	dw DoduoPicFront, DoduoPicBackSW
 
 	db PECK, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -20,4 +20,6 @@
 	     FLY
 	; end
 
-	db 0 ; padding
+	dw BANK(DoduoPicFront), BANK(DoduoPicBack)
+
+	dw 0000, DoduoPicBack

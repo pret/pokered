@@ -8,7 +8,7 @@
 	db 102 ; base exp
 
 	INCBIN "gfx/pokemon/front/drowzee.pic", 0, 1 ; sprite dimensions
-	dw DrowzeePicFront, DrowzeePicBack
+	dw DrowzeePicFront, DrowzeePicBackSW
 
 	db POUND, HYPNOSIS, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -21,4 +21,6 @@
 	     THUNDER_WAVE, PSYWAVE,      TRI_ATTACK,   SUBSTITUTE,   FLASH
 	; end
 
-	db 0 ; padding
+	dw BANK(DrowzeePicFront), BANK(DrowzeePicBack)
+
+	dw 0000, DrowzeePicBack

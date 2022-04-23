@@ -486,8 +486,17 @@ DisplayOptionMenu:
 	bit BIT_A_BUTTON, b
 	jr z, .checkDirectionKeys
 	ld a, [wTopMenuItemY]
-	cp 16 ; is the cursor on Cancel?
-	jr nz, .loop
+	cp 16 ; is the cursor on the cancel row?
+	jr z, .cancelMore
+	jr .loop
+.cancelMore
+	ld a, [wTopMenuItemX]
+	cp 10 ; is the cursor on cancel?
+	jr z, .exitMenu
+	ld a, SFX_PRESS_AB
+	call PlaySound
+	call ClearScreen
+	callfar DisplaySpriteOptions
 .exitMenu
 	ld a, SFX_PRESS_AB
 	call PlaySound
@@ -507,7 +516,7 @@ DisplayOptionMenu:
 	cp 13 ; cursor in Battle Style section?
 	jr z, .cursorInBattleStyle
 	cp 16 ; cursor on Cancel?
-	jr z, .loop
+	jr z, .cursorCancelRow
 .cursorInTextSpeed
 	bit BIT_D_LEFT, b
 	jp nz, .pressedLeftInTextSpeed
@@ -558,6 +567,11 @@ DisplayOptionMenu:
 	xor $0b ; toggle between 1 and 10
 	ld [wOptionsBattleStyleCursorX], a
 	jp .eraseOldMenuCursor
+.cursorCancelRow
+	ld a, [wOptionsCancelCursorX] ; battle style cursor X coordinate
+	xor $0b ; toggle between 1 and 10
+	ld [wOptionsCancelCursorX], a
+	jp .eraseOldMenuCursor
 .pressedLeftInTextSpeed
 	ld a, [wOptionsTextSpeedCursorX] ; text speed cursor X coordinate
 	cp 1                             ; leftmost position
@@ -596,7 +610,7 @@ BattleStyleOptionText:
 	next " SHIFT    SET@"
 
 OptionMenuCancelText:
-	db "CANCEL@"
+	db "NEXT     CANCEL@"
 
 ; sets the options variable according to the current placement of the menu cursors in the options menu
 SetOptionsFromCursorPositions:

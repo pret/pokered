@@ -8,7 +8,7 @@
 	db 111 ; base exp
 
 	INCBIN "gfx/pokemon/front/goldeen.pic", 0, 1 ; sprite dimensions
-	dw GoldeenPicFront, GoldeenPicBack
+	dw GoldeenPicFront, GoldeenPicBackSW
 
 	db PECK, TAIL_WHIP, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -20,4 +20,6 @@
 	     SUBSTITUTE,   SURF
 	; end
 
-	db 0 ; padding
+	dw BANK(GoldeenPicFront), BANK(GoldeenPicBack)
+
+	dw 0000, GoldeenPicBack

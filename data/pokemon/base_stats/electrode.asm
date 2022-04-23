@@ -8,7 +8,7 @@
 	db 150 ; base exp
 
 	INCBIN "gfx/pokemon/front/electrode.pic", 0, 1 ; sprite dimensions
-	dw ElectrodePicFront, ElectrodePicBack
+	dw ElectrodePicFront, ElectrodePicBackSW
 
 	db TACKLE, SCREECH, SONICBOOM, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -20,4 +20,6 @@
 	     THUNDER_WAVE, EXPLOSION,    SUBSTITUTE,   FLASH
 	; end
 
-	db 0 ; padding
+	dw BANK(ElectrodePicFront), BANK(ElectrodePicBack)
+
+	dw 0000, ElectrodePicBack

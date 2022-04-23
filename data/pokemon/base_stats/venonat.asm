@@ -8,7 +8,7 @@
 	db 75 ; base exp
 
 	INCBIN "gfx/pokemon/front/venonat.pic", 0, 1 ; sprite dimensions
-	dw VenonatPicFront, VenonatPicBack
+	dw VenonatPicFront, VenonatPicBackSW
 
 	db TACKLE, DISABLE, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -19,4 +19,6 @@
 	     BIDE,         REST,         PSYWAVE,      SUBSTITUTE
 	; end
 
-	db 0 ; padding
+	dw BANK(VenonatPicFront), BANK(VenonatPicBack)
+
+	dw 0000, VenonatPicBack
