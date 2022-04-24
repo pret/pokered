@@ -194,8 +194,8 @@ ElectrodePicBackSW::   INCBIN "gfx/pokemon/back_sw/electrodeb.pic"
 ClefablePicFront::     INCBIN "gfx/pokemon/front/clefable.pic"
 ClefablePicBackSW::    INCBIN "gfx/pokemon/back_sw/clefableb.pic"
 
-RedPicBackSW::         INCBIN "gfx/player/redb.pic"
-OldManPicBackSW::      INCBIN "gfx/battle/oldmanb.pic"
+RedPicBackSW::         INCBIN "gfx/player/redb_big.pic"
+OldManPicBackSW::      INCBIN "gfx/battle/oldmanb_big.pic"
 
 
 SECTION "Pics 5", ROMX, BANK[PICS_5]

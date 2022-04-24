@@ -8,7 +8,7 @@ UncompressMonBackSprite::
     ld [wSpriteInputPtr],a    ; fetch sprite input pointer
     ld a,[hl]
     ld [wSpriteInputPtr+1],a
-    ld a, [wOptions]
+    ld a, [wSpriteOptions2]
     bit BIT_BACK_SPRITES, a
     jr nz, .swSprites
 .ogSprites
