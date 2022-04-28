@@ -211,7 +211,7 @@ _CableClubNPCPleaseWaitText::
 	text_end
 
 _CableClubNPCLinkClosedBecauseOfInactivityText::
-	vc_patch Change_MSG
+	vc_patch Change_link_closed_inactivity_message
 IF DEF(_RED_VC) || DEF(_BLUE_VC)
 	text "Please come again!"
 	done
