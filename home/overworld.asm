@@ -2172,7 +2172,8 @@ LoadMapHeader::
 	ld b, a
 	ld c, $00
 .loadSpriteLoop
-	ld a, [hli]
+	call MapSpritePictureIDs
+	inc hl
 	ld [de], a ; x#SPRITESTATEDATA1_PICTUREID
 	inc d
 	ld a, $04
@@ -2283,6 +2284,32 @@ LoadMapHeader::
 	pop af
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
+	ret
+
+MapSpritePictureIDs::
+	ld a, [wSpriteOptions2]
+	bit BIT_MENU_ICON_SPRITES, a
+	jr z, .mapSpriteCheck
+	jr .noSpriteAdd
+.mapSpriteCheck
+	push de
+	ld de, AltSpriteMappingTable
+.loop ; find the alt sprite mapping in the array
+	ld a, [de]
+	inc de
+	inc de
+	cp $ff
+	jr z, .mapSpriteDone
+	cp [hl]
+	jr nz, .loop
+	dec de
+	ld a, [de] ; replacement sprite from matching array entry
+	pop de
+	ret
+.mapSpriteDone
+	pop de
+.noSpriteAdd
+	ld a, [hl]
 	ret
 
 ; function to copy map connection data from ROM to WRAM
@@ -2453,3 +2480,5 @@ LoadDestinationWarpPosition::
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret
+
+INCLUDE "data/sprites/alt_sprite_mappings.asm"

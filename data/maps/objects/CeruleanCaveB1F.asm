@@ -7,7 +7,7 @@ CeruleanCaveB1F_Object:
 	def_bg_events
 
 	def_object_events
-	object_event 27, 13, SPRITE_MONSTER, STAY, DOWN, 1, MEWTWO, 70
+	object_event 27, 13, SPRITE_PSYCHIC, STAY, DOWN, 1, MEWTWO, 70
 	object_event 16,  9, SPRITE_POKE_BALL, STAY, NONE, 2, ULTRA_BALL
 	object_event 18,  1, SPRITE_POKE_BALL, STAY, NONE, 3, MAX_REVIVE
 

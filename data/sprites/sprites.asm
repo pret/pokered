@@ -37,7 +37,7 @@ SpriteSheetPointerTable:
 	overworld_sprite MiddleAgedWomanSprite, 12  ; SPRITE_MIDDLE_AGED_WOMAN
 	overworld_sprite BrunetteGirlSprite, 12     ; SPRITE_BRUNETTE_GIRL
 	overworld_sprite LanceSprite, 12            ; SPRITE_LANCE
-	overworld_sprite ScientistSprite, 12        ; SPRITE_UNUSED_SCIENTIST
+	overworld_sprite Quadruped2Sprite, 12       ; SPRITE_UNUSED_SCIENTIST
 	overworld_sprite ScientistSprite, 12        ; SPRITE_SCIENTIST
 	overworld_sprite RockerSprite, 12           ; SPRITE_ROCKER
 	overworld_sprite SwimmerSprite, 12          ; SPRITE_SWIMMER
@@ -67,6 +67,12 @@ SpriteSheetPointerTable:
 	overworld_sprite BrunoSprite, 12            ; SPRITE_BRUNO
 	overworld_sprite LoreleiSprite, 12          ; SPRITE_LORELEI
 	overworld_sprite SeelSprite, 12             ; SPRITE_SEEL
+	overworld_sprite Monster2Sprite, 12         ; SPRITE_MONSTER2
+	overworld_sprite FuzzballSprite, 12     	; SPRITE_FUZZBALL
+	overworld_sprite FuzzballSprite, 12     	; SPRITE_FUZZBALL2
+	overworld_sprite PsychicSprite, 12     	    ; SPRITE_PSYCHIC
+	overworld_sprite VoltorbSprite, 12     		; SPRITE_VOLTORB
+	overworld_sprite FightingSprite, 12     	; SPRITE_FIGHTING
 	overworld_sprite PokeBallSprite, 4          ; SPRITE_POKE_BALL
 	overworld_sprite FossilSprite, 4            ; SPRITE_FOSSIL
 	overworld_sprite BoulderSprite, 4           ; SPRITE_BOULDER
@@ -74,9 +80,8 @@ SpriteSheetPointerTable:
 	overworld_sprite PokedexSprite, 4           ; SPRITE_POKEDEX
 	overworld_sprite ClipboardSprite, 4         ; SPRITE_CLIPBOARD
 	overworld_sprite SnorlaxSprite, 4           ; SPRITE_SNORLAX
-	overworld_sprite OldAmberSprite, 4          ; SPRITE_UNUSED_OLD_AMBER
+	overworld_sprite HelixSprite, 4             ; SPRITE_HELIX
 	overworld_sprite OldAmberSprite, 4          ; SPRITE_OLD_AMBER
-	overworld_sprite GamblerAsleepSprite, 4     ; SPRITE_UNUSED_GAMBLER_ASLEEP_1
-	overworld_sprite GamblerAsleepSprite, 4     ; SPRITE_UNUSED_GAMBLER_ASLEEP_2
 	overworld_sprite GamblerAsleepSprite, 4     ; SPRITE_GAMBLER_ASLEEP
+	overworld_sprite Monster2Sprite, 4          ; SPRITE_MONSTER2_STILL
 	assert_table_length NUM_SPRITES

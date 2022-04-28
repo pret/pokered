@@ -29,9 +29,10 @@ CeruleanCity_Object:
 	object_event  9, 21, SPRITE_SUPER_NERD, WALK, LEFT_RIGHT, 5 ; person
 	object_event 28, 12, SPRITE_GUARD, STAY, DOWN, 6 ; person
 	object_event 29, 26, SPRITE_COOLTRAINER_F, STAY, LEFT, 7 ; person
-	object_event 28, 26, SPRITE_MONSTER, STAY, DOWN, 8 ; person
+	object_event 28, 26, SPRITE_MONSTER2_STILL, STAY, DOWN, 8 ; person
 	object_event  9, 27, SPRITE_COOLTRAINER_F, WALK, LEFT_RIGHT, 9 ; person
 	object_event  4, 12, SPRITE_SUPER_NERD, STAY, DOWN, 10 ; person
 	object_event 27, 12, SPRITE_GUARD, STAY, DOWN, 11 ; person
 
 	def_warps_to CERULEAN_CITY
+

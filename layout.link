@@ -185,8 +185,10 @@ ROMX $2F
 	"Pics 9"
 ROMX $30
 	"Pics 10"
-ROMX $31
-    "newMenus"
+ROMX $34
+	"Party Sprites"
+ROMX $35
+    "newCode"
 WRAM0
 	"Audio RAM"
 	org $c100

@@ -358,8 +358,13 @@ INCLUDE "engine/movie/evolution.asm"
 INCLUDE "engine/overworld/elevator.asm"
 INCLUDE "engine/items/tm_prices.asm"
 
+SECTION "Party Sprites", ROMX, BANK[$34]
+PartyMonSprites1: INCBIN "gfx/icons/menusprites1.2bpp"
+PartyMonSprites2: INCBIN "gfx/icons/menusprites2.2bpp"
 
-SECTION "newMenus", ROMX
+SECTION "newCode", ROMX
 INCLUDE "engine/gfx/front_sprite_options.asm"
 INCLUDE "engine/menus/sprite_options_menu.asm"
 INCLUDE "engine/menus/sprite_options_menu2.asm"
+INCLUDE "engine/gfx/mon_icons2.asm"
+

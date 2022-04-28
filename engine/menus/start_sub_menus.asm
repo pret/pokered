@@ -20,6 +20,7 @@ StartMenu_Pokemon::
 	xor a
 	ld [wMenuItemToSwap], a
 	ld [wPartyMenuTypeOrMessageID], a
+	callfar ResetPartyAnimation
 	call GoBackToPartyMenu
 .checkIfPokemonChosen
 	jr nc, .chosePokemon
@@ -203,14 +204,14 @@ StartMenu_Pokemon::
 	call GBPalWhiteOutWithDelay3
 	jp .goBackToMap
 .teleport
-	call CheckIfInOutsideMap
-	jr z, .canTeleport
-	ld a, [wWhichPokemon]
-	ld hl, wPartyMonNicks
-	call GetPartyMonName
-	ld hl, .cannotUseTeleportNowText
-	call PrintText
-	jp .loop
+	;call CheckIfInOutsideMap
+	jr .canTeleport
+	; ld a, [wWhichPokemon]
+	;ld hl, wPartyMonNicks
+	;call GetPartyMonName
+	;ld hl, .cannotUseTeleportNowText
+	;call PrintText
+	;jp .loop
 .canTeleport
 	ld hl, .warpToLastPokemonCenterText
 	call PrintText
@@ -658,12 +659,52 @@ StartMenu_Option::
 	jp RedisplayStartMenu
 
 SwitchPartyMon::
+	;make sure the animation is reset.
+	push bc
+	callfar ResetPartyAnimation
+	pop bc
+	; then swap
 	call SwitchPartyMon_InitVarOrSwapData ; swap data
-	ld a, [wSwappedMenuItem]
+	ld a, [wWhichTrade]
 	call SwitchPartyMon_ClearGfx
 	ld a, [wCurrentMenuItem]
 	call SwitchPartyMon_ClearGfx
+	call SwapPartyMonIcons
 	jp RedrawPartyMenu_
+
+SwapPartyMonIcons:
+    ld a, [wWhichTrade] ;wSwappedMenuItem
+    ld hl, wOAMBuffer
+    ld bc, 16
+    call AddNTimes ; add bc to hl, a times
+    inc hl ; add 2 to hl for tileid.
+    inc hl
+	push hl
+	pop de
+    ld a, [wCurrentMenuItem]
+    ld hl, wOAMBuffer
+    ld bc, 16
+    call AddNTimes ; add bc to hl, a times
+    inc hl ; add 2 to hl for tileid.
+    inc hl
+    ld c, 4 ; four tiles
+.swapMonOAMLoop
+    ld a, [hl]
+    ld [hDividend], a ;hSwapTemp
+    ld a, [de]
+    ld [hl], a
+    ld a, [hDividend] ;hSwapTemp
+    ld [de], a
+    ld a, 4 ; add 4 to get to the next tiles.
+rept 4
+    inc hl
+endr
+rept 4
+    inc de
+endr
+    dec c
+    jr nz, .swapMonOAMLoop
+    ret
 
 SwitchPartyMon_ClearGfx:
 	push af

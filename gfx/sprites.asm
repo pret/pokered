@@ -25,7 +25,12 @@ PaperSprite::            INCBIN "gfx/sprites/paper.2bpp"
 PokedexSprite::          INCBIN "gfx/sprites/pokedex.2bpp"
 ClipboardSprite::        INCBIN "gfx/sprites/clipboard.2bpp"
 SnorlaxSprite::          INCBIN "gfx/sprites/snorlax.2bpp"
+Monster2Sprite::         INCBIN "gfx/sprites/monster2.2bpp"
+Quadruped2Sprite::       INCBIN "gfx/sprites/quadruped2.2bpp"
 OldAmberSprite::         INCBIN "gfx/sprites/old_amber.2bpp"
+HelixSprite::            INCBIN "gfx/sprites/helix.2bpp"
+VoltorbSprite::          INCBIN "gfx/sprites/voltorb.2bpp"
+FuzzballSprite::         INCBIN "gfx/sprites/fuzzball.2bpp"
 GamblerAsleepSprite::    INCBIN "gfx/sprites/gambler_asleep.2bpp"
 
 
@@ -71,3 +76,8 @@ AgathaSprite::           INCBIN "gfx/sprites/agatha.2bpp"
 BrunoSprite::            INCBIN "gfx/sprites/bruno.2bpp"
 LoreleiSprite::          INCBIN "gfx/sprites/lorelei.2bpp"
 SeelSprite::             INCBIN "gfx/sprites/seel.2bpp"
+
+SECTION "NPC Sprites 3", ROMX, BANK[$30]
+
+PsychicSprite::          INCBIN "gfx/sprites/psychic.2bpp"
+FightingSprite::          INCBIN "gfx/sprites/fighting.2bpp"

@@ -22,6 +22,7 @@ PrepareOAMData::
 	ldh a, [hSpriteOffset2]
 	ld e, a
 	ld a, [de] ; [x#SPRITESTATEDATA1_PICTUREID]
+
 	and a
 	jp z, .nextSprite
 

@@ -461,7 +461,7 @@ PrintNamingText:
 	ld a, [wcf91]
 	ld [wMonPartySpriteSpecies], a
 	push af
-	farcall WriteMonPartySpriteOAMBySpecies
+	farcall LoadNicknameMonSprite
 	pop af
 	ld [wd11e], a
 	call GetMonName

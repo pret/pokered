@@ -777,11 +777,14 @@ wOptionsTextSpeedCursorX:: db
 wOptionsBattleAnimCursorX:: db
 wOptionsBattleStyleCursorX:: db
 wOptionsCancelCursorX:: db
-wOptionsBackSpritesCursorX:: db
-wOptionsBulbasaurSpriteCursorX:: db
-wOptionsSquirtleSpriteCursorX:: db
-wOptionsBlastoiseSpriteCursorX:: db
-wOptionsPidgeotSpriteCursorX:: db
+; options page 2
+wOptionsPage2Option1CursorX:: db
+wOptionsPage2Option2CursorX:: db
+wOptionsPage2Option3CursorX:: db
+wOptionsPage2Option4CursorX:: db
+wOptionsPage2Option5CursorX:: db
+wOptionsPage2Option6CursorX:: db
+; options page 3
 wOptionsNidorinoSpriteCursorX:: db
 wOptionsGolbatSpriteCursorX:: db
 wOptionsMankeySpriteCursorX:: db

@@ -32,7 +32,7 @@
 	const SPRITE_MIDDLE_AGED_WOMAN       ; $1c
 	const SPRITE_BRUNETTE_GIRL           ; $1d
 	const SPRITE_LANCE                   ; $1e
-	const SPRITE_UNUSED_SCIENTIST        ; $1f
+	const SPRITE_QUADRUPED2              ; $1f
 	const SPRITE_SCIENTIST               ; $20
 	const SPRITE_ROCKER                  ; $21
 	const SPRITE_SWIMMER                 ; $22
@@ -62,17 +62,22 @@
 	const SPRITE_BRUNO                   ; $3a
 	const SPRITE_LORELEI                 ; $3b
 	const SPRITE_SEEL                    ; $3c
+	const SPRITE_MONSTER2                ; $3d
+	const SPRITE_FUZZBALL                ; $47
+	const SPRITE_FUZZBALL2               ; $47
+	const SPRITE_PSYCHIC                 ; $47
+	const SPRITE_VOLTORB                 ; $47
+	const SPRITE_FIGHTING                ; $48
 FIRST_STILL_SPRITE EQU const_value
-	const SPRITE_POKE_BALL               ; $3d
-	const SPRITE_FOSSIL                  ; $3e
-	const SPRITE_BOULDER                 ; $3f
-	const SPRITE_PAPER                   ; $40
-	const SPRITE_POKEDEX                 ; $41
-	const SPRITE_CLIPBOARD               ; $42
-	const SPRITE_SNORLAX                 ; $43
-	const SPRITE_UNUSED_OLD_AMBER        ; $44
+	const SPRITE_POKE_BALL               ; $3e
+	const SPRITE_FOSSIL                  ; $3f
+	const SPRITE_BOULDER                 ; $40
+	const SPRITE_PAPER                   ; $41
+	const SPRITE_POKEDEX                 ; $42
+	const SPRITE_CLIPBOARD               ; $43
+	const SPRITE_SNORLAX                 ; $44
+	const SPRITE_HELIX                   ; $46
 	const SPRITE_OLD_AMBER               ; $45
-	const SPRITE_UNUSED_GAMBLER_ASLEEP_1 ; $46
-	const SPRITE_UNUSED_GAMBLER_ASLEEP_2 ; $47
 	const SPRITE_GAMBLER_ASLEEP          ; $48
+	const SPRITE_MONSTER2_STILL          ; $48
 NUM_SPRITES EQU const_value - 1
