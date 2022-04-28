@@ -163,35 +163,35 @@ MACRO connection
 			DEF _len = \3_WIDTH
 		ENDC
 
-		ELIF !STRCMP("\1", "south")
-			DEF _blk = _src
-			DEF _map = (CURRENT_MAP_WIDTH + 6) * (CURRENT_MAP_HEIGHT + 3) + _tgt
-			DEF _win = \3_WIDTH + 7
-			DEF _y = 0
-			DEF _x = (\4) * -2
-			DEF _len = CURRENT_MAP_WIDTH + 3 - (\4)
+	ELIF !STRCMP("\1", "south")
+		DEF _blk = _src
+		DEF _map = (CURRENT_MAP_WIDTH + 6) * (CURRENT_MAP_HEIGHT + 3) + _tgt
+		DEF _win = \3_WIDTH + 7
+		DEF _y = 0
+		DEF _x = (\4) * -2
+		DEF _len = CURRENT_MAP_WIDTH + 3 - (\4)
 		IF _len > \3_WIDTH
 			DEF _len = \3_WIDTH
 		ENDC
 
-		ELIF !STRCMP("\1", "west")
-			DEF _blk = (\3_WIDTH * _src) + \3_WIDTH - 3
-			DEF _map = (CURRENT_MAP_WIDTH + 6) * _tgt
-			DEF _win = (\3_WIDTH + 6) * 2 - 6
-			DEF _y = (\4) * -2
-			DEF _x = \3_WIDTH * 2 - 1
-			DEF _len = CURRENT_MAP_HEIGHT + 3 - (\4)
+	ELIF !STRCMP("\1", "west")
+		DEF _blk = (\3_WIDTH * _src) + \3_WIDTH - 3
+		DEF _map = (CURRENT_MAP_WIDTH + 6) * _tgt
+		DEF _win = (\3_WIDTH + 6) * 2 - 6
+		DEF _y = (\4) * -2
+		DEF _x = \3_WIDTH * 2 - 1
+		DEF _len = CURRENT_MAP_HEIGHT + 3 - (\4)
 		IF _len > \3_HEIGHT
 			DEF _len = \3_HEIGHT
 		ENDC
 
-		ELIF !STRCMP("\1", "east")
-			DEF _blk = (\3_WIDTH * _src)
-			DEF _map = (CURRENT_MAP_WIDTH + 6) * _tgt + CURRENT_MAP_WIDTH + 3
-			DEF _win = \3_WIDTH + 7
-			DEF _y = (\4) * -2
-			DEF _x = 0
-			DEF _len = CURRENT_MAP_HEIGHT + 3 - (\4)
+	ELIF !STRCMP("\1", "east")
+		DEF _blk = (\3_WIDTH * _src)
+		DEF _map = (CURRENT_MAP_WIDTH + 6) * _tgt + CURRENT_MAP_WIDTH + 3
+		DEF _win = \3_WIDTH + 7
+		DEF _y = (\4) * -2
+		DEF _x = 0
+		DEF _len = CURRENT_MAP_HEIGHT + 3 - (\4)
 		IF _len > \3_HEIGHT
 			DEF _len = \3_HEIGHT
 		ENDC
