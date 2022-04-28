@@ -120,12 +120,12 @@ NUM_TMS EQU 50
 
 __tmhm_value__ = NUM_TMS + 1
 
-add_tmnum: MACRO
+MACRO add_tmnum
 \1_TMNUM EQU __tmhm_value__
 __tmhm_value__ += 1
 ENDM
 
-add_hm: MACRO
+MACRO add_hm
 ; Defines three constants:
 ; - HM_\1: the item id, starting at $C4
 ; - \1_TMNUM: the learnable TM/HM flag, starting at 51
@@ -146,7 +146,7 @@ NUM_HMS EQU const_value - HM01
 
 __tmhm_value__ = 1
 
-add_tm: MACRO
+MACRO add_tm
 ; Defines three constants:
 ; - TM_\1: the item id, starting at $C9
 ; - \1_TMNUM: the learnable TM/HM flag, starting at 1

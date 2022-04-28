@@ -83,7 +83,7 @@ UnusedPlayerNameLengthFunc:
 	dec c
 	jr .loop
 
-diploma_text: MACRO
+MACRO diploma_text
 	dw \3
 	dwcoord \1, \2
 ENDM

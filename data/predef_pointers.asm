@@ -1,4 +1,4 @@
-add_predef: MACRO
+MACRO add_predef
 \1Predef::
 IF _NARG == 1
 	dba \1

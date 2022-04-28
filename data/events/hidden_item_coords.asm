@@ -1,4 +1,4 @@
-hidden_item: MACRO
+MACRO hidden_item
 	db \1, \3, \2
 ENDM
 

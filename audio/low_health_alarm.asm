@@ -61,7 +61,7 @@ Music_DoLowHealthAlarm::
 	jr nz, .copyLoop
 	ret
 
-alarm_tone: MACRO
+MACRO alarm_tone
 	db \1 ; length
 	db \2 ; envelope
 	dw \3 ; frequency

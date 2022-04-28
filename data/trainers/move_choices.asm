@@ -1,4 +1,4 @@
-move_choices: MACRO
+MACRO move_choices
 	IF _NARG
 		db \# ; all args
 	ENDC

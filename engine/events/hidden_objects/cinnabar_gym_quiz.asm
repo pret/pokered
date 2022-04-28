@@ -183,7 +183,7 @@ UpdateCinnabarGymGateTileBlocks_::
 	jr nz, .loop
 	ret
 
-gym_gate_coord: MACRO
+MACRO gym_gate_coord
 	db \1, \2, \3, 0
 ENDM
 

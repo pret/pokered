@@ -59,7 +59,7 @@ PrintNumber::
 	cp 6
 	jr z, .hundred_thousands
 
-print_digit: MACRO
+MACRO print_digit
 
 IF (\1) / $10000
 	ld a, \1 / $10000 % $100

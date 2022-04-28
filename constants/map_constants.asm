@@ -1,4 +1,4 @@
-mapconst: MACRO
+MACRO mapconst
 	const \1
 \1_HEIGHT EQU \2
 \1_WIDTH EQU \3

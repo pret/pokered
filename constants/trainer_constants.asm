@@ -1,6 +1,6 @@
 OPP_ID_OFFSET EQU 200
 
-trainer_const: MACRO
+MACRO trainer_const
 	const \1
 OPP_\1 EQU OPP_ID_OFFSET + \1
 ENDM
