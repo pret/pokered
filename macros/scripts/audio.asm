@@ -41,7 +41,7 @@ ENDM
 ; fade: positive value means decrease in volume, negative value means increase in volume
 ;       small magnitude means quick change, large magnitude means slow change
 ;       in signed magnitude representation, so a value of 8 is the same as (negative) 0
-square_note_cmd EQU sfx_note_cmd ; $20
+DEF square_note_cmd EQU sfx_note_cmd ; $20
 MACRO square_note
 	db square_note_cmd | \1
 	IF \3 < 0
@@ -56,7 +56,7 @@ ENDM
 ; fade: positive value means decrease in volume, negative value means increase in volume
 ;       small magnitude means quick change, large magnitude means slow change
 ;       in signed magnitude representation, so a value of 8 is the same as (negative) 0
-noise_note_cmd EQU sfx_note_cmd ; $20
+DEF noise_note_cmd EQU sfx_note_cmd ; $20
 MACRO noise_note
 	db noise_note_cmd | \1
 	IF \3 < 0
@@ -114,7 +114,7 @@ MACRO note_type
 ENDM
 
 ; arguments: speed [0, 15]
-drum_speed_cmd EQU note_type_cmd ; $d0
+DEF drum_speed_cmd EQU note_type_cmd ; $d0
 MACRO drum_speed
 	db drum_speed_cmd | \1
 ENDM

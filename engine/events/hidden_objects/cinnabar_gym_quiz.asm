@@ -187,8 +187,8 @@ MACRO gym_gate_coord
 	db \1, \2, \3, 0
 ENDM
 
-HORIZONTAL_GATE_BLOCK EQU $54
-VERTICAL_GATE_BLOCK   EQU $5f
+DEF HORIZONTAL_GATE_BLOCK EQU $54
+DEF VERTICAL_GATE_BLOCK   EQU $5f
 
 CinnabarGymGateCoords:
 	; x coord, y coord, block id

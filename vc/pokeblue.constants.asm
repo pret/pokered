@@ -3,7 +3,7 @@ INCLUDE "constants.asm"
 ; These are all the asm constants needed to make the blue_vc patch.
 
 MACRO vc_const
-x = \1
+	DEF x = \1
 	PRINTLN "00:{04x:x} \1" ; same format as rgblink's .sym file
 ENDM
 

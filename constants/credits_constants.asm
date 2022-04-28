@@ -64,7 +64,7 @@
 	const CRED_FUKUI          ; $3D
 	const CRED_CLUB           ; $3E
 	const CRED_PAAD           ; $3F
-NUM_CRED_STRINGS EQU const_value
+DEF NUM_CRED_STRINGS EQU const_value
 
 	const_def -1, -1
 	const CRED_TEXT_FADE_MON ; $FF

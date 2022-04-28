@@ -1,10 +1,10 @@
 MACRO add_predef
-\1Predef::
-IF _NARG == 1
-	dba \1
-ELSE
-	dbw \2, \1
-ENDC
+	\1Predef::
+	IF _NARG == 1
+		dba \1
+	ELSE
+		dbw \2, \1
+	ENDC
 ENDM
 
 PredefPointers::

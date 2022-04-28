@@ -3,7 +3,7 @@ MACRO move_choices
 		db \# ; all args
 	ENDC
 	db 0 ; end
-list_index += 1
+	DEF list_index += 1
 ENDM
 
 ; move choice modification methods that are applied for each trainer class

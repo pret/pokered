@@ -156,4 +156,4 @@
 	const DEX_MEWTWO     ; 150
 	const DEX_MEW        ; 151
 
-NUM_POKEMON EQU const_value - 1
+DEF NUM_POKEMON EQU const_value - 1

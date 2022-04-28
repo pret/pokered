@@ -191,7 +191,7 @@ ENDM
 ; Some hidden objects use SPRITE_FACING_* values,
 ; but these do not actually prevent the player
 ; from interacting with them in any direction.
-ANY_FACING EQU $d0
+DEF ANY_FACING EQU $d0
 
 TradeCenterHiddenObjects:
 	hidden_object  5,  4, ANY_FACING, CableClubRightGameboy

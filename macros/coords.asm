@@ -11,9 +11,9 @@ MACRO validate_coords
 	ENDC
 ENDM
 
-hlcoord EQUS "coord hl,"
-bccoord EQUS "coord bc,"
-decoord EQUS "coord de,"
+DEF hlcoord EQUS "coord hl,"
+DEF bccoord EQUS "coord bc,"
+DEF decoord EQUS "coord de,"
 
 MACRO coord
 ; register, x, y[, origin]
@@ -25,9 +25,9 @@ MACRO coord
 	ENDC
 ENDM
 
-hlbgcoord EQUS "bgcoord hl,"
-bcbgcoord EQUS "bgcoord bc,"
-debgcoord EQUS "bgcoord de,"
+DEF hlbgcoord EQUS "bgcoord hl,"
+DEF bcbgcoord EQUS "bgcoord bc,"
+DEF debgcoord EQUS "bgcoord de,"
 
 MACRO bgcoord
 ; register, x, y[, origin]
@@ -39,9 +39,9 @@ MACRO bgcoord
 	ENDC
 ENDM
 
-hlowcoord EQUS "owcoord hl,"
-bcowcoord EQUS "owcoord bc,"
-deowcoord EQUS "owcoord de,"
+DEF hlowcoord EQUS "owcoord hl,"
+DEF bcowcoord EQUS "owcoord bc,"
+DEF deowcoord EQUS "owcoord de,"
 
 MACRO owcoord
 ; register, x, y, map width

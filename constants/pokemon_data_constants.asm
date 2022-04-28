@@ -1,37 +1,37 @@
 ; base data struct members (see data/pokemon/base_stats/*.asm)
 rsreset
-BASE_DEX_NO      rb
-BASE_STATS       rb NUM_STATS
+DEF BASE_DEX_NO      rb
+DEF BASE_STATS       rb NUM_STATS
 rsset BASE_STATS
-BASE_HP          rb
-BASE_ATK         rb
-BASE_DEF         rb
-BASE_SPD         rb
-BASE_SPC         rb
-BASE_TYPES       rw
+DEF BASE_HP          rb
+DEF BASE_ATK         rb
+DEF BASE_DEF         rb
+DEF BASE_SPD         rb
+DEF BASE_SPC         rb
+DEF BASE_TYPES       rw
 rsset BASE_TYPES
-BASE_TYPE_1      rb
-BASE_TYPE_2      rb
-BASE_CATCH_RATE  rb
-BASE_EXP         rb
-BASE_PIC_SIZE    rb
-BASE_FRONTPIC    rw
-BASE_BACKPIC     rw
-BASE_MOVES       rb NUM_MOVES
-BASE_GROWTH_RATE rb
-BASE_TMHM        rb (NUM_TM_HM + 7) / 8
-                 rb_skip
-BASE_DATA_SIZE EQU _RS
+DEF BASE_TYPE_1      rb
+DEF BASE_TYPE_2      rb
+DEF BASE_CATCH_RATE  rb
+DEF BASE_EXP         rb
+DEF BASE_PIC_SIZE    rb
+DEF BASE_FRONTPIC    rw
+DEF BASE_BACKPIC     rw
+DEF BASE_MOVES       rb NUM_MOVES
+DEF BASE_GROWTH_RATE rb
+DEF BASE_TMHM        rb (NUM_TM_HM + 7) / 8
+                     rb_skip
+DEF BASE_DATA_SIZE EQU _RS
 
 
-PARTY_LENGTH EQU 6
+DEF PARTY_LENGTH EQU 6
 
-MONS_PER_BOX EQU 20
-NUM_BOXES    EQU 12
+DEF MONS_PER_BOX EQU 20
+DEF NUM_BOXES    EQU 12
 
-HOF_MON           EQU $10
-HOF_TEAM          EQU PARTY_LENGTH * HOF_MON
-HOF_TEAM_CAPACITY EQU 50
+DEF HOF_MON           EQU $10
+DEF HOF_TEAM          EQU PARTY_LENGTH * HOF_MON
+DEF HOF_TEAM_CAPACITY EQU 50
 
 
 ; mon data locations
@@ -52,8 +52,8 @@ HOF_TEAM_CAPACITY EQU 50
 	const EV_ITEM  ; 2
 	const EV_TRADE ; 3
 
-MAX_EVOLUTIONS EQU 3
-EVOLUTION_SIZE EQU 4
+DEF MAX_EVOLUTIONS EQU 3
+DEF EVOLUTION_SIZE EQU 4
 
 
 ; wMonHGrowthRate values
@@ -65,8 +65,8 @@ EVOLUTION_SIZE EQU 4
 	const GROWTH_MEDIUM_SLOW
 	const GROWTH_FAST
 	const GROWTH_SLOW
-NUM_GROWTH_RATES EQU const_value
+DEF NUM_GROWTH_RATES EQU const_value
 
 ; wild data (see data/wild/maps/*.asm)
-NUM_WILDMONS EQU 10
-WILDDATA_LENGTH EQU 1 + NUM_WILDMONS * 2
+DEF NUM_WILDMONS EQU 10
+DEF WILDDATA_LENGTH EQU 1 + NUM_WILDMONS * 2

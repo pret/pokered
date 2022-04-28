@@ -1,4 +1,4 @@
-CIRCLE_TILE_ID EQU $70
+DEF CIRCLE_TILE_ID EQU $70
 
 DisplayDiploma::
 	call SaveScreenTilesToBuffer2
