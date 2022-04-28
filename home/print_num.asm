@@ -66,7 +66,7 @@ MACRO print_digit
 	ELSE
 		xor a
 	ENDC
-		ldh [hPowerOf10 + 0], a
+	ldh [hPowerOf10 + 0], a
 
 	IF (\1) / $100
 		ld a, \1 / $100   % $100
