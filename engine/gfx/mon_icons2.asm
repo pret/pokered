@@ -89,10 +89,6 @@ FillPartyMonOAM:
     push hl
     push de
     push bc
-    xor a
-    ld hl, wMonPartySpritesSavedOAM
-    ld bc, $60
-    call FillMemory
     ld hl, PartyMonOAM
     ld de, wOAMBuffer
     ld bc, $60
@@ -104,6 +100,7 @@ FillPartyMonOAM:
     pop bc
     pop de
     pop hl
+    ret
 
 ShowPartyMonSprite:
     push hl
