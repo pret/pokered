@@ -134,6 +134,7 @@ StartBattle:
 	ld [wPartyGainExpFlags], a
 	ld [wPartyFoughtCurrentEnemyFlags], a
 	ld [wActionResultOrTookBattleTurn], a
+	ld [wLowHealthTonePairs], a ; FIXED: low health alarm sanity: clear low health tone tracker
 	inc a
 	ld [wFirstMonsNotOutYet], a
 	ld hl, wEnemyMon1HP
@@ -3866,7 +3867,7 @@ PrintMoveFailureText:
 	                ; Thus, recoil damage will always be equal to 1
 	                ; even if it was intended to be potential damage/8.
 
-	ld hl, wUnusedD71F ;FIXEDBUG: this address now stores the damage that would have been done if it didn't miss
+	ld hl, wDamageIntention ;FIXEDBUG: this address now stores the damage that would have been done if it didn't miss
 	ld a, [hli]
 	ld b, [hl]
 	srl a
@@ -5467,9 +5468,9 @@ MoveHitTest:
 	ret
 .moveMissed
 ;;;;;;;;;;;;;;;;;;;;
-;shinpokered code - if a move misses, store the damage it threatened into wUnusedD71F.
+;shinpokered code - if a move misses, store the damage it threatened into wDamageIntention.
 ;this is so the Jump Kick effect works correctly
-	ld hl, wUnusedD71F
+	ld hl, wDamageIntention
 	ld a, [wDamage]
 	ld [hli], a
 	ld a, [wDamage + 1]
