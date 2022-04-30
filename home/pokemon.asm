@@ -85,12 +85,12 @@ LoadMonData::
 
 OverwritewMoves::
 ; Write c to [wMoves + b]. Unused.
-	ld hl, wMoves
-	ld e, b
-	ld d, 0
-	add hl, de
-	ld a, c
-	ld [hl], a
+;	ld hl, wMoves
+;	ld e, b
+;	ld d, 0
+;	add hl, de
+;	ld a, c
+;	ld [hl], a
 	ret
 
 LoadFlippedFrontSpriteByMonIndex::

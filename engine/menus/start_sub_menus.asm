@@ -301,6 +301,8 @@ ItemMenuLoop:
 	call RunDefaultPaletteCommand
 
 StartMenu_Item::
+	ld a, 1
+	ld [wListWithTMText], a ; we want TM names to get printed here
 	ld a, [wLinkState]
 	dec a ; is the player in the Colosseum or Trade Centre?
 	jr nz, .notInCableClubRoom
@@ -324,6 +326,8 @@ StartMenu_Item::
 	ld [wBagSavedMenuItem], a
 	jr nc, .choseItem
 .exitMenu
+	xor a
+	ld [wListWithTMText], a ; finished scrolling through a list
 	call LoadScreenTilesFromBuffer2 ; restore saved screen
 	call LoadTextBoxTilePatterns
 	call UpdateSprites
@@ -413,6 +417,8 @@ StartMenu_Item::
 	ld a, [wActionResultOrTookBattleTurn]
 	and a
 	jp z, ItemMenuLoop
+	xor a
+	ld [wListWithTMText], a ; finished using list
 	jp CloseStartMenu
 .useItem_partyMenu
 	ld a, [wUpdateSpritesEnabled]

@@ -367,4 +367,5 @@ INCLUDE "engine/gfx/front_sprite_options.asm"
 INCLUDE "engine/menus/sprite_options_menu.asm"
 INCLUDE "engine/menus/sprite_options_menu2.asm"
 INCLUDE "engine/gfx/mon_icons2.asm"
+INCLUDE "engine/menus/menu_list_tm_name_loader.asm"
 

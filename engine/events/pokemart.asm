@@ -6,6 +6,7 @@ DisplayPokemartDialogue_::
 	ld [wBoughtOrSoldItemInMart], a
 .loop
 	xor a
+	ld [wListWithTMText], a ; we may have just been in the buy menu and no longer need to read out TM names
 	ld [wListScrollOffset], a
 	ld [wCurrentMenuItem], a
 	ld [wPlayerMonNumber], a
@@ -36,7 +37,8 @@ DisplayPokemartDialogue_::
 	dec a ; quitting?
 	jp z, .done
 .sellMenu
-
+	ld a, 1
+	ld [wListWithTMText], a ; we're in a list that might have TMs to read out
 ; the same variables are set again below, so this code has no effect
 	xor a
 	ld [wPrintItemPrices], a
@@ -121,8 +123,10 @@ DisplayPokemartDialogue_::
 	jp .returnToMainPokemartMenu
 .buyMenu
 
-; the same variables are set again below, so this code has no effect
 	ld a, 1
+	ld [wListWithTMText], a ; we're in a list that might have TMs to read out
+
+; the same variables are set again below, so this code has no effect
 	ld [wPrintItemPrices], a
 	ld a, INIT_OTHER_ITEM_LIST
 	ld [wInitListType], a

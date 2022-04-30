@@ -573,8 +573,8 @@ ENDU
 
 	ds 1
 
+wTMTextShown:: db
 wNPCMovementDirections2Index::
-wUnusedCD37::
 ; number of items in wFilteredBagItems list
 wFilteredBagItemsCount:: db
 
@@ -856,6 +856,8 @@ wSwappedMenuItem::
 wRodResponse::
 	db
 ENDU
+
+wListWithTMText:: db
 
 ; 0 = neither
 ; 1 = warp pad

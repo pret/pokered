@@ -17,6 +17,8 @@ PlayerPC::
 	call PrintText
 
 PlayerPCMenu:
+	xor a
+	ld [wListWithTMText], a
 	ld a, [wParentMenuItem]
 	ld [wCurrentMenuItem], a
 	ld hl, wFlags_0xcd60
@@ -84,6 +86,8 @@ ExitPlayerPC:
 	ret
 
 PlayerPCDeposit:
+	ld a, 1
+	ld [wListWithTMText], a
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wListScrollOffset], a
@@ -138,6 +142,8 @@ PlayerPCDeposit:
 	jp .loop
 
 PlayerPCWithdraw:
+	ld a, 1
+	ld [wListWithTMText], a
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wListScrollOffset], a

@@ -59,6 +59,7 @@ HandleMenuInput_::
 .notAtTop
 	dec a
 	ld [wCurrentMenuItem], a ; move selected menu item up one space
+	call CheckForTM
 	jr .checkOtherKeys
 .alreadyAtTop
 	ld a, [wMenuWrappingEnabled]
@@ -85,6 +86,7 @@ HandleMenuInput_::
 .notAtBottom
 	ld a, c
 	ld [wCurrentMenuItem], a
+	call CheckForTM
 .checkOtherKeys
 	ld a, [wMenuWatchedKeys]
 	and b ; does the menu care about any of the pressed keys?
@@ -189,6 +191,17 @@ PlaceMenuCursor::
 	ld [wMenuCursorLocation + 1], a
 	ld a, [wCurrentMenuItem]
 	ld [wLastMenuItem], a
+	ret
+
+CheckForTM::
+	ld a, [wListWithTMText]
+	and a
+	ret z
+	push bc
+	push hl
+	farcall CheckLoadTmName
+	pop hl
+	pop bc
 	ret
 
 ; This is used to mark a menu cursor other than the one currently being

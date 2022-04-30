@@ -31,12 +31,12 @@ DisplayListMenuID::
 	call DisplayTextBoxID ; draw the menu text box
 	call UpdateSprites ; disable sprites behind the text box
 ; the code up to .skipMovingSprites appears to be useless
-	hlcoord 4, 2 ; coordinates of upper left corner of menu text box
-	lb de, 9, 14 ; height and width of menu text box
-	ld a, [wListMenuID]
-	and a ; PCPOKEMONLISTMENU?
-	jr nz, .skipMovingSprites
-	call UpdateSprites
+;	hlcoord 4, 2 ; coordinates of upper left corner of menu text box
+;	lb de, 9, 14 ; height and width of menu text box
+;	ld a, [wListMenuID]
+;	and a ; PCPOKEMONLISTMENU?
+;	jr nz, .skipMovingSprites
+;	call UpdateSprites
 .skipMovingSprites
 	ld a, 1 ; max menu item ID is 1 if the list has less than 2 entries
 	ld [wMenuWatchMovingOutOfBounds], a
@@ -52,8 +52,8 @@ DisplayListMenuID::
 	ld [wTopMenuItemX], a
 	ld a, A_BUTTON | B_BUTTON | SELECT | START
 	ld [wMenuWatchedKeys], a
-	ld c, 10
-	call DelayFrames
+	call CheckForTM
+	call Delay3
 
 DisplayListMenuIDLoop::
 	xor a
@@ -161,6 +161,7 @@ DisplayListMenuIDLoop::
 	ld [wChosenMenuItem], a
 	xor a
 	ldh [hJoy7], a ; joypad state update flag
+	ld [wTMTextShown], a
 	ld hl, wd730
 	res 6, [hl] ; turn on letter printing delay
 	jp BankswitchBack
@@ -181,12 +182,14 @@ DisplayListMenuIDLoop::
 	cp b ; will going down scroll past the Cancel button?
 	jp c, DisplayListMenuIDLoop
 	inc [hl] ; if not, go down
+	call CheckForTM
 	jp DisplayListMenuIDLoop
 .upPressed
 	ld a, [hl]
 	and a
 	jp z, DisplayListMenuIDLoop
 	dec [hl]
+	call CheckForTM
 	jp DisplayListMenuIDLoop
 
 DisplayChooseQuantityMenu::
@@ -321,6 +324,7 @@ ExitListMenu::
 	ld [wMenuExitMethod], a
 	ld [wMenuWatchMovingOutOfBounds], a
 	xor a
+	ld [wTMTextShown], a
 	ldh [hJoy7], a
 	ld hl, wd730
 	res 6, [hl]

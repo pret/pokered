@@ -29,7 +29,6 @@ HallOfFamePC:
 	ld c, 128
 	call DelayFrames
 	xor a
-	ld [wUnusedCD3D], a ; not read
 	ld [wNumCreditsMonsDisplayed], a
 	jp Credits
 
