@@ -164,21 +164,21 @@ TryingToLearn:
 	add hl, bc
 	ld a, [hl]
 	push af
-	push bc
-	call IsMoveHM
-	pop bc
+	;push bc   ; FIXED: moves are never considered HMs and can always be deleted if desired
+	;call IsMoveHM
+	;pop bc
 	pop de
 	ld a, d
-	jr c, .hm
+	;jr c, .hm
 	pop hl
 	add hl, bc
 	and a
 	ret
-.hm
-	ld hl, HMCantDeleteText
-	call PrintText
-	pop hl
-	jr .loop
+;.hm ; FIXED: moves are never considered HMs and can always be deleted if desired
+;	ld hl, HMCantDeleteText
+;	call PrintText
+;	pop hl
+;	jr .loop
 .cancel
 	scf
 	ret
@@ -221,6 +221,6 @@ ForgotAndText:
 	text_far _ForgotAndText
 	text_end
 
-HMCantDeleteText:
-	text_far _HMCantDeleteText
-	text_end
+;HMCantDeleteText: ; FIXED: moves are never considered HMs and can always be deleted if desired
+;	text_far _HMCantDeleteText
+;	text_end

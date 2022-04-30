@@ -257,6 +257,7 @@ ButtonStartPressed:: ; happens when pressing start in a list menu - used for fac
 	ret
 
 DepositItemFromItemMenu::
+	;IsItemHM - disallow HMs from being deposited this way to avoid softlock issues?
 	call IsKeyItem
 	ld a, 1
 	ld [wItemQuantity], a

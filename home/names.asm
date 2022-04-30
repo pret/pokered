@@ -119,13 +119,10 @@ IsItemHM::
 
 ; sets carry if move is an HM, clears carry if move is not an HM
 ; Input: a = move ID
-IsMoveHM::
-	ld hl, HMMoves
-	ld de, 1
-	jp IsInArray
-
-HMMoves::
-INCLUDE "data/moves/hm_moves.asm"
+;IsMoveHM:: ;FIXED: Moves are never considered HMs removing deletion restrictions
+	;ld hl, HMMoves
+	;ld de, 1
+	;jp IsInArray
 
 GetMoveName::
 	push hl
