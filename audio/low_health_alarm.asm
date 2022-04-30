@@ -4,7 +4,45 @@ Music_DoLowHealthAlarm::
 	jr z, .disableAlarm
 
 	bit 7, a  ;alarm enabled?
-	ret z     ;nope
+;	ret z     ;nope
+;	ret z     ;nope	
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; FIXED: low health alarm only rings a couple times before stopping after triggering
+	push af
+	jr z, .no_alarm_check_battle
+.yes_alarm_check_tone
+	ld a, [wLowHealthTonePairs]
+	and a
+	jr z, .pop_and_disable_alarm
+	jr .do_alarm_tone_check_dec
+.no_alarm_check_battle
+	ld a, [wIsInBattle]
+	cp $00
+	jr z, .no_alarm_no_battle
+	cp $FF
+	jr z, .no_alarm_no_battle
+.no_alarm_yes_battle_checkHP
+	ld a, [wPlayerHPBarColor]
+	cp HP_BAR_RED
+	jr z, .no_alarm_no_battle
+	ld a, 3
+	ld [wLowHealthTonePairs], a
+.no_alarm_no_battle
+	pop af
+	ret
+.pop_and_disable_alarm
+	pop af
+	jr .disableAlarm
+.do_alarm_tone_check_dec
+	ld a, [wLowHealthAlarm]
+	cp $81
+	jr nz, .do_alarm_tone
+	ld a, [wLowHealthTonePairs]
+	dec a
+	ld [wLowHealthTonePairs], a
+.do_alarm_tone
+	pop af
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 	and $7f   ;low 7 bits are the timer.
 	jr nz, .asm_21383 ;if timer > 0, play low tone.

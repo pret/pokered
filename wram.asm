@@ -2125,6 +2125,9 @@ wWhichDungeonWarp:: db
 wUnusedD71F:: db
 
 	ds 8
+	
+wLowHealthTonePairs::				;in battle, used as a counter for low hp alarm tone pairs
+	ds 1	
 
 ; bit 0: using Strength outside of battle
 ; bit 1: set by IsSurfingAllowed when surfing's allowed, but the caller resets it after checking the result
