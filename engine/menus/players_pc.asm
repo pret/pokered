@@ -240,6 +240,63 @@ PlayerPCToss:
 	call TossItem ; disallows tossing key items
 	jp .loop
 
+ButtonStartPressed:: ; happens when pressing start in a list menu - used for facilitating depositing items from the start item menu
+	ld a, [wListMenuID]
+	cp ITEMLISTMENU
+	jr nz, .done ; not an item list?
+	ld a, [wIsInBattle]
+	and a
+	jp nz, .done ; are we in the battle item list?
+	ld a, [wFlags_0xcd60]
+	bit 3, a ; are we in item list within PC menu?
+	jp nz, .done
+	ld a, 1
+	ld [wUnusedC000], a ; set the flag that tells the item menu code to trigger the item deposit
+	ld b, a ; load an A button press into b, which is needed to exit the generic list code and hit the deposit item code within the item list code
+.done
+	ret
+
+DepositItemFromItemMenu::
+	call IsKeyItem
+	ld a, 1
+	ld [wItemQuantity], a
+	ld a, [wIsKeyItem]
+	and a
+	jr nz, .keyItem
+; if it's not a key item, there can be more than one of the item
+	ld hl, DepositHowManyToPCText
+	call PrintText
+	call DisplayChooseQuantityMenu
+	cp $ff
+	ret z
+	jp .next
+.keyItem
+; if it is a key item, ask whether to deposit first
+	ld hl, WantToDepositText
+	call PrintText
+	call YesNoChoice
+	ld a, [wCurrentMenuItem]
+	and a
+	ret nz
+.next
+; do the depositing
+	ld hl, wNumBoxItems
+	call AddItemToInventory
+	jr c, .roomAvailable
+	ld hl, NoRoomToStoreText
+	call PrintText
+	ret
+.roomAvailable
+	ld hl, wNumBagItems
+	call RemoveItemFromInventory
+	call WaitForSoundToFinish
+	ld a, SFX_WITHDRAW_DEPOSIT
+	call PlaySound
+	call WaitForSoundToFinish
+	ld hl, ItemWasStoredText
+	call PrintText
+	ret
+
 PlayersPCMenuEntries:
 	db   "WITHDRAW ITEM"
 	next "DEPOSIT ITEM"
@@ -256,6 +313,14 @@ WhatDoYouWantText:
 
 WhatToDepositText:
 	text_far _WhatToDepositText
+	text_end
+
+WantToDepositText:
+	text_far _WantToDepositText
+	text_end
+
+DepositHowManyToPCText:
+	text_far _DepositHowManyToPCText
 	text_end
 
 DepositHowManyText:
@@ -301,3 +366,4 @@ WhatToTossText:
 TossHowManyText:
 	text_far _TossHowManyText
 	text_end
+

@@ -3862,17 +3862,20 @@ PrintMoveFailureText:
 	ret nz
 
 	; if you get here, the mon used jump kick or hi jump kick and missed
-	ld hl, wDamage ; since the move missed, wDamage will always contain 0 at this point.
+	;ld hl, wDamage ; since the move missed, wDamage will always contain 0 at this point.
 	                ; Thus, recoil damage will always be equal to 1
 	                ; even if it was intended to be potential damage/8.
+
+	ld hl, wUnusedD71F ;FIXEDBUG: this address now stores the damage that would have been done if it didn't miss
 	ld a, [hli]
 	ld b, [hl]
 	srl a
 	rr b
+	;srl a ;TWEAK: due to the increased base attack of hi jump kick, increase the recoil damage to 1/4 the damage it would have done
+	;rr b
 	srl a
 	rr b
-	srl a
-	rr b
+	ld hl, wDamage+1
 	ld [hl], b
 	dec hl
 	ld [hli], a
@@ -5463,6 +5466,15 @@ MoveHitTest:
 	jr nc, .moveMissed
 	ret
 .moveMissed
+;;;;;;;;;;;;;;;;;;;;
+;shinpokered code - if a move misses, store the damage it threatened into wUnusedD71F.
+;this is so the Jump Kick effect works correctly
+	ld hl, wUnusedD71F
+	ld a, [wDamage]
+	ld [hli], a
+	ld a, [wDamage + 1]
+	ld [hl], a
+;;;;;;;;;;;;;;;;;;;;
 	xor a
 	ld hl, wDamage ; zero the damage
 	ld [hli], a

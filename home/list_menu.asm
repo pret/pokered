@@ -50,7 +50,7 @@ DisplayListMenuID::
 	ld [wTopMenuItemY], a
 	ld a, 5
 	ld [wTopMenuItemX], a
-	ld a, A_BUTTON | B_BUTTON | SELECT
+	ld a, A_BUTTON | B_BUTTON | SELECT | START
 	ld [wMenuWatchedKeys], a
 	ld c, 10
 	call DelayFrames
@@ -84,17 +84,14 @@ DisplayListMenuIDLoop::
 	push af
 	call PlaceMenuCursor
 	pop af
-	bit BIT_A_BUTTON, a
+	ld b, a
+	bit BIT_START, a
+	call nz, ButtonStartPressed
+	bit BIT_A_BUTTON, b
 	jp z, .checkOtherKeys
 .buttonAPressed
 	ld a, [wCurrentMenuItem]
 	call PlaceUnfilledArrowMenuCursor
-
-; pointless because both values are overwritten before they are read
-	ld a, $01
-	ld [wMenuExitMethod], a
-	ld [wChosenMenuItem], a
-
 	xor a
 	ld [wMenuWatchMovingOutOfBounds], a
 	ld a, [wCurrentMenuItem]
@@ -521,6 +518,7 @@ PrintListMenuEntries::
 .printCancelMenuItem
 	ld de, ListMenuCancelText
 	jp PlaceString
+
 
 ListMenuCancelText::
 	db "CANCEL@"

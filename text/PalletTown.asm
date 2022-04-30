@@ -34,6 +34,12 @@ _PalletTownText3::
 	line "and recall items"
 	cont "and #MON as"
 	cont "data via PC!"
+	
+	para "You can even"
+	line "store items any"
+	cont "time by pressing"
+	cont "START on the"
+	cont "items menu!"
 	done
 
 _PalletTownText4::

@@ -329,7 +329,15 @@ StartMenu_Item::
 	call UpdateSprites
 	jp RedisplayStartMenu
 .choseItem
-; erase menu cursor (blank each tile in front of an item name)
+	ld a, [wUnusedC000]
+	cp 1
+	jr nz, .noStartButton
+	callfar DepositItemFromItemMenu
+	ld a, 0
+	ld [wUnusedC000], a
+	jp ItemMenuLoop
+.noStartButton
+; erase menu cursor (blank each tile in front of an item name) 
 	ld a, " "
 	ldcoord_a 5, 4
 	ldcoord_a 5, 6

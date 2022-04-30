@@ -1482,6 +1482,15 @@ _WhatToDepositText::
 	line "to deposit?"
 	done
 
+_WantToDepositText::
+	text "Deposit to PC?"
+	done
+
+_DepositHowManyToPCText::
+	text "Deposit how many"
+	line "to PC?"
+	done
+
 _DepositHowManyText::
 	text "How many?"
 	done

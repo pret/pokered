@@ -1404,7 +1404,6 @@ Audio2_PlaySound::
 
 .playMusic
 	xor a
-	ld [wUnusedC000], a
 	ld [wDisableChannelOutputWhenSfxEnds], a
 	ld [wMusicTempo + 1], a
 	ld [wMusicWaveInstrument], a
@@ -1645,7 +1644,6 @@ Audio2_PlaySound::
 	ld a, $77
 	ldh [rNR50], a ; full volume
 	xor a
-	ld [wUnusedC000], a
 	ld [wDisableChannelOutputWhenSfxEnds], a
 	ld [wMuteAudioAndPauseMusic], a
 	ld [wMusicTempo + 1], a
