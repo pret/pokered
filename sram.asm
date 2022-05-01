@@ -30,7 +30,7 @@ DEF box_n = 0
 MACRO boxes
 	REPT \1
 		DEF box_n += 1
-		sBox{d:box_n}:: ds wBoxDataEnd - wBoxDataStart
+	sBox{d:box_n}:: ds wBoxDataEnd - wBoxDataStart
 	ENDR
 ENDM
 

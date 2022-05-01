@@ -71,7 +71,7 @@ MACRO dict2
 	jr nz, .not\@
 	\2
 	jr AfterDisplayingTextID
-	.not\@
+.not\@
 ENDM
 
 	dict  TX_SCRIPT_MART,                    DisplayPokemartDialogue
