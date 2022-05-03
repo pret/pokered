@@ -1405,6 +1405,7 @@ wNumFBTiles:: db
 UNION
 wSpiralBallsBaseY:: db
 wSpiralBallsBaseX:: db
+wSpiralBallsDelay:: db
 
 NEXTU
 ; bits 0-6: index into FallingObjects_DeltaXs array (0 - 8)

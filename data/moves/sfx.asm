@@ -88,7 +88,7 @@ MoveSoundTable:
 	db SFX_BATTLE_2F,          $20, $80 ; THUNDERBOLT
 	db SFX_BATTLE_2E,          $12, $60 ; THUNDER_WAVE
 	db SFX_BATTLE_26,          $00, $80 ; THUNDER
-	db SFX_BATTLE_14,          $01, $e0 ; ROCK_THROW
+	db SFX_ICE,          	   $00, $40 ; ROCK_THROW -> but it's now used for ice animations
 	db SFX_BATTLE_29,          $0f, $e0 ; EARTHQUAKE
 	db SFX_BATTLE_29,          $11, $20 ; FISSURE
 	db SFX_DAMAGE,             $10, $40 ; DIG
@@ -118,7 +118,7 @@ MoveSoundTable:
 	db SFX_NOT_VERY_EFFECTIVE, $f0, $10 ; REFLECT
 	db SFX_BATTLE_25,          $00, $80 ; FOCUS_ENERGY
 	db SFX_BATTLE_18,          $00, $c0 ; BIDE
-	db SFX_BATTLE_32,          $c0, $ff ; METRONOME
+	db SFX_BATTLE_32,          $a2, $00 ; METRONOME
 	db SFX_BATTLE_09,          $f2, $20 ; MIRROR_MOVE
 	db SFX_BATTLE_34,          $00, $80 ; SELFDESTRUCT
 	db SFX_BATTLE_34,          $00, $40 ; EGG_BOMB
@@ -151,7 +151,7 @@ MoveSoundTable:
 	db SFX_BATTLE_13,          $f8, $ff ; FLASH
 	db SFX_BATTLE_0C,          $f0, $f0 ; PSYWAVE
 	db SFX_BATTLE_0F,          $08, $10 ; SPLASH
-	db SFX_BATTLE_0D,          $f0, $ff ; ACID_ARMOR
+	db SFX_ACID_ARMOR,         $00, $00 ; ACID_ARMOR
 	db SFX_SUPER_EFFECTIVE,    $f0, $ff ; CRABHAMMER
 	db SFX_BATTLE_34,          $10, $ff ; EXPLOSION
 	db SFX_BATTLE_0E,          $f0, $20 ; FURY_SWIPES

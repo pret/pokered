@@ -5,8 +5,10 @@ ENDM
 
 AnimationIdSpecialEffects:
 	; animation id, effect routine address
+	anim_special_effect WHIRLWIND,             FlashScreenEveryFourFrameBlocks
 	anim_special_effect MEGA_PUNCH,            AnimationFlashScreen
 	anim_special_effect GUILLOTINE,            AnimationFlashScreen
+	anim_special_effect CRABHAMMER,            AnimationFlashScreen
 	anim_special_effect MEGA_KICK,             AnimationFlashScreen
 	anim_special_effect HEADBUTT,              AnimationFlashScreen
 	anim_special_effect TAIL_WHIP,             TailWhipAnimationUnused
@@ -15,7 +17,7 @@ AnimationIdSpecialEffects:
 	anim_special_effect BLIZZARD,              DoBlizzardSpecialEffects
 	anim_special_effect BUBBLEBEAM,            AnimationFlashScreen
 	anim_special_effect HYPER_BEAM,            FlashScreenEveryFourFrameBlocks
-	anim_special_effect THUNDERBOLT,           FlashScreenEveryEightFrameBlocks
+	anim_special_effect THUNDERBOLT,           FlashScreenEveryEightFrameBlocks ; four?
 	anim_special_effect REFLECT,               AnimationFlashScreen
 	anim_special_effect SELFDESTRUCT,          DoExplodeSpecialEffects
 	anim_special_effect SPORE,                 AnimationFlashScreen

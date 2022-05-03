@@ -75,7 +75,7 @@ MoveEffectPointerTable:
 	dw StatModifierDownEffect    ; unused effect
 	dw StatModifierDownEffect    ; unused effect
 	dw StatModifierDownEffect    ; unused effect
-	dw StatModifierDownEffect    ; unused effect
+	dw ConfusionBigSideEffect    ; CONFUSION_BIG_SIDE_EFFECT
 	dw ConfusionSideEffect       ; CONFUSION_SIDE_EFFECT
 	dw TwoToFiveAttacksEffect    ; TWINEEDLE_EFFECT
 	dw NULL                      ; unused effect

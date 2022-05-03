@@ -808,9 +808,10 @@ DoExplodeSpecialEffects:
 	ld a, [wSubAnimCounter]
 	cp 1 ; is it the end of the subanimation?
 	jr nz, FlashScreenEveryFourFrameBlocks
-; if it's the end of the subanimation, make the attacking pokemon disappear
-	hlcoord 1, 5
-	jp AnimationHideMonPic ; make pokemon disappear
+	ret
+	; if it's the end of the subanimation, make the attacking pokemon disappear
+	;hlcoord 1, 5
+	;jp AnimationHideMonPic ; make pokemon disappear
 
 ; flashes the screen when subanimation counter is 1 modulo 4
 DoBlizzardSpecialEffects:
@@ -1106,7 +1107,17 @@ AnimationShakeScreen:
 AnimationShakeScreenHorizontallyFast:
 	predef_jump PredefShakeScreenHorizontally
 
-AnimationWaterDropletsEverywhere:
+AnimationWaterDropletsEverywhereFast:
+; Draws water droplets all over the screen and makes them
+; scroll. It's hard to describe, but it's the main animation
+; in Surf/Mist/Toxic.
+	xor a
+	ld [wWhichBattleAnimTileset], a
+	call LoadAnimationTileset
+	ld d, 16
+	jp AnimationWaterDropletsEverywhere
+
+AnimationWaterDropletsEverywhereDefault:
 ; Draws water droplets all over the screen and makes them
 ; scroll. It's hard to describe, but it's the main animation
 ; in Surf/Mist/Toxic.
@@ -1114,6 +1125,7 @@ AnimationWaterDropletsEverywhere:
 	ld [wWhichBattleAnimTileset], a
 	call LoadAnimationTileset
 	ld d, 32
+AnimationWaterDropletsEverywhere:
 	ld a, -16
 	ld [wBaseCoordX], a
 	ld a, $71
@@ -1396,6 +1408,20 @@ AnimationShowEnemyMonPic:
 	ld hl, AnimationShowMonPic
 	jp CallWithTurnFlipped
 
+AnimationShakeBackAndForthShort:
+	ldh a, [hWhoseTurn]
+	and a
+	hlcoord 0, 5
+	decoord 2, 5
+	jr z, .next
+	hlcoord 11, 0
+	decoord 13, 0
+
+.next
+	xor a ; TILEMAP_MON_PIC
+	ld c, $05
+	jp AnimationShakeLoop
+
 AnimationShakeBackAndForth:
 ; Shakes the mon's sprite back and forth rapidly. This is used in Double Team.
 ; The mon's sprite disappears after this animation.
@@ -1410,6 +1436,7 @@ AnimationShakeBackAndForth:
 .next
 	xor a ; TILEMAP_MON_PIC
 	ld c, $10
+AnimationShakeLoop:
 .loop
 	push af
 	push bc
@@ -1472,18 +1499,30 @@ AnimationResetMonPosition:
 	call ClearMonPicFromTileMap
 	jp AnimationShowMonPic
 
-AnimationSpiralBallsInward:
+AnimationSpiralBallsInwardDefault:
+	ld a, 5
+	ld [wSpiralBallsDelay], a
 ; Creates an effect that looks like energy balls spiralling into the
 ; player mon's sprite.  Used in Focus Energy, for example.
+AnimationSpiralBallsInward:
+	ld a, [wSpiralBallsDelay]
+	cp 2
+	jr z, .fastCheck
 	ldh a, [hWhoseTurn]
 	and a
-	jr z, .playerTurn
+	jr z, .onPlayer
+	jr .onEnemy
+.fastCheck
+	ldh a, [hWhoseTurn]
+	and a
+	jr nz, .onPlayer
+.onEnemy
 	ld a, -40
 	ld [wSpiralBallsBaseY], a
 	ld a, 80
 	ld [wSpiralBallsBaseX], a
 	jr .next
-.playerTurn
+.onPlayer
 	xor a
 	ld [wSpiralBallsBaseY], a
 	ld [wSpiralBallsBaseX], a
@@ -1515,7 +1554,15 @@ AnimationSpiralBallsInward:
 	inc de
 	dec c
 	jr nz, .innerLoop
-	ld c, 5
+	ld a, [wSpiralBallsDelay]
+	ld c, a
+	cp 2
+	jr z, .playSound
+	jr .frameDelay
+.playSound
+	ld a, SFX_BATTLE_1E
+	call PlaySound
+.frameDelay
 	call DelayFrames
 	pop hl
 	inc hl
@@ -1523,8 +1570,18 @@ AnimationSpiralBallsInward:
 	jr .loop
 .done
 	pop hl
+	ld a, [wSpiralBallsDelay]
+	cp 2
+	jr z, .finish
 	call AnimationCleanOAM
 	jp AnimationFlashScreen
+.finish
+	ret
+
+AnimationSpiralBallsInwardFast:
+	ld a, 2
+	ld [wSpiralBallsDelay], a
+	jp AnimationSpiralBallsInward
 
 SpiralBallAnimationCoordinates:
 ; y, x pairs
@@ -1683,10 +1740,10 @@ AnimationShootManyBallsUpward:
 	ldh a, [hWhoseTurn]
 	and a
 	ld hl, UpwardBallsAnimXCoordinatesPlayerTurn
-	ld a, $50 ; y coordinate for "energy" ball pillar
+	ld a, $45 ; y coordinate for "energy" ball pillar
 	jr z, .player
 	ld hl, UpwardBallsAnimXCoordinatesEnemyTurn
-	ld a, $28 ; y coordinate for "energy" ball pillar
+	ld a, $23 ; y coordinate for "energy" ball pillar
 .player
 	ld [wSavedY], a
 .loop
@@ -1705,13 +1762,13 @@ AnimationShootManyBallsUpward:
 UpwardBallsAnimXCoordinatesPlayerTurn:
 ; List of x coordinates for each pillar of "energy" balls in the
 ; AnimationShootManyBallsUpward animation. It's unused in the game.
-	db $10, $40, $28, $18, $38, $30
+	db $40, $28, $18, $38
 	db -1 ; end
 
 UpwardBallsAnimXCoordinatesEnemyTurn:
 ; List of x coordinates for each pillar of "energy" balls in the
 ; AnimationShootManyBallsUpward animation. It's unused in the game.
-	db $60, $90, $78, $68, $88, $80
+	db $90, $78, $68, $88
 	db -1 ; end
 
 AnimationMinimizeMon:
@@ -1750,6 +1807,10 @@ opt b.X ; . = 0, X = 1
 popo
 MinimizedMonSpriteEnd:
 
+AnimationSlideEnemyMonDownAndHide:
+	ld hl, AnimationSlideMonDownAndHide
+	jp CallWithTurnFlipped
+
 AnimationSlideMonDownAndHide:
 ; Slides the mon's sprite down and disappears. Used in Acid Armor.
 	ld a, TILEMAP_SLIDE_DOWN_MON_PIC_7X5
@@ -1763,7 +1824,7 @@ AnimationSlideMonDownAndHide:
 	call GetTileIDList
 	call GetMonSpriteTileMapPointerFromRowCount
 	call CopyPicTiles
-	ld c, 8
+	ld c, 15
 	call DelayFrames
 	pop af
 	inc a
@@ -1771,11 +1832,9 @@ AnimationSlideMonDownAndHide:
 	dec c
 	jr nz, .loop
 	call AnimationHideMonPic
-	ld hl, wTempPic
-	ld bc, 7 * 7 tiles
-	xor a
-	call FillMemory
-	jp CopyTempPicToMonPic
+	ld c, 30
+	call DelayFrames
+	jp AnimationShowMonPic
 
 _AnimationSlideMonOff:
 ; Slides the mon's sprite off the screen horizontally by e tiles and waits
@@ -1848,6 +1907,12 @@ _AnimationSlideMonOff:
 	ret c
 	ld a, " "
 	ret
+
+
+AnimationSlideEnemyMonHalfOff:
+; Slides the enemy mon off the screen horizontally.
+	ld hl, AnimationSlideMonHalfOff
+	jp CallWithTurnFlipped
 
 AnimationSlideMonHalfOff:
 ; Slides the mon's sprite halfway off the screen. It's used in Softboiled.

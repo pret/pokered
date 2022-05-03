@@ -223,6 +223,12 @@ SFX_Battle_09::
 SFX_Pound::
 	audio_header SFX_Pound, Ch8
 
+SFX_Acid_Armor::
+	audio_header SFX_Acid_Armor, Ch8
+
+SFX_Ice::
+	audio_header SFX_Ice, Ch5, Ch8
+
 SFX_Battle_0B::
 	audio_header SFX_Battle_0B, Ch8
 

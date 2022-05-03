@@ -1115,6 +1115,12 @@ ConfusionSideEffect:
 	ret nc
 	jr ConfusionSideEffectSuccess
 
+ConfusionBigSideEffect:
+	call BattleRandom
+	cp 25 percent ; chance of confusion
+	ret nc
+	jr ConfusionSideEffectSuccess
+
 ConfusionEffect:
 	call CheckTargetSubstitute
 	jr nz, ConfusionEffectFailed

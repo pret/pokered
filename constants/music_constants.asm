@@ -73,7 +73,7 @@ NOISE_INSTRUMENTS_START EQUS "SFX_NOISE_INSTRUMENT01"
 	music_const SFX_NOISE_INSTRUMENT13, SFX_Noise_Instrument13_1
 	music_const SFX_NOISE_INSTRUMENT14, SFX_Noise_Instrument14_1
 	music_const SFX_NOISE_INSTRUMENT15, SFX_Noise_Instrument15_1
-	music_const SFX_NOISE_INSTRUMENT16, SFX_Noise_Instrument16_1
+	music_const SFX_NOISE_INSTRUMENT16, SFX_Noise_Instrument16_1 ; ICE?
 	music_const SFX_NOISE_INSTRUMENT17, SFX_Noise_Instrument17_1
 	music_const SFX_NOISE_INSTRUMENT18, SFX_Noise_Instrument18_1
 	music_const SFX_NOISE_INSTRUMENT19, SFX_Noise_Instrument19_1
@@ -115,7 +115,7 @@ CRY_SFX_START EQUS "SFX_CRY_00"
 	music_const SFX_CRY_20,             SFX_Cry20_1
 	music_const SFX_CRY_21,             SFX_Cry21_1
 	music_const SFX_CRY_22,             SFX_Cry22_1
-	music_const SFX_CRY_23,             SFX_Cry23_1
+	music_const SFX_CRY_23,             SFX_Cry23_1 ; SCREAM sound effect misssingno
 	music_const SFX_CRY_24,             SFX_Cry24_1
 	music_const SFX_CRY_25,             SFX_Cry25_1
 CRY_SFX_END EQUS "SFX_CRY_25 + 3"
@@ -147,14 +147,14 @@ CRY_SFX_END EQUS "SFX_CRY_25 + 3"
 	music_const SFX_TELEPORT_ENTER_2,   SFX_Teleport_Enter2_1
 	music_const SFX_FLY,                SFX_Fly_1
 	music_const SFX_DENIED,             SFX_Denied_1
-	music_const SFX_ARROW_TILES,        SFX_Arrow_Tiles_1
+	music_const SFX_ARROW_TILES,        SFX_Arrow_Tiles_1 ; SFX_ARROW_TILES
 	music_const SFX_PUSH_BOULDER,       SFX_Push_Boulder_1
 	music_const SFX_SS_ANNE_HORN,       SFX_SS_Anne_Horn_1
 	music_const SFX_WITHDRAW_DEPOSIT,   SFX_Withdraw_Deposit_1
 	music_const SFX_CUT,                SFX_Cut_1
 	music_const SFX_GO_INSIDE,          SFX_Go_Inside_1
 	music_const SFX_SWAP,               SFX_Swap_1
-	music_const SFX_59,                 SFX_59_1 ; unused, sounds similar to SFX_SLOTS_STOP_WHEEL
+	music_const SFX_59,                 SFX_59_1 ; unused, sounds similar to SFX_SLOTS_STOP_WHEEL SFX_594
 	music_const SFX_PURCHASE,           SFX_Purchase_1
 	music_const SFX_COLLISION,          SFX_Collision_1
 	music_const SFX_GO_OUTSIDE,         SFX_Go_Outside_1
@@ -180,6 +180,8 @@ BATTLE_SFX_START EQUS "SFX_PECK"
 	music_const SFX_FAINT_FALL,         SFX_Faint_Fall
 	music_const SFX_BATTLE_09,          SFX_Battle_09
 	music_const SFX_POUND,              SFX_Pound
+	music_const SFX_ACID_ARMOR,         SFX_Acid_Armor
+	music_const SFX_ICE,         		SFX_Ice
 	music_const SFX_BATTLE_0B,          SFX_Battle_0B
 	music_const SFX_BATTLE_0C,          SFX_Battle_0C
 	music_const SFX_BATTLE_0D,          SFX_Battle_0D
