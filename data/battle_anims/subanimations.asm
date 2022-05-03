@@ -88,6 +88,7 @@ SubanimationPointers:
 	dw Subanimation55
 	dw SubanimationAmnesia
 	dw SubanimationAmnesia1
+	dw SubanimationBurn
 	assert_table_length NUM_SUBANIMS
 
 ; format:
@@ -966,6 +967,12 @@ SubanimationAmnesia1:
 	subanim SUBANIMTYPE_COORDFLIP, 2
 	db FRAMEBLOCK_39, BASECOORD_72, FRAMEBLOCKMODE_00
 	db FRAMEBLOCK_38, BASECOORD_72, FRAMEBLOCKMODE_00
+
+SubanimationBurn:
+	subanim SUBANIMTYPE_ENEMY, 3
+	db FRAMEBLOCK_0C, BASECOORD_20, FRAMEBLOCKMODE_00
+	db FRAMEBLOCK_0C, BASECOORD_21, FRAMEBLOCKMODE_00
+	db FRAMEBLOCK_0C, BASECOORD_23, FRAMEBLOCKMODE_00
 
 ;SubanimationScratch2:
 ;	subanim SUBANIMTYPE_HFLIP, 12

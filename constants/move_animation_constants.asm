@@ -137,6 +137,7 @@ FIRST_SE_ID EQU const_value
 	const SUBANIM_55
 	const SUBANIM_AMNESIA
 	const SUBANIM_AMNESIA1
+	const SUBANIM_BURN
 NUM_SUBANIMS EQU const_value
 
 ; types of subanimations

@@ -182,8 +182,8 @@ AttackAnimationPointers:
 	dw XStatItemBlackAnim
 	dw ShrinkingSquareBlackAnim
 	dw ShrinkingSquareBlackAnim
-	dw UnusedAnim
-	dw UnusedAnim
+	dw BurnAnim
+	dw BurnAnim
 	dw ParalyzeAnim
 	dw ParalyzeAnim
 	dw PoisonAnim
@@ -1361,10 +1361,10 @@ ShrinkingSquareBlackAnim:
 	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
 	db -1 ; end
 
-UnusedAnim:
-	battle_anim NO_MOVE, SE_LIGHT_SCREEN_PALETTE
-	battle_anim NO_MOVE, SE_SHOOT_MANY_BALLS_UPWARD
-	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+BurnAnim:
+	battle_anim EMBER, SUBANIM_BURN, 1, 1
+	battle_anim EMBER, SUBANIM_BURN, 1, 1
+	battle_anim EMBER, SUBANIM_BURN, 1, 4
 	db -1 ; end
 
 ParalyzeAnim:

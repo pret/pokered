@@ -1232,6 +1232,37 @@ FrameBlock79:
 	db 1 ; #
 	dbsprite  0,  0,  0,  0, $4e, 0
 
+;FrameBlock80:
+;	db 4 ; #
+;	dbsprite  2,  0,  0,  0, $44, 0
+;	dbsprite  3,  0,  0,  0, $44, OAM_HFLIP
+;	dbsprite  2,  1,  0,  0, $44, OAM_VFLIP
+;	dbsprite  3,  1,  0,  0, $44, OAM_HFLIP | OAM_VFLIP
+
+;FrameBlock81:
+;	db 5 ; #
+;	dbsprite  1,  1,  0,  0, $44, 0
+;	dbsprite  2,  1,  0,  0, $44, OAM_HFLIP
+;	dbsprite  1,  2,  0,  0, $44, OAM_VFLIP
+;	dbsprite  2,  2,  0,  0, $44, OAM_HFLIP | OAM_VFLIP
+;	dbsprite  3,  0,  0,  0, $47, 0
+
+;FrameBlock82:
+;	db 6 ; #
+;	dbsprite  0,  2,  0,  0, $44, 0
+;	dbsprite  1,  2,  0,  0, $44, OAM_HFLIP
+;	dbsprite  0,  3,  0,  0, $44, OAM_VFLIP
+;	dbsprite  1,  3,  0,  0, $44, OAM_HFLIP | OAM_VFLIP
+;	dbsprite  2,  1,  0,  0, $47, 0
+;	dbsprite  2,  0,  6,  2, $47, 0
+
+;FrameBlock83:
+;	db 4 ; #
+;	dbsprite  0,  3,  0,  0, $47, 0
+;	dbsprite  0,  2,  6,  2, $47, 0
+;	dbsprite  1,  1,  4,  4, $47, 0
+;	dbsprite  2,  0,  2,  6, $47, 0
+
 INCLUDE "data/battle_anims/base_coords.asm"
 
 FrameBlock00:

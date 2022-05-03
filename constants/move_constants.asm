@@ -192,10 +192,10 @@ NUM_ATTACKS EQU const_value - 1
 	const ANIM_B4
 	const ANIM_B5
 	const ANIM_B6
-	const ANIM_B7
+	const BURN_ANIM ; Plays when a monster is burned
 	const ANIM_B8
 	const ANIM_B9
-	const BURN_PSN_ANIM ; Plays when a monster is burned or poisoned
+	const PSN_ANIM ; Plays when a monster is poisoned
 	const ANIM_BB
 	const ANIM_BC
 	const SLP_ANIM ; sleeping monster
