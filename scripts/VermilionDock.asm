@@ -1,5 +1,9 @@
 VermilionDock_Script:
 	call EnableAutoTextBoxDrawing
+	ld hl, VermilionDockTrainerHeaders
+	ld de, VermilionDock_ScriptPointers
+	call ExecuteCurMapScriptInTable
+	call TruckCheck
 	CheckEventHL EVENT_STARTED_WALKING_OUT_OF_DOCK
 	jr nz, .asm_1db8d
 	CheckEventReuseHL EVENT_GOT_HM01
@@ -36,7 +40,15 @@ VermilionDock_Script:
 	SetEventReuseHL EVENT_WALKED_OUT_OF_DOCK
 	ret
 
+VermilionDock_ScriptPointers:
+	dw CheckFightingMapTrainers
+	dw DisplayEnemyTrainerTextAndStartBattle
+	dw EndTrainerBattle
+
 VermilionDock_1db9b:
+	ld a, [wObtainedBadges]
+	bit 4, a ; after obtaining 4 badges the ship returns
+	ret nz
 	SetEventForceReuseHL EVENT_SS_ANNE_LEFT
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wJoyIgnore], a
@@ -210,7 +222,171 @@ VermilionDock_EraseSSAnne:
 
 VermilionDock_TextPointers:
 	dw VermilionDockText1
+	dw VermilionDockText2
 
 VermilionDockText1:
 	text_far _VermilionDockText1
 	text_end
+
+VermilionDockTrainerHeaders:
+	def_trainers
+MewTrainerHeader:
+	trainer EVENT_ENCOUNTERED_MEW, 0, MewBattleText, MewBattleText, MewBattleText
+	db -1 ; end
+
+VermilionDockText2:
+	text_asm
+	ld hl, MewTrainerHeader
+	call TalkToTrainer
+	jp TextScriptEnd
+
+MewBattleText:
+	text_far _MewtwoBattleText ; Mew!
+	text_asm
+	ld a, MEW
+	call PlayCry
+	call WaitForSoundToFinish
+	jp TextScriptEnd
+
+TruckOAMTable:
+	db $50, $28, $C0, $10
+	db $50, $30, $C1, $10
+	db $50, $38, $C2, $10
+	db $50, $40, $C3, $10
+	db $58, $28, $C4, $10
+	db $58, $30, $C5, $10
+	db $58, $38, $C6, $10
+	db $58, $40, $C7, $10
+
+RedLeftOAMTable:
+	db $8,$0,$9,$0
+	db $a,$2,$b,$3
+
+TruckSpriteGFX: INCBIN  "gfx/sprites/truck_sprite.2bpp"
+
+TruckCheck:
+	CheckEventHL EVENT_FOUND_MEW
+	jp nz, ChangeTruckTile
+	ld c, HS_MEW_VERMILION_DOCK
+	ld b, $2
+	ld hl, wMissableObjectFlags
+	predef FlagActionPredef
+	ld a, c
+	and a
+	jr nz, .skiphidingmew
+	ld a, HS_MEW_VERMILION_DOCK
+	ld [wMissableObjectIndex], a
+	predef HideObject
+.skiphidingmew
+	ld a, [wd728]
+	bit 0, a ; using Strength?
+	ret z
+	; the position for moving truck is $00, $15
+	ld hl, wYCoord
+	ld a, [hli]
+	and a
+	ret nz
+	ld a, [hl]
+	cp $16
+	ret nz
+	; if the player is trying to walk left
+	ld a, [wPlayerDirection]
+	cp 2
+	ret nz
+	
+	xor a
+	ld [$ff8c], a
+	ld a, $8
+	ld [$ff8d], a
+	call SetSpriteFacingDirection
+	ld a, $ff
+	ld [wJoyIgnore], a
+	ld [wUpdateSpritesEnabled], a
+	xor a
+	ld bc, $4c48
+	ld de, RedLeftOAMTable
+	call WriteOAMBlock
+	ld bc, (Bank(TruckSpriteGFX) << 8) | 8
+	ld hl, vChars1 + $400
+	ld de, TruckSpriteGFX
+	call CopyVideoData
+	ld hl, TruckOAMTable
+	ld bc, $20
+	ld de, wOAMBuffer + $20
+	call CopyData
+	ld a, $c
+	ld [wNewTileBlockID], a ; used to be wd09f
+	ld bc, $a
+	predef ReplaceTileBlock
+	; moving the truck
+	ld a, SFX_PUSH_BOULDER
+	call PlaySound
+	ld b, 32
+	ld de, 4
+.movingtruck
+	ld hl, wOAMBuffer + $21
+	ld a, 8
+.movingtruck2
+	dec [hl]
+	add hl, de
+	dec a
+	jr nz, .movingtruck2
+	ld c, 2
+	call DelayFrames
+	dec b
+	jr nz, .movingtruck
+	ld a, $3
+	ld [wNewTileBlockID], a ; used to be wd09f
+	ld bc, $9
+	predef ReplaceTileBlock
+	call ShowMew
+	jp FinishShowMew
+	; show mew and print its dialogue
+ShowMew:	
+	ld a, 1
+	ld [wUpdateSpritesEnabled], a
+	ld a, HS_MEW_VERMILION_DOCK
+	ld [wMissableObjectIndex], a
+	predef ShowObject
+	ret
+FinishShowMew:
+	ld c, 60
+	call DelayFrames
+	xor a
+	ld [wJoyIgnore], a
+	SetEvent EVENT_FOUND_MEW
+	ret
+
+ChangeTruckTile:
+	ld bc, $9
+	call GetOWCoord
+	ld a, [hl]
+	cp $3
+	ret z
+	ld a, $3
+	ld [hli], a
+	ld a, $c
+	ld [hl], a
+	CheckEvent EVENT_ENCOUNTERED_MEW
+	call z, ShowMew
+	jpfar RedrawMapView
+
+GetOWCoord:
+	ld hl, wOverworldMap + 2
+	ld a, [wCurMapWidth]
+	add $6
+	ld e, a
+	ld d, $0
+	add hl, de
+	add hl, de
+	inc b
+	inc c
+.bloop
+	add hl, de
+	dec b
+	jr nz, .bloop
+.cloop
+	inc hl
+	dec c
+	jr nz, .cloop
+	ret

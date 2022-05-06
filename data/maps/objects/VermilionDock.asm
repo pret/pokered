@@ -8,5 +8,6 @@ VermilionDock_Object:
 	def_bg_events
 
 	def_object_events
+	object_event 21,  0, SPRITE_FAIRY, STAY, DOWN, 2, MEW, 50
 
 	def_warps_to VERMILION_DOCK
