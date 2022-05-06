@@ -39,6 +39,7 @@ HealEffect_:
 	jr z, .restEffect
 	ld hl, wEnemyMonStatus
 .restEffect
+	callfar UndoBurnParStats ; FIXED: remove negative effects of burn/paralyze on stats before healing
 	ld a, [hl]
 	and a
 	ld [hl], 2 ; clear status and set number of turns asleep to 2

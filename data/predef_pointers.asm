@@ -50,7 +50,7 @@ PredefPointers::
 	add_predef UpdateHPBar
 	add_predef HPBarLength
 	add_predef Diploma_TextBoxBorder
-	add_predef DoubleOrHalveSelectedStats
+	add_predef UndoBurnParStats
 	add_predef ShowPokedexMenu
 	add_predef EvolutionAfterBattle
 	add_predef SaveSAVtoSRAM0
