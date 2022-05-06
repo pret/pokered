@@ -2,7 +2,6 @@ ResidualEffects2:
 ; non-side effects not included in ResidualEffects1
 ; stat-affecting moves, sleep-inflicting moves, and Bide
 ; e.g., Meditate, Bide, Hypnosis
-	db EFFECT_01
 	db ATTACK_UP1_EFFECT
 	db DEFENSE_UP1_EFFECT
 	db SPEED_UP1_EFFECT
@@ -29,4 +28,7 @@ ResidualEffects2:
 	db SPECIAL_DOWN2_EFFECT
 	db ACCURACY_DOWN2_EFFECT
 	db EVASION_DOWN2_EFFECT
+	db ATTACK_ACCURACY_UP1_EFFECT
+	db ATTACK_DEFENSE_UP1_EFFECT
+	db ATTACK_SPECIAL_SPEED_UP1
 	db -1 ; end

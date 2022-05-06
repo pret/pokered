@@ -241,8 +241,7 @@ FreezeBurnParalyzeEffect:
 	call HalveAttackDueToBurn ; halve attack of affected mon
 	ld a, ANIM_A9
 	call PlayBattleAnimation
-	ld hl, BurnedText
-	jp PrintText
+	jp PrintBurnText
 .freeze1
 	call ClearHyperBeam ; resets hyper beam (recharge) condition from target
 	ld a, 1 << FRZ
@@ -290,13 +289,16 @@ FreezeBurnParalyzeEffect:
 	ld a, 1 << BRN
 	ld [wBattleMonStatus], a
 	call HalveAttackDueToBurn
-	ld hl, BurnedText
-	jp PrintText
+	jp PrintBurnText
 .freeze2
 ; hyper beam bits aren't reseted for opponent's side
 	ld a, 1 << FRZ
 	ld [wBattleMonStatus], a
 	ld hl, FrozenText
+	jp PrintText
+
+PrintBurnText:
+	ld hl, BurnedText
 	jp PrintText
 
 BurnedText:
@@ -346,6 +348,83 @@ FireDefrostedText:
 	text_far _FireDefrostedText
 	text_end
 
+; increases attack, special, and speed as a move effect
+AttackSpecialSpeedUpEffect:
+	;values for the enemy's turn
+	ld de, wPlayerMoveEffect
+	ldh a, [hWhoseTurn]
+	and a
+	jr z, .next
+	; values for the player's turn
+	ld de, wEnemyMoveEffect
+.next
+	ld a, SPECIAL_UP1_EFFECT
+	ld [de], a
+	push de
+	call StatModifierUpEffect ; stat modifier raising function
+	pop de
+	ld a, ATTACK_UP_SIDE_EFFECT
+	ld [de], a ; we do the side effect for the second+third stat because it won't run the animation
+	push de
+	call StatModifierUpEffect ; stat modifier raising function
+	pop de
+	ld a, SPEED_UP_SIDE_EFFECT
+	ld [de], a 
+	push de
+	call StatModifierUpEffect ; stat modifier raising function
+	pop de
+	ld a, ATTACK_SPECIAL_SPEED_UP1
+	ld [de], a
+	ret
+
+; increases both attack and defense as a move effect
+AttackDefenseUpEffect:
+	;values for the enemy's turn
+	ld de, wPlayerMoveEffect
+	ldh a, [hWhoseTurn]
+	and a
+	jr z, .next
+	; values for the player's turn
+	ld de, wEnemyMoveEffect
+.next
+	ld a, DEFENSE_UP1_EFFECT
+	ld [de], a
+	push de
+	call StatModifierUpEffect ; stat modifier raising function
+	pop de
+	ld a, ATTACK_UP_SIDE_EFFECT
+	ld [de], a ; we do the side effect for the second stat because it won't run the animation
+	push de
+	call StatModifierUpEffect ; stat modifier raising function
+	pop de
+	ld a, ATTACK_DEFENSE_UP1_EFFECT
+	ld [de], a
+	ret
+
+; increases both accuracy and attack as a move effect
+AccuracyAttackUpEffect:
+	;values for the enemy's turn
+	ld de, wPlayerMoveEffect
+	ldh a, [hWhoseTurn]
+	and a
+	jr z, .next
+	; values for the player's turn
+	ld de, wEnemyMoveEffect
+.next
+	ld a, ACCURACY_UP1_EFFECT
+	ld [de], a
+	push de
+	call StatModifierUpEffect ; stat modifier raising function
+	pop de
+	ld a, ATTACK_UP_SIDE_EFFECT
+	ld [de], a ; we do the side effect for the second stat because it won't run the animation
+	push de
+	call StatModifierUpEffect ; stat modifier raising function
+	pop de
+	ld a, ATTACK_ACCURACY_UP1_EFFECT
+	ld [de], a
+	ret
+
 StatModifierUpEffect:
 	ld hl, wPlayerMonStatMods
 	ld de, wPlayerMoveEffect
@@ -356,6 +435,17 @@ StatModifierUpEffect:
 	ld de, wEnemyMoveEffect
 .statModifierUpEffect
 	ld a, [de]
+	ld [wWhichStatMod], a
+	call MapEffectToStat
+	ld [wWhatStat], a
+	ld a, [de]
+	call MapSideEffectToStatMod
+	cp $ff
+	jr z, .loadDefault
+	jr .continue 
+.loadDefault
+	ld a, [de]
+.continue
 	sub ATTACK_UP1_EFFECT
 	cp EVASION_UP1_EFFECT + $3 - ATTACK_UP1_EFFECT ; covers all +1 effects
 	jr c, .incrementStatMod
@@ -370,6 +460,13 @@ StatModifierUpEffect:
 	cp b ; can't raise stat past +6 ($d or 13)
 	jp c, PrintNothingHappenedText
 	ld a, [de]
+	call MapSideEffectToStatMod
+	cp $ff
+	jr z, .loadDefault2
+	jr .continue2
+.loadDefault2
+	ld a, [de]
+.continue2
 	cp ATTACK_UP1_EFFECT + $8 ; is it a +2 effect?
 	jr c, .ok
 	inc b ; if so, increment stat mod again
@@ -466,7 +563,12 @@ UpdateStatDone:
 	ld de, wEnemyMoveNum
 	ld bc, wEnemyMonMinimized
 .playerTurn
-	ld a, [de]
+	ld a, [wWhichStatMod]
+	cp ATTACK_UP_SIDE_EFFECT
+	jr z, .skipAnimation
+	cp SPEED_UP_SIDE_EFFECT
+	jr z, .skipAnimation
+	ld a, [de]	
 	cp MINIMIZE
 	jr nz, .notMinimize
  ; if a substitute is up, slide off the substitute and show the mon pic before
@@ -481,6 +583,7 @@ UpdateStatDone:
 	pop de
 .notMinimize
 	call PlayCurrentMoveAnimation
+.skipAnimation
 	ld a, [de]
 	cp MINIMIZE
 	jr nz, .applyBadgeBoostsAndStatusPenalties
@@ -492,16 +595,33 @@ UpdateStatDone:
 	pop af
 	call nz, Bankswitch
 .applyBadgeBoostsAndStatusPenalties
-	ldh a, [hWhoseTurn]
+	ld a, [hWhoseTurn]
 	and a
-	call z, ApplyBadgeStatBoosts ; whenever the player uses a stat-up move, badge boosts get reapplied again to every stat,
+	call z, ApplyBadgeBoostsForSpecificStat ; whenever the player uses a stat-up move, badge boosts get reapplied again to every stat,
 	                             ; even to those not affected by the stat-up move (will be boosted further)
+	                             ; FIXED: badge boosts only applied to the specific stat being modified
 	ld hl, MonsStatsRoseText
 	call PrintText
 
-; these shouldn't be here
-	call QuarterSpeedDueToParalysis ; apply speed penalty to the player whose turn is not, if it's paralyzed
-	jp HalveAttackDueToBurn ; apply attack penalty to the player whose turn is not, if it's burned
+; these always run on the opponent, and run regardless of what stat was modified
+; FIXED: These ran on the opponent's stats erroneously
+; FIXED: These only run if the specific stat burn or paralyze affect is being modified
+	ld a, [hWhoseTurn]
+	push af
+	xor 1 ; flip the turn temporarily to make these run on whoever's turn it currently is instead of the opponent correctly
+	ld [hWhoseTurn], a
+	ld a, [wWhatStat]
+	cp MOD_SPEED
+	call z, QuarterSpeedDueToParalysis ; apply speed penalty to the player whose turn it is, if it's paralyzed
+	ld a, [wWhatStat]
+	cp MOD_ATTACK
+	call z, HalveAttackDueToBurn ; apply attack penalty to the player whose turn it is, if it's burned
+	pop af
+	ld [hWhoseTurn], a
+	ld a, $ff
+	ld [wWhatStat], a ; no longer modifying a stat
+	ld [wWhichStatMod], a ; no longer modifying a stat
+	ret
 
 RestoreOriginalStatModifier:
 	pop hl
@@ -521,8 +641,13 @@ MonsStatsRoseText:
 	jr z, .playerTurn
 	ld a, [wEnemyMoveEffect]
 .playerTurn
+	cp ATTACK_UP_SIDE_EFFECT
+	jp z, .rose
+	cp SPEED_UP_SIDE_EFFECT
+	jp z, .rose
 	cp ATTACK_DOWN1_EFFECT
 	ret nc
+.rose
 	ld hl, RoseText
 	ret
 
@@ -553,6 +678,9 @@ StatModifierDownEffect:
 .statModifierDownEffect
 	call CheckTargetSubstitute ; can't hit through substitute
 	jp nz, MoveMissed
+	ld a, [de]
+	call MapEffectToStat
+	ld [wWhatStat], a
 	ld a, [de]
 	cp ATTACK_DOWN_SIDE_EFFECT
 	jr c, .nonSideEffect
@@ -684,16 +812,26 @@ UpdateLoweredStatDone:
 .ApplyBadgeBoostsAndStatusPenalties
 	ldh a, [hWhoseTurn]
 	and a
-	call nz, ApplyBadgeStatBoosts ; whenever the player uses a stat-down move, badge boosts get reapplied again to every stat,
+	call nz, ApplyBadgeBoostsForSpecificStat ; whenever the player uses a stat-down move, badge boosts get reapplied again to every stat,
 	                              ; even to those not affected by the stat-up move (will be boosted further)
+	                             ; FIXED: badge boosts only applied to the specific stat being modified
 	ld hl, MonsStatsFellText
 	call PrintText
 
 ; These where probably added given that a stat-down move affecting speed or attack will override
 ; the stat penalties from paralysis and burn respectively.
 ; But they are always called regardless of the stat affected by the stat-down move.
-	call QuarterSpeedDueToParalysis
-	jp HalveAttackDueToBurn
+; FIXED: These only run if the specific stat burn or paralyze affect is being modified
+	ld a, [wWhatStat]
+	cp MOD_SPEED
+	call z, QuarterSpeedDueToParalysis ; apply speed penalty to the player whose turn it is, if it's paralyzed
+	ld a, [wWhatStat]
+	cp MOD_ATTACK
+	call z, HalveAttackDueToBurn ; apply attack penalty to the player whose turn it is, if it's burned
+	ld a, $ff
+	ld [wWhatStat], a ; no longer modifying a stat
+	ret
+
 
 CantLowerAnymore_Pop:
 	pop de
@@ -756,35 +894,35 @@ PrintStatText:
 	jp CopyData
 
 INCLUDE "data/battle/stat_mod_names.asm"
-
 INCLUDE "data/battle/stat_modifiers.asm"
+INCLUDE "data/battle/stat_mod_stat_mapping.asm"
 
-BideEffect:
-	ld hl, wPlayerBattleStatus1
-	ld de, wPlayerBideAccumulatedDamage
-	ld bc, wPlayerNumAttacksLeft
-	ldh a, [hWhoseTurn]
-	and a
-	jr z, .bideEffect
-	ld hl, wEnemyBattleStatus1
-	ld de, wEnemyBideAccumulatedDamage
-	ld bc, wEnemyNumAttacksLeft
-.bideEffect
-	set STORING_ENERGY, [hl] ; mon is now using bide
-	xor a
-	ld [de], a
-	inc de
-	ld [de], a
-	ld [wPlayerMoveEffect], a
-	ld [wEnemyMoveEffect], a
-	call BattleRandom
-	and $1
-	inc a
-	inc a
-	ld [bc], a ; set Bide counter to 2 or 3 at random
-	ldh a, [hWhoseTurn]
-	add XSTATITEM_ANIM
-	jp PlayBattleAnimation2
+;BideEffect: ;CHANGED: Bide effect switched to a stat buff
+;	ld hl, wPlayerBattleStatus1
+;	ld de, wPlayerBideAccumulatedDamage
+;	ld bc, wPlayerNumAttacksLeft
+;	ldh a, [hWhoseTurn]
+;	and a
+;	jr z, .bideEffect
+;	ld hl, wEnemyBattleStatus1
+;	ld de, wEnemyBideAccumulatedDamage
+;	ld bc, wEnemyNumAttacksLeft
+;.bideEffect
+;	set STORING_ENERGY, [hl] ; mon is now using bide
+;	xor a
+;	ld [de], a
+;	inc de
+;	ld [de], a
+;	ld [wPlayerMoveEffect], a
+;	ld [wEnemyMoveEffect], a
+;	call BattleRandom
+;	and $1
+;	inc a
+;	inc a
+;	ld [bc], a ; set Bide counter to 2 or 3 at random
+;	ldh a, [hWhoseTurn]
+;	add XSTATITEM_ANIM
+;	jp PlayBattleAnimation2
 
 ThrashPetalDanceEffect:
 	ld hl, wPlayerBattleStatus1
@@ -1107,7 +1245,10 @@ FocusEnergyEffect:
 	jpfar FocusEnergyEffect_
 
 RecoilEffect:
-	jpfar RecoilEffect_
+	jpfar DefaultRecoilEffect_
+
+BigRecoilEffect:
+	jpfar BigRecoilEffect_
 
 ConfusionSideEffect:
 	call BattleRandom
@@ -1150,8 +1291,12 @@ ConfusionSideEffectSuccess:
 	inc a
 	ld [bc], a ; confusion status will last 2-5 turns
 	pop af
+	cp CONFUSION_BIG_SIDE_EFFECT
+	jr z, .done
 	cp CONFUSION_SIDE_EFFECT
-	call nz, PlayCurrentMoveAnimation2
+	jr z, .done
+	call PlayCurrentMoveAnimation2
+.done
 	ld hl, BecameConfusedText
 	jp PrintText
 
@@ -1160,11 +1305,16 @@ BecameConfusedText:
 	text_end
 
 ConfusionEffectFailed:
+	cp CONFUSION_BIG_SIDE_EFFECT
+	ret z
 	cp CONFUSION_SIDE_EFFECT
 	ret z
 	ld c, 50
 	call DelayFrames
 	jp ConditionalPrintButItFailed
+
+BurnEffect:
+	jpfar BurnEffect_
 
 ParalyzeEffect:
 	jpfar ParalyzeEffect_
@@ -1194,15 +1344,16 @@ ClearHyperBeam:
 	pop hl
 	ret
 
-RageEffect:
-	ld hl, wPlayerBattleStatus2
-	ldh a, [hWhoseTurn]
-	and a
-	jr z, .player
-	ld hl, wEnemyBattleStatus2
-.player
-	set USING_RAGE, [hl] ; mon is now in "rage" mode
+RageEffect: ; rage effect was removed
 	ret
+	;ld hl, wPlayerBattleStatus2
+	;ldh a, [hWhoseTurn]
+	;and a
+	;jr z, .player
+	;ld hl, wEnemyBattleStatus2
+;.player
+	;set USING_RAGE, [hl] ; mon is now in "rage" mode
+	;ret
 
 MimicEffect:
 	ld c, 50

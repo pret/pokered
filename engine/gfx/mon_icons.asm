@@ -5,7 +5,7 @@ AnimatePartyMon_ForceSpeed1:
 	inc a
 	jr GetAnimationSpeed
 
-ResetPartyAnimation:
+ResetPartyAnimation::
 	push bc
 	ld hl, $0
 	ld bc, 16
@@ -312,9 +312,7 @@ BugIconFrame2:       INCBIN "gfx/icons/bug.2bpp", INC_FRAME_2
 PlantIconFrame2:     INCBIN "gfx/icons/plant.2bpp", INC_FRAME_2
 SnakeIconFrame1:     INCBIN "gfx/icons/snake.2bpp", INC_FRAME_1
 QuadrupedIconFrame1: INCBIN "gfx/icons/quadruped.2bpp", INC_FRAME_1
-BugWingedIconFrame1: INCBIN "gfx/icons/bug_winged.2bpp", INC_FRAME_1
 SnakeIconFrame2:     INCBIN "gfx/icons/snake.2bpp", INC_FRAME_2
 QuadrupedIconFrame2: INCBIN "gfx/icons/quadruped.2bpp", INC_FRAME_2
-BugWingedIconFrame2: INCBIN "gfx/icons/bug_winged.2bpp", INC_FRAME_2
 
 TradeBubbleIconGFX:  INCBIN "gfx/trade/bubble.2bpp"

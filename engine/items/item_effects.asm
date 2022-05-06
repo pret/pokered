@@ -1,4 +1,6 @@
 UseItem_::
+	xor a
+	ld [wListWithTMText], a ; if we used an item we don't need to display TM text afterwards.
 	ld a, 1
 	ld [wActionResultOrTookBattleTurn], a ; initialise to success value
 	ld a, [wcf91] ;contains item_ID

@@ -1,3 +1,15 @@
+BigRecoilEffect_:
+	call RecoilEffect_
+	call GotRecoilDamage
+	ret
+
+DefaultRecoilEffect_:
+	call RecoilEffect_
+	srl b
+	rr c
+	call GotRecoilDamage
+	ret
+
 RecoilEffect_:
 	ldh a, [hWhoseTurn]
 	and a
@@ -14,12 +26,9 @@ RecoilEffect_:
 	ld c, a
 	srl b
 	rr c
-	ld a, d
-	cp STRUGGLE ; struggle deals 50% recoil damage
-	jr z, .gotRecoilDamage
-	srl b
-	rr c
-.gotRecoilDamage
+	ret
+
+GotRecoilDamage:
 	ld a, b
 	or c
 	jr nz, .updateHP

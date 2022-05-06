@@ -294,6 +294,7 @@ DrawPartyMenu::
 	jr DrawPartyMenuCommon
 
 RedrawPartyMenu::
+	callfar ResetPartyAnimation
 	ld hl, RedrawPartyMenu_
 
 DrawPartyMenuCommon::

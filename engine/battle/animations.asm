@@ -1560,6 +1560,10 @@ AnimationSpiralBallsInward:
 	jr z, .playSound
 	jr .frameDelay
 .playSound
+	ld a, $01
+	ld [wFrequencyModifier], a
+	ld a, $40
+	ld [wTempoModifier], a
 	ld a, SFX_BATTLE_1E
 	call PlaySound
 .frameDelay

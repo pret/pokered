@@ -26,12 +26,12 @@ YesNoChoicePokeCenter::
 	lb bc, 8, 12
 	jr DisplayYesNoChoice
 
-WideYesNoChoice:: ; unused
-	call SaveScreenTilesToBuffer1
-	ld a, WIDE_YES_NO_MENU
-	ld [wTwoOptionMenuID], a
-	hlcoord 12, 7
-	lb bc, 8, 13
+;WideYesNoChoice:: ; unused
+;	call SaveScreenTilesToBuffer1
+;	ld a, WIDE_YES_NO_MENU
+;	ld [wTwoOptionMenuID], a
+;	hlcoord 12, 7
+;	lb bc, 8, 13
 
 DisplayYesNoChoice::
 	ld a, TWO_OPTION_MENU

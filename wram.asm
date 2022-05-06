@@ -507,7 +507,7 @@ wPlayerMonMinimized:: db
 ; number of hits by enemy in attacks like Double Slap, etc.
 wEnemyNumHits:: ; db
 ; the amount of damage accumulated by the enemy while biding
-wEnemyBideAccumulatedDamage:: dw
+; wEnemyBideAccumulatedDamage:: dw ; CHANGED: bide effect changed to normal buff move
 
 	ds 8
 ENDU
@@ -1196,6 +1196,9 @@ wEnemyMonBaseExp:: db
 wBattleMonNick:: ds NAME_LENGTH
 wBattleMon:: battle_struct wBattleMon
 
+wWhatStat:: db ; contains the stat currently being modified by a stat changing move
+wWhichStatMod:: db ; contains the stat mod type currently being carried out
+
 
 wTrainerClass:: db
 
@@ -1337,7 +1340,7 @@ wEnemyDisabledMove:: db
 
 UNION
 ; the amount of damage accumulated by the player while biding
-wPlayerBideAccumulatedDamage:: dw
+; wPlayerBideAccumulatedDamage:: dw ; CHANGED: bide effect changed to normal move
 
 NEXTU
 wUnknownSerialCounter2:: dw

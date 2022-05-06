@@ -20,7 +20,6 @@ StartMenu_Pokemon::
 	xor a
 	ld [wMenuItemToSwap], a
 	ld [wPartyMenuTypeOrMessageID], a
-	callfar ResetPartyAnimation
 	call GoBackToPartyMenu
 .checkIfPokemonChosen
 	jr nc, .chosePokemon
@@ -861,3 +860,4 @@ SwitchPartyMon_InitVarOrSwapData:
 	pop de
 	pop hl
 	ret
+

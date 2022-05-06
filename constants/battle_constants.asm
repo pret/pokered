@@ -47,7 +47,7 @@ MAX_NEUTRAL_DAMAGE EQU 999
 
 ; fixed damage constants
 SONICBOOM_DAMAGE   EQU 20
-DRAGON_RAGE_DAMAGE EQU 40
+;DRAGON_RAGE_DAMAGE EQU 40
 
 ; type effectiveness factors, scaled by 10
 SUPER_EFFECTIVE    EQU 20
@@ -72,7 +72,7 @@ SPDSPCDV_TRAINER EQU $88
 
 ; wPlayerBattleStatus1 or wEnemyBattleStatus1 bit flags
 	const_def
-	const STORING_ENERGY           ; 0 ; Bide
+	const STORING_ENERGY           ; 0 ; Bide CHANGED: (now unused since bide is a normal buff move)
 	const THRASHING_ABOUT          ; 1 ; e.g. Thrash
 	const ATTACKING_MULTIPLE_TIMES ; 2 ; e.g. Double Kick, Fury Attack
 	const FLINCHED                 ; 3
