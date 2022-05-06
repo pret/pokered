@@ -223,10 +223,6 @@ SSAnneNotHereText:
 	text_far _SSAnneNotHereText
 	text_end
 
-SSAnneCameBackText:
-	text_far _SSAnneCameBackText
-	text_end
-
 VermilionCityText4:
 	text_far _VermilionCityText4
 	text_end
