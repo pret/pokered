@@ -158,6 +158,8 @@ GainExperience:
 	farcall CalcLevelFromExperience
 	pop hl
 	ld a, [hl] ; current level
+	ld [wTempCoins1], a	;FIXED: fixing skip move-learn glitch: need to store the current level in wram
+	;wTempCoins1 was chosen because it's used only for slot machine and gets defaulted to 1 during the mini-game
 	cp d
 	jp z, .nextMon ; if level didn't change, go to next mon
 	ld a, [wCurEnemyLVL]
@@ -253,7 +255,23 @@ GainExperience:
 	ld [wMonDataLocation], a
 	ld a, [wd0b5]
 	ld [wd11e], a
+	;;;;;;;;;;;;;;;;;;;;
+	;FIXED: fixing skip move-learn glitch: here is where moves are learned from level-up
+	ld a, [wCurEnemyLVL]	; load the level to advance to into a. this starts out as the final level.
+	ld c, a	; load the final level to grow to over to c
+	ld a, [wTempCoins1]	; load the current level into a
+	ld b, a	; load the current level over to b
+.inc_level	; marker for looping back 
+	inc b	;increment 	the current level
+	ld a, b	;put the current level in a
+	ld [wCurEnemyLVL], a	;and reset the level to advance to as merely 1 higher
+	push bc	;save b & c on the stack as they hold the current a true final level
 	predef LearnMoveFromLevelUp
+	pop bc	;get the current and final level values back from the stack
+	ld a, b	;load the current level into a
+	cp c	;compare it with the final level
+	jr nz, .inc_level	;loop back again if final level has not been reached
+	;;;;;;;;;;;;;;;;;;;;
 	ld hl, wCanEvolveFlags
 	ld a, [wWhichPokemon]
 	ld c, a
