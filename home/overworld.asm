@@ -276,12 +276,16 @@ OverworldLoopLessDelay::
 .moveAhead2
 	ld hl, wFlags_0xcd60
 	res 2, [hl]
+	ld a, [wd736]
+	bit 7, a ; spinning?
+	jr nz, .doBikeSpeed ; FIXED: faster spinning movement
 	ld a, [wWalkBikeSurfState]
 	dec a ; riding a bike?
 	jr nz, .normalPlayerSpriteAdvancement
 	ld a, [wd736]
 	bit 6, a ; jumping a ledge?
 	jr nz, .normalPlayerSpriteAdvancement
+.doBikeSpeed
 	call DoBikeSpeedup
 .normalPlayerSpriteAdvancement
 	call AdvancePlayerSprite
