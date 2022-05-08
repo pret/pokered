@@ -555,6 +555,9 @@ SquirtlePicFrontRG::   INCBIN "gfx/pokemon/front_RG/squirtle.pic"
 ExeggutorPicFront::    INCBIN "gfx/pokemon/front/exeggutor.pic"
 ExeggutorPicBackSW::   INCBIN "gfx/pokemon/back_sw/exeggutorb.pic"
 ExeggutorPicFrontY::   INCBIN "gfx/pokemon/front_y/exeggutor.pic"
+MewPicFront::          INCBIN "gfx/pokemon/front/mew.pic" ; moved from bank 1
+MewPicBack::           INCBIN "gfx/pokemon/back/mewb.pic" ; moved from bank 1
+MewPicBackSW::         INCBIN "gfx/pokemon/back_sw/mewb.pic" ; moved from bank 1
 
 RedPicBack::           INCBIN "gfx/player/redb.pic"
 OldManPicBack::        INCBIN "gfx/battle/oldmanb.pic"

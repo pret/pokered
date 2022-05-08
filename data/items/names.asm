@@ -49,7 +49,7 @@ ItemNames::
 	li "LEAF STONE"
 	li "CARD KEY"
 	li "NUGGET"
-	li "PP UP"
+	li "APEX CHIP"
 	li "POKé DOLL"
 	li "FULL HEAL"
 	li "REVIVE"

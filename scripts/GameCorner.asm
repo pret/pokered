@@ -285,12 +285,58 @@ CeladonGameCornerText6:
 CeladonGameCornerText7:
 	text_asm
 	CheckEvent EVENT_BEAT_ERIKA
+	jr nz, .afterBattle
 	ld hl, CeladonGameCornerText_48dca
-	jr z, .asm_48dc4
-	ld hl, CeladonGameCornerText_48dcf
-.asm_48dc4
 	call PrintText
+	jr .done
+.afterBattle
+	ld hl, CeladonGameCornerText_gymguide
+	call PrintText
+	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS ; have to hear about apex chips to receive them after that
+	jr z, .gameCornerPrizes
+	CheckEvent EVENT_GOT_CELADON_APEX_CHIPS
+	jr nz, .gameCornerPrizes
+.giveApexChips
+	ld hl, GymGuideMoreApexChipText4
+	call PrintText
+	lb bc, APEX_CHIP, 2
+	call GiveItem
+	jr nc, .BagFull
+	ld hl, ReceivedApexChipsText4
+	call PrintText
+	ld hl, CeladonGameCornerGymGuideApexChipGrassText
+	call PrintText
+	SetEvent EVENT_GOT_CELADON_APEX_CHIPS
+.gameCornerPrizes
+	ld hl, CeladonGameCornerText_48dcf
+	call PrintText
+	jr .done
+.BagFull
+	ld hl, ApexNoRoomText4
+	call PrintText
+.done
 	jp TextScriptEnd
+
+ReceivedApexChipsText4:
+	text_far _ReceivedApexChipsText
+	sound_get_item_1
+	text_end
+
+ApexNoRoomText4:
+	text_far _TM34NoRoomText
+	text_end
+
+GymGuideMoreApexChipText4:
+	text_far _GymGuideMoreApexChipText
+	text_end
+
+CeladonGameCornerText_gymguide:
+	text_far _CeladonGameCornerText_gymguide
+	text_end
+
+CeladonGameCornerGymGuideApexChipGrassText:
+	text_far _CeladonGameCornerGymGuideApexChipGrassText
+	text_end
 
 CeladonGameCornerText_48dca:
 	text_far _CeladonGameCornerText_48dca

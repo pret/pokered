@@ -236,8 +236,47 @@ VermilionGymGuideText:
 .afterBeat
 	ld hl, VermilionGymGuidePostBattleText
 	call PrintText
+	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS ; have to hear about apex chips to receive them after that
+	jr z, .done
+	CheckEvent EVENT_GOT_VERMILION_APEX_CHIPS
+	jr nz, .alreadyApexChips
+.giveApexChips
+	ld hl, GymGuideMoreApexChipText3
+	call PrintText
+	lb bc, APEX_CHIP, 2
+	call GiveItem
+	jr nc, .BagFull
+	ld hl, ReceivedApexChipsText3
+	call PrintText
+	ld hl, VermilionGymGuideApexChipElectricText
+	call PrintText
+	SetEvent EVENT_GOT_VERMILION_APEX_CHIPS
+.alreadyApexChips
+	ld hl, AlreadyReceivedApexChipsText3
+	call PrintText
+	jr .done
+.BagFull
+	ld hl, ApexNoRoomText3
+	call PrintText
 .done
 	jp TextScriptEnd
+
+ReceivedApexChipsText3:
+	text_far _ReceivedApexChipsText
+	sound_get_item_1
+	text_end
+
+ApexNoRoomText3:
+	text_far _TM34NoRoomText
+	text_end
+
+GymGuideMoreApexChipText3:
+	text_far _GymGuideMoreApexChipText
+	text_end
+
+AlreadyReceivedApexChipsText3:
+	text_far _AlreadyReceivedApexChipsText
+	text_end
 
 VermilionGymGuidePreBattleText:
 	text_far _VermilionGymGuidePreBattleText
@@ -245,4 +284,8 @@ VermilionGymGuidePreBattleText:
 
 VermilionGymGuidePostBattleText:
 	text_far _VermilionGymGuidePostBattleText
+	text_end
+
+VermilionGymGuideApexChipElectricText:
+	text_far _VermilionGymGuideApexChipElectricText
 	text_end

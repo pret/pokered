@@ -85,7 +85,6 @@ DoubleSelectedStats:
 ;It's meant to be run right before healing paralysis or burn so as to 
 ;undo the stat changes.
 UndoBurnParStats:
-	call PrintDebugMsg
 	ld hl, wBattleMonStatus
 	ld de, wPlayerStatsToDouble
 	ld a, [hWhoseTurn]

@@ -92,7 +92,7 @@ _LearnedMove1Text::
 _WhichMoveToForgetText::
 	text "Which move should"
 	next "be forgotten?"
-	done
+	prompt
 
 _AbandonLearningText::
 	text "Abandon learning"
@@ -130,6 +130,11 @@ _TryingToLearnText::
 	text_ram wStringBuffer
 	text "?"
 	done
+
+_PressStartToLearnText::
+	text "Press START to"
+	line "select a move."
+	prompt
 
 _OneTwoAndText::
 	text "1, 2 and...@"

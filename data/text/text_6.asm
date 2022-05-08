@@ -68,6 +68,44 @@ _SurfingNoPlaceToGetOffText::
 	line "to get off!"
 	prompt
 
+_ApexChipPutOnPokeballText::
+	text "You installed the"
+	line "APEX CHIP on"
+	para "@"
+	text_ram wcd6d
+	text "'s"
+	line "Poké Ball.@"
+	text_asm
+	ld a, SFX_SWITCH
+	call PlaySound
+	call WaitForSoundToFinish
+	ld c, 50
+	call DelayFrames
+	ld a, SFX_TRADE_MACHINE
+	call PlaySound
+	call WaitForSoundToFinish
+	ld c, 50
+	call DelayFrames
+	jp TextScriptEnd
+
+_ApexChipDVsMaxedText::
+	text_ram wcd6d
+	text "'s"
+	line "potential is"
+	cont "maximized!"
+	para "DVs are at max!"
+	prompt
+
+_ApexChipAlreadyUsedText::
+	text "There's already"
+	line "an APEX CHIP"
+	para "installed on"
+	line "@"
+	text_ram wcd6d
+	text "'s"
+	cont "Poké Ball."
+	prompt
+
 _VitaminStatRoseText::
 	text_ram wcd6d
 	text "'s"

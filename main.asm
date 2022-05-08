@@ -11,7 +11,6 @@ INCLUDE "engine/movie/title.asm"
 INCLUDE "engine/pokemon/load_mon_data.asm"
 INCLUDE "data/items/prices.asm"
 INCLUDE "data/items/names.asm"
-INCLUDE "data/text/unused_names.asm"
 INCLUDE "engine/gfx/sprite_oam.asm"
 INCLUDE "engine/gfx/oam_dma.asm"
 INCLUDE "engine/link/print_waiting_text.asm"
@@ -361,11 +360,15 @@ INCLUDE "data/battle_anims/subanimations.asm"
 INCLUDE "data/battle_anims/frame_blocks.asm"
 INCLUDE "engine/movie/evolution.asm"
 
+
 SECTION "Party Sprites", ROMX, BANK[$34]
+
 PartyMonSprites1: INCBIN "gfx/icons/menusprites1.2bpp"
 PartyMonSprites2: INCBIN "gfx/icons/menusprites2.2bpp"
 
+
 SECTION "newCode", ROMX
+
 INCLUDE "engine/gfx/front_sprite_options.asm"
 INCLUDE "engine/menus/sprite_options_menu.asm"
 INCLUDE "engine/menus/sprite_options_menu2.asm"

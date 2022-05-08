@@ -191,4 +191,14 @@ _FuchsiaGymGuidePostBattleText::
 	text "It's amazing how"
 	line "ninja can terrify"
 	cont "even now!"
-	done
+	prompt
+
+_FuchsiaGymGuideApexChipPoisonText::
+	text "For poison"
+	line "#MON, an "
+	cont "APEX CHIP will"
+	cont "conjure up images"
+	cont "of a dark,"
+	cont "totally overgrown"
+	cont "mangrove swamp."
+	prompt

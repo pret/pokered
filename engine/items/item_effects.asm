@@ -68,7 +68,7 @@ ItemUsePtrTable:
 	dw ItemUseEvoStone   ; LEAF_STONE
 	dw ItemUseCardKey    ; CARD_KEY
 	dw UnusableItem      ; NUGGET
-	dw UnusableItem      ; ??? PP_UP
+	dw ItemUseApexChip   ; APEX_CHIP
 	dw ItemUsePokedoll   ; POKE_DOLL
 	dw ItemUseMedicine   ; FULL_HEAL
 	dw ItemUseMedicine   ; REVIVE
@@ -799,6 +799,12 @@ ItemUseEvoStone:
 	pop af
 	ret
 
+ItemUseApexChip:
+	ld a, [wIsInBattle]
+	and a
+	jp nz, ItemUseNotTime
+	jp ItemUseMedicine
+
 ItemUseVitamin:
 	ld a, [wIsInBattle]
 	and a
@@ -1299,6 +1305,8 @@ ItemUseMedicine:
 	ld a, [wcf91]
 	cp RARE_CANDY
 	jp z, .useRareCandy
+	cp APEX_CHIP
+	jp z, .useApexChip
 	push hl
 	sub HP_UP
 	add a
@@ -1445,6 +1453,72 @@ ItemUseMedicine:
 	pop af
 	ld [wWhichPokemon], a
 	jp RemoveUsedItem
+.useApexChip	
+	push hl
+	ld bc, wPartyMon1DVs - wPartyMon1
+	add hl, bc ; hl now points to DVs
+	ld a, $FF
+	cp [hl] ; is the first byte of their DVs maxed
+	jr z, .secondCompare
+	jr .setDVs
+.secondCompare
+	inc hl
+	cp [hl] ; is the second byte of their DVs maxed
+	jr z, .alreadyUsedApex ; if so, assume we already used an apex chip on the pokemon
+	dec hl
+.setDVs
+	ld [hli], a ; set first byte of DVs to max
+	ld [hl], a  ; set second byte of DVs to max
+	pop hl
+
+	push hl
+	ld bc, wPartyMon1MaxHP - wPartyMon1
+	add hl, bc ; hl now points to MSB of max HP
+	ld a, [hli]
+	ld b, a
+	ld c, [hl]
+	pop hl
+
+	push hl
+	call .recalculateStats
+	pop hl
+	ld bc, (wPartyMon1MaxHP) - wPartyMon1
+	add hl, bc ; hl now points to MSB of recalculated max HP
+	ld a, [hli]
+	ld b, a
+	ld a, [hld]
+	ld c, a
+	
+	; set current hp to new max hp
+	ld de, (wPartyMon1HP) - wPartyMon1MaxHP
+	add hl, de ; hl now points to MSB of current HP
+	ld a, b
+	ld [hli], a
+	ld a, c
+	ld [hld], a
+
+	ld hl, ApexChipPutOnPokeballText
+	call PrintText
+	ld hl, ApexChipDVsMaxedText
+	call PrintText
+	jp RemoveUsedItem
+.alreadyUsedApex
+	pop hl
+	ld hl, ApexChipAlreadyUsedText
+	call PrintText
+	jp GBPalWhiteOut
+
+ApexChipPutOnPokeballText:
+	text_far _ApexChipPutOnPokeballText
+	text_end
+
+ApexChipDVsMaxedText:
+	text_far _ApexChipDVsMaxedText
+	text_end
+
+ApexChipAlreadyUsedText:
+	text_far _ApexChipAlreadyUsedText
+	text_end
 
 VitaminStatRoseText:
 	text_far _VitaminStatRoseText
@@ -2191,9 +2265,23 @@ ItemUseTMHM:
 	call CopyToStringBuffer
 	pop af
 	ld hl, BootedUpTMText
-	jr nc, .printBootedUpMachineText
+;;;;;
+	jr nc, .playTMSound
 	ld hl, BootedUpHMText
+.playHMSound
+	push hl
+	ld a, SFX_ENTER_PC
+	jr .printBootedUpMachineText
+.playTMSound
+	push hl
+	ld a, SFX_59
 .printBootedUpMachineText
+	call PlaySoundWaitForCurrent ; CHANGED: play a sound for booting up a HM
+	call WaitForSoundToFinish
+	ld a, SFX_LEDGE
+	call PlaySoundWaitForCurrent 
+	pop hl
+;;;;;
 	call PrintText
 	ld hl, TeachMachineMoveText
 	call PrintText
