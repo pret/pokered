@@ -133,8 +133,8 @@ _TryingToLearnText::
 
 _PressStartToLearnText::
 	text "Press START to"
-	line "select a move."
-	prompt
+	line "select a move.@"
+	text_end
 
 _OneTwoAndText::
 	text "1, 2 and...@"
