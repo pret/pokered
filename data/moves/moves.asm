@@ -153,7 +153,7 @@ Moves:
 	move LEECH_LIFE,   DRAIN_HP_EFFECT,             70, BUG,          100, 15
 	move LOVELY_KISS,  SLEEP_EFFECT,                 0, NORMAL,        75, 10
 	move SKY_ATTACK,   BIG_RECOIL_EFFECT,          130, FLYING,       100,  5
-	move TRANSFORM,    TRANSFORM_EFFECT,             0, NORMAL,       100, 10
+	move TRANSFORM,    TRANSFORM_EFFECT,             0, NORMAL,       100, 10 ; priority move
 	move BUBBLE,       SPEED_DOWN_SIDE_EFFECT,      20, WATER,        100, 30
 	move DIZZY_PUNCH,  CONFUSION_BIG_SIDE_EFFECT,   90, NORMAL,       100, 10
 	move SPORE,        SLEEP_EFFECT,                 0, GRASS,        100, 15

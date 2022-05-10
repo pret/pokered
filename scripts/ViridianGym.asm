@@ -467,7 +467,7 @@ GymGuideMoreApexChipText8:
 	text_end
 
 AlreadyReceivedApexChipsText8:
-	text_far _AlreadyReceivedApexChipsText
+	text_far _ViridianGymGuideSeeAtPokemonLeagueText
 	text_end
 
 ViridianGymGuideApexChipGroundText:

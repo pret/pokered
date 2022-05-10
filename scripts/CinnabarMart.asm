@@ -13,3 +13,6 @@ CinnabarMartText2:
 CinnabarMartText3:
 	text_far _CinnabarMartText3
 	text_end
+
+CinnabarCashierText::
+	script_mart ULTRA_BALL, GREAT_BALL, HYPER_POTION, MAX_REPEL, ESCAPE_ROPE, FULL_HEAL, REVIVE

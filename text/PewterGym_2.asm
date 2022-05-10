@@ -180,6 +180,14 @@ _ApexChipExplanationText::
 
 	para "Use them on your"
 	line "best #MON!"
+
+	para "For Rock-type"
+	line "#MON, an APEX"
+	cont "CHIP simulates"
+	cont "a jagged craggy"
+	cont "ridge with cave"
+	cont "systems and steep"
+	cont "mountain terrain."
 	prompt
 
 _AlreadyReceivedApexChipsText::

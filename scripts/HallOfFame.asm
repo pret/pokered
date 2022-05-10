@@ -40,6 +40,7 @@ HallofFameRoomScript2:
 	ld [wLancesRoomCurScript], a
 	ld [wHallOfFameCurScript], a
 	; Elite 4 events
+	SetEvent EVENT_BECAME_CHAMP
 	ResetEventRange ELITE4_EVENTS_START, ELITE4_CHAMPION_EVENTS_END, 1
 	xor a
 	ld [wHallOfFameCurScript], a

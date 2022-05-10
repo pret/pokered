@@ -351,7 +351,6 @@ INCLUDE "gfx/fishing.asm"
 INCLUDE "engine/overworld/cut2.asm"
 INCLUDE "engine/overworld/dust_smoke.asm"
 
-
 SECTION "bank1E", ROMX
 
 INCLUDE "engine/battle/animations.asm"

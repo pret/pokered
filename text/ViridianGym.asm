@@ -250,3 +250,8 @@ _ViridianGymGuideApexChipGroundText::
 	cont "and burrowable"
 	cont "earth below."
 	prompt 
+
+_ViridianGymGuideSeeAtPokemonLeagueText::
+	text "See you at the"
+	line "#MON LEAGUE!"
+	done
