@@ -651,8 +651,11 @@ ItemUseBicycle:
 	call ItemUseReloadOverworldData
 	xor a
 	ld [wWalkBikeSurfState], a ; change player state to walking
-	call PlayDefaultMusic ; play walking music
-	ld hl, GotOffBicycleText
+	; call PlayDefaultMusic ; play walking music
+	CheckEvent EVENT_SAW_GOT_OFF_BIKE_TEXT 
+	jr nz, .done 
+	SetEvent EVENT_SAW_GOT_OFF_BIKE_TEXT
+	ld hl, GotOffBicycleText ; this text only displays once to be less annoying
 	jr .printText
 .tryToGetOnBike
 	call IsBikeRidingAllowed
@@ -662,8 +665,14 @@ ItemUseBicycle:
 	ldh [hJoyHeld], a ; current joypad state
 	inc a
 	ld [wWalkBikeSurfState], a ; change player state to bicycling
-	ld hl, GotOnBicycleText
-	call PlayDefaultMusic ; play bike riding music
+	; call PlayDefaultMusic ; play bike riding music
+	CheckEvent EVENT_SAW_GOT_ON_BIKE_TEXT
+	jr nz, .done 
+	SetEvent EVENT_SAW_GOT_ON_BIKE_TEXT
+	ld hl, GotOnBicycleText ; this text only displays once to be less annoying
+	jr .printText
+.done
+	ret
 .printText
 	jp PrintText
 

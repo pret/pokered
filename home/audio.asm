@@ -23,7 +23,12 @@ PlayDefaultMusicCommon::
 	and a
 	jr z, .walking
 	cp $2
-	jr z, .surfing
+	jr z, .surfing 
+	ld a, [wd732] ; forcibly riding bike (cycling road)
+	bit 5, a
+	jr nz, .bikeMusic
+	jr .walking
+.bikeMusic
 	ld a, MUSIC_BIKE_RIDING
 	jr .next
 

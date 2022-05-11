@@ -80,13 +80,23 @@ OverworldLoopLessDelay::
 	jp .displayDialogue
 .startButtonNotPressed
 	bit BIT_A_BUTTON, a
+	jr nz, .aorSelectPressed
+	bit BIT_SELECT, a
 	jp z, .checkIfDownButtonIsPressed
+.aorSelectPressed	
 ; if A is pressed
 	ld a, [wd730]
 	bit 2, a
 	jp nz, .noDirectionButtonsPressed
 	call IsPlayerCharacterBeingControlledByGame
 	jr nz, .checkForOpponent
+.trySelectingBikeRod
+	ld a, [hJoyPressed]
+	bit BIT_SELECT, a	;is Select being pressed?
+	jr z, .notSelect
+	callfar CheckForRodBike
+	jp OverworldLoop
+.notSelect
 	call CheckForHiddenObjectOrBookshelfOrCardKeyDoor
 	ldh a, [hItemAlreadyFound]
 	and a
@@ -285,9 +295,23 @@ OverworldLoopLessDelay::
 	ld a, [wd736]
 	bit 6, a ; jumping a ledge?
 	jr nz, .normalPlayerSpriteAdvancement
+	; Bike is normally 2x walking speed
+	; Holding B makes the bike even faster
+	ld a, [hJoyHeld]
+	and B_BUTTON
+	jr z, .doBikeSpeed
+	call DoBikeSpeedup
+	call DoBikeSpeedup
 .doBikeSpeed
 	call DoBikeSpeedup
+	jr .notRunning
 .normalPlayerSpriteAdvancement
+	; Holding B makes you run at 2x walking speed
+	ld a, [hJoyHeld]
+	and B_BUTTON
+	jr z, .notRunning
+	call DoBikeSpeedup
+.notRunning
 	call AdvancePlayerSprite
 	ld a, [wWalkCounter]
 	and a
