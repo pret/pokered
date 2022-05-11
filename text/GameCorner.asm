@@ -100,8 +100,28 @@ _CeladonGameCornerText_48dca::
 	cont "be fooled!"
 	done
 
+_CeladonGameCornerText_gymguide::
+	text "Yo! Champ in"
+	line "making! I hear"
+	cont "you beat ERIKA!"
+	prompt
+
+_CeladonGameCornerGymGuideApexChipGrassText::
+	text "For grass #MON,"
+	line "an APEX CHIP will"
+	cont "evoke a lush"
+	cont "green forest or"
+	cont "jungle with a"
+	cont "thick canopy and"
+	cont "endless amounts"
+	cont "of plantlife."
+	prompt
+
 _CeladonGameCornerText_48dcf::
-	text "They offer rare"
+	text "How about this"
+	line "Game Corner?"
+
+	para "They offer rare"
 	line "#MON that can"
 	cont "be exchanged for"
 	cont "your coins."

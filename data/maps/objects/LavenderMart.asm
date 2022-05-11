@@ -11,5 +11,6 @@ LavenderMart_Object:
 	object_event  0,  5, SPRITE_CLERK, STAY, RIGHT, 1 ; person
 	object_event  3,  4, SPRITE_BALDING_GUY, STAY, NONE, 2 ; person
 	object_event  7,  2, SPRITE_COOLTRAINER_M, STAY, NONE, 3 ; person
+	object_event  1,  7, SPRITE_LITTLE_BOY, STAY, NONE, 4 ; person
 
 	def_warps_to LAVENDER_MART

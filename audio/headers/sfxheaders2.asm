@@ -262,8 +262,8 @@ SFX_Battle_14::
 SFX_Vine_Whip::
 	audio_header SFX_Vine_Whip, Ch8
 
-SFX_Battle_16::
-	audio_header SFX_Battle_16, Ch8
+;SFX_Battle_16::
+;	audio_header SFX_Battle_16, Ch8
 
 SFX_Battle_17::
 	audio_header SFX_Battle_17, Ch8

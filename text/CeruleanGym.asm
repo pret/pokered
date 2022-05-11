@@ -130,4 +130,17 @@ _CeruleanGymGuidePostBattleText::
 	para "You and me kid,"
 	line "we make a pretty"
 	cont "darn good team!"
-	done
+	prompt ; this prompt is glitchy when it doesn't go to the next text
+
+_GymGuideMoreApexChipText::
+	text "I've got two more"
+	line "APEX CHIPs,here!"
+	prompt
+
+_CeruleanGymGuideApexChipWaterText::
+	text "For water #MON,"
+	line "an APEX CHIP will"
+	cont "evoke a beautiful"
+	cont "ocean or river"
+	cont "biome."
+	prompt

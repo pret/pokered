@@ -143,4 +143,57 @@ _PewterGymGuidePostBattleText::
 	text "Just as I thought!"
 	line "You're #MON"
 	cont "champ material!"
+	prompt
+
+_PewterGymGuideApexChipText::
+	text "I want you"
+	line "to have these!"
+	prompt
+
+_ReceivedApexChipsText::
+	text "<PLAYER> received"
+	line "2 APEX CHIPs!@"
+	text_end
+
+_ApexChipExplanationText::
+	text_start
+
+	para "The APEX CHIP is a"
+	line "special microchip"
+	cont "I developed."
+	
+	para "You install it"
+	line "onto a #MON's"
+	cont "Poké Ball."
+
+	para "It simulates the"
+	line "natural wild"
+	cont "environment of"
+	cont "the #MON"
+	cont "inside its Poké"
+	cont "Ball!"
+
+	para "It makes #MON"
+	line "happy and helps"
+	cont "achieve their"
+	cont "max potential!"
+
+	para "Use them on your"
+	line "best #MON!"
+
+	para "For Rock-type"
+	line "#MON, an APEX"
+	cont "CHIP simulates"
+	cont "a jagged craggy"
+	cont "ridge with cave"
+	cont "systems and steep"
+	cont "mountain terrain."
+	prompt
+
+_AlreadyReceivedApexChipsText::
+	text "Talk to me at"
+	line "the next GYM if"
+	cont "you defeat the"
+	cont "LEADER for more"
+	cont "APEX CHIPs!"
 	done

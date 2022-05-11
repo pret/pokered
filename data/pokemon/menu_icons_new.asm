@@ -102,7 +102,7 @@ MonPartyDataNew:
 	db ICON_BALL      ; Voltorb
 	db ICON_BALL      ; Electrode
 	db ICON_AMORPHOUS ; Exeggcute
-	db ICON_SNAKE     ; Exeggutor
+	db ICON_GRASS     ; Exeggutor
 	db ICON_MON       ; Cubone
 	db ICON_MON       ; Marowak
 	db ICON_FIGHTING  ; Hitmonlee

@@ -11,5 +11,6 @@ SaffronMart_Object:
 	object_event  0,  5, SPRITE_CLERK, STAY, RIGHT, 1 ; person
 	object_event  4,  2, SPRITE_SUPER_NERD, STAY, NONE, 2 ; person
 	object_event  6,  5, SPRITE_COOLTRAINER_F, WALK, ANY_DIR, 3 ; person
+	object_event  1,  7, SPRITE_LITTLE_BOY, STAY, NONE, 4 ; person
 
 	def_warps_to SAFFRON_MART

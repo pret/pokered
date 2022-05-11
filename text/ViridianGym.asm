@@ -237,4 +237,21 @@ _ViridianGymGuidePostBattleText::
 	text "Blow me away!"
 	line "GIOVANNI was the"
 	cont "GYM LEADER here?"
+	prompt
+
+_ViridianGymGuideApexChipGroundText::
+	text "For ground"
+	line "#MON, an "
+	cont "APEX CHIP will"
+	cont "simulate a sandy"
+	cont "dry badland"
+	cont "environment with"
+	cont "rolling hills"
+	cont "and burrowable"
+	cont "earth below."
+	prompt 
+
+_ViridianGymGuideSeeAtPokemonLeagueText::
+	text "See you at the"
+	line "#MON LEAGUE!"
 	done

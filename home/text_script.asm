@@ -142,12 +142,16 @@ DisplayPokemartDialogue::
 	ld hl, PokemartGreetingText
 	call PrintText
 	pop hl
+	call DisplayPokemartNoGreeting
+	jp AfterDisplayingTextID
+
+DisplayPokemartNoGreeting::
 	inc hl
 	call LoadItemList
 	ld a, PRICEDITEMLISTMENU
 	ld [wListMenuID], a
 	homecall DisplayPokemartDialogue_
-	jp AfterDisplayingTextID
+	ret
 
 PokemartGreetingText::
 	text_far _PokemartGreetingText

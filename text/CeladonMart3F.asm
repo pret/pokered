@@ -97,3 +97,35 @@ _CeladonMart3Text15::
 	text "Red and Blue!"
 	line "Both are #MON!"
 	done
+
+_CeladonMartTMKidFlavor::
+	text "My dad got kicked"
+	line "out of CELADON"
+	cont "GYM! How funny is"
+	cont "that!"
+
+	para "They said men"
+	line "aren't allowed to"
+	cont "loiter inside!"
+
+	para "Now he's goofing"
+	line "off at the GAME"
+	cont "CORNER."
+
+	para "For once the"
+	line "MART here has TMs"
+	cont "so I'm not selling"
+	cont "any of my own!"
+
+	para "I think I'll use"
+	line "some of the cash"
+	cont "I made selling"
+	cont "TMs to buy a"
+	cont "GAME BOY COLOR."
+	
+	para "I heard that"
+	line "WARIO LAND 3 is"
+	cont "the best game!"
+	
+	para "Catch you later!"
+	done

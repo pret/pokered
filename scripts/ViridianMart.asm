@@ -26,7 +26,7 @@ ViridianMart_ScriptPointers:
 
 ViridianMartScript0:
 	call UpdateSprites
-	ld a, $4
+	ld a, $5
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld hl, wSimulatedJoypadStatesEnd
@@ -49,7 +49,7 @@ ViridianMartScript1:
 	and a
 	ret nz
 	call Delay3
-	ld a, $5
+	ld a, $6
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	lb bc, OAKS_PARCEL, 1
@@ -65,6 +65,7 @@ ViridianMart_TextPointers:
 	dw ViridianMartText1
 	dw ViridianMartText2
 	dw ViridianMartText3
+	dw ViridianMartTMKid
 	dw ViridianMartText4
 	dw ViridianMartText5
 
@@ -72,6 +73,7 @@ ViridianMart_TextPointers2:
 	dw ViridianCashierText
 	dw ViridianMartText2
 	dw ViridianMartText3
+	dw ViridianMartTMKid
 
 ViridianMartText1:
 	text_far _ViridianMartText1
@@ -93,3 +95,51 @@ ViridianMartText2:
 ViridianMartText3:
 	text_far _ViridianMartText3
 	text_end
+
+ViridianMartTMKid:
+	text_asm
+	CheckEvent EVENT_BEAT_BLAINE
+	jr nz, .beforeGiovanni
+	CheckEvent EVENT_BEAT_MISTY
+	jr nz, .afterMisty
+	jr .beforeMisty
+.beforeMisty
+	ld hl, ViridianMartTMKidBefore
+	call PrintText
+	jr .done
+.tmkidgreet
+	ld hl, TMKidGreet8
+	call PrintText
+	ret
+.afterMisty
+	call .tmkidgreet
+	ld hl, TMKidStockingUp
+	call PrintText
+	jr .done
+.beforeGiovanni
+	CheckEvent EVENT_MET_GYM_GUIDE_SON
+	jr nz, .afterMisty
+	call .tmkidgreet
+	ld hl, TMKidBigStockIndigo
+	call PrintText
+.done
+	jp TextScriptEnd
+
+TMKidGreet8:
+	text_far _TMKidGreet
+	text_end
+
+TMKidStockingUp:
+	text_far _TMKidStockingUp
+	text_end
+
+TMKidBigStockIndigo:
+	text_far _TMKidBigStockIndigo
+	text_end
+
+ViridianMartTMKidBefore:
+	text_far _ViridianMartTMKid
+	text_end
+	
+ViridianCashierText::
+	script_mart POKE_BALL, ANTIDOTE, PARLYZ_HEAL, BURN_HEAL

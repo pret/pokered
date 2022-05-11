@@ -199,6 +199,24 @@ PewterGymGuideText:
 .afterBeat
 	ld hl, PewterGymGuidePostBattleText
 	call PrintText
+	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS
+	jr nz, .alreadyApexChips
+.giveApexChips
+	ld hl, PewterGymGuideApexChipText
+	call PrintText
+	lb bc, APEX_CHIP, 2
+	call GiveItem
+	jr nc, .BagFull
+	ld hl, ReceivedApexChipsTextPewter
+	call PrintText
+	SetEvent EVENT_GOT_PEWTER_APEX_CHIPS
+.alreadyApexChips
+	ld hl, AlreadyReceivedApexChipsText
+	call PrintText
+	jr .done
+.BagFull
+	ld hl, TM34NoRoomText
+	call PrintText
 .done
 	jp TextScriptEnd
 
@@ -220,4 +238,18 @@ PewterGymText_5c524:
 
 PewterGymGuidePostBattleText:
 	text_far _PewterGymGuidePostBattleText
+	text_end
+
+PewterGymGuideApexChipText:
+	text_far _PewterGymGuideApexChipText
+	text_end
+
+ReceivedApexChipsTextPewter:
+	text_far _ReceivedApexChipsText
+	sound_get_item_1
+	text_far _ApexChipExplanationText
+	text_end
+
+AlreadyReceivedApexChipsText:
+	text_far _AlreadyReceivedApexChipsText
 	text_end

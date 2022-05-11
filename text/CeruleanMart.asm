@@ -17,3 +17,33 @@ _CeruleanMartText3::
 	line "make #MON go"
 	cont "up one level!"
 	done
+
+_TMKidGreet::
+	text "Yo! It's me!"
+	line "The TM Pirate!"
+	prompt
+
+_TMKidQuick::
+	text "Want some TMs?"
+	done
+
+_CeruleanMartTMKidFlavor::
+	text "Bringing TMs to"
+	line "the place they"
+	cont "should be, at"
+	cont "any cost!"
+
+	para "Me and my dad"
+	line "travel a lot, so"
+	cont "you'll probably"
+	cont "see me at MARTs"
+	cont "in other places"
+	cont "too!"
+
+	para "I'm selling TMs"
+	line "that I copied"
+	cont "from my dad's"
+	cont "originals!"
+
+	para "Want some?"
+	done

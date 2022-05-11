@@ -49,7 +49,7 @@ KeyItemFlags:
 	dbit FALSE ; LEAF_STONE
 	dbit TRUE  ; CARD_KEY
 	dbit FALSE ; NUGGET
-	dbit FALSE ; PP_UP_2
+	dbit FALSE ; APEX_CHIP
 	dbit FALSE ; POKE_DOLL
 	dbit FALSE ; FULL_HEAL
 	dbit FALSE ; REVIVE

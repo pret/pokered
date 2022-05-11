@@ -275,12 +275,54 @@ FuchsiaGymAfterBattleText6:
 FuchsiaGymGuideText:
 	text_asm
 	CheckEvent EVENT_BEAT_KOGA
-	ld hl, FuchsiaGymGuidePostBattleText
 	jr nz, .afterBeat
 	ld hl, FuchsiaGymGuidePreBattleText
-.afterBeat
 	call PrintText
+	jr .done
+.afterBeat
+	ld hl, FuchsiaGymGuidePostBattleText
+	call PrintText
+	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS ; have to hear about apex chips to receive them after that
+	jr z, .done
+	CheckEvent EVENT_GOT_FUCHSIA_APEX_CHIPS
+	jr nz, .alreadyApexChips
+.giveApexChips
+	ld hl, GymGuideMoreApexChipText5
+	call PrintText
+	lb bc, APEX_CHIP, 2
+	call GiveItem
+	jr nc, .BagFull
+	ld hl, ReceivedApexChipsText5
+	call PrintText
+	ld hl, FuchsiaGymGuideApexChipPoisonText
+	call PrintText
+	SetEvent EVENT_GOT_FUCHSIA_APEX_CHIPS
+.alreadyApexChips
+	ld hl, AlreadyReceivedApexChipsText5
+	call PrintText
+	jr .done
+.BagFull
+	ld hl, ApexNoRoomText5
+	call PrintText
+.done
 	jp TextScriptEnd
+
+ReceivedApexChipsText5:
+	text_far _ReceivedApexChipsText
+	sound_get_item_1
+	text_end
+
+ApexNoRoomText5:
+	text_far _TM34NoRoomText
+	text_end
+
+GymGuideMoreApexChipText5:
+	text_far _GymGuideMoreApexChipText
+	text_end
+
+AlreadyReceivedApexChipsText5:
+	text_far _AlreadyReceivedApexChipsText
+	text_end
 
 FuchsiaGymGuidePreBattleText:
 	text_far _FuchsiaGymGuidePreBattleText
@@ -288,4 +330,8 @@ FuchsiaGymGuidePreBattleText:
 
 FuchsiaGymGuidePostBattleText:
 	text_far _FuchsiaGymGuidePostBattleText
+	text_end
+
+FuchsiaGymGuideApexChipPoisonText:
+	text_far _FuchsiaGymGuideApexChipPoisonText
 	text_end

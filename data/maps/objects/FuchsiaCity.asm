@@ -34,7 +34,7 @@ FuchsiaCity_Object:
 	object_event 30, 14, SPRITE_FISHER, STAY, DOWN, 3 ; person
 	object_event 24,  8, SPRITE_YOUNGSTER, STAY, UP, 4 ; person
 	object_event 31,  5, SPRITE_FAIRY, WALK, ANY_DIR, 5 ; person
-	object_event 25,  6, SPRITE_VOLTORB, STAY, DOWN, 6 ; person
+	object_event 25,  6, SPRITE_POKE_BALL, STAY, NONE, 6 ; person
 	object_event 12,  6, SPRITE_MONSTER, WALK, LEFT_RIGHT, 7 ; person
 	object_event 30, 12, SPRITE_MONSTER2, STAY, NONE, 8 ; person
 	object_event  8, 17, SPRITE_SEEL, WALK, ANY_DIR, 9 ; person

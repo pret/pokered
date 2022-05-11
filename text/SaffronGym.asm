@@ -98,7 +98,18 @@ _SaffronGymGuidePostBattleText::
 	para "If I had that,"
 	line "I'd make a bundle"
 	cont "at the slots!"
-	done
+	prompt
+
+_SaffronGymGuideApexChipPsychicText::
+	text "For psychic"
+	line "#MON, an "
+	cont "APEX CHIP will"
+	cont "replicate a calm"
+	cont "silent area of"
+	cont "meditation, like"
+	cont "a temple or a"
+	cont "beach at sunset."
+	prompt 
 
 _SaffronGymBattleText1::
 	text "SABRINA is younger"

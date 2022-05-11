@@ -506,10 +506,12 @@ wPlayerMonMinimized:: db
 
 ; number of hits by enemy in attacks like Double Slap, etc.
 wEnemyNumHits:: ; db
+
 ; the amount of damage accumulated by the enemy while biding
-; wEnemyBideAccumulatedDamage:: dw ; CHANGED: bide effect changed to normal buff move
+wEnemyBideAccumulatedDamage:: dw ; CHANGED: bide effect changed to normal buff move
 
 	ds 8
+
 ENDU
 
 ; This union spans 39 bytes.
@@ -573,7 +575,6 @@ ENDU
 
 	ds 1
 
-wTMTextShown:: db
 wNPCMovementDirections2Index::
 ; number of items in wFilteredBagItems list
 wFilteredBagItemsCount:: db
@@ -773,6 +774,7 @@ wTrainerInfoTextBoxWidth:: db
 wTrainerInfoTextBoxNextRowOffset:: db
 
 NEXTU
+; options page 1
 wOptionsTextSpeedCursorX:: db
 wOptionsBattleAnimCursorX:: db
 wOptionsBattleStyleCursorX:: db
@@ -791,6 +793,8 @@ wOptionsMankeySpriteCursorX:: db
 wOptionsArcanineSpriteCursorX:: db
 wOptionsExeggutorSpriteCursorX:: db
 wOptionsMewtwoSpriteCursorX:: db
+
+;14 bytes remaining in union
 
 NEXTU
 ; tile ID of the badge number being drawn
@@ -857,7 +861,6 @@ wRodResponse::
 	db
 ENDU
 
-wListWithTMText:: db
 
 ; 0 = neither
 ; 1 = warp pad
@@ -883,7 +886,15 @@ wRightGBMonSpecies:: db
 ; bit 6: tried pushing against boulder once (you need to push twice before it will move)
 wFlags_0xcd60:: db
 
-	ds 9
+	ds 1
+
+wListWithTMText:: db ; whether the current list menu can contain TMs and should print their moves
+wTMTextShown:: db ; whether text for a TM is visible in a menu
+wDamageIntention:: db ; in battle, the amount of damage a move will do before doing it (used for high jump kick / jump kick crash effect)
+wLowHealthTonePairs:: db ;in battle, used as a counter for low hp alarm tone pairs
+wSpiralBallsDelay:: db
+
+	ds 3
 
 ; This has overlapping related uses.
 ; When the player tries to use an item or use certain field moves, 0 is stored
@@ -1196,9 +1207,6 @@ wEnemyMonBaseExp:: db
 wBattleMonNick:: ds NAME_LENGTH
 wBattleMon:: battle_struct wBattleMon
 
-wWhatStat:: db ; contains the stat currently being modified by a stat changing move
-wWhichStatMod:: db ; contains the stat mod type currently being carried out
-
 
 wTrainerClass:: db
 
@@ -1341,8 +1349,7 @@ wEnemyDisabledMove:: db
 UNION
 ; the amount of damage accumulated by the player while biding
 ; wPlayerBideAccumulatedDamage:: dw ; CHANGED: bide effect changed to normal move
-
-NEXTU
+; NEXTU
 wUnknownSerialCounter2:: dw
 
 NEXTU
@@ -1408,7 +1415,6 @@ wNumFBTiles:: db
 UNION
 wSpiralBallsBaseY:: db
 wSpiralBallsBaseX:: db
-wSpiralBallsDelay:: db
 
 NEXTU
 ; bits 0-6: index into FallingObjects_DeltaXs array (0 - 8)
@@ -1560,10 +1566,10 @@ wMonHBackSprite:: dw
 wMonHMoves:: ds NUM_MOVES
 wMonHGrowthRate:: db
 wMonHLearnset:: flag_array NUM_TMS + NUM_HMS
-wMonHPicBank:: dw
-wMonHBackPicBank:: dw
-wMonHAltFrontSprite:: dw
-wMonHAltBackSprite:: dw
+wMonHPicBank:: dw ; shifts
+wMonHBackPicBank:: dw ; shifts
+wMonHAltFrontSprite:: dw ; shifts
+wMonHAltBackSprite:: dw ; shifts
     ds 1
 wMonHeaderEnd::
 
@@ -1678,7 +1684,10 @@ wSavedSpriteScreenX:: db
 wSavedSpriteMapY:: db
 wSavedSpriteMapX:: db
 
-	ds 5
+	ds 3
+
+wWhatStat:: db ; contains the stat currently being modified by a stat changing move
+wWhichStatMod:: db ; contains the stat mod type currently being carried out
 
 wWhichPrize:: db
 
@@ -2128,11 +2137,9 @@ wDungeonWarpDestinationMap:: db
 ; which dungeon warp within the source map was used
 wWhichDungeonWarp:: db
 
-wDamageIntention:: db
+wUnusedD71F:: db
 
 	ds 8
-
-wLowHealthTonePairs:: db ;in battle, used as a counter for low hp alarm tone pairs
 
 ; bit 0: using Strength outside of battle
 ; bit 1: set by IsSurfingAllowed when surfing's allowed, but the caller resets it after checking the result
@@ -2305,7 +2312,25 @@ wUnusedDA38:: db
 ; mostly copied from map-specific map script pointer and written back later
 wCurMapScript:: db
 
-	ds 7
+	ds 1
+
+; bit 0 -> Squirtle sprite version: 0 = RB, 1 = RG
+; bit 1 -> Blastoise sprite version: 0 = RB, 1 = RG
+; bit 2 -> Pidgeot sprite version: 0 = RB, 1 = RG
+; bit 3 -> Nidorino sprite version: 0 = RB, 1 = RG
+; bit 4 -> Golbat sprite version: 0 = Y, 1 = RB
+; bit 5 -> Mankey sprite version: 0 = RB, 1 = RG
+; bit 6 -> Arcanine sprite version: 0 = RB, 1 = RG
+; bit 7 -> Mewtwo sprite version: 0 = RB, 1 = RG
+wSpriteOptions:: db
+
+; bit 0 -> Back sprites: 0 = RB, 1 = Space World
+; bit 1 -> Bulbasaur sprite version: 0 = RB, 1 = RG
+; bit 2 -> Exeggutor sprite version: 0 = Y, 1 = RB
+wSpriteOptions2:: db
+
+
+	ds 4
 
 wPlayTimeHours:: db
 wPlayTimeMaxed:: db
@@ -2326,22 +2351,6 @@ wDayCareMonName:: ds NAME_LENGTH
 wDayCareMonOT::   ds NAME_LENGTH
 
 wDayCareMon:: box_struct wDayCareMon
-
-
-; bit 0 -> Squirtle sprite version: 0 = RB, 1 = RG
-; bit 1 -> Blastoise sprite version: 0 = RB, 1 = RG
-; bit 2 -> Pidgeot sprite version: 0 = RB, 1 = RG
-; bit 3 -> Nidorino sprite version: 0 = RB, 1 = RG
-; bit 4 -> Golbat sprite version: 0 = Y, 1 = RB
-; bit 5 -> Mankey sprite version: 0 = RB, 1 = RG
-; bit 6 -> Arcanine sprite version: 0 = RB, 1 = RG
-; bit 7 -> Mewtwo sprite version: 0 = RB, 1 = RG
-wSpriteOptions:: db
-
-; bit 0 -> Back sprites: 0 = RB, 1 = Space World
-; bit 1 -> Bulbasaur sprite version: 0 = RB, 1 = RG
-; bit 2 -> Exeggutor sprite version: 0 = Y, 1 = RB
-wSpriteOptions2:: db
 
 wMainDataEnd::
 

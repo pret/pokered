@@ -195,8 +195,47 @@ CeruleanGymGuideText:
 .afterBeat
 	ld hl, CeruleanGymGuidePostBattleText
 	call PrintText
+	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS ; have to hear about apex chips to receive them after that
+	jr z, .done
+	CheckEvent EVENT_GOT_CERULEAN_APEX_CHIPS
+	jr nz, .alreadyApexChips
+.giveApexChips
+	ld hl, GymGuideMoreApexChipText2
+	call PrintText
+	lb bc, APEX_CHIP, 2
+	call GiveItem
+	jr nc, .BagFull
+	ld hl, ReceivedApexChipsText2
+	call PrintText
+	ld hl, CeruleanGymGuideApexChipWaterText
+	call PrintText
+	SetEvent EVENT_GOT_CERULEAN_APEX_CHIPS
+.alreadyApexChips
+	ld hl, AlreadyReceivedApexChipsText2
+	call PrintText
+	jr .done
+.BagFull
+	ld hl, ApexNoRoomText2
+	call PrintText
 .done
 	jp TextScriptEnd
+
+ReceivedApexChipsText2:
+	text_far _ReceivedApexChipsText
+	sound_get_item_1
+	text_end
+
+ApexNoRoomText2:
+	text_far _TM34NoRoomText
+	text_end
+
+GymGuideMoreApexChipText2:
+	text_far _GymGuideMoreApexChipText
+	text_end
+
+AlreadyReceivedApexChipsText2:
+	text_far _AlreadyReceivedApexChipsText
+	text_end
 
 CeruleanGymGuidePreBattleText:
 	text_far _CeruleanGymGuidePreBattleText
@@ -204,4 +243,13 @@ CeruleanGymGuidePreBattleText:
 
 CeruleanGymGuidePostBattleText:
 	text_far _CeruleanGymGuidePostBattleText
+	text_end
+
+ReceivedApexChipsText::
+	text_far _ReceivedApexChipsText
+	sound_get_item_1
+	text_end
+
+CeruleanGymGuideApexChipWaterText:
+	text_far _CeruleanGymGuideApexChipWaterText
 	text_end

@@ -4,6 +4,7 @@ PriorityMoves:
 	db WING_ATTACK
 	db FLASH
 	db SWIFT
+	db TRANSFORM
 	db -1 ; end
 
 ; returns with c set if move in c is a priority move

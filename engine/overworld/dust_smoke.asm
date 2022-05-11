@@ -57,10 +57,10 @@ boulder_dust_adjust: MACRO
 ENDM
 
 MoveBoulderDustFunctionPointerTable:
-	boulder_dust_adjust -1, 0, AdjustOAMBlockYPos ; down
-	boulder_dust_adjust  1, 0, AdjustOAMBlockYPos ; up
-	boulder_dust_adjust  1, 1, AdjustOAMBlockXPos ; left
-	boulder_dust_adjust -1, 1, AdjustOAMBlockXPos ; right
+	boulder_dust_adjust -1, 0, AdjustOAMBlockYPos3start ; down
+	boulder_dust_adjust  1, 0, AdjustOAMBlockYPos3start ; up
+	boulder_dust_adjust  1, 1, AdjustOAMBlockXPos3start ; left
+	boulder_dust_adjust -1, 1, AdjustOAMBlockXPos3start ; right
 
 LoadSmokeTileFourTimes::
 	ld hl, vChars1 tile $7c
