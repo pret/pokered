@@ -129,8 +129,8 @@ _CeruleanGymGuidePostBattleText::
 
 	para "You and me kid,"
 	line "we make a pretty"
-	cont "darn good team!"
-	prompt ; this prompt is glitchy when it doesn't go to the next text
+	cont "darn good team!@"
+	text_end
 
 _GymGuideMoreApexChipText::
 	text "I've got two more"

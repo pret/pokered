@@ -193,10 +193,10 @@ CeruleanGymGuideText:
 	call PrintText
 	jr .done
 .afterBeat
-	ld hl, CeruleanGymGuidePostBattleText
-	call PrintText
 	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS ; have to hear about apex chips to receive them after that
-	jr z, .done
+	jr z, .donePost
+	ld hl, CeruleanGymGuidePostBattleTextPrompt
+	call PrintText
 	CheckEvent EVENT_GOT_CERULEAN_APEX_CHIPS
 	jr nz, .alreadyApexChips
 .giveApexChips
@@ -219,6 +219,11 @@ CeruleanGymGuideText:
 	call PrintText
 .done
 	jp TextScriptEnd
+.donePost
+	ld hl, CeruleanGymGuidePostBattleTextDone
+	call PrintText
+	jr .done
+
 
 ReceivedApexChipsText2:
 	text_far _ReceivedApexChipsText
@@ -241,7 +246,12 @@ CeruleanGymGuidePreBattleText:
 	text_far _CeruleanGymGuidePreBattleText
 	text_end
 
-CeruleanGymGuidePostBattleText:
+CeruleanGymGuidePostBattleTextPrompt:
+	text_far _CeruleanGymGuidePostBattleText
+	text_promptbutton
+	text_end
+
+CeruleanGymGuidePostBattleTextDone:
 	text_far _CeruleanGymGuidePostBattleText
 	text_end
 
