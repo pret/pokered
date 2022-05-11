@@ -14,10 +14,10 @@ _IndigoPlateauLobbyText2::
 
 	para "If you need TMs"
 	line "just talk to"
-	cont "my son! He's a"
-	cont "chip off the"
-	cont "ole' block!"
+	cont "my son!"
 
+	para "He's a chip off"
+	line "the old block!"
 	prompt
 
 _IndigoPlateauGymGuideChampGreeting::
@@ -96,6 +96,9 @@ _IndigoPlateauGymGuideSonIntro::
 	line "a great gym guide"
 	cont "like my dad some"
 	cont "day!"
+
+	para "I'm a certified"
+	line "TM engineer now!"
 
 	para "Got some powerful"
 	line "TMs copied from"

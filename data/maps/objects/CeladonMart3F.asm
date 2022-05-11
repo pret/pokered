@@ -26,5 +26,6 @@ CeladonMart3F_Object:
 	object_event  7,  2, SPRITE_GAMEBOY_KID, STAY, DOWN, 3 ; person
 	object_event  8,  2, SPRITE_GAMEBOY_KID, STAY, DOWN, 4 ; person
 	object_event  2,  5, SPRITE_LITTLE_BOY, STAY, UP, 5 ; person
+	object_event  5,  2, SPRITE_LITTLE_BOY, STAY, DOWN, 18 ; person
 
 	def_warps_to CELADON_MART_3F

@@ -19,6 +19,7 @@ CeladonMart3F_TextPointers:
 	dw CeladonMart3Text15
 	dw CeladonMart3Text16
 	dw CeladonMart3Text17
+	dw CeladonMartTMKid
 
 CeladonMart3Text1:
 	text_asm
@@ -106,3 +107,22 @@ CeladonMart3Text16:
 CeladonMart3Text15:
 	text_far _CeladonMart3Text15
 	text_end
+
+CeladonMartTMKid:
+	text_asm
+	ld hl, TMKidGreet4
+	call PrintText
+	ld hl, CeladonMartTMKidFlavor
+	call PrintText
+	jp TextScriptEnd
+	
+TMKidGreet4::
+	text_far _TMKidGreet
+	text_end
+
+CeladonMartTMKidFlavor:
+	text_far _CeladonMartTMKidFlavor
+	text_end
+	
+CeladonTMKidShop::
+	script_mart TM_TELEPORT

@@ -21,3 +21,32 @@ _VermilionMartText3::
 	cont "evil. It depends"
 	cont "on the trainer."
 	done
+
+_VermilionMartTMKidFlavor::
+	text "Bringing TMs to"
+	line "the place they"
+	cont "should be, at"
+	cont "any cost!"
+
+	para "I'm selling TMs"
+	line "that I copied"
+	cont "from my dad's"
+	cont "originals!"
+
+	para "The clerk here"
+	line "thinks copying"
+	cont "and selling TMs"
+	cont "is wrong!"
+
+	para "Little do they"
+	line "know that my dad"
+	cont "helped create"
+	cont "the software for"
+	cont "TMs!"
+
+	para "He gave my little"
+	line "'business' his"
+	cont "approval!"
+
+	para "Want some TMs?"
+	done

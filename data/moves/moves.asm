@@ -158,7 +158,7 @@ Moves:
 	move DIZZY_PUNCH,  CONFUSION_BIG_SIDE_EFFECT,   90, NORMAL,       100, 10
 	move SPORE,        SLEEP_EFFECT,                 0, GRASS,        100, 15
 	move FLASH,        FLINCH_SIDE_EFFECT1,         60, ELECTRIC,     100, 15 ; priority move
-	move PSYWAVE,      SPECIAL_DOWN_SIDE_EFFECT,    35, PSYCHIC_TYPE, 100, 30 ;*
+	move PSYWAVE,      SPECIAL_DOWN_SIDE_EFFECT,    35, PSYCHIC_TYPE, 100, 30
 	move SPLASH,       SPLASH_EFFECT,                0, NORMAL,       100, 40
 	move ACID_ARMOR,   DEFENSE_UP2_EFFECT,           0, POISON,       100, 40
 	move CRABHAMMER,   NO_ADDITIONAL_EFFECT,        90, WATER,         95, 10 ; high critical hit ratio
