@@ -69,10 +69,10 @@ FlyWarpDataPtr:
 	fly_warp_spec LAVENDER_TOWN,   .LavenderTown
 	fly_warp_spec VERMILION_CITY,  .VermilionCity
 	fly_warp_spec CELADON_CITY,    .CeladonCity
+	fly_warp_spec SAFFRON_CITY,    .SaffronCity
 	fly_warp_spec FUCHSIA_CITY,    .FuchsiaCity
 	fly_warp_spec CINNABAR_ISLAND, .CinnabarIsland
 	fly_warp_spec INDIGO_PLATEAU,  .IndigoPlateau
-	fly_warp_spec SAFFRON_CITY,    .SaffronCity
 	fly_warp_spec ROUTE_4,         .Route4
 	fly_warp_spec ROUTE_10,        .Route10
 
@@ -83,9 +83,9 @@ FlyWarpDataPtr:
 .LavenderTown:   fly_warp LAVENDER_TOWN,    3,  6
 .VermilionCity:  fly_warp VERMILION_CITY,  11,  4
 .CeladonCity:    fly_warp CELADON_CITY,    41, 10
+.SaffronCity:    fly_warp SAFFRON_CITY,     9, 30
 .FuchsiaCity:    fly_warp FUCHSIA_CITY,    19, 28
 .CinnabarIsland: fly_warp CINNABAR_ISLAND, 11, 12
 .IndigoPlateau:  fly_warp INDIGO_PLATEAU,   9,  6
-.SaffronCity:    fly_warp SAFFRON_CITY,     9, 30
 .Route4:         fly_warp ROUTE_4,         11,  6
 .Route10:        fly_warp ROUTE_10,        11, 20

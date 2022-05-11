@@ -8,10 +8,10 @@ MapHeaderPointers::
 	dw LavenderTown_h
 	dw VermilionCity_h
 	dw CeladonCity_h
+	dw SaffronCity_h
 	dw FuchsiaCity_h
 	dw CinnabarIsland_h
 	dw IndigoPlateau_h
-	dw SaffronCity_h
 	dw SaffronCity_h ; UNUSED_MAP_0B
 	dw Route1_h
 	dw Route2_h

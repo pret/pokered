@@ -10,10 +10,10 @@ MapHSPointers:
 	dw NoHS
 	dw NoHS
 	dw NoHS
-	dw NoHS
-	dw NoHS
-	dw NoHS
 	dw SaffronCityHS
+	dw NoHS
+	dw NoHS
+	dw NoHS
 	dw NoHS
 	dw NoHS
 	dw Route2HS

@@ -7,10 +7,10 @@ MapSpriteSets:
 	db $03 ; LAVENDER_TOWN
 	db $04 ; VERMILION_CITY
 	db $05 ; CELADON_CITY
+	db $07 ; SAFFRON_CITY
 	db $0b ; FUCHSIA_CITY
 	db $01 ; CINNABAR_ISLAND
 	db $06 ; INDIGO_PLATEAU
-	db $07 ; SAFFRON_CITY
 	db $01 ; unused map ID
 	db $01 ; ROUTE_1
 	db $f1 ; ROUTE_2
