@@ -17,8 +17,16 @@ CinnabarGymQuiz::
 	and $f0
 	swap a
 	ldh [hGymGateAnswer], a
+	CheckEvent EVENT_SAW_CINNABAR_GYM_QUIZ_INTRO ;FIXED: Only show the long intro text once because it's annoying to see it repeatedly
+	jr nz, .skipIntro
 	ld hl, CinnabarGymQuizIntroText
 	call PrintText
+	SetEvent EVENT_SAW_CINNABAR_GYM_QUIZ_INTRO
+	jr .doneIntro
+.skipIntro
+	ld hl, CinnabarGymQuizStartText
+	call PrintText
+.doneIntro
 	ldh a, [hGymGateIndex]
 	dec a
 	add a
@@ -34,6 +42,10 @@ CinnabarGymQuiz::
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	call CinnabarGymQuiz_1ea92
 	jp TextScriptEnd
+
+CinnabarGymQuizStartText:
+	text_far _CinnabarGymQuizStartText
+	text_end
 
 CinnabarGymQuizIntroText:
 	text_far _CinnabarGymQuizIntroText

@@ -234,10 +234,10 @@ VermilionGymGuideText:
 	call PrintText
 	jr .done
 .afterBeat
-	ld hl, VermilionGymGuidePostBattleText
-	call PrintText
 	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS ; have to hear about apex chips to receive them after that
-	jr z, .done
+	jr z, .postNoPrompt
+	ld hl, VermilionGymGuidePostBattleTextPrompt
+	call PrintText
 	CheckEvent EVENT_GOT_VERMILION_APEX_CHIPS
 	jr nz, .alreadyApexChips
 .giveApexChips
@@ -260,6 +260,10 @@ VermilionGymGuideText:
 	call PrintText
 .done
 	jp TextScriptEnd
+.postNoPrompt
+	ld hl, VermilionGymGuidePostBattleText
+	call PrintText
+	jr .done
 
 ReceivedApexChipsText3:
 	text_far _ReceivedApexChipsText
@@ -284,6 +288,11 @@ VermilionGymGuidePreBattleText:
 
 VermilionGymGuidePostBattleText:
 	text_far _VermilionGymGuidePostBattleText
+	text_end
+
+VermilionGymGuidePostBattleTextPrompt:
+	text_far _VermilionGymGuidePostBattleText
+	text_promptbutton
 	text_end
 
 VermilionGymGuideApexChipElectricText:

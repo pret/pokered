@@ -190,8 +190,8 @@ _FuchsiaGymGuidePreBattleText::
 _FuchsiaGymGuidePostBattleText::
 	text "It's amazing how"
 	line "ninja can terrify"
-	cont "even now!"
-	prompt
+	cont "even now!@"
+	text_end
 
 _FuchsiaGymGuideApexChipPoisonText::
 	text "For poison"

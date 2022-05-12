@@ -17,8 +17,8 @@ _IndigoPlateauLobbyText2::
 	cont "my son!"
 
 	para "He's a chip off"
-	line "the old block!"
-	prompt
+	line "the old block!@"
+	text_end
 
 _IndigoPlateauGymGuideChampGreeting::
 	text "Yo! Champ!!"
@@ -33,8 +33,8 @@ _IndigoPlateauGymGuideChampGreeting::
 	para "By the way, could"
 	line "you sign an auto-"
 	cont "graph for my son?"
-	cont "He's a big fan!"
-	prompt
+	cont "He's a big fan!@"
+	text_end
 
 _IndigoPlateauGymGuideChampApexChips::
 	text "Come talk to me"
@@ -47,8 +47,8 @@ _IndigoPlateauGymGuideChampAfterGreet::
 	line "How's it going?"
 
 	para "My son and I are"
-	line "here to help!"
-	done
+	line "here to help!@"
+	text_end
 
 _IndigoPlateauLobbyText3::
 	text "From here on, you"

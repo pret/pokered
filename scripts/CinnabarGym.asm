@@ -462,10 +462,10 @@ CinnabarGymGuideText:
 	call PrintText
 	jr .done
 .afterBeat
-	ld hl, CinnabarGymGuidePostBattleText
-	call PrintText
 	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS ; have to hear about apex chips to receive them after that
-	jr z, .done
+	jr z, .donePrompt
+	ld hl, CinnabarGymGuidePostBattleTextPrompt
+	call PrintText
 	CheckEvent EVENT_GOT_CINNABAR_APEX_CHIPS
 	jr nz, .alreadyApexChips
 .giveApexChips
@@ -488,6 +488,10 @@ CinnabarGymGuideText:
 	call PrintText
 .done
 	jp TextScriptEnd
+.donePrompt
+	ld hl, CinnabarGymGuidePostBattleText
+	call PrintText
+	jr .done
 
 ReceivedApexChipsText7:
 	text_far _ReceivedApexChipsText
@@ -516,4 +520,9 @@ CinnabarGymGuidePreBattleText:
 
 CinnabarGymGuidePostBattleText:
 	text_far _CinnabarGymGuidePostBattleText
+	text_end
+
+CinnabarGymGuidePostBattleTextPrompt:
+	text_far _CinnabarGymGuidePostBattleText
+	text_promptbutton
 	text_end

@@ -236,8 +236,8 @@ _ViridianGymGuidePreBattleText::
 _ViridianGymGuidePostBattleText::
 	text "Blow me away!"
 	line "GIOVANNI was the"
-	cont "GYM LEADER here?"
-	prompt
+	cont "GYM LEADER here?@"
+	text_end
 
 _ViridianGymGuideApexChipGroundText::
 	text "For ground"

@@ -29,10 +29,10 @@ IndigoPlateauGymGuideText:
 	text_asm
 	CheckEvent EVENT_BECAME_CHAMP
 	jr nz, .afterChamp
-	ld hl, IndigoPlateauLobbyText2get
-	call PrintText
 	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS ; have to hear about apex chips to receive them after that
-	jr z, .done
+	jr z, .donePrompt
+	ld hl, IndigoPlateauLobbyText2getPrompt
+	call PrintText
 	ld hl, IndigoPlateauApexChipsAfterChamp
 	call PrintText
 	jr .done
@@ -40,23 +40,35 @@ IndigoPlateauGymGuideText:
 	CheckEvent EVENT_TALKED_GYM_GUIDE_AFTER_CHAMP
 	jr nz, .quickGreet
 	SetEvent EVENT_TALKED_GYM_GUIDE_AFTER_CHAMP
-	ld hl, IndigoPlateauGymGuideChampGreeting
-	call PrintText
 	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS ; have to hear about apex chips to receive them after that
-	jr z, .done
+	jr z, .donePrompt2
+	ld hl, IndigoPlateauGymGuideChampGreetingPrompt
+	call PrintText
 	ld hl, IndigoPlateauGymGuideChampApexChips
 	call PrintText
 	jr .sellChips
 .quickGreet
-	ld hl, IndigoPlateauGymGuideChampAfterGreet
-	call PrintText
 	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS ; have to hear about apex chips to receive them after that
-	jr z, .done
+	jr z, .donePrompt3
+	ld hl, IndigoPlateauGymGuideChampAfterGreetPrompt
+	call PrintText
 .sellChips
 	ld hl, IndigoGymGuideShop
 	call DisplayPokemartNoGreeting
 .done
 	jp TextScriptEnd
+.donePrompt
+	ld hl, IndigoPlateauLobbyText2get
+	call PrintText
+	jr .done
+.donePrompt2
+	ld hl, IndigoPlateauGymGuideChampGreeting
+	call PrintText
+	jr .done
+.donePrompt3
+	ld hl, IndigoPlateauGymGuideChampAfterGreet
+	call PrintText
+	jr .done
 
 IndigoGymGuideSonText:
 	text_asm
@@ -110,6 +122,11 @@ IndigoPlateauLobbyText2get:
 	text_far _IndigoPlateauLobbyText2
 	text_end
 
+IndigoPlateauLobbyText2getPrompt:
+	text_far _IndigoPlateauLobbyText2
+	text_promptbutton
+	text_end
+
 IndigoPlateauApexChipsAfterChamp:
 	text_far _IndigoPlateauApexChipsAfterChamp
 	text_end
@@ -122,6 +139,11 @@ IndigoPlateauGymGuideChampGreeting:
 	text_far _IndigoPlateauGymGuideChampGreeting
 	text_end
 
+IndigoPlateauGymGuideChampGreetingPrompt:
+	text_far _IndigoPlateauGymGuideChampGreeting
+	text_promptbutton
+	text_end
+
 IndigoPlateauGymGuideChampApexChips:
 	text_far _IndigoPlateauGymGuideChampApexChips
 	text_end
@@ -130,8 +152,16 @@ IndigoPlateauGymGuideChampAfterGreet:
 	text_far _IndigoPlateauGymGuideChampAfterGreet
 	text_end
 
+IndigoPlateauGymGuideChampAfterGreetPrompt:
+	text_far _IndigoPlateauGymGuideChampAfterGreet
+	text_promptbutton
+	text_end
+
 IndigoTradeNurseText:
-	script_cable_club_receptionist
+	text_asm
+	SetEvent EVENT_BECAME_CHAMP
+	jp TextScriptEnd
+	;script_cable_club_receptionist
 	
 IndigoCashierText:
 	script_mart ULTRA_BALL, GREAT_BALL, FULL_RESTORE, MAX_POTION, FULL_HEAL, REVIVE, MAX_REPEL

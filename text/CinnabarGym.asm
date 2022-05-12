@@ -208,8 +208,8 @@ _CinnabarGymGuidePreBattleText::
 
 _CinnabarGymGuidePostBattleText::
 	text "<PLAYER>! You beat"
-	line "that fire brand!"
-	prompt
+	line "that fire brand!@"
+	text_end
 
 _CinnabarGymGuideApexChipFireText::
 	text "An APEX CHIP will"

@@ -97,8 +97,8 @@ _SaffronGymGuidePostBattleText::
 
 	para "If I had that,"
 	line "I'd make a bundle"
-	cont "at the slots!"
-	prompt
+	cont "at the slots!@"
+	text_end
 
 _SaffronGymGuideApexChipPsychicText::
 	text "For psychic"

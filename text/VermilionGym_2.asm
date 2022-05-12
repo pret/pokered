@@ -141,8 +141,8 @@ _VermilionGymGuidePreBattleText::
 
 _VermilionGymGuidePostBattleText::
 	text "Whew! That match"
-	line "was electric!"
-	prompt
+	line "was electric!@"
+	text_end
 
 _VermilionGymGuideApexChipElectricText::
 	text "For electric"

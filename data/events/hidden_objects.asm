@@ -389,7 +389,7 @@ CinnabarGymHiddenObjects:
 	hidden_object 10,  1, (TRUE  << 4) | 2, PrintCinnabarQuiz
 	hidden_object  9,  7, (TRUE  << 4) | 3, PrintCinnabarQuiz
 	hidden_object  9, 13, (TRUE  << 4) | 4, PrintCinnabarQuiz
-	hidden_object  1, 13, (FALSE << 4) | 5, PrintCinnabarQuiz
+	hidden_object  1, 13, (TRUE << 4) | 5, PrintCinnabarQuiz
 	hidden_object  1,  7, (TRUE  << 4) | 6, PrintCinnabarQuiz
 	db -1 ; end
 

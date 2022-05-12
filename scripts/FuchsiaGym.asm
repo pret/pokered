@@ -280,10 +280,10 @@ FuchsiaGymGuideText:
 	call PrintText
 	jr .done
 .afterBeat
-	ld hl, FuchsiaGymGuidePostBattleText
-	call PrintText
 	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS ; have to hear about apex chips to receive them after that
-	jr z, .done
+	jr z, .donePrompt
+	ld hl, FuchsiaGymGuidePostBattleTextPrompt
+	call PrintText
 	CheckEvent EVENT_GOT_FUCHSIA_APEX_CHIPS
 	jr nz, .alreadyApexChips
 .giveApexChips
@@ -306,6 +306,10 @@ FuchsiaGymGuideText:
 	call PrintText
 .done
 	jp TextScriptEnd
+.donePrompt
+	ld hl, FuchsiaGymGuidePostBattleText
+	call PrintText
+	jr .done
 
 ReceivedApexChipsText5:
 	text_far _ReceivedApexChipsText
@@ -330,6 +334,11 @@ FuchsiaGymGuidePreBattleText:
 
 FuchsiaGymGuidePostBattleText:
 	text_far _FuchsiaGymGuidePostBattleText
+	text_end
+
+FuchsiaGymGuidePostBattleTextPrompt:
+	text_far _FuchsiaGymGuidePostBattleText
+	text_promptbutton
 	text_end
 
 FuchsiaGymGuideApexChipPoisonText:

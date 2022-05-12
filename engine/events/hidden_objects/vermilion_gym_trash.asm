@@ -58,11 +58,13 @@ GymTrashScript:
 
 	ldh [hGymTrashCanRandNumMask], a
 	push hl
+.tryagain
 	call Random
 	swap a
 	ld b, a
 	ldh a, [hGymTrashCanRandNumMask]
 	and b
+	jr z, .tryagain ; FIXED: never AND to 0
 	dec a
 	pop hl
 
@@ -83,14 +85,15 @@ GymTrashScript:
 	cp b
 	jr z, .openSecondLock
 
-; Reset the cans.
-	ResetEvent EVENT_1ST_LOCK_OPENED
-	call Random
+; Reset the cans. ; FIXED: don't reset locks because it's just an annoying waste of time
+	;ResetEvent EVENT_1ST_LOCK_OPENED
+	;call Random
 
-	and $e
-	ld [wFirstLockTrashCanIndex], a
+	;and $e
+	;ld [wFirstLockTrashCanIndex], a
 
-	tx_pre_id VermilionGymTrashFailText
+	;tx_pre_id VermilionGymTrashFailText
+	tx_pre_id VermilionGymTrashText
 	jr .done
 
 .openSecondLock

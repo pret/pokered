@@ -426,10 +426,10 @@ ViridianGymGuideText:
 	call PrintText
 	jr .done
 .afterBeat
-	ld hl, ViridianGymGuidePostBattleText
-	call PrintText
 	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS ; have to hear about apex chips to receive them after that
-	jr z, .done
+	jr z, .donePrompt
+	ld hl, ViridianGymGuidePostBattleTextPrompt
+	call PrintText
 	CheckEvent EVENT_GOT_CINNABAR_APEX_CHIPS
 	jr nz, .alreadyApexChips
 .giveApexChips
@@ -452,6 +452,10 @@ ViridianGymGuideText:
 	call PrintText
 .done
 	jp TextScriptEnd
+.donePrompt
+	ld hl, ViridianGymGuidePostBattleText
+	call PrintText
+	jr .done
 
 ReceivedApexChipsText8:
 	text_far _ReceivedApexChipsText
@@ -480,4 +484,9 @@ ViridianGymGuidePreBattleText:
 
 ViridianGymGuidePostBattleText:
 	text_far _ViridianGymGuidePostBattleText
+	text_end
+
+ViridianGymGuidePostBattleTextPrompt:
+	text_far _ViridianGymGuidePostBattleText
+	text_promptbutton
 	text_end

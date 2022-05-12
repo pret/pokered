@@ -213,10 +213,10 @@ SaffronGymGuideText:
 	call PrintText
 	jr .done
 .afterBeat
-	ld hl, SaffronGymGuidePostBattleText
-	call PrintText
 	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS ; have to hear about apex chips to receive them after that
-	jr z, .done
+	jr z, .donePrompt
+	ld hl, SaffronGymGuidePostBattleTextPrompt
+	call PrintText
 	CheckEvent EVENT_GOT_SAFFRON_APEX_CHIPS
 	jr nz, .alreadyApexChips
 .giveApexChips
@@ -239,6 +239,10 @@ SaffronGymGuideText:
 	call PrintText
 .done
 	jp TextScriptEnd
+.donePrompt
+	ld hl, SaffronGymGuidePostBattleText
+	call PrintText
+	jr .done
 
 ReceivedApexChipsText6:
 	text_far _ReceivedApexChipsText
@@ -267,6 +271,11 @@ SaffronGymGuidePreBattleText:
 
 SaffronGymGuidePostBattleText:
 	text_far _SaffronGymGuidePostBattleText
+	text_end
+
+SaffronGymGuidePostBattleTextPrompt:
+	text_far _SaffronGymGuidePostBattleText
+	text_promptbutton
 	text_end
 
 SaffronGymBattleText1:

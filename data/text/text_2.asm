@@ -318,6 +318,11 @@ _GameOverText::
 	line "GAME is over!"
 	done
 
+_CinnabarGymQuizStartText::
+	text "#MON Quiz!"
+	line "Here we go!"
+	prompt
+
 _CinnabarGymQuizIntroText::
 	text "#MON Quiz!"
 
@@ -338,39 +343,38 @@ _CinnabarGymQuizIntroText::
 	prompt
 
 _CinnabarQuizQuestionsText1::
-	text "CATERPIE evolves"
+	text "METAPOD evolves"
 	line "into BUTTERFREE?"
-	done
+	prompt
 
 _CinnabarQuizQuestionsText2::
-	text "There are 9"
+	text "Are there 9"
 	line "certified #MON"
 	cont "LEAGUE BADGEs?"
-	done
+	prompt
 
 _CinnabarQuizQuestionsText3::
-	text "POLIWAG evolves 3"
-	line "times?"
-	done
+	text "Does POLIWAG"
+	line "evolve 3 times?"
+	prompt
 
 _CinnabarQuizQuestionsText4::
-	text "Are thunder moves"
-	line "effective against"
-	cont "ground element-"
+	text "Are electric"
+	line "moves effective"
+	cont "against ground-"
 	cont "type #MON?"
-	done
+	prompt
 
 _CinnabarQuizQuestionsText5::
-	text "#MON of the"
-	line "same kind and"
-	cont "level are not"
-	cont "identical?"
-	done
+	text "Are #MON of the"
+	line "same species and"
+	cont "level identical?"
+	prompt
 
 _CinnabarQuizQuestionsText6::
 	text "TM28 contains"
 	line "TOMBSTONER?"
-	done
+	prompt
 
 _CinnabarGymQuizCorrectText::
 	text "You're absolutely"
