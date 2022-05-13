@@ -2,10 +2,7 @@ AbleToPlaySlotsCheck:
 	ld a, [wSpritePlayerStateData1ImageIndex]
 	and $8
 	jr z, .done ; not able
-	ld b, COIN_CASE
-	predef GetQuantityOfItemInBag
-	ld a, b
-	and a
+	CheckEvent EVENT_GOT_COIN_CASE
 	ld b, (GameCornerCoinCaseText_id - TextPredefs) / 2 + 1
 	jr z, .printCoinCaseRequired
 	ld hl, wPlayerCoins

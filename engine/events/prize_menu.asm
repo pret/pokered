@@ -1,6 +1,5 @@
 CeladonPrizeMenu::
-	ld b, COIN_CASE
-	call IsItemInBag
+	CheckEvent EVENT_GOT_COIN_CASE
 	jr nz, .havingCoinCase
 	ld hl, RequireCoinCaseTextPtr
 	jp PrintText

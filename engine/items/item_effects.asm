@@ -41,7 +41,7 @@ ItemUsePtrTable:
 	dw ItemUseMedicine   ; POTION
 	dw ItemUseBait       ; BOULDERBADGE
 	dw ItemUseRock       ; CASCADEBADGE
-	dw UnusableItem      ; THUNDERBADGE
+	dw UnusableItem 	 ; THUNDERBADGE
 	dw UnusableItem      ; RAINBOWBADGE
 	dw UnusableItem      ; SOULBADGE
 	dw UnusableItem      ; MARSHBADGE
@@ -62,7 +62,7 @@ ItemUsePtrTable:
 	dw UnusableItem      ; DOME_FOSSIL
 	dw UnusableItem      ; HELIX_FOSSIL
 	dw UnusableItem      ; SECRET_KEY
-	dw UnusableItem
+	dw ItemUsePocketAbra ; POCKET_ABRA
 	dw UnusableItem      ; BIKE_VOUCHER
 	dw ItemUseXAccuracy  ; X_ACCURACY
 	dw ItemUseEvoStone   ; LEAF_STONE
@@ -87,7 +87,7 @@ ItemUsePtrTable:
 	dw ItemUseXStat      ; X_DEFEND
 	dw ItemUseXStat      ; X_SPEED
 	dw ItemUseXStat      ; X_SPECIAL
-	dw ItemUseCoinCase   ; COIN_CASE
+	dw UnusableItem      ; LOST_WALLET (used to be coin case)
 	dw ItemUseOaksParcel ; OAKS_PARCEL
 	dw ItemUseItemfinder ; ITEMFINDER
 	dw UnusableItem      ; SILPH_SCOPE
@@ -1634,6 +1634,75 @@ ItemUseEscapeRope:
 	jp ItemUseNotTime
 
 INCLUDE "data/tilesets/escape_rope_tilesets.asm"
+
+ItemUsePocketAbra:
+	ld hl, .wantToTeleportText
+	call PrintText
+	call YesNoChoice
+	ld a, [wCurrentMenuItem]
+	and a
+	jr z, .yes
+.no
+	ld hl, .pocketAbraNo
+	call PrintText
+	ret
+.yes
+	ld hl, wd732
+	set 3, [hl]
+	set 6, [hl]
+	ld hl, wd72e
+	set 1, [hl]
+	res 4, [hl]
+	call ItemUseReloadOverworldData
+	call Random
+	cp 200
+	jr nc, .flavor1
+	cp 150
+	jr nc, .flavor2
+	cp 100
+	jr nc, .flavor3
+	cp 50
+	jr nc, .flavor4
+	ld hl, .pocketAbraFlavorText5
+.done
+	call PrintText
+	call StopMusic
+	ld a, ABRA
+	call PlayCry
+	ret
+.flavor1
+	ld hl, .pocketAbraFlavorText1
+	jr .done
+.flavor2
+	ld hl, .pocketAbraFlavorText2
+	jr .done
+.flavor3
+	ld hl, .pocketAbraFlavorText3
+	jr .done
+.flavor4
+	ld hl, .pocketAbraFlavorText4
+	jr .done
+.wantToTeleportText
+	text_far _WantToTeleportText
+	text_end
+.pocketAbraNo
+	text_far _PocketAbraNo
+	text_end
+.pocketAbraFlavorText1
+	text_far _PocketAbraFlavorText1
+	text_end
+.pocketAbraFlavorText2
+	text_far _PocketAbraFlavorText2
+	text_end
+.pocketAbraFlavorText3
+	text_far _PocketAbraFlavorText3
+	text_end
+.pocketAbraFlavorText4
+	text_far _PocketAbraFlavorText4
+	text_end
+.pocketAbraFlavorText5
+	text_far _PocketAbraFlavorText5
+	text_end
 
 ItemUseRepel:
 	ld b, 100

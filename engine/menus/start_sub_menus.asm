@@ -352,6 +352,8 @@ StartMenu_Item::
 	ld a, [wcf91]
 	cp BICYCLE
 	jp z, .useOrTossItem
+	cp POCKET_ABRA
+	jp z, .useOrTossItem
 .notBicycle1
 	ld a, USE_TOSS_MENU_TEMPLATE
 	ld [wTextBoxID], a
@@ -382,7 +384,13 @@ StartMenu_Item::
 	call CopyToStringBuffer
 	ld a, [wcf91]
 	cp BICYCLE
-	jr nz, .notBicycle2
+	jr z, .yesBicycle
+	cp POCKET_ABRA
+	jr z, .pocketAbra
+	jr .notBicycle2
+.pocketAbra
+	jr .useItem_closeMenu
+.yesBicycle
 	ld a, [wd732]
 	bit 5, a
 	jr z, .useItem_closeMenu

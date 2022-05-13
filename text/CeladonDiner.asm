@@ -43,15 +43,13 @@ _CeladonDinerText_491a7::
 
 _ReceivedCoinCaseText::
 	text "<PLAYER> received"
-	line "a @"
-	text_ram wStringBuffer
-	text "!@"
+	line "a COIN CASE!@"
 	text_end
-
-_CoinCaseNoRoomText::
-	text "Make room for"
-	line "this!"
-	done
+	
+;_CoinCaseNoRoomText::
+;	text "Make room for"
+;	line "this!"
+;	done
 
 _CeladonDinerText_491b7::
 	text "I always thought"

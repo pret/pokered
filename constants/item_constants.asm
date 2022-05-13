@@ -52,7 +52,7 @@ SAFARI_ROCK EQU $16 ; overload
 	const DOME_FOSSIL   ; $29
 	const HELIX_FOSSIL  ; $2A
 	const SECRET_KEY    ; $2B
-	const UNUSED_ITEM   ; $2C "?????"
+	const POCKET_ABRA   ; $2C
 	const BIKE_VOUCHER  ; $2D
 	const X_ACCURACY    ; $2E
 	const LEAF_STONE    ; $2F
@@ -67,7 +67,7 @@ SAFARI_ROCK EQU $16 ; overload
 	const SUPER_REPEL   ; $38
 	const MAX_REPEL     ; $39
 	const DIRE_HIT      ; $3A
-	const COIN          ; $3B
+	const COIN          ; $3B ; useless item?
 	const FRESH_WATER   ; $3C
 	const SODA_POP      ; $3D
 	const LEMONADE      ; $3E
@@ -77,13 +77,13 @@ SAFARI_ROCK EQU $16 ; overload
 	const X_DEFEND      ; $42
 	const X_SPEED       ; $43
 	const X_SPECIAL     ; $44
-	const COIN_CASE     ; $45
+	const LOST_WALLET   ; $45 ; Used to be COIN_CASE before coin case was switched to be an event only
 	const OAKS_PARCEL   ; $46
 	const ITEMFINDER    ; $47
 	const SILPH_SCOPE   ; $48
 	const POKE_FLUTE    ; $49
 	const LIFT_KEY      ; $4A
-	const EXP_ALL       ; $4B
+	const EXP_ALL       ; $4B ; pointless item
 	const OLD_ROD       ; $4C
 	const GOOD_ROD      ; $4D
 	const SUPER_ROD     ; $4E

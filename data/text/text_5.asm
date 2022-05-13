@@ -35,10 +35,56 @@ _FlashLightsAreaText::
 	line "lights the area!"
 	prompt
 
+_WantToTeleportText::
+	text "Warp to the last"
+	line "#MON CENTER?"
+	prompt
+
+_PocketAbraFlavorText1::
+	text_ram wPocketAbraNick
+	text " "
+	line "grabbed your"
+	cont "hand quickly in"
+	cont "anticipation."
+	prompt
+
+_PocketAbraFlavorText2::
+	text_ram wPocketAbraNick
+	text " looks"
+	line "very excited!"
+	prompt
+
+_PocketAbraFlavorText3::
+	text_ram wPocketAbraNick
+	text " was"
+	line "dozing off in"
+	cont "your bag."
+	prompt
+
+_PocketAbraFlavorText4::
+	text_ram wPocketAbraNick
+	text " sat"
+	line "on your shoulder"
+	cont "comfily."
+	prompt
+
+_PocketAbraFlavorText5::
+	text_ram wPocketAbraNick
+	text " "
+	line "focused with"
+	cont "all its might!"
+	prompt
+
+_PocketAbraNo::
+	text_ram wPocketAbraNick
+	text " looks"
+	line "disappointed..."
+	prompt
+
 _WarpToLastPokemonCenterText::
 	text "Warp to the last"
 	line "#MON CENTER."
-	done
+	prompt
 
 _CannotUseTeleportNowText::
 	text_ram wcd6d

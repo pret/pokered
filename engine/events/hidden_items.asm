@@ -50,10 +50,7 @@ HiddenItemBagFullText::
 	text_end
 
 HiddenCoins:
-	ld b, COIN_CASE
-	predef GetQuantityOfItemInBag
-	ld a, b
-	and a
+	CheckEvent EVENT_GOT_COIN_CASE
 	ret z
 	ld hl, HiddenCoinCoords
 	call FindHiddenItemOrCoinsIndex
