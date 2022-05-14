@@ -2506,3 +2506,15 @@ LoadDestinationWarpPosition::
 	ret
 
 INCLUDE "data/sprites/alt_sprite_mappings.asm"
+
+SetLastBlackoutMap::
+	; called when entering pokemon centers
+	ld a, [wLastMap]
+	ld [wLastBlackoutMap], a
+	ret
+
+SetCurBlackoutMap::
+	; called after using FLY
+	ld a, [wCurMap]
+	ld [wLastBlackoutMap], a
+	ret

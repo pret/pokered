@@ -1,4 +1,5 @@
 RedsHouse1F_Script:
+	call SetLastBlackoutMap
 	jp EnableAutoTextBoxDrawing
 
 RedsHouse1F_TextPointers:

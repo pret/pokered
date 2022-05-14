@@ -14,7 +14,7 @@ DisplayPokemonCenterDialogue_::
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .declinedHealing ; if the player chose No
-	call SetLastBlackoutMap
+	; call SetLastBlackoutMap ; FIXED: set last blackout map on entering a pokemon center instead of when healing
 	call LoadScreenTilesFromBuffer1 ; restore screen
 	ld hl, NeedYourPokemonText
 	call PrintText

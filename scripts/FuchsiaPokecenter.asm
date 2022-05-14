@@ -1,4 +1,5 @@
 FuchsiaPokecenter_Script:
+	call SetLastBlackoutMap
 	call Serial_TryEstablishingExternallyClockedConnection
 	jp EnableAutoTextBoxDrawing
 

@@ -1,4 +1,5 @@
 IndigoPlateauLobby_Script:
+	call SetLastBlackoutMap
 	call Serial_TryEstablishingExternallyClockedConnection
 	call EnableAutoTextBoxDrawing
 	ld hl, wCurrentMapScriptFlags
