@@ -25,19 +25,19 @@ BluesHouse_TextPointers:
 BluesHouseDaisySittingText:
 	text_asm
 	CheckEvent EVENT_GOT_TOWN_MAP
-	jr nz, .got_town_map
+	jr nz, .gotTownMap
 	CheckEvent EVENT_GOT_POKEDEX
-	jr nz, .give_town_map
+	jr nz, .giveTownMap
 	ld hl, DaisyInitialText
 	call PrintText
 	jr .done
 
-.give_town_map
+.giveTownMap
 	ld hl, DaisyOfferMapText
 	call PrintText
 	lb bc, TOWN_MAP, 1
 	call GiveItem
-	jr nc, .bag_full
+	jr nc, .bagFull
 	ld a, HS_TOWN_MAP
 	ld [wMissableObjectIndex], a
 	predef HideObject
@@ -46,12 +46,12 @@ BluesHouseDaisySittingText:
 	SetEvent EVENT_GOT_TOWN_MAP
 	jr .done
 
-.got_town_map
+.gotTownMap
 	ld hl, DaisyUseMapText
 	call PrintText
 	jr .done
 
-.bag_full
+.bagFull
 	ld hl, DaisyBagFullText
 	call PrintText
 .done

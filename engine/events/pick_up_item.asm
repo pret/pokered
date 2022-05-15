@@ -28,7 +28,7 @@ PickUpItem:
 	ld b, a ; item
 	ld c, 1 ; quantity
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, .bagFull
 
 	ldh a, [hMissableObjectIndex]
 	ld [wMissableObjectIndex], a
@@ -38,7 +38,7 @@ PickUpItem:
 	ld hl, FoundItemText
 	jr .print
 
-.BagFull
+.bagFull
 	ld hl, NoMoreRoomForItemText
 .print
 	call PrintText

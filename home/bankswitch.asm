@@ -24,10 +24,10 @@ Bankswitch::
 	ld a, b
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
-	ld bc, .Return
+	ld bc, .return
 	push bc
 	jp hl
-.Return
+.return
 	pop bc
 	ld a, b
 	ldh [hLoadedROMBank], a

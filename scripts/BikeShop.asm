@@ -12,7 +12,7 @@ BikeShopText1:
 	jr z, .asm_260d4
 	ld hl, BikeShopText_1d82f
 	call PrintText
-	jp .Done
+	jp .done
 .asm_260d4
 	ld b, BIKE_VOUCHER
 	call IsItemInBag
@@ -21,18 +21,18 @@ BikeShopText1:
 	call PrintText
 	lb bc, BICYCLE, 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, .bagFull
 	ld a, BIKE_VOUCHER
 	ldh [hItemToRemoveID], a
 	farcall RemoveItemByID
 	SetEvent EVENT_GOT_BICYCLE
 	ld hl, BikeShopText_1d824
 	call PrintText
-	jr .Done
-.BagFull
+	jr .done
+.bagFull
 	ld hl, BikeShopText_1d834
 	call PrintText
-	jr .Done
+	jr .done
 .asm_41190
 	ld hl, BikeShopText_1d810
 	call PrintText
@@ -75,7 +75,7 @@ BikeShopText1:
 .cancel
 	ld hl, BikeShopComeAgainText
 	call PrintText
-.Done
+.done
 	jp TextScriptEnd
 
 BikeShopMenuText:

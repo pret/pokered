@@ -67,7 +67,7 @@ StatusScreen:
 	call LoadMonData
 	ld a, [wMonDataLocation]
 	cp BOX_DATA
-	jr c, .DontRecalculate
+	jr c, .dontRecalculate
 ; mon is in a box or daycare
 	ld a, [wLoadedMonBoxLevel]
 	ld [wLoadedMonLevel], a
@@ -76,7 +76,7 @@ StatusScreen:
 	ld de, wLoadedMonStats
 	ld b, $1
 	call CalcStats ; Recalculate stats
-.DontRecalculate
+.dontRecalculate
 	ld hl, wd72c
 	set 1, [hl]
 	ld a, $33
@@ -128,11 +128,11 @@ StatusScreen:
 	hlcoord 16, 6
 	ld de, wLoadedMonStatus
 	call PrintStatusCondition
-	jr nz, .StatusWritten
+	jr nz, .statusWritten
 	hlcoord 16, 6
 	ld de, OKText
 	call PlaceString ; "OK"
-.StatusWritten
+.statusWritten
 	hlcoord 9, 6
 	ld de, StatusText
 	call PlaceString ; "STATUS/"
@@ -149,13 +149,13 @@ StatusScreen:
 	hlcoord 11, 10
 	predef PrintMonType
 	ld hl, NamePointers2
-	call .GetStringPointer
+	call .getStringPointer
 	ld d, h
 	ld e, l
 	hlcoord 9, 1
 	call PlaceString ; Pokémon name
 	ld hl, OTPointers
-	call .GetStringPointer
+	call .getStringPointer
 	ld d, h
 	ld e, l
 	hlcoord 12, 16
@@ -177,7 +177,7 @@ StatusScreen:
 	ldh [hTileAnimations], a
 	ret
 
-.GetStringPointer
+.getStringPointer
 	ld a, [wMonDataLocation]
 	add a
 	ld c, a
@@ -229,18 +229,18 @@ OKText:
 ; Draws a line starting from hl high b and wide c
 DrawLineBox:
 	ld de, SCREEN_WIDTH ; New line
-.PrintVerticalLine
+.printVerticalLine
 	ld [hl], $78 ; │
 	add hl, de
 	dec b
-	jr nz, .PrintVerticalLine
+	jr nz, .printVerticalLine
 	ld [hl], $77 ; ┘
 	dec hl
-.PrintHorizLine
+.printHorizLine
 	ld [hl], $76 ; ─
 	dec hl
 	dec c
-	jr nz, .PrintHorizLine
+	jr nz, .printHorizLine
 	ld [hl], $6f ; ← (halfarrow ending)
 	ret
 
@@ -249,22 +249,22 @@ PTile: INCBIN "gfx/font/P.1bpp"
 PrintStatsBox:
 	ld a, d
 	and a ; a is 0 from the status screen
-	jr nz, .DifferentBox
+	jr nz, .differentBox
 	hlcoord 0, 8
 	ld b, 8
 	ld c, 8
 	call TextBoxBorder ; Draws the box
 	hlcoord 1, 9 ; Start printing stats from here
 	ld bc, $19 ; Number offset
-	jr .PrintStats
-.DifferentBox
+	jr .printStats
+.differentBox
 	hlcoord 9, 2
 	ld b, 8
 	ld c, 9
 	call TextBoxBorder
 	hlcoord 11, 3
 	ld bc, $18
-.PrintStats
+.printStats
 	push bc
 	push hl
 	ld de, StatsText
@@ -333,15 +333,15 @@ StatusScreen2:
 	call StatusScreen_PrintPP ; Print "PP"
 	ld a, b
 	and a
-	jr z, .InitPP
+	jr z, .initPP
 	ld c, a
 	ld a, "-"
 	call StatusScreen_PrintPP ; Fill the rest with --
-.InitPP
+.initPP
 	ld hl, wLoadedMonMoves
 	decoord 14, 10
 	ld b, 0
-.PrintPP
+.printPP
 	ld a, [hli]
 	and a
 	jr z, .PPDone
@@ -387,7 +387,7 @@ StatusScreen2:
 	inc b
 	ld a, b
 	cp $4
-	jr nz, .PrintPP
+	jr nz, .printPP
 .PPDone
 	hlcoord 9, 3
 	ld de, StatusScreenExpText
@@ -395,10 +395,10 @@ StatusScreen2:
 	ld a, [wLoadedMonLevel]
 	push af
 	cp MAX_LEVEL
-	jr z, .Level100
+	jr z, .level100
 	inc a
 	ld [wLoadedMonLevel], a ; Increase temporarily if not 100
-.Level100
+.level100
 	hlcoord 14, 6
 	ld [hl], "<to>"
 	inc hl

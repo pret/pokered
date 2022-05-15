@@ -3273,7 +3273,7 @@ PrintGhostText:
 	ret nz
 	ldh a, [hWhoseTurn]
 	and a
-	jr nz, .Ghost
+	jr nz, .ghost
 	ld a, [wBattleMonStatus] ; player's turn
 	and SLP | (1 << FRZ)
 	ret nz
@@ -3281,7 +3281,7 @@ PrintGhostText:
 	call PrintText
 	xor a
 	ret
-.Ghost ; ghost's turn
+.ghost ; ghost's turn
 	ld hl, GetOutText
 	call PrintText
 	xor a
@@ -3318,12 +3318,12 @@ CheckPlayerStatusConditions:
 	ld hl, wBattleMonStatus
 	ld a, [hl]
 	and SLP ; sleep mask
-	jr z, .FrozenCheck
+	jr z, .frozenCheck
 ; sleeping
 	dec a
 	ld [wBattleMonStatus], a ; decrement number of turns left
 	and a
-	jr z, .WakeUp ; if the number of turns hit 0, wake up
+	jr z, .wakeUp ; if the number of turns hit 0, wake up
 ; fast asleep
 	xor a
 	ld [wAnimationType], a
@@ -3332,7 +3332,7 @@ CheckPlayerStatusConditions:
 	ld hl, FastAsleepText
 	call PrintText
 	jr .sleepDone
-.WakeUp
+.wakeUp
 	ld hl, WokeUpText
 	call PrintText
 .sleepDone
@@ -3341,9 +3341,9 @@ CheckPlayerStatusConditions:
 	ld hl, ExecutePlayerMoveDone ; player can't move this turn
 	jp .returnToHL
 
-.FrozenCheck
+.frozenCheck
 	bit FRZ, [hl] ; frozen?
-	jr z, .HeldInPlaceCheck
+	jr z, .heldInPlaceCheck
 	ld hl, IsFrozenText
 	call PrintText
 	xor a
@@ -3351,7 +3351,7 @@ CheckPlayerStatusConditions:
 	ld hl, ExecutePlayerMoveDone ; player can't move this turn
 	jp .returnToHL
 
-.HeldInPlaceCheck
+.heldInPlaceCheck
 	ld a, [wEnemyBattleStatus1]
 	bit USING_TRAPPING_MOVE, a ; is enemy using a multi-turn move like wrap?
 	jp z, .FlinchedCheck
@@ -3363,50 +3363,50 @@ CheckPlayerStatusConditions:
 .FlinchedCheck
 	ld hl, wPlayerBattleStatus1
 	bit FLINCHED, [hl]
-	jp z, .HyperBeamCheck
+	jp z, .hyperBeamCheck
 	res FLINCHED, [hl] ; reset player's flinch status
 	ld hl, FlinchedText
 	call PrintText
 	ld hl, ExecutePlayerMoveDone ; player can't move this turn
 	jp .returnToHL
 
-.HyperBeamCheck
+.hyperBeamCheck
 	ld hl, wPlayerBattleStatus2
 	bit NEEDS_TO_RECHARGE, [hl]
-	jr z, .AnyMoveDisabledCheck
+	jr z, .anyMoveDisabledCheck
 	res NEEDS_TO_RECHARGE, [hl] ; reset player's recharge status
 	ld hl, MustRechargeText
 	call PrintText
 	ld hl, ExecutePlayerMoveDone ; player can't move this turn
 	jp .returnToHL
 
-.AnyMoveDisabledCheck
+.anyMoveDisabledCheck
 	ld hl, wPlayerDisabledMove
 	ld a, [hl]
 	and a
-	jr z, .ConfusedCheck
+	jr z, .confusedCheck
 	dec a
 	ld [hl], a
 	and $f ; did Disable counter hit 0?
-	jr nz, .ConfusedCheck
+	jr nz, .confusedCheck
 	ld [hl], a
 	ld [wPlayerDisabledMoveNumber], a
 	ld hl, DisabledNoMoreText
 	call PrintText
 
-.ConfusedCheck
+.confusedCheck
 	ld a, [wPlayerBattleStatus1]
 	add a ; is player confused?
-	jr nc, .TriedToUseDisabledMoveCheck
+	jr nc, .triedToUseDisabledMoveCheck
 	ld hl, wPlayerConfusedCounter
 	dec [hl]
-	jr nz, .IsConfused
+	jr nz, .isConfused
 	ld hl, wPlayerBattleStatus1
 	res CONFUSED, [hl] ; if confused counter hit 0, reset confusion status
 	ld hl, ConfusedNoMoreText
 	call PrintText
-	jr .TriedToUseDisabledMoveCheck
-.IsConfused
+	jr .triedToUseDisabledMoveCheck
+.isConfused
 	ld hl, IsConfusedText
 	call PrintText
 	xor a
@@ -3415,37 +3415,37 @@ CheckPlayerStatusConditions:
 	call PlayMoveAnimation
 	call BattleRandom
 	cp 50 percent + 1 ; chance to hurt itself
-	jr c, .TriedToUseDisabledMoveCheck
+	jr c, .triedToUseDisabledMoveCheck
 	ld hl, wPlayerBattleStatus1
 	ld a, [hl]
 	and 1 << CONFUSED ; if mon hurts itself, clear every other status from wPlayerBattleStatus1
 	ld [hl], a
 	call HandleSelfConfusionDamage
-	jr .MonHurtItselfOrFullyParalysed
+	jr .monHurtItselfOrFullyParalysed
 
-.TriedToUseDisabledMoveCheck
+.triedToUseDisabledMoveCheck
 ; prevents a disabled move that was selected before being disabled from being used
 	ld a, [wPlayerDisabledMoveNumber]
 	and a
-	jr z, .ParalysisCheck
+	jr z, .paralysisCheck
 	ld hl, wPlayerSelectedMove
 	cp [hl]
-	jr nz, .ParalysisCheck
+	jr nz, .paralysisCheck
 	call PrintMoveIsDisabledText
 	ld hl, ExecutePlayerMoveDone ; if a disabled move was somehow selected, player can't move this turn
 	jp .returnToHL
 
-.ParalysisCheck
+.paralysisCheck
 	ld hl, wBattleMonStatus
 	bit PAR, [hl]
-	jr z, .BideCheck
+	jr z, .bideCheck
 	call BattleRandom
 	cp $3F ; 25% to be fully paralyzed
-	jr nc, .BideCheck
+	jr nc, .bideCheck
 	ld hl, FullyParalyzedText
 	call PrintText
 
-.MonHurtItselfOrFullyParalysed
+.monHurtItselfOrFullyParalysed
 	ld hl, wPlayerBattleStatus1
 	ld a, [hl]
 	; clear bide, thrashing, charging up, and trapping moves such as warp (already cleared for confusion damage)
@@ -3453,24 +3453,24 @@ CheckPlayerStatusConditions:
 	ld [hl], a
 	ld a, [wPlayerMoveEffect]
 	cp FLY_EFFECT
-	jr z, .FlyOrChargeEffect
+	jr z, .flyOrChargeEffect
 	cp CHARGE_EFFECT
-	jr z, .FlyOrChargeEffect
-	jr .NotFlyOrChargeEffect
+	jr z, .flyOrChargeEffect
+	jr .notFlyOrChargeEffect
 
-.FlyOrChargeEffect
+.flyOrChargeEffect
 	xor a
 	ld [wAnimationType], a
 	ld a, STATUS_AFFECTED_ANIM
 	call PlayMoveAnimation
-.NotFlyOrChargeEffect
+.notFlyOrChargeEffect
 	ld hl, ExecutePlayerMoveDone
 	jp .returnToHL ; if using a two-turn move, we need to recharge the first turn
 
-.BideCheck
+.bideCheck
 	ld hl, wPlayerBattleStatus1
 	bit STORING_ENERGY, [hl] ; is mon using bide?
-	jr z, .ThrashingAboutCheck
+	jr z, .thrashingAboutCheck
 	xor a
 	ld [wPlayerMoveNum], a
 	ld hl, wDamage
@@ -3486,10 +3486,10 @@ CheckPlayerStatusConditions:
 	ld [hl], a
 	ld hl, wPlayerNumAttacksLeft
 	dec [hl] ; did Bide counter hit 0?
-	jr z, .UnleashEnergy
+	jr z, .unleashEnergy
 	ld hl, ExecutePlayerMoveDone
 	jp .returnToHL ; unless mon unleashes energy, can't move this turn
-.UnleashEnergy
+.unleashEnergy
 	ld hl, wPlayerBattleStatus1
 	res STORING_ENERGY, [hl] ; not using bide any more
 	ld hl, UnleashedEnergyText
@@ -3517,9 +3517,9 @@ CheckPlayerStatusConditions:
 	ld hl, handleIfPlayerMoveMissed ; skip damage calculation, DecrementPP and MoveHitTest
 	jp .returnToHL
 
-.ThrashingAboutCheck
+.thrashingAboutCheck
 	bit THRASHING_ABOUT, [hl] ; is mon using thrash or petal dance?
-	jr z, .MultiturnMoveCheck
+	jr z, .multiturnMoveCheck
 	ld a, THRASH
 	ld [wPlayerMoveNum], a
 	ld hl, ThrashingAboutText
@@ -3540,9 +3540,9 @@ CheckPlayerStatusConditions:
 	pop hl ; skip DecrementPP
 	jp .returnToHL
 
-.MultiturnMoveCheck
+.multiturnMoveCheck
 	bit USING_TRAPPING_MOVE, [hl] ; is mon using multi-turn move?
-	jp z, .RageCheck
+	jp z, .rageCheck
 	ld hl, AttackContinuesText
 	call PrintText
 	ld a, [wPlayerNumAttacksLeft]
@@ -3553,7 +3553,7 @@ CheckPlayerStatusConditions:
 	jp nz, .returnToHL
 	jp .returnToHL
 
-.RageCheck
+.rageCheck
 	ld a, [wPlayerBattleStatus2]
 	bit USING_RAGE, a ; is mon using rage?
 	jp z, .checkPlayerStatusConditionsDone ; if we made it this far, mon can move normally this turn
@@ -4511,7 +4511,7 @@ CalculateDamage:
 	ldh a, [hQuotient + 3]
 	add b
 	ldh [hQuotient + 3], a
-	jr nc, .dont_cap_1
+	jr nc, .dontCap1
 
 	ldh a, [hQuotient + 2]
 	inc a
@@ -4519,7 +4519,7 @@ CalculateDamage:
 	and a
 	jr z, .cap
 
-.dont_cap_1
+.dontCap1
 	ldh a, [hQuotient]
 	ld b, a
 	ldh a, [hQuotient + 1]
@@ -4528,7 +4528,7 @@ CalculateDamage:
 
 	ldh a, [hQuotient + 2]
 	cp HIGH(MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE + 1)
-	jr c, .dont_cap_2
+	jr c, .dontCap2
 
 	cp HIGH(MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE + 1) + 1
 	jr nc, .cap
@@ -4537,7 +4537,7 @@ CalculateDamage:
 	cp LOW(MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE + 1)
 	jr nc, .cap
 
-.dont_cap_2
+.dontCap2
 	inc hl
 
 	ldh a, [hQuotient + 3]
@@ -4553,7 +4553,7 @@ CalculateDamage:
 
 	ld a, [hl]
 	cp HIGH(MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE + 1)
-	jr c, .dont_cap_3
+	jr c, .dontCap3
 
 	cp HIGH(MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE + 1) + 1
 	jr nc, .cap
@@ -4561,7 +4561,7 @@ CalculateDamage:
 	inc hl
 	ld a, [hld]
 	cp LOW(MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE + 1)
-	jr c, .dont_cap_3
+	jr c, .dontCap3
 
 .cap
 	ld a, HIGH(MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE)
@@ -4569,15 +4569,15 @@ CalculateDamage:
 	ld a, LOW(MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE)
 	ld [hld], a
 
-.dont_cap_3
+.dontCap3
 ; Add back MIN_NEUTRAL_DAMAGE (capping at 999).
 	inc hl
 	ld a, [hl]
 	add MIN_NEUTRAL_DAMAGE
 	ld [hld], a
-	jr nc, .dont_floor
+	jr nc, .dontFloor
 	inc [hl]
-.dont_floor
+.dontFloor
 
 ; Returns nz and nc.
 	ld a, 1
@@ -4634,23 +4634,23 @@ CriticalHitTest:
 	srl b
 .noFocusEnergyUsed
 	ld hl, HighCriticalMoves     ; table of high critical hit moves
-.Loop
+.loop
 	ld a, [hli]                  ; read move from move table
 	cp c                         ; does it match the move about to be used?
-	jr z, .HighCritical          ; if so, the move about to be used is a high critical hit ratio move
+	jr z, .highCritical          ; if so, the move about to be used is a high critical hit ratio move
 	inc a                        ; move on to the next move, FF terminates loop
-	jr nz, .Loop                 ; check the next move in HighCriticalMoves
+	jr nz, .loop                 ; check the next move in HighCriticalMoves
 	srl b                        ; /2 for regular move (effective (base speed / 2))
-	jr .SkipHighCritical         ; continue as a normal move
-.HighCritical
+	jr .skipHighCritical         ; continue as a normal move
+.highCritical
 	sla b                        ; *2 for high critical hit moves
 	jr nc, .noCarry
 	ld b, $ff                    ; cap at 255/256
 .noCarry
 	sla b                        ; *4 for high critical move (effective (base speed/2)*8))
-	jr nc, .SkipHighCritical
+	jr nc, .skipHighCritical
 	ld b, $ff
-.SkipHighCritical
+.skipHighCritical
 	call BattleRandom            ; generates a random value, in "a"
 	rlc a
 	rlc a

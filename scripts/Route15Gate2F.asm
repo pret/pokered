@@ -8,7 +8,7 @@ Route15Gate2F_TextPointers:
 Route15GateUpstairsText1:
 	text_asm
 	CheckEvent EVENT_GOT_EXP_ALL
-	jr nz, .got_item
+	jr nz, .gotItem
 	ld a, 50
 	ldh [hOaksAideRequirement], a
 	ld a, EXP_ALL
@@ -22,12 +22,12 @@ Route15GateUpstairsText1:
 	predef OaksAideScript
 	ldh a, [hOaksAideResult]
 	cp OAKS_AIDE_GOT_ITEM
-	jr nz, .no_item
+	jr nz, .noItem
 	SetEvent EVENT_GOT_EXP_ALL
-.got_item
+.gotItem
 	ld hl, Route15GateUpstairsText_4968c
 	call PrintText
-.no_item
+.noItem
 	jp TextScriptEnd
 
 Route15GateUpstairsText_4968c:

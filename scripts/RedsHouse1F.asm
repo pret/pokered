@@ -54,9 +54,9 @@ RedsHouse1FTVText:
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
 	ld hl, TVWrongSideText
-	jr nz, .got_text
+	jr nz, .gotText
 	ld hl, StandByMeText
-.got_text
+.gotText
 	call PrintText
 	jp TextScriptEnd
 

@@ -2,9 +2,9 @@ _RunPaletteCommand:
 	call GetPredefRegisters
 	ld a, b
 	cp SET_PAL_DEFAULT
-	jr nz, .not_default
+	jr nz, .notDefault
 	ld a, [wDefaultPaletteCommand]
-.not_default
+.notDefault
 	cp SET_PAL_PARTY_MENU_HP_BARS
 	jp z, UpdatePartyMenuBlkPacket
 	ld l, a

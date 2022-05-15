@@ -74,7 +74,7 @@ PickPokeball:
 	ld a, [hl]
 	and a
 	ld b, $33 ; crossed ball (fainted)
-	jr z, .done_fainted
+	jr z, .doneFainted
 .alive
 	inc hl
 	inc hl
@@ -84,7 +84,7 @@ PickPokeball:
 	jr nz, .done
 	dec b ; regular ball
 	jr .done
-.done_fainted
+.doneFainted
 	inc hl
 	inc hl
 .done

@@ -51,7 +51,7 @@ VendingMachineMenu::
 	ld b, a
 	ld c, 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, .bagFull
 
 	ld b, 60 ; number of times to play the "brrrrr" sound
 .playDeliverySound
@@ -73,7 +73,7 @@ VendingMachineMenu::
 	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	jp DisplayTextBoxID
-.BagFull
+.bagFull
 	ld hl, VendingMachineText6
 	jp PrintText
 .notThirsty

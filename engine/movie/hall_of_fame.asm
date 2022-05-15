@@ -131,7 +131,7 @@ HoFShowMonOrPlayer:
 	jr z, .next2
 	sla e ; scroll more slowly on SGB
 .next2
-	call .ScrollPic ; scroll back pic left
+	call .scrollPic ; scroll back pic left
 	xor a
 	ldh [hSCY], a
 	ld c, a ; front pic
@@ -140,13 +140,13 @@ HoFShowMonOrPlayer:
 	ld e, -4
 ; scroll front pic right
 
-.ScrollPic
+.scrollPic
 	call DelayFrame
 	ldh a, [hSCX]
 	add e
 	ldh [hSCX], a
 	cp d
-	jr nz, .ScrollPic
+	jr nz, .scrollPic
 	ret
 
 HoFDisplayAndRecordMonInfo:

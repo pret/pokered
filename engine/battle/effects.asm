@@ -213,11 +213,11 @@ FreezeBurnParalyzeEffect:
 	ld a, [wPlayerMoveEffect]
 	cp PARALYZE_SIDE_EFFECT1 + 1
 	ld b, 10 percent + 1
-	jr c, .regular_effectiveness
+	jr c, .regularEffectiveness
 ; extra effectiveness
 	ld b, 30 percent + 1
 	sub BURN_SIDE_EFFECT2 - BURN_SIDE_EFFECT1 ; treat extra effective as regular from now on
-.regular_effectiveness
+.regularEffectiveness
 	push af
 	call BattleRandom ; get random 8bit value for probability test
 	cp b
@@ -266,11 +266,11 @@ FreezeBurnParalyzeEffect:
 	ld a, [wEnemyMoveEffect]
 	cp PARALYZE_SIDE_EFFECT1 + 1
 	ld b, 10 percent + 1
-	jr c, .regular_effectiveness2
+	jr c, .regularEffectiveness2
 ; extra effectiveness
 	ld b, 30 percent + 1
 	sub BURN_SIDE_EFFECT2 - BURN_SIDE_EFFECT1 ; treat extra effective as regular from now on
-.regular_effectiveness2
+.regularEffectiveness2
 	push af
 	call BattleRandom
 	cp b
@@ -679,9 +679,9 @@ UpdateLoweredStatDone:
 	pop de
 	ld a, [de]
 	cp $44
-	jr nc, .ApplyBadgeBoostsAndStatusPenalties
+	jr nc, .applyBadgeBoostsAndStatusPenalties
 	call PlayCurrentMoveAnimation2
-.ApplyBadgeBoostsAndStatusPenalties
+.applyBadgeBoostsAndStatusPenalties
 	ldh a, [hWhoseTurn]
 	and a
 	call nz, ApplyBadgeStatBoosts ; whenever the player uses a stat-down move, badge boosts get reapplied again to every stat,
@@ -742,14 +742,14 @@ FellText:
 PrintStatText:
 	ld hl, StatModTextStrings
 	ld c, "@"
-.findStatName_outer
+.findStatNameOuter
 	dec b
 	jr z, .foundStatName
-.findStatName_inner
+.findStatNameInner
 	ld a, [hli]
 	cp c
-	jr z, .findStatName_outer
-	jr .findStatName_inner
+	jr z, .findStatNameOuter
+	jr .findStatNameInner
 .foundStatName
 	ld de, wStringBuffer
 	ld bc, $a

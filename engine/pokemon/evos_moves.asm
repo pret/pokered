@@ -6,7 +6,7 @@ TryEvolvingMon:
 	ld a, [wWhichPokemon]
 	ld c, a
 	ld b, FLAG_SET
-	call Evolution_FlagAction
+	call EvolutionFlagAction
 
 ; this is only called after battle
 ; it is supposed to do level up evolutions, though there is a bug that allows item evolutions to occur
@@ -23,7 +23,7 @@ EvolutionAfterBattle:
 	ld hl, wPartyCount
 	push hl
 
-Evolution_PartyMonLoop: ; loop over party mons
+EvolutionPartyMonLoop: ; loop over party mons
 	ld hl, wWhichPokemon
 	inc [hl]
 	pop hl
@@ -37,10 +37,10 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld c, a
 	ld hl, wCanEvolveFlags
 	ld b, FLAG_TEST
-	call Evolution_FlagAction
+	call EvolutionFlagAction
 	ld a, c
 	and a ; is the mon's bit set?
-	jp z, Evolution_PartyMonLoop ; if not, go to the next mon
+	jp z, EvolutionPartyMonLoop ; if not, go to the next mon
 	ld a, [wEvoOldSpecies]
 	dec a
 	ld b, 0
@@ -65,20 +65,20 @@ Evolution_PartyMonLoop: ; loop over party mons
 .evoEntryLoop ; loop over evolution entries
 	ld a, [hli]
 	and a ; have we reached the end of the evolution data?
-	jr z, Evolution_PartyMonLoop
+	jr z, EvolutionPartyMonLoop
 	ld b, a ; evolution type
 	cp EV_TRADE
 	jr z, .checkTradeEvo
 ; not trade evolution
 	ld a, [wLinkState]
 	cp LINK_STATE_TRADING
-	jr z, Evolution_PartyMonLoop ; if trading, go the next mon
+	jr z, EvolutionPartyMonLoop ; if trading, go the next mon
 	ld a, b
 	cp EV_ITEM
 	jr z, .checkItemEvo
 	ld a, [wForceEvolution]
 	and a
-	jr nz, Evolution_PartyMonLoop
+	jr nz, EvolutionPartyMonLoop
 	ld a, b
 	cp EV_LEVEL
 	jr z, .checkLevel
@@ -90,7 +90,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld b, a
 	ld a, [wLoadedMonLevel]
 	cp b ; is the mon's level greater than the evolution requirement?
-	jp c, Evolution_PartyMonLoop ; if so, go the next mon
+	jp c, EvolutionPartyMonLoop ; if so, go the next mon
 	jr .doEvolution
 .checkItemEvo
 	ld a, [hli]
@@ -212,7 +212,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	predef SetPartyMonTypes
 	ld a, [wIsInBattle]
 	and a
-	call z, Evolution_ReloadTilesetTilePatterns
+	call z, EvolutionReloadTilesetTilePatterns
 	predef IndexToPokedex
 	ld a, [wd11e]
 	dec a
@@ -220,10 +220,10 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld b, FLAG_SET
 	ld hl, wPokedexOwned
 	push bc
-	call Evolution_FlagAction
+	call EvolutionFlagAction
 	pop bc
 	ld hl, wPokedexSeen
-	call Evolution_FlagAction
+	call EvolutionFlagAction
 	pop de
 	pop hl
 	ld a, [wLoadedMonSpecies]
@@ -292,8 +292,8 @@ CancelledEvolution:
 	call PrintText
 	call ClearScreen
 	pop hl
-	call Evolution_ReloadTilesetTilePatterns
-	jp Evolution_PartyMonLoop
+	call EvolutionReloadTilesetTilePatterns
+	jp EvolutionPartyMonLoop
 
 EvolvedText:
 	text_far _EvolvedText
@@ -311,7 +311,7 @@ IsEvolvingText:
 	text_far _IsEvolvingText
 	text_end
 
-Evolution_ReloadTilesetTilePatterns:
+EvolutionReloadTilesetTilePatterns:
 	ld a, [wLinkState]
 	cp LINK_STATE_TRADING
 	ret z
@@ -448,7 +448,7 @@ WriteMonMoves:
 	push hl
 	ld h, d
 	ld l, e
-	call WriteMonMoves_ShiftMoveData ; shift all moves one up (deleting move 1)
+	call WriteMonMovesShiftMoveData ; shift all moves one up (deleting move 1)
 	ld a, [wLearningMovesFromDayCare]
 	and a
 	jr z, .writeMoveToSlot
@@ -459,7 +459,7 @@ WriteMonMoves:
 	add hl, bc
 	ld d, h
 	ld e, l
-	call WriteMonMoves_ShiftMoveData ; shift all move PP data one up
+	call WriteMonMovesShiftMoveData ; shift all move PP data one up
 	pop de
 
 .writeMoveToSlot
@@ -497,7 +497,7 @@ WriteMonMoves:
 	ret
 
 ; shifts all move data one up (freeing 4th move slot)
-WriteMonMoves_ShiftMoveData:
+WriteMonMovesShiftMoveData:
 	ld c, NUM_MOVES - 1
 .loop
 	inc de
@@ -507,7 +507,7 @@ WriteMonMoves_ShiftMoveData:
 	jr nz, .loop
 	ret
 
-Evolution_FlagAction:
+EvolutionFlagAction:
 	predef_jump FlagActionPredef
 
 INCLUDE "data/pokemon/evos_moves.asm"

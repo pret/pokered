@@ -202,16 +202,16 @@ UnusedPartyMonSpriteFunction:
 	call GetPartyMonSpriteID
 	push af
 	ld hl, vSprites tile $00
-	call .LoadTilePatterns
+	call .loadTilePatterns
 	pop af
 	add $54
 	ld hl, vSprites tile $04
-	call .LoadTilePatterns
+	call .loadTilePatterns
 	xor a
 	ld [wMonPartySpriteSpecies], a
 	jr WriteMonPartySpriteOAMBySpecies
 
-.LoadTilePatterns
+.loadTilePatterns
 	push hl
 	add a
 	ld c, a

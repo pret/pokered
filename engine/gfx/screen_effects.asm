@@ -20,8 +20,8 @@ PredefShakeScreenVertically:
 	xor a
 .loop
 	ldh [hMutateWY], a
-	call .MutateWY
-	call .MutateWY
+	call .mutateWY
+	call .mutateWY
 	dec b
 	ld a, b
 	jr nz, .loop
@@ -29,7 +29,7 @@ PredefShakeScreenVertically:
 	ld [wDisableVBlankWYUpdate], a
 	ret
 
-.MutateWY
+.mutateWY
 	ldh a, [hMutateWY]
 	xor b
 	ldh [hMutateWY], a
@@ -44,10 +44,10 @@ PredefShakeScreenHorizontally:
 	xor a
 .loop
 	ldh [hMutateWX], a
-	call .MutateWX
+	call .mutateWX
 	ld c, 1
 	call DelayFrames
-	call .MutateWX
+	call .mutateWX
 	dec b
 	ld a, b
 	jr nz, .loop
@@ -57,7 +57,7 @@ PredefShakeScreenHorizontally:
 	ldh [rWX], a
 	ret
 
-.MutateWX
+.mutateWX
 	ldh a, [hMutateWX]
 	xor b
 	ldh [hMutateWX], a

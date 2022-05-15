@@ -8,7 +8,7 @@ VermilionHouse2Text1:
 	text_asm
 	ld a, [wd728]
 	bit 3, a ; got old rod?
-	jr nz, .got_item
+	jr nz, .gotItem
 	ld hl, VermilionHouse2Text_560b1
 	call PrintText
 	call YesNoChoice
@@ -17,18 +17,18 @@ VermilionHouse2Text1:
 	jr nz, .refused
 	lb bc, OLD_ROD, 1
 	call GiveItem
-	jr nc, .bag_full
+	jr nc, .bagFull
 	ld hl, wd728
 	set 3, [hl] ; got old rod
 	ld hl, VermilionHouse2Text_560b6
 	jr .done
-.bag_full
+.bagFull
 	ld hl, VermilionHouse2Text_560ca
 	jr .done
 .refused
 	ld hl, VermilionHouse2Text_560c0
 	jr .done
-.got_item
+.gotItem
 	ld hl, VermilionHouse2Text_560c5
 .done
 	call PrintText

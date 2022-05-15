@@ -13,11 +13,11 @@ MrFujisHouse_TextPointers:
 LavenderHouse1Text1:
 	text_asm
 	CheckEvent EVENT_RESCUED_MR_FUJI
-	jr nz, .rescued_mr_fuji
+	jr nz, .rescuedMrFuji
 	ld hl, LavenderHouse1Text_1d8d1
 	call PrintText
 	jr .done
-.rescued_mr_fuji
+.rescuedMrFuji
 	ld hl, LavenderHouse1Text_1d8d6
 	call PrintText
 .done
@@ -34,11 +34,11 @@ LavenderHouse1Text_1d8d6:
 LavenderHouse1Text2:
 	text_asm
 	CheckEvent EVENT_RESCUED_MR_FUJI
-	jr nz, .rescued_mr_fuji
+	jr nz, .rescuedMrFuji
 	ld hl, LavenderHouse1Text_1d8f4
 	call PrintText
 	jr .done
-.rescued_mr_fuji
+.rescuedMrFuji
 	ld hl, LavenderHouse1Text_1d8f9
 	call PrintText
 .done
@@ -69,21 +69,21 @@ LavenderHouse1Text4:
 LavenderHouse1Text5:
 	text_asm
 	CheckEvent EVENT_GOT_POKE_FLUTE
-	jr nz, .got_item
+	jr nz, .gotItem
 	ld hl, LavenderHouse1Text_1d94c
 	call PrintText
 	lb bc, POKE_FLUTE, 1
 	call GiveItem
-	jr nc, .bag_full
+	jr nc, .bagFull
 	ld hl, ReceivedFluteText
 	call PrintText
 	SetEvent EVENT_GOT_POKE_FLUTE
 	jr .done
-.bag_full
+.bagFull
 	ld hl, FluteNoRoomText
 	call PrintText
 	jr .done
-.got_item
+.gotItem
 	ld hl, MrFujiAfterFluteText
 	call PrintText
 .done

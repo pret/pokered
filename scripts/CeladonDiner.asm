@@ -28,21 +28,21 @@ CeladonDinerText4:
 CeladonDinerText5:
 	text_asm
 	CheckEvent EVENT_GOT_COIN_CASE
-	jr nz, .got_item
+	jr nz, .gotItem
 	ld hl, CeladonDinerText_491a7
 	call PrintText
 	lb bc, COIN_CASE, 1
 	call GiveItem
-	jr nc, .bag_full
+	jr nc, .bagFull
 	SetEvent EVENT_GOT_COIN_CASE
 	ld hl, ReceivedCoinCaseText
 	call PrintText
 	jr .done
-.bag_full
+.bagFull
 	ld hl, CoinCaseNoRoomText
 	call PrintText
 	jr .done
-.got_item
+.gotItem
 	ld hl, CeladonDinerText_491b7
 	call PrintText
 .done

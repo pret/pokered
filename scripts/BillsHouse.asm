@@ -165,7 +165,7 @@ BillsHouseText2:
 	call PrintText
 	lb bc, S_S_TICKET, 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, .bagFull
 	ld hl, SSTicketReceivedText
 	call PrintText
 	SetEvent EVENT_GOT_SS_TICKET
@@ -179,7 +179,7 @@ BillsHouseText2:
 	ld hl, BillsHouseText_1e8cb
 	call PrintText
 	jr .asm_1e8b7
-.BagFull
+.bagFull
 	ld hl, SSTicketNoRoomText
 	call PrintText
 .asm_1e8b7

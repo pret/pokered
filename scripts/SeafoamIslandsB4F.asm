@@ -29,7 +29,7 @@ SeafoamIslands5Script4:
 SeafoamIslands5Script0:
 	CheckBothEventsSet EVENT_SEAFOAM3_BOULDER1_DOWN_HOLE, EVENT_SEAFOAM3_BOULDER2_DOWN_HOLE
 	ret z
-	ld hl, .Coords
+	ld hl, .coords
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, [wCoordIndex]
@@ -52,7 +52,7 @@ SeafoamIslands5Script0:
 	ld [wSeafoamIslandsB4FCurScript], a
 	ret
 
-.Coords
+.coords
 	dbmapcoord 20, 17
 	dbmapcoord 21, 17
 	dbmapcoord 20, 16
@@ -73,7 +73,7 @@ SeafoamIslands5Script2:
 	CheckBothEventsSet EVENT_SEAFOAM4_BOULDER1_DOWN_HOLE, EVENT_SEAFOAM4_BOULDER2_DOWN_HOLE
 	ld a, $0
 	jr z, .asm_46849
-	ld hl, .Coords
+	ld hl, .coords
 	call ArePlayerCoordsInArray
 	ld a, $0
 	jr nc, .asm_46849
@@ -95,7 +95,7 @@ SeafoamIslands5Script2:
 	ld [wSeafoamIslandsB4FCurScript], a
 	ret
 
-.Coords
+.coords
 	dbmapcoord  4, 14
 	dbmapcoord  5, 14
 	db -1 ; end

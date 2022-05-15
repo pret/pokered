@@ -7,10 +7,10 @@ PrintWaitingText::
 	jr z, .trade
 ; battle
 	call TextBoxBorder
-	jr .border_done
+	jr .borderDone
 .trade
 	call CableClub_TextBoxBorder
-.border_done
+.borderDone
 	hlcoord 4, 11
 	ld de, WaitingText
 	call PlaceString

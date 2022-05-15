@@ -27,12 +27,12 @@ LanceShowOrHideEntranceBlocks:
 	push bc
 	ld [wNewTileBlockID], a
 	lb bc, 6, 2
-	call .SetEntranceBlock
+	call .setEntranceBlock
 	pop bc
 	ld a, b
 	ld [wNewTileBlockID], a
 	lb bc, 6, 3
-.SetEntranceBlock:
+.setEntranceBlock:
 	predef_jump ReplaceTileBlock
 
 ResetLanceScript:

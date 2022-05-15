@@ -106,12 +106,12 @@ Route24Text1:
 	text_asm
 	ResetEvent EVENT_NUGGET_REWARD_AVAILABLE
 	CheckEvent EVENT_GOT_NUGGET
-	jr nz, .got_item
+	jr nz, .gotItem
 	ld hl, Route24Text_51510
 	call PrintText
 	lb bc, NUGGET, 1
 	call GiveItem
-	jr nc, .bag_full
+	jr nc, .bagFull
 	SetEvent EVENT_GOT_NUGGET
 	ld hl, Route24Text_5151a
 	call PrintText
@@ -133,11 +133,11 @@ Route24Text1:
 	ld [wRoute24CurScript], a
 	ld [wCurMapScript], a
 	jp TextScriptEnd
-.got_item
+.gotItem
 	ld hl, Route24Text_51530
 	call PrintText
 	jp TextScriptEnd
-.bag_full
+.bagFull
 	ld hl, Route24Text_51521
 	call PrintText
 	SetEvent EVENT_NUGGET_REWARD_AVAILABLE

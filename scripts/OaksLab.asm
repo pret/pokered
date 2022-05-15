@@ -193,19 +193,19 @@ OaksLabScript7:
 OaksLabScript8:
 	ld a, [wPlayerStarter]
 	cp STARTER1
-	jr z, .Charmander
+	jr z, .charmander
 	cp STARTER2
-	jr z, .Squirtle
-	jr .Bulbasaur
-.Charmander
-	ld de, .MiddleBallMovement1
+	jr z, .squirtle
+	jr .bulbasaur
+.charmander
+	ld de, .middleBallMovement1
 	ld a, [wYCoord]
 	cp 4 ; is the player standing below the table?
 	jr z, .moveBlue
-	ld de, .MiddleBallMovement2
+	ld de, .middleBallMovement2
 	jr .moveBlue
 
-.MiddleBallMovement1
+.middleBallMovement1
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_RIGHT
@@ -214,22 +214,22 @@ OaksLabScript8:
 	db NPC_MOVEMENT_UP
 	db -1 ; end
 
-.MiddleBallMovement2
+.middleBallMovement2
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
 	db -1 ; end
 
-.Squirtle
-	ld de, .RightBallMovement1
+.squirtle
+	ld de, .rightBallMovement1
 	ld a, [wYCoord]
 	cp 4 ; is the player standing below the table?
 	jr z, .moveBlue
-	ld de, .RightBallMovement2
+	ld de, .rightBallMovement2
 	jr .moveBlue
 
-.RightBallMovement1
+.rightBallMovement1
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_RIGHT
@@ -239,7 +239,7 @@ OaksLabScript8:
 	db NPC_MOVEMENT_UP
 	db -1 ; end
 
-.RightBallMovement2
+.rightBallMovement2
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
@@ -247,7 +247,7 @@ OaksLabScript8:
 	db NPC_MOVEMENT_RIGHT
 	db -1 ; end
 
-.Bulbasaur
+.bulbasaur
 	ld de, .LeftBallMovement1
 	ld a, [wXCoord]
 	cp 9 ; is the player standing to the right of the table?
@@ -390,10 +390,10 @@ OaksLabScript11:
 	jr .done
 .NotSquirtle
 	cp STARTER3
-	jr nz, .Charmander
+	jr nz, .charmander
 	ld a, $2
 	jr .done
-.Charmander
+.charmander
 	ld a, $3
 .done
 	ld [wTrainerNo], a
@@ -444,7 +444,7 @@ OaksLabScript13:
 	farcall Music_RivalAlternateStart
 	ld a, $1
 	ldh [hSpriteIndex], a
-	ld de, .RivalExitMovement
+	ld de, .rivalExitMovement
 	call MoveSprite
 	ld a, [wXCoord]
 	cp 4
@@ -461,7 +461,7 @@ OaksLabScript13:
 	ld [wOaksLabCurScript], a
 	ret
 
-.RivalExitMovement
+.rivalExitMovement
 	db NPC_CHANGE_FACING
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN

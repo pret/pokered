@@ -27,7 +27,7 @@ EvolveMon:
 	ld a, [wEvoNewSpecies]
 	ld [wcf91], a
 	ld [wd0b5], a
-	call Evolution_LoadPic
+	call EvolutionLoadPic
 	ld de, vFrontPic
 	ld hl, vBackPic
 	ld bc, 7 * 7
@@ -35,7 +35,7 @@ EvolveMon:
 	ld a, [wEvoOldSpecies]
 	ld [wcf91], a
 	ld [wd0b5], a
-	call Evolution_LoadPic
+	call EvolutionLoadPic
 	ld a, $1
 	ldh [hAutoBGTransferEnabled], a
 	ld a, [wEvoOldSpecies]
@@ -51,9 +51,9 @@ EvolveMon:
 	lb bc, $1, $10
 .animLoop
 	push bc
-	call Evolution_CheckForCancel
+	call EvolutionCheckForCancel
 	jr c, .evolutionCancelled
-	call Evolution_BackAndForthAnim
+	call EvolutionBackAndForthAnim
 	pop bc
 	inc b
 	dec c
@@ -63,7 +63,7 @@ EvolveMon:
 	ld [wEvoCancelled], a
 	ld a, $31
 	ld [wEvoMonTileOffset], a
-	call Evolution_ChangeMonPic ; show the new species pic
+	call EvolutionChangeMonPic ; show the new species pic
 	ld a, [wEvoNewSpecies]
 .done
 	ld [wWholeScreenPaletteMonSpecies], a
@@ -97,24 +97,24 @@ EvolutionSetWholeScreenPalette:
 	ld b, SET_PAL_POKEMON_WHOLE_SCREEN
 	jp RunPaletteCommand
 
-Evolution_LoadPic:
+EvolutionLoadPic:
 	call GetMonHeader
 	hlcoord 7, 2
 	jp LoadFlippedFrontSpriteByMonIndex
 
-Evolution_BackAndForthAnim:
+EvolutionBackAndForthAnim:
 ; show the mon change back and forth between the new and old species b times
 	ld a, $31
 	ld [wEvoMonTileOffset], a
-	call Evolution_ChangeMonPic
+	call EvolutionChangeMonPic
 	ld a, -$31
 	ld [wEvoMonTileOffset], a
-	call Evolution_ChangeMonPic
+	call EvolutionChangeMonPic
 	dec b
-	jr nz, Evolution_BackAndForthAnim
+	jr nz, EvolutionBackAndForthAnim
 	ret
 
-Evolution_ChangeMonPic:
+EvolutionChangeMonPic:
 	push bc
 	xor a
 	ldh [hAutoBGTransferEnabled], a
@@ -139,7 +139,7 @@ Evolution_ChangeMonPic:
 	pop bc
 	ret
 
-Evolution_CheckForCancel:
+EvolutionCheckForCancel:
 	call DelayFrame
 	push bc
 	call JoypadLowSensitivity
@@ -149,7 +149,7 @@ Evolution_CheckForCancel:
 	jr nz, .pressedB
 .notAllowedToCancel
 	dec c
-	jr nz, Evolution_CheckForCancel
+	jr nz, EvolutionCheckForCancel
 	and a
 	ret
 .pressedB

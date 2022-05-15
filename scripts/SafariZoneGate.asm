@@ -254,40 +254,40 @@ SafariZoneGate_TextPointers:
 	ld [wSafariZoneGateCurScript], a
 	jp TextScriptEnd
 
-.SafariZoneEntranceText_753bb
+.SafariZoneEntranceText_753bb:
 	text_far _SafariZoneEntranceText_753bb
 	text_end
 
-.SafariZoneEntranceText_753c0
+.SafariZoneEntranceText_753c0:
 	text_far _SafariZoneEntranceText_753c0
 	text_end
 
-.SafariZoneEntranceText6
+.SafariZoneEntranceText6:
 	text_far _SafariZoneEntranceText_753c5
 	text_end
 
 .SafariZoneEntranceText2
 	text_asm
-	ld hl, .FirstTimeQuestionText
+	ld hl, .firstTimeQuestionText
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	ld hl, .RegularText
-	jr nz, .Explanation
-	ld hl, .ExplanationText
-.Explanation
+	ld hl, .regularText
+	jr nz, .explanation
+	ld hl, .explanationText
+.explanation
 	call PrintText
 	jp TextScriptEnd
 
-.FirstTimeQuestionText
+.firstTimeQuestionText
 	text_far _SafariZoneEntranceText_753e6
 	text_end
 
-.ExplanationText
+.explanationText
 	text_far _SafariZoneEntranceText_753eb
 	text_end
 
-.RegularText
+.regularText
 	text_far _SafariZoneEntranceText_753f0
 	text_end

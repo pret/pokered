@@ -11,12 +11,12 @@ WardensHouse_TextPointers:
 FuchsiaHouse2Text1:
 	text_asm
 	CheckEvent EVENT_GOT_HM04
-	jr nz, .got_item
+	jr nz, .gotItem
 	ld b, GOLD_TEETH
 	call IsItemInBag
-	jr nz, .have_gold_teeth
+	jr nz, .haveGoldTeeth
 	CheckEvent EVENT_GAVE_GOLD_TEETH
-	jr nz, .gave_gold_teeth
+	jr nz, .gaveOldTeeth
 	ld hl, WardenGibberishText1
 	call PrintText
 	call YesNoChoice
@@ -28,28 +28,28 @@ FuchsiaHouse2Text1:
 .refused
 	call PrintText
 	jr .done
-.have_gold_teeth
+.haveGoldTeeth
 	ld hl, WardenTeethText1
 	call PrintText
 	ld a, GOLD_TEETH
 	ldh [hItemToRemoveID], a
 	farcall RemoveItemByID
 	SetEvent EVENT_GAVE_GOLD_TEETH
-.gave_gold_teeth
+.gaveOldTeeth
 	ld hl, WardenThankYouText
 	call PrintText
 	lb bc, HM_STRENGTH, 1
 	call GiveItem
-	jr nc, .bag_full
+	jr nc, .bagFull
 	ld hl, ReceivedHM04Text
 	call PrintText
 	SetEvent EVENT_GOT_HM04
 	jr .done
-.got_item
+.gotItem
 	ld hl, HM04ExplanationText
 	call PrintText
 	jr .done
-.bag_full
+.bagFull
 	ld hl, HM04NoRoomText
 	call PrintText
 .done

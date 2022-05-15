@@ -57,7 +57,7 @@ Route22RivalMovementData:
 Route22Script0:
 	CheckEvent EVENT_ROUTE22_RIVAL_WANTS_BATTLE
 	ret z
-	ld hl, .Route22RivalBattleCoords
+	ld hl, .route22RivalBattleCoords
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, [wCoordIndex]
@@ -74,7 +74,7 @@ Route22Script0:
 	jp nz, Route22Script_5104e
 	ret
 
-.Route22RivalBattleCoords
+.route22RivalBattleCoords
 	dbmapcoord 29,  4
 	dbmapcoord 29,  5
 	db -1 ; end

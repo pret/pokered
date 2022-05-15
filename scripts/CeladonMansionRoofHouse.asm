@@ -13,9 +13,9 @@ CeladonMansion5Text2:
 	text_asm
 	lb bc, EEVEE, 25
 	call GivePokemon
-	jr nc, .party_full
+	jr nc, .partyFull
 	ld a, HS_CELADON_MANSION_EEVEE_GIFT
 	ld [wMissableObjectIndex], a
 	predef HideObject
-.party_full
+.partyFull
 	jp TextScriptEnd

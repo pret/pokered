@@ -13,7 +13,7 @@ LoadWildData::
 	ld a, [hli]
 	ld [wGrassRate], a
 	and a
-	jr z, .NoGrassData ; if no grass data, skip to surfing data
+	jr z, .noGrassData ; if no grass data, skip to surfing data
 	push hl
 	ld de, wGrassMons ; otherwise, load grass data
 	ld bc, $14
@@ -21,7 +21,7 @@ LoadWildData::
 	pop hl
 	ld bc, $14
 	add hl, bc
-.NoGrassData
+.noGrassData
 	ld a, [hli]
 	ld [wWaterRate], a
 	and a

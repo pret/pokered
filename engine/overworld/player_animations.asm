@@ -411,9 +411,9 @@ FishingAnim:
 	ld b, 10
 .loop
 	ld hl, wSpritePlayerStateData1YPixels
-	call .ShakePlayerSprite
+	call .shakePlayerSprite
 	ld hl, wOAMBuffer + $9c
-	call .ShakePlayerSprite
+	call .shakePlayerSprite
 	call Delay3
 	dec b
 	jr nz, .loop
@@ -450,7 +450,7 @@ FishingAnim:
 	call LoadFontTilePatterns
 	ret
 
-.ShakePlayerSprite
+.shakePlayerSprite
 	ld a, [hl]
 	xor $1
 	ld [hl], a

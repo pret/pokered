@@ -149,13 +149,13 @@ CinnabarGymReceiveTM38:
 	SetEvent EVENT_BEAT_BLAINE
 	lb bc, TM_FIRE_BLAST, 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, .bagFull
 	ld a, $b
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_GOT_TM38
 	jr .gymVictory
-.BagFull
+.bagFull
 	ld a, $c
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID

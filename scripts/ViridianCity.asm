@@ -19,10 +19,10 @@ ViridianCityScript_1900b:
 	ret nz
 	ld a, [wObtainedBadges]
 	cp ~(1 << BIT_EARTHBADGE)
-	jr nz, .gym_closed
+	jr nz, .gymClosed
 	SetEvent EVENT_VIRIDIAN_GYM_OPEN
 	ret
-.gym_closed
+.gymClosed
 	ld a, [wYCoord]
 	cp 8
 	ret nz
@@ -232,21 +232,21 @@ ViridianCityText_19191:
 ViridianCityText6:
 	text_asm
 	CheckEvent EVENT_GOT_TM42
-	jr nz, .got_item
+	jr nz, .gotItem
 	ld hl, ViridianCityText_191ca
 	call PrintText
 	lb bc, TM_DREAM_EATER, 1
 	call GiveItem
-	jr nc, .bag_full
+	jr nc, .bagFull
 	ld hl, ReceivedTM42Text
 	call PrintText
 	SetEvent EVENT_GOT_TM42
 	jr .done
-.bag_full
+.bagFull
 	ld hl, TM42NoRoomText
 	call PrintText
 	jr .done
-.got_item
+.gotItem
 	ld hl, TM42Explanation
 	call PrintText
 .done

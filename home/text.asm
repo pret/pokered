@@ -52,15 +52,15 @@ PlaceString::
 PlaceNextChar::
 	ld a, [de]
 	cp "@"
-	jr nz, .NotTerminator
+	jr nz, .notTerminator
 	ld b, h
 	ld c, l
 	pop hl
 	ret
 
-.NotTerminator
+.notTerminator
 	cp "<NEXT>"
-	jr nz, .NotNext
+	jr nz, .notNext
 	ld bc, 2 * SCREEN_WIDTH
 	ldh a, [hUILayoutFlags]
 	bit 2, a
@@ -72,15 +72,15 @@ PlaceNextChar::
 	push hl
 	jp NextChar
 
-.NotNext
+.notNext
 	cp "<LINE>"
-	jr nz, .NotLine
+	jr nz, .notLine
 	pop hl
 	hlcoord 1, 16
 	push hl
 	jp NextChar
 
-.NotLine
+.notLine
 
 ; Check against a dictionary
 	dict "<NULL>",    NullChar
@@ -295,10 +295,10 @@ ScrollTextUpOneLine::
 	jr nz, .clearText
 
 	ld b, 5
-.WaitFrame
+.waitFrame
 	call DelayFrame
 	dec b
-	jr nz, .WaitFrame
+	jr nz, .waitFrame
 
 	ret
 

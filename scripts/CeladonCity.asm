@@ -48,19 +48,19 @@ CeladonCityText5:
 	call PrintText
 	lb bc, TM_SOFTBOILED, 1
 	call GiveItem
-	jr c, .Success
+	jr c, .success
 	ld hl, TM41NoRoomText
 	call PrintText
-	jr .Done
-.Success
+	jr .done
+.success
 	ld hl, ReceivedTM41Text
 	call PrintText
 	SetEvent EVENT_GOT_TM41
-	jr .Done
+	jr .done
 .asm_7053f
 	ld hl, TM41ExplanationText
 	call PrintText
-.Done
+.done
 	jp TextScriptEnd
 
 TM41PreText:

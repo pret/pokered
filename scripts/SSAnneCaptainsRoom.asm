@@ -17,25 +17,25 @@ SSAnneCaptainsRoom_TextPointers:
 SSAnne7Text1:
 	text_asm
 	CheckEvent EVENT_GOT_HM01
-	jr nz, .got_item
+	jr nz, .gotItem
 	ld hl, SSAnne7RubText
 	call PrintText
 	ld hl, ReceivingHM01Text
 	call PrintText
 	lb bc, HM_CUT, 1
 	call GiveItem
-	jr nc, .bag_full
+	jr nc, .bagFull
 	ld hl, ReceivedHM01Text
 	call PrintText
 	SetEvent EVENT_GOT_HM01
 	jr .done
-.bag_full
+.bagFull
 	ld hl, HM01NoRoomText
 	call PrintText
 	ld hl, wd72d
 	set 5, [hl]
 	jr .done
-.got_item
+.gotItem
 	ld hl, SSAnne7Text_61932
 	call PrintText
 .done

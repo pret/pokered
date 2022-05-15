@@ -13,7 +13,7 @@ CopycatsHouse2F_TextPointers:
 CopycatsHouse2FText1:
 	text_asm
 	CheckEvent EVENT_GOT_TM31
-	jr nz, .got_item
+	jr nz, .gotItem
 	ld a, TRUE
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, CopycatsHouse2FText_5ccd4
@@ -25,7 +25,7 @@ CopycatsHouse2FText1:
 	call PrintText
 	lb bc, TM_MIMIC, 1
 	call GiveItem
-	jr nc, .bag_full
+	jr nc, .bagFull
 	ld hl, ReceivedTM31Text
 	call PrintText
 	ld a, POKE_DOLL
@@ -33,11 +33,11 @@ CopycatsHouse2FText1:
 	farcall RemoveItemByID
 	SetEvent EVENT_GOT_TM31
 	jr .done
-.bag_full
+.bagFull
 	ld hl, TM31NoRoomText
 	call PrintText
 	jr .done
-.got_item
+.gotItem
 	ld hl, TM31ExplanationText2
 	call PrintText
 .done

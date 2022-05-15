@@ -49,13 +49,13 @@ PewterGymScriptReceiveTM34:
 	SetEvent EVENT_BEAT_BROCK
 	lb bc, TM_BIDE, 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, .bagFull
 	ld a, $5
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_GOT_TM34
 	jr .gymVictory
-.BagFull
+.bagFull
 	ld a, $6
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID

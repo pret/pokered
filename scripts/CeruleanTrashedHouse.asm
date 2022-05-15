@@ -12,11 +12,11 @@ CeruleanHouseTrashedText1:
 	ld b, TM_DIG
 	predef GetQuantityOfItemInBag
 	and b
-	jr z, .no_dig_tm
+	jr z, .noDigTm
 	ld hl, CeruleanHouseTrashedText_1d6b0
 	call PrintText
 	jr .done
-.no_dig_tm
+.noDigTm
 	ld hl, CeruleanHouseTrashedText_1d6ab
 	call PrintText
 .done

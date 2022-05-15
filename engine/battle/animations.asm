@@ -2202,15 +2202,15 @@ GetMoveSound:
 	ld a, [hli]
 	ld b, a
 	call IsCryMove
-	jr nc, .NotCryMove
+	jr nc, .notCryMove
 	ldh a, [hWhoseTurn]
 	and a
 	jr nz, .next
 	ld a, [wBattleMonSpecies] ; get number of current monster
-	jr .Continue
+	jr .continue
 .next
 	ld a, [wEnemyMonSpecies]
-.Continue
+.continue
 	push hl
 	call GetCryData
 	ld b, a
@@ -2223,7 +2223,7 @@ GetMoveSound:
 	add [hl]
 	ld [wTempoModifier], a
 	jr .done
-.NotCryMove
+.notCryMove
 	ld a, [hli]
 	ld [wFrequencyModifier], a
 	ld a, [hli]
@@ -2236,12 +2236,12 @@ IsCryMove:
 ; set carry if the move animation involves playing a monster cry
 	ld a, [wAnimationID]
 	cp GROWL
-	jr z, .CryMove
+	jr z, .cryMove
 	cp ROAR
-	jr z, .CryMove
+	jr z, .cryMove
 	and a ; clear carry
 	ret
-.CryMove
+.cryMove
 	scf
 	ret
 
@@ -2578,7 +2578,7 @@ BattleAnimCopyTileMapToVRAM:
 TossBallAnimation:
 	ld a, [wIsInBattle]
 	cp 2
-	jr z, .BlockBall ; if in trainer battle, play different animation
+	jr z, .blockBall ; if in trainer battle, play different animation
 	ld a, [wPokeBallAnimData]
 	ld b, a
 
@@ -2606,7 +2606,7 @@ TossBallAnimation:
 	ld b, ULTRATOSS_ANIM
 .done
 	ld a, b
-.PlayNextAnimation
+.playNextAnimation
 	ld [wAnimationID], a
 	push bc
 	push hl
@@ -2615,14 +2615,14 @@ TossBallAnimation:
 	ld a, [hli]
 	pop bc
 	dec c
-	jr nz, .PlayNextAnimation
+	jr nz, .playNextAnimation
 	ret
 
 .PokeBallAnimations:
 ; sequence of animations that make up the Poké Ball toss
 	db POOF_ANIM, HIDEPIC_ANIM, SHAKE_ANIM, POOF_ANIM, SHOWPIC_ANIM
 
-.BlockBall
+.blockBall
 	ld a, TOSS_ANIM
 	ld [wAnimationID], a
 	call PlayAnimation

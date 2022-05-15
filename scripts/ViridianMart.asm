@@ -7,10 +7,10 @@ ViridianMart_Script:
 
 ViridianMartScript_1d47d:
 	CheckEvent EVENT_OAK_GOT_PARCEL
-	jr nz, .delivered_parcel
+	jr nz, .deliveredParcel
 	ld hl, ViridianMart_TextPointers
 	jr .done
-.delivered_parcel
+.deliveredParcel
 	ld hl, ViridianMart_TextPointers2
 .done
 	ld a, l

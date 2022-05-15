@@ -9,21 +9,21 @@ Route12Gate2F_TextPointers:
 Route12GateUpstairsText1:
 	text_asm
 	CheckEvent EVENT_GOT_TM39, 1
-	jr c, .got_item
+	jr c, .gotItem
 	ld hl, TM39PreReceiveText
 	call PrintText
 	lb bc, TM_SWIFT, 1
 	call GiveItem
-	jr nc, .bag_full
+	jr nc, .bagFull
 	ld hl, ReceivedTM39Text
 	call PrintText
 	SetEvent EVENT_GOT_TM39
 	jr .done
-.bag_full
+.bagFull
 	ld hl, TM39NoRoomText
 	call PrintText
 	jr .done
-.got_item
+.gotItem
 	ld hl, TM39ExplanationText
 	call PrintText
 .done

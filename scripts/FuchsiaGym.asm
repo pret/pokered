@@ -51,13 +51,13 @@ FuchsiaGymReceiveTM06:
 	SetEvent EVENT_BEAT_KOGA
 	lb bc, TM_TOXIC, 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, .bagFull
 	ld a, $a
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_GOT_TM06
 	jr .gymVictory
-.BagFull
+.bagFull
 	ld a, $b
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID

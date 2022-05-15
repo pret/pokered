@@ -68,13 +68,13 @@ VermilionGymReceiveTM24:
 	SetEvent EVENT_BEAT_LT_SURGE
 	lb bc, TM_THUNDERBOLT, 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, .bagFull
 	ld a, $7
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_GOT_TM24
 	jr .gymVictory
-.BagFull
+.bagFull
 	ld a, $8
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID

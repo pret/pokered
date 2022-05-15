@@ -18,7 +18,7 @@ Route11GateUpstairsScriptEnd:
 Route11GateUpstairsText2:
 	text_asm
 	CheckEvent EVENT_GOT_ITEMFINDER, 1
-	jr c, .got_item
+	jr c, .gotItem
 	ld a, 30
 	ldh [hOaksAideRequirement], a
 	ld a, ITEMFINDER
@@ -33,12 +33,12 @@ Route11GateUpstairsText2:
 	predef OaksAideScript
 	ldh a, [hOaksAideResult]
 	dec a ; OAKS_AIDE_GOT_ITEM?
-	jr nz, .no_item
+	jr nz, .noItem
 	SetEvent EVENT_GOT_ITEMFINDER
-.got_item
+.gotItem
 	ld hl, Route11GateUpstairsText_494a3
 	call PrintText
-.no_item
+.noItem
 	jr Route11GateUpstairsScriptEnd
 
 Route11GateUpstairsText_494a3:

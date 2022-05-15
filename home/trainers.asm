@@ -422,7 +422,7 @@ PlayTrainerMusic::
 	cp b
 	jr nz, .evilTrainerListLoop
 	ld a, MUSIC_MEET_EVIL_TRAINER
-	jr .PlaySound
+	jr .playSound
 .noEvilTrainer
 	ld hl, FemaleTrainerList
 .femaleTrainerListLoop
@@ -432,10 +432,10 @@ PlayTrainerMusic::
 	cp b
 	jr nz, .femaleTrainerListLoop
 	ld a, MUSIC_MEET_FEMALE_TRAINER
-	jr .PlaySound
+	jr .playSound
 .maleTrainer
 	ld a, MUSIC_MEET_MALE_TRAINER
-.PlaySound
+.playSound
 	ld [wNewSoundID], a
 	jp PlaySound
 

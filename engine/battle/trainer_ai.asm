@@ -565,9 +565,9 @@ AISwitchIfEnoughMons:
 	ld b, a
 	ld a, [hld]
 	or b
-	jr z, .Fainted ; has monster fainted?
+	jr z, .fainted ; has monster fainted?
 	inc d
-.Fainted
+.fainted
 	push bc
 	ld bc, wEnemyMon2 - wEnemyMon1
 	add hl, bc

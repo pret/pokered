@@ -141,13 +141,13 @@ ViridianGymReceiveTM27:
 	SetEvent EVENT_BEAT_VIRIDIAN_GYM_GIOVANNI
 	lb bc, TM_FISSURE, 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, .bagFull
 	ld a, $d
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_GOT_TM27
 	jr .gymVictory
-.BagFull
+.bagFull
 	ld a, $e
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID

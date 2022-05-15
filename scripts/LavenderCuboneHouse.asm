@@ -16,11 +16,11 @@ LavenderHouse2Text1:
 LavenderHouse2Text2:
 	text_asm
 	CheckEvent EVENT_RESCUED_MR_FUJI
-	jr nz, .rescued_mr_fuji
+	jr nz, .rescuedMrFuji
 	ld hl, LavenderHouse2Text_1d9dc
 	call PrintText
 	jr .done
-.rescued_mr_fuji
+.rescuedMrFuji
 	ld hl, LavenderHouse2Text_1d9e1
 	call PrintText
 .done

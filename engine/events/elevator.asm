@@ -32,9 +32,9 @@ DisplayElevatorFloorMenu:
 	ld a, [hl]
 	ld c, a
 	ld hl, wWarpEntries
-	call .UpdateWarp
+	call .updateWarp
 
-.UpdateWarp
+.updateWarp
 	inc hl
 	inc hl
 	ld a, b

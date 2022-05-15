@@ -13,20 +13,20 @@ LavenderMartText2:
 LavenderMartText3:
 	text_asm
 	CheckEvent EVENT_RESCUED_MR_FUJI
-	jr nz, .Nugget
+	jr nz, .nugget
 	ld hl, .ReviveText
 	call PrintText
 	jr .done
-.Nugget
+.nugget
 	ld hl, .NuggetText
 	call PrintText
 .done
 	jp TextScriptEnd
 
-.ReviveText
+.ReviveText:
 	text_far _LavenderMartReviveText
 	text_end
 
-.NuggetText
+.NuggetText:
 	text_far _LavenderMartNuggetText
 	text_end

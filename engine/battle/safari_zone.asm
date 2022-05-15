@@ -2,11 +2,11 @@ PrintSafariZoneBattleText:
 	ld hl, wSafariBaitFactor
 	ld a, [hl]
 	and a
-	jr z, .no_bait
+	jr z, .noBait
 	dec [hl]
 	ld hl, SafariZoneEatingText
 	jr .done
-.no_bait
+.noBait
 	dec hl
 	ld a, [hl]
 	and a

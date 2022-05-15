@@ -10,12 +10,12 @@ SaveTrainerName::
 	ld h, [hl]
 	ld l, a
 	ld de, wcd6d
-.CopyCharacter
+.copyCharacter
 	ld a, [hli]
 	ld [de], a
 	inc de
 	cp "@"
-	jr nz, .CopyCharacter
+	jr nz, .copyCharacter
 	ret
 
 INCLUDE "data/trainers/name_pointers.asm"

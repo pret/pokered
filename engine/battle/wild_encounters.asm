@@ -9,13 +9,13 @@ TryDoWildEncounter:
 	ret nz
 	callfar IsPlayerStandingOnDoorTileOrWarpTile
 	jr nc, .notStandingOnDoorOrWarpTile
-.CantEncounter
+.cantEncounter
 	ld a, $1
 	and a
 	ret
 .notStandingOnDoorOrWarpTile
 	callfar IsPlayerJustOutsideMap
-	jr z, .CantEncounter
+	jr z, .cantEncounter
 	ld a, [wRepelRemainingSteps]
 	and a
 	jr z, .next
@@ -30,27 +30,27 @@ TryDoWildEncounter:
 	ld a, [wGrassTile]
 	cp c
 	ld a, [wGrassRate]
-	jr z, .CanEncounter
+	jr z, .canEncounter
 	ld a, $14 ; in all tilesets with a water tile, this is its id
 	cp c
 	ld a, [wWaterRate]
-	jr z, .CanEncounter
+	jr z, .canEncounter
 ; even if not in grass/water, standing anywhere we can encounter pokemon
 ; so long as the map is "indoor" and has wild pokemon defined.
 ; ...as long as it's not Viridian Forest or Safari Zone.
 	ld a, [wCurMap]
 	cp FIRST_INDOOR_MAP ; is this an indoor map?
-	jr c, .CantEncounter2
+	jr c, .cantEncounter2
 	ld a, [wCurMapTileset]
 	cp FOREST ; Viridian Forest/Safari Zone
-	jr z, .CantEncounter2
+	jr z, .cantEncounter2
 	ld a, [wGrassRate]
-.CanEncounter
+.canEncounter
 ; compare encounter chance with a random number to determine if there will be an encounter
 	ld b, a
 	ldh a, [hRandomAdd]
 	cp b
-	jr nc, .CantEncounter2
+	jr nc, .cantEncounter2
 	ldh a, [hRandomSub]
 	ld b, a
 	ld hl, WildMonEncounterSlotChances
@@ -85,7 +85,7 @@ TryDoWildEncounter:
 	ld b, a
 	ld a, [wCurEnemyLVL]
 	cp b
-	jr c, .CantEncounter2 ; repel prevents encounters if the leading party mon's level is higher than the wild mon
+	jr c, .cantEncounter2 ; repel prevents encounters if the leading party mon's level is higher than the wild mon
 	jr .willEncounter
 .lastRepelStep
 	ld [wRepelRemainingSteps], a
@@ -93,7 +93,7 @@ TryDoWildEncounter:
 	ldh [hSpriteIndexOrTextID], a
 	call EnableAutoTextBoxDrawing
 	call DisplayTextID
-.CantEncounter2
+.cantEncounter2
 	ld a, $1
 	and a
 	ret

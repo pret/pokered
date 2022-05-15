@@ -97,18 +97,18 @@ IF DEF(_DEBUG)
 	; Get some debug items.
 	ld hl, wNumBagItems
 	ld de, DebugItemsList
-.items_loop
+.itemsLoop
 	ld a, [de]
 	cp -1
-	jr z, .items_end
+	jr z, .itemsEnd
 	ld [wcf91], a
 	inc de
 	ld a, [de]
 	inc de
 	ld [wItemQuantity], a
 	call AddItemToInventory
-	jr .items_loop
-.items_end
+	jr .itemsLoop
+.itemsEnd
 
 	; Complete the Pokédex.
 	ld hl, wPokedexOwned

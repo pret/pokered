@@ -41,15 +41,15 @@ SSAnne6Text7:
 	call PrintText
 	ldh a, [hRandomAdd]
 	bit 7, a
-	jr z, .not_dialog_1
+	jr z, .notDialog1
 	ld hl, SSAnne6Text_6180c
 	jr .done
-.not_dialog_1
+.notDialog1
 	bit 4, a
-	jr z, .not_dialog_2
+	jr z, .notDialog2
 	ld hl, SSAnne6Text_61811
 	jr .done
-.not_dialog_2
+.notDialog2
 	ld hl, SSAnne6Text_61816
 .done
 	call PrintText

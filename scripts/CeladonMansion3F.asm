@@ -30,10 +30,10 @@ DirectorText:
 	call CountSetBits
 	ld a, [wNumSetBits]
 	cp NUM_POKEMON - 1 ; discount Mew
-	jr nc, .completed_dex
+	jr nc, .completedDex
 	ld hl, .GameDesignerText
 	jr .done
-.completed_dex
+.completedDex
 	ld hl, .CompletedDexText
 .done
 	call PrintText

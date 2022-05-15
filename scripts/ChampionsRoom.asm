@@ -70,15 +70,15 @@ GaryScript2:
 	; select which team to use during the encounter
 	ld a, [wRivalStarter]
 	cp STARTER2
-	jr nz, .NotStarter2
+	jr nz, .notStarter2
 	ld a, $1
 	jr .saveTrainerId
-.NotStarter2
+.notStarter2
 	cp STARTER3
-	jr nz, .NotStarter3
+	jr nz, .notStarter3
 	ld a, $2
 	jr .saveTrainerId
-.NotStarter3
+.notStarter3
 	ld a, $3
 .saveTrainerId
 	ld [wTrainerNo], a
@@ -207,7 +207,7 @@ GaryScript9:
 	ld a, $ff
 	ld [wJoyIgnore], a
 	ld hl, wSimulatedJoypadStatesEnd
-	ld de, WalkToHallOfFame_RLEMovment
+	ld de, WalkToHallOfFameRLEMovment
 	call DecodeRLEList
 	dec a
 	ld [wSimulatedJoypadStatesIndex], a
@@ -216,7 +216,7 @@ GaryScript9:
 	ld [wChampionsRoomCurScript], a
 	ret
 
-WalkToHallOfFame_RLEMovment:
+WalkToHallOfFameRLEMovment:
 	db D_UP, 4
 	db D_LEFT, 1
 	db -1 ; end

@@ -8,7 +8,7 @@ Route12HouseText1:
 	text_asm
 	ld a, [wd728]
 	bit 5, a ; received super rod?
-	jr nz, .got_item
+	jr nz, .gotItem
 	ld hl, Route12HouseText_564c0
 	call PrintText
 	call YesNoChoice
@@ -17,18 +17,18 @@ Route12HouseText1:
 	jr nz, .refused
 	lb bc, SUPER_ROD, 1
 	call GiveItem
-	jr nc, .bag_full
+	jr nc, .bagFull
 	ld hl, wd728
 	set 5, [hl] ; received super rod
 	ld hl, Route12HouseText_564c5
 	jr .done
-.bag_full
+.bagFull
 	ld hl, Route12HouseText_564d9
 	jr .done
 .refused
 	ld hl, Route12HouseText_564cf
 	jr .done
-.got_item
+.gotItem
 	ld hl, Route12HouseText_564d4
 .done
 	call PrintText

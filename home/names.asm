@@ -31,7 +31,7 @@ GetItemName::
 	push bc
 	ld a, [wd11e]
 	cp HM01 ; is this a TM/HM?
-	jr nc, .Machine
+	jr nc, .machine
 
 	ld [wd0b5], a
 	ld a, ITEM_NAME
@@ -39,11 +39,11 @@ GetItemName::
 	ld a, BANK(ItemNames)
 	ld [wPredefBank], a
 	call GetName
-	jr .Finish
+	jr .finish
 
-.Machine
+.machine
 	call GetMachineName
-.Finish
+.finish
 	ld de, wcd6d ; pointer to where item name is stored in RAM
 	pop bc
 	pop hl
@@ -57,18 +57,18 @@ GetMachineName::
 	ld a, [wd11e]
 	push af
 	cp TM01 ; is this a TM? [not HM]
-	jr nc, .WriteTM
+	jr nc, .writeTM
 ; if HM, then write "HM" and add NUM_HMS to the item ID, so we can reuse the
 ; TM printing code
 	add NUM_HMS
 	ld [wd11e], a
 	ld hl, HiddenPrefix ; points to "HM"
 	ld bc, 2
-	jr .WriteMachinePrefix
-.WriteTM
+	jr .writeMachinePrefix
+.writeTM
 	ld hl, TechnicalPrefix ; points to "TM"
 	ld bc, 2
-.WriteMachinePrefix
+.writeMachinePrefix
 	ld de, wcd6d
 	call CopyData
 
@@ -76,12 +76,12 @@ GetMachineName::
 	ld a, [wd11e]
 	sub TM01 - 1
 	ld b, "0"
-.FirstDigit
+.firstDigit
 	sub 10
-	jr c, .SecondDigit
+	jr c, .secondDigit
 	inc b
-	jr .FirstDigit
-.SecondDigit
+	jr .firstDigit
+.secondDigit
 	add 10
 	push af
 	ld a, b

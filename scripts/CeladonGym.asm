@@ -49,13 +49,13 @@ CeladonGymReceiveTM21:
 	SetEvent EVENT_BEAT_ERIKA
 	lb bc, TM_MEGA_DRAIN, 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, .bagFull
 	ld a, $a
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_GOT_TM21
 	jr .gymVictory
-.BagFull
+.bagFull
 	ld a, $b
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID

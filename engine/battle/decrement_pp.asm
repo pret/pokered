@@ -14,7 +14,7 @@ DecrementPP:
 	ld hl, wBattleMonPP  ; PP of first move (in battle)
 
 ; decrement PP in the battle struct
-	call .DecrementPP
+	call .decrementPP
 
 ; decrement PP in the party struct
 	ld a, [wPlayerBattleStatus3]
@@ -33,7 +33,7 @@ DecrementPP:
 	ld a, [wPlayerMonNumber] ; which mon in party is active
 	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes       ; calculate address of the mon to modify
-.DecrementPP:
+.decrementPP
 	ld a, [wPlayerMoveListIndex] ; which move (0, 1, 2, 3) did we use?
 	ld c, a
 	ld b, 0
