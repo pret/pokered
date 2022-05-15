@@ -113,7 +113,7 @@ RedrawPartyMenu_::
 	db "NOT ABLE@"
 .evolutionStoneMenu
 	push hl
-	ld hl, EvosMovesPointerTable
+	ld hl, EvosAttacksPointersTable
 	ld b, 0
 	ld a, [wLoadedMonSpecies]
 	dec a
@@ -121,19 +121,19 @@ RedrawPartyMenu_::
 	rl b
 	ld c, a
 	add hl, bc
-	ld de, wEvosMoves
-	ld a, BANK(EvosMovesPointerTable)
+	ld de, wEvosAttacks
+	ld a, BANK(EvosAttacksPointersTable)
 	ld bc, 2
 	call FarCopyData
-	ld hl, wEvosMoves
+	ld hl, wEvosAttacks
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld de, wEvosMoves
-	ld a, BANK(EvosMovesPointerTable)
-	ld bc, wEvosMovesEnd - wEvosMoves
+	ld de, wEvosAttacks
+	ld a, BANK(EvosAttacksPointersTable)
+	ld bc, wEvosAttacksEnd - wEvosAttacks
 	call FarCopyData
-	ld hl, wEvosMoves
+	ld hl, wEvosAttacks
 	ld de, .notAbleToEvolveText
 ; loop through the pokemon's evolution entries
 .checkEvolutionsLoop

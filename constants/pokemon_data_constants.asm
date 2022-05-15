@@ -44,7 +44,7 @@ HOF_TEAM_CAPACITY EQU 50
 	const BATTLE_MON_DATA   ; 4
 
 
-; See data/pokemon/evos_moves.asm
+; See data/pokemon/evos_attacks.asm
 
 ; Evolution types
 	const_def 1

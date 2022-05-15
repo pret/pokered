@@ -1,7 +1,7 @@
 ; pokemon ids
 ; indexes for:
 ; - MonsterNames (see data/pokemon/names.asm)
-; - EvosMovesPointerTable (see data/pokemon/evos_moves.asm)
+; - EvosAttacksPointersTable (see data/pokemon/evos_attacks.asm)
 ; - CryData (see data/pokemon/cries.asm)
 ; - PokedexOrder (see data/pokemon/dex_order.asm)
 ; - PokedexEntryPointers (see data/pokemon/dex_entries.asm)

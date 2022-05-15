@@ -1,201 +1,201 @@
 ; See constants/pokemon_data_constants.asm
 ; The max number of evolutions per monster is MAX_EVOLUTIONS
 
-EvosMovesPointerTable:
-	table_width 2, EvosMovesPointerTable
-	dw RhydonEvosMoves
-	dw KangaskhanEvosMoves
-	dw NidoranMEvosMoves
-	dw ClefairyEvosMoves
-	dw SpearowEvosMoves
-	dw VoltorbEvosMoves
-	dw NidokingEvosMoves
-	dw SlowbroEvosMoves
-	dw IvysaurEvosMoves
-	dw ExeggutorEvosMoves
-	dw LickitungEvosMoves
-	dw ExeggcuteEvosMoves
-	dw GrimerEvosMoves
-	dw GengarEvosMoves
-	dw NidoranFEvosMoves
-	dw NidoqueenEvosMoves
-	dw CuboneEvosMoves
-	dw RhyhornEvosMoves
-	dw LaprasEvosMoves
-	dw ArcanineEvosMoves
-	dw MewEvosMoves
-	dw GyaradosEvosMoves
-	dw ShellderEvosMoves
-	dw TentacoolEvosMoves
-	dw GastlyEvosMoves
-	dw ScytherEvosMoves
-	dw StaryuEvosMoves
-	dw BlastoiseEvosMoves
-	dw PinsirEvosMoves
-	dw TangelaEvosMoves
-	dw MissingNo1FEvosMoves
-	dw MissingNo20EvosMoves
-	dw GrowlitheEvosMoves
-	dw OnixEvosMoves
-	dw FearowEvosMoves
-	dw PidgeyEvosMoves
-	dw SlowpokeEvosMoves
-	dw KadabraEvosMoves
-	dw GravelerEvosMoves
-	dw ChanseyEvosMoves
-	dw MachokeEvosMoves
-	dw MrMimeEvosMoves
-	dw HitmonleeEvosMoves
-	dw HitmonchanEvosMoves
-	dw ArbokEvosMoves
-	dw ParasectEvosMoves
-	dw PsyduckEvosMoves
-	dw DrowzeeEvosMoves
-	dw GolemEvosMoves
-	dw MissingNo32EvosMoves
-	dw MagmarEvosMoves
-	dw MissingNo34EvosMoves
-	dw ElectabuzzEvosMoves
-	dw MagnetonEvosMoves
-	dw KoffingEvosMoves
-	dw MissingNo38EvosMoves
-	dw MankeyEvosMoves
-	dw SeelEvosMoves
-	dw DiglettEvosMoves
-	dw TaurosEvosMoves
-	dw MissingNo3DEvosMoves
-	dw MissingNo3EEvosMoves
-	dw MissingNo3FEvosMoves
-	dw FarfetchdEvosMoves
-	dw VenonatEvosMoves
-	dw DragoniteEvosMoves
-	dw MissingNo43EvosMoves
-	dw MissingNo44EvosMoves
-	dw MissingNo45EvosMoves
-	dw DoduoEvosMoves
-	dw PoliwagEvosMoves
-	dw JynxEvosMoves
-	dw MoltresEvosMoves
-	dw ArticunoEvosMoves
-	dw ZapdosEvosMoves
-	dw DittoEvosMoves
-	dw MeowthEvosMoves
-	dw KrabbyEvosMoves
-	dw MissingNo4FEvosMoves
-	dw MissingNo50EvosMoves
-	dw MissingNo51EvosMoves
-	dw VulpixEvosMoves
-	dw NinetalesEvosMoves
-	dw PikachuEvosMoves
-	dw RaichuEvosMoves
-	dw MissingNo56EvosMoves
-	dw MissingNo57EvosMoves
-	dw DratiniEvosMoves
-	dw DragonairEvosMoves
-	dw KabutoEvosMoves
-	dw KabutopsEvosMoves
-	dw HorseaEvosMoves
-	dw SeadraEvosMoves
-	dw MissingNo5EEvosMoves
-	dw MissingNo5FEvosMoves
-	dw SandshrewEvosMoves
-	dw SandslashEvosMoves
-	dw OmanyteEvosMoves
-	dw OmastarEvosMoves
-	dw JigglypuffEvosMoves
-	dw WigglytuffEvosMoves
-	dw EeveeEvosMoves
-	dw FlareonEvosMoves
-	dw JolteonEvosMoves
-	dw VaporeonEvosMoves
-	dw MachopEvosMoves
-	dw ZubatEvosMoves
-	dw EkansEvosMoves
-	dw ParasEvosMoves
-	dw PoliwhirlEvosMoves
-	dw PoliwrathEvosMoves
-	dw WeedleEvosMoves
-	dw KakunaEvosMoves
-	dw BeedrillEvosMoves
-	dw MissingNo73EvosMoves
-	dw DodrioEvosMoves
-	dw PrimeapeEvosMoves
-	dw DugtrioEvosMoves
-	dw VenomothEvosMoves
-	dw DewgongEvosMoves
-	dw MissingNo79EvosMoves
-	dw MissingNo7AEvosMoves
-	dw CaterpieEvosMoves
-	dw MetapodEvosMoves
-	dw ButterfreeEvosMoves
-	dw MachampEvosMoves
-	dw MissingNo7FEvosMoves
-	dw GolduckEvosMoves
-	dw HypnoEvosMoves
-	dw GolbatEvosMoves
-	dw MewtwoEvosMoves
-	dw SnorlaxEvosMoves
-	dw MagikarpEvosMoves
-	dw MissingNo86EvosMoves
-	dw MissingNo87EvosMoves
-	dw MukEvosMoves
-	dw MissingNo8AEvosMoves
-	dw KinglerEvosMoves
-	dw CloysterEvosMoves
-	dw MissingNo8CEvosMoves
-	dw ElectrodeEvosMoves
-	dw ClefableEvosMoves
-	dw WeezingEvosMoves
-	dw PersianEvosMoves
-	dw MarowakEvosMoves
-	dw MissingNo92EvosMoves
-	dw HaunterEvosMoves
-	dw AbraEvosMoves
-	dw AlakazamEvosMoves
-	dw PidgeottoEvosMoves
-	dw PidgeotEvosMoves
-	dw StarmieEvosMoves
-	dw BulbasaurEvosMoves
-	dw VenusaurEvosMoves
-	dw TentacruelEvosMoves
-	dw MissingNo9CEvosMoves
-	dw GoldeenEvosMoves
-	dw SeakingEvosMoves
-	dw MissingNo9FEvosMoves
-	dw MissingNoA0EvosMoves
-	dw MissingNoA1EvosMoves
-	dw MissingNoA2EvosMoves
-	dw PonytaEvosMoves
-	dw RapidashEvosMoves
-	dw RattataEvosMoves
-	dw RaticateEvosMoves
-	dw NidorinoEvosMoves
-	dw NidorinaEvosMoves
-	dw GeodudeEvosMoves
-	dw PorygonEvosMoves
-	dw AerodactylEvosMoves
-	dw MissingNoACEvosMoves
-	dw MagnemiteEvosMoves
-	dw MissingNoAEEvosMoves
-	dw MissingNoAFEvosMoves
-	dw CharmanderEvosMoves
-	dw SquirtleEvosMoves
-	dw CharmeleonEvosMoves
-	dw WartortleEvosMoves
-	dw CharizardEvosMoves
-	dw MissingNoB5EvosMoves
-	dw FossilKabutopsEvosMoves
-	dw FossilAerodactylEvosMoves
-	dw MonGhostEvosMoves
-	dw OddishEvosMoves
-	dw GloomEvosMoves
-	dw VileplumeEvosMoves
-	dw BellsproutEvosMoves
-	dw WeepinbellEvosMoves
-	dw VictreebelEvosMoves
+EvosAttacksPointersTable:
+	table_width 2, EvosAttacksPointersTable
+	dw RhydonEvosAttacks
+	dw KangaskhanEvosAttacks
+	dw NidoranMEvosAttacks
+	dw ClefairyEvosAttacks
+	dw SpearowEvosAttacks
+	dw VoltorbEvosAttacks
+	dw NidokingEvosAttacks
+	dw SlowbroEvosAttacks
+	dw IvysaurEvosAttacks
+	dw ExeggutorEvosAttacks
+	dw LickitungEvosAttacks
+	dw ExeggcuteEvosAttacks
+	dw GrimerEvosAttacks
+	dw GengarEvosAttacks
+	dw NidoranFEvosAttacks
+	dw NidoqueenEvosAttacks
+	dw CuboneEvosAttacks
+	dw RhyhornEvosAttacks
+	dw LaprasEvosAttacks
+	dw ArcanineEvosAttacks
+	dw MewEvosAttacks
+	dw GyaradosEvosAttacks
+	dw ShellderEvosAttacks
+	dw TentacoolEvosAttacks
+	dw GastlyEvosAttacks
+	dw ScytherEvosAttacks
+	dw StaryuEvosAttacks
+	dw BlastoiseEvosAttacks
+	dw PinsirEvosAttacks
+	dw TangelaEvosAttacks
+	dw MissingNo1FEvosAttacks
+	dw MissingNo20EvosAttacks
+	dw GrowlitheEvosAttacks
+	dw OnixEvosAttacks
+	dw FearowEvosAttacks
+	dw PidgeyEvosAttacks
+	dw SlowpokeEvosAttacks
+	dw KadabraEvosAttacks
+	dw GravelerEvosAttacks
+	dw ChanseyEvosAttacks
+	dw MachokeEvosAttacks
+	dw MrMimeEvosAttacks
+	dw HitmonleeEvosAttacks
+	dw HitmonchanEvosAttacks
+	dw ArbokEvosAttacks
+	dw ParasectEvosAttacks
+	dw PsyduckEvosAttacks
+	dw DrowzeeEvosAttacks
+	dw GolemEvosAttacks
+	dw MissingNo32EvosAttacks
+	dw MagmarEvosAttacks
+	dw MissingNo34EvosAttacks
+	dw ElectabuzzEvosAttacks
+	dw MagnetonEvosAttacks
+	dw KoffingEvosAttacks
+	dw MissingNo38EvosAttacks
+	dw MankeyEvosAttacks
+	dw SeelEvosAttacks
+	dw DiglettEvosAttacks
+	dw TaurosEvosAttacks
+	dw MissingNo3DEvosAttacks
+	dw MissingNo3EEvosAttacks
+	dw MissingNo3FEvosAttacks
+	dw FarfetchdEvosAttacks
+	dw VenonatEvosAttacks
+	dw DragoniteEvosAttacks
+	dw MissingNo43EvosAttacks
+	dw MissingNo44EvosAttacks
+	dw MissingNo45EvosAttacks
+	dw DoduoEvosAttacks
+	dw PoliwagEvosAttacks
+	dw JynxEvosAttacks
+	dw MoltresEvosAttacks
+	dw ArticunoEvosAttacks
+	dw ZapdosEvosAttacks
+	dw DittoEvosAttacks
+	dw MeowthEvosAttacks
+	dw KrabbyEvosAttacks
+	dw MissingNo4FEvosAttacks
+	dw MissingNo50EvosAttacks
+	dw MissingNo51EvosAttacks
+	dw VulpixEvosAttacks
+	dw NinetalesEvosAttacks
+	dw PikachuEvosAttacks
+	dw RaichuEvosAttacks
+	dw MissingNo56EvosAttacks
+	dw MissingNo57EvosAttacks
+	dw DratiniEvosAttacks
+	dw DragonairEvosAttacks
+	dw KabutoEvosAttacks
+	dw KabutopsEvosAttacks
+	dw HorseaEvosAttacks
+	dw SeadraEvosAttacks
+	dw MissingNo5EEvosAttacks
+	dw MissingNo5FEvosAttacks
+	dw SandshrewEvosAttacks
+	dw SandslashEvosAttacks
+	dw OmanyteEvosAttacks
+	dw OmastarEvosAttacks
+	dw JigglypuffEvosAttacks
+	dw WigglytuffEvosAttacks
+	dw EeveeEvosAttacks
+	dw FlareonEvosAttacks
+	dw JolteonEvosAttacks
+	dw VaporeonEvosAttacks
+	dw MachopEvosAttacks
+	dw ZubatEvosAttacks
+	dw EkansEvosAttacks
+	dw ParasEvosAttacks
+	dw PoliwhirlEvosAttacks
+	dw PoliwrathEvosAttacks
+	dw WeedleEvosAttacks
+	dw KakunaEvosAttacks
+	dw BeedrillEvosAttacks
+	dw MissingNo73EvosAttacks
+	dw DodrioEvosAttacks
+	dw PrimeapeEvosAttacks
+	dw DugtrioEvosAttacks
+	dw VenomothEvosAttacks
+	dw DewgongEvosAttacks
+	dw MissingNo79EvosAttacks
+	dw MissingNo7AEvosAttacks
+	dw CaterpieEvosAttacks
+	dw MetapodEvosAttacks
+	dw ButterfreeEvosAttacks
+	dw MachampEvosAttacks
+	dw MissingNo7FEvosAttacks
+	dw GolduckEvosAttacks
+	dw HypnoEvosAttacks
+	dw GolbatEvosAttacks
+	dw MewtwoEvosAttacks
+	dw SnorlaxEvosAttacks
+	dw MagikarpEvosAttacks
+	dw MissingNo86EvosAttacks
+	dw MissingNo87EvosAttacks
+	dw MukEvosAttacks
+	dw MissingNo8AEvosAttacks
+	dw KinglerEvosAttacks
+	dw CloysterEvosAttacks
+	dw MissingNo8CEvosAttacks
+	dw ElectrodeEvosAttacks
+	dw ClefableEvosAttacks
+	dw WeezingEvosAttacks
+	dw PersianEvosAttacks
+	dw MarowakEvosAttacks
+	dw MissingNo92EvosAttacks
+	dw HaunterEvosAttacks
+	dw AbraEvosAttacks
+	dw AlakazamEvosAttacks
+	dw PidgeottoEvosAttacks
+	dw PidgeotEvosAttacks
+	dw StarmieEvosAttacks
+	dw BulbasaurEvosAttacks
+	dw VenusaurEvosAttacks
+	dw TentacruelEvosAttacks
+	dw MissingNo9CEvosAttacks
+	dw GoldeenEvosAttacks
+	dw SeakingEvosAttacks
+	dw MissingNo9FEvosAttacks
+	dw MissingNoA0EvosAttacks
+	dw MissingNoA1EvosAttacks
+	dw MissingNoA2EvosAttacks
+	dw PonytaEvosAttacks
+	dw RapidashEvosAttacks
+	dw RattataEvosAttacks
+	dw RaticateEvosAttacks
+	dw NidorinoEvosAttacks
+	dw NidorinaEvosAttacks
+	dw GeodudeEvosAttacks
+	dw PorygonEvosAttacks
+	dw AerodactylEvosAttacks
+	dw MissingNoACEvosAttacks
+	dw MagnemiteEvosAttacks
+	dw MissingNoAEEvosAttacks
+	dw MissingNoAFEvosAttacks
+	dw CharmanderEvosAttacks
+	dw SquirtleEvosAttacks
+	dw CharmeleonEvosAttacks
+	dw WartortleEvosAttacks
+	dw CharizardEvosAttacks
+	dw MissingNoB5EvosAttacks
+	dw FossilKabutopsEvosAttacks
+	dw FossilAerodactylEvosAttacks
+	dw MonGhostEvosAttacks
+	dw OddishEvosAttacks
+	dw GloomEvosAttacks
+	dw VileplumeEvosAttacks
+	dw BellsproutEvosAttacks
+	dw WeepinbellEvosAttacks
+	dw VictreebelEvosAttacks
 	assert_table_length NUM_POKEMON_INDEXES
 
-RhydonEvosMoves:
+RhydonEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -207,7 +207,7 @@ RhydonEvosMoves:
 	db 64, TAKE_DOWN
 	db 0
 
-KangaskhanEvosMoves:
+KangaskhanEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -218,7 +218,7 @@ KangaskhanEvosMoves:
 	db 46, DIZZY_PUNCH
 	db 0
 
-NidoranMEvosMoves:
+NidoranMEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 16, NIDORINO
 	db 0
@@ -231,7 +231,7 @@ NidoranMEvosMoves:
 	db 43, DOUBLE_KICK
 	db 0
 
-ClefairyEvosMoves:
+ClefairyEvosAttacks:
 ; Evolutions
 	db EV_ITEM, MOON_STONE, 1, CLEFABLE
 	db 0
@@ -244,7 +244,7 @@ ClefairyEvosMoves:
 	db 48, LIGHT_SCREEN
 	db 0
 
-SpearowEvosMoves:
+SpearowEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 20, FEAROW
 	db 0
@@ -256,7 +256,7 @@ SpearowEvosMoves:
 	db 36, AGILITY
 	db 0
 
-VoltorbEvosMoves:
+VoltorbEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 30, ELECTRODE
 	db 0
@@ -268,7 +268,7 @@ VoltorbEvosMoves:
 	db 43, EXPLOSION
 	db 0
 
-NidokingEvosMoves:
+NidokingEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -277,7 +277,7 @@ NidokingEvosMoves:
 	db 23, THRASH
 	db 0
 
-SlowbroEvosMoves:
+SlowbroEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -290,7 +290,7 @@ SlowbroEvosMoves:
 	db 55, PSYCHIC_M
 	db 0
 
-IvysaurEvosMoves:
+IvysaurEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 32, VENUSAUR
 	db 0
@@ -304,14 +304,14 @@ IvysaurEvosMoves:
 	db 54, SOLARBEAM
 	db 0
 
-ExeggutorEvosMoves:
+ExeggutorEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 28, STOMP
 	db 0
 
-LickitungEvosMoves:
+LickitungEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -322,7 +322,7 @@ LickitungEvosMoves:
 	db 39, SCREECH
 	db 0
 
-ExeggcuteEvosMoves:
+ExeggcuteEvosAttacks:
 ; Evolutions
 	db EV_ITEM, LEAF_STONE, 1, EXEGGUTOR
 	db 0
@@ -335,7 +335,7 @@ ExeggcuteEvosMoves:
 	db 48, SLEEP_POWDER
 	db 0
 
-GrimerEvosMoves:
+GrimerEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 38, MUK
 	db 0
@@ -348,7 +348,7 @@ GrimerEvosMoves:
 	db 55, ACID_ARMOR
 	db 0
 
-GengarEvosMoves:
+GengarEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -356,7 +356,7 @@ GengarEvosMoves:
 	db 38, DREAM_EATER
 	db 0
 
-NidoranFEvosMoves:
+NidoranFEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 16, NIDORINA
 	db 0
@@ -369,7 +369,7 @@ NidoranFEvosMoves:
 	db 43, DOUBLE_KICK
 	db 0
 
-NidoqueenEvosMoves:
+NidoqueenEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -378,7 +378,7 @@ NidoqueenEvosMoves:
 	db 23, BODY_SLAM
 	db 0
 
-CuboneEvosMoves:
+CuboneEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 28, MAROWAK
 	db 0
@@ -390,7 +390,7 @@ CuboneEvosMoves:
 	db 46, RAGE
 	db 0
 
-RhyhornEvosMoves:
+RhyhornEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 42, RHYDON
 	db 0
@@ -403,7 +403,7 @@ RhyhornEvosMoves:
 	db 55, TAKE_DOWN
 	db 0
 
-LaprasEvosMoves:
+LaprasEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -415,13 +415,13 @@ LaprasEvosMoves:
 	db 46, HYDRO_PUMP
 	db 0
 
-ArcanineEvosMoves:
+ArcanineEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-MewEvosMoves:
+MewEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -431,7 +431,7 @@ MewEvosMoves:
 	db 40, PSYCHIC_M
 	db 0
 
-GyaradosEvosMoves:
+GyaradosEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -442,7 +442,7 @@ GyaradosEvosMoves:
 	db 52, HYPER_BEAM
 	db 0
 
-ShellderEvosMoves:
+ShellderEvosAttacks:
 ; Evolutions
 	db EV_ITEM, WATER_STONE, 1, CLOYSTER
 	db 0
@@ -454,7 +454,7 @@ ShellderEvosMoves:
 	db 50, ICE_BEAM
 	db 0
 
-TentacoolEvosMoves:
+TentacoolEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 30, TENTACRUEL
 	db 0
@@ -469,7 +469,7 @@ TentacoolEvosMoves:
 	db 48, HYDRO_PUMP
 	db 0
 
-GastlyEvosMoves:
+GastlyEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 25, HAUNTER
 	db 0
@@ -478,7 +478,7 @@ GastlyEvosMoves:
 	db 35, DREAM_EATER
 	db 0
 
-ScytherEvosMoves:
+ScytherEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -490,7 +490,7 @@ ScytherEvosMoves:
 	db 42, AGILITY
 	db 0
 
-StaryuEvosMoves:
+StaryuEvosAttacks:
 ; Evolutions
 	db EV_ITEM, WATER_STONE, 1, STARMIE
 	db 0
@@ -504,7 +504,7 @@ StaryuEvosMoves:
 	db 47, HYDRO_PUMP
 	db 0
 
-BlastoiseEvosMoves:
+BlastoiseEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -516,7 +516,7 @@ BlastoiseEvosMoves:
 	db 52, HYDRO_PUMP
 	db 0
 
-PinsirEvosMoves:
+PinsirEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -528,7 +528,7 @@ PinsirEvosMoves:
 	db 54, SWORDS_DANCE
 	db 0
 
-TangelaEvosMoves:
+TangelaEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -540,19 +540,19 @@ TangelaEvosMoves:
 	db 49, GROWTH
 	db 0
 
-MissingNo1FEvosMoves:
+MissingNo1FEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-MissingNo20EvosMoves:
+MissingNo20EvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-GrowlitheEvosMoves:
+GrowlitheEvosAttacks:
 ; Evolutions
 	db EV_ITEM, FIRE_STONE, 1, ARCANINE
 	db 0
@@ -564,7 +564,7 @@ GrowlitheEvosMoves:
 	db 50, FLAMETHROWER
 	db 0
 
-OnixEvosMoves:
+OnixEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -575,7 +575,7 @@ OnixEvosMoves:
 	db 43, HARDEN
 	db 0
 
-FearowEvosMoves:
+FearowEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -586,7 +586,7 @@ FearowEvosMoves:
 	db 43, AGILITY
 	db 0
 
-PidgeyEvosMoves:
+PidgeyEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 18, PIDGEOTTO
 	db 0
@@ -599,7 +599,7 @@ PidgeyEvosMoves:
 	db 44, MIRROR_MOVE
 	db 0
 
-SlowpokeEvosMoves:
+SlowpokeEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 37, SLOWBRO
 	db 0
@@ -612,7 +612,7 @@ SlowpokeEvosMoves:
 	db 48, PSYCHIC_M
 	db 0
 
-KadabraEvosMoves:
+KadabraEvosAttacks:
 ; Evolutions
 	db EV_TRADE, 1, ALAKAZAM
 	db 0
@@ -625,7 +625,7 @@ KadabraEvosMoves:
 	db 42, REFLECT
 	db 0
 
-GravelerEvosMoves:
+GravelerEvosAttacks:
 ; Evolutions
 	db EV_TRADE, 1, GOLEM
 	db 0
@@ -638,7 +638,7 @@ GravelerEvosMoves:
 	db 43, EXPLOSION
 	db 0
 
-ChanseyEvosMoves:
+ChanseyEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -650,7 +650,7 @@ ChanseyEvosMoves:
 	db 54, DOUBLE_EDGE
 	db 0
 
-MachokeEvosMoves:
+MachokeEvosAttacks:
 ; Evolutions
 	db EV_TRADE, 1, MACHAMP
 	db 0
@@ -662,7 +662,7 @@ MachokeEvosMoves:
 	db 52, SUBMISSION
 	db 0
 
-MrMimeEvosMoves:
+MrMimeEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -673,7 +673,7 @@ MrMimeEvosMoves:
 	db 47, SUBSTITUTE
 	db 0
 
-HitmonleeEvosMoves:
+HitmonleeEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -684,7 +684,7 @@ HitmonleeEvosMoves:
 	db 53, MEGA_KICK
 	db 0
 
-HitmonchanEvosMoves:
+HitmonchanEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -695,7 +695,7 @@ HitmonchanEvosMoves:
 	db 53, COUNTER
 	db 0
 
-ArbokEvosMoves:
+ArbokEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -706,7 +706,7 @@ ArbokEvosMoves:
 	db 47, ACID
 	db 0
 
-ParasectEvosMoves:
+ParasectEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -717,7 +717,7 @@ ParasectEvosMoves:
 	db 48, GROWTH
 	db 0
 
-PsyduckEvosMoves:
+PsyduckEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 33, GOLDUCK
 	db 0
@@ -729,7 +729,7 @@ PsyduckEvosMoves:
 	db 52, HYDRO_PUMP
 	db 0
 
-DrowzeeEvosMoves:
+DrowzeeEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 26, HYPNO
 	db 0
@@ -742,7 +742,7 @@ DrowzeeEvosMoves:
 	db 37, MEDITATE
 	db 0
 
-GolemEvosMoves:
+GolemEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -754,13 +754,13 @@ GolemEvosMoves:
 	db 43, EXPLOSION
 	db 0
 
-MissingNo32EvosMoves:
+MissingNo32EvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-MagmarEvosMoves:
+MagmarEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -772,13 +772,13 @@ MagmarEvosMoves:
 	db 55, FLAMETHROWER
 	db 0
 
-MissingNo34EvosMoves:
+MissingNo34EvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-ElectabuzzEvosMoves:
+ElectabuzzEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -789,7 +789,7 @@ ElectabuzzEvosMoves:
 	db 54, THUNDER
 	db 0
 
-MagnetonEvosMoves:
+MagnetonEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -801,7 +801,7 @@ MagnetonEvosMoves:
 	db 54, SCREECH
 	db 0
 
-KoffingEvosMoves:
+KoffingEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 35, WEEZING
 	db 0
@@ -813,13 +813,13 @@ KoffingEvosMoves:
 	db 48, EXPLOSION
 	db 0
 
-MissingNo38EvosMoves:
+MissingNo38EvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-MankeyEvosMoves:
+MankeyEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 28, PRIMEAPE
 	db 0
@@ -831,7 +831,7 @@ MankeyEvosMoves:
 	db 39, THRASH
 	db 0
 
-SeelEvosMoves:
+SeelEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 34, DEWGONG
 	db 0
@@ -843,7 +843,7 @@ SeelEvosMoves:
 	db 50, ICE_BEAM
 	db 0
 
-DiglettEvosMoves:
+DiglettEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 26, DUGTRIO
 	db 0
@@ -855,7 +855,7 @@ DiglettEvosMoves:
 	db 40, EARTHQUAKE
 	db 0
 
-TaurosEvosMoves:
+TaurosEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -866,25 +866,25 @@ TaurosEvosMoves:
 	db 51, TAKE_DOWN
 	db 0
 
-MissingNo3DEvosMoves:
+MissingNo3DEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-MissingNo3EEvosMoves:
+MissingNo3EEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-MissingNo3FEvosMoves:
+MissingNo3FEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-FarfetchdEvosMoves:
+FarfetchdEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -895,7 +895,7 @@ FarfetchdEvosMoves:
 	db 39, SLASH
 	db 0
 
-VenonatEvosMoves:
+VenonatEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 31, VENOMOTH
 	db 0
@@ -908,7 +908,7 @@ VenonatEvosMoves:
 	db 43, PSYCHIC_M
 	db 0
 
-DragoniteEvosMoves:
+DragoniteEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -919,25 +919,25 @@ DragoniteEvosMoves:
 	db 60, HYPER_BEAM
 	db 0
 
-MissingNo43EvosMoves:
+MissingNo43EvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-MissingNo44EvosMoves:
+MissingNo44EvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-MissingNo45EvosMoves:
+MissingNo45EvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-DoduoEvosMoves:
+DoduoEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 31, DODRIO
 	db 0
@@ -950,7 +950,7 @@ DoduoEvosMoves:
 	db 44, AGILITY
 	db 0
 
-PoliwagEvosMoves:
+PoliwagEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 25, POLIWHIRL
 	db 0
@@ -963,7 +963,7 @@ PoliwagEvosMoves:
 	db 45, HYDRO_PUMP
 	db 0
 
-JynxEvosMoves:
+JynxEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -975,7 +975,7 @@ JynxEvosMoves:
 	db 58, BLIZZARD
 	db 0
 
-MoltresEvosMoves:
+MoltresEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -984,7 +984,7 @@ MoltresEvosMoves:
 	db 60, SKY_ATTACK
 	db 0
 
-ArticunoEvosMoves:
+ArticunoEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -993,7 +993,7 @@ ArticunoEvosMoves:
 	db 60, MIST
 	db 0
 
-ZapdosEvosMoves:
+ZapdosEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1002,13 +1002,13 @@ ZapdosEvosMoves:
 	db 60, LIGHT_SCREEN
 	db 0
 
-DittoEvosMoves:
+DittoEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-MeowthEvosMoves:
+MeowthEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 28, PERSIAN
 	db 0
@@ -1020,7 +1020,7 @@ MeowthEvosMoves:
 	db 44, SLASH
 	db 0
 
-KrabbyEvosMoves:
+KrabbyEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 28, KINGLER
 	db 0
@@ -1032,25 +1032,25 @@ KrabbyEvosMoves:
 	db 40, HARDEN
 	db 0
 
-MissingNo4FEvosMoves:
+MissingNo4FEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-MissingNo50EvosMoves:
+MissingNo50EvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-MissingNo51EvosMoves:
+MissingNo51EvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-VulpixEvosMoves:
+VulpixEvosAttacks:
 ; Evolutions
 	db EV_ITEM, FIRE_STONE, 1, NINETALES
 	db 0
@@ -1062,13 +1062,13 @@ VulpixEvosMoves:
 	db 42, FIRE_SPIN
 	db 0
 
-NinetalesEvosMoves:
+NinetalesEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-PikachuEvosMoves:
+PikachuEvosAttacks:
 ; Evolutions
 	db EV_ITEM, THUNDER_STONE, 1, RAICHU
 	db 0
@@ -1080,25 +1080,25 @@ PikachuEvosMoves:
 	db 43, THUNDER
 	db 0
 
-RaichuEvosMoves:
+RaichuEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-MissingNo56EvosMoves:
+MissingNo56EvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-MissingNo57EvosMoves:
+MissingNo57EvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-DratiniEvosMoves:
+DratiniEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 30, DRAGONAIR
 	db 0
@@ -1110,7 +1110,7 @@ DratiniEvosMoves:
 	db 50, HYPER_BEAM
 	db 0
 
-DragonairEvosMoves:
+DragonairEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 55, DRAGONITE
 	db 0
@@ -1122,7 +1122,7 @@ DragonairEvosMoves:
 	db 55, HYPER_BEAM
 	db 0
 
-KabutoEvosMoves:
+KabutoEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 40, KABUTOPS
 	db 0
@@ -1133,7 +1133,7 @@ KabutoEvosMoves:
 	db 49, HYDRO_PUMP
 	db 0
 
-KabutopsEvosMoves:
+KabutopsEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1143,7 +1143,7 @@ KabutopsEvosMoves:
 	db 53, HYDRO_PUMP
 	db 0
 
-HorseaEvosMoves:
+HorseaEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 32, SEADRA
 	db 0
@@ -1155,7 +1155,7 @@ HorseaEvosMoves:
 	db 45, HYDRO_PUMP
 	db 0
 
-SeadraEvosMoves:
+SeadraEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1166,19 +1166,19 @@ SeadraEvosMoves:
 	db 52, HYDRO_PUMP
 	db 0
 
-MissingNo5EEvosMoves:
+MissingNo5EEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-MissingNo5FEvosMoves:
+MissingNo5FEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-SandshrewEvosMoves:
+SandshrewEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 22, SANDSLASH
 	db 0
@@ -1190,7 +1190,7 @@ SandshrewEvosMoves:
 	db 38, FURY_SWIPES
 	db 0
 
-SandslashEvosMoves:
+SandslashEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1201,7 +1201,7 @@ SandslashEvosMoves:
 	db 47, FURY_SWIPES
 	db 0
 
-OmanyteEvosMoves:
+OmanyteEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 40, OMASTAR
 	db 0
@@ -1212,7 +1212,7 @@ OmanyteEvosMoves:
 	db 53, HYDRO_PUMP
 	db 0
 
-OmastarEvosMoves:
+OmastarEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1222,7 +1222,7 @@ OmastarEvosMoves:
 	db 49, HYDRO_PUMP
 	db 0
 
-JigglypuffEvosMoves:
+JigglypuffEvosAttacks:
 ; Evolutions
 	db EV_ITEM, MOON_STONE, 1, WIGGLYTUFF
 	db 0
@@ -1236,13 +1236,13 @@ JigglypuffEvosMoves:
 	db 39, DOUBLE_EDGE
 	db 0
 
-WigglytuffEvosMoves:
+WigglytuffEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-EeveeEvosMoves:
+EeveeEvosAttacks:
 ; Evolutions
 	db EV_ITEM, FIRE_STONE, 1, FLAREON
 	db EV_ITEM, THUNDER_STONE, 1, JOLTEON
@@ -1255,7 +1255,7 @@ EeveeEvosMoves:
 	db 45, TAKE_DOWN
 	db 0
 
-FlareonEvosMoves:
+FlareonEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1269,7 +1269,7 @@ FlareonEvosMoves:
 	db 54, FLAMETHROWER
 	db 0
 
-JolteonEvosMoves:
+JolteonEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1283,7 +1283,7 @@ JolteonEvosMoves:
 	db 54, THUNDER
 	db 0
 
-VaporeonEvosMoves:
+VaporeonEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1297,7 +1297,7 @@ VaporeonEvosMoves:
 	db 54, HYDRO_PUMP
 	db 0
 
-MachopEvosMoves:
+MachopEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 28, MACHOKE
 	db 0
@@ -1309,7 +1309,7 @@ MachopEvosMoves:
 	db 46, SUBMISSION
 	db 0
 
-ZubatEvosMoves:
+ZubatEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 22, GOLBAT
 	db 0
@@ -1321,7 +1321,7 @@ ZubatEvosMoves:
 	db 36, HAZE
 	db 0
 
-EkansEvosMoves:
+EkansEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 22, ARBOK
 	db 0
@@ -1333,7 +1333,7 @@ EkansEvosMoves:
 	db 38, ACID
 	db 0
 
-ParasEvosMoves:
+ParasEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 24, PARASECT
 	db 0
@@ -1345,7 +1345,7 @@ ParasEvosMoves:
 	db 41, GROWTH
 	db 0
 
-PoliwhirlEvosMoves:
+PoliwhirlEvosAttacks:
 ; Evolutions
 	db EV_ITEM, WATER_STONE, 1, POLIWRATH
 	db 0
@@ -1358,7 +1358,7 @@ PoliwhirlEvosMoves:
 	db 49, HYDRO_PUMP
 	db 0
 
-PoliwrathEvosMoves:
+PoliwrathEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1366,21 +1366,21 @@ PoliwrathEvosMoves:
 	db 19, WATER_GUN
 	db 0
 
-WeedleEvosMoves:
+WeedleEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 7, KAKUNA
 	db 0
 ; Learnset
 	db 0
 
-KakunaEvosMoves:
+KakunaEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 10, BEEDRILL
 	db 0
 ; Learnset
 	db 0
 
-BeedrillEvosMoves:
+BeedrillEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1392,13 +1392,13 @@ BeedrillEvosMoves:
 	db 35, AGILITY
 	db 0
 
-MissingNo73EvosMoves:
+MissingNo73EvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-DodrioEvosMoves:
+DodrioEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1410,7 +1410,7 @@ DodrioEvosMoves:
 	db 51, AGILITY
 	db 0
 
-PrimeapeEvosMoves:
+PrimeapeEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1421,7 +1421,7 @@ PrimeapeEvosMoves:
 	db 46, THRASH
 	db 0
 
-DugtrioEvosMoves:
+DugtrioEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1432,7 +1432,7 @@ DugtrioEvosMoves:
 	db 47, EARTHQUAKE
 	db 0
 
-VenomothEvosMoves:
+VenomothEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1444,7 +1444,7 @@ VenomothEvosMoves:
 	db 50, PSYCHIC_M
 	db 0
 
-DewgongEvosMoves:
+DewgongEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1455,33 +1455,33 @@ DewgongEvosMoves:
 	db 56, ICE_BEAM
 	db 0
 
-MissingNo79EvosMoves:
+MissingNo79EvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-MissingNo7AEvosMoves:
+MissingNo7AEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-CaterpieEvosMoves:
+CaterpieEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 7, METAPOD
 	db 0
 ; Learnset
 	db 0
 
-MetapodEvosMoves:
+MetapodEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 10, BUTTERFREE
 	db 0
 ; Learnset
 	db 0
 
-ButterfreeEvosMoves:
+ButterfreeEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1494,7 +1494,7 @@ ButterfreeEvosMoves:
 	db 32, PSYBEAM
 	db 0
 
-MachampEvosMoves:
+MachampEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1505,13 +1505,13 @@ MachampEvosMoves:
 	db 52, SUBMISSION
 	db 0
 
-MissingNo7FEvosMoves:
+MissingNo7FEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-GolduckEvosMoves:
+GolduckEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1522,7 +1522,7 @@ GolduckEvosMoves:
 	db 59, HYDRO_PUMP
 	db 0
 
-HypnoEvosMoves:
+HypnoEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1534,7 +1534,7 @@ HypnoEvosMoves:
 	db 43, MEDITATE
 	db 0
 
-GolbatEvosMoves:
+GolbatEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1545,7 +1545,7 @@ GolbatEvosMoves:
 	db 43, HAZE
 	db 0
 
-MewtwoEvosMoves:
+MewtwoEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1556,7 +1556,7 @@ MewtwoEvosMoves:
 	db 81, AMNESIA
 	db 0
 
-SnorlaxEvosMoves:
+SnorlaxEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1566,7 +1566,7 @@ SnorlaxEvosMoves:
 	db 56, HYPER_BEAM
 	db 0
 
-MagikarpEvosMoves:
+MagikarpEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 20, GYARADOS
 	db 0
@@ -1574,19 +1574,19 @@ MagikarpEvosMoves:
 	db 15, TACKLE
 	db 0
 
-MissingNo86EvosMoves:
+MissingNo86EvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-MissingNo87EvosMoves:
+MissingNo87EvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-MukEvosMoves:
+MukEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1598,13 +1598,13 @@ MukEvosMoves:
 	db 60, ACID_ARMOR
 	db 0
 
-MissingNo8AEvosMoves:
+MissingNo8AEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-KinglerEvosMoves:
+KinglerEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1615,20 +1615,20 @@ KinglerEvosMoves:
 	db 49, HARDEN
 	db 0
 
-CloysterEvosMoves:
+CloysterEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 50, SPIKE_CANNON
 	db 0
 
-MissingNo8CEvosMoves:
+MissingNo8CEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-ElectrodeEvosMoves:
+ElectrodeEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1639,13 +1639,13 @@ ElectrodeEvosMoves:
 	db 50, EXPLOSION
 	db 0
 
-ClefableEvosMoves:
+ClefableEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-WeezingEvosMoves:
+WeezingEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1656,7 +1656,7 @@ WeezingEvosMoves:
 	db 53, EXPLOSION
 	db 0
 
-PersianEvosMoves:
+PersianEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1667,7 +1667,7 @@ PersianEvosMoves:
 	db 51, SLASH
 	db 0
 
-MarowakEvosMoves:
+MarowakEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1678,13 +1678,13 @@ MarowakEvosMoves:
 	db 55, RAGE
 	db 0
 
-MissingNo92EvosMoves:
+MissingNo92EvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-HaunterEvosMoves:
+HaunterEvosAttacks:
 ; Evolutions
 	db EV_TRADE, 1, GENGAR
 	db 0
@@ -1693,14 +1693,14 @@ HaunterEvosMoves:
 	db 38, DREAM_EATER
 	db 0
 
-AbraEvosMoves:
+AbraEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 16, KADABRA
 	db 0
 ; Learnset
 	db 0
 
-AlakazamEvosMoves:
+AlakazamEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1712,7 +1712,7 @@ AlakazamEvosMoves:
 	db 42, REFLECT
 	db 0
 
-PidgeottoEvosMoves:
+PidgeottoEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 36, PIDGEOT
 	db 0
@@ -1725,7 +1725,7 @@ PidgeottoEvosMoves:
 	db 49, MIRROR_MOVE
 	db 0
 
-PidgeotEvosMoves:
+PidgeotEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1737,13 +1737,13 @@ PidgeotEvosMoves:
 	db 54, MIRROR_MOVE
 	db 0
 
-StarmieEvosMoves:
+StarmieEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-BulbasaurEvosMoves:
+BulbasaurEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 16, IVYSAUR
 	db 0
@@ -1757,7 +1757,7 @@ BulbasaurEvosMoves:
 	db 48, SOLARBEAM
 	db 0
 
-VenusaurEvosMoves:
+VenusaurEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1770,7 +1770,7 @@ VenusaurEvosMoves:
 	db 65, SOLARBEAM
 	db 0
 
-TentacruelEvosMoves:
+TentacruelEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1784,13 +1784,13 @@ TentacruelEvosMoves:
 	db 50, HYDRO_PUMP
 	db 0
 
-MissingNo9CEvosMoves:
+MissingNo9CEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-GoldeenEvosMoves:
+GoldeenEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 33, SEAKING
 	db 0
@@ -1803,7 +1803,7 @@ GoldeenEvosMoves:
 	db 54, AGILITY
 	db 0
 
-SeakingEvosMoves:
+SeakingEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1815,31 +1815,31 @@ SeakingEvosMoves:
 	db 54, AGILITY
 	db 0
 
-MissingNo9FEvosMoves:
+MissingNo9FEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-MissingNoA0EvosMoves:
+MissingNoA0EvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-MissingNoA1EvosMoves:
+MissingNoA1EvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-MissingNoA2EvosMoves:
+MissingNoA2EvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-PonytaEvosMoves:
+PonytaEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 40, RAPIDASH
 	db 0
@@ -1852,7 +1852,7 @@ PonytaEvosMoves:
 	db 48, AGILITY
 	db 0
 
-RapidashEvosMoves:
+RapidashEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1864,7 +1864,7 @@ RapidashEvosMoves:
 	db 55, AGILITY
 	db 0
 
-RattataEvosMoves:
+RattataEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 20, RATICATE
 	db 0
@@ -1875,7 +1875,7 @@ RattataEvosMoves:
 	db 34, SUPER_FANG
 	db 0
 
-RaticateEvosMoves:
+RaticateEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1885,7 +1885,7 @@ RaticateEvosMoves:
 	db 41, SUPER_FANG
 	db 0
 
-NidorinoEvosMoves:
+NidorinoEvosAttacks:
 ; Evolutions
 	db EV_ITEM, MOON_STONE, 1, NIDOKING
 	db 0
@@ -1898,7 +1898,7 @@ NidorinoEvosMoves:
 	db 50, DOUBLE_KICK
 	db 0
 
-NidorinaEvosMoves:
+NidorinaEvosAttacks:
 ; Evolutions
 	db EV_ITEM, MOON_STONE, 1, NIDOQUEEN
 	db 0
@@ -1911,7 +1911,7 @@ NidorinaEvosMoves:
 	db 50, DOUBLE_KICK
 	db 0
 
-GeodudeEvosMoves:
+GeodudeEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 25, GRAVELER
 	db 0
@@ -1924,7 +1924,7 @@ GeodudeEvosMoves:
 	db 36, EXPLOSION
 	db 0
 
-PorygonEvosMoves:
+PorygonEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1934,7 +1934,7 @@ PorygonEvosMoves:
 	db 42, TRI_ATTACK
 	db 0
 
-AerodactylEvosMoves:
+AerodactylEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -1944,13 +1944,13 @@ AerodactylEvosMoves:
 	db 54, HYPER_BEAM
 	db 0
 
-MissingNoACEvosMoves:
+MissingNoACEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-MagnemiteEvosMoves:
+MagnemiteEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 30, MAGNETON
 	db 0
@@ -1963,19 +1963,19 @@ MagnemiteEvosMoves:
 	db 47, SCREECH
 	db 0
 
-MissingNoAEEvosMoves:
+MissingNoAEEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-MissingNoAFEvosMoves:
+MissingNoAFEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-CharmanderEvosMoves:
+CharmanderEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 16, CHARMELEON
 	db 0
@@ -1988,7 +1988,7 @@ CharmanderEvosMoves:
 	db 46, FIRE_SPIN
 	db 0
 
-SquirtleEvosMoves:
+SquirtleEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 16, WARTORTLE
 	db 0
@@ -2001,7 +2001,7 @@ SquirtleEvosMoves:
 	db 42, HYDRO_PUMP
 	db 0
 
-CharmeleonEvosMoves:
+CharmeleonEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 36, CHARIZARD
 	db 0
@@ -2014,7 +2014,7 @@ CharmeleonEvosMoves:
 	db 56, FIRE_SPIN
 	db 0
 
-WartortleEvosMoves:
+WartortleEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 36, BLASTOISE
 	db 0
@@ -2027,7 +2027,7 @@ WartortleEvosMoves:
 	db 47, HYDRO_PUMP
 	db 0
 
-CharizardEvosMoves:
+CharizardEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -2039,31 +2039,31 @@ CharizardEvosMoves:
 	db 55, FIRE_SPIN
 	db 0
 
-MissingNoB5EvosMoves:
+MissingNoB5EvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-FossilKabutopsEvosMoves:
+FossilKabutopsEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-FossilAerodactylEvosMoves:
+FossilAerodactylEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-MonGhostEvosMoves:
+MonGhostEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
 
-OddishEvosMoves:
+OddishEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 21, GLOOM
 	db 0
@@ -2076,7 +2076,7 @@ OddishEvosMoves:
 	db 46, SOLARBEAM
 	db 0
 
-GloomEvosMoves:
+GloomEvosAttacks:
 ; Evolutions
 	db EV_ITEM, LEAF_STONE, 1, VILEPLUME
 	db 0
@@ -2089,7 +2089,7 @@ GloomEvosMoves:
 	db 52, SOLARBEAM
 	db 0
 
-VileplumeEvosMoves:
+VileplumeEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset
@@ -2098,7 +2098,7 @@ VileplumeEvosMoves:
 	db 19, SLEEP_POWDER
 	db 0
 
-BellsproutEvosMoves:
+BellsproutEvosAttacks:
 ; Evolutions
 	db EV_LEVEL, 21, WEEPINBELL
 	db 0
@@ -2112,7 +2112,7 @@ BellsproutEvosMoves:
 	db 42, SLAM
 	db 0
 
-WeepinbellEvosMoves:
+WeepinbellEvosAttacks:
 ; Evolutions
 	db EV_ITEM, LEAF_STONE, 1, VICTREEBEL
 	db 0
@@ -2126,7 +2126,7 @@ WeepinbellEvosMoves:
 	db 49, SLAM
 	db 0
 
-VictreebelEvosMoves:
+VictreebelEvosAttacks:
 ; Evolutions
 	db 0
 ; Learnset

@@ -44,7 +44,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, [wEvoOldSpecies]
 	dec a
 	ld b, 0
-	ld hl, EvosMovesPointerTable
+	ld hl, EvosAttacksPointersTable
 	add a
 	rl b
 	ld c, a
@@ -318,12 +318,12 @@ Evolution_ReloadTilesetTilePatterns:
 	jp ReloadTilesetTilePatterns
 
 LearnMoveFromLevelUp:
-	ld hl, EvosMovesPointerTable
+	ld hl, EvosAttacksPointersTable
 	ld a, [wd11e] ; species
 	ld [wcf91], a
 	dec a
 	ld bc, 0
-	ld hl, EvosMovesPointerTable
+	ld hl, EvosAttacksPointersTable
 	add a
 	rl b
 	ld c, a
@@ -382,7 +382,7 @@ WriteMonMoves:
 	push hl
 	push de
 	push bc
-	ld hl, EvosMovesPointerTable
+	ld hl, EvosAttacksPointersTable
 	ld b, 0
 	ld a, [wcf91]  ; cur mon ID
 	dec a
@@ -510,4 +510,4 @@ WriteMonMoves_ShiftMoveData:
 Evolution_FlagAction:
 	predef_jump FlagActionPredef
 
-INCLUDE "data/pokemon/evos_moves.asm"
+INCLUDE "data/pokemon/evos_attacks.asm"
