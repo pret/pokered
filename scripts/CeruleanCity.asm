@@ -1,8 +1,33 @@
 CeruleanCity_Script:
+	call CeruleanCityReplaceCutTile
 	call EnableAutoTextBoxDrawing
 	ld hl, CeruleanCity_ScriptPointers
 	ld a, [wCeruleanCityCurScript]
 	jp CallFunctionInTable
+
+CeruleanCityReplaceCutTile:
+	CheckEvent EVENT_DELETED_CERULEAN_TREE
+	ret z
+	ld hl, wCurrentMapScriptFlags
+	bit 5, [hl]
+	res 5, [hl]
+	jr nz, .replaceTile
+	bit 4, [hl]
+	res 4, [hl]
+	jr nz, .replaceTileNoRedraw
+	ret
+.replaceTile
+	call .loadTile
+	predef_jump ReplaceTileBlock
+.replaceTileNoRedraw
+	; this avoids redrawing the map because when going between areas these tiles are offscreen.
+	call .loadTile
+	predef_jump ReplaceTileBlockNoRedraw
+.loadTile
+	lb bc, 14, 9
+	ld a, $6D
+	ld [wNewTileBlockID], a
+	ret
 
 CeruleanCityScript_1948c:
 	xor a

@@ -4,6 +4,16 @@
 ; c = X
 ReplaceTileBlock:
 	call GetPredefRegisters
+	call ReplaceTileBlockCommon
+	ret c
+	jp RedrawMapView 
+
+ReplaceTileBlockNoRedraw:
+	call GetPredefRegisters
+	call ReplaceTileBlockCommon
+	ret
+
+ReplaceTileBlockCommon:
 	ld hl, wOverworldMap
 	ld a, [wCurMapWidth]
 	add $6
@@ -45,6 +55,8 @@ ReplaceTileBlock:
 	pop bc
 	call CompareHLWithBC
 	ret c ; return if the replaced tile block is above the map view in memory
+	ret
+
 
 RedrawMapView::
 	ld a, [wIsInBattle]

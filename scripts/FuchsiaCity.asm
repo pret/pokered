@@ -1,5 +1,57 @@
 FuchsiaCity_Script:
+	call FuchsiaReplaceCutTiles
 	jp EnableAutoTextBoxDrawing
+
+
+FuchsiaReplaceCutTiles:
+	ld hl, wCurrentMapScriptFlags
+	bit 5, [hl] ; did we load the map from a save/warp/door/battle, etc?
+	res 5, [hl]
+	jr nz, .removeAddCutTiles
+	bit 4, [hl] ; did we enter the map by traversal from another route
+	res 4, [hl]
+	jr nz, .removeAddCutTilesNoRedraw
+	ret
+.removeAddCutTiles
+	CheckEvent EVENT_DELETED_FUCHSIA_TREES
+	jr nz, .remove
+.add
+	ld a, $60
+	ld [wNewTileBlockID], a
+	lb bc, 6, 13
+	predef ReplaceTileBlock
+	lb bc, 3, 11
+	predef ReplaceTileBlock
+	ret
+.remove
+	ld a, $6E
+	ld [wNewTileBlockID], a
+	lb bc, 9, 9
+	predef ReplaceTileBlock
+	lb bc, 5, 8
+	predef ReplaceTileBlock
+	ret
+.removeAddCutTilesNoRedraw
+	; this avoids redrawing the map because when going between areas these tiles are offscreen.
+	CheckEvent EVENT_DELETED_FUCHSIA_TREES
+	jr nz, .removeNoRedraw
+.addNoRedraw
+	ld a, $60
+	ld [wNewTileBlockID], a
+	lb bc, 6, 13
+	predef ReplaceTileBlockNoRedraw
+	lb bc, 3, 11
+	predef ReplaceTileBlockNoRedraw
+	ret
+.removeNoRedraw
+	ld a, $6E
+	ld [wNewTileBlockID], a
+	lb bc, 9, 9
+	predef ReplaceTileBlockNoRedraw
+	lb bc, 5, 8
+	predef ReplaceTileBlockNoRedraw
+	ret
+
 
 FuchsiaCity_TextPointers:
 	dw FuchsiaCityText1

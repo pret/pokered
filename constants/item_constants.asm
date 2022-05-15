@@ -111,6 +111,11 @@ NUM_ITEMS EQU const_value - 1
 	const FLOOR_B4F     ; $61
 NUM_FLOORS EQU const_value - 1 - NUM_ITEMS
 
+	const TREE_ROUTE_2  ; 62
+	const TREE_CERULEAN_CITY ;63
+	const TREE_ROUTE_9  ;64
+	const TREE_FUCHSIA_CITY ;65
+
 	const_next $C4
 
 ; HMs are defined before TMs, so the actual number of TM definitions

@@ -99,3 +99,7 @@ ItemNames::
 	li "11F"
 	li "B4F"
 	assert_list_length NUM_ITEMS + NUM_FLOORS
+	li "ROUTE 2"
+	li "CERULEAN CITY"
+	li "ROUTE 9"
+	li "FUCHSIA CITY"

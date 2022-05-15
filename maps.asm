@@ -1106,6 +1106,7 @@ CinnabarMart_Blocks:
 PewterMart_Blocks: INCBIN "maps/PewterMart.blk"
 
 FuchsiaBillsGrandpasHouse_Blocks: INCBIN "maps/FuchsiaBillsGrandpasHouse.blk"
+FuchsiaTreeDeleterHouse_Blocks: INCBIN "maps/FuchsiaTreeDeleterHouse.blk"
 
 CinnabarPokecenter_Blocks:
 FuchsiaPokecenter_Blocks: INCBIN "maps/FuchsiaPokecenter.blk"
@@ -1141,6 +1142,11 @@ SECTION "Maps 21", ROMX
 INCLUDE "data/maps/headers/FuchsiaBillsGrandpasHouse.asm"
 INCLUDE "scripts/FuchsiaBillsGrandpasHouse.asm"
 INCLUDE "data/maps/objects/FuchsiaBillsGrandpasHouse.asm"
+
+
+INCLUDE "data/maps/headers/FuchsiaTreeDeleterHouse.asm"
+INCLUDE "scripts/FuchsiaTreeDeleterHouse.asm"
+INCLUDE "data/maps/objects/FuchsiaTreeDeleterHouse.asm"
 
 INCLUDE "data/maps/headers/FuchsiaPokecenter.asm"
 INCLUDE "scripts/FuchsiaPokecenter.asm"

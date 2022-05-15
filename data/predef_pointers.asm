@@ -98,7 +98,7 @@ PredefPointers::
 	add_predef DoInGameTradeDialogue
 	add_predef HallOfFamePC
 	add_predef DisplayDexRating
-	add_predef _LeaveMapAnim, $1E ; wrong bank
+	add_predef ReplaceTileBlockNoRedraw
 	add_predef EnterMapAnim, $1E ; wrong bank
 	add_predef GetTileTwoStepsInFrontOfPlayer
 	add_predef CheckForCollisionWhenPushingBoulder

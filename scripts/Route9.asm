@@ -1,10 +1,35 @@
 Route9_Script:
+	call Route9ReplaceCutTile
 	call EnableAutoTextBoxDrawing
 	ld hl, Route9TrainerHeaders
 	ld de, Route9_ScriptPointers
 	ld a, [wRoute9CurScript]
 	call ExecuteCurMapScriptInTable
 	ld [wRoute9CurScript], a
+	ret
+
+Route9ReplaceCutTile:
+	CheckEvent EVENT_DELETED_ROUTE9_TREE
+	ret z
+	ld hl, wCurrentMapScriptFlags
+	bit 5, [hl]
+	res 5, [hl]
+	jr nz, .replaceTile
+	bit 4, [hl]
+	res 4, [hl]
+	jr nz, .replaceTileNoRedraw
+	ret
+.replaceTile
+	call .loadTile
+	predef_jump ReplaceTileBlock
+.replaceTileNoRedraw
+	; this avoids redrawing the map because when going between areas these tiles are offscreen.
+	call .loadTile
+	predef_jump ReplaceTileBlockNoRedraw
+.loadTile
+	lb bc, 4, 3
+	ld a, $4C
+	ld [wNewTileBlockID], a
 	ret
 
 Route9_ScriptPointers:
