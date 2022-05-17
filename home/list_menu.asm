@@ -228,6 +228,10 @@ DisplayChooseQuantityMenu::
 	jr nz, .incrementQuantity
 	bit BIT_D_DOWN, a
 	jr nz, .decrementQuantity
+	bit BIT_D_RIGHT, a
+	jr nz, .incrementQuantity10
+	bit BIT_D_LEFT, a
+	jr nz, .decrementQuantity10
 	jr .waitForKeyPressLoop
 .incrementQuantity
 	ld a, [wMaxItemQuantity]
@@ -246,6 +250,33 @@ DisplayChooseQuantityMenu::
 	ld hl, wItemQuantity ; current quantity
 	dec [hl]
 	jr nz, .handleNewQuantity
+; wrap to the max quantity if the player goes below 1
+	ld a, [wMaxItemQuantity]
+	ld [hl], a
+	jr .handleNewQuantity
+.incrementQuantity10
+	ld a, [wMaxItemQuantity]
+	inc a
+	ld b, a
+	ld hl, wItemQuantity ; current quantity
+	ld a, [hl]
+	add 10
+	ld [hl], a
+	cp b
+	jr c, .handleNewQuantity
+; wrap to 1 if the player goes above the max quantity
+	ld a, 1
+	ld [hl], a
+	jr .handleNewQuantity
+.decrementQuantity10
+	ld hl, wItemQuantity ; current quantity
+	ld a, [hl]
+	cp 11
+	jr c, .wrapMax
+	sub 10
+	ld [hl], a
+	jr .handleNewQuantity
+.wrapMax
 ; wrap to the max quantity if the player goes below 1
 	ld a, [wMaxItemQuantity]
 	ld [hl], a
