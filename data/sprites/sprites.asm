@@ -66,6 +66,10 @@ SpriteSheetPointerTable:
 	overworld_sprite AgathaSprite, 12           ; SPRITE_AGATHA
 	overworld_sprite BrunoSprite, 12            ; SPRITE_BRUNO
 	overworld_sprite LoreleiSprite, 12          ; SPRITE_LORELEI
+	overworld_sprite BrockSprite, 12            ; SPRITE_BROCK
+	overworld_sprite MistySprite, 12            ; SPRITE_MISTY
+	overworld_sprite SabrinaSprite, 12          ; SPRITE_SABRINA
+	overworld_sprite BlaineSprite, 12           ; SPRITE_BLAINE
 	overworld_sprite SeelSprite, 12             ; SPRITE_SEEL
 	overworld_sprite Monster2Sprite, 12         ; SPRITE_MONSTER2
 	overworld_sprite FuzzballSprite, 12     	; SPRITE_FUZZBALL

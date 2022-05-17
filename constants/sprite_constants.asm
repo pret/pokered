@@ -61,6 +61,10 @@
 	const SPRITE_AGATHA                  ; $39
 	const SPRITE_BRUNO                   ; $3a
 	const SPRITE_LORELEI                 ; $3b
+	const SPRITE_BROCK                   ; $3b
+	const SPRITE_MISTY                   ; $3b
+	const SPRITE_SABRINA                 ; $3b
+	const SPRITE_BLAINE                  ; $3b
 	const SPRITE_SEEL                    ; $3c
 	const SPRITE_MONSTER2                ; $3d
 	const SPRITE_FUZZBALL                ; $47

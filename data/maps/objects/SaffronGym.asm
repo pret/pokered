@@ -38,7 +38,7 @@ SaffronGym_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  9,  8, SPRITE_GIRL, STAY, DOWN, 1, OPP_SABRINA, 1
+	object_event  9,  8, SPRITE_SABRINA, STAY, DOWN, 1, OPP_SABRINA, 1
 	object_event 10,  1, SPRITE_CHANNELER, STAY, DOWN, 2, OPP_CHANNELER, 22
 	object_event 17,  1, SPRITE_YOUNGSTER, STAY, DOWN, 3, OPP_PSYCHIC_TR, 1
 	object_event  3,  7, SPRITE_CHANNELER, STAY, DOWN, 4, OPP_CHANNELER, 23

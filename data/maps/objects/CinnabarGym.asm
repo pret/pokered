@@ -8,7 +8,7 @@ CinnabarGym_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  3,  3, SPRITE_MIDDLE_AGED_MAN, STAY, DOWN, 1, OPP_BLAINE, 1
+	object_event  3,  3, SPRITE_BLAINE, STAY, DOWN, 1, OPP_BLAINE, 1
 	object_event 17,  2, SPRITE_SUPER_NERD, STAY, DOWN, 2, OPP_SUPER_NERD, 9
 	object_event 17,  8, SPRITE_SUPER_NERD, STAY, DOWN, 3, OPP_BURGLAR, 4
 	object_event 11,  4, SPRITE_SUPER_NERD, STAY, DOWN, 4, OPP_SUPER_NERD, 10
