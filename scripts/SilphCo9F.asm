@@ -101,22 +101,40 @@ SilphCo9Script_5d863:
 	cp $1
 	jr nz, .next1
 	SetEventReuseHL EVENT_SILPH_CO_9_UNLOCKED_DOOR1
-	ret
+	callfar CheckAllCardKeyEvents
+	jp Load9FCheckCardKeyText
 .next1
 	cp $2
 	jr nz, .next2
 	SetEventAfterBranchReuseHL EVENT_SILPH_CO_9_UNLOCKED_DOOR2, EVENT_SILPH_CO_9_UNLOCKED_DOOR1
-	ret
+	callfar CheckAllCardKeyEvents
+	jp Load9FCheckCardKeyText
 .next2
 	cp $3
 	jr nz, .next3
 	SetEventAfterBranchReuseHL EVENT_SILPH_CO_9_UNLOCKED_DOOR3, EVENT_SILPH_CO_9_UNLOCKED_DOOR1
-	ret
+	callfar CheckAllCardKeyEvents
+	jp Load9FCheckCardKeyText
 .next3
 	cp $4
 	ret nz
 	SetEventAfterBranchReuseHL EVENT_SILPH_CO_9_UNLOCKED_DOOR4, EVENT_SILPH_CO_9_UNLOCKED_DOOR1
+	callfar CheckAllCardKeyEvents
+	jp Load9FCheckCardKeyText
+
+
+Load9FCheckCardKeyText:
+	CheckEvent EVENT_ALL_CARD_KEY_DOORS_OPENED
+	ret z
+	ld a, 5
+	ldh [hSpriteIndexOrTextID], a
+	call DisplayTextID
 	ret
+
+SilphCo9Text5:
+	text_asm
+	callfar PrintCardKeyDoneText
+	jp TextScriptEnd
 
 SilphCo9F_ScriptPointers:
 	dw CheckFightingMapTrainers
@@ -128,6 +146,7 @@ SilphCo9F_TextPointers:
 	dw SilphCo9Text2
 	dw SilphCo9Text3
 	dw SilphCo9Text4
+	dw SilphCo9Text5
 
 SilphCo9TrainerHeaders:
 	def_trainers 2

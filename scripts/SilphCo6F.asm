@@ -32,7 +32,21 @@ SilphCo6Script_1a1e6:
 	and a
 	ret z
 	SetEvent EVENT_SILPH_CO_6_UNLOCKED_DOOR
+	callfar CheckAllCardKeyEvents
+	jp Load6FCheckCardKeyText
+
+Load6FCheckCardKeyText:
+	CheckEvent EVENT_ALL_CARD_KEY_DOORS_OPENED
+	ret z
+	ld a, 11
+	ldh [hSpriteIndexOrTextID], a
+	call DisplayTextID
 	ret
+
+SilphCo6Text11:
+	text_asm
+	callfar PrintCardKeyDoneText
+	jp TextScriptEnd
 
 SilphCo6F_ScriptPointers:
 	dw CheckFightingMapTrainers
@@ -50,6 +64,7 @@ SilphCo6F_TextPointers:
 	dw SilphCo6Text8
 	dw PickUpItemText
 	dw PickUpItemText
+	dw SilphCo6Text11
 
 SilphCo6TrainerHeaders:
 	def_trainers 6

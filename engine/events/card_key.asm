@@ -58,7 +58,56 @@ PrintCardKeyText:
 	ldh [hSpriteIndexOrTextID], a
 	jp PrintPredefTextID
 
+CheckAllCardKeyEvents::
+	; FIXED: when every card key door has been opened, the CARD KEY is removed from inventory.
+	CheckBothEventsSet EVENT_SILPH_CO_2_UNLOCKED_DOOR1, EVENT_SILPH_CO_2_UNLOCKED_DOOR2
+	ret nz
+	CheckBothEventsSet EVENT_SILPH_CO_3_UNLOCKED_DOOR1, EVENT_SILPH_CO_3_UNLOCKED_DOOR2
+	ret nz
+	CheckBothEventsSet EVENT_SILPH_CO_4_UNLOCKED_DOOR1, EVENT_SILPH_CO_4_UNLOCKED_DOOR2
+	ret nz
+	CheckBothEventsSet EVENT_SILPH_CO_5_UNLOCKED_DOOR1, EVENT_SILPH_CO_5_UNLOCKED_DOOR2
+	ret nz
+	CheckEvent EVENT_SILPH_CO_5_UNLOCKED_DOOR3
+	ret z
+	CheckEvent EVENT_SILPH_CO_6_UNLOCKED_DOOR
+	ret z
+	CheckBothEventsSet EVENT_SILPH_CO_7_UNLOCKED_DOOR1, EVENT_SILPH_CO_7_UNLOCKED_DOOR2
+	ret nz
+	CheckEvent EVENT_SILPH_CO_7_UNLOCKED_DOOR3
+	ret z
+	CheckEvent EVENT_SILPH_CO_8_UNLOCKED_DOOR
+	ret z
+	CheckBothEventsSet EVENT_SILPH_CO_9_UNLOCKED_DOOR1, EVENT_SILPH_CO_9_UNLOCKED_DOOR2
+	ret nz
+	CheckBothEventsSet EVENT_SILPH_CO_9_UNLOCKED_DOOR3, EVENT_SILPH_CO_9_UNLOCKED_DOOR4
+	ret nz
+	CheckEvent EVENT_SILPH_CO_10_UNLOCKED_DOOR
+	ret z
+	CheckEvent EVENT_SILPH_CO_11_UNLOCKED_DOOR
+	ret z
+	; if we reached here, every card key door has been opened.
+	SetEvent EVENT_ALL_CARD_KEY_DOORS_OPENED
+	ret
+
+PrintCardKeyDoneText::
+	ld b, CARD_KEY
+	predef GetIndexOfItemInBag
+	ld a, b
+	ld [wWhichPokemon], a ; load item index to be removed
+	ld hl, wNumBagItems
+	ld a, 1 ; one item
+	ld [wItemQuantity], a
+	call RemoveItemFromInventory
+	ld hl, CardKeyDoneText
+	call PrintText
+	jp TextScriptEnd
+
 INCLUDE "data/events/card_key_maps.asm"
+
+CardKeyDoneText::
+	text_far _CardKeyDoneText
+	text_end
 
 CardKeySuccessText::
 	text_far _CardKeySuccessText1

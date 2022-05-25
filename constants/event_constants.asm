@@ -182,7 +182,8 @@
 ; Cinnabar Island events
 	const_next $278
 	const EVENT_MANSION_SWITCH_ON
-	const_skip 16
+	const EVENT_USED_SECRET_KEY
+	const_skip 15
 	const EVENT_BEAT_MANSION_1_TRAINER_0
 	const_skip 13
 	const EVENT_GOT_CINNABAR_APEX_CHIPS
@@ -618,7 +619,7 @@
 
 ; Rocket Hideout events
 	const_next $670
-	const_skip
+	const EVENT_USED_LIFT_KEY
 	const EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_0
 	const EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_1
 	const EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_2
@@ -717,7 +718,7 @@
 	const EVENT_SILPH_CO_11_UNLOCKED_DOOR
 	const_skip 4
 	const EVENT_GOT_MASTER_BALL
-	const_skip
+	const EVENT_ALL_CARD_KEY_DOORS_OPENED
 	const EVENT_BEAT_SILPH_CO_GIOVANNI
 
 ; Pokémon Mansion events

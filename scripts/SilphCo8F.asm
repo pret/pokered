@@ -68,7 +68,22 @@ SilphCo8Script_5656d:
 	and a
 	ret z
 	SetEvent EVENT_SILPH_CO_8_UNLOCKED_DOOR
+	callfar CheckAllCardKeyEvents
+	jp Load8FCheckCardKeyText
+
+
+Load8FCheckCardKeyText:
+	CheckEvent EVENT_ALL_CARD_KEY_DOORS_OPENED
+	ret z
+	ld a, 5
+	ldh [hSpriteIndexOrTextID], a
+	call DisplayTextID
 	ret
+
+SilphCo8Text5:
+	text_asm
+	callfar PrintCardKeyDoneText
+	jp TextScriptEnd
 
 SilphCo8F_ScriptPointers:
 	dw CheckFightingMapTrainers
@@ -80,6 +95,7 @@ SilphCo8F_TextPointers:
 	dw SilphCo8Text2
 	dw SilphCo8Text3
 	dw SilphCo8Text4
+	dw SilphCo8Text5
 
 SilphCo8TrainerHeaders:
 	def_trainers 2

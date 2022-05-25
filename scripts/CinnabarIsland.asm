@@ -13,8 +13,7 @@ CinnabarIsland_ScriptPointers:
 	dw CinnabarIslandScript1
 
 CinnabarIslandScript0:
-	ld b, SECRET_KEY
-	call IsItemInBag
+	CheckEvent EVENT_USED_SECRET_KEY
 	ret nz
 	ld a, [wYCoord]
 	cp 4
@@ -27,6 +26,8 @@ CinnabarIslandScript0:
 	ld a, $8
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
+	CheckEvent EVENT_USED_SECRET_KEY
+	ret nz
 	xor a
 	ldh [hJoyHeld], a
 	ld a, $1
@@ -61,6 +62,38 @@ CinnabarIsland_TextPointers:
 	dw CinnabarIslandText8
 
 CinnabarIslandText8:
+	text_asm
+	ld b, SECRET_KEY
+	predef GetIndexOfItemInBag
+	ld a, b
+	cp $FF ; not in bag
+	jr z, .noKey
+	; FIXED: if we have the SECRET_KEY, remove it from bag and unlock the door forever
+	ld [wWhichPokemon], a ; load item index to be removed
+	ld hl, wNumBagItems
+	ld a, 1 ; one item
+	ld [wItemQuantity], a
+	call RemoveItemFromInventory
+	SetEvent EVENT_USED_SECRET_KEY
+    ld a, SFX_WITHDRAW_DEPOSIT
+    call PlaySound
+    call WaitForSoundToFinish
+    ld a, SFX_59
+    call PlaySound
+    call WaitForSoundToFinish
+	ld hl, UnlockedDoorText
+	call PrintText
+	jp TextScriptEnd
+.noKey
+	ld hl, NoKeyText
+	call PrintText
+	jp TextScriptEnd
+
+UnlockedDoorText:
+	text_far _UnlockedCinnabarGymDoorText
+	text_end
+
+NoKeyText:
 	text_far _CinnabarIslandText8
 	text_end
 

@@ -32,7 +32,22 @@ SilphCo10Text_5a176:
 	and a
 	ret z
 	SetEvent EVENT_SILPH_CO_10_UNLOCKED_DOOR
+	callfar CheckAllCardKeyEvents
+	jp Load10FCheckCardKeyText
+
+
+Load10FCheckCardKeyText:
+	CheckEvent EVENT_ALL_CARD_KEY_DOORS_OPENED
+	ret z
+	ld a, 7
+	ldh [hSpriteIndexOrTextID], a
+	call DisplayTextID
 	ret
+
+SilphCo10Text7:
+	text_asm
+	callfar PrintCardKeyDoneText
+	jp TextScriptEnd
 
 SilphCo10F_ScriptPointers:
 	dw CheckFightingMapTrainers
@@ -46,6 +61,7 @@ SilphCo10F_TextPointers:
 	dw PickUpItemText
 	dw PickUpItemText
 	dw PickUpItemText
+	dw SilphCo10Text7
 
 SilphCo10TrainerHeaders:
 	def_trainers

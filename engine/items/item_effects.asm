@@ -82,13 +82,13 @@ ItemUsePtrTable:
 	dw ItemUseMedicine   ; SODA_POP
 	dw ItemUseMedicine   ; LEMONADE
 	dw UnusableItem      ; S_S_TICKET
-	dw UnusableItem      ; GOLD_TEETH
+	dw ItemNotYours      ; GOLD_TEETH
 	dw ItemUseXStat      ; X_ATTACK
 	dw ItemUseXStat      ; X_DEFEND
 	dw ItemUseXStat      ; X_SPEED
 	dw ItemUseXStat      ; X_SPECIAL
-	dw UnusableItem      ; LOST_WALLET (used to be coin case)
-	dw ItemUseOaksParcel ; OAKS_PARCEL
+	dw ItemNotYours      ; LOST_WALLET (used to be coin case)
+	dw ItemNotYours      ; OAKS_PARCEL
 	dw ItemUseItemfinder ; ITEMFINDER
 	dw UnusableItem      ; SILPH_SCOPE
 	dw ItemUsePokeflute  ; POKE_FLUTE
@@ -2110,7 +2110,7 @@ FishingInit:
 	scf ; can't fish when surfing
 	ret
 
-ItemUseOaksParcel:
+ItemNotYours:
 	jp ItemUseNotYoursToUse
 
 ItemUseItemfinder:

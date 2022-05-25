@@ -68,7 +68,21 @@ SilphCo11Script_62163:
 	and a
 	ret z
 	SetEvent EVENT_SILPH_CO_11_UNLOCKED_DOOR
+	callfar CheckAllCardKeyEvents
+	jp Load11FCheckCardKeyText
+
+Load11FCheckCardKeyText:
+	CheckEvent EVENT_ALL_CARD_KEY_DOORS_OPENED
+	ret z
+	ld a, 7
+	ldh [hSpriteIndexOrTextID], a
+	call DisplayTextID
 	ret
+
+SilphCo11Text7:
+	text_asm
+	callfar PrintCardKeyDoneText
+	jp TextScriptEnd
 
 SilphCo11Script_6216d:
 	ld hl, MissableObjectIDs_6219b
@@ -279,6 +293,7 @@ SilphCo11F_TextPointers:
 	dw SilphCo11Text4
 	dw SilphCo11Text5
 	dw SilphCo11Text6
+	dw SilphCo11Text7
 
 SilphCo11TrainerHeaders:
 	def_trainers 4

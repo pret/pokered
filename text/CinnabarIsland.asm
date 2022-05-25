@@ -35,3 +35,9 @@ _CinnabarIslandText7::
 	para "The Hot-Headed"
 	line "Quiz Master!"
 	done
+
+_UnlockedCinnabarGymDoorText::
+	text "<PLAYER> unlocked"
+	line "the door with the"
+	cont "SECRET KEY!"
+	done	

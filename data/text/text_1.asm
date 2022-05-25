@@ -13,6 +13,18 @@ _CardKeyFailText::
 	line "CARD KEY!"
 	done
 
+_CardKeyDoneText::
+	text "All the CARD KEY"
+	line "doors have been"
+	cont "opened!"
+	
+	para "Don't need this"
+	line "CARD KEY anymore."
+
+	para "<PLAYER> left it"
+	line "in the card slot!"
+	done
+
 _TrainerNameText::
 	text_ram wcd6d
 	text ": @"

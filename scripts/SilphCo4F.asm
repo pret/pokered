@@ -81,10 +81,28 @@ SilphCo4Script_19d89:
 	cp $1
 	jr nz, .next
 	SetEventReuseHL EVENT_SILPH_CO_4_UNLOCKED_DOOR1
-	ret
+	callfar CheckAllCardKeyEvents
+	jp Load4FCheckCardKeyText
 .next
 	SetEventAfterBranchReuseHL EVENT_SILPH_CO_4_UNLOCKED_DOOR2, EVENT_SILPH_CO_4_UNLOCKED_DOOR1
+	callfar CheckAllCardKeyEvents
+	jp Load4FCheckCardKeyText
+
+
+
+Load4FCheckCardKeyText:
+	CheckEvent EVENT_ALL_CARD_KEY_DOORS_OPENED
+	ret z
+	ld a, 8
+	ldh [hSpriteIndexOrTextID], a
+	call DisplayTextID
 	ret
+
+SilphCo4Text8:
+	text_asm
+	callfar PrintCardKeyDoneText
+	jp TextScriptEnd
+
 
 SilphCo4F_ScriptPointers:
 	dw CheckFightingMapTrainers
@@ -99,6 +117,7 @@ SilphCo4F_TextPointers:
 	dw PickUpItemText
 	dw PickUpItemText
 	dw PickUpItemText
+	dw SilphCo4Text8
 
 SilphCo4TrainerHeaders:
 	def_trainers 2

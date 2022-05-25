@@ -91,15 +91,32 @@ SilphCo7Text_51bf4:
 	cp $1
 	jr nz, .next1
 	SetEventReuseHL EVENT_SILPH_CO_7_UNLOCKED_DOOR1
-	ret
+	callfar CheckAllCardKeyEvents
+	jp Load7FCheckCardKeyText
 .next1
 	cp $2
 	jr nz, .next2
 	SetEventAfterBranchReuseHL EVENT_SILPH_CO_7_UNLOCKED_DOOR2, EVENT_SILPH_CO_7_UNLOCKED_DOOR1
-	ret
+	callfar CheckAllCardKeyEvents
+	jp Load7FCheckCardKeyText
 .next2
 	SetEventAfterBranchReuseHL EVENT_SILPH_CO_7_UNLOCKED_DOOR3, EVENT_SILPH_CO_7_UNLOCKED_DOOR1
+	callfar CheckAllCardKeyEvents
+	jp Load7FCheckCardKeyText
+
+
+Load7FCheckCardKeyText:
+	CheckEvent EVENT_ALL_CARD_KEY_DOORS_OPENED
+	ret z
+	ld a, 16
+	ldh [hSpriteIndexOrTextID], a
+	call DisplayTextID
 	ret
+
+SilphCo7Text16:
+	text_asm
+	callfar PrintCardKeyDoneText
+	jp TextScriptEnd
 
 SilphCo7Text_51c0c:
 	xor a
@@ -278,6 +295,7 @@ SilphCo7F_TextPointers:
 	dw SilphCo7Text13
 	dw SilphCo7Text14
 	dw SilphCo7Text15
+	dw SilphCo7Text16
 
 SilphCo7TrainerHeaders:
 	def_trainers 5

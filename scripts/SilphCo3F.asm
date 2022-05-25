@@ -45,10 +45,25 @@ SilphCo3Script_59fad:
 	cp $1
 	jr nz, .next
 	SetEventReuseHL EVENT_SILPH_CO_3_UNLOCKED_DOOR1
-	ret
+	callfar CheckAllCardKeyEvents
+	jp Load3FCheckCardKeyText
 .next
 	SetEventAfterBranchReuseHL EVENT_SILPH_CO_3_UNLOCKED_DOOR2, EVENT_SILPH_CO_3_UNLOCKED_DOOR1
+	callfar CheckAllCardKeyEvents
+	jp Load3FCheckCardKeyText
+
+Load3FCheckCardKeyText:
+	CheckEvent EVENT_ALL_CARD_KEY_DOORS_OPENED
+	ret z
+	ld a, 5
+	ldh [hSpriteIndexOrTextID], a
+	call DisplayTextID
 	ret
+
+SilphCo3Text5:
+	text_asm
+	callfar PrintCardKeyDoneText
+	jp TextScriptEnd
 
 SilphCo3F_ScriptPointers:
 	dw CheckFightingMapTrainers
@@ -60,6 +75,7 @@ SilphCo3F_TextPointers:
 	dw SilphCo3Text2
 	dw SilphCo3Text3
 	dw PickUpItemText
+	dw SilphCo3Text5
 
 SilphCo3TrainerHeaders:
 	def_trainers 2

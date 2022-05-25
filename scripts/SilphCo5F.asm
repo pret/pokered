@@ -55,15 +55,32 @@ SilphCo5Script_19f9e:
 	cp $1
 	jr nz, .next1
 	SetEventReuseHL EVENT_SILPH_CO_5_UNLOCKED_DOOR1
+	callfar CheckAllCardKeyEvents
+	jp Load5FCheckCardKeyText
 	ret
 .next1
 	cp $2
 	jr nz, .next2
 	SetEventAfterBranchReuseHL EVENT_SILPH_CO_5_UNLOCKED_DOOR2, EVENT_SILPH_CO_5_UNLOCKED_DOOR1
-	ret
+	callfar CheckAllCardKeyEvents
+	jp Load5FCheckCardKeyText
 .next2
 	SetEventAfterBranchReuseHL EVENT_SILPH_CO_5_UNLOCKED_DOOR3, EVENT_SILPH_CO_5_UNLOCKED_DOOR1
+	callfar CheckAllCardKeyEvents
+	jp Load5FCheckCardKeyText
+
+Load5FCheckCardKeyText:
+	CheckEvent EVENT_ALL_CARD_KEY_DOORS_OPENED
+	ret z
+	ld a, 12
+	ldh [hSpriteIndexOrTextID], a
+	call DisplayTextID
 	ret
+
+SilphCo5Text12:
+	text_asm
+	callfar PrintCardKeyDoneText
+	jp TextScriptEnd
 
 SilphCo5F_ScriptPointers:
 	dw CheckFightingMapTrainers
@@ -82,6 +99,7 @@ SilphCo5F_TextPointers:
 	dw SilphCo5Text9
 	dw SilphCo5Text10
 	dw SilphCo5Text11
+	dw SilphCo5Text12
 
 SilphCo5TrainerHeaders:
 	def_trainers 2
