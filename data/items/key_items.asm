@@ -4,7 +4,7 @@ KeyItemFlags:
 	dbit FALSE ; ULTRA_BALL
 	dbit FALSE ; GREAT_BALL
 	dbit FALSE ; POKE_BALL
-	dbit TRUE  ; TOWN_MAP
+	dbit FALSE ; HYPER_BALL
 	dbit TRUE  ; BICYCLE
 	dbit TRUE  ; SURFBOARD
 	dbit TRUE  ; SAFARI_BALL
@@ -74,7 +74,7 @@ KeyItemFlags:
 	dbit TRUE  ; SILPH_SCOPE
 	dbit TRUE  ; POKE_FLUTE
 	dbit TRUE  ; LIFT_KEY
-	dbit FALSE ; HYPER_BALL
+	dbit TRUE  ; TOWN_MAP
 	dbit TRUE  ; OLD_ROD
 	dbit TRUE  ; GOOD_ROD
 	dbit TRUE  ; SUPER_ROD

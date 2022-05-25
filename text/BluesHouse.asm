@@ -13,10 +13,16 @@ _DaisyOfferMapText::
 
 _GotMapText::
 	text "<PLAYER> got a"
-	line "@"
-	text_ram wStringBuffer
-	text "!@"
+	line "TOWN MAP!@"
 	text_end
+
+_MapHelpText::
+	text "Press SELECT"
+	line "when looking at"
+	cont "your POKéDEX to"
+	cont "view the TOWN"
+	cont "MAP. Easy!"
+	done
 
 _DaisyBagFullText::
 	text "You have too much"
@@ -27,6 +33,8 @@ _DaisyUseMapText::
 	text "Use the TOWN MAP"
 	line "to find out where"
 	cont "you are."
+	para "Just press SELECT"
+	line "in the POKéDEX!"
 	done
 
 _BluesHouseDaisyWalkingText::

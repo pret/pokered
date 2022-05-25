@@ -35,15 +35,17 @@ BluesHouseDaisySittingText:
 .give_town_map
 	ld hl, DaisyOfferMapText
 	call PrintText
-	lb bc, TOWN_MAP, 1
-	call GiveItem
-	jr nc, .bag_full
+;	lb bc, TOWN_MAP, 1
+;	call GiveItem ; FIXED: TOWN MAP is not treated as a bag item, pressing SELECT in the pokedex will open it after having received it from daisy.
+;	jr nc, .bag_full
 	ld a, HS_TOWN_MAP
 	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld hl, GotMapText
 	call PrintText
 	SetEvent EVENT_GOT_TOWN_MAP
+	ld hl, MapHelpText
+	call PrintText
 	jr .done
 
 .got_town_map
@@ -51,9 +53,9 @@ BluesHouseDaisySittingText:
 	call PrintText
 	jr .done
 
-.bag_full
-	ld hl, DaisyBagFullText
-	call PrintText
+;.bag_full
+;	ld hl, DaisyBagFullText
+;	call PrintText
 .done
 	jp TextScriptEnd
 
@@ -68,6 +70,10 @@ DaisyOfferMapText:
 GotMapText:
 	text_far _GotMapText
 	sound_get_key_item
+	text_end
+
+MapHelpText:
+	text_far _MapHelpText
 	text_end
 
 DaisyBagFullText:

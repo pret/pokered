@@ -11,7 +11,7 @@
 	const ULTRA_BALL    ; $02
 	const GREAT_BALL    ; $03
 	const POKE_BALL     ; $04
-	const TOWN_MAP      ; $05
+	const HYPER_BALL    ; $05
 	const BICYCLE       ; $06
 	const SURFBOARD     ; $07 buggy?
 	const SAFARI_BALL   ; $08
@@ -83,7 +83,7 @@ SAFARI_ROCK EQU $16 ; overload
 	const SILPH_SCOPE   ; $48
 	const POKE_FLUTE    ; $49
 	const LIFT_KEY      ; $4A
-	const HYPER_BALL    ; $4B
+	const TOWN_MAP      ; $4B ; pointless item after changes
 	const OLD_ROD       ; $4C
 	const GOOD_ROD      ; $4D
 	const SUPER_ROD     ; $4E
