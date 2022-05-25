@@ -1,5 +1,6 @@
 SeafoamIslandsB3F_Script:
 	call EnableAutoTextBoxDrawing
+	call CheckShowFossil
 	ld hl, wFlags_0xcd60
 	bit 7, [hl]
 	res 7, [hl]
@@ -43,6 +44,27 @@ SeafoamIslandsB3F_Script:
 	ld hl, SeafoamIslandsB3F_ScriptPointers
 	ld a, [wSeafoamIslandsB3FCurScript]
 	jp CallFunctionInTable
+
+CheckShowFossil:
+	CheckEvent EVENT_GOT_DOME_FOSSIL
+	jr nz, .hideDomeFossil
+	jr .next
+.hideDomeFossil
+	ld a, HS_SEAFOAM_ISLANDS_B3F_DOME_FOSSIL
+	ld [wMissableObjectIndex], a
+	predef HideObject
+.next
+	CheckEvent EVENT_GOT_HELIX_FOSSIL
+	jr nz, .hideHelixFossil
+	jr .done
+.hideHelixFossil
+	ld a, HS_SEAFOAM_ISLANDS_B3F_HELIX_FOSSIL
+	ld [wMissableObjectIndex], a
+	predef HideObject	
+.done
+	ret
+
+
 
 Seafoam4HolesCoords:
 	dbmapcoord  3, 16
@@ -147,3 +169,5 @@ SeafoamIslandsB3F_TextPointers:
 	dw BoulderText
 	dw BoulderText
 	dw BoulderText
+	dw PickUpItemText
+	dw PickUpItemText

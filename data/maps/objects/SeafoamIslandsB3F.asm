@@ -19,5 +19,7 @@ SeafoamIslandsB3F_Object:
 	object_event  9, 14, SPRITE_BOULDER, STAY, BOULDER_MOVEMENT_BYTE_2, 4 ; person
 	object_event 18,  6, SPRITE_BOULDER, STAY, NONE, 5 ; person
 	object_event 19,  6, SPRITE_BOULDER, STAY, NONE, 6 ; person
+	object_event 29, 16, SPRITE_FOSSIL, STAY, NONE, 7, DOME_FOSSIL ; person
+	object_event 29, 17, SPRITE_FOSSIL, STAY, NONE, 8, HELIX_FOSSIL  ; person
 
 	def_warps_to SEAFOAM_ISLANDS_B3F
