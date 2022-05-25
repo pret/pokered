@@ -83,7 +83,7 @@ SAFARI_ROCK EQU $16 ; overload
 	const SILPH_SCOPE   ; $48
 	const POKE_FLUTE    ; $49
 	const LIFT_KEY      ; $4A
-	const EXP_ALL       ; $4B ; pointless item
+	const HYPER_BALL    ; $4B
 	const OLD_ROD       ; $4C
 	const GOOD_ROD      ; $4D
 	const SUPER_ROD     ; $4E
@@ -115,6 +115,10 @@ NUM_FLOORS EQU const_value - 1 - NUM_ITEMS
 	const TREE_CERULEAN_CITY ;63
 	const TREE_ROUTE_9  ;64
 	const TREE_FUCHSIA_CITY ;65
+
+	const SAFARI_CLASSIC  ; 66
+	const SAFARI_RANGER_HUNT ;67
+	const SAFARI_FREE_ROAM  ;68
 
 	const_next $C4
 

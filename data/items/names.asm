@@ -74,7 +74,7 @@ ItemNames::
 	li "SILPH SCOPE"
 	li "POKé FLUTE"
 	li "LIFT KEY"
-	li "EXP.ALL"
+	li "HYPER BALL"
 	li "OLD ROD"
 	li "GOOD ROD"
 	li "SUPER ROD"
@@ -103,3 +103,7 @@ ItemNames::
 	li "CERULEAN CITY"
 	li "ROUTE 9"
 	li "FUCHSIA CITY"
+
+	li "CLASSIC"
+	li "RANGER HUNT"
+	li "FREE ROAM"

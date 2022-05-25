@@ -74,7 +74,7 @@ KeyItemFlags:
 	dbit TRUE  ; SILPH_SCOPE
 	dbit TRUE  ; POKE_FLUTE
 	dbit TRUE  ; LIFT_KEY
-	dbit FALSE ; EXP_ALL
+	dbit FALSE ; HYPER_BALL
 	dbit TRUE  ; OLD_ROD
 	dbit TRUE  ; GOOD_ROD
 	dbit TRUE  ; SUPER_ROD

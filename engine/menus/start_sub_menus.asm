@@ -132,7 +132,7 @@ StartMenu_Pokemon::
 .fly
 	bit BIT_THUNDERBADGE, a
 	jp z, .newBadgeRequired
-	call CheckIfInOutsideMap
+	call CheckIfInFlyMap
 	jr z, .canFly
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMonNicks
@@ -144,11 +144,14 @@ StartMenu_Pokemon::
 	call ChooseFlyDestination
 	ld a, [wd732]
 	bit 3, a ; did the player decide to fly?
-	jp nz, .goBackToMap
+	jr nz, .doFly
 	call LoadFontTilePatterns
 	ld hl, wd72e
 	set 1, [hl]
 	jp StartMenu_Pokemon
+.doFly
+	callfar ClearSafariFlags
+	jp .goBackToMap
 .cut
 	bit BIT_CASCADEBADGE, a
 	jp z, .newBadgeRequired
@@ -223,6 +226,7 @@ StartMenu_Pokemon::
 	ld c, 60
 	call DelayFrames
 	call GBPalWhiteOutWithDelay3
+	callfar ClearSafariFlags
 	jp .goBackToMap
 .warpToLastPokemonCenterText
 	text_far _WarpToLastPokemonCenterText

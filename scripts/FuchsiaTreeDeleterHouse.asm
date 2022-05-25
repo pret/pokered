@@ -267,7 +267,7 @@ FuchsiaTreeDeleterFuchsiaCity:
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
-	xor a
+	and a
 	jr nz, .done
 	xor a
 	ldh [hMoney + 2], a

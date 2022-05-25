@@ -4,7 +4,7 @@
 	;   hp  atk  def  spd  spc
 
 	db NORMAL, NORMAL ; type
-	db 25 ; catch rate
+	db 45 ; catch rate
 	db 129 ; base exp
 
 	INCBIN "gfx/pokemon/front/clefable.pic", 0, 1 ; sprite dimensions

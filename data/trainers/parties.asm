@@ -75,7 +75,7 @@ YoungsterData:
 	db 19, SANDSHREW, ZUBAT, 0
 	db 17, RATTATA, RATTATA, RATICATE, 0
 	db 18, NIDORAN_M, NIDORINO, 0
-; Unused
+; Unused -> NEW: Pewter Museum
 	db 17, SPEAROW, RATTATA, RATTATA, SPEAROW, 0
 
 BugCatcherData:
@@ -211,6 +211,12 @@ PokemaniacData:
 	db 40, CHARMELEON, LAPRAS, LICKITUNG, 0
 ; Rock Tunnel 1F
 	db 23, CUBONE, SLOWPOKE, 0
+; Safari Zone Center
+	db 40, ARCANINE, TANGELA, NINETALES, 0
+; Safari Zone North
+	db 40, LAPRAS, LAPRAS, LICKITUNG, 0
+; Safari Zone West
+	db 40, MAGMAR, LAPRAS, LICKITUNG, 0
 
 SuperNerdData:
 ; Mt. Moon 1F
@@ -221,8 +227,9 @@ SuperNerdData:
 	db 20, VOLTORB, KOFFING, VOLTORB, MAGNEMITE, 0
 	db 22, GRIMER, MUK, GRIMER, 0
 	db 26, KOFFING, 0
-; Unused
+; Safari Zone North
 	db 22, KOFFING, MAGNEMITE, WEEZING, 0
+; Unused
 	db 20, MAGNEMITE, MAGNEMITE, KOFFING, MAGNEMITE, 0
 	db 24, MAGNEMITE, VOLTORB, 0
 ; Cinnabar Gym
@@ -286,8 +293,9 @@ BikerData:
 	db 29, KOFFING, MUK, 0
 
 BurglarData:
-; Unused
+; Safari Zone West
 	db 29, GROWLITHE, VULPIX, 0
+; Unused
 	db 33, GROWLITHE, 0
 	db 28, VULPIX, CHARMANDER, PONYTA, 0
 ; Cinnabar Gym
@@ -302,11 +310,15 @@ BurglarData:
 	db 34, GROWLITHE, PONYTA, 0
 
 EngineerData:
-; Unused
+; Safari Zone Center
 	db 21, VOLTORB, MAGNEMITE, 0
 ; Route 11
 	db 21, MAGNEMITE, 0
 	db 18, MAGNEMITE, MAGNEMITE, MAGNETON, 0
+; Safari Zone East
+	db 18, PORYGON, MAGNEMITE, MAGNETON, 0
+; Safari Zone North
+	db 18, GOLBAT, MAGNEMITE, MAGNETON, 0
 
 UnusedJugglerData:
 ; none
@@ -407,12 +419,22 @@ PsychicData:
 	db 34, MR_MIME, KADABRA, 0
 	db 33, SLOWPOKE, SLOWPOKE, SLOWBRO, 0
 	db 38, SLOWBRO, 0
+; Safari Zone East
+	db 33, SLOWPOKE, SLOWPOKE, SLOWBRO, 0
+; Safari Zone West
+	db 33, SLOWPOKE, SLOWPOKE, SLOWBRO, 0
 
 RockerData:
 ; Vermilion Gym
 	db 20, VOLTORB, MAGNEMITE, VOLTORB, 0
 ; Route 12
 	db 29, VOLTORB, ELECTRODE, 0
+; Safari Zone Center
+	db 29, VOLTORB, ELECTRODE, 0
+; Safari Zone East
+	db 29, PIKACHU, ELECTRODE, 0
+; Safari Zone West
+	db 29, SLOWPOKE, ELECTRODE, 0
 
 JugglerData:
 ; Silph Co. 5F
@@ -424,11 +446,15 @@ JugglerData:
 	db 34, DROWZEE, HYPNO, 0
 ; Victory Road 2F
 	db 48, MR_MIME, 0
-; Unused
-	db 33, HYPNO, 0
+; Safari Zone Center
+	db 33, TAUROS, TAUROS, TAUROS, TAUROS, TAUROS, TAUROS, 0
 ; Fuchsia Gym
 	db 38, HYPNO, 0
 	db 34, DROWZEE, KADABRA, 0
+; Safari Zone North
+	db 33, ALAKAZAM, 0
+; Safari Zone West
+	db 33, MR_MIME, 0
 
 TamerData:
 ; Fuchsia Gym
@@ -439,8 +465,11 @@ TamerData:
 	db 39, ARBOK, TAUROS, 0
 ; Victory Road 2F
 	db 44, PERSIAN, GOLDUCK, 0
-; Unused
+; Safari Zone Center
 	db 42, RHYHORN, PRIMEAPE, ARBOK, TAUROS, 0
+; Safari Zone West
+	db 42, RHYDON, PRIMEAPE, ARBOK, TAUROS, 0
+	db 42, PIDGEOT, PRIMEAPE, ARBOK, TAUROS, 0
 
 BirdKeeperData:
 ; Route 13
@@ -612,9 +641,11 @@ CooltrainerMData:
 	db 45, KINGLER, STARMIE, 0
 ; Victory Road 1F
 	db 42, IVYSAUR, WARTORTLE, CHARMELEON, CHARIZARD, 0
-; Unused
+; Safari Zone East
 	db 44, IVYSAUR, WARTORTLE, CHARMELEON, 0
+; Safari Zone North
 	db 49, NIDOKING, 0
+; Unused
 	db 44, KINGLER, CLOYSTER, 0
 ; Viridian Gym
 	db 39, SANDSLASH, DUGTRIO, 0
@@ -630,9 +661,11 @@ CooltrainerFData:
 	db 46, VILEPLUME, BUTTERFREE, 0
 ; Victory Road 1F
 	db 44, PERSIAN, NINETALES, 0
-; Unused
+; Safari Zone East
 	db 45, IVYSAUR, VENUSAUR, 0
+; Safari Zone North
 	db 45, NIDORINA, NIDOQUEEN, 0
+; Unused
 	db 43, PERSIAN, NINETALES, RAICHU, 0
 
 BrunoData:

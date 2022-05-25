@@ -4,7 +4,7 @@
 	;   hp  atk  def  spd  spc
 
 	db ICE, FLYING ; type
-	db 3 ; catch rate
+	db 25 ; catch rate
 	db 215 ; base exp
 
 	INCBIN "gfx/pokemon/front/articuno.pic", 0, 1 ; sprite dimensions

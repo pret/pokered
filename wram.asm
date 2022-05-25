@@ -1779,9 +1779,11 @@ wPokedexOwnedEnd::
 wPokedexSeen:: flag_array NUM_POKEMON
 wPokedexSeenEnd::
 
-wNumBagItems:: db
-; item, quantity
-wBagItems:: ds BAG_ITEM_CAPACITY * 2 + 1
+;;;;;
+UNION
+ds 42 ; wNumBagItems and wBagItems used to be here
+ENDU
+;;;;;
 
 wPlayerMoney:: ds 3 ; BCD
 
@@ -1873,9 +1875,25 @@ wWarpEntries:: ds 32 * 4 ; Y, X, warp ID, map ID
 ; if $ff, the player's coordinates are not updated when entering the map
 wDestinationWarpID:: db
 
+
+
+UNION
+; original size of this empty space
+ds 128
+
+NEXTU
+
 wPocketAbraNick:: ds NAME_LENGTH
 
-	ds 117
+;;;; moved from after wPokedexSeenEnd
+wNumBagItems:: db
+; item, quantity
+wBagItems:: ds BAG_ITEM_CAPACITY * 2 + 1
+;;;;
+
+; 55 bytes remaining in union
+
+ENDU
 
 ; number of signs in the current map (up to 16)
 wNumSigns:: db
@@ -1998,7 +2016,13 @@ wRedsHouse2FCurScript:: db
 wViridianMartCurScript:: db
 wRoute22GateCurScript:: db
 wCeruleanCityCurScript:: db
-	ds 7
+	ds 1
+wMuseum2FCurScript:: db ; NEW
+wSafariZoneCenterCurScript:: db ; NEW
+wSafariZoneEastCurScript:: db ; NEW
+wSafariZoneNorthCurScript:: db ; NEW
+wSafariZoneWestCurScript:: db ; NEW
+	ds 1
 wSSAnneBowCurScript:: db
 wViridianForestCurScript:: db
 wMuseum1FCurScript:: db
@@ -2314,7 +2338,12 @@ wUnusedDA38:: db
 ; mostly copied from map-specific map script pointer and written back later
 wCurMapScript:: db
 
-	ds 1
+
+; Current safari zone game type
+; 0 = Classic
+; 1 = Ranger Hunt
+; 2 = Free Roam
+wSafariType:: db 
 
 ; bit 0 -> Squirtle sprite version: 0 = RB, 1 = RG
 ; bit 1 -> Blastoise sprite version: 0 = RB, 1 = RG

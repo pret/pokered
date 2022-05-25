@@ -817,22 +817,22 @@ FaintEnemyPokemon:
 	call SaveScreenTilesToBuffer1
 	xor a
 	ld [wBattleResult], a
-	ld b, EXP_ALL
-	call IsItemInBag
-	push af
-	jr z, .giveExpToMonsThatFought ; if no exp all, then jump
+	;ld b, EXP_ALL ; CHANGED: EXP ALL removed from game because it's useless
+	;call IsItemInBag
+	;push af
+	;jr .giveExpToMonsThatFought ; if no exp all, then jump
 
 ; the player has exp all
 ; first, we halve the values that determine exp gain
 ; the enemy mon base stats are added to stat exp, so they are halved
 ; the base exp (which determines normal exp) is also halved
-	ld hl, wEnemyMonBaseStats
-	ld b, $7
-.halveExpDataLoop
-	srl [hl]
-	inc hl
-	dec b
-	jr nz, .halveExpDataLoop
+	;ld hl, wEnemyMonBaseStats
+	;ld b, $7
+;.halveExpDataLoop
+	;srl [hl]
+	;inc hl
+	;dec b
+	;jr nz, .halveExpDataLoop
 
 ; give exp (divided evenly) to the mons that actually fought in battle against the enemy mon that has fainted
 ; if exp all is in the bag, this will be only be half of the stat exp and normal exp, due to the above loop
@@ -840,24 +840,24 @@ FaintEnemyPokemon:
 	xor a
 	ld [wBoostExpByExpAll], a
 	callfar GainExperience
-	pop af
-	ret z ; return if no exp all
+	;pop af
+	ret ; return if no exp all
 
 ; the player has exp all
 ; now, set the gain exp flag for every party member
 ; half of the total stat exp and normal exp will divided evenly amongst every party member
-	ld a, $1
-	ld [wBoostExpByExpAll], a
-	ld a, [wPartyCount]
-	ld b, 0
-.gainExpFlagsLoop
-	scf
-	rl b
-	dec a
-	jr nz, .gainExpFlagsLoop
-	ld a, b
-	ld [wPartyGainExpFlags], a
-	jpfar GainExperience
+;	ld a, $1
+;	ld [wBoostExpByExpAll], a
+;	ld a, [wPartyCount]
+;	ld b, 0
+;.gainExpFlagsLoop
+;	scf
+;	rl b
+;	dec a
+;	jr nz, .gainExpFlagsLoop
+;	ld a, b
+;	ld [wPartyGainExpFlags], a
+;	jpfar GainExperience
 
 EnemyMonFaintedText:
 	text_far _EnemyMonFaintedText
@@ -6216,7 +6216,7 @@ LoadEnemyMonData:
 	ld a, [hli]            ; copy type 2
 	ld [de], a
 	inc de
-	ld a, [hli]            ; copy catch rate
+	ld a, [hli]            ; copy catch rate TODO: alt palette
 	ld [de], a
 	inc de
 	ld a, [wIsInBattle]

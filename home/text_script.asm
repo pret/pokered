@@ -26,6 +26,7 @@ DisplayTextID::
 	dict TEXT_MON_FAINTED,      DisplayPokemonFaintedText
 	dict TEXT_BLACKED_OUT,      DisplayPlayerBlackedOutText
 	dict TEXT_REPEL_WORE_OFF,   DisplayRepelWoreOffText
+	dict TEXT_RANGER_SAFARI_GAME_OVER, DisplayRangerSafariGameOverText
 	
 	cp $FF
 	jp z, CloseTextDisplay
@@ -189,6 +190,10 @@ DisplayPokemonCenterDialogue::
 
 DisplaySafariGameOverText::
 	callfar PrintSafariGameOverText
+	jp AfterDisplayingTextID
+
+DisplayRangerSafariGameOverText::
+	callfar PrintRangerSafariGameOverText
 	jp AfterDisplayingTextID
 
 DisplayPokemonFaintedText::

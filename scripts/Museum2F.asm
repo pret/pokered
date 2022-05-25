@@ -6,6 +6,7 @@ Museum2F_Script:
 	ret
 
 Museum2F_TextPointers:
+	dw Museum2FWalletKid1
 	dw Museum2FText1
 	dw Museum2FText2
 	dw Museum2FText3
@@ -13,7 +14,6 @@ Museum2F_TextPointers:
 	dw Museum2FText5
 	dw Museum2FText6
 	dw Museum2FText7
-	dw Museum2FWalletKid1
 	dw Museum2FWalletKidWalletGive
 	dw ReceivedLostWallet
 	dw WalletKidNoRoomText
@@ -89,10 +89,15 @@ Museum2FWalletKid1:
 .done
 	jp TextScriptEnd
 
+ResetScripts:
+	xor a
+	ld [wCurMapScript], a
+	ret
+
 WalletKidPostBattle:
 	ld a, [wIsInBattle]
 	cp $ff
-	ret z
+	jr z, ResetScripts
 GiveWallet:
 	SetEvent EVENT_BEAT_WALLET_KID
 	ld a, 9
@@ -112,7 +117,7 @@ GiveWallet:
 	call DisplayTextID
 	jr .done
 .done
-	ret
+	jr ResetScripts
 
 Museum2FWalletKid1Intro:
 	text_far _Museum2FWalletKid1

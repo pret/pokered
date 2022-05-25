@@ -138,6 +138,9 @@ UpdateNPCSprite:
 	ld hl, wMapSpriteData
 	add l
 	ld l, a
+	jr nc, .nc ; FIXED: sprites above index 10 wouldn't get the correct movement byte because no carry compensation on the address
+    inc h
+.nc
 	ld a, [hl]        ; read movement byte 2
 	ld [wCurSpriteMovement2], a
 	ld h, HIGH(wSpriteStateData1)

@@ -654,6 +654,19 @@ AIUseGuardSpec:
 ;	ld a, DIRE_HIT
 ;	jp AIPrintItemUse
 
+; if enemy HP is below a 1/[wUnusedC000], store 1 in wUnusedC000.
+AICheckIfHPBelowFractionStore::
+	ld a, [wUnusedC000]
+	call AICheckIfHPBelowFraction
+	jr c, .below
+	xor a
+	jr .done
+.below
+	ld a, 1
+.done
+	ld [wUnusedC000], a 
+	ret
+
 AICheckIfHPBelowFraction:
 ; return carry if enemy trainer's current HP is below 1 / a of the maximum
 	ldh [hDivisor], a

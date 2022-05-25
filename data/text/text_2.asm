@@ -318,6 +318,14 @@ _GameOverText::
 	line "GAME is over!"
 	done
 
+_RangerHuntSuccessText::
+	text "PA: <PLAYER>"
+	line "has defeated all"
+	cont "5 RANGERs!!"
+
+	para "Congratulations!"
+	done
+
 _CinnabarGymQuizStartText::
 	text "#MON Quiz!"
 	line "Here we go!"

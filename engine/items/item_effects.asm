@@ -93,7 +93,7 @@ ItemUsePtrTable:
 	dw UnusableItem      ; SILPH_SCOPE
 	dw ItemUsePokeflute  ; POKE_FLUTE
 	dw UnusableItem      ; LIFT_KEY
-	dw UnusableItem      ; EXP_ALL
+	dw ItemUseBall       ; HYPER_BALL
 	dw ItemUseOldRod     ; OLD_ROD
 	dw ItemUseGoodRod    ; GOOD_ROD
 	dw ItemUseSuperRod   ; SUPER_ROD
@@ -196,6 +196,10 @@ ItemUseBall:
 	cp MASTER_BALL
 	jp z, .captured
 
+	cp HYPER_BALL
+	jr z, .hyperBallCheck
+.loopreturn	
+
 ; Anything will do for the basic Poké Ball.
 	cp POKE_BALL
 	jr z, .checkForAilments
@@ -214,7 +218,24 @@ ItemUseBall:
 	ld a, 150
 	cp b
 	jr c, .loop
-
+	jr .checkForAilments
+.hyperBallCheck
+	ld a, [wEnemyMonActualCatchRate]
+	cp 26 
+	jp nc, .captured ;Hyper Ball always captures pokemon with catch rate >25
+	push hl
+	push bc
+	ld a, 3
+	ld [wUnusedC000], a ; store 1/3 in the fraction to check
+	callfar AICheckIfHPBelowFractionStore
+	pop bc
+	pop hl
+	ld a, [wUnusedC000] ; wUnusedC000 contains the result of AICheckIfHPBelowFractionPredef
+	and a
+	ld a, 0
+	ld [wUnusedC000], a ; reset this variable so it doesn't mess with other places that use it
+	jp nz, .captured
+	jr .loopreturn
 .checkForAilments
 ; Pokémon can be caught more easily with a status ailment.
 ; Depending on the status ailment, a certain value will be subtracted from
@@ -252,14 +273,16 @@ ItemUseBall:
 	ldh [hMultiplier], a
 	call Multiply
 
-; Determine BallFactor. It's 8 for Great Balls and 12 for the others.
+; Determine BallFactor. It's 8 for Great Balls / Hyper Balls and 12 for the others.
 	ld a, [wcf91]
+	ld b, 8
 	cp GREAT_BALL
-	ld a, 12
-	jr nz, .skip1
-	ld a, 8
-
+	jr z, .skip1
+	cp HYPER_BALL
+	jr z, .skip1
+	ld b, 12
 .skip1
+	ld a, b
 ; Note that the results of all division operations are floored.
 
 ; Calculate (MaxHP * 255) / BallFactor.
@@ -337,7 +360,7 @@ ItemUseBall:
 ; Determine BallFactor2.
 ; Poké Ball:         BallFactor2 = 255
 ; Great Ball:        BallFactor2 = 200
-; Ultra/Safari Ball: BallFactor2 = 150
+; Ultra/Safari/Hyper Ball: BallFactor2 = 150
 	ld a, [wcf91]
 	ld b, 255
 	cp POKE_BALL
@@ -1616,11 +1639,8 @@ ItemUseEscapeRope:
 	set 6, [hl]
 	ld hl, wd72e
 	res 4, [hl]
-	ResetEvent EVENT_IN_SAFARI_ZONE
-	xor a
-	ld [wNumSafariBalls], a
-	ld [wSafariZoneGateCurScript], a
-	inc a
+	callfar ClearSafariFlags
+	ld a, 1
 	ld [wEscapedFromBattle], a
 	ld [wActionResultOrTookBattleTurn], a ; item used
 	ld a, [wPseudoItemID]
@@ -1653,6 +1673,7 @@ ItemUsePocketAbra:
 	ld hl, wd72e
 	set 1, [hl]
 	res 4, [hl]
+	callfar ClearSafariFlags
 	call ItemUseReloadOverworldData
 	call Random
 	cp 200
@@ -1727,54 +1748,55 @@ ItemUseXAccuracy:
 ; This function is bugged and never works. It always jumps to ItemUseNotTime.
 ; The Card Key is handled in a different way.
 ItemUseCardKey:
-	xor a
-	call GetTileAndCoordsInFrontOfPlayer
-	ld a, [GetTileAndCoordsInFrontOfPlayer]
-	cp $18
-	jr nz, .next0
-	ld hl, CardKeyTable1
-	jr .next1
-.next0
-	cp $24
-	jr nz, .next2
-	ld hl, CardKeyTable2
-	jr .next1
-.next2
-	cp $5e
-	jp nz, ItemUseNotTime
-	ld hl, CardKeyTable3
-.next1
-	ld a, [wCurMap]
-	ld b, a
-.loop
-	ld a, [hli]
-	cp -1
-	jp z, ItemUseNotTime
-	cp b
-	jr nz, .nextEntry1
-	ld a, [hli]
-	cp d
-	jr nz, .nextEntry2
-	ld a, [hli]
-	cp e
-	jr nz, .nextEntry3
-	ld a, [hl]
-	jr .done
-.nextEntry1
-	inc hl
-.nextEntry2
-	inc hl
-.nextEntry3
-	inc hl
-	jr .loop
-.done
-	ld hl, ItemUseText00
-	call PrintText
-	ld hl, wd728
-	set 7, [hl]
-	ret
+	jp ItemUseNotTime
+;	xor a
+;	call GetTileAndCoordsInFrontOfPlayer
+;	ld a, [GetTileAndCoordsInFrontOfPlayer]
+;	cp $18
+;	jr nz, .next0
+;	ld hl, CardKeyTable1
+;	jr .next1
+;.next0
+;	cp $24
+;	jr nz, .next2
+;	ld hl, CardKeyTable2
+;	jr .next1
+;.next2
+;	cp $5e
+;	jp nz, ItemUseNotTime
+;	ld hl, CardKeyTable3
+;.next1
+;	ld a, [wCurMap]
+;	ld b, a
+;.loop
+;	ld a, [hli]
+;	cp -1
+;	jp z, ItemUseNotTime
+;	cp b
+;	jr nz, .nextEntry1
+;	ld a, [hli]
+;	cp d
+;	jr nz, .nextEntry2
+;	ld a, [hli]
+;	cp e
+;	jr nz, .nextEntry3
+;	ld a, [hl]
+;	jr .done
+;.nextEntry1
+;	inc hl
+;.nextEntry2
+;	inc hl
+;.nextEntry3
+;	inc hl
+;	jr .loop
+;.done
+;	ld hl, ItemUseText00
+;	call PrintText
+;	ld hl, wd728
+;	set 7, [hl]
+;	ret
 
-INCLUDE "data/events/card_key_coords.asm"
+;INCLUDE "data/events/card_key_coords.asm"
 
 ItemUsePokedoll:
 	ld a, [wIsInBattle]

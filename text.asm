@@ -44,7 +44,6 @@ INCLUDE "text/PokemonMansion3F.asm"
 INCLUDE "text/PokemonMansionB1F.asm"
 INCLUDE "text/SafariZoneEast.asm"
 INCLUDE "text/SafariZoneNorth.asm"
-INCLUDE "text/SafariZoneWest.asm"
 INCLUDE "text/SafariZoneCenter.asm"
 INCLUDE "text/SafariZoneCenterRestHouse.asm"
 INCLUDE "text/SafariZoneSecretHouse.asm"
@@ -77,6 +76,8 @@ INCLUDE "text/ViridianForestSouthGate.asm"
 INCLUDE "text/MtMoonPokecenter.asm"
 INCLUDE "text/SaffronGates.asm"
 INCLUDE "text/Daycare.asm"
+; moved from Text 2
+INCLUDE "text/SafariZoneWest.asm"
 
 
 SECTION "Text 4", ROMX

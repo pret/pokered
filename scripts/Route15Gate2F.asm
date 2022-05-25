@@ -11,7 +11,8 @@ Route15GateUpstairsText1:
 	jr nz, .got_item
 	ld a, 50
 	ldh [hOaksAideRequirement], a
-	ld a, EXP_ALL
+	;ld a, EXP_ALL ; TODO: EXP_ALL has been removed 
+	ld a, HYPER_BALL
 	ldh [hOaksAideRewardItem], a
 	ld [wd11e], a
 	call GetItemName
