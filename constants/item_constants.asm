@@ -15,7 +15,7 @@
 	const BICYCLE       ; $06
 	const SURFBOARD     ; $07 buggy?
 	const SAFARI_BALL   ; $08
-	const POKEDEX       ; $09
+	const POKEDEX       ; $09 pointless item?
 	const MOON_STONE    ; $0A
 	const ANTIDOTE      ; $0B
 	const BURN_HEAL     ; $0C
