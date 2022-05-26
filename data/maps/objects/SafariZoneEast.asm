@@ -14,7 +14,7 @@ SafariZoneEast_Object:
 	bg_event  5, 23, 12 ; SafariZoneEastText7
 
 	def_object_events
-	object_event 1, 1, SPRITE_COOLTRAINER_F, STAY, RIGHT, 1, OPP_COOLTRAINER_F, 6
+	object_event 1, 1, SPRITE_COOLTRAINER_F, STAY, RIGHT, 1, OPP_RANGER_F, 1
 	object_event 26, 18, SPRITE_YOUNGSTER, STAY, NONE, 2, OPP_PSYCHIC_TR, 5
 	object_event 5, 12, SPRITE_ROCKER, STAY, NONE, 3, OPP_ROCKER, 4
 	object_event 14, 4, SPRITE_COOLTRAINER_M, STAY, DOWN, 4, OPP_COOLTRAINER_M, 6

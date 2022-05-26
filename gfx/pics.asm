@@ -3,6 +3,7 @@ PICS_2 EQU $A
 PICS_3 EQU $B
 PICS_4 EQU $C
 PICS_5 EQU $D
+PICS_6 EQU $13
 PICS_7 EQU $2D
 PICS_8 EQU $2E
 PICS_9 EQU $2F
@@ -242,7 +243,7 @@ CharizardPicFront::    INCBIN "gfx/pokemon/front/charizard.pic"
 CharizardPicBackSW::   INCBIN "gfx/pokemon/back_sw/charizardb.pic"
 
 
-SECTION "Pics 6", ROMX
+SECTION "Pics 6", ROMX, BANK[PICS_6]
 
 YoungsterPic::     INCBIN "gfx/trainers/youngster.pic"
 BugCatcherPic::    INCBIN "gfx/trainers/bugcatcher.pic"
@@ -561,3 +562,8 @@ MewPicBackSW::         INCBIN "gfx/pokemon/back_sw/mewb.pic" ; moved from bank 1
 
 RedPicBack::           INCBIN "gfx/player/redb.pic"
 OldManPicBack::        INCBIN "gfx/battle/oldmanb.pic"
+; used elsewhere
+KidPic::           INCBIN "gfx/capsule_monsters_stuff/cool_kid.pic"
+FireFighterPic::   INCBIN "gfx/capsule_monsters_stuff/firefighter.pic"
+RangerPic::        INCBIN "gfx/capsule_monsters_stuff/ranger.pic"
+RangerFPic::       INCBIN "gfx/trainers/rangerf.pic"

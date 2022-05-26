@@ -19,11 +19,11 @@ MonPartyDataNew:
 	db ICON_BIRD      ; Pidgeotto
 	db ICON_BIRD      ; Pidgeot
 	db ICON_QUADRUPED ; Rattata
-	db ICON_QUADRUPED ; Raticate *
+	db ICON_QUADRUPED ; Raticate
 	db ICON_BIRD      ; Spearow
 	db ICON_BIRD      ; Fearow
 	db ICON_SNAKE     ; Ekans
-	db ICON_SNAKE     ; Arbok
+	db ICON_SNAKE     ; Arbok *
 	db ICON_FAIRY     ; Pikachu
 	db ICON_FAIRY     ; Raichu
 	db ICON_MON       ; Sandshrew
@@ -36,8 +36,8 @@ MonPartyDataNew:
 	db ICON_MON       ; Nidoking
 	db ICON_FAIRY     ; Clefairy
 	db ICON_FAIRY     ; Clefable
-	db ICON_QUADRUPED ; Vulpix
-	db ICON_QUADRUPED ; Ninetales
+	db ICON_CAT       ; Vulpix
+	db ICON_CAT       ; Ninetales
 	db ICON_FAIRY     ; Jigglypuff
 	db ICON_FAIRY     ; Wigglytuff
 	db ICON_WINGED    ; Zubat
@@ -51,13 +51,13 @@ MonPartyDataNew:
 	db ICON_BUG_WINGED; Venomoth
 	db ICON_DIGLETT   ; Diglett
 	db ICON_DIGLETT   ; Dugtrio
-	db ICON_FUZZBALL  ; Meowth
-	db ICON_QUADRUPED ; Persian
+	db ICON_CAT       ; Meowth
+	db ICON_CAT       ; Persian
 	db ICON_MON2      ; Psyduck
 	db ICON_MON       ; Golduck
-	db ICON_FUZZBALL  ; Mankey
-	db ICON_FUZZBALL  ; Primeape
-	db ICON_QUADRUPED ; Growlithe
+	db ICON_FUZZBALL  ; Mankey *
+	db ICON_FUZZBALL  ; Primeape *
+	db ICON_CAT       ; Growlithe
 	db ICON_QUADRUPED2; Arcanine
 	db ICON_WATER     ; Poliwag
 	db ICON_WATER     ; Poliwhirl
@@ -83,8 +83,8 @@ MonPartyDataNew:
 	db ICON_ROBOT     ; Magnemite
 	db ICON_ROBOT     ; Magneton
 	db ICON_BIRD      ; Farfetch'd
-	db ICON_FUZZBALL  ; Doduo
-	db ICON_FUZZBALL  ; Dodrio
+	db ICON_FUZZBALL  ; Doduo *
+	db ICON_FUZZBALL  ; Dodrio *
 	db ICON_WATER     ; Seel
 	db ICON_WATER     ; Dewgong
 	db ICON_AMORPHOUS ; Grimer
@@ -113,7 +113,7 @@ MonPartyDataNew:
 	db ICON_QUADRUPED2; Rhyhorn
 	db ICON_MON       ; Rhydon
 	db ICON_FAIRY     ; Chansey
-	db ICON_FUZZBALL  ; Tangela
+	db ICON_FUZZBALL  ; Tangela *
 	db ICON_MON       ; Kangaskhan
 	db ICON_WATER     ; Horsea
 	db ICON_WATER     ; Seadra
@@ -129,13 +129,13 @@ MonPartyDataNew:
 	db ICON_HUMANOID_INSECT ; Pinsir
 	db ICON_QUADRUPED2; Tauros
 	db ICON_WATER     ; Magikarp
-	db ICON_SNAKE     ; Gyarados
+	db ICON_SNAKE     ; Gyarados *
 	db ICON_WATER     ; Lapras
 	db ICON_AMORPHOUS ; Ditto
-	db ICON_QUADRUPED ; Eevee
-	db ICON_QUADRUPED ; Vaporeon
-	db ICON_QUADRUPED ; Jolteon
-	db ICON_QUADRUPED ; Flareon
+	db ICON_CAT       ; Eevee
+	db ICON_CAT       ; Vaporeon
+	db ICON_CAT       ; Jolteon
+	db ICON_CAT       ; Flareon
 	db ICON_ROBOT     ; Porygon
 	db ICON_HELIX     ; Omanyte
 	db ICON_HELIX     ; Omastar
@@ -143,9 +143,9 @@ MonPartyDataNew:
 	db ICON_HUMANOID_INSECT ; Kabutops
 	db ICON_WINGED    ; Aerodactyl
 	db ICON_SNORLAX   ; Snorlax
-	db ICON_BIRD      ; Articuno
-	db ICON_BIRD      ; Zapdos
-	db ICON_BIRD      ; Moltres
+	db ICON_BIRD2     ; Articuno
+	db ICON_BIRD2     ; Zapdos
+	db ICON_BIRD2     ; Moltres
 	db ICON_SNAKE     ; Dratini
 	db ICON_SNAKE     ; Dragonair
 	db ICON_DRAGON    ; Dragonite

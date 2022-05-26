@@ -9,7 +9,7 @@ Museum2F_Object:
 	bg_event  2,  5, 8 ; Museum2FText7
 
 	def_object_events
-	object_event  3,  1, SPRITE_LITTLE_BOY, STAY, NONE, 1, OPP_YOUNGSTER, 13 ; person
+	object_event  3,  1, SPRITE_LITTLE_BOY, STAY, NONE, 1, OPP_COOL_KID, 1 ; person
 	object_event  1,  7, SPRITE_YOUNGSTER, WALK, LEFT_RIGHT, 2 ; person
 	object_event  0,  5, SPRITE_GRAMPS, STAY, DOWN, 3 ; person
 	object_event  7,  5, SPRITE_SCIENTIST, STAY, DOWN, 4 ; person

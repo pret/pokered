@@ -18,8 +18,8 @@ SafariZoneWest_Object:
 	bg_event 24, 22, 15 ; SafariZoneWestText8
 
 	def_object_events
-	object_event 15, 24, SPRITE_BALDING_GUY, STAY, NONE, 1, OPP_TAMER, 7
-	object_event 12, 7, SPRITE_COOK, STAY, NONE, 2, OPP_TAMER, 8
+	object_event 15, 24, SPRITE_BALDING_GUY, STAY, NONE, 1, OPP_RANGER, 2
+	object_event 12, 7, SPRITE_COOK, STAY, NONE, 2, OPP_RANGER, 3
 	object_event 21, 10, SPRITE_SUPER_NERD, STAY, NONE, 3, OPP_BURGLAR, 1
 	object_event 22, 20, SPRITE_SUPER_NERD, STAY, NONE, 4, OPP_POKEMANIAC, 10
 	object_event 5, 7, SPRITE_ROCKER, STAY, LEFT, 5, OPP_ROCKER, 5

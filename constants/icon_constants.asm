@@ -34,6 +34,8 @@
 	const ICON_BALL_OLD  ; 29
 	const ICON_FOSSIL    ; 30
 	const ICON_BIRD_OLD  ; 31
+	const ICON_CAT       ; 32
+	const ICON_BIRD2     ; 33
 
 
 ICON_TRADEBUBBLE EQU $e

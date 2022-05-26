@@ -20,7 +20,7 @@ SafariZoneNorth_Object:
 	bg_event 26, 28, 13 ; SafariZoneNorthText7
 
 	def_object_events
-	object_event 20, 15, SPRITE_BRUNETTE_GIRL, STAY, NONE, 1, OPP_COOLTRAINER_F, 7
+	object_event 20, 15, SPRITE_BRUNETTE_GIRL, STAY, NONE, 1, OPP_RANGER_F, 2
 	object_event 18, 29, SPRITE_ROCKER, STAY, RIGHT, 2, OPP_JUGGLER, 9
 	object_event 32, 20, SPRITE_YOUNGSTER, STAY, NONE, 3, OPP_COOLTRAINER_M, 8
 	object_event 8, 14, SPRITE_GAMEBOY_KID, STAY, DOWN, 4, OPP_SUPER_NERD, 6

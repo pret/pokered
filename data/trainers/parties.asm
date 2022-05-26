@@ -46,6 +46,10 @@ TrainerDataPointers:
 	dw ChannelerData
 	dw AgathaData
 	dw LanceData
+	dw CoolKidData
+	dw FireFighterData
+	dw RangerData
+	dw RangerFData
 
 ; if first byte != $FF, then
 	; first byte is level (of all pokemon on this team)
@@ -75,8 +79,6 @@ YoungsterData:
 	db 19, SANDSHREW, ZUBAT, 0
 	db 17, RATTATA, RATTATA, RATICATE, 0
 	db 18, NIDORAN_M, NIDORINO, 0
-; Unused -> NEW: Pewter Museum
-	db 17, SPEAROW, RATTATA, RATTATA, SPEAROW, 0
 
 BugCatcherData:
 ; Viridian Forest
@@ -235,8 +237,6 @@ SuperNerdData:
 ; Cinnabar Gym
 	db 36, VULPIX, VULPIX, NINETALES, 0
 	db 34, PONYTA, CHARMANDER, VULPIX, GROWLITHE, 0
-	db 41, RAPIDASH, 0
-	db 37, GROWLITHE, VULPIX, 0
 
 HikerData:
 ; Mt. Moon 1F
@@ -465,11 +465,6 @@ TamerData:
 	db 39, ARBOK, TAUROS, 0
 ; Victory Road 2F
 	db 44, PERSIAN, GOLDUCK, 0
-; Safari Zone Center
-	db 42, RHYHORN, PRIMEAPE, ARBOK, TAUROS, 0
-; Safari Zone West
-	db 42, RHYDON, PRIMEAPE, ARBOK, TAUROS, 0
-	db 42, PIDGEOT, PRIMEAPE, ARBOK, TAUROS, 0
 
 BirdKeeperData:
 ; Route 13
@@ -661,10 +656,6 @@ CooltrainerFData:
 	db 46, VILEPLUME, BUTTERFREE, 0
 ; Victory Road 1F
 	db 44, PERSIAN, NINETALES, 0
-; Safari Zone East
-	db 45, IVYSAUR, VENUSAUR, 0
-; Safari Zone North
-	db 45, NIDORINA, NIDOQUEEN, 0
 ; Unused
 	db 43, PERSIAN, NINETALES, RAICHU, 0
 
@@ -773,3 +764,26 @@ AgathaData:
 
 LanceData:
 	db $FF, 58, GYARADOS, 56, DRAGONAIR, 56, DRAGONAIR, 60, AERODACTYL, 62, DRAGONITE, 0
+
+CoolKidData:
+; Pewter Museum
+	db 17, SPEAROW, RATTATA, RATTATA, SPEAROW, 0
+
+FireFighterData:
+; Cinnabar Gym
+	db 41, RAPIDASH, TENTACRUEL, 0
+	db 37, GROWLITHE, VULPIX, BLASTOISE, 0
+
+RangerData:
+; Safari Zone Center
+	db 42, RHYHORN, PRIMEAPE, ARBOK, TAUROS, 0
+; Safari Zone West
+	db 42, RHYDON, PRIMEAPE, ARBOK, TAUROS, 0
+	db 42, PIDGEOT, PRIMEAPE, ARBOK, TAUROS, 0
+
+RangerFData:
+; Safari Zone East
+	db 45, IVYSAUR, VENUSAUR, 0
+; Safari Zone North
+	db 45, NIDORINA, NIDOQUEEN, 0
+	

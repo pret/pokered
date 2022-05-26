@@ -51,4 +51,8 @@ TrainerAIPointers:
 	dbw 3, GenericAI
 	dbw 2, AgathaAI ; agatha
 	dbw 1, LanceAI ; lance
+	dbw 3, GenericAI
+	dbw 3, GenericAI
+	dbw 2, CooltrainerMAI ; ranger
+	dbw 1, CooltrainerFAI ; rangerf
 	assert_table_length NUM_TRAINERS

@@ -6991,17 +6991,28 @@ _InitBattleCommon:
 .emptyString
 	db "@"
 
+CheckTrainerPicBank:
+	ld a, [wLinkState]
+	and a
+	jr z, .defaultSprite
+	ld a, BANK(RedPicFront)
+	ret
+.defaultSprite
+	ld a, [wUnusedD119]
+	cp OPP_COOL_KID
+	ld a, BANK("Pics 6") ; this is where most of the trainer pics are
+	jr c, .isDefault
+	ld a, BANK(KidPic) ; this is where extra trainer pics are (trainers after Cool Kid in ID)
+.isDefault
+	ret
+
 _LoadTrainerPic:
 ; wd033-wd034 contain pointer to pic
 	ld a, [wTrainerPicPointer]
 	ld e, a
 	ld a, [wTrainerPicPointer + 1]
 	ld d, a ; de contains pointer to trainer pic
-	ld a, [wLinkState]
-	and a
-	ld a, BANK("Pics 6") ; this is where all the trainer pics are (not counting Red's)
-	jr z, .loadSprite
-	ld a, BANK(RedPicFront)
+	call CheckTrainerPicBank
 .loadSprite
 	call UncompressSpriteFromDE
 	ld de, vFrontPic

@@ -17,7 +17,7 @@ SafariZoneCenter_Object:
 	bg_event 14, 22, 8 ; SafariZoneCenterText3
 
 	def_object_events
-	object_event 15, 10, SPRITE_SILPH_WORKER, STAY, NONE, 1, OPP_TAMER, 6
+	object_event 15, 10, SPRITE_SILPH_WORKER, STAY, NONE, 1, OPP_RANGER, 1
 	object_event 5, 20, SPRITE_ROCKER, STAY, NONE, 2, OPP_ROCKER, 3
 	object_event 20, 19, SPRITE_SAFARI_ZONE_WORKER, STAY, DOWN, 3, OPP_ENGINEER, 1
 	object_event 26, 3, SPRITE_ROCKER, STAY, NONE, 4, OPP_JUGGLER, 6

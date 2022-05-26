@@ -12,7 +12,7 @@ CeladonMansion1F_Object:
 	bg_event  4,  9, 5 ; CeladonMansion1Text5
 
 	def_object_events
-	object_event  0,  5, SPRITE_FUZZBALL, STAY, DOWN, 1 ; person
+	object_event  0,  5, SPRITE_CAT, STAY, RIGHT, 1 ; person
 	object_event  1,  5, SPRITE_GRANNY, STAY, DOWN, 2 ; person
 	object_event  1,  8, SPRITE_FAIRY, WALK, LEFT_RIGHT, 3 ; person
 	object_event  4,  4, SPRITE_QUADRUPED2, WALK, UP_DOWN, 4 ; person

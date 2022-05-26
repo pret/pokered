@@ -331,6 +331,7 @@ EngageMapTrainer::
 	ld e, a
 	add hl, de     ; seek to engaged trainer data
 	ld a, [hli]    ; load trainer class
+	ld [wUnusedD119], a ; persists after battle complete, used for drawing trainer sprites
 	ld [wEngagedTrainerClass], a
 	ld a, [hl]     ; load trainer mon set
 	ld [wEngagedTrainerSet], a

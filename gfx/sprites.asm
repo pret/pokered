@@ -81,6 +81,8 @@ SECTION "NPC Sprites 3", ROMX, BANK[$30]
 
 PsychicSprite::          INCBIN "gfx/sprites/psychic.2bpp"
 FightingSprite::          INCBIN "gfx/sprites/fighting.2bpp"
+CatSprite::              INCBIN "gfx/capsule_monsters_stuff/cat.2bpp"
+LegendaryBirdSprite::    INCBIN "gfx/capsule_monsters_stuff/legendary_bird.2bpp"
 BrockSprite::          INCBIN "gfx/sprites/brock.2bpp"
 MistySprite::          INCBIN "gfx/sprites/misty.2bpp"
 SabrinaSprite::          INCBIN "gfx/sprites/sabrina.2bpp"

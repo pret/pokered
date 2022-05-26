@@ -2046,7 +2046,7 @@ LoadPlayerSpriteGraphicsCommon::
 LoadMapHeader::
 	farcall MarkTownVisitedAndLoadMissableObjects
 	ld a, [wCurMapTileset]
-	ld [wUnusedD119], a
+	;ld [wUnusedD119], a
 	ld a, [wCurMap]
 	call SwitchToMapRomBank
 	ld a, [wCurMapTileset]
@@ -2371,7 +2371,7 @@ LoadMapData::
 	ldh [hSCY], a
 	ldh [hSCX], a
 	ld [wWalkCounter], a
-	ld [wUnusedD119], a
+	;ld [wUnusedD119], a
 	ld [wWalkBikeSurfStateCopy], a
 	ld [wSpriteSetID], a
 	call LoadTextBoxTilePatterns
