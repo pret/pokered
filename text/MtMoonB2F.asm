@@ -48,6 +48,72 @@ _MtMoon3Text_49f94::
 	para "They do research"
 	line "on regenerating"
 	cont "fossils."
+	prompt
+
+_MtMoon3TextSuperNerdGiveFossil::
+	text "I plan on taking"
+	line "my fossil there!"
+
+	para "Tell you what:"
+
+	para "If you give me"
+	line "your fossil too,"
+	cont "I can bring it"
+	cont "to the lab and"
+	cont "see if it can be"
+	cont "regenerated!"
+
+	para "How about it?@"
+	text_end
+
+_MtMoon3TextSuperNerdNoFossil::
+	text "Looks like you"
+	line "don't have your"
+	cont "fossil in your"
+	cont "bag. Go get it!"
+	done	
+
+_MtMoon3TextSuperNerdGaveHelix::
+	text "<PLAYER> gave the"
+	line "HELIX FOSSIL to"
+	cont "the SUPER NERD!"
+	done
+
+_MtMoon3TextSuperNerdGaveDome::
+	text "<PLAYER> gave the"
+	line "DOME FOSSIL to"
+	cont "the SUPER NERD!"
+	done
+
+_MtMoon3TextSuperNerdGaveFossil::
+	text "Great! I'll try"
+	line "reviving both"
+	cont "fossils."
+	prompt
+
+_MtMoon3TextSuperNerdKeptFossil::
+	text "No worries!"
+	para "It's your fossil"
+	line "after all."
+	done
+
+_MtMoon3TextSuperNerdGaveFossilEnd::
+	text "Meet me in"
+	line "SAFFRON CITY."
+	
+	para "I'll tell you"
+	line "the results!"
+	done
+
+_MtMoon3TextSuperNerdLookingForMoreFossils::
+	text "Hey! I'm looking"
+	line "for more fossils."
+
+	para "Haven't found any"
+	line "yet! Oh well."
+
+	para "I live for the"
+	line "hunt!"
 	done
 
 _MtMoon3Text_49f99::

@@ -206,7 +206,7 @@ MapHeaderBanks::
 	db BANK(RocketHideoutB4F_h)
 	db BANK(RocketHideoutElevator_h)
 	db BANK(FuchsiaTreeDeleterHouse_h)
-	db $01 ; UNUSED_MAP_CD
+	db BANK(FossilGuysHouse_h)
 	db $01 ; UNUSED_MAP_CE
 	db BANK(SilphCo2F_h)
 	db BANK(SilphCo3F_h)

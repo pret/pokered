@@ -1,4 +1,5 @@
 SaffronCity_Script:
+	ResetEvent EVENT_SUPER_NERD_GOING_TO_CINNABAR
 	jp EnableAutoTextBoxDrawing
 
 SaffronCity_TextPointers:

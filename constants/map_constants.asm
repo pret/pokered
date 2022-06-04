@@ -223,7 +223,7 @@ FIRST_INDOOR_MAP EQU const_value
 	mapconst ROCKET_HIDEOUT_B4F,            12, 15 ; $CA
 	mapconst ROCKET_HIDEOUT_ELEVATOR,        4,  3 ; $CB
 	mapconst FUCHSIA_TREE_DELETER_HOUSE,     4,  4 ; $CC
-	mapconst UNUSED_MAP_CD,                  0,  0 ; $CD
+	mapconst FOSSIL_GUYS_HOUSE,              4,  5 ; $CD
 	mapconst UNUSED_MAP_CE,                  0,  0 ; $CE
 	mapconst SILPH_CO_2F,                    9, 15 ; $CF
 	mapconst SILPH_CO_3F,                    9, 15 ; $D0

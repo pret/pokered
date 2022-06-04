@@ -169,5 +169,12 @@ SeafoamIslandsB3F_TextPointers:
 	dw BoulderText
 	dw BoulderText
 	dw BoulderText
-	dw PickUpItemText
-	dw PickUpItemText
+	dw PickUpFossilText
+	dw PickUpFossilText
+
+PickUpFossilText:
+	text_asm
+	SetEvent EVENT_SEAFOAM_FOUND_OTHER_FOSSIL
+	predef PickUpItem
+	jp TextScriptEnd
+	

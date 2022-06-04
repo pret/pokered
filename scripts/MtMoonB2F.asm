@@ -147,8 +147,33 @@ MtMoon3Script5:
 .asm_49e1f
 	ld [wMissableObjectIndex], a
 	predef HideObject
+	; ask the player if they want to give the nerd their fossil right away, and can collect their fossil pokemon in saffron later
+	ld a, 1
+	ldh [hSpriteIndex], a
+	CheckEvent EVENT_GOT_DOME_FOSSIL
+	jr z, .right
+	; make player face super nerd
+	ld a, PLAYER_DIR_RIGHT
+	ld [wPlayerMovingDirection], a
+	; make super nerd face player
+	ld a, SPRITE_FACING_LEFT
+	jr .doFacing
+.right
+	; make player face super nerd
+	ld a, PLAYER_DIR_LEFT
+	ld [wPlayerMovingDirection], a
+	; make super nerd face player
+	ld a, SPRITE_FACING_RIGHT
+.doFacing
+  	ldh [hSpriteFacingDirection], a
+  	call SetSpriteFacingDirection
 	xor a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld [wJoyIgnore], a
+	ld a, 11
+	ldh [hSpriteIndexOrTextID], a
+	call DisplayTextID
+	; done
 	ld a, $0
 	ld [wMtMoonB2FCurScript], a
 	ld [wCurMapScript], a
@@ -165,6 +190,7 @@ MtMoonB2F_TextPointers:
 	dw PickUpItemText
 	dw PickUpItemText
 	dw MtMoon3Text_49f99
+	dw MtMoonSuperNerdTakeFossilQuestionText
 
 MtMoon3TrainerHeaders:
 	def_trainers 2
@@ -206,8 +232,7 @@ MtMoon3Text1:
 	ld [wCurMapScript], a
 	jr .asm_49ebe
 .asm_49eb8
-	ld hl, MtMoon3Text_49f94
-	call PrintText
+	call MtMoonSuperNerdTakeFossilQuestion
 .asm_49ebe
 	jp TextScriptEnd
 
@@ -332,6 +357,104 @@ MtMoon3Text_49f99:
 	sound_get_key_item
 	text_end
 
+MtMoonSuperNerdTakeFossilQuestionText:
+	text_asm
+	call MtMoonSuperNerdTakeFossilQuestion
+	jp TextScriptEnd
+
+MtMoonSuperNerdTakeFossilQuestion:
+	CheckEvent EVENT_RECEIVED_FOSSIL_PKMN_FROM_SUPER_NERD
+	jr nz, .lookingForMoreFossils
+	CheckEvent EVENT_GAVE_FOSSIL_TO_SUPER_NERD
+	jr nz, .end
+	ld hl, MtMoon3Text_49f94
+	call PrintText
+	ld hl, MtMoon3TextSuperNerdGiveFossil
+	call PrintText
+	call YesNoChoice
+	ld a, [wCurrentMenuItem]
+	and a
+	jr nz, .no
+.yes
+	CheckEvent EVENT_GOT_DOME_FOSSIL
+	jr z, .checkHelix
+	ld b, DOME_FOSSIL
+	jr .isInBag
+.checkHelix
+	ld b, HELIX_FOSSIL
+.isInBag
+	call IsItemInBag
+	jr z, .noFossil
+	jr .haveFossil
+.noFossil
+	ld hl, MtMoon3TextSuperNerdNoFossil
+	call PrintText
+	jr .done
+.haveFossil
+	SetEvent EVENT_GAVE_FOSSIL_TO_SUPER_NERD
+	CheckEvent EVENT_GOT_DOME_FOSSIL
+	jr nz, .domeRemove
+	ld hl, MtMoon3TextSuperNerdGaveHelix
+	call PrintText
+	ld a, HELIX_FOSSIL
+	jr .removeItem
+.domeRemove
+	ld hl, MtMoon3TextSuperNerdGaveDome
+	call PrintText
+	ld a, DOME_FOSSIL
+.removeItem
+	ldh [hItemToRemoveID], a
+	farcall RemoveItemByID
+	ld hl, MtMoon3TextSuperNerdGaveFossil
+	call PrintText
+.end
+	ld hl, MtMoon3TextSuperNerdGaveFossilEnd
+	call PrintText
+	jr .done
+.lookingForMoreFossils
+	ld hl, MtMoon3TextSuperNerdLookingForMoreFossils
+	call PrintText
+	jr .done
+.no
+	ld hl, MtMoon3TextSuperNerdKeptFossil
+	call PrintText
+.done
+	ret
+	
+MtMoon3TextSuperNerdNoFossil:
+	text_far _MtMoon3TextSuperNerdNoFossil
+	text_end
+
+MtMoon3TextSuperNerdGiveFossil:
+	text_far _MtMoon3TextSuperNerdGiveFossil
+	text_end
+
+MtMoon3TextSuperNerdGaveFossil:
+	text_far _MtMoon3TextSuperNerdGaveFossil
+	text_end
+
+MtMoon3TextSuperNerdGaveHelix:
+	text_far _MtMoon3TextSuperNerdGaveHelix
+	sound_get_item_1
+	text_end
+
+MtMoon3TextSuperNerdGaveDome:
+	text_far _MtMoon3TextSuperNerdGaveDome
+	sound_get_item_1
+	text_end
+
+MtMoon3TextSuperNerdGaveFossilEnd:
+	text_far _MtMoon3TextSuperNerdGaveFossilEnd
+	text_end
+
+MtMoon3TextSuperNerdKeptFossil:
+	text_far _MtMoon3TextSuperNerdKeptFossil
+	text_end
+
+MtMoon3TextSuperNerdLookingForMoreFossils:
+	text_far _MtMoon3TextSuperNerdLookingForMoreFossils
+	text_end
+	
 MtMoon3BattleText2:
 	text_far _MtMoon3BattleText2
 	text_end
