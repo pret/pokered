@@ -6,11 +6,14 @@ CheckLoadTmName:: ; loads a TM name when the cursor is on TMs
 	jr z, .getItem ; if it's an item menu, proceed
 	cp PRICEDITEMLISTMENU
 	jr z, .getItem ; if it's a shop menu, proceed
-	jr .noAction
+	jr .noAction ; other menus cant contain TMs, so no need to check anything
 .getItem
 	push bc
 	push hl
 	push de
+	ld a, [wListCount]
+	and a
+	jr z, .notTMHM ;if the list is 0 entries, we only have CANCEL in the list, so don't load any TM info
 	ld a, [wCurrentMenuItem]
 	ld c, a
 	ld a, [wListScrollOffset]
@@ -28,7 +31,7 @@ CheckLoadTmName:: ; loads a TM name when the cursor is on TMs
 	ld c, a
 	ld a, [wListMenuID]
 	cp ITEMLISTMENU
-	jr nz, .skipmulti ; if it's an item menu, proceed
+	jr nz, .skipmulti 
 	sla c ; item entries are 2 bytes long, so multiply by 2
 .skipmulti
 	ld a, [wListPointer]

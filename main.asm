@@ -376,4 +376,4 @@ INCLUDE "engine/gfx/mon_icons2.asm"
 INCLUDE "engine/menus/menu_list_tm_name_loader.asm"
 INCLUDE "engine/overworld/select_button_functionality.asm"
 INCLUDE "engine/overworld/use_another_repel.asm"
-
+INCLUDE "engine/menus/wrap_list_menu.asm"

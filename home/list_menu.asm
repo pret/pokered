@@ -50,7 +50,7 @@ DisplayListMenuID::
 	ld [wTopMenuItemY], a
 	ld a, 5
 	ld [wTopMenuItemX], a
-	ld a, A_BUTTON | B_BUTTON | SELECT | START
+	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_LEFT
 	ld [wMenuWatchedKeys], a
 	call CheckForTM
 	call Delay3
@@ -171,6 +171,8 @@ DisplayListMenuIDLoop::
 	bit BIT_SELECT, a
 	jp nz, HandleItemListSwapping ; if so, allow the player to swap menu entries
 	ld b, a
+	bit BIT_D_LEFT, b
+	jr nz, .handleListSkip
 	bit BIT_D_DOWN, b
 	ld hl, wListScrollOffset
 	jr z, .upPressed
@@ -191,6 +193,10 @@ DisplayListMenuIDLoop::
 	dec [hl]
 	call CheckForTM
 	jp DisplayListMenuIDLoop
+.handleListSkip
+	callfar WrapListMenu
+	jp DisplayListMenuIDLoop
+
 
 DisplayChooseQuantityMenu::
 ; text box dimensions/coordinates for just quantity

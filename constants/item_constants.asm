@@ -83,7 +83,7 @@ SAFARI_ROCK EQU $16 ; overload
 	const SILPH_SCOPE   ; $48
 	const POKE_FLUTE    ; $49
 	const LIFT_KEY      ; $4A
-	const TOWN_MAP      ; $4B ; pointless item after changes
+	const TOWN_MAP      ; $4B ; unused item after changes
 	const OLD_ROD       ; $4C
 	const GOOD_ROD      ; $4D
 	const SUPER_ROD     ; $4E

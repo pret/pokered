@@ -83,7 +83,7 @@ DrawHPBar::
 LoadMonData::
 	jpfar LoadMonData_
 
-OverwritewMoves::
+;OverwritewMoves::
 ; Write c to [wMoves + b]. Unused.
 ;	ld hl, wMoves
 ;	ld e, b
@@ -91,7 +91,7 @@ OverwritewMoves::
 ;	add hl, de
 ;	ld a, c
 ;	ld [hl], a
-	ret
+;	ret
 
 LoadFlippedFrontSpriteByMonIndex::
 	ld a, 1
@@ -361,14 +361,14 @@ PrintLevelCommon::
 	ld b, LEFT_ALIGN | 1 ; 1 byte
 	jp PrintNumber
 
-GetwMoves::
+;GetwMoves::
 ; Unused. Returns the move at index a from wMoves in a
-	ld hl, wMoves
-	ld c, a
-	ld b, 0
-	add hl, bc
-	ld a, [hl]
-	ret
+;	ld hl, wMoves
+;	ld c, a
+;	ld b, 0
+;	add hl, bc
+;	ld a, [hl]
+;	ret
 
 ; copies the base stat data of a pokemon to wMonHeader
 ; INPUT:
