@@ -38,12 +38,12 @@ _Route22RivalDefeatedText1::
 	prompt
 
 _Route22Text_511bc::
-	text "<RIVAL>: What?"
+	text "What?"
 	line "Why do I have 2"
 	cont "#MON?"
 
 	para "You should catch"
-	cont "some more too!"
+	line "some more too!"
 	prompt
 
 _Route22RivalBeforeBattleText2::
@@ -88,7 +88,7 @@ _Route22RivalDefeatedText2::
 	prompt
 
 _Route22Text_511d0::
-	text "<RIVAL>: Hahaha!"
+	text "Hahaha!"
 	line "<PLAYER>! That's"
 	cont "your best? You're"
 	cont "nowhere near as"

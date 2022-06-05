@@ -2016,7 +2016,7 @@ wRedsHouse2FCurScript:: db
 wViridianMartCurScript:: db
 wRoute22GateCurScript:: db
 wCeruleanCityCurScript:: db
-	ds 1
+wCeruleanCave2FCurScript:: db ; NEW
 wMuseum2FCurScript:: db ; NEW
 wSafariZoneCenterCurScript:: db ; NEW
 wSafariZoneEastCurScript:: db ; NEW
@@ -2198,6 +2198,7 @@ wd72c:: db
 ; but they do not appear to affect anything. Bit 6 is reset after all battles
 ; and bit 7 is reset after trainer battles (but it's only set before trainer
 ; battles anyway).
+; Bit 7 decides if end battle text attempts to get printed.
 wd72d:: db
 
 ; bit 0: the player has received Lapras in the Silph Co. building

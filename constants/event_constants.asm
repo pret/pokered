@@ -772,7 +772,7 @@
 
 ; Cerulean Cave events
 	const_next $8C0
-	const_skip
+	const EVENT_BEAT_PROF_OAK
 	const EVENT_BEAT_MEWTWO
 
 ; Indigo Plateau events

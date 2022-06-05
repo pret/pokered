@@ -901,7 +901,7 @@ _UseNextMonText::
 	done
 
 _Rival1WinText::
-	text "<RIVAL>: Yeah! Am"
+	text "Yeah! Am"
 	line "I great or what?"
 	prompt
 

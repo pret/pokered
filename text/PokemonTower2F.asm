@@ -19,7 +19,7 @@ _PokemonTower2Text_60632::
 	prompt
 
 _PokemonTower2Text_60637::
-	text "<RIVAL>: Well,"
+	text "Well,"
 	line "look at all your"
 	cont "wimpy #MON!"
 
