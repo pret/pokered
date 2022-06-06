@@ -1,4 +1,4 @@
-NOT_VISITED EQU $fe
+DEF NOT_VISITED EQU $fe
 
 DisplayTownMap:
 	call LoadTownMap

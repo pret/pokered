@@ -1,4 +1,4 @@
-pic_money: MACRO
+MACRO pic_money
 	dw \1
 	bcd3 \2
 ENDM

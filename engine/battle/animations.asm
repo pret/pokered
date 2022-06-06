@@ -372,7 +372,7 @@ LoadAnimationTileset:
 	ld c, a ; number of tiles
 	jp CopyVideoData ; load tileset
 
-anim_tileset: MACRO
+MACRO anim_tileset
 	db \1
 	dw \2
 	db -1 ; padding

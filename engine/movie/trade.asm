@@ -56,12 +56,12 @@ TradeAnimCommon:
 	ld [wOptions], a
 	ret
 
-addtradefunc: MACRO
+MACRO addtradefunc
 \1TradeFunc::
 	dw \1
 ENDM
 
-tradefunc: MACRO
+MACRO tradefunc
 	db (\1TradeFunc - TradeFuncPointerTable) / 2
 ENDM
 
@@ -697,7 +697,7 @@ Trade_WriteCircleOAM:
 	jr nz, .loop
 	ret
 
-trade_circle_oam: MACRO
+MACRO trade_circle_oam
 	dw \1
 	db \2, \3
 ENDM

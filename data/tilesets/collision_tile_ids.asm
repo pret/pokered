@@ -1,4 +1,4 @@
-coll_tiles: MACRO
+MACRO coll_tiles
 	IF _NARG
 		db \# ; all args
 	ENDC

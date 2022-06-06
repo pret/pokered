@@ -62,7 +62,7 @@
 	const SPRITE_BRUNO                   ; $3a
 	const SPRITE_LORELEI                 ; $3b
 	const SPRITE_SEEL                    ; $3c
-FIRST_STILL_SPRITE EQU const_value
+DEF FIRST_STILL_SPRITE EQU const_value
 	const SPRITE_POKE_BALL               ; $3d
 	const SPRITE_FOSSIL                  ; $3e
 	const SPRITE_BOULDER                 ; $3f
@@ -75,4 +75,4 @@ FIRST_STILL_SPRITE EQU const_value
 	const SPRITE_UNUSED_GAMBLER_ASLEEP_1 ; $46
 	const SPRITE_UNUSED_GAMBLER_ASLEEP_2 ; $47
 	const SPRITE_GAMBLER_ASLEEP          ; $48
-NUM_SPRITES EQU const_value - 1
+DEF NUM_SPRITES EQU const_value - 1

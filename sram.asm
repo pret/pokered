@@ -26,12 +26,12 @@ sMainDataCheckSum:: db
 
 ; The PC boxes will not fit into one SRAM bank,
 ; so they use multiple SECTIONs
-box_n = 0
-boxes: MACRO
-REPT \1
-box_n += 1
-sBox{d:box_n}:: ds wBoxDataEnd - wBoxDataStart
-ENDR
+DEF box_n = 0
+MACRO boxes
+	REPT \1
+		DEF box_n += 1
+	sBox{d:box_n}:: ds wBoxDataEnd - wBoxDataStart
+	ENDR
 ENDM
 
 SECTION "Saved Boxes 1", SRAM

@@ -1,8 +1,8 @@
 ; Song ids are calculated by address to save space.
 ; SFX_Headers_(1|2|3) indexes (see audio/headers/*.asm)
 
-music_const: MACRO
-\1 EQUS "((\2 - SFX_Headers_1) / 3)"
+MACRO music_const
+	DEF \1 EQUS "((\2 - SFX_Headers_1) / 3)"
 ENDM
 
 	; AUDIO_1
@@ -57,7 +57,7 @@ ENDM
 	music_const MUSIC_MEET_MALE_TRAINER,   Music_MeetMaleTrainer
 
 	; AUDIO_1 AUDIO_2 AUDIO_3
-NOISE_INSTRUMENTS_START EQUS "SFX_NOISE_INSTRUMENT01"
+DEF NOISE_INSTRUMENTS_START EQUS "SFX_NOISE_INSTRUMENT01"
 	music_const SFX_NOISE_INSTRUMENT01, SFX_Noise_Instrument01_1
 	music_const SFX_NOISE_INSTRUMENT02, SFX_Noise_Instrument02_1
 	music_const SFX_NOISE_INSTRUMENT03, SFX_Noise_Instrument03_1
@@ -77,9 +77,9 @@ NOISE_INSTRUMENTS_START EQUS "SFX_NOISE_INSTRUMENT01"
 	music_const SFX_NOISE_INSTRUMENT17, SFX_Noise_Instrument17_1
 	music_const SFX_NOISE_INSTRUMENT18, SFX_Noise_Instrument18_1
 	music_const SFX_NOISE_INSTRUMENT19, SFX_Noise_Instrument19_1
-NOISE_INSTRUMENTS_END EQUS "SFX_NOISE_INSTRUMENT19 + 1"
+DEF NOISE_INSTRUMENTS_END EQUS "SFX_NOISE_INSTRUMENT19 + 1"
 
-CRY_SFX_START EQUS "SFX_CRY_00"
+DEF CRY_SFX_START EQUS "SFX_CRY_00"
 	music_const SFX_CRY_00,             SFX_Cry00_1
 	music_const SFX_CRY_01,             SFX_Cry01_1
 	music_const SFX_CRY_02,             SFX_Cry02_1
@@ -118,7 +118,7 @@ CRY_SFX_START EQUS "SFX_CRY_00"
 	music_const SFX_CRY_23,             SFX_Cry23_1
 	music_const SFX_CRY_24,             SFX_Cry24_1
 	music_const SFX_CRY_25,             SFX_Cry25_1
-CRY_SFX_END EQUS "SFX_CRY_25 + 3"
+DEF CRY_SFX_END EQUS "SFX_CRY_25 + 3"
 
 	music_const SFX_GET_ITEM_2,         SFX_Get_Item2_1
 	music_const SFX_TINK,               SFX_Tink_1
@@ -163,7 +163,7 @@ CRY_SFX_END EQUS "SFX_CRY_25 + 3"
 	; AUDIO_1
 	music_const SFX_POKEFLUTE,          SFX_Pokeflute
 	music_const SFX_SAFARI_ZONE_PA,     SFX_Safari_Zone_PA
-MAX_SFX_ID_1 EQUS "SFX_SAFARI_ZONE_PA"
+DEF MAX_SFX_ID_1 EQUS "SFX_SAFARI_ZONE_PA"
 
 	; AUDIO_2
 	music_const SFX_LEVEL_UP,           SFX_Level_Up
@@ -175,7 +175,7 @@ MAX_SFX_ID_1 EQUS "SFX_SAFARI_ZONE_PA"
 	music_const SFX_DEX_PAGE_ADDED,     SFX_Dex_Page_Added
 	music_const SFX_CAUGHT_MON,         SFX_Caught_Mon
 
-BATTLE_SFX_START EQUS "SFX_PECK"
+DEF BATTLE_SFX_START EQUS "SFX_PECK"
 	music_const SFX_PECK,               SFX_Peck
 	music_const SFX_FAINT_FALL,         SFX_Faint_Fall
 	music_const SFX_BATTLE_09,          SFX_Battle_09
@@ -225,8 +225,8 @@ BATTLE_SFX_START EQUS "SFX_PECK"
 	music_const SFX_BATTLE_35,          SFX_Battle_35
 	music_const SFX_BATTLE_36,          SFX_Battle_36
 	music_const SFX_SILPH_SCOPE,        SFX_Silph_Scope
-BATTLE_SFX_END   EQUS "SFX_SILPH_SCOPE + 1"
-MAX_SFX_ID_2 EQUS "SFX_SILPH_SCOPE"
+DEF BATTLE_SFX_END   EQUS "SFX_SILPH_SCOPE + 1"
+DEF MAX_SFX_ID_2 EQUS "SFX_SILPH_SCOPE"
 
 	; AUDIO_3
 	music_const SFX_INTRO_LUNGE,        SFX_Intro_Lunge
@@ -239,6 +239,6 @@ MAX_SFX_ID_2 EQUS "SFX_SILPH_SCOPE"
 	music_const SFX_SLOTS_REWARD,       SFX_Slots_Reward
 	music_const SFX_SLOTS_NEW_SPIN,     SFX_Slots_New_Spin
 	music_const SFX_SHOOTING_STAR,      SFX_Shooting_Star
-MAX_SFX_ID_3 EQUS "SFX_SHOOTING_STAR"
+DEF MAX_SFX_ID_3 EQUS "SFX_SHOOTING_STAR"
 
-SFX_STOP_ALL_MUSIC EQU $ff
+DEF SFX_STOP_ALL_MUSIC EQU $ff

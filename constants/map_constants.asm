@@ -1,7 +1,7 @@
-mapconst: MACRO
+MACRO mapconst
 	const \1
-\1_HEIGHT EQU \2
-\1_WIDTH EQU \3
+	DEF \1_HEIGHT EQU \2
+	DEF \1_WIDTH EQU \3
 ENDM
 
 ; map ids
@@ -26,9 +26,9 @@ ENDM
 	mapconst CINNABAR_ISLAND,                9, 10 ; $08
 	mapconst INDIGO_PLATEAU,                 9, 10 ; $09
 	mapconst SAFFRON_CITY,                  18, 20 ; $0A
-NUM_CITY_MAPS EQU const_value
+DEF NUM_CITY_MAPS EQU const_value
 	mapconst UNUSED_MAP_0B,                  0,  0 ; $0B
-FIRST_ROUTE_MAP EQU const_value
+DEF FIRST_ROUTE_MAP EQU const_value
 	mapconst ROUTE_1,                       18, 10 ; $0C
 	mapconst ROUTE_2,                       36, 10 ; $0D
 	mapconst ROUTE_3,                        9, 35 ; $0E
@@ -54,7 +54,7 @@ FIRST_ROUTE_MAP EQU const_value
 	mapconst ROUTE_23,                      72, 10 ; $22
 	mapconst ROUTE_24,                      18, 10 ; $23
 	mapconst ROUTE_25,                       9, 30 ; $24
-FIRST_INDOOR_MAP EQU const_value
+DEF FIRST_INDOOR_MAP EQU const_value
 	mapconst REDS_HOUSE_1F,                  4,  4 ; $25
 	mapconst REDS_HOUSE_2F,                  4,  4 ; $26
 	mapconst BLUES_HOUSE,                    4,  4 ; $27
@@ -266,8 +266,8 @@ FIRST_INDOOR_MAP EQU const_value
 	mapconst LORELEIS_ROOM,                  6,  5 ; $F5
 	mapconst BRUNOS_ROOM,                    6,  5 ; $F6
 	mapconst AGATHAS_ROOM,                   6,  5 ; $F7
-NUM_MAPS EQU const_value
+DEF NUM_MAPS EQU const_value
 
 ; Indoor maps, such as houses, use this as the Map ID in their exit warps
 ; This map ID takes the player back to the last outdoor map they were on, stored in wLastMap
-LAST_MAP EQU -1
+DEF LAST_MAP EQU -1

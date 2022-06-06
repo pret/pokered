@@ -123,7 +123,7 @@ TextIDErrorText:: ; "[hSpriteIndexOrTextID] ERROR."
 	text_far _TextIDErrorText
 	text_end
 
-print_name: MACRO
+MACRO print_name
 	push de
 	ld de, \1
 	jr PlaceCommandCharacter

@@ -4,10 +4,10 @@
 	const SHADE_LIGHT ; %01
 	const SHADE_DARK  ; %10
 	const SHADE_BLACK ; %11
-NUM_PAL_COLORS EQU const_value
+DEF NUM_PAL_COLORS EQU const_value
 
-PAL_COLOR_SIZE EQU 2
-PALETTE_SIZE EQU NUM_PAL_COLORS * PAL_COLOR_SIZE
+DEF PAL_COLOR_SIZE EQU 2
+DEF PALETTE_SIZE EQU NUM_PAL_COLORS * PAL_COLOR_SIZE
 
 ; pal/blk packets
 ; SetPalFunctions indexes (see engine/gfx/palettes.asm)
@@ -27,8 +27,8 @@ PALETTE_SIZE EQU NUM_PAL_COLORS * PAL_COLOR_SIZE
 	const SET_PAL_GAME_FREAK_INTRO     ; $0C
 	const SET_PAL_TRAINER_CARD         ; $0D
 
-SET_PAL_PARTY_MENU_HP_BARS EQU $fc
-SET_PAL_DEFAULT EQU $ff
+DEF SET_PAL_PARTY_MENU_HP_BARS EQU $fc
+DEF SET_PAL_DEFAULT EQU $ff
 
 ; sgb palettes
 ; SuperPalettes indexes (see data/sgb/sgb_palettes.asm)
@@ -70,4 +70,4 @@ SET_PAL_DEFAULT EQU $ff
 	const PAL_BADGE     ; $22
 	const PAL_CAVE      ; $23
 	const PAL_GAMEFREAK ; $24
-NUM_SGB_PALS EQU const_value
+DEF NUM_SGB_PALS EQU const_value

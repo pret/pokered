@@ -1,4 +1,4 @@
-CIRCLE_TILE_ID EQU $70
+DEF CIRCLE_TILE_ID EQU $70
 
 DisplayDiploma::
 	call SaveScreenTilesToBuffer2
@@ -83,7 +83,7 @@ UnusedPlayerNameLengthFunc:
 	dec c
 	jr .loop
 
-diploma_text: MACRO
+MACRO diploma_text
 	dw \3
 	dwcoord \1, \2
 ENDM

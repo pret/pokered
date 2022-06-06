@@ -280,8 +280,8 @@ GetPartyMonSpriteID:
 
 INCLUDE "data/pokemon/menu_icons.asm"
 
-INC_FRAME_1 EQUS "0, $20"
-INC_FRAME_2 EQUS "$20, $20"
+DEF INC_FRAME_1 EQUS "0, $20"
+DEF INC_FRAME_2 EQUS "$20, $20"
 
 BugIconFrame1:       INCBIN "gfx/icons/bug.2bpp", INC_FRAME_1
 PlantIconFrame1:     INCBIN "gfx/icons/plant.2bpp", INC_FRAME_1

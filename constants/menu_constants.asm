@@ -1,5 +1,5 @@
-BAG_ITEM_CAPACITY EQU 20
-PC_ITEM_CAPACITY  EQU 50
+DEF BAG_ITEM_CAPACITY EQU 20
+DEF PC_ITEM_CAPACITY  EQU 50
 
 ; text box IDs
 	const_def 1
@@ -42,15 +42,15 @@ PC_ITEM_CAPACITY  EQU 50
 	const TRADE_CANCEL_MENU ; 5
 	const HEAL_CANCEL_MENU  ; 6
 	const NO_YES_MENU       ; 7
-NUM_TWO_OPTION_MENUS EQU const_value
+DEF NUM_TWO_OPTION_MENUS EQU const_value
 
 ; menu exit method constants for list menus and the buy/sell/quit menu
-CHOSE_MENU_ITEM   EQU 1 ; pressed A
-CANCELLED_MENU    EQU 2 ; pressed B
+DEF CHOSE_MENU_ITEM   EQU 1 ; pressed A
+DEF CANCELLED_MENU    EQU 2 ; pressed B
 
 ; menu exit method constants for two-option menus
-CHOSE_FIRST_ITEM  EQU 1
-CHOSE_SECOND_ITEM EQU 2
+DEF CHOSE_FIRST_ITEM  EQU 1
+DEF CHOSE_SECOND_ITEM EQU 2
 
 ; move mon constants
 	const_def
@@ -71,7 +71,7 @@ CHOSE_SECOND_ITEM EQU 2
 ; party menu message IDs
 ; PartyMenuItemUseMessagePointers indexes (see engine/menus/party_menu.asm)
 	const_next $F0
-FIRST_PARTY_MENU_TEXT_ID EQU const_value
+DEF FIRST_PARTY_MENU_TEXT_ID EQU const_value
 	const ANTIDOTE_MSG         ; $F0
 	const BURN_HEAL_MSG        ; $F1
 	const ICE_HEAL_MSG         ; $F2

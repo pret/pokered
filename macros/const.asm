@@ -1,48 +1,48 @@
 ; Enumerate constants
 
-const_def: MACRO
-IF _NARG >= 1
-const_value = \1
-ELSE
-const_value = 0
-ENDC
-IF _NARG >= 2
-const_inc = \2
-ELSE
-const_inc = 1
-ENDC
+MACRO const_def
+	IF _NARG >= 1
+		DEF const_value = \1
+	ELSE
+		DEF const_value = 0
+	ENDC
+	IF _NARG >= 2
+		DEF const_inc = \2
+	ELSE
+		DEF const_inc = 1
+	ENDC
 ENDM
 
-const: MACRO
-\1 EQU const_value
-const_value += const_inc
+MACRO const
+	DEF \1 EQU const_value
+	DEF const_value += const_inc
 ENDM
 
-shift_const: MACRO
-\1 EQU 1 << const_value
-const_value += const_inc
+MACRO shift_const
+	DEF \1 EQU 1 << const_value
+	DEF const_value += const_inc
 ENDM
 
-const_skip: MACRO
-if _NARG >= 1
-const_value += const_inc * (\1)
-else
-const_value += const_inc
-endc
+MACRO const_skip
+	if _NARG >= 1
+		DEF const_value += const_inc * (\1)
+	else
+		DEF const_value += const_inc
+	endc
 ENDM
 
-const_next: MACRO
-if (const_value > 0 && \1 < const_value) || (const_value < 0 && \1 > const_value)
-fail "const_next cannot go backwards from {const_value} to \1"
-else
-const_value = \1
-endc
+MACRO const_next
+	if (const_value > 0 && \1 < const_value) || (const_value < 0 && \1 > const_value)
+		fail "const_next cannot go backwards from {const_value} to \1"
+	else
+		DEF const_value = \1
+	endc
 ENDM
 
-rb_skip: MACRO
-IF _NARG == 1
-rsset _RS + \1
-ELSE
-rsset _RS + 1
-ENDC
+MACRO rb_skip
+	IF _NARG == 1
+		rsset _RS + \1
+	ELSE
+		rsset _RS + 1
+	ENDC
 ENDM
