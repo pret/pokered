@@ -124,21 +124,21 @@ CableClub_DoBattleOrTradeAgain:
 	ld hl, wSerialRandomNumberListBlock
 	ld de, wSerialOtherGameboyRandomNumberListBlock
 	ld bc, $11
-	vc_hook Network17
+	vc_hook Wireless_ExchangeBytes_1_unknown_Type5
 	call Serial_ExchangeBytes
 	ld a, SERIAL_NO_DATA_BYTE
 	ld [de], a
 	ld hl, wSerialPlayerDataBlock
 	ld de, wSerialEnemyDataBlock
 	ld bc, $1a8
-	vc_hook Network424
+	vc_hook Wireless_ExchangeBytes_2
 	call Serial_ExchangeBytes
 	ld a, SERIAL_NO_DATA_BYTE
 	ld [de], a
 	ld hl, wSerialPartyMonsPatchList
 	ld de, wSerialEnemyMonsPatchList
 	ld bc, $c8
-	vc_hook Network200
+	vc_hook Wireless_ExchangeBytes_3
 	call Serial_ExchangeBytes
 	ld a, (1 << SERIAL) | (1 << TIMER) | (1 << VBLANK)
 	ldh [rIE], a
@@ -862,7 +862,7 @@ TradeCenter_Trade:
 	ld de, TradeCompleted
 	call PlaceString
 	predef SaveSAVtoSRAM2
-	vc_hook save_game_end
+	vc_hook Trade_save_game_end
 	ld c, 50
 	call DelayFrames
 	xor a

@@ -284,11 +284,11 @@ LinkMenu:
 .choseCancel
 	xor a
 	ld [wMenuJoypadPollCount], a
-	vc_hook Network_STOP
+	vc_hook Wireless_net_stop
 	call Delay3
 	call CloseLinkConnection
 	ld hl, LinkCanceledText
-	vc_hook Network_END
+	vc_hook Wireless_net_end
 	call PrintText
 	ld hl, wd72e
 	res 6, [hl]

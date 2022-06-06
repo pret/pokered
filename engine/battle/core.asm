@@ -3023,7 +3023,7 @@ LinkBattleExchangeData:
 	ld a, b
 .doExchange
 	ld [wSerialExchangeNybbleSendData], a
-	vc_hook send_byt2
+	vc_hook Wireless_start_exchange
 	callfar PrintWaitingText
 .syncLoop1
 	call Serial_ExchangeNybble
@@ -3031,8 +3031,8 @@ LinkBattleExchangeData:
 	ld a, [wSerialExchangeNybbleReceiveData]
 	inc a
 	jr z, .syncLoop1
-	vc_hook send_byt2_ret
-	vc_patch FIGHT
+	vc_hook Wireless_end_exchange
+	vc_patch Wireless_net_delay_1
 IF DEF(_RED_VC) || DEF(_BLUE_VC)
 	ld b, 26
 ELSE
@@ -3044,8 +3044,8 @@ ENDC
 	call Serial_ExchangeNybble
 	dec b
 	jr nz, .syncLoop2
-	vc_hook send_dummy
-	vc_patch FIGHT2
+	vc_hook Wireless_start_send_zero_bytes
+	vc_patch Wireless_net_delay_2
 IF DEF(_RED_VC) || DEF(_BLUE_VC)
 	ld b, 26
 ELSE
@@ -3057,7 +3057,7 @@ ENDC
 	call Serial_SendZeroByte
 	dec b
 	jr nz, .syncLoop3
-	vc_hook send_dummy_end
+	vc_hook Wireless_end_send_zero_bytes
 	ret
 
 ExecutePlayerMove:
@@ -6677,8 +6677,8 @@ BattleRandom:
 	ld a, [hl]
 	pop bc
 	pop hl
-	vc_hook fight_ret_c
-	vc_patch fight_ret
+	vc_hook Unknown_BattleRandom_ret_c
+	vc_patch BattleRandom_ret
 IF DEF(_RED_VC) || DEF(_BLUE_VC)
 	ret
 ELSE
@@ -6749,9 +6749,9 @@ HandleExplodingAnimation:
 
 PlayMoveAnimation:
 	ld [wAnimationID], a
-	vc_hook_red FPA_conf_Begin
+	vc_hook_red Reduce_move_anim_flashing_Confusion
 	call Delay3
-	vc_hook_red FPA_phy_Begin
+	vc_hook_red Reduce_move_anim_flashing_Psychic
 	predef_jump MoveAnimation
 
 InitBattle::
