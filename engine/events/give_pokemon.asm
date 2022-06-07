@@ -35,20 +35,29 @@ _GivePokemon::
 	ld [hl], "@"
 	ld hl, SentToBoxText
 	call PrintText
+	call .clearAltPaletteData
 	scf
 	ret
 .boxFull
 	ld hl, BoxIsFullText
 	call PrintText
+	push af
+	call .clearAltPaletteData
+	pop af
 	and a
 	ret
 .addToParty
 	call SetPokedexOwnedFlag
 	call AddPartyMon
+	call .clearAltPaletteData
 	ld a, 1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld [wAddedToParty], a
 	scf
+	ret
+.clearAltPaletteData
+	xor a
+	ld [wIsAltPalettePkmnData], a
 	ret
 
 SetPokedexOwnedFlag:

@@ -6224,7 +6224,9 @@ LoadEnemyMonData:
 	ld a, [hli]            ; copy type 2
 	ld [de], a
 	inc de
-	ld a, [hli]            ; copy catch rate TODO: alt palette
+	ld a, [hli]            ; copy catch rate NEW: this property is no longer used
+	; NEW: pokemon will be alternate palette if wIsAltPalettePkmn is set
+	ld a, [wIsAltPalettePkmnData]
 	ld [de], a
 	inc de
 	ld a, [wIsInBattle]

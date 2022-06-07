@@ -242,7 +242,7 @@ FightingDojoText6:
 	ld a, [wcf91]
 	ld b, a
 	ld c, 30
-	call GivePokemon
+	call GivePokemonAltPalette
 	jr nc, .done
 
 	; once Poké Ball is taken, hide sprite
@@ -277,7 +277,7 @@ FightingDojoText7:
 	ld a, [wcf91]
 	ld b, a
 	ld c, 30
-	call GivePokemon
+	call GivePokemonAltPalette
 	jr nc, .done
 	SetEvents EVENT_GOT_HITMONCHAN, EVENT_DEFEATED_FIGHTING_DOJO
 

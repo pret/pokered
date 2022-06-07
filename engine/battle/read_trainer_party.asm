@@ -10,6 +10,7 @@ ReadTrainer:
 ; XXX second is species of first pokemon?
 	ld hl, wEnemyPartyCount
 	xor a
+	ld [wIsAltPalettePkmnData], a ; NPC trainers never have alt palette pokemon for now
 	ld [hli], a
 	dec a
 	ld [hl], a

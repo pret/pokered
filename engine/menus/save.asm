@@ -642,6 +642,16 @@ SaveHallOfFameTeams:
 	ld d, h
 	ld hl, wHallOfFame
 	ld bc, HOF_TEAM
+	call HallOfFame_Copy
+	ld a, [wNumHoFTeams]
+	dec a
+	ld hl, sHallOfFamePalettes
+	ld bc, 1
+	call AddNTimes
+	ld e, l
+	ld d, h
+	ld hl, wHallOfFamePalettes
+	ld bc, 1
 	jr HallOfFame_Copy
 
 .shiftHOFTeams
@@ -654,6 +664,14 @@ SaveHallOfFameTeams:
 	ld hl, wHallOfFame
 	ld de, sHallOfFame + HOF_TEAM * (HOF_TEAM_CAPACITY - 1)
 	ld bc, HOF_TEAM
+	call HallOfFame_Copy
+	ld hl, sHallOfFamePalettes + 1
+	ld de, sHallOfFamePalettes
+	ld bc, (HOF_TEAM_CAPACITY - 1)
+	call HallOfFame_Copy
+	ld hl, wHallOfFamePalettes
+	ld de, sHallOfFamePalettes + (HOF_TEAM_CAPACITY - 1)
+	ld bc, 1
 	jr HallOfFame_Copy
 
 LoadHallOfFameTeams:
@@ -663,6 +681,13 @@ LoadHallOfFameTeams:
 	call AddNTimes
 	ld de, wHallOfFame
 	ld bc, HOF_TEAM
+	call HallOfFame_Copy
+	ld hl, sHallOfFamePalettes
+	ld bc, 1
+	ld a, [wHoFTeamIndex]
+	call AddNTimes
+	ld de, wHallOfFamePalettes
+	ld bc, 1
 	; fallthrough
 
 HallOfFame_Copy:

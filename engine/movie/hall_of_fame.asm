@@ -18,6 +18,7 @@ AnimateHallOfFame:
 	ld bc, HOF_TEAM
 	call FillMemory
 	xor a
+	ld [wHallOfFamePalettes], a
 	ld [wUpdateSpritesEnabled], a
 	ldh [hTileAnimations], a
 	ld [wSpriteFlipped], a
@@ -48,6 +49,7 @@ AnimateHallOfFame:
 	ld [wHoFMonSpecies], a
 	ld a, c
 	ld [wHoFPartyMonIndex], a
+	call StoreHoFAltPaletteFlag
 	ld hl, wPartyMon1Level
 	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes
@@ -91,6 +93,34 @@ AnimateHallOfFame:
 	res 3, [hl]
 	ret
 
+StoreHoFAltPaletteFlag:
+	push af
+	ld a, [wHoFPartyMonIndex]
+	ld hl, wPartyMon1Flags
+	ld bc, wPartyMon2 - wPartyMon1
+	call AddNTimes
+	ld a, [hl]
+	and 1
+	ld [wIsAltPalettePkmn], a
+	ld b, a ; whether it's an alt palette
+	ld a, [wHoFPartyMonIndex]
+	ld c, a
+	and a
+	ld a, b
+	jr z, .storeBit
+.loopShiftLeft
+	sla a
+	dec c
+	jr nz, .loopShiftLeft
+.storeBit
+	ld hl, wHallOfFamePalettes
+	or a, [hl]
+	ld [hl], a
+	pop af
+	ret
+
+
+
 HallOfFameText:
 	db "HALL OF FAME@"
 
@@ -112,12 +142,13 @@ HoFShowMonOrPlayer:
 	call HoFLoadPlayerPics
 	jr .next1
 .showMon
+	ld a, [wBattleMon]
 	hlcoord 12, 5
 	call GetMonHeader
 	call LoadFrontSpriteByMonIndex
 	predef LoadMonBackPic
 .next1
-	ld b, SET_PAL_POKEMON_WHOLE_SCREEN
+	ld b, SET_PAL_POKEMON_WHOLE_SCREEN_TRADE
 	ld c, 0
 	call RunPaletteCommand
 	ld a, %11100100

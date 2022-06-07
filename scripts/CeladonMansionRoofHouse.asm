@@ -12,7 +12,7 @@ CeladonMansion5Text1:
 CeladonMansion5Text2:
 	text_asm
 	lb bc, EEVEE, 25
-	call GivePokemon
+	call GivePokemonAltPalette
 	jr nc, .party_full
 	ld a, HS_CELADON_MANSION_EEVEE_GIFT
 	ld [wMissableObjectIndex], a

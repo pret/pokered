@@ -13,3 +13,7 @@ TradeMons:
 	db VENONAT,    TANGELA,   TRADE_DIALOGSET_HAPPY,  "CRINKLES@@@"
 	db NIDORAN_M,  NIDORAN_F, TRADE_DIALOGSET_HAPPY,  "SPOT@@@@@@@"
 	assert_table_length NUM_NPC_TRADES
+
+TradeMonPalettes:
+	db %00000000
+	db %00

@@ -361,6 +361,8 @@ Trade_ShowEnemyMon:
 	call Trade_CopyTileMapToVRAM
 	ld a, $1
 	ldh [hAutoBGTransferEnabled], a
+	ld a, [wIsAltPalettePkmnData]
+	ld [wIsAltPalettePkmn], a
 	ld a, [wTradedEnemyMonSpecies]
 	call Trade_LoadMonSprite
 	ld a, TRADE_BALL_POOF_ANIM
@@ -751,7 +753,7 @@ Trade_LoadMonSprite:
 	ld [wcf91], a
 	ld [wd0b5], a
 	ld [wWholeScreenPaletteMonSpecies], a
-	ld b, SET_PAL_POKEMON_WHOLE_SCREEN
+	ld b, SET_PAL_POKEMON_WHOLE_SCREEN_TRADE
 	ld c, 0
 	call RunPaletteCommand
 	ldh a, [hAutoBGTransferEnabled]

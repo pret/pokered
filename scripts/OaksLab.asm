@@ -926,6 +926,8 @@ OaksLabMonChoiceMenu:
 	ld [wCurEnemyLVL], a
 	ld a, [wcf91]
 	ld [wd11e], a
+	xor a
+	ld [wIsAltPalettePkmnData], a
 	call AddPartyMon
 	ld hl, wd72e
 	set 3, [hl]

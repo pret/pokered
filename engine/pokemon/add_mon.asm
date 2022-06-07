@@ -169,7 +169,10 @@ _AddPartyMon::
 	ld [de], a
 	inc de
 	ld a, [hli]       ; catch rate (held item in gen 2)
+	;NEW: we don't load catch rate, we instead treat this byte as a set of flags. at the moment only bit 0 is used for indicating alt palettes. 
+	ld a, [wIsAltPalettePkmnData]
 	ld [de], a
+	;;;;
 	ld hl, wMonHMoves
 	ld a, [hli]
 	inc de
@@ -278,6 +281,10 @@ AddPartyMon_WriteMovePP:
 ; adds enemy mon [wcf91] (at position [wWhichPokemon] in enemy list) to own party
 ; used in the cable club trade center
 _AddEnemyMonToPlayerParty::
+	ld a, [wIsAltPalettePkmnData]
+	ld [wLoadedMonFlags], a
+	xor a
+	ld [wIsAltPalettePkmnData], a
 	ld hl, wPartyCount
 	ld a, [hl]
 	cp PARTY_LENGTH

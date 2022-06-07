@@ -3082,6 +3082,15 @@ ReadSuperRodData:
 	cp b
 	jr nc, .RandomLoop ; if a is greater than the number of mons, regenerate
 
+	ld b, a
+	push hl
+	push af
+	ld a, b
+	add 20 ; fishing group indices start at bit 20 of the palette flag array
+	ld [wIsAltPalettePkmn], a ; index from 20 to 23 to indicate which palette flag to check
+	callfar CheckWildPokemonPalettes ; stores the palette flag if the given pokemon should be alt palette
+	pop af
+	pop hl
 	; get the mon
 	add a
 	ld c, a

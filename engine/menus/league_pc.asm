@@ -52,7 +52,9 @@ PKMNLeaguePC:
 
 LeaguePCShowTeam:
 	ld c, PARTY_LENGTH
+	ld b, 0
 .loop
+	call CheckMonAltPaletteLeaguePC
 	push bc
 	call LeaguePCShowMon
 	call WaitForTextScrollButtonPress
@@ -67,6 +69,7 @@ LeaguePCShowTeam:
 	ld a, [wHallOfFame + 0]
 	cp $ff
 	jr z, .done
+	inc b
 	dec c
 	jr nz, .loop
 .done
@@ -92,7 +95,7 @@ LeaguePCShowMon:
 	ld de, wcd6d
 	ld bc, NAME_LENGTH
 	call CopyData
-	ld b, SET_PAL_POKEMON_WHOLE_SCREEN
+	ld b, SET_PAL_POKEMON_WHOLE_SCREEN_TRADE
 	ld c, 0
 	call RunPaletteCommand
 	hlcoord 12, 5
@@ -111,6 +114,26 @@ LeaguePCShowMon:
 	lb bc, 1, 3
 	call PrintNumber
 	farjp HoFDisplayMonInfo
+
+CheckMonAltPaletteLeaguePC:
+	;b = index in team
+	ld a, b
+	push de
+	ld e, b
+	and a
+	ld a, [wHallOfFamePalettes]
+	jr z, .getBit
+.loopShiftRight
+	srl a
+	dec b
+	jr nz, .loopShiftRight
+.getBit
+	and 1
+	ld [wIsAltPalettePkmn], a
+	ld b, e
+	pop de
+	ret
+
 
 HallOfFameNoText:
 	db "HALL OF FAME No   @"

@@ -366,6 +366,9 @@ wTrainerCardBlkPacket:: ds $40
 
 NEXTU
 wHallOfFame:: ds HOF_TEAM
+; bit array of whether each pokemon in current hall of fame team data should use an alt color palette
+; only uses bits 0-5, since the party size is 6.
+wHallOfFamePalettes:: db 
 
 NEXTU
 wNPCMovementDirections:: ds 180
@@ -893,8 +896,15 @@ wTMTextShown:: db ; whether text for a TM is visible in a menu
 wDamageIntention:: db ; in battle, the amount of damage a move will do before doing it (used for high jump kick / jump kick crash effect)
 wLowHealthTonePairs:: db ;in battle, used as a counter for low hp alarm tone pairs
 wSpiralBallsDelay:: db
+wIsAltPalettePkmn:: db ;a flag for features related to alternate pokemon color palettes, set in these scenarios:
+;1 - set prior to loading the palette of a pokemon that should have an alternate palette, reset upon showing the pokemon sprite
+;2 - set as a storage value for "which wild pokemon slot has been encountered" when figuring out if that slot is an alternate palette pokemon
+;if this flag is 0 the default palette will be used.
+wIsAltPalettePkmnData:: db ;a flag for features related to alternate pokemon color palettes, set in these scenarios:
+;1 - set prior to loading the data of a pokemon into wram in order to insert the flag for alternate palette into its data permanently
+;stays set until the next pokemon is loaded.
 
-	ds 3
+	ds 1
 
 ; This has overlapping related uses.
 ; When the player tries to use an item or use certain field moves, 0 is stored
@@ -1891,7 +1901,9 @@ wNumBagItems:: db
 wBagItems:: ds BAG_ITEM_CAPACITY * 2 + 1
 ;;;;
 
-; 55 bytes remaining in union
+wWildMonPalettes:: ds 3 ; flag array for the current location of which wild pokemon should use alt palettes
+
+; 52 bytes remaining in union
 
 ENDU
 

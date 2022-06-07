@@ -25,9 +25,12 @@ LoadWildData::
 	ld a, [hli]
 	ld [wWaterRate], a
 	and a
-	ret z        ; if no water data, we're done
+	jr z, .loadPaletteData   ; if no water data, skip loading it
 	ld de, wWaterMons  ; otherwise, load surfing data
 	ld bc, $14
-	jp CopyData
+	call CopyData
+.loadPaletteData
+	callfar GetWildPokemonPalettes
+	ret
 
 INCLUDE "data/wild/grass_water.asm"

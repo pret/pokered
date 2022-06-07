@@ -54,13 +54,18 @@ TryDoWildEncounter:
 	ldh a, [hRandomSub]
 	ld b, a
 	ld hl, WildMonEncounterSlotChances
+	xor a
+	ld c, a
 .determineEncounterSlot
 	ld a, [hli]
 	cp b
 	jr nc, .gotEncounterSlot
+	inc c ; c will store the current encounter slot index
 	inc hl
 	jr .determineEncounterSlot
 .gotEncounterSlot
+	ld a, c
+	ld [wIsAltPalettePkmn], a ; store which encounter slot index (0-9) we ended up with into wIsAltPalettePokemon
 ; determine which wild pokemon (grass or water) can appear in the half-block we're standing in
 	ld c, [hl]
 	ld hl, wGrassMons
@@ -68,6 +73,9 @@ TryDoWildEncounter:
 	cp $14 ; is the bottom left tile (8,9) of the half-block we're standing in a water tile?
 	jr nz, .gotWildEncounterType ; else, it's treated as a grass tile by default
 	ld hl, wWaterMons
+	ld a, [wIsAltPalettePkmn]
+	add 10 ; water encounters start at bit 10
+	ld [wIsAltPalettePkmn], a
 ; since the bottom right tile of a "left shore" half-block is $14 but the bottom left tile is not,
 ; "left shore" half-blocks (such as the one in the east coast of Cinnabar) load grass encounters.
 .gotWildEncounterType
@@ -94,10 +102,13 @@ TryDoWildEncounter:
 	call EnableAutoTextBoxDrawing
 	call DisplayTextID
 .CantEncounter2
+	xor a
+	ld [wIsAltPalettePkmn], a
 	ld a, $1
 	and a
 	ret
 .willEncounter
+	callfar CheckWildPokemonPalettes ; checks if the pokemon should use an alt palette and if so stores 1 in wIsAltPalettePkmn
 	xor a
 	ret
 
