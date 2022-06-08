@@ -2028,10 +2028,12 @@ ItemUseOldRod:
 ItemUseGoodRod:
 	call FishingInit
 	jp c, ItemUseNotTime
+	call Random
+	and %11
+	and a
+	jr z, .SetBite ;25% chance of no bite
 .RandomLoop
 	call Random
-	srl a
-	jr c, .SetBite
 	and %11
 	cp 2
 	jr nc, .RandomLoop
@@ -2070,6 +2072,13 @@ RodResponse:
 	ld [wCurEnemyLVL], a
 	ld a, c ; species
 	ld [wCurOpponent], a
+	; store fishing item index so we can reload it next time we open the item menu outside battle
+	ld a, [wBagSavedMenuItem]
+	ld [wSavedFishingItem], a
+	ld a, [wListScrollOffset]
+	ld [wSavedFishingItemOffset], a
+	ld a, 2
+	ld [wExtraSavedStartMenuIndex], a ; ITEM menu saved index saved for use after battle
 
 .next
 	ld hl, wWalkBikeSurfState
@@ -2102,7 +2111,7 @@ FishingInit:
 	call PrintText
 	ld a, SFX_HEAL_AILMENT
 	call PlaySound
-	ld c, 80
+	ld c, 20
 	call DelayFrames
 	and a
 	ret
@@ -3073,11 +3082,13 @@ ReadSuperRodData:
 	inc hl ; point to data
 	ld e, $0 ; no bite yet
 
+	call Random
+	and %11 ; 2-bit random number
+	and a
+	ret z ; 25% chance of no battle (25% chance of 2 bits being 00)
+
 .RandomLoop
 	call Random
-	srl a
-	ret c ; 50% chance of no battle
-
 	and %11 ; 2-bit random number
 	cp b
 	jr nc, .RandomLoop ; if a is greater than the number of mons, regenerate

@@ -1,45 +1,10 @@
-_Route12HouseText_564c0::
+_Route12GuruIntro::
 	text "I'm the FISHING"
-	line "GURU's brother!"
+	line "GURU's younger"
+	cont "brother!"
+	prompt
 
-	para "I simply Looove"
-	line "fishing!"
-
-	para "Do you like to"
-	line "fish?"
-	done
-
-_Route12HouseText_564c5::
-	text "Grand! I like"
-	line "your style!"
-
-	para "Take this and"
-	line "fish, young one!"
-
-	para "<PLAYER> received"
-	line "a @"
-	text_ram wStringBuffer
-	text "!@"
-	text_end
-
-_Route12HouseText_564ca::
-	text_start
-
-	para "Fishing is a way"
-	line "of life!"
-
-	para "From the seas to"
-	line "rivers, go out"
-	cont "and land the big"
-	cont "one!"
-	done
-
-_Route12HouseText_564cf::
-	text "Oh... That's so"
-	line "disappointing..."
-	done
-
-_Route12HouseText_564d4::
+_Route12GuruEnd::
 	text "Hello there,"
 	line "<PLAYER>!"
 
@@ -49,14 +14,12 @@ _Route12HouseText_564d4::
 	cont "different kinds"
 	cont "of #MON."
 
+	para "Depending on"
+	line "where you fish,"
+	cont "you may even find"
+	cont "differently"
+	cont "colored #MON!"
+
 	para "Try fishing"
 	line "wherever you can!"
-	done
-
-_Route12HouseText_564d9::
-	text "Oh no!"
-
-	para "I had a gift for"
-	line "you, but you have"
-	cont "no room for it!"
 	done

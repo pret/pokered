@@ -322,8 +322,7 @@ StartMenu_Item::
 	ld [wPrintItemPrices], a
 	ld a, ITEMLISTMENU
 	ld [wListMenuID], a
-	ld a, [wBagSavedMenuItem]
-	ld [wCurrentMenuItem], a
+	call CheckLoadSavedIndex
 	call DisplayListMenuID
 	ld a, [wCurrentMenuItem]
 	ld [wBagSavedMenuItem], a
@@ -873,3 +872,28 @@ SwitchPartyMon_InitVarOrSwapData:
 	pop hl
 	ret
 
+CheckLoadSavedIndex:
+	ld a, [wBagSavedMenuItem]
+	and a
+	jr nz, .done
+	ld a, [wListScrollOffset]
+	and a
+	jr nz, .default
+	; try loading the fishing item offset if we don't have any offsets saved
+	ld a, [wSavedFishingItemOffset]
+	ld [wListScrollOffset], a
+	xor a
+	ld [wSavedFishingItemOffset], a
+	ld a, [wSavedFishingItem]
+	push bc
+	ld b, a
+	xor a
+	ld [wSavedFishingItem], a
+	ld a, b
+	pop bc
+	jr .done
+.default
+	ld a, [wBagSavedMenuItem]	
+.done	
+	ld [wCurrentMenuItem], a
+	ret

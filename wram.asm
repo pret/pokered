@@ -228,6 +228,7 @@ wPartyAndBillsPCSavedMenuItem:: db
 
 ; It is used by the bag list to remember the cursor position while the menu
 ; isn't active.
+; it's reset at the start of battle
 wBagSavedMenuItem:: db
 
 ; It is used by the start menu to remember the cursor position while the menu
@@ -244,7 +245,8 @@ wPlayerMonNumber:: db
 ; the address of the menu cursor's current location within wTileMap
 wMenuCursorLocation:: dw
 
-	ds 2
+wSavedFishingItem:: db ; used to keep the fishing rod item index after doing a fishing battle
+wSavedFishingItemOffset:: db ; used to keep the fishing rod item offset after doing a fishing battle
 
 ; how many times should HandleMenuInput poll the joypad state before it returns?
 wMenuJoypadPollCount:: db
@@ -264,7 +266,7 @@ wMenuWatchMovingOutOfBounds:: db
 
 wTradeCenterPointerTableIndex:: db
 
-	ds 1
+wExtraSavedStartMenuIndex:: db ; used to save the current cursor index in the start menu (when we want it to persist after battle)
 
 ; destination pointer for text output
 ; this variable is written to, but is never read from

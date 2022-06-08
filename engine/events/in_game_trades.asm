@@ -151,12 +151,10 @@ InGameTrade_DoTrade:
 	ld a, $3
 	jr .tradeSucceeded
 .tradeFailed
-	xor a
-	ld [wIsAltPalettePkmnData], a
 	scf
 .tradeSucceeded
 	ld [wInGameTradeTextPointerTableIndex], a
-	xor a
+	ld a, 0
 	ld [wIsAltPalettePkmnData], a ; clear any alt palette flags
 	ret
 

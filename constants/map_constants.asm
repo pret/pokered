@@ -123,7 +123,7 @@ FIRST_INDOOR_MAP EQU const_value
 	mapconst SS_ANNE_1F_ROOMS,               8, 12 ; $66
 	mapconst SS_ANNE_2F_ROOMS,               8, 12 ; $67
 	mapconst SS_ANNE_B1F_ROOMS,              8, 12 ; $68
-	mapconst UNUSED_MAP_69,                  0,  0 ; $69
+	mapconst CERULEAN_OLD_ROD_HOUSE,         5,  4 ; $69
 	mapconst UNUSED_MAP_6A,                  0,  0 ; $6A
 	mapconst UNUSED_MAP_6B,                  0,  0 ; $6B
 	mapconst VICTORY_ROAD_1F,                9, 10 ; $6C

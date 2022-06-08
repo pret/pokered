@@ -18,9 +18,7 @@ DrawStartMenu::
 	ld [wTopMenuItemY], a ; Y position of first menu choice
 	ld a, $0b
 	ld [wTopMenuItemX], a ; X position of first menu choice
-	ld a, [wBattleAndStartSavedMenuItem] ; remembered menu selection from last time
-	ld [wCurrentMenuItem], a
-	ld [wLastMenuItem], a
+	call CheckSavedStartMenuIndex
 	xor a
 	ld [wMenuWatchMovingOutOfBounds], a
 	ld hl, wd730
@@ -57,6 +55,24 @@ DrawStartMenu::
 	call PlaceString
 	ld hl, wd730
 	res 6, [hl] ; turn pauses between printing letters back on
+	ret
+
+CheckSavedStartMenuIndex:
+	ld a, [wBattleAndStartSavedMenuItem] ; remembered menu selection from last time
+	and a
+	jr nz, .done
+	ld a, [wExtraSavedStartMenuIndex] ; remembered menu selection even after a battle - like when a fishing encounter occurred
+	and a
+	jr z, .done
+	push bc
+	ld b, a
+	xor a
+	ld [wExtraSavedStartMenuIndex], a
+	ld a, b
+	pop bc
+.done
+	ld [wCurrentMenuItem], a
+	ld [wLastMenuItem], a
 	ret
 
 StartMenuPokedexText:

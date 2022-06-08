@@ -398,7 +398,10 @@ FishingAnim:
 	ld de, wOAMBuffer + $9c
 	ld bc, $4
 	call CopyData
-	ld c, 100
+	call Random
+	and %1111111 ; a = random number between 0 and 127
+	add 20 ; minimum of 20 frames after starting to result, so minimum frames fishing = 20 and max = 147
+	ld c, a
 	call DelayFrames
 	ld a, [wRodResponse]
 	and a
