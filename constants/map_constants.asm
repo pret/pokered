@@ -12,6 +12,7 @@ ENDM
 ; - MapHSPointers (see data/maps/hide_show_data.asm)
 ; - MapSpriteSets (see data/maps/sprite_sets.asm)
 ; - ExternalMapEntries (see data/maps/town_map_entries.asm)
+; - WildDataPointers (see data/wild/grass_water.asm)
 ; Each map also has associated data in maps.asm.
 ; Order: towns/cities, then routes, then indoor/dungeon maps
 	const_def
