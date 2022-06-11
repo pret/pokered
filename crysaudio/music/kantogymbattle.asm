@@ -436,7 +436,7 @@ Music_KantoGymBattle_Ch2:
 	sound_ret
 
 Music_KantoGymBattle_Ch3:
-	note_type 12, 1, -1
+	note_type 12, 1, 9
 	octave 2
 	note E_, 1
 	rest 1

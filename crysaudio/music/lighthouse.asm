@@ -212,7 +212,7 @@ Music_Lighthouse_Ch2:
 	sound_loop 0, .mainloop
 
 Music_Lighthouse_Ch3:
-	note_type 12, 1, -1
+	note_type 12, 1, 9
 	stereo_panning TRUE, FALSE
 .mainloop:
 	octave 2

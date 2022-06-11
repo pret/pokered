@@ -614,7 +614,7 @@ Music_JohtoGymBattle_Ch2:
 	sound_loop 0, .mainloop
 
 Music_JohtoGymBattle_Ch3:
-	note_type 12, 1, -1
+	note_type 12, 1, 9
 	octave 4
 	note F_, 1
 	rest 1

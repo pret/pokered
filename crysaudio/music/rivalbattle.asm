@@ -536,7 +536,7 @@ Music_RivalBattle_Ch2:
 	sound_ret
 
 Music_RivalBattle_Ch3:
-	note_type 12, 1, -1
+	note_type 12, 1, 9
 	octave 3
 	note F#, 2
 	note A#, 2

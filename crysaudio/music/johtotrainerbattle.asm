@@ -900,7 +900,7 @@ Music_JohtoTrainerBattle_Ch2:
 	sound_ret
 
 Music_JohtoTrainerBattle_Ch3:
-	note_type 12, 1, -1
+	note_type 12, 1, 9
 	octave 4
 	note E_, 1
 	note D#, 1

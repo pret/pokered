@@ -115,7 +115,7 @@ Music_IndigoPlateau_Ch2:
 	sound_ret
 
 Music_IndigoPlateau_Ch3:
-	note_type 12, 1, -1
+	note_type 12, 1, 9
 .mainloop:
 	sound_call .sub1
 	octave 3

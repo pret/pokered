@@ -223,7 +223,7 @@ Music_RocketHideout_Ch2:
 	sound_loop 0, .mainloop
 
 Music_RocketHideout_Ch3:
-	note_type 12, 1, -1
+	note_type 12, 1, 9
 .mainloop:
 .loop1:
 	octave 2
