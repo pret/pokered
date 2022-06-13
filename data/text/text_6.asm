@@ -48,6 +48,13 @@ _ItemUseBallText08::
 	cont "someone's PC!"
 	prompt
 
+_NoBoxSlotsLeftText::
+	text "Your BOX is now"
+	line "full."
+	para "Time to change"
+	line "boxes!"
+	prompt
+
 _ItemUseBallText06::
 	text "New #DEX data"
 	line "will be added for"

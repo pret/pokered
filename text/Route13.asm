@@ -170,6 +170,11 @@ _Route13Text12::
 	para "Use SELECT to"
 	line "switch items in"
 	cont "the ITEM window!"
+
+	para "This also works"
+	line "during battle"
+	cont "with #MON"
+	cont "attacks!"
 	done
 
 _Route13Text13::

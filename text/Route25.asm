@@ -154,3 +154,17 @@ _Route25Text11::
 	text "SEA COTTAGE"
 	line "BILL lives here!"
 	done
+
+_Route25Text12::
+	text "TRAINER TIPS"
+	para "Hold both the"
+	line "A and B Buttons" 
+	cont "while standing"
+	cont "still."
+	para "Then press any" 
+	line "direction on the" 
+	cont "D-PAD to change"
+	cont "the direction"
+	cont "you're facing"
+	cont "without walking."
+	done

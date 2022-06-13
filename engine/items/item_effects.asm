@@ -589,6 +589,12 @@ ItemUseBall:
 	ld hl, ItemUseBallText08
 .printTransferredToPCText
 	call PrintText
+	ld a, [wBoxCount]
+	cp MONS_PER_BOX
+	jr nz, .notFullBox
+	ld hl, NoBoxSlotsLeftText
+	call PrintText
+.notFullBox
 	jr .done
 
 .oldManCaughtMon
@@ -644,6 +650,11 @@ ItemUseBallText07:
 ItemUseBallText08:
 ;"X was transferred to someone's PC"
 	text_far _ItemUseBallText08
+	text_end
+
+NoBoxSlotsLeftText:
+;"0 slots left in Box X! Time to change boxes!"
+	text_far _NoBoxSlotsLeftText
 	text_end
 
 ItemUseBallText06:

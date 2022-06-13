@@ -52,6 +52,7 @@ Route25_TextPointers:
 	dw Route25Text9
 	dw PickUpItemText
 	dw Route25Text11
+	dw Route25Text12
 
 Route25TrainerHeaders:
 	def_trainers
@@ -239,4 +240,8 @@ Route25AfterBattleText9:
 
 Route25Text11:
 	text_far _Route25Text11
+	text_end
+
+Route25Text12:
+	text_far _Route25Text12
 	text_end

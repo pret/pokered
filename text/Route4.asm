@@ -110,8 +110,8 @@ _Route4Text9::
 	line "to 30 items."
 	para "If you run out"
 	line "of item space,"
-	cont "press START to"
+	cont "press START in"
+	cont "the ITEM menu to"
 	cont "deposit an item"
-	cont "to your PC from"
-	cont "the ITEM menu!"
+	cont "to your PC!"
 	done

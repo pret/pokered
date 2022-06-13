@@ -152,3 +152,15 @@ _CeladonCityText18::
 	line "The playground"
 	cont "for grown-ups!"
 	done
+
+_CeladonCityText19::
+	text "TRAINER TIPS"
+	para "Open the START "
+	line "menu and scroll"
+	cont "down to the SAVE"
+	cont "option."
+	para "Then press SELECT"
+	line "to change PC"
+	cont "boxes whenever"
+	cont "you like!"
+	done
