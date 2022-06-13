@@ -317,8 +317,10 @@ wMonDataLocation:: db
 ; set to 0 if you can't go past the top or bottom of the menu
 wMenuWrappingEnabled:: db
 
-; whether to check for 180-degree turn (0 = don't, 1 = do)
-wCheckFor180DegreeTurn:: db
+; A counter that is incremented when holding A+B while standing still in the overworld. 
+; After this counter reaches a certain amount, the player will be in "turn around without moving forward" mode.
+; Releasing either button will reset this counter.
+wDirectionChangeModeCounter:: db
 
 	ds 1
 

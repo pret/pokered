@@ -143,8 +143,22 @@ OverworldLoopLessDelay::
 	ld hl, wFlags_0xcd60
 	res 2, [hl]
 	call UpdateSprites
-	ld a, 1
-	ld [wCheckFor180DegreeTurn], a
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; - NEW : code for changing direction without moving by pressing A+B and a direction when standing still.
+	ld a, [hJoyHeld] 
+	and B_BUTTON
+	jr z, .resetDirectionChangeState
+	ld a, [hJoyHeld] 
+	and A_BUTTON
+	jr z, .resetDirectionChangeState ; hold both B and A button to go into "change direction without moving" mode.
+	ld a, [wDirectionChangeModeCounter]
+	inc a
+	ld [wDirectionChangeModeCounter], a
+	jr .noDirectionButtonsPressed2
+.resetDirectionChangeState
+	xor a
+	ld [wDirectionChangeModeCounter], a
+.noDirectionButtonsPressed2
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	ld a, [wPlayerMovingDirection] ; the direction that was pressed last time
 	and a
 	jp z, OverworldLoop
@@ -191,14 +205,20 @@ OverworldLoopLessDelay::
 	ld a, [wd730]
 	bit 7, a ; are we simulating button presses?
 	jr nz, .noDirectionChange ; ignore direction changes if we are
-	ld a, [wCheckFor180DegreeTurn]
-	and a
-	jr z, .noDirectionChange
-	ld a, [wPlayerDirection] ; new direction
-	ld b, a
-	ld a, [wPlayerLastStopDirection] ; old direction
-	cp b
-	jr z, .noDirectionChange
+;;;;;; - NEW: Code for entering "direction change" mode when wDirectionChangeModeCounter >= 10
+	ld a, [wDirectionChangeModeCounter]
+	cp 10 ; must hold down A+B for at least this many frames while standing still to get into this mode
+	jr c, .noDirectionChange
+;;;;;;
+	 ;
+;	ld a, [wDirectionChangeModeCounter]
+;	and a
+;	jr z, .noDirectionChange
+;	ld a, [wPlayerDirection] ; new direction
+;	ld b, a
+;	ld a, [wPlayerLastStopDirection] ; old direction
+;	cp b
+;	jr z, .noDirectionChange
 ; Check whether the player did a 180-degree turn.
 ; It appears that this code was supposed to show the player rotate by having
 ; the player's sprite face an intermediate direction before facing the opposite
@@ -207,36 +227,33 @@ OverworldLoopLessDelay::
 ; ever be visible because DelayFrame is called at the start of OverworldLoop and
 ; normally not enough cycles would be executed between then and the time the
 ; direction is set for V-blank to occur while the direction is still set.
-	swap a ; put old direction in upper half
-	or b ; put new direction in lower half
-	cp (PLAYER_DIR_DOWN << 4) | PLAYER_DIR_UP ; change dir from down to up
-	jr nz, .notDownToUp
-	ld a, PLAYER_DIR_LEFT
-	ld [wPlayerMovingDirection], a
-	jr .holdIntermediateDirectionLoop
-.notDownToUp
-	cp (PLAYER_DIR_UP << 4) | PLAYER_DIR_DOWN ; change dir from up to down
-	jr nz, .notUpToDown
-	ld a, PLAYER_DIR_RIGHT
-	ld [wPlayerMovingDirection], a
-	jr .holdIntermediateDirectionLoop
-.notUpToDown
-	cp (PLAYER_DIR_RIGHT << 4) | PLAYER_DIR_LEFT ; change dir from right to left
-	jr nz, .notRightToLeft
-	ld a, PLAYER_DIR_DOWN
-	ld [wPlayerMovingDirection], a
-	jr .holdIntermediateDirectionLoop
-.notRightToLeft
-	cp (PLAYER_DIR_LEFT << 4) | PLAYER_DIR_RIGHT ; change dir from left to right
-	jr nz, .holdIntermediateDirectionLoop
-	ld a, PLAYER_DIR_UP
-	ld [wPlayerMovingDirection], a
-.holdIntermediateDirectionLoop
+;	swap a ; put old direction in upper half
+;	or b ; put new direction in lower half
+;	cp (PLAYER_DIR_DOWN << 4) | PLAYER_DIR_UP ; change dir from down to up
+;	jr nz, .notDownToUp
+;	ld a, PLAYER_DIR_LEFT
+;	ld [wPlayerMovingDirection], a
+;	jr .holdIntermediateDirectionLoop
+;.notDownToUp
+;	cp (PLAYER_DIR_UP << 4) | PLAYER_DIR_DOWN ; change dir from up to down
+;	jr nz, .notUpToDown
+;	ld a, PLAYER_DIR_RIGHT
+;	ld [wPlayerMovingDirection], a
+;	jr .holdIntermediateDirectionLoop
+;.notUpToDown
+;	cp (PLAYER_DIR_RIGHT << 4) | PLAYER_DIR_LEFT ; change dir from right to left
+;	jr nz, .notRightToLeft
+;	ld a, PLAYER_DIR_DOWN
+;	ld [wPlayerMovingDirection], a
+;	jr .holdIntermediateDirectionLoop
+;.notRightToLeft
+;	cp (PLAYER_DIR_LEFT << 4) | PLAYER_DIR_RIGHT ; change dir from left to right
+;	jr nz, .holdIntermediateDirectionLoop
+;	ld a, PLAYER_DIR_UP
+;	ld [wPlayerMovingDirection], a
+.directionChangeState
 	ld hl, wFlags_0xcd60
 	set 2, [hl]
-	ld hl, wCheckFor180DegreeTurn
-	dec [hl]
-	jr nz, .holdIntermediateDirectionLoop
 	ld a, [wPlayerDirection]
 	ld [wPlayerMovingDirection], a
 	call NewBattle
@@ -244,6 +261,8 @@ OverworldLoopLessDelay::
 	jp OverworldLoop
 
 .noDirectionChange
+	xor a
+	ld [wDirectionChangeModeCounter], a
 	ld a, [wPlayerDirection] ; current direction
 	ld [wPlayerMovingDirection], a ; save direction
 	call UpdateSprites
