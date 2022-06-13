@@ -99,6 +99,25 @@ _Route10AfterBattleText6::
 	cont "floral pattern!"
 	done
 
+_Route10BattleText7::
+	text "I wonder what's"
+	line "down this river?"
+	done
+
+_Route10EndBattleText7::
+	text "I got"
+	line "doused!"
+	prompt
+
+_Route10AfterBattleText7::
+	text "What if there"
+	line "was a derelict"
+	cont "sunken ship down"
+	cont "this river?"
+	para "That'd be so"
+	line "cool! Right?"
+	done
+
 _Route10Text9::
 _Route10Text7::
 	text "ROCK TUNNEL"

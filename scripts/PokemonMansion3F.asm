@@ -78,13 +78,14 @@ Mansion3Script_Switches::
 	ret nz
 	xor a
 	ldh [hJoyHeld], a
-	ld a, $6
+	ld a, $7
 	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
 PokemonMansion3F_TextPointers:
 	dw Mansion3Text1
 	dw Mansion3Text2
+	dw Mansion3Text3
 	dw PickUpItemText
 	dw PickUpItemText
 	dw Mansion3Text5
@@ -96,6 +97,8 @@ Mansion3TrainerHeader0:
 	trainer EVENT_BEAT_MANSION_3_TRAINER_0, 0, Mansion3BattleText1, Mansion3EndBattleText1, Mansion3AfterBattleText1
 Mansion3TrainerHeader1:
 	trainer EVENT_BEAT_MANSION_3_TRAINER_1, 2, Mansion3BattleText2, Mansion3EndBattleText2, Mansion3AfterBattleText2
+Mansion3TrainerHeader2:
+	trainer EVENT_BEAT_MANSION_3_TRAINER_2, 0, Mansion3BattleText3, Mansion3EndBattleText3, Mansion3AfterBattleText3
 	db -1 ; end
 
 Mansion3Text1:
@@ -133,6 +136,25 @@ Mansion3EndBattleText2:
 Mansion3AfterBattleText2:
 	text_far _Mansion3AfterBattleText2
 	text_end
+
+Mansion3Text3:
+	text_asm
+	ld hl, Mansion3TrainerHeader2
+	call TalkToTrainer
+	jp TextScriptEnd
+
+Mansion3BattleText3:
+	text_far _Mansion3BattleText3
+	text_end
+
+Mansion3EndBattleText3:
+	text_far _Mansion3EndBattleText3
+	text_end
+
+Mansion3AfterBattleText3:
+	text_far _Mansion3AfterBattleText3
+	text_end
+
 
 Mansion3Text5:
 	text_far _Mansion3Text5

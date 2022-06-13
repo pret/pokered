@@ -22,6 +22,7 @@ Route8_TextPointers:
 	dw Route8Text7
 	dw Route8Text8
 	dw Route8Text9
+	dw PickUpItemText
 	dw Route8Text10
 
 Route8TrainerHeaders:

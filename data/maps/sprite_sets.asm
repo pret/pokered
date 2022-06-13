@@ -139,7 +139,7 @@ SPRITE_SET_LENGTH EQU 9 + 2
 	db SPRITE_ROCKET
 	db SPRITE_POKE_BALL
 	db SPRITE_SNORLAX
-	;assert_table_length SPRITE_SET_LENGTH
+	assert_table_length SPRITE_SET_LENGTH
 
 ; sprite set $06
 	table_width 1

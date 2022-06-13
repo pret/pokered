@@ -51,7 +51,7 @@ Mansion1Script_Switches::
 	ret nz
 	xor a
 	ldh [hJoyHeld], a
-	ld a, $4
+	ld a, $7
 	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
@@ -62,19 +62,46 @@ PokemonMansion1F_ScriptPointers:
 
 PokemonMansion1F_TextPointers:
 	dw Mansion1Text1
-	dw PickUpItemText
-	dw PickUpItemText
+	dw Mansion1Text2
+	dw Mansion1Text3
 	dw Mansion1Text4
+	dw PickUpItemText
+	dw PickUpItemText
+	dw Mansion1Text5
 
 Mansion1TrainerHeaders:
 	def_trainers
 Mansion1TrainerHeader0:
-	trainer EVENT_BEAT_MANSION_1_TRAINER_0, 3, Mansion1BattleText2, Mansion1EndBattleText2, Mansion1AfterBattleText2
+	trainer EVENT_BEAT_MANSION_1_TRAINER_0, 3, Mansion1BattleText1, Mansion1EndBattleText1, Mansion1AfterBattleText1
+Mansion1TrainerHeader1:
+	trainer EVENT_BEAT_MANSION_1_TRAINER_1, 3, Mansion1BattleText2, Mansion1EndBattleText2, Mansion1AfterBattleText2
+Mansion1TrainerHeader2:
+	trainer EVENT_BEAT_MANSION_1_TRAINER_2, 3, Mansion1BattleText3, Mansion1EndBattleText3, Mansion1AfterBattleText3
+Mansion1TrainerHeader3:
+	trainer EVENT_BEAT_MANSION_1_TRAINER_3, 3, Mansion1BattleText4, Mansion1EndBattleText4, Mansion1AfterBattleText4
 	db -1 ; end
 
 Mansion1Text1:
 	text_asm
 	ld hl, Mansion1TrainerHeader0
+	call TalkToTrainer
+	jp TextScriptEnd
+
+Mansion1BattleText1:
+	text_far _Mansion1BattleText1
+	text_end
+
+Mansion1EndBattleText1:
+	text_far _Mansion1EndBattleText1
+	text_end
+
+Mansion1AfterBattleText1:
+	text_far _Mansion1AfterBattleText1
+	text_end
+
+Mansion1Text2:
+	text_asm
+	ld hl, Mansion1TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
@@ -90,7 +117,43 @@ Mansion1AfterBattleText2:
 	text_far _Mansion1AfterBattleText2
 	text_end
 
+Mansion1Text3:
+	text_asm
+	ld hl, Mansion1TrainerHeader2
+	call TalkToTrainer
+	jp TextScriptEnd
+
+Mansion1BattleText3:
+	text_far _Mansion1BattleText3
+	text_end
+
+Mansion1EndBattleText3:
+	text_far _Mansion1EndBattleText3
+	text_end
+
+Mansion1AfterBattleText3:
+	text_far _Mansion1AfterBattleText3
+	text_end
+
 Mansion1Text4:
+	text_asm
+	ld hl, Mansion1TrainerHeader3
+	call TalkToTrainer
+	jp TextScriptEnd
+
+Mansion1BattleText4:
+	text_far _Mansion1BattleText4
+	text_end
+
+Mansion1EndBattleText4:
+	text_far _Mansion1EndBattleText4
+	text_end
+
+Mansion1AfterBattleText4:
+	text_far _Mansion1AfterBattleText4
+	text_end
+
+Mansion1Text5:
 	text_asm
 	ld hl, MansionSwitchText
 	call PrintText

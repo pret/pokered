@@ -14,11 +14,13 @@ SHOW EQU $15
 	const HS_OLD_MAN                       ; 02
 	const HS_MUSEUM_GUY                    ; 03
 	const HS_GYM_GUY                       ; 04
+	const HS_PEWTER_CITY_ITEM              ; NEW X
 	const HS_CERULEAN_RIVAL                ; 05
 	const HS_CERULEAN_ROCKET               ; 06
 	const HS_CERULEAN_GUARD_1              ; 07
 	const HS_CERULEAN_CAVE_GUY             ; 08
 	const HS_CERULEAN_GUARD_2              ; 09
+	const HS_CERULEAN_ITEM                 ; NEW X
 	const HS_SAFFRON_CITY_1                ; 0A
 	const HS_SAFFRON_CITY_2                ; 0B
 	const HS_SAFFRON_CITY_3                ; 0C
@@ -36,17 +38,31 @@ SHOW EQU $15
 	const HS_SAFFRON_CITY_F                ; 18
 	const HS_ROUTE_2_ITEM_1                ; 19 X
 	const HS_ROUTE_2_ITEM_2                ; 1A X
-	const HS_ROUTE_4_ITEM                  ; 1B X
+	const HS_ROUTE_2_ITEM_3                ; NEW X
+	const HS_ROUTE_4_ITEM_1                ; 1B X
+	const HS_ROUTE_4_ITEM_2                ; NEW X
+	const HS_ROUTE_5_ITEM                  ; NEW X
+	const HS_ROUTE_6_ITEM                  ; NEW X
+	const HS_ROUTE_8_ITEM                  ; NEW X
 	const HS_ROUTE_9_ITEM                  ; 1C X
+	const HS_ROUTE_10_ITEM                 ; NEW X
+	const HS_ROUTE_11_ITEM                 ; NEW X
 	const HS_ROUTE_12_SNORLAX              ; 1D
 	const HS_ROUTE_12_ITEM_1               ; 1E X
 	const HS_ROUTE_12_ITEM_2               ; 1F X
+	const HS_ROUTE_12_ITEM_3               ; NEW X
 	const HS_ROUTE_15_ITEM                 ; 20 X
 	const HS_ROUTE_16_SNORLAX              ; 21
+	const HS_ROUTE_21_ITEM                 ; NEW X
 	const HS_ROUTE_22_RIVAL_1              ; 22
 	const HS_ROUTE_22_RIVAL_2              ; 23
+	const HS_ROUTE_22_ITEM_1               ; NEW X
+	const HS_ROUTE_22_ITEM_2               ; NEW X
 	const HS_NUGGET_BRIDGE_GUY             ; 24
-	const HS_ROUTE_24_ITEM                 ; 25 X
+	const HS_ROUTE_23_ITEM_1               ; NEW X
+	const HS_ROUTE_23_ITEM_2               ; NEW X
+	const HS_ROUTE_24_ITEM_1               ; 25 X
+	const HS_ROUTE_24_ITEM_2               ; NEW X
 	const HS_ROUTE_25_ITEM                 ; 26 X
 	const HS_DAISY_SITTING                 ; 27
 	const HS_DAISY_WALKING                 ; 28
@@ -78,6 +94,7 @@ SHOW EQU $15
 	const HS_POKEMON_TOWER_7F_ROCKET_3     ; 42 X
 	const HS_POKEMON_TOWER_7F_MR_FUJI      ; 43
 	const HS_MR_FUJIS_HOUSE_MR_FUJI        ; 44
+	const HS_CELADON_MANSION_ROOF_ITEM     ; NEW X
 	const HS_CELADON_MANSION_EEVEE_GIFT    ; 45
 	const HS_GAME_CORNER_ROCKET            ; 46
 	const HS_WARDENS_HOUSE_ITEM            ; 47 X
@@ -85,7 +102,14 @@ SHOW EQU $15
 	const HS_POKEMON_MANSION_1F_ITEM_2     ; 49 X
 	const HS_FIGHTING_DOJO_GIFT_1          ; 4A
 	const HS_FIGHTING_DOJO_GIFT_2          ; 4B
+	const HS_SILPH_CO_1F_TRAINER_1         ; NEW
+	const HS_SILPH_CO_1F_TRAINER_2         ; NEW
+	const HS_SILPH_CO_1F_TRAINER_3         ; NEW
+	const HS_SILPH_CO_1F_TRAINER_4         ; NEW
 	const HS_SILPH_CO_1F_RECEPTIONIST      ; 4C
+	const HS_ROCK_TUNNEL_1F_ITEM           ; NEW X
+	const HS_ROCK_TUNNEL_B1F_ITEM_1        ; NEW X
+	const HS_ROCK_TUNNEL_B1F_ITEM_2        ; NEW X
 	const HS_VOLTORB_1                     ; 4D X
 	const HS_VOLTORB_2                     ; 4E X
 	const HS_VOLTORB_3                     ; 4F X
@@ -179,7 +203,6 @@ SHOW EQU $15
 	const HS_SILPH_CO_7F_RIVAL             ; A7
 	const HS_SILPH_CO_7F_ITEM_1            ; A8 X
 	const HS_SILPH_CO_7F_ITEM_2            ; A9 X
-	const HS_SILPH_CO_7F_8                 ; AA XXX sprite doesn't exist
 	const HS_SILPH_CO_8F_1                 ; AB
 	const HS_SILPH_CO_8F_2                 ; AC
 	const HS_SILPH_CO_8F_3                 ; AD
@@ -195,7 +218,6 @@ SHOW EQU $15
 	const HS_SILPH_CO_11F_1                ; B7
 	const HS_SILPH_CO_11F_2                ; B8
 	const HS_SILPH_CO_11F_3                ; B9
-	const HS_UNUSED_MAP_F4_1               ; BA XXX sprite doesn't exist
 	const HS_POKEMON_MANSION_2F_ITEM       ; BB X
 	const HS_POKEMON_MANSION_3F_ITEM_1     ; BC X
 	const HS_POKEMON_MANSION_3F_ITEM_2     ; BD X
@@ -204,64 +226,70 @@ SHOW EQU $15
 	const HS_POKEMON_MANSION_B1F_ITEM_3    ; C0 X
 	const HS_POKEMON_MANSION_B1F_ITEM_4    ; C1 X
 	const HS_POKEMON_MANSION_B1F_ITEM_5    ; C2 X
-	const HS_SAFARI_ZONE_EAST_RANGER_0     ; C3 X
-	const HS_SAFARI_ZONE_EAST_TRAINER_0    ; C4 X
-	const HS_SAFARI_ZONE_EAST_TRAINER_1    ; C5 X
-	const HS_SAFARI_ZONE_EAST_TRAINER_2    ; C6 X
-	const HS_SAFARI_ZONE_EAST_TRAINER_3    ; C7 X
-	const HS_SAFARI_ZONE_EAST_ITEM_1       ; C8 X
-	const HS_SAFARI_ZONE_EAST_ITEM_2       ; C9 X
-	const HS_SAFARI_ZONE_EAST_ITEM_3       ; CA X
-	const HS_SAFARI_ZONE_EAST_ITEM_4       ; CB X
-	const HS_SAFARI_ZONE_NORTH_RANGER_0    ; CC X
-	const HS_SAFARI_ZONE_NORTH_TRAINER_0   ; CD X
-	const HS_SAFARI_ZONE_NORTH_TRAINER_1   ; CE X
-	const HS_SAFARI_ZONE_NORTH_TRAINER_2   ; CF X
-	const HS_SAFARI_ZONE_NORTH_TRAINER_3   ; D0 X
-	const HS_SAFARI_ZONE_NORTH_TRAINER_4   ; D1 X
-	const HS_SAFARI_ZONE_NORTH_ITEM_1      ; D2 X
-	const HS_SAFARI_ZONE_NORTH_ITEM_2      ; D3 X
-	const HS_SAFARI_ZONE_WEST_RANGER_0    ; D4 X
-	const HS_SAFARI_ZONE_WEST_RANGER_1    ; D5 X
-	const HS_SAFARI_ZONE_WEST_TRAINER_0   ; D6 X
-	const HS_SAFARI_ZONE_WEST_TRAINER_1   ; D7 X
-	const HS_SAFARI_ZONE_WEST_TRAINER_2   ; D8 X
-	const HS_SAFARI_ZONE_WEST_TRAINER_3   ; D9 X
-	const HS_SAFARI_ZONE_WEST_TRAINER_4   ; DA X
-	const HS_SAFARI_ZONE_WEST_ITEM_1       ; DB X
-	const HS_SAFARI_ZONE_WEST_ITEM_2       ; DC X
-	const HS_SAFARI_ZONE_WEST_ITEM_3       ; DD X
-	const HS_SAFARI_ZONE_WEST_ITEM_4       ; DE X
-	const HS_SAFARI_ZONE_CENTER_RANGER_0     ; DF X
-	const HS_SAFARI_ZONE_CENTER_TRAINER_0    ; E0 X
-	const HS_SAFARI_ZONE_CENTER_TRAINER_1    ; E1 X
-	const HS_SAFARI_ZONE_CENTER_TRAINER_2    ; E2 X
-	const HS_SAFARI_ZONE_CENTER_TRAINER_3    ; E3 X
-	const HS_SAFARI_ZONE_CENTER_ITEM       ; E4 X
-	const HS_CERULEAN_CAVE_2F_ITEM_1       ; E5 X
-	const HS_CERULEAN_CAVE_2F_ITEM_2       ; E6 X
-	const HS_CERULEAN_CAVE_2F_ITEM_3       ; E7 X
-	const HS_MEWTWO                        ; E8 X
-	const HS_CERULEAN_CAVE_B1F_ITEM_1      ; E9 X
-	const HS_CERULEAN_CAVE_B1F_ITEM_2      ; EA X
-	const HS_VICTORY_ROAD_1F_ITEM_1        ; EB X
-	const HS_VICTORY_ROAD_1F_ITEM_2        ; EC X
-	const HS_CHAMPIONS_ROOM_OAK            ; ED
-	const HS_SEAFOAM_ISLANDS_1F_BOULDER_1  ; EE
-	const HS_SEAFOAM_ISLANDS_1F_BOULDER_2  ; EF
-	const HS_SEAFOAM_ISLANDS_B1F_BOULDER_1 ; F0
-	const HS_SEAFOAM_ISLANDS_B1F_BOULDER_2 ; F1
-	const HS_SEAFOAM_ISLANDS_B2F_BOULDER_1 ; F2
-	const HS_SEAFOAM_ISLANDS_B2F_BOULDER_2 ; F3
-	const HS_SEAFOAM_ISLANDS_B3F_BOULDER_1 ; F4
-	const HS_SEAFOAM_ISLANDS_B3F_BOULDER_2 ; F5
-	const HS_SEAFOAM_ISLANDS_B3F_BOULDER_3 ; F6
-	const HS_SEAFOAM_ISLANDS_B3F_BOULDER_4 ; F7
-	const HS_SEAFOAM_ISLANDS_B3F_DOME_FOSSIL ; F8
-	const HS_SEAFOAM_ISLANDS_B3F_HELIX_FOSSIL ; F9
-	const HS_SEAFOAM_ISLANDS_B4F_BOULDER_1 ; FA
-	const HS_SEAFOAM_ISLANDS_B4F_BOULDER_2 ; FB
-	const HS_ARTICUNO                      ; FC X
-	const HS_MEW_VERMILION_DOCK            ; FD 
+	const HS_CERULEAN_CAVE_2F_ITEM_1       ; C3 X
+	const HS_CERULEAN_CAVE_2F_ITEM_2       ; C4 X
+	const HS_CERULEAN_CAVE_2F_ITEM_3       ; C5 X
+	const HS_MEWTWO                        ; C6 X
+	const HS_CERULEAN_CAVE_B1F_ITEM_1      ; C7 X
+	const HS_CERULEAN_CAVE_B1F_ITEM_2      ; C8 X
+	const HS_VICTORY_ROAD_1F_ITEM_1        ; C9 X
+	const HS_VICTORY_ROAD_1F_ITEM_2        ; D0 X
+	const HS_CHAMPIONS_ROOM_OAK            ; D1
+	const HS_SEAFOAM_ISLANDS_1F_BOULDER_1  ; D2
+	const HS_SEAFOAM_ISLANDS_1F_BOULDER_2  ; D3
+	const HS_SEAFOAM_ISLANDS_B1F_BOULDER_1 ; D4
+	const HS_SEAFOAM_ISLANDS_B1F_BOULDER_2 ; D5
+	const HS_SEAFOAM_ISLANDS_B2F_BOULDER_1 ; D6
+	const HS_SEAFOAM_ISLANDS_B2F_BOULDER_2 ; D7
+	const HS_SEAFOAM_ISLANDS_B3F_BOULDER_1 ; D8
+	const HS_SEAFOAM_ISLANDS_B3F_BOULDER_2 ; D9
+	const HS_SEAFOAM_ISLANDS_B3F_BOULDER_3 ; E0
+	const HS_SEAFOAM_ISLANDS_B3F_BOULDER_4 ; E1
+	const HS_SEAFOAM_ISLANDS_B3F_DOME_FOSSIL ; E2
+	const HS_SEAFOAM_ISLANDS_B3F_HELIX_FOSSIL ; E3
+	const HS_SEAFOAM_ISLANDS_B4F_BOULDER_1 ; E4
+	const HS_SEAFOAM_ISLANDS_B4F_BOULDER_2 ; E5
+	const HS_ARTICUNO                      ; E6 X
+	const HS_SEAFOAM_ISLANDS_B4F_ITEM      ; NEW X
+	const HS_MEW_VERMILION_DOCK            ; NEW X
+	; current length -> F3
 
 NUM_HS_OBJECTS EQU const_value
+
+	const_def
+	const HS_SAFARI_ZONE_EAST_RANGER_0     ; 01 X
+	const HS_SAFARI_ZONE_EAST_TRAINER_0    ; 02 X
+	const HS_SAFARI_ZONE_EAST_TRAINER_1    ; 03 X
+	const HS_SAFARI_ZONE_EAST_TRAINER_2    ; 04 X
+	const HS_SAFARI_ZONE_EAST_TRAINER_3    ; 05 X
+	const HS_SAFARI_ZONE_EAST_ITEM_1       ; 06 X
+	const HS_SAFARI_ZONE_EAST_ITEM_2       ; 07 X
+	const HS_SAFARI_ZONE_EAST_ITEM_3       ; 08 X
+	const HS_SAFARI_ZONE_EAST_ITEM_4       ; 09 X
+	const HS_SAFARI_ZONE_NORTH_RANGER_0    ; 0A X
+	const HS_SAFARI_ZONE_NORTH_TRAINER_0   ; 0B X
+	const HS_SAFARI_ZONE_NORTH_TRAINER_1   ; 0C X
+	const HS_SAFARI_ZONE_NORTH_TRAINER_2   ; 0D X
+	const HS_SAFARI_ZONE_NORTH_TRAINER_3   ; 0E X
+	const HS_SAFARI_ZONE_NORTH_TRAINER_4   ; 0F X
+	const HS_SAFARI_ZONE_NORTH_ITEM_1      ; 10 X
+	const HS_SAFARI_ZONE_NORTH_ITEM_2      ; 11 X
+	const HS_SAFARI_ZONE_WEST_RANGER_0    ; 12 X
+	const HS_SAFARI_ZONE_WEST_RANGER_1    ; 13 X
+	const HS_SAFARI_ZONE_WEST_TRAINER_0   ; 14 X
+	const HS_SAFARI_ZONE_WEST_TRAINER_1   ; 15 X
+	const HS_SAFARI_ZONE_WEST_TRAINER_2   ; 16 X
+	const HS_SAFARI_ZONE_WEST_TRAINER_3   ; 17 X
+	const HS_SAFARI_ZONE_WEST_TRAINER_4   ; 18 X
+	const HS_SAFARI_ZONE_WEST_ITEM_1       ; 19 X
+	const HS_SAFARI_ZONE_WEST_ITEM_2       ; 20 X
+	const HS_SAFARI_ZONE_WEST_ITEM_3       ; 21 X
+	const HS_SAFARI_ZONE_WEST_ITEM_4       ; 22 X
+	const HS_SAFARI_ZONE_CENTER_RANGER_0     ; 23 X
+	const HS_SAFARI_ZONE_CENTER_TRAINER_0    ; 24 X
+	const HS_SAFARI_ZONE_CENTER_TRAINER_1    ; 25 X
+	const HS_SAFARI_ZONE_CENTER_TRAINER_2    ; 26 X
+	const HS_SAFARI_ZONE_CENTER_TRAINER_3    ; 27 X
+	const HS_SAFARI_ZONE_CENTER_ITEM       ; 28 X
+
+NUM_EXTRA_HS_OBJECTS EQU const_value

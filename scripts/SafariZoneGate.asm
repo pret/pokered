@@ -593,7 +593,7 @@ ShowAllHl:
 	ld [wMissableObjectIndex], a
 	push af
 	push hl
-	predef ShowObject
+	predef ShowExtraObject
 	pop hl
 	pop af
 	inc a
@@ -607,7 +607,7 @@ HideAllHl:
 	ld [wMissableObjectIndex], a
 	push af
 	push hl
-	predef HideObject
+	predef HideExtraObject
 	pop hl
 	pop af
 	inc a

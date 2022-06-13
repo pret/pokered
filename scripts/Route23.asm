@@ -146,6 +146,8 @@ Route23_TextPointers:
 	dw Route23Text5
 	dw Route23Text6
 	dw Route23Text7
+	dw PickUpItemText
+	dw PickUpItemText
 	dw Route23Text8
 
 Route23Text1:

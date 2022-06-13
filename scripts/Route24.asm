@@ -85,6 +85,7 @@ Route24_TextPointers:
 	dw Route24Text6
 	dw Route24Text7
 	dw PickUpItemText
+	dw PickUpItemText
 
 Route24TrainerHeaders:
 	def_trainers 2

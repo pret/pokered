@@ -102,3 +102,9 @@ _Route22FrontGateText::
 	text "#MON LEAGUE"
 	line "Front Gate"
 	done
+
+_Route22TrainerTipsText::
+	text "TRAINER TIPS"
+	para "Hold B while"
+	line "moving to run."
+	done

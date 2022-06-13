@@ -20,6 +20,9 @@ Route6_TextPointers:
 	dw Route6Text5
 	dw Route6Text6
 	dw Route6Text7
+	dw Route6Text8
+	dw PickUpItemText
+	dw Route6Text9
 
 Route6TrainerHeaders:
 	def_trainers
@@ -35,6 +38,10 @@ Route6TrainerHeader4:
 	trainer EVENT_BEAT_ROUTE_6_TRAINER_4, 3, Route6BattleText5, Route6EndBattleText5, Route6AfterBattleText5
 Route6TrainerHeader5:
 	trainer EVENT_BEAT_ROUTE_6_TRAINER_5, 3, Route6BattleText6, Route6EndBattleText6, Route6AfterBattleText6
+Route6TrainerHeader6:
+	trainer EVENT_BEAT_ROUTE_6_TRAINER_6, 2, Route6BattleText7, Route6EndBattleText7, Route6AfterBattleText7
+Route6TrainerHeader7:
+	trainer EVENT_BEAT_ROUTE_6_TRAINER_7, 3, Route6BattleText8, Route6EndBattleText8, Route6AfterBattleText8
 	db -1 ; end
 
 Route6Text1:
@@ -142,5 +149,41 @@ Route6AfterBattleText6:
 	text_end
 
 Route6Text7:
+	text_asm
+	ld hl, Route6TrainerHeader6
+	call TalkToTrainer
+	jp TextScriptEnd
+
+Route6BattleText7:
+	text_far _Route6BattleText7
+	text_end
+
+Route6EndBattleText7:
+	text_far _Route6EndBattleText7
+	text_end
+
+Route6AfterBattleText7:
+	text_far _Route6AfterBattleText7
+	text_end
+
+Route6Text8:
+	text_asm
+	ld hl, Route6TrainerHeader7
+	call TalkToTrainer
+	jp TextScriptEnd
+
+Route6BattleText8:
+	text_far _Route6BattleText8
+	text_end
+
+Route6EndBattleText8:
+	text_far _Route6EndBattleText8
+	text_end
+
+Route6AfterBattleText8:
+	text_far _Route6AfterBattleText8
+	text_end
+
+Route6Text9:
 	text_far _Route6Text7
 	text_end

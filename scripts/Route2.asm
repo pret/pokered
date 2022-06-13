@@ -1,6 +1,12 @@
 Route2_Script:
 	call Route2ReplaceCutTiles
-	jp EnableAutoTextBoxDrawing
+	call EnableAutoTextBoxDrawing
+	ld hl, Route2TrainerHeaders
+	ld de, Route2_ScriptPointers
+	ld a, [wRoute2CurScript]
+	call ExecuteCurMapScriptInTable
+	ld [wRoute2CurScript], a
+	ret
 
 ; replaces the cut trees, by default it adds 1
 ; after using the "Tree Deleter" on this route it removes 2 trees from the default to have 3 gone in total and an open path to Pewter City
@@ -49,11 +55,84 @@ Route2ReplaceCutTiles:
 	predef ReplaceTileBlockNoRedraw
 	ret
 
+Route2_ScriptPointers:
+	dw CheckFightingMapTrainers
+	dw DisplayEnemyTrainerTextAndStartBattle
+	dw EndTrainerBattle
+
 Route2_TextPointers:
+	dw Route2BugCatcherText
+	dw Route2JrTrainerMText
+	dw Route2JrTrainerFText
+	dw PickUpItemText
 	dw PickUpItemText
 	dw PickUpItemText
 	dw Route2Text3
 	dw Route2Text4
+
+Route2TrainerHeaders:
+	def_trainers 1
+Route2TrainerHeader0:
+	trainer EVENT_BEAT_ROUTE_2_TRAINER_0, 4, Route2BattleText1, Route2EndBattleText1, Route2AfterBattleText1
+Route2TrainerHeader1:
+	trainer EVENT_BEAT_ROUTE_2_TRAINER_1, 4, Route2BattleText2, Route2EndBattleText2, Route2AfterBattleText2
+Route2TrainerHeader2:
+	trainer EVENT_BEAT_ROUTE_2_TRAINER_2, 3, Route2BattleText3, Route2EndBattleText3, Route2AfterBattleText3
+	db -1 ; end
+
+Route2BugCatcherText:
+	text_asm
+	ld hl, Route2TrainerHeader0
+	call TalkToTrainer
+	jp TextScriptEnd
+
+Route2BattleText1:
+	text_far _Route2BattleText1
+	text_end
+
+Route2EndBattleText1:
+	text_far _Route2EndBattleText1
+	text_end
+
+Route2AfterBattleText1:
+	text_far _Route2AfterBattleText1
+	text_end
+
+Route2JrTrainerMText:
+	text_asm
+	ld hl, Route2TrainerHeader1
+	call TalkToTrainer
+	jp TextScriptEnd
+
+Route2BattleText2:
+	text_far _Route2BattleText2
+	text_end
+
+Route2EndBattleText2:
+	text_far _Route2EndBattleText2
+	text_end
+
+Route2AfterBattleText2:
+	text_far _Route2AfterBattleText2
+	text_end
+
+Route2JrTrainerFText:
+	text_asm
+	ld hl, Route2TrainerHeader2
+	call TalkToTrainer
+	jp TextScriptEnd
+
+Route2BattleText3:
+	text_far _Route2BattleText3
+	text_end
+
+Route2EndBattleText3:
+	text_far _Route2EndBattleText3
+	text_end
+
+Route2AfterBattleText3:
+	text_far _Route2AfterBattleText3
+	text_end
 
 Route2Text3:
 	text_far _Route2Text3

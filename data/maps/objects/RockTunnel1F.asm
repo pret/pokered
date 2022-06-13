@@ -12,7 +12,7 @@ RockTunnel1F_Object:
 	warp_event 37, 17, ROCK_TUNNEL_B1F, 4
 
 	def_bg_events
-	bg_event 11, 29, 8 ; RockTunnel1Text8
+	bg_event 11, 29, 9 ; RockTunnel1Text8
 
 	def_object_events
 	object_event  7,  5, SPRITE_HIKER, STAY, DOWN, 1, OPP_HIKER, 12
@@ -22,5 +22,6 @@ RockTunnel1F_Object:
 	object_event 37, 21, SPRITE_COOLTRAINER_F, STAY, LEFT, 5, OPP_JR_TRAINER_F, 17
 	object_event 22, 24, SPRITE_COOLTRAINER_F, STAY, DOWN, 6, OPP_JR_TRAINER_F, 18
 	object_event 32, 24, SPRITE_COOLTRAINER_F, STAY, RIGHT, 7, OPP_JR_TRAINER_F, 19
+	object_event 3,  26, SPRITE_POKE_BALL, STAY, NONE, 8, SURFBOARD
 
 	def_warps_to ROCK_TUNNEL_1F

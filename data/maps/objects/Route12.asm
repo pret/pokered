@@ -8,8 +8,8 @@ Route12_Object:
 	warp_event 11, 77, ROUTE_12_SUPER_ROD_HOUSE, 1
 
 	def_bg_events
-	bg_event 13, 13, 11 ; Route12Text11
-	bg_event 11, 63, 12 ; Route12Text12
+	bg_event 13, 13, 14 ; Route12Text11
+	bg_event 11, 63, 15 ; Route12Text12
 
 	def_object_events
 	object_event 10, 62, SPRITE_SNORLAX, STAY, DOWN, 1 ; person
@@ -20,7 +20,10 @@ Route12_Object:
 	object_event 12, 40, SPRITE_FISHER, STAY, LEFT, 6, OPP_FISHER, 5
 	object_event  9, 52, SPRITE_FISHER, STAY, RIGHT, 7, OPP_FISHER, 6
 	object_event  6, 87, SPRITE_FISHER, STAY, DOWN, 8, OPP_FISHER, 11
-	object_event 14, 35, SPRITE_POKE_BALL, STAY, NONE, 9, TM_PAY_DAY
-	object_event  5, 89, SPRITE_POKE_BALL, STAY, NONE, 10, IRON
+	object_event  4, 15, SPRITE_SUPER_NERD, STAY, UP, 9, OPP_TAMER, 8
+	object_event 17, 12, SPRITE_SUPER_NERD, STAY, LEFT, 10, OPP_SUPER_NERD, 8
+	object_event 14, 35, SPRITE_POKE_BALL, STAY, NONE, 11, TM_PAY_DAY
+	object_event  5, 89, SPRITE_POKE_BALL, STAY, NONE, 12, IRON
+	object_event  6, 104, SPRITE_POKE_BALL, STAY, NONE, 13, SURFBOARD
 
 	def_warps_to ROUTE_12

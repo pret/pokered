@@ -9,8 +9,10 @@ Route7_Object:
 	warp_event  5, 13, UNDERGROUND_PATH_ROUTE_7, 1
 
 	def_bg_events
-	bg_event  3, 13, 1 ; Route7Text1
+	bg_event  3, 13, 3 ; Route7Text1
 
 	def_object_events
+	object_event 13,  13, SPRITE_GRAMPS, STAY, UP, 1, OPP_GAMBLER, 8
+	object_event 13,  14, SPRITE_GRAMPS, STAY, DOWN, 2, OPP_GAMBLER, 6
 
 	def_warps_to ROUTE_7

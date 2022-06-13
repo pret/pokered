@@ -45,6 +45,7 @@ START_MONEY EQU $3000
 	ld bc, wGameProgressFlagsEnd - wGameProgressFlags
 	call FillMemory ; clear all game progress flags
 
+	call InitializeExtraMissableObjectsFlags
 	jp InitializeMissableObjectsFlags
 
 InitializeEmptyList:

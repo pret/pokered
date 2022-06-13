@@ -32,7 +32,13 @@ PickUpItem:
 
 	ldh a, [hMissableObjectIndex]
 	ld [wMissableObjectIndex], a
+	CheckEvent EVENT_IN_SAFARI_ZONE
+	jr nz, .hideExtra
 	predef HideObject
+	jr .continue
+.hideExtra
+	predef HideExtraObject
+.continue
 	ld a, 1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, FoundItemText

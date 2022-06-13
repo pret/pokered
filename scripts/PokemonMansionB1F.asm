@@ -49,7 +49,7 @@ Mansion4Script_Switches::
 	ret nz
 	xor a
 	ldh [hJoyHeld], a
-	ld a, $9
+	ld a, 11
 	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
@@ -61,6 +61,8 @@ PokemonMansionB1F_ScriptPointers:
 PokemonMansionB1F_TextPointers:
 	dw Mansion4Text1
 	dw Mansion4Text2
+	dw Mansion4Text3
+	dw Mansion4Text4
 	dw PickUpItemText
 	dw PickUpItemText
 	dw PickUpItemText
@@ -75,6 +77,10 @@ Mansion4TrainerHeader0:
 	trainer EVENT_BEAT_MANSION_4_TRAINER_0, 0, Mansion4BattleText1, Mansion4EndBattleText1, Mansion4AfterBattleText1
 Mansion4TrainerHeader1:
 	trainer EVENT_BEAT_MANSION_4_TRAINER_1, 3, Mansion4BattleText2, Mansion4EndBattleText2, Mansion4AfterBattleText2
+Mansion4TrainerHeader2:
+	trainer EVENT_BEAT_MANSION_4_TRAINER_2, 0, Mansion4BattleText3, Mansion4EndBattleText3, Mansion4AfterBattleText3
+Mansion4TrainerHeader3:
+	trainer EVENT_BEAT_MANSION_4_TRAINER_3, 0, Mansion4BattleText4, Mansion4EndBattleText4, Mansion4AfterBattleText4
 	db -1 ; end
 
 Mansion4Text1:
@@ -86,6 +92,18 @@ Mansion4Text1:
 Mansion4Text2:
 	text_asm
 	ld hl, Mansion4TrainerHeader1
+	call TalkToTrainer
+	jp TextScriptEnd
+
+Mansion4Text3:
+	text_asm
+	ld hl, Mansion4TrainerHeader2
+	call TalkToTrainer
+	jp TextScriptEnd
+
+Mansion4Text4:
+	text_asm
+	ld hl, Mansion4TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
@@ -112,6 +130,30 @@ Mansion4EndBattleText2:
 Mansion4AfterBattleText2:
 	text_far _Mansion4AfterBattleText2
 	text_end
+
+Mansion4BattleText3:
+	text_far _Mansion4BattleText3
+	text_end
+
+Mansion4EndBattleText3:
+	text_far _Mansion4EndBattleText3
+	text_end
+
+Mansion4AfterBattleText3:
+	text_far _Mansion4AfterBattleText3
+	text_end
+
+Mansion4BattleText4:
+	text_far _Mansion4BattleText4
+	text_end
+
+Mansion4EndBattleText4:
+	text_far _Mansion4EndBattleText4
+	text_end
+
+Mansion4AfterBattleText4:
+	text_far _Mansion4AfterBattleText4
+	text_end	
 
 Mansion4Text7:
 	text_far _Mansion4Text7

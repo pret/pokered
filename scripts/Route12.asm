@@ -26,7 +26,7 @@ Route12Script0:
 	CheckEventReuseHL EVENT_FIGHT_ROUTE12_SNORLAX
 	ResetEventReuseHL EVENT_FIGHT_ROUTE12_SNORLAX
 	jp z, CheckFightingMapTrainers
-	ld a, $d
+	ld a, $11
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, SNORLAX
@@ -49,7 +49,7 @@ Route12Script3:
 	ld a, [wBattleResult]
 	cp $2
 	jr z, .asm_59664
-	ld a, $e
+	ld a, $12
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .asm_59664
@@ -69,6 +69,9 @@ Route12_TextPointers:
 	dw Route12Text6
 	dw Route12Text7
 	dw Route12Text8
+	dw Route12Text9
+	dw Route12Text10
+	dw PickUpItemText
 	dw PickUpItemText
 	dw PickUpItemText
 	dw Route12Text11
@@ -92,6 +95,10 @@ Route12TrainerHeader5:
 	trainer EVENT_BEAT_ROUTE_12_TRAINER_5, 4, Route12BattleText6, Route12EndBattleText6, Route12AfterBattleText6
 Route12TrainerHeader6:
 	trainer EVENT_BEAT_ROUTE_12_TRAINER_6, 1, Route12BattleText7, Route12EndBattleText7, Route12AfterBattleText7
+Route12TrainerHeader7:
+	trainer EVENT_BEAT_ROUTE_12_TRAINER_7, 4, Route12BattleText8, Route12EndBattleText8, Route12AfterBattleText8
+Route12TrainerHeader8:
+	trainer EVENT_BEAT_ROUTE_12_TRAINER_8, 3, Route12BattleText9, Route12EndBattleText9, Route12AfterBattleText9
 	db -1 ; end
 
 Route12Text1:
@@ -230,6 +237,42 @@ Route12EndBattleText7:
 
 Route12AfterBattleText7:
 	text_far _Route12AfterBattleText7
+	text_end
+
+Route12Text9:
+	text_asm
+	ld hl, Route12TrainerHeader7
+	call TalkToTrainer
+	jp TextScriptEnd
+
+Route12BattleText8:
+	text_far _Route12BattleText8
+	text_end
+
+Route12EndBattleText8:
+	text_far _Route12EndBattleText8
+	text_end
+
+Route12AfterBattleText8:
+	text_far _Route12AfterBattleText8
+	text_end
+
+Route12Text10:
+	text_asm
+	ld hl, Route12TrainerHeader8
+	call TalkToTrainer
+	jp TextScriptEnd
+
+Route12BattleText9:
+	text_far _Route12BattleText9
+	text_end
+
+Route12EndBattleText9:
+	text_far _Route12EndBattleText9
+	text_end
+
+Route12AfterBattleText9:
+	text_far _Route12AfterBattleText9
 	text_end
 
 Route12Text11:

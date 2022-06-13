@@ -45,6 +45,44 @@ _Route18AfterBattleText3::
 	cont "area!"
 	done
 
+_Route18BattleText4::
+	text "Out of the way!!"
+	para "How do I stop"
+	line "this thing!?"
+	done
+
+_Route18EndBattleText4::
+	text "Phew."
+	prompt
+
+_Route18AfterBattleText4::
+	text "I guess taming"
+	line "a BICYCLE isn't"
+	cont "like taming"
+	cont "#MON."
+	para "I'm still"
+	line "learning how to"
+	cont "ride this."
+	done
+
+_Route18BattleText5::
+	text "Ride like the"
+	line "wind!"
+	para "Speed is king!"
+	line "Rock is life!"
+	done
+
+_Route18EndBattleText5::
+	text "Silenced!"
+	prompt
+
+_Route18AfterBattleText5::
+	text "Live fast and"
+	line "lose hard."
+	para "That's what I"
+	line "always say!"
+	done
+
 _Route18Text4::
 	text "ROUTE 18"
 	line "CELADON CITY -"

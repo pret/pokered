@@ -79,7 +79,7 @@ MapHeaderPointers::
 	dw UndergroundPathRoute6_h ; UNDERGROUND_PATH_ROUTE_6_COPY
 	dw Route7Gate_h
 	dw UndergroundPathRoute7_h
-	dw UndergroundPathRoute7Copy_h
+	dw UndergroundPathRoute7_h ; unused
 	dw Route8Gate_h
 	dw UndergroundPathRoute8_h
 	dw RockTunnelPokecenter_h

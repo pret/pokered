@@ -20,7 +20,13 @@ MarkTownVisitedAndLoadMissableObjects::
 LoadMissableObjects:
 	ld l, a
 	push hl
+	CheckEvent EVENT_IN_SAFARI_ZONE
+	jr nz, .extraMissables
 	ld de, MissableObjects     ; calculate difference between out pointer and the base pointer
+	jr .load
+.extraMissables
+	ld de, ExtraMissableObjects
+.load
 	ld a, l
 	sub e
 	jr nc, .asm_f13c
@@ -97,6 +103,36 @@ InitializeMissableObjectsFlags:
 	inc hl
 	jr .missableObjectsLoop
 
+InitializeExtraMissableObjectsFlags:
+	ld hl, wExtraMissableObjectFlags
+	ld bc, wExtraMissableObjectFlagsEnd - wExtraMissableObjectFlags
+	xor a
+	call FillMemory ; clear missable objects flags
+	ld hl, ExtraMissableObjects
+	xor a
+	ld [wMissableObjectCounter], a
+.missableObjectsLoop
+	ld a, [hli]
+	cp -1           ; end of list
+	ret z
+	push hl
+	inc hl
+	ld a, [hl]
+	cp HIDE
+	jr nz, .skip
+	ld hl, wExtraMissableObjectFlags
+	ld a, [wMissableObjectCounter]
+	ld c, a
+	ld b, FLAG_SET
+	call MissableObjectFlagAction ; set flag if Item is hidden
+.skip
+	ld hl, wMissableObjectCounter
+	inc [hl]
+	pop hl
+	inc hl
+	inc hl
+	jr .missableObjectsLoop
+
 ; tests if current sprite is a missable object that is hidden/has been removed
 IsObjectHidden:
 	ldh a, [hCurrentSpriteOffset]
@@ -112,7 +148,16 @@ IsObjectHidden:
 	jr nz, .loop
 	ld c, a
 	ld b, FLAG_TEST
+	ld a, [wCurMap]
+	cp SAFARI_ZONE_EAST
+	jr c, .notSafariZone
+	cp SAFARI_ZONE_CENTER_REST_HOUSE
+	jr nc, .notSafariZone
+	ld hl, wExtraMissableObjectFlags
+	jr .doAction
+.notSafariZone
 	ld hl, wMissableObjectFlags
+.doAction
 	call MissableObjectFlagAction
 	ld a, c
 	and a
@@ -128,6 +173,13 @@ IsObjectHidden:
 ShowObject:
 ShowObject2:
 	ld hl, wMissableObjectFlags
+	jr ShowObjectCommon
+
+ShowExtraObject:
+	ld hl, wExtraMissableObjectFlags
+	jr ShowObjectCommon
+
+ShowObjectCommon:
 	ld a, [wMissableObjectIndex]
 	ld c, a
 	ld b, FLAG_RESET
@@ -138,6 +190,13 @@ ShowObject2:
 ; [wMissableObjectIndex]: index of the missable object to be removed (global index)
 HideObject:
 	ld hl, wMissableObjectFlags
+	jr HideObjectCommon
+
+HideExtraObject:
+	ld hl, wExtraMissableObjectFlags
+	jr HideObjectCommon
+
+HideObjectCommon:
 	ld a, [wMissableObjectIndex]
 	ld c, a
 	ld b, FLAG_SET

@@ -50,3 +50,4 @@ TrainerNames::
 	db "FIREFIGHTER@"
 	db "RANGER@"
 	db "RANGER@"
+	db "ROOKIE@"

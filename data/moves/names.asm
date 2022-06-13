@@ -20,7 +20,7 @@ MoveNames::
 	li "WHIRLWIND"
 	li "FLY"
 	li "BIND"
-	li "SLAM"
+	li "FILTHY SLAM" ; changed from SLAM
 	li "VINE WHIP"
 	li "STOMP"
 	li "DOUBLE KICK"
@@ -67,7 +67,7 @@ MoveNames::
 	li "DRILL PECK"
 	li "SUBMISSION"
 	li "LOW KICK"
-	li "DRAIN PUNCH"
+	li "DRAIN PUNCH" ; changed from COUNTER
 	li "SEISMIC TOSS"
 	li "STRENGTH"
 	li "ABSORB"
@@ -131,9 +131,9 @@ MoveNames::
 	li "SWIFT"
 	li "SKULL BASH"
 	li "SPIKE CANNON"
-	li "CONSTRICT"
+	li "STATIC SNAG" ; changed from CONSTRICT
 	li "AMNESIA"
-	li "FIREWALL"
+	li "FIREWALL" ; changed from KINESIS
 	li "SOFTBOILED"
 	li "HI JUMP KICK"
 	li "GLARE"

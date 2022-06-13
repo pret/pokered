@@ -8,7 +8,7 @@ Route6_Object:
 	warp_event 17, 13, UNDERGROUND_PATH_ROUTE_6, 1
 
 	def_bg_events
-	bg_event 19, 15, 7 ; Route6Text7
+	bg_event 19, 15, 10 ; Route6Text7
 
 	def_object_events
 	object_event 10, 21, SPRITE_COOLTRAINER_M, STAY, RIGHT, 1, OPP_JR_TRAINER_M, 4
@@ -17,5 +17,8 @@ Route6_Object:
 	object_event 11, 31, SPRITE_COOLTRAINER_M, STAY, LEFT, 4, OPP_JR_TRAINER_M, 5
 	object_event 11, 30, SPRITE_COOLTRAINER_F, STAY, LEFT, 5, OPP_JR_TRAINER_F, 3
 	object_event 19, 26, SPRITE_YOUNGSTER, STAY, LEFT, 6, OPP_BUG_CATCHER, 11
+	object_event 13, 8, SPRITE_COOLTRAINER_M, STAY, DOWN, 7, OPP_ROOKIE, 6
+	object_event 1, 9, SPRITE_SUPER_NERD, STAY, RIGHT, 8, OPP_BURGLAR, 2
+	object_event 16, 5, SPRITE_POKE_BALL, STAY, NONE, 9, SURFBOARD
 
 	def_warps_to ROUTE_6

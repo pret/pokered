@@ -8,5 +8,8 @@ UndergroundPathWestEast_Object:
 	def_bg_events
 
 	def_object_events
+	object_event  44, 4, SPRITE_GENTLEMAN, WALK, LEFT, 1, OPP_GENTLEMAN, 6
+	object_event  42, 4, SPRITE_GENTLEMAN, WALK, LEFT, 2, OPP_GENTLEMAN, 7
+	object_event  25, 1, SPRITE_LITTLE_BOY, WALK, LEFT_RIGHT, 3, OPP_COOL_KID, 4
 
 	def_warps_to UNDERGROUND_PATH_WEST_EAST

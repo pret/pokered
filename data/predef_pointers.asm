@@ -40,8 +40,8 @@ PredefPointers::
 	add_predef LearnMove
 	add_predef GetQuantityOfItemInBag
 	add_predef GetIndexOfItemInBag
-	add_predef CheckForHiddenObjectOrBookshelfOrCardKeyDoor, $03 ; home bank
-	add_predef GiveItem, $03 ; home bank
+	add_predef ShowExtraObject
+	add_predef HideExtraObject
 	add_predef ChangeBGPalColor0_4Frames
 	add_predef FindPathToPlayer
 	add_predef PredefShakeScreenVertically

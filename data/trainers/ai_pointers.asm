@@ -55,4 +55,5 @@ TrainerAIPointers:
 	dbw 3, GenericAI
 	dbw 2, CooltrainerMAI ; ranger
 	dbw 1, CooltrainerFAI ; rangerf
+	dbw 3, JugglerAI ; rookie
 	assert_table_length NUM_TRAINERS

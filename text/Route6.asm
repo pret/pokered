@@ -90,6 +90,54 @@ _Route6AfterBattleText6::
 	cont "just bad?"
 	done
 
+_Route6BattleText7::
+	text "Huh! The guard"
+	line "won't let me"
+	cont "through!"
+	para "I'll battle you"
+	line "instead I guess!"
+	done
+
+_Route6EndBattleText7::
+	text "What"
+	line "should I do?"
+	prompt
+
+_Route6AfterBattleText7::
+	text "Something's up"
+	line "in SAFFRON CITY"
+	cont "if they closed"
+	cont "the gates."
+	para "I wonder what?"
+	done
+
+_Route6BattleText8::
+	text "Heheheheh..."
+	line "that escape was"
+	cont "perfect!"
+	para "I'm already at"
+	line "SAFFRON CITY's"
+	cont "outskirts!"
+	done
+
+_Route6EndBattleText8::
+	text "Yikes!"
+	line "I'm out of here!"
+	prompt
+
+_Route6AfterBattleText8::
+	text "No way I'll get"
+	line "turned in!"
+	para "Not after my big"
+	line "heist in SAFFRON"
+	cont "CITY!"
+	para "Everyone was too"
+	line "distracted to"
+	cont "notice me."
+	para "The place was in"
+	line "chaos!"
+	done
+
 _Route6Text7::
 	text "UNDERGROUND PATH"
 	line "CERULEAN CITY -"

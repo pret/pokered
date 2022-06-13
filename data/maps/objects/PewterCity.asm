@@ -11,13 +11,13 @@ PewterCity_Object:
 	warp_event 13, 25, PEWTER_POKECENTER, 1
 
 	def_bg_events
-	bg_event 19, 29,  6 ; PewterCityText6
-	bg_event 33, 19,  7 ; PewterCityText7
-	bg_event 24, 17,  8 ; MartSignText
-	bg_event 14, 25,  9 ; PokeCenterSignText
-	bg_event 15,  9, 10 ; PewterCityText10
-	bg_event 11, 17, 11 ; PewterCityText11
-	bg_event 25, 23, 12 ; PewterCityText12
+	bg_event 19, 29,  7 ; PewterCityText6
+	bg_event 33, 19,  8 ; PewterCityText7
+	bg_event 24, 17,  9 ; MartSignText
+	bg_event 14, 25, 10 ; PokeCenterSignText
+	bg_event 15,  9, 11 ; PewterCityText10
+	bg_event 11, 17, 12 ; PewterCityText11
+	bg_event 25, 23, 13 ; PewterCityText12
 
 	def_object_events
 	object_event  8, 15, SPRITE_COOLTRAINER_F, STAY, NONE, 1 ; person
@@ -25,5 +25,6 @@ PewterCity_Object:
 	object_event 27, 17, SPRITE_SUPER_NERD, STAY, NONE, 3 ; person
 	object_event 26, 25, SPRITE_SUPER_NERD, WALK, LEFT_RIGHT, 4 ; person
 	object_event 35, 16, SPRITE_YOUNGSTER, STAY, DOWN, 5 ; person
+	object_event  7,  3, SPRITE_POKE_BALL, STAY, NONE, 6, SURFBOARD ; person
 
 	def_warps_to PEWTER_CITY

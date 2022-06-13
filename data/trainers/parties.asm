@@ -50,6 +50,7 @@ TrainerDataPointers:
 	dw FireFighterData
 	dw RangerData
 	dw RangerFData
+	dw RookieData
 
 ; if first byte != $FF, then
 	; first byte is level (of all pokemon on this team)
@@ -97,7 +98,7 @@ BugCatcherData:
 ; Route 6
 	db 16, WEEDLE, CATERPIE, WEEDLE, 0
 	db 20, BUTTERFREE, 0
-; Unused
+; Route 2
 	db 18, METAPOD, CATERPIE, VENONAT, 0
 ; Route 9
 	db 19, BEEDRILL, BEEDRILL, 0
@@ -155,7 +156,7 @@ JrTrainerMData:
 ; Route 6
 	db 20, SQUIRTLE, 0
 	db 16, SPEAROW, RATICATE, 0
-; Unused
+; Route 2
 	db 18, DIGLETT, DIGLETT, SANDSHREW, 0
 ; Route 9
 	db 21, GROWLITHE, CHARMANDER, 0
@@ -169,7 +170,7 @@ JrTrainerFData:
 ; Route 6
 	db 16, RATTATA, PIKACHU, 0
 	db 16, PIDGEY, PIDGEY, PIDGEY, 0
-; Unused
+; Route 2
 	db 22, BULBASAUR, 0
 ; Route 9
 	db 18, ODDISH, BELLSPROUT, ODDISH, BELLSPROUT, 0
@@ -231,8 +232,9 @@ SuperNerdData:
 	db 26, KOFFING, 0
 ; Safari Zone North
 	db 22, KOFFING, MAGNEMITE, WEEZING, 0
-; Unused
+; Route 10
 	db 20, MAGNEMITE, MAGNEMITE, KOFFING, MAGNEMITE, 0
+; Route 12
 	db 24, MAGNEMITE, VOLTORB, 0
 ; Cinnabar Gym
 	db 36, VULPIX, VULPIX, NINETALES, 0
@@ -295,8 +297,9 @@ BikerData:
 BurglarData:
 ; Safari Zone West
 	db 29, GROWLITHE, VULPIX, 0
-; Unused
+; Route 6
 	db 33, GROWLITHE, 0
+; Mansion 1F
 	db 28, VULPIX, CHARMANDER, PONYTA, 0
 ; Cinnabar Gym
 	db 36, GROWLITHE, VULPIX, NINETALES, 0
@@ -384,10 +387,12 @@ GamblerData:
 	db 18, GROWLITHE, VULPIX, 0
 ; Route 8
 	db 22, POLIWAG, POLIWAG, POLIWHIRL, 0
-; Unused
+; Route 7
 	db 22, ONIX, GEODUDE, GRAVELER, 0
 ; Route 8
 	db 24, GROWLITHE, VULPIX, 0
+; Route 7
+	db 22, ONIX, GEODUDE, GRAVELER, 0
 
 BeautyData:
 ; Celadon Gym
@@ -404,7 +409,7 @@ BeautyData:
 ; Route 15
 	db 29, PIDGEOTTO, WIGGLYTUFF, 0
 	db 29, BULBASAUR, IVYSAUR, 0
-; Unused
+; Route 14
 	db 33, WEEPINBELL, BELLSPROUT, WEEPINBELL, 0
 ; Route 19
 	db 27, POLIWAG, GOLDEEN, SEAKING, GOLDEEN, POLIWAG, 0
@@ -434,6 +439,8 @@ RockerData:
 ; Safari Zone East
 	db 29, PIKACHU, ELECTRODE, 0
 ; Safari Zone West
+	db 29, SLOWPOKE, ELECTRODE, 0
+; Route 18
 	db 29, SLOWPOKE, ELECTRODE, 0
 
 JugglerData:
@@ -465,6 +472,14 @@ TamerData:
 	db 39, ARBOK, TAUROS, 0
 ; Victory Road 2F
 	db 44, PERSIAN, GOLDUCK, 0
+; Route 4
+	db 10, MEOWTH, PSYDUCK, 0
+; Route 5
+	db 10, MEOWTH, PSYDUCK, 0
+; Route 12
+	db 10, MEOWTH, PSYDUCK, 0
+; Route 18
+	db 10, MEOWTH, PSYDUCK, 0
 
 BirdKeeperData:
 ; Route 13
@@ -485,8 +500,8 @@ BirdKeeperData:
 	db 30, FEAROW, FEAROW, PIDGEOTTO, 0
 ; Unused
 	db 39, PIDGEOTTO, PIDGEOTTO, PIDGEY, PIDGEOTTO, 0
-	db 42, FARFETCHD, FEAROW, 0
 ; Route 14
+	db 42, FARFETCHD, FEAROW, 0
 	db 28, PIDGEY, DODUO, PIDGEOTTO, 0
 	db 26, PIDGEY, SPEAROW, PIDGEY, FEAROW, 0
 	db 29, PIDGEOTTO, FEAROW, 0
@@ -520,7 +535,6 @@ Green1Data:
 	db $FF, 18, PIDGEOTTO, 15, ABRA, 15, RATTATA, 17, CHARMANDER, 0
 
 ProfOakData:
-; Unused
 	db $FF, 65, MAGNETON, 66, TAUROS, 67, EXEGGUTOR, 68, ARCANINE, 69, BLASTOISE, 70, GYARADOS, 0
 	db $FF, 65, MAGNETON, 66, TAUROS, 67, EXEGGUTOR, 68, ARCANINE, 69, VENUSAUR, 70, GYARADOS, 0
 	db $FF, 65, MAGNETON, 66, TAUROS, 67, EXEGGUTOR, 68, ARCANINE, 69, CHARIZARD, 70, GYARADOS, 0
@@ -529,12 +543,12 @@ ChiefData:
 ; none
 
 ScientistData:
-; Unused
+; Mansion 2F
 	db 34, KOFFING, VOLTORB, 0
 ; Silph Co. 2F
 	db 26, GRIMER, WEEZING, KOFFING, WEEZING, 0
 	db 28, MAGNEMITE, VOLTORB, MAGNETON, 0
-; Silph Co. 3F/Mansion 1F
+; Silph Co. 3F
 	db 29, ELECTRODE, WEEZING, 0
 ; Silph Co. 4F
 	db 33, ELECTRODE, 0
@@ -554,6 +568,9 @@ ScientistData:
 	db 33, MAGNEMITE, MAGNETON, VOLTORB, 0
 ; Mansion B1F
 	db 34, MAGNEMITE, ELECTRODE, 0
+; Mansion 1F
+	db 34, KOFFING, VOLTORB, 0
+
 
 GiovanniData:
 ; Rocket Hideout B4F
@@ -632,7 +649,7 @@ CooltrainerMData:
 ; Victory Road 3F
 	db 43, EXEGGUTOR, CLOYSTER, ARCANINE, 0
 	db 43, KINGLER, TENTACRUEL, BLASTOISE, 0
-; Unused
+; Pokemon Mansion 2F
 	db 45, KINGLER, STARMIE, 0
 ; Victory Road 1F
 	db 42, IVYSAUR, WARTORTLE, CHARMELEON, CHARIZARD, 0
@@ -640,7 +657,7 @@ CooltrainerMData:
 	db 44, IVYSAUR, WARTORTLE, CHARMELEON, 0
 ; Safari Zone North
 	db 49, NIDOKING, 0
-; Unused
+; Pokemon Mansion B1F
 	db 44, KINGLER, CLOYSTER, 0
 ; Viridian Gym
 	db 39, SANDSLASH, DUGTRIO, 0
@@ -652,11 +669,11 @@ CooltrainerFData:
 ; Victory Road 3F
 	db 43, BELLSPROUT, WEEPINBELL, VICTREEBEL, 0
 	db 43, PARASECT, DEWGONG, CHANSEY, 0
-; Unused
+; Pokemon Mansion 2F
 	db 46, VILEPLUME, BUTTERFREE, 0
 ; Victory Road 1F
 	db 44, PERSIAN, NINETALES, 0
-; Unused
+; Pokemon Mansion 2F
 	db 43, PERSIAN, NINETALES, RAICHU, 0
 
 BrunoData:
@@ -689,9 +706,12 @@ GentlemanData:
 	db 19, NIDORAN_M, NIDORAN_F, 0
 ; SS Anne 2F Rooms/Vermilion Gym
 	db 23, PIKACHU, 0
-; Unused
+; Underground Path Route 5-6
 	db 48, PRIMEAPE, 0
 ; SS Anne 2F Rooms
+	db 17, GROWLITHE, PONYTA, 0
+; Underground Path Route 7-8
+	db 17, GROWLITHE, PONYTA, 0
 	db 17, GROWLITHE, PONYTA, 0
 
 Green2Data:
@@ -721,9 +741,11 @@ LoreleiData:
 	db $FF, 54, DEWGONG, 53, CLOYSTER, 54, SLOWBRO, 56, JYNX, 56, LAPRAS, 0
 
 ChannelerData:
-; Unused
+; Celadon City Hotel
 	db 22, GASTLY, 0
+; Pokemon Mansion 2F
 	db 24, GASTLY, 0
+; Unused
 	db 23, GASTLY, GASTLY, 0
 	db 24, GASTLY, 0
 ; Pokémon Tower 3F
@@ -768,10 +790,25 @@ LanceData:
 CoolKidData:
 ; Pewter Museum
 	db 17, SPEAROW, RATTATA, RATTATA, SPEAROW, 0
+; Underground path route 5-6
+	db 17, SPEAROW, RATTATA, 0
+	db 17, SPEAROW, RATTATA, 0
+; Underground path route 7-8
+	db 17, SPEAROW, RATTATA, 0
 
 FireFighterData:
 ; Cinnabar Gym
 	db 41, RAPIDASH, TENTACRUEL, 0
+	db 37, GROWLITHE, VULPIX, BLASTOISE, 0
+; Silph co 1F after beating giovanni
+	db 41, RAPIDASH, TENTACRUEL, 0
+	db 37, GROWLITHE, VULPIX, BLASTOISE, 0
+	db 41, RAPIDASH, TENTACRUEL, 0
+	db 37, GROWLITHE, VULPIX, BLASTOISE, 0
+; Pokemon Mansion 1F
+	db 41, RAPIDASH, TENTACRUEL, 0
+	db 37, GROWLITHE, VULPIX, BLASTOISE, 0
+; Pokemon Mansion B1F
 	db 37, GROWLITHE, VULPIX, BLASTOISE, 0
 
 RangerData:
@@ -787,3 +824,15 @@ RangerFData:
 ; Safari Zone North
 	db 45, NIDORINA, NIDOQUEEN, 0
 	
+RookieData:
+; Route 4
+	db 13, IVYSAUR, VENUSAUR, 0
+	db 13, NIDORINA, NIDOQUEEN, 0
+; Route 5
+	db 13, IVYSAUR, VENUSAUR, 0
+	db 13, NIDORINA, NIDOQUEEN, 0
+	db 13, NIDORINA, NIDOQUEEN, 0
+; Route 6
+	db 13, NIDORINA, NIDOQUEEN, 0
+; Route 2
+	db 13, NIDORINA, NIDOQUEEN, 0

@@ -9,7 +9,7 @@ Route11_Object:
 	warp_event  4,  5, DIGLETTS_CAVE_ROUTE_11, 1
 
 	def_bg_events
-	bg_event  1,  5, 11 ; Route11Text11
+	bg_event  1,  5, 12 ; Route11Text11
 
 	def_object_events
 	object_event 10, 14, SPRITE_GAMBLER, STAY, DOWN, 1, OPP_GAMBLER, 1
@@ -22,5 +22,6 @@ Route11_Object:
 	object_event 43,  5, SPRITE_YOUNGSTER, STAY, RIGHT, 8, OPP_YOUNGSTER, 11
 	object_event 45, 16, SPRITE_SUPER_NERD, STAY, LEFT, 9, OPP_ENGINEER, 3
 	object_event 22, 12, SPRITE_YOUNGSTER, STAY, UP, 10, OPP_YOUNGSTER, 12
+	object_event 52, 14, SPRITE_POKE_BALL, STAY, NONE, 11, SURFBOARD
 
 	def_warps_to ROUTE_11

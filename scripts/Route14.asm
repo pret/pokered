@@ -24,6 +24,9 @@ Route14_TextPointers:
 	dw Route14Text9
 	dw Route14Text10
 	dw Route14Text11
+	dw Route14Text12
+	dw Route14Text13
+	dw Route14Text14
 
 Route14TrainerHeaders:
 	def_trainers
@@ -47,6 +50,10 @@ Route14TrainerHeader8:
 	trainer EVENT_BEAT_ROUTE_14_TRAINER_8, 3, Route14BattleText9, Route14EndBattleText9, Route14AfterBattleText9
 Route14TrainerHeader9:
 	trainer EVENT_BEAT_ROUTE_14_TRAINER_9, 4, Route14BattleText10, Route14EndBattleText10, Route14AfterBattleText10
+Route14TrainerHeader10:
+	trainer EVENT_BEAT_ROUTE_14_TRAINER_10, 3, Route14BattleText11, Route14EndBattleText11, Route14AfterBattleText11
+Route14TrainerHeader11:
+	trainer EVENT_BEAT_ROUTE_14_TRAINER_11, 4, Route14BattleText12, Route14EndBattleText12, Route14AfterBattleText12
 	db -1 ; end
 
 Route14Text1:
@@ -230,5 +237,45 @@ Route14AfterBattleText10:
 	text_end
 
 Route14Text11:
+	text_asm
+	ld hl, Route14TrainerHeader10
+	call TalkToTrainer
+	jp TextScriptEnd
+
+Route14BattleText11:
+	text_far _Route14BattleText11
+	text_end
+
+Route14EndBattleText11:
+	text_far _Route14EndBattleText11
+	text_end
+
+Route14AfterBattleText11:
+	text_far _Route14AfterBattleText11
+	text_end
+
+Route14Text12:
+	text_asm
+	ld hl, Route14TrainerHeader11
+	call TalkToTrainer
+	jp TextScriptEnd
+
+Route14BattleText12:
+	text_far _Route14BattleText12
+	text_end
+
+Route14EndBattleText12:
+	text_far _Route14EndBattleText12
+	text_end
+
+Route14AfterBattleText12:
+	text_far _Route14AfterBattleText12
+	text_end
+
+Route14Text13:
 	text_far _Route14Text11
+	text_end
+
+Route14Text14:
+	text_far _Route14Text12
 	text_end

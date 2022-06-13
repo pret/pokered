@@ -83,9 +83,10 @@ INCLUDE "text/SafariZoneWest.asm"
 SECTION "Text 4", ROMX
 
 INCLUDE "text/Daycare_2.asm"
+INCLUDE "text/UndergroundPathNorthSouth.asm"
+INCLUDE "text/UndergroundPathEastWest.asm"
 INCLUDE "text/UndergroundPathRoute6.asm"
 INCLUDE "text/UndergroundPathRoute7.asm"
-INCLUDE "text/UndergroundPathRoute7Copy.asm"
 INCLUDE "text/UndergroundPathRoute8.asm"
 INCLUDE "text/RockTunnelPokecenter.asm"
 INCLUDE "text/RockTunnel1F.asm"

@@ -268,6 +268,7 @@ CeruleanCity_TextPointers:
 	dw CeruleanCityText9
 	dw CeruleanCityText10
 	dw CeruleanCityText11
+	dw PickUpItemText
 	dw CeruleanCityText12
 	dw CeruleanCityText13
 	dw MartSignText

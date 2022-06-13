@@ -15,5 +15,6 @@ Route21_Object:
 	object_event 15, 71, SPRITE_SWIMMER, STAY, LEFT, 7, OPP_SWIMMER, 15
 	object_event 14, 56, SPRITE_FISHER, STAY, LEFT, 8, OPP_FISHER, 8
 	object_event 17, 57, SPRITE_FISHER, STAY, RIGHT, 9, OPP_FISHER, 10
+	object_event 13,  6, SPRITE_POKE_BALL, STAY, NONE, 10, SURFBOARD
 
 	def_warps_to ROUTE_21

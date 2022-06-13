@@ -134,3 +134,28 @@ _VermilionCityText15::
 	line "journey it's"
 	cont "back in port."
 	done
+
+_VermilionCityDockBeautyGreeting::
+	text "Ack!! You found"
+	line "my top secret"
+	cont "suntanning dock!"
+	para "Don't tell anyone"
+	line "I'm here!"
+	para "Take this!"
+	prompt
+
+_VermilionCityDockBeautyReceivedItemText::
+	text "<PLAYER> received"
+	line "a ??????!"
+	done
+
+_VermilionCityDockBeautyEndText::
+	text "This is where I"
+	line "come to relax and"
+	cont "get a beautiful"
+	cont "tan!"
+	para "I love the peace"
+	line "and the calm"
+	cont "sound of the"
+	cont "gentle waves."
+	done

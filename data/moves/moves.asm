@@ -30,18 +30,18 @@ Moves:
 	move WHIRLWIND,    CONFUSION_BIG_SIDE_EFFECT,   110,FLYING,        85, 10
 	move FLY,          FLY_EFFECT,                  90, FLYING,       100, 15
 	move BIND,         TRAPPING_EFFECT,             25, ROCK,          85, 20
-	move SLAM,         NO_ADDITIONAL_EFFECT,        80, POISON,       100, 20
-	move VINE_WHIP,    NO_ADDITIONAL_EFFECT,        40, GRASS,        100, 15
+	move SLAM,         NO_ADDITIONAL_EFFECT,        80, POISON,       100, 20 ;* "FILTHY SLAM"
+	move VINE_WHIP,    NO_ADDITIONAL_EFFECT,        40, GRASS,        100, 15 
 	move STOMP,        FLINCH_SIDE_EFFECT2,         65, NORMAL,       100, 20
 	move DOUBLE_KICK,  ATTACK_TWICE_EFFECT,         30, FIGHTING,     100, 30
 	move MEGA_KICK,    NO_ADDITIONAL_EFFECT,       120, FIGHTING,      95,  5
 	move JUMP_KICK,    JUMP_KICK_EFFECT,            70, FIGHTING,      95, 25
-	move ROLLING_KICK, FLINCH_SIDE_EFFECT2,         60, ROCK,         100, 15
+	move ROLLING_KICK, FLINCH_SIDE_EFFECT2,         60, ROCK,         100, 15 
 	move SAND_ATTACK,  ACCURACY_DOWN1_EFFECT,        0, NORMAL,       100, 15
 	move HEADBUTT,     FLINCH_SIDE_EFFECT2,         75, NORMAL,       100, 15
-	move HORN_ATTACK,  NO_ADDITIONAL_EFFECT,        65, ROCK,         100, 25
+	move HORN_ATTACK,  NO_ADDITIONAL_EFFECT,        65, ROCK,         100, 25 
 	move FURY_ATTACK,  ATTACK_TWICE_EFFECT,         40, FLYING,       100, 20
-	move HORN_DRILL,   OHKO_EFFECT,                  1, NORMAL,        30,  5
+	move HORN_DRILL,   OHKO_EFFECT,                  1, ROCK,         30,  5
 	move TACKLE,       NO_ADDITIONAL_EFFECT,        35, NORMAL,       100, 35
 	move BODY_SLAM,    PARALYZE_SIDE_EFFECT2,       85, NORMAL,       100, 15
 	move WRAP,         TRAPPING_EFFECT,             15, NORMAL,        85, 20
@@ -77,7 +77,7 @@ Moves:
 	move DRILL_PECK,   FLINCH_SIDE_EFFECT2,         80, FLYING,       100, 20
 	move SUBMISSION,   ATTACK_UP_SIDE_EFFECT,       60, FIGHTING,     100, 10 
 	move LOW_KICK,     FLINCH_SIDE_EFFECT2,         50, FIGHTING,     100, 20
-	move COUNTER,      DRAIN_HP_EFFECT,             75, FIGHTING,     100, 10 
+	move COUNTER,      DRAIN_HP_EFFECT,             75, FIGHTING,     100, 10 ; -> DRAIN PUNCH
 	move SEISMIC_TOSS, SPECIAL_DAMAGE_EFFECT,        1, FIGHTING,     100, 20
 	move STRENGTH,     NO_ADDITIONAL_EFFECT,        80, FIGHTING,     100, 15
 	move ABSORB,       DRAIN_HP_EFFECT,             30, GRASS,        100, 20
@@ -130,7 +130,7 @@ Moves:
 	move METRONOME,    METRONOME_EFFECT,             0, NORMAL,       100, 10 
 	move MIRROR_MOVE,  MIRROR_MOVE_EFFECT,           0, FLYING,       100, 20
 	move SELFDESTRUCT, BIG_RECOIL_EFFECT,          140, FIRE,         100,  5
-	move EGG_BOMB,     PAY_DAY_EFFECT,             100, DRAGON,       100, 10
+	move EGG_BOMB,     NO_ADDITIONAL_EFFECT,       100, DRAGON,       100, 10
 	move LICK,         PARALYZE_SIDE_EFFECT1,       35, GHOST,        100, 30
 	move SMOG,         POISON_SIDE_EFFECT1,         40, POISON,       100, 20
 	move SLUDGE,       POISON_SIDE_EFFECT2,         90, POISON,       100, 20
@@ -141,8 +141,8 @@ Moves:
 	move SWIFT,        SWIFT_EFFECT,                60, ICE,          100, 20 ; priority move
 	move SKULL_BASH,   JUMP_KICK_EFFECT,           100, ROCK,          85, 10
 	move SPIKE_CANNON, TWO_TO_FIVE_ATTACKS_EFFECT,  25, ROCK,         100, 15
-	move CONSTRICT,    PARALYZE_SIDE_EFFECT2,       50, ELECTRIC,     100, 35
-	move AMNESIA,      SPECIAL_UP2_EFFECT,           0, PSYCHIC_TYPE, 100, 20
+	move CONSTRICT,    PARALYZE_SIDE_EFFECT2,       50, ELECTRIC,     100, 35 ;* STATIC SNAG
+	move AMNESIA,      SPECIAL_UP2_EFFECT,           0, PSYCHIC_TYPE, 100, 20 
 	move KINESIS,      BURN_EFFECT,                  0, FIRE,          80, 10 ; -> FIREWALL
 	move SOFTBOILED,   HEAL_EFFECT,                  0, NORMAL,       100, 10
 	move HI_JUMP_KICK, JUMP_KICK_EFFECT,           130, FIGHTING,      90, 10

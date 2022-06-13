@@ -4,9 +4,9 @@ Route13_Object:
 	def_warp_events
 
 	def_bg_events
-	bg_event 15, 13, 11 ; Route13Text11
-	bg_event 33,  5, 12 ; Route13Text12
-	bg_event 31, 11, 13 ; Route13Text13
+	bg_event 15, 13, 12 ; Route13Text11
+	bg_event 33,  5, 13 ; Route13Text12
+	bg_event 31, 11, 14 ; Route13Text13
 
 	def_object_events
 	object_event 49, 10, SPRITE_COOLTRAINER_M, STAY, RIGHT, 1, OPP_BIRD_KEEPER, 1

@@ -166,8 +166,52 @@ _Route14AfterBattleText10::
 	cont "one on one!"
 	done
 
+_Route14BattleText11::
+	text "Initiate"
+	line "power dive!"
+	done
+
+_Route14EndBattleText11::
+	text "Pull"
+	line "up!"
+	prompt
+
+_Route14AfterBattleText11::
+	text "Looks like we"
+	line "lost another one,"
+	cont "flyboys."
+	done
+
+_Route14BattleText12::
+	text "Lots of burly"
+	line "BIKERs here isn't"
+	cont "there?"
+	done
+
+_Route14EndBattleText12::
+	text "Goodness!"
+	prompt
+
+_Route14AfterBattleText12::
+	text "I've seen them"
+	line "around here"
+	cont "before."
+	para "They might look"
+	line "scary, but they"
+	cont "are actually nice"
+	cont "guys."
+	done	
+
 _Route14Text11::
 	text "ROUTE 14"
 	line "West to FUCHSIA"
 	cont "CITY"
+	done
+
+_Route14Text12::
+	text "TRAINER TIPS"
+	para "Press SELECT to"
+	line "use your BICYCLE."
+	para "Make sure to keep"
+	line "it in your bag."
 	done

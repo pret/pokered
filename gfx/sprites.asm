@@ -30,7 +30,6 @@ Quadruped2Sprite::       INCBIN "gfx/sprites/quadruped2.2bpp"
 OldAmberSprite::         INCBIN "gfx/sprites/old_amber.2bpp"
 HelixSprite::            INCBIN "gfx/sprites/helix.2bpp"
 VoltorbSprite::          INCBIN "gfx/sprites/voltorb.2bpp"
-FuzzballSprite::         INCBIN "gfx/sprites/fuzzball.2bpp"
 GamblerAsleepSprite::    INCBIN "gfx/sprites/gambler_asleep.2bpp"
 
 
@@ -67,7 +66,6 @@ ErikaSprite::            INCBIN "gfx/sprites/erika.2bpp"
 MiddleAgedWomanSprite::  INCBIN "gfx/sprites/middle_aged_woman.2bpp"
 BrunetteGirlSprite::     INCBIN "gfx/sprites/brunette_girl.2bpp"
 LanceSprite::            INCBIN "gfx/sprites/lance.2bpp"
-MomSprite::              INCBIN "gfx/sprites/mom.2bpp"
 BaldingGuySprite::       INCBIN "gfx/sprites/balding_guy.2bpp"
 LittleBoySprite::        INCBIN "gfx/sprites/little_boy.2bpp"
 GameboyKidSprite::       INCBIN "gfx/sprites/gameboy_kid.2bpp"
@@ -79,6 +77,9 @@ SeelSprite::             INCBIN "gfx/sprites/seel.2bpp"
 
 SECTION "NPC Sprites 3", ROMX, BANK[$30]
 
+MomSprite::              INCBIN "gfx/sprites/mom.2bpp"
+
+FuzzballSprite::         INCBIN "gfx/sprites/fuzzball.2bpp"
 PsychicSprite::          INCBIN "gfx/sprites/psychic.2bpp"
 FightingSprite::          INCBIN "gfx/sprites/fighting.2bpp"
 CatSprite::              INCBIN "gfx/capsule_monsters_stuff/cat.2bpp"

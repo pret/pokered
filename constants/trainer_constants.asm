@@ -66,4 +66,5 @@ ENDM
 	trainer_const FIREFIGHTER    ; $31
 	trainer_const RANGER         ; $32
 	trainer_const RANGER_F       ; $33
+	trainer_const ROOKIE         ; $34
 NUM_TRAINERS EQU const_value - 1

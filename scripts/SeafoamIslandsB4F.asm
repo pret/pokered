@@ -134,6 +134,7 @@ SeafoamIslandsB4F_TextPointers:
 	dw BoulderText
 	dw BoulderText
 	dw ArticunoText
+	dw PickUpItemText
 	dw SeafoamIslands5Text4
 	dw SeafoamIslands5Text5
 

@@ -7,8 +7,10 @@ CeladonMansionRoof_Object:
 	warp_event  2,  7, CELADON_MANSION_ROOF_HOUSE, 1
 
 	def_bg_events
-	bg_event  3,  7, 1 ; CeladonMansion4Text1
+	bg_event  3,  7, 2 ; CeladonMansion4Text1
 
 	def_object_events
+	object_event  1, 10, SPRITE_POKE_BALL, STAY, NONE, 1, SURFBOARD
+
 
 	def_warps_to CELADON_MANSION_ROOF

@@ -1,6 +1,82 @@
 UndergroundPathWestEast_Script:
-	jp EnableAutoTextBoxDrawing
+	call EnableAutoTextBoxDrawing
+	ld hl, UndergroundPathWestEastTrainerHeaders
+	ld de, UndergroundPathWestEast_ScriptPointers
+	ld a, [wUndergroundPathWestEastCurScript]
+	call ExecuteCurMapScriptInTable
+	ld [wUndergroundPathWestEastCurScript], a
+	ret
+
+UndergroundPathWestEast_ScriptPointers:
+	dw CheckFightingMapTrainers
+	dw DisplayEnemyTrainerTextAndStartBattle
+	dw EndTrainerBattle
 
 UndergroundPathWestEast_TextPointers:
+	dw UndergroundPathWestEastTrainer1Text
+	dw UndergroundPathWestEastTrainer2Text
+	dw UndergroundPathWestEastTrainer3Text
 
-	text_end ; unused
+UndergroundPathWestEastTrainerHeaders:
+	def_trainers 3
+UndergroundPathWestEastTrainerHeader0:
+	trainer EVENT_BEAT_UNDERGROUND_PATH_WEST_EAST_TRAINER_0, 0, UndergroundPathWestEastBattleText1, UndergroundPathWestEastEndBattleText1, UndergroundPathWestEastAfterBattleText1
+UndergroundPathWestEastTrainerHeader1:
+	trainer EVENT_BEAT_UNDERGROUND_PATH_WEST_EAST_TRAINER_1, 0, UndergroundPathWestEastBattleText2, UndergroundPathWestEastEndBattleText2, UndergroundPathWestEastAfterBattleText2
+UndergroundPathWestEastTrainerHeader2:
+	trainer EVENT_BEAT_UNDERGROUND_PATH_WEST_EAST_TRAINER_2, 0, UndergroundPathWestEastBattleText3, UndergroundPathWestEastEndBattleText3, UndergroundPathWestEastAfterBattleText3
+	db -1 ;end
+
+UndergroundPathWestEastTrainer1Text:
+	text_asm
+	ld hl, UndergroundPathWestEastTrainerHeader0
+	call TalkToTrainer
+	jp TextScriptEnd
+
+UndergroundPathWestEastBattleText1:
+	text_far _UndergroundPathWestEastBattleText1
+	text_end
+
+UndergroundPathWestEastEndBattleText1:
+	text_far _UndergroundPathWestEastEndBattleText1
+	text_end
+
+UndergroundPathWestEastAfterBattleText1:
+	text_far _UndergroundPathWestEastAfterBattleText1
+	text_end
+
+UndergroundPathWestEastTrainer2Text:
+	text_asm
+	ld hl, UndergroundPathWestEastTrainerHeader1
+	call TalkToTrainer
+	jp TextScriptEnd
+
+UndergroundPathWestEastBattleText2:
+	text_far _UndergroundPathWestEastBattleText2
+	text_end
+
+UndergroundPathWestEastEndBattleText2:
+	text_far _UndergroundPathWestEastEndBattleText2
+	text_end
+
+UndergroundPathWestEastAfterBattleText2:
+	text_far _UndergroundPathWestEastAfterBattleText2
+	text_end
+
+UndergroundPathWestEastTrainer3Text:
+	text_asm
+	ld hl, UndergroundPathWestEastTrainerHeader2
+	call TalkToTrainer
+	jp TextScriptEnd
+
+UndergroundPathWestEastBattleText3:
+	text_far _UndergroundPathWestEastBattleText3
+	text_end
+
+UndergroundPathWestEastEndBattleText3:
+	text_far _UndergroundPathWestEastEndBattleText3
+	text_end
+
+UndergroundPathWestEastAfterBattleText3:
+	text_far _UndergroundPathWestEastAfterBattleText3
+	text_end

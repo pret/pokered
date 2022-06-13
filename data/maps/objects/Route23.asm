@@ -8,7 +8,7 @@ Route23_Object:
 	warp_event 14, 31, VICTORY_ROAD_2F, 2
 
 	def_bg_events
-	bg_event  3, 33, 8 ; Route23Text8
+	bg_event  3, 33, 10 ; Route23Text8
 
 	def_object_events
 	object_event  4, 35, SPRITE_GUARD, STAY, DOWN, 1 ; person
@@ -18,5 +18,7 @@ Route23_Object:
 	object_event 12, 105, SPRITE_GUARD, STAY, DOWN, 5 ; person
 	object_event  8, 119, SPRITE_GUARD, STAY, DOWN, 6 ; person
 	object_event  8, 136, SPRITE_GUARD, STAY, DOWN, 7 ; person
+	object_event  9, 13, SPRITE_POKE_BALL, STAY, NONE, 8, SURFBOARD ; person
+	object_event  1, 51, SPRITE_POKE_BALL, STAY, NONE, 9, SURFBOARD ; person
 
 	def_warps_to ROUTE_23

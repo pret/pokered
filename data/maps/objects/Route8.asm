@@ -9,7 +9,7 @@ Route8_Object:
 	warp_event 13,  3, UNDERGROUND_PATH_ROUTE_8, 1
 
 	def_bg_events
-	bg_event 17,  3, 10 ; Route8Text10
+	bg_event 17,  3, 11 ; Route8Text11
 
 	def_object_events
 	object_event  8,  5, SPRITE_SUPER_NERD, STAY, RIGHT, 1, OPP_SUPER_NERD, 3
@@ -21,5 +21,6 @@ Route8_Object:
 	object_event 26,  6, SPRITE_COOLTRAINER_F, STAY, RIGHT, 7, OPP_LASS, 15
 	object_event 46, 13, SPRITE_GAMBLER, STAY, DOWN, 8, OPP_GAMBLER, 7
 	object_event 51, 12, SPRITE_COOLTRAINER_F, STAY, LEFT, 9, OPP_LASS, 16
+	object_event  6, 13, SPRITE_POKE_BALL, STAY, NONE, 10, SURFBOARD
 
 	def_warps_to ROUTE_8

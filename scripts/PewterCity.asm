@@ -58,7 +58,7 @@ PewterCityScript1:
 	call PlayDefaultMusic
 	ld hl, wFlags_0xcd60
 	set 4, [hl]
-	ld a, $d
+	ld a, $e
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $3c
@@ -126,7 +126,7 @@ PewterCityScript4:
 	call PlayDefaultMusic
 	ld hl, wFlags_0xcd60
 	set 4, [hl]
-	ld a, $e
+	ld a, $f
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $3c
@@ -186,6 +186,7 @@ PewterCity_TextPointers:
 	dw PewterCityText3
 	dw PewterCityText4
 	dw PewterCityText5
+	dw PickUpItemText
 	dw PewterCityText6
 	dw PewterCityText7
 	dw MartSignText

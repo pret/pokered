@@ -79,7 +79,7 @@ MapHeaderBanks::
 	db BANK(UndergroundPathRoute6_h) ; UNDERGROUND_PATH_ROUTE_6_COPY
 	db BANK(Route7Gate_h)
 	db BANK(UndergroundPathRoute7_h)
-	db BANK(UndergroundPathRoute7Copy_h)
+	db BANK(UndergroundPathRoute7_h) ; unused
 	db BANK(Route8Gate_h)
 	db BANK(UndergroundPathRoute8_h)
 	db BANK(RockTunnelPokecenter_h)

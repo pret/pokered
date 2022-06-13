@@ -843,7 +843,6 @@ LavenderPokecenter_Blocks:
 PewterPokecenter_Blocks: INCBIN "maps/PewterPokecenter.blk"
 
 UndergroundPathRoute7_Blocks:
-UndergroundPathRoute7Copy_Blocks:
 UndergroundPathRoute6_Blocks:
 UndergroundPathRoute5_Blocks: INCBIN "maps/UndergroundPathRoute5.blk"
 
@@ -960,10 +959,6 @@ INCLUDE "data/maps/objects/UndergroundPathRoute6.asm"
 INCLUDE "data/maps/headers/UndergroundPathRoute7.asm"
 INCLUDE "scripts/UndergroundPathRoute7.asm"
 INCLUDE "data/maps/objects/UndergroundPathRoute7.asm"
-
-INCLUDE "data/maps/headers/UndergroundPathRoute7Copy.asm"
-INCLUDE "scripts/UndergroundPathRoute7Copy.asm"
-INCLUDE "data/maps/objects/UndergroundPathRoute7Copy.asm"
 
 INCLUDE "data/maps/headers/SilphCo9F.asm"
 INCLUDE "scripts/SilphCo9F.asm"

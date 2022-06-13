@@ -22,6 +22,7 @@ Route21_TextPointers:
 	dw Route21Text7
 	dw Route21Text8
 	dw Route21Text9
+	dw PickUpItemText
 
 Route21TrainerHeaders:
 	def_trainers

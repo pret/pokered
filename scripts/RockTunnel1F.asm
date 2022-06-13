@@ -20,6 +20,7 @@ RockTunnel1F_TextPointers:
 	dw RockTunnel1Text5
 	dw RockTunnel1Text6
 	dw RockTunnel1Text7
+	dw PickUpItemText
 	dw RockTunnel1Text8
 
 RockTunnel1TrainerHeaders:

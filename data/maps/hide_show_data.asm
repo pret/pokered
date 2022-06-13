@@ -19,13 +19,13 @@ MapHSPointers:
 	dw Route2HS
 	dw NoHS
 	dw Route4HS
+	dw Route5HS
+	dw Route6HS
 	dw NoHS
-	dw NoHS
-	dw NoHS
-	dw NoHS
+	dw Route8HS
 	dw Route9HS
-	dw NoHS
-	dw NoHS
+	dw Route10HS
+	dw Route11HS
 	dw Route12HS
 	dw NoHS
 	dw NoHS
@@ -35,9 +35,9 @@ MapHSPointers:
 	dw NoHS
 	dw NoHS
 	dw NoHS
-	dw NoHS
+	dw Route21HS
 	dw Route22HS
-	dw NoHS
+	dw Route23HS
 	dw Route24HS
 	dw Route25HS
 	dw NoHS
@@ -85,7 +85,7 @@ MapHSPointers:
 	dw NoHS
 	dw NoHS
 	dw NoHS
-	dw NoHS
+	dw RockTunnel1FHS
 	dw PowerPlantHS
 	dw NoHS
 	dw NoHS
@@ -134,7 +134,7 @@ MapHSPointers:
 	dw NoHS
 	dw NoHS
 	dw NoHS
-	dw NoHS
+	dw CeladonMansionRoofHS
 	dw CeladonMansionRoofHouseHS
 	dw NoHS
 	dw NoHS
@@ -235,7 +235,7 @@ MapHSPointers:
 	dw NoHS
 	dw NoHS
 	dw NoHS
-	dw NoHS
+	dw RockTunnelB1FHS
 	dw SilphCo9FHS
 	dw SilphCo10FHS
 	dw SilphCo11FHS
@@ -247,7 +247,7 @@ MapHSPointers:
 	dw NoHS
 	dw NoHS
 	dw NoHS
-	dw UnusedMapF4HS
+	dw NoHS
 	dw NoHS
 	dw NoHS
 	dw NoHS
@@ -270,12 +270,14 @@ ViridianCityHS:
 PewterCityHS:
 	db PEWTER_CITY, $03, SHOW
 	db PEWTER_CITY, $05, SHOW
+	db PEWTER_CITY, $06, SHOW
 CeruleanCityHS:
 	db CERULEAN_CITY, $01, HIDE
 	db CERULEAN_CITY, $02, SHOW
 	db CERULEAN_CITY, $06, HIDE
 	db CERULEAN_CITY, $0A, SHOW
 	db CERULEAN_CITY, $0B, SHOW
+	db CERULEAN_CITY, $0C, SHOW
 SaffronCityHS:
 	db SAFFRON_CITY, $01, SHOW
 	db SAFFRON_CITY, $02, SHOW
@@ -293,26 +295,47 @@ SaffronCityHS:
 	db SAFFRON_CITY, $0E, SHOW
 	db SAFFRON_CITY, $0F, HIDE
 Route2HS:
-	db ROUTE_2, $01, SHOW
-	db ROUTE_2, $02, SHOW
+	db ROUTE_2, $04, SHOW
+	db ROUTE_2, $05, SHOW
+	db ROUTE_2, $06, SHOW
 Route4HS:
-	db ROUTE_4, $03, SHOW
+	db ROUTE_4, $06, SHOW
+	db ROUTE_4, $07, SHOW
+Route5HS:
+	db ROUTE_5, $05, SHOW
+Route6HS:
+	db ROUTE_6, $09, SHOW
+Route8HS:
+	db ROUTE_8, $0A, SHOW
 Route9HS:
 	db ROUTE_9, $0A, SHOW
+Route10HS:
+	db ROUTE_10, $08, SHOW
+Route11HS:
+	db ROUTE_11, $0B, SHOW
 Route12HS:
 	db ROUTE_12, $01, SHOW
-	db ROUTE_12, $09, SHOW
-	db ROUTE_12, $0A, SHOW
+	db ROUTE_12, $0B, SHOW
+	db ROUTE_12, $0C, SHOW
+	db ROUTE_12, $0D, SHOW
 Route15HS:
 	db ROUTE_15, $0B, SHOW
 Route16HS:
 	db ROUTE_16, $07, SHOW
+Route21HS:
+	db ROUTE_21, $0A, SHOW
 Route22HS:
 	db ROUTE_22, $01, HIDE
 	db ROUTE_22, $02, HIDE
+	db ROUTE_22, $03, SHOW
+	db ROUTE_22, $04, SHOW
+Route23HS:
+	db ROUTE_23, $08, SHOW
+	db ROUTE_23, $09, SHOW
 Route24HS:
 	db ROUTE_24, $01, SHOW
 	db ROUTE_24, $08, SHOW
+	db ROUTE_24, $09, SHOW
 Route25HS:
 	db ROUTE_25, $0A, SHOW
 BluesHouseHS:
@@ -357,6 +380,8 @@ PokemonTower7FHS:
 	db POKEMON_TOWER_7F, $04, SHOW
 MrFujisHouseHS:
 	db MR_FUJIS_HOUSE, $05, HIDE
+CeladonMansionRoofHS:
+	db CELADON_MANSION_ROOF, $01, SHOW
 CeladonMansionRoofHouseHS:
 	db CELADON_MANSION_ROOF_HOUSE, $02, SHOW
 GameCornerHS:
@@ -364,13 +389,22 @@ GameCornerHS:
 WardensHouseHS:
 	db WARDENS_HOUSE, $02, SHOW
 PokemonMansion1FHS:
-	db POKEMON_MANSION_1F, $02, SHOW
-	db POKEMON_MANSION_1F, $03, SHOW
+	db POKEMON_MANSION_1F, $05, SHOW
+	db POKEMON_MANSION_1F, $06, SHOW
 FightingDojoHS:
 	db FIGHTING_DOJO, $06, SHOW
 	db FIGHTING_DOJO, $07, SHOW
 SilphCo1FHS:
 	db SILPH_CO_1F, $01, HIDE
+	db SILPH_CO_1F, $02, HIDE
+	db SILPH_CO_1F, $03, HIDE
+	db SILPH_CO_1F, $04, HIDE
+	db SILPH_CO_1F, $05, HIDE
+RockTunnel1FHS:
+	db ROCK_TUNNEL_1F, $08, SHOW
+RockTunnelB1FHS:
+	db ROCK_TUNNEL_B1F, $09, SHOW
+	db ROCK_TUNNEL_B1F, $0A, SHOW
 PowerPlantHS:
 	db POWER_PLANT, $01, SHOW
 	db POWER_PLANT, $02, SHOW
@@ -485,7 +519,6 @@ SilphCo7FHS:
 	db SILPH_CO_7F, $09, SHOW
 	db SILPH_CO_7F, $0A, SHOW
 	db SILPH_CO_7F, $0B, SHOW
-	db SILPH_CO_7F, $0C, SHOW
 SilphCo8FHS:
 	db SILPH_CO_8F, $02, SHOW
 	db SILPH_CO_8F, $03, SHOW
@@ -505,19 +538,61 @@ SilphCo11FHS:
 	db SILPH_CO_11F, $03, SHOW
 	db SILPH_CO_11F, $04, SHOW
 	db SILPH_CO_11F, $05, SHOW
-UnusedMapF4HS:
-	db UNUSED_MAP_F4, $02, SHOW
 PokemonMansion2FHS:
-	db POKEMON_MANSION_2F, $02, SHOW
+	db POKEMON_MANSION_2F, $06, SHOW
 PokemonMansion3FHS:
-	db POKEMON_MANSION_3F, $03, SHOW
 	db POKEMON_MANSION_3F, $04, SHOW
+	db POKEMON_MANSION_3F, $05, SHOW
 PokemonMansionB1FHS:
-	db POKEMON_MANSION_B1F, $03, SHOW
-	db POKEMON_MANSION_B1F, $04, SHOW
 	db POKEMON_MANSION_B1F, $05, SHOW
 	db POKEMON_MANSION_B1F, $06, SHOW
+	db POKEMON_MANSION_B1F, $07, SHOW
 	db POKEMON_MANSION_B1F, $08, SHOW
+	db POKEMON_MANSION_B1F, $0A, SHOW
+CeruleanCave2FHS:
+	db CERULEAN_CAVE_2F, $02, SHOW
+	db CERULEAN_CAVE_2F, $03, SHOW
+	db CERULEAN_CAVE_2F, $04, SHOW
+CeruleanCaveB1FHS:
+	db CERULEAN_CAVE_B1F, $01, SHOW
+	db CERULEAN_CAVE_B1F, $02, SHOW
+	db CERULEAN_CAVE_B1F, $03, SHOW
+VictoryRoad1FHS:
+	db VICTORY_ROAD_1F, $03, SHOW
+	db VICTORY_ROAD_1F, $04, SHOW
+ChampionsRoomHS:
+	db CHAMPIONS_ROOM, $02, HIDE
+SeafoamIslands1FHS:
+	db SEAFOAM_ISLANDS_1F, $01, SHOW
+	db SEAFOAM_ISLANDS_1F, $02, SHOW
+SeafoamIslandsB1FHS:
+	db SEAFOAM_ISLANDS_B1F, $01, HIDE
+	db SEAFOAM_ISLANDS_B1F, $02, HIDE
+SeafoamIslandsB2FHS:
+	db SEAFOAM_ISLANDS_B2F, $01, HIDE
+	db SEAFOAM_ISLANDS_B2F, $02, HIDE
+SeafoamIslandsB3FHS:
+	db SEAFOAM_ISLANDS_B3F, $02, SHOW
+	db SEAFOAM_ISLANDS_B3F, $03, SHOW
+	db SEAFOAM_ISLANDS_B3F, $05, HIDE
+	db SEAFOAM_ISLANDS_B3F, $06, HIDE
+	db SEAFOAM_ISLANDS_B3F, $07, SHOW ; FOSSIL
+	db SEAFOAM_ISLANDS_B3F, $08, SHOW ; FOSSIL
+SeafoamIslandsB4FHS:
+	db SEAFOAM_ISLANDS_B4F, $01, HIDE
+	db SEAFOAM_ISLANDS_B4F, $02, HIDE
+	db SEAFOAM_ISLANDS_B4F, $03, SHOW
+	db SEAFOAM_ISLANDS_B4F, $04, SHOW
+VermilionDockHS:
+	db VERMILION_DOCK, $01, HIDE
+	db $FF, $01, SHOW ; end
+	assert_table_length NUM_HS_OBJECTS + 1
+
+ExtraMissableObjects:
+; entries correspond to HS_* constants (see constants/hide_show_constants)
+	table_width 3, ExtraMissableObjects
+; format: map id, object id, HIDE/SHOW
+
 SafariZoneEastHS:
 	db SAFARI_ZONE_EAST, $01, SHOW ; ranger
 	db SAFARI_ZONE_EAST, $02, SHOW ; trainer
@@ -556,40 +631,5 @@ SafariZoneCenterHS:
 	db SAFARI_ZONE_CENTER, $04, SHOW ; trainer
 	db SAFARI_ZONE_CENTER, $05, SHOW ; trainer
 	db SAFARI_ZONE_CENTER, $06, SHOW
-CeruleanCave2FHS:
-	db CERULEAN_CAVE_2F, $02, SHOW
-	db CERULEAN_CAVE_2F, $03, SHOW
-	db CERULEAN_CAVE_2F, $04, SHOW
-CeruleanCaveB1FHS:
-	db CERULEAN_CAVE_B1F, $01, SHOW
-	db CERULEAN_CAVE_B1F, $02, SHOW
-	db CERULEAN_CAVE_B1F, $03, SHOW
-VictoryRoad1FHS:
-	db VICTORY_ROAD_1F, $03, SHOW
-	db VICTORY_ROAD_1F, $04, SHOW
-ChampionsRoomHS:
-	db CHAMPIONS_ROOM, $02, HIDE
-SeafoamIslands1FHS:
-	db SEAFOAM_ISLANDS_1F, $01, SHOW
-	db SEAFOAM_ISLANDS_1F, $02, SHOW
-SeafoamIslandsB1FHS:
-	db SEAFOAM_ISLANDS_B1F, $01, HIDE
-	db SEAFOAM_ISLANDS_B1F, $02, HIDE
-SeafoamIslandsB2FHS:
-	db SEAFOAM_ISLANDS_B2F, $01, HIDE
-	db SEAFOAM_ISLANDS_B2F, $02, HIDE
-SeafoamIslandsB3FHS:
-	db SEAFOAM_ISLANDS_B3F, $02, SHOW
-	db SEAFOAM_ISLANDS_B3F, $03, SHOW
-	db SEAFOAM_ISLANDS_B3F, $05, HIDE
-	db SEAFOAM_ISLANDS_B3F, $06, HIDE
-	db SEAFOAM_ISLANDS_B3F, $07, SHOW ; FOSSIL
-	db SEAFOAM_ISLANDS_B3F, $08, SHOW ; FOSSIL
-SeafoamIslandsB4FHS:
-	db SEAFOAM_ISLANDS_B4F, $01, HIDE
-	db SEAFOAM_ISLANDS_B4F, $02, HIDE
-	db SEAFOAM_ISLANDS_B4F, $03, SHOW
-VermilionDockHS:
-	db VERMILION_DOCK, $01, HIDE
 	db $FF, $01, SHOW ; end
-	assert_table_length NUM_HS_OBJECTS + 1
+	assert_table_length NUM_EXTRA_HS_OBJECTS + 1

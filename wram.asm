@@ -1793,7 +1793,14 @@ wPokedexSeenEnd::
 
 ;;;;;
 UNION
+
 ds 42 ; wNumBagItems and wBagItems used to be here
+
+NEXTU
+
+wExtraMissableObjectFlags:: flag_array NUM_EXTRA_HS_OBJECTS ; max size 42
+wExtraMissableObjectFlagsEnd::
+
 ENDU
 ;;;;;
 
@@ -2001,14 +2008,15 @@ wMissableObjectList:: ds 16 * 2 + 1
 wGameProgressFlags::
 wOaksLabCurScript:: db
 wPalletTownCurScript:: db
-	ds 1
+wCeladonHotelCurScript:: db ; NEW
 wBluesHouseCurScript:: db
 wViridianCityCurScript:: db
-	ds 2
+wRoute7CurScript:: db ; NEW
+wRoute2CurScript:: db ; NEW
 wPewterCityCurScript:: db
 wRoute3CurScript:: db
 wRoute4CurScript:: db
-	ds 1
+wRoute5CurScript:: db ; NEW
 wViridianGymCurScript:: db
 wPewterGymCurScript:: db
 wCeruleanGymCurScript:: db
@@ -2025,7 +2033,7 @@ wMtMoonB2FCurScript:: db
 wSSAnne1FRoomsCurScript:: db
 wSSAnne2FRoomsCurScript:: db
 wRoute22CurScript:: db
-	ds 1
+wSilphCo1FCurScript:: db ; NEW
 wRedsHouse2FCurScript:: db
 wViridianMartCurScript:: db
 wRoute22GateCurScript:: db
@@ -2036,7 +2044,7 @@ wSafariZoneCenterCurScript:: db ; NEW
 wSafariZoneEastCurScript:: db ; NEW
 wSafariZoneNorthCurScript:: db ; NEW
 wSafariZoneWestCurScript:: db ; NEW
-	ds 1
+wUndergroundPathNorthSouthCurScript:: db ;NEW
 wSSAnneBowCurScript:: db
 wViridianForestCurScript:: db
 wMuseum1FCurScript:: db
@@ -2048,7 +2056,7 @@ wRoute21CurScript:: db
 wSafariZoneGateCurScript:: db
 wRockTunnelB1FCurScript:: db
 wRockTunnel1FCurScript:: db
-	ds 1
+wUndergroundPathWestEastCurScript:: db ;NEW
 wRoute11CurScript:: db
 wRoute12CurScript:: db
 wRoute15CurScript:: db

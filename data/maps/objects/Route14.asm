@@ -4,7 +4,8 @@ Route14_Object:
 	def_warp_events
 
 	def_bg_events
-	bg_event 17, 13, 11 ; Route14Text11
+	bg_event 17, 13, 13 ; Route14Text11
+	bg_event 15, 47, 14 ; Route14Text11
 
 	def_object_events
 	object_event  4,  4, SPRITE_COOLTRAINER_M, STAY, DOWN, 1, OPP_BIRD_KEEPER, 14
@@ -17,5 +18,7 @@ Route14_Object:
 	object_event  4, 30, SPRITE_BIKER, STAY, RIGHT, 8, OPP_BIKER, 14
 	object_event 15, 30, SPRITE_BIKER, STAY, LEFT, 9, OPP_BIKER, 15
 	object_event  4, 31, SPRITE_BIKER, STAY, RIGHT, 10, OPP_BIKER, 2
+	object_event  6, 14, SPRITE_COOLTRAINER_M, STAY, RIGHT, 11, OPP_BIRD_KEEPER, 13
+	object_event 14, 46, SPRITE_BEAUTY, STAY, UP, 12, OPP_BEAUTY, 11
 
 	def_warps_to ROUTE_14

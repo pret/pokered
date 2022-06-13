@@ -8,12 +8,14 @@ Route18_Object:
 	warp_event 40,  9, ROUTE_18_GATE_1F, 4
 
 	def_bg_events
-	bg_event 43,  7, 4 ; Route18Text4
-	bg_event 33,  5, 5 ; Route18Text5
+	bg_event 43,  7, 6 ; Route18Text4
+	bg_event 33,  5, 7 ; Route18Text5
 
 	def_object_events
 	object_event 36, 11, SPRITE_COOLTRAINER_M, STAY, RIGHT, 1, OPP_BIRD_KEEPER, 8
 	object_event 40, 15, SPRITE_COOLTRAINER_M, STAY, LEFT, 2, OPP_BIRD_KEEPER, 9
 	object_event 42, 13, SPRITE_COOLTRAINER_M, STAY, LEFT, 3, OPP_BIRD_KEEPER, 10
+	object_event 10, 4, SPRITE_BIKER, STAY, NONE, 4, OPP_TAMER, 9
+	object_event 24, 6, SPRITE_BIKER, STAY, DOWN, 5, OPP_ROCKER, 6
 
 	def_warps_to ROUTE_18
