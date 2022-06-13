@@ -50,7 +50,7 @@ CheckForRodBike::
 	pop bc
 	jp nc, PrepareText
 	call UseBike
-	call CloseTextDisplay ; instant bike usage
+	call CloseTextDisplayNoSpriteUpdate ; instant bike usage
 	ret
 
 PrepareText:
