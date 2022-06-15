@@ -7,35 +7,35 @@
 WildPalettePointers:
 	table_width 2, WildPalettePointers
 	dw DefaultPalettes         ; PALLET_TOWN
-	dw DefaultPalettes         ; VIRIDIAN_CITY
+	dw SurfGrassAltPalettes         ; VIRIDIAN_CITY
 	dw DefaultPalettes         ; PEWTER_CITY
 	dw DefaultPalettes         ; CERULEAN_CITY
 	dw DefaultPalettes         ; LAVENDER_TOWN
-	dw DefaultPalettes         ; VERMILION_CITY
-	dw DefaultPalettes         ; CELADON_CITY
+	dw VermilionCityWildPalettes         ; VERMILION_CITY
+	dw AllAltPalettes          ; CELADON_CITY
 	dw DefaultPalettes         ; SAFFRON_CITY
-	dw DefaultPalettes         ; FUCHSIA_CITY
-	dw DefaultPalettes         ; CINNABAR_ISLAND
+	dw FuchsiaCityWildPalettes         ; FUCHSIA_CITY
+	dw SeaRoutesWildPalettes   ; CINNABAR_ISLAND
 	dw DefaultPalettes         ; INDIGO_PLATEAU
 	dw DefaultPalettes         ; unused
 	dw DefaultPalettes         ; ROUTE_1
 	dw DefaultPalettes         ; ROUTE_2
 	dw DefaultPalettes         ; ROUTE_3
-	dw Route4WildPalettes         ; ROUTE_4
-	dw DefaultPalettes         ; ROUTE_5
-	dw DefaultPalettes         ; ROUTE_6
-	dw DefaultPalettes         ; ROUTE_7
+	dw DefaultPalettes         ; ROUTE_4
+	dw Route5WildPalettes         ; ROUTE_5
+	dw Route6WildPalettes         ; ROUTE_6
+	dw Route7WildPalettes         ; ROUTE_7
 	dw DefaultPalettes         ; ROUTE_8
 	dw DefaultPalettes         ; ROUTE_9
-	dw DefaultPalettes         ; ROUTE_10
-	dw DefaultPalettes         ; ROUTE_11
-	dw Route12WildPalettes     ; ROUTE_12
+	dw Route10WildPalettes         ; ROUTE_10
+	dw Route11WildPalettes         ; ROUTE_11
+	dw Route12WildPalettes         ; ROUTE_12
 	dw Route13WildPalettes         ; ROUTE_13
 	dw Route14WildPalettes         ; ROUTE_14
 	dw Route15WildPalettes         ; ROUTE_15
 	dw Route16WildPalettes         ; ROUTE_16
-	dw Route17WildPalettes         ; ROUTE_17
-	dw Route18WildPalettes         ; ROUTE_18
+	dw DefaultPalettes         ; ROUTE_17
+	dw DefaultPalettes         ; ROUTE_18
 	dw SeaRoutesWildPalettes       ; ROUTE_19
 	dw SeaRoutesWildPalettes       ; ROUTE_20
 	dw Route21WildPalettes         ; ROUTE_21
@@ -100,7 +100,7 @@ WildPalettePointers:
 	dw DefaultPalettes
 	dw DefaultPalettes
 	dw DefaultPalettes
-	dw DefaultPalettes
+	dw VermilionCityWildPalettes
 	dw DefaultPalettes
 	dw DefaultPalettes
 	dw DefaultPalettes
@@ -166,7 +166,7 @@ WildPalettePointers:
 	dw DefaultPalettes
 	dw DefaultPalettes
 	dw SeafoamIslandsB1FWildPalettes
-	dw SeafoamIslandsB2FWildPalettes
+	dw DefaultPalettes
 	dw SeafoamIslandsB3FWildPalettes
 	dw SeafoamIslandsB4FWildPalettes
 	dw DefaultPalettes
@@ -238,7 +238,7 @@ WildPalettePointers:
 	dw DefaultPalettes
 	dw DefaultPalettes
 	dw DefaultPalettes
-	dw DefaultPalettes ;rock tunnel b1f
+	dw RockTunnelB1FWildPalettes ;rock tunnel b1f
 	dw DefaultPalettes
 	dw DefaultPalettes
 	dw DefaultPalettes
@@ -316,3 +316,6 @@ INCLUDE "data/wild/palettes/maps/VictoryRoad2F.asm"
 INCLUDE "data/wild/palettes/maps/VictoryRoad3F.asm"
 INCLUDE "data/wild/palettes/maps/VictoryRoad1F.asm"
 INCLUDE "data/wild/palettes/maps/DiglettsCave.asm"
+INCLUDE "data/wild/palettes/maps/VermilionCity.asm"
+INCLUDE "data/wild/palettes/maps/FuchsiaCity.asm"
+INCLUDE "data/wild/palettes/maps/ViridianCity.asm"

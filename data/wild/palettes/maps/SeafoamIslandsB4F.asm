@@ -1,5 +1,4 @@
-
 SeafoamIslandsB4FWildPalettes:
-	db 0
-	db 0
-	db 0
+	db %00001111
+	db %00000100
+	db %01000010

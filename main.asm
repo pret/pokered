@@ -54,7 +54,6 @@ INCLUDE "engine/overworld/daycare_exp.asm"
 INCLUDE "data/maps/hide_show_data.asm"
 INCLUDE "engine/overworld/field_move_messages.asm"
 INCLUDE "engine/items/inventory.asm"
-INCLUDE "engine/overworld/wild_mons.asm"
 INCLUDE "engine/items/item_effects.asm"
 INCLUDE "engine/menus/draw_badges.asm"
 INCLUDE "engine/overworld/update_map.asm"
@@ -360,6 +359,12 @@ INCLUDE "data/moves/animations.asm"
 INCLUDE "data/battle_anims/subanimations.asm"
 INCLUDE "data/battle_anims/frame_blocks.asm"
 
+SECTION "Wild Mons", ROMX
+; moved from bank3
+INCLUDE "engine/overworld/wild_mons.asm"
+; new code
+INCLUDE "engine/overworld/wild_mon_alt_palettes.asm"
+
 
 SECTION "Party Sprites", ROMX, BANK[$34]
 
@@ -377,5 +382,4 @@ INCLUDE "engine/menus/menu_list_tm_name_loader.asm"
 INCLUDE "engine/overworld/select_button_functionality.asm"
 INCLUDE "engine/overworld/use_another_repel.asm"
 INCLUDE "engine/menus/wrap_list_menu.asm"
-INCLUDE "engine/overworld/wild_mon_alt_palettes.asm"
 INCLUDE "engine/items/last_two_fishing_gurus_script.asm"

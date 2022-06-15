@@ -177,6 +177,7 @@ ROMX $2B
 	"Pokédex Text"
 ROMX $2C
 	"Move Names"
+	"Wild Mons"
 ROMX $2D
 	"Pics 7"
 ROMX $2E

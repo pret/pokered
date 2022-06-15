@@ -1,4 +1,4 @@
 CeruleanCaveB1FWildPalettes:
-	db 0
-	db 0
-	db 0
+	db $FF
+	db %01010111
+	db %11110101

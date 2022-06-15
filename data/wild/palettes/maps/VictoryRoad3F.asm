@@ -1,5 +1,5 @@
 
 VictoryRoad3FWildPalettes:
-	db 0
-	db 0
+	db %00001111
+	db %00000011
 	db 0

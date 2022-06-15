@@ -665,6 +665,9 @@ _ViridianBlackboardSleepText::
 	line "attack if it's"
 	cont "asleep!"
 
+	para "It can wake up"
+	line "during battle."
+
 	para "#MON will stay"
 	line "asleep even after"
 	cont "battles."
@@ -690,6 +693,9 @@ _ViridianBlackboardPrlzText::
 	line "make #MON"
 	cont "moves misfire!"
 
+	para "It cuts SPEED"
+	line "stat as well."
+
 	para "Paralysis remains"
 	line "after battles."
 
@@ -699,7 +705,7 @@ _ViridianBlackboardPrlzText::
 
 _ViridianBlackboardBurnText::
 	text "A burn reduces"
-	line "power and speed."
+	line "the ATTACK stat."
 	cont "It also causes"
 	cont "ongoing damage."
 

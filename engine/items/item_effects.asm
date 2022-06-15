@@ -2032,7 +2032,14 @@ CoinCaseNumCoinsText:
 ItemUseOldRod:
 	call FishingInit
 	jp c, ItemUseNotTime
-	lb bc, 5, MAGIKARP
+	call Random
+	and 1
+	jr z, .goldeen
+	lb bc, 10, MAGIKARP
+	jr .done
+.goldeen
+	lb bc, 10, GOLDEEN
+.done
 	ld a, $1 ; set bite
 	jr RodResponse
 
@@ -2044,12 +2051,19 @@ ItemUseGoodRod:
 	and a
 	jr z, .SetBite ;25% chance of no bite
 .RandomLoop
+	; choose which good rod pokemon table
+	ld a, [wCurMap]
+	ld c, a
+	call IsMapOceanMap
+	jr c, .ocean
+	ld hl, GoodRodMons
+	jr .gotMons
+.ocean
+	ld hl, GoodRodMonsOcean	
+.gotMons
+	; now choose which pokemon in the table
 	call Random
 	and %11
-	cp 2
-	jr nc, .RandomLoop
-	; choose which monster appears
-	ld hl, GoodRodMons
 	add a
 	ld c, a
 	ld b, 0
@@ -2065,6 +2079,7 @@ ItemUseGoodRod:
 	jr RodResponse
 
 INCLUDE "data/wild/good_rod.asm"
+INCLUDE "data/maps/ocean_maps.asm"
 
 ItemUseSuperRod:
 	call FishingInit
@@ -3131,52 +3146,3 @@ INCLUDE "data/wild/super_rod.asm"
 ItemUseReloadOverworldData:
 	call LoadCurrentMapView
 	jp UpdateSprites
-
-; creates a list at wBuffer of maps where the mon in [wd11e] can be found.
-; this is used by the pokedex to display locations the mon can be found on the map.
-FindWildLocationsOfMon:
-	ld hl, WildDataPointers
-	ld de, wBuffer
-	ld c, $0
-.loop
-	inc hl
-	ld a, [hld]
-	inc a
-	jr z, .done
-	push hl
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld a, [hli]
-	and a
-	call nz, CheckMapForMon ; land
-	ld a, [hli]
-	and a
-	call nz, CheckMapForMon ; water
-	pop hl
-	inc hl
-	inc hl
-	inc c
-	jr .loop
-.done
-	ld a, $ff ; list terminator
-	ld [de], a
-	ret
-
-CheckMapForMon:
-	inc hl
-	ld b, $a
-.loop
-	ld a, [wd11e]
-	cp [hl]
-	jr nz, .nextEntry
-	ld a, c
-	ld [de], a
-	inc de
-.nextEntry
-	inc hl
-	inc hl
-	dec b
-	jr nz, .loop
-	dec hl
-	ret

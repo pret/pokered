@@ -51,6 +51,13 @@ ZapdosTrainerHeader:
 	db -1 ; end
 
 InitVoltorbBattle:
+	xor a
+	jr InitVoltorbBattle
+
+InitAltPaletteVoltorbBattle:
+	ld a, 1
+InitVoltorbBattleCommon:
+	ld [wIsAltPalettePkmnData], a
 	call TalkToTrainer
 	ld a, [wCurMapScript]
 	ld [wPowerPlantCurScript], a
@@ -69,7 +76,7 @@ Voltorb1Text:
 Voltorb2Text:
 	text_asm
 	ld hl, Voltorb2TrainerHeader
-	jr InitVoltorbBattle
+	jr InitAltPaletteVoltorbBattle
 
 Voltorb3Text:
 	text_asm
@@ -79,7 +86,7 @@ Voltorb3Text:
 Voltorb4Text:
 	text_asm
 	ld hl, Voltorb4TrainerHeader
-	jr InitVoltorbBattle
+	jr InitAltPaletteVoltorbBattle
 
 Voltorb5Text:
 	text_asm
@@ -89,12 +96,12 @@ Voltorb5Text:
 Voltorb6Text:
 	text_asm
 	ld hl, Voltorb6TrainerHeader
-	jr InitVoltorbBattle
+	jr InitAltPaletteVoltorbBattle
 
 Voltorb7Text:
 	text_asm
 	ld hl, Voltorb7TrainerHeader
-	jr InitVoltorbBattle
+	jr InitAltPaletteVoltorbBattle
 
 ZapdosText:
 	text_asm

@@ -1,4 +1,4 @@
 Route14WildPalettes:
-	db 0
+	db $FF
 	db 0
 	db 0

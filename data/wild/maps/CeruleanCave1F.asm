@@ -1,21 +1,27 @@
 CeruleanCave1FWildMons:
-	def_grass_wildmons 10 ; encounter rate
-	db 46, GOLBAT
-	db 46, HYPNO
-	db 46, MAGNETON
-	db 49, DODRIO
-	db 49, VENOMOTH
-IF DEF(_RED)
-	db 52, ARBOK
-ENDC
-IF DEF(_BLUE)
-	db 52, SANDSLASH
-ENDC
-	db 49, KADABRA
-	db 52, PARASECT
-	db 53, RAICHU
-	db 53, DITTO
+	def_grass_wildmons 7 ; encounter rate
+	db 60, JYNX
+	db 65, JYNX
+	db 65, STARMIE
+	db 64, STARMIE
+	db 66, ELECTABUZZ
+	db 65, ELECTABUZZ
+	db 55, ELECTABUZZ
+	db 65, KINGLER
+	db 58, KINGLER
+	db 59, KINGLER
 	end_grass_wildmons
 
-	def_water_wildmons 0 ; encounter rate
+	def_water_wildmons 7 ; encounter rate
+	db 60, GYARADOS
+	db 65, GYARADOS
+	db 65, GYARADOS
+	db 64, GYARADOS
+	db 66, GYARADOS
+	db 65, GYARADOS
+	db 55, GYARADOS
+	db 65, GYARADOS
+	db 58, GYARADOS
+	db 59, GYARADOS
 	end_water_wildmons
+

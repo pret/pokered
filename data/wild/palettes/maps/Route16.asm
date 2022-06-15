@@ -1,4 +1,4 @@
 Route16WildPalettes:
-	db 0
-	db 0
+	db %00111100
+	db %00000011
 	db 0

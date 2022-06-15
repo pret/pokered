@@ -1,4 +1,4 @@
 PokemonMansion3FWildPalettes:
-	db 0
-	db 0
+	db %00111111
+	db %00000011
 	db 0

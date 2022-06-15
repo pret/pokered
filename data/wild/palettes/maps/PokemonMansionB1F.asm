@@ -1,4 +1,4 @@
 PokemonMansionB1FWildPalettes:
-	db 0
-	db 0
+	db %11101111
+	db %00000001
 	db 0

@@ -2,18 +2,18 @@ TradeMons:
 ; entries correspond to TRADE_FOR_* constants
 	table_width 3 + NAME_LENGTH, TradeMons
 	; give mon, get mon, dialog id, nickname
-	db NIDORINO,   NIDORINA,  TRADE_DIALOGSET_CASUAL, "TERRY@@@@@@"
-	db ABRA,       MR_MIME,   TRADE_DIALOGSET_CASUAL, "MARCEL@@@@@"
-	db BUTTERFREE, BEEDRILL,  TRADE_DIALOGSET_HAPPY,  "CHIKUCHIKU@"
-	db PONYTA,     SEEL,      TRADE_DIALOGSET_CASUAL, "SAILOR@@@@@"
-	db SPEAROW,    FARFETCHD, TRADE_DIALOGSET_HAPPY,  "DUX@@@@@@@@"
-	db SLOWBRO,    LICKITUNG, TRADE_DIALOGSET_CASUAL, "MARC@@@@@@@"
-	db POLIWHIRL,  JYNX,      TRADE_DIALOGSET_POLITE, "LOLA@@@@@@@"
-	db RAICHU,     ELECTRODE, TRADE_DIALOGSET_POLITE, "DORIS@@@@@@"
-	db VENONAT,    TANGELA,   TRADE_DIALOGSET_HAPPY,  "CRINKLES@@@"
-	db NIDORAN_M,  NIDORAN_F, TRADE_DIALOGSET_HAPPY,  "SPOT@@@@@@@"
+	db GLOOM,      PONYTA,    TRADE_DIALOGSET_CASUAL, "Seabiscuit@" ; route 11
+	db SCYTHER,    GRIMER,    TRADE_DIALOGSET_CASUAL, "Goopinator@" ; route 2
+	db RATTATA,    MAGNETON,  TRADE_DIALOGSET_HAPPY,  "SPROCKET@@@" ; unused
+	db PONYTA,     MACHOP,    TRADE_DIALOGSET_CASUAL, "HulkSmash@@" ; cinnabar lab
+	db ONIX,       GASTLY,    TRADE_DIALOGSET_HAPPY,  "Nebula@@@@@" ; vermilion city
+	db TAUROS,     LICKITUNG, TRADE_DIALOGSET_CASUAL, "Saliva@@@@@" ; route 18 
+	db PIDGEOTTO,  SEEL,      TRADE_DIALOGSET_POLITE, "Slappy@@@@@" ; cerulean city
+	db DITTO,      ZUBAT,     TRADE_DIALOGSET_POLITE, "EmeraldSDB@" ; cinnabar lab
+	db LAPRAS,     SNORLAX,   TRADE_DIALOGSET_HAPPY,  "Fatso@@@@@@" ; cinnabar lab 
+	db VOLTORB,    TANGELA,   TRADE_DIALOGSET_HAPPY,  "Discombob@@" ; route 5
 	assert_table_length NUM_NPC_TRADES
 
 TradeMonPalettes:
-	db %00000000
-	db %00
+	db %10101100
+	db %01

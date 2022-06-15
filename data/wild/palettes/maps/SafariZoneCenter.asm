@@ -1,4 +1,4 @@
 SafariZoneCenterWildPalettes:
 	db $FF
-	db $FF
-	db %00001111
+	db %00000011
+	db %00000000

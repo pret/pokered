@@ -1,4 +1,4 @@
 PokemonMansion2FWildPalettes:
-	db 0
-	db 0
+	db %10011011
+	db %00000011
 	db 0
