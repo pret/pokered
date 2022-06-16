@@ -38,6 +38,7 @@ NUM_NPC_TRADES EQU const_value
 	const TRADE_DIALOGSET_CASUAL
 	const TRADE_DIALOGSET_POLITE
 	const TRADE_DIALOGSET_HAPPY
+	const TRADE_DIALOGSET_SPROCKET
 
 ; badges
 ; wObtainedBadges and wBeatGymFlags bits

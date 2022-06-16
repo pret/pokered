@@ -76,7 +76,7 @@ InternalMapEntries:
 	internal_map BILLS_HOUSE,                   12,  0, SeaCottageName
 	internal_map VERMILION_DOCK,                10,  9, VermilionCityName
 	internal_map SS_ANNE_B1F_ROOMS,              9, 10, SSAnneName
-	internal_map CERULEAN_OLD_ROD_HOUSE,        10,  2, CeruleanCityName
+	internal_map CERULEAN_ROCKET_HOUSE_B1F,     10,  2, CeruleanCityName
 	internal_map VICTORY_ROAD_1F,                0,  4, VictoryRoadName
 	internal_map HALL_OF_FAME,                   0,  2, PokemonLeagueName
 	internal_map UNDERGROUND_PATH_NORTH_SOUTH,  10,  5, UndergroundPathName

@@ -93,6 +93,8 @@ HiddenObjectMaps:
 	db ROUTE_18
 	db PEWTER_CITY
 	db SAFARI_ZONE_NORTH
+	db CERULEAN_ROCKET_HOUSE_1F
+	db CERULEAN_ROCKET_HOUSE_B1F
 	db -1 ; end
 
 HiddenObjectPointers:
@@ -191,6 +193,8 @@ HiddenObjectPointers:
 	dw Route18HiddenObjects
 	dw PewterCityHiddenObjects
 	dw SafariZoneNorthHiddenObjects
+	dw CeruleanRocketHouse1FHiddenObjects
+	dw CeruleanRocketHouseB1FHiddenObjects
 
 hidden_object: MACRO
 	db \2 ; y coord
@@ -727,3 +731,33 @@ PewterCityHiddenObjects:
 SafariZoneNorthHiddenObjects:
 	hidden_object  7, 13, SURFBOARD, HiddenItems
 	db -1 ; end
+
+CeruleanRocketHouse1FHiddenObjects:
+	hidden_object 3, 3, ANY_FACING, PrintRocketSNESText
+	db -1 ; end	
+
+CeruleanRocketHouseB1FHiddenObjects:
+	hidden_object 1, 10, SPRITE_FACING_UP, PrintRocketBasementLeftComputerText
+	hidden_object 0, 10, SPRITE_FACING_UP, PrintRocketBasementLeftComputerText
+	hidden_object 4, 10, SPRITE_FACING_UP, PrintRocketBasementCenterComputerText
+	hidden_object 5, 10, SPRITE_FACING_UP, PrintRocketBasementCenterComputerText
+	hidden_object 6, 10, SPRITE_FACING_UP, PrintRocketBasementLeftPaperText
+	hidden_object 8, 10, SPRITE_FACING_UP, PrintRocketBasementRightComputerText
+	hidden_object 9, 10, SPRITE_FACING_UP, PrintRocketBasementRightComputerText
+	hidden_object 10, 10, SPRITE_FACING_UP, PrintRocketBasementRightPaperText
+	hidden_object 2,  5, SPRITE_FACING_UP, PrintRocketBasementMachineText
+	hidden_object 3,  5, SPRITE_FACING_UP, PrintRocketBasementMachineText
+	hidden_object 4,  5, SPRITE_FACING_UP, PrintRocketBasementMachineText
+	hidden_object 5,  5, SPRITE_FACING_UP, PrintRocketBasementMachineText
+	hidden_object 6,  5, SPRITE_FACING_UP, PrintRocketBasementMachineText
+	hidden_object 7,  5, SPRITE_FACING_UP, PrintRocketBasementMachineText
+	hidden_object 8,  5, SPRITE_FACING_UP, PrintRocketBasementMachineText
+	hidden_object 9,  5, SPRITE_FACING_UP, PrintRocketBasementMachineText
+	hidden_object 10,  5, SPRITE_FACING_UP, PrintRocketBasementMachineText
+	hidden_object 11,  5, SPRITE_FACING_UP, PrintRocketBasementMachineText
+	hidden_object 12,  5, SPRITE_FACING_UP, PrintRocketBasementMachineText
+	hidden_object 13,  5, SPRITE_FACING_UP, PrintRocketBasementMachineText
+	hidden_object 14,  5, SPRITE_FACING_UP, PrintRocketBasementMachineText
+	hidden_object 15,  5, SPRITE_FACING_UP, PrintRocketBasementMachineText
+	db -1 ; end	
+

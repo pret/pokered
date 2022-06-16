@@ -292,6 +292,7 @@ INCLUDE "engine/events/hidden_objects/museum_fossils.asm"
 INCLUDE "engine/events/hidden_objects/school_blackboard.asm"
 INCLUDE "engine/events/hidden_objects/vermilion_gym_trash.asm"
 INCLUDE "engine/events/hidden_objects/fossil_guys_pc.asm"
+INCLUDE "engine/events/hidden_objects/cerulean_rocket_house.asm"
 
 
 SECTION "Cinnabar Lab Fossils", ROMX

@@ -252,7 +252,8 @@ SHOW EQU $15
 	const HS_ARTICUNO                      ; E6 X
 	const HS_SEAFOAM_ISLANDS_B4F_ITEM      ; NEW X
 	const HS_MEW_VERMILION_DOCK            ; NEW X
-	; current length -> F3
+	const HS_CERULEAN_ROCKET_HOUSE_1F_GUY  ; NEW X
+	; current length -> F4
 
 NUM_HS_OBJECTS EQU const_value
 

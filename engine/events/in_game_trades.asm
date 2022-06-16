@@ -265,6 +265,7 @@ InGameTradeTextPointers:
 	dw TradeTextPointers1
 	dw TradeTextPointers2
 	dw TradeTextPointers3
+	dw TradeTextPointers4
 
 TradeTextPointers1:
 	dw WannaTrade1Text
@@ -286,6 +287,13 @@ TradeTextPointers3:
 	dw WrongMon3Text
 	dw Thanks3Text
 	dw AfterTrade3Text
+
+TradeTextPointers4:
+	dw WannaTrade1Text
+	dw NoTrade1Text
+	dw WrongMon1Text
+	dw Thanks1TextPrompt
+	dw AfterTrade1Text
 
 ConnectCableText:
 	text_far _ConnectCableText
@@ -311,6 +319,11 @@ WrongMon1Text:
 
 Thanks1Text:
 	text_far _Thanks1Text
+	text_end
+
+Thanks1TextPrompt:
+	text_far _Thanks1Text
+	text_promptbutton
 	text_end
 
 AfterTrade1Text:

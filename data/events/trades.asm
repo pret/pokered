@@ -4,7 +4,7 @@ TradeMons:
 	; give mon, get mon, dialog id, nickname
 	db GLOOM,      PONYTA,    TRADE_DIALOGSET_CASUAL, "Seabiscuit@" ; route 11
 	db SCYTHER,    GRIMER,    TRADE_DIALOGSET_CASUAL, "Goopinator@" ; route 2
-	db RATTATA,    MAGNETON,  TRADE_DIALOGSET_HAPPY,  "SPROCKET@@@" ; unused
+	db ALAKAZAM,    MAGNETON,  TRADE_DIALOGSET_SPROCKET, "SPROCKET@@@" ; cerulean city rocket house basement
 	db PONYTA,     MACHOP,    TRADE_DIALOGSET_CASUAL, "HulkSmash@@" ; cinnabar lab
 	db ONIX,       GASTLY,    TRADE_DIALOGSET_HAPPY,  "Nebula@@@@@" ; vermilion city
 	db TAUROS,     LICKITUNG, TRADE_DIALOGSET_CASUAL, "Saliva@@@@@" ; route 18 

@@ -114,6 +114,9 @@ HallofFameRoomScript1:
 	ld a, HS_CERULEAN_CAVE_GUY
 	ld [wMissableObjectIndex], a
 	predef HideObject
+	ld a, HS_CERULEAN_ROCKET_HOUSE_1F_GUY
+	ld [wMissableObjectIndex], a
+	predef HideObject
 	ld a, $2
 	ld [wHallOfFameCurScript], a
 	ret

@@ -109,7 +109,7 @@ MapHSPointers:
 	dw SSAnne2FRoomsHS
 	dw SSAnneB1FRoomsHS
 	dw NoHS
-	dw NoHS
+	dw CeruleanRocketHouse1FHS
 	dw NoHS
 	dw VictoryRoad1FHS
 	dw NoHS
@@ -585,6 +585,8 @@ SeafoamIslandsB4FHS:
 	db SEAFOAM_ISLANDS_B4F, $04, SHOW
 VermilionDockHS:
 	db VERMILION_DOCK, $01, HIDE
+CeruleanRocketHouse1FHS:
+	db CERULEAN_ROCKET_HOUSE_1F, $01, SHOW
 	db $FF, $01, SHOW ; end
 	assert_table_length NUM_HS_OBJECTS + 1
 

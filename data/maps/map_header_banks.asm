@@ -107,8 +107,8 @@ MapHeaderBanks::
 	db BANK(SSAnne2FRooms_h)
 	db BANK(SSAnneB1FRooms_h)
 	db BANK(CeruleanOldRodHouse_h) ; UNUSED_MAP_69
-	db $1D ; UNUSED_MAP_6A
-	db $1D ; UNUSED_MAP_6B
+	db BANK(CeruleanRocketHouse1F_h) ; UNUSED_MAP_6A
+	db BANK(CeruleanRocketHouseB1F_h); UNUSED_MAP_6B
 	db BANK(VictoryRoad1F_h)
 	db $1D ; UNUSED_MAP_6D
 	db $1D ; UNUSED_MAP_6E

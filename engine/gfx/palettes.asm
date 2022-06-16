@@ -162,6 +162,8 @@ SetPal_Overworld:
 	ld a, [wCurMap]
 	cp FIRST_INDOOR_MAP
 	jr c, .townOrRoute
+	cp CERULEAN_ROCKET_HOUSE_B1F
+	jr z, .rocketHouseBasement
 	cp CERULEAN_CAVE_2F
 	jr c, .normalDungeonOrBuilding
 	cp CERULEAN_CAVE_1F + 1
@@ -184,6 +186,9 @@ SetPal_Overworld:
 	ld a, SET_PAL_OVERWORLD
 	ld [wDefaultPaletteCommand], a
 	ret
+.rocketHouseBasement
+	ld a, PAL_REDMON - 1
+	jr .town
 .PokemonTowerOrAgatha
 	ld a, PAL_GREYMON - 1
 	jr .town

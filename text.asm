@@ -222,6 +222,7 @@ INCLUDE "text/FuchsiaPokecenter.asm"
 INCLUDE "text/WardensHouse.asm"
 INCLUDE "text/SafariZoneGate.asm"
 INCLUDE "text/FuchsiaGym.asm"
+INCLUDE "text/CeruleanRocketHouse.asm"
 
 
 SECTION "Text 9", ROMX
