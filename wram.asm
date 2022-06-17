@@ -1914,9 +1914,10 @@ wBagItems:: ds BAG_ITEM_CAPACITY * 2 + 1
 
 wWildMonPalettes:: ds 3 ; flag array for the current location of which wild pokemon should use alt palettes
 
-wColorSwapsUsed:: db
+wColorSwapsUsed:: db ; how many times the player has used the color changer
+wBoosterChipActive:: db ; whether the player gets boosted EXP from the effects of the boosterchip
 
-; 51 bytes remaining in union
+; 50 bytes remaining in union
 
 ENDU
 

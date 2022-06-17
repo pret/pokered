@@ -70,6 +70,9 @@ GainExperience:
 	add hl, de
 	ld b, [hl] ; party mon OTID
 	inc hl
+	ld a, [wBoosterChipActive] ; always get traded pokemon boost if BOOSTER CHIP was used.
+	and a
+	jr nz, .tradedMon
 	ld a, [wPlayerID]
 	cp b
 	jr nz, .tradedMon

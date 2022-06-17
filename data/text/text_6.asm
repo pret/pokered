@@ -113,6 +113,16 @@ _ApexChipAlreadyUsedText::
 	cont "Poké Ball."
 	prompt
 
+_BoosterChipInstalledText::
+	text "You plugged the"
+	line "BOOSTER CHIP into"
+	cont "your POKéBALL"
+	cont "belt."
+
+	para "All #MON will"
+	line "gain boosted EXP!@"
+	text_end
+
 _VitaminStatRoseText::
 	text_ram wcd6d
 	text "'s"

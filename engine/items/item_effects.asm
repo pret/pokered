@@ -93,7 +93,7 @@ ItemUsePtrTable:
 	dw UnusableItem      ; SILPH_SCOPE
 	dw ItemUsePokeflute  ; POKE_FLUTE
 	dw UnusableItem      ; LIFT_KEY
-	dw ItemUseTownMap    ; TOWN_MAP
+	dw ItemUseBoosterChip; BOOSTER_CHIP
 	dw ItemUseOldRod     ; OLD_ROD
 	dw ItemUseGoodRod    ; GOOD_ROD
 	dw ItemUseSuperRod   ; SUPER_ROD
@@ -670,6 +670,27 @@ ItemUseTownMap:
 	and a
 	jp nz, ItemUseNotTime
 	farjp DisplayTownMap
+
+ItemUseBoosterChip:
+	ld a, [wIsInBattle]
+	and a
+	jp nz, ItemUseNotTime
+	ld a, 1
+	ld [wBoosterChipActive], a
+	ld a, SFX_SWITCH
+	call PlaySoundWaitForCurrent
+	ld hl, BoosterChipInstalledText
+	call PrintText
+	ld a, BOOSTER_CHIP
+	ldh [hItemToRemoveID], a
+	farcall RemoveItemByID
+	ret
+
+BoosterChipInstalledText::
+	text_far _BoosterChipInstalledText
+	sound_get_item_1
+	text_promptbutton
+	text_end
 
 ItemUseBicycle:
 	ld a, [wIsInBattle]

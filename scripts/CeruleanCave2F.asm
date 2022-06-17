@@ -106,5 +106,5 @@ OakBeatenText:
 
 OakFirstLoseText:
 	text_far _OakFirstLoseText
-	sound_get_item_1
+	sound_pokedex_rating
 	text_end

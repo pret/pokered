@@ -74,7 +74,7 @@ ItemNames::
 	li "SILPH SCOPE"
 	li "POKé FLUTE"
 	li "LIFT KEY"
-	li "TOWN MAP"
+	li "BOOSTER CHIP"
 	li "OLD ROD"
 	li "GOOD ROD"
 	li "SUPER ROD"
