@@ -3,6 +3,7 @@ TextBoxFunctionTable:
 	dbw MONEY_BOX,           DisplayMoneyBox
 	dbw BUY_SELL_QUIT_MENU,  DoBuySellQuitMenu
 	dbw FIELD_MOVE_MON_MENU, DisplayFieldMoveMonMenu
+	dbw AMOUNT_LEFT_BOX, DisplayAmountLeftBox
 	db -1 ; end
 
 TextBoxCoordTable:
@@ -35,6 +36,7 @@ TextBoxTextAndCoordTable:
 	text_box_text MONEY_BOX_TEMPLATE,                11,  0, 19,  2, MoneyText,               13,  0
 	text_box_text JP_AH_MENU_TEMPLATE,                7,  6, 11, 10, JapaneseAhText,           8,  8
 	text_box_text JP_POKEDEX_MENU_TEMPLATE,          11,  8, 19, 17, JapanesePokedexMenu,     12, 10
+	text_box_text AMOUNT_LEFT_BOX_TEMPLATE,          7,  0, 19,  2, ColorChangesText,        8,  0
 
 BuySellQuitText:
 	db   "BUY"
@@ -57,6 +59,9 @@ JapaneseSpeedOptionsText:
 
 MoneyText:
 	db "MONEY@"
+
+ColorChangesText:
+	db "COLOR SWAPS@"
 
 JapaneseMochimonoText:
 	db "もちもの@"

@@ -148,6 +148,30 @@ DisplayMoneyBox:
 CurrencyString:
 	db "      ¥@"
 
+DisplayAmountLeftBox:
+	ld hl, wd730
+	set 6, [hl]
+	ld a, AMOUNT_LEFT_BOX_TEMPLATE
+	ld [wTextBoxID], a
+	call DisplayTextBoxID
+	hlcoord 13, 1
+	ld b, 1
+	ld c, 6
+	call ClearScreenArea
+	hlcoord 10, 1
+	ld de, wUnusedC000
+	lb bc, 1, 2
+	call PrintNumber
+	hlcoord 12, 1
+	ld de, AmountLeftString
+	call PlaceString
+	ld hl, wd730
+	res 6, [hl]
+	ret
+
+AmountLeftString:
+	db "× Left@"
+
 DoBuySellQuitMenu:
 	ld a, [wd730]
 	set 6, a ; no printing delay

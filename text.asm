@@ -270,6 +270,8 @@ INCLUDE "text/SaffronCity.asm"
 
 INCLUDE "data/text/text_6.asm"
 
+INCLUDE "text/CinnabarLabColorChanger.asm"
+
 
 SECTION "Text 11", ROMX
 

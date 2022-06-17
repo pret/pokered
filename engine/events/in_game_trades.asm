@@ -178,7 +178,7 @@ GetTradeMonPalette:
 	ld [wIsAltPalettePkmnData], a ; a now contains the flag value for whether the palette is alt or original.
 	ret
 
-InGameTrade_RestoreScreen:
+InGameTrade_RestoreScreen::
 	call GBPalWhiteOutWithDelay3
 	call RestoreScreenTilesAndReloadTilePatterns
 	call ReloadTilesetTilePatterns

@@ -120,6 +120,35 @@ SetPal_Pokedex:
 	ld de, BlkPacket_Pokedex
 	ret
 
+SetPal_ColorBeforeAfter:
+	ld hl, PalPacket_Empty
+	ld de, wPalPacket
+	ld bc, $10
+	call CopyData
+	; before picture
+	ld a, [wLoadedMonFlags]
+	and 1 ; only the 1st bit of the flags determines alt palette, zero the other ones
+	ld c, a
+	ld [wIsAltPalettePkmn], a
+	ld a, [wcf91]
+	call DeterminePaletteIDOutOfBattle
+	ld b, a
+	; after picture
+	ld a, c
+	xor 1 ; second palette should always be alternate one
+	ld [wIsAltPalettePkmn], a
+	ld a, [wcf91]
+	call DeterminePaletteIDOutOfBattle
+	ld c, a
+	ld hl, wPalPacket + 1
+	ld [hl], a
+	ld hl, wPalPacket + 3
+	ld a, b
+	ld [hl], a
+	ld hl, wPalPacket
+	ld de, BlkPacket_Pokedex
+	ret
+
 SetPal_Slots:
 	ld hl, PalPacket_Slots
 	ld de, BlkPacket_Slots
@@ -281,6 +310,7 @@ SetPalFunctions:
 	dw SetPal_PokemonWholeScreenTrade
 	dw SetPal_GameFreakIntro
 	dw SetPal_TrainerCard
+	dw SetPal_ColorBeforeAfter
 
 ; The length of the blk data of each badge on the Trainer Card.
 ; The Rainbow Badge has 3 entries because of its many colors.

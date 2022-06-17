@@ -185,7 +185,9 @@
 	const_next $278
 	const EVENT_MANSION_SWITCH_ON
 	const EVENT_USED_SECRET_KEY
-	const_skip 15
+	const EVENT_MET_LAB_COLOR_CHANGER
+	const EVENT_LAB_COLOR_CHANGER_FULL_CHANGES
+	const_skip 13
 	const EVENT_BEAT_MANSION_1_TRAINER_0
 	const EVENT_BEAT_MANSION_1_TRAINER_1
 	const EVENT_BEAT_MANSION_1_TRAINER_2
@@ -825,6 +827,7 @@
 	const_next $8C0
 	const EVENT_BEAT_PROF_OAK
 	const EVENT_BEAT_MEWTWO
+	const EVENT_BEAT_PROF_OAK_ONCE
 
 ; Indigo Plateau events
 	const_next $8E0

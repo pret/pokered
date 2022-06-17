@@ -1914,7 +1914,9 @@ wBagItems:: ds BAG_ITEM_CAPACITY * 2 + 1
 
 wWildMonPalettes:: ds 3 ; flag array for the current location of which wild pokemon should use alt palettes
 
-; 52 bytes remaining in union
+wColorSwapsUsed:: db
+
+; 51 bytes remaining in union
 
 ENDU
 

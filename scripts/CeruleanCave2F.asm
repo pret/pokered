@@ -16,6 +16,14 @@ CeruleanCave2FScript1:
 	cp $ff
 	jr z, .done
 	SetEvent EVENT_BEAT_PROF_OAK
+	CheckEvent EVENT_BEAT_PROF_OAK_ONCE
+	jr z, .initialLossText
+	jr .done
+.initialLossText
+	ld a, 5
+	ldh [hSpriteIndexOrTextID], a
+    call DisplayTextID
+	SetEvent EVENT_BEAT_PROF_OAK_ONCE
 .done
 	ld a, 0
 	ld [wCeruleanCave2FCurScript], a
@@ -26,6 +34,7 @@ CeruleanCave2F_TextPointers:
 	dw PickUpItemText
 	dw PickUpItemText
 	dw PickUpItemText
+	dw OakCeruleanCaveFirstDefeatText
 
 OakCeruleanCaveText:
 	text_asm
@@ -73,6 +82,12 @@ OakBattle:
 	ld [wCeruleanCave2FCurScript], a
 	ret
 
+OakCeruleanCaveFirstDefeatText:
+	text_asm
+	ld hl, OakFirstLoseText
+	call PrintText
+	jp TextScriptEnd
+
 OakBattleStartText:
 	text_far _OakBattleStartText
 	text_end
@@ -87,4 +102,9 @@ OakBattleLoseText:
 
 OakBeatenText:
 	text_far _OakBeatenText
+	text_end
+
+OakFirstLoseText:
+	text_far _OakFirstLoseText
+	sound_get_item_1
 	text_end

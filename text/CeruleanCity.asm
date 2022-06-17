@@ -298,3 +298,26 @@ _OakBeatenText::
 	line "great stories to"
 	cont "tell!"
 	done
+
+_OakFirstLoseText::
+	text "Great battle!"
+	para "As expected of"
+	line "the CHAMPION!"
+	para "I feel like I"
+	line "should reward"
+	cont "you somehow."
+	para "Ah, how about"
+	line "this?"
+	para "Take this note"
+	line "to the lab at"
+	cont "CINNABAR ISLAND."
+	para "My colleague"
+	line "works there!"
+	para "He'll know what"
+	line "to do!"
+	para "..."
+	para "..."
+	para "..."
+	para "PROF.OAK wrote"
+	line "a note for you!@"
+	text_end
