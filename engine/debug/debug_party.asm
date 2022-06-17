@@ -142,14 +142,17 @@ DebugItemsList:
 	db BICYCLE, 1
 	db FULL_RESTORE, 99
 	db FULL_HEAL, 99
-	db ESCAPE_ROPE, 99
 	db RARE_CANDY, 99
 	db MASTER_BALL, 99
-	db TOWN_MAP, 1
+	db HYPER_BALL, 99
 	db SECRET_KEY, 1
 	db CARD_KEY, 1
 	db S_S_TICKET, 1
 	db LIFT_KEY, 1
+	db OLD_ROD, 1
+	db GOOD_ROD, 1
+	db SUPER_ROD, 1
+	db POCKET_ABRA, 1
 	db -1 ; end
 
 DebugUnusedList:
