@@ -225,7 +225,7 @@ ItemUseBall:
 	ld a, [wEnemyMonStatus]
 	and a
 	jr z, .skipAilmentValueSubtraction ; no ailments
-	and 1 << FRZ | SLP
+	and (1 << FRZ) | SLP_MASK
 	ld c, 12
 	jr z, .notFrozenOrAsleep
 	ld c, 25
@@ -380,7 +380,7 @@ ItemUseBall:
 	ld a, [wEnemyMonStatus]
 	and a
 	jr z, .skip5
-	and 1 << FRZ | SLP
+	and (1 << FRZ) | SLP_MASK
 	ld b, 5
 	jr z, .addAilmentValue
 	ld b, 10
@@ -878,7 +878,7 @@ ItemUseMedicine:
 	lb bc, ICE_HEAL_MSG, 1 << FRZ
 	cp ICE_HEAL
 	jr z, .checkMonStatus
-	lb bc, AWAKENING_MSG, SLP
+	lb bc, AWAKENING_MSG, SLP_MASK
 	cp AWAKENING
 	jr z, .checkMonStatus
 	lb bc, PARALYZ_HEAL_MSG, 1 << PAR
@@ -1700,7 +1700,7 @@ ItemUsePokeflute:
 .inBattle
 	xor a
 	ld [wWereAnyMonsAsleep], a
-	ld b, ~SLP & $ff
+	ld b, ~SLP_MASK
 	ld hl, wPartyMon1Status
 	call WakeUpEntireParty
 	ld a, [wIsInBattle]
@@ -1752,7 +1752,7 @@ WakeUpEntireParty:
 .loop
 	ld a, [hl]
 	push af
-	and SLP ; is pokemon asleep?
+	and SLP_MASK
 	jr z, .notAsleep
 	ld a, 1
 	ld [wWereAnyMonsAsleep], a ; indicate that a pokemon had to be woken up

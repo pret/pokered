@@ -57,7 +57,7 @@ DEF NOT_VERY_EFFECTIVE EQU 05
 DEF NO_EFFECT          EQU 00
 
 ; non-volatile statuses
-DEF SLP EQU %111 ; sleep counter
+DEF SLP_MASK EQU %111 ; 0-7 turns
 	const_def 3
 	const PSN ; 3
 	const BRN ; 4
