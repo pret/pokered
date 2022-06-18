@@ -1,11 +1,3 @@
-INCLUDE "constants.asm"
-
-INCLUDE "macros/wram.asm"
-
-
-INCLUDE "vram.asm"
-
-
 SECTION "Audio RAM", WRAM0
 
 wUnusedC000:: db
@@ -2337,8 +2329,3 @@ SECTION "Stack", WRAM0
 ; the stack grows downward
 	ds $100 - 1
 wStack:: db
-
-
-INCLUDE "sram.asm"
-
-INCLUDE "hram.asm"

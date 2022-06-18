@@ -11,8 +11,8 @@ rom_obj := \
 	home.o \
 	main.o \
 	maps.o \
+	ram.o \
 	text.o \
-	wram.o \
 	gfx/pics.o \
 	gfx/sprites.o \
 	gfx/tilesets.o
