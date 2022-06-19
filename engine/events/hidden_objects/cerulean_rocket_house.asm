@@ -178,9 +178,6 @@ CeruleanRocketHouseB1FMachineText:
 	ld c, BANK(SFX_Noise_Instrument05_1)
 	ld a, SFX_NOISE_INSTRUMENT05
 	call PlayMusic
-	ld c, BANK(SFX_Battle_26)
-	ld a, SFX_BATTLE_26
-	call PlayMusic
 	call GBFadeOutToBlack
 	ld b, $FF
 	call DelayFrames

@@ -159,13 +159,13 @@ IndigoPlateauGymGuideChampAfterGreetPrompt:
 	text_end
 
 IndigoTradeNurseText:
-	text_asm
+	text_asm ;TODO: remove this debug change
 	SetEvent EVENT_BECAME_CHAMP
 	jp TextScriptEnd
 	;script_cable_club_receptionist
 	
 IndigoCashierText:
-	script_mart ULTRA_BALL, GREAT_BALL, FULL_RESTORE, MAX_POTION, FULL_HEAL, REVIVE, MAX_REPEL
+	script_mart ULTRA_BALL, GREAT_BALL, FULL_RESTORE, MAX_POTION, ELIXER, PP_UP, FULL_HEAL, REVIVE, MAX_REPEL
 
 IndigoPlateauGymGuideSonText:
 	text_far _IndigoPlateauGymGuideSonText

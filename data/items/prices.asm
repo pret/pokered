@@ -9,7 +9,7 @@ ItemPrices::
 	bcd3 0     ; SURFBOARD
 	bcd3 1000  ; SAFARI_BALL
 	bcd3 0     ; POKEDEX
-	bcd3 0     ; MOON_STONE
+	bcd3 5000  ; MOON_STONE
 	bcd3 100   ; ANTIDOTE
 	bcd3 250   ; BURN_HEAL
 	bcd3 250   ; ICE_HEAL
@@ -34,11 +34,11 @@ ItemPrices::
 	bcd3 2100  ; FIRE_STONE
 	bcd3 2100  ; THUNDER_STONE
 	bcd3 2100  ; WATER_STONE
-	bcd3 9800  ; HP_UP
-	bcd3 9800  ; PROTEIN
-	bcd3 9800  ; IRON
-	bcd3 9800  ; CARBOS
-	bcd3 9800  ; CALCIUM
+	bcd3 5000  ; HP_UP
+	bcd3 5000  ; PROTEIN
+	bcd3 5000  ; IRON
+	bcd3 5000  ; CARBOS
+	bcd3 5000  ; CALCIUM
 	bcd3 4800  ; RARE_CANDY
 	bcd3 0     ; DOME_FOSSIL
 	bcd3 0     ; HELIX_FOSSIL
@@ -64,8 +64,8 @@ ItemPrices::
 	bcd3 350   ; LEMONADE
 	bcd3 0     ; S_S_TICKET
 	bcd3 0     ; GOLD_TEETH
-	bcd3 500   ; X_ATTACK
-	bcd3 550   ; X_DEFEND
+	bcd3 350   ; X_ATTACK
+	bcd3 350   ; X_DEFEND
 	bcd3 350   ; X_SPEED
 	bcd3 350   ; X_SPECIAL
 	bcd3 0     ; COIN_CASE
@@ -78,8 +78,8 @@ ItemPrices::
 	bcd3 0     ; OLD_ROD
 	bcd3 0     ; GOOD_ROD
 	bcd3 0     ; SUPER_ROD
-	bcd3 9800  ; PP_UP
-	bcd3 0     ; ETHER
+	bcd3 5000  ; PP_UP
+	bcd3 1000  ; ETHER
 	bcd3 0     ; MAX_ETHER
 	bcd3 0     ; ELIXER
 	bcd3 0     ; MAX_ELIXER
