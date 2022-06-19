@@ -5,12 +5,12 @@ TradeMons:
 	db GLOOM,      PONYTA,    TRADE_DIALOGSET_CASUAL, "Seabiscuit@" ; route 11
 	db SCYTHER,    GRIMER,    TRADE_DIALOGSET_CASUAL, "Goopinator@" ; route 2
 	db ALAKAZAM,    MAGNETON,  TRADE_DIALOGSET_SPROCKET, "SPROCKET@@@" ; cerulean city rocket house basement
-	db PONYTA,     MACHOP,    TRADE_DIALOGSET_CASUAL, "HulkSmash@@" ; cinnabar lab
+	db PONYTA,     MACHOP,    TRADE_DIALOGSET_CASUAL_COLOR, "HulkSmash@@" ; cinnabar lab
 	db ONIX,       GASTLY,    TRADE_DIALOGSET_HAPPY,  "Nebula@@@@@" ; vermilion city
 	db TAUROS,     LICKITUNG, TRADE_DIALOGSET_CASUAL, "Saliva@@@@@" ; route 18 
 	db PIDGEOTTO,  SEEL,      TRADE_DIALOGSET_POLITE, "Slappy@@@@@" ; cerulean city
-	db DITTO,      ZUBAT,     TRADE_DIALOGSET_POLITE, "EmeraldSDB@" ; cinnabar lab
-	db LAPRAS,     SNORLAX,   TRADE_DIALOGSET_HAPPY,  "Fatso@@@@@@" ; cinnabar lab 
+	db DITTO,      ZUBAT,     TRADE_DIALOGSET_POLITE_COLOR, "EmeraldSDB@" ; cinnabar lab
+	db LAPRAS,     SNORLAX,   TRADE_DIALOGSET_HAPPY_COLOR,  "Fatso@@@@@@" ; cinnabar lab 
 	db VOLTORB,    TANGELA,   TRADE_DIALOGSET_HAPPY,  "Discombob@@" ; route 5
 	assert_table_length NUM_NPC_TRADES
 

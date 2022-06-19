@@ -266,6 +266,9 @@ InGameTradeTextPointers:
 	dw TradeTextPointers2
 	dw TradeTextPointers3
 	dw TradeTextPointers4
+	dw TradeTextPointers5
+	dw TradeTextPointers6
+	dw TradeTextPointers7
 
 TradeTextPointers1:
 	dw WannaTrade1Text
@@ -289,11 +292,33 @@ TradeTextPointers3:
 	dw AfterTrade3Text
 
 TradeTextPointers4:
-	dw WannaTrade1Text
+	dw WannaTrade1ColorText
 	dw NoTrade1Text
 	dw WrongMon1Text
 	dw Thanks1TextPrompt
 	dw AfterTrade1Text
+
+TradeTextPointers5:
+	dw WannaTrade1ColorText
+	dw NoTrade1Text
+	dw WrongMon1Text
+	dw Thanks1Text
+	dw AfterTrade1Text
+
+TradeTextPointers6:
+	dw WannaTrade2ColorText
+	dw NoTrade2Text
+	dw WrongMon2Text
+	dw Thanks2Text
+	dw AfterTrade2Text
+
+TradeTextPointers7:
+	dw WannaTrade3ColorText
+	dw NoTrade3Text
+	dw WrongMon3Text
+	dw Thanks3Text
+	dw AfterTrade3Text
+
 
 ConnectCableText:
 	text_far _ConnectCableText
@@ -308,6 +333,23 @@ TradedForText:
 WannaTrade1Text:
 	text_far _WannaTrade1Text
 	text_end
+
+WannaTrade1TextPrompt:
+	text_far _WannaTrade1Text
+	text_promptbutton
+	text_end
+
+WannaTradeColorPaletteText:
+	text_far _TradeColorPaletteText
+	text_end
+
+WannaTrade1ColorText:
+	text_asm
+	ld hl, WannaTrade1TextPrompt
+	call PrintText
+	ld hl, WannaTradeColorPaletteText
+	call PrintText
+	jp TextScriptEnd
 
 NoTrade1Text:
 	text_far _NoTrade1Text
@@ -334,6 +376,19 @@ WannaTrade2Text:
 	text_far _WannaTrade2Text
 	text_end
 
+WannaTrade2TextPrompt:
+	text_far _WannaTrade2Text
+	text_promptbutton
+	text_end
+
+WannaTrade2ColorText:
+	text_asm
+	ld hl, WannaTrade2TextPrompt
+	call PrintText
+	ld hl, WannaTradeColorPaletteText
+	call PrintText
+	jp TextScriptEnd
+
 NoTrade2Text:
 	text_far _NoTrade2Text
 	text_end
@@ -353,6 +408,19 @@ AfterTrade2Text:
 WannaTrade3Text:
 	text_far _WannaTrade3Text
 	text_end
+
+WannaTrade3TextPrompt:
+	text_far _WannaTrade3Text
+	text_promptbutton
+	text_end
+
+WannaTrade3ColorText:
+	text_asm
+	ld hl, WannaTrade3TextPrompt
+	call PrintText
+	ld hl, WannaTradeColorPaletteText
+	call PrintText
+	jp TextScriptEnd
 
 NoTrade3Text:
 	text_far _NoTrade3Text

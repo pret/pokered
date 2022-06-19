@@ -118,6 +118,11 @@ _WannaTrade2Text::
 	text "?"
 	done
 
+_TradeColorPaletteText::
+	text "It's a special"
+	line "rare color!"
+	done
+
 _NoTrade2Text::
 	text "Well, if you"
 	line "don't want to..."
