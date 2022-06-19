@@ -12,5 +12,6 @@ RockTunnelPokecenter_Object:
 	object_event  7,  3, SPRITE_GENTLEMAN, WALK, LEFT_RIGHT, 2 ; person
 	object_event  2,  5, SPRITE_FISHER, STAY, NONE, 3 ; person
 	object_event 11,  2, SPRITE_LINK_RECEPTIONIST, STAY, DOWN, 4 ; person
+	object_event  5,  3, SPRITE_NURSE, STAY, DOWN, 5 ; person
 
 	def_warps_to ROCK_TUNNEL_POKECENTER

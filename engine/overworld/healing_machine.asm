@@ -15,8 +15,13 @@ AnimateHealingMachine:
 	ld hl, wOAMBuffer + $84
 	ld de, PokeCenterOAMData
 	call CopyHealingMachineOAM
+	ld c, 30
+	ld a, [wUnusedC000]
+	and a
+	jr nz, .noFadeout ; NEW: if you're holding b when you start talking to the nurse, it'll do healing faster
 	ld a, 4
 	ld [wAudioFadeOutControl], a
+.noFadeout
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
@@ -30,7 +35,14 @@ AnimateHealingMachine:
 	call CopyHealingMachineOAM
 	ld a, SFX_HEALING_MACHINE
 	call PlaySound
+	ld a, [wUnusedC000]
+	and a
+	jr nz, .shortDelay ; NEW: if you're holding b when you start talking to the nurse, it'll do healing faster
 	ld c, 30
+	jr .doDelay
+.shortDelay
+	ld c, 5
+.doDelay	
 	call DelayFrames
 	dec b
 	jr nz, .partyLoop

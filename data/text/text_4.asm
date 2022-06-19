@@ -184,6 +184,11 @@ _NeedYourPokemonText::
 	line "your #MON."
 	done
 
+_PokemonCenterFastWelcomeText::
+	text "We'll heal your"
+	line "#MON quick."
+	done
+
 _PokemonFightingFitText::
 	text "Thank you!"
 	line "Your #MON are"
