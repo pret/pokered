@@ -755,6 +755,11 @@ CheckIfInFlyMap::
 	call CheckIfInOutsideMap
 	ret z
 	cp FOREST ; FIXED: can fly in safari zone and viridian forest
+	ret z
+	ld a, [wCurMap]
+	cp CELADON_MART_ROOF ; FIXED: can fly on roofs
+	ret z
+	cp CELADON_MANSION_ROOF ; FIXED: can fly on roofs
 	ret
 
 CheckIfInOutsideMap::
