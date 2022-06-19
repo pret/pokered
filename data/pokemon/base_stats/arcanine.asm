@@ -11,7 +11,7 @@
 	dw ArcaninePicFront, ArcaninePicBackSW
 
 	db ROAR, EMBER, LEER, TAKE_DOWN ; level 1 learnset
-	db GROWTH_SLOW ; growth rate
+	db GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm \

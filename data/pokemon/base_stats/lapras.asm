@@ -11,7 +11,7 @@
 	dw LaprasPicFront, LaprasPicBackSW
 
 	db WATER_GUN, GROWL, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_SLOW ; growth rate
+	db GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm \
