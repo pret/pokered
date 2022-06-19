@@ -14,8 +14,11 @@
 	db GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
-	tmhm
+	tmhm \
+	BUBBLEBEAM,\
+	BIDE
 	; end
+
 
 	dw BANK(MagikarpPicFront), BANK(MagikarpPicBack)
 

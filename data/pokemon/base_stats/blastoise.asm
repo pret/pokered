@@ -14,13 +14,37 @@
 	db GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset
-	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
-	     DOUBLE_EDGE,  BUBBLEBEAM,   WATER_GUN,    ICE_BEAM,     BLIZZARD,     \
-	     HYPER_BEAM,   SUBMISSION,   COUNTER,      SEISMIC_TOSS, RAGE,         \
-	     EARTHQUAKE,   FISSURE,      DIG,          MIMIC,        DOUBLE_TEAM,  \
-	     REFLECT,      BIDE,         SKULL_BASH,   REST,         SUBSTITUTE,   \
-	     SURF,         STRENGTH
-	; end
+	tmhm \
+	ICE_PUNCH,\
+	TOXIC,\
+	BODY_SLAM,\
+	SLASH,\
+	DOUBLE_EDGE,\
+	BUBBLEBEAM,\
+	AURORA_BEAM,\
+	ICE_BEAM,\
+	BLIZZARD,\
+	HYPER_BEAM,\
+	AMNESIA,\
+	THUNDERPUNCH,\
+	ROLLING_KICK,\
+	BARRIER,\
+	EARTHQUAKE,\
+	CRABHAMMER,\
+	DIG,\
+	SWORDS_DANCE,\
+	REFLECT,\
+	BIDE,\
+	BARRAGE,\
+	SLAM,\
+	KARATE_CHOP,\
+	LIGHT_SCREEN,\
+	GLARE,\
+	SUBSTITUTE,\
+	CUT,\
+	SURF,\
+	STRENGTH,\
+	FLASH
 
 	dw BANK(BlastoisePicFront), BANK(BlastoisePicBack)
 

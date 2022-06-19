@@ -10,7 +10,7 @@ SaffronHouse2Text1:
 	jr nz, .got_item
 	ld hl, TM29PreReceiveText
 	call PrintText
-	lb bc, TM_PSYCHIC_M, 1
+	lb bc, TM_PSYBEAM, 1
 	call GiveItem
 	jr nc, .bag_full
 	ld hl, ReceivedTM29Text

@@ -19,7 +19,7 @@ Route2_Object:
 	object_event 19, 30, SPRITE_COOLTRAINER_F, STAY, LEFT, 3, OPP_JR_TRAINER_F, 4
 	object_event 13, 54, SPRITE_POKE_BALL, STAY, NONE, 4, MOON_STONE
 	object_event 13, 45, SPRITE_POKE_BALL, STAY, NONE, 5, HP_UP
-	object_event 13, 3, SPRITE_POKE_BALL, STAY, NONE, 6, SURFBOARD
+	object_event 13, 3, SPRITE_POKE_BALL, STAY, NONE, 6, TM_REFLECT
 
 	def_warps_to ROUTE_2
 

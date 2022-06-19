@@ -68,13 +68,13 @@ KeyItemFlags:
 	dbit FALSE ; X_DEFEND
 	dbit FALSE ; X_SPEED
 	dbit FALSE ; X_SPECIAL
-	dbit TRUE  ; COIN_CASE
+	dbit TRUE  ; LOST_WALLET
 	dbit TRUE  ; OAKS_PARCEL
 	dbit TRUE  ; ITEMFINDER
 	dbit TRUE  ; SILPH_SCOPE
 	dbit TRUE  ; POKE_FLUTE
 	dbit TRUE  ; LIFT_KEY
-	dbit TRUE  ; TOWN_MAP
+	dbit TRUE  ; BOOSTER_CHIP
 	dbit TRUE  ; OLD_ROD
 	dbit TRUE  ; GOOD_ROD
 	dbit TRUE  ; SUPER_ROD

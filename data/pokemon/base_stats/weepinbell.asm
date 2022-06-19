@@ -14,11 +14,31 @@
 	db GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset
-	tmhm SWORDS_DANCE, TOXIC,        TAKE_DOWN,    DOUBLE_EDGE,  RAGE,         \
-	     MEGA_DRAIN,   SOLARBEAM,    MIMIC,        DOUBLE_TEAM,  REFLECT,      \
-	     BIDE,         REST,         SUBSTITUTE,   CUT
+	tmhm \
+	LEECH_SEED,\
+	PIN_MISSILE,\
+	TOXIC,\
+	SLASH,\
+	BODY_SLAM,\
+	DOUBLE_EDGE,\
+	AMNESIA,\
+	BARRIER,\
+	RAZOR_LEAF,\
+	SOLARBEAM,\
+	MEGA_DRAIN,\
+	SWORDS_DANCE,\
+	REFLECT,\
+	BIDE,\
+	BARRAGE,\
+	SLAM,\
+	LIGHT_SCREEN,\
+	SLUDGE,\
+	GLARE,\
+	SUBSTITUTE,\
+	CUT,\
+	FLASH
 	; end
-
+	
 	dw BANK(WeepinbellPicFront), BANK(WeepinbellPicBack)
 
 	dw 0000, WeepinbellPicBack

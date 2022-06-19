@@ -14,10 +14,34 @@
 	db GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
-	tmhm SWORDS_DANCE, TOXIC,        TAKE_DOWN,    DOUBLE_EDGE,  HYPER_BEAM,   \
-	     RAGE,         MIMIC,        DOUBLE_TEAM,  BIDE,         SWIFT,        \
-	     SKULL_BASH,   REST,         SUBSTITUTE,   CUT
+	tmhm \
+	RAZOR_WIND,\
+	PIN_MISSILE,\
+	TOXIC,\
+	BODY_SLAM,\
+	SLASH,\
+	DOUBLE_EDGE,\
+	HYPER_BEAM,\
+	HI_JUMP_KICK,\
+	ROLLING_KICK,\
+	BARRIER,\
+	DIG,\
+	SWORDS_DANCE,\
+	REFLECT,\
+	BIDE,\
+	AGILITY,\
+	BARRAGE,\
+	SLAM,\
+	KARATE_CHOP,\
+	SKY_ATTACK,\
+	LIGHT_SCREEN,\
+	GLARE,\
+	SUBSTITUTE,\
+	CUT,\
+	FLY,\
+	STRENGTH
 	; end
+
 
 	dw BANK(ScytherPicFront), BANK(ScytherPicBack)
 

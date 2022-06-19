@@ -132,6 +132,12 @@ _VitaminStatRoseText::
 	prompt
 
 _VitaminNoEffectText::
+	text "Vitamins can't"
+	line "raise this stat"
+	cont "further."
+	prompt
+
+_RareCandyNoEffectText::
 	text "It won't have any"
 	line "effect."
 	prompt

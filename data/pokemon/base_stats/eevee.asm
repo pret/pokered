@@ -14,10 +14,26 @@
 	db GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
-	tmhm TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  RAGE,         \
-	     MIMIC,        DOUBLE_TEAM,  REFLECT,      BIDE,         SWIFT,        \
-	     SKULL_BASH,   REST,         SUBSTITUTE
+	tmhm \
+	TOXIC,\
+	BODY_SLAM,\
+	SLASH,\
+	DOUBLE_EDGE,\
+	ROLLING_KICK,\
+	DIG,\
+	REFLECT,\
+	BIDE,\
+	AGILITY,\
+	BARRAGE,\
+	SLAM,\
+	KARATE_CHOP,\
+	LIGHT_SCREEN,\
+	GLARE,\
+	SUBSTITUTE,\
+	CUT,\
+	FLASH
 	; end
+
 
 	dw BANK(EeveePicFront), BANK(EeveePicBack)
 

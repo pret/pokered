@@ -14,12 +14,37 @@
 	db GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset
-	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
-	     DOUBLE_EDGE,  BUBBLEBEAM,   WATER_GUN,    ICE_BEAM,     BLIZZARD,     \
-	     HYPER_BEAM,   SUBMISSION,   COUNTER,      SEISMIC_TOSS, RAGE,         \
-	     EARTHQUAKE,   FISSURE,      PSYCHIC_M,    MIMIC,        DOUBLE_TEAM,  \
-	     BIDE,         METRONOME,    SKULL_BASH,   REST,         PSYWAVE,      \
-	     SUBSTITUTE,   SURF,         STRENGTH
+	tmhm \
+	ICE_PUNCH,\
+	FIRE_PUNCH,\
+	TOXIC,\
+	BODY_SLAM,\
+	DOUBLE_EDGE,\
+	BUBBLEBEAM,\
+	AURORA_BEAM,\
+	ICE_BEAM,\
+	BLIZZARD,\
+	HYPER_BEAM,\
+	AMNESIA,\
+	HI_JUMP_KICK,\
+	THUNDERPUNCH,\
+	ROLLING_KICK,\
+	BARRIER,\
+	DIG,\
+	PSYCHIC_M,\
+	REFLECT,\
+	BIDE,\
+	BARRAGE,\
+	KARATE_CHOP,\
+	MEDITATE,\
+	LIGHT_SCREEN,\
+	PSYBEAM,\
+	ROCK_SLIDE,\
+	GLARE,\
+	SUBSTITUTE,\
+	SURF,\
+	STRENGTH,\
+	FLASH
 	; end
 
 	dw BANK(PoliwrathPicFront), BANK(PoliwrathPicBack)

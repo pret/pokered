@@ -1109,7 +1109,7 @@ wGymCityName:: ds 17
 
 wGymLeaderName:: ds NAME_LENGTH
 
-wItemList:: ds 16
+ds 16 ;used to be wItemList::
 
 wListPointer:: dw
 
@@ -1603,6 +1603,7 @@ wMoves:: ds NUM_MOVES
 
 wMoveNum:: db
 
+wItemList::
 wMovesString:: ds 56
 
 wUnusedD119:: db

@@ -38,7 +38,7 @@ TMKidQuick6::
 	text_end
 	
 SaffronTMKidShop::
-	script_mart TM_TELEPORT
+	script_mart TM_KARATE_CHOP, TM_ICE_PUNCH, TM_FIRE_PUNCH, TM_THUNDERPUNCH
 
 SaffronMartText2:
 	text_far _SaffronMartText2

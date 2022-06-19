@@ -14,11 +14,32 @@
 	db GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
-	tmhm TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  BUBBLEBEAM,   \
-	     WATER_GUN,    BLIZZARD,     RAGE,         THUNDERBOLT,  THUNDER,      \
-	     DIG,          MIMIC,        DOUBLE_TEAM,  BIDE,         SWIFT,        \
-	     SKULL_BASH,   REST,         SUBSTITUTE
+	tmhm \
+	TOXIC,\
+	BODY_SLAM,\
+	SLASH,\
+	DOUBLE_EDGE,\
+	BUBBLEBEAM,\
+	AURORA_BEAM,\
+	ICE_BEAM,\
+	BLIZZARD,\
+	AMNESIA,\
+	ROLLING_KICK,\
+	BARRIER,\
+	THUNDERBOLT,\
+	THUNDER,\
+	DIG,\
+	SWORDS_DANCE,\
+	BIDE,\
+	AGILITY,\
+	BARRAGE,\
+	SLAM,\
+	GLARE,\
+	SUBSTITUTE,\
+	CUT,\
+	FLASH
 	; end
+
 
 	dw BANK(RattataPicFront), BANK(RattataPicBack)
 

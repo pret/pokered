@@ -14,11 +14,35 @@
 	db GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
-	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
-	     DOUBLE_EDGE,  SUBMISSION,   COUNTER,      SEISMIC_TOSS, RAGE,         \
-	     PSYCHIC_M,    TELEPORT,     MIMIC,        DOUBLE_TEAM,  REFLECT,      \
-	     BIDE,         METRONOME,    SKULL_BASH,   DREAM_EATER,  REST,         \
-	     THUNDER_WAVE, PSYWAVE,      TRI_ATTACK,   SUBSTITUTE,   FLASH
+	tmhm \
+	ICE_PUNCH,\
+	FIRE_PUNCH,\
+	TOXIC,\
+	BODY_SLAM,\
+	SLASH,\
+	DOUBLE_EDGE,\
+	AURORA_BEAM,\
+	AMNESIA,\
+	THUNDERPUNCH,\
+	ROLLING_KICK,\
+	BARRIER,\
+	PSYCHIC_M,\
+	KINESIS,\
+	REFLECT,\
+	BIDE,\
+	BARRAGE,\
+	SLAM,\
+	KARATE_CHOP,\
+	MEDITATE,\
+	LOVELY_KISS,\
+	LIGHT_SCREEN,\
+	PSYBEAM,\
+	SLUDGE,\
+	GLARE,\
+	SUBSTITUTE,\
+	CUT,\
+	STRENGTH,\
+	FLASH
 	; end
 
 	dw BANK(DrowzeePicFront), BANK(DrowzeePicBack)

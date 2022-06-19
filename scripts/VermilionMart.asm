@@ -38,7 +38,7 @@ TMKidQuick2::
 	text_end
 	
 VermilionTMKidShop::
-	script_mart TM_TELEPORT
+	script_mart TM_KINESIS, TM_LEECH_SEED
 
 VermilionMartText2:
 	text_far _VermilionMartText2

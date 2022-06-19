@@ -14,9 +14,27 @@
 	db GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset
-	tmhm TOXIC,        RAGE,         MEGA_DRAIN,   THUNDERBOLT,  THUNDER,      \
-	     PSYCHIC_M,    MIMIC,        DOUBLE_TEAM,  BIDE,         SELFDESTRUCT, \
-	     DREAM_EATER,  REST,         PSYWAVE,      EXPLOSION,    SUBSTITUTE
+	tmhm \
+	TOXIC,\
+	DOUBLE_EDGE,\
+	AURORA_BEAM,\
+	THUNDERPUNCH,\
+	THUNDERBOLT,\
+	THUNDER,\
+	PSYCHIC_M,\
+	MEGA_DRAIN,\
+	KINESIS,\
+	BIDE,\
+	BARRAGE,\
+	SLAM,\
+	KARATE_CHOP,\
+	LOVELY_KISS,\
+	PSYBEAM,\
+	SLUDGE,\
+	GLARE,\
+	SUBSTITUTE,\
+	CUT,\
+	FLASH
 	; end
 
 	dw BANK(HaunterPicFront), BANK(HaunterPicBack)

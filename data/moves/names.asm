@@ -153,7 +153,7 @@ MoveNames::
 	li "ACID ARMOR"
 	li "CRABHAMMER"
 	li "EXPLOSION"
-	li "FURY SWIPES"
+	li "DUST CLAW" ; changed from FURY SWIPES
 	li "BONEMERANG"
 	li "REST"
 	li "ROCK SLIDE"

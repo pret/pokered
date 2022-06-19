@@ -16,6 +16,6 @@ Route5_Object:
 	object_event 4,  15, SPRITE_COOLTRAINER_M, STAY, LEFT, 2, OPP_ROOKIE, 4
 	object_event 18, 23, SPRITE_COOLTRAINER_M, STAY, UP, 3, OPP_ROOKIE, 5
 	object_event 15, 10, SPRITE_SUPER_NERD, STAY, DOWN, 4, OPP_TAMER, 6
-	object_event 2, 30, SPRITE_POKE_BALL, STAY, NONE, 5, SURFBOARD
+	object_event 2, 30, SPRITE_POKE_BALL, STAY, NONE, 5, TM_RAZOR_WIND
 
 	def_warps_to ROUTE_5

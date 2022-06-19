@@ -12,7 +12,7 @@ Route12GateUpstairsText1:
 	jr c, .got_item
 	ld hl, TM39PreReceiveText
 	call PrintText
-	lb bc, TM_SWIFT, 1
+	lb bc, TM_SLAM, 1
 	call GiveItem
 	jr nc, .bag_full
 	ld hl, ReceivedTM39Text

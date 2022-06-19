@@ -14,7 +14,20 @@
 	db GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
-	tmhm
+	tmhm \
+	PIN_MISSILE,\
+	TOXIC,\
+	DOUBLE_EDGE,\
+	BARRIER,\
+	MEGA_DRAIN,\
+	SWORDS_DANCE,\
+	REFLECT,\
+	BIDE,\
+	SLUDGE,\
+	GLARE,\
+	SUBSTITUTE,\
+	CUT,\
+	FLASH
 	; end
 
 	dw BANK(KakunaPicFront), BANK(KakunaPicBack)

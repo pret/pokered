@@ -19,10 +19,10 @@ Moves:
 	move FIRE_PUNCH,   BURN_SIDE_EFFECT1,           75, FIRE,         100, 15
 	move ICE_PUNCH,    FREEZE_SIDE_EFFECT,          75, ICE,          100, 15
 	move THUNDERPUNCH, PARALYZE_SIDE_EFFECT1,       75, ELECTRIC,     100, 15
-	move SCRATCH,      NO_ADDITIONAL_EFFECT,        40, GROUND,       100, 35
+	move SCRATCH,      NO_ADDITIONAL_EFFECT,        40, NORMAL,       100, 35
 	move VICEGRIP,     PARALYZE_SIDE_EFFECT2,       75, BUG,          100, 30
 	move GUILLOTINE,   OHKO_EFFECT,                  1, BUG,           30,  5
-	move RAZOR_WIND,   HEAL_EFFECT,                  0, FLYING,       100, 10 ; is now roost
+	move RAZOR_WIND,   HEAL_EFFECT,                  0, FLYING,       100, 10 ; -> ROOST
 	move SWORDS_DANCE, ATTACK_UP2_EFFECT,            0, NORMAL,       100, 30
 	move CUT,          NO_ADDITIONAL_EFFECT,        70, BUG,          100, 30
 	move GUST,         NO_ADDITIONAL_EFFECT,        40, FLYING,       100, 35
@@ -30,7 +30,7 @@ Moves:
 	move WHIRLWIND,    CONFUSION_BIG_SIDE_EFFECT,   110,FLYING,        85, 10
 	move FLY,          FLY_EFFECT,                  90, FLYING,       100, 15
 	move BIND,         TRAPPING_EFFECT,             25, ROCK,          85, 20
-	move SLAM,         NO_ADDITIONAL_EFFECT,        80, POISON,       100, 20 ;* "FILTHY SLAM"
+	move SLAM,         NO_ADDITIONAL_EFFECT,        80, POISON,       100, 20 ; -> FILTHY SLAM
 	move VINE_WHIP,    NO_ADDITIONAL_EFFECT,        40, GRASS,        100, 15 
 	move STOMP,        FLINCH_SIDE_EFFECT2,         65, NORMAL,       100, 20
 	move DOUBLE_KICK,  ATTACK_TWICE_EFFECT,         30, FIGHTING,     100, 30
@@ -41,7 +41,7 @@ Moves:
 	move HEADBUTT,     FLINCH_SIDE_EFFECT2,         75, NORMAL,       100, 15
 	move HORN_ATTACK,  NO_ADDITIONAL_EFFECT,        65, ROCK,         100, 25 
 	move FURY_ATTACK,  ATTACK_TWICE_EFFECT,         40, FLYING,       100, 20
-	move HORN_DRILL,   OHKO_EFFECT,                  1, ROCK,         30,  5
+	move HORN_DRILL,   OHKO_EFFECT,                  1, NORMAL,        30,  5
 	move TACKLE,       NO_ADDITIONAL_EFFECT,        35, NORMAL,       100, 35
 	move BODY_SLAM,    PARALYZE_SIDE_EFFECT2,       85, NORMAL,       100, 15
 	move WRAP,         TRAPPING_EFFECT,             15, NORMAL,        85, 20
@@ -141,7 +141,7 @@ Moves:
 	move SWIFT,        SWIFT_EFFECT,                60, ICE,          100, 20 ; priority move
 	move SKULL_BASH,   JUMP_KICK_EFFECT,           100, ROCK,          85, 10
 	move SPIKE_CANNON, TWO_TO_FIVE_ATTACKS_EFFECT,  25, ROCK,         100, 15
-	move CONSTRICT,    PARALYZE_SIDE_EFFECT2,       50, ELECTRIC,     100, 35 ;* STATIC SNAG
+	move CONSTRICT,    PARALYZE_SIDE_EFFECT2,       50, ELECTRIC,     100, 35 ; -> STATIC SNAG
 	move AMNESIA,      SPECIAL_UP2_EFFECT,           0, PSYCHIC_TYPE, 100, 20 
 	move KINESIS,      BURN_EFFECT,                  0, FIRE,          80, 10 ; -> FIREWALL
 	move SOFTBOILED,   HEAL_EFFECT,                  0, NORMAL,       100, 10
@@ -155,7 +155,7 @@ Moves:
 	move SKY_ATTACK,   BIG_RECOIL_EFFECT,          130, FLYING,       100,  5
 	move TRANSFORM,    TRANSFORM_EFFECT,             0, NORMAL,       100, 10 ; priority move
 	move BUBBLE,       SPEED_DOWN_SIDE_EFFECT,      20, WATER,        100, 30
-	move DIZZY_PUNCH,  CONFUSION_BIG_SIDE_EFFECT,   90, NORMAL,       100, 10
+	move DIZZY_PUNCH,  CONFUSION_BIG_SIDE_EFFECT,   90, FIGHTING,     100, 10
 	move SPORE,        SLEEP_EFFECT,                 0, GRASS,        100, 15
 	move FLASH,        FLINCH_SIDE_EFFECT1,         60, ELECTRIC,     100, 15 ; priority move
 	move PSYWAVE,      SPECIAL_DOWN_SIDE_EFFECT,    35, PSYCHIC_TYPE, 100, 30
@@ -163,7 +163,7 @@ Moves:
 	move ACID_ARMOR,   DEFENSE_UP2_EFFECT,           0, POISON,       100, 40
 	move CRABHAMMER,   NO_ADDITIONAL_EFFECT,        90, WATER,         95, 10 ; high critical hit ratio
 	move EXPLOSION,    BIG_RECOIL_EFFECT,          140, ROCK,         100,  5
-	move FURY_SWIPES,  ATTACK_TWICE_EFFECT,         40, NORMAL,       100, 15
+	move FURY_SWIPES,  NO_ADDITIONAL_EFFECT,        40, GROUND,       100, 15 ; -> DUST CLAW
 	move BONEMERANG,   ATTACK_TWICE_EFFECT,         55, GROUND,        90, 10
 	move REST,         HEAL_EFFECT,                  0, PSYCHIC_TYPE, 100, 10
 	move ROCK_SLIDE,   FLINCH_SIDE_EFFECT1,         80, ROCK,         100, 10

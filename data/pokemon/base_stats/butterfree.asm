@@ -14,11 +14,33 @@
 	db GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
-	tmhm RAZOR_WIND,   WHIRLWIND,    TOXIC,        TAKE_DOWN,    DOUBLE_EDGE,  \
-	     HYPER_BEAM,   RAGE,         MEGA_DRAIN,   SOLARBEAM,    PSYCHIC_M,    \
-	     TELEPORT,     MIMIC,        DOUBLE_TEAM,  REFLECT,      BIDE,         \
-	     SWIFT,        REST,         PSYWAVE,      SUBSTITUTE
-	; end
+	tmhm \
+	RAZOR_WIND,\
+	LEECH_SEED,\
+	TOXIC,\
+	DOUBLE_EDGE,\
+	AURORA_BEAM,\
+	HYPER_BEAM,\
+	AMNESIA,\
+	BARRIER,\
+	PSYCHIC_M,\
+	MEGA_DRAIN,\
+	SWORDS_DANCE,\
+	REFLECT,\
+	BIDE,\
+	BARRAGE,\
+	SLAM,\
+	MEDITATE,\
+	SKY_ATTACK,\
+	LIGHT_SCREEN,\
+	THUNDER_WAVE,\
+	PSYBEAM,\
+	GLARE,\
+	SUBSTITUTE,\
+	CUT,\
+	FLY,\
+	FLASH
+	;end
 
 	dw BANK(ButterfreePicFront), BANK(ButterfreePicBack)
 

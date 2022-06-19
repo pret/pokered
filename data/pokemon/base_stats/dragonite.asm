@@ -14,12 +14,37 @@
 	db GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
-	tmhm RAZOR_WIND,   TOXIC,        HORN_DRILL,   BODY_SLAM,    TAKE_DOWN,    \
-	     DOUBLE_EDGE,  BUBBLEBEAM,   WATER_GUN,    ICE_BEAM,     BLIZZARD,     \
-	     HYPER_BEAM,   RAGE,         DRAGON_RAGE,  THUNDERBOLT,  THUNDER,      \
-	     MIMIC,        DOUBLE_TEAM,  REFLECT,      BIDE,         FIRE_BLAST,   \
-	     SWIFT,        SKULL_BASH,   REST,         THUNDER_WAVE, SUBSTITUTE,   \
-	     SURF,         STRENGTH
+	tmhm \
+	FIRE_PUNCH,\
+	TOXIC,\
+	HORN_DRILL,\
+	BODY_SLAM,\
+	DOUBLE_EDGE,\
+	BUBBLEBEAM,\
+	AURORA_BEAM,\
+	ICE_BEAM,\
+	BLIZZARD,\
+	HYPER_BEAM,\
+	DRAGON_RAGE,\
+	THUNDERBOLT,\
+	THUNDER,\
+	KINESIS,\
+	REFLECT,\
+	BIDE,\
+	AGILITY,\
+	BARRAGE,\
+	FIRE_BLAST,\
+	FLAMETHROWER,\
+	SLAM,\
+	KARATE_CHOP,\
+	LIGHT_SCREEN,\
+	THUNDER_WAVE,\
+	SUBSTITUTE,\
+	CUT,\
+	FLY,\
+	SURF,\
+	STRENGTH,\
+	FLASH
 	; end
 
 	dw BANK(DragonitePicFront), BANK(DragonitePicBack)

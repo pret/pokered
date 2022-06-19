@@ -38,7 +38,7 @@ TMKidQuick5::
 	text_end
 	
 FuchsiaTMKidShop::
-	script_mart TM_TELEPORT
+	script_mart TM_SLASH, TM_MEGA_DRAIN, TM_PIN_MISSILE, TM_AGILITY, TM_PSYBEAM
 
 FuchsiaMartText2:
 	text_far _FuchsiaMartText2

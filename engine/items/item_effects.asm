@@ -1381,12 +1381,12 @@ ItemUseMedicine:
 	jr nc, .noCarry2
 	inc h
 .noCarry2
-	ld a, 10
+	ld a, 34 ; 10 NEW: vitamins are ~3.4 times as effective
 	ld b, a
 	ld a, [hl] ; a = MSB of stat experience of the appropriate stat
 	cp 100 ; is there already at least 25600 (256 * 100) stat experience?
 	jr nc, .vitaminNoEffect ; if so, vitamins can't add any more
-	add b ; add 2560 (256 * 10) stat experience
+	add b ; add NEW: now 8704 EXP (256*34) stat experience OLD: 2560 (256 * 10) 
 	jr nc, .noCarry3 ; a carry should be impossible here, so this will always jump
 	ld a, 255
 .noCarry3
@@ -1416,9 +1416,14 @@ ItemUseMedicine:
 	ld hl, VitaminStatRoseText
 	call PrintText
 	jp RemoveUsedItem
+.rareCandyNoEffect
+	pop hl
+	ld hl, RareCandyNoEffectText
+	jr .printNoEffect
 .vitaminNoEffect
 	pop hl
 	ld hl, VitaminNoEffectText
+.printNoEffect
 	call PrintText
 	jp GBPalWhiteOut
 .recalculateStats
@@ -1436,7 +1441,7 @@ ItemUseMedicine:
 	add hl, bc ; hl now points to level
 	ld a, [hl] ; a = level
 	cp MAX_LEVEL
-	jr z, .vitaminNoEffect ; can't raise level above 100
+	jr z, .rareCandyNoEffect ; can't raise level above 100
 	inc a
 	ld [hl], a ; store incremented level
 	ld [wCurEnemyLVL], a
@@ -1590,6 +1595,10 @@ VitaminStatRoseText:
 
 VitaminNoEffectText:
 	text_far _VitaminNoEffectText
+	text_end
+
+RareCandyNoEffectText:
+	text_far _RareCandyNoEffectText
 	text_end
 
 INCLUDE "data/battle/stat_names.asm"
@@ -2257,10 +2266,10 @@ ItemUsePPRestore:
 	jr .chooseMove
 .PPNotMaxedOut
 	ld a, [hl]
-	add 1 << 6 ; increase PP Up count by 1
+	add 3 << 6 ; increase PP Up count by 1
 	ld [hl], a
 	ld a, 1 ; 1 PP Up used
-	ld [wd11e], a
+	ld [wUsingPPUp], a
 	call RestoreBonusPP ; add the bonus PP to current PP
 	ld hl, PPIncreasedText
 	call PrintText
@@ -2707,9 +2716,9 @@ AddBonusPP:
 .addAmount
 	add b
 	ld b, a
-	ld a, [wUsingPPUp]
-	dec a ; is the player using a PP Up right now?
-	jr z, .done ; if so, only add the bonus once
+	;ld a, [wUsingPPUp] NEW: PP UPs max out PP in one go
+	;dec a ; is the player using a PP Up right now?
+	;jr z, .ppUP ; if so, only add the bonus three times
 	dec c
 	jr nz, .loop
 .done

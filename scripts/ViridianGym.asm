@@ -139,7 +139,7 @@ ViridianGymReceiveTM27:
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_BEAT_VIRIDIAN_GYM_GIOVANNI
-	lb bc, TM_FISSURE, 1
+	lb bc, TM_EARTHQUAKE, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $d

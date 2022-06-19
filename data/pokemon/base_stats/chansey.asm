@@ -14,15 +14,31 @@
 	db GROWTH_FAST ; growth rate
 
 	; tm/hm learnset
-	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
-	     DOUBLE_EDGE,  BUBBLEBEAM,   WATER_GUN,    ICE_BEAM,     BLIZZARD,     \
-	     HYPER_BEAM,   SUBMISSION,   COUNTER,      SEISMIC_TOSS, RAGE,         \
-	     SOLARBEAM,    THUNDERBOLT,  THUNDER,      PSYCHIC_M,    TELEPORT,     \
-	     MIMIC,        DOUBLE_TEAM,  REFLECT,      BIDE,         METRONOME,    \
-	     EGG_BOMB,     FIRE_BLAST,   SKULL_BASH,   SOFTBOILED,   REST,         \
-	     THUNDER_WAVE, PSYWAVE,      TRI_ATTACK,   SUBSTITUTE,   STRENGTH,     \
-	     FLASH
+	tmhm \
+	TOXIC,\
+	BODY_SLAM,\
+	DOUBLE_EDGE,\
+	BUBBLEBEAM,\
+	AURORA_BEAM,\
+	ICE_BEAM,\
+	BLIZZARD,\
+	HYPER_BEAM,\
+	SOLARBEAM,\
+	THUNDERBOLT,\
+	THUNDER,\
+	PSYCHIC_M,\
+	REFLECT,\
+	BIDE,\
+	BARRAGE,\
+	FIRE_BLAST,\
+	FLAMETHROWER,\
+	LIGHT_SCREEN,\
+	PSYBEAM,\
+	SUBSTITUTE,\
+	STRENGTH,\
+	FLASH
 	; end
+
 
 	dw BANK(ChanseyPicFront), BANK(ChanseyPicBack)
 

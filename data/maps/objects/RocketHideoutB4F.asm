@@ -14,7 +14,7 @@ RocketHideoutB4F_Object:
 	object_event 26, 12, SPRITE_ROCKET, STAY, DOWN, 3, OPP_ROCKET, 17
 	object_event 11,  2, SPRITE_ROCKET, STAY, DOWN, 4, OPP_ROCKET, 18
 	object_event 10, 12, SPRITE_POKE_BALL, STAY, NONE, 5, HP_UP
-	object_event  9,  4, SPRITE_POKE_BALL, STAY, NONE, 6, TM_RAZOR_WIND
+	object_event  9,  4, SPRITE_POKE_BALL, STAY, NONE, 6, TM_SLASH
 	object_event 12, 20, SPRITE_POKE_BALL, STAY, NONE, 7, IRON
 	object_event 25,  2, SPRITE_POKE_BALL, STAY, NONE, 8, SILPH_SCOPE
 	object_event 10,  2, SPRITE_POKE_BALL, STAY, NONE, 9, LIFT_KEY

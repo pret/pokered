@@ -22,6 +22,6 @@ PowerPlant_Object:
 	object_event 28,  3, SPRITE_POKE_BALL, STAY, NONE, 11, HP_UP
 	object_event 34,  3, SPRITE_POKE_BALL, STAY, NONE, 12, RARE_CANDY
 	object_event 26, 32, SPRITE_POKE_BALL, STAY, NONE, 13, TM_THUNDER
-	object_event 20, 32, SPRITE_POKE_BALL, STAY, NONE, 14, TM_REFLECT
+	object_event 20, 32, SPRITE_POKE_BALL, STAY, NONE, 14, TM_SLUDGE
 
 	def_warps_to POWER_PLANT

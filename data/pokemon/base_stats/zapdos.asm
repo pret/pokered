@@ -14,11 +14,34 @@
 	db GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
-	tmhm RAZOR_WIND,   WHIRLWIND,    TOXIC,        TAKE_DOWN,    DOUBLE_EDGE,  \
-	     HYPER_BEAM,   RAGE,         THUNDERBOLT,  THUNDER,      MIMIC,        \
-	     DOUBLE_TEAM,  REFLECT,      BIDE,         SWIFT,        SKY_ATTACK,   \
-	     REST,         THUNDER_WAVE, SUBSTITUTE,   FLY,          FLASH
+	tmhm \
+	RAZOR_WIND,\
+	PIN_MISSILE,\
+	TOXIC,\
+	BODY_SLAM,\
+	SLASH,\
+	DOUBLE_EDGE,\
+	HYPER_BEAM,\
+	AMNESIA,\
+	BARRIER,\
+	THUNDERBOLT,\
+	THUNDER,\
+	KINESIS,\
+	REFLECT,\
+	BIDE,\
+	AGILITY,\
+	BARRAGE,\
+	SKY_ATTACK,\
+	LIGHT_SCREEN,\
+	THUNDER_WAVE,\
+	PSYBEAM,\
+	GLARE,\
+	SUBSTITUTE,\
+	CUT,\
+	FLY,\
+	FLASH
 	; end
+
 
 	dw BANK(ZapdosPicFront), BANK(ZapdosPicBack)
 

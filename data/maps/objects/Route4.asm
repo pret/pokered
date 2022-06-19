@@ -19,7 +19,7 @@ Route4_Object:
 	object_event 47,  5, SPRITE_COOLTRAINER_M, STAY, RIGHT, 3, OPP_ROOKIE, 1
 	object_event 48,  5, SPRITE_COOLTRAINER_M, STAY, LEFT, 4, OPP_ROOKIE, 2
 	object_event 5,  12, SPRITE_SUPER_NERD, STAY, RIGHT, 5, OPP_TAMER, 6
-	object_event 57,  3, SPRITE_POKE_BALL, STAY, NONE, 6, TM_WHIRLWIND
+	object_event 57,  3, SPRITE_POKE_BALL, STAY, NONE, 6, TM_LEECH_SEED
 	object_event 63,  3, SPRITE_POKE_BALL, STAY, NONE, 7, HYPER_BALL
 
 	def_warps_to ROUTE_4

@@ -14,10 +14,30 @@
 	db GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
-	tmhm RAZOR_WIND,   WHIRLWIND,    TOXIC,        TAKE_DOWN,    DOUBLE_EDGE,  \
-	     HYPER_BEAM,   RAGE,         MIMIC,        DOUBLE_TEAM,  BIDE,         \
-	     SWIFT,        SKY_ATTACK,   REST,         SUBSTITUTE,   FLY
+	tmhm \
+	RAZOR_WIND,\
+	PIN_MISSILE,\
+	TOXIC,\
+	BODY_SLAM,\
+	SLASH,\
+	DOUBLE_EDGE,\
+	HYPER_BEAM,\
+	BARRIER,\
+	DIG,\
+	SWORDS_DANCE,\
+	REFLECT,\
+	BIDE,\
+	AGILITY,\
+	BARRAGE,\
+	SLAM,\
+	SKY_ATTACK,\
+	GLARE,\
+	SUBSTITUTE,\
+	CUT,\
+	FLY,\
+	STRENGTH
 	; end
+
 
 	dw BANK(FearowPicFront), BANK(FearowPicBack)
 

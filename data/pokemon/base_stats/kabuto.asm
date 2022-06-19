@@ -14,11 +14,35 @@
 	db GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
-	tmhm TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  BUBBLEBEAM,   \
-	     WATER_GUN,    ICE_BEAM,     BLIZZARD,     RAGE,         MIMIC,        \
-	     DOUBLE_TEAM,  REFLECT,      BIDE,         REST,         SUBSTITUTE,   \
-	     SURF
+	tmhm \
+	LEECH_SEED,\
+	PIN_MISSILE,\
+	TOXIC,\
+	BODY_SLAM,\
+	SLASH,\
+	DOUBLE_EDGE,\
+	BUBBLEBEAM,\
+	AURORA_BEAM,\
+	ICE_BEAM,\
+	BLIZZARD,\
+	BARRIER,\
+	EARTHQUAKE,\
+	CRABHAMMER,\
+	DIG,\
+	MEGA_DRAIN,\
+	REFLECT,\
+	BIDE,\
+	BARRAGE,\
+	SLAM,\
+	SLUDGE,\
+	ROCK_SLIDE,\
+	GLARE,\
+	SUBSTITUTE,\
+	CUT,\
+	SURF,\
+	FLASH
 	; end
+
 
 	dw BANK(KabutoPicFront), BANK(KabutoPicBack)
 

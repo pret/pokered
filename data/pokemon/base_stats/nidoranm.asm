@@ -14,11 +14,33 @@
 	db GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset
-	tmhm TOXIC,        HORN_DRILL,   BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  \
-	     BLIZZARD,     RAGE,         THUNDERBOLT,  THUNDER,      MIMIC,        \
-	     DOUBLE_TEAM,  REFLECT,      BIDE,         SKULL_BASH,   REST,         \
-	     SUBSTITUTE
+	tmhm \
+	PIN_MISSILE,\
+	TOXIC,\
+	HORN_DRILL,\
+	BODY_SLAM,\
+	SLASH,\
+	DOUBLE_EDGE,\
+	ICE_BEAM,\
+	BLIZZARD,\
+	ROLLING_KICK,\
+	BARRIER,\
+	THUNDERBOLT,\
+	THUNDER,\
+	DIG,\
+	REFLECT,\
+	BIDE,\
+	BARRAGE,\
+	SLAM,\
+	KARATE_CHOP,\
+	LIGHT_SCREEN,\
+	SLUDGE,\
+	GLARE,\
+	SUBSTITUTE,\
+	CUT,\
+	FLASH
 	; end
+
 
 	dw BANK(NidoranMPicFront), BANK(NidoranMPicBack)
 

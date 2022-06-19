@@ -15,6 +15,6 @@ SeafoamIslandsB4F_Object:
 	object_event  4, 15, SPRITE_BOULDER, STAY, NONE, 1 ; person
 	object_event  5, 15, SPRITE_BOULDER, STAY, NONE, 2 ; person
 	object_event  6,  1, SPRITE_BIRD2, STAY, DOWN, 3, ARTICUNO, 50
-	object_event 17, 15, SPRITE_POKE_BALL, STAY, NONE, 4, SURFBOARD
+	object_event 17, 15, SPRITE_POKE_BALL, STAY, NONE, 4, TM_ICE_BEAM
 
 	def_warps_to SEAFOAM_ISLANDS_B4F

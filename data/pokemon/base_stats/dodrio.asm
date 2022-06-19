@@ -14,10 +14,32 @@
 	db GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
-	tmhm WHIRLWIND,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  \
-	     HYPER_BEAM,   RAGE,         MIMIC,        DOUBLE_TEAM,  REFLECT,      \
-	     BIDE,         SKULL_BASH,   SKY_ATTACK,   REST,         TRI_ATTACK,   \
-	     SUBSTITUTE,   FLY
+	tmhm \
+	RAZOR_WIND,\
+	PIN_MISSILE,\
+	TOXIC,\
+	BODY_SLAM,\
+	SLASH,\
+	DOUBLE_EDGE,\
+	HYPER_BEAM,\
+	HI_JUMP_KICK,\
+	ROLLING_KICK,\
+	BARRIER,\
+	EARTHQUAKE,\
+	DIG,\
+	SWORDS_DANCE,\
+	REFLECT,\
+	BIDE,\
+	AGILITY,\
+	BARRAGE,\
+	SLAM,\
+	SKY_ATTACK,\
+	THUNDER_WAVE,\
+	GLARE,\
+	SUBSTITUTE,\
+	CUT,\
+	FLY,\
+	STRENGTH
 	; end
 
 	dw BANK(DodrioPicFront), BANK(DodrioPicBack)

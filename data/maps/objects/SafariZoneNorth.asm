@@ -27,7 +27,7 @@ SafariZoneNorth_Object:
 	object_event 37, 7, SPRITE_SAFARI_ZONE_WORKER, STAY, LEFT, 5, OPP_ENGINEER, 5
 	object_event 5, 6, SPRITE_SUPER_NERD, STAY, NONE, 6, OPP_POKEMANIAC, 9
 	object_event 25,  1, SPRITE_POKE_BALL, STAY, NONE, 7, PROTEIN
-	object_event 19,  7, SPRITE_POKE_BALL, STAY, NONE, 8, TM_SKULL_BASH
+	object_event 19,  7, SPRITE_POKE_BALL, STAY, NONE, 8, TM_SLAM
 
 
 	def_warps_to SAFARI_ZONE_NORTH

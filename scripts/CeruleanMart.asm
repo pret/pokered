@@ -38,7 +38,7 @@ TMKidQuick1::
 	text_end
 	
 CeruleanTMKidShop::
-	script_mart TM_TELEPORT
+	script_mart TM_BIDE
 
 
 CeruleanMartText2:

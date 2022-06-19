@@ -14,10 +14,31 @@
 	db GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
-	tmhm TOXIC,        HORN_DRILL,   BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  \
-	     RAGE,         MIMIC,        DOUBLE_TEAM,  REFLECT,      BIDE,         \
-	     FIRE_BLAST,   SWIFT,        SKULL_BASH,   REST,         SUBSTITUTE
+	tmhm \
+	TOXIC,\
+	HORN_DRILL,\
+	BODY_SLAM,\
+	DOUBLE_EDGE,\
+	AURORA_BEAM,\
+	BARRIER,\
+	SOLARBEAM,\
+	DRAGON_RAGE,\
+	KINESIS,\
+	SWORDS_DANCE,\
+	REFLECT,\
+	BIDE,\
+	AGILITY,\
+	BARRAGE,\
+	FIRE_BLAST,\
+	FLAMETHROWER,\
+	SLAM,\
+	LIGHT_SCREEN,\
+	GLARE,\
+	SUBSTITUTE,\
+	STRENGTH,\
+	FLASH
 	; end
+
 
 	dw BANK(PonytaPicFront), BANK(PonytaPicBack)
 

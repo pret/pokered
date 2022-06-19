@@ -14,8 +14,20 @@
 	db GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
-	tmhm
-	; end
+	tmhm \
+	TOXIC,\
+	DOUBLE_EDGE,\
+	BARRIER,\
+	MEGA_DRAIN,\
+	SWORDS_DANCE,\
+	REFLECT,\
+	BIDE,\
+	LIGHT_SCREEN,\
+	GLARE,\
+	SUBSTITUTE,\
+	CUT,\
+	FLASH
+	;end
 
 	dw BANK(CaterpiePicFront), BANK(CaterpiePicBack)
 

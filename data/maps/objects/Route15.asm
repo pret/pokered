@@ -21,6 +21,6 @@ Route15_Object:
 	object_event 46, 10, SPRITE_BIKER, STAY, DOWN, 8, OPP_BIKER, 4
 	object_event 37,  5, SPRITE_COOLTRAINER_F, STAY, RIGHT, 9, OPP_JR_TRAINER_F, 22
 	object_event 18, 13, SPRITE_COOLTRAINER_F, STAY, UP, 10, OPP_JR_TRAINER_F, 23
-	object_event 18,  5, SPRITE_POKE_BALL, STAY, NONE, 11, TM_RAGE
+	object_event 18,  5, SPRITE_POKE_BALL, STAY, NONE, 11, TM_BARRIER
 
 	def_warps_to ROUTE_15

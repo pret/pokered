@@ -38,7 +38,7 @@ TMKidQuick3::
 	text_end
 	
 LavenderTMKidShop::
-	script_mart TM_TELEPORT
+	script_mart TM_BUBBLEBEAM, TM_AURORA_BEAM, TM_THUNDER_WAVE, PP_UP
 
 LavenderMartText2:
 	text_far _LavenderMartText2

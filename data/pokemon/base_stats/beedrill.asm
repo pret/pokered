@@ -13,12 +13,38 @@
 	db FURY_ATTACK, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
 
-	; tm/hm learnset
-	tmhm SWORDS_DANCE, TOXIC,        TAKE_DOWN,    DOUBLE_EDGE,  HYPER_BEAM,   \
-	     RAGE,         MEGA_DRAIN,   MIMIC,        DOUBLE_TEAM,  REFLECT,      \
-	     BIDE,         SWIFT,        SKULL_BASH,   REST,         SUBSTITUTE,   \
-	     CUT
+	tmhm \
+	RAZOR_WIND,\
+	LEECH_SEED,\
+	PIN_MISSILE,\
+	TOXIC,\
+	HORN_DRILL,\
+	SLASH,\
+	DOUBLE_EDGE,\
+	HYPER_BEAM,\
+	AMNESIA,\
+	BARRIER,\
+	SOLARBEAM,\
+	CRABHAMMER,\
+	MEGA_DRAIN,\
+	SWORDS_DANCE,\
+	REFLECT,\
+	BIDE,\
+	AGILITY,\
+	BARRAGE,\
+	SLAM,\
+	KARATE_CHOP,\
+	SKY_ATTACK,\
+	LIGHT_SCREEN,\
+	THUNDER_WAVE,\
+	SLUDGE,\
+	GLARE,\
+	SUBSTITUTE,\
+	CUT,\
+	FLY,\
+	FLASH
 	; end
+
 
 	dw BANK(BeedrillPicFront), BANK(BeedrillPicBack)
 

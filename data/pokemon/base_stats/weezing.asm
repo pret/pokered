@@ -14,9 +14,27 @@
 	db GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
-	tmhm TOXIC,        HYPER_BEAM,   RAGE,         THUNDERBOLT,  THUNDER,      \
-	     MIMIC,        DOUBLE_TEAM,  BIDE,         SELFDESTRUCT, FIRE_BLAST,   \
-	     REST,         EXPLOSION,    SUBSTITUTE
+	tmhm \
+	PIN_MISSILE,\
+	TOXIC,\
+	BODY_SLAM,\
+	DOUBLE_EDGE,\
+	HYPER_BEAM,\
+	AMNESIA,\
+	BARRIER,\
+	THUNDERBOLT,\
+	THUNDER,\
+	KINESIS,\
+	REFLECT,\
+	BIDE,\
+	BARRAGE,\
+	FIRE_BLAST,\
+	FLAMETHROWER,\
+	SLAM,\
+	LIGHT_SCREEN,\
+	SLUDGE,\
+	SUBSTITUTE,\
+	FLASH
 	; end
 
 	dw BANK(WeezingPicFront), BANK(WeezingPicBack)

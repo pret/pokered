@@ -14,11 +14,36 @@
 	db GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
-	tmhm SWORDS_DANCE, TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  \
-	     HYPER_BEAM,   SUBMISSION,   SEISMIC_TOSS, RAGE,         MIMIC,        \
-	     DOUBLE_TEAM,  BIDE,         REST,         SUBSTITUTE,   CUT,          \
-	     STRENGTH
+	tmhm \
+	ICE_PUNCH,\
+	PIN_MISSILE,\
+	FIRE_PUNCH,\
+	TOXIC,\
+	HORN_DRILL,\
+	BODY_SLAM,\
+	SLASH,\
+	DOUBLE_EDGE,\
+	HYPER_BEAM,\
+	HI_JUMP_KICK,\
+	THUNDERPUNCH,\
+	ROLLING_KICK,\
+	BARRIER,\
+	EARTHQUAKE,\
+	CRABHAMMER,\
+	DIG,\
+	SWORDS_DANCE,\
+	BIDE,\
+	BARRAGE,\
+	SLAM,\
+	KARATE_CHOP,\
+	MEDITATE,\
+	ROCK_SLIDE,\
+	GLARE,\
+	SUBSTITUTE,\
+	SURF,\
+	STRENGTH
 	; end
+
 
 	dw BANK(PinsirPicFront), BANK(PinsirPicBack)
 

@@ -14,10 +14,33 @@
 	db GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
-	tmhm RAZOR_WIND,   WHIRLWIND,    TOXIC,        TAKE_DOWN,    DOUBLE_EDGE,  \
-	     HYPER_BEAM,   RAGE,         MEGA_DRAIN,   SOLARBEAM,    PSYCHIC_M,    \
-	     TELEPORT,     MIMIC,        DOUBLE_TEAM,  REFLECT,      BIDE,         \
-	     SWIFT,        REST,         PSYWAVE,      SUBSTITUTE
+	tmhm \
+	RAZOR_WIND,\
+	LEECH_SEED,\
+	PIN_MISSILE,\
+	TOXIC,\
+	DOUBLE_EDGE,\
+	AURORA_BEAM,\
+	HYPER_BEAM,\
+	AMNESIA,\
+	BARRIER,\
+	SOLARBEAM,\
+	PSYCHIC_M,\
+	MEGA_DRAIN,\
+	KINESIS,\
+	SWORDS_DANCE,\
+	REFLECT,\
+	BIDE,\
+	AGILITY,\
+	BARRAGE,\
+	SKY_ATTACK,\
+	LIGHT_SCREEN,\
+	PSYBEAM,\
+	SLUDGE,\
+	SUBSTITUTE,\
+	CUT,\
+	FLY,\
+	FLASH
 	; end
 
 	dw BANK(VenomothPicFront), BANK(VenomothPicBack)

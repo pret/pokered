@@ -27,7 +27,7 @@ CeladonMart3Text1:
 	jr nz, .got_item
 	ld hl, TM18PreReceiveText
 	call PrintText
-	lb bc, TM_COUNTER, 1
+	lb bc, TM_AGILITY, 1
 	call GiveItem
 	jr nc, .bag_full
 	SetEvent EVENT_GOT_TM18
@@ -123,6 +123,3 @@ TMKidGreet4::
 CeladonMartTMKidFlavor:
 	text_far _CeladonMartTMKidFlavor
 	text_end
-	
-CeladonTMKidShop::
-	script_mart TM_TELEPORT

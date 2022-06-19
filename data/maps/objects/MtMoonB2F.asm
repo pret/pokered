@@ -18,6 +18,6 @@ MtMoonB2F_Object:
 	object_event 12,  6, SPRITE_FOSSIL, STAY, NONE, 6 ; person
 	object_event 13,  6, SPRITE_FOSSIL, STAY, NONE, 7 ; person
 	object_event 25, 21, SPRITE_POKE_BALL, STAY, NONE, 8, HP_UP
-	object_event 29,  5, SPRITE_POKE_BALL, STAY, NONE, 9, TM_MEGA_PUNCH
+	object_event 29,  5, SPRITE_POKE_BALL, STAY, NONE, 9, TM_KARATE_CHOP
 
 	def_warps_to MT_MOON_B2F

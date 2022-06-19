@@ -14,10 +14,26 @@
 	db GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
-	tmhm TOXIC,        TAKE_DOWN,    DOUBLE_EDGE,  HYPER_BEAM,   RAGE,         \
-	     THUNDERBOLT,  THUNDER,      TELEPORT,     MIMIC,        DOUBLE_TEAM,  \
-	     REFLECT,      BIDE,         SWIFT,        REST,         THUNDER_WAVE, \
-	     SUBSTITUTE,   FLASH
+	tmhm \
+	TOXIC,\
+	BODY_SLAM,\
+	DOUBLE_EDGE,\
+	AURORA_BEAM,\
+	HYPER_BEAM,\
+	BARRIER,\
+	THUNDERBOLT,\
+	THUNDER,\
+	CRABHAMMER,\
+	KINESIS,\
+	REFLECT,\
+	BIDE,\
+	BARRAGE,\
+	MEDITATE,\
+	LIGHT_SCREEN,\
+	THUNDER_WAVE,\
+	PSYBEAM,\
+	SUBSTITUTE,\
+	FLASH
 	; end
 
 	dw BANK(MagnetonPicFront), BANK(MagnetonPicBack)

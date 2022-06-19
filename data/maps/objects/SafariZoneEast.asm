@@ -22,6 +22,6 @@ SafariZoneEast_Object:
 	object_event 21, 10, SPRITE_POKE_BALL, STAY, NONE, 6, FULL_RESTORE
 	object_event  3,  7, SPRITE_POKE_BALL, STAY, NONE, 7, MAX_POTION
 	object_event 20, 13, SPRITE_POKE_BALL, STAY, NONE, 8, CARBOS
-	object_event 15, 12, SPRITE_POKE_BALL, STAY, NONE, 9, TM_EGG_BOMB
+	object_event 15, 12, SPRITE_POKE_BALL, STAY, NONE, 9, TM_DOUBLE_EDGE
 
 	def_warps_to SAFARI_ZONE_EAST

@@ -14,7 +14,7 @@ Lab3Text1:
 	jr nz, .got_item
 	ld hl, TM35PreReceiveText
 	call PrintText
-	lb bc, TM_METRONOME, 1
+	lb bc, TM_CRABHAMMER, 1
 	call GiveItem
 	jr nc, .bag_full
 	ld hl, ReceivedTM35Text
