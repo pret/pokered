@@ -343,9 +343,8 @@ BindAnim:
 SlamAnim:
 	battle_anim NO_MOVE, SE_MOVE_MON_HORIZONTALLY
 	battle_anim SLAM, SUBANIM_02, 0, 6
-	battle_anim NO_MOVE, SE_SLIDE_ENEMY_MON_HALF_OFF
+	battle_anim SLUDGE, SUBANIM_14, 1, 6
 	battle_anim NO_MOVE, SE_RESET_MON_POSITION
-	battle_anim NO_MOVE, SE_SHOW_ENEMY_MON_PIC
 	db -1 ; end
 
 VineWhipAnim:
@@ -1125,6 +1124,7 @@ SpikeCannonAnim:
 	db -1 ; end
 
 ConstrictAnim:
+	battle_anim SCRATCH, SUBANIM_02, 0, 4
 	battle_anim THUNDER_WAVE, SUBANIM_23, 0, 6
 	battle_anim CONSTRICT, SUBANIM_23, 0, 6
 	battle_anim CONSTRICT, SUBANIM_23, 0, 6
@@ -1264,8 +1264,8 @@ ExplosionAnim:
 	db -1 ; end
 
 FurySwipesAnim:
-	battle_anim FURY_SWIPES, SUBANIM_0F, 0, 2
-	battle_anim FURY_SWIPES, SUBANIM_0F, 0, 2
+	battle_anim SCRATCH, SUBANIM_0F, 0, 4
+	battle_anim SLEEP_POWDER, SUBANIM_36, 0, 2
 	db -1 ; end
 
 BonemerangAnim:
