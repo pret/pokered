@@ -10,6 +10,29 @@ CeladonDiner_TextPointers:
 	dw CeladonDinerText5
 
 CeladonDinerText1:
+	text_asm
+	ld a, [wd728]
+	bit 6, a
+	jr nz, .noBreak
+	ld hl, CeladonDinerBreakText
+	call PrintText
+	jr .done
+.noBreak
+	ld hl, CeladonDinerOpenText
+	call PrintText
+	ld hl, CeladonDinerMenu
+	call DisplayPokemartNoGreeting
+.done
+	jp TextScriptEnd
+
+CeladonDinerMenu:
+	script_mart FRESH_WATER, SODA_POP, LEMONADE
+
+CeladonDinerOpenText:
+	text_far _CeladonDinerOpenText
+	text_end
+
+CeladonDinerBreakText:
 	text_far _CeladonDinerText1
 	text_end
 

@@ -56,3 +56,9 @@ _CeladonDinerText_491b7::
 	line "I was going to"
 	cont "win it back..."
 	done
+
+_CeladonDinerOpenText::
+	text "Welcome to"
+	line "CELADON DINER!"
+	cont "Fancy a drink?"
+	done
