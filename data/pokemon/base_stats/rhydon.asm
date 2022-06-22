@@ -5,12 +5,12 @@
 
 	db GROUND, ROCK ; type
 	db 60 ; catch rate
-	db 204 ; base exp
+	db 255 ; base exp
 
 	INCBIN "gfx/pokemon/front/rhydon.pic", 0, 1 ; sprite dimensions
 	dw RhydonPicFront, RhydonPicBackSW
 
-	db HORN_ATTACK, STOMP, TAIL_WHIP, FURY_ATTACK ; level 1 learnset
+	db FURY_SWIPES, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset
@@ -28,7 +28,6 @@
 	ICE_BEAM,\
 	BLIZZARD,\
 	HYPER_BEAM,\
-	HI_JUMP_KICK,\
 	THUNDERPUNCH,\
 	ROLLING_KICK,\
 	BARRIER,\

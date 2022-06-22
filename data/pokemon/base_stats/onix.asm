@@ -1,6 +1,6 @@
 	db DEX_ONIX ; pokedex id
 
-	db  35,  45, 160,  70,  30
+	db  55,  25, 180,  85,  80
 	;   hp  atk  def  spd  spc
 
 	db ROCK, GROUND ; type
@@ -10,7 +10,7 @@
 	INCBIN "gfx/pokemon/front/onix.pic", 0, 1 ; sprite dimensions
 	dw OnixPicFront, OnixPicBackSW
 
-	db TACKLE, SCREECH, NO_MOVE, NO_MOVE ; level 1 learnset
+	db TACKLE, HARDEN, GROWL, NO_MOVE ; level 1 learnset
 	db GROWTH_FAST ; growth rate
 
 	; tm/hm learnset
@@ -19,10 +19,12 @@
 	BODY_SLAM,\
 	SLASH,\
 	DOUBLE_EDGE,\
+	AMNESIA,\
 	HYPER_BEAM,\
 	BARRIER,\
 	DRAGON_RAGE,\
 	EARTHQUAKE,\
+	CRABHAMMER,\
 	DIG,\
 	KINESIS,\
 	SWORDS_DANCE,\

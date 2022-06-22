@@ -193,7 +193,6 @@ INCLUDE "engine/battle/scroll_draw_trainer_pic.asm"
 INCLUDE "engine/battle/trainer_ai.asm"
 INCLUDE "engine/battle/draw_hud_pokeball_gfx.asm"
 INCLUDE "gfx/trade.asm"
-INCLUDE "engine/pokemon/evos_moves.asm"
 
 SECTION "Battle Core", ROMX
 
@@ -365,6 +364,10 @@ SECTION "Wild Mons", ROMX
 INCLUDE "engine/overworld/wild_mons.asm"
 ; new code
 INCLUDE "engine/overworld/wild_mon_alt_palettes.asm"
+
+SECTION "Evos Moves", ROMX
+; moved from battle engine 7
+INCLUDE "engine/pokemon/evos_moves.asm"
 
 
 SECTION "Party Sprites", ROMX, BANK[$34]

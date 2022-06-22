@@ -1,9 +1,9 @@
 	db DEX_FEAROW ; pokedex id
 
-	db  65,  90,  65, 100,  61
+	db  85,  90,  65, 100,  61
 	;   hp  atk  def  spd  spc
 
-	db NORMAL, FLYING ; type
+	db FIGHTING, FLYING ; type
 	db 90 ; catch rate
 	db 162 ; base exp
 

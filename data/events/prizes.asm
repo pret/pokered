@@ -37,7 +37,7 @@ PrizeMenuTMsEntries:
 	db "@"
 
 PrizeMenuTMsCost:
-	bcd2 1000
+	bcd2 1500
 	bcd2 2000
-	bcd2 1000
+	bcd2 4000
 	db "@"

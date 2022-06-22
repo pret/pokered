@@ -1,16 +1,16 @@
 	db DEX_BUTTERFREE ; pokedex id
 
-	db  60,  45,  50,  70,  80
+	db  70,  25,  75,  95,  92
 	;   hp  atk  def  spd  spc
 
-	db BUG, FLYING ; type
-	db 45 ; catch rate
+	db BUG, PSYCHIC_TYPE ; type
+	db 105 ; catch rate
 	db 160 ; base exp
 
 	INCBIN "gfx/pokemon/front/butterfree.pic", 0, 1 ; sprite dimensions
 	dw ButterfreePicFront, ButterfreePicBackSW
 
-	db CONFUSION, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
+	db HARDEN, TACKLE, STRING_SHOT, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset

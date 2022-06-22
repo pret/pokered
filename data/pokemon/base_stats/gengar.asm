@@ -15,6 +15,7 @@
 
 	; tm/hm learnset
 	tmhm \
+	ICE_PUNCH,\
 	TOXIC,\
 	BODY_SLAM,\
 	DOUBLE_EDGE,\

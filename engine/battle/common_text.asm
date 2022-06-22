@@ -5,7 +5,7 @@ PrintBeginningBattleText:
 	ld a, [wCurMap]
 	cp POKEMON_TOWER_3F
 	jr c, .notPokemonTower
-	cp POKEMON_TOWER_7F + 1
+	cp POKEMON_TOWER_6F + 1 ; NEW: pokemon on floor 7 are treated as normal wild pokemon since we've passed the restless soul, allows normal marowak encounters
 	jr c, .pokemonTower
 .notPokemonTower
 	ld a, [wEnemyMonSpecies2]

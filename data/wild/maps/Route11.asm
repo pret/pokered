@@ -7,7 +7,7 @@ Route11WildMons:
 	db 13, DROWZEE
 	db 14, DROWZEE
 	db 15, SCYTHER
-	db 17, SCYTHER
+	db 16, SCYTHER
 	db 11, TAUROS
 	db 15, TAUROS
 	end_grass_wildmons

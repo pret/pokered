@@ -15,6 +15,7 @@
 
 	; tm/hm learnset
 	tmhm \
+	ICE_PUNCH,\
 	TOXIC,\
 	DOUBLE_EDGE,\
 	AURORA_BEAM,\

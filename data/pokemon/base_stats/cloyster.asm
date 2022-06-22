@@ -4,13 +4,13 @@
 	;   hp  atk  def  spd  spc
 
 	db WATER, ICE ; type
-	db 60 ; catch rate
+	db 70 ; catch rate
 	db 203 ; base exp
 
 	INCBIN "gfx/pokemon/front/cloyster.pic", 0, 1 ; sprite dimensions
 	dw CloysterPicFront, CloysterPicBackSW
 
-	db WITHDRAW, SUPERSONIC, CLAMP, AURORA_BEAM ; level 1 learnset
+	db TACKLE, WATER_GUN, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset

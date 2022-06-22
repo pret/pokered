@@ -10,7 +10,7 @@
 	INCBIN "gfx/pokemon/front/dratini.pic", 0, 1 ; sprite dimensions
 	dw DratiniPicFront, DratiniPicBackSW
 
-	db WRAP, LEER, NO_MOVE, NO_MOVE ; level 1 learnset
+	db WRAP, LEER, ROAR, NO_MOVE ; level 1 learnset
 	db GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
