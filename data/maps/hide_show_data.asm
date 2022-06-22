@@ -143,7 +143,7 @@ MapHSPointers:
 	dw NoHS
 	dw NoHS
 	dw NoHS
-	dw NoHS
+	dw CeladonHotelHS
 	dw NoHS
 	dw NoHS
 	dw PokemonTower2FHS
@@ -587,6 +587,8 @@ VermilionDockHS:
 	db VERMILION_DOCK, $01, HIDE
 CeruleanRocketHouse1FHS:
 	db CERULEAN_ROCKET_HOUSE_1F, $01, SHOW
+CeladonHotelHS:
+	db CELADON_HOTEL, $05, SHOW
 	db $FF, $01, SHOW ; end
 	assert_table_length NUM_HS_OBJECTS + 1
 

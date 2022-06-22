@@ -129,7 +129,8 @@
 ; Celadon City events
 	const_next $180
 	const EVENT_GOT_TM41
-	const_skip 11
+	const EVENT_GOT_LAPRAS_EARLY
+	const_skip 10
 	const EVENT_GOT_TM13
 	const EVENT_GOT_TM48
 	const EVENT_GOT_TM49

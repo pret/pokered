@@ -312,11 +312,17 @@ SilphCo7TrainerHeader3:
 SilphCo7Text1:
 ; lapras guy
 	text_asm
+	ld a, HS_LAPRAS_GUY_CELADON
+	ld [wMissableObjectIndex], a
+	predef HideObject
+	CheckEventHL EVENT_GOT_LAPRAS_EARLY
+	jr nz, .gotLaprasAlready
 	ld a, [wd72e]
 	bit 0, a ; got lapras?
 	jr z, .givelapras
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .savedsilph
+.noItemToGive	
 	ld hl, .LaprasGuyText
 	call PrintText
 	jr .done
@@ -340,6 +346,31 @@ SilphCo7Text1:
 	call PrintText
 .done
 	jp TextScriptEnd
+.gotLaprasAlready
+	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
+	jr nz, .savedsilph
+	ld a, [wd72e]
+	bit 0, a ; got his item already?
+	jr nz, .noItemToGive
+	ld hl, .LaprasGuyAlreadyText
+	call PrintText
+	; give rare candy
+	lb bc, RARE_CANDY, 1
+	call GiveItem
+	jr nc, .noRoom
+	ld hl, .LaprasGuyReceivedItemText
+	call PrintText
+	ld hl, .LaprasGuyGoodLuckText
+	call PrintText
+	ld hl, wd72e
+	set 0, [hl]
+	jr .done
+.noRoom
+	ld hl, .LaprasGuyNoBagRoomText
+	call PrintText
+	jr .done
+
+
 
 .MeetLaprasGuyText
 	text_far _MeetLaprasGuyText
@@ -355,6 +386,23 @@ SilphCo7Text1:
 
 .LaprasGuySavedText
 	text_far _LaprasGuySavedText
+	text_end
+
+.LaprasGuyAlreadyText
+	text_far _LaprasGuySilphCoAlreadyText
+	text_end
+
+.LaprasGuyReceivedItemText
+	text_far _LastTwoGurusReceivedItemText
+	sound_get_item_1
+	text_end
+
+.LaprasGuyGoodLuckText
+	text_far _SafariZoneEntranceText_753c0
+	text_end
+
+.LaprasGuyNoBagRoomText
+	text_far _TM34NoRoomText
 	text_end
 
 SilphCo7Text2:

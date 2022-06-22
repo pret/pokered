@@ -11,6 +11,7 @@ CeladonHotel_ScriptPointers:
 	dw CheckFightingMapTrainers
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
+	dw CeladonLaprasGuyLeaves
 
 
 CeladonHotel_TextPointers:
@@ -18,6 +19,7 @@ CeladonHotel_TextPointers:
 	dw CeladonHotelText1
 	dw CeladonHotelText2
 	dw CeladonHotelText3
+	dw CeladonLaprasGuyText
 
 CeladonHotelTrainerHeaders:
 	def_trainers 2
@@ -87,4 +89,70 @@ CeladonHotelText2:
 
 CeladonHotelText3:
 	text_far _CeladonHotelText3
+	text_end
+
+CeladonLaprasGuyText:
+	text_asm
+	CheckEventHL EVENT_BEAT_ROCKET_HIDEOUT_GIOVANNI
+	jr nz, .celadonRocketsGone
+	ld hl, CeladonLaprasGuyIntro
+	call PrintText
+	jr .done
+.celadonRocketsGone
+	ld hl, CeladonLaprasGuyReady
+	call PrintText
+	lb bc, LAPRAS, 27
+	call GivePokemon
+	jr nc, .noBoxRoom
+	ld a, [wSimulatedJoypadStatesEnd]
+	and a
+	call z, WaitForTextScrollButtonPress
+	ld hl, CeladonHeresYourLaprasText
+	call PrintText
+	SetEvent EVENT_GOT_LAPRAS_EARLY
+	ld a, [wSimulatedJoypadStatesEnd]
+	and a
+	call z, WaitForTextScrollButtonPress
+	ld hl, CeladonLaprasGuyAfter
+	call PrintText
+	ld a, 3
+	ld [wCeladonHotelCurScript], a
+	jr .done
+.noBoxRoom
+	ld hl, CeladonLaprasGuyNoBoxRoom
+	call PrintText
+.done
+	jp TextScriptEnd
+
+CeladonLaprasGuyLeaves:
+	; fade out, set hide show flag, fade back in
+	call GBFadeOutToWhite
+	ld a, HS_LAPRAS_GUY_CELADON
+	ld [wMissableObjectIndex], a
+	predef HideObject
+	call Delay3
+	call GBFadeInFromWhite
+	xor a
+	ld [wCeladonHotelCurScript], a
+	ld [wCurMapScript], a
+	ret
+
+CeladonLaprasGuyIntro:
+	text_far _CeladonLaprasGuyIntro
+	text_end
+
+CeladonLaprasGuyReady:
+	text_far _CeladonLaprasGuyReady
+	text_end
+
+CeladonHeresYourLaprasText:
+	text_far _HeresYourLaprasText
+	text_end
+
+CeladonLaprasGuyNoBoxRoom:
+	text_far _SwitchPCBoxesFirst
+	text_end
+
+CeladonLaprasGuyAfter:
+	text_far _CeladonLaprasGuyAfter
 	text_end
