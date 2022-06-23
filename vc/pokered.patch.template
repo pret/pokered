@@ -86,17 +86,17 @@ Mode = 1
 Address = {HEX @+1}
 Fixcode = {PATCH +1}
 
-[Network17@Wireless_ExchangeBytes_1_unknown_Type5]
+[Network17@Wireless_ExchangeBytes_RNG_state_unknown_Type5]
 Mode = 2
 Address = {HEX @}
 Type = 5
 
-[Network424@Wireless_ExchangeBytes_2]
+[Network424@Wireless_ExchangeBytes_party_structs]
 Mode = 2
 Address = {HEX @}
 Type = 4
 
-[Network200@Wireless_ExchangeBytes_3]
+[Network200@Wireless_ExchangeBytes_patch_lists]
 Mode = 2
 Address = {HEX @}
 Type = 4
