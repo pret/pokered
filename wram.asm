@@ -1109,7 +1109,15 @@ wGymCityName:: ds 17
 
 wGymLeaderName:: ds NAME_LENGTH
 
+UNION
 ds 16 ;used to be wItemList::
+NEXTU
+
+wItemFinderItemDirection::db
+wSawItemFinderText::db
+; 14 bytes remaining in this empty space
+
+ENDU
 
 wListPointer:: dw
 

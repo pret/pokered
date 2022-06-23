@@ -1,4 +1,16 @@
 EmotionBubble:
+	call EmotionBubbleCommon
+	ld c, 60
+	call DelayFrames
+	jp EmotionBubbleCommon2
+
+EmotionBubbleQuick:
+	call EmotionBubbleCommon
+	ld c, 30
+	call DelayFrames
+	jp EmotionBubbleCommon2
+
+EmotionBubbleCommon:
 	ld a, [wWhichEmotionBubble]
 	ld c, a
 	ld b, 0
@@ -54,9 +66,12 @@ EmotionBubble:
 	ld de, EmotionBubblesOAM
 	xor a
 	call WriteOAMBlock
-	ld c, 60
-	call DelayFrames
 	pop af
+	ld d, a
+	ret
+
+EmotionBubbleCommon2:
+	ld a, d
 	ld [wUpdateSpritesEnabled], a
 	call DelayFrame
 	jp UpdateSprites

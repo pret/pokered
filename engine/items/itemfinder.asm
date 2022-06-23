@@ -40,6 +40,7 @@ HiddenItemNear:
 	add 5
 	cp e
 	jr c, .loop
+	call GetItemFinderFacing ; NEW: stores which direction the item is from the player for later
 	scf
 	ret
 
@@ -49,4 +50,68 @@ Sub5ClampTo0:
 	cp $f0
 	ret c
 	xor a
+	ret
+
+; NEW: Code for turning to face the direction of the item
+; d = hidden item's y coord
+; e = hidden item's x coord
+GetItemFinderFacing:
+	call CheckExactCoordMatch
+	jr c, .exactMatch
+	ld bc, 0
+	ld a, [wYCoord] ; player's y coord
+	sub d ; subtract hidden item's y value
+	jr nc, .next
+	cpl
+	inc a
+	inc b
+.next
+	ld d, a ; how far away in y direction the item is
+	ld a, [wXCoord]
+	sub e
+	jr nc, .next2
+	cpl
+	inc a
+	inc c
+.next2
+	ld e, a ; how far away in x direction the item is
+	ld a, d
+	sub e
+	jr nc, .upOrDown
+.leftOrRight
+	ld a, c
+	and a
+	jr z, .left
+	ld a, PLAYER_DIR_RIGHT
+	jr .done
+.upOrDown
+	ld a, b
+	and a
+	jr z, .up
+	ld a, PLAYER_DIR_DOWN
+	jr .done
+.left
+	ld a, PLAYER_DIR_LEFT
+	jr .done
+.up
+	ld a, PLAYER_DIR_UP
+	jr .done
+.exactMatch
+	xor a
+.done
+  	ld [wItemFinderItemDirection], a
+  	ret
+
+	
+CheckExactCoordMatch:
+	ld a, [wYCoord] ; player's y coord
+	sub d ; item's y value
+	jr nz, .clearCF
+	ld a, [wXCoord] ; player's x coord
+	sub e ; item's x value
+	jr nz, .clearCF
+	scf
+	ret
+.clearCF
+	and a ; clear carry flag
 	ret
