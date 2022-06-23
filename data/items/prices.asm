@@ -20,14 +20,14 @@ ItemPrices::
 	bcd3 1500  ; HYPER_POTION
 	bcd3 700   ; SUPER_POTION
 	bcd3 300   ; POTION
-	bcd3 0     ; BOULDERBADGE
-	bcd3 0     ; CASCADEBADGE
-	bcd3 0     ; THUNDERBADGE
-	bcd3 0     ; RAINBOWBADGE
-	bcd3 0     ; SOULBADGE
-	bcd3 0     ; MARSHBADGE
-	bcd3 0     ; VOLCANOBADGE
-	bcd3 0     ; EARTHBADGE
+	bcd3 0     ; SAFARI_BAIT
+	bcd3 0     ; SAFARI_ROCK
+	bcd3 0     ; UNUSED_ITEM1
+	bcd3 0     ; UNUSED_ITEM2
+	bcd3 0     ; UNUSED_ITEM3
+	bcd3 0     ; UNUSED_ITEM4
+	bcd3 0     ; UNUSED_ITEM5
+	bcd3 0     ; UNUSED_ITEM6
 	bcd3 550   ; ESCAPE_ROPE
 	bcd3 350   ; REPEL
 	bcd3 0     ; OLD_AMBER

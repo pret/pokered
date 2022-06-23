@@ -27,16 +27,14 @@
 	const HYPER_POTION  ; $12
 	const SUPER_POTION  ; $13
 	const POTION        ; $14
-	const BOULDERBADGE  ; $15
-	const CASCADEBADGE  ; $16
-SAFARI_BAIT EQU $15 ; overload
-SAFARI_ROCK EQU $16 ; overload
-	const THUNDERBADGE  ; $17
-	const RAINBOWBADGE  ; $18
-	const SOULBADGE     ; $19
-	const MARSHBADGE    ; $1A
-	const VOLCANOBADGE  ; $1B
-	const EARTHBADGE    ; $1C
+	const SAFARI_BAIT   ; $15
+	const SAFARI_ROCK   ; $16
+	const UNUSED_ITEM1  ; $17
+	const UNUSED_ITEM2  ; $18
+	const UNUSED_ITEM3  ; $19
+	const UNUSED_ITEM4  ; $1A
+	const UNUSED_ITEM5  ; $1B
+	const UNUSED_ITEM6  ; $1C
 	const ESCAPE_ROPE   ; $1D
 	const REPEL         ; $1E
 	const OLD_AMBER     ; $1F
@@ -119,6 +117,15 @@ NUM_FLOORS EQU const_value - 1 - NUM_ITEMS
 	const SAFARI_CLASSIC  ; 66
 	const SAFARI_RANGER_HUNT ;67
 	const SAFARI_FREE_ROAM  ;68
+
+	const BOULDERBADGE  ; $69
+	const CASCADEBADGE  ; $6A
+	const THUNDERBADGE  ; $6B
+	const RAINBOWBADGE  ; $6C
+	const SOULBADGE     ; $6D
+	const MARSHBADGE    ; $6E
+	const VOLCANOBADGE  ; $6F
+	const EARTHBADGE    ; $70
 
 	const_next $C4
 
