@@ -419,16 +419,16 @@ SlotMachine_CheckForMatches:
 	call SlotMachine_AnimWheel3
 	call DelayFrame
 	jp SlotMachine_CheckForMatches
-.foundMatch
-	ld a, [wSlotMachineFlags]
-	and $c0
-	jr z, .rollWheel3DownByOneSymbol ; roll wheel if player isn't allowed to win
-	and $80
-	jr nz, .acceptMatch
+.foundMatch ; NEW: always accept matches
+	;ld a, [wSlotMachineFlags]
+	;and $c0
+	;jr z, .rollWheel3DownByOneSymbol ; roll wheel if player isn't allowed to win
+	;and $80
+	;jr nz, .acceptMatch
 ; if 7/bar matches aren't enabled and the match was a 7/bar symbol, roll wheel
-	ld a, [hl]
-	cp HIGH(SLOTSBAR) + 1
-	jr c, .rollWheel3DownByOneSymbol
+	;ld a, [hl]
+	;cp HIGH(SLOTSBAR) + 1
+	;jr c, .rollWheel3DownByOneSymbol
 .acceptMatch
 	ld a, [hl]
 	sub $2
@@ -506,16 +506,16 @@ SlotRewardPointers:
 	dw SlotReward15Text
 
 SlotReward300Text:
-	db "300@"
+	db "500@"
 
 SlotReward100Text:
-	db "100@"
+	db "200@"
 
 SlotReward8Text:
-	db "8@"
+	db "9@"
 
 SlotReward15Text:
-	db "15@"
+	db "50@"
 
 NotThisTimeText:
 	text_far _NotThisTimeText
@@ -569,7 +569,7 @@ SlotReward8Func:
 	dec [hl]
 .skip
 	ld b, $2
-	ld de, 8
+	ld de, 9
 	ret
 
 SlotReward15Func:
@@ -580,7 +580,7 @@ SlotReward15Func:
 	dec [hl]
 .skip
 	ld b, $4
-	ld de, 15
+	ld de, 50
 	ret
 
 SlotReward100Func:
@@ -589,7 +589,7 @@ SlotReward100Func:
 	xor a
 	ld [wSlotMachineFlags], a
 	ld b, $8
-	ld de, 100
+	ld de, 200
 	ret
 
 SlotReward300Func:
@@ -605,7 +605,7 @@ SlotReward300Func:
 .skip
 	ld [wSlotMachineAllowMatchesCounter], a
 	ld b, $14
-	ld de, 300
+	ld de, 500
 	ret
 
 YeahText:
@@ -663,7 +663,14 @@ SlotMachine_PayCoinsToPlayer:
 	ld hl, wTempCoins1
 	xor a
 	ld [hli], a
-	inc a
+	ld a, [wSlotMachineWinningSymbol]
+	cp HIGH(SLOTSBAR) + 1
+	jr c, .tenAtATime
+	ld a, 1
+	jr .loadTemp
+.tenAtATime
+	ld a, 10
+.loadTemp
 	ld [hl], a
 
 	ld a, 5
@@ -678,7 +685,15 @@ SlotMachine_PayCoinsToPlayer:
 	ld h, a
 	or l
 	ret z
+
+	ld a, [wSlotMachineWinningSymbol]
+	cp HIGH(SLOTSBAR) + 1
+	jr c, .tenAtATime2
 	ld de, -1
+	jr .doSubtract
+.tenAtATime2
+	ld de, -10
+.doSubtract
 	add hl, de
 	ld a, l
 	ld [wPayoutCoins + 1], a
@@ -702,10 +717,10 @@ SlotMachine_PayCoinsToPlayer:
 .skip1
 	ld [wAnimCounter], a
 	ld a, [wSlotMachineWinningSymbol]
-	cp HIGH(SLOTSBAR) + 1
+	cp HIGH(SLOTSCHERRY) - 2
 	ld c, 8
-	jr nc, .skip2
-	srl c ; c = 4 (make the the coins transfer faster if the symbol was 7 or bar)
+	jr z, .skip2
+	srl c ; c = 4 (make the the coins transfer faster if the symbol wasn't cherries)
 .skip2
 	call DelayFrames
 	jr .loop

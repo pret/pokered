@@ -1166,9 +1166,9 @@ ItemUseMedicine:
 	cp SUPER_POTION
 	ld b, 200 ; Hyper Potion heal amount
 	jr c, .addHealAmount
-	ld b, 50 ; Super Potion heal amount
+	ld b, 100 ; Super Potion heal amount
 	jr z, .addHealAmount
-	ld b, 20 ; Potion heal amount
+	ld b, 50 ; Potion heal amount
 .addHealAmount
 	pop de
 	pop hl
