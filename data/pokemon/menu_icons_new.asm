@@ -23,7 +23,7 @@ MonPartyDataNew:
 	db ICON_BIRD      ; Spearow
 	db ICON_BIRD      ; Fearow
 	db ICON_SNAKE     ; Ekans
-	db ICON_SNAKE     ; Arbok *
+	db ICON_SNAKE2    ; Arbok
 	db ICON_FAIRY     ; Pikachu
 	db ICON_FAIRY     ; Raichu
 	db ICON_MON       ; Sandshrew
@@ -55,8 +55,8 @@ MonPartyDataNew:
 	db ICON_CAT       ; Persian
 	db ICON_MON2      ; Psyduck
 	db ICON_MON       ; Golduck
-	db ICON_FUZZBALL  ; Mankey *
-	db ICON_FUZZBALL  ; Primeape *
+	db ICON_FUZZBALL  ; Mankey
+	db ICON_FUZZBALL  ; Primeape
 	db ICON_CAT       ; Growlithe
 	db ICON_QUADRUPED2; Arcanine
 	db ICON_WATER     ; Poliwag
@@ -71,8 +71,8 @@ MonPartyDataNew:
 	db ICON_GRASS     ; Bellsprout
 	db ICON_GRASS     ; Weepinbell
 	db ICON_GRASS     ; Victreebel
-	db ICON_WATER     ; Tentacool
-	db ICON_WATER     ; Tentacruel
+	db ICON_JELLYFISH ; Tentacool
+	db ICON_JELLYFISH ; Tentacruel
 	db ICON_ROCK      ; Geodude
 	db ICON_ROCK      ; Graveler
 	db ICON_ROCK      ; Golem
@@ -83,8 +83,8 @@ MonPartyDataNew:
 	db ICON_ROBOT     ; Magnemite
 	db ICON_ROBOT     ; Magneton
 	db ICON_BIRD      ; Farfetch'd
-	db ICON_FUZZBALL  ; Doduo *
-	db ICON_FUZZBALL  ; Dodrio *
+	db ICON_FUZZBALL  ; Doduo
+	db ICON_FUZZBALL  ; Dodrio
 	db ICON_WATER     ; Seel
 	db ICON_WATER     ; Dewgong
 	db ICON_AMORPHOUS ; Grimer
@@ -113,7 +113,7 @@ MonPartyDataNew:
 	db ICON_QUADRUPED2; Rhyhorn
 	db ICON_MON       ; Rhydon
 	db ICON_FAIRY     ; Chansey
-	db ICON_FUZZBALL  ; Tangela *
+	db ICON_AMORPHOUS ; Tangela
 	db ICON_MON       ; Kangaskhan
 	db ICON_WATER     ; Horsea
 	db ICON_WATER     ; Seadra
@@ -129,7 +129,7 @@ MonPartyDataNew:
 	db ICON_HUMANOID_INSECT ; Pinsir
 	db ICON_QUADRUPED2; Tauros
 	db ICON_WATER     ; Magikarp
-	db ICON_SNAKE     ; Gyarados *
+	db ICON_SNAKE2    ; Gyarados
 	db ICON_WATER     ; Lapras
 	db ICON_AMORPHOUS ; Ditto
 	db ICON_CAT       ; Eevee

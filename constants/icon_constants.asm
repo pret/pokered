@@ -36,6 +36,9 @@
 	const ICON_BIRD_OLD  ; 31
 	const ICON_CAT       ; 32
 	const ICON_BIRD2     ; 33
+	const ICON_SNAKE2    ; 34
+	const ICON_MISSINGNO ; 35
+	const ICON_JELLYFISH ; 36
 
 
 ICON_TRADEBUBBLE EQU $e

@@ -717,7 +717,7 @@ SlotMachine_PayCoinsToPlayer:
 .skip1
 	ld [wAnimCounter], a
 	ld a, [wSlotMachineWinningSymbol]
-	cp HIGH(SLOTSCHERRY) - 2
+	cp LOW(SLOTSCHERRY)
 	ld c, 8
 	jr z, .skip2
 	srl c ; c = 4 (make the the coins transfer faster if the symbol wasn't cherries)
