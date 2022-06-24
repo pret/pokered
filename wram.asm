@@ -796,6 +796,18 @@ wOptionsPage2Option4CursorX:: db
 wOptionsPage2Option5CursorX:: db
 wOptionsPage2Option6CursorX:: db
 ; options page 3
+wOptionsPage3Option1CursorX:: db
+wOptionsPage3Option2CursorX:: db
+wOptionsPage3Option3CursorX:: db
+wOptionsPage3Option4CursorX:: db
+; options page 4
+wOptionsPage4Option1CursorX:: db
+wOptionsPage4Option2CursorX:: db
+wOptionsPage4Option3CursorX:: db
+wOptionsPage4Option4CursorX:: db
+wOptionsPage4Option5CursorX:: db
+wOptionsPage4Option6CursorX:: db
+; options page 5
 wOptionsNidorinoSpriteCursorX:: db
 wOptionsGolbatSpriteCursorX:: db
 wOptionsMankeySpriteCursorX:: db
@@ -803,7 +815,7 @@ wOptionsArcanineSpriteCursorX:: db
 wOptionsExeggutorSpriteCursorX:: db
 wOptionsMewtwoSpriteCursorX:: db
 
-;14 bytes remaining in union
+;6 bytes remaining in union
 
 NEXTU
 ; tile ID of the badge number being drawn
@@ -895,7 +907,7 @@ wRightGBMonSpecies:: db
 ; bit 6: tried pushing against boulder once (you need to push twice before it will move)
 wFlags_0xcd60:: db
 
-	ds 1
+wInGame:: db ; whether we're in-game rather than in the main menu before loading a game
 
 wListWithTMText:: db ; whether the current list menu can contain TMs and should print their moves
 wTMTextShown:: db ; whether text for a TM is visible in a menu
@@ -1841,7 +1853,7 @@ wOptions:: db
 
 wObtainedBadges:: flag_array NUM_BADGES
 
-	ds 1
+ds 1
 
 ; bit 0: If 0, limit the delay to 1 frame. Note that this has no effect if
 ;        the delay has been disabled entirely through bit 1 of this variable
@@ -2417,8 +2429,17 @@ wSpriteOptions:: db
 ; bit 2 -> Exeggutor sprite version: 0 = Y, 1 = RB
 wSpriteOptions2:: db
 
+; bits 0-1 = Palette setting 
+; 00 = Original
+; 01 = SGB
+; 11 = Yellow
+; bit 2 = Alt pokemon colors on or off
+; bit 3 = Is audio panning on or off
+; bit 4 = Is Bike music enabled
 
-	ds 4
+wOptions2:: db
+
+	ds 3
 
 wPlayTimeHours:: db
 wPlayTimeMaxed:: db

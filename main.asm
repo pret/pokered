@@ -378,10 +378,18 @@ SECTION "Party Sprites", ROMX, BANK[$34]
 PartyMonSprites1: INCBIN "gfx/icons/menusprites1.2bpp"
 PartyMonSprites2: INCBIN "gfx/icons/menusprites2.2bpp"
 
+SECTION "GBC Mode Code", ROMX
+
+;gbcnote: include the bgmap files from pokemon yellow
+INCLUDE "data/gbc/bg_map_attributes.asm"
+INCLUDE "engine/gbc/bg_map_attributes.asm"
+INCLUDE "engine/gfx/scroll_gfx_horizontally.asm"
+
 
 SECTION "newCode", ROMX
 
 INCLUDE "engine/gfx/front_sprite_options.asm"
+INCLUDE "engine/menus/options_menu2.asm"
 INCLUDE "engine/menus/sprite_options_menu.asm"
 INCLUDE "engine/menus/sprite_options_menu2.asm"
 INCLUDE "engine/gfx/mon_icons2.asm"
@@ -390,8 +398,4 @@ INCLUDE "engine/overworld/select_button_functionality.asm"
 INCLUDE "engine/overworld/use_another_repel.asm"
 INCLUDE "engine/menus/wrap_list_menu.asm"
 INCLUDE "engine/items/last_two_fishing_gurus_script.asm"
-;gbcnote: include the bgmap files from pokemon yellow
-INCLUDE "data/gbc/bg_map_attributes.asm"
-INCLUDE "engine/gbc/bg_map_attributes.asm"
-INCLUDE "engine/gfx/scroll_gfx_horizontally.asm"
 INCLUDE "engine/overworld/check_map_connections.asm"

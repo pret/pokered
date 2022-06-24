@@ -197,6 +197,8 @@ SaveSAVtoSRAM0:
 	ld a, $1
 	ld [MBC1SRamBankingMode], a
 	ld [MBC1SRamBank], a
+	ld a, [wOptions2]
+	ld [sOptions2], a
 	ld hl, wPlayerName
 	ld de, sPlayerName
 	ld bc, NAME_LENGTH

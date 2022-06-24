@@ -316,6 +316,8 @@ StartNewGameDebug:
 
 ; enter map after using a special warp or loading the game from the main menu
 SpecialEnterMap::
+	ld a, 1
+	ld [wInGame], a
 	xor a
 	ldh [hJoyPressed], a
 	ldh [hJoyHeld], a
@@ -496,7 +498,7 @@ DisplayOptionMenu:
 	ld a, SFX_PRESS_AB
 	call PlaySound
 	call ClearScreen
-	callfar DisplaySpriteOptions
+	callfar DisplayOptions2
 .exitMenu
 	ld a, SFX_PRESS_AB
 	call PlaySound
@@ -708,14 +710,8 @@ CheckForPlayerNameInSRAM:
 	ld a, $1
 	ld [MBC1SRamBankingMode], a
 	ld [MBC1SRamBank], a
-	ld b, NAME_LENGTH
-	ld hl, sPlayerName
-.loop
-	ld a, [hli]
-	cp "@"
-	jr z, .found
-	dec b
-	jr nz, .loop
+	call CheckSaveFileExists
+	jr c, .found
 ; not found
 	xor a
 	ld [MBC1SRamEnable], a

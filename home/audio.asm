@@ -24,6 +24,10 @@ PlayDefaultMusicCommon::
 	jr z, .walking
 	cp $2
 	jr z, .surfing 
+	ld a, [wOptions2]
+	bit BIT_BIKE_MUSIC, a
+	jr z, .bikeMusic ; jump if bike music is enabled
+	; else only play bike music if in cycling road
 	ld a, [wd732] ; forcibly riding bike (cycling road)
 	bit 5, a
 	jr nz, .bikeMusic

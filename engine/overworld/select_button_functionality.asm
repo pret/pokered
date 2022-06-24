@@ -27,6 +27,10 @@ CheckForRodBike::
 	ld a, [wd732]
 	bit 5, a
 	ret nz
+	; do nothing if surfing
+	ld a, [wWalkBikeSurfState]
+	cp 2
+	ret z
 	;else check if bike is in bag
 	ld b, BICYCLE
 	push bc

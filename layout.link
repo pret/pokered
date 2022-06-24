@@ -190,6 +190,7 @@ ROMX $30
 	"Pics 10"
 ROMX $34
 	"Party Sprites"
+	"GBC Mode Code"
 ROMX $35
     "newCode"
 WRAM0

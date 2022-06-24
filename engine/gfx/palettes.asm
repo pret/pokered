@@ -343,6 +343,9 @@ DeterminePaletteIDOutOfBattle:
 	ld a, [wIsAltPalettePkmn]
 	and a
 	jr z, .defaultPalette
+	ld a, [wOptions2]
+	bit BIT_ALT_PKMN_PALETTES, a ; do we have alt palettes enabled
+	jr z, .defaultPalette ; if not show default palettes always
 	ld hl, AltMonsterPalettes ; not just for Pokemon, Trainers use it too
 	jr .usePalette
 .defaultPalette
@@ -491,7 +494,13 @@ LoadSGB:
 	xor a
 	ld [wCopyingSGBTileData], a
 	ld de, PalTrnPacket
+	call GetPalettes
+	jr c, .gbcPalettes
 	ld hl, SuperPalettes
+	jr .gotPalettes
+.gbcPalettes
+	ld hl, GBCBasePalettes
+.gotPalettes
 	call CopyGfxToSuperNintendoVRAM
 	call ClearVram
 	ld hl, MaskEnCancelPacket
@@ -661,27 +670,18 @@ SendSGBPackets:
 
 
 ; original function for monochromatic color gbc palettes
-InitGBCPalettes:
-	ld a, $80 ; index 0 with auto-increment
-	ldh [rBGPI], a
-	inc hl
-	ld c, $20
-.loop
-	ld a, [hli]
-	inc hl
-	add a
-	add a
-	add a
-	ld de, SuperPalettes
-	add e
-	jr nc, .noCarry
-	inc d
-.noCarry
-	ld a, [de]
-	ldh [rBGPD], a
-	dec c
-	jr nz, .loop
+GetPalettes:
+	ld a, [wOptions2]
+	and %11
+	cp 3
+	jr z, .gbcPalettes
+	and a
+	jr .done
+.gbcPalettes
+	scf
+.done
 	ret
+
 
 InitGBCPalettesNew:	;gbcnote - updating this to work with the Yellow code
 	ld a, [hl]
@@ -737,7 +737,13 @@ GetGBCBasePalAddress:: ;gbcnote - new function
 	add hl, hl
 	add hl, hl
 	add hl, hl
+	call GetPalettes
+	jr c, .gbcPalettes
+	ld de, SuperPalettes
+	jr .gotPalettes
+.gbcPalettes
 	ld de, GBCBasePalettes
+.gotPalettes
 	add hl, de
 	ld a, l
 	ld e, a
@@ -754,21 +760,33 @@ DMGPalToGBCPal::	;gbcnote - new function
 ; de = address of GBC base palette
 	and a
 	jr nz, .notBGP
+	ld a, [wOptions2]
+	and %11 
+	jr nz, .notOG1 ; if this value is non-zero we're not using OG palettes on GBC
+	ld de, GBC_OGPalettes_BGOBJ1
+.notOG1
 	ld a, [rBGP]
 	ld [wLastBGP], a
-	;ld de, GBC_OGPalettes_BGOBJ1
 	jr .convert
 .notBGP
 	dec a
 	jr nz, .notOBP0
+	ld a, [wOptions2]
+	and %11 
+	jr nz, .notOG2 ; if this value is non-zero we're not using OG palettes on GBC
+	ld de, GBC_OGPalettes_OBJ0
+.notOG2
 	ld a, [rOBP0]
 	ld [wLastOBP0], a
-	;ld de, GBC_OGPalettes_OBJ0
 	jr .convert
 .notOBP0
+	ld a, [wOptions2]
+	and %11 
+	jr nz, .notOG3 ; if this value is non-zero we're not using OG palettes on GBC
+	ld de, GBC_OGPalettes_BGOBJ1
+.notOG3
 	ld a, [rOBP1]
 	ld [wLastOBP1], a
-	;ld de, GBC_OGPalettes_BGOBJ1
 .convert
 ;"A" now holds the palette data
 color_index = 0

@@ -95,6 +95,24 @@ rLCDC_DEFAULT EQU %11100011
 
 	ei
 
+	ld a, SRAM_ENABLE
+	ld [MBC1SRamEnable], a
+	ld a, $1
+	ld [MBC1SRamBankingMode], a
+	ld [MBC1SRamBank], a
+	ld b, NAME_LENGTH
+	ld hl, sPlayerName
+.nameCheckLoop
+	; by checking if a name has been saved we can know if a save file was created
+	call CheckSaveFileExists
+	jr nc, .skipLoad
+	ld a, [sOptions2]
+	ld [wOptions2], a
+.skipLoad
+	xor a
+	ld [MBC1SRamBankingMode], a
+	ld [MBC1SRamEnable], a
+
 	predef LoadSGB
 
 	ld a, BANK(SFX_Shooting_Star)
@@ -135,3 +153,19 @@ StopAllSounds::
 	ld [wLastMusicSoundID], a
 	dec a
 	jp PlaySound
+
+; assumes SRAM has been enabled first
+CheckSaveFileExists::
+	ld b, NAME_LENGTH
+	ld hl, sPlayerName
+.loop
+	ld a, [hli]
+	cp "@"
+	jr z, .found
+	dec b
+	jr nz, .loop
+	and a
+	ret
+.found
+	scf
+	ret	
