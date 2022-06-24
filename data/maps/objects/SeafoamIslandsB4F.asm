@@ -1,3 +1,8 @@
+	object_const_def
+	const SEAFOAMISLANDSB4F_BOULDER1
+	const SEAFOAMISLANDSB4F_BOULDER2
+	const SEAFOAMISLANDSB4F_ARTICUNO
+
 SeafoamIslandsB4F_Object:
 	db $7d ; border block
 
@@ -8,12 +13,12 @@ SeafoamIslandsB4F_Object:
 	warp_event 25,  4, SEAFOAM_ISLANDS_B3F, 3
 
 	def_bg_events
-	bg_event  9, 15, 4 ; SeafoamIslands5Text4
-	bg_event 23,  1, 5 ; SeafoamIslands5Text5
+	bg_event  9, 15, TEXT_SEAFOAMISLANDSB4F_BOULDERS_SIGN
+	bg_event 23,  1, TEXT_SEAFOAMISLANDSB4F_DANGER_SIGN
 
 	def_object_events
-	object_event  4, 15, SPRITE_BOULDER, STAY, NONE, 1 ; person
-	object_event  5, 15, SPRITE_BOULDER, STAY, NONE, 2 ; person
-	object_event  6,  1, SPRITE_BIRD, STAY, DOWN, 3, ARTICUNO, 50
+	object_event  4, 15, SPRITE_BOULDER, STAY, NONE, TEXT_SEAFOAMISLANDSB4F_BOULDER1
+	object_event  5, 15, SPRITE_BOULDER, STAY, NONE, TEXT_SEAFOAMISLANDSB4F_BOULDER2
+	object_event  6,  1, SPRITE_BIRD, STAY, DOWN, TEXT_SEAFOAMISLANDSB4F_ARTICUNO, ARTICUNO, 50
 
 	def_warps_to SEAFOAM_ISLANDS_B4F

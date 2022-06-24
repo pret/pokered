@@ -2,28 +2,29 @@ RedsHouse1F_Script:
 	jp EnableAutoTextBoxDrawing
 
 RedsHouse1F_TextPointers:
-	dw RedsHouse1FMomText
-	dw RedsHouse1FTVText
+	def_text_pointers
+	dw_const RedsHouse1FMomText, TEXT_REDSHOUSE1F_MOM
+	dw_const RedsHouse1FTVText,  TEXT_REDSHOUSE1F_TV
 
 RedsHouse1FMomText:
 	text_asm
 	ld a, [wd72e]
 	bit 3, a ; received a Pokémon from Oak?
 	jr nz, .heal
-	ld hl, MomWakeUpText
+	ld hl, .WakeUpText
 	call PrintText
 	jr .done
 .heal
-	call MomHealPokemon
+	call RedsHouse1FMomHealScript
 .done
 	jp TextScriptEnd
 
-MomWakeUpText:
-	text_far _MomWakeUpText
+.WakeUpText:
+	text_far _RedsHouse1FMomWakeUpText
 	text_end
 
-MomHealPokemon:
-	ld hl, MomHealText1
+RedsHouse1FMomHealScript:
+	ld hl, RedsHouse1FMomYouShouldRestText
 	call PrintText
 	call GBFadeOutToWhite
 	call ReloadMapData
@@ -39,31 +40,31 @@ MomHealPokemon:
 	ld [wNewSoundID], a
 	call PlaySound
 	call GBFadeInFromWhite
-	ld hl, MomHealText2
+	ld hl, RedsHouse1FMomLookingGreatText
 	jp PrintText
 
-MomHealText1:
-	text_far _MomHealText1
+RedsHouse1FMomYouShouldRestText:
+	text_far _RedsHouse1FMomYouShouldRestText
 	text_end
-MomHealText2:
-	text_far _MomHealText2
+RedsHouse1FMomLookingGreatText:
+	text_far _RedsHouse1FMomLookingGreatText
 	text_end
 
 RedsHouse1FTVText:
 	text_asm
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
-	ld hl, TVWrongSideText
+	ld hl, .WrongSideText
 	jr nz, .got_text
-	ld hl, StandByMeText
+	ld hl, .StandByMeMovieText
 .got_text
 	call PrintText
 	jp TextScriptEnd
 
-StandByMeText:
-	text_far _StandByMeText
+.StandByMeMovieText:
+	text_far _RedsHouse1FTVStandByMeMovieText
 	text_end
 
-TVWrongSideText:
-	text_far _TVWrongSideText
+.WrongSideText:
+	text_far _RedsHouse1FTVWrongSideText
 	text_end

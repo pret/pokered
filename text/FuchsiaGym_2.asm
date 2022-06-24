@@ -1,4 +1,4 @@
-_KogaPostBattleAdviceText::
+_FuchsiaGymKogaPostBattleAdviceText::
 	text "When afflicted by"
 	line "TOXIC, #MON"
 	cont "suffer more and"
@@ -9,7 +9,7 @@ _KogaPostBattleAdviceText::
 	line "terrorize foes!"
 	done
 
-_KogaSoulBadgeInfoText::
+_FuchsiaGymKogaSoulBadgeInfoText::
 	text "Now that you have"
 	line "the SOULBADGE,"
 	cont "the DEFENSE of"
@@ -24,14 +24,14 @@ _KogaSoulBadgeInfoText::
 	line "too!"
 	done
 
-_ReceivedTM06Text::
+_FuchsiaGymKogaReceivedTM06Text::
 	text "<PLAYER> received"
 	line "@"
 	text_ram wStringBuffer
 	text "!@"
 	text_end
 
-_TM06ExplanationText::
+_FuchsiaGymKogaTM06ExplanationText::
 	text_start
 	para "TM06 contains"
 	line "TOXIC!"
@@ -41,12 +41,12 @@ _TM06ExplanationText::
 	cont "400 years old!"
 	done
 
-_TM06NoRoomText::
+_FuchsiaGymKogaTM06NoRoomText::
 	text "Make space for"
 	line "this, child!"
 	done
 
-_FuchsiaGymBattleText1::
+_FuchsiaGymRocker1BattleText::
 	text "Strength isn't"
 	line "the key for"
 	cont "#MON!"
@@ -58,54 +58,54 @@ _FuchsiaGymBattleText1::
 	cont "brute strength!"
 	done
 
-_FuchsiaGymEndBattleText1::
+_FuchsiaGymRocker1EndBattleText::
 	text "What?"
 	line "Extraordinary!"
 	prompt
 
-_FuchsiaGymAfterBattleText1::
+_FuchsiaGymRocker1AfterBattleText::
 	text "So, you mix brawn"
 	line "with brains?"
 	cont "Good strategy!"
 	done
 
-_FuchsiaGymBattleText2::
+_FuchsiaGymRocker2BattleText::
 	text "I wanted to become"
 	line "a ninja, so I"
 	cont "joined this GYM!"
 	done
 
-_FuchsiaGymEndBattleText2::
+_FuchsiaGymRocker2EndBattleText::
 	text "I'm done"
 	line "for!"
 	prompt
 
-_FuchsiaGymAfterBattleText2::
+_FuchsiaGymRocker2AfterBattleText::
 	text "I will keep on"
 	line "training under"
 	cont "KOGA, my ninja"
 	cont "master!"
 	done
 
-_FuchsiaGymBattleText3::
+_FuchsiaGymRocker3BattleText::
 	text "Let's see you"
 	line "beat my special"
 	cont "techniques!"
 	done
 
-_FuchsiaGymEndBattleText3::
+_FuchsiaGymRocker3EndBattleText::
 	text "You"
 	line "had me fooled!"
 	prompt
 
-_FuchsiaGymAfterBattleText3::
+_FuchsiaGymRocker3AfterBattleText::
 	text "I like poison and"
 	line "sleep techniques,"
 	cont "as they linger"
 	cont "after battle!"
 	done
 
-_FuchsiaGymBattleText4::
+_FuchsiaGymRocker4BattleText::
 	text "Stop right there!"
 
 	para "Our invisible"
@@ -113,12 +113,12 @@ _FuchsiaGymBattleText4::
 	cont "frustrated?"
 	done
 
-_FuchsiaGymEndBattleText4::
+_FuchsiaGymRocker4EndBattleText::
 	text "Whoa!"
 	line "He's got it!"
 	prompt
 
-_FuchsiaGymAfterBattleText4::
+_FuchsiaGymRocker4AfterBattleText::
 	text "You impressed me!"
 	line "Here's a hint!"
 
@@ -127,7 +127,7 @@ _FuchsiaGymAfterBattleText4::
 	cont "invisible walls!"
 	done
 
-_FuchsiaGymBattleText5::
+_FuchsiaGymRocker5BattleText::
 	text "I also study the"
 	line "way of the ninja"
 	cont "with master KOGA!"
@@ -137,16 +137,16 @@ _FuchsiaGymBattleText5::
 	cont "animals!"
 	done
 
-_FuchsiaGymEndBattleText5::
+_FuchsiaGymRocker5EndBattleText::
 	text "Awoo!"
 	prompt
 
-_FuchsiaGymAfterBattleText5::
+_FuchsiaGymRocker5AfterBattleText::
 	text "I still have much"
 	line "to learn!"
 	done
 
-_FuchsiaGymBattleText6::
+_FuchsiaGymRocker6BattleText::
 	text "Master KOGA comes"
 	line "from a long line"
 	cont "of ninjas!"
@@ -155,12 +155,12 @@ _FuchsiaGymBattleText6::
 	line "descend from?"
 	done
 
-_FuchsiaGymEndBattleText6::
+_FuchsiaGymRocker6EndBattleText::
 	text "Dropped"
 	line "my balls!"
 	prompt
 
-_FuchsiaGymAfterBattleText6::
+_FuchsiaGymRocker6AfterBattleText::
 	text "Where there is"
 	line "light, there is"
 	cont "shadow!"
@@ -170,7 +170,7 @@ _FuchsiaGymAfterBattleText6::
 	cont "choose?"
 	done
 
-_FuchsiaGymGuidePreBattleText::
+_FuchsiaGymGymGuideChampInMakingText::
 	text "Yo! Champ in"
 	line "making!"
 
@@ -187,7 +187,7 @@ _FuchsiaGymGuidePreBattleText::
 	cont "to reach him!"
 	done
 
-_FuchsiaGymGuidePostBattleText::
+_FuchsiaGymGymGuideBeatKogaText::
 	text "It's amazing how"
 	line "ninja can terrify"
 	cont "even now!"

@@ -1,4 +1,4 @@
-_Route12HouseText_564c0::
+_Route12SuperRodHouseFishingGuruDoYouLikeToFishText::
 	text "I'm the FISHING"
 	line "GURU's brother!"
 
@@ -9,7 +9,7 @@ _Route12HouseText_564c0::
 	line "fish?"
 	done
 
-_Route12HouseText_564c5::
+_Route12SuperRodHouseFishingGuruReceivedSuperRodText::
 	text "Grand! I like"
 	line "your style!"
 
@@ -22,7 +22,7 @@ _Route12HouseText_564c5::
 	text "!@"
 	text_end
 
-_Route12HouseText_564ca::
+_Route12SuperRodHouseFishingGuruFishingWayOfLifeText::
 	text_start
 
 	para "Fishing is a way"
@@ -34,12 +34,12 @@ _Route12HouseText_564ca::
 	cont "one!"
 	done
 
-_Route12HouseText_564cf::
+_Route12SuperRodHouseFishingGuruThatsDisappointingText::
 	text "Oh... That's so"
 	line "disappointing..."
 	done
 
-_Route12HouseText_564d4::
+_Route12SuperRodHouseFishingGuruTryFishingText::
 	text "Hello there,"
 	line "<PLAYER>!"
 
@@ -53,7 +53,7 @@ _Route12HouseText_564d4::
 	line "wherever you can!"
 	done
 
-_Route12HouseText_564d9::
+_Route12SuperRodHouseFishingGuruNoRoomText::
 	text "Oh no!"
 
 	para "I had a gift for"

@@ -2,20 +2,21 @@ CeladonMart5F_Script:
 	jp EnableAutoTextBoxDrawing
 
 CeladonMart5F_TextPointers:
-	dw CeladonMart5Text1
-	dw CeladonMart5Text2
-	dw CeladonMart5Clerk1Text
-	dw CeladonMart5Clerk2Text
-	dw CeladonMart5Text5
+	def_text_pointers
+	dw_const CeladonMart5FGentlemanText,        TEXT_CELADONMART5F_GENTLEMAN
+	dw_const CeladonMart5FSailorText,           TEXT_CELADONMART5F_SAILOR
+	dw_const CeladonMart5FClerk1Text,           TEXT_CELADONMART5F_CLERK1
+	dw_const CeladonMart5FClerk2Text,           TEXT_CELADONMART5F_CLERK2
+	dw_const CeladonMart5FCurrentFloorSignText, TEXT_CELADONMART5F_CURRENT_FLOOR_SIGN
 
-CeladonMart5Text1:
-	text_far _CeladonMart5Text1
+CeladonMart5FGentlemanText:
+	text_far _CeladonMart5FGentlemanText
 	text_end
 
-CeladonMart5Text2:
-	text_far _CeladonMart5Text2
+CeladonMart5FSailorText:
+	text_far _CeladonMart5FSailorText
 	text_end
 
-CeladonMart5Text5:
-	text_far _CeladonMart5Text5
+CeladonMart5FCurrentFloorSignText:
+	text_far _CeladonMart5FCurrentFloorSignText
 	text_end

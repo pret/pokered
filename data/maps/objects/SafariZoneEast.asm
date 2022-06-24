@@ -1,3 +1,9 @@
+	object_const_def
+	const SAFARIZONEEAST_FULL_RESTORE
+	const SAFARIZONEEAST_MAX_RESTORE
+	const SAFARIZONEEAST_CARBOS
+	const SAFARIZONEEAST_TM_EGG_BOMB
+
 SafariZoneEast_Object:
 	db $0 ; border block
 
@@ -9,14 +15,14 @@ SafariZoneEast_Object:
 	warp_event 25,  9, SAFARI_ZONE_EAST_REST_HOUSE, 1
 
 	def_bg_events
-	bg_event 26, 10, 5 ; SafariZoneEastText5
-	bg_event  6,  4, 6 ; SafariZoneEastText6
-	bg_event  5, 23, 7 ; SafariZoneEastText7
+	bg_event 26, 10, TEXT_SAFARIZONEEAST_REST_HOUSE_SIGN
+	bg_event  6,  4, TEXT_SAFARIZONEEAST_TRAINER_TIPS
+	bg_event  5, 23, TEXT_SAFARIZONEEAST_SIGN
 
 	def_object_events
-	object_event 21, 10, SPRITE_POKE_BALL, STAY, NONE, 1, FULL_RESTORE
-	object_event  3,  7, SPRITE_POKE_BALL, STAY, NONE, 2, MAX_POTION
-	object_event 20, 13, SPRITE_POKE_BALL, STAY, NONE, 3, CARBOS
-	object_event 15, 12, SPRITE_POKE_BALL, STAY, NONE, 4, TM_EGG_BOMB
+	object_event 21, 10, SPRITE_POKE_BALL, STAY, NONE, TEXT_SAFARIZONEEAST_FULL_RESTORE, FULL_RESTORE
+	object_event  3,  7, SPRITE_POKE_BALL, STAY, NONE, TEXT_SAFARIZONEEAST_MAX_RESTORE, MAX_POTION
+	object_event 20, 13, SPRITE_POKE_BALL, STAY, NONE, TEXT_SAFARIZONEEAST_CARBOS, CARBOS
+	object_event 15, 12, SPRITE_POKE_BALL, STAY, NONE, TEXT_SAFARIZONEEAST_TM_EGG_BOMB, TM_EGG_BOMB
 
 	def_warps_to SAFARI_ZONE_EAST

@@ -1,4 +1,4 @@
-_Route11GateUpstairsText_494a3::
+_Route11Gate2FOaksAideItemfinderDescriptionText::
 	text "There are items on"
 	line "the ground that"
 	cont "can't be seen."
@@ -12,7 +12,7 @@ _Route11GateUpstairsText_494a3::
 	cont "to look yourself!"
 	done
 
-_BinocularsSnorlaxText::
+_Route11Gate2FLeftBinocularsSnorlaxText::
 	text "Looked into the"
 	line "binoculars."
 
@@ -20,7 +20,7 @@ _BinocularsSnorlaxText::
 	line "asleep on a road!"
 	done
 
-_BinocularsNoSnorlaxText::
+_Route11Gate2FLeftBinocularsNoSnorlaxText::
 	text "Looked into the"
 	line "binoculars."
 
@@ -28,7 +28,7 @@ _BinocularsNoSnorlaxText::
 	line "view!"
 	done
 
-_Route11GateUpstairsText_494d5::
+_Route11Gate2FRightBinocularsText::
 	text "Looked into the"
 	line "binoculars."
 

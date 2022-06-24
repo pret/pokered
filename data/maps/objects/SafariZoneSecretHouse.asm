@@ -1,3 +1,6 @@
+	object_const_def
+	const SAFARIZONESECRETHOUSE_FISHING_GURU
+
 SafariZoneSecretHouse_Object:
 	db $17 ; border block
 
@@ -8,6 +11,6 @@ SafariZoneSecretHouse_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  3,  3, SPRITE_FISHING_GURU, STAY, DOWN, 1 ; person
+	object_event  3,  3, SPRITE_FISHING_GURU, STAY, DOWN, TEXT_SAFARIZONESECRETHOUSE_FISHING_GURU
 
 	def_warps_to SAFARI_ZONE_SECRET_HOUSE

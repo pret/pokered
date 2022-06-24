@@ -15,22 +15,23 @@ IndigoPlateauLobby_Script:
 	ret
 
 IndigoPlateauLobby_TextPointers:
-	dw IndigoHealNurseText
-	dw IndigoPlateauLobbyText2
-	dw IndigoPlateauLobbyText3
-	dw IndigoCashierText
-	dw IndigoTradeNurseText
+	def_text_pointers
+	dw_const IndigoPlateauNurseText,            TEXT_INDIGOPLATEAU_NURSE
+	dw_const IndigoPlateauGymGuideText,         TEXT_INDIGOPLATEAU_GYM_GUIDE
+	dw_const IndigoPlateauCooltrainerFText,     TEXT_INDIGOPLATEAU_COOLTRAINER_F
+	dw_const IndigoPlateauClerkText,            TEXT_INDIGOPLATEAU_CLERK
+	dw_const IndigoPlateauLinkReceptionistText, TEXT_INDIGOPLATEAU_LINK_RECEPTIONIST
 
-IndigoHealNurseText:
+IndigoPlateauNurseText:
 	script_pokecenter_nurse
 
-IndigoPlateauLobbyText2:
-	text_far _IndigoPlateauLobbyText2
+IndigoPlateauGymGuideText:
+	text_far _IndigoPlateauGymGuideText
 	text_end
 
-IndigoPlateauLobbyText3:
-	text_far _IndigoPlateauLobbyText3
+IndigoPlateauCooltrainerFText:
+	text_far _IndigoPlateauCooltrainerFText
 	text_end
 
-IndigoTradeNurseText:
+IndigoPlateauLinkReceptionistText:
 	script_cable_club_receptionist

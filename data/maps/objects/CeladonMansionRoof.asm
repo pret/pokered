@@ -7,7 +7,7 @@ CeladonMansionRoof_Object:
 	warp_event  2,  7, CELADON_MANSION_ROOF_HOUSE, 1
 
 	def_bg_events
-	bg_event  3,  7, 1 ; CeladonMansion4Text1
+	bg_event  3,  7, TEXT_CELADONMANSIONROOF_HOUSE_SIGN
 
 	def_object_events
 

@@ -2,38 +2,39 @@ Museum2F_Script:
 	jp EnableAutoTextBoxDrawing
 
 Museum2F_TextPointers:
-	dw Museum2FText1
-	dw Museum2FText2
-	dw Museum2FText3
-	dw Museum2FText4
-	dw Museum2FText5
-	dw Museum2FText6
-	dw Museum2FText7
+	def_text_pointers
+	dw_const Museum2FYoungsterText,        TEXT_MUSEUM2F_YOUNGSTER
+	dw_const Museum2FGrampsText,           TEXT_MUSEUM2F_GRAMPS
+	dw_const Museum2FScientistText,        TEXT_MUSEUM2F_SCIENTIST
+	dw_const Museum2FBrunetteGirlText,     TEXT_MUSEUM2F_BRUNETTE_GIRL
+	dw_const Museum2FHikerText,            TEXT_MUSEUM2F_HIKER
+	dw_const Museum2FSpaceShuttleSignText, TEXT_MUSEUM2F_SPACE_SHUTTLE_SIGN
+	dw_const Museum2FMoonStoneSignText,    TEXT_MUSEUM2F_MOON_STONE_SIGN
 
-Museum2FText1:
-	text_far _Museum2FText1
+Museum2FYoungsterText:
+	text_far _Museum2FYoungsterText
 	text_end
 
-Museum2FText2:
-	text_far _Museum2FText2
+Museum2FGrampsText:
+	text_far _Museum2FGrampsText
 	text_end
 
-Museum2FText3:
-	text_far _Museum2FText3
+Museum2FScientistText:
+	text_far _Museum2FScientistText
 	text_end
 
-Museum2FText4:
-	text_far _Museum2FText4
+Museum2FBrunetteGirlText:
+	text_far _Museum2FBrunetteGirlText
 	text_end
 
-Museum2FText5:
-	text_far _Museum2FText5
+Museum2FHikerText:
+	text_far _Museum2FHikerText
 	text_end
 
-Museum2FText6:
-	text_far _Museum2FText6
+Museum2FSpaceShuttleSignText:
+	text_far _Museum2FSpaceShuttleSignText
 	text_end
 
-Museum2FText7:
-	text_far _Museum2FText7
+Museum2FMoonStoneSignText:
+	text_far _Museum2FMoonStoneSignText
 	text_end

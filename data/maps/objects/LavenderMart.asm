@@ -1,3 +1,8 @@
+	object_const_def
+	const LAVENDERMART_CLERK
+	const LAVENDERMART_BALDING_GUY
+	const LAVENDERMART_COOLTRAINER_M
+
 LavenderMart_Object:
 	db $0 ; border block
 
@@ -8,8 +13,8 @@ LavenderMart_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  0,  5, SPRITE_CLERK, STAY, RIGHT, 1 ; person
-	object_event  3,  4, SPRITE_BALDING_GUY, STAY, NONE, 2 ; person
-	object_event  7,  2, SPRITE_COOLTRAINER_M, STAY, NONE, 3 ; person
+	object_event  0,  5, SPRITE_CLERK, STAY, RIGHT, TEXT_LAVENDERMART_CLERK
+	object_event  3,  4, SPRITE_BALDING_GUY, STAY, NONE, TEXT_LAVENDERMART_BALDING_GUY
+	object_event  7,  2, SPRITE_COOLTRAINER_M, STAY, NONE, TEXT_LAVENDERMART_COOLTRAINER_M
 
 	def_warps_to LAVENDER_MART

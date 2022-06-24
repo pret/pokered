@@ -1,3 +1,9 @@
+	object_const_def
+	const CELADONMANSION1F_MEOWTH
+	const CELADONMANSION1F_GRANNY
+	const CELADONMANSION1F_CLEFAIRY
+	const CELADONMANSION1F_NIDORANF
+
 CeladonMansion1F_Object:
 	db $f ; border block
 
@@ -9,12 +15,12 @@ CeladonMansion1F_Object:
 	warp_event  2,  1, CELADON_MANSION_2F, 3
 
 	def_bg_events
-	bg_event  4,  9, 5 ; CeladonMansion1Text5
+	bg_event  4,  9, TEXT_CELADONMANSION1F_MANAGERS_SUITE_SIGN
 
 	def_object_events
-	object_event  0,  5, SPRITE_MONSTER, STAY, RIGHT, 1 ; person
-	object_event  1,  5, SPRITE_GRANNY, STAY, DOWN, 2 ; person
-	object_event  1,  8, SPRITE_FAIRY, WALK, LEFT_RIGHT, 3 ; person
-	object_event  4,  4, SPRITE_MONSTER, WALK, UP_DOWN, 4 ; person
+	object_event  0,  5, SPRITE_MONSTER, STAY, RIGHT, TEXT_CELADONMANSION1F_MEOWTH
+	object_event  1,  5, SPRITE_GRANNY, STAY, DOWN, TEXT_CELADONMANSION1F_GRANNY
+	object_event  1,  8, SPRITE_FAIRY, WALK, LEFT_RIGHT, TEXT_CELADONMANSION1F_CLEFAIRY
+	object_event  4,  4, SPRITE_MONSTER, WALK, UP_DOWN, TEXT_CELADONMANSION1F_NIDORANF
 
 	def_warps_to CELADON_MANSION_1F

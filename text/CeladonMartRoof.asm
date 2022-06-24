@@ -1,9 +1,9 @@
-_CeladonMartRoofText_484ee::
+_CeladonMartRoofLittleGirlGiveHerWhichDrinkText::
 	text "Give her which"
 	line "drink?"
 	done
 
-_CeladonMartRoofText_484f3::
+_CeladonMartRoofLittleGirlYayFreshWaterText::
 	text "Yay!"
 
 	para "FRESH WATER!"
@@ -14,14 +14,14 @@ _CeladonMartRoofText_484f3::
 	line "from me!@"
 	text_end
 
-_CeladonMartRoofText_484f9::
+_CeladonMartRoofLittleGirlReceivedTM13Text::
 	text "<PLAYER> received"
 	line "@"
 	text_ram wStringBuffer
 	text "!@"
 	text_end
 
-_CeladonMartRoofText_484fe::
+_CeladonMartRoofLittleGirlTM13ExplanationText::
 	text_start
 
 	para "@"
@@ -33,7 +33,7 @@ _CeladonMartRoofText_484fe::
 	line "target sometimes!@"
 	text_end
 
-_CeladonMartRoofText_48504::
+_CeladonMartRoofLittleGirlYaySodaPopText::
 	text "Yay!"
 
 	para "SODA POP!"
@@ -44,14 +44,14 @@ _CeladonMartRoofText_48504::
 	line "from me!@"
 	text_end
 
-_CeladonMartRoofText_4850a::
+_CeladonMartRoofLittleGirlReceivedTM48Text::
 	text "<PLAYER> received"
 	line "@"
 	text_ram wStringBuffer
 	text "!@"
 	text_end
 
-_CeladonMartRoofText_4850f::
+_CeladonMartRoofLittleGirlTM48ExplanationText::
 	text_start
 
 	para "@"
@@ -63,7 +63,7 @@ _CeladonMartRoofText_4850f::
 	line "target sometimes!@"
 	text_end
 
-_CeladonMartRoofText_48515::
+_CeladonMartRoofLittleGirlYayLemonadeText::
 	text "Yay!"
 
 	para "LEMONADE!"
@@ -74,30 +74,30 @@ _CeladonMartRoofText_48515::
 	line "from me!@"
 	text_end
 
-_ReceivedTM49Text::
+_CeladonMartRoofLittleGirlReceivedTM49Text::
 	text "<PLAYER> received"
 	line "TM49!@"
 	text_end
 
-_CeladonMartRoofText_48520::
+_CeladonMartRoofLittleGirlTM49ExplanationText::
 	text_start
 
 	para "TM49 contains"
 	line "TRI ATTACK!@"
 	text_end
 
-_CeladonMartRoofText_48526::
+_CeladonMartRoofLittleGirlNoRoomText::
 	text "You don't have"
 	line "space for this!@"
 	text_end
 
-_CeladonMartRoofText_4852c::
+_CeladonMartRoofLittleGirlImNotThirstyText::
 	text "No thank you!"
 	line "I'm not thirsty"
 	cont "after all!@"
 	text_end
 
-_CeladonMartRoofText1::
+_CeladonMartRoofSuperNerdText::
 	text "My sister is a"
 	line "trainer, believe"
 	cont "it or not."
@@ -107,13 +107,13 @@ _CeladonMartRoofText1::
 	cont "drives me nuts!"
 	done
 
-_CeladonMartRoofText_48598::
+_CeladonMartRoofLittleGirlImThirstyText::
 	text "I'm thirsty!"
 	line "I want something"
 	cont "to drink!"
 	done
 
-_CeladonMartRoofText4::
+_CeladonMartRoofLittleGirlGiveHerADrinkText::
 	text "I'm thirsty!"
 	line "I want something"
 	cont "to drink!"
@@ -121,7 +121,7 @@ _CeladonMartRoofText4::
 	para "Give her a drink?"
 	done
 
-_CeladonMartRoofText6::
+_CeladonMartRoofCurrentFloorSignText::
 	text "ROOFTOP SQUARE:"
 	line "VENDING MACHINES"
 	done

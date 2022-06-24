@@ -1,3 +1,7 @@
+	object_const_def
+	const CERULEANTRASHEDHOUSE_FISHING_GURU
+	const CERULEANTRASHEDHOUSE_GIRL
+
 CeruleanTrashedHouse_Object:
 	db $a ; border block
 
@@ -7,10 +11,10 @@ CeruleanTrashedHouse_Object:
 	warp_event  3,  0, LAST_MAP, 8
 
 	def_bg_events
-	bg_event  3,  0, 3 ; CeruleanHouseTrashedText3
+	bg_event  3,  0, TEXT_CERULEANTRASHEDHOUSE_WALL_HOLE
 
 	def_object_events
-	object_event  2,  1, SPRITE_FISHING_GURU, STAY, DOWN, 1 ; person
-	object_event  5,  6, SPRITE_GIRL, WALK, LEFT_RIGHT, 2 ; person
+	object_event  2,  1, SPRITE_FISHING_GURU, STAY, DOWN, TEXT_CERULEANTRASHEDHOUSE_FISHING_GURU
+	object_event  5,  6, SPRITE_GIRL, WALK, LEFT_RIGHT, TEXT_CERULEANTRASHEDHOUSE_GIRL
 
 	def_warps_to CERULEAN_TRASHED_HOUSE

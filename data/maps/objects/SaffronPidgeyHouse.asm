@@ -1,3 +1,9 @@
+	object_const_def
+	const SAFFRONPIDGEYHOUSE_BRUNETTE_GIRL
+	const SAFFRONPIDGEYHOUSE_PIDGEY
+	const SAFFRONPIDGEYHOUSE_YOUNGSTER
+	const SAFFRONPIDGEYHOUSE_PAPER
+
 SaffronPidgeyHouse_Object:
 	db $a ; border block
 
@@ -8,9 +14,9 @@ SaffronPidgeyHouse_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  2,  3, SPRITE_BRUNETTE_GIRL, STAY, RIGHT, 1 ; person
-	object_event  0,  4, SPRITE_BIRD, WALK, UP_DOWN, 2 ; person
-	object_event  4,  1, SPRITE_YOUNGSTER, STAY, DOWN, 3 ; person
-	object_event  3,  3, SPRITE_PAPER, STAY, NONE, 4 ; person
+	object_event  2,  3, SPRITE_BRUNETTE_GIRL, STAY, RIGHT, TEXT_SAFFRONPIDGEYHOUSE_BRUNETTE_GIRL
+	object_event  0,  4, SPRITE_BIRD, WALK, UP_DOWN, TEXT_SAFFRONPIDGEYHOUSE_PIDGEY
+	object_event  4,  1, SPRITE_YOUNGSTER, STAY, DOWN, TEXT_SAFFRONPIDGEYHOUSE_YOUNGSTER
+	object_event  3,  3, SPRITE_PAPER, STAY, NONE, TEXT_SAFFRONPIDGEYHOUSE_PAPER
 
 	def_warps_to SAFFRON_PIDGEY_HOUSE

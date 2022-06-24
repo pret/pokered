@@ -1,4 +1,4 @@
-_TM39PreReceiveText::
+_Route12Gate2FBrunetteGirlYouCanHaveThisText::
 	text "My #MON's"
 	line "ashes are stored"
 	cont "in #MON TOWER."
@@ -8,12 +8,12 @@ _TM39PreReceiveText::
 	cont "it any more..."
 	prompt
 
-_ReceivedTM39Text::
+_Route12Gate2FBrunetteGirlReceivedTM39Text::
 	text "<PLAYER> received"
 	line "TM39!@"
 	text_end
 
-_TM39ExplanationText::
+_Route12Gate2FBrunetteGirlTM39ExplanationText::
 	text "TM39 is a move"
 	line "called SWIFT."
 
@@ -23,19 +23,19 @@ _TM39ExplanationText::
 	cont "afford to lose."
 	done
 
-_TM39NoRoomText::
+_Route12Gate2FBrunetteGirlTM39NoRoomText::
 	text "You don't have"
 	line "room for this."
 	done
 
-_Route12GateUpstairsText_495b8::
+_Route12Gate2FLeftBinocularsText::
 	text "Looked into the"
 	line "binoculars."
 
 	para "A man fishing!"
 	done
 
-_Route12GateUpstairsText_495c4::
+_Route12Gate2FRightBinocularsText::
 	text "Looked into the"
 	line "binoculars."
 

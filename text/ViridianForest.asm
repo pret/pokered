@@ -1,4 +1,4 @@
-_ViridianForestText1::
+_ViridianForestYoungster1Text::
 	text "I came here with"
 	line "some friends!"
 
@@ -6,13 +6,13 @@ _ViridianForestText1::
 	line "#MON fights!"
 	done
 
-_ViridianForestBattleText1::
+_ViridianForestYoungster2BattleText::
 	text "Hey! You have"
 	line "#MON! Come on!"
 	cont "Let's battle'em!"
 	done
 
-_ViridianForestEndBattleText1::
+_ViridianForestYoungster2EndBattleText::
 	text "No!"
 	line "CATERPIE can't"
 	cont "cut it!"
@@ -23,13 +23,13 @@ _ViridianFrstAfterBattleText1::
 	line "the bugs away!"
 	done
 
-_ViridianForestBattleText2::
+_ViridianForestYoungster3BattleText::
 	text "Yo! You can't jam"
 	line "out if you're a"
 	cont "#MON trainer!"
 	done
 
-_ViridianForestEndBattleText2::
+_ViridianForestYoungster3EndBattleText::
 	text "Huh?"
 	line "I ran out of"
 	cont "#MON!"
@@ -41,12 +41,12 @@ _ViridianFrstAfterBattleText2::
 	cont "stronger ones!"
 	done
 
-_ViridianForestBattleText3::
+_ViridianForestYoungster4BattleText::
 	text "Hey, wait up!"
 	line "What's the hurry?"
 	done
 
-_ViridianForestEndBattleText3::
+_ViridianForestYoungster4EndBattleText::
 	text "I"
 	line "give! You're good"
 	cont "at this!"
@@ -62,7 +62,7 @@ _ViridianFrstAfterBattleText3::
 	cont "dropped!"
 	done
 
-_ViridianForestText8::
+_ViridianForestYoungster5Text::
 	text "I ran out of #"
 	line "BALLs to catch"
 	cont "#MON with!"
@@ -71,7 +71,7 @@ _ViridianForestText8::
 	line "extras!"
 	done
 
-_ViridianForestText9::
+_ViridianForestTrainerTips1Text::
 	text "TRAINER TIPS"
 
 	para "If you want to"
@@ -80,13 +80,13 @@ _ViridianForestText9::
 	cont "grassy areas!"
 	done
 
-_ViridianForestText10::
+_ViridianForestUseAntidoteSignText::
 	text "For poison, use"
 	line "ANTIDOTE! Get it"
 	cont "at #MON MARTs!"
 	done
 
-_ViridianForestText11::
+_ViridianForestTrainerTips2Text::
 	text "TRAINER TIPS"
 
 	para "Contact PROF.OAK"
@@ -95,7 +95,7 @@ _ViridianForestText11::
 	cont "evaluated!"
 	done
 
-_ViridianForestText12::
+_ViridianForestTrainerTips3Text::
 	text "TRAINER TIPS"
 
 	para "No stealing of"
@@ -105,7 +105,7 @@ _ViridianForestText12::
 	cont "#MON!"
 	done
 
-_ViridianForestText13::
+_ViridianForestTrainerTips4Text::
 	text "TRAINER TIPS"
 
 	para "Weaken #MON"
@@ -116,7 +116,7 @@ _ViridianForestText13::
 	line "they may escape!"
 	done
 
-_ViridianForestText14::
+_ViridianForestLeavingSignText::
 	text "LEAVING"
 	line "VIRIDIAN FOREST"
 	cont "PEWTER CITY AHEAD"

@@ -1,4 +1,4 @@
-_TowerRescueFujiText::
+_PokemonTower7FMrFujiRescueText::
 	text "MR.FUJI: Heh? You"
 	line "came to save me?"
 
@@ -24,21 +24,21 @@ _TowerRescueFujiText::
 	cont "of this tower."
 	done
 
-_PokemonTower7BattleText1::
+_PokemonTower7FRocket1BattleText::
 	text "What do you want?"
 	line "Why are you here?"
 	done
 
-_PokemonTower7EndBattleText1::
+_PokemonTower7FRocket1EndBattleText::
 	text "I give up!"
 	prompt
 
-_PokemonTower7AfterBattleText1::
+_PokemonTower7FRocket1AfterBattleText::
 	text "I'm not going to"
 	line "forget this!"
 	done
 
-_PokemonTower7BattleText2::
+_PokemonTower7FRocket2BattleText::
 	text "This old guy came"
 	line "and complained"
 	cont "about us harming"
@@ -48,12 +48,12 @@ _PokemonTower7BattleText2::
 	line "over as adults!"
 	done
 
-_PokemonTower7EndBattleText2::
+_PokemonTower7FRocket2EndBattleText::
 	text "Please!"
 	line "No more!"
 	prompt
 
-_PokemonTower7AfterBattleText2::
+_PokemonTower7FRocket2AfterBattleText::
 	text "#MON are only"
 	line "good for making"
 	cont "money!"
@@ -62,17 +62,17 @@ _PokemonTower7AfterBattleText2::
 	line "business!"
 	done
 
-_PokemonTower7BattleText3::
+_PokemonTower7FRocket3BattleText::
 	text "You're not saving"
 	line "anyone, kid!"
 	done
 
-_PokemonTower7EndBattleText3::
+_PokemonTower7FRocket3EndBattleText::
 	text "Don't"
 	line "fight us ROCKETs!"
 	prompt
 
-_PokemonTower7AfterBattleText3::
+_PokemonTower7FRocket3AfterBattleText::
 	text "You're not getting"
 	line "away with this!"
 	done

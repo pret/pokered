@@ -2,26 +2,27 @@ SaffronPidgeyHouse_Script:
 	jp EnableAutoTextBoxDrawing
 
 SaffronPidgeyHouse_TextPointers:
-	dw SaffronHouse1Text1
-	dw SaffronHouse1Text2
-	dw SaffronHouse1Text3
-	dw SaffronHouse1Text4
+	def_text_pointers
+	dw_const SaffronPidgeyHouseBrunetteGirlText, TEXT_SAFFRONPIDGEYHOUSE_BRUNETTE_GIRL
+	dw_const SaffronPidgeyHousePidgeyText,       TEXT_SAFFRONPIDGEYHOUSE_PIDGEY
+	dw_const SaffronPidgeyHouseYoungsterText,    TEXT_SAFFRONPIDGEYHOUSE_YOUNGSTER
+	dw_const SaffronPidgeyHousePaperText,        TEXT_SAFFRONPIDGEYHOUSE_PAPER
 
-SaffronHouse1Text1:
-	text_far _SaffronHouse1Text1
+SaffronPidgeyHouseBrunetteGirlText:
+	text_far _SaffronPidgeyHouseBrunetteGirlText
 	text_end
 
-SaffronHouse1Text2:
-	text_far _SaffronHouse1Text2
+SaffronPidgeyHousePidgeyText:
+	text_far _SaffronPidgeyHousePidgeyText
 	text_asm
 	ld a, PIDGEY
 	call PlayCry
 	jp TextScriptEnd
 
-SaffronHouse1Text3:
-	text_far _SaffronHouse1Text3
+SaffronPidgeyHouseYoungsterText:
+	text_far _SaffronPidgeyHouseYoungsterText
 	text_end
 
-SaffronHouse1Text4:
-	text_far _SaffronHouse1Text4
+SaffronPidgeyHousePaperText:
+	text_far _SaffronPidgeyHousePaperText
 	text_end

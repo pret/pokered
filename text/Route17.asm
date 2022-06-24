@@ -1,160 +1,160 @@
-_Route17BattleText1::
+_Route17Biker1BattleText::
 	text "There's no money"
 	line "in fighting kids!"
 	done
 
-_Route17EndBattleText1::
+_Route17Biker1EndBattleText::
 	text "Burned"
 	line "out!"
 	prompt
 
-_Route17AfterBattleText1::
+_Route17Biker1AfterBattleText::
 	text "Good stuff is"
 	line "lying around on"
 	cont "CYCLING ROAD!"
 	done
 
-_Route17BattleText2::
+_Route17Biker2BattleText::
 	text "What do you want,"
 	line "kiddo?"
 	done
 
-_Route17EndBattleText2::
+_Route17Biker2EndBattleText::
 	text "Whoo!"
 	prompt
 
-_Route17AfterBattleText2::
+_Route17Biker2AfterBattleText::
 	text "I could belly-"
 	line "bump you outta"
 	cont "here!"
 	done
 
-_Route17BattleText3::
+_Route17Biker3BattleText::
 	text "You heading to"
 	line "FUCHSIA?"
 	done
 
-_Route17EndBattleText3::
+_Route17Biker3EndBattleText::
 	text "Crash and"
 	line "burn!"
 	prompt
 
-_Route17AfterBattleText3::
+_Route17Biker3AfterBattleText::
 	text "I love racing"
 	line "downhill!"
 	done
 
-_Route17BattleText4::
+_Route17Biker4BattleText::
 	text "We're BIKERs!"
 	line "Highway stars!"
 	done
 
-_Route17EndBattleText4::
+_Route17Biker4EndBattleText::
 	text "Smoked!"
 	prompt
 
-_Route17AfterBattleText4::
+_Route17Biker4AfterBattleText::
 	text "Are you looking"
 	line "for adventure?"
 	done
 
-_Route17BattleText5::
+_Route17Biker5BattleText::
 	text "Let VOLTORB"
 	line "electrify you!"
 	done
 
-_Route17EndBattleText5::
+_Route17Biker5EndBattleText::
 	text "Grounded"
 	line "out!"
 	prompt
 
-_Route17AfterBattleText5::
+_Route17Biker5AfterBattleText::
 	text "I got my VOLTORB"
 	line "at the abandoned"
 	cont "POWER PLANT."
 	done
 
-_Route17BattleText6::
+_Route17Biker6BattleText::
 	text "My #MON won't"
 	line "evolve! Why?"
 	done
 
-_Route17EndBattleText6::
+_Route17Biker6EndBattleText::
 	text "Why,"
 	line "you!"
 	prompt
 
-_Route17AfterBattleText6::
+_Route17Biker6AfterBattleText::
 	text "Maybe some #MON"
 	line "need element"
 	cont "STONEs to evolve."
 	done
 
-_Route17BattleText7::
+_Route17Biker7BattleText::
 	text "I need a little"
 	line "exercise!"
 	done
 
-_Route17EndBattleText7::
+_Route17Biker7EndBattleText::
 	text "Whew!"
 	line "Good workout!"
 	prompt
 
-_Route17AfterBattleText7::
+_Route17Biker7AfterBattleText::
 	text "I'm sure I lost"
 	line "weight there!"
 	done
 
-_Route17BattleText8::
+_Route17Biker8BattleText::
 	text "Be a rebel!"
 	done
 
-_Route17EndBattleText8::
+_Route17Biker8EndBattleText::
 	text "Aaaargh!"
 	prompt
 
-_Route17AfterBattleText8::
+_Route17Biker8AfterBattleText::
 	text "Be ready to fight"
 	line "for your beliefs!"
 	done
 
-_Route17BattleText9::
+_Route17Biker9BattleText::
 	text "Nice BIKE!"
 	line "How's it handle?"
 	done
 
-_Route17EndBattleText9::
+_Route17Biker9EndBattleText::
 	text "Shoot!"
 	prompt
 
-_Route17AfterBattleText9::
+_Route17Biker9AfterBattleText::
 	text "The slope makes"
 	line "it hard to steer!"
 	done
 
-_Route17BattleText10::
+_Route17Biker10BattleText::
 	text "Get lost kid!"
 	line "I'm bushed!"
 	done
 
-_Route17EndBattleText10::
+_Route17Biker10EndBattleText::
 	text "Are you"
 	line "satisfied?"
 	prompt
 
-_Route17AfterBattleText10::
+_Route17Biker10AfterBattleText::
 	text "I need to catch"
 	line "a few Zs!"
 	done
 
-_Route17Text11::
+_Route17NoticeSign1Text::
 	text "It's a notice!"
 
 	para "Watch out for"
 	line "discarded items!"
 	done
 
-_Route17Text12::
+_Route17TrainerTips1Text::
 	text "TRAINER TIPS"
 
 	para "All #MON are"
@@ -166,7 +166,7 @@ _Route17Text12::
 	cont "different rates."
 	done
 
-_Route17Text13::
+_Route17TrainerTips2Text::
 	text "TRAINER TIPS"
 
 	para "Press the A or B"
@@ -175,13 +175,13 @@ _Route17Text13::
 	cont "slope."
 	done
 
-_Route17Text14::
+_Route17SignText::
 	text "ROUTE 17"
 	line "CELADON CITY -"
 	cont "FUCHSIA CITY"
 	done
 
-_Route17Text15::
+_Route17NoticeSign2Text::
 	text "It's a notice!"
 
 	para "Don't throw the"
@@ -189,7 +189,7 @@ _Route17Text15::
 	cont "BALLs instead!"
 	done
 
-_Route17Text16::
+_Route17CyclingRoadEndsSignText::
 	text "CYCLING ROAD"
 	line "Slope ends here!"
 	done

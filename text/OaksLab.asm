@@ -1,10 +1,10 @@
-_OaksLabGaryText1::
+_OaksLabRivalGrampsIsntAroundText::
 	text "<RIVAL>: Yo"
 	line "<PLAYER>! Gramps"
 	cont "isn't around!"
 	done
 
-_OaksLabText40::
+_OaksLabRivalGoAheadAndChooseText::
 	text "<RIVAL>: Heh, I"
 	line "don't need to be"
 	cont "greedy like you!"
@@ -13,31 +13,31 @@ _OaksLabText40::
 	line "choose, <PLAYER>!"
 	done
 
-_OaksLabText41::
+_OaksLabRivalMyPokemonLooksStrongerText::
 	text "<RIVAL>: My"
 	line "#MON looks a"
 	cont "lot stronger."
 	done
 
-_OaksLabText39::
+_OaksLabThoseArePokeBallsText::
 	text "Those are #"
 	line "BALLs. They"
 	cont "contain #MON!"
 	done
 
-_OaksLabCharmanderText::
+_OaksLabYouWantCharmanderText::
 	text "So! You want the"
 	line "fire #MON,"
 	cont "CHARMANDER?"
 	done
 
-_OaksLabSquirtleText::
+_OaksLabYouWantSquirtleText::
 	text "So! You want the"
 	line "water #MON,"
 	cont "SQUIRTLE?"
 	done
 
-_OaksLabBulbasaurText::
+_OaksLabYouWantBulbasaurText::
 	text "So! You want the"
 	line "plant #MON,"
 	cont "BULBASAUR?"
@@ -60,27 +60,27 @@ _OaksLabLastMonText::
 	line "last #MON!"
 	done
 
-_OaksLabText_1d2f0::
+_OaksLabOak1WhichPokemonDoYouWantText::
 	text "OAK: Now, <PLAYER>,"
 	line "which #MON do"
 	cont "you want?"
 	done
 
-_OaksLabText_1d2f5::
+_OaksLabOak1YourPokemonCanFightText::
 	text "OAK: If a wild"
 	line "#MON appears,"
 	cont "your #MON can"
 	cont "fight against it!"
 	done
 
-_OaksLabText_1d2fa::
+_OaksLabOak1RaiseYourYoungPokemonText::
 	text "OAK: <PLAYER>,"
 	line "raise your young"
 	cont "#MON by making"
 	cont "it fight!"
 	done
 
-_OaksLabDeliverParcelText1::
+_OaksLabOak1DeliverParcelText::
 	text "OAK: Oh, <PLAYER>!"
 
 	para "How is my old"
@@ -100,7 +100,7 @@ _OaksLabDeliverParcelText1::
 	line "OAK's PARCEL.@"
 	text_end
 
-_OaksLabDeliverParcelText2::
+_OaksLabOak1ParcelThanksText::
 	text_start
 	para "Ah! This is the"
 	line "custom # BALL"
@@ -108,13 +108,13 @@ _OaksLabDeliverParcelText2::
 	cont "Thank you!"
 	done
 
-_OaksLabAroundWorldText::
+_OaksLabOak1PokemonAroundTheWorldText::
 	text "#MON around the"
 	line "world wait for"
 	cont "you, <PLAYER>!"
 	done
 
-_OaksLabGivePokeballsText1::
+_OaksLabOak1ReceivedPokeballsText::
 	text "OAK: You can't get"
 	line "detailed data on"
 	cont "#MON by just"
@@ -129,7 +129,7 @@ _OaksLabGivePokeballsText1::
 	line "# BALLs!@"
 	text_end
 
-_OaksLabGivePokeballsText2::
+_OaksLabGivePokeballsExplanationText::
 	text_start
 	para "When a wild"
 	line "#MON appears,"
@@ -147,7 +147,7 @@ _OaksLabGivePokeballsText2::
 	cont "have to be lucky!"
 	done
 
-_OaksLabPleaseVisitText::
+_OaksLabOak1ComeSeeMeSometimesText::
 	text "OAK: Come see me"
 	line "sometimes."
 
@@ -156,7 +156,7 @@ _OaksLabPleaseVisitText::
 	cont "coming along."
 	done
 
-_OaksLabText_1d31d::
+_OaksLabOak1HowIsYourPokedexComingText::
 	text "OAK: Good to see "
 	line "you! How is your "
 	cont "#DEX coming? "
@@ -164,17 +164,17 @@ _OaksLabText_1d31d::
 	cont "a look!"
 	prompt
 
-_OaksLabText_1d32c::
+_OaksLabPokedexText::
 	text "It's encyclopedia-"
 	line "like, but the"
 	cont "pages are blank!"
 	done
 
-_OaksLabText8::
+_OaksLabOak2Text::
 	text "?"
 	done
 
-_OaksLabText_1d340::
+_OaksLabGirlText::
 	text "PROF.OAK is the"
 	line "authority on"
 	cont "#MON!"
@@ -184,13 +184,13 @@ _OaksLabText_1d340::
 	cont "in high regard!"
 	done
 
-_OaksLabRivalWaitingText::
+_OaksLabRivalFedUpWithWaitingText::
 	text "<RIVAL>: Gramps!"
 	line "I'm fed up with"
 	cont "waiting!"
 	done
 
-_OaksLabChooseMonText::
+_OaksLabOakChooseMonText::
 	text "OAK: <RIVAL>?"
 	line "Let me think..."
 
@@ -218,24 +218,24 @@ _OaksLabChooseMonText::
 	cont "one! Choose!"
 	done
 
-_OaksLabRivalInterjectionText::
+_OaksLabRivalWhatAboutMeText::
 	text "<RIVAL>: Hey!"
 	line "Gramps! What"
 	cont "about me?"
 	done
 
-_OaksLabBePatientText::
+_OaksLabOakBePatientText::
 	text "OAK: Be patient!"
 	line "<RIVAL>, you can"
 	cont "have one too!"
 	done
 
-_OaksLabLeavingText::
+_OaksLabOakDontGoAwayYetText::
 	text "OAK: Hey! Don't go"
 	line "away yet!"
 	done
 
-_OaksLabRivalPickingMonText::
+_OaksLabRivalIllTakeThisOneText::
 	text "<RIVAL>: I'll take"
 	line "this one, then!"
 	done
@@ -247,7 +247,7 @@ _OaksLabRivalReceivedMonText::
 	text "!@"
 	text_end
 
-_OaksLabRivalChallengeText::
+_OaksLabRivalIllTakeYouOnText::
 	text "<RIVAL>: Wait"
 	line "<PLAYER>!"
 	cont "Let's check out"
@@ -257,19 +257,19 @@ _OaksLabRivalChallengeText::
 	line "you on!"
 	done
 
-_OaksLabText_1d3be::
+_OaksLabRivalIPickedTheWrongPokemonText::
 	text "WHAT?"
 	line "Unbelievable!"
 	cont "I picked the"
 	cont "wrong #MON!"
 	prompt
 
-_OaksLabText_1d3c3::
+_OaksLabRivalAmIGreatOrWhatText::
 	text "<RIVAL>: Yeah! Am"
 	line "I great or what?"
 	prompt
 
-_OaksLabRivalToughenUpText::
+_OaksLabRivalSmellYouLaterText::
 	text "<RIVAL>: Okay!"
 	line "I'll make my"
 	cont "#MON fight to"
@@ -279,22 +279,22 @@ _OaksLabRivalToughenUpText::
 	line "Smell you later!"
 	done
 
-_OaksLabText21::
+_OaksLabRivalGrampsText::
 	text "<RIVAL>: Gramps!"
 	done
 
-_OaksLabText22::
+_OaksLabRivalWhatDidYouCallMeForText::
 	text "<RIVAL>: What did"
 	line "you call me for?"
 	done
 
-_OaksLabText23::
+_OaksLabOakIHaveARequestText::
 	text "OAK: Oh right! I"
 	line "have a request"
 	cont "of you two."
 	done
 
-_OaksLabText24::
+_OaksLabOakMyInventionPokedexText::
 	text "On the desk there"
 	line "is my invention,"
 	cont "#DEX!"
@@ -308,7 +308,7 @@ _OaksLabText24::
 	line "encyclopedia!"
 	done
 
-_OaksLabText25::
+_OaksLabOakGotPokedexText::
 	text "OAK: <PLAYER> and"
 	line "<RIVAL>! Take"
 	cont "these with you!"
@@ -317,7 +317,7 @@ _OaksLabText25::
 	line "#DEX from OAK!@"
 	text_end
 
-_OaksLabText26::
+_OaksLabOakThatWasMyDreamText::
 	text "To make a complete"
 	line "guide on all the"
 	cont "#MON in the"
@@ -340,7 +340,7 @@ _OaksLabText26::
 	cont "#MON history!"
 	done
 
-_OaksLabText27::
+_OaksLabRivalLeaveItAllToMeText::
 	text "<RIVAL>: Alright"
 	line "Gramps! Leave it"
 	cont "all to me!"
@@ -358,7 +358,7 @@ _OaksLabText27::
 	cont "<PLAYER>! Hahaha!"
 	done
 
-_OaksLabText_1d405::
+_OaksLabScientistText::
 	text "I study #MON as"
 	line "PROF.OAK's AIDE."
 	done

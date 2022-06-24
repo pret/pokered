@@ -8,200 +8,202 @@ Route9_Script:
 	ret
 
 Route9_ScriptPointers:
-	dw CheckFightingMapTrainers
-	dw DisplayEnemyTrainerTextAndStartBattle
-	dw EndTrainerBattle
+	def_script_pointers
+	dw_const CheckFightingMapTrainers,              SCRIPT_ROUTE9_DEFAULT
+	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_ROUTE9_START_BATTLE
+	dw_const EndTrainerBattle,                      SCRIPT_ROUTE9_END_BATTLE
 
 Route9_TextPointers:
-	dw Route9Text1
-	dw Route9Text2
-	dw Route9Text3
-	dw Route9Text4
-	dw Route9Text5
-	dw Route9Text6
-	dw Route9Text7
-	dw Route9Text8
-	dw Route9Text9
-	dw PickUpItemText
-	dw Route9Text11
+	def_text_pointers
+	dw_const Route9CooltrainerF1Text, TEXT_ROUTE9_COOLTRAINER_F1
+	dw_const Route9CooltrainerM1Text, TEXT_ROUTE9_COOLTRAINER_M1
+	dw_const Route9CooltrainerM2Text, TEXT_ROUTE9_COOLTRAINER_M2
+	dw_const Route9CooltrainerF2Text, TEXT_ROUTE9_COOLTRAINER_F2
+	dw_const Route9Hiker1Text,        TEXT_ROUTE9_HIKER_1
+	dw_const Route9Hiker2Text,        TEXT_ROUTE9_HIKER_2
+	dw_const Route9Youngster1Text,    TEXT_ROUTE9_YOUNGSTER_1
+	dw_const Route9Hiker3Text,        TEXT_ROUTE9_HIKER_3
+	dw_const Route9Youngster2Text,    TEXT_ROUTE9_YOUNGSTER_2
+	dw_const PickUpItemText,          TEXT_ROUTE9_TM_TELEPORT
+	dw_const Route9SignText,          TEXT_ROUTE9_SIGN
 
 Route9TrainerHeaders:
 	def_trainers
 Route9TrainerHeader0:
-	trainer EVENT_BEAT_ROUTE_9_TRAINER_0, 3, Route9BattleText1, Route9EndBattleText1, Route9AfterBattleText1
+	trainer EVENT_BEAT_ROUTE_9_TRAINER_0, 3, Route9CooltrainerF1BattleText, Route9CooltrainerF1EndBattleText, Route9CooltrainerF1AfterBattleText
 Route9TrainerHeader1:
-	trainer EVENT_BEAT_ROUTE_9_TRAINER_1, 2, Route9BattleText2, Route9EndBattleText2, Route9AfterBattleText2
+	trainer EVENT_BEAT_ROUTE_9_TRAINER_1, 2, Route9CooltrainerM1BattleText, Route9CooltrainerM1EndBattleText, Route9CooltrainerM1AfterBattleText
 Route9TrainerHeader2:
-	trainer EVENT_BEAT_ROUTE_9_TRAINER_2, 4, Route9BattleText3, Route9EndBattleText3, Route9AfterBattleText3
+	trainer EVENT_BEAT_ROUTE_9_TRAINER_2, 4, Route9CooltrainerM2BattleText, Route9CooltrainerM2EndBattleText, Route9CooltrainerM2AfterBattleText
 Route9TrainerHeader3:
-	trainer EVENT_BEAT_ROUTE_9_TRAINER_3, 2, Route9BattleText4, Route9EndBattleText4, Route9AfterBattleText4
+	trainer EVENT_BEAT_ROUTE_9_TRAINER_3, 2, Route9CooltrainerF2BattleText, Route9CooltrainerF2EndBattleText, Route9CooltrainerF2AfterBattleText
 Route9TrainerHeader4:
-	trainer EVENT_BEAT_ROUTE_9_TRAINER_4, 2, Route9BattleText5, Route9EndBattleText5, Route9AfterBattleText5
+	trainer EVENT_BEAT_ROUTE_9_TRAINER_4, 2, Route9Hiker1BattleText, Route9Hiker1EndBattleText, Route9Hiker1AfterBattleText
 Route9TrainerHeader5:
-	trainer EVENT_BEAT_ROUTE_9_TRAINER_5, 3, Route9BattleText6, Route9EndBattleText6, Route9AfterBattleText6
+	trainer EVENT_BEAT_ROUTE_9_TRAINER_5, 3, Route9Hiker2BattleText, Route9Hiker2EndBattleText, Route9Hiker2AfterBattleText
 Route9TrainerHeader6:
-	trainer EVENT_BEAT_ROUTE_9_TRAINER_6, 4, Route9BattleText7, Route9EndBattleText7, Route9AfterBattleText7
+	trainer EVENT_BEAT_ROUTE_9_TRAINER_6, 4, Route9Youngster1BattleText, Route9Youngster1EndBattleText, Route9Youngster1AfterBattleText
 Route9TrainerHeader7:
-	trainer EVENT_BEAT_ROUTE_9_TRAINER_7, 2, Route9BattleText8, Route9EndBattleText8, Route9AfterBattleText8
+	trainer EVENT_BEAT_ROUTE_9_TRAINER_7, 2, Route9Hiker3BattleText, Route9Hiker3EndBattleText, Route9Hiker3AfterBattleText
 Route9TrainerHeader8:
-	trainer EVENT_BEAT_ROUTE_9_TRAINER_8, 2, Route9BattleText9, Route9EndBattleText9, Route9AfterBattleText9
+	trainer EVENT_BEAT_ROUTE_9_TRAINER_8, 2, Route9Youngster2BattleText, Route9Youngster2EndBattleText, Route9Youngster2AfterBattleText
 	db -1 ; end
 
-Route9Text1:
+Route9CooltrainerF1Text:
 	text_asm
 	ld hl, Route9TrainerHeader0
 	jr Route9TalkToTrainer
 
-Route9Text2:
+Route9CooltrainerM1Text:
 	text_asm
 	ld hl, Route9TrainerHeader1
 	jr Route9TalkToTrainer
 
-Route9Text3:
+Route9CooltrainerM2Text:
 	text_asm
 	ld hl, Route9TrainerHeader2
 	jr Route9TalkToTrainer
 
-Route9Text4:
+Route9CooltrainerF2Text:
 	text_asm
 	ld hl, Route9TrainerHeader3
 	jr Route9TalkToTrainer
 
-Route9Text5:
+Route9Hiker1Text:
 	text_asm
 	ld hl, Route9TrainerHeader4
 	jr Route9TalkToTrainer
 
-Route9Text6:
+Route9Hiker2Text:
 	text_asm
 	ld hl, Route9TrainerHeader5
 	jr Route9TalkToTrainer
 
-Route9Text7:
+Route9Youngster1Text:
 	text_asm
 	ld hl, Route9TrainerHeader6
 	jr Route9TalkToTrainer
 
-Route9Text8:
+Route9Hiker3Text:
 	text_asm
 	ld hl, Route9TrainerHeader7
 	jr Route9TalkToTrainer
 
-Route9Text9:
+Route9Youngster2Text:
 	text_asm
 	ld hl, Route9TrainerHeader8
 Route9TalkToTrainer:
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route9BattleText1:
-	text_far _Route9BattleText1
+Route9CooltrainerF1BattleText:
+	text_far _Route9CooltrainerF1BattleText
 	text_end
 
-Route9EndBattleText1:
-	text_far _Route9EndBattleText1
+Route9CooltrainerF1EndBattleText:
+	text_far _Route9CooltrainerF1EndBattleText
 	text_end
 
-Route9AfterBattleText1:
-	text_far _Route9AfterBattleText1
+Route9CooltrainerF1AfterBattleText:
+	text_far _Route9CooltrainerF1AfterBattleText
 	text_end
 
-Route9BattleText2:
-	text_far _Route9BattleText2
+Route9CooltrainerM1BattleText:
+	text_far _Route9CooltrainerM1BattleText
 	text_end
 
-Route9EndBattleText2:
-	text_far _Route9EndBattleText2
+Route9CooltrainerM1EndBattleText:
+	text_far _Route9CooltrainerM1EndBattleText
 	text_end
 
-Route9AfterBattleText2:
-	text_far _Route9AfterBattleText2
+Route9CooltrainerM1AfterBattleText:
+	text_far _Route9CooltrainerM1AfterBattleText
 	text_end
 
-Route9BattleText3:
-	text_far _Route9BattleText3
+Route9CooltrainerM2BattleText:
+	text_far _Route9CooltrainerM2BattleText
 	text_end
 
-Route9EndBattleText3:
-	text_far _Route9EndBattleText3
+Route9CooltrainerM2EndBattleText:
+	text_far _Route9CooltrainerM2EndBattleText
 	text_end
 
-Route9AfterBattleText3:
-	text_far _Route9AfterBattleText3
+Route9CooltrainerM2AfterBattleText:
+	text_far _Route9CooltrainerM2AfterBattleText
 	text_end
 
-Route9BattleText4:
-	text_far _Route9BattleText4
+Route9CooltrainerF2BattleText:
+	text_far _Route9CooltrainerF2BattleText
 	text_end
 
-Route9EndBattleText4:
-	text_far _Route9EndBattleText4
+Route9CooltrainerF2EndBattleText:
+	text_far _Route9CooltrainerF2EndBattleText
 	text_end
 
-Route9AfterBattleText4:
-	text_far _Route9AfterBattleText4
+Route9CooltrainerF2AfterBattleText:
+	text_far _Route9CooltrainerF2AfterBattleText
 	text_end
 
-Route9BattleText5:
-	text_far _Route9BattleText5
+Route9Hiker1BattleText:
+	text_far _Route9Hiker1BattleText
 	text_end
 
-Route9EndBattleText5:
-	text_far _Route9EndBattleText5
+Route9Hiker1EndBattleText:
+	text_far _Route9Hiker1EndBattleText
 	text_end
 
-Route9AfterBattleText5:
-	text_far _Route9AfterBattleText5
+Route9Hiker1AfterBattleText:
+	text_far _Route9Hiker1AfterBattleText
 	text_end
 
-Route9BattleText6:
-	text_far _Route9BattleText6
+Route9Hiker2BattleText:
+	text_far _Route9Hiker2BattleText
 	text_end
 
-Route9EndBattleText6:
-	text_far _Route9EndBattleText6
+Route9Hiker2EndBattleText:
+	text_far _Route9Hiker2EndBattleText
 	text_end
 
-Route9AfterBattleText6:
-	text_far _Route9AfterBattleText6
+Route9Hiker2AfterBattleText:
+	text_far _Route9Hiker2AfterBattleText
 	text_end
 
-Route9BattleText7:
-	text_far _Route9BattleText7
+Route9Youngster1BattleText:
+	text_far _Route9Youngster1BattleText
 	text_end
 
-Route9EndBattleText7:
-	text_far _Route9EndBattleText7
+Route9Youngster1EndBattleText:
+	text_far _Route9Youngster1EndBattleText
 	text_end
 
-Route9AfterBattleText7:
-	text_far _Route9AfterBattleText7
+Route9Youngster1AfterBattleText:
+	text_far _Route9Youngster1AfterBattleText
 	text_end
 
-Route9BattleText8:
-	text_far _Route9BattleText8
+Route9Hiker3BattleText:
+	text_far _Route9Hiker3BattleText
 	text_end
 
-Route9EndBattleText8:
-	text_far _Route9EndBattleText8
+Route9Hiker3EndBattleText:
+	text_far _Route9Hiker3EndBattleText
 	text_end
 
-Route9AfterBattleText8:
-	text_far _Route9AfterBattleText8
+Route9Hiker3AfterBattleText:
+	text_far _Route9Hiker3AfterBattleText
 	text_end
 
-Route9BattleText9:
-	text_far _Route9BattleText9
+Route9Youngster2BattleText:
+	text_far _Route9Youngster2BattleText
 	text_end
 
-Route9EndBattleText9:
-	text_far _Route9EndBattleText9
+Route9Youngster2EndBattleText:
+	text_far _Route9Youngster2EndBattleText
 	text_end
 
-Route9AfterBattleText9:
-	text_far _Route9AfterBattleText9
+Route9Youngster2AfterBattleText:
+	text_far _Route9Youngster2AfterBattleText
 	text_end
 
-Route9Text11:
-	text_far _Route9Text11
+Route9SignText:
+	text_far _Route9SignText
 	text_end

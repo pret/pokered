@@ -1,3 +1,8 @@
+	object_const_def
+	const SAFFRONMART_CLERK
+	const SAFFRONMART_SUPER_NERD
+	const SAFFRONMART_COOLTRAINER_F
+
 SaffronMart_Object:
 	db $0 ; border block
 
@@ -8,8 +13,8 @@ SaffronMart_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  0,  5, SPRITE_CLERK, STAY, RIGHT, 1 ; person
-	object_event  4,  2, SPRITE_SUPER_NERD, STAY, NONE, 2 ; person
-	object_event  6,  5, SPRITE_COOLTRAINER_F, WALK, ANY_DIR, 3 ; person
+	object_event  0,  5, SPRITE_CLERK, STAY, RIGHT, TEXT_SAFFRONMART_CLERK
+	object_event  4,  2, SPRITE_SUPER_NERD, STAY, NONE, TEXT_SAFFRONMART_SUPER_NERD
+	object_event  6,  5, SPRITE_COOLTRAINER_F, WALK, ANY_DIR, TEXT_SAFFRONMART_COOLTRAINER_F
 
 	def_warps_to SAFFRON_MART

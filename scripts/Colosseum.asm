@@ -2,8 +2,9 @@ Colosseum_Script:
 	jp TradeCenter_Script
 
 Colosseum_TextPointers:
-	dw ColosseumText1
+	def_text_pointers
+	dw_const ColosseumRedText, TEXT_COLOSSEUM_RED
 
-ColosseumText1:
-	text_far _ColosseumText1
+ColosseumRedText:
+	text_far _ColosseumRedText
 	text_end

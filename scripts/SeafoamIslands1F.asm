@@ -43,5 +43,6 @@ Seafoam1HolesCoords:
 	db -1 ; end
 
 SeafoamIslands1F_TextPointers:
-	dw BoulderText
-	dw BoulderText
+	def_text_pointers
+	dw_const BoulderText, TEXT_SEAFOAMISLANDS1F_BOULDER1
+	dw_const BoulderText, TEXT_SEAFOAMISLANDS1F_BOULDER2

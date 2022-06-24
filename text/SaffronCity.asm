@@ -1,60 +1,60 @@
-_SaffronCityText1::
+_SaffronCityRocket1Text::
 	text "What do you want?"
 	line "Get lost!"
 	done
 
-_SaffronCityText2::
+_SaffronCityRocket2Text::
 	text "BOSS said he'll"
 	line "take this town!"
 	done
 
-_SaffronCityText3::
+_SaffronCityRocket3Text::
 	text "Get out of the"
 	line "way!"
 	done
 
-_SaffronCityText4::
+_SaffronCityRocket4Text::
 	text "SAFFRON belongs"
 	line "to TEAM ROCKET!"
 	done
 
-_SaffronCityText5::
+_SaffronCityRocket5Text::
 	text "Being evil makes"
 	line "me feel so alive!"
 	done
 
-_SaffronCityText6::
+_SaffronCityRocket6Text::
 	text "Ow! Watch where"
 	line "you're walking!"
 	done
 
-_SaffronCityText7::
+_SaffronCityRocket7Text::
 	text "With SILPH under"
 	line "control, we can"
 	cont "exploit #MON"
 	cont "around the world!"
 	done
 
-_SaffronCityText8::
+_SaffronCityScientistText::
 	text "You beat TEAM"
 	line "ROCKET all alone?"
 	cont "That's amazing!"
 	done
 
-_SaffronCityText9::
+_SaffronCitySilphWorkerMText::
 	text "Yeah! TEAM ROCKET"
 	line "is gone!"
 	cont "It's safe to go"
 	cont "out again!"
 	done
 
-_SaffronCityText10::
+_SaffronCitySilphWorkerFText::
 	text "People should be"
 	line "flocking back to"
 	cont "SAFFRON now."
 	done
 
-_SaffronCityText11::
+_SaffronCityGentlemanText::
 	text "I flew here on my"
 	line "PIDGEOT when I"
 	cont "read about SILPH."
@@ -64,17 +64,17 @@ _SaffronCityText11::
 	cont "media action."
 	done
 
-_SaffronCityText12::
+_SaffronCityPidgeotText::
 	text "PIDGEOT: Bi bibii!@"
 	text_end
 
-_SaffronCityText13::
+_SaffronCityRockerText::
 	text "I saw ROCKET"
 	line "BOSS escaping"
 	cont "SILPH's building."
 	done
 
-_SaffronCityText14::
+_SaffronCityRocket8Text::
 	text "I'm a security"
 	line "guard."
 
@@ -82,7 +82,7 @@ _SaffronCityText14::
 	line "don't allow in!"
 	done
 
-_SaffronCityText15::
+_SaffronCityRocket9Text::
 	text "..."
 	line "Snore..."
 
@@ -90,17 +90,17 @@ _SaffronCityText15::
 	line "a snooze!"
 	done
 
-_SaffronCityText16::
+_SaffronCitySignText::
 	text "SAFFRON CITY"
 	line "Shining, Golden"
 	cont "Land of Commerce"
 	done
 
-_SaffronCityText17::
+_SaffronCityFightingDojoSignText::
 	text "FIGHTING DOJO"
 	done
 
-_SaffronCityText18::
+_SaffronCityGymSignText::
 	text "SAFFRON CITY"
 	line "#MON GYM"
 	cont "LEADER: SABRINA"
@@ -109,7 +109,7 @@ _SaffronCityText18::
 	line "Psychic #MON!"
 	done
 
-_SaffronCityText20::
+_SaffronCityTrainerTips1Text::
 	text "TRAINER TIPS"
 
 	para "FULL HEAL cures"
@@ -121,7 +121,7 @@ _SaffronCityText20::
 	cont "more convenient."
 	done
 
-_SaffronCityText21::
+_SaffronCityTrainerTips2Text::
 	text "TRAINER TIPS"
 
 	para "New GREAT BALL"
@@ -133,17 +133,17 @@ _SaffronCityText21::
 	cont "#MON."
 	done
 
-_SaffronCityText22::
+_SaffronCitySilphCoSignText::
 	text "SILPH CO."
 	line "OFFICE BUILDING"
 	done
 
-_SaffronCityText24::
+_SaffronCityMrPsychicsHouseSignText::
 	text "MR.PSYCHIC's"
 	line "HOUSE"
 	done
 
-_SaffronCityText25::
+_SaffronCitySilphCoLatestProductSignText::
 	text "SILPH's latest"
 	line "product!"
 

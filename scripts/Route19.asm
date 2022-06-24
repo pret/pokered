@@ -8,227 +8,229 @@ Route19_Script:
 	ret
 
 Route19_ScriptPointers:
-	dw CheckFightingMapTrainers
-	dw DisplayEnemyTrainerTextAndStartBattle
-	dw EndTrainerBattle
+	def_script_pointers
+	dw_const CheckFightingMapTrainers,              SCRIPT_ROUTE19_DEFAULT
+	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_ROUTE19_START_BATTLE
+	dw_const EndTrainerBattle,                      SCRIPT_ROUTE19_END_BATTLE
 
 Route19_TextPointers:
-	dw Route19Text1
-	dw Route19Text2
-	dw Route19Text3
-	dw Route19Text4
-	dw Route19Text5
-	dw Route19Text6
-	dw Route19Text7
-	dw Route19Text8
-	dw Route19Text9
-	dw Route19Text10
-	dw Route19Text11
+	def_text_pointers
+	dw_const Route19CooltrainerM1Text, TEXT_ROUTE19_COOLTRAINER_M1
+	dw_const Route19CooltrainerM2Text, TEXT_ROUTE19_COOLTRAINER_M2
+	dw_const Route19Swimmer1Text,      TEXT_ROUTE19_SWIMMER1
+	dw_const Route19Swimmer2Text,      TEXT_ROUTE19_SWIMMER2
+	dw_const Route19Swimmer3Text,      TEXT_ROUTE19_SWIMMER3
+	dw_const Route19Swimmer4Text,      TEXT_ROUTE19_SWIMMER4
+	dw_const Route19Swimmer5Text,      TEXT_ROUTE19_SWIMMER5
+	dw_const Route19Swimmer6Text,      TEXT_ROUTE19_SWIMMER6
+	dw_const Route19Swimmer7Text,      TEXT_ROUTE19_SWIMMER7
+	dw_const Route19Swimmer8Text,      TEXT_ROUTE19_SWIMMER8
+	dw_const Route19SignText,          TEXT_ROUTE19_SIGN
 
 Route19TrainerHeaders:
 	def_trainers
 Route19TrainerHeader0:
-	trainer EVENT_BEAT_ROUTE_19_TRAINER_0, 4, Route19BattleText1, Route19EndBattleText1, Route19AfterBattleText1
+	trainer EVENT_BEAT_ROUTE_19_TRAINER_0, 4, Route19CooltrainerM1BattleText, Route19CooltrainerM1EndBattleText, Route19CooltrainerM1AfterBattleText
 Route19TrainerHeader1:
-	trainer EVENT_BEAT_ROUTE_19_TRAINER_1, 3, Route19BattleText2, Route19EndBattleText2, Route19AfterBattleText2
+	trainer EVENT_BEAT_ROUTE_19_TRAINER_1, 3, Route19CooltrainerM2BattleText, Route19CooltrainerM2EndBattleText, Route19CooltrainerM2AfterBattleText
 Route19TrainerHeader2:
-	trainer EVENT_BEAT_ROUTE_19_TRAINER_2, 3, Route19BattleText3, Route19EndBattleText3, Route19AfterBattleText3
+	trainer EVENT_BEAT_ROUTE_19_TRAINER_2, 3, Route19Swimmer1BattleText, Route19Swimmer1EndBattleText, Route19Swimmer1AfterBattleText
 Route19TrainerHeader3:
-	trainer EVENT_BEAT_ROUTE_19_TRAINER_3, 4, Route19BattleText4, Route19EndBattleText4, Route19AfterBattleText4
+	trainer EVENT_BEAT_ROUTE_19_TRAINER_3, 4, Route19Swimmer2BattleText, Route19Swimmer2EndBattleText, Route19Swimmer2AfterBattleText
 Route19TrainerHeader4:
-	trainer EVENT_BEAT_ROUTE_19_TRAINER_4, 4, Route19BattleText5, Route19EndBattleText5, Route19AfterBattleText5
+	trainer EVENT_BEAT_ROUTE_19_TRAINER_4, 4, Route19Swimmer3BattleText, Route19Swimmer3EndBattleText, Route19Swimmer3AfterBattleText
 Route19TrainerHeader5:
-	trainer EVENT_BEAT_ROUTE_19_TRAINER_5, 4, Route19BattleText6, Route19EndBattleText6, Route19AfterBattleText6
+	trainer EVENT_BEAT_ROUTE_19_TRAINER_5, 4, Route19Swimmer4BattleText, Route19Swimmer4EndBattleText, Route19Swimmer4AfterBattleText
 Route19TrainerHeader6:
-	trainer EVENT_BEAT_ROUTE_19_TRAINER_6, 3, Route19BattleText7, Route19EndBattleText7, Route19AfterBattleText7
+	trainer EVENT_BEAT_ROUTE_19_TRAINER_6, 3, Route19Swimmer5BattleText, Route19Swimmer5EndBattleText, Route19Swimmer5AfterBattleText
 Route19TrainerHeader7:
-	trainer EVENT_BEAT_ROUTE_19_TRAINER_7, 4, Route19BattleText8, Route19EndBattleText8, Route19AfterBattleText8
+	trainer EVENT_BEAT_ROUTE_19_TRAINER_7, 4, Route19Swimmer6BattleText, Route19Swimmer6EndBattleText, Route19Swimmer6AfterBattleText
 Route19TrainerHeader8:
-	trainer EVENT_BEAT_ROUTE_19_TRAINER_8, 4, Route19BattleText9, Route19EndBattleText9, Route19AfterBattleText9
+	trainer EVENT_BEAT_ROUTE_19_TRAINER_8, 4, Route19Swimmer7BattleText, Route19Swimmer7EndBattleText, Route19Swimmer7AfterBattleText
 Route19TrainerHeader9:
-	trainer EVENT_BEAT_ROUTE_19_TRAINER_9, 4, Route19BattleText10, Route19EndBattleText10, Route19AfterBattleText10
+	trainer EVENT_BEAT_ROUTE_19_TRAINER_9, 4, Route19Swimmer8BattleText, Route19Swimmer8EndBattleText, Route19Swimmer8AfterBattleText
 	db -1 ; end
 
-Route19Text1:
+Route19CooltrainerM1Text:
 	text_asm
 	ld hl, Route19TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route19Text2:
+Route19CooltrainerM2Text:
 	text_asm
 	ld hl, Route19TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route19Text3:
+Route19Swimmer1Text:
 	text_asm
 	ld hl, Route19TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route19Text4:
+Route19Swimmer2Text:
 	text_asm
 	ld hl, Route19TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route19Text5:
+Route19Swimmer3Text:
 	text_asm
 	ld hl, Route19TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route19Text6:
+Route19Swimmer4Text:
 	text_asm
 	ld hl, Route19TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route19Text7:
+Route19Swimmer5Text:
 	text_asm
 	ld hl, Route19TrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route19Text8:
+Route19Swimmer6Text:
 	text_asm
 	ld hl, Route19TrainerHeader7
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route19Text9:
+Route19Swimmer7Text:
 	text_asm
 	ld hl, Route19TrainerHeader8
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route19Text10:
+Route19Swimmer8Text:
 	text_asm
 	ld hl, Route19TrainerHeader9
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route19BattleText1:
-	text_far _Route19BattleText1
+Route19CooltrainerM1BattleText:
+	text_far _Route19CooltrainerM1BattleText
 	text_end
 
-Route19EndBattleText1:
-	text_far _Route19EndBattleText1
+Route19CooltrainerM1EndBattleText:
+	text_far _Route19CooltrainerM1EndBattleText
 	text_end
 
-Route19AfterBattleText1:
-	text_far _Route19AfterBattleText1
+Route19CooltrainerM1AfterBattleText:
+	text_far _Route19CooltrainerM1AfterBattleText
 	text_end
 
-Route19BattleText2:
-	text_far _Route19BattleText2
+Route19CooltrainerM2BattleText:
+	text_far _Route19CooltrainerM2BattleText
 	text_end
 
-Route19EndBattleText2:
-	text_far _Route19EndBattleText2
+Route19CooltrainerM2EndBattleText:
+	text_far _Route19CooltrainerM2EndBattleText
 	text_end
 
-Route19AfterBattleText2:
-	text_far _Route19AfterBattleText2
+Route19CooltrainerM2AfterBattleText:
+	text_far _Route19CooltrainerM2AfterBattleText
 	text_end
 
-Route19BattleText3:
-	text_far _Route19BattleText3
+Route19Swimmer1BattleText:
+	text_far _Route19Swimmer1BattleText
 	text_end
 
-Route19EndBattleText3:
-	text_far _Route19EndBattleText3
+Route19Swimmer1EndBattleText:
+	text_far _Route19Swimmer1EndBattleText
 	text_end
 
-Route19AfterBattleText3:
-	text_far _Route19AfterBattleText3
+Route19Swimmer1AfterBattleText:
+	text_far _Route19Swimmer1AfterBattleText
 	text_end
 
-Route19BattleText4:
-	text_far _Route19BattleText4
+Route19Swimmer2BattleText:
+	text_far _Route19Swimmer2BattleText
 	text_end
 
-Route19EndBattleText4:
-	text_far _Route19EndBattleText4
+Route19Swimmer2EndBattleText:
+	text_far _Route19Swimmer2EndBattleText
 	text_end
 
-Route19AfterBattleText4:
-	text_far _Route19AfterBattleText4
+Route19Swimmer2AfterBattleText:
+	text_far _Route19Swimmer2AfterBattleText
 	text_end
 
-Route19BattleText5:
-	text_far _Route19BattleText5
+Route19Swimmer3BattleText:
+	text_far _Route19Swimmer3BattleText
 	text_end
 
-Route19EndBattleText5:
-	text_far _Route19EndBattleText5
+Route19Swimmer3EndBattleText:
+	text_far _Route19Swimmer3EndBattleText
 	text_end
 
-Route19AfterBattleText5:
-	text_far _Route19AfterBattleText5
+Route19Swimmer3AfterBattleText:
+	text_far _Route19Swimmer3AfterBattleText
 	text_end
 
-Route19BattleText6:
-	text_far _Route19BattleText6
+Route19Swimmer4BattleText:
+	text_far _Route19Swimmer4BattleText
 	text_end
 
-Route19EndBattleText6:
-	text_far _Route19EndBattleText6
+Route19Swimmer4EndBattleText:
+	text_far _Route19Swimmer4EndBattleText
 	text_end
 
-Route19AfterBattleText6:
-	text_far _Route19AfterBattleText6
+Route19Swimmer4AfterBattleText:
+	text_far _Route19Swimmer4AfterBattleText
 	text_end
 
-Route19BattleText7:
-	text_far _Route19BattleText7
+Route19Swimmer5BattleText:
+	text_far _Route19Swimmer5BattleText
 	text_end
 
-Route19EndBattleText7:
-	text_far _Route19EndBattleText7
+Route19Swimmer5EndBattleText:
+	text_far _Route19Swimmer5EndBattleText
 	text_end
 
-Route19AfterBattleText7:
-	text_far _Route19AfterBattleText7
+Route19Swimmer5AfterBattleText:
+	text_far _Route19Swimmer5AfterBattleText
 	text_end
 
-Route19BattleText8:
-	text_far _Route19BattleText8
+Route19Swimmer6BattleText:
+	text_far _Route19Swimmer6BattleText
 	text_end
 
-Route19EndBattleText8:
-	text_far _Route19EndBattleText8
+Route19Swimmer6EndBattleText:
+	text_far _Route19Swimmer6EndBattleText
 	text_end
 
-Route19AfterBattleText8:
-	text_far _Route19AfterBattleText8
+Route19Swimmer6AfterBattleText:
+	text_far _Route19Swimmer6AfterBattleText
 	text_end
 
-Route19BattleText9:
-	text_far _Route19BattleText9
+Route19Swimmer7BattleText:
+	text_far _Route19Swimmer7BattleText
 	text_end
 
-Route19EndBattleText9:
-	text_far _Route19EndBattleText9
+Route19Swimmer7EndBattleText:
+	text_far _Route19Swimmer7EndBattleText
 	text_end
 
-Route19AfterBattleText9:
-	text_far _Route19AfterBattleText9
+Route19Swimmer7AfterBattleText:
+	text_far _Route19Swimmer7AfterBattleText
 	text_end
 
-Route19BattleText10:
-	text_far _Route19BattleText10
+Route19Swimmer8BattleText:
+	text_far _Route19Swimmer8BattleText
 	text_end
 
-Route19EndBattleText10:
-	text_far _Route19EndBattleText10
+Route19Swimmer8EndBattleText:
+	text_far _Route19Swimmer8EndBattleText
 	text_end
 
-Route19AfterBattleText10:
-	text_far _Route19AfterBattleText10
+Route19Swimmer8AfterBattleText:
+	text_far _Route19Swimmer8AfterBattleText
 	text_end
 
-Route19Text11:
-	text_far _Route19Text11
+Route19SignText:
+	text_far _Route19SignText
 	text_end

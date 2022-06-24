@@ -2,19 +2,20 @@ CeladonMart4F_Script:
 	jp EnableAutoTextBoxDrawing
 
 CeladonMart4F_TextPointers:
-	dw CeladonMart4ClerkText
-	dw CeladonMart4Text2
-	dw CeladonMart4Text3
-	dw CeladonMart4Text4
+	def_text_pointers
+	dw_const CeladonMart4FClerkText,            TEXT_CELADONMART4F_CLERK
+	dw_const CeladonMart4FSuperNerdText,        TEXT_CELADONMART4F_SUPER_NERD
+	dw_const CeladonMart4FYoungsterText,        TEXT_CELADONMART4F_YOUNGSTER
+	dw_const CeladonMart4FCurrentFloorSignText, TEXT_CELADONMART4F_CURRENT_FLOOR_SIGN
 
-CeladonMart4Text2:
-	text_far _CeladonMart4Text2
+CeladonMart4FSuperNerdText:
+	text_far _CeladonMart4FSuperNerdText
 	text_end
 
-CeladonMart4Text3:
-	text_far _CeladonMart4Text3
+CeladonMart4FYoungsterText:
+	text_far _CeladonMart4FYoungsterText
 	text_end
 
-CeladonMart4Text4:
-	text_far _CeladonMart4Text4
+CeladonMart4FCurrentFloorSignText:
+	text_far _CeladonMart4FCurrentFloorSignText
 	text_end

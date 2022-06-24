@@ -1,3 +1,8 @@
+	object_const_def
+	const CERULEANCAVE2F_PP_UP
+	const CERULEANCAVE2F_ULTRA_BALL
+	const CERULEANCAVE2F_FULL_RESTORE
+
 CeruleanCave2F_Object:
 	db $7d ; border block
 
@@ -12,8 +17,8 @@ CeruleanCave2F_Object:
 	def_bg_events
 
 	def_object_events
-	object_event 29,  9, SPRITE_POKE_BALL, STAY, NONE, 1, PP_UP
-	object_event  4, 15, SPRITE_POKE_BALL, STAY, NONE, 2, ULTRA_BALL
-	object_event 13,  6, SPRITE_POKE_BALL, STAY, NONE, 3, FULL_RESTORE
+	object_event 29,  9, SPRITE_POKE_BALL, STAY, NONE, TEXT_CERULEANCAVE2F_PP_UP, PP_UP
+	object_event  4, 15, SPRITE_POKE_BALL, STAY, NONE, TEXT_CERULEANCAVE2F_ULTRA_BALL, ULTRA_BALL
+	object_event 13,  6, SPRITE_POKE_BALL, STAY, NONE, TEXT_CERULEANCAVE2F_FULL_RESTORE, FULL_RESTORE
 
 	def_warps_to CERULEAN_CAVE_2F

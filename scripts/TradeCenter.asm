@@ -31,8 +31,9 @@ TradeCenter_Script:
 	ret
 
 TradeCenter_TextPointers:
-	dw TradeCenterText1
+	def_text_pointers
+	dw_const TradeCenterRedText, TEXT_TRADECENTER_RED
 
-TradeCenterText1:
-	text_far _TradeCenterText1
+TradeCenterRedText:
+	text_far _TradeCenterRedText
 	text_end

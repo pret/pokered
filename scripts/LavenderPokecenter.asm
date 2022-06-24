@@ -3,21 +3,22 @@ LavenderPokecenter_Script:
 	jp EnableAutoTextBoxDrawing
 
 LavenderPokecenter_TextPointers:
-	dw LavenderHealNurseText
-	dw LavenderPokecenterText2
-	dw LavenderPokecenterText3
-	dw LavenderTradeNurseText
+	def_text_pointers
+	dw_const LavenderPokecenterNurseText,            TEXT_LAVENDERPOKECENTER_NURSE
+	dw_const LavenderPokecenterGentlemanText,        TEXT_LAVENDERPOKECENTER_GENTLEMAN
+	dw_const LavenderPokecenterLittleGirlText,       TEXT_LAVENDERPOKECENTER_LITTLE_GIRL
+	dw_const LavenderPokecenterLinkReceptionistText, TEXT_LAVENDERPOKECENTER_LINK_RECEPTIONIST
 
-LavenderTradeNurseText:
+LavenderPokecenterLinkReceptionistText:
 	script_cable_club_receptionist
 
-LavenderHealNurseText:
+LavenderPokecenterNurseText:
 	script_pokecenter_nurse
 
-LavenderPokecenterText2:
-	text_far _LavenderPokecenterText2
+LavenderPokecenterGentlemanText:
+	text_far _LavenderPokecenterGentlemanText
 	text_end
 
-LavenderPokecenterText3:
-	text_far _LavenderPokecenterText3
+LavenderPokecenterLittleGirlText:
+	text_far _LavenderPokecenterLittleGirlText
 	text_end

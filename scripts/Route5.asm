@@ -2,8 +2,9 @@ Route5_Script:
 	jp EnableAutoTextBoxDrawing
 
 Route5_TextPointers:
-	dw Route5Text1
+	def_text_pointers
+	dw_const Route5UndergroundPathSignText, TEXT_ROUTE5_UNDERGROUND_PATH_SIGN
 
-Route5Text1:
-	text_far _Route5Text1
+Route5UndergroundPathSignText:
+	text_far _Route5UndergroundPathSignText
 	text_end

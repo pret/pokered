@@ -1,4 +1,4 @@
-_Route18GateUpstairsText_49993::
+_Route18Gate2FLeftBinocularsText::
 	text "Looked into the"
 	line "binoculars."
 
@@ -6,7 +6,7 @@ _Route18GateUpstairsText_49993::
 	line "the west!"
 	done
 
-_Route18GateUpstairsText_4999f::
+_Route18Gate2FRightBinocularsText::
 	text "Looked into the"
 	line "binoculars."
 

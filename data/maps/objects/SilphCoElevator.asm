@@ -6,7 +6,7 @@ SilphCoElevator_Object:
 	warp_event  2,  3, UNUSED_MAP_ED, 1
 
 	def_bg_events
-	bg_event  3,  0, 1 ; SilphCoElevatorText1
+	bg_event  3,  0, TEXT_SILPHCOELEVATOR_ELEVATOR
 
 	def_object_events
 

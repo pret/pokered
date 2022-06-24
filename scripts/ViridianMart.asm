@@ -1,11 +1,11 @@
 ViridianMart_Script:
-	call ViridianMartScript_1d47d
+	call ViridianMartCheckParcelDeliveredScript
 	call EnableAutoTextBoxDrawing
 	ld hl, ViridianMart_ScriptPointers
 	ld a, [wViridianMartCurScript]
 	jp CallFunctionInTable
 
-ViridianMartScript_1d47d:
+ViridianMartCheckParcelDeliveredScript:
 	CheckEvent EVENT_OAK_GOT_PARCEL
 	jr nz, .delivered_parcel
 	ld hl, ViridianMart_TextPointers
@@ -20,76 +20,80 @@ ViridianMartScript_1d47d:
 	ret
 
 ViridianMart_ScriptPointers:
-	dw ViridianMartScript0
-	dw ViridianMartScript1
-	dw ViridianMartScript2
+	def_script_pointers
+	dw_const ViridianMartDefaultScript,    SCRIPT_VIRIDIANMART_DEFAULT
+	dw_const ViridianMartOaksParcelScript, SCRIPT_VIRIDIANMART_OAKS_PARCEL
+	dw_const ViridianMartNoopScript,       SCRIPT_VIRIDIANMART_NOOP
 
-ViridianMartScript0:
+ViridianMartDefaultScript:
 	call UpdateSprites
-	ld a, $4
+	ld a, TEXT_VIRIDIANMART_CLERK_YOU_CAME_FROM_PALLET_TOWN
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld hl, wSimulatedJoypadStatesEnd
-	ld de, RLEMovement1d4bb
+	ld de, .PlayerMovement
 	call DecodeRLEList
 	dec a
 	ld [wSimulatedJoypadStatesIndex], a
 	call StartSimulatingJoypadStates
-	ld a, $1
+	ld a, SCRIPT_VIRIDIANMART_OAKS_PARCEL
 	ld [wViridianMartCurScript], a
 	ret
 
-RLEMovement1d4bb:
+.PlayerMovement:
 	db D_LEFT, 1
 	db D_UP, 2
 	db -1 ; end
 
-ViridianMartScript1:
+ViridianMartOaksParcelScript:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 	call Delay3
-	ld a, $5
+	ld a, TEXT_VIRIDIANMART_CLERK_PARCEL_QUEST
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	lb bc, OAKS_PARCEL, 1
 	call GiveItem
 	SetEvent EVENT_GOT_OAKS_PARCEL
-	ld a, $2
+	ld a, SCRIPT_VIRIDIANMART_NOOP
 	ld [wViridianMartCurScript], a
 	; fallthrough
-ViridianMartScript2:
+ViridianMartNoopScript:
 	ret
 
 ViridianMart_TextPointers:
-	dw ViridianMartText1
-	dw ViridianMartText2
-	dw ViridianMartText3
-	dw ViridianMartText4
-	dw ViridianMartText5
+	dw ViridianMartClerkSayHiToOakText
+	dw ViridianMartYoungsterText
+	dw ViridianMartCooltrainerMText
+	const_def 4
+	dw_const ViridianMartClerkYouCameFromPalletTownText, TEXT_VIRIDIANMART_CLERK_YOU_CAME_FROM_PALLET_TOWN
+	dw_const ViridianMartClerkParcelQuestText,           TEXT_VIRIDIANMART_CLERK_PARCEL_QUEST
 
 ViridianMart_TextPointers2:
-	dw ViridianCashierText
-	dw ViridianMartText2
-	dw ViridianMartText3
+	; This becomes the primary text pointers table when Oak's parcel has been delivered.
+	def_text_pointers
+	dw_const ViridianMartClerkText,        TEXT_VIRIDIANMART_CLERK
+	dw_const ViridianMartYoungsterText,    TEXT_VIRIDIANMART_YOUNGSTER
+	dw_const ViridianMartCooltrainerMText, TEXT_VIRIDIANMART_COOLTRAINER_M
 
-ViridianMartText1:
-	text_far _ViridianMartText1
+ViridianMartClerkSayHiToOakText:
+	text_far _ViridianMartClerkSayHiToOakText
 	text_end
 
-ViridianMartText4:
-	text_far _ViridianMartText4
+ViridianMartClerkYouCameFromPalletTownText:
+	text_far _ViridianMartClerkYouCameFromPalletTownText
 	text_end
 
-ViridianMartText5:
-	text_far ViridianMartParcelQuestText
+ViridianMartClerkParcelQuestText:
+	text_far _ViridianMartClerkParcelQuestText
 	sound_get_key_item
 	text_end
 
-ViridianMartText2:
-	text_far _ViridianMartText2
+ViridianMartYoungsterText:
+	text_far _ViridianMartYoungsterText
 	text_end
 
-ViridianMartText3:
-	text_far _ViridianMartText3
+ViridianMartCooltrainerMText:
+	text_far _ViridianMartCooltrainerMText
 	text_end

@@ -1,4 +1,4 @@
-_SSAnne7RubText::
+_SSAnneCaptainsRoomRubCaptainsBackText::
 	text "CAPTAIN: Ooargh..."
 	line "I feel hideous..."
 	cont "Urrp! Seasick..."
@@ -11,7 +11,7 @@ _SSAnne7RubText::
 	line "Rub-rub...@"
 	text_end
 
-_ReceivingHM01Text::
+_SSAnneCaptainsRoomCaptainIFeelMuchBetterText::
 	text "CAPTAIN: Whew!"
 	line "Thank you! I"
 	cont "feel much better!"
@@ -31,14 +31,14 @@ _ReceivingHM01Text::
 	cont "any time!"
 	prompt
 
-_ReceivedHM01Text::
+_SSAnneCaptainsRoomCaptainReceivedHM01Text::
 	text "<PLAYER> got"
 	line "@"
 	text_ram wStringBuffer
 	text "!@"
 	text_end
 
-_SSAnne7Text_61932::
+_SSAnneCaptainsRoomCaptainNotSickAnymoreText::
 	text "CAPTAIN: Whew!"
 
 	para "Now that I'm not"
@@ -46,17 +46,17 @@ _SSAnne7Text_61932::
 	cont "guess it's time."
 	done
 
-_HM01NoRoomText::
+_SSAnneCaptainsRoomCaptainHM01NoRoomText::
 	text "Oh no! You have"
 	line "no room for this!"
 	done
 
-_SSAnne7Text2::
+_SSAnneCaptainsRoomTrashText::
 	text "Yuck! Shouldn't"
 	line "have looked!"
 	done
 
-_SSAnne7Text3::
+_SSAnneCaptainsRoomSeasickBookText::
 	text "How to Conquer"
 	line "Seasickness..."
 	cont "The CAPTAIN's"

@@ -8,170 +8,172 @@ MtMoon1F_Script:
 	ret
 
 MtMoon1F_ScriptPointers:
-	dw CheckFightingMapTrainers
-	dw DisplayEnemyTrainerTextAndStartBattle
-	dw EndTrainerBattle
+	def_script_pointers
+	dw_const CheckFightingMapTrainers,              SCRIPT_MTMOON1F_DEFAULT
+	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_MTMOON1F_START_BATTLE
+	dw_const EndTrainerBattle,                      SCRIPT_MTMOON1F_END_BATTLE
 
 MtMoon1F_TextPointers:
-	dw MtMoon1Text1
-	dw MtMoon1Text2
-	dw MtMoon1Text3
-	dw MtMoon1Text4
-	dw MtMoon1Text5
-	dw MtMoon1Text6
-	dw MtMoon1Text7
-	dw PickUpItemText
-	dw PickUpItemText
-	dw PickUpItemText
-	dw PickUpItemText
-	dw PickUpItemText
-	dw PickUpItemText
-	dw MtMoon1Text14
+	def_text_pointers
+	dw_const MtMoon1FHikerText,         TEXT_MTMOON1F_HIKER
+	dw_const MtMoon1FYoungster1Text,    TEXT_MTMOON1F_YOUNGSTER1
+	dw_const MtMoon1FCooltrainerF1Text, TEXT_MTMOON1F_COOLTRAINER_F1
+	dw_const MtMoon1FSuperNerdText,     TEXT_MTMOON1F_SUPER_NERD
+	dw_const MtMoon1FCooltrainerF2Text, TEXT_MTMOON1F_COOLTRAINER_F2
+	dw_const MtMoon1FYoungster2Text,    TEXT_MTMOON1F_YOUNGSTER2
+	dw_const MtMoon1FYoungster3Text,    TEXT_MTMOON1F_YOUNGSTER3
+	dw_const PickUpItemText,            TEXT_MTMOON1F_POTION1
+	dw_const PickUpItemText,            TEXT_MTMOON1F_MOON_STONE
+	dw_const PickUpItemText,            TEXT_MTMOON1F_RARE_CANDY
+	dw_const PickUpItemText,            TEXT_MTMOON1F_ESCAPE_ROPE
+	dw_const PickUpItemText,            TEXT_MTMOON1F_POTION2
+	dw_const PickUpItemText,            TEXT_MTMOON1F_TM_WATER_GUN
+	dw_const MtMoon1FBewareZubatSign,   TEXT_MTMOON1F_BEWARE_ZUBAT_SIGN
 
 MtMoon1TrainerHeaders:
 	def_trainers
 MtMoon1TrainerHeader0:
-	trainer EVENT_BEAT_MT_MOON_1_TRAINER_0, 2, MtMoon1BattleText2, MtMoon1EndBattleText2, MtMoon1AfterBattleText2
+	trainer EVENT_BEAT_MT_MOON_1_TRAINER_0, 2, MtMoon1FHikerBattleText, MtMoon1FHikerEndBattleText, MtMoon1FHikerAfterBattleText
 MtMoon1TrainerHeader1:
-	trainer EVENT_BEAT_MT_MOON_1_TRAINER_1, 3, MtMoon1BattleText3, MtMoon1EndBattleText3, MtMoon1AfterBattleText3
+	trainer EVENT_BEAT_MT_MOON_1_TRAINER_1, 3, MtMoon1FYoungster1BattleText, MtMoon1FYoungster1EndBattleText, MtMoon1FYoungster1AfterBattleText
 MtMoon1TrainerHeader2:
-	trainer EVENT_BEAT_MT_MOON_1_TRAINER_2, 3, MtMoon1BattleText4, MtMoon1EndBattleText4, MtMoon1AfterBattleText4
+	trainer EVENT_BEAT_MT_MOON_1_TRAINER_2, 3, MtMoon1FCooltrainerF1BattleText, MtMoon1FCooltrainerF1EndBattleText, MtMoon1FCooltrainerF1AfterBattleText
 MtMoon1TrainerHeader3:
-	trainer EVENT_BEAT_MT_MOON_1_TRAINER_3, 3, MtMoon1BattleText5, MtMoon1EndBattleText5, MtMoon1AfterBattleText5
+	trainer EVENT_BEAT_MT_MOON_1_TRAINER_3, 3, MtMoon1FSuperNerdBattleText, MtMoon1FSuperNerdEndBattleText, MtMoon1FSuperNerdAfterBattleText
 MtMoon1TrainerHeader4:
-	trainer EVENT_BEAT_MT_MOON_1_TRAINER_4, 3, MtMoon1BattleText6, MtMoon1EndBattleText6, MtMoon1AfterBattleText6
+	trainer EVENT_BEAT_MT_MOON_1_TRAINER_4, 3, MtMoon1FCooltrainerF2BattleText, MtMoon1FCooltrainerF2EndBattleText, MtMoon1FCooltrainerF2AfterBattleText
 MtMoon1TrainerHeader5:
-	trainer EVENT_BEAT_MT_MOON_1_TRAINER_5, 3, MtMoon1BattleText7, MtMoon1EndBattleText7, MtMoon1AfterBattleText7
+	trainer EVENT_BEAT_MT_MOON_1_TRAINER_5, 3, MtMoon1FYoungster2BattleText, MtMoon1FYoungster2EndBattleText, MtMoon1FYoungster2AfterBattleText
 MtMoon1TrainerHeader6:
-	trainer EVENT_BEAT_MT_MOON_1_TRAINER_6, 3, MtMoon1BattleText8, MtMoon1EndBattleText8, MtMoon1AfterBattleText8
+	trainer EVENT_BEAT_MT_MOON_1_TRAINER_6, 3, MtMoon1FYoungster3BattleText, MtMoon1FYoungster3EndBattleText, MtMoon1FYoungster3AfterBattleText
 	db -1 ; end
 
-MtMoon1Text1:
+MtMoon1FHikerText:
 	text_asm
 	ld hl, MtMoon1TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
-MtMoon1Text2:
+MtMoon1FYoungster1Text:
 	text_asm
 	ld hl, MtMoon1TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
-MtMoon1Text3:
+MtMoon1FCooltrainerF1Text:
 	text_asm
 	ld hl, MtMoon1TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
-MtMoon1Text4:
+MtMoon1FSuperNerdText:
 	text_asm
 	ld hl, MtMoon1TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
-MtMoon1Text5:
+MtMoon1FCooltrainerF2Text:
 	text_asm
 	ld hl, MtMoon1TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
-MtMoon1Text6:
+MtMoon1FYoungster2Text:
 	text_asm
 	ld hl, MtMoon1TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
-MtMoon1Text7:
+MtMoon1FYoungster3Text:
 	text_asm
 	ld hl, MtMoon1TrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
 
-MtMoon1BattleText2:
-	text_far _MtMoon1BattleText2
+MtMoon1FHikerBattleText:
+	text_far _MtMoon1FHikerBattleText
 	text_end
 
-MtMoon1EndBattleText2:
-	text_far _MtMoon1EndBattleText2
+MtMoon1FHikerEndBattleText:
+	text_far _MtMoon1FHikerEndBattleText
 	text_end
 
-MtMoon1AfterBattleText2:
-	text_far _MtMoon1AfterBattleText2
+MtMoon1FHikerAfterBattleText:
+	text_far _MtMoon1FHikerAfterBattleText
 	text_end
 
-MtMoon1BattleText3:
-	text_far _MtMoon1BattleText3
+MtMoon1FYoungster1BattleText:
+	text_far _MtMoon1FYoungster1BattleText
 	text_end
 
-MtMoon1EndBattleText3:
-	text_far _MtMoon1EndBattleText3
+MtMoon1FYoungster1EndBattleText:
+	text_far _MtMoon1FYoungster1EndBattleText
 	text_end
 
-MtMoon1AfterBattleText3:
-	text_far _MtMoon1AfterBattleText3
+MtMoon1FYoungster1AfterBattleText:
+	text_far _MtMoon1FYoungster1AfterBattleText
 	text_end
 
-MtMoon1BattleText4:
-	text_far _MtMoon1BattleText4
+MtMoon1FCooltrainerF1BattleText:
+	text_far _MtMoon1FCooltrainerF1BattleText
 	text_end
 
-MtMoon1EndBattleText4:
-	text_far _MtMoon1EndBattleText4
+MtMoon1FCooltrainerF1EndBattleText:
+	text_far _MtMoon1FCooltrainerF1EndBattleText
 	text_end
 
-MtMoon1AfterBattleText4:
-	text_far _MtMoon1AfterBattleText4
+MtMoon1FCooltrainerF1AfterBattleText:
+	text_far _MtMoon1FCooltrainerF1AfterBattleText
 	text_end
 
-MtMoon1BattleText5:
-	text_far _MtMoon1BattleText5
+MtMoon1FSuperNerdBattleText:
+	text_far _MtMoon1FSuperNerdBattleText
 	text_end
 
-MtMoon1EndBattleText5:
-	text_far _MtMoon1EndBattleText5
+MtMoon1FSuperNerdEndBattleText:
+	text_far _MtMoon1FSuperNerdEndBattleText
 	text_end
 
-MtMoon1AfterBattleText5:
-	text_far _MtMoon1AfterBattleText5
+MtMoon1FSuperNerdAfterBattleText:
+	text_far _MtMoon1FSuperNerdAfterBattleText
 	text_end
 
-MtMoon1BattleText6:
-	text_far _MtMoon1BattleText6
+MtMoon1FCooltrainerF2BattleText:
+	text_far _MtMoon1FCooltrainerF2BattleText
 	text_end
 
-MtMoon1EndBattleText6:
-	text_far _MtMoon1EndBattleText6
+MtMoon1FCooltrainerF2EndBattleText:
+	text_far _MtMoon1FCooltrainerF2EndBattleText
 	text_end
 
-MtMoon1AfterBattleText6:
-	text_far _MtMoon1AfterBattleText6
+MtMoon1FCooltrainerF2AfterBattleText:
+	text_far _MtMoon1FCooltrainerF2AfterBattleText
 	text_end
 
-MtMoon1BattleText7:
-	text_far _MtMoon1BattleText7
+MtMoon1FYoungster2BattleText:
+	text_far _MtMoon1FYoungster2BattleText
 	text_end
 
-MtMoon1EndBattleText7:
-	text_far _MtMoon1EndBattleText7
+MtMoon1FYoungster2EndBattleText:
+	text_far _MtMoon1FYoungster2EndBattleText
 	text_end
 
-MtMoon1AfterBattleText7:
-	text_far _MtMoon1AfterBattleText7
+MtMoon1FYoungster2AfterBattleText:
+	text_far _MtMoon1FYoungster2AfterBattleText
 	text_end
 
-MtMoon1BattleText8:
-	text_far _MtMoon1BattleText8
+MtMoon1FYoungster3BattleText:
+	text_far _MtMoon1FYoungster3BattleText
 	text_end
 
-MtMoon1EndBattleText8:
-	text_far _MtMoon1EndBattleText8
+MtMoon1FYoungster3EndBattleText:
+	text_far _MtMoon1FYoungster3EndBattleText
 	text_end
 
-MtMoon1AfterBattleText8:
-	text_far _MtMoon1AfterBattleText8
+MtMoon1FYoungster3AfterBattleText:
+	text_far _MtMoon1FYoungster3AfterBattleText
 	text_end
 
-MtMoon1Text14:
-	text_far _MtMoon1Text14
+MtMoon1FBewareZubatSign:
+	text_far _MtMoon1FBewareZubatSign
 	text_end

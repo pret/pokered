@@ -1,3 +1,9 @@
+	object_const_def
+	const SAFFRONPOKECENTER_NURSE
+	const SAFFRONPOKECENTER_BEAUTY
+	const SAFFRONPOKECENTER_GENTLEMAN
+	const SAFFRONPOKECENTER_LINK_RECEPTIONIST
+
 SaffronPokecenter_Object:
 	db $0 ; border block
 
@@ -8,9 +14,9 @@ SaffronPokecenter_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  3,  1, SPRITE_NURSE, STAY, DOWN, 1 ; person
-	object_event  5,  5, SPRITE_BEAUTY, STAY, NONE, 2 ; person
-	object_event  8,  3, SPRITE_GENTLEMAN, STAY, DOWN, 3 ; person
-	object_event 11,  2, SPRITE_LINK_RECEPTIONIST, STAY, DOWN, 4 ; person
+	object_event  3,  1, SPRITE_NURSE, STAY, DOWN, TEXT_SAFFRONPOKECENTER_NURSE
+	object_event  5,  5, SPRITE_BEAUTY, STAY, NONE, TEXT_SAFFRONPOKECENTER_BEAUTY
+	object_event  8,  3, SPRITE_GENTLEMAN, STAY, DOWN, TEXT_SAFFRONPOKECENTER_GENTLEMAN
+	object_event 11,  2, SPRITE_LINK_RECEPTIONIST, STAY, DOWN, TEXT_SAFFRONPOKECENTER_LINK_RECEPTIONIST
 
 	def_warps_to SAFFRON_POKECENTER

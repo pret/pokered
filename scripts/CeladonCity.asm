@@ -5,128 +5,129 @@ CeladonCity_Script:
 	ret
 
 CeladonCity_TextPointers:
-	dw CeladonCityText1
-	dw CeladonCityText2
-	dw CeladonCityText3
-	dw CeladonCityText4
-	dw CeladonCityText5
-	dw CeladonCityText6
-	dw CeladonCityText7
-	dw CeladonCityText8
-	dw CeladonCityText9
-	dw CeladonCityText10
-	dw CeladonCityText11
-	dw PokeCenterSignText
-	dw CeladonCityText13
-	dw CeladonCityText14
-	dw CeladonCityText15
-	dw CeladonCityText16
-	dw CeladonCityText17
-	dw CeladonCityText18
+	def_text_pointers
+	dw_const CeladonCityLittleGirlText,        TEXT_CELADONCITY_LITTLE_GIRL
+	dw_const CeladonCityGramps1Text,           TEXT_CELADONCITY_GRAMPS1
+	dw_const CeladonCityGirlText,              TEXT_CELADONCITY_GIRL
+	dw_const CeladonCityGramps2Text,           TEXT_CELADONCITY_GRAMPS2
+	dw_const CeladonCityGramps3Text,           TEXT_CELADONCITY_GRAMPS3
+	dw_const CeladonCityFisherText,            TEXT_CELADONCITY_FISHER
+	dw_const CeladonCityPoliwrathText,         TEXT_CELADONCITY_POLIWRATH
+	dw_const CeladonCityRocket1Text,           TEXT_CELADONCITY_ROCKET1
+	dw_const CeladonCityRocket2Text,           TEXT_CELADONCITY_ROCKET2
+	dw_const CeladonCityTrainerTips1Text,      TEXT_CELADONCITY_TRAINER_TIPS1
+	dw_const CeladonCitySignText,              TEXT_CELADONCITY_SIGN
+	dw_const PokeCenterSignText,               TEXT_CELADONCITY_POKECENTER_SIGN
+	dw_const CeladonCityGymSignText,           TEXT_CELADONCITY_GYM_SIGN
+	dw_const CeladonCityMansionSignText,       TEXT_CELADONCITY_MANSION_SIGN
+	dw_const CeladonCityDeptStoreSignText,     TEXT_CELADONCITY_DEPTSTORE_SIGN
+	dw_const CeladonCityTrainerTips2Text,      TEXT_CELADONCITY_TRAINER_TIPS2
+	dw_const CeladonCityPrizeExchangeSignText, TEXT_CELADONCITY_PRIZEEXCHANGE_SIGN
+	dw_const CeladonCityGameCornerSignText,    TEXT_CELADONCITY_GAMECORNER_SIGN
 
-CeladonCityText1:
-	text_far _CeladonCityText1
+CeladonCityLittleGirlText:
+	text_far _CeladonCityLittleGirlText
 	text_end
 
-CeladonCityText2:
-	text_far _CeladonCityText2
+CeladonCityGramps1Text:
+	text_far _CeladonCityGramps1Text
 	text_end
 
-CeladonCityText3:
-	text_far _CeladonCityText3
+CeladonCityGirlText:
+	text_far _CeladonCityGirlText
 	text_end
 
-CeladonCityText4:
-	text_far _CeladonCityText4
+CeladonCityGramps2Text:
+	text_far _CeladonCityGramps2Text
 	text_end
 
-CeladonCityText5:
+CeladonCityGramps3Text:
 	text_asm
 	CheckEvent EVENT_GOT_TM41
-	jr nz, .asm_7053f
-	ld hl, TM41PreText
+	jr nz, .gotTM41
+	ld hl, .Text
 	call PrintText
 	lb bc, TM_SOFTBOILED, 1
 	call GiveItem
 	jr c, .Success
-	ld hl, TM41NoRoomText
+	ld hl, .TM41NoRoomText
 	call PrintText
 	jr .Done
 .Success
-	ld hl, ReceivedTM41Text
+	ld hl, .ReceivedTM41Text
 	call PrintText
 	SetEvent EVENT_GOT_TM41
 	jr .Done
-.asm_7053f
-	ld hl, TM41ExplanationText
+.gotTM41
+	ld hl, .TM41ExplanationText
 	call PrintText
 .Done
 	jp TextScriptEnd
 
-TM41PreText:
-	text_far _TM41PreText
+.Text:
+	text_far _CeledonCityGramps3Text
 	text_end
 
-ReceivedTM41Text:
-	text_far _ReceivedTM41Text
+.ReceivedTM41Text:
+	text_far _CeledonCityGramps3ReceivedTM41Text
 	sound_get_item_1
 	text_end
 
-TM41ExplanationText:
-	text_far _TM41ExplanationText
+.TM41ExplanationText:
+	text_far _CeledonCityGramps3TM41ExplanationText
 	text_end
 
-TM41NoRoomText:
-	text_far _TM41NoRoomText
+.TM41NoRoomText:
+	text_far _CeledonCityGramps3TM41NoRoomText
 	text_end
 
-CeladonCityText6:
-	text_far _CeladonCityText6
+CeladonCityFisherText:
+	text_far _CeladonCityFisherText
 	text_end
 
-CeladonCityText7:
-	text_far _CeladonCityText7
+CeladonCityPoliwrathText:
+	text_far _CeladonCityPoliwrathText
 	text_asm
 	ld a, POLIWRATH
 	call PlayCry
 	jp TextScriptEnd
 
-CeladonCityText8:
-	text_far _CeladonCityText8
+CeladonCityRocket1Text:
+	text_far _CeladonCityRocket1Text
 	text_end
 
-CeladonCityText9:
-	text_far _CeladonCityText9
+CeladonCityRocket2Text:
+	text_far _CeladonCityRocket2Text
 	text_end
 
-CeladonCityText10:
-	text_far _CeladonCityText10
+CeladonCityTrainerTips1Text:
+	text_far _CeladonCityTrainerTips1Text
 	text_end
 
-CeladonCityText11:
-	text_far _CeladonCityText11
+CeladonCitySignText:
+	text_far _CeladonCitySignText
 	text_end
 
-CeladonCityText13:
-	text_far _CeladonCityText13
+CeladonCityGymSignText:
+	text_far _CeladonCityGymSignText
 	text_end
 
-CeladonCityText14:
-	text_far _CeladonCityText14
+CeladonCityMansionSignText:
+	text_far _CeladonCityMansionSignText
 	text_end
 
-CeladonCityText15:
-	text_far _CeladonCityText15
+CeladonCityDeptStoreSignText:
+	text_far _CeladonCityDeptStoreSignText
 	text_end
 
-CeladonCityText16:
-	text_far _CeladonCityText16
+CeladonCityTrainerTips2Text:
+	text_far _CeladonCityTrainerTips2Text
 	text_end
 
-CeladonCityText17:
-	text_far _CeladonCityText17
+CeladonCityPrizeExchangeSignText:
+	text_far _CeladonCityPrizeExchangeSignText
 	text_end
 
-CeladonCityText18:
-	text_far _CeladonCityText18
+CeladonCityGameCornerSignText:
+	text_far _CeladonCityGameCornerSignText
 	text_end

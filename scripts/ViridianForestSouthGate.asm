@@ -2,13 +2,14 @@ ViridianForestSouthGate_Script:
 	jp EnableAutoTextBoxDrawing
 
 ViridianForestSouthGate_TextPointers:
-	dw ViridianForestEntranceText1
-	dw ViridianForestEntranceText2
+	def_text_pointers
+	dw_const ViridianForestSouthGateGirlText,       TEXT_VIRIDIANFORESTSOUTHGATE_GIRL
+	dw_const ViridianForestSouthGateLittleGirlText, TEXT_VIRIDIANFORESTSOUTHGATE_LITTLE_GIRL
 
-ViridianForestEntranceText1:
-	text_far _ViridianForestEntranceText1
+ViridianForestSouthGateGirlText:
+	text_far _ViridianForestSouthGateGirlText
 	text_end
 
-ViridianForestEntranceText2:
-	text_far _ViridianForestEntranceText2
+ViridianForestSouthGateLittleGirlText:
+	text_far _ViridianForestSouthGateLittleGirlText
 	text_end

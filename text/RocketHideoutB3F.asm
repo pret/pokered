@@ -1,15 +1,15 @@
-_RocketHideout3BattleText2::
+_RocketHideoutB3FRocket1BattleText::
 	text "Stop meddling in"
 	line "TEAM ROCKET's"
 	cont "affairs!"
 	done
 
-_RocketHideout3EndBattleText2::
+_RocketHideoutB3FRocket1EndBattleText::
 	text "Oof!"
 	line "Taken down!"
 	prompt
 
-_RocketHideout3AfterBattleTxt2::
+_RocketHideoutB3FRocket1AfterBattleText::
 	text "SILPH SCOPE?"
 	line "The machine the"
 	cont "BOSS stole. It's"

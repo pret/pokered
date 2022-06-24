@@ -4,8 +4,9 @@ DiglettsCaveRoute2_Script:
 	jp EnableAutoTextBoxDrawing
 
 DiglettsCaveRoute2_TextPointers:
-	dw DiglettsCaveRoute2Text1
+	def_text_pointers
+	dw_const DiglettsCaveRoute2FishingGuruText, TEXT_DIGLETTSCAVEROUTE2_FISHING_GURU
 
-DiglettsCaveRoute2Text1:
-	text_far _DiglettsCaveRoute2Text1
+DiglettsCaveRoute2FishingGuruText:
+	text_far _DiglettsCaveRoute2FishingGuruText
 	text_end

@@ -1,3 +1,8 @@
+	object_const_def
+	const BILLSHOUSE_BILL_POKEMON
+	const BILLSHOUSE_BILL1
+	const BILLSHOUSE_BILL2
+
 BillsHouse_Object:
 	db $d ; border block
 
@@ -8,8 +13,8 @@ BillsHouse_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  6,  5, SPRITE_MONSTER, STAY, NONE, 1 ; person
-	object_event  4,  4, SPRITE_SUPER_NERD, STAY, NONE, 2 ; person
-	object_event  6,  5, SPRITE_SUPER_NERD, STAY, NONE, 3 ; person
+	object_event  6,  5, SPRITE_MONSTER, STAY, NONE, TEXT_BILLSHOUSE_BILL_POKEMON
+	object_event  4,  4, SPRITE_SUPER_NERD, STAY, NONE, TEXT_BILLSHOUSE_BILL_SS_TICKET
+	object_event  6,  5, SPRITE_SUPER_NERD, STAY, NONE, TEXT_BILLSHOUSE_BILL_CHECK_OUT_MY_RARE_POKEMON
 
 	def_warps_to BILLS_HOUSE

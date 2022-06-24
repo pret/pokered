@@ -1,4 +1,4 @@
-_MeetLaprasGuyText::
+_SilphCo7FSilphWorkerM1HaveThisPokemonText::
 	text "Oh! Hi! You're"
 	line "not a ROCKET! You"
 	cont "came to save us?"
@@ -9,7 +9,7 @@ _MeetLaprasGuyText::
 	cont "for saving us."
 	prompt
 
-_HeresYourLaprasText::
+_SilphCo7FSilphWorkerM1LaprasDescriptionText::
 	text "It's LAPRAS. It's"
 	line "very intelligent."
 
@@ -27,129 +27,129 @@ _HeresYourLaprasText::
 	cont "give you a lift!"
 	done
 
-_LaprasGuyText::
+_SilphCo7FSilphWorkerM1IsOurPresidentOkText::
 	text "TEAM ROCKET's"
 	line "BOSS went to the"
 	cont "boardroom! Is our"
 	cont "PRESIDENT OK?"
 	done
 
-_LaprasGuySavedText::
+_SilphCo7FSilphWorkerM1SavedText::
 	text "Saved at last!"
 	line "Thank you!"
 	done
 
-_SilphCo7Text_51e00::
+_SilphCo7FSilphWorkerM2AfterTheMasterBallText::
 	text "TEAM ROCKET was"
 	line "after the MASTER"
 	cont "BALL which will"
 	cont "catch any #MON!"
 	done
 
-_CanceledMasterBallText::
+_SilphCo7FSilphWorkerM2CancelledMasterBallText::
 	text "We canceled the"
 	line "MASTER BALL"
 	cont "project because"
 	cont "of TEAM ROCKET."
 	done
 
-_SilphCo7Text_51e23::
+_SilphCo7FSilphWorkerM3ItWouldBeBadText::
 	text "It would be bad"
 	line "if TEAM ROCKET"
 	cont "took over SILPH"
 	cont "or our #MON!"
 	done
 
-_SilphCo7Text_51e28::
+_SilphCo7FSilphWorkerM3YouChasedOffTeamRocketText::
 	text "Wow! You chased"
 	line "off TEAM ROCKET"
 	cont "all by yourself?"
 	done
 
-_SilphCo7Text_51e46::
+_SilphCo7FSilphWorkerM4ItsReallyDangerousHereText::
 	text "You! It's really"
 	line "dangerous here!"
 	cont "You came to save"
 	cont "me? You can't!"
 	done
 
-_SilphCo7Text_51e4b::
+_SilphCo7FSilphWorkerM4SafeAtLastText::
 	text "Safe at last!"
 	line "Oh thank you!"
 	done
 
-_SilphCo7BattleText1::
+_SilphCo7FRocket1BattleText::
 	text "Oh ho! I smell a"
 	line "little rat!"
 	done
 
-_SilphCo7EndBattleText1::
+_SilphCo7FRocket1EndBattleText::
 	text "Lights"
 	line "out!"
 	prompt
 
-_SilphCo7AfterBattleText1::
+_SilphCo7FRocket1AfterBattleText::
 	text "You won't find my"
 	line "BOSS by just"
 	cont "scurrying around!"
 	done
 
-_SilphCo7BattleText2::
+_SilphCo7FScientistBattleText::
 	text "Heheh!"
 
 	para "You mistook me for"
 	line "a SILPH worker?"
 	done
 
-_SilphCo7EndBattleText2::
+_SilphCo7FScientistEndBattleText::
 	text "I'm"
 	line "done!"
 	prompt
 
-_SilphCo7AfterBattleText2::
+_SilphCo7FScientistAfterBattleText::
 	text "Despite your age,"
 	line "you are a skilled"
 	cont "trainer!"
 	done
 
-_SilphCo7BattleText3::
+_SilphCo7FRocket2BattleText::
 	text "I am one of the 4"
 	line "ROCKET BROTHERS!"
 	done
 
-_SilphCo7EndBattleText3::
+_SilphCo7FRocket2EndBattleText::
 	text "Aack!"
 	line "Brothers, I lost!"
 	prompt
 
-_SilphCo7AfterBattleText3::
+_SilphCo7FRocket2AfterBattleText::
 	text "Doesn't matter."
 	line "My brothers will"
 	cont "repay the favor!"
 	done
 
-_SilphCo7BattleText4::
+_SilphCo7FRocket3BattleText::
 	text "A child intruder?"
 	line "That must be you!"
 	done
 
-_SilphCo7EndBattleText4::
+_SilphCo7FRocket3EndBattleText::
 	text "Fine!"
 	line "I lost!"
 	prompt
 
-_SilphCo7AfterBattleText4::
+_SilphCo7FRocket3AfterBattleText::
 	text "Go on home"
 	line "before my BOSS"
 	cont "gets ticked off!"
 	done
 
-_SilphCo7Text_51ebe::
+_SilphCo7FRivalText::
 	text "<RIVAL>: What"
 	line "kept you <PLAYER>?"
 	done
 
-_SilphCo7Text_51ec3::
+_SilphCo7FRivalWaitedHereText::
 	text "<RIVAL>: Hahaha!"
 	line "I thought you'd"
 	cont "turn up if I"
@@ -166,13 +166,13 @@ _SilphCo7Text_51ec3::
 	cont "you got better!"
 	done
 
-_SilphCo7Text_51ec8::
+_SilphCo7FRivalDefeatedText::
 	text "Oh ho!"
 	line "So, you are ready"
 	cont "for BOSS ROCKET!"
 	prompt
 
-_SilphCo7Text_51ecd::
+_SilphCo7FRivalVictoryText::
 	text "<RIVAL>: How can"
 	line "I put this?"
 
@@ -181,7 +181,7 @@ _SilphCo7Text_51ecd::
 	cont "with us big boys!"
 	prompt
 
-_SilphCo7Text_51ed2::
+_SilphCo7FRivalGoodLuckToYouText::
 	text "Well, <PLAYER>!"
 
 	para "I'm moving on up"

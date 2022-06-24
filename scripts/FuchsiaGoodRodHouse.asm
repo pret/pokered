@@ -2,14 +2,15 @@ FuchsiaGoodRodHouse_Script:
 	jp EnableAutoTextBoxDrawing
 
 FuchsiaGoodRodHouse_TextPointers:
-	dw FuchsiaHouse3Text1
+	def_text_pointers
+	dw_const FuchsiaGoodRodHouseFishingGuruText, TEXT_FUCHSIAGOODRODHOUSE_FISHING_GURU
 
-FuchsiaHouse3Text1:
+FuchsiaGoodRodHouseFishingGuruText:
 	text_asm
 	ld a, [wd728]
 	bit 4, a ; got good rod?
 	jr nz, .got_item
-	ld hl, FuchsiaHouse3Text_561bd
+	ld hl, .Text
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
@@ -20,30 +21,30 @@ FuchsiaHouse3Text1:
 	jr nc, .bag_full
 	ld hl, wd728
 	set 4, [hl] ; got good rod
-	ld hl, FuchsiaHouse3Text_561c2
+	ld hl, .ReceivedGoodRodText
 	jr .done
 .bag_full
-	ld hl, FuchsiaHouse3Text_5621c
+	ld hl, .NoRoomText
 	jr .done
 .refused
-	ld hl, FuchsiaHouse3Text_56212
+	ld hl, .ThatsSoDisappointingText
 	jr .done
 .got_item
-	ld hl, FuchsiaHouse3Text_56217
+	ld hl, .HowAreTheFishText
 .done
 	call PrintText
 	jp TextScriptEnd
 
-FuchsiaHouse3Text_561bd:
-	text_far _FuchsiaHouse3Text_561bd
+.Text:
+	text_far _FuchsiaGoodRodHouseFishingGuruText
 	text_end
 
-FuchsiaHouse3Text_561c2:
-	text_far _FuchsiaHouse3Text_561c2
+.ReceivedGoodRodText:
+	text_far _FuchsiaGoodRodHouseFishingGuruReceivedGoodRodText
 	sound_get_item_1
 	text_end
 
-UnusedText_561c8:
+.UnusedText:
 	para "つり　こそ"
 	line "おとこの　ロマン　だ！"
 
@@ -53,14 +54,14 @@ UnusedText_561c8:
 	line "もっと　いいもんが　つれるんじゃ！"
 	done
 
-FuchsiaHouse3Text_56212:
-	text_far _FuchsiaHouse3Text_56212
+.ThatsSoDisappointingText:
+	text_far _FuchsiaGoodRodHouseFishingGuruThatsSoDisappointingText
 	text_end
 
-FuchsiaHouse3Text_56217:
-	text_far _FuchsiaHouse3Text_56217
+.HowAreTheFishText:
+	text_far _FuchsiaGoodRodHouseFishingGuruHowAreTheFishText
 	text_end
 
-FuchsiaHouse3Text_5621c:
-	text_far _FuchsiaHouse3Text_5621c
+.NoRoomText:
+	text_far _FuchsiaGoodRodHouseFishingGuruNoRoomText
 	text_end
