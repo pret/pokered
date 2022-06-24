@@ -63,6 +63,7 @@ DisplayDiploma::
 	call GBPalNormal
 	ld a, $90
 	ldh [rOBP0], a
+	call UpdateGBCPal_OBP0
 	call WaitForTextScrollButtonPress
 	ld hl, wd730
 	res 6, [hl]

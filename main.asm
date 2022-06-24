@@ -315,8 +315,6 @@ INCLUDE "gfx/version.asm"
 
 SECTION "bank1C", ROMX
 
-INCLUDE "engine/movie/splash.asm"
-INCLUDE "engine/movie/hall_of_fame.asm"
 INCLUDE "engine/overworld/healing_machine.asm"
 INCLUDE "engine/overworld/player_animations.asm"
 INCLUDE "engine/battle/ghost_marowak_anim.asm"
@@ -369,6 +367,11 @@ SECTION "Evos Moves", ROMX
 ; moved from battle engine 7
 INCLUDE "engine/pokemon/evos_moves.asm"
 
+SECTION "Splash Animation", ROMX
+; moved from bank1C
+INCLUDE "engine/movie/splash.asm"
+INCLUDE "engine/movie/hall_of_fame.asm"
+
 
 SECTION "Party Sprites", ROMX, BANK[$34]
 
@@ -387,3 +390,8 @@ INCLUDE "engine/overworld/select_button_functionality.asm"
 INCLUDE "engine/overworld/use_another_repel.asm"
 INCLUDE "engine/menus/wrap_list_menu.asm"
 INCLUDE "engine/items/last_two_fishing_gurus_script.asm"
+;gbcnote: include the bgmap files from pokemon yellow
+INCLUDE "data/gbc/bg_map_attributes.asm"
+INCLUDE "engine/gbc/bg_map_attributes.asm"
+INCLUDE "engine/gfx/scroll_gfx_horizontally.asm"
+INCLUDE "engine/overworld/check_map_connections.asm"

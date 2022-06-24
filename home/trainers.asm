@@ -70,11 +70,11 @@ ReadTrainerHeaderInfo::
 	jr z, .readPointer ; read after battle text
 	cp $8
 	jr z, .readPointer ; read end battle text
-	cp $a
-	jr nz, .done
-	ld a, [hli]        ; read end battle text (2) but override the result afterwards (XXX why, bug?)
-	ld d, [hl]
-	ld e, a
+;	cp $a
+;	jr nz, .done
+;	ld a, [hli]        ; read end battle text (2) but override the result afterwards (XXX why, bug?)
+;	ld d, [hl]
+;	ld e, a
 	jr .done
 .readPointer
 	ld a, [hli]
@@ -107,8 +107,8 @@ TalkToTrainer::
 	ld a, $4
 	call ReadTrainerHeaderInfo     ; print before battle text
 	call PrintText
-	ld a, $a
-	call ReadTrainerHeaderInfo     ; (?) does nothing apparently (maybe bug in ReadTrainerHeaderInfo)
+	;ld a, $a
+	;call ReadTrainerHeaderInfo     ; (?) does nothing apparently (maybe bug in ReadTrainerHeaderInfo)
 	push de
 	ld a, $8
 	call ReadTrainerHeaderInfo     ; read end battle text
@@ -335,7 +335,7 @@ EngageMapTrainer::
 	ld [wEngagedTrainerClass], a
 	ld a, [hl]     ; load trainer mon set
 	ld [wEngagedTrainerSet], a
-	jp PlayTrainerMusic
+	jpfar PlayTrainerMusic
 
 PrintEndBattleText::
 	push hl
@@ -387,57 +387,10 @@ TrainerEndBattleText::
 ; only engage with the trainer if the player is not already
 ; engaged with another trainer
 ; XXX unused?
-CheckIfAlreadyEngaged::
-	ld a, [wFlags_0xcd60]
-	bit 0, a
-	ret nz
-	call EngageMapTrainer
-	xor a
-	ret
-
-PlayTrainerMusic::
-	ld a, [wEngagedTrainerClass]
-	cp OPP_RIVAL1
-	ret z
-	cp OPP_RIVAL2
-	ret z
-	cp OPP_RIVAL3
-	ret z
-	ld a, [wGymLeaderNo]
-	and a
-	ret nz
-	xor a
-	ld [wAudioFadeOutControl], a
-	ld a, SFX_STOP_ALL_MUSIC
-	call PlaySound
-	ld a, BANK(Music_MeetEvilTrainer)
-	ld [wAudioROMBank], a
-	ld [wAudioSavedROMBank], a
-	ld a, [wEngagedTrainerClass]
-	ld b, a
-	ld hl, EvilTrainerList
-.evilTrainerListLoop
-	ld a, [hli]
-	cp $ff
-	jr z, .noEvilTrainer
-	cp b
-	jr nz, .evilTrainerListLoop
-	ld a, MUSIC_MEET_EVIL_TRAINER
-	jr .PlaySound
-.noEvilTrainer
-	ld hl, FemaleTrainerList
-.femaleTrainerListLoop
-	ld a, [hli]
-	cp $ff
-	jr z, .maleTrainer
-	cp b
-	jr nz, .femaleTrainerListLoop
-	ld a, MUSIC_MEET_FEMALE_TRAINER
-	jr .PlaySound
-.maleTrainer
-	ld a, MUSIC_MEET_MALE_TRAINER
-.PlaySound
-	ld [wNewSoundID], a
-	jp PlaySound
-
-INCLUDE "data/trainers/encounter_types.asm"
+;CheckIfAlreadyEngaged::
+;	ld a, [wFlags_0xcd60]
+;	bit 0, a
+;	ret nz
+;	call EngageMapTrainer
+;	xor a
+;	ret

@@ -4,7 +4,7 @@ _Start::
 	xor a
 	jr .ok
 .gbc
-	ld a, FALSE
+	ld a, 1
 .ok
-	ld [wGBC], a
+	ldh [hGBC], a
 	jp Init

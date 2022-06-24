@@ -367,6 +367,7 @@ INCLUDE "audio/alternate_tempo.asm"
 SECTION "Low Health Alarm (Audio Engine 2)", ROMX
 
 INCLUDE "audio/low_health_alarm.asm"
+INCLUDE "audio/fade_audio.asm"
 
 
 SECTION "Audio Engine 2", ROMX

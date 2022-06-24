@@ -42,6 +42,7 @@ OakSpeech:
 	call LoadTextBoxTilePatterns
 	call SetDefaultNames
 	predef InitPlayerData2
+	call RunDefaultPaletteCommand	;gbcnote - reinitialize the default palette in case the pointers got cleared
 	ld hl, wNumBoxItems
 	ld a, POTION
 	ld [wcf91], a
@@ -176,6 +177,7 @@ FadeInIntroPic:
 .next
 	ld a, [hli]
 	ldh [rBGP], a
+	call UpdateGBCPal_BGP
 	ld c, 10
 	call DelayFrames
 	dec b
@@ -197,6 +199,7 @@ MovePicLeft:
 
 	ld a, %11100100
 	ldh [rBGP], a
+	call UpdateGBCPal_BGP
 .next
 	call DelayFrame
 	ldh a, [rWX]

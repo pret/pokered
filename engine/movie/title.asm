@@ -140,6 +140,7 @@ ENDC
 	call GBPalNormal
 	ld a, %11100100
 	ldh [rOBP0], a
+	call UpdateGBCPal_OBP0
 
 ; make pokemon logo bounce up and down
 	ld bc, hSCY ; background scroll Y
@@ -218,6 +219,16 @@ ENDC
 	xor a
 	ld [wUnusedCC5B], a
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;gbcnote - The tiles in the window need to be shifted so that the bottom
+;half of the title screen is in the top half of the window area.
+;This is accomplished by copying the tile map to vram at an offset.
+;The goal is to get the tile map for the bottom half of the title screen
+;resides in the BGMap1 address space (address $9c00).
+	ld a, (vBGMap0 + $300) / $100
+	call TitleScreenCopyTileMapToVRAM
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ; Keep scrolling in new mons indefinitely until the user performs input.
 .awaitUserInterruptionLoop
 	ld c, 200
@@ -285,6 +296,12 @@ TitleScreenPickNewMon:
 	ld [hl], a
 	call LoadTitleMonSprite
 
+	push de
+	ld d, CONVERT_BGP
+	ld e, 2
+	farcall TransferMonPal ;gbcnote - update the bg pal for the new title mon
+	pop de
+
 	ld a, $90
 	ldh [hWY], a
 	ld d, 1 ; scroll out
@@ -294,19 +311,20 @@ TitleScreenPickNewMon:
 TitleScreenScrollInMon:
 	ld d, 0 ; scroll in
 	farcall TitleScroll
-	xor a
+	;xor a
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;gbcnote - The window normally covers the whole screen when picking a new title screen mon.
+;This is not desired since it applies BG pal 2 to the whole screen when on a gbc.
+;Instead, shift the window downwards by 40 tiles to just cover the version text and below.
+;This makes it so the map attributes for BGMap1 (address $9c00) are covering the bottom half 
+;of the screen.
+	ld a, $40
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	ldh [hWY], a
 	ret
 
 ScrollTitleScreenGameVersion:
-.wait
-	ldh a, [rLY]
-	cp l
-	jr nz, .wait
-
-	ld a, h
-	ldh [rSCX], a
-
+	predef BGLayerScrollingUpdate	;gbcnote - consolidated into a predef that also fixes some issues
 .wait2
 	ldh a, [rLY]
 	cp h
@@ -337,6 +355,16 @@ DrawPlayerCharacter:
 	ld e, a
 	ld a, [wPlayerCharacterOAMTile]
 	ld [hli], a ; tile
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;gbcnote - set the palette for the player tiles
+;These bits only work on the GBC
+	push af
+	ld a, [hl]	;Attributes/Flags
+	and %11111000
+	or  %00000010
+	ld [hl], a
+	pop af
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	inc a
 	ld [wPlayerCharacterOAMTile], a
 	inc hl

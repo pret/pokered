@@ -2,7 +2,7 @@ StartMenu_Pokedex::
 	predef ShowPokedexMenu
 	call LoadScreenTilesFromBuffer2 ; restore saved screen
 	call Delay3
-	call LoadGBPal
+	;call LoadGBPal ;gbcnote: moved to redisplaystartmenu for better visual effect
 	call UpdateSprites
 	jp RedisplayStartMenu
 
@@ -26,7 +26,7 @@ StartMenu_Pokemon::
 .exitMenu
 	call GBPalWhiteOutWithDelay3
 	call RestoreScreenTilesAndReloadTilePatterns
-	call LoadGBPal
+	;call LoadGBPal ;gbcnote: moved to redisplaystartmenu for better visual effect
 	jp RedisplayStartMenu
 .chosePokemon
 	call SaveScreenTilesToBuffer1
@@ -494,7 +494,7 @@ StartMenu_TrainerInfo::
 	call LoadScreenTilesFromBuffer2 ; restore saved screen
 	call RunDefaultPaletteCommand
 	call ReloadMapData
-	call LoadGBPal
+	;call LoadGBPal ;gbcnote: moved to redisplaystartmenu for better visual effect
 	pop af
 	ldh [hTileAnimations], a
 	jp RedisplayStartMenu

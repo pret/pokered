@@ -1,9 +1,9 @@
 AltMonsterPalettes: ; pokemon have alternate palettes depending on where you encounter them
 	table_width 1, AltMonsterPalettes
 	db PAL_MEWMON    ; MISSINGNO
-	db PAL_TOWNMAP  ; BULBASAUR
-	db PAL_TOWNMAP  ; IVYSAUR
-	db PAL_TOWNMAP  ; VENUSAUR
+	db PAL_BLUEGREENMON  ; BULBASAUR
+	db PAL_BLUEGREENMON  ; IVYSAUR
+	db PAL_BLUEGREENMON  ; VENUSAUR
 	db PAL_BLACKMON    ; CHARMANDER
 	db PAL_BLACKMON    ; CHARMELEON
 	db PAL_BLACKMON    ; CHARIZARD
@@ -46,8 +46,8 @@ AltMonsterPalettes: ; pokemon have alternate palettes depending on where you enc
 	db PAL_REDMON  ; ODDISH
 	db PAL_0F    ; GLOOM
 	db PAL_0F    ; VILEPLUME
-	db PAL_TOWNMAP  ; PARAS
-	db PAL_TOWNMAP  ; PARASECT
+	db PAL_BLUEGREENMON  ; PARAS
+	db PAL_BLUEGREENMON  ; PARASECT
 	db PAL_REDMON  ; VENONAT
 	db PAL_REDMON  ; VENOMOTH
 	db PAL_BLACKMON  ; DIGLETT
@@ -138,8 +138,8 @@ AltMonsterPalettes: ; pokemon have alternate palettes depending on where you enc
 	db PAL_REDMON ; JOLTEON
 	db PAL_CYANMON    ; FLAREON
 	db PAL_WHITEMON   ; PORYGON
-	db PAL_TOWNMAP   ; OMANYTE
-	db PAL_TOWNMAP   ; OMASTAR
+	db PAL_BLUEGREENMON   ; OMANYTE
+	db PAL_BLUEGREENMON   ; OMASTAR
 	db PAL_BLACKMON  ; KABUTO
 	db PAL_BLACKMON  ; KABUTOPS
 	db PAL_WHITEMON   ; AERODACTYL

@@ -380,7 +380,9 @@ wNPCMovementDirections:: ds 180
 NEXTU
 wDexRatingNumMonsSeen:: db
 wDexRatingNumMonsOwned:: db
-wDexRatingText:: db
+wDexRatingText:: 
+wTrainerCardBadgeAttributes:: db
+;gbcnote - modified to match yellow
 
 NEXTU
 ; If a random number greater than this value is generated, then the player is
@@ -1091,7 +1093,12 @@ wPalPacket::
 
 ; This union spans 49 bytes.
 UNION
-wPartyMenuBlkPacket:: ds $30
+wPartyMenuBlkPacket:: ; cf2e
+; $30 bytes
+	ds 9
+;gbcnote - modified to match yellow
+wPartyHPBarAttributes:: ; cf36
+	ds 20
 
 NEXTU
 	ds 29
@@ -2143,7 +2150,20 @@ wRoute18Gate1FCurScript:: db
 	ds 78
 wGameProgressFlagsEnd::
 
-	ds 56
+wGBCBasePalPointers:: 
+	ds NUM_ACTIVE_PALS * 2 ; 8 bytes
+wGBCPal:: 
+	ds PAL_SIZE ; 8 bytes
+wLastBGP:: 
+	ds 1
+wLastOBP0:: 
+	ds 1
+wLastOBP1:: 
+	ds 1 
+wBGPPalsBuffer:: 
+	ds NUM_ACTIVE_PALS * PAL_SIZE ;32 bytes
+	
+	ds 5
 
 wObtainedHiddenItemsFlags:: flag_array 112
 
