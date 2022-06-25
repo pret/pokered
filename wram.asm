@@ -2108,7 +2108,7 @@ wRocketHideoutB1FCurScript:: db
 wRocketHideoutB2FCurScript:: db
 wRocketHideoutB3FCurScript:: db
 wRocketHideoutB4FCurScript:: db
-	ds 1
+wCeruleanRocketHouseCurScript:: db ;NEW
 wRoute6GateCurScript:: db
 wRoute8GateCurScript:: db
 	ds 1

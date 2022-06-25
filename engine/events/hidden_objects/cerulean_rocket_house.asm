@@ -160,29 +160,8 @@ CeruleanRocketHouseB1FMachineText:
 	text_asm
 	ld hl, MachineText
 	call PrintText
-	ld a, SFX_STOP_ALL_MUSIC
-	call PlaySound
-	ld b, 100
-.loop
-	push bc
-	ld c, BANK(SFX_SS_Anne_Horn_1)
-	ld a, SFX_SS_ANNE_HORN
-	call PlayMusic
-	ld c, 2
-	call DelayFrames
-	pop bc
-	dec b
-	jr nz, .loop
-	ld a, SFX_STOP_ALL_MUSIC
-	call PlaySound
-	ld c, BANK(SFX_Noise_Instrument05_1)
-	ld a, SFX_NOISE_INSTRUMENT05
-	call PlayMusic
-	call GBFadeOutToBlack
-	ld b, $FF
-	call DelayFrames
-	call GBFadeInFromBlack
-	call PlayDefaultMusic
+	ld a, 1
+	ld [wCeruleanRocketHouseCurScript], a
 	jp TextScriptEnd
 
 MachineText:

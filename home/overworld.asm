@@ -257,7 +257,7 @@ OverworldLoopLessDelay::
 	ld a, [wPlayerDirection]
 	ld [wPlayerMovingDirection], a
 	call NewBattle
-	jp c, .battleOccurred
+	jp c, BattleOccurred
 	jp OverworldLoop
 
 .noDirectionChange
@@ -365,7 +365,7 @@ OverworldLoopLessDelay::
 	ld hl, wd736
 	res 2, [hl] ; standing on warp flag
 	jp nc, CheckWarpsNoCollision ; check for warps if there was no battle
-.battleOccurred
+BattleOccurred::
 	ld hl, wd72d
 	res 6, [hl]
 	ld hl, wFlags_D733
