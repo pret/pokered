@@ -66,7 +66,7 @@ GetPartyMonSpriteID:
     ld [wd11e], a
     predef IndexToPokedex
     ld a, [wd11e]
-    dec a
+    ; missingno is allowed here, 0 is a valid value
     ld b, a
     ld a, [wSpriteOptions2]
     bit BIT_MENU_ICON_SPRITES, a

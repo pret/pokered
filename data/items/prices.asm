@@ -53,7 +53,7 @@ ItemPrices::
 	bcd3 1000  ; POKE_DOLL
 	bcd3 600   ; FULL_HEAL
 	bcd3 1500  ; REVIVE
-	bcd3 4000  ; MAX_REVIVE
+	bcd3 3000  ; MAX_REVIVE
 	bcd3 700   ; GUARD_SPEC
 	bcd3 500   ; SUPER_REPEL
 	bcd3 700   ; MAX_REPEL

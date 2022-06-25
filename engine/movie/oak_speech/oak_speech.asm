@@ -5,6 +5,12 @@ SetDefaultNames:
 	push af
 	ld a, [wd732]
 	push af
+	ld a, [wSpriteOptions]
+	push af
+	ld a, [wSpriteOptions2]
+	push af
+	ld a, [wOptions2]
+	push af
 	ld hl, wPlayerName
 	ld bc, wBoxDataEnd - wPlayerName
 	xor a
@@ -13,6 +19,12 @@ SetDefaultNames:
 	ld bc, wSpriteDataEnd - wSpriteDataStart
 	xor a
 	call FillMemory
+	pop af
+	ld [wOptions2], a
+	pop af
+	ld [wSpriteOptions2], a
+	pop af
+	ld [wSpriteOptions], a
 	pop af
 	ld [wd732], a
 	pop af

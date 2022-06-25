@@ -28,17 +28,44 @@ UncompressMonSprite::
     ld a,[hl]
     ld [wSpriteInputPtr+1],a
     ld a,[wcf91] ; XXX name for this ram location
+    cp MISSINGNO
+    jr z,.missingNo
     cp FOSSIL_KABUTOPS
     jr z,.RecallBank
     cp FOSSIL_AERODACTYL
     jr z,.RecallBank
     cp MON_GHOST
     jr z,.RecallBank
-    ld a, b
     ld a,[wMonHPicBank]
     jr .GotBank
+.missingNo
+    call Random ; missingno sometimes displays other front sprites
+    and %111
+    jr z, .fossilAerodactyl ; 1/8 chance of fossil aerodactyl
+    cp 1
+    jr z, .fossilKabutops ; 1/8 chance of fossil kabutops
+    cp 2
+    jr z, .ghost ; 1/8 chance of ghost
+    ld a, [wMonHPicBank]
+    jr .GotBank
+.ghost
+	ld de, GhostPic
+	jr .fossilGhostDimensions
+.fossilKabutops
+	ld de, FossilKabutopsPic
+.fossilGhostDimensions
+	ld a, $66 ; dimensions of kabutops and ghost sprite
+	ld [wMonHSpriteDim], a
+	jr .loadMissingnoRandomizedSprite
+.fossilAerodactyl
+	ld de, FossilAerodactylPic ; don't need to update dimensions as this sprite is the same size as missingno's
+.loadMissingnoRandomizedSprite
+	ld a, e
+	ld [wSpriteInputPtr], a
+	ld a, d
+	ld [wSpriteInputPtr+1], a
 .RecallBank
-    ld a,BANK(FossilKabutopsPic)
+    ld a,BANK(FossilKabutopsPic)    
 .GotBank
     jp UncompressSpriteData
 

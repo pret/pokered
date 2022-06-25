@@ -169,6 +169,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld [wd11e], a
 	predef IndexToPokedex
 	ld a, [wd11e]
+	; missingno or mew can't evolve so this is never reached for them and their base stats aren't important here
 	dec a
 	ld hl, BaseStats
 	ld bc, BASE_DATA_SIZE
@@ -251,6 +252,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	call z, Evolution_ReloadTilesetTilePatterns
 	predef IndexToPokedex
 	ld a, [wd11e]
+	; missingno or mew can't evolve so this is never reached for them and their base stats aren't important here
 	dec a
 	ld c, a
 	ld b, FLAG_SET

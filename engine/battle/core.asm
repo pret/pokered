@@ -5290,6 +5290,7 @@ AdjustDamageForMoveType:
 	jr z, .matchingPairFound
 	jr .nextTypePair
 .matchingPairFound
+	; TODO: option type matchup remap here
 ; if the move type matches the "attacking type" and one of the defender's types matches the "defending type"
 	push hl
 	push bc
@@ -5386,6 +5387,7 @@ AIGetTypeEffectiveness:
 	inc hl
 	jr .loop
 .done
+	; TODO: option remap here
 	ld a, [hl]
 	ld [wTypeEffectiveness], a ; store damage multiplier
 	ret
@@ -6307,11 +6309,13 @@ LoadEnemyMonData:
 	ld [wd11e], a
 	predef IndexToPokedex
 	ld a, [wd11e]
-	dec a
+	and a
+	jr z, .missingnoSkip ; don't mark as seen if it's missingno who has no dex info
 	ld c, a
 	ld b, FLAG_SET
 	ld hl, wPokedexSeen
 	predef FlagActionPredef ; mark this mon as seen in the pokedex
+.missingnoSkip
 	ld hl, wEnemyMonLevel
 	ld de, wEnemyMonUnmodifiedLevel
 	ld bc, 1 + NUM_STATS * 2

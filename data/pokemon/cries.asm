@@ -186,7 +186,7 @@ CryData::
 	mon_cry SFX_CRY_04, $20, $40 ; Charmeleon
 	mon_cry SFX_CRY_1D, $20, $40 ; Wartortle
 	mon_cry SFX_CRY_04, $00, $80 ; Charizard
-	mon_cry SFX_CRY_1D, $00, $80 ; MissingNo.
+	mon_cry SFX_CRY_23, $00, $C0 ; MissingNo.
 	mon_cry SFX_CRY_00, $00, $00 ; MissingNo.
 	mon_cry SFX_CRY_00, $00, $00 ; MissingNo.
 	mon_cry SFX_CRY_00, $00, $00 ; MissingNo.

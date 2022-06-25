@@ -337,6 +337,7 @@ DeterminePaletteIDOutOfBattle:
 	predef IndexToPokedex
 	pop bc
 	ld a, [wd11e]
+	; 0 = missingno is a valid value here
 .skipDexNumConversion
 	ld e, a
 	ld d, 0
@@ -470,7 +471,6 @@ LoadSGB:
 	and a
 	jr z, .onDMG
 	;if on gbc, set SGB flag but skip all the SGB vram stuff
-	; TODO: check for palette type option
 	ld a, $1
 	ld [wOnSGB], a
 .onDMG

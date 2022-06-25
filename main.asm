@@ -5,7 +5,6 @@ SECTION "bank1", ROMX
 
 INCLUDE "data/sprites/facings.asm"
 INCLUDE "engine/events/black_out.asm"
-INCLUDE "data/pokemon/mew.asm"
 INCLUDE "engine/battle/safari_zone.asm"
 INCLUDE "engine/movie/title.asm"
 INCLUDE "engine/pokemon/load_mon_data.asm"
@@ -186,7 +185,6 @@ INCLUDE "engine/slots/game_corner_slots.asm"
 SECTION "Battle Engine 7", ROMX
 
 INCLUDE "data/moves/moves.asm"
-INCLUDE "data/pokemon/base_stats.asm"
 INCLUDE "data/pokemon/cries.asm"
 INCLUDE "engine/battle/stats_functions.asm"
 INCLUDE "engine/battle/scroll_draw_trainer_pic.asm"
@@ -366,6 +364,7 @@ INCLUDE "engine/overworld/wild_mon_alt_palettes.asm"
 SECTION "Evos Moves", ROMX
 ; moved from battle engine 7
 INCLUDE "engine/pokemon/evos_moves.asm"
+INCLUDE "data/pokemon/base_stats.asm"
 
 SECTION "Splash Animation", ROMX
 ; moved from bank1C
