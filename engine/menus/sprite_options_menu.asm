@@ -50,7 +50,7 @@ DisplaySpriteOptions:
 	ld a, 3 ; first sprite option Y coordinate
 	ld [wTopMenuItemY], a
 	call SetCursorPositionsFromSpriteOptions
-	ld a, [wOptionsPage2Option1CursorX] ; text speed cursor X coordinate
+	ld a, [wOptionsPage4Option1CursorX] ; text speed cursor X coordinate
 	ld [wTopMenuItemX], a
 	ld a, $01
 	ldh [hAutoBGTransferEnabled], a ; enable auto background transfer
@@ -97,7 +97,7 @@ DisplaySpriteOptions:
 .downPressed
 	cp 16
 	ld b, -13 ;b = how far vertically the cursor will go compared to its current location
-	ld hl, wOptionsPage2Option1CursorX
+	ld hl, wOptionsPage4Option1CursorX
 	jr z, .updateMenuVariables
 	ld b, 2
 	cp 3
@@ -121,7 +121,7 @@ DisplaySpriteOptions:
 .upPressed
 	cp 5
 	ld b, -2
-	ld hl, wOptionsPage2Option1CursorX
+	ld hl, wOptionsPage4Option1CursorX
 	jr z, .updateMenuVariables
 	cp 7
 	inc hl
@@ -166,64 +166,64 @@ leftRightPressed:
 	cp 16 ; cursor on Cancel?
 	jr z, .cursorCancelRow
 .cursorInOption1
-	ld a, [wOptionsPage2Option1CursorX] ; battle animation cursor X coordinate
+	ld a, [wOptionsPage4Option1CursorX] ; battle animation cursor X coordinate
 	ld b, OPTION1_LEFT_XPOS
 	cp OPTION1_RIGHT_XPOS
 	jr z, .loadOption1X
 	ld b, OPTION1_RIGHT_XPOS
 .loadOption1X
 	ld a, b
-	ld [wOptionsPage2Option1CursorX], a
+	ld [wOptionsPage4Option1CursorX], a
 	jp .eraseOldMenuCursor
 .cursorInOption2
-	ld a, [wOptionsPage2Option2CursorX] ; battle animation cursor X coordinate
+	ld a, [wOptionsPage4Option2CursorX] ; battle animation cursor X coordinate
 	ld b, OPTION2_LEFT_XPOS
 	cp OPTION2_RIGHT_XPOS
 	jr z, .loadOption2X
 	ld b, OPTION2_RIGHT_XPOS
 .loadOption2X
 	ld a, b
-	ld [wOptionsPage2Option2CursorX], a
+	ld [wOptionsPage4Option2CursorX], a
 	jp .eraseOldMenuCursor
 .cursorInOption3
-	ld a, [wOptionsPage2Option3CursorX] ; battle animation cursor X coordinate
+	ld a, [wOptionsPage4Option3CursorX] ; battle animation cursor X coordinate
 	ld b, OPTION3_LEFT_XPOS
 	cp OPTION3_RIGHT_XPOS
 	jr z, .loadOption3X
 	ld b, OPTION3_RIGHT_XPOS
 .loadOption3X
 	ld a, b
-	ld [wOptionsPage2Option3CursorX], a
+	ld [wOptionsPage4Option3CursorX], a
 	jp .eraseOldMenuCursor
 .cursorInOption4
-	ld a, [wOptionsPage2Option4CursorX] ; battle animation cursor X coordinate
+	ld a, [wOptionsPage4Option4CursorX] ; battle animation cursor X coordinate
 	ld b, OPTION4_LEFT_XPOS
 	cp OPTION4_RIGHT_XPOS
 	jr z, .loadOption4X
 	ld b, OPTION4_RIGHT_XPOS
 .loadOption4X
 	ld a, b
-	ld [wOptionsPage2Option4CursorX], a
+	ld [wOptionsPage4Option4CursorX], a
 	jp .eraseOldMenuCursor
 .cursorInOption5
-	ld a, [wOptionsPage2Option5CursorX] ; battle animation cursor X coordinate
+	ld a, [wOptionsPage4Option5CursorX] ; battle animation cursor X coordinate
 	ld b, OPTION5_LEFT_XPOS
 	cp OPTION5_RIGHT_XPOS
 	jr z, .loadOption5X
 	ld b, OPTION5_RIGHT_XPOS
 .loadOption5X
 	ld a, b
-	ld [wOptionsPage2Option5CursorX], a
+	ld [wOptionsPage4Option5CursorX], a
 	jp .eraseOldMenuCursor
 .cursorInOption6
-	ld a, [wOptionsPage2Option6CursorX] ; battle animation cursor X coordinate
+	ld a, [wOptionsPage4Option6CursorX] ; battle animation cursor X coordinate
 	ld b, OPTION6_LEFT_XPOS
 	cp OPTION6_RIGHT_XPOS
 	jr z, .loadOption6X
 	ld b, OPTION6_RIGHT_XPOS
 .loadOption6X
 	ld a, b
-	ld [wOptionsPage2Option6CursorX], a
+	ld [wOptionsPage4Option6CursorX], a
 	jp .eraseOldMenuCursor
 .cursorCancelRow
 	ld a, [wOptionsCancelCursorX] ; battle style cursor X coordinate
@@ -240,7 +240,7 @@ leftRightPressed:
 SetSpriteOptionsFromCursorPositions:
 	ld a, [wSpriteOptions2]
 	ld d, a
-	ld a, [wOptionsPage2Option1CursorX] ; battle style cursor X coordinate
+	ld a, [wOptionsPage4Option1CursorX] ; battle style cursor X coordinate
 	cp OPTION1_RIGHT_XPOS 
 	jr z, .option1setRight
 .option1setLeft
@@ -249,7 +249,7 @@ SetSpriteOptionsFromCursorPositions:
 .option1setRight
 	set OPTION1_BIT, d
 .checkOption2
-	ld a, [wOptionsPage2Option2CursorX] ; battle style cursor X coordinate
+	ld a, [wOptionsPage4Option2CursorX] ; battle style cursor X coordinate
 	cp OPTION2_RIGHT_XPOS 
 	jr z, .option2setRight
 .option2setLeft
@@ -258,7 +258,7 @@ SetSpriteOptionsFromCursorPositions:
 .option2setRight
 	set OPTION2_BIT, d
 .checkOption3
-	ld a, [wOptionsPage2Option3CursorX] ; battle style cursor X coordinate
+	ld a, [wOptionsPage4Option3CursorX] ; battle style cursor X coordinate
 	cp OPTION3_RIGHT_XPOS 
 	jr z, .option3setRight
 .option3setLeft
@@ -272,7 +272,7 @@ SetSpriteOptionsFromCursorPositions:
 	ld a, [wSpriteOptions]
 	ld d, a
 .checkOption4
-	ld a, [wOptionsPage2Option4CursorX] ; battle style cursor X coordinate
+	ld a, [wOptionsPage4Option4CursorX] ; battle style cursor X coordinate
 	cp OPTION4_RIGHT_XPOS 
 	jr z, .option4setRight
 .option4setLeft
@@ -281,7 +281,7 @@ SetSpriteOptionsFromCursorPositions:
 .option4setRight
 	set OPTION4_BIT, d
 .checkOption5
-	ld a, [wOptionsPage2Option5CursorX] ; battle style cursor X coordinate
+	ld a, [wOptionsPage4Option5CursorX] ; battle style cursor X coordinate
 	cp OPTION5_RIGHT_XPOS 
 	jr z, .option5setRight
 .option5setLeft
@@ -290,7 +290,7 @@ SetSpriteOptionsFromCursorPositions:
 .option5setRight
 	set OPTION5_BIT, d
 .checkOption6
-	ld a, [wOptionsPage2Option6CursorX] ; battle style cursor X coordinate
+	ld a, [wOptionsPage4Option6CursorX] ; battle style cursor X coordinate
 	cp OPTION6_RIGHT_XPOS 
 	jr z, .option6setRight
 .option6setLeft
@@ -310,7 +310,7 @@ SetCursorPositionsFromSpriteOptions:
 	jr z, .storeOption1CursorX
 	ld a, 12
 .storeOption1CursorX
-	ld [wOptionsPage2Option1CursorX], a ; Back Sprites Cursor X Coordinate
+	ld [wOptionsPage4Option1CursorX], a ; Back Sprites Cursor X Coordinate
 	hlcoord 0, 3
 	call .placeUnfilledRightArrow
 .getOption2
@@ -320,7 +320,7 @@ SetCursorPositionsFromSpriteOptions:
 	jr z, .storeOption2CursorX
 	ld a, 12
 .storeOption2CursorX
-	ld [wOptionsPage2Option2CursorX], a ; Menu Sprites Cursor X Coordinate
+	ld [wOptionsPage4Option2CursorX], a ; Menu Sprites Cursor X Coordinate
 	hlcoord 0, 5
 	call .placeUnfilledRightArrow
 .getOption3
@@ -330,7 +330,7 @@ SetCursorPositionsFromSpriteOptions:
 	jr z, .storeOption3SpriteCursorX
 	ld a, 16
 .storeOption3SpriteCursorX
-	ld [wOptionsPage2Option3CursorX], a ; Back Sprites Cursor X Coordinate
+	ld [wOptionsPage4Option3CursorX], a ; Back Sprites Cursor X Coordinate
 	hlcoord 0, 7
 	call .placeUnfilledRightArrow
 .getOption4SpriteOption
@@ -340,7 +340,7 @@ SetCursorPositionsFromSpriteOptions:
 	jr z, .storeOption4SpriteCursorX
 	ld a, 16
 .storeOption4SpriteCursorX
-	ld [wOptionsPage2Option4CursorX], a ; Back Sprites Cursor X Coordinate
+	ld [wOptionsPage4Option4CursorX], a ; Back Sprites Cursor X Coordinate
 	hlcoord 0, 9
 	call .placeUnfilledRightArrow
 .getOption5SpriteOption
@@ -350,7 +350,7 @@ SetCursorPositionsFromSpriteOptions:
 	jr z, .storeOption5SpriteCursorX
 	ld a, 16
 .storeOption5SpriteCursorX
-	ld [wOptionsPage2Option5CursorX], a ; Back Sprites Cursor X Coordinate
+	ld [wOptionsPage4Option5CursorX], a ; Back Sprites Cursor X Coordinate
 	hlcoord 0, 11
 	call .placeUnfilledRightArrow
 .getOption6SpriteOption
@@ -360,7 +360,7 @@ SetCursorPositionsFromSpriteOptions:
 	jr z, .storeOption6SpriteCursorX
 	ld a, 16
 .storeOption6SpriteCursorX
-	ld [wOptionsPage2Option6CursorX], a ; Back Sprites Cursor X Coordinate
+	ld [wOptionsPage4Option6CursorX], a ; Back Sprites Cursor X Coordinate
 	hlcoord 0, 13
 	call .placeUnfilledRightArrow
 	; cursor in front of Cancel

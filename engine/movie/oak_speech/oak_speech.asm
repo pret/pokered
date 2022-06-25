@@ -5,6 +5,12 @@ SetDefaultNames:
 	push af
 	ld a, [wd732]
 	push af
+	ld a, [wSpriteOptions]
+	push af
+	ld a, [wSpriteOptions2]
+	push af
+	ld a, [wOptions2]
+	push af
 	ld hl, wPlayerName
 	ld bc, wBoxDataEnd - wPlayerName
 	xor a
@@ -13,6 +19,12 @@ SetDefaultNames:
 	ld bc, wSpriteDataEnd - wSpriteDataStart
 	xor a
 	call FillMemory
+	pop af
+	ld [wOptions2], a
+	pop af
+	ld [wSpriteOptions2], a
+	pop af
+	ld [wSpriteOptions], a
 	pop af
 	ld [wd732], a
 	pop af
@@ -42,6 +54,7 @@ OakSpeech:
 	call LoadTextBoxTilePatterns
 	call SetDefaultNames
 	predef InitPlayerData2
+	call RunDefaultPaletteCommand	;gbcnote - reinitialize the default palette in case the pointers got cleared
 	ld hl, wNumBoxItems
 	ld a, POTION
 	ld [wcf91], a
@@ -176,6 +189,7 @@ FadeInIntroPic:
 .next
 	ld a, [hli]
 	ldh [rBGP], a
+	call UpdateGBCPal_BGP
 	ld c, 10
 	call DelayFrames
 	dec b
@@ -197,6 +211,7 @@ MovePicLeft:
 
 	ld a, %11100100
 	ldh [rBGP], a
+	call UpdateGBCPal_BGP
 .next
 	call DelayFrame
 	ldh a, [rWX]

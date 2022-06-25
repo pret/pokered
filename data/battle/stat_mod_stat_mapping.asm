@@ -44,7 +44,7 @@ MapEffectToStat:
 	push de
 	ld b, a
 	ld de, StatMapping
-	jp MapLoop
+	;fallthrough
 
 MapLoop:
 .loop ; find the stat mapping in the array
@@ -56,7 +56,7 @@ MapLoop:
 	cp b
 	jr nz, .loop
 	dec de
-	ld a, [de] ; replacement sprite from matching array entry
+	ld a, [de]
 .mapStatDone
 	pop de
 	pop bc
@@ -67,4 +67,4 @@ MapSideEffectToStatMod:
 	push de
 	ld b, a
 	ld de, SideEffectMapping
-	jp MapLoop
+	jr MapLoop

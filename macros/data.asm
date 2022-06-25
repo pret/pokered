@@ -69,3 +69,7 @@ REPT _NARG
 	SHIFT
 ENDR
 ENDM
+
+ldPal: MACRO
+	ld \1, \2 << 6 | \3 << 4 | \4 << 2 | \5
+ENDM

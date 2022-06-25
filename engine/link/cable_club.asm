@@ -281,6 +281,8 @@ CableClub_DoBattleOrTradeAgain:
 	ld [wCurOpponent], a
 	call ClearScreen
 	call Delay3
+	ld b, SET_PAL_OVERWORLD
+	call RunPaletteCommand ;gbcnote - refresh pal
 	ld hl, wOptions
 	res 7, [hl]
 	predef InitOpponent
@@ -311,6 +313,9 @@ CallCurrentTradeCenterFunction:
 
 TradeCenter_SelectMon:
 	call ClearScreen
+	call Delay3
+	ld b, SET_PAL_OVERWORLD
+	call RunPaletteCommand ;gbcnote - refresh pal
 	call LoadTrainerInfoTextBoxTiles
 	call TradeCenter_DrawPartyLists
 	call TradeCenter_DrawCancelBox
@@ -627,6 +632,9 @@ TradeCenter_DisplayStats:
 	ld [wWhichPokemon], a
 	predef StatusScreen
 	predef StatusScreen2
+	call Delay3
+	ld b, SET_PAL_OVERWORLD
+	call RunPaletteCommand ;gbcnote - refresh pal
 	call GBPalNormal
 	call LoadTrainerInfoTextBoxTiles
 	call TradeCenter_DrawPartyLists
@@ -861,6 +869,9 @@ TradeCenter_Trade:
 	callfar TryEvolvingMon
 	call ClearScreen
 	call LoadTrainerInfoTextBoxTiles
+	call Delay3
+	ld b, SET_PAL_OVERWORLD
+	call RunPaletteCommand ;gbcnote - refresh pal
 	call Serial_PrintWaitingTextAndSyncAndExchangeNybble
 	ld c, 40
 	call DelayFrames

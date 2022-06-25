@@ -179,6 +179,7 @@ ROMX $2C
 	"Move Names"
 	"Wild Mons"
 	"Evos Moves"
+	"Splash Animation"
 ROMX $2D
 	"Pics 7"
 ROMX $2E
@@ -189,6 +190,7 @@ ROMX $30
 	"Pics 10"
 ROMX $34
 	"Party Sprites"
+	"GBC Mode Code"
 ROMX $35
     "newCode"
 WRAM0

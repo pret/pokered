@@ -546,6 +546,8 @@ ItemUseBall:
 ; Add the caught Pokémon to the Pokédex.
 	predef IndexToPokedex
 	ld a, [wd11e]
+	and a ; is it missingno?
+	jr z, .skipShowingPokedexData ; don't mark in pokedex if so
 	dec a
 	ld c, a
 	ld b, FLAG_TEST
@@ -706,7 +708,9 @@ ItemUseBicycle:
 	call ItemUseReloadOverworldData
 	xor a
 	ld [wWalkBikeSurfState], a ; change player state to walking
-	; call PlayDefaultMusic ; play walking music
+	ld a, [wOptions2]
+	bit BIT_BIKE_MUSIC, a
+	call z, PlayDefaultMusic ; play walking music
 	CheckEvent EVENT_SAW_GOT_OFF_BIKE_TEXT 
 	jr nz, .done 
 	SetEvent EVENT_SAW_GOT_OFF_BIKE_TEXT
@@ -720,7 +724,9 @@ ItemUseBicycle:
 	ldh [hJoyHeld], a ; current joypad state
 	inc a
 	ld [wWalkBikeSurfState], a ; change player state to bicycling
-	; call PlayDefaultMusic ; play bike riding music
+	ld a, [wOptions2]
+	bit BIT_BIKE_MUSIC, a
+	call z, PlayDefaultMusic ; play bike riding music
 	CheckEvent EVENT_SAW_GOT_ON_BIKE_TEXT
 	jr nz, .done 
 	SetEvent EVENT_SAW_GOT_ON_BIKE_TEXT
@@ -974,13 +980,13 @@ ItemUseMedicine:
 	push hl
 	ld hl, wPlayerBattleStatus3
 	res BADLY_POISONED, [hl] ; heal Toxic status
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	push af
 	xor a	;forcibly set it to the player's turn
-	ld [hWhoseTurn], a
+	ldh [hWhoseTurn], a
 	callfar UndoBurnParStats	;undo brn/par stat changes
 	pop af
-	ld [hWhoseTurn], a
+	ldh [hWhoseTurn], a
 	pop hl
 	xor a
 	ld [wBattleMonStatus], a ; remove the status ailment in the in-battle pokemon data
@@ -1242,13 +1248,13 @@ ItemUseMedicine:
 	jr z, .clearParBrn	;do not adjust the stats if not currently in battle
 	push hl
 	push de
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	push af
 	xor a	;forcibly set it to the player's turn
-	ld [hWhoseTurn], a
+	ldh [hWhoseTurn], a
 	callfar UndoBurnParStats	;undo brn/par stat changes
 	pop af
-	ld [hWhoseTurn], a
+	ldh [hWhoseTurn], a
 	pop de
 	pop hl
 .clearParBrn

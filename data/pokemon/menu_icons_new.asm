@@ -1,5 +1,6 @@
 MonPartyDataNew:
 	table_width 1, MonPartyDataNew
+	db ICON_MISSINGNO ; Missingno
 	db ICON_GRASS     ; Bulbasaur
 	db ICON_GRASS     ; Ivysaur
 	db ICON_QUADRUPED2; Venusaur

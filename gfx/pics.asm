@@ -391,6 +391,10 @@ WeepinbellPicBackSW::  INCBIN "gfx/pokemon/back_sw/weepinbellb.pic"
 VictreebelPicFront::   INCBIN "gfx/pokemon/front/victreebel.pic"
 VictreebelPicBackSW::  INCBIN "gfx/pokemon/back_sw/victreebelb.pic"
 
+MissingnoPicFront::    INCBIN "gfx/pokemon/front/missingno.pic"
+MissingnoPicBackSW::   INCBIN "gfx/pokemon/back_sw/missingnob.pic"
+MissingnoPicBack::     INCBIN "gfx/pokemon/back/missingnob.pic"
+
 FossilAerodactylPic::  INCBIN "gfx/pokemon/front/fossilaerodactyl.pic"
 FossilKabutopsPic::   INCBIN "gfx/pokemon/front/fossilkabutops.pic"
 GhostPic::             INCBIN "gfx/battle/ghost.pic"

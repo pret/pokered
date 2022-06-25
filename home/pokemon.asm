@@ -110,7 +110,6 @@ LoadFrontSpriteByMonIndex::
 	ld [hl], b
 	and a
 	pop hl
-	jr z, .invalidDexNumber ; dex #0 invalid
 	cp NUM_POKEMON + 1
 	jr c, .validDexNumber   ; dex >#151 invalid
 .invalidDexNumber
@@ -401,12 +400,20 @@ GetMonHeader::
 	jr z, .mew
 	predef IndexToPokedex   ; convert pokemon ID in [wd11e] to pokedex number
 	ld a, [wd11e]
+	and a
+	jr z, .missingno ; index of 0 is missingno
 	dec a
 	ld bc, BASE_DATA_SIZE
 	ld hl, BaseStats
 	call AddNTimes
 	ld de, wMonHeader
 	ld bc, BASE_DATA_SIZE
+	call CopyData
+	jr .done
+.missingno
+	ld hl, MissingnoBaseStats
+	ld bc, BASE_DATA_SIZE
+	ld de, wMonHeader
 	call CopyData
 	jr .done
 .specialID
@@ -418,11 +425,10 @@ GetMonHeader::
 	ld [hl], d
 	jr .done
 .mew
-	ld hl, MewBaseStats
+	ld hl, MewBaseStats 
 	ld de, wMonHeader
 	ld bc, BASE_DATA_SIZE
-	ld a, BANK(MewBaseStats)
-	call FarCopyData
+	call CopyData ; now in same bank as rest of base stat data so no need to farcopy
 .done
 	ld a, [wd0b5]
 	ld [wMonHIndex], a

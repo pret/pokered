@@ -50,6 +50,11 @@ MainMenu:
 	ld de, NewGameText
 	call PlaceString
 .next2
+	;NEW: - print the game version
+	coord hl, $00, $11
+	ld de, VersionText
+	call PlaceString
+
 	ld hl, wd730
 	res 6, [hl]
 	call UpdateSprites
@@ -84,6 +89,7 @@ MainMenu:
 	jr z, .choseContinue
 	cp 1
 	jp z, StartNewGame
+	call ClearScreen ; remove version text before displaying options
 	call DisplayOptionMenu
 	ld a, 1
 	ld [wOptionsInitialized], a
@@ -316,6 +322,8 @@ StartNewGameDebug:
 
 ; enter map after using a special warp or loading the game from the main menu
 SpecialEnterMap::
+	ld a, 1
+	ld [wInGame], a
 	xor a
 	ldh [hJoyPressed], a
 	ldh [hJoyHeld], a
@@ -344,6 +352,14 @@ CableClubOptionsText:
 	db   "TRADE CENTER"
 	next "COLOSSEUM"
 	next "CANCEL@"
+
+VersionText:
+IF DEF(_RED)
+	db " PureRed v2.0@"
+ENDC
+IF DEF(_BLUE)
+	db " PureBlue v2.0@"
+ENDC
 
 DisplayContinueGameInfo:
 	xor a
@@ -496,7 +512,7 @@ DisplayOptionMenu:
 	ld a, SFX_PRESS_AB
 	call PlaySound
 	call ClearScreen
-	callfar DisplaySpriteOptions
+	callfar DisplayOptions2
 .exitMenu
 	ld a, SFX_PRESS_AB
 	call PlaySound
@@ -708,14 +724,8 @@ CheckForPlayerNameInSRAM:
 	ld a, $1
 	ld [MBC1SRamBankingMode], a
 	ld [MBC1SRamBank], a
-	ld b, NAME_LENGTH
-	ld hl, sPlayerName
-.loop
-	ld a, [hli]
-	cp "@"
-	jr z, .found
-	dec b
-	jr nz, .loop
+	call CheckSaveFileExists
+	jr c, .found
 ; not found
 	xor a
 	ld [MBC1SRamEnable], a

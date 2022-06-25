@@ -180,7 +180,7 @@ PokedexOrder:
 	db DEX_CHARMELEON
 	db DEX_WARTORTLE
 	db DEX_CHARIZARD
-	db 0 ; MISSINGNO.
+	db DEX_MISSINGNO ; real missingno
 	db 0 ; MISSINGNO.
 	db 0 ; MISSINGNO.
 	db 0 ; MISSINGNO.

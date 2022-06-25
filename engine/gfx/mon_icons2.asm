@@ -1,19 +1,19 @@
 LoadNicknameMonSprite:
     call DisableLCD
     xor a
-    ld [hDownArrowBlinkCount1], a
+    ldh [hDownArrowBlinkCount1], a
     ld a, [wMonPartySpriteSpecies]
     ld de, vNPCSprites
     call LoadPartyMonSpriteIntoVRAM
     call FillPartyMonOAM
     call EnableLCD
-    ld a, [hSpriteIndex]
+    ldh a, [hSpriteIndex]
     push af
     xor a
-    ld [hSpriteIndex], a
+    ldh [hSpriteIndex], a
     call ShowPartyMonSprite
     pop af
-    ld [hSpriteIndex], a
+    ldh [hSpriteIndex], a
     ret
 	
 LoadTradeMonSprite:
@@ -43,16 +43,16 @@ LoadPartyMonSpriteIntoVRAM:
 	call GetPartyMonSpriteID
     ld b, a
 	xor a
-	ld [hMultiplicand], a
-	ld [hMultiplicand + 1], a
+	ldh [hMultiplicand], a
+	ldh [hMultiplicand + 1], a
     ld a, b
-	ld [hMultiplicand + 2], a
+	ldh [hMultiplicand + 2], a
 	ld a, $80
-	ld [hMultiplier], a
+	ldh [hMultiplier], a
 	call Multiply
-	ld a, [hProduct + 2]
+	ldh a, [hProduct + 2]
 	ld h, a
-	ld a, [hProduct + 3]
+	ldh a, [hProduct + 3]
 	ld l, a	
 	ld a, h
 	add $40
@@ -66,7 +66,7 @@ GetPartyMonSpriteID:
     ld [wd11e], a
     predef IndexToPokedex
     ld a, [wd11e]
-    dec a
+    ; missingno is allowed here, 0 is a valid value
     ld b, a
     ld a, [wSpriteOptions2]
     bit BIT_MENU_ICON_SPRITES, a

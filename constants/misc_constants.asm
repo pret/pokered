@@ -17,19 +17,27 @@ TEXT_DELAY_SLOW    EQU %011 ; 3
 	const BIT_BATTLE_SHIFT     ; 6
 	const BIT_BATTLE_ANIMATION ; 7
 
+; wOptions2
+
+PALETTES_DEFAULT    EQU %00 ; 0 
+PALETTES_SGB        EQU %01 ; 1
+PALETTES_YELLOW     EQU %11 ; 3
+
+	const_def 2
+	const BIT_ALT_PKMN_PALETTES ; 2
+	const BIT_AUDIO_PAN         ; 3
+	const BIT_BIKE_MUSIC        ; 4
+
 ; wSpriteOptions2
 	const_def  
 	const BIT_BACK_SPRITES     ; 0
 	const BIT_BULBASAUR_SPRITE ; 1
 	const BIT_EXEGGUTOR_SPRITE ; 2
 	const BIT_MENU_ICON_SPRITES ; 3
-	;const BIT_AUDIO_TYPE       ; 4
-	;const BIT_GHOST_PSYCHIC    ; 5
-
-;6/7
-;GBC_COLOR_DEFAULT    EQU %00 ; 0 
-;GBC_COLOR_SGB        EQU %01 ; 1
-;GBC_COLOR_YELLOW     EQU %11 ; 3
+	const BIT_GHOST_PSYCHIC    ; 4
+	const BIT_ICE_FIRE         ; 5
+	const BIT_BUG_PSN          ; 6
+	const BIT_PSN_BUG          ; 7
 
 ; wSpriteOptions
 	const_def
@@ -42,6 +50,16 @@ TEXT_DELAY_SLOW    EQU %011 ; 3
 	const BIT_ARCANINE_SPRITE  ; 6
 	const BIT_MEWTWO_SPRITE    ; 7
 
+
 SAFARI_TYPE_CLASSIC EQU 0
 SAFARI_TYPE_RANGER_HUNT EQU 1
 SAFARI_TYPE_FREE_ROAM EQU 2
+
+; DMGPalToGBCPal
+CONVERT_BGP  EQU 0
+CONVERT_OBP0 EQU 1
+CONVERT_OBP1 EQU 2
+
+NUM_COLORS EQU 4
+PAL_SIZE EQU NUM_COLORS * 2
+NUM_ACTIVE_PALS EQU 4

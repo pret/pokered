@@ -1,5 +1,5 @@
 DoubleSelectedStats:
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	ld a, [wPlayerStatsToDouble]
 	ld hl, wBattleMonAttack
@@ -87,7 +87,7 @@ DoubleSelectedStats:
 UndoBurnParStats:
 	ld hl, wBattleMonStatus
 	ld de, wPlayerStatsToDouble
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .checkburn
 	ld hl, wEnemyMonStatus

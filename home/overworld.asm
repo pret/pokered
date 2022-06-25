@@ -91,7 +91,7 @@ OverworldLoopLessDelay::
 	call IsPlayerCharacterBeingControlledByGame
 	jr nz, .checkForOpponent
 .trySelectingBikeRod
-	ld a, [hJoyPressed]
+	ldh a, [hJoyPressed]
 	bit BIT_SELECT, a	;is Select being pressed?
 	jr z, .notSelect
 	callfar CheckForRodBike
@@ -144,10 +144,10 @@ OverworldLoopLessDelay::
 	res 2, [hl]
 	call UpdateSprites
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; - NEW : code for changing direction without moving by pressing A+B and a direction when standing still.
-	ld a, [hJoyHeld] 
+	ldh a, [hJoyHeld] 
 	and B_BUTTON
 	jr z, .resetDirectionChangeState
-	ld a, [hJoyHeld] 
+	ldh a, [hJoyHeld] 
 	and A_BUTTON
 	jr z, .resetDirectionChangeState ; hold both B and A button to go into "change direction without moving" mode.
 	ld a, [wDirectionChangeModeCounter]
@@ -307,26 +307,21 @@ OverworldLoopLessDelay::
 	res 2, [hl]
 	ld a, [wd736]
 	bit 7, a ; spinning?
-	jr nz, .doBikeSpeed ; FIXED: faster spinning movement
+	jr nz, .spinnerSpeed ; FIXED: faster spinning movement
 	ld a, [wWalkBikeSurfState]
 	dec a ; riding a bike?
 	jr nz, .normalPlayerSpriteAdvancement
 	ld a, [wd736]
 	bit 6, a ; jumping a ledge?
 	jr nz, .normalPlayerSpriteAdvancement
-	; Bike is normally 2x walking speed
-	; Holding B makes the bike even faster
-	ld a, [hJoyHeld]
-	and B_BUTTON
-	jr z, .doBikeSpeed
-	call DoBikeSpeedup
-	call DoBikeSpeedup
-.doBikeSpeed
+	call GetBikeSpeed
+	jr .notRunning
+.spinnerSpeed
 	call DoBikeSpeedup
 	jr .notRunning
 .normalPlayerSpriteAdvancement
 	; Holding B makes you run at 2x walking speed
-	ld a, [hJoyHeld]
+	ldh a, [hJoyHeld]
 	and B_BUTTON
 	jr z, .notRunning
 	call DoBikeSpeedup
@@ -420,18 +415,45 @@ NewBattle::
 	and a
 	ret
 
+GetBikeSpeed::
+	; Bike is normally 2x walking speed
+	; Holding B makes the bike even faster
+	ld a, [wCurMap]
+	cp ROUTE_17 ; Cycling Road
+	jr z, .cyclingRoad
+	ldh a, [hJoyHeld]
+	and B_BUTTON
+	jr z, .normalBikeSpeed
+	; B button held
+	call DoBikeSpeedup
+	call DoBikeSpeedup
+.normalBikeSpeed
+	call DoBikeSpeedup
+	ret	
+.cyclingRoad
+	; uphill we can only go a bit faster, downhill we can go full speed
+	ldh a, [hJoyHeld]
+	and D_UP | D_LEFT | D_RIGHT
+	jr nz, .slower
+	call DoBikeSpeedup
+.slower
+	ldh a, [hJoyHeld]
+	and B_BUTTON
+	jr z, .done
+	call DoBikeSpeedup
+	ldh a, [hJoyHeld]
+	and D_UP | D_LEFT | D_RIGHT
+	jr nz, .done
+	call DoBikeSpeedup
+	jr .done
+.done
+	ret
+
 ; function to make bikes twice as fast as walking
 DoBikeSpeedup::
 	ld a, [wNPCMovementScriptPointerTableNum]
 	and a
 	ret nz
-	ld a, [wCurMap]
-	cp ROUTE_17 ; Cycling Road
-	jr nz, .goFaster
-	ldh a, [hJoyHeld]
-	and D_UP | D_LEFT | D_RIGHT
-	ret nz
-.goFaster
 	jp AdvancePlayerSprite
 
 ; check if the player has stepped onto a warp after having not collided
@@ -593,132 +615,8 @@ ContinueCheckWarpsNoCollisionLoop::
 
 ; if no matching warp was found
 CheckMapConnections::
-.checkWestMap
-	ld a, [wXCoord]
-	cp $ff
-	jr nz, .checkEastMap
-	ld a, [wWestConnectedMap]
-	ld [wCurMap], a
-	ld a, [wWestConnectedMapXAlignment] ; new X coordinate upon entering west map
-	ld [wXCoord], a
-	ld a, [wYCoord]
-	ld c, a
-	ld a, [wWestConnectedMapYAlignment] ; Y adjustment upon entering west map
-	add c
-	ld c, a
-	ld [wYCoord], a
-	ld a, [wWestConnectedMapViewPointer] ; pointer to upper left corner of map without adjustment for Y position
-	ld l, a
-	ld a, [wWestConnectedMapViewPointer + 1]
-	ld h, a
-	srl c
-	jr z, .savePointer1
-.pointerAdjustmentLoop1
-	ld a, [wWestConnectedMapWidth] ; width of connected map
-	add MAP_BORDER * 2
-	ld e, a
-	ld d, 0
-	ld b, 0
-	add hl, de
-	dec c
-	jr nz, .pointerAdjustmentLoop1
-.savePointer1
-	ld a, l
-	ld [wCurrentTileBlockMapViewPointer], a ; pointer to upper left corner of current tile block map section
-	ld a, h
-	ld [wCurrentTileBlockMapViewPointer + 1], a
-	jp .loadNewMap
-
-.checkEastMap
-	ld b, a
-	ld a, [wCurrentMapWidth2] ; map width
-	cp b
-	jr nz, .checkNorthMap
-	ld a, [wEastConnectedMap]
-	ld [wCurMap], a
-	ld a, [wEastConnectedMapXAlignment] ; new X coordinate upon entering east map
-	ld [wXCoord], a
-	ld a, [wYCoord]
-	ld c, a
-	ld a, [wEastConnectedMapYAlignment] ; Y adjustment upon entering east map
-	add c
-	ld c, a
-	ld [wYCoord], a
-	ld a, [wEastConnectedMapViewPointer] ; pointer to upper left corner of map without adjustment for Y position
-	ld l, a
-	ld a, [wEastConnectedMapViewPointer + 1]
-	ld h, a
-	srl c
-	jr z, .savePointer2
-.pointerAdjustmentLoop2
-	ld a, [wEastConnectedMapWidth]
-	add MAP_BORDER * 2
-	ld e, a
-	ld d, 0
-	ld b, 0
-	add hl, de
-	dec c
-	jr nz, .pointerAdjustmentLoop2
-.savePointer2
-	ld a, l
-	ld [wCurrentTileBlockMapViewPointer], a ; pointer to upper left corner of current tile block map section
-	ld a, h
-	ld [wCurrentTileBlockMapViewPointer + 1], a
-	jp .loadNewMap
-
-.checkNorthMap
-	ld a, [wYCoord]
-	cp $ff
-	jr nz, .checkSouthMap
-	ld a, [wNorthConnectedMap]
-	ld [wCurMap], a
-	ld a, [wNorthConnectedMapYAlignment] ; new Y coordinate upon entering north map
-	ld [wYCoord], a
-	ld a, [wXCoord]
-	ld c, a
-	ld a, [wNorthConnectedMapXAlignment] ; X adjustment upon entering north map
-	add c
-	ld c, a
-	ld [wXCoord], a
-	ld a, [wNorthConnectedMapViewPointer] ; pointer to upper left corner of map without adjustment for X position
-	ld l, a
-	ld a, [wNorthConnectedMapViewPointer + 1]
-	ld h, a
-	ld b, 0
-	srl c
-	add hl, bc
-	ld a, l
-	ld [wCurrentTileBlockMapViewPointer], a ; pointer to upper left corner of current tile block map section
-	ld a, h
-	ld [wCurrentTileBlockMapViewPointer + 1], a
-	jp .loadNewMap
-
-.checkSouthMap
-	ld b, a
-	ld a, [wCurrentMapHeight2]
-	cp b
+	farcall CheckWestMap ; NEW: check map connections in another bank to save space, do all 4 if necessary from that bank without returning until done
 	jr nz, .didNotEnterConnectedMap
-	ld a, [wSouthConnectedMap]
-	ld [wCurMap], a
-	ld a, [wSouthConnectedMapYAlignment] ; new Y coordinate upon entering south map
-	ld [wYCoord], a
-	ld a, [wXCoord]
-	ld c, a
-	ld a, [wSouthConnectedMapXAlignment] ; X adjustment upon entering south map
-	add c
-	ld c, a
-	ld [wXCoord], a
-	ld a, [wSouthConnectedMapViewPointer] ; pointer to upper left corner of map without adjustment for X position
-	ld l, a
-	ld a, [wSouthConnectedMapViewPointer + 1]
-	ld h, a
-	ld b, 0
-	srl c
-	add hl, bc
-	ld a, l
-	ld [wCurrentTileBlockMapViewPointer], a ; pointer to upper left corner of current tile block map section
-	ld a, h
-	ld [wCurrentTileBlockMapViewPointer + 1], a
 .loadNewMap ; load the connected map that was entered
 	ld hl, wCurrentMapScriptFlags
 	set 4, [hl]

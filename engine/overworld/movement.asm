@@ -79,7 +79,7 @@ UpdatePlayerSprite:
 	ld a, [wJoyIgnore]
 	and a
 	jr nz, .doneSpeed
-	ld a, [hJoyHeld]
+	ldh a, [hJoyHeld]
 	and B_BUTTON
 	jr z, .doneSpeed
 	ld c, 2
@@ -420,7 +420,7 @@ sprite60fps:
 	push af
 	ld h, $c2
 	ld l, $0a
-	ld a, [hCurrentSpriteOffset]
+	ldh a, [hCurrentSpriteOffset]
 	add l
 	ld l, a
 	ld a, [hl]

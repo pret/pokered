@@ -20,6 +20,7 @@ HallOfFamePC:
 	call FillFourRowsWithBlack
 	ld a, %11000000
 	ldh [rBGP], a
+	call UpdateGBCPal_BGP
 	call EnableLCD
 	ld a, SFX_STOP_ALL_MUSIC
 	call PlaySoundWaitForCurrent
@@ -38,6 +39,7 @@ FadeInCreditsText:
 .loop
 	ld a, [hli]
 	ldh [rBGP], a
+	call UpdateGBCPal_BGP
 	ld c, 5
 	call DelayFrames
 	dec b
@@ -77,6 +79,7 @@ DisplayCreditsMon:
 	call FillMiddleOfScreenWithWhite
 	ld a, %11111100 ; make the mon a black silhouette
 	ldh [rBGP], a
+	call UpdateGBCPal_BGP
 
 ; scroll the mon left by one tile 7 times
 	ld bc, 7
@@ -101,6 +104,7 @@ DisplayCreditsMon:
 	ldh [hWY], a
 	ld a, %11000000
 	ldh [rBGP], a
+	call UpdateGBCPal_BGP
 	ret
 
 INCLUDE "data/credits/credits_mons.asm"
@@ -118,11 +122,7 @@ ScrollCreditsMonLeft:
 	ret
 
 ScrollCreditsMonLeft_SetSCX:
-	ldh a, [rLY]
-	cp l
-	jr nz, ScrollCreditsMonLeft_SetSCX
-	ld a, h
-	ldh [rSCX], a
+	predef BGLayerScrollingUpdate	;gbcnote - consolidated into a predef that also fixes some issues
 .loop
 	ldh a, [rLY]
 	cp h

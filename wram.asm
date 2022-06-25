@@ -380,7 +380,9 @@ wNPCMovementDirections:: ds 180
 NEXTU
 wDexRatingNumMonsSeen:: db
 wDexRatingNumMonsOwned:: db
-wDexRatingText:: db
+wDexRatingText:: 
+wTrainerCardBadgeAttributes:: db
+;gbcnote - modified to match yellow
 
 NEXTU
 ; If a random number greater than this value is generated, then the player is
@@ -794,6 +796,18 @@ wOptionsPage2Option4CursorX:: db
 wOptionsPage2Option5CursorX:: db
 wOptionsPage2Option6CursorX:: db
 ; options page 3
+wOptionsPage3Option1CursorX:: db
+wOptionsPage3Option2CursorX:: db
+wOptionsPage3Option3CursorX:: db
+wOptionsPage3Option4CursorX:: db
+; options page 4
+wOptionsPage4Option1CursorX:: db
+wOptionsPage4Option2CursorX:: db
+wOptionsPage4Option3CursorX:: db
+wOptionsPage4Option4CursorX:: db
+wOptionsPage4Option5CursorX:: db
+wOptionsPage4Option6CursorX:: db
+; options page 5
 wOptionsNidorinoSpriteCursorX:: db
 wOptionsGolbatSpriteCursorX:: db
 wOptionsMankeySpriteCursorX:: db
@@ -801,7 +815,7 @@ wOptionsArcanineSpriteCursorX:: db
 wOptionsExeggutorSpriteCursorX:: db
 wOptionsMewtwoSpriteCursorX:: db
 
-;14 bytes remaining in union
+;6 bytes remaining in union
 
 NEXTU
 ; tile ID of the badge number being drawn
@@ -893,7 +907,7 @@ wRightGBMonSpecies:: db
 ; bit 6: tried pushing against boulder once (you need to push twice before it will move)
 wFlags_0xcd60:: db
 
-	ds 1
+wInGame:: db ; whether we're in-game rather than in the main menu before loading a game
 
 wListWithTMText:: db ; whether the current list menu can contain TMs and should print their moves
 wTMTextShown:: db ; whether text for a TM is visible in a menu
@@ -1091,7 +1105,12 @@ wPalPacket::
 
 ; This union spans 49 bytes.
 UNION
-wPartyMenuBlkPacket:: ds $30
+wPartyMenuBlkPacket:: ; cf2e
+; $30 bytes
+	ds 9
+;gbcnote - modified to match yellow
+wPartyHPBarAttributes:: ; cf36
+	ds 20
 
 NEXTU
 	ds 29
@@ -1796,10 +1815,10 @@ SECTION "Main Data", WRAM0
 
 wMainDataStart::
 
-wPokedexOwned:: flag_array NUM_POKEMON
+wPokedexOwned:: flag_array NUM_POKEMON - 1 ; discount missingno
 wPokedexOwnedEnd::
 
-wPokedexSeen:: flag_array NUM_POKEMON
+wPokedexSeen:: flag_array NUM_POKEMON - 1 ; discount missingno
 wPokedexSeenEnd::
 
 ;;;;;
@@ -1834,7 +1853,7 @@ wOptions:: db
 
 wObtainedBadges:: flag_array NUM_BADGES
 
-	ds 1
+ds 1
 
 ; bit 0: If 0, limit the delay to 1 frame. Note that this has no effect if
 ;        the delay has been disabled entirely through bit 1 of this variable
@@ -2143,7 +2162,20 @@ wRoute18Gate1FCurScript:: db
 	ds 78
 wGameProgressFlagsEnd::
 
-	ds 56
+wGBCBasePalPointers:: 
+	ds NUM_ACTIVE_PALS * 2 ; 8 bytes
+wGBCPal:: 
+	ds PAL_SIZE ; 8 bytes
+wLastBGP:: 
+	ds 1
+wLastOBP0:: 
+	ds 1
+wLastOBP1:: 
+	ds 1 
+wBGPPalsBuffer:: 
+	ds NUM_ACTIVE_PALS * PAL_SIZE ;32 bytes
+	
+	ds 5
 
 wObtainedHiddenItemsFlags:: flag_array 112
 
@@ -2397,8 +2429,17 @@ wSpriteOptions:: db
 ; bit 2 -> Exeggutor sprite version: 0 = Y, 1 = RB
 wSpriteOptions2:: db
 
+; bits 0-1 = Palette setting 
+; 00 = Original
+; 01 = SGB
+; 11 = Yellow
+; bit 2 = Alt pokemon colors on or off
+; bit 3 = Is audio panning on or off
+; bit 4 = Is Bike music enabled
 
-	ds 4
+wOptions2:: db
+
+	ds 3
 
 wPlayTimeHours:: db
 wPlayTimeMaxed:: db

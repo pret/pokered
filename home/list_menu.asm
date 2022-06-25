@@ -53,7 +53,7 @@ DisplayListMenuID::
 	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_LEFT
 	ld [wMenuWatchedKeys], a
 	call CheckForTM
-	call Delay3
+	homecall PrepareOAMData	;gbcnote - makes mart menus cleaner by updating the OAM sprite table ahead of vblank
 
 DisplayListMenuIDLoop::
 	xor a

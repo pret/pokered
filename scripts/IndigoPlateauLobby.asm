@@ -165,7 +165,7 @@ IndigoTradeNurseText:
 	;script_cable_club_receptionist
 	
 IndigoCashierText:
-	script_mart ULTRA_BALL, GREAT_BALL, FULL_RESTORE, MAX_POTION, ELIXER, PP_UP, FULL_HEAL, REVIVE, MAX_REPEL
+	script_mart MAX_POTION, FULL_RESTORE, FULL_HEAL, REVIVE, ELIXER, PP_UP, ULTRA_BALL, GREAT_BALL, MAX_REPEL
 
 IndigoPlateauGymGuideSonText:
 	text_far _IndigoPlateauGymGuideSonText
@@ -188,7 +188,7 @@ IndigoPlateauGymGuideSonMoreTMs:
 	text_end
 
 IndigoGymGuideShop:
-	script_mart APEX_CHIP
+	script_mart APEX_CHIP, MAX_REVIVE, MAX_ELIXER, MAX_ETHER
 
 IndigoGymGuideSonShop1:
 	script_mart TM_ICE_BEAM, TM_THUNDERBOLT, TM_EARTHQUAKE, TM_FLAMETHROWER, TM_HI_JUMP_KICK, TM_PSYCHIC_M, TM_RAZOR_LEAF, TM_ROCK_SLIDE, TM_SLUDGE, TM_DOUBLE_EDGE

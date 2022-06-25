@@ -27,6 +27,10 @@ CheckForRodBike::
 	ld a, [wd732]
 	bit 5, a
 	ret nz
+	; do nothing if surfing
+	ld a, [wWalkBikeSurfState]
+	cp 2
+	ret z
 	;else check if bike is in bag
 	ld b, BICYCLE
 	push bc
@@ -65,7 +69,7 @@ PrepareText:
 	
 	;use $ff value loaded into hSpriteIndexOrTextID to make DisplayTextID display nothing and close any text
 	ld a, $FF
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 
 	ret

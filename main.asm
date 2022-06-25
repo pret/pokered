@@ -5,7 +5,6 @@ SECTION "bank1", ROMX
 
 INCLUDE "data/sprites/facings.asm"
 INCLUDE "engine/events/black_out.asm"
-INCLUDE "data/pokemon/mew.asm"
 INCLUDE "engine/battle/safari_zone.asm"
 INCLUDE "engine/movie/title.asm"
 INCLUDE "engine/pokemon/load_mon_data.asm"
@@ -186,7 +185,6 @@ INCLUDE "engine/slots/game_corner_slots.asm"
 SECTION "Battle Engine 7", ROMX
 
 INCLUDE "data/moves/moves.asm"
-INCLUDE "data/pokemon/base_stats.asm"
 INCLUDE "data/pokemon/cries.asm"
 INCLUDE "engine/battle/stats_functions.asm"
 INCLUDE "engine/battle/scroll_draw_trainer_pic.asm"
@@ -315,8 +313,6 @@ INCLUDE "gfx/version.asm"
 
 SECTION "bank1C", ROMX
 
-INCLUDE "engine/movie/splash.asm"
-INCLUDE "engine/movie/hall_of_fame.asm"
 INCLUDE "engine/overworld/healing_machine.asm"
 INCLUDE "engine/overworld/player_animations.asm"
 INCLUDE "engine/battle/ghost_marowak_anim.asm"
@@ -368,6 +364,12 @@ INCLUDE "engine/overworld/wild_mon_alt_palettes.asm"
 SECTION "Evos Moves", ROMX
 ; moved from battle engine 7
 INCLUDE "engine/pokemon/evos_moves.asm"
+INCLUDE "data/pokemon/base_stats.asm"
+
+SECTION "Splash Animation", ROMX
+; moved from bank1C
+INCLUDE "engine/movie/splash.asm"
+INCLUDE "engine/movie/hall_of_fame.asm"
 
 
 SECTION "Party Sprites", ROMX, BANK[$34]
@@ -375,10 +377,18 @@ SECTION "Party Sprites", ROMX, BANK[$34]
 PartyMonSprites1: INCBIN "gfx/icons/menusprites1.2bpp"
 PartyMonSprites2: INCBIN "gfx/icons/menusprites2.2bpp"
 
+SECTION "GBC Mode Code", ROMX
+
+;gbcnote: include the bgmap files from pokemon yellow
+INCLUDE "data/gbc/bg_map_attributes.asm"
+INCLUDE "engine/gbc/bg_map_attributes.asm"
+INCLUDE "engine/gfx/scroll_gfx_horizontally.asm"
+
 
 SECTION "newCode", ROMX
 
 INCLUDE "engine/gfx/front_sprite_options.asm"
+INCLUDE "engine/menus/options_menu2.asm"
 INCLUDE "engine/menus/sprite_options_menu.asm"
 INCLUDE "engine/menus/sprite_options_menu2.asm"
 INCLUDE "engine/gfx/mon_icons2.asm"
@@ -387,3 +397,4 @@ INCLUDE "engine/overworld/select_button_functionality.asm"
 INCLUDE "engine/overworld/use_another_repel.asm"
 INCLUDE "engine/menus/wrap_list_menu.asm"
 INCLUDE "engine/items/last_two_fishing_gurus_script.asm"
+INCLUDE "engine/overworld/check_map_connections.asm"
