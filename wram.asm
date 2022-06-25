@@ -1134,7 +1134,8 @@ NEXTU
 
 wItemFinderItemDirection::db
 wSawItemFinderText::db
-; 14 bytes remaining in this empty space
+wItemDuplicationActive:: db
+; 13 bytes remaining in this empty space
 
 ENDU
 
