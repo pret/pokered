@@ -595,7 +595,7 @@ UpdateStatDone:
 	pop af
 	call nz, Bankswitch
 .applyBadgeBoostsAndStatusPenalties
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	call z, ApplyBadgeBoostsForSpecificStat ; whenever the player uses a stat-up move, badge boosts get reapplied again to every stat,
 	                             ; even to those not affected by the stat-up move (will be boosted further)
@@ -606,10 +606,10 @@ UpdateStatDone:
 ; these always run on the opponent, and run regardless of what stat was modified
 ; FIXED: These ran on the opponent's stats erroneously
 ; FIXED: These only run if the specific stat burn or paralyze affect is being modified
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	push af
 	xor 1 ; flip the turn temporarily to make these run on whoever's turn it currently is instead of the opponent correctly
-	ld [hWhoseTurn], a
+	ldh [hWhoseTurn], a
 	ld a, [wWhatStat]
 	cp MOD_SPEED
 	call z, QuarterSpeedDueToParalysis ; apply speed penalty to the player whose turn it is, if it's paralyzed
@@ -617,7 +617,7 @@ UpdateStatDone:
 	cp MOD_ATTACK
 	call z, HalveAttackDueToBurn ; apply attack penalty to the player whose turn it is, if it's burned
 	pop af
-	ld [hWhoseTurn], a
+	ldh [hWhoseTurn], a
 	ld a, $ff
 	ld [wWhatStat], a ; no longer modifying a stat
 	ld [wWhichStatMod], a ; no longer modifying a stat

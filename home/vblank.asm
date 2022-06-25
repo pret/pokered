@@ -26,7 +26,7 @@ VBlank::
 	call VBlankCopy
 	call VBlankCopyDouble
 	call UpdateMovingBgTiles
-	ld a, [hFlagsFFFA]	;see if OAM skip has been enabled (such as while overworld sprites are updating)
+	ldh a, [hFlagsFFFA]	;see if OAM skip has been enabled (such as while overworld sprites are updating)
 	bit 0, a
 	jr nz, .skipOAM
 	call hDMARoutine

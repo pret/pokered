@@ -91,7 +91,7 @@ OverworldLoopLessDelay::
 	call IsPlayerCharacterBeingControlledByGame
 	jr nz, .checkForOpponent
 .trySelectingBikeRod
-	ld a, [hJoyPressed]
+	ldh a, [hJoyPressed]
 	bit BIT_SELECT, a	;is Select being pressed?
 	jr z, .notSelect
 	callfar CheckForRodBike
@@ -144,10 +144,10 @@ OverworldLoopLessDelay::
 	res 2, [hl]
 	call UpdateSprites
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; - NEW : code for changing direction without moving by pressing A+B and a direction when standing still.
-	ld a, [hJoyHeld] 
+	ldh a, [hJoyHeld] 
 	and B_BUTTON
 	jr z, .resetDirectionChangeState
-	ld a, [hJoyHeld] 
+	ldh a, [hJoyHeld] 
 	and A_BUTTON
 	jr z, .resetDirectionChangeState ; hold both B and A button to go into "change direction without moving" mode.
 	ld a, [wDirectionChangeModeCounter]
@@ -307,26 +307,21 @@ OverworldLoopLessDelay::
 	res 2, [hl]
 	ld a, [wd736]
 	bit 7, a ; spinning?
-	jr nz, .doBikeSpeed ; FIXED: faster spinning movement
+	jr nz, .spinnerSpeed ; FIXED: faster spinning movement
 	ld a, [wWalkBikeSurfState]
 	dec a ; riding a bike?
 	jr nz, .normalPlayerSpriteAdvancement
 	ld a, [wd736]
 	bit 6, a ; jumping a ledge?
 	jr nz, .normalPlayerSpriteAdvancement
-	; Bike is normally 2x walking speed
-	; Holding B makes the bike even faster
-	ld a, [hJoyHeld]
-	and B_BUTTON
-	jr z, .doBikeSpeed
-	call DoBikeSpeedup
-	call DoBikeSpeedup
-.doBikeSpeed
+	call GetBikeSpeed
+	jr .notRunning
+.spinnerSpeed
 	call DoBikeSpeedup
 	jr .notRunning
 .normalPlayerSpriteAdvancement
 	; Holding B makes you run at 2x walking speed
-	ld a, [hJoyHeld]
+	ldh a, [hJoyHeld]
 	and B_BUTTON
 	jr z, .notRunning
 	call DoBikeSpeedup
@@ -420,18 +415,45 @@ NewBattle::
 	and a
 	ret
 
+GetBikeSpeed::
+	; Bike is normally 2x walking speed
+	; Holding B makes the bike even faster
+	ld a, [wCurMap]
+	cp ROUTE_17 ; Cycling Road
+	jr z, .cyclingRoad
+	ldh a, [hJoyHeld]
+	and B_BUTTON
+	jr z, .normalBikeSpeed
+	; B button held
+	call DoBikeSpeedup
+	call DoBikeSpeedup
+.normalBikeSpeed
+	call DoBikeSpeedup
+	ret	
+.cyclingRoad
+	; uphill we can only go a bit faster, downhill we can go full speed
+	ldh a, [hJoyHeld]
+	and D_UP | D_LEFT | D_RIGHT
+	jr nz, .slower
+	call DoBikeSpeedup
+.slower
+	ldh a, [hJoyHeld]
+	and B_BUTTON
+	jr z, .done
+	call DoBikeSpeedup
+	ldh a, [hJoyHeld]
+	and D_UP | D_LEFT | D_RIGHT
+	jr nz, .done
+	call DoBikeSpeedup
+	jr .done
+.done
+	ret
+
 ; function to make bikes twice as fast as walking
 DoBikeSpeedup::
 	ld a, [wNPCMovementScriptPointerTableNum]
 	and a
 	ret nz
-	ld a, [wCurMap]
-	cp ROUTE_17 ; Cycling Road
-	jr nz, .goFaster
-	ldh a, [hJoyHeld]
-	and D_UP | D_LEFT | D_RIGHT
-	ret nz
-.goFaster
 	jp AdvancePlayerSprite
 
 ; check if the player has stepped onto a warp after having not collided

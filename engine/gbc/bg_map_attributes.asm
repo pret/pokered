@@ -18,37 +18,37 @@ LoadBGMapAttributes::
 
 	di
 	ld a, $1
-	ld [rVBK], a
+	ldh [rVBK], a
 	push hl
 	ld a, [hl]
 	ld c, a ; save attribute count for later
 	ld de, $10
 	add hl, de
 	ld a, h
-	ld [rHDMA1], a
+	ldh [rHDMA1], a
 	ld a, l
-	ld [rHDMA2], a
+	ldh [rHDMA2], a
 	ld de, vBGMap0
 	ld a, d
-	ld [rHDMA3], a
+	ldh [rHDMA3], a
 	ld a, e
-	ld [rHDMA4], a
+	ldh [rHDMA4], a
 
-	ld a, [rLCDC]
+	ldh a, [rLCDC]
 	and rLCDC_ENABLE_MASK ; is LCD off?
 	jr z, .lcdOff ; if off, transfer immediately
 ; wait for VBlank if LCD is on
 .waitForVBlankLoop1
-	ld a, [rLY]
+	ldh a, [rLY]
 	cp $90
 	jr nz, .waitForVBlankLoop1
 .waitForAccessibleVRAMLoop1
-	ld a, [rSTAT]
+	ldh a, [rSTAT]
 	and %10 ; are we in HBlank or VBlank?
 	jr nz, .waitForAccessibleVRAMLoop1 ; loop until we're in a safe period to transfer to VRAM
 .lcdOff
 	ld a, c ; number of BG attributes to transfer, plus 1 times 16
-	ld [rHDMA5], a ; initiate transfer
+	ldh [rHDMA5], a ; initiate transfer
 	call Func_3082 ; update audio so it doesn't "lag"
 	pop hl
 	ld a, [hli]
@@ -59,30 +59,30 @@ LoadBGMapAttributes::
 	ld d, a    ; offset of the attributes
 	add hl, de ; hl = new pointer
 	ld a, h
-	ld [rHDMA1], a
+	ldh [rHDMA1], a
 	ld a, l
-	ld [rHDMA2], a
+	ldh [rHDMA2], a
 	ld de, vBGMap1 ; copy to vBGMap1
 	ld a, d
-	ld [rHDMA3], a
+	ldh [rHDMA3], a
 	ld a, e
-	ld [rHDMA4], a
+	ldh [rHDMA4], a
 ; LCD check again
-	ld a, [rLCDC]
+	ldh a, [rLCDC]
 	and rLCDC_ENABLE_MASK ; is LCD off?
 	jr z, .lcdOff2 ; if off, transfer immediately
 ; wait for VBlank if LCD is on
 .waitForVBlankLoop2
-	ld a, [rLY]
+	ldh a, [rLY]
 	cp $90
 	jr nz, .waitForVBlankLoop2
 .waitForAccessibleVRAMLoop2
-	ld a, [rSTAT]
+	ldh a, [rSTAT]
 	and %10 ; are we in HBlank or VBlank?
 	jr nz, .waitForAccessibleVRAMLoop2 ; loop until we're in a safe period to transfer to VRAM
 .lcdOff2
 	ld a, c
-	ld [rHDMA5], a
+	ldh [rHDMA5], a
 	pop af
 	dec a
 	dec a
@@ -96,11 +96,11 @@ LoadBGMapAttributes::
 	call z, HandlePartyHPBarAttributes
 .done
 	call Func_3082
-	ld a, [rIF]
+	ldh a, [rIF]
 	res VBLANK, a
-	ld [rIF], a
+	ldh [rIF], a
 	xor a
-	ld [rVBK], a
+	ldh [rVBK], a
 	ei
 	ret
 

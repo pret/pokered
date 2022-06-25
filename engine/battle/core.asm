@@ -903,8 +903,8 @@ ReplaceFaintedEnemyMon:
 	ld e, $30
 	call GetBattleHealthBarColor
 	ldPal a, SHADE_BLACK, SHADE_DARK, SHADE_LIGHT, SHADE_WHITE
-	ld [rOBP0], a
-	ld [rOBP1], a
+	ldh [rOBP0], a
+	ldh [rOBP1], a
 	call UpdateGBCPal_OBP0
 	call UpdateGBCPal_OBP1
 	callfar DrawEnemyPokeballs

@@ -4,18 +4,18 @@
 BGLayerScrollingUpdate:
 	call GetPredefRegisters
 	ld a, 1	;set hVBlankOccurred to a non-zero value ; it becomes zero to indicate vblank happened
-	ld [hVBlankOccurred], a
+	ldh [hVBlankOccurred], a
 .wait
-	ld a, [rLY] ; rLY
+	ldh a, [rLY] ; rLY
 	cp l
 	jr z, .update	;update SCX if we have reached the line specified in 'l'
-	ld a, [hVBlankOccurred]	;otherwise see if vblank happened in the meantime
+	ldh a, [hVBlankOccurred]	;otherwise see if vblank happened in the meantime
 	and a
 	jr nz, .wait	;if vblank hasn't happened, then keep waiting to reach the needed line
-	ld a, [rLY]	;otherwise vblank happened already while waiting; get the current line
+	ldh a, [rLY]	;otherwise vblank happened already while waiting; get the current line
 	cp l	;is the current line still less than the needed line?
 	jr c, .wait	;if so keep waiting; otherwise just go ahead and update SCX to head off another vblank
 .update
 	ld a, h
-	ld [rSCX], a
+	ldh [rSCX], a
 	ret

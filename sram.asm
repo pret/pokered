@@ -17,7 +17,7 @@ SECTION "Save Data", SRAM
 
 	ds $597
 
-sOptions2:: db ; duplicate options variable, used to set these options on game load so the palettes match your settings from game initialization
+sOptions2:: db ; duplicate options2 variable, used to set these options on game load so the palettes match your settings from game initialization
 
 sGameData::
 sPlayerName::  ds NAME_LENGTH

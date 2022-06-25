@@ -714,10 +714,10 @@ SwapPartyMonIcons:
     ld c, 4 ; four tiles
 .swapMonOAMLoop
     ld a, [hl]
-    ld [hDividend], a ;hSwapTemp
+    ldh [hDividend], a ;hSwapTemp
     ld a, [de]
     ld [hl], a
-    ld a, [hDividend] ;hSwapTemp
+    ldh a, [hDividend] ;hSwapTemp
     ld [de], a
     ld a, 4 ; add 4 to get to the next tiles.
 rept 4

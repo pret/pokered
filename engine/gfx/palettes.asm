@@ -394,11 +394,11 @@ UpdatePartyMenuBlkPacket:
 SendSGBPacket: ;gbcnote - shifted joypad polling around
 ; disable ReadJoypad to prevent it from interfering with sending the packet
 	ld a, 1
-	ld [hDisableJoypadPolling], a ; don't poll joypad while sending packet
+	ldh [hDisableJoypadPolling], a ; don't poll joypad while sending packet
 	call _SendSGBPacket
 ;re-enable joypad polling
 	xor a
-	ld [hDisableJoypadPolling], a
+	ldh [hDisableJoypadPolling], a
 	ret
 
 _SendSGBPacket:
@@ -657,7 +657,7 @@ SendSGBPackets:
 	;call EmptyFunc3
 	;gbcnote - initialize the second pal packet in de (now in hl) then enable the lcd
 	call InitGBCPalettesNew
-	ld a, [rLCDC]
+	ldh a, [rLCDC]
 	and rLCDC_ENABLE_MASK
 	ret z
 	call Delay3
@@ -765,7 +765,7 @@ DMGPalToGBCPal::	;gbcnote - new function
 	jr nz, .notOG1 ; if this value is non-zero we're not using OG palettes on GBC
 	ld de, GBC_OGPalettes_BGOBJ1
 .notOG1
-	ld a, [rBGP]
+	ldh a, [rBGP]
 	ld [wLastBGP], a
 	jr .convert
 .notBGP
@@ -776,7 +776,7 @@ DMGPalToGBCPal::	;gbcnote - new function
 	jr nz, .notOG2 ; if this value is non-zero we're not using OG palettes on GBC
 	ld de, GBC_OGPalettes_OBJ0
 .notOG2
-	ld a, [rOBP0]
+	ldh a, [rOBP0]
 	ld [wLastOBP0], a
 	jr .convert
 .notOBP0
@@ -785,7 +785,7 @@ DMGPalToGBCPal::	;gbcnote - new function
 	jr nz, .notOG3 ; if this value is non-zero we're not using OG palettes on GBC
 	ld de, GBC_OGPalettes_BGOBJ1
 .notOG3
-	ld a, [rOBP1]
+	ldh a, [rOBP1]
 	ld [wLastOBP1], a
 .convert
 ;"A" now holds the palette data
@@ -833,10 +833,10 @@ TransferCurBGPData::
 	add a
 	add a
 	or $80 ; set auto-increment bit of rBGPI
-	ld [rBGPI], a
+	ldh [rBGPI], a
 	ld de, rBGPD
 	ld hl, wGBCPal
-	ld a, [rLCDC]
+	ldh a, [rLCDC]
 	and rLCDC_ENABLE_MASK
 	jr nz, .lcdEnabled
 	rept NUM_COLORS
@@ -877,14 +877,14 @@ BufferBGPPal::
 	
 TransferBGPPals::
 ; Transfer the buffered BG palettes.
-	ld a, [rLCDC]
+	ldh a, [rLCDC]
 	and rLCDC_ENABLE_MASK
 	jr z, .lcdDisabled
 	; have to wait until LCDC is disabled
 	; LCD should only ever be disabled during the V-blank period to prevent hardware damage
 	di	;disable interrupts
 .waitLoop
-	ld a, [rLY]
+	ldh a, [rLY]
 	cp 144	;V-blank can be confirmed when the value of LY is greater than or equal to 144
 	jr c, .waitLoop
 .lcdDisabled
@@ -894,7 +894,7 @@ TransferBGPPals::
 .DoTransfer:
 	xor a
 	or $80 ; set the auto-increment bit of rBPGI
-	ld [rBGPI], a
+	ldh [rBGPI], a
 	ld de, rBGPD
 	ld hl, wBGPPalsBuffer
 	ld c, 4 * PAL_SIZE
@@ -913,10 +913,10 @@ TransferCurOBPData:
 	add a
 	add a
 	or $80 ; set auto-increment bit of OBPI
-	ld [rOBPI], a
+	ldh [rOBPI], a
 	ld de, rOBPD
 	ld hl, wGBCPal
-	ld a, [rLCDC]
+	ldh a, [rLCDC]
 	and rLCDC_ENABLE_MASK
 	jr nz, .lcdEnabled
 	rept NUM_COLORS
@@ -935,12 +935,12 @@ TransferPalColorLCDEnabled:
 ; Transfer a palette color while the LCD is enabled.
 ; In case we're already in H-blank or V-blank, wait for it to end. This is a
 ; precaution so that the transfer doesn't extend past the blanking period.
-	ld a, [rSTAT]
+	ldh a, [rSTAT]
 	and %10 ; mask for non-V-blank/non-H-blank STAT mode
 	jr z, TransferPalColorLCDEnabled	;repeat if still in h-blank or v-blank
 ; Wait for H-blank or V-blank to begin.
 .notInBlankingPeriod
-	ld a, [rSTAT]
+	ldh a, [rSTAT]
 	and %10 ; mask for non-V-blank/non-H-blank STAT mode
 	jr nz, .notInBlankingPeriod
 ; fall through
@@ -1090,7 +1090,7 @@ CopySGBBorderTiles:
 ;d = CONVERT_OBP0, CONVERT_OBP1, or CONVERT_BGP
 ;e = palette register # (0 to 7)
 TransferMonPal:
-	ld a, [hGBC]
+	ldh a, [hGBC]
 	and a
 	ret z 
 	ld a, e

@@ -978,13 +978,13 @@ ItemUseMedicine:
 	push hl
 	ld hl, wPlayerBattleStatus3
 	res BADLY_POISONED, [hl] ; heal Toxic status
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	push af
 	xor a	;forcibly set it to the player's turn
-	ld [hWhoseTurn], a
+	ldh [hWhoseTurn], a
 	callfar UndoBurnParStats	;undo brn/par stat changes
 	pop af
-	ld [hWhoseTurn], a
+	ldh [hWhoseTurn], a
 	pop hl
 	xor a
 	ld [wBattleMonStatus], a ; remove the status ailment in the in-battle pokemon data
@@ -1246,13 +1246,13 @@ ItemUseMedicine:
 	jr z, .clearParBrn	;do not adjust the stats if not currently in battle
 	push hl
 	push de
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	push af
 	xor a	;forcibly set it to the player's turn
-	ld [hWhoseTurn], a
+	ldh [hWhoseTurn], a
 	callfar UndoBurnParStats	;undo brn/par stat changes
 	pop af
-	ld [hWhoseTurn], a
+	ldh [hWhoseTurn], a
 	pop de
 	pop hl
 .clearParBrn

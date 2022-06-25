@@ -611,9 +611,9 @@ Trade_AnimCircledMon:
 	ldh [rBGP], a
 	call UpdateGBCPal_BGP
 	; we either sub 2 or add 2 depending on odds or even
-	ld a, [hDividend] ; hSwapTemp
+	ldh a, [hDividend] ; hSwapTemp
 	inc a
-	ld [hDividend], a
+	ldh [hDividend], a
 	bit 0, a
 	ld hl, wOAMBuffer + $02 ; OAM tile id
 	ld de, $4
@@ -646,7 +646,7 @@ Trade_AnimCircledMon:
 Trade_WriteCircledMonOAM:
 	farcall WriteMonPartySpriteOAMBySpecies 
 	xor a
-	ld [hDividend], a ; hSwapTemp
+	ldh [hDividend], a ; hSwapTemp
 	callfar LoadTradeMonSprite
 	call Trade_WriteCircleOAM
 

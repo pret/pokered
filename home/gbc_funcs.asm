@@ -7,7 +7,7 @@ UpdateGBCPal_BGP::
 	push bc
 	push de
 	push hl
-	ld a, [rBGP]
+	ldh a, [rBGP]
 	ld b, a
 	ld a, [wLastBGP]
 	cp b
@@ -29,7 +29,7 @@ UpdateGBCPal_OBP0::
 	push bc
 	push de
 	push hl
-	ld a, [rOBP0]
+	ldh a, [rOBP0]
 	ld b, a
 	ld a, [wLastOBP0]
 	cp b
@@ -52,7 +52,7 @@ UpdateGBCPal_OBP1::
 	push bc
 	push de
 	push hl
-	ld a, [rOBP1]
+	ldh a, [rOBP1]
 	ld b, a
 	ld a, [wLastOBP1]
 	cp b
