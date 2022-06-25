@@ -375,6 +375,10 @@ wHallOfFame:: ds HOF_TEAM
 wHallOfFamePalettes:: db 
 
 NEXTU
+; when copying SRAM to the ROM on save for batteryless saving functionality, this is where the code that runs the flash is copied.
+wBatterylessSaveCode:: ds 180
+
+NEXTU
 wNPCMovementDirections:: ds 180
 
 NEXTU

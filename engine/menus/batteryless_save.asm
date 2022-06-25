@@ -27,231 +27,225 @@
 ; Where in the ROM is the original save routine?: 0x
 
 ; Restore SRAM code - Do this first thing at game startup
-push af
-ld   a,??	; load/save code bank
-ld   (2000),a
-call 4000   ; offset in the bank for our load code
-ld   a,01
-ld   (2000),a
-pop  af
-jp   ????  ; game start address (aka original entry point)
+RestoreSRAMFromROM:
+	callfar CopyFlashedSaveToSRAM
+;	ret
+;	push af
+;	ld   a,??	; load/save code bank
+;	ld   [MBC1RomBank],a
+;	call 4000   ; offset in the bank for our load code
+;	ld   a,01
+;	ld   [MBC1RomBank],a
+;	pop  af
+;	ret
+;	jp   ????  ; game start address (aka original entry point)
 
 ; Save SRAM to Flash.
-di ; disable interrupts
-push af
-push bc
-push de
-push hl
-ld   a,?? ; load/save code bank
-ld   (2000),a
-call 4100 ; offset in the bank for our save code
-ld   a,(????) ; Game Engine Current Bank Variable
-ld   (2000),a
-pop  hl
-pop  de
-pop  bc
-pop  af
-ei
-ret  
+SaveSRAMtoROM::
+	di ; disable interrupts
+	push af
+	push bc
+	push de
+	push hl
+	ld   a,?? ; load/save code bank
+	ld   [MBC1RomBank],a
+	call FlashSRAMToROM ; offset in the bank for our save code
+	ld   a,(????) ; Game Engine Current Bank Variable
+	ld   [MBC1RomBank],a
+	pop  hl
+	pop  de
+	pop  bc
+	pop  af
+	ei
+	ret  
 
 ; Bank Switch and copy code
-ld   (2000),a
-ldi  a,(hl)
-ld   (de),a
-inc  de
-dec  bc
-ld   a,c
-or   b
-jr   nz,$F8
-ld   a,?? ; load/save code bank
-ld   (2000),a
-ret  
+BankSwitchAndCopy::
+	ld   [MBC1RomBank],a
+	call CopyData
+	ld   a,?? ; load/save code bank
+	ld   [MBC1RomBank],a
+	ret  
 
-; @4000 rom 2 sram
-ld   a,0A
-ld   (0000),a
-xor  a
-ld   (4000),a 
-ld   hl,4000  
-ld   de,A000  
-ld   bc,2000  
-ld   a,?? ; Bank 1
-call ???? ; Bank switch + copy routine
-ld   a,1
-ld   (4000),a 
-ld   hl,6000  
-ld   de,A000  
-ld   bc,2000  
-ld   a,?? ; Bank 1
-call ???? ; Bank switch + copy routine
-ld   a,2
-ld   (4000),a 
-ld   hl,4000  
-ld   de,A000  
-ld   bc,2000  
-ld   a,?? ; Bank 2
-call ???? ; Bank switch + copy routine
-ld   a,3
-ld   (4000),a 
-ld   hl,6000  
-ld   de,A000  
-ld   bc,2000  
-ld   a,?? ; Bank 2
-call ???? ; Bank switch + copy routine
-ret 
-
-; @40A0 copy routine
-ldi  a,(hl)
-ld   (de),a
-inc  de
-dec  bc
-ld   a,c
-or   b
-jr   nz,$F8
-ret  
+CopyFlashedSaveToSRAM::
+	ld   a,SRAM_ENABLE
+	ld   [MBC1SRamEnable],a
+	xor  a
+	ld   [MBC1SRamBank],a 
+	ld   hl, 4000  
+	ld   de, SRAM_Begin  
+	ld   bc, SRAM_End - SRAM_Begin  
+	ld   a,$3D
+	call BankswitchAndCopy ; Bank switch + copy routine
+	ld   a,1
+	ld   [MBC1SRamBank],a 
+	ld   hl, 6000  
+	ld   de, SRAM_Begin  
+	ld   bc, SRAM_End - SRAM_Begin
+	ld   a,$3D
+	call BankswitchAndCopy ; Bank switch + copy routine
+	ld   a,2
+	ld   [MBC1SRamBank],a 
+	ld   hl, 4000  
+	ld   de, SRAM_Begin  
+	ld   bc, SRAM_End - SRAM_Begin
+	ld   a,$3F
+	call BankswitchAndCopy ; Bank switch + copy routine
+	ld   a,3
+	ld   [MBC1SRamBank],a 
+	ld   hl, 6000  
+	ld   de, SRAM_Begin  
+	ld   bc, SRAM_End - SRAM_Begin  
+	ld   a,$3F
+	call BankswitchAndCopy ; Bank switch + copy routine
+	ret   
 
 ; @4100 erase+write routines copy to WRAM then jump
-ld   hl,4200 ; ERASE ROUTINE
-ld   de,???? ; free WRAM
-ld   bc,0050
-call 40A0    ; copy routine
-ld   a,??    ; bank 1
-call ????    ; free WRAM
-nop  
-ld   hl,4300 ; WRITE ROUTINE
-ld   de,???? ; free WRAM
-ld   bc,005D
-call 40A0
-call ????    ; free WRAM
-nop  
-ld   hl,4400 ; WRITE ROUTINE
-ld   de,???? ; free WRAM
-ld   bc,005D
-call 40A0
-call ????    ; free WRAM
-nop
-ld   hl,4500 ; WRITE ROUTINE
-ld   de,???? ; free WRAM
-ld   bc,005D
-call 40A0
-call ????    ; free WRAM
-nop  
-ld   hl,4600 ; WRITE ROUTINE
-ld   de,???? ; free WRAM
-ld   bc,005D
-call 40A0
-call ???? ; free WRAM
-nop  
-ret  
+FlashSRAMToROM::
+	ld   hl,EraseROMSave ; ERASE ROUTINE
+	ld   de,wBatterylessSaveCode ; free WRAM
+	ld   bc,0050
+	call CopyData    ; copy routine
+	ld   a,$3D   ; bank 1
+	call wBatterylessSaveCode    ; free WRAM
+	nop  
+	ld   hl,FlashSRAMBank0 ; WRITE ROUTINE
+	ld   de,wBatterylessSaveCode ; free WRAM
+	ld   bc,005D
+	call CopyData
+	call wBatterylessSaveCode    ; free WRAM
+	nop  
+	ld   hl,FlashSRAMBank1 ; WRITE ROUTINE
+	ld   de,wBatterylessSaveCode ; free WRAM
+	ld   bc,005D
+	call CopyData
+	call wBatterylessSaveCode    ; free WRAM
+	nop
+	ld   hl,FlashSRAMBank2 ; WRITE ROUTINE
+	ld   de,wBatterylessSaveCode ; free WRAM
+	ld   bc,005D
+	call CopyData
+	call wBatterylessSaveCode    ; free WRAM
+	nop  
+	ld   hl,FlashSRAMBank3 ; WRITE ROUTINE
+	ld   de,wBatterylessSaveCode ; free WRAM
+	ld   bc,005D
+	call CopyData
+	call wBatterylessSaveCode ; free WRAM
+	nop  
+	ret  
 
 ; @ 4200 erase bank
-ld   (2000),a
-nop  
-ld   a,F0
-ld   (4000),a
-nop  
-ld   a,A9
-ld   (0AAA),a
-nop  
-ld   a,56
-ld   (0555),a
-nop  
-ld   a,80
-ld   (0AAA),a
-nop  
-ld   a,A9
-ld   (0AAA),a
-nop  
-ld   a,56
-ld   (0555),a
-nop  
-ld   a,30
-ld   (4000),a
-nop  
-ld   a,(4000)
-cp   a,FF
-jr   z,$2
-jr   $F7
-nop  
-ld   a,F0
-ld   (4000),a
-ld   a,??  ;Load/Save code Bank#
-ld   (2000),a
-ret  
+EraseROMSave:
+	ld   [MBC1RomBank],a
+	nop  
+	ld   a,F0
+	ld   [MBC1SRamBank],a
+	nop  
+	ld   a,A9
+	ld   (0AAA),a
+	nop  
+	ld   a,56
+	ld   (0555),a
+	nop  
+	ld   a,80
+	ld   (0AAA),a
+	nop  
+	ld   a,A9
+	ld   (0AAA),a
+	nop  
+	ld   a,56
+	ld   (0555),a
+	nop  
+	ld   a,30
+	ld   [MBC1SRamBank],a
+	nop  
+	ld   a,[MBC1SRamBank]
+	cp   a,FF
+	jr   z,$2
+	jr   $F7
+	nop  
+	ld   a,F0
+	ld   [MBC1SRamBank],a
+	ld   a,??  ;Load/Save code Bank#
+	ld   [MBC1RomBank],a
+	ret  
 
 ; @ 4300: copy SRAM bank 0 
-push hl
-push de
-push bc
-ld   a,$??     ; savestate bank 1    
-ld   (2000),a
-ld   hl,A000
-ld   de,4000
-ld   a,0A
-ld   (0000),a
-ld   a,$01
-ld   (6000),a
-ld   a,$00    
-ld   (4000),a
-ld   a,(hl)
-ld   b,a
-ld   a,$00
-ld   (6000),a
-ld   (0000),a
-ld   a,$F0
-ld   (4000),a
-nop  
-ld   a,$A9
-ld   (0AAA),a
-nop  
-ld   a,$56
-ld   (0555),a
-nop  
-ld   a,$A0
-ld   (0AAA),a
-nop  
-ld   a,b
-ld   (de),a
-ld   a,(de)
-xor  b
-jr   z,$3
-jr   $F9
-nop
-inc  hl
-inc  de
-ld   a,h
-cp   a,$C0
-jr   nz,$BF
-ld   a,$F0
-ld   (4000),a
-ld   a,$??      ; Load/save routines bank
-ld   (2000),a
-pop  bc
-pop  de
-pop  hl
-ret  
+FlashSRAMBank0:
+	push hl
+	push de
+	push bc
+	ld   a,$3D     ; savestate bank 1    
+	ld   [MBC1RomBank],a
+	ld   hl,SRAM_Begin
+	ld   de,4000
+	ld   a,SRAM_ENABLE
+	ld   [MBC1SRamEnable],a
+	ld   a,$01
+	ld   [MBC1SRamBankingMode],a
+	ld   a,$00    
+	ld   [MBC1SRamBank],a
+	ld   a,[hl]
+	ld   b,a
+	ld   a,$00
+	ld   [MBC1SRamBankingMode],a
+	ld   [MBC1SRamEnable],a
+	ld   a,$F0
+	ld   [MBC1SRamBank],a
+	nop  
+	ld   a,$A9
+	ld   (0AAA),a
+	nop  
+	ld   a,$56
+	ld   (0555),a
+	nop  
+	ld   a,$A0
+	ld   (0AAA),a
+	nop  
+	ld   a,b
+	ld   [de],a
+	ld   a,[de]
+	xor  b
+	jr   z,$3
+	jr   $F9
+	nop
+	inc  hl
+	inc  de
+	ld   a,h
+	cp   a,$C0
+	jr   nz,$BF
+	ld   a,$F0
+	ld   [MBC1SRamBank],a
+	ld   a,$??      ; Load/save routines bank
+	ld   [MBC1RomBank],a
+	pop  bc
+	pop  de
+	pop  hl
+	ret  
 
 ; @ 4400: copy SRAM bank 1 
+FlashSRAMBank1:
 push hl
 push de
 push bc
-ld   a,$??     ; savestate bank 1
-ld   (2000),a
-ld   hl,A000
+ld   a,$3D     ; savestate bank 1
+ld   [MBC1RomBank],a
+ld   hl,SRAM_Begin
 ld   de,6000
-ld   a,0A
-ld   (0000),a
+ld   a,SRAM_ENABLE
+ld   [MBC1SRamEnable],a
 ld   a,$01
-ld   (6000),a
+ld   [MBC1SRamBankingMode],a
 ld   a,$01    
-ld   (4000),a
-ld   a,(hl)
+ld   [MBC1SRamBank],a
+ld   a,[hl]
 ld   b,a
 ld   a,$00
-ld   (6000),a
-ld   (0000),a
+ld   [MBC1SRamBankingMode],a
+ld   [MBC1SRamEnable],a
 ld   a,$F0
-ld   (4000),a
+ld   [MBC1SRamBank],a
 nop  
 ld   a,$A9
 ld   (0AAA),a
@@ -263,8 +257,8 @@ ld   a,$A0
 ld   (0AAA),a
 nop  
 ld   a,b
-ld   (de),a
-ld   a,(de)
+ld   [de],a
+ld   a,[de]
 xor  b
 jr   z,$3
 jr   $F9
@@ -275,35 +269,36 @@ ld   a,h
 cp   a,$C0
 jr   nz,$BF
 ld   a,$F0
-ld   (4000),a
+ld   [MBC1SRamBank],a
 ld   a,$??      ; Load/save routines bank
-ld   (2000),a
+ld   [MBC1RomBank],a
 pop  bc
 pop  de
 pop  hl
 ret  
 
 ; @ 4500: copy SRAM bank 2 
+FlashSRAMBank2:
 push hl
 push de
 push bc
-ld   a,$??     ; savestate bank 2
-ld   (2000),a
-ld   hl,A000
+ld   a,$3F     ; savestate bank 2
+ld   [MBC1RomBank],a
+ld   hl,SRAM_Begin
 ld   de,4000
-ld   a,0A
-ld   (0000),a
+ld   a,SRAM_ENABLE
+ld   [MBC1SRamEnable],a
 ld   a,$01
-ld   (6000),a
+ld   [MBC1SRamBankingMode],a
 ld   a,$02    
-ld   (4000),a
-ld   a,(hl)
+ld   [MBC1SRamBank],a
+ld   a,[hl]
 ld   b,a
 ld   a,$00
-ld   (6000),a
-ld   (0000),a
+ld   [MBC1SRamBankingMode],a
+ld   [MBC1SRamEnable],a
 ld   a,$F0
-ld   (4000),a
+ld   [MBC1SRamBank],a
 nop  
 ld   a,$A9
 ld   (0AAA),a
@@ -315,8 +310,8 @@ ld   a,$A0
 ld   (0AAA),a
 nop  
 ld   a,b
-ld   (de),a
-ld   a,(de)
+ld   [de],a
+ld   a,[de]
 xor  b
 jr   z,$3
 jr   $F9
@@ -327,35 +322,36 @@ ld   a,h
 cp   a,$C0
 jr   nz,$BF
 ld   a,$F0
-ld   (4000),a
+ld   [MBC1SRamBank],a
 ld   a,$??      ; Load/save routines bank
-ld   (2000),a
+ld   [MBC1RomBank],a
 pop  bc
 pop  de
 pop  hl
 ret  
 
 ; @ 4600: copy SRAM bank 3 
+FlashSRAMBank3:
 push hl
 push de
 push bc
-ld   a,$??     ; savestate bank 2
-ld   (2000),a
-ld   hl,A000
+ld   a,$3F     ; savestate bank 2
+ld   [MBC1RomBank],a
+ld   hl,SRAM_Begin
 ld   de,6000
-ld   a,0A
-ld   (0000),a
+ld   a, SRAM_ENABLE
+ld   [MBC1SRamEnable],a
 ld   a,$01
-ld   (6000),a
+ld   [MBC1SRamBankingMode],a
 ld   a,$03    
-ld   (4000),a
-ld   a,(hl)
+ld   [MBC1SRamBank],a
+ld   a,[hl]
 ld   b,a
 ld   a,$00
-ld   (6000),a
-ld   (0000),a
+ld   [MBC1SRamBankingMode],a
+ld   [MBC1SRamEnable],a
 ld   a,$F0
-ld   (4000),a
+ld   [MBC1SRamBank],a
 nop  
 ld   a,$A9
 ld   (0AAA),a
@@ -367,8 +363,8 @@ ld   a,$A0
 ld   (0AAA),a
 nop  
 ld   a,b
-ld   (de),a
-ld   a,(de)
+ld   [de],a
+ld   a,[de]
 xor  b
 jr   z,$3
 jr   $F9
@@ -379,9 +375,9 @@ ld   a,h
 cp   a,$C0
 jr   nz,$BF
 ld   a,$F0
-ld   (4000),a
+ld   [MBC1SRamBank],a
 ld   a,$??      ; Load/save routines bank
-ld   (2000),a
+ld   [MBC1RomBank],a
 pop  bc
 pop  de
 pop  hl
@@ -392,33 +388,33 @@ ret
 ; TIP: intercept a call opcode and replace it with a jp statement to this
 call ???? ; redirected call
 di   
-ld   a,(FFFF)
+ld   a, [rIE]
 push af
-ld   a,(FF0F)
+ld   a,[rIF]
 push af
-ld   a,(FF07)
+ld   a,[rTAC]
 push af
-ld   a,(FF41)
+ld   a,[rSTAT]
 push af
-ld   a,(FF24)
+ld   a,[rNR50]
 push af
 halt 
 xor  a
-ld   (FFFF),a
-ld   (FF0F),a
-ld   (FF07),a
-ld   (FF41),a
-ld   (FF24),a
-call ???? ; save SRAM function address
+ld   [rIE],a
+ld   [rIF],a
+ld   [rTAC],a
+ld   [rSTAT],a
+ld   [rNR50],a
+call SaveSRAMtoROM ; save SRAM function address
 pop  af
-ld   (FF24),a
+ld   [rNR50],a
 pop  af
-ld   (FF41),a
+ld   [rSTAT],a
 pop  af
-ld   (FF07),a
+ld   [rTAC],a
 pop  af
-ld   (FF0F),a
+ld   [rIF],a
 pop  af
-ld   (FFFF),a
+ld   [rIE],a
 ei   
 jp   ???? ; instruction just after the trojanized call
