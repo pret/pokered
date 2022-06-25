@@ -39,7 +39,7 @@ ItemPrices::
 	bcd3 5000  ; IRON
 	bcd3 5000  ; CARBOS
 	bcd3 5000  ; CALCIUM
-	bcd3 4800  ; RARE_CANDY
+	bcd3 8000  ; RARE_CANDY
 	bcd3 0     ; DOME_FOSSIL
 	bcd3 0     ; HELIX_FOSSIL
 	bcd3 0     ; SECRET_KEY
@@ -80,9 +80,9 @@ ItemPrices::
 	bcd3 0     ; SUPER_ROD
 	bcd3 5000  ; PP_UP
 	bcd3 1000  ; ETHER
-	bcd3 0     ; MAX_ETHER
-	bcd3 0     ; ELIXER
-	bcd3 0     ; MAX_ELIXER
+	bcd3 2000  ; MAX_ETHER
+	bcd3 2000  ; ELIXER
+	bcd3 4000  ; MAX_ELIXER
 	assert_table_length NUM_ITEMS
 	bcd3 0     ; FLOOR_B2F
 	bcd3 0     ; FLOOR_B1F
