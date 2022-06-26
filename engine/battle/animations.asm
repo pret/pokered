@@ -1,5 +1,6 @@
 ; Draws a "frame block". Frame blocks are blocks of tiles that are put
 ; together to form frames in battle animations.
+; gbcnote - oam updates from yellow version
 DrawFrameBlock:
 	ld l, c
 	ld h, b
@@ -15,6 +16,8 @@ DrawFrameBlock:
 	ld a, [wFBTileCounter]
 	inc a
 	ld [wFBTileCounter], a
+	ld a, 2
+	ld [wdef5], a
 	ld a, [wSubAnimTransform]
 	dec a
 	jr z, .flipHorizontalAndVertical   ; SUBANIMTYPE_HVFLIP
@@ -46,6 +49,12 @@ DrawFrameBlock:
 .finishCopying ; finish copying values to OAM (when subanimation not transformed)
 	add [hl] ; X offset
 	ld [de], a ; store X
+	cp 88
+	jr c, .asm_78056
+	ld a, [wdef5]
+	inc a
+	ld [wdef5], a
+.asm_78056
 	inc hl
 	inc de
 	ld a, [hli]
@@ -53,6 +62,9 @@ DrawFrameBlock:
 	ld [de], a ; store tile ID
 	inc de
 	ld a, [hli]
+	ld b, a
+	ld a, [wdef5]
+	or b
 	ld [de], a ; store flags
 	inc de
 	jp .nextTile
@@ -71,6 +83,12 @@ DrawFrameBlock:
 	ld a, 168
 	sub b ; flip X coordinate
 	ld [de], a ; store X
+	cp 88
+	jr c, .asm_78087
+	ld a, [wdef5]
+	inc a
+	ld [wdef5], a
+.asm_78087
 	inc hl
 	inc de
 	ld a, [hli]
@@ -90,7 +108,8 @@ DrawFrameBlock:
 	jr z, .storeFlags1
 	ld b, 0
 .storeFlags1
-	ld a, b
+	ld a, [wdef5]
+	or b
 	ld [de], a
 	inc de
 	jp .nextTile
@@ -107,6 +126,12 @@ DrawFrameBlock:
 	ld a, 168
 	sub b ; flip X coordinate
 	ld [de], a ; store X
+	cp 88
+	jr c, .asm_780c8
+	ld a, [wdef5]
+	inc a
+	ld [wdef5], a
+.asm_780c8
 	inc hl
 	inc de
 	ld a, [hli]
@@ -122,6 +147,9 @@ DrawFrameBlock:
 .disableHorizontalFlip
 	res 5, a
 .storeFlags2
+	ld b, a
+	ld a, [wdef5]
+	or b
 	ld [de], a
 	inc de
 .nextTile
@@ -411,12 +439,13 @@ MoveAnimation:
 	jr z, .animationFinished
 
 	; if throwing a Poké Ball, skip the regular animation code
-	cp TOSS_ANIM
-	jr nz, .moveAnimation
+	ld a, [wUnusedC000] ; when throwing a ball this will be set
+	and a
+	jr z, .moveAnimation
+.ballToss
 	ld de, .animationFinished
 	push de
 	jp TossBallAnimation
-
 .moveAnimation
 	; check if battle animations are disabled in the options
 	ld a, [wOptions]
@@ -438,7 +467,7 @@ MoveAnimation:
 	call WaitForSoundToFinish
 	xor a
 	ld [wSubAnimSubEntryAddr], a
-	ld [wUnusedD09B], a
+	;ld [wUnusedD09B], a
 	ld [wSubAnimTransform], a
 	dec a ; NO_MOVE - 1
 	ld [wAnimSoundID], a
@@ -550,10 +579,11 @@ AnimationShakeScreenHorizontallySlow:
 SetAnimationPalette:
 	ld a, [wOnSGB]
 	and a
-	ld a, $e4
+	;ld a, $e4	;redundant
 	jr z, .notSGB
-	ld a, $f0
-	ld [wAnimPalette], a
+	;ld a, $f0
+	;ld [wAnimPalette], a
+	predef SetAttackAnimPal	;gbcnote - new function to handle animation palettes
 	ld b, $e4
 	ld a, [wAnimationID]
 	cp TRADE_BALL_DROP_ANIM
@@ -579,6 +609,27 @@ SetAnimationPalette:
 	call UpdateGBCPal_OBP0
 	call UpdateGBCPal_OBP1
 	ret
+
+Func_78e98:
+	call SaveScreenTilesToBuffer2
+	xor a
+	ldh [hAutoBGTransferEnabled], a
+	call ClearScreen
+	ld h, vBGMap0 / $100
+	call WriteLowerByteOfBGMapAndEnableBGTransfer
+	call Delay3
+	xor a
+	ld [hAutoBGTransferEnabled], a
+	call LoadScreenTilesFromBuffer2
+	ld h, vBGMap1 / $100
+
+WriteLowerByteOfBGMapAndEnableBGTransfer:
+	ld l, vBGMap0 & $ff
+	call BattleAnimCopyTileMapToVRAM
+	ld a, $1
+	ldh [hAutoBGTransferEnabled], a
+	ret
+
 
 PlaySubanimation:
 	ld a, [wAnimSoundID]
@@ -695,7 +746,7 @@ DoBallTossSpecialEffects:
 	ldh a, [rOBP0]
 	xor %00111100 ; complement colors 1 and 2
 	ldh [rOBP0], a
-	call UpdateGBCPal_OBP0
+	;call UpdateGBCPal_OBP0
 .skipFlashingEffect
 	ld a, [wSubAnimCounter]
 	cp 11 ; is it the beginning of the subanimation?
@@ -776,12 +827,77 @@ DoBallShakeSpecialEffects:
 	ret
 
 ; plays a sound after the second frame of the poof animation
+; plays an animation for specific pokeballs too
 DoPoofSpecialEffects:
 	ld a, [wSubAnimCounter]
+	cp 1
+	jr z, .ballToss
 	cp 5
 	ret nz
+	ld a, [wUnusedC000]
+	cp MASTERTOSS_ANIM
+	jr z, .masterBallSFX
 	ld a, SFX_BALL_POOF
-	jp PlaySound
+	call PlaySound
+	ret
+.masterBallSFX
+	xor a
+	ld [wFrequencyModifier], a
+	ld [wTempoModifier], a
+	ld a, SFX_HORN_DRILL
+	call PlaySound
+	ret
+.ballToss
+	ld a, [wUnusedC000]
+	and a
+	ret z
+	ld b, a
+	xor a
+	ld [wFrequencyModifier], a
+	ld [wTempoModifier], a
+	ld a, b
+	; special effects for ball tosses
+	cp GREATTOSS_ANIM
+	jr z, .greatBall
+	cp ULTRATOSS_ANIM
+	jr z, .ultraBall
+	cp HYPERTOSS_ANIM
+	jr z, .hyperBall
+	cp MASTERTOSS_ANIM
+	jr z, .masterBall
+	jr .done
+.greatBall
+	call AnimationLightScreenPalette
+	call Delay3
+	call AnimationResetScreenPalette
+	jr .done
+.ultraBall
+	call AnimationFlashScreen
+	xor a
+	ld [wFrequencyModifier], a
+	ld a, $80
+	ld [wTempoModifier], a
+	ld a, SFX_SILPH_SCOPE
+	call PlaySoundWaitForCurrent
+	jr .done
+.hyperBall
+	call AnimationLightScreenPalette
+	ld a, SFX_BATTLE_0E
+	call PlaySoundWaitForCurrent
+	ld hl, AnimationShootBallsUpward
+	call CallWithTurnFlipped
+	call AnimationResetScreenPalette
+	jr .done
+.masterBall
+	call AnimationLightScreenPalette
+	ld a, SFX_FAINT_THUD
+	call PlaySoundWaitForCurrent
+	call AnimationSpiralBallsInwardFast
+	call AnimationResetScreenPalette
+.done
+	xor a
+	ld [wUnusedC000], a ; we clear this so the potential second poof doesnt have the fancy animation again
+	ret
 
 DoRockSlideSpecialEffects:
 	ld a, [wSubAnimCounter]
@@ -837,15 +953,15 @@ DoBlizzardSpecialEffects:
 
 ; flashes the screen at 3 points in the subanimation
 ; unused
-FlashScreenUnused:
-	ld a, [wSubAnimCounter]
-	cp 14
-	jp z, AnimationFlashScreen
-	cp 9
-	jp z, AnimationFlashScreen
-	cp 2
-	jp z, AnimationFlashScreen
-	ret
+;FlashScreenUnused:
+;	ld a, [wSubAnimCounter]
+;	cp 14
+;	jp z, AnimationFlashScreen
+;	cp 9
+;	jp z, AnimationFlashScreen
+;	cp 2
+;	jp z, AnimationFlashScreen
+;	ret
 
 ; function to make the pokemon disappear at the beginning of the animation
 TradeHidePokemon:
@@ -1148,12 +1264,12 @@ AnimationWaterDropletsEverywhere:
 	ld a, 16
 	ld [wBaseCoordY], a
 	ld a, 0
-	ld [wUnusedD08A], a
+	;ld [wUnusedD08A], a
 	call _AnimationWaterDroplets
 	ld a, 24
 	ld [wBaseCoordY], a
 	ld a, 32
-	ld [wUnusedD08A], a
+	;ld [wUnusedD08A], a
 	call _AnimationWaterDroplets
 	dec d
 	jr nz, .loop
@@ -1162,15 +1278,30 @@ AnimationWaterDropletsEverywhere:
 _AnimationWaterDroplets:
 	ld hl, wOAMBuffer
 .loop
+	ld a, $1
+	ld [wdef5], a
 	ld a, [wBaseCoordY]
 	ld [hli], a ; Y
+	cp 40
+	jr c, .asm_792d7
+	ld a, [wdef5]
+	inc a
+	ld [wdef5], a
+.asm_792d7
 	ld a, [wBaseCoordX]
 	add 27
 	ld [wBaseCoordX], a
 	ld [hli], a ; X
+	cp 88
+	jr c, .asm_792ee
+	ld a, [wdef5]
+	add $2
+	and $3
+	ld [wdef5], a
+.asm_792ee
 	ld a, [wDropletTile]
 	ld [hli], a ; tile
-	xor a
+	ld a, [wdef5]
 	ld [hli], a ; attribute
 	ld a, [wBaseCoordX]
 	cp 144
@@ -1313,16 +1444,30 @@ BattleAnimWriteOAMEntry:
 ; Y coordinate = e (increased by 8 each call, before the write to OAM)
 ; X coordinate = [wBaseCoordX]
 ; tile = d
-; attributes = 0
+; attributes = variable (dependant on coords)
+	ld a, $1
+	ld [wdef5], a
 	ld a, e
 	add 8
 	ld e, a
 	ld [hli], a
+	cp 40
+	jr c, .asm_793d8
+	ld a, [wdef5]
+	inc a
+	ld [wdef5], a
+.asm_793d8
 	ld a, [wBaseCoordX]
 	ld [hli], a
+	cp 88
+	jr c, .asm_793e8
+	ld a, [wdef5]
+	add $2
+	ld [wdef5], a
+.asm_793e8
 	ld a, d
 	ld [hli], a
-	xor a
+	ld a, [wdef5]
 	ld [hli], a
 	ret
 
@@ -1554,6 +1699,8 @@ AnimationSpiralBallsInward:
 	ld a, [hl]
 	cp $ff
 	jr z, .done
+	ld a, $2
+	ld [wdef5], a
 	ld a, [wSpiralBallsBaseY]
 	add [hl]
 	ld [de], a ; Y
@@ -1562,9 +1709,20 @@ AnimationSpiralBallsInward:
 	ld a, [wSpiralBallsBaseX]
 	add [hl]
 	ld [de], a ; X
+	cp 88
+	jr c, .asm_79524
+	ld a, $3
+	ld [wdef5], a
+.asm_79524
 	inc hl
 	inc de
 	inc de
+	ld a, [de]
+	and $f0
+	ld b, a
+	ld a, [wdef5]
+	or b
+	ld [de], a
 	inc de
 	dec c
 	jr nz, .innerLoop
@@ -1574,6 +1732,9 @@ AnimationSpiralBallsInward:
 	jr z, .playSound
 	jr .frameDelay
 .playSound
+	ld a, [wUnusedC000]
+	and a
+	jr nz, .frameDelay
 	ld a, $01
 	ld [wFrequencyModifier], a
 	ld a, $40
@@ -1865,7 +2026,7 @@ _AnimationSlideMonOff:
 .playerTurn
 	hlcoord 0, 5
 .next
-	ld d, 8 ; d's value is unused
+	;ld d, 8 ; d's value is unused
 .slideLoop ; iterates once for each time the pic slides by one tile
 	push hl
 	ld b, 7
@@ -1911,7 +2072,7 @@ _AnimationSlideMonOff:
 ; This is a bug. The lower right corner tile of the mon back pic is blanked
 ; while the mon is sliding off the screen. It should compare with the max tile
 ; plus one instead.
-	cp $61
+	cp $62
 	ret c
 	ld a, " "
 	ret
@@ -2457,6 +2618,8 @@ FallingObjects_UpdateOAMEntry:
 ; movement byte.
 	ld hl, wOAMBuffer
 	add hl, de
+	ld a, $1
+	ld [wdef5], a
 	ld a, [hl]
 	inc a
 	inc a
@@ -2465,6 +2628,12 @@ FallingObjects_UpdateOAMEntry:
 	ld a, 160 ; if Y >= 112, put it off-screen
 .next
 	ld [hli], a ; Y
+	cp 40
+	jr c, .asm_79e51
+	ld a, [wdef5]
+	inc a
+	ld [wdef5], a
+.asm_79e51
 	ld a, [wFallingObjectMovementByte]
 	ld b, a
 	ld de, FallingObjects_DeltaXs
@@ -2481,6 +2650,13 @@ FallingObjects_UpdateOAMEntry:
 	ld a, [de]
 	add [hl]
 	ld [hli], a ; X
+	cp 88
+	jr c, .asm_79e75
+	ld a, [wdef5]
+	add $2
+	and $3
+	ld [wdef5], a
+.asm_79e75
 	inc hl
 	xor a ; no horizontal flip
 	jr .next2
@@ -2490,9 +2666,19 @@ FallingObjects_UpdateOAMEntry:
 	ld a, [hl]
 	sub b
 	ld [hli], a ; X
+	cp 88
+	jr c, .asm_79e5c
+	ld a, [wdef5]
+	add $2
+	and $3
+	ld [wdef5], a
+.asm_79e5c
 	inc hl
 	ld a, (1 << OAM_X_FLIP)
 .next2
+	ld b, a
+	ld a, [wdef5]
+	or b
 	ld [hl], a ; attribute
 	ret
 
@@ -2577,6 +2763,14 @@ AnimationShakeEnemyHUD:
 	ld hl, vBGMap1 - $20 * 7
 	call BattleAnimCopyTileMapToVRAM
 
+; gbcnote - from pokemon yellow: update BGMap attributes
+	ldh a, [hGBC]
+	and a
+	jr z, .notGBC
+	ld d, 13
+	farcall LoadBGMapAttributes
+.notGBC
+
 ; Move the window so that the row below the enemy HUD (in BG map 0) lines up
 ; with the top row of the window on the screen. This makes it so that the window
 ; covers everything below the enemy HD with a copy that looks just like what
@@ -2610,6 +2804,15 @@ AnimationShakeEnemyHUD:
 	ldh [hWY], a
 	ld hl, vBGMap1
 	call BattleAnimCopyTileMapToVRAM
+
+	; gbcnote - from yellow version: update BGMap attributes
+	ldh a, [hGBC]
+	and a
+	jr z, .notGBC2
+	ld d, 11
+	farcall LoadBGMapAttributes
+.notGBC2
+
 	xor a
 	ldh [hWY], a
 	call SaveScreenTilesToBuffer1
@@ -2680,17 +2883,7 @@ TossBallAnimation:
 	ld [wNumShakes], a
 
 	ld hl, .PokeBallAnimations
-	; choose which toss animation to use
-	ld a, [wcf91]
-	cp POKE_BALL
-	ld b, TOSS_ANIM
-	jr z, .done
-	cp GREAT_BALL
-	ld b, GREATTOSS_ANIM
-	jr z, .done
-	ld b, ULTRATOSS_ANIM
-.done
-	ld a, b
+	ld a, [wAnimationID]
 .PlayNextAnimation
 	ld [wAnimationID], a
 	push bc
@@ -2701,6 +2894,11 @@ TossBallAnimation:
 	pop bc
 	dec c
 	jr nz, .PlayNextAnimation
+	xor a
+	ld [wLastOBP0], a ; force reset OBP0 color
+	call UpdateGBCPal_OBP0
+	xor a
+	ld [wUnusedC000], a
 	ret
 
 .PokeBallAnimations:
@@ -2708,13 +2906,13 @@ TossBallAnimation:
 	db POOF_ANIM, HIDEPIC_ANIM, SHAKE_ANIM, POOF_ANIM, SHOWPIC_ANIM
 
 .BlockBall
-	ld a, TOSS_ANIM
-	ld [wAnimationID], a
 	call PlayAnimation
 	ld a, SFX_FAINT_THUD
 	call PlaySound
 	ld a, BLOCKBALL_ANIM
 	ld [wAnimationID], a
+	xor a
+	ld [wUnusedC000], a
 	jp PlayAnimation
 
 PlayApplyingAttackSound:

@@ -1,5 +1,5 @@
 SafariZoneCenterWildMons:
-	def_grass_wildmons 10 ; encounter rate
+	def_grass_wildmons 20 ; encounter rate
 	db 28, NIDORAN_M ; alt palette
 	db 25, RHYHORN ; alt palette
 	db 26, VENONAT ; alt palette

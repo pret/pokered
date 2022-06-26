@@ -275,6 +275,7 @@ SaveSAVtoSRAM::
 	call SaveSAVtoSRAM0
 	call SaveSAVtoSRAM1
 	jp SaveSAVtoSRAM2
+;TODO: batteryless save call goes here
 
 SAVCheckSum:
 ;Check Sum (result[1 byte] is complemented)

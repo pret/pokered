@@ -444,9 +444,8 @@ ItemUseBall:
 	ld c, 20
 	call DelayFrames
 
-; Do the animation.
-	ld a, TOSS_ANIM
-	ld [wAnimationID], a
+	; Do the animation.
+	call MapBallToAnimation ; choose which toss animation to use
 	xor a
 	ldh [hWhoseTurn], a
 	ld [wAnimationType], a
@@ -666,6 +665,27 @@ ItemUseBallText06:
 	sound_dex_page_added
 	text_promptbutton
 	text_end
+
+MapBallToAnimation: 
+	ld a, [wcf91]
+	ld hl, BallAnimationMap - 1
+	ld c, a
+	ld b, 0
+	add hl, bc 
+	ld a, [hl]
+	ld [wAnimationID], a
+	ld [wUnusedC000], a ; identifies to a couple places that we're doing a ball toss animation (and which)
+	ret
+
+BallAnimationMap: ; this uses item indices, if item indices change then this won't work
+	db MASTERTOSS_ANIM
+	db ULTRATOSS_ANIM
+	db GREATTOSS_ANIM
+	db TOSS_ANIM
+	db HYPERTOSS_ANIM
+	db 0
+	db 0
+	db SAFARITOSS_ANIM
 
 ItemUseTownMap:
 	ld a, [wIsInBattle]
@@ -2614,8 +2634,8 @@ ThrowBallAtTrainerMon:
 	call RunDefaultPaletteCommand
 	call LoadScreenTilesFromBuffer1 ; restore saved screen
 	call Delay3
-	ld a, TOSS_ANIM
-	ld [wAnimationID], a
+	; choose which toss animation to use
+	call MapBallToAnimation
 	predef MoveAnimation ; do animation
 	ld hl, ThrowBallAtTrainerMonText1
 	call PrintText

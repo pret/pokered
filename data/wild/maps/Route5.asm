@@ -1,5 +1,5 @@
 Route5WildMons:
-	def_grass_wildmons 15 ; encounter rate
+	def_grass_wildmons 25 ; encounter rate
 	db 13, ODDISH
 	db 13, FARFETCHD
 	db 15, FARFETCHD

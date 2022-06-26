@@ -6882,7 +6882,9 @@ PlayMoveAnimation:
 	vc_hook_red FPA_conf_Begin
 	call Delay3
 	vc_hook_red FPA_phy_Begin
-	predef_jump MoveAnimation
+	predef MoveAnimation
+	callfar Func_78e98
+	ret
 
 InitBattle::
 	ld a, [wCurOpponent]

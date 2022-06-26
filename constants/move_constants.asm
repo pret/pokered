@@ -193,10 +193,10 @@ NUM_ATTACKS EQU const_value - 1
 	const ANIM_B5
 	const ANIM_B6
 	const BURN_ANIM ; Plays when a monster is burned
-	const ANIM_B8
-	const ANIM_B9
+	const SAFARITOSS_ANIM
+	const HYPERTOSS_ANIM
 	const PSN_ANIM ; Plays when a monster is poisoned
-	const ANIM_BB
+	const MASTERTOSS_ANIM ; toss Master Ball
 	const ANIM_BC
 	const SLP_ANIM ; sleeping monster
 	const ANIM_BE
@@ -207,7 +207,7 @@ NUM_ATTACKS EQU const_value - 1
 	const POOF_ANIM ; puff of smoke
 	const BLOCKBALL_ANIM ; trainer knocks away Poké Ball
 	const GREATTOSS_ANIM ; toss Great Ball
-	const ULTRATOSS_ANIM ; toss Ultra Ball or Master Ball
+	const ULTRATOSS_ANIM ; toss Ultra Ball
 	const ANIM_C7
 	const HIDEPIC_ANIM ; monster disappears
 	const ROCK_ANIM ; throw rock

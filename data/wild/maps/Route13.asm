@@ -1,5 +1,5 @@
 Route13WildMons:
-	def_grass_wildmons 20 ; encounter rate
+	def_grass_wildmons 40 ; encounter rate
 	db 28, BEEDRILL
 	db 27, BUTTERFREE
 	db 29, BUTTERFREE

@@ -1,5 +1,5 @@
 Route14WildMons:
-	def_grass_wildmons 20 ; encounter rate
+	def_grass_wildmons 40 ; encounter rate
 	db 25, MEOWTH
 	db 26, PERSIAN
 	db 28, JIGGLYPUFF

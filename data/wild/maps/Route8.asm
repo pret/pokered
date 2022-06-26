@@ -1,5 +1,5 @@
 Route8WildMons:
-	def_grass_wildmons 25 ; encounter rate
+	def_grass_wildmons 50 ; encounter rate
 	db 18, MR_MIME
 	db 16, MR_MIME
 	db 17, MR_MIME

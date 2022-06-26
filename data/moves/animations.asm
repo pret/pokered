@@ -184,10 +184,10 @@ AttackAnimationPointers:
 	dw ShrinkingSquareBlackAnim
 	dw BurnAnim
 	dw BurnAnim
-	dw ParalyzeAnim
-	dw ParalyzeAnim
+	dw BallTossAnim ; safari ball
+	dw BallTossAnim ; hyper ball
 	dw PoisonAnim
-	dw PoisonAnim
+	dw BallTossAnim ; master ball
 	dw SleepPlayerAnim
 	dw SleepEnemyAnim
 	dw ConfusedPlayerAnim
@@ -434,6 +434,7 @@ TakeDownAnim:
 	battle_anim LEECH_SEED, SE_MOVE_MON_HORIZONTALLY
 	battle_anim TAKE_DOWN, SE_DARK_SCREEN_FLASH
 	battle_anim NO_MOVE, SE_RESET_MON_POSITION
+	battle_anim NO_MOVE, SUBANIM_04, 1, 2
 	db -1 ; end
 
 ThrashAnim:
@@ -447,12 +448,6 @@ DoubleEdgeAnim:
 	battle_anim NO_MOVE, SE_MOVE_MON_HORIZONTALLY
 	battle_anim DOUBLE_EDGE, SE_DARK_SCREEN_FLASH
 	battle_anim NO_MOVE, SE_RESET_MON_POSITION
-	battle_anim NO_MOVE, SE_SLIDE_ENEMY_MON_HALF_OFF
-	battle_anim NO_MOVE, SE_SLIDE_MON_HALF_OFF
-	battle_anim NO_MOVE, SE_DELAY_ANIMATION_10
-	battle_anim NO_MOVE, SE_DELAY_ANIMATION_10
-	battle_anim NO_MOVE, SE_SHOW_MON_PIC
-	battle_anim NO_MOVE, SE_SHOW_ENEMY_MON_PIC
 	db -1 ; end
 
 TailWhipAnim:
@@ -715,7 +710,7 @@ MegaDrainAnim:
 
 LeechSeedAnim:
 	battle_anim LEECH_SEED, SUBANIM_1B, 1, 6
-	battle_anim STUN_SPORE, SUBANIM_1C, 1, 21
+	battle_anim SLEEP_POWDER, SUBANIM_1C, 1, 21
 	db -1 ; end
 
 GrowthAnim:
@@ -1254,9 +1249,10 @@ AcidArmorAnim:
 	db -1 ; end
 
 CrabHammerAnim:
+	battle_anim STOMP, SUBANIM_05, 1, 3
+	battle_anim TAKE_DOWN, SUBANIM_05, 1, 3
 	battle_anim GUILLOTINE, SUBANIM_2A, 0, 3
 	battle_anim CRABHAMMER, SUBANIM_2A, 0, 3
-	battle_anim GUILLOTINE, SUBANIM_2A, 0, 3
 	db -1 ; end
 
 ExplosionAnim:

@@ -1,5 +1,5 @@
 SafariZoneNorthWildMons:
-	def_grass_wildmons 10 ; encounter rate
+	def_grass_wildmons 15 ; encounter rate
 	db 27, NIDORAN_F ; alt palette
 	db 26, RHYHORN ; alt palette
 	db 23, PARAS ; alt palette

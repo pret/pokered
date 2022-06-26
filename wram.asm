@@ -2167,20 +2167,19 @@ wRoute18Gate1FCurScript:: db
 	ds 78
 wGameProgressFlagsEnd::
 
-wGBCBasePalPointers:: 
-	ds NUM_ACTIVE_PALS * 2 ; 8 bytes
-wGBCPal:: 
-	ds PAL_SIZE ; 8 bytes
-wLastBGP:: 
-	ds 1
-wLastOBP0:: 
-	ds 1
-wLastOBP1:: 
-	ds 1 
-wBGPPalsBuffer:: 
-	ds NUM_ACTIVE_PALS * PAL_SIZE ;32 bytes
-	
-	ds 5
+;;;;;; GBC stuff from pokemon yellow
+
+wGBCBasePalPointers:: ds NUM_ACTIVE_PALS * 2 ; 8 bytes
+wGBCPal:: ds PAL_SIZE ; 8 bytes
+wLastBGP::db
+wLastOBP0::db
+wLastOBP1::db 
+wBGPPalsBuffer:: ds NUM_ACTIVE_PALS * PAL_SIZE ; 32 bytes
+wdef5:: db
+
+;;;;;;
+
+	ds 4
 
 wObtainedHiddenItemsFlags:: flag_array 112
 

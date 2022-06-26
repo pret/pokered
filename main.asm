@@ -399,6 +399,7 @@ INCLUDE "engine/menus/wrap_list_menu.asm"
 INCLUDE "engine/items/last_two_fishing_gurus_script.asm"
 INCLUDE "engine/overworld/check_map_connections.asm"
 INCLUDE "engine/pokemon/missingno_item_duplication.asm"
+INCLUDE "engine/gfx/set_attack_animation_palette.asm"
 
 
 SECTION "Batteryless Save Bank 1", ROMX, BANK[$3D]

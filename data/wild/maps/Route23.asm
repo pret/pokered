@@ -1,5 +1,5 @@
 Route23WildMons:
-	def_grass_wildmons 20 ; encounter rate
+	def_grass_wildmons 40 ; encounter rate
 	db 60, CHANSEY
 	db 60, CHANSEY
 	db 60, CHANSEY

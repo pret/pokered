@@ -919,7 +919,7 @@ CableClub_Run:
 	jr z, .doBattleOrTrade
 	cp LINK_STATE_RESET ; this is never used
 	ret nz
-	predef EmptyFunc
+;	predef EmptyFunc
 	jp Init
 .doBattleOrTrade
 	call CableClub_DoBattleOrTrade
@@ -948,8 +948,8 @@ CableClub_Run:
 	ld [wNewSoundID], a
 	jp PlaySound
 
-EmptyFunc:
-	ret
+;EmptyFunc:
+;	ret
 
 Diploma_TextBoxBorder:
 	call GetPredefRegisters

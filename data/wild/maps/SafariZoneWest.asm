@@ -1,5 +1,5 @@
 SafariZoneWestWildMons:
-	def_grass_wildmons 10 ; encounter rate
+	def_grass_wildmons 30 ; encounter rate
 	db 25, NIDORAN_M ; alt palette
 	db 26, DODUO ; alt palette
 	db 23, VENONAT ; alt palette

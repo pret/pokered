@@ -1,5 +1,5 @@
 Route9WildMons:
-	def_grass_wildmons 25 ; encounter rate
+	def_grass_wildmons 50 ; encounter rate
 	db 16, ONIX
 	db 14, MAGMAR
 	db 14, ONIX

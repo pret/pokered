@@ -8,7 +8,7 @@ AnimationIdSpecialEffects:
 	anim_special_effect WHIRLWIND,             FlashScreenEveryFourFrameBlocks
 	anim_special_effect MEGA_PUNCH,            AnimationFlashScreen
 	anim_special_effect GUILLOTINE,            AnimationFlashScreen
-	anim_special_effect CRABHAMMER,            AnimationFlashScreen
+	anim_special_effect CRABHAMMER,            FlashScreenEveryFourFrameBlocks
 	anim_special_effect MEGA_KICK,             AnimationFlashScreen
 	anim_special_effect HEADBUTT,              AnimationFlashScreen
 	anim_special_effect TAIL_WHIP,             TailWhipAnimationUnused
@@ -31,4 +31,7 @@ AnimationIdSpecialEffects:
 	anim_special_effect POOF_ANIM,             DoPoofSpecialEffects
 	anim_special_effect GREATTOSS_ANIM,        DoBallTossSpecialEffects
 	anim_special_effect ULTRATOSS_ANIM,        DoBallTossSpecialEffects
+	anim_special_effect MASTERTOSS_ANIM,        DoBallTossSpecialEffects
+	anim_special_effect HYPERTOSS_ANIM,        DoBallTossSpecialEffects
+	anim_special_effect SAFARITOSS_ANIM,        DoBallTossSpecialEffects
 	db -1 ; end

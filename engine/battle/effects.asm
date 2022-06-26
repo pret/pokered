@@ -1648,6 +1648,7 @@ PlayBattleAnimationGotID:
 	push de
 	push bc
 	predef MoveAnimation
+	callfar Func_78e98
 	pop bc
 	pop de
 	pop hl

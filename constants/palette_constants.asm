@@ -75,4 +75,7 @@ SET_PAL_DEFAULT EQU $ff
 	const PAL_BLACKMON  ; $25
 	const PAL_WHITEMON  ; $26
 	const PAL_BLUEGREENMON  ; $27
+	const PAL_BLACK2        ; $28	;gbc only
+	const PAL_ULTRABALL     ; $29	;gbc only
+	const PAL_SAFARIBALL    ; $2A   ;gbc only
 NUM_SGB_PALS EQU const_value

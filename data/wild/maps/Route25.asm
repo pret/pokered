@@ -1,5 +1,5 @@
 Route25WildMons:
-	def_grass_wildmons 25 ; encounter rate
+	def_grass_wildmons 40 ; encounter rate
 	db  8, ABRA
 	db  9, BELLSPROUT
 	db 13, ABRA

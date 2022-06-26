@@ -1,5 +1,5 @@
 Route12WildMons:
-	def_grass_wildmons 25 ; encounter rate
+	def_grass_wildmons 40 ; encounter rate
 	db 35, ARBOK
 	db 35, EKANS
 	db 30, EKANS

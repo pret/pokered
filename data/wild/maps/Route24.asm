@@ -1,5 +1,5 @@
 Route24WildMons:
-	def_grass_wildmons 25 ; encounter rate
+	def_grass_wildmons 30 ; encounter rate
 	db  7, ABRA
 	db  8, STARYU
 	db 12, ABRA

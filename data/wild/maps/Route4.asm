@@ -1,5 +1,5 @@
 Route4WildMons:
-	def_grass_wildmons 20 ; encounter rate
+	def_grass_wildmons 30 ; encounter rate
 	db 10, POLIWAG
 	db 10, SANDSHREW
 	db  8, POLIWAG

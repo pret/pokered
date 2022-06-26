@@ -1,5 +1,5 @@
 SafariZoneEastWildMons:
-	def_grass_wildmons 10 ; encounter rate
+	def_grass_wildmons 15 ; encounter rate
 	db 28, NIDORAN_F ; alt palette
 	db 26, DODUO ; alt palette
 	db 26, PARAS ; alt palette
