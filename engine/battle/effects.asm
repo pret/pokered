@@ -203,6 +203,10 @@ FreezeBurnParalyzeEffect:
 	and a
 	jp nz, CheckDefrost ; can't inflict status if opponent is already statused
 	ld a, [wPlayerMoveType]
+	cp NORMAL ; body slam and tri attack can apply status to any pokemon type
+	jr z, .skipTypeComparison
+	cp BUG ; vicegrip can apply status to any pokemon type
+	jr z, .skipTypeComparison
 	ld b, a
 	ld a, [wEnemyMonType1]
 	cp b ; do target type 1 and move type match?
@@ -210,6 +214,7 @@ FreezeBurnParalyzeEffect:
 	ld a, [wEnemyMonType2]
 	cp b ; do target type 2 and move type match?
 	ret z  ; return if they match
+.skipTypeComparison
 	ld a, [wPlayerMoveEffect]
 	cp PARALYZE_SIDE_EFFECT1 + 1
 	ld b, 10 percent + 1
