@@ -22,7 +22,7 @@ CheckSpriteOptions::
 	jr z,.mewtwoOptionCheck
 	jr .defaultSprite
 .bulbasaurOptionCheck
-	ld a, [wSpriteOptions2]
+	ld a, [wSpriteOptions]
 	bit BIT_BULBASAUR_SPRITE, a
 	jr nz,.optionSprite
 	jr .defaultSprite
@@ -42,7 +42,7 @@ CheckSpriteOptions::
 	jr nz,.optionSprite
 	jr .defaultSprite
 .nidorinoOptionCheck
-	ld a, [wSpriteOptions]
+	ld a, [wSpriteOptions2]
 	bit BIT_NIDORINO_SPRITE, a
 	jr nz,.optionSprite
 	jr .defaultSprite

@@ -108,6 +108,8 @@ rLCDC_DEFAULT EQU %11100011
 	jr nc, .skipLoad
 	ld a, [sOptions2]
 	ld [wOptions2], a
+	ld a, [sSpriteOptions]
+	ld [wSpriteOptions], a
 .skipLoad
 	xor a
 	ld [MBC1SRamBankingMode], a

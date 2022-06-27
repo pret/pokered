@@ -15,9 +15,11 @@ sHallOfFame:: ds HOF_TEAM * HOF_TEAM_CAPACITY
 
 SECTION "Save Data", SRAM
 
-	ds $597
-
-sOptions2:: db ; duplicate options2 variable, used to set these options on game load so the palettes match your settings from game initialization
+	ds $596
+	
+; duplicate options variables, used to set these options on game load so the palettes match your settings from game initialization
+sSpriteOptions:: db
+sOptions2:: db 
 
 sGameData::
 sPlayerName::  ds NAME_LENGTH

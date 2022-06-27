@@ -254,23 +254,23 @@ SetSpriteOptionsFromCursorPositions:
 	jr z, .option2setRight
 .option2setLeft
 	res OPTION2_BIT, d
-	jr .checkOption3
+	jr .storeOptions
 .option2setRight
 	set OPTION2_BIT, d
+.storeOptions
+	ld a, d
+	ld [wSpriteOptions2], a
+	ld a, [wSpriteOptions]
+	ld d, a
 .checkOption3
 	ld a, [wOptionsPage4Option3CursorX] ; battle style cursor X coordinate
 	cp OPTION3_RIGHT_XPOS 
 	jr z, .option3setRight
 .option3setLeft
 	res OPTION3_BIT, d
-	jr .storeOptions
+	jr .checkOption4
 .option3setRight
 	set OPTION3_BIT, d
-.storeOptions
-	ld a, d
-	ld [wSpriteOptions2], a
-	ld a, [wSpriteOptions]
-	ld d, a
 .checkOption4
 	ld a, [wOptionsPage4Option4CursorX] ; battle style cursor X coordinate
 	cp OPTION4_RIGHT_XPOS 
@@ -325,7 +325,7 @@ SetCursorPositionsFromSpriteOptions:
 	call .placeUnfilledRightArrow
 .getOption3
 	ld a, 13
-	ld hl, wSpriteOptions2
+	ld hl, wSpriteOptions
 	bit OPTION3_BIT, [hl]
 	jr z, .storeOption3SpriteCursorX
 	ld a, 16

@@ -226,22 +226,23 @@ SetSpriteOptionsFromCursorPositions2:
 	jr z, .exeggutorRG
 .exeggutorRB
 	res BIT_EXEGGUTOR_SPRITE, d
-	jr .storeOptions
+	jr .checkNidorino
 .exeggutorRG
 	set BIT_EXEGGUTOR_SPRITE, d
+.checkNidorino
+	ld a, [wOptionsNidorinoSpriteCursorX] ; battle style cursor X coordinate
+	cp NIDORINO_RG_XPOS 
+	jr z, .nidorinoRG
+.nidorinoRB
+	res BIT_NIDORINO_SPRITE, d
+	jr .storeOptions
+.nidorinoRG
+	set BIT_NIDORINO_SPRITE, d
 .storeOptions
 	ld a, d
 	ld [wSpriteOptions2], a
 	ld a, [wSpriteOptions]
 	ld d, a
-	ld a, [wOptionsNidorinoSpriteCursorX] ; battle style cursor X coordinate
-	cp NIDORINO_RG_XPOS 
-	jr z, .nidorinoRG
-.nidorinoRB
-	res 3, d
-	jr .checkGolbat
-.nidorinoRG
-	set 3, d
 .checkGolbat
 	ld a, [wOptionsGolbatSpriteCursorX] ; battle style cursor X coordinate
 	cp GOLBAT_RG_XPOS 
@@ -284,7 +285,7 @@ SetSpriteOptionsFromCursorPositions2:
 	ret
 
 SetCursorPositionsFromSpriteOptions2:
-	ld hl, wSpriteOptions
+	ld hl, wSpriteOptions2
 	ld a, 13
 	bit BIT_NIDORINO_SPRITE, [hl]
 	jr z, .storeNidorinoCursorX
