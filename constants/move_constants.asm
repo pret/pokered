@@ -191,7 +191,7 @@ NUM_ATTACKS EQU const_value - 1
 	const ANIM_B3
 	const ANIM_B4
 	const ANIM_B5
-	const ANIM_B6
+	const AMNESIA_ENEMY_ANIM
 	const BURN_ANIM ; Plays when a monster is burned
 	const SAFARITOSS_ANIM
 	const HYPERTOSS_ANIM

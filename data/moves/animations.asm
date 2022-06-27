@@ -182,7 +182,7 @@ AttackAnimationPointers:
 	dw XStatItemBlackAnim
 	dw ShrinkingSquareBlackAnim
 	dw ShrinkingSquareBlackAnim
-	dw BurnAnim
+	dw AmnesiaEnemyAnim
 	dw BurnAnim
 	dw BallTossAnim ; safari ball
 	dw UltraTossAnim ; hyper ball
@@ -1470,4 +1470,10 @@ ThrowRockAnim:
 
 ThrowBaitAnim:
 	battle_anim BARRAGE, SUBANIM_54, 0, 3
+	db -1 ; end
+
+AmnesiaEnemyAnim:
+	battle_anim MEGA_DRAIN, SUBANIM_AMNESIA1_ENEMY, 1, 2
+	battle_anim KINESIS, SUBANIM_AMNESIA_ENEMY, 0, 16
+	battle_anim DOUBLE_TEAM, SE_SHOOT_MANY_BALLS_UPWARD
 	db -1 ; end

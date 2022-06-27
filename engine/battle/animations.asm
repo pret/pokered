@@ -487,6 +487,10 @@ ShareMoveAnimations:
 
 	ld a, [wAnimationID]
 
+	cp AMNESIA
+	ld b, AMNESIA_ENEMY_ANIM
+	jr z, .replaceAnim
+
 	cp REST
 	ld b, SLP_ANIM
 	ret nz

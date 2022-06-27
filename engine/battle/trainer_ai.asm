@@ -183,7 +183,7 @@ AIMoveChoiceModification2:
 	dec [hl] ; slightly encourage this move
 	jr .nextMove
 
-; encourages moves that are effective against the player's mon (even if non-damaging).
+; encourages moves that are effective against the player's mon if they do damage.
 ; discourage damaging moves that are ineffective or not very effective against the player's mon,
 ; unless there's no damaging move that deals at least neutral damage
 AIMoveChoiceModification3:
@@ -210,9 +210,9 @@ AIMoveChoiceModification3:
 	cp EFFECTIVE
 	jr z, .nextMove
 	jr c, .notEffectiveMove
-	;ld a, [wEnemyMovePower]
-	;and a
-	;jr z, .nextMove ; don't encourage a non-damaging move just because it's of a super effective type
+	ld a, [wEnemyMovePower]
+	and a
+	jr z, .nextMove ; don't encourage a non-damaging move just because it's of a super effective type
 	dec [hl] ; slightly encourage this move
 	jr .nextMove
 .notEffectiveMove ; discourages non-effective moves if better moves are available
