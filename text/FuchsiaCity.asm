@@ -5,6 +5,11 @@ _FuchsiaCityText1::
 	cont "be caught there."
 	done
 
+_FuchsiaCityText1Color::
+	text "Many have unique"
+	line "colors too!"
+	done
+
 _FuchsiaCityText2::
 	text "SAFARI ZONE has a"
 	line "zoo in front of"

@@ -80,8 +80,34 @@ FuchsiaCity_TextPointers:
 	dw FuchsiaCityText24
 
 FuchsiaCityText1:
+	text_asm
+	ld a, [wOptions2]
+	bit BIT_ALT_PKMN_PALETTES, a ; do we have alt palettes enabled
+	jr nz, .altPalettes
+	ld hl, FuchsiaCityText1Start
+	jr .done
+.altPalettes
+	ld hl, FuchsiaCityText1StartPrompt
+	call PrintText
+	ld hl, FuchsiaCityText1Color
+.done
+	call PrintText
+	jp TextScriptEnd
+
+
+FuchsiaCityText1Start:
 	text_far _FuchsiaCityText1
 	text_end
+
+FuchsiaCityText1StartPrompt:
+	text_far _FuchsiaCityText1
+	text_promptbutton
+	text_end
+
+FuchsiaCityText1Color:
+	text_far _FuchsiaCityText1Color
+	text_end
+
 
 FuchsiaCityText2:
 	text_far _FuchsiaCityText2
