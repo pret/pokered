@@ -800,7 +800,6 @@ color_index = 0
 		ld e, a
 		ld a, [hl]
 		ld d, a
-		;predef GBCGamma
 		;now load the value that HL points to into wGBCPal offset by the loop
 		ld a, e
 		ld [wGBCPal + color_index * 2], a
@@ -1120,6 +1119,8 @@ TransferMonPal:
 .isMon	
 	call DeterminePaletteIDOutOfBattle
 	jr .back
+
+
 
 INCLUDE "data/sgb/sgb_packets.asm"
 

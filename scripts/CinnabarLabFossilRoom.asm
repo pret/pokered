@@ -111,6 +111,14 @@ LoadFossilItemAndMonNameBank1D:
 
 Lab4Text3:
 	text_asm
+	ld a, [wOptions2]
+	bit BIT_ALT_PKMN_PALETTES, a ; do we have alt palettes enabled
+	jr nz, .altPalettesEnabled
+	; we don't have alt palettes turned on, so no need to have his whole big script
+	ld hl, LabColorChangerResearchingColors
+	call PrintText
+	jp TextScriptEnd
+.altPalettesEnabled
 	CheckEvent EVENT_MET_LAB_COLOR_CHANGER
 	jr nz, .skipToColorChangeDialog
 	SetEvent EVENT_MET_LAB_COLOR_CHANGER
@@ -378,4 +386,8 @@ LabColorChangerColorChangeDone:
 	text_far _LabColorChangerColorChangeDone
 	sound_get_item_2
 	text_promptbutton
+	text_end
+
+LabColorChangerResearchingColors:
+	text_far _LabColorChangerResearchingColors
 	text_end

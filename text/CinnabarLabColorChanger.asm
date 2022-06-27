@@ -80,3 +80,9 @@ _LabColorChangerVasIsDas::
 	para "You get 10 extra"
 	line "color changes!@"
 	text_end
+
+_LabColorChangerResearchingColors::
+	text "I am researching"
+	line "how to change"
+	cont "#MON colors!"
+	done

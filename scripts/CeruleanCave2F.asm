@@ -20,6 +20,9 @@ CeruleanCave2FScript1:
 	jr z, .initialLossText
 	jr .done
 .initialLossText
+	ld a, [wOptions2]
+	bit BIT_ALT_PKMN_PALETTES, a ; do we have alt palettes enabled
+	jr z, .done ; don't do anything if alt palettes are turned off
 	ld a, 5
 	ldh [hSpriteIndexOrTextID], a
     call DisplayTextID

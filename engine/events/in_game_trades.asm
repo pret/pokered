@@ -345,9 +345,16 @@ WannaTradeColorPaletteText:
 
 WannaTrade1ColorText:
 	text_asm
+	ld a, [wOptions2]
+	bit BIT_ALT_PKMN_PALETTES, a ; do we have alt palettes enabled
+	jr nz, .altPalettesOn
+	ld hl, WannaTrade1Text
+	jr .done
+.altPalettesOn
 	ld hl, WannaTrade1TextPrompt
 	call PrintText
 	ld hl, WannaTradeColorPaletteText
+.done
 	call PrintText
 	jp TextScriptEnd
 
@@ -383,9 +390,16 @@ WannaTrade2TextPrompt:
 
 WannaTrade2ColorText:
 	text_asm
+	ld a, [wOptions2]
+	bit BIT_ALT_PKMN_PALETTES, a ; do we have alt palettes enabled
+	jr nz, .altPalettesOn
+	ld hl, WannaTrade2Text
+	jr .done
+.altPalettesOn
 	ld hl, WannaTrade2TextPrompt
 	call PrintText
 	ld hl, WannaTradeColorPaletteText
+.done
 	call PrintText
 	jp TextScriptEnd
 
@@ -416,9 +430,16 @@ WannaTrade3TextPrompt:
 
 WannaTrade3ColorText:
 	text_asm
+	ld a, [wOptions2]
+	bit BIT_ALT_PKMN_PALETTES, a ; do we have alt palettes enabled
+	jr nz, .altPalettesOn
+	ld hl, WannaTrade3Text
+	jr .done
+.altPalettesOn
 	ld hl, WannaTrade3TextPrompt
 	call PrintText
 	ld hl, WannaTradeColorPaletteText
+.done
 	call PrintText
 	jp TextScriptEnd
 
