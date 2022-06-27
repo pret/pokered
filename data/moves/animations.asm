@@ -185,9 +185,9 @@ AttackAnimationPointers:
 	dw BurnAnim
 	dw BurnAnim
 	dw BallTossAnim ; safari ball
-	dw BallTossAnim ; hyper ball
+	dw UltraTossAnim ; hyper ball
 	dw PoisonAnim
-	dw BallTossAnim ; master ball
+	dw UltraTossAnim ; master ball
 	dw SleepPlayerAnim
 	dw SleepEnemyAnim
 	dw ConfusedPlayerAnim

@@ -577,14 +577,13 @@ AnimationShakeScreenHorizontallySlow:
 	ret
 
 SetAnimationPalette:
+	ld b, $e4
 	ld a, [wOnSGB]
 	and a
 	;ld a, $e4	;redundant
 	jr z, .notSGB
 	;ld a, $f0
-	;ld [wAnimPalette], a
-	predef SetAttackAnimPal	;gbcnote - new function to handle animation palettes
-	ld b, $e4
+	;ld [wAnimPalette], a ; will handle in setattackanimpal
 	ld a, [wAnimationID]
 	cp TRADE_BALL_DROP_ANIM
 	jr c, .next
@@ -592,22 +591,24 @@ SetAnimationPalette:
 	jr nc, .next
 	ld b, $f0
 .next
-	ld a, b
-	ldh [rOBP0], a
-	ld a, $6c
-	ldh [rOBP1], a
-	call UpdateGBCPal_OBP0
-	call UpdateGBCPal_OBP1
-	ret
+	;ld a, b
+	;ldh [rOBP0], a
+	;ld a, $6c
+	;ldh [rOBP1], a
+	;call UpdateGBCPal_OBP0
+	;call UpdateGBCPal_OBP1
+	;ret
 .notSGB
-	ld a, $e4
-	ld [wAnimPalette], a
+	ld a, b
+	;ld a, $e4
+	;ld [wAnimPalette], a
 	vc_hook FPA_Dream_Eater_Begin
 	ldh [rOBP0], a
 	ld a, $6c
 	ldh [rOBP1], a
 	call UpdateGBCPal_OBP0
 	call UpdateGBCPal_OBP1
+	predef SetAttackAnimPal	;gbcnote - new function to handle animation palettes
 	ret
 
 Func_78e98:
@@ -737,6 +738,9 @@ DoSpecialEffectByAnimationId:
 INCLUDE "data/battle_anims/special_effects.asm"
 
 DoBallTossSpecialEffects:
+	ld a, [wSubAnimCounter]
+	cp 1
+	jr z, .skipFlashingEffect ; don't complement colors on the last frame
 	ld a, [wcf91]
 	cp HYPER_BALL
 	jr z, .flashingEffect
@@ -747,6 +751,7 @@ DoBallTossSpecialEffects:
 	xor %00111100 ; complement colors 1 and 2
 	ldh [rOBP0], a
 	;call UpdateGBCPal_OBP0
+	predef SetAttackAnimPal
 .skipFlashingEffect
 	ld a, [wSubAnimCounter]
 	cp 11 ; is it the beginning of the subanimation?
@@ -787,7 +792,7 @@ DoBallTossSpecialEffects:
 	ret
 .isTrainerBattle ; if it's a trainer battle, shorten the animation by one frame
 	ld a, [wSubAnimCounter]
-	cp 3
+	cp 2
 	ret nz
 	dec a
 	ld [wSubAnimCounter], a

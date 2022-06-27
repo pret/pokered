@@ -1,5 +1,11 @@
 SetAttackAnimPal:
 	call GetPredefRegisters
+
+	ld a, $e4
+	ld [wAnimPalette], a
+	ld a, [wOnSGB]
+	and a
+	ret z
 	
 	ld a, $f0
 	ld [wAnimPalette], a
@@ -53,10 +59,9 @@ SetAttackAnimPal:
 	ld b, a
 
 .gotPalette
-
 	;make sure to reset palette/shade data into OBP0
-	ld a, %11100100
-	ldh [rOBP0], a
+	;ld a, %11100100
+	;ldh [rOBP0], a
 
 	ld c, 4
 .transfer
