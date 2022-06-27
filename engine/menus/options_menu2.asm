@@ -75,7 +75,7 @@ DisplayOptions2:
 	ld a, SFX_PRESS_AB
 	call PlaySound
 	call ClearScreen
-	callfar DisplaySpriteOptions
+	callfar DisplayBattleOptions
 .exitMenu
 	ld a, SFX_PRESS_AB
 	call PlaySound

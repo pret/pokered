@@ -5292,7 +5292,6 @@ AdjustDamageForMoveType:
 	jr z, .matchingPairFound
 	jr .nextTypePair
 .matchingPairFound
-	; TODO: option type matchup remap here
 ; if the move type matches the "attacking type" and one of the defender's types matches the "defending type"
 	push hl
 	push bc
@@ -5301,6 +5300,7 @@ AdjustDamageForMoveType:
 	and $80
 	ld b, a
 	ld a, [hl] ; a = damage multiplier
+	call RemapTypeMatchupBasedOnOptions
 	ldh [hMultiplier], a
 ;;;; FIXEDBUG - fixing the wrong effectiveness message 
 	and a
@@ -5355,20 +5355,116 @@ AdjustDamageForMoveType:
 .done
 	ret
 
+; NEW: type matchups can be switched to match how they behave in later generations if so desired
+; by default ghost affects psychic, but can be set back to psychic being unaffected by ghost.
+RemapTypeMatchupBasedOnOptions:
+	push bc
+	dec hl
+	ld c, a
+	ld a, [wMoveType]
+	ld b, a
+	ld a, [wSpriteOptions2]
+	and %11110000 ; only care about the last 4 bits
+	jr z, .done ; if none are set we don't need to do any remapping
+	ld a, GHOST
+	cp b
+	jr z, .ghostOption
+	ld a, BUG
+	cp b
+	jr z, .bugOption
+	ld a, POISON
+	cp b
+	jr z, .poisonOption
+	ld a, ICE
+	cp b
+	jr z, .iceOption
+	jr .done
+.ghostOption
+	ld a, [wSpriteOptions2]
+	bit BIT_GHOST_PSYCHIC, a
+	jr nz, .ghostCheck
+	jr .done
+.iceOption
+	ld a, [wSpriteOptions2]
+	bit BIT_ICE_FIRE, a
+	jr nz, .iceCheck
+	jr .done
+.bugOption
+	ld a, [wSpriteOptions2]
+	bit BIT_BUG_PSN, a
+	jr nz, .bugCheck
+	jr .done
+.poisonOption
+	ld a, [wSpriteOptions2]
+	bit BIT_PSN_BUG, a
+	jr nz, .poisonCheck
+	jr .done
+.ghostCheck
+	ld a, PSYCHIC_TYPE
+	ld b, [hl]
+	cp b
+	jr z, .doRemapGhost
+	jr .done
+.doRemapGhost
+	ld c, NO_EFFECT
+	jr .done
+.iceCheck
+	ld a, FIRE
+	ld b, [hl]
+	cp b
+	jr z, .doRemapIce
+	jr .done
+.doRemapIce
+	ld c, NOT_VERY_EFFECTIVE
+	jr .done
+.bugCheck
+	ld a, POISON
+	ld b, [hl]
+	cp b
+	jr z, .doRemapBug
+	jr .done
+.doRemapBug
+	ld c, NOT_VERY_EFFECTIVE
+	jr .done
+.poisonCheck
+	ld a, BUG
+	ld b, [hl]
+	cp b
+	jr z, .doRemapPoison
+	jr .done
+.doRemapPoison
+	ld c, EFFECTIVE
+	jr .done
+.done
+	ld a, c
+	inc hl
+	pop bc
+	ret
+
+
+
+
+
+
+
 ; function to tell how effective the type of an enemy attack is on the player's current pokemon
-; this doesn't take into account the effects that dual types can have
+; now takes into account the effects that dual types can have
 ; (e.g. 4x weakness / resistance, weaknesses and resistances canceling)
 ; the result is stored in [wTypeEffectiveness]
-; ($05 is not very effective, $10 is neutral, $14 is super effective)
+; ($05 is not very effective, $0A is neutral, $14 is super effective)
+; ($00 is immune, $02 is 4x uneffective, $28 is 4x super effective)
 ; as far is can tell, this is only used once in some AI code to help decide which move to use
 AIGetTypeEffectiveness:
+;joenote - if type-effectiveness bit is set, then do wPlayerMoveType and wEnemyMonType
+;		-also changed neutral value from $10 to $0A since it makes more sense
+;		-and modifying this to take into account both types
 	ld a, [wEnemyMoveType]
 	ld d, a                    ; d = type of enemy move
 	ld hl, wBattleMonType
 	ld b, [hl]                 ; b = type 1 of player's pokemon
 	inc hl
 	ld c, [hl]                 ; c = type 2 of player's pokemon
-	ld a, $10
+	ld a, EFFECTIVE
 	ld [wTypeEffectiveness], a ; initialize to neutral effectiveness
 	ld hl, TypeEffects
 .loop
@@ -5379,18 +5475,41 @@ AIGetTypeEffectiveness:
 	jr nz, .nextTypePair1
 	ld a, [hli]
 	cp b                      ; match with type 1 of pokemon
-	jr z, .done
+	jr z, .AImatchingPairFound
 	cp c                      ; or match with type 2 of pokemon
-	jr z, .done
+	jr z, .AImatchingPairFound
 	jr .nextTypePair2
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+.AImatchingPairFound
+	ld a, [hl]	;get damage multiplier
+	call RemapTypeMatchupBasedOnOptions ; potentially remap the type matchup based on our settings in the game
+	cp NOT_VERY_EFFECTIVE	;is it halved?
+	jr nz, .AInothalf	;jump down of not half
+	ld a, [wTypeEffectiveness]	;else get the effectiveness multiplier
+	srl a	;halve the multiplier
+	ld [wTypeEffectiveness], a ; store damage multiplier
+	jr .nextTypePair2	;get next pair in list
+.AInothalf
+	cp SUPER_EFFECTIVE	;is it double?
+	jr nz, .AInotDouble	;if not double either
+	ld a, [wTypeEffectiveness]	;else get the effectiveness multiplier
+	sla a	;double the multiplier
+	ld [wTypeEffectiveness], a ; store damage multiplier
+	jr .nextTypePair2	;get next pair in list
+.AInotDouble
+	cp EFFECTIVE ; because of remappable matchups we can end up with a neutral here, no modification to the type effectiveness necessary
+	jr z, .nextTypePair2
+	; if it was none of these it's zero
+	xor a	;clear a to 00
+	jr .done
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 .nextTypePair1
 	inc hl
 .nextTypePair2
 	inc hl
 	jr .loop
 .done
-	; TODO: option remap here
-	ld a, [hl]
+	;joenote - removed		ld a, [hl]
 	ld [wTypeEffectiveness], a ; store damage multiplier
 	ret
 

@@ -1,33 +1,25 @@
-OPTION1_LEFT_XPOS EQU 13
-OPTION1_RIGHT_XPOS EQU 16
-OPTION2_LEFT_XPOS EQU 13
-OPTION2_RIGHT_XPOS EQU 16
-OPTION3_LEFT_XPOS EQU 13
-OPTION3_RIGHT_XPOS EQU 16
-OPTION4_LEFT_XPOS EQU 13
-OPTION4_RIGHT_XPOS EQU 16
-OPTION5_LEFT_XPOS EQU 13
-OPTION5_RIGHT_XPOS EQU 16
-OPTION6_LEFT_XPOS EQU 13
-OPTION6_RIGHT_XPOS EQU 16
+PAGE3_OPTION1_LEFT_XPOS EQU 11
+PAGE3_OPTION1_RIGHT_XPOS EQU 14
+PAGE3_OPTION2_LEFT_XPOS EQU 11
+PAGE3_OPTION2_RIGHT_XPOS EQU 14
+PAGE3_OPTION3_LEFT_XPOS EQU 11
+PAGE3_OPTION3_RIGHT_XPOS EQU 14
+PAGE3_OPTION4_LEFT_XPOS EQU 11
+PAGE3_OPTION4_RIGHT_XPOS EQU 14
 
-OPTION1_BIT EQU BIT_BACK_SPRITES
-OPTION2_BIT EQU BIT_MENU_ICON_SPRITES
-OPTION3_BIT EQU BIT_BULBASAUR_SPRITE
-OPTION4_BIT EQU BIT_SQUIRTLE_SPRITE
-OPTION5_BIT EQU BIT_BLASTOISE_SPRITE
-OPTION6_BIT EQU BIT_PIDGEOT_SPRITE
+PAGE3_OPTION1_BIT EQU BIT_GHOST_PSYCHIC
+PAGE3_OPTION2_BIT EQU BIT_ICE_FIRE
+PAGE3_OPTION3_BIT EQU BIT_BUG_PSN
+PAGE3_OPTION4_BIT EQU BIT_PSN_BUG
 
 BattleOptionText:
 	db   "BATTLE OPTIONS"
-	next " GHST->PSY:  0x 2x"
-	next " ICE->FIRE:  1x 0.5x"
-	next " BUG->PSN:   2x 0.5x"
-	next " PSN->BUG:   2x 1x"
-	next " BLASTOISE:  RB RG"
-	next " PIDGEOT:    RB RG@"
+	next " GHSTxPSY: 0× 2×"
+	next " ICExFIRE: 1× 0.5×"
+	next " BUGxPSN:  2× 0.5×"
+	next " PSNxBUG:  2× 1×@"
 
-SpriteMenuCancelText:
+BattleOptionMenuCancelText:
 	db "NEXT     CANCEL@"
 
 DisplayBattleOptions:
@@ -39,7 +31,7 @@ DisplayBattleOptions:
 	ld de, BattleOptionText
 	call PlaceString
 	hlcoord 2, 16
-	ld de, SpriteMenuCancelText
+	ld de, BattleOptionMenuCancelText
 	call PlaceString
 	xor a
 	ld [wCurrentMenuItem], a
@@ -50,7 +42,7 @@ DisplayBattleOptions:
 	ld a, 3 ; first sprite option Y coordinate
 	ld [wTopMenuItemY], a
 	call SetCursorPositionsFromBattleOptions
-	ld a, [wOptionsPage2Option1CursorX] ; text speed cursor X coordinate
+	ld a, [wOptionsPage3Option1CursorX] ; text speed cursor X coordinate
 	ld [wTopMenuItemX], a
 	ld a, $01
 	ldh [hAutoBGTransferEnabled], a ; enable auto background transfer
@@ -81,7 +73,7 @@ DisplayBattleOptions:
 	ld a, SFX_PRESS_AB
 	call PlaySound
 	call ClearScreen
-	callfar DisplaySpriteOptions2
+	callfar DisplaySpriteOptions
 .exitMenu
 	ld a, SFX_PRESS_AB
 	call PlaySound
@@ -92,12 +84,12 @@ DisplayBattleOptions:
 	jr nz, .downPressed
 	bit BIT_D_UP, b
 	jr nz, .upPressed
-	call leftRightPressed
+	call leftRightPressedBattleOptions
 	jp .loop
 .downPressed
 	cp 16
 	ld b, -13 ;b = how far vertically the cursor will go compared to its current location
-	ld hl, wOptionsPage2Option1CursorX
+	ld hl, wOptionsPage3Option1CursorX
 	jr z, .updateMenuVariables
 	ld b, 2
 	cp 3
@@ -109,19 +101,13 @@ DisplayBattleOptions:
 	cp 7
 	inc hl
 	jr z, .updateMenuVariables
-	cp 9
-	inc hl
-	jr z, .updateMenuVariables
-	cp 11
-	inc hl
-	jr z, .updateMenuVariables
-	ld b, 3
+	ld b, 7
 	ld hl, wOptionsCancelCursorX
 	jr .updateMenuVariables
 .upPressed
 	cp 5
 	ld b, -2
-	ld hl, wOptionsPage2Option1CursorX
+	ld hl, wOptionsPage3Option1CursorX
 	jr z, .updateMenuVariables
 	cp 7
 	inc hl
@@ -129,14 +115,8 @@ DisplayBattleOptions:
 	cp 9
 	inc hl
 	jr z, .updateMenuVariables
-	cp 11
-	inc hl
-	jr z, .updateMenuVariables
-	cp 13
-	inc hl
-	jr z, .updateMenuVariables
 	cp 16
-	ld b, -3
+	ld b, -7
 	inc hl
 	jr z, .updateMenuVariables
 	ld b, 13
@@ -150,7 +130,7 @@ DisplayBattleOptions:
 	jp .loop
 
 
-leftRightPressed:
+leftRightPressedBattleOptions:
 	cp 3 ; cursor in Back Sprite section?
 	jr z, .cursorInOption1
 	cp 5 ; cursor in Menu Sprite section?
@@ -159,71 +139,47 @@ leftRightPressed:
 	jr z, .cursorInOption3
 	cp 9 ; cursor in Squirtle section?
 	jr z, .cursorInOption4
-	cp 11 ; cursor in Blastoise section?
-	jr z, .cursorInOption5
-	cp 13 ; cursor in Pidgeot section?
-	jr z, .cursorInOption6
 	cp 16 ; cursor on Cancel?
 	jr z, .cursorCancelRow
 .cursorInOption1
-	ld a, [wOptionsPage2Option1CursorX] ; battle animation cursor X coordinate
-	ld b, OPTION1_LEFT_XPOS
-	cp OPTION1_RIGHT_XPOS
+	ld a, [wOptionsPage3Option1CursorX] ; battle animation cursor X coordinate
+	ld b, PAGE3_OPTION1_LEFT_XPOS
+	cp PAGE3_OPTION1_RIGHT_XPOS
 	jr z, .loadOption1X
-	ld b, OPTION1_RIGHT_XPOS
+	ld b, PAGE3_OPTION1_RIGHT_XPOS
 .loadOption1X
 	ld a, b
-	ld [wOptionsPage2Option1CursorX], a
+	ld [wOptionsPage3Option1CursorX], a
 	jp .eraseOldMenuCursor
 .cursorInOption2
-	ld a, [wOptionsPage2Option2CursorX] ; battle animation cursor X coordinate
-	ld b, OPTION2_LEFT_XPOS
-	cp OPTION2_RIGHT_XPOS
+	ld a, [wOptionsPage3Option2CursorX] ; battle animation cursor X coordinate
+	ld b, PAGE3_OPTION2_LEFT_XPOS
+	cp PAGE3_OPTION2_RIGHT_XPOS
 	jr z, .loadOption2X
-	ld b, OPTION2_RIGHT_XPOS
+	ld b, PAGE3_OPTION2_RIGHT_XPOS
 .loadOption2X
 	ld a, b
-	ld [wOptionsPage2Option2CursorX], a
+	ld [wOptionsPage3Option2CursorX], a
 	jp .eraseOldMenuCursor
 .cursorInOption3
-	ld a, [wOptionsPage2Option3CursorX] ; battle animation cursor X coordinate
-	ld b, OPTION3_LEFT_XPOS
-	cp OPTION3_RIGHT_XPOS
+	ld a, [wOptionsPage3Option3CursorX] ; battle animation cursor X coordinate
+	ld b, PAGE3_OPTION3_LEFT_XPOS
+	cp PAGE3_OPTION3_RIGHT_XPOS
 	jr z, .loadOption3X
-	ld b, OPTION3_RIGHT_XPOS
+	ld b, PAGE3_OPTION3_RIGHT_XPOS
 .loadOption3X
 	ld a, b
-	ld [wOptionsPage2Option3CursorX], a
+	ld [wOptionsPage3Option3CursorX], a
 	jp .eraseOldMenuCursor
 .cursorInOption4
-	ld a, [wOptionsPage2Option4CursorX] ; battle animation cursor X coordinate
-	ld b, OPTION4_LEFT_XPOS
-	cp OPTION4_RIGHT_XPOS
+	ld a, [wOptionsPage3Option4CursorX] ; battle animation cursor X coordinate
+	ld b, PAGE3_OPTION4_LEFT_XPOS
+	cp PAGE3_OPTION4_RIGHT_XPOS
 	jr z, .loadOption4X
-	ld b, OPTION4_RIGHT_XPOS
+	ld b, PAGE3_OPTION4_RIGHT_XPOS
 .loadOption4X
 	ld a, b
-	ld [wOptionsPage2Option4CursorX], a
-	jp .eraseOldMenuCursor
-.cursorInOption5
-	ld a, [wOptionsPage2Option5CursorX] ; battle animation cursor X coordinate
-	ld b, OPTION5_LEFT_XPOS
-	cp OPTION5_RIGHT_XPOS
-	jr z, .loadOption5X
-	ld b, OPTION5_RIGHT_XPOS
-.loadOption5X
-	ld a, b
-	ld [wOptionsPage2Option5CursorX], a
-	jp .eraseOldMenuCursor
-.cursorInOption6
-	ld a, [wOptionsPage2Option6CursorX] ; battle animation cursor X coordinate
-	ld b, OPTION6_LEFT_XPOS
-	cp OPTION6_RIGHT_XPOS
-	jr z, .loadOption6X
-	ld b, OPTION6_RIGHT_XPOS
-.loadOption6X
-	ld a, b
-	ld [wOptionsPage2Option6CursorX], a
+	ld [wOptionsPage3Option4CursorX], a
 	jp .eraseOldMenuCursor
 .cursorCancelRow
 	ld a, [wOptionsCancelCursorX] ; battle style cursor X coordinate
@@ -240,128 +196,85 @@ leftRightPressed:
 SetBattleOptionsFromCursorPositions:
 	ld a, [wSpriteOptions2]
 	ld d, a
-	ld a, [wOptionsPage2Option1CursorX] ; battle style cursor X coordinate
-	cp OPTION1_RIGHT_XPOS 
-	jr z, .option1setRight
-.option1setLeft
-	res OPTION1_BIT, d
-	jr .checkOption2
+	ld a, [wOptionsPage3Option1CursorX] ; battle style cursor X coordinate
+	cp PAGE3_OPTION1_LEFT_XPOS 
+	jr z, .option1setLeft
 .option1setRight
-	set OPTION1_BIT, d
+	res PAGE3_OPTION1_BIT, d
+	jr .checkOption2
+.option1setLeft
+	set PAGE3_OPTION1_BIT, d
 .checkOption2
-	ld a, [wOptionsPage2Option2CursorX] ; battle style cursor X coordinate
-	cp OPTION2_RIGHT_XPOS 
+	ld a, [wOptionsPage3Option2CursorX] ; battle style cursor X coordinate
+	cp PAGE3_OPTION2_RIGHT_XPOS 
 	jr z, .option2setRight
 .option2setLeft
-	res OPTION2_BIT, d
+	res PAGE3_OPTION2_BIT, d
 	jr .checkOption3
 .option2setRight
-	set OPTION2_BIT, d
+	set PAGE3_OPTION2_BIT, d
 .checkOption3
-	ld a, [wOptionsPage2Option3CursorX] ; battle style cursor X coordinate
-	cp OPTION3_RIGHT_XPOS 
+	ld a, [wOptionsPage3Option3CursorX] ; battle style cursor X coordinate
+	cp PAGE3_OPTION3_RIGHT_XPOS 
 	jr z, .option3setRight
 .option3setLeft
-	res OPTION3_BIT, d
-	jr .storeOptions
+	res PAGE3_OPTION3_BIT, d
+	jr .checkOption4
 .option3setRight
-	set OPTION3_BIT, d
+	set PAGE3_OPTION3_BIT, d
+.checkOption4
+	ld a, [wOptionsPage3Option4CursorX] ; battle style cursor X coordinate
+	cp PAGE3_OPTION4_RIGHT_XPOS 
+	jr z, .option4setRight
+.option4setLeft
+	res PAGE3_OPTION4_BIT, d
+	jr .storeOptions
+.option4setRight
+	set PAGE3_OPTION4_BIT, d
 .storeOptions
 	ld a, d
 	ld [wSpriteOptions2], a
-	ld a, [wSpriteOptions]
-	ld d, a
-.checkOption4
-	ld a, [wOptionsPage2Option4CursorX] ; battle style cursor X coordinate
-	cp OPTION4_RIGHT_XPOS 
-	jr z, .option4setRight
-.option4setLeft
-	res OPTION4_BIT, d
-	jr .checkOption5
-.option4setRight
-	set OPTION4_BIT, d
-.checkOption5
-	ld a, [wOptionsPage2Option5CursorX] ; battle style cursor X coordinate
-	cp OPTION5_RIGHT_XPOS 
-	jr z, .option5setRight
-.option5setLeft
-	res OPTION5_BIT, d
-	jr .checkOption6
-.option5setRight
-	set OPTION5_BIT, d
-.checkOption6
-	ld a, [wOptionsPage2Option6CursorX] ; battle style cursor X coordinate
-	cp OPTION6_RIGHT_XPOS 
-	jr z, .option6setRight
-.option6setLeft
-	res OPTION6_BIT, d
-	jr .storeSpriteOptions
-.option6setRight
-	set OPTION6_BIT, d
-.storeSpriteOptions
-	ld a, d
-	ld [wSpriteOptions], a
 	ret
 
 SetCursorPositionsFromBattleOptions:
 	ld hl, wSpriteOptions2
-	ld a, 9
-	bit OPTION1_BIT, [hl]
+	ld a, PAGE3_OPTION1_RIGHT_XPOS
+	bit PAGE3_OPTION1_BIT, [hl]
 	jr z, .storeOption1CursorX
-	ld a, 12
+	ld a, PAGE3_OPTION1_LEFT_XPOS
 .storeOption1CursorX
-	ld [wOptionsPage2Option1CursorX], a ; Back Sprites Cursor X Coordinate
+	ld [wOptionsPage3Option1CursorX], a ; Back Sprites Cursor X Coordinate
 	hlcoord 0, 3
 	call .placeUnfilledRightArrow
 .getOption2
-	ld a, 9
+	ld a, PAGE3_OPTION2_LEFT_XPOS
 	ld hl, wSpriteOptions2
-	bit OPTION2_BIT, [hl]
+	bit PAGE3_OPTION2_BIT, [hl]
 	jr z, .storeOption2CursorX
-	ld a, 12
+	ld a, PAGE3_OPTION2_RIGHT_XPOS
 .storeOption2CursorX
-	ld [wOptionsPage2Option2CursorX], a ; Menu Sprites Cursor X Coordinate
+	ld [wOptionsPage3Option2CursorX], a ; Menu Sprites Cursor X Coordinate
 	hlcoord 0, 5
 	call .placeUnfilledRightArrow
 .getOption3
-	ld a, 13
+	ld a, PAGE3_OPTION3_LEFT_XPOS
 	ld hl, wSpriteOptions2
-	bit OPTION3_BIT, [hl]
+	bit PAGE3_OPTION3_BIT, [hl]
 	jr z, .storeOption3SpriteCursorX
-	ld a, 16
+	ld a, PAGE3_OPTION3_RIGHT_XPOS
 .storeOption3SpriteCursorX
-	ld [wOptionsPage2Option3CursorX], a ; Back Sprites Cursor X Coordinate
+	ld [wOptionsPage3Option3CursorX], a ; Back Sprites Cursor X Coordinate
 	hlcoord 0, 7
 	call .placeUnfilledRightArrow
 .getOption4SpriteOption
-	ld a, 13
-	ld hl, wSpriteOptions
-	bit OPTION4_BIT, [hl]
+	ld a, PAGE3_OPTION4_LEFT_XPOS
+	ld hl, wSpriteOptions2
+	bit PAGE3_OPTION4_BIT, [hl]
 	jr z, .storeOption4SpriteCursorX
-	ld a, 16
+	ld a, PAGE3_OPTION4_RIGHT_XPOS
 .storeOption4SpriteCursorX
-	ld [wOptionsPage2Option4CursorX], a ; Back Sprites Cursor X Coordinate
+	ld [wOptionsPage3Option4CursorX], a ; Back Sprites Cursor X Coordinate
 	hlcoord 0, 9
-	call .placeUnfilledRightArrow
-.getOption5SpriteOption
-	ld a, 13
-	ld hl, wSpriteOptions
-	bit OPTION5_BIT, [hl]
-	jr z, .storeOption5SpriteCursorX
-	ld a, 16
-.storeOption5SpriteCursorX
-	ld [wOptionsPage2Option5CursorX], a ; Back Sprites Cursor X Coordinate
-	hlcoord 0, 11
-	call .placeUnfilledRightArrow
-.getOption6SpriteOption
-	ld a, 13
-	ld hl, wSpriteOptions
-	bit OPTION6_BIT, [hl]
-	jr z, .storeOption6SpriteCursorX
-	ld a, 16
-.storeOption6SpriteCursorX
-	ld [wOptionsPage2Option6CursorX], a ; Back Sprites Cursor X Coordinate
-	hlcoord 0, 13
 	call .placeUnfilledRightArrow
 	; cursor in front of Cancel
 	hlcoord 0, 16

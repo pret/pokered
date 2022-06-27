@@ -797,8 +797,6 @@ wOptionsPage2Option1CursorX:: db
 wOptionsPage2Option2CursorX:: db
 wOptionsPage2Option3CursorX:: db
 wOptionsPage2Option4CursorX:: db
-wOptionsPage2Option5CursorX:: db
-wOptionsPage2Option6CursorX:: db
 ; options page 3
 wOptionsPage3Option1CursorX:: db
 wOptionsPage3Option2CursorX:: db
@@ -2421,7 +2419,7 @@ wSafariType:: db
 ; bit 0 -> Squirtle sprite version: 0 = RB, 1 = RG
 ; bit 1 -> Blastoise sprite version: 0 = RB, 1 = RG
 ; bit 2 -> Pidgeot sprite version: 0 = RB, 1 = RG
-; bit 3 -> Nidorino sprite version: 0 = RB, 1 = RG
+; bit 3 -> Bulbasaur sprite version: 0 = RB, 1 = RG
 ; bit 4 -> Golbat sprite version: 0 = Y, 1 = RB
 ; bit 5 -> Mankey sprite version: 0 = RB, 1 = RG
 ; bit 6 -> Arcanine sprite version: 0 = RB, 1 = RG

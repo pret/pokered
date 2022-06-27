@@ -207,9 +207,12 @@ AIMoveChoiceModification3:
 	pop bc
 	pop hl
 	ld a, [wTypeEffectiveness]
-	cp $10
+	cp EFFECTIVE
 	jr z, .nextMove
 	jr c, .notEffectiveMove
+	;ld a, [wEnemyMovePower]
+	;and a
+	;jr z, .nextMove ; don't encourage a non-damaging move just because it's of a super effective type
 	dec [hl] ; slightly encourage this move
 	jr .nextMove
 .notEffectiveMove ; discourages non-effective moves if better moves are available
