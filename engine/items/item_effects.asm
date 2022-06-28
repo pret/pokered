@@ -2248,6 +2248,8 @@ ItemUseItemfinder:
 	ld [wPlayerMovingDirection], a
 	ld a, SFX_ARROW_TILES
 	call PlaySoundWaitForCurrent
+	xor a
+	ld [wEmotionBubbleSpriteIndex], a
 	ld a, QUESTION_BUBBLE
   	ld [wWhichEmotionBubble], a
 	predef EmotionBubbleQuick
@@ -2258,6 +2260,8 @@ ItemUseItemfinder:
 	call PlaySoundWaitForCurrent
 	ld a, EXCLAMATION_BUBBLE
   	ld [wWhichEmotionBubble], a
+	xor a
+	ld [wEmotionBubbleSpriteIndex], a
 	predef EmotionBubble
 	jr .done
 .printText
