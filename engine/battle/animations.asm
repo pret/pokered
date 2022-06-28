@@ -1456,7 +1456,7 @@ BattleAnimWriteOAMEntry:
 	add 8
 	ld e, a
 	ld [hli], a
-	cp 40
+	cp 72 ; FIXED : this fixes shootmanyballsupwards issue with the enemy's turn not having the correct color palette
 	jr c, .asm_793d8
 	ld a, [wdef5]
 	inc a
