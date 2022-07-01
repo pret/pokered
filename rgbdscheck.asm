@@ -1,6 +1,6 @@
-DEF MAJOR EQU 0
-DEF MINOR EQU 5
-DEF PATCH EQU 2
+MAJOR EQU 0
+MINOR EQU 5
+PATCH EQU 2
 
 MACRO wrong_rgbds
 	fail "pokered requires rgbds v0.5.2 or newer."
