@@ -5,12 +5,12 @@ AnimCut:
 	ld c, $8
 .cutTreeLoop
 	push bc
-	ld hl, wOAMBuffer + $91
+	ld hl, wShadowOAM + $91
 	ld a, 1
 	ld [wCoordAdjustmentAmount], a
 	ld c, 2
 	call AdjustOAMBlockXPos2
-	ld hl, wOAMBuffer + $99
+	ld hl, wShadowOAM + $99
 	ld a, -1
 	ld [wCoordAdjustmentAmount], a
 	ld c, 2
@@ -33,7 +33,7 @@ AnimCut:
 	ld c, $8
 	call AnimCutGrass_UpdateOAMEntries
 	call AnimCutGrass_SwapOAMEntries
-	ld hl, wOAMBuffer + $90
+	ld hl, wShadowOAM + $90
 	ld a, 2
 	ld [wCoordAdjustmentAmount], a
 	ld c, 4
@@ -45,22 +45,22 @@ AnimCut:
 
 AnimCutGrass_UpdateOAMEntries:
 	push bc
-	ld hl, wOAMBuffer + $91
+	ld hl, wShadowOAM + $91
 	ld a, 1
 	ld [wCoordAdjustmentAmount], a
 	ld c, 1
 	call AdjustOAMBlockXPos2
-	ld hl, wOAMBuffer + $95
+	ld hl, wShadowOAM + $95
 	ld a, 2
 	ld [wCoordAdjustmentAmount], a
 	ld c, 1
 	call AdjustOAMBlockXPos2
-	ld hl, wOAMBuffer + $99
+	ld hl, wShadowOAM + $99
 	ld a, -2
 	ld [wCoordAdjustmentAmount], a
 	ld c, 1
 	call AdjustOAMBlockXPos2
-	ld hl, wOAMBuffer + $9d
+	ld hl, wShadowOAM + $9d
 	ld a, -1
 	ld [wCoordAdjustmentAmount], a
 	ld c, 1
@@ -75,15 +75,15 @@ AnimCutGrass_UpdateOAMEntries:
 	ret
 
 AnimCutGrass_SwapOAMEntries:
-	ld hl, wOAMBuffer + $90
+	ld hl, wShadowOAM + $90
 	ld de, wBuffer
 	ld bc, $8
 	call CopyData
-	ld hl, wOAMBuffer + $98
-	ld de, wOAMBuffer + $90
+	ld hl, wShadowOAM + $98
+	ld de, wShadowOAM + $90
 	ld bc, $8
 	call CopyData
 	ld hl, wBuffer
-	ld de, wOAMBuffer + $98
+	ld de, wShadowOAM + $98
 	ld bc, $8
 	jp CopyData

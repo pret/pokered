@@ -143,12 +143,12 @@ wSpriteDataEnd::
 SECTION "OAM Buffer", WRAM0
 
 ; buffer for OAM data. Copied to OAM by DMA
-wOAMBuffer::
-; wOAMBufferSprite00 - wOAMBufferSprite39
+wShadowOAM::
+; wShadowOAMSprite00 - wShadowOAMSprite39
 FOR n, NUM_SPRITE_OAM_STRUCTS
-wOAMBufferSprite{02d:n}:: sprite_oam_struct wOAMBufferSprite{02d:n}
+wShadowOAMSprite{02d:n}:: sprite_oam_struct wShadowOAMSprite{02d:n}
 ENDR
-wOAMBufferEnd::
+wShadowOAMEnd::
 
 
 SECTION "Tilemap", WRAM0

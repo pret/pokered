@@ -4,7 +4,7 @@
 ; c = X coordinate of upper left corner of sprite
 ; de = base address of 4 tile number and attribute pairs
 WriteOAMBlock::
-	ld h, HIGH(wOAMBuffer)
+	ld h, HIGH(wShadowOAM)
 	swap a ; multiply by 16
 	ld l, a
 	call .writeOneEntry ; upper left

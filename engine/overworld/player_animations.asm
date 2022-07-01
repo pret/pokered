@@ -205,19 +205,19 @@ LeaveMapThroughHoleAnim:
 	ld a, $ff
 	ld [wUpdateSpritesEnabled], a ; disable UpdateSprites
 	; shift upper half of player's sprite down 8 pixels and hide lower half
-	ld a, [wOAMBuffer + 0 * 4 + 2]
-	ld [wOAMBuffer + 2 * 4 + 2], a
-	ld a, [wOAMBuffer + 1 * 4 + 2]
-	ld [wOAMBuffer + 3 * 4 + 2], a
+	ld a, [wShadowOAM + 0 * 4 + 2]
+	ld [wShadowOAM + 2 * 4 + 2], a
+	ld a, [wShadowOAM + 1 * 4 + 2]
+	ld [wShadowOAM + 3 * 4 + 2], a
 	ld a, $a0
-	ld [wOAMBuffer + 0 * 4], a
-	ld [wOAMBuffer + 1 * 4], a
+	ld [wShadowOAM + 0 * 4], a
+	ld [wShadowOAM + 1 * 4], a
 	ld c, 2
 	call DelayFrames
 	; hide upper half of player's sprite
 	ld a, $a0
-	ld [wOAMBuffer + 2 * 4], a
-	ld [wOAMBuffer + 3 * 4], a
+	ld [wShadowOAM + 2 * 4], a
+	ld [wShadowOAM + 3 * 4], a
 	call GBFadeOutToWhite
 	ld a, $1
 	ld [wUpdateSpritesEnabled], a ; enable UpdateSprites
@@ -392,7 +392,7 @@ FishingAnim:
 	ld b, $0
 	ld hl, FishingRodOAM
 	add hl, bc
-	ld de, wOAMBuffer + $9c
+	ld de, wShadowOAM + $9c
 	ld bc, $4
 	call CopyData
 	ld c, 100
@@ -412,7 +412,7 @@ FishingAnim:
 .loop
 	ld hl, wSpritePlayerStateData1YPixels
 	call .ShakePlayerSprite
-	ld hl, wOAMBuffer + $9c
+	ld hl, wShadowOAM + $9c
 	call .ShakePlayerSprite
 	call Delay3
 	dec b
@@ -424,7 +424,7 @@ FishingAnim:
 	cp SPRITE_FACING_UP
 	jr nz, .skipHidingFishingRod
 	ld a, $a0
-	ld [wOAMBuffer + $9c], a
+	ld [wShadowOAM + $9c], a
 
 .skipHidingFishingRod
 	ld hl, wEmotionBubbleSpriteIndex
@@ -438,7 +438,7 @@ FishingAnim:
 	cp SPRITE_FACING_UP
 	jr nz, .skipUnhidingFishingRod
 	ld a, $44
-	ld [wOAMBuffer + $9c], a
+	ld [wShadowOAM + $9c], a
 
 .skipUnhidingFishingRod
 	ld hl, ItsABiteText

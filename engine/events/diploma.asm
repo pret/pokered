@@ -42,7 +42,7 @@ DisplayDiploma::
 
 ; Move the player 33 pixels right and set the priority bit so he appears
 ; behind the background layer.
-	ld hl, wOAMBuffer + $01
+	ld hl, wShadowOAM + $01
 	lb bc, $80, $28
 .adjustPlayerGfxLoop
 	ld a, [hl] ; X

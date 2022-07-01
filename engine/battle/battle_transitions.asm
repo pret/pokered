@@ -26,7 +26,7 @@ BattleTransition:
 	jr nz, .loop1
 
 ; Clear OAM except for the blocks used by the player and enemy trainer sprites.
-	ld hl, wOAMBuffer + $10
+	ld hl, wShadowOAM + $10
 	ld c, 9
 .loop2
 	ld a, b

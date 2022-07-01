@@ -99,7 +99,7 @@ InitCutAnimOAM:
 	ld hl, vChars1 tile $7f
 	call LoadCutGrassAnimationTilePattern
 	call WriteCutOrBoulderDustAnimationOAMBlock
-	ld hl, wOAMBuffer + $93
+	ld hl, wShadowOAM + $93
 	ld de, 4
 	ld a, $30
 	ld c, e
