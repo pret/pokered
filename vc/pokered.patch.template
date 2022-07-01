@@ -358,7 +358,7 @@ ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuf
 ConditionValueB = {dws_ ==            ==              ==              ==              ==          } 
 ConditionValueC = {dws_ "D"           "R"             "E"             "A"             DREAM_EATER }          
                          
-[FPA 008 End@Stop_reducing_move_anim_flashing_Dream_Eater]       
+[FPA 008 End@Stop_reducing_move_anim_flashing_Blizzard]       
 Mode = 3                 
 Type = 1                 
 Address = {HEX @}

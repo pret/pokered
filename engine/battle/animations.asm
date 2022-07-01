@@ -256,7 +256,7 @@ PlayAnimation:
 	vc_hook_red Stop_reducing_move_anim_flashing_Mega_Punch
 	vc_hook_blue Stop_reducing_move_anim_flashing_Mega_Punch_Explosion
 	pop af
-	vc_hook_red Stop_reducing_move_anim_flashing_Dream_Eater
+	vc_hook_red Stop_reducing_move_anim_flashing_Blizzard
 	ldh [rOBP0], a
 .nextAnimationCommand
 	vc_hook_red Stop_reducing_move_anim_flashing_Hyper_Beam
