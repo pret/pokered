@@ -23,6 +23,37 @@ DEF BASE_TMHM        rb (NUM_TM_HM + 7) / 8
                      rb_skip
 DEF BASE_DATA_SIZE EQU _RS
 
+; party_struct members (see macros/wram.asm)
+rsreset
+DEF MON_SPECIES    rb
+DEF MON_HP         rw
+DEF MON_BOX_LEVEL  rb
+DEF MON_STATUS     rb
+DEF MON_TYPE       rw
+rsset MON_TYPE
+DEF MON_TYPE1      rb
+DEF MON_TYPE2      rb
+DEF MON_CATCH_RATE rb
+DEF MON_MOVES      rb NUM_MOVES
+DEF MON_OTID       rw
+DEF MON_EXP        rb 3
+DEF MON_HP_EXP     rw
+DEF MON_ATK_EXP    rw
+DEF MON_DEF_EXP    rw
+DEF MON_SPD_EXP    rw
+DEF MON_SPC_EXP    rw
+DEF MON_DVS        rw
+DEF MON_PP         rb NUM_MOVES
+DEF BOXMON_STRUCT_LENGTH EQU _RS
+DEF MON_LEVEL      rb
+DEF MON_STATS      rw NUM_STATS
+rsset MON_STATS
+DEF MON_MAXHP      rw
+DEF MON_ATK        rw
+DEF MON_DEF        rw
+DEF MON_SPD        rw
+DEF MON_SPC        rw
+DEF PARTYMON_STRUCT_LENGTH EQU _RS
 
 DEF PARTY_LENGTH EQU 6
 
