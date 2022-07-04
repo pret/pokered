@@ -14,6 +14,10 @@ DEF SERIAL_NO_DATA_BYTE  EQU $FE
 ; signals the end of one part of a patch list (there are two parts) for player/enemy party data
 DEF SERIAL_PATCH_LIST_PART_TERMINATOR EQU $FF
 
+DEF SERIAL_PREAMBLE_LENGTH    EQU 6
+DEF SERIAL_RN_PREAMBLE_LENGTH EQU 7
+DEF SERIAL_RNS_LENGTH         EQU 10
+
 DEF LINK_STATE_NONE          EQU $00 ; not using link
 DEF LINK_STATE_IN_CABLE_CLUB EQU $01 ; in a cable club room (Colosseum or Trade Centre)
 DEF LINK_STATE_START_TRADE   EQU $02 ; pre-trade selection screen initialisation
