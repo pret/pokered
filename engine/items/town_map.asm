@@ -47,7 +47,7 @@ DisplayTownMap:
 	call TownMapCoordsToOAMCoords
 	ld a, $4
 	ld [wOAMBaseTile], a
-	ld hl, wShadowOAM + $10
+	ld hl, wShadowOAMSprite04
 	call WriteTownMapSpriteOAM ; town map cursor sprite
 	pop hl
 	ld de, wcd6d
@@ -60,7 +60,7 @@ DisplayTownMap:
 	hlcoord 1, 0
 	ld de, wcd6d
 	call PlaceString
-	ld hl, wShadowOAM + $10
+	ld hl, wShadowOAMSprite04
 	ld de, wTileMapBackup + 16
 	ld bc, $10
 	call CopyData
@@ -439,9 +439,9 @@ TownMapCoordsToOAMCoords:
 WritePlayerOrBirdSpriteOAM:
 	ld a, [wOAMBaseTile]
 	and a
-	ld hl, wShadowOAM + $90 ; for player sprite
+	ld hl, wShadowOAMSprite36 ; for player sprite
 	jr z, WriteTownMapSpriteOAM
-	ld hl, wShadowOAM + $80 ; for bird sprite
+	ld hl, wShadowOAMSprite32 ; for bird sprite
 
 WriteTownMapSpriteOAM:
 	push hl

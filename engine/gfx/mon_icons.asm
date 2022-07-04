@@ -51,7 +51,7 @@ GetAnimationSpeed:
 	jr .incTimer
 .animateSprite
 	push bc
-	ld hl, wShadowOAM + $02 ; OAM tile id
+	ld hl, wShadowOAMSprite00TileID
 	ld bc, $10
 	ld a, [wCurrentMenuItem]
 	call AddNTimes

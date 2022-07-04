@@ -131,7 +131,7 @@ AnimateShootingStar:
 	push af
 
 ; shift the existing OAM entries down to make room for the next wave
-	ld hl, wShadowOAM + $10
+	ld hl, wShadowOAMSprite04
 	ld de, wShadowOAM
 	ld bc, $50
 	call CopyData

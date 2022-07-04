@@ -33,7 +33,7 @@ AnimCut:
 	ld c, $8
 	call AnimCutGrass_UpdateOAMEntries
 	call AnimCutGrass_SwapOAMEntries
-	ld hl, wShadowOAM + $90
+	ld hl, wShadowOAMSprite36
 	ld a, 2
 	ld [wCoordAdjustmentAmount], a
 	ld c, 4
@@ -75,12 +75,12 @@ AnimCutGrass_UpdateOAMEntries:
 	ret
 
 AnimCutGrass_SwapOAMEntries:
-	ld hl, wShadowOAM + $90
+	ld hl, wShadowOAMSprite36
 	ld de, wBuffer
 	ld bc, $8
 	call CopyData
 	ld hl, wShadowOAM + $98
-	ld de, wShadowOAM + $90
+	ld de, wShadowOAMSprite36
 	ld bc, $8
 	call CopyData
 	ld hl, wBuffer
