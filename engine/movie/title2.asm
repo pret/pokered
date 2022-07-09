@@ -115,6 +115,6 @@ GetTitleBallY:
 	pop de
 	and a
 	ret z
-	ld [wShadowOAM + $28], a
+	ld [wShadowOAMSprite10], a
 	inc e
 	ret

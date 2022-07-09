@@ -16,7 +16,7 @@ LoadShootingStarGraphics:
 	lb bc, BANK(FallingStar), (FallingStarEnd - FallingStar) / $10
 	call CopyVideoData
 	ld hl, GameFreakLogoOAMData
-	ld de, wShadowOAM + $60
+	ld de, wShadowOAMSprite24
 	ld bc, GameFreakLogoOAMDataEnd - GameFreakLogoOAMData
 	call CopyData
 	ld hl, GameFreakShootingStarOAMData
@@ -106,7 +106,7 @@ AnimateShootingStar:
 	ld d, a
 	push bc
 	push hl
-	ld hl, wShadowOAM + $50
+	ld hl, wShadowOAMSprite20
 	ld c, 4
 .smallStarsInnerLoop ; introduce new wave of 4 small stars OAM entries
 	ld a, [de]
@@ -186,7 +186,7 @@ SmallStarsEmptyWave:
 MoveDownSmallStars:
 	ld b, 8
 .loop
-	ld hl, wShadowOAM + $5c
+	ld hl, wShadowOAMSprite23
 	ld a, [wMoveDownSmallStarsOAMCount]
 	ld de, -4
 	ld c, a

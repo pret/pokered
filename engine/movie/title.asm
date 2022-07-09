@@ -93,7 +93,7 @@ DisplayTitleScreen:
 	call DrawPlayerCharacter
 
 ; put a pokeball in the player's hand
-	ld hl, wShadowOAM + $28
+	ld hl, wShadowOAMSprite10
 	ld a, $74
 	ld [hl], a
 
