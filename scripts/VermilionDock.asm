@@ -124,7 +124,7 @@ VermilionDock_1db9b:
 VermilionDock_AnimSmokePuffDriftRight:
 	push bc
 	push de
-	ld hl, wOAMBuffer + 4 * $4 + 1 ; x coord
+	ld hl, wShadowOAMSprite04XCoord
 	ld a, [wSSAnneSmokeDriftAmount]
 	swap a
 	ld c, a

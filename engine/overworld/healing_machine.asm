@@ -12,7 +12,7 @@ AnimateHealingMachine:
 	push af
 	ld a, $e0
 	ldh [rOBP1], a
-	ld hl, wOAMBuffer + $84
+	ld hl, wShadowOAMSprite33
 	ld de, PokeCenterOAMData
 	call CopyHealingMachineOAM
 	ld a, 4

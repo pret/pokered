@@ -43,7 +43,7 @@ GetMoveBoulderDustFunctionPointer:
 	ld h, [hl]
 	ld l, a
 	push hl
-	ld hl, wOAMBuffer + $90
+	ld hl, wShadowOAMSprite36
 	ld d, $0
 	add hl, de
 	ld e, l

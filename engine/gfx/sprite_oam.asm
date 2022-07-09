@@ -1,6 +1,6 @@
 PrepareOAMData::
 ; Determine OAM data for currently visible
-; sprites and write it to wOAMBuffer.
+; sprites and write it to wShadowOAM.
 
 	ld a, [wUpdateSpritesEnabled]
 	dec a
@@ -79,7 +79,7 @@ PrepareOAMData::
 
 	ldh a, [hOAMBufferOffset]
 	ld e, a
-	ld d, HIGH(wOAMBuffer)
+	ld d, HIGH(wShadowOAM)
 
 .tileLoop
 	ldh a, [hSpriteScreenY]   ; temp for sprite Y position
@@ -147,7 +147,7 @@ PrepareOAMData::
 	; Clear unused OAM.
 	ldh a, [hOAMBufferOffset]
 	ld l, a
-	ld h, HIGH(wOAMBuffer)
+	ld h, HIGH(wShadowOAM)
 	ld de, $4
 	ld b, $a0
 	ld a, [wd736]

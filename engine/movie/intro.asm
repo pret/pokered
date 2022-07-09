@@ -158,7 +158,7 @@ AnimateIntroNidorino:
 	jr AnimateIntroNidorino
 
 UpdateIntroNidorinoOAM:
-	ld hl, wOAMBuffer
+	ld hl, wShadowOAM
 	ld a, [wIntroNidorinoBaseTile]
 	ld d, a
 .loop
@@ -177,7 +177,7 @@ UpdateIntroNidorinoOAM:
 	ret
 
 InitIntroNidorinoOAM:
-	ld hl, wOAMBuffer
+	ld hl, wShadowOAM
 	ld d, 0
 .loop
 	push bc

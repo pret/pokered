@@ -147,7 +147,7 @@ DrawFrameBlock:
 	jr z, .resetFrameBlockDestAddr
 	call AnimationCleanOAM
 .resetFrameBlockDestAddr
-	ld hl, wOAMBuffer ; OAM buffer
+	ld hl, wShadowOAM
 	ld a, l
 	ld [wFBDestAddr + 1], a
 	ld a, h
@@ -583,7 +583,7 @@ PlaySubanimation:
 	call GetMoveSound
 	call PlaySound
 .skipPlayingSound
-	ld hl, wOAMBuffer ; base address of OAM buffer
+	ld hl, wShadowOAM
 	ld a, l
 	ld [wFBDestAddr + 1], a
 	ld a, h
@@ -855,7 +855,7 @@ TradeShakePokeball:
 ; if it's the end of the animation, make the ball jump up
 	ld de, BallMoveDistances1
 .loop
-	ld hl, wOAMBuffer ; OAM buffer
+	ld hl, wShadowOAM
 	ld bc, 4
 .innerLoop
 	ld a, [de]
@@ -885,7 +885,7 @@ BallMoveDistances1:
 TradeJumpPokeball:
 	ld de, BallMoveDistances2
 .loop
-	ld hl, wOAMBuffer ; OAM buffer
+	ld hl, wShadowOAM
 	ld bc, 4
 .innerLoop
 	ld a, [de]
@@ -925,8 +925,8 @@ BallMoveDistances2:
 ; this function copies the current musical note graphic
 ; so that there are two musical notes flying towards the defending pokemon
 DoGrowlSpecialEffects:
-	ld hl, wOAMBuffer ; OAM buffer
-	ld de, wOAMBuffer + $10
+	ld hl, wShadowOAM
+	ld de, wShadowOAMSprite04
 	ld bc, $10
 	call CopyData ; copy the musical note graphic
 	ld a, [wSubAnimCounter]
@@ -1136,7 +1136,7 @@ AnimationWaterDropletsEverywhere:
 	ret
 
 _AnimationWaterDroplets:
-	ld hl, wOAMBuffer
+	ld hl, wShadowOAM
 .loop
 	ld a, [wBaseCoordY]
 	ld [hli], a ; Y
@@ -1264,7 +1264,7 @@ ShakeEnemyHUD_WritePlayerMonPicOAM:
 	ld [wBaseCoordX], a
 	ld a, $30
 	ld [wBaseCoordY], a
-	ld hl, wOAMBuffer
+	ld hl, wShadowOAM
 	ld d, 0
 	ld c, 7
 .loop
@@ -1498,7 +1498,7 @@ AnimationSpiralBallsInward:
 .loop
 	push hl
 	ld c, 3
-	ld de, wOAMBuffer
+	ld de, wShadowOAM
 .innerLoop
 	ld a, [hl]
 	cp $ff
@@ -1637,7 +1637,7 @@ _AnimationShootBallsUpward:
 	call LoadAnimationTileset
 	pop bc
 	ld d, $7a ; ball tile
-	ld hl, wOAMBuffer
+	ld hl, wShadowOAM
 	push bc
 	ld a, [wBaseCoordY]
 	ld e, a
@@ -1651,7 +1651,7 @@ _AnimationShootBallsUpward:
 	ld [wNumShootingBalls], a
 .loop
 	push bc
-	ld hl, wOAMBuffer
+	ld hl, wShadowOAM
 .innerLoop
 	ld a, [wBaseCoordY]
 	add 8
@@ -2080,7 +2080,7 @@ InitMultipleObjectsOAM:
 	xor a
 	ld e, a
 	ld [wBaseCoordX], a
-	ld hl, wOAMBuffer
+	ld hl, wShadowOAM
 .loop
 	call BattleAnimWriteOAMEntry
 	dec c
@@ -2336,7 +2336,7 @@ AnimationFallingObjects:
 	call InitMultipleObjectsOAM
 	call FallingObjects_InitXCoords
 	call FallingObjects_InitMovementData
-	ld hl, wOAMBuffer
+	ld hl, wShadowOAM
 	ld [hl], 0
 .loop
 	ld hl, wFallingObjectsMovementData
@@ -2363,7 +2363,7 @@ AnimationFallingObjects:
 	dec c
 	jr nz, .innerLoop
 	call Delay3
-	ld hl, wOAMBuffer
+	ld hl, wShadowOAM
 	ld a, [hl] ; Y
 	cp 104 ; has the top falling object reached 104 yet?
 	jr nz, .loop ; keep moving the falling objects down until it does
@@ -2372,7 +2372,7 @@ AnimationFallingObjects:
 FallingObjects_UpdateOAMEntry:
 ; Increases Y by 2 pixels and adjusts X and X flip based on the falling object's
 ; movement byte.
-	ld hl, wOAMBuffer
+	ld hl, wShadowOAM
 	add hl, de
 	ld a, [hl]
 	inc a
@@ -2433,7 +2433,7 @@ FallingObjects_UpdateMovementByte:
 	ret
 
 FallingObjects_InitXCoords:
-	ld hl, wOAMBuffer + $01
+	ld hl, wShadowOAMSprite00XCoord
 	ld de, FallingObjects_InitialXCoords
 	ld a, [wNumFallingObjects]
 	ld c, a
