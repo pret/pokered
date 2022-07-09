@@ -757,7 +757,7 @@ SlotMachine_UpdateBallTiles:
 SlotMachine_AnimWheel1:
 	ld bc, SlotMachineWheel1
 	ld de, wSlotMachineWheel1Offset
-	ld hl, wShadowOAM
+	ld hl, wShadowOAMSprite00
 	ld a, $30
 	ld [wBaseCoordX], a
 	jr SlotMachine_AnimWheel

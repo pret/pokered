@@ -33,7 +33,7 @@ AnimCut:
 	ld c, $8
 	call AnimCutGrass_UpdateOAMEntries
 	call AnimCutGrass_SwapOAMEntries
-	ld hl, wShadowOAMSprite36
+	ld hl, wShadowOAMSprite36YCoord
 	ld a, 2
 	ld [wCoordAdjustmentAmount], a
 	ld c, 4
