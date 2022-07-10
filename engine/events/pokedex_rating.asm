@@ -56,83 +56,83 @@ PokedexRatingText_441cc:
 	text_end
 
 DexRatingsTable:
-	dbw 10, PokedexRatingText_44201
-	dbw 20, PokedexRatingText_44206
-	dbw 30, PokedexRatingText_4420b
-	dbw 40, PokedexRatingText_44210
-	dbw 50, PokedexRatingText_44215
-	dbw 60, PokedexRatingText_4421a
-	dbw 70, PokedexRatingText_4421f
-	dbw 80, PokedexRatingText_44224
-	dbw 90, PokedexRatingText_44229
-	dbw 100, PokedexRatingText_4422e
-	dbw 110, PokedexRatingText_44233
-	dbw 120, PokedexRatingText_44238
-	dbw 130, PokedexRatingText_4423d
-	dbw 140, PokedexRatingText_44242
-	dbw 150, PokedexRatingText_44247
-	dbw NUM_POKEMON + 1, PokedexRatingText_4424c
+	dbw 10, PokedexRatingText01
+	dbw 20, PokedexRatingText02
+	dbw 30, PokedexRatingText03
+	dbw 40, PokedexRatingText04
+	dbw 50, PokedexRatingText05
+	dbw 60, PokedexRatingText06
+	dbw 70, PokedexRatingText07
+	dbw 80, PokedexRatingText08
+	dbw 90, PokedexRatingText09
+	dbw 100, PokedexRatingText10
+	dbw 110, PokedexRatingText11
+	dbw 120, PokedexRatingText12
+	dbw 130, PokedexRatingText13
+	dbw 140, PokedexRatingText14
+	dbw 150, PokedexRatingText15
+	dbw NUM_POKEMON + 1, PokedexRatingText16
 
-PokedexRatingText_44201:
-	text_far _OaksLabText_44201
+PokedexRatingText01:
+	text_far _PokedexRatingText01
 	text_end
 
-PokedexRatingText_44206:
-	text_far _OaksLabText_44206
+PokedexRatingText02:
+	text_far _PokedexRatingText02
 	text_end
 
-PokedexRatingText_4420b:
-	text_far _OaksLabText_4420b
+PokedexRatingText03:
+	text_far _PokedexRatingText03
 	text_end
 
-PokedexRatingText_44210:
-	text_far _OaksLabText_44210
+PokedexRatingText04:
+	text_far _PokedexRatingText04
 	text_end
 
-PokedexRatingText_44215:
-	text_far _OaksLabText_44215
+PokedexRatingText05:
+	text_far _PokedexRatingText05
 	text_end
 
-PokedexRatingText_4421a:
-	text_far _OaksLabText_4421a
+PokedexRatingText06:
+	text_far _PokedexRatingText06
 	text_end
 
-PokedexRatingText_4421f:
-	text_far _OaksLabText_4421f
+PokedexRatingText07:
+	text_far _PokedexRatingText07
 	text_end
 
-PokedexRatingText_44224:
-	text_far _OaksLabText_44224
+PokedexRatingText08:
+	text_far _PokedexRatingText08
 	text_end
 
-PokedexRatingText_44229:
-	text_far _OaksLabText_44229
+PokedexRatingText09:
+	text_far _PokedexRatingText09
 	text_end
 
-PokedexRatingText_4422e:
-	text_far _OaksLabText_4422e
+PokedexRatingText10:
+	text_far _PokedexRatingText10
 	text_end
 
-PokedexRatingText_44233:
-	text_far _OaksLabText_44233
+PokedexRatingText11:
+	text_far _PokedexRatingText11
 	text_end
 
-PokedexRatingText_44238:
-	text_far _OaksLabText_44238
+PokedexRatingText12:
+	text_far _PokedexRatingText12
 	text_end
 
-PokedexRatingText_4423d:
-	text_far _OaksLabText_4423d
+PokedexRatingText13:
+	text_far _PokedexRatingText13
 	text_end
 
-PokedexRatingText_44242:
-	text_far _OaksLabText_44242
+PokedexRatingText14:
+	text_far _PokedexRatingText14
 	text_end
 
-PokedexRatingText_44247:
-	text_far _OaksLabText_44247
+PokedexRatingText15:
+	text_far _PokedexRatingText15
 	text_end
 
-PokedexRatingText_4424c:
-	text_far _OaksLabText_4424c
+PokedexRatingText16:
+	text_far _PokedexRatingText16
 	text_end
