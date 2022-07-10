@@ -26,7 +26,7 @@ DisplayDexRating:
 	CheckAndResetEventA EVENT_HALL_OF_FAME_DEX_RATING
 	jr nz, .hallOfFame
 	push hl
-	ld hl, PokedexRatingText_441cc
+	ld hl, DexCompletionText
 	call PrintText
 	pop hl
 	call PrintText
@@ -51,88 +51,88 @@ DisplayDexRating:
 	ld [de], a
 	ret
 
-PokedexRatingText_441cc:
-	text_far _OaksLabText_441cc
+DexCompletionText:
+	text_far _DexCompletionText
 	text_end
 
 DexRatingsTable:
-	dbw 10, PokedexRatingText01
-	dbw 20, PokedexRatingText02
-	dbw 30, PokedexRatingText03
-	dbw 40, PokedexRatingText04
-	dbw 50, PokedexRatingText05
-	dbw 60, PokedexRatingText06
-	dbw 70, PokedexRatingText07
-	dbw 80, PokedexRatingText08
-	dbw 90, PokedexRatingText09
-	dbw 100, PokedexRatingText10
-	dbw 110, PokedexRatingText11
-	dbw 120, PokedexRatingText12
-	dbw 130, PokedexRatingText13
-	dbw 140, PokedexRatingText14
-	dbw 150, PokedexRatingText15
-	dbw NUM_POKEMON + 1, PokedexRatingText16
+	dbw 10, DexRatingText_Own0To9
+	dbw 20, DexRatingText_Own10To19
+	dbw 30, DexRatingText_Own20To29
+	dbw 40, DexRatingText_Own30To39
+	dbw 50, DexRatingText_Own40To49
+	dbw 60, DexRatingText_Own50To59
+	dbw 70, DexRatingText_Own60To69
+	dbw 80, DexRatingText_Own70To79
+	dbw 90, DexRatingText_Own80To89
+	dbw 100, DexRatingText_Own90To99
+	dbw 110, DexRatingText_Own100To109
+	dbw 120, DexRatingText_Own110To119
+	dbw 130, DexRatingText_Own120To129
+	dbw 140, DexRatingText_Own130To139
+	dbw 150, DexRatingText_Own140To149
+	dbw NUM_POKEMON + 1, DexRatingText_Own150To151
 
-PokedexRatingText01:
-	text_far _PokedexRatingText01
+DexRatingText_Own0To9:
+	text_far _DexRatingText_Own0To9
 	text_end
 
-PokedexRatingText02:
-	text_far _PokedexRatingText02
+DexRatingText_Own10To19:
+	text_far _DexRatingText_Own10To19
 	text_end
 
-PokedexRatingText03:
-	text_far _PokedexRatingText03
+DexRatingText_Own20To29:
+	text_far _DexRatingText_Own20To29
 	text_end
 
-PokedexRatingText04:
-	text_far _PokedexRatingText04
+DexRatingText_Own30To39:
+	text_far _DexRatingText_Own30To39
 	text_end
 
-PokedexRatingText05:
-	text_far _PokedexRatingText05
+DexRatingText_Own40To49:
+	text_far _DexRatingText_Own40To49
 	text_end
 
-PokedexRatingText06:
-	text_far _PokedexRatingText06
+DexRatingText_Own50To59:
+	text_far _DexRatingText_Own50To59
 	text_end
 
-PokedexRatingText07:
-	text_far _PokedexRatingText07
+DexRatingText_Own60To69:
+	text_far _DexRatingText_Own60To69
 	text_end
 
-PokedexRatingText08:
-	text_far _PokedexRatingText08
+DexRatingText_Own70To79:
+	text_far _DexRatingText_Own70To79
 	text_end
 
-PokedexRatingText09:
-	text_far _PokedexRatingText09
+DexRatingText_Own80To89:
+	text_far _DexRatingText_Own80To89
 	text_end
 
-PokedexRatingText10:
-	text_far _PokedexRatingText10
+DexRatingText_Own90To99:
+	text_far _DexRatingText_Own90To99
 	text_end
 
-PokedexRatingText11:
-	text_far _PokedexRatingText11
+DexRatingText_Own100To109:
+	text_far _DexRatingText_Own100To109
 	text_end
 
-PokedexRatingText12:
-	text_far _PokedexRatingText12
+DexRatingText_Own110To119:
+	text_far _DexRatingText_Own110To119
 	text_end
 
-PokedexRatingText13:
-	text_far _PokedexRatingText13
+DexRatingText_Own120To129:
+	text_far _DexRatingText_Own120To129
 	text_end
 
-PokedexRatingText14:
-	text_far _PokedexRatingText14
+DexRatingText_Own130To139:
+	text_far _DexRatingText_Own130To139
 	text_end
 
-PokedexRatingText15:
-	text_far _PokedexRatingText15
+DexRatingText_Own140To149:
+	text_far _DexRatingText_Own140To149
 	text_end
 
-PokedexRatingText16:
-	text_far _PokedexRatingText16
+DexRatingText_Own150To151:
+	text_far _DexRatingText_Own150To151
 	text_end
