@@ -2,8 +2,7 @@ Music_UnusedSong_Ch1::
 	tempo 144
 	volume 7, 7
 	vibrato 5, 1, 6
-
-Music_UnusedSong_branch_a91b::
+.mainloop:
 	note_type 12, 1, 0
 	octave 6
 	note E_, 1
@@ -178,17 +177,16 @@ Music_UnusedSong_branch_a91b::
 	rest 6
 	note B_, 2
 	rest 6
-	sound_loop 0, Music_UnusedSong_branch_a91b
-	sound_ret
+	sound_loop 0, .mainloop
 
+	sound_ret ; unused
 
 Music_UnusedSong_Ch2::
 	tempo 144
 	volume 7, 7
 	toggle_perfect_pitch
 	vibrato 6, 1, 5
-
-Music_UnusedSong_branch_a9d8::
+.mainloop:
 	note_type 12, 1, 0
 	octave 6
 	note E_, 1
@@ -334,5 +332,6 @@ Music_UnusedSong_branch_a9d8::
 	rest 6
 	note D#, 2
 	rest 6
-	sound_loop 0, Music_UnusedSong_branch_a9d8
-	sound_ret
+	sound_loop 0, .mainloop
+
+	sound_ret ; unused

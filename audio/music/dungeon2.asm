@@ -4,8 +4,8 @@ Music_Dungeon2_Ch1::
 	duty_cycle 3
 	toggle_perfect_pitch
 	vibrato 10, 1, 4
-
-Music_Dungeon2_branch_7e892::
+.mainloop:
+.loop1:
 	note_type 12, 11, 2
 	octave 4
 	note E_, 4
@@ -51,7 +51,7 @@ Music_Dungeon2_branch_7e892::
 	note G_, 2
 	note A_, 4
 	note F#, 2
-	sound_loop 2, Music_Dungeon2_branch_7e892
+	sound_loop 2, .loop1
 	note_type 12, 1, -7
 	octave 3
 	note E_, 16
@@ -67,13 +67,12 @@ Music_Dungeon2_branch_7e892::
 	rest 16
 	rest 16
 	rest 16
-	sound_loop 0, Music_Dungeon2_branch_7e892
-
+	sound_loop 0, .mainloop
 
 Music_Dungeon2_Ch2::
 	vibrato 11, 1, 5
-
-Music_Dungeon2_branch_7e8db::
+.mainloop:
+.loop1:
 	duty_cycle 3
 	note_type 12, 12, 2
 	octave 3
@@ -110,7 +109,7 @@ Music_Dungeon2_branch_7e8db::
 	note G_, 4
 	note G_, 4
 	note F#, 4
-	sound_loop 2, Music_Dungeon2_branch_7e8db
+	sound_loop 2, .loop1
 	octave 3
 	note E_, 2
 	note G_, 2
@@ -159,16 +158,15 @@ Music_Dungeon2_branch_7e8db::
 	note D_, 16
 	note C_, 16
 	note D_, 16
-	sound_loop 0, Music_Dungeon2_branch_7e8db
-
+	sound_loop 0, .mainloop
 
 Music_Dungeon2_Ch3::
 	note_type 12, 1, 3
 	vibrato 8, 2, 6
-
-Music_Dungeon2_branch_7e940::
-	sound_call Music_Dungeon2_branch_7e9d1
-	sound_loop 16, Music_Dungeon2_branch_7e940
+.mainloop:
+.loop1:
+	sound_call .sub2
+	sound_loop 16, .loop1
 	note E_, 4
 	rest 4
 	rest 4
@@ -186,8 +184,7 @@ Music_Dungeon2_branch_7e940::
 	rest 4
 	rest 4
 	note A#, 4
-
-Music_Dungeon2_branch_7e958::
+.loop2:
 	octave 5
 	note E_, 2
 	rest 2
@@ -223,7 +220,7 @@ Music_Dungeon2_branch_7e958::
 	rest 2
 	note D#, 2
 	rest 2
-	sound_loop 3, Music_Dungeon2_branch_7e958
+	sound_loop 3, .loop2
 	octave 4
 	note E_, 4
 	note B_, 4
@@ -259,15 +256,17 @@ Music_Dungeon2_branch_7e958::
 	rest 16
 	rest 16
 	rest 16
-	sound_call Music_Dungeon2_branch_7e9d1
-	sound_call Music_Dungeon2_branch_7e9d1
-	sound_call Music_Dungeon2_branch_7e9d1
-	sound_call Music_Dungeon2_branch_7e9d1
-	sound_call Music_Dungeon2_branch_7e9d1
-	sound_call Music_Dungeon2_branch_7e9d1
-	sound_call Music_Dungeon2_branch_7e9d1
-	sound_call Music_Dungeon2_branch_7e9d1
-	sound_loop 0, Music_Dungeon2_branch_7e940
+	sound_call .sub2
+	sound_call .sub2
+	sound_call .sub2
+	sound_call .sub2
+	sound_call .sub2
+	sound_call .sub2
+	sound_call .sub2
+	sound_call .sub2
+	sound_loop 0, .mainloop
+
+.sub1: ; unreferenced
 	octave 2
 	note G_, 2
 	note A#, 4
@@ -288,7 +287,7 @@ Music_Dungeon2_branch_7e958::
 	rest 2
 	sound_ret
 
-Music_Dungeon2_branch_7e9d1::
+.sub2:
 	octave 4
 	note E_, 2
 	rest 4
@@ -301,11 +300,9 @@ Music_Dungeon2_branch_7e9d1::
 	note F#, 4
 	sound_ret
 
-
 Music_Dungeon2_Ch4::
 	drum_speed 12
-
-Music_Dungeon2_branch_7e9dd::
+.mainloop:
 	drum_note 12, 4
 	drum_note 13, 4
 	drum_note 12, 4
@@ -314,4 +311,4 @@ Music_Dungeon2_branch_7e9dd::
 	drum_note 13, 4
 	drum_note 11, 4
 	drum_note 9, 4
-	sound_loop 0, Music_Dungeon2_branch_7e9dd
+	sound_loop 0, .mainloop

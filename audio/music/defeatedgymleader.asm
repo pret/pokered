@@ -19,8 +19,7 @@ Music_DefeatedGymLeader_Ch1::
 	note A_, 8
 	note_type 12, 10, 7
 	note A_, 8
-
-Music_DefeatedGymLeader_branch_23ccc::
+.mainloop:
 	note_type 12, 11, 2
 	octave 3
 	note A_, 2
@@ -159,8 +158,7 @@ Music_DefeatedGymLeader_branch_23ccc::
 	note_type 12, 10, 7
 	note G_, 8
 	note E_, 8
-	sound_loop 0, Music_DefeatedGymLeader_branch_23ccc
-
+	sound_loop 0, .mainloop
 
 Music_DefeatedGymLeader_Ch2::
 	duty_cycle 2
@@ -180,8 +178,7 @@ Music_DefeatedGymLeader_Ch2::
 	note F#, 8
 	note_type 12, 11, 7
 	note F#, 8
-
-Music_DefeatedGymLeader_branch_23d84::
+.mainloop:
 	note_type 12, 12, 2
 	octave 4
 	note D_, 2
@@ -349,8 +346,7 @@ Music_DefeatedGymLeader_branch_23d84::
 	note B_, 1
 	octave 4
 	note C#, 1
-	sound_loop 0, Music_DefeatedGymLeader_branch_23d84
-
+	sound_loop 0, .mainloop
 
 Music_DefeatedGymLeader_Ch3::
 	note_type 12, 1, 0
@@ -369,8 +365,7 @@ Music_DefeatedGymLeader_Ch3::
 	octave 5
 	note D_, 1
 	note F#, 8
-
-Music_DefeatedGymLeader_branch_23e65::
+.mainloop:
 	octave 4
 	note F#, 1
 	rest 1
@@ -604,4 +599,4 @@ Music_DefeatedGymLeader_branch_23e65::
 	note A_, 2
 	note G_, 2
 	note E_, 2
-	sound_loop 0, Music_DefeatedGymLeader_branch_23e65
+	sound_loop 0, .mainloop

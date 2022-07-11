@@ -4,11 +4,11 @@ Music_RivalAlternateStart::
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
 	ld hl, wChannelCommandPointers
-	ld de, Music_MeetRival_branch_b1a2
+	ld de, Music_MeetRival_Ch1_AlternateStart
 	call Audio1_OverwriteChannelPointer
-	ld de, Music_MeetRival_branch_b21d
+	ld de, Music_MeetRival_Ch2_AlternateStart
 	call Audio1_OverwriteChannelPointer
-	ld de, Music_MeetRival_branch_b2b5
+	ld de, Music_MeetRival_Ch3_AlternateStart
 
 Audio1_OverwriteChannelPointer:
 	ld a, e
@@ -23,14 +23,14 @@ Music_RivalAlternateTempo::
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
 	ld hl, wChannelCommandPointers
-	ld de, Music_MeetRival_branch_b119
+	ld de, Music_MeetRival_Ch1_AlternateTempo
 	jp Audio1_OverwriteChannelPointer
 
 ; applies both the alternate start and alternate tempo
 Music_RivalAlternateStartAndTempo::
 	call Music_RivalAlternateStart
 	ld hl, wChannelCommandPointers
-	ld de, Music_MeetRival_branch_b19b
+	ld de, Music_MeetRival_Ch1_AlternateStartAndTempo
 	jp Audio1_OverwriteChannelPointer
 
 ; an alternate tempo for Cities1 which is used for the Hall of Fame room
@@ -46,5 +46,5 @@ Music_Cities1AlternateTempo::
 	ld a, MUSIC_CITIES1
 	call PlayMusic
 	ld hl, wChannelCommandPointers
-	ld de, Music_Cities1_branch_aa6f
+	ld de, Music_Cities1_Ch1_AlternateTempo
 	jp Audio1_OverwriteChannelPointer

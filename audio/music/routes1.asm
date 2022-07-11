@@ -4,8 +4,7 @@ Music_Routes1_Ch1::
 	vibrato 4, 2, 3
 	duty_cycle 2
 	toggle_perfect_pitch
-
-Music_Routes1_branch_9be9::
+.mainloop:
 	note_type 12, 10, 1
 	rest 4
 	octave 4
@@ -102,22 +101,21 @@ Music_Routes1_branch_9be9::
 	octave 3
 	note A_, 2
 	note A_, 2
-	sound_loop 0, Music_Routes1_branch_9be9
-	sound_ret
+	sound_loop 0, .mainloop
 
+	sound_ret ; unused
 
 Music_Routes1_Ch2::
 	duty_cycle 2
-
-Music_Routes1_branch_9c53::
+.mainloop:
 	note_type 12, 13, 1
-	sound_call Music_Routes1_branch_9c65
-	sound_call Music_Routes1_branch_9c78
-	sound_call Music_Routes1_branch_9c65
-	sound_call Music_Routes1_branch_9c8d
-	sound_loop 0, Music_Routes1_branch_9c53
+	sound_call .sub1
+	sound_call .sub2
+	sound_call .sub1
+	sound_call .sub3
+	sound_loop 0, .mainloop
 
-Music_Routes1_branch_9c65::
+.sub1:
 	octave 4
 	note D_, 1
 	note E_, 1
@@ -138,7 +136,7 @@ Music_Routes1_branch_9c65::
 	note E_, 6
 	sound_ret
 
-Music_Routes1_branch_9c78::
+.sub2:
 	note C#, 1
 	note D_, 1
 	note E_, 2
@@ -161,7 +159,7 @@ Music_Routes1_branch_9c78::
 	note F#, 2
 	sound_ret
 
-Music_Routes1_branch_9c8d::
+.sub3:
 	note C#, 1
 	note D_, 1
 	note E_, 2
@@ -231,14 +229,13 @@ Music_Routes1_branch_9c8d::
 	note D_, 2
 	note D_, 2
 	sound_ret
-	sound_ret
 
+	sound_ret ; unused
 
 Music_Routes1_Ch3::
 	vibrato 8, 2, 5
 	note_type 12, 1, 3
-
-Music_Routes1_branch_9cdd::
+.mainloop:
 	rest 2
 	octave 4
 	note D_, 4
@@ -305,11 +302,12 @@ Music_Routes1_branch_9cdd::
 	note A_, 8
 	octave 4
 	note D_, 6
-	sound_loop 0, Music_Routes1_branch_9cdd
-	sound_ret
+	sound_loop 0, .mainloop
 
+	sound_ret ; unused
 
 Music_Routes1_Ch4::
+.mainloop:
 	drum_speed 12
 	rest 4
 	drum_note 15, 2
@@ -400,5 +398,6 @@ Music_Routes1_Ch4::
 	rest 2
 	drum_note 15, 2
 	drum_note 15, 2
-	sound_loop 0, Music_Routes1_Ch4
-	sound_ret
+	sound_loop 0, .mainloop
+
+	sound_ret ; unused

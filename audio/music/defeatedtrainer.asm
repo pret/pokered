@@ -20,8 +20,7 @@ Music_DefeatedTrainer_Ch1::
 	note F#, 12
 	duty_cycle 1
 	tempo 224
-
-Music_DefeatedTrainer_branch_23a76::
+.mainloop:
 	note_type 4, 6, 3
 	octave 3
 	note A_, 6
@@ -92,8 +91,7 @@ Music_DefeatedTrainer_branch_23a76::
 	note G_, 3
 	note A_, 3
 	note B_, 3
-	sound_loop 0, Music_DefeatedTrainer_branch_23a76
-
+	sound_loop 0, .mainloop
 
 Music_DefeatedTrainer_Ch2::
 	duty_cycle 2
@@ -109,8 +107,7 @@ Music_DefeatedTrainer_Ch2::
 	note C#, 2
 	note_type 4, 12, 4
 	note D_, 12
-
-Music_DefeatedTrainer_branch_23ad2::
+.mainloop:
 	note_type 4, 8, 5
 	octave 4
 	note D_, 6
@@ -169,8 +166,7 @@ Music_DefeatedTrainer_branch_23ad2::
 	note E_, 12
 	note_type 4, 6, 7
 	note E_, 12
-	sound_loop 0, Music_DefeatedTrainer_branch_23ad2
-
+	sound_loop 0, .mainloop
 
 Music_DefeatedTrainer_Ch3::
 	note_type 4, 1, 0
@@ -185,8 +181,7 @@ Music_DefeatedTrainer_Ch3::
 	note G_, 2
 	note A_, 12
 	note_type 4, 2, 1
-
-Music_DefeatedTrainer_branch_23b24::
+.mainloop:
 	note F#, 3
 	rest 3
 	note F#, 3
@@ -263,4 +258,4 @@ Music_DefeatedTrainer_branch_23b24::
 	note C#, 3
 	octave 4
 	note A_, 3
-	sound_loop 0, Music_DefeatedTrainer_branch_23b24
+	sound_loop 0, .mainloop

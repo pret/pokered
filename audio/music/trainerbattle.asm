@@ -65,8 +65,7 @@ Music_TrainerBattle_Ch1::
 	note F_, 6
 	note C_, 2
 	note C#, 2
-
-Music_TrainerBattle_branch_22962::
+.mainloop:
 	note_type 12, 11, 5
 	note D_, 2
 	note E_, 4
@@ -646,8 +645,7 @@ Music_TrainerBattle_branch_22962::
 	note G#, 1
 	note A_, 1
 	note A#, 1
-	sound_loop 0, Music_TrainerBattle_branch_22962
-
+	sound_loop 0, .mainloop
 
 Music_TrainerBattle_Ch2::
 	duty_cycle 3
@@ -721,8 +719,7 @@ Music_TrainerBattle_Ch2::
 	note D_, 6
 	octave 4
 	note A_, 4
-
-Music_TrainerBattle_branch_22bfc::
+.mainloop:
 	note_type 12, 12, 7
 	octave 3
 	note B_, 6
@@ -950,8 +947,7 @@ Music_TrainerBattle_branch_22bfc::
 	note C_, 16
 	note E_, 8
 	note G_, 8
-	sound_loop 0, Music_TrainerBattle_branch_22bfc
-
+	sound_loop 0, .mainloop
 
 Music_TrainerBattle_Ch3::
 	vibrato 0, 2, 0
@@ -1091,8 +1087,7 @@ Music_TrainerBattle_Ch3::
 	note A#, 2
 	octave 3
 	note C_, 2
-
-Music_TrainerBattle_branch_22d9c::
+.mainloop:
 	octave 2
 	note A#, 1
 	note B_, 1
@@ -1854,4 +1849,4 @@ Music_TrainerBattle_branch_22d9c::
 	note E_, 2
 	note D_, 2
 	note C_, 2
-	sound_loop 0, Music_TrainerBattle_branch_22d9c
+	sound_loop 0, .mainloop

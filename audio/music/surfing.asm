@@ -15,8 +15,7 @@ Music_Surfing_Ch1::
 	note G#, 2
 	note F#, 2
 	note G#, 4
-
-Music_Surfing_branch_7fa30::
+.mainloop:
 	note_type 12, 11, 2
 	note E_, 2
 	note E_, 4
@@ -113,8 +112,7 @@ Music_Surfing_branch_7fa30::
 	note G#, 2
 	note F#, 2
 	note E_, 4
-	sound_loop 0, Music_Surfing_branch_7fa30
-
+	sound_loop 0, .mainloop
 
 Music_Surfing_Ch2::
 	duty_cycle 3
@@ -131,8 +129,7 @@ Music_Surfing_Ch2::
 	note D_, 2
 	octave 3
 	note B_, 2
-
-Music_Surfing_branch_7faae::
+.mainloop:
 	note_type 12, 12, 6
 	octave 4
 	note E_, 6
@@ -200,8 +197,7 @@ Music_Surfing_branch_7faae::
 	note A_, 1
 	octave 5
 	note C#, 6
-	sound_loop 0, Music_Surfing_branch_7faae
-
+	sound_loop 0, .mainloop
 
 Music_Surfing_Ch3::
 	note_type 12, 1, 0
@@ -212,8 +208,7 @@ Music_Surfing_Ch3::
 	note E_, 2
 	note F#, 2
 	note G#, 2
-
-Music_Surfing_branch_7fb03::
+.mainloop:
 	octave 3
 	note A_, 2
 	octave 4
@@ -332,4 +327,4 @@ Music_Surfing_branch_7fb03::
 	note C#, 2
 	note D_, 2
 	note E_, 2
-	sound_loop 0, Music_Surfing_branch_7fb03
+	sound_loop 0, .mainloop
