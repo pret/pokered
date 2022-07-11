@@ -22,7 +22,6 @@ SFX_Get_Key_Item_1_Ch5:
 	note A#, 8
 	sound_ret
 
-
 SFX_Get_Key_Item_1_Ch6:
 	execute_music
 	vibrato 4, 2, 3
@@ -45,7 +44,6 @@ SFX_Get_Key_Item_1_Ch6:
 	octave 5
 	note D#, 8
 	sound_ret
-
 
 SFX_Get_Key_Item_1_Ch7:
 	execute_music

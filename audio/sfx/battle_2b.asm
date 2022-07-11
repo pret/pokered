@@ -9,7 +9,6 @@ SFX_Battle_2B_Ch5:
 	square_note 8, 8, 1, 1024
 	sound_ret
 
-
 SFX_Battle_2B_Ch8:
 	noise_note 3, 6, 2, 34
 	noise_note 3, 10, 2, 50

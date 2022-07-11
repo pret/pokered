@@ -8,7 +8,6 @@ SFX_Denied_1_Ch5:
 	square_note 1, 0, 0, 0
 	sound_ret
 
-
 SFX_Denied_1_Ch6:
 	duty_cycle 3
 	square_note 4, 15, 0, 1025

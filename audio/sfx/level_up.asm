@@ -19,7 +19,6 @@ SFX_Level_Up_Ch5:
 	note F_, 8
 	sound_ret
 
-
 SFX_Level_Up_Ch6:
 	execute_music
 	vibrato 4, 2, 2
@@ -38,7 +37,6 @@ SFX_Level_Up_Ch6:
 	note_type 6, 12, 4
 	note A_, 8
 	sound_ret
-
 
 SFX_Level_Up_Ch7:
 	execute_music

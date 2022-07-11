@@ -15,7 +15,6 @@ ELSE
 ENDC
 	sound_ret
 
-
 SFX_Save_3_Ch6:
 	duty_cycle 2
 IF DEF(_RED)

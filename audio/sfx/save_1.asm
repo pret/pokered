@@ -9,7 +9,6 @@ SFX_Save_1_Ch5:
 	square_note 15, 15, 2, 2016
 	sound_ret
 
-
 SFX_Save_1_Ch6:
 	duty_cycle 2
 	square_note 4, 0, 8, 0
