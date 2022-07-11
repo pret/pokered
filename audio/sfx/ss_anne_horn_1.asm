@@ -9,7 +9,6 @@ SFX_SS_Anne_Horn_1_Ch5:
 	square_note 15, 15, 2, 1280
 	sound_ret
 
-
 SFX_SS_Anne_Horn_1_Ch6:
 	duty_cycle 3
 	square_note 15, 15, 0, 1154

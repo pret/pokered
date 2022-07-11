@@ -12,7 +12,6 @@ SFX_Battle_35_Ch5:
 	note G#, 8
 	sound_ret
 
-
 SFX_Battle_35_Ch6:
 	execute_music
 	vibrato 10, 2, 3

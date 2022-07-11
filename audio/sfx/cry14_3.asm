@@ -5,14 +5,12 @@ SFX_Cry14_3_Ch5:
 	square_note 8, 13, 1, 2008
 	sound_ret
 
-
 SFX_Cry14_3_Ch6:
 	duty_cycle_pattern 2, 2, 1, 1
 	square_note 10, 12, 4, 1905
 	square_note 15, 11, 6, 1954
 	square_note 8, 10, 1, 1975
 	sound_ret
-
 
 SFX_Cry14_3_Ch8:
 	noise_note 8, 14, 4, 76

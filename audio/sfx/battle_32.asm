@@ -5,7 +5,6 @@ SFX_Battle_32_Ch5:
 	pitch_sweep 0, 8
 	sound_ret
 
-
 SFX_Battle_32_Ch6:
 	duty_cycle 3
 	square_note 8, 15, 1, 1793

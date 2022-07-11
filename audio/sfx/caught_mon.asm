@@ -21,7 +21,6 @@ SFX_Caught_Mon_Ch5:
 	note E_, 8
 	sound_ret
 
-
 SFX_Caught_Mon_Ch6:
 	execute_music
 	duty_cycle 2
@@ -42,7 +41,6 @@ SFX_Caught_Mon_Ch6:
 	note_type 6, 12, 5
 	note G#, 8
 	sound_ret
-
 
 SFX_Caught_Mon_Ch7:
 	execute_music

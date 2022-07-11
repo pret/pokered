@@ -7,7 +7,6 @@ SFX_Battle_1E_Ch5:
 	pitch_sweep 0, 8
 	sound_ret
 
-
 SFX_Battle_1E_Ch8:
 	noise_note 0, 13, 1, 66
 	noise_note 4, 10, 1, 50
