@@ -25,11 +25,10 @@ Music_TitleScreen_Ch1::
 	note A_, 2
 	note A_, 2
 	note F#, 2
-
-Music_TitleScreen_branch_7e4e2::
-	sound_call Music_TitleScreen_branch_7e541
-	sound_call Music_TitleScreen_branch_7e54a
-	sound_call Music_TitleScreen_branch_7e541
+.mainloop:
+	sound_call .sub1
+	sound_call .sub2
+	sound_call .sub1
 	octave 3
 	note C_, 8
 	note_type 8, 12, 6
@@ -52,9 +51,9 @@ Music_TitleScreen_branch_7e4e2::
 	octave 3
 	note C_, 2
 	note D_, 2
-	sound_call Music_TitleScreen_branch_7e541
-	sound_call Music_TitleScreen_branch_7e54a
-	sound_call Music_TitleScreen_branch_7e541
+	sound_call .sub1
+	sound_call .sub2
+	sound_call .sub1
 	note C_, 6
 	note C_, 6
 	note E_, 4
@@ -82,21 +81,21 @@ Music_TitleScreen_branch_7e4e2::
 	octave 4
 	note C_, 4
 	note C#, 4
-	sound_call Music_TitleScreen_branch_7e55c
+	sound_call .sub3
 	note_type 8, 11, 4
 	octave 4
 	note C_, 4
 	note C_, 4
 	note C#, 4
-	sound_call Music_TitleScreen_branch_7e55c
+	sound_call .sub3
 	note_type 8, 11, 2
 	octave 3
 	note E_, 4
 	note E_, 4
 	note C#, 4
-	sound_loop 0, Music_TitleScreen_branch_7e4e2
+	sound_loop 0, .mainloop
 
-Music_TitleScreen_branch_7e541::
+.sub1:
 	note_type 12, 12, 6
 	octave 3
 	note D_, 6
@@ -106,7 +105,7 @@ Music_TitleScreen_branch_7e541::
 	note D_, 8
 	sound_ret
 
-Music_TitleScreen_branch_7e54a::
+.sub2:
 	note C_, 6
 	note F_, 6
 	note C_, 4
@@ -124,7 +123,7 @@ Music_TitleScreen_branch_7e54a::
 	note C_, 4
 	sound_ret
 
-Music_TitleScreen_branch_7e55c::
+.sub3:
 	note_type 12, 12, 1
 	note D_, 1
 	rest 1
@@ -153,7 +152,6 @@ Music_TitleScreen_branch_7e55c::
 	note D_, 1
 	sound_ret
 
-
 Music_TitleScreen_Ch2::
 	vibrato 16, 4, 6
 	duty_cycle 1
@@ -178,18 +176,17 @@ Music_TitleScreen_Ch2::
 	note F_, 2
 	note F_, 2
 	note F#, 2
-
-Music_TitleScreen_branch_7e594::
+.mainloop:
 	vibrato 16, 4, 6
-	sound_call Music_TitleScreen_branch_7e622
+	sound_call .sub1
 	octave 2
 	note A_, 4
 	note F_, 4
-	sound_call Music_TitleScreen_branch_7e62c
+	sound_call .sub2
 	octave 2
 	note A_, 8
 	note B_, 16
-	sound_call Music_TitleScreen_branch_7e622
+	sound_call .sub1
 	octave 2
 	note A_, 6
 	note F_, 2
@@ -208,11 +205,11 @@ Music_TitleScreen_branch_7e594::
 	note D_, 1
 	note F#, 1
 	note G_, 16
-	sound_call Music_TitleScreen_branch_7e622
+	sound_call .sub1
 	octave 2
 	note A_, 2
 	note F_, 6
-	sound_call Music_TitleScreen_branch_7e62c
+	sound_call .sub2
 	octave 3
 	note C_, 2
 	octave 2
@@ -220,7 +217,7 @@ Music_TitleScreen_branch_7e594::
 	note B_, 6
 	note G_, 2
 	note F_, 8
-	sound_call Music_TitleScreen_branch_7e622
+	sound_call .sub1
 	note_type 8, 9, 5
 	octave 2
 	note G_, 4
@@ -262,7 +259,7 @@ Music_TitleScreen_branch_7e594::
 	octave 5
 	note C_, 4
 	note C#, 4
-	sound_call Music_TitleScreen_branch_7e636
+	sound_call .sub3
 	rest 3
 	note D_, 1
 	rest 3
@@ -272,7 +269,7 @@ Music_TitleScreen_branch_7e594::
 	note C_, 4
 	note C_, 4
 	note C#, 4
-	sound_call Music_TitleScreen_branch_7e636
+	sound_call .sub3
 	note D_, 1
 	rest 2
 	note D_, 1
@@ -284,9 +281,9 @@ Music_TitleScreen_branch_7e594::
 	note C_, 4
 	octave 4
 	note B_, 4
-	sound_loop 0, Music_TitleScreen_branch_7e594
+	sound_loop 0, .mainloop
 
-Music_TitleScreen_branch_7e622::
+.sub1:
 	note_type 12, 14, 7
 	octave 3
 	note G_, 6
@@ -296,7 +293,7 @@ Music_TitleScreen_branch_7e622::
 	note_type 12, 9, 5
 	sound_ret
 
-Music_TitleScreen_branch_7e62c::
+.sub2:
 	note_type 12, 14, 7
 	octave 4
 	note F_, 6
@@ -306,7 +303,7 @@ Music_TitleScreen_branch_7e62c::
 	note_type 12, 9, 5
 	sound_ret
 
-Music_TitleScreen_branch_7e636::
+.sub3:
 	note_type 12, 14, 1
 	note D_, 1
 	rest 2
@@ -319,7 +316,6 @@ Music_TitleScreen_branch_7e636::
 	rest 3
 	note D_, 1
 	sound_ret
-
 
 Music_TitleScreen_Ch3::
 	note_type 12, 1, 0
@@ -347,41 +343,39 @@ Music_TitleScreen_Ch3::
 	note F_, 2
 	note F_, 2
 	note A_, 2
-
-Music_TitleScreen_branch_7e65e::
-	sound_call Music_TitleScreen_branch_7e6c9
-	sound_call Music_TitleScreen_branch_7e6d0
-
-Music_TitleScreen_branch_7e664::
-	sound_call Music_TitleScreen_branch_7e6c9
-	sound_call Music_TitleScreen_branch_7e6c9
-	sound_call Music_TitleScreen_branch_7e6c9
-	sound_call Music_TitleScreen_branch_7e6d0
-	sound_loop 3, Music_TitleScreen_branch_7e664
-	sound_call Music_TitleScreen_branch_7e6c9
+.mainloop:
+	sound_call .sub1
+	sound_call .sub2
+.loop1:
+	sound_call .sub1
+	sound_call .sub1
+	sound_call .sub1
+	sound_call .sub2
+	sound_loop 3, .loop1
+	sound_call .sub1
 	note G_, 6
 	note D_, 3
 	note A_, 6
 	note F_, 3
 	note A_, 3
 	note F_, 3
-	sound_call Music_TitleScreen_branch_7e6d7
+	sound_call .sub3
 	note A#, 3
 	note F_, 3
-	sound_call Music_TitleScreen_branch_7e6d7
+	sound_call .sub3
 	note B_, 3
 	note G_, 3
-	sound_call Music_TitleScreen_branch_7e6dc
+	sound_call .sub4
 	octave 4
 	note C_, 3
 	octave 3
 	note G_, 3
-	sound_call Music_TitleScreen_branch_7e6dc
+	sound_call .sub4
 	octave 4
 	note C#, 3
 	octave 3
 	note A_, 3
-	sound_call Music_TitleScreen_branch_7e6e5
+	sound_call .sub5
 	octave 5
 	pitch_slide 1, 4, D_
 	note D_, 4
@@ -398,7 +392,7 @@ Music_TitleScreen_branch_7e664::
 	note C_, 4
 	note C_, 4
 	note C#, 4
-	sound_call Music_TitleScreen_branch_7e6e5
+	sound_call .sub5
 	octave 6
 	pitch_slide 1, 5, D_
 	note D_, 4
@@ -413,9 +407,9 @@ Music_TitleScreen_branch_7e664::
 	note C_, 4
 	octave 3
 	note B_, 4
-	sound_loop 0, Music_TitleScreen_branch_7e65e
+	sound_loop 0, .mainloop
 
-Music_TitleScreen_branch_7e6c9::
+.sub1:
 	note G_, 6
 	note D_, 3
 	note G_, 6
@@ -424,7 +418,7 @@ Music_TitleScreen_branch_7e6c9::
 	note D_, 3
 	sound_ret
 
-Music_TitleScreen_branch_7e6d0::
+.sub2:
 	note F_, 6
 	note C_, 3
 	note F_, 6
@@ -433,14 +427,14 @@ Music_TitleScreen_branch_7e6d0::
 	note C_, 3
 	sound_ret
 
-Music_TitleScreen_branch_7e6d7::
+.sub3:
 	note A#, 6
 	note F_, 3
 	note A#, 6
 	note F_, 3
 	sound_ret
 
-Music_TitleScreen_branch_7e6dc::
+.sub4:
 	octave 4
 	note C_, 6
 	octave 3
@@ -451,13 +445,12 @@ Music_TitleScreen_branch_7e6dc::
 	note G_, 3
 	sound_ret
 
-Music_TitleScreen_branch_7e6e5::
+.sub5:
 	note_type 12, 1, 0
 	octave 4
 	note D_, 1
 	rest 5
 	sound_ret
-
 
 Music_TitleScreen_Ch4::
 	drum_speed 6
@@ -486,8 +479,7 @@ Music_TitleScreen_Ch4::
 	drum_note 3, 2
 	drum_note 2, 2
 	drum_note 1, 2
-
-Music_TitleScreen_branch_7e716::
+.mainloop:
 	drum_speed 12
 	drum_note 2, 1
 	rest 3
@@ -497,8 +489,8 @@ Music_TitleScreen_branch_7e716::
 	drum_note 2, 1
 	drum_note 3, 1
 	rest 3
-	sound_call Music_TitleScreen_branch_7e834
-	sound_call Music_TitleScreen_branch_7e834
+	sound_call .sub1
+	sound_call .sub1
 	drum_note 2, 1
 	rest 3
 	drum_note 2, 1
@@ -509,7 +501,7 @@ Music_TitleScreen_branch_7e716::
 	rest 1
 	drum_note 3, 1
 	drum_note 2, 1
-	sound_call Music_TitleScreen_branch_7e842
+	sound_call .sub2
 	drum_note 2, 1
 	rest 3
 	drum_note 2, 1
@@ -520,7 +512,7 @@ Music_TitleScreen_branch_7e716::
 	rest 1
 	drum_note 2, 1
 	rest 1
-	sound_call Music_TitleScreen_branch_7e842
+	sound_call .sub2
 	drum_note 2, 1
 	rest 3
 	drum_note 2, 1
@@ -535,8 +527,8 @@ Music_TitleScreen_branch_7e716::
 	drum_note 4, 1
 	drum_note 4, 1
 	drum_speed 12
-	sound_call Music_TitleScreen_branch_7e834
-	sound_call Music_TitleScreen_branch_7e842
+	sound_call .sub1
+	sound_call .sub2
 	drum_note 2, 1
 	rest 3
 	drum_note 2, 1
@@ -555,8 +547,8 @@ Music_TitleScreen_branch_7e716::
 	rest 1
 	drum_note 3, 1
 	drum_note 2, 1
-	sound_call Music_TitleScreen_branch_7e834
-	sound_call Music_TitleScreen_branch_7e842
+	sound_call .sub1
+	sound_call .sub2
 	drum_note 2, 1
 	rest 3
 	drum_note 2, 1
@@ -652,9 +644,9 @@ Music_TitleScreen_branch_7e716::
 	drum_note 2, 4
 	drum_note 3, 4
 	drum_note 2, 4
-	sound_loop 0, Music_TitleScreen_branch_7e716
+	sound_loop 0, .mainloop
 
-Music_TitleScreen_branch_7e834::
+.sub1:
 	drum_note 2, 1
 	rest 3
 	drum_note 2, 1
@@ -665,7 +657,7 @@ Music_TitleScreen_branch_7e834::
 	rest 3
 	sound_ret
 
-Music_TitleScreen_branch_7e842::
+.sub2:
 	drum_note 2, 1
 	rest 3
 	drum_note 2, 1

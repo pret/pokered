@@ -10,8 +10,7 @@ Music_Lavender_Ch1::
 	rest 16
 	rest 16
 	note_type 12, 10, 7
-
-Music_Lavender_branch_bb6b::
+.mainloop:
 	octave 3
 	note G_, 8
 	note G_, 8
@@ -59,22 +58,19 @@ Music_Lavender_branch_bb6b::
 	rest 16
 	rest 16
 	rest 16
-	sound_loop 0, Music_Lavender_branch_bb6b
-
+	sound_loop 0, .mainloop
 
 Music_Lavender_Ch2::
 	vibrato 0, 3, 4
 	duty_cycle 3
 	note_type 12, 9, 1
-
-Music_Lavender_branch_bba5::
+.mainloop:
 	octave 5
 	note C_, 4
 	note G_, 4
 	note B_, 4
 	note F#, 4
-	sound_loop 0, Music_Lavender_branch_bba5
-
+	sound_loop 0, .mainloop
 
 Music_Lavender_Ch3::
 	vibrato 4, 1, 1
@@ -84,8 +80,7 @@ Music_Lavender_Ch3::
 	rest 16
 	rest 16
 	note_type 12, 2, 5
-
-Music_Lavender_branch_bbb9::
+.mainloop:
 	octave 4
 	note E_, 16
 	note D_, 16
@@ -183,8 +178,7 @@ Music_Lavender_branch_bbb9::
 	note G_, 4
 	note F#, 4
 	note B_, 4
-	sound_loop 0, Music_Lavender_branch_bbb9
-
+	sound_loop 0, .mainloop
 
 Music_Lavender_Ch4::
 	drum_speed 12
@@ -192,8 +186,7 @@ Music_Lavender_Ch4::
 	rest 16
 	rest 16
 	rest 16
-
-Music_Lavender_branch_bc26::
+.mainloop:
 	drum_note 7, 8
 	drum_note 7, 8
-	sound_loop 0, Music_Lavender_branch_bc26
+	sound_loop 0, .mainloop

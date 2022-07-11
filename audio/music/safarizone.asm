@@ -16,17 +16,16 @@ Music_SafariZone_Ch1::
 	note G_, 1
 	rest 4
 	duty_cycle 3
-
-Music_SafariZone_branch_bc4f::
-	sound_call Music_SafariZone_branch_bc5f
+.mainloop:
+	sound_call .sub1
 	note_type 12, 10, 4
 	note F#, 4
-	sound_call Music_SafariZone_branch_bc5f
+	sound_call .sub1
 	note_type 12, 10, 4
 	note F#, 4
-	sound_loop 0, Music_SafariZone_branch_bc4f
+	sound_loop 0, .mainloop
 
-Music_SafariZone_branch_bc5f::
+.sub1:
 	note_type 12, 10, 2
 	octave 3
 	note C_, 4
@@ -37,7 +36,6 @@ Music_SafariZone_branch_bc5f::
 	note G_, 4
 	note C_, 4
 	sound_ret
-
 
 Music_SafariZone_Ch2::
 	duty_cycle 2
@@ -50,17 +48,16 @@ Music_SafariZone_Ch2::
 	note D_, 1
 	rest 4
 	duty_cycle 3
-
-Music_SafariZone_branch_bc79::
-	sound_call Music_SafariZone_branch_bc89
+.mainloop:
+	sound_call .sub1
 	note_type 12, 11, 5
 	note A_, 4
-	sound_call Music_SafariZone_branch_bc89
+	sound_call .sub1
 	note_type 12, 11, 5
 	note B_, 4
-	sound_loop 0, Music_SafariZone_branch_bc79
+	sound_loop 0, .mainloop
 
-Music_SafariZone_branch_bc89::
+.sub1:
 	note_type 12, 11, 2
 	octave 3
 	note G_, 4
@@ -72,21 +69,19 @@ Music_SafariZone_branch_bc89::
 	note G_, 4
 	sound_ret
 
-
 Music_SafariZone_Ch3::
 	note_type 12, 1, 0
 	rest 8
-
-Music_SafariZone_branch_bc97::
-	sound_call Music_SafariZone_branch_bca5
+.mainloop:
+	sound_call .sub1
 	octave 4
 	note A_, 4
-	sound_call Music_SafariZone_branch_bca5
+	sound_call .sub1
 	octave 4
 	note B_, 4
-	sound_loop 0, Music_SafariZone_branch_bc97
+	sound_loop 0, .mainloop
 
-Music_SafariZone_branch_bca5::
+.sub1:
 	octave 3
 	note A_, 2
 	rest 2

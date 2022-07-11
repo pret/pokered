@@ -14,8 +14,7 @@ Music_Cities2_Ch1::
 	octave 2
 	note B_, 2
 	rest 14
-
-Music_Cities2_branch_b51a::
+.mainloop:
 	octave 3
 	note B_, 4
 	octave 4
@@ -91,8 +90,7 @@ Music_Cities2_branch_b51a::
 	note F#, 4
 	note E_, 2
 	rest 14
-	sound_loop 0, Music_Cities2_branch_b51a
-
+	sound_loop 0, .mainloop
 
 Music_Cities2_Ch2::
 	duty_cycle 3
@@ -123,8 +121,7 @@ Music_Cities2_Ch2::
 	note F#, 1
 	note G#, 1
 	note A_, 1
-
-Music_Cities2_branch_b58b::
+.mainloop:
 	note_type 12, 10, 6
 	note G#, 6
 	note_type 12, 12, 2
@@ -277,8 +274,7 @@ Music_Cities2_branch_b58b::
 	note F#, 1
 	note G#, 1
 	note A_, 1
-	sound_loop 0, Music_Cities2_branch_b58b
-
+	sound_loop 0, .mainloop
 
 Music_Cities2_Ch3::
 	note_type 12, 1, 1
@@ -292,8 +288,7 @@ Music_Cities2_Ch3::
 	note G#, 2
 	note E_, 2
 	note G#, 2
-
-Music_Cities2_branch_b64c::
+.mainloop:
 	note F#, 2
 	note A_, 2
 	note F#, 2
@@ -413,4 +408,4 @@ Music_Cities2_branch_b64c::
 	note G#, 2
 	note E_, 2
 	note G#, 2
-	sound_loop 0, Music_Cities2_branch_b64c
+	sound_loop 0, .mainloop
