@@ -2646,7 +2646,7 @@ SendNewMonToBox:
 	ld a, [wcf91]
 	ld [wd0b5], a
 	ld c, a
-.asm_e7b1
+.loop
 	inc de
 	ld a, [de]
 	ld b, a
@@ -2654,13 +2654,13 @@ SendNewMonToBox:
 	ld c, b
 	ld [de], a
 	cp $ff
-	jr nz, .asm_e7b1
+	jr nz, .loop
 	call GetMonHeader
 	ld hl, wBoxMonOT
 	ld bc, NAME_LENGTH
 	ld a, [wBoxCount]
 	dec a
-	jr z, .asm_e7ee
+	jr z, .skip
 	dec a
 	call AddNTimes
 	push hl
@@ -2672,7 +2672,7 @@ SendNewMonToBox:
 	ld a, [wBoxCount]
 	dec a
 	ld b, a
-.asm_e7db
+.loop2
 	push bc
 	push hl
 	ld bc, NAME_LENGTH
@@ -2684,15 +2684,15 @@ SendNewMonToBox:
 	add hl, bc
 	pop bc
 	dec b
-	jr nz, .asm_e7db
-.asm_e7ee
+	jr nz, .loop2
+.skip
 	ld hl, wPlayerName
 	ld de, wBoxMonOT
 	ld bc, NAME_LENGTH
 	call CopyData
 	ld a, [wBoxCount]
 	dec a
-	jr z, .asm_e82a
+	jr z, .skip2
 	ld hl, wBoxMonNicks
 	ld bc, NAME_LENGTH
 	dec a
@@ -2706,7 +2706,7 @@ SendNewMonToBox:
 	ld a, [wBoxCount]
 	dec a
 	ld b, a
-.asm_e817
+.loop3
 	push bc
 	push hl
 	ld bc, NAME_LENGTH
@@ -2718,15 +2718,15 @@ SendNewMonToBox:
 	add hl, bc
 	pop bc
 	dec b
-	jr nz, .asm_e817
-.asm_e82a
+	jr nz, .loop3
+.skip2
 	ld hl, wBoxMonNicks
 	ld a, NAME_MON_SCREEN
 	ld [wNamingScreenType], a
 	predef AskName
 	ld a, [wBoxCount]
 	dec a
-	jr z, .asm_e867
+	jr z, .skip3
 	ld hl, wBoxMons
 	ld bc, wBoxMon2 - wBoxMon1
 	dec a
@@ -2740,7 +2740,7 @@ SendNewMonToBox:
 	ld a, [wBoxCount]
 	dec a
 	ld b, a
-.asm_e854
+.loop4
 	push bc
 	push hl
 	ld bc, wBoxMon2 - wBoxMon1
@@ -2752,8 +2752,8 @@ SendNewMonToBox:
 	add hl, bc
 	pop bc
 	dec b
-	jr nz, .asm_e854
-.asm_e867
+	jr nz, .loop4
+.skip3
 	ld a, [wEnemyMonLevel]
 	ld [wEnemyMonBoxLevel], a
 	ld hl, wEnemyMon
@@ -2783,11 +2783,11 @@ SendNewMonToBox:
 	inc de
 	xor a
 	ld b, NUM_STATS * 2
-.asm_e89f
+.loop5
 	ld [de], a
 	inc de
 	dec b
-	jr nz, .asm_e89f
+	jr nz, .loop5
 	ld hl, wEnemyMonDVs
 	ld a, [hli]
 	ld [de], a
@@ -2796,12 +2796,12 @@ SendNewMonToBox:
 	ld [de], a
 	ld hl, wEnemyMonPP
 	ld b, NUM_MOVES
-.asm_e8b1
+.loop6
 	ld a, [hli]
 	inc de
 	ld [de], a
 	dec b
-	jr nz, .asm_e8b1
+	jr nz, .loop6
 	ret
 
 ; checks if the tile in front of the player is a shore or water tile

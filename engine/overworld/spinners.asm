@@ -11,18 +11,18 @@ LoadSpinnerArrowTiles::
 	ld a, [wCurMapTileset]
 	cp FACILITY
 	ld hl, FacilitySpinnerArrows
-	jr z, .asm_44ff6
+	jr z, .gotSpinnerArrows
 	ld hl, GymSpinnerArrows
-.asm_44ff6
+.gotSpinnerArrows
 	ld a, [wSimulatedJoypadStatesIndex]
 	bit 0, a
-	jr nz, .asm_45001
-	ld de, $18
+	jr nz, .alternateGraphics
+	ld de, 6 * 4
 	add hl, de
-.asm_45001
+.alternateGraphics
 	ld a, $4
 	ld bc, $0
-.asm_45006
+.loop
 	push af
 	push hl
 	push bc
@@ -46,7 +46,7 @@ LoadSpinnerArrowTiles::
 	pop hl
 	pop af
 	dec a
-	jr nz, .asm_45006
+	jr nz, .loop
 	ret
 
 INCLUDE "data/tilesets/spinner_tiles.asm"

@@ -68,7 +68,7 @@ _Divide::
 	ldh [hDivideBuffer+4], a
 	ld a, $9
 	ld e, a
-.asm_37db3
+.loop
 	ldh a, [hDivideBuffer]
 	ld c, a
 	ldh a, [hDividend+1] ; (aliases: hMultiplicand)
@@ -78,18 +78,18 @@ _Divide::
 	ld c, a
 	ldh a, [hDividend] ; (aliases: hProduct, hPastLeadingZeros, hQuotient)
 	sbc c
-	jr c, .asm_37dce
+	jr c, .next
 	ldh [hDividend], a ; (aliases: hProduct, hPastLeadingZeros, hQuotient)
 	ld a, d
 	ldh [hDividend+1], a ; (aliases: hMultiplicand)
 	ldh a, [hDivideBuffer+4]
 	inc a
 	ldh [hDivideBuffer+4], a
-	jr .asm_37db3
-.asm_37dce
+	jr .loop
+.next
 	ld a, b
 	cp $1
-	jr z, .asm_37e18
+	jr z, .done
 	ldh a, [hDivideBuffer+4]
 	sla a
 	ldh [hDivideBuffer+4], a
@@ -103,7 +103,7 @@ _Divide::
 	rl a
 	ldh [hDivideBuffer+1], a
 	dec e
-	jr nz, .asm_37e04
+	jr nz, .next2
 	ld a, $8
 	ld e, a
 	ldh a, [hDivideBuffer]
@@ -116,20 +116,20 @@ _Divide::
 	ldh [hDividend+1], a ; (aliases: hMultiplicand)
 	ldh a, [hDividend+3]
 	ldh [hDividend+2], a
-.asm_37e04
+.next2
 	ld a, e
 	cp $1
-	jr nz, .asm_37e0a
+	jr nz, .okay
 	dec b
-.asm_37e0a
+.okay
 	ldh a, [hDivisor] ; (aliases: hDivisor, hMultiplier, hPowerOf10)
 	srl a
 	ldh [hDivisor], a ; (aliases: hDivisor, hMultiplier, hPowerOf10)
 	ldh a, [hDivideBuffer]
 	rr a
 	ldh [hDivideBuffer], a
-	jr .asm_37db3
-.asm_37e18
+	jr .loop
+.done
 	ldh a, [hDividend+1] ; (aliases: hMultiplicand)
 	ldh [hRemainder], a ; (aliases: hDivisor, hMultiplier, hPowerOf10)
 	ldh a, [hDivideBuffer+4]

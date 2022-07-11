@@ -32,7 +32,7 @@ IsSurfingAllowed:
 	ret nz
 	CheckBothEventsSet EVENT_SEAFOAM4_BOULDER1_DOWN_HOLE, EVENT_SEAFOAM4_BOULDER2_DOWN_HOLE
 	ret z
-	ld hl, CoordsData_cdf7
+	ld hl, SeafoamIslandsB4FStairsCoords
 	call ArePlayerCoordsInArray
 	ret nc
 	ld hl, wd728
@@ -45,7 +45,7 @@ IsSurfingAllowed:
 	ld hl, CyclingIsFunText
 	jp PrintText
 
-CoordsData_cdf7:
+SeafoamIslandsB4FStairsCoords:
 	dbmapcoord  7, 11
 	db -1 ; end
 

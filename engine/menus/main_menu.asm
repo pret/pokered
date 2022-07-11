@@ -184,13 +184,13 @@ LinkMenu:
 	ld b, a
 	and $f0
 	cp $d0
-	jr z, .asm_5c7d
+	jr z, .checkEnemyMenuSelection
 	ld a, [wLinkMenuSelectionReceiveBuffer + 1]
 	ld b, a
 	and $f0
 	cp $d0
 	jr nz, .exchangeMenuSelectionLoop
-.asm_5c7d
+.checkEnemyMenuSelection
 	ld a, b
 	and $c ; did the enemy press A or B?
 	jr nz, .enemyPressedAOrB

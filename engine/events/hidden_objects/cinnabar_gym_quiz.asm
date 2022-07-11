@@ -32,7 +32,7 @@ CinnabarGymQuiz::
 	call PrintText
 	ld a, 1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
-	call CinnabarGymQuiz_1ea92
+	call CinnabarGymQuiz_AskQuestion
 	jp TextScriptEnd
 
 CinnabarGymQuizIntroText:
@@ -75,7 +75,7 @@ CinnabarGymGateFlagAction:
 	EventFlagAddress hl, EVENT_CINNABAR_GYM_GATE0_UNLOCKED
 	predef_jump FlagActionPredef
 
-CinnabarGymQuiz_1ea92:
+CinnabarGymQuiz_AskQuestion:
 	call YesNoChoice
 	ldh a, [hGymGateAnswer]
 	ld c, a

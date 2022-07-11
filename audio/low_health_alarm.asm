@@ -7,25 +7,25 @@ Music_DoLowHealthAlarm::
 	ret z     ;nope
 
 	and $7f   ;low 7 bits are the timer.
-	jr nz, .asm_21383 ;if timer > 0, play low tone.
+	jr nz, .notToneHi ;if timer > 0, play low tone.
 
 	call .playToneHi
 	ld a, 30 ;keep this tone for 30 frames.
-	jr .asm_21395 ;reset the timer.
+	jr .resetTimer
 
-.asm_21383
+.notToneHi
 	cp 20
-	jr nz, .asm_2138a ;if timer == 20,
-	call .playToneLo  ;actually set the sound registers.
+	jr nz, .noTone   ;if timer == 20,
+	call .playToneLo ;actually set the sound registers.
 
-.asm_2138a
+.noTone
 	ld a, $86
 	ld [wChannelSoundIDs + Ch5], a ;disable sound channel?
 	ld a, [wLowHealthAlarm]
 	and $7f ;decrement alarm timer.
 	dec a
 
-.asm_21395
+.resetTimer
 	; reset the timer and enable flag.
 	set 7, a
 	ld [wLowHealthAlarm], a

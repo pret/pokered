@@ -6768,11 +6768,11 @@ InitOpponent:
 DetermineWildOpponent:
 	ld a, [wd732]
 	bit 1, a
-	jr z, .asm_3ef2f
+	jr z, .notDebug
 	ldh a, [hJoyHeld]
 	bit BIT_B_BUTTON, a
 	ret nz
-.asm_3ef2f
+.notDebug
 	ld a, [wNumberOfNoRandomBattleStepsLeft]
 	and a
 	ret nz

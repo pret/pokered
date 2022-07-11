@@ -17,9 +17,10 @@ DisplayDiploma::
 	hlcoord 0, 0
 	lb bc, 16, 18
 	predef Diploma_TextBoxBorder
+
 	ld hl, DiplomaTextPointersAndCoords
 	ld c, $5
-.asm_56715
+.placeTextLoop
 	push bc
 	ld a, [hli]
 	ld e, a
@@ -34,7 +35,7 @@ DisplayDiploma::
 	inc hl
 	pop bc
 	dec c
-	jr nz, .asm_56715
+	jr nz, .placeTextLoop
 	hlcoord 10, 4
 	ld de, wPlayerName
 	call PlaceString
