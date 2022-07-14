@@ -124,6 +124,9 @@ ENDC
 IF DEF(_BLUE)
 	ld a, STARTER2 ; which Pokemon to show first on the title screen
 ENDC
+IF DEF(_GREEN)
+	ld a, STARTER3 ; which Pokemon to show first on the title screen
+ENDC
 	ld [wTitleMonSpecies], a
 	call LoadTitleMonSprite
 
@@ -141,6 +144,12 @@ ENDC
 	ld a, %11100100
 	ldh [rOBP0], a
 	call UpdateGBCPal_OBP0
+
+	push de
+	ld d, CONVERT_BGP
+	ld e, 2
+	farcall TransferMonPal ;gbcnote - update the bg pal for the new title mon
+	pop de
 
 ; make pokemon logo bounce up and down
 	ld bc, hSCY ; background scroll Y
@@ -420,7 +429,11 @@ INCLUDE "data/pokemon/title_mons.asm"
 
 ; prints version text (red, blue)
 PrintGameVersionOnTitleScreen:
-	hlcoord 7, 8
+	IF DEF(_GREEN)
+		hlcoord 6, 8 ; version text needs to be slightly moved to the left due to the larger length
+	ELSE
+		hlcoord 7, 8
+	ENDC
 	ld de, VersionOnTitleScreenText
 	jp PlaceString
 
@@ -431,6 +444,9 @@ IF DEF(_RED)
 ENDC
 IF DEF(_BLUE)
 	db $61,$62,$63,$64,$65,$66,$67,$68,"@" ; "Blue Version"
+ENDC
+IF DEF(_GREEN)
+	db $62,$63,$64,$7F,$65,$66,$67,$68,$69,"@" ; "Green Version"
 ENDC
 
 NintenText: db "NINTEN@"

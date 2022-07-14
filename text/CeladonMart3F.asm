@@ -94,8 +94,9 @@ _CeladonMart3Text14::
 	done
 
 _CeladonMart3Text15::
-	text "Red and Blue!"
-	line "Both are #MON!"
+	text "Red, Blue, and"
+	line "Green!"
+	cont "All are #MON!"
 	done
 
 _CeladonMartTMKidFlavor::

@@ -1,6 +1,7 @@
 roms := \
 	pokered.gbc \
 	pokeblue.gbc \
+	pokegreen.gbc \
 	pokeblue_debug.gbc
 patches := \
 	pokered.patch \
@@ -19,6 +20,7 @@ rom_obj := \
 
 pokered_obj        := $(rom_obj:.o=_red.o)
 pokeblue_obj       := $(rom_obj:.o=_blue.o)
+pokegreen_obj       := $(rom_obj:.o=_green.o)
 pokeblue_debug_obj := $(rom_obj:.o=_blue_debug.o)
 pokered_vc_obj     := $(rom_obj:.o=_red_vc.o)
 pokeblue_vc_obj    := $(rom_obj:.o=_blue_vc.o)
@@ -45,11 +47,12 @@ RGBLINK ?= $(RGBDS)rgblink
 .SECONDEXPANSION:
 .PRECIOUS:
 .SECONDARY:
-.PHONY: all red blue blue_debug clean tidy compare tools
+.PHONY: all red blue green blue_debug clean tidy compare tools
 
 all: $(roms)
 red:        pokered.gbc
 blue:       pokeblue.gbc
+green:      pokegreen.gbc
 blue_debug: pokeblue_debug.gbc
 red_vc:     pokered.patch
 blue_vc:    pokeblue.patch
@@ -72,6 +75,7 @@ tidy:
 	      $(patches:%.patch=vc/%.constants.sym) \
 	      $(pokered_obj) \
 	      $(pokeblue_obj) \
+	      $(pokegreen_obj) \
 	      $(pokered_vc_obj) \
 	      $(pokeblue_vc_obj) \
 	      $(pokeblue_debug_obj) \
@@ -93,7 +97,8 @@ endif
 
 $(pokered_obj):        RGBASMFLAGS += -D _RED
 $(pokeblue_obj):       RGBASMFLAGS += -D _BLUE
-$(pokeblue_debug_obj): RGBASMFLAGS += -D _BLUE -D _DEBUG
+$(pokegreen_obj):      RGBASMFLAGS += -D _GREEN
+$(pokeblue_debug_obj): RGBASMFLAGS += -D _GREEN -D _DEBUG
 $(pokered_vc_obj):     RGBASMFLAGS += -D _RED -D _RED_VC
 $(pokeblue_vc_obj):    RGBASMFLAGS += -D _BLUE -D _BLUE_VC
 
@@ -120,6 +125,7 @@ $(info $(shell $(MAKE) -C tools))
 # Dependencies for objects (drop _red and _blue from asm file basenames)
 $(foreach obj, $(pokered_obj), $(eval $(call DEP,$(obj),$(obj:_red.o=.asm))))
 $(foreach obj, $(pokeblue_obj), $(eval $(call DEP,$(obj),$(obj:_blue.o=.asm))))
+$(foreach obj, $(pokegreen_obj), $(eval $(call DEP,$(obj),$(obj:_green.o=.asm))))
 $(foreach obj, $(pokeblue_debug_obj), $(eval $(call DEP,$(obj),$(obj:_blue_debug.o=.asm))))
 $(foreach obj, $(pokered_vc_obj), $(eval $(call DEP,$(obj),$(obj:_red_vc.o=.asm))))
 $(foreach obj, $(pokeblue_vc_obj), $(eval $(call DEP,$(obj),$(obj:_blue_vc.o=.asm))))
@@ -136,12 +142,14 @@ endif
 
 pokered_pad        = 0x00
 pokeblue_pad       = 0x00
+pokegreen_pad      = 0x00
 pokered_vc_pad     = 0x00
 pokeblue_vc_pad    = 0x00
 pokeblue_debug_pad = 0xff
 
 pokered_opt        = -cjsv -n 0 -k 01 -l 0x33 -m 0x13 -r 03 -t "POKEMON RED"
 pokeblue_opt       = -cjsv -n 0 -k 01 -l 0x33 -m 0x13 -r 03 -t "POKEMON BLUE"
+pokegreen_opt      = -cjsv -n 0 -k 01 -l 0x33 -m 0x13 -r 03 -t "POKEMON GREEN"
 pokeblue_debug_opt = -cjsv -n 0 -k 01 -l 0x33 -m 0x13 -r 03 -t "POKEMON BLUE"
 pokered_vc_opt     = -cjsv -n 0 -k 01 -l 0x33 -m 0x13 -r 03 -t "POKEMON RED"
 pokeblue_vc_opt    = -cjsv -n 0 -k 01 -l 0x33 -m 0x13 -r 03 -t "POKEMON BLUE"
@@ -169,6 +177,7 @@ gfx/credits/the_end.2bpp: tools/gfx += --interleave --png=$<
 
 gfx/slots/red_slots_1.2bpp: tools/gfx += --trim-whitespace
 gfx/slots/blue_slots_1.2bpp: tools/gfx += --trim-whitespace
+gfx/slots/green_slots_1.2bpp: tools/gfx += --trim-whitespace
 
 gfx/tilesets/%.2bpp: tools/gfx += --trim-whitespace
 gfx/tilesets/reds_house.2bpp: tools/gfx += --preserve=0x48
