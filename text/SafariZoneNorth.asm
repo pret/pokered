@@ -208,6 +208,6 @@ _SafariZoneNorthManiacAfterBattleText::
 	para "--You and the"
 	line "POKéMANIAC did"
 	cont "the secret cool-"
-	cont "kids-only"
+	cont "dudes-only"
 	cont "handshake!"
 	done

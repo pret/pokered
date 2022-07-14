@@ -5,7 +5,6 @@ Music_DoLowHealthAlarm::
 
 	bit 7, a  ;alarm enabled?
 ;	ret z     ;nope
-;	ret z     ;nope	
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; FIXED: low health alarm only rings a couple times before stopping after triggering
 	push af

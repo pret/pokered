@@ -355,8 +355,8 @@ KnowsHMMove::
 	ld bc, wPartyMon2 - wPartyMon1
 	jr .next
 ; unreachable
-	ld hl, wBoxMon1Moves
-	ld bc, wBoxMon2 - wBoxMon1
+	;ld hl, wBoxMon1Moves
+	;ld bc, wBoxMon2 - wBoxMon1
 .next
 	ld a, [wWhichPokemon]
 	call AddNTimes

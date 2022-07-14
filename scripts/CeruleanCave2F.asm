@@ -70,15 +70,15 @@ OakBattle:
 	ld a, [wPlayerStarter]
 	cp STARTER2
 	jr nz, .NotSquirtle
-	ld a, 1
+	ld a, 3
 	jr .done
 .NotSquirtle
 	cp STARTER3
 	jr nz, .Charmander
-	ld a, 2
+	ld a, 1
 	jr .done
 .Charmander
-	ld a, 3
+	ld a, 2
 .done
 	ld [wTrainerNo], a
 	ld a, 1

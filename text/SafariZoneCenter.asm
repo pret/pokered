@@ -80,7 +80,7 @@ _SafariZoneCenterJugglerText::
 	done
 
 _SafariZoneCenterJugglerEndBattleText::
-	text "just"
+	text "Just"
 	line "call me The"
 	cont "Matador!"
 	prompt

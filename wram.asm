@@ -913,8 +913,7 @@ wInGame:: db ; whether we're in-game rather than in the main menu before loading
 
 wListWithTMText:: db ; whether the current list menu can contain TMs and should print their moves
 wTMTextShown:: db ; whether text for a TM is visible in a menu
-wDamageIntention:: db ; in battle, the amount of damage a move will do before doing it (used for high jump kick / jump kick crash effect)
-wLowHealthTonePairs:: db ;in battle, used as a counter for low hp alarm tone pairs
+wDamageIntention:: dw ; in battle, the amount of damage a move will do before doing it (used for high jump kick / jump kick crash effect)
 wSpiralBallsDelay:: db
 wIsAltPalettePkmn:: db ;a flag for features related to alternate pokemon color palettes, set in these scenarios:
 ;1 - set prior to loading the palette of a pokemon that should have an alternate palette, reset upon showing the pokemon sprite
@@ -924,7 +923,7 @@ wIsAltPalettePkmnData:: db ;a flag for features related to alternate pokemon col
 ;1 - set prior to loading the data of a pokemon into wram in order to insert the flag for alternate palette into its data permanently
 ;stays set until the next pokemon is loaded.
 
-	ds 1
+wLowHealthTonePairs:: db ;in battle, used as a counter for low hp alarm tone pairs
 
 ; This has overlapping related uses.
 ; When the player tries to use an item or use certain field moves, 0 is stored

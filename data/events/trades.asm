@@ -7,7 +7,7 @@ TradeMons:
 	db ALAKAZAM,    MAGNETON,  TRADE_DIALOGSET_SPROCKET, "SPROCKET@@@" ; cerulean city rocket house basement
 	db PONYTA,     MACHOP,    TRADE_DIALOGSET_CASUAL_COLOR, "HulkSmash@@" ; cinnabar lab
 	db ONIX,       GASTLY,    TRADE_DIALOGSET_HAPPY,  "Nebula@@@@@" ; vermilion city
-	db TAUROS,     LICKITUNG, TRADE_DIALOGSET_CASUAL, "Saliva@@@@@" ; route 18 
+	db TAUROS,     LICKITUNG, TRADE_DIALOGSET_CASUAL_COLOR, "Saliva@@@@@" ; route 18 
 	db PIDGEOTTO,  SEEL,      TRADE_DIALOGSET_POLITE, "Slappy@@@@@" ; cerulean city
 	db DITTO,      ZUBAT,     TRADE_DIALOGSET_POLITE_COLOR, "EmeraldSDB@" ; cinnabar lab
 	db LAPRAS,     SNORLAX,   TRADE_DIALOGSET_HAPPY_COLOR,  "Fatso@@@@@@" ; cinnabar lab 

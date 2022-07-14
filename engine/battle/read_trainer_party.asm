@@ -84,18 +84,23 @@ ReadTrainer:
 	ld a, [wLoneAttackNo] ; Brock is 01, Misty is 02, Erika is 04, etc
 	and a
 	jr z, .AddTeamMove
-	dec a
-	add a
+	dec a ; indices start at 0, wLoneAttackNo starts at 1
+	ld b, a
+	add b ; double the index value 
+	add b ; triple the index value (each entry is 3 bytes)
 	ld c, a
 	ld b, 0
-	ld hl, LoneMoves
-	add hl, bc
-	ld a, [hli]
-	ld d, [hl]
-	ld hl, wEnemyMon1Moves + 2
+	ld hl, LoneMoves 
+	add hl, bc ; select the correct entry from LoneMoves
+	ld a, [hli] ; pokemon index
+	ld c, [hl] ; move index for the above pokemon
+	inc hl
+	ld d, [hl] ; move to be given
+	ld hl, wEnemyMon1Moves
+	add hl, bc ; select which move will be replaced based on c
 	ld bc, wEnemyMon2 - wEnemyMon1
-	call AddNTimes
-	ld [hl], d
+	call AddNTimes ; select the correct pokemon to modify
+	ld [hl], d ; modify the move at the given slot to be the given move
 	jr .FinishUp
 .AddTeamMove
 ; check if our trainer's team has special moves
@@ -122,26 +127,27 @@ ReadTrainer:
 	jr .FinishUp ; nope
 .GiveTeamMoves
 	ld a, [hl]
-	ld [wEnemyMon5Moves + 2], a
+	ld [wEnemyMon6Moves + 1], a
 	jr .FinishUp
 .ChampionRival ; give moves to his team
+; EDIT: not necessary because champion's team already has good moves at such high level from their learnset.
 
 ; pidgeot
-	ld a, SKY_ATTACK
-	ld [wEnemyMon1Moves + 2], a
+;	ld a, SKY_ATTACK
+;	ld [wEnemyMon1Moves + 2], a
 
 ; starter
-	ld a, [wRivalStarter]
-	cp STARTER3
-	ld b, MEGA_DRAIN
-	jr z, .GiveStarterMove
-	cp STARTER1
-	ld b, FIRE_BLAST
-	jr z, .GiveStarterMove
-	ld b, BLIZZARD ; must be squirtle
-.GiveStarterMove
-	ld a, b
-	ld [wEnemyMon6Moves + 2], a
+;	ld a, [wRivalStarter]
+;	cp STARTER3
+;	ld b, MEGA_DRAIN
+;	jr z, .GiveStarterMove
+;	cp STARTER1
+;	ld b, FIRE_BLAST
+;	jr z, .GiveStarterMove
+;	ld b, BLIZZARD ; must be squirtle
+;.GiveStarterMove
+;	ld a, b
+;	ld [wEnemyMon6Moves + 2], a
 .FinishUp
 ; clear wAmountMoneyWon addresses
 	xor a

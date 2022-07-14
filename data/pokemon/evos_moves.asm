@@ -259,6 +259,7 @@ ClefairyEvosMoves:
 	db 38, PETAL_DANCE
 	db 45, SKY_ATTACK
 	db 54, DREAM_EATER
+	db 54, LOVELY_KISS
 	db 65, MINIMIZE
 	db 0
 
@@ -419,6 +420,7 @@ GengarEvosMoves:
 	db 33, DREAM_EATER
 	db 41, SLAM
 	db 46, ICE_PUNCH
+	db 57, LOVELY_KISS
 	db 0
 
 NidoranFEvosMoves:
@@ -583,6 +585,7 @@ GastlyEvosMoves:
 	db 29, BARRAGE
 	db 33, DREAM_EATER
 	db 41, SLAM
+	db 57, LOVELY_KISS
 	db 0
 
 ScytherEvosMoves:
@@ -925,6 +928,7 @@ DrowzeeEvosMoves:
 	db 37, PSYCHIC_M
 	db 43, MEDITATE
 	db 48, DREAM_EATER
+	db 54, LOVELY_KISS
 	db 0
 
 GolemEvosMoves:
@@ -1143,6 +1147,7 @@ VenonatEvosMoves:
 	db 24, PSYBEAM
 	db 33, SLUDGE
 	db 37, DREAM_EATER
+	db 37, SLEEP_POWDER
 	db 42, TAKE_DOWN
 	db 53, SKY_ATTACK
 	db 0
@@ -1222,6 +1227,7 @@ JynxEvosMoves:
 	db 34, PSYBEAM
 	db 39, AMNESIA
 	db 42, DREAM_EATER
+	db 42, LOVELY_KISS
 	db 47, BLIZZARD
 	db 54, EGG_BOMB
 	db 0
@@ -1847,6 +1853,7 @@ VenomothEvosMoves:
 	db 31, WING_ATTACK
 	db 33, SLUDGE
 	db 37, DREAM_EATER
+	db 37, SLEEP_POWDER
 	db 42, TAKE_DOWN
 	db 53, SKY_ATTACK
 	db 0
@@ -1909,6 +1916,7 @@ ButterfreeEvosMoves:
 	db 33, WHIRLWIND
 	db 35, PSYCHIC_M
 	db 45, DREAM_EATER
+	db 45, SLEEP_POWDER
 	db 0
 
 MachampEvosMoves:
@@ -1964,6 +1972,7 @@ HypnoEvosMoves:
 	db 37, PSYCHIC_M
 	db 43, MEDITATE
 	db 48, DREAM_EATER
+	db 54, LOVELY_KISS
 	db 0
 
 GolbatEvosMoves:
@@ -2114,6 +2123,7 @@ ClefableEvosMoves:
 	db 38, PETAL_DANCE
 	db 45, SKY_ATTACK
 	db 54, DREAM_EATER
+	db 54, LOVELY_KISS
 	db 65, MINIMIZE
 	db 0
 
@@ -2184,6 +2194,7 @@ HaunterEvosMoves:
 	db 33, DREAM_EATER
 	db 41, SLAM
 	db 46, ICE_PUNCH
+	db 57, LOVELY_KISS
 	db 0
 
 AbraEvosMoves:
