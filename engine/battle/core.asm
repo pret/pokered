@@ -6364,9 +6364,18 @@ LoadEnemyMonData:
 	ld a, [hli]            ; copy type 2
 	ld [de], a
 	inc de
-	ld a, [hli]            ; copy catch rate NEW: this property is no longer used
-	; NEW: pokemon will be alternate palette if wIsAltPalettePkmn is set
-	ld a, [wIsAltPalettePkmnData]
+	;ld a, [hli]            ; copy catch rate NEW: this property is no longer used
+	ld a, [wIsInBattle]
+	cp $2 ; is it a trainer battle?
+	ld a, [wIsAltPalettePkmnData] ; NEW: wild pokemon will be alternate palette if wIsAltPalettePkmnData is set
+	jr nz, .wildBattleFlags
+	; if it's a trainer battle, copy flags from enemy party data
+	ld hl, wEnemyMon1Flags
+	ld a, [wWhichPokemon]
+	ld bc, wEnemyMon2 - wEnemyMon1
+	call AddNTimes
+	ld a, [hl]
+.wildBattleFlags
 	ld [de], a
 	inc de
 	ld a, [wIsInBattle]

@@ -10,7 +10,7 @@ ReadTrainer:
 ; XXX second is species of first pokemon?
 	ld hl, wEnemyPartyCount
 	xor a
-	ld [wIsAltPalettePkmnData], a ; NPC trainers never have alt palette pokemon for now
+	ld [wIsAltPalettePkmnData], a ; NPC trainers by default have normal palette pokemon, only specific party types can have alt palettes
 	ld [hli], a
 	dec a
 	ld [hl], a
@@ -50,6 +50,8 @@ ReadTrainer:
 	ld a, [hli]
 	cp $FF ; is the trainer special?
 	jr z, .SpecialTrainer ; if so, check for special moves
+	cp $FE ; is the trainer special with alt palettes?
+	jr z, .SpecialTrainer ; if so, load their alt palette flags as well as levels
 	ld [wCurEnemyLVL], a
 .LoopTrainerData
 	ld a, [hli]
@@ -64,12 +66,24 @@ ReadTrainer:
 	jr .LoopTrainerData
 .SpecialTrainer
 ; if this code is being run:
-; - each pokemon has a specific level
+; - each pokemon has a specific level stored in the first byte
 ;      (as opposed to the whole team being of the same level)
+; - the level byte's last bit indicates whether the pokemon uses alternate palette
+;   bit 7 (the final bit) of the level byte is only possible to be set if the level is above 127. 
+;   Since max is 100, we'll never set it. So we can use it to indicate whether the pokemon is using an alternate palette.
 ; - if [wLoneAttackNo] != 0, one pokemon on the team has a special move
 	ld a, [hli]
 	and a ; have we reached the end of the trainer data?
 	jr z, .AddLoneMove
+	bit 7, a 
+	push af
+	ld a, 0
+	jr z, .noAltPalette
+	ld a, 1 
+.noAltPalette
+	ld [wIsAltPalettePkmnData], a
+	pop af
+	and %01111111
 	ld [wCurEnemyLVL], a
 	ld a, [hli]
 	ld [wcf91], a
@@ -80,6 +94,8 @@ ReadTrainer:
 	pop hl
 	jr .SpecialTrainer
 .AddLoneMove
+	xor a
+	ld [wIsAltPalettePkmnData], a
 ; does the trainer have a single monster with a different move?
 	ld a, [wLoneAttackNo] ; Brock is 01, Misty is 02, Erika is 04, etc
 	and a
