@@ -17,6 +17,7 @@ CeruleanRocketHouseB1F_TextPointers:
 	dw CeruleanRocketHouseB1FText3
 	dw CeruleanRocketHouseB1FText4
 	dw CeruleanRocketHouseB1FText5
+	dw CeruleanRocketHouseB1FText6
 
 CeruleanRocketHouseB1FText1:
 	text_asm
@@ -77,6 +78,8 @@ CeruleanRocketHouseMissingnoScript:
 	jp BattleOccurred
 
 
+
+
 CeruleanRocketHouseB1FBeforeTradeText:
 	text_far _CeruleanRocketHouseB1FBeforeTradeText
 	text_end
@@ -101,3 +104,25 @@ CeruleanRocketHouseB1FText5:
 	text_far _CeruleanRocketHouseB1FMapText
 	text_end
 
+CeruleanRocketHouseB1FText6:
+	text_asm
+	ld hl, wPartyMon1Moves
+	ld b, NUM_MOVES
+.checkMoves
+	ld a, [hl]
+	cp PAY_DAY
+	jr z, .codeBroken
+	inc hl
+	dec b
+	jr nz, .checkMoves
+	ld hl, CeruleanRocketHouseCodeText
+	call PrintText
+	jr .done
+.codeBroken
+	farcall VendingMachineMenu
+.done
+	jp TextScriptEnd
+
+CeruleanRocketHouseCodeText:
+	text_far _CeruleanRocketHouseB1FCodeText
+	text_end

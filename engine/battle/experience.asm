@@ -161,8 +161,8 @@ GainExperience:
 	farcall CalcLevelFromExperience
 	pop hl
 	ld a, [hl] ; current level
-	ld [wTempCoins1], a	;FIXED: fixing skip move-learn glitch: need to store the current level in wram
-	;wTempCoins1 was chosen because it's used only for slot machine and gets defaulted to 1 during the mini-game
+	ld [wTempFlag0], a	;FIXED: fixing skip move-learn glitch: need to store the current level in wram
+	;wTempFlag0 / wTempCoins1 was chosen because it's used only for slot machine and gets defaulted to 1 during the mini-game
 	cp d
 	jp z, .nextMon ; if level didn't change, go to next mon
 	ld a, [wCurEnemyLVL]
@@ -262,7 +262,7 @@ GainExperience:
 	;FIXED: fixing skip move-learn glitch: here is where moves are learned from level-up
 	ld a, [wCurEnemyLVL]	; load the level to advance to into a. this starts out as the final level.
 	ld c, a	; load the final level to grow to over to c
-	ld a, [wTempCoins1]	; load the current level into a
+	ld a, [wTempFlag0]	; load the current level into a
 	ld b, a	; load the current level over to b
 .inc_level	; marker for looping back 
 	inc b	;increment 	the current level

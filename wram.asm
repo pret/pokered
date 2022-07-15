@@ -743,6 +743,7 @@ NEXTU
 wCanPlaySlots:: db
 	ds 8
 ; temporary variable used to add payout amount to the player's coins
+wTempFlag0::
 wTempCoins1:: dw
 	ds 2
 ; temporary variable used to subtract the bet amount from the player's coins

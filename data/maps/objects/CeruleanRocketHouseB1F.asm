@@ -10,7 +10,8 @@ CeruleanRocketHouseB1F_Object:
 	bg_event 15, 14, 2
 	bg_event  3, 10, 3 
 	bg_event  1,  4, 4
-	bg_event 13, 10, 5
+	bg_event 12, 10, 5
+	bg_event 13, 11, 6
 
 	def_object_events
 	object_event  8, 6, SPRITE_ROCKET, STAY, DOWN, 1 ; person

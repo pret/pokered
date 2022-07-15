@@ -231,3 +231,10 @@ _CeruleanRocketHouseB1FAfterTradeText::
 	cont "own POCKET and"
 	cont "HOCK it."
 	done
+
+_CeruleanRocketHouseB1FCodeText::
+	text "..-. .. .-. ... -"
+	line ".--. -.- -- -."
+	cont ".--. .- -.--"
+	cont "-.. .- -.--"
+	done

@@ -1062,7 +1062,7 @@ Audio1_96c3:
 	or b
 	cp BATTLE_SFX_START
 	jr c, .asm_96dc
-	cp MAX_SFX_ID_2
+	cp BATTLE_SFX_END
 	jr z, .asm_96de
 	jr c, .asm_96de
 .asm_96dc

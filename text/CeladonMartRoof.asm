@@ -140,6 +140,7 @@ _VendingMachineText5::
 	text_ram wStringBuffer
 	text_start
 	line "popped out!"
+	prompt
 	done
 
 _VendingMachineText6::
@@ -149,4 +150,9 @@ _VendingMachineText6::
 
 _VendingMachineText7::
 	text "Not thirsty!"
+	done
+
+_VendingMachineText8::
+	text "That's enough"
+	line "of that!"
 	done
