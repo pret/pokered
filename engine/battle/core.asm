@@ -2672,7 +2672,7 @@ SelectMenuItem:
 	cp c
 	jr z, .disabled
 	ld a, [wPlayerBattleStatus3]
-	bit 3, a ; transformed
+	bit TRANSFORMED, a 
 	jr nz, .dummy ; game freak derp
 .dummy
 	ld a, [wCurrentMenuItem]
@@ -2776,6 +2776,11 @@ NoMovesLeftText:
 	text_end
 
 SwapMovesInMenu:
+;;;;; FIXED: can't swap moves when transformed (fixes a crash bug)
+	ld a, [wPlayerBattleStatus3]
+	bit TRANSFORMED, a ; transformed
+	jp nz, MoveSelectionMenu
+;;;;;
 	ld a, [wMenuItemToSwap]
 	and a
 	jr z, .noMenuItemSelected
