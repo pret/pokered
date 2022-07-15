@@ -154,7 +154,7 @@ StopAllSounds::
 	ld [wNewSoundID], a
 	ld [wLastMusicSoundID], a
 	dec a
-	jp PlaySound
+	jp StopAllMusic
 
 ; assumes SRAM has been enabled first
 CheckSaveFileExists::

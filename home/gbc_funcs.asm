@@ -71,7 +71,8 @@ Func_3082:: ;added from pokeyellow - update audio so it doesn't "lag"
 	ld a, [hLoadedROMBank]
 	push af
 	farcall FadeOutAudio
-	call DoAudioUpdate
+	callbs Music_DoLowHealthAlarm
+	callbs Audio1_UpdateMusic
 	pop af
 	call BankswitchCommon
 	ret

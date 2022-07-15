@@ -10,9 +10,7 @@ PlayPokedexRatingSfx::
 	jr .getSfxPointer
 .gotSfxPointer
 	push bc
-	ld a, SFX_STOP_ALL_MUSIC
-	ld [wNewSoundID], a
-	call PlaySoundWaitForCurrent
+	call StopAllMusic
 	pop bc
 	ld b, $0
 	ld hl, PokedexRatingSfxPointers

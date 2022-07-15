@@ -1826,7 +1826,7 @@ JoypadOverworld::
 ; if done simulating button presses
 .doneSimulating
 	xor a
-	ld [wWastedByteCD3A], a
+;	ld [wWastedByteCD3A], a
 	ld [wSimulatedJoypadStatesIndex], a
 	ld [wSimulatedJoypadStatesEnd], a
 	ld [wJoyIgnore], a

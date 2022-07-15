@@ -22,6 +22,12 @@ jpfar: MACRO
 	jp Bankswitch
 ENDM
 
+callbs: MACRO	;audionote - added from pokeyellow
+	ld a, BANK(\1)
+	call BankswitchCommon
+	call \1
+ENDM
+
 homecall: MACRO
 	ldh a, [hLoadedROMBank]
 	push af

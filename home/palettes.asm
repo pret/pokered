@@ -22,22 +22,22 @@ GBPalNormal::
 	ld a, %11100100 ; 3210
 	ldh [rBGP], a
 	ld a, %11010000 ; 3100
+	jr UpdatePal
+
+GBPalWhiteOut::
+; White out all palettes.
+	xor a
+	ldh [rBGP], a
+	ldh [rOBP1], a
+	;fall through
+
+UpdatePal:
 	ldh [rOBP0], a
 	call UpdateGBCPal_BGP
 	call UpdateGBCPal_OBP0
 	call UpdateGBCPal_OBP1
 	ret
 
-GBPalWhiteOut::
-; White out all palettes.
-	xor a
-	ldh [rBGP], a
-	ldh [rOBP0], a
-	ldh [rOBP1], a
-	call UpdateGBCPal_BGP
-	call UpdateGBCPal_OBP0
-	call UpdateGBCPal_OBP1
-	ret
 
 RunDefaultPaletteCommand::
 	ld b, SET_PAL_DEFAULT

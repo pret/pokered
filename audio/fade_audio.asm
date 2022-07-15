@@ -38,9 +38,7 @@ FadeOutAudio::
 	ld b, a
 	xor a
 	ld [wAudioFadeOutControl], a
-	ld a, SFX_STOP_ALL_MUSIC
-	ld [wNewSoundID], a
-	call PlaySound
+	call StopAllMusic
 	ld a, [wAudioSavedROMBank]
 	ld [wAudioROMBank], a
 	ld a, b

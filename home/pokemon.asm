@@ -406,16 +406,10 @@ GetMonHeader::
 	ld bc, BASE_DATA_SIZE
 	ld hl, BaseStats
 	call AddNTimes
-	ld de, wMonHeader
-	ld bc, BASE_DATA_SIZE
-	call CopyData
-	jr .done
+	jr .copyBaseStats
 .missingno
 	ld hl, MissingnoBaseStats
-	ld bc, BASE_DATA_SIZE
-	ld de, wMonHeader
-	call CopyData
-	jr .done
+	jr .copyBaseStats
 .specialID
 	ld hl, wMonHSpriteDim
 	ld [hl], b ; write sprite dimensions
@@ -426,8 +420,9 @@ GetMonHeader::
 	jr .done
 .mew
 	ld hl, MewBaseStats 
-	ld de, wMonHeader
+.copyBaseStats
 	ld bc, BASE_DATA_SIZE
+	ld de, wMonHeader
 	call CopyData ; now in same bank as rest of base stat data so no need to farcopy
 .done
 	ld a, [wd0b5]

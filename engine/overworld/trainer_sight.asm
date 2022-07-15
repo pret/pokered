@@ -361,8 +361,7 @@ PlayTrainerMusic::
 	ret nz
 	xor a
 	ld [wAudioFadeOutControl], a
-	ld a, SFX_STOP_ALL_MUSIC
-	call PlaySound
+	call StopAllMusic
 	ld a, BANK(Music_MeetEvilTrainer)
 	ld [wAudioROMBank], a
 	ld [wAudioSavedROMBank], a

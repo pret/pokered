@@ -84,5 +84,5 @@ INCLUDE "home/predef.asm"
 INCLUDE "home/hidden_objects.asm"
 INCLUDE "home/predef_text.asm"
 INCLUDE "home/gbc_funcs.asm"
-INCLUDE "home/test.asm"
+;INCLUDE "home/test.asm"
 
