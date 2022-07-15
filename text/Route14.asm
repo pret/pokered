@@ -184,8 +184,8 @@ _Route14AfterBattleText11::
 
 _Route14BattleText12::
 	text "Lots of burly"
-	line "BIKERs here isn't"
-	cont "there?"
+	line "BIKERs here,"
+	cont "aren't there?"
 	done
 
 _Route14EndBattleText12::
