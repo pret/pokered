@@ -1074,7 +1074,7 @@ Audio2_IsCry:
 
 ; --- this section is only present in this copy of the sound engine
 Audio2_IsBattleSFX:
-; Returns whether the currently playing audio is a cry in carry.
+; Returns whether the currently playing audio is a battle sfx in carry.
 	ld a, [wChannelSoundIDs + Ch8]
 	ld b, a
 	ld a, [wChannelSoundIDs + Ch5]
