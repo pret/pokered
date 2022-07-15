@@ -224,17 +224,15 @@ OneTwoAndText:
 	text_asm
 	ld a, [wIsInBattle]
 	and a
-	jr nz, .loadSFX2 ; FIXED: SFX_SWAP doesn't exist in the battle audio engine so it would play an arbitrary sound
+	jr nz, .inBattlePoof ; FIXED: SFX_SWAP doesn't exist in the battle audio engine so it would play an arbitrary sound
 	ld a, SFX_SWAP
-	jr .playSound
-.loadSFX2
-	ld a, $45
-	ld [wFrequencyModifier], a
-	ld a, $f0
-	ld [wTempoModifier], a
-	ld a, SFX_BATTLE_32 ; this is the closest we can probably get to SFX_SWAP here
-.playSound
 	call PlaySoundWaitForCurrent
+	jr .done
+.inBattlePoof
+	push bc
+	farcall Music_LearnMovePoofInBattle ; play in-battle poof sound
+	pop bc
+.done
 	ld hl, PoofText
 	ret
 
