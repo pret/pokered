@@ -56,8 +56,8 @@ MonPartyDataNew:
 	db ICON_CAT       ; Persian
 	db ICON_MON2      ; Psyduck
 	db ICON_MON       ; Golduck
-	db ICON_FUZZBALL  ; Mankey
-	db ICON_FUZZBALL  ; Primeape
+	db ICON_FIGHTING  ; Mankey
+	db ICON_FIGHTING  ; Primeape
 	db ICON_CAT       ; Growlithe
 	db ICON_QUADRUPED2; Arcanine
 	db ICON_WATER     ; Poliwag
@@ -84,8 +84,8 @@ MonPartyDataNew:
 	db ICON_ROBOT     ; Magnemite
 	db ICON_ROBOT     ; Magneton
 	db ICON_BIRD      ; Farfetch'd
-	db ICON_FUZZBALL  ; Doduo
-	db ICON_FUZZBALL  ; Dodrio
+	db ICON_BIRD  	  ; Doduo
+	db ICON_BIRD      ; Dodrio
 	db ICON_WATER     ; Seel
 	db ICON_WATER     ; Dewgong
 	db ICON_AMORPHOUS ; Grimer

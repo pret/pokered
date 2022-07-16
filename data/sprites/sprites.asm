@@ -72,7 +72,6 @@ SpriteSheetPointerTable:
 	overworld_sprite BlaineSprite, 12           ; SPRITE_BLAINE
 	overworld_sprite SeelSprite, 12             ; SPRITE_SEEL
 	overworld_sprite Monster2Sprite, 12         ; SPRITE_MONSTER2
-	overworld_sprite FuzzballSprite, 12     	; SPRITE_FUZZBALL
 	overworld_sprite CatSprite, 12     	        ; SPRITE_CAT
 	overworld_sprite LegendaryBirdSprite, 12    ; SPRITE_BIRD2
 	overworld_sprite PsychicSprite, 12     	    ; SPRITE_PSYCHIC

@@ -233,8 +233,8 @@ _CeruleanRocketHouseB1FAfterTradeText::
 	done
 
 _CeruleanRocketHouseB1FCodeText::
-	text "..-. .. .-. ... -"
-	line ".--. -.- -- -."
-	cont ".--. .- -.--"
-	cont "-.. .- -.--"
+	text "··-· ·· ·-· ··· -"
+	line "·--· -·- -- -·"
+	cont "·--· ·- -·--"
+	cont "-·· ·- -·--"
 	done

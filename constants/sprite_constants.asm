@@ -67,7 +67,6 @@
 	const SPRITE_BLAINE                  ; $3b
 	const SPRITE_SEEL                    ; $3c
 	const SPRITE_MONSTER2                ; $3d
-	const SPRITE_FUZZBALL                ; $47
 	const SPRITE_CAT                     ; $47
 	const SPRITE_BIRD2                   ; $47
 	const SPRITE_PSYCHIC                 ; $47

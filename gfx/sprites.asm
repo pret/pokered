@@ -79,7 +79,6 @@ SECTION "NPC Sprites 3", ROMX, BANK[$30]
 
 MomSprite::              INCBIN "gfx/sprites/mom.2bpp"
 
-FuzzballSprite::         INCBIN "gfx/sprites/fuzzball.2bpp"
 PsychicSprite::          INCBIN "gfx/sprites/psychic.2bpp"
 FightingSprite::          INCBIN "gfx/sprites/fighting.2bpp"
 CatSprite::              INCBIN "gfx/capsule_monsters_stuff/cat.2bpp"
