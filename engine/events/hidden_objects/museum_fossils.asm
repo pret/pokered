@@ -22,6 +22,8 @@ KabutopsFossilText::
 	text_far _KabutopsFossilText
 	text_end
 
+;;;;;;;; PureRGBnote - FIXED: Updated to display the correct pokemon palette
+
 DisplayMonFrontSpriteInBox:
 ; Displays a pokemon's front sprite in a pop-up window.
 ; [wcf91] = pokemon internal id number
@@ -35,6 +37,9 @@ DisplayMonFrontSpriteInBox:
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	call UpdateSprites
+	call Delay3 ; allow box to finish rendering before setting palette
+	ld b, SET_PAL_MIDDLE_SCREEN_MON_BOX
+	call RunPaletteCommand
 	ld a, [wcf91]
 	ld [wd0b5], a
 	call GetMonHeader
@@ -44,9 +49,23 @@ DisplayMonFrontSpriteInBox:
 	ldh [hStartTileID], a
 	hlcoord 10, 11
 	predef AnimateSendingOutMon
+	ld a, [wcf91]
+	cp FOSSIL_KABUTOPS
+	jr z, .skipCry
+	cp FOSSIL_AERODACTYL
+	jr z, .skipCry
+	call PlayCry
+.skipCry
 	call WaitForTextScrollButtonPress
-	call LoadScreenTilesFromBuffer1
-	call Delay3
+	ld a, MON_SPRITE_POPUP
+	ld [wTextBoxID], a
+	call DisplayTextBoxID ; redisplay the box to clear the pokemon sprite out
+	call Delay3 ; allow box to finish clearing 
+	call RunDefaultPaletteCommand ; reset palette to what it was before displaying this box
+	call LoadScreenTilesFromBuffer1 ; close the box
+	call Delay3 ; allow box to finish closing before resetting hWY
 	ld a, $90
 	ldh [hWY], a
 	ret
+
+;;;;;;;;

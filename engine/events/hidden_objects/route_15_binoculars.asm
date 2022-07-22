@@ -1,3 +1,5 @@
+;;;;;;;; PureRGBnote: FIXED: Articuno cry is played within the DisplayMonFrontSpriteInBox code now
+
 Route15GateLeftBinoculars:
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
@@ -6,8 +8,11 @@ Route15GateLeftBinoculars:
 	tx_pre Route15UpstairsBinocularsText
 	ld a, ARTICUNO
 	ld [wcf91], a
-	call PlayCry
 	jp DisplayMonFrontSpriteInBox
+
+;;;;;;;;
+	
+	
 
 Route15UpstairsBinocularsText::
 	text_far _Route15UpstairsBinocularsText

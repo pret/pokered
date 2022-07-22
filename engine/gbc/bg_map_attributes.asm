@@ -105,7 +105,7 @@ LoadBGMapAttributes::
 	ret
 
 BGMapAttributesPointers:
-	dw BGMapAttributes_Unknown1
+	dw BGMapAttributes_PokemonMiddleScreenBox
 	dw BGMapAttributes_Unknown2
 	dw BGMapAttributes_GameFreakIntro
 	dw BGMapAttributes_TrainerCard
@@ -117,7 +117,7 @@ BGMapAttributesPointers:
 	dw BGMapAttributes_StatusScreen
 	dw BGMapAttributes_Battle
 	dw BGMapAttributes_WholeScreen
-	dw BGMapAttributes_Unknown13
+	dw BGMapAttributes_Unknown1
 
 HandleBadgeFaceAttributes:
 ; zero out the attributes if the player doesn't have the respective badge

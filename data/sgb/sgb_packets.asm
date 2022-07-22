@@ -96,6 +96,11 @@ BlkPacket_Pokedex:
 	ATTR_BLK_DATA %111, 1,1,0, 01,01, 08,08 ; mon: pal 1, everything else: pal 0
 	ds 8, 0
 
+BlkPacket_PokemonMiddleScreenBox:
+	ATTR_BLK 1
+	ATTR_BLK_DATA %111, 1,1,0, 06,04, 14,13 ; mon: pal 1, everything else: pal 0
+	ds 8, 0
+
 ; unused
 	db $02, 00,00, 17,00
 	db $01, 00,01, 19,00

@@ -120,6 +120,25 @@ SetPal_Pokedex:
 	ld de, BlkPacket_Pokedex
 	ret
 
+SetPal_MiddleScreenMonBox:
+	ld hl, PalPacket_Empty
+	ld de, wPalPacket
+	ld bc, $10
+	call CopyData
+
+	call GetOverworldPalette
+	ld hl, wPalPacket + 1
+	ld [hl], a
+	
+	ld a, [wcf91]
+	; no alt palette pkmn colors in this case
+	call DeterminePaletteIDOutOfBattle
+	ld hl, wPalPacket + 3
+	ld [hl], a
+	ld hl, wPalPacket
+	ld de, BlkPacket_PokemonMiddleScreenBox
+	ret
+
 SetPal_ColorBeforeAfter:
 	ld hl, PalPacket_Empty
 	ld de, wPalPacket
@@ -183,6 +202,16 @@ SetPal_Overworld:
 	ld de, wPalPacket
 	ld bc, $10
 	call CopyData
+	call GetOverworldPalette
+	ld hl, wPalPacket + 1
+	ld [hld], a
+	ld de, BlkPacket_WholeScreen
+	ld a, SET_PAL_OVERWORLD
+	ld [wDefaultPaletteCommand], a
+	ret
+
+; stores the palette used  for the current map in a
+GetOverworldPalette:
 	ld a, [wCurMapTileset]
 	cp CEMETERY
 	jr z, .PokemonTowerOrAgatha
@@ -209,11 +238,6 @@ SetPal_Overworld:
 	ld a, PAL_ROUTE - 1
 .town
 	inc a ; a town's palette ID is its map ID + 1
-	ld hl, wPalPacket + 1
-	ld [hld], a
-	ld de, BlkPacket_WholeScreen
-	ld a, SET_PAL_OVERWORLD
-	ld [wDefaultPaletteCommand], a
 	ret
 .rocketHouseBasement
 	ld a, PAL_REDMON - 1
@@ -311,6 +335,7 @@ SetPalFunctions:
 	dw SetPal_GameFreakIntro
 	dw SetPal_TrainerCard
 	dw SetPal_ColorBeforeAfter
+	dw SetPal_MiddleScreenMonBox
 
 ; The length of the blk data of each badge on the Trainer Card.
 ; The Rainbow Badge has 3 entries because of its many colors.
@@ -1048,8 +1073,9 @@ palPacketPointers:
 	dw wTrainerCardBlkPacket
 	dw BlkPacket_GameFreakIntro
 	dw wPalPacket
-	dw wPalPacket ; unused
+	dw BlkPacket_PokemonMiddleScreenBox
 palPacketPointersEnd:
+	
 
 
 EmptyFunc3:
