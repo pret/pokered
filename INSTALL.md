@@ -4,8 +4,25 @@ These instructions explain how to set up the tools required to build **pokered**
 
 If you run into trouble, ask for help on IRC or Discord (see [README.md](README.md)).
 
+- [Prepare the environment](#prepare-the-environment)
+  * [Windows 10 or 11](#windows-10-or-11)
+  * [Windows (alternate)](#windows-alternate)
+  * [macOS](#macos)
+  * [Linux](#linux)
+    + [Debian or Ubuntu](#debian-or-ubuntu)
+    + [OpenSUSE](#opensuse)
+    + [Arch Linux](#arch-linux)
+    + [Termux](#termux)
+    + [Other distros](#other-distros)
+- [Build pokered](#build-pokered)
+  * [Build with a local rgbds version](#build-with-a-local-rgbds-version)
 
-## Windows 10
+
+# Prepare the environment
+
+The tools that are available to you differ based on your OS.
+
+## Windows 10 or 11
 
 Download and install [**Windows Subsystem for Linux**](https://docs.microsoft.com/en-us/windows/wsl/install-win10). Then open the **WSL terminal**.
 
@@ -15,24 +32,26 @@ Update WSL's software before continuing. If you chose Debian, Ubuntu, or another
 apt-get update && apt-get upgrade
 ```
 
-WSL has its own file system that's not accessible from Windows, but Windows files *are* accessible from WSL. So you're going to want to install pokered within Windows. You'll have to change the **current working directory** every time you open WSL.
+WSL has its own file system that's not accessible from Windows, but Windows files *are* accessible from WSL. So you're going to want to install **pokered** within Windows. You'll have to change the **current working directory** every time you open WSL.
 
-For example, if you want to store pokered in **C:\Users\\*\<user>*\Desktop**, enter this command:
+For example, if you want to store **pokered** in `C:\Users\<user>\Desktop`, enter this command:
 
 ```bash
 cd /mnt/c/Users/<user>/Desktop
 ```
 
-(The Windows `C:\` drive is called `/mnt/c/` in WSL. Replace *\<user>* in the example path with your username.)
+(The Windows `C:\` drive is called `/mnt/c/` in WSL. Replace `<user>` in the example path with your username.)
 
 If this works, then follow [the instructions for **Linux**](#linux) below for whatever distribution you installed for WSL.
 
-Otherwise, continue reading below for [the older Windows instructions](#windows).
+Otherwise, continue reading below for [the older Windows instructions](#windows-alternate).
 
 
-## Windows
+## Windows (alternate)
 
-Download [**Cygwin**](http://cygwin.com/install.html): **setup-x86_64.exe** for 64-bit Windows, **setup-x86.exe** for 32-bit.
+*These instructions are the only option for older versions of Windows, but they also work for Windows 10 or 11 if you prefer not to use the [above](#windows-10-or-11).*
+
+Download [**Cygwin**](http://cygwin.com/install.html): use the installer **setup-x86_64.exe** for 64-bit Windows, **setup-x86.exe** for 32-bit.
 
 Run setup and leave the default settings. At the "**Select Packages**" step, choose to install the following, all of which are in the "**Devel**" category:
 
@@ -40,25 +59,24 @@ Run setup and leave the default settings. At the "**Select Packages**" step, cho
 - `git`
 - `gcc-core`
 
-Double click on the text that says "**Skip**" next to each package to select the most recent version to install.
+Double click on the text that says "**Skip**" next to each package to select the most recent version to install. Click "**Next**" and go through the remaining installer screens until it's finished.
 
-Then follow the [**rgbds** install instructions](https://rgbds.gbdev.io/install#pre-built) for Windows with Cygwin to install **rgbds 0.5.2**.
+Once you have finished installing Cygwin, follow the [**rgbds** install instructions](https://rgbds.gbdev.io/install#pre-built) (click **Windows**, then **Cygwin, MSYS2**) to install **rgbds 0.5.2**.
 
-**Note:** If you already have an older rgbds, you will need to update to 0.5.2. Ignore this if you have never installed rgbds before. If a version newer than 0.5.2 does not work, try downloading 0.5.2.
+***Note** (ignore this if you have never installed **rgbds** before):  
+If you already have an older version of **rgbds**, you will need to update to **0.5.2**. If a version newer than **0.5.2** does not work, try downloading **0.5.2.***
 
-Now open the **Cygwin terminal** and enter the following commands.
+Now open the **Cygwin terminal** and enter the following commands. You can open the terminal by double-clicking `Cygwin.bat`, which is in ``C:\cygwin64\``.
 
-Cygwin has its own file system that's within Windows, at **C:\cygwin64\home\\*\<user>***. If you don't want to store pokered there, you'll have to change the **current working directory** every time you open Cygwin.
-
-For example, if you want to store pokered in **C:\Users\\*\<user>*\Desktop**:
+Cygwin has its own file system that's stored within Windows. The Cygwin terminal uses its own syntax, different from Windows, to refer to directories and objects inside the Cygwin file system. In Windows terms, the Cygwin terminal's default **current working directory** is `C:\cygwin64\home\<user>`; in Cygwin terms this same directory is called `/cygdrive/c/cygwin64/home/<user>`. (Replace `<user>` in the example path with your username).
+  
+If you store **pokered** somewhere other than the default directory, you'll have to change the **current working directory** in the Cygwin terminal every time you open Cygwin. For example, if you store **pokered** in `C:\Users\<user>\Desktop` you must enter this command:
 
 ```bash
 cd /cygdrive/c/Users/<user>/Desktop
 ```
 
-(The Windows `C:\` drive is called `/cygdrive/c/` in Cygwin. Replace *\<user>* in the example path with your username.)
-
-Now you're ready to [build **pokered**](#build-pokered).
+With the Cygwin terminal open and your **current working directory** set to wherever you want to store **pokered**, you're ready to [build **pokered**](#build-pokered).
 
 
 ## macOS
@@ -138,7 +156,7 @@ If `rgbds` is not available, you'll need to follow the [**rgbds** instructions](
 Now you're ready to [build **pokered**](#build-pokered).
 
 
-## Build pokered
+# Build pokered
 
 To download the **pokered** source files:
 
@@ -153,9 +171,9 @@ To build **pokered.gbc** and **pokeblue.gbc**:
 make
 ```
 
-### Build with a local rgbds version
+## Build with a local rgbds version
 
-If you have different projects that require different versions of `rgbds`, it might not be convenient to install rgbds 0.5.2 globally. Instead, you can put its files in a directory within pokered, such as `pokered/rgbds-0.5.2/`. Then specify it when you run `make`:
+If you have different projects that require different versions of **rgbds**, it might not be convenient to install **rgbds 0.5.2** globally. Instead, you can put its files in a directory within **pokered**, such as `pokered/rgbds-0.5.2/`. Then specify it when you run `make`:
 
 ```bash
 make RGBDS=rgbds-0.5.2/
