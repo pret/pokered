@@ -32,8 +32,9 @@ _ReceivedTM24Text::
 
 _TM24ExplanationText::
 	text_start
-
-	para "TM24 contains"
+	para "@"
+	text_ram wStringBuffer
+	text " contains"
 	line "THUNDERBOLT!"
 
 	para "Teach it to an"

@@ -1,5 +1,5 @@
 VictoryRoad1FWildMons:
-	def_grass_wildmons 8 ; encounter rate
+	def_grass_wildmons 6 ; encounter rate
 	db 35, MACHOKE
 	db 36, MACHOKE
 	db 35, PRIMEAPE

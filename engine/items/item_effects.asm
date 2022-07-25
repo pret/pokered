@@ -41,7 +41,7 @@ ItemUsePtrTable:
 	dw ItemUseMedicine   ; POTION
 	dw ItemUseBait       ; SAFARI_BAIT
 	dw ItemUseRock       ; SAFARI_ROCK
-	dw UnusableItem 	 ; UNUSED_ITEM1
+	dw ValuableItem 	 ; OLD_COIN
 	dw UnusableItem      ; UNUSED_ITEM2
 	dw UnusableItem      ; UNUSED_ITEM3
 	dw UnusableItem      ; UNUSED_ITEM4
@@ -49,7 +49,7 @@ ItemUsePtrTable:
 	dw UnusableItem      ; UNUSED_ITEM6
 	dw ItemUseEscapeRope ; ESCAPE_ROPE
 	dw ItemUseRepel      ; REPEL
-	dw UnusableItem      ; OLD_AMBER
+	dw FossilItem        ; OLD_AMBER
 	dw ItemUseEvoStone   ; FIRE_STONE
 	dw ItemUseEvoStone   ; THUNDER_STONE
 	dw ItemUseEvoStone   ; WATER_STONE
@@ -59,15 +59,15 @@ ItemUsePtrTable:
 	dw ItemUseVitamin    ; CARBOS
 	dw ItemUseVitamin    ; CALCIUM
 	dw ItemUseVitamin    ; RARE_CANDY
-	dw UnusableItem      ; DOME_FOSSIL
-	dw UnusableItem      ; HELIX_FOSSIL
+	dw FossilItem        ; DOME_FOSSIL
+	dw FossilItem        ; HELIX_FOSSIL
 	dw UnusableItem      ; SECRET_KEY
 	dw ItemUsePocketAbra ; POCKET_ABRA
 	dw UnusableItem      ; BIKE_VOUCHER
 	dw ItemUseXAccuracy  ; X_ACCURACY
 	dw ItemUseEvoStone   ; LEAF_STONE
 	dw ItemUseCardKey    ; CARD_KEY
-	dw UnusableItem      ; NUGGET
+	dw ValuableItem      ; NUGGET
 	dw ItemUseApexChip   ; APEX_CHIP
 	dw ItemUsePokedoll   ; POKE_DOLL
 	dw ItemUseMedicine   ; FULL_HEAL
@@ -108,7 +108,7 @@ ItemUseBall:
 ; Balls can't be used out of battle.
 	ld a, [wIsInBattle]
 	and a
-	jp z, ItemUseNotTime
+	jp z, ItemUseInBattle
 
 ; Balls can't catch trainers' Pokémon.
 	dec a
@@ -173,8 +173,13 @@ ItemUseBall:
 	jr nz, .loop
 	ld a, [wEnemyMonSpecies2]
 	cp RESTLESS_SOUL
+	jp nz, .loop
+	push bc
+	ld b, SILPH_SCOPE
+	call IsItemInBag
+	pop bc
+	jr z, .loop
 	ld b, $10 ; can't be caught value
-	jp z, .setAnimData
 
 ; Get the first random number. Let it be called Rand1.
 ; Rand1 must be within a certain range according the kind of ball being thrown.
@@ -537,17 +542,29 @@ ItemUseBall:
 	ld [wd11e], a
 	ld a, [wBattleType]
 	dec a ; is this the old man battle?
-	jr z, .oldManCaughtMon ; if so, don't give the player the caught Pokémon
+	jp z, .oldManCaughtMon ; if so, don't give the player the caught Pokémon
 
 	ld hl, ItemUseBallText05
 	call PrintText
+	
+;;;;;;;;;; PureRGBnote - NEW: ghost marowak can be caught and the event will complete if you do so
+	ld a, [wCurMap]
+	cp POKEMON_TOWER_6F
+	jr nz, .notGhostMarowak
+	ld a, [wEnemyMonSpecies2]
+	cp RESTLESS_SOUL
+	jp nz, .notGhostMarowak
+	ld a, 1
+	ld [wCaughtGhostMarowak], a
+.notGhostMarowak
+;;;;;;;;;;
 
 ; Add the caught Pokémon to the Pokédex.
 	predef IndexToPokedex
 	ld a, [wd11e]
 	and a ; is it missingno?
 	jr z, .skipShowingPokedexData ; don't mark in pokedex if so
-	dec a
+	dec a ; pokedex is shifted by 1 because missingno is first
 	ld c, a
 	ld b, FLAG_TEST
 	ld hl, wPokedexOwned
@@ -831,9 +848,7 @@ ItemUseSurfboard:
 .storeSimulatedButtonPress
 	ld a, b
 	ld [wSimulatedJoypadStatesEnd], a
-	xor a
-	ld [wWastedByteCD39], a
-	inc a
+	ld a, 1
 	ld [wSimulatedJoypadStatesIndex], a
 	ret
 
@@ -955,7 +970,7 @@ ItemUseMedicine:
 .checkItemType
 	ld a, [wcf91]
 	cp REVIVE
-	jr nc, .healHP ; if it's a Revive or Max Revive
+	jp nc, .healHP ; if it's a Revive or Max Revive
 	cp FULL_HEAL
 	jr z, .cureStatusAilment ; if it's a Full Heal
 	cp HP_UP
@@ -988,6 +1003,10 @@ ItemUseMedicine:
 	and c ; does the pokemon have a status ailment the item can cure?
 	jp z, .healingItemNoEffect
 ; if the pokemon has a status the item can heal
+	ld a, 1
+	ld [wAIMoveSpamAvoider], a
+	ld a, [wBattleMonStatus]
+	ld [wAITargetMonStatus], a
 	xor a
 	ld [hl], a ; remove the status ailment in the party data
 	ld a, b
@@ -1723,6 +1742,9 @@ ItemUseEscapeRope:
 INCLUDE "data/tilesets/escape_rope_tilesets.asm"
 
 ItemUsePocketAbra:
+	ld a, [wIsInBattle]
+	and a
+	jp nz, ItemUseNotTime
 	ld hl, .wantToTeleportText
 	call PrintText
 	call YesNoChoice
@@ -1807,7 +1829,7 @@ ItemUseRepelCommon:
 ItemUseXAccuracy:
 	ld a, [wIsInBattle]
 	and a
-	jp z, ItemUseNotTime
+	jp z, ItemUseInBattle
 	ld hl, wPlayerBattleStatus2
 	set USING_X_ACCURACY, [hl] ; X Accuracy bit
 	jp PrintItemUseTextAndRemoveItem
@@ -1868,7 +1890,7 @@ ItemUseCardKey:
 ItemUsePokedoll:
 	ld a, [wIsInBattle]
 	dec a
-	jp nz, ItemUseNotTime
+	jp nz, ItemUseInBattle
 	ld a, $01
 	ld [wEscapedFromBattle], a
 	jp PrintItemUseTextAndRemoveItem
@@ -1876,7 +1898,7 @@ ItemUsePokedoll:
 ItemUseGuardSpec:
 	ld a, [wIsInBattle]
 	and a
-	jp z, ItemUseNotTime
+	jp z, ItemUseInBattle
 	ld hl, wPlayerBattleStatus2
 	set PROTECTED_BY_MIST, [hl] ; Mist bit
 	jp PrintItemUseTextAndRemoveItem
@@ -1892,7 +1914,7 @@ ItemUseMaxRepel:
 ItemUseDireHit:
 	ld a, [wIsInBattle]
 	and a
-	jp z, ItemUseNotTime
+	jp z, ItemUseInBattle
 	ld hl, wPlayerBattleStatus2
 	set GETTING_PUMPED, [hl] ; Focus Energy bit
 	jp PrintItemUseTextAndRemoveItem
@@ -1901,7 +1923,7 @@ ItemUseXStat:
 	ld a, [wIsInBattle]
 	and a
 	jr nz, .inBattle
-	call ItemUseNotTime
+	call ItemUseInBattle
 	ld a, 2
 	ld [wActionResultOrTookBattleTurn], a ; item not used
 	ret
@@ -1966,6 +1988,8 @@ ItemUsePokeflute:
 	ld hl, PlayedFluteNoEffectText
 	jp PrintText
 .inBattle
+	ld a, [wBattleMonStatus]
+	ld [wAITargetMonStatus], a
 	xor a
 	ld [wWereAnyMonsAsleep], a
 	ld b, ~SLP & $ff
@@ -1977,6 +2001,8 @@ ItemUsePokeflute:
 ; if it's a trainer battle
 	ld hl, wEnemyMon1Status
 	call WakeUpEntireParty
+	ld a, 1
+	ld [wAIMoveSpamAvoider], a ; load this value so the AI doesn't spam status moves right after you heal them
 .skipWakingUpEnemyParty
 	ld hl, wBattleMonStatus
 	ld a, [hl]
@@ -2482,6 +2508,14 @@ PPRestoredText:
 UnusableItem:
 	jp ItemUseNotTime
 
+ValuableItem:
+	ld hl, ItemUseValuableText
+	jp ItemUseFailed
+
+FossilItem:
+	ld hl, ItemUseFossilText
+	jp ItemUseFailed
+
 ItemUseTMHM:
 	ld a, [wIsInBattle]
 	and a
@@ -2630,6 +2664,10 @@ ItemUseNotTime:
 	ld hl, ItemUseNotTimeText
 	jr ItemUseFailed
 
+ItemUseInBattle:
+	ld hl, ItemUseInBattleText
+	jr ItemUseFailed
+
 ItemUseNotYoursToUse:
 	ld hl, ItemUseNotYoursToUseText
 	jr ItemUseFailed
@@ -2665,6 +2703,18 @@ ItemUseFailed:
 
 ItemUseNotTimeText:
 	text_far _ItemUseNotTimeText
+	text_end
+
+ItemUseValuableText:
+	text_far _ItemUseValuableText
+	text_end
+
+ItemUseFossilText:
+	text_far _ItemUseFossilText
+	text_end
+
+ItemUseInBattleText:
+	text_far _ItemUseInBattleText
 	text_end
 
 ItemUseNotYoursToUseText:

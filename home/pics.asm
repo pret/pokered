@@ -27,7 +27,7 @@ UncompressMonSprite::
     ld [wSpriteInputPtr],a    ; fetch sprite input pointer
     ld a,[hl]
     ld [wSpriteInputPtr+1],a
-    ld a,[wcf91] ; XXX name for this ram location
+    ld a, [wcf91]
     cp MISSINGNO
     jr z,.missingNo
     cp FOSSIL_KABUTOPS

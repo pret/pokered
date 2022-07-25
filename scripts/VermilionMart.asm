@@ -36,9 +36,6 @@ VermilionMartTMKidFlavor:
 TMKidQuick2::
 	text_far _TMKidQuick
 	text_end
-	
-VermilionTMKidShop::
-	script_mart TM_KINESIS, TM_LEECH_SEED
 
 VermilionMartText2:
 	text_far _VermilionMartText2
@@ -48,5 +45,4 @@ VermilionMartText3:
 	text_far _VermilionMartText3
 	text_end
 
-VermilionCashierText::
-	script_mart POKE_BALL, SUPER_POTION, ICE_HEAL, AWAKENING, PARLYZ_HEAL, REPEL
+INCLUDE "data/items/marts/vermilion.asm"

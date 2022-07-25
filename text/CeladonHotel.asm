@@ -9,7 +9,7 @@ _CeladonHotelText1::
 _CeladonHotelText2::
 	text "I'm on vacation"
 	line "with my brother"
-	cont "and boy friend."
+	cont "and boyfriend."
 
 	para "CELADON is such a"
 	line "pretty city!"

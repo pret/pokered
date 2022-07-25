@@ -146,7 +146,9 @@ _VermilionCityDockBeautyGreeting::
 
 _VermilionCityDockBeautyReceivedItemText::
 	text "<PLAYER> received"
-	line "a ??????!"
+	line "a @"
+	text_ram wStringBuffer
+	text "!"
 	done
 
 _VermilionCityDockBeautyEndText::

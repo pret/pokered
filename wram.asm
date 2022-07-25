@@ -596,8 +596,7 @@ wFilteredBagItemsCount:: db
 ; 0 if the joypad state is not being simulated
 wSimulatedJoypadStatesIndex:: db
 
-; written to but nothing ever reads it
-wWastedByteCD39:: db
+wTempStore1:: db
 
 ; written to but nothing ever reads it
 wWastedByteCD3A:: db
@@ -803,6 +802,7 @@ wOptionsPage3Option1CursorX:: db
 wOptionsPage3Option2CursorX:: db
 wOptionsPage3Option3CursorX:: db
 wOptionsPage3Option4CursorX:: db
+wOptionsPage3Option5CursorX:: db
 ; options page 4
 wOptionsPage4Option1CursorX:: db
 wOptionsPage4Option2CursorX:: db
@@ -1137,7 +1137,15 @@ NEXTU
 wItemFinderItemDirection::db
 wSawItemFinderText::db
 wItemDuplicationActive:: db
-; 13 bytes remaining in this empty space
+; set to 1 if you healed this turn, 2 if you switched out this turn (prevents ai from spamming certain moves in some cases)
+wAIMoveSpamAvoider:: db
+wPreviousEnemySelectedMove:: db ; store for disable move functionality
+wPreviousPlayerSelectedMove:: db ; store for disable move functionality
+wCaughtGhostMarowak:: db
+wAITargetMonType1:: db ; the type of the pokemon the AI should think it's attacking (stays as the previous pokemon when you switch pokemon)
+wAITargetMonType2:: db ; the type of the pokemon the AI should think it's attacking (stays as the previous pokemon when you switch pokemon)
+wAITargetMonStatus:: db ; the current status of the pokemon the AI should think it's attacking (set when healing a pokemon's status or switching it out)
+; 6 bytes remaining in this empty space
 
 ENDU
 
@@ -2493,6 +2501,13 @@ ENDR
 wBoxMonNicksEnd::
 
 wBoxDataEnd::
+
+;joenote - exp bar wram values
+wEXPBarPixelLength::  ds 1
+wEXPBarBaseEXP::      ds 3
+wEXPBarCurEXP::       ds 3
+wEXPBarNeededEXP::    ds 3
+wEXPBarKeepFullFlag:: ds 1
 
 
 SECTION "Stack", WRAM0

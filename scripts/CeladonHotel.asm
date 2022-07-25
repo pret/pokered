@@ -101,7 +101,7 @@ CeladonLaprasGuyText:
 .celadonRocketsGone
 	ld hl, CeladonLaprasGuyReady
 	call PrintText
-	lb bc, LAPRAS, 27
+	lb bc, LAPRAS, 30
 	call GivePokemon
 	jr nc, .noBoxRoom
 	ld a, [wSimulatedJoypadStatesEnd]

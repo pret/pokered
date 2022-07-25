@@ -13,11 +13,14 @@ _ReceivedTM29Text::
 	text_end
 
 _TM29ExplanationText::
-	text "TM29 is PSYCHIC!"
+	text "TM46 is PSYBEAM!"
 
-	para "It can lower the"
-	line "target's SPECIAL"
-	cont "abilities."
+	para "It can confuse"
+	line "the target."
+
+	para "It's a great"
+	line "PSYCHIC-type"
+	cont "move!"
 	done
 
 _TM29NoRoomText::

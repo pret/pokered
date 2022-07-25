@@ -88,8 +88,8 @@ _SSAnne10BattleText6::
 	text "Hello stranger!"
 	line "Stop and chat!"
 
-	para "All my #MON"
-	line "are from the sea!"
+	para "I love #MON"
+	line "from the sea!"
 	done
 
 _SSAnne10EndBattleText6::

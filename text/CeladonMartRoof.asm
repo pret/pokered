@@ -74,16 +74,16 @@ _CeladonMartRoofText_48515::
 	line "from me!@"
 	text_end
 
-_ReceivedTM49Text::
-	text "<PLAYER> received"
-	line "TM49!@"
-	text_end
-
 _CeladonMartRoofText_48520::
 	text_start
 
-	para "TM49 contains"
-	line "TRI ATTACK!@"
+	para "@"
+	text_ram wStringBuffer
+	text " contains"
+	line "GLARE!"
+	para "It paralyzes the"
+	line "target with a"
+	cont "piercing gaze!@"
 	text_end
 
 _CeladonMartRoofText_48526::

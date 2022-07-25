@@ -222,8 +222,6 @@ INCLUDE "text/FuchsiaPokecenter.asm"
 INCLUDE "text/WardensHouse.asm"
 INCLUDE "text/SafariZoneGate.asm"
 INCLUDE "text/FuchsiaGym.asm"
-INCLUDE "text/CeruleanRocketHouse.asm"
-
 
 SECTION "Text 9", ROMX
 
@@ -272,11 +270,13 @@ INCLUDE "data/text/text_6.asm"
 
 INCLUDE "text/CinnabarLabColorChanger.asm"
 INCLUDE "text/CeladonLaprasGuy.asm"
+INCLUDE "text/SafariZoneNewRestHouseText.asm"
 
 
 SECTION "Text 11", ROMX
 
 INCLUDE "data/text/text_7.asm"
+INCLUDE "text/CeruleanRocketHouse.asm"
 
 
 SECTION "Pokédex Text", ROMX

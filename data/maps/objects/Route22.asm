@@ -11,7 +11,7 @@ Route22_Object:
 	def_object_events
 	object_event 25,  5, SPRITE_BLUE, STAY, NONE, 1 ; person
 	object_event 25,  5, SPRITE_BLUE, STAY, NONE, 2 ; person
-	object_event 30,  2, SPRITE_POKE_BALL, STAY, NONE, 3, SURFBOARD 
-	object_event 2,  15, SPRITE_POKE_BALL, STAY, NONE, 4, SURFBOARD 
+	object_event 30,  2, SPRITE_POKE_BALL, STAY, NONE, 3, ITEM_ROUTE_22_NORTH_ALCOVE_NEW 
+	object_event 2,  15, SPRITE_POKE_BALL, STAY, NONE, 4, ITEM_ROUTE_22_SOUTHWEST_CORNER_NEW 
 
 	def_warps_to ROUTE_22

@@ -26,7 +26,7 @@ _IndigoPlateauGymGuideChampGreeting::
 
 	para "I saw a fire in"
 	line "your eyes back in"
-	cont "Pewter City..."
+	cont "PEWTER CITY..."
 	cont "I knew you'd go"
 	cont "places!"
 

@@ -16,12 +16,20 @@ _ReceivedTM35Text::
 _TM35ExplanationText::
 	text "Tch-tch-tch!"
 	line "That's the sound"
-	cont "of a METRONOME!"
+	cont "a KINGLER makes!"
 
-	para "It tweaks your"
-	line "#MON's brain"
-	cont "into using moves"
-	cont "it doesn't know!"
+	para "CRABHAMMER is"
+	line "its signature"
+	cont "move!"
+
+	para "I love that move"
+	line "so much, I made a"
+	cont "TM to teach it to"
+	cont "other #MON!"
+
+	para "When in doubt:"
+	para "Drop a HAMMER on"
+	line "'em!"
 	done
 
 _TM35NoRoomText::

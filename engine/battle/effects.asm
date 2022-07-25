@@ -202,19 +202,29 @@ FreezeBurnParalyzeEffect:
 	ld a, [wEnemyMonStatus]
 	and a
 	jp nz, CheckDefrost ; can't inflict status if opponent is already statused
+
+	ld a, [wPlayerMoveNum]
+	cp TRI_ATTACK
+	ld b, ICE ; NEW: tri attack can't freeze ice types
+	jr z, .doComparison1
+	cp SOLARBEAM
+	ld b, FIRE ; NEW: solarbeam can't burn fire types
+	jr z, .doComparison1
+
 	ld a, [wPlayerMoveType]
-	cp NORMAL ; body slam and tri attack can apply status to any pokemon type
-	jr z, .skipTypeComparison
-	cp BUG ; vicegrip can apply status to any pokemon type
-	jr z, .skipTypeComparison
+	cp NORMAL ; NEW: body slam can apply status to any pokemon type
+	jr z, .skipTypeComparison1
+	cp BUG ; NEW: vicegrip can apply status to any pokemon type
+	jr z, .skipTypeComparison1
 	ld b, a
+.doComparison1
 	ld a, [wEnemyMonType1]
 	cp b ; do target type 1 and move type match?
-	ret z  ; return if they match (an ice move can't freeze an ice-type, body slam can't paralyze a normal-type, etc.)
+	ret z  ; return if they match (an ice move can't freeze an ice-type etc.)
 	ld a, [wEnemyMonType2]
 	cp b ; do target type 2 and move type match?
 	ret z  ; return if they match
-.skipTypeComparison
+.skipTypeComparison1
 	ld a, [wPlayerMoveEffect]
 	cp PARALYZE_SIDE_EFFECT1 + 1
 	ld b, 10 percent + 1
@@ -259,14 +269,29 @@ FreezeBurnParalyzeEffect:
 	ld a, [wBattleMonStatus] ; mostly same as above with addresses swapped for opponent
 	and a
 	jp nz, CheckDefrost
+
+	ld a, [wEnemyMoveNum]
+	cp TRI_ATTACK
+	ld b, ICE ; NEW: tri attack can't freeze ice types
+	jr z, .doComparison2
+	cp SOLARBEAM
+	ld b, FIRE ; NEW: solarbeam can't burn fire types
+	jr z, .doComparison2
+	
 	ld a, [wEnemyMoveType]
+	cp NORMAL ; NEW: body slam and tri attack can apply status to any pokemon type
+	jr z, .skipTypeComparison2
+	cp BUG ; NEW: vicegrip can apply status to any pokemon type
+	jr z, .skipTypeComparison2
 	ld b, a
+.doComparison2
 	ld a, [wBattleMonType1]
 	cp b
 	ret z
 	ld a, [wBattleMonType2]
 	cp b
 	ret z
+.skipTypeComparison2
 	ld a, [wEnemyMoveEffect]
 	cp PARALYZE_SIDE_EFFECT1 + 1
 	ld b, 10 percent + 1
@@ -867,7 +892,7 @@ MonsStatsFellText:
 	ld a, [wEnemyMoveEffect]
 .playerTurn
 ; check if the move's effect decreases a stat by 2
-	cp BIDE_EFFECT
+	cp HAZE_EFFECT + 1
 	ret c
 	cp ATTACK_DOWN_SIDE_EFFECT
 	ret nc
@@ -1086,6 +1111,8 @@ TwoToFiveAttacksEffect:
 	ld a, [hl]
 	cp TWINEEDLE_EFFECT
 	jr z, .twineedle
+	cp TWO_OR_THREE_ATTACKS_EFFECT
+	jr z, .twoOrThree
 	cp ATTACK_TWICE_EFFECT
 	ld a, $2 ; number of hits it's always 2 for ATTACK_TWICE_EFFECT
 	jr z, .saveNumberOfHits
@@ -1097,6 +1124,10 @@ TwoToFiveAttacksEffect:
 ; if the number of hits was greater than 2, re-roll again for a lower chance
 	call BattleRandom
 	and $3
+	jr .gotNumHits
+.twoOrThree
+	call BattleRandom
+	and 1 ; can either be 0 or 1 which maps to 2 or 3 hits
 .gotNumHits
 	inc a
 	inc a
@@ -1232,14 +1263,20 @@ TrappingEffect:
 	call ClearHyperBeam ; since this effect is called before testing whether the move will hit,
                         ; the target won't need to recharge even if the trapping move missed
 	set USING_TRAPPING_MOVE, [hl] ; mon is now using a trapping move
-	call BattleRandom ; 3/8 chance for 2 and 3 attacks, and 1/8 chance for 4 and 5 attacks
-	and $3
-	cp $2
-	jr c, .setTrappingCounter
-	call BattleRandom
-	and $3
+
+;;;;;;;;;;;;;;;;; PureRGB - NEW: trapping moves do 2-3 turns maximum but a bit more damage to compensate.	
+.reroll
+	call BattleRandom 	
+	and %11
+	cp %11
+	jr z, .reroll ; only want 3 possible results, not 4
+	and a ; 2/3 chance for 2 attacks (results 01 and 11), 1/3 chance for 3 (result 0)
+	ld a, 2
+	jr nz, .setTrappingCounter
+	ld a, 3
 .setTrappingCounter
-	inc a
+	dec a
+;;;;;;;;;;;;;;;;;
 	ld [de], a
 	ret
 
@@ -1263,7 +1300,7 @@ ConfusionSideEffect:
 
 ConfusionBigSideEffect:
 	call BattleRandom
-	cp 25 percent ; chance of confusion
+	cp 30 percent ; chance of confusion
 	ret nc
 	jr ConfusionSideEffectSuccess
 
@@ -1447,20 +1484,37 @@ DisableEffect:
 	call MoveHitTest
 	ld a, [wMoveMissed]
 	and a
-	jr nz, .moveMissed
+	jp nz, .moveMissed
 	ld de, wEnemyDisabledMove
 	ld hl, wEnemyMonMoves
+	ld a, [wPreviousEnemySelectedMove]
+	ld b, a
 	ldh a, [hWhoseTurn]
 	and a
 	jr z, .disableEffect
 	ld de, wPlayerDisabledMove
 	ld hl, wBattleMonMoves
+	ld a, [wPreviousPlayerSelectedMove]
+	ld b, a
 .disableEffect
 ; no effect if target already has a move disabled
 	ld a, [de]
 	and a
 	jr nz, .moveMissed
 .pickMoveToDisable
+	ld a, b ; load the player or enemy's previously used move
+	and a 
+	jr z, .doRandomSelection ; if this value is 0, they haven't selected a move yet or are unable to act, so randomly select a move instead
+	ld [wd11e], a ; store move ID 
+	ld c, 0
+.findPreviousMoveIndex
+	ld a, [hl]
+	inc hl
+	inc c ; c will be move index 1-4
+	cp b
+	jr nz, .findPreviousMoveIndex
+	jr .finishDisabling
+.doRandomSelection
 	push hl
 	call BattleRandom
 	and $3
@@ -1471,7 +1525,7 @@ DisableEffect:
 	pop hl
 	and a
 	jr z, .pickMoveToDisable ; loop until a non-00 move slot is found
-	ld [wd11e], a ; store move number
+	ld [wd11e], a ; store move number	
 	push hl
 	ldh a, [hWhoseTurn]
 	and a
@@ -1501,11 +1555,15 @@ DisableEffect:
 	and a
 	jr z, .pickMoveToDisable ; pick another move if this one had 0 PP
 .playerTurnNotLinkBattle
+	inc c ; move 1-4 will be disabled
+.finishDisabling
 ; non-link battle enemies have unlimited PP so the previous checks aren't needed
 	call BattleRandom
 	and $7
-	inc a ; 1-8 turns disabled
-	inc c ; move 1-4 will be disabled
+	cp 7
+	jr z, .finishDisabling ; redo randomization if we have a value of 7 so we can't have 9 turns disabled
+	inc a ; 1-7 turns disabled
+	inc a ; 2-8 turns disabled
 	swap c
 	add c ; map disabled move to high nibble of wEnemyDisabledMove / wPlayerDisabledMove
 	ld [de], a

@@ -48,13 +48,15 @@ _ReceivedTM41Text::
 
 _TM41ExplanationText::
 	text "TM41 teaches"
-	line "SOFTBOILED!"
+	line "MEDITATE!"
 
-	para "Only one #MON"
-	line "can use it!"
+	para "It enhances "
+	line "ATTACK, SPECIAL"
+	cont "and SPEED all"
+	cont "once!"
 
-	para "That #MON is"
-	line "CHANSEY!"
+	para "Your #MON will"
+	line "be unstoppable!"
 	done
 
 _TM41NoRoomText::
@@ -132,9 +134,9 @@ _CeladonCityText16::
 
 	para "GUARD SPEC."
 	line "protects #MON"
-	cont "against SPECIAL"
-	cont "attacks such as"
-	cont "fire and water!"
+	cont "against status"
+	cont "moves like LEER"
+	cont "or SAND-ATTACK!"
 
 	para "Get your items at"
 	line "CELADON DEPT."

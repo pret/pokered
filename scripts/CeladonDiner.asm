@@ -25,8 +25,7 @@ CeladonDinerText1:
 .done
 	jp TextScriptEnd
 
-CeladonDinerMenu:
-	script_mart FRESH_WATER, SODA_POP, LEMONADE
+INCLUDE "data/items/marts/celadon_diner.asm"
 
 CeladonDinerOpenText:
 	text_far _CeladonDinerOpenText

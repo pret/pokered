@@ -15,6 +15,7 @@
 
 	; tm/hm learnset
 	tmhm \
+	RAZOR_WIND,\
 	FIRE_PUNCH,\
 	TOXIC,\
 	HORN_DRILL,\

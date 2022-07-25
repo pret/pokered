@@ -23,9 +23,9 @@ SSAnneB1FRooms_Object:
 	object_event  0,  2, SPRITE_SAILOR, STAY, RIGHT, 5, OPP_SAILOR, 7
 	object_event  0,  4, SPRITE_FISHER, STAY, RIGHT, 6, OPP_FISHER, 2
 	object_event 10, 13, SPRITE_SUPER_NERD, STAY, RIGHT, 7 ; person
-	object_event 11, 12, SPRITE_MONSTER, STAY, NONE, 8 ; person
-	object_event 20,  2, SPRITE_POKE_BALL, STAY, NONE, 9, ETHER
-	object_event 10,  2, SPRITE_POKE_BALL, STAY, NONE, 10, TM_PIN_MISSILE
-	object_event 12, 11, SPRITE_POKE_BALL, STAY, NONE, 11, MAX_POTION
+	object_event 11, 12, SPRITE_FIGHTING, STAY, NONE, 8 ; person
+	object_event 20,  2, SPRITE_POKE_BALL, STAY, NONE, 9, ITEM_SS_ANNE_B1F_ROOMS
+	object_event 10,  2, SPRITE_POKE_BALL, STAY, NONE, 10, TM_SS_ANNE_B1F_ROOMS
+	object_event 12, 11, SPRITE_POKE_BALL, STAY, NONE, 11, ITEM_SS_ANNE_B1F_ROOMS_MACHOKE
 
 	def_warps_to SS_ANNE_B1F_ROOMS

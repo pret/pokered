@@ -114,7 +114,7 @@ SilphCo4F_TextPointers:
 	dw SilphCo4Text2
 	dw SilphCo4Text3
 	dw SilphCo4Text4
-	dw PickUpItemText
+	dw PickUp3ItemText
 	dw PickUpItemText
 	dw PickUpItemText
 	dw SilphCo4Text8

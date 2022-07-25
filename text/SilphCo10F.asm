@@ -1,6 +1,6 @@
 _SilphCo10Text_5a1d3::
 	text "Waaaaa!"
-	cont "I'm scared!"
+	para "I'm scared!"
 	done
 
 _SilphCo10Text_5a1d8::

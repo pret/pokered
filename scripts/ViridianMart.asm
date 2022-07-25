@@ -140,6 +140,5 @@ TMKidBigStockIndigo:
 ViridianMartTMKidBefore:
 	text_far _ViridianMartTMKid
 	text_end
-	
-ViridianCashierText::
-	script_mart POKE_BALL, ANTIDOTE, PARLYZ_HEAL, BURN_HEAL
+
+INCLUDE "data/items/marts/viridian.asm"

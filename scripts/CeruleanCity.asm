@@ -268,7 +268,7 @@ CeruleanCity_TextPointers:
 	dw CeruleanCityText9
 	dw CeruleanCityText10
 	dw CeruleanCityText11
-	dw PickUpItemText
+	dw PickUp5ItemText
 	dw CeruleanCityText12
 	dw CeruleanCityText13
 	dw MartSignText
@@ -372,7 +372,23 @@ CeruleanCityText3:
 	text_end
 
 CeruleanCityText4:
+	text_asm
+	CheckEvent EVENT_DELETED_CERULEAN_TREE
+	jr nz, .deletedTree
+	ld hl, CeruleanCityText4_BeforeTreeDelete
+	jr .done
+.deletedTree
+	ld hl, CeruleanCityText4_AfterTreeDelete
+.done
+	call PrintText
+	jp TextScriptEnd
+
+CeruleanCityText4_BeforeTreeDelete:
 	text_far _CeruleanCityText4
+	text_end
+
+CeruleanCityText4_AfterTreeDelete:
+	text_far _CeruleanCityText4_AfterTreeDelete
 	text_end
 
 CeruleanCityText5:

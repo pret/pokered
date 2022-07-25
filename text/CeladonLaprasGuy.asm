@@ -17,8 +17,16 @@ _CeladonLaprasGuyIntro::
 _CeladonLaprasGuyReady::
 	text "So you were the" 
 	line "one who kicked"
-	cont "TEAM ROCKET out"
-	cont "of CELADON CITY?"
+	cont "TEAM ROCKET's"
+	cont "butt in their"
+	cont "hideout?"
+
+	para "The ROCKETs are"
+	line "all moping around"
+	cont "now. Hah!"
+
+	para "Serves them"
+	line "right!"
 	
 	para "Thanks to you,"
 	line "my business trip"

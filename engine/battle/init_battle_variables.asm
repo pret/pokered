@@ -16,6 +16,12 @@ InitBattleVariables:
 	ld [wPlayerMonNumber], a
 	ld [wEscapedFromBattle], a
 	ld [wMapPalOffset], a
+	ld [wAIMoveSpamAvoider], a
+	ld [wPreviousEnemySelectedMove], a
+	ld [wPreviousPlayerSelectedMove], a
+	ld [wAITargetMonType1], a
+	ld [wAITargetMonType2], a
+	ld [wAITargetMonStatus], a
 	ld hl, wPlayerHPBarColor
 	ld [hli], a ; wPlayerHPBarColor
 	ld [hl], a ; wEnemyHPBarColor

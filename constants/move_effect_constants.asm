@@ -28,9 +28,9 @@
 	const SPECIAL_DOWN1_EFFECT       ; $15
 	const ACCURACY_DOWN1_EFFECT      ; $16
 	const EVASION_DOWN1_EFFECT       ; $17
-	const CONVERSION_EFFECT          ; $18
+	const CONVERSION_EFFECT          ; $18 now unused
 	const HAZE_EFFECT                ; $19
-	const BIDE_EFFECT                ; $1A
+	const TWO_OR_THREE_ATTACKS_EFFECT; $1A
 	const THRASH_PETAL_DANCE_EFFECT  ; $1B
 	const SWITCH_AND_TELEPORT_EFFECT ; $1C
 	const TWO_TO_FIVE_ATTACKS_EFFECT ; $1D
@@ -45,7 +45,7 @@
 	const OHKO_EFFECT                ; $26 moves like Horn Drill
 	const CHARGE_EFFECT              ; $27 moves like Solar Beam
 	const SUPER_FANG_EFFECT          ; $28
-	const SPECIAL_DAMAGE_EFFECT      ; $29 Seismic Toss, Night Shade, Sonic Boom, Dragon Rage, Psywave
+	const SPECIAL_DAMAGE_EFFECT      ; $29 Seismic Toss, Sonic Boom
 	const TRAPPING_EFFECT            ; $2A moves like Wrap
 	const FLY_EFFECT                 ; $2B
 	const ATTACK_TWICE_EFFECT        ; $2C
@@ -85,7 +85,7 @@
 	const ATTACK_SPECIAL_SPEED_UP1   ; $4E
 	const SUBSTITUTE_EFFECT          ; $4F
 	const HYPER_BEAM_EFFECT          ; $50
-	const RAGE_EFFECT                ; $51
+	const RAGE_EFFECT                ; $51 ; unused
 	const MIMIC_EFFECT               ; $52
 	const METRONOME_EFFECT           ; $53
 	const LEECH_SEED_EFFECT          ; $54

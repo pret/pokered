@@ -27,9 +27,9 @@ Moves:
 	move CUT,          NO_ADDITIONAL_EFFECT,        70, BUG,          100, 30
 	move GUST,         NO_ADDITIONAL_EFFECT,        40, FLYING,       100, 35
 	move WING_ATTACK,  NO_ADDITIONAL_EFFECT,        50, FLYING,       100, 35 ; priority move
-	move WHIRLWIND,    CONFUSION_BIG_SIDE_EFFECT,   110,FLYING,        85, 10
+	move WHIRLWIND,    CONFUSION_BIG_SIDE_EFFECT,  110, FLYING,        85, 10
 	move FLY,          FLY_EFFECT,                  90, FLYING,       100, 15
-	move BIND,         TRAPPING_EFFECT,             25, ROCK,          85, 20
+	move BIND,         TRAPPING_EFFECT,             25, ROCK,          85, 15
 	move SLAM,         NO_ADDITIONAL_EFFECT,        80, POISON,       100, 20 ; -> FILTHY SLAM
 	move VINE_WHIP,    NO_ADDITIONAL_EFFECT,        40, GRASS,        100, 15 
 	move STOMP,        FLINCH_SIDE_EFFECT2,         65, NORMAL,       100, 20
@@ -44,12 +44,12 @@ Moves:
 	move HORN_DRILL,   OHKO_EFFECT,                  1, NORMAL,        30,  5
 	move TACKLE,       NO_ADDITIONAL_EFFECT,        35, NORMAL,       100, 35
 	move BODY_SLAM,    PARALYZE_SIDE_EFFECT2,       85, NORMAL,       100, 15
-	move WRAP,         TRAPPING_EFFECT,             15, NORMAL,        85, 20
-	move TAKE_DOWN,    BURN_SIDE_EFFECT2,           75, FIRE,         100, 20
+	move WRAP,         TRAPPING_EFFECT,             22, NORMAL,        85, 15
+	move TAKE_DOWN,    BURN_SIDE_EFFECT2,           75, FIRE,         100, 20 ; -> HEAT RUSH
 	move THRASH,       THRASH_PETAL_DANCE_EFFECT,   90, NORMAL,       100, 20
-	move DOUBLE_EDGE,  BIG_RECOIL_EFFECT,          120, NORMAL,       100, 15
-	move TAIL_WHIP,    DEFENSE_DOWN1_EFFECT,         0, NORMAL,       100, 30 ;* -> small damage
-	move POISON_STING, POISON_SIDE_EFFECT1,         15, POISON,       100, 35
+	move DOUBLE_EDGE,  RECOIL_EFFECT,          	   120, NORMAL,       100, 10
+	move TAIL_WHIP,    DEFENSE_DOWN1_EFFECT,         0, NORMAL,       100, 30
+	move POISON_STING, POISON_SIDE_EFFECT2,         15, POISON,       100, 35
 	move TWINEEDLE,    TWINEEDLE_EFFECT,            50, BUG,          100, 20
 	move PIN_MISSILE,  TWO_TO_FIVE_ATTACKS_EFFECT,  18, BUG,          100, 20
 	move LEER,         DEFENSE_DOWN1_EFFECT,         0, NORMAL,       100, 30
@@ -89,7 +89,7 @@ Moves:
 	move POISONPOWDER, POISON_EFFECT,                0, POISON,        75, 35
 	move STUN_SPORE,   PARALYZE_EFFECT,              0, GRASS,         75, 30
 	move SLEEP_POWDER, SLEEP_EFFECT,                 0, GRASS,         75, 15
-	move PETAL_DANCE,  THRASH_PETAL_DANCE_EFFECT,  110, GRASS,        100, 20
+	move PETAL_DANCE,  THRASH_PETAL_DANCE_EFFECT,  120, GRASS,        100, 20
 	move STRING_SHOT,  SPEED_DOWN1_EFFECT,           0, BUG,           95, 40
 	move DRAGON_RAGE,  NO_ADDITIONAL_EFFECT,        80, DRAGON,       100, 20
 	move FIRE_SPIN,    TRAPPING_EFFECT,             25, FIRE,          85, 15
@@ -137,10 +137,10 @@ Moves:
 	move BONE_CLUB,    FLINCH_SIDE_EFFECT1,         65, GROUND,       100, 20
 	move FIRE_BLAST,   BURN_SIDE_EFFECT2,          120, FIRE,          85,  5
 	move WATERFALL,    FLINCH_SIDE_EFFECT2,         80, WATER,        100, 15
-	move CLAMP,        TRAPPING_EFFECT,             25, WATER,         85, 10
+	move CLAMP,        TRAPPING_EFFECT,             25, WATER,         85, 15
 	move SWIFT,        SWIFT_EFFECT,                60, ICE,          100, 20 ; priority move
-	move SKULL_BASH,   JUMP_KICK_EFFECT,           100, ROCK,          85, 10
-	move SPIKE_CANNON, TWO_TO_FIVE_ATTACKS_EFFECT,  25, ROCK,         100, 15
+	move SKULL_BASH,   JUMP_KICK_EFFECT,           100, ROCK,          90, 10
+	move SPIKE_CANNON, TWO_OR_THREE_ATTACKS_EFFECT, 42, ROCK,         100, 10
 	move CONSTRICT,    PARALYZE_SIDE_EFFECT2,       50, ELECTRIC,     100, 35 ; -> STATIC SNAG
 	move AMNESIA,      SPECIAL_UP2_EFFECT,           0, PSYCHIC_TYPE, 100, 20 
 	move KINESIS,      BURN_EFFECT,                  0, FIRE,          80, 10 ; -> FIREWALL
@@ -152,7 +152,7 @@ Moves:
 	move BARRAGE,      ATTACK_TWICE_EFFECT,         40, GHOST,        100, 20
 	move LEECH_LIFE,   DRAIN_HP_EFFECT,             70, BUG,          100, 15
 	move LOVELY_KISS,  SLEEP_EFFECT,                 0, PSYCHIC_TYPE,  75, 10
-	move SKY_ATTACK,   BIG_RECOIL_EFFECT,          130, FLYING,       100,  5
+	move SKY_ATTACK,   RECOIL_EFFECT,          	   130, FLYING,       100, 10
 	move TRANSFORM,    TRANSFORM_EFFECT,             0, NORMAL,       100, 10 ; priority move
 	move BUBBLE,       SPEED_DOWN_SIDE_EFFECT,      20, WATER,        100, 30
 	move DIZZY_PUNCH,  CONFUSION_BIG_SIDE_EFFECT,   90, FIGHTING,     100, 10

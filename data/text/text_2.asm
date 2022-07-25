@@ -773,6 +773,15 @@ _FoundHiddenItemText::
 	text "!@"
 	text_end
 
+_FoundHiddenItemMultiText::
+	text "<PLAYER> found"
+	line "@"
+	text_ram wcd6d
+	text " ×@"
+	text_ram wTempStore1
+	text "!@"
+	text_end
+
 _HiddenItemBagFullText::
 	text "But, <PLAYER> has"
 	line "no more room for"

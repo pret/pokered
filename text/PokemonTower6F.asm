@@ -7,9 +7,22 @@ _PokemonTower2Text_60c1f::
 _PokemonTower2Text_60c24::
 	text "The mother's soul"
 	line "was calmed."
+	prompt
 
-	para "It departed to"
+_PokemonTower2Text_toAfterlife::
+	text "It departed to"
 	line "the afterlife!"
+	done
+
+_PokemonTower2Text_Caught::
+	text "It wants to"
+	line "fight alongside"
+	cont "you against"
+	cont "TEAM ROCKET!"
+	para "This is its"
+	line "final wish before"
+	cont "departing to the"
+	cont "afterlife!"
 	done
 
 _PokemonTower6BattleText1::

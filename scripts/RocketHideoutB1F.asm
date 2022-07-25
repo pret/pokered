@@ -41,8 +41,8 @@ RocketHideoutB1F_TextPointers:
 	dw RocketHideout1Text3
 	dw RocketHideout1Text4
 	dw RocketHideout1Text5
-	dw PickUpItemText
-	dw PickUpItemText
+	dw PickUp5ItemText
+	dw PickUp3ItemText
 
 RocketHideout1TrainerHeaders:
 	def_trainers

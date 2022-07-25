@@ -16,7 +16,7 @@ PokemonTower4F_TextPointers:
 	dw PokemonTower4Text1
 	dw PokemonTower4Text2
 	dw PokemonTower4Text3
-	dw PickUpItemText
+	dw PickUp3ItemText
 	dw PickUpItemText
 	dw PickUpItemText
 

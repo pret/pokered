@@ -254,6 +254,27 @@ _ItemUseNotTimeText::
 	cont "time to use that! "
 	prompt
 
+_ItemUseValuableText::
+	text "Looks valuable!"
+	para "Selling it would"
+	line "be a good idea."
+	prompt
+
+_ItemUseFossilText::
+	text "This fossil is"
+	line "fun to admire!"
+	para "Maybe putting it"
+	line "in the PC until"
+	cont "finding a use"
+	cont "for it is best."
+	prompt
+
+_ItemUseInBattleText::
+	text "This can only"
+	line "be used during"
+	cont "a #MON battle."
+	prompt
+
 _ItemUseNotYoursToUseText::
 	text "This isn't yours"
 	line "to use!"

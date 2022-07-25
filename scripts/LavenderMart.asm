@@ -36,9 +36,6 @@ LavenderMartTMKidFlavor:
 TMKidQuick3::
 	text_far _TMKidQuick
 	text_end
-	
-LavenderTMKidShop::
-	script_mart TM_BUBBLEBEAM, TM_AURORA_BEAM, TM_THUNDER_WAVE, PP_UP
 
 LavenderMartText2:
 	text_far _LavenderMartText2
@@ -65,5 +62,4 @@ LavenderMartText3:
 	text_far _LavenderMartNuggetText
 	text_end
 
-LavenderCashierText::
-	script_mart GREAT_BALL, SUPER_POTION, REVIVE, ESCAPE_ROPE, SUPER_REPEL, ANTIDOTE, BURN_HEAL, ICE_HEAL, PARLYZ_HEAL
+INCLUDE "data/items/marts/lavender.asm"

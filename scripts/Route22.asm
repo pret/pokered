@@ -379,7 +379,7 @@ Route22Script6:
 Route22_TextPointers:
 	dw Route22Text1
 	dw Route22Text2
-	dw PickUpItemText
+	dw PickUp3ItemText
 	dw PickUpItemText
 	dw Route22FrontGateText
 	dw Route22TrainerTipsText

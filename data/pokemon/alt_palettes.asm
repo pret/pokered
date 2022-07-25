@@ -104,8 +104,8 @@ AltMonsterPalettes: ; pokemon have alternate palettes depending on where you enc
 	db PAL_BLUEMON    ; ELECTRODE
 	db PAL_MEWMON   ; EXEGGCUTE
 	db PAL_GREENBAR  ; EXEGGUTOR
-	db PAL_BROWNMON   ; CUBONE
-	db PAL_BROWNMON   ; MAROWAK
+	db PAL_WHITEMON   ; CUBONE
+	db PAL_WHITEMON   ; MAROWAK
 	db PAL_GREYMON  ; HITMONLEE
 	db PAL_WHITEMON  ; HITMONCHAN
 	db PAL_PURPLEMON   ; LICKITUNG

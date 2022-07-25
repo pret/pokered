@@ -87,8 +87,8 @@ _Route8EndBattleText6::
 	prompt
 
 _Route8AfterBattleText6::
-	text "I think PIDGEY"
-	line "and RATTATA"
+	text "I think EEVEE"
+	line "and FARFETCH'D"
 	cont "are cute too!"
 	done
 
@@ -141,9 +141,8 @@ _Route8EndBattleText9::
 	prompt
 
 _Route8AfterBattleText9::
-	text "I heard that"
-	line "CLEFAIRY evolves"
-	cont "when it's exposed"
+	text "CLEFAIRY evolves"
+	line "when it's exposed"
 	cont "to a MOON STONE."
 	done
 

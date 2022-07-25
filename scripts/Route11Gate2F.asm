@@ -19,7 +19,7 @@ Route11GateUpstairsText2:
 	text_asm
 	CheckEvent EVENT_GOT_ITEMFINDER, 1
 	jr c, .got_item
-	ld a, 30
+	ld a, 20
 	ldh [hOaksAideRequirement], a
 	ld a, ITEMFINDER
 	ldh [hOaksAideRewardItem], a

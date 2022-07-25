@@ -21,7 +21,7 @@ Route6_TextPointers:
 	dw Route6Text6
 	dw Route6Text7
 	dw Route6Text8
-	dw PickUpItemText
+	dw PickUp3ItemText
 	dw Route6Text9
 
 Route6TrainerHeaders:

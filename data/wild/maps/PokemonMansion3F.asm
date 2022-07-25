@@ -1,5 +1,5 @@
 PokemonMansion3FWildMons:
-	def_grass_wildmons 10 ; encounter rate
+	def_grass_wildmons 8 ; encounter rate
 	db 35, VULPIX
 	db 33, NINETALES
 	db 36, NINETALES

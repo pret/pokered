@@ -35,7 +35,7 @@ MoveNames::
 	li "TACKLE"
 	li "BODY SLAM"
 	li "WRAP"
-	li "TAKE DOWN"
+	li "HEAT RUSH" ; changed from TAKE DOWN
 	li "THRASH"
 	li "DOUBLE-EDGE"
 	li "TAIL WHIP"

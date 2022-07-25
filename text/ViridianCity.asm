@@ -84,12 +84,14 @@ _ViridianCityText_191ca::
 
 _ReceivedTM42Text::
 	text "<PLAYER> received"
-	line "TM42!@"
+	line "@"
+	text_ram wStringBuffer
+	text "!@"
 	text_end
 
 _TM42Explanation::
 	text "TM42 contains"
-	line "DREAM EATER..."
+	line "LOVELY KISS..."
 	cont "...Snore..."
 	done
 

@@ -16,7 +16,7 @@ PokemonTower3F_TextPointers:
 	dw PokemonTower3Text1
 	dw PokemonTower3Text2
 	dw PokemonTower3Text3
-	dw PickUpItemText
+	dw PickUp5ItemText
 
 PokemonTower3TrainerHeaders:
 	def_trainers

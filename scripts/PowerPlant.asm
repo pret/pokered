@@ -52,7 +52,7 @@ ZapdosTrainerHeader:
 
 InitVoltorbBattle:
 	xor a
-	jr InitVoltorbBattle
+	jr InitVoltorbBattleCommon
 
 InitAltPaletteVoltorbBattle:
 	ld a, 1

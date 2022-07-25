@@ -71,13 +71,15 @@ _ReceivedTM21Text::
 _TM21ExplanationText::
 	text_start
 
-	para "TM21 contains"
-	line "MEGA DRAIN."
+	para "@"
+	text_ram wStringBuffer
+	text " contains"
+	line "RAZOR LEAF."
 
-	para "Half the damage"
-	line "it inflicts is"
-	cont "drained to heal"
-	cont "your #MON!"
+	para "It's a powerful"
+	line "GRASS attack that"
+	cont "lands critical"
+	cont "hits very often!"
 	done
 
 _TM21NoRoomText::
@@ -152,7 +154,7 @@ _CeladonGymEndBattleText5::
 	prompt
 
 _CeladonGymAfterBattleText5::
-	text "We only use grass-"
+	text "We love grass-"
 	line "type #MON at"
 	cont "our GYM!"
 

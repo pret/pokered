@@ -20,7 +20,7 @@ SafariZoneEast_TextPointers:
 	dw SafariZoneEastTrainerText2
 	dw SafariZoneEastTrainerText3
 	dw PickUpItemText
-	dw PickUpItemText
+	dw PickUp5ItemText
 	dw PickUpItemText
 	dw PickUpItemText
 	dw SafariZoneEastText5
@@ -36,7 +36,22 @@ SafariZoneEastText5:
 	text_end
 
 SafariZoneEastText6:
+	text_asm
+	ld a, [wSafariType]
+	cp SAFARI_TYPE_CLASSIC
+	ld hl, SafariZoneEastText6Default
+	jr z, .done
+	ld hl, SafariZoneEastText6NotClassic
+.done
+	call PrintText
+	jp TextScriptEnd
+
+SafariZoneEastText6Default:
 	text_far _SafariZoneEastText6
+	text_end
+
+SafariZoneEastText6NotClassic:
+	text_far _SafariZoneEastText6NotClassic
 	text_end
 
 SafariZoneEastText7:

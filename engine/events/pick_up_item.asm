@@ -1,4 +1,11 @@
+PickUpItemQuantity:
+	call GetPredefRegisters
+	jp PickUpItemCommon
+
 PickUpItem:
+	ld c, 1 ; default quantity
+PickUpItemCommon:
+	push bc
 	call EnableAutoTextBoxDrawing
 
 	ldh a, [hSpriteIndexOrTextID]
@@ -25,8 +32,9 @@ PickUpItem:
 	ld e, a
 	add hl, de
 	ld a, [hl]
+	pop bc ; obtain c which is either set to 1 if we called PickUpItem, or an arbitrary quantity otherwise
 	ld b, a ; item
-	ld c, 1 ; quantity
+	push bc
 	call GiveItem
 	jr nc, .BagFull
 
@@ -41,14 +49,29 @@ PickUpItem:
 .continue
 	ld a, 1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
+	and a
+	pop bc
+	ld a, c
+	cp 1
+	jr z, .singleItemPickup
+.multiItemPickup
+	add $f6 ; index of first number character in charmap (assumes c must be 0-9)
+	ld [wTempStore1], a
+	ld hl, FoundMultipleItemText
+	jr .print
+.singleItemPickup
 	ld hl, FoundItemText
 	jr .print
-
 .BagFull
 	ld hl, NoMoreRoomForItemText
 .print
 	call PrintText
 	ret
+
+FoundMultipleItemText:
+	text_far _FoundMultipleItemText
+	sound_get_item_1
+	text_end
 
 FoundItemText:
 	text_far _FoundItemText

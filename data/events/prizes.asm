@@ -38,6 +38,6 @@ PrizeMenuTMsEntries:
 
 PrizeMenuTMsCost:
 	bcd2 1500
-	bcd2 2000
+	bcd2 3000
 	bcd2 4000
 	db "@"

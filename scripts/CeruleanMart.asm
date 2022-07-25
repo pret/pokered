@@ -36,9 +36,6 @@ CeruleanMartTMKidFlavor:
 TMKidQuick1::
 	text_far _TMKidQuick
 	text_end
-	
-CeruleanTMKidShop::
-	script_mart TM_BIDE
 
 
 CeruleanMartText2:
@@ -49,5 +46,4 @@ CeruleanMartText3:
 	text_far _CeruleanMartText3
 	text_end
 
-CeruleanCashierText::
-	script_mart POKE_BALL, POTION, REPEL, ANTIDOTE, BURN_HEAL, AWAKENING, PARLYZ_HEAL
+INCLUDE "data/items/marts/cerulean.asm"

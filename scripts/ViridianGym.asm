@@ -139,7 +139,7 @@ ViridianGymReceiveTM27:
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_BEAT_VIRIDIAN_GYM_GIOVANNI
-	lb bc, TM_EARTHQUAKE, 1
+	lb bc, TM_GIOVANNI, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $d
@@ -430,7 +430,7 @@ ViridianGymGuideText:
 	jr z, .donePrompt
 	ld hl, ViridianGymGuidePostBattleTextPrompt
 	call PrintText
-	CheckEvent EVENT_GOT_CINNABAR_APEX_CHIPS
+	CheckEvent EVENT_GOT_VIRIDIAN_APEX_CHIPS
 	jr nz, .alreadyApexChips
 .giveApexChips
 	ld hl, GymGuideMoreApexChipText8
@@ -442,7 +442,7 @@ ViridianGymGuideText:
 	call PrintText
 	ld hl, ViridianGymGuideApexChipGroundText
 	call PrintText
-	SetEvent EVENT_GOT_CINNABAR_APEX_CHIPS
+	SetEvent EVENT_GOT_VIRIDIAN_APEX_CHIPS
 .alreadyApexChips
 	ld hl, AlreadyReceivedApexChipsText8
 	call PrintText

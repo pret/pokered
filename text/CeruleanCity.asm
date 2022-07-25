@@ -70,7 +70,9 @@ _CeruleanCityText_196d9::
 
 _ReceivedTM28Text::
 	text "<PLAYER> recovered"
-	line "TM28!@"
+	line "@"
+	text_ram wStringBuffer
+	text "!@"
 	text_end
 
 _ReceivedTM28Text2::
@@ -113,6 +115,23 @@ _CeruleanCityText4::
 
 	para "There might be a"
 	line "way around."
+	done
+
+_CeruleanCityText4_AfterTreeDelete::
+	text "Some crazy guy"
+	line "with sunglasses"
+	cont "flew in like a"
+	cont "whirlwind!"
+	para "Then his snorlax"
+	line "straight up just"
+	cont "uprooted the tree"
+	cont "that was in front"
+	cont "of the shop!"
+	para "Then they left as"
+	line "quickly as they"
+	cont "arrived!"
+	para "What a sight to"
+	line "behold!"
 	done
 
 _CeruleanCityText5::
@@ -205,8 +224,8 @@ _CeruleanCityText10::
 
 _CeruleanCityText12::
 	text "CERULEAN CITY"
-	line "A Mysterious,"
-	cont "Blue Aura"
+	para "A Mysterious"
+	line "Blue Aura"
 	cont "Surrounds It"
 	done
 

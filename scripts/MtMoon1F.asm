@@ -20,11 +20,11 @@ MtMoon1F_TextPointers:
 	dw MtMoon1Text5
 	dw MtMoon1Text6
 	dw MtMoon1Text7
+	dw PickUp3ItemText
 	dw PickUpItemText
 	dw PickUpItemText
 	dw PickUpItemText
-	dw PickUpItemText
-	dw PickUpItemText
+	dw PickUp3ItemText
 	dw PickUpItemText
 	dw MtMoon1Text14
 

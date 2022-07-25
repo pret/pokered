@@ -24,3 +24,7 @@ CheckPriority:
 .noPriority
 	pop hl
 	ret
+
+CheckPriorityPredef:
+	call GetPredefRegisters
+	jr CheckPriority

@@ -16,6 +16,7 @@ UsedStrengthText:
 
 CanMoveBouldersText:
 	text_far _CanMoveBouldersText
+	text_promptbutton
 	text_end
 
 IsSurfingAllowed:

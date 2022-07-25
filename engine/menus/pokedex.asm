@@ -36,7 +36,6 @@ ShowPokedexMenu:
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
 	ldh [hJoy7], a
-	ld [wWastedByteCD3A], a
 	ld [wOverrideSimulatedJoypadStatesMask], a
 	pop af
 	ld [wListScrollOffset], a

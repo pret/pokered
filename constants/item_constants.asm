@@ -29,7 +29,7 @@
 	const POTION        ; $14
 	const SAFARI_BAIT   ; $15
 	const SAFARI_ROCK   ; $16
-	const UNUSED_ITEM1  ; $17
+	const OLD_COIN      ; $17
 	const UNUSED_ITEM2  ; $18
 	const UNUSED_ITEM3  ; $19
 	const UNUSED_ITEM4  ; $1A
@@ -173,26 +173,26 @@ TM{02d:__tmhm_value__}_MOVE EQU \1
 ENDM
 
 TM01 EQU const_value
-	add_tm ICE_PUNCH   ; $C9
-	add_tm RAZOR_WIND   ; $CA
-	add_tm LEECH_SEED ; $CB
-	add_tm PIN_MISSILE    ; $CC
-	add_tm FIRE_PUNCH    ; $CD
+	add_tm ICE_PUNCH   	; $C9
+	add_tm RAZOR_WIND   ; $CA ROOST
+	add_tm LEECH_SEED 	; $CB
+	add_tm PIN_MISSILE  ; $CC
+	add_tm FIRE_PUNCH   ; $CD
 	add_tm TOXIC        ; $CE
 	add_tm HORN_DRILL   ; $CF
 	add_tm BODY_SLAM    ; $D0
-	add_tm SLASH    ; $D1
+	add_tm SLASH    	; $D1
 	add_tm DOUBLE_EDGE  ; $D2
 	add_tm BUBBLEBEAM   ; $D3
-	add_tm AURORA_BEAM    ; $D4
+	add_tm AURORA_BEAM  ; $D4
 	add_tm ICE_BEAM     ; $D5
 	add_tm BLIZZARD     ; $D6
 	add_tm HYPER_BEAM   ; $D7
 	add_tm AMNESIA      ; $D8
-	add_tm HI_JUMP_KICK   ; $D9
-	add_tm THUNDERPUNCH      ; $DA
+	add_tm HI_JUMP_KICK ; $D9
+	add_tm THUNDERPUNCH ; $DA
 	add_tm ROLLING_KICK ; $DB
-	add_tm BARRIER         ; $DC
+	add_tm BARRIER      ; $DC
 	add_tm RAZOR_LEAF   ; $DD
 	add_tm SOLARBEAM    ; $DE
 	add_tm DRAGON_RAGE  ; $DF
@@ -202,26 +202,26 @@ TM01 EQU const_value
 	add_tm CRABHAMMER	; $E3
 	add_tm DIG          ; $E4
 	add_tm PSYCHIC_M    ; $E5
-	add_tm MEGA_DRAIN     ; $E6
-	add_tm KINESIS        ; $E7 FIREWALL
-	add_tm SWORDS_DANCE  ; $E8
+	add_tm MEGA_DRAIN   ; $E6
+	add_tm KINESIS      ; $E7 FIREWALL
+	add_tm SWORDS_DANCE ; $E8
 	add_tm REFLECT      ; $E9
 	add_tm BIDE         ; $EA 
-	add_tm AGILITY    ; $EB
-	add_tm BARRAGE ; $EC
-	add_tm FIRE_BLAST     ; $ED
-	add_tm FLAMETHROWER   ; $EE
-	add_tm SLAM        ; $EF
-	add_tm KARATE_CHOP   ; $F0
-	add_tm MEDITATE   ; $F1 
+	add_tm AGILITY    	; $EB
+	add_tm BARRAGE 		; $EC
+	add_tm FLAMETHROWER ; $ED
+	add_tm FIRE_BLAST   ; $EE
+	add_tm SLAM        	; $EF
+	add_tm KARATE_CHOP  ; $F0
+	add_tm MEDITATE   	; $F1 
 	add_tm LOVELY_KISS  ; $F2
 	add_tm SKY_ATTACK   ; $F3
-	add_tm LIGHT_SCREEN         ; $F4
+	add_tm LIGHT_SCREEN ; $F4
 	add_tm THUNDER_WAVE ; $F5
 	add_tm PSYBEAM      ; $F6
-	add_tm SLUDGE    ; $F7
+	add_tm SLUDGE    	; $F7
 	add_tm ROCK_SLIDE   ; $F8
-	add_tm GLARE   ; $F9
+	add_tm GLARE   		; $F9
 	add_tm SUBSTITUTE   ; $FA
 ASSERT NUM_TMS == const_value - TM01, "NUM_TMS ({d:NUM_TMS}) does not match the number of add_tm definitions"
 

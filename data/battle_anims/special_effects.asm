@@ -20,7 +20,7 @@ AnimationIdSpecialEffects:
 	anim_special_effect THUNDERBOLT,           FlashScreenEveryEightFrameBlocks ; four?
 	anim_special_effect REFLECT,               AnimationFlashScreen
 	anim_special_effect SELFDESTRUCT,          DoExplodeSpecialEffects
-	anim_special_effect SPORE,                 AnimationFlashScreen
+	anim_special_effect SPORE,                 FlashScreenEveryFourFrameBlocks
 	anim_special_effect EXPLOSION,             DoExplodeSpecialEffects
 	anim_special_effect ROCK_SLIDE,            DoRockSlideSpecialEffects
 	anim_special_effect TRADE_BALL_DROP_ANIM,  TradeHidePokemon

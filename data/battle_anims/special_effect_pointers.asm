@@ -47,4 +47,6 @@ SpecialEffectPointers:
 	special_effect SE_SHAKE_BACK_AND_FORTH_SHORT,AnimationShakeBackAndForthShort  ; $D7
 	special_effect SE_SLIDE_ENEMY_MON_HALF_OFF,  AnimationSlideEnemyMonHalfOff    ; $D6
 	special_effect SE_SLIDE_ENEMY_MON_DOWN_AND_HIDE,  AnimationSlideEnemyMonDownAndHide ; $D5
+	special_effect SE_FIRE_EVERYWHERE,  AnimationFireEverywhere ; $D4
+	special_effect SE_SMOKE_EVERYWHERE, AnimationSmokeEverywhere ; $D3
 	db -1 ; end

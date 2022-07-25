@@ -191,6 +191,7 @@ INCLUDE "engine/battle/scroll_draw_trainer_pic.asm"
 INCLUDE "engine/battle/trainer_ai.asm"
 INCLUDE "engine/battle/draw_hud_pokeball_gfx.asm"
 INCLUDE "gfx/trade.asm"
+INCLUDE "engine/battle/trainers2.asm"
 
 SECTION "Battle Core", ROMX
 
@@ -401,6 +402,9 @@ INCLUDE "engine/items/last_two_fishing_gurus_script.asm"
 INCLUDE "engine/overworld/check_map_connections.asm"
 INCLUDE "engine/pokemon/missingno_item_duplication.asm"
 INCLUDE "engine/gfx/set_attack_animation_palette.asm"
+INCLUDE "engine/battle/exp_bar_print.asm"
+INCLUDE "engine/overworld/strength.asm"
+
 
 
 SECTION "Batteryless Save Bank 1", ROMX, BANK[$3D]

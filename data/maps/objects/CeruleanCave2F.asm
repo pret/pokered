@@ -13,8 +13,8 @@ CeruleanCave2F_Object:
 
 	def_object_events
 	object_event 11,  7, SPRITE_OAK, STAY, LEFT, 1
-	object_event 29,  9, SPRITE_POKE_BALL, STAY, NONE, 2, PP_UP
-	object_event  4, 15, SPRITE_POKE_BALL, STAY, NONE, 3, ULTRA_BALL
-	object_event 13,  6, SPRITE_POKE_BALL, STAY, NONE, 4, FULL_RESTORE
+	object_event 29,  9, SPRITE_POKE_BALL, STAY, NONE, 2, ITEM_CERULEAN_CAVE_2F_EAST
+	object_event  4, 15, SPRITE_POKE_BALL, STAY, NONE, 3, ITEM_CERULEAN_CAVE_2F_SOUTHWEST
+	object_event 13,  6, SPRITE_POKE_BALL, STAY, NONE, 4, ITEM_CERULEAN_CAVE_2F_CENTER
 
 	def_warps_to CERULEAN_CAVE_2F

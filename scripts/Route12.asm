@@ -26,12 +26,12 @@ Route12Script0:
 	CheckEventReuseHL EVENT_FIGHT_ROUTE12_SNORLAX
 	ResetEventReuseHL EVENT_FIGHT_ROUTE12_SNORLAX
 	jp z, CheckFightingMapTrainers
-	ld a, $11
+	ld a, $10
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, SNORLAX
 	ld [wCurOpponent], a
-	ld a, 30
+	ld a, 40
 	ld [wCurEnemyLVL], a
 	ld a, HS_ROUTE_12_SNORLAX
 	ld [wMissableObjectIndex], a
@@ -49,7 +49,7 @@ Route12Script3:
 	ld a, [wBattleResult]
 	cp $2
 	jr z, .asm_59664
-	ld a, $12
+	ld a, $11
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .asm_59664

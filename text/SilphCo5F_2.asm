@@ -50,6 +50,9 @@ _SilphCo5Text11::
 	line "REPORT!"
 
 	para "4 #MON evolve"
-	line "only when traded"
-	cont "by link-cable."
+	line "at level 37."
+
+	para "They are:"
+	line "GRAVELER, HAUNTER"
+	cont "MACHOKE, KADABRA."
 	done

@@ -74,7 +74,7 @@ SilphCo3F_TextPointers:
 	dw SilphCo3Text1
 	dw SilphCo3Text2
 	dw SilphCo3Text3
-	dw PickUpItemText
+	dw PickUp3ItemText
 	dw SilphCo3Text5
 
 SilphCo3TrainerHeaders:

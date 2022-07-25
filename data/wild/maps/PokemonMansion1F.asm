@@ -1,5 +1,5 @@
 PokemonMansion1FWildMons:
-	def_grass_wildmons 10 ; encounter rate
+	def_grass_wildmons 8 ; encounter rate
 	db 33, MUK
 	db 35, KOFFING
 	db 36, MUK

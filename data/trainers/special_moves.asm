@@ -7,7 +7,7 @@ LoneMoves:
 	db 1, 3, BIDE
 	db 1, 3, BUBBLEBEAM
 	db 2, 3, THUNDERBOLT
-	db 2, 0, RAZOR_LEAF
+	db 2, 1, RAZOR_LEAF
 	db 3, 0, TOXIC
 	db 4, 2, PSYCHIC_M
 	db 4, 1, FIRE_BLAST
@@ -20,6 +20,6 @@ TeamMoves:
 	; trainer, move
 	db LORELEI, ICE_BEAM
 	db BRUNO,   MEGA_PUNCH
-	db AGATHA,  BARRAGE
-	db LANCE,   REFLECT
+	db AGATHA,  THUNDERBOLT
+	db LANCE,   RAZOR_WIND ; ROOST
 	db -1 ; end

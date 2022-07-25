@@ -1,5 +1,5 @@
 PokemonMansion2FWildMons:
-	def_grass_wildmons 10 ; encounter rate
+	def_grass_wildmons 8 ; encounter rate
 	db 36, DROWZEE
 	db 38, DROWZEE
 	db 35, MUK

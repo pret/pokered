@@ -110,7 +110,7 @@ Route24Text1:
 	jr nz, .got_item
 	ld hl, Route24Text_51510
 	call PrintText
-	lb bc, NUGGET, 1
+	lb bc, ITEM_NUGGET_BRIDGE_REWARD, 1
 	call GiveItem
 	jr nc, .bag_full
 	SetEvent EVENT_GOT_NUGGET

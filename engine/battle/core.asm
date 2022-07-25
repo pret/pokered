@@ -730,6 +730,8 @@ HandleEnemyMonFainted:
 	ret c
 	call ChooseNextMon
 .skipReplacingBattleMon
+	xor a
+	ld [wPreviousEnemySelectedMove], a
 	ld a, $1
 	ld [wActionResultOrTookBattleTurn], a
 	call ReplaceFaintedEnemyMon
@@ -1005,6 +1007,8 @@ HandlePlayerMonFainted:
 	call AnyEnemyPokemonAliveCheck
 	jp z, TrainerBattleVictory
 .doUseNextMonDialogue
+	xor a
+	ld [wPreviousPlayerSelectedMove], a
 	call DoUseNextMonDialogue
 	ret c ; return if the player ran from battle
 	call ChooseNextMon
@@ -1845,6 +1849,11 @@ DrawPlayerHUDAndHPBar:
 	hlcoord 10, 7
 	call CenterMonName
 	call PlaceString
+	ld a, [wOptions2]
+	bit BIT_EXP_BAR, a
+	jr z, .noExpBar
+	farcall PrintEXPBar	;joenote - added in the exp bar
+.noExpBar
 	ld hl, wBattleMonSpecies
 	ld de, wLoadedMon
 	ld bc, wBattleMonDVs - wBattleMonSpecies
@@ -2428,6 +2437,15 @@ PartyMenuOrRockOrRun:
 .notAlreadyOut
 	call HasMonFainted
 	jp z, .partyMonDeselected ; can't switch to fainted mon
+	;;;;;;;;; PureRGB - set previous type and status indicators so the AI doesn't use super effective moves or status moves cheaply 
+	;;;;;;;;;           against the pokemon we just sent out when we switch using a turn up
+	ld a, [wBattleMonType1]
+	ld [wAITargetMonType1], a 
+	ld a, [wBattleMonType2]
+	ld [wAITargetMonType2], a 
+	ld a, [wBattleMonStatus]
+	ld [wAITargetMonStatus], a
+	;;;;;;;;;
 	ld a, $1
 	ld [wActionResultOrTookBattleTurn], a
 	call GBPalWhiteOut
@@ -2440,6 +2458,10 @@ PartyMenuOrRockOrRun:
 
 SwitchPlayerMon:
 	callfar RetreatMon
+	;;;;;;;;; PureRGB - reset disable move indicator when we switch pokemon so the move disabled is random until we use a move again with the new pokemon.
+	xor a
+	ld [wPreviousPlayerSelectedMove], a
+	;;;;;;;;;
 	ld c, 50
 	call DelayFrames
 	call AnimateRetreatingPlayerMon
@@ -2458,6 +2480,7 @@ SwitchPlayerMon:
 	call SaveScreenTilesToBuffer1
 	ld a, $2
 	ld [wCurrentMenuItem], a
+	ld [wAIMoveSpamAvoider], a ; helps avoid ai spamming as if they predict you switching pokemon perfectly
 	and a
 	ret
 
@@ -3107,6 +3130,11 @@ ExecutePlayerMove:
 	jp nz, ExecutePlayerMoveDone
 	call PrintGhostText
 	jp z, ExecutePlayerMoveDone
+	ld a, [wPlayerSelectedMove]
+	cp $ff
+	jr z, .skipLoadingPreviousMove
+	ld [wPreviousPlayerSelectedMove], a
+.skipLoadingPreviousMove
 	call CheckPlayerStatusConditions
 	jr nz, .playerHasNoSpecialCondition
 	jp hl
@@ -4479,6 +4507,8 @@ CalculateDamage:
 ; Multi-hit attacks may or may not have 0 bp.
 	cp TWO_TO_FIVE_ATTACKS_EFFECT
 	jr z, .skipbp
+	cp TWO_OR_THREE_ATTACKS_EFFECT
+	jr z, .skipbp
 	cp $1e
 	jr z, .skipbp
 
@@ -4923,8 +4953,8 @@ ApplyAttackToPlayerPokemon:
 	ld a, [wEnemyMoveNum]
 	cp SEISMIC_TOSS
 	jr z, .storeDamage
-	cp NIGHT_SHADE
-	jr z, .storeDamage
+	; cp NIGHT_SHADE
+	; jr z, .storeDamage ; night shade was made a normal move instead of fixed damage
 	ld b, SONICBOOM_DAMAGE
 	cp SONICBOOM
 	jr z, .storeDamage
@@ -5465,10 +5495,10 @@ AIGetTypeEffectiveness:
 ;		-and modifying this to take into account both types
 	ld a, [wEnemyMoveType]
 	ld d, a                    ; d = type of enemy move
-	ld hl, wBattleMonType
-	ld b, [hl]                 ; b = type 1 of player's pokemon
-	inc hl
-	ld c, [hl]                 ; c = type 2 of player's pokemon
+	ld a, [wAITargetMonType1]
+	ld b, a
+	ld a, [wAITargetMonType2]
+	ld c, a
 	ld a, EFFECTIVE
 	ld [wTypeEffectiveness], a ; initialize to neutral effectiveness
 	ld hl, TypeEffects
@@ -5777,6 +5807,8 @@ ExecuteEnemyMove:
 .executeEnemyMove
 	ld hl, wAILayer2Encouragement
 	inc [hl]
+	ld a, [wEnemySelectedMove]
+	ld [wPreviousEnemySelectedMove], a
 	xor a
 	ld [wMoveMissed], a
 	ld [wMoveDidntMiss], a
@@ -6446,6 +6478,7 @@ LoadEnemyMonData:
 	ld a, [wd11e]
 	and a
 	jr z, .missingnoSkip ; don't mark as seen if it's missingno who has no dex info
+	dec a ; pokedex is shifted by 1 because missingno is first
 	ld c, a
 	ld b, FLAG_SET
 	ld hl, wPokedexSeen
@@ -6796,7 +6829,7 @@ CalculateModifiedStat:
 	pop bc
 	ret
 
-ApplyBadgeBoostsForSpecificStat: ;badge boosts a specific stat based on hWhatStat
+ApplyBadgeBoostsForSpecificStat: ;badge boosts a specific stat based on wWhatStat
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	ret z ; return if link battle
@@ -7061,7 +7094,7 @@ InitBattleCommon:
 	sub OPP_ID_OFFSET
 	jp c, InitWildBattle
 	ld [wTrainerClass], a
-	call GetTrainerInformation
+	callfar GetTrainerInformation
 	callfar ReadTrainer
 	call DoBattleTransitionAndInitBattleVariables
 	call _LoadTrainerPic

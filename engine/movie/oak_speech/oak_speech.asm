@@ -56,7 +56,7 @@ OakSpeech:
 	predef InitPlayerData2
 	call RunDefaultPaletteCommand	;gbcnote - reinitialize the default palette in case the pointers got cleared
 	ld hl, wNumBoxItems
-	ld a, POTION
+	ld a, ITEM_INITIAL_PC_ITEM
 	ld [wcf91], a
 	ld a, 1
 	ld [wItemQuantity], a

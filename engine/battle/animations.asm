@@ -1197,30 +1197,30 @@ AnimationDarkenMonPalette:
 	lb bc, $f9, $f4
 	jr SetAnimationBGPalette
 
-AnimationUnusedPalette1:
-	lb bc, $fe, $f8
-	jr SetAnimationBGPalette
+;AnimationUnusedPalette1:
+;	lb bc, $fe, $f8
+;	jr SetAnimationBGPalette
 
-AnimationUnusedPalette2:
-	lb bc, $ff, $ff
-	jr SetAnimationBGPalette
+;AnimationUnusedPalette2:
+;	lb bc, $ff, $ff
+;	jr SetAnimationBGPalette
 
 AnimationResetScreenPalette:
 ; Restores the screen's palette to the normal palette.
 	lb bc, $e4, $e4
 	jr SetAnimationBGPalette
 
-AnimationUnusedPalette3:
-	lb bc, $00, $00
-	jr SetAnimationBGPalette
+;AnimationUnusedPalette3:
+;	lb bc, $00, $00
+;	jr SetAnimationBGPalette
 
 AnimationLightScreenPalette:
 ; Changes the screen to use a palette with light colors.
 	lb bc, $90, $90
 	jr SetAnimationBGPalette
 
-AnimationUnusedPalette4:
-	lb bc, $40, $40
+;AnimationUnusedPalette4:
+;	lb bc, $40, $40
 
 SetAnimationBGPalette:
 	ld a, [wOnSGB]
@@ -1245,6 +1245,24 @@ AnimationShakeScreen:
 AnimationShakeScreenHorizontallyFast:
 	predef_jump PredefShakeScreenHorizontally
 
+AnimationSmokeEverywhere:
+	xor a
+	ld [wWhichBattleAnimTileset], a
+	call LoadAnimationTileset
+	ld d, 16
+	ld a, $7A
+	ld [wDropletTile], a
+	jp AnimationTileEverywhere
+
+AnimationFireEverywhere:
+	ld a, 1
+	ld [wWhichBattleAnimTileset], a
+	call LoadAnimationTileset
+	ld d, 16
+	ld a, $73
+	ld [wDropletTile], a
+	jp AnimationTileEverywhere
+
 AnimationWaterDropletsEverywhereFast:
 ; Draws water droplets all over the screen and makes them
 ; scroll. It's hard to describe, but it's the main animation
@@ -1264,10 +1282,11 @@ AnimationWaterDropletsEverywhereDefault:
 	call LoadAnimationTileset
 	ld d, 32
 AnimationWaterDropletsEverywhere:
-	ld a, -16
-	ld [wBaseCoordX], a
 	ld a, $71
 	ld [wDropletTile], a
+AnimationTileEverywhere:
+	ld a, -16
+	ld [wBaseCoordX], a
 .loop
 	ld a, 16
 	ld [wBaseCoordY], a
@@ -1922,15 +1941,17 @@ _AnimationShootBallsUpward:
 	jr nz, .loop
 	ret
 
+;;;;;;;;;;;;;;;;;;;;;; 
+; PureRGB - NEW: Shoot many balls upward has been slightly modified to look nicer, and is used in-game now instead of being unused.
 AnimationShootManyBallsUpward:
 ; Shoots several pillars of "energy" balls upward.
 	ldh a, [hWhoseTurn]
 	and a
 	ld hl, UpwardBallsAnimXCoordinatesPlayerTurn
-	ld a, $45 ; y coordinate for "energy" ball pillar
+	ld a, $42 ; y coordinate for "energy" ball pillar
 	jr z, .player
 	ld hl, UpwardBallsAnimXCoordinatesEnemyTurn
-	ld a, $23 ; y coordinate for "energy" ball pillar
+	ld a, $18 ; y coordinate for "energy" ball pillar
 .player
 	ld [wSavedY], a
 .loop
@@ -1940,7 +1961,7 @@ AnimationShootManyBallsUpward:
 	cp $ff
 	jp z, AnimationCleanOAM
 	ld [wBaseCoordX], a
-	lb bc, 4, 1
+	lb bc, 5, 1
 	push hl
 	call _AnimationShootBallsUpward
 	pop hl
@@ -1948,15 +1969,16 @@ AnimationShootManyBallsUpward:
 
 UpwardBallsAnimXCoordinatesPlayerTurn:
 ; List of x coordinates for each pillar of "energy" balls in the
-; AnimationShootManyBallsUpward animation. It's unused in the game.
+; AnimationShootManyBallsUpward animation. It's unused in the game. NEW: It's used now
 	db $40, $28, $18, $38
 	db -1 ; end
 
 UpwardBallsAnimXCoordinatesEnemyTurn:
 ; List of x coordinates for each pillar of "energy" balls in the
-; AnimationShootManyBallsUpward animation. It's unused in the game.
+; AnimationShootManyBallsUpward animation. It's unused in the game. NEW: It's used now
 	db $90, $78, $68, $88
 	db -1 ; end
+;;;;;;;;;;;;;;;;;;;;;;
 
 AnimationMinimizeMon:
 ; Changes the mon's sprite to a mini black sprite. Used by the

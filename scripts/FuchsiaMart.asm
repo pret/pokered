@@ -36,9 +36,6 @@ FuchsiaMartTMKidFlavor:
 TMKidQuick5::
 	text_far _TMKidQuick
 	text_end
-	
-FuchsiaTMKidShop::
-	script_mart TM_SLASH, TM_MEGA_DRAIN, TM_PIN_MISSILE, TM_AGILITY, TM_PSYBEAM
 
 FuchsiaMartText2:
 	text_far _FuchsiaMartText2
@@ -48,5 +45,4 @@ FuchsiaMartText3:
 	text_far _FuchsiaMartText3
 	text_end
 
-FuchsiaCashierText::
-	script_mart ULTRA_BALL, GREAT_BALL, SUPER_POTION, REVIVE, FULL_HEAL, SUPER_REPEL
+INCLUDE "data/items/marts/fuchsia.asm"

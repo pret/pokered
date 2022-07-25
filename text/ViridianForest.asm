@@ -62,6 +62,42 @@ _ViridianFrstAfterBattleText3::
 	cont "dropped!"
 	done
 
+_ViridianForestBattleTextPikaGirl::
+	text "Hi, do you have a"
+	line "PIKACHU?"
+	done
+
+_ViridianForestEndBattleTextPikaGirl::
+	text "Oh no,"
+	line "really?"
+	prompt
+
+_ViridianForestAfterBattleTextPikaGirl::
+	text "I've heard there"
+	line "are wild PIKACHU"
+	cont "here!"
+	para "Have you seen"
+	line "any?"
+	done
+
+_ViridianForestBattleTextSamurai::
+	text "I'm gonna be the"
+	line "best. You just"
+	cont "can't beat me!"
+	done
+
+_ViridianForestEndBattleTextSamurai::
+	text "After"
+	line "all I did..."
+	prompt
+
+_ViridianForestAfterBattleTextSamurai::
+	text "A METAPOD is cool"
+	line "because its"
+	cont "attack is its"
+	cont "defense!"
+	done
+
 _ViridianForestText8::
 	text "I ran out of #"
 	line "BALLs to catch"

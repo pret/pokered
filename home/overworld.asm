@@ -799,19 +799,22 @@ LoadPlayerSpriteGraphics::
 	jp LoadWalkingPlayerSpriteGraphics
 
 IsBikeRidingAllowed::
-; The bike can be used on Route 23 and Indigo Plateau,
+; The bike can be used on maps within BikeRidingMaps,
 ; or maps with tilesets in BikeRidingTilesets.
 ; Return carry if biking is allowed.
-
-	ld a, [wCurMap]
-	cp ROUTE_23
-	jr z, .allowed
-	cp INDIGO_PLATEAU
-	jr z, .allowed
 
 	ld a, [wCurMapTileset]
 	ld b, a
 	ld hl, BikeRidingTilesets
+	call .bikeAllowedLoop
+	ret c
+	ld a, [wCurMap]
+	ld b, a
+	ld hl, BikeRidingMaps
+	call .bikeAllowedLoop
+	ret
+
+.bikeAllowedLoop
 .loop
 	ld a, [hli]
 	cp b
@@ -1826,7 +1829,6 @@ JoypadOverworld::
 ; if done simulating button presses
 .doneSimulating
 	xor a
-;	ld [wWastedByteCD3A], a
 	ld [wSimulatedJoypadStatesIndex], a
 	ld [wSimulatedJoypadStatesEnd], a
 	ld [wJoyIgnore], a
@@ -1935,19 +1937,17 @@ RunMapScript::
 
 LoadWalkingPlayerSpriteGraphics::
 	ld de, RedSprite
-	ld hl, vNPCSprites
 	jr LoadPlayerSpriteGraphicsCommon
 
 LoadSurfingPlayerSpriteGraphics::
 	ld de, SeelSprite
-	ld hl, vNPCSprites
 	jr LoadPlayerSpriteGraphicsCommon
 
 LoadBikePlayerSpriteGraphics::
 	ld de, RedBikeSprite
-	ld hl, vNPCSprites
 
 LoadPlayerSpriteGraphicsCommon::
+	ld hl, vNPCSprites
 	push de
 	push hl
 	lb bc, BANK(RedSprite), $0c
@@ -2374,8 +2374,12 @@ IgnoreInputForHalfSecond:
 
 ResetUsingStrengthOutOfBattleBit:
 	ld hl, wd728
-	res 0, [hl]
+	bit 0, [hl] ; don't need to reset it if it's zero
+	ret z
+	callfar CheckResetStrengthFlag
+	and a ; reset z flag
 	ret
+
 
 ForceBikeOrSurf::
 	ld b, BANK(RedSprite)
@@ -2443,11 +2447,11 @@ INCLUDE "data/sprites/alt_sprite_mappings.asm"
 SetLastBlackoutMap::
 	; called when entering pokemon centers
 	ld a, [wLastMap]
-	ld [wLastBlackoutMap], a
-	ret
+	jr BlackoutMapCommon
 
 SetCurBlackoutMap::
 	; called after using FLY
 	ld a, [wCurMap]
+BlackoutMapCommon:
 	ld [wLastBlackoutMap], a
 	ret

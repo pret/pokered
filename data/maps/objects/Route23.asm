@@ -18,7 +18,7 @@ Route23_Object:
 	object_event 12, 105, SPRITE_GUARD, STAY, DOWN, 5 ; person
 	object_event  8, 119, SPRITE_GUARD, STAY, DOWN, 6 ; person
 	object_event  8, 136, SPRITE_GUARD, STAY, DOWN, 7 ; person
-	object_event  9, 13, SPRITE_POKE_BALL, STAY, NONE, 8, SURFBOARD ; person
-	object_event  1, 51, SPRITE_POKE_BALL, STAY, NONE, 9, SURFBOARD ; person
+	object_event  9, 13, SPRITE_POKE_BALL, STAY, NONE, 8, TM_ROUTE_23_MAZE_AFTER_VICTORY_ROAD_NEW ; person
+	object_event  1, 51, SPRITE_POKE_BALL, STAY, NONE, 9, ITEM_ROUTE_23_WEST_AFTER_7TH_GUARD_NEW ; person
 
 	def_warps_to ROUTE_23

@@ -19,7 +19,9 @@ _BeforeReceivedTM34Text::
 
 _ReceivedTM34Text::
 	text "<PLAYER> received"
-	line "TM34!@"
+	line "@"
+	text_ram wStringBuffer
+	text "!@"
 	text_end
 
 _TM34ExplanationText::
@@ -37,13 +39,15 @@ _TM34ExplanationText::
 	cont "pick the #MON"
 	cont "carefully!"
 
-	para "TM34 contains"
+	para "@"
+	text_ram wStringBuffer
+	text " contains"
 	line "BIDE!"
 
 	para "Your #MON will"
-	line "absorb damage in"
-	cont "battle then pay"
-	cont "it back double!"
+	line "steel itself,"
+	cont "raising ATTACK"
+	cont "and DEFENSE!"
 	done
 
 _TM34NoRoomText::

@@ -18,7 +18,7 @@ _CanMoveBouldersText::
 	text_ram wcd6d
 	text " can"
 	line "move boulders."
-	prompt
+	done
 
 _CurrentTooFastText::
 	text "The current is"

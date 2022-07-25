@@ -13,6 +13,15 @@ Route12HouseText1:
 	callfar LastTwoGurusScript
 	jr .done
 .printEndText
+	ld a, [wOptions2]
+	bit BIT_ALT_PKMN_PALETTES, a ; do we have alt palettes enabled
+	jr z, .noColorText
+	ld hl, Route12GuruEndColor
+	call PrintText
+	ld hl, Route12GuruColorInfo
+	call PrintText
+	jr .done
+.noColorText
 	ld hl, Route12GuruEnd
 	call PrintText
 .done
@@ -24,4 +33,13 @@ Route12GuruIntro:
 
 Route12GuruEnd:
 	text_far _Route12GuruEnd
+	text_end
+
+Route12GuruEndColor:
+	text_far _Route12GuruEnd
+	text_promptbutton
+	text_end
+
+Route12GuruColorInfo:
+	text_far _Route12GuruColor
 	text_end

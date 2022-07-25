@@ -10,17 +10,21 @@ _TM39PreReceiveText::
 
 _ReceivedTM39Text::
 	text "<PLAYER> received"
-	line "TM39!@"
+	line "@"
+	text_ram wStringBuffer
+	text "!@"
 	text_end
 
 _TM39ExplanationText::
 	text "TM39 is a move"
-	line "called SWIFT."
+	line "called"
+	cont "FILTHY SLAM."
 
-	para "It's very accurate,"
-	line "so use it during"
-	cont "battles you can't"
-	cont "afford to lose."
+	para "It's a strong"
+	line "POISON type move."
+	para "Use it in battles"
+	line "you can't afford"
+	cont "to lose."
 	done
 
 _TM39NoRoomText::

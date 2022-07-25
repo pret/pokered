@@ -15,15 +15,15 @@ ItemPrices::
 	bcd3 250   ; ICE_HEAL
 	bcd3 200   ; AWAKENING
 	bcd3 200   ; PARLYZ_HEAL
-	bcd3 3000  ; FULL_RESTORE
-	bcd3 2500  ; MAX_POTION
-	bcd3 1500  ; HYPER_POTION
+	bcd3 2200  ; FULL_RESTORE
+	bcd3 1800  ; MAX_POTION
+	bcd3 1200  ; HYPER_POTION
 	bcd3 700   ; SUPER_POTION
 	bcd3 300   ; POTION
 	bcd3 0     ; SAFARI_BAIT
 	bcd3 0     ; SAFARI_ROCK
-	bcd3 0     ; UNUSED_ITEM1
-	bcd3 0     ; UNUSED_ITEM2
+	bcd3 2000  ; OLD_COIN
+	bcd3 0	   ; UNUSED_ITEM2
 	bcd3 0     ; UNUSED_ITEM3
 	bcd3 0     ; UNUSED_ITEM4
 	bcd3 0     ; UNUSED_ITEM5
@@ -39,7 +39,7 @@ ItemPrices::
 	bcd3 5000  ; IRON
 	bcd3 5000  ; CARBOS
 	bcd3 5000  ; CALCIUM
-	bcd3 8000  ; RARE_CANDY
+	bcd3 4000  ; RARE_CANDY
 	bcd3 0     ; DOME_FOSSIL
 	bcd3 0     ; HELIX_FOSSIL
 	bcd3 0     ; SECRET_KEY
@@ -78,7 +78,7 @@ ItemPrices::
 	bcd3 0     ; OLD_ROD
 	bcd3 0     ; GOOD_ROD
 	bcd3 0     ; SUPER_ROD
-	bcd3 5000  ; PP_UP
+	bcd3 8000  ; PP_UP
 	bcd3 1000  ; ETHER
 	bcd3 2000  ; MAX_ETHER
 	bcd3 2000  ; ELIXER

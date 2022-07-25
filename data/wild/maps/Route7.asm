@@ -1,15 +1,15 @@
 Route7WildMons:
 	def_grass_wildmons 40 ; encounter rate
-	db 19, GRIMER
-	db 19, KOFFING
-	db 17, GRIMER
+	db 26, FLAREON
 	db 22, KOFFING
-	db 22, GRIMER
-	db 18, VULPIX
-	db 18, VULPIX
-	db 20, VULPIX
-	db 19, GROWLITHE
-	db 20, GROWLITHE
+	db 24, GRIMER
+	db 24, KOFFING
+	db 25, GRIMER
+	db 24, VULPIX
+	db 25, VULPIX
+	db 26, VULPIX
+	db 23, GROWLITHE
+	db 25, GROWLITHE
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate

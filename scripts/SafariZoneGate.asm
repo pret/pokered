@@ -518,7 +518,7 @@ SafariZonePATextNoBalls:
 	text_end
 
 GiveHyperBall:
-	lb bc, HYPER_BALL, 1
+	lb bc, ITEM_RANGER_HUNT_COMPLETION_PRIZE_NEW, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, ReceivedHyperBallText

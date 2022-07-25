@@ -7,9 +7,10 @@ FossilGuysHouse_TextPointers:
 	dw FossilGuysHouseText2
 	dw FossilGuysHouseText3
 	dw FossilGuysHouseText4
-	dw FossilGuysHouseText4
+	dw FossilGuysHouseText5
 	dw FossilGuysHouseText5
 	dw FossilGuysHouseText6
+	dw FossilGuysHouseText7
 
 FossilGuysHouseText1:
 	text_asm
@@ -86,7 +87,7 @@ FossilGuysHouseText1:
 	ld a, OMANYTE	
 .finishGiveFossil
 	ld b, a
-	ld c, 22
+	ld c, 24
 	call GivePokemon
 	jp nc, .done
 	SetEvent EVENT_RECEIVED_FOSSIL_PKMN_FROM_SUPER_NERD
@@ -121,7 +122,7 @@ FossilGuysHouseText1:
 	ld hl, FossilGuyCameBackAmber
 	call PrintText
 	ld b, AERODACTYL
-	ld c, 25
+	ld c, 24
 	call GivePokemon
 	jr nc, .done
 	SetEvent EVENT_RECEIVED_AERODACTYL_FROM_SUPER_NERD
@@ -221,9 +222,73 @@ FossilGuyGoToCinnabarText:
 	text_far _FossilGuyGoToCinnabarText
 	text_end
 
-; sign/house object text
+; cat text
 
 FossilGuysHouseText2:
+	text_asm
+	CheckEvent EVENT_MET_FOSSIL_GUYS_CAT
+	jr nz, .metCatAlready
+	SetEvent EVENT_MET_FOSSIL_GUYS_CAT
+	ld hl, FossilGuysHouseCatText1
+	call PrintText
+	call FossilGuyFacesPlayerDirection
+	ld hl, FossilGuysHouseCatText2
+	jr .done
+.metCatAlready
+	ld hl, FossilGuysHouseCatText3
+	call PrintText
+	call FossilGuyFacesPlayerDirection
+	ld hl, FossilGuysHouseCatText4
+.done
+	call PrintText
+	jp TextScriptEnd
+
+; makes fossil guy face the player
+FossilGuyFacesPlayerDirection:
+	ld a, 1
+	ldh [hSpriteIndex], a
+	ld a, [wXCoord]
+	cp 1
+	jr z, .checkYcoord
+	cp 0
+	ld a, SPRITE_FACING_LEFT
+	jr z, .doFacing
+	ld a, SPRITE_FACING_RIGHT
+	jr .doFacing
+.checkYcoord
+	ld a, [wYCoord]
+	cp 4
+	ret c ; don't need to change facing if facing up is the best option
+	ld a, SPRITE_FACING_DOWN
+.doFacing
+  	ldh [hSpriteFacingDirection], a
+  	call SetSpriteFacingDirection
+	ret
+	
+
+FossilGuysHouseCatText1:
+	text_far _CeladonMansion1Text1
+	sound_cry_meowth
+	text_promptbutton
+	text_end
+
+FossilGuysHouseCatText2:
+	text_far _FossilGuysCat2
+	text_end
+
+FossilGuysHouseCatText3:
+	text_far _FossilGuysCat1
+	sound_cry_meowth
+	text_promptbutton
+	text_end
+
+FossilGuysHouseCatText4:
+	text_far _FossilGuysCat3
+	text_end
+
+; sign/house object text
+
+FossilGuysHouseText3:
 	text_asm
 	CheckEitherEventSet EVENT_GOT_DOME_FOSSIL, EVENT_GOT_HELIX_FOSSIL
 	jr z, .done
@@ -250,18 +315,18 @@ FossilGuysOmanyteText:
 	text_far _FossilGuysPaperTextOmanyte
 	text_end
 
-FossilGuysHouseText3:
+FossilGuysHouseText4:
 	text_far _FossilGuysRock
 	text_end
 
-FossilGuysHouseText4:
+FossilGuysHouseText5:
 	text_far _FossilGuysTeleporterText
 	text_end
 
-FossilGuysHouseText5:
+FossilGuysHouseText6:
 	text_far _FossilGuysPosterText
 	text_end
 
-FossilGuysHouseText6:
+FossilGuysHouseText7:
 	text_far _FossilGuysDesk
 	text_end

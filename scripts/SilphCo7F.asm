@@ -329,7 +329,7 @@ SilphCo7Text1:
 .givelapras
 	ld hl, .MeetLaprasGuyText
 	call PrintText
-	lb bc, LAPRAS, 35
+	lb bc, LAPRAS, 40
 	call GivePokemon
 	jr nc, .done
 	ld a, [wSimulatedJoypadStatesEnd]
@@ -354,8 +354,8 @@ SilphCo7Text1:
 	jr nz, .noItemToGive
 	ld hl, .LaprasGuyAlreadyText
 	call PrintText
-	; give rare candy
-	lb bc, RARE_CANDY, 1
+	; give ra
+	lb bc, ITEM_GOT_LAPRAS_SILPH_CO_7F_REWARD_NEW, 1
 	call GiveItem
 	jr nc, .noRoom
 	ld hl, .LaprasGuyReceivedItemText

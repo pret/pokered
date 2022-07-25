@@ -98,22 +98,26 @@ AIEnemyTrainerChooseMoves:
 	dec c
 	jr nz, .filterMinimalEntries
 	ld hl, wBuffer    ; use created temporary array as move set
-	ret
+	jr .done
 .useOriginalMoveSet
 	ld hl, wEnemyMonMoves    ; use original move set
+.done
+	xor a
+	ld [wAIMoveSpamAvoider], a
+	ld [wAITargetMonStatus], a
 	ret
 
 AIMoveChoiceModificationFunctionPointers:
 	dw AIMoveChoiceModification1
 	dw AIMoveChoiceModification2
 	dw AIMoveChoiceModification3
-	dw AIMoveChoiceModification4 ; unused, does nothing
+	dw AIMoveChoiceModification4
 
-; discourages moves that cause no damage but only a status ailment if player's mon already has one
+; AKA the "Dont do stupid things no player would ever do" AI subroutine
+; discourages moves that cause no damage but only a status ailment if player's mon already has one, or if they're immune to it
+; discourages moves that after being used once won't do anything when used again (mist, leech seed, etc.)
+; discourages moves that will fail due to the current enemy pokemon's state (recover at full health, one hit ko moves on faster pkmn)
 AIMoveChoiceModification1:
-	ld a, [wBattleMonStatus]
-	and a
-	ret z ; return if no status ailment on player's mon
 	ld hl, wBuffer - 1 ; temp move selection array (-1 byte offset)
 	ld de, wEnemyMonMoves ; enemy moves
 	ld b, NUM_MOVES + 1
@@ -126,9 +130,31 @@ AIMoveChoiceModification1:
 	ret z ; no more moves in move set
 	inc de
 	call ReadMove
+	ld a, [wEnemyMoveEffect]
+	cp DREAM_EATER_EFFECT
+	jr z, .checkAsleep
+	cp OHKO_EFFECT
+	jr z, .ohko
 	ld a, [wEnemyMovePower]
 	and a
 	jr nz, .nextMove
+	ld a, [wEnemyMoveEffect]
+	cp DISABLE_EFFECT
+	jr z, .checkDisabled
+	cp LEECH_SEED_EFFECT
+	jp z, .checkSeeded
+	cp FOCUS_ENERGY_EFFECT
+	jr z, .checkPumpedUp
+	cp LIGHT_SCREEN_EFFECT
+	jr z, .checkLightScreenUp
+	cp REFLECT_EFFECT
+	jr z, .checkReflectUp
+	cp MIST_EFFECT
+	jr z, .checkMistUp
+	cp CONFUSION_EFFECT
+	jp z, .checkConfused
+	cp HEAL_EFFECT
+	jp z, .checkFullHealth
 	ld a, [wEnemyMoveEffect]
 	push hl
 	push de
@@ -140,10 +166,93 @@ AIMoveChoiceModification1:
 	pop de
 	pop hl
 	jr nc, .nextMove
+.checkStatusImmunity
+	call CheckStatusImmunity
+	jr c, .discourage
+.notImmune
+	ld a, [wAITargetMonStatus] ; set to the pokemon's current status before it gets healed or before it switches out
+	and a
+	jr nz, .discourage ; if the AI thinks the player has a status, they should avoid using status moves 
+					   ; even if the player heals the status or switches out that turn
+	ld a, [wAIMoveSpamAvoider] ; set if we switched or healed this turn
+	cp 2 ; set to 2 if we switched
+	jr z, .nextMove ; if the AI thinks the player DOESNT have a status before they switch, we should avoid discouraging status moves
+	ld a, [wBattleMonStatus]
+	and a
+	jr z, .nextMove ; no need to discourage status moves if the player doesn't have a status
+.discourage
 	ld a, [hl]
 	add $5 ; heavily discourage move
 	ld [hl], a
 	jr .nextMove
+.ohko
+	call WillOHKOMoveAlwaysFail
+	jr nc, .nextMove
+	jr .discourage
+.checkDisabled
+	ld a, [wPlayerDisabledMove] ; non-zero if the player has a disabled move
+	and a
+	jr z, .nextMove ; if it's zero don't do anything
+	jr .discourage ; otherwise discourage using disable while opponent is disabled already
+.checkPumpedUp
+	ld a, [wEnemyBattleStatus2]
+	bit GETTING_PUMPED, a
+	jr nz, .discourage ; if the enemy has used focus energy don't use again
+	jp .nextMove
+.checkAsleep
+	ld a, [wAITargetMonStatus]
+	and SLP
+	jp nz, .nextMove ; if we just healed sleep or switched out a sleeping pokemon, 
+					 ; the AI shouldn't predict this perfectly when deciding whether to use dream eater
+	ld a, [wBattleMonStatus]
+	and SLP
+	jr z, .discourage ; heavily discourage, if the player isn't asleep avoid using dream eater
+	jp .nextMove
+.checkLightScreenUp
+	ld a, [wEnemyBattleStatus3]
+	bit HAS_LIGHT_SCREEN_UP, a
+	jr nz, .discourage ; if the enemy has a light screen up dont use the move again
+	jp .nextMove
+.checkReflectUp
+	ld a, [wEnemyBattleStatus3]
+	bit HAS_REFLECT_UP, a
+	jr nz, .discourage ; if the enemy has a reflect up dont use the move again
+	jp .nextMove
+.checkMistUp
+	ld a, [wEnemyBattleStatus2]
+	bit PROTECTED_BY_MIST, a
+	jr nz, .discourage ; if the enemy has used mist, don't use it again
+	jp .nextMove
+.checkConfused
+	ld a, [wPlayerBattleStatus1]
+	bit CONFUSED, a
+	jr nz, .discourage ; if the player is confused, don't use confusion-inflicting moves
+	jp .nextMove
+.checkSeeded
+	call CheckSeeded
+	jp nc, .nextMove
+	jr .discourage
+.checkFullHealth ; avoid using moves like recover at full health.
+	push hl
+	push de
+	ld hl, wEnemyMonMaxHP
+	ld de, wEnemyMonHP
+	ld a, [de]
+	cp [hl]
+	jr nz, .notFullHealth
+	inc hl
+	inc de
+	ld a, [de]
+	cp [hl]
+	jr nz, .notFullHealth
+	pop de
+	pop hl
+	jp .discourage
+.notFullHealth
+	pop de
+	pop hl
+	jp .nextMove
+
 
 StatusAilmentMoveEffects:
 	db SLEEP_EFFECT
@@ -152,13 +261,94 @@ StatusAilmentMoveEffects:
 	db BURN_EFFECT
 	db -1 ; end
 
-; slightly encourage moves with specific effects.
-; in particular, stat-modifying moves and other move effects
-; that fall in-between
+CheckSeeded:
+	push hl
+	ld a, [wPlayerBattleStatus2]
+	bit SEEDED, a
+	jr nz, .discourage ; if the enemy has used leech seed don't use again
+	ld a, [wAIMoveSpamAvoider]
+	cp 2 ; set to 2 if we switched out this turn
+	ld hl, wBattleMonType1
+	jr nz, .noSwitchOut
+	ld hl, wAITargetMonType1 ; stores what the AI thinks the player's type is when a switchout happens
+.noSwitchOut	
+	ld a, [hl]
+	cp GRASS
+	jr z, .discourage ; leech seed does not affect grass types
+	inc hl
+	ld a, [hl]
+	cp GRASS
+	jr z, .discourage ; leech seed does not affect grass types
+	pop hl
+	and a
+	ret
+.discourage
+	pop hl
+	scf
+	ret	
+
+
+CheckStatusImmunity:
+	push bc
+	push hl
+	ld a, [wEnemyMoveEffect]
+	cp POISON_EFFECT
+	ld b, POISON
+	jr z, .getMonTypes
+	cp PARALYZE_EFFECT
+	jr z, .checkParalyze
+	cp BURN_EFFECT
+	ld b, FIRE
+	jr z, .getMonTypes
+	jr .done
+.checkParalyze
+	ld a, [wEnemyMoveType]
+	cp ELECTRIC
+	ld b, GROUND
+	jr nz, .done
+.getMonTypes
+	ld a, [wAIMoveSpamAvoider] ; set if we healed status or switched out this turn
+	cp 2 ; it's 2 if we switched out
+	jr nz, .noSwitchOut
+	ld hl, wAITargetMonType1
+	jr .checkTypes
+.noSwitchOut
+	ld hl, wBattleMonType1
+.checkTypes
+	ld a, [hl]
+	cp b
+	jr z, .discourage
+	inc hl
+	ld a, [hl]
+	cp b
+	jr z, .discourage
+.done
+	pop hl
+	pop bc
+	and a
+	ret
+.discourage
+	pop hl
+	pop bc
+	scf
+	ret	
+
+WillOHKOMoveAlwaysFail:
+	call CompareSpeed
+	jr c, .userIsSlower
+	and a
+	ret
+.userIsSlower
+	scf
+	ret
+
+; AKA the "Boost stats on the first turn" subroutine
+; slightly encourage moves with specific effects on the first turn. (FIXED: used to be the second turn)
+; this mostly means trainers will buff their pokemon a bit on the first turn
 AIMoveChoiceModification2:
 	ld a, [wAILayer2Encouragement]
-	cp $1
-	ret nz
+	and a
+	ret nz ; choose this modifier only on the first turn
 	ld hl, wBuffer - 1 ; temp move selection array (-1 byte offset)
 	ld de, wEnemyMonMoves ; enemy moves
 	ld b, NUM_MOVES + 1
@@ -172,33 +362,82 @@ AIMoveChoiceModification2:
 	inc de
 	call ReadMove
 	ld a, [wEnemyMoveEffect]
-	cp ATTACK_UP1_EFFECT
-	jr c, .nextMove
-	cp ATTACK_UP2_EFFECT
-	jr c, .nextMove
-	cp POISON_EFFECT
-	jr c, .preferMove
-	jr .nextMove
+	push hl
+	push de
+	push bc
+	ld hl, Modifier2PreferredMoves
+	ld de, 1
+	call IsInArray
+	pop bc
+	pop de
+	pop hl
+	jr nc, .nextMove
 .preferMove
 	dec [hl] ; slightly encourage this move
 	jr .nextMove
 
+Modifier2PreferredMoves:
+	db LEECH_SEED_EFFECT
+	db FOCUS_ENERGY_EFFECT
+	db REFLECT_EFFECT
+	db LIGHT_SCREEN_EFFECT
+	db ATTACK_UP1_EFFECT
+	db DEFENSE_UP1_EFFECT
+	db SPEED_UP1_EFFECT
+	db SPECIAL_UP1_EFFECT
+	db ACCURACY_UP1_EFFECT
+	db EVASION_UP1_EFFECT
+	db ATTACK_DOWN1_EFFECT
+	db DEFENSE_DOWN1_EFFECT
+	db SPEED_DOWN1_EFFECT
+	db SPECIAL_DOWN1_EFFECT
+	db ACCURACY_DOWN1_EFFECT
+	db EVASION_DOWN1_EFFECT
+	db ATTACK_UP2_EFFECT
+	db DEFENSE_UP2_EFFECT
+	db SPEED_UP2_EFFECT
+	db SPECIAL_UP2_EFFECT
+	db ACCURACY_UP2_EFFECT
+	db EVASION_UP2_EFFECT
+	db ATTACK_DOWN2_EFFECT
+	db DEFENSE_DOWN2_EFFECT
+	db SPEED_DOWN2_EFFECT
+	db SPECIAL_DOWN2_EFFECT
+	db ACCURACY_DOWN2_EFFECT
+	db EVASION_DOWN2_EFFECT
+	db ATTACK_ACCURACY_UP1_EFFECT
+	db ATTACK_DEFENSE_UP1_EFFECT
+	db ATTACK_SPECIAL_SPEED_UP1
+	db ATTACK_UP_SIDE_EFFECT
+	db SUBSTITUTE_EFFECT
+	db -1 ; end
+
+; AKA the "Use Effective damaging moves offensively" subroutine
 ; encourages moves that are effective against the player's mon if they do damage.
 ; discourage damaging moves that are ineffective or not very effective against the player's mon,
 ; unless there's no damaging move that deals at least neutral damage
+; encourage effective or super effective priority moves if the pokemon is slower than the player's pokemon (but only after obtaining 5 badges)
+; encourage effective or super effective draining moves to be used at low health
 AIMoveChoiceModification3:
 	ld hl, wBuffer - 1 ; temp move selection array (-1 byte offset)
 	ld de, wEnemyMonMoves ; enemy moves
 	ld b, NUM_MOVES + 1
 .nextMove
 	dec b
-	ret z ; processed all 4 moves
+	jp z, .clearPreviousTypes ; processed all 4 moves
 	inc hl
 	ld a, [de]
 	and a
-	ret z ; no more moves in move set
+	jp z, .clearPreviousTypes ; no more moves in move set
 	inc de
 	call ReadMove
+	ld a, [wEnemyMovePower]
+	and a
+	jr z, .nextMove ; ignores moves that do no damage (status moves), as we're only concerned with damaging moves for this modifier
+	ld a, [wAIMoveSpamAvoider] ; if we switched this turn or healed status, this is set
+	cp 2 ; it's 2 if we switched pokemon this turn
+	call nz, StoreBattleMonTypes ; in the case where we didnt switch
+								 ; we need to populate wAITargetMonType1 and wAITargetMonType2 with the current pokemon's type data
 	push hl
 	push bc
 	push de
@@ -208,12 +447,15 @@ AIMoveChoiceModification3:
 	pop hl
 	ld a, [wTypeEffectiveness]
 	cp EFFECTIVE
-	jr z, .nextMove
+	jr z, .checkSpecificEffects
 	jr c, .notEffectiveMove
-	ld a, [wEnemyMovePower]
-	and a
-	jr z, .nextMove ; don't encourage a non-damaging move just because it's of a super effective type
-	dec [hl] ; slightly encourage this move
+	;ld a, [wEnemyMoveEffect]
+	; check for reasons not to use a super effective move here
+
+	dec [hl] ; slightly encourage this super effective move
+.checkSpecificEffects ; we'll further encourage certain moves
+	call EncouragePriorityIfSlow
+	call EncourageDrainingMoveIfLowHealth
 	jr .nextMove
 .notEffectiveMove ; discourages non-effective moves if better moves are available
 	push hl
@@ -253,11 +495,133 @@ AIMoveChoiceModification3:
 	pop de
 	pop hl
 	and a
-	jr z, .nextMove
+	jp z, .nextMove
 	inc [hl] ; slightly discourage this move
-	jr .nextMove
-AIMoveChoiceModification4:
+	jp .nextMove
+.clearPreviousTypes
+	xor a
+	ld [wAITargetMonType1], a
+	ld [wAITargetMonType2], a
 	ret
+
+CompareSpeed:
+	push hl
+	push de
+	push bc
+	ld hl, wEnemyMonSpeed + 1
+	ld de, wBattleMonSpeed + 1
+.compareSpeed
+; check if current speed is higher than the target's
+	ld a, [de]
+	dec de
+	ld b, a
+	ld a, [hld]
+	sub b
+	ld a, [de]
+	ld b, a
+	ld a, [hl]
+	sbc b
+	pop bc
+	pop de
+	pop hl
+	ret
+
+; encourages priority moves if the enemy's pokemon is slower than the player's and the move is neutral or super effective.
+; BUT this effect is only applied after you have the soulbadge to prevent priority moves from being spammed early game.
+EncouragePriorityIfSlow:
+	ld a, [wObtainedBadges]
+	bit BIT_SOULBADGE, a
+	ret z
+	call CompareSpeed
+	ret nc
+	dec [hl] ; encourage the move if it's a priority move and the pokemon is slower
+	ret
+
+EncourageDrainingMoveIfLowHealth:
+	ld a, [wEnemyMoveEffect]
+	cp DRAIN_HP_EFFECT
+	ret nz
+	ld a, 2 ; 1/2 maximum hp gone
+	call AICheckIfHPBelowFractionWrapped
+	ret nc
+	dec [hl] ; encourage the draining move if enemy has more than half health gone
+	ret
+
+; AKA the "Apply Status and Heal when needed" subroutine
+; slightly encourage moves with specific effects. 
+; This one will make the opponent want to use status applying moves when you don't have one.
+; It also makes them want to use dream eater if you're asleep, and want to use a recovery move at low health.
+AIMoveChoiceModification4:
+	ld hl, wBuffer - 1 ; temp move selection array (-1 byte offset)
+	ld de, wEnemyMonMoves ; enemy moves
+	ld b, NUM_MOVES + 1
+.nextMove
+	dec b
+	jr z, .done ; processed all 4 moves
+	inc hl
+	ld a, [de]
+	and a
+	jr z, .done ; no more moves in move set
+	inc de
+	call ReadMove
+	ld a, [wEnemyMoveEffect]
+	cp DREAM_EATER_EFFECT
+	jr z, .checkOpponentAsleep
+	ld a, [wEnemyMovePower]
+	and a
+	jr nz, .nextMove
+	ld a, [wEnemyMoveEffect]
+	cp HEAL_EFFECT
+	jr z, .checkWorthHealing
+	push hl
+	push de
+	push bc
+	ld hl, Modifier4PreferredMoves
+	ld de, 1
+	call IsInArray
+	pop bc
+	pop de
+	pop hl
+	jr nc, .nextMove
+	ld a, [wAITargetMonStatus] ; set to nonzero if player healed battle mon's status or switched one with a status out this turn
+	and a
+	jr z, .preferMove
+	ld a, [hl]
+	add $5 
+	ld [hl], a ; heavily discourage using a status move right after the player switched or healed
+	jr .nextMove
+.preferMove
+	dec [hl] ; slightly encourage this move
+	jr .nextMove
+.checkWorthHealing
+	ld a, 2 ; 1/2 maximum HP
+	call AICheckIfHPBelowFractionWrapped
+	jr c, .preferMove ; if HP is below 50% encourage using a healing move
+	jr .nextMove ; otherwise don't encourage it
+.checkOpponentAsleep
+	ld a, [wAITargetMonStatus] ; set to nonzero if player healed battle mon's status or switched one with a status out this turn
+	and SLP
+	jr nz, .preferMoveEvenMore
+	ld a, [wAIMoveSpamAvoider] ; set if we switched or healed this turn
+	cp 2 ; set to 2 if we switched
+	jr z, .nextMove ; if the AI thinks the player IS NOT asleep before they switch, we shouldn't encourage based on the new mon's status
+	ld a, [wBattleMonStatus]
+	and SLP
+	jr nz, .preferMoveEvenMore ; heavier favor for dream eater if the opponent is asleep
+	jr .nextMove
+.preferMoveEvenMore
+	dec [hl]
+	jr .preferMove
+.done
+	ret
+
+Modifier4PreferredMoves:
+	db SLEEP_EFFECT
+	db POISON_EFFECT
+	db PARALYZE_EFFECT
+	db BURN_EFFECT
+	db CONFUSION_EFFECT
+	db -1 ; end
 
 ReadMove:
 	push hl
@@ -275,8 +639,6 @@ ReadMove:
 	ret
 
 INCLUDE "data/trainers/move_choices.asm"
-
-INCLUDE "data/trainers/pic_pointers_money.asm"
 
 INCLUDE "data/trainers/names.asm"
 
@@ -333,12 +695,12 @@ BlackbeltAI:
 	jp AIUseXAttack
 
 GiovanniAI:
-	cp 25 percent + 1
+	cp 10 percent + 1
 	ret nc
 	jp AIUseGuardSpec
 
 CooltrainerMAI:
-	cp 25 percent + 1
+	cp 10 percent + 1
 	ret nc
 	jp AIUseXAttack
 
@@ -363,25 +725,25 @@ BrockAI:
 	jp AIUseFullHeal
 
 MistyAI:
-	cp 25 percent + 1
+	cp 10 percent + 1
 	ret nc
 	jp AIUseXDefend
 
 LtSurgeAI:
-	cp 25 percent + 1
+	cp 10 percent + 1
 	ret nc
 	jp AIUseXSpeed
 
 ErikaAI:
 	cp 50 percent + 1
 	ret nc
-	ld a, 10
+	ld a, 5
 	call AICheckIfHPBelowFraction
 	ret nc
 	jp AIUseSuperPotion
 
 KogaAI:
-	cp 25 percent + 1
+	cp 10 percent + 1
 	ret nc
 	jp AIUseXAttack
 
@@ -393,7 +755,7 @@ BlaineAI:
 SabrinaAI:
 	cp 25 percent + 1
 	ret nc
-	ld a, 10
+	ld a, 5
 	call AICheckIfHPBelowFraction
 	ret nc
 	jp AIUseHyperPotion
@@ -404,10 +766,10 @@ Rival2AI:
 	ld a, 5
 	call AICheckIfHPBelowFraction
 	ret nc
-	jp AIUsePotion
+	jp AIUseHyperPotion
 
 Rival3AI:
-	cp 13 percent - 1
+	cp 25 percent - 1
 	ret nc
 	ld a, 5
 	call AICheckIfHPBelowFraction
@@ -420,10 +782,10 @@ LoreleiAI:
 	ld a, 5
 	call AICheckIfHPBelowFraction
 	ret nc
-	jp AIUseSuperPotion
+	jp AIUseHyperPotion
 
 BrunoAI:
-	cp 25 percent + 1
+	cp 10 percent + 1
 	ret nc
 	jp AIUseXDefend
 
@@ -435,7 +797,7 @@ AgathaAI:
 	ld a, 4
 	call AICheckIfHPBelowFraction
 	ret nc
-	jp AIUseSuperPotion
+	jp AIUseHyperPotion
 
 LanceAI:
 	cp 50 percent + 1
@@ -443,7 +805,7 @@ LanceAI:
 	ld a, 5
 	call AICheckIfHPBelowFraction
 	ret nc
-	jp AIUseHyperPotion
+	jp AIUseFullRestore
 
 GenericAI:
 	and a ; clear carry
@@ -598,6 +960,9 @@ SwitchEnemyMon:
 
 	ld hl, AIBattleWithdrawText
 	call PrintText
+	
+	xor a
+	ld [wPreviousEnemySelectedMove], a
 
 	; This wFirstMonsNotOutYet variable is abused to prevent the player from
 	; switching in a new mon in response to this switch.
@@ -668,6 +1033,16 @@ AICheckIfHPBelowFractionStore::
 	ld a, 1
 .done
 	ld [wUnusedC000], a 
+	ret
+
+AICheckIfHPBelowFractionWrapped:
+	push hl
+	push bc
+	push de
+	call AICheckIfHPBelowFraction
+	pop de
+	pop bc
+	pop hl
 	ret
 
 AICheckIfHPBelowFraction:
@@ -754,3 +1129,14 @@ AIPrintItemUse_:
 AIBattleUseItemText:
 	text_far _AIBattleUseItemText
 	text_end
+
+StoreBattleMonTypes:
+	push hl
+	ld hl, wBattleMonType
+	ld a, [hl]                 ; b = type 1 of player's pokemon
+	ld [wAITargetMonType1], a
+	inc hl
+	ld a, [hl]                 ; c = type 2 of player's pokemon
+	ld [wAITargetMonType2], a
+	pop hl
+	ret

@@ -27,7 +27,7 @@ PrintBeginningBattleText:
 	callfar DrawAllPokeballs
 	pop hl
 	call PrintText
-	jr .done
+	jp .done
 .pokemonTower
 	ld b, SILPH_SCOPE
 	call IsItemInBag
@@ -41,6 +41,7 @@ PrintBeginningBattleText:
 	callfar LoadEnemyMonData
 	jr .notPokemonTower
 .noSilphScope
+	call PlayGhostSfx
 	ld hl, EnemyAppearedText
 	call PrintText
 	ld hl, GhostCantBeIDdText
@@ -50,15 +51,17 @@ PrintBeginningBattleText:
 	ld a, b
 	and a
 	jr z, .noSilphScope
+	call PlayGhostSfx
 	ld hl, EnemyAppearedText
 	call PrintText
 	ld hl, UnveiledGhostText
 	call PrintText
 	callfar LoadEnemyMonData
 	callfar MarowakAnim
+	ld a, MAROWAK
+	call PlayCry
 	ld hl, WildMonAppearedText
 	call PrintText
-
 .playSFX
 	xor a
 	ld [wFrequencyModifier], a
@@ -68,6 +71,19 @@ PrintBeginningBattleText:
 	call PlaySound
 	jp WaitForSoundToFinish
 .done
+	ret
+
+PlayGhostSfx:
+	ld a, $50
+	ld [wFrequencyModifier], a
+	ld a, $20
+	ld [wTempoModifier], a
+	ld a, SFX_BATTLE_2F
+	call PlaySound
+	call WaitForSoundToFinish
+	xor a
+	ld [wFrequencyModifier], a
+	ld [wTempoModifier], a
 	ret
 
 WildMonAppearedText:

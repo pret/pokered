@@ -68,7 +68,7 @@ UpdateGBCPal_OBP1::
 	ret
 
 Func_3082:: ;added from pokeyellow - update audio so it doesn't "lag"
-	ld a, [hLoadedROMBank]
+	ldh a, [hLoadedROMBank]
 	push af
 	farcall FadeOutAudio
 	callbs Music_DoLowHealthAlarm

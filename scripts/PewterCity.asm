@@ -186,7 +186,7 @@ PewterCity_TextPointers:
 	dw PewterCityText3
 	dw PewterCityText4
 	dw PewterCityText5
-	dw PickUpItemText
+	dw PickUp2ItemText
 	dw PewterCityText6
 	dw PewterCityText7
 	dw MartSignText

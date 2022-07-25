@@ -33,7 +33,9 @@ _ReceivedTM06Text::
 
 _TM06ExplanationText::
 	text_start
-	para "TM06 contains"
+	para "@"
+	text_ram wStringBuffer
+	text " contains"
 	line "TOXIC!"
 
 	para "It is a secret"

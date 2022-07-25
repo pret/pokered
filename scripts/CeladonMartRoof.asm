@@ -167,7 +167,7 @@ CeladonMartRoofText_48515:
 	text_end
 
 ReceivedTM49Text:
-	text_far _ReceivedTM49Text
+	text_far _CeladonMartRoofText_4850a
 	sound_get_item_1
 	text_far _CeladonMartRoofText_48520
 	text_waitbutton

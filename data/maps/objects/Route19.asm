@@ -8,7 +8,7 @@ Route19_Object:
 
 	def_object_events
 	object_event  8,  7, SPRITE_COOLTRAINER_M, STAY, LEFT, 1, OPP_SWIMMER, 2
-	object_event 13,  7, SPRITE_COOLTRAINER_M,STAY, LEFT, 2, OPP_SWIMMER, 3
+	object_event 13,  7, SPRITE_COOLTRAINER_M, STAY, LEFT, 2, OPP_SWIMMER, 3
 	object_event 13, 25, SPRITE_SWIMMER, STAY, LEFT, 3, OPP_SWIMMER, 4
 	object_event  4, 27, SPRITE_SWIMMER, STAY, RIGHT, 4, OPP_SWIMMER, 5
 	object_event 16, 31, SPRITE_SWIMMER, STAY, UP, 5, OPP_SWIMMER, 6

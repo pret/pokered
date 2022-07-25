@@ -1,11 +1,12 @@
 _Route13BattleText2::
-	text "My bird #MON"
+	text "My flying #MON"
 	line "want to scrap!"
 	done
 
 _Route13EndBattleText2::
 	text "My"
-	line "bird combo lost?"
+	line "flying combo"
+	cont "lost?"
 	prompt
 
 _Route13AfterBattleText2::
@@ -142,7 +143,7 @@ _Route13AfterBattleText10::
 	done
 
 _Route13BattleText11::
-	text "I always go with"
+	text "I always love"
 	line "bird #MON!"
 	done
 
@@ -153,8 +154,8 @@ _Route13EndBattleText11::
 
 _Route13AfterBattleText11::
 	text "I wish I could"
-	line "fly like PIDGEY"
-	cont "and PIDGEOTTO..."
+	line "fly like a"
+	cont "FEAROW..."
 	done
 
 _Route13Text11::

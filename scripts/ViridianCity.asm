@@ -235,7 +235,7 @@ ViridianCityText6:
 	jr nz, .got_item
 	ld hl, ViridianCityText_191ca
 	call PrintText
-	lb bc, TM_LOVELY_KISS, 1
+	lb bc, TM_VIRIDIAN_CITY_SLEEPING_GUY, 1
 	call GiveItem
 	jr nc, .bag_full
 	ld hl, ReceivedTM42Text

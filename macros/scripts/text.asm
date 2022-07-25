@@ -102,9 +102,9 @@ sound_pokedex_rating: MACRO
 	db TX_SOUND_POKEDEX_RATING
 ENDM
 
-	const TX_SOUND_GET_ITEM_1_DUPLICATE ; $0f
-sound_get_item_1_duplicate: MACRO
-	db TX_SOUND_GET_ITEM_1_DUPLICATE
+	const TX_SOUND_CRY_SNORLAX ; $0f
+sound_cry_snorlax: MACRO
+	db TX_SOUND_CRY_SNORLAX
 ENDM
 
 	const TX_SOUND_GET_ITEM_2 ; $10
@@ -137,9 +137,9 @@ sound_cry_pidgeot: MACRO
 	db TX_SOUND_CRY_PIDGEOT
 ENDM
 
-	const TX_SOUND_CRY_DEWGONG ; $16
-sound_cry_dewgong: MACRO
-	db TX_SOUND_CRY_DEWGONG
+	const TX_SOUND_CRY_MEOWTH ; $16
+sound_cry_meowth: MACRO
+	db TX_SOUND_CRY_MEOWTH
 ENDM
 
 	const TX_FAR ; $17

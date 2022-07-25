@@ -2,7 +2,9 @@
 ; SpecialEffectPointers associates them with effect routines (see data/battle_anims/special_effect_pointers.asm)
 	const_def $C0
 FIRST_SE_ID EQU const_value
-	const_skip $14
+	const_skip $12
+	const SE_SMOKE_EVERYWHERE          ; $D3 used in Poison Gas
+	const SE_FIRE_EVERYWHERE           ; $D4 used in Take Down
 	const SE_SLIDE_ENEMY_MON_DOWN_AND_HIDE   ; $D5 used in Sludge
 	const SE_SLIDE_ENEMY_MON_HALF_OFF  ; $D6 used in Slam
 	const SE_SHAKE_BACK_AND_FORTH_SHORT; $D7 used in Rolling Kick

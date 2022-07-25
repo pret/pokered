@@ -22,7 +22,7 @@ RockTunnelB1F_TextPointers:
 	dw RockTunnel2Text7
 	dw RockTunnel2Text8
 	dw PickUpItemText
-	dw PickUpItemText
+	dw PickUp3ItemText
 
 RockTunnel2TrainerHeaders:
 	def_trainers

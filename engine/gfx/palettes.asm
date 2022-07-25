@@ -224,8 +224,6 @@ GetOverworldPalette:
 	jr z, .rocketHouseBasement
 	cp CERULEAN_CAVE_2F
 	jr c, .normalDungeonOrBuilding
-	cp CERULEAN_CAVE_1F + 1
-	jr c, .caveOrBruno
 	cp LORELEIS_ROOM
 	jr z, .Lorelei
 	cp BRUNOS_ROOM
@@ -246,10 +244,25 @@ GetOverworldPalette:
 	ld a, PAL_GREYMON - 1
 	jr .town
 .caveOrBruno
+	ld a, [wCurMap]
+	cp SEAFOAM_ISLANDS_1F
+	jr z, .seafoam
+	cp SEAFOAM_ISLANDS_B1F
+	jr c, .caveDefault
+	cp SEAFOAM_ISLANDS_B4F + 1
+	jr c, .seafoam
+.caveDefault
 	ld a, PAL_CAVE - 1
 	jr .town
 .Lorelei
+	call GetPalettes
+	jr c, .gbcLorelei
+	jr .seafoam
+.gbcLorelei
 	xor a
+	jr .town
+.seafoam
+	ld a, PAL_0F - 1
 	jr .town
 
 ; used when a Pokemon is the only thing on the screen

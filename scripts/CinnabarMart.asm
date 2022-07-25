@@ -36,9 +36,6 @@ CinnabarMartTMKidFlavor:
 TMKidQuick7::
 	text_far _TMKidQuick
 	text_end
-	
-CinnabarTMKidShop::
-	script_mart TM_TOXIC, TM_BARRIER, TM_AMNESIA, TM_BODY_SLAM, TM_BARRAGE, TM_SLAM
 
 CinnabarMartText2:
 	text_far _CinnabarMartText2
@@ -48,5 +45,4 @@ CinnabarMartText3:
 	text_far _CinnabarMartText3
 	text_end
 
-CinnabarCashierText::
-	script_mart ULTRA_BALL, GREAT_BALL, HYPER_POTION, MAX_REPEL, ESCAPE_ROPE, FULL_HEAL, REVIVE
+INCLUDE "data/items/marts/cinnabar.asm"

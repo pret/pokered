@@ -167,6 +167,8 @@ TryingToLearn:
 	add hl, bc
 	ld a, [hl]
 	push af
+	cp STRENGTH
+	call z, ResetStrengthOverworldBit
 	;push bc   ; FIXED: moves are never considered HMs and can always be deleted if desired
 	;call IsMoveHM
 	;pop bc
@@ -190,6 +192,12 @@ TryingToLearn:
 	jr .menuLoop
 .cancel
 	scf
+	ret
+
+ResetStrengthOverworldBit:
+	ld a, [wd728]
+	res 0, a
+	ld [wd728], a
 	ret
 
 LearnedMove1Text:

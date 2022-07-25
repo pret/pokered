@@ -35,9 +35,15 @@ _ReceivedTM31Text::
 
 _TM31ExplanationText1::
 	text_start
+	para "@"
+	text_ram wStringBuffer
+	text " contains my"
+	line "favorite,"
+	cont "SUBSTITUTE!"
 
-	para "TM31 contains my"
-	line "favorite, MIMIC!"
+	para "Your #MON will"
+	line "trick the foe"
+	cont "with a decoy!"
 
 	para "Use it on a good"
 	line "#MON!@"
@@ -45,7 +51,7 @@ _TM31ExplanationText1::
 
 _TM31ExplanationText2::
 	text "<PLAYER>: Hi!"
-	line "Thanks for TM31!"
+	line "Thanks for TM50!"
 
 	para "<PLAYER>: Pardon?"
 

@@ -51,8 +51,9 @@ _ReceivedTM38Text::
 
 _TM38ExplanationText::
 	text_start
-
-	para "TM38 contains"
+	para "@"
+	text_ram wStringBuffer
+	text " contains"
 	line "FIRE BLAST!"
 
 	para "Teach it to fire-"

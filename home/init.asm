@@ -97,12 +97,11 @@ rLCDC_DEFAULT EQU %11100011
 
 	ld a, SRAM_ENABLE
 	ld [MBC1SRamEnable], a
-	ld a, $1
+	ld a, 1
 	ld [MBC1SRamBankingMode], a
 	ld [MBC1SRamBank], a
 	ld b, NAME_LENGTH
 	ld hl, sPlayerName
-.nameCheckLoop
 	; by checking if a name has been saved we can know if a save file was created
 	call CheckSaveFileExists
 	jr nc, .skipLoad

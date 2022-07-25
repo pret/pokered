@@ -12,9 +12,11 @@ _Route12GuruEnd::
 	line "in any water!"
 	cont "You can catch"
 	cont "different kinds"
-	cont "of #MON."
+	cont "of #MON.@"
+	text_end
 
-	para "Depending on"
+_Route12GuruColor::
+	text "Depending on"
 	line "where you fish,"
 	cont "you may even find"
 	cont "differently"

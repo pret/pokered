@@ -55,7 +55,7 @@ _Mansion1AfterBattleText3::
 	line "open!" 
 	para "Watch your step!"
 	para "And above all,"
-	cont "stay safe!"
+	line "stay safe!"
 	done
 
 _Mansion1BattleText4::

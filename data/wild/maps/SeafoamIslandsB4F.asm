@@ -1,5 +1,5 @@
 SeafoamIslandsB4FWildMons:
-	def_grass_wildmons 10 ; encounter rate
+	def_grass_wildmons 8 ; encounter rate
 	db 31, KINGLER
 	db 31, KINGLER
 	db 33, KINGLER

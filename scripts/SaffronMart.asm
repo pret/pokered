@@ -36,9 +36,6 @@ SaffronMartTMKidFlavor:
 TMKidQuick6::
 	text_far _TMKidQuick
 	text_end
-	
-SaffronTMKidShop::
-	script_mart TM_KARATE_CHOP, TM_ICE_PUNCH, TM_FIRE_PUNCH, TM_THUNDERPUNCH
 
 SaffronMartText2:
 	text_far _SaffronMartText2
@@ -48,5 +45,4 @@ SaffronMartText3:
 	text_far _SaffronMartText3
 	text_end
 
-SaffronCashierText::
-	script_mart GREAT_BALL, HYPER_POTION, MAX_REPEL, ESCAPE_ROPE, FULL_HEAL, REVIVE
+INCLUDE "data/items/marts/saffron.asm"

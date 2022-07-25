@@ -32,7 +32,33 @@ SafariZoneCenterText2:
 	text_end
 
 SafariZoneCenterText3:
+	text_asm
+	ld a, [wSafariType]
+	cp SAFARI_TYPE_RANGER_HUNT
+	jr z, .rangerHuntText
+	cp SAFARI_TYPE_FREE_ROAM
+	jr z, .freeRoamText
+	ld hl, SafariZoneCenterText3Default
+	jr .done
+.rangerHuntText
+	ld hl, SafariZoneCenterText3RangerHunt
+	jr .done
+.freeRoamText
+	ld hl, SafariZoneCenterText3FreeRoam
+.done
+	call PrintText
+	jp TextScriptEnd
+
+SafariZoneCenterText3Default:
 	text_far _SafariZoneCenterText3
+	text_end
+
+SafariZoneCenterText3RangerHunt:
+	text_far _SafariZoneCenterText3RangerHunt
+	text_end
+
+SafariZoneCenterText3FreeRoam:
+	text_far _SafariZoneCenterText3FreeRoam
 	text_end
 
 SafariZoneCenterTrainerHeaders:

@@ -15,20 +15,8 @@ FuchsiaTreeDeleterHouseText2:
 	text_end
 
 FuchsiaTreeDeleterSnorlax:
-	text_asm
-	ld hl, FuchsiaTreeDeleterSnorlaxText
-	call PrintText
-	ld a, SNORLAX
-	call PlayCry
-	ld hl, FuchsiaTreeDeleterSnorlaxText2
-	call PrintText
-	jp TextScriptEnd
-
-FuchsiaTreeDeleterSnorlaxText:
 	text_far _FuchsiaTreeDeleterSnorlax
-	text_end
-
-FuchsiaTreeDeleterSnorlaxText2:
+	sound_cry_snorlax
 	text_far _FuchsiaTreeDeleterSnorlax2
 	text_end
 

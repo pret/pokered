@@ -1,9 +1,9 @@
 SeafoamIslandsB3FWildMons:
-	def_grass_wildmons 10 ; encounter rate
+	def_grass_wildmons 8 ; encounter rate
 	db 31, JYNX
 	db 31, JYNX
 	db 33, JYNX
-	db 33, JYNX
+	db 35, JYNX
 	db 29, DEWGONG
 	db 31, DEWGONG
 	db 31, KINGLER

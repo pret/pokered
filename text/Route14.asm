@@ -11,9 +11,14 @@ _Route14EndBattleText1::
 
 _Route14AfterBattleText1::
 	text "You have some HMs"
-	line "right? #MON"
-	cont "can't ever forget"
-	cont "those moves."
+	line "right?"
+	para "They can be"
+	line "replaced just"
+	cont "like other moves"
+	cont "can."
+	para "It's best to"
+	line "replace them at a"
+	cont "#MON CENTER."
 	done
 
 _Route14BattleText2::
@@ -193,9 +198,9 @@ _Route14EndBattleText12::
 	prompt
 
 _Route14AfterBattleText12::
-	text "I've seen them"
-	line "around here"
-	cont "before."
+	text "I've seen those"
+	line "BIKERs around"
+	cont "here before."
 	para "They might look"
 	line "scary, but they"
 	cont "are actually nice"

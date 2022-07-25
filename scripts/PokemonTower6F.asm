@@ -32,6 +32,10 @@ PokemonTower6Script0:
 	ld a, $6
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
+;;;;;;;;;; PureRGBnote - NEW: ghost marowak uses a special color palette if the feature is enabled
+	ld a, 1
+	ld [wIsAltPalettePkmnData], a
+;;;;;;;;;;
 	ld a, RESTLESS_SOUL
 	ld [wCurOpponent], a
 	ld a, 30
@@ -57,16 +61,21 @@ PokemonTower6Script4:
 	call UpdateSprites
 	ld a, $f0
 	ld [wJoyIgnore], a
+;;;;;;;;;; PureRGBnote - NEW: ghost marowak can be caught and the event will complete if you do so
+	ld a, [wCaughtGhostMarowak]
+	and a
+	jr nz, .success 
+;;;;;;;;;;
 	ld a, [wBattleResult]
 	and a
 	jr nz, .asm_60b82
+.success
 	SetEvent EVENT_BEAT_GHOST_MAROWAK
 	ld a, $7
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
 	ld [wJoyIgnore], a
-	ld a, $0
 	ld [wPokemonTower6FCurScript], a
 	ld [wCurMapScript], a
 	ret
@@ -85,6 +94,7 @@ PokemonTower6Script4:
 	ld [wCurMapScript], a
 	ret
 
+
 PokemonTower6Script3:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
@@ -100,7 +110,7 @@ PokemonTower6F_TextPointers:
 	dw PokemonTower6Text2
 	dw PokemonTower6Text3
 	dw PickUpItemText
-	dw PickUpItemText
+	dw PickUp2ItemText
 	dw PokemonTower6Text6
 	dw PokemonTower6Text7
 
@@ -143,6 +153,19 @@ PokemonTower6Text7:
 	call DelayFrames
 	ld hl, PokemonTower2Text_60c24
 	call PrintText
+;;;;;;;;;; PureRGBnote - NEW: ghost marowak can be caught and the event will complete if you do so
+	ld a, [wCaughtGhostMarowak]
+	and a
+	jr nz, .caughtGhostMarowak
+	ld hl, PokemonTower2Text_toAfterlife
+	jr .done
+.caughtGhostMarowak
+	ld hl, PokemonTower2Text_CaughtGhostMarowak	
+.done
+	call PrintText
+	xor a
+	ld [wCaughtGhostMarowak], a 
+;;;;;;;;;;
 	jp TextScriptEnd
 
 PokemonTower2Text_60c1f:
@@ -152,6 +175,16 @@ PokemonTower2Text_60c1f:
 PokemonTower2Text_60c24:
 	text_far _PokemonTower2Text_60c24
 	text_end
+
+;;;;;;;;;; PureRGBnote - NEW: ghost marowak can be caught and the event will complete if you do so
+PokemonTower2Text_CaughtGhostMarowak:
+	text_far _PokemonTower2Text_Caught
+	text_end
+
+PokemonTower2Text_toAfterlife:
+	text_far _PokemonTower2Text_toAfterlife
+	text_end
+;;;;;;;;;;
 
 PokemonTower6BattleText1:
 	text_far _PokemonTower6BattleText1

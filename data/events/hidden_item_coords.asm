@@ -9,6 +9,7 @@ HiddenItemCoords:
 	hidden_item MT_MOON_B2F,                   18,  12
 	hidden_item ROUTE_25,                      38,   3
 	hidden_item ROUTE_9,                       14,   7
+	hidden_item ROUTE_9,                       32,   3
 	hidden_item SS_ANNE_KITCHEN,               13,   9
 	hidden_item SS_ANNE_B1F_ROOMS,              3,   1
 	hidden_item ROUTE_10,                       9,  17
@@ -44,11 +45,11 @@ HiddenItemCoords:
 	hidden_item VIRIDIAN_CITY,                 14,   4
 	hidden_item ROUTE_11,                      48,   5
 	hidden_item ROUTE_12,                       2,  63
-	hidden_item ROUTE_17,                      15,  14
-	hidden_item ROUTE_17,                       8,  45
-	hidden_item ROUTE_17,                      17,  72
-	hidden_item ROUTE_17,                       4,  91
-	hidden_item ROUTE_17,                       8, 121
+	hidden_item ROUTE_17,                      14,  15
+	hidden_item ROUTE_17,                       9,  45
+	hidden_item ROUTE_17,                      16,  72
+	hidden_item ROUTE_17,                       4,  90
+	hidden_item ROUTE_17,                       9, 121
 	hidden_item UNDERGROUND_PATH_NORTH_SOUTH,   3,   4
 	hidden_item UNDERGROUND_PATH_NORTH_SOUTH,   4,  34
 	hidden_item UNDERGROUND_PATH_WEST_EAST,    12,   2

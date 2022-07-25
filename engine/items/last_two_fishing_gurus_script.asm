@@ -23,7 +23,7 @@ LastTwoGurusScript::
 	ld hl, LastTwoGurusTextNo
 	jr .done
 .got_rod
-	lb bc, HYPER_BALL, 1
+	lb bc, ITEM_GOT_SUPER_ROD_ALREADY_REWARD_NEW, 1
 	call GiveItem
 	jr nc, .bag_full
 	ld hl, LastTwoGurusTextAlreadyHaveSuperRod

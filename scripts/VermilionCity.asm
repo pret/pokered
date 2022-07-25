@@ -286,7 +286,7 @@ VermilionCityDockBeautyText:
 	jr nz, .endText
 	ld hl, VermilionCityDockBeautyGreeting
 	call PrintText
-	lb bc, SURFBOARD, 1
+	lb bc, ITEM_VERMILION_SECRET_DOCK_BEAUTY_NEW, 1
 	call GiveItem
 	jr nc, .bagfull
 	SetEvent EVENT_GOT_DOCK_BEAUTY_ITEM

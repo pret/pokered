@@ -1,13 +1,11 @@
-GetTrainerInformation::
+GetTrainerInformation:: 
 	call GetTrainerName
 	ld a, [wLinkState]
 	and a
 	jr nz, .linkBattle
-	ld a, BANK(TrainerPicAndMoneyPointers)
-	call BankswitchHome
 	ld a, [wTrainerClass]
 	dec a
-	ld hl, TrainerPicAndMoneyPointers
+	ld hl, TrainerPicAndMoneyPointers 
 	ld bc, $5
 	call AddNTimes
 	ld de, wTrainerPicPointer
@@ -22,7 +20,7 @@ GetTrainerInformation::
 	inc de
 	ld a, [hli]
 	ld [de], a
-	jp BankswitchBack
+	ret
 .linkBattle
 	ld hl, wTrainerPicPointer
 	ld de, RedPicFront
@@ -33,3 +31,5 @@ GetTrainerInformation::
 
 GetTrainerName::
 	farjp GetTrainerName_
+
+INCLUDE "data/trainers/pic_pointers_money.asm"

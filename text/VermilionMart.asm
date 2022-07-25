@@ -45,7 +45,7 @@ _VermilionMartTMKidFlavor::
 	cont "TMs!"
 
 	para "He gave my little"
-	line "'business' his"
+	line "‘business’ his"
 	cont "approval!"
 
 	para "Want some TMs?"

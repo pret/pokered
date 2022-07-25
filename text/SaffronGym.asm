@@ -57,16 +57,22 @@ _KogaMarshBadgeInfoText::
 
 _ReceivedTM46Text::
 	text "<PLAYER> received"
-	line "TM46!@"
+	line "@"
+	text_ram wStringBuffer
+	text "!@"
 	text_end
 
 _TM46ExplanationText::
 	text_start
-
-	para "TM46 is PSYWAVE!"
+	para "@"
+	text_ram wStringBuffer
+	text " is PSYCHIC!"
 	line "It uses powerful"
 	cont "psychic waves to"
 	cont "inflict damage!"
+
+	para "It often lowers"
+	line "the SPECIAL stat!"
 	done
 
 _TM46NoRoomText::

@@ -5,17 +5,18 @@ TextScriptEnd::
 	ld hl, TextScriptEndingText
 	ret
 
-ExclamationText::
-	text_far _ExclamationText
-	text_end
+;ExclamationText:: ; unused
+;	text_far _ExclamationText
+;	text_end
 
-GroundRoseText::
-	text_far _GroundRoseText
-	text_end
+;GroundRoseText:: ; unused
+;	text_far _GroundRoseText
+;	text_end
 
 BoulderText::
-	text_far _BoulderText
-	text_end
+	text_asm
+	callfar CheckStrengthUsage
+	jp TextScriptEnd
 
 MartSignText::
 	text_far _MartSignText
@@ -28,4 +29,23 @@ PokeCenterSignText::
 PickUpItemText::
 	text_asm
 	predef PickUpItem
+	jp TextScriptEnd
+
+PickUp2ItemText::
+	text_asm
+	ld c, 2
+	jr DoMultiItemPickup
+
+PickUp3ItemText::
+	text_asm
+	ld c, 3
+	jr DoMultiItemPickup
+
+PickUp5ItemText::
+	text_asm
+	ld c, 5
+	jr DoMultiItemPickup
+
+DoMultiItemPickup:
+	predef PickUpItemQuantity
 	jp TextScriptEnd

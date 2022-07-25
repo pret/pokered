@@ -4,7 +4,7 @@
 	;   hp  atk  def  spd  spc
 
 	db NORMAL, FLYING ; type
-	db 45 ; catch rate
+	db 85 ; catch rate
 	db 130 ; base exp
 
 	INCBIN "gfx/pokemon/front/farfetchd.pic", 0, 1 ; sprite dimensions

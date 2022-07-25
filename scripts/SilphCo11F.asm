@@ -314,7 +314,7 @@ SilphCo11Text1:
 	jp nz, .got_item
 	ld hl, SilphCoPresidentText
 	call PrintText
-	lb bc, MASTER_BALL, 1
+	lb bc, ITEM_SILPH_CO_PRESIDENT_REWARD, 1
 	call GiveItem
 	jr nc, .bag_full
 	ld hl, ReceivedSilphCoMasterBallText

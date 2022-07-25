@@ -146,8 +146,8 @@ _Route19EndBattleText10::
 
 _Route19AfterBattleText10::
 	text "LAPRAS is so big,"
-	line "it must keep you"
-	cont "dry on water."
+	line "it keeps you dry"
+	cont "on water."
 	done
 
 _Route19Text11::

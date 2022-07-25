@@ -21,7 +21,7 @@ SilphCo7F_Object:
 	object_event 20,  2, SPRITE_ROCKET, STAY, LEFT, 7, OPP_ROCKET, 33
 	object_event 19, 14, SPRITE_ROCKET, STAY, RIGHT, 8, OPP_ROCKET, 34
 	object_event  3,  7, SPRITE_BLUE, STAY, UP, 9 ; person
-	object_event  1,  9, SPRITE_POKE_BALL, STAY, NONE, 10, CALCIUM
-	object_event 24, 11, SPRITE_POKE_BALL, STAY, NONE, 11, TM_SLUDGE
+	object_event  1,  9, SPRITE_POKE_BALL, STAY, NONE, 10, ITEM_SILPH_CO_7F_WEST
+	object_event 24, 11, SPRITE_POKE_BALL, STAY, NONE, 11, TM_SILPH_CO_7F_EAST
 
 	def_warps_to SILPH_CO_7F

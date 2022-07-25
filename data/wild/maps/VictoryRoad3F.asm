@@ -1,5 +1,5 @@
 VictoryRoad3FWildMons:
-	def_grass_wildmons 15 ; encounter rate
+	def_grass_wildmons 6 ; encounter rate
 	db 45, GOLEM
 	db 45, GOLEM
 	db 50, MAROWAK

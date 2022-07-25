@@ -21,7 +21,7 @@ SSAnne2FRooms_TextPointers:
 	dw SSAnne9Text3
 	dw SSAnne9Text4
 	dw SSAnne9Text5
-	dw PickUpItemText
+	dw PickUp2ItemText
 	dw SSAnne9Text7
 	dw SSAnne9Text8
 	dw PickUpItemText

@@ -18,6 +18,6 @@ ViridianGym_Object:
 	object_event  2, 16, SPRITE_ROCKER, STAY, RIGHT, 8, OPP_TAMER, 4
 	object_event  6,  5, SPRITE_COOLTRAINER_M, STAY, DOWN, 9, OPP_COOLTRAINER_M, 1
 	object_event 16, 15, SPRITE_GYM_GUIDE, STAY, DOWN, 10 ; person
-	object_event 16,  9, SPRITE_POKE_BALL, STAY, NONE, 11, REVIVE
+	object_event 16,  9, SPRITE_POKE_BALL, STAY, NONE, 11, ITEM_VIRIDIAN_GYM
 
 	def_warps_to VIRIDIAN_GYM

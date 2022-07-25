@@ -10,13 +10,15 @@ _Route15EndBattleText1::
 	prompt
 
 _Route15AfterBattleText1::
-	text "You can't change"
+	text "It's nice to keep"
 	line "the nickname of"
 	cont "any #MON you"
 	cont "get in a trade."
 
-	para "Only the Original"
-	line "Trainer can."
+	para "The NAME RATER"
+	line "can always help"
+	cont "you come up with"
+	cont "a new name!"
 	done
 
 _Route15BattleText2::

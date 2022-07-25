@@ -48,14 +48,19 @@ _ExclamationText::
 	text "!"
 	done
 
-_GroundRoseText::
-	text "Ground rose up"
-	line "somewhere!"
-	done
+;_GroundRoseText:: ; unused
+;	text "Ground rose up"
+;	line "somewhere!"
+;	done
 
 _BoulderText::
 	text "This requires"
 	line "STRENGTH to move!"
+	done
+
+_StrengthActive::
+	text "This boulder"
+	line "can be moved!"
 	done
 
 _MartSignText::
@@ -73,6 +78,15 @@ _FoundItemText::
 	text "<PLAYER> found"
 	line "@"
 	text_ram wStringBuffer
+	text "!@"
+	text_end
+
+_FoundMultipleItemText::
+	text "<PLAYER> found"
+	line "@"
+	text_ram wStringBuffer
+	text " ×@"
+	text_ram wTempStore1
 	text "!@"
 	text_end
 

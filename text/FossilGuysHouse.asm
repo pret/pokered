@@ -257,3 +257,21 @@ _FossilGuysDesk::
 	para "LONG DISTANCE"
 	line "TELEPORTER"
 	done
+
+_FossilGuysCat1::
+	text "BASTET: Meow!@"
+	text_end
+
+_FossilGuysCat2::
+	text "That's my MEOWTH."
+	para "Her name is"
+	line "BASTET."
+	done
+
+_FossilGuysCat3::
+	text "She's really good"
+	line "at finding old"
+	cont "coins!"
+	para "She's like a"
+	line "metal detector!"
+	done

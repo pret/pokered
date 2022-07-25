@@ -358,6 +358,8 @@ StartMenu_Item::
 	cp POCKET_ABRA
 	jp z, .useOrTossItem
 .notBicycle1
+	xor a
+	ld [wListWithTMText], a
 	ld a, USE_TOSS_MENU_TEMPLATE
 	ld [wTextBoxID], a
 	call DisplayTextBoxID

@@ -23,10 +23,11 @@ PALETTES_DEFAULT    EQU %00 ; 0
 PALETTES_SGB        EQU %01 ; 1
 PALETTES_YELLOW     EQU %11 ; 3
 
-	const_def 2
+	const_def 2 ; first two bytes are the palette options above
 	const BIT_ALT_PKMN_PALETTES ; 2
 	const BIT_AUDIO_PAN         ; 3
 	const BIT_BIKE_MUSIC        ; 4
+	const BIT_EXP_BAR           ; 5
 
 ; wSpriteOptions2
 	const_def  

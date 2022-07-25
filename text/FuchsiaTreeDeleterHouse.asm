@@ -108,7 +108,7 @@ _FuchsiaTreeDeleterFinalText2::
 	done
 
 _FuchsiaTreeDeleterSnorlax::
-	text "Snoooooooore-"
+	text "SNORLAX: Snooore-"
 
 	para "..."
 
@@ -116,10 +116,11 @@ _FuchsiaTreeDeleterSnorlax::
 
 	para "..."
 
-	para "-laaaaaaaaax"
-	prompt
+	para "-laaaaaaaaax@"
+	text_end
 
 _FuchsiaTreeDeleterSnorlax2::
-	text "What a couch"
+	text_start
+	para "What a couch"
 	line "potato!"
 	done

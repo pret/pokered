@@ -434,7 +434,7 @@ TakeDownAnim:
 	battle_anim LEECH_SEED, SE_MOVE_MON_HORIZONTALLY
 	battle_anim TAKE_DOWN, SE_DARK_SCREEN_FLASH
 	battle_anim NO_MOVE, SE_RESET_MON_POSITION
-	battle_anim NO_MOVE, SUBANIM_04, 1, 2
+	battle_anim FLAMETHROWER, SE_FIRE_EVERYWHERE
 	db -1 ; end
 
 ThrashAnim:
@@ -1170,6 +1170,8 @@ DreamEaterAnim:
 	battle_anim DREAM_EATER, SE_FLASH_SCREEN_LONG
 	battle_anim DREAM_EATER, SE_DARK_SCREEN_PALETTE
 	battle_anim DREAM_EATER, SUBANIM_02, 0, 8
+	battle_anim NO_MOVE, SUBANIM_21, 0, 6
+	battle_anim NO_MOVE, SUBANIM_22, 0, 6
 	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
 	db -1 ; end
 
@@ -1178,7 +1180,7 @@ PoisonGasAnim:
 	battle_anim NO_MOVE, SUBANIM_19, 1, 2
 	battle_anim NO_MOVE, SE_DARKEN_MON_PALETTE
 	battle_anim NO_MOVE, SUBANIM_19, 1, 2
-	battle_anim CONFUSE_RAY, SE_WATER_DROPLETS_EVERYWHERE_FAST
+	battle_anim CONFUSE_RAY, SE_SMOKE_EVERYWHERE
 	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
 	db -1 ; end
 

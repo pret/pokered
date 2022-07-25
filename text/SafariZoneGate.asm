@@ -138,7 +138,9 @@ _ReceivedHyperBallText::
 	line "earned prize!!"
 
 	para "<PLAYER> received"
-	line "a HYPER BALL!@"
+	line "a @"
+	text_ram wStringBuffer
+	text "!@"
 	text_end
 
 _SafariZoneEntranceHyperBallOwedText::

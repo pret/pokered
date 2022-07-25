@@ -22,7 +22,7 @@ KeyItemFlags:
 	dbit FALSE ; POTION
 	dbit TRUE  ; SAFARI_BAIT
 	dbit TRUE  ; SAFARI_ROCK
-	dbit TRUE  ; UNUSED_ITEM1
+	dbit FALSE ; OLD_COIN
 	dbit TRUE  ; UNUSED_ITEM2
 	dbit TRUE  ; UNUSED_ITEM3
 	dbit TRUE  ; UNUSED_ITEM4

@@ -153,6 +153,10 @@ GainExperience:
 	call PrintText
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a
+	call HasExpBar
+	jr z, .noExpBar
+	farcall AnimateEXPBar	;joenote - animate the exp bar
+.noExpBar
 	call LoadMonData
 	pop hl
 	ld bc, wPartyMon1Level - wPartyMon1Exp
@@ -165,6 +169,12 @@ GainExperience:
 	;wTempFlag0 / wTempCoins1 was chosen because it's used only for slot machine and gets defaulted to 1 during the mini-game
 	cp d
 	jp z, .nextMon ; if level didn't change, go to next mon
+	call HasExpBar
+	jr z, .noExpBar2
+	push hl
+	farcall KeepEXPBarFull	;joenote - animate the exp bar
+	pop hl
+.noExpBar2
 	ld a, [wCurEnemyLVL]
 	push af
 	push hl
@@ -249,6 +259,10 @@ GainExperience:
 	call PrintText
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a
+	call HasExpBar
+	jr z, .noExpBar3
+	farcall AnimateEXPBarAgain	;joenote - animate exp bar
+.noExpBar3
 	call LoadMonData
 	ld d, $1
 	callfar PrintStatsBox
@@ -391,3 +405,8 @@ GrewLevelText:
 	text_far _GrewLevelText
 	sound_level_up
 	text_end
+
+HasExpBar:
+	ld a, [wOptions2]
+	bit BIT_EXP_BAR, a
+	ret

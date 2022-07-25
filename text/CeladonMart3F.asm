@@ -15,10 +15,18 @@ _ReceivedTM18Text::
 	text_end
 
 _TM18ExplanationText::
-	text "TM18 is COUNTER!"
-	line "Not like the one"
-	cont "I'm leaning on,"
-	cont "mind you!"
+	text "TM35 is AGILITY!"
+	para "Use speed to your"
+	line "advantage!"
+	para "If you go first,"
+	line "you can control"
+	cont "what happens in"
+	cont "battle easily!"
+	para "Trust me, I know"
+	line "how things work!"
+	para "That's why I'm"
+	line "the one behind"
+	cont "this counter!"
 	done
 
 _TM18NoRoomText::

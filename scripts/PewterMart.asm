@@ -57,5 +57,4 @@ PewterMartText3:
 	text_far _PewterMartText3
 	text_end
 
-PewterCashierText::
-	script_mart POKE_BALL, POTION, ESCAPE_ROPE, ANTIDOTE, BURN_HEAL, AWAKENING, PARLYZ_HEAL
+INCLUDE "data/items/marts/pewter.asm"
