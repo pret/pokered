@@ -438,21 +438,32 @@ MainInBattleLoop:
 	call DrawHUDsAndHPBars
 	call CheckNumAttacksLeft
 	jp MainInBattleLoop
-.playerMovesFirst
+.playerMovesFirst ;joenote - reorganizing this so enemy AI item use and switching has priority over player moves
+;#1 - handle enemy switching or using an item
+	ld a, 1
+	ld [hWhoseTurn], a
+	callfar TrainerAI
+	call c, SetEnemyActedBit	;if carry was set from TrainerAI, set the bit indicating the ai trainer switched or used an item
+;#2 - handle player using a move
 	call ExecutePlayerMove
 	ld a, [wEscapedFromBattle]
 	and a ; was Teleport, Road, or Whirlwind used to escape from battle?
 	ret nz ; if so, return
 	ld a, b
 	and a
+	call z, CheckandResetEnemyActedBit	;reset enemy acted bit if enemy pkmn fainted
+	ld a, b
+	and a
 	jp z, HandleEnemyMonFainted
 	call HandlePoisonBurnLeechSeed
 	jp z, HandlePlayerMonFainted
 	call DrawHUDsAndHPBars
+;#3 - handle enemy using move
 	ld a, $1
 	ldh [hWhoseTurn], a
-	callfar TrainerAI
-	jr c, .AIActionUsedPlayerFirst
+	call CheckandResetEnemyActedBit	;check to see if ai trainer already acted this turn
+	jr nz, .AIActionUsedPlayerFirst	;skip executing enemy move if it already acted
+	;else execute the enemy move
 	call ExecuteEnemyMove
 	ld a, [wEscapedFromBattle]
 	and a ; was Teleport, Road, or Whirlwind used to escape from battle?
@@ -7403,4 +7414,19 @@ do999StatCap:
 	ld c, a ;and store it as the low byte
 	;now registers b & c together contain $03E7 for a capped stat value of 999
 .donecapping
+	ret
+
+;joenote - function for checking and reseting the AI's already-acted bit
+CheckandResetEnemyActedBit:
+	ld a, [wEnemyBattleStatus3]
+	bit ALREADY_ACTED, a	;check a for already-acted bit (sets or clears zero flag)
+	res ALREADY_ACTED, a ; resets the already-acted bit (does not affect flags)
+	ld [wEnemyBattleStatus3], a
+	ret 
+
+;joenote - function for setting the AI's already-acted bit
+SetEnemyActedBit:
+	ld a, [wEnemyBattleStatus3]
+	set ALREADY_ACTED, a ; sets the already-acted bit
+	ld [wEnemyBattleStatus3], a
 	ret

@@ -658,6 +658,17 @@ TrainerAI:
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	ret z ; if in a link battle, we're done as well
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;joenote - AI should not use actions if in a move that prevents such a thing
+	ld a, [wEnemyBattleStatus2]
+	bit NEEDS_TO_RECHARGE, a
+	ret nz
+	ld a, [wEnemyBattleStatus1]
+	and %01110010 
+	ret nz
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 	ld a, [wTrainerClass] ; what trainer class is this?
 	dec a
 	ld c, a
@@ -695,14 +706,17 @@ BlackbeltAI:
 	jp AIUseXAttack
 
 GiovanniAI:
-	cp 10 percent + 1
+	cp 20 percent + 1
 	ret nc
-	jp AIUseGuardSpec
+	ld a, [wEnemyBattleStatus2]
+	bit GETTING_PUMPED, a
+	ret nz
+	jp AIUseDireHit
 
 CooltrainerMAI:
-	cp 10 percent + 1
+	cp 20 percent + 1
 	ret nc
-	jp AIUseXAttack
+	jp AIUseXSpecial
 
 CooltrainerFAI:
 	; The intended 25% chance to consider switching will not apply.
@@ -725,7 +739,7 @@ BrockAI:
 	jp AIUseFullHeal
 
 MistyAI:
-	cp 10 percent + 1
+	cp 20 percent + 1
 	ret nc
 	jp AIUseXDefend
 
@@ -747,10 +761,14 @@ KogaAI:
 	ret nc
 	jp AIUseXAttack
 
-BlaineAI:
-	cp 25 percent + 1
-	ret nc
-	jp AIUseSuperPotion
+BlaineAI:	;blaine needs to check HP. this was an oversight
+	cp 40 percent + 1
+	jr nc, .blainereturn
+	ld a, 2
+	call AICheckIfHPBelowFraction	
+	jp c, AIUseSuperPotion
+.blainereturn
+	ret
 
 SabrinaAI:
 	cp 25 percent + 1
@@ -769,7 +787,7 @@ Rival2AI:
 	jp AIUseHyperPotion
 
 Rival3AI:
-	cp 25 percent - 1
+	cp 40 percent - 1
 	ret nc
 	ld a, 5
 	call AICheckIfHPBelowFraction
@@ -785,9 +803,16 @@ LoreleiAI:
 	jp AIUseHyperPotion
 
 BrunoAI:
-	cp 10 percent + 1
-	ret nc
-	jp AIUseXDefend
+	;cp 10 percent + 1
+	;ret nc
+	;jp AIUseXDefend
+	cp 30 percent + 1
+	jr nc, .brunoreturn
+	ld a, 5
+	call AICheckIfHPBelowFraction
+	jp c, AIUseHyperPotion
+.brunoreturn
+	ret
 
 AgathaAI:
 	cp 8 percent
@@ -946,6 +971,18 @@ AISwitchIfEnoughMons:
 
 SwitchEnemyMon:
 
+;joenote - if player using trapping move, then end their move
+	ld a, [wPlayerBattleStatus1]
+	bit USING_TRAPPING_MOVE, a
+	jr z, .preparewithdraw
+	ld hl, wPlayerBattleStatus1
+	res USING_TRAPPING_MOVE, [hl] 
+	xor a
+	ld [wPlayerNumAttacksLeft], a
+	ld a, $FF
+	ld [wPlayerSelectedMove], a
+.preparewithdraw
+
 ; prepare to withdraw the active monster: copy hp, number, and status to roster
 
 	ld a, [wEnemyMonPartyPos]
@@ -975,6 +1012,10 @@ SwitchEnemyMon:
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	ret z
+
+	;joenote - the act of switching clears H_WHOSETURN, so it needs to be set back to 1
+	ld a, 1
+	ldh [hWhoseTurn], a
 	scf
 	ret
 
@@ -988,7 +1029,7 @@ AIUseFullHeal:
 	ld a, FULL_HEAL
 	jp AIPrintItemUse
 
-AICureStatus:
+AICureStatus:	;joenote - modified to be more robust and also undo stat changes of brn/par
 ; cures the status of enemy's active pokemon
 	ld a, [wEnemyMonPartyPos]
 	ld hl, wEnemyMon1Status
@@ -996,9 +1037,17 @@ AICureStatus:
 	call AddNTimes
 	xor a
 	ld [hl], a ; clear status in enemy team roster
-	ld [wEnemyMonStatus], a ; clear status of active enemy
+	ldh a, [hWhoseTurn]
+	push af
+	ld a, $01 	;forcibly set it to the AI's turn
+	ldh [hWhoseTurn], a
+	farcall UndoBurnParStats	;undo brn/par stat changes
+	pop af
+	ldh [hWhoseTurn], a
+	xor a
+	ld [wEnemyMonStatus], a ; clear status in active enemy data
 	ld hl, wEnemyBattleStatus3
-	res 0, [hl]
+	res BADLY_POISONED, [hl]	;clear toxic bit
 	ret
 
 ;AIUseXAccuracy: ; unused
@@ -1008,19 +1057,19 @@ AICureStatus:
 ;	ld a, X_ACCURACY
 ;	jp AIPrintItemUse
 
-AIUseGuardSpec:
-	call AIPlayRestoringSFX
-	ld hl, wEnemyBattleStatus2
-	set 1, [hl]
-	ld a, GUARD_SPEC
-	jp AIPrintItemUse
-
-;AIUseDireHit: ; unused
+;AIUseGuardSpec: ; now unused
 ;	call AIPlayRestoringSFX
 ;	ld hl, wEnemyBattleStatus2
-;	set 2, [hl]
-;	ld a, DIRE_HIT
+;	set 1, [hl]
+;	ld a, GUARD_SPEC
 ;	jp AIPrintItemUse
+
+AIUseDireHit: 
+	call AIPlayRestoringSFX
+	ld hl, wEnemyBattleStatus2
+	set 2, [hl]
+	ld a, DIRE_HIT
+	jp AIPrintItemUse
 
 ; if enemy HP is below a 1/[wUnusedC000], store 1 in wUnusedC000.
 AICheckIfHPBelowFractionStore::

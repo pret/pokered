@@ -1337,7 +1337,7 @@ wPlayerStatsToDouble:: db
 ; always 0
 wPlayerStatsToHalve:: db
 
-; bit 0 - bide
+; bit 0 - bide (PureRGB: now unused)
 ; bit 1 - thrash / petal dance
 ; bit 2 - attacking multiple times (e.g. double kick)
 ; bit 3 - flinch
@@ -1347,12 +1347,13 @@ wPlayerStatsToHalve:: db
 ; bit 7 - confusion
 wPlayerBattleStatus1:: db
 
-; bit 0 - X Accuracy effect
+; bit 0 - X Accuracy effect 
 ; bit 1 - protected by "mist"
 ; bit 2 - focus energy effect
+; bit 3 - unused
 ; bit 4 - has a substitute
 ; bit 5 - need to recharge
-; bit 6 - rage
+; bit 6 - rage (PureRGB: now never set)
 ; bit 7 - leech seeded
 wPlayerBattleStatus2:: db
 
@@ -1360,6 +1361,7 @@ wPlayerBattleStatus2:: db
 ; bit 1 - light screen
 ; bit 2 - reflect
 ; bit 3 - transformed
+; bit 4 - already acted this turn (used when an enemy switches or uses an item)
 wPlayerBattleStatus3:: db
 
 ; always 0
