@@ -21,8 +21,8 @@ AltMonsterPalettes: ; pokemon have alternate palettes depending on where you enc
 	db PAL_REDBAR  ; PIDGEOT
 	db PAL_WHITEMON ; RATTATA
 	db PAL_WHITEMON ; RATICATE
-	db PAL_MEWMON  ; SPEAROW
-	db PAL_MEWMON  ; FEAROW
+	db PAL_BLACKMON  ; SPEAROW
+	db PAL_BLACKMON  ; FEAROW
 	db PAL_REDMON ; EKANS
 	db PAL_REDMON ; ARBOK
 	db PAL_REDMON ; PIKACHU
@@ -85,7 +85,7 @@ AltMonsterPalettes: ; pokemon have alternate palettes depending on where you enc
 	db PAL_BLACKMON   ; MAGNETON
 	db PAL_YELLOWMON  ; FARFETCHD
 	db PAL_YELLOWMON  ; DODUO
-	db PAL_REDBAR  ; DODRIO
+	db PAL_REDMON  ; DODRIO
 	db PAL_WHITEMON   ; SEEL
 	db PAL_WHITEMON   ; DEWGONG
 	db PAL_GREENMON ; GRIMER
@@ -103,7 +103,7 @@ AltMonsterPalettes: ; pokemon have alternate palettes depending on where you enc
 	db PAL_BLUEMON    ; VOLTORB
 	db PAL_BLUEMON    ; ELECTRODE
 	db PAL_MEWMON   ; EXEGGCUTE
-	db PAL_GREENBAR  ; EXEGGUTOR
+	db PAL_REDBAR  ; EXEGGUTOR
 	db PAL_WHITEMON   ; CUBONE
 	db PAL_WHITEMON   ; MAROWAK
 	db PAL_GREYMON  ; HITMONLEE
