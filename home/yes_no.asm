@@ -5,7 +5,7 @@ YesNoChoice::
 	call InitYesNoTextBoxParameters
 	jr DisplayYesNoChoice
 
-Func_35f4::
+TwoOptionMenu:: ; unreferenced
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call InitYesNoTextBoxParameters

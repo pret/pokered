@@ -90,7 +90,7 @@
 	const MAX_ETHER     ; $51
 	const ELIXER        ; $52
 	const MAX_ELIXER    ; $53
-NUM_ITEMS EQU const_value - 1
+DEF NUM_ITEMS EQU const_value - 1
 
 ; elevator floors use item IDs
 	const FLOOR_B2F     ; $54
@@ -107,7 +107,7 @@ NUM_ITEMS EQU const_value - 1
 	const FLOOR_10F     ; $5F
 	const FLOOR_11F     ; $60
 	const FLOOR_B4F     ; $61
-NUM_FLOORS EQU const_value - 1 - NUM_ITEMS
+DEF NUM_FLOORS EQU const_value - 1 - NUM_ITEMS
 
 	const TREE_ROUTE_2  ; 62
 	const TREE_CERULEAN_CITY ;63
@@ -132,47 +132,47 @@ NUM_FLOORS EQU const_value - 1 - NUM_ITEMS
 ; HMs are defined before TMs, so the actual number of TM definitions
 ; is not yet available. The TM quantity is hard-coded here and must
 ; match the actual number below.
-NUM_TMS EQU 50
+DEF NUM_TMS EQU 50
 
-__tmhm_value__ = NUM_TMS + 1
+DEF __tmhm_value__ = NUM_TMS + 1
 
-add_tmnum: MACRO
-\1_TMNUM EQU __tmhm_value__
-__tmhm_value__ += 1
+MACRO add_tmnum
+	DEF \1_TMNUM EQU __tmhm_value__
+	DEF __tmhm_value__ += 1
 ENDM
 
-add_hm: MACRO
+MACRO add_hm
 ; Defines three constants:
 ; - HM_\1: the item id, starting at $C4
 ; - \1_TMNUM: the learnable TM/HM flag, starting at 51
 ; - HM##_MOVE: alias for the move id, equal to the value of \1
 	const HM_\1
-HM_VALUE = __tmhm_value__ - NUM_TMS
-HM{02d:HM_VALUE}_MOVE EQU \1
+	DEF HM_VALUE = __tmhm_value__ - NUM_TMS
+	DEF HM{02d:HM_VALUE}_MOVE EQU \1
 	add_tmnum \1
 ENDM
 
-HM01 EQU const_value
+DEF HM01 EQU const_value
 	add_hm CUT          ; $C4
 	add_hm FLY          ; $C5
 	add_hm SURF         ; $C6
 	add_hm STRENGTH     ; $C7
 	add_hm FLASH        ; $C8
-NUM_HMS EQU const_value - HM01
+DEF NUM_HMS EQU const_value - HM01
 
-__tmhm_value__ = 1
+DEF __tmhm_value__ = 1
 
-add_tm: MACRO
+MACRO add_tm
 ; Defines three constants:
 ; - TM_\1: the item id, starting at $C9
 ; - \1_TMNUM: the learnable TM/HM flag, starting at 1
 ; - TM##_MOVE: alias for the move id, equal to the value of \1
 	const TM_\1
-TM{02d:__tmhm_value__}_MOVE EQU \1
+	DEF TM{02d:__tmhm_value__}_MOVE EQU \1
 	add_tmnum \1
 ENDM
 
-TM01 EQU const_value
+DEF TM01 EQU const_value
 	add_tm ICE_PUNCH   	; $C9
 	add_tm RAZOR_WIND   ; $CA ROOST
 	add_tm LEECH_SEED 	; $CB
@@ -225,9 +225,9 @@ TM01 EQU const_value
 	add_tm SUBSTITUTE   ; $FA
 ASSERT NUM_TMS == const_value - TM01, "NUM_TMS ({d:NUM_TMS}) does not match the number of add_tm definitions"
 
-NUM_TM_HM EQU NUM_TMS + NUM_HMS
+DEF NUM_TM_HM EQU NUM_TMS + NUM_HMS
 
 ; 50 TMs + 5 HMs = 55 learnable TM/HM flags per Pokémon.
 ; These fit in 7 bytes, with one unused bit left over.
-__tmhm_value__ = NUM_TM_HM + 1
-UNUSED_TMNUM EQU __tmhm_value__
+DEF __tmhm_value__ = NUM_TM_HM + 1
+DEF UNUSED_TMNUM EQU __tmhm_value__

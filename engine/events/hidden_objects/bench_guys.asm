@@ -79,9 +79,9 @@ SaffronCityPokecenterBenchGuyText::
 	text_asm
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	ld hl, SaffronCityPokecenterBenchGuyText2
-	jr nz, .asm_624f2
+	jr nz, .printText
 	ld hl, SaffronCityPokecenterBenchGuyText1
-.asm_624f2
+.printText
 	call PrintText
 	jp TextScriptEnd
 

@@ -1,4 +1,4 @@
-two_option_menu: MACRO
+MACRO two_option_menu
 	db \1, \2, \3
 	dw \4
 ENDM

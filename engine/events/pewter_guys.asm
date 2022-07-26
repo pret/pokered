@@ -8,7 +8,7 @@ PewterGuys:
 	add hl, de
 	ld d, h
 	ld e, l
-	ld hl, PointerTable_37ce6
+	ld hl, PewterGuysCoordsTable
 	ld a, [wWhichPewterGuy]
 	add a
 	ld b, 0
@@ -48,7 +48,7 @@ PewterGuys:
 	inc hl
 	jr .findMatchingCoordsLoop
 
-PointerTable_37ce6:
+PewterGuysCoordsTable:
 	dw PewterMuseumGuyCoords
 	dw PewterGymGuyCoords
 

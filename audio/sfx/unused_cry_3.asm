@@ -9,7 +9,6 @@ SFX_UnusedCry_3_Ch5: ; unreferenced
 	square_note 8, 7, 1, 1924
 	sound_ret
 
-
 SFX_UnusedCry_3_Ch6: ; unreferenced
 	duty_cycle_pattern 0, 0, 1, 1
 	square_note 15, 10, 0, 1857
@@ -19,7 +18,6 @@ SFX_UnusedCry_3_Ch6: ; unreferenced
 	square_note 10, 4, -4, 1857
 	square_note 8, 3, 1, 1862
 	sound_ret
-
 
 SFX_UnusedCry_3_Ch8: ; unreferenced
 	noise_note 2, 15, 2, 76

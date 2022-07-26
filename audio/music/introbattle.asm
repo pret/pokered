@@ -89,7 +89,6 @@ Music_IntroBattle_Ch1::
 	note D_, 16
 	sound_ret
 
-
 Music_IntroBattle_Ch2::
 	duty_cycle 3
 	vibrato 8, 2, 5
@@ -164,7 +163,6 @@ Music_IntroBattle_Ch2::
 	note D_, 16
 	sound_ret
 
-
 Music_IntroBattle_Ch3::
 	note_type 12, 1, 0
 	rest 8
@@ -227,7 +225,6 @@ Music_IntroBattle_Ch3::
 	note D_, 1
 	rest 15
 	sound_ret
-
 
 Music_IntroBattle_Ch4::
 	drum_speed 6

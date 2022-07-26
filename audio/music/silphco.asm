@@ -32,8 +32,7 @@ Music_SilphCo_Ch1::
 	rest 6
 	note B_, 2
 	rest 2
-
-Music_SilphCo_branch_7f26d::
+.mainloop:
 	note G_, 2
 	rest 2
 	note B_, 2
@@ -185,9 +184,9 @@ Music_SilphCo_branch_7f26d::
 	note A#, 2
 	note B_, 2
 	note A#, 2
-	sound_call Music_SilphCo_branch_7f3f0
-	sound_call Music_SilphCo_branch_7f3f0
-	sound_call Music_SilphCo_branch_7f3f0
+	sound_call .sub1
+	sound_call .sub1
+	sound_call .sub1
 	rest 4
 	note C_, 2
 	rest 6
@@ -365,9 +364,9 @@ Music_SilphCo_branch_7f26d::
 	rest 6
 	note B_, 2
 	rest 2
-	sound_loop 0, Music_SilphCo_branch_7f26d
+	sound_loop 0, .mainloop
 
-Music_SilphCo_branch_7f3f0::
+.sub1:
 	octave 2
 	note B_, 2
 	note A#, 2
@@ -393,7 +392,6 @@ Music_SilphCo_branch_7f3f0::
 	octave 3
 	note C_, 2
 	sound_ret
-
 
 Music_SilphCo_Ch2::
 	vibrato 10, 3, 2
@@ -427,8 +425,7 @@ Music_SilphCo_Ch2::
 	rest 6
 	note G#, 2
 	rest 2
-
-Music_SilphCo_branch_7f42e::
+.mainloop:
 	note E_, 2
 	rest 2
 	note G_, 2
@@ -777,8 +774,7 @@ Music_SilphCo_branch_7f42e::
 	rest 6
 	note G#, 2
 	rest 2
-	sound_loop 0, Music_SilphCo_branch_7f42e
-
+	sound_loop 0, .mainloop
 
 Music_SilphCo_Ch3::
 	vibrato 8, 1, 1
@@ -789,8 +785,7 @@ Music_SilphCo_Ch3::
 	note D#, 4
 	note E_, 4
 	note F_, 4
-
-Music_SilphCo_branch_7f5c9::
+.mainloop:
 	note E_, 4
 	note D#, 4
 	note D_, 4
@@ -997,4 +992,4 @@ Music_SilphCo_branch_7f5c9::
 	note D#, 4
 	note E_, 4
 	note F_, 4
-	sound_loop 0, Music_SilphCo_branch_7f5c9
+	sound_loop 0, .mainloop

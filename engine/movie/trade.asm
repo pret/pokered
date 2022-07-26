@@ -57,12 +57,12 @@ TradeAnimCommon:
 	ld [wOptions], a
 	ret
 
-addtradefunc: MACRO
+MACRO addtradefunc
 \1TradeFunc::
 	dw \1
 ENDM
 
-tradefunc: MACRO
+MACRO tradefunc
 	db (\1TradeFunc - TradeFuncPointerTable) / 2
 ENDM
 
@@ -319,7 +319,7 @@ Trade_AnimateBallEnteringLinkCable:
 	xor $1
 	ld [wLinkCableAnimBulgeToggle], a
 	add $7e
-	ld hl, wOAMBuffer + $02
+	ld hl, wShadowOAMSprite00TileID
 	ld de, 4
 	ld c, e
 .cycleLinkCableBulgeTile
@@ -615,7 +615,7 @@ Trade_AnimCircledMon:
 	inc a
 	ldh [hDividend], a
 	bit 0, a
-	ld hl, wOAMBuffer + $02 ; OAM tile id
+	ld hl, wShadowOAMSprite00TileID ; OAM tile id
 	ld de, $4
 	ld c, $4
 	ld b, 2 ; amount to increase the tile id by
@@ -628,7 +628,7 @@ Trade_AnimCircledMon:
 	add hl, de
 	dec c
 	jr nz, .loopMon
-	ld hl, wOAMBuffer + $04 + $04 + $04 + $04 + $02 ; OAM tile id and skip the mon.
+	ld hl, wShadowOAM + $04 + $04 + $04 + $04 + $02 ; OAM tile id and skip the mon.
 	ld de, $4
 	ld c, $10
 .loopCable
@@ -651,7 +651,7 @@ Trade_WriteCircledMonOAM:
 	call Trade_WriteCircleOAM
 
 Trade_AddOffsetsToOAMCoords:
-	ld hl, wOAMBuffer
+	ld hl, wShadowOAM
 	ld c, $14
 .loop
 	ld a, [wBaseCoordY]
@@ -729,7 +729,7 @@ Trade_WriteCircleOAM:
 	jr nz, .loop
 	ret
 
-trade_circle_oam: MACRO
+MACRO trade_circle_oam
 	dw \1
 	db \2, \3
 ENDM

@@ -1,4 +1,4 @@
-mon_icon_header: MACRO
+MACRO mon_icon_header
 	dw \1 tile \2
 	db \3
 	db BANK(\1)

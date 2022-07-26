@@ -54,3 +54,24 @@ jobs:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: |
           .github/webhook.sh
+
+      - name: Checkout symbols
+        if: ${{ github.event_name == 'push' && github.repository_owner == 'pret' }}
+        uses: actions/checkout@master
+        with:
+          path: symbols
+          ref: symbols
+
+      - name: Move symbols
+        if: ${{ github.event_name == 'push' && github.repository_owner == 'pret' }}
+        run: |
+          cp -v *.sym symbols/
+
+      - name: Update symbols
+        if: ${{ github.event_name == 'push' && github.repository_owner == 'pret' }}
+        uses: EndBug/add-and-commit@v7
+        with:
+          branch: symbols
+          cwd: "./symbols"
+          add: "*.sym"
+          message: ${{ github.event.commits[0].message }}

@@ -1,5 +1,5 @@
-HIDE EQU $11
-SHOW EQU $15
+DEF HIDE EQU $11
+DEF SHOW EQU $15
 
 ; MissableObjects indexes (see data/maps/hide_show_data.asm)
 ; this is a list of the sprites that can be enabled/disabled during the game
@@ -256,7 +256,7 @@ SHOW EQU $15
 	const HS_LAPRAS_GUY_CELADON  ; NEW X
 	; current length -> F5
 
-NUM_HS_OBJECTS EQU const_value
+DEF NUM_HS_OBJECTS EQU const_value
 
 	const_def
 	const HS_SAFARI_ZONE_EAST_RANGER_0     ; 01 X
@@ -294,4 +294,5 @@ NUM_HS_OBJECTS EQU const_value
 	const HS_SAFARI_ZONE_CENTER_TRAINER_3    ; 27 X
 	const HS_SAFARI_ZONE_CENTER_ITEM       ; 28 X
 
-NUM_EXTRA_HS_OBJECTS EQU const_value
+DEF NUM_EXTRA_HS_OBJECTS EQU const_value
+

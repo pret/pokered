@@ -1,4 +1,4 @@
-bench_guy_text: MACRO
+MACRO bench_guy_text
 	db \1, \2
 	db_tx_pre \3
 ENDM

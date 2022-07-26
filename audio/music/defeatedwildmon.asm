@@ -13,8 +13,7 @@ Music_DefeatedWildMon_Ch1::
 	note G#, 1
 	note F#, 1
 	note E_, 12
-
-Music_DefeatedWildMon_branch_23b8b::
+.mainloop:
 	note_type 12, 6, 2
 	note E_, 2
 	note F#, 2
@@ -64,8 +63,7 @@ Music_DefeatedWildMon_branch_23b8b::
 	note A#, 2
 	note A#, 4
 	note A_, 8
-	sound_loop 0, Music_DefeatedWildMon_branch_23b8b
-
+	sound_loop 0, .mainloop
 
 Music_DefeatedWildMon_Ch2::
 	execute_music
@@ -78,8 +76,7 @@ Music_DefeatedWildMon_Ch2::
 	note A_, 1
 	note_type 12, 12, 7
 	note B_, 12
-
-Music_DefeatedWildMon_branch_23bce::
+.mainloop:
 	note_type 12, 8, 2
 	octave 3
 	note B_, 2
@@ -139,8 +136,7 @@ Music_DefeatedWildMon_branch_23bce::
 	note D_, 2
 	note D_, 4
 	note C_, 8
-	sound_loop 0, Music_DefeatedWildMon_branch_23bce
-
+	sound_loop 0, .mainloop
 
 Music_DefeatedWildMon_Ch3::
 	execute_music
@@ -161,8 +157,7 @@ Music_DefeatedWildMon_Ch3::
 	rest 3
 	note E_, 1
 	rest 3
-
-Music_DefeatedWildMon_branch_23c21::
+.mainloop:
 	octave 4
 	note E_, 1
 	rest 1
@@ -299,4 +294,4 @@ Music_DefeatedWildMon_branch_23c21::
 	rest 3
 	octave 4
 	note D#, 4
-	sound_loop 0, Music_DefeatedWildMon_branch_23c21
+	sound_loop 0, .mainloop

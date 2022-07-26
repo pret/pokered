@@ -8,8 +8,7 @@ Music_PokemonTower_Ch1::
 	rest 4
 	octave 4
 	note B_, 12
-
-Music_PokemonTower_branch_7f05a::
+.mainloop:
 	note_type 12, 11, 4
 	octave 4
 	note G_, 1
@@ -137,8 +136,7 @@ Music_PokemonTower_branch_7f05a::
 	octave 5
 	note C_, 16
 	note C_, 16
-	sound_loop 0, Music_PokemonTower_branch_7f05a
-
+	sound_loop 0, .mainloop
 
 Music_PokemonTower_Ch2::
 	vibrato 20, 3, 4
@@ -148,8 +146,7 @@ Music_PokemonTower_Ch2::
 	note C_, 12
 	octave 4
 	note E_, 4
-
-Music_PokemonTower_branch_7f0ee::
+.mainloop:
 	note_type 12, 12, 1
 	octave 5
 	note C_, 8
@@ -289,8 +286,7 @@ Music_PokemonTower_branch_7f0ee::
 	vibrato 0, 3, 4
 	note_type 12, 10, 7
 	note C_, 16
-	sound_loop 0, Music_PokemonTower_branch_7f0ee
-
+	sound_loop 0, .mainloop
 
 Music_PokemonTower_Ch3::
 	vibrato 4, 1, 1
@@ -298,8 +294,7 @@ Music_PokemonTower_Ch3::
 	rest 8
 	octave 5
 	note G_, 8
-
-Music_PokemonTower_branch_7f1a2::
+.mainloop:
 	note E_, 1
 	rest 7
 	note E_, 1
@@ -455,4 +450,4 @@ Music_PokemonTower_branch_7f1a2::
 	rest 1
 	note D#, 1
 	rest 1
-	sound_loop 0, Music_PokemonTower_branch_7f1a2
+	sound_loop 0, .mainloop

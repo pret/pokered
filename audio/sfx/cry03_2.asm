@@ -9,7 +9,6 @@ SFX_Cry03_2_Ch5:
 	square_note 8, 14, 1, 1408
 	sound_ret
 
-
 SFX_Cry03_2_Ch6:
 	duty_cycle_pattern 0, 0, 2, 2
 	square_note 4, 12, 7, 1284
@@ -20,7 +19,6 @@ SFX_Cry03_2_Ch6:
 	square_note 4, 11, 3, 1187
 	square_note 8, 12, 1, 1154
 	sound_ret
-
 
 SFX_Cry03_2_Ch8:
 	noise_note 12, 14, 4, 76

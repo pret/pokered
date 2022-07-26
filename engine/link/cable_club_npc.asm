@@ -31,7 +31,7 @@ CableClubNPC::
 ; USING_INTERNAL_CLOCK, which allows the player to proceed past the link
 ; receptionist's "Please wait." It assumes that hSerialConnectionStatus is at
 ; its original address.
-	vc_hook linkCable_fake_begin
+	vc_hook Link_fake_connection_status
 	vc_assert hSerialConnectionStatus == $ffaa, \
 		"hSerialConnectionStatus is no longer located at 00:ffaa"
 	vc_assert USING_INTERNAL_CLOCK == $02, \
@@ -63,7 +63,7 @@ CableClubNPC::
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .choseNo
-	vc_hook linkCable_block_input
+	vc_hook Wireless_TryQuickSave_block_input
 	callfar SaveSAVtoSRAM
 	call WaitForSoundToFinish
 	ld a, SFX_SAVE
@@ -76,10 +76,10 @@ CableClubNPC::
 	xor a
 	ld [hl], a
 	ldh [hSerialReceivedNewData], a
-	vc_hook linkCable_fake_end
+	vc_hook Wireless_prompt
 	ld [wSerialExchangeNybbleSendData], a
 	call Serial_SyncAndExchangeNybble
-	vc_hook Network_RECHECK
+	vc_hook Wireless_net_recheck
 	ld hl, wUnknownSerialCounter
 	ld a, [hli]
 	inc a

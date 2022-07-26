@@ -90,7 +90,7 @@ FillPartyMonOAM:
     push de
     push bc
     ld hl, PartyMonOAM
-    ld de, wOAMBuffer
+    ld de, wShadowOAM
     ld bc, $60
     call CopyData
     ld hl, PartyMonOAM
@@ -112,7 +112,7 @@ ShowPartyMonSprite:
     add a
     add a ;x16. a is $0 - $50 now.
 	ld c, a ; store H_SPRITEINDEX * 8 for later.	
-    ld hl, wOAMBuffer
+    ld hl, wShadowOAM
     ld b, 0
     add hl, bc
     add $10 ; for OAM Y replacement
@@ -127,7 +127,7 @@ ShowPartyMonSprite:
     ld [hl], a
     add hl, de
     ; also update the saved OAM.
-    ld hl, wOAMBuffer ; count back up to where we were
+    ld hl, wShadowOAM ; count back up to where we were
     ld b, 0
 	; we haven't touched c yet so it's still H_SPRITEINDEX * 8.
     add hl, bc
@@ -145,7 +145,7 @@ ShowPartyMonSprite:
     ret
 	
 AdjustForTradeScreen:
-	ld hl, wOAMBuffer + $1 ;the x value of party sprite 1.
+	ld hl, wShadowOAM + $1 ;the x value of party sprite 1.
 	ld de, $4
 	ld b, e
 .loopOAM

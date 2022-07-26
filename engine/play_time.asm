@@ -39,12 +39,12 @@ TrackPlayTime::
 CountDownIgnoreInputBitReset:
 	ld a, [wIgnoreInputCounter]
 	and a
-	jr nz, .asm_18e40
+	jr nz, .decrement
 	ld a, $ff
-	jr .asm_18e41
-.asm_18e40
+	jr .continue
+.decrement
 	dec a
-.asm_18e41
+.continue
 	ld [wIgnoreInputCounter], a
 	and a
 	ret nz

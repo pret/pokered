@@ -12,8 +12,7 @@ Music_MeetMaleTrainer_Ch1::
 	note E_, 1
 	note F_, 12
 	rest 16
-
-Music_MeetMaleTrainer_branch_7f78f::
+.mainloop:
 	octave 3
 	note B_, 4
 	note A_, 4
@@ -29,8 +28,7 @@ Music_MeetMaleTrainer_branch_7f78f::
 	octave 4
 	note D_, 8
 	note E_, 16
-	sound_loop 0, Music_MeetMaleTrainer_branch_7f78f
-
+	sound_loop 0, .mainloop
 
 Music_MeetMaleTrainer_Ch2::
 	duty_cycle 3
@@ -48,8 +46,7 @@ Music_MeetMaleTrainer_Ch2::
 	rest 3
 	note E_, 1
 	rest 9
-
-Music_MeetMaleTrainer_branch_7f7b5::
+.mainloop:
 	note_type 12, 12, 4
 	octave 4
 	note E_, 6
@@ -72,8 +69,7 @@ Music_MeetMaleTrainer_branch_7f7b5::
 	note F#, 8
 	octave 4
 	note C#, 8
-	sound_loop 0, Music_MeetMaleTrainer_branch_7f7b5
-
+	sound_loop 0, .mainloop
 
 Music_MeetMaleTrainer_Ch3::
 	note_type 12, 1, 0
@@ -99,8 +95,7 @@ Music_MeetMaleTrainer_Ch3::
 	rest 1
 	note F#, 1
 	rest 1
-
-Music_MeetMaleTrainer_branch_7f7ea::
+.mainloop:
 	note E_, 1
 	rest 1
 	note B_, 1
@@ -187,4 +182,4 @@ Music_MeetMaleTrainer_branch_7f7ea::
 	rest 1
 	note D#, 1
 	rest 1
-	sound_loop 0, Music_MeetMaleTrainer_branch_7f7ea
+	sound_loop 0, .mainloop

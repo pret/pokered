@@ -1,4 +1,4 @@
-add_tx_pre: MACRO
+MACRO add_tx_pre
 \1_id::
 	dw \1
 ENDM

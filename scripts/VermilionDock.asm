@@ -137,7 +137,7 @@ VermilionDock_1db9b:
 VermilionDock_AnimSmokePuffDriftRight:
 	push bc
 	push de
-	ld hl, wOAMBuffer + 4 * $4 + 1 ; x coord
+	ld hl, wShadowOAMSprite04XCoord
 	ld a, [wSSAnneSmokeDriftAmount]
 	swap a
 	ld c, a
@@ -309,7 +309,7 @@ TruckCheck:
 	call CopyVideoData
 	ld hl, TruckOAMTable
 	ld bc, $20
-	ld de, wOAMBuffer + $20
+	ld de, wShadowOAM + $20
 	call CopyData
 	ld a, $c
 	ld [wNewTileBlockID], a ; used to be wd09f
@@ -321,7 +321,7 @@ TruckCheck:
 	ld b, 32
 	ld de, 4
 .movingtruck
-	ld hl, wOAMBuffer + $21
+	ld hl, wShadowOAM + $21
 	ld a, 8
 .movingtruck2
 	dec [hl]

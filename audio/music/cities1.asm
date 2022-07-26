@@ -1,16 +1,14 @@
-Music_Cities1_branch_aa6f::
+Music_Cities1_Ch1_AlternateTempo::
 	tempo 232
-	sound_loop 0, Music_Cities1_branch_aa79
+	sound_loop 0, Music_Cities1_Ch1.body
 
 Music_Cities1_Ch1::
 	tempo 144
-
-Music_Cities1_branch_aa79::
+.body:
 	volume 7, 7
 	vibrato 8, 2, 4
 	duty_cycle 3
-
-Music_Cities1_branch_aa80::
+.mainloop:
 	note_type 12, 12, 5
 	octave 3
 	note G#, 4
@@ -39,7 +37,7 @@ Music_Cities1_branch_aa80::
 	octave 2
 	note B_, 4
 	note_type 12, 12, 5
-	sound_call Music_Cities1_branch_ab7d
+	sound_call .sub1
 	octave 3
 	note D#, 6
 	note E_, 2
@@ -90,7 +88,7 @@ Music_Cities1_branch_aa80::
 	note B_, 2
 	note B_, 4
 	note_type 12, 12, 5
-	sound_call Music_Cities1_branch_ab7d
+	sound_call .sub1
 	octave 3
 	note D#, 4
 	note D#, 2
@@ -114,7 +112,7 @@ Music_Cities1_branch_aa80::
 	note C#, 2
 	note E_, 4
 	note_type 12, 11, 3
-	sound_call Music_Cities1_branch_ab8a
+	sound_call .sub2
 	note A_, 2
 	note B_, 2
 	note A_, 2
@@ -142,8 +140,7 @@ Music_Cities1_branch_aa80::
 	octave 2
 	note B_, 2
 	octave 3
-
-Music_Cities1_branch_ab12::
+.loop1:
 	note C#, 2
 	note D#, 2
 	note C#, 2
@@ -153,7 +150,7 @@ Music_Cities1_branch_ab12::
 	octave 3
 	note C#, 2
 	note D#, 2
-	sound_loop 2, Music_Cities1_branch_ab12
+	sound_loop 2, .loop1
 	note E_, 2
 	octave 2
 	note B_, 4
@@ -180,7 +177,7 @@ Music_Cities1_branch_ab12::
 	octave 2
 	note B_, 2
 	octave 3
-	sound_call Music_Cities1_branch_ab8a
+	sound_call .sub2
 	note A_, 2
 	note E_, 2
 	note A_, 2
@@ -240,9 +237,9 @@ Music_Cities1_branch_ab12::
 	octave 3
 	note E_, 2
 	note F#, 2
-	sound_loop 0, Music_Cities1_branch_aa80
+	sound_loop 0, .mainloop
 
-Music_Cities1_branch_ab7d::
+.sub1:
 	octave 3
 	note F#, 2
 	note D#, 4
@@ -257,7 +254,7 @@ Music_Cities1_branch_ab7d::
 	note C#, 2
 	sound_ret
 
-Music_Cities1_branch_ab8a::
+.sub2:
 	note A_, 2
 	note E_, 2
 	note C#, 2
@@ -267,10 +264,10 @@ Music_Cities1_branch_ab8a::
 	note E_, 2
 	sound_ret
 
-
 Music_Cities1_Ch2::
+.mainloop:
 	vibrato 5, 1, 5
-	sound_call Music_Cities1_branch_ac00
+	sound_call .sub1
 	octave 4
 	note G#, 2
 	note_type 12, 12, 4
@@ -283,7 +280,7 @@ Music_Cities1_Ch2::
 	note E_, 6
 	note F#, 6
 	note G#, 4
-	sound_call Music_Cities1_branch_ac00
+	sound_call .sub1
 	octave 4
 	note G#, 2
 	note_type 12, 12, 4
@@ -357,9 +354,9 @@ Music_Cities1_Ch2::
 	note G#, 1
 	note_type 12, 10, 4
 	note A_, 1
-	sound_loop 0, Music_Cities1_Ch2
+	sound_loop 0, .mainloop
 
-Music_Cities1_branch_ac00::
+.sub1:
 	duty_cycle 2
 	note_type 12, 12, 3
 	octave 4
@@ -400,17 +397,15 @@ Music_Cities1_branch_ac00::
 	note F#, 2
 	sound_ret
 
-
 Music_Cities1_Ch3::
 	note_type 12, 1, 1
 	toggle_perfect_pitch
-
-Music_Cities1_branch_ac35::
+.mainloop:
 	vibrato 0, 0, 0
 	octave 4
-	sound_call Music_Cities1_branch_acc5
-	sound_call Music_Cities1_branch_acc5
-	sound_call Music_Cities1_branch_acce
+	sound_call .sub1
+	sound_call .sub1
+	sound_call .sub2
 	note G#, 2
 	note E_, 2
 	note F#, 2
@@ -419,7 +414,7 @@ Music_Cities1_branch_ac35::
 	note E_, 2
 	note F#, 2
 	note G#, 2
-	sound_call Music_Cities1_branch_acc5
+	sound_call .sub1
 	note B_, 2
 	note E_, 2
 	note F#, 2
@@ -428,8 +423,8 @@ Music_Cities1_branch_ac35::
 	note E_, 2
 	note F#, 2
 	note G#, 2
-	sound_call Music_Cities1_branch_acc5
-	sound_call Music_Cities1_branch_acce
+	sound_call .sub1
+	sound_call .sub2
 	note G#, 2
 	note E_, 2
 	note F#, 2
@@ -530,9 +525,9 @@ Music_Cities1_branch_ac35::
 	note A_, 2
 	note G#, 2
 	note F#, 2
-	sound_loop 0, Music_Cities1_branch_ac35
+	sound_loop 0, .mainloop
 
-Music_Cities1_branch_acc5::
+.sub1:
 	rest 2
 	note E_, 2
 	note F#, 2
@@ -543,7 +538,7 @@ Music_Cities1_branch_acc5::
 	note G#, 2
 	sound_ret
 
-Music_Cities1_branch_acce::
+.sub2:
 	note A_, 2
 	note F#, 2
 	note G#, 2
@@ -577,28 +572,27 @@ Music_Cities1_branch_acce::
 	note E_, 2
 	note F#, 2
 	sound_ret
-
 
 Music_Cities1_Ch4::
+.mainloop:
 	drum_speed 12
-	sound_call Music_Cities1_branch_ad36
-
-Music_Cities1_branch_acf3::
-	sound_call Music_Cities1_branch_ad36
-	sound_call Music_Cities1_branch_ad45
-	sound_call Music_Cities1_branch_ad45
-	sound_loop 2, Music_Cities1_branch_acf3
-	sound_call Music_Cities1_branch_ad36
-	sound_call Music_Cities1_branch_ad5f
-	sound_call Music_Cities1_branch_ad52
+	sound_call .sub1
+.loop1:
+	sound_call .sub1
+	sound_call .sub2
+	sound_call .sub2
+	sound_loop 2, .loop1
+	sound_call .sub1
+	sound_call .sub4
+	sound_call .sub3
 	drum_note 6, 6
 	drum_note 6, 6
 	drum_note 7, 4
-	sound_call Music_Cities1_branch_ad6e
-	sound_call Music_Cities1_branch_ad5f
-	sound_call Music_Cities1_branch_ad52
-	sound_call Music_Cities1_branch_ad6e
-	sound_call Music_Cities1_branch_ad52
+	sound_call .sub5
+	sound_call .sub4
+	sound_call .sub3
+	sound_call .sub5
+	sound_call .sub3
 	drum_note 6, 6
 	drum_note 6, 6
 	drum_note 7, 2
@@ -609,9 +603,9 @@ Music_Cities1_branch_acf3::
 	drum_note 6, 6
 	drum_note 8, 6
 	drum_note 8, 4
-	sound_loop 0, Music_Cities1_Ch4
+	sound_loop 0, .mainloop
 
-Music_Cities1_branch_ad36::
+.sub1:
 	drum_note 8, 6
 	drum_note 8, 6
 	drum_note 8, 4
@@ -621,7 +615,7 @@ Music_Cities1_branch_ad36::
 	drum_note 8, 2
 	sound_ret
 
-Music_Cities1_branch_ad45::
+.sub2:
 	drum_note 8, 6
 	drum_note 8, 6
 	drum_note 8, 4
@@ -630,7 +624,7 @@ Music_Cities1_branch_ad45::
 	drum_note 8, 4
 	sound_ret
 
-Music_Cities1_branch_ad52::
+.sub3:
 	drum_note 6, 6
 	drum_note 6, 6
 	drum_note 7, 4
@@ -639,7 +633,7 @@ Music_Cities1_branch_ad52::
 	drum_note 7, 4
 	sound_ret
 
-Music_Cities1_branch_ad5f::
+.sub4:
 	drum_note 6, 6
 	drum_note 6, 6
 	drum_note 7, 4
@@ -649,7 +643,7 @@ Music_Cities1_branch_ad5f::
 	drum_note 6, 2
 	sound_ret
 
-Music_Cities1_branch_ad6e::
+.sub5:
 	drum_note 6, 6
 	drum_note 6, 6
 	drum_note 7, 2

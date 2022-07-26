@@ -108,6 +108,6 @@ GetTitleBallY:
 	pop de
 	and a
 	ret z
-	ld [wOAMBuffer + $28], a
+	ld [wShadowOAMSprite10YCoord], a
 	inc e
 	ret

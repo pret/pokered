@@ -60,8 +60,7 @@ Music_WildBattle_Ch1::
 	note E_, 6
 	note D#, 10
 	note C#, 10
-
-Music_WildBattle_branch_230e0::
+.mainloop:
 	note_type 12, 11, 3
 	note C#, 1
 	note D_, 1
@@ -297,8 +296,7 @@ Music_WildBattle_branch_230e0::
 	note D#, 6
 	note_type 12, 10, 7
 	note C#, 8
-	sound_loop 0, Music_WildBattle_branch_230e0
-
+	sound_loop 0, .mainloop
 
 Music_WildBattle_Ch2::
 	duty_cycle 3
@@ -371,8 +369,7 @@ Music_WildBattle_Ch2::
 	note G_, 6
 	note G_, 10
 	note G_, 10
-
-Music_WildBattle_branch_23225::
+.mainloop:
 	note_type 12, 12, 5
 	note G_, 6
 	note F#, 6
@@ -459,8 +456,7 @@ Music_WildBattle_branch_23225::
 	note G_, 6
 	note_type 12, 12, 7
 	note F_, 8
-	sound_loop 0, Music_WildBattle_branch_23225
-
+	sound_loop 0, .mainloop
 
 Music_WildBattle_Ch3::
 	vibrato 0, 2, 0
@@ -497,8 +493,7 @@ Music_WildBattle_Ch3::
 	octave 3
 	note A#, 2
 	note B_, 2
-
-Music_WildBattle_branch_232b5::
+.introloop:
 	octave 4
 	note C_, 2
 	note G_, 2
@@ -530,9 +525,8 @@ Music_WildBattle_branch_232b5::
 	note A#, 2
 	note G#, 2
 	note F_, 2
-	sound_loop 2, Music_WildBattle_branch_232b5
-
-Music_WildBattle_branch_232d8::
+	sound_loop 2, .introloop
+.mainloop:
 	note C_, 2
 	note G_, 2
 	note C_, 2
@@ -735,4 +729,4 @@ Music_WildBattle_branch_232d8::
 	note G#, 2
 	note C#, 2
 	note G#, 2
-	sound_loop 0, Music_WildBattle_branch_232d8
+	sound_loop 0, .mainloop

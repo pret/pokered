@@ -1,11 +1,10 @@
-Music_MeetRival_branch_b119::
+Music_MeetRival_Ch1_AlternateTempo::
 	tempo 100
-	sound_loop 0, Music_MeetRival_branch_b123
+	sound_loop 0, Music_MeetRival_Ch1.body
 
 Music_MeetRival_Ch1::
 	tempo 112
-
-Music_MeetRival_branch_b123::
+.body:
 	volume 7, 7
 	duty_cycle 3
 	vibrato 6, 3, 4
@@ -30,8 +29,7 @@ Music_MeetRival_branch_b123::
 	note A_, 2
 	note G_, 2
 	note A_, 2
-
-Music_MeetRival_branch_b140::
+.mainloop:
 	note B_, 4
 	note A#, 2
 	note A_, 4
@@ -117,16 +115,15 @@ Music_MeetRival_branch_b140::
 	note A_, 2
 	note G_, 2
 	note A_, 2
-	sound_loop 0, Music_MeetRival_branch_b140
+	sound_loop 0, .mainloop
 
-Music_MeetRival_branch_b19b::
+Music_MeetRival_Ch1_AlternateStartAndTempo::
 	tempo 100
-	sound_loop 0, Music_MeetRival_branch_b1a5
+	sound_loop 0, Music_MeetRival_Ch1_AlternateStart.body
 
-Music_MeetRival_branch_b1a2::
+Music_MeetRival_Ch1_AlternateStart::
 	tempo 112
-
-Music_MeetRival_branch_b1a5::
+.body:
 	volume 7, 7
 	duty_cycle 3
 	vibrato 6, 3, 4
@@ -140,8 +137,7 @@ Music_MeetRival_branch_b1a5::
 	note A_, 2
 	note G_, 2
 	note A_, 2
-	sound_loop 0, Music_MeetRival_branch_b140
-
+	sound_loop 0, Music_MeetRival_Ch1.mainloop
 
 Music_MeetRival_Ch2::
 	duty_cycle 3
@@ -169,8 +165,7 @@ Music_MeetRival_Ch2::
 	note D_, 2
 	note F_, 2
 	note F#, 2
-
-Music_MeetRival_branch_b1d8::
+.mainloop:
 	note_type 12, 12, 7
 	note G_, 4
 	note D_, 2
@@ -228,9 +223,9 @@ Music_MeetRival_branch_b1d8::
 	note D_, 2
 	note F_, 2
 	note F#, 2
-	sound_loop 0, Music_MeetRival_branch_b1d8
+	sound_loop 0, .mainloop
 
-Music_MeetRival_branch_b21d::
+Music_MeetRival_Ch2_AlternateStart::
 	duty_cycle 3
 	vibrato 10, 2, 6
 	note_type 12, 12, 7
@@ -245,8 +240,7 @@ Music_MeetRival_branch_b21d::
 	note D_, 2
 	note F_, 2
 	note F#, 2
-	sound_loop 0, Music_MeetRival_branch_b1d8
-
+	sound_loop 0, Music_MeetRival_Ch2.mainloop
 
 Music_MeetRival_Ch3::
 	note_type 12, 1, 4
@@ -272,8 +266,7 @@ Music_MeetRival_Ch3::
 	rest 1
 	note G_, 1
 	rest 1
-
-Music_MeetRival_branch_b24b::
+.mainloop:
 	note G_, 2
 	octave 5
 	note D_, 2
@@ -376,9 +369,9 @@ Music_MeetRival_branch_b24b::
 	rest 2
 	octave 5
 	note D_, 2
-	sound_loop 0, Music_MeetRival_branch_b24b
+	sound_loop 0, .mainloop
 
-Music_MeetRival_branch_b2b5::
+Music_MeetRival_Ch3_AlternateStart::
 	note_type 12, 1, 4
 	octave 4
 	note G_, 1
@@ -393,4 +386,4 @@ Music_MeetRival_branch_b2b5::
 	rest 1
 	note G_, 1
 	rest 1
-	sound_loop 0, Music_MeetRival_branch_b24b
+	sound_loop 0, Music_MeetRival_Ch3.mainloop

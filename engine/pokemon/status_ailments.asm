@@ -8,7 +8,7 @@ PrintStatusAilment::
 	jr nz, .frz
 	bit PAR, a
 	jr nz, .par
-	and SLP
+	and SLP_MASK
 	ret z
 	ld a, "S"
 	ld [hli], a

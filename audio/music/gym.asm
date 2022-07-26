@@ -21,8 +21,7 @@ Music_Gym_Ch1::
 	note E_, 1
 	note F_, 4
 	note G_, 4
-
-Music_Gym_branch_bcd8::
+.mainloop:
 	note E_, 4
 	note F_, 2
 	note G_, 2
@@ -162,8 +161,7 @@ Music_Gym_branch_bcd8::
 	note A_, 2
 	note G_, 2
 	note A_, 2
-	sound_loop 0, Music_Gym_branch_bcd8
-
+	sound_loop 0, .mainloop
 
 Music_Gym_Ch2::
 	duty_cycle 3
@@ -183,8 +181,7 @@ Music_Gym_Ch2::
 	note A_, 12
 	note_type 12, 12, 7
 	note B_, 4
-
-Music_Gym_branch_bd82::
+.mainloop:
 	octave 4
 	note C_, 12
 	octave 3
@@ -285,8 +282,7 @@ Music_Gym_branch_bd82::
 	note C_, 1
 	note D_, 1
 	note E_, 12
-	sound_loop 0, Music_Gym_branch_bd82
-
+	sound_loop 0, .mainloop
 
 Music_Gym_Ch3::
 	note_type 12, 1, 1
@@ -296,23 +292,22 @@ Music_Gym_Ch3::
 	note G_, 2
 	note F_, 2
 	note D_, 2
-
-Music_Gym_branch_be02::
-	sound_call Music_Gym_branch_be3b
-	sound_call Music_Gym_branch_be44
-	sound_call Music_Gym_branch_be3b
-	sound_call Music_Gym_branch_be44
-	sound_call Music_Gym_branch_be3b
-	sound_call Music_Gym_branch_be44
-	sound_call Music_Gym_branch_be3b
-	sound_call Music_Gym_branch_be44
-	sound_call Music_Gym_branch_be3b
-	sound_call Music_Gym_branch_be4d
-	sound_call Music_Gym_branch_be3b
-	sound_call Music_Gym_branch_be4d
-	sound_call Music_Gym_branch_be3b
-	sound_call Music_Gym_branch_be4d
-	sound_call Music_Gym_branch_be3b
+.mainloop:
+	sound_call .sub1
+	sound_call .sub2
+	sound_call .sub1
+	sound_call .sub2
+	sound_call .sub1
+	sound_call .sub2
+	sound_call .sub1
+	sound_call .sub2
+	sound_call .sub1
+	sound_call .sub3
+	sound_call .sub1
+	sound_call .sub3
+	sound_call .sub1
+	sound_call .sub3
+	sound_call .sub1
 	note F_, 2
 	note A#, 2
 	note F_, 2
@@ -321,9 +316,9 @@ Music_Gym_branch_be02::
 	note A#, 2
 	note A_, 2
 	note F_, 2
-	sound_loop 0, Music_Gym_branch_be02
+	sound_loop 0, .mainloop
 
-Music_Gym_branch_be3b::
+.sub1:
 	note E_, 2
 	note G_, 2
 	note E_, 2
@@ -334,7 +329,7 @@ Music_Gym_branch_be3b::
 	note G_, 2
 	sound_ret
 
-Music_Gym_branch_be44::
+.sub2:
 	note D_, 2
 	note F_, 2
 	note D_, 2
@@ -345,7 +340,7 @@ Music_Gym_branch_be44::
 	note F_, 2
 	sound_ret
 
-Music_Gym_branch_be4d::
+.sub3:
 	note F_, 2
 	note A#, 2
 	note F_, 2

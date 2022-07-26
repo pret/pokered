@@ -1,4 +1,4 @@
-anim_special_effect: MACRO
+MACRO anim_special_effect
 	db \1
 	dw \2
 ENDM

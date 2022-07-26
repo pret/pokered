@@ -1,8 +1,8 @@
-OPP_ID_OFFSET EQU 200
+DEF OPP_ID_OFFSET EQU 200
 
-trainer_const: MACRO
+MACRO trainer_const
 	const \1
-OPP_\1 EQU OPP_ID_OFFSET + \1
+	DEF OPP_\1 EQU OPP_ID_OFFSET + \1
 ENDM
 
 ; trainer class ids
@@ -67,4 +67,4 @@ ENDM
 	trainer_const RANGER         ; $32
 	trainer_const RANGER_F       ; $33
 	trainer_const ROOKIE         ; $34
-NUM_TRAINERS EQU const_value - 1
+DEF NUM_TRAINERS EQU const_value - 1
