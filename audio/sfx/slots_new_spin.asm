@@ -5,7 +5,6 @@ SFX_Slots_New_Spin_Ch5:
 	square_note 15, 15, 1, 1984
 	sound_ret
 
-
 SFX_Slots_New_Spin_Ch6:
 	duty_cycle 2
 	square_note 4, 12, 1, 1729

@@ -20,7 +20,6 @@ SFX_Pokedex_Rating_1_Ch5:
 	note F_, 4
 	sound_ret
 
-
 SFX_Pokedex_Rating_1_Ch6:
 	execute_music
 	duty_cycle 2
@@ -42,7 +41,6 @@ SFX_Pokedex_Rating_1_Ch6:
 	note G_, 4
 	note F_, 4
 	sound_ret
-
 
 SFX_Pokedex_Rating_1_Ch7:
 	execute_music

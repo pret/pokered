@@ -1,7 +1,7 @@
 ClearSprites::
 	xor a
-	ld hl, wOAMBuffer
-	ld b, wOAMBufferEnd - wOAMBuffer
+	ld hl, wShadowOAM
+	ld b, wShadowOAMEnd - wShadowOAM
 .loop
 	ld [hli], a
 	dec b
@@ -10,7 +10,7 @@ ClearSprites::
 
 HideSprites::
 	ld a, 160
-	ld hl, wOAMBuffer
+	ld hl, wShadowOAM
 	ld de, 4
 	ld b, 40
 .loop

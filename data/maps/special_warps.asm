@@ -17,7 +17,7 @@ DungeonWarpList:
 	db -1 ; end
 
 
-fly_warp: MACRO
+MACRO fly_warp
 	event_displacement \1_WIDTH, \2, \3
 	db ((\3) & $01) ;sub-block Y
 	db ((\2) & $01) ;sub-block X
@@ -38,7 +38,7 @@ DungeonWarpData:
 	fly_warp POKEMON_MANSION_2F,  18, 14
 
 
-special_warp_spec: MACRO
+MACRO special_warp_spec
 	db \1
 	fly_warp \1, \2, \3
 	db \4
@@ -56,7 +56,7 @@ ColosseumSpec2:
 	special_warp_spec COLOSSEUM,     6, 4, CLUB
 
 
-fly_warp_spec: MACRO
+MACRO fly_warp_spec
 	db \1, 0
 	dw \2
 ENDM

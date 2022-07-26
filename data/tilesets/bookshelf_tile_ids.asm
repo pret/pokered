@@ -1,4 +1,4 @@
-bookshelf_tile: MACRO
+MACRO bookshelf_tile
 	db \1, \2
 	db_tx_pre \3
 ENDM

@@ -1,11 +1,3 @@
-INCLUDE "constants.asm"
-
-INCLUDE "macros/wram.asm"
-
-
-INCLUDE "vram.asm"
-
-
 SECTION "Audio RAM", WRAM0
 
 wUnusedC000:: db ; used for various temporary flags
@@ -151,12 +143,12 @@ wSpriteDataEnd::
 SECTION "OAM Buffer", WRAM0
 
 ; buffer for OAM data. Copied to OAM by DMA
-wOAMBuffer::
-; wOAMBufferSprite00 - wOAMBufferSprite39
+wShadowOAM::
+; wShadowOAMSprite00 - wShadowOAMSprite39
 FOR n, NUM_SPRITE_OAM_STRUCTS
-wOAMBufferSprite{02d:n}:: sprite_oam_struct wOAMBufferSprite{02d:n}
+wShadowOAMSprite{02d:n}:: sprite_oam_struct wShadowOAMSprite{02d:n}
 ENDR
-wOAMBufferEnd::
+wShadowOAMEnd::
 
 
 SECTION "Tilemap", WRAM0
@@ -2527,8 +2519,3 @@ SECTION "Stack", WRAM0
 ; the stack grows downward
 	ds $100 - 1
 wStack:: db
-
-
-INCLUDE "sram.asm"
-
-INCLUDE "hram.asm"

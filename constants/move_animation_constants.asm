@@ -1,7 +1,7 @@
 ; special effects that are part of move animations
 ; SpecialEffectPointers associates them with effect routines (see data/battle_anims/special_effect_pointers.asm)
 	const_def $C0
-FIRST_SE_ID EQU const_value
+DEF FIRST_SE_ID EQU const_value
 	const_skip $12
 	const SE_SMOKE_EVERYWHERE          ; $D3 used in Poison Gas
 	const SE_FIRE_EVERYWHERE           ; $D4 used in Take Down
@@ -142,7 +142,7 @@ FIRST_SE_ID EQU const_value
 	const SUBANIM_BURN
 	const SUBANIM_AMNESIA_ENEMY
 	const SUBANIM_AMNESIA1_ENEMY
-NUM_SUBANIMS EQU const_value
+DEF NUM_SUBANIMS EQU const_value
 
 ; types of subanimations
 	const_def
@@ -278,7 +278,7 @@ NUM_SUBANIMS EQU const_value
 	const FRAMEBLOCK_77
 	const FRAMEBLOCK_78
 	const FRAMEBLOCK_79
-NUM_FRAMEBLOCKS EQU const_value
+DEF NUM_FRAMEBLOCKS EQU const_value
 
 ; base coordinates that are part of subanimations
 ; FrameBlockBaseCoords indexes (see data/battle_anims/base_coords.asm)
@@ -460,7 +460,7 @@ NUM_FRAMEBLOCKS EQU const_value
 	const BASECOORD_AE
 	const BASECOORD_AF
 	const BASECOORD_B0
-NUM_BASECOORDS EQU const_value
+DEF NUM_BASECOORDS EQU const_value
 
 ; frame block modes that are part of subanimations
 	const_def

@@ -1,4 +1,4 @@
-growth_rate: MACRO
+MACRO growth_rate
 ; [1]/[2]*n**3 + [3]*n**2 + [4]*n - [5]
 	dn \1, \2
 	if \3 < 0

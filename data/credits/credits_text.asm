@@ -67,7 +67,7 @@ CreditsTextPointers:
 	dw CredPAAD
 	assert_table_length NUM_CRED_STRINGS
 
-CredVersion: ; this 1 byte difference makes all bank addresses offset by 1 in the blue version
+CredVersion:
 IF DEF(_RED)
 	db -8, "RED VERSION STAFF@"
 ENDC

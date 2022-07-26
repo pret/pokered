@@ -4,8 +4,7 @@ Music_SSAnne_Ch1::
 	duty_cycle 1
 	vibrato 8, 3, 4
 	toggle_perfect_pitch
-
-Music_SSAnne_branch_b3b2::
+.mainloop:
 	note_type 12, 10, 4
 	rest 12
 	octave 3
@@ -104,14 +103,12 @@ Music_SSAnne_branch_b3b2::
 	rest 4
 	octave 3
 	note D_, 8
-	sound_loop 0, Music_SSAnne_branch_b3b2
-
+	sound_loop 0, .mainloop
 
 Music_SSAnne_Ch2::
 	duty_cycle 0
 	vibrato 12, 2, 4
-
-Music_SSAnne_branch_b41e::
+.mainloop:
 	note_type 12, 12, 5
 	octave 3
 	note A_, 2
@@ -279,10 +276,10 @@ Music_SSAnne_branch_b41e::
 	note C#, 3
 	octave 3
 	note B_, 3
-	sound_loop 0, Music_SSAnne_branch_b41e
-
+	sound_loop 0, .mainloop
 
 Music_SSAnne_Ch3::
+.mainloop:
 	note_type 12, 1, 3
 	rest 16
 	rest 12
@@ -335,4 +332,4 @@ Music_SSAnne_Ch3::
 	note F#, 8
 	note G#, 8
 	note B_, 8
-	sound_loop 0, Music_SSAnne_Ch3
+	sound_loop 0, .mainloop

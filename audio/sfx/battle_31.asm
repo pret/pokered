@@ -7,7 +7,6 @@ SFX_Battle_31_Ch5:
 	square_note 15, 15, 2, 2016
 	sound_ret
 
-
 SFX_Battle_31_Ch6:
 	duty_cycle 3
 	square_note 15, 15, -7, 2018

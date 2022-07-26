@@ -28,7 +28,7 @@ AttackAnimationPointers:
 	dw JumpKickAnim
 	dw RollingKickAnim
 	dw SandAttackAnim
-	dw HeatButtAnim
+	dw HeadButtAnim
 	dw HornAttackAnim
 	dw FuryAttackAnim
 	dw HornDrillAnim
@@ -214,7 +214,7 @@ AttackAnimationPointers:
 ; if \2 is a subanimation_id:
 ;\3: tileset_id
 ;\4: delay
-battle_anim: MACRO
+MACRO battle_anim
 	IF _NARG == 4
 		db (\3 << 6) | \4
 		db \1 - 1
@@ -387,7 +387,7 @@ SandAttackAnim:
 	battle_anim SAND_ATTACK, SUBANIM_28, 1, 6
 	db -1 ; end
 
-HeatButtAnim:
+HeadButtAnim:
 	battle_anim HEADBUTT, SUBANIM_05, 1, 6
 	db -1 ; end
 

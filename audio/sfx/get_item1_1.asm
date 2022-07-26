@@ -15,7 +15,6 @@ SFX_Get_Item1_1_Ch5:
 	note E_, 4
 	sound_ret
 
-
 SFX_Get_Item1_1_Ch6:
 	execute_music
 	vibrato 8, 2, 7
@@ -28,7 +27,6 @@ SFX_Get_Item1_1_Ch6:
 	note_type 12, 12, 3
 	note B_, 4
 	sound_ret
-
 
 SFX_Get_Item1_1_Ch7:
 	execute_music

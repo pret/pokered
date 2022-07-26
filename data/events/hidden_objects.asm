@@ -196,14 +196,14 @@ HiddenObjectPointers:
 	dw CeruleanRocketHouse1FHiddenObjects
 	dw CeruleanRocketHouseB1FHiddenObjects
 
-hidden_object: MACRO
+MACRO hidden_object
 	db \2 ; y coord
 	db \1 ; x coord
 	db \3 ; item id
 	dba \4 ; object routine
 ENDM
 
-hidden_text_predef: MACRO
+MACRO hidden_text_predef
 	db \2 ; y coord
 	db \1 ; x coord
 	db_tx_pre \3 ; text id
@@ -213,7 +213,7 @@ ENDM
 ; Some hidden objects use SPRITE_FACING_* values,
 ; but these do not actually prevent the player
 ; from interacting with them in any direction.
-ANY_FACING EQU $d0
+DEF ANY_FACING EQU $d0
 
 TradeCenterHiddenObjects:
 	hidden_object  5,  4, ANY_FACING, CableClubRightGameboy

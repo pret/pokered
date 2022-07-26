@@ -14,22 +14,22 @@ FindPathToPlayer:
 	call CalcDifference
 	ld d, a
 	and a
-	jr nz, .asm_f8da
+	jr nz, .stillHasYProgress
 	ldh a, [hFindPathFlags]
 	set 0, a ; current end of path matches the player's Y coordinate
 	ldh [hFindPathFlags], a
-.asm_f8da
+.stillHasYProgress
 	ldh a, [hFindPathXProgress]
 	ld b, a
 	ldh a, [hNPCPlayerXDistance] ; X distance in steps
 	call CalcDifference
 	ld e, a
 	and a
-	jr nz, .asm_f8ec
+	jr nz, .stillHasXProgress
 	ldh a, [hFindPathFlags]
 	set 1, a ; current end of path matches the player's X coordinate
 	ldh [hFindPathFlags], a
-.asm_f8ec
+.stillHasXProgress
 	ldh a, [hFindPathFlags]
 	cp $3 ; has the end of the path reached the player's position?
 	jr z, .done

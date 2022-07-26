@@ -72,7 +72,7 @@
 	const SPRITE_PSYCHIC                 ; $47
 	const SPRITE_VOLTORB                 ; $47
 	const SPRITE_FIGHTING                ; $48
-FIRST_STILL_SPRITE EQU const_value
+DEF FIRST_STILL_SPRITE EQU const_value
 	const SPRITE_POKE_BALL               ; $3e
 	const SPRITE_FOSSIL                  ; $3f
 	const SPRITE_BOULDER                 ; $40
@@ -84,4 +84,4 @@ FIRST_STILL_SPRITE EQU const_value
 	const SPRITE_OLD_AMBER               ; $45
 	const SPRITE_GAMBLER_ASLEEP          ; $48
 	const SPRITE_MONSTER2_STILL          ; $48
-NUM_SPRITES EQU const_value - 1
+DEF NUM_SPRITES EQU const_value - 1

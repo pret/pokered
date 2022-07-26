@@ -5,7 +5,6 @@ SFX_Ball_Poof_Ch5:
 	pitch_sweep 0, 8
 	sound_ret
 
-
 SFX_Ball_Poof_Ch8:
 	noise_note 15, 10, 2, 34
 	sound_ret

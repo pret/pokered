@@ -201,11 +201,11 @@ AIMoveChoiceModification1:
 	jp .nextMove
 .checkAsleep
 	ld a, [wAITargetMonStatus]
-	and SLP
+	and SLP_MASK
 	jp nz, .nextMove ; if we just healed sleep or switched out a sleeping pokemon, 
 					 ; the AI shouldn't predict this perfectly when deciding whether to use dream eater
 	ld a, [wBattleMonStatus]
-	and SLP
+	and SLP_MASK
 	jr z, .discourage ; heavily discourage, if the player isn't asleep avoid using dream eater
 	jp .nextMove
 .checkLightScreenUp
@@ -600,13 +600,13 @@ AIMoveChoiceModification4:
 	jr .nextMove ; otherwise don't encourage it
 .checkOpponentAsleep
 	ld a, [wAITargetMonStatus] ; set to nonzero if player healed battle mon's status or switched one with a status out this turn
-	and SLP
+	and SLP_MASK
 	jr nz, .preferMoveEvenMore
 	ld a, [wAIMoveSpamAvoider] ; set if we switched or healed this turn
 	cp 2 ; set to 2 if we switched
 	jr z, .nextMove ; if the AI thinks the player IS NOT asleep before they switch, we shouldn't encourage based on the new mon's status
 	ld a, [wBattleMonStatus]
-	and SLP
+	and SLP_MASK
 	jr nz, .preferMoveEvenMore ; heavier favor for dream eater if the opponent is asleep
 	jr .nextMove
 .preferMoveEvenMore

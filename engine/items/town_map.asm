@@ -1,4 +1,4 @@
-NOT_VISITED EQU $fe
+DEF NOT_VISITED EQU $fe
 
 DisplayTownMap:
 	call LoadTownMap
@@ -16,7 +16,7 @@ DisplayTownMap:
 	hlcoord 1, 0
 	ld de, wcd6d
 	call PlaceString
-	ld hl, wOAMBuffer
+	ld hl, wShadowOAM
 	ld de, wTileMapBackup
 	ld bc, $10
 	call CopyData
@@ -47,7 +47,7 @@ DisplayTownMap:
 	call TownMapCoordsToOAMCoords
 	ld a, $4
 	ld [wOAMBaseTile], a
-	ld hl, wOAMBuffer + $10
+	ld hl, wShadowOAMSprite04
 	call WriteTownMapSpriteOAM ; town map cursor sprite
 	pop hl
 	ld de, wcd6d
@@ -60,7 +60,7 @@ DisplayTownMap:
 	hlcoord 1, 0
 	ld de, wcd6d
 	call PlaceString
-	ld hl, wOAMBuffer + $10
+	ld hl, wShadowOAMSprite04
 	ld de, wTileMapBackup + 16
 	ld bc, $10
 	call CopyData
@@ -362,7 +362,7 @@ DrawPlayerOrBirdSprite:
 	inc de
 	cp "@"
 	jr nz, .loop
-	ld hl, wOAMBuffer
+	ld hl, wShadowOAM
 	ld de, wTileMapBackup
 	ld bc, $a0
 	jp CopyData
@@ -370,7 +370,7 @@ DrawPlayerOrBirdSprite:
 DisplayWildLocations:
 	farcall FindWildLocationsOfMon
 	call ZeroOutDuplicatesInList
-	ld hl, wOAMBuffer
+	ld hl, wShadowOAM
 	ld de, wTownMapCoords
 .loop
 	ld a, [de]
@@ -410,7 +410,7 @@ DisplayWildLocations:
 	ld b, $0
 	call DrawPlayerOrBirdSprite
 .done
-	ld hl, wOAMBuffer
+	ld hl, wShadowOAM
 	ld de, wTileMapBackup
 	ld bc, $a0
 	jp CopyData
@@ -439,9 +439,9 @@ TownMapCoordsToOAMCoords:
 WritePlayerOrBirdSpriteOAM:
 	ld a, [wOAMBaseTile]
 	and a
-	ld hl, wOAMBuffer + $90 ; for player sprite
+	ld hl, wShadowOAMSprite36 ; for player sprite
 	jr z, WriteTownMapSpriteOAM
-	ld hl, wOAMBuffer + $80 ; for bird sprite
+	ld hl, wShadowOAMSprite32 ; for bird sprite
 
 WriteTownMapSpriteOAM:
 	push hl
@@ -600,13 +600,13 @@ TownMapSpriteBlinkingAnimation::
 	jr nz, .done
 ; show sprites when the counter reaches 50
 	ld hl, wTileMapBackup
-	ld de, wOAMBuffer
+	ld de, wShadowOAM
 	ld bc, $90
 	call CopyData
 	xor a
 	jr .done
 .hideSprites
-	ld hl, wOAMBuffer
+	ld hl, wShadowOAM
 	ld b, $24
 	ld de, $4
 .hideSpritesLoop

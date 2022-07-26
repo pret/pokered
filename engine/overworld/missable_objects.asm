@@ -29,9 +29,9 @@ LoadMissableObjects:
 .load
 	ld a, l
 	sub e
-	jr nc, .asm_f13c
+	jr nc, .noCarry
 	dec h
-.asm_f13c
+.noCarry
 	ld l, a
 	ld a, h
 	sub d

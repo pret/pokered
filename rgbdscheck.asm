@@ -2,7 +2,7 @@ MAJOR EQU 0
 MINOR EQU 5
 PATCH EQU 2
 
-wrong_rgbds: MACRO
+MACRO wrong_rgbds
 	fail "pokered requires rgbds v0.5.2 or newer."
 ENDM
 

@@ -6,8 +6,7 @@ Music_BikeRiding_Ch1::
 	note_type 12, 11, 5
 	octave 3
 	note G_, 2
-
-Music_BikeRiding_branch_7dbc9::
+.mainloop:
 	octave 4
 	note C_, 4
 	note D_, 4
@@ -150,8 +149,7 @@ Music_BikeRiding_branch_7dbc9::
 	note G_, 12
 	note_type 12, 11, 5
 	vibrato 8, 1, 4
-	sound_loop 0, Music_BikeRiding_branch_7dbc9
-
+	sound_loop 0, .mainloop
 
 Music_BikeRiding_Ch2::
 	duty_cycle 2
@@ -159,8 +157,7 @@ Music_BikeRiding_Ch2::
 	note_type 12, 12, 3
 	octave 4
 	note C_, 2
-
-Music_BikeRiding_branch_7dc75::
+.mainloop:
 	note E_, 4
 	note F_, 4
 	note G_, 4
@@ -299,14 +296,12 @@ Music_BikeRiding_branch_7dc75::
 	note_type 12, 12, 7
 	note B_, 12
 	note_type 12, 12, 3
-	sound_loop 0, Music_BikeRiding_branch_7dc75
-
+	sound_loop 0, .mainloop
 
 Music_BikeRiding_Ch3::
 	note_type 12, 1, 3
 	rest 2
-
-Music_BikeRiding_branch_7dd17::
+.mainloop:
 	octave 4
 	note C_, 1
 	rest 1
@@ -640,36 +635,34 @@ Music_BikeRiding_branch_7dd17::
 	octave 4
 	note F_, 1
 	rest 1
-	sound_loop 0, Music_BikeRiding_branch_7dd17
-
+	sound_loop 0, .mainloop
 
 Music_BikeRiding_Ch4::
 	drum_speed 12
 	rest 2
+.mainloop:
+	sound_call .sub1
+	sound_call .sub2
+	sound_call .sub1
+	sound_call .sub3
+	sound_call .sub2
+	sound_call .sub2
+	sound_call .sub1
+	sound_call .sub1
+	sound_call .sub1
+	sound_call .sub1
+	sound_call .sub2
+	sound_call .sub1
+	sound_call .sub3
+	sound_call .sub1
+	sound_call .sub2
+	sound_call .sub1
+	sound_call .sub1
+	sound_call .sub1
+	sound_call .sub1
+	sound_loop 0, .mainloop
 
-Music_BikeRiding_branch_7de6a::
-	sound_call Music_BikeRiding_branch_7dea7
-	sound_call Music_BikeRiding_branch_7deb4
-	sound_call Music_BikeRiding_branch_7dea7
-	sound_call Music_BikeRiding_branch_7dec2
-	sound_call Music_BikeRiding_branch_7deb4
-	sound_call Music_BikeRiding_branch_7deb4
-	sound_call Music_BikeRiding_branch_7dea7
-	sound_call Music_BikeRiding_branch_7dea7
-	sound_call Music_BikeRiding_branch_7dea7
-	sound_call Music_BikeRiding_branch_7dea7
-	sound_call Music_BikeRiding_branch_7deb4
-	sound_call Music_BikeRiding_branch_7dea7
-	sound_call Music_BikeRiding_branch_7dec2
-	sound_call Music_BikeRiding_branch_7dea7
-	sound_call Music_BikeRiding_branch_7deb4
-	sound_call Music_BikeRiding_branch_7dea7
-	sound_call Music_BikeRiding_branch_7dea7
-	sound_call Music_BikeRiding_branch_7dea7
-	sound_call Music_BikeRiding_branch_7dea7
-	sound_loop 0, Music_BikeRiding_branch_7de6a
-
-Music_BikeRiding_branch_7dea7::
+.sub1:
 	rest 2
 	drum_note 16, 2
 	rest 2
@@ -680,7 +673,7 @@ Music_BikeRiding_branch_7dea7::
 	drum_note 16, 2
 	sound_ret
 
-Music_BikeRiding_branch_7deb4::
+.sub2:
 	rest 2
 	drum_note 16, 2
 	rest 2
@@ -691,7 +684,7 @@ Music_BikeRiding_branch_7deb4::
 	drum_note 16, 2
 	sound_ret
 
-Music_BikeRiding_branch_7dec2::
+.sub3:
 	rest 2
 	drum_note 16, 2
 	rest 2

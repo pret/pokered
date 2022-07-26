@@ -21,38 +21,36 @@ Music_MuseumGuy_Ch1::
 	note E_, 1
 	note G#, 1
 	note B_, 10
-	sound_call Music_MuseumGuy_branch_ade7
-	sound_call Music_MuseumGuy_branch_adec
-	sound_call Music_MuseumGuy_branch_ade7
+	sound_call .sub1
+	sound_call .sub2
+	sound_call .sub1
 	note E_, 4
 	note E_, 4
 	note E_, 2
 	note E_, 6
-
-Music_MuseumGuy_branch_add6::
-	sound_call Music_MuseumGuy_branch_ade7
-	sound_call Music_MuseumGuy_branch_adec
-	sound_call Music_MuseumGuy_branch_ade7
+.mainloop:
+	sound_call .sub1
+	sound_call .sub2
+	sound_call .sub1
 	note E_, 4
 	note E_, 4
 	note E_, 2
 	note E_, 6
-	sound_loop 0, Music_MuseumGuy_branch_add6
+	sound_loop 0, .mainloop
 
-Music_MuseumGuy_branch_ade7::
+.sub1:
 	note E_, 2
 	note E_, 6
 	note F#, 2
 	note F#, 6
 	sound_ret
 
-Music_MuseumGuy_branch_adec::
+.sub2:
 	note E_, 2
 	note E_, 6
 	note D_, 2
 	note D_, 6
 	sound_ret
-
 
 Music_MuseumGuy_Ch2::
 	duty_cycle 2
@@ -106,8 +104,7 @@ Music_MuseumGuy_Ch2::
 	note A_, 2
 	note A_, 2
 	note A_, 4
-
-Music_MuseumGuy_branch_ae26::
+.mainloop:
 	octave 3
 	note A_, 2
 	octave 4
@@ -162,8 +159,7 @@ Music_MuseumGuy_branch_ae26::
 	note A_, 2
 	note A_, 2
 	note A_, 4
-	sound_loop 0, Music_MuseumGuy_branch_ae26
-
+	sound_loop 0, .mainloop
 
 Music_MuseumGuy_Ch3::
 	note_type 12, 1, 0
@@ -175,7 +171,7 @@ Music_MuseumGuy_Ch3::
 	rest 3
 	note E_, 1
 	rest 9
-	sound_call Music_MuseumGuy_branch_aeb8
+	sound_call .sub1
 	note A_, 1
 	rest 1
 	note A_, 1
@@ -184,7 +180,7 @@ Music_MuseumGuy_Ch3::
 	rest 1
 	note G#, 1
 	rest 5
-	sound_call Music_MuseumGuy_branch_aeb8
+	sound_call .sub1
 	note B_, 1
 	rest 3
 	note G#, 1
@@ -193,9 +189,8 @@ Music_MuseumGuy_Ch3::
 	rest 1
 	note A_, 1
 	rest 3
-
-Music_MuseumGuy_branch_ae8e::
-	sound_call Music_MuseumGuy_branch_aec1
+.mainloop:
+	sound_call .sub2
 	rest 3
 	octave 6
 	note E_, 1
@@ -211,7 +206,7 @@ Music_MuseumGuy_branch_ae8e::
 	rest 1
 	note G#, 1
 	rest 3
-	sound_call Music_MuseumGuy_branch_aec1
+	sound_call .sub2
 	rest 1
 	octave 6
 	note E_, 1
@@ -229,9 +224,9 @@ Music_MuseumGuy_branch_ae8e::
 	rest 1
 	note A_, 1
 	rest 3
-	sound_loop 0, Music_MuseumGuy_branch_ae8e
+	sound_loop 0, .mainloop
 
-Music_MuseumGuy_branch_aeb8::
+.sub1:
 	note A_, 1
 	rest 1
 	note A_, 1
@@ -242,7 +237,7 @@ Music_MuseumGuy_branch_aeb8::
 	rest 5
 	sound_ret
 
-Music_MuseumGuy_branch_aec1::
+.sub2:
 	octave 6
 	note C#, 1
 	rest 1
@@ -260,7 +255,6 @@ Music_MuseumGuy_branch_aec1::
 	note A_, 1
 	sound_ret
 
-
 Music_MuseumGuy_Ch4::
 	drum_speed 12
 	rest 16
@@ -274,8 +268,7 @@ Music_MuseumGuy_Ch4::
 	drum_note 19, 1
 	drum_note 18, 1
 	drum_note 18, 1
-
-Music_MuseumGuy_branch_aee1::
+.mainloop:
 	drum_note 17, 4
 	drum_note 17, 6
 	drum_note 17, 2
@@ -334,4 +327,4 @@ Music_MuseumGuy_branch_aee1::
 	drum_note 19, 1
 	drum_note 18, 1
 	drum_note 18, 1
-	sound_loop 0, Music_MuseumGuy_branch_aee1
+	sound_loop 0, .mainloop

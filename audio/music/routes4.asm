@@ -21,8 +21,7 @@ Music_Routes4_Ch1::
 	note E_, 1
 	note F#, 1
 	note B_, 1
-
-Music_Routes4_branch_a28a::
+.mainloop:
 	note_type 12, 11, 7
 	note B_, 6
 	note E_, 2
@@ -135,8 +134,7 @@ Music_Routes4_branch_a28a::
 	note F#, 3
 	note G#, 3
 	note A_, 3
-	sound_loop 0, Music_Routes4_branch_a28a
-
+	sound_loop 0, .mainloop
 
 Music_Routes4_Ch2::
 	vibrato 12, 2, 4
@@ -163,8 +161,7 @@ Music_Routes4_Ch2::
 	note B_, 1
 	octave 4
 	note D#, 1
-
-Music_Routes4_branch_a325::
+.mainloop:
 	note_type 12, 12, 7
 	note E_, 6
 	octave 3
@@ -285,8 +282,7 @@ Music_Routes4_branch_a325::
 	note E_, 8
 	note_type 12, 10, 7
 	note E_, 10
-	sound_loop 0, Music_Routes4_branch_a325
-
+	sound_loop 0, .mainloop
 
 Music_Routes4_Ch3::
 	note_type 12, 1, 0
@@ -307,8 +303,7 @@ Music_Routes4_Ch3::
 	rest 3
 	note D#, 1
 	rest 3
-
-Music_Routes4_branch_a3d7::
+.mainloop:
 	note E_, 1
 	rest 3
 	note E_, 1
@@ -503,8 +498,7 @@ Music_Routes4_branch_a3d7::
 	rest 3
 	note D#, 1
 	rest 1
-	sound_loop 0, Music_Routes4_branch_a3d7
-
+	sound_loop 0, .mainloop
 
 Music_Routes4_Ch4::
 	drum_speed 12
@@ -514,8 +508,7 @@ Music_Routes4_Ch4::
 	drum_note 19, 1
 	drum_note 18, 1
 	drum_note 18, 1
-
-Music_Routes4_branch_a4a8::
+.mainloop:
 	drum_note 17, 4
 	drum_note 19, 1
 	drum_note 19, 1
@@ -678,4 +671,4 @@ Music_Routes4_branch_a4a8::
 	drum_note 17, 2
 	drum_note 17, 2
 	drum_note 17, 2
-	sound_loop 0, Music_Routes4_branch_a4a8
+	sound_loop 0, .mainloop

@@ -3,7 +3,6 @@ SFX_59_1_Ch5:
 	square_note 4, 15, 1, 1920
 	sound_ret
 
-
 SFX_59_1_Ch6:
 	duty_cycle 2
 	square_note 1, 0, 8, 0

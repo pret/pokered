@@ -700,7 +700,7 @@ SwitchPartyMon::
 
 SwapPartyMonIcons:
     ld a, [wWhichTrade] ;wSwappedMenuItem
-    ld hl, wOAMBuffer
+    ld hl, wShadowOAM
     ld bc, 16
     call AddNTimes ; add bc to hl, a times
     inc hl ; add 2 to hl for tileid.
@@ -708,7 +708,7 @@ SwapPartyMonIcons:
 	push hl
 	pop de
     ld a, [wCurrentMenuItem]
-    ld hl, wOAMBuffer
+    ld hl, wShadowOAM
     ld bc, 16
     call AddNTimes ; add bc to hl, a times
     inc hl ; add 2 to hl for tileid.
@@ -744,7 +744,7 @@ SwitchPartyMon_ClearGfx:
 	dec c
 	jr nz, .clearMonBGLoop
 	pop af
-	ld hl, wOAMBuffer
+	ld hl, wShadowOAM
 	ld bc, $10
 	call AddNTimes
 	ld de, $4

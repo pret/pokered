@@ -13,7 +13,7 @@
 	const A_ ; 9
 	const A# ; A
 	const B_ ; B
-NUM_NOTES EQU const_value
+DEF NUM_NOTES EQU const_value
 
 ; channel
 ; Audio[1|2|3]_HWChannelBaseAddresses, Audio[1|2|3]_HWChannelDisableMasks,
@@ -23,31 +23,31 @@ NUM_NOTES EQU const_value
 	const Ch2 ; 1
 	const Ch3 ; 2
 	const Ch4 ; 3
-NUM_MUSIC_CHANS EQU const_value
+DEF NUM_MUSIC_CHANS EQU const_value
 	const Ch5 ; 4
 	const Ch6 ; 5
 	const Ch7 ; 6
 	const Ch8 ; 7
-NUM_NOISE_CHANS EQU const_value - NUM_MUSIC_CHANS
-NUM_CHANNELS EQU const_value
+DEF NUM_NOISE_CHANS EQU const_value - NUM_MUSIC_CHANS
+DEF NUM_CHANNELS EQU const_value
 
 ; HW sound channel register base addresses
-HW_CH1_BASE EQU LOW(rNR10)
-HW_CH2_BASE EQU LOW(rNR21) - 1
-HW_CH3_BASE EQU LOW(rNR30)
-HW_CH4_BASE EQU LOW(rNR41) - 1
+DEF HW_CH1_BASE EQU LOW(rNR10)
+DEF HW_CH2_BASE EQU LOW(rNR21) - 1
+DEF HW_CH3_BASE EQU LOW(rNR30)
+DEF HW_CH4_BASE EQU LOW(rNR41) - 1
 
 ; HW sound channel enable bit masks
-HW_CH1_ENABLE_MASK EQU %00010001
-HW_CH2_ENABLE_MASK EQU %00100010
-HW_CH3_ENABLE_MASK EQU %01000100
-HW_CH4_ENABLE_MASK EQU %10001000
+DEF HW_CH1_ENABLE_MASK EQU %00010001
+DEF HW_CH2_ENABLE_MASK EQU %00100010
+DEF HW_CH3_ENABLE_MASK EQU %01000100
+DEF HW_CH4_ENABLE_MASK EQU %10001000
 
 ; HW sound channel disable bit masks
-HW_CH1_DISABLE_MASK EQU (~HW_CH1_ENABLE_MASK & $ff)
-HW_CH2_DISABLE_MASK EQU (~HW_CH2_ENABLE_MASK & $ff)
-HW_CH3_DISABLE_MASK EQU (~HW_CH3_ENABLE_MASK & $ff)
-HW_CH4_DISABLE_MASK EQU (~HW_CH4_ENABLE_MASK & $ff)
+DEF HW_CH1_DISABLE_MASK EQU (~HW_CH1_ENABLE_MASK & $ff)
+DEF HW_CH2_DISABLE_MASK EQU (~HW_CH2_ENABLE_MASK & $ff)
+DEF HW_CH3_DISABLE_MASK EQU (~HW_CH3_ENABLE_MASK & $ff)
+DEF HW_CH4_DISABLE_MASK EQU (~HW_CH4_ENABLE_MASK & $ff)
 
 	const_def 1
 	const REG_DUTY_SOUND_LEN  ; 1
@@ -65,4 +65,4 @@ HW_CH4_DISABLE_MASK EQU (~HW_CH4_ENABLE_MASK & $ff)
 	const BIT_ROTATE_DUTY_CYCLE      ; 6 ; if rotating duty cycle
 
 ; wChannelFlags2 constant (only has one flag)
-BIT_EXECUTE_MUSIC EQU 0 ; if in execute music
+DEF BIT_EXECUTE_MUSIC EQU 0 ; if in execute music

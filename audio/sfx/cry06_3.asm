@@ -7,10 +7,8 @@ SFX_Cry06_3_Ch5:
 	square_note 15, 8, 2, 549
 	square_note 15, 4, 2, 519
 
-
 SFX_Cry06_3_Ch6:
 	sound_ret
-
 
 SFX_Cry06_3_Ch8:
 	noise_note 8, 13, 4, 140

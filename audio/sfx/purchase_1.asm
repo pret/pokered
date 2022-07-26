@@ -4,7 +4,6 @@ SFX_Purchase_1_Ch5:
 	square_note 8, 15, 2, 2016
 	sound_ret
 
-
 SFX_Purchase_1_Ch6:
 	duty_cycle 2
 	square_note 1, 0, 8, 0

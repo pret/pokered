@@ -20,7 +20,6 @@ Music_JigglypuffSong_Ch1::
 	note E_, 10
 	sound_ret
 
-
 Music_JigglypuffSong_Ch2::
 	vibrato 5, 1, 5
 	duty_cycle 2

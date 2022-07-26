@@ -26,7 +26,7 @@ BattleTransition:
 	jr nz, .loop1
 
 ; Clear OAM except for the blocks used by the player and enemy trainer sprites.
-	ld hl, wOAMBuffer + $10
+	ld hl, wShadowOAMSprite04
 	ld c, 9
 .loop2
 	ld a, b
@@ -666,7 +666,7 @@ BattleTransition_Circle_Sub2:
 	const CIRCLE_LEFT
 	const CIRCLE_RIGHT
 
-half_circle: MACRO
+MACRO half_circle
 	; quadrant x, circle data, target coord
 	db \1
 	dw \2

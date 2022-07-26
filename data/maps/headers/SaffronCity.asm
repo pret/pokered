@@ -1,4 +1,3 @@
-
 	map_header SaffronCity, SAFFRON_CITY, OVERWORLD, NORTH | SOUTH | WEST | EAST
 	connection north, Route5, ROUTE_5, 5
 	connection south, Route6, ROUTE_6, 5

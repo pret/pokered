@@ -14,7 +14,7 @@ DoorTileIDPointers:
 	dbw PLATEAU,     .PlateauDoorTileIDs
 	db -1 ; end
 
-door_tiles: MACRO
+MACRO door_tiles
 	IF _NARG
 		db \# ; all args
 	ENDC
