@@ -2,6 +2,8 @@
 
 These instructions explain how to set up the tools required to build **pokered**, including [**rgbds**](https://github.com/gbdev/rgbds), which assembles the source files into a ROM.
 
+This is not an explanation of how to patch or play Red / Blue.
+
 If you run into trouble, ask for help on IRC or Discord (see [README.md](README.md)).
 
 
