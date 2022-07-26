@@ -110,13 +110,24 @@ UpdatePlayerSprite:
 ; bit set by later logic.
 	ldh a, [hTilePlayerStandingOn]
 	ld c, a
-	ld a, [wGrassTile]
-	cp c
+	call TestGrassTile2
 	ld a, 0
 	jr nz, .next2
 	ld a, OAM_BEHIND_BG
 .next2
 	ld [wSpritePlayerStateData2GrassPriority], a
+	ret
+
+TestGrassTile2:
+	ld a, [wGrassTile]
+	cp c
+	jr z, .return
+	ld a, [wCurMapTileset]
+	cp FOREST
+	jr nz, .return
+	ld a, $34	; check for the extra grass tile in the forest tileset
+	cp c
+.return
 	ret
 
 UnusedReadSpriteDataFunction:
@@ -608,8 +619,7 @@ CheckSpriteAvailability:
 	ldh a, [hCurrentSpriteOffset]
 	add $7
 	ld l, a
-	ld a, [wGrassTile]
-	cp c
+	call TestGrassTile2
 	ld a, 0
 	jr nz, .notInGrass
 	ld a, OAM_BEHIND_BG

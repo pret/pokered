@@ -20,19 +20,17 @@ TryDoWildEncounter:
 	and a
 	jr z, .next
 	dec a
-	jr z, .lastRepelStep
+	jp z, .lastRepelStep
 	ld [wRepelRemainingSteps], a
 .next
 ; determine if wild pokemon can appear in the half-block we're standing in
 ; is the bottom right tile (9,9) of the half-block we're standing in a grass/water tile?
 	hlcoord 9, 9
 	ld c, [hl]
-	ld a, [wGrassTile]
-	cp c
+	call TestGrassTile ; PureRGBnote: FIXED: viridian forest and safari zone grass tiles are detected correctly
 	ld a, [wGrassRate]
 	jr z, .CanEncounter
-	ld a, $14 ; in all tilesets with a water tile, this is its id
-	cp c
+	call TestWaterTile ; PureRGBnote: FIXED: Route 10 coast tiles will be treated as water encounter tiles instead of loading grass tiles
 	ld a, [wWaterRate]
 	jr z, .CanEncounter
 ; even if not in grass/water, standing anywhere we can encounter pokemon
@@ -70,7 +68,8 @@ TryDoWildEncounter:
 	ld c, [hl]
 	ld hl, wGrassMons
 	lda_coord 8, 9
-	cp $14 ; is the bottom left tile (8,9) of the half-block we're standing in a water tile?
+	call TestWaterTile2 ; is the bottom left tile (8,9) of the half-block we're standing in a water tile?
+	                    ; PureRGBnote: FIXED: Route 10 coast tiles will be treated as water encounter tiles instead of loading grass encounters
 	jr nz, .gotWildEncounterType ; else, it's treated as a grass tile by default
 	ld hl, wWaterMons
 	ld a, [wIsAltPalettePkmn]
@@ -110,6 +109,37 @@ TryDoWildEncounter:
 .willEncounter
 	callfar CheckWildPokemonPalettes ; checks if the pokemon should use an alt palette and if so stores 1 in wIsAltPalettePkmn
 	xor a
+	ret
+
+TestGrassTile:
+	ld a, [wGrassTile]
+	cp c
+	jr z, .return
+	ld a, [wCurMapTileset]
+	cp FOREST
+	jr nz, .return
+	ld a, $34	; check for the extra grass tile in the forest tileset
+	cp c
+.return
+	ret
+
+TestWaterTile:
+	ld a, $14 ; in all tilesets with a water tile, this is its id
+	cp c
+	jr z, .return
+	ld a, [wCurMap]
+	cp ROUTE_10	; on route 10 left-coast tiles will yield water encounters
+	jr nz, .return
+	ld a, $32 ; left coast tile
+	cp c
+.return
+	ret
+
+TestWaterTile2:
+	push bc
+	ld c, a
+	call TestWaterTile
+	pop bc
 	ret
 
 INCLUDE "data/wild/probabilities.asm"
