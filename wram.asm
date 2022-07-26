@@ -1199,7 +1199,7 @@ wLoadedMon:: party_struct wLoadedMon
 ;bit 4: 4th pkmn (position 3)
 ;bit 5: 5th pkmn (position 4)
 ;bit 6: 6th pkmn (position 5)
-;bit 7: force a wild pokemon with shiny DVs if set
+;bit 7: unused
 wAIWhichPokemonSentOutAlready::
 wFontLoaded:: db
 
