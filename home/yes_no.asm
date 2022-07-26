@@ -5,11 +5,11 @@ YesNoChoice::
 	call InitYesNoTextBoxParameters
 	jr DisplayYesNoChoice
 
-TwoOptionMenu:: ; unreferenced
-	ld a, TWO_OPTION_MENU
-	ld [wTextBoxID], a
-	call InitYesNoTextBoxParameters
-	jp DisplayTextBoxID
+;TwoOptionMenu:: ; unreferenced
+;	ld a, TWO_OPTION_MENU
+;	ld [wTextBoxID], a
+;	call InitYesNoTextBoxParameters
+;	jp DisplayTextBoxID
 
 InitYesNoTextBoxParameters::
 	xor a ; YES_NO_MENU
