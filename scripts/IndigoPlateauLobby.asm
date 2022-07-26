@@ -159,10 +159,10 @@ IndigoPlateauGymGuideChampAfterGreetPrompt:
 	text_end
 
 IndigoTradeNurseText:
-	text_asm ;TODO: remove this debug change
-	SetEvent EVENT_BECAME_CHAMP
-	jp TextScriptEnd
-	;script_cable_club_receptionist
+	;text_asm ;DEBUGMODE
+	;SetEvent EVENT_BECAME_CHAMP
+	;jp TextScriptEnd
+	script_cable_club_receptionist
 
 IndigoPlateauGymGuideSonText:
 	text_far _IndigoPlateauGymGuideSonText
