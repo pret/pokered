@@ -8,12 +8,15 @@ PAGE3_OPTION4_LEFT_XPOS EQU 11
 PAGE3_OPTION4_RIGHT_XPOS EQU 14
 PAGE3_OPTION5_LEFT_XPOS EQU 11
 PAGE3_OPTION5_RIGHT_XPOS EQU 14
+PAGE3_OPTION6_LEFT_XPOS EQU 11
+PAGE3_OPTION6_RIGHT_XPOS EQU 14
 
 PAGE3_OPTION1_BIT EQU BIT_GHOST_PSYCHIC
 PAGE3_OPTION2_BIT EQU BIT_ICE_FIRE
 PAGE3_OPTION3_BIT EQU BIT_BUG_PSN
 PAGE3_OPTION4_BIT EQU BIT_PSN_BUG
 PAGE3_OPTION5_BIT EQU BIT_EXP_BAR
+PAGE3_OPTION6_BIT EQU BIT_NPC_STAT_EXP
 
 BattleOptionText:
 	db   "BATTLE OPTIONS"
@@ -21,7 +24,8 @@ BattleOptionText:
 	next " ICExFIRE: 1× 0.5×"
 	next " BUGxPSN:  2× 0.5×"
 	next " PSNxBUG:  2× 1×"
-	next " EXP BAR:  ON OFF@"
+	next " EXP BAR:  ON OFF"
+	next " NPC EVs:  ON OFF@"
 
 BattleOptionMenuCancelText:
 	db "NEXT     CANCEL@"
@@ -108,7 +112,10 @@ DisplayBattleOptions:
 	cp 9
 	inc hl
 	jr z, .updateMenuVariables
-	ld b, 5
+	cp 11
+	inc hl
+	jr z, .updateMenuVariables
+	ld b, 3
 	ld hl, wOptionsCancelCursorX
 	jr .updateMenuVariables
 .upPressed
@@ -125,8 +132,11 @@ DisplayBattleOptions:
 	cp 11
 	inc hl
 	jr z, .updateMenuVariables
+	cp 13
+	inc hl
+	jr z, .updateMenuVariables
 	cp 16
-	ld b, -5
+	ld b, -3
 	inc hl
 	jr z, .updateMenuVariables
 	ld b, 13
@@ -151,6 +161,8 @@ leftRightPressedBattleOptions:
 	jr z, .cursorInOption4
 	cp 11 ; cursor in Squirtle section?
 	jr z, .cursorInOption5
+	cp 13 ; cursor in Squirtle section?
+	jr z, .cursorInOption6
 	cp 16 ; cursor on Cancel?
 	jr z, .cursorCancelRow
 .cursorInOption1
@@ -202,6 +214,16 @@ leftRightPressedBattleOptions:
 .loadOption5X
 	ld a, b
 	ld [wOptionsPage3Option5CursorX], a
+	jr .eraseOldMenuCursor
+.cursorInOption6
+	ld a, [wOptionsPage3Option6CursorX] ; battle animation cursor X coordinate
+	ld b, PAGE3_OPTION6_LEFT_XPOS
+	cp PAGE3_OPTION6_RIGHT_XPOS
+	jr z, .loadOption6X
+	ld b, PAGE3_OPTION6_RIGHT_XPOS
+.loadOption6X
+	ld a, b
+	ld [wOptionsPage3Option6CursorX], a
 	jr .eraseOldMenuCursor
 .cursorCancelRow
 	ld a, [wOptionsCancelCursorX] ; battle style cursor X coordinate
@@ -264,9 +286,18 @@ SetBattleOptionsFromCursorPositions:
 	jr z, .option5setRight
 .option5setLeft
 	set PAGE3_OPTION5_BIT, d
-	jr .storeOptions2
+	jr .checkOption6
 .option5setRight
 	res PAGE3_OPTION5_BIT, d
+.checkOption6
+	ld a, [wOptionsPage3Option6CursorX]
+	cp PAGE3_OPTION6_RIGHT_XPOS
+	jr z, .option6setRight
+.option6setLeft
+	set PAGE3_OPTION6_BIT, d
+	jr .storeOptions2
+.option6setRight
+	res PAGE3_OPTION6_BIT, d	
 .storeOptions2
 	ld a, d
 	ld [wOptions2], a
@@ -321,6 +352,16 @@ SetCursorPositionsFromBattleOptions:
 .storeOption5SpriteCursorX
 	ld [wOptionsPage3Option5CursorX], a ; Back Sprites Cursor X Coordinate
 	hlcoord 0, 11
+	call .placeUnfilledRightArrow
+.getOption6SpriteOption
+	ld a, PAGE3_OPTION6_RIGHT_XPOS
+	ld hl, wOptions2
+	bit PAGE3_OPTION6_BIT, [hl]
+	jr z, .storeOption6SpriteCursorX
+	ld a, PAGE3_OPTION6_LEFT_XPOS
+.storeOption6SpriteCursorX
+	ld [wOptionsPage3Option6CursorX], a ; Back Sprites Cursor X Coordinate
+	hlcoord 0, 13
 	call .placeUnfilledRightArrow
 	; cursor in front of Cancel
 	hlcoord 0, 16

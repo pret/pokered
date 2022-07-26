@@ -22,6 +22,10 @@ InitBattleVariables:
 	ld [wAITargetMonType1], a
 	ld [wAITargetMonType2], a
 	ld [wAITargetMonStatus], a
+	ld a, [wAIWhichPokemonSentOutAlready]
+	and $81	;clear bits 1 to 6 only by ANDing with 1000 0001
+	ld [wAIWhichPokemonSentOutAlready], a
+	xor a
 	ld hl, wPlayerHPBarColor
 	ld [hli], a ; wPlayerHPBarColor
 	ld [hl], a ; wEnemyHPBarColor

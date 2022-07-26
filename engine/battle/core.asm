@@ -4479,16 +4479,32 @@ GetEnemyMonStat:
 	ld a, [wEnemyMonSpecies]
 	ld [wd0b5], a
 	call GetMonHeader
-	ld hl, wEnemyMonDVs
-	ld de, wLoadedMonSpeedExp
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	;ld hl, wEnemyMonDVs	;joenote - why load this into speedexp? I don't even know like seriously WTF
+	;ld de, wLoadedMonSpeedExp		
+	;ld a, [hli]
+	;ld [de], a
+	;inc de
+	;ld a, [hl]
+	;ld [de], a
 	pop bc
 	ld b, $0
-	ld hl, wLoadedMonSpeedExp - $b ; this base address makes CalcStat look in [wLoadedMonSpeedExp] for DVs
+	;ld hl, wLoadedMonSpeedExp - $b ; this base address makes CalcStat look in [wLoadedMonSpeedExp] for DVs
+	ld hl, wEnemyMonHP	;joenote - I mean come on just read it out of the wEnemyMon battle structure like normal
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;joenote - take stat exp into account if this is a trainer AI battle
+	ld a, [wIsInBattle]
+	cp 2 ; is it a trainer battle?
+	jr nz, .nottrainer
+
+	;point hl to the saved position for HPStatExp - 1
+	ld a, [wEnemyStatEXPStore]
+	ld h, a
+	ld a, [wEnemyStatEXPStore + 1]
+	ld l, a
+	
+	ld b, 1	;take stat exp into account
+.nottrainer
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	call CalcStat
 	pop de
 	ret
@@ -6363,6 +6379,7 @@ LoadEnemyMonData:
 	ld hl, wEnemyMonDVs
 	ld [hli], a
 	ld [hl], b
+
 	ld de, wEnemyMonLevel
 	ld a, [wCurEnemyLVL]
 	ld [de], a
@@ -6370,6 +6387,52 @@ LoadEnemyMonData:
 	ld b, $0
 	ld hl, wEnemyMonHP
 	push hl
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;joenote - assign calculated stat exp to all stats if this is a trainer ai battle 
+
+;is this a trainer battle? Wild pkmn do not have statexp
+	ld a, [wIsInBattle]
+	cp $2 ; is it a trainer battle?
+	jr nz, .nottrainer	;not a trainer battle, so hl will continue to point to wEnemyMonHP and b=0 for CalcStats
+	
+;this is a trainer battle, so point hl to the HP statExp address of the correct mon in the enemy party data
+	ld hl, wEnemyMon1HPExp	;make hl point to HP statExp of the first enemy party mon
+	ld a, [wWhichPokemon]	;get the party position
+	ld bc, wEnemyMon2 - wEnemyMon1	;get the size to advance between party positions
+	call AddNTimes	;advance the pointer to the correct party position
+	dec hl	;move the pointer back one position so it points at party data wEnemyMon<x>HPExp - 1
+	;save this position to recall it later
+	ld a, h
+	ld [wEnemyStatEXPStore], a
+	ld a, l
+	ld [wEnemyStatEXPStore + 1], a
+
+	;has this pkmn been sent out before? If so, then it already has statExp values
+	call CheckAISentOut
+	jr nz, .noloops
+	
+;the pkmn is out for the first time, so give it some statExp
+	push de	;preserve de
+	push hl
+	farcall CalcEnemyStatEXP	;based on the enemy pkmn level, get a stat exp amount into de 
+	pop hl
+	push hl	;save position for party data wEnemyMon<x>HPExp - 1
+	inc hl ; move hl forward one position to MSB of first stat exp
+	ld b, 5	;load loops into b to loop through the five stats
+.writeStatExp_loop
+	ld a, d	;set some statExp for MSB
+	ld [hli], a		;load MSB and point hl to the LSB position
+	ld a, e	;set some statExp for LSB
+	ld [hli], a		;load LSB and point hl to MSB of next statexp location
+	dec b
+	jr nz, .writeStatExp_loop
+	
+	pop hl	;point hl back to the saved position for party data wEnemyMon<x>HPExp - 1
+	pop de	;restore the prior de
+.noloops
+	ld b, 1	;make CalcStats account for statExp and recognize that hl points to wEnemyMon<x>HPExp - 1
+.nottrainer
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	call CalcStats
 	pop hl
 	ld a, [wIsInBattle]
@@ -6397,6 +6460,25 @@ LoadEnemyMonData:
 	ld [wEnemyMonHP], a
 	ld a, [hli]
 	ld [wEnemyMonHP + 1], a
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;joenote - if this is a trainer battle and it's the first time the pkmn is sent out
+;		   then make sure it's current hp = it's max hp
+
+	ld a, [wIsInBattle]
+	cp $2 ; is it a trainer battle?
+	jr nz, .nottrainer2
+	
+	;has pkmn already been sent out?
+	call CheckAISentOut
+	jr nz, .nottrainer2
+	
+;set hp equal to max hp
+	ld a, [wEnemyMonMaxHP]
+	ld [wEnemyMonHP], a
+	ld a, [wEnemyMonMaxHP+1]
+	ld [wEnemyMonHP + 1], a
+.nottrainer2
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	ld a, [wWhichPokemon]
 	ld [wEnemyMonPartyPos], a
 	inc hl
@@ -6506,6 +6588,17 @@ LoadEnemyMonData:
 	ld [hli], a
 	dec b
 	jr nz, .statModLoop
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;joenote - if this is a trainer battle, set the pkmn as being sent out and apply any burn/par stat changes
+	push af
+	ld a, [wIsInBattle]
+	cp 2 ; is it a trainer battle?
+	jr nz, .end_set_sendout
+	call SetAISentOut	;joenote - custom function
+	call ApplyBurnAndParalysisPenaltiesToEnemy
+.end_set_sendout
+	pop af
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	ret
 
 ; calls BattleTransition to show the battle transition animation and initializes some battle variables
@@ -7429,4 +7522,85 @@ SetEnemyActedBit:
 	ld a, [wEnemyBattleStatus3]
 	set ALREADY_ACTED, a ; sets the already-acted bit
 	ld [wEnemyBattleStatus3], a
+	ret
+
+;joenote - custom functions for determining which trainerAI pkmn have already been sent out before
+;a=party position of pkmn (like wWhichPokemon). If checking, zero flag gives bit state (1 means sent out already)
+CheckAISentOut:
+	ld a, [wWhichPokemon]	
+	cp $05
+	jr z, .party5
+	cp $04
+	jr z, .party4
+	cp $03
+	jr z, .party3
+	cp $02
+	jr z, .party2
+	cp $01
+	jr z, .party1
+	jr .party0
+.party5
+	ld a, [wAIWhichPokemonSentOutAlready]
+	bit 6, a
+	jr .partyret
+.party4
+	ld a, [wAIWhichPokemonSentOutAlready]
+	bit 5, a
+	jr .partyret
+.party3
+	ld a, [wAIWhichPokemonSentOutAlready]
+	bit 4, a
+	jr .partyret
+.party2
+	ld a, [wAIWhichPokemonSentOutAlready]
+	bit 3, a
+	jr .partyret
+.party1
+	ld a, [wAIWhichPokemonSentOutAlready]
+	bit 2, a
+	jr .partyret
+.party0
+	ld a, [wAIWhichPokemonSentOutAlready]
+	bit 1, a
+.partyret
+	ret
+	
+SetAISentOut:
+	ld a, [wWhichPokemon]	
+	cp $05
+	jr z, .party5
+	cp $04
+	jr z, .party4
+	cp $03
+	jr z, .party3
+	cp $02
+	jr z, .party2
+	cp $01
+	jr z, .party1
+	jr .party0
+.party5
+	ld a, [wAIWhichPokemonSentOutAlready]
+	set 6, a
+	jr .partyret
+.party4
+	ld a, [wAIWhichPokemonSentOutAlready]
+	set 5, a
+	jr .partyret
+.party3
+	ld a, [wAIWhichPokemonSentOutAlready]
+	set 4, a
+	jr .partyret
+.party2
+	ld a, [wAIWhichPokemonSentOutAlready]
+	set 3, a
+	jr .partyret
+.party1
+	ld a, [wAIWhichPokemonSentOutAlready]
+	set 2, a
+	jr .partyret
+.party0
+	ld a, [wAIWhichPokemonSentOutAlready]
+	set 1, a
+.partyret
+	ld [wAIWhichPokemonSentOutAlready], a
 	ret

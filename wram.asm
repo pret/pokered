@@ -803,6 +803,7 @@ wOptionsPage3Option2CursorX:: db
 wOptionsPage3Option3CursorX:: db
 wOptionsPage3Option4CursorX:: db
 wOptionsPage3Option5CursorX:: db
+wOptionsPage3Option6CursorX:: db
 ; options page 4
 wOptionsPage4Option1CursorX:: db
 wOptionsPage4Option2CursorX:: db
@@ -818,7 +819,7 @@ wOptionsArcanineSpriteCursorX:: db
 wOptionsExeggutorSpriteCursorX:: db
 wOptionsMewtwoSpriteCursorX:: db
 
-;6 bytes remaining in union
+;13 bytes remaining in union
 
 NEXTU
 ; tile ID of the badge number being drawn
@@ -1191,7 +1192,15 @@ wLoadedMon:: party_struct wLoadedMon
 ; bit 0: The space in VRAM that is used to store walk animation tile patterns
 ;        for the player and NPCs is in use for font tile patterns.
 ;        This means that NPC movement must be disabled.
-; The other bits are unused.
+;joenote - use bits 1 to 6 for tracking which trainer ai pkmn have already been sent out
+;bit 1: 1st pkmn (position 0)
+;bit 2: 2nd pkmn (position 1)
+;bit 3: 3rd pkmn (position 2)
+;bit 4: 4th pkmn (position 3)
+;bit 5: 5th pkmn (position 4)
+;bit 6: 6th pkmn (position 5)
+;bit 7: force a wild pokemon with shiny DVs if set
+wAIWhichPokemonSentOutAlready::
 wFontLoaded:: db
 
 ; walk animation counter
@@ -1784,9 +1793,10 @@ wSerialPlayerDataBlock:: ; ds $1a8
 ; that case, this would be ESCAPE_ROPE.
 wPseudoItemID:: db
 
-wUnusedD153:: db
+wEnemyStatEXPStore::
+wUnusedD153:: dw
 
-	ds 2
+	ds 1
 
 wEvoStoneItemID:: db
 

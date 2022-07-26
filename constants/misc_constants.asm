@@ -28,6 +28,7 @@ PALETTES_YELLOW     EQU %11 ; 3
 	const BIT_AUDIO_PAN         ; 3
 	const BIT_BIKE_MUSIC        ; 4
 	const BIT_EXP_BAR           ; 5
+	const BIT_NPC_STAT_EXP		; 6
 
 ; wSpriteOptions2
 	const_def  
