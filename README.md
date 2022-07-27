@@ -28,7 +28,7 @@ This is a purist's enhancement of Pokemon Red/Blue/Green. The goal is to enhance
   - Tweak the type matchups to be exactly like gen 1, gen 2, or a cross between them if you like directly in-game.
   - Optional in-battle experience bar
   - Option to give trainers some Stat EXP to their pokemon based on level. Makes the game a little bit harder.
-- There are a couple new things added into the game based on beta or cut content (like the FIREFIGHTER trainer class), and in a few cases, entirely new things to facilitate quality of life changes in a fun way. Example: an NPC who can permanently remove CUT trees, and an item that lets you TELEPORT as long as you have the item in your bag.
+- There are a couple new things added into the game based on beta or cut content (like the FIREFIGHTER trainer class), and in a few cases, entirely new things to facilitate quality of life changes in a fun way. Example: an NPC who can permanently remove CUT trees.
 
 ## Contact the creator on
 
