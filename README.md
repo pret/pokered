@@ -36,11 +36,11 @@ This is a purist's enhancement of Pokemon Red/Blue/Green. The goal is to enhance
   - An NPC who can revive fossils for you in SAFFRON CITY so you can get fossil pokemon a bit earlier.
   - An NPC who will give you LAPRAS a bit earlier in the game.
   
-![Shader On](/screenshots/blue_title_gb_no_color.png?raw=true) ![Shader On](/screenshots/blue_title_default_gbc_color.png?raw=true) ![Shader On](/screenshots/blue_title_sgb_colors_on_gbc.png?raw=true) ![Shader On](/screenshots/blue_title_gbc_colors_on_gbc.png?raw=true) 
+![blue gb](/screenshots/blue_title_gb_no_color.png?raw=true) ![blue gbc default](/screenshots/blue_title_default_gbc_color.png?raw=true) ![blue sgb colors](/screenshots/blue_title_sgb_colors_on_gbc.png?raw=true) ![blue gbc colors](/screenshots/blue_title_gbc_colors_on_gbc.png?raw=true) 
 
-![Shader On](/screenshots/red_title_gb_no_color.png?raw=true) ![Shader On](/screenshots/red_title_default_gbc_color.png?raw=true)  ![Shader On](/screenshots/red_title_sgb_colors_on_gbc.png?raw=true) ![Shader On](/screenshots/red_title_gbc_colors_on_gbc.png?raw=true)
+![red gb](/screenshots/red_title_gb_no_color.png?raw=true) ![red gbc default](/screenshots/red_title_default_gbc_color.png?raw=true)  ![red sgb colors](/screenshots/red_title_sgb_colors_on_gbc.png?raw=true) ![red gbc colors](/screenshots/red_title_gbc_colors_on_gbc.png?raw=true)
 
-![Shader On](/screenshots/green_title_gb_no_color.png?raw=true) ![Shader On](/screenshots/green_title_default_gbc_color.png?raw=true)  ![Shader On](/screenshots/green_title_sgb_colors_on_gbc.png?raw=true) ![Shader On](/screenshots/green_title_gbc_colors_on_gbc.png?raw=true)
+![green gb](/screenshots/green_title_gb_no_color.png?raw=true) ![green gbc default](/screenshots/green_title_default_gbc_color.png?raw=true)  ![green sgb colors](/screenshots/green_title_sgb_colors_on_gbc.png?raw=true) ![green gbc colors](/screenshots/green_title_gbc_colors_on_gbc.png?raw=true)
 
 Pictured: GB Monochrome, Original GBC color, SGB Colors, GBC Colors (can choose between the 3 color options on GBC in-game)
 
