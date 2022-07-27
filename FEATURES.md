@@ -100,6 +100,8 @@ Many options have been added to the game's options menu. To be clear, there are 
 - The FISHING GURU now lives in cerulean city and you can get the OLD ROD a bit earlier. Same with the GOOD ROD, which is now in the old FISHING GURU's house in vermilion city. As for the last two gurus on Route 12 and in Fuchsia city, whoever you meet first will give you a SUPER ROD. The other will be a bit distraught at the unexpected turn of events.
 
 - A couple of items or TRAINER TIPS signs have been added to otherwise empty places in the overworld.
+- A couple of new hidden items were added to various areas in the game.
+- Multiple items can be picked up at once (example: you found 5 potions)
 
 ## Restored Cut Content
 
@@ -123,6 +125,7 @@ Many options have been added to the game's options menu. To be clear, there are 
 - Skipping a level due to gaining a lot of experience won't skip the move you could have learned on the skipped level anymore
 - Learning moves after evolution works correctly now.
 - Eevee will always learn a type-specific move on evolution regardless of the level it is evolved at
+- Cap light screen / reflect stat boosts to 999 to prevent overflows
 - 
 
 ## Tweaks
