@@ -45,7 +45,10 @@ Many options have been added to the game's options menu. To be clear, there are 
 - Save speed increased
 - TELEPORT is usable inside caves and buildings
 - An item that allows you to TELEPORT without the need for a pokemon with the move TELEPORT in your party is now in the game. You can obtain it within Pewter City.
+- Press SELECT in the overworld to use the bicycle if it's in your bag. After seeing "You got on your bicycle" and "You got off your bicycle" text once, getting on and off will be instant.
+- Run by holding the B button. Speed up the bicycle by holding the B button. Your animation speed increases to match your faster movement too.
 - The Bicycle is usable inside gates
+- Stop, then hold B+A at the same time. When you're holding both buttons, you can now turn around without moving in any direction. 
 - Fly is usable in places where you should be able to use it but weren't able to for some reason (Viridian forest, Safari Zone, Celadon Mart roof, Celadon Mansion roof)
 - The Name Rater will always be willing to rename pokemon, regardless of if you received them via trading. Is he going soft?
 - When selecting where to Fly to on the map, there is no longer needless forced delay between each selection.
@@ -53,14 +56,13 @@ Many options have been added to the game's options menu. To be clear, there are 
 - HMs are deletable. Try not to delete them in a place where it will prevent you from leaving.
 - When teaching a pokemon a move and selecting a move to forget, you must press START to select the move to forget instead of A. Now you won't accidentally select the wrong one disastrously!
 - Spin tiles in rocket hideout and viridian gym move you much faster
-- Run by holding the B button. Speed up the bicycle by holding the B button. Your animation speed increases to match your faster movement too.
-- Stop, then hold B+A at the same time. When you're holding both buttons, you can now turn around without moving in any direction. 
 - "Use another repel" menu implemented.
 - When doing the Cinnabar Gym quiz, it won't keep explaining the quiz every time you start it up.
 - Coin Case doesn't take up space in your bag. Go to the game corner if you need to check how many coins you have.
 - Secret Key, Card Key, and Lift Key are consumed when you no-longer need them. Less item clutter.
 - Town Map does not take up space in your bag. To check it, go to your pokedex and press SELECT. (You still must obtain it in Pallet Town to use this feature.)
 - Fishing animation is a bit shorter in general
+- Fishing has a straight 75% rate of landing a pokemon
 - You can buy drinks in bulk from Celadon Diner after giving a drink to one of the Saffron guards.
 - 500 coins can be bought for 8000 pokedollars repeatedly at the game corner.
 - Slot machines won't cheat you out of lining up symbols based on RNG anymore.
@@ -71,20 +73,104 @@ Many options have been added to the game's options menu. To be clear, there are 
 - Fuchsia City's layout has been modified very slightly to be less annoying to navigate.
 
 ## New Gameplay Features
+- Mew is under the truck!!! Use strength on it from the right side. If the SS Anne has left, it returns after obtaining the Soul Badge.
+- Missingno and the item duplication glitch are still accessible. Missingno can be caught and won't corrupt your game data in any way. It's very powerful, so be careful when trying to catch it! Missingno also randomly displays different sprites like its original "glitchy" sprite, the Ghost sprite or Fossil Kabutops/Aerodactyl each time its sprite is loaded.
 - Ghost Marowak can be caught, and if you have Alt Pkmn Palettes turned on, it has a special ghostly coloration. It wants revenge on Team Rocket!
 
 - The Safari Zone now has 3 different "Modes" of Safari Game. They are:
   - `CLASSIC`: the original game's "Safari Game".  Use bait and rocks instead of your well-trained pokemon to try to catch wild pokemon with Safari Balls. The only change to this mode is that you have 700 steps instead of 500.
   - `FREE ROAM`: Bring your pokemon into the Safari Zone and catch and battle pokemon like you would normally. Also, no limit on steps! On top of that, now there are trainers ready to battle all over the Safari Zone? This is great! The trainers will reset when you re-enter, allowing you to repeatedly battle them.
-  - `RANGER HUNT`: now we're talking. Find the 5 rangers and defeat them before you run out of steps! You get a special prize if you do! Bring in your pokemon just like FREE ROAM mode, but you only have 700 steps to find and beat all 5 rangers! All the trainers from Free Roam mode are present too. This is the ultimate Safari Zone challenge! The reward is a new type of Poke Ball, the HYPER BALL, which never fails to catch pokemon if they are <1/4 health. Even legendary pokemon!
+  - `RANGER HUNT`: now we're talking. Find the 5 rangers and defeat them before you run out of steps! You get a special prize if you do! Bring in your pokemon just like FREE ROAM mode, but you only have 700 steps to find and beat all 5 rangers! All the trainers from Free Roam mode are present too. This is the ultimate Safari Zone challenge! The reward is a new type of Poke Ball, the HYPER BALL, which never fails to catch pokemon if they are <1/4 health. Even legendary pokemon! This challenge can be repeated.
 
 - New Items:
-  - `POCKET ABRA`: It's an Abra that fits in your bag. A pocket pokemon! Isn't that redundant?...It allows you to teleport whenever you want, even in buildings or caves, back to the last pokemon center. Keep it on hand at all times for maximum convenience.
+  - `POCKET ABRA`: It's an Abra that fits in your bag. A pocket pokemon! Isn't that redundant?...It allows you to teleport whenever you want, even in buildings or caves, back to the last pokemon center. Keep it on hand at all times for maximum convenience. You can nickname it even!
   - `BOOSTER CHIP`: Replaces `EXP.ALL` - Oak's aide on Route 15 will give you this if you catch at least 70 pokemon. When you install it to your pokeball belt, all your pokemon will gain boosted EXP as if they were traded pokemon! Great for training up pokemon when you're trying to catch them all.
   - `APEX CHIP`: The Gym Guide's creation! It maximizes DVs when installed. The Gym Guide will give you 2 of them after you beat each gym leader. Inside a pokemon's pokeball, this chip will simulate their natural habitat, helping them be happy and achieve their maximum potential! 
+  - `HYPER BALL`: As discussed above, a new type of Poke Ball that never fails to catch pokemon if they're below 1/4 health. For many non-legendary pokemon, it will never fail even at full health! You might want to save these for legendaries because they're a bit hard to come by.
+
+- The "TM Pirate" is a kid who appears in most PokeMarts who will sell you TMs! It's just a fun way of adding more purchasable TMs to the game. 
 
 - The Mt Moon fossil Super Nerd will offer to take your fossil to Cinnabar Lab right away! You have to meet up with him at his house in SAFFRON CITY to get your fossil pokemon if you give it to him. Then you can give him OLD AMBER too. This allows you to receive fossil pokemon early.
 - You can obtain the fossil that you didn't choose in Mt.Moon hidden inside Seafoam Islands.
+
 - In Fuchsia City there is an NPC who will permanently remove CUT trees for a fee. Remove all the trees in Fuchsia City, the one blocking Route 9, and more!
+
 - If you have Alt Palette Pkmn option turned on, at the Cinnabar Lab there is an NPC who will allow you to swap the color palette of your pokemon for its alternate palette. You have a limited number of color change usages!
+
+- The FISHING GURU now lives in cerulean city and you can get the OLD ROD a bit earlier. Same with the GOOD ROD, which is now in the old FISHING GURU's house in vermilion city. As for the last two gurus on Route 12 and in Fuchsia city, whoever you meet first will give you a SUPER ROD. The other will be a bit distraught at the unexpected turn of events.
+
+- A couple of items or TRAINER TIPS signs have been added to otherwise empty places in the overworld.
+
+## Restored Cut Content
+
+- There is unused text in the game for when you lose to your rival - these were re-implemented and now work as expected!
+- There was an unused trainer class for Prof Oak. It's been added back into the game. Find him in Cerulean Cave after beating the Elite Four. He can be battled repeatedly. Just leave the area and come back.
+- Some trainer classes based on Beta or unused sprites were reintroduced to the game: `ROOKIE`, `RANGER`, `FIREFIGHTER`, `COOL KID`. You'll find them in previously empty places or routes!
+- Some unused trainers from existing classes were added into the game in various originally empty places
+
+## Visual changes
+- Burn status has a burn animation instead of reusing the poison animation
+
+## Bugfixes
+- High Jump Kick / Jump Kick crash damage on missing does more damage instead of 1 damage always now. (1/4 the damage of what it would have done to the opponent)
+- Focus Energy actually works as intended now (multiplies critical hit rate by 4 instead of dividing it by 4)
+- Badge boosts aren't repeatedly applied to every stat when you use or are afflicted by a stat modifier move.
+- Speed decrease / Attack decrease caused by paralysis and burn statuses aren't repeatedly applied on being hit by or using a stat modifier move.
+- After healing Paralysis/Burn with an item, speed or attack stats will be correctly reset to their original values
+- Nidorino's cry plays correctly in Oak's introduction instead of nidorina's
+- Healing moves like Recover won't fail incorrectly when restoring exactly 255 HP.
+- The evolution stone item bypass glitch was removed - you must use evolution stones to evolve stone evolution pokemon.
+- Skipping a level due to gaining a lot of experience won't skip the move you could have learned on the skipped level anymore
+- Learning moves after evolution works correctly now.
+- Eevee will always learn a type-specific move on evolution regardless of the level it is evolved at
 - 
+
+## Tweaks
+- Spaceworld backsprites were tweaked to improve them a bit
+- Many move animations were enhanced
+- A couple of front sprites were tweaked very slightly to improve their appearance
+- Potion heals 50HP
+- Super Potion heals 100HP
+- Some pokemon had their default color palette adjusted (example: Voltorb and Electrode are red instead of the original yellow. Don't ask me why they were yellow in the first place)
+- HMs don't prevent a pokemon from being put into the daycare
+- Saffron City is after Celadon City in the "Fly order" instead of after indigo plateau for some reason
+- The vermilion gym puzzle won't reset if you choose the wrong second switch. RNG time waster be gone!
+- The "teleport" flag is set when you fly to a city or enter a pokemon center.
+- Moved the cut tree on route 9 to the right slightly to allow tree clearing code to run instantly on transitioning to that route instead of while you are looking at the cut tree.
+- Moved the ridge below the daycare down a block to prevent accidentally jumping off of it
+- OLD ROD can catch goldeen as well as magikarp now
+- GOOD ROD can catch a bunch of water pokemon, what you get depends on if you fish in the sea or in a pond/lake.
+- SUPER ROD can catch higher level pokemon - or if you have the feature enabled, is the only way to catch specific alternate palette water pokemon in specific places! Time to hunt for a blue goldeen!
+
+## Move changes
+- 7 moves that people almost never use were renamed and changed to have much more useful effects:
+  - CONSTRICT is now STATIC SNAG - 50 base power, electric type, 30% chance of paralysis, 100% accuracy
+  - TAKE DOWN is now HEAT RUSH - 75 base power, fire type, 30% chance of burn, 100% accuracy
+  - KINESIS is now FIREWALL - status move, fire type, causes burn, 80% accuracy 
+  - COUNTER is now DRAIN PUNCH - 75 base power, fighting type, drains HP, 100% accuracy
+  - RAZOR WIND is now ROOST - heals 1/2 max HP
+  - SLAM is now FILTHY SLAM - 80 base power, poison type, no additional effect, 100% accuracy
+  - FURY SWIPES is now DUST CLAW - 40 base power, ground type, no additional effect, 100% accuracy (early-game ground type move)
+- Some moves that were fairly useless were made less useless
+  - WHIRLWIND - 110 base power, flying type, 30% chance of confusion, 85% accuracy
+  - WITHDRAW - heals 1/2 max HP
+  - GROWTH - heals 1/2 max HP
+  - DEFENSE CURL - acts like LIGHT SCREEN, increases special defense
+  - MEDITATE - raises all of attack, speed, and special by 1 stage
+  - SUBMISSION - 60 base power, fighting type, raises attack by 1 stage, 100% accuracy
+  - CUT - 70 base power, bug type, no additional effect, 100% accuracy
+  - FLASH - 60 base power, electric type, priority move, 10% chance of flinching, 100% accuracy
+  - CONVERSION - acts like AMNESIA, raises SPECIAL two stages
+  - COMET PUNCH - 60 base power, fighting type, priority move, 100% accuracy
+  - KARATE CHOP, MEGA PUNCH, MEGA KICK, STRENGTH, and DIZZY PUNCH are all Fighting type moves now
+  - VICEGRIP - 75 base power, bug type, 30% chance of paralysis, 100% accuracy
+  - WING ATTACK - 50 base power, flying type, priority move, 100% accuracy
+  - BIDE - Raises attack and defense both by 1 stage
+  - SELFDESTRUCT - 140 base power, fire type, deals heavy recoil, 100% accuracy
+  - EXPLOSION - 140 base power, rock type, deals heavy recoil, 100% accuracy
+  - SKULL BASH - 100 base power, rock type, if it misses it deals crash damage like jump kick/hi jump kick, 90% accuracy
+  - SPIKE CANNON - 42 base power, rock type, hits 2 or 3 times (50% chance of each outcome), 100% accuracy
+  - POISON GAS - 60 base power, poison type, high critical hit ratio, 10% chance of poison, 100% accuracy
+  - LEECH LIFE - 70 base power, bug type, drains HP, 100% accuracy
+  - ROCK SLIDE and ROCK THROW both have 100% accuracy
+- There are many more tweaks to moves. See the wiki for a link to the complete move list. 
