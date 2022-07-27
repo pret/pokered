@@ -4,6 +4,10 @@ A purist's enhancement of Pokémon Red, Green, and Blue based on the pokered dis
 
 To download the latest version of this romhack, [**go here**](https://github.com/Vortyne/pureRGB/releases/latest)
 
+To see the full list of features, bugfixes, and everything else, see [**FEATURES.md**](FEATURES.md)
+
+If you want info on the game while playing it, see [**The Wiki**](https://github.com/Vortyne/pureRGB/wiki)
+
 This is a purist's enhancement of Pokemon Red/Blue/Green. The goal is to enhance the original games for excellent replayability without bringing in mechanics, moves, sprites, visuals, type matchups, or pokemon that were introduced in later games. 
 
 - It makes the bulk of the 151 original pokemon all more obtainable and usable in the early game, with better movesets and more balanced stats. 
@@ -23,11 +27,6 @@ This is a purist's enhancement of Pokemon Red/Blue/Green. The goal is to enhance
   - Tweak the type matchups to be exactly like gen 1, gen 2, or a cross between them if you like directly in-game.
   - Optional in-battle experience bar
   - Option to give trainers some Stat EXP to their pokemon based on level. Makes the game a little bit harder.
-  
-
-To see the full list of features, bugfixes, and everything else, see [**FEATURES.md**](FEATURES.md)
-
-If you want info on the game while playing it, see [**The Wiki**](https://github.com/Vortyne/pureRGB/wiki)
 
 ## Contact the creator on
 
