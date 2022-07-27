@@ -10,6 +10,8 @@ This is a purist's enhancement of Pokemon Red/Blue/Green. The goal is to enhance
 
 To see the full list of features, bugfixes, and everything else, see [**FEATURES.md**](FEATURES.md)
 
+If you want info on the game while playing it, see [**The Wiki**](https://github.com/Vortyne/pureRGB/wiki)
+
 ## Contact the creator on
 
 - **Discord:** [pret][discord]
