@@ -35,7 +35,7 @@ This is a purist's enhancement of Pokemon Red/Blue/Green. The goal is to enhance
   - An NPC who can revive fossils for you in SAFFRON CITY so you can get fossil pokemon a bit earlier.
   - An NPC who will give you LAPRAS a bit earlier in the game.
 
-## Contact the creator on
+## Contact the creator
 
 - **Discord:** [pret][discord]
 
