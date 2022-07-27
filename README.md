@@ -39,7 +39,7 @@ This is a purist's enhancement of Pokemon Red/Blue/Green. The goal is to enhance
 
 [discord]: https://discord.gg/d5dubZ3
 
-If you'd like to make your own romhack based on this one, see [**INSTALL.md**](INSTALL.md).
+If you'd like to make your own romhack based on this one, fork the repository and see [**INSTALL.md**](INSTALL.md).
 
 ## Credits
 
