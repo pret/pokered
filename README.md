@@ -11,3 +11,5 @@ This is a purist's enhancement of Pokemon Red/Blue/Green. The goal is to enhance
 ## Contact the creator on
 
 - **Discord:** [pret][discord]
+
+[discord]: https://discord.gg/d5dubZ3
