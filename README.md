@@ -13,7 +13,7 @@ This is a purist's enhancement of Pokemon Red/Blue/Green. The goal is to enhance
 - It makes the bulk of the 151 original pokemon all more obtainable and usable in the early game, with better movesets and more balanced stats. 
 - Many moves in the game were rebalanced or modified. When I say "rebalanced", I mean "the useless things were made more useful!" 
 - There are more bug, poison, and ghost type moves available. The focus is on getting a useful set of moves available for every single pokemon in the game. 
-- Front sprites were updated to be just about the best set of sprites from Red/Green/Blue/Yellow/Spaceworld 1997 overall. Yellow sprites were used very sparingly.
+- Front sprites were updated to be just about the best set of sprites from Red/Green/Blue/Spaceworld 1997 overall.
 - All 151 pokemon are obtainable in all versions of this hack. 
 - Many small quality-of-life tweaks were made. 
 - Game bugs that can be used to your own advantage (like the leech seed/toxic bug, the hyper beam no recharge on faint bug, etc.) are unchanged, because they are quirks of the battle engine that you can use as your own tool. 
