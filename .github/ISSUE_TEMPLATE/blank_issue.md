@@ -1,4 +1,4 @@
 ---
-name: Update to pokered
-about: Suggest a possible change to pokered itself.
+name: Bug / Issue Report
+about: Report an issue or bug with PureRGB.
 ---
