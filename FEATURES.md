@@ -268,3 +268,5 @@ The version-specific visuals of japanese pokemon green were added into PureGreen
 - I will not make the game use Gen 2 colors/tilesets/music/sprites/etc.
 - I will not implement the physical/special split. I balanced the game around there not being one.
 - I will not split the SPECIAL stat into SPECIAL DEFENSE and SPECIAL ATTACK. I balanced the game around the combined special stat.
+- I will not add dark, steel, or fairy type. 
+- I will not mess with the type matchup chart outside of the tweakable options already provided.
