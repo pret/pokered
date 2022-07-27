@@ -31,6 +31,8 @@ Many options have been added to the game's options menu. To be clear, there are 
 - The fifth page contains 6 additional pokemon whose front sprites can be customized.
 
 ## Quality of Life Enhancements
+- Stone evos have full movesets
+- Trade evos evolve at level 37
 - The overworld runs at a smoother framerate.
 - Bag size increased to 30 up from 20
 - You can deposit items to your PC directly from the items menu by pressing START on the item you wish to deposit. Technology is amazing! Now items can be stored wirelessly!
@@ -71,6 +73,8 @@ Many options have been added to the game's options menu. To be clear, there are 
 - Strength can be used on boulders by pressing A on them while you have a pokemon with strength in your party.
 - Seafoam Islands and Victory Road will remember that you used Strength between going up and down floors so you don't have to re-enable it.
 - Fuchsia City's layout has been modified very slightly to be less annoying to navigate.
+- Route 23 has some grass just after the north exit of Victory Road to allow reaching those encounters more easily late game.
+- Some pokemon evolve at earlier levels
 
 ## New Gameplay Features
 - Mew is under the truck!!! Use strength on it from the right side. If the SS Anne has left, it returns after obtaining the Soul Badge.
@@ -84,7 +88,7 @@ Many options have been added to the game's options menu. To be clear, there are 
 
 - New Items:
   - `POCKET ABRA`: It's an Abra that fits in your bag. A pocket pokemon! Isn't that redundant?...It allows you to teleport whenever you want, even in buildings or caves, back to the last pokemon center. Keep it on hand at all times for maximum convenience. You can nickname it even!
-  - `BOOSTER CHIP`: Replaces `EXP.ALL` - Oak's aide on Route 15 will give you this if you catch at least 70 pokemon. When you install it to your pokeball belt, all your pokemon will gain boosted EXP as if they were traded pokemon! Great for training up pokemon when you're trying to catch them all.
+  - `BOOSTER CHIP`: Replaces `EXP.ALL` - Oak's aide on Route 15 will give you this if you catch at least 80 pokemon. When you install it to your pokeball belt, all your pokemon will gain boosted EXP as if they were traded pokemon! Great for training up pokemon when you're trying to catch them all.
   - `APEX CHIP`: The Gym Guide's creation! It maximizes DVs when installed. The Gym Guide will give you 2 of them after you beat each gym leader. Inside a pokemon's pokeball, this chip will simulate their natural habitat, helping them be happy and achieve their maximum potential! 
   - `HYPER BALL`: As discussed above, a new type of Poke Ball that never fails to catch pokemon if they're below 1/4 health. For many non-legendary pokemon, it will never fail even at full health! You might want to save these for legendaries because they're a bit hard to come by.
 
@@ -93,15 +97,25 @@ Many options have been added to the game's options menu. To be clear, there are 
 - The Mt Moon fossil Super Nerd will offer to take your fossil to Cinnabar Lab right away! You have to meet up with him at his house in SAFFRON CITY to get your fossil pokemon if you give it to him. Then you can give him OLD AMBER too. This allows you to receive fossil pokemon early.
 - You can obtain the fossil that you didn't choose in Mt.Moon hidden inside Seafoam Islands.
 
+- In Celadon City there is an NPC in the Hotel who will give you LAPRAS early after clearing Rocket Hideout. It's the same guy who gives you it in Silph Co on a business trip. He ends up stuck in Silph Co later on as expected! If you don't get LAPRAS early you can still get it the original way.
+
 - In Fuchsia City there is an NPC who will permanently remove CUT trees for a fee. Remove all the trees in Fuchsia City, the one blocking Route 9, and more!
 
 - If you have Alt Palette Pkmn option turned on, at the Cinnabar Lab there is an NPC who will allow you to swap the color palette of your pokemon for its alternate palette. You have a limited number of color change usages!
 
 - The FISHING GURU now lives in cerulean city and you can get the OLD ROD a bit earlier. Same with the GOOD ROD, which is now in the old FISHING GURU's house in vermilion city. As for the last two gurus on Route 12 and in Fuchsia city, whoever you meet first will give you a SUPER ROD. The other will be a bit distraught at the unexpected turn of events.
 
+- A secret stairway opens up in a building somewhere after you become champ. The last in-game trade and some interesting stuff to see is in there. 
+
 - A couple of items or TRAINER TIPS signs have been added to otherwise empty places in the overworld.
 - A couple of new hidden items were added to various areas in the game.
 - Multiple items can be picked up at once (example: you found 5 potions)
+
+- Donate some money to the rock tunnel pokemon center to hear the secret of the pokemon centers: holding B before talking to the nurse will give you very express service!
+- Someone will sell every single TM after becoming champ.
+
+- Rare candies can be purchased after becoming champ, but you must do a bit of sleuthing to find out how.
+- The two extra viridian forest trainers from Yellow were added in to make it a bit less empty
 
 ## Restored Cut Content
 
@@ -111,7 +125,18 @@ Many options have been added to the game's options menu. To be clear, there are 
 - Some unused trainers from existing classes were added into the game in various originally empty places
 
 ## Visual changes
-- Burn status has a burn animation instead of reusing the poison animation
+- Burn status has a burn animation instead of reusing the poison animation.
+- Pokeballs have varying animations slightly based on the type you use. Master Ball is especially cool!
+- If playing on GBC/GBA and have selected `SGB` or `GBC` in the options menu for the `COLORS` option, move animations will have fitting colors (ember is red, surf is blue, etc.).
+- If playing on GBC/GBA and have selected `SGB` or `GBC` in the options menu for the `COLORS` option, each type of pokeball will have a different coloration.
+- Many move animations were enhanced.
+- Using SGB colors, pewter's palette is slightly greyer than the original game.
+- Using either SGB or GBC colors, seafoam island is bluish purple instead of the same color as every other cave in the game.
+- Using SGB colors, lorelei's room is a similar color to seafoam islands instead of light green.
+- Using GBC color mode, the "Grey pokemon" palette was made less brown.
+- Spaceworld backsprites were tweaked to improve them a bit
+- A couple of front sprites were tweaked very slightly to improve their appearance
+- Some pokemon had their default color palette adjusted (example: Voltorb and Electrode are red instead of the original yellow. Don't ask me why they were yellow in the first place)
 
 ## Bugfixes
 - High Jump Kick / Jump Kick crash damage on missing does more damage instead of 1 damage always now. (1/4 the damage of what it would have done to the opponent)
@@ -126,15 +151,15 @@ Many options have been added to the game's options menu. To be clear, there are 
 - Learning moves after evolution works correctly now.
 - Eevee will always learn a type-specific move on evolution regardless of the level it is evolved at
 - Cap light screen / reflect stat boosts to 999 to prevent overflows
+- LT Surge says the Thunderbadge boosts speed, but in the code it actually boosted defence. Now it boosts speed as text indicated.
+- Koga says the Soulbadge boosts defense, but in the code it actually boosted speed. Now it boosts defense as the text indicated.
+- When learning a new move in battle, the "Poof!" sound effect didn't work correctly and would play a random sound instead. Now it works.
+- While transformed into another pokemon via TRANSFORM, you cannot swap your move positions - this caused glitches that end with the game crashing
 - 
 
 ## Tweaks
-- Spaceworld backsprites were tweaked to improve them a bit
-- Many move animations were enhanced
-- A couple of front sprites were tweaked very slightly to improve their appearance
 - Potion heals 50HP
 - Super Potion heals 100HP
-- Some pokemon had their default color palette adjusted (example: Voltorb and Electrode are red instead of the original yellow. Don't ask me why they were yellow in the first place)
 - HMs don't prevent a pokemon from being put into the daycare
 - Saffron City is after Celadon City in the "Fly order" instead of after indigo plateau for some reason
 - The vermilion gym puzzle won't reset if you choose the wrong second switch. RNG time waster be gone!
@@ -144,8 +169,16 @@ Many options have been added to the game's options menu. To be clear, there are 
 - OLD ROD can catch goldeen as well as magikarp now
 - GOOD ROD can catch a bunch of water pokemon, what you get depends on if you fish in the sea or in a pond/lake.
 - SUPER ROD can catch higher level pokemon - or if you have the feature enabled, is the only way to catch specific alternate palette water pokemon in specific places! Time to hunt for a blue goldeen!
+- Vitamins like HP Up are about 3 times as effective
+- PP Up maxes out PP for a move in one usage
+- Snorlax, Slowpoke, and Slowbro move slowly in the party menu regardless of their HP level
+- Lance will now turn to face you when you are about to fight him, and you will turn to face him.
+- Coastal water tiles will now load water encounters EXCEPT on route 20 to facilitate the original Missingno Encounter method.
+- The "star shaped grass" tile in viridian forest and the safari zone now loads encounters correctly.
 
 ## Move changes
+- Disable disables the previously selected move of the opponent. If they haven't selected a move yet, it chooses a random move. It has 85% accuracy. It lasts 2-7 turns.
+- Trapping moves only last 2 or 3 turns but deal a bit more damage to compensate. 2/3 chance of 2 turns, 1/3 chance of 3 turns.
 - 7 moves that people almost never use were renamed and changed to have much more useful effects:
   - CONSTRICT is now STATIC SNAG - 50 base power, electric type, 30% chance of paralysis, 100% accuracy
   - TAKE DOWN is now HEAT RUSH - 75 base power, fire type, 30% chance of burn, 100% accuracy
@@ -177,3 +210,44 @@ Many options have been added to the game's options menu. To be clear, there are 
   - LEECH LIFE - 70 base power, bug type, drains HP, 100% accuracy
   - ROCK SLIDE and ROCK THROW both have 100% accuracy
 - There are many more tweaks to moves. See the wiki for a link to the complete move list. 
+
+## Pokemon type changes
+These changes were all made to make the pokemon more fun to use / more unique from similar pokemon / less bad
+- Butterfree is Bug/Psychic
+- Doduo/Dodrio are Flying/Ground
+- Voltorb/Electrode are Electric/Fire
+- Fearow is Flying/Fighting
+- Kingler is Water/Ground
+- Pinsir is Bug/Fighting
+- Victreebel is Grass/Dragon
+- Sandshrew and Sandslash are Ground/Normal (stronger slash damage!)
+- Ponyta and Rapidash are now Fire/Normal 
+- Goldeen and Seaking are now Water/Normal
+- Mr Mime is Psychic/Ghost
+- Electabuzz is Electric/Fighting
+- Marowak is Ground/Ghost
+- 
+
+## Trainer AI changes
+- AI won't spam agility or amnesia repeatedly just because your pokemon is weak to psychic moves. The subroutine for selecting super effective moves ignores moves that do no damage now.
+- Similarly, AI will avoid using OHKO moves just because they seem super effective if they would never work. But it will use them if they have a chance of working on you.
+- AI using items or switching pokemon will always go at the start of the turn like it does for the player instead of when their turn starts
+- Most Trainers will avoid using Dream Eater if you're not asleep
+- Most Trainers will avoid using Leech Seed, Disable, Light Screen, Reflect, Focus Energy, Mist, etc effects if they already used it and it would not do anything
+- Most Trainers will avoid using confusion-inflicting moves if you're already confused
+- Most Trainers will avoid using healing moves like recover at full health
+- Smarter trainers will favor using priority moves if you're faster than them
+- Smarter trainers will favor using draining moves like Mega Drain when they're at low health
+- Expert trainers will favor using healing moves like recover when they're at low health
+- Expert trainers will heavily favor using dream eater if you're asleep
+- Expert trainers will try to apply statuses if you don't have one
+
+## Audio Changes
+- The ghosts in pokemon tower now have a sound effect on encountering
+- Booting up a TM or HM has a little sound effect
+
+## Pokemon Green visuals
+The version-specific visuals of japanese pokemon green were added into PureGreen.
+- Slot machines
+- SGB Borders
+- Title Screen
