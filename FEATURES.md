@@ -1,4 +1,6 @@
-under construction
+# Full Features / Bugfixes List
+
+The only version differences between PureRed / PureBlue / PureGreen are visual. Play whatever color you like the most.
 
 ## New Options in the Options Menu
 Many options have been added to the game's options menu. To be clear, there are **5 pages of options** now. **Use the Next button on the options page** to cycle through the pages when in-game.
@@ -31,9 +33,11 @@ Many options have been added to the game's options menu. To be clear, there are 
 - The fifth page contains 6 additional pokemon whose front sprites can be customized.
 
 ## Quality of Life Enhancements
-- Stone evos have full movesets
+- Stone evos and trade evos have full movesets
 - Trade evos evolve at level 37
 - The overworld runs at a smoother framerate.
+- TMs are all useful attacks
+- Level up movesets vastly improved for all pokemon
 - Bag size increased to 30 up from 20
 - You can deposit items to your PC directly from the items menu by pressing START on the item you wish to deposit. Technology is amazing! Now items can be stored wirelessly!
 - Open the start menu and scroll down to SAVE, then press SELECT, and you can change PC boxes whenever, wherever. Easy!
@@ -158,6 +162,10 @@ Many options have been added to the game's options menu. To be clear, there are 
 - 
 
 ## Tweaks
+- Trainers in general have a bit less type-specific parties and more varied pokemon. 
+- Gym leaders teams are still type specific but might have 1 or two new/different pokemon.
+- Your rival uses various teams throughout the game but keeps his starter pokemon.
+- 1 of each elemental stone is hidden before rock tunnel
 - Potion heals 50HP
 - Super Potion heals 100HP
 - HMs don't prevent a pokemon from being put into the daycare
@@ -255,3 +263,8 @@ The version-specific visuals of japanese pokemon green were added into PureGreen
 - Slot machines
 - SGB Borders
 - Title Screen
+
+## Things that Will Remain Unchanged
+- I will not make the game use Gen 2 colors/tilesets/music/sprites/etc.
+- I will not implement the physical/special split. I balanced the game around there not being one.
+- I will not split the SPECIAL stat into SPECIAL DEFENSE and SPECIAL ATTACK. I balanced the game around the combined special stat.
