@@ -17,6 +17,7 @@ This is a purist's enhancement of Pokemon Red/Blue/Green. The goal is to enhance
 - All 151 pokemon are obtainable in all versions of this hack. 
 - Many small quality-of-life tweaks were made. 
 - Game bugs that can be used to your own advantage (like the leech seed/toxic bug, the hyper beam no recharge on faint bug, etc.) are unchanged, because they are quirks of the battle engine that you can use as your own tool. 
+- Mew is under the truck as expected!
 - Many options to enhance the game visually and mechanically were added. **(You must turn them on via the options in-game!)** Including:
   - Switchable color palettes (Choose between original colors, Super Gameboy Colors, or Pokemon Yellow Colors in-game whenever you like! Works on GBC and Super Gameboy. Yes, this romhack has full GBC support!)
   - Optional Spaceworld 1997 Back Sprites
