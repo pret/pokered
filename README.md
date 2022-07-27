@@ -28,7 +28,10 @@ This is a purist's enhancement of Pokemon Red/Blue/Green. The goal is to enhance
   - Tweak the type matchups to be exactly like gen 1, gen 2, or a cross between them if you like directly in-game.
   - Optional in-battle experience bar
   - Option to give trainers some Stat EXP to their pokemon based on level. Makes the game a little bit harder.
-- There are a couple new things added into the game based on beta or cut content (like the FIREFIGHTER trainer class), and in a few cases, entirely new things to facilitate quality of life changes in a fun way. Example: an NPC who can permanently remove CUT trees.
+- There are a couple entirely new things added into the game to facilitate quality of life fixes. Including:
+  - An NPC who can permanently remove CUT trees.
+  - An NPC who can revive fossils for you in SAFFRON CITY so you can get fossil pokemon a bit earlier.
+  - An NPC who will give you LAPRAS a bit earlier in the game.
 
 ## Contact the creator on
 
