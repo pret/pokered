@@ -6,7 +6,7 @@ To download the latest version of this romhack, [**go here**](https://github.com
 
 To see the full list of features, bugfixes, and everything else, see [**FEATURES.md**](FEATURES.md)
 
-If you want info on the game while playing it, see [**The Wiki**](https://github.com/Vortyne/pureRGB/wiki)
+If you want info on the game while playing it (learnsets, for example), see [**The Wiki**](https://github.com/Vortyne/pureRGB/wiki)
 
 If you experience a bug or have an issue while playing, report it [**Here**](https://github.com/Vortyne/pureRGB/issues/new?assignees=&labels=&template=blank_issue.md)
 
