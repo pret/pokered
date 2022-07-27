@@ -66,6 +66,25 @@ Many options have been added to the game's options menu. To be clear, there are 
 - Slot machines won't cheat you out of lining up symbols based on RNG anymore.
 - Slot machine payout amounts increased.
 - Slot machine payout speed increased.
-
+- Strength can be used on boulders by pressing A on them while you have a pokemon with strength in your party.
+- Seafoam Islands and Victory Road will remember that you used Strength between going up and down floors so you don't have to re-enable it.
+- Fuchsia City's layout has been modified very slightly to be less annoying to navigate.
 
 ## New Gameplay Features
+- Ghost Marowak can be caught, and if you have Alt Pkmn Palettes turned on, it has a special ghostly coloration. It wants revenge on Team Rocket!
+
+- The Safari Zone now has 3 different "Modes" of Safari Game. They are:
+  - `CLASSIC`: the original game's "Safari Game".  Use bait and rocks instead of your well-trained pokemon to try to catch wild pokemon with Safari Balls. The only change to this mode is that you have 700 steps instead of 500.
+  - `FREE ROAM`: Bring your pokemon into the Safari Zone and catch and battle pokemon like you would normally. Also, no limit on steps! On top of that, now there are trainers ready to battle all over the Safari Zone? This is great! The trainers will reset when you re-enter, allowing you to repeatedly battle them.
+  - `RANGER HUNT`: now we're talking. Find the 5 rangers and defeat them before you run out of steps! You get a special prize if you do! Bring in your pokemon just like FREE ROAM mode, but you only have 700 steps to find and beat all 5 rangers! All the trainers from Free Roam mode are present too. This is the ultimate Safari Zone challenge! The reward is a new type of Poke Ball, the HYPER BALL, which never fails to catch pokemon if they are <1/4 health. Even legendary pokemon!
+
+- New Items:
+  - `POCKET ABRA`: It's an Abra that fits in your bag. A pocket pokemon! Isn't that redundant?...It allows you to teleport whenever you want, even in buildings or caves, back to the last pokemon center. Keep it on hand at all times for maximum convenience.
+  - `BOOSTER CHIP`: Replaces `EXP.ALL` - Oak's aide on Route 15 will give you this if you catch at least 70 pokemon. When you install it to your pokeball belt, all your pokemon will gain boosted EXP as if they were traded pokemon! Great for training up pokemon when you're trying to catch them all.
+  - `APEX CHIP`: The Gym Guide's creation! It maximizes DVs when installed. The Gym Guide will give you 2 of them after you beat each gym leader. Inside a pokemon's pokeball, this chip will simulate their natural habitat, helping them be happy and achieve their maximum potential! 
+
+- The Mt Moon fossil Super Nerd will offer to take your fossil to Cinnabar Lab right away! You have to meet up with him at his house in SAFFRON CITY to get your fossil pokemon if you give it to him. Then you can give him OLD AMBER too. This allows you to receive fossil pokemon early.
+- You can obtain the fossil that you didn't choose in Mt.Moon hidden inside Seafoam Islands.
+- In Fuchsia City there is an NPC who will permanently remove CUT trees for a fee. Remove all the trees in Fuchsia City, the one blocking Route 9, and more!
+- If you have Alt Palette Pkmn option turned on, at the Cinnabar Lab there is an NPC who will allow you to swap the color palette of your pokemon for its alternate palette. You have a limited number of color change usages!
+- 
