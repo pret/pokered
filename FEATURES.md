@@ -213,6 +213,11 @@ Many options have been added to the game's options menu. To be clear, there are 
 
 ## Pokemon type changes
 These changes were all made to make the pokemon more fun to use / more unique from similar pokemon / less bad
+- Ninetales is Fire/Ghost
+- Golduck is Water/Psychic
+- Seadra is Water/Dragon
+- Magmar is Fire/Psychic
+- Kabuto/Kabutops are Rock/Bug
 - Butterfree is Bug/Psychic
 - Doduo/Dodrio are Flying/Ground
 - Voltorb/Electrode are Electric/Fire
@@ -226,7 +231,6 @@ These changes were all made to make the pokemon more fun to use / more unique fr
 - Mr Mime is Psychic/Ghost
 - Electabuzz is Electric/Fighting
 - Marowak is Ground/Ghost
-- 
 
 ## Trainer AI changes
 - AI won't spam agility or amnesia repeatedly just because your pokemon is weak to psychic moves. The subroutine for selecting super effective moves ignores moves that do no damage now.
