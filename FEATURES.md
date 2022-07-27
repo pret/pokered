@@ -27,6 +27,8 @@ The second page contains new big features related to general gameplay.
     
     ![Blue Title GBC](/screenshots/blue_title_gbc_colors_on_gbc.png?raw=true) ![Red Title GBC](/screenshots/red_title_gbc_colors_on_gbc.png?raw=true) ![Green Title GBC](/screenshots/green_title_gbc_colors_on_gbc.png?raw=true)
   - The second option, `ALT PKMN COLORS` will enable or disable pokemon from being able to have special color palettes (Default: OFF). When turned on, features related to alternate color pokemon are enabled. In certain regions, you will find differently colored pokemon, like blue nidorinos and purple nidorinas. Think of them as regional color variants. This is just an amusing feature to allow for additional enjoyment in finding unique pokemon by exploring different places.
+
+![Alt Colors Off](/screenshots/alt_pokemon_colors_off.png?raw=true) ![Alt Colors On](/screenshots/alt_pokemon_colors_on.png?raw=true)
   - The third option, `AUDIO PAN` will enable or disable stereo audio panning (Default: OFF). The game uses stereo audio by default, but every channel is played at equal volume throughout the right and left speaker, so it sounds like mono. With this turned on the game music sounds a bit more dynamic by panning certain channels to left or right. This was an option in Pokemon Yellow that was ported to this romhack.
   - The fourth option, `BIKE SONG` will enable or disable the music that plays while on the bicycle (Default: ON). Since the bicycle music plays 100% of the time you are using the bicycle, it gets a bit old after a while. If turned off, the only time you'll hear the music is in Cycling Road. This way you can enjoy all the music in the game, not just the bicycle song.
 
