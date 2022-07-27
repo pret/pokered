@@ -44,6 +44,9 @@ If you'd like to make your own romhack based on this one, see [**INSTALL.md**](I
 ## Credits
 
 Jojobear13 - Tons of code snippets and help via the shinpokered romhack codebase, direct support regarding the pokemon yellow gbc enhancements porting
+
 33Dannye - Larger back sprites code snippets, EXP Bar code snippets, various support regarding game audio and questions about rgbasm/gbz80 answered
+
 Mechanicalpen - enhanced menu icons code
+
 pret discord and pret in general for their original disassembly work on Red / Blue
