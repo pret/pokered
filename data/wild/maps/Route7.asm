@@ -1,6 +1,6 @@
 Route7WildMons:
 	def_grass_wildmons 40 ; encounter rate
-	db 26, FLAREON
+	db 26, GRIMER
 	db 22, KOFFING
 	db 24, GRIMER
 	db 24, KOFFING
