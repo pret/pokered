@@ -158,7 +158,7 @@ Many options have been added to the game's options menu. To be clear, there are 
 - LT Surge says the Thunderbadge boosts speed, but in the code it actually boosted defence. Now it boosts speed as text indicated.
 - Koga says the Soulbadge boosts defense, but in the code it actually boosted speed. Now it boosts defense as the text indicated.
 - When learning a new move in battle, the "Poof!" sound effect didn't work correctly and would play a random sound instead. Now it works.
-- While transformed into another pokemon via TRANSFORM, you cannot swap your move positions - this caused glitches that end with the game crashing
+- While transformed into another pokemon via TRANSFORM, you cannot swap your move positions anymore - allowing this caused glitches that end with the game crashing
 - 
 
 ## Tweaks
