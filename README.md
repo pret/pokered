@@ -30,6 +30,7 @@ This is a purist's enhancement of Pokemon Red/Blue/Green. The goal is to enhance
   - Tweak the type matchups to be exactly like gen 1, gen 2, or a cross between them if you like directly in-game.
   - Optional in-battle experience bar
   - Option to give trainers some Stat EXP to their pokemon based on level. Makes the game a little bit harder.
+- If you're playing on GBC and have the palettes set to SGB or GBC mode, move animations will have colors! Surf will be blue, ember will be red, etc.
 - There are a couple entirely new things added into the game to facilitate quality of life fixes. Including:
   - An NPC who can permanently remove CUT trees.
   - An NPC who can revive fossils for you in SAFFRON CITY so you can get fossil pokemon a bit earlier.
