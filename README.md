@@ -8,6 +8,8 @@ To see the full list of features, bugfixes, and everything else, see [**FEATURES
 
 If you want info on the game while playing it, see [**The Wiki**](https://github.com/Vortyne/pureRGB/wiki)
 
+If you experience a bug or have an issue while playing, report it [**Here**](https://github.com/Vortyne/pureRGB/issues/new?assignees=&labels=&template=blank_issue.md)
+
 This is a purist's enhancement of Pokemon Red/Blue/Green. The goal is to enhance the original games for excellent replayability without bringing in mechanics, moves, sprites, visuals, type matchups, or pokemon that were introduced in later games. 
 
 - It makes the bulk of the 151 original pokemon all more obtainable and usable in the early game, with better movesets and more balanced stats. 
