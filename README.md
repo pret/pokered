@@ -11,7 +11,6 @@ If you want info on the game while playing it (learnsets, for example), see [**T
 If you experience a bug or have an issue while playing, report it [**Here**](https://github.com/Vortyne/pureRGB/issues/new?assignees=&labels=&template=blank_issue.md)
 
 This is a purist's enhancement of Pokemon Red/Blue/Green. The goal is to enhance the original games for excellent replayability without bringing in mechanics, moves, sprites, visuals, type matchups, or pokemon that were introduced in later games. 
-
 - It makes the bulk of the 151 original pokemon all more obtainable and usable in the early game, with better movesets and more balanced stats. 
 - Many moves in the game were rebalanced or modified. When I say "rebalanced", I mean "the useless things were made more useful!" 
 - There are more bug, poison, and ghost type moves available. The focus is on getting a useful set of moves available for every single pokemon in the game. 
@@ -36,6 +35,14 @@ This is a purist's enhancement of Pokemon Red/Blue/Green. The goal is to enhance
   - An NPC who can permanently remove CUT trees.
   - An NPC who can revive fossils for you in SAFFRON CITY so you can get fossil pokemon a bit earlier.
   - An NPC who will give you LAPRAS a bit earlier in the game.
+  
+![blue gb](/screenshots/blue_title_gb_no_color.png?raw=true) ![blue gbc default](/screenshots/blue_title_default_gbc_color.png?raw=true) ![blue sgb colors](/screenshots/blue_title_sgb_colors_on_gbc.png?raw=true) ![blue gbc colors](/screenshots/blue_title_gbc_colors_on_gbc.png?raw=true) 
+
+![red gb](/screenshots/red_title_gb_no_color.png?raw=true) ![red gbc default](/screenshots/red_title_default_gbc_color.png?raw=true)  ![red sgb colors](/screenshots/red_title_sgb_colors_on_gbc.png?raw=true) ![red gbc colors](/screenshots/red_title_gbc_colors_on_gbc.png?raw=true)
+
+![green gb](/screenshots/green_title_gb_no_color.png?raw=true) ![green gbc default](/screenshots/green_title_default_gbc_color.png?raw=true)  ![green sgb colors](/screenshots/green_title_sgb_colors_on_gbc.png?raw=true) ![green gbc colors](/screenshots/green_title_gbc_colors_on_gbc.png?raw=true)
+
+Pictured: GB Monochrome, Original GBC color, SGB Colors, GBC Colors (can choose between the 3 color options on GBC in-game)
 
 ## Contact the creator
 
