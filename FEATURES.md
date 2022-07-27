@@ -5,32 +5,65 @@ The only version differences between PureRed / PureBlue / PureGreen are visual. 
 ## New Options in the Options Menu
 Many options have been added to the game's options menu. To be clear, there are **5 pages of options** now. **Use the Next button on the options page** to cycle through the pages when in-game.
 
-- The first page contains the original game's options. Text speed has an "Instant" option now, and the "Slow" option is now the original game's "Medium". The game defaults to "Fast" speed. Other than that, the way Battle Style and Battle Animations options work haven't changed.
 
-- The second page contains new big features related to general gameplay.
+
+The first page contains the original game's options. Text speed has an "Instant" option now, and the "Slow" option is now the original game's "Medium". The game defaults to "Fast" speed. Other than that, the way Battle Style and Battle Animations options work haven't changed.
+
+![Options First Page](/screenshots/options_page_1.png?raw=true) 
+
+The second page contains new big features related to general gameplay. 
+
+![Options Second Page](/screenshots/options_page_2.png?raw=true)
   - The first option, `COLORS` will cycle between color palette options of the game. These only apply if you're playing on a system that supports color, like GBC, GBA, Super Gameboy, etc. Important to note: On Super Gameboy after changing this setting you will need to save and restart the game to apply the change. On GBC and GBA it's instant.
     - `OG`: Default color setting. The game will use whatever colors it originally would have had on the system you're playing on. In the case of GBC or GBA, this is a hardcoded limited dual-color palette. On SGB, this is the default SGB color palettes.
+    
+    ![Blue Title GBC Default](/screenshots/blue_title_default_gbc_color.png?raw=true) ![Red Title GBC Default](/screenshots/red_title_default_gbc_color.png?raw=true) ![Green Title GBC Default](/screenshots/green_title_default_gbc_color.png?raw=true)
     - `SGB`: Force SGB color palettes. This is no different than the "OG" setting if playing on SGB. On GBC or GBA, this changes the game to use the same color palettes as on SGB, and enables full color mode. Attack animations will have color in this mode when on GBC or GBA, along with some other color enhancements.
+  
+    ![Blue Title SGB](/screenshots/blue_title_sgb_colors_on_gbc.png?raw=true) ![Red Title SGB](/screenshots/red_title_sgb_colors_on_gbc.png?raw=true) ![Green Title SGB](/screenshots/green_title_sgb_colors_on_gbc.png?raw=true)
+    
+    ![Attack Color Fire Blast SGB](/screenshots/attack_color_fire_blast.png?raw=true) ![Attack Color Ice Beam SGB](/screenshots/attack_color_ice_beam.png?raw=true) ![Attack Color Solar Beam SGB](/screenshots/attack_color_solarbeam.png?raw=true) ![Attack Color Surf SGB](/screenshots/attack_color_surf.png?raw=true)
     - `GBC`: Force GBC color palettes. On Super Gameboy, it'll now have Pokemon Yellow's GBC more intense color palettes. Same with GBC and GBA. On GBC and GBA, enables full color mode. Attack animations will have color in this mode when on GBC or GBA, along with some other color enhancements.
+    
+    ![Blue Title GBC](/screenshots/blue_title_gbc_colors_on_gbc.png?raw=true) ![Red Title GBC](/screenshots/red_title_gbc_colors_on_gbc.png?raw=true) ![Green Title GBC](/screenshots/green_title_gbc_colors_on_gbc.png?raw=true)
   - The second option, `ALT PKMN COLORS` will enable or disable pokemon from being able to have special color palettes (Default: OFF). When turned on, features related to alternate color pokemon are enabled. In certain regions, you will find differently colored pokemon, like blue nidorinos and purple nidorinas. Think of them as regional color variants. This is just an amusing feature to allow for additional enjoyment in finding unique pokemon by exploring different places.
   - The third option, `AUDIO PAN` will enable or disable stereo audio panning (Default: OFF). The game uses stereo audio by default, but every channel is played at equal volume throughout the right and left speaker, so it sounds like mono. With this turned on the game music sounds a bit more dynamic by panning certain channels to left or right. This was an option in Pokemon Yellow that was ported to this romhack.
   - The fourth option, `BIKE SONG` will enable or disable the music that plays while on the bicycle (Default: ON). Since the bicycle music plays 100% of the time you are using the bicycle, it gets a bit old after a while. If turned off, the only time you'll hear the music is in Cycling Road. This way you can enjoy all the music in the game, not just the bicycle song.
 
-- The third page contains settings related to battles.
+
+
+The third page contains settings related to battles. 
+
+![Options Third Page](/screenshots/options_page_3.png?raw=true)
+-
   - The first four options, `GHSTxPSY`, `ICExFIRE`, `BUGxPSN`, `PSNxBUG` all control type matchups in the game. The option on the left for these is the original game's type matchup, and the right option is what it was changed to in Gen 2. These options allow you to fine-tune how you want type matchups to behave. The only non-original one is GHSTxPSY, which is set to make Ghost super effective against Psychic by default. In the original game Psychic was immune to Ghost, which the game even tells you isn't supposed to be the case in NPC dialogue.
   - The fifth option, `EXP BAR` enables or disables an experience bar visual in battle. (Default: OFF) This feature allows easier tracking of experience while in battle.
+  
+   ![Exp bar](screenshots/exp_bar.png?raw=true)
   - The sixth option, `NPC EVs` enables or disables giving opponent trainer pokemon Stat EXP based on their pokemon's level. (Default: OFF) In the original game, they receive 0 stat EXP regardless of the level of their pokemon. This means if the player has a lot of stat EXP, they will totally outclass similar-level trainer pokemon. Turning this feature on will give trainer pokemon stat EXP scaled with their level to a reasonable degree. This makes the game a bit harder but can be fun for more experienced players.
 
-- The fourth page contains Sprite-related options.
+The fourth page contains Sprite-related options. 
+ 
+![Options Fourth Page](/screenshots/options_page_4.png?raw=true)
   - The first option, `BACK` changes the back sprites in the game. (Default: OG) There are two possible settings:
     - OG: Use the original blocky back sprites. 
+    
+    ![Original back sprite venusaur](/gfx/pokemon/back/venusaurb.png?raw=true) ![Original back sprite blastoise](/gfx/pokemon/back/blastoiseb.png?raw=true) ![Original back sprite charizard](/gfx/pokemon/back/charizardb.png?raw=true)
     - SW97: Use the spaceworld 1997 back sprites. (some have been touched up a bit) These are higher resolution while still matching the original game's style. Very nice!
+    
+    ![Spaceworld back sprite venusaur](/gfx/pokemon/back_sw/venusaurb.png?raw=true) ![Spaceworld back sprite blastoise](/gfx/pokemon/back_sw/blastoiseb.png?raw=true) ![Spaceworld back sprite charizard](/gfx/pokemon/back_sw/charizardb.png?raw=true)
   - The second option, `ICONS` changes the menu icons and overworld sprites in the game. (Default: OG) If you change this while in the overworld, it won't come into effect visually until you load another map (like by going into or out of a building.) There are two possible settings:
     - OG: Use the original icons in the overworld and on the pokemon menu.
     - OGplus: Use the original icons with some new ones. Some are based on beta sprites, some are completely newly designed sprites with the intention of being similar to the non-specific icon design of the original game, and ONE based on Gen 2's menu sprites (jellyfish sprite). This also will give unique sprites to Brock, Misty, Sabrina, and Blaine. They are all sprites that were designed from scratch to match the game's original trainer sprites, EXCEPT blaine's sprite, which is borrowed from Gen 2.
   - The third to sixth options all control front sprites of specific pokemon that have multiple nice front sprites from the original games to choose from. You can choose which front sprites you like the most for these pokemon.
 
-- The fifth page contains 6 additional pokemon whose front sprites can be customized.
+![Front Sprite 1 Bulbasaur](/gfx/pokemon/front/bulbasaur.png?raw=true) ![Front Sprite 2 Bulbasaur](/gfx/pokemon/front_rg/bulbasaur.png?raw=true) ![Front Sprite 1 Squirtle](/gfx/pokemon/front/squirtle.png?raw=true) ![Front Sprite 2 Squirtle](/gfx/pokemon/front_rg/squirtle.png?raw=true) ![Front Sprite 1 Blastoise](/gfx/pokemon/front/blastoise.png?raw=true) ![Front Sprite 2 Blastoise](/gfx/pokemon/front_rg/blastoise.png?raw=true) ![Front Sprite 1 Pidgeot](/gfx/pokemon/front/pidgeot.png?raw=true) ![Front Sprite 2 Pidgeot](/gfx/pokemon/front_rg/pidgeot.png?raw=true)
+
+The fifth page contains 6 additional pokemon whose front sprites can be customized. 
+
+![Options Fifth Page](/screenshots/options_page_5.png?raw=true)
+
+ ![Front Sprite 1 Nidorino](/gfx/pokemon/front/nidorino.png?raw=true) ![Front Sprite 2 Nidorino](/gfx/pokemon/front_rg/nidorino.png?raw=true)  ![Front Sprite 1 Golbat](/gfx/pokemon/front_y/golbat.png?raw=true) ![Front Sprite 2 Golbat](/gfx/pokemon/front/golbat.png?raw=true) ![Front Sprite 1 Mankey](/gfx/pokemon/front/mankey.png?raw=true) ![Front Sprite 2 Mankey](/gfx/pokemon/front_rg/mankey.png?raw=true) ![Front Sprite 1 Arcanine](/gfx/pokemon/front/arcanine.png?raw=true) ![Front Sprite 2 Arcanine](/gfx/pokemon/front_rg/arcanine.png?raw=true) ![Front Sprite 1 Exeggutor](/gfx/pokemon/front_y/exeggutor.png?raw=true) ![Front Sprite 2 Exeggutor](/gfx/pokemon/front/exeggutor.png?raw=true) ![Front Sprite 1 Mewteo](/gfx/pokemon/front/mewtwo.png?raw=true) ![Front Sprite 2 Mewtwo](/gfx/pokemon/front_rg/mewtwo.png?raw=true) 
 
 ## Quality of Life Enhancements
 - Stone evos and trade evos have full movesets
@@ -40,9 +73,15 @@ Many options have been added to the game's options menu. To be clear, there are 
 - Level up movesets vastly improved for all pokemon
 - Bag size increased to 30 up from 20
 - You can deposit items to your PC directly from the items menu by pressing START on the item you wish to deposit. Technology is amazing! Now items can be stored wirelessly!
+
+![Deposit Item From Start Menu](/screenshots/deposit_item_from_menu.png?raw=true)
 - Open the start menu and scroll down to SAVE, then press SELECT, and you can change PC boxes whenever, wherever. Easy!
+
+![Box change](/screenshots/change_box_from_start_menu.png?raw=true)
 - The game will tell you when a box is full after catching a pokemon.
 - When scrolling over TMs/HMs in menus, a textbox will display the move they teach automatically! Hooray!
+
+![TM Text](/screenshots/tm_text_box_prompt.png?raw=true)
 - On any list that has scrolling (items menu, PC menus, elevator menus, etc.) you can skip to the bottom of the list from the top of the list and vice-versa by pressing LEFT on the D-PAD. Very convenient!
 - You can increase/decrease item buy/sell amounts by a factor of 10 by pressing left and right in the menu when choosing the amount.
 - After fishing, the game will remember you just used a fishing rod and will save your menu position to easily re-use it.
@@ -83,12 +122,16 @@ Many options have been added to the game's options menu. To be clear, there are 
 ## New Gameplay Features
 - Mew is under the truck!!! Use strength on it from the right side. If the SS Anne has left, it returns after obtaining the Soul Badge.
 - Missingno and the item duplication glitch are still accessible. Missingno can be caught and won't corrupt your game data in any way. It's very powerful, so be careful when trying to catch it! Missingno also randomly displays different sprites like its original "glitchy" sprite, the Ghost sprite or Fossil Kabutops/Aerodactyl each time its sprite is loaded.
+
+ ![Missingno](/screenshots/missingno.png?raw=true)
 - Ghost Marowak can be caught, and if you have Alt Pkmn Palettes turned on, it has a special ghostly coloration. It wants revenge on Team Rocket!
 
 - The Safari Zone now has 3 different "Modes" of Safari Game. They are:
   - `CLASSIC`: the original game's "Safari Game".  Use bait and rocks instead of your well-trained pokemon to try to catch wild pokemon with Safari Balls. The only change to this mode is that you have 700 steps instead of 500.
   - `FREE ROAM`: Bring your pokemon into the Safari Zone and catch and battle pokemon like you would normally. Also, no limit on steps! On top of that, now there are trainers ready to battle all over the Safari Zone? This is great! The trainers will reset when you re-enter, allowing you to repeatedly battle them.
   - `RANGER HUNT`: now we're talking. Find the 5 rangers and defeat them before you run out of steps! You get a special prize if you do! Bring in your pokemon just like FREE ROAM mode, but you only have 700 steps to find and beat all 5 rangers! All the trainers from Free Roam mode are present too. This is the ultimate Safari Zone challenge! The reward is a new type of Poke Ball, the HYPER BALL, which never fails to catch pokemon if they are <1/4 health. Even legendary pokemon! This challenge can be repeated.
+  
+   ![Safari Zone Modes](/screenshots/safari_zone_modes.png?raw=true) ![Safari Zone Trainers](/screenshots/safari_zone_ranger_hunt.png?raw=true) 
 
 - New Items:
   - `POCKET ABRA`: It's an Abra that fits in your bag. A pocket pokemon! Isn't that redundant?...It allows you to teleport whenever you want, even in buildings or caves, back to the last pokemon center. Keep it on hand at all times for maximum convenience. You can nickname it even!
@@ -99,13 +142,18 @@ Many options have been added to the game's options menu. To be clear, there are 
 - The "TM Pirate" is a kid who appears in most PokeMarts who will sell you TMs! It's just a fun way of adding more purchasable TMs to the game. 
 
 - The Mt Moon fossil Super Nerd will offer to take your fossil to Cinnabar Lab right away! You have to meet up with him at his house in SAFFRON CITY to get your fossil pokemon if you give it to him. Then you can give him OLD AMBER too. This allows you to receive fossil pokemon early.
+
+![Super Nerd House in Saffron](/screenshots/super_nerd_in_saffron_city.png?raw=true)
 - You can obtain the fossil that you didn't choose in Mt.Moon hidden inside Seafoam Islands.
 
 - In Celadon City there is an NPC in the Hotel who will give you LAPRAS early after clearing Rocket Hideout. It's the same guy who gives you it in Silph Co on a business trip. He ends up stuck in Silph Co later on as expected! If you don't get LAPRAS early you can still get it the original way.
 
 - In Fuchsia City there is an NPC who will permanently remove CUT trees for a fee. Remove all the trees in Fuchsia City, the one blocking Route 9, and more!
 
+![Tree Deleter](/screenshots/tree_deleter.png?raw=true)
 - If you have Alt Palette Pkmn option turned on, at the Cinnabar Lab there is an NPC who will allow you to swap the color palette of your pokemon for its alternate palette. You have a limited number of color change usages!
+
+ ![Lab color changer NPC](/screenshots/color_changer_npc.png?raw=true)
 
 - The FISHING GURU now lives in cerulean city and you can get the OLD ROD a bit earlier. Same with the GOOD ROD, which is now in the old FISHING GURU's house in vermilion city. As for the last two gurus on Route 12 and in Fuchsia city, whoever you meet first will give you a SUPER ROD. The other will be a bit distraught at the unexpected turn of events.
 
@@ -126,6 +174,8 @@ Many options have been added to the game's options menu. To be clear, there are 
 - There is unused text in the game for when you lose to your rival - these were re-implemented and now work as expected!
 - There was an unused trainer class for Prof Oak. It's been added back into the game. Find him in Cerulean Cave after beating the Elite Four. He can be battled repeatedly. Just leave the area and come back.
 - Some trainer classes based on Beta or unused sprites were reintroduced to the game: `ROOKIE`, `RANGER`, `FIREFIGHTER`, `COOL KID`. You'll find them in previously empty places or routes!
+
+![Rookie](/gfx/capsule_monsters_stuff/rookie.png?raw=true) ![Ranger](/gfx/capsule_monsters_stuff/ranger.png?raw=true) ![Firefighter](/gfx/capsule_monsters_stuff/firefighter.png?raw=true) ![Cool Kid](/gfx/capsule_monsters_stuff/cool_kid.png?raw=true)
 - Some unused trainers from existing classes were added into the game in various originally empty places
 
 ## Visual changes
@@ -133,6 +183,8 @@ Many options have been added to the game's options menu. To be clear, there are 
 - Pokeballs have varying animations slightly based on the type you use. Master Ball is especially cool!
 - If playing on GBC/GBA and have selected `SGB` or `GBC` in the options menu for the `COLORS` option, move animations will have fitting colors (ember is red, surf is blue, etc.).
 - If playing on GBC/GBA and have selected `SGB` or `GBC` in the options menu for the `COLORS` option, each type of pokeball will have a different coloration.
+
+![Pokeball Color](/screenshots/great_ball_color.png?raw=true)
 - Many move animations were enhanced.
 - Using SGB colors, pewter's palette is slightly greyer than the original game.
 - Using either SGB or GBC colors, seafoam island is bluish purple instead of the same color as every other cave in the game.
@@ -261,7 +313,11 @@ These changes were all made to make the pokemon more fun to use / more unique fr
 ## Pokemon Green visuals
 The version-specific visuals of japanese pokemon green were added into PureGreen.
 - Slot machines
+
+![Green Slots](/screenshots/green_slots.png?raw=true)
 - SGB Borders
+
+![Green SGB Border](/screenshots/green_title_sgb_border.png?raw=true)
 - Title Screen
 
 ## Things that Will Remain Unchanged
