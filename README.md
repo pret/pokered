@@ -56,7 +56,7 @@ If you'd like to make your own romhack based on this one, fork the repository an
 
 Jojobear13 - Tons of code snippets and help via the shinpokered romhack codebase, direct support regarding the pokemon yellow gbc enhancements porting
 
-33Dannye - Larger back sprites code snippets, EXP Bar code snippets, various support regarding game audio and questions about rgbasm/gbz80 answered
+Danny-E 33 - Larger back sprites code snippets, EXP Bar code snippets, various support regarding game audio and questions about rgbasm/gbz80 answered
 
 Mechanicalpen - enhanced menu icons code
 
