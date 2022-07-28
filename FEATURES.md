@@ -218,7 +218,6 @@ The fifth page contains 6 additional pokemon whose front sprites can be customiz
 - Koga says the Soulbadge boosts defense, but in the code it actually boosted speed. Now it boosts defense as the text indicated.
 - When learning a new move in battle, the "Poof!" sound effect didn't work correctly and would play a random sound instead. Now it works.
 - While transformed into another pokemon via TRANSFORM, you cannot swap your move positions anymore - allowing this caused glitches that end with the game crashing
-- 
 
 ## Tweaks
 - Trainers in general have a bit less type-specific parties and more varied pokemon. 
