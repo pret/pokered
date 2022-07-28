@@ -27,6 +27,8 @@ The second page contains new big features related to general gameplay.
     
     ![Blue Title GBC](/screenshots/blue_title_gbc_colors_on_gbc.png?raw=true) ![Red Title GBC](/screenshots/red_title_gbc_colors_on_gbc.png?raw=true) ![Green Title GBC](/screenshots/green_title_gbc_colors_on_gbc.png?raw=true)
   - The second option, `ALT PKMN COLORS` will enable or disable pokemon from being able to have special color palettes (Default: OFF). When turned on, features related to alternate color pokemon are enabled. In certain regions, you will find differently colored pokemon, like blue nidorinos and purple nidorinas. Think of them as regional color variants. This is just an amusing feature to allow for additional enjoyment in finding unique pokemon by exploring different places.
+
+![Alt Colors Off](/screenshots/alt_pokemon_colors_off.png?raw=true) ![Alt Colors On](/screenshots/alt_pokemon_colors_on.png?raw=true)
   - The third option, `AUDIO PAN` will enable or disable stereo audio panning (Default: OFF). The game uses stereo audio by default, but every channel is played at equal volume throughout the right and left speaker, so it sounds like mono. With this turned on the game music sounds a bit more dynamic by panning certain channels to left or right. This was an option in Pokemon Yellow that was ported to this romhack.
   - The fourth option, `BIKE SONG` will enable or disable the music that plays while on the bicycle (Default: ON). Since the bicycle music plays 100% of the time you are using the bicycle, it gets a bit old after a while. If turned off, the only time you'll hear the music is in Cycling Road. This way you can enjoy all the music in the game, not just the bicycle song.
 
@@ -55,6 +57,9 @@ The fourth page contains Sprite-related options.
   - The second option, `ICONS` changes the menu icons and overworld sprites in the game. (Default: OG) If you change this while in the overworld, it won't come into effect visually until you load another map (like by going into or out of a building.) There are two possible settings:
     - OG: Use the original icons in the overworld and on the pokemon menu.
     - OGplus: Use the original icons with some new ones. Some are based on beta sprites, some are completely newly designed sprites with the intention of being similar to the non-specific icon design of the original game, and ONE based on Gen 2's menu sprites (jellyfish sprite). This also will give unique sprites to Brock, Misty, Sabrina, and Blaine. They are all sprites that were designed from scratch to match the game's original trainer sprites, EXCEPT blaine's sprite, which is borrowed from Gen 2.
+
+ ![Menu Icons 1](/gfx/icons/menusprites1.png?raw=true) ![Menu Icons 2](/gfx/icons/menusprites2.png?raw=true)
+    ![Brock](/gfx/sprites/brock.png?raw=true) ![Misty](/gfx/sprites/misty.png?raw=true) ![Sabrina](/gfx/sprites/sabrina.png?raw=true) ![Blaine](/gfx/sprites/blaine.png?raw=true)
   - The third to sixth options all control front sprites of specific pokemon that have multiple nice front sprites from the original games to choose from. You can choose which front sprites you like the most for these pokemon.
 
 ![Front Sprite 1 Bulbasaur](/gfx/pokemon/front/bulbasaur.png?raw=true) ![Front Sprite 2 Bulbasaur](/gfx/pokemon/front_rg/bulbasaur.png?raw=true) ![Front Sprite 1 Squirtle](/gfx/pokemon/front/squirtle.png?raw=true) ![Front Sprite 2 Squirtle](/gfx/pokemon/front_rg/squirtle.png?raw=true) ![Front Sprite 1 Blastoise](/gfx/pokemon/front/blastoise.png?raw=true) ![Front Sprite 2 Blastoise](/gfx/pokemon/front_rg/blastoise.png?raw=true) ![Front Sprite 1 Pidgeot](/gfx/pokemon/front/pidgeot.png?raw=true) ![Front Sprite 2 Pidgeot](/gfx/pokemon/front_rg/pidgeot.png?raw=true)
