@@ -46,7 +46,7 @@ Pictured: GB Monochrome, Original GBC color, SGB Colors, GBC Colors (can choose 
 
 ## Contact the creator
 
-- **Discord:** [pret][discord]
+- **Discord:** [pret][discord] - user Vortiene
 
 [discord]: https://discord.gg/d5dubZ3
 
