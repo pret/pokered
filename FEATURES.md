@@ -123,6 +123,8 @@ The fifth page contains 6 additional pokemon whose front sprites can be customiz
 - Fuchsia City's layout has been modified very slightly to be less annoying to navigate.
 - Route 23 has some grass just after the north exit of Victory Road to allow reaching those encounters more easily late game.
 - Some pokemon evolve at earlier levels
+- Many pokemon have better base stats. See the wiki for the data.
+- Many pokemon have better learnsets than before. See the wiki for the data.
 
 ## New Gameplay Features
 - Mew is under the truck!!! Use strength on it from the right side. If the SS Anne has left, it returns after obtaining the Soul Badge.
@@ -216,7 +218,6 @@ The fifth page contains 6 additional pokemon whose front sprites can be customiz
 - Koga says the Soulbadge boosts defense, but in the code it actually boosted speed. Now it boosts defense as the text indicated.
 - When learning a new move in battle, the "Poof!" sound effect didn't work correctly and would play a random sound instead. Now it works.
 - While transformed into another pokemon via TRANSFORM, you cannot swap your move positions anymore - allowing this caused glitches that end with the game crashing
-- 
 
 ## Tweaks
 - Trainers in general have a bit less type-specific parties and more varied pokemon. 
