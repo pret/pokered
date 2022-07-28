@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: enhanced pokemon party menu icons, used when they are turned on in the options.
+
 MonPartyDataNew:
 	table_width 1, MonPartyDataNew
 	db ICON_MISSINGNO ; Missingno

@@ -5,7 +5,7 @@ ENDC
 IF DEF(_BLUE)
 	INCBIN "gfx/sgb/blue_border.tilemap"
 ENDC
-IF DEF(_GREEN)
+IF DEF(_GREEN) ; PureRGBnote: GREENBUILD: added the graphics for pokemon green's SGB border.
 	INCBIN "gfx/sgb/green_border.tilemap"
 ENDC
 

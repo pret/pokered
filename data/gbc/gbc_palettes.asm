@@ -1,3 +1,6 @@
+; shinpokerednote: gbcnote: ADDED: color palettes based on pokemon yellow's GBC colors.
+; GREENBUILD: palettes specific to pokemon green
+
 GBCBasePalettes:
 ; entries correspond to PAL_* constants
 	table_width 2 * 4, GBCBasePalettes
@@ -74,17 +77,19 @@ ENDC
 	RGB 31,31,31, 03,11,06, 03,17,11, 03,03,03 ; PAL_BADGE
 	RGB 31,31,31, 23,08,00, 17,14,11, 03,03,03 ; PAL_CAVE
 	RGB 31,31,31, 31,19,00, 19,19,00, 03,03,03 ; PAL_GAMEFREAK
-	RGB 31,31,31, 15,15,15, 10,11,11, 03,03,03 ; PAL_BLACKMON
-	RGB 31,31,31, 25,25,27, 20,20,23, 03,03,03 ; PAL_WHITEMON
-	RGB 31,31,31, 20,26,31, 12,25,06, 03,03,03 ; PAL_BLUEGREENMON
-	RGB 31,31,31, 31,31,31, 03,03,03, 03,03,03 ; PAL_BLACK2
-	RGB 31,29,31, 31,31,00, 03,03,03, 03,03,03 ; PAL_ULTRABALL
-	RGB 31,31,31, 17,31,11, 17,09,05, 03,03,03 ; PAL_SAFARIBALL
+;;;;;;;;;; PureRGBnote: ADDED: new palettes used for various reasons
+	RGB 31,31,31, 15,15,15, 10,11,11, 03,03,03 ; PAL_BLACKMON ; black alt palette pokemon
+	RGB 31,31,31, 25,25,27, 20,20,23, 03,03,03 ; PAL_WHITEMON ; white alt palette pokemon
+	RGB 31,31,31, 20,26,31, 12,25,06, 03,03,03 ; PAL_BLUEGREENMON ; blue/green alt palette pokemon
+	RGB 31,31,31, 31,31,31, 03,03,03, 03,03,03 ; PAL_BLACK2 ; default move animation palette
+	RGB 31,29,31, 31,31,00, 03,03,03, 03,03,03 ; PAL_ULTRABALL ; ultra ball palette when throwing one in battle
+	RGB 31,31,31, 17,31,11, 17,09,05, 03,03,03 ; PAL_SAFARIBALL ; safari ball palette when throwing one in battle
+;;;;;;;;;;
 	assert_table_length NUM_SGB_PALS
 
 
 
-; the colors that display on gbc without any modifications to pokemon red/blue code.
+; PureRGBnote: ADDED: the colors that display on gbc without any modifications to pokemon red/blue code.
 ; The "duochromatic" colors that original displayed on GBC games playing red/blue/green.
 ; only 2 palettes, one for background and OBJ1, another for OBJ0
 

@@ -1,3 +1,5 @@
+
+; PureRGBnote: CHANGED: Lonemoves was modified to specify which move index will be replaced.
 ; unique moves for gym leaders
 ; this is not automatic! you have to write the index you want to [wLoneAttackNo]
 ; first. e.g., erika's script writes 4 to [wLoneAttackNo] to get mega drain,

@@ -11,7 +11,7 @@
 	const ULTRA_BALL    ; $02
 	const GREAT_BALL    ; $03
 	const POKE_BALL     ; $04
-	const HYPER_BALL    ; $05
+	const HYPER_BALL    ; $05 ; PureRGBnote: ADDED: New item, used to be TOWN MAP
 	const BICYCLE       ; $06
 	const SURFBOARD     ; $07 buggy?
 	const SAFARI_BALL   ; $08
@@ -27,9 +27,9 @@
 	const HYPER_POTION  ; $12
 	const SUPER_POTION  ; $13
 	const POTION        ; $14
-	const SAFARI_BAIT   ; $15
+	const SAFARI_BAIT   ; $15 ; PureRGBnote: CHANGED: each of the badges used to have an item defined starting at this index, they were cleaned out
 	const SAFARI_ROCK   ; $16
-	const OLD_COIN      ; $17
+	const OLD_COIN      ; $17 ; PureRGBnote: ADDED: New item
 	const UNUSED_ITEM2  ; $18
 	const UNUSED_ITEM3  ; $19
 	const UNUSED_ITEM4  ; $1A
@@ -50,13 +50,13 @@
 	const DOME_FOSSIL   ; $29
 	const HELIX_FOSSIL  ; $2A
 	const SECRET_KEY    ; $2B
-	const POCKET_ABRA   ; $2C
+	const POCKET_ABRA   ; $2C ; PureRGBnote: ADDED: New item, used to be an unused placeholder item
 	const BIKE_VOUCHER  ; $2D
 	const X_ACCURACY    ; $2E
 	const LEAF_STONE    ; $2F
 	const CARD_KEY      ; $30
 	const NUGGET        ; $31
-	const APEX_CHIP     ; $32
+	const APEX_CHIP     ; $32 ; PureRGBnote: ADDED: New item, used to be a broken second instance of PP Up
 	const POKE_DOLL     ; $33
 	const FULL_HEAL     ; $34
 	const REVIVE        ; $35
@@ -75,13 +75,13 @@
 	const X_DEFEND      ; $42
 	const X_SPEED       ; $43
 	const X_SPECIAL     ; $44
-	const LOST_WALLET   ; $45 ; Used to be COIN_CASE before coin case was switched to be an event only
+	const LOST_WALLET   ; $45 ; PureRGBnote: ADDED: New item, Used to be COIN_CASE before coin case was switched to be an event only
 	const OAKS_PARCEL   ; $46
 	const ITEMFINDER    ; $47
 	const SILPH_SCOPE   ; $48
 	const POKE_FLUTE    ; $49
 	const LIFT_KEY      ; $4A
-	const BOOSTER_CHIP  ; $4B
+	const BOOSTER_CHIP  ; $4B ; PureRGBnote: ADDED: New item, used to be EXP.ALL
 	const OLD_ROD       ; $4C
 	const GOOD_ROD      ; $4D
 	const SUPER_ROD     ; $4E
@@ -109,6 +109,7 @@ DEF NUM_ITEMS EQU const_value - 1
 	const FLOOR_B4F     ; $61
 DEF NUM_FLOORS EQU const_value - 1 - NUM_ITEMS
 
+;;;;;;;;;; PureRGBnote: ADDED: some constants for lists that are used in menus for new features
 	const TREE_ROUTE_2  ; 62
 	const TREE_CERULEAN_CITY ;63
 	const TREE_ROUTE_9  ;64
@@ -117,7 +118,8 @@ DEF NUM_FLOORS EQU const_value - 1 - NUM_ITEMS
 	const SAFARI_CLASSIC  ; 66
 	const SAFARI_RANGER_HUNT ;67
 	const SAFARI_FREE_ROAM  ;68
-
+;;;;;;;;;;
+;;;;;;;;;; PureRGBnote: MOVED: these constants used to be defined higher up as actual items, they are only used to generate a menu in cerulean city
 	const BOULDERBADGE  ; $69
 	const CASCADEBADGE  ; $6A
 	const THUNDERBADGE  ; $6B
@@ -126,7 +128,7 @@ DEF NUM_FLOORS EQU const_value - 1 - NUM_ITEMS
 	const MARSHBADGE    ; $6E
 	const VOLCANOBADGE  ; $6F
 	const EARTHBADGE    ; $70
-
+;;;;;;;;;;
 	const_next $C4
 
 ; HMs are defined before TMs, so the actual number of TM definitions
@@ -172,6 +174,7 @@ MACRO add_tm
 	add_tmnum \1
 ENDM
 
+;;;;; PureRGBnote: CHANGED: TMs were reassigned better moves
 DEF TM01 EQU const_value
 	add_tm ICE_PUNCH   	; $C9
 	add_tm RAZOR_WIND   ; $CA ROOST

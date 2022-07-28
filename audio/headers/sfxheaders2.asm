@@ -224,10 +224,10 @@ SFX_Pound::
 	audio_header SFX_Pound, Ch8
 
 SFX_Acid_Armor::
-	audio_header SFX_Acid_Armor, Ch8
+	audio_header SFX_Acid_Armor, Ch8 ; PureRGBnote: ADDED: new sound effect for acid armor
 
 SFX_Ice::
-	audio_header SFX_Ice, Ch5, Ch8
+	audio_header SFX_Ice, Ch5, Ch8 ; PureRGBnote: ADDED: new sound effect for ice moves
 
 SFX_Battle_0B::
 	audio_header SFX_Battle_0B, Ch8
@@ -263,7 +263,7 @@ SFX_Vine_Whip::
 	audio_header SFX_Vine_Whip, Ch8
 
 ;SFX_Battle_16::
-;	audio_header SFX_Battle_16, Ch8
+;	audio_header SFX_Battle_16, Ch8 ; PureRGBnote: REMOVED: unused move sound effect
 
 SFX_Battle_17::
 	audio_header SFX_Battle_17, Ch8

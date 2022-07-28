@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: Many new hidden items were added versus the original game
+
 HiddenObjectMaps:
 	db REDS_HOUSE_2F
 	db BLUES_HOUSE

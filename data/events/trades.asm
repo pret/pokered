@@ -1,3 +1,5 @@
+; PureRGBnote: CHANGED: different in-game trades
+
 TradeMons:
 ; entries correspond to TRADE_FOR_* constants
 	table_width 3 + NAME_LENGTH, TradeMons
@@ -13,6 +15,8 @@ TradeMons:
 	db LAPRAS,     SNORLAX,   TRADE_DIALOGSET_HAPPY_COLOR,  "Fatso@@@@@@" ; cinnabar lab 
 	db VOLTORB,    TANGELA,   TRADE_DIALOGSET_HAPPY,  "Discombob@@" ; route 5
 	assert_table_length NUM_NPC_TRADES
+
+; PureRGBnote: ADDED: some received pokemon use alternate color palettes if the feature is enabled
 
 TradeMonPalettes:
 	db %10101100

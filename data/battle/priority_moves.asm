@@ -1,3 +1,5 @@
+; PureRGBnote: CHANGED: Priority moves are now stored in a list instead of hardcoded Quick Attack only.
+
 PriorityMoves:
 	db QUICK_ATTACK
 	db COMET_PUNCH

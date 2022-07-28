@@ -1,6 +1,6 @@
 ; Draws a "frame block". Frame blocks are blocks of tiles that are put
 ; together to form frames in battle animations.
-; gbcnote - oam updates from yellow version
+; shinpokerednote: gbcnote: oam updates from yellow version
 DrawFrameBlock:
 	ld l, c
 	ld h, b
@@ -16,8 +16,10 @@ DrawFrameBlock:
 	ld a, [wFBTileCounter]
 	inc a
 	ld [wFBTileCounter], a
+;;;;;;;;;; shinpokerednote: gbcnote: oam updates from yellow version
 	ld a, 2
 	ld [wdef5], a
+;;;;;;;;;;
 	ld a, [wSubAnimTransform]
 	dec a
 	jr z, .flipHorizontalAndVertical   ; SUBANIMTYPE_HVFLIP
@@ -49,12 +51,14 @@ DrawFrameBlock:
 .finishCopying ; finish copying values to OAM (when subanimation not transformed)
 	add [hl] ; X offset
 	ld [de], a ; store X
+;;;;;;;;;; shinpokerednote: gbcnote: oam updates from yellow version
 	cp 88
 	jr c, .asm_78056
 	ld a, [wdef5]
 	inc a
 	ld [wdef5], a
 .asm_78056
+;;;;;;;;;;
 	inc hl
 	inc de
 	ld a, [hli]
@@ -62,9 +66,11 @@ DrawFrameBlock:
 	ld [de], a ; store tile ID
 	inc de
 	ld a, [hli]
+;;;;;;;;;; shinpokerednote: gbcnote: oam updates from yellow version
 	ld b, a
 	ld a, [wdef5]
 	or b
+;;;;;;;;;;
 	ld [de], a ; store flags
 	inc de
 	jp .nextTile
@@ -83,12 +89,14 @@ DrawFrameBlock:
 	ld a, 168
 	sub b ; flip X coordinate
 	ld [de], a ; store X
+;;;;;;;;;; shinpokerednote: gbcnote: oam updates from yellow version
 	cp 88
 	jr c, .asm_78087
 	ld a, [wdef5]
 	inc a
 	ld [wdef5], a
 .asm_78087
+;;;;;;;;;;
 	inc hl
 	inc de
 	ld a, [hli]
@@ -108,8 +116,10 @@ DrawFrameBlock:
 	jr z, .storeFlags1
 	ld b, 0
 .storeFlags1
+;;;;;;;;;; shinpokerednote: gbcnote: oam updates from yellow version
 	ld a, [wdef5]
 	or b
+;;;;;;;;;;
 	ld [de], a
 	inc de
 	jp .nextTile
@@ -126,12 +136,14 @@ DrawFrameBlock:
 	ld a, 168
 	sub b ; flip X coordinate
 	ld [de], a ; store X
+;;;;;;;;;; shinpokerednote: gbcnote: oam updates from yellow version
 	cp 88
 	jr c, .asm_780c8
 	ld a, [wdef5]
 	inc a
 	ld [wdef5], a
 .asm_780c8
+;;;;;;;;;;
 	inc hl
 	inc de
 	ld a, [hli]
@@ -147,9 +159,11 @@ DrawFrameBlock:
 .disableHorizontalFlip
 	res 5, a
 .storeFlags2
+;;;;;;;;;; shinpokerednote: gbcnote: oam updates from yellow version
 	ld b, a
 	ld a, [wdef5]
 	or b
+;;;;;;;;;;
 	ld [de], a
 	inc de
 .nextTile
@@ -277,7 +291,7 @@ PlayAnimation:
 	push af
 	ld a, [wAnimPalette]
 	ldh [rOBP0], a
-	call UpdateGBCPal_OBP0
+	call UpdateGBCPal_OBP0 ; shinpokerednote: gbcnote: color support from yellow
 	call LoadAnimationTileset
 	vc_hook Reduce_move_anim_flashing_Mega_Punch_Self_Destruct_Explosion
 	call LoadSubanimation
@@ -287,7 +301,7 @@ PlayAnimation:
 	pop af
 	vc_hook_red Stop_reducing_move_anim_flashing_Blizzard
 	ldh [rOBP0], a
-	call UpdateGBCPal_OBP0
+	call UpdateGBCPal_OBP0 ; shinpokerednote: gbcnote: color support from yellow
 .nextAnimationCommand
 	vc_hook_red Stop_reducing_move_anim_flashing_Hyper_Beam
 	vc_hook_blue Stop_reducing_move_anim_flashing_Bubblebeam_Hyper_Beam_Blizzard
@@ -427,7 +441,7 @@ ENDC
 IF DEF(_BLUE)
 	INCBIN "gfx/slots/blue_slots_2.2bpp"
 ENDC
-IF DEF(_GREEN)
+IF DEF(_GREEN) ; PureRGBnote: GREENBUILD: slot graphics for green version added
 	INCBIN "gfx/slots/green_slots_2.2bpp"
 ENDC
 SlotMachineTiles2End:
@@ -444,10 +458,12 @@ MoveAnimation:
 	jr z, .animationFinished
 
 	; if throwing a Poké Ball, skip the regular animation code
+;;;;;;;;;; PureRGBnote: ADDED: code related to custom ball toss animations/colors for each ball
 	ld a, [wUnusedC000] ; when throwing a ball this will be set
 	and a
 	jr z, .moveAnimation
 .ballToss
+;;;;;;;;;;
 	ld de, .animationFinished
 	push de
 	jp TossBallAnimation
@@ -472,7 +488,7 @@ MoveAnimation:
 	call WaitForSoundToFinish
 	xor a
 	ld [wSubAnimSubEntryAddr], a
-	;ld [wUnusedD09B], a
+	;ld [wUnusedD09B], a ; PureRGBnote: this value is unused so we dont need to load it
 	ld [wSubAnimTransform], a
 	dec a ; NO_MOVE - 1
 	ld [wAnimSoundID], a
@@ -493,7 +509,7 @@ ShareMoveAnimations:
 	ld a, [wAnimationID]
 
 	cp AMNESIA
-	ld b, AMNESIA_ENEMY_ANIM
+	ld b, AMNESIA_ENEMY_ANIM ; PureRGBnote: CHANGED: amnesia has its own new animation
 	jr z, .replaceAnim
 
 	cp REST
@@ -581,6 +597,7 @@ AnimationShakeScreenHorizontallySlow:
 	jr nz, AnimationShakeScreenHorizontallySlow
 	ret
 
+;;;;;;;;;; shinpokerednote: gbcnote: CHANGED: this function was updated to facilitate colored move animations
 SetAnimationPalette:
 	ld b, $e4
 	ld a, [wOnSGB]
@@ -615,7 +632,9 @@ SetAnimationPalette:
 	call UpdateGBCPal_OBP1
 	predef SetAttackAnimPal	;gbcnote - new function to handle animation palettes
 	ret
+;;;;;;;;;;
 
+;;;;;;;;;; shinpokerednote: gbcnote: functions from pokemon yellow related to gbc color
 Func_78e98:
 	call SaveScreenTilesToBuffer2
 	xor a
@@ -635,7 +654,7 @@ WriteLowerByteOfBGMapAndEnableBGTransfer:
 	ld a, $1
 	ldh [hAutoBGTransferEnabled], a
 	ret
-
+;;;;;;;;;;
 
 PlaySubanimation:
 	ld a, [wAnimSoundID]
@@ -742,6 +761,7 @@ DoSpecialEffectByAnimationId:
 
 INCLUDE "data/battle_anims/special_effects.asm"
 
+;;;;;;;;;; PureRGBnote: CHANGED: pokeball toss animations were customized for each ball
 DoBallTossSpecialEffects:
 	ld a, [wSubAnimCounter]
 	cp 1
@@ -908,6 +928,7 @@ DoPoofSpecialEffects:
 	xor a
 	ld [wUnusedC000], a ; we clear this so the potential second poof doesnt have the fancy animation again
 	ret
+;;;;;;;;;;
 
 DoRockSlideSpecialEffects:
 	ld a, [wSubAnimCounter]
@@ -1112,7 +1133,7 @@ AnimationFlashScreenLong:
 	cp $01 ; is it the end of the palettes?
 	jr z, .endOfPalettes
 	ldh [rBGP], a
-	call UpdateGBCPal_BGP
+	call UpdateGBCPal_BGP ; shinpokerednote: gbcnote: gbc color facilitation
 	call FlashScreenLongDelay
 	jr .innerLoop
 .endOfPalettes
@@ -1176,17 +1197,17 @@ AnimationFlashScreen:
 	push af ; save initial palette
 	ld a, %00011011 ; 0, 1, 2, 3 (inverted colors)
 	ldh [rBGP], a
-	call UpdateGBCPal_BGP
+	call UpdateGBCPal_BGP ; shinpokerednote: gbcnote: gbc color facilitation
 	ld c, 2
 	call DelayFrames
 	xor a ; white out background
 	ldh [rBGP], a
-	call UpdateGBCPal_BGP
+	call UpdateGBCPal_BGP ; shinpokerednote: gbcnote: gbc color facilitation
 	ld c, 2
 	call DelayFrames
 	pop af
 	ldh [rBGP], a ; restore initial palette
-	call UpdateGBCPal_BGP
+	call UpdateGBCPal_BGP ; shinpokerednote: gbcnote: gbc color facilitation
 	ret
 
 AnimationDarkScreenPalette:
@@ -1232,7 +1253,7 @@ SetAnimationBGPalette:
 	ld a, c
 .next
 	ldh [rBGP], a
-	call UpdateGBCPal_BGP
+	call UpdateGBCPal_BGP ; shinpokerednote: gbcnote: gbc color facilitation
 	ret
 
 	ld b, $5
@@ -1247,7 +1268,8 @@ AnimationShakeScreen:
 AnimationShakeScreenHorizontallyFast:
 	predef_jump PredefShakeScreenHorizontally
 
-AnimationSmokeEverywhere:
+;;;;;;;;;; PureRGBnote: ADDED: new animations used with heat rush and poison gas
+AnimationSmokeEverywhere: 
 	xor a
 	ld [wWhichBattleAnimTileset], a
 	call LoadAnimationTileset
@@ -1266,14 +1288,13 @@ AnimationFireEverywhere:
 	jp AnimationTileEverywhere
 
 AnimationWaterDropletsEverywhereFast:
-; Draws water droplets all over the screen and makes them
-; scroll. It's hard to describe, but it's the main animation
-; in Surf/Mist/Toxic.
 	xor a
 	ld [wWhichBattleAnimTileset], a
 	call LoadAnimationTileset
 	ld d, 16
 	jp AnimationWaterDropletsEverywhere
+;;;;;;;;;;
+
 
 AnimationWaterDropletsEverywhereDefault:
 ; Draws water droplets all over the screen and makes them
@@ -1307,20 +1328,25 @@ AnimationTileEverywhere:
 _AnimationWaterDroplets:
 	ld hl, wShadowOAM
 .loop
+;;;;;;;;;; shinpokerednote: gbcnote: oam updates from pokemon yellow
 	ld a, $1
 	ld [wdef5], a
+;;;;;;;;;; 
 	ld a, [wBaseCoordY]
 	ld [hli], a ; Y
+;;;;;;;;;; shinpokerednote: gbcnote: oam updates from pokemon yellow
 	cp 40
 	jr c, .asm_792d7
 	ld a, [wdef5]
 	inc a
 	ld [wdef5], a
 .asm_792d7
+;;;;;;;;;;
 	ld a, [wBaseCoordX]
 	add 27
 	ld [wBaseCoordX], a
 	ld [hli], a ; X
+;;;;;;;;;; shinpokerednote: gbcnote: oam updates from pokemon yellow
 	cp 88
 	jr c, .asm_792ee
 	ld a, [wdef5]
@@ -1328,9 +1354,10 @@ _AnimationWaterDroplets:
 	and $3
 	ld [wdef5], a
 .asm_792ee
+;;;;;;;;;;
 	ld a, [wDropletTile]
 	ld [hli], a ; tile
-	ld a, [wdef5]
+	ld a, [wdef5] ; shinpokerednote: gbcnote: oam updates from pokemon yellow
 	ld [hli], a ; attribute
 	ld a, [wBaseCoordX]
 	cp 144
@@ -1474,29 +1501,35 @@ BattleAnimWriteOAMEntry:
 ; X coordinate = [wBaseCoordX]
 ; tile = d
 ; attributes = variable (dependant on coords)
+;;;;;;;;;; shinpokerednote: gbcnote: oam updates from pokemon yellow
 	ld a, $1
 	ld [wdef5], a
+;;;;;;;;;;
 	ld a, e
 	add 8
 	ld e, a
 	ld [hli], a
-	cp 72 ; FIXED : this fixes shootmanyballsupwards issue with the enemy's turn not having the correct color palette
+;;;;;;;;;; shinpokerednote: gbcnote: oam updates from pokemon yellow
+	cp 72 ; shinpokerednote: FIXED : this fixes shootmanyballsupwards issue with the enemy's turn not having the correct color palette
 	jr c, .asm_793d8
 	ld a, [wdef5]
 	inc a
 	ld [wdef5], a
 .asm_793d8
+;;;;;;;;;;
 	ld a, [wBaseCoordX]
 	ld [hli], a
+;;;;;;;;;; shinpokerednote: gbcnote: oam updates from pokemon yellow
 	cp 88
 	jr c, .asm_793e8
 	ld a, [wdef5]
 	add $2
 	ld [wdef5], a
 .asm_793e8
+;;;;;;;;;;
 	ld a, d
 	ld [hli], a
-	ld a, [wdef5]
+	ld a, [wdef5] ; shinpokerednote: gbcnote: oam updates from pokemon yellow
 	ld [hli], a
 	ret
 
@@ -1596,6 +1629,7 @@ AnimationShowEnemyMonPic:
 	ld hl, AnimationShowMonPic
 	jp CallWithTurnFlipped
 
+;;;;;;;;;; PureRGBnote: ADDED: new animation used with rolling kick
 AnimationShakeBackAndForthShort:
 	ldh a, [hWhoseTurn]
 	and a
@@ -1609,6 +1643,7 @@ AnimationShakeBackAndForthShort:
 	xor a ; TILEMAP_MON_PIC
 	ld c, $05
 	jp AnimationShakeLoop
+;;;;;;;;;;
 
 AnimationShakeBackAndForth:
 ; Shakes the mon's sprite back and forth rapidly. This is used in Double Team.
@@ -1692,6 +1727,8 @@ AnimationSpiralBallsInwardDefault:
 	ld [wSpiralBallsDelay], a
 ; Creates an effect that looks like energy balls spiralling into the
 ; player mon's sprite.  Used in Focus Energy, for example.
+; PureRGBnote: CHANGED: modified this function so the delay is customizable, and it can repeatedly play a sound effect while the animation is happening.
+;                       now used in Drill Peck and Horn Drill.
 AnimationSpiralBallsInward:
 	ld a, [wSpiralBallsDelay]
 	cp 2
@@ -1728,8 +1765,10 @@ AnimationSpiralBallsInward:
 	ld a, [hl]
 	cp $ff
 	jr z, .done
+;;;;;;;;;; shinpokerednote: gbcnote: oam updates from pokemon yellow
 	ld a, $2
 	ld [wdef5], a
+;;;;;;;;;;
 	ld a, [wSpiralBallsBaseY]
 	add [hl]
 	ld [de], a ; Y
@@ -1738,20 +1777,24 @@ AnimationSpiralBallsInward:
 	ld a, [wSpiralBallsBaseX]
 	add [hl]
 	ld [de], a ; X
+;;;;;;;;;; shinpokerednote: gbcnote: oam updates from pokemon yellow
 	cp 88
 	jr c, .asm_79524
 	ld a, $3
 	ld [wdef5], a
 .asm_79524
+;;;;;;;;;;
 	inc hl
 	inc de
 	inc de
+;;;;;;;;;; shinpokerednote: gbcnote: oam updates from pokemon yellow
 	ld a, [de]
 	and $f0
 	ld b, a
 	ld a, [wdef5]
 	or b
 	ld [de], a
+;;;;;;;;;;
 	inc de
 	dec c
 	jr nz, .innerLoop
@@ -1786,10 +1829,12 @@ AnimationSpiralBallsInward:
 .finish
 	ret
 
+;;;;;;;;;; PureRGBnote: ADDED: new animation used for Horn Drill and Drill Peck
 AnimationSpiralBallsInwardFast:
 	ld a, 2
 	ld [wSpiralBallsDelay], a
 	jp AnimationSpiralBallsInward
+;;;;;;;;;;
 
 SpiralBallAnimationCoordinates:
 ; y, x pairs
@@ -1944,7 +1989,7 @@ _AnimationShootBallsUpward:
 	ret
 
 ;;;;;;;;;;;;;;;;;;;;;; 
-; PureRGB - NEW: Shoot many balls upward has been slightly modified to look nicer, and is used in-game now instead of being unused.
+; PureRGBnote: ADDED: Shoot many balls upward has been slightly modified to look nicer, and is used in-game now instead of being unused.
 AnimationShootManyBallsUpward:
 ; Shoots several pillars of "energy" balls upward.
 	ldh a, [hWhoseTurn]
@@ -2018,12 +2063,15 @@ opt b.X ; . = 0, X = 1
 popo
 MinimizedMonSpriteEnd:
 
+;;;;;;;;;; PureRGBnote: ADDED: new animation used in sludge
 AnimationSlideEnemyMonDownAndHide:
 	ld hl, AnimationSlideMonDownAndHide
 	jp CallWithTurnFlipped
+;;;;;;;;;;
 
 AnimationSlideMonDownAndHide:
 ; Slides the mon's sprite down and disappears. Used in Acid Armor.
+; PureRGBnote: CHANGED: modified slightly to not hide the pokemon's picture after being used.
 	ld a, TILEMAP_SLIDE_DOWN_MON_PIC_7X5
 	ld c, 2
 .loop
@@ -2103,8 +2151,8 @@ _AnimationSlideMonOff:
 	add 7
 ; This is a bug. The lower right corner tile of the mon back pic is blanked
 ; while the mon is sliding off the screen. It should compare with the max tile
-; plus one instead.
-	cp $62
+; plus one instead. 
+	cp $62 ; PureRGBnote: CHANGED: now it's plus one as the above comment indicates
 	ret c
 	ld a, " "
 	ret
@@ -2119,11 +2167,12 @@ _AnimationSlideMonOff:
 	ld a, " "
 	ret
 
-
+;;;;;;;;;; PureRGBnote: ADDED: new animation used in some moves like Filthy Slam.
 AnimationSlideEnemyMonHalfOff:
 ; Slides the enemy mon off the screen horizontally.
 	ld hl, AnimationSlideMonHalfOff
 	jp CallWithTurnFlipped
+;;;;;;;;;;
 
 AnimationSlideMonHalfOff:
 ; Slides the mon's sprite halfway off the screen. It's used in Softboiled.
@@ -2587,14 +2636,14 @@ AnimationLeavesFalling:
 	push af
 	ld a, [wAnimPalette]
 	ldh [rOBP0], a
-	call UpdateGBCPal_OBP0
+	call UpdateGBCPal_OBP0 ; shinpokerednote: gbcnote: color support from yellow
 	ld d, $37 ; leaf tile
 	ld a, 3 ; number of leaves
 	ld [wNumFallingObjects], a
 	call AnimationFallingObjects
 	pop af
 	ldh [rOBP0], a
-	call UpdateGBCPal_OBP0
+	call UpdateGBCPal_OBP0 ; shinpokerednote: gbcnote: color support from yellow
 	ret
 
 AnimationPetalsFalling:
@@ -2650,8 +2699,10 @@ FallingObjects_UpdateOAMEntry:
 ; movement byte.
 	ld hl, wShadowOAM
 	add hl, de
+;;;;;;;;;; shinpokerednote: gbcnote: oam updates from pokemon yellow
 	ld a, $1
 	ld [wdef5], a
+;;;;;;;;;;
 	ld a, [hl]
 	inc a
 	inc a
@@ -2660,12 +2711,14 @@ FallingObjects_UpdateOAMEntry:
 	ld a, 160 ; if Y >= 112, put it off-screen
 .next
 	ld [hli], a ; Y
+;;;;;;;;;; shinpokerednote: gbcnote: oam updates from pokemon yellow
 	cp 40
 	jr c, .asm_79e51
 	ld a, [wdef5]
 	inc a
 	ld [wdef5], a
 .asm_79e51
+;;;;;;;;;;
 	ld a, [wFallingObjectMovementByte]
 	ld b, a
 	ld de, FallingObjects_DeltaXs
@@ -2682,6 +2735,7 @@ FallingObjects_UpdateOAMEntry:
 	ld a, [de]
 	add [hl]
 	ld [hli], a ; X
+;;;;;;;;;; shinpokerednote: gbcnote: oam updates from pokemon yellow
 	cp 88
 	jr c, .asm_79e75
 	ld a, [wdef5]
@@ -2689,6 +2743,7 @@ FallingObjects_UpdateOAMEntry:
 	and $3
 	ld [wdef5], a
 .asm_79e75
+;;;;;;;;;;
 	inc hl
 	xor a ; no horizontal flip
 	jr .next2
@@ -2698,6 +2753,7 @@ FallingObjects_UpdateOAMEntry:
 	ld a, [hl]
 	sub b
 	ld [hli], a ; X
+;;;;;;;;;; shinpokerednote: gbcnote: oam updates from pokemon yellow
 	cp 88
 	jr c, .asm_79e5c
 	ld a, [wdef5]
@@ -2705,12 +2761,15 @@ FallingObjects_UpdateOAMEntry:
 	and $3
 	ld [wdef5], a
 .asm_79e5c
+;;;;;;;;;;
 	inc hl
 	ld a, (1 << OAM_X_FLIP)
 .next2
+;;;;;;;;;; shinpokerednote: gbcnote: oam updates from pokemon yellow
 	ld b, a
 	ld a, [wdef5]
 	or b
+;;;;;;;;;;
 	ld [hl], a ; attribute
 	ret
 
@@ -2795,13 +2854,14 @@ AnimationShakeEnemyHUD:
 	ld hl, vBGMap1 - $20 * 7
 	call BattleAnimCopyTileMapToVRAM
 
-; gbcnote - from pokemon yellow: update BGMap attributes
+;;;;;;;;;; shinpokerednote: gbcnote: from pokemon yellow: update BGMap attributes
 	ldh a, [hGBC]
 	and a
 	jr z, .notGBC
 	ld d, 13
 	farcall LoadBGMapAttributes
 .notGBC
+;;;;;;;;;;
 
 ; Move the window so that the row below the enemy HUD (in BG map 0) lines up
 ; with the top row of the window on the screen. This makes it so that the window
@@ -2837,13 +2897,14 @@ AnimationShakeEnemyHUD:
 	ld hl, vBGMap1
 	call BattleAnimCopyTileMapToVRAM
 
-	; gbcnote - from yellow version: update BGMap attributes
+;;;;;;;;;; shinpokerednote: gbcnote: from pokemon yellow: update BGMap attributes
 	ldh a, [hGBC]
 	and a
 	jr z, .notGBC2
 	ld d, 11
 	farcall LoadBGMapAttributes
 .notGBC2
+;;;;;;;;;;
 
 	xor a
 	ldh [hWY], a
@@ -2913,7 +2974,7 @@ TossBallAnimation:
 	ld a, b
 	and $F
 	ld [wNumShakes], a
-
+	; PureRGBnote: gbcnote: pokeball toss animations don't get remapped here anymore, they each have a unique animation
 	ld hl, .PokeBallAnimations
 	ld a, [wAnimationID]
 .PlayNextAnimation
@@ -2926,11 +2987,13 @@ TossBallAnimation:
 	pop bc
 	dec c
 	jr nz, .PlayNextAnimation
+;;;;;;;;;; shinpokerednote: gbcnote: code to facilitate animation color
 	xor a
 	ld [wLastOBP0], a ; force reset OBP0 color
 	call UpdateGBCPal_OBP0
 	xor a
-	ld [wUnusedC000], a
+	ld [wUnusedC000], a ; PureRGBnote: gbcnote: this value here was used to specify we're doing a ball toss animation, so reset it
+;;;;;;;;;;
 	ret
 
 .PokeBallAnimations:

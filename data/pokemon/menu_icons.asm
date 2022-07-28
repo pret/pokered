@@ -1,3 +1,5 @@
+; PureRGBnote: CHANGED: a couple of default menu sprites were adjusted
+
 MonPartyData:
 	table_width 1, MonPartyData
 	db ICON_MISSINGNO ; Missingno

@@ -191,12 +191,14 @@ DEF NUM_ATTACKS EQU const_value - 1
 	const ANIM_B3
 	const ANIM_B4
 	const ANIM_B5
+;;;;;;;;;; PureRGBnote: CHANGED: some unused animations are now unique animations
 	const AMNESIA_ENEMY_ANIM
 	const BURN_ANIM ; Plays when a monster is burned
 	const SAFARITOSS_ANIM
 	const HYPERTOSS_ANIM
 	const PSN_ANIM ; Plays when a monster is poisoned
 	const MASTERTOSS_ANIM ; toss Master Ball
+;;;;;;;;;;
 	const ANIM_BC
 	const SLP_ANIM ; sleeping monster
 	const ANIM_BE

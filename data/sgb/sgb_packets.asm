@@ -96,7 +96,7 @@ BlkPacket_Pokedex:
 	ATTR_BLK_DATA %111, 1,1,0, 01,01, 08,08 ; mon: pal 1, everything else: pal 0
 	ds 8, 0
 
-BlkPacket_PokemonMiddleScreenBox:
+BlkPacket_PokemonMiddleScreenBox: ; PureRGBnote: FIXED: sgb color palette settings for the box that pops up when viewing fossils in the museum or the left binoculars on Route 15
 	ATTR_BLK 1
 	ATTR_BLK_DATA %111, 1,1,0, 06,04, 14,13 ; mon: pal 1, everything else: pal 0
 	ds 8, 0

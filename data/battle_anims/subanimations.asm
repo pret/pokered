@@ -551,7 +551,7 @@ Subanimation22:
 	db FRAMEBLOCK_47, BASECOORD_89, FRAMEBLOCKMODE_00
 	db FRAMEBLOCK_47, BASECOORD_B0, FRAMEBLOCKMODE_00
 
-Subanimation2d: ;FIXED: bug when enemy uses this subanimation - the coordinates are way off, switching to SUBANIMTYPE_HVFLIP fixed it
+Subanimation2d: ;PureRGBnote: FIXED: bug when enemy uses this subanimation - the coordinates are way off, switching to SUBANIMTYPE_HVFLIP fixed it
 	subanim SUBANIMTYPE_HVFLIP, 6
 	db FRAMEBLOCK_44, BASECOORD_64, FRAMEBLOCKMODE_00
 	db FRAMEBLOCK_45, BASECOORD_65, FRAMEBLOCKMODE_00

@@ -1,3 +1,5 @@
+; PureRGBnote: CHANGED: the default palette colors were changed for a couple pokemon. Like voltorb and electrode for example.
+
 MonsterPalettes:
 	table_width 1, MonsterPalettes
 	db PAL_MEWMON    ; MISSINGNO

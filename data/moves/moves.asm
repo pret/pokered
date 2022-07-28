@@ -1,3 +1,5 @@
+; PureRGBnote: CHANGED: Many move effects or values were tweaked/changed
+
 MACRO move
 	db \1 ; animation (interchangeable with move id)
 	db \2 ; effect

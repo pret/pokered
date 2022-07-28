@@ -1,3 +1,5 @@
+; PureRGBnote: CHANGED: different prize pokemon and TMs
+
 PrizeDifferentMenuPtrs:
 	dw PrizeMenuMon1Entries, PrizeMenuMon1Cost
 	dw PrizeMenuMon2Entries, PrizeMenuMon2Cost

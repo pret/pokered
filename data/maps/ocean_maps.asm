@@ -1,3 +1,6 @@
+; PureRGBnote: ADDED: good rod catches different pokemon depending on where you fish. (Oceans vs lakes/ponds)
+; This code checks if you're fishing in an ocean map.
+
 OceanMaps:
 	db PALLET_TOWN
 	db VERMILION_CITY

@@ -10,7 +10,7 @@ PlayPokedexRatingSfx::
 	jr .getSfxPointer
 .gotSfxPointer
 	push bc
-	call StopAllMusic
+	call StopAllMusic ; shinpokerednote: MOVING: a common function to do what the 3 lines that used to be here did was created
 	pop bc
 	ld b, $0
 	ld hl, PokedexRatingSfxPointers

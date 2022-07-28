@@ -1,3 +1,5 @@
+; PureRGBnote: CHANGED: prices were balanced with the new TM moves
+
 TechnicalMachinePrices:
 ; In thousands (nybbles).
 	nybble_array TechnicalMachinePrices

@@ -1,3 +1,6 @@
+; PureRGBnote: CHANGED: to facilitate the additional new pokemon icons appearing in the overworld when the option is turned on
+;                       some sprite sets were modified.
+
 MapSpriteSets:
 	table_width 1, MapSpriteSets
 	db $01 ; PALLET_TOWN

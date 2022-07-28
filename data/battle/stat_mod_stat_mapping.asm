@@ -1,3 +1,6 @@
+; PureRGBnote: CHANGED: Code to map stat effects to the stat they modify. 
+;                       The couple of attacks that affect multiple stats run multiple singular stat mod effects in a row.
+
 StatMapping:
 	; first byte = stat change effect constant
 	; second byte = the stat it affects

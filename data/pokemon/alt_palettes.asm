@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: these are palettes alternate palette pokemon will use instead of the normal palette in palettes.asm
+
 AltMonsterPalettes: ; pokemon have alternate palettes depending on where you encounter them
 	table_width 1, AltMonsterPalettes
 	db PAL_MEWMON    ; MISSINGNO

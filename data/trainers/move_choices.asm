@@ -1,3 +1,5 @@
+; PureRGBnote: CHANGED: some trainers have added AI types. Mainly AI type 3 is more widely used.
+
 MACRO move_choices
 	IF _NARG
 		db \# ; all args

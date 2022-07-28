@@ -1,3 +1,6 @@
+; PureRGBnote: ADDED: this mapping is to be able to swap overworld sprites when switching the ICONS setting in the options menu.
+; 					  the left value is what it will look like with enhanced icons turned on, the right is the original sprite.
+
 AltSpriteMappingTable:
 	; first byte = defined sprite
 	; second byte = sprite it should be replaced with when new icon sprites are turned off

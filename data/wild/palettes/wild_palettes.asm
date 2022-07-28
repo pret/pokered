@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: these all indicate whether wild pokemon in an area will use alternate palettes if the feature is turned on.
+
 ; the below pointers are 24 bits in length and each bit indicates which palette a pokemon will be for that wild data
 ; bit = 1 -> alt palette
 ; bit = 0 -> default palette

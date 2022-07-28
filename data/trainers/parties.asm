@@ -1,3 +1,5 @@
+; PureRGBnote: CHANGED: ADDED: Trainer levels were balanced, parties were modified, and some new trainers were added.
+
 TrainerDataPointers:
 	dw YoungsterData
 	dw BugCatcherData

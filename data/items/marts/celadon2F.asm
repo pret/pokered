@@ -1,3 +1,5 @@
+; PureRGBnote: CHANGED: many of the marts in these mart files were modified versus the original game.
+
 CeladonMart2Clerk1Text::
 	script_mart \
 	GREAT_BALL, \

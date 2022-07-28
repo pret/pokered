@@ -51,15 +51,17 @@ PrintBeginningBattleText:
 	ld a, b
 	and a
 	jr z, .noSilphScope
-	call PlayGhostSfx
+	call PlayGhostSfx 
 	ld hl, EnemyAppearedText
 	call PrintText
 	ld hl, UnveiledGhostText
 	call PrintText
 	callfar LoadEnemyMonData
 	callfar MarowakAnim
+;;;;;;;;;; PureRGBnote: ADDED: when encountering ghost marowak, upon transforming it will play marowak's cry now
 	ld a, MAROWAK
 	call PlayCry
+;;;;;;;;;;
 	ld hl, WildMonAppearedText
 	call PrintText
 .playSFX
@@ -73,6 +75,7 @@ PrintBeginningBattleText:
 .done
 	ret
 
+;;;;;;;;;; PureRGBnote: ADDED: a sound effect for ghosts encountered
 PlayGhostSfx:
 	ld a, $50
 	ld [wFrequencyModifier], a
@@ -85,6 +88,7 @@ PlayGhostSfx:
 	ld [wFrequencyModifier], a
 	ld [wTempoModifier], a
 	ret
+;;;;;;;;;;
 
 WildMonAppearedText:
 	text_far _WildMonAppearedText

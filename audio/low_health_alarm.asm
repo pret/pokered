@@ -6,7 +6,7 @@ Music_DoLowHealthAlarm::
 	bit 7, a  ;alarm enabled?
 ;	ret z     ;nope
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; FIXED: low health alarm only rings a couple times before stopping after triggering
+; shinpokerednote: FIXED: low health alarm only rings a couple times before stopping after triggering
 	push af
 	jr z, .no_alarm_check_battle
 .yes_alarm_check_tone

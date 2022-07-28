@@ -5,7 +5,7 @@
 ; MoveEffectPointerTable indexes (see data/moves/effects_pointers.asm)
 	const_def
 	const NO_ADDITIONAL_EFFECT       ; $00
-	const BIG_RECOIL_EFFECT          ; $01 
+	const BIG_RECOIL_EFFECT          ; $01 ; PureRGBnote: ADDED: new effect, 50% recoil
 	const POISON_SIDE_EFFECT1        ; $02
 	const DRAIN_HP_EFFECT            ; $03
 	const BURN_SIDE_EFFECT1          ; $04
@@ -30,16 +30,16 @@
 	const EVASION_DOWN1_EFFECT       ; $17
 	const CONVERSION_EFFECT          ; $18 now unused
 	const HAZE_EFFECT                ; $19
-	const TWO_OR_THREE_ATTACKS_EFFECT; $1A
+	const TWO_OR_THREE_ATTACKS_EFFECT; $1A ; PureRGBnote: ADDED: new effect, 50% chance of 2 hits, 50% chance of 3
 	const THRASH_PETAL_DANCE_EFFECT  ; $1B
 	const SWITCH_AND_TELEPORT_EFFECT ; $1C
 	const TWO_TO_FIVE_ATTACKS_EFFECT ; $1D
-	const BURN_EFFECT                ; $1E Firewall (kinesis)
+	const BURN_EFFECT                ; $1E ; PureRGBnote: ADDED: new effect, burns the opponent, used in FIREWALL (kinesis)
 	const FLINCH_SIDE_EFFECT1        ; $1F
 	const SLEEP_EFFECT               ; $20
 	const POISON_SIDE_EFFECT2        ; $21
 	const BURN_SIDE_EFFECT2          ; $22
-	const SPEED_UP_SIDE_EFFECT       ; $23
+	const SPEED_UP_SIDE_EFFECT       ; $23 ; PureRGBnote: ADDED: new effect, used in meditate
 	const PARALYZE_SIDE_EFFECT2      ; $24
 	const FLINCH_SIDE_EFFECT2        ; $25
 	const OHKO_EFFECT                ; $26 moves like Horn Drill
@@ -76,13 +76,15 @@
 	const DEFENSE_DOWN_SIDE_EFFECT   ; $45
 	const SPEED_DOWN_SIDE_EFFECT     ; $46
 	const SPECIAL_DOWN_SIDE_EFFECT   ; $47
-	const ATTACK_UP_SIDE_EFFECT      ; $48
-	const ATTACK_ACCURACY_UP1_EFFECT ; $49
-	const ATTACK_DEFENSE_UP1_EFFECT  ; $4A
-	const CONFUSION_BIG_SIDE_EFFECT  ; $4B
+;;;;;;;;;; PureRGB: ADDED: new move effects
+	const ATTACK_UP_SIDE_EFFECT      ; $48 ; used in bide, sharpen, submission and meditate
+	const ATTACK_ACCURACY_UP1_EFFECT ; $49 ; used in sharpen
+	const ATTACK_DEFENSE_UP1_EFFECT  ; $4A ; used in bide
+	const CONFUSION_BIG_SIDE_EFFECT  ; $4B ; used in Whirlwind and Dizzy punch
+;;;;;;;;;;
 	const CONFUSION_SIDE_EFFECT      ; $4C
 	const TWINEEDLE_EFFECT           ; $4D
-	const ATTACK_SPECIAL_SPEED_UP1   ; $4E
+	const ATTACK_SPECIAL_SPEED_UP1   ; $4E ; PureRGBnote: ADDED: new effect, used in meditate
 	const SUBSTITUTE_EFFECT          ; $4F
 	const HYPER_BEAM_EFFECT          ; $50
 	const RAGE_EFFECT                ; $51 ; unused
