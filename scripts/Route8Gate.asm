@@ -27,6 +27,7 @@ Route8GateScript0:
 	ld hl, CoordsData_1e22c
 	call ArePlayerCoordsInArray
 	ret nc
+	; bug, player would already be facing left and should face up towards the guard.
 	ld a, PLAYER_DIR_LEFT
 	ld [wPlayerMovingDirection], a
 	xor a
