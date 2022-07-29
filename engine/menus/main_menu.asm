@@ -355,13 +355,13 @@ CableClubOptionsText:
 
 VersionText:
 IF DEF(_RED)
-	db " PureRed v2.0@"
+	db " PureRed v2.01@"
 ENDC
 IF DEF(_BLUE)
-	db " PureBlue v2.0@"
+	db " PureBlue v2.01@"
 ENDC
 IF DEF(_GREEN)
-	db " PureGreen v2.0@"
+	db " PureGreen v2.01@"
 ENDC
 
 DisplayContinueGameInfo:
