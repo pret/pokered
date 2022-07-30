@@ -40,7 +40,7 @@ For example, if you want to store **pokered** in `C:\Users\<user>\Desktop`, ente
 cd /mnt/c/Users/<user>/Desktop
 ```
 
-(The Windows `C:\` drive is called `/mnt/c/` in WSL. Replace `<user>` in the example path with your username.)
+(Replace `<user>` in the example path with your WSL username.)
 
 If this works, then follow [the instructions for **Linux**](#linux) below for whatever distribution you installed for WSL.
 
