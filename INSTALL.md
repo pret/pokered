@@ -37,7 +37,7 @@ WSL has its own file system that's not accessible from Windows, but Windows file
 For example, if you want to store **pokered** in `C:\Users\<user>\Desktop`, enter this command:
 
 ```bash
-cd /mnt/c/Users/<user>/Desktop
+cd /home/<user>/
 ```
 
 (Replace `<user>` in the example path with your WSL username.)
