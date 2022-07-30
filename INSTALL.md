@@ -68,7 +68,11 @@ If you already have an older version of **rgbds**, you will need to update to **
 
 Now open the **Cygwin terminal** and enter the following commands. You can open the terminal by double-clicking `Cygwin.bat`, which is in ``C:\cygwin64\``.
 
-Cygwin has its own file system that's stored within Windows. The Cygwin terminal uses its own syntax, different from Windows, to refer to directories and objects inside the Cygwin file system. In Windows terms, the Cygwin terminal's default **current working directory** is `C:\cygwin64\home\<user>`; in Cygwin terms this same directory is called `/cygdrive/c/cygwin64/home/<user>`. (Replace `<user>` in the example path with your username).
+Cygwin has its own Unix-like file system that's stored within Windows but uses different syntax.
+* In Windows, the Cygwin terminal's default **current working directory** is `C:\cygwin64\home\<user>`.
+* In Cygwin, this same directory is called `/cygdrive/c/cygwin64/home/<user>`. 
+
+(Replace `<user>` in the example path with your username.)
   
 If you store **pokered** somewhere other than the default directory, you'll have to change the **current working directory** in the Cygwin terminal every time you open Cygwin. For example, if you store **pokered** in `C:\Users\<user>\Desktop` you must enter this command:
 
