@@ -34,7 +34,7 @@ apt-get update && apt-get upgrade
 
 WSL has its own file system that's not accessible from Windows, but Windows files *are* accessible from WSL. So you're going to want to install **pokered** within Windows. You'll have to change the **current working directory** every time you open WSL.
 
-For example, if you want to store **pokered** in `C:\Users\<user>\Desktop`, enter this command:
+For example, if you want to store **pokered** in your WSL's home directory, enter this command:
 
 ```bash
 cd /home/<user>/
