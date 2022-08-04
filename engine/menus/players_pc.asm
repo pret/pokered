@@ -286,7 +286,7 @@ DepositItemFromItemMenu::
 	ld hl, WantToDepositText
 	call PrintText
 	call YesNoChoice
-	xor a
+	ld a, 1
     ld [wListWithTMText], a ; enable displaying TM names again.
 	ld a, [wCurrentMenuItem]
 	and a

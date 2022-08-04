@@ -330,7 +330,7 @@ CeruleanCityText2:
 .beatRocketThief
 	ld hl, CeruleanCityText_196f3
 	call PrintText
-	lb bc, TM_DIG, 1
+	lb bc, TM_CERULEAN_ROCKET_TM_THIEF, 1
 	call GiveItem
 	jr c, .Success
 	ld hl, TM28NoRoomText

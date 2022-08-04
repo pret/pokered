@@ -2,7 +2,7 @@ PlayBattleMusic::
 	xor a
 	ld [wAudioFadeOutControl], a
 	ld [wLowHealthAlarm], a
-	call StopAllMusic ; shinpokerednote: MOVING: a common function to do what the 3 lines that used to be here did was created
+	call StopAllMusic ; shinpokerednote: MOVED: a common function to do what the 3 lines that used to be here did was created
 	call DelayFrame
 	ld c, BANK(Music_GymLeaderBattle)
 	ld a, [wGymLeaderNo]
