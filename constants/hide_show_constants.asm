@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: many new hide show values were added versus the original game to hide and show new items or NPCs 
+
 DEF HIDE EQU $11
 DEF SHOW EQU $15
 

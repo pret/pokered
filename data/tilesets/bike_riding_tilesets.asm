@@ -6,7 +6,7 @@ BikeRidingTilesets::
 	db CAVERN
 	db -1 ; end
 
-;;;;;;;;;; PureRGB - NEW: Allow bike riding in specific maps that dont have any of the above tilesets
+;;;;;;;;;; PureRGBnote: ADDED: Allow bike riding in specific maps that dont have any of the above tilesets
 BikeRidingMaps::
 	db ROUTE_23,
 	db INDIGO_PLATEAU,

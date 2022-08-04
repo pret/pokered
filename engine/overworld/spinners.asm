@@ -23,7 +23,7 @@ LoadSpinnerArrowTiles::
 	ld a, $4
 	ld bc, $0
 .loop
-	ret ; FIXED: faster spin movement on spinners
+	ret ; PureRGBnote: FIXED: faster spin movement on spinners
 	;push af
 	;push hl
 	;push bc

@@ -104,6 +104,7 @@ InGameTrade_DoTrade:
 	ld a, $2
 	jp nz, .tradeFailed ; jump if the selected mon's species is not the required one
 	ld a, [wWhichPokemon]
+;;;;;;;;;; PureRGBnote: ADDED: check if we need to store whether the player's pokemon uses alternate palette to make the trade animation correct
 	ld hl, wPartyMon1Flags
 	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes
@@ -113,6 +114,7 @@ InGameTrade_DoTrade:
 	ld bc, wPartyMon1Level - wPartyMon1Flags
 	add hl, bc ; go to level
 	ld a, [hl]
+;;;;;;;;;;
 	ld [wCurEnemyLVL], a
 	ld hl, wCompletedInGameTradeFlags
 	ld a, [wWhichTrade]
@@ -125,7 +127,7 @@ InGameTrade_DoTrade:
 	push af
 	ld a, [wCurEnemyLVL]
 	push af
-	call GetTradeMonPalette ; stores whether the mon you receive in this in-game trade has an alternate palette into wIsAltPalettePkmnData
+	call GetTradeMonPalette ; PureRGBnote: ADDED: stores whether mon you receive via trade has an alternate palette into wIsAltPalettePkmnData
 	call LoadHpBarAndStatusTilePatterns
 	call InGameTrade_PrepareTradeData
 	predef InternalClockTradeAnim
@@ -155,7 +157,7 @@ InGameTrade_DoTrade:
 .tradeSucceeded
 	ld [wInGameTradeTextPointerTableIndex], a
 	ld a, 0
-	ld [wIsAltPalettePkmnData], a ; clear any alt palette flags
+	ld [wIsAltPalettePkmnData], a ; PureRGBnote: ADDED: clear any alt palette flags so the next pokemon we deal with won't be alt palette
 	ret
 
 GetTradeMonPalette:
@@ -291,6 +293,8 @@ TradeTextPointers3:
 	dw Thanks3Text
 	dw AfterTrade3Text
 
+;;;;;;;;;; PureRGBnote: ADDED: some trade NPCs have alt palette pokemon to trade and will tell you about it.
+
 TradeTextPointers4:
 	dw WannaTrade1ColorText
 	dw NoTrade1Text
@@ -318,6 +322,8 @@ TradeTextPointers7:
 	dw WrongMon3Text
 	dw Thanks3Text
 	dw AfterTrade3Text
+
+;;;;;;;;;;
 
 
 ConnectCableText:

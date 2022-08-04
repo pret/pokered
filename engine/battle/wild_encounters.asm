@@ -58,12 +58,13 @@ TryDoWildEncounter:
 	ld a, [hli]
 	cp b
 	jr nc, .gotEncounterSlot
-	inc c ; c will store the current encounter slot index
+	inc c ; PureRGBnote: ADDED: c will store the current encounter slot index, used to help decide if that pokemon uses alternate palette
 	inc hl
 	jr .determineEncounterSlot
 .gotEncounterSlot
 	ld a, c
-	ld [wIsAltPalettePkmn], a ; store which encounter slot index (0-9) we ended up with into wIsAltPalettePokemon
+	ld [wIsAltPalettePkmn], a ; PureRGBnote: ADDED: store which encounter slot index (0-9) we ended up with into wIsAltPalettePokemon
+	                          ;                     we still don't know if the pokemon is alt palette yet, just storing the index.
 ; determine which wild pokemon (grass or water) can appear in the half-block we're standing in
 	ld c, [hl]
 	ld hl, wGrassMons
@@ -72,9 +73,11 @@ TryDoWildEncounter:
 	                    ; PureRGBnote: FIXED: Route 10 coast tiles will be treated as water encounter tiles instead of loading grass encounters
 	jr nz, .gotWildEncounterType ; else, it's treated as a grass tile by default
 	ld hl, wWaterMons
+;;;;;;;;;; PureRGBnote: ADDED: for water encounters, need to modify the encounter slot index to account for water encounter alt palette flags starting at bit 10.
 	ld a, [wIsAltPalettePkmn]
 	add 10 ; water encounters start at bit 10
 	ld [wIsAltPalettePkmn], a
+;;;;;;;;;;
 ; since the bottom right tile of a "left shore" half-block is $14 but the bottom left tile is not,
 ; "left shore" half-blocks (such as the one in the east coast of Cinnabar) load grass encounters.
 .gotWildEncounterType
@@ -102,12 +105,12 @@ TryDoWildEncounter:
 	call DisplayTextID
 .CantEncounter2
 	xor a
-	ld [wIsAltPalettePkmn], a
+	ld [wIsAltPalettePkmn], a ; PureRGBnote: ADDED: if we end up not encountering a pokemon we need to clear this property as it may have been modified.
 	ld a, $1
 	and a
 	ret
 .willEncounter
-	callfar CheckWildPokemonPalettes ; checks if the pokemon should use an alt palette and if so stores 1 in wIsAltPalettePkmn
+	callfar CheckWildPokemonPalettes ; PureRGBnote: ADDED: checks if the pokemon should use an alt palette and if so stores 1 in wIsAltPalettePkmn
 	xor a
 	ret
 

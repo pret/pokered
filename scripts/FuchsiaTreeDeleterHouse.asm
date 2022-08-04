@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: new house in fuchsia city. Has an NPC who will permanently remove specific annoying cut trees for a fee.
+; also has his SNORLAX.
 FuchsiaTreeDeleterHouse_Script:
 	call EnableAutoTextBoxDrawing
 	ret

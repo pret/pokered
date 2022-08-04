@@ -50,7 +50,7 @@ MainMenu:
 	ld de, NewGameText
 	call PlaceString
 .next2
-	;NEW: - print the game version
+	;PureRGBnote: ADDED: print the romhack version
 	coord hl, $00, $11
 	ld de, VersionText
 	call PlaceString
@@ -89,7 +89,7 @@ MainMenu:
 	jr z, .choseContinue
 	cp 1
 	jp z, StartNewGame
-	call ClearScreen ; remove version text before displaying options
+	call ClearScreen ; PureRGBnote: ADDED: remove romhack version text before displaying options
 	call DisplayOptionMenu
 	ld a, 1
 	ld [wOptionsInitialized], a
@@ -323,7 +323,7 @@ StartNewGameDebug:
 ; enter map after using a special warp or loading the game from the main menu
 SpecialEnterMap::
 	ld a, 1
-	ld [wInGame], a
+	ld [wInGame], a ; PureRGBnote: ADDED: new flag for determining if not yet playing the game
 	xor a
 	ldh [hJoyPressed], a
 	ldh [hJoyHeld], a
@@ -411,7 +411,7 @@ PrintSaveScreenText:
 	call PrintPlayTime
 	ld a, $1
 	ldh [hAutoBGTransferEnabled], a
-	ld c, 5
+	ld c, 5 ; PureRGBnote: CHANGED: reduce the artificial delay when displaying this screen.
 	jp DelayFrames
 
 PrintNumBadges:
@@ -505,6 +505,7 @@ DisplayOptionMenu:
 	bit BIT_A_BUTTON, b
 	jr z, .checkDirectionKeys
 	ld a, [wTopMenuItemY]
+;;;;;;;;;; PureRGBnote: ADDED: changes to the first page of options to compensate for the additional pages added.
 	cp 16 ; is the cursor on the cancel row?
 	jr z, .cancelMore
 	jr .loop
@@ -516,6 +517,7 @@ DisplayOptionMenu:
 	call PlaySound
 	call ClearScreen
 	callfar DisplayOptions2
+;;;;;;;;;;
 .exitMenu
 	ld a, SFX_PRESS_AB
 	call PlaySound
@@ -586,12 +588,15 @@ DisplayOptionMenu:
 	xor $0b ; toggle between 1 and 10
 	ld [wOptionsBattleStyleCursorX], a
 	jp .eraseOldMenuCursor
+;;;;;;;;;; PureRGBnote: ADDED: changes to the first page of options to compensate for the additional pages added.
 .cursorCancelRow
 	ld a, [wOptionsCancelCursorX] ; battle style cursor X coordinate
 	xor $0b ; toggle between 1 and 10
 	ld [wOptionsCancelCursorX], a
 	jp .eraseOldMenuCursor
+;;;;;;;;;;
 .pressedLeftInTextSpeed
+;;;;;;;;;; PureRGBnote: CHANGED: Instant text speed replaced medium speed, so we need to adjust the X positions of the cursors a bit.
 	ld a, [wOptionsTextSpeedCursorX] ; text speed cursor X coordinate
 	cp 1                             ; leftmost position
 	jr z, .updateTextSpeedXCoord     ; don't do anything
@@ -619,6 +624,8 @@ DisplayOptionMenu:
 TextSpeedOptionText:
 	db   "TEXT SPEED"
 	next " INSTANT FAST SLOW@"
+
+;;;;;;;;;;
 
 BattleAnimationOptionText:
 	db   "BATTLE ANIMATION"
@@ -708,6 +715,7 @@ SetCursorPositionsFromOptions:
 	ld [hl], "▷"
 	ret
 
+; PureRGBnote: CHANGED: x coordinates modified due to text changes for INSTANT speed.
 ; table that indicates how the 3 text speed options affect frame delays
 ; Format:
 ; 00: X coordinate of menu cursor
@@ -727,7 +735,7 @@ CheckForPlayerNameInSRAM:
 	ld a, $1
 	ld [MBC1SRamBankingMode], a
 	ld [MBC1SRamBank], a
-	call CheckSaveFileExists
+	call CheckSaveFileExists ; PureRGBnote: MOVED: this code was moved to home since it is used on booting the game to load options early.
 	jr c, .found
 ; not found
 	xor a

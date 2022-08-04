@@ -18,7 +18,7 @@ PlayerPC::
 
 PlayerPCMenu:
 	xor a
-	ld [wListWithTMText], a
+	ld [wListWithTMText], a ; PureRGBnote: ADDED: this list menu can't have TMs so turn off that flag so it doesn't even check to display
 	ld a, [wParentMenuItem]
 	ld [wCurrentMenuItem], a
 	ld hl, wFlags_0xcd60
@@ -87,7 +87,7 @@ ExitPlayerPC:
 
 PlayerPCDeposit:
 	ld a, 1
-	ld [wListWithTMText], a
+	ld [wListWithTMText], a ; PureRGBnote: ADDED: this list menu can have TMs so turn on that flag so it checks each item scrolled over
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wListScrollOffset], a
@@ -143,7 +143,7 @@ PlayerPCDeposit:
 
 PlayerPCWithdraw:
 	ld a, 1
-	ld [wListWithTMText], a
+	ld [wListWithTMText], a ; PureRGBnote: ADDED: this list menu can have TMs so turn on that flag so it checks each item scrolled over
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wListScrollOffset], a
@@ -246,7 +246,8 @@ PlayerPCToss:
 	call TossItem ; disallows tossing key items
 	jp .loop
 
-ButtonStartPressed:: ; happens when pressing start in a list menu - used for facilitating depositing items from the start item menu
+; PureRGBnote: ADDED: happens when pressing start in a list menu - used for facilitating depositing items from the start item menu
+ButtonStartPressed:: 
 	ld a, [wListMenuID]
 	cp ITEMLISTMENU
 	jr nz, .done ; not an item list?
@@ -262,6 +263,7 @@ ButtonStartPressed:: ; happens when pressing start in a list menu - used for fac
 .done
 	ret
 
+; PureRGBnote: ADDED: dialog for depositing an item from the item menu. Press start on the item menu to trigger it.
 DepositItemFromItemMenu::
 	;IsItemHM - disallow HMs from being deposited this way to avoid softlock issues?
 	call IsKeyItem
@@ -279,9 +281,13 @@ DepositItemFromItemMenu::
 	jp .next
 .keyItem
 ; if it is a key item, ask whether to deposit first
+    xor a
+    ld [wListWithTMText], a ; stop attempting to display TM names while this Yes no choice is open.
 	ld hl, WantToDepositText
 	call PrintText
 	call YesNoChoice
+	ld a, 1
+    ld [wListWithTMText], a ; enable displaying TM names again.
 	ld a, [wCurrentMenuItem]
 	and a
 	ret nz

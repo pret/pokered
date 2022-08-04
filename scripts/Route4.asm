@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: new trainers on this route.
+
 Route4_Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, Route4TrainerHeaders
@@ -19,12 +21,12 @@ Route4_TextPointers:
 	dw Route4Text4
 	dw Route4Text5
 	dw PickUpItemText
-	dw PickUpItemText
+	dw PickUpItemText ; PureRGBnote: ADDED: new item on this route.
 	dw PokeCenterSignText
 	dw Route4Text6
 	dw Route4Text7
-	dw Route4Text8
-	dw Route4Text9
+	dw Route4Text8 ; PureRGBnote: ADDED: new trainer tips sign on this route.
+	dw Route4Text9 ; PureRGBnote: ADDED: new trainer tips sign on this route.
 
 Route4TrainerHeaders:
 	def_trainers 2

@@ -15,6 +15,7 @@ GiveItem::
 	scf
 	ret
 
+; PureRGBnote: ADDED: when giving a pokemon we can make it alternate palette by calling a different function
 GivePokemonAltPalette::
 	ld a, 1
 	jr GivePokemonCommon

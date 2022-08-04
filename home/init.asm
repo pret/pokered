@@ -54,7 +54,7 @@ DEF rLCDC_DEFAULT EQU %11100011
 	call ClearVram
 
 	ld hl, HRAM_Begin
-	ld bc, hHRAMend - HRAM_Begin ; gbcnote: don't clear hgbc
+	ld bc, hHRAMend - HRAM_Begin ; shinpokerednote: gbcnote: don't clear hgbc
 	call FillMemory
 
 	call ClearSprites
@@ -95,6 +95,7 @@ DEF rLCDC_DEFAULT EQU %11100011
 
 	ei
 
+;;;;;;;;;; PureRGBnote: ADDED: load options configuration from SRAM on boot of the game so we can respect the color/sprite settings.
 	ld a, SRAM_ENABLE
 	ld [MBC1SRamEnable], a
 	ld a, 1
@@ -113,6 +114,7 @@ DEF rLCDC_DEFAULT EQU %11100011
 	xor a
 	ld [MBC1SRamBankingMode], a
 	ld [MBC1SRamEnable], a
+;;;;;;;;;;
 
 	predef LoadSGB
 
@@ -155,7 +157,7 @@ StopAllSounds::
 	dec a
 	jp StopAllMusic
 
-; assumes SRAM has been enabled first
+; note: function assumes SRAM has been enabled first
 CheckSaveFileExists::
 	ld b, NAME_LENGTH
 	ld hl, sPlayerName

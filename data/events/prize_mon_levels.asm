@@ -1,3 +1,5 @@
+; PureRGBnote: CHANGED: different prize pokemon
+
 PrizeMonLevelDictionary:
 	db JYNX,      20
 	db ELECTABUZZ, 20

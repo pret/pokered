@@ -63,13 +63,15 @@ SlidePlayerAndEnemySilhouettesOnScreen:
 	ld a, c
 	ldh [hSCX], a
 	call DelayFrame
-	call DelayFrame ; gbcnote - do one extra frame to make sure the screen can update
+	call DelayFrame ; shinpokerednote: gbcnote: do one extra frame to make sure the screen can update
 	ld a, %11100100 ; inverted palette for silhouette effect
 	ldh [rBGP], a
 	ldh [rOBP0], a
 	ldh [rOBP1], a
+;;;;;;;;;; shinpokerednote: gbcnote: color support from yellow
 	call UpdateGBCPal_OBP0
 	call UpdateGBCPal_OBP1
+;;;;;;;;;;
 .slideSilhouettesLoop ; slide silhouettes of the player's pic and the enemy's pic onto the screen
 	ld h, b
 	ld l, $40
@@ -80,12 +82,13 @@ SlidePlayerAndEnemySilhouettesOnScreen:
 	ld l, $60
 	call SetScrollXForSlidingPlayerBodyLeft ; end background scrolling on line $60
 
-	;gbcnote - update BGP here so screen isn't revealed when scrolling is out of place
+;;;;;;;;;; shinpokerednote: gbcnote: update BGP here so screen isn't revealed when scrolling is out of place
 	push af
 	ld a, b
 	cp $72
 	call z, UpdateGBCPal_BGP
 	pop af
+;;;;;;;;;;
 
 	call SlidePlayerHeadLeft
 	ld a, c
@@ -141,7 +144,7 @@ StartBattle:
 	ld [wPartyGainExpFlags], a
 	ld [wPartyFoughtCurrentEnemyFlags], a
 	ld [wActionResultOrTookBattleTurn], a
-	ld [wLowHealthTonePairs], a ; FIXED: low health alarm sanity: clear low health tone tracker
+	ld [wLowHealthTonePairs], a ; shinpokerednote: FIXED: low health alarm sanity: clear low health tone tracker
 	inc a
 	ld [wFirstMonsNotOutYet], a
 	ld hl, wEnemyMon1HP
@@ -307,7 +310,7 @@ MainInBattleLoop:
 	ld hl, wPlayerBattleStatus1
 	res FLINCHED, [hl] ; reset flinch bit
 	ld a, [hl]
-	and (1 << THRASHING_ABOUT) | (1 << CHARGING_UP) ; check if the player is thrashing about or charging for an attack
+	and (1 << THRASHING_ABOUT) | (1 << CHARGING_UP) ; check if the player is thrashing about or charging for an attack ; PureRGBnote: CHANGED: removed bide code
 	jr nz, .selectEnemyMove ; if so, jump
 ; the player is neither thrashing about nor charging for an attack
 	call DisplayBattleMenu ; show battle menu
@@ -374,6 +377,7 @@ MainInBattleLoop:
 	ld [wPlayerSelectedMove], a
 .specialMoveNotUsed
 	callfar SwitchEnemyMon
+;;;;;;;;;; PureRGBnote: ADDED: multiple priority moves are checked here instead of just quick attack
 .noLinkBattle
 	ld a, [wPlayerSelectedMove]
 	ld c, a
@@ -389,6 +393,7 @@ MainInBattleLoop:
 	ld c, a
 	call CheckPriority
 	jr c, .enemyMovesFirst ; if enemy used priority and player didn't
+;;;;;;;;;;
 .compareSpeed
 	ld de, wBattleMonSpeed ; player speed value
 	ld hl, wEnemyMonSpeed ; enemy speed value
@@ -438,7 +443,8 @@ MainInBattleLoop:
 	call DrawHUDsAndHPBars
 	call CheckNumAttacksLeft
 	jp MainInBattleLoop
-.playerMovesFirst ;joenote - reorganizing this so enemy AI item use and switching has priority over player moves
+;;;;;;;;;; shinpokerednote: FIXED: reorganizing this so enemy AI item use and switching has priority over player moves
+.playerMovesFirst 
 ;#1 - handle enemy switching or using an item
 	ld a, 1
 	ld [hWhoseTurn], a
@@ -464,6 +470,7 @@ MainInBattleLoop:
 	call CheckandResetEnemyActedBit	;check to see if ai trainer already acted this turn
 	jr nz, .AIActionUsedPlayerFirst	;skip executing enemy move if it already acted
 	;else execute the enemy move
+;;;;;;;;;;
 	call ExecuteEnemyMove
 	ld a, [wEscapedFromBattle]
 	and a ; was Teleport, Road, or Whirlwind used to escape from battle?
@@ -497,6 +504,7 @@ HandlePoisonBurnLeechSeed:
 	jr z, .poisoned
 	ld hl, HurtByBurnText
 .poisoned
+;;;;;;;;;; PureRGBnote: ADDED: code to decide whether to use the poison animation or new burn animation
 	push de
 	call PrintText
 	pop de
@@ -509,6 +517,7 @@ HandlePoisonBurnLeechSeed:
 	jr .doAnim
 .poisonAnim
 	ld a, PSN_ANIM
+;;;;;;;;;;
 .doAnim
 	call PlayMoveAnimation   ; play burn/poison animation
 	pop hl
@@ -741,8 +750,10 @@ HandleEnemyMonFainted:
 	ret c
 	call ChooseNextMon
 .skipReplacingBattleMon
+;;;;;;;;;; PureRGBnote: CHANGED: clear the previous move used when the pokemon faints so disable won't pick it up
 	xor a
 	ld [wPreviousEnemySelectedMove], a
+;;;;;;;;;;
 	ld a, $1
 	ld [wActionResultOrTookBattleTurn], a
 	call ReplaceFaintedEnemyMon
@@ -776,7 +787,7 @@ FaintEnemyPokemon:
 ; and the states of the two Game Boys will go out of sync unless the damage
 ; was congruent to 0 modulo 256.
 	xor a
-	;ld [wPlayerBideAccumulatedDamage], a
+	;ld [wPlayerBideAccumulatedDamage], a ; PureRGBnote: CHANGED: bide code removed because bide effect was changed
 	ld hl, wEnemyStatsToDouble ; clear enemy statuses
 	ld [hli], a
 	ld [hli], a
@@ -837,7 +848,7 @@ FaintEnemyPokemon:
 	call SaveScreenTilesToBuffer1
 	xor a
 	ld [wBattleResult], a
-	;ld b, EXP_ALL ; CHANGED: EXP ALL removed from game because it's useless
+	;ld b, EXP_ALL ; PureRGBnote: CHANGED: EXP ALL removed from game and replaced with BOOSTER CHIP
 	;call IsItemInBag
 	;push af
 	;jr .giveExpToMonsThatFought ; if no exp all, then jump
@@ -915,11 +926,13 @@ ReplaceFaintedEnemyMon:
 	ld hl, wEnemyHPBarColor
 	ld e, $30
 	call GetBattleHealthBarColor
-	ldPal a, SHADE_BLACK, SHADE_DARK, SHADE_LIGHT, SHADE_WHITE
+;;;;;;;;;; PureRGBnote: gbcnote: color support from yellow
+	ldpal a, SHADE_BLACK, SHADE_DARK, SHADE_LIGHT, SHADE_WHITE
 	ldh [rOBP0], a
 	ldh [rOBP1], a
 	call UpdateGBCPal_OBP0
 	call UpdateGBCPal_OBP1
+;;;;;;;;;;
 	callfar DrawEnemyPokeballs
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
@@ -947,6 +960,7 @@ TrainerBattleVictory:
 	jr nz, .gymleader
 	ld b, MUSIC_DEFEATED_TRAINER
 .gymleader
+;;;;;;;;;; PureRGBnote: ADDED: use gym leader defeat music when beating prof oak
 	ld a, [wTrainerClass]
 	cp RIVAL3 ; final battle against rival
 	jr z, .rival
@@ -958,6 +972,7 @@ TrainerBattleVictory:
 	set 1, [hl]
 .continue
 	ld b, MUSIC_DEFEATED_GYM_LEADER
+;;;;;;;;;;
 .notrival
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
@@ -1018,8 +1033,10 @@ HandlePlayerMonFainted:
 	call AnyEnemyPokemonAliveCheck
 	jp z, TrainerBattleVictory
 .doUseNextMonDialogue
+;;;;;;;;;; PureRGBnote: CHANGED: clear the previous move used when the pokemon faints so disable won't pick it up
 	xor a
 	ld [wPreviousPlayerSelectedMove], a
+;;;;;;;;;;
 	call DoUseNextMonDialogue
 	ret c ; return if the player ran from battle
 	call ChooseNextMon
@@ -1050,7 +1067,7 @@ RemoveFaintedPlayerMon:
 	call WaitForSoundToFinish
 .skipWaitForSound
 ; a is 0, so this zeroes the enemy's accumulated damage.
-	;ld hl, wEnemyBideAccumulatedDamage
+	;ld hl, wEnemyBideAccumulatedDamage ; PureRGBnote: CHANGED: bide effect removed from game because the effect was changed
 	ld [hli], a
 	ld [hl], a
 	ld [wBattleMonStatus], a
@@ -1161,6 +1178,7 @@ ChooseNextMon:
 	or [hl]
 	ret
 
+;;;;;;;;;; PureRGBnote: FIXED: restored unused rival loss text
 ; called when player is out of usable mons.
 ; prints appropriate lose message, sets carry flag if player blacked out (special case for initial rival fight)
 HandlePlayerBlackOut:
@@ -1204,6 +1222,7 @@ HandlePlayerBlackOut:
 	call ClearScreen
 	scf
 	ret
+;;;;;;;;;;
 
 PlayerBlackedOutText2:
 	text_far _PlayerBlackedOutText2
@@ -1860,11 +1879,13 @@ DrawPlayerHUDAndHPBar:
 	hlcoord 10, 7
 	call CenterMonName
 	call PlaceString
+;;;;;;;;;; PureRGBnote: ADDED: decide via the options value whether to display an EXP bar in battle
 	ld a, [wOptions2]
 	bit BIT_EXP_BAR, a
 	jr z, .noExpBar
-	farcall PrintEXPBar	;joenote - added in the exp bar
+	farcall PrintEXPBar	
 .noExpBar
+;;;;;;;;;;
 	ld hl, wBattleMonSpecies
 	ld de, wLoadedMon
 	ld bc, wBattleMonDVs - wBattleMonSpecies
@@ -2066,8 +2087,10 @@ DisplayBattleMenu::
 	; to get overwritten when entering a map with wild Pokémon,
 	; but an oversight prevents this in Cinnabar and Route 21,
 	; so the infamous MissingNo. glitch can show up.
+;;;;;;;;;; PureRGBnote: ADDED: enable item duplication "glitch" via this new wram variable
 	ld a, 1
 	ld [wItemDuplicationActive], a ; each time the game is reset we have to trigger this to allow item duplication from missingno
+;;;;;;;;;;
 	ld hl, wPlayerName
 	ld de, wLinkEnemyTrainerName
 	ld bc, NAME_LENGTH
@@ -2365,7 +2388,7 @@ PartyMenuOrRockOrRun:
 	call LoadHudTilePatterns
 	call LoadScreenTilesFromBuffer2
 	call RunDefaultPaletteCommand
-	call PrintEmptyString	;gbcnote - added to prevent a 1-frame menu flicker
+	call PrintEmptyString	; shinpokerednote: gbcnote: added to prevent a 1-frame menu flicker
 	call GBPalNormal
 	jp DisplayBattleMenu
 .partyMonDeselected
@@ -2448,7 +2471,7 @@ PartyMenuOrRockOrRun:
 .notAlreadyOut
 	call HasMonFainted
 	jp z, .partyMonDeselected ; can't switch to fainted mon
-	;;;;;;;;; PureRGB - set previous type and status indicators so the AI doesn't use super effective moves or status moves cheaply 
+	;;;;;;;;; PureRGBnote: ADDED: set previous type and status indicators so the AI doesn't use super effective moves or status moves cheaply 
 	;;;;;;;;;           against the pokemon we just sent out when we switch using a turn up
 	ld a, [wBattleMonType1]
 	ld [wAITargetMonType1], a 
@@ -2469,7 +2492,7 @@ PartyMenuOrRockOrRun:
 
 SwitchPlayerMon:
 	callfar RetreatMon
-	;;;;;;;;; PureRGB - reset disable move indicator when we switch pokemon so the move disabled is random until we use a move again with the new pokemon.
+	;;;;;;;;; PureRGB: CHANGED: reset disable move indicator when we switch pokemon so the move disabled is random until we use a move again with the new pokemon.
 	xor a
 	ld [wPreviousPlayerSelectedMove], a
 	;;;;;;;;;
@@ -2491,7 +2514,7 @@ SwitchPlayerMon:
 	call SaveScreenTilesToBuffer1
 	ld a, $2
 	ld [wCurrentMenuItem], a
-	ld [wAIMoveSpamAvoider], a ; helps avoid ai spamming as if they predict you switching pokemon perfectly
+	ld [wAIMoveSpamAvoider], a ; PureRGBnote: ADDED: helps avoid ai spamming as if they predict you switching pokemon perfectly
 	and a
 	ret
 
@@ -2810,7 +2833,7 @@ NoMovesLeftText:
 	text_end
 
 SwapMovesInMenu:
-;;;;; FIXED: can't swap moves when transformed (fixes a crash bug)
+;;;;; PureRGBnote: FIXED: can't swap moves when transformed (fixes a crash bug)
 	ld a, [wPlayerBattleStatus3]
 	bit TRANSFORMED, a ; transformed
 	jp nz, MoveSelectionMenu
@@ -3001,7 +3024,7 @@ SelectEnemyMove:
 	and (1 << FRZ) | SLP_MASK
 	ret nz
 	ld a, [wEnemyBattleStatus1]
-	and (1 << USING_TRAPPING_MOVE) ; using a trapping move like wrap or bide
+	and (1 << USING_TRAPPING_MOVE) ; using a trapping move like wrap or bide ; PureRGBnote: CHANGED: bide code removed since its effect was changed
 	ret nz
 	ld a, [wPlayerBattleStatus1]
 	bit USING_TRAPPING_MOVE, a ; caught in player's trapping move (e.g. wrap)
@@ -3141,11 +3164,13 @@ ExecutePlayerMove:
 	jp nz, ExecutePlayerMoveDone
 	call PrintGhostText
 	jp z, ExecutePlayerMoveDone
+;;;;;;;;;; PureRGBnote: CHANGED: code to facilitate disable disabling the previous move the opponent used
 	ld a, [wPlayerSelectedMove]
 	cp $ff
 	jr z, .skipLoadingPreviousMove
 	ld [wPreviousPlayerSelectedMove], a
 .skipLoadingPreviousMove
+;;;;;;;;;;
 	call CheckPlayerStatusConditions
 	jr nz, .playerHasNoSpecialCondition
 	jp hl
@@ -3196,7 +3221,7 @@ PlayerCalcMoveDamage:
 	call IsInArray
 	jp c, .moveHitTest ; SetDamageEffects moves (e.g. Seismic Toss and Super Fang) skip damage calculation
 	call CriticalHitTest
-	;call HandleCounterMove ; CHANGED: Counter changed to have an effect similar to drain punch
+	;call HandleCounterMove ; PureRGBnote: CHANGED: Counter changed to have an effect similar to drain punch, so dont need this code
 	;jr z, handleIfPlayerMoveMissed
 	call GetDamageVarsForPlayerAttack
 	call CalculateDamage
@@ -3298,7 +3323,7 @@ MirrorMoveCheck:
 	ld b, [hl]
 	or b
 	ret z ; don't do anything else if the enemy fainted
-	; call HandleBuildingRage
+	; call HandleBuildingRage ; PureRGBnote: CHANGED: rage effect changed so don't need this code
 
 	ld hl, wPlayerBattleStatus1
 	bit ATTACKING_MULTIPLE_TIMES, [hl]
@@ -3518,7 +3543,7 @@ CheckPlayerStatusConditions:
 	ld hl, wPlayerBattleStatus1
 	ld a, [hl]
 	; clear thrashing, charging up, and trapping moves such as warp (already cleared for confusion damage)
-	and ~((1 << THRASHING_ABOUT) | (1 << CHARGING_UP) | (1 << USING_TRAPPING_MOVE))
+	and ~((1 << THRASHING_ABOUT) | (1 << CHARGING_UP) | (1 << USING_TRAPPING_MOVE)) ; PureRGBnote: CHANGED: bide code removed since its effect was changed
 	ld [hl], a
 	ld a, [wPlayerMoveEffect]
 	cp FLY_EFFECT
@@ -3538,7 +3563,7 @@ CheckPlayerStatusConditions:
 
 .BideCheck
 	ld hl, wPlayerBattleStatus1
-	jr .ThrashingAboutCheck ; CHANGED: bide effect was changed so this whole block isn't needed now
+	jr .ThrashingAboutCheck ; PureRGBnote: CHANGED: bide effect was changed so this whole block isn't needed now
 	;bit STORING_ENERGY, [hl] ; is mon using bide?
 	;jr z, .ThrashingAboutCheck
 	;xor a
@@ -3936,12 +3961,12 @@ PrintMoveFailureText:
 	                ; Thus, recoil damage will always be equal to 1
 	                ; even if it was intended to be potential damage/8.
 
-	ld hl, wDamageIntention ;FIXEDBUG: this address now stores the damage that would have been done if it didn't miss
+	ld hl, wDamageIntention ; PureRGBnote: FIXED: this address now stores the damage that would have been done if it didn't miss
 	ld a, [hli]
 	ld b, [hl]
 	srl a
 	rr b
-	;srl a ;TWEAK: due to the increased base attack of hi jump kick, increase the recoil damage to 1/4 the damage it would have done
+	;srl a ; PureRGBnote: CHANGED: due to the increased base attack of hi jump kick, increase the recoil damage to 1/4 the damage it would have done
 	;rr b
 	srl a
 	rr b
@@ -4244,7 +4269,7 @@ GetDamageVarsForPlayerAttack:
 ; if the enemy has used Reflect, double the enemy's defense
 	sla c
 	rl b
-	call do999StatCap ; FIXED: cap at 999
+	call do999StatCap ; shinpokerednote: FIXED: cap reflect boosted stat at 999
 .physicalAttackCritCheck
 	ld hl, wBattleMonAttack
 	ld a, [wCriticalHitOrOHKO]
@@ -4277,7 +4302,7 @@ GetDamageVarsForPlayerAttack:
 	rl b
 ; reflect and light screen boosts do not cap the stat at MAX_STAT_VALUE, so weird things will happen during stats scaling
 ; if a Pokemon with 512 or more Defense has used Reflect, or if a Pokemon with 512 or more Special has used Light Screen
-	call do999StatCap ; FIXED: cap stat at 999
+	call do999StatCap ; shinpokerednote: FIXED: cap light screen boosted stat at 999
 .specialAttackCritCheck
 	ld hl, wBattleMonSpecial
 	ld a, [wCriticalHitOrOHKO]
@@ -4359,7 +4384,7 @@ GetDamageVarsForEnemyAttack:
 ; if the player has used Reflect, double the player's defense
 	sla c
 	rl b
-	call do999StatCap ; FIXED: cap at 999
+	call do999StatCap ; shinpokerednote: FIXED: cap reflect boosted stat at 999
 .physicalAttackCritCheck
 	ld hl, wEnemyMonAttack
 	ld a, [wCriticalHitOrOHKO]
@@ -4392,7 +4417,7 @@ GetDamageVarsForEnemyAttack:
 	rl b
 ; reflect and light screen boosts do not cap the stat at MAX_STAT_VALUE, so weird things will happen during stats scaling
 ; if a Pokemon with 512 or more Defense has used Reflect, or if a Pokemon with 512 or more Special has used Light Screen
-	call do999StatCap ; FIXED: cap stat at 999
+	call do999StatCap ; shinpokerednote: FIXED: cap light screen boosted stat at 999
 .specialAttackCritCheck
 	ld hl, wEnemyMonSpecial
 	ld a, [wCriticalHitOrOHKO]
@@ -4479,7 +4504,7 @@ GetEnemyMonStat:
 	ld a, [wEnemyMonSpecies]
 	ld [wd0b5], a
 	call GetMonHeader
-	;ld hl, wEnemyMonDVs	;joenote - why load this into speedexp? I don't even know like seriously WTF
+	;ld hl, wEnemyMonDVs	;shinpokerednote: CHANGED: why load this into speedexp? I don't even know like seriously WTF
 	;ld de, wLoadedMonSpeedExp		
 	;ld a, [hli]
 	;ld [de], a
@@ -4489,9 +4514,9 @@ GetEnemyMonStat:
 	pop bc
 	ld b, $0
 	;ld hl, wLoadedMonSpeedExp - $b ; this base address makes CalcStat look in [wLoadedMonSpeedExp] for DVs
-	ld hl, wEnemyMonHP	;joenote - I mean come on just read it out of the wEnemyMon battle structure like normal
+	ld hl, wEnemyMonHP	;shinpokerednote: CHANGED: I mean come on just read it out of the wEnemyMon battle structure like normal
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;joenote - take stat exp into account if this is a trainer AI battle
+;shinpokerednote: ADDED: take stat exp into account if this is a trainer AI battle
 	ld a, [wIsInBattle]
 	cp 2 ; is it a trainer battle?
 	jr nz, .nottrainer
@@ -4685,7 +4710,7 @@ JumpToOHKOMoveEffect:
 	dec a
 	ret
 
-INCLUDE "data/battle/priority_moves.asm"
+INCLUDE "data/battle/priority_moves.asm" 
 
 ; determines if attack is a critical hit
 ; Azure Heights claims "the fastest pokémon (who are, not coincidentally,
@@ -4721,10 +4746,12 @@ CriticalHitTest:
 	bit GETTING_PUMPED, a        ; test for focus energy
 	jr z, .noFocusEnergyUsed     ; bug: using focus energy causes a shift to the right instead of left,
 	                             ; resulting in 1/4 the usual crit chance
-	sla b                        ; FIXED: fix focus energy 
+;;;;;;;;;; PureRGBnote: FIXED: fix focus energy 
+	sla b                        
 	jr c, .capCritical
 	sla b 						 ; normal attacks have 4x crit rate under focus energy
 	jr c, .capCritical
+;;;;;;;;;;
 .noFocusEnergyUsed
 	ld hl, HighCriticalMoves     ; table of high critical hit moves
 .Loop
@@ -4758,6 +4785,7 @@ CriticalHitTest:
 
 INCLUDE "data/battle/critical_hit_moves.asm"
 
+; PureRGBnote: CHANGED: counter's effect was changed to be a draining move and its name was changed to DRAIN PUNCH, so dont need this block of code anymore
 ; function to determine if Counter hits and if so, how much damage it does
 ;HandleCounterMove:
 ; The variables checked by Counter are updated whenever the cursor points to a new move in the battle selection menu.
@@ -4866,10 +4894,11 @@ ApplyAttackToEnemyPokemon:
 	ld b, SONICBOOM_DAMAGE ; 20
 	cp SONICBOOM
 	jr z, .storeDamage
+	; PureRGBnote: CHANGED: dragon rage doesn't do a set 40 damage anymore
 	;ld b, DRAGON_RAGE_DAMAGE ; 40 dragon rage was made a normal move instead of fixed damage
 	;cp DRAGON_RAGE
 	;jr z, .storeDamage
-; Psywave ; CHANGED: Psywave is a basic low power psychic move now
+; Psywave ; PureRGBnote: CHANGED: Psywave is a basic low power psychic move now, don't need this old code for randomizing its damage
 ;	ld a, [hl]
 ;	ld b, a
 ;	srl a
@@ -4985,10 +5014,11 @@ ApplyAttackToPlayerPokemon:
 	ld b, SONICBOOM_DAMAGE
 	cp SONICBOOM
 	jr z, .storeDamage
+	; PureRGBnote: CHANGED: dragon rage doesn't do a set 40 damage anymore
 	;ld b, DRAGON_RAGE_DAMAGE ; dragon rage was made a normal move instead of fixed damage
 	;cp DRAGON_RAGE
 	;jr z, .storeDamage
-; Psywave ;CHANGED: Psywave is now a basic low-power psychic move
+; Psywave ;; PureRGBnote: CHANGED: Psywave is now a basic low-power psychic move
 ;	ld a, [hl]
 ;	ld b, a
 ;	srl a
@@ -5124,6 +5154,7 @@ SubstituteBrokeText:
 	text_far _SubstituteBrokeText
 	text_end
 
+; PureRGBnote: CHANGED: don't need this whole block of code since rage's effect was changed
 ; this function raises the attack modifier of a pokemon using Rage when that pokemon is attacked
 ;HandleBuildingRage:
 ; values for the player turn
@@ -5363,9 +5394,9 @@ AdjustDamageForMoveType:
 	and $80
 	ld b, a
 	ld a, [hl] ; a = damage multiplier
-	call RemapTypeMatchupBasedOnOptions
+	call RemapTypeMatchupBasedOnOptions ; PureRGBnote: ADDED: remap type chart based on game options settings
 	ldh [hMultiplier], a
-;;;; FIXEDBUG - fixing the wrong effectiveness message 
+;;;; shinpokerednote: FIXED: fixing the wrong effectiveness message 
 	and a
 	jr z, .endmulti	;skip to end if the multiplier is zero
 	cp $05	;multiplier is still in a, so see if it's half damage
@@ -5418,7 +5449,7 @@ AdjustDamageForMoveType:
 .done
 	ret
 
-; NEW: type matchups can be switched to match how they behave in later generations if so desired
+; PureRGBnote: ADDED: type matchups can be switched to match how they behave in later generations if so desired
 ; by default ghost affects psychic, but can be set back to psychic being unaffected by ghost.
 RemapTypeMatchupBasedOnOptions:
 	push bc
@@ -5505,11 +5536,6 @@ RemapTypeMatchupBasedOnOptions:
 	ret
 
 
-
-
-
-
-
 ; function to tell how effective the type of an enemy attack is on the player's current pokemon
 ; now takes into account the effects that dual types can have
 ; (e.g. 4x weakness / resistance, weaknesses and resistances canceling)
@@ -5518,7 +5544,7 @@ RemapTypeMatchupBasedOnOptions:
 ; ($00 is immune, $02 is 4x uneffective, $28 is 4x super effective)
 ; as far is can tell, this is only used once in some AI code to help decide which move to use
 AIGetTypeEffectiveness:
-;joenote - if type-effectiveness bit is set, then do wPlayerMoveType and wEnemyMonType
+;shinpokerednote: CHANGED: - if type-effectiveness bit is set, then do wPlayerMoveType and wEnemyMonType
 ;		-also changed neutral value from $10 to $0A since it makes more sense
 ;		-and modifying this to take into account both types
 	ld a, [wEnemyMoveType]
@@ -5681,7 +5707,7 @@ MoveHitTest:
 	ret
 .moveMissed
 ;;;;;;;;;;;;;;;;;;;;
-;shinpokered code - if a move misses, store the damage it threatened into wDamageIntention.
+;shinpokerednote: FIXED: if a move misses, store the damage it threatened into wDamageIntention.
 ;this is so the Jump Kick effect works correctly
 	ld hl, wDamageIntention
 	ld a, [wDamage]
@@ -5835,8 +5861,10 @@ ExecuteEnemyMove:
 .executeEnemyMove
 	ld hl, wAILayer2Encouragement
 	inc [hl]
+;;;;;;;;;; PureRGBnote: CHANGED: load the move that's about to be used in order to facilitate disable functionality
 	ld a, [wEnemySelectedMove]
 	ld [wPreviousEnemySelectedMove], a
+;;;;;;;;;;
 	xor a
 	ld [wMoveMissed], a
 	ld [wMoveDidntMiss], a
@@ -5893,7 +5921,7 @@ EnemyCalcMoveDamage:
 	call IsInArray
 	jp c, EnemyMoveHitTest
 	call CriticalHitTest
-	;call HandleCounterMove ;CHANGED: counter changed to have an effect similar to drain punch
+	;call HandleCounterMove ; PureRGBnote: CHANGED: counter changed to have an effect similar to drain punch
 	;jr z, handleIfEnemyMoveMissed
 	call SwapPlayerAndEnemyLevels
 	call GetDamageVarsForEnemyAttack
@@ -6004,7 +6032,7 @@ EnemyCheckIfMirrorMoveEffect:
 	ld b, [hl]
 	or b
 	ret z
-	; call HandleBuildingRage
+	; call HandleBuildingRage ; PureRGBnote: CHANGED: rage has a different effect so this code isn't needed
 	ld hl, wEnemyBattleStatus1
 	bit ATTACKING_MULTIPLE_TIMES, [hl] ; is mon hitting multiple times? (example: double kick)
 	jr z, .notMultiHitMove
@@ -6073,7 +6101,7 @@ CheckEnemyStatusConditions:
 	jp .enemyReturnToHL
 .checkIfTrapped
 	ld a, [wPlayerBattleStatus1]
-	bit USING_TRAPPING_MOVE, a ; is the player using a multi-turn attack like warp
+	bit USING_TRAPPING_MOVE, a ; is the player using a multi-turn attack like wrap
 	jp z, .checkIfFlinched
 	ld hl, CantMoveText
 	call PrintText
@@ -6200,7 +6228,7 @@ CheckEnemyStatusConditions:
 .monHurtItselfOrFullyParalysed
 	ld hl, wEnemyBattleStatus1
 	ld a, [hl]
-	; clear thrashing about, charging up, and multi-turn moves such as warp
+	; clear thrashing about, charging up, and multi-turn moves such as wrap ; PureRGBnote: CHANGED: bide effect changed so don't need that code
 	and ~((1 << THRASHING_ABOUT) | (1 << CHARGING_UP) | (1 << USING_TRAPPING_MOVE))
 	ld [hl], a
 	ld a, [wEnemyMoveEffect]
@@ -6217,7 +6245,7 @@ CheckEnemyStatusConditions:
 .notFlyOrChargeEffect
 	ld hl, ExecuteEnemyMoveDone
 	jp .enemyReturnToHL ; if using a two-turn move, enemy needs to recharge the first turn
-.checkIfUsingBide ; CHANGED: bide effect changed to be a normal buff move
+.checkIfUsingBide ; PureRGBnote: CHANGED: bide effect changed to be a normal buff move, don't need this code
 	ld hl, wEnemyBattleStatus1
 	jr .checkIfThrashingAbout
 ;	bit STORING_ENERGY, [hl] ; is mon using bide?
@@ -6389,7 +6417,7 @@ LoadEnemyMonData:
 	ld hl, wEnemyMonHP
 	push hl
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;joenote - assign calculated stat exp to all stats if this is a trainer ai battle 
+;shinpokerednote: ADDED: assign calculated stat exp to all stats if this is a trainer ai battle 
 
 ;is this a trainer battle? Wild pkmn do not have statexp
 	ld a, [wIsInBattle]
@@ -6462,7 +6490,7 @@ LoadEnemyMonData:
 	ld a, [hli]
 	ld [wEnemyMonHP + 1], a
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;joenote - if this is a trainer battle and it's the first time the pkmn is sent out
+;shinpokerednote: CHANGED: if this is a trainer battle and it's the first time the pkmn is sent out
 ;		   then make sure it's current hp = it's max hp
 
 	ld a, [wIsInBattle]
@@ -6495,6 +6523,7 @@ LoadEnemyMonData:
 	ld a, [hli]            ; copy type 2
 	ld [de], a
 	inc de
+;;;;;;;;;;; PureRGBnote: CHANGED: storing the data that makes a pokemon use alternate palette
 	;ld a, [hli]            ; copy catch rate NEW: this property is no longer used
 	ld a, [wIsInBattle]
 	cp $2 ; is it a trainer battle?
@@ -6507,6 +6536,7 @@ LoadEnemyMonData:
 	call AddNTimes
 	ld a, [hl]
 .wildBattleFlags
+;;;;;;;;;;
 	ld [de], a
 	inc de
 	ld a, [wIsInBattle]
@@ -6570,9 +6600,11 @@ LoadEnemyMonData:
 	ld [wd11e], a
 	predef IndexToPokedex
 	ld a, [wd11e]
+;;;;;;;;;; PureRGBnote: FIXED: missingno addition code
 	and a
 	jr z, .missingnoSkip ; don't mark as seen if it's missingno who has no dex info
 	dec a ; pokedex is shifted by 1 because missingno is first
+;;;;;;;;;;
 	ld c, a
 	ld b, FLAG_SET
 	ld hl, wPokedexSeen
@@ -6590,7 +6622,7 @@ LoadEnemyMonData:
 	dec b
 	jr nz, .statModLoop
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;joenote - if this is a trainer battle, set the pkmn as being sent out and apply any burn/par stat changes
+;shinpokerednote: ADDED: if this is a trainer battle, set the pkmn as being sent out and apply any burn/par stat changes
 	push af
 	ld a, [wIsInBattle]
 	cp 2 ; is it a trainer battle?
@@ -6654,6 +6686,7 @@ SwapPlayerAndEnemyLevels:
 ; also writes OAM data and loads tile patterns for the Red or Old Man back sprite's head
 ; (for use when scrolling the player sprite and enemy's silhouettes on screen)
 LoadPlayerBackPic:
+;;;;;;;;;; PureRGBnote: ADDED: choose between the original back sprite for the player or the high res one
 	ld a, [wSpriteOptions2]
 	bit BIT_BACK_SPRITES, a
 	jr z, .ogBackSprite
@@ -6664,12 +6697,14 @@ LoadPlayerBackPic:
 	ld de, OldManPicBackSW
 	jr z, .next
 .ogBackSprite
+;;;;;;;;;;
 	ld a, [wBattleType]
 	dec a ; is it the old man tutorial?
 	ld de, RedPicBack
 	jr nz, .next
 	ld de, OldManPicBack
 .next
+;;;;;;;;;; PureRGBnote: ADDED: choose between the original back sprite for the player or the high res one
 	ld a, [wSpriteOptions2]
 	bit BIT_BACK_SPRITES, a
 	jr z, .ogBackSpriteBank
@@ -6679,6 +6714,7 @@ LoadPlayerBackPic:
 	call LoadBackSpriteUnzoomed
 	jr .nextAgain
 .ogBackSpriteBank
+;;;;;;;;;;
 	ld a, BANK(RedPicBack)
 	ASSERT BANK(RedPicBack) == BANK(OldManPicBack)
 	call UncompressSpriteFromDE
@@ -6704,7 +6740,7 @@ LoadPlayerBackPic:
 	ld [hli], a ; OAM tile number
 	inc a ; increment tile number
 	ldh [hOAMTile], a
-	;;;;; gbcnote - load correct palette for hat object
+	;;;;; shinpokerednote: gbcnote: load correct palette for hat object
 	ld a, $2
 	ld [hl], a
 	;;;;;
@@ -6719,10 +6755,12 @@ LoadPlayerBackPic:
 	ld e, a
 	dec b
 	jr nz, .loop
+;;;;;;;;;; PureRGBnote: ADDED: in the case of high res sprites we dont need to run the interlace code
 	ld a, [wSpriteOptions2]
 	bit BIT_BACK_SPRITES, a
 	jr nz, .nextFinish
 .ogSpriteRoutine
+;;;;;;;;;;
 	ld de, vBackPic
 	call InterlaceMergeSpriteBuffers
 .nextFinish
@@ -6934,6 +6972,8 @@ CalculateModifiedStat:
 	pop bc
 	ret
 
+;;;;;;;;;; PureRGBnote: FIXED: stat modifiers only badge boost the specific stat that was affected instead of all of them
+
 ApplyBadgeBoostsForSpecificStat: ;badge boosts a specific stat based on wWhatStat
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
@@ -6973,6 +7013,10 @@ ApplyBadgeBoostsForSpecificStat: ;badge boosts a specific stat based on wWhatSta
 	jp nz, ApplyBoostToStat
 	ret
 
+;;;;;;;;;;
+
+;;;;;;;;;; PureRGBnote: FIXED: thunderbadge boosts speed as the game's text indicates and soulbadge boosts defense.
+
 ApplyBadgeStatBoosts:
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
@@ -6998,6 +7042,8 @@ ApplyBadgeStatBoosts:
 	bit BIT_VOLCANOBADGE, b
 	call nz, ApplyBoostToStat
 	ret
+
+;;;;;;;;;;
 
 ; multiply stat at hl by 1.125
 ; cap stat at MAX_STAT_VALUE
@@ -7159,9 +7205,11 @@ PlayMoveAnimation:
 	vc_hook_red Reduce_move_anim_flashing_Confusion
 	call Delay3
 	vc_hook_red Reduce_move_anim_flashing_Psychic
+;;;;;;;;;; shinpokerednote: gbcnote: color code from yellow
 	predef MoveAnimation
 	callfar Func_78e98
 	ret
+;;;;;;;;;;
 
 InitBattle::
 	ld a, [wCurOpponent]
@@ -7199,7 +7247,7 @@ InitBattleCommon:
 	sub OPP_ID_OFFSET
 	jp c, InitWildBattle
 	ld [wTrainerClass], a
-	callfar GetTrainerInformation
+	callfar GetTrainerInformation ; PureRGBnote: MOVED: this function was moved out of home bank
 	callfar ReadTrainer
 	call DoBattleTransitionAndInitBattleVariables
 	call _LoadTrainerPic
@@ -7216,6 +7264,8 @@ InitBattleCommon:
 	ld [wIsInBattle], a
 	jp _InitBattleCommon
 
+;;;;;;;;;; PureRGBnote: ADDED: this missingno code does the item duplication glitch if it's enabled when encountering missingno
+
 MissingNoInit:
 	callfar MissingNoBattleStart
 	ret
@@ -7224,6 +7274,7 @@ InitWildBattle:
 	ld a, [wEnemyMonSpecies2]
 	cp MISSINGNO
 	call z, MissingNoInit ; This handles item duplication code if we encountered missingno
+;;;;;;;;;;
 	ld a, $1
 	ld [wIsInBattle], a
 	call LoadEnemyMonData
@@ -7314,6 +7365,8 @@ _InitBattleCommon:
 .emptyString
 	db "@"
 
+;;;;;;;;;; PureRGBnote: ADDED: now two banks are used for trainer sprites instead of 1
+
 CheckTrainerPicBank:
 	ld a, [wLinkState]
 	and a
@@ -7328,6 +7381,8 @@ CheckTrainerPicBank:
 	ld a, BANK(KidPic) ; this is where extra trainer pics are (trainers after Cool Kid in ID)
 .isDefault
 	ret
+
+;;;;;;;;;;
 
 _LoadTrainerPic:
 ; wd033-wd034 contain pointer to pic
@@ -7453,6 +7508,7 @@ LoadMonBackPic:
 	ld b, 7
 	ld c, 8
 	call ClearScreenArea
+;;;;;;;;;; PureRGBnote: ADDED: code to switch between original and larged back sprites
 	ld a, [wSpriteOptions2]
 	bit BIT_BACK_SPRITES, a
 	jr nz, .swSpriteHeader
@@ -7472,6 +7528,7 @@ LoadMonBackPic:
 .swSprites
 	call LoadBackSpriteUnzoomed
 .nextb
+;;;;;;;;;;
 	ld hl, vSprites
 	ld de, vBackPic
 	ld c, (2*SPRITEBUFFERSIZE)/16 ; count of 16-byte chunks to be copied
@@ -7479,6 +7536,7 @@ LoadMonBackPic:
 	ld b, a
 	jp CopyVideoData
 
+;;;;;;;;;; PureRGBnote: ADDED: code to switch between original and larged back sprites
 LoadBackSpriteZoomed:
 	predef ScaleSpriteByTwo
 	ld de, vBackPic
@@ -7490,7 +7548,9 @@ LoadBackSpriteUnzoomed:
 	ld de, vBackPic
 	push de
 	jp LoadUncompressedBackSprite
+;;;;;;;;;;
 
+;;;;;;;;;; shinpokerednote: FIXED: code for capping reflect/light screen stat boost at 999
 do999StatCap:
 	;b register contains high byte & c register contains low byte
 	ld a, c ;let's work on low byte first. Note that decimal 999 is $03E7 in hex.
@@ -7509,8 +7569,9 @@ do999StatCap:
 	;now registers b & c together contain $03E7 for a capped stat value of 999
 .donecapping
 	ret
+;;;;;;;;;;
 
-;joenote - function for checking and reseting the AI's already-acted bit
+;shinpokerednote: ADDED: function for checking and reseting the AI's already-acted bit
 CheckandResetEnemyActedBit:
 	ld a, [wEnemyBattleStatus3]
 	bit ALREADY_ACTED, a	;check a for already-acted bit (sets or clears zero flag)
@@ -7518,14 +7579,14 @@ CheckandResetEnemyActedBit:
 	ld [wEnemyBattleStatus3], a
 	ret 
 
-;joenote - function for setting the AI's already-acted bit
+;shinpokerednote: ADDED: function for setting the AI's already-acted bit
 SetEnemyActedBit:
 	ld a, [wEnemyBattleStatus3]
 	set ALREADY_ACTED, a ; sets the already-acted bit
 	ld [wEnemyBattleStatus3], a
 	ret
 
-;joenote - custom functions for determining which trainerAI pkmn have already been sent out before
+;shinpokerednote: ADDED: custom functions for determining which trainerAI pkmn have already been sent out before
 ;a=party position of pkmn (like wWhichPokemon). If checking, zero flag gives bit state (1 means sent out already)
 CheckAISentOut:
 	ld a, [wWhichPokemon]	

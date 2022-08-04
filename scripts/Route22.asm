@@ -379,10 +379,10 @@ Route22Script6:
 Route22_TextPointers:
 	dw Route22Text1
 	dw Route22Text2
-	dw PickUp3ItemText
-	dw PickUpItemText
+	dw PickUp3ItemText ; PureRGBnote: ADDED: new item on this route
+	dw PickUpItemText ; PureRGBnote: ADDED: new item on this route
 	dw Route22FrontGateText
-	dw Route22TrainerTipsText
+	dw Route22TrainerTipsText ; PureRGBnote: ADDED: new trainer tips sign on this route.
 
 Route22Text1:
 	text_asm

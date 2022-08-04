@@ -1,3 +1,4 @@
+; PureRGBnote: ADDED: some new overworld sprites were added, and are used if the option for enhanced sprites is turned on.
 ; overworld sprites
 ; SpriteSheetPointerTable indexes (see data/sprites/sprites.asm)
 	const_def

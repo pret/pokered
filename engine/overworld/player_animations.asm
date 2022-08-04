@@ -44,7 +44,7 @@ EnterMapAnim::
 	call PlayerSpinWhileMovingDown
 	jr .done
 .flyAnimation
-	call SetCurBlackoutMap ; set the map fly ended up at as the blackout map
+	call SetCurBlackoutMap ; PureRGBnote: CHANGED: set the map fly we ended up at as the blackout map after flying
 	pop hl
 	ld de, BirdSprite
 	ld hl, vNPCSprites
@@ -89,7 +89,7 @@ PlayerSpinWhileMovingDown:
 	ld [hli], a ; wPlayerSpinWhileMovingUpOrDownAnimMaxY
 	call GetPlayerTeleportAnimFrameDelay
 	ld [hl], a ; wPlayerSpinWhileMovingUpOrDownAnimFrameDelay
-	ld hl, wFacingDirectionList ; FIXED: on GBC or GB there was a visual glitch while this animation happened.
+	ld hl, wFacingDirectionList ; PureRGBnote: FIXED: on GBC or GB there was a visual glitch while this animation happened.
 	jp PlayerSpinWhileMovingUpOrDown
 
 _LeaveMapAnim::
@@ -110,7 +110,7 @@ _LeaveMapAnim::
 	ld [hli], a ; wPlayerSpinWhileMovingUpOrDownAnimMaxY
 	call GetPlayerTeleportAnimFrameDelay
 	ld [hl], a ; wPlayerSpinWhileMovingUpOrDownAnimFrameDelay
-	ld hl, wFacingDirectionList ; FIXED: on GBC or GB there was a visual glitch while this animation happened.
+	ld hl, wFacingDirectionList ; PureRGBnote: FIXED: on GBC or GB there was a visual glitch while this animation happened.
 	call PlayerSpinWhileMovingUpOrDown
 	call IsPlayerStandingOnWarpPadOrHole
 	ld a, b
@@ -398,10 +398,12 @@ FishingAnim:
 	ld de, wShadowOAMSprite39
 	ld bc, $4
 	call CopyData
+;;;;;;;;;; PureRGBnote: CHANGED: fishing animation wait time is randomized instead of hardcoded 100 frames.
 	call Random
 	and %1111111 ; a = random number between 0 and 127
 	add 20 ; minimum of 20 frames after starting to result, so minimum frames fishing = 20 and max = 147
 	ld c, a
+;;;;;;;;;;
 	call DelayFrames
 	ld a, [wRodResponse]
 	and a
@@ -499,7 +501,7 @@ _HandleMidJump::
 	ld c, a
 	inc a
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;60fps - only update every other tick
+; shinpokerednote: 60fps - only update every other tick
 	call Ledge60fps
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	cp $10

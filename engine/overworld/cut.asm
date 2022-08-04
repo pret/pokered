@@ -76,7 +76,7 @@ InitCutAnimOAM:
 	ld [wWhichAnimationOffsets], a
 	ld a, %11100100
 	ldh [rOBP1], a
-	call UpdateGBCPal_OBP1
+	call UpdateGBCPal_OBP1 ; shinpokerednote: gbcnote: gbc color code from yellow 
 	ld a, [wCutTile]
 	cp $52
 	jr z, .grass
@@ -124,7 +124,7 @@ WriteCutOrBoulderDustAnimationOAMBlock:
 	jp WriteOAMBlock
 
 CutOrBoulderDustAnimationTilesAndAttributes:
-;gbcnote - updated attributes for GBC
+; shinpokerednote: gbcnote: updated attributes for GBC
 	db $FC,$14,$FD,$14
 	db $FE,$14,$FF,$14
 

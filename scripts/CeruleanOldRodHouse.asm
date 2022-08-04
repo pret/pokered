@@ -1,3 +1,4 @@
+; PureRGBnote: ADDED: new house in cerulean where the fishing guru was moved to, he will give you old rod earlier.
 CeruleanOldRodHouse_Script:
 	call EnableAutoTextBoxDrawing
 	ret

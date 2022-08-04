@@ -1,3 +1,6 @@
+; PureRGBnote: ADDED: in the options we can configure what specific front sprites will be used for specific pokemon.
+;                     this code will check which to display when about to render a front sprite.
+
 CheckSpriteOptions::
 	ld a,[wcf91]
 	cp BULBASAUR

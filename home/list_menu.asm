@@ -50,10 +50,10 @@ DisplayListMenuID::
 	ld [wTopMenuItemY], a
 	ld a, 5
 	ld [wTopMenuItemX], a
-	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_LEFT
+	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_LEFT ; PureRGBnote: ADDED: tracking START and Dpad Left for new functions
 	ld [wMenuWatchedKeys], a
-	call CheckForTM
-	homecall PrepareOAMData	;gbcnote - makes mart menus cleaner by updating the OAM sprite table ahead of vblank
+	call CheckForTM ; PureRGBnote: ADDED: check for TM text to display on initializing the table (like if the first entry is a TM)
+	homecall PrepareOAMData	; shinpokerednote: gbcnote: makes mart menus cleaner by updating the OAM sprite table ahead of vblank
 
 DisplayListMenuIDLoop::
 	xor a
@@ -86,7 +86,7 @@ DisplayListMenuIDLoop::
 	pop af
 	ld b, a
 	bit BIT_START, a
-	call nz, ButtonStartPressed
+	call nz, ButtonStartPressed ; PureRGBnote: ADDED: start button can trigger depositing items when in the item menu
 	bit BIT_A_BUTTON, b
 	jp z, .checkOtherKeys
 .buttonAPressed
@@ -161,7 +161,7 @@ DisplayListMenuIDLoop::
 	ld [wChosenMenuItem], a
 	xor a
 	ldh [hJoy7], a ; joypad state update flag
-	ld [wTMTextShown], a
+	ld [wTMTextShown], a ; PureRGBnote: ADDED: once we pick a list entry, we consider TM text not shown so we will re-render it after finishing
 	ld hl, wd730
 	res 6, [hl] ; turn on letter printing delay
 	jp BankswitchBack
@@ -172,7 +172,7 @@ DisplayListMenuIDLoop::
 	jp nz, HandleItemListSwapping ; if so, allow the player to swap menu entries
 	ld b, a
 	bit BIT_D_LEFT, b
-	jr nz, .handleListSkip
+	jr nz, .handleListSkip ; PureRGBnote: ADDED: when pressing left we will check to skip to the top or bottom of the list
 	bit BIT_D_DOWN, b
 	ld hl, wListScrollOffset
 	jr z, .upPressed
@@ -184,17 +184,18 @@ DisplayListMenuIDLoop::
 	cp b ; will going down scroll past the Cancel button?
 	jp c, DisplayListMenuIDLoop
 	inc [hl] ; if not, go down
-	call CheckForTM
+	call CheckForTM ; PureRGBnote: ADDED: when scrolling down the list we need to load TM text if we scrolled over one
 	jp DisplayListMenuIDLoop
 .upPressed
 	ld a, [hl]
 	and a
 	jp z, DisplayListMenuIDLoop
 	dec [hl]
-	call CheckForTM
+	call CheckForTM ; PureRGBnote: ADDED: when scrolling up the list we need to load TM text if we scrolled over one
 	jp DisplayListMenuIDLoop
 .handleListSkip
-	callfar WrapListMenu
+	; PureRGBnote: ADDED: code that will check to wrap to the top or bottom of the list menu when pressing left dpad
+	call WrapListMenu ; NOTE: WrapListMenu is in bank1, which will always be loaded when this line is hit
 	jp DisplayListMenuIDLoop
 
 
@@ -234,10 +235,12 @@ DisplayChooseQuantityMenu::
 	jr nz, .incrementQuantity
 	bit BIT_D_DOWN, a
 	jr nz, .decrementQuantity
+;;;;;;;;;; PureRGBnote: ADDED: functionality to decrement or increment amounts by 10 when pressing right or left
 	bit BIT_D_RIGHT, a
 	jr nz, .incrementQuantity10
 	bit BIT_D_LEFT, a
 	jr nz, .decrementQuantity10
+;;;;;;;;;;
 	jr .waitForKeyPressLoop
 .incrementQuantity
 	ld a, [wMaxItemQuantity]
@@ -256,6 +259,7 @@ DisplayChooseQuantityMenu::
 	ld hl, wItemQuantity ; current quantity
 	dec [hl]
 	jr nz, .handleNewQuantity
+;;;;;;;;;; PureRGBnote: ADDED: functionality to decrement or increment amounts by 10 when pressing right or left
 ; wrap to the max quantity if the player goes below 1
 	ld a, [wMaxItemQuantity]
 	ld [hl], a
@@ -283,6 +287,7 @@ DisplayChooseQuantityMenu::
 	ld [hl], a
 	jr .handleNewQuantity
 .wrapMax
+;;;;;;;;;;
 ; wrap to the max quantity if the player goes below 1
 	ld a, [wMaxItemQuantity]
 	ld [hl], a
@@ -361,7 +366,7 @@ ExitListMenu::
 	ld [wMenuExitMethod], a
 	ld [wMenuWatchMovingOutOfBounds], a
 	xor a
-	ld [wTMTextShown], a
+	ld [wTMTextShown], a ; PureRGBnote: ADDED: when we leave a list menu we are no longer displaying any TM text
 	ldh [hJoy7], a
 	ld hl, wd730
 	res 6, [hl]

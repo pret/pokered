@@ -1,5 +1,5 @@
 SaffronCity_Script:
-	ResetEvent EVENT_SUPER_NERD_GOING_TO_CINNABAR
+	ResetEvent EVENT_SUPER_NERD_GOING_TO_CINNABAR ; PureRGBnote: ADDED: this will make it so the super nerd finishes reviving your fossil.
 	jp EnableAutoTextBoxDrawing
 
 SaffronCity_TextPointers:

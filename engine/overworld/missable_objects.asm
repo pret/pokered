@@ -20,6 +20,7 @@ MarkTownVisitedAndLoadMissableObjects::
 LoadMissableObjects:
 	ld l, a
 	push hl
+;;;;;;;;;; PureRGBnote: ADDED: when in the safari zone we use a different set of flags for hiding/showing objects.
 	CheckEvent EVENT_IN_SAFARI_ZONE
 	jr nz, .extraMissables
 	ld de, MissableObjects     ; calculate difference between out pointer and the base pointer
@@ -27,6 +28,7 @@ LoadMissableObjects:
 .extraMissables
 	ld de, ExtraMissableObjects
 .load
+;;;;;;;;;;
 	ld a, l
 	sub e
 	jr nc, .noCarry
@@ -73,6 +75,9 @@ LoadMissableObjects:
 	ld [de], a                 ; write sentinel
 	ret
 
+
+; PureRGBnote: ADDED: when in the safari zone we use a different set of flags for hiding/showing objects.
+; this function initializes these flags.
 InitializeMissableObjectsFlags:
 	ld hl, wMissableObjectFlags
 	ld bc, wMissableObjectFlagsEnd - wMissableObjectFlags
@@ -148,6 +153,7 @@ IsObjectHidden:
 	jr nz, .loop
 	ld c, a
 	ld b, FLAG_TEST
+;;;;;;;;;; PureRGBnote: ADDED: when in the safari zone we use a different set of flags for hiding/showing objects.
 	ld a, [wCurMap]
 	cp SAFARI_ZONE_EAST
 	jr c, .notSafariZone
@@ -158,6 +164,7 @@ IsObjectHidden:
 .notSafariZone
 	ld hl, wMissableObjectFlags
 .doAction
+;;;;;;;;;;
 	call MissableObjectFlagAction
 	ld a, c
 	and a

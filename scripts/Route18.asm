@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: new trainers on this route.
+
 Route18_Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, Route18TrainerHeaders

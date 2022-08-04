@@ -8,6 +8,7 @@ SafariZoneWestRestHouse_TextPointers:
 	dw SafariZoneRestHouse2Text3
 
 SafariZoneRestHouse2Text1:
+; PureRGBnote: ADDED: this NPC will display different text depending on what type of safari game you're playing
 	text_asm
 	ld a, [wSafariType]
 	cp SAFARI_TYPE_RANGER_HUNT
@@ -38,6 +39,7 @@ SafariZoneRestHouse2TextKangaskhan:
 	text_end
 
 SafariZoneRestHouse2Text2:
+; PureRGBnote: ADDED: this NPC will display different text depending on what type of safari game you're playing
 	text_asm
 	ld a, [wSafariType]
 	cp SAFARI_TYPE_RANGER_HUNT

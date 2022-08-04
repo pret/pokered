@@ -12,7 +12,8 @@ DrawStartMenu::
 	ld c, $08
 .drawTextBoxBorder
 	call TextBoxBorder
-	ld a, D_DOWN | D_UP | START | B_BUTTON | A_BUTTON | SELECT
+	; PureRGBnote: CHANGED: now SELECT button is tracked on this menu. Used in the new box-switching anywhere functionality.
+	ld a, D_DOWN | D_UP | START | B_BUTTON | A_BUTTON | SELECT 
 	ld [wMenuWatchedKeys], a
 	ld a, $02
 	ld [wTopMenuItemY], a ; Y position of first menu choice
@@ -57,7 +58,9 @@ DrawStartMenu::
 	res 6, [hl] ; turn pauses between printing letters back on
 	ret
 
-CheckSavedStartMenuIndex:
+; PureRGBnote: ADDED: this code will remember the start menu's last selection in specific scenarios where it's usually cleared.
+;                     Example: after going into a wild battle caused by fishing.
+CheckSavedStartMenuIndex: 
 	ld a, [wBattleAndStartSavedMenuItem] ; remembered menu selection from last time
 	and a
 	jr nz, .done

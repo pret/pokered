@@ -8,7 +8,7 @@ NameRaterScript_1da15:
 	and a
 	ret
 
-;NameRaterScript_1da20:
+;NameRaterScript_1da20: ; PureRGBnote: CHANGED: Name Rater will always allow you to rename pokemon regardless of their OT.
 ;	ld hl, wPartyMonOT
 ;	ld bc, NAME_LENGTH
 ;	ld a, [wWhichPokemon]

@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: card key will be consumed if all card key doors were opened in the game.
+
 SilphCo11F_Script:
 	call SilphCo11Script_62110
 	call EnableAutoTextBoxDrawing
@@ -114,11 +116,13 @@ MissableObjectIDs_62194:
 	db HS_SAFFRON_CITY_B
 	db HS_SAFFRON_CITY_C
 	db HS_SAFFRON_CITY_D
+;;;;;;;;;; PureRGBnote: ADDED: show additional new NPCs on the first floor
 	db HS_SILPH_CO_1F_TRAINER_1
 	db HS_SILPH_CO_1F_TRAINER_2
 	db HS_SILPH_CO_1F_TRAINER_3
 	db HS_SILPH_CO_1F_TRAINER_4
-	db HS_SILPH_CO_1F_RECEPTIONIST
+;;;;;;;;;;
+	db HS_SILPH_CO_1F_RECEPTIONIST ; PureRGBnote: CHANGED: used to be shown with an event instead for some reason
 	db -1 ; end
 
 MissableObjectIDs_6219b:

@@ -1,3 +1,4 @@
+; PureRGBnote: ADDED:
 ; code for jumping from the start of a list to the end, happens when pressing left Dpad at the top or bottom of a list menu.
 ; List menus are the ones capable of scrolling. (Item menu, battle item menu, PC menus, elevator menus, etc.)
 WrapListMenu::

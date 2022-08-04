@@ -1,3 +1,8 @@
+; PureRGBnote: ADDED: basement room in the new house in cerulean. A big room with lots of interesting text to read.
+; contains a secret vending machine that requires a pokemon with pay day in their moves in slot 1 of the party to use.
+; contains a rocket NPC who will trade you an alternate palette magneton
+; contains a big machine that will summon missingno when checked with A button.
+; this floor is only accessible after becoming champion.
 CeruleanRocketHouseB1F_Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, CeruleanRocketHouse_ScriptPointers

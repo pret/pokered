@@ -20,7 +20,7 @@ PewterMartText2:
 	text_far _PewterMartText2
 	text_end
 
-PewterMartTMKid:
+PewterMartTMKid: ; PureRGBnote: ADDED: new NPC who will talk about selling TMs
 	text_asm
 	CheckEvent EVENT_BEAT_MISTY
 	jr nz, .afterMisty

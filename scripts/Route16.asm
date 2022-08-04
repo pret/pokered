@@ -31,7 +31,7 @@ Route16Script0:
 	call DisplayTextID
 	ld a, SNORLAX
 	ld [wCurOpponent], a
-	ld a, 40
+	ld a, 40 ; PureRGBnote: CHANGED: raised snorlax's level to balance with party levels
 	ld [wCurEnemyLVL], a
 	ld a, HS_ROUTE_16_SNORLAX
 	ld [wMissableObjectIndex], a

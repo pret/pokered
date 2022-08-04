@@ -19,7 +19,7 @@ CeladonMart3F_TextPointers:
 	dw CeladonMart3Text15
 	dw CeladonMart3Text16
 	dw CeladonMart3Text17
-	dw CeladonMartTMKid
+	dw CeladonMartTMKid ; PureRGbnote: ADDED: new NPC, it's the TM kid from other pokemarts, he doesn't sell anything though this time
 
 CeladonMart3Text1:
 	text_asm
@@ -27,7 +27,7 @@ CeladonMart3Text1:
 	jr nz, .got_item
 	ld hl, TM18PreReceiveText
 	call PrintText
-	lb bc, TM_AGILITY, 1
+	lb bc, TM_CELADON_MART_GAME_SHOP_GUY, 1
 	call GiveItem
 	jr nc, .bag_full
 	SetEvent EVENT_GOT_TM18

@@ -1,3 +1,7 @@
+; PureRGBnote: ADDED: script code for the behaviour of the last two fishing gurus, because they largely behave the same.
+;                     whichever you encounter first will give a super rod, the other a different gift item.
+;                     this is needed because the good rod now is given in vermilion and the old rod in cerulean.
+
 LastTwoGurusScript::
 	ld hl, LastTwoGurusTextQuestion
 	call PrintText

@@ -69,7 +69,3 @@ MACRO dab ; dwb address, bank
 		SHIFT
 	ENDR
 ENDM
-
-MACRO ldPal
-	ld \1, \2 << 6 | \3 << 4 | \4 << 2 | \5
-ENDM

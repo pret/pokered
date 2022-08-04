@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: vending machine code was updated to have rare candy available in one specific secret vending machine
+
 VendingMachineMenu::
 	ld hl, VendingMachineText1
 	call PrintText
@@ -55,7 +57,7 @@ VendingMachineMenu::
 	jr z, .checkItemsRareCandy
 .checkItemsDefault
 	ld a, [wCurrentMenuItem]
-;FIXED - need to account for soda and lemonade when checking if player has enough cash
+;PureRGBnote: FIXED: need to account for soda and lemonade when checking if player has enough cash - originally it only checked for fresh water's amount.
 	cp 2 ; chose lemonade?
 	jr z, .picklemonade
 	cp 1 ; chose soda?
@@ -133,7 +135,7 @@ VendingMachineMenu::
 	predef SubBCDPredef
 	ld a, 1
 	ld [wTempFlag0], a ; marks what text to display in the end
-	jp .vendingStart ; FIXED: don't make the player repeatedly open the vending machine dialogue after buying something
+	jp .vendingStart ; PureRGBnote: FIXED: don't make the player repeatedly open the vending machine dialogue after buying something
 .BagFull
 	ld hl, VendingMachineText6
 	jr .done

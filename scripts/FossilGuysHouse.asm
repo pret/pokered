@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: new house in saffron city. The super nerd from Mt Moon returns and will teleport to cinnabar with his teleporter
+; in order to revive fossils for you early. There is also a bunch of amusing text to read in his house.
 FossilGuysHouse_Script:
 	jp EnableAutoTextBoxDrawing
 

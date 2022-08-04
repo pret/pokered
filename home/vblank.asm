@@ -26,7 +26,7 @@ VBlank::
 	call VBlankCopy
 	call VBlankCopyDouble
 	call UpdateMovingBgTiles
-	ldh a, [hFlagsFFFA]	;see if OAM skip has been enabled (such as while overworld sprites are updating)
+	ldh a, [hFlagsFFFA]	; shinpokerednote: FIXED: see if OAM skip has been enabled (such as while overworld sprites are updating)
 	bit 0, a
 	jr nz, .skipOAM
 	call hDMARoutine
@@ -53,9 +53,11 @@ VBlank::
 	ldh [hFrameCounter], a
 
 .skipDec
+;;;;;;;;;; shinpokerednote: audionote: these funcs were duplicated in home/audio.asm in yellow so just call them
 	farcall FadeOutAudio
 	callbs Music_DoLowHealthAlarm
 	callbs Audio1_UpdateMusic
+;;;;;;;;;;
 
 	farcall TrackPlayTime ; keep track of time played
 

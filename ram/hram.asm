@@ -399,7 +399,7 @@ hJoyInput:: db
 
 hDisableJoypadPolling:: db
 
-hFlagsFFFA::db
+hFlagsFFFA::db ; shinpokerednote: ADDED: new flag to prevent something while sprites are updating
 	ds 3
 hHRAMend::
-hGBC:: db
+hGBC:: db ; shinpokerednote: gbcnote: hram indicator from pokeyellow for where we're playing on GBC

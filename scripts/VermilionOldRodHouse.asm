@@ -1,3 +1,5 @@
+; PureRGBnote: CHANGED: the fishing guru relative here will now give you GOOD ROD.
+
 VermilionOldRodHouse_Script:
 	jp EnableAutoTextBoxDrawing
 

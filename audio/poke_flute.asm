@@ -18,7 +18,7 @@ Audio2_OverwriteChannelPointer:
 	ld [hli], a
 	ret
 
-;;;;;;;; FIXED: "poof!" sound effect of forgetting a move now works in battle
+;;;;;;;; shinpokerednote: FIXED: "poof!" sound effect of forgetting a move now works in battle
 Music_LearnMovePoofInBattle::
 	; begin playing the "caught mon" sound effect
 	ld a, SFX_CAUGHT_MON

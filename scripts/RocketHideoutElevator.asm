@@ -65,7 +65,8 @@ RocketHideoutElevator_TextPointers:
 
 RocketHideoutElevatorText1:
 	text_asm
-	CheckEvent EVENT_USED_LIFT_KEY
+;;;;;;;;;; PureRGBnote: CHANGED: lift key is consumed upon unlocking the elevator, making it usable permanently 
+	CheckEvent EVENT_USED_LIFT_KEY 
 	jr nz, .startLift
 	ld b, LIFT_KEY
 	predef GetIndexOfItemInBag
@@ -85,6 +86,7 @@ RocketHideoutElevatorText1:
 	ld hl, UnlockedElevatorText
 	call PrintText
 .startLift
+;;;;;;;;;;
 	call RocketHideoutElevatorScript_45741
 	ld hl, RocketHideoutElevatorWarpMaps
 	predef DisplayElevatorFloorMenu

@@ -57,7 +57,7 @@ HandleMenuInput_::
 .notAtTop
 	dec a
 	ld [wCurrentMenuItem], a ; move selected menu item up one space
-	call CheckForTM
+	call CheckForTM ; PureRGBnote: ADDED: when moving up and down (but not scrolling) specific list menus, we need to display TM text
 	jr .checkOtherKeys
 .alreadyAtTop
 	ld a, [wMenuWrappingEnabled]
@@ -84,7 +84,7 @@ HandleMenuInput_::
 .notAtBottom
 	ld a, c
 	ld [wCurrentMenuItem], a
-	call CheckForTM
+	call CheckForTM ; PureRGBnote: ADDED: when moving up and down (but not scrolling) specific list menus, we need to display TM text
 .checkOtherKeys
 	ld a, [wMenuWatchedKeys]
 	and b ; does the menu care about any of the pressed keys?
@@ -191,16 +191,14 @@ PlaceMenuCursor::
 	ld [wLastMenuItem], a
 	ret
 
+; PureRGBnote: ADDED: function for displaying the move contained within a TM when scrolling over it in lists.
 CheckForTM::
 	ld a, [wListWithTMText]
 	and a
 	ret z
-	push bc
-	push hl
-	farcall CheckLoadTmName
-	pop hl
-	pop bc
-	ret
+	; This func is in bank1, not home bank, but we'll only ever reach this code while bank1 is loaded due to how list menus behave
+	; keep in mind we only need to display TM names in a list menu, other menu types never need to
+	jp CheckLoadTmName 
 
 ; This is used to mark a menu cursor other than the one currently being
 ; manipulated. In the case of submenus, this is used to show the location of

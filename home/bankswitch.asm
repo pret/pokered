@@ -5,7 +5,7 @@ BankswitchHome::
 	ldh a, [hLoadedROMBank]
 	ld [wBankswitchHomeSavedROMBank], a
 	ld a, [wBankswitchHomeTemp]
-BankswitchCommon::
+BankswitchCommon:: ; shinpokerednote: audionote: gbcnote: new function jump address from yellow
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret

@@ -64,7 +64,7 @@ DisplayDiploma::
 	call GBPalNormal
 	ld a, $90
 	ldh [rOBP0], a
-	call UpdateGBCPal_OBP0
+	call UpdateGBCPal_OBP0 ; shinpokerednote: gbcnote: gbc color code from pokemon yellow
 	call WaitForTextScrollButtonPress
 	ld hl, wd730
 	res 6, [hl]

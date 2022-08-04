@@ -1,3 +1,5 @@
+;;;;;;;;;; PureRGBnote: ADDED: CHANGED: most of these functions were modified to allow multiple hidden items to be picked up at once. 
+
 HiddenItems:
 	call HiddenItemsInit
 	ret nz
@@ -107,8 +109,11 @@ HiddenItemBagFullText::
 	text_far _HiddenItemBagFullText
 	text_end
 
+;;;;;;;;;;
+
+
 HiddenCoins:
-	CheckEvent EVENT_GOT_COIN_CASE
+	CheckEvent EVENT_GOT_COIN_CASE ; PureRGBnote: CHANGED: coin case is now just an event instead of an item in your bag.
 	ret z
 	ld hl, HiddenCoinCoords
 	call FindHiddenItemOrCoinsIndex

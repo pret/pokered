@@ -1,3 +1,5 @@
+; shinpokerednote: gbcnote: ADDED: palette data from pokemon yellow, this data is used on GBC to display colors in the correct places on screen 
+
 BGMapAttributes_Unknown1:
 	db $23
 	dw $000d
@@ -450,6 +452,9 @@ BGMapAttributes_WholeScreen:
 	db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
 	db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
 	db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+
+; PureRGBnote: ADDED: BGMapAttributes_PokemonMiddleScreenBox is used for colorizing on gbc the box that displays when 
+;                     you view the fossils in pewter city or the left binoculars in route 15
 
 BGMapAttributes_PokemonMiddleScreenBox:
 	db $23

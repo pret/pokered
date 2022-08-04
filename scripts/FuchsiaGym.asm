@@ -272,7 +272,7 @@ FuchsiaGymAfterBattleText6:
 	text_far _FuchsiaGymAfterBattleText6
 	text_end
 
-FuchsiaGymGuideText:
+FuchsiaGymGuideText: ; PureRGBnote: ADDED: gym guide gives you apex chips after beating the leader
 	text_asm
 	CheckEvent EVENT_BEAT_KOGA
 	jr nz, .afterBeat

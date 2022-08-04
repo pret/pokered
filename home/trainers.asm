@@ -1,3 +1,5 @@
+; PureRGBnote: MOVED: a bunch of code was moved from this file to other banks or commented out since it was unused.
+
 ; stores hl in [wTrainerHeaderPtr]
 StoreTrainerHeaderPointer::
 	ld a, h
@@ -331,11 +333,11 @@ EngageMapTrainer::
 	ld e, a
 	add hl, de     ; seek to engaged trainer data
 	ld a, [hli]    ; load trainer class
-	ld [wUnusedD119], a ; persists after battle complete, used for drawing trainer sprites
+	ld [wUnusedD119], a ; PureRGBnote: ADDED: persists after battle complete, used for drawing trainer sprites after battle
 	ld [wEngagedTrainerClass], a
 	ld a, [hl]     ; load trainer mon set
 	ld [wEngagedTrainerSet], a
-	jpfar PlayTrainerMusic
+	jpfar PlayTrainerMusic ; PureRGBnote: MOVED: playtrainermusic was moved to another bank
 
 PrintEndBattleText::
 	push hl

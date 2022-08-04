@@ -1,3 +1,7 @@
+; PureRGBnote: ADDED: currently unused code, intended for usage in a future version optionally for saving on a cart without a SRAM battery.
+;                     some bootleg carts allow you to flash the save data to the ROM itself so no battery needs to hold the volatile SRAM. 
+;                     This code is what does that. It's not fully implemented yet.
+
 ; 32K routines by LucentW#6667 / https://t.me/LucentW / https://github.com/LucentW
 
 ; big credits to BennVenn for the base template for 8K savestates,

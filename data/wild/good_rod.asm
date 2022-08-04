@@ -1,3 +1,4 @@
+; PureRGBnote: ADDED: there are now 2 encounter tables for good rod, one for ponds/lakes and one for the ocean.
 ; random choice of 4 good rod encounters
 GoodRodMons:
 	; level, species

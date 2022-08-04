@@ -1,3 +1,4 @@
+; PureRGBnote: ADDED: many new hide show values were added versus the original game to hide and show new items or NPCs 
 ; default hidden/shown objects for each map
 
 MapHSPointers:

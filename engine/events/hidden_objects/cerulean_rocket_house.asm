@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: this code is to allow readable text on specific tiles in the secret rocket house. Example: the computer screens.
+
 PrintRocketSNESText:
 	xor a
 	jp DoRocketHouseJump

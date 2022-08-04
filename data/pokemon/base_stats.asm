@@ -152,7 +152,7 @@ INCLUDE "data/pokemon/base_stats/dragonite.asm"
 INCLUDE "data/pokemon/base_stats/mewtwo.asm"
 	assert_table_length NUM_POKEMON - 2 ; discount Mew and missingno
 
-MissingnoBaseStats::
+MissingnoBaseStats:: ; PureRGBnote: ADDED: give missingno a proper base stat header
 INCLUDE "data/pokemon/base_stats/missingno.asm"
 
 ; Mew's pics and base data are not grouped with the other Pokémon

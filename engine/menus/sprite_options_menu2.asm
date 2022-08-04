@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: one of the new pages in the options menu. This one's one of the two pages for options related to game sprites.
+
 DEF NIDORINO_RB_XPOS EQU 13
 DEF NIDORINO_RG_XPOS EQU 16
 DEF GOLBAT_RB_XPOS EQU 13

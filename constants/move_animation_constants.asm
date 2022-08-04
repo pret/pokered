@@ -3,11 +3,13 @@
 	const_def $C0
 DEF FIRST_SE_ID EQU const_value
 	const_skip $12
-	const SE_SMOKE_EVERYWHERE          ; $D3 used in Poison Gas
-	const SE_FIRE_EVERYWHERE           ; $D4 used in Take Down
-	const SE_SLIDE_ENEMY_MON_DOWN_AND_HIDE   ; $D5 used in Sludge
-	const SE_SLIDE_ENEMY_MON_HALF_OFF  ; $D6 used in Slam
+;;;;;;;;;; PureRGBnote: ADDED: new special effects
+	const SE_SMOKE_EVERYWHERE          ; $D3 used in Poison Gas 
+	const SE_FIRE_EVERYWHERE           ; $D4 used in Take Down 
+	const SE_SLIDE_ENEMY_MON_DOWN_AND_HIDE   ; $D5 used in Sludge 
+	const SE_SLIDE_ENEMY_MON_HALF_OFF  ; $D6 used in Slam 
 	const SE_SHAKE_BACK_AND_FORTH_SHORT; $D7 used in Rolling Kick
+;;;;;;;;;;
 	const SE_WAVY_SCREEN               ; $D8 used in Psywave/Night Shade/Psychic etc.
 	const SE_SUBSTITUTE_MON            ; $D9 used in Substitute (turns the pokemon into a mini sprite)
 	const SE_SHAKE_BACK_AND_FORTH      ; $DA used in Double Team
@@ -16,10 +18,10 @@ DEF FIRST_SE_ID EQU const_value
 	const SE_SHOW_MON_PIC              ; $DD used in Low Kick/Quick Attack/Seismic Toss etc.
 	const SE_BLINK_ENEMY_MON           ; $DE used in Seismic Toss
 	const SE_HIDE_ENEMY_MON_PIC        ; $DF used in Seismic Toss
-	const SE_WATER_DROPLETS_EVERYWHERE_FAST       ; $E0 
+	const SE_WATER_DROPLETS_EVERYWHERE_FAST       ; $E0 ; PureRGBnote: ADDED: used in Hydro Pump
 	const SE_DELAY_ANIMATION_10        ; $E1 used in lots of animations
 	const SE_SPIRAL_BALLS_INWARD       ; $E2 used in Growth/Focus Energy/Hyper Beam etc.
-	const SE_SPIRAL_BALLS_INWARD_FAST  ; $E3
+	const SE_SPIRAL_BALLS_INWARD_FAST  ; $E3 ; PureRGBnote: ADDED: used in Drill Peck and Horn Drill
 	const SE_SHAKE_ENEMY_HUD           ; $E4
 	const SE_SLIDE_MON_HALF_OFF        ; $E5 used in Softboiled
 	const SE_PETALS_FALLING            ; $E6 used in Petal Dance
@@ -28,7 +30,7 @@ DEF FIRST_SE_ID EQU const_value
 	const SE_SLIDE_MON_DOWN_AND_HIDE   ; $E9 used in Acid Armor
 	const SE_MINIMIZE_MON              ; $EA used in Minimize
 	const SE_BOUNCE_UP_AND_DOWN        ; $EB used in Splash
-	const SE_SHOOT_MANY_BALLS_UPWARD   ; $EC used in an unused animation
+	const SE_SHOOT_MANY_BALLS_UPWARD   ; $EC unused ; PureRGBnote: ADDED: used in Swords Dance, Amnesia
 	const SE_SHOOT_BALLS_UPWARD        ; $ED used in Teleport/Sky Attack
 	const SE_SQUISH_MON_PIC            ; $EE used in Teleport/Sky Attack
 	const SE_HIDE_MON_PIC              ; $EF
@@ -137,11 +139,13 @@ DEF FIRST_SE_ID EQU const_value
 	const SUBANIM_53
 	const SUBANIM_54
 	const SUBANIM_55
+;;;;;;;;;; PureRGBnote: ADDED: new subanimations
 	const SUBANIM_AMNESIA
 	const SUBANIM_AMNESIA1
 	const SUBANIM_BURN
 	const SUBANIM_AMNESIA_ENEMY
 	const SUBANIM_AMNESIA1_ENEMY
+;;;;;;;;;;
 DEF NUM_SUBANIMS EQU const_value
 
 ; types of subanimations

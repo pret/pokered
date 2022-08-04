@@ -203,6 +203,8 @@ FreezeBurnParalyzeEffect:
 	and a
 	jp nz, CheckDefrost ; can't inflict status if opponent is already statused
 
+;;;;;;;;;; PureRGBnote: CHANGED: ADDED: tweak how some moves behave when applying burn/freeze/paralyze status
+
 	ld a, [wPlayerMoveNum]
 	cp TRI_ATTACK
 	ld b, ICE ; NEW: tri attack can't freeze ice types
@@ -218,6 +220,7 @@ FreezeBurnParalyzeEffect:
 	jr z, .skipTypeComparison1
 	ld b, a
 .doComparison1
+;;;;;;;;;;
 	ld a, [wEnemyMonType1]
 	cp b ; do target type 1 and move type match?
 	ret z  ; return if they match (an ice move can't freeze an ice-type etc.)
@@ -270,6 +273,7 @@ FreezeBurnParalyzeEffect:
 	and a
 	jp nz, CheckDefrost
 
+;;;;;;;;;; PureRGBnote: CHANGED: ADDED: tweak how some moves behave when applying burn/freeze/paralyze status
 	ld a, [wEnemyMoveNum]
 	cp TRI_ATTACK
 	ld b, ICE ; NEW: tri attack can't freeze ice types
@@ -285,6 +289,7 @@ FreezeBurnParalyzeEffect:
 	jr z, .skipTypeComparison2
 	ld b, a
 .doComparison2
+;;;;;;;;;;
 	ld a, [wBattleMonType1]
 	cp b
 	ret z
@@ -378,7 +383,7 @@ FireDefrostedText:
 	text_far _FireDefrostedText
 	text_end
 
-; increases attack, special, and speed as a move effect
+; PureRGBnote: ADDED: increases attack, special, and speed as a move effect. Used with Meditate.
 AttackSpecialSpeedUpEffect:
 	;values for the enemy's turn
 	ld de, wPlayerMoveEffect
@@ -407,7 +412,7 @@ AttackSpecialSpeedUpEffect:
 	ld [de], a
 	ret
 
-; increases both attack and defense as a move effect
+; PureRGBnote: ADDED: increases both attack and defense as a move effect, used with bide
 AttackDefenseUpEffect:
 	;values for the enemy's turn
 	ld de, wPlayerMoveEffect
@@ -431,7 +436,7 @@ AttackDefenseUpEffect:
 	ld [de], a
 	ret
 
-; increases both accuracy and attack as a move effect
+; PureRGBnote: ADDED: increases both accuracy and attack as a move effect, used with sharpen
 AccuracyAttackUpEffect:
 	;values for the enemy's turn
 	ld de, wPlayerMoveEffect
@@ -465,6 +470,7 @@ StatModifierUpEffect:
 	ld de, wEnemyMoveEffect
 .statModifierUpEffect
 	ld a, [de]
+;;;;;;;;;; PureRGBnote: ADDED: need to decide which stat is being modified here and store it so we can apply correct badge boosts if necessary
 	ld [wWhichStatMod], a
 	call MapEffectToStat
 	ld [wWhatStat], a
@@ -476,6 +482,7 @@ StatModifierUpEffect:
 .loadDefault
 	ld a, [de]
 .continue
+;;;;;;;;;;
 	sub ATTACK_UP1_EFFECT
 	cp EVASION_UP1_EFFECT + $3 - ATTACK_UP1_EFFECT ; covers all +1 effects
 	jr c, .incrementStatMod
@@ -490,6 +497,7 @@ StatModifierUpEffect:
 	cp b ; can't raise stat past +6 ($d or 13)
 	jp c, PrintNothingHappenedText
 	ld a, [de]
+;;;;;;;;;; PureRGBnote: ADDED: need to decide which stat is being modified here and store it so we can apply correct badge boosts if necessary
 	call MapSideEffectToStatMod
 	cp $ff
 	jr z, .loadDefault2
@@ -497,6 +505,7 @@ StatModifierUpEffect:
 .loadDefault2
 	ld a, [de]
 .continue2
+;;;;;;;;;;
 	cp ATTACK_UP1_EFFECT + $8 ; is it a +2 effect?
 	jr c, .ok
 	inc b ; if so, increment stat mod again
@@ -593,12 +602,14 @@ UpdateStatDone:
 	ld de, wEnemyMoveNum
 	ld bc, wEnemyMonMinimized
 .playerTurn
+;;;;;;;;;; PureRGBnote: ADDED: certain stat modifiers don't need to do the animation here
 	ld a, [wWhichStatMod]
 	cp ATTACK_UP_SIDE_EFFECT
 	jr z, .skipAnimation
 	cp SPEED_UP_SIDE_EFFECT
 	jr z, .skipAnimation
-	ld a, [de]	
+	ld a, [de]
+;;;;;;;;;;
 	cp MINIMIZE
 	jr nz, .notMinimize
  ; if a substitute is up, slide off the substitute and show the mon pic before
@@ -629,13 +640,13 @@ UpdateStatDone:
 	and a
 	call z, ApplyBadgeBoostsForSpecificStat ; whenever the player uses a stat-up move, badge boosts get reapplied again to every stat,
 	                             ; even to those not affected by the stat-up move (will be boosted further)
-	                             ; FIXED: badge boosts only applied to the specific stat being modified
+	                             ; PureRGBnote: FIXED: badge boosts only applied to the specific stat being modified
 	ld hl, MonsStatsRoseText
 	call PrintText
 
 ; these always run on the opponent, and run regardless of what stat was modified
-; FIXED: These ran on the opponent's stats erroneously
-; FIXED: These only run if the specific stat burn or paralyze affect is being modified
+;;;;;;;;;;; PureRGBnote: FIXED: These ran on the opponent's stats erroneously
+;;;;;;;;;;; PureRGBnote: FIXED: These only run if the specific stat burn or paralyze affect is being modified
 	ldh a, [hWhoseTurn]
 	push af
 	xor 1 ; flip the turn temporarily to make these run on whoever's turn it currently is instead of the opponent correctly
@@ -652,6 +663,7 @@ UpdateStatDone:
 	ld [wWhatStat], a ; no longer modifying a stat
 	ld [wWhichStatMod], a ; no longer modifying a stat
 	ret
+;;;;;;;;;;
 
 RestoreOriginalStatModifier:
 	pop hl
@@ -671,10 +683,12 @@ MonsStatsRoseText:
 	jr z, .playerTurn
 	ld a, [wEnemyMoveEffect]
 .playerTurn
+;;;;;;;;;; PureRGBnote: ADDED: these specific effects don't use "greatly rose" text
 	cp ATTACK_UP_SIDE_EFFECT
 	jp z, .rose
 	cp SPEED_UP_SIDE_EFFECT
 	jp z, .rose
+;;;;;;;;;;
 	cp ATTACK_DOWN1_EFFECT
 	ret nc
 .rose
@@ -709,9 +723,11 @@ StatModifierDownEffect:
 	call CheckTargetSubstitute ; can't hit through substitute
 	jp nz, MoveMissed
 	ld a, [de]
+;;;;;;;;;; PureRGBnote: ADDED: need to decide which stat is being modified here and store it so we can apply correct badge boosts if necessary
 	call MapEffectToStat
 	ld [wWhatStat], a
 	ld a, [de]
+;;;;;;;;;;
 	cp ATTACK_DOWN_SIDE_EFFECT
 	jr c, .nonSideEffect
 	call BattleRandom
@@ -844,14 +860,14 @@ UpdateLoweredStatDone:
 	and a
 	call nz, ApplyBadgeBoostsForSpecificStat ; whenever the player uses a stat-down move, badge boosts get reapplied again to every stat,
 	                              ; even to those not affected by the stat-up move (will be boosted further)
-	                             ; FIXED: badge boosts only applied to the specific stat being modified
+	                             ; PureRGBnote: FIXED: badge boosts only applied to the specific stat being modified
 	ld hl, MonsStatsFellText
 	call PrintText
 
 ; These where probably added given that a stat-down move affecting speed or attack will override
 ; the stat penalties from paralysis and burn respectively.
 ; But they are always called regardless of the stat affected by the stat-down move.
-; FIXED: These only run if the specific stat burn or paralyze affect is being modified
+;;;;;;;;;; PureRGBnote: FIXED: These only run if the specific stat burn or paralyze affect is being modified
 	ld a, [wWhatStat]
 	cp MOD_SPEED
 	call z, QuarterSpeedDueToParalysis ; apply speed penalty to the player whose turn it is, if it's paralyzed
@@ -861,6 +877,7 @@ UpdateLoweredStatDone:
 	ld a, $ff
 	ld [wWhatStat], a ; no longer modifying a stat
 	ret
+;;;;;;;;;;
 
 
 CantLowerAnymore_Pop:
@@ -892,7 +909,7 @@ MonsStatsFellText:
 	ld a, [wEnemyMoveEffect]
 .playerTurn
 ; check if the move's effect decreases a stat by 2
-	cp HAZE_EFFECT + 1
+	cp HAZE_EFFECT + 1 ; PureRGBnote: CHANGED: bide effect was removed so use the equivalent
 	ret c
 	cp ATTACK_DOWN_SIDE_EFFECT
 	ret nc
@@ -927,7 +944,7 @@ INCLUDE "data/battle/stat_mod_names.asm"
 INCLUDE "data/battle/stat_modifiers.asm"
 INCLUDE "data/battle/stat_mod_stat_mapping.asm"
 
-;BideEffect: ;CHANGED: Bide effect switched to a stat buff
+;BideEffect: ; PureRGBnote: CHANGED: Bide effect switched to a stat buff
 ;	ld hl, wPlayerBattleStatus1
 ;	ld de, wPlayerBideAccumulatedDamage
 ;	ld bc, wPlayerNumAttacksLeft
@@ -1111,7 +1128,7 @@ TwoToFiveAttacksEffect:
 	ld a, [hl]
 	cp TWINEEDLE_EFFECT
 	jr z, .twineedle
-	cp TWO_OR_THREE_ATTACKS_EFFECT
+	cp TWO_OR_THREE_ATTACKS_EFFECT ; PureRGBnote: ADDED: effect that has a 50% chance of 2 or 3 attacks each
 	jr z, .twoOrThree
 	cp ATTACK_TWICE_EFFECT
 	ld a, $2 ; number of hits it's always 2 for ATTACK_TWICE_EFFECT
@@ -1124,10 +1141,12 @@ TwoToFiveAttacksEffect:
 ; if the number of hits was greater than 2, re-roll again for a lower chance
 	call BattleRandom
 	and $3
+;;;;;;;;;; PureRGBnote: ADDED: effect that does 2 or 3 hits with a 50% chance of both results. Used for Spike Cannon.
 	jr .gotNumHits
 .twoOrThree
 	call BattleRandom
 	and 1 ; can either be 0 or 1 which maps to 2 or 3 hits
+;;;;;;;;;;
 .gotNumHits
 	inc a
 	inc a
@@ -1264,7 +1283,7 @@ TrappingEffect:
                         ; the target won't need to recharge even if the trapping move missed
 	set USING_TRAPPING_MOVE, [hl] ; mon is now using a trapping move
 
-;;;;;;;;;;;;;;;;; PureRGB - NEW: trapping moves do 2-3 turns maximum but a bit more damage to compensate.	
+;;;;;;;;;;;;;;;;; PureRGBnote: CHANGED: trapping moves do 2-3 turns maximum but a bit more damage to compensate.	
 .reroll
 	call BattleRandom 	
 	and %11
@@ -1290,7 +1309,7 @@ RecoilEffect:
 	jpfar DefaultRecoilEffect_
 
 BigRecoilEffect:
-	jpfar BigRecoilEffect_
+	jpfar BigRecoilEffect_ ; PureRGBnote: ADDED: recoil effect that does 1/2 of the damage done to the user.
 
 ConfusionSideEffect:
 	call BattleRandom
@@ -1298,7 +1317,7 @@ ConfusionSideEffect:
 	ret nc
 	jr ConfusionSideEffectSuccess
 
-ConfusionBigSideEffect:
+ConfusionBigSideEffect: ; PureRGBnote: ADDED: confusion effect that has a 30% chance of applying confusion
 	call BattleRandom
 	cp 30 percent ; chance of confusion
 	ret nc
@@ -1333,11 +1352,13 @@ ConfusionSideEffectSuccess:
 	inc a
 	ld [bc], a ; confusion status will last 2-5 turns
 	pop af
+;;;;;;;;;; PureRGBnote: ADDED: confusion effect that has a 30% chance of applying confusion
 	cp CONFUSION_BIG_SIDE_EFFECT
 	jr z, .done
 	cp CONFUSION_SIDE_EFFECT
 	jr z, .done
 	call PlayCurrentMoveAnimation2
+;;;;;;;;;;
 .done
 	ld hl, BecameConfusedText
 	jp PrintText
@@ -1386,7 +1407,7 @@ ClearHyperBeam:
 	pop hl
 	ret
 
-RageEffect: ; rage effect was removed
+RageEffect: ; PureRGBnote: CHANGED: rage effect was changed
 	ret
 	;ld hl, wPlayerBattleStatus2
 	;ldh a, [hWhoseTurn]
@@ -1480,6 +1501,8 @@ SplashEffect:
 	call PlayCurrentMoveAnimation
 	jp PrintNoEffectText
 
+;;;;;;;;;; PureRGBnote: CHANGED: this function was updated to disable the previous move used by the opponent
+;;;;;;;;;;                       or a random one if they haven't used any move yet. 
 DisableEffect:
 	call MoveHitTest
 	ld a, [wMoveMissed]
@@ -1583,6 +1606,7 @@ DisableEffect:
 	pop hl
 .moveMissed
 	jp PrintButItFailedText_
+;;;;;;;;;;
 
 MoveWasDisabledText:
 	text_far _MoveWasDisabledText
@@ -1711,7 +1735,7 @@ PlayBattleAnimationGotID:
 	push de
 	push bc
 	predef MoveAnimation
-	callfar Func_78e98
+	callfar Func_78e98 ; shinpokerednote: gbcnote: functions from pokemon yellow related to gbc color
 	pop bc
 	pop de
 	pop hl

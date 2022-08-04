@@ -1,3 +1,5 @@
+; PureRGBnote: CHANGED: many move animations were enhanced
+
 AttackAnimationPointers:
 	table_width 2, AttackAnimationPointers
 	dw PoundAnim

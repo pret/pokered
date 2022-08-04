@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: the 2 trainers that were added in pokemon yellow were added.
+
 ViridianForest_Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, ViridianForestTrainerHeaders

@@ -26,7 +26,7 @@ DefaultNamesRivalList:
 	db "JACK@"
 ENDC
 
-IF DEF(_GREEN)
+IF DEF(_GREEN) ; PureRGBnote: GREENBUILD: default names specific to pokemon green
 DefaultNamesPlayerList:
 	db "NEW NAME@"
 	db "GREEN@"

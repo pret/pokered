@@ -7,7 +7,7 @@ CeruleanMart_TextPointers:
 	dw CeruleanMartText3
 	dw CeruleanMartTMKid
 
-CeruleanMartTMKid:
+CeruleanMartTMKid: ; PureRGBnote: ADDED: new NPC who will sell TMs
 	text_asm
 	ld hl, TMKidGreet1
 	call PrintText

@@ -1,3 +1,4 @@
+; PureRGBnote: CHANGED: many super rod encounters were modified in level or pokemon
 ; super rod encounters
 SuperRodData:
 	; map, fishing group

@@ -2,7 +2,7 @@ StartMenu_Pokedex::
 	predef ShowPokedexMenu
 	call LoadScreenTilesFromBuffer2 ; restore saved screen
 	call Delay3
-	;call LoadGBPal ;gbcnote: moved to redisplaystartmenu for better visual effect
+	;call LoadGBPal ; shinpokerednote: gbcnote: moved to redisplaystartmenu for better visual effect
 	call UpdateSprites
 	jp RedisplayStartMenu
 
@@ -26,7 +26,7 @@ StartMenu_Pokemon::
 .exitMenu
 	call GBPalWhiteOutWithDelay3
 	call RestoreScreenTilesAndReloadTilePatterns
-	;call LoadGBPal ;gbcnote: moved to redisplaystartmenu for better visual effect
+	;call LoadGBPal ; shinpokerednote: gbcnote: moved to redisplaystartmenu for better visual effect
 	jp RedisplayStartMenu
 .chosePokemon
 	call SaveScreenTilesToBuffer1
@@ -132,7 +132,7 @@ StartMenu_Pokemon::
 .fly
 	bit BIT_THUNDERBADGE, a
 	jp z, .newBadgeRequired
-	call CheckIfInFlyMap
+	call CheckIfInFlyMap ; PureRGBnote: CHANGED: you can FLY from more places than vanilla game.
 	jr z, .canFly
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMonNicks
@@ -150,7 +150,7 @@ StartMenu_Pokemon::
 	set 1, [hl]
 	jp StartMenu_Pokemon
 .doFly
-	callfar ClearSafariFlags
+	callfar ClearSafariFlags ; PureRGBnote: CHANGED: safari zone stuff is cleared when initiating fly
 	jp .goBackToMap
 .cut
 	bit BIT_CASCADEBADGE, a
@@ -206,7 +206,7 @@ StartMenu_Pokemon::
 	call GBPalWhiteOutWithDelay3
 	jp .goBackToMap
 .teleport
-	;call CheckIfInOutsideMap
+	;call CheckIfInOutsideMap ; PureRGBnote: CHANGED: teleport can be used anywhere.
 	jr .canTeleport
 	; ld a, [wWhichPokemon]
 	;ld hl, wPartyMonNicks
@@ -226,7 +226,7 @@ StartMenu_Pokemon::
 	ld c, 60
 	call DelayFrames
 	call GBPalWhiteOutWithDelay3
-	callfar ClearSafariFlags
+	callfar ClearSafariFlags ; PureRGBnote: CHANGED: when teleporting, safari stuff is cleared.
 	jp .goBackToMap
 .warpToLastPokemonCenterText
 	text_far _WarpToLastPokemonCenterText
@@ -305,7 +305,7 @@ ItemMenuLoop:
 
 StartMenu_Item::
 	ld a, 1
-	ld [wListWithTMText], a ; we want TM names to get printed here
+	ld [wListWithTMText], a ; PureRGBnote: ADDED: we want TM names to get printed in this list menu
 	ld a, [wLinkState]
 	dec a ; is the player in the Colosseum or Trade Centre?
 	jr nz, .notInCableClubRoom
@@ -322,27 +322,30 @@ StartMenu_Item::
 	ld [wPrintItemPrices], a
 	ld a, ITEMLISTMENU
 	ld [wListMenuID], a
-	call CheckLoadSavedIndex
+	call CheckLoadSavedIndex ; PureRGBnote: CHANGED: we can save the position in the item menu in multiple ways now
 	call DisplayListMenuID
 	ld a, [wCurrentMenuItem]
 	ld [wBagSavedMenuItem], a
 	jr nc, .choseItem
 .exitMenu
 	xor a
-	ld [wListWithTMText], a ; finished scrolling through a list
+	ld [wListWithTMText], a ; PureRGBnote: ADDED: done with the item list interaction, so no TM names need to be printed anymore
 	call LoadScreenTilesFromBuffer2 ; restore saved screen
 	call LoadTextBoxTilePatterns
 	call UpdateSprites
 	jp RedisplayStartMenu
 .choseItem
+;;;;;;;;;; PureRGBnote: ADDED: code to facilitate depositing an item from the item menu directly to PC. 
+;;;;;;;;;;                     wUnusedC000 is set when we pressed start in the item list.
 	ld a, [wUnusedC000]
-	cp 1
-	jr nz, .noStartButton
+	and a
+	jr z, .noStartButton
 	callfar DepositItemFromItemMenu
-	ld a, 0
+	xor a
 	ld [wUnusedC000], a
 	jp ItemMenuLoop
 .noStartButton
+;;;;;;;;;;
 ; erase menu cursor (blank each tile in front of an item name) 
 	ld a, " "
 	ldcoord_a 5, 4
@@ -356,10 +359,10 @@ StartMenu_Item::
 	cp BICYCLE
 	jp z, .useOrTossItem
 	cp POCKET_ABRA
-	jp z, .useOrTossItem
+	jp z, .useOrTossItem ; PureRGBnote: ADDED: Pocket Abra doesn't bring up Use/toss dialog before usage
 .notBicycle1
 	xor a
-	ld [wListWithTMText], a
+	ld [wListWithTMText], a ; PureRGBnote: ADDED: done with the item list interaction, so no TM names need to be printed anymore
 	ld a, USE_TOSS_MENU_TEMPLATE
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
@@ -389,6 +392,7 @@ StartMenu_Item::
 	call CopyToStringBuffer
 	ld a, [wcf91]
 	cp BICYCLE
+;;;;;;;;;; PureRGBnote: ADDED: pocket abra closes the item menu after usage.
 	jr z, .yesBicycle
 	cp POCKET_ABRA
 	jr z, .pocketAbra
@@ -396,6 +400,7 @@ StartMenu_Item::
 .pocketAbra
 	jr .useItem_closeMenu
 .yesBicycle
+;;;;;;;;;;
 	ld a, [wd732]
 	bit 5, a
 	jr z, .useItem_closeMenu
@@ -430,7 +435,7 @@ StartMenu_Item::
 	and a
 	jp z, ItemMenuLoop
 	xor a
-	ld [wListWithTMText], a ; finished using list
+	ld [wListWithTMText], a ; PureRGBnote: ADDED: done with the item list interaction, so no TM names need to be printed anymore
 	jp CloseStartMenu
 .useItem_partyMenu
 	ld a, [wUpdateSpritesEnabled]
@@ -496,7 +501,7 @@ StartMenu_TrainerInfo::
 	call LoadScreenTilesFromBuffer2 ; restore saved screen
 	call RunDefaultPaletteCommand
 	call ReloadMapData
-	;call LoadGBPal ;gbcnote: moved to redisplaystartmenu for better visual effect
+	;call LoadGBPal ; shinpokerednote: gbcnote: moved to redisplaystartmenu for better visual effect
 	pop af
 	ldh [hTileAnimations], a
 	jp RedisplayStartMenu
@@ -685,21 +690,22 @@ StartMenu_Option::
 	jp RedisplayStartMenu
 
 SwitchPartyMon::
-	;make sure the animation is reset.
+	;mechanicalpennote: ADDED: make sure the animation is reset.
 	push bc
 	callfar ResetPartyAnimation
 	pop bc
 	; then swap
 	call SwitchPartyMon_InitVarOrSwapData ; swap data
-	ld a, [wWhichTrade]
+	ld a, [wSwappedMenuItem]
 	call SwitchPartyMon_ClearGfx
 	ld a, [wCurrentMenuItem]
 	call SwitchPartyMon_ClearGfx
 	call SwapPartyMonIcons
 	jp RedrawPartyMenu_
 
+; mechanicalpennote: ADDED: new code to swap pokemon icons when swapping pokemon on the party menu
 SwapPartyMonIcons:
-    ld a, [wWhichTrade] ;wSwappedMenuItem
+    ld a, [wSwappedMenuItem]
     ld hl, wShadowOAM
     ld bc, 16
     call AddNTimes ; add bc to hl, a times
@@ -874,6 +880,8 @@ SwitchPartyMon_InitVarOrSwapData:
 	pop hl
 	ret
 
+; PureRGBnote: ADDED: when fishing we can save the item list offset in a more permanent manner
+;                     so the fishing rod can be quickly reselected after battling a pokemon during fishing
 CheckLoadSavedIndex:
 	ld a, [wBagSavedMenuItem]
 	and a
@@ -900,6 +908,7 @@ CheckLoadSavedIndex:
 	ld [wCurrentMenuItem], a
 	ret
 
+; PureRGBnote: ADDED: when pressing SELECT on the start menu over the SAVE option, we can change boxes whenever we want.
 StartMenu_SelectPressed::
 	ld a, [wCurrentMenuItem]
 	ld [wBattleAndStartSavedMenuItem], a ; save current menu selection

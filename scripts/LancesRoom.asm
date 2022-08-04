@@ -156,7 +156,7 @@ LanceAfterBattleText:
 	SetEvent EVENT_BEAT_LANCE
 	jp TextScriptEnd
 
-DoFacings:
+DoFacings: ; PureRGBnote: ADDED: when about to fight Lance, lance and the player will face each other properly to talk.
 	ld a, [wYCoord]
 	cp 1
 	jr z, .leftOfLance

@@ -1,3 +1,5 @@
+; PureRGBnote: CHANGED: many maps had their objects (items, NPCs, maps) modified for new content
+
 AgathasRoom_Object:
 	db $0 ; border block
 

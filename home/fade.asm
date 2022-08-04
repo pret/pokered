@@ -16,9 +16,11 @@ LoadGBPal::
 	ldh [rOBP0], a
 	ld a, [hli]
 	ldh [rOBP1], a
+;;;;;;;;;; shinpokerednote: gbcnote: code to allow gbc color from yellow
 	call UpdateGBCPal_BGP
 	call UpdateGBCPal_OBP0
 	call UpdateGBCPal_OBP1
+;;;;;;;;;;
 	ret
 
 GBFadeInFromBlack::
@@ -37,9 +39,11 @@ GBFadeIncCommon:
 	ldh [rOBP0], a
 	ld a, [hli]
 	ldh [rOBP1], a
+;;;;;;;;;; shinpokerednote: gbcnote: code to allow gbc color from yellow
 	call UpdateGBCPal_BGP
 	call UpdateGBCPal_OBP0
 	call UpdateGBCPal_OBP1
+;;;;;;;;;;
 	ld c, 8
 	call DelayFrames
 	dec b
@@ -62,9 +66,11 @@ GBFadeDecCommon:
 	ldh [rOBP0], a
 	ld a, [hld]
 	ldh [rBGP], a
+;;;;;;;;;; shinpokerednote: gbcnote: code to allow gbc color from yellow
 	call UpdateGBCPal_BGP
 	call UpdateGBCPal_OBP0
 	call UpdateGBCPal_OBP1
+;;;;;;;;;;
 	ld c, 8
 	call DelayFrames
 	dec b

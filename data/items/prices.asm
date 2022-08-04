@@ -74,7 +74,7 @@ ItemPrices::
 	bcd3 0     ; SILPH_SCOPE
 	bcd3 0     ; POKE_FLUTE
 	bcd3 0     ; LIFT_KEY
-	bcd3 0     ; TOWN_MAP
+	bcd3 0     ; BOOSTER_CHIP
 	bcd3 0     ; OLD_ROD
 	bcd3 0     ; GOOD_ROD
 	bcd3 0     ; SUPER_ROD

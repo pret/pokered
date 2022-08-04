@@ -41,7 +41,7 @@ EnterMap::
 OverworldLoop::
 	call DelayFrame
 OverworldLoopLessDelay::
-	;call DelayFrame ;60fps mode
+	;call DelayFrame ; shinpokerednote: ADDED: 60fps mode enabled by commenting this (but needs additional tweaks to run correctly)
 	call LoadGBPal
 	ld a, [wd736]
 	bit 6, a ; jumping down a ledge?
@@ -80,7 +80,7 @@ OverworldLoopLessDelay::
 	jp .displayDialogue
 .startButtonNotPressed
 	bit BIT_A_BUTTON, a
-	jr nz, .aorSelectPressed
+	jr nz, .aorSelectPressed ; PureRGBnote: ADDED: functionality that happens when pressing SELECT in overworld (bicycle)
 	bit BIT_SELECT, a
 	jp z, .checkIfDownButtonIsPressed
 .aorSelectPressed	
@@ -90,6 +90,7 @@ OverworldLoopLessDelay::
 	jp nz, .noDirectionButtonsPressed
 	call IsPlayerCharacterBeingControlledByGame
 	jr nz, .checkForOpponent
+;;;;;;;;;; PureRGBnote: ADDED: functionality that happens when pressing SELECT in overworld (bicycle)
 .trySelectingBikeRod
 	ldh a, [hJoyPressed]
 	bit BIT_SELECT, a	;is Select being pressed?
@@ -97,6 +98,7 @@ OverworldLoopLessDelay::
 	callfar CheckForRodBike
 	jp OverworldLoop
 .notSelect
+;;;;;;;;;;
 	call CheckForHiddenObjectOrBookshelfOrCardKeyDoor
 	ldh a, [hItemAlreadyFound]
 	and a
@@ -143,7 +145,7 @@ OverworldLoopLessDelay::
 	ld hl, wFlags_0xcd60
 	res 2, [hl]
 	call UpdateSprites
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; - NEW : code for changing direction without moving by pressing A+B and a direction when standing still.
+;;;;;;;;;;; PureRGBnote: ADDED: code for changing direction without moving by pressing A+B and a direction when standing still.
 	ldh a, [hJoyHeld] 
 	and B_BUTTON
 	jr z, .resetDirectionChangeState
@@ -158,7 +160,7 @@ OverworldLoopLessDelay::
 	xor a
 	ld [wDirectionChangeModeCounter], a
 .noDirectionButtonsPressed2
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;
 	ld a, [wPlayerMovingDirection] ; the direction that was pressed last time
 	and a
 	jp z, OverworldLoop
@@ -205,12 +207,12 @@ OverworldLoopLessDelay::
 	ld a, [wd730]
 	bit 7, a ; are we simulating button presses?
 	jr nz, .noDirectionChange ; ignore direction changes if we are
-;;;;;; - NEW: Code for entering "direction change" mode when wDirectionChangeModeCounter >= 10
+;;;;;; PureRGBnote: ADDED: Code for entering "direction change" mode when wDirectionChangeModeCounter >= 10
 	ld a, [wDirectionChangeModeCounter]
 	cp 10 ; must hold down A+B for at least this many frames while standing still to get into this mode
 	jr c, .noDirectionChange
 ;;;;;;
-	 ;
+; PureRGBnote: CHANGED: this code isn't needed anymore
 ;	ld a, [wDirectionChangeModeCounter]
 ;	and a
 ;	jr z, .noDirectionChange
@@ -262,7 +264,7 @@ OverworldLoopLessDelay::
 
 .noDirectionChange
 	xor a
-	ld [wDirectionChangeModeCounter], a
+	ld [wDirectionChangeModeCounter], a ; PureRGBnote: ADDED: when we aren't standing still, clear this counter
 	ld a, [wPlayerDirection] ; current direction
 	ld [wPlayerMovingDirection], a ; save direction
 	call UpdateSprites
@@ -290,7 +292,7 @@ OverworldLoopLessDelay::
 	jp c, OverworldLoop
 
 .noCollision
-	ld a, $10
+	ld a, $10 ; shinpokerednote: 60fps: counter is doubled
 	ld [wWalkCounter], a
 	jr .moveAhead2
 
@@ -307,20 +309,20 @@ OverworldLoopLessDelay::
 	res 2, [hl]
 	ld a, [wd736]
 	bit 7, a ; spinning?
-	jr nz, .spinnerSpeed ; FIXED: faster spinning movement
+	jr nz, .spinnerSpeed ; PureRGBnote: CHANGED: faster spin tile movement
 	ld a, [wWalkBikeSurfState]
 	dec a ; riding a bike?
 	jr nz, .normalPlayerSpriteAdvancement
 	ld a, [wd736]
 	bit 6, a ; jumping a ledge?
 	jr nz, .normalPlayerSpriteAdvancement
-	call GetBikeSpeed
+	call GetBikeSpeed ; PureRGBnote: CHANGED: bike speed check is relegated to its own function
 	jr .notRunning
 .spinnerSpeed
 	call DoBikeSpeedup
 	jr .notRunning
 .normalPlayerSpriteAdvancement
-	; Holding B makes you run at 2x walking speed
+	; PureRGBnote: ADDED: Holding B makes you run at 2x walking speed
 	ldh a, [hJoyHeld]
 	and B_BUTTON
 	jr z, .notRunning
@@ -415,6 +417,8 @@ NewBattle::
 	and a
 	ret
 
+; PureRGBnote: ADDED: bike will go even faster when holding B while riding it
+; but we need to account for cycling road's "hill" in the movement speed which gets a bit complicated.
 GetBikeSpeed::
 	; Bike is normally 2x walking speed
 	; Holding B makes the bike even faster
@@ -615,7 +619,8 @@ ContinueCheckWarpsNoCollisionLoop::
 
 ; if no matching warp was found
 CheckMapConnections::
-	farcall CheckWestMap ; NEW: check map connections in another bank to save space, do all 4 if necessary from that bank without returning until done
+	; shinpokerednote: MOVED: check map connections in another bank to save space, do all 4 if necessary from that bank without returning until done
+	farcall CheckWestMap 
 	jr nz, .didNotEnterConnectedMap
 .loadNewMap ; load the connected map that was entered
 	ld hl, wCurrentMapScriptFlags
@@ -652,12 +657,12 @@ PlayMapChangeSound::
 CheckIfInFlyMap::
 	call CheckIfInOutsideMap
 	ret z
-	cp FOREST ; FIXED: can fly in safari zone and viridian forest
+	cp FOREST ; PureRGBnote: FIXED: can fly in safari zone and viridian forest
 	ret z
 	ld a, [wCurMap]
-	cp CELADON_MART_ROOF ; FIXED: can fly on roofs
+	cp CELADON_MART_ROOF ; PureRGBnote: FIXED: can fly on roofs
 	ret z
-	cp CELADON_MANSION_ROOF ; FIXED: can fly on roofs
+	cp CELADON_MANSION_ROOF ; PureRGBnote: FIXED: can fly on roofs
 	ret
 
 CheckIfInOutsideMap::
@@ -799,7 +804,7 @@ LoadPlayerSpriteGraphics::
 	jp LoadWalkingPlayerSpriteGraphics
 
 IsBikeRidingAllowed::
-; The bike can be used on maps within BikeRidingMaps,
+; PureRGBnote: ADDED: The bike can be used on maps within BikeRidingMaps,
 ; or maps with tilesets in BikeRidingTilesets.
 ; Return carry if biking is allowed.
 
@@ -1416,10 +1421,12 @@ AdvancePlayerSprite::
 	ld [wXCoord], a
 .afterUpdateMapCoords
 	ld a, [wWalkCounter] ; walking animation counter
+;;;;;;;;;; shinpokerednote: 60fps
 	push bc
 	ld b, $0F
 	cp b
 	pop bc
+;;;;;;;;;;
 	jp nz, .scrollBackgroundAndSprites
 ; if this is the first iteration of the animation
 	ld a, c
@@ -1479,6 +1486,7 @@ AdvancePlayerSprite::
 	or $98
 	ld [wMapViewVRAMPointer + 1], a
 .adjustXCoordWithinBlock
+; shinpokerednote: removed some code not needed in 60fps
 	ld hl, wXBlockCoord
 	ld a, [hl]
 	add c
@@ -1562,7 +1570,7 @@ AdvancePlayerSprite::
 	ld b, a
 	ld a, [wSpritePlayerStateData1XStepVector]
 	ld c, a
-	;sla b ; 60FPS mode doesn't need this
+	;sla b ; shinpokerednote: 60fps mode doesn't need this
 	;sla c
 	ldh a, [hSCY]
 	add b
@@ -2129,7 +2137,7 @@ LoadMapHeader::
 	ld b, a
 	ld c, $00
 .loadSpriteLoop
-	call MapSpritePictureIDs
+	call MapSpritePictureIDs ; PureRGBnote: ADDED: code that will remap overworld NPC icons according to options selection (enhanced or original) 
 	inc hl
 	ld [de], a ; x#SPRITESTATEDATA1_PICTUREID
 	inc d
@@ -2243,6 +2251,8 @@ LoadMapHeader::
 	ld [MBC1RomBank], a
 	ret
 
+; PureRGBnote: ADDED: code that will remap overworld NPC icons according to options selection (enhanced or original) 
+; if not using enhanced sprites we remap the sprite to its original sprite.
 MapSpritePictureIDs::
 	ld a, [wSpriteOptions2]
 	bit BIT_MENU_ICON_SPRITES, a
@@ -2376,7 +2386,7 @@ ResetUsingStrengthOutOfBattleBit:
 	ld hl, wd728
 	bit 0, [hl] ; don't need to reset it if it's zero
 	ret z
-	callfar CheckResetStrengthFlag
+	callfar CheckResetStrengthFlag ; PureRGBnote: ADDED: sometimes we don't want to reset the strength bit when loading a map
 	and a ; reset z flag
 	ret
 
@@ -2443,6 +2453,8 @@ LoadDestinationWarpPosition::
 	ret
 
 INCLUDE "data/sprites/alt_sprite_mappings.asm"
+
+; PureRGBnote: ADDED: code for setting blackout map on flying or entering a pokecenter (instead of just when healing pokemon)
 
 SetLastBlackoutMap::
 	; called when entering pokemon centers

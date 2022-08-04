@@ -125,7 +125,7 @@ IF DEF(_BLUE)
 	ld a, STARTER2 ; which Pokemon to show first on the title screen
 ENDC
 IF DEF(_GREEN)
-	ld a, STARTER3 ; which Pokemon to show first on the title screen
+	ld a, STARTER3 ; PureRGBnote: GREENBUILD: which Pokemon to show first on the title screen 
 ENDC
 	ld [wTitleMonSpecies], a
 	call LoadTitleMonSprite
@@ -143,12 +143,12 @@ ENDC
 	call GBPalNormal
 	ld a, %11100100
 	ldh [rOBP0], a
-	call UpdateGBCPal_OBP0
+	call UpdateGBCPal_OBP0 ; shinpokerednote: gbcnote: gbc color code from yellow 
 
 	push de
 	ld d, CONVERT_BGP
 	ld e, 2
-	farcall TransferMonPal ;gbcnote - update the bg pal for the new title mon
+	farcall TransferMonPal ; shinpokerednote: gbcnote: update the palette for the new title mon
 	pop de
 
 ; make pokemon logo bounce up and down
@@ -229,7 +229,7 @@ ENDC
 	ld [wUnusedCC5B], a
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;gbcnote - The tiles in the window need to be shifted so that the bottom
+; shinpokerednote: gbcnote: The tiles in the window need to be shifted so that the bottom
 ;half of the title screen is in the top half of the window area.
 ;This is accomplished by copying the tile map to vram at an offset.
 ;The goal is to get the tile map for the bottom half of the title screen
@@ -304,12 +304,13 @@ TitleScreenPickNewMon:
 
 	ld [hl], a
 	call LoadTitleMonSprite
-
+;;;;;;;;;; shinpokerednote: gbcnote: update the palette for the new title mon
 	push de
 	ld d, CONVERT_BGP
 	ld e, 2
-	farcall TransferMonPal ;gbcnote - update the bg pal for the new title mon
+	farcall TransferMonPal 
 	pop de
+;;;;;;;;;;
 
 	ld a, $90
 	ldh [hWY], a
@@ -322,7 +323,7 @@ TitleScreenScrollInMon:
 	farcall TitleScroll
 	;xor a
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;gbcnote - The window normally covers the whole screen when picking a new title screen mon.
+; shinpokerednote: gbcnote: The window normally covers the whole screen when picking a new title screen mon.
 ;This is not desired since it applies BG pal 2 to the whole screen when on a gbc.
 ;Instead, shift the window downwards by 40 tiles to just cover the version text and below.
 ;This makes it so the map attributes for BGMap1 (address $9c00) are covering the bottom half 
@@ -333,7 +334,7 @@ TitleScreenScrollInMon:
 	ret
 
 ScrollTitleScreenGameVersion:
-	predef BGLayerScrollingUpdate	;gbcnote - consolidated into a predef that also fixes some issues
+	predef BGLayerScrollingUpdate ; shinpokerednote: gbcnote: consolidated into a predef that also fixes some issues
 .wait2
 	ldh a, [rLY]
 	cp h
@@ -365,7 +366,7 @@ DrawPlayerCharacter:
 	ld a, [wPlayerCharacterOAMTile]
 	ld [hli], a ; tile
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;gbcnote - set the palette for the player tiles
+; shinpokerednote: gbcnote: set the palette for the player tiles
 ;These bits only work on the GBC
 	push af
 	ld a, [hl]	;Attributes/Flags
@@ -429,8 +430,8 @@ INCLUDE "data/pokemon/title_mons.asm"
 
 ; prints version text (red, blue)
 PrintGameVersionOnTitleScreen:
-	IF DEF(_GREEN)
-		hlcoord 6, 8 ; version text needs to be slightly moved to the left due to the larger length
+	IF DEF(_GREEN) ; PureRGBnote: GREENBUILD: version text needs to be slightly moved to the left due to the larger length
+		hlcoord 6, 8 
 	ELSE
 		hlcoord 7, 8
 	ENDC
@@ -445,7 +446,7 @@ ENDC
 IF DEF(_BLUE)
 	db $61,$62,$63,$64,$65,$66,$67,$68,"@" ; "Blue Version"
 ENDC
-IF DEF(_GREEN)
+IF DEF(_GREEN) ; PureRGBnote: GREENBUILD: different title screen subtitle text for green version
 	db $62,$63,$64,$7F,$65,$66,$67,$68,$69,"@" ; "Green Version"
 ENDC
 

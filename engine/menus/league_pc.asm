@@ -115,8 +115,9 @@ LeaguePCShowMon:
 	call PrintNumber
 	farjp HoFDisplayMonInfo
 
+; PureRGBnote: ADDED: code for enabling alternate palette pokemon to show up correctly after being inducted into the hall of fame.
 CheckMonAltPaletteLeaguePC:
-	;b = index in team
+	;input: b = index in team
 	ld a, b
 	push de
 	ld e, b

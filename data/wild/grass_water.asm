@@ -1,3 +1,5 @@
+; PureRGBnote: CHANGED: ADDED: many encounter assignments were changed. Some were added, like in many cases surfing encounters.
+
 WildDataPointers:
 	table_width 2, WildDataPointers
 	dw NothingWildMons         ; PALLET_TOWN

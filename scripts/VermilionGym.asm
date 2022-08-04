@@ -225,7 +225,7 @@ VermilionGymAfterBattleText3:
 	text_far _VermilionGymAfterBattleText3
 	text_end
 
-VermilionGymGuideText:
+VermilionGymGuideText: ; PureRGBnote: ADDED: gym guide gives you apex chips after beating the leader
 	text_asm
 	ld a, [wBeatGymFlags]
 	bit BIT_THUNDERBADGE, a

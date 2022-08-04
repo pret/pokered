@@ -5,6 +5,7 @@ CeruleanCity_Script:
 	ld a, [wCeruleanCityCurScript]
 	jp CallFunctionInTable
 
+; PureRGBnote: ADDED: function that will remove the cut tree if we deleted it with the tree deleter
 CeruleanCityReplaceCutTile:
 	CheckEvent EVENT_DELETED_CERULEAN_TREE
 	ret z
@@ -268,7 +269,7 @@ CeruleanCity_TextPointers:
 	dw CeruleanCityText9
 	dw CeruleanCityText10
 	dw CeruleanCityText11
-	dw PickUp5ItemText
+	dw PickUp5ItemText ; PureRGBnote: ADDED: new item location
 	dw CeruleanCityText12
 	dw CeruleanCityText13
 	dw MartSignText
@@ -329,7 +330,7 @@ CeruleanCityText2:
 .beatRocketThief
 	ld hl, CeruleanCityText_196f3
 	call PrintText
-	lb bc, TM_DIG, 1
+	lb bc, TM_CERULEAN_ROCKET_TM_THIEF, 1
 	call GiveItem
 	jr c, .Success
 	ld hl, TM28NoRoomText
@@ -373,12 +374,12 @@ CeruleanCityText3:
 
 CeruleanCityText4:
 	text_asm
-	CheckEvent EVENT_DELETED_CERULEAN_TREE
+	CheckEvent EVENT_DELETED_CERULEAN_TREE ; PureRGBnote: ADDED: this NPC won't talk about the cut tree if it was deleted permanently
 	jr nz, .deletedTree
 	ld hl, CeruleanCityText4_BeforeTreeDelete
 	jr .done
 .deletedTree
-	ld hl, CeruleanCityText4_AfterTreeDelete
+	ld hl, CeruleanCityText4_AfterTreeDelete ; instead he'll comment on how it was removed
 .done
 	call PrintText
 	jp TextScriptEnd

@@ -1,5 +1,6 @@
 CeruleanCave1F_Script:
-	ResetEvent EVENT_BEAT_PROF_OAK
+	; PureRGBnote: ADDED: if we defeated professor oak once we go back to this floor he will be reset and can be fought again.
+	ResetEvent EVENT_BEAT_PROF_OAK 
 	jp EnableAutoTextBoxDrawing
 
 CeruleanCave1F_TextPointers:

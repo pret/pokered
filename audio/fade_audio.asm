@@ -38,7 +38,7 @@ FadeOutAudio::
 	ld b, a
 	xor a
 	ld [wAudioFadeOutControl], a
-	call StopAllMusic
+	call StopAllMusic ; shinpokerednote: MOVED: a common function to do what the 3 lines that used to be here did was created
 	ld a, [wAudioSavedROMBank]
 	ld [wAudioROMBank], a
 	ld a, b

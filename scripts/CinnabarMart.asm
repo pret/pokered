@@ -7,7 +7,7 @@ CinnabarMart_TextPointers:
 	dw CinnabarMartText3
 	dw CinnabarMartTMKid
 
-CinnabarMartTMKid:
+CinnabarMartTMKid: ; PureRGBnote: ADDED: new NPC who will sell TMs
 	text_asm
 	ld hl, TMKidGreet7
 	call PrintText

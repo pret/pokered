@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: Many new hidden items were added versus the original game
+
 MACRO hidden_item
 	db \1, \3, \2
 ENDM

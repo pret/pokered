@@ -1,3 +1,5 @@
+; PureRGBnote: CHANGED: since Old rod is obtained in cerulean and good rod in vermilion now, this fishing guru will give either
+; the SUPER ROD or another non-key item depending on which of the last two gurus you talked to first.
 Route12SuperRodHouse_Script:
 	jp EnableAutoTextBoxDrawing
 
@@ -13,7 +15,7 @@ Route12HouseText1:
 	callfar LastTwoGurusScript
 	jr .done
 .printEndText
-	ld a, [wOptions2]
+	ld a, [wOptions2] ; PureRGBnote: ADDED: this NPC will talk about how super rod can catch alternate palette pokemon, but only if the feature is enabled.
 	bit BIT_ALT_PKMN_PALETTES, a ; do we have alt palettes enabled
 	jr z, .noColorText
 	ld hl, Route12GuruEndColor

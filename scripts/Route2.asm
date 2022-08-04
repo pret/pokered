@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: new trainers on this route.
+
 Route2_Script:
 	call Route2ReplaceCutTiles
 	call EnableAutoTextBoxDrawing
@@ -8,7 +10,7 @@ Route2_Script:
 	ld [wRoute2CurScript], a
 	ret
 
-; replaces the cut trees, by default it adds 1
+; PureRGBnote: ADDED: replaces the cut trees, by default it adds 1
 ; after using the "Tree Deleter" on this route it removes 2 trees from the default to have 3 gone in total and an open path to Pewter City
 Route2ReplaceCutTiles:
 	ld hl, wCurrentMapScriptFlags
@@ -66,7 +68,7 @@ Route2_TextPointers:
 	dw Route2JrTrainerFText
 	dw PickUpItemText
 	dw PickUpItemText
-	dw PickUpItemText
+	dw PickUpItemText ; PureRGBnote: ADDED: new item on this route.
 	dw Route2Text3
 	dw Route2Text4
 

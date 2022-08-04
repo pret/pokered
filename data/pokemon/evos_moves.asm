@@ -1,3 +1,4 @@
+; PureRGBnote: CHANGED: many learnsets and evolution levels were adjusted versus the original game
 ; See constants/pokemon_data_constants.asm
 ; The max number of evolutions per monster is MAX_EVOLUTIONS
 

@@ -1,3 +1,5 @@
+; PureRGBnote: MOVED: this file was moved to a different bank for space and references code in cut2 instead of the bank it used to be in.
+
 AnimateBoulderDust:
 	ld a, $1
 	ld [wWhichAnimationOffsets], a ; select the boulder dust offsets
@@ -7,7 +9,7 @@ AnimateBoulderDust:
 	ld [wUpdateSpritesEnabled], a
 	ld a, %11100100
 	ldh [rOBP1], a
-	call UpdateGBCPal_OBP1
+	call UpdateGBCPal_OBP1 ; shinpokerednote: gbcnote: gbc color code from yellow 
 	call LoadSmokeTileFourTimes
 	farcall WriteCutOrBoulderDustAnimationOAMBlock
 	ld c, 8 ; number of steps in animation
@@ -22,7 +24,7 @@ AnimateBoulderDust:
 	ldh a, [rOBP1]
 	xor %01100100
 	ldh [rOBP1], a
-	call UpdateGBCPal_OBP1
+	call UpdateGBCPal_OBP1 ; shinpokerednote: gbcnote: gbc color code from yellow 
 	call Delay3
 	pop bc
 	dec c

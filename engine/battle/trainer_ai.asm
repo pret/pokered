@@ -102,9 +102,11 @@ AIEnemyTrainerChooseMoves:
 .useOriginalMoveSet
 	ld hl, wEnemyMonMoves    ; use original move set
 .done
+;;;;;;;;;; PureRGBnote: clear these values at the end of an AI cycle, they only apply when the player has switched or healed in a turn
 	xor a
 	ld [wAIMoveSpamAvoider], a
 	ld [wAITargetMonStatus], a
+;;;;;;;;;;
 	ret
 
 AIMoveChoiceModificationFunctionPointers:
@@ -113,7 +115,7 @@ AIMoveChoiceModificationFunctionPointers:
 	dw AIMoveChoiceModification3
 	dw AIMoveChoiceModification4
 
-; AKA the "Dont do stupid things no player would ever do" AI subroutine
+; PureRGBnote: CHANGED: AKA the "Dont do stupid things no player would ever do" AI subroutine, many new default AI restrictions added
 ; discourages moves that cause no damage but only a status ailment if player's mon already has one, or if they're immune to it
 ; discourages moves that after being used once won't do anything when used again (mist, leech seed, etc.)
 ; discourages moves that will fail due to the current enemy pokemon's state (recover at full health, one hit ko moves on faster pkmn)
@@ -261,6 +263,8 @@ StatusAilmentMoveEffects:
 	db BURN_EFFECT
 	db -1 ; end
 
+;;;;;;;;;; PureRGBnote: ADDED: function for checking if the player can have leech seed applied and whether they already have it applied
+
 CheckSeeded:
 	push hl
 	ld a, [wPlayerBattleStatus2]
@@ -287,6 +291,9 @@ CheckSeeded:
 	scf
 	ret	
 
+;;;;;;;;;;
+
+;;;;;;;;;; PureRGBnote: ADDED: function for checking if the player's pokemon is unaffected by specific status moves.
 
 CheckStatusImmunity:
 	push bc
@@ -332,7 +339,9 @@ CheckStatusImmunity:
 	pop bc
 	scf
 	ret	
+;;;;;;;;;;
 
+;;;;;;;;;; PureRGBnote: ADDED: function that allows AI to avoid OHKO moves if they will never do anything to the player's pokemon due to speed differences
 WillOHKOMoveAlwaysFail:
 	call CompareSpeed
 	jr c, .userIsSlower
@@ -341,9 +350,10 @@ WillOHKOMoveAlwaysFail:
 .userIsSlower
 	scf
 	ret
+;;;;;;;;;;
 
-; AKA the "Boost stats on the first turn" subroutine
-; slightly encourage moves with specific effects on the first turn. (FIXED: used to be the second turn)
+; PureRGBnote: CHANGED: AKA the "Boost stats on the first turn" subroutine
+; slightly encourage moves with specific effects on the first turn. (PureRGBnote: FIXED: used to be the second turn, made it first turn)
 ; this mostly means trainers will buff their pokemon a bit on the first turn
 AIMoveChoiceModification2:
 	ld a, [wAILayer2Encouragement]
@@ -412,12 +422,14 @@ Modifier2PreferredMoves:
 	db SUBSTITUTE_EFFECT
 	db -1 ; end
 
-; AKA the "Use Effective damaging moves offensively" subroutine
-; encourages moves that are effective against the player's mon if they do damage.
+; PureRGBnote: CHANGED: AKA the "Use Effective damaging moves offensively" subroutine
+; encourages moves that are effective against the player's mon if they do damage. 
 ; discourage damaging moves that are ineffective or not very effective against the player's mon,
 ; unless there's no damaging move that deals at least neutral damage
 ; encourage effective or super effective priority moves if the pokemon is slower than the player's pokemon (but only after obtaining 5 badges)
 ; encourage effective or super effective draining moves to be used at low health
+; PureRGBnote: FIXED: this subroutine won't cause the AI to prefer status moves 
+;                     just because their type is super effective against the opponent. Like spamming agility on a poison pokemon.
 AIMoveChoiceModification3:
 	ld hl, wBuffer - 1 ; temp move selection array (-1 byte offset)
 	ld de, wEnemyMonMoves ; enemy moves
@@ -504,6 +516,7 @@ AIMoveChoiceModification3:
 	ld [wAITargetMonType2], a
 	ret
 
+;;;;;;;;;; PureRGBnote: ADDED: function that allows AI to be aware if they are slower than the opponent. Allows them to prefer priority moves.
 CompareSpeed:
 	push hl
 	push de
@@ -525,9 +538,11 @@ CompareSpeed:
 	pop de
 	pop hl
 	ret
+;;;;;;;;;;
 
-; encourages priority moves if the enemy's pokemon is slower than the player's and the move is neutral or super effective.
+; PureRGBnote: ADDED: encourages priority moves if the enemy's pokemon is slower than the player's and the move is neutral or super effective.
 ; BUT this effect is only applied after you have the soulbadge to prevent priority moves from being spammed early game.
+; Applies to trainers that use AI subroutine 3
 EncouragePriorityIfSlow:
 	ld a, [wObtainedBadges]
 	bit BIT_SOULBADGE, a
@@ -537,6 +552,7 @@ EncouragePriorityIfSlow:
 	dec [hl] ; encourage the move if it's a priority move and the pokemon is slower
 	ret
 
+; PureRGBnote: ADDED: if the opponent has less than 1/2 health they will prefer healing moves if they use AI subroutine 3
 EncourageDrainingMoveIfLowHealth:
 	ld a, [wEnemyMoveEffect]
 	cp DRAIN_HP_EFFECT
@@ -547,7 +563,7 @@ EncourageDrainingMoveIfLowHealth:
 	dec [hl] ; encourage the draining move if enemy has more than half health gone
 	ret
 
-; AKA the "Apply Status and Heal when needed" subroutine
+; PureRGBnote: ADDED: AKA the "Apply Status and Heal when needed" subroutine
 ; slightly encourage moves with specific effects. 
 ; This one will make the opponent want to use status applying moves when you don't have one.
 ; It also makes them want to use dream eater if you're asleep, and want to use a recovery move at low health.
@@ -660,7 +676,7 @@ TrainerAI:
 	ret z ; if in a link battle, we're done as well
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;joenote - AI should not use actions if in a move that prevents such a thing
+;shinpokerednote: FIXED: AI should not use actions (items / switching) if in a move that prevents such a thing
 	ld a, [wEnemyBattleStatus2]
 	bit NEEDS_TO_RECHARGE, a
 	ret nz
@@ -694,6 +710,8 @@ TrainerAI:
 	jp hl
 
 INCLUDE "data/trainers/ai_pointers.asm"
+
+; PureRGBnote: CHANGED: some of these trainer-specific AI were tweaked to happen more or less often or had their item modified from vanilla.
 
 JugglerAI:
 	cp 25 percent + 1
@@ -971,7 +989,7 @@ AISwitchIfEnoughMons:
 
 SwitchEnemyMon:
 
-;joenote - if player using trapping move, then end their move
+;;;;; shinpokerednote: CHANGED: if player using trapping move, then end their move
 	ld a, [wPlayerBattleStatus1]
 	bit USING_TRAPPING_MOVE, a
 	jr z, .preparewithdraw
@@ -982,6 +1000,7 @@ SwitchEnemyMon:
 	ld a, $FF
 	ld [wPlayerSelectedMove], a
 .preparewithdraw
+;;;;;
 
 ; prepare to withdraw the active monster: copy hp, number, and status to roster
 
@@ -998,8 +1017,10 @@ SwitchEnemyMon:
 	ld hl, AIBattleWithdrawText
 	call PrintText
 	
+;;;;;;;;;; PureRGBnote: ADDED: clear the previous selected move here to reset disable functionality on opponent switching pokemon.
 	xor a
-	ld [wPreviousEnemySelectedMove], a
+	ld [wPreviousEnemySelectedMove], a 
+;;;;;;;;;;
 
 	; This wFirstMonsNotOutYet variable is abused to prevent the player from
 	; switching in a new mon in response to this switch.
@@ -1013,7 +1034,7 @@ SwitchEnemyMon:
 	cp LINK_STATE_BATTLING
 	ret z
 
-	;joenote - the act of switching clears H_WHOSETURN, so it needs to be set back to 1
+	;shinpokerednote: FIXED: the act of switching clears hWhoseTurn, so it needs to be set back to 1
 	ld a, 1
 	ldh [hWhoseTurn], a
 	scf
@@ -1029,7 +1050,7 @@ AIUseFullHeal:
 	ld a, FULL_HEAL
 	jp AIPrintItemUse
 
-AICureStatus:	;joenote - modified to be more robust and also undo stat changes of brn/par
+AICureStatus:	;shinpokerednote: CHANGED: modified to be more robust and also undo stat changes of brn/par
 ; cures the status of enemy's active pokemon
 	ld a, [wEnemyMonPartyPos]
 	ld hl, wEnemyMon1Status
@@ -1057,7 +1078,7 @@ AICureStatus:	;joenote - modified to be more robust and also undo stat changes o
 ;	ld a, X_ACCURACY
 ;	jp AIPrintItemUse
 
-;AIUseGuardSpec: ; now unused
+;AIUseGuardSpec: ; PureRGBnote: CHANGED: now unused
 ;	call AIPlayRestoringSFX
 ;	ld hl, wEnemyBattleStatus2
 ;	set 1, [hl]
@@ -1071,7 +1092,8 @@ AIUseDireHit:
 	ld a, DIRE_HIT
 	jp AIPrintItemUse
 
-; if enemy HP is below a 1/[wUnusedC000], store 1 in wUnusedC000.
+; PureRGBnote: ADDED: if enemy HP is below a 1/[wUnusedC000], store 1 in wUnusedC000.
+; used for checking whether the hyper ball item should guarantee success on use
 AICheckIfHPBelowFractionStore::
 	ld a, [wUnusedC000]
 	call AICheckIfHPBelowFraction
@@ -1179,6 +1201,9 @@ AIBattleUseItemText:
 	text_far _AIBattleUseItemText
 	text_end
 
+;;;;;;;;;; PureRGBnote: ADDED: these wram properties are used to make sure the 
+;;;;;;;;;;                     AI doesn't instantly read the player's current pokemon type after a player switches.
+;;;;;;;;;;                     makes sure the AI doesn't appear to predict all your switch-outs of pokemon.
 StoreBattleMonTypes:
 	push hl
 	ld hl, wBattleMonType

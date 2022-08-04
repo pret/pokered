@@ -223,12 +223,15 @@ PrintSafariZoneSteps::
 	ret c
 	cp CERULEAN_CAVE_2F
 	ret nc
+;;;;;;;;;; PureRGBnote: ADDED: don't need to print any text in free roam safari
 	ld a, [wSafariType]
 	cp SAFARI_TYPE_FREE_ROAM
 	ret z ; no step or ball tracking in Free Roam safari
+;;;;;;;;;;
 
 	hlcoord 0, 0
 	ld c, 7
+;;;;;;;;;; PureRGBnote: ADDED: ranger hunt text box modifications
 	ld a, [wSafariType]
 	and a
 	jr nz, .ldLargeBox ; Ranger Hunt safari needs an extra line for printing text
@@ -237,6 +240,7 @@ PrintSafariZoneSteps::
 .ldLargeBox	
 	ld b, 5
 .continue
+;;;;;;;;;;
 	call TextBoxBorder
 	hlcoord 1, 1
 	ld de, wSafariSteps
@@ -245,11 +249,13 @@ PrintSafariZoneSteps::
 	hlcoord 4, 1
 	ld de, SafariSteps
 	call PlaceString
+;;;;;;;;;; PureRGBnote: ADDED: ranger hunt text box modifications
 	ld a, [wSafariType]
 	and a
 	jr nz, .addRangerText ; print the remaining number of rangers instead of safari balls
 .addBallText	
 	hlcoord 1, 3	
+;;;;;;;;;;
 	ld de, SafariBallText
 	call PlaceString
 	ld a, [wNumSafariBalls]
@@ -263,6 +269,7 @@ PrintSafariZoneSteps::
 	ld de, wNumSafariBalls
 	lb bc, 1, 2
 	jp PrintNumber
+;;;;;;;;;; PureRGBnote: ADDED: ranger hunt text box modifications
 .addRangerText
 	hlcoord 1, 3	
 	ld de, RangersLeftText
@@ -274,9 +281,11 @@ PrintSafariZoneSteps::
 	ld de, wNumSafariBalls
 	lb bc, 1, 2
 	jp PrintNumber
+;;;;;;;;;;
 
+; PureRGBnote: CHANGED: 700 steps in the safari zone in any step-tracked mode instead of 500. This is just the text though, not the default value.
 SafariSteps:
-	db "/700@"
+	db "/700@" 
 
 SafariBallText:
 	db "BALL×× @"

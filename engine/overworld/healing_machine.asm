@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: function updated so holding B when talking to the pokemon center nurse speeds up the healing process.
+;                     wUnusedC000 is set earlier in pokemon center code and indicates whether to speed things up or not.
 AnimateHealingMachine:
 	ld de, PokeCenterFlashingMonitorAndHealBall
 	ld hl, vChars0 tile $7c
@@ -70,7 +72,7 @@ AnimateHealingMachine:
 	call DelayFrames
 	pop af
 	ldh [rOBP1], a
-	call UpdateGBCPal_OBP1
+	call UpdateGBCPal_OBP1 ; shinpokerednote: gbcnote: gbc color code from yellow 
 	pop hl
 	pop af
 	ld [hl], a
@@ -80,7 +82,7 @@ PokeCenterFlashingMonitorAndHealBall:
 	INCBIN "gfx/overworld/heal_machine.2bpp"
 
 PokeCenterOAMData:
-;gbcnote - updated for GBC
+; shinpokerednote: gbcnote: updated for GBC
 	db $24,$34,$7C,$14 ; heal machine monitor
 	db $2B,$30,$7D,$14 ; pokeballs 1-6
 	db $2B,$38,$7D,$34
@@ -96,7 +98,7 @@ FlashSprite8Times:
 	ldh a, [rOBP1]
 	xor d
 	ldh [rOBP1], a
-	call UpdateGBCPal_OBP1
+	call UpdateGBCPal_OBP1 ; shinpokerednote: gbcnote: gbc color code from yellow 
 	ld c, 10
 	call DelayFrames
 	dec b

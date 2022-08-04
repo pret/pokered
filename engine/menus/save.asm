@@ -140,6 +140,7 @@ LoadSAVIgnoreBadCheckSum:
 	call LoadSAV1
 	jp LoadSAV2
 
+; PureRGBnote: CHANGED: remove "now saving" text because saving is near-instant now.
 SaveSAV:
 	farcall PrintSaveScreenText
 	ld hl, WouldYouLikeToSaveText
@@ -166,7 +167,7 @@ SaveSAV:
 	ld a, SFX_SAVE
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
-	ld c, 10
+	ld c, 10 ; PureRGBnote: CHANGED: reduce artificial save delay to 1/3 of original.
 	jp DelayFrames
 
 SaveSAVConfirm:
@@ -197,10 +198,12 @@ SaveSAVtoSRAM0:
 	ld a, $1
 	ld [MBC1SRamBankingMode], a
 	ld [MBC1SRamBank], a
+;;;;;;;;;; PureRGBnote: ADDED: duplicates of two options variables in SRAM. These are loaded on boot of the game for instant options-efficacy.
 	ld a, [wOptions2]
 	ld [sOptions2], a
 	ld a, [wSpriteOptions]
 	ld [sSpriteOptions], a
+;;;;;;;;;;
 	ld hl, wPlayerName
 	ld de, sPlayerName
 	ld bc, NAME_LENGTH
@@ -647,6 +650,7 @@ SaveHallOfFameTeams:
 	ld d, h
 	ld hl, wHallOfFame
 	ld bc, HOF_TEAM
+;;;;;;;;;; PureRGBnote: ADDED: additional data in SRAM is needed to store what palettes each of the hall of fame pokemon have.
 	call HallOfFame_Copy
 	ld a, [wNumHoFTeams]
 	dec a
@@ -657,6 +661,7 @@ SaveHallOfFameTeams:
 	ld d, h
 	ld hl, wHallOfFamePalettes
 	ld bc, 1
+;;;;;;;;;;
 	jr HallOfFame_Copy
 
 .shiftHOFTeams
@@ -686,6 +691,7 @@ LoadHallOfFameTeams:
 	call AddNTimes
 	ld de, wHallOfFame
 	ld bc, HOF_TEAM
+;;;;;;;;;; PureRGBnote: ADDED: additional data in SRAM is needed to store what palettes each of the hall of fame pokemon have.
 	call HallOfFame_Copy
 	ld hl, sHallOfFamePalettes
 	ld bc, 1
@@ -693,6 +699,7 @@ LoadHallOfFameTeams:
 	call AddNTimes
 	ld de, wHallOfFamePalettes
 	ld bc, 1
+;;;;;;;;;;
 	; fallthrough
 
 HallOfFame_Copy:

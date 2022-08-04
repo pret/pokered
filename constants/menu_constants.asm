@@ -1,4 +1,4 @@
-DEF BAG_ITEM_CAPACITY EQU 30
+DEF BAG_ITEM_CAPACITY EQU 30 ; PureRGBnote: CHANGED: bag size increased to 30
 DEF PC_ITEM_CAPACITY  EQU 50
 
 ; text box IDs
@@ -24,8 +24,8 @@ DEF PC_ITEM_CAPACITY  EQU 50
 	const MONEY_BOX                         ; $13
 	const TWO_OPTION_MENU                   ; $14
 	const BUY_SELL_QUIT_MENU                ; $15
-	const AMOUNT_LEFT_BOX                   ; $16
-	const AMOUNT_LEFT_BOX_TEMPLATE          ; $17
+	const AMOUNT_LEFT_BOX                   ; $16 ; PureRGBnote: ADDED: New menu box type (used at the cinnabar lab color changer)
+	const AMOUNT_LEFT_BOX_TEMPLATE          ; $17 ; PureRGBnote: ADDED: New menu box type (used at the cinnabar lab color changer)
 	const_skip                              ; $18
 	const_skip                              ; $19
 	const JP_POKEDEX_MENU_TEMPLATE          ; $1a

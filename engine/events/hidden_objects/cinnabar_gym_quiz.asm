@@ -17,7 +17,7 @@ CinnabarGymQuiz::
 	and $f0
 	swap a
 	ldh [hGymGateAnswer], a
-	CheckEvent EVENT_SAW_CINNABAR_GYM_QUIZ_INTRO ;FIXED: Only show the long intro text once because it's annoying to see it repeatedly
+	CheckEvent EVENT_SAW_CINNABAR_GYM_QUIZ_INTRO ; PureRGBnote: FIXED: Only show the long intro text once because it's annoying to see it repeatedly
 	jr nz, .skipIntro
 	ld hl, CinnabarGymQuizIntroText
 	call PrintText

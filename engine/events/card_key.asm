@@ -59,7 +59,7 @@ PrintCardKeyText:
 	jp PrintPredefTextID
 
 CheckAllCardKeyEvents::
-	; FIXED: when every card key door has been opened, the CARD KEY is removed from inventory.
+	; PureRGBnote: ADDED: FIXED: when every card key door has been opened, the CARD KEY is removed from inventory.
 	CheckBothEventsSet EVENT_SILPH_CO_2_UNLOCKED_DOOR1, EVENT_SILPH_CO_2_UNLOCKED_DOOR2
 	ret nz
 	CheckBothEventsSet EVENT_SILPH_CO_3_UNLOCKED_DOOR1, EVENT_SILPH_CO_3_UNLOCKED_DOOR2
@@ -90,6 +90,7 @@ CheckAllCardKeyEvents::
 	SetEvent EVENT_ALL_CARD_KEY_DOORS_OPENED
 	ret
 
+; PureRGBnote: ADDED: text that displays when the card key will be consumed.
 PrintCardKeyDoneText::
 	ld b, CARD_KEY
 	predef GetIndexOfItemInBag

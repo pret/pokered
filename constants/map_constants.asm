@@ -23,7 +23,7 @@ ENDM
 	mapconst LAVENDER_TOWN,                  9, 10 ; $04
 	mapconst VERMILION_CITY,                18, 20 ; $05
 	mapconst CELADON_CITY,                  18, 25 ; $06
-	mapconst SAFFRON_CITY,                  18, 20 ; $07
+	mapconst SAFFRON_CITY,                  18, 20 ; $07 ; PureRGBnote: MOVED: Saffron city was moved earlier in the index so it appears before Fuchsia city in the fly menu 
 	mapconst FUCHSIA_CITY,                  18, 20 ; $08
 	mapconst CINNABAR_ISLAND,                9, 10 ; $09
 	mapconst INDIGO_PLATEAU,                 9, 10 ; $0A
@@ -124,9 +124,9 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	mapconst SS_ANNE_1F_ROOMS,               8, 12 ; $66
 	mapconst SS_ANNE_2F_ROOMS,               8, 12 ; $67
 	mapconst SS_ANNE_B1F_ROOMS,              8, 12 ; $68
-	mapconst CERULEAN_OLD_ROD_HOUSE,         5,  4 ; $69
-	mapconst CERULEAN_ROCKET_HOUSE_1F,       3,  3 ; $6A
-	mapconst CERULEAN_ROCKET_HOUSE_B1F,      8,  8 ; $6B
+	mapconst CERULEAN_OLD_ROD_HOUSE,         5,  4 ; $69 ; PureRGBnote: ADDED: New map
+	mapconst CERULEAN_ROCKET_HOUSE_1F,       3,  3 ; $6A ; PureRGBnote: ADDED: New map
+	mapconst CERULEAN_ROCKET_HOUSE_B1F,      8,  8 ; $6B ; PureRGBnote: ADDED: New map
 	mapconst VICTORY_ROAD_1F,                9, 10 ; $6C
 	mapconst UNUSED_MAP_6D,                  0,  0 ; $6D
 	mapconst UNUSED_MAP_6E,                  0,  0 ; $6E
@@ -223,8 +223,8 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	mapconst ROCKET_HIDEOUT_B3F,            14, 15 ; $C9
 	mapconst ROCKET_HIDEOUT_B4F,            12, 15 ; $CA
 	mapconst ROCKET_HIDEOUT_ELEVATOR,        4,  3 ; $CB
-	mapconst FUCHSIA_TREE_DELETER_HOUSE,     4,  4 ; $CC
-	mapconst FOSSIL_GUYS_HOUSE,              4,  5 ; $CD
+	mapconst FUCHSIA_TREE_DELETER_HOUSE,     4,  4 ; $CC ; PureRGBnote: ADDED: New map
+	mapconst FOSSIL_GUYS_HOUSE,              4,  5 ; $CD ; PureRGBnote: ADDED: New map
 	mapconst UNUSED_MAP_CE,                  0,  0 ; $CE
 	mapconst SILPH_CO_2F,                    9, 15 ; $CF
 	mapconst SILPH_CO_3F,                    9, 15 ; $D0

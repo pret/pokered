@@ -1,4 +1,4 @@
-;gbcnote - new functions
+; shinpokerednote: gbcnote: new functions ported from yellow
 UpdateGBCPal_BGP::
 	push af
 	ldh a, [hGBC]
@@ -67,7 +67,7 @@ UpdateGBCPal_OBP1::
 	pop af
 	ret
 
-Func_3082:: ;added from pokeyellow - update audio so it doesn't "lag"
+Func_3082:: ; added from pokeyellow - update audio so it doesn't "lag"
 	ldh a, [hLoadedROMBank]
 	push af
 	farcall FadeOutAudio

@@ -36,7 +36,7 @@ IF DEF(_BLUE)
 	db GENGAR
 	db RAICHU
 ENDC
-IF DEF(_GREEN)
+IF DEF(_GREEN) ; PureRGBnote: GREENBUILD: the pokemon that appear on the start screen on green version.
 	db STARTER3
 	db STARTER1
 	db STARTER2

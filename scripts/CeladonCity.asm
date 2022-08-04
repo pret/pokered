@@ -23,7 +23,7 @@ CeladonCity_TextPointers:
 	dw CeladonCityText16
 	dw CeladonCityText17
 	dw CeladonCityText18
-	dw CeladonCityText19
+	dw CeladonCityText19 ; PureRGBnote: ADDED: new trainer tips sign near celadon gym
 
 CeladonCityText1:
 	text_far _CeladonCityText1

@@ -1,3 +1,5 @@
+; PureRGBnote: MOVED: moved a bunch of code out of home for more space
+
 INCLUDE "constants.asm"
 
 
@@ -82,6 +84,6 @@ INCLUDE "home/random.asm"
 INCLUDE "home/predef.asm"
 INCLUDE "home/hidden_objects.asm"
 INCLUDE "home/predef_text.asm"
-INCLUDE "home/gbc_funcs.asm"
+INCLUDE "home/gbc_funcs.asm" ; shinpokerednote: gbcnote: added code from pokemon yellow for showing colors correctly on gbc
 ;INCLUDE "home/test.asm"
 

@@ -109,7 +109,12 @@ Lab4Text2:
 LoadFossilItemAndMonNameBank1D:
 	farjp LoadFossilItemAndMonName
 
-Lab4Text3:
+; PureRGBnote: ADDED: new NPC who will allow you to change color palettes of your pokemon to alternate and back a limited number of times
+; per playthrough. Beating professor oak the first time will get you 10 extra color changes.
+; If you run out, it's time to go and catch alternate palette pokemon in the wild instead. Most pokemon are available in alternate palette somewhere.
+; A few, like legendaries and starters, are not.
+; Everything below this point is code for the color changer npc.
+Lab4Text3: 
 	text_asm
 	ld a, [wOptions2]
 	bit BIT_ALT_PKMN_PALETTES, a ; do we have alt palettes enabled

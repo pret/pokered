@@ -7,7 +7,7 @@ SaffronMart_TextPointers:
 	dw SaffronMartText3
 	dw SaffronMartTMKid
 
-SaffronMartTMKid:
+SaffronMartTMKid: ; PureRGBnote: ADDED: new NPC who will sell TMs
 	text_asm
 	ld hl, TMKidGreet6
 	call PrintText

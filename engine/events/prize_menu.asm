@@ -1,5 +1,5 @@
 CeladonPrizeMenu::
-	CheckEvent EVENT_GOT_COIN_CASE
+	CheckEvent EVENT_GOT_COIN_CASE ; PureRGBnote: CHANGED: coin case was made into an event rather than an item in your bag.
 	jr nz, .havingCoinCase
 	ld hl, RequireCoinCaseTextPtr
 	jp PrintText

@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: new trainers on this route.
+
 Route7_Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, Route7TrainerHeaders

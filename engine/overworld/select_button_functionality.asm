@@ -1,4 +1,5 @@
-;this function handles quick-use of fishing and biking
+; shinpokerednote: ADDED: this function handles quick-use of fishing and biking on pressing select.
+; PureRGBnote: at the moment fishing with select is commented out since we've made it easier to select from the item menu the rod repeatedly.
 CheckForRodBike::
 	;callfar IsNextTileShoreOrWater	;unsets carry if player is facing water or shore
 	;jr c, .nofishing

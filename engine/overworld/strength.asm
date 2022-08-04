@@ -1,4 +1,4 @@
-; checks if we can use strength when pressing A on a boulder and asks the player whether to do so if it's possible
+; PureRGBnote: ADDED: checks if we can use strength when pressing A on a boulder and asks the player whether to do so if it's possible
 CheckStrengthUsage::
 	ld a, [wd728]
 	bit 0, a

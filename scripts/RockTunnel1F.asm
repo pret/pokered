@@ -20,7 +20,7 @@ RockTunnel1F_TextPointers:
 	dw RockTunnel1Text5
 	dw RockTunnel1Text6
 	dw RockTunnel1Text7
-	dw PickUp5ItemText
+	dw PickUp5ItemText ; PureRGBnote: ADDED: new item location
 	dw RockTunnel1Text8
 
 RockTunnel1TrainerHeaders:

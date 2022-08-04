@@ -1,3 +1,5 @@
+; PureRGBNote: ADDED: some new enhanced sprites were added. They are only used if enhanced sprites is turned on in the options in-game.
+
 MACRO overworld_sprite
 	dw \1
 	db \2 tiles

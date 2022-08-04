@@ -8,14 +8,19 @@ DEF TRUE  EQU 1
 	const FLAG_SET   ; 1
 	const FLAG_TEST  ; 2
 
+;;;;;;;;;; PureRGBnote: CHANGED: increased the speed of each text speed option
 ; wOptions
 DEF TEXT_DELAY_FAST    EQU %000 ; 0
 DEF TEXT_DELAY_MEDIUM  EQU %001 ; 1
 DEF TEXT_DELAY_SLOW    EQU %011 ; 3
+;;;;;;;;;;
 
 	const_def 6
 	const BIT_BATTLE_SHIFT     ; 6
 	const BIT_BATTLE_ANIMATION ; 7
+
+;;;;;;;;;; PureRGBnote: ADDED: New constants for all the new options that appear in the new options menus. 
+;;;;;;;;;;                     Controls which bits they use in the options wram variables.
 
 ; wOptions2
 
@@ -52,11 +57,15 @@ DEF PALETTES_YELLOW     EQU %11 ; 3
 	const BIT_ARCANINE_SPRITE  ; 6
 	const BIT_MEWTWO_SPRITE    ; 7
 
+;;;;;;;;;;
 
+;;;;;;;;;; PureRGBnote: constants for indicating which type of safari game the player is currently playing
 DEF SAFARI_TYPE_CLASSIC EQU 0
 DEF SAFARI_TYPE_RANGER_HUNT EQU 1
 DEF SAFARI_TYPE_FREE_ROAM EQU 2
+;;;;;;;;;;
 
+;;;;;;;;;; shinpokerednote: gbcnote: new constants for managing GBC color palettes functionality
 ; DMGPalToGBCPal
 DEF CONVERT_BGP  EQU 0
 DEF CONVERT_OBP0 EQU 1
@@ -65,3 +74,4 @@ DEF CONVERT_OBP1 EQU 2
 DEF NUM_COLORS EQU 4
 DEF PAL_SIZE EQU NUM_COLORS * 2
 DEF NUM_ACTIVE_PALS EQU 4
+;;;;;;;;;;

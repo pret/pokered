@@ -61,7 +61,7 @@ CinnabarIsland_TextPointers:
 	dw CinnabarIslandText7
 	dw CinnabarIslandText8
 
-CinnabarIslandText8:
+CinnabarIslandText8: ; PureRGBnote: CHANGED: secret key gets consumed on usage and the door is permanently unlocked.
 	text_asm
 	ld b, SECRET_KEY
 	predef GetIndexOfItemInBag

@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: card key will be consumed if all card key doors were opened in the game.
+
 SilphCo6F_Script:
 	call SilphCo6Script_1a1bf
 	call EnableAutoTextBoxDrawing

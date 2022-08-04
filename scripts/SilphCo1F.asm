@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: new trainers in this location. Only after defeating giovanni on 11F though.
+
 SilphCo1F_Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, SilphCo1FTrainerHeaders

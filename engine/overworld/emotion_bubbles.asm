@@ -1,3 +1,4 @@
+; PureRGBnote: ADDED: the emotion bubble code was split into two functions that differ in how long the bubble shows.
 EmotionBubble:
 	call EmotionBubbleCommon
 	ld c, 60

@@ -1,3 +1,5 @@
+; PureRGBnote: CHANGED: since Old rod is obtained in cerulean and good rod in vermilion now, this fishing guru will give either
+; the SUPER ROD or another non-key item depending on which of the last two gurus you talked to first.
 FuchsiaGoodRodHouse_Script:
 	jp EnableAutoTextBoxDrawing
 

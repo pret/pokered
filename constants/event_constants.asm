@@ -1,3 +1,4 @@
+; PureRGBnote: ADDED: many event constants were added versus the original game to track new content added to the game
 ; wEventFlags bit flags
 
 ; Pallet Town events

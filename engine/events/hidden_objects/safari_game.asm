@@ -1,9 +1,11 @@
 SafariZoneCheck::
 	CheckEventHL EVENT_IN_SAFARI_ZONE ; if we are not in the Safari Zone,
 	jr z, SafariZoneGameStillGoing ; don't bother printing game over text
+;;;;;;;;;; PureRGBnote: ADDED: free roam safari doesn't end based on steps
 	ld a, [wSafariType]
 	cp SAFARI_TYPE_FREE_ROAM ; in Classic and Ranger Hunt, when safari ball counter reaches 0 (which in ranger hunt is the "Rangers Left" counter essentially) we end the safari.
 	jr z, SafariZoneGameStillGoing ; if we're in a Free Roam safari game, we can't game over from 0 safari balls since there aren't any.
+;;;;;;;;;;
 	ld a, [wNumSafariBalls]
 	and a
 	jr z, SafariZoneGameOver
@@ -14,9 +16,11 @@ IF DEF(_DEBUG)
 	call DebugPressedOrHeldB
 	ret nz
 ENDC
+;;;;;;;;;; PureRGBnote: ADDED: free roam safari doesn't end based on steps
 	ld a, [wSafariType]
 	cp SAFARI_TYPE_FREE_ROAM
 	ret z ; if we're in a free roam safari, there's no game over caused by step limit.
+;;;;;;;;;;
 	ld a, [wSafariSteps]
 	ld b, a
 	ld a, [wSafariSteps + 1]
@@ -46,6 +50,7 @@ SafariZoneGameOver:
 	ld a, [wChannelSoundIDs + Ch5]
 	cp SFX_SAFARI_ZONE_PA
 	jr nz, .waitForMusicToPlay
+;;;;;;;;;; PureRGBnote: ADDED: special ending text if we completed ranger hunt safari game
 	ld a, [wSafariType]
 	and a
 	jr nz, .rangerHuntDone ; if we finished a Ranger Hunt game (wSafariType = 1) we will display different ending text
@@ -64,6 +69,7 @@ SafariZoneGameOver:
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .doneSafari	
+;;;;;;;;;;
 	xor a
 	ld [wPlayerMovingDirection], a
 	ld a, SAFARI_ZONE_GATE
@@ -106,8 +112,9 @@ SafariRangerHuntSuccessText::
 	sound_get_item_2
 	text_end	
 
+; PureRGBnote: ADDED: used when leaving the safari zone by flying, teleporting, blacking out, etc.
+;                     clears all variables related to the safari game you were in
 ClearSafariFlags::
-	; used when leaving the safari zone by flying, teleporting, blacking out, etc.
 	ResetEvents EVENT_SAFARI_GAME_OVER, EVENT_IN_SAFARI_ZONE
 	xor a
 	ld [wSafariType], a
@@ -125,6 +132,7 @@ GameOverText:
 	text_far _GameOverText
 	text_end
 
+; PureRGBnote: ADDED: decrements the number of rangers left once you beat one.
 RangerPostBattle::
 	ld a, [wIsInBattle] 
 	cp $ff ; if you lost the battle don't decrement and return

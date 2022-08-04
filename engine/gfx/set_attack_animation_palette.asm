@@ -1,3 +1,6 @@
+; shinpokerednote: ADDED: code for adding color to move animations.
+; PureRGBnote: ADDED: now also used for pokeball animation colors and a couple of other non-move animations.
+
 SetAttackAnimPal:
 	call GetPredefRegisters
 

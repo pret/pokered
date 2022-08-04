@@ -40,7 +40,7 @@ HiddenItemNear:
 	add 5
 	cp e
 	jr c, .loop
-	call GetItemFinderFacing ; NEW: stores which direction the item is from the player for later
+	call GetItemFinderFacing ; PureRGBnote: ADDED: stores which direction the item is from the player for later
 	scf
 	ret
 
@@ -52,7 +52,7 @@ Sub5ClampTo0:
 	xor a
 	ret
 
-; NEW: Code for turning to face the direction of the item
+; PureRGBnote: ADDED: Code for turning to face the direction of the item
 ; d = hidden item's y coord
 ; e = hidden item's x coord
 GetItemFinderFacing:

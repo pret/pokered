@@ -93,10 +93,12 @@ Evolution_PartyMonLoop: ; loop over party mons
 	jp c, Evolution_PartyMonLoop ; if so, go the next mon
 	jr .doEvolution
 .checkItemEvo
-	ld a, [wIsInBattle] ; FIXED: skip checking stone evolutions if in battle to avoid the exploit with species numbers allowing stone evolution after battle.
+;;;;;;;;;; shinpokerednote: FIXED: skip checking stone evolutions if in battle to avoid the exploit with species numbers allowing stone evolution after battle.
+	ld a, [wIsInBattle] 
 	and a
 	ld a, [hli]
 	jp nz, .nextEvoEntry1
+;;;;;;;;;;
 	ld b, a ; evolution item
 	ld a, [wcf91] ; BUG: this is supposed to be the last item used, but it is also used to hold species numbers
 	cp b ; was the evolution item in this entry used?
@@ -111,13 +113,14 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld [wCurEnemyLVL], a
 	ld a, 1
 	ld [wEvolutionOccurred], a
-	; FIXED: skipping evolution learned moves if levelled up a non-evolved pokemon multiple times then evolving
+;;;;;;;;;; shinpokerednote: FIXED: skipping evolution learned moves if levelled up a non-evolved pokemon multiple times then evolving
 	ld a, [wTempFlag0]
 	cp b
 	jp nc, .evoLevelRequirementSatisfied
 	ld a, b
 	ld [wTempFlag0], a
 .evoLevelRequirementSatisfied
+;;;;;;;;;;
 	push hl
 	ld a, [hl]
 	ld [wEvoNewSpecies], a
@@ -218,9 +221,8 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld [wd11e], a
 	xor a
 	ld [wMonDataLocation], a
-.learnMoveEevee	
-	call EeveelutionForceLearnMove ; FIXED: Force eeveelutions to learn a move on evolution
-	;FIXED: fixing skip move-learn on level-up evolution
+	call EeveelutionForceLearnMove ; PureRGBnote: ADDED: Force eeveelutions to learn a move on evolution
+;;;;;;;;;; shinpokerednote: FIXED: fixing skip move-learn on level-up evolution
 	ld a, [wIsInBattle]
 	and a
 	jr z, .notinbattle
@@ -247,6 +249,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 .notinbattle
 	call LearnMoveFromLevelUp
 .skipfix_end
+;;;;;;;;;;
 	pop hl
 	predef SetPartyMonTypes
 	ld a, [wIsInBattle]
@@ -357,7 +360,8 @@ Evolution_ReloadTilesetTilePatterns:
 	ret z
 	jp ReloadTilesetTilePatterns
 
-LearnMoveFromLevelUp: ; FIXED: supports learning multiple moves at the same level
+; shinpokerednote: FIXED: supports learning multiple moves at the same level
+LearnMoveFromLevelUp: 
 	ld hl, EvosMovesPointerTable
 	ld a, [wd11e] ; species
 	ld [wcf91], a
@@ -424,7 +428,7 @@ LearnMoveFromLevelUp: ; FIXED: supports learning multiple moves at the same leve
 	ld [wd11e], a
 	ret
 
-; used to force the eeveelutions to learn a specific move on evolution so this move cannot be missed
+; PureRGBnote: ADDED: used to force the eeveelutions to learn a specific move on evolution so this move cannot be missed
 EeveelutionForceLearnMove:
 	push bc
 	ld a, [wd11e] ; species

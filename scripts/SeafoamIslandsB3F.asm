@@ -1,6 +1,6 @@
 SeafoamIslandsB3F_Script:
 	call EnableAutoTextBoxDrawing
-	call CheckShowFossil
+	call CheckShowFossil ; PureRGBnote: ADDED: the fossil you didn't get in mt moon will be available here.
 	ld hl, wFlags_0xcd60
 	bit 7, [hl]
 	res 7, [hl]

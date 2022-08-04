@@ -5,6 +5,7 @@ SetDefaultNames:
 	push af
 	ld a, [wd732]
 	push af
+;;;;;;;;;; PureRGBnote: ADDED: these new options variables need to be preserved when starting a new game.
 	ld a, [wSpriteOptions]
 	push af
 	ld a, [wSpriteOptions2]
@@ -25,6 +26,7 @@ SetDefaultNames:
 	ld [wSpriteOptions2], a
 	pop af
 	ld [wSpriteOptions], a
+;;;;;;;;;;
 	pop af
 	ld [wd732], a
 	pop af
@@ -54,7 +56,7 @@ OakSpeech:
 	call LoadTextBoxTilePatterns
 	call SetDefaultNames
 	predef InitPlayerData2
-	call RunDefaultPaletteCommand	;gbcnote - reinitialize the default palette in case the pointers got cleared
+	call RunDefaultPaletteCommand	; shinpokerednote: gbcnote: reinitialize the default palette in case the pointers got cleared
 	ld hl, wNumBoxItems
 	ld a, ITEM_INITIAL_PC_ITEM
 	ld [wcf91], a
@@ -189,7 +191,7 @@ FadeInIntroPic:
 .next
 	ld a, [hli]
 	ldh [rBGP], a
-	call UpdateGBCPal_BGP
+	call UpdateGBCPal_BGP ; shinpokerednote: gbcnote: gbc color code from yellow 
 	ld c, 10
 	call DelayFrames
 	dec b
@@ -211,7 +213,7 @@ MovePicLeft:
 
 	ld a, %11100100
 	ldh [rBGP], a
-	call UpdateGBCPal_BGP
+	call UpdateGBCPal_BGP ; shinpokerednote: gbcnote: gbc color code from yellow 
 .next
 	call DelayFrame
 	ldh a, [rWX]
