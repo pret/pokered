@@ -186,7 +186,7 @@ PewterCity_TextPointers:
 	dw PewterCityText3
 	dw PewterCityText4
 	dw PewterCityText5
-	dw PickUp2ItemText
+	dw PickUp2ItemText ; PureRGBnote: ADDED: new item in this location
 	dw PewterCityText6
 	dw PewterCityText7
 	dw MartSignText

@@ -10,6 +10,8 @@ CeladonDiner_TextPointers:
 	dw CeladonDinerText5
 
 CeladonDinerText1:
+; PureRGBnote: ADDED: celadon diner sells drinks after giving a drink to the guards guarding saffron
+; allows you to buy a bunch of drinks at once if you want.
 	text_asm
 	ld a, [wd728]
 	bit 6, a
@@ -53,7 +55,7 @@ CeladonDinerText5:
 	jr nz, .got_item
 	ld hl, CeladonDinerText_491a7
 	call PrintText
-	;lb bc, COIN_CASE, 1 ; FIXED: COIN_CASE is not an item
+	;lb bc, COIN_CASE, 1 ; PureRGBnote: CHANGED: COIN_CASE is not an item, it's just an event that lets you use the game corner
 	;call GiveItem
 	;jr nc, .bag_full
 	SetEvent EVENT_GOT_COIN_CASE

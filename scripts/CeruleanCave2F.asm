@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: code was added pertaining to battling professor oak on this floor.
+
 CeruleanCave2F_Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, CeruleanCave2F_ScriptPointers

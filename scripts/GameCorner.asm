@@ -145,14 +145,14 @@ CeladonGameCornerText2:
 	and a
 	jr nz, .asm_48d0f
 .wantsToBuyMoreCoins
-	CheckEvent EVENT_GOT_COIN_CASE
+	CheckEvent EVENT_GOT_COIN_CASE ; PureRGBnote: CHANGED: coin case is an event instead of an item
 	jr z, .asm_48d19
 	call Has9990Coins
 	jr nc, .asm_48d14
 	xor a
 	ldh [hMoney], a
 	ldh [hMoney + 2], a
-	ld a, $80
+	ld a, $80 ; PureRGBnote: CHANGED: 8000 pokebucks for 500 coins.
 	ldh [hMoney + 1], a
 	call HasEnoughMoney
 	jr nc, .asm_48cdb
@@ -162,7 +162,7 @@ CeladonGameCornerText2:
 	xor a
 	ldh [hMoney], a
 	ldh [hMoney + 2], a
-	ld a, $80
+	ld a, $80 ; PureRGBnote: CHANGED: 8000 pokebucks for 500 coins.
 	ldh [hMoney + 1], a
 	ld hl, hMoney + 2
 	ld de, wPlayerMoney + 2
@@ -172,7 +172,7 @@ CeladonGameCornerText2:
 	ldh [hUnusedCoinsByte], a
 	ldh [hCoins + 1], a
 	ldh [hCoins + 2], a
-	ld a, $05
+	ld a, $05 ; PureRGBnote: CHANGED: 8000 pokebucks for 500 coins.
 	ldh [hCoins], a
 	ld de, wPlayerCoins + 2
 	ld hl, hCoins + 2
@@ -180,6 +180,7 @@ CeladonGameCornerText2:
 	predef AddBCDPredef
 	call CeladonGameCornerScript_48f1e
 	ld hl, CeladonGameCornerText_48d27
+;;;;;;;;;; PureRGBnote: CHANGED: the clerk will allow you to repeatedly buy 500 coins without long dialog repeat
 	call PrintText
 	ld hl, CeladonGameCornerText_another500
 	call PrintText
@@ -188,6 +189,7 @@ CeladonGameCornerText2:
 	and a
 	jr z, .wantsToBuyMoreCoins
 	ld hl, CeladonGameCornerThanks
+;;;;;;;;;;
 	jr .asm_48d1c
 .asm_48d0f
 	ld hl, CeladonGameCornerText_48d2c
@@ -248,7 +250,7 @@ CeladonGameCornerText5:
 	jr nz, .asm_48d89
 	ld hl, CeladonGameCornerText_48d9c
 	call PrintText
-	CheckEvent EVENT_GOT_COIN_CASE
+	CheckEvent EVENT_GOT_COIN_CASE ; PureRGBnote: CHANGED: coin case is an event instead of an item
 	jr z, .asm_48d93
 	call Has9990Coins
 	jr nc, .asm_48d8e
@@ -299,7 +301,7 @@ CeladonGameCornerText6:
 	text_far _CeladonGameCornerText6
 	text_end
 
-CeladonGameCornerText7:
+CeladonGameCornerText7: ; PureRGBnote: ADDED: gym guide gives you apex chips after beating the leader
 	text_asm
 	CheckEvent EVENT_BEAT_ERIKA
 	jr nz, .afterBattle
@@ -373,7 +375,7 @@ CeladonGameCornerText9:
 	jr nz, .asm_48e13
 	ld hl, CeladonGameCornerText_48e26
 	call PrintText
-	CheckEvent EVENT_GOT_COIN_CASE
+	CheckEvent EVENT_GOT_COIN_CASE ; PureRGBnote: CHANGED: coin case is an event instead of an item
 	jr z, .asm_48e1d
 	call Has9990Coins
 	jr nc, .asm_48e18
@@ -424,7 +426,7 @@ CeladonGameCornerText10:
 	jr nz, .asm_48e75
 	ld hl, CeladonGameCornerText_48e88
 	call PrintText
-	CheckEvent EVENT_GOT_COIN_CASE
+	CheckEvent EVENT_GOT_COIN_CASE ; PureRGBnote: CHANGED: coin case is an event instead of an item
 	jr z, .asm_48e7f
 	call Has9990Coins
 	jr z, .asm_48e7a

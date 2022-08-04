@@ -22,7 +22,7 @@ Route21_TextPointers:
 	dw Route21Text7
 	dw Route21Text8
 	dw Route21Text9
-	dw PickUpItemText
+	dw PickUpItemText ; PureRGBnote: ADDED: new item on this route.
 
 Route21TrainerHeaders:
 	def_trainers

@@ -10,14 +10,14 @@ DisplayStartMenu::
 RedisplayStartMenu::
 	farcall DrawStartMenu
 	farcall PrintSafariZoneSteps ; print Safari Zone info, if in Safari Zone
-	call LoadGBPal ;gbcnote: moved to redisplaystartmenu for better visual effect
+	call LoadGBPal ; shinpokerednote: gbcnote: moved to redisplaystartmenu for better visual effect
 	call UpdateSprites
 .loop
 	call HandleMenuInput
 	ld b, a
 .checkIfUpPressed
 	bit BIT_SELECT, a
-	jp nz, .selectPressed ; NEW: if pressing SELECT while the cursor is over the SAVE option - we can change PC boxes.
+	jp nz, .selectPressed ; PureRGBnote: ADDED: if pressing SELECT while the cursor is over the SAVE option - we can change PC boxes.
 	bit BIT_D_UP, a
 	jr z, .checkIfDownPressed
 	ld a, [wCurrentMenuItem] ; menu selection
@@ -78,15 +78,16 @@ RedisplayStartMenu::
 	cp 5
 	jp z, StartMenu_Option
 	jr CloseStartMenu
+;;;;;;;;;; PureRGBnote: ADDED: if pressing SELECT while the cursor is over the SAVE option - we can change PC boxes.
 .selectPressed
-	CheckEvent EVENT_GOT_POKEDEX
+	CheckEvent EVENT_GOT_POKEDEX ; functionality only allowed if we have the pokedex
 	jp z, .loop
 	ld a, [wCurrentMenuItem]
 	cp 4 ; are we currently on SAVE menu index? (need to be to do the below action)
 	jp nz, .loop
 	jp StartMenu_SelectPressed
+;;;;;;;;;;
 
-; EXIT falls through to here
 CloseStartMenu::
 	call Joypad
 	ldh a, [hJoyPressed]

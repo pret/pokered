@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: new trainers on this route.
+
 Route12_Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, Route12TrainerHeaders
@@ -31,7 +33,7 @@ Route12Script0:
 	call DisplayTextID
 	ld a, SNORLAX
 	ld [wCurOpponent], a
-	ld a, 40
+	ld a, 40 ; PureRGBnote: CHANGED: raised snorlax's level to balance with party levels
 	ld [wCurEnemyLVL], a
 	ld a, HS_ROUTE_12_SNORLAX
 	ld [wMissableObjectIndex], a
@@ -73,7 +75,7 @@ Route12_TextPointers:
 	dw Route12Text10
 	dw PickUpItemText
 	dw PickUpItemText
-	dw PickUpItemText
+	dw PickUpItemText ; PureRGBnote: ADDED: new item in this location
 	dw Route12Text11
 	dw Route12Text12
 	dw Route12Text13

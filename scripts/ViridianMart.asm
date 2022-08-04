@@ -96,7 +96,7 @@ ViridianMartText3:
 	text_far _ViridianMartText3
 	text_end
 
-ViridianMartTMKid:
+ViridianMartTMKid: ; PureRGBnote: ADDED: new NPC who will talk about TMs
 	text_asm
 	CheckEvent EVENT_BEAT_BLAINE
 	jr nz, .beforeGiovanni

@@ -7,7 +7,7 @@ VermilionMart_TextPointers:
 	dw VermilionMartText3
 	dw VermilionMartTMKid
 
-VermilionMartTMKid:
+VermilionMartTMKid: ; PureRGBnote: ADDED: new NPC who will sell TMs
 	text_asm
 	ld hl, TMKidGreet2
 	call PrintText

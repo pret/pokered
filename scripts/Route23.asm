@@ -146,8 +146,8 @@ Route23_TextPointers:
 	dw Route23Text5
 	dw Route23Text6
 	dw Route23Text7
-	dw PickUpItemText
-	dw PickUpItemText
+	dw PickUpItemText ; PureRGBnote: ADDED: new item on this route.
+	dw PickUpItemText ; PureRGBnote: ADDED: new item on this route.
 	dw Route23Text8
 
 Route23Text1:

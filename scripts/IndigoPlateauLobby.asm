@@ -1,5 +1,5 @@
 IndigoPlateauLobby_Script:
-	call SetLastBlackoutMap
+	call SetLastBlackoutMap ; PureRGBnote: ADDED: set blackout map on entering pokemon center
 	call Serial_TryEstablishingExternallyClockedConnection
 	call EnableAutoTextBoxDrawing
 	ld hl, wCurrentMapScriptFlags
@@ -26,7 +26,7 @@ IndigoPlateauLobby_TextPointers:
 IndigoHealNurseText:
 	script_pokecenter_nurse
 
-IndigoPlateauGymGuideText:
+IndigoPlateauGymGuideText: ; PureRGBnote: ADDED: gym guide sells you apex chips (and a couple items) after becoming champ
 	text_asm
 	CheckEvent EVENT_BECAME_CHAMP
 	jr nz, .afterChamp
@@ -71,7 +71,7 @@ IndigoPlateauGymGuideText:
 	call PrintText
 	jr .done
 
-IndigoGymGuideSonText:
+IndigoGymGuideSonText:  ; PureRGBnote: ADDED: new NPC who will sell TMs - sells all 50 TMs after becoming champ.
 	text_asm
 	CheckEvent EVENT_BECAME_CHAMP
 	jr nz, .afterChamp

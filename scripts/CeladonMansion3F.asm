@@ -29,7 +29,7 @@ DirectorText:
 	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
 	ld a, [wNumSetBits]
-	cp NUM_POKEMON - 2 ; discount Mew and Missingno
+	cp NUM_POKEMON - 2 ; PureRGBnote: CHANGED: discount Mew and Missingno when checking for if the player has caught everything
 	jr nc, .completed_dex
 	ld hl, .GameDesignerText
 	jr .done

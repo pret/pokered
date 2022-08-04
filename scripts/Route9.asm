@@ -8,6 +8,7 @@ Route9_Script:
 	ld [wRoute9CurScript], a
 	ret
 
+; PureRGBnote: ADDED: function that will remove the cut tree if we deleted it with the tree deleter
 Route9ReplaceCutTile:
 	CheckEvent EVENT_DELETED_ROUTE9_TREE
 	ret z

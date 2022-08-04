@@ -1,3 +1,4 @@
+; dannye33note: ADDED: code for rendering sprites from an arbitrary bank instead of hardcoded.
 ; uncompresses the front or back sprite of the specified mon
 ; assumes the corresponding mon header is already loaded
 ; hl contains offset to sprite pointer ($b for front or $d for back)
@@ -19,7 +20,7 @@ UncompressMonBackSprite::
 .GotBank
     jp UncompressSpriteData
 
-
+; dannye33note: CHANGED: code for rendering sprites from an arbitrary bank instead of hardcoded.
 UncompressMonSprite::
     ld bc,wMonHeader
     add hl,bc
@@ -38,6 +39,7 @@ UncompressMonSprite::
     jr z,.RecallBank
     ld a,[wMonHPicBank]
     jr .GotBank
+;;;;;;;;;; PureRGNnote: ADDED: missingno has a randomized front sprite
 .missingNo
     call Random ; missingno sometimes displays other front sprites
     and %111
@@ -64,6 +66,7 @@ UncompressMonSprite::
 	ld [wSpriteInputPtr], a
 	ld a, d
 	ld [wSpriteInputPtr+1], a
+;;;;;;;;;;
 .RecallBank
     ld a,BANK(FossilKabutopsPic)    
 .GotBank
@@ -72,7 +75,7 @@ UncompressMonSprite::
 ; de: destination location
 LoadMonFrontSprite::
 	push de
-	callfar CheckSpriteOptions
+	callfar CheckSpriteOptions ; PureRGBnote: ADDED: we need to check options and remap the front sprite based on player settings here
 	call UncompressMonSprite
 	ld hl, wMonHSpriteDim
 	ld a, [hli]

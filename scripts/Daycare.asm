@@ -35,7 +35,7 @@ DayCareMText1:
 	pop af
 	ld hl, DayCareAllRightThenText
 	jp c, .done
-	;callfar KnowsHMMove ;FIXED - pokemon are never considered to have HM moves so the restrictions are gone
+	;callfar KnowsHMMove ; PureRGBnote: CHANGED: pokemon are never considered to have HM moves so the restrictions are gone
 	;ld hl, DayCareCantAcceptMonWithHMText
 	;jp c, .done
 	xor a

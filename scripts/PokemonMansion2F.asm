@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: new trainers were added to this location
+
 PokemonMansion2F_Script:
 	call Mansion2Script_51fee
 	call EnableAutoTextBoxDrawing

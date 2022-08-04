@@ -1,11 +1,15 @@
+; PureRGBnote: ADDED: secret house in cerulean
 CeruleanRocketHouse1F_Script:
 	call EnableAutoTextBoxDrawing
 	call CeruleanRocketHouse1F_AddStairs
 	ret
 
 CeruleanRocketHouse1F_TextPointers:
-	dw CeruleanRocketHouse1FText1
+; PureRGBnote: ADDED: Rocket who shows up in this building after getting the DIG tm from him. He goes downstairs after becoming champ.
+	dw CeruleanRocketHouse1FText1 
 
+
+; after becoming champ a stairway opens up in the house that wasn't present before, allowing you to descend.
 CeruleanRocketHouse1F_AddStairs:
 	CheckEvent EVENT_BECAME_CHAMP
 	ret z

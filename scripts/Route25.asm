@@ -52,7 +52,7 @@ Route25_TextPointers:
 	dw Route25Text9
 	dw PickUpItemText
 	dw Route25Text11
-	dw Route25Text12
+	dw Route25Text12 ; PureRGBnote: ADDED: new trainer tips sign on this route.
 
 Route25TrainerHeaders:
 	def_trainers

@@ -5,6 +5,8 @@ Route15Gate2F_TextPointers:
 	dw Route15GateUpstairsText1
 	dw Route15GateUpstairsText2
 
+; PureRGBnote: CHANGED: oak's aide here will give you the BOOSTER CHIP instead of EXP.ALL, and it requires 80 pokemon caught to obtain.
+; Once you install it, you must talk to him to get it removed. This removes the need for it taking up an item slot when in use.
 Route15GateUpstairsText1:
 	text_asm
 	CheckEvent EVENT_GOT_BOOSTER_CHIP

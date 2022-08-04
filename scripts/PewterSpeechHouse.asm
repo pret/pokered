@@ -14,7 +14,8 @@ PewterHouse2Text2:
 	text_far _PewterHouse2Text2
 	text_end
 
-PewterHouse2Text3:
+; PureRGBnote: ADDED: new NPC who will give you POCKET ABRA once you return their LOST WALLET
+PewterHouse2Text3: 
 	text_asm
 		CheckEvent EVENT_RETURNED_LOST_WALLET
 		jr nz, .howsAbra

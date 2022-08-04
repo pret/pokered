@@ -205,7 +205,7 @@ SaffronGymTrainerText7:
 	call TalkToTrainer
 	jp TextScriptEnd
 
-SaffronGymGuideText:
+SaffronGymGuideText: ; PureRGBnote: ADDED: gym guide gives you apex chips after beating the leader
 	text_asm
 	CheckEvent EVENT_BEAT_SABRINA
 	jr nz, .afterBeat

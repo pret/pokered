@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: new trainer in this location
+
 Route10_Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, Route10TrainerHeaders
@@ -20,8 +22,8 @@ Route10_TextPointers:
 	dw Route10Text5
 	dw Route10Text6
 	dw Route10Text7
-	dw PickUpItemText
-	dw Route10Text8
+	dw PickUpItemText ; PureRGBnote: ADDED: new item in this location 
+	dw Route10Text8 
 	dw PokeCenterSignText
 	dw Route10Text9
 	dw Route10Text10

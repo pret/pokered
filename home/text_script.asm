@@ -26,7 +26,7 @@ DisplayTextID::
 	dict TEXT_MON_FAINTED,      DisplayPokemonFaintedText
 	dict TEXT_BLACKED_OUT,      DisplayPlayerBlackedOutText
 	dict TEXT_REPEL_WORE_OFF,   DisplayRepelWoreOffText
-	dict TEXT_RANGER_SAFARI_GAME_OVER, DisplayRangerSafariGameOverText
+	dict TEXT_RANGER_SAFARI_GAME_OVER, DisplayRangerSafariGameOverText ; PureRGBnote: ADDED: text that displays when ranger hunt is completed
 	
 	cp $FF
 	jp z, CloseTextDisplay
@@ -105,7 +105,7 @@ HoldTextDisplayOpen::
 	bit BIT_A_BUTTON, a
 	jr nz, HoldTextDisplayOpen
 
-CloseTextDisplayNoSpriteUpdate::
+CloseTextDisplayNoSpriteUpdate:: ; PureRGBnote: ADDED: less laggy version of closing the text display that doesn't reset sprite facings
 	call CloseTextDisplayPart1
 	jp CloseTextDisplayPart2
 
@@ -164,7 +164,7 @@ DisplayPokemartDialogue::
 	call DisplayPokemartNoGreeting
 	jp AfterDisplayingTextID
 
-DisplayPokemartNoGreeting::
+DisplayPokemartNoGreeting:: ; PureRGBnote: ADDED: show pokemart without the "welcome!" dialogue first, allows vendors to say something else beforehand.
 	inc hl
 	call LoadItemList
 	ld a, PRICEDITEMLISTMENU
@@ -235,7 +235,7 @@ PlayerBlackedOutText::
 DisplayRepelWoreOffText::
 	ld hl, RepelWoreOffText
 	call PrintText
-	callfar UseAnotherRepel
+	callfar UseAnotherRepel ; PureRGBnote: ADDED: when repel wears off ask to use another if available
 	jp CloseTextDisplay
 
 RepelWoreOffText::

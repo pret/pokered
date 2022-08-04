@@ -54,7 +54,7 @@ InitVoltorbBattle:
 	xor a
 	jr InitVoltorbBattleCommon
 
-InitAltPaletteVoltorbBattle:
+InitAltPaletteVoltorbBattle: ; PureRGBnote: ADDED: some overworld voltorbs/electrodes use alternate palette if the feature is enabled
 	ld a, 1
 InitVoltorbBattleCommon:
 	ld [wIsAltPalettePkmnData], a

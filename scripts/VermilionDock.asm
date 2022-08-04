@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: code to make mew show up under the truck.
+
 VermilionDock_Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, VermilionDockTrainerHeaders
@@ -181,7 +183,7 @@ VermilionDock_1dc7c:
 	ld h, $0
 	ld l, $80
 .asm_1dc86
-	predef BGLayerScrollingUpdate	;gbcnote - consolidated into a predef that also fixes some issues
+	predef BGLayerScrollingUpdate ; shinpokerednote: gbcnote - consolidated into a predef that also fixes some issues
 .asm_1dc8e
 	ldh a, [rLY]
 	cp h

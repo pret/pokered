@@ -1,3 +1,5 @@
+; PureRGBnote: CHANGED: ADDED: the super nerd who you both get fossils on this floor will now ask to take your fossil right away
+; and then meet him in saffron city to receive the revived pokemon. Frees up some space in your items.
 MtMoonB2F_Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, MtMoon3TrainerHeaders

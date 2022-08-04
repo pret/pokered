@@ -90,7 +90,7 @@ CeladonMartRoofScript_GiveDrinkToGirl:
 	ld hl, CeladonMartRoofText_48515
 	call PrintText
 	call RemoveItemByIDBank12
-	lb bc, TM_GLARE, 1
+	lb bc, TM_CELADON_MART_ROOF_GIRL_LEMONADE, 1
 	call GiveItem
 	jr nc, .bagFull
 	ld hl, ReceivedTM49Text
@@ -103,7 +103,7 @@ CeladonMartRoofScript_GiveDrinkToGirl:
 	ld hl, CeladonMartRoofText_48504
 	call PrintText
 	call RemoveItemByIDBank12
-	lb bc, TM_ROCK_SLIDE, 1
+	lb bc, TM_CELADON_MART_ROOF_GIRL_SODA_POP, 1
 	call GiveItem
 	jr nc, .bagFull
 	ld hl, CeladonMartRoofText_4850a
@@ -116,7 +116,7 @@ CeladonMartRoofScript_GiveDrinkToGirl:
 	ld hl, CeladonMartRoofText_484f3
 	call PrintText
 	call RemoveItemByIDBank12
-	lb bc, TM_ICE_BEAM, 1
+	lb bc, TM_CELADON_MART_ROOF_GIRL_FRESH_WATER, 1
 	call GiveItem
 	jr nc, .bagFull
 	ld hl, CeladonMartRoofText_484f9

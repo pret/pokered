@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: new NPC who will give you LOST WALLET after beating them in a battle.
+
 Museum2F_Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, Museum2FTrainerHeaders

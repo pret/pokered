@@ -57,7 +57,7 @@ HandleMenuInput_::
 .notAtTop
 	dec a
 	ld [wCurrentMenuItem], a ; move selected menu item up one space
-	call CheckForTM
+	call CheckForTM ; PureRGBnote: ADDED: when moving up and down (but not scrolling) specific list menus, we need to display TM text
 	jr .checkOtherKeys
 .alreadyAtTop
 	ld a, [wMenuWrappingEnabled]
@@ -84,7 +84,7 @@ HandleMenuInput_::
 .notAtBottom
 	ld a, c
 	ld [wCurrentMenuItem], a
-	call CheckForTM
+	call CheckForTM ; PureRGBnote: ADDED: when moving up and down (but not scrolling) specific list menus, we need to display TM text
 .checkOtherKeys
 	ld a, [wMenuWatchedKeys]
 	and b ; does the menu care about any of the pressed keys?
@@ -191,6 +191,7 @@ PlaceMenuCursor::
 	ld [wLastMenuItem], a
 	ret
 
+; PureRGBnote: ADDED: function for displaying the move contained within a TM when scrolling over it in lists.
 CheckForTM::
 	ld a, [wListWithTMText]
 	and a

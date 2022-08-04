@@ -544,13 +544,13 @@ TextCommandSounds::
 	db TX_SOUND_GET_ITEM_1,           SFX_GET_ITEM_1 ; actually plays SFX_LEVEL_UP when the battle music engine is loaded
 	db TX_SOUND_CAUGHT_MON,           SFX_CAUGHT_MON
 	db TX_SOUND_POKEDEX_RATING,       SFX_POKEDEX_RATING ; unused
-	db TX_SOUND_CRY_SNORLAX, 		  SNORLAX ; NEW: used in Tree Deleter's house 
+	db TX_SOUND_CRY_SNORLAX, 		  SNORLAX ; PureRGBnote: CHANGED: used in Tree Deleter's house 
 	db TX_SOUND_GET_ITEM_2,           SFX_GET_ITEM_2
 	db TX_SOUND_GET_KEY_ITEM,         SFX_GET_KEY_ITEM
 	db TX_SOUND_DEX_PAGE_ADDED,       SFX_DEX_PAGE_ADDED
-	db TX_SOUND_CRY_NIDORINA,         NIDORINO ; used in OakSpeech FIXED: play correct nidorino cry
+	db TX_SOUND_CRY_NIDORINA,         NIDORINO ; used in OakSpeech ; PureRGBnote: FIXED: play correct nidorino cry
 	db TX_SOUND_CRY_PIDGEOT,          PIDGEOT  ; used in SaffronCityText12
-	db TX_SOUND_CRY_MEOWTH,           MEOWTH  ; NEW: used in Fossil guy's house 
+	db TX_SOUND_CRY_MEOWTH,           MEOWTH  ; PureRGBnote: CHANGED: used in Fossil guy's house 
 
 TextCommand_DOTS::
 ; wait for button press or 30 frames while printing "…"s

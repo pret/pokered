@@ -32,7 +32,7 @@ PokemonTower6Script0:
 	ld a, $6
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
-;;;;;;;;;; PureRGBnote - NEW: ghost marowak uses a special color palette if the feature is enabled
+;;;;;;;;;; PureRGBnote: ADDED: ghost marowak uses a special color palette if the feature is enabled
 	ld a, 1
 	ld [wIsAltPalettePkmnData], a
 ;;;;;;;;;;
@@ -61,7 +61,7 @@ PokemonTower6Script4:
 	call UpdateSprites
 	ld a, $f0
 	ld [wJoyIgnore], a
-;;;;;;;;;; PureRGBnote - NEW: ghost marowak can be caught and the event will complete if you do so
+;;;;;;;;;; PureRGBnote: ADDED: ghost marowak can be caught and the event will complete if you do so
 	ld a, [wCaughtGhostMarowak]
 	and a
 	jr nz, .success 
@@ -153,7 +153,7 @@ PokemonTower6Text7:
 	call DelayFrames
 	ld hl, PokemonTower2Text_60c24
 	call PrintText
-;;;;;;;;;; PureRGBnote - NEW: ghost marowak can be caught and the event will complete if you do so
+;;;;;;;;;; PureRGBnote: ADDED: ghost marowak can be caught and the event will complete if you do so
 	ld a, [wCaughtGhostMarowak]
 	and a
 	jr nz, .caughtGhostMarowak
@@ -176,7 +176,7 @@ PokemonTower2Text_60c24:
 	text_far _PokemonTower2Text_60c24
 	text_end
 
-;;;;;;;;;; PureRGBnote - NEW: ghost marowak can be caught and the event will complete if you do so
+;;;;;;;;;; PureRGBnote: ADDED: ghost marowak can be caught and the event will complete if you do so
 PokemonTower2Text_CaughtGhostMarowak:
 	text_far _PokemonTower2Text_Caught
 	text_end

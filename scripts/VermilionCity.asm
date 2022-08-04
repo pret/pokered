@@ -50,7 +50,7 @@ VermilionCityScript0:
 	ld a, $3
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld a, [wObtainedBadges] ; ship returns after obtaining the soul badge
+	ld a, [wObtainedBadges] ; PureRGBnote: CHANGED: ship returns after obtaining the soul badge so let the player in if they have the ticket
 	bit 4, a
 	jr nz, .default
 	CheckEvent EVENT_SS_ANNE_LEFT
@@ -161,7 +161,7 @@ VermilionCityTextSSAnneDeparted:
 VermilionCityText3:
 	text_asm
 	ld a, [wObtainedBadges]
-	bit 4, a ; after obtaining soul badge the ship returns
+	bit 4, a ; PureRGBnote: CHANGED: after obtaining soul badge the ship returns so this NPC will talk about it
 	jr nz, .default
 	CheckEvent EVENT_SS_ANNE_LEFT
 	jr nz, .shipHasDeparted
@@ -280,7 +280,8 @@ VermilionCityText13:
 	text_far _VermilionCityText13
 	text_end
 
-VermilionCityDockBeautyText:
+; PureRGBnote: ADDED: new NPC who will give you an item if found. Requires surf to even see this NPC's location.
+VermilionCityDockBeautyText: 
 	text_asm
 	CheckEvent EVENT_GOT_DOCK_BEAUTY_ITEM
 	jr nz, .endText

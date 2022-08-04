@@ -1,5 +1,5 @@
 RedsHouse1F_Script:
-	call SetLastBlackoutMap
+	call SetLastBlackoutMap ; PureRGBnote: ADDED: set blackout map on entering pokemon center
 	jp EnableAutoTextBoxDrawing
 
 RedsHouse1F_TextPointers:

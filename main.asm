@@ -2,7 +2,7 @@ INCLUDE "constants.asm"
 
 
 SECTION "bank1", ROMX
-
+; PureRGBnote: MOVED: mew's base stats was moved, and unused_names.asm was removed completely
 INCLUDE "data/sprites/facings.asm"
 INCLUDE "engine/events/black_out.asm"
 INCLUDE "engine/battle/safari_zone.asm"
@@ -43,7 +43,7 @@ INCLUDE "engine/menus/wrap_list_menu.asm" ; PureRGBnote: ADDED: code for wrappin
 
 
 SECTION "bank3", ROMX
-
+; PureRGBnote: MOVED: wild_mons.asm was moved out of this bank
 INCLUDE "engine/joypad.asm"
 INCLUDE "data/maps/songs.asm"
 INCLUDE "data/maps/map_header_banks.asm"
@@ -193,7 +193,7 @@ INCLUDE "engine/battle/scroll_draw_trainer_pic.asm"
 INCLUDE "engine/battle/trainer_ai.asm"
 INCLUDE "engine/battle/draw_hud_pokeball_gfx.asm"
 INCLUDE "gfx/trade.asm"
-INCLUDE "engine/battle/trainers2.asm"
+INCLUDE "engine/battle/trainers2.asm" ; PureRGBnote: MOVED: moved from home bank
 
 SECTION "Battle Core", ROMX
 
@@ -234,8 +234,8 @@ SECTION "Battle Engine 8", ROMX
 
 INCLUDE "engine/battle/init_battle_variables.asm"
 INCLUDE "engine/battle/move_effects/paralyze.asm"
-INCLUDE "engine/battle/move_effects/burn.asm"
-; moved from battle engine 7
+INCLUDE "engine/battle/move_effects/burn.asm" ; PureRGBnote: ADDED: new burn effect code
+; PureRGBnote: MOVED: moved from battle engine 7
 INCLUDE "engine/battle/move_effects/heal.asm"
 INCLUDE "engine/battle/move_effects/transform.asm"
 INCLUDE "engine/battle/move_effects/reflect_light_screen.asm"
@@ -291,6 +291,7 @@ INCLUDE "engine/events/hidden_objects/route_15_binoculars.asm"
 INCLUDE "engine/events/hidden_objects/museum_fossils.asm"
 INCLUDE "engine/events/hidden_objects/school_blackboard.asm"
 INCLUDE "engine/events/hidden_objects/vermilion_gym_trash.asm"
+; PureRGBnote: ADDED: new hidden objects code files
 INCLUDE "engine/events/hidden_objects/fossil_guys_pc.asm"
 INCLUDE "engine/events/hidden_objects/cerulean_rocket_house.asm"
 
@@ -315,7 +316,7 @@ INCLUDE "gfx/version.asm"
 
 
 SECTION "bank1C", ROMX
-
+; PureRGBnote: MOVED: splash.asm and hall_of_fame.asm were moved
 INCLUDE "engine/overworld/healing_machine.asm"
 INCLUDE "engine/overworld/player_animations.asm"
 INCLUDE "engine/battle/ghost_marowak_anim.asm"
@@ -343,7 +344,7 @@ SECTION "Itemfinder 2", ROMX
 
 INCLUDE "engine/menus/league_pc.asm"
 INCLUDE "engine/events/hidden_items.asm"
-; moved these from bank 1E
+; PureRGBnote: MOVED: moved these from bank 1E
 INCLUDE "engine/overworld/elevator.asm"
 INCLUDE "engine/items/tm_prices.asm"
 INCLUDE "engine/movie/evolution.asm"
@@ -359,37 +360,37 @@ INCLUDE "data/battle_anims/subanimations.asm"
 INCLUDE "data/battle_anims/frame_blocks.asm"
 
 SECTION "Wild Mons", ROMX
-; moved from bank3
+; PureRGBnote: MOVED: moved from bank3
 INCLUDE "engine/overworld/wild_mons.asm"
-; new code
+; PureRGBnote: ADDED: new code
 INCLUDE "engine/overworld/wild_mon_alt_palettes.asm"
 
 SECTION "Evos Moves", ROMX
-; moved from battle engine 7
+; PureRGBnote: MOVED: moved from battle engine 7
 INCLUDE "engine/pokemon/evos_moves.asm"
 INCLUDE "data/pokemon/base_stats.asm"
 
 SECTION "Splash Animation", ROMX
-; moved from bank1C
+; PureRGBnote: MOVED: moved from bank1C
 INCLUDE "engine/movie/splash.asm"
 INCLUDE "engine/movie/hall_of_fame.asm"
 
 
 SECTION "Party Sprites", ROMX, BANK[$34]
-
+; PureRGBnote: ADDED: new menu sprite icons raw data
 PartyMonSprites1: INCBIN "gfx/icons/menusprites1.2bpp"
 PartyMonSprites2: INCBIN "gfx/icons/menusprites2.2bpp"
 
 SECTION "GBC Mode Code", ROMX
 
-;gbcnote: include the bgmap files from pokemon yellow
+; shinpokerednote: gbcnote: include the bgmap files from pokemon yellow
 INCLUDE "data/gbc/bg_map_attributes.asm"
 INCLUDE "engine/gbc/bg_map_attributes.asm"
 INCLUDE "engine/gfx/scroll_gfx_horizontally.asm"
 
 
 SECTION "newCode", ROMX
-
+; PureRGBnote: ADDED: new code
 INCLUDE "engine/gfx/front_sprite_options.asm"
 INCLUDE "engine/menus/options_menu2.asm"
 INCLUDE "engine/menus/battle_options.asm"
@@ -406,7 +407,8 @@ INCLUDE "engine/battle/exp_bar_print.asm"
 INCLUDE "engine/overworld/strength.asm"
 
 
-
+; PureRGBnote: TODO: these are currently unused but are intended to be where the save file is flashed to the ROM
+; once batteryless saving is implemented.
 SECTION "Batteryless Save Bank 1", ROMX, BANK[$3D]
 ; don't put anything in this bank ever
 

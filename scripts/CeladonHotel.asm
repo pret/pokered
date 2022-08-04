@@ -27,7 +27,8 @@ CeladonHotelTrainerHeader0:
 	trainer EVENT_BEAT_CELADON_HOTEL_TRAINER_0, 0, CeladonHotelBattleText1, CeladonHotelEndBattleText1, CeladonHotelAfterBattleText1
 	db -1 ; end
 
-CeladonChannelerText:
+; PureRGBnote: ADDED: new trainer in the hotel who humorously is looking for the "ghost PC" which actually exists in this hotel.
+CeladonChannelerText: 
 	text_asm
 	CheckEvent EVENT_BEAT_CELADON_HOTEL_TRAINER_0
 	jr nz, .beat
@@ -91,6 +92,9 @@ CeladonHotelText3:
 	text_far _CeladonHotelText3
 	text_end
 
+; PureRGBnote: ADDED: NPC who will give you lapras earlier once you beat rocket hideout.
+; He's supposed to be the same guy who gives you lapras in silph co. but he's on a business trip 
+; and goes back to silph co just in time for it to be occupied by team rocket.
 CeladonLaprasGuyText:
 	text_asm
 	CheckEventHL EVENT_BEAT_ROCKET_HIDEOUT_GIOVANNI

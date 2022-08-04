@@ -7,7 +7,7 @@ LavenderMart_TextPointers:
 	dw LavenderMartText3
 	dw LavenderMartTMKid
 
-LavenderMartTMKid:
+LavenderMartTMKid: ; PureRGBnote: ADDED: new NPC who will sell TMs
 	text_asm
 	ld hl, TMKidGreet3
 	call PrintText

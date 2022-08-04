@@ -1,6 +1,6 @@
 SECTION "Audio RAM", WRAM0
 
-wUnusedC000:: db ; used for various temporary flags
+wUnusedC000:: db ; PureRGBnote: CHANGED: used for various temporary flags
 
 wSoundID:: db
 
@@ -237,6 +237,7 @@ wPlayerMonNumber:: db
 ; the address of the menu cursor's current location within wTileMap
 wMenuCursorLocation:: dw
 
+; PureRGBnote: ADDED: two new variables where empty space used to be
 wSavedFishingItem:: db ; used to keep the fishing rod item index after doing a fishing battle
 wSavedFishingItemOffset:: db ; used to keep the fishing rod item offset after doing a fishing battle
 
@@ -258,7 +259,8 @@ wMenuWatchMovingOutOfBounds:: db
 
 wTradeCenterPointerTableIndex:: db
 
-wExtraSavedStartMenuIndex:: db ; used to save the current cursor index in the start menu (when we want it to persist after battle)
+; PureRGBnote: ADDED: meant for saving the current cursor index in the start menu (when we want it to persist after battle)
+wExtraSavedStartMenuIndex:: db 
 
 ; destination pointer for text output
 ; this variable is written to, but is never read from
@@ -309,7 +311,7 @@ wMonDataLocation:: db
 ; set to 0 if you can't go past the top or bottom of the menu
 wMenuWrappingEnabled:: db
 
-; A counter that is incremented when holding A+B while standing still in the overworld. 
+; PureRGBnote: CHANGED: Now a counter that is incremented when holding A+B while standing still in the overworld. 
 ; After this counter reaches a certain amount, the player will be in "turn around without moving forward" mode.
 ; Releasing either button will reset this counter.
 wDirectionChangeModeCounter:: db
@@ -362,11 +364,12 @@ wTrainerCardBlkPacket:: ds $40
 
 NEXTU
 wHallOfFame:: ds HOF_TEAM
-; bit array of whether each pokemon in current hall of fame team data should use an alt color palette
+; PureRGBnote: ADDED: bit array of whether each pokemon in current hall of fame team data should use an alt color palette
 ; only uses bits 0-5, since the party size is 6.
 wHallOfFamePalettes:: db 
 
 NEXTU
+; PureRGBnote: TODO: currently unused since batteryless saving isn't implemented yet
 ; when copying SRAM to the ROM on save for batteryless saving functionality, this is where the code that runs the flash is copied.
 wBatterylessSaveCode:: ds 180
 
@@ -378,7 +381,7 @@ wDexRatingNumMonsSeen:: db
 wDexRatingNumMonsOwned:: db
 wDexRatingText:: 
 wTrainerCardBadgeAttributes:: db
-;gbcnote - modified to match yellow
+; shinpokerednote: gbcnote: modified to match yellow
 
 NEXTU
 ; If a random number greater than this value is generated, then the player is
@@ -513,7 +516,7 @@ wPlayerMonMinimized:: db
 wEnemyNumHits:: ; db
 
 ; the amount of damage accumulated by the enemy while biding
-wEnemyBideAccumulatedDamage:: dw ; CHANGED: bide effect changed to normal buff move
+wEnemyBideAccumulatedDamage:: dw ; PureRGBnote: CHANGED: bide effect changed to normal buff move, so this is unused
 
 	ds 8
 
@@ -588,6 +591,7 @@ wFilteredBagItemsCount:: db
 ; 0 if the joypad state is not being simulated
 wSimulatedJoypadStatesIndex:: db
 
+; PureRGBnote: CHANGED: this variable was previously unused but now it is used
 wTempStore1:: db
 
 ; written to but nothing ever reads it
@@ -733,7 +737,7 @@ wSlotMachineBet:: db
 NEXTU
 wCanPlaySlots:: db
 	ds 8
-; temporary variable used to add payout amount to the player's coins
+; PureRGBnote: CHANGED: temporary variable used to add payout amount to the player's coins
 wTempFlag0::
 wTempCoins1:: dw
 	ds 2
@@ -779,6 +783,7 @@ wTrainerInfoTextBoxWidth:: db
 wTrainerInfoTextBoxNextRowOffset:: db
 
 NEXTU
+; PureRGBnote: ADDED: many options cursor trackers for new menu pages.
 ; options page 1
 wOptionsTextSpeedCursorX:: db
 wOptionsBattleAnimCursorX:: db
@@ -903,6 +908,7 @@ wRightGBMonSpecies:: db
 ; bit 6: tried pushing against boulder once (you need to push twice before it will move)
 wFlags_0xcd60:: db
 
+;;;;;;;;;; PureRGBnote: CHANGED: previously this empty space of 9 bytes was used by new variables
 wInGame:: db ; whether we're in-game rather than in the main menu before loading a game
 
 wListWithTMText:: db ; whether the current list menu can contain TMs and should print their moves
@@ -918,6 +924,7 @@ wIsAltPalettePkmnData:: db ;a flag for features related to alternate pokemon col
 ;stays set until the next pokemon is loaded.
 
 wLowHealthTonePairs:: db ;in battle, used as a counter for low hp alarm tone pairs
+;;;;;;;;;;
 
 ; This has overlapping related uses.
 ; When the player tries to use an item or use certain field moves, 0 is stored
@@ -1100,11 +1107,11 @@ wPalPacket::
 
 ; This union spans 49 bytes.
 UNION
-wPartyMenuBlkPacket:: ; cf2e
+wPartyMenuBlkPacket::
 ; $30 bytes
 	ds 9
-;gbcnote - modified to match yellow
-wPartyHPBarAttributes:: ; cf36
+;shinpokerednote: gbcnote: modified to match yellow
+wPartyHPBarAttributes::	
 	ds 20
 
 NEXTU
@@ -1124,22 +1131,24 @@ wGymCityName:: ds 17
 wGymLeaderName:: ds NAME_LENGTH
 
 UNION
-ds 16 ;used to be wItemList::
+ds 16 ; PureRGBnote: CHANGED: used to be wItemList:: but now the item list for marts is expanded in size and reuses a bigger space elsewhere
 NEXTU
+;;;;;;;;;; PureRGBnote: ADDED: new wram variables
+wItemFinderItemDirection::db 
+wSawItemFinderText::db ; the "yes, an item is nearby!" text will only display once per game restart
+wItemDuplicationActive:: db ; after seeing the old man catch pokemon, this flag is enabled until the game restarts - allows missingno item dupe glitch
 
-wItemFinderItemDirection::db
-wSawItemFinderText::db
-wItemDuplicationActive:: db
 ; set to 1 if you healed this turn, 2 if you switched out this turn (prevents ai from spamming certain moves in some cases)
 wAIMoveSpamAvoider:: db
+
 wPreviousEnemySelectedMove:: db ; store for disable move functionality
 wPreviousPlayerSelectedMove:: db ; store for disable move functionality
-wCaughtGhostMarowak:: db
+wCaughtGhostMarowak:: db ; flag that makes it so after catching ghost marowak different text displays than defeating it
 wAITargetMonType1:: db ; the type of the pokemon the AI should think it's attacking (stays as the previous pokemon when you switch pokemon)
 wAITargetMonType2:: db ; the type of the pokemon the AI should think it's attacking (stays as the previous pokemon when you switch pokemon)
 wAITargetMonStatus:: db ; the current status of the pokemon the AI should think it's attacking (set when healing a pokemon's status or switching it out)
 ; 6 bytes remaining in this empty space
-
+;;;;;;;;;;
 ENDU
 
 wListPointer:: dw
@@ -1184,7 +1193,7 @@ wLoadedMon:: party_struct wLoadedMon
 ; bit 0: The space in VRAM that is used to store walk animation tile patterns
 ;        for the player and NPCs is in use for font tile patterns.
 ;        This means that NPC movement must be disabled.
-;joenote - use bits 1 to 6 for tracking which trainer ai pkmn have already been sent out
+;shinpokerednote: ADDED: use bits 1 to 6 for tracking which trainer ai pkmn have already been sent out
 ;bit 1: 1st pkmn (position 0)
 ;bit 2: 2nd pkmn (position 1)
 ;bit 3: 3rd pkmn (position 2)
@@ -1338,7 +1347,7 @@ wPlayerStatsToDouble:: db
 ; always 0
 wPlayerStatsToHalve:: db
 
-; bit 0 - bide (PureRGB: now unused)
+; bit 0 - bide (PureRGBnote: CHANGED: now unused)
 ; bit 1 - thrash / petal dance
 ; bit 2 - attacking multiple times (e.g. double kick)
 ; bit 3 - flinch
@@ -1354,7 +1363,7 @@ wPlayerBattleStatus1:: db
 ; bit 3 - unused
 ; bit 4 - has a substitute
 ; bit 5 - need to recharge
-; bit 6 - rage (PureRGB: now never set)
+; bit 6 - rage (PureRGBnote: CHANGED: now never set)
 ; bit 7 - leech seeded
 wPlayerBattleStatus2:: db
 
@@ -1362,7 +1371,7 @@ wPlayerBattleStatus2:: db
 ; bit 1 - light screen
 ; bit 2 - reflect
 ; bit 3 - transformed
-; bit 4 - already acted this turn (used when an enemy switches or uses an item)
+; bit 4 - PureRGBnote: ADDED: already acted this turn (used when an enemy switches or uses an item)
 wPlayerBattleStatus3:: db
 
 ; always 0
@@ -1403,7 +1412,7 @@ wEnemyDisabledMove:: db
 
 UNION
 ; the amount of damage accumulated by the player while biding
-; wPlayerBideAccumulatedDamage:: dw ; CHANGED: bide effect changed to normal move
+; wPlayerBideAccumulatedDamage:: dw ; PureRGBnote: CHANGED: bide effect changed to normal move
 ; NEXTU
 wUnknownSerialCounter2:: dw
 
@@ -1621,6 +1630,7 @@ wMonHBackSprite:: dw
 wMonHMoves:: ds NUM_MOVES
 wMonHGrowthRate:: db
 wMonHLearnset:: flag_array NUM_TMS + NUM_HMS
+; PureRGBnote: ADDED: new properties in the pokemon header - these take up new space in WRAM.
 wMonHPicBank:: dw ; shifts
 wMonHBackPicBank:: dw ; shifts
 wMonHAltFrontSprite:: dw ; shifts
@@ -1644,7 +1654,9 @@ wMoves:: ds NUM_MOVES
 
 wMoveNum:: db
 
-wItemList::
+; PureRGBnote: MOVED: itemlist is a temp list for indicating what items appear in a mart, the size was expanded to allow for bigger mart stocks.
+; we reuse wMovesString for this expanded list since wMovesString is only used in battle.
+wItemList:: 
 wMovesString:: ds 56
 
 wUnusedD119:: db
@@ -1742,8 +1754,10 @@ wSavedSpriteMapX:: db
 
 	ds 3
 
+;;; PureRGBnote: ADDED: new properties in this previously empty space
 wWhatStat:: db ; contains the stat currently being modified by a stat changing move
 wWhichStatMod:: db ; contains the stat mod type currently being carried out
+;;;
 
 wWhichPrize:: db
 
@@ -1785,7 +1799,7 @@ wSerialPlayerDataBlock:: ; ds $1a8
 ; that case, this would be ESCAPE_ROPE.
 wPseudoItemID:: db
 
-wEnemyStatEXPStore::
+wEnemyStatEXPStore:: ; shinpokerednote: ADDED: store for EVs applied to the opponent's pokemon if the option is turned on
 wUnusedD153:: dw
 
 	ds 1
@@ -1830,20 +1844,21 @@ SECTION "Main Data", WRAM0
 
 wMainDataStart::
 
-wPokedexOwned:: flag_array NUM_POKEMON - 1 ; discount missingno
+wPokedexOwned:: flag_array NUM_POKEMON - 1 ; PureRGBnote: CHANGED: discount missingno since it doesn't appear in the dex - size remains the same as original
 wPokedexOwnedEnd::
 
-wPokedexSeen:: flag_array NUM_POKEMON - 1 ; discount missingno
+wPokedexSeen:: flag_array NUM_POKEMON - 1 ; PureRGBnote: CHANGED: discount missingno since it doesn't appear in the dex - size remains the same as original
 wPokedexSeenEnd::
 
-;;;;;
+;;;;; PureRGBnote: CHANGED: bag item size increased so now we have a bunch of empty space here
 UNION
 
 ds 42 ; wNumBagItems and wBagItems used to be here
 
 NEXTU
 
-wExtraMissableObjectFlags:: flag_array NUM_EXTRA_HS_OBJECTS ; max size 42
+; PureRGBnote: ADDED: we use this empty space currently for a store of extra flags to hide/show objects in the safari zone.
+wExtraMissableObjectFlags:: flag_array NUM_EXTRA_HS_OBJECTS ; max size 42 bytes
 wExtraMissableObjectFlagsEnd::
 
 ENDU
@@ -1941,28 +1956,29 @@ wDestinationWarpID:: db
 
 
 
+;;;;;;;;;; PureRGBnote: CHANGED: this empty space is now used for bigger bag space and a couple more properties
 UNION
 ; original size of this empty space
 ds 128
 
 NEXTU
-
 wPocketAbraNick:: ds NAME_LENGTH
 
 ;;;; moved from after wPokedexSeenEnd
 wNumBagItems:: db
 ; item, quantity
-wBagItems:: ds BAG_ITEM_CAPACITY * 2 + 1
+wBagItems:: ds BAG_ITEM_CAPACITY * 2 + 1 ; now holds 30 items
 ;;;;
 
-wWildMonPalettes:: ds 3 ; flag array for the current location of which wild pokemon should use alt palettes
+wWildMonPalettes:: ds 3 ; flag array for the current map: which wild pokemon should use alt palettes
 
-wColorSwapsUsed:: db ; how many times the player has used the color changer
+wColorSwapsUsed:: db ; how many times the player has used the color changer NPC
 wBoosterChipActive:: db ; whether the player gets boosted EXP from the effects of the boosterchip
 
 ; 50 bytes remaining in union
 
 ENDU
+;;;;;;;;;;
 
 ; number of signs in the current map (up to 16)
 wNumSigns:: db
@@ -2052,7 +2068,7 @@ wd5cd:: db
 wMissableObjectList:: ds 16 * 2 + 1
 
 	ds 1
-
+; PureRGBnote: ADDED: additional new script variables replaced previously empty space for maps that now need script tracking
 wGameProgressFlags::
 wOaksLabCurScript:: db
 wPalletTownCurScript:: db
@@ -2177,7 +2193,7 @@ wRoute18Gate1FCurScript:: db
 	ds 78
 wGameProgressFlagsEnd::
 
-;;;;;; GBC stuff from pokemon yellow
+;;;;;; shinpokerednote: gbcnote: GBC stuff from pokemon yellow
 
 wGBCBasePalPointers:: ds NUM_ACTIVE_PALS * 2 ; 8 bytes
 wGBCPal:: ds PAL_SIZE ; 8 bytes
@@ -2421,7 +2437,7 @@ wUnusedDA38:: db
 ; mostly copied from map-specific map script pointer and written back later
 wCurMapScript:: db
 
-
+;;;;;;;;;; PureRGBnote: ADDED: new variables in this previously empty space
 ; Current safari zone game type
 ; 0 = Classic
 ; 1 = Ranger Hunt
@@ -2439,8 +2455,13 @@ wSafariType:: db
 wSpriteOptions:: db
 
 ; bit 0 -> Back sprites: 0 = RB, 1 = Space World
-; bit 1 -> Bulbasaur sprite version: 0 = RB, 1 = RG
+; bit 1 -> Nidorino sprite version: 0 = RB, 1 = RG
 ; bit 2 -> Exeggutor sprite version: 0 = Y, 1 = RB
+; bit 3 -> Menu icon sprites: 0 = Original, 1 = Enhanced Original
+; bit 4 -> type matchup option for GHOST->PSYCHIC: 0 = 2x effective, 1 = 0x effective
+; bit 5 -> type matchup option for ICE->FIRE: 0 = 1x effective, 1 = 0.5x effective
+; bit 6 -> type matchup option for BUG->POISON: 0 = 2x effective, 1 = 0.5x effective
+; bit 7 -> type matchup option for POISON->BUG: 0 = 2x effective, 1 = 1x effective
 wSpriteOptions2:: db
 
 ; bits 0-1 = Palette setting 
@@ -2450,8 +2471,11 @@ wSpriteOptions2:: db
 ; bit 2 = Alt pokemon colors on or off
 ; bit 3 = Is audio panning on or off
 ; bit 4 = Is Bike music enabled
-
+; bit 5 = Is Experience bar enabled
+; bit 6 = Do NPC trainers get stat experience on their pokemon
+; bit 7 = unused
 wOptions2:: db
+;;;;;;;;;;
 
 	ds 3
 
@@ -2506,7 +2530,7 @@ wBoxMonNicksEnd::
 
 wBoxDataEnd::
 
-;joenote - exp bar wram values
+;shinpokerednote: ADDED: exp bar wram values
 wEXPBarPixelLength::  ds 1
 wEXPBarBaseEXP::      ds 3
 wEXPBarCurEXP::       ds 3

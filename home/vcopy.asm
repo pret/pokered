@@ -379,10 +379,11 @@ UpdateMovingBgTiles::
 	and a
 	ret z
 
-;gbcnote - fixes a strange incident where $FF is written to this one byte of a water tile
-	ld a,[rLY]
+;;;;;;;;;; shinpokerednote: gbcnote: fixes a strange incident where $FF is written to this one byte of a water tile
+	ldh a, [rLY]
 	cp $90 ; check if not in vblank period??? (maybe if vblank is too long)
 	ret c
+;;;;;;;;;;
 
 	ldh a, [hMovingBGTilesCounter1]
 	inc a

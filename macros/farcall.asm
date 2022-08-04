@@ -22,7 +22,7 @@ MACRO jpfar
 	jp Bankswitch
 ENDM
 
-MACRO callbs	;audionote - added from pokeyellow
+MACRO callbs	; shinpokerednote: audionote: added from pokeyellow
 	ld a, BANK(\1)
 	call BankswitchCommon
 	call \1

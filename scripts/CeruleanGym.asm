@@ -185,7 +185,7 @@ CeruleanGymAfterBattleText2:
 	text_far _CeruleanGymAfterBattleText2
 	text_end
 
-CeruleanGymGuideText:
+CeruleanGymGuideText: ; PureRGBnote: ADDED: gym guide gives you apex chips after beating the leader
 	text_asm
 	CheckEvent EVENT_BEAT_MISTY
 	jr nz, .afterBeat

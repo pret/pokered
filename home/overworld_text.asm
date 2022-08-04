@@ -31,6 +31,8 @@ PickUpItemText::
 	predef PickUpItem
 	jp TextScriptEnd
 
+;;;;;;;;;; PureRGBnote: ADDED: text used when picking up multiple items at once
+
 PickUp2ItemText::
 	text_asm
 	ld c, 2
@@ -49,3 +51,5 @@ PickUp5ItemText::
 DoMultiItemPickup:
 	predef PickUpItemQuantity
 	jp TextScriptEnd
+
+;;;;;;;;;;

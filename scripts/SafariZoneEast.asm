@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: new trainers in this location
+
 SafariZoneEast_Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, SafariZoneEastTrainerHeaders

@@ -19,7 +19,7 @@ Route11GateUpstairsText2:
 	text_asm
 	CheckEvent EVENT_GOT_ITEMFINDER, 1
 	jr c, .got_item
-	ld a, 20
+	ld a, 20 ; PureRGBnote: CHANGED: itemfinder caught pokemon requirement lowered to 20 pokemon.
 	ldh [hOaksAideRequirement], a
 	ld a, ITEMFINDER
 	ldh [hOaksAideRewardItem], a

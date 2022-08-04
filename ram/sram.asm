@@ -6,9 +6,10 @@ sSpriteBuffer2:: ds SPRITEBUFFERSIZE
 
 	ds 206 ; used to be $100 = 256
 
-; byte array of whether each pokemon in current hall of fame team data should use an alt color palette
+; PureRGBnote: ADDED: byte array of whether each pokemon in current hall of fame team data should use an alt color palette
 ; only uses bits 0-5 in each byte, since the party size is 6.
 sHallOfFamePalettes:: ds HOF_TEAM_CAPACITY 
+
 ; hall of fame data, contains species, level, and nickname of each pokemon for each team
 sHallOfFame:: ds HOF_TEAM * HOF_TEAM_CAPACITY
 
@@ -17,7 +18,7 @@ SECTION "Save Data", SRAM
 
 	ds $596
 	
-; duplicate options variables, used to set these options on game load so the palettes match your settings from game initialization
+; PureRGBnote: ADDED: duplicate options variables, used to set these options on game load so the palettes match your settings from game initialization
 sSpriteOptions:: db
 sOptions2:: db 
 

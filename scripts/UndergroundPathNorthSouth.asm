@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: trainers in this location
+
 UndergroundPathNorthSouth_Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, UndergroundPathNorthSouthTrainerHeaders

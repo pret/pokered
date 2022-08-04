@@ -7,7 +7,7 @@ FuchsiaMart_TextPointers:
 	dw FuchsiaMartText3
 	dw FuchsiaMartTMKid
 
-FuchsiaMartTMKid:
+FuchsiaMartTMKid: ; PureRGBnote: ADDED: new NPC who will sell TMs
 	text_asm
 	ld hl, TMKidGreet5
 	call PrintText

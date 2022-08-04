@@ -24,6 +24,7 @@ PlayDefaultMusicCommon::
 	jr z, .walking
 	cp $2
 	jr z, .surfing 
+;;;;;;;;;; PureRGBnote: ADDED: bike music can be disabled via options.
 	ld a, [wOptions2]
 	bit BIT_BIKE_MUSIC, a
 	jr z, .bikeMusic ; jump if bike music is enabled
@@ -33,6 +34,7 @@ PlayDefaultMusicCommon::
 	jr nz, .bikeMusic
 	jr .walking
 .bikeMusic
+;;;;;;;;;;
 	ld a, MUSIC_BIKE_RIDING
 	jr .next
 
@@ -78,6 +80,7 @@ PlayDefaultMusicCommon::
 UpdateMusic6Times::
 ; This is called when entering a map, before fading out the current music and
 ; playing the default music (i.e. the map's music or biking/surfing music).
+; shinpokerednote: audionote: updated to match pokemon yellow's audio engine code
 	ld c, 6
 UpdateMusicCTimes::
 .loop
@@ -117,6 +120,7 @@ CompareMapMusicBankWithCurrentBank::
 	scf
 	ret
 
+; shinpokerednote: audionote: updated to match pokemon yellow's audio engine code
 PlayMusic::
 	ld b, a
 	ld [wNewSoundID], a
@@ -128,9 +132,11 @@ PlayMusic::
 	ld a, b
 	jr PlaySound
 
-StopAllMusic::
+; shinpokerednote: audionote: updated to match pokemon yellow's audio engine code
+StopAllMusic:: 
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
+; shinpokerednote: audionote: updated to match pokemon yellow's audio engine code
 ; plays music specified by a. If value is $ff, music is stopped
 PlaySound::
 	push hl
@@ -180,6 +186,8 @@ PlaySound::
 	pop de
 	pop hl
 	ret
+
+; shinpokerednote: audionote: everything below are genericized audio code pulled from yellow (they used to be duplicated in each audio engine)
 
 GetNextMusicByte::
 	ldh a, [hLoadedROMBank]

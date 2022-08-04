@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: new trainers on this route.
+
 Route6_Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, Route6TrainerHeaders
@@ -21,7 +23,7 @@ Route6_TextPointers:
 	dw Route6Text6
 	dw Route6Text7
 	dw Route6Text8
-	dw PickUp3ItemText
+	dw PickUp3ItemText ; PureRGBnote: ADDED: new item on this route.
 	dw Route6Text9
 
 Route6TrainerHeaders:

@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: card key will be consumed if all card key doors were opened in the game.
+
 SilphCo7F_Script:
 	call SilphCo7Script_51b77
 	call EnableAutoTextBoxDrawing
@@ -309,6 +311,7 @@ SilphCo7TrainerHeader3:
 	trainer EVENT_BEAT_SILPH_CO_7F_TRAINER_3, 4, SilphCo7BattleText4, SilphCo7EndBattleText4, SilphCo7AfterBattleText4
 	db -1 ; end
 
+; PureRGBnote: ADDED: the guy who gives you lapras will give you something else if you already received lapras from him in celadon earlier in game.
 SilphCo7Text1:
 ; lapras guy
 	text_asm
@@ -329,7 +332,7 @@ SilphCo7Text1:
 .givelapras
 	ld hl, .MeetLaprasGuyText
 	call PrintText
-	lb bc, LAPRAS, 40
+	lb bc, LAPRAS, 40 ; PureRGBnote: CHANGED: lapras level increased to keep up with party level
 	call GivePokemon
 	jr nc, .done
 	ld a, [wSimulatedJoypadStatesEnd]

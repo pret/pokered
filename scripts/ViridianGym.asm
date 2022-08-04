@@ -418,7 +418,7 @@ ViridianGymAfterBattleText8:
 	text_far _ViridianGymAfterBattleText8
 	text_end
 
-ViridianGymGuideText:
+ViridianGymGuideText: ; PureRGBnote: ADDED: gym guide gives you apex chips after beating the leader
 	text_asm
 	CheckEvent EVENT_BEAT_VIRIDIAN_GYM_GIOVANNI
 	jr nz, .afterBeat

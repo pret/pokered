@@ -1,4 +1,4 @@
-
+; PureRGBnote: ADDED: lots of code pertaining to the new safari zone game types.
 
 SafariZoneGate_Script:
 	call EnableAutoTextBoxDrawing

@@ -454,7 +454,7 @@ CinnabarGymAfterBattleText7:
 	text_far _CinnabarGymAfterBattleText7
 	text_end
 
-CinnabarGymGuideText:
+CinnabarGymGuideText: ; PureRGBnote: ADDED: gym guide gives you apex chips after beating the leader
 	text_asm
 	CheckEvent EVENT_BEAT_BLAINE
 	jr nz, .afterBeat

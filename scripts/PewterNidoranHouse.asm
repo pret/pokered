@@ -23,6 +23,7 @@ PewterHouse1Text3:
 	text_far _PewterHouse1Text3
 	text_end
 
+; PureRGBnote: ADDED: new NPC who will talk about alternate color palettes if the feature is enabled.
 PewterHouse1Text4:
 	text_asm
 	ld a, [wOptions2]

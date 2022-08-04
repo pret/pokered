@@ -1,5 +1,5 @@
 RockTunnelPokecenter_Script:
-	call SetLastBlackoutMap
+	call SetLastBlackoutMap ; PureRGBnote: ADDED: set blackout map on entering pokemon center
 	call Serial_TryEstablishingExternallyClockedConnection
 	jp EnableAutoTextBoxDrawing
 
@@ -24,7 +24,8 @@ RockTunnelPokecenterText3:
 RockTunnelTradeNurseText:
 	script_cable_club_receptionist
 
-RockTunnelCharityNurseText:
+; PureRGBnote: ADDED: by donating to this nurse you unlock the ability to speed up pokemon center healing by holding B before talking to the nurse
+RockTunnelCharityNurseText: 
 	text_asm
 	ld hl, RockTunnelCharityNurseText1
 	call PrintText

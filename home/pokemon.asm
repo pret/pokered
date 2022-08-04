@@ -293,7 +293,7 @@ DrawPartyMenu::
 	jr DrawPartyMenuCommon
 
 RedrawPartyMenu::
-	callfar ResetPartyAnimation
+	callfar ResetPartyAnimation ; mechanicalpennote: ADDED: new code for rendering party menu icons
 	ld hl, RedrawPartyMenu_
 
 DrawPartyMenuCommon::
@@ -401,7 +401,7 @@ GetMonHeader::
 	predef IndexToPokedex   ; convert pokemon ID in [wd11e] to pokedex number
 	ld a, [wd11e]
 	and a
-	jr z, .missingno ; index of 0 is missingno
+	jr z, .missingno ; PureRGBnote: ADDED: index of 0 is missingno
 	dec a
 	ld bc, BASE_DATA_SIZE
 	ld hl, BaseStats
@@ -423,7 +423,7 @@ GetMonHeader::
 .copyBaseStats
 	ld bc, BASE_DATA_SIZE
 	ld de, wMonHeader
-	call CopyData ; now in same bank as rest of base stat data so no need to farcopy
+	call CopyData ; PureRGBnote: CHANGED: mew header now in same bank as rest of base stat data so no need to farcopy
 .done
 	ld a, [wd0b5]
 	ld [wMonHIndex], a

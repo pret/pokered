@@ -2,7 +2,7 @@ FuchsiaCity_Script:
 	call FuchsiaReplaceCutTiles
 	jp EnableAutoTextBoxDrawing
 
-
+; PureRGBnote: ADDED: function that will remove all cut trees in fuchsia if we deleted them with the tree deleter
 FuchsiaReplaceCutTiles:
 	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl] ; did we load the map from a save/warp/door/battle, etc?
@@ -79,7 +79,9 @@ FuchsiaCity_TextPointers:
 	dw FuchsiaCityText23
 	dw FuchsiaCityText24
 
-FuchsiaCityText1:
+; PureRGBnote: CHANGED: this NPC will point out how alt palette pokemon appear in the safari zone
+; but only if we have alt palette pokemon enabled in the game options.
+FuchsiaCityText1: 
 	text_asm
 	ld a, [wOptions2]
 	bit BIT_ALT_PKMN_PALETTES, a ; do we have alt palettes enabled

@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: new trainers in this route.
+
 Route14_Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, Route14TrainerHeaders
@@ -26,7 +28,7 @@ Route14_TextPointers:
 	dw Route14Text11
 	dw Route14Text12
 	dw Route14Text13
-	dw Route14Text14
+	dw Route14Text14 ; PureRGBnote: ADDED: new trainer tips sign on this route.
 
 Route14TrainerHeaders:
 	def_trainers
