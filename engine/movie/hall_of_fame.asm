@@ -18,7 +18,7 @@ AnimateHallOfFame:
 	ld bc, HOF_TEAM
 	call FillMemory
 	xor a
-	ld [wHallOfFamePalettes], a
+	ld [wHallOfFamePalettes], a ; PureRGBnote: ADDED: clear the hall of fame team color palettes as we're going to repopulate this variable.
 	ld [wUpdateSpritesEnabled], a
 	ldh [hTileAnimations], a
 	ld [wSpriteFlipped], a
@@ -49,7 +49,7 @@ AnimateHallOfFame:
 	ld [wHoFMonSpecies], a
 	ld a, c
 	ld [wHoFPartyMonIndex], a
-	call StoreHoFAltPaletteFlag
+	call StoreHoFAltPaletteFlag ; PureRGBnote: ADDED: we will set a flag to indicate whether the pokemon uses alt palette or not
 	ld hl, wPartyMon1Level
 	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes
@@ -79,6 +79,7 @@ AnimateHallOfFame:
 	ld bc, HOF_MON
 	call AddNTimes
 	ld [hl], $ff
+	; PureRGBnote: MOVED: hall_of_fame.asm was moved to a different bank so this was switched to a callfar to go to the save.asm bank.
 	callfar SaveHallOfFameTeams
 	xor a
 	ld [wHoFMonSpecies], a
@@ -93,6 +94,7 @@ AnimateHallOfFame:
 	res 3, [hl]
 	ret
 
+; PureRGBnote: ADDED: sets a flag in wHallofFamePalettes if the pokemon uses an alt palette.
 StoreHoFAltPaletteFlag:
 	push af
 	ld a, [wHoFPartyMonIndex]
@@ -153,7 +155,7 @@ HoFShowMonOrPlayer:
 	call RunPaletteCommand
 	ld a, %11100100
 	ldh [rBGP], a
-	call UpdateGBCPal_BGP
+	call UpdateGBCPal_BGP ; shinpokerednote: gbcnote: gbc color code from yellow 
 	ld c, $31 ; back pic
 	call HoFLoadMonPlayerPicTileIDs
 	ld d, $a0
@@ -214,6 +216,7 @@ HoFMonInfoText:
 	next "TYPE1/"
 	next "TYPE2/@"
 
+; PureRGBnote: CHANGED: updated to be able to display higher quality back sprite if option turned on.
 HoFLoadPlayerPics:
 	ld de, RedPicFront
 	ld a, BANK(RedPicFront)

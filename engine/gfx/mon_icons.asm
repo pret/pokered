@@ -1,9 +1,12 @@
+
 AnimatePartyMon_ForceSpeed1:
 	xor a
 	ld [wCurrentMenuItem], a
 	ld b, a
 	inc a
 	jr GetAnimationSpeed
+
+;;;;;;;;;; mechanicalpennote: ADDED: code for adding the new pokemon icons to OAM when displaying the party menu.
 
 ResetPartyAnimation::
 	push bc
@@ -22,11 +25,14 @@ ResetPartyAnimation::
 	pop bc
 	ret
 
+;;;;;;;;;;
+
 ; wPartyMenuHPBarColors contains the party mon's health bar colors
 ; 0: green
 ; 1: yellow
 ; 2: red
 AnimatePartyMon::
+;;;;;;;;;; mechanicalpennote: ADDED: store which pokemon is being hovered on in the party menu
     ld hl, wPartySpecies
     ld a, [wCurrentMenuItem]
 	ld c, a
@@ -34,6 +40,7 @@ AnimatePartyMon::
 	add hl, bc
 	ld a, [hl]
   	ld [wMonPartySpriteSpecies], a
+;;;;;;;;;;
 	ld hl, wPartyMenuHPBarColors
 	ld a, [wCurrentMenuItem]
 	ld c, a
@@ -43,6 +50,7 @@ AnimatePartyMon::
 
 GetAnimationSpeed:
 	ld c, a
+;;;;;;;;;; PureRGBnote: ADDED: some slow pokemon animate slower by default just for fun
 	ld a, [wMonPartySpriteSpecies]
 	cp SLOWPOKE ; make some pokemon move slower since they don't like moving quickly
 	jr z, .slowSpeed
@@ -57,6 +65,7 @@ GetAnimationSpeed:
 .normalSpeed
 	ld hl, PartyMonSpeeds
 .next
+;;;;;;;;;;
 	add hl, bc
 	ld a, [wOnSGB]
 	xor $1
@@ -78,7 +87,7 @@ GetAnimationSpeed:
 	ld [wAnimCounter], a
 	jp DelayFrame
 .resetSprites
-	call ResetPartyAnimation
+	call ResetPartyAnimation ; mechanicalpennote: ADDED: reset OAM
 	xor a
 	jr .incTimer
 .animateSprite
@@ -87,6 +96,7 @@ GetAnimationSpeed:
 	ld bc, $10
 	ld a, [wCurrentMenuItem]
 	call AddNTimes
+	; mechanicalpennote: ADDED: don't use hardcoded icon sprite indices
 	ld c, 2
 	ld b, $4
 	ld de, $4
@@ -148,7 +158,8 @@ LoadAnimSpriteGfx:
 	jr nz, .loop
 	ret
 
-;LoadMonPartySpriteGfxWithLCDDisabled:
+; mechanicalpennote: CHANGED: don't need this code since we have a new way of displaying menu icons
+; LoadMonPartySpriteGfxWithLCDDisabled:
 ;; Load mon party sprite tile patterns into VRAM immediately by disabling the
 ;; LCD.
 ;	call DisableLCD
@@ -187,6 +198,7 @@ LoadAnimSpriteGfx:
 
 INCLUDE "data/icon_pointers.asm"
 
+; mechanicalpennote: CHANGED: don't need this code since we have a new way of displaying menu icons
 ;WriteMonPartySpriteOAMByPartyIndex:
 ;; Write OAM blocks for the party mon in [hPartyMonIndex].
 ;	push hl
@@ -212,10 +224,11 @@ WriteMonPartySpriteOAMBySpecies:
 	xor a
 	ldh [hPartyMonIndex], a
 	ld a, [wMonPartySpriteSpecies]
-	callfar GetPartyMonSpriteID
+	callfar GetPartyMonSpriteID ; mechanicalpennote: ADDED: new code for deciding which pokemon icon to display
 	ld [wOAMBaseTile], a
 	jr WriteMonPartySpriteOAM
 
+; PureRGBnote: CHANGED: don't need this code since it's unused
 ;UnusedPartyMonSpriteFunction:
 ; This function is unused and doesn't appear to do anything useful. It looks
 ; like it may have been intended to load the tile patterns and OAM data for
@@ -280,6 +293,7 @@ WriteMonPartySpriteOAM:
 	ld bc, $60
 	jp CopyData
 
+; mechanicalpennote: CHANGED: don't need this code since we have a new way of displaying menu icons
 ;GetPartyMonSpriteIDOld:
 ;	ld [wd11e], a
 ;	predef IndexToPokedex

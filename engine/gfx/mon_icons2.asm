@@ -1,3 +1,5 @@
+; mechanicalpennote: ADDED: new code for increasing the number of icons possible to display on the party menu.
+
 LoadNicknameMonSprite:
     call DisableLCD
     xor a

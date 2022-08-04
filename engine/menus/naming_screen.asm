@@ -461,7 +461,7 @@ PrintNamingText:
 	ld a, [wcf91]
 	ld [wMonPartySpriteSpecies], a
 	push af
-	farcall LoadNicknameMonSprite
+	farcall LoadNicknameMonSprite ; mechanicalpennote: CHANGED: new code for choosing which sprite displays on the nicknaming menus
 	pop af
 	ld [wd11e], a
 	call GetMonName

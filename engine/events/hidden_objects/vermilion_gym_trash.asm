@@ -64,7 +64,7 @@ GymTrashScript:
 	ld b, a
 	ldh a, [hGymTrashCanRandNumMask]
 	and b
-	jr z, .tryagain ; FIXED: never AND to 0
+	jr z, .tryagain ; PureRGBnote: FIXED: never AND to 0
 	dec a
 	pop hl
 
@@ -85,7 +85,7 @@ GymTrashScript:
 	cp b
 	jr z, .openSecondLock
 
-; Reset the cans. ; FIXED: don't reset locks because it's just an annoying waste of time
+; Reset the cans. ; PureRGBnote: CHANGED: don't reset locks because it's just an annoying waste of time
 	;ResetEvent EVENT_1ST_LOCK_OPENED
 	;call Random
 

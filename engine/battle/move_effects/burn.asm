@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: new effect that just applies burn to the opponent. Used in firewall.
+
 BurnEffect_:
 	ld hl, wEnemyMonStatus
 	ld de, wPlayerMoveType

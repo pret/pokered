@@ -68,7 +68,7 @@ _TitleScroll:
 	jr _TitleScroll
 
 .ScrollBetween:
-	predef BGLayerScrollingUpdate	;gbcnote - consolidated into a predef that also fixes some issues
+	predef BGLayerScrollingUpdate	; shinpokerednote: gbcnote: consolidated into a predef that also fixes some issues
 .wait2
 	ldh a, [rLY] ; rLY
 	cp h

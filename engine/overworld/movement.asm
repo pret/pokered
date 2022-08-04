@@ -1,3 +1,4 @@
+; PureRGBnote: CHANGED: file was updated to deal with higher framerate (60fps) overworld.
 DEF MAP_TILESET_SIZE EQU $60
 
 UpdatePlayerSprite:
@@ -118,6 +119,7 @@ UpdatePlayerSprite:
 	ld [wSpritePlayerStateData2GrassPriority], a
 	ret
 
+; PureRGBnote: FIXED: NPCs will properly appear behind the unique "star grass" in the forest tileset.
 TestGrassTile2:
 	ld a, [wGrassTile]
 	cp c
@@ -149,9 +151,11 @@ UpdateNPCSprite:
 	ld hl, wMapSpriteData
 	add l
 	ld l, a
-	jr nc, .nc ; FIXED: sprites above index 10 wouldn't get the correct movement byte because no carry compensation on the address
+;;;;;;;;;;; PureRGBnote: FIXED: sprites above index 10 wouldn't get the correct movement byte because no carry compensation on the address
+	jr nc, .nc 
     inc h
 .nc
+;;;;;;;;;;;
 	ld a, [hl]        ; read movement byte 2
 	ld [wCurSpriteMovement2], a
 	ld h, HIGH(wSpriteStateData1)
@@ -338,7 +342,7 @@ UpdateSpriteInWalkingAnimation:
 	ld l, a
 	ld a, [hl]                       ; x#SPRITESTATEDATA1_INTRAANIMFRAMECOUNTER
 	inc a
-;60fps - updated xy every other tick
+;shinpokerednote: 60fps - updated xy every other tick
 	call sprite60fps	
 	push bc
 	sub b
@@ -358,7 +362,7 @@ UpdateSpriteInWalkingAnimation:
 	add $3
 	ld l, a
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;60fps - updated xy every other tick
+;shinpokerednote: 60fps - updated xy every other tick
 	pop bc
 	push bc
 	ld a, b
@@ -381,7 +385,7 @@ UpdateSpriteInWalkingAnimation:
 	inc h
 	ld a, [hl]                       ; x#SPRITESTATEDATA2_WALKANIMATIONCOUNTER
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;60fps - make the delay decounter update every other tick	
+;shinpokerednote: 60fps - make the delay decounter update every other tick	
 	pop bc
 	add b	;60fps
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -456,7 +460,7 @@ UpdateSpriteMovementDelay:
 	jr .moving
 .tickMoveCounter
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;60fps - make the delay decounter update every other tick
+;shinpokerednote: 60fps - make the delay decounter update every other tick
 	ld a, [hl]
 	call sprite60fps
 	add b
@@ -817,7 +821,7 @@ DoScriptedNPCMovement:
 	bit 7, a
 	ret z
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;60fps - update animations every other frame and halve movement
+; shinpokerednote: 60fps - update animations every other frame and halve movement
 	ld de, $00
 	call sprite60fps
 	ld e, b
@@ -842,7 +846,7 @@ DoScriptedNPCMovement:
 	ld c, SPRITE_FACING_UP
 	ld a, -2
 	
-	add d	;60fps
+	add d	; shinpokerednote: 60fps
 	
 	jr .move
 .checkIfMovingDown
@@ -852,7 +856,7 @@ DoScriptedNPCMovement:
 	ld c, SPRITE_FACING_DOWN
 	ld a, 2
 	
-	sub d	;60fps
+	sub d	; shinpokerednote: 60fps
 	
 	jr .move
 .checkIfMovingLeft
@@ -862,7 +866,7 @@ DoScriptedNPCMovement:
 	ld c, SPRITE_FACING_LEFT
 	ld a, -2
 	
-	add d	;60fps
+	add d	; shinpokerednote: 60fps
 	
 	jr .move
 .checkIfMovingRight
@@ -891,7 +895,7 @@ DoScriptedNPCMovement:
 	call AnimScriptedNPCMovement
 	ld hl, wScriptedNPCWalkCounter
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;60fps - every other frame, do not decrement walk counter
+; shinpokerednote: 60fps - every other frame, do not decrement walk counter
 	ld a, [hl]
 	add e
 	ld [hl], a
@@ -974,7 +978,7 @@ AdvanceScriptedNPCAnimFrameCounter:
 	ld a, [hl] ; intra-animation frame counter
 	inc a
 	
-	sub e	;60fps
+	sub e	; shinpokerednote: 60fps
 	
 	ld [hl], a
 	cp 4

@@ -93,7 +93,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	jp c, Evolution_PartyMonLoop ; if so, go the next mon
 	jr .doEvolution
 .checkItemEvo
-	ld a, [wIsInBattle] ; FIXED: skip checking stone evolutions if in battle to avoid the exploit with species numbers allowing stone evolution after battle.
+	ld a, [wIsInBattle] ; shinpokerednote: FIXED: skip checking stone evolutions if in battle to avoid the exploit with species numbers allowing stone evolution after battle.
 	and a
 	jp nz, .nextEvoEntry1
 	ld a, [hli]

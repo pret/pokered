@@ -10,7 +10,7 @@ ReadTrainer:
 ; XXX second is species of first pokemon?
 	ld hl, wEnemyPartyCount
 	xor a
-	ld [wIsAltPalettePkmnData], a ; NPC trainers by default have normal palette pokemon, only specific party types can have alt palettes
+	ld [wIsAltPalettePkmnData], a ; PureRGBnote: ADDED: NPC trainers by default have normal palette pokemon, only specific party types can have alt palettes
 	ld [hli], a
 	dec a
 	ld [hl], a
@@ -50,8 +50,10 @@ ReadTrainer:
 	ld a, [hli]
 	cp $FF ; is the trainer special?
 	jr z, .SpecialTrainer ; if so, check for special moves
+;;;;;;;;;; PureRGBnote: ADDED: parties that start with $FE are considered alt palette teams.
 	cp $FE ; is the trainer special with alt palettes?
 	jr z, .SpecialTrainer ; if so, load their alt palette flags as well as levels
+;;;;;;;;;;
 	ld [wCurEnemyLVL], a
 .LoopTrainerData
 	ld a, [hli]
@@ -75,6 +77,7 @@ ReadTrainer:
 	ld a, [hli]
 	and a ; have we reached the end of the trainer data?
 	jr z, .AddLoneMove
+;;;;;;;;;; PureRGBnote: ADDED: final bit of "pokemon level" in special parties is used to indicate pokemon having alternate palette.
 	bit 7, a 
 	push af
 	ld a, 0
@@ -84,6 +87,7 @@ ReadTrainer:
 	ld [wIsAltPalettePkmnData], a
 	pop af
 	and %01111111
+;;;;;;;;;;
 	ld [wCurEnemyLVL], a
 	ld a, [hli]
 	ld [wcf91], a
@@ -94,12 +98,15 @@ ReadTrainer:
 	pop hl
 	jr .SpecialTrainer
 .AddLoneMove
+;;;;;;;;;; PureRGBnote: ADDED: can't have alt palette pokemon at this point.
 	xor a
 	ld [wIsAltPalettePkmnData], a
+;;;;;;;;;;
 ; does the trainer have a single monster with a different move?
 	ld a, [wLoneAttackNo] ; Brock is 01, Misty is 02, Erika is 04, etc
 	and a
 	jr z, .AddTeamMove
+;;;;;;;;;; PureRGBnote: CHANGED: gym leader special moves can have custom indices instead of hardcoded to replace move 2 of the given pokemon.
 	dec a ; indices start at 0, wLoneAttackNo starts at 1
 	ld b, a
 	add b ; double the index value 
@@ -117,6 +124,7 @@ ReadTrainer:
 	ld bc, wEnemyMon2 - wEnemyMon1
 	call AddNTimes ; select the correct pokemon to modify
 	ld [hl], d ; modify the move at the given slot to be the given move
+;;;;;;;;;;
 	jr .FinishUp
 .AddTeamMove
 ; check if our trainer's team has special moves
@@ -143,10 +151,10 @@ ReadTrainer:
 	jr .FinishUp ; nope
 .GiveTeamMoves
 	ld a, [hl]
-	ld [wEnemyMon6Moves + 1], a
+	ld [wEnemyMon6Moves + 1], a ; PureRGBnote: CHANGED: elite four trainers replace their 6th pokemon's 2nd move with their special moves.
 	jr .FinishUp
 .ChampionRival ; give moves to his team
-; EDIT: not necessary because champion's team already has good moves at such high level from their learnset.
+; PureRGBnote: CHANGED: not necessary because champion's team already has good moves at such high level from their learnset.
 
 ; pidgeot
 ;	ld a, SKY_ATTACK

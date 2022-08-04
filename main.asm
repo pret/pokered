@@ -38,6 +38,8 @@ INCLUDE "engine/battle/move_effects/drain_hp.asm"
 INCLUDE "engine/menus/players_pc.asm"
 INCLUDE "engine/pokemon/remove_mon.asm"
 INCLUDE "engine/events/display_pokedex.asm"
+INCLUDE "engine/menus/menu_list_tm_name_loader.asm" ; PureRGBnote: ADDED: code for showing TM names in list menus
+INCLUDE "engine/menus/wrap_list_menu.asm" ; PureRGBnote: ADDED: code for wrapping to the bottom and top of lists by pressing dpad left
 
 
 SECTION "bank3", ROMX
@@ -394,10 +396,8 @@ INCLUDE "engine/menus/battle_options.asm"
 INCLUDE "engine/menus/sprite_options_menu.asm"
 INCLUDE "engine/menus/sprite_options_menu2.asm"
 INCLUDE "engine/gfx/mon_icons2.asm"
-INCLUDE "engine/menus/menu_list_tm_name_loader.asm"
 INCLUDE "engine/overworld/select_button_functionality.asm"
 INCLUDE "engine/overworld/use_another_repel.asm"
-INCLUDE "engine/menus/wrap_list_menu.asm"
 INCLUDE "engine/items/last_two_fishing_gurus_script.asm"
 INCLUDE "engine/overworld/check_map_connections.asm"
 INCLUDE "engine/pokemon/missingno_item_duplication.asm"

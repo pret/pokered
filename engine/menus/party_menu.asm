@@ -4,7 +4,7 @@ DrawPartyMenu_::
 	call ClearScreen
 	call UpdateSprites
 RedrawPartyMenu_ReloadSprites:
-	callfar LoadPartyMonSprites ; load pokemon icon graphics
+	callfar LoadPartyMonSprites ; mechanicalpennote: CHANGED: load pokemon icon graphics with the new code
 
 RedrawPartyMenu_::
 	ld a, [wPartyMenuTypeOrMessageID]
@@ -31,8 +31,8 @@ RedrawPartyMenu_::
 	call GetPartyMonName
 	pop hl
 	call PlaceString ; print the pokemon's name
-	callfar ShowPartyMonSprite ; place the appropriate pokemon icon
-	ld a,[hPartyMonIndex] ; loop counter
+	callfar ShowPartyMonSprite ; mechanicalpennote: CHANGED: place the appropriate pokemon icon with the new code
+	ldh a, [hPartyMonIndex] ; loop counter
 	ld [wWhichPokemon], a
 	inc a
 	ldh [hPartyMonIndex], a

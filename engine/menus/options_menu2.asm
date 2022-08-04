@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: one of the new pages in the options menu. This one's for main gameplay features.
+
 DEF PAGE2_OPTION1_LEFT_XPOS EQU 9
 DEF PAGE2_OPTION1_MIDDLE_XPOS EQU 12
 DEF PAGE2_OPTION1_RIGHT_XPOS EQU 16

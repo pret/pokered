@@ -348,6 +348,7 @@ CheckPlayerIsInFrontOfSprite:
 	ld [wTrainerSpriteOffset], a
 	ret
 
+; PureRGBnote: MOVED: this code was in the home bank but didn't need to be, so it was moved for some space.
 PlayTrainerMusic::
 	ld a, [wEngagedTrainerClass]
 	cp OPP_RIVAL1

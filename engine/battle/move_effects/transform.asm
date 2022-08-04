@@ -60,6 +60,7 @@ TransformEffect_:
 	inc de
 	inc de
 	inc de
+;;;;;;;;;; PureRGBnote: CHANGED: need to preserve the "flags" data of the pokemon that is transforming to remember if it should keep the alternate palette it could have.
 ; type 1
 	ld a, [hli]
 	ld [de], a
@@ -74,6 +75,7 @@ TransformEffect_:
 ; moves - copy bc (4) bytes from hl to de
 	call CopyData
 ; hl and de now point to pokemon DVs after Copydata is complete
+;;;;;;;;;;
 	ldh a, [hWhoseTurn]
 	and a
 	jr z, .next

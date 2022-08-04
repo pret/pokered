@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: CHANGED: a bunch of this code was modified to allow for multiple items to be picked up at once from an item ball.
+
 PickUpItemQuantity:
 	call GetPredefRegisters
 	jp PickUpItemCommon
@@ -40,6 +42,7 @@ PickUpItemCommon:
 
 	ldh a, [hMissableObjectIndex]
 	ld [wMissableObjectIndex], a
+;;;;;;;;;; PureRGBnote: CHANGED: safari zone hidable items use a different set of flags than everywhere else, needed more space for flags.
 	CheckEvent EVENT_IN_SAFARI_ZONE
 	jr nz, .hideExtra
 	predef HideObject
@@ -47,6 +50,7 @@ PickUpItemCommon:
 .hideExtra
 	predef HideExtraObject
 .continue
+;;;;;;;;;;
 	ld a, 1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	and a

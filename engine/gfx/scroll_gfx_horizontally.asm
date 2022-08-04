@@ -1,4 +1,4 @@
-;joenote - Consolidate horizontal scrolling that uses SCX (such as title screen mons scrolling)
+;shinpokerednote: ADDED: Consolidate horizontal scrolling that uses SCX (such as title screen mons scrolling)
 ;this is prevents two vblanks from happening when waiting on scrolling to update
 ;prevents some artifacts when 'mons are panning across the screen
 BGLayerScrollingUpdate:

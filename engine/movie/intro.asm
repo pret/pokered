@@ -27,9 +27,11 @@ PlayIntroScene:
 	ldh [rBGP], a
 	ldh [rOBP0], a
 	ldh [rOBP1], a
-	call UpdateGBCPal_BGP
-	call UpdateGBCPal_OBP0
+;;;;;;;;;; shinpokerednote: gbcnote: gbc color code from yellow 
+	call UpdateGBCPal_BGP 
+	call UpdateGBCPal_OBP0 
 	call UpdateGBCPal_OBP1
+;;;;;;;;;;
 	xor a
 	ldh [hSCX], a
 	ld b, TILEMAP_GENGAR_INTRO_1
@@ -312,7 +314,7 @@ PlayShootingStar:
 	farcall LoadCopyrightAndTextBoxTiles
 	ldpal a, SHADE_BLACK, SHADE_DARK, SHADE_LIGHT, SHADE_WHITE
 	ldh [rBGP], a
-	call UpdateGBCPal_BGP
+	call UpdateGBCPal_BGP ; shinpokerednote: gbcnote: gbc color code from yellow 
 	ld c, 180
 	call DelayFrames
 	call ClearScreen
@@ -447,7 +449,7 @@ FightIntroBackMon:
 	ds 16, $00 ; blank tile
 FightIntroBackMonEnd:
 
-IF (DEF(_RED) || DEF(_GREEN))
+IF (DEF(_RED) || DEF(_GREEN)) ; PureRGBnote: GREENBUILD: pokemon green displays the nidorino intro
 FightIntroFrontMon:
 	INCBIN "gfx/intro/red_nidorino_1.2bpp"
 FightIntroFrontMon2:

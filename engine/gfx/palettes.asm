@@ -24,6 +24,7 @@ SetPal_BattleBlack:
 	ld de, BlkPacket_Battle
 	ret
 
+; PureRGBnote: ADDED: updated function to allow alternate palette pokemon based on loaded data.
 ; uses PalPacket_Empty to build a packet based on mon IDs and health color
 SetPal_Battle:
 	ld hl, PalPacket_Empty
@@ -69,6 +70,7 @@ SetPal_TownMap:
 	ld de, BlkPacket_WholeScreen
 	ret
 
+; PureRGBnote: ADDED: updated function to allow alternate palette pokemon based on loaded data.
 ; uses PalPacket_Empty to build a packet based the mon ID
 SetPal_StatusScreen:
 	ld hl, PalPacket_Empty
@@ -120,6 +122,8 @@ SetPal_Pokedex:
 	ld de, BlkPacket_Pokedex
 	ret
 
+; PureRGBnote: ADDED: function that sets the palette on the pokemon sprite boxes 
+;                     that appear in the pewter museum or the route 15 left binoculars
 SetPal_MiddleScreenMonBox:
 	ld hl, PalPacket_Empty
 	ld de, wPalPacket
@@ -139,6 +143,7 @@ SetPal_MiddleScreenMonBox:
 	ld de, BlkPacket_PokemonMiddleScreenBox
 	ret
 
+; PureRGBnote: ADDED: function that sets the palette on the color changer NPC's "before and after" screen
 SetPal_ColorBeforeAfter:
 	ld hl, PalPacket_Empty
 	ld de, wPalPacket
@@ -196,6 +201,7 @@ SetPal_GameFreakIntro:
 	ld [wDefaultPaletteCommand], a
 	ret
 
+; PureRGBnote: CHANGED: abstracted code to a function called GetOverworldPalette for reusability.
 ; uses PalPacket_Empty to build a packet based on the current map
 SetPal_Overworld:
 	ld hl, PalPacket_Empty
@@ -210,6 +216,7 @@ SetPal_Overworld:
 	ld [wDefaultPaletteCommand], a
 	ret
 
+; PureRGBnote: CHANGED: abstracted into its own function, removed some redundant code
 ; stores the palette used  for the current map in a
 GetOverworldPalette:
 	ld a, [wCurMapTileset]
@@ -220,7 +227,7 @@ GetOverworldPalette:
 	ld a, [wCurMap]
 	cp FIRST_INDOOR_MAP
 	jr c, .townOrRoute
-	cp CERULEAN_ROCKET_HOUSE_B1F
+	cp CERULEAN_ROCKET_HOUSE_B1F ; PureRGBnote: ADDED: this new map uses the red pokemon palette
 	jr z, .rocketHouseBasement
 	cp CERULEAN_CAVE_2F
 	jr c, .normalDungeonOrBuilding
@@ -243,7 +250,7 @@ GetOverworldPalette:
 .PokemonTowerOrAgatha
 	ld a, PAL_GREYMON - 1
 	jr .town
-.caveOrBruno
+.caveOrBruno ; PureRGBnote: CHANGED: seafoam islands use a bluish purple color palette instead of brown.
 	ld a, [wCurMap]
 	cp SEAFOAM_ISLANDS_1F
 	jr z, .seafoam
@@ -257,14 +264,15 @@ GetOverworldPalette:
 .Lorelei
 	call GetPalettes
 	jr c, .gbcLorelei
-	jr .seafoam
-.gbcLorelei
+	jr .seafoam ; PureRGBnote: CHANGED: lorelei's room uses a bluish purple palette instead of light green on SGB colors.
+.gbcLorelei 
 	xor a
 	jr .town
 .seafoam
 	ld a, PAL_0F - 1
 	jr .town
 
+; PureRGBnote: ADDED: updated function to allow alternate palette pokemon based on loaded data.
 ; used when a Pokemon is the only thing on the screen
 ; such as evolution, trading and the Hall of Fame
 SetPal_PokemonWholeScreen:
@@ -364,7 +372,7 @@ BadgeBlkDataLengths:
 
 DeterminePaletteID:
 	bit TRANSFORMED, a ; a is battle status 3
-	ld a, DEX_DITTO	;ld a, PAL_GREYMON  ; if the mon has used Transform, use Ditto's palette
+	ld a, DEX_DITTO	;ld a, PAL_GREYMON  ; shinpokerednote: FIXED: if the mon has used Transform, use Ditto's palette
 	jr nz, DeterminePaletteIDOutOfBattle.skipDexNumConversion ;ret nz
 	ld a, [hl]
 DeterminePaletteIDOutOfBattle:
@@ -379,6 +387,7 @@ DeterminePaletteIDOutOfBattle:
 .skipDexNumConversion
 	ld e, a
 	ld d, 0
+;;;;;;;;;; PureRGBnote: ADDED: show an alternate palette pokemon if the flag is set. Then immediately clear the flag.
 	ld a, [wIsAltPalettePkmn]
 	and a
 	jr z, .defaultPalette
@@ -393,6 +402,7 @@ DeterminePaletteIDOutOfBattle:
 	add hl, de
 	xor a
 	ld [wIsAltPalettePkmn], a ; always reset this value after displaying a pokemon sprite
+;;;;;;;;;;
 	ld a, [hl]
 	ret
 
@@ -430,7 +440,7 @@ UpdatePartyMenuBlkPacket:
 	ld [hl], e
 	ret
 
-SendSGBPacket: ;gbcnote - shifted joypad polling around
+SendSGBPacket: ; shinpokerednote: gbcnote - shifted joypad polling around
 ; disable ReadJoypad to prevent it from interfering with sending the packet
 	ld a, 1
 	ldh [hDisableJoypadPolling], a ; don't poll joypad while sending packet
@@ -500,6 +510,7 @@ _SendSGBPacket:
 ; else send 16 more bytes
 	jr .loop2
 
+; shinpokerednote: gbcnote: run GBC color code if on GBC when running this function now
 LoadSGB:
 	xor a
 	ld [wOnSGB], a
@@ -532,6 +543,7 @@ LoadSGB:
 	xor a
 	ld [wCopyingSGBTileData], a
 	ld de, PalTrnPacket
+;;;;;;;;;; PureRGBnote: ADDED: optional toggle between original SGB palettes and GBC palettes when playing on SGB
 	call GetPalettes
 	jr c, .gbcPalettes
 	ld hl, SuperPalettes
@@ -539,6 +551,7 @@ LoadSGB:
 .gbcPalettes
 	ld hl, GBCBasePalettes
 .gotPalettes
+;;;;;;;;;;
 	call CopyGfxToSuperNintendoVRAM
 	call ClearVram
 	ld hl, MaskEnCancelPacket
@@ -637,7 +650,7 @@ CopyGfxToSuperNintendoVRAM:
 	call DisableLCD
 	ld a, $e4
 	ldh [rBGP], a
-	call UpdateGBCPal_BGP
+	call UpdateGBCPal_BGP ; shinpokerednote: gbcnote: color code from pokemon yellow
 	ld de, vChars1
 	ld a, [wCopyingSGBTileData]
 	and a
@@ -668,7 +681,7 @@ CopyGfxToSuperNintendoVRAM:
 	call SendSGBPacket
 	xor a
 	ldh [rBGP], a
-	call UpdateGBCPal_BGP
+	call UpdateGBCPal_BGP ; shinpokerednote: gbcnote: color code from pokemon yellow
 	ei
 	ret
 
@@ -693,7 +706,7 @@ SendSGBPackets:
 	call InitGBCPalettesNew
 	pop hl
 	;call EmptyFunc3
-	;gbcnote - initialize the second pal packet in de (now in hl) then enable the lcd
+	;shinpokerednote: gbcnote: initialize the second pal packet in de (now in hl) then enable the lcd
 	call InitGBCPalettesNew
 	ldh a, [rLCDC]
 	and rLCDC_ENABLE_MASK
@@ -707,7 +720,7 @@ SendSGBPackets:
 	jp SendSGBPacket
 
 
-; original function for monochromatic color gbc palettes
+; PureRGBnote: ADDED: figure out if we have SGB or GBC palettes selected in the options.
 GetPalettes:
 	ld a, [wOptions2]
 	and %11
@@ -721,7 +734,7 @@ GetPalettes:
 	ret
 
 
-InitGBCPalettesNew:	;gbcnote - updating this to work with the Yellow code
+InitGBCPalettesNew:	;shinpokerednote: gbcnote: updating this to work with the Yellow code
 	ld a, [hl]
 	and $f8
 	cp $20	;check to see if hl points to a blk pal packet
@@ -765,7 +778,7 @@ index = index + 1
 	ENDR
 	ret
 
-GetGBCBasePalAddress:: ;gbcnote - new function
+GetGBCBasePalAddress:: ;shinpokerednote: gbcnote: new function
 ; Input: a = palette ID
 ; Output: de = palette address
 	push hl
@@ -775,6 +788,7 @@ GetGBCBasePalAddress:: ;gbcnote - new function
 	add hl, hl
 	add hl, hl
 	add hl, hl
+;;;;;;;;;; PureRGBnote: ADDED: optional toggle between original SGB palettes and GBC palettes when playing on SGB
 	call GetPalettes
 	jr c, .gbcPalettes
 	ld de, SuperPalettes
@@ -782,6 +796,7 @@ GetGBCBasePalAddress:: ;gbcnote - new function
 .gbcPalettes
 	ld de, GBCBasePalettes
 .gotPalettes
+;;;;;;;;;;
 	add hl, de
 	ld a, l
 	ld e, a
@@ -790,7 +805,7 @@ GetGBCBasePalAddress:: ;gbcnote - new function
 	pop hl
 	ret
 	
-DMGPalToGBCPal::	;gbcnote - new function
+DMGPalToGBCPal::	;shinpokerednote: gbcnote: new function
 ; Populate wGBCPal with colors from a base palette, selected using one of the
 ; DMG palette registers.
 ; Input:
@@ -798,31 +813,37 @@ DMGPalToGBCPal::	;gbcnote - new function
 ; de = address of GBC base palette
 	and a
 	jr nz, .notBGP
+;;;;;;;;;; PureRGBnote: ADDED: on GBC we will use the original duochromatic colors if the option is selected.
 	ld a, [wOptions2]
 	and %11 
 	jr nz, .notOG1 ; if this value is non-zero we're not using OG palettes on GBC
 	ld de, GBC_OGPalettes_BGOBJ1
 .notOG1
+;;;;;;;;;; 
 	ldh a, [rBGP]
 	ld [wLastBGP], a
 	jr .convert
 .notBGP
 	dec a
 	jr nz, .notOBP0
+;;;;;;;;;; PureRGBnote: ADDED: on GBC we will use the original duochromatic colors if the option is selected.
 	ld a, [wOptions2]
 	and %11 
 	jr nz, .notOG2 ; if this value is non-zero we're not using OG palettes on GBC
 	ld de, GBC_OGPalettes_OBJ0
 .notOG2
+;;;;;;;;;;
 	ldh a, [rOBP0]
 	ld [wLastOBP0], a
 	jr .convert
 .notOBP0
+;;;;;;;;;; PureRGBnote: ADDED: on GBC we will use the original duochromatic colors if the option is selected.
 	ld a, [wOptions2]
 	and %11 
 	jr nz, .notOG3 ; if this value is non-zero we're not using OG palettes on GBC
 	ld de, GBC_OGPalettes_BGOBJ1
 .notOG3
+;;;;;;;;;;
 	ldh a, [rOBP1]
 	ld [wLastOBP1], a
 .convert
@@ -862,7 +883,7 @@ color_index = color_index + 1
 	add hl, de	;HL now holds the base palette address offset by 2x shade in bytes (base, base+2, base+4, or base+6)
 	ret
 
-TransferCurBGPData::
+TransferCurBGPData:: ;shinpokerednote: gbcnote: code from pokemon yellow
 ; a = indexed offset of wGBCBasePalPointers
 	push de
 	;multiply index by 8 since each index represents 8 bytes worth of data
@@ -888,7 +909,7 @@ TransferCurBGPData::
 	pop de
 	ret	
 
-BufferBGPPal::
+BufferBGPPal:: ;shinpokerednote: gbcnote: code from pokemon yellow
 ; Copy wGBCPal to palette a in wBGPPalsBuffer.
 ; a = indexed offset of wGBCBasePalPointers
 	push de
@@ -912,7 +933,7 @@ BufferBGPPal::
 	pop de
 	ret
 	
-TransferBGPPals::
+TransferBGPPals:: ;shinpokerednote: gbcnote: code from pokemon yellow
 ; Transfer the buffered BG palettes.
 	ldh a, [rLCDC]
 	and rLCDC_ENABLE_MASK
@@ -942,7 +963,7 @@ TransferBGPPals::
 	jr nz, .loop
 	ret
 
-TransferCurOBPData:
+TransferCurOBPData: ;shinpokerednote: gbcnote: code from pokemon yellow
 ; a = indexed offset of wGBCBasePalPointers
 	push de
 	;multiply index by 8 since each index represents 8 bytes worth of data
@@ -968,7 +989,7 @@ TransferCurOBPData:
 	pop de
 	ret	
 
-TransferPalColorLCDEnabled:
+TransferPalColorLCDEnabled: ;shinpokerednote: gbcnote: code from pokemon yellow
 ; Transfer a palette color while the LCD is enabled.
 ; In case we're already in H-blank or V-blank, wait for it to end. This is a
 ; precaution so that the transfer doesn't extend past the blanking period.
@@ -989,7 +1010,7 @@ TransferPalColorLCDDisabled:
 	ld [de], a
 	ret
 	
-_UpdateGBCPal_BGP::
+_UpdateGBCPal_BGP:: ;shinpokerednote: gbcnote: code from pokemon yellow
 index = 0
 	REPT NUM_ACTIVE_PALS
 		ld a, [wGBCBasePalPointers + index * 2]
@@ -1005,7 +1026,7 @@ index = index + 1
 	call TransferBGPPals	;Transfer wBGPPalsBuffer contents to rBGPD
 	ret
 
-_UpdateGBCPal_OBP::
+_UpdateGBCPal_OBP:: ;shinpokerednote: gbcnote: code from pokemon yellow
 ; d then c = CONVERT_OBP0 or CONVERT_OBP1
 	ld a, d
 	ld c, a
@@ -1036,7 +1057,7 @@ index = index + 1
 	ENDR
 	ret
 	
-;gbcnote - new function
+;shinpokerednote: gbcnote: new function
 TranslatePalPacketToBGMapAttributes::
 ; translate the SGB pals for blk packets into something usable for the GBC
 	push hl
@@ -1071,7 +1092,7 @@ TranslatePalPacketToBGMapAttributes::
 	pop de
 	ret
 
-;gbcnote - pointers from pokemon yellow
+;shinpokerednote: gbcnote: pointers from pokemon yellow
 PalPacketPointers::
 	db (palPacketPointersEnd - palPacketPointers) / 2
 palPacketPointers:
@@ -1124,7 +1145,7 @@ CopySGBBorderTiles:
 	jr nz, .tileLoop
 	ret
 
-;gbcnote - This function loads the palette for a given pokemon index in wcf91 into a specified palette register on the GBC
+;shinpokerednote: gbcnote: This function loads the palette for a given pokemon index in wcf91 into a specified palette register on the GBC
 ;d = CONVERT_OBP0, CONVERT_OBP1, or CONVERT_BGP
 ;e = palette register # (0 to 7)
 ;if wcf91 has bit 7 set, then it the address holds a specific palette instead of a 'mon

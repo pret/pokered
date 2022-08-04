@@ -25,4 +25,4 @@
 
 ;INCLUDE "data/maps/rest_house_maps.asm"
 
-;FIXED: not needed
+;PureRGBnote: FIXED: not needed since safari zone rest houses will never get set as the blackout map anyway

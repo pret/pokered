@@ -1,3 +1,6 @@
+; PureRGBnote: ADDED: code was added to triggere pokemart menu lists displaying TM names when scrolling over TMs for sale.
+;                     this code is available for any menu list, but the list must indicate with wListWithTMText that it should check for TMs.
+
 DisplayPokemartDialogue_::
 	ld a, [wListScrollOffset]
 	ld [wSavedListScrollOffset], a
@@ -37,8 +40,6 @@ DisplayPokemartDialogue_::
 	dec a ; quitting?
 	jp z, .done
 .sellMenu
-	ld a, 1
-	ld [wListWithTMText], a ; we're in a list that might have TMs to read out
 ; the same variables are set again below, so this code has no effect
 	xor a
 	ld [wPrintItemPrices], a
@@ -53,6 +54,8 @@ DisplayPokemartDialogue_::
 	call PrintText
 	call SaveScreenTilesToBuffer1 ; save screen
 .sellMenuLoop
+	ld a, 1
+	ld [wListWithTMText], a ; we're in a list that might have TMs to read out
 	call LoadScreenTilesFromBuffer1 ; restore saved screen
 	ld a, MONEY_BOX
 	ld [wTextBoxID], a
@@ -88,7 +91,9 @@ DisplayPokemartDialogue_::
 	call PrintText
 	hlcoord 14, 7
 	lb bc, 8, 15
-	ld a, TWO_OPTION_MENU
+	xor a
+	ld [wListWithTMText], a ; we shouldn't read out TMs when showing the Yes/No menu
+	ld a, TWO_OPTION_MENU 
 	ld [wTextBoxID], a
 	call DisplayTextBoxID ; yes/no menu
 	ld a, [wMenuExitMethod]
@@ -123,9 +128,6 @@ DisplayPokemartDialogue_::
 	jp .returnToMainPokemartMenu
 .buyMenu
 
-	ld a, 1
-	ld [wListWithTMText], a ; we're in a list that might have TMs to read out
-
 ; the same variables are set again below, so this code has no effect
 	ld [wPrintItemPrices], a
 	ld a, INIT_OTHER_ITEM_LIST
@@ -136,6 +138,8 @@ DisplayPokemartDialogue_::
 	call PrintText
 	call SaveScreenTilesToBuffer1
 .buyMenuLoop
+	ld a, 1
+	ld [wListWithTMText], a ; we're in a list that might have TMs to read out
 	call LoadScreenTilesFromBuffer1
 	ld a, MONEY_BOX
 	ld [wTextBoxID], a
@@ -168,6 +172,8 @@ DisplayPokemartDialogue_::
 	call PrintText
 	hlcoord 14, 7
 	lb bc, 8, 15
+	xor a
+	ld [wListWithTMText], a ; we shouldn't read out TMs when showing the Yes/No menu
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID ; yes/no menu

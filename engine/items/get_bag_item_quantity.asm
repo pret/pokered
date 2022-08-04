@@ -17,6 +17,7 @@ GetQuantityOfItemInBag:
 	ld b, 0
 	ret
 
+; PureRGBnote: ADDED: function for determining what index an item is in the player's bag.
 GetIndexOfItemInBag:
 ; In: b = item ID
 ; Out: b = index of item in bag (FF if not)

@@ -35,7 +35,7 @@ _GivePokemon::
 	ld [hl], "@"
 	ld hl, SentToBoxText
 	call PrintText
-	call .clearAltPaletteData
+	call .clearAltPaletteData 
 	scf
 	ret
 .boxFull
@@ -55,7 +55,9 @@ _GivePokemon::
 	ld [wAddedToParty], a
 	scf
 	ret
-.clearAltPaletteData
+	; PureRGBnote: ADDED: if the pokemon being given was an alternate palette pokemon, 
+	;                     we need to clear the flag to make sure the next pokemon given is not alternate palette.
+.clearAltPaletteData 
 	xor a
 	ld [wIsAltPalettePkmnData], a
 	ret
@@ -67,7 +69,7 @@ SetPokedexOwnedFlag:
 	predef IndexToPokedex
 	ld a, [wd11e]
 	and a
-	ret z ; do nothing for missingno
+	ret z ; PureRGBnote: ADDED: do nothing for missingno to avoid glitchy results (missingno isn't part of the dex	)
 	dec a
 	ld c, a
 	ld hl, wPokedexOwned

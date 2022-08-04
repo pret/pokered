@@ -27,7 +27,7 @@ ShowPokedexMenu:
 	inc hl
 	ld a, 6
 	ld [hli], a ; max menu item ID
-	ld [hl], D_LEFT | D_RIGHT | B_BUTTON | A_BUTTON | SELECT
+	ld [hl], D_LEFT | D_RIGHT | B_BUTTON | A_BUTTON | SELECT ; PureRGBnote: ADDED: track the SELECT button in order to trigger town map when able
 	call HandlePokedexListMenu
 	jr c, .goToSideMenu ; if the player chose a pokemon from the list
 .exitPokedex
@@ -283,8 +283,10 @@ HandlePokedexListMenu:
 	call Delay3
 	call GBPalNormal
 	call HandleMenuInput
+;;;;;;;;;; PureRGBnote: ADDED: track the SELECT button in order to trigger town map when able
 	bit BIT_SELECT, a
 	jp nz, .selectPressed
+;;;;;;;;;;
 	bit BIT_B_BUTTON, a
 	jp nz, .buttonBPressed
 .checkIfUpPressed
@@ -347,12 +349,15 @@ HandlePokedexListMenu:
 .buttonBPressed
 	and a
 	ret
+;;;;;;;;;; PureRGBnote: CHANGED: SELECT button will open the town map while in the pokedex. You need the town map from rival's sister to do this.
+;;;;;;;;;;                       Town map doesn't take up space in the bag due to this modification.
 .selectPressed
 	CheckEvent EVENT_GOT_TOWN_MAP
 	jr nz, .showTownMap
 	jp .loop
 .showTownMap
 	farjp DisplayTownMap
+;;;;;;;;;;
 
 DrawPokedexVerticalLine:
 	ld c, 9 ; height of line

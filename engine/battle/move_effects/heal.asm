@@ -8,7 +8,8 @@ HealEffect_:
 	ld de, wEnemyMonHP
 	ld hl, wEnemyMonMaxHP
 	ld a, [wEnemyMoveNum]
-.healEffect ; FIXED: HP recovery bug where the move fails when HP is 255 or 511 less than max HP
+;;;;;;;;;; shinpokerednote: FIXED: HP recovery bug where the move fails when HP is 255 or 511 less than max HP
+.healEffect 
 	;h holds high byte of maxHP, l holds low byte of maxHP
 	;d holds high byte of curHP, e holds low byte of curHP
 	ld b, a
@@ -25,6 +26,7 @@ HealEffect_:
 	;A a zero flag means both h and d as well as l and e are equal pairs. hl = de, so already at full hp!
 	jp z, .failed ; no effect if user's HP is already at its maximum
 .passed
+;;;;;;;;;;
 	ld a, b
 	cp REST
 	jr nz, .healHP
@@ -39,7 +41,7 @@ HealEffect_:
 	jr z, .restEffect
 	ld hl, wEnemyMonStatus
 .restEffect
-	callfar UndoBurnParStats ; FIXED: remove negative effects of burn/paralyze on stats before healing
+	callfar UndoBurnParStats ; shinpokerednote: FIXED: remove negative effects of burn/paralyze on stats before healing
 	ld a, [hl]
 	and a
 	ld [hl], 2 ; clear status and set number of turns asleep to 2

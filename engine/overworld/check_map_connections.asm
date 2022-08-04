@@ -1,3 +1,5 @@
+; PureRGBnote: MOVED: these functions were moved from overworld.asm for additional space in the home bank.
+
 CheckWestMap::
 	ld a, [wXCoord]
 	cp $ff

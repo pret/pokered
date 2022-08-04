@@ -3,8 +3,8 @@ LoadShootingStarGraphics:
 	ldh [rOBP0], a
 	ld a, $a4
 	ldh [rOBP1], a
-	call UpdateGBCPal_OBP0
-	call UpdateGBCPal_OBP1
+	call UpdateGBCPal_OBP0 ; shinpokerednote: gbcnote: gbc color code from yellow 
+	call UpdateGBCPal_OBP1 ; shinpokerednote: gbcnote: gbc color code from yellow 
 	ld de, AnimationTileset2 tile 3 ; star tile (top left quadrant)
 	ld hl, vChars1 tile $20
 	lb bc, BANK(AnimationTileset2), 1
@@ -77,7 +77,7 @@ AnimateShootingStar:
 	ld hl, rOBP0
 	rrc [hl]
 	rrc [hl]
-	call UpdateGBCPal_OBP0
+	call UpdateGBCPal_OBP0 ; shinpokerednote: gbcnote: gbc color code from yellow 
 	ld c, 10
 	call CheckForUserInterruption
 	ret c
@@ -122,7 +122,7 @@ AnimateShootingStar:
 	inc de
 	inc hl
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;gbcnote - hl now points to OAM attribute byte for falling stars
+; shinpokerednote: gbcnote: hl now points to OAM attribute byte for falling stars
 ;Need to get and set the palette data from the new coordinate arrays
 	push bc
 	ld a, [de]
@@ -176,7 +176,7 @@ SmallStarsWaveCoordsPointerTable:
 ; The stars that fall from the Gamefreak logo come in 4 waves of 4 OAM entries.
 ; These arrays contain the Y and X coordinates of each OAM entry.
 
-;gbcnote - these have been modified per Yellow version to have pal data for the GBC attribute bits
+; shinpokerednote: gbcnote: these have been modified per Yellow version to have pal data for the GBC attribute bits
 
 SmallStarsWave1Coords:
 	db $68,$30
@@ -230,7 +230,7 @@ MoveDownSmallStars:
 	ldh a, [rOBP1]
 	xor %10100000
 	ldh [rOBP1], a
-	call UpdateGBCPal_OBP1
+	call UpdateGBCPal_OBP1 ; shinpokerednote: gbcnote: gbc color code from yellow 
 
 	ld c, 3
 	call CheckForUserInterruption
@@ -258,7 +258,7 @@ GameFreakLogoOAMData:
 	dbsprite 15, 12,  0,  0, $86, 0
 GameFreakLogoOAMDataEnd:
 
-GameFreakShootingStarOAMData:	;gbcnote - changing the attribute to use palette 4 via GBC bits
+GameFreakShootingStarOAMData:	;shinpokerednote: gbcnote: changing the attribute to use palette 4 via GBC bits
 ;last column is byte 3 of OAM data; the attribute byte
 	db $00,$A0,$A0,$14
 	db $00,$A8,$A0,$34

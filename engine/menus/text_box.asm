@@ -148,6 +148,7 @@ DisplayMoneyBox:
 CurrencyString:
 	db "      ¥@"
 
+; PureRGBnote: ADDED: new text box type - this one's for displaying how many color changes are left when talking to the color change NPC.
 DisplayAmountLeftBox:
 	ld hl, wd730
 	set 6, [hl]

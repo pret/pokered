@@ -87,7 +87,7 @@ _AddPartyMon::
 	pop de
 	ld a, [wd11e]
 	and a
-	jr z, .missingnoskip ; if it's missingno don't do any pokedex actions
+	jr z, .missingnoskip ; PureRGBnote: ADDED: if it's missingno don't do any pokedex actions
 	dec a
 	ld c, a
 	ld b, FLAG_TEST
@@ -171,10 +171,11 @@ _AddPartyMon::
 	ld [de], a
 	inc de
 	ld a, [hli]       ; catch rate (held item in gen 2)
-	;NEW: we don't load catch rate, we instead treat this byte as a set of flags. at the moment only bit 0 is used for indicating alt palettes. 
+;;;;;;;;;; PureRGBnote: CHANGED: we don't load catch rate here, we instead treat this byte as a set of flags. 
+;;;;;;;;;; at the moment only bit 0 is used for indicating alt palettes. 
 	ld a, [wIsAltPalettePkmnData]
 	ld [de], a
-	;;;;
+;;;;;;;;;;
 	ld hl, wMonHMoves
 	ld a, [hli]
 	inc de
@@ -283,10 +284,12 @@ AddPartyMon_WriteMovePP:
 ; adds enemy mon [wcf91] (at position [wWhichPokemon] in enemy list) to own party
 ; used in the cable club trade center
 _AddEnemyMonToPlayerParty::
+;;;;;;;;;; PureRGBnote: need to store whether the pokemon uses alternate palette after trading then reset that flag
 	ld a, [wIsAltPalettePkmnData]
 	ld [wLoadedMonFlags], a
 	xor a
 	ld [wIsAltPalettePkmnData], a
+;;;;;;;;;;
 	ld hl, wPartyCount
 	ld a, [hl]
 	cp PARTY_LENGTH

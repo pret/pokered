@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: one of the new pages in the options menu. This one's one of the two pages for options related to game sprites.
+
 DEF OPTION1_LEFT_XPOS EQU 9
 DEF OPTION1_RIGHT_XPOS EQU 12
 DEF OPTION2_LEFT_XPOS EQU 9

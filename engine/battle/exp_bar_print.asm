@@ -1,3 +1,5 @@
+; shinpokerednote: ADDED: code for rendering EXP bar in battle.
+
 AnimateEXPBarAgain:
 	call LoadMonData
 	call IsCurrentMonBattleMon

@@ -195,12 +195,9 @@ CheckForTM::
 	ld a, [wListWithTMText]
 	and a
 	ret z
-	push bc
-	push hl
-	farcall CheckLoadTmName
-	pop hl
-	pop bc
-	ret
+	; This func is in bank1, not home bank, but we'll only ever reach this code while bank1 is loaded due to how list menus behave
+	; keep in mind we only need to display TM names in a list menu, other menu types never need to
+	jp CheckLoadTmName 
 
 ; This is used to mark a menu cursor other than the one currently being
 ; manipulated. In the case of submenus, this is used to show the location of

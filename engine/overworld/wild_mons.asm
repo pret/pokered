@@ -25,15 +25,15 @@ LoadWildData::
 	ld a, [hli]
 	ld [wWaterRate], a
 	and a
-	jr z, .loadPaletteData   ; if no water data, skip loading it
+	jr z, .loadPaletteData   ; if no water data, no need to load it
 	ld de, wWaterMons  ; otherwise, load surfing data
 	ld bc, $14
 	call CopyData
 .loadPaletteData
-	call GetWildPokemonPalettes
+	call GetWildPokemonPalettes ; PureRGBnote: ADDED: we always need to load the palette flags for wild pokemon on loading a map.
 	ret
 
-; creates a list at wBuffer of maps where the mon in [wd11e] can be found.
+; PureRGBnote: MOVED: creates a list at wBuffer of maps where the mon in [wd11e] can be found.
 ; this is used by the pokedex to display locations the mon can be found on the map.
 FindWildLocationsOfMon:
 	ld hl, WildDataPointers

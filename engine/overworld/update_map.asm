@@ -1,3 +1,5 @@
+; PureRGBnote: CHANGED: Replacetileblock was split up into two functions, one that redraws the map and one that does not.
+; If we know something is offscreen then calling the noredraw version will cause less in-game lag.
 ; replaces a tile block with the one specified in [wNewTileBlockID]
 ; and redraws the map view if necessary
 ; b = Y

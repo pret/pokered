@@ -2,7 +2,7 @@ MarowakAnim:
 ; animate the ghost being unveiled as a Marowak
 	ld a, $e4
 	ldh [rOBP1], a
-	call UpdateGBCPal_OBP1
+	call UpdateGBCPal_OBP1 ; shinpokerednote: gbcnote: color code from pokemon yellow
 	call CopyMonPicFromBGToSpriteVRAM ; cover the BG ghost pic with a sprite ghost pic that looks the same
 ; now that the ghost pic is being displayed using sprites, clear the ghost pic from the BG tilemap
 	hlcoord 12, 0
@@ -28,7 +28,7 @@ MarowakAnim:
 	sla a
 	sla a
 	ldh [rOBP1], a
-	call UpdateGBCPal_OBP1
+	call UpdateGBCPal_OBP1 ; shinpokerednote: gbcnote: color code from pokemon yellow
 	jr nz, .fadeOutGhostLoop
 	call ClearSprites
 	call CopyMonPicFromBGToSpriteVRAM ; copy Marowak pic from BG to sprite VRAM
@@ -42,7 +42,7 @@ MarowakAnim:
 	srl b
 	rra
 	ldh [rOBP1], a
-	call UpdateGBCPal_OBP1
+	call UpdateGBCPal_OBP1 ; shinpokerednote: gbcnote: color code from pokemon yellow
 	ld a, b
 	and a
 	jr nz, .fadeInMarowakLoop
@@ -77,7 +77,7 @@ CopyMonPicFromBGToSpriteVRAM:
 	ld [hli], a
 	ld a, d
 	ld [hli], a
-	ld a, $14 ; use OBP1	;gbcnote - updated oam setting for GBC
+	ld a, $14 ; use OBP1	;shinpokerednote: gbcnote - updated oam setting for GBC
 	ld [hli], a
 	inc d
 	dec c

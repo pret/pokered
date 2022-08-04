@@ -1,6 +1,8 @@
+; PureRGBnote: ADDED: CHANGED: some item effects were changed or new ones were added
+
 UseItem_::
 	xor a
-	ld [wListWithTMText], a ; if we used an item we don't need to display TM text afterwards.
+	ld [wListWithTMText], a ; PureRGBnote: ADDED: if we used an item we don't need to display TM text afterwards.
 	ld a, 1
 	ld [wActionResultOrTookBattleTurn], a ; initialise to success value
 	ld a, [wcf91] ;contains item_ID
@@ -108,7 +110,7 @@ ItemUseBall:
 ; Balls can't be used out of battle.
 	ld a, [wIsInBattle]
 	and a
-	jp z, ItemUseInBattle
+	jp z, ItemUseInBattle ; PureRGBnote: ADDED: text indicating the item should be used in battle.
 
 ; Balls can't catch trainers' Pokémon.
 	dec a
@@ -173,12 +175,14 @@ ItemUseBall:
 	jr nz, .loop
 	ld a, [wEnemyMonSpecies2]
 	cp RESTLESS_SOUL
+;;;;;;;;;; PureRGBnote: ADDED: ghost marowak can be caught if you have silph scope in your bag.
 	jp nz, .loop
 	push bc
 	ld b, SILPH_SCOPE
 	call IsItemInBag
 	pop bc
 	jr z, .loop
+;;;;;;;;;;
 	ld b, $10 ; can't be caught value
 
 ; Get the first random number. Let it be called Rand1.
@@ -201,9 +205,11 @@ ItemUseBall:
 	cp MASTER_BALL
 	jp z, .captured
 
+;;;;;;;;;; PureRGBnote: ADDED: effect for the new Hyper ball item.
 	cp HYPER_BALL
 	jr z, .hyperBallCheck
 .loopreturn	
+;;;;;;;;;;
 
 ; Anything will do for the basic Poké Ball.
 	cp POKE_BALL
@@ -224,12 +230,14 @@ ItemUseBall:
 	cp b
 	jr c, .loop
 	jr .checkForAilments
+;;;;;;;;;; PureRGBnote: ADDED: effect for the new Hyper ball item.
 .hyperBallCheck
 	ld a, [wEnemyMonActualCatchRate]
 	cp 26 
 	jp nc, .captured ;Hyper Ball always captures pokemon with catch rate >25
 	push hl
 	push bc
+	; if the catch rate is 25 or lower it will guarantee catching if the pokemon has <1/3 health.
 	ld a, 3
 	ld [wUnusedC000], a ; store 1/3 in the fraction to check
 	callfar AICheckIfHPBelowFractionStore
@@ -241,6 +249,7 @@ ItemUseBall:
 	ld [wUnusedC000], a ; reset this variable so it doesn't mess with other places that use it
 	jp nz, .captured
 	jr .loopreturn
+;;;;;;;;;;
 .checkForAilments
 ; Pokémon can be caught more easily with a status ailment.
 ; Depending on the status ailment, a certain value will be subtracted from
@@ -283,8 +292,10 @@ ItemUseBall:
 	ld b, 8
 	cp GREAT_BALL
 	jr z, .skip1
+;;;;;;;;;;; PureRGBnote: ADDED: hyper ball has the same ballfactor as great ball
 	cp HYPER_BALL
 	jr z, .skip1
+;;;;;;;;;;;
 	ld b, 12
 .skip1
 	ld a, b
@@ -450,7 +461,7 @@ ItemUseBall:
 	call DelayFrames
 
 	; Do the animation.
-	call MapBallToAnimation ; choose which toss animation to use
+	call MapBallToAnimation ; PureRGBnote: CHANGED: choose which toss animation to use before entering animation code
 	xor a
 	ldh [hWhoseTurn], a
 	ld [wAnimationType], a
@@ -547,7 +558,7 @@ ItemUseBall:
 	ld hl, ItemUseBallText05
 	call PrintText
 	
-;;;;;;;;;; PureRGBnote - NEW: ghost marowak can be caught and the event will complete if you do so
+;;;;;;;;;; PureRGBnote: ADDED: ghost marowak can be caught and the event will complete if you do so
 	ld a, [wCurMap]
 	cp POKEMON_TOWER_6F
 	jr nz, .notGhostMarowak
@@ -555,16 +566,18 @@ ItemUseBall:
 	cp RESTLESS_SOUL
 	jp nz, .notGhostMarowak
 	ld a, 1
-	ld [wCaughtGhostMarowak], a
+	ld [wCaughtGhostMarowak], a ; need to indicate to the map script that marowak was caught so the text differs when you do vs defeating it
 .notGhostMarowak
 ;;;;;;;;;;
 
 ; Add the caught Pokémon to the Pokédex.
 	predef IndexToPokedex
 	ld a, [wd11e]
+;;;;;;;;;; PureRGBnote: ADDED: need specific behaviour when catching missingno since it has no pokedex data
 	and a ; is it missingno?
 	jr z, .skipShowingPokedexData ; don't mark in pokedex if so
 	dec a ; pokedex is shifted by 1 because missingno is first
+;;;;;;;;;;
 	ld c, a
 	ld b, FLAG_TEST
 	ld hl, wPokedexOwned
@@ -607,12 +620,14 @@ ItemUseBall:
 	ld hl, ItemUseBallText08
 .printTransferredToPCText
 	call PrintText
+;;;;;;;;;; shinpokerednote: ADDED: text indicating your box is full when catching a pokemon that fills it up.
 	ld a, [wBoxCount]
 	cp MONS_PER_BOX
 	jr nz, .notFullBox
 	ld hl, NoBoxSlotsLeftText
 	call PrintText
 .notFullBox
+;;;;;;;;;;
 	jr .done
 
 .oldManCaughtMon
@@ -683,6 +698,7 @@ ItemUseBallText06:
 	text_promptbutton
 	text_end
 
+;;;;;;;;;; PureRGBnote: ADDED: maps item ID to which pokeball toss animation will be used.
 MapBallToAnimation: 
 	ld a, [wcf91]
 	ld hl, BallAnimationMap - 1
@@ -703,6 +719,7 @@ BallAnimationMap: ; this uses item indices, if item indices change then this won
 	db 0
 	db 0
 	db SAFARITOSS_ANIM
+;;;;;;;;;;
 
 ItemUseTownMap:
 	ld a, [wIsInBattle]
@@ -710,6 +727,7 @@ ItemUseTownMap:
 	jp nz, ItemUseNotTime
 	farjp DisplayTownMap
 
+;;;;;;;;;; PureRGBnote: ADDED: functions that enable the booster chip item. Makes all pokemon gain boosted EXP when turned on.
 ItemUseBoosterChip:
 	ld a, [wIsInBattle]
 	and a
@@ -730,6 +748,7 @@ BoosterChipInstalledText::
 	sound_get_item_1
 	text_promptbutton
 	text_end
+;;;;;;;;;;
 
 ItemUseBicycle:
 	ld a, [wIsInBattle]
@@ -745,13 +764,17 @@ ItemUseBicycle:
 	call ItemUseReloadOverworldData
 	xor a
 	ld [wWalkBikeSurfState], a ; change player state to walking
+;;;;;;;;;; PureRGBnote: ADDED: bike music can be turned off via the options.
 	ld a, [wOptions2]
 	bit BIT_BIKE_MUSIC, a
 	call z, PlayDefaultMusic ; play walking music
+;;;;;;;;;;
+;;;;;;;;;; PureRGBnote: CHANGED: the text telling you "got on bike" and "got off bike" each only display once per playthrough to be less annoying
 	CheckEvent EVENT_SAW_GOT_OFF_BIKE_TEXT 
 	jr nz, .done 
 	SetEvent EVENT_SAW_GOT_OFF_BIKE_TEXT
 	ld hl, GotOffBicycleText ; this text only displays once to be less annoying
+;;;;;;;;;;
 	jr .printText
 .tryToGetOnBike
 	call IsBikeRidingAllowed
@@ -761,13 +784,17 @@ ItemUseBicycle:
 	ldh [hJoyHeld], a ; current joypad state
 	inc a
 	ld [wWalkBikeSurfState], a ; change player state to bicycling
+;;;;;;;;;; PureRGBnote: ADDED: bike music can be turned off via the options.
 	ld a, [wOptions2]
 	bit BIT_BIKE_MUSIC, a
 	call z, PlayDefaultMusic ; play bike riding music
+;;;;;;;;;;
+;;;;;;;;;; PureRGBnote: CHANGED: the text telling you "got on bike" and "got off bike" each only display once per playthrough to be less annoying
 	CheckEvent EVENT_SAW_GOT_ON_BIKE_TEXT
 	jr nz, .done 
 	SetEvent EVENT_SAW_GOT_ON_BIKE_TEXT
 	ld hl, GotOnBicycleText ; this text only displays once to be less annoying
+;;;;;;;;;;
 	jr .printText
 .done
 	ret
@@ -904,7 +931,7 @@ ItemUseEvoStone:
 	pop af
 	ret
 
-ItemUseApexChip:
+ItemUseApexChip: ; PureRGBnote: ADDED: code for item that maximizes DVs of a pokemon.
 	ld a, [wIsInBattle]
 	and a
 	jp nz, ItemUseNotTime
@@ -1003,10 +1030,12 @@ ItemUseMedicine:
 	and c ; does the pokemon have a status ailment the item can cure?
 	jp z, .healingItemNoEffect
 ; if the pokemon has a status the item can heal
+;;;;;;;;;; PureRGBnote: ADDED: code that helps make the trainer AI not predict healing statuses perfectly and reapplying the same turn.
 	ld a, 1
 	ld [wAIMoveSpamAvoider], a
 	ld a, [wBattleMonStatus]
 	ld [wAITargetMonStatus], a
+;;;;;;;;;;
 	xor a
 	ld [hl], a ; remove the status ailment in the party data
 	ld a, b
@@ -1015,7 +1044,7 @@ ItemUseMedicine:
 	cp d ; is pokemon the item was used on active in battle?
 	jp nz, .doneHealing
 ; if it is active in battle
-	; FIXED: reset burn and paralyze stat drops on healing
+;;;;;;;;;; shinpokerednote: FIXED: reset burn and paralyze stat drops on healing
 	push hl
 	ld hl, wPlayerBattleStatus3
 	res BADLY_POISONED, [hl] ; heal Toxic status
@@ -1030,12 +1059,13 @@ ItemUseMedicine:
 	xor a
 	ld [wBattleMonStatus], a ; remove the status ailment in the in-battle pokemon data
 	ld [wPlayerToxicCounter], a	;clear toxic counter
+;;;;;;;;;;
 	ld bc, wPartyMon1Stats - wPartyMon1Status
 	add hl, bc ; hl now points to party stats
 	ld de, wBattleMonStats
 	ld bc, NUM_STATS * 2
 	;call CopyData ; copy party stats to in-battle stat data
-	;predef DoubleOrHalveSelectedStats
+	;predef DoubleOrHalveSelectedStats ; shinpokerednote: FIXED: these function calls are redundant after the above code block
 	jp .doneHealing
 .healHP
 	inc hl ; hl = address of current HP
@@ -1211,9 +1241,9 @@ ItemUseMedicine:
 	cp SUPER_POTION
 	ld b, 200 ; Hyper Potion heal amount
 	jr c, .addHealAmount
-	ld b, 100 ; Super Potion heal amount
+	ld b, 100 ; Super Potion heal amount ; PureRGBnote: CHANGED: super potion heals 100 now instead of 50
 	jr z, .addHealAmount
-	ld b, 50 ; Potion heal amount
+	ld b, 50 ; Potion heal amount ; PureRGBnote: CHANGED: super potion heals 50 now instead of 20
 .addHealAmount
 	pop de
 	pop hl
@@ -1281,7 +1311,7 @@ ItemUseMedicine:
 	jr nz, .updateInBattleData
 	ld bc, wPartyMon1Status - (wPartyMon1MaxHP + 1)
 	add hl, bc
-	; FIXED: undo burn/paralyze negative stat effects
+;;;;;;;;;; shinpokerednote: FIXED: reset burn and paralyze stat drops on healing via full restore
 	ld a, [wIsInBattle]
 	and a
 	jr z, .clearParBrn	;do not adjust the stats if not currently in battle
@@ -1297,10 +1327,10 @@ ItemUseMedicine:
 	pop de
 	pop hl
 .clearParBrn
-
+;;;;;;;;;;
 	xor a
 	ld [hl], a ; remove the status ailment in the party data
-	ld [wPlayerToxicCounter], a	;clear toxic counter
+	ld [wPlayerToxicCounter], a	; shinpokerednote: FIXED: clear toxic counter
 .updateInBattleData
 	ld h, d
 	ld l, e
@@ -1415,7 +1445,7 @@ ItemUseMedicine:
 	cp RARE_CANDY
 	jp z, .useRareCandy
 	cp APEX_CHIP
-	jp z, .useApexChip
+	jp z, .useApexChip ; PureRGBnote: ADDED: specific code for using an apex chip
 	push hl
 	sub HP_UP
 	add a
@@ -1426,12 +1456,12 @@ ItemUseMedicine:
 	jr nc, .noCarry2
 	inc h
 .noCarry2
-	ld a, 34 ; 10 NEW: vitamins are ~3.4 times as effective
+	ld a, 34 ; 10 ; PureRGBnote: CHANGED: vitamins are ~3.4 times as effective
 	ld b, a
 	ld a, [hl] ; a = MSB of stat experience of the appropriate stat
 	cp 100 ; is there already at least 25600 (256 * 100) stat experience?
 	jr nc, .vitaminNoEffect ; if so, vitamins can't add any more
-	add b ; add NEW: now 8704 EXP (256*34) stat experience OLD: 2560 (256 * 10) 
+	add b ; add ; PureRGBnote: CHANGED: now 8704 EXP (256*34) stat experience OLD: 2560 (256 * 10) 
 	jr nc, .noCarry3 ; a carry should be impossible here, so this will always jump
 	ld a, 255
 .noCarry3
@@ -1461,6 +1491,7 @@ ItemUseMedicine:
 	ld hl, VitaminStatRoseText
 	call PrintText
 	jp RemoveUsedItem
+;;;;;;;;;; PureRGBnote: CHANGED: text for rare candy and vitamin "had no effect" differ now, with the vitamin one indicating it can't be raised further via items specifically.
 .rareCandyNoEffect
 	pop hl
 	ld hl, RareCandyNoEffectText
@@ -1469,6 +1500,7 @@ ItemUseMedicine:
 	pop hl
 	ld hl, VitaminNoEffectText
 .printNoEffect
+;;;;;;;;;;
 	call PrintText
 	jp GBPalWhiteOut
 .recalculateStats
@@ -1567,6 +1599,7 @@ ItemUseMedicine:
 	pop af
 	ld [wWhichPokemon], a
 	jp RemoveUsedItem
+;;;;;;;;;; PureRGBnote: ADDED: code for maximizing DVs after using an apex chip and displaying the usage text.
 .useApexChip	
 	push hl
 	ld bc, wPartyMon1DVs - wPartyMon1
@@ -1633,6 +1666,7 @@ ApexChipDVsMaxedText:
 ApexChipAlreadyUsedText:
 	text_far _ApexChipAlreadyUsedText
 	text_end
+;;;;;;;;;;
 
 VitaminStatRoseText:
 	text_far _VitaminStatRoseText
@@ -1725,7 +1759,7 @@ ItemUseEscapeRope:
 	set 6, [hl]
 	ld hl, wd72e
 	res 4, [hl]
-	callfar ClearSafariFlags
+	callfar ClearSafariFlags ; PureRGBnote: CHANGED: new function to clear safari flags on warping or flying out of it
 	ld a, 1
 	ld [wEscapedFromBattle], a
 	ld [wActionResultOrTookBattleTurn], a ; item used
@@ -1741,6 +1775,7 @@ ItemUseEscapeRope:
 
 INCLUDE "data/tilesets/escape_rope_tilesets.asm"
 
+; PureRGBnote: ADDED: code for teleporting via the pocket abra item. Has some unique text including the abra's nickname and sound effects.
 ItemUsePocketAbra:
 	ld a, [wIsInBattle]
 	and a
@@ -1829,13 +1864,13 @@ ItemUseRepelCommon:
 ItemUseXAccuracy:
 	ld a, [wIsInBattle]
 	and a
-	jp z, ItemUseInBattle
+	jp z, ItemUseInBattle ; PureRGBnote: CHANGED: text that displays when using out of battle indicates it's for use in battle
 	ld hl, wPlayerBattleStatus2
 	set USING_X_ACCURACY, [hl] ; X Accuracy bit
 	jp PrintItemUseTextAndRemoveItem
 
 ; This function is bugged and never works. It always jumps to ItemUseNotTime.
-; The Card Key is handled in a different way.
+; The Card Key is handled in a different way. ; PureRGBnote: CHANGED: unused code commented out
 ItemUseCardKey:
 	jp ItemUseNotTime
 ;	xor a
@@ -1890,7 +1925,7 @@ ItemUseCardKey:
 ItemUsePokedoll:
 	ld a, [wIsInBattle]
 	dec a
-	jp nz, ItemUseInBattle
+	jp nz, ItemUseInBattle ; PureRGBnote: CHANGED: text that displays when using out of battle indicates it's for use in battle
 	ld a, $01
 	ld [wEscapedFromBattle], a
 	jp PrintItemUseTextAndRemoveItem
@@ -1898,7 +1933,7 @@ ItemUsePokedoll:
 ItemUseGuardSpec:
 	ld a, [wIsInBattle]
 	and a
-	jp z, ItemUseInBattle
+	jp z, ItemUseInBattle ; PureRGBnote: CHANGED: text that displays when using out of battle indicates it's for use in battle
 	ld hl, wPlayerBattleStatus2
 	set PROTECTED_BY_MIST, [hl] ; Mist bit
 	jp PrintItemUseTextAndRemoveItem
@@ -1914,7 +1949,7 @@ ItemUseMaxRepel:
 ItemUseDireHit:
 	ld a, [wIsInBattle]
 	and a
-	jp z, ItemUseInBattle
+	jp z, ItemUseInBattle ; PureRGBnote: CHANGED: text that displays when using out of battle indicates it's for use in battle
 	ld hl, wPlayerBattleStatus2
 	set GETTING_PUMPED, [hl] ; Focus Energy bit
 	jp PrintItemUseTextAndRemoveItem
@@ -1923,7 +1958,7 @@ ItemUseXStat:
 	ld a, [wIsInBattle]
 	and a
 	jr nz, .inBattle
-	call ItemUseInBattle
+	call ItemUseInBattle ; PureRGBnote: CHANGED: text that displays when using out of battle indicates it's for use in battle
 	ld a, 2
 	ld [wActionResultOrTookBattleTurn], a ; item not used
 	ret
@@ -1988,8 +2023,10 @@ ItemUsePokeflute:
 	ld hl, PlayedFluteNoEffectText
 	jp PrintText
 .inBattle
+;;;;;;;;;; PureRGBnote: ADDED: prevents AI from instantly preferring reapplying sleep after having healed it
 	ld a, [wBattleMonStatus]
 	ld [wAITargetMonStatus], a
+;;;;;;;;;;
 	xor a
 	ld [wWereAnyMonsAsleep], a
 	ld b, ~SLP_MASK
@@ -2001,8 +2038,10 @@ ItemUsePokeflute:
 ; if it's a trainer battle
 	ld hl, wEnemyMon1Status
 	call WakeUpEntireParty
+;;;;;;;;;; PureRGBnote: ADDED: prevents AI from instantly preferring reapplying sleep after having healed it
 	ld a, 1
 	ld [wAIMoveSpamAvoider], a ; load this value so the AI doesn't spam status moves right after you heal them
+;;;;;;;;;;
 .skipWakingUpEnemyParty
 	ld hl, wBattleMonStatus
 	ld a, [hl]
@@ -2111,7 +2150,8 @@ CoinCaseNumCoinsText:
 	text_far _CoinCaseNumCoinsText
 	text_end
 
-ItemUseOldRod:
+; PureRGBnote: CHANGED: now has 50% chance of landing goldeen and 50% chance of landing magikarp.
+ItemUseOldRod: 
 	call FishingInit
 	jp c, ItemUseNotTime
 	call Random
@@ -2125,7 +2165,8 @@ ItemUseOldRod:
 	ld a, $1 ; set bite
 	jr RodResponse
 
-ItemUseGoodRod:
+; PureRGBnote: CHANGED: now lands a different set of pokemon depending if you're fishing in a lake/pond/river or the ocean.
+ItemUseGoodRod: 
 	call FishingInit
 	jp c, ItemUseNotTime
 	call Random
@@ -2163,6 +2204,7 @@ ItemUseGoodRod:
 INCLUDE "data/wild/good_rod.asm"
 INCLUDE "data/maps/ocean_maps.asm"
 
+; PureRGBnote: ADDED: super rod can land alternate palette pokemon depending on where you fish.
 ItemUseSuperRod:
 	call FishingInit
 	jp c, ItemUseNotTime
@@ -2219,7 +2261,7 @@ FishingInit:
 	call PrintText
 	ld a, SFX_HEAL_AILMENT
 	call PlaySound
-	ld c, 20
+	ld c, 20 ; PureRGBnote: CHANGED: reduce the artificial delay on initiating fishing.
 	call DelayFrames
 	and a
 	ret
@@ -2230,6 +2272,7 @@ FishingInit:
 ItemNotYours:
 	jp ItemUseNotYoursToUse
 
+; PureRGBnote: CHANGED: ADDED: itemfinder will make you face in the direction of the item it detected. 
 ItemUseItemfinder:
 	ld a, [wIsInBattle]
 	and a
@@ -2265,7 +2308,7 @@ ItemUseItemfinder:
 	ld hl, ItemfinderFoundItemText
 	call PrintText
 	ld a, 1
-	ld [wSawItemFinderText], a ; only display the "yes! itemfinder found an item!" text once per game restart
+	ld [wSawItemFinderText], a ; PureRGBnote: CHANGED: only display the "yes! itemfinder found an item!" text once per game restart
 .doDirectionFacing
 	ld a, [wItemFinderItemDirection]
 	and a ; a = 0 means we're on top of the item
@@ -2363,7 +2406,7 @@ ItemUsePPRestore:
 	jr .chooseMove
 .PPNotMaxedOut
 	ld a, [hl]
-	add 3 << 6 ; increase PP Up count by 1
+	add 3 << 6 ; increase PP Up count by 3 (maximizes PP) ; PureRGBnote: CHANGED: PP up maximizes PP on a move in one usage
 	ld [hl], a
 	ld a, 1 ; 1 PP Up used
 	ld [wUsingPPUp], a
@@ -2508,10 +2551,12 @@ PPRestoredText:
 UnusableItem:
 	jp ItemUseNotTime
 
+; PureRGBnote: ADDED: text for items that should be sold and have no other use
 ValuableItem:
 	ld hl, ItemUseValuableText
 	jp ItemUseFailed
 
+; PureRGBnote: ADDED: text for fossils indicating they may be better deposited into the PC until a use for them is found.
 FossilItem:
 	ld hl, ItemUseFossilText
 	jp ItemUseFailed
@@ -2535,7 +2580,7 @@ ItemUseTMHM:
 	call CopyToStringBuffer
 	pop af
 	ld hl, BootedUpTMText
-;;;;;
+;;;;;;;;;; PureRGBnote: ADDED: booting up a TM or HM both have a little sound effect now
 	jr nc, .playTMSound
 	ld hl, BootedUpHMText
 .playHMSound
@@ -2546,12 +2591,12 @@ ItemUseTMHM:
 	push hl
 	ld a, SFX_59
 .printBootedUpMachineText
-	call PlaySoundWaitForCurrent ; CHANGED: play a sound for booting up a HM
+	call PlaySoundWaitForCurrent ; play a sound for booting up a HM
 	call WaitForSoundToFinish
 	ld a, SFX_LEDGE
 	call PlaySoundWaitForCurrent 
 	pop hl
-;;;;;
+;;;;;;;;;;
 	call PrintText
 	ld hl, TeachMachineMoveText
 	call PrintText
@@ -2664,6 +2709,7 @@ ItemUseNotTime:
 	ld hl, ItemUseNotTimeText
 	jr ItemUseFailed
 
+; PureRGBnote: ADDED: text for items that are meant for use in battle indicating that
 ItemUseInBattle:
 	ld hl, ItemUseInBattleText
 	jr ItemUseFailed
@@ -2676,7 +2722,7 @@ ThrowBallAtTrainerMon:
 	call RunDefaultPaletteCommand
 	call LoadScreenTilesFromBuffer1 ; restore saved screen
 	call Delay3
-	; choose which toss animation to use
+	; PureRGBnote: ADDED: choose which toss animation to use before entering the animation code
 	call MapBallToAnimation
 	predef MoveAnimation ; do animation
 	ld hl, ThrowBallAtTrainerMonText1
@@ -2837,7 +2883,7 @@ AddBonusPP:
 .addAmount
 	add b
 	ld b, a
-	;ld a, [wUsingPPUp] NEW: PP UPs max out PP in one go
+	;ld a, [wUsingPPUp] ; PureRGBnote: CHANGED: PP UPs max out PP in one go
 	;dec a ; is the player using a PP Up right now?
 	;jr z, .ppUP ; if so, only add the bonus three times
 	dec c
@@ -3260,10 +3306,13 @@ ReadSuperRodData:
 	ld e, $0 ; no bite yet
 
 	call Random
+;;;;;;;;;; PureRGBnote: CHANGED: fishing rods now have a hard 1/4 chance of not catching a pokemon instead of a repeated 1/2 chance.
 	and %11 ; 2-bit random number
 	and a
 	ret z ; 25% chance of no battle (25% chance of 2 bits being 00)
+;;;;;;;;;;
 
+;;;;;;;;;; PureRGBnote: ADDED: alt palette pokemon can show up when fishing in places with the super rod.
 .RandomLoop
 	call Random
 	and %11 ; 2-bit random number
@@ -3279,6 +3328,7 @@ ReadSuperRodData:
 	callfar CheckWildPokemonPalettes ; stores the palette flag if the given pokemon should be alt palette
 	pop af
 	pop hl
+;;;;;;;;;;
 	; get the mon
 	add a
 	ld c, a

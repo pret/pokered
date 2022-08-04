@@ -1,3 +1,4 @@
+; PureRGBnote: ADDED: code to store which wild pokemon use alternate palettes on loading a map.
 GetWildPokemonPalettes::
 	;loads the palette flag array for the current map into wWildMonPalettes, which is 3 bytes long.
 	ld hl, WildPalettePointers

@@ -16,6 +16,7 @@ InitBattleVariables:
 	ld [wPlayerMonNumber], a
 	ld [wEscapedFromBattle], a
 	ld [wMapPalOffset], a
+;;;;;;;;;; PureRGBnote: ADDED: clear various new AI-related variables.
 	ld [wAIMoveSpamAvoider], a
 	ld [wPreviousEnemySelectedMove], a
 	ld [wPreviousPlayerSelectedMove], a
@@ -26,6 +27,7 @@ InitBattleVariables:
 	and $81	;clear bits 1 to 6 only by ANDing with 1000 0001
 	ld [wAIWhichPokemonSentOutAlready], a
 	xor a
+;;;;;;;;;;
 	ld hl, wPlayerHPBarColor
 	ld [hli], a ; wPlayerHPBarColor
 	ld [hl], a ; wEnemyHPBarColor
@@ -42,9 +44,11 @@ InitBattleVariables:
 	jr c, .notSafariBattle
 	cp SAFARI_ZONE_CENTER_REST_HOUSE
 	jr nc, .notSafariBattle
+;;;;;;;;;; PureRGBnote: ADDED: we can be in the safari zone maps but without safari zone battles depending on the type of safari.
 	ld a, [wSafariType]
 	and a
 	jr nz, .notSafariBattle ; only Classic safari type uses original safari battles
+;;;;;;;;;;
 	ld a, BATTLE_TYPE_SAFARI
 	ld [wBattleType], a
 .notSafariBattle

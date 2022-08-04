@@ -1,11 +1,11 @@
-BigRecoilEffect_:
+BigRecoilEffect_: ; PureRGBnote: ADDED: big recoil effect does 50% of the damage inflicted, used with selfdestruct, explosion, and struggle.
 	call RecoilEffect_
 	call GotRecoilDamage
 	ret
 
 DefaultRecoilEffect_:
 	call RecoilEffect_
-	srl b
+	srl b ; PureRGBnote: CHANGED: recoil effect does 50% by default, so divide that by 2 here to get the original 25% of damage done.
 	rr c
 	call GotRecoilDamage
 	ret

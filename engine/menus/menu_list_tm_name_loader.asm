@@ -1,4 +1,5 @@
-
+; PureRGBnote: ADDED: code that displays the name of a TM when scrolling over it on various list screens that can contain TMs.
+;                     this code is called from the generic list menu code if the menu that called it indicates it can contain TMs via wListWithTMText
 CheckLoadTmName:: ; loads a TM name when the cursor is on TMs
 	push af
 	ld a, [wListMenuID]
@@ -68,12 +69,9 @@ CheckLoadTmName:: ; loads a TM name when the cursor is on TMs
 	pop de
 	pop hl
 	pop bc
-	pop af
-	ret
 .noAction
 	pop af
 	ret
-
 
 ClearTMTextBox:
 	ld a, [wTMTextShown]

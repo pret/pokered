@@ -70,9 +70,11 @@ GainExperience:
 	add hl, de
 	ld b, [hl] ; party mon OTID
 	inc hl
+;;;;;;;;;; PureRGBnote: ADDED: new item that causes all pokemon to gain EXP as if they were received from a trade.
 	ld a, [wBoosterChipActive] ; always get traded pokemon boost if BOOSTER CHIP was used.
 	and a
 	jr nz, .tradedMon
+;;;;;;;;;;
 	ld a, [wPlayerID]
 	cp b
 	jr nz, .tradedMon
@@ -153,10 +155,12 @@ GainExperience:
 	call PrintText
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a
+;;;;;;;;;; PureRGBnote: ADDED: EXP bar is optional and will only render if the option is enabled.
 	call HasExpBar
 	jr z, .noExpBar
-	farcall AnimateEXPBar	;joenote - animate the exp bar
+	farcall AnimateEXPBar	;shinpokerednote: ADDED: animate the exp bar
 .noExpBar
+;;;;;;;;;;
 	call LoadMonData
 	pop hl
 	ld bc, wPartyMon1Level - wPartyMon1Exp
@@ -165,7 +169,8 @@ GainExperience:
 	farcall CalcLevelFromExperience
 	pop hl
 	ld a, [hl] ; current level
-	ld [wTempFlag0], a	;FIXED: fixing skip move-learn glitch: need to store the current level in wram
+;;;;;;;;;; PureRGBnote: FIXED: fixing skip move-learn glitch: need to store the current level in wram
+	ld [wTempFlag0], a	
 	;wTempFlag0 / wTempCoins1 was chosen because it's used only for slot machine and gets defaulted to 1 during the mini-game
 	cp d
 	jp z, .nextMon ; if level didn't change, go to next mon
@@ -175,6 +180,7 @@ GainExperience:
 	farcall KeepEXPBarFull	;joenote - animate the exp bar
 	pop hl
 .noExpBar2
+;;;;;;;;;;
 	ld a, [wCurEnemyLVL]
 	push af
 	push hl
@@ -259,10 +265,12 @@ GainExperience:
 	call PrintText
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a
+;;;;;;;;;; PureRGBnote: ADDED: EXP bar is optional and will only render if the option is enabled.
 	call HasExpBar
 	jr z, .noExpBar3
-	farcall AnimateEXPBarAgain	;joenote - animate exp bar
+	farcall AnimateEXPBarAgain	;shinpokerednote: ADDED: animate the exp bar
 .noExpBar3
+;;;;;;;;;;
 	call LoadMonData
 	ld d, $1
 	callfar PrintStatsBox
@@ -272,8 +280,8 @@ GainExperience:
 	ld [wMonDataLocation], a
 	ld a, [wd0b5]
 	ld [wd11e], a
-	;;;;;;;;;;;;;;;;;;;;
-	;FIXED: fixing skip move-learn glitch: here is where moves are learned from level-up
+;;;;;;;;;;;;;;;;;;;;
+;shinpokerednote: FIXED: fixing skip move-learn glitch: here is where moves are learned from level-up
 	ld a, [wCurEnemyLVL]	; load the level to advance to into a. this starts out as the final level.
 	ld c, a	; load the final level to grow to over to c
 	ld a, [wTempFlag0]	; load the current level into a
@@ -288,7 +296,7 @@ GainExperience:
 	ld a, b	;load the current level into a
 	cp c	;compare it with the final level
 	jr nz, .inc_level	;loop back again if final level has not been reached
-	;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;
 	ld hl, wCanEvolveFlags
 	ld a, [wWhichPokemon]
 	ld c, a

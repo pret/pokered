@@ -194,7 +194,7 @@ DisplayListMenuIDLoop::
 	call CheckForTM
 	jp DisplayListMenuIDLoop
 .handleListSkip
-	callfar WrapListMenu
+	call WrapListMenu ; NOTE: WrapListMenu is in bank1, which will always be loaded when this line is hit
 	jp DisplayListMenuIDLoop
 
 

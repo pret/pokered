@@ -1,3 +1,4 @@
+;shinpokerednote: ADDED: doubles the given stat
 DoubleSelectedStats:
 	ldh a, [hWhoseTurn]
 	and a
@@ -81,7 +82,7 @@ DoubleSelectedStats:
 ;	dec hl
 ;	ret
 
-;doubles attack if burned or quadruples speed if paralyzed.
+;shinpokerednote: ADDED: doubles attack if burned or quadruples speed if paralyzed.
 ;It's meant to be run right before healing paralysis or burn so as to 
 ;undo the stat changes.
 UndoBurnParStats:
@@ -113,7 +114,7 @@ UndoBurnParStats:
 	ld [de], a	;reset the stat change bits
 	ret
 
-;joenote - this function puts statexp per enemy pkmn level into de
+;shinpokerednote: ADDED: this function puts statexp per enemy pkmn level into de
 ;requires a, b, de, and wCurEnemyLVL
 CalcEnemyStatEXP:
 	ld a, [wOptions2]	;load game options

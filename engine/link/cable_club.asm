@@ -282,7 +282,7 @@ CableClub_DoBattleOrTradeAgain:
 	call ClearScreen
 	call Delay3
 	ld b, SET_PAL_OVERWORLD
-	call RunPaletteCommand ;gbcnote - refresh pal
+	call RunPaletteCommand ;shinpokerednote: gbcnote: refresh pal
 	ld hl, wOptions
 	res 7, [hl]
 	predef InitOpponent
@@ -315,7 +315,7 @@ TradeCenter_SelectMon:
 	call ClearScreen
 	call Delay3
 	ld b, SET_PAL_OVERWORLD
-	call RunPaletteCommand ;gbcnote - refresh pal
+	call RunPaletteCommand ;shinpokerednote: gbcnote: refresh pal
 	call LoadTrainerInfoTextBoxTiles
 	call TradeCenter_DrawPartyLists
 	call TradeCenter_DrawCancelBox
@@ -634,7 +634,7 @@ TradeCenter_DisplayStats:
 	predef StatusScreen2
 	call Delay3
 	ld b, SET_PAL_OVERWORLD
-	call RunPaletteCommand ;gbcnote - refresh pal
+	call RunPaletteCommand ;shinpokerednote: gbcnote: refresh pal
 	call GBPalNormal
 	call LoadTrainerInfoTextBoxTiles
 	call TradeCenter_DrawPartyLists
@@ -773,12 +773,14 @@ TradeCenter_Trade:
 	ld a, [wTradingWhichPlayerMon]
 	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes
+;;;;;;;;;; PureRGBnote: ADDED: need to show alternate palette pokemon for the player's pokemon if the flag is set
 	ld bc, wPartyMon1Flags - wPartyMon1
 	add hl, bc
 	ld a, [hl]
 	and 1
 	ld [wIsAltPalettePkmn], a ; should the player's pokemon be shown as having an alt palette
 	ld bc, wPartyMon1OTID - wPartyMon1Flags
+;;;;;;;;;;
 	add hl, bc
 	ld a, [hli]
 	ld [wTradedPlayerMonOTID], a
@@ -794,12 +796,14 @@ TradeCenter_Trade:
 	ld a, [wTradingWhichEnemyMon]
 	ld bc, wEnemyMon2 - wEnemyMon1
 	call AddNTimes
+;;;;;;;;;; PureRGBnote: ADDED: need to show alternate palette pokemon for the received pokemon if the flag is set
 	ld bc, wEnemyMon1Flags - wEnemyMon1
 	add hl, bc
 	ld a, [hl]
 	and 1
 	ld [wIsAltPalettePkmnData], a ; should the received pokemon be shown as having an alt palette
 	ld bc, wEnemyMon1OTID - wEnemyMon1Flags
+;;;;;;;;;;
 	add hl, bc
 	ld a, [hli]
 	ld [wTradedEnemyMonOTID], a
@@ -871,7 +875,7 @@ TradeCenter_Trade:
 	call LoadTrainerInfoTextBoxTiles
 	call Delay3
 	ld b, SET_PAL_OVERWORLD
-	call RunPaletteCommand ;gbcnote - refresh pal
+	call RunPaletteCommand ;shinpokerednote: gbcnote: refresh pal
 	call Serial_PrintWaitingTextAndSyncAndExchangeNybble
 	ld c, 40
 	call DelayFrames

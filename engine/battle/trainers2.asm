@@ -1,3 +1,5 @@
+; PureRGBnote: MOVED: this function was slightly modified and moved outside of home bank for more space in the home bank.
+
 GetTrainerInformation:: 
 	call GetTrainerName
 	ld a, [wLinkState]

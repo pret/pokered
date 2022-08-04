@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: this code is simply to set up what happens when pressing A on the PC in the new saffron city fossil super nerd's house.
+
 FossilGuysPC:
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP

@@ -22,7 +22,7 @@ KabutopsFossilText::
 	text_far _KabutopsFossilText
 	text_end
 
-;;;;;;;; PureRGBnote - FIXED: Updated to display the correct pokemon palette
+;;;;;;;; PureRGBnote: FIXED: Updated function to display the correct pokemon palette
 
 DisplayMonFrontSpriteInBox:
 ; Displays a pokemon's front sprite in a pop-up window.

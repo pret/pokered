@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: one of the new pages in the options menu. This one's for battle-related settings.
+
 DEF PAGE3_OPTION1_LEFT_XPOS EQU 11
 DEF PAGE3_OPTION1_RIGHT_XPOS EQU 14
 DEF PAGE3_OPTION2_LEFT_XPOS EQU 11

@@ -1,3 +1,5 @@
+; shinpokerednote: gbcnote: code from pokemon yellow to allow for proper color on GBC.
+
 LoadBGMapAttributes::
 	ld hl, BGMapAttributesPointers
 	ld c, d

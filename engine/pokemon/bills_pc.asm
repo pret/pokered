@@ -363,7 +363,7 @@ KnowsHMMove::
 	ld b, NUM_MOVES
 .loop
 	ld a, [hli]
-	;push hl ;FIXED: pokemon are never considered to have HMs
+	;push hl ; PureRGBnote: FIXED: pokemon are never considered to have HMs, allows them to be stored in daycare no matter what
 	;push bc
 	;ld hl, HMMoveArray
 	;ld de, 1
