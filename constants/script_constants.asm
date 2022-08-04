@@ -38,10 +38,12 @@ DEF NUM_NPC_TRADES EQU const_value
 	const TRADE_DIALOGSET_CASUAL
 	const TRADE_DIALOGSET_POLITE
 	const TRADE_DIALOGSET_HAPPY
+;;;;;;;;;; PureRGBnote: ADDED: new trade dialog sets
 	const TRADE_DIALOGSET_SPROCKET
 	const TRADE_DIALOGSET_CASUAL_COLOR
 	const TRADE_DIALOGSET_POLITE_COLOR
 	const TRADE_DIALOGSET_HAPPY_COLOR
+;;;;;;;;;;
 
 ; badges
 ; wObtainedBadges and wBeatGymFlags bits

@@ -62,9 +62,11 @@ ENDM
 	trainer_const CHANNELER      ; $2D
 	trainer_const AGATHA         ; $2E
 	trainer_const LANCE          ; $2F
+;;;;;;;;;; PureRGBnote: ADDED: new trainer types
 	trainer_const COOL_KID       ; $30
 	trainer_const FIREFIGHTER    ; $31
 	trainer_const RANGER         ; $32
 	trainer_const RANGER_F       ; $33
 	trainer_const ROOKIE         ; $34
+;;;;;;;;;;
 DEF NUM_TRAINERS EQU const_value - 1

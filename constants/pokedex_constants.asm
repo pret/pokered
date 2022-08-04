@@ -157,4 +157,4 @@
 	const DEX_MEWTWO     ; 150
 	const DEX_MEW        ; 151
 
-DEF NUM_POKEMON EQU const_value
+DEF NUM_POKEMON EQU const_value ; PureRGBnote: CHANGED: missingno is included as index 0 now
