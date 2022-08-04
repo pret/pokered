@@ -143,14 +143,14 @@ TryingToLearn:
 	inc hl
 	ld a, [wNumMovesMinusOne]
 	ld [hli], a ; wMaxMenuItem
-	ld a, A_BUTTON | START | B_BUTTON
+	ld a, A_BUTTON | START | B_BUTTON ; PureRGBnote: ADDED: START button is tracked in this menu 
 	ld [hli], a ; wMenuWatchedKeys
 	ld [hl], 0 ; wLastMenuItem
 	ld hl, hUILayoutFlags
 	set 1, [hl]
 .menuLoop	
 	call HandleMenuInput
-	bit BIT_A_BUTTON, a ; FIXED: Press START to learn a move instead of A to prevent accidental mashing A move-forget woes
+	bit BIT_A_BUTTON, a ; PureRGBnote: FIXED: Press START to learn a move instead of A to prevent accidental mashing A move-forget woes
 	jr nz, .pressStart
 	ld hl, hUILayoutFlags
 	res 1, [hl]
@@ -167,9 +167,9 @@ TryingToLearn:
 	add hl, bc
 	ld a, [hl]
 	push af
-	cp STRENGTH
+	cp STRENGTH ; PureRGBnote: FIXED: if we are allowed to forget HM moves, strength needs to be turned off when we forget it
 	call z, ResetStrengthOverworldBit
-	;push bc   ; FIXED: moves are never considered HMs and can always be deleted if desired
+	;push bc   ; PureRGBnote: FIXED: moves are never considered HMs and can always be deleted if desired
 	;call IsMoveHM
 	;pop bc
 	pop de
@@ -184,7 +184,7 @@ TryingToLearn:
 ;	call PrintText
 ;	pop hl
 ;	jr .loop
-.pressStart ; FIXED: explain the start button is used to select a move if A is pressed.
+.pressStart ; PureRGBnote: FIXED: explain the start button is used to select a move now if A is pressed.
 	push hl
 	ld hl, PressStartToLearnText
 	call PrintText
@@ -232,13 +232,13 @@ OneTwoAndText:
 	text_asm
 	ld a, [wIsInBattle]
 	and a
-	jr nz, .inBattlePoof ; FIXED: SFX_SWAP doesn't exist in the battle audio engine so it would play an arbitrary sound
+	jr nz, .inBattlePoof ; PureRGBnote: FIXED: SFX_SWAP doesn't exist in the battle audio engine so it would play an arbitrary sound
 	ld a, SFX_SWAP
 	call PlaySoundWaitForCurrent
 	jr .done
 .inBattlePoof
 	push bc
-	farcall Music_LearnMovePoofInBattle ; play in-battle poof sound
+	farcall Music_LearnMovePoofInBattle ; play in-battle poof sound the same way the pokeflute is played in battle
 	pop bc
 .done
 	ld hl, PoofText
@@ -251,6 +251,6 @@ ForgotAndText:
 	text_far _ForgotAndText
 	text_end
 
-;HMCantDeleteText: ; FIXED: moves are never considered HMs and can always be deleted if desired
+;HMCantDeleteText: ; PureRGBnote: FIXED: moves are never considered HMs and can always be deleted if desired
 ;	text_far _HMCantDeleteText
 ;	text_end

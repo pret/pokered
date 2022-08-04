@@ -1,5 +1,5 @@
 ; The first of three duplicated sound engines.
-; PureRGBnote: audionote: This file was heavily modified to be closer to pokeyellow's audio engine
+; shinpokerednote: audionote: This file was heavily modified to be closer to pokeyellow's audio engine
 
 Audio1_UpdateMusic::
 	ld c, Ch1

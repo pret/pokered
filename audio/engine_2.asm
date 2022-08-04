@@ -1,4 +1,4 @@
-; PureRGBnote: audionote: This file was heavily modified to be closer to pokeyellow's audio engine
+; shinpokerednote: audionote: This file was heavily modified to be closer to pokeyellow's audio engine
 
 Audio2_PlaySound::
 	ld [wSoundID], a

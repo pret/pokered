@@ -1,3 +1,6 @@
+; PureRGBnote: ADDED: code for performing item duplication "glitch" when encountering missingno.
+; except now it's intended functionality
+; it only triggers if we have watched the old man catch a pokemon since the last time we turned the game on before encountering missingno.
 MissingNoBattleStart::
 	ld a, [wItemDuplicationActive]
 	and a

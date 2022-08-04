@@ -2,7 +2,7 @@ AbleToPlaySlotsCheck:
 	ld a, [wSpritePlayerStateData1ImageIndex]
 	and $8
 	jr z, .done ; not able
-	CheckEvent EVENT_GOT_COIN_CASE
+	CheckEvent EVENT_GOT_COIN_CASE ; PureRGBnote: CHANGED: coin case is an event instead of an item now.
 	ld b, (GameCornerCoinCaseText_id - TextPredefs) / 2 + 1
 	jr z, .printCoinCaseRequired
 	ld hl, wPlayerCoins
