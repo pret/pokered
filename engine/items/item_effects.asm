@@ -2919,7 +2919,7 @@ FindWildLocationsOfMon:
 
 CheckMapForMon:
 	inc hl
-	ld b, $a
+	ld b, NUM_WILDMONS
 .loop
 	ld a, [wd11e]
 	cp [hl]
