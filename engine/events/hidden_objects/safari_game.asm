@@ -37,7 +37,7 @@ SafariZoneGameOver:
 	ld a, SFX_SAFARI_ZONE_PA
 	call PlayMusic
 .waitForMusicToPlay
-	ld a, [wChannelSoundIDs + Ch5]
+	ld a, [wChannelSoundIDs + CHAN5]
 	cp SFX_SAFARI_ZONE_PA
 	jr nz, .waitForMusicToPlay
 	ld a, TEXT_SAFARI_GAME_OVER

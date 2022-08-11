@@ -146,10 +146,10 @@ PlaySound::
 	and a
 	jr z, .next
 	xor a
-	ld [wChannelSoundIDs + Ch5], a
-	ld [wChannelSoundIDs + Ch6], a
-	ld [wChannelSoundIDs + Ch7], a
-	ld [wChannelSoundIDs + Ch8], a
+	ld [wChannelSoundIDs + CHAN5], a
+	ld [wChannelSoundIDs + CHAN6], a
+	ld [wChannelSoundIDs + CHAN7], a
+	ld [wChannelSoundIDs + CHAN8], a
 .next
 	ld a, [wAudioFadeOutControl]
 	and a ; has a fade-out length been specified?

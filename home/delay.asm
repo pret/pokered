@@ -18,7 +18,7 @@ WaitForSoundToFinish::
 	ret nz
 	push hl
 .waitLoop
-	ld hl, wChannelSoundIDs + Ch5
+	ld hl, wChannelSoundIDs + CHAN5
 	xor a
 	or [hl]
 	inc hl

@@ -3,7 +3,7 @@ Music_PokeFluteInBattle::
 	ld a, SFX_CAUGHT_MON
 	call PlaySoundWaitForCurrent
 	; then immediately overwrite the channel pointers
-	ld hl, wChannelCommandPointers + Ch5 * 2
+	ld hl, wChannelCommandPointers + CHAN5 * 2
 	ld de, SFX_Pokeflute_Ch5
 	call Audio2_OverwriteChannelPointer
 	ld de, SFX_Pokeflute_Ch6
