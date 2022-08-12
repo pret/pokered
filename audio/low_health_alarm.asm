@@ -20,7 +20,7 @@ Music_DoLowHealthAlarm::
 
 .noTone
 	ld a, $86
-	ld [wChannelSoundIDs + Ch5], a ;disable sound channel?
+	ld [wChannelSoundIDs + CHAN5], a ;disable sound channel?
 	ld a, [wLowHealthAlarm]
 	and $7f ;decrement alarm timer.
 	dec a
@@ -34,7 +34,7 @@ Music_DoLowHealthAlarm::
 .disableAlarm
 	xor a
 	ld [wLowHealthAlarm], a  ;disable alarm
-	ld [wChannelSoundIDs + Ch5], a  ;re-enable sound channel?
+	ld [wChannelSoundIDs + CHAN5], a  ;re-enable sound channel?
 	ld de, .toneDataSilence
 	jr .playTone
 

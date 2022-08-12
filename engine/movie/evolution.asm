@@ -8,7 +8,7 @@ EvolveMon:
 	push af
 	xor a
 	ld [wLowHealthAlarm], a
-	ld [wChannelSoundIDs + Ch5], a
+	ld [wChannelSoundIDs + CHAN5], a
 	dec a ; SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
