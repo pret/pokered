@@ -438,7 +438,7 @@ SFX_Vine_Whip::
 
 ;SFX_Battle_16::
 ;	channel_count 1
-;	channel 8, SFX_Battle_16_Ch8
+;	channel 8, SFX_Battle_16_Ch8 ; PureRGBnote: REMOVED: unused move sound effect
 
 SFX_Battle_17::
 	channel_count 1

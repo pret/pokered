@@ -189,7 +189,7 @@ Audio1_sound_ret:
 	ld hl, wChannelFlags2
 	add hl, bc
 	res BIT_EXECUTE_MUSIC, [hl]
-	cp Ch7
+	cp CHAN7
 	jr nz, .skipSfxChannel3
 ; restart hardware channel 3 (wave channel) output
 	ld a, $0
@@ -353,7 +353,7 @@ Audio1_note_type:
 	ld a, c
 	cp CHAN3
 	jr z, .musicChannel3
-	cp Ch7
+	cp CHAN7
 	jr nz, .skipChannel3
 	ld hl, wSfxWaveInstrument
 	jr .channel3
@@ -775,7 +775,7 @@ Audio1_note_pitch:
 	ld a, c
 	cp CHAN3
 	jr z, .channel3
-	cp Ch7
+	cp CHAN7
 	jr nz, .notChannel3
 .channel3
 	ld b, 0
@@ -896,7 +896,7 @@ Audio1_ApplyDutyCycleAndSoundLength:
 	ld a, c
 	cp CHAN3
 	jr z, .skipDuty ; if music channel 3
-	cp Ch7
+	cp CHAN7
 	jr z, .skipDuty ; if sfx channel 3
 ; include duty cycle (except on channel 3 which doesn't have it)
 	ld a, d
@@ -917,7 +917,7 @@ Audio1_ApplyWavePatternAndFrequency:
 	ld a, c
 	cp CHAN3
 	jr z, .channel3
-	cp Ch7
+	cp CHAN7
 	jr nz, .notChannel3
 	; fall through
 .channel3
@@ -1538,7 +1538,7 @@ Audio1_PlaySound::
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
-	ld hl, wChannelCommandPointers + Ch7 * 2 ; sfx wave channel pointer
+	ld hl, wChannelCommandPointers + CHAN7 * 2 ; sfx wave channel pointer
 	ld de, Audio1_CryRet
 	ld [hl], e
 	inc hl
