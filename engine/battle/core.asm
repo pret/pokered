@@ -4077,11 +4077,22 @@ CheckForDisobedience:
 	bit BIT_MARSHBADGE, [hl]
 	ld a, 70
 	jr nz, .next
+;;;;;;;;;; PureRGBnote: CHANGED: traded pokemon disobedience thresholds increase with each badge instead of every second badge.
+	bit BIT_SOULBADGE, [hl]
+	ld a, 60
+	jr nz, .next
 	bit BIT_RAINBOWBADGE, [hl]
 	ld a, 50
 	jr nz, .next
+	bit BIT_THUNDERBADGE, [hl]
+	ld a, 40
+	jr nz, .next
 	bit BIT_CASCADEBADGE, [hl]
 	ld a, 30
+	jr nz, .next
+	bit BIT_BOULDERBADGE, [hl]
+	ld a, 20
+;;;;;;;;;;
 	jr nz, .next
 	ld a, 10
 .next

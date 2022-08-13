@@ -243,6 +243,7 @@ The fifth page contains 6 additional pokemon whose front sprites can be customiz
 - Lance will now turn to face you when you are about to fight him, and you will turn to face him.
 - Coastal water tiles will now load water encounters EXCEPT on route 20 to facilitate the original Missingno Encounter method.
 - The "star shaped grass" tile in viridian forest and the safari zone now loads encounters correctly.
+- Every badge will raise the level traded pokemon will obey you by 10 up until the marshbadge, instead of by 20 levels every 2 badges. The badge explanation text is unchanged, however. This is just for easier usage of in-game traded pokemon during a normal playthrough.
 
 ## Move changes
 - Disable disables the previously selected move of the opponent. If they haven't selected a move yet, it chooses a random move. It has 85% accuracy. It lasts 2-7 turns.
