@@ -47,7 +47,7 @@ SafariZoneGameOver:
 	ld a, SFX_SAFARI_ZONE_PA
 	call PlayMusic
 .waitForMusicToPlay
-	ld a, [wChannelSoundIDs + Ch5]
+	ld a, [wChannelSoundIDs + CHAN5]
 	cp SFX_SAFARI_ZONE_PA
 	jr nz, .waitForMusicToPlay
 ;;;;;;;;;; PureRGBnote: ADDED: special ending text if we completed ranger hunt safari game
