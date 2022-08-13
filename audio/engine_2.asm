@@ -55,7 +55,7 @@ PlaySfx:
 	and a
 	jr z, .playChannel
 	ld a, e
-	cp Ch8
+	cp CHAN8
 	jr nz, .notNoiseChannel
 	ld a, [wSoundID]
 	cp NOISE_INSTRUMENTS_END
@@ -123,7 +123,7 @@ PlaySoundCommon_2:
 	push bc
 	ld b, $0
 	ld c, a
-	cp Ch4
+	cp CHAN4
 	jr c, .skipSettingFlag
 	ld hl, wChannelFlags1
 	add hl, bc
@@ -166,12 +166,12 @@ PlaySoundCommon_2:
 	jr c, .cry
 	jr .done
 .cry
-	ld hl, wChannelSoundIDs + Ch5
+	ld hl, wChannelSoundIDs + CHAN5
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
-	ld hl, wChannelCommandPointers + Ch7 * 2 ; sfx noise channel pointer
+	ld hl, wChannelCommandPointers + CHAN7 * 2 ; sfx noise channel pointer
 	ld de, Noise2_endchannel
 	ld [hl], e
 	inc hl
@@ -344,7 +344,7 @@ Audio2_InitSFXVariables::
 	add hl, de
 	ld [hl], a
 	ld a, e
-	cp Ch5
+	cp CHAN5
 	ret nz
 	ld a, $8
 	ld [rNR10], a

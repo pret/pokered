@@ -1,18 +1,15 @@
-MACRO audio_header
-	db (_NARG - 2) << 6 | \2
-	dw \1_\2
-	IF _NARG > 2
-		db \3
-		dw \1_\3
-	ENDC
-	IF _NARG > 3
-		db \4
-		dw \1_\4
-	ENDC
-	IF _NARG > 4
-		db \5
-		dw \1_\5
-	ENDC
+MACRO channel_count
+	ASSERT 0 < (\1) && (\1) <= NUM_MUSIC_CHANS, \
+		"channel_count must be 1-{d:NUM_MUSIC_CHANS}"
+	DEF _num_channels = \1 - 1
+ENDM
+
+MACRO channel
+	ASSERT 0 < (\1) && (\1) <= NUM_CHANNELS, \
+		"channel id must be 1-{d:NUM_CHANNELS}"
+	dn (_num_channels << 2), \1 - 1 ; channel id
+	dw \2 ; address
+	DEF _num_channels = 0
 ENDM
 
 	const_def $10
@@ -27,9 +24,9 @@ ENDM
 MACRO pitch_sweep
 	db pitch_sweep_cmd
 	IF \2 < 0
-		db (\1 << 4) | (%1000 | (\2 * -1))
+		dn \1, %1000 | (\2 * -1)
 	ELSE
-		db (\1 << 4) | \2
+		dn \1, \2
 	ENDC
 ENDM
 
@@ -45,9 +42,9 @@ DEF square_note_cmd EQU sfx_note_cmd ; $20
 MACRO square_note
 	db square_note_cmd | \1
 	IF \3 < 0
-		db (\2 << 4) | (%1000 | (\3 * -1))
+		dn \2, %1000 | (\3 * -1)
 	ELSE
-		db (\2 << 4) | \3
+		dn \2, \3
 	ENDC
 	dw \4
 ENDM
@@ -60,16 +57,16 @@ DEF noise_note_cmd EQU sfx_note_cmd ; $20
 MACRO noise_note
 	db noise_note_cmd | \1
 	IF \3 < 0
-		db (\2 << 4) | (%1000 | (\3 * -1))
+		dn \2, %1000 | (\3 * -1)
 	ELSE
-		db (\2 << 4) | \3
+		dn \2, \3
 	ENDC
 	db \4
 ENDM
 
 ; arguments: pitch, length [1, 16]
 MACRO note
-	db (\1 << 4) | (\2 - 1)
+	dn \1, \2 - 1
 ENDM
 
 	const_next $b0
@@ -86,7 +83,7 @@ ENDM
 ; can only be used with instruments 1-10, excluding 2
 ; unused
 MACRO drum_note_short
-	db (\1 << 4) | (\2 - 1)
+	note \1, \2
 ENDM
 
 	const_next $c0
@@ -107,9 +104,9 @@ ENDM
 MACRO note_type
 	db note_type_cmd | \1
 	IF \3 < 0
-		db (\2 << 4) | (%1000 | (\3 * -1))
+		dn \2, %1000 | (\3 * -1)
 	ELSE
-		db (\2 << 4) | \3
+		dn \2, \3
 	ENDC
 ENDM
 
@@ -145,7 +142,7 @@ ENDM
 MACRO vibrato
 	db vibrato_cmd
 	db \1
-	db (\2 << 4) | \3
+	dn \2, \3
 ENDM
 
 ; arguments: length [1, 256], octave [1, 8], pitch
@@ -153,7 +150,7 @@ ENDM
 MACRO pitch_slide
 	db pitch_slide_cmd
 	db \1 - 1
-	db ((8 - \2) << 4) | \3
+	dn 8 - \2, \3
 ENDM
 
 ; arguments: duty cycle [0, 3] (12.5%, 25%, 50%, 75%)
@@ -179,7 +176,7 @@ ENDM
 	const stereo_panning_cmd ; $ee
 MACRO stereo_panning
 	db stereo_panning_cmd
-	db (\1 << 4) | \2
+	dn \1, \2
 ENDM
 
 	const unknownmusic0xef_cmd ; $ef
@@ -192,7 +189,7 @@ ENDM
 	const volume_cmd ; $f0
 MACRO volume
 	db volume_cmd
-	db (\1 << 4) | \2
+	dn \1, \2
 ENDM
 
 	const_next $f8

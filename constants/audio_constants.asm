@@ -19,15 +19,15 @@ DEF NUM_NOTES EQU const_value
 ; Audio[1|2|3]_HWChannelBaseAddresses, Audio[1|2|3]_HWChannelDisableMasks,
 ; and Audio[1|2|3]_HWChannelEnableMasks indexes (see audio/engine_[1|2|3].asm)
 	const_def
-	const Ch1 ; 0
-	const Ch2 ; 1
-	const Ch3 ; 2
-	const Ch4 ; 3
+	const CHAN1 ; 0
+	const CHAN2 ; 1
+	const CHAN3 ; 2
+	const CHAN4 ; 3
 DEF NUM_MUSIC_CHANS EQU const_value
-	const Ch5 ; 4
-	const Ch6 ; 5
-	const Ch7 ; 6
-	const Ch8 ; 7
+	const CHAN5 ; 4
+	const CHAN6 ; 5
+	const CHAN7 ; 6
+	const CHAN8 ; 7
 DEF NUM_NOISE_CHANS EQU const_value - NUM_MUSIC_CHANS
 DEF NUM_CHANNELS EQU const_value
 
