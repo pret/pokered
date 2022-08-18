@@ -281,13 +281,13 @@ DepositItemFromItemMenu::
 	jp .next
 .keyItem
 ; if it is a key item, ask whether to deposit first
-    xor a
-    ld [wListWithTMText], a ; stop attempting to display TM names while this Yes no choice is open.
+	xor a
+	ld [wListWithTMText], a ; stop attempting to display TM names while this Yes no choice is open.
 	ld hl, WantToDepositText
 	call PrintText
 	call YesNoChoice
 	ld a, 1
-    ld [wListWithTMText], a ; enable displaying TM names again.
+	ld [wListWithTMText], a ; enable displaying TM names again.
 	ld a, [wCurrentMenuItem]
 	and a
 	ret nz

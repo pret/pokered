@@ -33,8 +33,8 @@ ResetPartyAnimation::
 ; 2: red
 AnimatePartyMon::
 ;;;;;;;;;; mechanicalpennote: ADDED: store which pokemon is being hovered on in the party menu
-    ld hl, wPartySpecies
-    ld a, [wCurrentMenuItem]
+	ld hl, wPartySpecies
+	ld a, [wCurrentMenuItem]
 	ld c, a
 	ld b, 0
 	add hl, bc

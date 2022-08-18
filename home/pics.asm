@@ -4,52 +4,52 @@
 ; hl contains offset to sprite pointer ($b for front or $d for back)
 UncompressMonBackSprite::
 	ld bc,wMonHeader
-    add hl,bc
-    ld a,[hli]
-    ld [wSpriteInputPtr],a    ; fetch sprite input pointer
-    ld a,[hl]
-    ld [wSpriteInputPtr+1],a
-    ld a, [wSpriteOptions2]
-    bit BIT_BACK_SPRITES, a
-    jr nz, .swSprites
+	add hl,bc
+	ld a,[hli]
+	ld [wSpriteInputPtr],a    ; fetch sprite input pointer
+	ld a,[hl]
+	ld [wSpriteInputPtr+1],a
+	ld a, [wSpriteOptions2]
+	bit BIT_BACK_SPRITES, a
+	jr nz, .swSprites
 .ogSprites
-    ld a,[wMonHBackPicBank]
-    jr .GotBank
+	ld a,[wMonHBackPicBank]
+	jr .GotBank
 .swSprites
-    ld a,[wMonHPicBank]
+	ld a,[wMonHPicBank]
 .GotBank
-    jp UncompressSpriteData
+	jp UncompressSpriteData
 
 ; dannye33note: CHANGED: code for rendering sprites from an arbitrary bank instead of hardcoded.
 UncompressMonSprite::
-    ld bc,wMonHeader
-    add hl,bc
-    ld a,[hli]
-    ld [wSpriteInputPtr],a    ; fetch sprite input pointer
-    ld a,[hl]
-    ld [wSpriteInputPtr+1],a
-    ld a, [wcf91]
-    cp MISSINGNO
-    jr z,.missingNo
-    cp FOSSIL_KABUTOPS
-    jr z,.RecallBank
-    cp FOSSIL_AERODACTYL
-    jr z,.RecallBank
-    cp MON_GHOST
-    jr z,.RecallBank
-    ld a,[wMonHPicBank]
-    jr .GotBank
+	ld bc,wMonHeader
+	add hl,bc
+	ld a,[hli]
+	ld [wSpriteInputPtr],a    ; fetch sprite input pointer
+	ld a,[hl]
+	ld [wSpriteInputPtr+1],a
+	ld a, [wcf91]
+	cp MISSINGNO
+	jr z,.missingNo
+	cp FOSSIL_KABUTOPS
+	jr z,.RecallBank
+	cp FOSSIL_AERODACTYL
+	jr z,.RecallBank
+	cp MON_GHOST
+	jr z,.RecallBank
+	ld a,[wMonHPicBank]
+	jr .GotBank
 ;;;;;;;;;; PureRGNnote: ADDED: missingno has a randomized front sprite
 .missingNo
-    call Random ; missingno sometimes displays other front sprites
-    and %111
-    jr z, .fossilAerodactyl ; 1/8 chance of fossil aerodactyl
-    cp 1
-    jr z, .fossilKabutops ; 1/8 chance of fossil kabutops
-    cp 2
-    jr z, .ghost ; 1/8 chance of ghost
-    ld a, [wMonHPicBank]
-    jr .GotBank
+	call Random ; missingno sometimes displays other front sprites
+	and %111
+	jr z, .fossilAerodactyl ; 1/8 chance of fossil aerodactyl
+	cp 1
+	jr z, .fossilKabutops ; 1/8 chance of fossil kabutops
+	cp 2
+	jr z, .ghost ; 1/8 chance of ghost
+	ld a, [wMonHPicBank]
+	jr .GotBank
 .ghost
 	ld de, GhostPic
 	jr .fossilGhostDimensions
@@ -68,9 +68,9 @@ UncompressMonSprite::
 	ld [wSpriteInputPtr+1], a
 ;;;;;;;;;;
 .RecallBank
-    ld a,BANK(FossilKabutopsPic)    
+	ld a,BANK(FossilKabutopsPic)    
 .GotBank
-    jp UncompressSpriteData
+	jp UncompressSpriteData
 
 ; de: destination location
 LoadMonFrontSprite::

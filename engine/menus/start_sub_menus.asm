@@ -705,38 +705,38 @@ SwitchPartyMon::
 
 ; mechanicalpennote: ADDED: new code to swap pokemon icons when swapping pokemon on the party menu
 SwapPartyMonIcons:
-    ld a, [wSwappedMenuItem]
-    ld hl, wShadowOAM
-    ld bc, 16
-    call AddNTimes ; add bc to hl, a times
-    inc hl ; add 2 to hl for tileid.
-    inc hl
+	ld a, [wSwappedMenuItem]
+	ld hl, wShadowOAM
+	ld bc, 16
+	call AddNTimes ; add bc to hl, a times
+	inc hl ; add 2 to hl for tileid.
+	inc hl
 	push hl
 	pop de
-    ld a, [wCurrentMenuItem]
-    ld hl, wShadowOAM
-    ld bc, 16
-    call AddNTimes ; add bc to hl, a times
-    inc hl ; add 2 to hl for tileid.
-    inc hl
-    ld c, 4 ; four tiles
+	ld a, [wCurrentMenuItem]
+	ld hl, wShadowOAM
+	ld bc, 16
+	call AddNTimes ; add bc to hl, a times
+	inc hl ; add 2 to hl for tileid.
+	inc hl
+	ld c, 4 ; four tiles
 .swapMonOAMLoop
-    ld a, [hl]
-    ldh [hDividend], a ;hSwapTemp
-    ld a, [de]
-    ld [hl], a
-    ldh a, [hDividend] ;hSwapTemp
-    ld [de], a
-    ld a, 4 ; add 4 to get to the next tiles.
+	ld a, [hl]
+	ldh [hDividend], a ;hSwapTemp
+	ld a, [de]
+	ld [hl], a
+	ldh a, [hDividend] ;hSwapTemp
+	ld [de], a
+	ld a, 4 ; add 4 to get to the next tiles.
 rept 4
-    inc hl
+	inc hl
 endr
 rept 4
-    inc de
+	inc de
 endr
-    dec c
-    jr nz, .swapMonOAMLoop
-    ret
+	dec c
+	jr nz, .swapMonOAMLoop
+	ret
 
 SwitchPartyMon_ClearGfx:
 	push af
