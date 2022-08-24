@@ -912,6 +912,11 @@ CheckLoadSavedIndex:
 StartMenu_SelectPressed::
 	ld a, [wCurrentMenuItem]
 	ld [wBattleAndStartSavedMenuItem], a ; save current menu selection
+	ld a, [wMapTextPtr]
+	ld b, a
+	ld a, [wMapTextPtr + 1]
+	ld c, a
+	push bc ; save the current maptextptr for later because that property can be modified by changing boxes
 	call SaveScreenTilesToBuffer2 ; copy background from wTileMap to wTileMapBackup2
 	ld hl, vChars2 tile $78
 	ld de, PokeballTileGraphics
@@ -921,5 +926,10 @@ StartMenu_SelectPressed::
 	call LoadScreenTilesFromBuffer2 ; restore saved screen
 	call LoadTextBoxTilePatterns
 	call UpdateSprites
+	pop bc ; recover the original maptextptr in case we changed the value by changing boxes
+	ld a, b
+	ld [wMapTextPtr], a 
+	ld a, c
+	ld [wMapTextPtr + 1], a
 .done
 	jp RedisplayStartMenu

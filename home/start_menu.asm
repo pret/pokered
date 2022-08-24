@@ -85,7 +85,7 @@ RedisplayStartMenu::
 	ld a, [wCurrentMenuItem]
 	cp 4 ; are we currently on SAVE menu index? (need to be to do the below action)
 	jp nz, .loop
-	jp StartMenu_SelectPressed
+	jp StartMenu_SelectPressed ; we can jp to this since it's in the bank on we loaded at the start of DisplayStartMenu
 ;;;;;;;;;;
 
 CloseStartMenu::
