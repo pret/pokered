@@ -405,6 +405,7 @@ INCLUDE "engine/pokemon/missingno_item_duplication.asm"
 INCLUDE "engine/gfx/set_attack_animation_palette.asm"
 INCLUDE "engine/battle/exp_bar_print.asm"
 INCLUDE "engine/overworld/strength.asm"
+INCLUDE "engine/battle/store_pkmn_levels.asm"
 
 
 ; PureRGBnote: TODO: these are currently unused but are intended to be where the save file is flashed to the ROM

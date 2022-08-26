@@ -2173,7 +2173,6 @@ ItemUseGoodRod:
 	and %11
 	and a
 	jr z, .SetBite ;25% chance of no bite
-.RandomLoop
 	; choose which good rod pokemon table
 	ld a, [wCurMap]
 	ld c, a
@@ -2195,10 +2194,8 @@ ItemUseGoodRod:
 	inc hl
 	ld c, [hl]
 	and a
+	ld a, 1
 .SetBite
-	ld a, 0
-	rla
-	xor 1
 	jr RodResponse
 
 INCLUDE "data/wild/good_rod.asm"

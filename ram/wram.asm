@@ -761,7 +761,7 @@ wPlayerSpinInPlaceAnimSoundID:: db
 	db ; temporary space used when wFacingDirectionList is rotated
 ; used when spinning the player's sprite
 wFacingDirectionList:: ds 4
-	ds 3
+	ds 1
 wSavedPlayerScreenY:: db
 wSavedPlayerFacingDirection:: db
 
@@ -769,6 +769,9 @@ NEXTU
 wPlayerSpinWhileMovingUpOrDownAnimDeltaY:: db
 wPlayerSpinWhileMovingUpOrDownAnimMaxY:: db
 wPlayerSpinWhileMovingUpOrDownAnimFrameDelay:: db
+	ds 8
+; shinpokerednote: ADDED: tracker for the levels of each of the player's pokemon at the start of battle, same address as wFacingDirectionList
+wStartBattleLevels:: ds 6 
 
 NEXTU
 wTrainerSpriteOffset:: db
