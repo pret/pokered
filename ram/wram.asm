@@ -761,7 +761,7 @@ wPlayerSpinInPlaceAnimSoundID:: db
 	db ; temporary space used when wFacingDirectionList is rotated
 ; used when spinning the player's sprite
 wFacingDirectionList:: ds 4
-	ds 1
+	ds 3
 wSavedPlayerScreenY:: db
 wSavedPlayerFacingDirection:: db
 
