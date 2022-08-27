@@ -37,7 +37,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 ; to a chosen memory address in order to be compared later with the evolution requirements.
 	pop de
 	ld a, [de]
-	ld [wTempFlag0], a
+	ld [wTempLevelStore], a
 	inc de
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	inc hl
@@ -128,11 +128,11 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, 1
 	ld [wEvolutionOccurred], a
 ;;;;;;;;;; shinpokerednote: FIXED: skipping evolution learned moves if levelled up a non-evolved pokemon multiple times then evolving
-	ld a, [wTempFlag0]
+	ld a, [wTempLevelStore]
 	cp b
 	jp nc, .evoLevelRequirementSatisfied
 	ld a, b
-	ld [wTempFlag0], a
+	ld [wTempLevelStore], a
 .evoLevelRequirementSatisfied
 ;;;;;;;;;;
 	push hl
@@ -244,7 +244,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	
 	ld a, [wCurEnemyLVL]	; load the final level into a.
 	ld c, a	; load the final level to over to c
-	ld a, [wTempFlag0]	; load the evolution level into a
+	ld a, [wTempLevelStore]	; load the evolution level into a
 	ld b, a	; load the evolution level over to b
 	dec b
 .inc_level	; marker for looping back 

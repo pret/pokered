@@ -624,7 +624,7 @@ CheckMapConnections::
 	jr nz, .didNotEnterConnectedMap
 .loadNewMap ; load the connected map that was entered
 	ld hl, wCurrentMapScriptFlags
-	set 4, [hl]
+	set 4, [hl] ; PureRGBnote: ADDED: flag to indicate we crossed between maps by walking in the overworld
 	call LoadMapHeader
 	call PlayDefaultMusicFadeOutCurrent
 	ld b, SET_PAL_OVERWORLD

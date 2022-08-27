@@ -737,7 +737,7 @@ wSlotMachineBet:: db
 NEXTU
 wCanPlaySlots:: db
 	ds 8
-; PureRGBnote: CHANGED: temporary variable used to add payout amount to the player's coins
+; PureRGBnote: CHANGED: temporary variable used to add payout amount to the player's coins, also used in vending machine code
 wTempFlag0::
 wTempCoins1:: dw
 	ds 2
@@ -769,9 +769,6 @@ NEXTU
 wPlayerSpinWhileMovingUpOrDownAnimDeltaY:: db
 wPlayerSpinWhileMovingUpOrDownAnimMaxY:: db
 wPlayerSpinWhileMovingUpOrDownAnimFrameDelay:: db
-	ds 8
-; shinpokerednote: ADDED: tracker for the levels of each of the player's pokemon at the start of battle, same address as wFacingDirectionList
-wStartBattleLevels:: ds 6 
 
 NEXTU
 wTrainerSpriteOffset:: db
@@ -1129,6 +1126,8 @@ wExpAmountGained:: dw
 wGainBoostedExp:: db
 ENDU
 
+; shinpokerednote: ADDED: tracker for the levels of each of the player's pokemon at the start of battle, same address as wGymCityName
+wStartBattleLevels:: 
 wGymCityName:: ds 17
 
 wGymLeaderName:: ds NAME_LENGTH
@@ -1137,13 +1136,13 @@ UNION
 ds 16 ; PureRGBnote: CHANGED: used to be wItemList:: but now the item list for marts is expanded in size and reuses a bigger space elsewhere
 NEXTU
 ;;;;;;;;;; PureRGBnote: ADDED: new wram variables
+wTempLevelStore::
 wItemFinderItemDirection::db 
 wSawItemFinderText::db ; the "yes, an item is nearby!" text will only display once per game restart
 wItemDuplicationActive:: db ; after seeing the old man catch pokemon, this flag is enabled until the game restarts - allows missingno item dupe glitch
 
 ; set to 1 if you healed this turn, 2 if you switched out this turn (prevents ai from spamming certain moves in some cases)
 wAIMoveSpamAvoider:: db
-
 wPreviousEnemySelectedMove:: db ; store for disable move functionality
 wPreviousPlayerSelectedMove:: db ; store for disable move functionality
 wCaughtGhostMarowak:: db ; flag that makes it so after catching ghost marowak different text displays than defeating it
