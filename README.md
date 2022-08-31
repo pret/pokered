@@ -1,3 +1,21 @@
+Kanto Expansion Pak
+===================
+This is a ROM Hack of Pokémon Red and Blue, aiming to expand the dex with 
+
+Credits
+====
+* Plague von Karma - Creator of the Showdown Mod, Developer
+* Martha's Against Humanity - Developer 
+* Ema Sky - Developer 
+* ausma - Showdown Mod assistance
+* Paulluxx - Showdown Mod assistance
+* DuoM2 - Showdown Mod assistance 
+* Albatross - Much of the new sprites used in the hack 
+* Helix Chamber, RacieBeep, et al - Prototype Pokémon sprites
+* pret et al - Pokémon Red and Blue Disassembly Project
+
+Original README.md proceeding;
+====
 # Pokémon Red and Blue [![Build Status][ci-badge]][ci]
 
 This is a disassembly of Pokémon Red and Blue.
