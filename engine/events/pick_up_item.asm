@@ -67,6 +67,7 @@ PickUpItemCommon:
 	ld hl, FoundItemText
 	jr .print
 .BagFull
+	pop bc
 	ld hl, NoMoreRoomForItemText
 .print
 	call PrintText

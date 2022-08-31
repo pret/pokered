@@ -121,6 +121,7 @@ The fifth page contains 6 additional pokemon whose front sprites can be customiz
 - Strength can be used on boulders by pressing A on them while you have a pokemon with strength in your party.
 - Seafoam Islands and Victory Road will remember that you used Strength between going up and down floors so you don't have to re-enable it.
 - Fuchsia City's layout has been modified very slightly to be less annoying to navigate.
+- The Daycare has a PC in it.
 - Route 23 has some grass just after the north exit of Victory Road to allow reaching those encounters more easily late game.
 - Some pokemon evolve at earlier levels
 - Many pokemon have better base stats. See the wiki for the data.

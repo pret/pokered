@@ -97,6 +97,7 @@ HiddenObjectMaps:
 	db SAFARI_ZONE_NORTH
 	db CERULEAN_ROCKET_HOUSE_1F
 	db CERULEAN_ROCKET_HOUSE_B1F
+	db DAYCARE
 	db -1 ; end
 
 HiddenObjectPointers:
@@ -197,6 +198,7 @@ HiddenObjectPointers:
 	dw SafariZoneNorthHiddenObjects
 	dw CeruleanRocketHouse1FHiddenObjects
 	dw CeruleanRocketHouseB1FHiddenObjects
+	dw DaycareHiddenObjects
 
 MACRO hidden_object
 	db \2 ; y coord
@@ -764,3 +766,6 @@ CeruleanRocketHouseB1FHiddenObjects:
 	hidden_object 15,  5, SPRITE_FACING_UP, PrintRocketBasementMachineText
 	db -1 ; end	
 
+DaycareHiddenObjects:
+	hidden_object 4,  1, SPRITE_FACING_UP, OpenPokemonCenterPC
+	db -1 ; end
