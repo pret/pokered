@@ -40,15 +40,3 @@ Music_DefeatedGymLeader::
 	channel 2, Music_DefeatedGymLeader_Ch2
 	channel 3, Music_DefeatedGymLeader_Ch3
 
-Music_Digda01::
-	channel_count 3
-	channel 1, Music_Digda01_Ch1
-	channel 2, Music_Digda01_Ch2
-	channel 3, Music_Digda01_Ch3
-	
-Music_Field6::
-	channel_count 4
-	channel 1, Music_Field6_Ch1
-	channel 2, Music_Field6_Ch2
-	channel 3, Music_Field6_Ch3
-	channel 4, Music_Field6_Ch4

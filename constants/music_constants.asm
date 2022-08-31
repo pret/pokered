@@ -26,6 +26,8 @@ ENDM
 	music_const MUSIC_ROUTES3,             Music_Routes3
 	music_const MUSIC_ROUTES4,             Music_Routes4
 	music_const MUSIC_INDIGO_PLATEAU,      Music_IndigoPlateau
+	music_const MUSIC_DIGDA01,             Music_Digda01
+	music_const MUSIC_FIELD6,   		   Music_Field6
 
 	; AUDIO_2
 	music_const MUSIC_GYM_LEADER_BATTLE,   Music_GymLeaderBattle
@@ -35,8 +37,6 @@ ENDM
 	music_const MUSIC_DEFEATED_TRAINER,    Music_DefeatedTrainer
 	music_const MUSIC_DEFEATED_WILD_MON,   Music_DefeatedWildMon
 	music_const MUSIC_DEFEATED_GYM_LEADER, Music_DefeatedGymLeader
-	music_const MUSIC_DIGDA01,             Music_Digda01
-	music_const MUSIC_FIELD6,   		   Music_Field6
 
 	; AUDIO_3
 	music_const MUSIC_TITLE_SCREEN,        Music_TitleScreen

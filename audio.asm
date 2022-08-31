@@ -406,6 +406,8 @@ INCLUDE "audio/music/lavender.asm"
 INCLUDE "audio/music/safarizone.asm"
 INCLUDE "audio/music/gym.asm"
 INCLUDE "audio/music/pokecenter.asm"
+INCLUDE "audio/music/digda01.asm"
+INCLUDE "audio/music/field6.asm"
 
 
 SECTION "Music 2", ROMX
@@ -422,8 +424,6 @@ INCLUDE "audio/sfx/caught_mon.asm"
 INCLUDE "audio/music/defeatedtrainer.asm"
 INCLUDE "audio/music/defeatedwildmon.asm"
 INCLUDE "audio/music/defeatedgymleader.asm"
-INCLUDE "audio/music/digda01.asm"
-INCLUDE "audio/music/field6.asm"
 
 
 SECTION "Music 3", ROMX
