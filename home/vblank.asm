@@ -26,11 +26,15 @@ VBlank::
 	call VBlankCopy
 	call VBlankCopyDouble
 	call UpdateMovingBgTiles
-	call hDMARoutine
+	ld a, [hSkipOAMUpdates]
+	bit 0, a
+	jr nz, .skipOAM
+	call hDMARoutine ; this prevents v-blank interference - PvK
 	ld a, BANK(PrepareOAMData)
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call PrepareOAMData
+.skipOAM
 
 	; VBlank-sensitive operations end.
 

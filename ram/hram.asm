@@ -387,7 +387,7 @@ hWhoseTurn:: db ; 0 on player's turn, 1 on enemy's turn
 
 hClearLetterPrintingDelayFlags:: db
 
-	ds 1
+hSkipOAMUpdates:: db ; this prevents v-blank interference - PvK
 
 ; bit 0: draw HP fraction to the right of bar instead of below (for party menu)
 ; bit 1: menu is double spaced

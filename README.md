@@ -24,6 +24,10 @@ May non-multiplayer, non-battle related bugs have been fixed. The aforementioned
 - 2 invisible stars that show on the title screen are cut off; also, the "presents" logo from RG is re-used!
 - The healing machine animates correctly! 
 - Using Minimize or Substitute, looking at the Pokedex, and then battling won't cause sprite corruption.
+- OAM Updates can no longer be interrupted by V-Blank, avoiding some sprite corruption.
+- Trainer Card transition no longer shows weird garbage on DMGs; this was due to not having enough time to load properly.
+- Battle victory music plays at the right time; there were some situations where it would happen when you lost.
+- Music in Oak's Lab is delayed a frame so it always plays with the correct channels; V-Blank could otherwise interrupt it.
 and more!
 
 Credits
