@@ -238,14 +238,14 @@ _TentacoolDexEntry::
 	next "its stinging acid"
 	dex
 
-_GastlyDexEntry::
-	text "Almost invisible,"
-	next "this gaseous"
-	next "#MON cloaks"
-
-	page "the target and"
-	next "puts it to sleep"
-	next "without notice"
+_GastlyDexEntry::		; Dex entry from Green, swapping the Indian Elephant for Trampel. ~M
+	text "A being that"
+	next "exists as a thin"
+	next "gas. The gas is"
+	
+	page "potent enough to"
+	next "fell a TRAMPEL"
+	next "in two seconds"
 	dex
 
 _ScytherDexEntry::
@@ -668,14 +668,14 @@ _KrabbyDexEntry::
 	next "sideways"
 	dex
 
-_VulpixDexEntry::
-	text "At the time of"
-	next "birth, it has"
-	next "just one tail."
-
-	page "The tail splits"
-	next "from its tip as"
-	next "it grows older"
+_VulpixDexEntry::			; Changed to make it not too similar to Mikon's dex entry. ~M
+	text "As each tail"
+	next "grows, its fur"
+	next "becomes softer."
+	
+	page "When held, it"
+	next "gives off a"
+	next "slight warmth"
 	dex
 
 _NinetalesDexEntry::
