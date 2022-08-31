@@ -20,4 +20,5 @@
 	     SUBSTITUTE,   FLY
 	; end
 
-	db 0 ; padding
+	db BANK(MoltresPicFront)
+	assert BANK(MoltresPicFront) == BANK(MoltresPicBack)

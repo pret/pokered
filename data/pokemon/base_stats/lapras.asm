@@ -22,4 +22,5 @@
 	     STRENGTH
 	; end
 
-	db 0 ; padding
+	db BANK(LaprasPicFront)
+	assert BANK(LaprasPicFront) == BANK(LaprasPicBack)

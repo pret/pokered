@@ -20,4 +20,5 @@
 	     SKULL_BASH,   REST,         SUBSTITUTE,   CUT,          SURF
 	; end
 
-	db 0 ; padding
+	db BANK(TentacruelPicFront)
+	assert BANK(TentacruelPicFront) == BANK(TentacruelPicBack)

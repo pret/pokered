@@ -24,4 +24,5 @@
 	     FLASH
 	; end
 
-	db 0 ; padding
+	db BANK(MewtwoPicFront)
+	assert BANK(MewtwoPicFront) == BANK(MewtwoPicBack)

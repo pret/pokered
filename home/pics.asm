@@ -8,40 +8,17 @@ UncompressMonSprite::
 	ld [wSpriteInputPtr], a    ; fetch sprite input pointer
 	ld a, [hl]
 	ld [wSpriteInputPtr+1], a
-; define (by index number) the bank that a pokemon's image is in
-; index = MEW:             bank $1
-; index = FOSSIL_KABUTOPS: bank $B
-;       index < $1F:       bank $9 ("Pics 1")
-; $1F ≤ index < $4A:       bank $A ("Pics 2")
-; $4A ≤ index < $74:       bank $B ("Pics 3")
-; $74 ≤ index < $99:       bank $C ("Pics 4")
-; $99 ≤ index:             bank $D ("Pics 5")
 	ld a, [wcf91]
-	ld b, a
-	cp MEW
-	ld a, BANK(MewPicFront)
-	jr z, .GotBank
-	ld a, b
 	cp FOSSIL_KABUTOPS
+	jr z, .RecallBank
+	cp FOSSIL_AERODACTYL
+	jr z, .RecallBank
+	cp MON_GHOST
+	jr z, .RecallBank
+	ld a, [wMonHPicBank]
+	jr .GotBank
+.RecallBank
 	ld a, BANK(FossilKabutopsPic)
-	jr z, .GotBank
-	ld a, b
-	cp TANGELA + 1
-	ld a, BANK("Pics 1")
-	jr c, .GotBank
-	ld a, b
-	cp MOLTRES + 1
-	ld a, BANK("Pics 2")
-	jr c, .GotBank
-	ld a, b
-	cp BEEDRILL + 2
-	ld a, BANK("Pics 3")
-	jr c, .GotBank
-	ld a, b
-	cp STARMIE + 1
-	ld a, BANK("Pics 4")
-	jr c, .GotBank
-	ld a, BANK("Pics 5")
 .GotBank
 	jp UncompressSpriteData
 

@@ -20,4 +20,5 @@
 	     REST,         SUBSTITUTE,   SURF,         STRENGTH
 	; end
 
-	db 0 ; padding
+	db BANK(SeelPicFront)
+	assert BANK(SeelPicFront) == BANK(SeelPicBack)

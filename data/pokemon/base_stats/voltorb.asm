@@ -20,4 +20,5 @@
 	     SUBSTITUTE,   FLASH
 	; end
 
-	db 0 ; padding
+	db BANK(VoltorbPicFront)
+	assert BANK(VoltorbPicFront) == BANK(VoltorbPicBack)

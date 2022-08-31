@@ -19,4 +19,5 @@
 	     SELFDESTRUCT, FIRE_BLAST,   REST,         EXPLOSION,    SUBSTITUTE
 	; end
 
-	db 0 ; padding
+	db BANK(MukPicFront)
+	assert BANK(MukPicFront) == BANK(MukPicBack)

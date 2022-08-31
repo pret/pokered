@@ -21,4 +21,5 @@
 	     STRENGTH
 	; end
 
-	db 0 ; padding
+	db BANK(TaurosPicFront)
+	assert BANK(TaurosPicFront) == BANK(TaurosPicBack)

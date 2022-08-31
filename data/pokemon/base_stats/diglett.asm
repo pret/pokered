@@ -19,4 +19,5 @@
 	     BIDE,         REST,         ROCK_SLIDE,   SUBSTITUTE
 	; end
 
-	db 0 ; padding
+	db BANK(DiglettPicFront)
+	assert BANK(DiglettPicFront) == BANK(DiglettPicBack)

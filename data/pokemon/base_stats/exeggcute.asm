@@ -20,4 +20,5 @@
 	     SUBSTITUTE
 	; end
 
-	db 0 ; padding
+	db BANK(ExeggcutePicFront)
+	assert BANK(ExeggcutePicFront) == BANK(ExeggcutePicBack)

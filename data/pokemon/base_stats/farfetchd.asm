@@ -20,4 +20,5 @@
 	     SUBSTITUTE,   CUT,          FLY
 	; end
 
-	db 0 ; padding
+	db BANK(FarfetchdPicFront)
+	assert BANK(FarfetchdPicFront) == BANK(FarfetchdPicBack)

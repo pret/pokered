@@ -20,4 +20,5 @@
 	     SUBSTITUTE,   SURF
 	; end
 
-	db 0 ; padding
+	db BANK(SeadraPicFront)
+	assert BANK(SeadraPicFront) == BANK(SeadraPicBack)

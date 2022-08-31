@@ -20,4 +20,5 @@
 	     BIDE,         SKULL_BASH,   REST,         SUBSTITUTE
 	; end
 
-	db 0 ; padding
+	db BANK(NidorinaPicFront)
+	assert BANK(NidorinaPicFront) == BANK(NidorinaPicBack)
