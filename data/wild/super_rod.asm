@@ -34,7 +34,8 @@ SuperRodData:
 	dbw CERULEAN_CAVE_2F,    .Group9
 	dbw CERULEAN_CAVE_B1F,   .Group9
 	dbw CERULEAN_CAVE_1F,    .Group9
-	dbw ROCK_TUNNEL,         .Group5
+	dbw ROCK_TUNNEL_1F,      .Group5
+	dbw ROCK_TUNNEL_1F,      .Group5
 	db -1 ; end
 
 ; fishing groups
