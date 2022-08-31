@@ -9,7 +9,7 @@ QoL Enhancements
 
 Bug Fixes
 ====
-May non-multiplayer, non-battle related bugs have been fixed. The aforementioned have been preserved for the RBY battle experience. Bugs that are fixed are ones that objectively hurt the gameplay experience. Much of this can be attributed to [the tutorials](https://github.com/pret/pokered/wiki/Bugs-and-Glitches) made by the good people at pret.
+Many non-multiplayer, non-battle related bugs have been fixed. The aforementioned have been preserved for the RBY battle experience. Bugs that are fixed are ones that objectively hurt the gameplay experience. Much of this can be attributed to [the tutorials](https://github.com/pret/pokered/wiki/Bugs-and-Glitches) made by the good people at pret.
 - Blaine is no longer addicted to Super Potions.
 - CoolTrainerF no longer switches a lot.
 - Transformed Pokemon aren't presumed to be Dittos! (very important given Animon)
