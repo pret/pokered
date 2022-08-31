@@ -34,6 +34,7 @@ SuperRodData:
 	dbw CERULEAN_CAVE_2F,    .Group9
 	dbw CERULEAN_CAVE_B1F,   .Group9
 	dbw CERULEAN_CAVE_1F,    .Group9
+	dbw ROCK_TUNNEL,         .Group5
 	db -1 ; end
 
 ; fishing groups
@@ -69,9 +70,10 @@ SuperRodData:
 .Group5:
 	db 2
 	db 25, POLIWHIRL
-	db 20, SLOWPOKE
+	db 25, SLOWPOKE
 	db 20, SKIMPER
-	db 20, CHEEP
+	db 25, CHEEP
+	db 25, BLOTTLE
 
 .Group6:
 	db 4
