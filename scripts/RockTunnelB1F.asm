@@ -185,3 +185,25 @@ RockTunnel2EndBattleText9:
 RockTunnel2AfterBattleText9:
 	text_far _RockTunnel2AfterBattleText9
 	text_end
+
+; Edited from Articuno - PvK
+	def_trainers 9
+KabutopsTrainerHeader:
+	trainer EVENT_BEAT_KABUTOPS, 0, KabutopsBattleText, KabutopsBattleText, KabutopsBattleText
+	db -1 ; end
+
+KabutopsText:
+	text_asm
+	ld hl, KabutopsTrainerHeader
+	call TalkToTrainer
+	ld a, $4
+	ld [wSeafoamIslandsB4FCurScript], a
+	jp TextScriptEnd
+
+KabutopsBattleText:
+	text_far _KabutopsBattleText
+	text_asm
+	ld a, KABUTOPS
+	call PlayCry
+	call WaitForSoundToFinish
+	jp TextScriptEnd
