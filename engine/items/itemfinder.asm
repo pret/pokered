@@ -29,7 +29,7 @@ HiddenItemNear:
 	cp d
 	jr z, .y_zflag ; starts to fix the y/x coord 0 no find bug - PvK
 	jr nc, .loop
-y_zflag
+.y_zflag
 	ld a, [wYCoord]
 	add 4
 	cp d
