@@ -176,4 +176,17 @@ Moves:
 	move SLASH,        NO_ADDITIONAL_EFFECT,        70, NORMAL,       100, 20
 	move SUBSTITUTE,   SUBSTITUTE_EFFECT,            0, NORMAL,       100, 10
 	move STRUGGLE,     RECOIL_EFFECT,               50, NORMAL,       100, 10
+	move FAIRY_WIND,   NO_ADDITIONAL_EFFECT,        40, FAIRY,        100, 30
+	move DRAININGKISS, DRAIN_HP_EFFECT,             50, FAIRY,        100, 10
+	move METAL_SOUND,  SPECIAL_DOWN2_EFFECT,         0, STEEL,         85, 40
+	move MAGNET_BOMB,  SWIFT_EFFECT,                60, STEEL,        100, 20
+	move IRON_DEFENSE, DEFENSE_UP2_EFFECT,           0, STEEL,        100, 15
+	move DAZZLE_GLEAM, NO_ADDITIONAL_EFFECT,        80, FAIRY,        100, 10
+	move NIGHT_SLASH,  NO_ADDITIONAL_EFFECT,        70, DARK,         100, 15
+	move FEINT_ATTACK, SWIFT_EFFECT,                60, DARK,         100, 20
+	move IRON_HEAD,    FLINCH_SIDE_EFFECT2,         80, STEEL,        100, 15
+	move BRUTAL_SWING, NO_ADDITIONAL_EFFECT,        60, DARK,         100, 20
+	move CHARM,        ATTACK_DOWN2_EFFECT,          0, FAIRY,        100, 20
+	move SWEET_KISS,   CONFUSION_EFFECT,             0, FAIRY,         75, 10
+	move BULLET_PUNCH, NO_ADDITIONAL_EFFECT,        40, STEEL,        100, 30
 	assert_table_length NUM_ATTACKS

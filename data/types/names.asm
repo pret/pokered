@@ -10,8 +10,9 @@ TypeNames:
 	dw .Bird
 	dw .Bug
 	dw .Ghost
+	dw .Steel
 
-REPT FIRE - GHOST - 1
+REPT FIRE - STEEL - 1
 	dw .Normal
 ENDR
 
@@ -22,6 +23,8 @@ ENDR
 	dw .Psychic
 	dw .Ice
 	dw .Dragon
+	dw .Dark
+	dw .Fairy
 
 	assert_table_length NUM_TYPES
 
@@ -41,3 +44,7 @@ ENDR
 .Bug:      db "BUG@"
 .Ghost:    db "GHOST@"
 .Dragon:   db "DRAGON@"
+.Steel:    db "STEEL@"
+.Fairy:    db "FAIRY@"
+.Dark:     db "DARK@"
+
