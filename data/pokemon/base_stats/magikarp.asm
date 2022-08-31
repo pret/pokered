@@ -14,7 +14,7 @@
 	db GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
-	tmhm
+	tmhm DRAGON_RAGE
 	; end
 
 	db BANK(MagikarpPicFront)
