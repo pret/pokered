@@ -33,9 +33,15 @@ FoundHiddenItemText::
 	ld c, a
 	ld b, FLAG_SET
 	predef FlagActionPredef
+	ld a, [wAudioFadeOutControl] ; this stops it from getting cut off - PvK
+	push af
+	xor a
+	ld [wAudioFadeOutControl], a
 	ld a, SFX_GET_ITEM_2
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
+	pop af
+	ld [wAudioFadeOutControl], a
 	jp TextScriptEnd
 .bagFull
 	call WaitForTextScrollButtonPress ; wait for button press

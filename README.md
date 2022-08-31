@@ -9,7 +9,7 @@ QoL Enhancements
 
 Bug Fixes
 ====
-May non-multiplayer, non-battle related bugs have been fixed. The aforementioned have been preserved for the RBY battle experience. Bugs that are fixed are ones that objectively hurt the gameplay experience.
+May non-multiplayer, non-battle related bugs have been fixed. The aforementioned have been preserved for the RBY battle experience. Bugs that are fixed are ones that objectively hurt the gameplay experience. Much of this can be attributed to [the tutorials](https://github.com/pret/pokered/wiki/Bugs-and-Glitches) made by the good people at pret.
 - Blaine is no longer addicted to Super Potions.
 - CoolTrainerF no longer switches a lot.
 - Transformed Pokemon aren't presumed to be Dittos! (very important given Animon)
@@ -20,7 +20,7 @@ May non-multiplayer, non-battle related bugs have been fixed. The aforementioned
 - The Item Finder will correctly find items at X/Y 0.0
 - Glitch Pokémon will no longer corrupt the Hall of Fame.
 - Strength smoke puffs now show properly.
-- Game Corner slots no longer load too many tiles; the lucky machine stops when it should if there's a 7, few other objective issues. Also, the 40-coin hidden item is fixed.
+- Game Corner slots no longer load too many tiles; the lucky machine stops when it should if there's a 7, few other objective issues. Also, the 40-coin hidden item is fixed, and there can always be a lucky machine.
 - 2 invisible stars that show on the title screen are cut off; also, the "presents" logo from RG is re-used!
 - The healing machine animates correctly! 
 - Using Minimize or Substitute, looking at the Pokedex, and then battling won't cause sprite corruption.
@@ -28,6 +28,12 @@ May non-multiplayer, non-battle related bugs have been fixed. The aforementioned
 - Trainer Card transition no longer shows weird garbage on DMGs; this was due to not having enough time to load properly.
 - Battle victory music plays at the right time; there were some situations where it would happen when you lost.
 - Music in Oak's Lab is delayed a frame so it always plays with the correct channels; V-Blank could otherwise interrupt it.
+- The hidden item sfx no longer gets cut off sometimes
+- The audio engine no longer borrows from the high bytes of the wrong frequency.
+- Oak no longer has his line overwrite itself when giving Poke Balls.
+- Player correctly faces the Route 8 guard when stopped.
+- Weird behaviour when going to 11F in Silph Co. and forcing a player to leave despite not moving is fixed.
+- Fixed weirdness in Pokemon Tower where saving Mr. Fuji won't immediately let you leave. Also fixed coord termination on 2F which could cause some terribleness.
 and more!
 
 Credits

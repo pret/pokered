@@ -60,7 +60,7 @@ ENDC
 CoordsData_6055e:
 	dbmapcoord 15,  5
 	dbmapcoord 14,  6
-	db $0F ; end? (should be $ff?)
+	db -1 ; fixes coord termination which can have adverse effects
 
 PokemonTower2Script1:
 	ld a, [wIsInBattle]
