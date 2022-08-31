@@ -335,7 +335,6 @@ PlayShootingStar:
        inc a
        dec c
        jr nz, .loop
-	   
 	ld c, 40
 	call DelayFrames
 .next
