@@ -171,6 +171,19 @@
 	const SLASH        ; a3
 	const SUBSTITUTE   ; a4
 	const STRUGGLE     ; a5
+	const FAIRY_WIND   ; a6
+	const DRAININGKISS ; a7
+	const METAL_SOUND  ; a8
+	const MAGNET_BOMB  ; a9
+	const IRON_DEFENSE ; aa
+	const DAZZLE_GLEAM ; ab
+	const NIGHT_SLASH  ; ac
+	const FEINT_ATTACK ; ad
+	const IRON_HEAD    ; ae
+	const BRUTAL_SWING ; af
+	const CHARM 	 ; b0
+	const SWEET_KISS   ; b1
+	const BULLET_PUNCH ; b2
 DEF NUM_ATTACKS EQU const_value - 1
 
 	; Moves do double duty as animation identifiers.
