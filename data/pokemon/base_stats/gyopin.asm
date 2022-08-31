@@ -20,5 +20,5 @@
 	     SUBSTITUTE,   SURF
 	; end
 
-	ddb BANK(GyopinPicFront)
+	db BANK(GyopinPicFront)
 	assert BANK(GyopinPicFront) == BANK(GyopinPicBack)

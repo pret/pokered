@@ -20,5 +20,5 @@
 	     REST,         SUBSTITUTE,   CUT,          STRENGTH
 	; end
 
-	ddb BANK(PurakkusuPicFront)
+	db BANK(PurakkusuPicFront)
 	assert BANK(PurakkusuPicFront) == BANK(PurakkusuPicBack)
