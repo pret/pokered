@@ -422,6 +422,8 @@ INCLUDE "audio/sfx/caught_mon.asm"
 INCLUDE "audio/music/defeatedtrainer.asm"
 INCLUDE "audio/music/defeatedwildmon.asm"
 INCLUDE "audio/music/defeatedgymleader.asm"
+INCLUDE "audio/music/digda01.asm"
+INCLUDE "audio/music/field6.asm"
 
 
 SECTION "Music 3", ROMX
@@ -448,5 +450,4 @@ INCLUDE "audio/music/surfing.asm"
 INCLUDE "audio/music/jigglypuffsong.asm"
 INCLUDE "audio/music/halloffame.asm"
 INCLUDE "audio/music/credits.asm"
-INCLUDE "audio/music/digda01.asm"
-INCLUDE "audio/music/field6.asm"
+

@@ -35,6 +35,8 @@ ENDM
 	music_const MUSIC_DEFEATED_TRAINER,    Music_DefeatedTrainer
 	music_const MUSIC_DEFEATED_WILD_MON,   Music_DefeatedWildMon
 	music_const MUSIC_DEFEATED_GYM_LEADER, Music_DefeatedGymLeader
+	music_const MUSIC_DIGDA01,             Music_Digda01
+	music_const MUSIC_FIELD6,   		   Music_Field6
 
 	; AUDIO_3
 	music_const MUSIC_TITLE_SCREEN,        Music_TitleScreen
