@@ -331,11 +331,10 @@ PlayShootingStar:
 	ld a, $67       ; starting tile ID
 	ld c, $06       ; number of tiles
 	.loop
-    ld [hli], a
-    inc a
-    dec c
-    jr nz, .loop
-	
+       ld [hli], a
+       inc a
+       dec c
+       jr nz, .loop
 	ld c, 40
 	call DelayFrames
 .next
