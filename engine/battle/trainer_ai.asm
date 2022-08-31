@@ -345,7 +345,7 @@ CooltrainerFAI:
 	; The intended 25% chance to consider switching will not apply.
 	; Uncomment the line below to fix this.
 	cp 25 percent + 1
-	; ret nc
+	ret nc ; fixes the bug
 	ld a, 10
 	call AICheckIfHPBelowFraction
 	jp c, AIUseHyperPotion
@@ -387,6 +387,9 @@ KogaAI:
 BlaineAI:
 	cp 25 percent + 1
 	ret nc
+	ld a, 10
+	call AICheckIfHPBelowFraction
+	ret nc ; this fixes the super potion thing - PvK
 	jp AIUseSuperPotion
 
 SabrinaAI:
