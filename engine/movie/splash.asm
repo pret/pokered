@@ -124,7 +124,7 @@ AnimateShootingStar:
 	ld a, [wMoveDownSmallStarsOAMCount]
 	cp 24
 	jr z, .next2
-	add 6 ; should be 4, but the extra 2 aren't visible on screen
+	add 4 ; fixes the invisible extra 2 stars that can take up ram
 	ld [wMoveDownSmallStarsOAMCount], a
 .next2
 	call MoveDownSmallStars

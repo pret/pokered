@@ -205,12 +205,38 @@ TryingToLearnText:
 	text_far _TryingToLearnText
 	text_end
 
-OneTwoAndText:
+OneTwoAndText: ; uses the fixed move swap sound - PvK
 	text_far _OneTwoAndText
 	text_pause
 	text_asm
+	text_far _OneTwoAndText
+	text_pause
+	text_asm
+	push af
+	push bc
+	push de
+	push hl
+	ld a, $1
+	ld [wMuteAudioAndPauseMusic], a
+	call DelayFrame
+	ld a, [wAudioROMBank]
+	push af
+	ld a, BANK(SFX_Swap_1)
+	ld [wAudioROMBank], a
+	ld [wAudioSavedROMBank], a
+	call WaitForSoundToFinish
 	ld a, SFX_SWAP
-	call PlaySoundWaitForCurrent
+	call PlaySound
+	call WaitForSoundToFinish
+	pop af
+	ld [wAudioROMBank], a
+	ld [wAudioSavedROMBank], a
+	xor a
+	ld [wMuteAudioAndPauseMusic], a
+	pop hl
+	pop de
+	pop bc
+	pop af
 	ld hl, PoofText
 	ret
 

@@ -304,7 +304,7 @@ SlotMachine_StopWheel1Early:
 .loop
 	ld a, [hli]
 	cp HIGH(SLOTS7)
-	jr c, .stopWheel ; condition never true
+	jr z, .stopWheel ; now works properly - PvK
 	dec c
 	jr nz, .loop
 	ret
@@ -329,9 +329,13 @@ SlotMachine_StopWheel2Early:
 ; player's odds.
 .sevenAndBarMode
 	call SlotMachine_FindWheel1Wheel2Matches
+	ret nz
 	ld a, [de]
 	cp HIGH(SLOTSBAR) + 1
-	ret nc
+	jr c, .stopWheel
+	ld a, [wSlotMachineFlags]
+	bit 6, a
+	ret z
 .stopWheel
 	xor a
 	ld [wSlotMachineWheel2SlipCounter], a
@@ -850,7 +854,7 @@ LoadSlotMachineTiles:
 	call DisableLCD
 	ld hl, SlotMachineTiles2
 	ld de, vChars0
-	ld bc, $1c tiles ; should be SlotMachineTiles2End - SlotMachineTiles2, or $18 tiles
+	ld bc, SlotMachineTiles2End - SlotMachineTiles2 ; fixes loading too many tiles - PvK
 	ld a, BANK(SlotMachineTiles2)
 	call FarCopyData2
 	ld hl, SlotMachineTiles1
@@ -860,7 +864,7 @@ LoadSlotMachineTiles:
 	call FarCopyData2
 	ld hl, SlotMachineTiles2
 	ld de, vChars2 tile $25
-	ld bc, $1c tiles ; should be SlotMachineTiles2End - SlotMachineTiles2, or $18 tiles
+	ld bc, SlotMachineTiles2End - SlotMachineTiles2
 	ld a, BANK(SlotMachineTiles2)
 	call FarCopyData2
 	ld hl, SlotMachineMap

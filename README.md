@@ -1,3 +1,55 @@
+Kanto Expansion Pak
+===================
+This is a ROM Hack of Pokémon Red and Blue, aiming to expand the dex with 
+
+QoL Enhancements
+====
+- PC added to Celadon Hotel where the event usually is. Why not?
+- Artificial Save Delay has been removed.
+
+Bug Fixes
+====
+Many non-multiplayer, non-battle related bugs have been fixed. The aforementioned have been preserved for the RBY battle experience. Bugs that are fixed are ones that objectively hurt the gameplay experience. Much of this can be attributed to [the tutorials](https://github.com/pret/pokered/wiki/Bugs-and-Glitches) made by the good people at pret.
+- Blaine is no longer addicted to Super Potions.
+- CoolTrainerF no longer switches a lot.
+- Transformed Pokemon aren't presumed to be Dittos! (very important given Animon)
+- Status curing items don't remove modifiers anymore.
+- Learning new moves plays the sound in the correct bank.
+- Falling through a hole on a bike now properly resets the music, as you fall off a bike when going down.
+- Using an Escape Rope no longer shows weird characters on DMG and spins correctly on DMG.
+- The Item Finder will correctly find items at X/Y 0.0
+- Glitch Pokémon will no longer corrupt the Hall of Fame.
+- Strength smoke puffs now show properly.
+- Game Corner slots no longer load too many tiles; the lucky machine stops when it should if there's a 7, few other objective issues. Also, the 40-coin hidden item is fixed, and there can always be a lucky machine.
+- 2 invisible stars that show on the title screen are cut off; also, the "presents" logo from RG is re-used!
+- The healing machine animates correctly! 
+- Using Minimize or Substitute, looking at the Pokedex, and then battling won't cause sprite corruption.
+- OAM Updates can no longer be interrupted by V-Blank, avoiding some sprite corruption.
+- Trainer Card transition no longer shows weird garbage on DMGs; this was due to not having enough time to load properly.
+- Battle victory music plays at the right time; there were some situations where it would happen when you lost.
+- Music in Oak's Lab is delayed a frame so it always plays with the correct channels; V-Blank could otherwise interrupt it.
+- The hidden item sfx no longer gets cut off sometimes
+- The audio engine no longer borrows from the high bytes of the wrong frequency.
+- Oak no longer has his line overwrite itself when giving Poke Balls.
+- Player correctly faces the Route 8 guard when stopped.
+- Weird behaviour when going to 11F in Silph Co. and forcing a player to leave despite not moving is fixed.
+- Fixed weirdness in Pokemon Tower where saving Mr. Fuji won't immediately let you leave. Also fixed coord termination on 2F which could cause some terribleness.
+and more!
+
+Credits
+====
+* Plague von Karma - Creator of the Showdown Mod, Developer
+* Martha's Against Humanity - Developer 
+* Ema Sky - Developer 
+* ausma - Showdown Mod assistance
+* Paulluxx - Showdown Mod assistance
+* DuoM2 - Showdown Mod assistance 
+* Albatross - Much of the new sprites used in the hack 
+* ZumiIsawhat? - Restorations of beta OST
+* Helix Chamber, RacieBeep, et al - Prototype Pokémon sprites
+* pret et al - Pokémon Red and Blue Disassembly Project, many tutorials helped us!
+
+Original README.md proceeding;
 # Pokémon Red and Blue [![Build Status][ci-badge]][ci]
 
 This is a disassembly of Pokémon Red and Blue.

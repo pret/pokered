@@ -137,7 +137,7 @@ _OaksLabGivePokeballsText2::
 
 	para "Just throw a #"
 	line "BALL at it and try"
-	line "to catch it!"
+	cont "to catch it!" ; this prevents the text overwriting weirdness
 
 	para "This won't always"
 	line "work, though."

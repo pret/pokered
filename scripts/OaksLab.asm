@@ -118,6 +118,7 @@ OaksLabScript4:
 	call UpdateSprites
 	ld hl, wFlags_D733
 	res 1, [hl]
+	call DelayFrame
 	call PlayDefaultMusic
 
 	ld a, $5

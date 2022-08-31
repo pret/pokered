@@ -15,7 +15,7 @@ CeladonGameCornerScript_48bcf:
 	ldh a, [hRandomAdd]
 	cp $7
 	jr nc, .asm_48be2
-	ld a, $8
+	ld a, $7 ; no longer makes the lucky machine a nonexistent one
 .asm_48be2
 	srl a
 	srl a
