@@ -3,8 +3,8 @@ Route21WildMons:
 	db 21, RATICATE
 	db 23, PIDGEOTTO
 	db 30, BARUNDA
-	db 30, MR. MIME
-	db 29, MR. MIME
+	db 30, MR.MIME
+	db 29, MR.MIME
 	db 29, GLOOM
 	db 29, WEEPINBELL
 	db 28, TANGELA

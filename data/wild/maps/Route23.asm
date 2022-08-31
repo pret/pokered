@@ -18,7 +18,7 @@ IF DEF(_BLUE)
 	db 41, PINSIR
 ENDC
 	db 43, EXEGGCUTE
-	db 41, ZUDUCK
+	db 41, WEIRDUCK
 	db 38, TAUROS
 	end_grass_wildmons
 
