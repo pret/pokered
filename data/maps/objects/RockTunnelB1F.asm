@@ -18,5 +18,6 @@ RockTunnelB1F_Object:
 	object_event 14, 28, SPRITE_COOLTRAINER_F, STAY, RIGHT, 6, OPP_JR_TRAINER_F, 10
 	object_event 33,  5, SPRITE_HIKER, STAY, RIGHT, 7, OPP_HIKER, 11
 	object_event 26, 30, SPRITE_SUPER_NERD, STAY, DOWN, 8, OPP_POKEMANIAC, 5
+	object_event  7, 24, SPRITE_MON, WALK, DOWN, 3, KABUTOPS, 40
 
 	def_warps_to ROCK_TUNNEL_B1F
