@@ -17,4 +17,5 @@
 	tmhm
 	; end
 
-	db 0 ; padding
+	db BANK(WeedlePicFront)
+	assert BANK(WeedlePicFront) == BANK(WeedlePicBack)

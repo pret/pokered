@@ -20,4 +20,5 @@
 	     FLASH
 	; end
 
-	db 0 ; padding
+	db BANK(MagnemitePicFront)
+	assert BANK(MagnemitePicFront) == BANK(MagnemitePicBack)

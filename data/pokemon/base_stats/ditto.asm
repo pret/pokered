@@ -17,4 +17,5 @@
 	tmhm
 	; end
 
-	db 0 ; padding
+	db BANK(DittoPicFront)
+	assert BANK(DittoPicFront) == BANK(DittoPicBack)

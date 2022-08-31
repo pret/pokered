@@ -21,4 +21,5 @@
 	     REST,         SUBSTITUTE,   CUT,          STRENGTH
 	; end
 
-	db 0 ; padding
+	db BANK(CharmeleonPicFront)
+	assert BANK(CharmeleonPicFront) == BANK(CharmeleonPicBack)

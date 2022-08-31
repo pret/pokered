@@ -24,4 +24,5 @@
 	     STRENGTH
 	; end
 
-	db 0 ; padding
+	db BANK(SnorlaxPicFront)
+	assert BANK(SnorlaxPicFront) == BANK(SnorlaxPicBack)

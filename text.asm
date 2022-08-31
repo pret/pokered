@@ -70,6 +70,7 @@ INCLUDE "text/SeafoamIslandsB4F.asm"
 INCLUDE "data/text/text_2.asm"
 
 INCLUDE "text/DiglettsCaveRoute2.asm"
+INCLUDE "text/DiglettsCave.asm"
 INCLUDE "text/ViridianForestNorthGate.asm"
 INCLUDE "text/Route2TradeHouse.asm"
 INCLUDE "text/Route2Gate.asm"

@@ -20,4 +20,5 @@
 	     SURF
 	; end
 
-	db 0 ; padding
+	db BANK(OmanytePicFront)
+	assert BANK(OmanytePicFront) == BANK(OmanytePicBack)

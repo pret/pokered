@@ -22,4 +22,5 @@
 	     STRENGTH
 	; end
 
-	db 0 ; padding
+	db BANK(GolduckPicFront)
+	assert BANK(GolduckPicFront) == BANK(GolduckPicBack)

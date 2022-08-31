@@ -21,4 +21,5 @@
 	     THUNDER_WAVE, PSYWAVE,      TRI_ATTACK,   SUBSTITUTE,   FLASH
 	; end
 
-	db 0 ; padding
+	db BANK(DrowzeePicFront)
+	assert BANK(DrowzeePicFront) == BANK(DrowzeePicBack)

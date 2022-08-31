@@ -22,4 +22,5 @@
 	     FLASH
 	; end
 
-	db 0 ; padding
+	db BANK(StarmiePicFront)
+	assert BANK(StarmiePicFront) == BANK(StarmiePicBack)

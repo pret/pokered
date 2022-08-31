@@ -21,4 +21,5 @@
 	     THUNDER_WAVE, SUBSTITUTE,   FLASH
 	; end
 
-	db 0 ; padding
+	db BANK(RaichuPicFront)
+	assert BANK(RaichuPicFront) == BANK(RaichuPicBack)

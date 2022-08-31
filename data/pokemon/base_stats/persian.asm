@@ -20,4 +20,5 @@
 	     SKULL_BASH,   REST,         SUBSTITUTE
 	; end
 
-	db 0 ; padding
+	db BANK(PersianPicFront)
+	assert BANK(PersianPicFront) == BANK(PersianPicBack)

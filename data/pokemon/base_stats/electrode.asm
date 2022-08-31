@@ -20,4 +20,5 @@
 	     THUNDER_WAVE, EXPLOSION,    SUBSTITUTE,   FLASH
 	; end
 
-	db 0 ; padding
+	db BANK(ElectrodePicFront)
+	assert BANK(ElectrodePicFront) == BANK(ElectrodePicBack)
