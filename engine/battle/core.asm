@@ -368,14 +368,21 @@ MainInBattleLoop:
 	callfar SwitchEnemyMon
 .noLinkBattle
 	ld a, [wPlayerSelectedMove]
+	cp BULLET_PUNCH
+      jr z, .PriorityMoveUsed
 	cp QUICK_ATTACK
 	jr nz, .playerDidNotUseQuickAttack
+.PriorityMoveUsed
 	ld a, [wEnemySelectedMove]
+	cp BULLET_PUNCH
+	jr z, .compareSpeed
 	cp QUICK_ATTACK
 	jr z, .compareSpeed  ; if both used Quick Attack
 	jp .playerMovesFirst ; if player used Quick Attack and enemy didn't
 .playerDidNotUseQuickAttack
 	ld a, [wEnemySelectedMove]
+	cp BULLET_PUNCH
+	jr z, .enemyMovesFirst
 	cp QUICK_ATTACK
 	jr z, .enemyMovesFirst ; if enemy used Quick Attack and player didn't
 	ld a, [wPlayerSelectedMove]
@@ -5150,7 +5157,7 @@ MetronomePickMove:
 	and a
 	jr z, .pickMoveLoop
 	cp STRUGGLE
-	assert NUM_ATTACKS == STRUGGLE ; random numbers greater than STRUGGLE are not moves
+	assert NUM_ATTACKS == BULLET_PUNCH ; rerolls if greater than the last move in index
 	jr nc, .pickMoveLoop
 	cp METRONOME
 	jr z, .pickMoveLoop

@@ -165,6 +165,19 @@ AttackAnimationPointers:
 	dw SlashAnim
 	dw SubstituteAnim
 	dw StruggleAnim
+	dw FairyWindAnim
+	dw DrainingKissAnim
+	dw MetalSoundAnim
+	dw MagnetBombAnim
+	dw IronDefenseAnim
+	dw DazzleGleamAnim
+	dw NightSlashAnim
+	dw FeintAttackAnim
+	dw IronHeadAnim
+	dw BrutalSwingAnim
+	dw CharmAnim
+	dw SweetKissAnim
+	dw BulletPunchAnim
 	assert_table_length NUM_ATTACKS
 	dw ShowPicAnim
 	dw EnemyFlashAnim
@@ -243,6 +256,7 @@ DoubleSlapAnim:
 	battle_anim DOUBLESLAP, SUBANIM_01, 0, 5
 	db -1 ; end
 
+BulletPunchAnim:
 CometPunchAnim:
 	battle_anim COMET_PUNCH, SUBANIM_02, 0, 4
 	battle_anim COMET_PUNCH, SUBANIM_02, 0, 4
@@ -282,6 +296,7 @@ VicegripAnim:
 	battle_anim VICEGRIP, SUBANIM_2A, 0, 8
 	db -1 ; end
 
+NightSlashAnim:
 GuillotineAnim:
 	battle_anim GUILLOTINE, SUBANIM_2A, 0, 6
 	db -1 ; end
@@ -301,6 +316,7 @@ CutAnim:
 	battle_anim NO_MOVE, SUBANIM_16, 0, 4
 	db -1 ; end
 
+FairyWindAnim:
 GustAnim:
 	battle_anim GUST, SUBANIM_10, 1, 6
 	battle_anim NO_MOVE, SUBANIM_02, 0, 6
@@ -410,6 +426,7 @@ ThrashAnim:
 	battle_anim THRASH, SUBANIM_04, 1, 6
 	db -1 ; end
 
+IronHeadAnim:
 DoubleEdgeAnim:
 	battle_anim LEECH_SEED, SE_LIGHT_SCREEN_PALETTE
 	battle_anim NO_MOVE, SUBANIM_2D, 0, 6
@@ -565,6 +582,7 @@ DrillPeckAnim:
 	battle_anim DRILL_PECK, SUBANIM_04, 1, 6
 	db -1 ; end
 
+BrutalSwingAnim:
 SubmissionAnim:
 	battle_anim SUBMISSION, SE_SLIDE_MON_OFF
 	battle_anim NO_MOVE, SUBANIM_01, 0, 6
@@ -603,6 +621,7 @@ StrengthAnim:
 	battle_anim FIRE_PUNCH, SUBANIM_04, 1, 6
 	db -1 ; end
 
+DrainingKissAnim:
 AbsorbAnim:
 	battle_anim ABSORB, SE_LIGHT_SCREEN_PALETTE
 	battle_anim NO_MOVE, SUBANIM_21, 0, 6
@@ -751,6 +770,7 @@ AgilityAnim:
 	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
 	db -1 ; end
 
+FeintAttackAnim:
 QuickAttackAnim:
 	battle_anim QUICK_ATTACK, SE_SLIDE_MON_OFF
 	battle_anim NO_MOVE, SUBANIM_04, 1, 6
@@ -776,6 +796,7 @@ MimicAnim:
 	battle_anim MIMIC, SUBANIM_22, 1, 6
 	db -1 ; end
 
+MetalSoundAnim:
 ScreechAnim:
 	battle_anim SCREECH, SUBANIM_12, 1, 6
 	db -1 ; end
@@ -799,6 +820,7 @@ RecoverAnim:
 	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
 	db -1 ; end
 
+IronDefenseAnim:
 HardenAnim:
 	battle_anim HARDEN, SE_LIGHT_SCREEN_PALETTE
 	battle_anim NO_MOVE, SUBANIM_43, 1, 6
@@ -903,6 +925,7 @@ SelfdestructAnim:
 	battle_anim SELFDESTRUCT, SUBANIM_34, 1, 3
 	db -1 ; end
 
+MagnetBombAnim:
 EggBombAnim:
 	battle_anim EGG_BOMB, SUBANIM_41, 1, 4
 	battle_anim EGG_BOMB, SUBANIM_42, 1, 4
@@ -1019,6 +1042,8 @@ LeechLifeAnim:
 	battle_anim NO_MOVE, SE_DARK_SCREEN_FLASH
 	db -1 ; end
 
+SweetKissAnim:
+CharmAnim:
 LovelyKissAnim:
 	battle_anim LOVELY_KISS, SUBANIM_12, 0, 6
 	db -1 ; end
@@ -1052,6 +1077,7 @@ SporeAnim:
 	battle_anim SPORE, SUBANIM_36, 0, 6
 	db -1 ; end
 
+DazzleGleamAnim:
 FlashAnim:
 	battle_anim LEECH_SEED, SE_LIGHT_SCREEN_PALETTE
 	battle_anim GLARE, SE_DARK_SCREEN_FLASH

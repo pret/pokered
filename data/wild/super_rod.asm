@@ -47,13 +47,13 @@ SuperRodData:
 	db 5, GYOPIN
 
 .Group2:
-	db 2
+	db 3
 	db 10, MAGIKARP
 	db 7, POLIWAG
 	db 10, GYOPIN
 
 .Group3:
-	db 3
+	db 5
 	db 15, SKIMPER
 	db 19, MAGIKARP
 	db 15, KRABBY
@@ -61,7 +61,7 @@ SuperRodData:
 	db 15, CHEEP
 
 .Group4:
-	db 2
+	db 5
 	db 20, KRABBY
 	db 20, SHELLDER
 	db 20, TENTACOOL
@@ -69,7 +69,7 @@ SuperRodData:
 	db 20, HORSEA
 
 .Group5:
-	db 2
+	db 5
 	db 25, POLIWHIRL
 	db 25, SLOWPOKE
 	db 20, SKIMPER
@@ -77,7 +77,7 @@ SuperRodData:
 	db 25, BLOTTLE
 
 .Group6:
-	db 4
+	db 6
 	db 15, DRATINI
 	db 28, KRABBY
 	db 25, CHEEP
@@ -86,7 +86,7 @@ SuperRodData:
 	db 32, BAWLIGUA
 
 .Group7:
-	db 4
+	db 6
 	db 40, TENTACRUEL
 	db 40, KINGLER
 	db 40, SEAKING
@@ -102,7 +102,7 @@ SuperRodData:
 	db 40, PENDRAKEN
 
 .Group9:
-	db 4
+	db 5
 	db 50, GYARADOS
 	db 50, SEAKING
 	db 50, KINGLER
@@ -110,7 +110,7 @@ SuperRodData:
 	db 50, PENDRAKEN
 
 .Group10:
-	db 4
+	db 12
 	db 50, KINGLER
 	db 50, PENDRAKEN
 	db 50, SEAKING
