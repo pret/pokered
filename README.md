@@ -1,6 +1,6 @@
 Kanto Expansion Pak
 ===================
-This is a ROM Hack of Pokémon Red and Blue, aiming to expand the dex with 
+This is a ROM Hack of Pokémon Red and Blue, aiming to expand the Kanto region with more interesting locations, evolutions added in later generations, and QoL changes.
 
 Improved areas
 ====
