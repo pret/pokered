@@ -7,17 +7,18 @@
 	db 45 ; catch rate
 	db 196 ; base exp
 
-	INCBIN "gfx/pokemon/front/vaporeon.pic", 0, 1 ; sprite dimensions
-	dw VaporeonPicFront, VaporeonPicBack
+	INCBIN "gfx/pokemon/front/leafeon.pic", 0, 1 ; sprite dimensions
+	dw LeafeonPicFront, LeafeonPicBack
 
 	db TACKLE, SAND_ATTACK, QUICK_ATTACK, ABSORB ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  HYPER_BEAM,   \
-	     RAGE,         MEGA_DRAIN,   MIMIC,        DOUBLE_TEAM,  REFLECT,      \
-		 BIDE,         SWIFT,        SKULL_BASH,   REST,         SUBSTITUTE
+	     RAGE,         MEGA_DRAIN,   SOLARBEAM,    MIMIC,        DOUBLE_TEAM,  \
+	     REFLECT,      BIDE,         SWIFT,        SKULL_BASH,   REST,         \
+	     SUBSTITUTE
 	; end
 
-	db BANK(VaporeonPicFront)
-	assert BANK(VaporeonPicFront) == BANK(VaporeonPicBack)
+	db BANK(LeafeonPicFront)
+	assert BANK(LeafeonPicFront) == BANK(LeafeonPicBack)

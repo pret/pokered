@@ -464,7 +464,7 @@ _EspeonDexEntry::
 	next "its body to sense"
 
 	page "air currents and"
-	next "predicts its"
+	next "predict its"
 	next "enemy's actions"
 	dex
 

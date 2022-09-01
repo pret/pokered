@@ -2583,9 +2583,9 @@ UmbreonEvosMoves:
 	db 16, BRUTAL_SWING
 	db 23, QUICK_ATTACK
 	db 30, FEINT_ATTACK
-	db 36, BITE ; should be Fake Tears but I can't find that move
+	db 36, BITE ; should be Fake Tears but it hasn't been added yet
 	db 42, TAKE_DOWN
-	db 52, NIGHT_SLASH ; should be False Surrender but I can't find that move
+	db 52, NIGHT_SLASH ; should be False Surrender but it hasn't been added yet
 	
 LeafeonEvosMoves:
 ; Evolutions
@@ -2607,7 +2607,7 @@ GlaceonEvosMoves:
 	db 16, AURORA_BEAM
 	db 23, QUICK_ATTACK
 	db 30, MIST
-	db 30, HAZE
+	db 32, HAZE
 	db 42, TAKE_DOWN
 	db 47, BLIZZARD
 	db 52, BARRIER
@@ -2617,7 +2617,7 @@ SylveonEvosMoves:
 	db 0
 ; Learnset
 	db 8, SAND_ATTACK
-	db 16, FAIRY_WIND ; should be Disarming Voice according to KEP docs but I can't find that move
+	db 16, FAIRY_WIND ; should be Disarming Voice but it hasn't been added yet
 	db 23, QUICK_ATTACK
 	db 30, DRAININGKISS
 	db 36, DAZZLE_GLEAM

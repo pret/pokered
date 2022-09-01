@@ -473,3 +473,16 @@ RhyperiorPicBack::     INCBIN "gfx/pokemon/back/rhyperiorb.pic"
 FossilKabutopsPic::   INCBIN "gfx/pokemon/front/fossilkabutops.pic"
 FossilAerodactylPic:: INCBIN "gfx/pokemon/front/fossilaerodactyl.pic"
 GhostPic::            INCBIN "gfx/battle/ghost.pic"
+
+SECTION "Pics 9", ROMX
+
+EspeonPicFront::       INCBIN "gfx/pokemon/front/espeon.pic"
+EspeonPicBack::        INCBIN "gfx/pokemon/back/espeonb.pic"
+UmbreonPicFront::      INCBIN "gfx/pokemon/front/umbreon.pic"
+UmbreonPicBack::       INCBIN "gfx/pokemon/back/umbreonb.pic"
+LeafeonPicFront::      INCBIN "gfx/pokemon/front/leafeon.pic"
+LeafeonPicBack::       INCBIN "gfx/pokemon/back/leafeonb.pic"
+GlaceonPicFront::      INCBIN "gfx/pokemon/front/glaceon.pic"
+GlaceonPicBack::       INCBIN "gfx/pokemon/back/glaceonb.pic"
+SylveonPicFront::      INCBIN "gfx/pokemon/front/sylveon.pic"
+SylveonPicBack::       INCBIN "gfx/pokemon/back/sylveonb.pic"

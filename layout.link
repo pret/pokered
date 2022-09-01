@@ -181,6 +181,8 @@ ROMX $2D
 	"Pics 7"
 ROMX $2E
 	"Pics 8"
+ROMX $2F
+	"Pics 9"
 WRAM0
 	"Audio RAM"
 	org $c100
