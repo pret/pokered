@@ -199,4 +199,5 @@ MonsterNames::
 	db "BETOBEBII@"
 	db "BELLOSSOM@"
 	db "SCIZOR@@@@"
+	db "RHYPERIOR@"
 	assert_table_length NUM_POKEMON_INDEXES

@@ -22,3 +22,19 @@ CopyData::
 	or b
 	jr nz, CopyData
 	ret
+
+FarCopyData2::
+; Identical to FarCopyData, but uses hROMBankTemp
+; as temp space instead of wBuffer.
+	ldh [hROMBankTemp], a
+	ldh a, [hLoadedROMBank]
+	push af
+	ldh a, [hROMBankTemp]
+	ldh [hLoadedROMBank], a
+	ld [MBC1RomBank], a
+	call CopyData
+	pop af
+	ldh [hLoadedROMBank], a
+	ld [MBC1RomBank], a
+	ret
+	

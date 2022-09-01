@@ -448,6 +448,16 @@ _BellossomDexEntry::
 	next "to summon the sun"
 	dex
 
+_RhyperiorDexEntry::
+	text "This is a newly"
+	next "discovered"
+	next "#MON. It is"
+
+	page "currently under"
+	next "investigation. No"
+	next "info is available"
+	dex
+
 _MissingNoDexEntry::
 	text "This is a newly"
 	next "discovered"

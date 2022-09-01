@@ -33,6 +33,8 @@ Route22Script_50ed6:
 .asm_50ee1
 	ld a, [hl]
 	ld [wTrainerNo], a
+	ld a, 1
+	ld [wIsTrainerBattle], a 
 	ret
 
 Route22MoveRivalSprite:
@@ -149,6 +151,8 @@ Route22Script2:
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, Route22Script_50ece
+	xor a 
+	ld [wIsTrainerBattle], a 
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	and a ; cp SPRITE_FACING_DOWN
 	jr nz, .notDown
@@ -304,6 +308,8 @@ Route22Script5:
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, Route22Script_50ece
+	xor a 
+	ld [wIsTrainerBattle], a
 	ld a, $2
 	ldh [hSpriteIndex], a
 	ld a, [wcf0d]

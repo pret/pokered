@@ -199,4 +199,5 @@ PokedexOrder:
 	db DEX_BETOBEBII
 	db DEX_BELLOSSOM
 	db DEX_SCIZOR
+	db DEX_RHYPERIOR
 	assert_table_length NUM_POKEMON_INDEXES

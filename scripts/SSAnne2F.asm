@@ -114,6 +114,8 @@ SSAnne2Script1:
 	ld a, $3
 .done
 	ld [wTrainerNo], a
+	ld a, 1
+	ld [wIsTrainerBattle], a
 
 	call SSAnne2Script_61416
 	ld a, $2
@@ -124,6 +126,8 @@ SSAnne2Script2:
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, SSAnne2Script_613ab
+	xor a 
+	ld [wIsTrainerBattle], a 
 	call SSAnne2Script_61416
 	ld a, $f0
 	ld [wJoyIgnore], a

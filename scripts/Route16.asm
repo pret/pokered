@@ -33,6 +33,8 @@ Route16Script0:
 	ld [wCurOpponent], a
 	ld a, 30
 	ld [wCurEnemyLVL], a
+	xor a
+	ld [wIsTrainerBattle], a 
 	ld a, HS_ROUTE_16_SNORLAX
 	ld [wMissableObjectIndex], a
 	predef HideObject

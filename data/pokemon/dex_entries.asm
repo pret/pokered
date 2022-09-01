@@ -199,6 +199,7 @@ PokedexEntryPointers:
 	dw MissingNoDexEntry
 	dw BellossomDexEntry
 	dw ScizorDexEntry
+	dw RhyperiorDexEntry
 	assert_table_length NUM_POKEMON_INDEXES
 
 ; string: species name
@@ -1550,3 +1551,10 @@ ScizorDexEntry:
 	text_far _ScizorDexEntry
 	text_end
 
+RhyperiorDexEntry:
+    db "TEST@"
+	db 5,11
+	dw 5000
+	text_far _RhyperiorDexEntry
+	text_end 
+	

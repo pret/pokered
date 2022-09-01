@@ -156,6 +156,8 @@ CeruleanCityScript1:
 	ld a, $9
 .done
 	ld [wTrainerNo], a
+	ld a, 1
+	ld [wIsTrainerBattle], a 
 
 	xor a
 	ldh [hJoyHeld], a
@@ -168,6 +170,8 @@ CeruleanCityScript2:
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, CeruleanCityScript_1948c
+	xor a 
+	ld [wIsTrainerBattle], a 
 	call CeruleanCityScript_1955d
 	ld a, $f0
 	ld [wJoyIgnore], a

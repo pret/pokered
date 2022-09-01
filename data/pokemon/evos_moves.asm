@@ -202,6 +202,7 @@ EvosMovesPointerTable:
 	dw BetobebiiEvosMoves
 	dw BellossomEvosMoves
 	dw ScizorEvosMoves
+	dw RhyperiorEvosMoves
 	assert_table_length NUM_POKEMON_INDEXES
 
 RhydonEvosMoves:
@@ -2538,3 +2539,14 @@ ScizorEvosMoves:
 	db 50, BULLET_PUNCH
 	db 0
 
+RhyperiorEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 30, STOMP
+	db 35, TAIL_WHIP
+	db 40, FURY_ATTACK
+	db 48, HORN_DRILL
+	db 55, LEER
+	db 64, TAKE_DOWN
+	db 0

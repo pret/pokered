@@ -205,4 +205,5 @@ CryData::
 	mon_cry SFX_CRY_05, $FF, $40 ; Betobebii
 	mon_cry SFX_CRY_00, $00, $00 ; Bellossom (unfinished)
 	mon_cry SFX_CRY_00, $00, $00 ; Scizor (unfinished)
+	mon_cry SFX_CRY_00, $00, $00 ; Rhyperior (test)
 	assert_table_length NUM_POKEMON_INDEXES
