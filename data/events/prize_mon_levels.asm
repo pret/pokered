@@ -1,19 +1,19 @@
 PrizeMonLevelDictionary:
 IF DEF(_RED)
-	db ABRA,      9
-	db CLEFAIRY,  8
-	db NIDORINA, 17
+	db CUBONE,      12
+	db CLEFAIRY,  12
+	db NIDORINA, 18
 
-	db DRATINI,  18
+	db CACTUS,  25
 	db SCYTHER,  25
-	db PORYGON,  26
+	db PORYGON,  30
 ENDC
 IF DEF(_BLUE)
-	db ABRA,      6
+	db ABRA,      12
 	db CLEFAIRY, 12
-	db NIDORINO, 17
+	db NIDORINO, 18
 
-	db PINSIR,   20
-	db DRATINI,  24
-	db PORYGON,  18
+	db CACTUS,   25
+	db PINSIR,  25
+	db PORYGON,  30
 ENDC

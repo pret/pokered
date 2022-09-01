@@ -9,8 +9,23 @@ Improved areas
 
 QoL Enhancements
 ====
-- PC added to Celadon Hotel where the event usually is. Why not?
+- PC added to Celadon Hotel where the invisible event usually is. Why not?
 - Artificial Save Delay has been removed.
+- Japanese event moves can now be taught via TM/HM;
+	- TM16 (Pay Day) can be taught to Fearow and Rapidash.
+	- TM23 (Dragon Rage) can be taught to Magikarp.
+	- HM02 (Fly) can be taught to the Pikachu line.
+	- HM03 (Surf) can be taught to the Pikachu line.
+- The Game Corner in general is massively buffed, making everything far more worth going for;
+	- 3x Cherry now gives 40 coins (used to be 8)
+	- 3x Magikarp/Poliwag/Bird/Diglett/Rattata/Jigglypuff now gives 75 coins (used to be 15)
+	- 3x BAR now gives 300 coins (used to be 100)
+	- 3x 7s now gives 999 coins (used to be 300)
+- Game Corner prizes have been altered;
+	- Version parity is done across prizes, using Blue's superior prices.
+	- New prizes across both versions include; Cubone, Blastyke, and Cactus.
+	- Version exclusives are Clefairy for Red and Jigglypuff for Blue. Pinsir and Scyther remain the same.
+	- The Moon Stone is available over TM23 (Dragon Rage). Dragon Rage has been moved to Celadon Mart, over Take Down, which can still be obtained in Silph Co.
 
 Bug Fixes
 ====
