@@ -5,8 +5,6 @@ Route21WildMons:
 	db 30, BARUNDA
 	db 30, MR_MIME
 	db 29, MR_MIME
-	db 30, MR_MIME
-	db 29, MR_MIME
 	db 29, GLOOM
 	db 29, WEEPINBELL
 	db 28, TANGELA
