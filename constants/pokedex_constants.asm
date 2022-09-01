@@ -186,6 +186,11 @@
 	const DEX_VAPOREON   ; 134
 	const DEX_JOLTEON    ; 135
 	const DEX_FLAREON    ; 136
+	const DEX_ESPEON
+	const DEX_UMBREON
+	const DEX_LEAFEON
+	const DEX_GLACEON
+	const DEX_SYLVEON
 	const DEX_PORYGON    ; 137
 	const DEX_OMANYTE    ; 138
 	const DEX_OMASTAR    ; 139
@@ -201,11 +206,5 @@
 	const DEX_DRAGONITE  ; 149
 	const DEX_MEWTWO     ; 150
 	const DEX_MEW        ; 151
-	const DEX_RHYPERIOR
-	const DEX_ESPEON
-	const DEX_UMBREON
-	const DEX_LEAFEON
-	const DEX_GLACEON
-	const DEX_SYLVEON
 
 DEF NUM_POKEMON EQU const_value - 1

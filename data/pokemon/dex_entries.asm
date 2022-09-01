@@ -1559,42 +1559,42 @@ ScizorDexEntry:
 RhyperiorDexEntry:
     db "DRILL@"
 	db 7,10
-	dw 6235
+	dw 6240
 	text_far _RhyperiorDexEntry
 	text_end 
 
 EspeonDexEntry:
     db "SUN@"
 	db 2,11
-	dw 584
+	dw 580
 	text_far _EspeonDexEntry
 	text_end 
 	
 UmbreonDexEntry:
     db "MOONLIGHT@"
 	db 3,3
-	dw 595
+	dw 600
 	text_far _UmbreonDexEntry
 	text_end 
 	
 LeafeonDexEntry:
     db "VERDANT@"
 	db 3,3
-	dw 562
+	dw 560
 	text_far _LeafeonDexEntry
 	text_end 
 	
 GlaceonDexEntry:
     db "FRESH SNOW@"
 	db 2,7
-	dw 571
+	dw 570
 	text_far _GlaceonDexEntry
 	text_end 
 	
 SylveonDexEntry:
     db "INTERTWINE@"
 	db 3,3
-	dw 518
+	dw 520
 	text_far _SylveonDexEntry
 	text_end 
 	

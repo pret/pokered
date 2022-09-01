@@ -449,18 +449,18 @@ _BellossomDexEntry::
 	dex
 
 _RhyperiorDexEntry::
-	text "From holes in its"
-	next "palms, it fires"
-	next "out Geodude!"
+	text "Stores rocks in"
+	next "the holes in its"
+	next "palms, using its"
 
-	page "Its carapace can"
-	next "withstand a"
-	next "volcanic eruption"
+	page "muscles to shoot"
+	next "them. GEODUDE are"
+	next "shot occasionally"
 	dex
 
 _EspeonDexEntry::
 	text "It uses the fine"
-	next "fair that covers"
+	next "hair that covers"
 	next "its body to sense"
 
 	page "air currents and"
@@ -468,14 +468,14 @@ _EspeonDexEntry::
 	next "enemy's actions"
 	dex
 
-_UmbreonDexEntry::
-	text "On the night of a"
-	next "full moon, or"
-	next "when it gets"
+_UmbreonDexEntry::	; Entry alludes to its scrapped Poison type, and I thought it was a neat touch. ~M
+	text "When this #MON"
+	next "becomes angry, its"
+	next "pores secrete a"
 
-	page "excited, the"
-	next "ring patterns on"
-	next "its body glow"
+	page "poisonous sweat,"
+	next "which it sprays at"
+	next "its foe's eyes"
 	dex
 	
 _LeafeonDexEntry::
@@ -499,13 +499,13 @@ _GlaceonDexEntry::
 	dex
 	
 _SylveonDexEntry::
-	text "It sends a"
-	next "soothing aura"
-	next "from its"
+	text "This #MON uses"
+	next "its ribbonlike"
+	next "feelers to emit"
 
-	page "ribbonlike"
-	next "feelers to calm"
-	next "nearby fights"
+	page "a soothing aura"
+	next "that calms any"
+	next "hostile emotions"
 	dex
 
 _MissingNoDexEntry::

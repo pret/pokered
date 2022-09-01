@@ -203,9 +203,9 @@ CryData::
 	mon_cry SFX_CRY_00, $00, $00 ; Hinaazu (unfinished)
 	mon_cry SFX_CRY_1F, $40, $01 ; Pudi
 	mon_cry SFX_CRY_05, $FF, $40 ; Betobebii
-	mon_cry SFX_CRY_00, $00, $00 ; Bellossom (unfinished)
-	mon_cry SFX_CRY_00, $00, $00 ; Scizor (unfinished)
-	mon_cry SFX_CRY_00, $00, $00 ; Rhyperior (test)
+	mon_cry SFX_CRY_00, $00, $00 ; Bellossom (unfinished from this point onward)
+	mon_cry SFX_CRY_00, $00, $00 ; Scizor
+	mon_cry SFX_CRY_00, $00, $00 ; Rhyperior
 	mon_cry SFX_CRY_00, $00, $00 ; Espeon
 	mon_cry SFX_CRY_00, $00, $00 ; Umbreon
 	mon_cry SFX_CRY_00, $00, $00 ; Leafeon

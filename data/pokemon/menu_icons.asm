@@ -182,6 +182,11 @@ MonPartyData:
 	nybble ICON_QUADRUPED ; Vaporeon
 	nybble ICON_QUADRUPED ; Jolteon
 	nybble ICON_QUADRUPED ; Flareon
+	nybble ICON_QUADRUPED ; Espeon
+	nybble ICON_QUADRUPED ; Umbreon
+	nybble ICON_QUADRUPED ; Leafeon
+	nybble ICON_QUADRUPED ; Glaceon
+	nybble ICON_QUADRUPED ; Sylveon
 	nybble ICON_MON       ; Porygon
 	nybble ICON_HELIX     ; Omanyte
 	nybble ICON_HELIX     ; Omastar
@@ -197,10 +202,4 @@ MonPartyData:
 	nybble ICON_SNAKE     ; Dragonite
 	nybble ICON_MON       ; Mewtwo
 	nybble ICON_MON       ; Mew
-	nybble ICON_MON       ; Rhyperior
-	nybble ICON_QUADRUPED ; Espeon
-	nybble ICON_QUADRUPED ; Umbreon
-	nybble ICON_QUADRUPED ; Leafeon
-	nybble ICON_QUADRUPED ; Glaceon
-	nybble ICON_QUADRUPED ; Sylveon
 	end_nybble_array NUM_POKEMON
