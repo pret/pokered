@@ -5,7 +5,7 @@ This is a ROM Hack of Pokémon Red and Blue, aiming to expand the dex with
 Improved areas
 ====
 - Rock Tunnel has a more workable map, now being easier to go through and having new areas to explore. Includes a way to get renewable fossils, items, and other interesting bits and pieces. Overall, it makes Flash much more rewarding to bring, showing you where the items and content are instead of being an inconvenience. 
-- Diglett's Cave has the prototype music and a more detailed map. Plus, if you go back after getting Surf, you'll be able to access a neat little island.
+- Diglett's Cave has a more detailed map. Plus, if you go back after getting Surf, you'll be able to access a neat little island. (Prototype music to be added later!)
 
 QoL Enhancements
 ====
