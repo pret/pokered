@@ -1,14 +1,14 @@
-	db DEX_RHYDON ; pokedex id
+	db DEX_RHYPERIOR ; pokedex id
 
 	db 115, 140, 130,  50,  55
 	;   hp  atk  def  spd  spc
 
 	db GROUND, ROCK ; type
-	db 60 ; catch rate
-	db 204 ; base exp
+	db 30 ; catch rate
+	db 217 ; base exp
 
-	INCBIN "gfx/pokemon/front/rhydon.pic", 0, 1 ; sprite dimensions
-	dw RhydonPicFront, RhydonPicBack
+	INCBIN "gfx/pokemon/front/rhyperior.pic", 0, 1 ; sprite dimensions
+	dw RhyperiorPicFront, RhyperiorPicBack
 
 	db HORN_ATTACK, STOMP, TAIL_WHIP, FURY_ATTACK ; level 1 learnset
 	db GROWTH_SLOW ; growth rate
@@ -23,5 +23,5 @@
 	     SURF,         STRENGTH
 	; end
 
-	db BANK(RhydonPicFront)
-	assert BANK(RhydonPicFront) == BANK(RhydonPicBack)
+	db BANK(RhyperiorPicFront)
+	assert BANK(RhyperiorPicFront) == BANK(RhyperiorPicBack)

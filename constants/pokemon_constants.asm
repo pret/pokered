@@ -206,7 +206,7 @@
 	const BETOBEBII          ; $C5	(new)
 	const BELLOSSOM          ; $C6	(new)
 	const SCIZOR             ; $C7	(new)
-	const RHYPERIOR          ; $C8  (test)
+	const RHYPERIOR          ; $C8
 
 DEF NUM_POKEMON_INDEXES EQU const_value - 1
 

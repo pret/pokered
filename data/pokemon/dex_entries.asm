@@ -1552,9 +1552,9 @@ ScizorDexEntry:
 	text_end
 
 RhyperiorDexEntry:
-    db "TEST@"
-	db 5,11
-	dw 5000
+    	db "DRILL@"
+	db 7,10
+	dw 6240
 	text_far _RhyperiorDexEntry
 	text_end 
 	

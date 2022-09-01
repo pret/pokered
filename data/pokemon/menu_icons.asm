@@ -144,6 +144,7 @@ MonPartyData:
 	nybble ICON_MON       ; Weezing
 	nybble ICON_QUADRUPED ; Rhyhorn
 	nybble ICON_MON       ; Rhydon
+	nybble ICON_MON       ; Rhyperior
 	nybble ICON_FAIRY     ; Chansey
 	nybble ICON_GRASS     ; Monja
 	nybble ICON_GRASS     ; Tangela
@@ -196,5 +197,4 @@ MonPartyData:
 	nybble ICON_SNAKE     ; Dragonite
 	nybble ICON_MON       ; Mewtwo
 	nybble ICON_MON       ; Mew
-	nybble ICON_MON       ; Rhyperior
 	end_nybble_array NUM_POKEMON

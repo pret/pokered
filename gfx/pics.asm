@@ -467,6 +467,8 @@ BellossomPicFront::    INCBIN "gfx/pokemon/front/bellossom.pic"
 BellossomPicBack::     INCBIN "gfx/pokemon/back/bellossomb.pic"
 ScizorPicFront::       INCBIN "gfx/pokemon/front/scizor.pic"
 ScizorPicBack::        INCBIN "gfx/pokemon/back/scizorb.pic"
+RhyperiorPicFront::    INCBIN "gfx/pokemon/front/rhyperior.pic"
+RhyperiorPicBack::     INCBIN "gfx/pokemon/back/rhyperiorb.pic"
 
 FossilKabutopsPic::   INCBIN "gfx/pokemon/front/fossilkabutops.pic"
 FossilAerodactylPic:: INCBIN "gfx/pokemon/front/fossilaerodactyl.pic"

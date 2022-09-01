@@ -207,6 +207,7 @@ EvosMovesPointerTable:
 
 RhydonEvosMoves:
 ; Evolutions
+	db EV_ITEM, MOON_STONE, 1, RHYPERIOR	; Protector isn't added yet  ~M
 	db 0
 ; Learnset
 	db 30, STOMP

@@ -449,13 +449,13 @@ _BellossomDexEntry::
 	dex
 
 _RhyperiorDexEntry::
-	text "This is a newly"
-	next "discovered"
-	next "#MON. It is"
+	text "It launches rocks"
+	next "from the holes"
+	next "in its palms."
 
-	page "currently under"
-	next "investigation. No"
-	next "info is available"
+	page "On rare occasions,"
+	next "it can even fire"
+	next "out GEODUDE"
 	dex
 
 _MissingNoDexEntry::
