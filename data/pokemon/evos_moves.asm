@@ -1425,8 +1425,8 @@ EeveeEvosMoves:
 	db EV_ITEM, SUN_STONE, 1, ESPEON
 	db EV_ITEM, MOON_STONE, 1, UMBREON
 	db EV_ITEM, LEAF_STONE, 1, LEAFEON
-	;db EV_ITEM, ICE_STONE, 1, GLACEON ; item is placeholder and does not exist
-	;db EV_ITEM, SHINY_STONE, 1, SYLVEON ; item is placeholder and does not exist
+	db EV_ITEM, ICE_STONE, 1, GLACEON
+	db EV_ITEM, SHINY_STONE, 1, SYLVEON
 	db 0
 ; Learnset
 	db 8, SAND_ATTACK
