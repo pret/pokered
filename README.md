@@ -2,6 +2,21 @@ Kanto Expansion Pak
 ===================
 This is a ROM Hack of Pokémon Red and Blue, aiming to expand the Kanto region with more interesting locations, evolutions added in later generations, and QoL changes.
 
+New Pokemon:
+====
+- The 34 known beta Pokemon that were cut from RBY have been fully implemented.
+- Evolutions or Pre-evolutions of a Kanto Pokemon found in a future generation are included; eg. Steelix, Glaceon
+- Evolutions or Pre-evolutions of a Kanto Pokemon found in the SpaceWorld '97 demo are included; eg. Madaamu, Pudi
+	- note that for Pokemon that appeared in the Spaceworld '97 demo and had their sprite design altered, the sprite from SW97 was used instead
+
+New Types:
+====
+- Dark, Steel and Fairy types are added
+	- note that Dark and Steel use their type effectiveness from the SW97 demo
+	- note that Bite is still Normal-type
+	- note that the Magnemite, Cleffa, Mime Jr, and Igglybuff lines are not Steel or Fairy-type, respectively
+		- this (and Bite) was done to ensure the original Kanto Pokemon were unaltered in any way 
+
 Improved areas
 ====
 - Rock Tunnel has a more workable map, now being easier to go through and having new areas to explore. Includes a way to get renewable fossils, items, and other interesting bits and pieces. Overall, it makes Flash much more rewarding to bring, showing you where the items and content are instead of being an inconvenience. 
@@ -17,11 +32,14 @@ QoL Enhancements
 	- HM02 (Fly) can be taught to the Pikachu line.
 	- HM03 (Surf) can be taught to the Pikachu line.
 - Yellow learnset changes are imported; eg. Flash Venonat
+- Psyduck learns Amnesia at Lv1, removing the need to connect with Pokemon Stadium to obtain the move.
 - The Game Corner in general is massively buffed, making everything far more worth going for;
 	- 3x Cherry now gives 40 coins (used to be 8)
 	- 3x Magikarp/Poliwag/Bird/Diglett/Rattata/Jigglypuff now gives 75 coins (used to be 15)
 	- 3x BAR now gives 300 coins (used to be 100)
 	- 3x 7s now gives 999 coins (used to be 300)
+- The Route 5-6 underground path contains a shortcut to Celadon City. 
+	- This allows you to skip Route 9 and Rock Tunnel, making them optional areas and opening up central Kanto.
 - Game Corner prizes have been altered;
 	- Version parity is done across prizes, using Blue's superior prices.
 	- New prizes across both versions include; Cubone, Blastyke, and Cactus.
@@ -65,7 +83,7 @@ Credits
 ====
 * Plague von Karma - Creator of the Showdown Mod, Developer
 * Martha's Against Humanity - Developer 
-* Ema Sky - Developer 
+* Ema Skye - Developer 
 * ausma - Showdown Mod assistance
 * Paulluxx - Showdown Mod assistance
 * DuoM2 - Showdown Mod assistance 
