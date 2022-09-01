@@ -17,6 +17,10 @@ New Types:
 	- note that the Magnemite, Cleffa, Mime Jr, and Igglybuff lines are not Steel or Fairy-type, respectively
 		- this (and Bite) was done to ensure the original Kanto Pokemon were unaltered in any way 
 
+New Items:
+====
+- The Sun, Ice and Shiny Stones have been added
+	
 Improved areas
 ====
 - Rock Tunnel has a more workable map, now being easier to go through and having new areas to explore. Includes a way to get renewable fossils, items, and other interesting bits and pieces. Overall, it makes Flash much more rewarding to bring, showing you where the items and content are instead of being an inconvenience. 
