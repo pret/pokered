@@ -206,7 +206,61 @@
 	const BETOBEBII          ; $C5	(new)
 	const BELLOSSOM          ; $C6	(new)
 	const SCIZOR             ; $C7	(new)
-	const RHYPERIOR          ; $C8  (test)
+	const RHYPERIOR          ; $C8  (dex expansion starts here)
+	const ESPEON             ; $C9
+	const UMBREON            ; $CA
+	const LEAFEON            ; $CB
+	const GLACEON            ; $CC
+	const SYLVEON            ; $CD
+;	const CROBAT             ; $CE
+;	const POLITOED           ; $CF
+;	const SLOWKING           ; $D0
+;	const MAGNEZONE          ; $D1
+;	const HITMONTOP          ; $D2
+;	const LICKILICKY         ; $D3
+;	const STEELIX            ; $D4
+;	const BLISSEY            ; $D5
+;	const TANGROWTH          ; $D6
+;	const KINGDRA            ; $D7
+;	const ELECTIVIRE         ; $D8
+;	const MAGMORTAR          ; $D9
+;	const PORYGON2           ; $DA
+;	const PORYGON-Z          ; $DB
+;	const KLEAVOR            ; $DC
+;	const SIRFETCHD          ; $DD
+;	const MR_RIME            ; $DE
+;	const PERRSERKER         ; $DF
+;	const CLEFFA             ; $E0
+;	const IGGLYBUFF          ; $E1
+;	const SMOOCHUM           ; $E2
+;	const HAPPINY            ; $E3
+;	const MUNCHLAX           ; $E4
+;	const ELEKID             ; $E5
+;	const MAGBY              ; $E6
+;	const MIME_JR            ; $E7
+;	const PICHU              ; $E8
+;	const TYROGUE            ; $E9
+; $E9 reserved for ScVi spoiler reasons
+	; vacant $EB
+	; vacant $EC
+	; vacant $ED
+	; vacant $EE
+	; vacant $EF
+	; vacant $F1
+	; vacant $F2
+	; vacant $F3
+	; vacant $F4
+	; vacant $F5
+	; vacant $F6
+	; vacant $F7
+	; vacant $F8
+	; vacant $F9
+	; vacant $FA
+	; vacant $FB
+	; vacant $FC
+	; vacant $FD
+	; vacant $FE
+	; vacant $FF
 
 DEF NUM_POKEMON_INDEXES EQU const_value - 1
 
