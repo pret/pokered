@@ -203,11 +203,16 @@ EvosMovesPointerTable:
 	dw BellossomEvosMoves
 	dw ScizorEvosMoves
 	dw RhyperiorEvosMoves
+	dw EspeonEvosMoves
+	dw UmbreonEvosMoves
+	dw LeafeonEvosMoves
+	dw GlaceonEvosMoves
+	dw SylveonEvosMoves
 	assert_table_length NUM_POKEMON_INDEXES
 
 RhydonEvosMoves:
 ; Evolutions
-	db 0
+	db EV_TRADE, 1, RHYPERIOR
 ; Learnset
 	db 30, STOMP
 	db 35, TAIL_WHIP
@@ -1416,6 +1421,11 @@ EeveeEvosMoves:
 	db EV_ITEM, FIRE_STONE, 1, FLAREON
 	db EV_ITEM, THUNDER_STONE, 1, JOLTEON
 	db EV_ITEM, WATER_STONE, 1, VAPOREON
+	db EV_ITEM, SUN_STONE, 1, ESPEON
+	db EV_ITEM, MOON_STONE, 1, UMBREON
+	db EV_ITEM, LEAF_STONE, 1, LEAFEON
+	;db EV_ITEM, ICE_STONE, 1, GLACEON ; item is placeholder and does not exist
+	;db EV_ITEM, SHINY_STONE, 1, SYLVEON ; item is placeholder and does not exist
 	db 0
 ; Learnset
 	db 8, SAND_ATTACK
@@ -2550,3 +2560,65 @@ RhyperiorEvosMoves:
 	db 55, LEER
 	db 64, TAKE_DOWN
 	db 0
+
+EspeonEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 8, SAND_ATTACK
+	db 16, CONFUSION
+	db 23, QUICK_ATTACK
+	db 30, BITE
+	db 36, PSYBEAM
+	db 37, TAIL_WHIP
+	db 42, TAKE_DOWN
+	db 52, PSYCHIC_M
+	
+UmbreonEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 8, SAND_ATTACK
+	db 16, BRUTAL_SWING
+	db 23, QUICK_ATTACK
+	db 30, FEINT_ATTACK
+	db 36, BITE ; should be Fake Tears but I can't find that move
+	db 42, TAKE_DOWN
+	db 52, NIGHT_SLASH ; should be False Surrender but I can't find that move
+	
+LeafeonEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 8, SAND_ATTACK
+	db 16, ABSORB
+	db 23, QUICK_ATTACK
+	db 30, GROWTH
+	db 36, RAZOR_LEAF
+	db 42, TAKE_DOWN
+	db 52, SOLARBEAM
+	
+GlaceonEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 8, SAND_ATTACK
+	db 16, AURORA_BEAM
+	db 23, QUICK_ATTACK
+	db 30, MIST
+	db 30, HAZE
+	db 42, TAKE_DOWN
+	db 47, BLIZZARD
+	db 52, BARRIER
+	
+SylveonEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 8, SAND_ATTACK
+	db 16, FAIRY_WIND ; should be Disarming Voice according to KEP docs but I can't find that move
+	db 23, QUICK_ATTACK
+	db 30, DRAININGKISS
+	db 36, DAZZLE_GLEAM
+	db 42, TAKE_DOWN
+	db 52, DAZZLE_GLEAM ; PvK needs to fix this!!!!!!!!

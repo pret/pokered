@@ -77,7 +77,7 @@ ItemNames::
 	li "EXP.ALL"
 	li "OLD ROD"
 	li "GOOD ROD"
-	li "SUPER ROD"
+	li "FISHING ROD"
 	li "PP UP"
 	li "ETHER"
 	li "MAX ETHER"
@@ -98,4 +98,6 @@ ItemNames::
 	li "10F"
 	li "11F"
 	li "B4F"
+	li "SHINY STONE"
+	li "ICE STONE"
 	assert_list_length NUM_ITEMS + NUM_FLOORS

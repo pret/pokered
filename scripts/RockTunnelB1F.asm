@@ -21,6 +21,7 @@ RockTunnelB1F_TextPointers:
 	dw RockTunnel2Text6
 	dw RockTunnel2Text7
 	dw RockTunnel2Text8
+;	dw KabutopsText
 
 RockTunnel2TrainerHeaders:
 	def_trainers
@@ -40,6 +41,8 @@ RockTunnel2TrainerHeader6:
 	trainer EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_6, 3, RockTunnel2BattleText8, RockTunnel2EndBattleText8, RockTunnel2AfterBattleText8
 RockTunnel2TrainerHeader7:
 	trainer EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_7, 3, RockTunnel2BattleText9, RockTunnel2EndBattleText9, RockTunnel2AfterBattleText9
+;KabutopsTrainerHeader:
+;    trainer EVENT_BEAT_KABUTOPS, 0, KabutopsBattleText, KabutopsBattleText, KabutopsBattleText
 	db -1 ; end
 
 RockTunnel2Text1:
@@ -186,24 +189,16 @@ RockTunnel2AfterBattleText9:
 	text_far _RockTunnel2AfterBattleText9
 	text_end
 
-; Edited from Articuno - PvK
-	def_trainers 9
-KabutopsTrainerHeader:
-	trainer EVENT_BEAT_KABUTOPS, 0, KabutopsBattleText, KabutopsBattleText, KabutopsBattleText
-	db -1 ; end
-
-KabutopsText:
-	text_asm
-	ld hl, KabutopsTrainerHeader
-	call TalkToTrainer
-	ld a, $4
-	ld [wSeafoamIslandsB4FCurScript], a
-	jp TextScriptEnd
-
-KabutopsBattleText:
-	text_far _KabutopsBattleText
-	text_asm
-	ld a, KABUTOPS
-	call PlayCry
-	call WaitForSoundToFinish
-	jp TextScriptEnd
+;KabutopsText:
+;	text_asm
+;	ld hl, KabutopsTrainerHeader
+;	call TalkToTrainer
+;	jp TextScriptEnd
+;
+;KabutopsBattleText:
+;	text_far _KabutopsBattleText
+;	text_asm
+;	ld a, KABUTOPS
+;	call PlayCry
+;	call WaitForSoundToFinish
+;	jp TextScriptEnd

@@ -206,4 +206,9 @@ CryData::
 	mon_cry SFX_CRY_00, $00, $00 ; Bellossom (unfinished)
 	mon_cry SFX_CRY_00, $00, $00 ; Scizor (unfinished)
 	mon_cry SFX_CRY_00, $00, $00 ; Rhyperior (test)
+	mon_cry SFX_CRY_00, $00, $00 ; Espeon
+	mon_cry SFX_CRY_00, $00, $00 ; Umbreon
+	mon_cry SFX_CRY_00, $00, $00 ; Leafeon
+	mon_cry SFX_CRY_00, $00, $00 ; Glaceon
+	mon_cry SFX_CRY_00, $00, $00 ; Sylveon
 	assert_table_length NUM_POKEMON_INDEXES

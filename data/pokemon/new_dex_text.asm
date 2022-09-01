@@ -449,13 +449,63 @@ _BellossomDexEntry::
 	dex
 
 _RhyperiorDexEntry::
-	text "This is a newly"
-	next "discovered"
-	next "#MON. It is"
+	text "From holes in its"
+	next "palms, it fires"
+	next "out Geodude!"
 
-	page "currently under"
-	next "investigation. No"
-	next "info is available"
+	page "Its carapace can"
+	next "withstand a"
+	next "volcanic eruption"
+	dex
+
+_EspeonDexEntry::
+	text "It uses the fine"
+	next "fair that covers"
+	next "its body to sense"
+
+	page "air currents and"
+	next "predicts its"
+	next "enemy's actions"
+	dex
+
+_UmbreonDexEntry::
+	text "On the night of a"
+	next "full moon, or"
+	next "when it gets"
+
+	page "excited, the"
+	next "ring patterns on"
+	next "its body glow"
+	dex
+	
+_LeafeonDexEntry::
+	text "Just like a plant,"
+	next "it can use"
+	next "photosynthesis."
+
+	page "As a result, it is"
+	next "always enveloped"
+	next "in clear air"
+	dex
+	
+_GlaceonDexEntry::
+	text "By controlling its"
+	next "body heat, it can"
+	next "freeze the air"
+
+	page "around it to make"
+	next "a flurry of"
+	next "diamond-dust"
+	dex
+	
+_SylveonDexEntry::
+	text "It sends a"
+	next "soothing aura"
+	next "from its"
+
+	page "ribbonlike"
+	next "feelers to calm"
+	next "nearby fights"
 	dex
 
 _MissingNoDexEntry::

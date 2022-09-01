@@ -200,4 +200,9 @@ MonsterNames::
 	db "BELLOSSOM@"
 	db "SCIZOR@@@@"
 	db "RHYPERIOR@"
+	db "ESPEON@@@@"
+	db "UMBREON@@@"
+	db "LEAFEON@@@"
+	db "GLACEON@@@"
+	db "SYLVEON@@@"
 	assert_table_length NUM_POKEMON_INDEXES

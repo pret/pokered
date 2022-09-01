@@ -200,6 +200,11 @@ PokedexEntryPointers:
 	dw BellossomDexEntry
 	dw ScizorDexEntry
 	dw RhyperiorDexEntry
+	dw EspeonDexEntry
+	dw UmbreonDexEntry
+	dw LeafeonDexEntry
+	dw GlaceonDexEntry
+	dw SylveonDexEntry
 	assert_table_length NUM_POKEMON_INDEXES
 
 ; string: species name
@@ -1552,9 +1557,44 @@ ScizorDexEntry:
 	text_end
 
 RhyperiorDexEntry:
-    db "TEST@"
-	db 5,11
-	dw 5000
+    db "DRILL@"
+	db 7,10
+	dw 6235
 	text_far _RhyperiorDexEntry
+	text_end 
+
+EspeonDexEntry:
+    db "SUN@"
+	db 2,11
+	dw 584
+	text_far _EspeonDexEntry
+	text_end 
+	
+UmbreonDexEntry:
+    db "MOONLIGHT@"
+	db 3,3
+	dw 595
+	text_far _UmbreonDexEntry
+	text_end 
+	
+LeafeonDexEntry:
+    db "VERDANT@"
+	db 3,3
+	dw 562
+	text_far _LeafeonDexEntry
+	text_end 
+	
+GlaceonDexEntry:
+    db "FRESH SNOW@"
+	db 2,7
+	dw 571
+	text_far _GlaceonDexEntry
+	text_end 
+	
+SylveonDexEntry:
+    db "INTERTWINE@"
+	db 3,3
+	dw 518
+	text_far _SylveonDexEntry
 	text_end 
 	

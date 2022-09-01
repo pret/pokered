@@ -197,4 +197,9 @@ MonPartyData:
 	nybble ICON_MON       ; Mewtwo
 	nybble ICON_MON       ; Mew
 	nybble ICON_MON       ; Rhyperior
+	nybble ICON_QUADRUPED ; Espeon
+	nybble ICON_QUADRUPED ; Umbreon
+	nybble ICON_QUADRUPED ; Leafeon
+	nybble ICON_QUADRUPED ; Glaceon
+	nybble ICON_QUADRUPED ; Sylveon
 	end_nybble_array NUM_POKEMON

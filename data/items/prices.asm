@@ -98,4 +98,6 @@ ItemPrices::
 	bcd3 0     ; FLOOR_10F
 	bcd3 0     ; FLOOR_11F
 	bcd3 0     ; FLOOR_B4F
+	bcd3 2100  ; SHINY_STONE
+	bcd3 2100  ; ICE_STONE
 	assert_table_length NUM_ITEMS + NUM_FLOORS
