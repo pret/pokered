@@ -508,6 +508,106 @@ _SylveonDexEntry::
 	next "hostile emotions"
 	dex
 
+_CrobatDexEntry::
+	text "It flies silently"
+	next "through the dark"
+	next "on its four wings."
+
+	page "It is often not"
+	next "noticed even"
+	next "when nearby"
+	dex
+
+_PolitoedDexEntry::
+	text "Whenever three or"
+	next "more of these get"
+	next "together, they"
+
+	page "sing in a loud"
+	next "voice that sounds"
+	next "like bellowing"
+	dex
+
+_SlowkingDexEntry::
+	text "Every time it"
+	next "yawns, SHELLDER"
+	next "injects more"
+
+	page "poison into it,"
+	next "which makes it"
+	next "more intelligent"
+	dex
+
+_SteelixDexEntry::
+	text "The many small"
+	next "metal particles"
+	next "that love this"
+
+	page "@MON's body"
+	next "reflect bright"
+	next "light well"
+	dex
+
+_HitmontopDexEntry::
+	text "After doing a"
+	next "handstand to"
+	next "throw off the"
+
+	page "opponent's timing"
+	next "it presents its"
+	next "fancy kick moves"
+	dex
+	
+_BlisseyDexEntry::
+	text "Anyone who takes"
+	next "a bite of its"
+	next "egg becomes"
+
+	page "unfaillingly"
+	next "caring and"
+	next "pleasant to all"
+	dex
+
+_Porygon2DexEntry::
+	text "This is a newly"
+	next "discovered"
+	next "#MON. It is"
+
+	page "currently under"
+	next "investigation. No"
+	next "info is available"
+	dex
+	
+_KingdraDexEntry::
+	text "This is a newly"
+	next "discovered"
+	next "#MON. It is"
+
+	page "currently under"
+	next "investigation. No"
+	next "info is available"
+	dex
+	
+_LickilickyDexEntry::
+	text "This is a newly"
+	next "discovered"
+	next "#MON. It is"
+
+	page "currently under"
+	next "investigation. No"
+	next "info is available"
+	dex
+	
+_MagnezoneDexEntry::
+	text "This is a newly"
+	next "discovered"
+	next "#MON. It is"
+
+	page "currently under"
+	next "investigation. No"
+	next "info is available"
+	dex
+
 _MissingNoDexEntry::
 	text "This is a newly"
 	next "discovered"

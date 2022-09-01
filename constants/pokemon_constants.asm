@@ -212,19 +212,19 @@
 	const LEAFEON            ; $CB
 	const GLACEON            ; $CC
 	const SYLVEON            ; $CD
-;	const CROBAT             ; $CE
-;	const POLITOED           ; $CF
-;	const SLOWKING           ; $D0
-;	const MAGNEZONE          ; $D1
-;	const HITMONTOP          ; $D2
+	const CROBAT             ; $CE
+	const POLITOED           ; $CF
+	const SLOWKING           ; $D0
+	const STEELIX            ; $D1
+	const HITMONTOP          ; $D2
+	const BLISSEY            ; $D3
+;	const PORYGON2           ; $D4
+;	const KINGDRA            ; $D5
 ;	const LICKILICKY         ; $D3
-;	const STEELIX            ; $D4
-;	const BLISSEY            ; $D5
+;	const MAGNEZONE          ; $D4
 ;	const TANGROWTH          ; $D6
-;	const KINGDRA            ; $D7
 ;	const ELECTIVIRE         ; $D8
 ;	const MAGMORTAR          ; $D9
-;	const PORYGON2           ; $DA
 ;	const PORYGON-Z          ; $DB
 ;	const KLEAVOR            ; $DC
 ;	const SIRFETCHD          ; $DD

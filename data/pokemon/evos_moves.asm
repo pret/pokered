@@ -208,6 +208,16 @@ EvosMovesPointerTable:
 	dw LeafeonEvosMoves
 	dw GlaceonEvosMoves
 	dw SylveonEvosMoves
+	dw CrobatEvosMoves
+	dw PolitoedEvosMoves
+	dw SlowkingEvosMoves
+	dw SteelixEvosMoves
+	dw HitmontopEvosMoves
+	dw BlisseyEvosMoves
+;	dw Porygon2EvosMoves
+;	dw KingdraEvosMoves
+;	dw LickilickyEvosMoves
+;	dw MagnezoneEvosMoves
 	assert_table_length NUM_POKEMON_INDEXES
 
 RhydonEvosMoves:
@@ -2574,6 +2584,7 @@ EspeonEvosMoves:
 	db 37, TAIL_WHIP
 	db 42, TAKE_DOWN
 	db 52, PSYCHIC_M
+	db 0
 	
 UmbreonEvosMoves:
 ; Evolutions
@@ -2586,6 +2597,7 @@ UmbreonEvosMoves:
 	db 36, BITE ; should be Fake Tears but it hasn't been added yet
 	db 42, TAKE_DOWN
 	db 52, NIGHT_SLASH ; should be False Surrender but it hasn't been added yet
+	db 0
 	
 LeafeonEvosMoves:
 ; Evolutions
@@ -2598,6 +2610,7 @@ LeafeonEvosMoves:
 	db 36, RAZOR_LEAF
 	db 42, TAKE_DOWN
 	db 52, SOLARBEAM
+	db 0
 	
 GlaceonEvosMoves:
 ; Evolutions
@@ -2611,6 +2624,7 @@ GlaceonEvosMoves:
 	db 42, TAKE_DOWN
 	db 47, BLIZZARD
 	db 52, BARRIER
+	db 0
 	
 SylveonEvosMoves:
 ; Evolutions
@@ -2622,4 +2636,121 @@ SylveonEvosMoves:
 	db 30, DRAININGKISS
 	db 36, DAZZLE_GLEAM
 	db 42, TAKE_DOWN
-	db 52, DAZZLE_GLEAM ; PvK needs to fix this!!!!!!!!
+	db 0
+
+CrobatEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 7, GUST
+	db 10, SUPERSONIC
+	db 15, BITE
+	db 17, QUICK_ATTACK
+	db 21, CONFUSE_RAY
+	db 26, SLUDGE
+	db 32, WING_ATTACK
+	db 43, HAZE
+	db 50, AGILITY
+	db 0
+	
+PolitoedEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 16, HYPNOSIS
+	db 19, WATER_GUN
+	db 0
+
+SlowkingEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 18, DISABLE
+	db 22, HEADBUTT
+	db 27, GROWL
+	db 33, WATER_GUN
+	db 44, AMNESIA
+	db 55, PSYCHIC_M
+	db 0
+
+SteelixEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 8, IRON_DEFENSE
+	db 15, BIND
+	db 19, ROCK_THROW
+	db 25, RAGE
+	db 33, SLAM
+	db 38, IRON_HEAD
+	db 43, HARDEN
+	db 0
+
+HitmontopEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 7, FOCUS_ENERGY
+	db 33, QUICK_ATTACK
+	db 38, COUNTER
+	db 43, AGILITY
+	db 48, JUMP_KICK
+	db 53, DOUBLE_KICK
+	db 0
+
+BlisseyEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 12, DOUBLESLAP
+	db 24, SING
+	db 30, GROWL
+	db 38, MINIMIZE
+	db 44, DEFENSE_CURL
+	db 48, LIGHT_SCREEN
+	db 54, DOUBLE_EDGE
+	db 0
+	
+Porygon2EvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 23, PSYBEAM
+	db 28, RECOVER
+	db 35, AGILITY
+	db 42, TRI_ATTACK
+	db 0
+	
+KingdraEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 19, SMOKESCREEN
+	db 24, LEER
+	db 30, WATER_GUN
+	db 41, AGILITY
+	db 52, HYDRO_PUMP
+	db 0
+
+LickilickyEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 7, STOMP
+	db 15, DISABLE
+	db 23, DEFENSE_CURL
+	db 31, SLAM
+	db 39, SCREECH
+	db 0
+
+MagnezoneEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 21, SONICBOOM
+	db 25, THUNDERSHOCK
+	db 29, SUPERSONIC
+	db 38, THUNDER_WAVE
+	db 46, SWIFT
+	db 54, SCREECH
+	db 0

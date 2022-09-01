@@ -46,6 +46,7 @@ MonPartyData:
 	nybble ICON_MON       ; Bittybat
 	nybble ICON_MON       ; Zubat
 	nybble ICON_MON       ; Golbat
+	nybble ICON_MON       ; Crobat
 	nybble ICON_GRASS     ; Oddish
 	nybble ICON_GRASS     ; Gloom
 	nybble ICON_GRASS     ; Vileplume
@@ -75,6 +76,7 @@ MonPartyData:
 	nybble ICON_MON       ; Poliwag
 	nybble ICON_MON       ; Poliwhirl
 	nybble ICON_MON       ; Poliwrath
+	nybble ICON_MON       ; Politoed
 	nybble ICON_MON       ; Abra
 	nybble ICON_MON       ; Kadabra
 	nybble ICON_MON       ; Alakazam
@@ -97,9 +99,11 @@ MonPartyData:
 	nybble ICON_QUADRUPED ; Rapidash
 	nybble ICON_QUADRUPED ; Slowpoke
 	nybble ICON_MON       ; Slowbro
+	nybble ICON_MON       ; Slowking
 	nybble ICON_BALL      ; Magnemite
 	nybble ICON_BALL      ; Magnetite
 	nybble ICON_BALL      ; Magneton
+;	nybble ICON_BALL      ; Magnezone
 	nybble ICON_BALL      ; Barunda
 	nybble ICON_BIRD      ; Farfetch'd
 	nybble ICON_BIRD	    ; Madaamu
@@ -119,6 +123,7 @@ MonPartyData:
 	nybble ICON_MON       ; Haunter
 	nybble ICON_MON       ; Gengar
 	nybble ICON_SNAKE     ; Onix
+	nybble ICON_SNAKE     ; Steelix
 	nybble ICON_MON       ; Drowzee
 	nybble ICON_MON       ; Hypno
 	nybble ICON_QUADRUPED ; Kotora
@@ -139,13 +144,16 @@ MonPartyData:
 	nybble ICON_MON	    ; Kangaskhan
 	nybble ICON_MON       ; Hitmonlee
 	nybble ICON_MON       ; Hitmonchan
+	nybble ICON_MON       ; Hitmontop
 	nybble ICON_MON       ; Lickitung
+;	nybble ICON_MON       ; Lickilicky
 	nybble ICON_MON       ; Koffing
 	nybble ICON_MON       ; Weezing
 	nybble ICON_QUADRUPED ; Rhyhorn
 	nybble ICON_MON       ; Rhydon
 	nybble ICON_MON       ; Rhyperior
 	nybble ICON_FAIRY     ; Chansey
+	nybble ICON_FAIRY     ; Blissey
 	nybble ICON_GRASS     ; Monja
 	nybble ICON_GRASS     ; Tangela
 	nybble ICON_MON	    ; Decilla
@@ -153,6 +161,7 @@ MonPartyData:
 	nybble ICON_MON	    ; Omega
 	nybble ICON_WATER     ; Horsea
 	nybble ICON_WATER     ; Seadra
+;	nybble ICON_WATER     ; Kingdra
 	nybble ICON_WATER     ; Gyopin
 	nybble ICON_WATER     ; Goldeen
 	nybble ICON_WATER     ; Seaking
@@ -188,6 +197,7 @@ MonPartyData:
 	nybble ICON_QUADRUPED ; Glaceon
 	nybble ICON_QUADRUPED ; Sylveon
 	nybble ICON_MON       ; Porygon
+;	nybble ICON_MON       ; Porygon2
 	nybble ICON_HELIX     ; Omanyte
 	nybble ICON_HELIX     ; Omastar
 	nybble ICON_HELIX     ; Kabuto

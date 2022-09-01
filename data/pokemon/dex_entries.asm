@@ -205,6 +205,16 @@ PokedexEntryPointers:
 	dw LeafeonDexEntry
 	dw GlaceonDexEntry
 	dw SylveonDexEntry
+	dw CrobatDexEntry
+	dw PolitoedDexEntry
+	dw SlowkingDexEntry
+	dw SteelixDexEntry
+	dw HitmontopDexEntry
+	dw BlisseyDexEntry
+;	dw Porygon2DexEntry
+;	dw KingdraDexEntry
+;	dw LickilickyDexEntry
+;	dw MagnezoneDexEntry
 	assert_table_length NUM_POKEMON_INDEXES
 
 ; string: species name
@@ -1598,3 +1608,72 @@ SylveonDexEntry:
 	text_far _SylveonDexEntry
 	text_end 
 	
+CrobatDexEntry:
+    db "BAT@"
+	db 5,11
+	dw 1653
+	text_far _CrobatDexEntry
+	text_end 
+	
+PolitoedDexEntry:
+    db "FROG@"
+	db 3,7
+	dw 747
+	text_far _PolitoedDexEntry
+	text_end 
+	
+SlowkingDexEntry:
+    db "ROYAL@"
+	db 6,7
+	dw 1753
+	text_far _SlowkingDexEntry
+	text_end 
+	
+SteelixDexEntry:
+    db "IRON SNAKE@"
+	db 30,2
+	dw 8818
+	text_far _SteelixDexEntry
+	text_end 
+	
+HitmontopDexEntry:
+    db "HANDSTAND@"
+	db 4,7
+	dw 1058
+	text_far _HitmontopDexEntry
+	text_end 
+
+BlisseyDexEntry:
+    db "HANDSTAND@"
+	db 4,7
+	dw 1058
+	text_far _BlisseyDexEntry
+	text_end
+
+Porygon2DexEntry:
+    db "HANDSTAND@"
+	db 4,7
+	dw 1058
+	text_far _Porygon2DexEntry
+	text_end
+	
+KingdraDexEntry:
+    db "HANDSTAND@"
+	db 4,7
+	dw 1058
+	text_far _KingdraDexEntry
+	text_end
+	
+LickilickyDexEntry:
+    db "HANDSTAND@"
+	db 4,7
+	dw 1058
+	text_far _LickilickyDexEntry
+	text_end
+	
+MagnezoneDexEntry:
+    db "HANDSTAND@"
+	db 4,7
+	dw 1058
+	text_far _MagnezoneDexEntry
+	text_end

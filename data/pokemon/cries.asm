@@ -211,4 +211,14 @@ CryData::
 	mon_cry SFX_CRY_00, $00, $00 ; Leafeon
 	mon_cry SFX_CRY_00, $00, $00 ; Glaceon
 	mon_cry SFX_CRY_00, $00, $00 ; Sylveon
+	mon_cry SFX_CRY_00, $00, $00 ; Crobat
+	mon_cry SFX_CRY_00, $00, $00 ; Politoed
+	mon_cry SFX_CRY_00, $00, $00 ; Slowking
+	mon_cry SFX_CRY_00, $00, $00 ; Steelix
+	mon_cry SFX_CRY_00, $00, $00 ; Hitmontop
+	mon_cry SFX_CRY_00, $00, $00 ; Blissey
+;	mon_cry SFX_CRY_00, $00, $00 ; Porygon2
+;	mon_cry SFX_CRY_00, $00, $00 ; Kingdra
+;	mon_cry SFX_CRY_00, $00, $00 ; Lickilicky
+;	mon_cry SFX_CRY_00, $00, $00 ; Magnezone
 	assert_table_length NUM_POKEMON_INDEXES
