@@ -40,7 +40,11 @@ Many non-multiplayer, non-battle related bugs have been fixed. The aforementione
 - The Item Finder will correctly find items at X/Y 0.0
 - Glitch Pokémon will no longer corrupt the Hall of Fame.
 - Strength smoke puffs now show properly.
-- Game Corner slots no longer load too many tiles; the lucky machine stops when it should if there's a 7, few other objective issues. Also, the 40-coin hidden item is fixed, and there can always be a lucky machine.
+- Game Corner has a ton of fixes;
+	- The slots no longer load too many tiles
+	- The lucky machine stops when it should if there's a 7
+	- The 40-coin hidden item is fixed, and there can always be a lucky machine.
+	- and a few other objective fixes.
 - 2 invisible stars that show on the title screen are cut off; also, the "presents" logo from RG is re-used!
 - The healing machine animates correctly! 
 - Using Minimize or Substitute, looking at the Pokedex, and then battling won't cause sprite corruption.
