@@ -148,6 +148,7 @@
 	const DEX_WEEZING    ; 110
 	const DEX_RHYHORN    ; 111
 	const DEX_RHYDON     ; 112
+	const DEX_RHYPERIOR
 	const DEX_CHANSEY    ; 113
 	const DEX_MONJA
 	const DEX_TANGELA    ; 114 
