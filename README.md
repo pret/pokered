@@ -16,6 +16,7 @@ QoL Enhancements
 	- TM23 (Dragon Rage) can be taught to Magikarp.
 	- HM02 (Fly) can be taught to the Pikachu line.
 	- HM03 (Surf) can be taught to the Pikachu line.
+- Yellow learnset changes are imported; eg. Flash Venonat
 - The Game Corner in general is massively buffed, making everything far more worth going for;
 	- 3x Cherry now gives 40 coins (used to be 8)
 	- 3x Magikarp/Poliwag/Bird/Diglett/Rattata/Jigglypuff now gives 75 coins (used to be 15)
