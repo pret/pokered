@@ -217,8 +217,26 @@ CryData::
 	mon_cry SFX_CRY_00, $00, $00 ; Steelix
 	mon_cry SFX_CRY_00, $00, $00 ; Hitmontop
 	mon_cry SFX_CRY_00, $00, $00 ; Blissey
-;	mon_cry SFX_CRY_00, $00, $00 ; Porygon2
-;	mon_cry SFX_CRY_00, $00, $00 ; Kingdra
-;	mon_cry SFX_CRY_00, $00, $00 ; Lickilicky
-;	mon_cry SFX_CRY_00, $00, $00 ; Magnezone
+	mon_cry SFX_CRY_00, $00, $00 ; Porygon2
+	mon_cry SFX_CRY_00, $00, $00 ; Kingdra
+	mon_cry SFX_CRY_00, $00, $00 ; Lickilicky
+	mon_cry SFX_CRY_00, $00, $00 ; Magnezone
+	mon_cry SFX_CRY_00, $00, $00 ; Tangrowth
+	mon_cry SFX_CRY_00, $00, $00 ; Electivire
+	mon_cry SFX_CRY_00, $00, $00 ; Magmortar
+	mon_cry SFX_CRY_00, $00, $00 ; PorygonZ
+	mon_cry SFX_CRY_00, $00, $00 ; Kleavor
+	;mon_cry SFX_CRY_00, $00, $00 ; Sirfetchd
+	;mon_cry SFX_CRY_00, $00, $00 ; Mr. Rime
+	;mon_cry SFX_CRY_00, $00, $00 ; Perrserker
+	;mon_cry SFX_CRY_00, $00, $00 ; Cleffa
+	;mon_cry SFX_CRY_00, $00, $00 ; Igglybuff
+	;mon_cry SFX_CRY_00, $00, $00 ; Smoochum
+	;mon_cry SFX_CRY_00, $00, $00 ; Happiny
+	;mon_cry SFX_CRY_00, $00, $00 ; Munchlax
+	;mon_cry SFX_CRY_00, $00, $00 ; Elekid
+	;mon_cry SFX_CRY_00, $00, $00 ; Magby
+	;mon_cry SFX_CRY_00, $00, $00 ; Mime Jr
+	;mon_cry SFX_CRY_00, $00, $00 ; Pichu
+	;mon_cry SFX_CRY_00, $00, $00 ; Tyrogue
 	assert_table_length NUM_POKEMON_INDEXES

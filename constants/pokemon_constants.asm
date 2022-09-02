@@ -218,15 +218,15 @@
 	const STEELIX            ; $D1
 	const HITMONTOP          ; $D2
 	const BLISSEY            ; $D3
-;	const PORYGON2           ; $D4
-;	const KINGDRA            ; $D5
-;	const LICKILICKY         ; $D3
-;	const MAGNEZONE          ; $D4
-;	const TANGROWTH          ; $D6
-;	const ELECTIVIRE         ; $D8
-;	const MAGMORTAR          ; $D9
-;	const PORYGON-Z          ; $DB
-;	const KLEAVOR            ; $DC
+	const PORYGON2           ; $D4
+	const KINGDRA            ; $D5
+	const LICKILICKY         ; $D3
+	const MAGNEZONE          ; $D4
+	const TANGROWTH          ; $D6
+	const ELECTIVIRE         ; $D8
+	const MAGMORTAR          ; $D9
+	const PORYGONZ          ; $DB
+	const KLEAVOR            ; $DC
 ;	const SIRFETCHD          ; $DD
 ;	const MR_RIME            ; $DE
 ;	const PERRSERKER         ; $DF

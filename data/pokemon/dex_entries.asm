@@ -211,10 +211,29 @@ PokedexEntryPointers:
 	dw SteelixDexEntry
 	dw HitmontopDexEntry
 	dw BlisseyDexEntry
-;	dw Porygon2DexEntry
-;	dw KingdraDexEntry
-;	dw LickilickyDexEntry
-;	dw MagnezoneDexEntry
+	dw Porygon2DexEntry
+	dw KingdraDexEntry
+	dw LickilickyDexEntry
+	dw MagnezoneDexEntry
+	dw TangrowthDexEntry
+	dw ElectivireDexEntry
+	dw MagmortarDexEntry
+	dw PorygonZDexEntry
+	dw KleavorDexEntry
+; dw SirfetchdDexEntry
+; dw MrRimeDexEntry
+; dw PerrserkerDexEntry
+; dw CleffaDexEntry
+; dw IgglybuffDexEntry
+; dw SmoochumDexEntry
+; dw HappinyDexEntry
+; dw MunchlaxDexEntry
+; dw ElekidDexEntry
+; dw MagbyDexEntry
+; dw MimeJrDexEntry
+; dw PichuDexEntry
+; dw TyrogueDexEntry	
+
 	assert_table_length NUM_POKEMON_INDEXES
 
 ; string: species name

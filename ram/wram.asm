@@ -1731,7 +1731,6 @@ wPartyMonNicksEnd::
 
 wPartyDataEnd::
 
-
 SECTION "Main Data", WRAM0
 
 wMainDataStart::
@@ -2298,7 +2297,6 @@ wDayCareMon:: box_struct wDayCareMon
 
 wMainDataEnd::
 
-
 SECTION "Current Box Data", WRAM0
 
 wBoxDataStart::
@@ -2327,9 +2325,8 @@ wBoxMonNicksEnd::
 
 wBoxDataEnd::
 
-
 SECTION "Stack", WRAM0
 
 ; the stack grows downward
-	ds $100 - 1
+	ds $7D5 - 1
 wStack:: db

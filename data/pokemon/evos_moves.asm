@@ -214,10 +214,28 @@ EvosMovesPointerTable:
 	dw SteelixEvosMoves
 	dw HitmontopEvosMoves
 	dw BlisseyEvosMoves
-;	dw Porygon2EvosMoves
-;	dw KingdraEvosMoves
-;	dw LickilickyEvosMoves
-;	dw MagnezoneEvosMoves
+	dw Porygon2EvosMoves
+	dw KingdraEvosMoves
+	dw LickilickyEvosMoves
+	dw MagnezoneEvosMoves
+	dw TangrowthEvosMoves
+	dw ElectivireEvosMoves
+	dw MagmortarEvosMoves
+	dw PorygonZEvosMoves
+	dw KleavorEvosMoves
+	;dw SirfetchdEvosMoves
+	;dw MrRimeEvosMoves
+	;dw PerrserkerEvosMoves
+	;dw CleffaEvosMoves
+	;dw IgglybuffEvosMoves
+	;dw SmoochumEvosMoves
+	;dw HappinyEvosMoves
+	;dw MunchlaxEvosMoves
+	;dw ElekidEvosMoves
+	;dw MagbyEvosMoves
+	;dw MimeJrEvosMoves
+	;dw PichuEvosMoves
+	;dw TyrogueEvosMoves
 	assert_table_length NUM_POKEMON_INDEXES
 
 RhydonEvosMoves:
@@ -2753,4 +2771,64 @@ MagnezoneEvosMoves:
 	db 38, THUNDER_WAVE
 	db 46, SWIFT
 	db 54, SCREECH
+	db 0
+
+TangrowthEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 24, BIND
+	db 27, ABSORB
+	db 29, VINE_WHIP
+	db 32, POISONPOWDER
+	db 36, STUN_SPORE
+	db 39, SLEEP_POWDER
+	db 45, SLAM
+	db 48, GROWTH
+	db 0
+	
+ElectivireEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 34, THUNDERSHOCK
+	db 37, SCREECH
+	db 42, THUNDERPUNCH
+	db 49, LIGHT_SCREEN
+	db 54, THUNDER
+	db 0
+	
+MagmortarEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 36, LEER
+	db 39, CONFUSE_RAY
+	db 43, FIRE_PUNCH
+	db 48, SMOKESCREEN
+	db 52, SMOG
+	db 55, FLAMETHROWER
+	db 0
+
+PorygonZEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 23, PSYBEAM
+	db 28, RECOVER
+	db 35, AGILITY
+	db 42, TRI_ATTACK
+	db 0
+
+KleavorEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 17, LEER
+	db 20, FOCUS_ENERGY
+	db 24, DOUBLE_TEAM
+	db 29, SLASH
+	db 35, SWORDS_DANCE
+	db 42, AGILITY
+	db 50, ROCK_SLIDE
 	db 0
