@@ -1,14 +1,14 @@
 	db DEX_BLISSEY ; pokedex id
 
-	db 250,   5,   5,  50, 105
+	db 255,  10,  10,  55, 135
 	;   hp  atk  def  spd  spc
 
 	db NORMAL, NORMAL ; type
 	db 30 ; catch rate
 	db 255 ; base exp
 
-	INCBIN "gfx/pokemon/front/chansey.pic", 0, 1 ; sprite dimensions
-	dw ChanseyPicFront, ChanseyPicBack
+	INCBIN "gfx/pokemon/front/blissey.pic", 0, 1 ; sprite dimensions
+	dw BlisseyPicFront, BlisseyPicBack
 
 	db POUND, TAIL_WHIP, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_FAST ; growth rate
@@ -24,5 +24,5 @@
 	     FLASH
 	; end
 
-	db BANK(ChanseyPicFront)
-	assert BANK(ChanseyPicFront) == BANK(ChanseyPicBack)
+	db BANK(BlisseyPicFront)
+	assert BANK(BlisseyPicFront) == BANK(BlisseyPicBack)

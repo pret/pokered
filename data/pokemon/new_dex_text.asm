@@ -539,23 +539,23 @@ _SlowkingDexEntry::
 	dex
 
 _SteelixDexEntry::
-	text "The many small"
-	next "metal particles"
-	next "that love this"
+	text "The iron that it"
+	next "ingested with the"
+	next "soil it swallowed"
 
-	page "@MON's body"
-	next "reflect bright"
-	next "light well"
+	page "transformed its"
+	next "body, making it"
+	next "incredibly tough"
 	dex
 
 _HitmontopDexEntry::
-	text "After doing a"
-	next "handstand to"
-	next "throw off the"
+	text "It fights while"
+	next "spinning around"
+	next "at high speed."
 
-	page "opponent's timing"
-	next "it presents its"
-	next "fancy kick moves"
+	page "If it spins too"
+	next "fast, it may bore"
+	next "into the ground"
 	dex
 	
 _BlisseyDexEntry::
@@ -563,49 +563,99 @@ _BlisseyDexEntry::
 	next "a bite of its"
 	next "egg becomes"
 
-	page "unfaillingly"
+	page "unfailingly"
 	next "caring and"
 	next "pleasant to all"
 	dex
 
 _Porygon2DexEntry::
-	text "This is a newly"
-	next "discovered"
-	next "#MON. It is"
+	text "It was upgraded to"
+	next "function in space."
+	next "PORYGON2 possesses"
 
-	page "currently under"
-	next "investigation. No"
-	next "info is available"
+	page "AI, which allows"
+	next "it to learn and"
+	next "develop itself"
 	dex
 	
 _KingdraDexEntry::
-	text "This is a newly"
-	next "discovered"
-	next "#MON. It is"
+	text "Lives in caves on"
+	next "the seafloor. A"
+	next "simple yawn from"
 
-	page "currently under"
-	next "investigation. No"
-	next "info is available"
+	page "this #MON is"
+	next "enough to create"
+	next "a huge whirlpool"
 	dex
 	
 _LickilickyDexEntry::
-	text "This is a newly"
-	next "discovered"
-	next "#MON. It is"
+	text "It uses its long"
+	next "tongue to wrap"
+	next "up an enemy,"
 
-	page "currently under"
-	next "investigation. No"
-	next "info is available"
+	page "leaving it soaked"
+	next "in a saliva that"
+	next "causes numbness"
 	dex
 	
 _MagnezoneDexEntry::
-	text "This is a newly"
-	next "discovered"
-	next "#MON. It is"
+	text "It evolved from"
+	next "exposure to a"
+	next "special magnetic"
 
-	page "currently under"
-	next "investigation. No"
-	next "info is available"
+	page "field. Its three"
+	next "units generate"
+	next "strong magnetism"
+	dex
+
+_TangrowthDexEntry::
+	text "It ensnares prey"
+	next "by extending its"
+	next "arms, which are"
+
+	page "made of vines."
+	next "They regenerate"
+	next "quickly if cut"
+	dex
+
+_ElectivireDexEntry::
+	text "It pushes the"
+	next "tips of its tails"
+	next "against a foe,"
+
+	page "before unleashing"
+	next "over 20,000 volts"
+	next "of electricity"
+	dex
+	
+_MagmortarDexEntry::
+	text "Blasts fireballs"
+	next "of over 3,600"
+	next "degrees Fahrenheit"
+
+	page "out of its arms."
+	next "It avoids this"
+	next "when hunting prey"
+	dex
+	
+_PorygonZDexEntry::
+	text "Corrupted by the"
+	next "faulty update"
+	next "added to it, this"
+
+	page "#MON exhibits"
+	next "strange behaviour"
+	next "and movements"
+	dex
+	
+_KleavorDexEntry::
+	text "The axes on its"
+	next "forearms are not"
+	next "only tough, but"
+
+	page "sharp enough to"
+	next "fall huge trees"
+	next "in a single slice"
 	dex
 
 _MissingNoDexEntry::
@@ -617,3 +667,4 @@ _MissingNoDexEntry::
 	next "investigation. No"
 	next "info is available"
 	dex
+

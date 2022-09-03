@@ -218,11 +218,11 @@ EvosMovesPointerTable:
 	dw KingdraEvosMoves
 	dw LickilickyEvosMoves
 	dw MagnezoneEvosMoves
-	dw TangrowthEvosMoves
-	dw ElectivireEvosMoves
-	dw MagmortarEvosMoves
-	dw PorygonZEvosMoves
-	dw KleavorEvosMoves
+	;dw TangrowthEvosMoves
+	;dw ElectivireEvosMoves
+	;dw MagmortarEvosMoves
+	;dw PorygonZEvosMoves
+	;dw KleavorEvosMoves
 	;dw SirfetchdEvosMoves
 	;dw MrRimeEvosMoves
 	;dw PerrserkerEvosMoves
@@ -361,6 +361,7 @@ ExeggutorEvosMoves:
 
 LickitungEvosMoves:
 ; Evolutions
+	db EV_LEVEL, 37, LICKILICKY
 	db 0
 ; Learnset
 	db 7, STOMP
@@ -536,6 +537,7 @@ GastlyEvosMoves:
 ScytherEvosMoves:
 ; Evolutions
 	db EV_LEVEL, 41, SCIZOR
+	;db EV_ITEM, MOON_STONE, 1, KLEAVOR
 	db 0
 ; Learnset
 	db 17, LEER
@@ -589,6 +591,7 @@ PinsirEvosMoves:
 
 TangelaEvosMoves:
 ; Evolutions
+	;db EV_LEVEL, 34, TANGROWTH
 	db 0
 ; Learnset
 	db 24, BIND
@@ -632,6 +635,7 @@ GrowlitheEvosMoves:
 
 OnixEvosMoves:
 ; Evolutions
+	db EV_LEVEL, 30, STEELIX
 	db 0
 ; Learnset
 	db 15, BIND
@@ -668,6 +672,7 @@ PidgeyEvosMoves:
 SlowpokeEvosMoves:
 ; Evolutions
 	db EV_LEVEL, 37, SLOWBRO
+	db EV_ITEM, WATER_STONE, 1, SLOWKING
 	db 0
 ; Learnset
 	db 18, DISABLE
@@ -706,6 +711,7 @@ GravelerEvosMoves:
 
 ChanseyEvosMoves:
 ; Evolutions
+	db EV_LEVEL, 40, BLISSEY
 	db 0
 ; Learnset
 	db 12, DOUBLESLAP
@@ -833,6 +839,7 @@ BarundaEvosMoves:
 
 MagmarEvosMoves:
 ; Evolutions
+	;db EV_ITEM, FIRE_STONE, 1, MAGMORTAR
 	db 0
 ; Learnset
 	db 36, LEER
@@ -856,6 +863,7 @@ BuuEvosMoves:
 
 ElectabuzzEvosMoves:
 ; Evolutions
+	;db EV_ITEM, THUNDER_STONE, 1, ELECTIVIRE
 	db 0
 ; Learnset
 	db 34, THUNDERSHOCK
@@ -867,6 +875,7 @@ ElectabuzzEvosMoves:
 
 MagnetonEvosMoves:
 ; Evolutions
+	db EV_ITEM, THUNDER_STONE, 1, MAGNEZONE
 	db 0
 ; Learnset
 	db 21, SONICBOOM
@@ -1349,6 +1358,7 @@ HorseaEvosMoves:
 
 SeadraEvosMoves:
 ; Evolutions
+	db EV_LEVEL, 43, KINGDRA
 	db 0
 ; Learnset
 	db 19, SMOKESCREEN
@@ -1558,6 +1568,7 @@ ParasEvosMoves:
 PoliwhirlEvosMoves:
 ; Evolutions
 	db EV_ITEM, WATER_STONE, 1, POLIWRATH
+	db EV_ITEM, SUN_STONE, 1, POLITOED
 	db 0
 ; Learnset
 	db 16, HYPNOSIS
@@ -1780,6 +1791,7 @@ HypnoEvosMoves:
 
 GolbatEvosMoves:
 ; Evolutions
+	db EV_ITEM, MOON_STONE, 1, CROBAT
 	db 0
 ; Learnset
 	db 10, SUPERSONIC
@@ -2234,7 +2246,8 @@ GeodudeEvosMoves:
 	db 0
 
 PorygonEvosMoves:
-; Evolutions
+; Evolutions	
+	db EV_LEVEL, 30, PORYGON2
 	db 0
 ; Learnset
 	db 23, PSYBEAM
@@ -2731,6 +2744,7 @@ BlisseyEvosMoves:
 	
 Porygon2EvosMoves:
 ; Evolutions
+	;db EV_LEVEL, 45, PORYGONZ
 	db 0
 ; Learnset
 	db 23, PSYBEAM

@@ -165,7 +165,7 @@
 	const DEX_BLISSEY
 	const DEX_MONJA
 	const DEX_TANGELA    ; 114 
-	const DEX_TANGROWTH
+	;const DEX_TANGROWTH
 	const DEX_DECILLA   
 	const DEX_GYAOON     
 	const DEX_OMEGA      
@@ -185,18 +185,18 @@
 	const DEX_MR_MIME    ; 122
 	const DEX_SCYTHER    ; 123
 	const DEX_SCIZOR
-	const DEX_KLEAVOR
+	;const DEX_KLEAVOR
 	const DEX_PINSIR     ; 127
 	const DEX_PURAKKUSU
-;const DEX_SMOOCHUM	
+	;const DEX_SMOOCHUM	
 	const DEX_JYNX       ; 124
 	const DEX_BUU
 	;const DEX_ELEKID
 	const DEX_ELECTABUZZ ; 125
-	const DEX_ELECTIVIRE
+	;const DEX_ELECTIVIRE
 	;const DEX_MAGBY
 	const DEX_MAGMAR     ; 126
-	const DEX_MAGMORTAR
+	;const DEX_MAGMORTAR
 	const DEX_TRAMPEL    ; 
 	const DEX_TAUROS     ; 128
 	const DEX_MAGIKARP   ; 129
@@ -215,7 +215,7 @@
 	const DEX_SYLVEON
 	const DEX_PORYGON    ; 137
 	const DEX_PORYGON2
-	const DEX_PORYGONZ
+	;const DEX_PORYGONZ
 	const DEX_OMANYTE    ; 138
 	const DEX_OMASTAR    ; 139
 	const DEX_KABUTO     ; 140

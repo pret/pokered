@@ -221,11 +221,11 @@ CryData::
 	mon_cry SFX_CRY_00, $00, $00 ; Kingdra
 	mon_cry SFX_CRY_00, $00, $00 ; Lickilicky
 	mon_cry SFX_CRY_00, $00, $00 ; Magnezone
-	mon_cry SFX_CRY_00, $00, $00 ; Tangrowth
-	mon_cry SFX_CRY_00, $00, $00 ; Electivire
-	mon_cry SFX_CRY_00, $00, $00 ; Magmortar
-	mon_cry SFX_CRY_00, $00, $00 ; PorygonZ
-	mon_cry SFX_CRY_00, $00, $00 ; Kleavor
+	;mon_cry SFX_CRY_00, $00, $00 ; Tangrowth
+	;mon_cry SFX_CRY_00, $00, $00 ; Electivire
+	;mon_cry SFX_CRY_00, $00, $00 ; Magmortar
+	;mon_cry SFX_CRY_00, $00, $00 ; PorygonZ
+	;mon_cry SFX_CRY_00, $00, $00 ; Kleavor
 	;mon_cry SFX_CRY_00, $00, $00 ; Sirfetchd
 	;mon_cry SFX_CRY_00, $00, $00 ; Mr. Rime
 	;mon_cry SFX_CRY_00, $00, $00 ; Perrserker
