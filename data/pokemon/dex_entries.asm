@@ -190,14 +190,8 @@ PokedexEntryPointers:
 	dw BellsproutDexEntry
 	dw WeepinbellDexEntry
 	dw VictreebelDexEntry
-	dw TsubomittoDexEntry
-	dw AnimonDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
-	dw BellossomDexEntry
+	dw MissingNoDexEntry ; Monja
+	dw MissingNoDexEntry ; Pudi
 	dw ScizorDexEntry
 	dw RhyperiorDexEntry
 	dw EspeonDexEntry
@@ -205,34 +199,9 @@ PokedexEntryPointers:
 	dw LeafeonDexEntry
 	dw GlaceonDexEntry
 	dw SylveonDexEntry
-	dw CrobatDexEntry
-	dw PolitoedDexEntry
-	dw SlowkingDexEntry
-	dw SteelixDexEntry
-	dw HitmontopDexEntry
-	dw BlisseyDexEntry
-	dw Porygon2DexEntry
-	dw KingdraDexEntry
 	dw LickilickyDexEntry
-	dw MagnezoneDexEntry
-	;dw TangrowthDexEntry
-	;dw ElectivireDexEntry
-	;dw MagmortarDexEntry
-	;dw PorygonZDexEntry
-	;dw KleavorDexEntry
-; dw SirfetchdDexEntry
-; dw MrRimeDexEntry
-; dw PerrserkerDexEntry
-; dw CleffaDexEntry
-; dw IgglybuffDexEntry
-; dw SmoochumDexEntry
-; dw HappinyDexEntry
-; dw MunchlaxDexEntry
-; dw ElekidDexEntry
-; dw MagbyDexEntry
-; dw MimeJrDexEntry
-; dw PichuDexEntry
-; dw TyrogueDexEntry
+	dw TangrowthDexEntry
+	dw KleavorDexEntry
 	assert_table_length NUM_POKEMON_INDEXES
 
 ; string: species name
@@ -1626,107 +1595,23 @@ SylveonDexEntry:
 	text_far _SylveonDexEntry
 	text_end 
 	
-CrobatDexEntry:
-    db "BAT@"
-	db 5,11
-	dw 1650
-	text_far _CrobatDexEntry
-	text_end 
-	
-PolitoedDexEntry:
-    db "FROG@"
-	db 3,7
-	dw 750
-	text_far _PolitoedDexEntry
-	text_end 
-	
-SlowkingDexEntry:
-    db "ROYAL@"
-	db 6,7
-	dw 1750
-	text_far _SlowkingDexEntry
-	text_end 
-	
-SteelixDexEntry:
-    db "IRON SNAKE@"
-	db 30,2
-	dw 8820
-	text_far _SteelixDexEntry
-	text_end 
-	
-HitmontopDexEntry:
-    db "HEADSTAND@"
-	db 4,7
-	dw 1060
-	text_far _HitmontopDexEntry
-	text_end 
-
-BlisseyDexEntry:
-    db "HAPPINESS@"
-	db 4,11
-	dw 1030
-	text_far _BlisseyDexEntry
-	text_end
-
-Porygon2DexEntry:
-    db "VIRTUAL@"
-	db 2,0
-	dw 720
-	text_far _Porygon2DexEntry
-	text_end
-	
-KingdraDexEntry:
-    db "DRAGON@"
-	db 5,11
-	dw 3350
-	text_far _KingdraDexEntry
-	text_end
-	
 LickilickyDexEntry:
     db "LICKING@"
 	db 5,7
 	dw 3090
 	text_far _LickilickyDexEntry
 	text_end
-	
-MagnezoneDexEntry:
-    db "MAGNETAREA@"
-	db 3,11
-	dw 3970
-	text_far _MagnezoneDexEntry
+
+TangrowthDexEntry:
+    db "VINE@"
+	db 6,7
+	dw 2840
+	text_far _TangrowthDexEntry
 	text_end
-
-;TangrowthDexEntry:
-    ;db "VINE@"
-	;db 6,7
-	;dw 2840
-	;text_far _TangrowthDexEntry
-	;text_end
-
-;ElectivireDexEntry:
-    ;db "THUNDER@"
-	;db 5,11
-	;dw 3060
-	;text_far _ElectivireDexEntry
-	;text_end
 	
-;MagmortarDexEntry:
-    ;db "BLAST@"
-	;db 5,3
-	;dw 1500
-	;text_far _MagmortarDexEntry
-	;text_end
-	
-;PorygonZDexEntry:
-    ;db "VIRTUAL@"
-	;db 2,11
-	;dw 750
-	;text_far _PorygonZDexEntry
-	;text_end
-	
-;KleavorDexEntry:
-    ;db "AXE@"
-	;db 5,11
-	;dw 1960
-	;text_far _KleavorDexEntry
-	;text_end
+KleavorDexEntry:
+    db "AXE@"
+	db 5,11
+	dw 1960
+	text_far _KleavorDexEntry
+	text_end

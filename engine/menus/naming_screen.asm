@@ -34,6 +34,7 @@ AskName:
 	and a
 	jr nz, .inBattle
 	call ReloadMapSpriteTilePatterns
+	call ReloadMapData
 .inBattle
 	call LoadScreenTilesFromBuffer1
 	pop hl

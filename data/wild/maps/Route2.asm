@@ -4,7 +4,7 @@ Route2WildMons:
 	db  5, PIDGEY
 	db  4, PIDGEY
 	db  4, RATTATA
-	db  5, PARA
+	db  5, MONJA
 IF DEF(_RED)
 	db  4, WEEDLE
 	db  3, RATTATA

@@ -197,14 +197,8 @@
 	const BELLSPROUT         ; $BC
 	const WEEPINBELL         ; $BD
 	const VICTREEBEL         ; $BE
-	const TSUBOMITTO         ; $BF	(new)
-	const ANIMON             ; $C0	(new)
 	const MONJA              ; $C1	(new)
-	const PARA               ; $C2	(new)
-	const HINAAZU            ; $C3	(new)
 	const PUDI               ; $C4	(new)
-	const BETOBEBII          ; $C5	(new)
-	const BELLOSSOM          ; $C6	(new)
 	const SCIZOR             ; $C7	(new)
 	const RHYPERIOR          ; $C8  (dex expansion starts here)
 	const ESPEON             ; $C9
@@ -212,55 +206,9 @@
 	const LEAFEON            ; $CB
 	const GLACEON            ; $CC
 	const SYLVEON            ; $CD
-	const CROBAT             ; $CE
-	const POLITOED           ; $CF
-	const SLOWKING           ; $D0
-	const STEELIX            ; $D1
-	const HITMONTOP          ; $D2
-	const BLISSEY            ; $D3
-	const PORYGON2           ; $D4
-	const KINGDRA            ; $D5
 	const LICKILICKY         ; $D3
-	const MAGNEZONE          ; $D4
-	;const TANGROWTH          ; $D6
-	;const ELECTIVIRE         ; $D8
-	;const MAGMORTAR          ; $D9
-	;const PORYGONZ           ; $DB
-	;const KLEAVOR            ; $DC
-;	const SIRFETCHD          ; $DD
-;	const MR_RIME            ; $DE
-;	const PERRSERKER         ; $DF
-;	const CLEFFA             ; $E0
-;	const IGGLYBUFF          ; $E1
-;	const SMOOCHUM           ; $E2
-;	const HAPPINY            ; $E3
-;	const MUNCHLAX           ; $E4
-;	const ELEKID             ; $E5
-;	const MAGBY              ; $E6
-;	const MIME_JR            ; $E7
-;	const PICHU              ; $E8
-;	const TYROGUE            ; $E9
-; $E9 reserved for ScVi spoiler reasons
-	; vacant $EB
-	; vacant $EC
-	; vacant $ED
-	; vacant $EE
-	; vacant $EF
-	; vacant $F1
-	; vacant $F2
-	; vacant $F3
-	; vacant $F4
-	; vacant $F5
-	; vacant $F6
-	; vacant $F7
-	; vacant $F8
-	; vacant $F9
-	; vacant $FA
-	; vacant $FB
-	; vacant $FC
-	; vacant $FD
-	; vacant $FE
-	; vacant $FF
+	const TANGROWTH          ; $D6
+	const KLEAVOR            ; $DC
 
 DEF NUM_POKEMON_INDEXES EQU const_value - 1
 

@@ -194,7 +194,7 @@ WRAM0
 	"Party Data"
 	"Main Data"
 	"Current Box Data"
-	org $df04
+	org $df02
 	"Stack"
 VRAM
 	"VRAM"

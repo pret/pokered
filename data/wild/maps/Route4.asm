@@ -1,7 +1,7 @@
 Route4WildMons:
 	def_grass_wildmons 20 ; encounter rate
 	db 10, RATTATA
-	db 10, HINAAZU
+	db 10, PIDGEY
 	db  8, KONYA
 IF DEF(_RED)
 	db  6, EKANS

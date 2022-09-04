@@ -3,7 +3,7 @@ Route5WildMons:
 IF DEF(_RED)
 	db 13, ODDISH
 	db 13, KOTORA
-	db 15, BETOBEBII
+	db 15, MONJA
 	db 10, MANKEY
 	db 12, MANKEY
 	db 15, BELLSPROUT
@@ -15,7 +15,7 @@ ENDC
 IF DEF(_BLUE)
 	db 13, BELLSPROUT
 	db 13, KOTORA
-	db 15, BETOBEBII
+	db 15, MONJA
 	db 10, MEOWTH
 	db 12, MEOWTH
 	db 15, ODDISH
