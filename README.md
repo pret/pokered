@@ -29,6 +29,7 @@ Improved areas
 QoL Enhancements
 ====
 - DVs are erased and replaced with perfect 15s. 
+- The protagonist is referred to in a gender neutral manner.
 - PC added to Celadon Hotel where the invisible event usually is. Why not?
 - Artificial Save Delay has been removed.
 - Japanese event moves can now be taught via TM/HM;
