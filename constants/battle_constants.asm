@@ -68,7 +68,7 @@ DEF MAX_STAT_VALUE EQU 999
 
 ; trainer dvs, these should be set to 15.
 DEF ATKDEFDV_TRAINER EQU $FF
-DEF SPDSPCDV_TRAINER EQU $FF 
+DEF SPDSPCDV_TRAINER EQU $FF
 
 ; wPlayerBattleStatus1 or wEnemyBattleStatus1 bit flags
 	const_def
