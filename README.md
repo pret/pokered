@@ -28,7 +28,8 @@ Improved areas
 
 QoL Enhancements
 ====
-- DVs are erased and replaced with perfect 15s. 
+- Fast text has no frame delay between text scrolling, doubling the scroll speed. It's also been made the default option, so you don't need to go into the Options menu for it.
+- Trainer DVs are perfect-15s.
 - The protagonist is referred to in a gender neutral manner.
 - PC added to Celadon Hotel where the invisible event usually is. Why not?
 - Artificial Save Delay has been removed.
