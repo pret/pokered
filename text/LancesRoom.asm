@@ -52,7 +52,7 @@ _LanceAfterBattleText::
 
 	para "You have to face"
 	line "another trainer!"
-	cont "His name is..."
+	cont "Their name is..."
 
 	para "<RIVAL>!"
 	line "He beat the ELITE"

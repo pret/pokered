@@ -8,7 +8,7 @@ _SaffronGateText_1dfe7::
 	done
 
 _SaffronGateText_8aaa9::
-	text "Whoa, boy!"
+	text "Whoa there!"
 	line "I'm parched!"
 	cont "..."
 	cont "Huh? I can have"
