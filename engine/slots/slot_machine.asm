@@ -513,13 +513,13 @@ SlotReward300Text:
 	db "999@"
 
 SlotReward100Text:
-	db "350@"
+	db "500@"
 
 SlotReward8Text:
 	db "100@"
 
 SlotReward15Text:
-	db "150@"
+	db "200@"
 
 NotThisTimeText:
 	text_far _NotThisTimeText
@@ -573,7 +573,7 @@ SlotReward8Func:
 	dec [hl]
 .skip
 	ld b, $2
-	ld de, 40 ; buffed amounts start here
+	ld de, 100 ; buffed amounts start here
 	ret
 
 SlotReward15Func:
@@ -584,7 +584,7 @@ SlotReward15Func:
 	dec [hl]
 .skip
 	ld b, $4
-	ld de, 75
+	ld de, 200
 	ret
 
 SlotReward100Func:
@@ -593,7 +593,7 @@ SlotReward100Func:
 	xor a
 	ld [wSlotMachineFlags], a
 	ld b, $8
-	ld de, 300
+	ld de, 500
 	ret
 
 SlotReward300Func:
@@ -682,7 +682,7 @@ SlotMachine_PayCoinsToPlayer:
 	ld h, a
 	or l
 	ret z
-	ld de, -1
+	ld de, -5 ; this will not break anything at all - PvK (it was -1 before)
 	add hl, de
 	ld a, l
 	ld [wPayoutCoins + 1], a
