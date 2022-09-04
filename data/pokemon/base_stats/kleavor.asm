@@ -1,9 +1,9 @@
 	db DEX_KLEAVOR ; pokedex id
 
-	db  70, 110,  80, 105,  55
+	db  70, 135,  95,  85,  45
 	;   hp  atk  def  spd  spc
 
-	db BUG, FLYING ; type
+	db BUG, ROCK ; type
 	db 45 ; catch rate
 	db 187 ; base exp
 
@@ -16,7 +16,7 @@
 	; tm/hm learnset
 	tmhm SWORDS_DANCE, TOXIC,        TAKE_DOWN,    DOUBLE_EDGE,  HYPER_BEAM,   \
 	     RAGE,         MIMIC,        DOUBLE_TEAM,  BIDE,         SWIFT,        \
-	     SKULL_BASH,   REST,         SUBSTITUTE,   CUT
+	     SKULL_BASH,   REST,         ROCK_SLIDE,   SUBSTITUTE,   CUT
 	; end
 
 	db BANK(ScytherPicFront)
