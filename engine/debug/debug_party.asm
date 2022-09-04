@@ -86,9 +86,9 @@ IF DEF(_DEBUG)
 	ld a, 15
 	ld [hl], a
 
-	; Pikachu gets Surf.
+	; Pikachu gets Flash.
 	ld hl, wPartyMon6Moves + 2
-	ld a, SURF
+	ld a, FLASH
 	ld [hl], a
 	ld hl, wPartyMon6PP + 2
 	ld a, 15
