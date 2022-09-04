@@ -141,7 +141,7 @@ DebugSetPokedexEntries:
 DebugItemsList:
 	db BICYCLE, 1
 	db FULL_RESTORE, 99
-	db FULL_HEAL, 99
+	db MAX_REPEL, 99
 	db ESCAPE_ROPE, 99
 	db RARE_CANDY, 99
 	db MASTER_BALL, 99
