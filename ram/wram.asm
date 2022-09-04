@@ -2328,5 +2328,5 @@ wBoxDataEnd::
 SECTION "Stack", WRAM0
 
 ; the stack grows downward
-	ds $7D5 - 1
+	ds $FE - 1
 wStack:: db

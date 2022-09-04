@@ -161,7 +161,7 @@ MonPartyData:
 	nybble ICON_FAIRY     ; Blissey
 	nybble ICON_GRASS     ; Monja
 	nybble ICON_GRASS     ; Tangela
-	nybble ICON_GRASS     ; Tangrowth
+	;nybble ICON_GRASS     ; Tangrowth
 	nybble ICON_MON	    ; Decilla
 	nybble ICON_MON	    ; Gyaoon
 	nybble ICON_MON	    ; Omega
@@ -181,7 +181,7 @@ MonPartyData:
 	nybble ICON_MON       ; Mr.Mime
 	nybble ICON_BUG       ; Scyther
 	nybble ICON_BUG       ; Scizor
-	nybble ICON_BUG       ; Kleavor
+	;nybble ICON_BUG       ; Kleavor
 	nybble ICON_BUG       ; Pinsir
 	nybble ICON_BUG       ; Purakkusu
 	;nybble ICON_FAIRY     ; Smoochum
@@ -189,10 +189,10 @@ MonPartyData:
 	nybble ICON_MON       ; Buu
 	;nybble ICON_FAIRY     ; Elekid
 	nybble ICON_MON       ; Electabuzz
-	nybble ICON_MON       ; Electivire
+	;nybble ICON_MON       ; Electivire
 	;nybble ICON_FAIRY     ; Magby
 	nybble ICON_MON       ; Magmar
-	nybble ICON_MON       ; Magmortar
+	;nybble ICON_MON       ; Magmortar
 	nybble ICON_MON       ; Trampel
 	nybble ICON_QUADRUPED ; Tauros
 	nybble ICON_WATER     ; Magikarp
@@ -211,7 +211,7 @@ MonPartyData:
 	nybble ICON_QUADRUPED ; Sylveon
 	nybble ICON_MON       ; Porygon
 	nybble ICON_MON       ; Porygon2
-	nybble ICON_BIRD      ; PorygonZ
+	;nybble ICON_MON       ; PorygonZ
 	nybble ICON_HELIX     ; Omanyte
 	nybble ICON_HELIX     ; Omastar
 	nybble ICON_HELIX     ; Kabuto

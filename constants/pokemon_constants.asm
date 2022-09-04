@@ -222,11 +222,11 @@
 	const KINGDRA            ; $D5
 	const LICKILICKY         ; $D3
 	const MAGNEZONE          ; $D4
-	const TANGROWTH          ; $D6
-	const ELECTIVIRE         ; $D8
-	const MAGMORTAR          ; $D9
-	const PORYGONZ          ; $DB
-	const KLEAVOR            ; $DC
+	;const TANGROWTH          ; $D6
+	;const ELECTIVIRE         ; $D8
+	;const MAGMORTAR          ; $D9
+	;const PORYGONZ           ; $DB
+	;const KLEAVOR            ; $DC
 ;	const SIRFETCHD          ; $DD
 ;	const MR_RIME            ; $DE
 ;	const PERRSERKER         ; $DF
