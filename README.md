@@ -19,7 +19,7 @@ New Types:
 
 New Items:
 ====
-- The Sun, Ice and Shiny Stones have been added
+- The Sun, Ice, and Shiny Stones have been added.
 	
 Improved areas
 ====
@@ -29,19 +29,20 @@ Improved areas
 QoL Enhancements
 ====
 - DVs are erased and replaced with perfect 15s. 
+- The protagonist is referred to in a gender neutral manner.
 - PC added to Celadon Hotel where the invisible event usually is. Why not?
 - Artificial Save Delay has been removed.
-- Japanese event moves can now be taught via TM/HM;
-	- TM16 (Pay Day) can be taught to Fearow and Rapidash.
-	- TM23 (Dragon Rage) can be taught to Magikarp.
-	- HM02 (Fly) can be taught to the Pikachu line.
-	- HM03 (Surf) can be taught to the Pikachu line.
+- Event moves can now be taught via TM/HM;
+	- TM16 (Pay Day) can be taught to Fearow and Rapidash ('98 Shogakukan)
+	- TM23 (Dragon Rage) can be taught to Magikarp (July '98 Shogakukan)
+	- HM02 (Fly) can be taught to the Pikachu line (Corocoro)
+	- HM03 (Surf) can be taught to the Pikachu line (Stadium / Corocoro)
+	- Psyduck learns Amnesia at Lv15 (Stadium)
 - Yellow learnset changes are imported; eg. Flash Venonat
-- Psyduck learns Amnesia at Lv1, removing the need to connect with Pokemon Stadium to obtain the move.
 - The Game Corner in general is massively buffed, making everything far more worth going for;
-	- 3x Cherry now gives 40 coins (used to be 8)
-	- 3x Magikarp/Poliwag/Bird/Diglett/Rattata/Jigglypuff now gives 75 coins (used to be 15)
-	- 3x BAR now gives 300 coins (used to be 100)
+	- 3x Cherry now gives 100 coins (used to be 8)
+	- 3x Magikarp/Poliwag/Bird/Diglett/Rattata/Jigglypuff now gives 200 coins (used to be 15)
+	- 3x BAR now gives 500 coins (used to be 100)
 	- 3x 7s now gives 999 coins (used to be 300)
 - The Route 5-6 underground path contains a shortcut to Celadon City. 
 	- This allows you to skip Route 9 and Rock Tunnel, making them optional areas and opening up central Kanto.

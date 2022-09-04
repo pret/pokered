@@ -762,6 +762,7 @@ PsyduckEvosMoves:
 	db 0
 ; Learnset
 	db 14, TAIL_WHIP
+	db 15, AMNESIA
 	db 18, DISABLE
 	db 26, CONFUSION
 	db 32, FURY_SWIPES
