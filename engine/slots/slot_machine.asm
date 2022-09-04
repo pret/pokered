@@ -516,7 +516,7 @@ SlotReward100Text:
 	db "300@"
 
 SlotReward8Text:
-	db "40"
+	db "40@"
 
 SlotReward15Text:
 	db "75@"
