@@ -40,9 +40,9 @@ QoL Enhancements
 	- Psyduck learns Amnesia at Lv15 (Stadium)
 - Yellow learnset changes are imported; eg. Flash Venonat
 - The Game Corner in general is massively buffed, making everything far more worth going for;
-	- 3x Cherry now gives 40 coins (used to be 8)
-	- 3x Magikarp/Poliwag/Bird/Diglett/Rattata/Jigglypuff now gives 75 coins (used to be 15)
-	- 3x BAR now gives 300 coins (used to be 100)
+	- 3x Cherry now gives 100 coins (used to be 8)
+	- 3x Magikarp/Poliwag/Bird/Diglett/Rattata/Jigglypuff now gives 150 coins (used to be 15)
+	- 3x BAR now gives 350 coins (used to be 100)
 	- 3x 7s now gives 999 coins (used to be 300)
 - The Route 5-6 underground path contains a shortcut to Celadon City. 
 	- This allows you to skip Route 9 and Rock Tunnel, making them optional areas and opening up central Kanto.

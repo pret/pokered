@@ -513,13 +513,13 @@ SlotReward300Text:
 	db "999@"
 
 SlotReward100Text:
-	db "300@"
+	db "350@"
 
 SlotReward8Text:
-	db "40@"
+	db "100@"
 
 SlotReward15Text:
-	db "75@"
+	db "150@"
 
 NotThisTimeText:
 	text_far _NotThisTimeText
