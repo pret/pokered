@@ -5,10 +5,10 @@
 
 	db BUG, ROCK ; type
 	db 45 ; catch rate
-	db 187 ; base exp
+	db 204 ; base exp
 
-	INCBIN "gfx/pokemon/front/scyther.pic", 0, 1 ; sprite dimensions
-	dw ScytherPicFront, ScytherPicBack
+	INCBIN "gfx/pokemon/front/kleavor.pic", 0, 1 ; sprite dimensions
+	dw KleavorPicFront, KleavorPicBack
 
 	db QUICK_ATTACK, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -19,5 +19,5 @@
 	     SKULL_BASH,   REST,         ROCK_SLIDE,   SUBSTITUTE,   CUT
 	; end
 
-	db BANK(ScytherPicFront)
-	assert BANK(ScytherPicFront) == BANK(ScytherPicBack)
+	db BANK(KleavorPicFront)
+	assert BANK(KleavorPicFront) == BANK(KleavorPicBack)

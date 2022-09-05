@@ -200,15 +200,15 @@
 	const MONJA              ; $C1	(new)
 	const PUDI               ; $C4	(new)
 	const SCIZOR             ; $C7	(new)
-	const RHYPERIOR          ; $C8  (dex expansion starts here)
-	const ESPEON             ; $C9
-	const UMBREON            ; $CA
-	const LEAFEON            ; $CB
-	const GLACEON            ; $CC
-	const SYLVEON            ; $CD
-	const LICKILICKY         ; $D3
-	const TANGROWTH          ; $D6
-	const KLEAVOR            ; $DC
+	const RHYPERIOR          ; $C8	(new)
+	const ESPEON             ; $C9	(new)
+	const UMBREON            ; $CA	(new)
+	const LEAFEON            ; $CB	(new)
+	const GLACEON            ; $CC	(new)
+	const SYLVEON            ; $CD	(new)
+	const LICKILICKY         ; $CD	(new)
+	const TANGROWTH          ; $CE	(new)
+	const KLEAVOR            ; $CF	(new)
 
 DEF NUM_POKEMON_INDEXES EQU const_value - 1
 
