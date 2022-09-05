@@ -685,7 +685,7 @@ SlotMachine_PayCoinsToPlayer:
 	ld de, -5 ; this will not break anything at all - PvK (it was -1 before)
 	add hl, de
 	ld a, l
-	ld [wPayoutCoins + 1], a
+	ld [wPayoutCoins + 5], a
 	ld a, h
 	ld [wPayoutCoins], a
 	ld hl, wTempCoins1 + 1
