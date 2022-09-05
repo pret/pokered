@@ -685,11 +685,11 @@ SlotMachine_PayCoinsToPlayer:
 	ld de, -5 ; this will not break anything at all - PvK (it was -1 before)
 	add hl, de
 	ld a, l
-	ld [wPayoutCoins + 5], a
+	ld [wPayoutCoins + 1], a
 	ld a, h
 	ld [wPayoutCoins], a
 	ld hl, wTempCoins1 + 1
-	ld de, wPlayerCoins + 1
+	ld de, wPlayerCoins + 5
 	ld c, $2
 	predef AddBCDPredef
 	call SlotMachine_PrintCreditCoins
