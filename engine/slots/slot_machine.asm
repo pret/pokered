@@ -689,7 +689,7 @@ SlotMachine_PayCoinsToPlayer:
 	ld a, h
 	ld [wPayoutCoins], a
 	ld hl, wTempCoins1 + 1
-	ld de, wPlayerCoins + 5
+	ld de, wPlayerCoins + 1
 	ld c, $2
 	predef AddBCDPredef
 	call SlotMachine_PrintCreditCoins
