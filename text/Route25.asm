@@ -118,8 +118,8 @@ _Route25AfterBattleText7::
 
 _Route25BattleText8::
 	text "I'm off to see a"
-	line "#MON collector"
-	cont "at the cape!"
+	line "collector at"
+	cont "the lighthouse!"
 	done
 
 _Route25EndBattleText8::
@@ -151,6 +151,5 @@ _Route25AfterBattleText9::
 	done
 
 _Route25Text11::
-	text "SEA COTTAGE"
-	line "BILL lives here!"
+	text "BILL's LIGHTHOUSE"
 	done

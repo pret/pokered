@@ -144,9 +144,9 @@ _CeruleanCityText_19730::
 	done
 
 _CeruleanCityText_19735::
-	text "SLOWBRO punch!"
-	line "No! You blew it"
-	cont "again!"
+	text "SLOWBRO, use MEGA"
+	line "PUNCH! No! You"
+	cont "blew it again!"
 	done
 
 _CeruleanCityText_1973a::
@@ -191,16 +191,13 @@ _CeruleanCityText9::
 	cont "get dirty!"
 	done
 
-_CeruleanCityText10::
-	text "This is CERULEAN"
-	line "CAVE! Horribly"
-	cont "strong #MON"
-	cont "live in there!"
+_CeruleanCityText10::	; changed to be more ambiguous just in case this script needs reusing
+	text "Hey! This is a"
+	line "restricted area."
 
-	para "The #MON LEAGUE"
-	line "champion is the"
-	cont "only person who"
-	cont "is allowed in!"
+	para "I'm sorry, but"
+	line "I cannot allow"
+	cont "you to enter."
 	done
 
 _CeruleanCityText12::
