@@ -6,7 +6,7 @@ SuperRodData:
 	dbw CERULEAN_CITY,       .Group3
 	dbw VERMILION_CITY,      .Group4
 	dbw CELADON_CITY,        .Group5
-	dbw FUCHSIA_CITY,        .Group10
+	dbw FUCHSIA_CITY,        .Group7
 	dbw CINNABAR_ISLAND,     .Group8
 	dbw ROUTE_4,             .Group3
 	dbw ROUTE_6,             .Group4
@@ -32,7 +32,7 @@ SuperRodData:
 	dbw SAFARI_ZONE_WEST,    .Group6
 	dbw SAFARI_ZONE_CENTER,  .Group6
 	dbw CERULEAN_CAVE_2F,    .Group9
-	dbw CERULEAN_CAVE_B1F,   .Group9
+	dbw CERULEAN_CAVE_B1F,   .Group10
 	dbw CERULEAN_CAVE_1F,    .Group9
 	dbw ROCK_TUNNEL_1F,      .Group5
 	dbw ROCK_TUNNEL_1F,      .Group5
@@ -55,7 +55,7 @@ SuperRodData:
 .Group3:
 	db 5
 	db 15, SKIMPER
-	db 19, MAGIKARP
+	db 15, MAGIKARP
 	db 15, KRABBY
 	db 15, BLOTTLE
 	db 15, CHEEP
@@ -87,19 +87,20 @@ SuperRodData:
 
 .Group7:
 	db 6
-	db 40, TENTACRUEL
-	db 40, KINGLER
-	db 40, SEAKING
-	db 40, GYARADOS
-	db 40, PENDRAKEN
-	db 40, JABETTA
+	db 35, TENTACRUEL
+	db 35, KINGLER
+	db 35, SEAKING
+	db 35, GYARADOS
+	db 35, PENDRAKEN
+	db 35, JABETTA
 
 .Group8:
-	db 4
+	db 5
 	db 40, STARYU
 	db 40, SEADRA
 	db 40, SHELLDER
 	db 40, PENDRAKEN
+	db 40, JAGG
 
 .Group9:
 	db 5

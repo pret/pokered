@@ -44,6 +44,7 @@ FossilsList:
 	db DOME_FOSSIL
 	db HELIX_FOSSIL
 	db OLD_AMBER
+	db WING_FOSSIL
 	db 0 ; end
 
 Lab4Text1:

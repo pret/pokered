@@ -9,6 +9,7 @@ PewterCity_Object:
 	warp_event 23, 17, PEWTER_MART, 1
 	warp_event  7, 29, PEWTER_SPEECH_HOUSE, 1
 	warp_event 13, 25, PEWTER_POKECENTER, 1
+	warp_event 27, 21, ROUTE_12_SUPER_ROD_HOUSE, 1
 
 	def_bg_events
 	bg_event 19, 29,  6 ; PewterCityText6
