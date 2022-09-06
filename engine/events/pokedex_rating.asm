@@ -56,21 +56,21 @@ DexCompletionText:
 	text_end
 
 DexRatingsTable:
-	dbw 10, DexRatingText_Own0To9
-	dbw 20, DexRatingText_Own10To19
-	dbw 30, DexRatingText_Own20To29
-	dbw 40, DexRatingText_Own30To39
-	dbw 50, DexRatingText_Own40To49
-	dbw 60, DexRatingText_Own50To59
-	dbw 70, DexRatingText_Own60To69
-	dbw 80, DexRatingText_Own70To79
-	dbw 90, DexRatingText_Own80To89
-	dbw 100, DexRatingText_Own90To99
-	dbw 110, DexRatingText_Own100To109
-	dbw 120, DexRatingText_Own110To119
-	dbw 130, DexRatingText_Own120To129
-	dbw 140, DexRatingText_Own130To139
-	dbw 150, DexRatingText_Own140To149
+	dbw 15, DexRatingText_Own0To9
+	dbw 30, DexRatingText_Own10To19
+	dbw 40, DexRatingText_Own20To29
+	dbw 55, DexRatingText_Own30To39
+	dbw 70, DexRatingText_Own40To49
+	dbw 80, DexRatingText_Own50To59
+	dbw 95, DexRatingText_Own60To69
+	dbw 110, DexRatingText_Own70To79
+	dbw 120, DexRatingText_Own80To89
+	dbw 135, DexRatingText_Own90To99
+	dbw 150, DexRatingText_Own100To109
+	dbw 160, DexRatingText_Own110To119
+	dbw 175, DexRatingText_Own120To129
+	dbw 190, DexRatingText_Own130To139
+	dbw 199, DexRatingText_Own140To149
 	dbw NUM_POKEMON + 1, DexRatingText_Own150To151
 
 DexRatingText_Own0To9:
