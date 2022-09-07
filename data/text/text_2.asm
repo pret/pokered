@@ -1788,3 +1788,19 @@ _TextIDErrorText::
 _ContCharText::
 	text "<_CONT>@"
 	text_end
+
+_PromptToSurfText::
+	text "The water is calm."
+	line "Would you like to"
+	cont "SURF?"
+	done
+
+_ExplainCutText::
+	text "This tree can be"
+	line "CUT!"
+	done
+
+_PromptToCutText::
+	text "Would you like to"
+	line "use CUT?"
+	done
