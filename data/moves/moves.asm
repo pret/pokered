@@ -53,7 +53,7 @@ Moves:
 	move DOUBLE_EDGE,  RECOIL_EFFECT,          	   120, NORMAL,       100, 10
 	move TAIL_WHIP,    DEFENSE_DOWN1_EFFECT,         0, NORMAL,       100, 30
 	move POISON_STING, POISON_SIDE_EFFECT2,         15, POISON,       100, 35
-	move TWINEEDLE,    TWINEEDLE_EFFECT,            50, BUG,          100, 20
+	move TWINEEDLE,    TWINEEDLE_EFFECT,            50, BUG,          100, 20 ; hits twice
 	move PIN_MISSILE,  TWO_TO_FIVE_ATTACKS_EFFECT,  18, BUG,          100, 20
 	move LEER,         DEFENSE_DOWN1_EFFECT,         0, NORMAL,       100, 30
 	move BITE,         FLINCH_SIDE_EFFECT1,         60, NORMAL,       100, 25
