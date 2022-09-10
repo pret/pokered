@@ -22,7 +22,7 @@ DEF SLOTS_SOMEONESKEYS EQU $ff
 	const_def
 	const TRADE_FOR_TERRY
 	const TRADE_FOR_MARCEL
-	const TRADE_FOR_CHIKUCHIKU
+	const TRADE_FOR_CHIKUCHIKU ; unused
 	const TRADE_FOR_SAILOR
 	const TRADE_FOR_DUX
 	const TRADE_FOR_MARC
@@ -36,7 +36,7 @@ DEF NUM_NPC_TRADES EQU const_value
 ; InGameTradeTextPointers indexes (see engine/events/in_game_trades.asm)
 	const_def
 	const TRADE_DIALOGSET_CASUAL
-	const TRADE_DIALOGSET_POLITE
+	const TRADE_DIALOGSET_EVOLUTION
 	const TRADE_DIALOGSET_HAPPY
 
 ; badges
