@@ -8,5 +8,6 @@ VermilionDock_Object:
 	def_bg_events
 
 	def_object_events
+	; object_event 0,  0, SPRITE_MONSTER, STAY, DOWN, 1, MEW, 30 | OW_POKEMON
 
 	def_warps_to VERMILION_DOCK

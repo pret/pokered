@@ -1,3 +1,3 @@
 _CrockyBattleText::
-	text "Graogh!"
+	text "Graogh!@"
 	text_end

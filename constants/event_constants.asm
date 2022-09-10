@@ -579,6 +579,11 @@
 	const EVENT_BEAT_SS_ANNE_10_TRAINER_4
 	const EVENT_BEAT_SS_ANNE_10_TRAINER_5
 
+; Diglett's Cave events
+	const_next $650
+	const_skip
+	const EVENT_BEAT_CROCKY
+
 ; Victory Road 3F events
 	const_next $660
 	const EVENT_VICTORY_ROAD_3_BOULDER_ON_SWITCH1

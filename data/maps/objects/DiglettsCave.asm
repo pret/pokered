@@ -8,6 +8,6 @@ DiglettsCave_Object:
 	def_bg_events
 
 	def_object_events
-	object_event 30, 15, SPRITE_MONSTER, WALK, DOWN, 1, CROCKY, 40
+	object_event 29, 13, SPRITE_MONSTER, STAY, DOWN, 1, CROCKY, 28 | OW_POKEMON
 
 	def_warps_to DIGLETTS_CAVE

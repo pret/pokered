@@ -200,7 +200,7 @@ MapHSPointers:
 	dw VictoryRoad2FHS
 	dw NoHS
 	dw NoHS
-	dw NoHS
+	dw DiglettsCaveHS
 	dw VictoryRoad3FHS
 	dw RocketHideoutB1FHS
 	dw RocketHideoutB2FHS
@@ -424,6 +424,8 @@ SSAnneB1FRoomsHS:
 	db SS_ANNE_B1F_ROOMS, $09, SHOW
 	db SS_ANNE_B1F_ROOMS, $0A, SHOW
 	db SS_ANNE_B1F_ROOMS, $0B, SHOW
+DiglettsCaveHS:
+	db DIGLETTS_CAVE, $01, SHOW
 VictoryRoad3FHS:
 	db VICTORY_ROAD_3F, $05, SHOW
 	db VICTORY_ROAD_3F, $06, SHOW
