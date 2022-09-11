@@ -23,7 +23,7 @@ DEF BASE_TMHM        rb (NUM_TM_HM + 7) / 8
                      rb_skip
 DEF BASE_DATA_SIZE EQU _RS
 
-; party_struct members (see macros/wram.asm)
+; party_struct members (see macros/ram.asm)
 rsreset
 DEF MON_SPECIES    rb
 DEF MON_HP         rw
