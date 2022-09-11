@@ -1,6 +1,6 @@
 INCLUDE "constants.asm"
 
-INCLUDE "macros/wram.asm"
+INCLUDE "macros/ram.asm"
 
 
 INCLUDE "ram/vram.asm"
