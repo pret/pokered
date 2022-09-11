@@ -11,7 +11,7 @@ TypeNames:
 	dw .Bug
 	dw .Ghost
 
-REPT FIRE - GHOST - 1
+REPT UNUSED_TYPES_END - UNUSED_TYPES
 	dw .Normal
 ENDR
 
