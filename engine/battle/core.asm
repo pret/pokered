@@ -5172,7 +5172,7 @@ MetronomePickMove:
 	and a
 	jr z, .pickMoveLoop
 	cp STRUGGLE
-	assert NUM_ATTACKS == BULLET_PUNCH ; rerolls if greater than the last move in index
+	assert NUM_ATTACKS == STRUGGLE 
 	jr nc, .pickMoveLoop
 	cp METRONOME
 	jr z, .pickMoveLoop

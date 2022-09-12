@@ -164,7 +164,6 @@ AttackAnimationPointers:
 	dw SuperFangAnim
 	dw SlashAnim
 	dw SubstituteAnim
-	dw StruggleAnim
 	dw FairyWindAnim
 	dw DrainingKissAnim
 	dw MetalSoundAnim
@@ -178,6 +177,7 @@ AttackAnimationPointers:
 	dw CharmAnim
 	dw SweetKissAnim
 	dw BulletPunchAnim
+	dw StruggleAnim
 	assert_table_length NUM_ATTACKS
 	dw ShowPicAnim
 	dw EnemyFlashAnim

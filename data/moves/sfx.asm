@@ -165,7 +165,6 @@ MoveSoundTable:
 	db SFX_BATTLE_26,          $f0, $ff ; SUPER_FANG
 	db SFX_NOT_VERY_EFFECTIVE, $01, $ff ; SLASH
 	db SFX_BATTLE_2C,          $d8, $04 ; SUBSTITUTE
-	db SFX_BATTLE_0B,          $00, $80 ; STRUGGLE
 	db SFX_BATTLE_12,          $00, $c0 ; FAIRY_WIND
 	db SFX_BATTLE_24,          $00, $80 ; DRAININGKISS
 	db SFX_BATTLE_31,          $00, $80 ; METAL_SOUND
@@ -179,5 +178,6 @@ MoveSoundTable:
 	db SFX_BATTLE_09,          $88, $10 ; CHARM
 	db SFX_BATTLE_09,          $88, $10 ; SWEET_KISS
 	db SFX_BATTLE_0B,          $01, $80 ; BULLET_PUNCH
+	db SFX_BATTLE_0B,          $00, $80 ; STRUGGLE
 	assert_table_length NUM_ATTACKS
 	db SFX_BATTLE_0B,          $00, $80

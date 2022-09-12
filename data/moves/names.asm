@@ -164,7 +164,6 @@ MoveNames::
 	li "SUPER FANG"
 	li "SLASH"
 	li "SUBSTITUTE"
-	li "STRUGGLE"
 	li "FAIRY WIND"
 	li "DRAININGKISS"
 	li "METAL SOUND"
@@ -178,4 +177,5 @@ MoveNames::
 	li "CHARM"
 	li "SWEET KISS"
 	li "BULLET PUNCH"
+	li "STRUGGLE"
 	assert_list_length NUM_ATTACKS
