@@ -45,6 +45,9 @@ DEF FIRST_SE_ID EQU const_value
 
 ; subanimations that are part of move animations
 ; SubanimationPointers indexes (see data/battle_anims/subanimations.asm)
+
+; The 0 or 1 in the name of a subanim indicates whether to use tileset 0 or 1 data/moves/animations.asm.
+; "Both" indicates either can be used for different images using the same animation.
 	const_def
 	const SUBANIM_0_STAR
 	const SUBANIM_0_STAR_TWICE
