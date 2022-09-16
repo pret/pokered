@@ -836,7 +836,8 @@
 
 ; Indigo Plateau events
 	const_next $8E0
-	const ELITE4_EVENTS_START
+DEF INDIGO_PLATEAU_EVENTS_START EQU const_value
+	const_skip
 	const EVENT_BEAT_LORELEIS_ROOM_TRAINER_0
 	const_skip 4
 	const EVENT_AUTOWALKED_INTO_LORELEIS_ROOM
@@ -855,7 +856,8 @@
 	const EVENT_LANCES_ROOM_LOCK_DOOR
 	const_skip
 	const EVENT_BEAT_CHAMPION_RIVAL
-	const ELITE4_CHAMPION_EVENTS_END
+	const_skip
+DEF INDIGO_PLATEAU_EVENTS_END EQU const_value - 1
 	const_skip 
 	const EVENT_BECAME_CHAMP 
 	const EVENT_MET_GYM_GUIDE_SON 

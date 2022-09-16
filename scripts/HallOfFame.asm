@@ -41,7 +41,7 @@ HallofFameRoomScript2:
 	ld [wHallOfFameCurScript], a
 	; Elite 4 events
 	SetEvent EVENT_BECAME_CHAMP ; PureRGBnote: ADDED: new event to track whether we've beat the game once yet
-	ResetEventRange ELITE4_EVENTS_START, ELITE4_CHAMPION_EVENTS_END, 1
+	ResetEventRange INDIGO_PLATEAU_EVENTS_START, INDIGO_PLATEAU_EVENTS_END, 1
 	xor a
 	ld [wHallOfFameCurScript], a
 	ld a, PALLET_TOWN
