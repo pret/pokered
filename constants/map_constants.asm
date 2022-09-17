@@ -24,7 +24,7 @@ ENDM
 	mapconst VERMILION_CITY,                18, 20 ; $05
 	mapconst CELADON_CITY,                  18, 25 ; $06
 	mapconst FUCHSIA_CITY,                  18, 20 ; $07
-	mapconst CINNABAR_ISLAND,                9, 10 ; $08
+	mapconst CINNABAR_ISLAND,               15, 14 ; $08
 	mapconst INDIGO_PLATEAU,                 9, 10 ; $09
 	mapconst SAFFRON_CITY,                  18, 20 ; $0A
 DEF NUM_CITY_MAPS EQU const_value
@@ -38,8 +38,8 @@ DEF FIRST_ROUTE_MAP EQU const_value
 	mapconst ROUTE_6,                       18, 10 ; $11
 	mapconst ROUTE_7,                        9, 10 ; $12
 	mapconst ROUTE_8,                        9, 30 ; $13
-	mapconst ROUTE_9,                        9, 30 ; $14
-	mapconst ROUTE_10,                      36, 10 ; $15
+	mapconst ROUTE_9,                        13, 30 ; $14
+	mapconst ROUTE_10,                      40, 10 ; $15
 	mapconst ROUTE_11,                       9, 30 ; $16
 	mapconst ROUTE_12,                      54, 10 ; $17
 	mapconst ROUTE_13,                       9, 30 ; $18
@@ -48,13 +48,13 @@ DEF FIRST_ROUTE_MAP EQU const_value
 	mapconst ROUTE_16,                       9, 20 ; $1B
 	mapconst ROUTE_17,                      72, 10 ; $1C
 	mapconst ROUTE_18,                       9, 25 ; $1D
-	mapconst ROUTE_19,                      27, 10 ; $1E
-	mapconst ROUTE_20,                       9, 50 ; $1F
+	mapconst ROUTE_19,                      33, 10 ; $1E
+	mapconst ROUTE_20,                      15, 50 ; $1F
 	mapconst ROUTE_21,                      45, 10 ; $20
 	mapconst ROUTE_22,                       9, 20 ; $21
 	mapconst ROUTE_23,                      72, 10 ; $22
 	mapconst ROUTE_24,                      18, 10 ; $23
-	mapconst ROUTE_25,                       9, 30 ; $24
+	mapconst ROUTE_25,                       9, 37 ; $24
 DEF FIRST_INDOOR_MAP EQU const_value
 	mapconst REDS_HOUSE_1F,                  4,  4 ; $25
 	mapconst REDS_HOUSE_2F,                  4,  4 ; $26

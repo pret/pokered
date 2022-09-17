@@ -152,7 +152,7 @@ CeladonGameCornerText2:
 	xor a
 	ldh [hMoney], a
 	ldh [hMoney + 2], a
-	ld a, $10
+	ld a, $80
 	ldh [hMoney + 1], a
 	call HasEnoughMoney
 	jr nc, .asm_48cdb
@@ -162,7 +162,7 @@ CeladonGameCornerText2:
 	xor a
 	ldh [hMoney], a
 	ldh [hMoney + 2], a
-	ld a, $10
+	ld a, $80
 	ldh [hMoney + 1], a
 	ld hl, hMoney + 2
 	ld de, wPlayerMoney + 2
@@ -170,12 +170,13 @@ CeladonGameCornerText2:
 	predef SubBCDPredef
 	xor a
 	ldh [hUnusedCoinsByte], a
-	ldh [hCoins], a
-	ld a, $50
 	ldh [hCoins + 1], a
-	ld de, wPlayerCoins + 1
-	ld hl, hCoins + 1
-	ld c, $2
+	ldh [hCoins + 2], a
+	ld a, $05
+	ldh [hCoins], a
+	ld de, wPlayerCoins + 2
+	ld hl, hCoins + 2
+	ld c, $3
 	predef AddBCDPredef
 	call CeladonGameCornerScript_48f1e
 	ld hl, CeladonGameCornerText_48d27

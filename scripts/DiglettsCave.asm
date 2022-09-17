@@ -14,6 +14,7 @@ DiglettsCave_ScriptPointers:
 
 DiglettsCave_TextPointers:
 	dw CrockyText
+	dw DiglettsCaveText1
 
 DiglettsCaveTrainerHeaders:
 	def_trainers
@@ -34,3 +35,7 @@ CrockyBattleText:
 	call PlayCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd
+
+DiglettsCaveText1:
+	text_far _DiglettsCaveText1
+	text_end
