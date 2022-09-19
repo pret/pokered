@@ -48,8 +48,8 @@ objects = None
 if args.rootdir:
 	for line in subprocess.Popen(['make', '-C', args.rootdir, '-s', '-p', 'DEBUG=1'],
 			stdout=subprocess.PIPE).stdout.read().decode().split('\n'):
-		if line.startswith('pokered_obj := '):
-			objects = line[19:].strip().split()
+		if line.startswith('pokered_obj :='):
+			objects = line[len('pokered_obj :='):].strip().split()
 			break
 	else:
 		print('Error: Object files not found!', file=sys.stderr)
