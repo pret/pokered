@@ -48,7 +48,11 @@ HandleMenuInput_::
 .keyPressed
 	ldh a, [hJoy5]
 	ld b, a
-	bit BIT_D_UP, a
+	;shinpokerednote: FIXED: fix from pokeyellow to prioritize the A button over the directional buttons
+	bit BIT_A_BUTTON, a ; pressed A key?
+	jr nz, .checkOtherKeys
+
+	bit BIT_D_UP, a ; pressed Up key?
 	jr z, .checkIfDownPressed
 .upPressed
 	ld a, [wCurrentMenuItem] ; selected menu item
@@ -90,14 +94,12 @@ HandleMenuInput_::
 	and b ; does the menu care about any of the pressed keys?
 	jp z, .loop1
 .checkIfAButtonOrBButtonPressed
-	ldh a, [hJoy5]
+	ld a, b ; shinpokerednote: CHANGED: load from b, which contains [hJoy5], to save 1 byte
 	and A_BUTTON | B_BUTTON
 	jr z, .skipPlayingSound
 .AButtonOrBButtonPressed
-	push hl
-	ld hl, wFlags_0xcd60
-	bit 5, [hl]
-	pop hl
+	ld a, [wFlags_0xcd60] ;shinpokerednote: CHANGED: remove push/pop with hl to save 2 bytes
+	bit 5, a
 	jr nz, .skipPlayingSound
 	ld a, SFX_PRESS_AB
 	call PlaySound
@@ -108,7 +110,7 @@ HandleMenuInput_::
 	ldh [hDownArrowBlinkCount1], a ; restore previous values
 	xor a
 	ld [wMenuWrappingEnabled], a ; disable menu wrapping
-	ldh a, [hJoy5]
+	ld a, b ; shinpokerednote: CHANGED: load from b, which contains [hJoy5], to save 1 byte
 	ret
 .noWrappingAround
 	ld a, [wMenuWatchMovingOutOfBounds]
