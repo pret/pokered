@@ -70,7 +70,7 @@ _KotoraDexEntry::
 
 _JaggDexEntry::
 	text "Known as the"
-	next "Sailors' Scourge,"
+	next "Sailor's Scourge,"
 	next "it rams its"
 
 	page "proud horn into"
@@ -263,9 +263,9 @@ _CroakozunaDexEntry::
 	next "foes by puffing"
 	next "up and stomping."
 
-	page "These stomps can"
-	next "even shake the"
-	next "ground sometimes"
+	page "Then, it strikes"
+	next "with a flurry"
+	next "of strong slaps."
 	dex
 
 _GorotoraDexEntry::
@@ -299,14 +299,14 @@ _PurakkusuDexEntry::
 	dex
 
 _TrampelDexEntry::
-	text "A rare species,"
-	next "this #MON"
-	next "possesses great"
+    text "A rare species"
+    next "that's well-known"
+    next "in India. It has"
 
-	page "bulk, and also"
-	next "high dexterity"
-	next "using its trunk"
-	dex
+    page "a bulky physique,"
+    next "but it's adept at"
+    next "using its trunk"
+    dex
 
 _CrockyDexEntry::
 	text "Its huge eyes can"
@@ -359,13 +359,13 @@ _BarundaDexEntry::
 	dex
 
 _TsubomittoDexEntry::
-	text "By digging its"
-	next "root-like feet"
-	next "into the earth,"
+	text "A larger form"
+	next "of BELLSPROUT"
+	next "revered elsewhere."
 
-	page "it can absorb"
+	page "It can absorb"
 	next "useful nutrients"
-	next "found in the soil"
+	next "found in soil."
 	dex
 
 _AnimonDexEntry::
