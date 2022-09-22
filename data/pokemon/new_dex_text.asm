@@ -379,13 +379,13 @@ _AnimonDexEntry::
 	dex
 
 _MonjaDexEntry::
-	text "This is a newly"
-	next "discovered"
-	next "#MON. It is"
+	text "As it runs about,"
+	next "the vines on its"
+	next "head may obscure"
 
-	page "currently under"
-	next "investigation. No"
-	next "info is available"
+	page "its singular eye,"
+	next "causing it to"
+	next "trip and fall"
 	dex
 
 _ParaDexEntry::
@@ -409,13 +409,13 @@ _HinaazuDexEntry::
 	dex
 
 _PudiDexEntry::
-	text "This is a newly"
-	next "discovered"
-	next "#MON. It is"
+	text "A very popular"
+	next "family pet, this"
+	next "affectionate"
 
-	page "currently under"
-	next "investigation. No"
-	next "info is available"
+	page "#MON shoots"
+	next "out tiny embers"
+	next "whenever it barks"
 	dex
 
 _BetobebiiDexEntry::

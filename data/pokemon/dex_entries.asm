@@ -190,8 +190,8 @@ PokedexEntryPointers:
 	dw BellsproutDexEntry
 	dw WeepinbellDexEntry
 	dw VictreebelDexEntry
-	dw MissingNoDexEntry ; Monja
-	dw MissingNoDexEntry ; Pudi
+	dw MonjaDexEntry
+	dw PudiDexEntry
 	dw ScizorDexEntry
 	dw RhyperiorDexEntry
 	dw EspeonDexEntry
@@ -1614,4 +1614,18 @@ KleavorDexEntry:
 	db 5,11
 	dw 1960
 	text_far _KleavorDexEntry
+	text_end
+
+PudiDexEntry:
+    db "PUPPY@"
+	db 1,0
+	dw 270
+	text_far _PudiDexEntry
+	text_end
+
+MonjaDexEntry:
+    db "VINE@"
+	db 1,4
+	dw 330
+	text_far _MonjaDexEntry
 	text_end
