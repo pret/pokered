@@ -36,3 +36,6 @@ DEF NUM_SPLIT_SETS EQU const_value - FIRST_SPLIT_SET
 ; split directions
 DEF EAST_WEST   EQU 1
 DEF NORTH_SOUTH EQU 2
+
+; each sprite set has 9 walking sprites and 2 still sprites
+DEF SPRITE_SET_LENGTH EQU 9 + 2

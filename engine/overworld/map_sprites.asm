@@ -283,7 +283,7 @@ InitOutsideMapSprites:
 	sla a
 	sla a
 	add c
-	add b ; a = (spriteSetID - 1) * 11
+	add b ; a = (spriteSetID - 1) * SPRITE_SET_LENGTH
 	ld de, SpriteSets
 ; add a to de to get offset of sprite set
 	add e
@@ -309,7 +309,7 @@ InitOutsideMapSprites:
 	inc de
 	inc bc
 	ld a, l
-	cp $bd ; reached 11th sprite slot?
+	cp 11 * SPRITESTATEDATA2_LENGTH + SPRITESTATEDATA2_PICTUREID ; reached 11th sprite slot?
 	jr nz, .loadSpriteSetLoop
 	ld b, 4 ; 4 remaining sprite slots
 .zeroRemainingSlotsLoop ; loop to zero the picture ID's of the remaining sprite slots
@@ -322,13 +322,13 @@ InitOutsideMapSprites:
 	jr nz, .zeroRemainingSlotsLoop
 	ld a, [wNumSprites]
 	push af ; save number of sprites
-	ld a, 11 ; 11 sprites in sprite set
+	ld a, SPRITE_SET_LENGTH ; 11 sprites in sprite set
 	ld [wNumSprites], a
 	call LoadMapSpriteTilePatterns
 	pop af
 	ld [wNumSprites], a ; restore number of sprites
 	ld hl, wSprite01StateData2ImageBaseOffset
-	ld b, $0f
+	ld b, NUM_SPRITESTATEDATA_STRUCTS - 1
 ; The VRAM tile pattern slots that LoadMapSpriteTilePatterns set are in the
 ; order of the map's sprite set, not the order of the actual sprites loaded
 ; for the current map. So, they are not needed and are zeroed by this loop.

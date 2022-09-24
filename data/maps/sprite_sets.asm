@@ -63,8 +63,7 @@ SplitMapSpriteSets:
 	assert_table_length NUM_SPLIT_SETS
 
 SpriteSets:
-	; each sprite set has 9 walking sprites and 2 still sprites
-	table_width 9 + 2, SpriteSets
+	table_width SPRITE_SET_LENGTH, SpriteSets
 
 ; SPRITESET_PALLET_VIRIDIAN
 	db SPRITE_BLUE
