@@ -260,8 +260,8 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	mapconst UNUSED_MAP_EE,                  0,  0 ; $EE
 	mapconst TRADE_CENTER,                   4,  5 ; $EF
 	mapconst COLOSSEUM,                      4,  5 ; $F0
-	mapconst UNUSED_MAP_F1,                  0,  0 ; $F1
-	mapconst UNUSED_MAP_F2,                  0,  0 ; $F2
+	mapconst CELADON_UNIVERSITY_OUTSIDE,    20,  21 ; $F1 - was UNUSED_MAP_F1
+	mapconst CELADON_UNIVERSITY_INSIDE,     10,  11 ; $F2 - was UNUSED_MAP_F2
 	mapconst UNUSED_MAP_F3,                  0,  0 ; $F3
 	mapconst UNUSED_MAP_F4,                  0,  0 ; $F4
 	mapconst LORELEIS_ROOM,                  6,  5 ; $F5

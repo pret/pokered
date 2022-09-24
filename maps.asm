@@ -1222,3 +1222,13 @@ INCLUDE "data/maps/headers/AgathasRoom.asm"
 INCLUDE "scripts/AgathasRoom.asm"
 INCLUDE "data/maps/objects/AgathasRoom.asm"
 AgathasRoom_Blocks: INCBIN "maps/AgathasRoom.blk"
+
+INCLUDE "data/maps/headers/CeladonUniversityOutside.asm"
+INCLUDE "scripts/CeladonUniversityOutside.asm"
+INCLUDE "data/maps/objects/CeladonUniversityOutside.asm"
+CeladonUniversityOutside_Blocks: INCBIN "maps/CeladonUniversityOutside.blk"
+
+INCLUDE "data/maps/headers/CeladonUniversityInside.asm"
+INCLUDE "scripts/CeladonUniversityInside.asm"
+INCLUDE "data/maps/objects/CeladonUniversityInside.asm"
+CeladonUniversityInside_Blocks: INCBIN "maps/CeladonUniversityInside.blk"
