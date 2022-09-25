@@ -24,10 +24,20 @@ New Items:
 Improved areas
 ====
 - Rock Tunnel has a more workable map, now being easier to go through and having new areas to explore. Includes a way to get renewable fossils, items, and other interesting bits and pieces. Overall, it makes Flash much more rewarding to bring, showing you where the items and content are instead of being an inconvenience. 
-- Diglett's Cave has a more detailed map. Plus, if you go back after getting Surf, you'll be able to access a neat little island. (Prototype music to be added later!)
+- Diglett's Cave has a more detailed map, including a platform that has a static encounter. (Prototype music to be added later!)
+- Route 25 has been altered slightly to make reference to Bill's Lighthouse from the anime!
+- Cinnabar Island is a lot bigger, and has a new location added to it.
+
+New areas
+====
+- Celadon University is just north of Celadon.  
+- Citrine City is a new island city that can be accessed in the postgame.
+- Underwater Tunnel connects Route 25 and Route 10.
+- Cinnabar Volcano is a new area that houses Moltres, allowing it to be obtained before Victory Road.
 
 QoL Enhancements
 ====
+- All 199 (current) Pokemon can be obtained without the use of trading or glitches.
 - Fast text has no frame delay between text scrolling, doubling the scroll speed. It's also been made the default option, so you don't need to go into the Options menu for it.
 - Trainer DVs are perfect-15s.
 - The protagonist is referred to in a gender neutral manner.
@@ -50,7 +60,6 @@ QoL Enhancements
 - Game Corner prizes have been altered;
 	- Version parity is done across prizes, using Blue's superior prices.
 	- New prizes across both versions include; Cubone, Blastyke, and Cactus.
-	- Version exclusives are Clefairy for Red and Jigglypuff for Blue. Pinsir and Scyther remain the same.
 	- The Moon Stone is available over TM23 (Dragon Rage). Dragon Rage has been moved to Celadon Mart, over Take Down, which can still be obtained in Silph Co.
 
 Bug Fixes
@@ -98,6 +107,7 @@ Credits
 * ZumiIsawhat? - Restorations of beta OST
 * Helix Chamber, RacieBeep, et al - Prototype Pokémon sprites
 * pret et al - Pokémon Red and Blue Disassembly Project, many tutorials helped us!
+* Vortyne - Reused a bit of code from their pureRGB hack to add a Mew encounter!
 
 Original README.md proceeding;
 # Pokémon Red and Blue [![Build Status][ci-badge]][ci]
