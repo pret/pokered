@@ -1,24 +1,5 @@
 TitleMons:
 ; mons on the title screen are randomly chosen from here
-IF DEF(_RED)
-	db CHARIZARD
-	db TOTARTLE
-	db VENUSAUR
-	db GOROCHU
-	db CACTUS
-	db DEER
-	db BARUNDA
-	db RIBBITO
-	db GYAOON
-	db PUDI
-	db MAGNETITE
-	db MONJA
-	db SYLVEON
-	db SCIZOR
-	db SKIMPER
-	db BUU
-ENDC
-IF DEF(_BLUE)
 	db TOTARTLE
 	db CHARIZARD
 	db VENUSAUR
@@ -32,7 +13,6 @@ IF DEF(_BLUE)
 	db WEIRDUCK
 	db BLOTTLE
 	db MADAAMU
-	db PURAKKUSU
-	db KLEAVOR
+	db DEER
+	db GYAOON
 	db GUARDIA
-ENDC

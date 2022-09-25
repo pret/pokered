@@ -125,3 +125,8 @@ _VermilionCityText12::
 _VermilionCityText13::
 	text "VERMILION HARBOR"
 	done
+
+_VermilionCityText15::
+	text "The S.S.ANNE"
+	line "has returned!"
+	done
