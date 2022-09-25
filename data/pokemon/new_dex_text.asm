@@ -19,13 +19,13 @@ _GuardiaDexEntry::
 	dex
 
 _DeerDexEntry::
-	text "Once hunted"
-	next "in the past for"
-	next "its impressive"
+	text "It wildly swings"
+	next "its huge antlers"
+	next "to deter threats."
 
-	page "antlers, it's"
-	next "now under strict"
-	next "protection"
+	page "However, these"
+	next "antlers are highly"
+	next "prized by hunters"
 	dex
 
 _MadaamuDexEntry::
@@ -265,7 +265,7 @@ _CroakozunaDexEntry::
 
 	page "Then, it strikes"
 	next "with a flurry"
-	next "of strong slaps."
+	next "of strong slaps"
 	dex
 
 _GorotoraDexEntry::
@@ -275,7 +275,7 @@ _GorotoraDexEntry::
 
 	page "only be tamed"
 	next "by the bravest"
-	next "#MON TRAINERs"
+	next "#MON trainers"
 	dex
 
 _OmegaDexEntry::
@@ -299,14 +299,14 @@ _PurakkusuDexEntry::
 	dex
 
 _TrampelDexEntry::
-    text "A rare species"
-    next "that's well-known"
-    next "in India. It has"
+	text "A rare species"
+	next "that's well-known"
+	next "in India. It has"
 
-    page "a bulky physique,"
-    next "but it's adept at"
-    next "using its trunk"
-    dex
+	page "a bulky physique,"
+	next "but it's adept at"
+	next "using its trunk"
+	dex
 
 _CrockyDexEntry::
 	text "Its huge eyes can"
@@ -359,13 +359,13 @@ _BarundaDexEntry::
 	dex
 
 _TsubomittoDexEntry::
-	text "A larger form"
-	next "of BELLSPROUT"
-	next "revered elsewhere."
+	text "A plant #MON"
+	next "that's revered in"
+	next "another region."
 
 	page "It can absorb"
 	next "useful nutrients"
-	next "found in soil."
+	next "found in soil"
 	dex
 
 _AnimonDexEntry::
