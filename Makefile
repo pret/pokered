@@ -153,8 +153,8 @@ pokeblue_vc_opt    = -jsv -n 0 -k 01 -l 0x33 -m 0x13 -r 03 -t "POKEMON BLUE"
 
 ### Misc file-specific graphics rules
 
-gfx/battle/attack_anim_1.2bpp: tools/gfx += --trim-whitespace
-gfx/battle/attack_anim_2.2bpp: tools/gfx += --trim-whitespace
+gfx/battle/move_anim_0.2bpp: tools/gfx += --trim-whitespace
+gfx/battle/move_anim_1.2bpp: tools/gfx += --trim-whitespace
 
 gfx/intro/blue_jigglypuff_1.2bpp: rgbgfx += -h
 gfx/intro/blue_jigglypuff_2.2bpp: rgbgfx += -h
