@@ -5,7 +5,7 @@ This is a ROM Hack of Pokémon Red and Blue, aiming to expand the Kanto region w
 New Pokemon:
 ====
 - The 34 known beta Pokemon that were cut from RBY have been fully implemented.
-- Evolutions or Pre-evolutions of a Kanto Pokemon found in a future generation are included; eg. Steelix, Glaceon
+- Evolutions or Pre-evolutions of a Kanto Pokemon found in a future generation are included; eg. Kleavor, Glaceon
 - Evolutions or Pre-evolutions of a Kanto Pokemon found in the SpaceWorld '97 demo are included; eg. Madaamu, Pudi
 	- note that for Pokemon that appeared in the Spaceworld '97 demo and had their sprite design altered, the sprite from SW97 was used instead
 
@@ -61,6 +61,7 @@ QoL Enhancements
 	- Version parity is done across prizes, using Blue's superior prices.
 	- New prizes across both versions include; Cubone, Blastyke, and Cactus.
 	- The Moon Stone is available over TM23 (Dragon Rage). Dragon Rage has been moved to Celadon Mart, over Take Down, which can still be obtained in Silph Co.
+- Press A beside surfable water, strength boulders or cut trees to use the HMs without needing to go into the Party menu,
 
 Bug Fixes
 ====
@@ -108,6 +109,7 @@ Credits
 * Helix Chamber, RacieBeep, et al - Prototype Pokémon sprites
 * pret et al - Pokémon Red and Blue Disassembly Project, many tutorials helped us!
 * Vortyne - Reused a bit of code from their pureRGB hack to add a Mew encounter!
+* Rangi - Reused a bit of code from their Red* / Blue* hack to make HMs usable in the overworld!
 
 Original README.md proceeding;
 # Pokémon Red and Blue [![Build Status][ci-badge]][ci]
