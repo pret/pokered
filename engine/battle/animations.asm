@@ -292,7 +292,7 @@ PlayAnimation:
 	ld a, [wAnimPalette]
 	ldh [rOBP0], a
 	call UpdateGBCPal_OBP0 ; shinpokerednote: gbcnote: color support from yellow
-	call LoadAnimationTileset
+	call LoadMoveAnimationTiles
 	vc_hook Reduce_move_anim_flashing_Mega_Punch_Self_Destruct_Explosion
 	call LoadSubanimation
 	call PlaySubanimation
@@ -396,11 +396,11 @@ GetSubanimationTransform2:
 	ret
 
 ; loads tile patterns for battle animations
-LoadAnimationTileset:
+LoadMoveAnimationTiles:
 	ld a, [wWhichBattleAnimTileset]
 	add a
 	add a
-	ld hl, AnimationTilesetPointers
+	ld hl, MoveAnimationTilesPointers
 	ld e, a
 	ld d, 0
 	add hl, de
@@ -411,7 +411,7 @@ LoadAnimationTileset:
 	ld a, [hl]
 	ld d, a ; de = address of tileset
 	ld hl, vSprites tile $31
-	ld b, BANK(AnimationTileset1) ; ROM bank
+	ld b, BANK(MoveAnimationTiles0) ; ROM bank
 	ld a, [wTempTilesetNumTiles]
 	ld c, a ; number of tiles
 	jp CopyVideoData ; load tileset
@@ -422,17 +422,18 @@ MACRO anim_tileset
 	db -1 ; padding
 ENDM
 
-AnimationTilesetPointers:
+MoveAnimationTilesPointers:
 	; number of tiles, gfx pointer
-	anim_tileset 79, AnimationTileset1
-	anim_tileset 79, AnimationTileset2
-	anim_tileset 64, AnimationTileset1
+	anim_tileset 79, MoveAnimationTiles0
+	anim_tileset 79, MoveAnimationTiles1
+	anim_tileset 64, MoveAnimationTiles2
 
-AnimationTileset1:
-	INCBIN "gfx/battle/attack_anim_1.2bpp"
+MoveAnimationTiles0:
+MoveAnimationTiles2:
+	INCBIN "gfx/battle/move_anim_0.2bpp"
 
-AnimationTileset2:
-	INCBIN "gfx/battle/attack_anim_2.2bpp"
+MoveAnimationTiles1:
+	INCBIN "gfx/battle/move_anim_1.2bpp"
 
 SlotMachineTiles2:
 IF DEF(_RED)
@@ -1272,7 +1273,7 @@ AnimationShakeScreenHorizontallyFast:
 AnimationSmokeEverywhere: 
 	xor a
 	ld [wWhichBattleAnimTileset], a
-	call LoadAnimationTileset
+	call LoadMoveAnimationTiles
 	ld d, 16
 	ld a, $7A
 	ld [wDropletTile], a
@@ -1281,7 +1282,7 @@ AnimationSmokeEverywhere:
 AnimationFireEverywhere:
 	ld a, 1
 	ld [wWhichBattleAnimTileset], a
-	call LoadAnimationTileset
+	call LoadMoveAnimationTiles
 	ld d, 16
 	ld a, $73
 	ld [wDropletTile], a
@@ -1290,7 +1291,7 @@ AnimationFireEverywhere:
 AnimationWaterDropletsEverywhereFast:
 	xor a
 	ld [wWhichBattleAnimTileset], a
-	call LoadAnimationTileset
+	call LoadMoveAnimationTiles
 	ld d, 16
 	jp AnimationWaterDropletsEverywhere
 ;;;;;;;;;;
@@ -1302,7 +1303,7 @@ AnimationWaterDropletsEverywhereDefault:
 ; in Surf/Mist/Toxic.
 	xor a
 	ld [wWhichBattleAnimTileset], a
-	call LoadAnimationTileset
+	call LoadMoveAnimationTiles
 	ld d, 32
 AnimationWaterDropletsEverywhere:
 	ld a, $71
@@ -1942,7 +1943,7 @@ _AnimationShootBallsUpward:
 	push bc
 	xor a
 	ld [wWhichBattleAnimTileset], a
-	call LoadAnimationTileset
+	call LoadMoveAnimationTiles
 	pop bc
 	ld d, $7a ; ball tile
 	ld hl, wShadowOAM
@@ -2397,7 +2398,7 @@ InitMultipleObjectsOAM:
 	push bc
 	push de
 	ld [wWhichBattleAnimTileset], a
-	call LoadAnimationTileset
+	call LoadMoveAnimationTiles
 	pop de
 	pop bc
 	xor a
