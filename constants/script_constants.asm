@@ -30,6 +30,7 @@ DEF SLOTS_SOMEONESKEYS EQU $ff
 	const TRADE_FOR_DORIS
 	const TRADE_FOR_CRINKLES
 	const TRADE_FOR_SPOT
+	const TRADE_WITH_SELF
 DEF NUM_NPC_TRADES EQU const_value
 
 ; in game trade dialog sets
@@ -38,6 +39,7 @@ DEF NUM_NPC_TRADES EQU const_value
 	const TRADE_DIALOGSET_CASUAL
 	const TRADE_DIALOGSET_POLITE
 	const TRADE_DIALOGSET_HAPPY
+	const TRADE_DIALOGSET_SELF
 
 ; badges
 ; wObtainedBadges and wBeatGymFlags bits

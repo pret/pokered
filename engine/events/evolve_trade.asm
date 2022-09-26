@@ -16,24 +16,8 @@ EvolveTradeMon:
 ; were used instead, where none can evolve.
 
 ; This was fixed in Yellow.
+; KEP removes this quirk.
 
-	ld a, [wInGameTradeReceiveMonName]
-
-	; GRAVELER
-	cp "G"
-	jr z, .ok
-
-	; "SPECTRE" (HAUNTER)
-	cp "S"
-	ret nz
-	ld a, [wInGameTradeReceiveMonName + 1]
-	cp "P"
-	ret nz
-
-.ok
-	ld a, [wPartyCount]
-	dec a
-	ld [wWhichPokemon], a
 	ld a, $1
 	ld [wForceEvolution], a
 	ld a, LINK_STATE_TRADING

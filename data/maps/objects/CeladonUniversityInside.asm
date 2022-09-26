@@ -8,6 +8,7 @@ CeladonUniversityInside_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  8, 17, SPRITE_MIDDLE_AGED_MAN, STAY, ANY_DIR, 1 ; person
+	object_event  2,  3, SPRITE_MIDDLE_AGED_MAN, STAY, ANY_DIR, 1 ; person
+	object_event  4, 17, SPRITE_GAMEBOY_KID, STAY, DOWN, 2 ; person
 
 	def_warps_to CELADON_UNIVERSITY_INSIDE

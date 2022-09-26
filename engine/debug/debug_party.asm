@@ -31,7 +31,7 @@ ENDC
 	db DUGTRIO, 56
 	db ARTICUNO, 57
 IF DEF(_DEBUG)
-	db PIKACHU, 5
+	db KADABRA, 16 ; to test trade evos @ celadon uni - PvK
 ENDC
 	db -1 ; end
 
@@ -86,7 +86,7 @@ IF DEF(_DEBUG)
 	ld a, 15
 	ld [hl], a
 
-	; Pikachu gets Flash.
+	; Kadabra gets Flash.
 	ld hl, wPartyMon6Moves + 2
 	ld a, FLASH
 	ld [hl], a
