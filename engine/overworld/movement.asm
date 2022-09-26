@@ -117,8 +117,8 @@ UpdateNPCSprite:
 	dec a
 	add a
 	ld hl, wMapSpriteData
-	add l
-	ld l, a ; BUG: should account for carry here, but doesn't. Can cause sprites to get the wrong movement byte.
+	add l ; should be adc
+	ld l, a
 	ld a, [hl]        ; read movement byte 2
 	ld [wCurSpriteMovement2], a
 	ld h, HIGH(wSpriteStateData1)
