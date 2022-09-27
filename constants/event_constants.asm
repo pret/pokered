@@ -778,6 +778,15 @@
 	const_skip 8
 	const EVENT_BEAT_ARTICUNO
 
+; Celadon University events 
+	const_next $9E0
+	const_skip
+	const_skip
+	const EVENT_BEAT_CELADON_UNIVERSITY_OUTSIDE_TRAINER_0
+	const EVENT_BEAT_CELADON_UNIVERSITY_OUTSIDE_TRAINER_1
+	const EVENT_BEAT_CELADON_UNIVERSITY_OUTSIDE_TRAINER_2
+	const EVENT_BEAT_CELADON_UNIVERSITY_OUTSIDE_TRAINER_3
+
 ; End of events
 	const_next $A00
 DEF NUM_EVENTS EQU const_value

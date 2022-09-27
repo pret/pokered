@@ -324,19 +324,19 @@ DivideExpDataByNumMonsGainingExp:
 	jr nz, .divideLoop
 	ret
 
-; multiplies exp by 1.5
+; multiplies exp by 1.5...NOT!!!! - PvK
 BoostExp:
-	ldh a, [hQuotient + 2]
-	ld b, a
-	ldh a, [hQuotient + 3]
-	ld c, a
-	srl b
-	rr c
-	add c
-	ldh [hQuotient + 3], a
-	ldh a, [hQuotient + 2]
-	adc b
-	ldh [hQuotient + 2], a
+	; ldh a, [hQuotient + 2]
+	; ld b, a
+	; ldh a, [hQuotient + 3]
+	; ld c, a
+	; srl b
+	; rr c
+	; add c
+	; ldh [hQuotient + 3], a
+	; ldh a, [hQuotient + 2]
+	; adc b
+	; ldh [hQuotient + 2], a
 	ret
 
 GainedText:

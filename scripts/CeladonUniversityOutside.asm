@@ -1,6 +1,46 @@
 CeladonUniversityOutside_Script:
 	jp EnableAutoTextBoxDrawing
+	ld hl, CeladonUniversityOutsideTrainerHeaders
+	ld de, CeladonUniversityOutside_ScriptPointers
+	; ld a, [wCeladonUniversityOutsideCurScript]
+	; call ExecuteCurMapScriptInTable
+	; ld [wCeladonUniversityOutsideCurScript], a
+	ret
+
+CeladonUniversityOutside_ScriptPointers:
+	dw CheckFightingMapTrainers
+	dw DisplayEnemyTrainerTextAndStartBattle
+	dw EndTrainerBattle
 
 CeladonUniversityOutside_TextPointers:
+	dw CeladonUniversityOutsideText1
+
+CeladonUniversityOutsideTrainerHeaders:
+	def_trainers 2
+CeladonUniversityOutsideTrainerHeader0:
+	trainer EVENT_BEAT_CELADON_UNIVERSITY_OUTSIDE_TRAINER_0, 3, CeladonUniversityOutsideBattleText1, CeladonUniversityOutsideEndBattleText1, CeladonUniversityOutsideAfterBattleText1
+CeladonUniversityOutsideTrainerHeader1:
+	trainer EVENT_BEAT_CELADON_UNIVERSITY_OUTSIDE_TRAINER_1, 3, CeladonUniversityOutsideBattleText1, CeladonUniversityOutsideEndBattleText1, CeladonUniversityOutsideAfterBattleText1
+CeladonUniversityOutsideTrainerHeader2:
+	trainer EVENT_BEAT_CELADON_UNIVERSITY_OUTSIDE_TRAINER_2, 3, CeladonUniversityOutsideBattleText1, CeladonUniversityOutsideEndBattleText1, CeladonUniversityOutsideAfterBattleText1
+	db -1 ; end
+
+CeladonUniversityOutsideText1: ; trainer 0
+	text_asm
+	ld hl, CeladonUniversityOutsideTrainerHeader0
+	call TalkToTrainer
+	jp TextScriptEnd
+
+CeladonUniversityOutsideBattleText1:
+	text_far _CeladonUniversityOutsideBattleText1
+	text_end
+
+CeladonUniversityOutsideEndBattleText1:
+	text_far _CeladonUniversityOutsideEndBattleText1
+	text_end
+
+CeladonUniversityOutsideAfterBattleText1:
+	text_far _CeladonUniversityOutsideAfterBattleText1
+	text_end
 
 	text_end ; unused

@@ -271,6 +271,7 @@ SECTION "Text 11", ROMX
 
 INCLUDE "data/text/text_7.asm"
 INCLUDE "data/pokemon/new_dex_text.asm"
+INCLUDE "text/CeladonUniversityOutside.asm"
 INCLUDE "text/CeladonUniversityInside.asm"
 
 SECTION "Pokédex Text", ROMX
