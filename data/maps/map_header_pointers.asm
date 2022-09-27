@@ -244,7 +244,7 @@ MapHeaderPointers::
 	dw Colosseum_h
 	dw CeladonUniversityOutside_h ; UNUSED_MAP_F1
 	dw CeladonUniversityInside_h ; UNUSED_MAP_F2
-	dw SilphCo2F_h ; UNUSED_MAP_F3
+	dw CeladonUniversityPokecenter_h ; UNUSED_MAP_F3
 	dw SilphCo2F_h ; UNUSED_MAP_F4
 	dw LoreleisRoom_h
 	dw BrunosRoom_h

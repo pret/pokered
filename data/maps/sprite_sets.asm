@@ -93,7 +93,7 @@ DEF SPRITE_SET_LENGTH EQU 9 + 2
 	db SPRITE_COOLTRAINER_F
 	db SPRITE_COOLTRAINER_M
 	db SPRITE_POKE_BALL
-	db SPRITE_UNUSED_GAMBLER_ASLEEP_2
+	db SPRITE_FAKE_TREE ; fake tree, used to be unused sleeping gambler
 	assert_table_length SPRITE_SET_LENGTH
 
 ; sprite set $03
@@ -108,7 +108,7 @@ DEF SPRITE_SET_LENGTH EQU 9 + 2
 	db SPRITE_COOLTRAINER_M
 	db SPRITE_GUARD
 	db SPRITE_POKE_BALL
-	db SPRITE_UNUSED_GAMBLER_ASLEEP_2
+	db SPRITE_FAKE_TREE ; fake tree, used to be unused sleeping gambler
 	assert_table_length SPRITE_SET_LENGTH
 
 ; sprite set $04
@@ -123,7 +123,7 @@ DEF SPRITE_SET_LENGTH EQU 9 + 2
 	db SPRITE_COOLTRAINER_F
 	db SPRITE_COOLTRAINER_M
 	db SPRITE_POKE_BALL
-	db SPRITE_UNUSED_GAMBLER_ASLEEP_2
+	db SPRITE_FAKE_TREE ; fake tree, used to be unused sleeping gambler
 	assert_table_length SPRITE_SET_LENGTH
 
 ; sprite set $05
@@ -153,7 +153,7 @@ DEF SPRITE_SET_LENGTH EQU 9 + 2
 	db SPRITE_GUARD
 	db SPRITE_GAMBLER
 	db SPRITE_POKE_BALL
-	db SPRITE_UNUSED_GAMBLER_ASLEEP_2
+	db SPRITE_FAKE_TREE ; fake tree, used to be unused sleeping gambler
 	assert_table_length SPRITE_SET_LENGTH
 
 ; sprite set $07
@@ -168,7 +168,7 @@ DEF SPRITE_SET_LENGTH EQU 9 + 2
 	db SPRITE_COOLTRAINER_M
 	db SPRITE_MONSTER
 	db SPRITE_POKE_BALL
-	db SPRITE_UNUSED_GAMBLER_ASLEEP_2
+	db SPRITE_FAKE_TREE ; fake tree, used to be unused sleeping gambler
 	assert_table_length SPRITE_SET_LENGTH
 
 ; sprite set $08
