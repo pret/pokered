@@ -7,14 +7,14 @@ _CeladonUniversityInsideText1::
 	
 	para "My grandfather"
 	line "created the"
-	cont "#BALL!"
+	cont "# BALL!"
 	
 	done
 
 _CeladonUniversityInsideText2::
 	text "It's an old letter"
 	line "about selling the"
-	para "#BALL patent"
+	para "# BALL patent"
 	line "to SILPH CO."
 	
 	done

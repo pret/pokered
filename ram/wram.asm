@@ -2000,6 +2000,7 @@ wPokemonMansion3FCurScript:: db
 wPokemonMansionB1FCurScript:: db
 wDiglettsCaveCurScript:: db
 wCinnabarVolcanoCurScript:: db
+wCeladonUniversityOutsideCurScript:: db
 wVictoryRoad2FCurScript:: db
 wVictoryRoad3FCurScript:: db
 	ds 1

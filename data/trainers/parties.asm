@@ -168,7 +168,7 @@ JrTrainerFData:
 	db 16, RATTATA, PIKACHU, 0
 	db 16, PIDGEY, PIDGEY, PIDGEY, 0
 ; Unused - used in celadon university
-	db 22, BULBASAUR, 0
+	db 22, BULBASAUR, CHARMANDER, SQUIRTLE, 0
 ; Route 9
 	db 18, ODDISH, BELLSPROUT, ODDISH, BELLSPROUT, 0
 	db 23, MEOWTH, 0
@@ -222,8 +222,8 @@ SuperNerdData:
 	db 22, GRIMER, MUK, GRIMER, 0
 	db 26, KOFFING, 0
 ; Unused
-	db 22, KOFFING, MAGNEMITE, WEEZING, 0 ; - used in celadon university
-	db 20, MAGNEMITE, MAGNEMITE, KOFFING, MAGNEMITE, 0
+	db 30, PORYGON, 0 ; - used in celadon university
+	db 25, MAGNETITE, ELECTRODE, KABUTO, OMANYTE, 0 ; - used in celadon university
 	db 24, MAGNEMITE, VOLTORB, 0
 ; Cinnabar Gym
 	db 36, VULPIX, VULPIX, NINETALES, 0
@@ -303,7 +303,7 @@ BurglarData:
 
 EngineerData:
 ; Unused - used in celadon university
-	db 21, VOLTORB, MAGNEMITE, 0
+	db 36, GOLEM, 0
 ; Route 11
 	db 21, MAGNEMITE, 0
 	db 18, MAGNEMITE, MAGNEMITE, MAGNETON, 0
@@ -372,7 +372,7 @@ GamblerData:
 	db 18, GROWLITHE, VULPIX, 0
 ; Route 8
 	db 22, POLIWAG, POLIWAG, POLIWHIRL, 0
-; Unused - used in celadon university
+; Unused - may be used in celadon university
 	db 22, ONIX, GEODUDE, GRAVELER, 0
 ; Route 8
 	db 24, GROWLITHE, VULPIX, 0

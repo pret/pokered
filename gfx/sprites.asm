@@ -75,3 +75,4 @@ SeelSprite::             INCBIN "gfx/sprites/seel.2bpp"
 SECTION "NPC Sprites 3", ROMX
 
 CatSprite::              INCBIN "gfx/sprites/cat.2bpp"
+TreeSprite::			 INCBIN "gfx/sprites/fake_tree.2bpp"

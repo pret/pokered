@@ -262,7 +262,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	mapconst COLOSSEUM,                      4,  5 ; $F0
 	mapconst CELADON_UNIVERSITY_OUTSIDE,    20,  21 ; $F1 - was UNUSED_MAP_F1
 	mapconst CELADON_UNIVERSITY_INSIDE,     10,  11 ; $F2 - was UNUSED_MAP_F2
-	mapconst UNUSED_MAP_F3,                  0,  0 ; $F3
+	mapconst CELADON_UNIVERSITY_POKECENTER,  4,  7 ; $F3 - was UNUSED_MAP_F3
 	mapconst UNUSED_MAP_F4,                  0,  0 ; $F4
 	mapconst LORELEIS_ROOM,                  6,  5 ; $F5
 	mapconst BRUNOS_ROOM,                    6,  5 ; $F6

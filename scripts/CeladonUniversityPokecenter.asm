@@ -1,32 +1,27 @@
-RockTunnelPokecenter_Script:
+CeladonUniversityPokecenter_Script:
 	call Serial_TryEstablishingExternallyClockedConnection
 	jp EnableAutoTextBoxDrawing
 
-RockTunnelPokecenter_TextPointers:
-	dw RockTunnelHealNurseText
-	dw RockTunnelPokecenterText2
-	dw RockTunnelPokecenterText3
-	dw RockTunnelTradeNurseText
-	dw DittoSalesmanText
+CeladonUniversityPokecenter_TextPointers:
+	dw CeladonUniversityHealNurseText
+	dw CeladonUniversityPokecenterText2
+	dw CuboneSalesmanText
+	dw CeladonUniversityTradeNurseText
 
-RockTunnelHealNurseText:
-	script_pokecenter_nurse
-
-RockTunnelPokecenterText2:
-	text_far _RockTunnelPokecenterText2
-	text_end
-
-RockTunnelPokecenterText3:
-	text_far _RockTunnelPokecenterText3
-	text_end
-
-RockTunnelTradeNurseText:
+CeladonUniversityTradeNurseText:
 	script_cable_club_receptionist
 
-DittoSalesmanText:
+CeladonUniversityHealNurseText:
+	script_pokecenter_nurse
+
+CeladonUniversityPokecenterText2:
+	text_far _CeladonUniversityPokecenterText4
+	text_end
+
+CuboneSalesmanText:
 	text_asm
-	CheckEvent EVENT_BOUGHT_DITTO, 1
-	jp c, .alreadyBoughtDitto
+	CheckEvent EVENT_BOUGHT_CUBONE, 1
+	jp c, .alreadyBoughtCubone
 	ld hl, .Text1
 	call PrintText
 	ld a, MONEY_BOX
@@ -45,7 +40,7 @@ DittoSalesmanText:
 	ld hl, .NoMoneyText
 	jr .printText
 .enoughMoney
-	lb bc, DITTO, 23
+	lb bc, CUBONE, 17
 	call GivePokemon
 	jr nc, .done
 	xor a
@@ -60,12 +55,12 @@ DittoSalesmanText:
 	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
-	SetEvent EVENT_BOUGHT_DITTO
+	SetEvent EVENT_BOUGHT_CUBONE
 	jr .done
 .choseNo
 	ld hl, .RefuseText
 	jr .printText
-.alreadyBoughtDitto
+.alreadyBoughtCubone
 	ld hl, .Text2
 .printText
 	call PrintText
@@ -73,17 +68,17 @@ DittoSalesmanText:
 	jp TextScriptEnd
 
 .Text1
-	text_far _DittoSalesmanText1
+	text_far _CuboneSalesmanText1
 	text_end
 
 .RefuseText
-	text_far _DittoSalesmanNoText
+	text_far _CuboneSalesmanNoText
 	text_end
 
 .NoMoneyText
-	text_far _DittoSalesmanNoMoneyText
+	text_far _CuboneSalesmanNoMoneyText
 	text_end
 
 .Text2
-	text_far _DittoSalesmanText2
+	text_far _CuboneSalesmanText2
 	text_end

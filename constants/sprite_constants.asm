@@ -51,7 +51,7 @@
 	const SPRITE_FISHER                  ; $2f
 	const SPRITE_KOGA                    ; $30
 	const SPRITE_GUARD                   ; $31
-	const SPRITE_UNUSED_GUARD            ; $32
+	const SPRITE_FAKE_TREE               ; $32 - fake tree
 	const SPRITE_MOM                     ; $33
 	const SPRITE_BALDING_GUY             ; $34
 	const SPRITE_LITTLE_BOY              ; $35

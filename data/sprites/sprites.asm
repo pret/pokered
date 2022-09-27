@@ -56,7 +56,7 @@ SpriteSheetPointerTable:
 	overworld_sprite FisherSprite, 12           ; SPRITE_FISHER
 	overworld_sprite KogaSprite, 12             ; SPRITE_KOGA
 	overworld_sprite GuardSprite, 12            ; SPRITE_GUARD
-	overworld_sprite GuardSprite, 12            ; SPRITE_UNUSED_GUARD
+	overworld_sprite TreeSprite, 4             ; SPRITE_FAKE_TREE - used to be unused guard, now fake tree
 	overworld_sprite MomSprite, 12              ; SPRITE_MOM
 	overworld_sprite BaldingGuySprite, 12       ; SPRITE_BALDING_GUY
 	overworld_sprite LittleBoySprite, 12        ; SPRITE_LITTLE_BOY

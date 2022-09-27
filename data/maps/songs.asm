@@ -243,7 +243,7 @@ MapSongBanks::
 	db MUSIC_CELADON, BANK(Music_Celadon) ; COLOSSEUM
 	db MUSIC_CELADON, BANK(Music_Celadon) ; UNUSED_MAP_F1 / Celadon University Outside
 	db MUSIC_OAKS_LAB, BANK(Music_OaksLab) ; UNUSED_MAP_F2 / Celadon University Outside
-	db MUSIC_SILPH_CO, BANK(Music_SilphCo) ; UNUSED_MAP_F3
+	db MUSIC_POKECENTER, BANK(Music_Pokecenter) ; UNUSED_MAP_F3 / Celadon University Pokecenter
 	db MUSIC_SILPH_CO, BANK(Music_SilphCo) ; UNUSED_MAP_F4
 	db MUSIC_GYM, BANK(Music_Gym) ; LORELEIS_ROOM
 	db MUSIC_DUNGEON1, BANK(Music_Dungeon1) ; BRUNOS_ROOM
