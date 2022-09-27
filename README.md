@@ -30,14 +30,17 @@ Improved areas
 
 New areas
 ====
-- Celadon University is just north of Celadon.  
+- Celadon University is just north of Celadon.
+	- This area also contains a Tradebacks NPC to let you get trade evolutions.
+	- There are also some trainers here you can battle infinitely for EXP and money.
 - Citrine City is a new island city that can be accessed in the postgame.
 - Underwater Tunnel connects Route 25 and Route 10.
 - Cinnabar Volcano is a new area that houses Moltres, allowing it to be obtained before Victory Road.
 
 QoL Enhancements
 ====
-- All 199 (current) Pokemon can be obtained without the use of trading or glitches.
+- All 204 (current) Pokemon can be obtained without the use of trading or glitches.
+	- This includes Mew!
 - Fast text has no frame delay between text scrolling, doubling the scroll speed. It's also been made the default option, so you don't need to go into the Options menu for it.
 - Trainer DVs are perfect-15s.
 - The protagonist is referred to in a gender neutral manner.
@@ -61,7 +64,9 @@ QoL Enhancements
 	- Version parity is done across prizes, using Blue's superior prices.
 	- New prizes across both versions include; Cubone, Blastyke, and Cactus.
 	- The Moon Stone is available over TM23 (Dragon Rage). Dragon Rage has been moved to Celadon Mart, over Take Down, which can still be obtained in Silph Co.
-- Press A beside surfable water, strength boulders or cut trees to use the HMs without needing to go into the Party menu,
+- Press A beside surfable water, strength boulders or cut trees to use the HMs without needing to go into the Party menu.
+- Running Shoes by holding B. Also works with the bike! Surf speed is also doubled.
+- Bag has capacity for 30 items.
 
 Bug Fixes
 ====
