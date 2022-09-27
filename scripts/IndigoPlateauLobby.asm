@@ -34,3 +34,6 @@ IndigoPlateauLobbyText3:
 
 IndigoTradeNurseText:
 	script_cable_club_receptionist
+
+IndigoCashierText::
+	script_mart ULTRA_BALL, GREAT_BALL, FULL_RESTORE, MAX_POTION, FULL_HEAL, REVIVE, MAX_REPEL

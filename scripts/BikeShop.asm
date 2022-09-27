@@ -145,3 +145,6 @@ BikeShopText_1d85c:
 BikeShopText_1d861:
 	text_far _BikeShopText_1d861
 	text_end
+
+BikeShopCashierText:: ; unreferenced
+	script_mart BICYCLE
