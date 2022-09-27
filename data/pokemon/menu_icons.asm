@@ -46,6 +46,7 @@ MonPartyData:
 	nybble ICON_MON       ; Bittybat
 	nybble ICON_MON       ; Zubat
 	nybble ICON_MON       ; Golbat
+	nybble ICON_BIRD      ; Crobat 
 	nybble ICON_GRASS     ; Oddish
 	nybble ICON_GRASS     ; Gloom
 	nybble ICON_GRASS     ; Vileplume
@@ -82,6 +83,7 @@ MonPartyData:
 	nybble ICON_GRASS     ; Bellsprout
 	nybble ICON_GRASS     ; Weepinbell
 	nybble ICON_GRASS     ; Victreebel
+	nybble ICON_GRASS     ; Tsubomitto
 	nybble ICON_WATER     ; Tentacool
 	nybble ICON_WATER     ; Tentacruel
 	nybble ICON_MON       ; Geodude
@@ -114,6 +116,7 @@ MonPartyData:
 	nybble ICON_MON       ; Haunter
 	nybble ICON_MON       ; Gengar
 	nybble ICON_SNAKE     ; Onix
+	nybble ICON_SNAKE     ; Steelix
 	nybble ICON_MON       ; Drowzee
 	nybble ICON_MON       ; Hypno
 	nybble ICON_QUADRUPED ; Kotora
@@ -134,6 +137,7 @@ MonPartyData:
 	nybble ICON_MON	    ; Kangaskhan
 	nybble ICON_MON       ; Hitmonlee
 	nybble ICON_MON       ; Hitmonchan
+	nybble ICON_MON       ; Hitmontop
 	nybble ICON_MON       ; Lickitung
 	nybble ICON_MON       ; Lickilicky
 	nybble ICON_MON       ; Koffing
@@ -142,6 +146,7 @@ MonPartyData:
 	nybble ICON_MON       ; Rhydon
 	nybble ICON_MON       ; Rhyperior
 	nybble ICON_FAIRY     ; Chansey
+	nybble ICON_FAIRY     ; Blissey
 	nybble ICON_GRASS     ; Monja
 	nybble ICON_GRASS     ; Tangela
 	nybble ICON_GRASS     ; Tangrowth

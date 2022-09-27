@@ -205,6 +205,11 @@ EvosMovesPointerTable:
 	dw LickilickyEvosMoves
 	dw TangrowthEvosMoves
 	dw KleavorEvosMoves
+	dw TsubomittoEvosMoves
+	dw SteelixEvosMoves
+	dw BlisseyEvosMoves
+	dw HitmontopEvosMoves
+	dw CrobatEvosMoves
 	assert_table_length NUM_POKEMON_INDEXES
 
 RhydonEvosMoves:
@@ -2599,3 +2604,33 @@ KleavorEvosMoves:
 	db 42, AGILITY
 	db 50, ROCK_SLIDE
 	db 0
+
+TsubomittoEvosMoves:
+; Evolutions
+	db 0
+; Learnset 
+	db 0 
+
+SteelixEvosMoves:
+; Evolutions
+	db 0 
+; Learnset 
+	db 0 
+
+BlisseyEvosMoves:
+; Evolutions
+	db 0 
+; Learnset 
+	db 0 
+
+HitmontopEvosMoves:
+; Evolutions
+	db 0 
+; Learnset 
+	db 0 
+
+CrobatEvosMoves:
+; Evolutions
+	db 0 
+; Learnset 
+	db 0 

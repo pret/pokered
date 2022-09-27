@@ -209,6 +209,11 @@
 	const LICKILICKY         ; $CD	(new)
 	const TANGROWTH          ; $CE	(new)
 	const KLEAVOR            ; $CF	(new)
+	const TSUBOMITTO
+	const STEELIX
+	const BLISSEY
+	const HITMONTOP
+	const CROBAT
 
 DEF NUM_POKEMON_INDEXES EQU const_value - 1
 

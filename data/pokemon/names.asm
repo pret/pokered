@@ -202,5 +202,10 @@ MonsterNames::
 	db "LICKILICKY"
 	db "TANGROWTH@"
 	db "KLEAVOR@@@"
+	db "TSUBOMITTO"
+	db "STEELIX@@@"
+	db "BLISSEY@@@"
+	db "HITMONTOP@"
+	db "CROBAT@@@@"
 	
 	assert_table_length NUM_POKEMON_INDEXES

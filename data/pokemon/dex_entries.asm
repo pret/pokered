@@ -202,6 +202,11 @@ PokedexEntryPointers:
 	dw LickilickyDexEntry
 	dw TangrowthDexEntry
 	dw KleavorDexEntry
+	dw MissingNoDexEntry ; Tsubomitto
+	dw MissingNoDexEntry ; Steelix
+	dw MissingNoDexEntry ; Blissey
+	dw MissingNoDexEntry ; Hitmontop
+	dw MissingNoDexEntry ; Crobat
 	assert_table_length NUM_POKEMON_INDEXES
 
 ; string: species name

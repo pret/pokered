@@ -21,15 +21,15 @@ SetIshiharaTeam:
 	jr .loop
 
 IshiharaTeam:
-	db EXEGGUTOR, 90
+	db CROBAT, 90
 IF DEF(_DEBUG)
-	db MEW, 5
+	db BLISSEY, 5
 ELSE
-	db MEW, 20
+	db BLISSEY, 20
 ENDC
-	db JOLTEON, 56
-	db DUGTRIO, 56
-	db ARTICUNO, 57
+	db HITMONTOP, 56
+	db TSUBOMITTO, 56
+	db STEELIX, 57
 IF DEF(_DEBUG)
 	db KADABRA, 16 ; to test trade evos @ celadon uni - PvK
 ENDC
@@ -148,7 +148,7 @@ DebugItemsList:
 	db SECRET_KEY, 1
 	db CARD_KEY, 1
 	db S_S_TICKET, 1
-	db LIFT_KEY, 1
+	db SUPER_ROD, 1
 	db COIN_CASE, 1
 	db -1 ; end
 
