@@ -36,6 +36,7 @@ SuperRodData:
 	dbw CERULEAN_CAVE_1F,    .Group9
 	dbw ROCK_TUNNEL_1F,      .Group5
 	dbw ROCK_TUNNEL_1F,      .Group5
+	dbw CELADON_UNIVERSITY_OUTSIDE, .Group11
 	db -1 ; end
 
 ; fishing groups
@@ -124,3 +125,10 @@ SuperRodData:
 	db 50, JABETTA
 	db 50, POLIWHIRL
 	db 60, CRYITHAN
+
+.Group11:
+	db 4
+	db 25, MAGIKARP
+	db 20, MAGIKARP
+	db 20, GYARADOS
+	db 20, GRIMER 
