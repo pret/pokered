@@ -1,15 +1,15 @@
 SeafoamIslandsB2FWildMons:
 	def_grass_wildmons 10 ; encounter rate
-	db 30, SEEL
-	db 30, SLOWPOKE
-	db 32, SEEL
-	db 32, SLOWPOKE
-	db 28, HORSEA
-	db 30, STARYU
-	db 30, HORSEA
-	db 28, SHELLDER
-	db 30, GOLBAT
-	db 37, SLOWBRO
+	db 35, SEEL
+	db 35, SLOWPOKE
+	db 36, SEEL
+	db 36, SLOWPOKE
+	db 34, WEIRDUCK
+	db 35, STARYU
+	db 35, WEIRDUCK
+	db 38, JYNX
+	db 36, STARYU
+	db 39, GOLDUCK
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate

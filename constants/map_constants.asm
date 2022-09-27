@@ -250,7 +250,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	mapconst CERULEAN_CAVE_1F,               9, 15 ; $E4
 	mapconst NAME_RATERS_HOUSE,              4,  4 ; $E5
 	mapconst CERULEAN_BADGE_HOUSE,           4,  4 ; $E6
-	mapconst UNUSED_MAP_E7,                  0,  0 ; $E7
+	mapconst CINNABAR_VOLCANO,                  12,  14 ; $E7 - was UNUSED_MAP_E7
 	mapconst ROCK_TUNNEL_B1F,               18, 20 ; $E8
 	mapconst SILPH_CO_9F,                    9, 13 ; $E9
 	mapconst SILPH_CO_10F,                   9,  8 ; $EA

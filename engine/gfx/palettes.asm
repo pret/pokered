@@ -174,6 +174,8 @@ SetPal_Overworld:
 	ld a, [wCurMap]
 	cp SEAFOAM_ISLANDS_1F
 	jr z, .seafoam
+	cp CINNABAR_VOLCANO
+	jr z, .volcano
 	cp SEAFOAM_ISLANDS_B1F
 	jr c, .caveDefault
 	cp SEAFOAM_ISLANDS_B4F + 1
@@ -189,6 +191,9 @@ SetPal_Overworld:
 	jr .town
 .seafoam
 	ld a, PAL_0F - 1
+	jr .town
+.volcano
+	ld a, PAL_REDMON - 1
 	jr .town
 
 ; used when a Pokemon is the only thing on the screen
@@ -283,7 +288,7 @@ BadgeBlkDataLengths:
 
 DeterminePaletteID:
 	bit TRANSFORMED, a ; a is battle status 3
-	ld a, PAL_GREYMON  ; if the mon has used Transform, use Ditto's palette
+	ld a, PAL_PURPLEMON  ; if the mon has used Transform, use Ditto's palette
 	ret nz
 	ld a, [hl]
 DeterminePaletteIDOutOfBattle:

@@ -1232,3 +1232,8 @@ INCLUDE "data/maps/headers/CeladonUniversityInside.asm"
 INCLUDE "scripts/CeladonUniversityInside.asm"
 INCLUDE "data/maps/objects/CeladonUniversityInside.asm"
 CeladonUniversityInside_Blocks: INCBIN "maps/CeladonUniversityInside.blk"
+
+INCLUDE "data/maps/headers/CinnabarVolcano.asm"
+INCLUDE "scripts/CinnabarVolcano.asm"
+INCLUDE "data/maps/objects/CinnabarVolcano.asm"
+CinnabarVolcano_Blocks: INCBIN "maps/CinnabarVolcano.blk"

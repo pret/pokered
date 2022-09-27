@@ -72,7 +72,7 @@ VictoryRoad2F_TextPointers:
 	dw VictoryRoad2Text3
 	dw VictoryRoad2Text4
 	dw VictoryRoad2Text5
-	dw MoltresText
+	dw GyaoonText
 	dw PickUpItemText
 	dw PickUpItemText
 	dw PickUpItemText
@@ -93,8 +93,8 @@ VictoryRoad2TrainerHeader3:
 	trainer EVENT_BEAT_VICTORY_ROAD_2_TRAINER_3, 1, VictoryRoad2BattleText4, VictoryRoad2EndBattleText4, VictoryRoad2AfterBattleText4
 VictoryRoad2TrainerHeader4:
 	trainer EVENT_BEAT_VICTORY_ROAD_2_TRAINER_4, 3, VictoryRoad2BattleText5, VictoryRoad2EndBattleText5, VictoryRoad2AfterBattleText5
-MoltresTrainerHeader:
-	trainer EVENT_BEAT_MOLTRES, 0, MoltresBattleText, MoltresBattleText, MoltresBattleText
+GyaoonTrainerHeader:
+	trainer EVENT_BEAT_GYAOON, 0, GyaoonBattleText, GyaoonBattleText, GyaoonBattleText
 	db -1 ; end
 
 VictoryRoad2Text1:
@@ -127,16 +127,16 @@ VictoryRoad2Text5:
 	call TalkToTrainer
 	jp TextScriptEnd
 
-MoltresText:
+GyaoonText:
 	text_asm
-	ld hl, MoltresTrainerHeader
+	ld hl, GyaoonTrainerHeader
 	call TalkToTrainer
 	jp TextScriptEnd
 
-MoltresBattleText:
-	text_far _MoltresBattleText
+GyaoonBattleText:
+	text_far _GyaoonBattleText
 	text_asm
-	ld a, MOLTRES
+	ld a, GYAOON
 	call PlayCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd

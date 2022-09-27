@@ -1999,6 +1999,7 @@ wPokemonMansion2FCurScript:: db
 wPokemonMansion3FCurScript:: db
 wPokemonMansionB1FCurScript:: db
 wDiglettsCaveCurScript:: db
+wCinnabarVolcanoCurScript:: db
 wVictoryRoad2FCurScript:: db
 wVictoryRoad3FCurScript:: db
 	ds 1

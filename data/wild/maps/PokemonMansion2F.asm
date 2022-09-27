@@ -1,15 +1,15 @@
 PokemonMansion2FWildMons:
 	def_grass_wildmons 10 ; encounter rate
-	db 32, GROWLITHE
-	db 34, KOFFING
-	db 34, KOFFING
-	db 30, PONYTA
-	db 30, KOFFING
-	db 32, PONYTA
-	db 30, GRIMER
-	db 28, PONYTA
-	db 39, WEEZING
-	db 37, MUK
+	db 34, GRIMER
+	db 35, KOFFING
+	db 36, KOFFING
+	db 35, GRIMER
+	db 35, GASTLY
+	db 34, GASTLY
+	db 36, DROWZEE
+	db 38, HYPNO
+	db 40, WEEZING
+	db 40, MUK
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate

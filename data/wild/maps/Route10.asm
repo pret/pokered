@@ -6,7 +6,7 @@ Route10WildMons:
 	db 11, EKANS
 	db 13, SPEAROW
 	db 15, EKANS
-	db 17, CACTUS
+	db 17, MAGNEMITE
 	db 20, FEAROW
 	db 13, SANDSHREW
 	db 17, SANDSHREW

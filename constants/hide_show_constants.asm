@@ -100,7 +100,7 @@ DEF SHOW EQU $15
 	const HS_POWER_PLANT_ITEM_3            ; 58 X
 	const HS_POWER_PLANT_ITEM_4            ; 59 X
 	const HS_POWER_PLANT_ITEM_5            ; 5A X
-	const HS_MOLTRES                       ; 5B X
+	const HS_GYAOON                        ; 5B X
 	const HS_VICTORY_ROAD_2F_ITEM_1        ; 5C X
 	const HS_VICTORY_ROAD_2F_ITEM_2        ; 5D X
 	const HS_VICTORY_ROAD_2F_ITEM_3        ; 5E X
@@ -239,4 +239,5 @@ DEF SHOW EQU $15
 	const HS_ARTICUNO                      ; E3 X
 	const HS_CROCKY	               ; E4 X
 	const HS_MEW	                              ; E5 X
+	const HS_MOLTRES                       ; E6 X
 DEF NUM_HS_OBJECTS EQU const_value

@@ -234,7 +234,7 @@ MapHSPointers:
 	dw CeruleanCaveHS
 	dw NoHS
 	dw NoHS
-	dw NoHS
+	dw CinnabarVolcanoHS
 	dw NoHS
 	dw SilphCo9FHS
 	dw SilphCo10FHS
@@ -509,6 +509,8 @@ SilphCo11FHS:
 	db SILPH_CO_11F, $05, SHOW
 UnusedMapF4HS:
 	db UNUSED_MAP_F4, $02, SHOW
+CinnabarVolcanoHS:
+	db CINNABAR_VOLCANO, $01, SHOW
 PokemonMansion2FHS:
 	db POKEMON_MANSION_2F, $02, SHOW
 PokemonMansion3FHS:
