@@ -202,11 +202,11 @@ PokedexEntryPointers:
 	dw LickilickyDexEntry
 	dw TangrowthDexEntry
 	dw KleavorDexEntry
-	dw MissingNoDexEntry ; Tsubomitto
-	dw MissingNoDexEntry ; Steelix
-	dw MissingNoDexEntry ; Blissey
-	dw MissingNoDexEntry ; Hitmontop
-	dw MissingNoDexEntry ; Crobat
+	dw TsubomittoDexEntry
+	dw SteelixDexEntry
+	dw BlisseyDexEntry
+	dw HitmontopDexEntry
+	dw CrobatDexEntry
 	assert_table_length NUM_POKEMON_INDEXES
 
 ; string: species name
@@ -1634,3 +1634,32 @@ MonjaDexEntry:
 	dw 330
 	text_far _MonjaDexEntry
 	text_end
+	
+	SteelixDexEntry:
+    db "IRON SNAKE@"
+	db 30,2
+	dw 8820
+	text_far _SteelixDexEntry
+	text_end 
+	
+HitmontopDexEntry:
+    db "HEADSTAND@"
+	db 4,7
+	dw 1060
+	text_far _HitmontopDexEntry
+	text_end 
+
+BlisseyDexEntry:
+    db "HAPPINESS@"
+	db 4,11
+	dw 1030
+	text_far _BlisseyDexEntry
+	text_end
+	
+CrobatDexEntry:
+    db "BAT@"
+	db 5,11
+	dw 1650
+	text_far _CrobatDexEntry
+	text_end 
+	

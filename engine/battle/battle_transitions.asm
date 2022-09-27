@@ -81,7 +81,7 @@ BattleTransitions:
 	dw BattleTransition_Split             ; %111
 
 GetBattleTransitionID_WildOrTrainer:
-	ld a, [wCurOpponent]
+	ld a, [wIsTrainerBattle]
 	and a 
 	jr nz, .trainer
 	res 0, c

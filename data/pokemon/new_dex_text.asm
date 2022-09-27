@@ -559,13 +559,13 @@ _HitmontopDexEntry::
 	dex
 	
 _BlisseyDexEntry::
-	text "Anyone who takes"
-	next "a bite of its"
-	next "egg becomes"
+	text "Biting into one"
+	next "of the eggs that"
+	next "it lays will make"
 
-	page "unfailingly"
-	next "caring and"
-	next "pleasant to all"
+	page "anyone happy. It"
+	next "can sense sadness"
+	next "with its fur"
 	dex
 
 _Porygon2DexEntry::

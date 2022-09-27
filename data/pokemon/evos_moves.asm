@@ -335,7 +335,7 @@ ExeggutorEvosMoves:
 
 LickitungEvosMoves:
 ; Evolutions
-	db EV_LEVEL, 37, LICKILICKY
+	db EV_LEVEL, 32, LICKILICKY
 	db 0
 ; Learnset
 	db 7, STOMP
@@ -565,7 +565,7 @@ PinsirEvosMoves:
 
 TangelaEvosMoves:
 ; Evolutions
-	db EV_LEVEL, 34, TANGROWTH
+	db EV_LEVEL, 44, TANGROWTH
 	db 0
 ; Learnset
 	db 24, BIND
@@ -608,7 +608,8 @@ GrowlitheEvosMoves:
 	db 0
 
 OnixEvosMoves:
-; Evolutions
+; Evolutions	
+	db EV_LEVEL, 38, STEELIX
 	db 0
 ; Learnset
 	db 15, BIND
@@ -683,6 +684,7 @@ GravelerEvosMoves:
 
 ChanseyEvosMoves:
 ; Evolutions
+	db EV_LEVEL, 45, BLISSEY
 	db 0
 ; Learnset
 	db 12, DOUBLESLAP
@@ -1759,6 +1761,7 @@ HypnoEvosMoves:
 
 GolbatEvosMoves:
 ; Evolutions
+	db EV_LEVEL, 44, CROBAT
 	db 0
 ; Learnset
 	db 10, SUPERSONIC
@@ -2041,7 +2044,7 @@ TentacruelEvosMoves:
 
 GyopinEvosMoves:
 ; Evolutions
-	db EV_LEVEL, 22, GOLDEEN
+	db EV_LEVEL, 16, GOLDEEN
 	db 0
 ; Learnset
 	db 7, SUPERSONIC
@@ -2114,7 +2117,7 @@ GorotoraEvosMoves:
 
 PuchikoonEvosMoves:
 ; Evolutions
-	db EV_LEVEL, 25, PONYTA
+	db EV_LEVEL, 20, PONYTA
 	db 0
 ; Learnset
 	db 7, QUICK_ATTACK
@@ -2428,6 +2431,7 @@ BellsproutEvosMoves:
 WeepinbellEvosMoves:
 ; Evolutions
 	db EV_ITEM, LEAF_STONE, 1, VICTREEBEL
+	db EV_ITEM, SUN_STONE, 1, TSUBOMITTO
 	db 0
 ; Learnset
 	db 13, WRAP
@@ -2450,7 +2454,7 @@ VictreebelEvosMoves:
 
 MonjaEvosMoves:
 ; Evolutions
-	db EV_LEVEL, 18, TANGELA
+	db EV_LEVEL, 22, TANGELA
 	db 0
 ; Learnset
 	db 5, BIND
@@ -2466,7 +2470,7 @@ MonjaEvosMoves:
 
 PudiEvosMoves:
 ; Evolutions
-	db EV_LEVEL, 14, GROWLITHE
+	db EV_LEVEL, 16, GROWLITHE
 	db 0
 ; Learnset
 	db 9, EMBER
@@ -2609,28 +2613,58 @@ TsubomittoEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset 
-	db 0 
+	db 48, SOLARBEAM
+	db 0
 
 SteelixEvosMoves:
 ; Evolutions
 	db 0 
 ; Learnset 
-	db 0 
+	db 8, IRON_DEFENSE
+	db 15, BIND
+	db 19, ROCK_THROW
+	db 25, RAGE
+	db 33, SLAM
+	db 38, IRON_HEAD
+	db 43, HARDEN
+	db 0
 
 BlisseyEvosMoves:
 ; Evolutions
 	db 0 
 ; Learnset 
-	db 0 
+	db 12, DOUBLESLAP
+	db 24, SING
+	db 30, GROWL
+	db 38, MINIMIZE
+	db 44, DEFENSE_CURL
+	db 48, LIGHT_SCREEN
+	db 54, DOUBLE_EDGE
+	db 0
 
 HitmontopEvosMoves:
 ; Evolutions
 	db 0 
 ; Learnset 
-	db 0 
+	db 7, FOCUS_ENERGY
+	db 33, QUICK_ATTACK
+	db 38, COUNTER
+	db 43, AGILITY
+	db 48, JUMP_KICK
+	db 53, DOUBLE_KICK
+	db 0
 
 CrobatEvosMoves:
 ; Evolutions
 	db 0 
 ; Learnset 
-	db 0 
+	db 7, GUST
+	db 10, SUPERSONIC
+	db 15, BITE
+	db 17, QUICK_ATTACK
+	db 21, CONFUSE_RAY
+	db 26, SLUDGE
+	db 32, WING_ATTACK
+	db 43, HAZE
+	db 50, AGILITY
+	db 0

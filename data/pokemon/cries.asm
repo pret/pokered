@@ -208,9 +208,9 @@ CryData::
 	mon_cry SFX_CRY_00, $00, $00 ; Lickilicky
 	mon_cry SFX_CRY_00, $00, $00 ; Tangrowth
 	mon_cry SFX_CRY_00, $00, $00 ; Kleavor
-	mon_cry SFX_CRY_25, $44, $20 ; Tsubomitto
-	mon_cry SFX_CRY_25, $66, $CC ; Steelix
+	mon_cry SFX_CRY_21, $DD, $80 ; Tsubomitto
+	mon_cry SFX_CRY_00, $00, $00 ; Steelix
 	mon_cry SFX_CRY_00, $00, $00 ; Blissey
-	mon_cry SFX_CRY_25, $44, $20 ; Hitmontop
-	mon_cry SFX_CRY_25, $66, $CC ; Crobat
+	mon_cry SFX_CRY_1D, $E3, $1A ; Hitmontop
+	mon_cry SFX_CRY_1D, $08, $B1 ; Crobat
 	assert_table_length NUM_POKEMON_INDEXES

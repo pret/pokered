@@ -46,7 +46,7 @@ MonPartyData:
 	nybble ICON_MON       ; Bittybat
 	nybble ICON_MON       ; Zubat
 	nybble ICON_MON       ; Golbat
-	nybble ICON_BIRD      ; Crobat 
+	nybble ICON_MON       ; Crobat 
 	nybble ICON_GRASS     ; Oddish
 	nybble ICON_GRASS     ; Gloom
 	nybble ICON_GRASS     ; Vileplume

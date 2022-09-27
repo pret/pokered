@@ -300,6 +300,8 @@ BurglarData:
 	db 38, NINETALES, 0
 ; Mansion B1F
 	db 34, GROWLITHE, PONYTA, 0
+; Victory Road - BIG SHOT
+	db $FF, 47, DITTO, 47, MADAAMU, 50, CRYITHAN, 50, GUARDIA, 50, TANGROWTH, 53, GYARADOS, 0
 
 EngineerData:
 ; Unused - used in celadon university
