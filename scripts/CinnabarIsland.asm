@@ -17,10 +17,10 @@ CinnabarIslandScript0:
 	call IsItemInBag
 	ret nz
 	ld a, [wYCoord]
-	cp 4
+	cp 10
 	ret nz
 	ld a, [wXCoord]
-	cp 18
+	cp 20
 	ret nz
 	ld a, PLAYER_DIR_UP
 	ld [wPlayerMovingDirection], a

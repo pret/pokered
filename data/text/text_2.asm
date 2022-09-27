@@ -320,21 +320,7 @@ _GameOverText::
 
 _CinnabarGymQuizIntroText::
 	text "#MON Quiz!"
-
-	para "Get it right and"
-	line "the door opens to"
-	cont "the next room!"
-
-	para "Get it wrong and"
-	line "face a trainer!"
-
-	para "If you want to"
-	line "conserve your"
-	cont "#MON for the"
-	cont "GYM LEADER..."
-
-	para "Then get it right!"
-	line "Here we go!"
+	line "Here we go!"	; Removing the unnecessarily long text that appears every single time
 	prompt
 
 _CinnabarQuizQuestionsText1::
@@ -349,22 +335,23 @@ _CinnabarQuizQuestionsText2::
 	done
 
 _CinnabarQuizQuestionsText3::
-	text "POLIWAG evolves 3"
-	line "times?"
+	text "A total of 151"
+	line "#MON species"
+	cont "have been"
+	cont "discovered?"
 	done
 
 _CinnabarQuizQuestionsText4::
-	text "Are thunder moves"
-	line "effective against"
-	cont "ground element-"
-	cont "type #MON?"
+	text "Are FIGHTING-"
+	line "type moves super"
+	cont "effective on"
+	cont "STEEL #MON?"
 	done
 
 _CinnabarQuizQuestionsText5::
-	text "#MON of the"
-	line "same kind and"
-	cont "level are not"
-	cont "identical?"
+	text "Is PENDRAKEN a"
+	line "WATER- and FAIRY-"
+	cont "type #MON?"
 	done
 
 _CinnabarQuizQuestionsText6::

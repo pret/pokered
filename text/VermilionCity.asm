@@ -130,3 +130,20 @@ _VermilionCityText15::
 	text "The S.S.ANNE"
 	line "has returned!"
 	done
+
+_RoingusText::
+	text "Hey! You've gotta"
+	line "hear this!"
+
+	para "A #MON that"
+	line "I've never seen"
+	cont "before appeared"
+	cont "near the dock!"
+
+	para "If I'm the first"
+	line "to discover it, I"
+	cont "could name it!"
+
+	para "I'm gonna call"
+	line "it... ROINGUS!"
+	done

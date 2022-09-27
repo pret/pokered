@@ -131,6 +131,7 @@ VermilionCity_TextPointers:
 	dw VermilionCityText11
 	dw VermilionCityText12
 	dw VermilionCityText13
+	dw RoingusText
 
 VermilionCityText1:
 	text_far _VermilionCityText1
@@ -277,4 +278,8 @@ VermilionCityText12:
 
 VermilionCityText13:
 	text_far _VermilionCityText13
+	text_end
+
+RoingusText:
+	text_far _RoingusText
 	text_end
