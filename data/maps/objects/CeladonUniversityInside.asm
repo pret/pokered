@@ -11,8 +11,11 @@ CeladonUniversityInside_Object:
 	def_object_events
 	object_event 18,  5, SPRITE_MIDDLE_AGED_MAN, STAY, ANY_DIR, 1 ; person
 	object_event  4, 17, SPRITE_GAMEBOY_KID, STAY, DOWN, 2 ; person
-	object_event  3, 15, SPRITE_POKEDEX, STAY, NONE, 3 ; person
+	object_event  3, 15, SPRITE_PAPER, STAY, NONE, 3 ; person
 	object_event 17,  5, SPRITE_POKEDEX, STAY, NONE, 4 ; person
 	object_event 10,  5, SPRITE_SCIENTIST, STAY, NONE, 5 ; person
+	object_event  3,  8, SPRITE_PAPER, STAY, NONE, 6 ; person
+	object_event  5,  4, SPRITE_PAPER, STAY, NONE, 7 ; person
+	object_event  1,  4, SPRITE_PAPER, STAY, NONE, 8 ; person
 
 	def_warps_to CELADON_UNIVERSITY_INSIDE

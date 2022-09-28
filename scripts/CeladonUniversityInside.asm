@@ -8,6 +8,9 @@ CeladonUniversityInside_TextPointers:
 	dw CeladonUniversityInsideText3
 	dw CeladonUniversityInsideText4
 	dw CeladonUniversityInsideText5
+	dw CeladonUniversityInsideBookcaseText1
+	dw CeladonUniversityInsideBookcaseText2
+	dw CeladonUniversityInsideBookcaseText3
 
 CeladonUniversityInsideText1:
 	text_far _CeladonUniversityInsideText1
@@ -43,5 +46,17 @@ CeladonUniversityInsideText5:
 	ld a, MAGIKARP
 	call DisplayPokedex
 	jp TextScriptEnd
+
+CeladonUniversityInsideBookcaseText1:
+	text_far _BookcaseText1
+	text_end
+
+CeladonUniversityInsideBookcaseText2:
+	text_far _BookcaseText2
+	text_end
+
+CeladonUniversityInsideBookcaseText3:
+	text_far _BookcaseText3
+	text_end
 
 	text_end ; unused

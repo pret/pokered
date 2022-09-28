@@ -2405,11 +2405,7 @@ PartyMenuOrRockOrRun:
 	ld [wd0b5], a
 	call GetMonHeader
 	ld de, vFrontPic
-	call IsGhostBattle ; this prevents ghosts from being identified without the silph scope - PvK 
-	push af
-	call nz, LoadMonFrontSprite
-	pop af
-	call z, LoadGhostPic ; fix ends here, just make it "call LoadMonFrontSprite on line 2408 to revert.
+	call LoadMonFrontSprite ; want to implement https://github.com/pret/pokered/wiki/Bugs-and-Glitches#the-pok%C3%A9mon-behind-the-ghost-is-identified-as-seen-in-the-pok%C3%A9dex-even-if-you-didnt-use-the-silph-scope-on-it but the codebase was changed since the time of writing
 	jr .enemyMonPicReloaded
 .doEnemyMonAnimation
 	ld b, BANK(AnimationSubstitute) ; BANK(AnimationMinimizeMon)
