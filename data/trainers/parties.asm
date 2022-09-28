@@ -673,7 +673,7 @@ BlaineData:
 SabrinaData:
 	db $FF, 39, HYPNO, 40, MR_MIME, 39, SLOWBRO, 40, JYNX, 43, ALAKAZAM, 0
 ; post-game rematch team (currently unused)
-	; db $FF, 66, MR_MIME, 67, HYPNO, 67, JYNX, 66, SLOWBRO, 67, EXEGGUTOR, 70, ALAKAZAM, 0
+	; db $FF, 66, JYNX, 67, HYPNO, 67, MR_MIME, 66, SLOWBRO, 67, EXEGGUTOR, 70, ALAKAZAM, 0
 
 GentlemanData:
 ; SS Anne 1F Rooms
