@@ -99,14 +99,14 @@ _BookcaseText2::
 	para "As of today,"
 	line "PROF. OAK's"
 	cont "efforts have"
-	cont "led to 150"
+	cont "led to over 200" ;changed from 150 to 200 because we've expanded the dex :P
 	cont "#MON being"
 	cont "recognised."
 	
 	done
 	
 _BookcaseText3::
-	text "#BALL technology"
+	text "# BALL technology"
 	line "was discovered by"
 	cont "PROF. WESTWOOD,"
 	cont "who accidentally"
