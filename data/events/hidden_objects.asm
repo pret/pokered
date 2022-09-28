@@ -84,6 +84,7 @@ HiddenObjectMaps:
 	db VERMILION_CITY
 	db CERULEAN_CITY
 	db ROUTE_4
+	db CELADON_UNIVERSITY_POKECENTER
 	db -1 ; end
 
 HiddenObjectPointers:
@@ -173,6 +174,7 @@ HiddenObjectPointers:
 	dw VermilionCityHiddenObjects
 	dw CeruleanCityHiddenObjects
 	dw Route4HiddenObjects
+	dw CeladonUniversityPokecenterHiddenObjects
 
 MACRO hidden_object
 	db \2 ; y coord
@@ -665,4 +667,9 @@ CeruleanCityHiddenObjects:
 
 Route4HiddenObjects:
 	hidden_object 40,  3, GREAT_BALL, HiddenItems
+	db -1 ; end
+
+CeladonUniversityPokecenterHiddenObjects:
+	hidden_object  0,  4, SPRITE_FACING_UP, PrintBenchGuyText
+	hidden_object 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
 	db -1 ; end

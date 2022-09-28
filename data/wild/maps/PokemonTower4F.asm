@@ -3,8 +3,8 @@ PokemonTower4FWildMons:
 	db 20, GASTLY
 	db 21, GASTLY
 	db 22, GASTLY
-	db 23, GASTLY
-	db 19, GASTLY
+	db 15, MIKON
+	db 16, MIKON
 	db 23, VULPIX
 	db 25, HAUNTER
 	db 20, CUBONE

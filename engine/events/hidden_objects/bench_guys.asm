@@ -47,7 +47,7 @@ RockTunnelPokecenterBenchGuyText::
 	text_far _RockTunnelPokecenterGuyText
 	text_end
 
-UnusedBenchGuyText1::
+CeladonUniversityPokecenterBenchGuyText::
 	text_far _UnusedBenchGuyText1
 	text_end
 

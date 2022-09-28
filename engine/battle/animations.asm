@@ -1878,6 +1878,8 @@ AnimationWavyScreen:
 	ld c, $ff
 	ld hl, WavyScreenLineOffsets
 .loop
+	; ld a, [hl] ; this fixes the wavy screen, but causes a bank overflow
+	; ldh [hSCX], a
 	push hl
 .innerLoop
 	call WavyScreen_SetSCX
@@ -1894,6 +1896,7 @@ AnimationWavyScreen:
 	dec c
 	jr nz, .loop
 	xor a
+	; ldh [hSCX], a ; also fixing the wavy screen
 	ldh [hWY], a
 	call SaveScreenTilesToBuffer2
 	call ClearScreen

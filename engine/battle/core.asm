@@ -1675,7 +1675,7 @@ LoadBattleMonFromParty:
 	ld bc, 1 + NUM_STATS * 2
 	call CopyData
 	call ApplyBurnAndParalysisPenaltiesToPlayer
-	call ApplyBadgeStatBoosts
+	call ApplyBadgeStatBoosts ; if this is commented out maybe it stops them entirely? test - PvK
 	ld a, $7 ; default stat modifier
 	ld b, NUM_STAT_MODS
 	ld hl, wPlayerMonAttackMod
@@ -2405,7 +2405,7 @@ PartyMenuOrRockOrRun:
 	ld [wd0b5], a
 	call GetMonHeader
 	ld de, vFrontPic
-	call LoadMonFrontSprite
+	call LoadMonFrontSprite ; want to implement https://github.com/pret/pokered/wiki/Bugs-and-Glitches#the-pok%C3%A9mon-behind-the-ghost-is-identified-as-seen-in-the-pok%C3%A9dex-even-if-you-didnt-use-the-silph-scope-on-it but the codebase was changed since the time of writing
 	jr .enemyMonPicReloaded
 .doEnemyMonAnimation
 	ld b, BANK(AnimationSubstitute) ; BANK(AnimationMinimizeMon)
@@ -5291,6 +5291,21 @@ AdjustDamageForMoveType:
 	ld b, a
 	ld a, [hl] ; a = damage multiplier
 	ldh [hMultiplier], a
+	and a  ; cp NO_EFFECT		;This fixes incorrect type effectiveness messages
+	jr z, .gotMultiplier
+	cp NOT_VERY_EFFECTIVE
+	jr nz, .nothalf
+	ld a, [wDamageMultipliers]
+	and $7f
+	srl a
+	jr .gotMultiplier
+.nothalf
+	cp SUPER_EFFECTIVE
+	jr nz, .gotMultiplier
+	ld a, [wDamageMultipliers]
+	and $7f
+	sla a
+.gotMultiplier
 	add b
 	ld [wDamageMultipliers], a
 	xor a
@@ -6270,12 +6285,15 @@ LoadEnemyMonData:
 	ld a, [wEnemyMonSpecies2]
 	ld [wd11e], a
 	predef IndexToPokedex
+	call IsGhostBattle ; this prevents it from being identified early
+	jr nz, .noMarkSeen ; part of the ghost fix
 	ld a, [wd11e]
 	dec a
 	ld c, a
 	ld b, FLAG_SET
 	ld hl, wPokedexSeen
 	predef FlagActionPredef ; mark this mon as seen in the pokedex
+.noMarkSeen ; part of the ghost fix
 	ld hl, wEnemyMonLevel
 	ld de, wEnemyMonUnmodifiedLevel
 	ld bc, 1 + NUM_STATS * 2

@@ -7,7 +7,12 @@ CeladonUniversityInside_TextPointers:
 	dw CeladonUniversityInsideText2
 	dw CeladonUniversityInsideText3
 	dw CeladonUniversityInsideText4
+	dw CeladonUniversityInsideBookcaseText1
+	dw CeladonUniversityInsideBookcaseText2
+	dw CeladonUniversityInsideBookcaseText3
+	dw SlowbroCry
 	dw CeladonUniversityInsideText5
+	dw CeladonUniversityPCScreen
 
 CeladonUniversityInsideText1:
 	text_far _CeladonUniversityInsideText1
@@ -32,6 +37,26 @@ CeladonUniversityInsideText4:
 	text_far _CeladonUniversityInsideText4
 	text_end
 
+CeladonUniversityInsideBookcaseText1:
+	text_far _BookcaseText1
+	text_end
+
+CeladonUniversityInsideBookcaseText2:
+	text_far _BookcaseText2
+	text_end
+
+CeladonUniversityInsideBookcaseText3:
+	text_far _BookcaseText3
+	text_end
+
+SlowbroCry:
+	text_far _SlowbroCry
+	text_asm
+	ld a, SLOWBRO
+	call PlayCry
+	call WaitForSoundToFinish
+	jp TextScriptEnd
+
 CeladonUniversityInsideMagikarpText:
 	text_far _CeladonUniversityInsideMagikarpText
 	text_end
@@ -43,5 +68,9 @@ CeladonUniversityInsideText5:
 	ld a, MAGIKARP
 	call DisplayPokedex
 	jp TextScriptEnd
+
+CeladonUniversityPCScreen:
+	text_far _ComputerScreen
+	text_end
 
 	text_end ; unused

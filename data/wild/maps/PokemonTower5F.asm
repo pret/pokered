@@ -2,8 +2,8 @@ PokemonTower5FWildMons:
 	def_grass_wildmons 10 ; encounter rate
 	db 20, GASTLY
 	db 21, GASTLY
-	db 22, GASTLY
-	db 23, GASTLY
+	db 15, MIKON
+	db 16, MIKON
 	db 23, VULPIX
 	db 24, VULPIX
 	db 25, HAUNTER

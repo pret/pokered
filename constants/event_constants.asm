@@ -582,10 +582,27 @@
 	const EVENT_BEAT_SS_ANNE_10_TRAINER_4
 	const EVENT_BEAT_SS_ANNE_10_TRAINER_5
 
-; Diglett's Cave events
-	const_next $650
+; New static encounter events
+	const_next $620
 	const_skip
 	const EVENT_BEAT_CROCKY
+	const_skip 7
+	const EVENT_BEAT_CACTUS
+	const_skip 7
+	const EVENT_BEAT_MOLTRES
+	const_skip 7
+	const EVENT_BEAT_OMEGA
+
+; Celadon University + salesman events 
+	const_next $640
+	const_skip
+	const_skip
+	const EVENT_BEAT_CELADON_UNIVERSITY_OUTSIDE_TRAINER_0
+	const EVENT_BEAT_CELADON_UNIVERSITY_OUTSIDE_TRAINER_1
+	const EVENT_BEAT_CELADON_UNIVERSITY_OUTSIDE_TRAINER_2
+	const EVENT_BEAT_CELADON_UNIVERSITY_OUTSIDE_TRAINER_3
+	const EVENT_BOUGHT_CUBONE
+	const EVENT_BOUGHT_DITTO
 
 ; Victory Road 3F events
 	const_next $660
@@ -777,22 +794,6 @@
 	const EVENT_SEAFOAM4_BOULDER2_DOWN_HOLE
 	const_skip 8
 	const EVENT_BEAT_ARTICUNO
-
-; Celadon University events 
-	const_next $9E0
-	const_skip
-	const_skip
-	const EVENT_BEAT_CELADON_UNIVERSITY_OUTSIDE_TRAINER_0
-	const EVENT_BEAT_CELADON_UNIVERSITY_OUTSIDE_TRAINER_1
-	const EVENT_BEAT_CELADON_UNIVERSITY_OUTSIDE_TRAINER_2
-	const EVENT_BEAT_CELADON_UNIVERSITY_OUTSIDE_TRAINER_3
-	const EVENT_BOUGHT_CUBONE
-	const EVENT_BOUGHT_DITTO
-
-; Cinnabar Volcano events
-	const_next $9F0
-	const_skip
-	const EVENT_BEAT_MOLTRES
 
 ; End of events
 	const_next $A00
