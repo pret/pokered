@@ -95,8 +95,8 @@ _BookcaseText2::
 	para "As of today,"
 	line "PROF. OAK's"
 	cont "efforts have led"
-	cont "to 150 #MON"
-	cont "species being"
+	cont "to over 200" ;changed from 150 to 200 because we've expanded the dex :P
+	cont "#MON being"
 	cont "recognised."
 	
 	done
