@@ -2,7 +2,7 @@ PokemonTower7FWildMons:
 	def_grass_wildmons 15 ; encounter rate
 	db 21, GASTLY
 	db 22, GASTLY
-	db 23, GASTLY
+	db 21, MIKON
 	db 24, VULPIX
 	db 25, VULPIX
 	db 28, HAUNTER
