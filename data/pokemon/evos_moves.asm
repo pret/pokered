@@ -205,7 +205,7 @@ RhydonEvosMoves:
 	db 19, HORN_ATTACK
 	db 23, HEADBUTT
 	db 27, FURY_ATTACK
-	db 36, SLAM
+	db 36, SLAM ; FILTHY SLAM
 	db 39, EARTHQUAKE
 	db 42, SKULL_BASH
 	db 47, DEFENSE_CURL
@@ -237,7 +237,7 @@ NidoranMEvosMoves:
 	db 12, HORN_ATTACK
 	db 14, POISON_STING
 	db 18, FOCUS_ENERGY
-	db 21, SLAM
+	db 21, SLAM ; FILTHY SLAM
 	db 26, GLARE
 	db 31, FURY_ATTACK
 	db 37, COUNTER ;DRAIN PUNCH
@@ -307,7 +307,7 @@ NidokingEvosMoves:
 	db 14, POISON_STING
 	db 18, FOCUS_ENERGY
 	db 23, THRASH
-	db 25, SLAM
+	db 25, SLAM ; FILTHY SLAM
 	db 27, GLARE
 	db 31, FURY_ATTACK
 	db 37, COUNTER ;DRAIN PUNCH
@@ -326,7 +326,7 @@ SlowbroEvosMoves:
 	db 24, BUBBLEBEAM
 	db 28, PSYBEAM
 	db 32, WITHDRAW
-	db 36, SLAM
+	db 36, SLAM ; FILTHY SLAM
 	db 41, AMNESIA
 	db 45, PSYCHIC_M
 	db 0
@@ -340,7 +340,7 @@ IvysaurEvosMoves:
 	db 13, VINE_WHIP
 	db 16, POISONPOWDER
 	db 19, STUN_SPORE
-	db 24, CONSTRICT
+	db 24, CONSTRICT ; STATIC SNAG
 	db 29, RAZOR_LEAF
 	db 35, SLEEP_POWDER
 	db 38, GROWTH
@@ -372,7 +372,7 @@ LickitungEvosMoves:
 	db 20, DEFENSE_CURL
 	db 23, HEADBUTT
 	db 28, DIZZY_PUNCH
-	db 31, SLAM
+	db 31, SLAM ; FILTHY SLAM
 	db 37, MEDITATE
 	db 42, MEGA_PUNCH
 	db 50, HYPER_BEAM
@@ -401,7 +401,7 @@ GrimerEvosMoves:
 ; Learnset
 	db 14, ACID
 	db 23, MINIMIZE
-	db 26, SLAM
+	db 26, SLAM ; FILTHY SLAM
 	db 29, BARRAGE
 	db 33, ACID_ARMOR
 	db 37, SLUDGE
@@ -419,7 +419,7 @@ GengarEvosMoves:
 	db 24, MEGA_DRAIN
 	db 29, BARRAGE
 	db 33, DREAM_EATER
-	db 41, SLAM
+	db 41, SLAM ; FILTHY SLAM
 	db 46, ICE_PUNCH
 	db 57, LOVELY_KISS
 	db 0
@@ -433,7 +433,7 @@ NidoranFEvosMoves:
 	db 12, POISON_STING
 	db 14, FURY_SWIPES ; DUST CLAW
 	db 18, BITE
-	db 21, SLAM
+	db 21, SLAM ; FILTHY SLAM
 	db 25, ACID_ARMOR
 	db 31, SLASH
 	db 37, DIZZY_PUNCH
@@ -450,7 +450,7 @@ NidoqueenEvosMoves:
 	db 14, POISON_STING
 	db 18, BITE
 	db 23, BODY_SLAM
-	db 25, SLAM
+	db 25, SLAM ; FILTHY SLAM
 	db 27, ACID_ARMOR
 	db 31, SLASH
 	db 37, DIZZY_PUNCH
@@ -488,7 +488,7 @@ RhyhornEvosMoves:
 	db 19, HORN_ATTACK
 	db 23, HEADBUTT
 	db 27, FURY_ATTACK
-	db 36, SLAM
+	db 36, SLAM ; FILTHY SLAM
 	db 39, EARTHQUAKE
 	db 42, SKULL_BASH
 	db 47, DEFENSE_CURL
@@ -516,7 +516,7 @@ ArcanineEvosMoves:
 	db 15, EMBER
 	db 19, KINESIS ; FIREWALL
 	db 23, HYPER_FANG
-	db 28, TAKE_DOWN
+	db 28, TAKE_DOWN ; HEAT_RUSH
 	db 31, AGILITY
 	db 36, FLAMETHROWER
 	db 45, SKULL_BASH
@@ -586,7 +586,7 @@ GastlyEvosMoves:
 	db 24, MEGA_DRAIN
 	db 29, BARRAGE
 	db 33, DREAM_EATER
-	db 41, SLAM
+	db 41, SLAM ; FILTHY SLAM
 	db 57, LOVELY_KISS
 	db 0
 
@@ -688,7 +688,7 @@ GrowlitheEvosMoves:
 	db 15, EMBER
 	db 19, KINESIS ; FIREWALL
 	db 23, HYPER_FANG
-	db 28, TAKE_DOWN
+	db 28, TAKE_DOWN ; HEAT RUSH
 	db 31, AGILITY
 	db 36, FLAMETHROWER
 	db 45, SKULL_BASH
@@ -706,7 +706,7 @@ OnixEvosMoves:
 	db 25, RAGE
 	db 29, CLAMP
 	db 33, AMNESIA
-	db 39, TAKE_DOWN
+	db 39, TAKE_DOWN ; HEAT RUSH
 	db 45, WITHDRAW
 	db 52, SELFDESTRUCT
 	db 0
@@ -735,11 +735,11 @@ PidgeyEvosMoves:
 	db 6, SAND_ATTACK
 	db 12, QUICK_ATTACK
 	db 19, WING_ATTACK
-	db 26, RAZOR_WIND
+	db 26, RAZOR_WIND ; ROOST
 	db 28, GLARE
 	db 32, BARRAGE
 	db 35, FURY_ATTACK
-	db 41, TAKE_DOWN
+	db 41, TAKE_DOWN ; HEAT RUSH
 	db 48, SKULL_BASH
 	db 54, WHIRLWIND
 	db 60, HYPER_BEAM
@@ -756,7 +756,7 @@ SlowpokeEvosMoves:
 	db 24, BUBBLEBEAM
 	db 29, PSYBEAM
 	db 32, WITHDRAW
-	db 36, SLAM
+	db 36, SLAM ; FILTHY SLAM
 	db 41, AMNESIA
 	db 45, PSYCHIC_M
 	db 0
@@ -872,10 +872,10 @@ ArbokEvosMoves:
 	db 0
 ; Learnset
 	db 10, BITE
-	db 13, CONSTRICT
+	db 13, CONSTRICT ; STATIC SNAG
 	db 18, GLARE
 	db 22, MEGA_DRAIN
-	db 26, SLAM
+	db 26, SLAM ; FILTHY SLAM
 	db 30, WITHDRAW
 	db 36, LEECH_LIFE
 	db 43, SUPER_FANG
@@ -986,7 +986,7 @@ ElectabuzzEvosMoves:
 	db 28, LIGHT_SCREEN
 	db 30, THUNDERBOLT
 	db 33, COUNTER ; DRAIN PUNCH
-	db 37, TAKE_DOWN
+	db 37, TAKE_DOWN ; HEAT RUSH
 	db 42, MEGA_PUNCH
 	db 47, THUNDER
 	db 54, HYPER_BEAM
@@ -1079,7 +1079,7 @@ DiglettEvosMoves:
 	db 15, FURY_SWIPES ; DUST CLAW
 	db 19, DIG
 	db 24, SAND_ATTACK
-	db 30, SLAM
+	db 30, SLAM ; FILTHY SLAM
 	db 35, SLASH
 	db 39, EARTHQUAKE
 	db 43, FURY_ATTACK
@@ -1151,7 +1151,7 @@ VenonatEvosMoves:
 	db 33, SLUDGE
 	db 37, DREAM_EATER
 	db 37, SLEEP_POWDER
-	db 42, TAKE_DOWN
+	db 42, TAKE_DOWN ; HEAT RUSH
 	db 53, SKY_ATTACK
 	db 0
 
@@ -1296,7 +1296,7 @@ KrabbyEvosMoves:
 	db 22, GUILLOTINE
 	db 26, AGILITY
 	db 30, SLASH
-	db 35, SLAM
+	db 35, SLAM ; FILTHY SLAM
 	db 39, FURY_ATTACK
 	db 44, EARTHQUAKE
 	db 50, SPIKE_CANNON
@@ -1631,7 +1631,7 @@ JolteonEvosMoves: ; Automatically tries to learn THUNDERSHOCK on evolution
 	db 28, THUNDERBOLT
 	db 32, BARRIER
 	db 38, PIN_MISSILE
-	db 44, TAKE_DOWN
+	db 44, TAKE_DOWN ; HEAT RUSH
 	db 49, THUNDER
 	db 0
 
@@ -1696,10 +1696,10 @@ EkansEvosMoves:
 ; Learnset
 	db 7, ABSORB
 	db 10, BITE
-	db 13, CONSTRICT
+	db 13, CONSTRICT ; STATIC SNAG
 	db 18, GLARE
 	db 23, MEGA_DRAIN
-	db 26, SLAM
+	db 26, SLAM ; FILTHY SLAM
 	db 30, WITHDRAW
 	db 36, LEECH_LIFE
 	db 43, SUPER_FANG
@@ -1835,7 +1835,7 @@ DugtrioEvosMoves:
 	db 15, FURY_SWIPES ; DUST CLAW
 	db 19, DIG
 	db 24, SAND_ATTACK
-	db 30, SLAM
+	db 30, SLAM ; FILTHY SLAM
 	db 35, SLASH
 	db 39, EARTHQUAKE
 	db 43, FURY_ATTACK
@@ -1860,7 +1860,7 @@ VenomothEvosMoves:
 	db 33, SLUDGE
 	db 37, DREAM_EATER
 	db 37, SLEEP_POWDER
-	db 42, TAKE_DOWN
+	db 42, TAKE_DOWN ; HEAT RUSH
 	db 53, SKY_ATTACK
 	db 0
 
@@ -2047,7 +2047,7 @@ MukEvosMoves:
 ; Learnset
 	db 14, ACID
 	db 23, MINIMIZE
-	db 26, SLAM
+	db 26, SLAM ; FILTHY SLAM
 	db 29, BARRAGE
 	db 33, ACID_ARMOR
 	db 37, SLUDGE
@@ -2073,7 +2073,7 @@ KinglerEvosMoves:
 	db 22, GUILLOTINE
 	db 26, AGILITY
 	db 30, SLASH
-	db 35, SLAM
+	db 35, SLAM ; FILTHY SLAM
 	db 39, FURY_ATTACK
 	db 44, EARTHQUAKE
 	db 51, SPIKE_CANNON
@@ -2198,7 +2198,7 @@ HaunterEvosMoves:
 	db 24, MEGA_DRAIN
 	db 29, BARRAGE
 	db 33, DREAM_EATER
-	db 41, SLAM
+	db 41, SLAM ; FILTHY SLAM
 	db 46, ICE_PUNCH
 	db 57, LOVELY_KISS
 	db 0
@@ -2232,7 +2232,7 @@ PidgeottoEvosMoves:
 	db 6, SAND_ATTACK
 	db 12, QUICK_ATTACK
 	db 19, WING_ATTACK
-	db 26, RAZOR_WIND
+	db 26, RAZOR_WIND ; ROOST
 	db 28, GLARE
 	db 32, BARRAGE
 	db 35, FURY_ATTACK
@@ -2250,7 +2250,7 @@ PidgeotEvosMoves:
 	db 6, SAND_ATTACK
 	db 12, QUICK_ATTACK
 	db 19, WING_ATTACK
-	db 26, RAZOR_WIND
+	db 26, RAZOR_WIND ; ROOST
 	db 28, GLARE
 	db 32, BARRAGE
 	db 35, FURY_ATTACK
@@ -2284,7 +2284,7 @@ BulbasaurEvosMoves:
 	db 11, VINE_WHIP
 	db 14, POISONPOWDER
 	db 18, STUN_SPORE
-	db 21, CONSTRICT
+	db 21, CONSTRICT ; STATIC SNAG
 	db 25, RAZOR_LEAF
 	db 33, SLEEP_POWDER
 	db 38, GROWTH
@@ -2299,7 +2299,7 @@ VenusaurEvosMoves:
 	db 13, VINE_WHIP
 	db 17, POISONPOWDER
 	db 20, STUN_SPORE
-	db 24, CONSTRICT
+	db 24, CONSTRICT ; STATIC SNAG
 	db 30, RAZOR_LEAF
 	db 36, SLEEP_POWDER
 	db 40, GROWTH
@@ -2396,11 +2396,11 @@ PonytaEvosMoves:
 	db 0
 ; Learnset
 	db 9, TAIL_WHIP
-	db 18, KINESIS
+	db 18, KINESIS ; FIREWALL
 	db 21, STOMP
 	db 25, FOCUS_ENERGY
 	db 28, HEADBUTT
-	db 33, TAKE_DOWN
+	db 33, TAKE_DOWN ; HEAT RUSH
 	db 36, SWIFT
 	db 40, FURY_ATTACK
 	db 45, SKULL_BASH
@@ -2413,11 +2413,11 @@ RapidashEvosMoves:
 	db 0
 ; Learnset
 	db 9, TAIL_WHIP
-	db 18, KINESIS
+	db 18, KINESIS ; FIREWALL
 	db 21, STOMP
 	db 25, FOCUS_ENERGY
 	db 28, HEADBUTT
-	db 33, TAKE_DOWN
+	db 33, TAKE_DOWN ; HEAT RUSH
 	db 36, SWIFT
 	db 40, FURY_ATTACK
 	db 45, SKULL_BASH
@@ -2466,7 +2466,7 @@ NidorinoEvosMoves:
 	db 12, HORN_ATTACK
 	db 14, POISON_STING
 	db 18, FOCUS_ENERGY
-	db 21, SLAM
+	db 21, SLAM ; FILTHY SLAM
 	db 26, GLARE
 	db 31, FURY_ATTACK
 	db 37, COUNTER ;DRAIN PUNCH
@@ -2484,7 +2484,7 @@ NidorinaEvosMoves:
 	db 12, POISON_STING
 	db 14, FURY_SWIPES ; DUST CLAW
 	db 18, BITE
-	db 21, SLAM
+	db 21, SLAM ; FILTHY SLAM
 	db 25, ACID_ARMOR
 	db 31, SLASH
 	db 37, DIZZY_PUNCH
@@ -2581,7 +2581,7 @@ CharmanderEvosMoves:
 	db 15, SMOKESCREEN
 	db 18, KINESIS ; FIREWALL
 	db 23, RAGE
-	db 26, TAKE_DOWN
+	db 26, TAKE_DOWN ; HEAT RUSH
 	db 30, SLASH
 	db 38, FLAMETHROWER
 	db 46, FIRE_SPIN
@@ -2614,7 +2614,7 @@ CharmeleonEvosMoves:
 	db 15, SMOKESCREEN
 	db 19, KINESIS ; FIREWALL
 	db 24, RAGE
-	db 28, TAKE_DOWN
+	db 28, TAKE_DOWN ; HEAT RUSH
 	db 31, SLASH
 	db 39, FLAMETHROWER
 	db 46, FIRE_SPIN
@@ -2646,7 +2646,7 @@ CharizardEvosMoves:
 	db 15, SMOKESCREEN
 	db 19, KINESIS ; FIREWALL
 	db 24, RAGE
-	db 28, TAKE_DOWN
+	db 28, TAKE_DOWN ; HEAT_RUSH
 	db 31, SLASH
 	db 41, FLAMETHROWER
 	db 48, FIRE_SPIN

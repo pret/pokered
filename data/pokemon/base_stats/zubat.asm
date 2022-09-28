@@ -15,7 +15,7 @@
 
 	; tm/hm learnset
 	tmhm \
-	RAZOR_WIND,\
+	RAZOR_WIND,\ ; ROOST
 	TOXIC,\
 	SLASH,\
 	DOUBLE_EDGE,\
@@ -25,7 +25,7 @@
 	BIDE,\
 	AGILITY,\
 	BARRAGE,\
-	SLAM,\
+	SLAM,\ ; FILTHY SLAM
 	LOVELY_KISS,\
 	SKY_ATTACK,\
 	SLUDGE,\

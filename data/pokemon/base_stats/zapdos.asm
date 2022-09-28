@@ -15,7 +15,7 @@
 
 	; tm/hm learnset
 	tmhm \
-	RAZOR_WIND,\
+	RAZOR_WIND,\ ; ROOST
 	PIN_MISSILE,\
 	TOXIC,\
 	BODY_SLAM,\
@@ -26,7 +26,7 @@
 	BARRIER,\
 	THUNDERBOLT,\
 	THUNDER,\
-	KINESIS,\
+	KINESIS,\ ; FIREWALL
 	REFLECT,\
 	BIDE,\
 	AGILITY,\

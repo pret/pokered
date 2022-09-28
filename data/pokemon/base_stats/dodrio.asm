@@ -15,7 +15,7 @@
 
 	; tm/hm learnset
 	tmhm \
-	RAZOR_WIND,\
+	RAZOR_WIND,\ ; ROOST
 	PIN_MISSILE,\
 	TOXIC,\
 	BODY_SLAM,\
@@ -32,7 +32,7 @@
 	BIDE,\
 	AGILITY,\
 	BARRAGE,\
-	SLAM,\
+	SLAM,\ ; FILTHY SLAM
 	SKY_ATTACK,\
 	THUNDER_WAVE,\
 	GLARE,\

@@ -15,7 +15,7 @@
 
 	; tm/hm learnset
 	tmhm \
-	RAZOR_WIND,\
+	RAZOR_WIND,\ ; ROOST
 	TOXIC,\
 	BODY_SLAM,\
 	SLASH,\

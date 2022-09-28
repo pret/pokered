@@ -15,7 +15,7 @@ CeladonMart2Clerk1Text::
 
 CeladonMart2Clerk2Text::
 	script_mart \
-	TM_RAZOR_WIND, \
+	TM_RAZOR_WIND, \ ; ROOST
 	TM_HORN_DRILL, \
 	TM_ROLLING_KICK, \
 	TM_DIG, \

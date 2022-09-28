@@ -15,7 +15,7 @@
 
 	; tm/hm learnset
 	tmhm \
-	RAZOR_WIND,\
+	RAZOR_WIND,\ ; ROOST
 	LEECH_SEED,\
 	PIN_MISSILE,\
 	TOXIC,\
@@ -35,7 +35,7 @@
 	BIDE,\
 	AGILITY,\
 	BARRAGE,\
-	SLAM,\
+	SLAM,\ ; FILTHY SLAM
 	KARATE_CHOP,\
 	MEDITATE,\
 	SKY_ATTACK,\

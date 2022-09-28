@@ -15,7 +15,7 @@
 
 	; tm/hm learnset
 	tmhm \
-	RAZOR_WIND,\
+	RAZOR_WIND,\ ; ROOST
 	TOXIC,\
 	BODY_SLAM,\
 	SLASH,\
@@ -24,7 +24,7 @@
 	AMNESIA,\
 	BARRIER,\
 	SOLARBEAM,\
-	KINESIS,\
+	KINESIS,\ ; FIREWALL
 	REFLECT,\
 	BIDE,\
 	AGILITY,\

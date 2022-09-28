@@ -15,7 +15,7 @@
 
 	; tm/hm learnset
 	tmhm \
-	RAZOR_WIND,\
+	RAZOR_WIND,\ ; ROOST
 	LEECH_SEED,\
 	TOXIC,\
 	DOUBLE_EDGE,\
@@ -29,7 +29,7 @@
 	REFLECT,\
 	BIDE,\
 	BARRAGE,\
-	SLAM,\
+	SLAM,\ ; FILTHY SLAM
 	MEDITATE,\
 	SKY_ATTACK,\
 	LIGHT_SCREEN,\

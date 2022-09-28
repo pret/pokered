@@ -15,7 +15,7 @@
 
 	; tm/hm learnset
 	tmhm \
-	RAZOR_WIND,\
+	RAZOR_WIND,\ ; ROOST
 	LEECH_SEED,\
 	PIN_MISSILE,\
 	TOXIC,\
@@ -27,7 +27,7 @@
 	SOLARBEAM,\
 	PSYCHIC_M,\
 	MEGA_DRAIN,\
-	KINESIS,\
+	KINESIS,\ ; FIREWALL
 	SWORDS_DANCE,\
 	REFLECT,\
 	BIDE,\
