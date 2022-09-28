@@ -5,7 +5,7 @@ _CeladonUniversityInsideText1::
 	para "My name is PROF."
 	line "WESTWOOD V!"
 	
-	para "My grandfather"
+	para "My ancestors"
 	line "created the"
 	cont "# BALL!"
 	
@@ -44,10 +44,6 @@ _CeladonUniversityInsideText4::
 	line "TRAINERs in"
 	cont "VERMILLION!"
 	
-	para "So far, nobody"
-	line "has come up"
-	cont "with a reason."
-	
 	done
 
 _CeladonUniversityInsideMagikarpText::
@@ -72,8 +68,8 @@ _BookcaseText1::
 	cont "their biology was"
 	cont "conducted by"
 	cont "BARON TAJIRIN of"
-	cont "France in the 18th"
-	cont "century."
+	cont "France in the"
+	cont "18th century."
 	
 	para "At the time, only"
 	line "30 species were"
@@ -84,36 +80,39 @@ _BookcaseText1::
 _BookcaseText2::
 	text "In 1899, PROF."
 	line "WESTWOOD of Japan"
-	cont "released a study"
-	cont "on the observation"
-	cont "on the evolution"
-	cont "of PIKACHU."
+	cont "released a book"
+	cont "observing the"
+	cont "evolution of a"
+	cont "PIKACHU."
 	
 	para "Japan became the"
-	line "global leader"
-	cont "in #MON study,"
+	line "global leader in"
+	cont "#MON study,"
 	cont "discovering 80"
 	cont "#MON at the"
 	cont "time."
 	
 	para "As of today,"
 	line "PROF. OAK's"
-	cont "efforts have"
-	cont "led to 150"
-	cont "#MON being"
+	cont "efforts have led"
+	cont "to 150 #MON"
+	cont "species being"
 	cont "recognised."
 	
 	done
 	
 _BookcaseText3::
-	text "#BALL technology"
-	line "was discovered by"
+	text "The idea of the"
+	line "# BALL was"
+	cont "discovered by"
 	cont "PROF. WESTWOOD,"
 	cont "who accidentally"
 	cont "administered too"
 	cont "many drugs to a"
-	cont "PRIMEAPE, as part"
-	cont "of an experiment"
+	cont "PRIMEAPE."
+	
+	para "This was part"
+	line "of an experiment"
 	cont "to extract its"
 	cont "angry energy."
 	
@@ -122,3 +121,29 @@ _BookcaseText3::
 	cont "ball and fit into"
 	cont "his glasses case."
 	
+	para "The modern #"
+	line "BALL was made by"
+	cont "researchers at"
+	cont "CELADON"
+	cont "UNIVERSITY"
+	cont "in 1925, and"
+	cont "mass production"
+	cont "began at SILPH"
+	cont "CO. soon after."
+	
+	done
+
+_SlowbroCry::
+	text "..."
+	para "..."
+	para "..."
+	para "...BRO?"
+	
+	done
+
+_ComputerScreen::
+	text "Chaotic graphs are"
+	line "visible on the PC"
+	cont "screen."
+	
+	done
