@@ -1,8 +1,3 @@
-; GetBattleTransitionID_IsDungeonMap fails to recognize
-; VICTORY_ROAD_2F, VICTORY_ROAD_3F, all ROCKET_HIDEOUT maps,
-; POKEMON_MANSION_1F, SEAFOAM_ISLANDS_[B1F-B4F], POWER_PLANT,
-; DIGLETTS_CAVE, and SILPH_CO_[9-11]F as dungeon maps
-
 ; GetBattleTransitionID_IsDungeonMap checks if wCurMap
 ; is equal to one of these maps
 DungeonMaps1:
@@ -11,6 +6,11 @@ DungeonMaps1:
 	db SEAFOAM_ISLANDS_1F
 	db ROCK_TUNNEL_B1F
 	db CINNABAR_VOLCANO
+	db POKEMON_MANSION_1F
+	db VICTORY_ROAD_2F
+	db VICTORY_ROAD_3F
+	db POWER_PLANT
+	db DIGLETTS_CAVE
 	db -1 ; end
 
 ; GetBattleTransitionID_IsDungeonMap checks if wCurMap
@@ -25,4 +25,10 @@ DungeonMaps2:
 	; SILPH_CO_[2-8]F, POKEMON_MANSION[2F-B1F], SAFARI_ZONE, and
 	; CERULEAN_CAVE maps, except for SILPH_CO_1F
 	db SILPH_CO_2F, CERULEAN_CAVE_1F
+	; SILPH_CO_[9-11]F
+	db SILPH_CO_9F, SILPH_CO_11F
+	; SEAFOAM_ISLANDS_[B1F-B4F]
+	db SEAFOAM_ISLANDS_B1F, SEAFOAM_ISLANDS_B4F
+	; all ROCKET_HIDEOUT maps
+	db ROCKET_HIDEOUT_B1F, ROCKET_HIDEOUT_B4F
 	db -1 ; end

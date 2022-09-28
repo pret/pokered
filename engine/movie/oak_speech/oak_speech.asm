@@ -157,7 +157,7 @@ OakSpeechText1:
 	text_end
 OakSpeechText2:
 	text_far _OakSpeechText2A
-	sound_cry_nidorina
+	sound_cry_nidorino
 	text_far _OakSpeechText2B
 	text_end
 IntroducePlayerText:
