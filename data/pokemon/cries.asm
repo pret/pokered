@@ -212,5 +212,5 @@ CryData::
 	mon_cry SFX_CRY_00, $00, $00 ; Steelix
 	mon_cry SFX_CRY_00, $00, $00 ; Blissey
 	mon_cry SFX_CRY_1D, $E3, $1A ; Hitmontop
-	mon_cry SFX_CRY_1D, $08, $B1 ; Crobat
+	mon_cry SFX_CRY_1D, $01, $B1 ; Crobat
 	assert_table_length NUM_POKEMON_INDEXES

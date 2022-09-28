@@ -240,5 +240,5 @@ DEF SHOW EQU $15
 	const HS_CROCKY	               		   ; E4 X
 	const HS_MEW	                       ; E5 X
 	const HS_MOLTRES					   ; E6 X
-	const HS_CACTUS                        ; E7 X
+	; const HS_CACTUS                        ; E7 X
 DEF NUM_HS_OBJECTS EQU const_value
