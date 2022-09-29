@@ -210,11 +210,17 @@ EvosMovesPointerTable:
 	dw BlisseyEvosMoves
 	dw HitmontopEvosMoves
 	dw CrobatEvosMoves
+	dw AnimonEvosMoves
+	dw BellossomEvosMoves
+	dw Porygon2EvosMoves
+	dw KingdraEvosMoves
+	dw PolitoedEvosMoves
+	dw SlowkingEvosMoves
 	assert_table_length NUM_POKEMON_INDEXES
 
 RhydonEvosMoves:
 ; Evolutions
-	db EV_ITEM, MOON_STONE, 1, RHYPERIOR	; Protector isn't added yet  ~M
+	db EV_TRADE, 1, RHYPERIOR
 	db 0
 ; Learnset
 	db 30, STOMP
@@ -646,6 +652,7 @@ PidgeyEvosMoves:
 SlowpokeEvosMoves:
 ; Evolutions
 	db EV_LEVEL, 37, SLOWBRO
+	db EV_TRADE, 1, SLOWKING
 	db 0
 ; Learnset
 	db 18, DISABLE
@@ -1123,6 +1130,7 @@ ZapdosEvosMoves:
 
 DittoEvosMoves:
 ; Evolutions
+	db EV_TRADE, 1, ANIMON
 	db 0
 ; Learnset
 	db 0
@@ -1330,6 +1338,7 @@ HorseaEvosMoves:
 
 SeadraEvosMoves:
 ; Evolutions
+	db EV_TRADE, 1, KINGDRA
 	db 0
 ; Learnset
 	db 19, SMOKESCREEN
@@ -1539,6 +1548,7 @@ ParasEvosMoves:
 PoliwhirlEvosMoves:
 ; Evolutions
 	db EV_ITEM, WATER_STONE, 1, POLIWRATH
+	db EV_TRADE, 1, POLITOED
 	db 0
 ; Learnset
 	db 16, HYPNOSIS
@@ -2216,7 +2226,8 @@ GeodudeEvosMoves:
 	db 0
 
 PorygonEvosMoves:
-; Evolutions	
+; Evolutions
+	db EV_TRADE, 1, PORYGON2
 	db 0
 ; Learnset
 	db 23, PSYBEAM
@@ -2395,6 +2406,7 @@ OddishEvosMoves:
 GloomEvosMoves:
 ; Evolutions
 	db EV_ITEM, LEAF_STONE, 1, VILEPLUME
+	db EV_ITEM, SUN_STONE, 1, BELLOSSOM
 	db 0
 ; Learnset
 	db 15, POISONPOWDER
@@ -2667,4 +2679,64 @@ CrobatEvosMoves:
 	db 32, WING_ATTACK
 	db 43, HAZE
 	db 50, AGILITY
+	db 0
+
+AnimonEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 30, MIST
+	db 40, LIGHT_SCREEN
+	db 50, REFLECT
+	db 0
+	
+BellossomEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 15, POISONPOWDER
+	db 17, STUN_SPORE
+	db 19, SLEEP_POWDER
+	db 0
+	
+Porygon2EvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 23, PSYBEAM
+	db 28, RECOVER
+	db 35, AGILITY
+	db 42, TRI_ATTACK
+	db 45, DEFENSE_CURL
+	db 0
+	
+KingdraEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 19, SMOKESCREEN
+	db 24, LEER
+	db 30, WATER_GUN
+	db 32, PIN_MISSILE
+	db 36, QUICK_ATTACK
+	db 41, AGILITY
+	db 52, HYDRO_PUMP
+	db 0
+	
+PolitoedEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 0
+
+SlowkingEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 18, DISABLE
+	db 22, HEADBUTT
+	db 27, GROWL
+	db 33, WATER_GUN
+	db 44, AMNESIA
+	db 55, PSYCHIC_M
 	db 0

@@ -50,6 +50,7 @@ MonPartyData:
 	nybble ICON_GRASS     ; Oddish
 	nybble ICON_GRASS     ; Gloom
 	nybble ICON_GRASS     ; Vileplume
+	nybble ICON_GRASS     ; Bellossom
 	nybble ICON_BUG       ; Paras
 	nybble ICON_BUG       ; Parasect
 	nybble ICON_BUG       ; Venonat
@@ -74,6 +75,7 @@ MonPartyData:
 	nybble ICON_MON       ; Poliwag
 	nybble ICON_MON       ; Poliwhirl
 	nybble ICON_MON       ; Poliwrath
+	nybble ICON_MON       ; Politoed
 	nybble ICON_MON       ; Abra
 	nybble ICON_MON       ; Kadabra
 	nybble ICON_MON       ; Alakazam
@@ -96,12 +98,13 @@ MonPartyData:
 	nybble ICON_QUADRUPED ; Rapidash
 	nybble ICON_QUADRUPED ; Slowpoke
 	nybble ICON_MON       ; Slowbro
+	nybble ICON_MON       ; Slowking
 	nybble ICON_BALL      ; Magnemite
 	nybble ICON_BALL      ; Magnetite
 	nybble ICON_BALL      ; Magneton
 	nybble ICON_BALL      ; Barunda
 	nybble ICON_BIRD      ; Farfetch'd
-	nybble ICON_BIRD	    ; Madaamu
+	nybble ICON_BIRD	  ; Madaamu
 	nybble ICON_WATER     ; Blastyke
 	nybble ICON_WATER     ; Blastoise
 	nybble ICON_BIRD      ; Doduo
@@ -126,15 +129,15 @@ MonPartyData:
 	nybble ICON_WATER     ; Kingler
 	nybble ICON_BALL      ; Voltorb
 	nybble ICON_BALL      ; Electrode
-	nybble ICON_GRASS	    ; Cactus
-	nybble ICON_MON	    ; Crocky
+	nybble ICON_GRASS	  ; Cactus
+	nybble ICON_MON	      ; Crocky
 	nybble ICON_QUADRUPED ; Deer
 	nybble ICON_GRASS     ; Exeggcute
 	nybble ICON_GRASS     ; Exeggutor
 	nybble ICON_MON       ; Cubone
 	nybble ICON_MON       ; Marowak
-	nybble ICON_MON	    ; Guardia
-	nybble ICON_MON	    ; Kangaskhan
+	nybble ICON_MON	      ; Guardia
+	nybble ICON_MON	      ; Kangaskhan
 	nybble ICON_MON       ; Hitmonlee
 	nybble ICON_MON       ; Hitmonchan
 	nybble ICON_MON       ; Hitmontop
@@ -150,20 +153,21 @@ MonPartyData:
 	nybble ICON_GRASS     ; Monja
 	nybble ICON_GRASS     ; Tangela
 	nybble ICON_GRASS     ; Tangrowth
-	nybble ICON_MON	    ; Decilla
-	nybble ICON_MON	    ; Gyaoon
-	nybble ICON_MON	    ; Omega
+	nybble ICON_MON	      ; Decilla
+	nybble ICON_MON	      ; Gyaoon
+	nybble ICON_MON	      ; Omega
 	nybble ICON_WATER     ; Horsea
 	nybble ICON_WATER     ; Seadra
+	nybble ICON_WATER     ; Kingdra
 	nybble ICON_WATER     ; Gyopin
 	nybble ICON_WATER     ; Goldeen
 	nybble ICON_WATER     ; Seaking
-	nybble ICON_MON	    ; Skimper
-	nybble ICON_MON	    ; Bawligua
-	nybble ICON_MON	    ; Cryithan
+	nybble ICON_MON	      ; Skimper
+	nybble ICON_MON	      ; Bawligua
+	nybble ICON_MON	      ; Cryithan
 	nybble ICON_HELIX     ; Staryu
 	nybble ICON_HELIX     ; Starmie
-	nybble ICON_WATER	    ; Jagg
+	nybble ICON_WATER	  ; Jagg
 	nybble ICON_MON       ; Mr.Mime
 	nybble ICON_BUG       ; Scyther
 	nybble ICON_BUG       ; Scizor
@@ -180,6 +184,7 @@ MonPartyData:
 	nybble ICON_SNAKE     ; Gyarados
 	nybble ICON_WATER     ; Lapras
 	nybble ICON_MON       ; Ditto
+	nybble ICON_MON       ; Animon
 	nybble ICON_QUADRUPED ; Eevee
 	nybble ICON_QUADRUPED ; Vaporeon
 	nybble ICON_QUADRUPED ; Jolteon
@@ -190,6 +195,7 @@ MonPartyData:
 	nybble ICON_QUADRUPED ; Glaceon
 	nybble ICON_QUADRUPED ; Sylveon
 	nybble ICON_MON       ; Porygon
+	nybble ICON_MON       ; Porygon2
 	nybble ICON_HELIX     ; Omanyte
 	nybble ICON_HELIX     ; Omastar
 	nybble ICON_HELIX     ; Kabuto

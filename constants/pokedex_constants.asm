@@ -54,6 +54,7 @@
 	const DEX_ODDISH     ; 43
 	const DEX_GLOOM      ; 44
 	const DEX_VILEPLUME  ; 45
+	const DEX_BELLOSSOM
 	const DEX_PARAS      ; 46
 	const DEX_PARASECT   ; 47
 	const DEX_VENONAT    ; 48
@@ -78,6 +79,7 @@
 	const DEX_POLIWAG    ; 60
 	const DEX_POLIWHIRL  ; 61
 	const DEX_POLIWRATH  ; 62
+	const DEX_POLITOED
 	const DEX_ABRA       ; 63
 	const DEX_KADABRA    ; 64
 	const DEX_ALAKAZAM   ; 65
@@ -100,6 +102,7 @@
 	const DEX_RAPIDASH   ; 78
 	const DEX_SLOWPOKE   ; 79
 	const DEX_SLOWBRO    ; 80
+	const DEX_SLOWKING
 	const DEX_MAGNEMITE  ; 81
 	const DEX_MAGNETITE
 	const DEX_MAGNETON   ; 82
@@ -159,6 +162,7 @@
 	const DEX_OMEGA      
 	const DEX_HORSEA     ; 116
 	const DEX_SEADRA     ; 117
+	const DEX_KINGDRA
 	const DEX_GYOPIN
 	const DEX_GOLDEEN    ; 118
 	const DEX_SEAKING    ; 119
@@ -184,6 +188,7 @@
 	const DEX_GYARADOS   ; 130
 	const DEX_LAPRAS     ; 131
 	const DEX_DITTO      ; 132
+	const DEX_ANIMON
 	const DEX_EEVEE      ; 133	
 	const DEX_VAPOREON   ; 134
 	const DEX_JOLTEON    ; 135
@@ -194,6 +199,7 @@
 	const DEX_GLACEON
 	const DEX_SYLVEON
 	const DEX_PORYGON    ; 137
+	const DEX_PORYGON2
 	const DEX_OMANYTE    ; 138
 	const DEX_OMASTAR    ; 139
 	const DEX_KABUTO     ; 140

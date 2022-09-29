@@ -197,23 +197,50 @@
 	const BELLSPROUT         ; $BC
 	const WEEPINBELL         ; $BD
 	const VICTREEBEL         ; $BE
-	const MONJA              ; $C1	(new)
-	const PUDI               ; $C4	(new)
-	const SCIZOR             ; $C7	(new)
-	const RHYPERIOR          ; $C8	(new)
-	const ESPEON             ; $C9	(new)
-	const UMBREON            ; $CA	(new)
-	const LEAFEON            ; $CB	(new)
-	const GLACEON            ; $CC	(new)
-	const SYLVEON            ; $CD	(new)
-	const LICKILICKY         ; $CD	(new)
-	const TANGROWTH          ; $CE	(new)
-	const KLEAVOR            ; $CF	(new)
-	const TSUBOMITTO		 ; $D0  (new)
-	const STEELIX			 ; $D1  (new)
-	const BLISSEY			 ; $D2  (new)
-	const HITMONTOP 		 ; $D3  (new)
-	const CROBAT			 ; $D4  (new)
+	const MONJA              ; $BF	(new pokemon start here)
+	const PUDI               ; $C0
+	const SCIZOR             ; $C1
+	const RHYPERIOR          ; $C2
+	const ESPEON             ; $C3
+	const UMBREON            ; $C4
+	const LEAFEON            ; $C5
+	const GLACEON            ; $C6
+	const SYLVEON            ; $C7
+	const LICKILICKY         ; $C8
+	const TANGROWTH          ; $C9
+	const KLEAVOR            ; $CA
+	const TSUBOMITTO		 ; $CB
+	const STEELIX			 ; $CC
+	const BLISSEY			 ; $CD
+	const HITMONTOP 		 ; $CE
+	const CROBAT			 ; $CF
+	const ANIMON             ; $D0
+	const BELLOSSOM          ; $D1
+	const PORYGON2           ; $D2
+	const KINGDRA            ; $D3
+	const POLITOED           ; $D4
+	const SLOWKING           ; $D5
+	; const PARA               ; $D6
+	; const HINAAZU            ; $D7
+	; const BETOBEBII          ; $D8
+	; const MAGNEZONE          ; $D9
+	; const ELECTIVIRE         ; $DA
+	; const MAGMORTAR          ; $DB
+	; const PORYGONZ           ; $DC
+	; const PERRSERKER         ; $DD
+	; const SIRFETCHD          ; $DE
+	; const MR_RIME            ; $DF
+	; const PICHU              ; $E0
+	; const CLEFFA             ; $E1
+	; const IGGLYBUFF          ; $E2
+	; const TYROGUE            ; $E3
+	; const SMOOCHUM           ; $E4
+	; const ELEKID             ; $E5
+	; const MAGBY              ; $E6
+	; const MIME_JR            ; $E7
+	; const HAPPINY            ; $E8
+	; const MUNCHLAX           ; $E9
+	
 
 DEF NUM_POKEMON_INDEXES EQU const_value - 1
 

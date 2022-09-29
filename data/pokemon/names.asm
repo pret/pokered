@@ -207,5 +207,11 @@ MonsterNames::
 	db "BLISSEY@@@"
 	db "HITMONTOP@"
 	db "CROBAT@@@@"
+	db "ANIMON@@@@"
+	db "BELLOSSOM@"
+	db "PORYGON2@@"
+	db "KINGDRA@@@"
+	db "POLITOED@@"
+	db "SLOWKING@@"
 	
 	assert_table_length NUM_POKEMON_INDEXES

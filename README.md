@@ -39,7 +39,7 @@ New areas
 
 QoL Enhancements
 ====
-- All 204 (current) Pokemon can be obtained without the use of trading or glitches.
+- All 210 (current) Pokemon can be obtained without the use of trading or glitches.
 	- This includes Mew!
 - Fast text has no frame delay between text scrolling, doubling the scroll speed. It's also been made the default option, so you don't need to go into the Options menu for it.
 - Trainer DVs are perfect-15s.

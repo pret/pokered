@@ -1,14 +1,14 @@
 	db DEX_PORYGON2 ; pokedex id
 
-	db  65,  60,  70,  40,  75
+	db  85,  80,  90,  60,  95
 	;   hp  atk  def  spd  spc
 
 	db NORMAL, NORMAL ; type
 	db 45 ; catch rate
-	db 130 ; base exp
+	db 180 ; base exp
 
-	INCBIN "gfx/pokemon/front/porygon.pic", 0, 1 ; sprite dimensions
-	dw PorygonPicFront, PorygonPicBack
+	INCBIN "gfx/pokemon/front/porygon2.pic", 0, 1 ; sprite dimensions
+	dw Porygon2PicFront, Porygon2PicBack
 
 	db TACKLE, SHARPEN, CONVERSION, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -21,5 +21,5 @@
 	     TRI_ATTACK,   SUBSTITUTE,   FLASH
 	; end
 
-	db BANK(PorygonPicFront)
-	assert BANK(PorygonPicFront) == BANK(PorygonPicBack)
+	db BANK(Porygon2PicFront)
+	assert BANK(Porygon2PicFront) == BANK(Porygon2PicBack)

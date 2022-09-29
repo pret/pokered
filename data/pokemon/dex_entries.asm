@@ -207,6 +207,12 @@ PokedexEntryPointers:
 	dw BlisseyDexEntry
 	dw HitmontopDexEntry
 	dw CrobatDexEntry
+	dw AnimonDexEntry
+	dw BellossomDexEntry
+	dw Porygon2DexEntry
+	dw KingdraDexEntry
+	dw PolitoedDexEntry
+	dw SlowkingDexEntry
 	assert_table_length NUM_POKEMON_INDEXES
 
 ; string: species name
@@ -1635,7 +1641,7 @@ MonjaDexEntry:
 	text_far _MonjaDexEntry
 	text_end
 	
-	SteelixDexEntry:
+SteelixDexEntry:
     db "IRON SNAKE@"
 	db 30,2
 	dw 8820
@@ -1661,5 +1667,33 @@ CrobatDexEntry:
 	db 5,11
 	dw 1650
 	text_far _CrobatDexEntry
+	text_end 
+	
+Porygon2DexEntry:
+    db "VIRTUAL@"
+	db 2,0
+	dw 720
+	text_far _Porygon2DexEntry
+	text_end
+	
+KingdraDexEntry:
+    db "DRAGON@"
+	db 5,11
+	dw 3350
+	text_far _KingdraDexEntry
+	text_end
+	
+PolitoedDexEntry:
+    db "FROG@"
+	db 3,7
+	dw 750
+	text_far _PolitoedDexEntry
+	text_end 
+	
+SlowkingDexEntry:
+    db "ROYAL@"
+	db 6,7
+	dw 1750
+	text_far _SlowkingDexEntry
 	text_end 
 	
