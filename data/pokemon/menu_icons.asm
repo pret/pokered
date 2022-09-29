@@ -177,7 +177,9 @@ MonPartyData:
 	nybble ICON_MON       ; Jynx
 	nybble ICON_MON       ; Buu
 	nybble ICON_MON       ; Electabuzz
+	nybble ICON_MON       ; Electivire
 	nybble ICON_MON       ; Magmar
+	nybble ICON_MON       ; Magmortar
 	nybble ICON_MON       ; Trampel
 	nybble ICON_QUADRUPED ; Tauros
 	nybble ICON_WATER     ; Magikarp

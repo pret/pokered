@@ -55,6 +55,7 @@
 	const DEX_GLOOM      ; 44
 	const DEX_VILEPLUME  ; 45
 	const DEX_BELLOSSOM
+	; const DEX_PARA
 	const DEX_PARAS      ; 46
 	const DEX_PARASECT   ; 47
 	const DEX_VENONAT    ; 48
@@ -68,6 +69,7 @@
 	const DEX_KONYA 
 	const DEX_MEOWTH     ; 52
 	const DEX_PERSIAN    ; 53
+	; const DEX_PERRSERKER
 	const DEX_PSYDUCK    ; 54
 	const DEX_WEIRDUCK   
 	const DEX_GOLDUCK    ; 55
@@ -106,15 +108,19 @@
 	const DEX_MAGNEMITE  ; 81
 	const DEX_MAGNETITE
 	const DEX_MAGNETON   ; 82
+	; const DEX_MAGNEZONE
 	const DEX_BARUNDA 
 	const DEX_FARFETCHD  ; 83 
 	const DEX_MADAAMU    
+	; const DEX_SIRFETCHD
 	const DEX_BLASTYKE  
 	const DEX_BLASTOISE 
+	; const DEX_HINAAZU
 	const DEX_DODUO      ; 84
 	const DEX_DODRIO     ; 85 
 	const DEX_SEEL       ; 86
 	const DEX_DEWGONG    ; 87
+	; const DEX_BETOBEBII 
 	const DEX_GRIMER     ; 88
 	const DEX_MUK        ; 89
 	const DEX_SHELLDER   ; 90
@@ -173,6 +179,7 @@
 	const DEX_STARMIE    ; 121
 	const DEX_JAGG
 	const DEX_MR_MIME    ; 122
+	; const DEX_MR_RIME
 	const DEX_SCYTHER    ; 123
 	const DEX_SCIZOR
 	const DEX_KLEAVOR
@@ -181,7 +188,9 @@
 	const DEX_JYNX       ; 124
 	const DEX_BUU
 	const DEX_ELECTABUZZ ; 125
+	const DEX_ELECTIVIRE
 	const DEX_MAGMAR     ; 126
+	const DEX_MAGMORTAR
 	const DEX_TRAMPEL    ; 
 	const DEX_TAUROS     ; 128
 	const DEX_MAGIKARP   ; 129
@@ -200,6 +209,7 @@
 	const DEX_SYLVEON
 	const DEX_PORYGON    ; 137
 	const DEX_PORYGON2
+	; const DEX_PORYGONZ
 	const DEX_OMANYTE    ; 138
 	const DEX_OMASTAR    ; 139
 	const DEX_KABUTO     ; 140

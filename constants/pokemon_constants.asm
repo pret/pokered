@@ -220,12 +220,12 @@
 	const KINGDRA            ; $D3
 	const POLITOED           ; $D4
 	const SLOWKING           ; $D5
-	; const PARA               ; $D6
-	; const HINAAZU            ; $D7
-	; const BETOBEBII          ; $D8
-	; const MAGNEZONE          ; $D9
-	; const ELECTIVIRE         ; $DA
-	; const MAGMORTAR          ; $DB
+	const ELECTIVIRE         ; $D6
+	const MAGMORTAR          ; $D7
+	; const PARA               ; $D8
+	; const HINAAZU            ; $D9
+	; const BETOBEBII          ; $DA
+	; const MAGNEZONE          ; $DB
 	; const PORYGONZ           ; $DC
 	; const PERRSERKER         ; $DD
 	; const SIRFETCHD          ; $DE
