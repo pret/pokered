@@ -216,6 +216,8 @@ EvosMovesPointerTable:
 	dw KingdraEvosMoves
 	dw PolitoedEvosMoves
 	dw SlowkingEvosMoves
+	dw ElectivireEvosMoves
+	dw MagmortarEvosMoves
 	assert_table_length NUM_POKEMON_INDEXES
 
 RhydonEvosMoves:
@@ -820,7 +822,7 @@ BarundaEvosMoves:
 
 MagmarEvosMoves:
 ; Evolutions
-	;db EV_ITEM, FIRE_STONE, 1, MAGMORTAR
+	db EV_ITEM, FIRE_STONE, 1, MAGMORTAR
 	db 0
 ; Learnset
 	db 36, LEER
@@ -844,7 +846,7 @@ BuuEvosMoves:
 
 ElectabuzzEvosMoves:
 ; Evolutions
-	;db EV_ITEM, THUNDER_STONE, 1, ELECTIVIRE
+	db EV_ITEM, THUNDER_STONE, 1, ELECTIVIRE
 	db 0
 ; Learnset
 	db 34, THUNDERSHOCK
@@ -2740,3 +2742,28 @@ SlowkingEvosMoves:
 	db 44, AMNESIA
 	db 55, PSYCHIC_M
 	db 0
+
+ElectivireEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 34, THUNDERSHOCK
+	db 37, SCREECH
+	db 42, THUNDERPUNCH
+	db 49, LIGHT_SCREEN
+	db 54, THUNDER
+	db 58, LOW_KICK
+	db 0
+	
+MagmortarEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 36, LEER
+	db 39, CONFUSE_RAY
+	db 43, FIRE_PUNCH
+	db 48, SMOKESCREEN
+	db 52, SMOG
+	db 55, FLAMETHROWER
+	db 0
+	

@@ -213,6 +213,8 @@ PokedexEntryPointers:
 	dw KingdraDexEntry
 	dw PolitoedDexEntry
 	dw SlowkingDexEntry
+	dw ElectivireDexEntry
+	dw MagmortarDexEntry
 	assert_table_length NUM_POKEMON_INDEXES
 
 ; string: species name
@@ -1696,4 +1698,18 @@ SlowkingDexEntry:
 	dw 1750
 	text_far _SlowkingDexEntry
 	text_end 
+	
+ElectivireDexEntry:
+    db "THUNDER@"
+	db 5,11
+	dw 3060
+	text_far _ElectivireDexEntry
+	text_end
+	
+MagmortarDexEntry:
+    db "BLAST@"
+	db 5,3
+	dw 1500
+	text_far _MagmortarDexEntry
+	text_end
 	

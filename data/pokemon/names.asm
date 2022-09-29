@@ -213,5 +213,7 @@ MonsterNames::
 	db "KINGDRA@@@"
 	db "POLITOED@@"
 	db "SLOWKING@@"
+	db "ELECTIVIRE"
+	db "MAGMORTAR@"
 	
 	assert_table_length NUM_POKEMON_INDEXES
