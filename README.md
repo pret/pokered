@@ -18,18 +18,18 @@ New Types:
 		- this (and Bite) was done to ensure the original Kanto Pokemon were unaltered in any way
 
 Type Matchups for Steel and Dark for reference:
-	- Steel...
-		- Attacks are Super Effective vs: Rock, Fairy
-		- Attacks are Not Very Effective vs: Water, Electric
-		- Attacks do no Damage vs: Steel
-		- Pokemon are weak to: Water, Electric
-		- Pokemon resist: Poison, Rock, Fighting, Fairy
-		- Pokemon are Immune To: Steel
-	- Dark...
-		- Attacks are Super Effective vs: Ghost, Psychic, Dark
-		- Attacks are Not Very Effective vs: Normal, Fairy 
-		- Pokemon are Weak to: Normal, Dark, Fairy 
-		- Pokemon resist: Ghost, Psychic
+- Steel...
+	- Attacks are Super Effective vs: Rock, Fairy
+	- Attacks are Not Very Effective vs: Water, Electric
+	- Attacks do no Damage vs: Steel
+	- Pokemon are weak to: Water, Electric
+	- Pokemon resist: Poison, Rock, Fighting, Fairy
+	- Pokemon are Immune To: Steel
+- Dark...
+	- Attacks are Super Effective vs: Ghost, Psychic, Dark
+	- Attacks are Not Very Effective vs: Normal, Fairy 
+	- Pokemon are Weak to: Normal, Dark, Fairy 
+	- Pokemon resist: Ghost, Psychic
 
 New Items:
 ====
