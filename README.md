@@ -18,18 +18,18 @@ New Types:
 		- this (and Bite) was done to ensure the original Kanto Pokemon were unaltered in any way
 
 Type Matchups for Steel and Dark for reference:
-	Steel...
-	- Attacks are Super Effective vs: Rock, Fairy
-	- Attacks are Not Very Effective vs: Water, Electric
-	- Attacks do no Damage vs: Steel
-	- Pokemon are weak to: Water, Electric
-	- Pokemon resist: Poison, Rock, Fighting, Fairy
-	- Pokemon are Immune To: Steel
-	Dark...
-	- Attacks are Super Effective vs: Ghost, Psychic, Dark
-	- Attacks are Not Very Effective vs: Normal, Fairy 
-	- Pokemon are Weak to: Normal, Dark, Fairy 
-	- Pokemon resist: Ghost, Psychic
+	- Steel...
+		- Attacks are Super Effective vs: Rock, Fairy
+		- Attacks are Not Very Effective vs: Water, Electric
+		- Attacks do no Damage vs: Steel
+		- Pokemon are weak to: Water, Electric
+		- Pokemon resist: Poison, Rock, Fighting, Fairy
+		- Pokemon are Immune To: Steel
+	- Dark...
+		- Attacks are Super Effective vs: Ghost, Psychic, Dark
+		- Attacks are Not Very Effective vs: Normal, Fairy 
+		- Pokemon are Weak to: Normal, Dark, Fairy 
+		- Pokemon resist: Ghost, Psychic
 
 New Items:
 ====
@@ -38,16 +38,19 @@ New Items:
 Improved areas
 ====
 - Rock Tunnel has a more workable map, now being easier to go through and having new areas to explore. Includes a way to get renewable fossils, items, and other interesting bits and pieces. Overall, it makes Flash much more rewarding to bring, showing you where the items and content are instead of being an inconvenience. 
-- Diglett's Cave has a more detailed map, including a platform that has a static encounter. (Prototype music to be added later!)
+- Diglett's Cave has a more detailed map, including a platform that has a static encounter.
 - Route 25 has been altered slightly to make reference to Bill's Lighthouse from the anime!
 - Cinnabar Island is a lot bigger, and has a new location added to it.
-- Pokemon Tower was shortened as its old length was excessive
-- Silph Co's pathing was completely overhauled to make navigating it less tedious
+- Pokemon Tower was shortened as its old length was excessive.
+- Silph Co's pathing was completely overhauled to make navigating it less tedious.
+- Viridian Gym now has a new area once you make Giovanni leave.
+- The S.S. Anne port has a little surprise for the adventurous...
 
 New areas
 ====
 - Celadon University is just north of Celadon.
-	- This area also contains a Tradebacks NPC to let you get trade evolutions.
+	- This is a reference to a Magikarp event from July 1998, and includes the lore from it and other areas of Pokemon's early worldbuilding.
+	- This area also contains a Trade-back NPC to let you get trade evolutions.
 	- There are also some trainers here you can battle infinitely for EXP and money.
 - Citrine City is a new island city that can be accessed in the postgame.
 - Underwater Tunnel connects Route 25 and Route 10.
@@ -56,8 +59,7 @@ New areas
 
 QoL Enhancements
 ====
-- All 210 (current) Pokemon can be obtained without the use of trading or glitches.
-	- This includes Mew!
+- All 210 (current) Pokemon can be obtained without the use of trading or glitches, including Mew!
 - Fast text has no frame delay between text scrolling, doubling the scroll speed. It's also been made the default option, so you don't need to go into the Options menu for it.
 - Trainer DVs are perfect-15s.
 - The protagonist is referred to in a gender neutral manner.
@@ -75,12 +77,12 @@ QoL Enhancements
 	- 3x Magikarp/Poliwag/Bird/Diglett/Rattata/Jigglypuff now gives 200 coins (used to be 15)
 	- 3x BAR now gives 500 coins (used to be 100)
 	- 3x 7s now gives 999 coins (used to be 300)
-- The Route 5-6 underground path contains a shortcut to Celadon City. 
-	- This allows you to skip Route 9 and Rock Tunnel, making them optional areas and opening up central Kanto.
 - Game Corner prizes have been altered;
 	- Version parity is done across prizes, using Blue's superior prices.
 	- New prizes across both versions include; Cubone, Blastyke, and Cactus.
 	- The Moon Stone is available over TM23 (Dragon Rage). Dragon Rage has been moved to Celadon Mart, over Take Down, which can still be obtained in Silph Co.
+- The Route 5-6 underground path contains a shortcut to Celadon City. 
+	- This allows you to skip Route 9 and Rock Tunnel, making them optional areas and opening up central Kanto.
 - Press A beside surfable water, strength boulders or cut trees to use the HMs without needing to go into the Party menu.
 - Running Shoes by holding B. Also works with the bike! Surf speed is also doubled.
 - Bag has capacity for 30 items.
