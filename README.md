@@ -15,7 +15,21 @@ New Types:
 	- note that Dark and Steel use their type effectiveness from the SW97 demo
 	- note that Bite is still Normal-type
 	- note that the Magnemite, Cleffa, Mime Jr, and Igglybuff lines are not Steel or Fairy-type, respectively
-		- this (and Bite) was done to ensure the original Kanto Pokemon were unaltered in any way 
+		- this (and Bite) was done to ensure the original Kanto Pokemon were unaltered in any way
+
+Type Matchups for Steel and Dark for reference:
+	Steel...
+	- Attacks are Super Effective vs: Rock, Fairy
+	- Attacks are Not Very Effective vs: Water, Electric
+	- Attacks do no Damage vs: Steel
+	- Pokemon are weak to: Water, Electric
+	- Pokemon resist: Poison, Rock, Fighting, Fairy
+	- Pokemon are Immune To: Steel
+	Dark...
+	- Attacks are Super Effective vs: Ghost, Psychic, Dark
+	- Attacks are Not Very Effective vs: Normal, Fairy 
+	- Pokemon are Weak to: Normal, Dark, Fairy 
+	- Pokemon resist: Ghost, Psychic
 
 New Items:
 ====
@@ -27,6 +41,8 @@ Improved areas
 - Diglett's Cave has a more detailed map, including a platform that has a static encounter. (Prototype music to be added later!)
 - Route 25 has been altered slightly to make reference to Bill's Lighthouse from the anime!
 - Cinnabar Island is a lot bigger, and has a new location added to it.
+- Pokemon Tower was shortened as its old length was excessive
+- Silph Co's pathing was completely overhauled to make navigating it less tedious
 
 New areas
 ====
@@ -36,6 +52,7 @@ New areas
 - Citrine City is a new island city that can be accessed in the postgame.
 - Underwater Tunnel connects Route 25 and Route 10.
 - Cinnabar Volcano is a new area that houses Moltres, allowing it to be obtained before Victory Road.
+- Silph Co. holds a special challenge for Pokemon League Champions...
 
 QoL Enhancements
 ====
