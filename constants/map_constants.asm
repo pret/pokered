@@ -218,7 +218,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	mapconst VERMILION_TRADE_HOUSE,          4,  4 ; $C4
 	mapconst DIGLETTS_CAVE,                 18, 20 ; $C5
 	mapconst VICTORY_ROAD_3F,                9, 15 ; $C6
-	mapconst ROCKET_HIDEOUT_B1F,            14, 15 ; $C7
+	mapconst ROCKET_HIDEOUT_B1F,            14, 11 ; $C7, now part of viridian gym
 	mapconst ROCKET_HIDEOUT_B2F,            14, 15 ; $C8
 	mapconst ROCKET_HIDEOUT_B3F,            14, 15 ; $C9
 	mapconst ROCKET_HIDEOUT_B4F,            12, 15 ; $CA

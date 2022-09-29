@@ -2,12 +2,8 @@ _GiovanniPreBattleText::
 	text "Fwahahaha! This is"
 	line "my hideout!"
 
-	para "I planned to"
-	line "resurrect TEAM"
-	cont "ROCKET here!"
-
-	para "But, you have"
-	line "caught me again!"
+	para "Once again, you"
+	line "thrwart me!"
 	cont "So be it! This"
 	cont "time, I'm not"
 	cont "holding back!"
