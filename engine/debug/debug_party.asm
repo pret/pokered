@@ -31,7 +31,7 @@ ENDC
 	db ELECTIVIRE, 56
 	db PORYGON2, 57
 IF DEF(_DEBUG)
-	db POLIWHIRL, 16 ; to test trade evos @ celadon uni - PvK
+	db SCYTHER, 16
 ENDC
 	db -1 ; end
 
@@ -143,7 +143,7 @@ DebugItemsList:
 	db FULL_RESTORE, 99
 	db MAX_REPEL, 99
 	db ESCAPE_ROPE, 99
-	db RARE_CANDY, 99
+	db BLKAUGERITE, 99
 	db MASTER_BALL, 99
 	db SECRET_KEY, 1
 	db CARD_KEY, 1

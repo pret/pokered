@@ -60,7 +60,7 @@ ItemUsePtrTable:
 	dw UnusableItem      ; DOME_FOSSIL
 	dw UnusableItem      ; HELIX_FOSSIL
 	dw UnusableItem      ; SECRET_KEY
-	dw ItemUseEvoStone   ; SUN_STONE
+	dw ItemUseEvoStone   ; HEART_STONE
 	dw UnusableItem      ; BIKE_VOUCHER
 	dw ItemUseXAccuracy  ; X_ACCURACY
 	dw ItemUseEvoStone   ; LEAF_STONE
@@ -114,8 +114,10 @@ ItemUsePtrTable:
 	dw UnusableItem      ; FLOOR_10F
 	dw UnusableItem      ; FLOOR_11F
 	dw UnusableItem      ; FLOOR_14F
-	dw ItemUseEvoStone   ; SHINY_STONE
 	dw ItemUseEvoStone   ; ICE_STONE
+	dw ItemUseEvoStone   ; PROTECTOR
+	dw ItemUseEvoStone   ; POISON_STONE
+	dw ItemUseEvoStone   ; BLKAUGERITE
 
 ItemUseBall:
 

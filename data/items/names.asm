@@ -43,7 +43,7 @@ ItemNames::
 	li "DOME FOSSIL"
 	li "HELIX FOSSIL"
 	li "SECRET KEY"
-	li "SUN STONE"
+	li "HEART STONE"
 	li "BIKE VOUCHER"
 	li "X ACCURACY"
 	li "LEAF STONE"
@@ -98,6 +98,8 @@ ItemNames::
 	li "10F"
 	li "11F"
 	li "B4F"
-	li "SHINY STONE"
 	li "ICE STONE"
+	li "PROTECTOR"
+	li "POISON STONE"
+	li "BLKAUGERITE"
 	assert_list_length NUM_ITEMS + NUM_FLOORS

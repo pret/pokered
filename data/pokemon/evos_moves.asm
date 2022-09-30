@@ -223,6 +223,7 @@ EvosMovesPointerTable:
 RhydonEvosMoves:
 ; Evolutions
 	db EV_TRADE, 1, RHYPERIOR
+	db EV_ITEM, PROTECTOR, 1, RHYPERIOR 
 	db 0
 ; Learnset
 	db 30, STOMP
@@ -519,7 +520,7 @@ GastlyEvosMoves:
 ScytherEvosMoves:
 ; Evolutions
 	db EV_LEVEL, 41, SCIZOR
-	db EV_ITEM, MOON_STONE, 1, KLEAVOR
+	db EV_ITEM, BLKAUGERITE, 1, KLEAVOR
 	db 0
 ; Learnset
 	db 17, LEER
@@ -654,7 +655,7 @@ PidgeyEvosMoves:
 SlowpokeEvosMoves:
 ; Evolutions
 	db EV_LEVEL, 37, SLOWBRO
-	db EV_TRADE, 1, SLOWKING
+	db EV_ITEM, HEART_STONE, 1, SLOWKING
 	db 0
 ; Learnset
 	db 18, DISABLE
@@ -1442,11 +1443,11 @@ EeveeEvosMoves:
 	db EV_ITEM, FIRE_STONE, 1, FLAREON
 	db EV_ITEM, THUNDER_STONE, 1, JOLTEON
 	db EV_ITEM, WATER_STONE, 1, VAPOREON
-	db EV_ITEM, SUN_STONE, 1, ESPEON
-	db EV_ITEM, MOON_STONE, 1, UMBREON
+	db EV_ITEM, HEART_STONE, 1, ESPEON
+	db EV_ITEM, POISON_STONE, 1, UMBREON
 	db EV_ITEM, LEAF_STONE, 1, LEAFEON
 	db EV_ITEM, ICE_STONE, 1, GLACEON
-	db EV_ITEM, SHINY_STONE, 1, SYLVEON
+	db EV_ITEM, MOON_STONE, 1, SYLVEON
 	db 0
 ; Learnset
 	db 8, SAND_ATTACK
@@ -1550,7 +1551,7 @@ ParasEvosMoves:
 PoliwhirlEvosMoves:
 ; Evolutions
 	db EV_ITEM, WATER_STONE, 1, POLIWRATH
-	db EV_TRADE, 1, POLITOED
+	db EV_ITEM, HEART_STONE, 1, POLITOED
 	db 0
 ; Learnset
 	db 16, HYPNOSIS
@@ -1930,7 +1931,7 @@ PersianEvosMoves:
 
 MarowakEvosMoves:
 ; Evolutions
-	db EV_LEVEL, 40, GUARDIA
+	db EV_ITEM, HEART_STONE, 1, GUARDIA
 	db 0
 ; Learnset
 	db 10, BONE_CLUB
@@ -2189,7 +2190,7 @@ RaticateEvosMoves:
 NidorinoEvosMoves:
 ; Evolutions
 	db EV_ITEM, MOON_STONE, 1, NIDOREIGN
-	db EV_LEVEL, 36, NIDOKING
+	db EV_ITEM, POISON_STONE, 1, NIDOKING
 	db 0
 ; Learnset
 	db 8, HORN_ATTACK
@@ -2203,7 +2204,7 @@ NidorinoEvosMoves:
 NidorinaEvosMoves:
 ; Evolutions
 	db EV_ITEM, MOON_STONE, 1, NIDOREIGN
-	db EV_LEVEL, 36, NIDOQUEEN
+	db EV_ITEM, POISON_STONE, 1, NIDOQUEEN
 	db 0
 ; Learnset
 	db 8, SCRATCH
@@ -2407,8 +2408,8 @@ OddishEvosMoves:
 
 GloomEvosMoves:
 ; Evolutions
-	db EV_ITEM, LEAF_STONE, 1, VILEPLUME
-	db EV_ITEM, SUN_STONE, 1, BELLOSSOM
+	db EV_ITEM, POISON_STONE, 1, VILEPLUME
+	db EV_ITEM, LEAF_STONE, 1, BELLOSSOM
 	db 0
 ; Learnset
 	db 15, POISONPOWDER
@@ -2445,7 +2446,7 @@ BellsproutEvosMoves:
 WeepinbellEvosMoves:
 ; Evolutions
 	db EV_ITEM, LEAF_STONE, 1, VICTREEBEL
-	db EV_ITEM, SUN_STONE, 1, TSUBOMITTO
+	db EV_ITEM, POISON_STONE, 1, TSUBOMITTO
 	db 0
 ; Learnset
 	db 13, WRAP

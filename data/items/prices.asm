@@ -43,7 +43,7 @@ ItemPrices::
 	bcd3 0     ; DOME_FOSSIL
 	bcd3 0     ; HELIX_FOSSIL
 	bcd3 0     ; SECRET_KEY
-	bcd3 2100  ; SUN_STONE
+	bcd3 2100  ; HEART_STONE
 	bcd3 0     ; BIKE_VOUCHER
 	bcd3 950   ; X_ACCURACY
 	bcd3 2100  ; LEAF_STONE
@@ -98,6 +98,8 @@ ItemPrices::
 	bcd3 0     ; FLOOR_10F
 	bcd3 0     ; FLOOR_11F
 	bcd3 0     ; FLOOR_B4F
-	bcd3 2100  ; SHINY_STONE
 	bcd3 2100  ; ICE_STONE
+	bcd3 3000  ; PROTECTOR
+	bcd3 2100  ; POISON_STONE
+	bcd3 2100  ; BLKAUGERITE
 	assert_table_length NUM_ITEMS + NUM_FLOORS
