@@ -33,7 +33,8 @@ Type Matchups for Steel and Dark for reference:
 
 New Items:
 ====
-- The Sun, Ice, and Shiny Stones have been added.
+- The Sun, Ice, Poison and Heart Stones have been added.
+- The Protector and Black Augurite evolution items have been added.
 	
 Improved areas
 ====
@@ -59,7 +60,7 @@ New areas
 
 QoL Enhancements
 ====
-- All 210 (current) Pokemon can be obtained without the use of trading or glitches, including Mew!
+- All 212 (current) Pokemon can be obtained without the use of trading or glitches, including Mew!
 - Fast text has no frame delay between text scrolling, doubling the scroll speed. It's also been made the default option, so you don't need to go into the Options menu for it.
 - Trainer DVs are perfect-15s.
 - The protagonist is referred to in a gender neutral manner.
@@ -79,13 +80,14 @@ QoL Enhancements
 	- 3x 7s now gives 999 coins (used to be 300)
 - Game Corner prizes have been altered;
 	- Version parity is done across prizes, using Blue's superior prices.
-	- New prizes across both versions include; Cubone, Blastyke, and Cactus.
+	- New prizes across both versions include: Cubone, Blastyke, and Cactus.
 	- The Moon Stone is available over TM23 (Dragon Rage). Dragon Rage has been moved to Celadon Mart, over Take Down, which can still be obtained in Silph Co.
 - The Route 5-6 underground path contains a shortcut to Celadon City. 
 	- This allows you to skip Route 9 and Rock Tunnel, making them optional areas and opening up central Kanto.
 - Press A beside surfable water, strength boulders or cut trees to use the HMs without needing to go into the Party menu.
 - Running Shoes by holding B. Also works with the bike! Surf speed is also doubled.
 - Bag has capacity for 30 items.
+- Spinner tiles move faster
 
 Bug Fixes
 ====
@@ -119,6 +121,10 @@ Many non-multiplayer, non-battle related bugs have been fixed. The aforementione
 - Weird behaviour when going to 11F in Silph Co. and forcing a player to leave despite not moving is fixed.
 - Fixed weirdness in Pokemon Tower where saving Mr. Fuji won't immediately let you leave. Also fixed coord termination on 2F which could cause some terribleness.
 and more!
+
+Known Bugs
+====
+- Only portions of spinner tiles animate 
 
 Credits
 ====
