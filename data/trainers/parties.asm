@@ -730,7 +730,7 @@ ChannelerData:
 	db 23, GASTLY, GASTLY, 0
 ; Unused
 	db 24, GASTLY, 0
-; Pokémon Tower 4F
+; Pokémon Tower 4F, now unused 
 	db 22, GASTLY, 0
 ; Unused
 	db 24, GASTLY, 0
