@@ -20,7 +20,7 @@ LoadSpinnerArrowTiles::
 	ld de, 6 * 4
 	add hl, de
 .alternateGraphics
-	ld a, $4
+	ld a, 1
 	ld bc, $0
 .loop
 	push af
