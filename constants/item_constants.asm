@@ -112,7 +112,7 @@ DEF NUM_ITEMS EQU const_value - 1
 	const ICE_STONE     ; $62
 	const PROTECTOR		; $63
 	const POISON_STONE  ; $64
-	const BLKAUGERITE   ; $65
+	const BLK_AUGURITE   ; $65
 DEF NUM_FLOORS EQU const_value - 1 - NUM_ITEMS
 
 	const_next $C4

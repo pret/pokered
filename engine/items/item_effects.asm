@@ -117,7 +117,7 @@ ItemUsePtrTable:
 	dw ItemUseEvoStone   ; ICE_STONE
 	dw ItemUseEvoStone   ; PROTECTOR
 	dw ItemUseEvoStone   ; POISON_STONE
-	dw ItemUseEvoStone   ; BLKAUGERITE
+	dw ItemUseEvoStone   ; BLK_AUGURITE
 
 ItemUseBall:
 

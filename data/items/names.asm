@@ -101,5 +101,5 @@ ItemNames::
 	li "ICE STONE"
 	li "PROTECTOR"
 	li "POISON STONE"
-	li "BLKAUGERITE"
+	li "BLK AUGURITE"
 	assert_list_length NUM_ITEMS + NUM_FLOORS

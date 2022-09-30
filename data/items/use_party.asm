@@ -40,5 +40,5 @@ UsableItems_PartyMenu:
 	db ICE_STONE
 	db PROTECTOR
 	db POISON_STONE
-	db BLKAUGERITE
+	db BLK_AUGURITE
 	db -1 ; end

@@ -83,4 +83,22 @@ KeyItemFlags:
 	dbit FALSE ; MAX_ETHER
 	dbit FALSE ; ELIXER
 	dbit FALSE ; MAX_ELIXER
-	end_bit_array NUM_ITEMS
+	dbit TRUE  ; FLOOR_B2F
+	dbit TRUE  ; FLOOR_B1F
+	dbit TRUE  ; FLOOR_1F
+	dbit TRUE  ; FLOOR_2F
+	dbit TRUE  ; FLOOR_3F
+	dbit TRUE  ; FLOOR_4F
+	dbit TRUE ; FLOOR_5F
+	dbit TRUE  ; FLOOR_6F
+	dbit TRUE  ; FLOOR_7F
+	dbit TRUE  ; FLOOR_8F
+	dbit TRUE  ; FLOOR_9F
+	dbit TRUE  ; FLOOR_10F
+	dbit TRUE  ; FLOOR_11F
+	dbit TRUE  ; FLOOR_B4F
+	dbit FALSE ; ICE_STONE
+	dbit FALSE ; PROTECTOR
+	dbit FALSE ; POISON_STONE
+	dbit FALSE ; BLK_AUGURITE
+	end_bit_array NUM_ITEMS + NUM_FLOORS

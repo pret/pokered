@@ -222,7 +222,6 @@ EvosMovesPointerTable:
 
 RhydonEvosMoves:
 ; Evolutions
-	db EV_TRADE, 1, RHYPERIOR
 	db EV_ITEM, PROTECTOR, 1, RHYPERIOR 
 	db 0
 ; Learnset
@@ -300,12 +299,8 @@ NidokingEvosMoves:
 	db 0
 ; Learnset
 	db 8, HORN_ATTACK
-	db 12, DOUBLE_KICK
-	db 19, POISON_STING
-	db 26, FOCUS_ENERGY
-	db 34, FURY_ATTACK
-	db 41, THRASH
-	db 46, HORN_DRILL
+	db 14, POISON_STING
+	db 23, THRASH
 	db 0
 
 SlowbroEvosMoves:
@@ -406,12 +401,8 @@ NidoqueenEvosMoves:
 	db 0
 ; Learnset
 	db 8, SCRATCH
-	db 12, DOUBLE_KICK
-	db 19, POISON_STING
-	db 25, TAIL_WHIP
-	db 34, BITE
-	db 41, BODY_SLAM
-	db 46, FURY_SWIPES
+	db 14, POISON_STING
+	db 23, BODY_SLAM
 	db 0
 
 CuboneEvosMoves:
@@ -520,7 +511,7 @@ GastlyEvosMoves:
 ScytherEvosMoves:
 ; Evolutions
 	db EV_LEVEL, 41, SCIZOR
-	db EV_ITEM, BLKAUGERITE, 1, KLEAVOR
+	db EV_ITEM, BLK_AUGURITE, 1, KLEAVOR
 	db 0
 ; Learnset
 	db 17, LEER

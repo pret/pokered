@@ -101,5 +101,5 @@ ItemPrices::
 	bcd3 2100  ; ICE_STONE
 	bcd3 3000  ; PROTECTOR
 	bcd3 2100  ; POISON_STONE
-	bcd3 2100  ; BLKAUGERITE
+	bcd3 2100  ; BLK_AUGURITE
 	assert_table_length NUM_ITEMS + NUM_FLOORS
