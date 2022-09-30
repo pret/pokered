@@ -10,7 +10,7 @@
 	INCBIN "gfx/pokemon/front/nidoqueen.pic", 0, 1 ; sprite dimensions
 	dw NidoqueenPicFront, NidoqueenPicBack
 
-	db EARTHQUAKE, ROCK_SLIDE, SURF, BLIZZARD ; level 1 learnset - used for trainers
+	db TACKLE, SCRATCH, TAIL_WHIP, BODY_SLAM ; level 1 learnset
 	db GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset
