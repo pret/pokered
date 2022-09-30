@@ -719,12 +719,12 @@ ChannelerData:
 	db 23, GASTLY, GASTLY, 0
 	db 24, GASTLY, 0
 ; Pokémon Tower 3F
-	db 23, MIKON, 0
-	db 24, GASTLY, 0
+	db 23, MIKON, GASTLY 0
+	db 24, VULPIX, 0
 ; Unused
 	db 24, HAUNTER, 0
 ; Pokémon Tower 3F
-	db 22, GASTLY, 0
+	db 25, GASTLY, HAUNTER, 0
 ; Pokémon Tower 4F, now unused 
 	db 24, GASTLY, 0
 	db 23, GASTLY, GASTLY, 0
