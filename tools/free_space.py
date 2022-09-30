@@ -28,7 +28,7 @@ def main():
 	if print_bank not in {'all', 'none'}:
 		try:
 			print_bank = (int(print_bank[2:], 16)
-				if print_bank.startswith('0x') or print_bank.startswith('0X')
+				if print_bank.startswith(('0x', '0X'))
 				else int(print_bank))
 		except ValueError:
 			error = f'Error: invalid BANK: {print_bank}'
