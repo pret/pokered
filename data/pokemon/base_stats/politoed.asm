@@ -10,7 +10,7 @@
 	INCBIN "gfx/pokemon/front/politoed.pic", 0, 1 ; sprite dimensions
 	dw PolitoedPicFront, PolitoedPicBack
 
-	db HYPNOSIS, WATER_GUN, BUBBLE, NO_MOVE ; level 1 learnset
+	db HYPNOSIS, AMNESIA, SURF, BODY_SLAM ; level 1 learnset - used for trainers
 	db GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset

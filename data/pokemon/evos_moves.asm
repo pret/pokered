@@ -2627,6 +2627,7 @@ TsubomittoEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset 
+	db 40, LOVELY_KISS
 	db 48, SOLARBEAM
 	db 0
 

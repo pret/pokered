@@ -10,7 +10,7 @@
 	INCBIN "gfx/pokemon/front/nidoreign.pic", 0, 1 ; sprite dimensions
 	dw NidoreignPicFront, NidoreignPicBack
 
-	db SCRATCH, GROWL, TAIL_WHIP, BITE ; level 1 learnset
+	db BODY_SLAM, ROCK_SLIDE, THUNDERBOLT, BLIZZARD ; level 1 learnset - used for trainers
 	db GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset
