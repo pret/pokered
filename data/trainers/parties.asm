@@ -554,7 +554,8 @@ RocketData:
 ; Game Corner
 	db 20, RATICATE, ZUBAT, 0
 ; Rocket Hideout B1F
-	db 21, DROWZEE, MACHOP, 0
+	db 42, HYPNO, WEEZING, ARBOK, 0
+; Rocket Hideout B1F - all now unused
 	db 21, RATICATE, RATICATE, 0
 	db 20, GRIMER, KOFFING, KOFFING, 0
 	db 19, RATTATA, RATICATE, RATICATE, RATTATA, 0

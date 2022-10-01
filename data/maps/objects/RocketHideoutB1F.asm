@@ -13,5 +13,6 @@ RocketHideoutB1F_Object:
 	object_event  8, 16, SPRITE_PAPER, STAY, RIGHT, 4
 	object_event 17, 22, SPRITE_POKE_BALL, STAY, NONE, 5, TM_EARTHQUAKE
 	object_event  7, 22, SPRITE_POKE_BALL, STAY, NONE, 6, PROTECTOR
+	object_event 6,  6, SPRITE_ROCKET, STAY, LEFT, 7, OPP_ROCKET, 8
 
 	def_warps_to ROCKET_HIDEOUT_B1F

@@ -80,9 +80,12 @@ _RocketHideout1Text3::
 	cont "the floor..."
 	
 	para "PROTECTOR: ¥3,000"
+
 	para "GUARD SPEC: ¥4,200"
+
 	para "DEVELOPMENT OF"
 	line "TM26: ¥15,000"
+
 	para "Business: ¥100,000"
 	
 	para "It keeps going..."
@@ -99,4 +102,25 @@ _RocketHideout1Text4::
 	
 	para "1977?!"
 	
+	done
+
+_RocketHideout1BattleText2::
+	text "Hey! Intruders"
+	line "aren't welcome in"
+	cont "the BOSS's room!"
+
+	para "I'm his last"
+	line "line of defence!"
+	done
+
+_RocketHideout1EndBattleText2::
+	text "Oww!"
+	line "Beaten!"
+	prompt
+
+_RocketHideout1AfterBattleTxt2::
+	text "What?! Are you"
+	line "serious? TEAM"
+	cont "ROCKET is"
+	cont "disbanding?"
 	done

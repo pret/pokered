@@ -1,4 +1,4 @@
-RocketHideoutB1F_Script: ;all trainer references are commented out.
+RocketHideoutB1F_Script:
 	;call RocketHideout1Script_44be0
 	call EnableAutoTextBoxDrawing
 	ld hl, RocketHideout1TrainerHeaders
@@ -32,9 +32,9 @@ RocketHideoutB1F_Script: ;all trainer references are commented out.
 
 RocketHideoutB1F_ScriptPointers:
 	dw RocketHideout1Script0
-	dw RocketHideout1Script4
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
+	dw RocketHideout1Script4
 
 RocketHideout1Script0:
 	ld a, [wYCoord]
@@ -76,6 +76,7 @@ RocketHideout1ArrowMovement1:
 	db -1 ; end
 
 RocketHideout1ArrowMovement2:
+	db D_UP, 9
 	db D_LEFT, 4
 	db -1 ; end
 
@@ -88,14 +89,18 @@ RocketHideout1ArrowMovement4:
 	db -1 ; end
 
 RocketHideout1ArrowMovement5:
+	db D_RIGHT, 3
+	db D_DOWN, 2
 	db D_RIGHT, 2
 	db -1 ; end
 
 RocketHideout1ArrowMovement7:
+	db D_RIGHT, 3
 	db D_DOWN, 2
 	db -1 ; end
 
 RocketHideout1ArrowMovement8:
+	db D_UP, 1
 	db D_RIGHT, 2
 	db -1 ; end
 
@@ -104,7 +109,7 @@ RocketHideout1ArrowMovement9:
 	db -1 ; end
 
 RocketHideout1ArrowMovement10:
-	db D_RIGHT, 2
+	db D_RIGHT, 5
 	db -1 ; end
 
 RocketHideout1ArrowMovement11:
@@ -112,11 +117,13 @@ RocketHideout1ArrowMovement11:
 	db -1 ; end
 
 RocketHideout1ArrowMovement12:
+	db D_UP, 1
+	db D_RIGHT, 2
 	db D_UP, 2
 	db -1 ; end
 
 RocketHideout1ArrowMovement13:
-	db D_UP, 2
+	db D_UP, 3
 	db -1 ; end
 
 RocketHideout1Script4:
@@ -136,13 +143,14 @@ RocketHideoutB1F_TextPointers:
 	dw RocketHideout1Text2
 	dw RocketHideout1Text3
 	dw RocketHideout1Text4
+	dw RocketHideout1Text5
 	dw PickUpItemText
 	dw PickUpItemText
 
 RocketHideout1TrainerHeaders:
 	def_trainers
-;RocketHideout1TrainerHeader0:
-;	trainer EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_0, 3, RocketHideout1BattleText2, RocketHideout1EndBattleText2, RocketHideout1AfterBattleTxt2
+RocketHideout1TrainerHeader0:
+	trainer EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_0, 3, RocketHideout1BattleText2, RocketHideout1EndBattleText2, RocketHideout1AfterBattleTxt2
 ;RocketHideout1TrainerHeader1:
 ;	trainer EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_1, 2, RocketHideout1BattleText3, RocketHideout1EndBattleText3, RocketHideout1AfterBattleTxt3
 ;RocketHideout1TrainerHeader2:
@@ -167,4 +175,22 @@ RocketHideout1Text3:
 
 RocketHideout1Text4:
 	text_far _RocketHideout1Text4
+	text_end
+
+RocketHideout1Text5:
+	text_asm
+	ld hl, RocketHideout1TrainerHeader0
+	call TalkToTrainer
+	jp TextScriptEnd
+
+RocketHideout1BattleText2:
+	text_far _RocketHideout1BattleText2
+	text_end
+
+RocketHideout1EndBattleText2:
+	text_far _RocketHideout1EndBattleText2
+	text_end
+
+RocketHideout1AfterBattleTxt2:
+	text_far _RocketHideout1AfterBattleTxt2
 	text_end
