@@ -3,13 +3,13 @@ PokemonTower6FWildMons:
 	db 21, GASTLY
 	db 22, GASTLY
 	db 23, GASTLY
-	db 20, MIKON
+	db 20, VULPIX
 	db 23, VULPIX
-	db 24, VULPIX
+	db 24, CUBONE
 	db 26, HAUNTER
 	db 22, CUBONE
-	db 24, CUBONE
-	db 28, HAUNTER
+	db 27, HAUNTER
+	db 28, BARUNDA
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate
