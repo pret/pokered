@@ -148,9 +148,9 @@ RocketHideoutB1F_TextPointers:
 	dw RocketHideout1Text2
 	dw RocketHideout1Text3
 	dw RocketHideout1Text4
-	dw RocketHideout1Text5
 	dw PickUpItemText
 	dw PickUpItemText
+	dw RocketHideout1Text7
 
 RocketHideout1TrainerHeaders:
 	def_trainers
@@ -182,7 +182,7 @@ RocketHideout1Text4:
 	text_far _RocketHideout1Text4
 	text_end
 
-RocketHideout1Text5:
+RocketHideout1Text7:
 	text_asm
 	ld hl, RocketHideout1TrainerHeader0
 	call TalkToTrainer

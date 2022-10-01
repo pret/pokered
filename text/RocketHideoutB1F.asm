@@ -33,7 +33,7 @@ _RocketHideout1Text1::
 	cont "KANTO."
 
 	para "However, with"
-	cont "enough force,"
+	line "enough force,"
 	cont "RHYDON can evolve"
 	cont "successfully."
 	
