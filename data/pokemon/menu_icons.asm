@@ -51,6 +51,7 @@ MonPartyData:
 	nybble ICON_GRASS     ; Gloom
 	nybble ICON_GRASS     ; Vileplume
 	nybble ICON_GRASS     ; Bellossom
+	nybble ICON_BUG       ; Para
 	nybble ICON_BUG       ; Paras
 	nybble ICON_BUG       ; Parasect
 	nybble ICON_BUG       ; Venonat

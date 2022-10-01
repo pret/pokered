@@ -55,7 +55,7 @@
 	const DEX_GLOOM      ; 44
 	const DEX_VILEPLUME  ; 45
 	const DEX_BELLOSSOM
-	; const DEX_PARA
+	const DEX_PARA
 	const DEX_PARAS      ; 46
 	const DEX_PARASECT   ; 47
 	const DEX_VENONAT    ; 48

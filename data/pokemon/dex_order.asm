@@ -215,4 +215,5 @@ PokedexOrder:
 	db DEX_SLOWKING
 	db DEX_ELECTIVIRE
 	db DEX_MAGMORTAR
+	db DEX_PARA
 	assert_table_length NUM_POKEMON_INDEXES

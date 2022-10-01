@@ -215,5 +215,6 @@ MonsterNames::
 	db "SLOWKING@@"
 	db "ELECTIVIRE"
 	db "MAGMORTAR@"
+	db "PARA@@@@@@"
 	
 	assert_table_length NUM_POKEMON_INDEXES

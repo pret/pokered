@@ -218,6 +218,7 @@ EvosMovesPointerTable:
 	dw SlowkingEvosMoves
 	dw ElectivireEvosMoves
 	dw MagmortarEvosMoves
+	dw ParaEvosMoves
 	assert_table_length NUM_POKEMON_INDEXES
 
 RhydonEvosMoves:
@@ -2760,3 +2761,16 @@ MagmortarEvosMoves:
 	db 55, FLAMETHROWER
 	db 0
 	
+ParaEvosMoves:
+; Evolutions
+	db EV_LEVEL, 12, PARAS
+	db 0
+; Learnset
+	db 3, STUN_SPORE
+	db 6, LEECH_LIFE
+	db 10, POISONPOWDER
+	db 15, FURY_SWIPES
+	db 21, SPORE
+	db 25, GROWTH
+	db 29, SLASH
+	db 0

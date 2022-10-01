@@ -389,13 +389,13 @@ _MonjaDexEntry::
 	dex
 
 _ParaDexEntry::
-	text "This is a newly"
-	next "discovered"
-	next "#MON. It is"
+	text "It's always born"
+	next "planted inside"
+	next "of a mushroom."
 
-	page "currently under"
-	next "investigation. No"
-	next "info is available"
+	page "The mushroom will"
+	next "stay with it for"
+	next "its whole life"
 	dex
 
 _HinaazuDexEntry::

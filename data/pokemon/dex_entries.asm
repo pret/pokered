@@ -215,6 +215,7 @@ PokedexEntryPointers:
 	dw SlowkingDexEntry
 	dw ElectivireDexEntry
 	dw MagmortarDexEntry
+	dw ParaDexEntry
 	assert_table_length NUM_POKEMON_INDEXES
 
 ; string: species name
@@ -1713,3 +1714,9 @@ MagmortarDexEntry:
 	text_far _MagmortarDexEntry
 	text_end
 	
+ParaDexEntry:
+    db "MUSHROOM@"
+	db 0,8
+	dw 40
+	text_far _ParaDexEntry
+	text_end
