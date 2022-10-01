@@ -219,6 +219,8 @@ EvosMovesPointerTable:
 	dw ElectivireEvosMoves
 	dw MagmortarEvosMoves
 	dw ParaEvosMoves
+	dw HinaazuEvosMoves
+	dw BetobebiiEvosMoves
 	assert_table_length NUM_POKEMON_INDEXES
 
 RhydonEvosMoves:
@@ -2773,4 +2775,31 @@ ParaEvosMoves:
 	db 21, SPORE
 	db 25, GROWTH
 	db 29, SLASH
+	db 0
+	
+HinaazuEvosMoves:
+; Evolutions
+	db EV_LEVEL, 18, DODUO
+	db 0
+; Learnset
+	db 5, QUICK_ATTACK
+	db 11, FURY_ATTACK
+	db 20, DRILL_PECK
+	db 23, RAGE
+	db 27, TRI_ATTACK
+	db 32, AGILITY
+	db 0
+
+BetobebiiEvosMoves:
+; Evolutions
+	db EV_LEVEL, 20, GRIMER
+	db 0
+; Learnset
+	db 13, POISON_GAS
+	db 16, ACID
+	db 19, MINIMIZE
+	db 22, SLUDGE
+	db 28, HARDEN
+	db 33, SCREECH
+	db 37, ACID_ARMOR
 	db 0

@@ -115,12 +115,12 @@
 	; const DEX_SIRFETCHD
 	const DEX_BLASTYKE  
 	const DEX_BLASTOISE 
-	; const DEX_HINAAZU
+	const DEX_HINAAZU
 	const DEX_DODUO      ; 84
 	const DEX_DODRIO     ; 85 
 	const DEX_SEEL       ; 86
 	const DEX_DEWGONG    ; 87
-	; const DEX_BETOBEBII 
+	const DEX_BETOBEBII 
 	const DEX_GRIMER     ; 88
 	const DEX_MUK        ; 89
 	const DEX_SHELLDER   ; 90

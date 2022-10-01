@@ -216,4 +216,6 @@ PokedexOrder:
 	db DEX_ELECTIVIRE
 	db DEX_MAGMORTAR
 	db DEX_PARA
+	db DEX_HINAAZU
+	db DEX_BETOBEBII
 	assert_table_length NUM_POKEMON_INDEXES
