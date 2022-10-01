@@ -179,3 +179,10 @@ _ViridianCityText14::
 	text "The GYM's doors"
 	line "are locked..."
 	done
+
+_ViridianCityText16::
+	text "The GYM has a"
+	line "back door?!"
+
+	para "It's locked..."
+	done

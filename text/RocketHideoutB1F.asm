@@ -30,9 +30,11 @@ _RocketHideout1Text1::
 	line "any evolution"
 	cont "currently"
 	cont "understood in"
-	cont "KANTO. However,"
-	cont "with force, RHYDON"
-	cont "can evolve"
+	cont "KANTO."
+
+	para "However, with"
+	cont "enough force,"
+	cont "RHYDON can evolve"
 	cont "successfully."
 	
 	para "It unfortunately"
@@ -72,10 +74,10 @@ _RocketHideout1Text2::
 	done
 
 _RocketHideout1Text3::
-	text "Financial"
+	text "Various financial"
 	line "documents are"
-	cont "scattered"
-	cont "around the desk."
+	cont "scattered on"
+	cont "the floor..."
 	
 	para "PROTECTOR: ¥3,000"
 	para "GUARD SPEC: ¥4,200"

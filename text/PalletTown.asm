@@ -4,11 +4,7 @@ _OakAppearsText::
 	text_end
 
 _OakWalksUpText::
-	text "OAK: Phew. Unlike"
-	line "you, I can't run"
-	cont "by pressing B..."
-
-	text "It's unsafe!"
+	text "OAK: It's unsafe!"
 	line "Wild #MON live"
 	cont "in tall grass!"
 

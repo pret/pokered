@@ -2,7 +2,7 @@ RocketHideoutB1F_Object:
 	db $2e ; border block
 
 	def_warp_events
-	warp_event  5,  4, VIRIDIAN_GYM, 5
+	warp_event  5,  4, VIRIDIAN_GYM, 4
 
 	def_bg_events
 
@@ -11,7 +11,7 @@ RocketHideoutB1F_Object:
 	object_event 17,  8, SPRITE_PAPER, STAY, RIGHT, 2
 	object_event 17, 15, SPRITE_PAPER, STAY, DOWN, 3
 	object_event  8, 16, SPRITE_PAPER, STAY, RIGHT, 4
-	object_event 17,  9, SPRITE_POKE_BALL, STAY, NONE, 6, TM_EARTHQUAKE ; FIXME: doesn't work for some reason
-	; object_event  5, 22, SPRITE_POKE_BALL, STAY, NONE, 7, PROTECTOR needs implementing
+	object_event 17, 22, SPRITE_POKE_BALL, STAY, NONE, 5, TM_EARTHQUAKE
+	object_event  7, 22, SPRITE_POKE_BALL, STAY, NONE, 6, PROTECTOR
 
 	def_warps_to ROCKET_HIDEOUT_B1F

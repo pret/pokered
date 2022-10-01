@@ -54,9 +54,8 @@ ViridianGymArrowTilePlayerMovement:
 	map_coord_movement 19, 11, ViridianGymArrowMovement1
 	map_coord_movement 19,  1, ViridianGymArrowMovement2
 	map_coord_movement 18,  2, ViridianGymArrowMovement3
-	map_coord_movement 11,  2, ViridianGymArrowMovement4
+	map_coord_movement 10,  2, ViridianGymArrowMovement4
 	map_coord_movement 16, 10, ViridianGymArrowMovement5
-	map_coord_movement  4,  6, ViridianGymArrowMovement6
 	map_coord_movement  5, 13, ViridianGymArrowMovement7
 	map_coord_movement  4, 14, ViridianGymArrowMovement8
 	map_coord_movement  0, 15, ViridianGymArrowMovement9
@@ -78,15 +77,11 @@ ViridianGymArrowMovement3:
 	db -1 ; end
 
 ViridianGymArrowMovement4:
-	db D_RIGHT, 6
+	db D_RIGHT, 7
 	db -1 ; end
 
 ViridianGymArrowMovement5:
 	db D_DOWN, 2
-	db -1 ; end
-
-ViridianGymArrowMovement6:
-	db D_DOWN, 7
 	db -1 ; end
 
 ViridianGymArrowMovement7:
@@ -98,7 +93,7 @@ ViridianGymArrowMovement8:
 	db -1 ; end
 
 ViridianGymArrowMovement9:
-	db D_UP, 8
+	db D_UP, 4
 	db -1 ; end
 
 ViridianGymArrowMovement10:

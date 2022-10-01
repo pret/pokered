@@ -12,6 +12,7 @@ ViridianCity_ScriptPointers:
 
 ViridianCityScript0:
 	call ViridianCityScript_1900b
+	call ViridianCityScript_backdoor
 	jp ViridianCityScript_1903d
 
 ViridianCityScript_1900b:
@@ -113,11 +114,47 @@ ViridianCityScript3:
 	ld [wViridianCityCurScript], a
 	ret
 
+ViridianCityScript_backdoor:
+	CheckEvent EVENT_VIRIDIAN_GYM_OPEN
+	ret nz
+	ld a, [wObtainedBadges]
+	cp ~(1 << BIT_EARTHBADGE)
+	jr nz, .gym_closed
+	SetEvent EVENT_VIRIDIAN_GYM_OPEN
+	ret
+.gym_closed
+	ld a, [wYCoord]
+	cp 3
+	ret nz
+	ld a, [wXCoord]
+	cp 29
+	ret nz
+	ld a, $10
+	ldh [hSpriteIndexOrTextID], a
+	call DisplayTextID
+	xor a
+	ldh [hJoyHeld], a
+	call ViridianCityScript_backdoor2
+	ld a, $3
+	ld [wViridianCityCurScript], a
+	ret
+
 ViridianCityScript_190cf:
 	call StartSimulatingJoypadStates
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
 	ld a, D_DOWN
+	ld [wSimulatedJoypadStatesEnd], a
+	xor a
+	ld [wSpritePlayerStateData1FacingDirection], a
+	ld [wJoyIgnore], a
+	ret
+
+ViridianCityScript_backdoor2:
+	call StartSimulatingJoypadStates
+	ld a, $1
+	ld [wSimulatedJoypadStatesIndex], a
+	ld a, D_UP
 	ld [wSimulatedJoypadStatesEnd], a
 	xor a
 	ld [wSpritePlayerStateData1FacingDirection], a
@@ -140,6 +177,7 @@ ViridianCity_TextPointers:
 	dw ViridianCityText13
 	dw ViridianCityText14
 	dw ViridianCityText15
+	dw ViridianCityText16
 
 ViridianCityText1:
 	text_far _ViridianCityText1
@@ -324,4 +362,8 @@ ViridianCityText13:
 
 ViridianCityText14:
 	text_far _ViridianCityText14
+	text_end
+
+ViridianCityText16:
+	text_far _ViridianCityText16
 	text_end

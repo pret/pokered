@@ -3,7 +3,7 @@ _GiovanniPreBattleText::
 	line "my hideout!"
 
 	para "Once again, you"
-	line "thrwart me!"
+	line "thwart me!"
 	cont "So be it! This"
 	cont "time, I'm not"
 	cont "holding back!"
