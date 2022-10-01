@@ -69,6 +69,7 @@ RocketHideout1ArrowTilePlayerMovement:
 	map_coord_movement 15, 10, RocketHideout1ArrowMovement11
 	map_coord_movement 12, 11, RocketHideout1ArrowMovement12
 	map_coord_movement 14, 11, RocketHideout1ArrowMovement13
+	map_coord_movement 14, 5, RocketHideout1ArrowMovement14
 	db -1 ; end
 
 RocketHideout1ArrowMovement1:
@@ -124,6 +125,10 @@ RocketHideout1ArrowMovement12:
 
 RocketHideout1ArrowMovement13:
 	db D_UP, 3
+	db -1 ; end
+	
+RocketHideout1ArrowMovement14:
+	db D_RIGHT, 4
 	db -1 ; end
 
 RocketHideout1Script4:
