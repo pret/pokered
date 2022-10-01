@@ -216,5 +216,7 @@ MonsterNames::
 	db "ELECTIVIRE"
 	db "MAGMORTAR@"
 	db "PARA@@@@@@"
+	db "HINAAZU@@@"
+	db "BETOBEBII@"
 	
 	assert_table_length NUM_POKEMON_INDEXES

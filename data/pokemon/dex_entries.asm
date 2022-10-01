@@ -216,6 +216,8 @@ PokedexEntryPointers:
 	dw ElectivireDexEntry
 	dw MagmortarDexEntry
 	dw ParaDexEntry
+	dw HinaazuDexEntry
+	dw BetobebiiDexEntry
 	assert_table_length NUM_POKEMON_INDEXES
 
 ; string: species name
@@ -1719,4 +1721,18 @@ ParaDexEntry:
 	db 0,8
 	dw 40
 	text_far _ParaDexEntry
+	text_end
+	
+BetobebiiDexEntry:
+	db "SLUDGE@"
+	db 1,0
+	dw 200
+	text_far _BetobebiiDexEntry
+	text_end
+	
+HinaazuDexEntry:
+	db "BIRD NEST@"
+	db 1,4
+	dw 200
+	text_far _HinaazuDexEntry
 	text_end

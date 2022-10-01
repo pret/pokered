@@ -108,10 +108,12 @@ MonPartyData:
 	nybble ICON_BIRD	  ; Madaamu
 	nybble ICON_WATER     ; Blastyke
 	nybble ICON_WATER     ; Blastoise
+	nybble ICON_BIRD      ; Hinaazu
 	nybble ICON_BIRD      ; Doduo
 	nybble ICON_BIRD      ; Dodrio
 	nybble ICON_WATER     ; Seel
 	nybble ICON_WATER     ; Dewgong
+	nybble ICON_MON       ; Betobebii
 	nybble ICON_MON       ; Grimer
 	nybble ICON_MON       ; Muk
 	nybble ICON_HELIX     ; Shellder

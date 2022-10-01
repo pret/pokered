@@ -223,8 +223,8 @@
 	const ELECTIVIRE         ; $D6
 	const MAGMORTAR          ; $D7
 	const PARA               ; $D8
-	; const HINAAZU            ; $D9
-	; const BETOBEBII          ; $DA
+	const HINAAZU            ; $D9
+	const BETOBEBII          ; $DA
 	; const MAGNEZONE          ; $DB
 	; const PORYGONZ           ; $DC
 	; const PERRSERKER         ; $DD

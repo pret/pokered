@@ -399,13 +399,13 @@ _ParaDexEntry::
 	dex
 
 _HinaazuDexEntry::
-	text "This is a newly"
-	next "discovered"
-	next "#MON. It is"
+	text "One of the three"
+	next "heads is withdrawn"
+	next "upon evolution."
 
-	page "currently under"
-	next "investigation. No"
-	next "info is available"
+	page "It grows back in"
+	next "as the angriest"
+	next "head of DODRIO"
 	dex
 
 _PudiDexEntry::
@@ -419,13 +419,13 @@ _PudiDexEntry::
 	dex
 
 _BetobebiiDexEntry::
-	text "This is a newly"
-	next "discovered"
-	next "#MON. It is"
+	text "Though it has a"
+	next "cute appearance,"
+	next "it constantly"
 
-	page "currently under"
-	next "investigation. No"
-	next "info is available"
+	page "emits an foul"
+	next "odor that deters"
+	next "anyone around it"
 	dex
 
 _ScizorDexEntry::
