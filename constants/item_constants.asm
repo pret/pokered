@@ -58,7 +58,7 @@ DEF SAFARI_ROCK EQU $16 ; overload
 	const LEAF_STONE    ; $2F
 	const CARD_KEY      ; $30
 	const NUGGET        ; $31
-	const WING_FOSSIL       ; $32
+	const WING_FOSSIL   ; $32
 	const POKE_DOLL     ; $33
 	const FULL_HEAL     ; $34
 	const REVIVE        ; $35
@@ -112,7 +112,8 @@ DEF NUM_ITEMS EQU const_value - 1
 	const ICE_STONE     ; $62
 	const PROTECTOR		; $63
 	const POISON_STONE  ; $64
-	const BLK_AUGURITE   ; $65
+	const BLK_AUGURITE  ; $65
+	const DUBIOUS_DISC  ; $66
 DEF NUM_FLOORS EQU const_value - 1 - NUM_ITEMS
 
 	const_next $C4

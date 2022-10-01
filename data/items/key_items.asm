@@ -89,7 +89,7 @@ KeyItemFlags:
 	dbit TRUE  ; FLOOR_2F
 	dbit TRUE  ; FLOOR_3F
 	dbit TRUE  ; FLOOR_4F
-	dbit TRUE ; FLOOR_5F
+	dbit TRUE  ; FLOOR_5F
 	dbit TRUE  ; FLOOR_6F
 	dbit TRUE  ; FLOOR_7F
 	dbit TRUE  ; FLOOR_8F
@@ -101,4 +101,5 @@ KeyItemFlags:
 	dbit FALSE ; PROTECTOR
 	dbit FALSE ; POISON_STONE
 	dbit FALSE ; BLK_AUGURITE
+	dbit FALSE ; DUBIOUS_DISC
 	end_bit_array NUM_ITEMS + NUM_FLOORS

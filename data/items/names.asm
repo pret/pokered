@@ -102,4 +102,5 @@ ItemNames::
 	li "PROTECTOR"
 	li "POISON STONE"
 	li "BLK AUGURITE"
+	li "DUBIOUS DISC"
 	assert_list_length NUM_ITEMS + NUM_FLOORS

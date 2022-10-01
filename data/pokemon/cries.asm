@@ -224,8 +224,8 @@ CryData::
 	mon_cry SFX_CRY_1E, $79, $40 ; Para
 	mon_cry SFX_CRY_00, $00, $00 ; Hinaazu
 	mon_cry SFX_CRY_05, $FF, $40 ; Betobebii
-	; mon_cry SFX_CRY_00, $00, $00 ; Magnezone
-	; mon_cry SFX_CRY_00, $00, $00 ; Porygon-Z
+	mon_cry SFX_CRY_00, $00, $00 ; Magnezone
+	mon_cry SFX_CRY_00, $00, $00 ; Porygon-Z
 	; mon_cry SFX_CRY_00, $00, $00 ; Perrserker
 	; mon_cry SFX_CRY_00, $00, $00 ; Sirfetch'd
 	; mon_cry SFX_CRY_00, $00, $00 ; Mr. Rime

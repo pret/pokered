@@ -102,4 +102,5 @@ ItemPrices::
 	bcd3 3000  ; PROTECTOR
 	bcd3 2100  ; POISON_STONE
 	bcd3 2100  ; BLK_AUGURITE
+	bcd3 3000  ; DUBIOUS_DISC
 	assert_table_length NUM_ITEMS + NUM_FLOORS

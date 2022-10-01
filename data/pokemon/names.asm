@@ -218,5 +218,7 @@ MonsterNames::
 	db "PARA@@@@@@"
 	db "HINAAZU@@@"
 	db "BETOBEBII@"
+	db "MAGNEZONE@"
+	db "PORYGON-Z@"
 	
 	assert_table_length NUM_POKEMON_INDEXES

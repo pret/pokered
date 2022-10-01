@@ -103,6 +103,7 @@ MonPartyData:
 	nybble ICON_BALL      ; Magnemite
 	nybble ICON_BALL      ; Magnetite
 	nybble ICON_BALL      ; Magneton
+	nybble ICON_BALL      ; Magnezone
 	nybble ICON_BALL      ; Barunda
 	nybble ICON_BIRD      ; Farfetch'd
 	nybble ICON_BIRD	  ; Madaamu
@@ -201,6 +202,7 @@ MonPartyData:
 	nybble ICON_QUADRUPED ; Sylveon
 	nybble ICON_MON       ; Porygon
 	nybble ICON_MON       ; Porygon2
+	nybble ICON_MON       ; Porygon-Z
 	nybble ICON_HELIX     ; Omanyte
 	nybble ICON_HELIX     ; Omastar
 	nybble ICON_HELIX     ; Kabuto

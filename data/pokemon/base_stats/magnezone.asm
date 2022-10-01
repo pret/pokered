@@ -1,14 +1,14 @@
 	db DEX_MAGNEZONE ; pokedex id
 
-	db  50,  60,  95,  70, 120
+	db  70,  70, 115,  60, 130
 	;   hp  atk  def  spd  spc
 
 	db ELECTRIC, STEEL ; type
-	db 60 ; catch rate
-	db 161 ; base exp
+	db 30 ; catch rate
+	db 211 ; base exp
 
-	INCBIN "gfx/pokemon/front/magneton.pic", 0, 1 ; sprite dimensions
-	dw MagnetonPicFront, MagnetonPicBack
+	INCBIN "gfx/pokemon/front/magnezone.pic", 0, 1 ; sprite dimensions
+	dw MagnezonePicFront, MagnezonePicBack
 
 	db TACKLE, SONICBOOM, THUNDERSHOCK, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -20,5 +20,5 @@
 	     SUBSTITUTE,   FLASH
 	; end
 
-	db BANK(MagnetonPicFront)
-	assert BANK(MagnetonPicFront) == BANK(MagnetonPicBack)
+	db BANK(MagnezonePicFront)
+	assert BANK(MagnezonePicFront) == BANK(MagnezonePicBack)

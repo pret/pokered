@@ -108,7 +108,7 @@
 	const DEX_MAGNEMITE  ; 81
 	const DEX_MAGNETITE
 	const DEX_MAGNETON   ; 82
-	; const DEX_MAGNEZONE
+	const DEX_MAGNEZONE
 	const DEX_BARUNDA 
 	const DEX_FARFETCHD  ; 83 
 	const DEX_MADAAMU    
@@ -209,7 +209,7 @@
 	const DEX_SYLVEON
 	const DEX_PORYGON    ; 137
 	const DEX_PORYGON2
-	; const DEX_PORYGONZ
+	const DEX_PORYGONZ
 	const DEX_OMANYTE    ; 138
 	const DEX_OMASTAR    ; 139
 	const DEX_KABUTO     ; 140

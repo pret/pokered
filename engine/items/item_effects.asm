@@ -118,6 +118,7 @@ ItemUsePtrTable:
 	dw ItemUseEvoStone   ; PROTECTOR
 	dw ItemUseEvoStone   ; POISON_STONE
 	dw ItemUseEvoStone   ; BLK_AUGURITE
+	dw ItemUseEvoStone   ; DUBIOUS_DISC
 
 ItemUseBall:
 

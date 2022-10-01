@@ -218,4 +218,6 @@ PokedexOrder:
 	db DEX_PARA
 	db DEX_HINAAZU
 	db DEX_BETOBEBII
+	db DEX_MAGNEZONE
+	db DEX_PORYGONZ
 	assert_table_length NUM_POKEMON_INDEXES

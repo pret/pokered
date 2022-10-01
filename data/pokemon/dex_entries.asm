@@ -218,6 +218,8 @@ PokedexEntryPointers:
 	dw ParaDexEntry
 	dw HinaazuDexEntry
 	dw BetobebiiDexEntry
+	dw MagnezoneDexEntry
+	dw PorygonZDexEntry
 	assert_table_length NUM_POKEMON_INDEXES
 
 ; string: species name
@@ -1735,4 +1737,18 @@ HinaazuDexEntry:
 	db 1,4
 	dw 200
 	text_far _HinaazuDexEntry
+	text_end
+
+MagnezoneDexEntry:
+    db "MAGNETAREA@"
+	db 3,11
+	dw 3970
+	text_far _MagnezoneDexEntry
+	text_end
+
+PorygonZDexEntry:
+    db "VIRTUAL@"
+	db 2,11
+	dw 750
+	text_far _PorygonZDexEntry
 	text_end

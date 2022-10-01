@@ -41,4 +41,5 @@ UsableItems_PartyMenu:
 	db PROTECTOR
 	db POISON_STONE
 	db BLK_AUGURITE
+	db DUBIOUS_DISC
 	db -1 ; end

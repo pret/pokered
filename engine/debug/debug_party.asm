@@ -23,15 +23,15 @@ SetIshiharaTeam:
 IshiharaTeam:
 	db KINGDRA, 90
 IF DEF(_DEBUG)
-	db ANIMON, 50
+	db MAGNEZONE, 50
 ELSE
-	db ANIMON, 20
+	db MAGNEZONE, 20
 ENDC
 	db MAGMORTAR, 56
 	db ELECTIVIRE, 56
 	db PORYGON2, 57
 IF DEF(_DEBUG)
-	db SCYTHER, 16
+	db KADABRA, 16
 ENDC
 	db -1 ; end
 
@@ -145,12 +145,14 @@ DebugItemsList:
 	db ESCAPE_ROPE, 99
 	db RARE_CANDY, 99
 	db MASTER_BALL, 99
-	db BLK_AUGURITE, 99
+	db DUBIOUS_DISC, 99
 	db SECRET_KEY, 1
 	db CARD_KEY, 1
 	db S_S_TICKET, 1
 	db SUPER_ROD, 1
 	db COIN_CASE, 1
+	db POKE_FLUTE, 1
+	db SILPH_SCOPE, 1
 	db -1 ; end
 
 DebugUnusedList:

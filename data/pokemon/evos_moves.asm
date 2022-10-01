@@ -221,6 +221,8 @@ EvosMovesPointerTable:
 	dw ParaEvosMoves
 	dw HinaazuEvosMoves
 	dw BetobebiiEvosMoves
+	dw MagnezoneEvosMoves
+	dw PorygonZEvosMoves
 	assert_table_length NUM_POKEMON_INDEXES
 
 RhydonEvosMoves:
@@ -853,6 +855,7 @@ ElectabuzzEvosMoves:
 
 MagnetonEvosMoves:
 ; Evolutions
+	db EV_ITEM, THUNDER_STONE, 1, MAGNEZONE
 	db 0
 ; Learnset
 	db 21, SONICBOOM
@@ -2699,6 +2702,7 @@ BellossomEvosMoves:
 	
 Porygon2EvosMoves:
 ; Evolutions
+	db EV_ITEM, DUBIOUS_DISC, 1, PORYGONZ
 	db 0
 ; Learnset
 	db 23, PSYBEAM
@@ -2802,4 +2806,20 @@ BetobebiiEvosMoves:
 	db 28, HARDEN
 	db 33, SCREECH
 	db 37, ACID_ARMOR
+	db 0
+	
+MagnezoneEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 31, METAL_SOUND
+	db 41, MAGNET_BOMB
+	db 50, IRON_HEAD
+	db 0
+
+PorygonZEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 50, AMNESIA	; will replace with nasty plot
 	db 0

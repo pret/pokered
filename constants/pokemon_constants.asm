@@ -225,8 +225,8 @@
 	const PARA               ; $D8
 	const HINAAZU            ; $D9
 	const BETOBEBII          ; $DA
-	; const MAGNEZONE          ; $DB
-	; const PORYGONZ           ; $DC
+	const MAGNEZONE          ; $DB
+	const PORYGONZ           ; $DC
 	; const PERRSERKER         ; $DD
 	; const SIRFETCHD          ; $DE
 	; const MR_RIME            ; $DF
