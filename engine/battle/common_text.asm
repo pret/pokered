@@ -3,7 +3,7 @@ PrintBeginningBattleText:
 	dec a
 	jr nz, .trainerBattle
 	ld a, [wCurMap]
-	cp POKEMON_TOWER_3F
+	cp POKEMON_TOWER_2F
 	jr c, .notPokemonTower
 	cp POKEMON_TOWER_7F + 1
 	jr c, .pokemonTower

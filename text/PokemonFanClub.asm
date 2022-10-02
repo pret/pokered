@@ -39,7 +39,7 @@ FanClubMeetChairText::
 	line "#MON Fan Club!"
 
 	para "I have collected"
-	line "over 100 #MON!"
+	line "over 150 #MON!"
 
 	para "I'm very fussy"
 	line "when it comes to"

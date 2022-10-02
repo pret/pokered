@@ -102,4 +102,5 @@ KeyItemFlags:
 	dbit FALSE ; POISON_STONE
 	dbit FALSE ; BLK_AUGURITE
 	dbit FALSE ; DUBIOUS_DISC
+	dbit TRUE  ; CITRINE_PASS
 	end_bit_array NUM_ITEMS + NUM_FLOORS

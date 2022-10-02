@@ -149,6 +149,7 @@ DebugItemsList:
 	db SECRET_KEY, 1
 	db CARD_KEY, 1
 	db S_S_TICKET, 1
+	db CITRINE_PASS, 1
 	db SUPER_ROD, 1
 	db COIN_CASE, 1
 	db POKE_FLUTE, 1

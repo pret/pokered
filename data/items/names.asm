@@ -103,4 +103,5 @@ ItemNames::
 	li "POISON STONE"
 	li "BLK AUGURITE"
 	li "DUBIOUS DISC"
+	li "CITRINE PASS"
 	assert_list_length NUM_ITEMS + NUM_FLOORS
