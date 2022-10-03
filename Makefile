@@ -85,7 +85,7 @@ tools:
 	$(MAKE) -C tools/
 
 
-RGBASMFLAGS = -h -L -Weverything -Wnumeric-string=2 -Wtruncation=1
+RGBASMFLAGS = -hL -Q8 -P includes.asm -Weverything -Wnumeric-string=2 -Wtruncation=1
 # Create a sym/map for debug purposes if `make` run with `DEBUG=1`
 ifeq ($(DEBUG),1)
 RGBASMFLAGS += -E
@@ -107,7 +107,7 @@ rgbdscheck.o: rgbdscheck.asm
 # As a side effect, they're evaluated immediately instead of when the rule is invoked.
 # It doesn't look like $(shell) can be deferred so there might not be a better way.
 define DEP
-$1: $2 $$(shell tools/scan_includes $2) | rgbdscheck.o
+$1: $2 $$(shell tools/scan_includes $2) | includes.asm rgbdscheck.o
 	$$(RGBASM) $$(RGBASMFLAGS) -o $$@ $$<
 endef
 
@@ -125,8 +125,8 @@ $(foreach obj, $(pokered_vc_obj), $(eval $(call DEP,$(obj),$(obj:_red_vc.o=.asm)
 $(foreach obj, $(pokeblue_vc_obj), $(eval $(call DEP,$(obj),$(obj:_blue_vc.o=.asm))))
 
 # Dependencies for VC files that need to run scan_includes
-%.constants.sym: %.constants.asm $(shell tools/scan_includes %.constants.asm) | rgbdscheck.o
-	$(RGBASM) $< > $@
+%.constants.sym: %.constants.asm $(shell tools/scan_includes %.constants.asm) | includes.asm rgbdscheck.o
+	$(RGBASM) $(RGBASMFLAGS) $< > $@
 
 endif
 
@@ -156,13 +156,13 @@ pokeblue_vc_opt    = -jsv -n 0 -k 01 -l 0x33 -m 0x13 -r 03 -t "POKEMON BLUE"
 gfx/battle/move_anim_0.2bpp: tools/gfx += --trim-whitespace
 gfx/battle/move_anim_1.2bpp: tools/gfx += --trim-whitespace
 
-gfx/intro/blue_jigglypuff_1.2bpp: rgbgfx += -h
-gfx/intro/blue_jigglypuff_2.2bpp: rgbgfx += -h
-gfx/intro/blue_jigglypuff_3.2bpp: rgbgfx += -h
-gfx/intro/red_nidorino_1.2bpp: rgbgfx += -h
-gfx/intro/red_nidorino_2.2bpp: rgbgfx += -h
-gfx/intro/red_nidorino_3.2bpp: rgbgfx += -h
-gfx/intro/gengar.2bpp: rgbgfx += -h
+gfx/intro/blue_jigglypuff_1.2bpp: rgbgfx += -Z
+gfx/intro/blue_jigglypuff_2.2bpp: rgbgfx += -Z
+gfx/intro/blue_jigglypuff_3.2bpp: rgbgfx += -Z
+gfx/intro/red_nidorino_1.2bpp: rgbgfx += -Z
+gfx/intro/red_nidorino_2.2bpp: rgbgfx += -Z
+gfx/intro/red_nidorino_3.2bpp: rgbgfx += -Z
+gfx/intro/gengar.2bpp: rgbgfx += -Z
 gfx/intro/gengar.2bpp: tools/gfx += --remove-duplicates --preserve=0x19,0x76
 
 gfx/credits/the_end.2bpp: tools/gfx += --interleave --png=$<
