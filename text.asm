@@ -1,6 +1,3 @@
-INCLUDE "constants.asm"
-
-
 SECTION "Text 1", ROMX
 
 INCLUDE "data/text/text_1.asm"

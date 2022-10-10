@@ -1,8 +1,5 @@
 ; PureRGBnote: MOVED: moved a bunch of code out of home for more space
 
-INCLUDE "constants.asm"
-
-
 SECTION "NULL", ROM0
 NULL::
 

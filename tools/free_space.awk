@@ -39,7 +39,7 @@ function register_bank(amount) {
 	}
 }
 
-rom_bank && toupper($0) ~ /^[ \t]*EMPTY/ {
+rom_bank && toupper($0) ~ /^[ \t]*EMPTY$/ {
 	# Empty bank
 	register_bank(16384)
 }

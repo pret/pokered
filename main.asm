@@ -1,6 +1,3 @@
-INCLUDE "constants.asm"
-
-
 SECTION "bank1", ROMX
 ; PureRGBnote: MOVED: mew's base stats was moved, and unused_names.asm was removed completely
 INCLUDE "data/sprites/facings.asm"

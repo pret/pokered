@@ -1,6 +1,3 @@
-INCLUDE "constants.asm"
-
-
 SECTION "Maps 1", ROMX
 
 INCLUDE "data/maps/headers/CeladonCity.asm"

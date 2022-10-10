@@ -1,6 +1,3 @@
-INCLUDE "constants.asm"
-
-
 SECTION "Sound Effect Headers 1", ROMX
 INCLUDE "audio/headers/sfxheaders1.asm"
 

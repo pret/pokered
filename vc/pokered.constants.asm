@@ -1,5 +1,3 @@
-INCLUDE "constants.asm"
-
 ; These are all the asm constants needed to make the red_vc patch.
 
 MACRO vc_const
