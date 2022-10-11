@@ -18,11 +18,13 @@ The second page contains new big features related to general gameplay.
     - `OG`: Default color setting. The game will use whatever colors it originally would have had on the system you're playing on. In the case of GBC or GBA, this is a hardcoded limited dual-color palette. On SGB, this is the default SGB color palettes.
     
     ![Blue Title GBC Default](/screenshots/blue_title_default_gbc_color.png?raw=true) ![Red Title GBC Default](/screenshots/red_title_default_gbc_color.png?raw=true) ![Green Title GBC Default](/screenshots/green_title_default_gbc_color.png?raw=true)
-    - `SGB`: Force SGB color palettes. This is no different than the "OG" setting if playing on SGB. On GBC or GBA, this changes the game to use the same color palettes as on SGB, and enables full color mode. Attack animations will have color in this mode when on GBC or GBA, along with some other color enhancements.
+    - `SGB1`: Force SGB color palettes. This is no different than the "OG" setting if playing on SGB. On GBC or GBA, this changes the game to use the same color palettes as on SGB, and enables full color mode. Attack animations will have color in this mode when on GBC or GBA, along with some other color enhancements.
   
     ![Blue Title SGB](/screenshots/blue_title_sgb_colors_on_gbc.png?raw=true) ![Red Title SGB](/screenshots/red_title_sgb_colors_on_gbc.png?raw=true) ![Green Title SGB](/screenshots/green_title_sgb_colors_on_gbc.png?raw=true)
     
     ![Attack Color Fire Blast SGB](/screenshots/attack_color_fire_blast.png?raw=true) ![Attack Color Ice Beam SGB](/screenshots/attack_color_ice_beam.png?raw=true) ![Attack Color Solar Beam SGB](/screenshots/attack_color_solarbeam.png?raw=true) ![Attack Color Surf SGB](/screenshots/attack_color_surf.png?raw=true)
+    - `SGB2`: Force alternate SGB color palettes. Access this option by pressing A on SGB1 in this options menu. This is the same as SGB1 with a couple minor differences in colors based on japanese pokemon green. A more greenish white color for all the palettes. Other minor color differences include: Pallet Town is purplish instead of light green. Pewter City, Saffron City, Celadon City, and Lavender Town have slightly different main colors in comparison to SGB1. Other than these slight color differences it is the same as SGB1 in features.
+
     - `GBC`: Force GBC color palettes. On Super Gameboy, it'll now have Pokemon Yellow's GBC more intense color palettes. Same with GBC and GBA. On GBC and GBA, enables full color mode. Attack animations will have color in this mode when on GBC or GBA, along with some other color enhancements.
     
     ![Blue Title GBC](/screenshots/blue_title_gbc_colors_on_gbc.png?raw=true) ![Red Title GBC](/screenshots/red_title_gbc_colors_on_gbc.png?raw=true) ![Green Title GBC](/screenshots/green_title_gbc_colors_on_gbc.png?raw=true)
@@ -189,14 +191,14 @@ The fifth page contains 6 additional pokemon whose front sprites can be customiz
 ## Visual changes
 - Burn status has a burn animation instead of reusing the poison animation.
 - Pokeballs have varying animations slightly based on the type you use. Master Ball is especially cool!
-- If playing on GBC/GBA and have selected `SGB` or `GBC` in the options menu for the `COLORS` option, move animations will have fitting colors (ember is red, surf is blue, etc.).
-- If playing on GBC/GBA and have selected `SGB` or `GBC` in the options menu for the `COLORS` option, each type of pokeball will have a different coloration.
+- If playing on GBC/GBA and have selected `SGB1`, `SGB2` or `GBC` in the options menu for the `COLORS` option, move animations will have fitting colors (ember is red, surf is blue, etc.).
+- If playing on GBC/GBA and have selected `SGB1`, `SGB2` or `GBC` in the options menu for the `COLORS` option, each type of pokeball will have a different coloration.
 
 ![Pokeball Color](/screenshots/great_ball_color.png?raw=true)
 - Many move animations were enhanced.
-- Using SGB colors, pewter's palette is slightly greyer than the original game.
-- Using either SGB or GBC colors, seafoam island is bluish purple instead of the same color as every other cave in the game.
-- Using SGB colors, lorelei's room is a similar color to seafoam islands instead of light green.
+- Using SGB1 colors, pewter's palette is slightly greyer than the original game.
+- Using any of SGB1, SGB2, or GBC colors, seafoam island is bluish purple instead of the same color as every other cave in the game.
+- Using SGB1 or SGB2 colors, lorelei's room is a similar color to seafoam islands (it was the same color as Pallet Town previously).
 - Using GBC color mode, the "Grey pokemon" palette was made less brown.
 - Spaceworld backsprites were tweaked to improve them a bit
 - A couple of front sprites were tweaked very slightly to improve their appearance
@@ -221,6 +223,8 @@ The fifth page contains 6 additional pokemon whose front sprites can be customiz
 - While transformed into another pokemon via TRANSFORM, you cannot swap your move positions anymore - allowing this caused glitches that end with the game crashing
 - NPCs won't rarely disobey their facing behavioural assignments (facing forward, left, etc.)
 - Double Edge animation appearance when opponent uses it fixed
+- Blacking out in the Safari Zone won't glitch the game out
+- Trying to switch to the current pokemon or a fainted one won't trigger a small visual glitch
 
 ## Tweaks
 - Trainers in general have a bit less type-specific parties and more varied pokemon. 
@@ -250,7 +254,7 @@ The fifth page contains 6 additional pokemon whose front sprites can be customiz
 - Disable disables the previously selected move of the opponent. If they haven't selected a move yet, it chooses a random move. It has 85% accuracy. It lasts 2-7 turns.
 - Trapping moves only last 2 or 3 turns but deal a bit more damage to compensate. 2/3 chance of 2 turns, 1/3 chance of 3 turns.
 - 7 moves that people almost never use were renamed and changed to have much more useful effects:
-  - CONSTRICT is now STATIC SNAG - 50 base power, electric type, 30% chance of paralysis, 100% accuracy
+  - CONSTRICT is now STATIC SNAG - 75 base power, electric type, 30% chance of paralysis, 100% accuracy
   - TAKE DOWN is now HEAT RUSH - 75 base power, fire type, 30% chance of burn, 100% accuracy
   - KINESIS is now FIREWALL - status move, fire type, causes burn, 80% accuracy 
   - COUNTER is now DRAIN PUNCH - 75 base power, fighting type, drains HP, 100% accuracy
