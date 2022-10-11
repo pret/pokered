@@ -234,6 +234,7 @@ PartyMenuMessagePointers:
 	dw PartyMenuUseTMText
 	dw PartyMenuSwapMonText
 	dw PartyMenuItemUseText
+	dw PartyMenuEmptyText
 
 PartyMenuNormalText:
 	text_far _PartyMenuNormalText
@@ -253,6 +254,10 @@ PartyMenuUseTMText:
 
 PartyMenuSwapMonText:
 	text_far _PartyMenuSwapMonText
+	text_end
+
+PartyMenuEmptyText:
+	text_far _PartyMenuEmptyText
 	text_end
 
 PotionText:

@@ -1536,6 +1536,7 @@ HasMonFainted:
 	ld a, [wFirstMonsNotOutYet]
 	and a
 	jr nz, .done
+	call EmptyPartyMenuRedraw ; PureRGBnote: FIXED: minor graphical glitch when selecting a fainted pokemon 
 	ld hl, NoWillText
 	call PrintText
 .done
@@ -2465,6 +2466,7 @@ PartyMenuOrRockOrRun:
 	cp d ; check if the mon to switch to is already out
 	jr nz, .notAlreadyOut
 ; mon is already out
+	call EmptyPartyMenuRedraw ; PureRGBnote: FIXED: minor graphical glitch avoided by redrawing the party menu before displaying the text
 	ld hl, AlreadyOutText
 	call PrintText
 	jp .partyMonDeselected
@@ -7680,4 +7682,13 @@ SetAISentOut:
 	set 1, a
 .partyret
 	ld [wAIWhichPokemonSentOutAlready], a
+	ret
+
+; PureRGBnote: FIXED: function to redraw the party menu without any bottom box text, used to avoid minor graphical glitches
+EmptyPartyMenuRedraw:
+	ld a, EMPTY_PARTY_MENU ; new party menu text option - it just displays no text in the bottom box since we'll be writing there immediately
+	ld [wPartyMenuTypeOrMessageID], a
+	call RedrawPartyMenu 
+	xor a ; NORMAL_PARTY_MENU
+	ld [wPartyMenuTypeOrMessageID], a
 	ret

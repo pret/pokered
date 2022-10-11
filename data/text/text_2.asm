@@ -1408,6 +1408,10 @@ _PartyMenuSwapMonText::
 	line "where?"
 	done
 
+_PartyMenuEmptyText::
+	text " "
+	done
+
 _PotionText::
 	text_ram wcd6d
 	text_start
