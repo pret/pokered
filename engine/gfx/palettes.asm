@@ -542,16 +542,14 @@ LoadSGB:
 	call CopyGfxToSuperNintendoVRAM
 	xor a
 	ld [wCopyingSGBTileData], a
-	ld de, PalTrnPacket
 ;;;;;;;;;; PureRGBnote: ADDED: optional toggle between original SGB palettes and GBC palettes when playing on SGB
 	call GetPalettes
-	jr c, .gbcPalettes
-	ld hl, SuperPalettes
-	jr .gotPalettes
-.gbcPalettes
-	ld hl, GBCBasePalettes
-.gotPalettes
+	ld a, d
+	ld h, a
+	ld a, e
+	ld l, a ; GetPalettes stores the palette set address in de, but here we need it to be in hl, so we copy it over to hl
 ;;;;;;;;;;
+	ld de, PalTrnPacket
 	call CopyGfxToSuperNintendoVRAM
 	call ClearVram
 	ld hl, MaskEnCancelPacket
@@ -724,12 +722,20 @@ SendSGBPackets:
 GetPalettes:
 	ld a, [wOptions2]
 	and %11
-	cp 3
+	cp PALETTES_YELLOW
 	jr z, .gbcPalettes
+	cp PALETTES_SGB2
+	jr z, .sgbPalettes2
+	ld de, SuperPalettes
 	and a
 	jr .done
 .gbcPalettes
+	ld de, GBCBasePalettes
 	scf
+	jr .done
+.sgbPalettes2
+	ld de, SuperPalettes2
+	and a
 .done
 	ret
 
@@ -790,12 +796,6 @@ GetGBCBasePalAddress:: ;shinpokerednote: gbcnote: new function
 	add hl, hl
 ;;;;;;;;;; PureRGBnote: ADDED: optional toggle between original SGB palettes and GBC palettes when playing on SGB
 	call GetPalettes
-	jr c, .gbcPalettes
-	ld de, SuperPalettes
-	jr .gotPalettes
-.gbcPalettes
-	ld de, GBCBasePalettes
-.gotPalettes
 ;;;;;;;;;;
 	add hl, de
 	ld a, l
@@ -1189,5 +1189,6 @@ INCLUDE "data/pokemon/alt_palettes.asm"
 
 INCLUDE "data/sgb/sgb_palettes.asm"
 INCLUDE "data/gbc/gbc_palettes.asm"
+INCLUDE "data/sgb/sgb_palettes2.asm"
 
 INCLUDE "data/sgb/sgb_border.asm"

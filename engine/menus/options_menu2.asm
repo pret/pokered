@@ -2,7 +2,7 @@
 
 DEF PAGE2_OPTION1_LEFT_XPOS EQU 9
 DEF PAGE2_OPTION1_MIDDLE_XPOS EQU 12
-DEF PAGE2_OPTION1_RIGHT_XPOS EQU 16
+DEF PAGE2_OPTION1_RIGHT_XPOS EQU 17
 DEF PAGE2_OPTION2_LEFT_XPOS EQU 4
 DEF PAGE2_OPTION2_RIGHT_XPOS EQU 11
 DEF PAGE2_OPTION3_LEFT_XPOS EQU 12
@@ -17,7 +17,7 @@ DEF PAGE2_OPTION4_BIT EQU BIT_BIKE_MUSIC
 
 Options2Text:
 	db   "OPTIONS 2"
-	next " COLORS: OG SGB Y"
+	next " COLORS: OG SGB  Y"
 	next " ALT PKMN COLORS:"
 	next "    OFF    ON"
 	next " AUDIO PAN: OFF ON"
@@ -37,6 +37,9 @@ DisplayOptions2:
 	hlcoord 2, 16
 	ld de, Page2MenuCancelText
 	call PlaceString
+	ld a, [wOptions2]
+	and %11
+	call PrintSGBOptionNumber
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
@@ -67,8 +70,16 @@ DisplayOptions2:
 	bit BIT_A_BUTTON, b
 	jr z, .checkDirectionKeys
 	ld a, [wTopMenuItemY]
+	cp 3 ;is the cursor on the COLORS row?
+	jr z, .checkAltSGBColors
 	cp 16 ; is the cursor on the cancel row?
 	jr z, .cancelMore
+	jr .loop
+.checkAltSGBColors
+	ld a, [wTopMenuItemX]
+	cp PAGE2_OPTION1_MIDDLE_XPOS ; is the cursor on SGB?
+	jr nz, .loop
+	call ToggleAltSGBColors
 	jr .loop
 .cancelMore
 	ld a, [wTopMenuItemX]
@@ -137,17 +148,21 @@ DisplayOptions2:
 
 
 Page2LeftRightPressed:
-	cp 3 ; cursor in Back Sprite section?
+	cp 3 ; cursor in COLORS section?
 	jr z, .cursorInOption1
-	cp 7 ; cursor in Menu Sprite section?
+	cp 7 ; cursor in x section?
 	jr z, .cursorInOption2
-	cp 9 ; cursor in Bulbasaur section?
+	cp 9 ; cursor in x section?
 	jr z, .cursorInOption3
-	cp 11 ; cursor in Squirtle section?
+	cp 11 ; cursor in x section?
 	jr z, .cursorInOption4
 	cp 16 ; cursor on Cancel?
 	jr z, .cursorCancelRow
 .cursorInOption1
+	push bc
+	ld a, PALETTES_SGB
+	call PrintSGBOptionNumber ; if we move left or right on the COLORS menu we will switch SGB text back to SGB1
+	pop bc
 	call GetTwoBitXPosition
 .loadOption1X
 	ld a, b
@@ -271,6 +286,10 @@ SetTwoBitPropFromXPosition:
 	ld a, PALETTES_YELLOW
 	jr .done
 .option1setMiddle
+	ld a, [wOptions2]
+	and %11
+	cp PALETTES_SGB2
+	ret z ; don't set middle if we set it to the second SGB type
 	ld a, PALETTES_SGB
 .done
 	or %11111100
@@ -360,7 +379,38 @@ GetTwoBitXPositionFromOptions:
 	cp 1
 	ld d, PAGE2_OPTION1_MIDDLE_XPOS
 	jr z, .done
+	cp %10
+	ld d, PAGE2_OPTION1_MIDDLE_XPOS
+	jr z, .done
 	ld d, PAGE2_OPTION1_RIGHT_XPOS
 .done
 	ld a, d
+	ret
+
+SGB1Char:
+	db "1@"
+
+SGB2Char:
+	db "2@"
+
+ToggleAltSGBColors:
+	ld a, SFX_PRESS_AB
+	call PlaySound
+	ld a, [wOptions2]
+	xor %11 ; %10 becomes %01, toggles between the two sgb options.
+	ld [wOptions2], a
+	and %11
+	call PrintSGBOptionNumber
+	call RunDefaultPaletteCommand
+	ret
+
+; input: a = what SGB color mode we want to be printed on the screen, a = %10 = SGB2, anything else = SGB1
+PrintSGBOptionNumber:
+	cp %10
+	ld de, SGB2Char
+	jr z, .printText
+	ld de, SGB1Char
+.printText
+	hlcoord 16, 3
+	call PlaceString
 	ret

@@ -1,5 +1,6 @@
 ; shinpokerednote: gbcnote: ADDED: color palettes based on pokemon yellow's GBC colors.
 ; GREENBUILD: palettes specific to pokemon green
+; These color palettes are displayed when COLOR option Y is selected on Super Gameboy or GBC.
 
 GBCBasePalettes:
 ; entries correspond to PAL_* constants

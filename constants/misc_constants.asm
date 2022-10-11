@@ -26,6 +26,7 @@ DEF TEXT_DELAY_SLOW    EQU %011 ; 3
 
 DEF PALETTES_DEFAULT    EQU %00 ; 0 
 DEF PALETTES_SGB        EQU %01 ; 1
+DEF PALETTES_SGB2       EQU %10 ; 2
 DEF PALETTES_YELLOW     EQU %11 ; 3
 
 	const_def 2 ; first two bytes are the palette options above

@@ -1,4 +1,5 @@
 ; PureRGBnote: GREENBUILD: added sgb palettes specific to green version
+; Default color palettes on SGB, or the palettes displayed when COLOR mode SGB1 is selected on SGB or GBC.
 
 SuperPalettes:
 ; entries correspond to PAL_* constants
