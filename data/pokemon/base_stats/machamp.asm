@@ -1,6 +1,6 @@
 	db DEX_MACHAMP ; pokedex id
 
-	db  100, 130,  80,  55,  65
+	db  120, 130,  80,  55,  65
 	;   hp   atk   def  spd  spc
 
 	db FIGHTING, FIGHTING ; type

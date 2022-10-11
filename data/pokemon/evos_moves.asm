@@ -819,9 +819,10 @@ MachokeEvosMoves:
 	db 30, BARRAGE
 	db 35, SUBMISSION
 	db 41, ROCK_SLIDE
+	db 44, COMET_PUNCH
 	db 47, MEGA_PUNCH
 	db 52, SKULL_BASH
-	db 55, COMET_PUNCH
+	db 56, COUNTER ; DRAIN PUNCH
 	db 0
 
 MrMimeEvosMoves:
@@ -1068,6 +1069,8 @@ SeelEvosMoves:
 	db 39, SKULL_BASH
 	db 43, AMNESIA
 	db 50, BLIZZARD
+	db 55, SWIFT
+	db 59, WITHDRAW
 	db 0
 
 DiglettEvosMoves:
@@ -1665,9 +1668,10 @@ MachopEvosMoves:
 	db 30, BARRAGE
 	db 35, SUBMISSION
 	db 41, ROCK_SLIDE
+	db 44, COMET_PUNCH
 	db 47, MEGA_PUNCH
 	db 52, SKULL_BASH
-	db 55, COMET_PUNCH
+	db 56, COUNTER ; DRAIN PUNCH
 	db 0
 
 ZubatEvosMoves:
@@ -1878,6 +1882,8 @@ DewgongEvosMoves:
 	db 39, SKULL_BASH
 	db 43, AMNESIA
 	db 50, BLIZZARD
+	db 55, SWIFT
+	db 59, WITHDRAW
 	db 0
 
 MissingNo79EvosMoves:
@@ -1937,9 +1943,10 @@ MachampEvosMoves:
 	db 30, BARRAGE
 	db 35, SUBMISSION
 	db 41, ROCK_SLIDE
+	db 44, COMET_PUNCH
 	db 47, MEGA_PUNCH
 	db 52, SKULL_BASH
-	db 56, COMET_PUNCH
+	db 56, COUNTER ; DRAIN PUNCH
 	db 0
 
 MissingNo7FEvosMoves:
