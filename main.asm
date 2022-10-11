@@ -403,6 +403,7 @@ INCLUDE "engine/gfx/set_attack_animation_palette.asm"
 INCLUDE "engine/battle/exp_bar_print.asm"
 INCLUDE "engine/overworld/strength.asm"
 INCLUDE "engine/battle/store_pkmn_levels.asm"
+INCLUDE "engine/gfx/remap_overworld_sprites.asm"
 
 
 ; PureRGBnote: TODO: these are currently unused but are intended to be where the save file is flashed to the ROM

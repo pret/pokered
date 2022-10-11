@@ -2043,7 +2043,6 @@ LoadMapHeader::
 	ld [wObjectDataPointerTemp], a
 	ld a, [hli]
 	ld [wObjectDataPointerTemp + 1], a
-	push hl
 	ld a, [wObjectDataPointerTemp]
 	ld l, a
 	ld a, [wObjectDataPointerTemp + 1]
@@ -2137,7 +2136,20 @@ LoadMapHeader::
 	ld b, a
 	ld c, $00
 .loadSpriteLoop
-	call MapSpritePictureIDs ; PureRGBnote: ADDED: code that will remap overworld NPC icons according to options selection (enhanced or original) 
+	ld a, [wSpriteOptions2]
+	bit BIT_MENU_ICON_SPRITES, a
+	ld a, [hl]
+	jr nz, .noMap
+	push bc
+	push de
+	ld d, a ; original sprite ID
+	push hl
+	callfar RemapSpritePictureIDs ; PureRGBnote: ADDED: code that will remap overworld NPC icons according to options selection (enhanced or original)
+	ld a, d ; remapped sprite ID
+	pop hl
+	pop de
+	pop bc
+.noMap
 	inc hl
 	ld [de], a ; x#SPRITESTATEDATA1_PICTUREID
 	inc d
@@ -2224,7 +2236,6 @@ LoadMapHeader::
 .finishUp
 	predef LoadTilesetHeader
 	callfar LoadWildData
-	pop hl ; restore hl from before going to the warp/sign/sprite data (this value was saved for seemingly no purpose)
 	ld a, [wCurMapHeight] ; map height in 4x4 tile blocks
 	add a ; double it
 	ld [wCurrentMapHeight2], a ; store map height in 2x2 tile blocks
@@ -2249,34 +2260,6 @@ LoadMapHeader::
 	pop af
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
-	ret
-
-; PureRGBnote: ADDED: code that will remap overworld NPC icons according to options selection (enhanced or original) 
-; if not using enhanced sprites we remap the sprite to its original sprite.
-MapSpritePictureIDs::
-	ld a, [wSpriteOptions2]
-	bit BIT_MENU_ICON_SPRITES, a
-	jr z, .mapSpriteCheck
-	jr .noSpriteAdd
-.mapSpriteCheck
-	push de
-	ld de, AltSpriteMappingTable
-.loop ; find the alt sprite mapping in the array
-	ld a, [de]
-	inc de
-	inc de
-	cp $ff
-	jr z, .mapSpriteDone
-	cp [hl]
-	jr nz, .loop
-	dec de
-	ld a, [de] ; replacement sprite from matching array entry
-	pop de
-	ret
-.mapSpriteDone
-	pop de
-.noSpriteAdd
-	ld a, [hl]
 	ret
 
 ; function to copy map connection data from ROM to WRAM
@@ -2451,8 +2434,6 @@ LoadDestinationWarpPosition::
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret
-
-INCLUDE "data/sprites/alt_sprite_mappings.asm"
 
 ; PureRGBnote: ADDED: code for setting blackout map on flying or entering a pokecenter (instead of just when healing pokemon)
 
