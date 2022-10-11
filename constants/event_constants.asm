@@ -98,7 +98,7 @@
 	const EVENT_BEAT_POKEMONTOWER_6_TRAINER_2
 	const_skip 3
 	const EVENT_BEAT_GHOST_MAROWAK
-	const_skip
+	const EVENT_CAUGHT_GHOST_MAROWAK ; PureRGBnote: ADDED: flag so catching marowak will complete the ghost marowak event and display different text
 	const EVENT_BEAT_POKEMONTOWER_7_TRAINER_0
 	const EVENT_BEAT_POKEMONTOWER_7_TRAINER_1
 	const EVENT_BEAT_POKEMONTOWER_7_TRAINER_2

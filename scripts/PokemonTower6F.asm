@@ -62,8 +62,7 @@ PokemonTower6Script4:
 	ld a, $f0
 	ld [wJoyIgnore], a
 ;;;;;;;;;; PureRGBnote: ADDED: ghost marowak can be caught and the event will complete if you do so
-	ld a, [wCaughtGhostMarowak]
-	and a
+	CheckEvent EVENT_CAUGHT_GHOST_MAROWAK
 	jr nz, .success 
 ;;;;;;;;;;
 	ld a, [wBattleResult]
@@ -154,8 +153,7 @@ PokemonTower6Text7:
 	ld hl, PokemonTower2Text_60c24
 	call PrintText
 ;;;;;;;;;; PureRGBnote: ADDED: ghost marowak can be caught and the event will complete if you do so
-	ld a, [wCaughtGhostMarowak]
-	and a
+	CheckEvent EVENT_CAUGHT_GHOST_MAROWAK
 	jr nz, .caughtGhostMarowak
 	ld hl, PokemonTower2Text_toAfterlife
 	jr .done
@@ -163,8 +161,6 @@ PokemonTower6Text7:
 	ld hl, PokemonTower2Text_CaughtGhostMarowak	
 .done
 	call PrintText
-	xor a
-	ld [wCaughtGhostMarowak], a 
 ;;;;;;;;;;
 	jp TextScriptEnd
 

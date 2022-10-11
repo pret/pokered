@@ -1145,7 +1145,7 @@ wItemDuplicationActive:: db ; after seeing the old man catch pokemon, this flag 
 wAIMoveSpamAvoider:: db
 wPreviousEnemySelectedMove:: db ; store for disable move functionality
 wPreviousPlayerSelectedMove:: db ; store for disable move functionality
-wCaughtGhostMarowak:: db ; flag that makes it so after catching ghost marowak different text displays than defeating it
+ds 1 ; unused byte
 wAITargetMonType1:: db ; the type of the pokemon the AI should think it's attacking (stays as the previous pokemon when you switch pokemon)
 wAITargetMonType2:: db ; the type of the pokemon the AI should think it's attacking (stays as the previous pokemon when you switch pokemon)
 wAITargetMonStatus:: db ; the current status of the pokemon the AI should think it's attacking (set when healing a pokemon's status or switching it out)
@@ -2468,7 +2468,8 @@ wSpriteOptions2:: db
 
 ; bits 0-1 = Palette setting 
 ; 00 = Original
-; 01 = SGB
+; 01 = SGB1
+; 10 = SGB2
 ; 11 = Yellow
 ; bit 2 = Alt pokemon colors on or off
 ; bit 3 = Is audio panning on or off

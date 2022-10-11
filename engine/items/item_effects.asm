@@ -565,8 +565,7 @@ ItemUseBall:
 	ld a, [wEnemyMonSpecies2]
 	cp RESTLESS_SOUL
 	jp nz, .notGhostMarowak
-	ld a, 1
-	ld [wCaughtGhostMarowak], a ; need to indicate to the map script that marowak was caught so the text differs when you do vs defeating it
+	SetEvent EVENT_CAUGHT_GHOST_MAROWAK
 .notGhostMarowak
 ;;;;;;;;;;
 
