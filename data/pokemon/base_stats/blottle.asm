@@ -3,7 +3,7 @@
 	db  60,  35,  60,  50,  65
 	;   hp  atk  def  spd  spc
 
-	db WATER, WATER ; type
+	db WATER, FAIRY ; type
 	db 190 ; catch rate
 	db 97 ; base exp
 

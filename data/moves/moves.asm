@@ -115,7 +115,7 @@ Moves:
 	move MIMIC,        MIMIC_EFFECT,                 0, NORMAL,       100, 10
 	move SCREECH,      DEFENSE_DOWN2_EFFECT,         0, NORMAL,        85, 40
 	move DOUBLE_TEAM,  EVASION_UP1_EFFECT,           0, NORMAL,       100, 15
-	move RECOVER,      HEAL_EFFECT,                  0, NORMAL,       100, 20
+	move RECOVER,      SPLASH_EFFECT,                0, NORMAL,       100, 20	;temporary until we fix it
 	move HARDEN,       DEFENSE_UP1_EFFECT,           0, NORMAL,       100, 30
 	move MINIMIZE,     EVASION_UP1_EFFECT,           0, NORMAL,       100, 20
 	move SMOKESCREEN,  ACCURACY_DOWN1_EFFECT,        0, NORMAL,       100, 20
@@ -145,7 +145,7 @@ Moves:
 	move CONSTRICT,    SPEED_DOWN_SIDE_EFFECT,      10, NORMAL,       100, 35
 	move AMNESIA,      SPECIAL_UP2_EFFECT,           0, PSYCHIC_TYPE, 100, 20
 	move KINESIS,      ACCURACY_DOWN1_EFFECT,        0, PSYCHIC_TYPE,  80, 15
-	move SOFTBOILED,   HEAL_EFFECT,                  0, NORMAL,       100, 10
+	move SOFTBOILED,   SPLASH_EFFECT,                0, NORMAL,       100, 10	;temporary until we fix it
 	move HI_JUMP_KICK, JUMP_KICK_EFFECT,            85, FIGHTING,      90, 20
 	move GLARE,        PARALYZE_EFFECT,              0, NORMAL,        75, 30
 	move DREAM_EATER,  DREAM_EATER_EFFECT,         100, PSYCHIC_TYPE, 100, 15
@@ -166,7 +166,7 @@ Moves:
 	move EXPLOSION,    EXPLODE_EFFECT,             170, NORMAL,       100,  5
 	move FURY_SWIPES,  TWO_TO_FIVE_ATTACKS_EFFECT,  18, NORMAL,        80, 15
 	move BONEMERANG,   ATTACK_TWICE_EFFECT,         50, GROUND,        90, 10
-	move REST,         HEAL_EFFECT,                  0, PSYCHIC_TYPE, 100, 10
+	move REST,         SPLASH_EFFECT,                0, PSYCHIC_TYPE, 100, 10	;temporary until we fix it
 	move ROCK_SLIDE,   NO_ADDITIONAL_EFFECT,        75, ROCK,          90, 10
 	move HYPER_FANG,   FLINCH_SIDE_EFFECT1,         80, NORMAL,        90, 15
 	move SHARPEN,      ATTACK_UP1_EFFECT,            0, NORMAL,       100, 30

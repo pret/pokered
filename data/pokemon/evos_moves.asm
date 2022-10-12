@@ -2823,3 +2823,44 @@ PorygonZEvosMoves:
 ; Learnset
 	db 50, AMNESIA	; will replace with nasty plot
 	db 0
+
+;ArticunoGEvosMoves:
+; Evolutions
+;	db 0
+; Learnset
+;	db 40, REFLECT
+;	db 45, HYPNOSIS
+;	db 51, PSYBEAM
+;	db 55, AGILITY
+;	db 60, LIGHT_SCREEN
+;	db 65, RECOVER
+;	db 70, DREAM_EATER
+;	db 0
+
+;ZapdosGEvosMoves:
+; Evolutions
+;	db 0
+; Learnset
+;	db 40, DOUBLE_KICK
+;	db 45, LIGHT_SCREEN
+;	db 51, LOW_KICK
+;	db 55, AGILITY
+;	db 58, JUMP_KICK
+;	db 62, DRILL_PECK
+;	db 66, ROLLING_KICK
+;	db 70, HI_JUMP_KICK
+;	db 0
+
+;MoltresGEvosMoves:
+; Evolutions
+;	db 0
+; Learnset
+;	db 40, BITE		; Fake Tears
+;	db 45, WING_ATTACK
+;	db 51, BRUTAL_SWING
+;	db 55, AGILITY
+;	db 58, FEINT_ATTACK
+;	db 62, AMNESIA		; Nasty Plot
+;	db 66, NIGHT_SLASH	; False Surrender
+;	db 70, SKY_ATTACK
+;	db 0
