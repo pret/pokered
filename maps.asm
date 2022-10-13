@@ -1135,6 +1135,41 @@ INCLUDE "data/maps/headers/CeruleanBadgeHouse.asm"
 INCLUDE "scripts/CeruleanBadgeHouse.asm"
 INCLUDE "data/maps/objects/CeruleanBadgeHouse.asm"
 
+INCLUDE "data/maps/headers/SilphGauntlet1F.asm"
+INCLUDE "scripts/SilphGauntlet1F.asm"
+INCLUDE "data/maps/objects/SilphGauntlet1F.asm"
+SilphGauntlet1F_Blocks: INCBIN "maps/SilphGauntlet1F.blk"
+
+INCLUDE "data/maps/headers/SilphGauntlet2F.asm"
+INCLUDE "scripts/SilphGauntlet2F.asm"
+INCLUDE "data/maps/objects/SilphGauntlet2F.asm"
+SilphGauntlet2F_Blocks: INCBIN "maps/SilphGauntlet2F.blk"
+
+INCLUDE "data/maps/headers/SilphGauntlet3F.asm"
+INCLUDE "scripts/SilphGauntlet3F.asm"
+INCLUDE "data/maps/objects/SilphGauntlet3F.asm"
+SilphGauntlet3F_Blocks: INCBIN "maps/SilphGauntlet3F.blk"
+
+INCLUDE "data/maps/headers/SilphGauntlet4F.asm"
+INCLUDE "scripts/SilphGauntlet4F.asm"
+INCLUDE "data/maps/objects/SilphGauntlet4F.asm"
+SilphGauntlet4F_Blocks: INCBIN "maps/SilphGauntlet4F.blk"
+
+INCLUDE "data/maps/headers/SilphGauntlet5F.asm"
+INCLUDE "scripts/SilphGauntlet5F.asm"
+INCLUDE "data/maps/objects/SilphGauntlet5F.asm"
+SilphGauntlet5F_Blocks: INCBIN "maps/SilphGauntlet5F.blk"
+
+INCLUDE "data/maps/headers/SilphGauntlet6F.asm"
+INCLUDE "scripts/SilphGauntlet6F.asm"
+INCLUDE "data/maps/objects/SilphGauntlet6F.asm"
+SilphGauntlet6F_Blocks: INCBIN "maps/SilphGauntlet6F.blk"
+
+INCLUDE "data/maps/headers/SilphGauntlet7F.asm"
+INCLUDE "scripts/SilphGauntlet7F.asm"
+INCLUDE "data/maps/objects/SilphGauntlet7F.asm"
+SilphGauntlet7F_Blocks: INCBIN "maps/SilphGauntlet7F.blk"
+
 
 SECTION "Maps 21", ROMX
 

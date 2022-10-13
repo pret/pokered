@@ -124,14 +124,14 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	mapconst SS_ANNE_1F_ROOMS,               8, 12 ; $66
 	mapconst SS_ANNE_2F_ROOMS,               8, 12 ; $67
 	mapconst SS_ANNE_B1F_ROOMS,              8, 12 ; $68
-	mapconst UNUSED_MAP_69,                  0,  0 ; $69	; Gauntlet Floor 1: Viridian Forest
-	mapconst UNUSED_MAP_6A,                  0,  0 ; $6A	; Gauntlet Floor 2: Mt. Moon
-	mapconst UNUSED_MAP_6B,                  0,  0 ; $6B	; Gauntlet Floor 3: S.S. Anne
+	mapconst SILPH_GAUNTLET_1F,              9, 10 ; $69	; Gauntlet Floor 1: Viridian Forest
+	mapconst SILPH_GAUNTLET_2F,             10, 13 ; $6A	; Gauntlet Floor 2: Mt. Moon
+	mapconst SILPH_GAUNTLET_3F,             13, 17 ; $6B	; Gauntlet Floor 3: S.S. Anne
 	mapconst VICTORY_ROAD_1F,                9, 10 ; $6C
-	mapconst UNUSED_MAP_6D,                  0,  0 ; $6D	; Gauntlet Floor 4: Lavender Tower
-	mapconst UNUSED_MAP_6E,                  0,  0 ; $6E	; Gauntlet Floor 5: Safari Zone
-	mapconst UNUSED_MAP_6F,                  0,  0 ; $6F	; Gauntlet Floor 6: Pokemon Mansion
-	mapconst UNUSED_MAP_70,                  0,  0 ; $70	; Gauntlet Floor 7: Chief's Office
+	mapconst SILPH_GAUNTLET_4F,              9, 10 ; $6D	; Gauntlet Floor 4: Lavender Tower
+	mapconst SILPH_GAUNTLET_5F,              9, 10 ; $6E	; Gauntlet Floor 5: Safari Zone
+	mapconst SILPH_GAUNTLET_6F,             12, 12 ; $6F	; Gauntlet Floor 6: Pokemon Mansion
+	mapconst SILPH_GAUNTLET_7F,              5,  6 ; $70	; Gauntlet Floor 7: Chief's Office
 	mapconst LANCES_ROOM,                   13, 13 ; $71
 	mapconst UNUSED_MAP_72,                  0,  0 ; $72	; Unused
 	mapconst UNUSED_MAP_73,                  0,  0 ; $73	; Unused
@@ -224,8 +224,8 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	mapconst ROCKET_HIDEOUT_B4F,            12, 15 ; $CA	; Unused, Citrine House 1?
 	mapconst ROCKET_HIDEOUT_ELEVATOR,        4,  3 ; $CB	; Unused, Citrine House 2?
 	mapconst UNUSED_MAP_CC,                  0,  0 ; $CC	; Unused, Citrine Dock?
-	mapconst UNUSED_MAP_CD,                  0,  0 ; $CD	; Unused, Citrine Cave?
-	mapconst UNUSED_MAP_CE,                  0,  0 ; $CE	; Unused
+	mapconst UNUSED_MAP_CD,                  0,  0 ; $CD	; Unused, Citrine Cave 1F?
+	mapconst UNUSED_MAP_CE,                  0,  0 ; $CE	; Unused, Citrine Cave B1F?
 	mapconst SILPH_CO_2F,                    9, 15 ; $CF
 	mapconst SILPH_CO_3F,                    9, 15 ; $D0
 	mapconst SILPH_CO_4F,                    9, 15 ; $D1
@@ -256,8 +256,8 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	mapconst SILPH_CO_10F,                   9,  8 ; $EA
 	mapconst SILPH_CO_11F,                   9,  9 ; $EB
 	mapconst SILPH_CO_ELEVATOR,              2,  2 ; $EC
-	mapconst UNUSED_MAP_ED,                  0,  0 ; $ED
-	mapconst UNUSED_MAP_EE,                  0,  0 ; $EE
+	mapconst UNUSED_MAP_ED,                  0,  0 ; $ED	; Unused
+	mapconst UNUSED_MAP_EE,                  0,  0 ; $EE	; Unused
 	mapconst TRADE_CENTER,                   4,  5 ; $EF
 	mapconst COLOSSEUM,                      4,  5 ; $F0
 	mapconst CELADON_UNIVERSITY_OUTSIDE,    20, 21 ; $F1 - was UNUSED_MAP_F1

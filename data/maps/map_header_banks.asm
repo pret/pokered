@@ -106,14 +106,14 @@ MapHeaderBanks::
 	db BANK(SSAnne1FRooms_h)
 	db BANK(SSAnne2FRooms_h)
 	db BANK(SSAnneB1FRooms_h)
-	db $1D ; UNUSED_MAP_69
-	db $1D ; UNUSED_MAP_6A
-	db $1D ; UNUSED_MAP_6B
+	db BANK(SilphGauntlet1F_h)
+	db BANK(SilphGauntlet2F_h)
+	db BANK(SilphGauntlet3F_h)
 	db BANK(VictoryRoad1F_h)
-	db $1D ; UNUSED_MAP_6D
-	db $1D ; UNUSED_MAP_6E
-	db $1D ; UNUSED_MAP_6F
-	db $1D ; UNUSED_MAP_70
+	db BANK(SilphGauntlet4F_h)
+	db BANK(SilphGauntlet5F_h)
+	db BANK(SilphGauntlet6F_h)
+	db BANK(SilphGauntlet7F_h)
 	db BANK(LancesRoom_h)
 	db $1D ; UNUSED_MAP_72
 	db $1D ; UNUSED_MAP_73
