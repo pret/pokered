@@ -202,7 +202,7 @@ _UsedCutText::
 _WannaTrade4Text::
 	text "I'm the TRADER!"
 	line "I love to help"
-	para "TRAINERs evolve"
+	para "trainers evolve"
 	line "their #MON!"
 	para "Wanna trade?"
 	done

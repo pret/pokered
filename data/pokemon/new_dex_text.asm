@@ -657,6 +657,36 @@ _KleavorDexEntry::
 	next "fall huge trees"
 	next "in a single slice"
 	dex
+	
+_ArticunoGDexEntry::
+	text "From its eyes,"
+	next "it fires beams"
+	next "which can stun"
+
+	page "and immobilize"
+	next "foes as if they"
+	next "had been frozen"
+	dex
+	
+_ZapdosGDexEntry::
+	text "Its leg muscles"
+	next "are so powerful"
+	next "that one kick can"
+
+	page "pulverize a dump"
+	next "truck. It runs"
+	next "at over 180 mph"
+	dex
+	
+_MoltresGDexEntry::
+	text "The sinister aura"
+	next "that surrounds it"
+	next "is said to burn"
+
+	page "the spirit of"
+	next "any creature that"
+	next "wanders too close"
+	dex
 
 _MissingNoDexEntry::
 	text "This is a newly"

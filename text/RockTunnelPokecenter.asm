@@ -17,9 +17,9 @@ _DittoSalesmanText1::
 	line "kid! Nice to"
 	cont "see you again!"
 	
-	para "I have a very"
-	line "special deal"
-	cont "for you again!"
+	para "I have another"
+	line "very special"
+	cont "deal for you!"
 	
 	para "For a limited"
 	line "time, you can"

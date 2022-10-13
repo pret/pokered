@@ -189,10 +189,11 @@ SECTION "Battle Engine 7", ROMX
 INCLUDE "data/moves/moves.asm"
 INCLUDE "data/pokemon/base_stats.asm"
 INCLUDE "data/pokemon/cries.asm"
-INCLUDE "engine/battle/scroll_draw_trainer_pic.asm"
-INCLUDE "engine/battle/trainer_ai.asm"
-INCLUDE "engine/battle/draw_hud_pokeball_gfx.asm"
+INCLUDE "engine/battle/unused_stats_functions.asm"
+INCLUDE "engine/pokemon/evos_moves.asm"
 INCLUDE "engine/battle/move_effects/heal.asm"
+INCLUDE "engine/battle/move_effects/transform.asm"
+INCLUDE "engine/battle/move_effects/reflect_light_screen.asm"
 
 
 SECTION "Battle Core", ROMX
@@ -208,8 +209,6 @@ INCLUDE "engine/movie/trade.asm"
 INCLUDE "engine/movie/intro.asm"
 INCLUDE "engine/movie/trade2.asm"
 INCLUDE "gfx/trade.asm"
-INCLUDE "engine/battle/unused_stats_functions.asm"
-INCLUDE "engine/battle/move_effects/transform.asm"
 
 
 SECTION "Pokédex Rating", ROMX
@@ -237,8 +236,6 @@ SECTION "Battle Engine 8", ROMX
 
 INCLUDE "engine/battle/init_battle_variables.asm"
 INCLUDE "engine/battle/move_effects/paralyze.asm"
-INCLUDE "engine/battle/move_effects/reflect_light_screen.asm"
-
 
 
 SECTION "Hidden Objects 2", ROMX
@@ -253,7 +250,9 @@ INCLUDE "engine/events/hidden_objects/indigo_plateau_hq.asm"
 SECTION "Battle Engine 9", ROMX
 
 INCLUDE "engine/battle/experience.asm"
-INCLUDE "engine/pokemon/evos_moves.asm"
+INCLUDE "engine/battle/scroll_draw_trainer_pic.asm"
+INCLUDE "engine/battle/trainer_ai.asm"
+INCLUDE "engine/battle/draw_hud_pokeball_gfx.asm"
 
 
 SECTION "Diploma", ROMX

@@ -75,8 +75,8 @@ YoungsterData:
 	db 19, SANDSHREW, ZUBAT, 0
 	db 17, RATTATA, RATTATA, RATICATE, 0
 	db 18, NIDORAN_M, NIDORINO, 0
-; Unused
-	db 17, SPEAROW, RATTATA, RATTATA, SPEAROW, 0
+; Unused - this will be used in the Silph Gauntlet
+	db 62, RATICATE, ARBOK, SANDSLASH, FEAROW, NIDOKING, VENUSAUR, 0
 
 BugCatcherData:
 ; Viridian Forest
@@ -95,8 +95,8 @@ BugCatcherData:
 ; Route 6
 	db 16, WEEDLE, CATERPIE, WEEDLE, 0
 	db 20, BUTTERFREE, 0
-; Unused
-	db 18, METAPOD, CATERPIE, VENONAT, 0
+; Unused - this will be used in the Silph Gauntlet
+	db 62, SCIZOR, BEEDRILL, PARASECT, VENOMOTH, PURAKKUSU, KLEAVOR, 0
 ; Route 9
 	db 19, BEEDRILL, BEEDRILL, 0
 	db 20, CATERPIE, WEEDLE, VENONAT, 0
@@ -129,6 +129,8 @@ LassData:
 ; Celadon Gym
 	db 23, BELLSPROUT, WEEPINBELL, 0
 	db 23, ODDISH, GLOOM, 0
+; New - this will be used in the Silph Gauntlet
+	; db 62, PERSIAN, CLEFABLE, VILEPLUME, WIGGLYTUFF, POLITOED, NIDOQUEEN, 0
 
 SailorData:
 ; SS Anne Stern
@@ -142,6 +144,8 @@ SailorData:
 	db 20, MACHOP, 0
 ; Vermilion Gym
 	db 21, PIKACHU, PIKACHU, 0
+; New - this will be used in the Silph Gauntlet
+	; db 64, KINGDRA, MACHAMP, CLOYSTER, STARMIE, GOROCHU, TENTACRUEL, 0
 
 JrTrainerMData:
 ; Pewter Gym
@@ -153,8 +157,8 @@ JrTrainerMData:
 ; Route 6
 	db 20, SQUIRTLE, 0
 	db 16, SPEAROW, RATICATE, 0
-; Unused
-	db 18, DIGLETT, DIGLETT, SANDSHREW, 0
+; Unused - this will be used in the Silph Gauntlet
+	db 63, DUGTRIO, PRIMEAPE, SANDSLASH, BLASTOISE, NIDOKING, ARCANINE, 0
 ; Route 9
 	db 21, GROWLITHE, CHARMANDER, 0
 	db 19, RATTATA, DIGLETT, EKANS, SANDSHREW, 0
@@ -198,6 +202,8 @@ JrTrainerFData:
 	db 29, BELLSPROUT, ODDISH, TANGELA, 0
 ; Route 20
 	db 30, TENTACOOL, HORSEA, SEEL, 0
+; New - this will be used in the Silph Gauntlet
+	; db 63, TSUBOMITTO, SEAKING, MADAAMU, BELLOSSOM, GOROCHU, VENUSAUR, 0
 
 PokemaniacData:
 ; Route 10
@@ -211,6 +217,8 @@ PokemaniacData:
 	db 40, CHARMELEON, LAPRAS, LICKITUNG, 0
 ; Rock Tunnel 1F
 	db 23, CUBONE, SLOWPOKE, 0
+; New - this will be used in the Silph Gauntlet
+	db 66, GUARDIA, SLOWBRO, CHARIZARD, STEELIX, LICKILICKY, RHYPERIOR, 0
 
 SuperNerdData:
 ; Mt. Moon 1F
@@ -224,7 +232,7 @@ SuperNerdData:
 ; Unused
 	db 30, PORYGON, 0 ; - used in celadon university
 	db 25, MAGNETITE, ELECTRODE, KABUTO, OMANYTE, 0 ; - used in celadon university
-	db 24, MAGNEMITE, VOLTORB, 0
+	db 63, MAGNEZONE, MUK, KABUTOPS, OMASTAR, PORYGONZ, MAGMORTAR, 0 ; - used in Silph Gauntlet
 ; Cinnabar Gym
 	db 36, VULPIX, VULPIX, NINETALES, 0
 	db 34, PONYTA, CHARMANDER, VULPIX, GROWLITHE, 0
@@ -253,6 +261,8 @@ HikerData:
 	db 19, GEODUDE, MACHOP, GEODUDE, GEODUDE, 0
 	db 20, ONIX, ONIX, GEODUDE, 0
 	db 21, GEODUDE, GRAVELER, 0
+; New - this will be used in the Silph Gauntlet
+	db 63, STEELIX, GOLEM, MACHAMP, CROBAT, CROAKOZUNA, GUARDIA, 0
 
 BikerData:
 ; Route 13
@@ -284,10 +294,12 @@ BikerData:
 	db 26, KOFFING, KOFFING, GRIMER, KOFFING, 0
 	db 28, GRIMER, GRIMER, KOFFING, 0
 	db 29, KOFFING, MUK, 0
+; New - this will be used in the Silph Gauntlet
+	db 65, ELECTRODE, MUK, WEEZING, TENTACRUEL, HYPNO, HITMONTOP, 0
 
 BurglarData:
 ; Unused
-	db 29, GROWLITHE, VULPIX, 0
+	db 66, NINETALES, RAPIDASH, ARCANINE, WEEZING, MAGMORTAR, MUK, 0 ; - used in Silph Gauntlet
 	db 33, GROWLITHE, 0
 	db 28, VULPIX, CHARMANDER, PONYTA, 0
 ; Cinnabar Gym
@@ -426,8 +438,8 @@ JugglerData:
 	db 34, DROWZEE, HYPNO, 0
 ; Victory Road 2F
 	db 48, MR_MIME, 0
-; Unused
-	db 33, HYPNO, 0
+; Unused - this will be used in the Silph Gauntlet
+	db 65, HYPNO, MR_MIME, ALAKAZAM, ELECTRODE, GENGAR, SLOWKING, 0
 ; Fuchsia Gym
 	db 38, HYPNO, 0
 	db 34, DROWZEE, KADABRA, 0
@@ -441,8 +453,8 @@ TamerData:
 	db 39, ARBOK, TAUROS, 0
 ; Victory Road 2F
 	db 44, PERSIAN, GOLDUCK, 0
-; Unused
-	db 42, RHYHORN, PRIMEAPE, ARBOK, TAUROS, 0
+; Unused - this will be used in the Silph Gauntlet
+	db 66, RHYPERIOR, ARBOK, SANDSLASH, PRIMEAPE, GOLDUCK, TAUROS, 0
 
 BirdKeeperData:
 ; Route 13
@@ -504,7 +516,8 @@ ProfOakData:
 	db $FF, 66, TAUROS, 67, ARCANINE, 68, EXEGGUTOR, 68, GYARADOS, 69, NIDOKING, 70, CHARIZARD, 0
 
 ChiefData:
-; none
+; New - this will be used in the Silph Gauntlet
+	db $FF, 73, MAGNEZONE, 72, LAPRAS, 73, SCIZOR, 73, EXEGGUTOR, 75, PORYGON2, 77, OMEGA, 0
 
 ScientistData:
 ; Unused

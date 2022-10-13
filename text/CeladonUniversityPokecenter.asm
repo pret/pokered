@@ -11,9 +11,9 @@ _CeladonUniversityPokecenterText4::
 
 _CuboneSalesmanText1::
 	text "MAN: Hey there,"
-	line "BIG SHOT TRAINER!"
+	line "big shot trainer!"
 	
-	para "Have I got the"
+	para "Have I got a"
 	line "deal for you!"
 	
 	para "Strike fear into"

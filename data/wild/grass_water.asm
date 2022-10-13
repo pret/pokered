@@ -11,7 +11,7 @@ WildDataPointers:
 	dw NothingWildMons         ; CINNABAR_ISLAND
 	dw NothingWildMons         ; INDIGO_PLATEAU
 	dw NothingWildMons         ; SAFFRON_CITY
-	dw NothingWildMons         ; unused
+	dw NothingWildMons         ; CITRINE_CITY
 	dw Route1WildMons          ; ROUTE_1
 	dw Route2WildMons          ; ROUTE_2
 	dw Route3WildMons          ; ROUTE_3
@@ -105,13 +105,13 @@ WildDataPointers:
 	dw NothingWildMons
 	dw NothingWildMons
 	dw NothingWildMons
-	dw NothingWildMons
-	dw NothingWildMons
-	dw NothingWildMons
+	dw Gauntlet1FWildMons
+	dw Gauntlet2FWildMons
+	dw Gauntlet3FWildMons
 	dw VictoryRoad1FWildMons
-	dw NothingWildMons
-	dw NothingWildMons
-	dw NothingWildMons
+	dw Gauntlet4FWildMons
+	dw Gauntlet5FWildMons
+	dw Gauntlet6FWildMons
 	dw NothingWildMons
 	dw NothingWildMons
 	dw NothingWildMons
@@ -322,3 +322,9 @@ INCLUDE "data/wild/maps/VictoryRoad3F.asm"
 INCLUDE "data/wild/maps/VictoryRoad1F.asm"
 INCLUDE "data/wild/maps/DiglettsCave.asm"
 INCLUDE "data/wild/maps/CinnabarVolcano.asm"
+INCLUDE "data/wild/maps/SilphGauntlet1F.asm"
+INCLUDE "data/wild/maps/SilphGauntlet2F.asm"
+INCLUDE "data/wild/maps/SilphGauntlet3F.asm"
+INCLUDE "data/wild/maps/SilphGauntlet4F.asm"
+INCLUDE "data/wild/maps/SilphGauntlet5F.asm"
+INCLUDE "data/wild/maps/SilphGauntlet6F.asm"
