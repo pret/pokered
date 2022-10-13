@@ -913,6 +913,7 @@ wInGame:: db ; whether we're in-game rather than in the main menu before loading
 
 wListWithTMText:: db ; whether the current list menu can contain TMs and should print their moves
 wTMTextShown:: db ; whether text for a TM is visible in a menu
+wSum:: ; a temp store for 16 bit values created by addition, used with PrintNumber to display the sum on screen
 wDamageIntention:: dw ; in battle, the amount of damage a move will do before doing it (used for high jump kick / jump kick crash effect)
 wSpiralBallsDelay:: db
 wIsAltPalettePkmn:: db ;a flag for features related to alternate pokemon color palettes, set in these scenarios:
