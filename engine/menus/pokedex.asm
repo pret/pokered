@@ -382,6 +382,8 @@ HandlePokedexListMenu:
 	jr nz, .showTownMap
 	jp .loop
 .showTownMap
+	ld a, SFX_SWITCH
+	call PlaySound
 	farjp DisplayTownMap
 ;;;;;;;;;;
 
