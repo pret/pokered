@@ -229,6 +229,8 @@ GetOverworldPalette:
 	jr c, .townOrRoute
 	cp CERULEAN_ROCKET_HOUSE_B1F ; PureRGBnote: ADDED: this new map uses the red pokemon palette
 	jr z, .rocketHouseBasement
+	cp POWER_PLANT
+	jr z, .powerPlant
 	cp CERULEAN_CAVE_2F
 	jr c, .normalDungeonOrBuilding
 	cp LORELEIS_ROOM
@@ -270,6 +272,9 @@ GetOverworldPalette:
 	jr .town
 .seafoam
 	ld a, PAL_0F - 1
+	jr .town
+.powerPlant
+	ld a, PAL_MEWMON - 1
 	jr .town
 
 ; PureRGBnote: ADDED: updated function to allow alternate palette pokemon based on loaded data.
