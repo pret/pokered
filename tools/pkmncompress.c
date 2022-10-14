@@ -32,7 +32,7 @@ void write_bit(int bit) {
 }
 
 void compress_plane(uint8_t *plane, int width) {
-	static int nybble_lookup[2][0x10] = {
+	static int gray_codes[2][0x10] = {
 		{0x0, 0x1, 0x3, 0x2, 0x6, 0x7, 0x5, 0x4, 0xC, 0xD, 0xF, 0xE, 0xA, 0xB, 0x9, 0x8},
 		{0x8, 0x9, 0xB, 0xA, 0xE, 0xF, 0xD, 0xC, 0x4, 0x5, 0x7, 0x6, 0x2, 0x3, 0x1, 0x0},
 	};
@@ -44,10 +44,10 @@ void compress_plane(uint8_t *plane, int width) {
 		}
 		int j = i / width + m * width * 8;
 		int nybble_hi = (plane[j] >> 4) & 0xF;
-		int code_1 = nybble_lookup[nybble_lo & 1][nybble_hi];
+		int code_hi = gray_codes[nybble_lo & 1][nybble_hi];
 		nybble_lo = plane[j] & 0xF;
-		int code_2 = nybble_lookup[nybble_hi & 1][nybble_lo];
-		plane[j] = (code_1 << 4) | code_2;
+		int code_lo = gray_codes[nybble_hi & 1][nybble_lo];
+		plane[j] = (code_hi << 4) | code_lo;
 	}
 }
 
@@ -105,7 +105,7 @@ int interpret_compress(uint8_t *plane1, uint8_t *plane2, int mode, int order, in
 	}
 	cur_bit = 7;
 	cur_byte = 0;
-	memset(compressed, 0, sizeof(compressed) / sizeof(*compressed));
+	memset(compressed, 0, COUNTOF(compressed));
 	compressed[0] = (width << 4) | width;
 	write_bit(order);
 	uint8_t bit_groups[0x1000] = {0};
@@ -113,7 +113,7 @@ int interpret_compress(uint8_t *plane1, uint8_t *plane2, int mode, int order, in
 	for (int plane = 0; plane < 2; plane++) {
 		int type = 0;
 		int nums = 0;
-		memset(bit_groups, 0, sizeof(bit_groups) / sizeof(*bit_groups));
+		memset(bit_groups, 0, COUNTOF(bit_groups));
 		for (int x = 0; x < width; x++) {
 			for (int bit = 0; bit < 8; bit += 2) {
 				for (int y = 0, byte = x * width * 8; y < width * 8; y++, byte++) {
@@ -129,7 +129,7 @@ int interpret_compress(uint8_t *plane1, uint8_t *plane2, int mode, int order, in
 							write_bit(0);
 						}
 						type = 1;
-						memset(bit_groups, 0, sizeof(bit_groups) / sizeof(*bit_groups));
+						memset(bit_groups, 0, COUNTOF(bit_groups));
 						index = 0;
 					} else {
 						if (!type) {
@@ -171,7 +171,7 @@ int compress(uint8_t *data, int width) {
 		plane1[i] = data[i * 2];
 		plane2[i] = data[i * 2 + 1];
 	}
-	uint8_t current[sizeof(compressed) / sizeof(*compressed)] = {0};
+	uint8_t current[COUNTOF(compressed)] = {0};
 	int compressed_size = -1;
 	for (int mode = 1; mode < 4; mode++) {
 		for (int order = 0; order < 2; order++) {
@@ -181,12 +181,12 @@ int compress(uint8_t *data, int width) {
 			int new_size = interpret_compress(plane1, plane2, mode, order, width);
 			if (compressed_size == -1 || new_size < compressed_size) {
 				compressed_size = new_size;
-				memset(current, 0, sizeof(current) / sizeof(*current));
+				memset(current, 0, COUNTOF(current));
 				memcpy(current, compressed, compressed_size / 8);
 			}
 		}
 	}
-	memset(compressed, 0, sizeof(compressed) / sizeof(*compressed));
+	memset(compressed, 0, COUNTOF(compressed));
 	memcpy(compressed, current, compressed_size / 8);
 	free(plane1);
 	free(plane2);
