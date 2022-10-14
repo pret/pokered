@@ -122,3 +122,23 @@ _FuchsiaCityKabutoText::
 _FuchsiaCityText_19b2a::
 	text "..."
 	done
+
+_FuchsiaCityFossilFanText::
+	text "This fossil"
+	line "#MON is really"
+	cont "shy."
+
+	para "It stays in its"
+	line "shell all day."
+	done
+
+_FuchsiaCityFossilFanText2::
+	text "But if you wait"
+	line "quietly, it"
+	cont "occasionally"
+	cont "peeks out!"
+	done
+
+_FuchsiaCityFossilFanText3::
+	text "There it is!"
+	done

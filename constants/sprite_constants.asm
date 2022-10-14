@@ -71,7 +71,6 @@
 	const SPRITE_CAT                     ; $47
 	const SPRITE_BIRD2                   ; $47
 	const SPRITE_PSYCHIC                 ; $47
-	const SPRITE_VOLTORB                 ; $47
 	const SPRITE_FIGHTING                ; $48
 DEF FIRST_STILL_SPRITE EQU const_value
 	const SPRITE_POKE_BALL               ; $3e
@@ -81,8 +80,8 @@ DEF FIRST_STILL_SPRITE EQU const_value
 	const SPRITE_POKEDEX                 ; $42
 	const SPRITE_CLIPBOARD               ; $43
 	const SPRITE_SNORLAX                 ; $44
-	const SPRITE_HELIX                   ; $46
 	const SPRITE_OLD_AMBER               ; $45
 	const SPRITE_GAMBLER_ASLEEP          ; $48
 	const SPRITE_MONSTER2_STILL          ; $48
+	const SPRITE_POKE_BALL2			 	 ; $49
 DEF NUM_SPRITES EQU const_value - 1

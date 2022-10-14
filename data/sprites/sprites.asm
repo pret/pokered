@@ -77,7 +77,6 @@ SpriteSheetPointerTable:
 	overworld_sprite CatSprite, 12     	        ; SPRITE_CAT
 	overworld_sprite LegendaryBirdSprite, 12    ; SPRITE_BIRD2
 	overworld_sprite PsychicSprite, 12     	    ; SPRITE_PSYCHIC
-	overworld_sprite VoltorbSprite, 12     		; SPRITE_VOLTORB
 	overworld_sprite FightingSprite, 12     	; SPRITE_FIGHTING
 	overworld_sprite PokeBallSprite, 4          ; SPRITE_POKE_BALL
 	overworld_sprite FossilSprite, 4            ; SPRITE_FOSSIL
@@ -86,8 +85,8 @@ SpriteSheetPointerTable:
 	overworld_sprite PokedexSprite, 4           ; SPRITE_POKEDEX
 	overworld_sprite ClipboardSprite, 4         ; SPRITE_CLIPBOARD
 	overworld_sprite SnorlaxSprite, 4           ; SPRITE_SNORLAX
-	overworld_sprite HelixSprite, 4             ; SPRITE_HELIX
 	overworld_sprite OldAmberSprite, 4          ; SPRITE_OLD_AMBER
 	overworld_sprite GamblerAsleepSprite, 4     ; SPRITE_GAMBLER_ASLEEP
 	overworld_sprite Monster2Sprite, 4          ; SPRITE_MONSTER2_STILL
+	overworld_sprite PokeballSprite2, 4     	; SPRITE_POKE_BALL2
 	assert_table_length NUM_SPRITES

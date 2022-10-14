@@ -1,4 +1,7 @@
+DEF OMANYTE_KABUTO_FOSSIL_TILE EQU $7C0
+
 FuchsiaCity_Script:
+	call TryLoadKabutoSprite
 	call FuchsiaReplaceCutTiles
 	jp EnableAutoTextBoxDrawing
 
@@ -13,6 +16,7 @@ FuchsiaReplaceCutTiles:
 	jr nz, .removeAddCutTilesNoRedraw
 	ret
 .removeAddCutTiles
+	ResetEvent EVENT_FOSSIL_FAN_TEXT_TOGGLE ; this is just a good place to clear this event so the guy says the first text every time you reload the area.
 	CheckEvent EVENT_DELETED_FUCHSIA_TREES
 	jr nz, .remove
 .add
@@ -33,6 +37,7 @@ FuchsiaReplaceCutTiles:
 	ret
 .removeAddCutTilesNoRedraw
 	; this avoids redrawing the map because when going between areas these tiles are offscreen.
+	ResetEvent EVENT_FOSSIL_FAN_TEXT_TOGGLE ; this is just a good place to clear this event so the guy says the first text every time you reload the area.
 	CheckEvent EVENT_DELETED_FUCHSIA_TREES
 	jr nz, .removeNoRedraw
 .addNoRedraw
@@ -52,6 +57,32 @@ FuchsiaReplaceCutTiles:
 	predef ReplaceTileBlockNoRedraw
 	ret
 
+; PureRGBnote: ADDED: since we don't have enough space in the sprite sheet to add kabuto's icon, 
+; we just replace omanyte's with it when loading fuchsia city if kabuto is supposed to be in the zoo
+TryLoadKabutoSprite:
+	ld a, [wSpriteOptions2]
+	bit BIT_MENU_ICON_SPRITES, a
+	ret z
+	CheckEvent EVENT_GOT_HELIX_FOSSIL
+	ret z
+	ld hl, wCurrentMapScriptFlags
+	bit 5, [hl] ; did we load the map from a save/warp/door/battle, etc?
+	jr nz, ReplaceOmanyteWithKabutoSprite
+	bit 4, [hl] ; did we enter the map by traversal from another route
+	jr nz, ReplaceOmanyteWithKabutoSprite
+	CheckEvent EVENT_RELOADED_KABUTO_SPRITE
+	ret nz
+	call ReplaceOmanyteWithKabutoSprite
+	SetEvent EVENT_RELOADED_KABUTO_SPRITE
+	ret
+	
+ReplaceOmanyteWithKabutoSprite::
+	ld hl, vChars0 + OMANYTE_KABUTO_FOSSIL_TILE
+	ld de, KabutoSprite
+	lb bc, BANK(KabutoSprite), (KabutoSpriteEnd - KabutoSprite) / $10
+	call CopyVideoData
+	ret
+
 
 FuchsiaCity_TextPointers:
 	dw FuchsiaCityText1
@@ -64,6 +95,7 @@ FuchsiaCity_TextPointers:
 	dw FuchsiaCityText8
 	dw FuchsiaCityText9
 	dw FuchsiaCityText10
+	dw FuchsiaCityFossilFanText
 	dw FuchsiaCityText11
 	dw FuchsiaCityText12
 	dw FuchsiaCityText13
@@ -120,6 +152,26 @@ FuchsiaCityText3:
 	text_end
 
 FuchsiaCityText4:
+	text_asm
+	ld hl, FuchsiaCityText4raw
+	call PrintText
+;;;;;;;;;; PureRGBnote: ADDED: the voltorb will now move while talking to this NPC (but only if OGPlus icons option is turned on)
+	ld a, [wSpriteOptions2]
+	bit BIT_MENU_ICON_SPRITES, a
+	jr z, .done
+	ld de, vChars0 + VOLTORB_POKEBALL_TILE1
+	callfar LoadVoltorbSprite
+	ld c, 10
+	call DelayFrames
+	ld hl, vChars0 + VOLTORB_POKEBALL_TILE1
+	ld de, PokeBallSprite
+	lb bc, BANK(PokeBallSprite), (PokeBallSpriteEnd - PokeBallSprite) / $10
+	call CopyVideoData
+.done
+;;;;;;;;;;
+	jp TextScriptEnd
+
+FuchsiaCityText4raw:
 	text_far _FuchsiaCityText4
 	text_end
 
@@ -247,3 +299,120 @@ FuchsiaCityKabutoText:
 FuchsiaCityText_19b2a:
 	text_far _FuchsiaCityText_19b2a
 	text_end
+
+FuchsiaCityFossilFanText:
+	text_asm
+	CheckEvent EVENT_FOSSIL_FAN_TEXT_TOGGLE
+	jr nz, .moveFossil
+	ld a, [wSpriteOptions2]
+	bit BIT_MENU_ICON_SPRITES, a 
+	jr z, .noEvent
+	CheckEitherEventSet EVENT_GOT_HELIX_FOSSIL, EVENT_GOT_DOME_FOSSIL
+	jr z, .noEvent
+	ld hl, FuchsiaCityFossilFanText1Prompt
+	call PrintText
+	ld hl, FuchsiaCityFossilFanText2
+	call PrintText
+	SetEvent EVENT_FOSSIL_FAN_TEXT_TOGGLE
+	jr .done
+.moveFossil
+	ResetEvent EVENT_FOSSIL_FAN_TEXT_TOGGLE
+	ld a, [wSpriteOptions2]
+	bit BIT_MENU_ICON_SPRITES, a 
+	jr z, .noEvent
+	call ShowFossilPokemon
+	ld a, 11
+	ldh [hSpriteIndex], a
+	ld a, SPRITE_FACING_UP
+  	ldh [hSpriteFacingDirection], a
+  	call SetSpriteFacingDirection
+	ld hl, FuchsiaCityFossilFanText3
+	call PrintText
+	ld c, 20
+	call DelayFrames
+	ld a, PLAYER_DIR_UP
+	ld [wPlayerMovingDirection], a
+	call UpdateSprites
+	call MoveFossilPokemon
+  	jr .done
+.noEvent
+	ld hl, FuchsiaCityFossilFanText1
+	call PrintText
+.done
+	jp TextScriptEnd
+
+FuchsiaCityFossilFanText1:
+	text_far _FuchsiaCityFossilFanText
+	text_end
+
+FuchsiaCityFossilFanText1Prompt:
+	text_far _FuchsiaCityFossilFanText
+	text_promptbutton
+	text_end
+
+FuchsiaCityFossilFanText2:
+	text_far _FuchsiaCityFossilFanText2
+	text_end
+
+FuchsiaCityFossilFanText3:
+	text_far _FuchsiaCityFossilFanText3
+	text_end
+
+GetFossilSpriteData:
+	CheckEvent EVENT_GOT_HELIX_FOSSIL
+	jr nz, .domeFossil
+	ld de, OmanyteSprite
+	lb bc, BANK(OmanyteSprite), (OmanyteSpriteEnd - OmanyteSprite) / $10
+	jr .showSprite
+.domeFossil
+	ld de, KabutoSpriteFrame2
+	lb bc, BANK(KabutoSpriteFrame2), (KabutoSpriteFrame2End - KabutoSpriteFrame2) / $10
+.showSprite
+	ld hl, vChars0 + OMANYTE_KABUTO_FOSSIL_TILE
+	ret
+
+ShowFossilPokemon:
+	call GetFossilSpriteData
+	call CopyVideoData
+	ret
+
+GetOmanyteSpriteDataFrame2:
+	ld de, OmanyteSpriteFrame2
+	lb bc, BANK(OmanyteSpriteFrame2), (OmanyteSpriteFrame2End - OmanyteSpriteFrame2) / $10
+	ld hl, vChars0 + OMANYTE_KABUTO_FOSSIL_TILE
+	ret
+
+MoveFossilPokemon:
+	CheckEvent EVENT_GOT_HELIX_FOSSIL
+	jr nz, HideKabuto
+	; omanyte will wiggle a bit before hiding
+	ld a, 4
+	push af
+	; make it move a bit by alternating frames
+.loop
+	call GetFossilSpriteData
+	call CopyVideoData
+	call Delay3
+	call GetOmanyteSpriteDataFrame2
+	call CopyVideoData
+	call Delay3
+	pop af
+	dec a
+	push af
+	jr nz, .loop
+	pop af
+.hideOmanyte
+	ld de, FossilSprite
+	lb bc, BANK(FossilSprite), (FossilSpriteEnd - FossilSprite) / $10
+	jr RunHide
+	
+HideKabuto:
+	ld c, 20
+	call DelayFrames
+	ld de, KabutoSprite
+	lb bc, BANK(KabutoSprite), (KabutoSpriteEnd - KabutoSprite) / $10
+	; fall through
+RunHide:
+	ld hl, vChars0 + OMANYTE_KABUTO_FOSSIL_TILE
+	call CopyVideoData
+	ret

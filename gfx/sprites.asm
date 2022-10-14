@@ -18,8 +18,11 @@ CaptainSprite::          INCBIN "gfx/sprites/captain.2bpp"
 FisherSprite::           INCBIN "gfx/sprites/fisher.2bpp"
 KogaSprite::             INCBIN "gfx/sprites/koga.2bpp"
 GuardSprite::            INCBIN "gfx/sprites/guard.2bpp"
+MomSprite::              INCBIN "gfx/sprites/mom.2bpp"
 PokeBallSprite::         INCBIN "gfx/sprites/poke_ball.2bpp"
+PokeBallSpriteEnd::
 FossilSprite::           INCBIN "gfx/sprites/fossil.2bpp"
+FossilSpriteEnd::
 BoulderSprite::          INCBIN "gfx/sprites/boulder.2bpp"
 PaperSprite::            INCBIN "gfx/sprites/paper.2bpp"
 PokedexSprite::          INCBIN "gfx/sprites/pokedex.2bpp"
@@ -28,8 +31,6 @@ SnorlaxSprite::          INCBIN "gfx/sprites/snorlax.2bpp"
 Monster2Sprite::         INCBIN "gfx/sprites/monster2.2bpp"
 Quadruped2Sprite::       INCBIN "gfx/sprites/quadruped2.2bpp"
 OldAmberSprite::         INCBIN "gfx/sprites/old_amber.2bpp"
-HelixSprite::            INCBIN "gfx/sprites/helix.2bpp"
-VoltorbSprite::          INCBIN "gfx/sprites/voltorb.2bpp"
 GamblerAsleepSprite::    INCBIN "gfx/sprites/gambler_asleep.2bpp"
 
 
@@ -77,8 +78,6 @@ SeelSprite::             INCBIN "gfx/sprites/seel.2bpp"
 
 SECTION "NPC Sprites 3", ROMX, BANK[$30]
 
-MomSprite::              INCBIN "gfx/sprites/mom.2bpp"
-
 PsychicSprite::          INCBIN "gfx/sprites/psychic.2bpp"
 FightingSprite::          INCBIN "gfx/sprites/fighting.2bpp"
 CatSprite::              INCBIN "gfx/capsule_monsters_stuff/cat.2bpp"
@@ -87,3 +86,18 @@ BrockSprite::          INCBIN "gfx/sprites/brock.2bpp"
 MistySprite::          INCBIN "gfx/sprites/misty.2bpp"
 SabrinaSprite::          INCBIN "gfx/sprites/sabrina.2bpp"
 BlaineSprite::          INCBIN "gfx/sprites/blaine.2bpp"
+
+VoltorbSprite::          INCBIN "gfx/sprites/voltorb.2bpp"
+VoltorbSpriteEnd::
+VoltorbSpriteFrame2::    INCBIN "gfx/sprites/voltorb2.2bpp"
+VoltorbSpriteFrame2End::
+KabutoSprite::			 INCBIN "gfx/sprites/kabuto_shell.2bpp"
+KabutoSpriteEnd::
+KabutoSpriteFrame2::     INCBIN "gfx/sprites/kabuto2.2bpp"
+KabutoSpriteFrame2End::
+OmanyteSprite::			 INCBIN "gfx/sprites/omanyte.2bpp"
+OmanyteSpriteEnd::
+OmanyteSpriteFrame2::     INCBIN "gfx/sprites/omanyte2.2bpp"
+OmanyteSpriteFrame2End::
+PokeballSprite2::		  INCBIN "gfx/sprites/poke_ball.2bpp"
+PokeballSprite2End::
