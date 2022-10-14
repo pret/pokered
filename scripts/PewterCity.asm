@@ -6,7 +6,7 @@ PewterCity_Script:
 
 PewterCity_ScriptPointers:
 	dw PewterCityScript0
-	dw PewterCityScript1
+;	dw PewterCityScript1
 	dw PewterCityScript2
 	dw PewterCityScript3
 	dw PewterCityScript4
@@ -43,7 +43,7 @@ CoordsData_19277:
 	dbmapcoord 37, 19
 	db -1 ; end
 
-PewterCityScript1:
+;PewterCityScript1:
 	ld a, [wNPCMovementScriptPointerTableNum]
 	and a
 	ret nz
