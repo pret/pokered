@@ -115,8 +115,8 @@ MapHeaderBanks::
 	db BANK(SilphGauntlet6F_h)
 	db BANK(SilphGauntlet7F_h)
 	db BANK(LancesRoom_h)
-	db $1D ; UNUSED_MAP_72
-	db $1D ; UNUSED_MAP_73
+	db BANK(FarawayIslandOutside_h) ; UNUSED_MAP_72
+	db BANK(FarawayIslandInside_h) ; UNUSED_MAP_73
 	db $1D ; UNUSED_MAP_74
 	db $1D ; UNUSED_MAP_75
 	db BANK(HallOfFame_h)

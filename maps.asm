@@ -1277,3 +1277,13 @@ INCLUDE "data/maps/headers/CeladonUniversityPokecenter.asm"
 INCLUDE "scripts/CeladonUniversityPokecenter.asm"
 INCLUDE "data/maps/objects/CeladonUniversityPokecenter.asm"
 CeladonUniversityPokecenter_Blocks: INCBIN "maps/CeladonUniversityPokecenter.blk"
+
+INCLUDE "data/maps/headers/FarawayIslandOutside.asm"
+INCLUDE "scripts/FarawayIslandOutside.asm"
+INCLUDE "data/maps/objects/FarawayIslandOutside.asm"
+FarawayIslandOutside_Blocks: INCBIN "maps/FarawayIslandOutside.blk"
+
+INCLUDE "data/maps/headers/FarawayIslandInside.asm"
+INCLUDE "scripts/FarawayIslandInside.asm"
+INCLUDE "data/maps/objects/FarawayIslandInside.asm"
+FarawayIslandInside_Blocks: INCBIN "maps/FarawayIslandInside.blk"
