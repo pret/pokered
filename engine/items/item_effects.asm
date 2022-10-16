@@ -120,6 +120,7 @@ ItemUsePtrTable:
 	dw ItemUseEvoStone   ; BLK_AUGURITE
 	dw ItemUseEvoStone   ; DUBIOUS_DISC
 	dw UnusableItem      ; CITRINE_PASS
+	dw UnusableItem      ; OLDSEACHART
 
 ItemUseBall:
 

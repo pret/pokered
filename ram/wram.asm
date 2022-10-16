@@ -2031,7 +2031,7 @@ wBrunosRoomCurScript:: db
 wAgathasRoomCurScript:: db
 wCeruleanCaveB1FCurScript:: db
 wVictoryRoad1FCurScript:: db
-	ds 1
+wFarawayIslandInsideCurScript:: db ; this should work
 wLancesRoomCurScript:: db
 	ds 4
 wSilphCo10FCurScript:: db

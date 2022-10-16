@@ -115,6 +115,7 @@ DEF NUM_ITEMS EQU const_value - 1
 	const BLK_AUGURITE  ; $65
 	const DUBIOUS_DISC  ; $66
 	const CITRINE_PASS  ; $67
+	const OLDSEACHART	; $68
 DEF NUM_FLOORS EQU const_value - 1 - NUM_ITEMS
 
 	const_next $C4

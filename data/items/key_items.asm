@@ -103,4 +103,5 @@ KeyItemFlags:
 	dbit FALSE ; BLK_AUGURITE
 	dbit FALSE ; DUBIOUS_DISC
 	dbit TRUE  ; CITRINE_PASS
+	dbit TRUE  ; OLDSEACHART
 	end_bit_array NUM_ITEMS + NUM_FLOORS

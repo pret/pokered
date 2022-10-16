@@ -104,4 +104,5 @@ ItemNames::
 	li "BLK AUGURITE"
 	li "DUBIOUS DISC"
 	li "CITRINE PASS"
+	li "OLDSEACHART"
 	assert_list_length NUM_ITEMS + NUM_FLOORS

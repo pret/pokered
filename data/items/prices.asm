@@ -104,4 +104,5 @@ ItemPrices::
 	bcd3 2100  ; BLK_AUGURITE
 	bcd3 3000  ; DUBIOUS_DISC
 	bcd3 0     ; CITRINE_PASS
+	bcd3 0	   ; OLDSEACHART
 	assert_table_length NUM_ITEMS + NUM_FLOORS

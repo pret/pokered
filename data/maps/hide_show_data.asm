@@ -97,7 +97,8 @@ MapHSPointers:
 	dw NoHS
 	dw NoHS
 	dw NoHS
-	dw VermilionDockHS
+	dw VermilionDockHS ; may not be necessary now? old sea chart tho.
+	; dw NoHS swap if you need to remove the vermillion dock bit
 	dw NoHS
 	dw SSAnne2FHS
 	dw NoHS
@@ -117,7 +118,7 @@ MapHSPointers:
 	dw NoHS
 	dw NoHS
 	dw NoHS
-	dw NoHS
+	dw FarawayIslandInsideHS
 	dw NoHS
 	dw NoHS
 	dw NoHS
@@ -568,7 +569,10 @@ SeafoamIslandsB4FHS:
 	db SEAFOAM_ISLANDS_B4F, $01, HIDE
 	db SEAFOAM_ISLANDS_B4F, $02, HIDE
 	db SEAFOAM_ISLANDS_B4F, $03, SHOW
-VermilionDockHS:
-	db VERMILION_DOCK, $01, HIDE
-	db $FF, $01, SHOW ; end
+VermilionDockHS: ; unsure if necessary
+	db VERMILION_DOCK, $01, SHOW
+	;db $FF, $01, SHOW ; end
+FarawayIslandInsideHS:
+	db FARAWAY_ISLAND_INSIDE, $01, HIDE ; if mew is fucking up this is why
+
 	assert_table_length NUM_HS_OBJECTS + 1
