@@ -117,7 +117,7 @@ MapHeaderBanks::
 	db BANK(LancesRoom_h)
 	db BANK(FarawayIslandOutside_h) ; UNUSED_MAP_72
 	db BANK(FarawayIslandInside_h) ; UNUSED_MAP_73
-	db $1D ; UNUSED_MAP_74
+	db BANK(PokemonMansionB2F_h) ; UNUSED_MAP_74
 	db $1D ; UNUSED_MAP_75
 	db BANK(HallOfFame_h)
 	db BANK(UndergroundPathNorthSouth_h)

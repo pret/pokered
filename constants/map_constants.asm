@@ -135,7 +135,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	mapconst LANCES_ROOM,                   13, 13 ; $71
 	mapconst FARAWAY_ISLAND_OUTSIDE,                  18,  15 ; $72	; Unused UNUSED_MAP_72
 	mapconst FARAWAY_ISLAND_INSIDE,                  11,  15 ; $73	; Unused UNUSED_MAP_73
-	mapconst UNUSED_MAP_74,                  0,  0 ; $74	; Unused
+	mapconst POKEMON_MANSION_B2F,                  8,  8 ; $74	; Unused UNUSED_MAP_74
 	mapconst UNUSED_MAP_75,                  0,  0 ; $75	; Unused
 	mapconst HALL_OF_FAME,                   4,  5 ; $76
 	mapconst UNDERGROUND_PATH_NORTH_SOUTH,  24,  4 ; $77

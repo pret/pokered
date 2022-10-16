@@ -117,7 +117,7 @@ MapHeaderPointers::
 	dw LancesRoom_h
 	dw FarawayIslandInside_h ; UNUSED_MAP_72
 	dw FarawayIslandOutside_h ; UNUSED_MAP_73
-	dw LancesRoom_h ; UNUSED_MAP_74
+	dw PokemonMansionB2F_h ; UNUSED_MAP_74
 	dw LancesRoom_h ; UNUSED_MAP_75
 	dw HallOfFame_h
 	dw UndergroundPathNorthSouth_h

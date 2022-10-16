@@ -1287,3 +1287,8 @@ INCLUDE "data/maps/headers/FarawayIslandInside.asm"
 INCLUDE "scripts/FarawayIslandInside.asm"
 INCLUDE "data/maps/objects/FarawayIslandInside.asm"
 FarawayIslandInside_Blocks: INCBIN "maps/FarawayIslandInside.blk"
+
+INCLUDE "data/maps/headers/PokemonMansionB2F.asm"
+INCLUDE "scripts/PokemonMansionB2F.asm"
+INCLUDE "data/maps/objects/PokemonMansionB2F.asm"
+PokemonMansionB2F_Blocks: INCBIN "maps/PokemonMansionB2F.blk"
