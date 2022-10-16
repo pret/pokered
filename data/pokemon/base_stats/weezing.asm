@@ -39,4 +39,4 @@
 
 	dw BANK(WeezingPicFront), BANK(WeezingPicBack)
 
-	dw 0000, WeezingPicBack
+	dw 1, WeezingPicBack

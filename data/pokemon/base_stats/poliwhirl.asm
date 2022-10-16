@@ -46,4 +46,4 @@
 
 	dw BANK(PoliwhirlPicFront), BANK(PoliwhirlPicBack)
 
-	dw 0000, PoliwhirlPicBack
+	dw 1, PoliwhirlPicBack

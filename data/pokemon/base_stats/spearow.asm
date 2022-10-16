@@ -38,4 +38,4 @@
 
 	dw BANK(SpearowPicFront), BANK(SpearowPicBack)
 
-	dw 0000, SpearowPicBack
+	dw 1, SpearowPicBack

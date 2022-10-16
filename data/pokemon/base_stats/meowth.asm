@@ -45,4 +45,4 @@
 
 	dw BANK(MeowthPicFront), BANK(MeowthPicBack)
 
-	dw 0000, MeowthPicBack
+	dw 1, MeowthPicBack

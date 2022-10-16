@@ -45,4 +45,4 @@
 
 	dw BANK(ParasPicFront), BANK(ParasPicBack)
 
-	dw 0000, ParasPicBack
+	dw 1, ParasPicBack

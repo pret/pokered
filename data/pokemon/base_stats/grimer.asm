@@ -52,4 +52,4 @@
 
 	dw BANK(GrimerPicFront), BANK(GrimerPicBack)
 
-	dw 0000, GrimerPicBack
+	dw 1, GrimerPicBack

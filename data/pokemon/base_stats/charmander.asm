@@ -46,4 +46,4 @@
 
 	dw BANK(CharmanderPicFront), BANK(CharmanderPicBack)
 
-	dw 0000, CharmanderPicBack
+	dw 1, CharmanderPicBack

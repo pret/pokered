@@ -44,4 +44,4 @@
 
 	dw BANK(JolteonPicFront), BANK(JolteonPicBack)
 
-	dw 0000, JolteonPicBack
+	dw 1, JolteonPicBack

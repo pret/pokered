@@ -56,4 +56,4 @@
 
 	dw BANK(JigglypuffPicFront), BANK(JigglypuffPicBack)
 
-	dw 0000, JigglypuffPicBack
+	dw 1, JigglypuffPicBack

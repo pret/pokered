@@ -47,4 +47,4 @@
 
 	dw BANK(KrabbyPicFront), BANK(KrabbyPicBack)
 
-	dw 0000, KrabbyPicBack
+	dw 1, KrabbyPicBack

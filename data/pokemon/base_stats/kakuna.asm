@@ -32,4 +32,4 @@
 
 	dw BANK(KakunaPicFront), BANK(KakunaPicBack)
 
-	dw 0000, KakunaPicBack
+	dw 1, KakunaPicBack

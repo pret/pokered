@@ -46,4 +46,4 @@
 
 	dw BANK(RhyhornPicFront), BANK(RhyhornPicBack)
 
-	dw 0000, RhyhornPicBack
+	dw 1, RhyhornPicBack

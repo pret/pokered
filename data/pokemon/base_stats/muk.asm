@@ -52,4 +52,4 @@
 
 	dw BANK(MukPicFront), BANK(MukPicBack)
 
-	dw 0000, MukPicBack
+	dw 1, MukPicBack

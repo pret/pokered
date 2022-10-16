@@ -50,4 +50,4 @@
 
 	dw BANK(DragonitePicFront), BANK(DragonitePicBack)
 
-	dw 0000, DragonitePicBack
+	dw 1, DragonitePicBack

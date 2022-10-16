@@ -52,4 +52,4 @@
 
 	dw BANK(CharizardPicFront), BANK(CharizardPicBack)
 
-	dw 0000, CharizardPicBack
+	dw 1, CharizardPicBack

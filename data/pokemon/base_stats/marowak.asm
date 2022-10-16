@@ -51,4 +51,4 @@
 
 	dw BANK(MarowakPicFront), BANK(MarowakPicBack)
 
-	dw 0000, MarowakPicBack
+	dw 1, MarowakPicBack

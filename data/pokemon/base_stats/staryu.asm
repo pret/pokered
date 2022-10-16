@@ -43,4 +43,4 @@
 
 	dw BANK(StaryuPicFront), BANK(StaryuPicBack)
 
-	dw 0000, StaryuPicBack
+	dw 1, StaryuPicBack

@@ -16,11 +16,14 @@ sHallOfFame:: ds HOF_TEAM * HOF_TEAM_CAPACITY
 
 SECTION "Save Data", SRAM
 
-	ds $596
+	ds $595
 	
 ; PureRGBnote: ADDED: duplicate options variables, used to set these options on game load so the palettes match your settings from game initialization
+sExtraOptions::
+sSpriteOptions3:: db
 sSpriteOptions:: db
 sOptions2:: db 
+sExtraOptionsEnd::
 
 sGameData::
 sPlayerName::  ds NAME_LENGTH

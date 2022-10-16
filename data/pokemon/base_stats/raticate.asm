@@ -51,4 +51,4 @@
 
 	dw BANK(RaticatePicFront), BANK(RaticatePicBack)
 
-	dw 0000, RaticatePicBack
+	dw 1, RaticatePicBack

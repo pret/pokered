@@ -36,4 +36,4 @@
 
 	dw BANK(AlakazamPicFront), BANK(AlakazamPicBack)
 
-	dw 0000, AlakazamPicBack
+	dw 1, AlakazamPicBack

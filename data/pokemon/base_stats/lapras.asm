@@ -46,4 +46,4 @@
 
 	dw BANK(LaprasPicFront), BANK(LaprasPicBack)
 
-	dw 0000, LaprasPicBack
+	dw 1, LaprasPicBack

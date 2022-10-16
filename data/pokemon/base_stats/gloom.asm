@@ -41,4 +41,4 @@
 
 	dw BANK(GloomPicFront), BANK(GloomPicBack)
 
-	dw 0000, GloomPicBack
+	dw 1, GloomPicBack

@@ -47,4 +47,4 @@
 
 	dw BANK(PorygonPicFront), BANK(PorygonPicBack)
 
-	dw 0000, PorygonPicBack
+	dw 1, PorygonPicBack

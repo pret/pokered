@@ -46,4 +46,4 @@
 
 	dw BANK(VaporeonPicFront), BANK(VaporeonPicBack)
 
-	dw 0000, VaporeonPicBack
+	dw 1, VaporeonPicBack

@@ -74,4 +74,4 @@
 
 	dw BANK(MewPicFront), BANK(MewPicBack)
 
-	dw 0000, MewPicBack
+	dw 1, MewPicBack

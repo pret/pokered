@@ -43,4 +43,4 @@
 
 	dw BANK(RattataPicFront), BANK(RattataPicBack)
 
-	dw 0000, RattataPicBack
+	dw 1, RattataPicBack

@@ -46,4 +46,4 @@
 
 	dw BANK(NinetalesPicFront), BANK(NinetalesPicBack)
 
-	dw 0000, NinetalesPicBack
+	dw 1, NinetalesPicBack

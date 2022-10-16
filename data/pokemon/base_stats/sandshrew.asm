@@ -47,4 +47,4 @@
 
 	dw BANK(SandshrewPicFront), BANK(SandshrewPicBack)
 
-	dw 0000, SandshrewPicBack
+	dw 1, SandshrewPicBack

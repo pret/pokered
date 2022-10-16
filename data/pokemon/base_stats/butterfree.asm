@@ -44,4 +44,4 @@
 
 	dw BANK(ButterfreePicFront), BANK(ButterfreePicBack)
 
-	dw 0000, ButterfreePicBack
+	dw ButterfreePicFrontRG, ButterfreePicBack

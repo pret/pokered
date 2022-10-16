@@ -49,4 +49,4 @@
 
 	dw BANK(JynxPicFront), BANK(JynxPicBack)
 
-	dw 0000, JynxPicBack
+	dw 1, JynxPicBack

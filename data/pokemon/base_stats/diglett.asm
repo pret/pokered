@@ -37,4 +37,4 @@
 
 	dw BANK(DiglettPicFront), BANK(DiglettPicBack)
 
-	dw 0000, DiglettPicBack
+	dw 1, DiglettPicBack

@@ -47,4 +47,4 @@
 
 	dw BANK(SlowpokePicFront), BANK(SlowpokePicBack)
 
-	dw 0000, SlowpokePicBack
+	dw 1, SlowpokePicBack

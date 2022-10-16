@@ -39,4 +39,4 @@
 
 	dw BANK(KoffingPicFront), BANK(KoffingPicBack)
 
-	dw 0000, KoffingPicBack
+	dw 1, KoffingPicBack

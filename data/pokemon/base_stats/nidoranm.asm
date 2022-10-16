@@ -44,4 +44,4 @@
 
 	dw BANK(NidoranMPicFront), BANK(NidoranMPicBack)
 
-	dw 0000, NidoranMPicBack
+	dw 1, NidoranMPicBack

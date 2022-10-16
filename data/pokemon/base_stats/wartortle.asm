@@ -46,4 +46,4 @@
 
 	dw BANK(WartortlePicFront), BANK(WartortlePicBack)
 
-	dw 0000, WartortlePicBack
+	dw 1, WartortlePicBack

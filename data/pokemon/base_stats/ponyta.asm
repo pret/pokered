@@ -42,4 +42,4 @@
 
 	dw BANK(PonytaPicFront), BANK(PonytaPicBack)
 
-	dw 0000, PonytaPicBack
+	dw 1, PonytaPicBack

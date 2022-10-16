@@ -682,6 +682,8 @@ StartMenu_SaveReset::
 StartMenu_Option::
 	xor a
 	ldh [hAutoBGTransferEnabled], a
+	ld [wOptionsCancelCursorX], a
+	ld [wTopMenuItemY], a
 	call ClearScreen
 	call UpdateSprites
 	callfar DisplayOptionMenu

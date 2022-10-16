@@ -38,4 +38,4 @@
 
 	dw BANK(MagnemitePicFront), BANK(MagnemitePicBack)
 
-	dw 0000, MagnemitePicBack
+	dw 1, MagnemitePicBack

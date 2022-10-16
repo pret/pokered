@@ -43,4 +43,4 @@
 
 	dw BANK(RapidashPicFront), BANK(RapidashPicBack)
 
-	dw 0000, RapidashPicBack
+	dw 1, RapidashPicBack

@@ -40,4 +40,4 @@
 
 	dw BANK(GoldeenPicFront), BANK(GoldeenPicBack)
 
-	dw 0000, GoldeenPicBack
+	dw 1, GoldeenPicBack

@@ -19,4 +19,4 @@
 
 	dw BANK(DittoPicFront), BANK(DittoPicBack)
 
-	dw 0000, DittoPicBack
+	dw 1, DittoPicBack

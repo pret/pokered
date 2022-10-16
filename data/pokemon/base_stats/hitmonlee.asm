@@ -44,4 +44,4 @@
 
 	dw BANK(HitmonleePicFront), BANK(HitmonleePicBack)
 
-	dw 0000, HitmonleePicBack
+	dw 1, HitmonleePicBack

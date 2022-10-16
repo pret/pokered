@@ -38,4 +38,4 @@
 
 	dw BANK(ExeggcutePicFront), BANK(ExeggcutePicBack)
 
-	dw 0000, ExeggcutePicBack
+	dw 1, ExeggcutePicBack

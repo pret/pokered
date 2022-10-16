@@ -41,4 +41,4 @@
 
 	dw BANK(PoliwagPicFront), BANK(PoliwagPicBack)
 
-	dw 0000, PoliwagPicBack
+	dw 1, PoliwagPicBack

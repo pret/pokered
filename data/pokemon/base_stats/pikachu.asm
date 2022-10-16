@@ -48,4 +48,4 @@
 
 	dw BANK(PikachuPicFront), BANK(PikachuPicBack)
 
-	dw 0000, PikachuPicBack
+	dw 1, PikachuPicBack

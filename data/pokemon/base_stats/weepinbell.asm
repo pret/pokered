@@ -41,4 +41,4 @@
 	
 	dw BANK(WeepinbellPicFront), BANK(WeepinbellPicBack)
 
-	dw 0000, WeepinbellPicBack
+	dw 1, WeepinbellPicBack

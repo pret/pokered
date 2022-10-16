@@ -46,4 +46,4 @@
 
 	dw BANK(KabutoPicFront), BANK(KabutoPicBack)
 
-	dw 0000, KabutoPicBack
+	dw 1, KabutoPicBack

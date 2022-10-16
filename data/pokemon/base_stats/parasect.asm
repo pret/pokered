@@ -47,4 +47,4 @@
 
 	dw BANK(ParasectPicFront), BANK(ParasectPicBack)
 
-	dw 0000, ParasectPicBack
+	dw 1, ParasectPicBack

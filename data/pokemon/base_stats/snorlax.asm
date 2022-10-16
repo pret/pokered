@@ -53,4 +53,4 @@
 
 	dw BANK(SnorlaxPicFront), BANK(SnorlaxPicBack)
 
-	dw 0000, SnorlaxPicBack
+	dw 1, SnorlaxPicBack

@@ -57,4 +57,4 @@
 
 	dw BANK(GolduckPicFront), BANK(GolduckPicBack)
 
-	dw 0000, GolduckPicBack
+	dw 1, GolduckPicBack

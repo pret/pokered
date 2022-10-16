@@ -39,4 +39,4 @@
 
 	dw BANK(ShellderPicFront), BANK(ShellderPicBack)
 
-	dw 0000, ShellderPicBack
+	dw 1, ShellderPicBack

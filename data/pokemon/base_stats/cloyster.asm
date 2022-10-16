@@ -39,4 +39,4 @@
 
 	dw BANK(CloysterPicFront), BANK(CloysterPicBack)
 
-	dw 0000, CloysterPicBack
+	dw 1, CloysterPicBack

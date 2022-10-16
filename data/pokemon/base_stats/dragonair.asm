@@ -44,4 +44,4 @@
 
 	dw BANK(DragonairPicFront), BANK(DragonairPicBack)
 
-	dw 0000, DragonairPicBack
+	dw 1, DragonairPicBack

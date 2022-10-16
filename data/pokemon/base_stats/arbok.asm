@@ -46,4 +46,4 @@
 
 	dw BANK(ArbokPicFront), BANK(ArbokPicBack)
 
-	dw 0000, ArbokPicBack
+	dw 1, ArbokPicBack

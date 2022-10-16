@@ -55,4 +55,4 @@
 
 	dw BANK(RhydonPicFront), BANK(RhydonPicBack)
 
-	dw 0000, RhydonPicBack
+	dw 1, RhydonPicBack

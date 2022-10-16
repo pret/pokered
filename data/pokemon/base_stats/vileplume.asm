@@ -42,4 +42,4 @@
 
 	dw BANK(VileplumePicFront), BANK(VileplumePicBack)
 
-	dw 0000, VileplumePicBack
+	dw 1, VileplumePicBack

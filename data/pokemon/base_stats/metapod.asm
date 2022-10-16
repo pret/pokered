@@ -31,4 +31,4 @@
 
 	dw BANK(MetapodPicFront), BANK(MetapodPicBack)
 
-	dw 0000, MetapodPicBack
+	dw 1, MetapodPicBack

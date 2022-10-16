@@ -51,4 +51,4 @@
 
 	dw BANK(CubonePicFront), BANK(CubonePicBack)
 
-	dw 0000, CubonePicBack
+	dw 1, CubonePicBack

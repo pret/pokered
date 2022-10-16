@@ -35,4 +35,4 @@
 
 	dw BANK(KadabraPicFront), BANK(KadabraPicBack)
 
-	dw 0000, KadabraPicBack
+	dw KadabraPicFrontRG, KadabraPicBack

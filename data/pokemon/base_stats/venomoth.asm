@@ -45,4 +45,4 @@
 
 	dw BANK(VenomothPicFront), BANK(VenomothPicBack)
 
-	dw 0000, VenomothPicBack
+	dw 1, VenomothPicBack

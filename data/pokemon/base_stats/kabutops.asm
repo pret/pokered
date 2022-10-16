@@ -52,4 +52,4 @@
 
 	dw BANK(KabutopsPicFront), BANK(KabutopsPicBack)
 
-	dw 0000, KabutopsPicBack
+	dw 1, KabutopsPicBack

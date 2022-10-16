@@ -44,4 +44,4 @@
 
 	dw BANK(TentacoolPicFront), BANK(TentacoolPicBack)
 
-	dw 0000, TentacoolPicBack
+	dw 1, TentacoolPicBack

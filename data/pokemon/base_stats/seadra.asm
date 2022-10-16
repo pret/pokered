@@ -45,4 +45,4 @@
 
 	dw BANK(SeadraPicFront), BANK(SeadraPicBack)
 
-	dw 0000, SeadraPicBack
+	dw 1, SeadraPicBack

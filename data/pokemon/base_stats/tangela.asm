@@ -43,4 +43,4 @@
 
 	dw BANK(TangelaPicFront), BANK(TangelaPicBack)
 
-	dw 0000, TangelaPicBack
+	dw 1, TangelaPicBack

@@ -788,12 +788,15 @@ NEXTU
 wOptionsTextSpeedCursorX:: db
 wOptionsBattleAnimCursorX:: db
 wOptionsBattleStyleCursorX:: db
+ds 3
 wOptionsCancelCursorX:: db
+NEXTU
 ; options page 2
 wOptionsPage2Option1CursorX:: db
 wOptionsPage2Option2CursorX:: db
 wOptionsPage2Option3CursorX:: db
 wOptionsPage2Option4CursorX:: db
+NEXTU
 ; options page 3
 wOptionsPage3Option1CursorX:: db
 wOptionsPage3Option2CursorX:: db
@@ -801,6 +804,7 @@ wOptionsPage3Option3CursorX:: db
 wOptionsPage3Option4CursorX:: db
 wOptionsPage3Option5CursorX:: db
 wOptionsPage3Option6CursorX:: db
+NEXTU
 ; options page 4
 wOptionsPage4Option1CursorX:: db
 wOptionsPage4Option2CursorX:: db
@@ -808,6 +812,7 @@ wOptionsPage4Option3CursorX:: db
 wOptionsPage4Option4CursorX:: db
 wOptionsPage4Option5CursorX:: db
 wOptionsPage4Option6CursorX:: db
+NEXTU
 ; options page 5
 wOptionsNidorinoSpriteCursorX:: db
 wOptionsGolbatSpriteCursorX:: db
@@ -815,9 +820,22 @@ wOptionsMankeySpriteCursorX:: db
 wOptionsArcanineSpriteCursorX:: db
 wOptionsExeggutorSpriteCursorX:: db
 wOptionsMewtwoSpriteCursorX:: db
-
-;13 bytes remaining in union
-
+NEXTU
+; options page 6
+wOptionsPage6Option1CursorX:: db
+wOptionsPage6Option2CursorX:: db
+wOptionsPage6Option3CursorX:: db
+wOptionsPage6Option4CursorX:: db
+wOptionsPage6Option5CursorX:: db
+wOptionsPage6Option6CursorX:: db
+NEXTU
+; options page 7
+wOptionsPage7Option1CursorX:: db
+wOptionsPage7Option2CursorX:: db
+wOptionsPage7Option3CursorX:: db
+wOptionsPage7Option4CursorX:: db
+wOptionsPage7Option5CursorX:: db
+wOptionsPage7Option6CursorX:: db
 NEXTU
 ; tile ID of the badge number being drawn
 wBadgeNumberTile:: db
@@ -2481,7 +2499,12 @@ wSpriteOptions2:: db
 wOptions2:: db
 ;;;;;;;;;;
 
-	ds 3
+
+wSpriteOptions3:: db
+
+wSpriteOptions4:: db
+	
+	ds 1
 
 wPlayTimeHours:: db
 wPlayTimeMaxed:: db

@@ -47,4 +47,4 @@
 
 	dw BANK(DrowzeePicFront), BANK(DrowzeePicBack)
 
-	dw 0000, DrowzeePicBack
+	dw 1, DrowzeePicBack

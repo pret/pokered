@@ -37,4 +37,4 @@
 
 	dw BANK(DugtrioPicFront), BANK(DugtrioPicBack)
 
-	dw 0000, DugtrioPicBack
+	dw 1, DugtrioPicBack

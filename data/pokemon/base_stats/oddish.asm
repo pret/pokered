@@ -40,4 +40,4 @@
 
 	dw BANK(OddishPicFront), BANK(OddishPicBack)
 
-	dw 0000, OddishPicBack
+	dw 1, OddishPicBack

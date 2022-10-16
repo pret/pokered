@@ -44,4 +44,4 @@
 
 	dw BANK(DratiniPicFront), BANK(DratiniPicBack)
 
-	dw 0000, DratiniPicBack
+	dw 1, DratiniPicBack

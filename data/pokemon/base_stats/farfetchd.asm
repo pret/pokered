@@ -52,4 +52,4 @@
 
 	dw BANK(FarfetchdPicFront), BANK(FarfetchdPicBack)
 
-	dw 0000, FarfetchdPicBack
+	dw 1, FarfetchdPicBack

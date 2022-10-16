@@ -40,4 +40,4 @@
 
 	dw BANK(DewgongPicFront), BANK(DewgongPicBack)
 
-	dw 0000, DewgongPicBack
+	dw 1, DewgongPicBack

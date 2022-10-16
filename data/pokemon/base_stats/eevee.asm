@@ -37,4 +37,4 @@
 
 	dw BANK(EeveePicFront), BANK(EeveePicBack)
 
-	dw 0000, EeveePicBack
+	dw 1, EeveePicBack

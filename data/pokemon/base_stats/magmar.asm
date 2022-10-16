@@ -56,4 +56,4 @@
 
 	dw BANK(MagmarPicFront), BANK(MagmarPicBack)
 
-	dw 0000, MagmarPicBack
+	dw 1, MagmarPicBack

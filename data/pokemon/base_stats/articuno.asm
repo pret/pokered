@@ -45,4 +45,4 @@
 
 	dw BANK(ArticunoPicFront), BANK(ArticunoPicBack)
 
-	dw 0000, ArticunoPicBack
+	dw 1, ArticunoPicBack

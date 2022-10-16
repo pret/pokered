@@ -40,4 +40,4 @@
 
 	dw BANK(HaunterPicFront), BANK(HaunterPicBack)
 
-	dw 0000, HaunterPicBack
+	dw 1, HaunterPicBack

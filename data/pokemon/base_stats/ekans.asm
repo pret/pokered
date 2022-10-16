@@ -45,4 +45,4 @@
 
 	dw BANK(EkansPicFront), BANK(EkansPicBack)
 
-	dw 0000, EkansPicBack
+	dw 1, EkansPicBack

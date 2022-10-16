@@ -31,4 +31,4 @@
 
 	dw BANK(CaterpiePicFront), BANK(CaterpiePicBack)
 
-	dw 0000, CaterpiePicBack
+	dw 1, CaterpiePicBack

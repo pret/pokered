@@ -10,6 +10,10 @@ SetDefaultNames:
 	push af
 	ld a, [wSpriteOptions2]
 	push af
+	ld a, [wSpriteOptions3]
+	push af
+	ld a, [wSpriteOptions4]
+	push af
 	ld a, [wOptions2]
 	push af
 	ld hl, wPlayerName
@@ -22,6 +26,10 @@ SetDefaultNames:
 	call FillMemory
 	pop af
 	ld [wOptions2], a
+	pop af
+	ld [wSpriteOptions4], a
+	pop af
+	ld [wSpriteOptions3], a
 	pop af
 	ld [wSpriteOptions2], a
 	pop af

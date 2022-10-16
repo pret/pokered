@@ -44,4 +44,4 @@
 
 	dw BANK(DodrioPicFront), BANK(DodrioPicBack)
 
-	dw 0000, DodrioPicBack
+	dw 1, DodrioPicBack

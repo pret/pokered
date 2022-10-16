@@ -43,4 +43,4 @@
 
 	dw BANK(GolemPicFront), BANK(GolemPicBack)
 
-	dw 0000, GolemPicBack
+	dw 1, GolemPicBack

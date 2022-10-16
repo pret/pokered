@@ -75,4 +75,4 @@
 
 	dw BANK(MissingnoPicFront), BANK(MissingnoPicBack)
 
-	dw 0000, MissingnoPicBack
+	dw 1, MissingnoPicBack

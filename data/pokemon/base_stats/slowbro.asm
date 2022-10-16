@@ -52,4 +52,4 @@
 
 	dw BANK(SlowbroPicFront), BANK(SlowbroPicBack)
 
-	dw 0000, SlowbroPicBack
+	dw 1, SlowbroPicBack

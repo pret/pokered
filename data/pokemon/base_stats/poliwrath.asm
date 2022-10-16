@@ -49,4 +49,4 @@
 
 	dw BANK(PoliwrathPicFront), BANK(PoliwrathPicBack)
 
-	dw 0000, PoliwrathPicBack
+	dw 1, PoliwrathPicBack

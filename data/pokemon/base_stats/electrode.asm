@@ -41,4 +41,4 @@
 
 	dw BANK(ElectrodePicFront), BANK(ElectrodePicBack)
 
-	dw 0000, ElectrodePicBack
+	dw 1, ElectrodePicBack

@@ -48,4 +48,4 @@
 
 	dw BANK(OmastarPicFront), BANK(OmastarPicBack)
 
-	dw 0000, OmastarPicBack
+	dw 1, OmastarPicBack

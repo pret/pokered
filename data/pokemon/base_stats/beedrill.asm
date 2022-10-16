@@ -48,4 +48,4 @@
 
 	dw BANK(BeedrillPicFront), BANK(BeedrillPicBack)
 
-	dw 0000, BeedrillPicBack
+	dw 1, BeedrillPicBack

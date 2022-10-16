@@ -33,4 +33,4 @@
 
 	dw BANK(WeedlePicFront), BANK(WeedlePicBack)
 
-	dw 0000, WeedlePicBack
+	dw 1, WeedlePicBack

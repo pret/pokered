@@ -57,4 +57,4 @@
 
 	dw BANK(ClefablePicFront), BANK(ClefablePicBack)
 
-	dw 0000, ClefablePicBack
+	dw 1, ClefablePicBack

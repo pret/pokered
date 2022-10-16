@@ -38,4 +38,4 @@
 
 	dw BANK(MagnetonPicFront), BANK(MagnetonPicBack)
 
-	dw 0000, MagnetonPicBack
+	dw 1, MagnetonPicBack

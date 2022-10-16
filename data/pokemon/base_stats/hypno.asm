@@ -48,4 +48,4 @@
 
 	dw BANK(HypnoPicFront), BANK(HypnoPicBack)
 
-	dw 0000, HypnoPicBack
+	dw 1, HypnoPicBack

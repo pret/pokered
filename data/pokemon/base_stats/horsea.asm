@@ -40,4 +40,4 @@
 
 	dw BANK(HorseaPicFront), BANK(HorseaPicBack)
 
-	dw 0000, HorseaPicBack
+	dw 1, HorseaPicBack

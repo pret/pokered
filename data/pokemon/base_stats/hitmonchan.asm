@@ -43,4 +43,4 @@
 
 	dw BANK(HitmonchanPicFront), BANK(HitmonchanPicBack)
 
-	dw 0000, HitmonchanPicBack
+	dw 1, HitmonchanPicBack

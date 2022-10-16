@@ -22,4 +22,4 @@
 
 	dw BANK(MagikarpPicFront), BANK(MagikarpPicBack)
 
-	dw 0000, MagikarpPicBack
+	dw 1, MagikarpPicBack

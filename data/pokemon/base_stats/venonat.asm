@@ -40,4 +40,4 @@
 
 	dw BANK(VenonatPicFront), BANK(VenonatPicBack)
 
-	dw 0000, VenonatPicBack
+	dw 1, VenonatPicBack

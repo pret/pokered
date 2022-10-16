@@ -38,4 +38,4 @@
 
 	dw BANK(ZubatPicFront), BANK(ZubatPicBack)
 
-	dw 0000, ZubatPicBack
+	dw 1, ZubatPicBack

@@ -42,4 +42,4 @@
 
 	dw BANK(VulpixPicFront), BANK(VulpixPicBack)
 
-	dw 0000, VulpixPicBack
+	dw 1, VulpixPicBack

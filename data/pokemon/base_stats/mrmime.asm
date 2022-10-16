@@ -55,4 +55,4 @@
 
 	dw BANK(MrMimePicFront), BANK(MrMimePicBack)
 
-	dw 0000, MrMimePicBack
+	dw 1, MrMimePicBack

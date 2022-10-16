@@ -58,6 +58,24 @@ DEF PALETTES_YELLOW     EQU %11 ; 3
 	const BIT_ARCANINE_SPRITE  ; 6
 	const BIT_MEWTWO_SPRITE    ; 7
 
+; wSpriteOptions3
+	const_def
+	const BIT_PIDGEOTTO_SPRITE  ; 0
+	const BIT_BUTTERFREE_SPRITE ; 1
+	const BIT_GENGAR_SPRITE     ; 2
+	const BIT_ONIX_SPRITE       ; 3
+	const BIT_VOLTORB_SPRITE    ; 4
+	const BIT_STARMIE_SPRITE    ; 5
+
+; wSpriteOptions4
+	const_def
+	const BIT_KADABRA_SPRITE    ; 0
+	const BIT_TENTACRUEL_SPRITE ; 1
+	const BIT_GRAVELER_SPRITE   ; 2
+	const BIT_MACHOP_SPRITE     ; 3
+	const BIT_PINSIR_SPRITE     ; 4
+	const BIT_ZAPDOS_SPRITE     ; 5
+
 ;;;;;;;;;;
 
 ;;;;;;;;;; PureRGBnote: constants for indicating which type of safari game the player is currently playing

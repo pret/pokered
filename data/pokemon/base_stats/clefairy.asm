@@ -57,4 +57,4 @@
 
 	dw BANK(ClefairyPicFront), BANK(ClefairyPicBack)
 
-	dw 0000, ClefairyPicBack
+	dw 1, ClefairyPicBack

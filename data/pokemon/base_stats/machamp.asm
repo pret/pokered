@@ -44,4 +44,4 @@
 
 	dw BANK(MachampPicFront), BANK(MachampPicBack)
 
-	dw 0000, MachampPicBack
+	dw 1, MachampPicBack

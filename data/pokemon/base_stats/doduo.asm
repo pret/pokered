@@ -44,4 +44,4 @@
 
 	dw BANK(DoduoPicFront), BANK(DoduoPicBack)
 
-	dw 0000, DoduoPicBack
+	dw 1, DoduoPicBack

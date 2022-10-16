@@ -44,4 +44,4 @@
 
 	dw BANK(GyaradosPicFront), BANK(GyaradosPicBack)
 
-	dw 0000, GyaradosPicBack
+	dw 1, GyaradosPicBack

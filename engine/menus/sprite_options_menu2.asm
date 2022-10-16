@@ -13,6 +13,9 @@ DEF EXEGGUTOR_RG_XPOS EQU 16
 DEF MEWTWO_RB_XPOS EQU 13
 DEF MEWTWO_RG_XPOS EQU 16
 
+SpriteOption2PageText:
+	db "5/7@"
+
 DisplaySpriteOptions2:
 	hlcoord 0, 0
 	ld b, 14
@@ -22,19 +25,33 @@ DisplaySpriteOptions2:
 	ld de, SpritesOptionText2
 	call PlaceString
 	hlcoord 2, 16
-	ld de, SpriteMenuCancelText2
+	ld de, OptionsNextBackText
+	call PlaceString
+	hlcoord 16, 16
+	ld de, SpriteOption2PageText
 	call PlaceString
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
 	inc a
 	ld [wLetterPrintingDelayFlags], a
+	ld a, [wOptionsCancelCursorX]
+	and a
+	jr nz, .cancelXValue
+	ld a, 1
+.cancelXValue
 	ld [wOptionsCancelCursorX], a
-	ld a, 3 ; first sprite option Y coordinate
+	ld [wTopMenuItemX], a ; next page coordinate
+	push af
+	ld a, 16 ; next page coordinate
 	ld [wTopMenuItemY], a
 	call SetCursorPositionsFromSpriteOptions2
-	ld a, [wOptionsNidorinoSpriteCursorX] ; text speed cursor X coordinate
-	ld [wTopMenuItemX], a
+	pop af
+	cp 7
+	jr nz, .doneLoad
+	hlcoord 1, 16
+	ld [hl], " "
+.doneLoad
 	ld a, $01
 	ldh [hAutoBGTransferEnabled], a ; enable auto background transfer
 	call Delay3
@@ -58,13 +75,15 @@ DisplaySpriteOptions2:
 	jr z, .cancelMore
 	jr .loop
 .cancelMore
-	ld a, [wTopMenuItemX]
-	cp 10 ; is the cursor on cancel?
-	jr z, .exitMenu
 	ld a, SFX_PRESS_AB
 	call PlaySound
 	call ClearScreen
-	callfar DisplayOptionMenu
+	ld a, [wTopMenuItemX]
+	cp 7 ; is the cursor on "BACK">
+	jr z, .back
+	jp DisplaySpriteOptions3
+.back
+	jp DisplaySpriteOptions
 .exitMenu
 	ld a, SFX_PRESS_AB
 	call PlaySound
@@ -210,7 +229,7 @@ leftRightPressed2:
 	jp .eraseOldMenuCursor
 .cursorCancelRow
 	ld a, [wOptionsCancelCursorX] ; battle style cursor X coordinate
-	xor $0b ; toggle between 1 and 10
+	xor 6 ; toggle between 1 and 7
 	ld [wOptionsCancelCursorX], a
 	jp .eraseOldMenuCursor
 .eraseOldMenuCursor
@@ -364,6 +383,4 @@ SpritesOptionText2:
 	next " ARCANINE:   RB RG"
 	next " EXEGGUTOR:  Y  RB"
 	next " MEWTWO:     RB RG@"
-
-SpriteMenuCancelText2:
-	db "BACK     CANCEL@"
+	

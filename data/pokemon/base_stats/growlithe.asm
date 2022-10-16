@@ -41,4 +41,4 @@
 
 	dw BANK(GrowlithePicFront), BANK(GrowlithePicBack)
 
-	dw 0000, GrowlithePicBack
+	dw 1, GrowlithePicBack

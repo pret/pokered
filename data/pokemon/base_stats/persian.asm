@@ -46,4 +46,4 @@
 
 	dw BANK(PersianPicFront), BANK(PersianPicBack)
 
-	dw 0000, PersianPicBack
+	dw 1, PersianPicBack

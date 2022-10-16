@@ -64,4 +64,4 @@
 
 	dw BANK(LickitungPicFront), BANK(LickitungPicBack)
 
-	dw 0000, LickitungPicBack
+	dw 1, LickitungPicBack

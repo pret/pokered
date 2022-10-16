@@ -49,4 +49,4 @@
 
 	dw BANK(RaichuPicFront), BANK(RaichuPicBack)
 
-	dw 0000, RaichuPicBack
+	dw 1, RaichuPicBack

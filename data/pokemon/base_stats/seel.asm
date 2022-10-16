@@ -41,4 +41,4 @@
 
 	dw BANK(SeelPicFront), BANK(SeelPicBack)
 
-	dw 0000, SeelPicBack
+	dw 1, SeelPicBack

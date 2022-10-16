@@ -44,4 +44,4 @@
 
 	dw BANK(MoltresPicFront), BANK(MoltresPicBack)
 
-	dw 0000, MoltresPicBack
+	dw 1, MoltresPicBack

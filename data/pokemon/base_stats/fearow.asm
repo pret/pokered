@@ -41,4 +41,4 @@
 
 	dw BANK(FearowPicFront), BANK(FearowPicBack)
 
-	dw 0000, FearowPicBack
+	dw 1, FearowPicBack

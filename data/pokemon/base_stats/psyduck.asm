@@ -56,4 +56,4 @@
 
 	dw BANK(PsyduckPicFront), BANK(PsyduckPicBack)
 
-	dw 0000, PsyduckPicBack
+	dw 1, PsyduckPicBack

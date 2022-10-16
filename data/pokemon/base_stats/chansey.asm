@@ -42,4 +42,4 @@
 
 	dw BANK(ChanseyPicFront), BANK(ChanseyPicBack)
 
-	dw 0000, ChanseyPicBack
+	dw 1, ChanseyPicBack

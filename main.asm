@@ -389,10 +389,13 @@ INCLUDE "engine/gfx/scroll_gfx_horizontally.asm"
 SECTION "newCode", ROMX
 ; PureRGBnote: ADDED: new code
 INCLUDE "engine/gfx/front_sprite_options.asm"
+INCLUDE "engine/menus/options_menu.asm" ; PureRGBnote: MOVED: used to be part of main_menu.asm but moved out of there for space.
 INCLUDE "engine/menus/options_menu2.asm"
 INCLUDE "engine/menus/battle_options.asm"
 INCLUDE "engine/menus/sprite_options_menu.asm"
 INCLUDE "engine/menus/sprite_options_menu2.asm"
+INCLUDE "engine/menus/sprite_options_menu3.asm"
+INCLUDE "engine/menus/sprite_options_menu4.asm"
 INCLUDE "engine/gfx/mon_icons2.asm"
 INCLUDE "engine/overworld/select_button_functionality.asm"
 INCLUDE "engine/overworld/use_another_repel.asm"

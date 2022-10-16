@@ -42,4 +42,4 @@
 
 	dw BANK(GeodudePicFront), BANK(GeodudePicBack)
 
-	dw 0000, GeodudePicBack
+	dw 1, GeodudePicBack

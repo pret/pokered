@@ -47,4 +47,4 @@
 
 	dw BANK(KinglerPicFront), BANK(KinglerPicBack)
 
-	dw 0000, KinglerPicBack
+	dw 1, KinglerPicBack

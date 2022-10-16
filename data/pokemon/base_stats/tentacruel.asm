@@ -45,4 +45,4 @@
 
 	dw BANK(TentacruelPicFront), BANK(TentacruelPicBack)
 
-	dw 0000, TentacruelPicBack
+	dw TentacruelPicFrontRG, TentacruelPicBack

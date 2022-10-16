@@ -44,4 +44,4 @@
 
 	dw BANK(AerodactylPicFront), BANK(AerodactylPicBack)
 
-	dw 0000, AerodactylPicBack
+	dw 1, AerodactylPicBack

@@ -39,4 +39,4 @@
 
 	dw BANK(PidgeyPicFront), BANK(PidgeyPicBack)
 
-	dw 0000, PidgeyPicBack
+	dw 1, PidgeyPicBack

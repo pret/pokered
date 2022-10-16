@@ -43,4 +43,4 @@
 
 	dw BANK(OnixPicFront), BANK(OnixPicBack)
 
-	dw 0000, OnixPicBack
+	dw OnixPicFrontRG, OnixPicBack

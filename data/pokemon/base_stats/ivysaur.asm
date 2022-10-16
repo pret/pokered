@@ -45,4 +45,4 @@
 
 	dw BANK(IvysaurPicFront), BANK(IvysaurPicBack)
 
-	dw 0000, IvysaurPicBack
+	dw 1, IvysaurPicBack

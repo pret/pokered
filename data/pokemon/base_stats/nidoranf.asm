@@ -42,4 +42,4 @@
 
 	dw BANK(NidoranFPicFront), BANK(NidoranFPicBack)
 
-	dw 0000, NidoranFPicBack
+	dw 1, NidoranFPicBack

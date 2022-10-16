@@ -45,4 +45,4 @@
 
 	dw BANK(FlareonPicFront), BANK(FlareonPicBack)
 
-	dw 0000, FlareonPicBack
+	dw 1, FlareonPicBack

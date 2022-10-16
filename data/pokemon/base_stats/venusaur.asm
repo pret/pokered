@@ -49,4 +49,4 @@
 
 	dw BANK(VenusaurPicFront), BANK(VenusaurPicBack)
 
-	dw 0000, VenusaurPicBack
+	dw 1, VenusaurPicBack

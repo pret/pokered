@@ -53,4 +53,4 @@
 
 	dw BANK(KangaskhanPicFront), BANK(KangaskhanPicBack)
 
-	dw 0000, KangaskhanPicBack
+	dw 1, KangaskhanPicBack

@@ -47,4 +47,4 @@
 
 	dw BANK(PrimeapePicFront), BANK(PrimeapePicBack)
 
-	dw 0000, PrimeapePicBack
+	dw 1, PrimeapePicBack

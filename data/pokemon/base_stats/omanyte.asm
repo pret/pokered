@@ -46,4 +46,4 @@
 
 	dw BANK(OmanytePicFront), BANK(OmanytePicBack)
 
-	dw 0000, OmanytePicBack
+	dw 1, OmanytePicBack

@@ -43,4 +43,4 @@
 
 	dw BANK(VictreebelPicFront), BANK(VictreebelPicBack)
 
-	dw 0000, VictreebelPicBack
+	dw 1, VictreebelPicBack

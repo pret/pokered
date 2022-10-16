@@ -37,4 +37,4 @@
 
 	dw BANK(GastlyPicFront), BANK(GastlyPicBack)
 
-	dw 0000, GastlyPicBack
+	dw 1, GastlyPicBack

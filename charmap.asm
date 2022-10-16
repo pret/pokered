@@ -169,8 +169,8 @@
 	charmap "!",         $e7
 	charmap ".",         $e8
 
-	charmap "ァ",         $e9 ; katakana small a, unused
-	charmap "ゥ",         $ea ; katakana small u, unused
+	charmap "→",         $e9 ; PureRGBnote: ADDED: right facing arrow character
+	charmap "+",         $ea ; PureRGBnote: ADDED: plus sign
 	charmap "ェ",         $eb ; katakana small e, unused
 
 	charmap "▷",         $ec

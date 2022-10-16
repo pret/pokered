@@ -58,4 +58,4 @@
 
 	dw BANK(NidoqueenPicFront), BANK(NidoqueenPicBack)
 
-	dw 0000, NidoqueenPicBack
+	dw 1, NidoqueenPicBack

@@ -40,4 +40,4 @@
 
 	dw BANK(SeakingPicFront), BANK(SeakingPicBack)
 
-	dw 0000, SeakingPicBack
+	dw 1, SeakingPicBack

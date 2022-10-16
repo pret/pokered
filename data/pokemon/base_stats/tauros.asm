@@ -45,4 +45,4 @@
 
 	dw BANK(TaurosPicFront), BANK(TaurosPicBack)
 
-	dw 0000, TaurosPicBack
+	dw 1, TaurosPicBack

@@ -57,4 +57,4 @@
 
 	dw BANK(NidokingPicFront), BANK(NidokingPicBack)
 
-	dw 0000, NidokingPicBack
+	dw 1, NidokingPicBack

@@ -23,8 +23,8 @@ Options2Text:
 	next " AUDIO PAN: OFF ON"
 	next " BIKE SONG: ON OFF@"
 
-Page2MenuCancelText:
-	db "NEXT     CANCEL@"
+Option2PageText:
+	db "2/7@"
 
 DisplayOptions2:
 	hlcoord 0, 0
@@ -35,7 +35,10 @@ DisplayOptions2:
 	ld de, Options2Text
 	call PlaceString
 	hlcoord 2, 16
-	ld de, Page2MenuCancelText
+	ld de, OptionsNextBackText
+	call PlaceString
+	hlcoord 16, 16
+	ld de, Option2PageText
 	call PlaceString
 	ld a, [wOptions2]
 	and %11
@@ -45,12 +48,23 @@ DisplayOptions2:
 	ld [wLastMenuItem], a
 	inc a
 	ld [wLetterPrintingDelayFlags], a
+	ld a, [wOptionsCancelCursorX]
+	and a
+	jr nz, .cancelXValue
+	ld a, 1
+.cancelXValue
 	ld [wOptionsCancelCursorX], a
-	ld a, 3 ; first sprite option Y coordinate
+	ld [wTopMenuItemX], a ; next page coordinate
+	push af
+	ld a, 16 ; next page coordinate
 	ld [wTopMenuItemY], a
 	call SetCursorPositionsFromOptions2
-	ld a, [wOptionsPage2Option1CursorX] ; text speed cursor X coordinate
-	ld [wTopMenuItemX], a
+	pop af
+	cp 7
+	jr nz, .doneLoad
+	hlcoord 1, 16
+	ld [hl], " "
+.doneLoad
 	ld a, $01
 	ldh [hAutoBGTransferEnabled], a ; enable auto background transfer
 	call Delay3
@@ -82,13 +96,15 @@ DisplayOptions2:
 	call ToggleAltSGBColors
 	jr .loop
 .cancelMore
-	ld a, [wTopMenuItemX]
-	cp 10 ; is the cursor on cancel?
-	jr z, .exitMenu
 	ld a, SFX_PRESS_AB
 	call PlaySound
 	call ClearScreen
-	callfar DisplayBattleOptions
+	ld a, [wTopMenuItemX]
+	cp 7 ; is the cursor on "BACK">
+	jr z, .back
+	jp DisplayBattleOptions
+.back
+	jp DisplayOptionMenu
 .exitMenu
 	ld a, SFX_PRESS_AB
 	call PlaySound
@@ -200,7 +216,7 @@ Page2LeftRightPressed:
 	jp .eraseOldMenuCursor
 .cursorCancelRow
 	ld a, [wOptionsCancelCursorX] ; battle style cursor X coordinate
-	xor $0b ; toggle between 1 and 10
+	xor 6 ; toggle between 1 and 7
 	ld [wOptionsCancelCursorX], a
 	jp .eraseOldMenuCursor
 .eraseOldMenuCursor

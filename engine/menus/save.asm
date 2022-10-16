@@ -198,11 +198,13 @@ SaveSAVtoSRAM0:
 	ld a, $1
 	ld [MBC1SRamBankingMode], a
 	ld [MBC1SRamBank], a
-;;;;;;;;;; PureRGBnote: ADDED: duplicates of two options variables in SRAM. These are loaded on boot of the game for instant options-efficacy.
+;;;;;;;;;; PureRGBnote: ADDED: duplicates of options variables in SRAM. These are loaded on boot of the game for instant options-efficacy.
 	ld a, [wOptions2]
 	ld [sOptions2], a
 	ld a, [wSpriteOptions]
 	ld [sSpriteOptions], a
+	ld a, [wSpriteOptions3]
+	ld [sSpriteOptions3], a
 ;;;;;;;;;;
 	ld hl, wPlayerName
 	ld de, sPlayerName

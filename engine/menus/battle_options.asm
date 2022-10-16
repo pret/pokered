@@ -22,15 +22,15 @@ DEF PAGE3_OPTION6_BIT EQU BIT_NPC_STAT_EXP
 
 BattleOptionText:
 	db   "BATTLE OPTIONS"
-	next " GHSTxPSY: 0× 2×"
-	next " ICExFIRE: 1× 0.5×"
-	next " BUGxPSN:  2× 0.5×"
-	next " PSNxBUG:  2× 1×"
+	next " GHST→PSY: 0× 2×"
+	next " ICE→FIRE: 1× 0.5×"
+	next " BUG→PSN:  2× 0.5×"
+	next " PSN→BUG:  2× 1×"
 	next " EXP BAR:  ON OFF"
 	next " NPC EVs:  ON OFF@"
 
-BattleOptionMenuCancelText:
-	db "NEXT     CANCEL@"
+BattleOptionPageText:
+	db "3/7@"
 
 DisplayBattleOptions:
 	hlcoord 0, 0
@@ -41,19 +41,33 @@ DisplayBattleOptions:
 	ld de, BattleOptionText
 	call PlaceString
 	hlcoord 2, 16
-	ld de, BattleOptionMenuCancelText
+	ld de, OptionsNextBackText
+	call PlaceString
+	hlcoord 16, 16
+	ld de, BattleOptionPageText
 	call PlaceString
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
 	inc a
 	ld [wLetterPrintingDelayFlags], a
+	ld a, [wOptionsCancelCursorX]
+	and a
+	jr nz, .cancelXValue
+	ld a, 1
+.cancelXValue
 	ld [wOptionsCancelCursorX], a
-	ld a, 3 ; first sprite option Y coordinate
+	ld [wTopMenuItemX], a ; next page coordinate
+	push af
+	ld a, 16 ; next page coordinate
 	ld [wTopMenuItemY], a
 	call SetCursorPositionsFromBattleOptions
-	ld a, [wOptionsPage3Option1CursorX] ; text speed cursor X coordinate
-	ld [wTopMenuItemX], a
+	pop af
+	cp 7
+	jr nz, .doneLoad
+	hlcoord 1, 16
+	ld [hl], " "
+.doneLoad
 	ld a, $01
 	ldh [hAutoBGTransferEnabled], a ; enable auto background transfer
 	call Delay3
@@ -77,13 +91,15 @@ DisplayBattleOptions:
 	jr z, .cancelMore
 	jr .loop
 .cancelMore
-	ld a, [wTopMenuItemX]
-	cp 10 ; is the cursor on cancel?
-	jr z, .exitMenu
 	ld a, SFX_PRESS_AB
 	call PlaySound
 	call ClearScreen
-	callfar DisplaySpriteOptions
+	ld a, [wTopMenuItemX]
+	cp 7 ; is the cursor on "BACK">
+	jr z, .back
+	jp DisplaySpriteOptions
+.back
+	jp DisplayOptions2
 .exitMenu
 	ld a, SFX_PRESS_AB
 	call PlaySound
@@ -229,7 +245,7 @@ leftRightPressedBattleOptions:
 	jr .eraseOldMenuCursor
 .cursorCancelRow
 	ld a, [wOptionsCancelCursorX] ; battle style cursor X coordinate
-	xor $0b ; toggle between 1 and 10
+	xor 6 ; toggle between 1 and 7
 	ld [wOptionsCancelCursorX], a
 	jp .eraseOldMenuCursor
 .eraseOldMenuCursor

@@ -43,4 +43,4 @@
 
 	dw BANK(MachokePicFront), BANK(MachokePicBack)
 
-	dw 0000, MachokePicBack
+	dw 1, MachokePicBack

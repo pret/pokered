@@ -41,4 +41,4 @@
 
 	dw BANK(BellsproutPicFront), BANK(BellsproutPicBack)
 
-	dw 0000, BellsproutPicBack
+	dw 1, BellsproutPicBack

@@ -45,4 +45,4 @@
 
 	dw BANK(ScytherPicFront), BANK(ScytherPicBack)
 
-	dw 0000, ScytherPicBack
+	dw 1, ScytherPicBack
