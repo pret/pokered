@@ -35,17 +35,20 @@ New Items:
 ====
 - The Sun, Ice, Poison and Heart Stones have been added.
 - The Protector and Black Augurite evolution items have been added.
+- The Citrine Pass has been added, allowing access to a new post-game area based on the unused "C" map.
+- The Old Sea Chart has been added, allowing access to Faraway Island and Mew.
 	
 Improved areas
 ====
 - Rock Tunnel has a more workable map, now being easier to go through and having new areas to explore. Includes a way to get renewable fossils, items, and other interesting bits and pieces. Overall, it makes Flash much more rewarding to bring, showing you where the items and content are instead of being an inconvenience. 
+- It is now possible to go back through Mt. Moon after reaching Cerulean City, allowing for players to backtrack to get items they missed. Additionally, it is now possible to go directly to Rock Tunnel, skipping Misty and Surge.
 - Diglett's Cave has a more detailed map, including a platform that has a static encounter.
 - Route 25 has been altered slightly to make reference to Bill's Lighthouse from the anime!
 - Cinnabar Island is a lot bigger, and has a new location added to it.
 - Pokemon Tower was shortened as its old length was excessive.
 - Silph Co's pathing was completely overhauled to make navigating it less tedious.
 - Viridian Gym now has a new area once you make Giovanni leave.
-- The S.S. Anne port has a little surprise for the adventurous...
+- The S.S. Anne now returns after getting your fourth badge!
 
 New areas
 ====
@@ -56,7 +59,9 @@ New areas
 - Citrine City is a new island city that can be accessed in the postgame.
 - Underwater Tunnel connects Route 25 and Route 10.
 - Cinnabar Volcano is a new area that houses Moltres, allowing it to be obtained before Victory Road.
+- Faraway Island from Pokemon Emerald has been added, where you can find Mew. It also has its own wild encounters, as well as an improved translation on its sign, enhancing its appearance from its source material.
 - Silph Co. holds a special challenge for Pokemon League Champions...
+
 
 QoL Enhancements
 ====
@@ -87,7 +92,7 @@ QoL Enhancements
 - Press A beside surfable water, strength boulders or cut trees to use the HMs without needing to go into the Party menu.
 - Running Shoes by holding B. Also works with the bike! Surf speed is also doubled.
 - Bag has capacity for 30 items.
-- Spinner tiles move faster
+- Spinner tiles move faster.
 
 Bug Fixes
 ====
@@ -124,21 +129,23 @@ and more!
 
 Known Bugs
 ====
-- Only portions of spinner tiles animate 
+- Only portions of spinner tiles animate.
+- Occasionally, menu text sets itself to scroll.
+- Some sprites in the Celadon University area spawn bugged out.
 
 Credits
 ====
 * Plague von Karma - Creator of the Showdown Mod, Developer
 * Martha's Against Humanity - Developer 
 * Ema Skye - Developer 
+* pret et al - Pokémon Red and Blue Disassembly Project, many tutorials helped us!
 * ausma - Showdown Mod assistance
 * Paulluxx - Showdown Mod assistance
 * DuoM2 - Showdown Mod assistance 
 * Albatross - Much of the new sprites used in the hack 
 * ZumiIsawhat? - Restorations of beta OST
 * Helix Chamber, RacieBeep, et al - Prototype Pokémon sprites
-* pret et al - Pokémon Red and Blue Disassembly Project, many tutorials helped us!
-* Vortyne - Reused a bit of code from their pureRGB hack to add a Mew encounter!
+* Vortyne - Reused a bit of code from their pureRGB hack, which was used to assist with the eventual final Mew encounter.
 * Rangi - Reused a bit of code from their Red* / Blue* hack to make HMs usable in the overworld!
 
 Original README.md proceeding;
