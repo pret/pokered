@@ -273,7 +273,7 @@ GetOverworldPalette:
 .seafoam
 	ld a, PAL_0F - 1
 	jr .town
-.powerPlant
+.powerPlant ; PureRGBnote: CHANGED: the power plant uses a different palette that looks more abandoned power plant-y
 	ld a, PAL_MEWMON - 1
 	jr .town
 

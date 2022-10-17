@@ -3,6 +3,7 @@ MACRO external_map
 	dw \3
 ENDM
 
+; PureRGBnote: CHANGED: some coordinates were changed for better positioning here
 ; the appearance of towns and routes in the town map
 ExternalMapEntries:
 	table_width 3, ExternalMapEntries
@@ -53,6 +54,7 @@ MACRO internal_map
 	dw \4
 ENDM
 
+; PureRGBnote: CHANGED: some coordinates were changed for better positioning here
 ; the appearance of buildings and dungeons in the town map
 InternalMapEntries:
 	; maximum map id subject to this rule, x, y, name

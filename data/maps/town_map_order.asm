@@ -1,3 +1,5 @@
+; PureRGBnote: CHANGED: this list was reordered a bit to follow the order of the game a bit better.
+
 TownMapOrder:
 	db PALLET_TOWN
 	db ROUTE_1

@@ -313,8 +313,11 @@ HandlePokedexListMenu:
 ;;;;;;;;;;
 	bit BIT_B_BUTTON, a
 	jp nz, .buttonBPressed
+;;;;;;;;;; PureRGBnote: FIXED: code from yellow, avoids a bug where pressing down/up and then 
+;;;;;;;;;; immediately A scrolls up/down twice instead of selecting the next pokemon
 	bit BIT_A_BUTTON, a 
-	jp nz, .buttonAPressed ; avoids a bug where pressing down/up and then immediately A scrolls down twice instead of selecting the next pokemon
+	jp nz, .buttonAPressed 
+;;;;;;;;;;
 .checkIfUpPressed
 	bit BIT_D_UP, a
 	jr z, .checkIfDownPressed
@@ -711,6 +714,7 @@ ShowPokedexDataInternal:
 	call PrintMonTypes ; PureRGBnote: ADDED: for pokemon you have seen but not caught it displays just their types on the bottom
 	jr .waitForButtonPress
 
+; PureRGBnote: ADDED: code for printing the current pokemon's type(s)
 PrintMonTypes:
 	hlcoord 1, 11
 	ld de, DexType1Text
