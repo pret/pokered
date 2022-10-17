@@ -115,8 +115,8 @@ MapHeaderPointers::
 	dw SilphGauntlet6F_h
 	dw SilphGauntlet7F_h
 	dw LancesRoom_h
-	dw FarawayIslandInside_h ; UNUSED_MAP_72
-	dw FarawayIslandOutside_h ; UNUSED_MAP_73
+	dw FarawayIslandOutside_h ; UNUSED_MAP_72
+	dw FarawayIslandInside_h ; UNUSED_MAP_73
 	dw PokemonMansionB2F_h ; UNUSED_MAP_74
 	dw LancesRoom_h ; UNUSED_MAP_75
 	dw HallOfFame_h

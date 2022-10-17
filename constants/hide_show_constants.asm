@@ -238,9 +238,10 @@ DEF SHOW EQU $15
 	const HS_SEAFOAM_ISLANDS_B4F_BOULDER_2 ; E2
 	const HS_ARTICUNO                      ; E3 X
 	const HS_CROCKY	               		   ; E4 X
-	const HS_MEW	                       ; E5 X ; I am 90% sure there may be a bug involving getting the Old Sea Chart from Vermillion Dock here. Does that need to be here? Is Moltres positioned poorly?
+	const HS_MEW	                       ; E5 X
 	const HS_MOLTRES					   ; E6 X
-	; const HS_CACTUS                        ; E7 X
-	const HS_POKEMON_MANSION_B2F_ITEM_1 ; E8?
-	const HS_POKEMON_MANSION_B2F_ITEM_2 ; E9?
+	; const HS_OMEGA                         ; E7 X
+	const HS_OLD_SEA_CHART	; E8 X
+	const HS_POKEMON_MANSION_B2F_ITEM_1 ; E9
+	const HS_POKEMON_MANSION_B2F_ITEM_2 ; EA
 DEF NUM_HS_OBJECTS EQU const_value

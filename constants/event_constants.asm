@@ -552,10 +552,6 @@
 ; S.S. Anne events
 	const_next $5C0
 	const_skip 4
-	; const_skip
-	; const EVENT_ENCOUNTERED_MEW
-	; const EVENT_FOUND_MEW
-	; const_skip
 	const EVENT_BEAT_SS_ANNE_5_TRAINER_0
 	const EVENT_BEAT_SS_ANNE_5_TRAINER_1
 	const_skip 26
@@ -588,7 +584,7 @@
 	const_skip
 	const EVENT_BEAT_CROCKY
 	const_skip 7
-	const EVENT_BEAT_CACTUS
+	const EVENT_BEAT_MEW
 	const_skip 7
 	const EVENT_BEAT_MOLTRES
 	const_skip 7
@@ -604,11 +600,6 @@
 	const EVENT_BEAT_CELADON_UNIVERSITY_OUTSIDE_TRAINER_3
 	const EVENT_BOUGHT_CUBONE
 	const EVENT_BOUGHT_DITTO
-	
-; , Faraway Island
-	const_next $650
-	const_skip
-	const EVENT_BEAT_MEW
 
 ; Victory Road 3F events
 	const_next $660

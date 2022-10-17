@@ -131,7 +131,8 @@ Known Bugs
 ====
 - Only portions of spinner tiles animate.
 - Occasionally, menu text sets itself to scroll.
-- Some sprites in the Celadon University area spawn bugged out.
+- Some sprites in the Celadon University area spawn bugged out on certain emulators.
+- Battling multiple of the trainers in Celadon University causes a crash when attempting to go to Route 16
 
 Credits
 ====

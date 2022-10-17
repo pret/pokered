@@ -9,6 +9,5 @@ VermilionDock_Object:
 
 	def_object_events
 	object_event 22,  0, SPRITE_POKE_BALL, STAY, NONE, 2, OLDSEACHART
-	; object_event 21,  0, SPRITE_MONSTER, STAY, DOWN, 2, MEW, 30 | OW_POKEMON
 
 	def_warps_to VERMILION_DOCK

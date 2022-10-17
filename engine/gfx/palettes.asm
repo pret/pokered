@@ -190,7 +190,7 @@ SetPal_Overworld:
 	xor a
 	jr .town
 .seafoam
-	ld a, PAL_0F - 1
+	ld a, PAL_CYANMON - 1
 	jr .town
 .volcano
 	ld a, PAL_REDMON - 1

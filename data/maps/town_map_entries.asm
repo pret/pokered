@@ -79,6 +79,9 @@ InternalMapEntries:
 	internal_map SILPH_GAUNTLET_3F,             10,  5, SilphCoName
 	internal_map VICTORY_ROAD_1F,                0,  4, VictoryRoadName
 	internal_map SILPH_GAUNTLET_7F,             10,  5, SilphCoName
+	internal_map LANCES_ROOM,                   0,  2, PokemonLeagueName
+	internal_map FARAWAY_ISLAND_INSIDE,         17,  16, FarawayIslandName
+	internal_map POKEMON_MANSION_B2F,             2, 15, PokemonMansionName
 	internal_map HALL_OF_FAME,                   0,  2, PokemonLeagueName
 	internal_map UNDERGROUND_PATH_NORTH_SOUTH,  10,  5, UndergroundPathName
 	internal_map CHAMPIONS_ROOM,                 0,  2, PokemonLeagueName
