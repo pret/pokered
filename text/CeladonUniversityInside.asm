@@ -106,30 +106,18 @@ _BookcaseText3::
 	line "# BALL was"
 	cont "discovered by"
 	cont "PROF. WESTWOOD,"
-	cont "who accidentally"
-	cont "administered too"
-	cont "many drugs to a"
+	cont "as part of an"
+	cont "experiment to"
+	cont "extract the"
+	cont "energy of a"
 	cont "PRIMEAPE."
-	
-	para "This was part"
-	line "of an experiment"
-	cont "to extract its"
-	cont "angry energy."
-	
-	para "Weakened, it"
-	line "curled into a"
-	cont "ball and fit into"
-	cont "his glasses case."
 	
 	para "The modern #"
 	line "BALL was made by"
 	cont "researchers at"
 	cont "CELADON"
 	cont "UNIVERSITY"
-	cont "in 1925, and"
-	cont "mass production"
-	cont "began at SILPH"
-	cont "CO. soon after."
+	cont "in 1925."
 	
 	done
 

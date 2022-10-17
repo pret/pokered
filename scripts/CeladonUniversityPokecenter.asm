@@ -6,6 +6,7 @@ CeladonUniversityPokecenter_TextPointers:
 	dw CeladonUniversityHealNurseText
 	dw CeladonUniversityPokecenterText2
 	dw CuboneSalesmanText
+	dw CeladonUniversityPokecenterText8
 	dw CeladonUniversityTradeNurseText
 
 CeladonUniversityTradeNurseText:
@@ -81,4 +82,8 @@ CuboneSalesmanText:
 
 .Text2
 	text_far _CuboneSalesmanText2
+	text_end
+
+CeladonUniversityPokecenterText8::
+	text_far _CeladonUniversityPokecenterText8
 	text_end

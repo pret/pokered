@@ -154,7 +154,7 @@ DebugItemsList:
 	db COIN_CASE, 1
 	db POKE_FLUTE, 1
 	db SILPH_SCOPE, 1
-	; db OLDSEACHART, 1
+	db OLDSEACHART, 1
 	db -1 ; end
 
 DebugUnusedList:

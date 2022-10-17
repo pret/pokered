@@ -46,3 +46,13 @@ _CuboneSalesmanText2::
 	text "MAN: As usual, no"
 	line "refunds!"
 	done
+
+_CeladonUniversityPokecenterText8::
+	text "I wonder how"
+	line "DRAGONAIR can fly"
+	cont "without wings..."
+	
+	text "#MON are strange"
+	line "creatures..."
+	
+	done
