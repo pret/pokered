@@ -119,7 +119,7 @@ MapHSPointers:
 	dw NoHS
 	dw NoHS
 	dw FarawayIslandInsideHS
-	dw NoHS
+	dw PokemonMansionB2FHS
 	dw NoHS
 	dw NoHS
 	dw NoHS
@@ -571,8 +571,11 @@ SeafoamIslandsB4FHS:
 	db SEAFOAM_ISLANDS_B4F, $03, SHOW
 VermilionDockHS: ; unsure if necessary
 	db VERMILION_DOCK, $01, SHOW
-	;db $FF, $01, SHOW ; end
+	;db $FF, $01, SHOW 
 FarawayIslandInsideHS:
 	db FARAWAY_ISLAND_INSIDE, $01, HIDE ; if mew is fucking up this is why
+PokemonMansionB2FHS:
+	db POKEMON_MANSION_B2F, $03, SHOW
+	db POKEMON_MANSION_B2F, $04, SHOW ; end
 
 	assert_table_length NUM_HS_OBJECTS + 1

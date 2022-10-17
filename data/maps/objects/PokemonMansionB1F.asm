@@ -1,8 +1,9 @@
 PokemonMansionB1F_Object:
-	db $1 ; border block
+	db $01 ; border block
 
 	def_warp_events
 	warp_event 23, 22, POKEMON_MANSION_1F, 6
+	warp_event  2,  1, POKEMON_MANSION_B2F, 1 ; temp for debugging purposes...unless?
 
 	def_bg_events
 

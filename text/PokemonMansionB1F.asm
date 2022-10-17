@@ -33,7 +33,9 @@ _Mansion4Text7::
 	line "MEWTWO is far too"
 	cont "powerful."
 
-	para "We have failed to"
-	line "curb its vicious"
-	cont "tendencies..."
+	text "It's no use..."
+	
+	text "I cannot control"
+	line "it!"
+	
 	done

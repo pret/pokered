@@ -53,7 +53,7 @@ Mansion3Script0:
 CoordsData_52254:
 	dbmapcoord 16, 14
 	dbmapcoord 17, 14
-	dbmapcoord 19, 14
+	dbmapcoord 19, 14 ; this one kicks you out i think
 	db -1 ; end
 
 Mansion3Script_5225b:
