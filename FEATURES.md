@@ -71,11 +71,13 @@ The fourth page contains Sprite-related options.
 
 ![Front Sprite 1 Bulbasaur](/gfx/pokemon/front/bulbasaur.png?raw=true) ![Front Sprite 2 Bulbasaur](/gfx/pokemon/front_rg/bulbasaur.png?raw=true) ![Front Sprite 1 Squirtle](/gfx/pokemon/front/squirtle.png?raw=true) ![Front Sprite 2 Squirtle](/gfx/pokemon/front_rg/squirtle.png?raw=true) ![Front Sprite 1 Blastoise](/gfx/pokemon/front/blastoise.png?raw=true) ![Front Sprite 2 Blastoise](/gfx/pokemon/front_rg/blastoise.png?raw=true) ![Front Sprite 1 Pidgeot](/gfx/pokemon/front/pidgeot.png?raw=true) ![Front Sprite 2 Pidgeot](/gfx/pokemon/front_rg/pidgeot.png?raw=true)
 
-The fifth page contains 6 additional pokemon whose front sprites can be customized. 
-
-![Options Fifth Page](/screenshots/options_page_5.png?raw=true)
+The fifth, sixth, and seventh pages contain additional pokemon whose front sprites can be customized. 
 
  ![Front Sprite 1 Nidorino](/gfx/pokemon/front/nidorino.png?raw=true) ![Front Sprite 2 Nidorino](/gfx/pokemon/front_rg/nidorino.png?raw=true)  ![Front Sprite 1 Golbat](/gfx/pokemon/front_y/golbat.png?raw=true) ![Front Sprite 2 Golbat](/gfx/pokemon/front/golbat.png?raw=true) ![Front Sprite 1 Mankey](/gfx/pokemon/front/mankey.png?raw=true) ![Front Sprite 2 Mankey](/gfx/pokemon/front_rg/mankey.png?raw=true) ![Front Sprite 1 Arcanine](/gfx/pokemon/front/arcanine.png?raw=true) ![Front Sprite 2 Arcanine](/gfx/pokemon/front_rg/arcanine.png?raw=true) ![Front Sprite 1 Exeggutor](/gfx/pokemon/front_y/exeggutor.png?raw=true) ![Front Sprite 2 Exeggutor](/gfx/pokemon/front/exeggutor.png?raw=true) ![Front Sprite 1 Mewteo](/gfx/pokemon/front/mewtwo.png?raw=true) ![Front Sprite 2 Mewtwo](/gfx/pokemon/front_rg/mewtwo.png?raw=true) 
+
+ ![Front Sprite 1 Pidgeotto](/gfx/pokemon/front/pidgeotto.png?raw=true) ![Front Sprite 2 Pidgeotto](/gfx/pokemon/front_rg/pidgeotto.png?raw=true)  ![Front Sprite 1 Butterfree](/gfx/pokemon/front/butterfree.png?raw=true) ![Front Sprite 2 Butterfree](/gfx/pokemon/front/butterfree.png?raw=true) ![Front Sprite 1 Gengar](/gfx/pokemon/front/gengar.png?raw=true) ![Front Sprite 2 Gengar](/gfx/pokemon/front_y/gengar.png?raw=true) ![Front Sprite 1 Onix](/gfx/pokemon/front/onix.png?raw=true) ![Front Sprite 2 Onix](/gfx/pokemon/front_rg/onix.png?raw=true) ![Front Sprite 1 Voltorb](/gfx/pokemon/front/voltorb.png?raw=true) ![Front Sprite 2 Voltorb](/gfx/pokemon/front_rg/voltorb.png?raw=true) ![Front Sprite 1 Starmie](/gfx/pokemon/front/starmie.png?raw=true) ![Front Sprite 2 Starmie](/gfx/pokemon/front_rg/Starmie.png?raw=true) 
+
+ ![Front Sprite 1 Kadabra](/gfx/pokemon/front/kadabra.png?raw=true) ![Front Sprite 2 Kadabra](/gfx/pokemon/front_rg/kadabra.png?raw=true)  ![Front Sprite 1 Tentacruel](/gfx/pokemon/front/tentacruel.png?raw=true) ![Front Sprite 2 Tentacruel](/gfx/pokemon/front_rg/tentacruel.png?raw=true) ![Front Sprite 1 Graveler](/gfx/pokemon/front/graveler.png?raw=true) ![Front Sprite 2 Graveler](/gfx/pokemon/front_rg/graveler.png?raw=true) ![Front Sprite 1 Machop](/gfx/pokemon/front/machop.png?raw=true) ![Front Sprite 2 Machop](/gfx/pokemon/front_rg/machop.png?raw=true) ![Front Sprite 1 Pinsir](/gfx/pokemon/front/pinsir.png?raw=true) ![Front Sprite 2 Pinsir](/gfx/pokemon/front_rg/pinsir.png?raw=true) ![Front Sprite 1 Zapdos](/gfx/pokemon/front/zapdos.png?raw=true) ![Front Sprite 2 Zapdos](/gfx/pokemon/front_rg/zapdos.png?raw=true) 
 
 ## Quality of Life Enhancements
 - Stone evos and trade evos have full movesets
@@ -114,6 +116,9 @@ The fifth page contains 6 additional pokemon whose front sprites can be customiz
 - When teaching a pokemon a move and selecting a move to forget, you must press START to select the move to forget instead of A. Now you won't accidentally select the wrong one disastrously!
 - Spin tiles in rocket hideout and viridian gym move you much faster
 - "Use another repel" menu implemented.
+- New info in the pokedex: The pokedex displays the typing of pokemon you have seen, and typing/base stats of pokemon you have caught
+
+![Pokedex Base Stats](/screenshots/pokedex_base_stats_typing.png?raw=true)
 - When doing the Cinnabar Gym quiz, it won't keep explaining the quiz every time you start it up.
 - Coin Case doesn't take up space in your bag. Go to the game corner if you need to check how many coins you have.
 - Secret Key, Card Key, and Lift Key are consumed when you no-longer need them. Less item clutter.
@@ -203,6 +208,7 @@ The fifth page contains 6 additional pokemon whose front sprites can be customiz
 - Many move animations were enhanced.
 - Using SGB1 colors, pewter's palette is slightly greyer than the original game.
 - Using any of SGB1, SGB2, or GBC colors, seafoam island is bluish purple instead of the same color as every other cave in the game.
+- Using any of SGB1, SGB2, or GBC colors, the Power Plant is a pale color instead of the same green + blue color as every grass route in the game.
 - Using SGB1 or SGB2 colors, lorelei's room is a similar color to seafoam islands (it was the same color as Pallet Town previously).
 - Using GBC color mode, the "Grey pokemon" palette was made less brown.
 - Spaceworld backsprites were tweaked to improve them a bit
