@@ -7,12 +7,15 @@ Music_DoLowHealthAlarm::
 ;	ret z     ;nope
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; shinpokerednote: FIXED: low health alarm only rings a couple times before stopping after triggering
+;                         limit the low health alarm to 3 tone pairs
 	push af
 	jr z, .no_alarm_check_battle
 .yes_alarm_check_tone
 	ld a, [wLowHealthTonePairs]
 	and a
-	jr z, .pop_and_disable_alarm
+	jr z, .no_alarm_no_battle
+	cp 1
+	jr z, .dec_pop_and_disable_alarm
 	jr .do_alarm_tone_check_dec
 .no_alarm_check_battle
 	ld a, [wIsInBattle]
@@ -24,11 +27,15 @@ Music_DoLowHealthAlarm::
 	ld a, [wPlayerHPBarColor]
 	cp HP_BAR_RED
 	jr z, .no_alarm_no_battle
-	ld a, 3
+	ld a, 3 + 1
 	ld [wLowHealthTonePairs], a
 .no_alarm_no_battle
 	pop af
 	ret
+.dec_pop_and_disable_alarm
+	ld a, [wLowHealthTonePairs]
+	dec a
+	ld [wLowHealthTonePairs], a
 .pop_and_disable_alarm
 	pop af
 	jr .disableAlarm
