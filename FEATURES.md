@@ -45,7 +45,7 @@ The third page contains settings related to battles.
 
 ![Options Third Page](/screenshots/options_page_3.png?raw=true)
 -
-  - The first four options, `GHSTxPSY`, `ICExFIRE`, `BUGxPSN`, `PSNxBUG` all control type matchups in the game. The option on the left for these is the original game's type matchup, and the right option is what it was changed to in Gen 2. These options allow you to fine-tune how you want type matchups to behave. The only non-original one is GHSTxPSY, which is set to make Ghost super effective against Psychic by default. In the original game Psychic was immune to Ghost, which the game even tells you isn't supposed to be the case in NPC dialogue.
+  - The first four options, `GHST→PSY`, `ICE→FIRE`, `BUG→PSN`, `PSN→BUG` all control type matchups in the game. The option on the left for these is the original game's type matchup, and the right option is what it was changed to in Gen 2. These options allow you to fine-tune how you want type matchups to behave. The only non-original one is GHSTxPSY, which is set to make Ghost super effective against Psychic by default. In the original game Psychic was immune to Ghost, which the game even tells you isn't supposed to be the case in NPC dialogue.
   - The fifth option, `EXP BAR` enables or disables an experience bar visual in battle. (Default: OFF) This feature allows easier tracking of experience while in battle.
   
    ![Exp bar](screenshots/exp_bar.png?raw=true)
