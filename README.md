@@ -16,7 +16,7 @@ This is a purist's enhancement of Pokemon Red/Blue/Green. The goal is to enhance
 - There are more bug, poison, and ghost type moves available. The focus is on getting a useful set of moves available for every single pokemon in the game. 
 - Front sprites were updated to be just about the best set of sprites from Red/Green/Blue/Spaceworld 1997 overall.
 - All 151 pokemon are obtainable in all versions of this hack. 
-- Many small quality-of-life tweaks and bugfixes were made. 
+- [Many small quality-of-life tweaks and bugfixes](https://github.com/Vortyne/pureRGB/blob/master/FEATURES.md#quality-of-life-enhancements) were made. 
 - Game bugs that can be used to your own advantage (like the leech seed/toxic bug, the hyper beam no recharge on faint bug, etc.) are unchanged, because they are quirks of the battle engine that you can use as your own tool. 
 - Mew is under the truck as expected!
 - Missingno and the item duplication glitch are intact - but won't corrupt your save anymore!
