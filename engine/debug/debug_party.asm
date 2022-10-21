@@ -59,7 +59,7 @@ IF DEF(_DEBUG)
 	ld [hli], a
 	ld a, SURF
 	ld [hli], a
-	ld a, STRENGTH
+	ld a, FOCUS_ENERGY
 	ld [hl], a
 	ld hl, wPartyMon1PP
 	ld a, 15

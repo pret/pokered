@@ -923,7 +923,8 @@ DoPoofSpecialEffects:
 	call AnimationLightScreenPalette
 	ld a, SFX_FAINT_THUD
 	call PlaySoundWaitForCurrent
-	call AnimationSpiralBallsInwardFast
+	ld d, $7a ; animation tile number
+	call AnimationSpiralBallsInwardFastDefault
 	call AnimationResetScreenPalette
 .done
 	xor a
@@ -1723,15 +1724,24 @@ AnimationResetMonPosition:
 	call ClearMonPicFromTileMap
 	jp AnimationShowMonPic
 
+;;;;;;;;;; PureRGBnote: ADDED: new animation used for Horn Drill, Drill Peck, and when using a Master Ball
+AnimationSpiralBallsInwardFast:
+	ld d, $50 ; tile number
+AnimationSpiralBallsInwardFastDefault:
+	ld e, 2 ; delay
+	jr AnimationSpiralBallsInward
+;;;;;;;;;;
+
 AnimationSpiralBallsInwardDefault:
-	ld a, 5
-	ld [wSpiralBallsDelay], a
+	ld d, $7a ; tile number
+	ld e, 5 ; delay
 ; Creates an effect that looks like energy balls spiralling into the
 ; player mon's sprite.  Used in Focus Energy, for example.
 ; PureRGBnote: CHANGED: modified this function so the delay is customizable, and it can repeatedly play a sound effect while the animation is happening.
-;                       now used in Drill Peck and Horn Drill.
+;                       now used in Drill Peck, Horn Drill, and the animation for using a Master Ball.
 AnimationSpiralBallsInward:
-	ld a, [wSpiralBallsDelay]
+	push de
+	ld a, e
 	cp 2
 	jr z, .fastCheck
 	ldh a, [hWhoseTurn]
@@ -1753,7 +1763,7 @@ AnimationSpiralBallsInward:
 	ld [wSpiralBallsBaseY], a
 	ld [wSpiralBallsBaseX], a
 .next
-	ld d, $7a ; ball tile
+	; d still has the tile number stored
 	ld c, 3 ; number of balls
 	xor a
 	call InitMultipleObjectsOAM
@@ -1799,7 +1809,11 @@ AnimationSpiralBallsInward:
 	inc de
 	dec c
 	jr nz, .innerLoop
-	ld a, [wSpiralBallsDelay]
+	pop hl
+	pop de
+	ld a, e ; amount of delay
+	push de
+	push hl
 	ld c, a
 	cp 2
 	jr z, .playSound
@@ -1822,20 +1836,12 @@ AnimationSpiralBallsInward:
 	jr .loop
 .done
 	pop hl
-	ld a, [wSpiralBallsDelay]
-	cp 2
-	jr z, .finish
 	call AnimationCleanOAM
+	pop de
+	ld a, e ; amount of delay
+	cp 2
+	ret z
 	jp AnimationFlashScreen
-.finish
-	ret
-
-;;;;;;;;;; PureRGBnote: ADDED: new animation used for Horn Drill and Drill Peck
-AnimationSpiralBallsInwardFast:
-	ld a, 2
-	ld [wSpiralBallsDelay], a
-	jp AnimationSpiralBallsInward
-;;;;;;;;;;
 
 SpiralBallAnimationCoordinates:
 ; y, x pairs
