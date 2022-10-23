@@ -220,6 +220,7 @@ KangaskhanEvosMoves:
 	db 18, BITE
 	db 23, STOMP
 	db 27, HEADBUTT
+	db 30, MIMIC
 	db 33, DIZZY_PUNCH
 	db 36, REST
 	db 41, FOCUS_ENERGY
@@ -256,6 +257,7 @@ ClefairyEvosMoves:
 	db 17, METRONOME
 	db 21, HEADBUTT
 	db 25, LIGHT_SCREEN
+	db 28, MIMIC
 	db 33, LOVELY_KISS
 	db 38, PETAL_DANCE
 	db 45, SKY_ATTACK
@@ -389,6 +391,7 @@ ExeggcuteEvosMoves:
 	db 23, REFLECT
 	db 27, PSYBEAM
 	db 32, BARRAGE
+	db 34, SOFTBOILED
 	db 36, SLEEP_POWDER
 	db 48, SOLARBEAM
 	db 53, EGG_BOMB
@@ -655,8 +658,8 @@ TangelaEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
-	db 12, VINE_WHIP
 	db 14, POISONPOWDER
+	db 18, CONSTRICT ; STATIC_SNAG
 	db 23, STUN_SPORE
 	db 26, MEGA_DRAIN
 	db 30, AMNESIA
@@ -705,6 +708,7 @@ OnixEvosMoves:
 	db 22, DEFENSE_CURL
 	db 25, RAGE
 	db 29, CLAMP
+	db 31, MIRROR_MOVE
 	db 33, AMNESIA
 	db 39, TAKE_DOWN ; HEAT RUSH
 	db 45, WITHDRAW
@@ -791,6 +795,7 @@ GravelerEvosMoves:
 	db 39, EARTHQUAKE
 	db 46, EXPLOSION
 	db 52, MEGA_KICK
+	db 60, FISSURE
 	db 0
 
 ChanseyEvosMoves:
@@ -832,12 +837,13 @@ MrMimeEvosMoves:
 	db 17, DOUBLESLAP
 	db 21, LIGHT_SCREEN
 	db 23, PSYBEAM
-	db 26, GLARE
+	db 26, MIRROR_MOVE
 	db 31, SEISMIC_TOSS
 	db 35, MEDITATE
 	db 39, PSYCHIC_M
 	db 44, SWIFT
 	db 48, SUBSTITUTE
+	db 53, MIMIC
 	db 0
 
 HitmonleeEvosMoves:
@@ -864,7 +870,7 @@ HitmonchanEvosMoves:
 	db 26, THUNDERPUNCH
 	db 32, DIZZY_PUNCH
 	db 37, COUNTER ; DRAIN PUNCH
-	db 43, BARRAGE
+	db 43, MIRROR_MOVE
 	db 49, MEGA_PUNCH
 	db 0
 
@@ -949,6 +955,7 @@ GolemEvosMoves:
 	db 39, EARTHQUAKE
 	db 46, EXPLOSION
 	db 52, MEGA_KICK
+	db 60, FISSURE
 	db 0
 
 MissingNo32EvosMoves:
@@ -1022,6 +1029,7 @@ KoffingEvosMoves:
 	db 24, ACID
 	db 26, HEADBUTT
 	db 30, SLUDGE
+	db 33, HAZE
 	db 36, SELFDESTRUCT
 	db 42, RECOVER
 	db 46, POISON_GAS
@@ -1149,13 +1157,12 @@ VenonatEvosMoves:
 	db 15, STUN_SPORE
 	db 16, SLEEP_POWDER
 	db 18, LEECH_LIFE
-	db 21, CONFUSION
-	db 24, PSYBEAM
+	db 22, PSYBEAM
+	db 30, MIRROR_MOVE
 	db 33, SLUDGE
 	db 37, DREAM_EATER
 	db 37, SLEEP_POWDER
 	db 42, TAKE_DOWN ; HEAT RUSH
-	db 53, SKY_ATTACK
 	db 0
 
 DragoniteEvosMoves:
@@ -1688,7 +1695,7 @@ ZubatEvosMoves:
 	db 30, SLUDGE
 	db 36, SUBMISSION
 	db 42, SKULL_BASH
-	db 49, SKY_ATTACK
+	db 49, SUPER_FANG
 	db 54, POISON_GAS
 	db 60, HAZE
 	db 0
@@ -1858,9 +1865,9 @@ VenomothEvosMoves:
 	db 15, STUN_SPORE
 	db 16, SLEEP_POWDER
 	db 18, LEECH_LIFE
-	db 21, CONFUSION
-	db 24, PSYBEAM
-	db 31, WING_ATTACK
+	db 22, PSYBEAM
+	db 27, WING_ATTACK
+	db 30, MIRROR_MOVE
 	db 33, SLUDGE
 	db 37, DREAM_EATER
 	db 37, SLEEP_POWDER
@@ -2001,7 +2008,7 @@ GolbatEvosMoves:
 	db 30, SLUDGE
 	db 36, SUBMISSION
 	db 42, SKULL_BASH
-	db 49, SKY_ATTACK
+	db 49, SUPER_FANG
 	db 54, POISON_GAS
 	db 60, HAZE
 	db 0
@@ -2131,6 +2138,7 @@ ClefableEvosMoves:
 	db 17, METRONOME
 	db 21, HEADBUTT
 	db 25, LIGHT_SCREEN
+	db 28, MIMIC
 	db 33, LOVELY_KISS
 	db 38, PETAL_DANCE
 	db 45, SKY_ATTACK
@@ -2149,6 +2157,7 @@ WeezingEvosMoves:
 	db 24, ACID
 	db 26, HEADBUTT
 	db 30, SLUDGE
+	db 33, HAZE
 	db 36, SELFDESTRUCT
 	db 42, RECOVER
 	db 46, POISON_GAS
@@ -2515,6 +2524,7 @@ GeodudeEvosMoves:
 	db 39, EARTHQUAKE
 	db 46, EXPLOSION
 	db 52, MEGA_KICK
+	db 60, FISSURE
 	db 0
 
 PorygonEvosMoves:

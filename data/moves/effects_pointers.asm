@@ -81,7 +81,7 @@ MoveEffectPointerTable:
 	dw AttackSpecialSpeedUpEffect; ATTACK_SPECIAL_SPEED_UP1
 	dw SubstituteEffect          ; SUBSTITUTE_EFFECT
 	dw HyperBeamEffect           ; HYPER_BEAM_EFFECT
-	dw RageEffect                ; RAGE_EFFECT
+	dw TwoToFiveAttacksEffect    ; BONEMERANG_EFFECT
 	dw MimicEffect               ; MIMIC_EFFECT
 	dw NULL                      ; METRONOME_EFFECT
 	dw LeechSeedEffect           ; LEECH_SEED_EFFECT

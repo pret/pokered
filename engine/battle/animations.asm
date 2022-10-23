@@ -1270,45 +1270,55 @@ AnimationShakeScreen:
 AnimationShakeScreenHorizontallyFast:
 	predef_jump PredefShakeScreenHorizontally
 
-;;;;;;;;;; PureRGBnote: ADDED: new animations used with heat rush and poison gas
-AnimationSmokeEverywhere: 
-	xor a
-	ld [wWhichBattleAnimTileset], a
-	call LoadMoveAnimationTiles
-	ld d, 16
-	ld a, $7A
-	ld [wDropletTile], a
-	jp AnimationTileEverywhere
-
-AnimationFireEverywhere:
-	ld a, 1
-	ld [wWhichBattleAnimTileset], a
-	call LoadMoveAnimationTiles
-	ld d, 16
-	ld a, $73
-	ld [wDropletTile], a
-	jp AnimationTileEverywhere
-
-AnimationWaterDropletsEverywhereFast:
-	xor a
-	ld [wWhichBattleAnimTileset], a
-	call LoadMoveAnimationTiles
-	ld d, 16
-	jp AnimationWaterDropletsEverywhere
-;;;;;;;;;;
-
-
 AnimationWaterDropletsEverywhereDefault:
 ; Draws water droplets all over the screen and makes them
 ; scroll. It's hard to describe, but it's the main animation
 ; in Surf/Mist/Toxic.
 	xor a
-	ld [wWhichBattleAnimTileset], a
-	call LoadMoveAnimationTiles
 	ld d, 32
-AnimationWaterDropletsEverywhere:
-	ld a, $71
+	ld e, $71
+	jr AnimationTileEverywhereInit
+
+;;;;;;;;;; PureRGBnote: ADDED: new animations used with heat rush and poison gas
+
+AnimationWaterDropletsEverywhereFast:
+	xor a
+	ld e, $71
+	jr AnimationTileEverywhereFastInit
+
+AnimationSmokeEverywhere: 
+	xor a
+	ld e, $7A
+	jr AnimationTileEverywhereFastInit
+
+AnimationStaticEverywhere: 
+	ld a, 1
+	ld e, $7B
+	jr AnimationTileEverywhereFastInit
+
+AnimationSnowflakesEverywhere: 
+	xor a
+	ld e, $4D
+	jr AnimationTileEverywhereFastInit
+
+AnimationFireEverywhere:
+	ld a, 1
+	ld e, $73
+
+AnimationTileEverywhereFastInit:
+	ld d, 16
+
+AnimationTileEverywhereInit:
+	ld [wWhichBattleAnimTileset], a
+	push de
+	call LoadMoveAnimationTiles
+	pop de
+	ld a, e
 	ld [wDropletTile], a
+;;;;;;;;;;
+
+; fall through
+
 AnimationTileEverywhere:
 	ld a, -16
 	ld [wBaseCoordX], a
@@ -1485,6 +1495,7 @@ ShakeEnemyHUD_WritePlayerMonPicOAM:
 	ld e, a
 	ld b, 5
 .innerLoop
+	xor a
 	call BattleAnimWriteOAMEntry
 	inc d
 	dec b
@@ -1503,6 +1514,8 @@ BattleAnimWriteOAMEntry:
 ; X coordinate = [wBaseCoordX]
 ; tile = d
 ; attributes = variable (dependant on coords)
+; does horizontal + vertical flip if a = 1
+	push af
 ;;;;;;;;;; shinpokerednote: gbcnote: oam updates from pokemon yellow
 	ld a, $1
 	ld [wdef5], a
@@ -1531,7 +1544,13 @@ BattleAnimWriteOAMEntry:
 ;;;;;;;;;;
 	ld a, d
 	ld [hli], a
+	pop af
+	and a
 	ld a, [wdef5] ; shinpokerednote: gbcnote: oam updates from pokemon yellow
+	jr z, .noFlip
+	set 5, a
+	set 6, a
+.noFlip
 	ld [hli], a
 	ret
 
@@ -1633,23 +1652,16 @@ AnimationShowEnemyMonPic:
 
 ;;;;;;;;;; PureRGBnote: ADDED: new animation used with rolling kick
 AnimationShakeBackAndForthShort:
-	ldh a, [hWhoseTurn]
-	and a
-	hlcoord 0, 5
-	decoord 2, 5
-	jr z, .next
-	hlcoord 11, 0
-	decoord 13, 0
-
-.next
-	xor a ; TILEMAP_MON_PIC
 	ld c, $05
-	jp AnimationShakeLoop
+	jr AnimationShakeBackAndForthInit
 ;;;;;;;;;;
 
 AnimationShakeBackAndForth:
+	ld c, $10
 ; Shakes the mon's sprite back and forth rapidly. This is used in Double Team.
 ; The mon's sprite disappears after this animation.
+AnimationShakeBackAndForthInit:
+	push bc
 	ldh a, [hWhoseTurn]
 	and a
 	hlcoord 0, 5
@@ -1657,10 +1669,9 @@ AnimationShakeBackAndForth:
 	jr z, .next
 	hlcoord 11, 0
 	decoord 13, 0
-
 .next
 	xor a ; TILEMAP_MON_PIC
-	ld c, $10
+	pop bc
 AnimationShakeLoop:
 .loop
 	push af
@@ -1744,6 +1755,7 @@ AnimationSpiralBallsInward:
 	ld a, e
 	cp 2
 	jr z, .fastCheck
+	ld b, 0 ; no flip
 	ldh a, [hWhoseTurn]
 	and a
 	jr z, .onPlayer
@@ -1751,7 +1763,9 @@ AnimationSpiralBallsInward:
 .fastCheck
 	ldh a, [hWhoseTurn]
 	and a
+	ld b, 1 ; horizontal + vertical flip
 	jr nz, .onPlayer
+	ld b, 0 ; no flip
 .onEnemy
 	ld a, -40
 	ld [wSpiralBallsBaseY], a
@@ -1957,6 +1971,7 @@ _AnimationShootBallsUpward:
 	ld a, [wBaseCoordY]
 	ld e, a
 .initOAMLoop
+	xor a
 	call BattleAnimWriteOAMEntry
 	dec b
 	jr nz, .initOAMLoop
@@ -2401,6 +2416,7 @@ InitMultipleObjectsOAM:
 ; Sets their Y coordinates to sequential multiples of 8, starting from 0.
 ; Sets their X coordinates to 0.
 ; Loads animation tileset a.
+; if b = 1, does horizontal + vertical flip
 	push bc
 	push de
 	ld [wWhichBattleAnimTileset], a
@@ -2412,6 +2428,7 @@ InitMultipleObjectsOAM:
 	ld [wBaseCoordX], a
 	ld hl, wShadowOAM
 .loop
+	ld a, b
 	call BattleAnimWriteOAMEntry
 	dec c
 	jr nz, .loop
@@ -2665,6 +2682,7 @@ AnimationPetalsFalling:
 AnimationFallingObjects:
 	ld c, a
 	ld a, 1
+	ld b, 0
 	call InitMultipleObjectsOAM
 	call FallingObjects_InitXCoords
 	call FallingObjects_InitMovementData

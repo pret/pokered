@@ -10,6 +10,6 @@ AlwaysHappenSideEffects:
 	db RECOIL_EFFECT
 	db BIG_RECOIL_EFFECT ; PureRGBnote: ADDED:
 	db TWINEEDLE_EFFECT
-	db RAGE_EFFECT
 	db ATTACK_UP_SIDE_EFFECT ; PureRGBnote: ADDED:
+	db BONEMERANG_EFFECT ; PureRGBnote: ADDED:
 	db -1 ; end

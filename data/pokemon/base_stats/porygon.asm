@@ -10,7 +10,7 @@
 	INCBIN "gfx/pokemon/front/porygon.pic", 0, 1 ; sprite dimensions
 	dw PorygonPicFront, PorygonPicBackSW
 
-	db TACKLE, SHARPEN, KINESIS, NO_MOVE ; level 1 learnset
+	db TACKLE, SHARPEN, KINESIS, MIRROR_MOVE ; level 1 learnset
 	db GROWTH_FAST ; growth rate
 
 	; tm/hm learnset

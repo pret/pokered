@@ -10,7 +10,7 @@
 	INCBIN "gfx/pokemon/front/farfetchd.pic", 0, 1 ; sprite dimensions
 	dw FarfetchdPicFront, FarfetchdPicBackSW
 
-	db PECK, SAND_ATTACK, LEER, NO_MOVE ; level 1 learnset
+	db PECK, SAND_ATTACK, LEER, MIRROR_MOVE ; level 1 learnset
 	db GROWTH_FAST ; growth rate
 
 	; tm/hm learnset

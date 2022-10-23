@@ -7,6 +7,7 @@ PriorityMoves:
 	db FLASH
 	db SWIFT
 	db TRANSFORM
+	db MIRROR_MOVE
 	db -1 ; end
 
 ; returns with c set if move in c is a priority move

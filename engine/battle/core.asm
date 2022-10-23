@@ -752,7 +752,7 @@ HandleEnemyMonFainted:
 .skipReplacingBattleMon
 ;;;;;;;;;; PureRGBnote: CHANGED: clear the previous move used when the pokemon faints so disable won't pick it up
 	xor a
-	ld [wPreviousEnemySelectedMove], a
+	ld [wEnemyLastSelectedMoveDisable], a
 ;;;;;;;;;;
 	ld a, $1
 	ld [wActionResultOrTookBattleTurn], a
@@ -1035,7 +1035,7 @@ HandlePlayerMonFainted:
 .doUseNextMonDialogue
 ;;;;;;;;;; PureRGBnote: CHANGED: clear the previous move used when the pokemon faints so disable won't pick it up
 	xor a
-	ld [wPreviousPlayerSelectedMove], a
+	ld [wPlayerLastSelectedMoveDisable], a
 ;;;;;;;;;;
 	call DoUseNextMonDialogue
 	ret c ; return if the player ran from battle
@@ -2496,7 +2496,7 @@ SwitchPlayerMon:
 	callfar RetreatMon
 	;;;;;;;;; PureRGB: CHANGED: reset disable move indicator when we switch pokemon so the move disabled is random until we use a move again with the new pokemon.
 	xor a
-	ld [wPreviousPlayerSelectedMove], a
+	ld [wPlayerLastSelectedMoveDisable], a
 	;;;;;;;;;
 	ld c, 50
 	call DelayFrames
@@ -3166,17 +3166,18 @@ ExecutePlayerMove:
 	jp nz, ExecutePlayerMoveDone
 	call PrintGhostText
 	jp z, ExecutePlayerMoveDone
-;;;;;;;;;; PureRGBnote: CHANGED: code to facilitate disable disabling the previous move the opponent used
-	ld a, [wPlayerSelectedMove]
-	cp $ff
-	jr z, .skipLoadingPreviousMove
-	ld [wPreviousPlayerSelectedMove], a
-.skipLoadingPreviousMove
-;;;;;;;;;;
 	call CheckPlayerStatusConditions
 	jr nz, .playerHasNoSpecialCondition
 	jp hl
 .playerHasNoSpecialCondition
+;;;;;;;;;; PureRGBnote: CHANGED: code to facilitate disable disabling the previous move the opponent used and mirror move
+	ld a, [wPlayerSelectedMove]
+	cp $ff
+	jr z, .skipLoadingPreviousMove
+	ld [wPlayerLastSelectedMoveDisable], a
+	ld [wPlayerLastSelectedMove], a
+.skipLoadingPreviousMove
+;;;;;;;;;;
 	call GetCurrentMove
 	ld hl, wPlayerBattleStatus1
 	bit CHARGING_UP, [hl] ; charging up for attack
@@ -3295,6 +3296,8 @@ MirrorMoveCheck:
 	call MetronomePickMove
 	jp CheckIfPlayerNeedsToChargeUp ; Go back to damage calculation for the move picked by Metronome
 .next
+	cp MIMIC_EFFECT
+	jp z, MimicEffect
 	ld a, [wPlayerMoveEffect]
 	ld hl, ResidualEffects2
 	ld de, 1
@@ -3639,7 +3642,7 @@ CheckPlayerStatusConditions:
 
 .MultiturnMoveCheck
 	bit USING_TRAPPING_MOVE, [hl] ; is mon using multi-turn move?
-	jp z, .RageCheck
+	jp z, .checkPlayerStatusConditionsDone ; if we made it this far, mon can move normally this turn
 	ld hl, AttackContinuesText
 	call PrintText
 	ld a, [wPlayerNumAttacksLeft]
@@ -3647,21 +3650,21 @@ CheckPlayerStatusConditions:
 	ld [wPlayerNumAttacksLeft], a
 	ld hl, getPlayerAnimationType ; if it didn't, skip damage calculation (deal damage equal to last hit),
 	                ; DecrementPP and MoveHitTest
-	jp nz, .returnToHL
-	jp .returnToHL
+;	jp nz, .returnToHL  ; PureRGBnote: Rage effect was changed, don't need this code
+;	jp .returnToHL
 
-.RageCheck
-	ld a, [wPlayerBattleStatus2]
-	bit USING_RAGE, a ; is mon using rage?
-	jp z, .checkPlayerStatusConditionsDone ; if we made it this far, mon can move normally this turn
-	ld a, RAGE
-	ld [wd11e], a
-	call GetMoveName
-	call CopyToStringBuffer
-	xor a
-	ld [wPlayerMoveEffect], a
-	ld hl, PlayerCanExecuteMove
-	jp .returnToHL
+;.RageCheck
+;	ld a, [wPlayerBattleStatus2]
+;	bit USING_RAGE, a ; is mon using rage?
+;	jp z, .checkPlayerStatusConditionsDone
+;	ld a, RAGE
+;	ld [wd11e], a
+;	call GetMoveName
+;	call CopyToStringBuffer
+;	xor a
+;	ld [wPlayerMoveEffect], a
+;	ld hl, PlayerCanExecuteMove
+;	jp .returnToHL
 
 .returnToHL
 	xor a
@@ -4878,22 +4881,7 @@ ApplyAttackToEnemyPokemon:
 	jp z, ApplyAttackToEnemyPokemonDone ; no attack to apply if base power is 0
 	jr ApplyDamageToEnemyPokemon
 .superFangEffect
-; set the damage to half the target's HP
-	ld hl, wEnemyMonHP
-	ld de, wDamage
-	ld a, [hli]
-	srl a
-	ld [de], a
-	inc de
-	ld b, a
-	ld a, [hl]
-	rr a
-	ld [de], a
-	or b
-	jr nz, ApplyDamageToEnemyPokemon
-; make sure Super Fang's damage is always at least 1
-	ld a, $01
-	ld [de], a
+	call SuperFangEffect
 	jr ApplyDamageToEnemyPokemon
 .specialDamage
 	ld hl, wBattleMonLevel
@@ -4998,22 +4986,7 @@ ApplyAttackToPlayerPokemon:
 	jp z, ApplyAttackToPlayerPokemonDone
 	jr ApplyDamageToPlayerPokemon
 .superFangEffect
-; set the damage to half the target's HP
-	ld hl, wBattleMonHP
-	ld de, wDamage
-	ld a, [hli]
-	srl a
-	ld [de], a
-	inc de
-	ld b, a
-	ld a, [hl]
-	rr a
-	ld [de], a
-	or b
-	jr nz, ApplyDamageToPlayerPokemon
-; make sure Super Fang's damage is always at least 1
-	ld a, $01
-	ld [de], a
+	call SuperFangEffect
 	jr ApplyDamageToPlayerPokemon
 .specialDamage
 	ld hl, wEnemyMonLevel
@@ -5220,19 +5193,20 @@ SubstituteBrokeText:
 MirrorMoveCopyMove:
 ; Mirror Move makes use of wPlayerUsedMove and wEnemyUsedMove,
 ; which are mainly used to print the "[Pokemon] used [Move]" text.
-; Both are set to 0 whenever a new Pokemon is sent out
-; wPlayerUsedMove is also set to 0 whenever the player is fast asleep or frozen solid.
-; wEnemyUsedMove is also set to 0 whenever the enemy is fast asleep or frozen solid.
+; PureRGBnote: CHANGED: now it uses wEnemyLastSelectedMove and wPlayerLastSelectedMove
+; which persist between switches and turns where the opponent can't move.
+; basically means mirror move will always use the previously used opponent move, 
+; no matter if the pokemon that used the move fainted, switched, etc.
 
 	ldh a, [hWhoseTurn]
 	and a
 ; values for player turn
-	ld a, [wEnemyUsedMove]
+	ld a, [wEnemyLastSelectedMove]
 	ld hl, wPlayerSelectedMove
 	ld de, wPlayerMoveNum
 	jr z, .next
 ; values for enemy turn
-	ld a, [wPlayerUsedMove]
+	ld a, [wPlayerLastSelectedMove]
 	ld de, wEnemyMoveNum
 	ld hl, wEnemySelectedMove
 .next
@@ -5240,12 +5214,27 @@ MirrorMoveCopyMove:
 	cp MIRROR_MOVE ; did the target Pokemon last use Mirror Move, and miss?
 	jr z, .mirrorMoveFailed
 	and a ; has the target selected any move yet?
-	jr nz, ReloadMoveData
+	jr nz, .doMirrorMove
 .mirrorMoveFailed
 	ld hl, MirrorMoveFailedText
 	call PrintText
 	xor a
 	ret
+;;;;;;;;;; PureRGBnote: ADDED: Mirror move has a small animation before using the mirrored move now
+.doMirrorMove
+	ld a, [hl]
+	push af
+	ld a, MIRROR_MOVE
+	ld [hl], a
+	push hl
+	push de
+	call PlayCurrentMoveAnimation
+	pop de
+	pop hl
+	pop af
+	ld [hl], a
+	jr ReloadMoveData
+;;;;;;;;;;
 
 MirrorMoveFailedText:
 	text_far _MirrorMoveFailedText
@@ -5874,10 +5863,6 @@ ExecuteEnemyMove:
 .executeEnemyMove
 	ld hl, wAILayer2Encouragement
 	inc [hl]
-;;;;;;;;;; PureRGBnote: CHANGED: load the move that's about to be used in order to facilitate disable functionality
-	ld a, [wEnemySelectedMove]
-	ld [wPreviousEnemySelectedMove], a
-;;;;;;;;;;
 	xor a
 	ld [wMoveMissed], a
 	ld [wMoveDidntMiss], a
@@ -5887,6 +5872,11 @@ ExecuteEnemyMove:
 	jr nz, .enemyHasNoSpecialConditions
 	jp hl
 .enemyHasNoSpecialConditions
+;;;;;;;;;; PureRGBnote: CHANGED: load the move that's about to be used in order to facilitate disable and mirror move functionality
+	ld a, [wEnemySelectedMove]
+	ld [wEnemyLastSelectedMoveDisable], a
+	ld [wEnemyLastSelectedMove], a
+;;;;;;;;;;
 	ld hl, wEnemyBattleStatus1
 	bit CHARGING_UP, [hl] ; is the enemy charging up for attack?
 	jr nz, EnemyCanExecuteChargingMove ; if so, jump
@@ -6015,6 +6005,8 @@ EnemyCheckIfMirrorMoveEffect:
 	call MetronomePickMove
 	jp CheckIfEnemyNeedsToChargeUp
 .notMetronomeEffect
+	cp MIMIC_EFFECT
+	jp z, MimicEffect
 	ld a, [wEnemyMoveEffect]
 	ld hl, ResidualEffects2
 	ld de, $1
@@ -6333,27 +6325,27 @@ CheckEnemyStatusConditions:
 	jp .enemyReturnToHL
 .checkIfUsingMultiturnMove
 	bit USING_TRAPPING_MOVE, [hl] ; is mon using multi-turn move?
-	jp z, .checkIfUsingRage
+	jp z, .checkEnemyStatusConditionsDone
 	ld hl, AttackContinuesText
 	call PrintText
 	ld hl, wEnemyNumAttacksLeft
 	dec [hl] ; did multi-turn move end?
 	ld hl, GetEnemyAnimationType ; if it didn't, skip damage calculation (deal damage equal to last hit),
 	                             ; DecrementPP and MoveHitTest
-	jp nz, .enemyReturnToHL
-	jp .enemyReturnToHL
-.checkIfUsingRage
-	ld a, [wEnemyBattleStatus2]
-	bit USING_RAGE, a ; is mon using rage?
-	jp z, .checkEnemyStatusConditionsDone ; if we made it this far, mon can move normally this turn
-	ld a, RAGE
-	ld [wd11e], a
-	call GetMoveName
-	call CopyToStringBuffer
-	xor a
-	ld [wEnemyMoveEffect], a
-	ld hl, EnemyCanExecuteMove
-	jp .enemyReturnToHL
+;	jp nz, .enemyReturnToHL ; PureRGBnote: Rage effect was changed, don't need this code
+;	jp .enemyReturnToHL
+;.checkIfUsingRage
+;	ld a, [wEnemyBattleStatus2]
+;	bit USING_RAGE, a ; is mon using rage?
+;	jp z, .checkEnemyStatusConditionsDone ; if we made it this far, mon can move normally this turn
+;	ld a, RAGE
+;	ld [wd11e], a
+;	call GetMoveName
+;	call CopyToStringBuffer
+;	xor a
+;	ld [wEnemyMoveEffect], a
+;	ld hl, EnemyCanExecuteMove
+;	jp .enemyReturnToHL
 .enemyReturnToHL
 	xor a ; set Z flag
 	ret

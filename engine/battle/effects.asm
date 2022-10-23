@@ -1126,6 +1126,8 @@ TwoToFiveAttacksEffect:
 	ld hl, wEnemyMoveEffect
 .setNumberOfHits
 	ld a, [hl]
+	cp BONEMERANG_EFFECT
+	jr z, .bonemerang
 	cp TWINEEDLE_EFFECT
 	jr z, .twineedle
 	cp TWO_OR_THREE_ATTACKS_EFFECT ; PureRGBnote: ADDED: effect that has a 50% chance of 2 or 3 attacks each
@@ -1155,8 +1157,13 @@ TwoToFiveAttacksEffect:
 	ld [bc], a
 	ret
 .twineedle
-	ld a, POISON_SIDE_EFFECT1
+	ld a, POISON_SIDE_EFFECT1 ; this is also the value 2, which is how many hits twineedle will do
 	ld [hl], a ; set Twineedle's effect to poison effect
+	jr .saveNumberOfHits
+.bonemerang
+	ld a, SPEED_DOWN_SIDE_EFFECT 
+	ld [hl], a ; make bonemerang a 30% chance of speed down move
+	ld a, 2
 	jr .saveNumberOfHits
 
 FlinchSideEffect:
@@ -1424,7 +1431,7 @@ MimicEffect:
 	call MoveHitTest
 	ld a, [wMoveMissed]
 	and a
-	jr nz, .mimicMissed
+	jp nz, .mimicMissed
 	ldh a, [hWhoseTurn]
 	and a
 	ld hl, wBattleMonMoves
@@ -1483,10 +1490,28 @@ MimicEffect:
 	ld a, d
 	ld [hl], a
 	ld [wd11e], a
+	push af
 	call GetMoveName
 	call PlayCurrentMoveAnimation
 	ld hl, MimicLearnedMoveText
-	jp PrintText
+	call PrintText
+;;;;;;;;;; PureRGBnote: CHANGED: Now immediately use the move
+	ld a, [hWhoseTurn]
+	and a
+	ld hl, wPlayerSelectedMove
+	ld de, wPlayerMoveNum
+	jr z, .playerTurn2
+	ld hl, wEnemySelectedMove
+	ld de, wEnemyMoveNum
+.playerTurn2
+	pop af
+	ld [hl], a
+	call ReloadMoveData
+	ld a, [hWhoseTurn]
+	and a
+	jp z, CheckIfPlayerNeedsToChargeUp
+	jp CheckIfEnemyNeedsToChargeUp
+;;;;;;;;;;
 .mimicMissed
 	jp PrintButItFailedText_
 
@@ -1510,14 +1535,14 @@ DisableEffect:
 	jp nz, .moveMissed
 	ld de, wEnemyDisabledMove
 	ld hl, wEnemyMonMoves
-	ld a, [wPreviousEnemySelectedMove]
+	ld a, [wEnemyLastSelectedMoveDisable]
 	ld b, a
 	ldh a, [hWhoseTurn]
 	and a
 	jr z, .disableEffect
 	ld de, wPlayerDisabledMove
 	ld hl, wBattleMonMoves
-	ld a, [wPreviousPlayerSelectedMove]
+	ld a, [wPlayerLastSelectedMoveDisable]
 	ld b, a
 .disableEffect
 ; no effect if target already has a move disabled
@@ -1739,4 +1764,44 @@ PlayBattleAnimationGotID:
 	pop bc
 	pop de
 	pop hl
+	ret
+
+SuperFangEffect:
+	ldh a, [hWhoseTurn]
+	and a
+	ld hl, wEnemyMonHP
+	jr z, .playerTurn
+	ld hl, wBattleMonHP
+.playerTurn
+; set the damage to half the target's HP
+; PureRGBnote: CHANGED: now 2/3 the target's HP
+	ld a, 3
+	ldh [hDivisor], a
+	ld de, wDamage ; we'll store the whole opponent's current HP in the damage variable for now
+	ld a, [hli]
+	ldh [hDividend], a
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ldh [hDividend + 1], a
+	ld [de], a
+	ld b, 2
+	call Divide
+	ldh a, [hQuotient + 2]
+	ld b, a
+	ld hl, wDamage ; subtract 1/3 of the mon's current HP from their current HP value to obtain 2/3 resultant damage
+	ld a, [hl]
+	sub b
+	ld [hli], a
+	ld c, a
+	ldh a, [hQuotient + 3]
+	ld b, a
+	ld a, [hl]
+	sbc b
+	ld [hl], a
+	or c
+	ret nz
+; make sure Super Fang's damage is always at least 1
+	ld a, 1
+	ld [hl], a
 	ret

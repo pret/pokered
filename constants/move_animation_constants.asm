@@ -2,10 +2,12 @@
 ; SpecialEffectPointers associates them with effect routines (see data/battle_anims/special_effect_pointers.asm)
 	const_def $C0
 DEF FIRST_SE_ID EQU const_value
-	const_skip $12
+	const_skip $10
 ;;;;;;;;;; PureRGBnote: ADDED: new special effects
+	const SE_SNOWFLAKES_EVERYWHERE     ; $D1 used in Blizzard
+	const SE_STATIC_EVERYWHERE         ; $D2 used in Constrict (Static Snag)
 	const SE_SMOKE_EVERYWHERE          ; $D3 used in Poison Gas 
-	const SE_FIRE_EVERYWHERE           ; $D4 used in Take Down 
+	const SE_FIRE_EVERYWHERE           ; $D4 used in Take Down (Heat Rush)
 	const SE_SLIDE_ENEMY_MON_DOWN_AND_HIDE   ; $D5 used in Sludge 
 	const SE_SLIDE_ENEMY_MON_HALF_OFF  ; $D6 used in Slam 
 	const SE_SHAKE_BACK_AND_FORTH_SHORT; $D7 used in Rolling Kick
@@ -148,6 +150,9 @@ DEF FIRST_SE_ID EQU const_value
 	const SUBANIM_BURN
 	const SUBANIM_AMNESIA_ENEMY
 	const SUBANIM_AMNESIA1_ENEMY
+	const SUBANIM_0_PIN_JAB
+	const SUBANIM_0_PIN_MISSILE
+	const SUBANIM_0_BARB_JAB
 ;;;;;;;;;;
 DEF NUM_SUBANIMS EQU const_value
 
@@ -285,6 +290,7 @@ DEF NUM_SUBANIMS EQU const_value
 	const FRAMEBLOCK_77
 	const FRAMEBLOCK_78
 	const FRAMEBLOCK_79
+	const FRAMEBLOCK_7A
 DEF NUM_FRAMEBLOCKS EQU const_value
 
 ; base coordinates that are part of subanimations

@@ -49,4 +49,6 @@ SpecialEffectPointers:
 	special_effect SE_SLIDE_ENEMY_MON_DOWN_AND_HIDE,  AnimationSlideEnemyMonDownAndHide ; $D5
 	special_effect SE_FIRE_EVERYWHERE,  AnimationFireEverywhere ; $D4
 	special_effect SE_SMOKE_EVERYWHERE, AnimationSmokeEverywhere ; $D3
+	special_effect SE_STATIC_EVERYWHERE, AnimationStaticEverywhere ; $D2
+	special_effect SE_SNOWFLAKES_EVERYWHERE, AnimationSnowflakesEverywhere ; $D1
 	db -1 ; end

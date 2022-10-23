@@ -134,7 +134,7 @@ AIMoveChoiceModification1:
 	call ReadMove
 	ld a, [wEnemyMoveEffect]
 	cp DREAM_EATER_EFFECT
-	jr z, .checkAsleep
+	jp z, .checkAsleep
 	cp OHKO_EFFECT
 	jr z, .ohko
 	ld a, [wEnemyMovePower]
@@ -152,11 +152,13 @@ AIMoveChoiceModification1:
 	cp REFLECT_EFFECT
 	jr z, .checkReflectUp
 	cp MIST_EFFECT
-	jr z, .checkMistUp
+	jp z, .checkMistUp
 	cp CONFUSION_EFFECT
 	jp z, .checkConfused
 	cp HEAL_EFFECT
 	jp z, .checkFullHealth
+	cp MIRROR_MOVE_EFFECT
+	jp z, .checkNoMirrorMoveOnFirstTurn
 	ld a, [wEnemyMoveEffect]
 	push hl
 	push de
@@ -194,7 +196,7 @@ AIMoveChoiceModification1:
 .checkDisabled
 	ld a, [wPlayerDisabledMove] ; non-zero if the player has a disabled move
 	and a
-	jr z, .nextMove ; if it's zero don't do anything
+	jp z, .nextMove ; if it's zero don't do anything
 	jr .discourage ; otherwise discourage using disable while opponent is disabled already
 .checkPumpedUp
 	ld a, [wEnemyBattleStatus2]
@@ -253,6 +255,11 @@ AIMoveChoiceModification1:
 .notFullHealth
 	pop de
 	pop hl
+	jp .nextMove
+.checkNoMirrorMoveOnFirstTurn
+	ld a, [wPlayerLastSelectedMove]
+	and a
+	jp z, .discourage ; don't use mirror move if the player has never selected a move yet
 	jp .nextMove
 
 
@@ -1019,7 +1026,7 @@ SwitchEnemyMon:
 	
 ;;;;;;;;;; PureRGBnote: ADDED: clear the previous selected move here to reset disable functionality on opponent switching pokemon.
 	xor a
-	ld [wPreviousEnemySelectedMove], a 
+	ld [wEnemyLastSelectedMoveDisable], a 
 ;;;;;;;;;;
 
 	; This wFirstMonsNotOutYet variable is abused to prevent the player from

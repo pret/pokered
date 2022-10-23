@@ -18,8 +18,10 @@ InitBattleVariables:
 	ld [wMapPalOffset], a
 ;;;;;;;;;; PureRGBnote: ADDED: clear various new AI-related variables.
 	ld [wAIMoveSpamAvoider], a
-	ld [wPreviousEnemySelectedMove], a
-	ld [wPreviousPlayerSelectedMove], a
+	ld [wEnemyLastSelectedMove], a
+	ld [wPlayerLastSelectedMove], a
+	ld [wEnemyLastSelectedMoveDisable], a
+	ld [wPlayerLastSelectedMoveDisable], a
 	ld [wAITargetMonType1], a
 	ld [wAITargetMonType2], a
 	ld [wAITargetMonStatus], a

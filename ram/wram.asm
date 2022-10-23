@@ -73,7 +73,11 @@ wAudioSavedROMBank:: db
 wFrequencyModifier:: db
 wTempoModifier:: db
 
+UNION
 	ds 13
+NEXTU
+	; unused audio wram 13 bytes
+ENDU
 
 
 SECTION "Sprite State Data", WRAM0
@@ -169,7 +173,11 @@ wSerialPartyMonsPatchList:: ds 200
 wSerialEnemyMonsPatchList:: ds 200
 ENDU
 
+UNION
 	ds 80
+NEXTU
+	; unused tilemap wram 80 bytes
+ENDU
 
 
 SECTION "Overworld Map", WRAM0
@@ -316,7 +324,7 @@ wMenuWrappingEnabled:: db
 ; Releasing either button will reset this counter.
 wDirectionChangeModeCounter:: db
 
-	ds 1
+	ds 1 ; Unused lone byte
 
 wMissableObjectIndex:: db
 
@@ -327,7 +335,7 @@ wPredefBC:: dw
 
 wTrainerHeaderFlagBit:: db
 
-	ds 1
+	ds 1 ; Unused lone byte
 
 ; which NPC movement script pointer is being used
 ; 0 if an NPC movement script is not running
@@ -336,7 +344,7 @@ wNPCMovementScriptPointerTableNum:: db
 ; ROM bank of current NPC movement script
 wNPCMovementScriptBank:: db
 
-	ds 2
+	ds 2 ; Unused 2 bytes
 
 ; This union spans 180 bytes.
 UNION
@@ -581,7 +589,7 @@ wEngagedTrainerClass:: db
 wEngagedTrainerSet:: db
 ENDU
 
-	ds 1
+	ds 1 ; unused lone byte
 
 wNPCMovementDirections2Index::
 ; number of items in wFilteredBagItems list
@@ -601,7 +609,7 @@ wWastedByteCD3A:: db
 ; XXX is it ever not 0?
 wOverrideSimulatedJoypadStatesMask:: db
 
-	ds 1
+	ds 1 ; unused lone byte
 
 ; This union spans 30 bytes.
 UNION
@@ -1084,14 +1092,14 @@ wSpriteIndex:: db
 ; movement byte 2 of current sprite
 wCurSpriteMovement2:: db
 
-	ds 2
+	ds 2 ; unused 2 bytes
 
 ; sprite offset of sprite being controlled by NPC movement script
 wNPCMovementScriptSpriteOffset:: db
 
 wScriptedNPCWalkCounter:: db
 
-	ds 1
+	ds 1 ; unused lone byte
 
 wGBC:: db
 
@@ -1117,7 +1125,7 @@ wPartyMenuHPBarColors:: ds PARTY_LENGTH
 
 wStatusScreenHPBarColor:: db
 
-	ds 7
+	ds 7 ; unused 7 bytes
 
 wCopyingSGBTileData::
 wWhichPartyMenuHPBar::
@@ -1162,9 +1170,9 @@ wItemDuplicationActive:: db ; after seeing the old man catch pokemon, this flag 
 
 ; set to 1 if you healed this turn, 2 if you switched out this turn (prevents ai from spamming certain moves in some cases)
 wAIMoveSpamAvoider:: db
-wPreviousEnemySelectedMove:: db ; store for disable move functionality
-wPreviousPlayerSelectedMove:: db ; store for disable move functionality
-ds 1 ; unused byte
+wEnemyLastSelectedMoveDisable:: db ; store for disable functionality
+wPlayerLastSelectedMoveDisable:: db ; store for disable functionality
+ds 1 ; unused lone byte
 wAITargetMonType1:: db ; the type of the pokemon the AI should think it's attacking (stays as the previous pokemon when you switch pokemon)
 wAITargetMonType2:: db ; the type of the pokemon the AI should think it's attacking (stays as the previous pokemon when you switch pokemon)
 wAITargetMonStatus:: db ; the current status of the pokemon the AI should think it's attacking (set when healing a pokemon's status or switching it out)
@@ -1293,11 +1301,11 @@ wBattleMon:: battle_struct wBattleMon
 
 wTrainerClass:: db
 
-	ds 1
+	ds 1 ; unused lone byte
 
 wTrainerPicPointer:: dw
 
-	ds 1
+	ds 1 ; unused lone byte
 
 UNION
 wTempMoveNameBuffer:: ds 14
@@ -1307,14 +1315,15 @@ NEXTU
 wLearnMoveMonName:: ds NAME_LENGTH
 ENDU
 
-	ds 2
+wPlayerLastSelectedMove::db ; Last used move by the player, regardless of switching or fainting, etc. - used for mirror move functionality
+wEnemyLastSelectedMove::db ; Last used move by the opponent, regardless of switching or fainting, etc. - used for mirror move functionality
 
 ; money received after battle = base money × level of last enemy mon
 wTrainerBaseMoney:: dw ; BCD
 
 wMissableObjectCounter:: db
 
-	ds 1
+	ds 1 ; unused byte
 
 ; 13 bytes for the letters of the opposing trainer
 ; the name is terminated with $50 with possible
@@ -1416,7 +1425,7 @@ wPlayerToxicCounter:: db
 ; low nibble: disable turns left
 wPlayerDisabledMove:: db
 
-	ds 1
+	ds 1 ; unused lone byte
 
 ; when the enemy is attacking multiple times, the number of attacks left
 wEnemyNumAttacksLeft:: db
@@ -1429,7 +1438,7 @@ wEnemyToxicCounter:: db
 ; low nibble: disable turns left
 wEnemyDisabledMove:: db
 
-	ds 1
+	ds 1 ; unused lone byte
 
 UNION
 ; the amount of damage accumulated by the player while biding
@@ -1442,7 +1451,7 @@ NEXTU
 wPlayerNumHits:: db
 ENDU
 
-	ds 2
+	ds 2 ; unused 2 bytes
 
 ; non-zero when an item or move that allows escape from battle was used
 wEscapedFromBattle:: db
@@ -1470,7 +1479,7 @@ wTempTilesetNumTiles:: db
 ; so that it can be restored when the player is done with the pokemart NPC
 wSavedListScrollOffset:: db
 
-	ds 2
+	ds 2 ; unused 2 bytes
 
 ; base coordinates of frame block
 wBaseCoordX:: db
@@ -1533,10 +1542,10 @@ ENDU
 
 wEndBattleWinTextPointer:: dw
 wEndBattleLoseTextPointer:: dw
-	ds 2
+	ds 2 ; unused 2 bytes
 wEndBattleTextRomBank:: db
 
-	ds 1
+	ds 1 ; unused byte
 
 ; the address _of the address_ of the current subanimation entry
 wSubAnimAddrPtr:: dw
@@ -1553,7 +1562,7 @@ NEXTU
 wSlotMachineAllowMatchesCounter:: db
 ENDU
 
-	ds 2
+	ds 2 ; unused 2 bytes
 
 wOutwardSpiralTileMapPointer:: db
 
@@ -1656,17 +1665,17 @@ wMonHPicBank:: dw ; shifts
 wMonHBackPicBank:: dw ; shifts
 wMonHAltFrontSprite:: dw ; shifts
 wMonHAltBackSprite:: dw ; shifts
-    ds 1
+    ds 1 ; unused byte
 wMonHeaderEnd::
 
 ; saved at the start of a battle and then written back at the end of the battle
 wSavedTileAnimations:: db
 
-	ds 2
+	ds 2 ; unused 2 bytes
 
 wDamage:: dw
 
-	ds 2
+	ds 2 ; unused 2 bytes
 
 wRepelRemainingSteps:: db
 
@@ -1724,7 +1733,7 @@ wEvolutionOccurred:: db
 
 wVBlankSavedROMBank:: db
 
-	ds 1
+	ds 1 ; unused lone byte
 
 wIsKeyItem:: db
 
@@ -1773,7 +1782,7 @@ wSavedSpriteScreenX:: db
 wSavedSpriteMapY:: db
 wSavedSpriteMapX:: db
 
-	ds 3
+	ds 3 ; unused 3 bytes
 
 ;;; PureRGBnote: ADDED: new properties in this previously empty space
 wWhatStat:: db ; contains the stat currently being modified by a stat changing move
@@ -1796,7 +1805,7 @@ wPrize1:: db
 wPrize2:: db
 wPrize3:: db
 
-	ds 1
+	ds 1 ; unused lone byte
 
 UNION
 wSerialRandomNumberListBlock:: ds $11
@@ -1823,7 +1832,7 @@ wPseudoItemID:: db
 wEnemyStatEXPStore:: ; shinpokerednote: ADDED: store for EVs applied to the opponent's pokemon if the option is turned on
 wUnusedD153:: dw
 
-	ds 1
+	ds 1 ; unused lone byte
 
 wEvoStoneItemID:: db
 
@@ -1904,7 +1913,7 @@ wOptions:: db
 
 wObtainedBadges:: flag_array NUM_BADGES
 
-ds 1
+ds 1 ; unused save file byte
 
 ; bit 0: If 0, limit the delay to 1 frame. Note that this has no effect if
 ;        the delay has been disabled entirely through bit 1 of this variable
@@ -1961,7 +1970,7 @@ wSpriteSetID:: db
 
 wObjectDataPointerTemp:: dw
 
-	ds 2
+	ds 2 ; unused save file 2 bytes
 
 ; the tile shown outside the boundaries of the map
 wMapBackgroundTile:: db
@@ -1997,6 +2006,7 @@ wColorSwapsUsed:: db ; how many times the player has used the color changer NPC
 wBoosterChipActive:: db ; whether the player gets boosted EXP from the effects of the boosterchip
 
 ; 50 bytes remaining in union
+; unused save file 50 bytes
 
 ENDU
 ;;;;;;;;;;
@@ -2056,7 +2066,7 @@ wTilesetTalkingOverTiles:: ds 3
 
 wGrassTile:: db
 
-	ds 4
+	ds 4 ; unused save file 4 bytes
 
 wNumBoxItems:: db
 ; item, quantity
@@ -2077,7 +2087,7 @@ wPlayerCoins:: ds 2 ; BCD
 wMissableObjectFlags:: flag_array $100
 wMissableObjectFlagsEnd::
 
-	ds 7
+	ds 7 ; unused save file 7 bytes
 
 ; temp copy of SPRITESTATEDATA1_IMAGEINDEX (used for sprite facing/anim)
 wd5cd:: db
@@ -2088,7 +2098,7 @@ wd5cd:: db
 ; terminated with $FF
 wMissableObjectList:: ds 16 * 2 + 1
 
-	ds 1
+	ds 1 ; unused save file byte
 ; PureRGBnote: ADDED: additional new script variables replaced previously empty space for maps that now need script tracking
 wGameProgressFlags::
 wOaksLabCurScript:: db
@@ -2163,16 +2173,16 @@ wRocketHideoutB4FCurScript:: db
 wCeruleanRocketHouseCurScript:: db ;NEW
 wRoute6GateCurScript:: db
 wRoute8GateCurScript:: db
-	ds 1
+	ds 1 ; unused save file byte
 wCinnabarIslandCurScript:: db
 wPokemonMansion1FCurScript:: db
-	ds 1
+	ds 1 ; unused save file byte
 wPokemonMansion2FCurScript:: db
 wPokemonMansion3FCurScript:: db
 wPokemonMansionB1FCurScript:: db
 wVictoryRoad2FCurScript:: db
 wVictoryRoad3FCurScript:: db
-	ds 1
+	ds 1 ; unused save file byte
 wFightingDojoCurScript:: db
 wSilphCo2FCurScript:: db
 wSilphCo3FCurScript:: db
@@ -2189,15 +2199,15 @@ wBrunosRoomCurScript:: db
 wAgathasRoomCurScript:: db
 wCeruleanCaveB1FCurScript:: db
 wVictoryRoad1FCurScript:: db
-	ds 1
+	ds 1 ; unused save file byte
 wLancesRoomCurScript:: db
-	ds 4
+	ds 4 ; unused save file 4 bytes
 wSilphCo10FCurScript:: db
 wSilphCo11FCurScript:: db
-	ds 1
+	ds 1 ; unused save file byte
 wFuchsiaGymCurScript:: db
 wSaffronGymCurScript:: db
-	ds 1
+	ds 1 ; unused save file byte
 wCinnabarGymCurScript:: db
 wGameCornerCurScript:: db
 wRoute16Gate1FCurScript:: db
@@ -2205,13 +2215,13 @@ wBillsHouseCurScript:: db
 wRoute5GateCurScript:: db
 wPowerPlantCurScript:: ; overload
 wRoute7GateCurScript:: db
-	ds 1
+	ds 1 ; unused save file byte
 wSSAnne2FCurScript:: db
 wSeafoamIslandsB3FCurScript:: db
 wRoute23CurScript:: db
 wSeafoamIslandsB4FCurScript:: db
 wRoute18Gate1FCurScript:: db
-	ds 78
+	ds 78 ; unused save file 78 bytes
 wGameProgressFlagsEnd::
 
 ;;;;;; shinpokerednote: gbcnote: GBC stuff from pokemon yellow
@@ -2226,7 +2236,7 @@ wdef5:: db
 
 ;;;;;;
 
-	ds 4
+	ds 4 ; unused save file 4 bytes
 
 wObtainedHiddenItemsFlags:: flag_array 112
 
@@ -2237,7 +2247,7 @@ wObtainedHiddenCoinsFlags:: flag_array 16
 ; $02 = surfing
 wWalkBikeSurfState:: db
 
-	ds 10
+	ds 10 ; unused save file 10 bytes
 
 wTownVisitedFlag:: flag_array NUM_CITY_MAPS
 
@@ -2249,7 +2259,7 @@ wFossilItem:: db
 ; mon that will result from the item
 wFossilMon:: db
 
-	ds 2
+	ds 2 ; unused save file 2 bytes
 
 ; trainer classes start at OPP_ID_OFFSET
 wEnemyMonOrTrainerClass:: db
@@ -2258,7 +2268,7 @@ wPlayerJumpingYScreenCoordsIndex:: db
 
 wRivalStarter:: db
 
-	ds 1
+	ds 1 ; unused save file byte
 
 wPlayerStarter:: db
 
@@ -2284,7 +2294,7 @@ wWhichDungeonWarp:: db
 
 wUnusedD71F:: db
 
-	ds 8
+	ds 8 ; unused save file 8 bytes
 
 ; bit 0: using Strength outside of battle
 ; bit 1: set by IsSurfingAllowed when surfing's allowed, but the caller resets it after checking the result
@@ -2295,13 +2305,13 @@ wUnusedD71F:: db
 ; bit 7: set by ItemUseCardKey, which is leftover code from a previous implementation of the Card Key
 wd728:: db
 
-	ds 1
+	ds 1 ; unused save file byte
 
 ; redundant because it matches wObtainedBadges
 ; used to determine whether to show name on statue and in two NPC text scripts
 wBeatGymFlags:: db
 
-	ds 1
+	ds 1 ; unused save file byte
 
 ; bit 0: if not set, the 3 minimum steps between random battles have passed
 ; bit 1: prevent audio fade out
@@ -2330,7 +2340,7 @@ wd72d:: db
 ; bit 7: set if scripted NPC movement has been initialised
 wd72e:: db
 
-	ds 1
+	ds 1 ; unused save file byte
 
 ; bit 0: NPC sprite being moved by script
 ; bit 5: ignore joypad input
@@ -2338,7 +2348,7 @@ wd72e:: db
 ; bit 7: set if joypad states are being simulated in the overworld or an NPC's movement is being scripted
 wd730:: db
 
-	ds 1
+	ds 1 ; unused save file byte
 
 ; bit 0: play time being counted
 ; bit 1: remnant of debug mode; only set by the debug build.
@@ -2371,7 +2381,7 @@ wFlags_D733:: db
 ; the game uses this to tell when Elite 4 events need to be reset
 wBeatLorelei:: db
 
-	ds 1
+	ds 1 ; unused save file byte
 
 ; bit 0: check if the player is standing on a door and make him walk down a step if so
 ; bit 1: the player is currently stepping down from a door
@@ -2382,22 +2392,22 @@ wd736:: db
 
 wCompletedInGameTradeFlags:: dw
 
-	ds 2
+	ds 2 ; unused save file 2 bytes
 
 wWarpedFromWhichWarp:: db
 wWarpedFromWhichMap:: db
 
-	ds 2
+	ds 2 ; unused save file 2 bytes
 
 wCardKeyDoorY:: db
 wCardKeyDoorX:: db
 
-	ds 2
+	ds 2 ; unused save file 2 bytes
 
 wFirstLockTrashCanIndex:: db
 wSecondLockTrashCanIndex:: db
 
-	ds 2
+	ds 2 ; unused save file 2 bytes
 
 wEventFlags:: flag_array NUM_EVENTS
 
@@ -2447,7 +2457,7 @@ ENDU
 
 wTrainerHeaderPtr:: dw
 
-	ds 6
+	ds 6  ; unused save file 6 bytes
 
 ; the trainer the player must face after getting a wrong answer in the Cinnabar
 ; gym quiz
@@ -2504,7 +2514,7 @@ wSpriteOptions3:: db
 
 wSpriteOptions4:: db
 	
-	ds 1
+	ds 1  ; unused save file byte
 
 wPlayTimeHours:: db
 wPlayTimeMaxed:: db
