@@ -24,7 +24,7 @@ SpritesOptionText4:
 	db   "SPRITES 4"
 	next " KADABRA:    RB RG"
 	next " TENTACRUEL: RB RG"
-	next " GRAVELER:   RB Y"
+	next " GRAVELER:   RB RG"
 	next " MACHOP:     RB RG"
 	next " PINSIR:     RB RG"
 	next " ZAPDOS:     RB RG@"
