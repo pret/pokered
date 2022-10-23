@@ -7,7 +7,7 @@ MoveEffectPointerTable:
 	dw FreezeBurnParalyzeEffect  ; BURN_SIDE_EFFECT1
 	dw FreezeBurnParalyzeEffect  ; FREEZE_SIDE_EFFECT
 	dw FreezeBurnParalyzeEffect  ; PARALYZE_SIDE_EFFECT1
-	dw ExplodeEffect             ; EXPLODE_EFFECT
+	dw NULL                      ; EXPLODE_EFFECT ; unused
 	dw DrainHPEffect             ; DREAM_EATER_EFFECT
 	dw NULL                      ; MIRROR_MOVE_EFFECT
 	dw StatModifierUpEffect      ; ATTACK_UP1_EFFECT
