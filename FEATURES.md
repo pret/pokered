@@ -136,7 +136,7 @@ The fifth, sixth, and seventh pages contain additional pokemon whose front sprit
 - The Daycare has a PC in it.
 - Route 23 has some grass just after the north exit of Victory Road to allow reaching those encounters more easily late game.
 - Some pokemon evolve at earlier levels
-- Many pokemon have better base stats. See the wiki for the data.
+- Many pokemon have better base stats. You can view base stats by checking the pokedex entry after catching the pokemon. Or, see the wiki for the full data.
 - Many pokemon have better learnsets than before. See the wiki for the data.
 
 ## New Gameplay Features
