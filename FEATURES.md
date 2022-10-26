@@ -294,6 +294,10 @@ The fifth, sixth, and seventh pages contain additional pokemon whose front sprit
   - POISON GAS - 60 base power, poison type, high critical hit ratio, 10% chance of poison, 100% accuracy
   - LEECH LIFE - 70 base power, bug type, drains HP, 100% accuracy
   - ROCK SLIDE and ROCK THROW both have 100% accuracy
+  - MIRROR MOVE - is a priority move and always uses the previous attack the opponent used regardless of if the pokemon that used it fainted
+  - MIMIC - you can still choose the exact move to mimic, but now it will use that move the same turn you mimic it
+  - BONEMERANG - 55 base power, hits twice, 90 accuracy, 30% chance of lowering opponent's speed.
+  - SUPER FANG - now deals a set 2/3 the opponent's HP instead of 1/2. Useful for catching rare pokemon!
 - There are many more tweaks to moves. See the wiki for a link to the complete move list. Be sure to try almost every move and don't write them off. Except for splash. It still does nothing as usual.
 
 ## Pokemon type changes
