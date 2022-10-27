@@ -580,8 +580,9 @@ MewPicBackSW::         INCBIN "gfx/pokemon/back_sw/mewb.pic" ; moved from bank 1
 RedPicBack::           INCBIN "gfx/player/redb.pic"
 OldManPicBack::        INCBIN "gfx/battle/oldmanb.pic"
 ; used elsewhere
-KidPic::           INCBIN "gfx/capsule_monsters_stuff/cool_kid.pic"
-FireFighterPic::   INCBIN "gfx/capsule_monsters_stuff/firefighter.pic"
-RangerPic::        INCBIN "gfx/capsule_monsters_stuff/ranger.pic"
+KidPic::           INCBIN "gfx/unused_prototype_sprites/cool_kid.pic"
+FireFighterPic::   INCBIN "gfx/unused_prototype_sprites/firefighter.pic"
+RangerPic::        INCBIN "gfx/unused_prototype_sprites/ranger.pic"
 RangerFPic::       INCBIN "gfx/trainers/rangerf.pic"
-RookiePic::        INCBIN "gfx/capsule_monsters_stuff/rookie.pic"
+RookiePic::        INCBIN "gfx/unused_prototype_sprites/rookie.pic"
+SoldierPic::       INCBIN "gfx/unused_prototype_sprites/soldier.pic"

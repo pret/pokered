@@ -195,7 +195,7 @@ The fifth, sixth, and seventh pages contain additional pokemon whose front sprit
 - There was an unused trainer class for Prof Oak. It's been added back into the game. Find him in Cerulean Cave after beating the Elite Four. He can be battled repeatedly. Just leave the area and come back.
 - Some trainer classes based on Beta or unused sprites were reintroduced to the game: `ROOKIE`, `RANGER`, `FIREFIGHTER`, `COOL KID`. You'll find them in previously empty places or routes!
 
-![Rookie](/gfx/capsule_monsters_stuff/rookie.png?raw=true) ![Ranger](/gfx/capsule_monsters_stuff/ranger.png?raw=true) ![Firefighter](/gfx/capsule_monsters_stuff/firefighter.png?raw=true) ![Cool Kid](/gfx/capsule_monsters_stuff/cool_kid.png?raw=true)
+![Rookie](/gfx/unused_prototype_sprites/rookie.png?raw=true) ![Ranger](/gfx/unused_prototype_sprites/ranger.png?raw=true) ![Firefighter](/gfx/unused_prototype_sprites/firefighter.png?raw=true) ![Cool Kid](/gfx/unused_prototype_sprites/cool_kid.png?raw=true)
 - Some unused trainers from existing classes were added into the game in various originally empty places
 
 ## Visual changes
