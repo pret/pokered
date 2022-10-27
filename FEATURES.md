@@ -355,3 +355,7 @@ The version-specific visuals of japanese pokemon green were added into PureGreen
 - I will not split the SPECIAL stat into SPECIAL DEFENSE and SPECIAL ATTACK. I balanced the game around the combined special stat.
 - I will not add dark, steel, or fairy type. 
 - I will not mess with the type matchup chart outside of the tweakable options already provided.
+- I will not make a version without the base stat changes
+- I will not make a version without the move changes
+- I will not make a version without learnset / TM / trainer party changes
+- If you want less changes but still the quality of life / bugfix stuff, I'd recommend taking a look at the romhack called shinpokered.
