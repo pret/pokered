@@ -149,7 +149,7 @@ SailorData:
 
 JrTrainerMData:
 ; Pewter Gym
-	db 11, DIGLETT, SANDSHREW, 0
+	db 11, GEODUDE, SANDSHREW, 0
 ; Route 24/Route 25
 	db 14, RATTATA, EKANS, 0
 ; Route 24
@@ -433,7 +433,7 @@ JugglerData:
 	db 29, KADABRA, MR_MIME, 0
 ; Victory Road 2F
 	db 41, DROWZEE, HYPNO, KADABRA, KADABRA, 0
-; Fuchsia Gym
+; Fuchsia Gym (will be moved to Saffron Gym instead)
 	db 31, DROWZEE, DROWZEE, KADABRA, DROWZEE, 0
 	db 34, DROWZEE, HYPNO, 0
 ; Victory Road 2F
@@ -441,20 +441,21 @@ JugglerData:
 ; Unused - this will be used in the Silph Gauntlet
 	db 65, HYPNO, MR_MIME, ALAKAZAM, ELECTRODE, GENGAR, SLOWKING, 0
 ; Fuchsia Gym
-	db 38, HYPNO, 0
+	db 38, UMBREON, 0
+; Fuchsia Gym  (will be moved to Saffron Gym instead)
 	db 34, DROWZEE, KADABRA, 0
 
 TamerData:
 ; Fuchsia Gym
-	db 34, SANDSLASH, ARBOK, 0
-	db 33, ARBOK, SANDSLASH, ARBOK, 0
+	db 34, NIDOQUEEN, ARBOK, 0
+	db 33, ARBOK, NIDOKING, ARBOK, 0
 ; Viridian Gym
-	db 43, RHYHORN, 0
-	db 39, ARBOK, TAUROS, 0
+	db 43, RHYDON, 0
+	db 39, SANDSLASH, TRAMPEL, 0
 ; Victory Road 2F
-	db 44, PERSIAN, GOLDUCK, 0
+	db 44, TAUROS, GOLDUCK, 0
 ; Unused - this will be used in the Silph Gauntlet
-	db 66, RHYPERIOR, ARBOK, SANDSLASH, PRIMEAPE, GOLDUCK, TAUROS, 0
+	db 66, RHYPERIOR, ARBOK, SANDSLASH, PRIMEAPE, TRAMPEL, TAUROS, 0
 
 BirdKeeperData:
 ; Route 13
@@ -489,10 +490,10 @@ BlackbeltData:
 	db 32, MACHOP, MACHOKE, 0
 	db 36, PRIMEAPE, 0
 	db 31, MACHOP, MANKEY, PRIMEAPE, 0
-; Viridian Gym
-	db 40, MACHOP, MACHOKE, 0
-	db 43, MACHOKE, 0
-	db 38, MACHOKE, MACHOP, MACHOKE, 0
+; Viridian Gym	- changed to fit the Ground-type gym theme
+	db 40, GRAVELER, GOLEM, 0
+	db 43, RHYDON, 0
+	db 38, RHYHORN, ONIX, STEELIX, 0
 ; Victory Road 2F
 	db 43, MACHOKE, MACHOP, MACHOKE, 0
 
@@ -520,8 +521,8 @@ ChiefData:
 	db $FF, 73, MAGNEZONE, 72, LAPRAS, 73, SCIZOR, 73, EXEGGUTOR, 75, PORYGON2, 77, OMEGA, 0
 
 ScientistData:
-; Unused
-	db 34, KOFFING, VOLTORB, 0
+; Unused - this will be used in the Silph Gauntlet
+	db 64, MAGNEZONE, ELECTRODE, PORYGONZ, MUK, WEEZING, ALAKAZAM, 0
 ; Silph Co. 2F
 	db 26, GRIMER, WEEZING, KOFFING, WEEZING, 0
 	db 28, MAGNEMITE, VOLTORB, MAGNETON, 0
@@ -586,8 +587,8 @@ RocketData:
 	db 25, ZUBAT, ZUBAT, GOLBAT, 0
 	db 26, KOFFING, DROWZEE, 0
 	db 23, ZUBAT, RATTATA, RATICATE, ZUBAT, 0
-; Unused
-	db 26, DROWZEE, KOFFING, 0
+; Unused - this will be used in the Silph Gauntlet
+	db 65, PERSIAN, ARBOK, WEEZING, CROBAT, HYPNO, GUARDIA, 0
 ; Silph Co. 2F
 	db 29, CUBONE, ZUBAT, 0
 	db 25, GOLBAT, ZUBAT, ZUBAT, RATICATE, ZUBAT, 0
@@ -620,12 +621,12 @@ RocketData:
 
 CooltrainerMData:
 ; Viridian Gym
-	db 39, NIDORINO, NIDOKING, 0
+	db 39, MAROWAK, NIDOKING, 0
 ; Victory Road 3F
 	db 43, EXEGGUTOR, CLOYSTER, ARCANINE, 0
 	db 43, KINGLER, TENTACRUEL, BLASTOISE, 0
-; Unused
-	db 45, KINGLER, STARMIE, 0
+; Unused - this will be used in the Silph Gauntlet
+	db 66, TAUROS, VENUSAUR, NIDOKING, CHARIZARD, SNORLAX, TOTARTLE, 0
 ; Victory Road 1F
 	db 42, IVYSAUR, WARTORTLE, CHARMELEON, CHARIZARD, 0
 ; Unused
@@ -642,8 +643,8 @@ CooltrainerFData:
 ; Victory Road 3F
 	db 43, BELLSPROUT, WEEPINBELL, VICTREEBEL, 0
 	db 43, PARASECT, DEWGONG, CHANSEY, 0
-; Unused
-	db 46, VILEPLUME, BUTTERFREE, 0
+; Unused - this will be used in the Silph Gauntlet
+	db 66, PERSIAN, BLISSEY, GOROCHU, NINETALES, VAPOREON, VICTREEBEL, 0
 ; Victory Road 1F
 	db 44, PERSIAN, NINETALES, 0
 ; Unused
@@ -667,7 +668,7 @@ MistyData:
 	; db $FF, 66, STARMIE, 67, PENDRAKEN, 67, JABETTA, 66, TOTARTLE, 67, JAGG, 70, GYARADOS, 0
 
 LtSurgeData:
-	db $FF, 22, VOLTORB, 21, GAOTORA, 22, MAGNEMITE, 23, ELECTABUZZ, 24, GOROCHU, 0
+	db $FF, 22, VOLTORB, 21, GAOTORA, 22, MAGNETITE, 23, ELECTABUZZ, 25, GOROCHU, 0
 ; post-game rematch team (currently unused)
 	; db $FF, 66, ELECTRODE, 67, GOROTORA, 67, ELECTIVIRE, 66, JOLTEON, 67, GOROCHU, 70, ZAPDOS, 0
 
@@ -697,8 +698,8 @@ GentlemanData:
 	db 19, NIDORAN_M, NIDORAN_F, 0
 ; SS Anne 2F Rooms/Vermilion Gym
 	db 23, PIKACHU, 0
-; Unused
-	db 48, PRIMEAPE, 0
+; Unused - this will be used in the Silph Gauntlet
+	db 64, ARCANINE, NIDOQUEEN, PRIMEAPE, FEAROW, JAGG, RAPIDASH, 0
 ; SS Anne 2F Rooms
 	db 17, GROWLITHE, PONYTA, 0
 
@@ -732,7 +733,7 @@ Green3Data:
 LoreleiData:
 	db $FF, 54, DEWGONG, 53, CLOYSTER, 54, GLACEON, 55, JYNX, 55, BUU, 56, LAPRAS, 0
 ; post-game rematch team (currently unused)
-	; db $FF, 74, BUU, 73, DEWGONG, 74, GLACEON, 75, CLOYSTER, 75, LAPRAS, 76, ARTICUNO, 0
+	; db $FF, 74, DEWGONG, 73, NINETALES_A, 74, GLACEON, 75, CLOYSTER, 75, LAPRAS, 76, ARTICUNO, 0
 
 ChannelerData:
 ; Unused
@@ -768,7 +769,7 @@ ChannelerData:
 	db 22, GASTLY, CUBONE, HAUNTER, 0
 	db 24, GASTLY, VULPIX, 0
 	db 30, HAUNTER, 0
-; Saffron Gym
+; Saffron Gym (will be moved to Fuchsia Gym instead)
 	db 34, GASTLY, HAUNTER, 0
 	db 38, HAUNTER, 0
 	db 33, GASTLY, GASTLY, HAUNTER, 0
@@ -776,10 +777,10 @@ ChannelerData:
 AgathaData:
 	db $FF, 57, CROAKOZUNA, 56, CROBAT, 56, TSUBOMITTO, 58, UMBREON, 58, ARBOK, 60, GENGAR, 0
 ; post-game rematch team (currently unused)
-	; db $FF, 77, CROAKOZUNA, 76, TSUBOMITTO, 76, UMBREON, 78, CROBAT, 78, GENGAR, 80, MOLTRES_G, 0
+	; db $FF, 77, CROAKOZUNA, 76, MAROWAK_A, 76, UMBREON, 78, CROBAT, 78, GENGAR, 80, MOLTRES_G, 0
 
 LanceData:
 	db $FF, 58, CROCKY, 57, KINGDRA, 57, AERODACTYL, 59, CRYITHAN, 59, CHARIZARD, 62, DRAGONITE, 0
 ; post-game rematch team (currently unused)
-	; db $FF, 78, CROCKY, 77, KINGDRA, 77, AERODACTYL, 79, CHARIZARD, 79, CRYITHAN, 82, DRAGONITE, 0
+	; db $FF, 78, CROCKY, 77, KINGDRA, 77, AERODACTYL, 79, EXEGGUTOR_A, 79, CRYITHAN, 82, DRAGONITE, 0
 

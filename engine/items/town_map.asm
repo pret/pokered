@@ -384,6 +384,8 @@ DisplayWildLocations:
 	ld a, [de]
 	cp $19 ; Cerulean Cave's coordinates
 	jr z, .nextEntry ; skip Cerulean Cave
+	cp $5A ; Silph Gauntlet's coordinates
+	jr z, .nextEntry ; skip
 	call TownMapCoordsToOAMCoords
 	ld a, $4 ; nest icon tile no.
 	ld [hli], a

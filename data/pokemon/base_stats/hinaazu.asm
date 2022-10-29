@@ -1,6 +1,6 @@
 	db DEX_HINAAZU ; pokedex id
 
-	db  20,  70,  30,  20,  60
+	db  20,  70,  30,  60,  20	; +5 to all stats
 	;   hp  atk  def  spd  spc
 
 	db NORMAL, FLYING ; type

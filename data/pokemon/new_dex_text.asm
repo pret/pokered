@@ -239,13 +239,13 @@ _CheepDexEntry::
 	dex
 
 _TotartleDexEntry::
-	text "Known for its"
-	next "longevity, the"
-	next "oldest known"
+	text "A #MON capable"
+	next "of living for"
+	next "10,000 years."
 
-	page "TOTARTLE lived"
-	next "to be almost"
-	next "1,000 years old"
+	page "Its algae-covered"
+	next "tail is a symbol"
+	next "of its longevity"
 	dex
 
 _WeirduckDexEntry::
@@ -349,13 +349,13 @@ _NidoreignDexEntry::
 	dex
 
 _BarundaDexEntry::
-	text "If it ever feels"
-	next "threatened, it"
-	next "will inflate its"
+	text "Often mistaken"
+	next "for an ordinary"
+	next "balloon. If its"
 
-	page "body to a gigantic"
-	next "size to intimidate"
-	next "attackers"
+	page "tail is grabbed,"
+	next "it will let out a"
+	next "shrill screech"
 	dex
 
 _TsubomittoDexEntry::

@@ -1,6 +1,6 @@
 	db DEX_TOTARTLE ; pokedex id
 
-	db  70, 100,  65,  78, 100
+	db  79,  83,  85,  78, 100
 	;   hp  atk  def  spd  spc
 
 	db WATER, GRASS ; type

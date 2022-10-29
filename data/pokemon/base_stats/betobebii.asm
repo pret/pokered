@@ -1,6 +1,6 @@
 	db DEX_BETOBEBII ; pokedex id
 
-	db  65,  65,  35,  10,  25
+	db  65,  65,  35,  10,  25	; +5 to all stats
 	;   hp  atk  def  spd  spc
 
 	db POISON, POISON ; type

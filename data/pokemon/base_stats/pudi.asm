@@ -1,6 +1,6 @@
 	db DEX_PUDI ; pokedex id
 
-	db  40,  55,  30,  45,  35
+	db  40,  55,  30,  45,  35	; added 5 to all stats to make BST closer to Mikon's
 	;   hp  atk  def  spd  spc
 
 	db FIRE, FIRE ; type
