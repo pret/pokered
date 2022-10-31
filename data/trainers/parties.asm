@@ -323,7 +323,9 @@ EngineerData:
 	db 18, MAGNEMITE, MAGNEMITE, MAGNETON, 0
 
 UnusedJugglerData:
-; none
+	; db $FF, 7, KONYA, 7, EEVEE, 10, LICKITUNG, 0
+; post-game rematch team (currently unused)
+	; db $FF, 66, PERSIAN, 67, TAUROS, 67, MADAAMU, 66, BLISSEY, 67, SNORLAX, 70, LICKILICKY, 0
 
 FisherData:
 ; SS Anne 2F Rooms

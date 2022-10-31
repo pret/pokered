@@ -220,4 +220,5 @@ PokedexOrder:
 	db DEX_BETOBEBII
 	db DEX_MAGNEZONE
 	db DEX_PORYGONZ
+	db DEX_MISSINGNO
 	assert_table_length NUM_POKEMON_INDEXES

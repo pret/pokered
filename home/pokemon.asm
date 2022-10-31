@@ -100,9 +100,8 @@ LoadFrontSpriteByMonIndex::
 	ld [hl], b
 	and a
 	pop hl
-	jr z, .invalidDexNumber ; dex #0 invalid
 	cp NUM_POKEMON + 1
-	jr c, .validDexNumber   ; dex >#151 invalid
+	jr c, .validDexNumber   ; dex numbers over normal limit invalid
 .invalidDexNumber
 	ld a, RHYDON ; $1
 	ld [wcf91], a
@@ -379,12 +378,20 @@ GetMonHeader::
 	jr z, .specialID
 	predef IndexToPokedex   ; convert pokemon ID in [wd11e] to pokedex number
 	ld a, [wd11e]
+	and a
+	jr z, .missingno ; index of 0 is missingno
 	dec a
 	ld bc, BASE_DATA_SIZE
 	ld hl, BaseStats
 	call AddNTimes
 	ld de, wMonHeader
 	ld bc, BASE_DATA_SIZE
+	call CopyData
+	jr .done
+.missingno
+	ld hl, MissingnoBaseStats
+	ld bc, BASE_DATA_SIZE
+	ld de, wMonHeader
 	call CopyData
 	jr .done
 .specialID

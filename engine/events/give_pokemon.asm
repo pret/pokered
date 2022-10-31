@@ -57,6 +57,8 @@ SetPokedexOwnedFlag:
 	ld [wd11e], a
 	predef IndexToPokedex
 	ld a, [wd11e]
+	and a
+	ret z ; do nothing for missingno
 	dec a
 	ld c, a
 	ld hl, wPokedexOwned

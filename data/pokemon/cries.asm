@@ -239,4 +239,5 @@ CryData::
 	; mon_cry SFX_CRY_00, $00, $00 ; Mime Jr.
 	; mon_cry SFX_CRY_00, $00, $00 ; Happiny
 	; mon_cry SFX_CRY_00, $00, $00 ; Munchlax
+	mon_cry SFX_CRY_00, $00, $00 ; MissingNo.
 	assert_table_length NUM_POKEMON_INDEXES

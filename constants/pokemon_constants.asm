@@ -240,6 +240,7 @@
 	; const MIME_JR            ; $E7
 	; const HAPPINY            ; $E8
 	; const MUNCHLAX           ; $E9
+	const MISSINGNO          ; $EA
 	
 
 DEF NUM_POKEMON_INDEXES EQU const_value - 1

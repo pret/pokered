@@ -2,7 +2,7 @@ RocketHideoutB1F_Object:
 	db $2e ; border block
 
 	def_warp_events
-	warp_event  5,  4, VIRIDIAN_GYM, 2
+	warp_event  5,  4, VIRIDIAN_GYM, 3
 	warp_event 17,  4, VIRIDIAN_CITY, 6
 
 	def_bg_events

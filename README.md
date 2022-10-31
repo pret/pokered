@@ -65,7 +65,7 @@ New areas
 
 QoL Enhancements
 ====
-- All 212 (current) Pokemon can be obtained without the use of trading or glitches, including Mew!
+- All 217 (current) Pokemon can be obtained without the use of trading or glitches, including Mew!
 - Fast text has no frame delay between text scrolling, doubling the scroll speed. It's also been made the default option, so you don't need to go into the Options menu for it.
 - Trainer DVs are perfect-15s.
 - The protagonist is referred to in a gender neutral manner.
@@ -133,6 +133,7 @@ Known Bugs
 - Occasionally, menu text sets itself to scroll.
 - Some sprites in the Celadon University area spawn bugged out on certain emulators.
 - Battling multiple of the trainers in Celadon University causes a crash when attempting to go to Route 16
+- The lone Rocket in Viridian Gym's basement needs to be directly spoken to to be battled
 
 Credits
 ====

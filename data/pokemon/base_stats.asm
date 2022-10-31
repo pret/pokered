@@ -217,4 +217,7 @@ INCLUDE "data/pokemon/base_stats/dragonair.asm"
 INCLUDE "data/pokemon/base_stats/dragonite.asm"
 INCLUDE "data/pokemon/base_stats/mewtwo.asm"
 INCLUDE "data/pokemon/base_stats/mew.asm"
-	assert_table_length NUM_POKEMON
+	assert_table_length NUM_POKEMON - 1 ; discount MissingNo
+
+MissingnoBaseStats::
+INCLUDE "data/pokemon/base_stats/missingno.asm"

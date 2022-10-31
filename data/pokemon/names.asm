@@ -220,5 +220,6 @@ MonsterNames::
 	db "BETOBEBII@"
 	db "MAGNEZONE@"
 	db "PORYGON-Z@"
+	db "MISSINGNO."
 	
 	assert_table_length NUM_POKEMON_INDEXES

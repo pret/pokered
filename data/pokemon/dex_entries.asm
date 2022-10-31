@@ -220,6 +220,7 @@ PokedexEntryPointers:
 	dw BetobebiiDexEntry
 	dw MagnezoneDexEntry
 	dw PorygonZDexEntry
+	dw MissingNoDexEntry
 	assert_table_length NUM_POKEMON_INDEXES
 
 ; string: species name

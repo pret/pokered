@@ -8,7 +8,7 @@ WildDataPointers:
 	dw NothingWildMons         ; VERMILION_CITY
 	dw NothingWildMons         ; CELADON_CITY
 	dw NothingWildMons         ; FUCHSIA_CITY
-	dw NothingWildMons         ; CINNABAR_ISLAND
+	dw CinnabarWildMons        ; CINNABAR_ISLAND
 	dw NothingWildMons         ; INDIGO_PLATEAU
 	dw NothingWildMons         ; SAFFRON_CITY
 	dw NothingWildMons         ; CITRINE_CITY
@@ -263,6 +263,7 @@ WildDataPointers:
         ; level, species (ten times)
 
 INCLUDE "data/wild/maps/nothing.asm"
+INCLUDE "data/wild/maps/CinnabarIsland.asm"
 INCLUDE "data/wild/maps/Route1.asm"
 INCLUDE "data/wild/maps/Route2.asm"
 INCLUDE "data/wild/maps/Route22.asm"

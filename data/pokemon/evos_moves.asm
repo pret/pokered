@@ -223,6 +223,7 @@ EvosMovesPointerTable:
 	dw BetobebiiEvosMoves
 	dw MagnezoneEvosMoves
 	dw PorygonZEvosMoves
+	dw MissingNoEvosMoves
 	assert_table_length NUM_POKEMON_INDEXES
 
 RhydonEvosMoves:
@@ -2822,6 +2823,12 @@ PorygonZEvosMoves:
 	db 0
 ; Learnset
 	db 50, AMNESIA	; will replace with nasty plot
+	db 0
+
+MissingNoEvosMoves:
+; Evolutions
+	db 0
+; Learnset
 	db 0
 
 ;ArticunoGEvosMoves:
