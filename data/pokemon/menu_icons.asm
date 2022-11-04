@@ -1,6 +1,5 @@
 MonPartyData:
 	nybble_array MonPartyData
-	nybble ICON_MON       ; MissingNo.
 	nybble ICON_GRASS     ; Bulbasaur
 	nybble ICON_GRASS     ; Ivysaur
 	nybble ICON_GRASS     ; Venusaur
@@ -218,4 +217,4 @@ MonPartyData:
 	nybble ICON_SNAKE     ; Dragonite
 	nybble ICON_MON       ; Mewtwo
 	nybble ICON_MON       ; Mew
-	end_nybble_array NUM_POKEMON
+	end_nybble_array NUM_POKEMON - 1

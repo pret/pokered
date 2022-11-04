@@ -5,8 +5,10 @@ Route6_Object:
 	warp_event  9,  1, ROUTE_6_GATE, 3
 	warp_event 10,  1, ROUTE_6_GATE, 3
 	warp_event 10,  7, ROUTE_6_GATE, 1
+	warp_event 17, 13, UNDERGROUND_PATH_ROUTE_6, 1
 
 	def_bg_events
+	bg_event 19, 15, 7 ; Route6Text7
 
 	def_object_events
 	object_event 10, 21, SPRITE_COOLTRAINER_M, STAY, RIGHT, 1, OPP_JR_TRAINER_M, 4

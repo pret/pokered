@@ -134,6 +134,7 @@ Known Bugs
 - Some sprites in the Celadon University area spawn bugged out on certain emulators.
 - Battling multiple of the trainers in Celadon University causes a crash when attempting to go to Route 16
 - The lone Rocket in Viridian Gym's basement needs to be directly spoken to to be battled
+- Faraway Island Inside can't be entered
 
 Credits
 ====
@@ -144,10 +145,10 @@ Credits
 * ausma - Showdown Mod assistance
 * Paulluxx - Showdown Mod assistance
 * DuoM2 - Showdown Mod assistance 
-* Albatross - Much of the new sprites used in the hack 
+* Albatross - Several of the new sprites used in the hack (Electivire, Magmortar, Rhyperior, Tangrowth, Glaceon, Sylveon...)
 * ZumiIsawhat? - Restorations of beta OST
 * Helix Chamber, RacieBeep, et al - Prototype Pokémon sprites
-* Vortyne - Reused a bit of code from their pureRGB hack, which was used to assist with the eventual final Mew encounter.
+* Vortyne - Reused a bit of code from their pureRGB hack, which was used to assist with making MissingNo. stable.
 * Rangi - Reused a bit of code from their Red* / Blue* hack to make HMs usable in the overworld!
 
 Original README.md proceeding;

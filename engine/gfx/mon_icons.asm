@@ -262,6 +262,7 @@ GetPartyMonSpriteID:
 	predef IndexToPokedex
 	ld a, [wd11e]
 	ld c, a
+	dec a
 	srl a
 	ld hl, MonPartyData
 	ld e, a

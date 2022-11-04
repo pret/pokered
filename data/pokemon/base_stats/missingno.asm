@@ -1,6 +1,6 @@
 	db DEX_MISSINGNO ; pokedex id
 
-	db 211, 157,  53,  31,  47
+	db 211, 157,  53,  29,  73
 	;   hp  atk  def  spd  spc
 
 	db BIRD, NORMAL ; type
@@ -10,21 +10,17 @@
 	INCBIN "gfx/pokemon/front/missingno.pic", 0, 1 ; sprite dimensions
 	dw MissingNoPicFront, MissingNoPicBack
 
-	db WATER_GUN, WATER_GUN, SKY_ATTACK, NO_MOVE ; level 1 learnset
+	db WATER_GUN, WATER_GUN, SKY_ATTACK, PAY_DAY ; level 1 learnset
 	db GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
-	tmhm MEGA_PUNCH,   RAZOR_WIND,   SWORDS_DANCE, WHIRLWIND,    MEGA_KICK,    \
-	     TOXIC,        HORN_DRILL,   BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  \
-	     BUBBLEBEAM,   WATER_GUN,    ICE_BEAM,     BLIZZARD,     HYPER_BEAM,   \
-	     PAY_DAY,      SUBMISSION,   COUNTER,      SEISMIC_TOSS, RAGE,         \
-	     MEGA_DRAIN,   SOLARBEAM,    DRAGON_RAGE,  THUNDERBOLT,  THUNDER,      \
-	     EARTHQUAKE,   FISSURE,      DIG,          PSYCHIC_M,    TELEPORT,     \
-	     MIMIC,        DOUBLE_TEAM,  REFLECT,      BIDE,         METRONOME,    \
-	     SELFDESTRUCT, EGG_BOMB,     FIRE_BLAST,   SWIFT,        SKULL_BASH,   \
-	     SOFTBOILED,   DREAM_EATER,  SKY_ATTACK,   REST,         THUNDER_WAVE, \
-	     PSYWAVE,      EXPLOSION,    ROCK_SLIDE,   TRI_ATTACK,   SUBSTITUTE,   \
-	     CUT,          FLY,          SURF,         STRENGTH,     FLASH
+	tmhm MEGA_PUNCH,   RAZOR_WIND,   SWORDS_DANCE, MEGA_KICK,    TOXIC,		   \
+	     TAKE_DOWN,    DOUBLE_EDGE,  BUBBLEBEAM,   WATER_GUN,	 ICE_BEAM,     \
+	     BLIZZARD,     HYPER_BEAM,   PAY_DAY,      SUBMISSION,   SEISMIC_TOSS, \
+	     RAGE,         THUNDERBOLT,  THUNDER,      EARTHQUAKE,   FISSURE,      \
+	     PSYCHIC_M,    TELEPORT,     MIMIC,        DOUBLE_TEAM,  REFLECT,      \
+	     BIDE,         SWIFT,        SKY_ATTACK,   REST,         THUNDER_WAVE, \
+	     TRI_ATTACK,   SUBSTITUTE,   CUT,          FLY,          SURF
 	; end
 
 	db BANK(MissingNoPicFront)

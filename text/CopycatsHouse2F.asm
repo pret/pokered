@@ -63,12 +63,9 @@ _TM31NoRoomText::
 	text_end
 
 _CopycatsHouse2FText2::
-	text "DODUO: Giiih!"
-
-	para "MIRROR MIRROR ON"
-	line "THE WALL, WHO IS"
-	cont "THE FAIREST ONE"
-	cont "OF ALL?"
+	text "It's a JAGG"
+	line "doll with cute,"
+	cont "round eyes!"
 	done
 
 _CopycatsHouse2FText3::

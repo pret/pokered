@@ -10,7 +10,6 @@ VermilionCity_Object:
 	warp_event 18, 31, VERMILION_DOCK, 1
 	warp_event 19, 31, VERMILION_DOCK, 1
 	warp_event 15, 13, VERMILION_TRADE_HOUSE, 1
-	warp_event  7,  3, VERMILION_OLD_ROD_HOUSE, 1
 	warp_event 10, 31, FARAWAY_ISLAND_OUTSIDE, 2
 	warp_event 11, 31, FARAWAY_ISLAND_OUTSIDE, 1
 
