@@ -7,9 +7,7 @@ DrawStartMenu::
 	ld c, $08
 	jr nz, .drawTextBoxBorder
 ; shorter menu if the player doesn't have the pokedex
-	hlcoord 10, 0
 	ld b, $0c
-	ld c, $08
 .drawTextBoxBorder
 	call TextBoxBorder
 	; PureRGBnote: CHANGED: now SELECT button is tracked on this menu. Used in the new box-switching anywhere functionality.
