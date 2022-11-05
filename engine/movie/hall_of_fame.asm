@@ -227,7 +227,7 @@ HoFLoadPlayerPics:
 	call CopyData
 	ld de, vFrontPic
 	call InterlaceMergeSpriteBuffers
-	ld a, [wOptions]
+	ld a, [wSpriteOptions2]
 	bit BIT_BACK_SPRITES, a
 	jr nz, .swSprite
 .ogSprite
