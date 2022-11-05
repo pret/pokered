@@ -15,7 +15,7 @@ PrintLetterDelay::
 	bit 0, a
 	jr z, .waitOneFrame
 	ld a, [wOptions]
-	and $f
+	and %11
 	ldh [hFrameCounter], a
 	jr .checkButtons
 .waitOneFrame

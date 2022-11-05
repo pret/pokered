@@ -283,7 +283,7 @@ SetCursorPositionsFromOptions:
 	ld hl, TextSpeedOptionData + 1
 	ld a, [wOptions]
 	ld c, a
-	and $3f
+	and %11
 	push bc
 	ld de, 2
 	call IsInArray
