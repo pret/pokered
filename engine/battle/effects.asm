@@ -1640,8 +1640,8 @@ MoveWasDisabledText:
 PayDayEffect:
 	jpfar PayDayEffect_
 
-ConversionEffect:
-	jpfar ConversionEffect_
+;ConversionEffect:
+;	jpfar ConversionEffect_ ; PureRGBnote: CHANGED: conversion's effect was changed so this isn't needed.
 
 HazeEffect:
 	jpfar HazeEffect_

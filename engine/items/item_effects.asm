@@ -3197,6 +3197,12 @@ SendNewMonToBox:
 	dec b
 	jr nz, .loop4
 .skip3
+;;;;;;;;;; PureRGBnote: Reset the enemy pokemon's types in case they were remapped during battle
+	ld a, [wMonHType1]
+	ld [wEnemyMonType1], a
+	ld a, [wMonHType2]
+	ld [wEnemyMonType2], a
+;;;;;;;;;;
 	ld a, [wEnemyMonLevel]
 	ld [wEnemyMonBoxLevel], a
 	ld hl, wEnemyMon

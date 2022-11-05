@@ -6,6 +6,14 @@ PrintMonType:
 	call GetMonHeader
 	pop hl
 	push hl
+	push de
+	ld de, wMonHTypes
+	push hl
+	push bc
+	callfar TryRemapTyping
+	pop bc
+	pop hl
+	pop de
 	ld a, [wMonHType1]
 	call PrintType
 	ld a, [wMonHType1]

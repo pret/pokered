@@ -46,6 +46,12 @@ HazeEffect_:
 	ld hl, StatusChangesEliminatedText
 	jp PrintText
 
+PrintButItFailedText:
+	ld hl, PrintButItFailedText_
+CallBankF:
+	ld b, BANK(PrintButItFailedText_)
+	jp Bankswitch
+
 CureVolatileStatuses:
 	res CONFUSED, [hl]
 	inc hl ; BATTSTATUS2

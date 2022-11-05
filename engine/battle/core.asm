@@ -1720,6 +1720,8 @@ LoadBattleMonFromParty:
 	ld [hli], a
 	dec b
 	jr nz, .statModLoop
+	ld de, wBattleMonType
+	callfar TryRemapTyping
 	ret
 
 ; copies from enemy party data to current enemy mon data when sending out a new enemy mon
@@ -1774,6 +1776,8 @@ LoadEnemyMonFromParty:
 	jr nz, .statModLoop
 	ld a, [wWhichPokemon]
 	ld [wEnemyMonPartyPos], a
+	ld de, wEnemyMonType
+	callfar TryRemapTyping
 	ret
 
 SendOutMon:
@@ -6528,6 +6532,14 @@ LoadEnemyMonData:
 	ld a, [hli]            ; copy type 2
 	ld [de], a
 	inc de
+	push de
+	push hl
+	push bc
+	ld de, wEnemyMonType
+	callfar TryRemapTyping
+	pop bc
+	pop hl
+	pop de
 ;;;;;;;;;;; PureRGBnote: CHANGED: storing the data that makes a pokemon use alternate palette
 	;ld a, [hli]            ; copy catch rate NEW: this property is no longer used
 	ld a, [wIsInBattle]

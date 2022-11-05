@@ -24,7 +24,7 @@ MoveEffectPointerTable:
 	dw StatModifierDownEffect    ; SPECIAL_DOWN1_EFFECT
 	dw StatModifierDownEffect    ; ACCURACY_DOWN1_EFFECT
 	dw StatModifierDownEffect    ; EVASION_DOWN1_EFFECT
-	dw ConversionEffect          ; CONVERSION_EFFECT
+	dw NULL                      ; CONVERSION_EFFECT ; unused
 	dw HazeEffect                ; HAZE_EFFECT
 	dw TwoToFiveAttacksEffect    ; TWO_OR_THREE_ATTACKS_EFFECT
 	dw ThrashPetalDanceEffect    ; THRASH_PETAL_DANCE_EFFECT

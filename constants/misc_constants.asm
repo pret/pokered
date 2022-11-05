@@ -10,9 +10,9 @@ DEF TRUE  EQU 1
 
 ;;;;;;;;;; PureRGBnote: CHANGED: increased the speed of each text speed option
 ; wOptions
-DEF TEXT_DELAY_FAST    EQU %000 ; 0
-DEF TEXT_DELAY_MEDIUM  EQU %001 ; 1
-DEF TEXT_DELAY_SLOW    EQU %011 ; 3
+DEF TEXT_DELAY_FAST    EQU %00 ; 0
+DEF TEXT_DELAY_MEDIUM  EQU %01 ; 1
+DEF TEXT_DELAY_SLOW    EQU %11 ; 3
 ;;;;;;;;;;
 
 	const_def 6
@@ -35,6 +35,7 @@ DEF PALETTES_YELLOW     EQU %11 ; 3
 	const BIT_BIKE_MUSIC        ; 4
 	const BIT_EXP_BAR           ; 5
 	const BIT_NPC_STAT_EXP		; 6
+	const BIT_PKMN_TYPINGS      ; 7
 
 ; wSpriteOptions2
 	const_def  

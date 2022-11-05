@@ -1898,11 +1898,14 @@ wPlayerMoney:: ds 3 ; BCD
 
 wRivalName:: ds NAME_LENGTH
 
-; bits 0-3 = text speed (number of frames to delay after printing a letter)
-; 1: Fast
-; 3: Medium
-; 5: Slow
-; bits 4-5 = padding
+; bits 0-1 = text speed (number of frames to delay after printing a letter)
+; 00: Fast
+; 01: Medium
+; 11: Slow
+; bit 2 = unused (used to be used by larger numbers for text speed)
+; bit 3 = unused (used to be used by larger numbers for text speed)
+; bit 4 = unused (reserved for text speed but never used in the original game)
+; bit 5 = unused (reserved for text speed but never used in the original game)
 ; bit 6 = battle style
 ; 0: Shift
 ; 1: Set
@@ -2005,8 +2008,10 @@ wWildMonPalettes:: ds 3 ; flag array for the current map: which wild pokemon sho
 wColorSwapsUsed:: db ; how many times the player has used the color changer NPC
 wBoosterChipActive:: db ; whether the player gets boosted EXP from the effects of the boosterchip
 
-; 50 bytes remaining in union
-; unused save file 50 bytes
+wPkmnTypeRemapFlags:: ds 3 ; flag array for changing pokemon back to their original types. 0 = new typing, 1 = old typing
+
+; 47 bytes remaining in union
+; unused save file 47 bytes
 
 ENDU
 ;;;;;;;;;;
