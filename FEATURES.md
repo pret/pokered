@@ -264,13 +264,13 @@ The fifth, sixth, and seventh pages contain additional pokemon whose front sprit
 ## Move changes
 - Disable disables the previously selected move of the opponent. If they haven't selected a move yet, it chooses a random move. It has 85% accuracy. It lasts 2-7 turns.
 - Trapping moves only last 2 or 3 turns but deal a bit more damage to compensate. 2/3 chance of 2 turns, 1/3 chance of 3 turns.
-- 7 moves that people almost never use were renamed and changed to have much more useful effects:
-  - CONSTRICT is now STATIC SNAG - 75 base power, electric type, 30% chance of paralysis, 100% accuracy
-  - TAKE DOWN is now HEAT RUSH - 75 base power, fire type, 30% chance of burn, 100% accuracy
-  - KINESIS is now FIREWALL - status move, fire type, causes burn, 80% accuracy 
+- 7 moves that people almost never use were renamed and changed to have much more useful effects (mostly based on unused prototype moves):
+  - CONSTRICT is now STATIC SNAG - 75 base power, electric type, 30% chance of paralysis, 100% accuracy (Inspired by the unused prototype moves `PARALYZING SCISSORS` and `ELEKITER`)
+  - TAKE DOWN is now HEAT RUSH - 75 base power, fire type, 30% chance of burn, 100% accuracy (Inspired by the unused prototype move `MEGA FIRE`)
+  - KINESIS is now FIREWALL - status move, fire type, causes burn, 80% accuracy (Inspired by the unused prototype move `F WALL`)
   - COUNTER is now DRAIN PUNCH - 75 base power, fighting type, drains HP, 100% accuracy
   - RAZOR WIND is now ROOST - heals 1/2 max HP
-  - SLAM is now FILTHY SLAM - 80 base power, poison type, no additional effect, 100% accuracy
+  - SLAM is now FILTHY SLAM - 80 base power, poison type, no additional effect, 100% accuracy  (Inspired by the unused prototype move `GASTRO ACID`)
   - FURY SWIPES is now DUST CLAW - 40 base power, ground type, no additional effect, 100% accuracy (early-game ground type move)
 - Some moves that were fairly useless were made less useless
   - WHIRLWIND - 110 base power, flying type, 30% chance of confusion, 85% accuracy
