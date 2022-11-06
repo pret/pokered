@@ -3,7 +3,7 @@
 The only version differences between PureRed / PureBlue / PureGreen are visual. Play whatever color you like the most.
 
 ## New Options in the Options Menu
-Many options have been added to the game's options menu. To be clear, there are **5 pages of options** now. **Use the Next button on the options page** to cycle through the pages when in-game.
+Many options have been added to the game's options menu. To be clear, there are **7 pages of options** now. **Use the Next button on the options page** to cycle through the pages when in-game.
 
 
 
