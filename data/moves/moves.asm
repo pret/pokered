@@ -173,9 +173,9 @@ Moves:
 	move HYPER_FANG,   FLINCH_SIDE_EFFECT1,         80, NORMAL,        90, 15
 	move SHARPEN,      ATTACK_ACCURACY_UP1_EFFECT,   0, NORMAL,       100, 30 
 	move CONVERSION,   SPECIAL_UP2_EFFECT,           0, NORMAL,       100, 30
-	move TRI_ATTACK,   FREEZE_SIDE_EFFECT,          80, NORMAL,       100, 10
+	move TRI_ATTACK,   TRI_ATTACK_EFFECT,           90, TRI,          100, 10 ; 10% chance each of freeze/burn/paralysis, uses SPECIAL stat, NORMAL pokemon get STAB.
 	move SUPER_FANG,   SUPER_FANG_EFFECT,            1, NORMAL,       100, 10 ; now does 2/3 of the opponents HP instead of 1/2
 	move SLASH,        NO_ADDITIONAL_EFFECT,        70, NORMAL,       100, 20 ; high critical hit ratio
 	move SUBSTITUTE,   SUBSTITUTE_EFFECT,            0, NORMAL,       100, 10
-	move STRUGGLE,     BIG_RECOIL_EFFECT,           50, NORMAL,       100, 10
+	move STRUGGLE,     BIG_RECOIL_EFFECT,           50, TYPELESS,     100, 10
 	assert_table_length NUM_ATTACKS

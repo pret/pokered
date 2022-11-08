@@ -925,3 +925,17 @@ IF DEF(_GREEN) ; PureRGBnote: GREENBUILD: use the green slots visuals on green v
 	INCBIN "gfx/slots/green_slots_1.2bpp"
 ENDC
 SlotMachineTiles1End:
+
+;;;;;;;;;; PureRGBnote: Slot machine tiles moved from bank1E for more bank1E space
+SlotMachineTiles2:
+IF DEF(_RED)
+	INCBIN "gfx/slots/red_slots_2.2bpp"
+ENDC
+IF DEF(_BLUE)
+	INCBIN "gfx/slots/blue_slots_2.2bpp"
+ENDC
+IF DEF(_GREEN) ; PureRGBnote: GREENBUILD: slot graphics for green version added
+	INCBIN "gfx/slots/green_slots_2.2bpp"
+ENDC
+SlotMachineTiles2End:
+;;;;;;;;;;

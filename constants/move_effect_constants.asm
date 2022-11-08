@@ -28,7 +28,7 @@
 	const SPECIAL_DOWN1_EFFECT       ; $15
 	const ACCURACY_DOWN1_EFFECT      ; $16
 	const EVASION_DOWN1_EFFECT       ; $17
-	const CONVERSION_EFFECT          ; $18 now unused
+	const TRI_ATTACK_EFFECT          ; $18 ; PureRGBnote: ADDED: new effect, 10% chance of burn / freeze / paralyze
 	const HAZE_EFFECT                ; $19
 	const TWO_OR_THREE_ATTACKS_EFFECT; $1A ; PureRGBnote: ADDED: new effect, 50% chance of 2 hits, 50% chance of 3
 	const THRASH_PETAL_DANCE_EFFECT  ; $1B

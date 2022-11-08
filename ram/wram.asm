@@ -941,7 +941,7 @@ wListWithTMText:: db ; whether the current list menu can contain TMs and should 
 wTMTextShown:: db ; whether text for a TM is visible in a menu
 wSum:: ; a temp store for 16 bit values created by addition, used with PrintNumber to display the sum on screen
 wDamageIntention:: dw ; in battle, the amount of damage a move will do before doing it (used for high jump kick / jump kick crash effect)
-ds 1 ; unused byte
+ds 1 ; unused lone byte
 wIsAltPalettePkmn:: db ;a flag for features related to alternate pokemon color palettes, set in these scenarios:
 ;1 - set prior to loading the palette of a pokemon that should have an alternate palette, reset upon showing the pokemon sprite
 ;2 - set as a storage value for "which wild pokemon slot has been encountered" when figuring out if that slot is an alternate palette pokemon
@@ -1103,7 +1103,7 @@ wScriptedNPCWalkCounter:: db
 
 wGBC:: db
 
-; if running on SGB, it's 1, else it's 0
+; if running on SGB or GBC, it's 1, else it's 0
 wOnSGB:: db
 
 wDefaultPaletteCommand:: db

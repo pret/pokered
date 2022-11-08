@@ -27,9 +27,3 @@ ConversionEffect_:
 ConvertedTypeText:
 	text_far _ConvertedTypeText
 	text_end
-
-PrintButItFailedText:
-	ld hl, PrintButItFailedText_
-CallBankF:
-	ld b, BANK(PrintButItFailedText_)
-	jp Bankswitch

@@ -123,12 +123,12 @@ PoisonEffect:
 	dec de
 	ldh a, [hWhoseTurn]
 	and a
-	ld b, ANIM_C7
+	ld b, SHAKE_SCREEN_ANIM
 	ld hl, wPlayerBattleStatus3
 	ld a, [de]
 	ld de, wPlayerToxicCounter
 	jr nz, .ok
-	ld b, ANIM_A9
+	ld b, SHAKE_ENEMY_HUD_ANIM
 	ld hl, wEnemyBattleStatus3
 	ld de, wEnemyToxicCounter
 .ok
@@ -206,9 +206,6 @@ FreezeBurnParalyzeEffect:
 ;;;;;;;;;; PureRGBnote: CHANGED: ADDED: tweak how some moves behave when applying burn/freeze/paralyze status
 
 	ld a, [wPlayerMoveNum]
-	cp TRI_ATTACK
-	ld b, ICE ; NEW: tri attack can't freeze ice types
-	jr z, .doComparison1
 	cp SOLARBEAM
 	ld b, FIRE ; NEW: solarbeam can't burn fire types
 	jr z, .doComparison1
@@ -250,24 +247,23 @@ FreezeBurnParalyzeEffect:
 	ld a, 1 << PAR
 	ld [wEnemyMonStatus], a
 	call QuarterSpeedDueToParalysis ; quarter speed of affected mon
-	ld a, ANIM_A9
+	ld a, SHAKE_ENEMY_HUD_ANIM
 	call PlayBattleAnimation
 	jp PrintMayNotAttackText ; print paralysis text
 .burn1
 	ld a, 1 << BRN
 	ld [wEnemyMonStatus], a
 	call HalveAttackDueToBurn ; halve attack of affected mon
-	ld a, ANIM_A9
+	ld a, SHAKE_ENEMY_HUD_ANIM
 	call PlayBattleAnimation
 	jp PrintBurnText
 .freeze1
 	call ClearHyperBeam ; resets hyper beam (recharge) condition from target
 	ld a, 1 << FRZ
 	ld [wEnemyMonStatus], a
-	ld a, ANIM_A9
+	ld a, SHAKE_ENEMY_HUD_ANIM
 	call PlayBattleAnimation
-	ld hl, FrozenText
-	jp PrintText
+	jp PrintFrozenText
 .opponentAttacker
 	ld a, [wBattleMonStatus] ; mostly same as above with addresses swapped for opponent
 	and a
@@ -275,15 +271,12 @@ FreezeBurnParalyzeEffect:
 
 ;;;;;;;;;; PureRGBnote: CHANGED: ADDED: tweak how some moves behave when applying burn/freeze/paralyze status
 	ld a, [wEnemyMoveNum]
-	cp TRI_ATTACK
-	ld b, ICE ; NEW: tri attack can't freeze ice types
-	jr z, .doComparison2
 	cp SOLARBEAM
 	ld b, FIRE ; NEW: solarbeam can't burn fire types
 	jr z, .doComparison2
 	
 	ld a, [wEnemyMoveType]
-	cp NORMAL ; NEW: body slam and tri attack can apply status to any pokemon type
+	cp NORMAL ; NEW: body slam can apply status to any pokemon type
 	jr z, .skipTypeComparison2
 	cp BUG ; NEW: vicegrip can apply status to any pokemon type
 	jr z, .skipTypeComparison2
@@ -326,11 +319,10 @@ FreezeBurnParalyzeEffect:
 	call HalveAttackDueToBurn
 	jp PrintBurnText
 .freeze2
-; hyper beam bits aren't reseted for opponent's side
+; hyper beam bits aren't reset for opponent's side
 	ld a, 1 << FRZ
 	ld [wBattleMonStatus], a
-	ld hl, FrozenText
-	jp PrintText
+	jp PrintFrozenText
 
 PrintBurnText:
 	ld hl, BurnedText
@@ -339,6 +331,10 @@ PrintBurnText:
 BurnedText:
 	text_far _BurnedText
 	text_end
+
+PrintFrozenText:
+	ld hl, FrozenText
+	jp PrintText
 
 FrozenText:
 	text_far _FrozenText
@@ -987,7 +983,7 @@ ThrashPetalDanceEffect:
 	inc a
 	ld [de], a ; set thrash/petal dance counter to 2 or 3 at random
 	ldh a, [hWhoseTurn]
-	add ANIM_B0
+	add SHRINKING_SQUARE_ANIM
 	jp PlayBattleAnimation2
 
 SwitchAndTeleportEffect:
@@ -1193,31 +1189,32 @@ FlinchSideEffect:
 OneHitKOEffect:
 	jpfar OneHitKOEffect_
 
+
+; PureRGBnote: CHANGED: modified this subroutine a bit since fly and dig are the only possibilities after changes
 ChargeEffect:
 	ld hl, wPlayerBattleStatus1
 	ld de, wPlayerMoveEffect
 	ldh a, [hWhoseTurn]
 	and a
-	ld b, XSTATITEM_ANIM
 	jr z, .chargeEffect
 	ld hl, wEnemyBattleStatus1
 	ld de, wEnemyMoveEffect
-	ld b, ANIM_AF
 .chargeEffect
 	set CHARGING_UP, [hl]
+	set INVULNERABLE, [hl] ; mon is now invulnerable to typical attacks (fly/dig)
 	ld a, [de]
 	dec de ; de contains enemy or player MOVENUM
 	cp FLY_EFFECT
 	jr nz, .notFly
-	set INVULNERABLE, [hl] ; mon is now invulnerable to typical attacks (fly/dig)
 	ld b, TELEPORT ; load Teleport's animation
+	jr .finish
 .notFly
-	ld a, [de]
-	cp DIG
-	jr nz, .notDigOrFly
-	set INVULNERABLE, [hl] ; mon is now invulnerable to typical attacks (fly/dig)
-	ld b, ANIM_C0
-.notDigOrFly
+	;ld a, [de]
+	;cp DIG
+	;jr nz, .notDigOrFly
+	ld b, DIG_DOWN_ANIM ; dig is the only other option
+;.notDigOrFly
+.finish
 	xor a
 	ld [wAnimationType], a
 	ld a, b
@@ -1640,8 +1637,10 @@ MoveWasDisabledText:
 PayDayEffect:
 	jpfar PayDayEffect_
 
-ConversionEffect:
-	jpfar ConversionEffect_
+TriAttackEffect:
+	call BattleRandom
+	ld d, a
+	jpfar TriAttackEffect_
 
 HazeEffect:
 	jpfar HazeEffect_

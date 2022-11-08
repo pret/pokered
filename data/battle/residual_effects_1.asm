@@ -1,7 +1,6 @@
 ; These are move effects (second value from the Moves table in bank $E).
 ResidualEffects1:
 ; most non-side effects
-	db CONVERSION_EFFECT
 	db HAZE_EFFECT
 	db SWITCH_AND_TELEPORT_EFFECT
 	db MIST_EFFECT

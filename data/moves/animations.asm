@@ -177,13 +177,13 @@ AttackAnimationPointers:
 	dw TradeBallAppear2Anim
 	dw TradeBallPoofAnim
 	dw XStatItemAnim
-	dw XStatItemAnim
 	dw ShrinkingSquareAnim
-	dw ShrinkingSquareAnim
-	dw XStatItemBlackAnim
-	dw XStatItemBlackAnim
-	dw ShrinkingSquareBlackAnim
-	dw ShrinkingSquareBlackAnim
+	dw TriAttackStartAnim
+	dw TriAttackTriangleAnim
+	dw TriAttackTriangleAnim
+	dw TriAttackFireAnim
+	dw TriAttackIceAnim
+	dw TriAttackThunderAnim
 	dw AmnesiaEnemyAnim
 	dw BurnAnim
 	dw BallTossAnim ; safari ball
@@ -1320,12 +1320,36 @@ ConversionAnim:
 	db -1 ; end
 
 TriAttackAnim:
-	battle_anim NO_MOVE, SE_DARK_SCREEN_FLASH
-	battle_anim TRI_ATTACK, SUBANIM_1_TRIANGLE_TOSS, 1, 2
-	battle_anim NO_MOVE, SUBANIM_1_TRIANGLE_TOSS, 1, 2
-	battle_anim NO_MOVE, SUBANIM_1_TRIANGLE_TOSS, 1, 2
-	battle_anim NO_MOVE, SE_DARK_SCREEN_FLASH
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
 	db -1 ; end
+
+TriAttackStartAnim:
+	battle_anim NO_MOVE, SE_DARK_SCREEN_FLASH
+	battle_anim ROCK_SLIDE, SUBANIM_1_TRIANGLE_TOSS, 1, 2
+	db -1
+
+TriAttackTriangleAnim:
+	battle_anim NO_MOVE, SUBANIM_1_TRIANGLE_TOSS, 1, 2
+	db -1
+
+TriAttackFireAnim:
+	battle_anim NO_MOVE, SE_DELAY_ANIMATION_10
+	battle_anim NO_MOVE, SE_DELAY_ANIMATION_10
+	battle_anim NO_MOVE, SE_DARK_SCREEN_FLASH
+	battle_anim FLAMETHROWER, SUBANIM_1_FLAME_COLUMN_3, 1, 4
+	db -1 ; end
+
+TriAttackIceAnim:
+	battle_anim NO_MOVE, SE_LIGHT_SCREEN_PALETTE
+	battle_anim PAY_DAY, SUBANIM_0_ICE_RISE, 0, 2
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1 ; end
+
+TriAttackThunderAnim:
+	battle_anim NO_MOVE, SE_DARK_SCREEN_PALETTE
+	battle_anim THUNDER, SUBANIM_1_LIGHTNING, 1, 4
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1
 
 SuperFangAnim:
 	battle_anim LEECH_SEED, SE_DARK_SCREEN_PALETTE

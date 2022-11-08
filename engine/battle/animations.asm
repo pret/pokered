@@ -435,24 +435,24 @@ MoveAnimationTiles2:
 MoveAnimationTiles1:
 	INCBIN "gfx/battle/move_anim_1.2bpp"
 
-SlotMachineTiles2:
-IF DEF(_RED)
-	INCBIN "gfx/slots/red_slots_2.2bpp"
-ENDC
-IF DEF(_BLUE)
-	INCBIN "gfx/slots/blue_slots_2.2bpp"
-ENDC
-IF DEF(_GREEN) ; PureRGBnote: GREENBUILD: slot graphics for green version added
-	INCBIN "gfx/slots/green_slots_2.2bpp"
-ENDC
-SlotMachineTiles2End:
+MoveAnimationNoWaitingForSound:
+	push hl
+	push de
+	push bc
+	push af
+	ld a, 1
+	push af
+	jr MoveAnimationContent
 
 MoveAnimation:
 	push hl
 	push de
 	push bc
 	push af
+	xor a
+	push af
 	call WaitForSoundToFinish
+MoveAnimationContent:
 	call SetAnimationPalette
 	ld a, [wAnimationID]
 	and a
@@ -486,7 +486,11 @@ MoveAnimation:
 	vc_hook_blue Stop_reducing_move_anim_flashing_Rock_Slide_Dream_Eater
 	call PlayApplyingAttackAnimation ; shake the screen or flash the pic in and out (to show damage)
 .animationFinished
+	pop af ; a = whether the animation should wait for the sound to finish 
+	and a
+	jr nz, .noWaiting
 	call WaitForSoundToFinish
+.noWaiting
 	xor a
 	ld [wSubAnimSubEntryAddr], a
 	;ld [wUnusedD09B], a ; PureRGBnote: this value is unused so we dont need to load it

@@ -91,7 +91,6 @@ INCLUDE "engine/items/tms.asm"
 INCLUDE "engine/battle/end_of_battle.asm"
 INCLUDE "engine/battle/wild_encounters.asm"
 INCLUDE "engine/battle/move_effects/recoil.asm"
-INCLUDE "engine/battle/move_effects/conversion.asm"
 INCLUDE "engine/battle/move_effects/haze.asm"
 INCLUDE "engine/battle/get_trainer_name.asm"
 INCLUDE "engine/math/random.asm"
@@ -236,6 +235,7 @@ INCLUDE "engine/battle/move_effects/burn.asm" ; PureRGBnote: ADDED: new burn eff
 INCLUDE "engine/battle/move_effects/heal.asm"
 INCLUDE "engine/battle/move_effects/transform.asm"
 INCLUDE "engine/battle/move_effects/reflect_light_screen.asm"
+INCLUDE "engine/battle/move_effects/tri_attack.asm" ; PureRGBnote: ADDED: new tri attack effect code
 
 
 
@@ -407,6 +407,7 @@ INCLUDE "engine/battle/exp_bar_print.asm"
 INCLUDE "engine/overworld/strength.asm"
 INCLUDE "engine/battle/store_pkmn_levels.asm"
 INCLUDE "engine/gfx/remap_overworld_sprites.asm"
+INCLUDE "engine/battle/animations/tri_attack.asm"
 
 
 ; PureRGBnote: TODO: these are currently unused but are intended to be where the save file is flashed to the ROM

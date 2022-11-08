@@ -3426,7 +3426,7 @@ CheckPlayerStatusConditions:
 ; fast asleep
 	xor a
 	ld [wAnimationType], a
-	ld a, SLP_ANIM - 1
+	ld a, SLP_PLAYER_ANIM
 	call PlayMoveAnimation
 	ld hl, FastAsleepText
 	call PrintText
@@ -3510,7 +3510,7 @@ CheckPlayerStatusConditions:
 	call PrintText
 	xor a
 	ld [wAnimationType], a
-	ld a, CONF_ANIM - 1
+	ld a, CONF_PLAYER_ANIM
 	call PlayMoveAnimation
 	call BattleRandom
 	cp 50 percent + 1 ; chance to hurt itself
@@ -5352,6 +5352,16 @@ AdjustDamageForMoveType:
 	jr z, .sameTypeAttackBonus
 	cp c ; does the move type match type 2 of the attacker?
 	jr z, .sameTypeAttackBonus
+;;;;;;;;;; PureRGBnote: ADDED: normal type pokemon get STAB on tri attack
+	cp TRI
+	jr nz, .notTri
+	ld a, NORMAL 
+	cp b ; does NORMAL match type 1 of the attacker?
+	jr z, .sameTypeAttackBonus
+	cp c ; does NORMAL match type 2 of the attacker?
+	jr z, .sameTypeAttackBonus
+.notTri
+;;;;;;;;;
 	jr .skipSameTypeAttackBonus
 .sameTypeAttackBonus
 ; if the move type matches one of the attacker's types
