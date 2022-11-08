@@ -713,7 +713,7 @@ AIIncreaseStat:
 	ld a, [hl]
 	push af
 	push hl
-	ld a, ANIM_AF
+	ld a, XSTATITEM_DUPLICATE_ANIM
 	ld [hli], a
 	ld [hl], b
 	callfar StatModifierUpEffect

@@ -184,7 +184,7 @@ DEF NUM_ATTACKS EQU const_value - 1
 	const TRADE_BALL_TILT_ANIM
 	const TRADE_BALL_POOF_ANIM
 	const XSTATITEM_ANIM ; use X Attack/Defense/Speed/Special
-	const SHRINKING_SQUARE_ANIM
+	const XSTATITEM_DUPLICATE_ANIM
 	const ANIM_B0
 	const ANIM_B1
 	const ANIM_B2
