@@ -201,7 +201,7 @@ DEF NUM_ATTACKS EQU const_value - 1
 	const SLP_ANIM ; sleeping monster
 	const CONF_PLAYER_ANIM
 	const CONF_ANIM ; confused monster
-	const DIG_DOWN_ANIM
+	const SLIDE_DOWN_ANIM
 	const TOSS_ANIM ; toss Poké Ball
 	const SHAKE_ANIM ; shaking Poké Ball when catching monster
 	const POOF_ANIM ; puff of smoke

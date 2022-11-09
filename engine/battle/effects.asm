@@ -1016,7 +1016,7 @@ ChargeEffect:
 	cp DIG
 	jr nz, .notDigOrFly
 	set INVULNERABLE, [hl] ; mon is now invulnerable to typical attacks (fly/dig)
-	ld b, DIG_DOWN_ANIM
+	ld b, SLIDE_DOWN_ANIM
 .notDigOrFly
 	xor a
 	ld [wAnimationType], a
