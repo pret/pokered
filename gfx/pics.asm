@@ -586,3 +586,34 @@ RangerPic::        INCBIN "gfx/unused_prototype_sprites/ranger.pic"
 RangerFPic::       INCBIN "gfx/trainers/rangerf.pic"
 RookiePic::        INCBIN "gfx/unused_prototype_sprites/rookie.pic"
 SoldierPic::       INCBIN "gfx/unused_prototype_sprites/soldier.pic"
+
+SECTION "Type Icons", ROMX
+
+NormalTypeIcon::     INCBIN "gfx/movedex/type_icons/normal.2bpp"
+FightingTypeIcon::   INCBIN "gfx/movedex/type_icons/fighting.2bpp"
+FlyingTypeIcon::     INCBIN "gfx/movedex/type_icons/flying.2bpp"
+PoisonTypeIcon::     INCBIN "gfx/movedex/type_icons/poison.2bpp"
+GroundTypeIcon::     INCBIN "gfx/movedex/type_icons/ground.2bpp"
+RockTypeIcon::       INCBIN "gfx/movedex/type_icons/rock.2bpp"
+TypelessIcon::       INCBIN "gfx/movedex/type_icons/typeless.2bpp"
+BugTypeIcon::        INCBIN "gfx/movedex/type_icons/bug.2bpp"
+GhostTypeIcon::      INCBIN "gfx/movedex/type_icons/ghost.2bpp"
+FireTypeIcon::       INCBIN "gfx/movedex/type_icons/fire.2bpp"
+WaterTypeIcon::      INCBIN "gfx/movedex/type_icons/water.2bpp"
+GrassTypeIcon::      INCBIN "gfx/movedex/type_icons/grass.2bpp"
+ElectricTypeIcon::   INCBIN "gfx/movedex/type_icons/electric.2bpp"
+PsychicTypeIcon::    INCBIN "gfx/movedex/type_icons/psychic_sgb.2bpp"
+PsychicTypeGBCIcon:: INCBIN "gfx/movedex/type_icons/psychic_gbc.2bpp"
+IceTypeIcon::        INCBIN "gfx/movedex/type_icons/ice.2bpp"
+DragonTypeIcon::     INCBIN "gfx/movedex/type_icons/dragon.2bpp"
+TriTypeIcon::        INCBIN "gfx/movedex/type_icons/tri.2bpp"
+
+PokedexPromptGraphics::  INCBIN "gfx/pokedex/prompts.2bpp"
+PokedexPromptGraphicsEnd::
+
+MovedexPromptGraphics::  INCBIN "gfx/movedex/prompts.2bpp"
+MovedexPromptGraphicsEnd::
+
+MoveDexUI::          INCBIN "gfx/movedex/prev_data_next.2bpp"
+MoveDexUIEnd::
+

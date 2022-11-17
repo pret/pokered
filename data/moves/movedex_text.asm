@@ -3,8 +3,8 @@ _PoundDexEntry::
 	next "with a leg, tail"
 	next "or hand."
 
-	page "No additional"
-	next "effect."
+	bage "No additional"
+	next "effect"
 	dex
 
 _KarateChopDexEntry::
@@ -12,8 +12,8 @@ _KarateChopDexEntry::
 	next "vertical chop"
 	next "with hand or paw."
 
-	page "Often lands"
-	next "critical hits."
+	bage "Often lands"
+	next "critical hits"
 	dex
 
 _DoubleslapDexEntry::
@@ -21,8 +21,8 @@ _DoubleslapDexEntry::
 	next "the opponent with"
 	next "two hands."
 
-	page "Hits 2-5 times in"
-	next "succession."
+	bage "Hits 2-5 times in"
+	next "succession"
 	dex
 
 _CometPunchDexEntry::
@@ -30,8 +30,8 @@ _CometPunchDexEntry::
 	next "lightning speed"
 	next "punch."
 
-	page "Always goes"
-	next "first."
+	bage "Always goes"
+	next "first"
 	dex
 
 _MegaPunchDexEntry::
@@ -39,9 +39,9 @@ _MegaPunchDexEntry::
 	next "that can stun"
 	next "the opponent."
 
-	page "Causes the foe to"
+	bage "Causes the foe to"
 	next "flinch 30% of the"
-	next "time."
+	next "time"
 	dex
 
 _PayDayDexEntry::
@@ -49,9 +49,9 @@ _PayDayDexEntry::
 	next "at the foe."
 	next "Picking the coins"
 
-	page "up after battle"
+	bage "up after battle"
 	next "will earn you"
-	next "some extra money."
+	next "some extra money"
 	dex
 
 _FirePunchDexEntry::
@@ -59,8 +59,8 @@ _FirePunchDexEntry::
 	next "with a burning"
 	next "fist."
 
-	page "10% chance of"
-	next "burning the foe."
+	bage "10% chance of"
+	next "burning the foe"
 	dex
 
 _IcePunchDexEntry::
@@ -68,9 +68,9 @@ _IcePunchDexEntry::
 	next "with a freezing"
 	next "fist."
 
-	page "10% chance of"
+	bage "10% chance of"
 	next "freezing the foe"
-	next "solid."
+	next "solid"
 	dex
 
 _ThunderPunchDexEntry::
@@ -78,9 +78,9 @@ _ThunderPunchDexEntry::
 	next "an electrically"
 	next "charged fist."
 
-	page "10% chance of"
+	bage "10% chance of"
 	next "paralyzing the"
-	next "opponent."
+	next "opponent"
 	dex
 
 _ScratchDexEntry::
@@ -88,8 +88,8 @@ _ScratchDexEntry::
 	next "with claws or"
 	next "barbs."
 
-	page "No additional"
-	next "effect."
+	bage "No additional"
+	next "effect"
 	dex
 
 _VicegripDexEntry::
@@ -97,9 +97,9 @@ _VicegripDexEntry::
 	next "between claws,"
 	next "hands, or jaws."
 
-	page "30% chance of"
+	bage "30% chance of"
 	next "paralyzing the"
-	next "opponent."
+	next "opponent"
 	dex
 
 _GuillotineDexEntry::
@@ -107,13 +107,13 @@ _GuillotineDexEntry::
 	next "violently crush"
 	next "the opponent."
 
-	page "Always KOs the"
+	bage "Always KOs the"
 	next "opponent, but"
 	next "misses a lot."
 
-	page "Won't work on"
-	next "higher level"
-	next "<MON>."
+	bage "Doesn't work on"
+	next "opponents with"
+	next "higher SPEED"
 	dex
 
 _RazorWindDexEntry::
@@ -121,8 +121,8 @@ _RazorWindDexEntry::
 	next "from flying and"
 	next "rests."
 
-	page "Heals half of"
-	next "user's max HP."
+	bage "Heals half of"
+	next "user's max HP"
 	dex
 
 _SwordsDanceDexEntry::
@@ -130,7 +130,7 @@ _SwordsDanceDexEntry::
 	next "to raise fighting"
 	next "spirit."
 
-	page "Greatly raises"
+	bage "Greatly raises"
 	next "user's ATTACK."
 	next "(+2 ATTACK)"
 	dex
@@ -140,13 +140,13 @@ _CutDexEntry::
 	next "with a claw, barb"
 	next "tooth, wing, etc."
 
-	page "No additional"
+	bage "No additional"
 	next "effect. Usable"
 	next "outside battle"
 
-	page "to cut down"
+	bage "to cut down"
 	next "shrubs or clear"
-	next "patches of grass."
+	next "patches of grass"
 	dex
 
 _GustDexEntry::
@@ -154,8 +154,8 @@ _GustDexEntry::
 	next "of wind towards"
 	next "the opponent."
 
-	page "No additional"
-	next "effect."
+	bage "No additional"
+	next "effect"
 	dex
 
 _WingAttackDexEntry::
@@ -163,8 +163,8 @@ _WingAttackDexEntry::
 	next "the foe with"
 	next "wings."
 
-	page "Always goes"
-	next "first."
+	bage "Always goes"
+	next "first"
 	dex
 
 _WhirlwindDexEntry::
@@ -172,22 +172,22 @@ _WhirlwindDexEntry::
 	next "is summoned and"
 	next "hurled at foe."
 
-	page "Causes confusion"
-	next "30% of the time."
+	bage "Causes confusion"
+	next "30% of the time"
 	dex
 
 _FlyDexEntry::
-	text "The <MON> flies"
+	text "The #MON flies"
 	next "up high and then"
 	next "dive-bombs foe."
 
-	page "Avoids most"
+	bage "Avoids most"
 	next "attacks while"
 	next "flying high."
 
-	page "Usable outside"
+	bage "Usable outside"
 	next "battle to fly to"
-	next "other places."
+	next "other places"
 	dex
 
 _BindDexEntry::
@@ -195,9 +195,9 @@ _BindDexEntry::
 	next "in a rock-hard"
 	next "grip."
 
-	page "The foe can't"
+	bage "The foe can't"
 	next "move for 2-3"
-	next "turns."
+	next "turns"
 	dex
 
 _SlamDexEntry::
@@ -205,8 +205,8 @@ _SlamDexEntry::
 	next "with a dirty tail"
 	next "leg, arm, etc."
 
-	page "No additional"
-	next "effect."
+	bage "No additional"
+	next "effect"
 	dex
 
 
@@ -215,17 +215,17 @@ _VineWhipDexEntry::
 	next "with a plant"
 	next "vine."
 
-	page "No additional"
-	next "effect."
+	bage "No additional"
+	next "effect"
 	dex
 
 _StompDexEntry::
 	text "Stomps on the foe"
 	next "with feet/hooves."
 
-	page "Causes opponent"
+	bage "Causes opponent"
 	next "to flinch 30% of"
-	next "the time."
+	next "the time"
 	dex
 
 _DoubleKickDexEntry::
@@ -233,7 +233,7 @@ _DoubleKickDexEntry::
 	next "kicks in quick"
 	next "succession."
 
-	page "Hits twice."
+	bage "Hits twice"
 	dex
 
 _MegaKickDexEntry::
@@ -241,10 +241,10 @@ _MegaKickDexEntry::
 	next "usually with both"
 	next "legs, and a huge"
 
-	page "weight behind it."
+	bage "weight behind it."
 
-	page "No additional"
-	next "effect."
+	bage "No additional"
+	next "effect"
 	dex
 
 _JumpKickDexEntry::
@@ -252,12 +252,12 @@ _JumpKickDexEntry::
 	next "air to deliver a"
 	next "big kick."
 
-	page "Damages the user"
+	bage "Damages the user"
 	next "1/4 of what it"
 	next "would have done"
 
-	page "to the foe if it"
-	next "misses."
+	bage "to the foe if it"
+	next "misses"
 	dex
 
 _RollingKickDexEntry::
@@ -265,9 +265,9 @@ _RollingKickDexEntry::
 	next "stone to deliver"
 	next "a rock-hard kick."
 
-	page "Causes opponent"
+	bage "Causes opponent"
 	next "to flinch 30% of"
-	next "the time."
+	next "the time"
 	dex
 
 _SandAttackDexEntry::
@@ -275,7 +275,7 @@ _SandAttackDexEntry::
 	next "with a spray of"
 	next "sand."
 
-	page "Lowers the foe's"
+	bage "Lowers the foe's"
 	next "ACCURACY."
 	next "(-1 ACCURACY)"
 	dex
@@ -285,17 +285,17 @@ _HeadbuttDexEntry::
 	next "with the user's"
 	next "big head."
 
-	page "Causes opponent"
+	bage "Causes opponent"
 	next "to flinch 30% of"
-	next "the time."
+	next "the time"
 	dex
 
 _HornAttackDexEntry::
 	text "Jabs the foe with"
 	next "a rock-hard horn."
 
-	page "No additional"
-	next "effect."
+	bage "No additional"
+	next "effect"
 	dex
 
 _FuryAttackDexEntry::
@@ -303,7 +303,7 @@ _FuryAttackDexEntry::
 	next "foe with beak or"
 	next "horn rapidly."
 
-	page "Hits twice."
+	bage "Hits twice"
 	dex
 
 _HornDrillDexEntry::
@@ -311,13 +311,13 @@ _HornDrillDexEntry::
 	next "into foe with a"
 	next "razor-sharp horn."
 
-	page "Always KOs the"
+	bage "Always KOs the"
 	next "opponent, but"
 	next "misses a lot."
 
-	page "Won't work on"
-	next "higher level"
-	next "<MON>."
+	bage "Doesn't work on"
+	next "opponents with"
+	next "higher SPEED"
 	dex
 
 _TackleDexEntry::
@@ -325,8 +325,8 @@ _TackleDexEntry::
 	next "with a full-body"
 	next "tackle."
 
-	page "No additional"
-	next "effect."
+	bage "No additional"
+	next "effect"
 	dex
 
 _BodySlamDexEntry::
@@ -334,9 +334,9 @@ _BodySlamDexEntry::
 	next "body weight is"
 	next "slammed on foe."
 
-	page "30% chance of"
+	bage "30% chance of"
 	next "paralyzing the"
-	next "opponent."
+	next "opponent"
 	dex
 
 _WrapDexEntry::
@@ -344,9 +344,9 @@ _WrapDexEntry::
 	next "with a long"
 	next "appendage/body."
 
-	page "The foe can't"
+	bage "The foe can't"
 	next "move for 2-3"
-	next "turns."
+	next "turns"
 	dex
 
 _TakeDownDexEntry::
@@ -354,8 +354,8 @@ _TakeDownDexEntry::
 	next "while alight with"
 	next "raging flames."
 
-	page "30% chance of"
-	next "burning the foe."
+	bage "30% chance of"
+	next "burning the foe"
 	dex
 
 _ThrashDexEntry::
@@ -363,9 +363,9 @@ _ThrashDexEntry::
 	next "around hitting"
 	next "anything nearby."
 
-	page "Lasts 2-3 turns."
+	bage "Lasts 2-3 turns."
 	next "Causes confusion"
-	next "to user after."
+	next "to user after"
 	dex
 
 _DoubleEdgeDexEntry::
@@ -373,9 +373,9 @@ _DoubleEdgeDexEntry::
 	next "tackle that hurts"
 	next "the user as well."
 
-	page "User takes 25%"
+	bage "User takes 25%"
 	next "of damage done"
-	next "to foe as recoil."
+	next "to foe as recoil"
 	dex
 
 _TailWhipDexEntry::
@@ -383,10 +383,10 @@ _TailWhipDexEntry::
 	next "tail around cutely"
 	next "to trick the foe"
 
-	page "into lowering its"
+	bage "into lowering its"
 	next "guard."
 
-	page "Lowers foe's"
+	bage "Lowers foe's"
 	next "DEFENSE."
 	next "(-1 DEFENSE)"
 	dex
@@ -396,9 +396,9 @@ _PoisonStingDexEntry::
 	next "a small poison-"
 	next "tipped barb."
 
-	page "40% chance of"
+	bage "40% chance of"
 	next "poisoning the"
-	next "foe."
+	next "foe"
 	dex
 
 _TwineedleDexEntry::
@@ -406,11 +406,11 @@ _TwineedleDexEntry::
 	next "two barbs, claws,"
 	next "beaks, or spikes."
 
-	page "Hits twice."
+	bage "Hits twice."
 
-	page "20% chance of"
+	bage "20% chance of"
 	next "poisoning the"
-	next "foe."
+	next "foe"
 	dex
 
 _PinMissileDexEntry::
@@ -418,7 +418,7 @@ _PinMissileDexEntry::
 	next "pins or needles"
 	next "flurry the foe."
 
-	page "Hits 2-5 times."
+	bage "Hits 2-5 times"
 	dex
 
 _LeerDexEntry::
@@ -426,7 +426,7 @@ _LeerDexEntry::
 	next "at the foe to"
 	next "intimidate it."
 
-	page "Lowers opponent's"
+	bage "Lowers opponent's"
 	next "DEFENSE."
 	next "(-1 DEFENSE)"
 	dex
@@ -435,9 +435,9 @@ _BiteDexEntry::
 	text "Bites the foe"
 	next "with sharp teeth."
 
-	page "Causes opponent"
+	bage "Causes opponent"
 	next "to flinch 10% of"
-	next "the time."
+	next "the time"
 	dex
 
 _GrowlDexEntry::
@@ -445,7 +445,7 @@ _GrowlDexEntry::
 	next "causing the foe"
 	next "to be less wary."
 
-	page "Lowers opponent's"
+	bage "Lowers opponent's"
 	next "ATTACK."
 	next "(ATTACK -1)"
 	dex
@@ -455,7 +455,7 @@ _RoarDexEntry::
 	next "roar or bark that"
 	next "hurts the ears."
 
-	page "30% chance to"
+	bage "30% chance to"
 	next "lower ATTACK."
 	next "(ATTACK -1)"
 	dex
@@ -465,9 +465,9 @@ _SingDexEntry::
 	next "lulls the foe"
 	next "into deep sleep."
 
-	page "The foe falls"
+	bage "The foe falls"
 	next "asleep if it"
-	next "works."
+	next "works"
 	dex
 
 _SupersonicDexEntry::
@@ -475,8 +475,8 @@ _SupersonicDexEntry::
 	next "waves are emitted"
 	next "that may confuse."
 
-	page "Causes confusion"
-	next "if it works."
+	bage "Causes confusion"
+	next "if it works"
 	dex
 
 _SonicboomDexEntry::
@@ -484,9 +484,9 @@ _SonicboomDexEntry::
 	next "generates a "
 	next "shockwave."
 
-	page "Always does"
+	bage "Always does"
 	next "precisely 20"
-	next "damage."
+	next "damage"
 	dex
 
 _DisableDexEntry::
@@ -494,13 +494,13 @@ _DisableDexEntry::
 	next "disables one of"
 	next "the foe's moves."
 
-	page "Disables the last"
+	bage "Disables the last"
 	next "move used by foe"
 	next "for 2-8 turns,"
 
-	page "or a random move"
+	bage "or a random move"
 	next "if the foe didn't"
-	next "use any yet."
+	next "use any yet"
 	dex
 
 _AcidDexEntry::
@@ -508,7 +508,7 @@ _AcidDexEntry::
 	next "is unleashed on"
 	next "the opponent."
 
-	page "30% chance to"
+	bage "30% chance to"
 	next "lower DEFENSE."
 	next "(DEFENSE -1)"
 	dex
@@ -518,8 +518,8 @@ _EmberDexEntry::
 	next "small flames to"
 	next "scorch the foe."
 
-	page "10% chance of"
-	next "burning the foe."
+	bage "10% chance of"
+	next "burning the foe"
 	dex
 
 _FlamethrowerDexEntry::
@@ -527,12 +527,12 @@ _FlamethrowerDexEntry::
 	next "flame is blown"
 	next "at the opponent."
 
-	page "A famous and"
+	bage "A famous and"
 	next "beloved FIRE move"
 	next "for its power."
 
-	page "10% chance of"
-	next "burning the foe."
+	bage "10% chance of"
+	next "burning the foe"
 	dex
 
 _MistDexEntry::
@@ -540,16 +540,16 @@ _MistDexEntry::
 	next "cool white mist,"
 	next "enshrouding it."
 
-	page "Prevents stats"
+	bage "Prevents stats"
 	next "from decreasing"
 	next "from moves such"
 
-	page "as GROWL, SCREECH"
+	bage "as GROWL, SCREECH"
 	next "SMOKESCREEN, etc."
 
-	page "Lasts until the"
+	bage "Lasts until the"
 	next "user switches"
-	next "out or faints."
+	next "out or faints"
 	dex
 
 _WaterGunDexEntry::
@@ -557,8 +557,8 @@ _WaterGunDexEntry::
 	next "pressurized jet"
 	next "of water at foe."
 
-	page "No additional"
-	next "effect."
+	bage "No additional"
+	next "effect"
 	dex
 
 _HydroPumpDexEntry::
@@ -566,9 +566,9 @@ _HydroPumpDexEntry::
 	next "superpressurized"
 	next "water is blasted"
 
-	page "at the opponent."
+	bage "at the opponent."
 	next "No additional"
-	next "effect."
+	next "effect"
 	dex
 
 _SurfDexEntry::
@@ -576,12 +576,12 @@ _SurfDexEntry::
 	next "is flooded with"
 	next "deep water."
 
-	page "No additional"
+	bage "No additional"
 	next "effect."
 
-	page "Usable outside"
+	bage "Usable outside"
 	next "battle to travel"
-	next "over water."
+	next "over water"
 	dex
 
 _IceBeamDexEntry::
@@ -589,9 +589,9 @@ _IceBeamDexEntry::
 	next "of glacial ice"
 	next "is shot at the"
 
-	page "opponent."
+	bage "opponent."
 	next "10% chance of"
-	next "freezing the foe."
+	next "freezing the foe"
 	dex
 
 _BlizzardDexEntry::
@@ -599,9 +599,9 @@ _BlizzardDexEntry::
 	next "a powerful winter"
 	next "storm that"
 
-	page "batters the foe."
+	bage "batters the foe."
 	next "10% chance of"
-	next "freezing the foe."
+	next "freezing the foe"
 	dex
 
 _PsybeamDexEntry::
@@ -609,9 +609,9 @@ _PsybeamDexEntry::
 	next "of the user is"
 	next "focused into a"
 
-	page "strange beam."
-	page "10% chance of"
-	next "confusion."
+	bage "strange beam."
+	bage "10% chance of"
+	next "confusion"
 	dex
 
 _BubblebeamDexEntry::
@@ -619,7 +619,7 @@ _BubblebeamDexEntry::
 	next "is fired at the"
 	next "foe."
 
-	page "30% chance to"
+	bage "30% chance to"
 	next "lower SPEED."
 	next "(-1 SPEED)"
 	dex
@@ -629,11 +629,11 @@ _AuroraBeamDexEntry::
 	next "multicolored beam"
 	next "of light is shot"
 
-	page "at the opponent."
+	bage "at the opponent."
 	next "30% chance to"
 	next "lower ATTACK."
 
-	page "(-1 ATTACK)"
+	bage "(-1 ATTACK)"
 	dex
 
 _HyperBeamDexEntry::
@@ -641,17 +641,17 @@ _HyperBeamDexEntry::
 	next "the pure essence"
 	next "of destruction"
 
-	page "is fired mightily"
+	bage "is fired mightily"
 	next "at the foe in"
 	next "exalted glory."
 
-	page "After usage,"
+	bage "After usage,"
 	next "the user rests"
 	next "the next turn."
 
-	page "If the opponent"
+	bage "If the opponent"
 	next "faints, no rest"
-	next "is necessary."
+	next "is necessary"
 	dex
 
 _PeckDexEntry::
@@ -659,8 +659,8 @@ _PeckDexEntry::
 	next "the foe with"
 	next "a beak or horn."
 
-	page "No additional"
-	next "effect."
+	bage "No additional"
+	next "effect"
 	dex
 
 _DrillPeckDexEntry::
@@ -668,9 +668,9 @@ _DrillPeckDexEntry::
 	next "pecking attack"
 	next "with a beak/horn."
 
-	page "Causes opponent"
+	bage "Causes opponent"
 	next "to flinch 30% of"
-	next "the time."
+	next "the time"
 	dex
 
 _SubmissionDexEntry::
@@ -678,11 +678,11 @@ _SubmissionDexEntry::
 	next "the foe in a"
 	next "grappling hold"
 
-	page "that leaves the"
+	bage "that leaves the"
 	next "user at a big"
 	next "advantage."
 
-	page "Raises ATTACK."
+	bage "Raises ATTACK."
 	next "(ATTACK +1)"
 	dex
 
@@ -691,9 +691,9 @@ _LowKickDexEntry::
 	next "kick that can"
 	next "trip up the foe."
 
-	page "Causes opponent"
+	bage "Causes opponent"
 	next "to flinch 30% of"
-	next "the time."
+	next "the time"
 	dex
 
 _CounterDexEntry::
@@ -701,12 +701,12 @@ _CounterDexEntry::
 	next "technique that"
 	next "drains energy"
 
-	page "from the foe's"
+	bage "from the foe's"
 	next "fighting spirit."
 
-	page "Restores 50% of"
+	bage "Restores 50% of"
 	next "inflicted damage"
-	next "to the user's HP."
+	next "to the user's HP"
 	dex
 
 _SeismicTossDexEntry::
@@ -714,13 +714,13 @@ _SeismicTossDexEntry::
 	next "the foe in a"
 	next "dramatic spinning"
 
-	page "air drop aided"
+	bage "air drop aided"
 	next "by the power of"
 	next "gravity."
 
-	page "Does damage equal"
+	bage "Does damage equal"
 	next "to the current"
-	next "level of user."
+	next "level of user"
 	dex
 
 _StrengthDexEntry::
@@ -728,21 +728,21 @@ _StrengthDexEntry::
 	next "with a massive"
 	next "built up power."
 
-	page "No additional"
+	bage "No additional"
 	next "effect."
 
-	page "Usable outside of"
+	bage "Usable outside of"
 	next "battle to push"
-	next "heavy objects."
+	next "heavy objects"
 	dex
 
 _AbsorbDexEntry::
 	text "Drains nutrients"
 	next "from the foe."
 
-	page "Restores 50% of"
+	bage "Restores 50% of"
 	next "inflicted damage"
-	next "to the user's HP."
+	next "to the user's HP"
 	dex
 
 _MegaDrainDexEntry::
@@ -750,9 +750,9 @@ _MegaDrainDexEntry::
 	next "many nutrients"
 	next "from the foe."
 
-	page "Restores 50% of"
+	bage "Restores 50% of"
 	next "inflicted damage"
-	next "to the user's HP."
+	next "to the user's HP"
 	dex
 
 _LeechSeedDexEntry::
@@ -760,21 +760,21 @@ _LeechSeedDexEntry::
 	next "sprout and slowly"
 	next "drain energy."
 
-	page "Saps health from"
+	bage "Saps health from"
 	next "the opponent each"
 	next "of their turns."
 
-	page "Restores 50% of"
+	bage "Restores 50% of"
 	next "inflicted damage"
 	next "to the user's HP."
 
-	page "The seeds stay"
+	bage "The seeds stay"
 	next "until the foe"
 	next "faints/switches."
 
-	page "Doesn't work on"
+	bage "Doesn't work on"
 	next "GRASS-type"
-	next "<MON>."
+	next "#MON"
 	dex
 
 _GrowthDexEntry::
@@ -782,11 +782,11 @@ _GrowthDexEntry::
 	next "larger or heals"
 	next "its body,"
 
-	page "usually with"
+	bage "usually with"
 	next "photosynthesis."
 
-	page "Heals half of"
-	next "user's max HP."
+	bage "Heals half of"
+	next "user's max HP"
 	dex
 
 _RazorLeafDexEntry::
@@ -794,17 +794,17 @@ _RazorLeafDexEntry::
 	next "sharp leaves are"
 	next "hurled at foe."
 
-	page "Often lands"
-	next "critical hits."
+	bage "Often lands"
+	next "critical hits"
 	dex
 
-_SolarBeamDexEntry::
+_SolarbeamDexEntry::
 	text "Focuses sunlight"
 	next "into a powerful"
 	next "searing beam."
 
-	page "10% chance of"
-	next "burning the foe."
+	bage "10% chance of"
+	next "burning the foe"
 	dex
 
 _PoisonPowderDexEntry::
@@ -812,12 +812,12 @@ _PoisonPowderDexEntry::
 	next "cloud is spread"
 	next "around the foe."
 
-	page "Poisons the foe"
+	bage "Poisons the foe"
 	next "if it works."
 
-	page "Doesn't work on"
+	bage "Doesn't work on"
 	next "POISON-type"
-	next "<MON>."
+	next "#MON"
 	dex
 
 _StunSporeDexEntry::
@@ -825,8 +825,8 @@ _StunSporeDexEntry::
 	next "cloud is spread"
 	next "around the foe."
 
-	page "Paralyzes the foe"
-	next "if it works."
+	bage "Paralyzes the foe"
+	next "if it works"
 	dex
 
 _SleepPowderDexEntry::
@@ -834,9 +834,9 @@ _SleepPowderDexEntry::
 	next "sleep-inducing"
 	next "dust is spread."
 
-	page "Puts the foe to"
+	bage "Puts the foe to"
 	next "sleep if it"
-	next "works."
+	next "works"
 	dex
 
 _PetalDanceDexEntry::
@@ -844,13 +844,13 @@ _PetalDanceDexEntry::
 	next "by spreading"
 	next "petals all over."
 
-	page "It then becomes"
+	bage "It then becomes"
 	next "fixated on this"
 	next "flowery dance."
 
-	page "Lasts 2-3 turns."
+	bage "Lasts 2-3 turns."
 	next "Causes confusion"
-	next "to user after."
+	next "to user after"
 	dex
 
 _StringShotDexEntry::
@@ -858,7 +858,7 @@ _StringShotDexEntry::
 	next "sticky ropes of"
 	next "silk at the foe."
 
-	page "Lowers foe's"
+	bage "Lowers foe's"
 	next "SPEED stat."
 	next "(SPEED -1)"
 	dex
@@ -868,8 +868,8 @@ _DragonRageDexEntry::
 	next "by a shockwave of"
 	next "draconic rage."
 
-	page "No additional"
-	next "effect."
+	bage "No additional"
+	next "effect"
 	dex
 
 _FireSpinDexEntry::
@@ -877,18 +877,18 @@ _FireSpinDexEntry::
 	next "of fire surrounds"
 	next "the opponent."
 
-	page "The foe can't"
+	bage "The foe can't"
 	next "move for 2-3"
-	next "turns."
+	next "turns"
 	dex
 
 _ThundershockDexEntry::
 	text "A basic electric"
 	next "shock move."
 
-	page "10% chance of"
+	bage "10% chance of"
 	next "paralyzing the"
-	next "opponent."
+	next "opponent"
 	dex
 
 _ThunderboltDexEntry::
@@ -896,13 +896,13 @@ _ThunderboltDexEntry::
 	next "100,000 volts of"
 	next "electricity."
 
-	page "A move with many"
+	bage "A move with many"
 	next "fans due to its"
 	next "power/flashiness."
 
-	page "10% chance of"
+	bage "10% chance of"
 	next "paralyzing the"
-	next "opponent."
+	next "opponent"
 	dex
 
 _ThunderWaveDexEntry::
@@ -910,11 +910,11 @@ _ThunderWaveDexEntry::
 	next "electromagnetic"
 	next "wave that rapidly"
 
-	page "paralyzes the"
+	bage "paralyzes the"
 	next "foe."
 
-	page "Useful due to its"
-	next "great accuracy."
+	bage "Useful due to its"
+	next "great accuracy"
 	dex
 
 _ThunderDexEntry::
@@ -922,20 +922,20 @@ _ThunderDexEntry::
 	next "is conjured up,"
 	next "dropping a"
 
-	page "titanic lightning"
+	bage "titanic lightning"
 	next "bolt on the foe."
 
-	page "10% chance of"
+	bage "10% chance of"
 	next "paralyzing the"
-	next "opponent."
+	next "opponent"
 	dex
 
 _RockThrowDexEntry::
 	text "Rocks are dropped"
 	next "on the foe."
 
-	page "No additional"
-	next "effect."
+	bage "No additional"
+	next "effect"
 	dex
 
 _EarthquakeDexEntry::
@@ -943,12 +943,12 @@ _EarthquakeDexEntry::
 	next "off a powerful"
 	next "earthquake."
 
-	page "Commonly referred"
+	bage "Commonly referred"
 	next "to by trainers as"
-	next "'Old Reliable'."
+	next "-Old Reliable-"
 
-	page "No additional"
-	next "effect."
+	bage "No additional"
+	next "effect"
 	dex
 
 _FissureDexEntry::
@@ -956,16 +956,16 @@ _FissureDexEntry::
 	next "a wide split in"
 	next "the earth's crust"
 
-	page "that swallows the"
+	bage "that swallows the"
 	next "foe completely."
 
-	page "Always KOs the"
+	bage "Always KOs the"
 	next "opponent, but"
 	next "misses a lot."
 
-	page "Doesn't work on"
-	next "higher level"
-	next "<MON>."
+	bage "Doesn't work on"
+	next "opponents with"
+	next "higher SPEED"
 	dex
 
 _DigDexEntry::
@@ -973,16 +973,16 @@ _DigDexEntry::
 	next "for 1 turn, then"
 	next "suddenly emerges"
 
-	page "to strike the foe"
+	bage "to strike the foe"
 	next "the next turn."
 
-	page "While underground"
+	bage "While underground"
 	next "the user cannot"
 	next "be hit by moves."
 
-	page "Usable outside"
+	bage "Usable outside"
 	next "battle to dig out"
-	next "of caves."
+	next "of caves"
 	dex
 
 _ToxicDexEntry::
@@ -990,12 +990,12 @@ _ToxicDexEntry::
 	next "of poison are"
 	next "sprayed all over."
 
-	page "Badly poisons the"
+	bage "Badly poisons the"
 	next "foe if it hits."
 
-	page "The damage poison"
+	bage "The damage poison"
 	next "does to the foe"
-	next "grows each turn."
+	next "grows each turn"
 	dex
 
 _ConfusionDexEntry::
@@ -1003,8 +1003,8 @@ _ConfusionDexEntry::
 	next "powers to confuse"
 	next "the foe's mind."
 
-	page "Causes confusion"
-	text "10% of the time."
+	bage "Causes confusion"
+	next "10% of the time"
 	dex
 
 _PsychicDexEntry::
@@ -1012,11 +1012,11 @@ _PsychicDexEntry::
 	next "is unleashed,"
 	next "striking the foe."
 
-	page "Few foes resist"
+	bage "Few foes resist"
 	next "this fantastic"
 	next "psychic move."
 
-	page "30% chance to"
+	bage "30% chance to"
 	next "lower SPECIAL."
 	next "(-1 SPECIAL)"
 	dex
@@ -1026,8 +1026,8 @@ _HypnosisDexEntry::
 	next "tized into a deep"
 	next "sleep."
 
-	page "Puts the foe to"
-	next "sleep if it hits."
+	bage "Puts the foe to"
+	next "sleep if it hits"
 	dex
 
 _MeditateDexEntry::
@@ -1035,25 +1035,25 @@ _MeditateDexEntry::
 	next "meant for deep"
 	next "contemplation,"
 
-	page "the user relaxes,"
+	bage "the user relaxes,"
 	next "raising many of"
 	next "its abilities."
 
-	page "Raises ATTACK,"
+	bage "Raises ATTACK,"
 	next "SPECIAL, and"
 	next "SPEED. (+1 Each)"
-	next
+	dex
 
 _AgilityDexEntry::
 	text "A burst of"
 	next "adrenaline enters"
 	next "the user's system"
 
-	page "letting it move"
+	bage "letting it move"
 	next "with a newfound"
 	next "blinding speed."
 
-	page "Greatly raises"
+	bage "Greatly raises"
 	next "user's SPEED."
 	next "(+2 SPEED)"
 	dex
@@ -1062,8 +1062,8 @@ _QuickAttackDexEntry::
 	text "A super fast"
 	next "lunging attack."
 
-	page "Always goes"
-	next "first."
+	bage "Always goes"
+	next "first"
 	dex
 
 _RageDexEntry::
@@ -1071,7 +1071,7 @@ _RageDexEntry::
 	next "pent up anger on"
 	next "the foe."
 
-	page "Raises the user's"
+	bage "Raises the user's"
 	next "ATTACK."
 	next "(+1 ATTACK)"
 	dex
@@ -1080,19 +1080,19 @@ _TeleportDexEntry::
 	text "The user teleports"
 	next "away from battle."
 
-	page "Escapes wild"
-	next "<MON> battles."
+	bage "Escapes wild"
+	next "#MON battles."
 
-	page "Doesn't do"
+	bage "Doesn't do"
 	next "anything in"
 	next "trainer battles."
 
-	page "Can be used"
+	bage "Can be used"
 	next "outside battle to"
 	next "travel back to"
 
-	page "the last <MON>"
-	next "CENTER."
+	bage "the last #MON"
+	next "CENTER"
 	dex
 
 _NightShadeDexEntry::
@@ -1100,8 +1100,8 @@ _NightShadeDexEntry::
 	next "engulfs the foe,"
 	next "scaring them."
 
-	page "No additional"
-	next "effect."
+	bage "No additional"
+	next "effect"
 	dex
 
 _MimicDexEntry::
@@ -1109,16 +1109,16 @@ _MimicDexEntry::
 	next "one of the foe's"
 	next "moves."
 
-	page "The move can be"
+	bage "The move can be"
 	next "chosen, and is"
 	next "learned for the"
 
-	page "rest of the"
+	bage "rest of the"
 	next "battle."
 
-	page "It is used right"
+	bage "It is used right"
 	next "away after being"
-	next "mimicked."
+	next "mimicked"
 	dex
 
 _ScreechDexEntry::
@@ -1126,7 +1126,7 @@ _ScreechDexEntry::
 	next "noise is emitted"
 	next "by the user."
 
-	page "Greatly lowers"
+	bage "Greatly lowers"
 	next "foe's DEFENSE."
 	next "(-2 DEFENSE)"
 	dex
@@ -1136,11 +1136,11 @@ _DoubleTeamDexEntry::
 	next "many afterimages"
 	next "of itself to"
 
-	page "decrease chances"
+	bage "decrease chances"
 	next "of being hit and"
 	next "confuse the foe."
 
-	page "Raises user's"
+	bage "Raises user's"
 	next "EVASION."
 	next "(+1 EVASION)"
 	dex
@@ -1150,8 +1150,8 @@ _RecoverDexEntry::
 	next "cells to heal"
 	next "user's damage."
 
-	page "Heals half of"
-	next "user's max HP."
+	bage "Heals half of"
+	next "user's max HP"
 	dex
 
 _HardenDexEntry::
@@ -1159,7 +1159,7 @@ _HardenDexEntry::
 	next "the user gets"
 	next "harder."
 
-	page "Raises user's"
+	bage "Raises user's"
 	next "DEFENSE."
 	next "(+1 DEFENSE)"
 	dex
@@ -1169,7 +1169,7 @@ _MinimizeDexEntry::
 	next "to a tiny size to"
 	next "avoid being hit."
 
-	page "Raises user's"
+	bage "Raises user's"
 	next "EVASION."
 	next "(+1 EVASION)"
 	dex
@@ -1179,7 +1179,7 @@ _SmokescreenDexEntry::
 	next "shot everywhere,"
 	next "blinding the foe."
 
-	page "Lowers foe's"
+	bage "Lowers foe's"
 	next "ACCURACY."
 	next "(-1 ACCURACY)"
 	dex
@@ -1189,7 +1189,7 @@ _ConfuseRayDexEntry::
 	next "light confuse the"
 	next "opponent."
 
-	page "Causes confusion."
+	bage "Causes confusion"
 	dex
 
 _WithdrawDexEntry::
@@ -1197,8 +1197,8 @@ _WithdrawDexEntry::
 	next "its shell/cover"
 	next "of any kind."
 
-	page "Heals half of"
-	next "user's max HP."
+	bage "Heals half of"
+	next "user's max HP"
 	dex
 
 _DefenseCurlDexEntry::
@@ -1206,9 +1206,9 @@ _DefenseCurlDexEntry::
 	next "ball that raises"
 	next "defensibility."
 
-	page "Cuts SPECIAL"
+	bage "Cuts SPECIAL"
 	next "attack damage"
-	next "in half."
+	next "in half"
 	dex
 
 _BarrierDexEntry::
@@ -1216,7 +1216,7 @@ _BarrierDexEntry::
 	next "barrier is raised"
 	next "by the user."
 
-	page "Greatly raises"
+	bage "Greatly raises"
 	next "user's DEFENSE."
 	next "(+2 DEFENSE)"
 	dex
@@ -1226,36 +1226,36 @@ _LightScreenDexEntry::
 	next "of light is risen"
 	next "by the user."
 
-	page "Cuts SPECIAL"
+	bage "Cuts SPECIAL"
 	next "attack damage"
 	next "in half."
 
-	page "This effect only"
+	bage "This effect only"
 	next "applies to the"
-	next "original user."
+	next "original user"
 	dex
 
 _HazeDexEntry::
 	text "Black haze is"
 	next "spread about."
 
-	page "Resets all stat"
+	bage "Resets all stat"
 	next "changes."
 
-	page "Also resets"
+	bage "Also resets"
 	next "effects of these"
 	next "moves:"
 
-	page "FOCUS ENERGY,"
+	bage "FOCUS ENERGY,"
 	next "MIST, LEECH SEED,"
 	next "DISABLE."
 
-	page "Also resets"
+	bage "Also resets"
 	next "items: DIRE HIT,"
 	next "GUARD SPEC."
 
-	page "Also cures"
-	next "confusion."
+	bage "Also cures"
+	next "confusion"
 	dex
 
 _ReflectDexEntry::
@@ -1263,13 +1263,13 @@ _ReflectDexEntry::
 	next "of light is risen"
 	next "by the user."
 
-	page "Cuts physical"
+	bage "Cuts physical"
 	next "attack damage"
 	next "in half."
 
-	page "This effect only"
+	bage "This effect only"
 	next "applies to the"
-	next "original user."
+	next "original user"
 	dex
 
 _FocusEnergyDexEntry::
@@ -1277,13 +1277,13 @@ _FocusEnergyDexEntry::
 	next "deep breath and"
 	next "focuses, raising"
 
-	page "its fighting"
+	bage "its fighting"
 	next "spirit with sheer"
 	next "power of will."
 
-	page "Raises chance of"
+	bage "Raises chance of"
 	next "landing critical"
-	next "hits by 4×."
+	next "hits by 4×"
 	dex
 
 _BideDexEntry::
@@ -1291,7 +1291,7 @@ _BideDexEntry::
 	next "itself, raising"
 	next "physical prowess."
 
-	page "Raises ATTACK"
+	bage "Raises ATTACK"
 	next "and DEFENSE."
 	next "(+1 Each)"
 	dex
@@ -1301,9 +1301,9 @@ _MetronomeDexEntry::
 	next "a finger, and"
 	next "otherworldly"
 
-	page "magic causes a"
+	bage "magic causes a"
 	next "random attack to"
-	next "suddenly occur."
+	next "suddenly occur"
 	dex
 
 _MirrorMoveDexEntry::
@@ -1311,25 +1311,25 @@ _MirrorMoveDexEntry::
 	next "move any foe"
 	next "used."
 
-	page "Always goes"
+	bage "Always goes"
 	next "first."
 
-	page "Fails if no foe"
+	bage "Fails if no foe"
 	next "has attacked"
-	next "yet."
+	next "yet"
 	dex
 
-_SelfDestructDexEntry::
+_SelfdestructDexEntry::
 	text "The user explodes"
 	next "in a giant fiery"
 	next "fulmination."
 
-	page "Does heavy recoil"
+	bage "Does heavy recoil"
 	next "damage to the"
 	next "user;"
 
-	page "half the damage"
-	next "inflicted."
+	bage "half the damage"
+	next "inflicted"
 	dex
 
 _EggBombDexEntry::
@@ -1337,12 +1337,12 @@ _EggBombDexEntry::
 	next "egg or an egg-"
 	next "shaped bomb is"
 
-	page "hurled at the"
+	bage "hurled at the"
 	next "opponent, causing"
 	next "an explosion."
 
-	page "No additional"
-	next "effect."
+	bage "No additional"
+	next "effect"
 	dex
 
 _LickDexEntry::
@@ -1350,9 +1350,9 @@ _LickDexEntry::
 	next "the opponent with"
 	next "a long tongue."
 
-	page "10% chance of"
+	bage "10% chance of"
 	next "paralyzing the"
-	next "opponent."
+	next "opponent"
 	dex
 
 _SmogDexEntry::
@@ -1360,9 +1360,9 @@ _SmogDexEntry::
 	next "toxic smog wafts"
 	next "toward the foe."
 
-	page "40% chance of"
+	bage "40% chance of"
 	next "poisoning the"
-	next "opponent."
+	next "opponent"
 	dex
 
 _SludgeDexEntry::
@@ -1370,13 +1370,13 @@ _SludgeDexEntry::
 	next "sludge covers the"
 	next "foe's body."
 
-	page "Its acidity can"
+	bage "Its acidity can"
 	next "melt surfaces"
 	next "easily."
 
-	page "40% chance of"
+	bage "40% chance of"
 	next "poisoning the"
-	next "opponent."
+	next "opponent"
 	dex
 
 _BoneClubDexEntry::
@@ -1384,9 +1384,9 @@ _BoneClubDexEntry::
 	next "to club the"
 	next "opponent."
 
-	page "Causes opponent"
+	bage "Causes opponent"
 	next "to flinch 10% of"
-	next "the time."
+	next "the time"
 	dex
 
 _FireBlastDexEntry::
@@ -1394,9 +1394,9 @@ _FireBlastDexEntry::
 	next "of all-consuming"
 	next "fire engulfs the"
 
-	page "opponent."
+	bage "opponent."
 	next "30% chance to"
-	next "burn the foe."
+	next "burn the foe"
 	dex
 
 _WaterfallDexEntry::
@@ -1404,13 +1404,13 @@ _WaterfallDexEntry::
 	next "up by rushing"
 	next "water."
 
-	page "Has enough power"
+	bage "Has enough power"
 	next "behind it to"
 	next "climb waterfalls."
 
-	page "Causes opponent"
+	bage "Causes opponent"
 	next "to flinch 30% of"
-	next "the time."
+	next "the time"
 	dex
 
 _ClampDexEntry::
@@ -1418,12 +1418,12 @@ _ClampDexEntry::
 	next "with a valved"
 	next "shell, jaws,"
 
-	page "or powerful"
+	bage "or powerful"
 	next "magnetism."
 
-	page "The foe can't"
+	bage "The foe can't"
 	next "move for 2-3"
-	next "turns."
+	next "turns"
 	dex
 
 _SwiftDexEntry::
@@ -1431,13 +1431,13 @@ _SwiftDexEntry::
 	next "of light are shot"
 	next "at the foe."
 
-	page "Nicknamed"
-	next "'Speed Star'"
+	bage "Nicknamed"
+	next "-Speed Star-"
 	next "by trainers."
 
-	page "Always goes"
+	bage "Always goes"
 	next "first and"
-	next "never misses."
+	next "never misses"
 	dex
 
 _SkullBashDexEntry::
@@ -1445,13 +1445,13 @@ _SkullBashDexEntry::
 	next "rocket and slams"
 	next "the foe with a"
 
-	page "rock-hard skull."
+	bage "rock-hard skull."
 	next "Does damage to"
 	next "user on missing."
 
-	page "25% of the damage"
+	bage "25% of the damage"
 	next "it would have"
-	next "done to the foe."
+	next "done to the foe"
 	dex
 
 _SpikeCannonDexEntry::
@@ -1459,8 +1459,8 @@ _SpikeCannonDexEntry::
 	next "are fired at high"
 	next "velocity at the"
 
-	page "opponent."
-	next "Hits 2-3 times."
+	bage "opponent."
+	next "Hits 2-3 times"
 	dex
 
 _ConstrictDexEntry::
@@ -1468,13 +1468,13 @@ _ConstrictDexEntry::
 	next "snared with an"
 	next "electrostatically"
 
-	page "charged tendril"
+	bage "charged tendril"
 	next "or tail, electro-"
 	next "cuting the foe."
 
-	page "30% chance of"
+	bage "30% chance of"
 	next "paralyzing the"
-	next "opponent."
+	next "opponent"
 	dex
 
 _AmnesiaDexEntry::
@@ -1482,7 +1482,7 @@ _AmnesiaDexEntry::
 	next "its mind to"
 	next "forget concerns."
 
-	page "Greatly raises"
+	bage "Greatly raises"
 	next "user's SPECIAL."
 	next "(+2 SPECIAL)"
 	dex
@@ -1491,24 +1491,24 @@ _KinesisDexEntry::
 	text "A wall of fire"
 	next "scorches the foe."
 
-	page "Causes burn if"
+	bage "Causes burn if"
 	next "it works."
 
-	page "Doesn't work on"
+	bage "Doesn't work on"
 	next "FIRE-type"
-	next "<MON>."
+	next "#MON"
 	dex
 
 _SoftboiledDexEntry::
 	text "A delicious egg"
 	next "heals the user."
 
-	page "Heals half of"
+	bage "Heals half of"
 	next "user's max HP."
 
-	page "Usable outside"
+	bage "Usable outside"
 	next "battle to heal"
-	next "other <MON>."
+	next "other #MON"
 	dex
 
 _HiJumpKickDexEntry::
@@ -1516,15 +1516,15 @@ _HiJumpKickDexEntry::
 	next "high in the air"
 	next "to deliver a"
 
-	page "world-shattering"
+	bage "world-shattering"
 	next "hyper-kick."
 
-	next "Does damage to"
+	bage "Does damage to"
 	next "user on missing."
 
-	page "25% of the damage"
+	bage "25% of the damage"
 	next "it would have"
-	next "done to the foe."
+	next "done to the foe"
 	dex
 
 _GlareDexEntry::
@@ -1532,12 +1532,12 @@ _GlareDexEntry::
 	next "transfixed by"
 	next "terrifying eyes,"
 
-	page "scaring it into"
+	bage "scaring it into"
 	next "being unable"
 	next "to move."
 
-	page "Paralyzes the"
-	next "opponent."
+	bage "Paralyzes the"
+	next "opponent"
 	dex
 
 _DreamEaterDexEntry::
@@ -1545,13 +1545,13 @@ _DreamEaterDexEntry::
 	next "foe's dreams to"
 	next "regain HP."
 
-	page "Restores 50% of"
+	bage "Restores 50% of"
 	next "inflicted damage"
 	next "to the user's HP."
 
-	page "Only works when"
+	bage "Only works when"
 	next "the opponent is"
-	next "asleep."
+	next "asleep"
 	dex
 
 _PoisonGasDexEntry::
@@ -1559,12 +1559,12 @@ _PoisonGasDexEntry::
 	next "of corrosive"
 	next "choking gas."
 
-	page "Often lands"
+	bage "Often lands"
 	next "critical hits."
 
-	page "10% chance of"
+	bage "10% chance of"
 	next "poisoning the"
-	next "opponent."
+	next "opponent"
 	dex
 
 _BarrageDexEntry::
@@ -1572,11 +1572,11 @@ _BarrageDexEntry::
 	next "strange energy"
 	next "at the foe."
 
-	page "Where these"
+	bage "Where these"
 	next "ghostly orbs come"
 	next "from is unknown."
 
-	page "Hits twice."
+	bage "Hits twice"
 	dex
 
 _LeechLifeDexEntry::
@@ -1584,9 +1584,9 @@ _LeechLifeDexEntry::
 	next "energy from the"
 	next "foe's life force."
 
-	page "Restores 50% of"
+	bage "Restores 50% of"
 	next "inflicted damage"
-	next "to the user's HP."
+	next "to the user's HP"
 	dex
 
 _LovelyKissDexEntry::
@@ -1594,8 +1594,8 @@ _LovelyKissDexEntry::
 	next "bestowed on the"
 	next "foe, lulling it"
 
-	page "into a deep sleep"
-	next "if it works."
+	bage "into a deep sleep"
+	next "if it works"
 	dex
 
 _SkyAttackDexEntry::
@@ -1603,32 +1603,32 @@ _SkyAttackDexEntry::
 	next "speed attack"
 	next "in which the user"
 
-	page "flies into the"
+	bage "flies into the"
 	next "stratosphere in"
 	next "seconds for the"
 
-	page "ultimate glowing"
+	bage "ultimate glowing"
 	next "meteor dive-bomb."
 
-	page "User takes 25%"
+	bage "User takes 25%"
 	next "of damage done"
-	next "to foe as recoil."
+	next "to foe as recoil"
 	dex
 
 _TransformDexEntry::
 	text "Transforms into"
 	next "the opponent"
-	next "<MON>."
+	next "#MON."
 
-	page "All stats and"
+	bage "All stats and"
 	next "moves are copied."
 	next "(Except HP)"
 
-	page "Always goes"
+	bage "Always goes"
 	next "first."
 
-	page "Lasts until the"
-	next "end of battle."
+	bage "Lasts until the"
+	next "end of battle"
 	dex
 
 _BubbleDexEntry::
@@ -1636,18 +1636,18 @@ _BubbleDexEntry::
 	next "that bursts in"
 	next "the foe's face."
 	
-	page "30% chance to"
+	bage "30% chance to"
 	next "lower SPEED."
 	next "(-1 SPEED)"
 	dex 
 
-_DizzyPunchEntry::
+_DizzyPunchDexEntry::
 	text "A rhythmic punch"
 	next "that leaves the"
 	next "foe reeling."
 
-	page "Causes confusion"
-	next "30% of the time."
+	bage "Causes confusion"
+	next "30% of the time"
 	dex
 
 _SporeDexEntry::
@@ -1655,11 +1655,11 @@ _SporeDexEntry::
 	next "spores densely"
 	next "fill the air,"
 
-	page "tranquilizing"
+	bage "tranquilizing"
 	next "the opponent."
 
-	page "Causes the foe"
-	next "to fall asleep."
+	bage "Causes the foe"
+	next "to fall asleep"
 	dex
 
 _FlashDexEntry::
@@ -1667,16 +1667,16 @@ _FlashDexEntry::
 	next "flash blinds the"
 	next "foe."
 
-	page "Usually caused"
+	bage "Usually caused"
 	next "by a powerful"
 	next "electric arc."
 
-	page "Always goes"
+	bage "Always goes"
 	next "first."
 
-	page "Causes the foe to"
+	bage "Causes the foe to"
 	next "flinch 10% of the"
-	next "time."
+	next "time"
 	dex
 
 _PsywaveDexEntry::
@@ -1684,7 +1684,7 @@ _PsywaveDexEntry::
 	next "wave hits the"
 	next "opponent."
 
-	page "30% chance to"
+	bage "30% chance to"
 	next "lower SPECIAL."
 	next "(-1 SPECIAL)"
 	dex
@@ -1694,7 +1694,7 @@ _SplashDexEntry::
 	next "around"
 	next "pointlessly."
 
-	page "No effect at all."
+	bage "No effect at all"
 	dex
 
 _AcidArmorDexEntry::
@@ -1702,11 +1702,11 @@ _AcidArmorDexEntry::
 	next "its cellular"
 	next "structure causing"
 
-	page "it to liquify for"
+	bage "it to liquify for"
 	next "additional"
 	next "protection."
 
-	page "Greatly raises"
+	bage "Greatly raises"
 	next "user's DEFENSE."
 	next "(+2 DEFENSE)"
 	dex
@@ -1716,12 +1716,12 @@ _CrabhammerDexEntry::
 	next "down mercilessly"
 	next "on the opponent"
 
-	page "with a pincer,"
+	bage "with a pincer,"
 	next "fist, or blunt"
 	next "edge."
 
-	page "Often lands"
-	next "critical hits."
+	bage "Often lands"
+	next "critical hits"
 	dex
 
 _ExplosionDexEntry::
@@ -1729,13 +1729,13 @@ _ExplosionDexEntry::
 	next "like a giant bomb"
 	next "that sends rocky"
 
-	page "shrapnel out at"
+	bage "shrapnel out at"
 	next "supersonic speed."
 	next "Does heavy recoil"
 	
-	page "damage to the"
+	bage "damage to the"
 	next "user; half the"
-	next "damage inflicted."
+	next "damage inflicted"
 	dex
 
 _FurySwipesDexEntry::
@@ -1743,8 +1743,8 @@ _FurySwipesDexEntry::
 	next "with dust-ridden"
 	next "claws."
 
-	page "No additional"
-	next "effect."
+	bage "No additional"
+	next "effect"
 	dex
 
 _BonemerangDexEntry::
@@ -1752,10 +1752,10 @@ _BonemerangDexEntry::
 	next "like a boomerang"
 	next "to strike the foe"
 
-	page "2 times in quick"
+	bage "2 times in quick"
 	next "succession."
 
-	page "30% chance to"
+	bage "30% chance to"
 	next "lower SPEED."
 	next "(-1 SPEED)"
 	dex
@@ -1765,13 +1765,13 @@ _RestDexEntry::
 	next "asleep, healing"
 	next "all damage."
 
-	page "Heals to full"
+	bage "Heals to full"
 	next "HP and heals all"
 	next "status ailments."
 
-	page "The user sleeps"
+	bage "The user sleeps"
 	next "for exactly 2"
-	next "turns."
+	next "turns"
 	dex
 
 _RockSlideDexEntry::
@@ -1779,96 +1779,17 @@ _RockSlideDexEntry::
 	next "rocks rain on"
 	next "top of the foe."
 
-	page "Causes the foe to"
+	bage "Causes the foe to"
 	next "flinch 10% of the"
-	next "time."
+	next "time"
 	dex
 
 _HyperFangDexEntry::
 	text "Giant teeth gnash"
 	next "the opponent."
 
-	page "Causes the foe to"
+	bage "Causes the foe to"
 	next "flinch 10% of the"
-	next "time."
+	next "time"
 	dex
 
-_SharpenDexEntry::
-	text "The user sharpens"
-	next "its claws or"
-	next "edges."
-
-	page "Raises ATTACK"
-	next "and ACCURACY."
-	next "(+1 Each)"
-	dex
-
-_ConversionDexEntry::
-	text "The user analyzes"
-	next "the opponent and"
-	next "upgrades its body"
-
-	page "to be better"
-	next "suited for taking"
-	next "down its enemy."
-
-	page "Greatly raises"
-	next "user's SPECIAL."
-	next "(+2 SPECIAL)"
-	dex
-
-_TriAttackDexEntry::
-	text "Shoots triangles"
-	next "with properties"
-	next "of 3 elements:"
-
-	page "Fire, ice, and"
-	next "electricity."
-
-	page "10% chance each"
-	next "of burn, freeze"
-	next "or paralysis."
-	dex
-
-_SuperFangDexEntry::
-	text "The user chomps"
-	next "hard on the"
-	next "foe with razor"
-
-	page "-sharp front"
-	next "fangs."
-
-	page "Always does 2/3"
-	next "of the opponent's"
-	next "current HP."
-	dex
-
-_SlashDexEntry::
-	text "User heavily"
-	next "slashes the foe"
-	next "with claws or"
-
-	page "anything sharp."
-	next "Often lands"
-	next "critical hits."
-	dex
-
-_SubstituteDexEntry::
-	text "A decoy doll"
-	next "replaces the user"
-	next "and takes damage"
-
-	page "instead of it."
-	next "Need to sacrifice"
-	next "1/4 HP to use."
-	dex
-
-_StruggleDexEntry::
-	text "A last ditch"
-	next "move only usable"
-	next "when all moves"
-
-	page "have 0 PP left."
-	next "Does heavy recoil"
-	next "to the user."
-	dex

@@ -3258,6 +3258,8 @@ playPlayerMoveAnimation:
 	pop af
 	ld [wAnimationType], a
 	ld a, [wPlayerMoveNum]
+	ld hl, wBattleFunctionalFlags
+	set 0, [hl]
 	call PlayMoveAnimation
 	call HandleExplodingAnimation
 	call DrawPlayerHUDAndHPBar
@@ -5262,6 +5264,8 @@ MetronomePickMove:
 	xor a
 	ld [wAnimationType], a
 	ld a, METRONOME
+	ld hl, wBattleFunctionalFlags
+	set 0, [hl] ; metronome will be marked off on the movedex
 	call PlayMoveAnimation ; play Metronome's animation
 ; values for player turn
 	ld de, wPlayerMoveNum
@@ -5977,6 +5981,8 @@ playEnemyMoveAnimation:
 	pop af
 	ld [wAnimationType], a
 	ld a, [wEnemyMoveNum]
+	ld hl, wBattleFunctionalFlags
+	set 0, [hl]
 	call PlayMoveAnimation
 	call HandleExplodingAnimation
 	call DrawEnemyHUDAndHPBar
@@ -7393,7 +7399,7 @@ CheckTrainerPicBank:
 	ld a, BANK(RedPicFront)
 	ret
 .defaultSprite
-	ld a, [wUnusedD119]
+	ld a, [wWhichTrainerClass]
 	cp OPP_COOL_KID
 	ld a, BANK("Pics 6") ; this is where most of the trainer pics are
 	jr c, .isDefault

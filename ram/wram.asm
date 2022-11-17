@@ -1689,6 +1689,7 @@ wMoveNum:: db
 wItemList:: 
 wMovesString:: ds 56
 
+wWhichTrainerClass:: ; PureRGBnote: ADDED: indicates which trainer class is being battled - lasts until the very end of battle
 wUnusedD119:: db
 
 ; wWalkBikeSurfState is sometimes copied here, but it doesn't seem to be used for anything
@@ -1785,8 +1786,11 @@ wSavedSpriteMapX:: db
 	ds 3 ; unused 3 bytes
 
 ;;; PureRGBnote: ADDED: new properties in this previously empty space
+wDexMinSeenMon::
 wWhatStat:: db ; contains the stat currently being modified by a stat changing move
-wWhichStatMod:: db ; contains the stat mod type currently being carried out
+; bit 0 = set to 1 when we should mark a move as seen in the movedex flags on showing its animation, 0 otherwise
+; bit 1-7 = unused
+wBattleFunctionalFlags:: db
 ;;;
 
 wWhichPrize:: db
@@ -1880,18 +1884,32 @@ wPokedexOwnedEnd::
 wPokedexSeen:: flag_array NUM_POKEMON - 1 ; PureRGBnote: CHANGED: discount missingno since it doesn't appear in the dex - size remains the same as original
 wPokedexSeenEnd::
 
-;;;;; PureRGBnote: CHANGED: bag item size increased so now we have a bunch of empty space here
+;;;;; PureRGBnote: CHANGED: bag item size increased so now we have a bunch of space here 
+;;;;; (wNumBagItems and wBagItems used to be here, and used 42 bytes of space)
+
 UNION
 
-ds 42 ; wNumBagItems and wBagItems used to be here
+ds 20 ; 20 of the 42 bytes of space are alotted to new missable object flags
 
 NEXTU
 
 ; PureRGBnote: ADDED: we use this empty space currently for a store of extra flags to hide/show objects in the safari zone.
-wExtraMissableObjectFlags:: flag_array NUM_EXTRA_HS_OBJECTS ; max size 42 bytes
+wExtraMissableObjectFlags:: flag_array NUM_EXTRA_HS_OBJECTS ; max size 20 bytes or 152 flags (currently around 35 flags are used)
 wExtraMissableObjectFlagsEnd::
 
 ENDU
+
+UNION
+
+ds 22 ; 22 of the 42 bytes of space are alotted to movedex seen flags
+
+NEXTU
+
+wMovedexSeen:: flag_array NUM_ATTACKS ; PureRGBnote: ADDED: flags for the movedex, uses all 22 bytes
+wMovedexSeenEnd::
+
+ENDU
+
 ;;;;;
 
 wPlayerMoney:: ds 3 ; BCD
@@ -1945,7 +1963,7 @@ wXBlockCoord:: db
 
 wLastMap:: db
 
-wUnusedD366:: db
+wUnusedD366:: db ; unused byte
 
 wCurMapTileset:: db
 

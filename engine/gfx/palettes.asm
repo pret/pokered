@@ -122,6 +122,21 @@ SetPal_Pokedex:
 	ld de, BlkPacket_Pokedex
 	ret
 
+SetPal_Movedex:
+	ld hl, PalPacket_Movedex
+	ld de, wPalPacket
+	ld bc, $10
+	call CopyData
+	ld a, [wcf91]
+	ld d, a
+	callfar GetTypePalette
+	ld a, d
+	ld hl, wPalPacket + 3
+	ld [hl], a
+	ld hl, wPalPacket
+	ld de, BlkPacket_Pokedex
+	ret
+
 ; PureRGBnote: ADDED: function that sets the palette on the pokemon sprite boxes 
 ;                     that appear in the pewter museum or the route 15 left binoculars
 SetPal_MiddleScreenMonBox:
@@ -362,6 +377,7 @@ SetPalFunctions:
 	dw SetPal_TrainerCard
 	dw SetPal_ColorBeforeAfter
 	dw SetPal_MiddleScreenMonBox
+	dw SetPal_Movedex
 
 ; The length of the blk data of each badge on the Trainer Card.
 ; The Rainbow Badge has 3 entries because of its many colors.
@@ -549,10 +565,8 @@ LoadSGB:
 	ld [wCopyingSGBTileData], a
 ;;;;;;;;;; PureRGBnote: ADDED: optional toggle between original SGB palettes and GBC palettes when playing on SGB
 	call GetPalettes
-	ld a, d
-	ld h, a
-	ld a, e
-	ld l, a ; GetPalettes stores the palette set address in de, but here we need it to be in hl, so we copy it over to hl
+	ld h, d
+	ld l, e ; GetPalettes stores the palette set address in de, but here we need it to be in hl, so we copy it over to hl
 ;;;;;;;;;;
 	ld de, PalTrnPacket
 	call CopyGfxToSuperNintendoVRAM

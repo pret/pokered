@@ -98,6 +98,7 @@ HiddenObjectMaps:
 	db CERULEAN_ROCKET_HOUSE_1F
 	db CERULEAN_ROCKET_HOUSE_B1F
 	db DAYCARE
+	db VIRIDIAN_SCHOOL_HOUSE_B1F
 	db -1 ; end
 
 HiddenObjectPointers:
@@ -199,6 +200,7 @@ HiddenObjectPointers:
 	dw CeruleanRocketHouse1FHiddenObjects
 	dw CeruleanRocketHouseB1FHiddenObjects
 	dw DaycareHiddenObjects
+	dw ViridianSchoolB1FHiddenObjects
 
 MACRO hidden_object
 	db \2 ; y coord
@@ -768,4 +770,11 @@ CeruleanRocketHouseB1FHiddenObjects:
 
 DaycareHiddenObjects:
 	hidden_object 4,  1, SPRITE_FACING_UP, OpenPokemonCenterPC
+	db -1 ; end
+
+ViridianSchoolB1FHiddenObjects:
+	hidden_object  0,  1, SPRITE_FACING_UP, SchoolB1FLeftBookcaseA
+	hidden_object  1,  1, SPRITE_FACING_UP, SchoolB1FLeftBookcaseB
+	hidden_object 16,  1, SPRITE_FACING_UP, SchoolB1FRightBookcaseA
+	hidden_object 17,  1, SPRITE_FACING_UP, SchoolB1FRightBookcaseB
 	db -1 ; end

@@ -15,12 +15,10 @@ ShowPokedexMenu:
 	ld b, SET_PAL_GENERIC
 	call RunPaletteCommand
 	callfar LoadPokedexTilePatterns
-;;;;;;;;;;; PureRGBnote: ADDED: If we got the town map, load the "SELECT: MAP" prompt into VRAM
-	CheckEvent EVENT_GOT_TOWN_MAP
-	jr z, .doPokemonListMenu
-	ld de,SelectMapPromptGraphics
-	ld hl, vChars1 + $400
-	lb bc, BANK(SelectMapPromptGraphics), (SelectMapPromptGraphicsEnd - SelectMapPromptGraphics) / $10
+;;;;;;;;;;; PureRGBnote: ADDED: load these new button prompt graphics into VRAM
+	ld de, PokedexPromptGraphics
+	ld hl, vChars1 tile $40
+	lb bc, BANK(PokedexPromptGraphics), (PokedexPromptGraphicsEnd - PokedexPromptGraphics) / $10
 	call CopyVideoData
 ;;;;;;;;;;
 .doPokemonListMenu
@@ -35,9 +33,13 @@ ShowPokedexMenu:
 	inc hl
 	ld a, 6
 	ld [hli], a ; max menu item ID
-	ld [hl], D_LEFT | D_RIGHT | B_BUTTON | A_BUTTON | SELECT ; PureRGBnote: ADDED: track the SELECT button in order to trigger town map when able
+	ld [hl], D_LEFT | D_RIGHT | B_BUTTON | A_BUTTON | SELECT | START ; PureRGBnote: ADDED: track the SELECT and START buttons in order to trigger new functions
 	call HandlePokedexListMenu
 	jr c, .goToSideMenu ; if the player chose a pokemon from the list
+	cp 1
+	jr z, .selectPressed
+	cp 2
+	jr z, .startPressed
 .exitPokedex
 	xor a
 	ld [wMenuWatchMovingOutOfBounds], a
@@ -57,6 +59,14 @@ ShowPokedexMenu:
 	dec b
 	jr z, .doPokemonListMenu ; if pokemon not seen or player pressed B button
 	jp .setUpGraphics ; if pokemon data or area was shown
+.selectPressed
+	pop af
+	ld [wListScrollOffset], a
+	farjp DisplayTownMap
+.startPressed
+	pop af
+	ld [wListScrollOffset], a
+	jp ShowMovedexMenu
 
 ; handles the menu on the lower right in the pokedex screen
 ; OUTPUT:
@@ -166,9 +176,27 @@ HandlePokedexListMenu:
 	ldh [hAutoBGTransferEnabled], a
 ;;;;;;;;;;; PureRGBnote: ADDED: If we got the town map, draw the "SELECT: MAP" prompt at the very bottom
 	CheckEvent EVENT_GOT_TOWN_MAP
-	jr z, .noSelectPrompt
+	jr z, .movedexPrompt
 	hlcoord 1, 17
 	ld a, $C0 ; tile in VRAM that this prompt starts at, it's 5 tiles horizontally across
+	ld [hli], a
+	inc a
+	ld [hli], a
+	inc a
+	ld [hli], a
+	inc a
+	ld [hli], a
+	inc a
+	ld [hl], a
+.movedexPrompt
+	hlcoord 7, 17
+	CheckEvent EVENT_GOT_MOVEDEX
+	jr z, .noSelectPrompt
+	ld a, $C5
+	ld [hli], a
+	inc a
+	ld [hli], a
+	inc a
 	ld [hli], a
 	inc a
 	ld [hli], a
@@ -308,6 +336,10 @@ HandlePokedexListMenu:
 	call GBPalNormal
 	call HandleMenuInput
 ;;;;;;;;;; PureRGBnote: ADDED: track the SELECT button in order to trigger town map when able
+	bit BIT_START, a
+	jp nz, .startPressed
+;;;;;;;;;;
+;;;;;;;;;; PureRGBnote: ADDED: track the SELECT button in order to trigger town map when able
 	bit BIT_SELECT, a
 	jp nz, .selectPressed
 ;;;;;;;;;;
@@ -374,9 +406,11 @@ HandlePokedexListMenu:
 	jp .loop
 .buttonAPressed
 	scf
+	ld a, 0
 	ret
 .buttonBPressed
 	and a
+	ld a, 0
 	ret
 ;;;;;;;;;; PureRGBnote: CHANGED: SELECT button will open the town map while in the pokedex. You need the town map from rival's sister to do this.
 ;;;;;;;;;;                       Town map doesn't take up space in the bag due to this modification.
@@ -387,7 +421,20 @@ HandlePokedexListMenu:
 .showTownMap
 	ld a, SFX_SWITCH
 	call PlaySound
-	farjp DisplayTownMap
+	ld a, 1
+	and a
+	ret
+;;;;;;;;;; PureRGBnote: CHANGED: START button will open new MoveDex.
+.startPressed
+	CheckEvent EVENT_GOT_MOVEDEX
+	jr nz, .showMoveDex
+	jp .loop
+.showMoveDex
+	ld a, SFX_SWITCH
+	call PlaySound
+	ld a, 2
+	and a
+	ret
 ;;;;;;;;;;
 
 DrawPokedexVerticalLine:
@@ -836,5 +883,3 @@ SpcText:
 TotalText:
 	db "TOTAL@"
 
-SelectMapPromptGraphics:  INCBIN "gfx/pokedex/select_map.2bpp"
-SelectMapPromptGraphicsEnd:

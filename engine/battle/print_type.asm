@@ -50,3 +50,11 @@ PrintType_:
 	jp PlaceString
 
 INCLUDE "data/types/names.asm"
+
+; de = destination address
+; wPlayerMoveType = type
+FarPrintType:
+	ld h, d
+	ld l, e
+	ld a, [wPlayerMoveType]
+	jp PrintType

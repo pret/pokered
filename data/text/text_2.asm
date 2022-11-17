@@ -506,6 +506,11 @@ _ViridianSchoolNotebookText5::
 	line "look at my notes!@"
 	text_end
 
+_ViridianSchoolNotebookTextGus::
+	text "GUS: Hey! Don't"
+	line "look at my notes!@"
+	text_end
+
 _ViridianSchoolNotebookText1::
 	text "Looked at the"
 	line "notebook!"

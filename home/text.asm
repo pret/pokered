@@ -84,6 +84,7 @@ PlaceNextChar::
 
 ; Check against a dictionary
 	dict "<NULL>",    NullChar
+	dict "<BAGE>",    MultiButtonPageChar
 	dict "<SCROLL>",  _ContTextNoPause
 	dict "<_CONT>",   _ContText
 	dict "<PARA>",    Paragraph
@@ -254,6 +255,24 @@ PageChar::
 	hlcoord 1, 11
 	push hl
 	jp NextChar
+
+MultiButtonPageChar::
+	push de
+	callfar TextCommandPromptMultiButton
+	; d = what to do after this
+	ld a, d
+	and a
+	jr nz, .exit
+	pop de
+	pop hl
+	hlcoord 1, 11
+	push hl
+	jp NextChar
+.exit
+	pop de
+	jp DoneText
+
+
 
 _ContText::
 	ld a, "▼"

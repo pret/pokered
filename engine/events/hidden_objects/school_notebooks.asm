@@ -26,7 +26,11 @@ ViridianSchoolNotebook::
 	jr nz, .doneReading
 	ld hl, ViridianSchoolNotebookText4
 	call PrintText
+	CheckEvent EVENT_GUS_IN_DETENTION
 	ld hl, ViridianSchoolNotebookText5
+	jr z, .print
+	ld hl, ViridianSchoolNotebookTextGus
+.print
 	call PrintText
 .doneReading
 	jp TextScriptEnd
@@ -45,6 +49,11 @@ TurnPageText:
 
 ViridianSchoolNotebookText5:
 	text_far _ViridianSchoolNotebookText5
+	text_waitbutton
+	text_end
+
+ViridianSchoolNotebookTextGus:
+	text_far _ViridianSchoolNotebookTextGus
 	text_waitbutton
 	text_end
 

@@ -133,6 +133,7 @@ INCLUDE "text/Route21.asm"
 INCLUDE "text/Route22.asm"
 INCLUDE "text/Route23.asm"
 INCLUDE "text/Route24.asm"
+INCLUDE "text/ViridianSchoolHouseQuiz.asm"
 
 
 SECTION "Text 6", ROMX
@@ -285,3 +286,11 @@ INCLUDE "data/pokemon/dex_text.asm"
 SECTION "Move Names", ROMX
 
 INCLUDE "data/moves/names.asm"
+
+SECTION "Movedex Text", ROMX
+
+INCLUDE "data/moves/movedex_text.asm"
+
+SECTION "Movedex Text 2", ROMX
+
+INCLUDE "data/moves/movedex_text2.asm"

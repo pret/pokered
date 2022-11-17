@@ -333,7 +333,7 @@ EngageMapTrainer::
 	ld e, a
 	add hl, de     ; seek to engaged trainer data
 	ld a, [hli]    ; load trainer class
-	ld [wUnusedD119], a ; PureRGBnote: ADDED: persists after battle complete, used for drawing trainer sprites after battle
+	ld [wWhichTrainerClass], a ; PureRGBnote: ADDED: persists after battle complete, used for drawing trainer sprites after battle
 	ld [wEngagedTrainerClass], a
 	ld a, [hl]     ; load trainer mon set
 	ld [wEngagedTrainerSet], a

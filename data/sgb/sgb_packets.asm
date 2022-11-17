@@ -325,3 +325,6 @@ DataSndPacket8:
 	db  $60                 ; rts
 	db  $EA                 ; nop
 	db  $EA                 ; nop
+
+
+PalPacket_Movedex:        PAL_SET PAL_BLUEGREENMON, 0, 0, 0

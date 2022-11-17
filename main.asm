@@ -203,6 +203,8 @@ INCLUDE "engine/menus/pokedex.asm"
 INCLUDE "engine/movie/trade.asm"
 INCLUDE "engine/movie/intro.asm"
 INCLUDE "engine/movie/trade2.asm"
+INCLUDE "engine/menus/movedex.asm"
+INCLUDE "data/moves/movedex_type_palettes.asm"
 
 
 SECTION "Pokédex Rating", ROMX
@@ -291,6 +293,7 @@ INCLUDE "engine/events/hidden_objects/vermilion_gym_trash.asm"
 ; PureRGBnote: ADDED: new hidden objects code files
 INCLUDE "engine/events/hidden_objects/fossil_guys_pc.asm"
 INCLUDE "engine/events/hidden_objects/cerulean_rocket_house.asm"
+INCLUDE "engine/events/hidden_objects/school_house_b1f_bookcases.asm"
 
 
 SECTION "Cinnabar Lab Fossils", ROMX
@@ -385,7 +388,6 @@ INCLUDE "data/gbc/bg_map_attributes.asm"
 INCLUDE "engine/gbc/bg_map_attributes.asm"
 INCLUDE "engine/gfx/scroll_gfx_horizontally.asm"
 
-
 SECTION "newCode", ROMX
 ; PureRGBnote: ADDED: new code
 INCLUDE "engine/gfx/front_sprite_options.asm"
@@ -408,6 +410,8 @@ INCLUDE "engine/overworld/strength.asm"
 INCLUDE "engine/battle/store_pkmn_levels.asm"
 INCLUDE "engine/gfx/remap_overworld_sprites.asm"
 INCLUDE "engine/battle/animations/tri_attack.asm"
+INCLUDE "engine/menus/text_multi_button_prompt.asm"
+INCLUDE "engine/menus/multi_choice_menu.asm"
 
 
 ; PureRGBnote: TODO: these are currently unused but are intended to be where the save file is flashed to the ROM
