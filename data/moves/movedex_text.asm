@@ -455,7 +455,7 @@ _RoarDexEntry::
 	next "roar or bark that"
 	next "hurts the ears."
 
-	bage "30% chance to"
+	bage "33% chance to"
 	next "lower ATTACK."
 	next "(ATTACK -1)"
 	dex
@@ -508,7 +508,7 @@ _AcidDexEntry::
 	next "is unleashed on"
 	next "the opponent."
 
-	bage "30% chance to"
+	bage "33% chance to"
 	next "lower DEFENSE."
 	next "(DEFENSE -1)"
 	dex
@@ -619,7 +619,7 @@ _BubblebeamDexEntry::
 	next "is fired at the"
 	next "foe."
 
-	bage "30% chance to"
+	bage "33% chance to"
 	next "lower SPEED."
 	next "(-1 SPEED)"
 	dex
@@ -630,7 +630,7 @@ _AuroraBeamDexEntry::
 	next "of light is shot"
 
 	bage "at the opponent."
-	next "30% chance to"
+	next "33% chance to"
 	next "lower ATTACK."
 
 	bage "(-1 ATTACK)"
@@ -1016,7 +1016,7 @@ _PsychicDexEntry::
 	next "this fantastic"
 	next "psychic move."
 
-	bage "30% chance to"
+	bage "33% chance to"
 	next "lower SPECIAL."
 	next "(-1 SPECIAL)"
 	dex
@@ -1636,7 +1636,7 @@ _BubbleDexEntry::
 	next "that bursts in"
 	next "the foe's face."
 	
-	bage "30% chance to"
+	bage "33% chance to"
 	next "lower SPEED."
 	next "(-1 SPEED)"
 	dex 
@@ -1684,7 +1684,7 @@ _PsywaveDexEntry::
 	next "wave hits the"
 	next "opponent."
 
-	bage "30% chance to"
+	bage "33% chance to"
 	next "lower SPECIAL."
 	next "(-1 SPECIAL)"
 	dex
@@ -1755,7 +1755,7 @@ _BonemerangDexEntry::
 	bage "2 times in quick"
 	next "succession."
 
-	bage "30% chance to"
+	bage "33% chance to"
 	next "lower SPEED."
 	next "(-1 SPEED)"
 	dex
