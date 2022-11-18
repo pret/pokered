@@ -57,9 +57,9 @@ IF DEF(_DEBUG)
 	ld [hli], a
 	ld a, CUT
 	ld [hli], a
-	ld a, SUBMISSION
+	ld a, SURF
 	ld [hli], a
-	ld a, FOCUS_ENERGY
+	ld a, TRI_ATTACK
 	ld [hl], a
 	ld hl, wPartyMon1PP
 	ld a, 15
