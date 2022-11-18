@@ -143,7 +143,7 @@ HandleMovedexListMenu:
 
 .storeMinSeenPokemon
 	ld a, b
-	ld [wDexMinSeenMon], a
+	ld [wDexMinSeenMove], a
 
 ; find the highest pokedex number among the pokemon the player has seen
 	ld hl, wMovedexSeenEnd - 1
@@ -161,7 +161,7 @@ HandleMovedexListMenu:
 
 .storeMaxSeenPokemon
 	ld a, b
-	ld [wDexMaxSeenMon], a
+	ld [wDexMaxSeenMove], a
 .loop
 	xor a
 	ldh [hAutoBGTransferEnabled], a
@@ -172,7 +172,7 @@ HandleMovedexListMenu:
 	ld a, [wListScrollOffset]
 	ld [wd11e], a
 	ld d, 7
-	ld a, [wDexMaxSeenMon]
+	ld a, [wDexMaxSeenMove]
 	cp 7
 	jr nc, .printMoveLoop
 	ld d, a
@@ -249,7 +249,7 @@ HandleMovedexListMenu:
 	bit BIT_D_DOWN, a
 	jr z, .checkIfRightPressed
 .downPressed ; scroll down one row
-	ld a, [wDexMaxSeenMon]
+	ld a, [wDexMaxSeenMove]
 	cp 7
 	jp c, .loop ; can't if the list is shorter than 7
 	sub 7
@@ -264,7 +264,7 @@ HandleMovedexListMenu:
 	bit BIT_D_RIGHT, a
 	jr z, .checkIfLeftPressed
 .rightPressed ; scroll down 7 rows
-	ld a, [wDexMaxSeenMon]
+	ld a, [wDexMaxSeenMove]
 	cp 7
 	jp c, .loop ; can't if the list is shorter than 7
 	sub 6
@@ -360,8 +360,8 @@ ShowMoveData:
 	ldh [hTileAnimations], a
 
 	; load movedex data page UI tiles
-	ld de, MoveDexUI
-	lb bc, BANK(MoveDexUI), (MoveDexUIEnd - MoveDexUI) / $10
+	ld de, MovedexUI
+	lb bc, BANK(MovedexUI), (MovedexUIEnd - MovedexUI) / $10
 	ld hl, vChars1 tile $44
 	call CopyVideoData
 
@@ -513,14 +513,14 @@ ShowNextMoveData:
 	ld b, a
 	ld a, [wd11e]
 	ld c, a
-	ld a, [wDexMaxSeenMon]
+	ld a, [wDexMaxSeenMove]
 	cp c
 	jr z, .noRight
 	ld a, D_RIGHT
 	or b
 	ld b, a
 .noRight
-	ld a, [wDexMinSeenMon]
+	ld a, [wDexMinSeenMove]
 	cp c
 	jr z, .noLeft
 	ld a, D_LEFT
@@ -589,25 +589,26 @@ ShowNextMoveData:
 	and a
 	ret
 .nextMove
-	ld a, [wDexMaxSeenMon]
+	ld a, [wDexMaxSeenMove]
 	ld b, a
 	ld a, [wd11e]
 	cp b
 	jr nc, .reprintDescription
+	ld hl, wMovedexSeen
 	call SeekToNextMove
 	jr c, .reprintDescription
 	call ChangeListPosition
 	call ClearBasicMoveData
 	jp ShowNextMoveData
 .prevMove
-	ld a, [wDexMinSeenMon]
+	ld a, [wDexMinSeenMove]
 	ld b, a
 	ld a, [wd11e]
 	cp b
 	jr z, .reprintDescription
+	ld hl, wMovedexSeen
 	call SeekToPreviousMove
 	jr c, .reprintDescription
-	ld [wd11e], a
 	call ChangeListPosition
 	call ClearBasicMoveData
 	jp ShowNextMoveData
@@ -671,7 +672,7 @@ DrawBottomDataBorder: ; can change if there's no previous or next move
 
 	ld a, [wd11e]
 	ld b, a
-	ld a, [wDexMinSeenMon]
+	ld a, [wDexMinSeenMove]
 	cp b
 	push bc
 	jr z, .noPrev
@@ -701,7 +702,7 @@ DrawBottomDataBorder: ; can change if there's no previous or next move
 	call ClearScreenArea ; remove line above it
 .nextButton
 	pop bc
-	ld a, [wDexMaxSeenMon]
+	ld a, [wDexMaxSeenMove]
 	cp b
 	jr z, .noNext
 	hlcoord 16, 17 ; now we do the next> prompt
@@ -751,11 +752,12 @@ ClearBasicMoveData:
 	ret
 
 ; seeks to the next move that has been seen
+SeekToNextMon:
 SeekToNextMove:
 	ld a, [wd11e] ; = move ID
 	dec a ; = move bit index
 	ld d, a
-	ld a, [wDexMaxSeenMon]
+	ld a, [wDexMaxSeenMove]
 	inc a 
 	ld e, a
 .loop
@@ -763,7 +765,6 @@ SeekToNextMove:
 	ld a, e
 	cp d ; e = the index after the last move, stop searching if we hit that
 	jr z, .reachedEnd
-	ld hl, wMovedexSeen
 	ld c, d
 	ld b, FLAG_TEST
 	predef FlagActionPredef
@@ -780,11 +781,13 @@ SeekToNextMove:
 	ret
 
 ; seeks to the next move that has been seen
+; INPUT: hl = which set of flags to check
+SeekToPreviousMon:
 SeekToPreviousMove:
 	ld a, [wd11e] ; = move ID
 	dec a ; = current move bit index
 	ld d, a
-	ld a, [wDexMinSeenMon]
+	ld a, [wDexMinSeenMove]
 	dec a ; = first move bit index
 	dec a ; = before first move's bit index (if we get here, we should exit the function)
 	ld e, a
@@ -793,7 +796,6 @@ SeekToPreviousMove:
 	ld a, e
 	cp d ; e = the index before the first move or index 0, stop searching if we hit that
 	jr z, .reachedFirst
-	ld hl, wMovedexSeen
 	ld c, d
 	ld b, FLAG_TEST
 	predef FlagActionPredef
@@ -810,7 +812,7 @@ SeekToPreviousMove:
 	ret
 
 ChangeListPosition:
-	ld a, [wDexMaxSeenMon]
+	ld a, [wDexMaxSeenMove]
 	sub 6
 	ld b, a
 	ld a, [wd11e]

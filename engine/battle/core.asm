@@ -6732,6 +6732,7 @@ LoadPlayerBackPic:
 	ld a, BANK(RedPicBackSW)
 	ASSERT BANK(RedPicBackSW) == BANK(OldManPicBackSW)
 	call UncompressSpriteFromDE
+	ld de, vBackPic
 	call LoadBackSpriteUnzoomed
 	jr .nextAgain
 .ogBackSpriteBank
@@ -7524,6 +7525,11 @@ CopyUncompressedPicToHL::
 	jr nz, .flippedLoop
 	ret
 
+LoadMonBackPicInPokedex:
+	ld de, vFrontPic ; load it where the front pic is to save time
+	push de
+	jr LoadMonBackPicCommon
+
 LoadMonBackPic:
 ; Assumes the monster's attributes have
 ; been loaded with GetMonHeader.
@@ -7533,6 +7539,9 @@ LoadMonBackPic:
 	ld b, 7
 	ld c, 8
 	call ClearScreenArea
+	ld de, vBackPic
+	push de
+LoadMonBackPicCommon:
 ;;;;;;;;;; PureRGBnote: ADDED: code to switch between original and larged back sprites
 	ld a, [wSpriteOptions2]
 	bit BIT_BACK_SPRITES, a
@@ -7548,14 +7557,21 @@ LoadMonBackPic:
 	bit BIT_BACK_SPRITES, a
 	jr nz, .swSprites
 .ogSprites
+	pop de
+	push de
 	call LoadBackSpriteZoomed
 	jr .nextb
 .swSprites
+	pop de
+	push de
 	call LoadBackSpriteUnzoomed
 .nextb
 ;;;;;;;;;;
+	pop de
+	ld a, d
+	cp $90 ; d = $90 when de = vFrontPic
+	ret z ; don't copy anything to vSprites when we loaded to vFrontPic
 	ld hl, vSprites
-	ld de, vBackPic
 	ld c, (2*SPRITEBUFFERSIZE)/16 ; count of 16-byte chunks to be copied
 	ldh a, [hLoadedROMBank]
 	ld b, a
@@ -7563,14 +7579,14 @@ LoadMonBackPic:
 
 ;;;;;;;;;; PureRGBnote: ADDED: code to switch between original and larged back sprites
 LoadBackSpriteZoomed:
+	push de
 	predef ScaleSpriteByTwo
-	ld de, vBackPic
+	pop de
 	call InterlaceMergeSpriteBuffers ; combine the two buffers to a single 2bpp sprite
 	ret
 
 LoadBackSpriteUnzoomed:
 	ld a, $66
-	ld de, vBackPic
 	push de
 	jp LoadUncompressedBackSprite
 ;;;;;;;;;;

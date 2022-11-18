@@ -242,6 +242,7 @@ HoFLoadPlayerPics:
 	ld de, RedPicBackSW
 	ld a, BANK(RedPicBackSW)
 	call UncompressSpriteFromDE
+	ld de, vBackPic
 	farcall LoadBackSpriteUnzoomed
 
 HoFLoadMonPlayerPicTileIDs:

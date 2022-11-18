@@ -890,6 +890,7 @@ wSavedY::
 wTempSCX::
 ; which entry from TradeMons to select
 wWhichTrade::
+wDexMaxSeenMove::
 wDexMaxSeenMon::
 wPPRestoreItem::
 wWereAnyMonsAsleep::
@@ -1787,12 +1788,14 @@ wSavedSpriteMapX:: db
 
 ;;; PureRGBnote: ADDED: new properties in this previously empty space
 wDexMinSeenMon::
+wDexMinSeenMove::
 wWhatStat:: db ; contains the stat currently being modified by a stat changing move
 ; bit 0 = set to 1 when we should mark a move as seen in the movedex flags on showing its animation, 0 otherwise
 ; bit 1-7 = unused
 wBattleFunctionalFlags:: db
 ;;;
 
+wPokedexDataFlags::
 wWhichPrize:: db
 
 ; counts downward each frame
