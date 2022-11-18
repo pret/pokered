@@ -22,8 +22,13 @@ _DoubleslapDexEntry::
 	next "two hands."
 
 	bage "Hits 2-5 times in"
-	next "succession"
-	dex
+	next "succession."
+	next "2 hits → 37.5%"
+
+	bage "3 hits → 37.5%"
+	next "4 hits → 12.5%"
+	next "5 hits → 12.5%@"
+	text_end
 
 _CometPunchDexEntry::
 	text "Delivers a"
@@ -418,8 +423,13 @@ _PinMissileDexEntry::
 	next "pins or needles"
 	next "flurry the foe."
 
-	bage "Hits 2-5 times"
-	dex
+	bage "Hits 2-5 times."
+	next "2 hits → 37.5%"
+	next "3 hits → 37.5%"
+
+	bage "4 hits → 12.5%"
+	next "5 hits → 12.5%@"
+	text_end
 
 _LeerDexEntry::
 	text "The user glowers"
@@ -1456,11 +1466,12 @@ _SkullBashDexEntry::
 
 _SpikeCannonDexEntry::
 	text "Rock-hard spikes"
-	next "are fired at high"
-	next "velocity at the"
+	next "are fired at a"
+	next "high velocity."
 
-	bage "opponent."
-	next "Hits 2-3 times"
+	bage "Hits 2 or 3 times."
+	next "50% chance of"
+	next "each outcome"
 	dex
 
 _ConstrictDexEntry::
