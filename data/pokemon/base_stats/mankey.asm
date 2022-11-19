@@ -47,4 +47,4 @@
 
 	dw BANK(MankeyPicFront), BANK(MankeyPicBack)
 
-	dw MankeyPicFrontRG, MankeyPicBack
+	dw MankeyPicFrontAlt, MankeyPicBack

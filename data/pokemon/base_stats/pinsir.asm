@@ -47,4 +47,4 @@
 
 	dw BANK(PinsirPicFront), BANK(PinsirPicBack)
 
-	dw PinsirPicFrontRG, PinsirPicBack
+	dw PinsirPicFrontAlt, PinsirPicBack

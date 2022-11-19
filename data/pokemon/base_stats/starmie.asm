@@ -43,4 +43,4 @@
 
 	dw BANK(StarmiePicFront), BANK(StarmiePicBack)
 
-	dw StarmiePicFrontRG, StarmiePicBack
+	dw StarmiePicFrontAlt, StarmiePicBack

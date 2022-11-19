@@ -59,4 +59,4 @@
 
 	dw BANK(MewtwoPicFront), BANK(MewtwoPicBack)
 
-	dw MewtwoPicFrontRG, MewtwoPicBack
+	dw MewtwoPicFrontAlt, MewtwoPicBack
