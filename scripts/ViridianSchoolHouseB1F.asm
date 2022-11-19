@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: code for the new basement below the viridian schoolhouse. Contains a couple of classrooms.
+
 ViridianSchoolHouseB1F_Script:
 	jp EnableAutoTextBoxDrawing
 

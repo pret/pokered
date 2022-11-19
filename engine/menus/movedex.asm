@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: Entirely new menu for listing the moves a player has witnessed. This functionality is obtained in viridian city schoolhouse.
+
 ShowMovedexMenu:
 	call GBPalWhiteOut
 	call ClearScreen
@@ -54,8 +56,8 @@ ShowMovedexMenu:
 	jp ReloadMapData
 .goToMoveData
 	call ShowMoveData
-	jr z, .stayOnMenu ; if pokemon not seen or player pressed B button
-	jp .setUpGraphics ; if pokemon data or area was shown
+	jr z, .stayOnMenu ; if move not seen or player pressed B button
+	jp .setUpGraphics ; if move data was shown
 .selectPressed
 	pop af
 	ld [wListScrollOffset], a
@@ -65,7 +67,7 @@ ShowMovedexMenu:
 	ld [wListScrollOffset], a
 	jp ShowPokedexMenu
 
-; handles the list of pokemon on the left of the pokedex screen
+; handles the list of moves on the left of the pokedex screen
 ; sets carry flag if player presses A, unsets carry flag if player presses B
 HandleMovedexListMenu:
 	xor a
@@ -115,7 +117,7 @@ HandleMovedexListMenu:
 	ld de, wNumSetBits
 	hlcoord 16, 2
 	lb bc, 1, 3
-	call PrintNumber ; print number of seen pokemon
+	call PrintNumber ; print number of seen moves
 	hlcoord 15, 1
 	ld de, PokedexSeenText
 	call PlaceString
@@ -126,40 +128,40 @@ HandleMovedexListMenu:
 ; find the lowest move number among the moves the player has seen
 	ld hl, wMovedexSeen
 	ld b, 0
-.minSeenPokemonLoop
+.minSeenMovesLoop
 	ld a, [hli]
 	ld c, 0
-.minSeenPokemonInnerLoop
+.minSeenMovesInnerLoop
 	inc b
 	srl a
-	jr c, .storeMinSeenPokemon
+	jr c, .storeMinSeenMoves
 	ld d, a
 	inc c
 	ld a, c
 	cp 8
 	ld a, d
-	jr nz, .minSeenPokemonInnerLoop
-	jr .minSeenPokemonLoop
+	jr nz, .minSeenMovesInnerLoop
+	jr .minSeenMovesLoop
 
-.storeMinSeenPokemon
+.storeMinSeenMoves
 	ld a, b
 	ld [wDexMinSeenMove], a
 
-; find the highest pokedex number among the pokemon the player has seen
+; find the highest move number among the moves the player has seen
 	ld hl, wMovedexSeenEnd - 1
 	ld b, (wMovedexSeenEnd - wMovedexSeen) * 8 + 1
-.maxSeenPokemonLoop
+.maxSeenMovesLoop
 	ld a, [hld]
 	ld c, 8
-.maxSeenPokemonInnerLoop
+.maxSeenMovesInnerLoop
 	dec b
 	sla a
-	jr c, .storeMaxSeenPokemon
+	jr c, .storeMaxSeenMoves
 	dec c
-	jr nz, .maxSeenPokemonInnerLoop
-	jr .maxSeenPokemonLoop
+	jr nz, .maxSeenMovesInnerLoop
+	jr .maxSeenMovesLoop
 
-.storeMaxSeenPokemon
+.storeMaxSeenMoves
 	ld a, b
 	ld [wDexMaxSeenMove], a
 .loop
@@ -178,8 +180,7 @@ HandleMovedexListMenu:
 	ld d, a
 	dec a
 	ld [wMaxMenuItem], a
-; loop to print pokemon pokedex numbers and names
-; if the player has owned the pokemon, it puts a pokeball beside the name
+; loop to print move numbers and names
 .printMoveLoop
 	ld a, [wd11e]
 	inc a
@@ -191,7 +192,7 @@ HandleMovedexListMenu:
 	add hl, de
 	ld de, wd11e
 	lb bc, LEADING_ZEROES | 1, 3
-	call PrintNumber ; print the pokedex number
+	call PrintNumber ; print the move number
 	ld de, SCREEN_WIDTH
 	add hl, de
 	dec hl
@@ -199,9 +200,9 @@ HandleMovedexListMenu:
 	ld hl, wMovedexSeen
 	call IsMoveBitSet
 	jr nz, .getMoveName ; if the player has seen the move
-	ld de, .dashedLine ; print a dashed line in place of the name if the player hasn't seen the pokemon
+	ld de, .dashedLine ; print a dashed line in place of the name if the player hasn't seen the move
 	jr .skipGettingName
-.dashedLine ; for unseen pokemon in the list
+.dashedLine ; for unseen moves in the list
 	db "-----------@"
 .getMoveName
 	call GetMoveName
@@ -224,17 +225,12 @@ HandleMovedexListMenu:
 	call HandleMenuInput
 	bit BIT_START, a
 	jp nz, .startPressed
-;;;;;;;;;; PureRGBnote: ADDED: track the SELECT button in order to trigger town map when able
 	bit BIT_SELECT, a
 	jp nz, .selectPressed
-;;;;;;;;;;
 	bit BIT_B_BUTTON, a
 	jp nz, .buttonBPressed
-;;;;;;;;;; PureRGBnote: FIXED: code from yellow, avoids a bug where pressing down/up and then 
-;;;;;;;;;; immediately A scrolls up/down twice instead of selecting the next pokemon
 	bit BIT_A_BUTTON, a 
 	jp nz, .buttonAPressed 
-;;;;;;;;;;
 .checkIfUpPressed
 	bit BIT_D_UP, a
 	jr z, .checkIfDownPressed
@@ -297,8 +293,6 @@ HandleMovedexListMenu:
 	and a
 	ld a, 0
 	ret
-;;;;;;;;;; PureRGBnote: CHANGED: SELECT button will open the town map while in the pokedex. You need the town map from rival's sister to do this.
-;;;;;;;;;;                       Town map doesn't take up space in the bag due to this modification.
 .selectPressed
 	CheckEvent EVENT_GOT_TOWN_MAP
 	jr nz, .showTownMap
@@ -309,21 +303,14 @@ HandleMovedexListMenu:
 	ld a, 1
 	and a
 	ret
-;;;;;;;;;;
-;;;;;;;;;; PureRGBnote: CHANGED: START button will open new MoveDex.
 .startPressed
-	;CheckEvent EVENT_GOT_TOWN_MAP
-	;jr nz, .showMoveDex
-	;jp .loop
 	ld a, SFX_SWITCH
 	call PlaySound
 	ld a, 2
 	and a
 	ret
-;.showTownMap
-;;;;;;;;;;
 
-; tests if a pokemon's bit is set in the seen or owned pokemon bit fields
+; tests if a move's bit is set in the seen bit fields
 ; INPUT:
 ; [wd11e] = move id
 ; hl = address of bit field
@@ -432,7 +419,7 @@ ShowNextMoveData:
 	ld [hli], a
 	ld de, wd11e
 	lb bc, LEADING_ZEROES | 1, 3
-	call PrintNumber ; print pokedex number
+	call PrintNumber ; print move number
 
 	hlcoord 5, 4
 	ld d, h

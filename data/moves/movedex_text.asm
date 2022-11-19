@@ -1,3 +1,6 @@
+; PureRGBnote: ADDED: text pointers for the descriptions that show up in the movedex. 
+; Separated into two files because it doesn't fit in a single bank.
+
 _PoundDexEntry::
 	text "Pounds the foe"
 	next "with a leg, tail"

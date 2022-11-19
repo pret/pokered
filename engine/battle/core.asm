@@ -3258,8 +3258,10 @@ playPlayerMoveAnimation:
 	pop af
 	ld [wAnimationType], a
 	ld a, [wPlayerMoveNum]
+;;;;;;;;;; PureRGBnote: ADDED: set the flag that makes the animation code mark this move as seen in the movedex
 	ld hl, wBattleFunctionalFlags
 	set 0, [hl]
+;;;;;;;;;;
 	call PlayMoveAnimation
 	call HandleExplodingAnimation
 	call DrawPlayerHUDAndHPBar
@@ -5264,8 +5266,10 @@ MetronomePickMove:
 	xor a
 	ld [wAnimationType], a
 	ld a, METRONOME
+;;;;;;;;;; PureRGBnote: ADDED: set the flag that makes the animation code mark this move as seen in the movedex
 	ld hl, wBattleFunctionalFlags
 	set 0, [hl] ; metronome will be marked off on the movedex
+;;;;;;;;;;
 	call PlayMoveAnimation ; play Metronome's animation
 ; values for player turn
 	ld de, wPlayerMoveNum
@@ -5981,8 +5985,10 @@ playEnemyMoveAnimation:
 	pop af
 	ld [wAnimationType], a
 	ld a, [wEnemyMoveNum]
+;;;;;;;;;; PureRGBnote: ADDED: set the flag that makes the animation code mark this move as seen in the movedex
 	ld hl, wBattleFunctionalFlags
 	set 0, [hl]
+;;;;;;;;;;
 	call PlayMoveAnimation
 	call HandleExplodingAnimation
 	call DrawEnemyHUDAndHPBar
@@ -7525,10 +7531,12 @@ CopyUncompressedPicToHL::
 	jr nz, .flippedLoop
 	ret
 
+;;;;;;;;;; PureRGBnote: ADDED: code that loads the back sprite of a pokemon into VRAM in the pokedex when pressing SELECT
 LoadMonBackPicInPokedex:
 	ld de, vFrontPic ; load it where the front pic is to save time
 	push de
 	jr LoadMonBackPicCommon
+;;;;;;;;;;
 
 LoadMonBackPic:
 ; Assumes the monster's attributes have

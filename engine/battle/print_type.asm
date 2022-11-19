@@ -51,6 +51,7 @@ PrintType_:
 
 INCLUDE "data/types/names.asm"
 
+; PureRGBnote: ADDED: version of this subroutine that can be called from other banks
 ; de = destination address
 ; wPlayerMoveType = type
 FarPrintType:

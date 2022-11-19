@@ -1076,8 +1076,10 @@ SwitchAndTeleportEffect:
 	jp ConditionalPrintButItFailed
 .playAnimAndPrintText
 	; push af
+;;;;;;;;;; PureRGBnote: ADDED: set the flag that makes the animation code mark this move as seen in the movedex
 	ld hl, wBattleFunctionalFlags
 	set 0, [hl] ; teleport will be marked off on the movedex
+;;;;;;;;;;
 	call PlayBattleAnimation
 	ld c, 20
 	call DelayFrames
@@ -1725,10 +1727,12 @@ PlayCurrentMoveAnimation2:
 .notEnemyTurn
 	and a
 	ret z
+;;;;;;;;;; PureRGBnote: ADDED: set the flag that makes the animation code mark this move as seen in the movedex
 	push hl
 	ld hl, wBattleFunctionalFlags
 	set 0, [hl]
 	pop hl
+;;;;;;;;;;
 
 PlayBattleAnimation2:
 ; play animation ID at a and animation type 6 or 3
@@ -1755,10 +1759,12 @@ PlayCurrentMoveAnimation:
 .notEnemyTurn
 	and a
 	ret z
+;;;;;;;;;; PureRGBnote: ADDED: set the flag that makes the animation code mark this move as seen in the movedex
 	push hl
 	ld hl, wBattleFunctionalFlags
 	set 0, [hl]
 	pop hl
+;;;;;;;;;;
 
 PlayBattleAnimation:
 ; play animation ID at a and predefined animation type

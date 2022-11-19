@@ -1294,7 +1294,7 @@ CheckForTilePairCollisions::
 	jr .retry
 .currentTileMatchesFirstInPair
 	inc hl
-	ld a, [hli]
+	ld a, [hli] ; PureRGBnote: FIXED: performance improvement / fix for strange behaviour when adding new collision pairs
 	cp c
 	jr z, .foundMatch
 	jr .tilePairCollisionLoop

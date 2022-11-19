@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: subroutines for choosing which color palette the type icons in the movedex should use, and which icon images to use for which type.
+
 ; input d = type ID
 ; output d = palette ID
 GetTypePalette:

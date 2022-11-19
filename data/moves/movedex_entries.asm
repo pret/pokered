@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: text pointers for the descriptions that show up in the movedex.
+
 MovedexEntryPointers:
 	table_width 2, MovedexEntryPointers
 	dw PoundDexEntry

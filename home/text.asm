@@ -256,6 +256,7 @@ PageChar::
 	push hl
 	jp NextChar
 
+;;;;;;;;; PureRGBnote: ADDED: new text command that allows multiple buttons to be watched while waiting on a text prompt 
 MultiButtonPageChar::
 	push de
 	callfar TextCommandPromptMultiButton
@@ -271,7 +272,7 @@ MultiButtonPageChar::
 .exit
 	pop de
 	jp DoneText
-
+;;;;;;;;;
 
 
 _ContText::

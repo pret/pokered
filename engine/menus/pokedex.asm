@@ -1,3 +1,6 @@
+; PureRGBnote: CHANGED: a lot of this file was modified for new functionalities like pressing START/SELECT to bring up map/movedex
+; and new info in the data page / seeking between pokemon on the data page / showing the back sprite via SELECT on the data page
+
 ShowPokedexMenu:
 	call GBPalWhiteOut
 	call ClearScreen

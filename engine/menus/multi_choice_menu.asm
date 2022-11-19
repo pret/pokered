@@ -1,3 +1,4 @@
+; PureRGBnote: ADDED: this code lets you bring up selection lists of 2-6 entries without relying on item menu code.
 ; INPUT:
 ; [wListPointer] = address of the text list (2 bytes) (expected to be defined within this bank)
 ; [wMenuWatchedKeys] = which buttons should exit the menu (like A button for selecting an option)

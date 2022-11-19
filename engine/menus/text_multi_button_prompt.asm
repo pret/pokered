@@ -1,3 +1,4 @@
+; PureRGBnote: ADDED: 
 ; A new "next page" function for text scripts that has more functionality
 ; inputs: (required)
 ;   wMenuWatchedKeys - which buttons will jump out of the text script. A_BUTTON is an invalid option, it always proceeds the text script.

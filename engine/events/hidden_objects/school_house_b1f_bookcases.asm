@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: text for bookcases on the new basement floor of viridian city's schoolhouse
+
 SchoolB1FLeftBookcaseA:
 	ld a, 0
 	jp DoBookcaseJump

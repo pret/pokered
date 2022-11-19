@@ -203,9 +203,10 @@ INCLUDE "engine/menus/pokedex.asm"
 INCLUDE "engine/movie/trade.asm"
 INCLUDE "engine/movie/intro.asm"
 INCLUDE "engine/movie/trade2.asm"
+;;;;;;;;;; PureRGBnote: ADDED: new code for the movedex
 INCLUDE "engine/menus/movedex.asm"
 INCLUDE "data/moves/movedex_type_palettes.asm"
-
+;;;;;;;;;;
 
 SECTION "Pokédex Rating", ROMX
 

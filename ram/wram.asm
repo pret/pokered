@@ -1795,7 +1795,10 @@ wWhatStat:: db ; contains the stat currently being modified by a stat changing m
 wBattleFunctionalFlags:: db
 ;;;
 
-wPokedexDataFlags::
+;;;;; PureRGBnote: CHANGED: this property is also used in the pokedex for some flags.
+;;;;; bit 0 -> How we're displaying pokedex data. 0 = internal (from the pokedex), 1 = external (from dialog)
+;;;;; bit 1 -> Which sprite is currently displayed on a pokedex data page. 0 = front sprite, 1 = back sprite 
+wPokedexDataFlags:: 
 wWhichPrize:: db
 
 ; counts downward each frame
