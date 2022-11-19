@@ -42,4 +42,4 @@
 
 	dw BANK(GravelerPicFront), BANK(GravelerPicBack)
 
-	dw GravelerPicFrontRG, GravelerPicBack
+	dw GravelerPicFrontAlt, GravelerPicBack

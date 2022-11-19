@@ -47,4 +47,4 @@
 
 	dw BANK(NidorinoPicFront), BANK(NidorinoPicBack)
 
-	dw NidorinoPicFrontRG, NidorinoPicBack
+	dw NidorinoPicFrontAlt, NidorinoPicBack

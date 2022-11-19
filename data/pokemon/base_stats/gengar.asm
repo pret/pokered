@@ -45,4 +45,4 @@
 
 	dw BANK(GengarPicFront), BANK(GengarPicBack)
 
-	dw GengarPicFrontY, GengarPicBack
+	dw GengarPicFrontAlt, GengarPicBack

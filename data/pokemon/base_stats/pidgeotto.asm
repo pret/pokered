@@ -38,4 +38,4 @@
 
 	dw BANK(PidgeottoPicFront), BANK(PidgeottoPicBack)
 
-	dw PidgeottoPicFrontRG, PidgeottoPicBack
+	dw PidgeottoPicFrontAlt, PidgeottoPicBack

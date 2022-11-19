@@ -41,4 +41,4 @@
 
 	dw BANK(VoltorbPicFront), BANK(VoltorbPicBack)
 
-	dw VoltorbPicFrontRG, VoltorbPicBack
+	dw VoltorbPicFrontAlt, VoltorbPicBack
