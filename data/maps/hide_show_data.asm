@@ -47,7 +47,7 @@ MapHSPointers:
 	dw OaksLabHS
 	dw NoHS
 	dw NoHS
-	dw NoHS
+	dw ViridianSchoolhouseHS
 	dw NoHS
 	dw ViridianGymHS
 	dw NoHS
@@ -113,7 +113,7 @@ MapHSPointers:
 	dw CeruleanRocketHouse1FHS
 	dw NoHS
 	dw VictoryRoad1FHS
-	dw NoHS
+	dw ViridianSchoolhouseB1FHS
 	dw NoHS
 	dw NoHS
 	dw NoHS
@@ -590,6 +590,12 @@ CeruleanRocketHouse1FHS:
 	db CERULEAN_ROCKET_HOUSE_1F, $01, SHOW
 CeladonHotelHS:
 	db CELADON_HOTEL, $05, SHOW
+ViridianSchoolhouseHS:
+	db VIRIDIAN_SCHOOL_HOUSE, $01, SHOW ; brunette girl
+	db VIRIDIAN_SCHOOL_HOUSE, $03, HIDE ; rocker
+ViridianSchoolhouseB1FHS:
+	db VIRIDIAN_SCHOOL_HOUSE_B1F, $0A, SHOW ; rocker
+	db VIRIDIAN_SCHOOL_HOUSE_B1F, $0B, HIDE ; brunette girl
 	db $FF, $01, SHOW ; end
 	assert_table_length NUM_HS_OBJECTS + 1
 

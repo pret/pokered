@@ -3,6 +3,7 @@
 ; Control characters (see home/text.asm)
 
 	charmap "<NULL>",    $00
+	charmap "<BAGE>",    $48 ; PureRGBnote: ADDED: same as PAGE, but can watch more buttons than just A or B for being pressed
 	charmap "<PAGE>",    $49
 	charmap "<PKMN>",    $4a ; "<PK><MN>"
 	charmap "<_CONT>",   $4b ; implements "<CONT>"
@@ -171,7 +172,7 @@
 
 	charmap "→",         $e9 ; PureRGBnote: ADDED: right facing arrow character
 	charmap "+",         $ea ; PureRGBnote: ADDED: plus sign
-	charmap "ェ",         $eb ; katakana small e, unused
+	charmap "%",         $eb ; PureRGBnote: ADDED: percent sign
 
 	charmap "▷",         $ec
 	charmap "▶",         $ed

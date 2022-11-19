@@ -467,10 +467,10 @@ StatModifierUpEffect:
 .statModifierUpEffect
 	ld a, [de]
 ;;;;;;;;;; PureRGBnote: ADDED: need to decide which stat is being modified here and store it so we can apply correct badge boosts if necessary
-	ld [wWhichStatMod], a
+	push af
 	call MapEffectToStat
 	ld [wWhatStat], a
-	ld a, [de]
+	pop af
 	call MapSideEffectToStatMod
 	cp $ff
 	jr z, .loadDefault
@@ -478,6 +478,7 @@ StatModifierUpEffect:
 .loadDefault
 	ld a, [de]
 .continue
+	ld d, a
 ;;;;;;;;;;
 	sub ATTACK_UP1_EFFECT
 	cp EVASION_UP1_EFFECT + $3 - ATTACK_UP1_EFFECT ; covers all +1 effects
@@ -492,15 +493,8 @@ StatModifierUpEffect:
 	ld a, $d
 	cp b ; can't raise stat past +6 ($d or 13)
 	jp c, PrintNothingHappenedText
-	ld a, [de]
 ;;;;;;;;;; PureRGBnote: ADDED: need to decide which stat is being modified here and store it so we can apply correct badge boosts if necessary
-	call MapSideEffectToStatMod
-	cp $ff
-	jr z, .loadDefault2
-	jr .continue2
-.loadDefault2
-	ld a, [de]
-.continue2
+	ld a, d ; remapped stat mod
 ;;;;;;;;;;
 	cp ATTACK_UP1_EFFECT + $8 ; is it a +2 effect?
 	jr c, .ok
@@ -599,13 +593,21 @@ UpdateStatDone:
 	ld bc, wEnemyMonMinimized
 .playerTurn
 ;;;;;;;;;; PureRGBnote: ADDED: certain stat modifiers don't need to do the animation here
-	ld a, [wWhichStatMod]
+	push de
+	ld de, wPlayerMoveEffect
+	ldh a, [hWhoseTurn]
+	and a
+	jr z, .playerTurn2
+	ld de, wEnemyMoveEffect
+.playerTurn2
+	ld a, [de]
+	pop de
 	cp ATTACK_UP_SIDE_EFFECT
 	jr z, .skipAnimation
 	cp SPEED_UP_SIDE_EFFECT
 	jr z, .skipAnimation
-	ld a, [de]
 ;;;;;;;;;;
+	ld a, [de]
 	cp MINIMIZE
 	jr nz, .notMinimize
  ; if a substitute is up, slide off the substitute and show the mon pic before
@@ -657,7 +659,6 @@ UpdateStatDone:
 	ldh [hWhoseTurn], a
 	ld a, $ff
 	ld [wWhatStat], a ; no longer modifying a stat
-	ld [wWhichStatMod], a ; no longer modifying a stat
 	ret
 ;;;;;;;;;;
 
@@ -1074,18 +1075,22 @@ SwitchAndTeleportEffect:
 	jp nz, PrintText
 	jp ConditionalPrintButItFailed
 .playAnimAndPrintText
-	push af
+	; push af
+;;;;;;;;;; PureRGBnote: ADDED: set the flag that makes the animation code mark this move as seen in the movedex
+	ld hl, wBattleFunctionalFlags
+	set 0, [hl] ; teleport will be marked off on the movedex
+;;;;;;;;;;
 	call PlayBattleAnimation
 	ld c, 20
 	call DelayFrames
-	pop af
+	; pop af
 	ld hl, RanFromBattleText
-	cp TELEPORT
-	jr z, .printText
-	ld hl, RanAwayScaredText
-	cp ROAR
-	jr z, .printText
-	ld hl, WasBlownAwayText
+	;cp TELEPORT ; PureRGBnote: CHANGED: roar and whirlwind have different effects now so no need for this code
+	;jr z, .printText
+	;ld hl, RanAwayScaredText
+	;cp ROAR
+	;jr z, .printText
+	;ld hl, WasBlownAwayText
 .printText
 	jp PrintText
 
@@ -1722,6 +1727,12 @@ PlayCurrentMoveAnimation2:
 .notEnemyTurn
 	and a
 	ret z
+;;;;;;;;;; PureRGBnote: ADDED: set the flag that makes the animation code mark this move as seen in the movedex
+	push hl
+	ld hl, wBattleFunctionalFlags
+	set 0, [hl]
+	pop hl
+;;;;;;;;;;
 
 PlayBattleAnimation2:
 ; play animation ID at a and animation type 6 or 3
@@ -1748,6 +1759,12 @@ PlayCurrentMoveAnimation:
 .notEnemyTurn
 	and a
 	ret z
+;;;;;;;;;; PureRGBnote: ADDED: set the flag that makes the animation code mark this move as seen in the movedex
+	push hl
+	ld hl, wBattleFunctionalFlags
+	set 0, [hl]
+	pop hl
+;;;;;;;;;;
 
 PlayBattleAnimation:
 ; play animation ID at a and predefined animation type

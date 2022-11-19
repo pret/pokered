@@ -59,7 +59,7 @@ IF DEF(_DEBUG)
 	ld [hli], a
 	ld a, SURF
 	ld [hli], a
-	ld a, FOCUS_ENERGY
+	ld a, TRI_ATTACK
 	ld [hl], a
 	ld hl, wPartyMon1PP
 	ld a, 15
@@ -110,12 +110,21 @@ IF DEF(_DEBUG)
 	jr .items_loop
 .items_end
 
-	; Complete the Pokédex.
+	; Complete the Pokédex and Movedex
 	ld hl, wPokedexOwned
+	ld b, wPokedexOwnedEnd - wPokedexOwned - 1
 	call DebugSetPokedexEntries
+	ld [hl], %01111111
 	ld hl, wPokedexSeen
+	ld b, wPokedexSeenEnd - wPokedexSeen - 1
 	call DebugSetPokedexEntries
+	ld [hl], %01111111
+	ld hl, wMovedexSeen
+	ld b, wMovedexSeenEnd - wMovedexSeen - 1
+	call DebugSetPokedexEntries
+	ld [hl], %00011111
 	SetEvent EVENT_GOT_POKEDEX
+	SetEvent EVENT_GOT_MOVEDEX
 
 	
 	ld a, HS_LYING_OLD_MAN
@@ -137,13 +146,11 @@ IF DEF(_DEBUG)
 	ret
 
 DebugSetPokedexEntries:
-	ld b, wPokedexOwnedEnd - wPokedexOwned - 1
 	ld a, %11111111
 .loop
 	ld [hli], a
 	dec b
 	jr nz, .loop
-	ld [hl], %01111111
 	ret
 
 DebugItemsList:

@@ -563,8 +563,8 @@ WarpFound2::
 ; this is for handling "outside" maps that can't have the 0xFF destination map
 	ld a, [wCurMap]
 	ld [wLastMap], a
-	ld a, [wCurMapWidth]
-	ld [wUnusedD366], a ; not read
+	; ld a, [wCurMapWidth]
+	; ld [wUnusedD366], a ; not read
 	ldh a, [hWarpDestinationMap]
 	ld [wCurMap], a
 	cp ROCK_TUNNEL_1F
@@ -1294,7 +1294,7 @@ CheckForTilePairCollisions::
 	jr .retry
 .currentTileMatchesFirstInPair
 	inc hl
-	ld a, [hl]
+	ld a, [hli] ; PureRGBnote: FIXED: performance improvement / fix for strange behaviour when adding new collision pairs
 	cp c
 	jr z, .foundMatch
 	jr .tilePairCollisionLoop

@@ -94,3 +94,13 @@ DEF NUM_COLORS EQU 4
 DEF PAL_SIZE EQU NUM_COLORS * 2
 DEF NUM_ACTIVE_PALS EQU 4
 ;;;;;;;;;;
+
+;;;;;;;;;; PureRGBnote: ADDED: pokedex flags
+
+	const_def
+	const BIT_POKEDEX_DATA_DISPLAY_TYPE    ; 0
+	const BIT_POKEDEX_WHICH_SPRITE_SHOWING ; 1 
+;;;;;;;;;;
+
+
+	

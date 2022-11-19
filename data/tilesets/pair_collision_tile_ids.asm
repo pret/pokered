@@ -15,10 +15,12 @@ TilePairCollisionsLand::
 	db FOREST, $20, $2E
 	db FOREST, $5E, $2E
 	db FOREST, $5F, $2E
+	db CAVERN, $20, $38 ; PureRGBnote: ADDED: collision tiles added for cut content seafoam islands ice ridges that were reintroduced
 	db -1 ; end
 
 TilePairCollisionsWater::
 	db FOREST, $14, $2E
 	db FOREST, $48, $2E
 	db CAVERN, $14, $05
+	db CAVERN, $14, $38 ; PureRGBnote: ADDED: collision tiles added for cut content seafoam islands ice ridges that were reintroduced
 	db -1 ; end

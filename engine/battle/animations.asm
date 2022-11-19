@@ -453,7 +453,12 @@ MoveAnimation:
 	push af
 	call WaitForSoundToFinish
 MoveAnimationContent:
+;;;;;;;;;; PureRGBnote: ADDED: code for setting moves as seen for the movedex
+	ld a, [wBattleFunctionalFlags]
+	bit 0, a
+	call nz, SetMoveDexSeen
 	call SetAnimationPalette
+;;;;;;;;;;
 	ld a, [wAnimationID]
 	and a
 	jr z, .animationFinished
@@ -3064,3 +3069,20 @@ PlayApplyingAttackSound:
 	ld [wTempoModifier], a
 	ld a, c
 	jp PlaySound
+
+;;;;;;;;;; PureRGBnote: ADDED: code for setting moves as seen for the movedex
+SetMoveDexSeen:
+	ld a, [wAnimationID]
+	and a
+	ret z ; NO_MOVE doesn't count
+	dec a
+	cp NUM_ATTACKS + 1
+	ret nc ; non-move animations don't count
+	ld c, a
+	ld b, FLAG_SET
+	ld hl, wMovedexSeen
+	predef FlagActionPredef ; mark this move as seen in the movedex
+	ld hl, wBattleFunctionalFlags
+	res 0, [hl]
+	ret
+;;;;;;;;;;

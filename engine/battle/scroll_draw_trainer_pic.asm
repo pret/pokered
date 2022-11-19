@@ -7,7 +7,7 @@ _ScrollTrainerPicAfterBattle:
 	call RunPaletteCommand
 	callfar _LoadTrainerPic
 	xor a
-	ld [wUnusedD119], a ; PureRGBnote: ADDED: clear trainer class from variable used in bank checking for trainer sprites
+	ld [wWhichTrainerClass], a ; PureRGBnote: ADDED: clear trainer class from variable used in bank checking for trainer sprites
 	hlcoord 19, 0
 	ld c, $0
 .scrollLoop

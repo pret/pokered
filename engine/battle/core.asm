@@ -3258,6 +3258,10 @@ playPlayerMoveAnimation:
 	pop af
 	ld [wAnimationType], a
 	ld a, [wPlayerMoveNum]
+;;;;;;;;;; PureRGBnote: ADDED: set the flag that makes the animation code mark this move as seen in the movedex
+	ld hl, wBattleFunctionalFlags
+	set 0, [hl]
+;;;;;;;;;;
 	call PlayMoveAnimation
 	call HandleExplodingAnimation
 	call DrawPlayerHUDAndHPBar
@@ -5262,6 +5266,10 @@ MetronomePickMove:
 	xor a
 	ld [wAnimationType], a
 	ld a, METRONOME
+;;;;;;;;;; PureRGBnote: ADDED: set the flag that makes the animation code mark this move as seen in the movedex
+	ld hl, wBattleFunctionalFlags
+	set 0, [hl] ; metronome will be marked off on the movedex
+;;;;;;;;;;
 	call PlayMoveAnimation ; play Metronome's animation
 ; values for player turn
 	ld de, wPlayerMoveNum
@@ -5977,6 +5985,10 @@ playEnemyMoveAnimation:
 	pop af
 	ld [wAnimationType], a
 	ld a, [wEnemyMoveNum]
+;;;;;;;;;; PureRGBnote: ADDED: set the flag that makes the animation code mark this move as seen in the movedex
+	ld hl, wBattleFunctionalFlags
+	set 0, [hl]
+;;;;;;;;;;
 	call PlayMoveAnimation
 	call HandleExplodingAnimation
 	call DrawEnemyHUDAndHPBar
@@ -6726,6 +6738,7 @@ LoadPlayerBackPic:
 	ld a, BANK(RedPicBackSW)
 	ASSERT BANK(RedPicBackSW) == BANK(OldManPicBackSW)
 	call UncompressSpriteFromDE
+	ld de, vBackPic
 	call LoadBackSpriteUnzoomed
 	jr .nextAgain
 .ogBackSpriteBank
@@ -7393,7 +7406,7 @@ CheckTrainerPicBank:
 	ld a, BANK(RedPicFront)
 	ret
 .defaultSprite
-	ld a, [wUnusedD119]
+	ld a, [wWhichTrainerClass]
 	cp OPP_COOL_KID
 	ld a, BANK("Pics 6") ; this is where most of the trainer pics are
 	jr c, .isDefault
@@ -7518,6 +7531,13 @@ CopyUncompressedPicToHL::
 	jr nz, .flippedLoop
 	ret
 
+;;;;;;;;;; PureRGBnote: ADDED: code that loads the back sprite of a pokemon into VRAM in the pokedex when pressing SELECT
+LoadMonBackPicInPokedex:
+	ld de, vFrontPic ; load it where the front pic is to save time
+	push de
+	jr LoadMonBackPicCommon
+;;;;;;;;;;
+
 LoadMonBackPic:
 ; Assumes the monster's attributes have
 ; been loaded with GetMonHeader.
@@ -7527,6 +7547,9 @@ LoadMonBackPic:
 	ld b, 7
 	ld c, 8
 	call ClearScreenArea
+	ld de, vBackPic
+	push de
+LoadMonBackPicCommon:
 ;;;;;;;;;; PureRGBnote: ADDED: code to switch between original and larged back sprites
 	ld a, [wSpriteOptions2]
 	bit BIT_BACK_SPRITES, a
@@ -7542,14 +7565,21 @@ LoadMonBackPic:
 	bit BIT_BACK_SPRITES, a
 	jr nz, .swSprites
 .ogSprites
+	pop de
+	push de
 	call LoadBackSpriteZoomed
 	jr .nextb
 .swSprites
+	pop de
+	push de
 	call LoadBackSpriteUnzoomed
 .nextb
 ;;;;;;;;;;
+	pop de
+	ld a, d
+	cp $90 ; d = $90 when de = vFrontPic
+	ret z ; don't copy anything to vSprites when we loaded to vFrontPic
 	ld hl, vSprites
-	ld de, vBackPic
 	ld c, (2*SPRITEBUFFERSIZE)/16 ; count of 16-byte chunks to be copied
 	ldh a, [hLoadedROMBank]
 	ld b, a
@@ -7557,14 +7587,14 @@ LoadMonBackPic:
 
 ;;;;;;;;;; PureRGBnote: ADDED: code to switch between original and larged back sprites
 LoadBackSpriteZoomed:
+	push de
 	predef ScaleSpriteByTwo
-	ld de, vBackPic
+	pop de
 	call InterlaceMergeSpriteBuffers ; combine the two buffers to a single 2bpp sprite
 	ret
 
 LoadBackSpriteUnzoomed:
 	ld a, $66
-	ld de, vBackPic
 	push de
 	jp LoadUncompressedBackSprite
 ;;;;;;;;;;
