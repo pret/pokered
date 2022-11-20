@@ -163,7 +163,7 @@ wTileMap:: ds SCREEN_WIDTH * SCREEN_HEIGHT
 UNION
 ; buffer for temporarily saving and restoring current screen's tiles
 ; (e.g. if menus are drawn on top)
-wTileMapBackup:: ds SCREEN_WIDTH * SCREEN_HEIGHT
+wTileMapBackup:: ds SCREEN_WIDTH * SCREEN_HEIGHT ; 360
 
 NEXTU
 ; list of indexes to patch with SERIAL_NO_DATA_BYTE after transfer
@@ -377,9 +377,8 @@ wHallOfFame:: ds HOF_TEAM
 wHallOfFamePalettes:: db 
 
 NEXTU
-; PureRGBnote: TODO: currently unused since batteryless saving isn't implemented yet
-; when copying SRAM to the ROM on save for batteryless saving functionality, this is where the code that runs the flash is copied.
-wBatterylessSaveCode:: ds 180
+
+wTownMapSavedOAM:: ds 160
 
 NEXTU
 wNPCMovementDirections:: ds 180
@@ -423,7 +422,7 @@ NEXTU
 wSimulatedJoypadStatesEnd::
 
 NEXTU
-wBoostExpByExpAll::
+;wBoostExpByExpAll::
 wUnusedCC5B:: db
 
 	ds 59
@@ -1787,6 +1786,7 @@ wSavedSpriteMapX:: db
 	ds 3 ; unused 3 bytes
 
 ;;; PureRGBnote: ADDED: new properties in this previously empty space
+wTownMapAreaState:: ; view which state is which in map_pokemon_areas.asm
 wDexMinSeenMon::
 wDexMinSeenMove::
 wWhatStat:: db ; contains the stat currently being modified by a stat changing move
@@ -1799,6 +1799,14 @@ wBattleFunctionalFlags:: db
 ;;;;; bit 0 -> How we're displaying pokedex data. 0 = internal (from the pokedex), 1 = external (from dialog)
 ;;;;; bit 1 -> Which sprite is currently displayed on a pokedex data page. 0 = front sprite, 1 = back sprite 
 wPokedexDataFlags:: 
+;;;;; PureRGBnote: CHANGED: this property is also used in the "AREA" option in the pokedex for indicating which states are available for a pokemon
+;;;;; bit 0 -> pokemon has old rod locations
+;;;;; bit 1 -> pokemon has good rod locations in fresh water areas
+;;;;; bit 2 -> pokemon has good rod locations in salt water areas
+;;;;; bit 3 -> pokemon has super rod locations
+;;;;; bit 4 -> pokemon has grass / cave / building locations
+;;;;; bit 5 -> pokemon has surfing locations
+wTownMapAreaTypeFlags::
 wWhichPrize:: db
 
 ; counts downward each frame

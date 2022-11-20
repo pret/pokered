@@ -10,5 +10,6 @@ FuchsiaGoodRodHouse_Object:
 
 	def_object_events
 	object_event  5,  3, SPRITE_FISHING_GURU, STAY, RIGHT, 1 ; person
+	object_event  6,  2, SPRITE_POKEDEX, STAY, NONE, 2 
 
 	def_warps_to FUCHSIA_GOOD_ROD_HOUSE

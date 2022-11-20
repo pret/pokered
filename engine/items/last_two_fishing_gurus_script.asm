@@ -1,5 +1,5 @@
 ; PureRGBnote: ADDED: script code for the behaviour of the last two fishing gurus, because they largely behave the same.
-;                     whichever you encounter first will give a super rod, the other a different gift item.
+;                     whichever you encounter first will give a super rod, the other a FISHING GUIDE (unlocks fishing locations in pokedex).
 ;                     this is needed because the good rod now is given in vermilion and the old rod in cerulean.
 
 LastTwoGurusScript::
@@ -27,12 +27,13 @@ LastTwoGurusScript::
 	ld hl, LastTwoGurusTextNo
 	jr .done
 .got_rod
-	lb bc, ITEM_GOT_SUPER_ROD_ALREADY_REWARD_NEW, 1
-	call GiveItem
-	jr nc, .bag_full
 	ld hl, LastTwoGurusTextAlreadyHaveSuperRod
 	call PrintText
-	jr .gotItem
+	call SetEventFlag
+	ld hl, LastTwoGurusFishingGuideReceived
+	call PrintText
+	ld hl, LastTwoGurusFishingGuideInfo
+	jr .done
 .gotItem
 	call SetEventFlag
 	ld hl, LastTwoGurusReceivedItemText
@@ -50,6 +51,26 @@ SetEventFlag:
 	SetEvent EVENT_GOT_ROUTE12_FISHING_GURU_ITEM
 	ret
 
+LastTwoGurusFishingGuideBookText::
+	CheckBothEventsSet EVENT_GOT_FUCHSIA_FISHING_GURU_ITEM, EVENT_GOT_ROUTE12_FISHING_GURU_ITEM
+	ld hl, FishingGuideBookText
+	jr nz, .done
+	ld hl, FishingGuideBookTextPrompt
+	call PrintText
+	ld hl, LastTwoGurusFishingGuideInfo
+.done
+	call PrintText
+	ret
+
+FishingGuideBookText:
+	text_far _FishingGuideBookText
+	text_end
+
+FishingGuideBookTextPrompt:
+	text_far _FishingGuideBookText
+	text_promptbutton
+	text_end
+
 
 LastTwoGurusTextQuestion:
 	text_far _LastTwoGurusTextQuestion
@@ -61,7 +82,7 @@ LastTwoGurusTextYes:
 
 LastTwoGurusReceivedItemText:
 	text_far _LastTwoGurusReceivedItemText
-	sound_get_item_1
+	sound_get_item_2
 	text_end
 
 LastTwoGurusTextNo:
@@ -74,4 +95,14 @@ LastTwoGurusTextBagFull:
 
 LastTwoGurusTextAlreadyHaveSuperRod:
 	text_far _LastTwoGurusTextAlreadyHaveSuperRod
+	text_end
+
+LastTwoGurusFishingGuideReceived:
+	text_far _LastTwoGurusFishingGuideReceived
+	sound_get_item_2
+	text_promptbutton
+	text_end
+
+LastTwoGurusFishingGuideInfo:
+	text_far _LastTwoGurusFishingGuideInfo
 	text_end

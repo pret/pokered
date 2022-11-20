@@ -317,8 +317,7 @@ INCLUDE "gfx/version.asm"
 
 
 SECTION "bank1C", ROMX
-; PureRGBnote: MOVED: splash.asm and hall_of_fame.asm were moved
-INCLUDE "engine/overworld/healing_machine.asm"
+; PureRGBnote: MOVED: splash.asm, healing_machine.asm, and hall_of_fame.asm were moved
 INCLUDE "engine/overworld/player_animations.asm"
 INCLUDE "engine/battle/ghost_marowak_anim.asm"
 INCLUDE "engine/battle/battle_transitions.asm"
@@ -376,6 +375,10 @@ SECTION "Splash Animation", ROMX
 INCLUDE "engine/movie/splash.asm"
 INCLUDE "engine/movie/hall_of_fame.asm"
 
+SECTION "movedCode", ROMX
+; moved from bank1e
+INCLUDE "engine/overworld/healing_machine.asm"
+
 
 SECTION "Party Sprites", ROMX, BANK[$34]
 ; PureRGBnote: ADDED: new menu sprite icons raw data
@@ -413,6 +416,7 @@ INCLUDE "engine/gfx/remap_overworld_sprites.asm"
 INCLUDE "engine/battle/animations/tri_attack.asm"
 INCLUDE "engine/menus/text_multi_button_prompt.asm"
 INCLUDE "engine/menus/multi_choice_menu.asm"
+INCLUDE "engine/menus/map_pokemon_areas.asm"
 
 
 ; PureRGBnote: TODO: these are currently unused but are intended to be where the save file is flashed to the ROM

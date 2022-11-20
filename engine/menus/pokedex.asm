@@ -113,6 +113,13 @@ HandlePokedexSideMenu:
 	xor a
 	ld [hli], a ; old menu item ID
 	ld [wMenuWatchMovingOutOfBounds], a
+.waitForAButtonRelease
+	call Joypad
+	ld a, 5 ; 1/12 of a second delay
+	ldh [hFrameCounter], a
+	ldh a, [hJoyHeld]
+	bit BIT_A_BUTTON, a
+	jr nz, .waitForAButtonRelease
 .handleMenuInput
 	call HandleMenuInput
 	bit BIT_B_BUTTON, a

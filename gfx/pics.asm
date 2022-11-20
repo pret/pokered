@@ -619,3 +619,8 @@ MovedexUIEnd::
 
 PokedexDataUI::	INCBIN "gfx/pokedex/left_right.2bpp"
 PokedexDataUIEnd::
+
+MapAreasUI::	INCBIN "gfx/town_map/area_type_ui.2bpp"
+MapAreasUIEnd::
+
+FishingWaterIcons:: INCBIN "gfx/town_map/mon_fishing_water_icons.2bpp"

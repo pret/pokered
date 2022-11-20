@@ -25,3 +25,24 @@ _Route12GuruColor::
 	para "Try fishing"
 	line "wherever you can!"
 	done
+
+_LastTwoGurusFishingGuideReceived::
+	text "<PLAYER> received"
+	line "a FISHING GUIDE!@"
+	text_end
+
+_LastTwoGurusFishingGuideInfo::
+	text "Since you have"
+	line "a FISHING GUIDE"
+	cont "of your own, your"
+	cont "#DEX will show"
+	cont "fishing locations"
+	cont "of #MON in it!"
+	done
+
+_FishingGuideBookText::
+	text "It's a big book."
+	para "It says FISHING"
+	line "GUIDE in big"
+	cont "letters."
+	done

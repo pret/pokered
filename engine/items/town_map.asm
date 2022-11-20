@@ -17,7 +17,7 @@ DisplayTownMap:
 	ld de, wcd6d
 	call PlaceString
 	ld hl, wShadowOAM
-	ld de, wTileMapBackup
+	ld de, wTownMapSavedOAM
 	ld bc, $10
 	call CopyData
 	ld hl, vSprites tile $04
@@ -61,7 +61,7 @@ DisplayTownMap:
 	ld de, wcd6d
 	call PlaceString
 	ld hl, wShadowOAMSprite04
-	ld de, wTileMapBackup + 16
+	ld de, wTownMapSavedOAM + 16
 	ld bc, $10
 	call CopyData
 .inputLoop
@@ -118,23 +118,12 @@ LoadTownMap_Nest:
 	push af
 	ld [hl], $ff
 	push hl
-	call DisplayWildLocations
-	call GetMonName
-	hlcoord 1, 0
-	call PlaceString
-	ld h, b
-	ld l, c
-	ld de, MonsNestText
-	call PlaceString
-	call WaitForTextScrollButtonPress
+	callfar DisplayWildLocations
 	call ExitTownMap
 	pop hl
 	pop af
 	ld [hl], a
 	ret
-
-MonsNestText:
-	db "'s NEST@"
 
 LoadTownMap_Fly::
 	call ClearSprites
@@ -341,6 +330,10 @@ ExitTownMap:
 	call UpdateSprites
 	jp RunDefaultPaletteCommand
 
+FarDrawPlayerOrBirdSprite:
+	ld a, [wCurMap]
+	ld b, 0
+
 DrawPlayerOrBirdSprite:
 ; a = map number
 ; b = OAM base tile
@@ -363,60 +356,9 @@ DrawPlayerOrBirdSprite:
 	cp "@"
 	jr nz, .loop
 	ld hl, wShadowOAM
-	ld de, wTileMapBackup
+	ld de, wTownMapSavedOAM
 	ld bc, $a0
 	jp CopyData
-
-DisplayWildLocations:
-	farcall FindWildLocationsOfMon
-	call ZeroOutDuplicatesInList
-	ld hl, wShadowOAM
-	ld de, wTownMapCoords
-.loop
-	ld a, [de]
-	cp $ff
-	jr z, .exitLoop
-	and a
-	jr z, .nextEntry
-	push hl
-	call LoadTownMapEntry
-	pop hl
-	ld a, [de]
-	cp $19 ; Cerulean Cave's coordinates
-	jr z, .nextEntry ; skip Cerulean Cave
-	call TownMapCoordsToOAMCoords
-	ld a, $4 ; nest icon tile no.
-	ld [hli], a
-	xor a
-	ld [hli], a
-.nextEntry
-	inc de
-	jr .loop
-.exitLoop
-	ld a, l
-	and a ; were any OAM entries written?
-	jr nz, .drawPlayerSprite
-; if no OAM entries were written, print area unknown text
-	hlcoord 1, 7
-	ld b, 2
-	ld c, 15
-	call TextBoxBorder
-	hlcoord 2, 9
-	ld de, AreaUnknownText
-	call PlaceString
-	jr .done
-.drawPlayerSprite
-	ld a, [wCurMap]
-	ld b, $0
-	call DrawPlayerOrBirdSprite
-.done
-	ld hl, wShadowOAM
-	ld de, wTileMapBackup
-	ld bc, $a0
-	jp CopyData
-
-AreaUnknownText:
-	db " AREA UNKNOWN@"
 
 TownMapCoordsToOAMCoords:
 ; in: lower nybble of a = x, upper nybble of a = y
@@ -530,28 +472,9 @@ WriteSymmetricMonPartySpriteOAM:
 	jr nz, .loop
 	ret
 
-ZeroOutDuplicatesInList:
-; replace duplicate bytes in the list of wild pokemon locations with 0
-	ld de, wBuffer
-.loop
-	ld a, [de]
-	inc de
-	cp $ff
-	ret z
-	ld c, a
-	ld l, e
-	ld h, d
-.zeroDuplicatesLoop
-	ld a, [hl]
-	cp $ff
-	jr z, .loop
-	cp c
-	jr nz, .skipZeroing
-	xor a
-	ld [hl], a
-.skipZeroing
-	inc hl
-	jr .zeroDuplicatesLoop
+FarLoadTownMapEntry:
+	call GetPredefRegisters
+	ld a, b
 
 LoadTownMapEntry:
 ; in: a = map number
@@ -599,7 +522,7 @@ TownMapSpriteBlinkingAnimation::
 	cp 50
 	jr nz, .done
 ; show sprites when the counter reaches 50
-	ld hl, wTileMapBackup
+	ld hl, wTownMapSavedOAM
 	ld de, wShadowOAM
 	ld bc, $90
 	call CopyData

@@ -52,6 +52,11 @@ WaitForTextScrollSpecificButtonsPress::
 	ldh [hDownArrowBlinkCount2], a
 .loop
 	push hl
+	ld a, [wTownMapSpriteBlinkingEnabled]
+	and a
+	jr z, .skipAnimation
+	callfar TownMapSpriteBlinkingAnimation
+.skipAnimation
 	call LoadDownArrowCoord
 	call HandleDownArrowBlinkTiming
 	pop hl

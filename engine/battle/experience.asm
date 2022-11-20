@@ -384,10 +384,10 @@ BoostExp:
 GainedText:
 	text_far _GainedText
 	text_asm
-	ld a, [wBoostExpByExpAll]
-	ld hl, WithExpAllText
-	and a
-	ret nz
+	;ld a, [wBoostExpByExpAll]
+	;ld hl, WithExpAllText
+	;and a
+	;ret nz
 	ld hl, ExpPointsText
 	ld a, [wGainBoostedExp]
 	and a

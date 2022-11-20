@@ -102,5 +102,17 @@ DEF NUM_ACTIVE_PALS EQU 4
 	const BIT_POKEDEX_WHICH_SPRITE_SHOWING ; 1 
 ;;;;;;;;;;
 
+;;;;;;;;;; PureRGBnote: ADDED: town map area flags
+
+	const_def
+	const BIT_HAS_OLD_ROD_LOCATIONS    ; 0
+	const BIT_HAS_GOOD_ROD_FRESH ; 1
+	const BIT_HAS_GOOD_ROD_SALT ; 2
+	const BIT_HAS_SUPER_ROD_LOCATIONS ; 3
+	const BIT_HAS_GRASS_CAVE_LOCATIONS ; 4
+	const BIT_HAS_WATER_LOCATIONS ; 5 
+;;;;;;;;;;
+
+
 
 	

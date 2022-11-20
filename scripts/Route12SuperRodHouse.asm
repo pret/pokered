@@ -1,10 +1,11 @@
 ; PureRGBnote: CHANGED: since Old rod is obtained in cerulean and good rod in vermilion now, this fishing guru will give either
-; the SUPER ROD or another non-key item depending on which of the last two gurus you talked to first.
+; the SUPER ROD or the FISHING GUIDE depending on which of the last two gurus you talked to first.
 Route12SuperRodHouse_Script:
 	jp EnableAutoTextBoxDrawing
 
 Route12SuperRodHouse_TextPointers:
 	dw Route12HouseText1
+	dw Route12FishingGuide
 
 Route12HouseText1:
 	text_asm
@@ -45,3 +46,8 @@ Route12GuruEndColor:
 Route12GuruColorInfo:
 	text_far _Route12GuruColor
 	text_end
+
+Route12FishingGuide:
+	text_asm
+	callfar LastTwoGurusFishingGuideBookText
+	jp TextScriptEnd

@@ -93,3 +93,4 @@ ManualTextScroll::
 .inLinkBattle
 	ld c, 65
 	jp DelayFrames
+	

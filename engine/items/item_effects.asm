@@ -2162,7 +2162,7 @@ ItemUseOldRod:
 	lb bc, 10, GOLDEEN
 .done
 	ld a, $1 ; set bite
-	jr RodResponse
+	jp RodResponse
 
 ; PureRGBnote: CHANGED: now lands a different set of pokemon depending if you're fishing in a lake/pond/river or the ocean.
 ItemUseGoodRod: 

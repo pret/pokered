@@ -859,8 +859,8 @@ TradeCenter_Trade:
 	call DelayFrames
 	call ClearScreen
 	call LoadHpBarAndStatusTilePatterns
-	xor a
-	ld [wUnusedCC5B], a
+;	xor a
+;	ld [wUnusedCC5B], a
 	ldh a, [hSerialConnectionStatus]
 	cp USING_EXTERNAL_CLOCK
 	jr z, .usingExternalClock

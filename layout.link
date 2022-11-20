@@ -193,8 +193,9 @@ ROMX $31
 	"Movedex Text"
 ROMX $32
 	"Type Icons"
-ROMX $33
 	"Tilesets 4"
+ROMX $33
+	"movedCode"
 ROMX $34
 	"Party Sprites"
 	"GBC Mode Code"

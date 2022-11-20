@@ -10,7 +10,7 @@ WildDataPointers:
 	dw VermilionCityWildMons   ; VERMILION_CITY
 	dw CeladonCityWildMons     ; CELADON_CITY
 	dw NothingWildMons         ; SAFFRON_CITY
-	dw FuchsiaCityWildMons         ; FUCHSIA_CITY
+	dw FuchsiaCityWildMons     ; FUCHSIA_CITY
 	dw SeaRoutesWildMons       ; CINNABAR_ISLAND
 	dw NothingWildMons         ; INDIGO_PLATEAU
 	dw NothingWildMons         ; unused
