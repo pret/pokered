@@ -148,7 +148,7 @@ The fifth, sixth, and seventh pages contain additional pokemon whose front sprit
 
 - And entirely new pokedex mode has been added. It's called the MOVEDEX. This tracks every move you have seen the animation of in battle, and will list all their information and data in detail for you to see. Try to complete your MOVEDEX! The movedex is unlocked in a new basement classroom of the schoolhouse in Viridian City.
 
-[movedex](/screenshots/movedex.png?raw=true) [movedex thunderbolt](/screenshots/thunderbolt.png?raw=true) [movedex flamethrower](/screenshots/flamethrower.png?raw=true) [movedex surf](/screenshots/surf.png?raw=true)
+![movedex](/screenshots/movedex.png?raw=true) ![movedex thunderbolt](/screenshots/thunderbolt.png?raw=true) ![movedex flamethrower](/screenshots/flamethrower.png?raw=true) ![movedex surf](/screenshots/surf.png?raw=true)
  
 - Ghost Marowak can be caught, and if you have Alt Pkmn Palettes turned on, it has a special ghostly coloration. It wants revenge on Team Rocket!
 
