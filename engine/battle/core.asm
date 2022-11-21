@@ -869,7 +869,7 @@ FaintEnemyPokemon:
 ; if exp all is in the bag, this will be only be half of the stat exp and normal exp, due to the above loop
 .giveExpToMonsThatFought
 	xor a
-;	ld [wBoostExpByExpAll], a
+	ld [wAnimationType], a
 	callfar GainExperience
 	;pop af
 	ret ; return if no exp all
@@ -1791,7 +1791,7 @@ SendOutMon:
 	ld hl, wBattleAndStartSavedMenuItem
 	ld [hli], a
 	ld [hl], a
-;	ld [wBoostExpByExpAll], a
+	ld [wAnimationType], a
 	ld [wDamageMultipliers], a
 	ld [wPlayerMoveNum], a
 	ld hl, wPlayerUsedMove

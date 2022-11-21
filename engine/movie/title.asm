@@ -225,8 +225,8 @@ ENDC
 	ld a, MUSIC_TITLE_SCREEN
 	ld [wNewSoundID], a
 	call PlaySound
-;	xor a
-;	ld [wUnusedCC5B], a
+	xor a
+	ld [wUnusedCC5B], a
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; shinpokerednote: gbcnote: The tiles in the window need to be shifted so that the bottom
