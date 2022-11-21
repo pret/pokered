@@ -575,6 +575,9 @@ ShowPokedexDataCommon:
 	call GBPalWhiteOut ; zero all palettes
 	call ClearScreen
 
+	ld hl, wPokedexDataFlags
+	set 2, [hl] ; flag indicates we're currently in the pokedex data page
+
 	ldh a, [hTileAnimations]
 	push af
 	xor a
@@ -956,7 +959,7 @@ ShowNextPokemonData:
 	bit BIT_B_BUTTON, b
 	jp nz, .exitDataPage
 	bit BIT_D_LEFT, b
-	jr nz, .prevMon
+	jp nz, .prevMon
 	bit BIT_D_RIGHT, b
 	jr nz, .nextMon
 	bit BIT_SELECT, b
@@ -966,6 +969,7 @@ ShowNextPokemonData:
 .exitDataPage
 	xor a
 	ldh [hClearLetterPrintingDelayFlags], a
+	ld [wPokedexDataFlags], a
 	pop hl
 	pop af
 	ldh [hTileAnimations], a

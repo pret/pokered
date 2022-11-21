@@ -59,4 +59,5 @@ TrainerPicAndMoneyPointers::
 	pic_money RangerPic, 	   3500
 	pic_money RangerFPic, 	   3500
 	pic_money RookiePic, 	   3000
+	pic_money SoldierPic,      6000
 	assert_table_length NUM_TRAINERS

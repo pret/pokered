@@ -53,6 +53,7 @@ TrainerDataPointers:
 	dw RangerData
 	dw RangerFData
 	dw RookieData
+	dw SoldierData
 
 ; if first byte != $FF, then
 	; first byte is level (of all pokemon on this team)
@@ -722,8 +723,7 @@ GentlemanData:
 ; Underground Path Route 7-8
 	db 28, CUBONE, RAICHU, 0 ; NEWx
 	db 28, PIKACHU, MAROWAK, 0 ; NEWx
-; Vermilion Gym
-	db 25, ELECTABUZZ, 0 ; NEWx (from duplicate)
+; a duplicate here used in vermilion gym was switched over to SOLDIER due to its dialogue
 
 Green2Data:
 ; SS Anne 2F
@@ -847,3 +847,7 @@ RookieData:
 	db 19, BELLSPROUT, WARTORTLE, 0 ; NEWx
 ; Route 2
 	db 23, ABRA, CHARMANDER, SQUIRTLE, 0 ; NEWx
+
+SoldierData:
+; Vermilion Gym (used to be a gentleman)
+	db 25, ELECTABUZZ, 0 ; NEWx (from duplicate gentleman)

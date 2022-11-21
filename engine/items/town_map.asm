@@ -205,6 +205,7 @@ LoadTownMap_Fly::
 	xor a
 	ld [wTownMapSpriteBlinkingEnabled], a
 	call GBPalWhiteOutWithDelay3
+	call ClearSavedTownMapOAM
 	pop hl
 	pop af
 	ld [hl], a
@@ -323,12 +324,20 @@ ExitTownMap:
 	xor a
 	ld [wTownMapSpriteBlinkingEnabled], a
 	call GBPalWhiteOut
+	call ClearSavedTownMapOAM
 	call ClearScreen
 	call ClearSprites
 	call LoadPlayerSpriteGraphics
 	call LoadFontTilePatterns
 	call UpdateSprites
 	jp RunDefaultPaletteCommand
+
+ClearSavedTownMapOAM:
+	ld hl, wTownMapSavedOAM
+	ld bc, $a0
+	ld a, 0
+	call FillMemory ; clear the saved oam from wTownMapSavedOAM
+	ret
 
 FarDrawPlayerOrBirdSprite:
 	ld a, [wCurMap]

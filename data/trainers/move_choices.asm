@@ -63,4 +63,5 @@ TrainerClassMoveChoiceModifications:
 	move_choices 1, 3    ; RANGER
 	move_choices 1, 3    ; RANGER_F
 	move_choices 1, 2    ; ROOKIE
+	move_choices 1, 3    ; SOLDIER
 	assert_list_length NUM_TRAINERS

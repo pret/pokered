@@ -6737,7 +6737,6 @@ LoadPlayerBackPic:
 	ld a, BANK(RedPicBackSW)
 	ASSERT BANK(RedPicBackSW) == BANK(OldManPicBackSW)
 	call UncompressSpriteFromDE
-	ld de, vBackPic
 	call LoadBackSpriteUnzoomed
 	jr .nextAgain
 .ogBackSpriteBank
@@ -7532,8 +7531,6 @@ CopyUncompressedPicToHL::
 
 ;;;;;;;;;; PureRGBnote: ADDED: code that loads the back sprite of a pokemon into VRAM in the pokedex when pressing SELECT
 LoadMonBackPicInPokedex:
-	ld de, vFrontPic ; load it where the front pic is to save time
-	push de
 	jr LoadMonBackPicCommon
 ;;;;;;;;;;
 
@@ -7546,8 +7543,6 @@ LoadMonBackPic:
 	ld b, 7
 	ld c, 8
 	call ClearScreenArea
-	ld de, vBackPic
-	push de
 LoadMonBackPicCommon:
 ;;;;;;;;;; PureRGBnote: ADDED: code to switch between original and larged back sprites
 	ld a, [wSpriteOptions2]
@@ -7564,39 +7559,42 @@ LoadMonBackPicCommon:
 	bit BIT_BACK_SPRITES, a
 	jr nz, .swSprites
 .ogSprites
-	pop de
-	push de
 	call LoadBackSpriteZoomed
 	jr .nextb
 .swSprites
-	pop de
-	push de
 	call LoadBackSpriteUnzoomed
 .nextb
 ;;;;;;;;;;
-	pop de
-	ld a, d
-	cp $90 ; d = $90 when de = vFrontPic
-	ret z ; don't copy anything to vSprites when we loaded to vFrontPic
+	call GetBackSpriteTarget
+	ret nz ; don't copy anything to vSprites when we loaded to vFrontPic
 	ld hl, vSprites
 	ld c, (2*SPRITEBUFFERSIZE)/16 ; count of 16-byte chunks to be copied
 	ldh a, [hLoadedROMBank]
 	ld b, a
 	jp CopyVideoData
 
-;;;;;;;;;; PureRGBnote: ADDED: code to switch between original and larged back sprites
+;;;;;;;;;; PureRGBnote: ADDED: code to switch between original and larger back sprites
 LoadBackSpriteZoomed:
-	push de
 	predef ScaleSpriteByTwo
-	pop de
+	call GetBackSpriteTarget
 	call InterlaceMergeSpriteBuffers ; combine the two buffers to a single 2bpp sprite
 	ret
 
 LoadBackSpriteUnzoomed:
+	call GetBackSpriteTarget
 	ld a, $66
 	push de
 	jp LoadUncompressedBackSprite
 ;;;;;;;;;;
+
+GetBackSpriteTarget:
+	ld a, [wPokedexDataFlags]
+	bit 2, a
+	ld de, vBackPic
+	ret z
+	ld de, vFrontPic ; in the pokedex we render it to where the front sprite shows up for easier toggling
+	ret
+
 
 ;;;;;;;;;; shinpokerednote: FIXED: code for capping reflect/light screen stat boost at 999
 do999StatCap:

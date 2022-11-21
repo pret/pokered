@@ -51,3 +51,4 @@ TrainerNames::
 	db "RANGER@"
 	db "RANGER@"
 	db "ROOKIE@"
+	db "SOLDIER@"
