@@ -20,7 +20,7 @@ MarowakAnim:
  ; alternate between black and light grey 8 times.
  ; this makes the ghost's body appear to flash
 	ld d, $80
-	call FlashSprite8Times
+	callfar FlashSprite8Times
 .fadeOutGhostLoop
 	ld c, 10
 	call DelayFrames

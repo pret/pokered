@@ -157,8 +157,6 @@ SailorData:
 	db 22, TENTACOOL, STARYU, 0 
 	db 20, HORSEA, SANDSHREW, POLIWHIRL, 0
 	db 21, MACHOP, SQUIRTLE, 0
-; Vermilion Gym
-	db 23, PIKACHU, HORSEA, 0
 
 JrTrainerMData:
 ; Pewter Gym
@@ -487,7 +485,7 @@ TamerData:
 ; Route 5
 	db 17, DITTO, SEEL, DRATINI, 0 ; NEWx
 ; Route 12
-	db 28, TENTACOOL, NIDORINO, 0 ; NEWx
+	db 28, HORSEA, NIDORINO, 0 ; NEWx
 ; Route 18
 	db 42, KINGLER, SNORLAX, 0 ; NEWx
 
@@ -813,8 +811,6 @@ FireFighterData:
 	db 53, ELECTRODE, ARCANINE, BLASTOISE, 0
 ; Silph co 1F after beating giovanni
 	db 49, FLAREON, BLASTOISE, 0 ; NEWx
-	db 47, MAGMAR, KANGASKHAN, POLIWRATH, 0 ; NEWx
-	db 49, ARCANINE, VAPOREON, 0 ; NEWx
 	db 47, RAPIDASH, DEWGONG, BLASTOISE, 0 ; NEWx
 ; Pokemon Mansion 1F
 	db 54, ARCANINE, BLASTOISE, 0 ; NEWx
@@ -849,5 +845,9 @@ RookieData:
 	db 23, ABRA, CHARMANDER, SQUIRTLE, 0 ; NEWx
 
 SoldierData:
-; Vermilion Gym (used to be a gentleman)
-	db 25, ELECTABUZZ, 0 ; NEWx (from duplicate gentleman)
+; Vermilion Gym 
+	db 25, ELECTABUZZ, 0 ; NEWx (used to be a gentleman) (used to be a duplicate trainer entry)
+	db 23, PIKACHU, TENTACOOL, 0 ; used to be a sailor in vermilion gym
+; Silph Co 1F after beating giovanni on the 11th floor
+	db 47, MAGMAR, KANGASKHAN, POLIWRATH, 0 ; NEWx
+	db 49, ARCANINE, VAPOREON, 0 ; NEWx
