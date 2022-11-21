@@ -8,7 +8,6 @@ ITEM_ROUTE_1_MART_SAMPLE                EQU POTION
 ITEM_OAK_POKE_BALL_REWARD               EQU POKE_BALL
 ITEM_NUGGET_BRIDGE_REWARD               EQU NUGGET
 ITEM_GOT_LAPRAS_SILPH_CO_7F_REWARD_NEW  EQU RARE_CANDY 		; item you're given instead of LAPRAS if you already got lapras from this NPC earlier in the game
-ITEM_GOT_SUPER_ROD_ALREADY_REWARD_NEW   EQU RARE_CANDY		; item you're given by the extra fishing guru since one was added in cerulean city earlier on top of the existing ones
 ITEM_RANGER_HUNT_COMPLETION_PRIZE_NEW   EQU HYPER_BALL		; item you get for completing RANGER HUNT mode at the SAFARI ZONE
 ITEM_VERMILION_SECRET_DOCK_BEAUTY_NEW   EQU HYPER_BALL		; item a lady on a dock in the water of vermilion gives you when she is found
 ITEM_SILPH_CO_PRESIDENT_REWARD          EQU MASTER_BALL
