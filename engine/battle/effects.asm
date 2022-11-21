@@ -983,8 +983,7 @@ ThrashPetalDanceEffect:
 	inc a
 	inc a
 	ld [de], a ; set thrash/petal dance counter to 2 or 3 at random
-	ldh a, [hWhoseTurn]
-	add SHRINKING_SQUARE_ANIM
+	ld a, SHRINKING_SQUARE_ANIM
 	jp PlayBattleAnimation2
 
 SwitchAndTeleportEffect:
@@ -1805,17 +1804,28 @@ SuperFangEffect:
 	call Divide
 	ldh a, [hQuotient + 2]
 	ld b, a
-	ld hl, wDamage ; subtract 1/3 of the mon's current HP from their current HP value to obtain 2/3 resultant damage
-	ld a, [hl]
-	sub b
-	ld [hli], a
-	ld c, a
 	ldh a, [hQuotient + 3]
-	ld b, a
+	ld c, a
+	ld hl, wDamage ; subtract 1/3 of the mon's current HP from their current HP value to obtain 2/3 resultant damage
+	ld a, [hli]
+	ld d, a
 	ld a, [hl]
+	ld e, a
+	; subtract bc from de
+	ld a, e
+	sub c
+	ld e, a
+	ld a, d
 	sbc b
+	ld d, a
+	; de = resultant value
+	ld a, d
+	ld hl, wDamage
+	ld [hli], a
+	ld a, e
 	ld [hl], a
-	or c
+	and a
+	or d
 	ret nz
 ; make sure Super Fang's damage is always at least 1
 	ld a, 1
