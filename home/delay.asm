@@ -13,8 +13,8 @@ PlaySoundWaitForCurrent::
 
 ; Wait for sound to finish playing
 WaitForSoundToFinish::
-	ld a, [wLowHealthAlarm]
-	and $80
+	ld a, [wLowHealthTonePairs]
+	and a
 	ret nz
 	push hl
 .waitLoop
