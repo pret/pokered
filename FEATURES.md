@@ -175,7 +175,7 @@ The fifth, sixth, and seventh pages contain additional pokemon whose front sprit
 
  ![Lab color changer NPC](/screenshots/color_changer_npc.png?raw=true)
 
-- The FISHING GURU now lives in cerulean city and you can get the OLD ROD a bit earlier. Same with the GOOD ROD, which is now in the old FISHING GURU's house in vermilion city. As for the last two gurus on Route 12 and in Fuchsia city, whoever you meet first will give you a SUPER ROD. The other will be a bit distraught at the unexpected turn of events.
+- The FISHING GURU now lives in cerulean city and you can get the OLD ROD a bit earlier. Same with the GOOD ROD, which is now in the old FISHING GURU's house in vermilion city. As for the last two gurus on Route 12 and in Fuchsia city, whoever you meet first will give you a SUPER ROD. The other will be a bit distraught at the unexpected turn of events, and then give you a FISHING GUIDE. This unlocks the ability to see fishing locations for pokemon in the pokedex.
 
 - A secret stairway opens up in a building somewhere after you become champ. The last in-game trade and some interesting stuff to see is in there. 
 
