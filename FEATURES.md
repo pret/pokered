@@ -119,6 +119,7 @@ The fifth, sixth, and seventh pages contain additional pokemon whose front sprit
 - New info in the pokedex: The pokedex displays the typing of pokemon you have seen, and typing/base stats of pokemon you have caught
 
 ![Pokedex Base Stats](/screenshots/pokedex_base_stats_typing.png?raw=true)
+- You can press SELECT to view back sprites of pokemon you have caught in the pokedex when viewing their pokedex data.
 - When doing the Cinnabar Gym quiz, it won't keep explaining the quiz every time you start it up.
 - Coin Case doesn't take up space in your bag. Go to the game corner if you need to check how many coins you have.
 - Secret Key, Card Key, and Lift Key are consumed when you no-longer need them. Less item clutter.
@@ -144,6 +145,11 @@ The fifth, sixth, and seventh pages contain additional pokemon whose front sprit
 - Missingno and the item duplication glitch are still accessible. Missingno can be caught and won't corrupt your game data in any way. It's very powerful, so be careful when trying to catch it! Missingno also randomly displays different sprites like its original "glitchy" sprite, the Ghost sprite or Fossil Kabutops/Aerodactyl each time its sprite is loaded.
 
  ![Missingno](/screenshots/missingno.png?raw=true)
+
+- And entirely new pokedex mode has been added. It's called the MOVEDEX. This tracks every move you have seen the animation of in battle, and will list all their information and data in detail for you to see. Try to complete your MOVEDEX! The movedex is unlocked in a new basement classroom of the schoolhouse in Viridian City.
+
+[movedex](/screenshots/movedex.png?raw=true) [movedex thunderbolt](/screenshots/thunderbolt.png?raw=true) [movedex flamethrower](/screenshots/flamethrower.png?raw=true) [movedex surf](/screenshots/surf.png?raw=true)
+ 
 - Ghost Marowak can be caught, and if you have Alt Pkmn Palettes turned on, it has a special ghostly coloration. It wants revenge on Team Rocket!
 
 - The Safari Zone now has 3 different "Modes" of Safari Game. They are:
@@ -174,8 +180,14 @@ The fifth, sixth, and seventh pages contain additional pokemon whose front sprit
 - If you have Alt Palette Pkmn option turned on, at the Cinnabar Lab there is an NPC who will allow you to swap the color palette of your pokemon for its alternate palette. You have a limited number of color change usages!
 
  ![Lab color changer NPC](/screenshots/color_changer_npc.png?raw=true)
+ 
+- A new area was added in the basement of the Viridian Schoolhouse. Acts as a sort of help area in the early game, with more info about basic stuff in the game like stats, type matchups, STAB, etc. It's also where you unlock the MOVEDEX feature.
+
+![schoolhouse basement](/screenshots/new_school_basement.png?raw=true)
 
 - The FISHING GURU now lives in cerulean city and you can get the OLD ROD a bit earlier. Same with the GOOD ROD, which is now in the old FISHING GURU's house in vermilion city. As for the last two gurus on Route 12 and in Fuchsia city, whoever you meet first will give you a SUPER ROD. The other will be a bit distraught at the unexpected turn of events, and then give you a FISHING GUIDE. This unlocks the ability to see fishing locations for pokemon in the pokedex.
+
+![Fishing locations good rod](/screenshots/areas_good_rod.png?raw=true) ![Fishing Locations old rod](/screenshots/areas_old_rod.png?raw=true) ![Fishing locations super rod](/screenshots/areas_super_rod.png?raw=true)
 
 - A secret stairway opens up in a building somewhere after you become champ. The last in-game trade and some interesting stuff to see is in there. 
 
@@ -195,7 +207,10 @@ The fifth, sixth, and seventh pages contain additional pokemon whose front sprit
 - There was an unused trainer class for Prof Oak. It's been added back into the game. Find him in Cerulean Cave after beating the Elite Four. He can be battled repeatedly. Just leave the area and come back.
 - Some trainer classes based on Beta or unused sprites were reintroduced to the game: `ROOKIE`, `RANGER`, `FIREFIGHTER`, `COOL KID`. You'll find them in previously empty places or routes!
 
-![Rookie](/gfx/unused_prototype_sprites/rookie.png?raw=true) ![Ranger](/gfx/unused_prototype_sprites/ranger.png?raw=true) ![Firefighter](/gfx/unused_prototype_sprites/firefighter.png?raw=true) ![Cool Kid](/gfx/unused_prototype_sprites/cool_kid.png?raw=true)
+![Rookie](/gfx/unused_prototype_sprites/rookie.png?raw=true) ![Ranger](/gfx/unused_prototype_sprites/ranger.png?raw=true) ![Firefighter](/gfx/unused_prototype_sprites/firefighter.png?raw=true) ![Cool Kid](/gfx/unused_prototype_sprites/cool_kid.png?raw=true) ![Soldier](/gfx/unused_prototype_sprites/soldier.png?raw=true)
+
+- There were unused icy-looking tiles in the Cave tileset that were meant to be used in seafoam island. Now they are used there!
+![seafoam cut tiles](/screenshots/seafoam_islands_cut_content_tiles.png?raw=true)
 - Some unused trainers from existing classes were added into the game in various originally empty places
 
 ## Visual changes
@@ -236,6 +251,7 @@ The fifth, sixth, and seventh pages contain additional pokemon whose front sprit
 - Double Edge animation appearance when opponent uses it fixed
 - Blacking out in the Safari Zone won't glitch the game out
 - Trying to switch to the current pokemon or a fainted one won't trigger a small visual glitch
+- A small collision detection bug in cerulean cave was fixed
 
 ## Tweaks
 - Trainers in general have a bit less type-specific parties and more varied pokemon. 
