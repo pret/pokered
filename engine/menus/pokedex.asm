@@ -108,18 +108,11 @@ HandlePokedexSideMenu:
 	inc hl
 	ld a, 3
 	ld [hli], a ; max menu item ID
-	;ld a, A_BUTTON | B_BUTTON
+	;ld a, A_BUTTON | B_BUTTON not needed since A_BUTTON | B_BUTTON = 3 and 3 is already in the 'a' register
 	ld [hli], a ; menu watched keys (A button and B button)
 	xor a
 	ld [hli], a ; old menu item ID
 	ld [wMenuWatchMovingOutOfBounds], a
-.waitForAButtonRelease
-	call Joypad
-	ld a, 5 ; 1/12 of a second delay
-	ldh [hFrameCounter], a
-	ldh a, [hJoyHeld]
-	bit BIT_A_BUTTON, a
-	jr nz, .waitForAButtonRelease
 .handleMenuInput
 	call HandleMenuInput
 	bit BIT_B_BUTTON, a
