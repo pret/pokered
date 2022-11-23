@@ -5418,14 +5418,14 @@ AdjustDamageForMoveType:
 ;;;; shinpokerednote: FIXED: fixing the wrong effectiveness message 
 	and a
 	jr z, .endmulti	;skip to end if the multiplier is zero
-	cp $05	;multiplier is still in a, so see if it's half damage
+	cp NOT_VERY_EFFECTIVE	;multiplier is still in a, so see if it's half damage
 	jr nz, .nothalf	;skip ahead if not half
 	ld a, [wDamageMultipliers]	;otherwise get the original stored multiplier (should be $0A if first time)
 	and $7f	;a AND 0111111. this makes only the highest bit (used for STAB) zero.
 	srl a	; divide a by 2
 	jr .endmulti	;done with the fix, so skip onward
 .nothalf
-	cp $14	;multiplier is still in a, so see if it's double damage
+	cp SUPER_EFFECTIVE	;multiplier is still in a, so see if it's double damage
 	jr nz, .endmulti	;skip ahead if not double since at this point it has to be zero
 	ld a, [wDamageMultipliers]	;otherwise get the original stored multiplier (should be $0A if first time)
 	and $7f	;a AND 0111111. this makes only the highest bit (used for STAB) zero.

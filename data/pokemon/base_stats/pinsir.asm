@@ -40,6 +40,7 @@
 	ROCK_SLIDE,\
 	GLARE,\
 	SUBSTITUTE,\
+	CUT,\
 	SURF,\
 	STRENGTH
 	; end
