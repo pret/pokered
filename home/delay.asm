@@ -13,8 +13,8 @@ PlaySoundWaitForCurrent::
 
 ; Wait for sound to finish playing
 WaitForSoundToFinish::
-	ld a, [wLowHealthAlarm]
-	and $80
+	ld a, [wLowHealthTonePairs]
+	bit 7, a ; set if low health alarm sound is currently playing
 	ret nz
 	push hl
 .waitLoop

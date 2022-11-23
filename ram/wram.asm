@@ -950,7 +950,7 @@ wIsAltPalettePkmnData:: db ;a flag for features related to alternate pokemon col
 ;1 - set prior to loading the data of a pokemon into wram in order to insert the flag for alternate palette into its data permanently
 ;stays set until the next pokemon is loaded.
 
-wLowHealthTonePairs:: db ;in battle, used as a counter for low hp alarm tone pairs
+wLowHealthTonePairs:: db ;in battle, used as a counter for low hp alarm tone pairs. Bit 7 is a flag that indicates tones are currently being played.
 ;;;;;;;;;;
 
 ; This has overlapping related uses.

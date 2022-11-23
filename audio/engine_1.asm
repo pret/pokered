@@ -162,18 +162,14 @@ Audio1_PlayNextNote:
 	cp CHAN5
 	jr nz, .asm_918c
 	ld a, [wLowHealthAlarm]
-;	bit 7, a
+	bit 7, a
+	jr z, .asm_918c
 
-;;;;;;;;;; shinpokerednote: FIXED: treat zero wLowHealthTonePairs the same as a disabled wLowHealthAlarm
+;;;;;;;;;; shinpokerednote: FIXED: treat non-active wLowHealthTonePairs the same as a disabled wLowHealthAlarm
 ;;;;;;;;;; needed for limiting the hp alarm or else some sfx get cut off
-	and %10000000
-	ld b, a
 	ld a, [wLowHealthTonePairs]
-	or b
-	cp $81
-	jr c, .asm_918c
-
-;	jr z, .asm_918c
+	bit 7, a
+	jr z, .asm_918c
 ;;;;;;;;;;
 	call Audio1_EnableChannelOutput
 	ret
