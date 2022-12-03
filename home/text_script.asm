@@ -105,6 +105,7 @@ HoldTextDisplayOpen::
 	bit BIT_A_BUTTON, a
 	jr nz, HoldTextDisplayOpen
 
+; FIXME: this unintentionally gets run after HoldTextDisplayOpen...but that may be a good thing since resetting sprite facings seems pointless.
 CloseTextDisplayNoSpriteUpdate:: ; PureRGBnote: ADDED: less laggy version of closing the text display that doesn't reset sprite facings
 	call CloseTextDisplayPart1
 	jp CloseTextDisplayPart2

@@ -78,7 +78,7 @@ _SafariZoneNorthJugglerAfterBattleText::
 	cont "RANGER HUNT game"
 	cont "is supposed to be"
 	cont "a special type of"
-	cont "POKé BALL."
+	cont "# BALL."
 
 	para "Not available"
 	line "anywhere else!"
@@ -182,7 +182,7 @@ _SafariZoneNorthEngineerAfterBattleText::
 	done
 
 _SafariZoneNorthManiacText::
-	text "POKéMANIAC code!"
+	text "#MANIAC code!"
 	line "Tenet one!"
 
 	para "Always battle"
@@ -197,7 +197,7 @@ _SafariZoneNorthManiacEndBattleText::
 	prompt
 
 _SafariZoneNorthManiacAfterBattleText::
-	text "POKéMANIAC code!"
+	text "#MANIAC code!"
 	line "Tenet three!"
 
 	para "If you lose to a"
@@ -206,7 +206,7 @@ _SafariZoneNorthManiacAfterBattleText::
 	cont "your pal!"
 
 	para "--You and the"
-	line "POKéMANIAC did"
+	line "#MANIAC did"
 	cont "the secret cool-"
 	cont "dudes-only"
 	cont "handshake!"
