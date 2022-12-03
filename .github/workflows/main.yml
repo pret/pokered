@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@master
         with:
           path: rgbds
-          ref: v0.6.0
+          ref: v0.6.1
           repository: gbdev/rgbds
 
       - name: Install rgbds
