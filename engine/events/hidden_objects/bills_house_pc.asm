@@ -73,8 +73,6 @@ BillsHousePokemonList::
 	ld [wMenuItemOffset], a ; not used
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
-	ld a, A_BUTTON | B_BUTTON
-	ld [wMenuWatchedKeys], a
 	ld a, 4
 	ld [wMaxMenuItem], a
 	ld a, 2
@@ -82,6 +80,8 @@ BillsHousePokemonList::
 	ld a, 1
 	ld [wTopMenuItemX], a
 .billsPokemonLoop
+	ld a, A_BUTTON | B_BUTTON
+	ld [wMenuWatchedKeys], a
 	ld hl, wd730
 	set 6, [hl]
 	hlcoord 0, 0
