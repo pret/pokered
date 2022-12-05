@@ -201,10 +201,6 @@ ROMX $34
 	"GBC Mode Code"
 ROMX $35
     "newCode"
-ROMX $3D
-    "Batteryless Save Bank 1"
-ROMX $3F
-    "Batteryless Save Bank 2"
 WRAM0
 	"Audio RAM"
 	org $c100

@@ -417,12 +417,3 @@ INCLUDE "engine/battle/animations/tri_attack.asm"
 INCLUDE "engine/menus/text_multi_button_prompt.asm"
 INCLUDE "engine/menus/multi_choice_menu.asm"
 INCLUDE "engine/menus/map_pokemon_areas.asm"
-
-
-; PureRGBnote: TODO: these are currently unused but are intended to be where the save file is flashed to the ROM
-; once batteryless saving is implemented.
-SECTION "Batteryless Save Bank 1", ROMX, BANK[$3D]
-; don't put anything in this bank ever
-
-SECTION "Batteryless Save Bank 2", ROMX, BANK[$3F]
-; don't put anything in this bank ever
