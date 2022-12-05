@@ -229,11 +229,11 @@
 	const PORYGONZ           ; $DC
 	; const HAPPINY            ; $DD
 	; const MUNCHLAX           ; $DE
-	; const ANNIHILAPE         ; $DF
-	; const SCREAM_TAIL        ; $E0
-	; const SANDY_SHOCKS       ; $E1
+	const ANNIHILAPE         ; $DF
+	const SCREAM_TAIL        ; $E0
+	const SANDY_SHOCKS       ; $E1
 	; const WIGLETT            ; $E2
-	; const WUGTRIO            ; $E3
+	const WUGTRIO            ; $E3
 	; const TOEDSCOOL          ; $E4
 	; const TOEDSCRUEL         ; $E5
 	; const PERRSERKER         ; $E6
