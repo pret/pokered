@@ -3,14 +3,14 @@
 	db 115,  65,  99, 111,  65
 	;   hp  atk  def  spd  spc
 
-	db FAIRY, PSYCHIC ; type
+	db FAIRY, PSYCHIC_TYPE ; type
 	db 50 ; catch rate
 	db 210 ; base exp
 
 	INCBIN "gfx/pokemon/front/screamtail.pic", 0, 1 ; sprite dimensions
 	dw ScreamTailPicFront, ScreamTailPicBack
 
-	db SING, POUND, DISABLE, NO_MOVE ; level 1 learnset
+	db SING, FAIRY_WIND, DISABLE, BITE ; level 1 learnset
 	db GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset

@@ -10,7 +10,7 @@
 	INCBIN "gfx/pokemon/front/sandyshocks.pic", 0, 1 ; sprite dimensions
 	dw SandyShocksPicFront, SandyShocksPicBack
 
-	db TACKLE, SONIC_BOOM, THUNDERSHOCK, MAGNET_BOMB ; level 1 learnset
+	db TACKLE, SONICBOOM, THUNDERSHOCK, MAGNET_BOMB ; level 1 learnset
 	db GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset

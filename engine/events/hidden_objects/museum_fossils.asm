@@ -23,17 +23,17 @@ KabutopsFossilText::
 	text_end
 
 ScarletBook::
-	tx_pre ScarletBook1
+	text_far ScarletBook1
 	ld a, SCREAM_TAIL
 	ld [wcf91], a
 	call PlayCry
 	jp DisplayMonFrontSpriteInBox
-	tx_pre ScarletBook2
+	text_far ScarletBook2
 	ld a, SANDY_SHOCKS
 	ld [wcf91], a
 	call PlayCry
 	jp DisplayMonFrontSpriteInBox
-	tx_pre ScarletBook3
+	text_far ScarletBook3
 
 ScarletBook1::
 	text_far _ScarletBook1

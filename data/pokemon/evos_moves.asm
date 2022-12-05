@@ -223,6 +223,10 @@ EvosMovesPointerTable:
 	dw BetobebiiEvosMoves
 	dw MagnezoneEvosMoves
 	dw PorygonZEvosMoves
+	dw AnnihilapeEvosMoves
+	dw ScreamTailEvosMoves
+	dw SandyShocksEvosMoves
+	dw WugtrioEvosMoves
 	dw MissingNoEvosMoves
 	assert_table_length NUM_POKEMON_INDEXES
 
@@ -1620,6 +1624,7 @@ DodrioEvosMoves:
 
 PrimeapeEvosMoves:
 ; Evolutions
+	db EV_TRADE, 1, ANNIHILAPE
 	db 0
 ; Learnset
 	db 9, LOW_KICK
@@ -2823,6 +2828,50 @@ PorygonZEvosMoves:
 	db 0
 ; Learnset
 	db 50, AMNESIA	; will replace with nasty plot
+	db 0
+
+AnnihilapeEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 9, LOW_KICK
+	db 15, KARATE_CHOP
+	db 21, FURY_SWIPES
+	db 27, FOCUS_ENERGY
+	db 28, RAGE
+	db 37, SEISMIC_TOSS
+	db 45, SCREECH
+	db 46, THRASH
+	db 50, NIGHT_SHADE
+	db 0
+
+ScreamTailEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 51, SCREECH
+	db 55, DAZZLE_GLEAM
+	db 55, DRAININGKISS
+	db 0
+
+SandyShocksEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 51, SUPERSONIC
+	db 55, SCREECH
+	db 55, METAL_SOUND
+	db 0
+
+WugtrioEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 15, SAND_ATTACK
+	db 19, WRAP
+	db 24, HEADBUTT
+	db 31, DIG
+	db 37, HYDRO_PUMP
 	db 0
 
 MissingNoEvosMoves:
