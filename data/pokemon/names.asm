@@ -220,6 +220,18 @@ MonsterNames::
 	db "BETOBEBII@"
 	db "MAGNEZONE@"
 	db "PORYGON-Z@"
+	; db "HAPPINY@@@"
+	; db "MUNCHLAX@@"
+	; db "ANNIHILAPE"
+	; db "SCREAMTAIL"
+	; db "SANDY SHOX"
+	; db "WIGLETT@@@"
+	; db "WUGTRIO@@@"
+	; db "TOEDSCOOL@"
+	; db "TOEDSCRUEL"
+	; db "PERRSERKER"
+	; db "SIRFETCH'D"
+	; db "MR.RIME@@@"
 	db "MISSINGNO."
 	
 	assert_table_length NUM_POKEMON_INDEXES

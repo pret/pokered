@@ -227,20 +227,19 @@
 	const BETOBEBII          ; $DA
 	const MAGNEZONE          ; $DB
 	const PORYGONZ           ; $DC
-	; const PERRSERKER         ; $DD
-	; const SIRFETCHD          ; $DE
-	; const MR_RIME            ; $DF
-	; const PICHU              ; $E0
-	; const CLEFFA             ; $E1
-	; const IGGLYBUFF          ; $E2
-	; const TYROGUE            ; $E3
-	; const SMOOCHUM           ; $E4
-	; const ELEKID             ; $E5
-	; const MAGBY              ; $E6
-	; const MIME_JR            ; $E7
-	; const HAPPINY            ; $E8
-	; const MUNCHLAX           ; $E9
-	const MISSINGNO          ; $EA
+	; const HAPPINY            ; $DD
+	; const MUNCHLAX           ; $DE
+	; const ANNIHILAPE         ; $DF
+	; const SCREAM_TAIL        ; $E0
+	; const SANDY_SHOCKS       ; $E1
+	; const WIGLETT            ; $E2
+	; const WUGTRIO            ; $E3
+	; const TOEDSCOOL          ; $E4
+	; const TOEDSCRUEL         ; $E5
+	; const PERRSERKER         ; $E6
+	; const SIRFETCHD          ; $E7
+	; const MR_RIME            ; $E8
+	const MISSINGNO          ; $E9
 	
 
 DEF NUM_POKEMON_INDEXES EQU const_value - 1

@@ -657,6 +657,76 @@ _KleavorDexEntry::
 	next "fall huge trees"
 	next "in a single slice"
 	dex
+
+_AnnihilapeDexEntry::
+	text "Fuelled by a new,"
+	next "spirit-like power,"
+	next "ANNIHILAPE's blows"
+
+	page "break the minds"
+	next "and the bones"
+	next "of its opponents"
+	dex
+	
+_WiglettDexEntry::
+	text "Appears to be a"
+	next "form of DIGLETT,"
+	next "but the two are"
+
+	page "unrelated. It has"
+	next "an extraordinary"
+	next "sense of smell"
+	dex
+	
+_WugtrioDexEntry::
+	text "A trio of fish"
+	next "#MON that live"
+	next "inside a rock."
+
+	page "They work together"
+	next "to trap and carry"
+	next "off helpless prey"
+	dex
+	
+_ToedscoolDexEntry::
+	text "Looks similar to"
+	next "TENTACOOL, but it"
+	next "is a completely"
+
+	page "different species."
+	next "It scatters spores"
+	next "as it runs around"
+	dex
+	
+_ToedscruelDexEntry::
+	text "They form colonies"
+	next "in dark forests,"
+	next "coiling their many"
+
+	page "tentacles around"
+	next "prey and draining"
+	next "their nutrients"
+	dex
+	
+_ScreamTailDexEntry::
+	text "Though it bears"
+	next "similarity to a"
+	next "regular JIGGLYPUFF,"
+
+	page "it has a savage"
+	next "nature and a"
+	next "distinctive scream"
+	dex
+	
+_SandyShocksDexEntry::
+	text "Greatly resembles"
+	next "MAGNETON. Some"
+	next "speculate that"
+
+	page "MAGNETON looked"
+	next "like this over"
+	next "10,000 years ago"
+	dex
 	
 _ArticunoGDexEntry::
 	text "From its eyes,"
