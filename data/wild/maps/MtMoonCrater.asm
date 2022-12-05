@@ -8,8 +8,8 @@ MtMoonCraterMons:
 	db 55, RAICHU
 	db 55, UMBREON
 	db 56, ESPEON
-	db 50, SCREAMTAIL
-	db 50, SANDYSHOX
+	db 50, SCREAM_TAIL
+	db 50, SANDY_SHOCKS
 	end_grass_wildmons
 	
 	def_water_wildmons 10 ; encounter rate

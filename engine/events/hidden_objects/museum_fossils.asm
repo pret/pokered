@@ -24,12 +24,12 @@ KabutopsFossilText::
 
 ScarletBook::
 	tx_pre ScarletBook1
-	ld a, SCREAMTAIL
+	ld a, SCREAM_TAIL
 	ld [wcf91], a
 	call PlayCry
 	jp DisplayMonFrontSpriteInBox
 	tx_pre ScarletBook2
-	ld a, SANDYSHOX
+	ld a, SANDY_SHOCKS
 	ld [wcf91], a
 	call PlayCry
 	jp DisplayMonFrontSpriteInBox
