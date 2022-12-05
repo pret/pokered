@@ -239,7 +239,9 @@
 	; const PERRSERKER         ; $E6
 	; const SIRFETCHD          ; $E7
 	; const MR_RIME            ; $E8
-	const MISSINGNO          ; $E9
+	; const MELTAN			   ; $E9
+	; const MELMETAL		   ; $EA
+	const MISSINGNO          ; $EB
 	
 
 DEF NUM_POKEMON_INDEXES EQU const_value - 1

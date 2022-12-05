@@ -63,7 +63,7 @@ MonPartyData:
 	nybble ICON_QUADRUPED ; Arcanine
 	nybble ICON_MON       ; Mankey
 	nybble ICON_MON       ; Primeape
-	; nybble ICON_MON       ; Annihilape
+	nybble ICON_MON       ; Annihilape
 	nybble ICON_GRASS     ; Oddish
 	nybble ICON_GRASS     ; Gloom
 	nybble ICON_GRASS     ; Vileplume
@@ -94,7 +94,7 @@ MonPartyData:
 	nybble ICON_MON       ; Diglett
 	nybble ICON_MON       ; Dugtrio
 	; nybble ICON_WATER     ; Wiglett
-	; nybble ICON_WATER     ; Wugtrio
+	nybble ICON_WATER     ; Wugtrio
 	nybble ICON_MON	      ; Crocky
 	nybble ICON_QUADRUPED ; Kotora
 	nybble ICON_QUADRUPED ; Gaotora
@@ -217,11 +217,13 @@ MonPartyData:
 	nybble ICON_SNAKE     ; Dratini
 	nybble ICON_SNAKE     ; Dragonair
 	nybble ICON_SNAKE     ; Dragonite
-	; nybble ICON_FAIRY     ; Scream Tail
-	; nybble ICON_BALL      ; Sandy Shocks
+	nybble ICON_FAIRY     ; Scream Tail
+	nybble ICON_BALL      ; Sandy Shocks
 	nybble ICON_BIRD      ; Articuno
 	nybble ICON_BIRD      ; Zapdos
 	nybble ICON_BIRD      ; Moltres
 	nybble ICON_MON       ; Mewtwo
 	nybble ICON_MON       ; Mew
+	; nybble ICON_BALL      ; Meltan
+	; nybble ICON_BALL      ; Melmetal
 	end_nybble_array NUM_POKEMON - 1

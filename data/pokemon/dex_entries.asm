@@ -220,6 +220,13 @@ PokedexEntryPointers:
 	dw BetobebiiDexEntry
 	dw MagnezoneDexEntry
 	dw PorygonZDexEntry
+	dw AnnihilapeDexEntry
+	dw ScreamTailDexEntry
+	dw SandyShocksDexEntry
+	; dw WiglettDexEntry
+	dw WugtrioDexEntry
+	; dw ToedscoolDexEntry
+	; dw ToedscruelDexEntry
 	dw MissingNoDexEntry
 	assert_table_length NUM_POKEMON_INDEXES
 
@@ -1753,3 +1760,53 @@ PorygonZDexEntry:
 	dw 750
 	text_far _PorygonZDexEntry
 	text_end
+
+AnnihilapeDexEntry:
+    db "RAGEMONKEY@"
+	db 3,11
+	dw 1230
+	text_far _AnnihilapeDexEntry
+	text_end
+	
+ScreamTailDexEntry:
+    db "PARADOX@"
+	db 3,11
+	dw 180
+	text_far _ScreamTailDexEntry
+	text_end
+	
+SandyShocksDexEntry:
+    db "PARADOX@"
+	db 7,7
+	dw 1320
+	text_far _SandyShocksDexEntry
+	text_end
+	
+; WiglettDexEntry:
+	; db "GARDEN EEL@"
+	; db 3,11
+	; dw 40
+	; text_far _WiglettDexEntry
+	; text_end
+	
+WugtrioDexEntry:
+	db "GARDEN EEL@"
+	db 3,11
+	dw 120
+	text_far _WugtrioDexEntry
+	text_end
+
+; ToedscoolDexEntry:
+    ; db "WOODEAR@"
+	; db 2,11
+	; dw 730
+	; text_far _ToedscoolDexEntry
+	; text_end
+
+; ToedscruelDexEntry:
+    ; db "WOODEAR@"
+	; db 6,3
+	; dw 1280
+	; text_far _ToedscruelDexEntry
+	; text_end
+	

@@ -727,6 +727,26 @@ _SandyShocksDexEntry::
 	next "like this over"
 	next "10,000 years ago"
 	dex
+
+_MeltanDexEntry::
+	text "Typically living"
+	next "in groups, these"
+	next "#MON eat iron"
+
+	page "particles that"
+	next "they find in"
+	next "the subsoil"
+	dex
+	
+_MelmetalDexEntry::
+	text "A #MON revered"
+	next "as a deity over"
+	next "3,000 years ago"
+
+	page "for its ability"
+	next "to create pure"
+	next "iron from nothing"
+	dex
 	
 _ArticunoGDexEntry::
 	text "From its eyes,"

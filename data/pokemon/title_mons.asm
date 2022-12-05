@@ -7,12 +7,12 @@ TitleMons:
 	db CROCKY
 	db TRAMPEL
 	db JAGG
-	db CHEEP
+	db RHYPERIOR
 	db OMEGA
 	db MIKON
-	db WEIRDUCK
-	db BLOTTLE
+	db KLEAVOR
+	db MAGNEZONE
 	db MADAAMU
 	db DEER
 	db GYAOON
-	db GUARDIA
+	db ANNIHILAPE
