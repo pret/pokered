@@ -1292,3 +1292,8 @@ INCLUDE "data/maps/headers/PokemonMansionB2F.asm"
 INCLUDE "scripts/PokemonMansionB2F.asm"
 INCLUDE "data/maps/objects/PokemonMansionB2F.asm"
 PokemonMansionB2F_Blocks: INCBIN "maps/PokemonMansionB2F.blk"
+
+INCLUDE "data/maps/headers/MtMoonCrater.asm"
+INCLUDE "scripts/MtMoonCrater.asm"
+INCLUDE "data/maps/objects/MtMoonCrater.asm"
+MtMoonCrater_Blocks: INCBIN "maps/MtMoonCrater.blk"
