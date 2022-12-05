@@ -37,6 +37,7 @@ Museum1F_TextPointers:
 	dw Museum1FText3
 	dw Museum1FText4
 	dw Museum1FText5
+	dw SadaText
 
 Museum1FText1:
 	text_asm
@@ -244,4 +245,8 @@ Museum1FText5:
 
 Museum1FText_5c2bc:
 	text_far _Museum1FText_5c2bc
+	text_end	
+
+SadaText:
+	text_far _SadaText
 	text_end

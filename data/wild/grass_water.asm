@@ -116,7 +116,7 @@ WildDataPointers:
 	dw NothingWildMons
 	dw FarawayIslandInsideMons ; I think this is right??
 	dw NothingWildMons
-	dw NothingWildMons
+	dw MtMoonCraterMons
 	dw NothingWildMons
 	dw NothingWildMons
 	dw NothingWildMons
@@ -330,3 +330,4 @@ INCLUDE "data/wild/maps/SilphGauntlet4F.asm"
 INCLUDE "data/wild/maps/SilphGauntlet5F.asm"
 INCLUDE "data/wild/maps/SilphGauntlet6F.asm"
 INCLUDE "data/wild/maps/FarawayIslandInside.asm"
+INCLUDE "data/wild/maps/MtMoonCrater.asm"

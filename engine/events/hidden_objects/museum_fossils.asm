@@ -22,6 +22,31 @@ KabutopsFossilText::
 	text_far _KabutopsFossilText
 	text_end
 
+ScarletBook::
+	tx_pre ScarletBook1
+	ld a, SCREAMTAIL
+	ld [wcf91], a
+	call PlayCry
+	jp DisplayMonFrontSpriteInBox
+	tx_pre ScarletBook2
+	ld a, SANDYSHOX
+	ld [wcf91], a
+	call PlayCry
+	jp DisplayMonFrontSpriteInBox
+	tx_pre ScarletBook3
+
+ScarletBook1::
+	text_far _ScarletBook1
+	text_end
+
+ScarletBook2::
+	text_far _ScarletBook2
+	text_end
+	
+ScarletBook3::
+	text_far _ScarletBook3
+	text_end
+
 DisplayMonFrontSpriteInBox:
 ; Displays a pokemon's front sprite in a pop-up window.
 ; [wcf91] = pokemon internal id number

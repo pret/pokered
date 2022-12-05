@@ -38,6 +38,7 @@ SuperRodData:
 	dbw ROCK_TUNNEL_1F,     		.Group5
 	dbw CELADON_UNIVERSITY_OUTSIDE, .Group11
 	dbw FARAWAY_ISLAND_INSIDE, 		.Group7
+	dbw MT_MOON_CRATER,				.Group10
 	db -1 ; end
 
 ; fishing groups

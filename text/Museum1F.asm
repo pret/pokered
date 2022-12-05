@@ -106,3 +106,15 @@ _Museum1FText_5c2bc::
 	text "The AMBER is"
 	line "clear and gold!"
 	done
+
+_SadaText::
+	text "This book is so"
+	line "interesting! It"
+	cont "contains such"
+	cont "unusual #MON!"
+	
+	text "I want to research"
+	line "ancient #MON"
+	cont "when I grow up!"
+	
+	done

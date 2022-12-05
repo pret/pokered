@@ -242,6 +242,7 @@ ViridianGymHiddenObjects:
 Museum1FHiddenObjects:
 	hidden_object  2,  3, SPRITE_FACING_UP, AerodactylFossil
 	hidden_object  2,  6, SPRITE_FACING_UP, KabutopsFossil
+	hidden_object  3,  3, SPRITE_FACING_UP, ScarletBook
 	db -1 ; end
 
 PewterGymHiddenObjects:
