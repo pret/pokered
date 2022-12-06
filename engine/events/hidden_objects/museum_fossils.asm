@@ -23,28 +23,26 @@ KabutopsFossilText::
 	text_end
 
 ScarletBook::
-	text_far ScarletBook1
 	ld a, SCREAM_TAIL
 	ld [wcf91], a
 	call PlayCry
-	jp DisplayMonFrontSpriteInBox
-	text_far ScarletBook2
+	call DisplayMonFrontSpriteInBox
+	call EnableAutoTextBoxDrawing
+	tx_pre ScarletBook1
 	ld a, SANDY_SHOCKS
 	ld [wcf91], a
 	call PlayCry
-	jp DisplayMonFrontSpriteInBox
-	text_far ScarletBook3
+	call DisplayMonFrontSpriteInBox
+	call EnableAutoTextBoxDrawing
+	tx_pre ScarletBook2
+	ret
 
 ScarletBook1::
 	text_far _ScarletBook1
 	text_end
-
+	
 ScarletBook2::
 	text_far _ScarletBook2
-	text_end
-	
-ScarletBook3::
-	text_far _ScarletBook3
 	text_end
 
 DisplayMonFrontSpriteInBox:

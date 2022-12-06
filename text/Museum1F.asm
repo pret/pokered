@@ -109,11 +109,9 @@ _Museum1FText_5c2bc::
 
 _SadaText::
 	text "This book is so"
-	line "interesting! It"
-	cont "contains such"
-	cont "unusual #MON!"
+	line "interesting!"
 	
-	text "I want to research"
+	para "I want to research"
 	line "ancient #MON"
 	cont "when I grow up!"
 	

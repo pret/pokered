@@ -247,6 +247,12 @@ Museum1FText_5c2bc:
 	text_far _Museum1FText_5c2bc
 	text_end	
 
-SadaText:
+SadaTextUhh:
 	text_far _SadaText
 	text_end
+
+SadaText:
+    text_asm
+    ld hl, SadaTextUhh; wrong label
+    call PrintText
+    jp TextScriptEnd

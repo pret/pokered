@@ -589,7 +589,7 @@ _KabutopsFossilText::
 	cont "rare #MON."
 	done
 
-_ScarletBook1:: ; please don't overflow please don't overflow
+_ScarletBook1::
     text "A member of our"
     line "survey team"
     cont "photographed an"
@@ -597,42 +597,25 @@ _ScarletBook1:: ; please don't overflow please don't overflow
     cont "JIGGLYPUFF-like"
     cont "#MON."
     
-    text "It has been"
-    line "named"
-    cont "SCREAM TAIL."
+    para "It has been named"
+    line "SCREAM TAIL."
     
     done
 
 _ScarletBook2::
-    text "It is very"
-    line "aggressive, and"
-    cont "attacks all in"
-    cont "sight."
-    
-    text "We need to be"
-    line "more careful."
-    
     text "Another team"
-    line "got back. They"
+    line "returned. They"
     cont "were attacked by"
     cont "a MAGNETON that"
     cont "looked like a"
     cont "a tyrannosaur."
     
-    done
-
-_ScarletBook3::
-    text "These #MON are"
-    line "far too strong."
-    
-    text "Their power is"
-    line "beyond mankind's"
-    cont "comprehension."
-    
-    text "They must be"
-    line "contained, for"
-    cont "all our sakes."
-    
+	para "We called it"
+    line "SANDY SHOCKS."
+	
+	para "These #MON must"
+	line "be contained."
+	
     done
 
 _LinkCableHelpText1::
