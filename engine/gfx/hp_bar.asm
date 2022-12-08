@@ -144,7 +144,7 @@ UpdateHPBar_AnimateHPBar:
 	push de
 	ld d, $6
 	call DrawHPBar
-	ld c, 2
+	ld c, 1 ; was 2, this doubles hp bar speed
 	call DelayFrames
 	pop de
 	ld a, [wHPBarDelta] ; +1 or -1
