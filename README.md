@@ -66,6 +66,7 @@ New areas
 QoL Enhancements
 ====
 - All 217 (current) Pokemon can be obtained without the use of trading or glitches, including Mew!
+- New Pokedex entries for most Pokemon are available, sourced from the original 1996 Pokedex book by Creatures Inc., restoring a ton of old Kanto lore. Thanks to [Dr. Lava and Nob Ogasaware](http://lavacutcontent.com/1996-creatures-pokedex-translation-1/) for their incredible work translating and writing about it!
 - Fast text has no frame delay between text scrolling, doubling the scroll speed. It's also been made the default option, so you don't need to go into the Options menu for it.
 - Trainer DVs are perfect-15s.
 - The protagonist is referred to in a gender neutral manner.
@@ -148,7 +149,7 @@ Credits
 * Albatross - Several of the new sprites used in the hack (Electivire, Magmortar, Rhyperior, Tangrowth, Glaceon, Sylveon...)
 * ZumiIsawhat? - Restorations of beta OST
 * Helix Chamber, RacieBeep, et al - Prototype Pokémon sprites
-* Vortyne - Reused a bit of code from their pureRGB hack, which was used to assist with making MissingNo. stable.
+* Vortyne - Reused a bit of code from their pureRGB hack, which was used to assist with making MissingNo. stable. Assisted in bug fixes.
 * Rangi - Reused a bit of code from their Red* / Blue* hack to make HMs usable in the overworld!
 
 Original README.md proceeding;

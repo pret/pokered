@@ -1,21 +1,21 @@
-_RhydonDexEntry::
-	text "Protected by an"
-	next "armor-like hide,"
-	next "it is capable of"
+_RhydonDexEntry:: ; new entry
+	text "Its horn can"
+	next "destroy boulders."
+	next "Evolving to stand"
 
-	page "living in molten"
-	next "lava of 3,600"
-	next "degrees"
+	page "on its hind legs"
+	next "stimulated its"
+	next "brain"
 	dex
 
-_KangaskhanDexEntry::
-	text "The infant rarely"
-	next "ventures out of"
-	next "its mother's"
+_KangaskhanDexEntry:: ; new entry
+	text "Females raise"
+	next "babies in their"
+	next "pouches."
 
-	page "protective pouch"
-	next "until it is 3"
-	next "years old"
+	page "They are adept"
+	next "at using COMET"
+	next "PUNCH"
 	dex
 
 _NidoranMDexEntry::
@@ -28,54 +28,54 @@ _NidoranMDexEntry::
 	next "secreted venom"
 	dex
 
-_ClefairyDexEntry::
+_ClefairyDexEntry:: ; new entry, altered from the original.
 	text "Its magical and"
 	next "cute appeal has"
 	next "many admirers."
 
-	page "It is rare and"
-	next "found only in"
-	next "certain areas"
+	page "Occasionally, it"
+	next "surprises itself"
+	next "with METRONOME"
 	dex
 
-_SpearowDexEntry::
-	text "Eats bugs in"
-	next "grassy areas. It"
-	next "has to flap its"
+_SpearowDexEntry:: ; new entry
+	text "SPEAROW is far"
+	next "more aggressive"
+	next "than PIDGEY. It"
 
-	page "short wings at"
-	next "high speed to"
-	next "stay airborne"
+	page "busily searches"
+	next "for prey in tall"
+	next "grass"
 	dex
 
 _VoltorbDexEntry::
-	text "Usually found in"
-	next "power plants."
-	next "Easily mistaken"
+	text "Recently, VOLTORB"
+	next "have been found"
+	next "traveling on"
 
-	page "for a # BALL,"
-	next "they have zapped"
-	next "many people"
+	page "power lines. They"
+	next "tend to explode"
+	next "without warning"
 	dex
 
-_NidokingDexEntry::
-	text "It uses its"
-	next "powerful tail in"
-	next "battle to smash,"
+_NidokingDexEntry:: ; new entry
+	text "Its venomous horn"
+	next "gives it an edge"
+	next "in battle."
 
-	page "constrict, then"
-	next "break the prey's"
-	next "bones"
+	page "It will shy away"
+	next "from fighting"
+	next "NIDOQUEEN"
 	dex
 
-_SlowbroDexEntry::
-	text "The SHELLDER that"
-	next "is latched onto"
-	next "SLOWPOKE's tail"
-
-	page "is said to feed"
-	next "on the host's left"
-	next "over scraps"
+_SlowbroDexEntry:: ; new entry
+	text "If SLOWPOKE goes"
+	next "goes out to sea,"
+	next "it may get bit"
+	
+	page "by a spiral"
+	next "SHELLDER and"
+	next "become a SLOWBRO"
 	dex
 
 _IvysaurDexEntry::
@@ -89,66 +89,66 @@ _IvysaurDexEntry::
 	dex
 
 _ExeggutorDexEntry::
-	text "Legend has it that"
-	next "on rare occasions,"
-	next "one of its heads"
+	text "Also known as the"
+	next "walking tropical"
+	next "rainforest."
 
-	page "will drop off and"
-	next "continue on as an"
-	next "EXEGGCUTE"
+	page "Each fruit has"
+	next "a will of its"
+	next "own"
 	dex
 
-_LickitungDexEntry::
-	text "Its tongue can be"
-	next "extended like a"
-	next "chameleon's. It"
-
-	page "leaves a tingling"
-	next "sensation when it"
-	next "licks enemies"
+_LickitungDexEntry:: ; new entry
+	text "To appease its"
+	next "voracious"
+	next "appetite, its"
+	
+	page "tongue evolved"
+	next "to move like a"
+	next "human arm"
 	dex
 
-_ExeggcuteDexEntry::
-	text "Often mistaken"
-	next "for eggs."
-	next "When disturbed,"
+_ExeggcuteDexEntry:: ; new entry
+	text "Genetically akin"
+	next "to plant seeds."
+	next "It's argued to be"
 
-	page "they quickly"
-	next "gather and attack"
-	next "in swarms"
+	page "related to the"
+	next "plant that grows"
+	next "on BULBASAUR"
 	dex
 
-_GrimerDexEntry::
-	text "Appears in filthy"
-	next "areas. Thrives by"
-	next "sucking up"
+_GrimerDexEntry:: ; new entry
+	text "Toxic sludge"
+	next "mutated by x-rays"
+	next "from the moon"
 
-	page "polluted sludge"
-	next "that is pumped"
-	next "out of factories"
+	page "eventually"
+	next "became this"
+	next "#MON"
 	dex
 
-_GengarDexEntry::
-	text "Under a full moon,"
-	next "this #MON"
-	next "likes to mimic"
+_GengarDexEntry:: ; new entry
+	text "There are shrines"
+	next "honoring GENGAR"
+	next "on mountains. It"
 
-	page "the shadows of"
-	next "people and laugh"
-	next "at their fright"
+	page "Is said to appear"
+	next "from the dark to"
+	next "kill lost souls"
 	dex
 
-_NidoranFDexEntry::
-	text "Although small,"
-	next "its venomous"
-	next "barbs render this"
+_NidoranFDexEntry:: ; new entry
+	text "NIDORAN breed in"
+	next "spring. At the end"
+	next "of summer, they"
 
-	page "#MON dangerous."
-	next "The female has"
-	next "smaller horns"
+	page "lay two eggs. Baby"
+	next "NIDORAN are just"
+	next "10cm long"
 	dex
 
-_NidoqueenDexEntry::
+_NidoqueenDexEntry:: ; does not need a n.ew entry
 	text "Its hard scales"
 	next "provide strong"
 	next "protection. It"
@@ -158,47 +158,47 @@ _NidoqueenDexEntry::
 	next "powerful moves"
 	dex
 
-_CuboneDexEntry::
-	text "Because it never"
-	next "removes its skull"
-	next "helmet, no one"
+_CuboneDexEntry:: ; new entry
+	text "It dons the skull"
+	next "of its dead"
+	next "mother. While"
 
-	page "has ever seen"
-	next "this #MON's"
-	next "real face"
+	page "untrusting, it"
+	next "wails when left"
+	next "all alone"
 	dex
 
-_RhyhornDexEntry::
-	text "Its massive bones"
-	next "are 1000 times"
-	next "harder than human"
-
-	page "bones. It can"
-	next "easily knock a"
-	next "trailer flying"
+_RhyhornDexEntry:: ; new entry
+	text "While dim, its"
+	next "ramming can"
+	next "destroy buildings."
+	
+	page "They are not"
+	next "suitable house"
+	next "pets"
 	dex
 
-_LaprasDexEntry::
-	text "A #MON that"
-	next "has been over-"
-	next "hunted almost to"
+_LaprasDexEntry:: ; new entry
+	text "It is a placid"
+	next "#MON. Little"
+	next "progress has"
 
-	page "extinction. It"
-	next "can ferry people"
-	next "across the water"
+	page "been made in"
+	next "studying it due"
+	next "to poachers"
 	dex
 
-_ArcanineDexEntry::
-	text "A #MON that"
-	next "has been admired"
-	next "since the past"
+_ArcanineDexEntry:: ; new entry
+	text "A legendary"
+	next "#MON that"
+	next "appears in"
 
-	page "for its beauty."
-	next "It runs agilely"
-	next "as if on wings"
+	page "Chinese folklore."
+	next "It can outrun"
+	next "a racing car"
 	dex
 
-_MewDexEntry::
+_MewDexEntry:: ; does not have an entry in the book
 	text "So rare that it"
 	next "is still said to"
 	next "be a mirage by"
@@ -208,38 +208,38 @@ _MewDexEntry::
 	next "seen it worldwide"
 	dex
 
-_GyaradosDexEntry::
-	text "Rarely seen in"
-	next "the wild. Huge"
-	next "and vicious, it"
+_GyaradosDexEntry:: ; new entry
+	text "Lives on the sea"
+	next "floor. Its scales"
+	next "are used to make"
 
-	page "is capable of"
-	next "destroying entire"
-	next "cities in a rage"
+	page "jewelery, which"
+	next "command extremely"
+	next "high prices"
 	dex
 
-_ShellderDexEntry::
-	text "Its hard shell"
-	next "repels any kind"
-	next "of attack."
+_ShellderDexEntry:: ; new entry
+	text "Its shell is as"
+	next "harder than" 
+	next "diamonds. It"
 
-	page "It is vulnerable"
-	next "only when its"
-	next "shell is open"
+	page "uses it to"
+	next "squeeze foes"
+	next "with CLAMP"
 	dex
 
-_TentacoolDexEntry::
-	text "Drifts in shallow"
-	next "seas. Anglers who"
-	next "hook them by"
+_TentacoolDexEntry:: ; new entry
+	text "Emits odd lights"
+	next "from its eyes to"
+	next "confuse plankton."
 
-	page "accident are"
-	next "often punished by"
-	next "its stinging acid"
+	page "99 percent of its"
+	next "body is made up"
+	next "of water"
 	dex
 
 _GastlyDexEntry::		; Dex entry from Green, swapping the Indian Elephant for Trampel. ~M
-	text "A being that"
+	text "A being that"	; this will stay as it uses details from the pokedex book
 	next "exists as a thin"
 	next "gas. The gas is"
 	
@@ -248,298 +248,299 @@ _GastlyDexEntry::		; Dex entry from Green, swapping the Indian Elephant for Tram
 	next "in two seconds"
 	dex
 
-_ScytherDexEntry::
-	text "With ninja-like"
-	next "agility and speed,"
-	next "it can create the"
+_ScytherDexEntry:: ; new entry
+	text "It can fly with"
+	next "its wings, but"
+	next "it is uncommon."
 
-	page "illusion that"
-	next "there is more"
-	next "than one"
+	page "Few specimens"
+	next "have ever been"
+	next "caught"
 	dex
 
-_StaryuDexEntry::
-	text "An enigmatic"
-	next "#MON that can"
-	next "effortlessly"
+_StaryuDexEntry:: ; new entry
+	text "It possesses both"
+	next "male and female"
+	next "reproductive"
 
-	page "regenerate any"
-	next "appendage it"
-	next "loses in battle"
+	page "organs. At night,"
+	next "its central core"
+	next "flashes brightly"
 	dex
 
-_BlastoiseDexEntry::
-	text "A brutal #MON"
-	next "with pressurized"
-	next "water jets on its"
+_BlastoiseDexEntry:: ; new entry
+	text "It can faint foes"
+	next "by squashing them"
+	next "with its heavy"
 
-	page "shell. They are"
-	next "used for high"
-	next "speed tackles"
+	page "body. The shell"
+	next "protects it from"
+	next "most attacks"
 	dex
 
-_PinsirDexEntry::
-	text "If it fails to"
-	next "crush the victim"
-	next "in its pincers,"
+_PinsirDexEntry:: ; new entry
+	text "Once it grips"
+	next "its prey, it will"
+	next "not stop until it"
 
-	page "it will swing it"
-	next "around and toss"
-	next "it hard"
+	page "is torn apart. It"
+	next "appears to like"
+	next "the color green"
 	dex
 
-_TangelaDexEntry::
-	text "The whole body is"
-	next "swathed with wide"
-	next "vines that are"
+_TangelaDexEntry:: ; new entry
+	text "Researchers have"
+	next "tried to reveal"
+	next "TANGELA's true"
 
-	page "similar to sea-"
-	next "weed. Its vines"
-	next "shake as it walks"
+	page "form, but all"
+	next "fail due to its"
+	next "resistance"
 	dex
 
-_GrowlitheDexEntry::
-	text "Very protective"
-	next "of its territory."
-	next "It will bark and"
-
-	page "bite to repel"
-	next "intruders from"
-	next "its space"
+_GrowlitheDexEntry:: ; new entry
+	text "Friendly toward"
+	next "people with a"
+	next "loyal nature."
+	
+	page "CINNABAR VOLCANO"
+	next "influenced its"
+	next "evolution"
 	dex
 
-_OnixDexEntry::
-	text "As it grows, the"
-	next "stone portions of"
-	next "its body harden"
+_OnixDexEntry:: ; new entry
+	text "They usually live"
+	next "underground,"
+	next "burrowing at over"
 
-	page "to become similar"
-	next "to a diamond, but"
-	next "colored black"
+	page "80 kilometers per"
+	next "hour in search"
+	next "of prey"
 	dex
 
-_FearowDexEntry::
-	text "With its huge and"
-	next "magnificent wings,"
-	next "it can keep aloft"
+_FearowDexEntry:: ; new entry
+	text "It soars in the"
+	next "sky all day long."
+	next "Its powerful beak"
 
-	page "without ever"
-	next "having to land"
-	next "for rest"
+	page "lets it swallow"
+	next "prey like"
+	next "RATTATA whole"
 	dex
 
-_PidgeyDexEntry::
-	text "A common sight in"
-	next "forests and woods."
-	next "It flaps its"
+_PidgeyDexEntry:: ; new entry
+	text "Dislikes fights."
+	next "They hide among"
+	next "tall grass"
 
-	page "wings at ground"
-	next "level to kick up"
-	next "blinding sand"
+	page "while feeding on"
+	next "CATERPIE and"
+	next "WEEDLE"
 	dex
 
 _SlowpokeDexEntry::
-	text "Incredibly slow"
-	next "and dopey. It"
-	next "takes 5 seconds"
-
-	page "for it to feel"
-	next "pain when under"
-	next "attack"
+	text "It always has"
+	next "a vacant look."
+	next "While some become"
+	
+	page "relaxed around"
+	next "SLOWPOKE, others"
+	next "become irate"
 	dex
 
-_KadabraDexEntry::
-	text "It emits special"
-	next "alpha waves from"
-	next "its body that"
+_KadabraDexEntry:: ; new entry
+	text "A short story"
+	next "about a boy"
+	next "becoming a"
 
-	page "induce headaches"
-	next "just by being"
-	next "close by"
+	page "KADABRA made it"
+	next "a star for those"
+	next "in the know"
 	dex
 
-_GravelerDexEntry::
-	text "Rolls down slopes"
-	next "to move. It rolls"
-	next "over any obstacle"
+_GravelerDexEntry:: ; new entry
+	text "GRAVELER always"
+	next "smiles, but its"
+	next "eyes do not."
 
-	page "without slowing"
-	next "or changing its"
-	next "direction"
+	page "Its face unnerves"
+	next "new HIKERs as it"
+	next "rolls down slopes"
 	dex
 
-_ChanseyDexEntry::
-	text "A rare and elusive"
-	next "#MON that is"
-	next "said to bring"
+_ChanseyDexEntry:: ; new entry
+	text "They lay several"
+	next "delicious eggs"
+	next "a day. A nursing"
 
-	page "happiness to those"
-	next "who manage to get"
-	next "it"
+	page "#MON, they're"
+	next "peaceful and do"
+	next "not like fights"
 	dex
 
-_MachokeDexEntry::
-	text "Its muscular body"
-	next "is so powerful, it"
-	next "must wear a power"
+_MachokeDexEntry:: ; new entry
+	text "Its powerful body"
+	next "never tires, so"
+	next "it is often"
 
-	page "save belt to be"
-	next "able to regulate"
-	next "its motions"
+	page "employed to help"
+	next "transport heavy"
+	next "cargo"
 	dex
 
-_MrMimeDexEntry::
-	text "If interrupted"
-	next "while it is"
-	next "miming, it will"
+_MrMimeDexEntry:: ; new entry
+	text "The walls it"
+	next "mimes are said"
+	next "to turn real."
 
-	page "slap around the"
-	next "offender with its"
-	next "broad hands"
+	page "Its fingertips"
+	next "have suction pads"
+	next "to climb them"
 	dex
 
-_HitmonleeDexEntry::
-	text "When in a hurry,"
-	next "its legs lengthen"
-	next "progressively."
-
-	page "It runs smoothly"
-	next "with extra long,"
-	next "loping strides"
+_HitmonleeDexEntry:: ; new entry
+	text "Sometimes called"
+	next "'The Demon of"
+	next "Kickboxing'."
+	
+	page "Despite this,"
+	next "When not fighting,"
+	next "it is very docile"
 	dex
 
-_HitmonchanDexEntry::
-	text "While apparently"
-	next "doing nothing, it"
-	next "fires punches in"
-
-	page "lightning fast"
-	next "volleys that are"
-	next "impossible to see"
+_HitmonchanDexEntry:: ; new entry
+	text "It is inhabited"
+	next "by the spirit of"
+	next "a pro boxer."
+	
+	page "Its punches are"
+	next "faster than"
+	next "bullet train"
 	dex
 
-_ArbokDexEntry::
-	text "It is rumored that"
-	next "the ferocious"
-	next "warning markings"
+_ArbokDexEntry:: ; new entry
+	text "ARBOK paralyzes"
+	next "prey with its"
+	next "gaze. It will"
 
-	page "on its belly"
-	next "differ from area"
-	next "to area"
+	page "fight viciously"
+	next "with its mortal"
+	next "enemy, RATICATE"
 	dex
 
-_ParasectDexEntry::
-	text "A host-parasite"
-	next "pair in which the"
-	next "parasite mushroom"
-
-	page "has taken over the"
-	next "host bug. Prefers"
-	next "damp places"
+_ParasectDexEntry:: ; new entry
+	text "It lives in dark,"
+	next "damp forests."
+	next "In China, the"
+	
+	page "mushroom's toxic"
+	next "spores are used"
+	next "in medicine"
+	
 	dex
 
-_PsyduckDexEntry::
-	text "While lulling its"
-	next "enemies with its"
-	next "vacant look, this"
+_PsyduckDexEntry:: ; new entry, modified from the original.
+	text "It always has a"
+	next "headache. If it"
+	next "intensifies, it"
 
-	page "wily #MON will"
+	page "will begin to"
 	next "use psychokinetic"
 	next "powers"
 	dex
 
 _DrowzeeDexEntry::
-	text "Puts enemies to"
-	next "sleep then eats"
-	next "their dreams."
+	text "Often seen eerily"
+	next "muttering to"
+	next "itself."
 
-	page "Occasionally gets"
-	next "sick from eating"
-	next "bad dreams"
+	page "It is said to"
+	next "be a descendent"
+	next "of Baku"
 	dex
 
-_GolemDexEntry::
-	text "Its boulder-like"
-	next "body is extremely"
-	next "hard. It can"
+_GolemDexEntry:: ; new entry
+	text "Its shell is made"
+	next "of rocky slabs."
+	next "To grow larger,"
 
-	page "easily withstand"
-	next "dynamite blasts"
-	next "without damage"
+	page "GOLEM will shed"
+	next "it during the"
+	next "summer"
 	dex
 
-_MagmarDexEntry::
-	text "Its body always"
-	next "burns with an"
-	next "orange glow that"
+_MagmarDexEntry:: ; new entry, modified from the original
+	text "Found only in hot"
+	next "areas, MAGMAR's"
+	next "body burns at"
 
-	page "enables it to"
-	next "hide perfectly"
-	next "among flames"
+	page "1200 degrees. It"
+	next "hides perfectly"
+	next "in lava"
 	dex
 
-_ElectabuzzDexEntry::
-	text "Normally found"
-	next "near power plants,"
-	next "they can wander"
+_ElectabuzzDexEntry:: ; new entry
+	text "They feed on"
+	next "powerful"
+	next "electricity. It"
 
-	page "away and cause"
-	next "major blackouts"
-	next "in cities"
+	page "can distinguish"
+	next "colors, but red"
+	next "makes it angry"
 	dex
 
-_MagnetonDexEntry::
-	text "Formed by several"
-	next "MAGNEMITEs linked"
-	next "together. They"
-
-	page "frequently appear"
-	next "when sunspots"
-	next "flare up"
+_MagnetonDexEntry:: ; new entry
+	text "What keeps it"
+	next "levitating is"
+	next "unknown. It"
+	
+	page "discharges"
+	next "intense magnetic"
+	next "rays"
 	dex
 
-_KoffingDexEntry::
-	text "Because it stores"
-	next "several kinds of"
-	next "toxic gases in"
+_KoffingDexEntry:: ; new entry
+	text "Getting too close"
+	next "to KOFFING makes"
+	next "tears fill eyes."
 
-	page "its body, it is"
-	next "prone to exploding"
-	next "without warning"
+	page "It was originally"
+	next "discovered in a"
+	next "munitions factory"
 	dex
 
-_MankeyDexEntry::
-	text "Extremely quick to"
-	next "anger. It could"
-	next "be docile one"
-
-	page "moment then"
-	next "thrashing away"
-	next "the next instant"
+_MankeyDexEntry:: ; new entry
+	text "While carefree,"
+	next "it can become"
+	next "enraged instantly."
+	
+	page "Research points"
+	next "towards a calcium"
+	next "deficiency"
 	dex
 
 _SeelDexEntry::
-	text "The protruding"
-	next "horn on its head"
-	next "is very hard."
+	text "Its thick hide"
+	next "lets it stay"
+	next "active even in"
 
-	page "It is used for"
-	next "bashing through"
-	next "thick ice"
+	page "temperatures of"
+	next "-40 degrees. They"
+	next "live in sea caves"
 	dex
 
-_DiglettDexEntry::
+_DiglettDexEntry:: ; new entry
 	text "Lives about one"
-	next "yard underground"
-	next "where it feeds on"
-
-	page "plant roots. It"
-	next "sometimes appears"
-	next "above ground"
+	next "yard underground,"
+	next "but their trails"
+	
+	page "reveal them. They"
+	next "seek ONIX's"
+	next "leftovers"
 	dex
 
-_TaurosDexEntry::
-	text "When it targets"
+_TaurosDexEntry:: ; new entry - modified first line from the original
+	text "If provoked by"
 	next "an enemy, it"
 	next "charges furiously"
 
@@ -548,97 +549,98 @@ _TaurosDexEntry::
 	next "long tails"
 	dex
 
-_FarfetchdDexEntry::
-	text "The sprig of"
-	next "green onions it"
-	next "holds is its"
+_FarfetchdDexEntry:: ; new entry
+	text "The FARFETCH'D"
+	next "population has"
+	next "declined due to"
 
-	page "weapon. It is"
-	next "used much like a"
-	next "metal sword"
+	page "being hunted"
+	next "for the leeks"
+	next "they carry"
 	dex
 
-_VenonatDexEntry::
-	text "Lives in the"
-	next "shadows of tall"
-	next "trees where it"
-
-	page "eats insects. It"
-	next "is attracted by"
-	next "light at night"
+_VenonatDexEntry:: ; new entry
+	text "Its eyes emit"
+	next "beams of light"
+	next "to be used as"
+	
+	page "radars. This lets"
+	next "VENONAT remain"
+	next "active at night"
+	
 	dex
 
-_DragoniteDexEntry::
-	text "An extremely"
-	next "rarely seen"
-	next "marine #MON."
+_DragoniteDexEntry:: ; new entry
+	text "Despite its bulk,"
+	next "it can outrun a"
+	next "jet. It is said"
 
-	page "Its intelligence"
-	next "is said to match"
-	next "that of humans"
+	page "to represent"
+	next "a God of"
+	next "Destruction"
 	dex
 
-_DoduoDexEntry::
-	text "A bird that makes"
-	next "up for its poor"
-	next "flying with its"
+_DoduoDexEntry:: ; new entry
+	text "It was found 3"
+	next "years ago. It"
+	next "hates flying due"
 
-	page "fast foot speed."
-	next "Leaves giant"
-	next "footprints"
+	page "to short wings,"
+	next "and can't move if"
+	next "a head disagrees"
 	dex
 
-_PoliwagDexEntry::
-	text "Its newly grown"
-	next "legs prevent it"
-	next "from running. It"
+_PoliwagDexEntry:: ; new entry
+	text "The thin, white"
+	next "skin reveals its"
+	next "internal organs."
 
-	page "appears to prefer"
-	next "swimming than"
-	next "trying to stand"
+	page "It is genetically"
+	next "close to tadpoles"
 	dex
 
-_JynxDexEntry::
-	text "It seductively"
-	next "wiggles its hips"
-	next "as it walks. It"
+_JynxDexEntry:: ; new entry
+	text "While it speaks"
+	next "in a human-"
+	next "like manner,"
 
-	page "can cause people"
-	next "to dance in"
-	next "unison with it"
+	page "the language is"
+	next "impossible"
+	next "to translate."
+	
 	dex
 
-_MoltresDexEntry::
-	text "Known as the"
-	next "legendary bird of"
-	next "fire. Every flap"
+_MoltresDexEntry:: ; new entry
+	text "The legendary"
+	next "phoenix is said"
+	next "to be modeled"
 
-	page "of its wings"
-	next "creates a dazzling"
-	next "flash of flames"
+	page "after MOLTRES."
+	next "Its fiery wings"
+	next "dazzle onlookers"
 	dex
 
-_ArticunoDexEntry::
-	text "A legendary bird"
-	next "#MON that is"
-	next "said to appear to"
-
-	page "doomed people who"
-	next "are lost in icy"
-	next "mountains"
+_ArticunoDexEntry:: ; new entry
+	text "Folklore states"
+	next "that those who"
+	next "see ARTICUNO will"
+	
+	page "die rooted to"
+	next "the spot, caught"
+	next "up in its beauty"
 	dex
 
-_ZapdosDexEntry::
-	text "A legendary bird"
-	next "#MON that is"
-	next "said to appear"
+_ZapdosDexEntry:: ; new entry
+	text "As the divine"
+	next "bird presiding"
+	next "over the heavens,"
 
-	page "from clouds while"
-	next "dropping enormous"
-	next "lightning bolts"
+	page "innumerable years"
+	next "are spent flying"
+	next "above the clouds"
 	dex
 
-_DittoDexEntry::
+_DittoDexEntry:: ; does not need a n.ew entry
 	text "Capable of copying"
 	next "an enemy's genetic"
 	next "code to instantly"
@@ -648,7 +650,7 @@ _DittoDexEntry::
 	next "of the enemy"
 	dex
 
-_MeowthDexEntry::
+_MeowthDexEntry:: ; could have a new entry but this is already very similar...
 	text "Adores circular"
 	next "objects. Wanders"
 	next "the streets on a"
@@ -658,117 +660,117 @@ _MeowthDexEntry::
 	next "loose change"
 	dex
 
-_KrabbyDexEntry::
-	text "Its pincers are"
-	next "not only powerful"
-	next "weapons, they are"
+_KrabbyDexEntry:: ; new entry
+	text "It raises its"
+	next "claws to"
+	next "intimidate its"
 
-	page "used for balance"
-	next "when walking"
-	next "sideways"
+	page "foes. However,"
+	next "KRABBY dislikes"
+	next "fighting"
 	dex
 
 _VulpixDexEntry::			; Changed to make it not too similar to Mikon's dex entry. ~M
-	text "As each tail"
+	text "As each tail"		; second page altered ~ PvK 7-12-2022
 	next "grows, its fur"
 	next "becomes softer."
 	
-	page "When held, it"
-	next "gives off a"
-	next "slight warmth"
+	page "It is thought"
+	next "to be related"
+	next "to foxes"
 	dex
 
-_NinetalesDexEntry::
-	text "Very smart and"
-	next "very vengeful."
-	next "Grabbing one of"
-
-	page "its many tails"
-	next "could result in a"
-	next "1000-year curse"
+_NinetalesDexEntry:: ; new entry
+	text "Elders often say"
+	next "'NINETALES, 1,000"
+	next "years, TOTARTLE,"
+	
+	page "10,000 years.'"
+	next "to refer to its"
+	next "longevity"
 	dex
 
-_PikachuDexEntry::
-	text "When several of"
-	next "these #MON"
-	next "gather, their"
+_PikachuDexEntry:: ; new entry
+	text "Lives in forests,"
+	next "feeding on nuts."
+	next "If provoked, it"
 
-	page "electricity could"
-	next "build and cause"
-	next "lightning storms"
+	page "electrocutes its"
+	next "attacker using"
+	next "THUNDERSHOCK"
 	dex
 
-_RaichuDexEntry::
-	text "Its long tail"
-	next "serves as a"
-	next "ground to protect"
+_RaichuDexEntry:: ; new entry
+	text "Its mastery of"
+	next "electricity lets"
+	next "it loose up to"
 
-	page "itself from its"
-	next "own high voltage"
-	next "power"
+	page "100,000 volts. It"
+	next "can KO a TRAMPEL"
+	next "in one strike"
 	dex
 
-_DratiniDexEntry::
+_DratiniDexEntry:: ; new entry, doctored the entry with the originally intended lore.
 	text "Long considered a"
 	next "mythical #MON"
-	next "until recently"
+	next "until recently,"
 
-	page "when a small"
-	next "colony was found"
-	next "living underwater"
+	page "when someone"
+	next "fished one up in"
+	next "the SAFARI ZONE"
 	dex
 
-_DragonairDexEntry::
+_DragonairDexEntry:: ; new entry, altered original
 	text "A mystical #MON"
-	next "that exudes a"
-	next "gentle aura."
+	next "that can summon"
+	next "rain and snow."
 
-	page "Has the ability"
-	next "to change climate"
-	next "conditions"
+	page "Though it lacks"
+	next "wings, it can"
+	next "fly in the sky"
 	dex
 
-_KabutoDexEntry::
-	text "A #MON that"
-	next "was resurrected"
-	next "from a fossil"
+_KabutoDexEntry:: ; new entry
+	text "The ancestor of"
+	next "hermit crabs"
+	next "and turtles."
 
-	page "found in what was"
-	next "once the ocean"
-	next "floor eons ago"
+	page "They are thought"
+	next "to have disliked"
+	next "fighting"
 	dex
 
-_KabutopsDexEntry::
-	text "Its sleek shape is"
-	next "perfect for swim-"
-	next "ming. It slashes"
+_KabutopsDexEntry:: ; new entry
+	text "The oldest of"
+	next "all #MON. The"
+	next "only KABUTOPS"
 
-	page "prey with its"
-	next "claws and drains"
-	next "the body fluids"
+	page "fossil was"
+	next "discovered 6"
+	next "years ago"
 	dex
 
-_HorseaDexEntry::
-	text "Known to shoot"
-	next "down flying bugs"
-	next "with precision"
+_HorseaDexEntry:: ; new entry
+	text "When endangered,"
+	next "it spits black"
+	next "ink. In spring,"
 
-	page "blasts of ink"
-	next "from the surface"
-	next "of the water"
+	page "it lays thousands"
+	next "of eggs, but"
+	next "GOLDEEN eats many"
 	dex
 
 _SeadraDexEntry::
-	text "Capable of swim-"
-	next "ming backwards by"
-	next "rapidly flapping"
-
-	page "its wing-like"
-	next "pectoral fins and"
-	next "stout tail"
+	text "A vicious #MON,"
+	next "SEADRA's spikes"
+	next "are so painful"
+	
+	page "to touch that"
+	next "they can cause"
+	next "fainting"
 	dex
 
-_SandshrewDexEntry::
+_SandshrewDexEntry:: ; does not need n.ew entry.
 	text "Burrows deep"
 	next "underground in"
 	next "arid locations"
@@ -788,47 +790,47 @@ _SandslashDexEntry::
 	next "attack or escape"
 	dex
 
-_OmanyteDexEntry::
-	text "Although long"
-	next "extinct, in rare"
-	next "cases, it can be"
+_OmanyteDexEntry:: ; new entry
+	text "It was related"
+	next "to mollusks."
+	next "Feeding on"
 
-	page "genetically"
-	next "resurrected from"
-	next "fossils"
+	page "plankton and"
+	next "small fish, it"
+	next "swam with 10 feet"
 	dex
 
-_OmastarDexEntry::
+_OmastarDexEntry:: ; new entry
 	text "A prehistoric"
-	next "#MON that died"
-	next "out when its"
+	next "#MON. It hunted"
+	next "by clinging to"
 
-	page "heavy shell made"
-	next "it impossible to"
-	next "catch prey"
+	page "prey before"
+	next "feasting with"
+	next "its beak"
 	dex
 
-_JigglypuffDexEntry::
-	text "When its huge eyes"
-	next "light up, it sings"
-	next "a mysteriously"
+_JigglypuffDexEntry:: ; new entry
+	text "It uses its huge"
+	next "eyes to draw in"
+	next "foes before"
 
-	page "soothing melody"
-	next "that lulls its"
-	next "enemies to sleep"
+	page "singing them to"
+	next "sleep. It puffs"
+	next "up when angered"
 	dex
 
-_WigglytuffDexEntry::
-	text "The body is soft"
-	next "and rubbery. When"
-	next "angered, it will"
+_WigglytuffDexEntry:: ; new entry
+	text "WIGGLYTUFF's"
+	next "dense, supple fur"
+	next "is sold as a"
 
-	page "suck in air and"
-	next "inflate itself to"
-	next "an enormous size"
+	page "luxury item to"
+	next "foreign buyers"
+
 	dex
 
-_EeveeDexEntry::
+_EeveeDexEntry:: ; does not need a n.ew entry
 	text "Its genetic code"
 	next "is irregular."
 	next "It may mutate if"
@@ -838,107 +840,107 @@ _EeveeDexEntry::
 	next "element STONEs"
 	dex
 
-_FlareonDexEntry::
-	text "When storing"
-	next "thermal energy in"
-	next "its body, its"
+_FlareonDexEntry:: ; new entry, sort of modified off the original
+	text "It stores fire"
+	next "in a flame sac."
+	next "It looses it at"
 
-	page "temperature could"
-	next "soar to over 1600"
-	next "degrees"
+	page "temperatures over"
+	next "1,700 degrees"
+	next "celsius"
 	dex
 
-_JolteonDexEntry::
-	text "It accumulates"
-	next "negative ions in"
-	next "the atmosphere to"
+_JolteonDexEntry:: ; new entry
+	text "When startled,"
+	next "its body hair"
+	next "stands upright."
 
-	page "blast out 10000-"
-	next "volt lightning"
-	next "bolts"
+	page "It may use PIN"
+	next "MISSILE to"
+	next "puncture foes"
 	dex
 
-_VaporeonDexEntry::
-	text "Lives close to"
-	next "water. Its long"
-	next "tail is ridged"
+_VaporeonDexEntry:: ; new entry
+	text "Its cellular"
+	next "structure is"
+	next "close to water."
 
-	page "with a fin which"
-	next "is often mistaken"
-	next "for a mermaid's"
+	page "It easily swims"
+	next "in water, but can"
+	next "also melt into it"
 	dex
 
-_MachopDexEntry::
-	text "Loves to build"
-	next "its muscles."
-	next "It trains in all"
+_MachopDexEntry:: ; new entry, modified from the original.
+	text "Its body is"
+	next "entirely"
+	next "musclebound."
 
-	page "styles of martial"
-	next "arts to become"
-	next "even stronger"
+	page "Despite its size,"
+	next "it can throw up"
+	next "to 100 adults"
 	dex
 
-_ZubatDexEntry::
-	text "Forms colonies in"
-	next "perpetually dark"
-	next "places. Uses"
+_ZubatDexEntry:: ; new entry
+	text "Because it lives"
+	next "in darkness, its"
+	next "eyes disappeared."
 
-	page "ultrasonic waves"
-	next "to identify and"
-	next "approach targets"
+	page "It emits ultra-"
+	next "sonic cries to"
+	next "locate prey"
 	dex
 
-_EkansDexEntry::
-	text "Moves silently"
-	next "and stealthily."
-	next "Eats the eggs of"
+_EkansDexEntry:: ; new entry
+	text "It flicks its"
+	next "tongue to check"
+	next "for danger. If"
 
-	page "birds, such as"
-	next "PIDGEY and"
-	next "SPEAROW, whole"
+	page "it eats RATTATA,"
+	next "it can go without"
+	next "food for a month"
 	dex
 
-_ParasDexEntry::
-	text "Burrows to suck"
-	next "tree roots. The"
-	next "mushrooms on its"
+_ParasDexEntry:: ; new entry
+	text "Their mushrooms"
+	next "are called"
+	next "tochukaso."
 
-	page "back grow by draw-"
-	next "ing nutrients from"
-	next "the bug host"
+	page "They will grow"
+	next "alongside the"
+	next "#MON"
 	dex
 
-_PoliwhirlDexEntry::
-	text "Capable of living"
-	next "in or out of"
-	next "water. When out"
+_PoliwhirlDexEntry:: ; new entry
+	text "While its legs"
+	next "are well-"
+	next "developed,"
 
-	page "of water, it"
-	next "sweats to keep"
-	next "its body slimy"
+	page "POLIWHIRL much"
+	next "prefers life"
+	next "in the water"
 	dex
 
-_PoliwrathDexEntry::
+_PoliwrathDexEntry:: ; new entry, modified from original.
 	text "An adept swimmer"
-	next "at both the front"
-	next "crawl and breast"
+	next "at both the crawl"
+	next "and butterfly."
 
-	page "stroke. Easily"
-	next "overtakes the best"
-	next "human swimmers"
+	page "Why it remains a"
+	next "tadpole is"
+	next "unknown"
 	dex
 
-_WeedleDexEntry::
+_WeedleDexEntry:: ; new entry, modified from the original, including adding the omitted gingko leaf bit
 	text "Often found in"
 	next "forests, eating"
-	next "leaves."
+	next "gingko leaves."
 
-	page "It has a sharp"
-	next "venomous stinger"
-	next "on its head"
+	page "It wiggles its"
+	next "stinger to"
+	next "intimidate foes"
 	dex
 
-_KakunaDexEntry::
+_KakunaDexEntry:: ; does not need a n.ew entry.
 	text "Almost incapable"
 	next "of moving, this"
 	next "#MON can only"
@@ -948,27 +950,27 @@ _KakunaDexEntry::
 	next "from predators"
 	dex
 
-_BeedrillDexEntry::
-	text "Flies at high"
-	next "speed and attacks"
-	next "using its large"
+_BeedrillDexEntry:: ; new entry
+	text "Often appears"
+	next "in swarms. It"
+	next "buzzes around at"
 
-	page "venomous stingers"
-	next "on its forelegs"
-	next "and tail"
+	page "quick speeds and"
+	next "attacks with its"
+	next "venomous stinger"
 	dex
 
-_DodrioDexEntry::
-	text "Uses its three"
-	next "brains to execute"
-	next "complex plans."
+_DodrioDexEntry:: ; new entry
+	text "Historians claim"
+	next "that a religion"
+	next "in Central"
 
-	page "While two heads"
-	next "sleep, one head"
-	next "stays awake"
+	page "America revered"
+	next "DODRIO as a"
+	next "symbol"
 	dex
 
-_PrimeapeDexEntry::
+_PrimeapeDexEntry:: ; this entry is just like the pokedex, so no new one
 	text "Always furious"
 	next "and tenacious to"
 	next "boot. It will not"
@@ -978,17 +980,17 @@ _PrimeapeDexEntry::
 	next "it is caught"
 	dex
 
-_DugtrioDexEntry::
+_DugtrioDexEntry:: ; new entry, modified from the original
 	text "A team of DIGLETT"
 	next "triplets."
-	next "It triggers huge"
+	next "They burrow"
 
-	page "earthquakes by"
-	next "burrowing 60 miles"
-	next "underground"
+	page "underground to"
+	next "hide themselves"
+	next "before striking"
 	dex
 
-_VenomothDexEntry::
+_VenomothDexEntry:: ; does not need a n.ew entry
 	text "The dust-like"
 	next "scales covering"
 	next "its wings are"
@@ -998,27 +1000,27 @@ _VenomothDexEntry::
 	next "of poison it has"
 	dex
 
-_DewgongDexEntry::
-	text "Stores thermal"
-	next "energy in its"
-	next "body. Swims at a"
+_DewgongDexEntry:: ; new entry
+	text "Its blubber can"
+	next "be up to 30 cm"
+	next "thick. Unusually,"
 
-	page "steady 8 knots"
-	next "even in intensely"
-	next "cold waters"
+	page "they are more"
+	next "active at lower"
+	next "temperatures"
 	dex
 
-_CaterpieDexEntry::
-	text "Its short feet"
-	next "are tipped with"
-	next "suction pads that"
+_CaterpieDexEntry:: ; new page
+	text "PIDGEY is its"
+	next "archenemy. If it"
+	next "senses that it's"
 
-	page "enable it to"
-	next "tirelessly climb"
-	next "slopes and walls"
+	page "around, it will"
+	next "quickly burrow"
+	next "underground"
 	dex
 
-_MetapodDexEntry::
+_MetapodDexEntry:: ; does not need a n.ew entry
 	text "This #MON is"
 	next "vulnerable to"
 	next "attack while its"
@@ -1028,57 +1030,57 @@ _MetapodDexEntry::
 	next "and tender body"
 	dex
 
-_ButterfreeDexEntry::
-	text "In battle, it"
-	next "flaps its wings"
-	next "at high speed to"
+_ButterfreeDexEntry:: ; new entry
+	text "Its wings are"
+	next "covered in water-"
+	next "repellent scales"
 
-	page "release highly"
-	next "toxic dust into"
-	next "the air"
+	page "that let it fly"
+	next "even on rainy"
+	next "days"
 	dex
 
-_MachampDexEntry::
-	text "Using its heavy"
-	next "muscles, it throws"
-	next "powerful punches"
+_MachampDexEntry:: ; new entry
+	text "It can throw 1000"
+	next "punches in 2"
+	next "seconds. While"
 
-	page "that can send the"
-	next "victim clear over"
-	next "the horizon"
+	page "thought to evolve"
+	next "from MACHOKE, the"
+	next "method is unknown"
 	dex
 
-_GolduckDexEntry::
-	text "Often seen swim-"
-	next "ming elegantly by"
-	next "lake shores. It"
-
-	page "is often mistaken"
-	next "for the Japanese"
-	next "monster, Kappa"
+_GolduckDexEntry:: ; new entry
+	text "When swimming,"
+	next "GOLDUCK is"
+	next "faster than a"
+	
+	page "motorboat. It is"
+	next "often mistaken"
+	next "for Kappa"
 	dex
 
-_HypnoDexEntry::
-	text "When it locks eyes"
-	next "with an enemy, it"
-	next "will use a mix of"
+_HypnoDexEntry:: ; new entry
+	text "In towns where"
+	next "HYPNO appear,"
+	next "disappearances"
 
-	page "PSI moves such as"
-	next "HYPNOSIS and"
-	next "CONFUSION"
+	page "of children"
+	next "mysteriously"
+	next "surge"
 	dex
 
-_GolbatDexEntry::
-	text "Once it strikes,"
-	next "it will not stop"
-	next "draining energy"
-
-	page "from the victim"
-	next "even if it gets"
-	next "too heavy to fly"
+_GolbatDexEntry:: ; new entry
+	text "Using its sharp"
+	next "fangs, GOLBAT can"
+	next "suck up to"
+	
+	page "300 milliliters"
+	next "of blood in one"
+	next "bite"
 	dex
 
-_MewtwoDexEntry::
+_MewtwoDexEntry:: ; does not need a n.ew entry
 	text "It was created by"
 	next "a scientist after"
 	next "years of horrific"
@@ -1088,37 +1090,37 @@ _MewtwoDexEntry::
 	next "experiments"
 	dex
 
-_SnorlaxDexEntry::
-	text "Very lazy. Just"
-	next "eats and sleeps."
-	next "As its rotund"
+_SnorlaxDexEntry:: ; new entry, could be improved.
+	text "It eats 400 kilos"
+	next "of food a day. As"
+	next "soon as it is"
 
-	page "bulk builds, it"
-	next "becomes steadily"
-	next "more slothful"
+	page "done, it falls"
+	next "asleep. It is the"
+	next "heaviest #MON"
 	dex
 
-_MagikarpDexEntry::
-	text "In the distant"
-	next "past, it was"
-	next "somewhat stronger"
+_MagikarpDexEntry:: ; new entry
+	text "A pitifully weak"
+	next "#MON, recent"
+	next "studies have"
 
-	page "than the horribly"
-	next "weak descendants"
-	next "that exist today"
+	page "revealed dragon"
+	next "cells in its"
+	next "body"
 	dex
 
-_MukDexEntry::
-	text "Thickly covered"
-	next "with a filthy,"
-	next "vile sludge. It"
+_MukDexEntry:: ; new entry
+	text "Usually mingles"
+	next "with soil."
+	next "Analysis of its"
 
-	page "is so toxic, even"
-	next "its footprints"
-	next "contain poison"
+	page "cells revealed"
+	next "many unnatural"
+	next "substances"
 	dex
 
-_KinglerDexEntry::
+_KinglerDexEntry:: ; does not need a n.ew entry
 	text "The large pincer"
 	next "has 10000 hp of"
 	next "crushing power."
@@ -1128,382 +1130,382 @@ _KinglerDexEntry::
 	next "unwieldy to use"
 	dex
 
-_CloysterDexEntry::
-	text "When attacked, it"
-	next "launches its"
-	next "horns in quick"
+_CloysterDexEntry:: ; new entry
+	text "Its shell is"
+	next "extremely durable."
+	next "Even napalm bombs"
 
-	page "volleys. Its"
-	next "innards have"
-	next "never been seen"
+	page "have failed to"
+	next "reveal what's"
+	next "inside its shell"
 	dex
 
-_ElectrodeDexEntry::
-	text "It stores electric"
-	next "energy under very"
-	next "high pressure."
-
-	page "It often explodes"
-	next "with little or no"
-	next "provocation"
+_ElectrodeDexEntry:: ; new entry
+	text "Because they"
+	next "explode with"
+	next "little to no"
+	
+	page "provocation, it"
+	next "has been called"
+	next "the 'Bomb Ball'"
 	dex
 
-_ClefableDexEntry::
-	text "A timid fairy"
-	next "#MON that is"
-	next "rarely seen. It"
+_ClefableDexEntry:: ; new entry
+	text "Its hearing is"
+	next "very well-"
+	next "developed. It"
 
-	page "will run and hide"
-	next "the moment it"
-	next "senses people"
+	page "can hear a pin"
+	next "drop from a"
+	next "kilometer away"
 	dex
 
-_WeezingDexEntry::
-	text "Where two kinds"
-	next "of poison gases"
-	next "meet, 2 KOFFINGs"
-
-	page "can fuse into a"
-	next "WEEZING over many"
-	next "years"
+_WeezingDexEntry:: ; new entry
+	text "A rare mutation"
+	next "caused 2 KOFFING"
+	next "to fuse together."
+	
+	page "Researchers are"
+	next "trying to bleach"
+	next "its toxicity"
 	dex
 
-_PersianDexEntry::
-	text "Although its fur"
-	next "has many admirers,"
-	next "it is tough to"
+_PersianDexEntry:: ; new entry
+	text "Before pouncing,"
+	next "it raises its"
+	next "tail straight."
 
-	page "raise as a pet"
-	next "because of its"
-	next "fickle meanness"
+	page "Women often keep"
+	next "them as trophy"
+	next "pets"
 	dex
 
-_MarowakDexEntry::
-	text "The bone it holds"
-	next "is its key weapon."
-	next "It throws the"
+_MarowakDexEntry:: ; new entry
+	text "While weak when"
+	next "it's young, it"
+	next "becomes violent"
 
-	page "bone skillfully"
-	next "like a boomerang"
-	next "to KO targets"
+	page "when it learns"
+	next "to use"
+	next "BONEMERANG"
 	dex
 
-_HaunterDexEntry::
-	text "Because of its"
-	next "ability to slip"
-	next "through block"
+_HaunterDexEntry:: ; new entry
+	text "It's said that if"
+	next "you feel like"
+	next "you're being"
 
-	page "walls, it is said"
-	next "to be from an-"
-	next "other dimension"
+	page "watched while"
+	next "alone, HAUNTER"
+	next "is lurking"
 	dex
 
-_AbraDexEntry::
-	text "Using its ability"
-	next "to read minds, it"
-	next "will identify"
+_AbraDexEntry:: ; new entry
+	text "Even when asleep,"
+	next "ABRA can use"
+	next "telekinetic"
 
-	page "impending danger"
-	next "and TELEPORT to"
-	next "safety"
+	page "powers. It is"
+	next "rare due to a"
+	next "small population"
 	dex
 
-_AlakazamDexEntry::
-	text "Its brain can out-"
-	next "perform a super-"
-	next "computer."
+_AlakazamDexEntry:: ; new entry
+	text "Disdainful of"
+	next "physical attacks,"
+	next "ALAKAZAM uses"
 
-	page "Its intelligence"
-	next "quotient is said"
-	next "to be 5,000"
+	page "PSI moves instead."
+	next "In battle, it is"
+	next "expressionless"
 	dex
 
-_PidgeottoDexEntry::
-	text "Very protective"
-	next "of its sprawling"
-	next "territorial area,"
+_PidgeottoDexEntry:: ; new entry
+	text "Dives from heights"
+	next "of 800 meters to"
+	next "catch prey."
 
-	page "this #MON will"
-	next "fiercely peck at"
-	next "any intruder"
+	page "Their developed"
+	next "talons let them"
+	next "carry EXEGGCUTE"
 	dex
 
-_PidgeotDexEntry::
-	text "When hunting, it"
-	next "skims the surface"
-	next "of water at high"
+_PidgeotDexEntry:: ; new entry
+	text "Flies at speeds of"
+	next "up to Mach-2 at"
+	next "1200 meters."
 
-	page "speed to pick off"
-	next "unwary prey such"
-	next "as MAGIKARP"
+	page "They spread their"
+	next "wings for"
+	next "intimidation"
 	dex
 
-_StarmieDexEntry::
-	text "Its central core"
-	next "glows with the"
-	next "seven colors of"
+_StarmieDexEntry:: ; new entry
+	text "Little is known"
+	next "about STARMIE."
+	next "Locally, due to"
 
-	page "the rainbow. Some"
-	next "people value the"
-	next "core as a gem"
+	page "its body shape,"
+	next "it is believed"
+	next "to be an alien"
 	dex
 
-_BulbasaurDexEntry::
-	text "A strange seed was"
-	next "planted on its"
-	next "back at birth."
-
-	page "The plant sprouts"
-	next "and grows with"
-	next "this #MON"
+_BulbasaurDexEntry:: ; new entry
+	text "Researchers have"
+	next "argued for 6 years"
+	next "about whether"
+	
+	page "BULBASAUR is a"
+	next "plant or"
+	next "a mammal"
 	dex
 
-_VenusaurDexEntry::
-	text "The plant blooms"
-	next "when it is"
-	next "absorbing solar"
+_VenusaurDexEntry:: ; new entry
+	text "Its flower wafts"
+	next "a pacifying aroma."
+	next "Because it rests"
 
-	page "energy. It stays"
-	next "on the move to"
-	next "seek sunlight"
+	page "in sunlit places,"
+	next "some think that it"
+	next "photosynthesizes"
 	dex
 
-_TentacruelDexEntry::
-	text "The tentacles are"
-	next "normally kept"
-	next "short. On hunts,"
+_TentacruelDexEntry:: ; new entry
+	text "Also known as the"
+	next "'Gangster of the"
+	next "Sea', it uses its"
 
-	page "they are extended"
-	next "to ensnare and"
-	next "immobilize prey"
+	page "80 tentacles to"
+	next "ensnare and"
+	next "feast on prey"
 	dex
 
-_GoldeenDexEntry::
-	text "Its tail fin"
-	next "billows like an"
-	next "elegant ballroom"
+_GoldeenDexEntry:: ; new entry
+	text "It can swim at"
+	next "speeds of up to"
+	next "5 knots. Known to"
 
-	page "dress, giving it"
-	next "the nickname of"
-	next "the Water Queen"
+	page "inadvertently"
+	next "swim into the"
+	next "mouth of GYARADOS"
 	dex
 
-_SeakingDexEntry::
-	text "In the autumn"
-	next "spawning season,"
-	next "they can be seen"
+_SeakingDexEntry:: ; new entry
+	text "Using its drill-"
+	next "like horn, it"
+	next "hollows out"
 
-	page "swimming power-"
-	next "fully up rivers"
-	next "and creeks"
+	page "boulders to"
+	next "prepare for"
+	next "spawning GYOPIN"
 	dex
 
-_PonytaDexEntry::
-	text "Its hooves are 10"
-	next "times harder than"
-	next "diamonds. It can"
+_PonytaDexEntry:: ; new entry
+	text "It grazes in"
+	next "grasslands."
+	next "With strong legs,"
 
-	page "trample anything"
-	next "completely flat"
-	next "in little time"
+	page "it can clear"
+	next "SILPH CO. in a"
+	next "single jump"
 	dex
 
-_RapidashDexEntry::
-	text "Very competitive,"
-	next "this #MON will"
-	next "chase anything"
+_RapidashDexEntry:: ; new entry
+	text "RAPIDASH obey"
+	next "their TRAINERs"
+	next "dutifully."
 
-	page "that moves fast"
-	next "in the hopes of"
-	next "racing it"
+	page "They can keep"
+	next "pace with a"
+	next "bullet train"
 	dex
 
-_RattataDexEntry::
-	text "Bites anything"
-	next "when it attacks."
-	next "Small and very"
+_RattataDexEntry:: ; new entry
+	text "They gnaw on hard"
+	next "material to keep"
+	next "their fangs"
 
-	page "quick, it is a"
-	next "common sight in"
-	next "many places"
+	page "short. They like"
+	next "acorns and"
+	next "walnuts"
 	dex
 
-_RaticateDexEntry::
-	text "It uses its whis-"
-	next "kers to maintain"
-	next "its balance."
+_RaticateDexEntry:: ; new entry
+	text "Its feet are"
+	next "slightly webbed,"
+	next "letting it swim"
 
-	page "It apparently"
-	next "slows down if"
-	next "they are cut off"
+	page "across rivers."
+	next "Along with nuts,"
+	next "it also eats fish"
 	dex
 
-_NidorinoDexEntry::
-	text "An aggressive"
-	next "#MON that is"
-	next "quick to attack."
+_NidorinoDexEntry:: ; new entry
+	text "Its horn can"
+	next "pierce diamonds."
+	next "While evolved,"
 
-	page "The horn on its"
-	next "head secretes a"
-	next "powerful venom"
+	page "it does not lose"
+	next "the ability to"
+	next "breed"
 	dex
 
-_NidorinaDexEntry::
-	text "The female's horn"
-	next "develops slowly."
-	next "Prefers physical"
+_NidorinaDexEntry:: ; new entry
+	text "They are placid,"
+	next "but use ultrasonic"
+	next "cries to allure"
 
-	page "attacks such as"
-	next "clawing and"
-	next "biting"
+	page "foes. Despite"
+	next "being evolved, it"
+	next "doesn't lay eggs"
 	dex
 
-_GeodudeDexEntry::
-	text "Found in fields"
-	next "and mountains."
-	next "Mistaking them"
+_GeodudeDexEntry:: ; new entry
+	text "Being round and"
+	next "easy to hold,"
+	next "it is often"
 
-	page "for boulders,"
-	next "people often step"
-	next "or trip on them"
+	page "tossed around in"
+	next "GEODUDE fights by"
+	next "unruly teenagers"
 	dex
 
-_PorygonDexEntry::
-	text "A #MON that"
-	next "consists entirely"
-	next "of programming"
+_PorygonDexEntry:: ; new entry
+	text "It was created"
+	next "in 1995 by SILPH"
+	next "CO. Criminal"
 
-	page "code. Capable of"
-	next "moving freely in"
-	next "cyberspace"
+	page "investigations"
+	next "on prize PORYGON"
+	next "are ongoing"
 	dex
 
-_AerodactylDexEntry::
-	text "A ferocious, pre-"
-	next "historic #MON"
-	next "that goes for the"
+_AerodactylDexEntry:: ; new entry
+	text "The progenitor"
+	next "of birds. It"
+	next "flew with its"
 
-	page "enemy's throat"
-	next "with its serrated"
-	next "saw-like fangs"
+	page "broad wings while"
+	next "emitting high-"
+	next "pitched cries"
 	dex
 
-_MagnemiteDexEntry::
+_MagnemiteDexEntry:: ; new entry altered from original
 	text "Uses anti-gravity"
 	next "to stay suspended."
-	next "Appears without"
+	next "The magnets on its"
 
-	page "warning and uses"
-	next "THUNDER WAVE and"
-	next "similar moves"
+	page "sides radiate"
+	next "electromagnetic"
+	next "waves"
 	dex
 
-_CharmanderDexEntry::
-	text "Obviously prefers"
-	next "hot places. When"
-	next "it rains, steam"
-
-	page "is said to spout"
-	next "from the tip of"
-	next "its tail"
+_CharmanderDexEntry:: ; new entry
+	text "It is born with a"
+	next "flame on its tail,"
+	next "which it needs to"
+	
+	page "survive. Smokers"
+	next "keep them instead"
+	next "of lighters"
 	dex
 
-_SquirtleDexEntry::
-	text "After birth, its"
-	next "back swells and"
-	next "hardens into a"
-
-	page "shell. Powerfully"
-	next "sprays foam from"
-	next "its mouth"
+_SquirtleDexEntry:: ; new entry
+	text "After retracting"
+	next "its long neck"
+	next "into its shell,"
+	
+	page "it squirts out"
+	next "water with"
+	next "vigorous force"
 	dex
 
-_CharmeleonDexEntry::
-	text "When it swings"
-	next "its burning tail,"
-	next "it elevates the"
+_CharmeleonDexEntry:: ; new entry
+	text "Its tail can lift"
+	next "5 adults. They"
+	next "flail it to knock"
 
-	page "temperature to"
-	next "unbearably high"
-	next "levels"
+	page "#MON down to"
+	next "rend them with"
+	next "its claws"
 	dex
 
-_WartortleDexEntry::
-	text "Often hides in"
-	next "water to stalk"
-	next "unwary prey. For"
+_WartortleDexEntry:: ; new entry
+	text "Their fur-covered"
+	next "tail is a symbol"
+	next "of longevity."
 
-	page "swimming fast, it"
-	next "moves its ears to"
-	next "maintain balance"
+	page "They are popular"
+	next "as pets for their"
+	next "cute profile"
 	dex
 
-_CharizardDexEntry::
-	text "Spits fire that"
-	next "is hot enough to"
-	next "melt boulders."
-
-	page "Known to cause"
-	next "forest fires"
-	next "unintentionally"
+_CharizardDexEntry:: ; new entry
+	text "Because its dung"
+	next "is found on Mt."
+	next "Fuji, it is"
+	
+	page "thought to FLY up"
+	next "to 1,400 meters"
+	next "in altitude"
 	dex
 
-_OddishDexEntry::
-	text "During the day,"
-	next "it keeps its face"
-	next "buried in the"
+_OddishDexEntry:: ; new entry
+	text "It is also known"
+	next "as Walkimendes."
+	next "At night, they"
 
-	page "ground. At night,"
-	next "it wanders around"
-	next "sowing its seeds"
+	page "walk up to 300"
+	next "meters on their"
+	next "two roots"
 	dex
 
-_GloomDexEntry::
-	text "The fluid that"
-	next "oozes from its"
-	next "mouth isn't drool."
+_GloomDexEntry:: ; new entry
+	text "GLOOM's pistil"
+	next "emits a foul"
+	next "stench that makes"
 
-	page "It is a nectar"
-	next "that is used to"
-	next "attract prey"
+	page "foes faint up to"
+	next "2 kilometers"
+	next "away"
 	dex
 
-_VileplumeDexEntry::
-	text "The larger its"
-	next "petals, the more"
-	next "toxic pollen it"
+_VileplumeDexEntry:: ; new entry
+	text "They have the"
+	next "largest petals in"
+	next "the world. Its"
 
-	page "contains. Its big"
-	next "head is heavy and"
-	next "hard to hold up"
+	page "pollen can cause"
+	next "severe allergic"
+	next "reactions"
 	dex
 
-_BellsproutDexEntry::
-	text "A carnivorous"
-	next "#MON that traps"
-	next "and eats bugs."
+_BellsproutDexEntry:: ; new entry
+	text "Because its bud"
+	next "looks like a"
+	next "human face,"
 
-	page "It uses its root"
-	next "feet to soak up"
-	next "needed moisture"
+	page "It is said to be"
+	next "a legendary"
+	next "mandrake root"
 	dex
 
-_WeepinbellDexEntry::
-	text "It spits out"
-	next "POISONPOWDER to"
-	next "immobilize the"
+_WeepinbellDexEntry:: ; new entry
+	text "Its leaves are"
+	next "cutters for"
+	next "shredding foes."
 
-	page "enemy and then"
-	next "finishes it with"
-	next "a spray of ACID"
+	page "Their feeding is"
+	next "a bizarre"
+	next "spectacle"
 	dex
 
-_VictreebelDexEntry::
-	text "Said to live in"
-	next "huge colonies"
-	next "deep in jungles,"
+_VictreebelDexEntry:: ; new entry
+	text "It draws in prey"
+	next "with a honey-"
+	next "like aroma."
 
-	page "although no one"
-	next "has ever returned"
-	next "from there"
+	page "It will eat"
+	next "anything it can"
+	next "fit in its mouth"
 	dex

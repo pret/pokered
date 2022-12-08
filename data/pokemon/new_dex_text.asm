@@ -639,7 +639,7 @@ _MagmortarDexEntry::
 	dex
 	
 _PorygonZDexEntry::
-	text "Corrupted by the"
+	text "Corrupted by a"
 	next "faulty update"
 	next "added to it, this"
 
@@ -664,8 +664,8 @@ _AnnihilapeDexEntry::
 	next "ANNIHILAPE's blows"
 
 	page "break the minds"
-	next "and the bones"
-	next "of its opponents"
+	next "and bones of its"
+	next "opponents"
 	dex
 	
 _WiglettDexEntry::
@@ -709,13 +709,13 @@ _ToedscruelDexEntry::
 	dex
 	
 _ScreamTailDexEntry::
-	text "Though it bears"
-	next "similarity to a"
-	next "regular JIGGLYPUFF,"
+	text "It matches the"
+	next "description of"
+	next "an ancient"
 
-	page "it has a savage"
-	next "nature and a"
-	next "distinctive scream"
+	page "JIGGLYPUFF that"
+	next "was in a"
+	next "strange book."
 	dex
 	
 _SandyShocksDexEntry::
