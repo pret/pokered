@@ -10,9 +10,9 @@ DEF TRUE  EQU 1
 
 ;;;;;;;;;; PureRGBnote: CHANGED: increased the speed of each text speed option
 ; wOptions
-DEF TEXT_DELAY_FAST    EQU %000 ; 0
-DEF TEXT_DELAY_MEDIUM  EQU %001 ; 1
-DEF TEXT_DELAY_SLOW    EQU %011 ; 3
+DEF TEXT_DELAY_FAST    EQU %00 ; 0
+DEF TEXT_DELAY_MEDIUM  EQU %01 ; 1
+DEF TEXT_DELAY_SLOW    EQU %11 ; 3
 ;;;;;;;;;;
 
 	const_def 6
