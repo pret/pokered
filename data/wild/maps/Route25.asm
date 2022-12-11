@@ -9,7 +9,7 @@ Route25WildMons:
 	db 14, BELLSPROUT
 	db 10, ABRA
 	db 10, SKIMPER
-	db 15, BUTTERFREE
+	db 15, PIDGEOTTO
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate

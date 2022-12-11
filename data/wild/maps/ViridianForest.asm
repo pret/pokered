@@ -3,13 +3,13 @@ ViridianForestWildMons:
 	db  6, CATERPIE
 	db  6, WEEDLE
 	db  6, CATERPIE
-	db  5, PARA
+	db  5, PIDGEY
 	db  6, MONJA
 	db  6, PARA
 	db  8, KAKUNA
 	db  8, METAPOD
 	db  5, PIKACHU
-	db 10, BUTTERFREE
+	db 9, PIDGEOTTO
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate

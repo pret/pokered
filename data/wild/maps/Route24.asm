@@ -4,7 +4,7 @@ Route24WildMons:
 	db 12, ODDISH
 	db 12, PIDGEY
 	db 12, ODDISH
-	db 13, ODDISH
+	db 13, VENONAT
 	db 10, ABRA
 	db 14, BELLSPROUT
 	db 13, PIDGEY

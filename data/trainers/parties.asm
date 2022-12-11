@@ -82,7 +82,7 @@ BugCatcherData:
 ; Viridian Forest
 	db 6, WEEDLE, CATERPIE, 0
 	db 7, CATERPIE, KAKUNA, PARA, 0
-	db 9, WEEDLE, PARA, 0
+	db 9, WEEDLE, VENONAT, 0
 ; Route 3
 	db 10, CATERPIE, WEEDLE, PARA, 0
 	db 9, WEEDLE, KAKUNA, CATERPIE, METAPOD, 0
