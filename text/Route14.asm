@@ -69,8 +69,8 @@ _Route14AfterBattleText4::
 
 _Route14BattleText5::
 	text "Have you heard of"
-	line "the legendary"
-	cont "#MON?"
+	line "the winged"
+	cont "mirages?"
 	done
 
 _Route14EndBattleText5::
@@ -79,9 +79,17 @@ _Route14EndBattleText5::
 	prompt
 
 _Route14AfterBattleText5::
-	text "The 3 legendary"
-	line "#MON are all"
-	cont "birds of prey."
+	text "The winged" ; jp / remake restoration
+	line "mirages are the"
+	
+	para "legendary bird"
+	line "#MON."
+	
+	para "There are 3 of"
+	line "them: ZAPDOS,"
+	cont "ARTICUNO, and"
+	cont "MOLTRES."
+	
 	done
 
 _Route14BattleText6::

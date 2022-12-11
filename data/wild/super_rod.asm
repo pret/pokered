@@ -39,6 +39,7 @@ SuperRodData:
 	dbw CELADON_UNIVERSITY_OUTSIDE, .Group11
 	dbw FARAWAY_ISLAND_INSIDE, 		.Group7
 	dbw MT_MOON_CRATER,				.Group10
+	dbw DIGLETTS_CAVE,				.Group12
 	db -1 ; end
 
 ; fishing groups
@@ -134,3 +135,10 @@ SuperRodData:
 	db 20, MAGIKARP
 	db 20, GYARADOS
 	db 20, GRIMER
+
+.Group12:
+	db 4
+	db 16, WIGLETT
+	db 18, WIGLETT
+	db 19, WIGLETT
+	db 28, WUGTRIO

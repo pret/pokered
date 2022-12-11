@@ -124,8 +124,8 @@ _BittybatDexEntry::
 	next "these #MON may"
 
 	page "swarm a victim"
-	next "at once to"
-	next "prey on it"
+	next "at once to prey"
+	next "on it"
 	dex
 
 _RibbitoDexEntry::

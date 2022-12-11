@@ -127,7 +127,7 @@ MainMenu:
 InitOptions:
 	ld a, TEXT_DELAY_FAST
 	ld [wLetterPrintingDelayFlags], a
-	ld a, TEXT_DELAY_FAST
+	ld a, TEXT_DELAY_FAST ; makes fasttext come up without the need to change settings
 	ld [wOptions], a
 	ret
 
@@ -392,7 +392,7 @@ PrintSaveScreenText:
 	call PrintPlayTime
 	ld a, $1
 	ldh [hAutoBGTransferEnabled], a
-	ld c, 15 ; quicker player stat display
+	ld c, 30
 	jp DelayFrames
 
 PrintNumBadges:

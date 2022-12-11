@@ -21,7 +21,7 @@ SetIshiharaTeam:
 	jr .loop
 
 IshiharaTeam:
-	db KINGDRA, 90
+	db SCREAM_TAIL, 90
 IF DEF(_DEBUG)
 	db MAGNEZONE, 50
 ELSE
@@ -29,7 +29,7 @@ ELSE
 ENDC
 	db MAGMORTAR, 56
 	db ELECTIVIRE, 56
-	db PORYGON2, 57
+	db ANNIHILAPE, 57
 IF DEF(_DEBUG)
 	db KADABRA, 16
 ENDC
@@ -86,12 +86,14 @@ IF DEF(_DEBUG)
 	ld a, 15
 	ld [hl], a
 
-	; Kadabra gets Flash.
+	; Kadabra gets Flash and Teleport
 	ld hl, wPartyMon6Moves + 2
 	ld a, FLASH
 	ld [hl], a
 	ld hl, wPartyMon6PP + 2
 	ld a, 15
+	ld [hl], a
+	ld a, TELEPORT
 	ld [hl], a
 
 	; Get some debug items.
@@ -142,10 +144,10 @@ DebugItemsList:
 	db BICYCLE, 1
 	db FULL_RESTORE, 99
 	db MAX_REPEL, 99
-	db ESCAPE_ROPE, 99
 	db RARE_CANDY, 99
 	db MASTER_BALL, 99
-	db DUBIOUS_DISC, 99
+	db ULTRA_BALL, 99
+	db GREAT_BALL, 99
 	db SECRET_KEY, 1
 	db CARD_KEY, 1
 	db S_S_TICKET, 1

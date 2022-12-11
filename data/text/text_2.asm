@@ -819,8 +819,7 @@ _PokemonBooksText::
 	done
 
 _DiglettSculptureText::
-	text "It's a sculpture"
-	line "of DIGLETT."
+	text "It's a butsudan!" ; restored JP elemement
 	done
 
 _ElevatorText::

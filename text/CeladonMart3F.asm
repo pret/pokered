@@ -42,18 +42,19 @@ _CeladonMart3Text3::
 	para "My buddy's going"
 	line "to trade me his"
 	cont "KANGASKHAN for my"
-	cont "GRAVELER!"
+	cont "HAUNTER!" ; restored JP and remake element
 	done
 
 _CeladonMart3Text4::
-	text "Come on GRAVELER!"
+	text "Come on HAUNTER!" ; JP and remake restoration
 
-	para "I love GRAVELER!"
-	line "I collect them!"
+	para "I'm the HAUNTER"
+	line "MANIAC!"
+	cont "I collect them!"
 
 	para "Huh?"
 
-	para "GRAVELER turned"
+	para "HAUNTER turned"
 	line "into a different"
 	cont "#MON!"
 	done
@@ -94,6 +95,8 @@ _CeladonMart3Text14::
 	done
 
 _CeladonMart3Text15::
-	text "Red and Blue!"
-	line "Both are #MON!"
+	text "Red and Green!" ; restores element from JP Blue, but modifies it to comprise all versions - PvK
+	line "Blue and Yellow!"
+	
+	para "All are #MON!"
 	done

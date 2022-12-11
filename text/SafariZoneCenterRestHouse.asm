@@ -1,7 +1,9 @@
 _SafariZoneRestHouse1Text1::
-	text "SARA: Where did"
-	line "my boy friend,"
-	cont "ERIK, go?"
+	text "ATSUKO: Where did" ; JP elements restored, cut "boyfriend" line which was a translation change.
+	line "KOJI go?"
+	
+	para "He said to meet"
+	line "him here..."
 	done
 
 _SafariZoneRestHouse1Text2::

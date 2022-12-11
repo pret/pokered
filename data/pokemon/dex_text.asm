@@ -219,7 +219,7 @@ _GyaradosDexEntry:: ; new entry
 	dex
 
 _ShellderDexEntry:: ; new entry
-	text "Its shell is as"
+	text "Its shell is"
 	next "harder than" 
 	next "diamonds. It"
 
@@ -1256,8 +1256,8 @@ _BulbasaurDexEntry:: ; new entry
 	next "about whether"
 	
 	page "BULBASAUR is a"
-	next "plant or"
-	next "a mammal"
+	next "plant or a"
+	next "mammal"
 	dex
 
 _VenusaurDexEntry:: ; new entry

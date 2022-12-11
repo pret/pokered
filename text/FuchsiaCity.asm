@@ -16,8 +16,8 @@ _FuchsiaCityText2::
 	done
 
 _FuchsiaCityText3::
-	text "ERIK: Where's"
-	line "SARA? I said I'd"
+	text "KOJI: Where's" ; JP sequence restoration
+	line "ATSUKO? I said I'd"
 	cont "meet her here."
 	done
 

@@ -61,7 +61,7 @@ YoungsterData:
 	db 11, RATTATA, EKANS, 0
 	db 14, SPEAROW, 0
 ; Mt. Moon 1F
-	db 10, RATTATA, RATTATA, ZUBAT, 0
+	db 10, RATTATA, SPEAROW, BITTYBAT, 0
 ; Route 24
 	db 14, RATTATA, EKANS, ZUBAT, 0
 ; Route 25
@@ -94,12 +94,12 @@ BugCatcherData:
 	db 14, CATERPIE, WEEDLE, 0
 ; Route 6
 	db 16, WEEDLE, CATERPIE, WEEDLE, 0
-	db 20, BUTTERFREE, 0
+	db 20, BUTTERFREE, 0 ; this is that one boss fight-like one
 ; Unused - this will be used in the Silph Gauntlet
 	db 62, SCIZOR, BEEDRILL, PARASECT, VENOMOTH, PURAKKUSU, KLEAVOR, 0
 ; Route 9
-	db 19, BEEDRILL, BEEDRILL, 0
-	db 20, CATERPIE, WEEDLE, VENONAT, 0
+	db 19, BUTTERFREE, BEEDRILL, 0
+	db 20, WEEDLE, VENONAT, BEEDRILL, 0 ; holy shit why did they have an L20 Caterpie you psycho, weedle is barely acceptable...
 
 LassData:
 ; Route 3
@@ -320,7 +320,7 @@ EngineerData:
 	db 36, GOLEM, 0
 ; Route 11
 	db 21, MAGNEMITE, 0
-	db 18, MAGNEMITE, MAGNEMITE, MAGNETON, 0
+	db 18, MAGNEMITE, MAGNEMITE, MAGNETITE, 0
 
 UnusedJugglerData:
 	; db $FF, 7, KONYA, 7, EEVEE, 10, LICKITUNG, 0
@@ -507,10 +507,10 @@ Green1Data:
 	db $FF, 9, PIDGEY, 8, SQUIRTLE, 0
 	db $FF, 9, PIDGEY, 8, BULBASAUR, 0
 	db $FF, 9, PIDGEY, 8, CHARMANDER, 0
-; Cerulean City
-	db $FF, 18, PIDGEOTTO, 15, ABRA, 15, RATTATA, 17, SQUIRTLE, 0
-	db $FF, 18, PIDGEOTTO, 15, ABRA, 15, RATTATA, 17, BULBASAUR, 0
-	db $FF, 18, PIDGEOTTO, 15, ABRA, 15, RATTATA, 17, CHARMANDER, 0
+; Cerulean City - starter is now evolved
+	db $FF, 18, PIDGEOTTO, 15, ABRA, 15, RATTATA, 17, WARTORTLE, 0
+	db $FF, 18, PIDGEOTTO, 15, ABRA, 15, RATTATA, 17, IVYSAUR, 0
+	db $FF, 18, PIDGEOTTO, 15, ABRA, 15, RATTATA, 17, CHARMELEON, 0
 
 ProfOakData:
 ; Unused
@@ -559,9 +559,9 @@ GiovanniData:
 
 RocketData:
 ; Mt. Moon B2F
-	db 13, RATTATA, ZUBAT, 0
-	db 11, SANDSHREW, RATTATA, ZUBAT, 0
-	db 12, ZUBAT, EKANS, 0
+	db 13, RATTATA, BITTYBAT, 0
+	db 11, SANDSHREW, RATTATA, BITTYBAT, 0
+	db 12, BITTYBAT, EKANS, 0
 	db 16, RATICATE, 0
 ; Cerulean City
 	db 17, MACHOP, DROWZEE, 0

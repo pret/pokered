@@ -275,6 +275,10 @@ ItemUseBall:
 	ld a, [wcf91]
 	cp GREAT_BALL
 	ld a, 12
+	cp ULTRA_BALL ; lower threshold for ultras and safaris fix
+	ld a, 4
+	cp SAFARI_BALL 
+	ld a, 4 ; fix ends here
 	jr nz, .skip1
 	ld a, 8
 

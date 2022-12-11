@@ -73,6 +73,7 @@ QoL Enhancements
 - The protagonist is referred to in a gender neutral manner.
 - PC added to Celadon Hotel where the invisible event usually is. Why not?
 - Artificial Save Delay has been removed.
+- Ultra Balls now have a Ball Modifier of 4, instead of 8. This makes them better for general-purpose than Great Balls. Safari Balls have the same effect applied. 
 - Event moves can now be taught via TM/HM;
 	- TM16 (Pay Day) can be taught to Fearow and Rapidash ('98 Shogakukan)
 	- TM23 (Dragon Rage) can be taught to Magikarp (July '98 Shogakukan)
@@ -99,6 +100,7 @@ QoL Enhancements
 Bug Fixes
 ====
 Many non-multiplayer, non-battle related bugs have been fixed. The aforementioned have been preserved for the RBY battle experience. Bugs that are fixed are ones that objectively hurt the gameplay experience. Much of this can be attributed to [the tutorials](https://github.com/pret/pokered/wiki/Bugs-and-Glitches) made by the good people at pret.
+- Fixed various translation errors (eg. Route 14 Birdkeeper's "birds of prey" line, Koji and Atsuko in Fuschia.)
 - Blaine is no longer addicted to Super Potions.
 - CoolTrainerF no longer switches a lot.
 - Transformed Pokemon aren't presumed to be Dittos! (very important given Animon)
