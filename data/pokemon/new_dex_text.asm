@@ -244,7 +244,7 @@ _TotartleDexEntry::
 	next "10,000 years."
 
 	page "The shells of old"
-	next "TURTIDAL are fully"
+	next "TOTARTLE are fully"
 	next "covered in algae"
 	dex
 
