@@ -50,7 +50,7 @@ ENDM
 	warp_tiles $5E
 
 .ForestWarpTileIDs:
-	warp_tiles $5A, $5C, $3A
+	warp_tiles $5A, $5C, $3A, $50, $51, $52, $53 ; tiles $50 through $53 are the arrow tiles used in the Safari Zone. These are custom additions for Faraway Island.
 
 .DojoWarpTileIDs:
 .GymWarpTileIDs:
