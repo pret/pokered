@@ -89,13 +89,13 @@ _IvysaurDexEntry::
 	dex
 
 _ExeggutorDexEntry::
-	text "Also known as the"
-	next "walking tropical"
-	next "rainforest."
+	text "Known as The"
+	next "Walking Tropical"
+	next "Rainforest, each"
 
-	page "Each fruit has"
-	next "a will of its"
-	next "own"
+	page "fruit has a face"
+	next "and a will of"
+	next "its own"
 	dex
 
 _LickitungDexEntry:: ; new entry
@@ -119,13 +119,13 @@ _ExeggcuteDexEntry:: ; new entry
 	dex
 
 _GrimerDexEntry:: ; new entry
-	text "Toxic sludge"
-	next "mutated by x-rays"
-	next "from the moon"
+	text "Sludge mutated by"
+	next "x-rays from the"
+	next "moon eventually"
 
-	page "eventually"
-	next "became this"
-	next "#MON"
+	page "became GRIMER."
+	next "Loves to feed on"
+	next "filthy things"
 	dex
 
 _GengarDexEntry:: ; new entry
@@ -133,7 +133,7 @@ _GengarDexEntry:: ; new entry
 	next "honoring GENGAR"
 	next "on mountains. It"
 
-	page "Is said to appear"
+	page "is said to appear"
 	next "from the dark to"
 	next "kill lost souls"
 	dex
@@ -173,9 +173,9 @@ _RhyhornDexEntry:: ; new entry
 	next "ramming can"
 	next "destroy buildings."
 	
-	page "They are not"
-	next "suitable house"
-	next "pets"
+	page "Due to this, they"
+	next "are unsuitable"
+	next "house pets"
 	dex
 
 _LaprasDexEntry:: ; new entry
@@ -249,13 +249,13 @@ _GastlyDexEntry::		; Dex entry from Green, swapping the Indian Elephant for Tram
 	dex
 
 _ScytherDexEntry:: ; new entry
-	text "It can fly with"
-	next "its wings, but"
-	next "it is uncommon."
-
 	page "Few specimens"
 	next "have ever been"
-	next "caught"
+	next "caught. While"
+
+	page "it can fly using"
+	next "its wings, it"
+	next "rarely does this"
 	dex
 
 _StaryuDexEntry:: ; new entry
@@ -313,7 +313,7 @@ _OnixDexEntry:: ; new entry
 	next "underground,"
 	next "burrowing at over"
 
-	page "80 kilometers per"
+	page "50 miles per"		; changed to imperial to match other measurements
 	next "hour in search"
 	next "of prey"
 	dex
@@ -329,11 +329,11 @@ _FearowDexEntry:: ; new entry
 	dex
 
 _PidgeyDexEntry:: ; new entry
-	text "Dislikes fights."
-	next "They hide among"
-	next "tall grass"
+	text "Does not like to"
+	next "fight. It prefers"
+	next "to hide in tall"
 
-	page "while feeding on"
+	page "grass, feeding on"
 	next "CATERPIE and"
 	next "WEEDLE"
 	dex
@@ -349,13 +349,13 @@ _SlowpokeDexEntry::
 	dex
 
 _KadabraDexEntry:: ; new entry
-	text "A short story"
-	next "about a boy"
-	next "becoming a"
+	text "Its popularity has"
+	next "increased after"
+	next "the release of a"
 
-	page "KADABRA made it"
-	next "a star for those"
-	next "in the know"
+	page "short story about"
+	next "a boy who turned"
+	next "into a KADABRA"
 	dex
 
 _GravelerDexEntry:: ; new entry
@@ -400,12 +400,12 @@ _MrMimeDexEntry:: ; new entry
 
 _HitmonleeDexEntry:: ; new entry
 	text "Sometimes called"
-	next "'The Demon of"
-	next "Kickboxing'."
+	next "The Demon of"
+	next "Kickboxing."
 	
-	page "Despite this,"
-	next "When not fighting,"
-	next "it is very docile"
+	page "Despite this, it"
+	next "is very docile"
+	next "when not fighting"
 	dex
 
 _HitmonchanDexEntry:: ; new entry
@@ -413,17 +413,17 @@ _HitmonchanDexEntry:: ; new entry
 	next "by the spirit of"
 	next "a pro boxer."
 	
-	page "Its punches are"
-	next "faster than"
-	next "bullet train"
+	page "It throws punches"
+	next "that can outspeed"
+	next "a bullet train"
 	dex
 
 _ArbokDexEntry:: ; new entry
 	text "ARBOK paralyzes"
 	next "prey with its"
-	next "gaze. It will"
+	next "gaze. It often"
 
-	page "fight viciously"
+	page "fights viciously"
 	next "with its mortal"
 	next "enemy, RATICATE"
 	dex
@@ -436,7 +436,6 @@ _ParasectDexEntry:: ; new entry
 	page "mushroom's toxic"
 	next "spores are used"
 	next "in medicine"
-	
 	dex
 
 _PsyduckDexEntry:: ; new entry, modified from the original.
@@ -450,13 +449,13 @@ _PsyduckDexEntry:: ; new entry, modified from the original.
 	dex
 
 _DrowzeeDexEntry::
-	text "Often seen eerily"
-	next "muttering to"
-	next "itself."
+	text "Said to be a"
+	next "decendant of the"
+	next "legendary Baku,"
 
-	page "It is said to"
-	next "be a descendent"
-	next "of Baku"
+	page "it is often seen"
+	next "eerily muttering"
+	next "to itself"
 	dex
 
 _GolemDexEntry:: ; new entry
@@ -474,9 +473,9 @@ _MagmarDexEntry:: ; new entry, modified from the original
 	next "areas, MAGMAR's"
 	next "body burns at"
 
-	page "1200 degrees. It"
-	next "hides perfectly"
-	next "in lava"
+	page "2200 degrees F."		; changed to imperial
+	next "Hides perfectly"
+	next "among flames"
 	dex
 
 _ElectabuzzDexEntry:: ; new entry
@@ -500,9 +499,9 @@ _MagnetonDexEntry:: ; new entry
 	dex
 
 _KoffingDexEntry:: ; new entry
-	text "Getting too close"
-	next "to KOFFING makes"
-	next "tears fill eyes."
+	text "The toxic gases"
+	next "that it emits can"
+	next "induce tears."
 
 	page "It was originally"
 	next "discovered in a"
@@ -554,9 +553,9 @@ _FarfetchdDexEntry:: ; new entry
 	next "population has"
 	next "declined due to"
 
-	page "being hunted"
-	next "for the leeks"
-	next "they carry"
+	page "being hunted for"
+	next "their tasty meat"
+	next "and leeks"
 	dex
 
 _VenonatDexEntry:: ; new entry
@@ -571,18 +570,18 @@ _VenonatDexEntry:: ; new entry
 	dex
 
 _DragoniteDexEntry:: ; new entry
-	text "Despite its bulk,"
-	next "it can outrun a"
-	next "jet. It is said"
+	text "Has the ability to"
+	next "outspeed a jet,"
+	next "despite its bulk."
 
-	page "to represent"
-	next "a God of"
-	next "Destruction"
+	page "Feared as a god"
+	next "of destruction due"
+	next "to its strength"
 	dex
 
 _DoduoDexEntry:: ; new entry
-	text "It was found 3"
-	next "years ago. It"
+	text "First discovered"
+	next "3 years ago. It"
 	next "hates flying due"
 
 	page "to short wings,"
@@ -595,8 +594,9 @@ _PoliwagDexEntry:: ; new entry
 	next "skin reveals its"
 	next "internal organs."
 
-	page "It is genetically"
-	next "close to tadpoles"
+	page "Some believe it's"
+	next "a mutation of"
+	next "a common tadpole"
 	dex
 
 _JynxDexEntry:: ; new entry
@@ -635,8 +635,8 @@ _ZapdosDexEntry:: ; new entry
 	next "bird presiding"
 	next "over the heavens,"
 
-	page "innumerable years"
-	next "are spent flying"
+	page "ZAPDOS spends"
+	next "thousands of years"
 	next "above the clouds"
 	dex
 
@@ -681,13 +681,13 @@ _VulpixDexEntry::			; Changed to make it not too similar to Mikon's dex entry. ~
 	dex
 
 _NinetalesDexEntry:: ; new entry
-	text "Elders often say"
-	next "'NINETALES, 1,000"
-	next "years, TOTARTLE,"
+	text "A proverb exists"
+	next "that refers to"
+	next "its longevity:"
 	
-	page "10,000 years.'"
-	next "to refer to its"
-	next "longevity"
+	page "'NINETALES, 1,000"
+	next "years, TOTARTLE,"
+	next "10,000 years."
 	dex
 
 _PikachuDexEntry:: ; new entry
@@ -756,8 +756,8 @@ _HorseaDexEntry:: ; new entry
 	next "ink. In spring,"
 
 	page "it lays thousands"
-	next "of eggs, but"
-	next "GOLDEEN eats many"
+	next "of eggs, but many"
+	next "of them are eaten"
 	dex
 
 _SeadraDexEntry::
@@ -792,12 +792,12 @@ _SandslashDexEntry::
 
 _OmanyteDexEntry:: ; new entry
 	text "It was related"
-	next "to mollusks."
-	next "Feeding on"
+	next "to mollusks and"
+	next "fed on small fish"
 
-	page "plankton and"
-	next "small fish, it"
-	next "swam with 10 feet"
+	page "and plankton. It"
+	next "swam by waving"
+	next "its 10 feet"
 	dex
 
 _OmastarDexEntry:: ; new entry
@@ -826,8 +826,8 @@ _WigglytuffDexEntry:: ; new entry
 	next "is sold as a"
 
 	page "luxury item to"
+	next "a number of rich,"
 	next "foreign buyers"
-
 	dex
 
 _EeveeDexEntry:: ; does not need a n.ew entry
@@ -843,11 +843,11 @@ _EeveeDexEntry:: ; does not need a n.ew entry
 _FlareonDexEntry:: ; new entry, sort of modified off the original
 	text "It stores fire"
 	next "in a flame sac."
-	next "It looses it at"
+	next "It blows out"
 
-	page "temperatures over"
-	next "1,700 degrees"
-	next "celsius"
+	page "flames at nearly"
+	next "3,100 degrees"
+	next "Fahrenheit"		; changed to imperial
 	dex
 
 _JolteonDexEntry:: ; new entry
@@ -926,7 +926,7 @@ _PoliwrathDexEntry:: ; new entry, modified from original.
 	next "and butterfly."
 
 	page "Why it remains a"
-	next "tadpole is"
+	next "tadpole is still"
 	next "unknown"
 	dex
 
@@ -966,7 +966,7 @@ _DodrioDexEntry:: ; new entry
 	next "in Central"
 
 	page "America revered"
-	next "DODRIO as a"
+	next "DODRIO as their"
 	next "symbol"
 	dex
 
@@ -982,8 +982,8 @@ _PrimeapeDexEntry:: ; this entry is just like the pokedex, so no new one
 
 _DugtrioDexEntry:: ; new entry, modified from the original
 	text "A team of DIGLETT"
-	next "triplets."
-	next "They burrow"
+	next "triplets. They"
+	next "burrow deep"
 
 	page "underground to"
 	next "hide themselves"
@@ -1002,7 +1002,7 @@ _VenomothDexEntry:: ; does not need a n.ew entry
 
 _DewgongDexEntry:: ; new entry
 	text "Its blubber can"
-	next "be up to 30 cm"
+	next "be up to 12 inches"
 	next "thick. Unusually,"
 
 	page "they are more"
@@ -1075,9 +1075,9 @@ _GolbatDexEntry:: ; new entry
 	next "fangs, GOLBAT can"
 	next "suck up to"
 	
-	page "300 milliliters"
-	next "of blood in one"
-	next "bite"
+	page "10 ounces of"
+	next "blood in a"
+	next "single bite"
 	dex
 
 _MewtwoDexEntry:: ; does not need a n.ew entry
@@ -1090,14 +1090,14 @@ _MewtwoDexEntry:: ; does not need a n.ew entry
 	next "experiments"
 	dex
 
-_SnorlaxDexEntry:: ; new entry, could be improved.
-	text "It eats 400 kilos"
-	next "of food a day. As"
-	next "soon as it is"
+_SnorlaxDexEntry:: ; new entry
+	text "Isn't satisfied"
+	next "unless it eats"
+	next "over 880 lbs of"
 
-	page "done, it falls"
-	next "asleep. It is the"
-	next "heaviest #MON"
+	page "food every day."
+	next "When done, it"
+	next "falls asleep"
 	dex
 
 _MagikarpDexEntry:: ; new entry
@@ -1147,7 +1147,7 @@ _ElectrodeDexEntry:: ; new entry
 	
 	page "provocation, it"
 	next "has been called"
-	next "the 'Bomb Ball'"
+	next "the Bomb Ball"
 	dex
 
 _ClefableDexEntry:: ; new entry
@@ -1232,11 +1232,11 @@ _PidgeottoDexEntry:: ; new entry
 
 _PidgeotDexEntry:: ; new entry
 	text "Flies at speeds of"
-	next "up to Mach-2 at"
-	next "1200 meters."
+	next "up to Mach-2."
+	next "They spread their"
 
-	page "They spread their"
-	next "wings for"
+	page "gorgeous wings"
+	next "widely for"
 	next "intimidation"
 	dex
 
@@ -1256,8 +1256,8 @@ _BulbasaurDexEntry:: ; new entry
 	next "about whether"
 	
 	page "BULBASAUR is a"
-	next "plant or a"
-	next "mammal"
+	next "type of plant"
+	next "or a mammal"
 	dex
 
 _VenusaurDexEntry:: ; new entry
@@ -1272,8 +1272,8 @@ _VenusaurDexEntry:: ; new entry
 
 _TentacruelDexEntry:: ; new entry
 	text "Also known as the"
-	next "'Gangster of the"
-	next "Sea', it uses its"
+	next "Gangster of the"
+	next "Sea, it uses its"
 
 	page "80 tentacles to"
 	next "ensnare and"
@@ -1343,7 +1343,7 @@ _RaticateDexEntry:: ; new entry
 _NidorinoDexEntry:: ; new entry
 	text "Its horn can"
 	next "pierce diamonds."
-	next "While evolved,"
+	next "Unlike NIDORINA,"
 
 	page "it does not lose"
 	next "the ability to"
@@ -1441,13 +1441,13 @@ _WartortleDexEntry:: ; new entry
 	dex
 
 _CharizardDexEntry:: ; new entry
-	text "Because its dung"
-	next "is found on Mt."
-	next "Fuji, it is"
+	text "Thought to be"
+	next "capable of flying"
+	next "up to 4,500 feet"
 	
-	page "thought to FLY up"
-	next "to 1,400 meters"
-	next "in altitude"
+	page "in altitude after"
+	next "its droppings were"
+	next "found on Mt. Fuji"
 	dex
 
 _OddishDexEntry:: ; new entry
@@ -1465,8 +1465,8 @@ _GloomDexEntry:: ; new entry
 	next "emits a foul"
 	next "stench that makes"
 
-	page "foes faint up to"
-	next "2 kilometers"
+	page "foes faint more"
+	next "than a mile"
 	next "away"
 	dex
 

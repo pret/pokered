@@ -226,7 +226,10 @@ EvosMovesPointerTable:
 	dw AnnihilapeEvosMoves
 	dw ScreamTailEvosMoves
 	dw SandyShocksEvosMoves
-	dw WugtrioEvosMoves
+	dw WiglettEvosMoves
+	dw WugtrioEvosMoves	
+	dw ToedscoolEvosMoves
+	dw ToedscruelEvosMoves
 	dw MissingNoEvosMoves
 	assert_table_length NUM_POKEMON_INDEXES
 
@@ -2863,6 +2866,18 @@ SandyShocksEvosMoves:
 	db 55, METAL_SOUND
 	db 0
 
+WiglettEvosMoves:
+; Evolutions
+	db EV_LEVEL, 28, WUGTRIO
+	db 0
+; Learnset
+	db 15, SAND_ATTACK
+	db 19, WRAP
+	db 24, HEADBUTT
+	db 31, DIG
+	db 40, HYDRO_PUMP
+	db 0
+
 WugtrioEvosMoves:
 ; Evolutions
 	db 0
@@ -2871,7 +2886,36 @@ WugtrioEvosMoves:
 	db 19, WRAP
 	db 24, HEADBUTT
 	db 31, DIG
-	db 37, HYDRO_PUMP
+	db 40, HYDRO_PUMP
+	db 0
+
+ToedscoolEvosMoves:
+; Evolutions
+	db EV_LEVEL, 30, TOEDSCRUEL
+	db 0
+; Learnset
+	db 7, SUPERSONIC
+	db 13, WRAP
+	db 18, POISONPOWDER
+	db 22, STUN_SPORE
+	db 27, CONSTRICT
+	db 33, SOLARBEAM
+	db 40, SCREECH
+	db 48, SPORE
+	db 0
+
+ToedscruelEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 7, SUPERSONIC
+	db 13, WRAP
+	db 18, POISONPOWDER
+	db 22, STUN_SPORE
+	db 27, CONSTRICT
+	db 35, SOLARBEAM
+	db 43, SCREECH
+	db 50, SPORE
 	db 0
 
 MissingNoEvosMoves:

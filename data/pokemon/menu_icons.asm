@@ -93,7 +93,7 @@ MonPartyData:
 	nybble ICON_BIRD	  ; Madaamu
 	nybble ICON_MON       ; Diglett
 	nybble ICON_MON       ; Dugtrio
-	; nybble ICON_WATER     ; Wiglett
+	nybble ICON_WATER     ; Wiglett
 	nybble ICON_WATER     ; Wugtrio
 	nybble ICON_MON	      ; Crocky
 	nybble ICON_QUADRUPED ; Kotora
@@ -103,8 +103,8 @@ MonPartyData:
 	nybble ICON_BALL      ; Electrode
 	nybble ICON_WATER     ; Tentacool
 	nybble ICON_WATER     ; Tentacruel
-	; nybble ICON_GRASS     ; Toedscool
-	; nybble ICON_GRASS     ; Toedscruel
+	nybble ICON_GRASS     ; Toedscool
+	nybble ICON_GRASS     ; Toedscruel
 	nybble ICON_MON       ; Drowzee
 	nybble ICON_MON       ; Hypno
 	nybble ICON_MON       ; Lickitung

@@ -198,7 +198,7 @@ _PuchikoonDexEntry::
 	next "is very hot"
 	dex
 
-_GyopinDexEntry::
+_GyopinDexEntry::		; may rework, I just reused PokeThon's version
 	text "It was once scarce"
 	next "and rarely seen,"
 	next "but thanks to a"
@@ -243,9 +243,9 @@ _TotartleDexEntry::
 	next "of living for"
 	next "10,000 years."
 
-	page "Its algae-covered"
-	next "tail is a symbol"
-	next "of its longevity"
+	page "The shells of old"
+	next "TURTIDAL are fully"
+	next "covered in algae"
 	dex
 
 _WeirduckDexEntry::

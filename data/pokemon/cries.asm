@@ -226,15 +226,13 @@ CryData::
 	mon_cry SFX_CRY_05, $FF, $40 ; Betobebii
 	mon_cry SFX_CRY_00, $00, $00 ; Magnezone
 	mon_cry SFX_CRY_00, $00, $00 ; Porygon-Z
-	; mon_cry SFX_CRY_00, $00, $00 ; Happiny
-	; mon_cry SFX_CRY_00, $00, $00 ; Munchlax
 	mon_cry SFX_CRY_20, $00, $1C ; Annihilape
 	mon_cry SFX_CRY_0E, $FA, $80 ; Scream Tail
 	mon_cry SFX_CRY_1C, $1F, $DD ; Sandy Shocks
-	; mon_cry SFX_CRY_00, $00, $00 ; Wiglett
+	mon_cry SFX_CRY_00, $00, $00 ; Wiglett
 	mon_cry SFX_CRY_00, $00, $00 ; Wugtrio
-	; mon_cry SFX_CRY_00, $00, $00 ; Toedscool
-	; mon_cry SFX_CRY_00, $00, $00 ; Toedscruel
+	mon_cry SFX_CRY_00, $00, $00 ; Toedscool
+	mon_cry SFX_CRY_00, $00, $00 ; Toedscruel
 	; mon_cry SFX_CRY_19, $1A, $40 ; Perrserker
 	; mon_cry SFX_CRY_10, $64, $40 ; Sirfetch'd
 	; mon_cry SFX_CRY_20, $00, $70 ; Mr. Rime
