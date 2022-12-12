@@ -49,6 +49,7 @@ Improved areas
 - Silph Co's pathing was completely overhauled to make navigating it less tedious.
 - Viridian Gym now has a new area once you make Giovanni leave.
 - The S.S. Anne now returns after getting your fourth badge!
+- Once you've entered the Hall of Fame, try visiting Route 1...
 
 New areas
 ====
