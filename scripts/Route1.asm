@@ -1,6 +1,6 @@
 Route1_Script:
 	jp EnableAutoTextBoxDrawing
-	ld hl, Route1_ScriptPointers
+	;ld hl, Route1_ScriptPointers
 	ld a, [wRoute1CurScript]
 	jp CallFunctionInTable
 
