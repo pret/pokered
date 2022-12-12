@@ -1,12 +1,12 @@
 SafariZoneCenterWildMons:
 	def_grass_wildmons 30 ; encounter rate
-	db 22, NIDORAN_M
+	db 22, EXEGGCUTE
 	db 25, RHYHORN
 	db 22, VENONAT
-	db 24, EXEGGCUTE
-	db 31, NIDORINO
-	db 25, EXEGGCUTE
-	db 31, NIDORINA
+	db 24, TANGELA
+	db 31, MAROWAK
+	db 25, SLOWPOKE
+	db 31, LICKITUNG
 	db 30, PARASECT
 	db 23, TRAMPEL
 	db 23, CHANSEY

@@ -5,7 +5,7 @@ Route22WildMons:
 	db  4, PUDI
 	db  4, NIDORAN_M
 	db  2, RATTATA
-	db  2, NIDORAN_M
+	db  2, MANKEY
 	db  3, SPEAROW
 	db  5, MIKON
 	db  3, NIDORAN_F

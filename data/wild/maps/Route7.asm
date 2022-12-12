@@ -7,9 +7,9 @@ Route7WildMons:
 	db 19, EEVEE
 	db 18, MEOWTH
 	db 18, GROWLITHE
-	db 20, GROWLITHE
+	db 20, JIGGLYPUFF
 	db 19, VULPIX
-	db 20, VULPIX
+	db 20, ABRA
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate

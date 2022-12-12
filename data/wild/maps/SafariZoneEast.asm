@@ -1,14 +1,14 @@
 SafariZoneEastWildMons:
 	def_grass_wildmons 30 ; encounter rate
-	db 24, NIDORAN_M
+	db 24, EXEGGCUTE
 	db 26, DODUO
-	db 22, PARAS
-	db 25, EXEGGCUTE
-	db 33, NIDORINO
+	db 22, TANGELA
+	db 25, RHYHORN
+	db 33, LICKITUNG
 	db 23, EXEGGCUTE
-	db 24, NIDORAN_F
-	db 25, PARASECT
-	db 25, KANGASKHAN
+	db 24, KANGASKHAN
+	db 25, PINSIR
+	db 7, CHANSEY
 	db 28, SCYTHER
 	end_grass_wildmons
 

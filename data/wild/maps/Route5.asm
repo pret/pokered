@@ -4,11 +4,11 @@ Route5WildMons:
 	db 13, KOTORA
 	db 15, MONJA
 	db 10, MANKEY
-	db 12, MANKEY
+	db 12, JIGGLYPUFF
 	db 15, BELLSPROUT
 	db 16, BELLSPROUT
 	db 16, PIDGEOTTO
-	db 14, MEOWTH
+	db 14, JIGGLYPUFF
 	db 16, MEOWTH
 	end_grass_wildmons
 

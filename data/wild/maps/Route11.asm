@@ -9,7 +9,7 @@ Route11WildMons:
 	db 15, SANDSHREW
 	db 17, SPEAROW
 	db 11, DROWZEE
-	db 15, DROWZEE
+	db 15, RATICATE
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate

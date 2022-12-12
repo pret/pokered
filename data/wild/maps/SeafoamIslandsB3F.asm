@@ -6,7 +6,7 @@ SeafoamIslandsB3FWildMons:
 	db 37, SEEL
 	db 35, KRABBY
 	db 36, STARYU
-	db 36, KRABBY
+	db 36, KINGLER
 	db 38, JYNX
 	db 39, JYNX
 	db 39, BLASTOISE

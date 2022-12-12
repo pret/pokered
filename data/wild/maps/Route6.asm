@@ -8,7 +8,7 @@ Route6WildMons:
 	db 15, BELLSPROUT
 	db 16, BELLSPROUT
 	db 16, PSYDUCK
-	db 14, MEOWTH
+	db 14, JIGGLYPUFF
 	db 16, MEOWTH
 	end_grass_wildmons
 

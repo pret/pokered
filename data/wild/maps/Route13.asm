@@ -4,7 +4,7 @@ Route13WildMons:
 	db 25, FARFETCHD
 	db 27, PIDGEOTTO
 	db 24, VENONAT
-	db 22, ODDISH
+	db 22, DITTO
 	db 26, KRABBY
 	db 26, BELLSPROUT
 	db 25, DITTO

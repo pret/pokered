@@ -6,10 +6,10 @@ Route4WildMons:
 	db  6, EKANS
 	db  8, SPEAROW
 	db 10, EKANS
-	db 12, RATTATA
+	db 12, SANDSHREW
 	db 12, PUDI
 	db 12, MIKON
-	db  8, EKANS
+	db  8, MANKEY
 
 	end_grass_wildmons
 

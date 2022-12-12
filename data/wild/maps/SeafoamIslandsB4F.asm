@@ -3,8 +3,8 @@ SeafoamIslandsB4FWildMons:
 	db 37, WEIRDUCK
 	db 38, STARYU
 	db 37, SHELLDER
-	db 37, STARYU
-	db 38, SHELLDER
+	db 37, SEADRA
+	db 38, DEWGONG
 	db 41, GOLDUCK
 	db 33, SQUIRTLE
 	db 38, BUU

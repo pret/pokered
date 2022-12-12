@@ -7,7 +7,7 @@ Route15WildMons:
 	db 22, ODDISH
 	db 28, DEER
 	db 26, BELLSPROUT
-	db 30, GLOOM
+	db 30, VENOMOTH
 	db 28, GAOTORA
 	db 30, GAOTORA
 	end_grass_wildmons

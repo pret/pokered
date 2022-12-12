@@ -8,7 +8,7 @@ SeafoamIslandsB2FWildMons:
 	db 35, STARYU
 	db 35, WEIRDUCK
 	db 38, JYNX
-	db 36, STARYU
+	db 36, KRABBY
 	db 39, GOLDUCK
 	end_grass_wildmons
 

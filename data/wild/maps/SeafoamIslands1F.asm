@@ -1,8 +1,8 @@
 SeafoamIslands1FWildMons:
 	def_grass_wildmons 15 ; encounter rate
 	db 35, SEEL
-	db 35, PSYDUCK
-	db 35, STARYU
+	db 35, GOLBAT
+	db 35, HORSEA
 	db 35, KRABBY
 	db 36, WEIRDUCK
 	db 33, SEEL

@@ -7,8 +7,8 @@ CeruleanCaveB1FWildMons:
 	db 64, PARASECT
 	db 64, RAICHU
 	db 57, SANDSLASH
-	db 65, DITTO
-	db 63, DITTO
+	db 65, GLOOM
+	db 63, RAPIDASH
 	db 67, DITTO
 	end_grass_wildmons
 

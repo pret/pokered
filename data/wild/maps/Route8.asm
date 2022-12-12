@@ -6,7 +6,7 @@ Route8WildMons:
 	db 16, GROWLITHE
 	db 18, BULBASAUR
 	db 20, SANDSHREW
-	db 19, EKANS
+	db 19, RATICATE
 	db 17, VULPIX
 	db 18, VULPIX
 	db 15, KADABRA

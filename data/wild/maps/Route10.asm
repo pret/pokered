@@ -5,9 +5,9 @@ Route10WildMons:
 	db 14, VOLTORB
 	db 11, EKANS
 	db 13, SPEAROW
-	db 15, EKANS
-	db 17, MAGNEMITE
-	db 20, FEAROW
+	db 15, NIDORINO
+	db 17, NIDORINA
+	db 20, MACHOP
 	db 13, SANDSHREW
 	db 17, SANDSHREW
 	end_grass_wildmons

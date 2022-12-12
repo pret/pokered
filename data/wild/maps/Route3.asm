@@ -4,9 +4,9 @@ Route3WildMons:
 	db  5, SPEAROW
 	db  7, PIDGEY
 	db  6, SPEAROW
-	db  7, SPEAROW
-	db  8, PIDGEY
-	db  8, SPEAROW
+	db  7, MANKEY
+	db  8, RATTATA
+	db  8, SANDSHREW
 	db  3, JIGGLYPUFF
 	db  5, JIGGLYPUFF
 	db  7, JIGGLYPUFF
