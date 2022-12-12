@@ -48,3 +48,53 @@ _Route1Text3::
 	line "PALLET TOWN -"
 	cont "VIRIDIAN CITY"
 	done
+
+_OakBeforeBattleText::
+	text "OAK: Oh, my!"
+	
+	para "It seems you"
+	line "caught me during"
+	cont "during my lunch"
+	cont "hour!"
+	
+	para "<PLAYER>, you"
+	line "have truly come"
+	cont "into your own!"
+	
+	para "Your #MON"
+	line "LEAGUE challenge"
+	cont "has reignited"
+	cont "a spirit that"
+	cont "left me a long"
+	cont "time ago..."
+	
+	para "How about we"
+	line "spar a bit?"
+	cont "What say you?"
+	
+	done
+
+_OakDefeatedText::
+	text "Hmm..."
+	
+	para "I still have a"
+	line "lot to learn!"
+	prompt
+
+_OakWonText::
+	text "Back in my day,"
+	line "I was a serious"
+	cont "TRAINER!"
+	prompt
+	
+_OakYes::
+	text "Back in my day,"
+	line "I was a serious"
+	cont "TRAINER! Prepare"
+	cont "yourself, <PLAYER>!"
+	prompt
+
+_OakNo::
+	text "Maybe another"
+	line "time!"
+	done

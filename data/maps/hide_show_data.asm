@@ -15,7 +15,7 @@ MapHSPointers:
 	dw NoHS
 	dw SaffronCityHS
 	dw NoHS
-	dw NoHS
+	dw Route1HS
 	dw Route2HS
 	dw NoHS
 	dw Route4HS
@@ -575,6 +575,8 @@ FarawayIslandInsideHS:
 PokemonMansionB2FHS:
 	db POKEMON_MANSION_B2F, $03, SHOW
 	db POKEMON_MANSION_B2F, $04, SHOW
+Route1HS:
+	db ROUTE_1, $03, HIDE ; PROF OAK fight. To test, change to SHOW. - PvK
 	db $FF, $01, SHOW ; end
 
 	assert_table_length NUM_HS_OBJECTS + 1

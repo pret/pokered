@@ -1,10 +1,14 @@
 Route1_Script:
 	jp EnableAutoTextBoxDrawing
+	ld hl, Route1_ScriptPointers
+	ld a, [wRoute1CurScript]
+	jp CallFunctionInTable
 
 Route1_TextPointers:
 	dw Route1Text1
 	dw Route1Text2
 	dw Route1Text3
+	dw Route1OakText
 
 Route1Text1:
 	text_asm
@@ -50,3 +54,80 @@ Route1Text2:
 Route1Text3:
 	text_far _Route1Text3
 	text_end
+
+; oak stuff begins here
+
+; text
+Route1OakText:
+	text_asm
+	ld hl, OakBeforeBattleText
+	call PrintText
+
+;	call YesNoChoice ; this whole bit doesn't work for some reason
+;	ld a, [wCurrentMenuItem]
+;	and a
+;	ld hl, OakYes
+;	jr nz, .got_text
+;	ld hl, OakNo
+;.got_text
+	
+	ld hl, wd72d
+	set 6, [hl]
+	set 7, [hl]
+	
+	call Delay3
+	ld a, OPP_PROF_OAK
+	ld [wCurOpponent], a
+
+	; select which team to use during the encounter
+	ld a, [wRivalStarter]
+	cp STARTER2
+	jr nz, .NotSquirtle
+	ld a, $3
+	jr .done
+.NotSquirtle
+	cp STARTER3
+	jr nz, .Charmander
+	ld a, $1
+	jr .done
+.Charmander
+	ld a, $2
+.done
+	ld [wTrainerNo], a
+	ld a, 1
+	ld [wIsTrainerBattle], a
+
+	ld a, $2
+	ld [wRoute1CurScript], a
+	
+	ld hl, OakDefeatedText
+	ld de, OakWonText
+	call SaveEndBattleTextPointers
+	jp TextScriptEnd
+
+OakBeforeBattleText:
+	text_far _OakBeforeBattleText
+	text_end
+
+OakDefeatedText:
+	text_far _OakDefeatedText
+	text_end
+
+OakWonText:
+	text_far _OakWonText
+	text_end
+
+OakYes:
+	text_far _OakYes
+	text_end
+
+OakNo:
+	text_far _OakNo
+	text_end
+
+; useful thing
+StarterMons_Oak:
+; starter the rival picked, oak trainer number. way easier than storing oak's "choice"
+	db STARTER1, 2 ; Venusaur
+	db STARTER2, 3 ; Charizard
+	db STARTER3, 1 ; Totartle
