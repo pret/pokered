@@ -82,16 +82,16 @@ Route1OakText:
 	; select which team to use during the encounter
 	ld a, [wRivalStarter]
 	cp STARTER2
-	jr nz, .NotSquirtle
-	ld a, $3
+	jr nz, .NotSquirtle 
+	ld a, $2 ; If Charmander, Venusaur
 	jr .done
 .NotSquirtle
 	cp STARTER3
 	jr nz, .Charmander
-	ld a, $1
+	ld a, $3 ; If Bulbasaur, Totartle
 	jr .done
 .Charmander
-	ld a, $2
+	ld a, $1 ; If Squirtle, Charizard
 .done
 	ld [wTrainerNo], a
 	ld a, 1
@@ -124,10 +124,3 @@ OakYes:
 OakNo:
 	text_far _OakNo
 	text_end
-
-; useful thing
-StarterMons_Oak:
-; starter the rival picked, oak trainer number. way easier than storing oak's "choice"
-	db STARTER1, 2 ; Venusaur
-	db STARTER2, 3 ; Charizard
-	db STARTER3, 1 ; Totartle
