@@ -748,6 +748,36 @@ _MelmetalDexEntry::
 	next "iron from nothing"
 	dex
 	
+_SirfetchdDexEntry::
+	text "FARFETCH'D that"
+	next "wield huge leeks"
+	next "evolve into this"
+
+	page "form. It guards"
+	next "attacks using"
+	next "its leaf shield"
+	dex
+
+_MrRimeDexEntry::
+	text "As it tap-dances"
+	next "around, it waves"
+	next "its icy cane in"
+
+	page "perfect time,"
+	next "conjuring potent"
+	next "psychic energy"
+	dex
+
+_PerrserkerDexEntry::
+	text "A savage #MON"
+	next "with a body of"
+	next "iron. It uses its"
+
+	page "dagger-like claws"
+	next "to tear into"
+	next "foes in battle"
+	dex
+	
 _ArticunoGDexEntry::
 	text "From its eyes,"
 	next "it fires beams"

@@ -751,13 +751,13 @@ _KabutopsDexEntry:: ; new entry
 	dex
 
 _HorseaDexEntry:: ; new entry
-	text "When endangered,"
-	next "it spits black"
-	next "ink. In spring,"
+	text "Spits black ink"
+	next "when threatened."
+	next "It lays thousands"
 
-	page "it lays thousands"
-	next "of eggs, but many"
-	next "of them are eaten"
+	page "of eggs in spring"
+	next "but many are"
+	next "eaten by GOLDEEN"
 	dex
 
 _SeadraDexEntry::

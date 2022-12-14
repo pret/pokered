@@ -2,8 +2,8 @@ MtMoonCrater_Object:
 	db $0 ; border block
 
 	def_warp_events
-	warp_event 23, 49, 0, LAST_MAP
-	warp_event 22, 49, 0, LAST_MAP
+	warp_event 23, 49, 10, LAST_MAP
+	warp_event 22, 49, 10, LAST_MAP
 
 	def_bg_events
 
