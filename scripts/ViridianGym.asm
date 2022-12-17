@@ -231,7 +231,7 @@ GiovanniText:
 	ldh a, [hSpriteIndex]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
-	call InitBattleEnemyParameters
+	call InitBattleEnemyParameters ; giovanni is deliberately not scaled as he is always fought last
 	ld a, $8
 	ld [wGymLeaderNo], a
 	ld a, $3
