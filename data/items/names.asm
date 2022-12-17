@@ -6,7 +6,7 @@ ItemNames::
 	li "POKé BALL"
 	li "TOWN MAP"
 	li "BICYCLE"
-	li "?????"
+	li "LAPRAS' BALL" ; surfboard, ?????, etc.
 	li "SAFARI BALL"
 	li "POKéDEX"
 	li "MOON STONE"

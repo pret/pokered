@@ -118,7 +118,19 @@ BrockText:
 	ldh a, [hSpriteIndex]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
-	call InitBattleEnemyParameters
+	; call InitBattleEnemyParameters ; put this back if you mess up
+	
+	; gym scaling spaghetti code begins here - remove initial parameters as we're making our own
+	ld a, OPP_BROCK
+	ld [wCurOpponent], a
+	ld a, NUM_BADGES + 1 ; Picking the team based on badge count. Need +1 so it loads the right team: remember, you're fighting for the badge!
+	
+	ld [wTrainerNo], a
+	ld a, 1
+	ld [wIsTrainerBattle], a
+	
+	;ends here
+	
 	ld a, $1
 	ld [wGymLeaderNo], a
 	xor a
