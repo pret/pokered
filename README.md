@@ -150,7 +150,7 @@ Credits
 * ausma - Showdown Mod assistance
 * Paulluxx - Showdown Mod assistance
 * DuoM2 - Showdown Mod assistance 
-* Albatross - Several of the new sprites used in the hack (Electivire, Magmortar, Rhyperior, Tangrowth, Glaceon, Sylveon...)
+* Albatross - Much of the new sprites used in the hack (Electivire, Magmortar, Rhyperior, Tangrowth, Glaceon, Sylveon...)
 * ZumiIsawhat? - Restorations of beta OST
 * Helix Chamber, RacieBeep, et al - Prototype Pokémon sprites
 * Chatot4444 - Assisting with gym scaling code
