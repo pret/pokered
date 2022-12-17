@@ -994,6 +994,7 @@ BlottleEvosMoves:
 FarfetchdEvosMoves:
 ; Evolutions
 	db EV_LEVEL, 24, MADAAMU
+	db EV_ITEM, HEART_STONE, 1, SIRFETCHD
 	db 0
 ; Learnset
 	db 7, LEER
@@ -1229,7 +1230,7 @@ NinetalesEvosMoves:
 
 PikachuEvosMoves:
 ; Evolutions
-	db EV_LEVEL, 23, RAICHU
+	db EV_ITEM, THUNDER_STONE, 1, RAICHU
 	db 0
 ; Learnset
 	db 6, TAIL_WHIP
@@ -1245,7 +1246,7 @@ PikachuEvosMoves:
 
 RaichuEvosMoves:
 ; Evolutions
-	db EV_ITEM, THUNDER_STONE, 1, GOROCHU
+	db EV_TRADE, 1, GOROCHU ; It matches the old rumour and everyone will try it, don't bother doing Thunder Stone 2...
 	db 0
 ; Learnset
 	db 6, TAIL_WHIP
@@ -2414,8 +2415,8 @@ OddishEvosMoves:
 
 GloomEvosMoves:
 ; Evolutions
-	db EV_ITEM, POISON_STONE, 1, VILEPLUME
-	db EV_ITEM, LEAF_STONE, 1, BELLOSSOM
+	db EV_ITEM, LEAF_STONE, 1, VILEPLUME
+	db EV_ITEM, POISON_STONE, 1, BELLOSSOM
 	db 0
 ; Learnset
 	db 15, POISONPOWDER

@@ -5,17 +5,21 @@ This is a ROM Hack of Pokémon Red and Blue, aiming to expand the Kanto region w
 New Pokemon:
 ====
 - The 34 known beta Pokemon that were cut from RBY have been fully implemented.
-- Evolutions or Pre-evolutions of a Kanto Pokemon found in a future generation are included; eg. Kleavor, Glaceon
+- Evolutions or Pre-evolutions of a Kanto Pokemon found in a future generation are included; eg. Kleavor, Glaceon, Annihilape
 - Evolutions or Pre-evolutions of a Kanto Pokemon found in the SpaceWorld '97 demo are included; eg. Madaamu, Pudi
-	- note that for Pokemon that appeared in the Spaceworld '97 demo and had their sprite design altered, the sprite from SW97 was used instead
+	- Some Pokemon will also use their SW97 designs!
+
+Johto baby Pokemon and regional pre-evolutions were omitted due to memory constraints.
 
 New Types:
 ====
 - Dark, Steel and Fairy types are added
 	- note that Dark and Steel use their type effectiveness from the SW97 demo
 	- note that Bite is still Normal-type
-	- note that the Magnemite, Cleffa, Mime Jr, and Igglybuff lines are not Steel or Fairy-type, respectively
-		- this (and Bite) was done to ensure the original Kanto Pokemon were unaltered in any way
+	- note that the Clefairy, Mime Jr, and Jigglypuff lines are not Steel or Fairy-type, respectively
+		- This (and Bite) was done to ensure the original Kanto Pokemon were unaltered in any way
+		- While Magnemite, Magnetite, and Magneton are pure Electric, Magnezone is part-Steel.
+		- Scream Tail remains Psychic/Fairy.
 
 Type Matchups for Steel and Dark for reference:
 - Steel...
@@ -34,40 +38,44 @@ Type Matchups for Steel and Dark for reference:
 New Items:
 ====
 - The Sun, Ice, Poison and Heart Stones have been added.
-- The Protector and Black Augurite evolution items have been added.
-- The Citrine Pass has been added, allowing access to a new post-game area based on the unused "C" map.
+- The Protector and Black Augurite evolution items have been added for Rhyperior and Kleavor, respectively.
 - The Old Sea Chart has been added, allowing access to Faraway Island and Mew.
-	
-Improved areas
-====
-- Rock Tunnel has a more workable map, now being easier to go through and having new areas to explore. Includes a way to get renewable fossils, items, and other interesting bits and pieces. Overall, it makes Flash much more rewarding to bring, showing you where the items and content are instead of being an inconvenience. 
-- It is now possible to go back through Mt. Moon after reaching Cerulean City, allowing for players to backtrack to get items they missed. Additionally, it is now possible to go directly to Rock Tunnel, skipping Misty and Surge.
-- Diglett's Cave has a more detailed map, including a platform that has a static encounter.
-- Route 25 has been altered slightly to make reference to Bill's Lighthouse from the anime!
-- Cinnabar Island is a lot bigger, and has a new location added to it.
-- Pokemon Tower was shortened as its old length was excessive.
-- Silph Co's pathing was completely overhauled to make navigating it less tedious.
-- Viridian Gym now has a new area once you make Giovanni leave.
-- The S.S. Anne now returns after getting your fourth badge!
-- Once you've entered the Hall of Fame, try visiting Route 1...
+- The Citrine Pass has been added, allowing access to a new post-game area based on the unused "C" map.
 
 New areas
 ====
 - Celadon University is just north of Celadon.
 	- This is a reference to a Magikarp event from July 1998, and includes the lore from it and other areas of Pokemon's early worldbuilding.
 	- This area also contains a Trade-back NPC to let you get trade evolutions.
-	- There are also some trainers here you can battle infinitely for EXP and money.
+	- New infinitely re-battleable trainers are accessible.
 - Citrine City is a new island city that can be accessed in the postgame.
 - Underwater Tunnel connects Route 25 and Route 10.
 - Cinnabar Volcano is a new area that houses Moltres, allowing it to be obtained before Victory Road.
 - Faraway Island from Pokemon Emerald has been added, where you can find Mew. It also has its own wild encounters, as well as an improved translation on its sign, enhancing its appearance from its source material.
+- Mt. Moon Crater is a new area based on Area Zero in Pokemon Scarlet and Violet, accessible in the post-game. Here, you can encounter Scream Tail and Sandy Shocks via random encounter, just like the original!
 - Silph Co. holds a special challenge for Pokemon League Champions...
 
+Improved areas
+====
+- Most barriers to travel across the region have been removed, allowing for almost fully open world gameplay. To encourage this, Gym Leaders now have level scaling, giving more consistent challenge across the game. 
+- Rock Tunnel has a more workable map, now being easier to go through and having new areas to explore. Includes a way to get renewable fossils, items, and other interesting bits and pieces. Overall, it makes Flash much more rewarding to bring, showing you where the items and content are instead of being an inconvenience. 
+- Diglett's Cave has a more detailed map with Onix, Wiglett, and Wugtrio also appearing!
+- Route 25 has been given a facelift, adding Bill's Lighthouse!
+- The Route 5-6 underground path contains a shortcut to Celadon City. 
+	- This allows you to skip Route 9 and Rock Tunnel, making them optional areas and opening up central Kanto.
+- Cinnabar Island is a lot bigger, and has a new location added to it.
+- Pokemon Tower was shortened, being less intensive and adding room for more maps.
+- Silph Co's pathing was completely overhauled to make navigating it less tedious.
+- Viridian Gym now has a new area once you make Giovanni leave.
+- The S.S. Anne now returns after getting your fourth badge!
+- Once you've entered the Hall of Fame, try visiting Route 1...
 
 QoL Enhancements
 ====
 - All 217 (current) Pokemon can be obtained without the use of trading or glitches, including Mew!
 - New Pokedex entries for most Pokemon are available, sourced from the original 1996 Pokedex book by Creatures Inc., restoring a ton of old Kanto lore. Thanks to [Dr. Lava and Nob Ogasawara](http://lavacutcontent.com/1996-creatures-pokedex-translation-1/) for their incredible work translating and writing about it!
+- Press A beside surfable water, strength boulders or cut trees to use the HMs without needing to go into the Party menu.
+- Running Shoes by holding B. Also works with the bike! Surf speed is also doubled.
 - Fast text has no frame delay between text scrolling, doubling the scroll speed. It's also been made the default option, so you don't need to go into the Options menu for it.
 - HP bar has been doubled in speed, having a 1 frame delay per pixel rather than 2.
 - Trainer DVs are perfect-15s.
@@ -91,10 +99,6 @@ QoL Enhancements
 	- Version parity is done across prizes, using Blue's superior prices.
 	- New prizes across both versions include: Cubone, Blastyke, and Cactus.
 	- The Moon Stone is available over TM23 (Dragon Rage). Dragon Rage has been moved to Celadon Mart, over Take Down, which can still be obtained in Silph Co.
-- The Route 5-6 underground path contains a shortcut to Celadon City. 
-	- This allows you to skip Route 9 and Rock Tunnel, making them optional areas and opening up central Kanto.
-- Press A beside surfable water, strength boulders or cut trees to use the HMs without needing to go into the Party menu.
-- Running Shoes by holding B. Also works with the bike! Surf speed is also doubled.
 - Bag has capacity for 30 items.
 - Spinner tiles move faster.
 
@@ -139,7 +143,69 @@ Known Bugs
 - Some sprites in the Celadon University area spawn bugged out on certain emulators.
 - Battling multiple of the trainers in Celadon University causes a crash when attempting to go to Route 16
 - The lone Rocket in Viridian Gym's basement needs to be directly spoken to to be battled
-- Faraway Island Inside can't be entered
+
+Evolution Methods for new Pokemon
+====
+Due to the odd way some new Pokemon evolve, methods are listed here. Beta Pokemon are included with their original methods, given their obscurity. Some Pokemon will have methods from the Spaceworld '97 demo to be closer to RBY.
+
+New Pokemon:
+- Rhydon -> Rhyperior | Use Protector 
+- Lickitung -> Lickilicky | L32
+- Scyther -> Scizor | L41
+- Scyther -> Kleavor | Use Black Augurite
+- Pinsir -> Purakkusu | L42
+- Tangela -> Tangrowth | L44
+- Onix -> Steelix | L38
+- Slowpoke -> Slowking | Use Heart Stone 
+- Chansey -> Blissey | L45
+- Psyduck -> Weirduck | L22, Golduck level remains the same for Weirduck.
+- Magmar -> Magmortar | Use Fire Stone
+- Electabuzz -> Electivire | Use Thunder Stone
+- Magneton -> Magnezone | Use Thunder Stone
+- Farfetch'd -> Sirfetch'd | Use Heart Stone
+- Poliwhirl -> Politoed | Use Heart Stone
+- Ditto -> Animon | Trade
+- Seadra -> Kingdra | Trade
+- Primeape -> Annihilape | Trade
+- Golbat -> Crobat | L44
+- Marowak -> Guardia | Use Heart Stone
+- Porygon -> Porygon2 | Trade
+- Porygon2 -> Porygon-Z | Use Dubious Disc
+- Gloom -> Bellossom | Use Poison Stone
+- Weepinbell -> Tsubomitto | Use Poison Stone
+
+Kanto Beta Pokemon:
+- Blottle -> Pendraken | L30
+- Bittybat -> Zubat | L15
+- Cheep -> Jabetta | L30
+- Mikon -> Vulpix | L15
+- Raichu -> Gorochu | Trade
+- Ribbito -> Croakozuna | L30
+- Skimper -> Bawligua | L30
+- Bawligua -> Cryithan | L50
+- Konya -> Meowth | L14
+- Decilla -> Gyaoon | L40
+- Magnemite -> Magnetite | L20
+- Magnetite -> Magneton | L30
+- Gyopin -> Goldeen | L16
+- Kotora -> Gaotora | L16
+- Gaotora -> Gorotora | L36
+- Puchikorn -> Ponyta | L20
+- Blastyke -> Blastoise | L36
+- Wartortle -> Totartle | L36, replaces Blastoise
+- Pudi -> Growlithe | L16
+- Para -> Paras | L12
+- Hinaazu -> Doduo | L18
+- Betobebii -> Grimer | L20
+
+Eeveelutions:
+- Espeon | Heart Stone 
+- Umbreon | Poison Stone
+- Leafeon | Leaf Stone
+- Glaceon | Ice Stone
+- Sylveon | Moon Stone
+
+Nidos can evolve into Nidoreign with a Moon Stone, or their original counterparts with a Poison Stone. 
 
 Credits
 ====
