@@ -153,6 +153,7 @@ Credits
 * Albatross - Several of the new sprites used in the hack (Electivire, Magmortar, Rhyperior, Tangrowth, Glaceon, Sylveon...)
 * ZumiIsawhat? - Restorations of beta OST
 * Helix Chamber, RacieBeep, et al - Prototype Pokémon sprites
+* Chatot4444 - Assisting with gym scaling code
 * Vortyne - Reused a bit of code from their pureRGB hack, which was used to assist with making MissingNo. stable. Assisted in bug fixes.
 * Rangi - Reused a bit of code from their Red* / Blue* hack to make HMs usable in the overworld!
 

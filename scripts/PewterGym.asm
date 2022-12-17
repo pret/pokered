@@ -123,7 +123,12 @@ BrockText:
 	; gym scaling spaghetti code begins here - remove initial parameters as we're making our own
 	ld a, OPP_BROCK
 	ld [wCurOpponent], a
-	ld a, NUM_BADGES + 1 ; Picking the team based on badge count. Need +1 so it loads the right team: remember, you're fighting for the badge!
+	
+	ld hl, wObtainedBadges ; Picking the team based on badge count. Need +1 so it loads the right team: remember, you're fighting for the badge! Thanks to Chatot4444 for the help.
+	ld b, 1
+	call CountSetBits
+	ld a, [wNumSetBits]
+	inc a
 	
 	ld [wTrainerNo], a
 	ld a, 1
