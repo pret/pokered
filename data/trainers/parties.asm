@@ -498,7 +498,7 @@ BlackbeltData:
 ; Fighting Dojo Trainers
 	db 31, CHEEP, CHEEP, JABETTA, 0
 	db 32, MACHOKE, MACHAMP, 0
-	db 36, SIRFETCHD, 0
+	db 36, MACHAMP, 0 ; should be sirfetch'd
 	db 31, MACHOP, MANKEY, PRIMEAPE, 0
 ; Viridian Gym	- changed to fit the Ground-type gym theme
 	db 40, GRAVELER, GOLEM, 0

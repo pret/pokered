@@ -1,5 +1,9 @@
 PokemonMansionB2F_Script:
 	jp EnableAutoTextBoxDrawing
+	ld a, [wPokemonMansionB2FCurScript]
+	call ExecuteCurMapScriptInTable
+	ld [wPokemonMansionB2FCurScript], a
+	ret
 
 PokemonMansionB2F_TextPointers:
 	dw B2FBook1

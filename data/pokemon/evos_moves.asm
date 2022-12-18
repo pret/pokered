@@ -994,7 +994,7 @@ BlottleEvosMoves:
 FarfetchdEvosMoves:
 ; Evolutions
 	db EV_LEVEL, 24, MADAAMU
-	db EV_ITEM, HEART_STONE, 1, SIRFETCHD
+	; db EV_ITEM, HEART_STONE, 1, SIRFETCHD
 	db 0
 ; Learnset
 	db 7, LEER
