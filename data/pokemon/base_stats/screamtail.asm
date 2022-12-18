@@ -11,7 +11,7 @@
 	dw ScreamTailPicFront, ScreamTailPicBack
 
 	db SING, FAIRY_WIND, DISABLE, BITE ; level 1 learnset
-	db GROWTH_SLOW ; growth rate
+	db GROWTH_SLIGHTLY_FAST ; growth rate - reusing unused exp group, seems funny
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
