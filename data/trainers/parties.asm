@@ -557,7 +557,7 @@ ScientistData:
 ; Mansion B1F
 	db 34, MAGNEMITE, ELECTRODE, 0
 
-GiovanniData:
+GiovanniData: ; is not scaled as he is always fought last
 ; Rocket Hideout B4F
 	db $FF, 27, RHYHORN, 26, DECILLA, 31, KANGASKHAN, 31, PERSIAN, 0
 ; Silph Co. 11F
