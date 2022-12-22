@@ -2663,6 +2663,12 @@ SelectMenuItem:
 	jr z, .battleselect
 	dec a
 	jr nz, .select
+	; MIMIC-specific code only
+;;;;;;;;;; PureRGBnote: FIXED: bug with displaying the mimic menu's WHICH TECHNIQUE? text. The bottom line of text wasn't erased. It should be.
+	hlcoord 1, 14
+	lb bc, 3, 18
+	call ClearScreenArea
+;;;;;;;;;;
 	hlcoord 1, 14
 	ld de, WhichTechniqueString
 	call PlaceString
