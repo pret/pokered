@@ -58,42 +58,10 @@ TwoOptionMenu::
 	ld a, 5
 	ld [wTopMenuItemX], a
 
-	hlcoord 5, 7
-	ld b, 5
-	ld c, 14
-	call ClearScreenArea
-
-	; draw horizontal box borders
-	ld b, $7A
-	ld c, 14
-	ld de, 1
-	hlcoord 5, 7
-	call DrawTileLine2
-	hlcoord 5, 11
-	call DrawTileLine2
-
-	; draw vertical box borders
-	ld b, $7C
-	ld c, 4
-	ld de, 20
-	hlcoord 4, 8
-	call DrawTileLine2
-	hlcoord 19, 8
-	call DrawTileLine2
-
-	; draw box corners
 	hlcoord 4, 7
-	ld a, $79
-	ld [hl], a
-	hlcoord 19, 7
-	ld a, $7B
-	ld [hl], a
-	hlcoord 4, 11
-	ld a, $7D
-	ld [hl], a
-	hlcoord 19, 11
-	ld a, $7E
-	ld [hl], a
+	ld b, 3  ; height
+	ld c, 12 ; width
+	call TextBoxBorder
 
 	hlcoord 6, 8 ; where the list will be drawn at
 	jp DoneDrawFunc
@@ -108,42 +76,10 @@ ThreeOptionMenu::
 	ld a, 5
 	ld [wTopMenuItemX], a
 
-	hlcoord 5, 5
-	ld b, 7
-	ld c, 14
-	call ClearScreenArea
-
-	; draw horizontal box borders
-	ld b, $7A
-	ld c, 14
-	ld de, 1
-	hlcoord 5, 5
-	call DrawTileLine2
-	hlcoord 5, 11
-	call DrawTileLine2
-
-	; draw vertical box borders
-	ld b, $7C
-	ld c, 6
-	ld de, 20
-	hlcoord 4, 6
-	call DrawTileLine2
-	hlcoord 19, 6
-	call DrawTileLine2
-
-	; draw box corners
 	hlcoord 4, 5
-	ld a, $79
-	ld [hl], a
-	hlcoord 19, 5
-	ld a, $7B
-	ld [hl], a
-	hlcoord 4, 11
-	ld a, $7D
-	ld [hl], a
-	hlcoord 19, 11
-	ld a, $7E
-	ld [hl], a
+	ld b, 5  ; height
+	ld c, 12 ; width
+	call TextBoxBorder
 
 	hlcoord 6, 6 ; where the list will be drawn at
 	jp DoneDrawFunc
@@ -152,17 +88,17 @@ FourOptionMenu::
 	ld a, 3 ; 4-item menu (0 counts)
 	ld [wListCount], a
 	ld [wMaxMenuItem], a
-	ld a, LIST_MENU_BOX
-	ld [wTextBoxID], a
-	call DisplayTextBoxID ; standard list menu text box
+
 	ld a, 4
 	ld [wTopMenuItemY], a
 	ld a, 5
 	ld [wTopMenuItemX], a
-	hlcoord 5, 3
-	ld b, 9
-	ld c, 14
-	call ClearScreenArea
+
+	hlcoord 4, 3
+	ld b, 7  ; height
+	ld c, 12 ; width
+	call TextBoxBorder
+
 	hlcoord 6, 4 ; where the list will be drawn at
 	jp DoneDrawFunc
 
@@ -177,42 +113,10 @@ FiveOptionMenu::
 	ld a, 5
 	ld [wTopMenuItemX], a
 
-	hlcoord 5, 1
-	ld b, 11
-	ld c, 14
-	call ClearScreenArea
-
-	; draw horizontal box borders
-	ld b, $7A
-	ld c, 14
-	ld de, 1
-	hlcoord 5, 1
-	call DrawTileLine2
-	hlcoord 5, 11
-	call DrawTileLine2
-
-	; draw vertical box borders
-	ld b, $7C
-	ld c, 10
-	ld de, 20
-	hlcoord 4, 2
-	call DrawTileLine2
-	hlcoord 19, 2
-	call DrawTileLine2
-
-	; draw box corners
 	hlcoord 4, 1
-	ld a, $79
-	ld [hl], a
-	hlcoord 19, 1
-	ld a, $7B
-	ld [hl], a
-	hlcoord 4, 11
-	ld a, $7D
-	ld [hl], a
-	hlcoord 19, 11
-	ld a, $7E
-	ld [hl], a
+	ld b, 9  ; height
+	ld c, 12 ; width
+	call TextBoxBorder
 	
 	hlcoord 6, 2 ; where the list will be drawn at
 	jp DoneDrawFunc
@@ -227,42 +131,10 @@ SixOptionMenu::
 	ld a, 5
 	ld [wTopMenuItemX], a
 
-	hlcoord 5, 0
-	ld b, 12
-	ld c, 14
-	call ClearScreenArea
-
-	; draw horizontal box borders
-	ld b, $7A
-	ld c, 14
-	ld de, 1
-	hlcoord 5, 0
-	call DrawTileLine2
-	hlcoord 5, 12
-	call DrawTileLine2
-
-	; draw vertical box borders
-	ld b, $7C
-	ld c, 11
-	ld de, 20
-	hlcoord 4, 1
-	call DrawTileLine2
-	hlcoord 19, 1
-	call DrawTileLine2
-
-	; draw box corners
 	hlcoord 4, 0
-	ld a, $79
-	ld [hl], a
-	hlcoord 19, 0
-	ld a, $7B
-	ld [hl], a
-	hlcoord 4, 12
-	ld a, $7D
-	ld [hl], a
-	hlcoord 19, 12
-	ld a, $7E
-	ld [hl], a
+	ld b, 11 ; height
+	ld c, 12 ; width
+	call TextBoxBorder
 	
 	hlcoord 6, 1 ; where the list will be drawn at
 	jp DoneDrawFunc
