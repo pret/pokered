@@ -113,4 +113,6 @@ PredefPointers::
 	add_predef PickUpItemQuantity
 	add_predef CheckPriorityPredef
 	add_predef FarLoadTownMapEntry
+	add_predef SaveScreenTileAreaToBuffer3
+	add_predef LoadScreenTileAreaFromBuffer3
 	

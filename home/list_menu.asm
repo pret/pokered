@@ -15,6 +15,11 @@ DisplayListMenuID::
 	ld a, BANK(DisplayBattleMenu)
 .bankswitch
 	call BankswitchHome
+	ld a, [wListWithTMText]
+	and a
+	jr z, .noSaveScreenTiles
+	call CheckSaveTMTextScreenTiles
+.noSaveScreenTiles
 	ld hl, wd730
 	set 6, [hl] ; turn off letter printing delay
 	xor a

@@ -378,7 +378,8 @@ wHallOfFamePalettes:: db
 
 NEXTU
 
-wTownMapSavedOAM:: ds 160
+wTileMapBackup3:: ; partial tilemap backup for saving a portion of the screen's contents.
+wTownMapSavedOAM:: ds 160 
 
 NEXTU
 wNPCMovementDirections:: ds 180
