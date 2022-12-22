@@ -169,6 +169,9 @@ DebugItemsList:
 	db GOOD_ROD, 1
 	db SUPER_ROD, 1
 	db POCKET_ABRA, 1
+	db HM_SURF, 1
+	db HM_FLY, 1
+	db TM_THUNDERPUNCH, 1
 	db -1 ; end
 
 DebugUnusedList:
