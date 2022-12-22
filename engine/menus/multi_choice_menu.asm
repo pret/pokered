@@ -139,24 +139,6 @@ SixOptionMenu::
 	hlcoord 6, 1 ; where the list will be drawn at
 	jp DoneDrawFunc
 
-; draws a line of tiles
-; INPUT:
-; b = tile ID
-; c = number of tile ID's to write
-; de = amount to destination address after each tile (1 for horizontal, 20 for vertical)
-; hl = destination address
-DrawTileLine2:
-	push bc
-	push de
-.loop
-	ld [hl], b
-	add hl, de
-	dec c
-	jr nz, .loop
-	pop de
-	pop bc
-	ret
-
 MoveDexQuestion1::
 	dw FourOptionMenu
 	db   "FLYING"
