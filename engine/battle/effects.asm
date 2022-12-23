@@ -373,7 +373,9 @@ CheckDefrost:
 	ld [hl], a
 	ld hl, FireDefrostedText
 .common
-	jp PrintText
+	call PrintText
+	farjp CheckDefrostMove
+
 
 FireDefrostedText:
 	text_far _FireDefrostedText

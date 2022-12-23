@@ -190,6 +190,7 @@ INCLUDE "engine/battle/trainer_ai.asm"
 INCLUDE "engine/battle/draw_hud_pokeball_gfx.asm"
 INCLUDE "gfx/trade.asm"
 INCLUDE "engine/battle/trainers2.asm" ; PureRGBnote: MOVED: moved from home bank
+INCLUDE "engine/battle/move_effects/check_defrost_move.asm"
 
 SECTION "Battle Core", ROMX
 
