@@ -145,7 +145,7 @@ _NidoranFDexEntry:: ; new entry
 
 	page "lay two eggs. Baby"
 	next "NIDORAN are just"
-	next "10cm long"
+	next "4 inches long"
 	dex
 
 _NidoqueenDexEntry:: ; does not need a n.ew entry
@@ -249,7 +249,7 @@ _GastlyDexEntry::		; Dex entry from Green, swapping the Indian Elephant for Tram
 	dex
 
 _ScytherDexEntry:: ; new entry
-	page "Few specimens"
+	text "Few specimens"
 	next "have ever been"
 	next "caught. While"
 
@@ -473,7 +473,7 @@ _MagmarDexEntry:: ; new entry, modified from the original
 	next "areas, MAGMAR's"
 	next "body burns at"
 
-	page "2200 degrees F."		; changed to imperial
+	page "2,200 degrees F."		; changed to imperial
 	next "Hides perfectly"
 	next "among flames"
 	dex
@@ -604,9 +604,9 @@ _JynxDexEntry:: ; new entry
 	next "in a human-"
 	next "like manner,"
 
-	page "the language is"
-	next "impossible"
-	next "to translate."
+	page "the language"
+	next "seems impossible"
+	next "to translate"
 	
 	dex
 
@@ -687,7 +687,7 @@ _NinetalesDexEntry:: ; new entry
 	
 	page "'NINETALES, 1,000"
 	next "years, TOTARTLE,"
-	next "10,000 years."
+	next "10,000 years.'"
 	dex
 
 _PikachuDexEntry:: ; new entry
@@ -743,11 +743,11 @@ _KabutoDexEntry:: ; new entry
 _KabutopsDexEntry:: ; new entry
 	text "The oldest of"
 	next "all #MON. The"
-	next "only KABUTOPS"
+	next "only complete"
 
-	page "fossil was"
-	next "discovered 6"
-	next "years ago"
+	page "KABUTOPS fossil"
+	next "was discovered"
+	next "6 years ago"
 	dex
 
 _HorseaDexEntry:: ; new entry
@@ -1041,13 +1041,13 @@ _ButterfreeDexEntry:: ; new entry
 	dex
 
 _MachampDexEntry:: ; new entry
-	text "It can throw 1000"
+	text "Can throw 1,000"
 	next "punches in 2"
 	next "seconds. While"
 
 	page "thought to evolve"
 	next "from MACHOKE, the"
-	next "method is unknown"
+	next "method is unclear"
 	dex
 
 _GolduckDexEntry:: ; new entry
@@ -1122,7 +1122,7 @@ _MukDexEntry:: ; new entry
 
 _KinglerDexEntry:: ; does not need a n.ew entry
 	text "The large pincer"
-	next "has 10000 hp of"
+	next "has 10,000 hp of"
 	next "crushing power."
 
 	page "However, its huge"

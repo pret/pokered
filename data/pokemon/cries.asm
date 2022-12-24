@@ -233,10 +233,13 @@ CryData::
 	mon_cry SFX_CRY_00, $00, $00 ; Wugtrio
 	mon_cry SFX_CRY_00, $00, $00 ; Toedscool
 	mon_cry SFX_CRY_00, $00, $00 ; Toedscruel
-	; mon_cry SFX_CRY_19, $1A, $40 ; Perrserker
-	; mon_cry SFX_CRY_10, $64, $40 ; Sirfetch'd
-	; mon_cry SFX_CRY_20, $00, $70 ; Mr. Rime
+	mon_cry SFX_CRY_19, $1A, $40 ; Perrserker
+	mon_cry SFX_CRY_10, $64, $40 ; Sirfetch'd
+	mon_cry SFX_CRY_20, $00, $90 ; Mr. Rime
 	; mon_cry SFX_CRY_00, $00, $00 ; Meltan
 	; mon_cry SFX_CRY_00, $00, $00 ; Melmetal
+	mon_cry SFX_CRY_09, $80, $40 ; Articuno-G
+	mon_cry SFX_CRY_18, $FF, $80 ; Zapdos-G
+	mon_cry SFX_CRY_09, $F8, $40 ; Moltres-G
 	mon_cry SFX_CRY_00, $00, $00 ; MissingNo.
 	assert_table_length NUM_POKEMON_INDEXES

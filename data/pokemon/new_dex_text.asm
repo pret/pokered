@@ -714,8 +714,8 @@ _ScreamTailDexEntry::
 	next "an ancient"
 
 	page "JIGGLYPUFF that"
-	next "was in a"
-	next "strange book."
+	next "was found in a"
+	next "strange book"
 	dex
 	
 _SandyShocksDexEntry::

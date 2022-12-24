@@ -106,12 +106,12 @@ ROMX $14
 	"Maps 10"
 	"Battle Engine 8"
 	"Hidden Objects 2"
+	"Trainer Sight"
 ROMX $15
 	"Maps 11"
 	"Battle Engine 9"
 	"Maps 12"
 	"Diploma"
-	"Trainer Sight"
 ROMX $16
 	"Maps 13"
 	"Battle Engine 10"

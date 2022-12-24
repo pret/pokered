@@ -15,10 +15,10 @@
 
 	; tm/hm learnset
 	tmhm RAZOR_WIND,   SWORDS_DANCE, WHIRLWIND,    TOXIC,        HORN_DRILL,   \
-	     BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  RAGE,         THUNDERBOLT,  \
-	     THUNDER,      MIMIC,        DOUBLE_TEAM,  REFLECT,      BIDE,         \
-	     SWIFT,        SKULL_BASH,   REST,         SUBSTITUTE,   CUT,          \
-	     FLY
+	     BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  HYPER_BEAM,   RAGE,         \
+	     THUNDERBOLT,  THUNDER,      MIMIC,        DOUBLE_TEAM,  REFLECT,      \
+	     BIDE,         SWIFT,        SKULL_BASH,   REST,         SUBSTITUTE,   \
+	     CUT,          FLY
 	; end
 
 	db BANK(MadaamuPicFront)

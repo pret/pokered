@@ -227,6 +227,12 @@ PokedexEntryPointers:
 	dw WugtrioDexEntry
 	dw ToedscoolDexEntry
 	dw ToedscruelDexEntry
+	dw PerrserkerDexEntry
+	dw SirfetchdDexEntry
+	dw MrRimeDexEntry
+	dw ArticunoGDexEntry
+	dw ZapdosGDexEntry
+	dw MoltresGDexEntry
 	dw MissingNoDexEntry
 	assert_table_length NUM_POKEMON_INDEXES
 
@@ -1808,5 +1814,47 @@ ToedscruelDexEntry:
 	db 6,3
 	dw 1280
 	text_far _ToedscruelDexEntry
+	text_end
+	
+PerrserkerDexEntry:
+    db "VIKING@"
+	db 2,7
+	dw 620
+	text_far _PerrserkerDexEntry
+	text_end
+	
+SirfetchdDexEntry:
+    db "WILD DUCK@"
+	db 2,7
+	dw 2580
+	text_far _SirfetchdDexEntry
+	text_end
+	
+MrRimeDexEntry:
+	db "COMEDIAN@"
+	db 4,11
+	dw 1280
+	text_far _MrRimeDexEntry
+	text_end
+	
+ArticunoGDexEntry:
+	db "CRUEL@"
+	db 5,7
+	dw 1120
+	text_far _ArticunoGDexEntry
+	text_end
+
+ZapdosGDexEntry:
+    db "STRONGLEGS@"
+	db 5,3
+	dw 1280
+	text_far _ZapdosGDexEntry
+	text_end
+
+MoltresGDexEntry:
+    db "MALEVOLENT@"
+	db 6,7
+	dw 1460
+	text_far _MoltresGDexEntry
 	text_end
 	

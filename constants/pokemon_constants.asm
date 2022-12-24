@@ -234,12 +234,15 @@
 	const WUGTRIO            ; $E1
 	const TOEDSCOOL          ; $E2
 	const TOEDSCRUEL         ; $E3
-	; const PERRSERKER         ; $E4
-	; const SIRFETCHD          ; $E5
-	; const MR_RIME            ; $E6
+	const PERRSERKER         ; $E4
+	const SIRFETCHD          ; $E5
+	const MR_RIME            ; $E6
 	; const MELTAN			   ; $E7
 	; const MELMETAL		   ; $E8
-	const MISSINGNO          ; $E9
+	const ARTICUNO_G		 ; $E9
+	const ZAPDOS_G			 ; $EA
+	const MOLTRES_G			 ; $EB
+	const MISSINGNO          ; $EC
 	
 
 DEF NUM_POKEMON_INDEXES EQU const_value - 1

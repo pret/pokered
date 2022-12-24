@@ -230,6 +230,12 @@ EvosMovesPointerTable:
 	dw WugtrioEvosMoves	
 	dw ToedscoolEvosMoves
 	dw ToedscruelEvosMoves
+	dw PerrserkerEvosMoves
+	dw SirfetchdEvosMoves
+	dw MrRimeEvosMoves
+	dw ArticunoGEvosMoves	
+	dw ZapdosGEvosMoves
+	dw MoltresGEvosMoves
 	dw MissingNoEvosMoves
 	assert_table_length NUM_POKEMON_INDEXES
 
@@ -724,6 +730,7 @@ MachokeEvosMoves:
 
 MrMimeEvosMoves:
 ; Evolutions
+	db EV_ITEM, ICE_STONE, 1, MR_RIME
 	db 0
 ; Learnset
 	db 15, CONFUSION
@@ -994,7 +1001,7 @@ BlottleEvosMoves:
 FarfetchdEvosMoves:
 ; Evolutions
 	db EV_LEVEL, 24, MADAAMU
-	; db EV_ITEM, HEART_STONE, 1, SIRFETCHD
+	db EV_ITEM, HEART_STONE, 1, SIRFETCHD
 	db 0
 ; Learnset
 	db 7, LEER
@@ -1249,15 +1256,6 @@ RaichuEvosMoves:
 	db EV_TRADE, 1, GOROCHU ; It matches the old rumour and everyone will try it, don't bother doing Thunder Stone 2...
 	db 0
 ; Learnset
-	db 6, TAIL_WHIP
-	db 8, THUNDER_WAVE
-	db 11, QUICK_ATTACK
-	db 15, DOUBLE_TEAM
-	db 20, SLAM
-	db 26, AGILITY
-	db 33, THUNDERBOLT
-	db 41, LIGHT_SCREEN
-	db 50, THUNDER
 	db 0
 
 RibbitoEvosMoves:
@@ -2415,8 +2413,8 @@ OddishEvosMoves:
 
 GloomEvosMoves:
 ; Evolutions
-	db EV_ITEM, LEAF_STONE, 1, VILEPLUME
-	db EV_ITEM, POISON_STONE, 1, BELLOSSOM
+	db EV_ITEM, POISON_STONE, 1, VILEPLUME
+	db EV_ITEM, LEAF_STONE, 1, BELLOSSOM
 	db 0
 ; Learnset
 	db 15, POISONPOWDER
@@ -2869,7 +2867,7 @@ SandyShocksEvosMoves:
 
 WiglettEvosMoves:
 ; Evolutions
-	db EV_LEVEL, 28, WUGTRIO
+	db EV_LEVEL, 26, WUGTRIO
 	db 0
 ; Learnset
 	db 15, SAND_ATTACK
@@ -2918,50 +2916,91 @@ ToedscruelEvosMoves:
 	db 43, SCREECH
 	db 50, SPORE
 	db 0
+	
+PerrserkerEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 8, SCRATCH
+	db 12, PAY_DAY
+	db 17, BITE
+	db 25, MAGNET_BOMB		; Smart Strike
+	db 29, FURY_SWIPES
+	db 32, SCREECH
+	db 36, SLASH
+	db 40, METAL_SOUND
+	db 45, IRON_HEAD
+	db 0
+
+SirfetchdEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 7, LEER
+	db 15, DOUBLE_KICK
+	db 23, BRUTAL_SWING
+	db 31, LOW_KICK
+	db 39, SWORDS_DANCE
+	db 44, JUMP_KICK
+	db 49, ROLLING_KICK
+	db 55, HI_JUMP_KICK
+	db 0
+
+MrRimeEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 23, LIGHT_SCREEN
+	db 28, PSYBEAM
+	db 31, AURORA_BEAM
+	db 39, ICE_BEAM
+	db 44, PSYCHIC_M
+	db 50, FEINT_ATTACK
+	db 0
+
+ArticunoGEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 40, REFLECT
+	db 45, HYPNOSIS
+	db 51, PSYBEAM
+	db 55, AGILITY
+	db 60, LIGHT_SCREEN
+	db 65, RECOVER
+	db 70, DREAM_EATER
+	db 0
+
+ZapdosGEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 40, DOUBLE_KICK
+	db 45, LIGHT_SCREEN
+	db 51, LOW_KICK
+	db 55, AGILITY
+	db 58, JUMP_KICK
+	db 62, DRILL_PECK
+	db 66, ROLLING_KICK
+	db 70, HI_JUMP_KICK
+	db 0
+
+MoltresGEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 40, BITE		; Fake Tears
+	db 45, WING_ATTACK
+	db 51, BRUTAL_SWING
+	db 55, AGILITY
+	db 58, FEINT_ATTACK
+	db 62, AMNESIA		; Nasty Plot
+	db 66, NIGHT_SLASH	; False Surrender
+	db 70, SKY_ATTACK
+	db 0
 
 MissingNoEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
 	db 0
-
-;ArticunoGEvosMoves:
-; Evolutions
-;	db 0
-; Learnset
-;	db 40, REFLECT
-;	db 45, HYPNOSIS
-;	db 51, PSYBEAM
-;	db 55, AGILITY
-;	db 60, LIGHT_SCREEN
-;	db 65, RECOVER
-;	db 70, DREAM_EATER
-;	db 0
-
-;ZapdosGEvosMoves:
-; Evolutions
-;	db 0
-; Learnset
-;	db 40, DOUBLE_KICK
-;	db 45, LIGHT_SCREEN
-;	db 51, LOW_KICK
-;	db 55, AGILITY
-;	db 58, JUMP_KICK
-;	db 62, DRILL_PECK
-;	db 66, ROLLING_KICK
-;	db 70, HI_JUMP_KICK
-;	db 0
-
-;MoltresGEvosMoves:
-; Evolutions
-;	db 0
-; Learnset
-;	db 40, BITE		; Fake Tears
-;	db 45, WING_ATTACK
-;	db 51, BRUTAL_SWING
-;	db 55, AGILITY
-;	db 58, FEINT_ATTACK
-;	db 62, AMNESIA		; Nasty Plot
-;	db 66, NIGHT_SLASH	; False Surrender
-;	db 70, SKY_ATTACK
-;	db 0

@@ -608,7 +608,7 @@ _ScarletBook2::
     cont "were attacked by"
     cont "a MAGNETON that"
     cont "looked like a"
-    cont "a tyrannosaur."
+    cont "tyrannosaur."
     
 	para "We called it"
     line "SANDY SHOCKS."
