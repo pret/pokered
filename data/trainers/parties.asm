@@ -500,7 +500,7 @@ BlackbeltData:
 ; Fighting Dojo Trainers
 	db 31, CHEEP, CHEEP, JABETTA, 0
 	db 32, MACHOKE, MACHAMP, 0
-	db 36, MACHAMP, 0 ; should be sirfetch'd
+	db 36, SIRFETCHD, 0
 	db 31, MACHOP, MANKEY, PRIMEAPE, 0
 ; Viridian Gym	- changed to fit the Ground-type gym theme
 	db 40, GRAVELER, GOLEM, 0
@@ -560,7 +560,7 @@ ScientistData:
 	db 34, MAGNEMITE, ELECTRODE, 0
 
 GiovanniData: ; is not scaled as he is always fought last
-; Rocket Hideout B4F
+; Rocket Hideout B4F - should be changed to Lavender Tower
 	db $FF, 27, RHYHORN, 26, DECILLA, 31, KANGASKHAN, 31, PERSIAN, 0
 ; Silph Co. 11F
 	db $FF, 37, KANGASKHAN, 36, NIDORINO, 37, NIDOQUEEN, 40, PERSIAN, 42, RHYDON, 0
