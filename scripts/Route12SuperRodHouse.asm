@@ -3,6 +3,7 @@ Route12SuperRodHouse_Script:
 
 Route12SuperRodHouse_TextPointers:
 	dw Route12HouseText1
+	dw JumpText
 
 Route12HouseText1:
 	text_asm
@@ -54,4 +55,8 @@ Route12HouseText_564d4:
 
 Route12HouseText_564d9:
 	text_far _Route12HouseText_564d9
+	text_end
+
+JumpText:
+	text_far _JumpText
 	text_end

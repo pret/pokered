@@ -9,5 +9,6 @@ Route12SuperRodHouse_Object:
 
 	def_object_events
 	object_event  2,  4, SPRITE_FISHING_GURU, STAY, RIGHT, 1 ; person
+	object_event  5,  6, SPRITE_YOUNGSTER, WALK, LEFT, 2 ; person
 
 	def_warps_to ROUTE_12_SUPER_ROD_HOUSE

@@ -60,3 +60,10 @@ _Route12HouseText_564d9::
 	line "you, but you have"
 	cont "no room for it!"
 	done
+
+_JumpText::
+	text "I wish there was"
+	line "a ROD that could"
+	cont "only catch me"
+	cont "MAGIKARP..."
+	done
