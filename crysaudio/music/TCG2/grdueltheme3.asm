@@ -2146,7 +2146,7 @@ Branch_1f6df4:
 
 
 Music_GRDuelTheme3_Ch3: ; 1f6e11 (7d:6e11)
-	channel_volume 10
+	channel_volume 1
 	fade_wave 11
 	;musicdc 255
 	speed 1

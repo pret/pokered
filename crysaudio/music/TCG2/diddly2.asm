@@ -173,7 +173,7 @@ Music_Diddly2_Ch1: ; 1ebdaf (7a:7daf)
 
 
 Music_Diddly2_Ch3: ; 1ebe13 (7a:7e13)
-	channel_volume 10
+	channel_volume 1
 	fade_wave 14
 	speed 1
 	;musice9 128

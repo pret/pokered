@@ -1004,7 +1004,7 @@ Branch_1edb5a:
 
 
 Music_Fort1_Ch3: ; 1edb66 (7b:5b66)
-	channel_volume 10
+	channel_volume 1
 	speed 1
 	fade_wave 14
 	channel_volume 1

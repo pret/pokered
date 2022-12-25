@@ -1239,7 +1239,7 @@ Branch_1f1c97:
 
 
 Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
-	channel_volume 10
+	channel_volume 1
 	fade_wave 11
 	channel_volume 1
 	;musice9 96

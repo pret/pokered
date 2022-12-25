@@ -1217,7 +1217,7 @@ Branch_1ea90c:
 
 
 Music_HereComesGR_Ch3: ; 1ea934 (7a:6934)
-	channel_volume 10
+	channel_volume 1
 	speed 1
 	fade_wave 11
 	channel_volume 1

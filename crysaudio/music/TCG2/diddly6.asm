@@ -233,7 +233,7 @@ Music_Diddly6_Ch1: ; 1f7731 (7d:7731)
 
 
 Music_Diddly6_Ch3: ; 1f77cf (7d:77cf)
-	channel_volume 10
+	channel_volume 1
 	;fade_wave 15
 	load_wave 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 13, 12, 11, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 	channel_volume 1

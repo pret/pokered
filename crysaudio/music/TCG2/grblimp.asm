@@ -689,7 +689,7 @@ Branch_1e7e8a:
 
 
 Music_GRBlimp_Ch3: ; 1e7eed (79:7eed)
-	channel_volume 10
+	channel_volume 1
 	;musicdc 17
 	fade_wave 11
 	channel_volume 1

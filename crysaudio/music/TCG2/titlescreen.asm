@@ -1932,7 +1932,7 @@ Music_TCG2TitleScreen_Ch1: ; 1e9abd (7a:5abd)
 
 
 Music_TCG2TitleScreen_Ch3: ; 1ea0f8 (7a:60f8)
-	channel_volume 10
+	channel_volume 1
 	;musicdc 17
 	fade_wave 11
 	channel_volume 1

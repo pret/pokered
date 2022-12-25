@@ -1914,7 +1914,7 @@ Music_GRDuelTheme1_Ch1: ; 1f5c1b (7d:5c1b)
 
 
 Music_GRDuelTheme1_Ch3: ; 1f603f (7d:603f)
-	channel_volume 10
+	channel_volume 1
 	speed 1
 	fade_wave 11
 	channel_volume 1

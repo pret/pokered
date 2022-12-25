@@ -1291,7 +1291,7 @@ Music_Fort3_Ch1: ; 1eeaa0 (7b:6aa0)
 
 
 Music_Fort3_Ch3: ; 1eecfb (7b:6cfb)
-	channel_volume 10
+	channel_volume 1
 	speed 1
 	fade_wave 11
 	;musicdc 255

@@ -1415,7 +1415,7 @@ Branch_1f3a58:
 
 
 Music_Imakuni2_Ch3: ; 1f3a6c (7c:7a6c)
-	channel_volume 10
+	channel_volume 1
 	speed 1
 	fade_wave 11
 	;musicdc 255

@@ -1505,7 +1505,7 @@ Music_GROverworld_Ch1: ; 1eaeaf (7a:6eaf)
 
 
 Music_GROverworld_Ch3: ; 1eb3d6 (7a:73d6)
-	channel_volume 10
+	channel_volume 1
 	;musicdc 17
 	fade_wave 11
 	channel_volume 1

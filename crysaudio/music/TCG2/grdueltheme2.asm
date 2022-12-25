@@ -2148,7 +2148,7 @@ Branch_1efa62:
 
 
 Music_GRDuelTheme2_Ch3: ; 1efa74 (7b:7a74)
-	channel_volume 10
+	channel_volume 1
 	;fade_wave 15
 	load_wave 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 13, 12, 11, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 	speed 1

@@ -917,7 +917,7 @@ Branch_1f3150:
 
 
 Music_GRChallengeCup_Ch3: ; 1f315d (7c:715d)
-	channel_volume 10
+	channel_volume 1
 	speed 1
 	fade_wave 11
 	channel_volume 1

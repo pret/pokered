@@ -1729,7 +1729,7 @@ Branch_1ddc75:
 
 
 Music_Ishihara_Ch3: ; 1dde54 (77:5e54)
-	channel_volume 10
+	channel_volume 1
 	fade_wave 11
 	channel_volume 1
 	;musice9 96

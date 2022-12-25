@@ -4081,7 +4081,7 @@ Music_TCG2Credits_Ch1: ; 1deabb (77:6abb)
 
 
 Music_TCG2Credits_Ch3: ; 1df4a3 (77:74a3)
-	channel_volume 10
+	channel_volume 1
 	;fade_wave 16
 	load_wave 12, 12, 12, 12, 12, 12, 12, 12, 11, 12, 12, 12, 11, 12, 12, 12, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11
 	;musicdc 255

@@ -1818,7 +1818,7 @@ Music_GRCastle_Ch1: ; 1f2525 (7c:6525)
 
 
 Music_GRCastle_Ch3: ; 1f2903 (7c:6903)
-	channel_volume 10
+	channel_volume 1
 	fade_wave 11
 	channel_volume 1
 	;musice9 96

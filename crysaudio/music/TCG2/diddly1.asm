@@ -184,7 +184,7 @@ Music_Diddly1_Ch1: ; 1ebcb5 (7a:7cb5)
 
 
 Music_Diddly1_Ch3: ; 1ebd17 (7a:7d17)
-	channel_volume 10
+	channel_volume 1
 	;fade_wave 15
 	load_wave 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 13, 12, 11, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 	speed 1
@@ -250,7 +250,7 @@ Music_Diddly1_Ch3: ; 1ebd17 (7a:7d17)
 	note C_, 3
 	note E_, 3
 	dec_octave
-	channel_volume 128
+	channel_volume 3
 	note G_, 2
 	note A#, 3
 	inc_octave

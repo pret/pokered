@@ -55,7 +55,7 @@ Music_Diddly4_Ch1: ; 1ebec7 (7a:7ec7)
 
 
 Music_Diddly4_Ch3: ; 1ebee0 (7a:7ee0)
-	channel_volume 10
+	channel_volume 1
 	fade_wave 14
 	speed 1
 	channel_volume 2

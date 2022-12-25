@@ -996,7 +996,7 @@ Music_Fort2_Ch1: ; 1ee12f (7b:612f)
 
 
 Music_Fort2_Ch3: ; 1ee319 (7b:6319)
-	channel_volume 10
+	channel_volume 1
 	;fade_wave 15
 	load_wave 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 13, 12, 11, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 	channel_volume 2

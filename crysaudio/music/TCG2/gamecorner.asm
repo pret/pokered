@@ -829,7 +829,7 @@ Branch_1e778f:
 
 
 Music_TCG2GameCorner_Ch3: ; 1e782f (79:782f)
-	channel_volume 10
+	channel_volume 1
 	fade_wave 11
 	channel_volume 1
 	;musice9 64
