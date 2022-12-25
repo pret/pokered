@@ -30,12 +30,22 @@ Music_TCG2TitleScreen_Ch2: ; 1e96cc (7a:56cc)
 	;musicdc 1
 	note G_, 15
 	;musicdc 17
-	rept 3
+	;rept 3
 	note G_, 4
 	;musicdc 1
 	note G_, 1
 	;musicdc 17
-	endr
+	;---
+	note G_, 4
+	;musicdc 1
+	note G_, 1
+	;musicdc 17
+	;---
+	note G_, 4
+	;musicdc 1
+	note G_, 1
+	;musicdc 17
+	;endr
 	sound_loop 4, .Loop1
 	;musicf3
 	;musicdc 17
@@ -1651,12 +1661,17 @@ Music_TCG2TitleScreen_Ch1: ; 1e9abd (7a:5abd)
 	note E_, 5
 	;musicdc 16
 	note E_, 2
-	rept 2
+	;rept 2
 	;musicdc 17
 	note E_, 8
 	;musicdc 16
 	note E_, 7
-	endr
+	;---
+	;musicdc 17
+	note E_, 8
+	;musicdc 16
+	note E_, 7
+	;endr
 	inc_octave
 	;musicf1 64
 	;musicf2

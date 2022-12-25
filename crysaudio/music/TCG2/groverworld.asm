@@ -2024,13 +2024,19 @@ Music_GROverworld_Ch4: ; 1eb5e4 (7a:75e4)
 	drum_note 3, 6
 	drum_note 3, 5
 	drum_note 3, 5
-	rept 2
+	;rept 2
 	;musicef 254
 	drum_note 2, 16
 	rest 1
 	;musicef 2
 	drum_note 2, 16
-	endr
+	;---
+	;musicef 254
+	drum_note 2, 16
+	rest 1
+	;musicef 2
+	drum_note 2, 16
+	;endr
 	;musicef 0
 	drum_note 2, 16
 	rest 1

@@ -306,9 +306,21 @@ Music_Diddly6_Ch4: ; 1f7812 (7d:7812)
 	sound_loop 7, .Loop1
 .Loop2
 	drum_note 3, 6
-	rept 7
+	;rept 7
 	drum_note 3, 5
-	endr
+	;---
+	drum_note 3, 5
+	;---
+	drum_note 3, 5
+	;---
+	drum_note 3, 5
+	;---
+	drum_note 3, 5
+	;---
+	drum_note 3, 5
+	;---
+	drum_note 3, 5
+	;endr
 	sound_loop 3, .Loop2
 	;musicef 0
 .Loop3

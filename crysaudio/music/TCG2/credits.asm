@@ -1683,18 +1683,48 @@ Music_TCG2Credits_Ch2: ; 1de32a (77:632a)
 	note D_, 14
 	speed 1
 .Loop6
-	rept 4
+	;rept 4
 	note G_, 11
 	rest 4
 	note G_, 11
 	rest 3
-	endr
-	rept 4
+	;---
+	note G_, 11
+	rest 4
+	note G_, 11
+	rest 3
+	;---
+	note G_, 11
+	rest 4
+	note G_, 11
+	rest 3
+	;---
+	note G_, 11
+	rest 4
+	note G_, 11
+	rest 3
+	;endr
+	;rept 4
 	note D_, 11
 	rest 4
 	note D_, 11
 	rest 3
-	endr
+	;---
+	note D_, 11
+	rest 4
+	note D_, 11
+	rest 3
+	;---
+	note D_, 11
+	rest 4
+	note D_, 11
+	rest 3
+	;---
+	note D_, 11
+	rest 4
+	note D_, 11
+	rest 3
+	;endr
 	sound_loop 3, .Loop6
 .Loop7
 	note G_, 11

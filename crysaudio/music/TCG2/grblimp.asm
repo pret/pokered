@@ -805,10 +805,16 @@ Music_GRBlimp_Ch4: ; 1e7f50 (79:7f50)
 	drum_note 3, 3
 	;musicef 253
 	drum_note 3, 4
-	rept 3
+	;rept 3
 	drum_note 3, 3
 	drum_note 3, 4
-	endr
+	;---
+	drum_note 3, 3
+	drum_note 3, 4
+	;---
+	drum_note 3, 3
+	drum_note 3, 4
+	;endr
 	;musicef 0
 	drum_note 2, 14
 	drum_note 2, 14
@@ -826,10 +832,16 @@ Music_GRBlimp_Ch4: ; 1e7f50 (79:7f50)
 	drum_note 3, 3
 	;musicef 253
 	drum_note 3, 4
-	rept 3
+	;rept 3
 	drum_note 3, 3
 	drum_note 3, 4
-	endr
+	;---
+	drum_note 3, 3
+	drum_note 3, 4
+	;---
+	drum_note 3, 3
+	drum_note 3, 4
+	;endr
 	;musicef 0
 	sound_loop 11, .Loop1
 	drum_note 2, 14
