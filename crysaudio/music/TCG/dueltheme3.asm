@@ -15,11 +15,23 @@ Music_DuelTheme3_Ch1: ; f63a1 (3d:63a1)
 	octave 2
 	duty_cycle 0
 .Loop1
-	rept 4
+	;rept 4
 	notetype1 9
 	note F#, 2
 	rest 1
-	endr
+	;---
+	notetype1 9
+	note F#, 2
+	rest 1
+	;---
+	notetype1 9
+	note F#, 2
+	rest 1
+	;---
+	notetype1 9
+	note F#, 2
+	rest 1
+	;endr
 	notetype1 9
 	note E_, 2
 	notetype1 9
@@ -181,13 +193,31 @@ Music_DuelTheme3_Ch1: ; f63a1 (3d:63a1)
 	duty_cycle 0
 	octave 2
 .Loop8
-	rept 4
+	;rept 4
 	notetype1 9
 	note F#, 1
 	notetype1 3
 	note F#, 1
 	rest 1
-	endr
+	;---
+	notetype1 9
+	note F#, 1
+	notetype1 3
+	note F#, 1
+	rest 1
+	;---
+	notetype1 9
+	note F#, 1
+	notetype1 3
+	note F#, 1
+	rest 1
+	;---
+	notetype1 9
+	note F#, 1
+	notetype1 3
+	note F#, 1
+	rest 1
+	;endr
 	notetype1 9
 	note F#, 1
 	notetype1 3
@@ -196,13 +226,31 @@ Music_DuelTheme3_Ch1: ; f63a1 (3d:63a1)
 	note F#, 1
 	notetype1 3
 	note F#, 1
-	rept 4
+	;rept 4
 	notetype1 9
 	note G_, 1
 	notetype1 3
 	note G_, 1
 	rest 1
-	endr
+	;---
+	notetype1 9
+	note G_, 1
+	notetype1 3
+	note G_, 1
+	rest 1
+	;---
+	notetype1 9
+	note G_, 1
+	notetype1 3
+	note G_, 1
+	rest 1
+	;---
+	notetype1 9
+	note G_, 1
+	notetype1 3
+	note G_, 1
+	rest 1
+	;endr
 	notetype1 9
 	note A_, 1
 	notetype1 3
@@ -321,13 +369,31 @@ Music_DuelTheme3_Ch1: ; f63a1 (3d:63a1)
 	note E_, 2
 	duty_cycle 1
 .Loop9
-	rept 4
+	;rept 4
 	notetype1 9
 	note G#, 1
 	notetype1 3
 	note G#, 1
 	rest 1
-	endr
+	;---
+	notetype1 9
+	note G#, 1
+	notetype1 3
+	note G#, 1
+	rest 1
+	;---
+	notetype1 9
+	note G#, 1
+	notetype1 3
+	note G#, 1
+	rest 1
+	;---
+	notetype1 9
+	note G#, 1
+	notetype1 3
+	note G#, 1
+	rest 1
+	;endr
 	notetype1 9
 	note G#, 1
 	notetype1 3
@@ -336,13 +402,31 @@ Music_DuelTheme3_Ch1: ; f63a1 (3d:63a1)
 	note G#, 1
 	notetype1 3
 	note G#, 1
-	rept 4
+	;rept 4
 	notetype1 9
 	note A_, 1
 	notetype1 3
 	note A_, 1
 	rest 1
-	endr
+	;---
+	notetype1 9
+	note A_, 1
+	notetype1 3
+	note A_, 1
+	rest 1
+	;---
+	notetype1 9
+	note A_, 1
+	notetype1 3
+	note A_, 1
+	rest 1
+	;---
+	notetype1 9
+	note A_, 1
+	notetype1 3
+	note A_, 1
+	rest 1
+	;endr
 	notetype1 9
 	note A_, 1
 	notetype1 3
@@ -491,11 +575,23 @@ Music_DuelTheme3_Ch2: ; f6649 (3d:6649)
 	duty_cycle 0
 	;frequency_offset 3
 .Loop1
-	rept 4
+	;rept 4
 	notetype1 8
 	note F#, 2
 	rest 1
-	endr
+	;---
+	notetype1 8
+	note F#, 2
+	rest 1
+	;---
+	notetype1 8
+	note F#, 2
+	rest 1
+	;---
+	notetype1 8
+	note F#, 2
+	rest 1
+	;endr
 	notetype1 8
 	note E_, 2
 	notetype1 8
@@ -512,12 +608,16 @@ Music_DuelTheme3_Ch2: ; f6649 (3d:6649)
 	rest 8
 	sound_loop 4, .Loop2
 .Loop3
-	rept 2
+	;rept 2
 	sound_call Branch_f67b2
-	endr
-	rept 2
+	;---
+	sound_call Branch_f67b2
+	;endr
+	;rept 2
 	sound_call Branch_f680a
-	endr
+	;---
+	sound_call Branch_f680a
+	;endr
 	sound_loop 2, .Loop3
 	octave 2
 	notetype1 10
@@ -551,12 +651,16 @@ Music_DuelTheme3_Ch2: ; f6649 (3d:6649)
 	duty_cycle 0
 	notetype1 9
 .Loop4
-	rept 2
+	;rept 2
 	sound_call Branch_f67b2
-	endr
-	rept 2
+	;---
+	sound_call Branch_f67b2
+	;endr
+	;rept 2
 	sound_call Branch_f680a
-	endr
+	;---
+	sound_call Branch_f680a
+	;endr
 	sound_loop 2, .Loop4
 	vibrato 10, 3, 3
 .Loop5
@@ -650,13 +754,31 @@ Music_DuelTheme3_Ch2: ; f6649 (3d:6649)
 	note E_, 4
 	octave 3
 .Loop6
-	rept 4
+	;rept 4
 	notetype1 9
 	note C#, 1
 	notetype1 3
 	note C#, 1
 	rest 1
-	endr
+	;---
+	notetype1 9
+	note C#, 1
+	notetype1 3
+	note C#, 1
+	rest 1
+	;---
+	notetype1 9
+	note C#, 1
+	notetype1 3
+	note C#, 1
+	rest 1
+	;---
+	notetype1 9
+	note C#, 1
+	notetype1 3
+	note C#, 1
+	rest 1
+	;endr
 	notetype1 9
 	note C#, 1
 	notetype1 3
@@ -665,13 +787,31 @@ Music_DuelTheme3_Ch2: ; f6649 (3d:6649)
 	note C#, 1
 	notetype1 3
 	note C#, 1
-	rept 4
+	;rept 4
 	notetype1 9
 	note D_, 1
 	notetype1 3
 	note D_, 1
 	rest 1
-	endr
+	;---
+	notetype1 9
+	note D_, 1
+	notetype1 3
+	note D_, 1
+	rest 1
+	;---
+	notetype1 9
+	note D_, 1
+	notetype1 3
+	note D_, 1
+	rest 1
+	;---
+	notetype1 9
+	note D_, 1
+	notetype1 3
+	note D_, 1
+	rest 1
+	;endr
 	notetype1 9
 	note E_, 1
 	notetype1 3
@@ -684,13 +824,31 @@ Music_DuelTheme3_Ch2: ; f6649 (3d:6649)
 	duty_cycle 1
 	inc_octave
 .Loop7
-	rept 4
+	;rept 4
 	notetype1 8
 	note E_, 1
 	notetype1 3
 	note E_, 1
 	rest 1
-	endr
+	;---
+	notetype1 8
+	note E_, 1
+	notetype1 3
+	note E_, 1
+	rest 1
+	;---
+	notetype1 8
+	note E_, 1
+	notetype1 3
+	note E_, 1
+	rest 1
+	;---
+	notetype1 8
+	note E_, 1
+	notetype1 3
+	note E_, 1
+	rest 1
+	;endr
 	notetype1 8
 	note E_, 1
 	notetype1 3
@@ -699,13 +857,31 @@ Music_DuelTheme3_Ch2: ; f6649 (3d:6649)
 	note E_, 1
 	notetype1 3
 	note E_, 1
-	rept 4
+	;rept 4
 	notetype1 8
 	note D_, 1
 	notetype1 3
 	note D_, 1
 	rest 1
-	endr
+	;---
+	notetype1 8
+	note D_, 1
+	notetype1 3
+	note D_, 1
+	rest 1
+	;---
+	notetype1 8
+	note D_, 1
+	notetype1 3
+	note D_, 1
+	rest 1
+	;---
+	notetype1 8
+	note D_, 1
+	notetype1 3
+	note D_, 1
+	rest 1
+	;endr
 	notetype1 8
 	note D_, 1
 	notetype1 3
@@ -926,11 +1102,23 @@ Music_DuelTheme3_Ch3: ; f68c2 (3d:68c2)
 .MainLoop
 	octave 2
 .Loop1
-	rept 4
+	;rept 4
 	;cutoff 4
 	note F#, 2
 	rest 1
-	endr
+	;---
+	;cutoff 4
+	note F#, 2
+	rest 1
+	;---
+	;cutoff 4
+	note F#, 2
+	rest 1
+	;---
+	;cutoff 4
+	note F#, 2
+	rest 1
+	;endr
 	;cutoff 8
 	note E_, 2
 	note F_, 2
@@ -944,16 +1132,34 @@ Music_DuelTheme3_Ch3: ; f68c2 (3d:68c2)
 	sound_loop 2, .Loop3
 	octave 2
 .Loop4
-	rept 4
+	;rept 4
 	note F#, 1
 	rest 2
-	endr
-	note G_, 2
-	note G_, 2
-	rept 4
+	;---
 	note F#, 1
 	rest 2
-	endr
+	;---
+	note F#, 1
+	rest 2
+	;---
+	note F#, 1
+	rest 2
+	;endr
+	note G_, 2
+	note G_, 2
+	;rept 4
+	note F#, 1
+	rest 2
+	;---
+	note F#, 1
+	rest 2
+	;---
+	note F#, 1
+	rest 2
+	;---
+	note F#, 1
+	rest 2
+	;endr
 	note E_, 2
 	note F_, 2
 	sound_loop 2, .Loop4
@@ -1000,29 +1206,65 @@ Music_DuelTheme3_Ch3: ; f68c2 (3d:68c2)
 	note E_, 4
 	dec_octave
 .Loop7
-	rept 4
+	;rept 4
 	note F#, 1
 	rest 2
-	endr
+	;---
+	note F#, 1
+	rest 2
+	;---
+	note F#, 1
+	rest 2
+	;---
+	note F#, 1
+	rest 2
+	;endr
 	note F#, 2
 	note F_, 2
-	rept 4
+	;rept 4
 	note E_, 1
 	rest 2
-	endr
+	;---
+	note E_, 1
+	rest 2
+	;---
+	note E_, 1
+	rest 2
+	;---
+	note E_, 1
+	rest 2
+	;endr
 	note E_, 2
 	note F_, 2
 	sound_loop 6, .Loop7
 	;cutoff 7
 .Loop8
 	inc_octave
-	rept 4
+	;rept 4
 	note F#, 1
 	dec_octave
 	note F#, 1
 	note F#, 1
 	inc_octave
-	endr
+	;---
+	note F#, 1
+	dec_octave
+	note F#, 1
+	note F#, 1
+	inc_octave
+	;---
+	note F#, 1
+	dec_octave
+	note F#, 1
+	note F#, 1
+	inc_octave
+	;---
+	note F#, 1
+	dec_octave
+	note F#, 1
+	note F#, 1
+	inc_octave
+	;endr
 	note F#, 1
 	dec_octave
 	note F#, 1
@@ -1031,13 +1273,31 @@ Music_DuelTheme3_Ch3: ; f68c2 (3d:68c2)
 	dec_octave
 	note F#, 1
 	inc_octave
-	rept 4
+	;rept 4
 	note E_, 1
 	dec_octave
 	note E_, 1
 	note E_, 1
 	inc_octave
-	endr
+	;---
+	note E_, 1
+	dec_octave
+	note E_, 1
+	note E_, 1
+	inc_octave
+	;---
+	note E_, 1
+	dec_octave
+	note E_, 1
+	note E_, 1
+	inc_octave
+	;---
+	note E_, 1
+	dec_octave
+	note E_, 1
+	note E_, 1
+	inc_octave
+	;endr
 	note E_, 1
 	dec_octave
 	note E_, 1
@@ -1232,11 +1492,23 @@ Music_DuelTheme3_Ch4: ; f6a3f (3d:6a3f)
 	drum_speed 11
 .MainLoop
 .Loop1
-	rept 4
+	;rept 4
 	drum_note 5, 1
 	drum_note 4, 1
 	drum_note 4, 1
-	endr
+	;---
+	drum_note 5, 1
+	drum_note 4, 1
+	drum_note 4, 1
+	;---
+	drum_note 5, 1
+	drum_note 4, 1
+	drum_note 4, 1
+	;---
+	drum_note 5, 1
+	drum_note 4, 1
+	drum_note 4, 1
+	;endr
 	drum_note 5, 1
 	drum_note 4, 1
 	drum_note 5, 1
@@ -1516,14 +1788,42 @@ Branch_f6b7e:
 Branch_f6b9a:
 	drum_speed 11
 .Loop9
-	rept 5
+	;rept 5
 	drum_note 1, 1
 	drum_speed 1
 	drum_note 4, 5
 	drum_note 3, 6
 	drum_speed 11
 	drum_note 2, 1
-	endr
+	;---
+	drum_note 1, 1
+	drum_speed 1
+	drum_note 4, 5
+	drum_note 3, 6
+	drum_speed 11
+	drum_note 2, 1
+	;---
+	drum_note 1, 1
+	drum_speed 1
+	drum_note 4, 5
+	drum_note 3, 6
+	drum_speed 11
+	drum_note 2, 1
+	;---
+	drum_note 1, 1
+	drum_speed 1
+	drum_note 4, 5
+	drum_note 3, 6
+	drum_speed 11
+	drum_note 2, 1
+	;---
+	drum_note 1, 1
+	drum_speed 1
+	drum_note 4, 5
+	drum_note 3, 6
+	drum_speed 11
+	drum_note 2, 1
+	;endr
 	drum_note 1, 1
 	sound_loop 3, .Loop9
 .Loop10

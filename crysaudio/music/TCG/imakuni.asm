@@ -203,13 +203,19 @@ Music_Imakuni_Ch2: ; fae32 (3e:6e32)
 	sound_call Branch_faea5
 	sound_loop 6, .Loop1
 .Loop2
-	rept 2
+	;rept 2
 	notetype0 3
 	rest 10
 	notetype0 1
 	note C_, 7
 	rest 8
-	endr
+	;---
+	notetype0 3
+	rest 10
+	notetype0 1
+	note C_, 7
+	rest 8
+	;endr
 	rest 15
 	note C_, 7
 	rest 8
@@ -264,9 +270,11 @@ Music_Imakuni_Ch2: ; fae32 (3e:6e32)
 .Loop4
 	note D_, 7
 	rest 8
-	rept 2
+	;rept 2
 	rest 15
-	endr
+	;---
+	rest 15
+	;endr
 	sound_loop 4, .Loop4
 	note D_, 7
 	rest 8
@@ -284,11 +292,15 @@ Branch_faea5:
 	notetype0 6
 	rest 10
 	notetype0 1
-	rept 2
+	;rept 2
 	rest 15
 	note C#, 7
 	rest 8
-	endr
+	;---
+	rest 15
+	note C#, 7
+	rest 8
+	;endr
 	vibrato 8, 3, 3
 	notetype0 9
 	rest 10

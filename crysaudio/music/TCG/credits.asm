@@ -2907,10 +2907,13 @@ Music_TCGCredits_Ch3: ; fbb9d (3e:7b9d)
 	sound_call Branch_fbd47
 	octave 2
 .Loop2
-	rept 2
+	;rept 2
 	note B_, 6
 	rest 7
-	endr
+	;---
+	note B_, 6
+	rest 7
+	;endr
 	inc_octave
 	;cutoff 4
 	note G_, 13
@@ -2920,10 +2923,13 @@ Music_TCGCredits_Ch3: ; fbb9d (3e:7b9d)
 	rest 7
 	sound_loop 2, .Loop2
 .Loop3
-	rept 2
+	;rept 2
 	note A_, 6
 	rest 7
-	endr
+	;---
+	note A_, 6
+	rest 7
+	;endr
 	inc_octave
 	;cutoff 4
 	note F_, 13
@@ -2933,10 +2939,13 @@ Music_TCGCredits_Ch3: ; fbb9d (3e:7b9d)
 	rest 7
 	sound_loop 2, .Loop3
 .Loop4
-	rept 2
+	;rept 2
 	note G#, 6
 	rest 7
-	endr
+	;---
+	note G#, 6
+	rest 7
+	;endr
 	inc_octave
 	;cutoff 4
 	note F_, 13
@@ -3153,10 +3162,13 @@ Music_TCGCredits_Ch3: ; fbb9d (3e:7b9d)
 Branch_fbd47:
 	octave 3
 .Loop12
-	rept 2
+	;rept 2
 	note C_, 6
 	rest 7
-	endr
+	;---
+	note C_, 6
+	rest 7
+	;endr
 	;cutoff 4
 	note G_, 13
 	;cutoff 8
@@ -3168,10 +3180,13 @@ Branch_fbd47:
 Branch_fbd58:
 	octave 2
 .Loop13
-	rept 2
+	;rept 2
 	note B_, 6
 	rest 7
-	endr
+	;---
+	note B_, 6
+	rest 7
+	;endr
 	inc_octave
 	;cutoff 4
 	note G_, 13
@@ -3185,10 +3200,13 @@ Branch_fbd58:
 Branch_fbd6b:
 	octave 2
 .Loop14
-	rept 2
+	;rept 2
 	note A_, 6
 	rest 7
-	endr
+	;---
+	note A_, 6
+	rest 7
+	;endr
 	inc_octave
 	;cutoff 4
 	note G_, 13
@@ -3202,10 +3220,13 @@ Branch_fbd6b:
 Branch_fbd7e:
 	octave 2
 .Loop15
-	rept 2
+	;rept 2
 	note G_, 6
 	rest 7
-	endr
+	;---
+	note G_, 6
+	rest 7
+	;endr
 	inc_octave
 	;cutoff 4
 	note G_, 13
@@ -3219,10 +3240,13 @@ Branch_fbd7e:
 Branch_fbd91:
 	octave 2
 .Loop16
-	rept 2
+	;rept 2
 	note F_, 6
 	rest 7
-	endr
+	;---
+	note F_, 6
+	rest 7
+	;endr
 	inc_octave
 	;cutoff 4
 	note F_, 13
@@ -3236,10 +3260,13 @@ Branch_fbd91:
 Branch_fbda4:
 	octave 2
 .Loop17
-	rept 2
+	;rept 2
 	note E_, 6
 	rest 7
-	endr
+	;---
+	note E_, 6
+	rest 7
+	;endr
 	inc_octave
 	;cutoff 4
 	note E_, 13
@@ -3253,10 +3280,13 @@ Branch_fbda4:
 Branch_fbdb7:
 	octave 2
 .Loop18
-	rept 2
+	;rept 2
 	note D_, 6
 	rest 7
-	endr
+	;---
+	note D_, 6
+	rest 7
+	;endr
 	inc_octave
 	;cutoff 4
 	note F_, 13
@@ -3270,10 +3300,13 @@ Branch_fbdb7:
 Branch_fbdca:
 	octave 2
 .Loop19
-	rept 2
+	;rept 2
 	note G_, 6
 	rest 7
-	endr
+	;---
+	note G_, 6
+	rest 7
+	;endr
 	inc_octave
 	;cutoff 4
 	note F_, 13
@@ -3287,10 +3320,13 @@ Branch_fbdca:
 Branch_fbddd:
 	octave 2
 .Loop20
-	rept 2
+	;rept 2
 	note F_, 6
 	rest 7
-	endr
+	;---
+	note F_, 6
+	rest 7
+	;endr
 	inc_octave
 	;cutoff 4
 	note G#, 13
@@ -3304,10 +3340,13 @@ Branch_fbddd:
 Branch_fbdf0:
 	octave 2
 .Loop21
-	rept 2
+	;rept 2
 	note A#, 6
 	rest 7
-	endr
+	;---
+	note A#, 6
+	rest 7
+	;endr
 	inc_octave
 	;cutoff 4
 	note F_, 13
@@ -3336,10 +3375,13 @@ Branch_fbe03:
 Branch_fbe10:
 	octave 2
 .Loop22
-	rept 2
+	;rept 2
 	note E_, 6
 	rest 7
-	endr
+	;---
+	note E_, 6
+	rest 7
+	;endr
 	inc_octave
 	;cutoff 4
 	note G_, 13

@@ -527,10 +527,16 @@ Music_DuelTheme1_Ch2: ; f55e7 (3d:55e7)
 	notetype1 9
 	octave 2
 .Loop1
-	rept 3
+	;rept 3
 	note D_, 1
 	rest 2
-	endr
+	;---
+	note D_, 1
+	rest 2
+	;---
+	note D_, 1
+	rest 2
+	;endr
 	rest 1
 	dec_octave
 	note A_, 1
@@ -1336,10 +1342,16 @@ Music_DuelTheme1_Ch3: ; f5a32 (3d:5a32)
 	octave 2
 .MainLoop
 .Loop1
-	rept 3
+	;rept 3
 	note D_, 1
 	rest 2
-	endr
+	;---
+	note D_, 1
+	rest 2
+	;---
+	note D_, 1
+	rest 2
+	;endr
 	rest 1
 	sound_call Branch_f5c47
 	sound_loop 4, .Loop1

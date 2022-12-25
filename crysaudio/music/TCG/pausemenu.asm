@@ -557,7 +557,7 @@ Music_PauseMenu_Ch4: ; f6ec8 (3d:6ec8)
 	octave 1
 .MainLoop
 .Loop1
-	rept 7
+	;rept 7
 	drum_note 1, 1
 	drum_note 4, 1
 	drum_note 5, 2
@@ -572,7 +572,97 @@ Music_PauseMenu_Ch4: ; f6ec8 (3d:6ec8)
 	drum_note 4, 1
 	drum_note 5, 1
 	drum_note 2, 1
-	endr
+	;---
+	drum_note 1, 1
+	drum_note 4, 1
+	drum_note 5, 2
+	drum_note 2, 1
+	drum_note 4, 1
+	drum_note 5, 1
+	drum_note 3, 1
+	drum_note 1, 1
+	drum_note 4, 1
+	drum_note 5, 2
+	drum_note 2, 1
+	drum_note 4, 1
+	drum_note 5, 1
+	drum_note 2, 1
+	;---
+	drum_note 1, 1
+	drum_note 4, 1
+	drum_note 5, 2
+	drum_note 2, 1
+	drum_note 4, 1
+	drum_note 5, 1
+	drum_note 3, 1
+	drum_note 1, 1
+	drum_note 4, 1
+	drum_note 5, 2
+	drum_note 2, 1
+	drum_note 4, 1
+	drum_note 5, 1
+	drum_note 2, 1
+	;---
+	drum_note 1, 1
+	drum_note 4, 1
+	drum_note 5, 2
+	drum_note 2, 1
+	drum_note 4, 1
+	drum_note 5, 1
+	drum_note 3, 1
+	drum_note 1, 1
+	drum_note 4, 1
+	drum_note 5, 2
+	drum_note 2, 1
+	drum_note 4, 1
+	drum_note 5, 1
+	drum_note 2, 1
+	;---
+	drum_note 1, 1
+	drum_note 4, 1
+	drum_note 5, 2
+	drum_note 2, 1
+	drum_note 4, 1
+	drum_note 5, 1
+	drum_note 3, 1
+	drum_note 1, 1
+	drum_note 4, 1
+	drum_note 5, 2
+	drum_note 2, 1
+	drum_note 4, 1
+	drum_note 5, 1
+	drum_note 2, 1
+	;---
+	drum_note 1, 1
+	drum_note 4, 1
+	drum_note 5, 2
+	drum_note 2, 1
+	drum_note 4, 1
+	drum_note 5, 1
+	drum_note 3, 1
+	drum_note 1, 1
+	drum_note 4, 1
+	drum_note 5, 2
+	drum_note 2, 1
+	drum_note 4, 1
+	drum_note 5, 1
+	drum_note 2, 1
+	;---
+	drum_note 1, 1
+	drum_note 4, 1
+	drum_note 5, 2
+	drum_note 2, 1
+	drum_note 4, 1
+	drum_note 5, 1
+	drum_note 3, 1
+	drum_note 1, 1
+	drum_note 4, 1
+	drum_note 5, 2
+	drum_note 2, 1
+	drum_note 4, 1
+	drum_note 5, 1
+	drum_note 2, 1
+	;endr
 	drum_note 1, 1
 	drum_note 4, 1
 	drum_note 5, 2
@@ -583,9 +673,23 @@ Music_PauseMenu_Ch4: ; f6ec8 (3d:6ec8)
 	drum_note 3, 4
 	drum_note 3, 3
 	drum_speed 7
-	rept 8
+	;rept 8
 	drum_note 2, 1
-	endr
+	;---
+	drum_note 2, 1
+	;---
+	drum_note 2, 1
+	;---
+	drum_note 2, 1
+	;---
+	drum_note 2, 1
+	;---
+	drum_note 2, 1
+	;---
+	drum_note 2, 1
+	;---
+	drum_note 2, 1
+	;endr
 	sound_loop 2, .Loop1
 	sound_loop 0, .MainLoop
 ; 0xf6ef1

@@ -423,10 +423,22 @@ Branch_f5f90:
 	notetype1 9
 	octave 1
 	note D_, 1
-	rept 5
+	;rept 5
 	note D_, 2
 	note D_, 1
-	endr
+	;---
+	note D_, 2
+	note D_, 1
+	;---
+	note D_, 2
+	note D_, 1
+	;---
+	note D_, 2
+	note D_, 1
+	;---
+	note D_, 2
+	note D_, 1
+	;endr
 	note D_, 2
 	duty_cycle 1
 	notetype1 10
@@ -834,10 +846,22 @@ Branch_f618f:
 	dec_octave
 	dec_octave
 	note D_, 1
-	rept 5
+	;rept 5
 	note D_, 2
 	note D_, 1
-	endr
+	;---
+	note D_, 2
+	note D_, 1
+	;---
+	note D_, 2
+	note D_, 1
+	;---
+	note D_, 2
+	note D_, 1
+	;---
+	note D_, 2
+	note D_, 1
+	;endr
 	note D_, 2
 	notetype1 7
 	;frequency_offset 0
@@ -864,9 +888,13 @@ Music_DuelTheme2_Ch3: ; f61ac (3d:61ac)
 	sound_call Branch_f62e5
 	sound_loop 44, .Loop2
 .Loop3
-	rept 3
+	;rept 3
 	sound_call Branch_f62e5
-	endr
+	;---
+	sound_call Branch_f62e5
+	;---
+	sound_call Branch_f62e5
+	;endr
 	octave 2
 	;cutoff 4
 	note D_, 2
@@ -1056,9 +1084,13 @@ Music_DuelTheme2_Ch3: ; f61ac (3d:61ac)
 	dec_octave
 	sound_loop 2, .Loop16
 .Loop17
-	rept 3
+	;rept 3
 	sound_call Branch_f62e5
-	endr
+	;---
+	sound_call Branch_f62e5
+	;---
+	sound_call Branch_f62e5
+	;endr
 	octave 2
 	;cutoff 4
 	note D_, 2
@@ -1136,9 +1168,19 @@ Music_DuelTheme2_Ch4: ; f62f3 (3d:62f3)
 	sound_call Branch_f6396
 .Loop6
 	sound_call Branch_f637c
-	rept 6
+	;rept 6
 	drum_note 2, 1
-	endr
+	;---
+	drum_note 2, 1
+	;---
+	drum_note 2, 1
+	;---
+	drum_note 2, 1
+	;---
+	drum_note 2, 1
+	;---
+	drum_note 2, 1
+	;endr
 	drum_note 2, 2
 	drum_note 6, 3
 	drum_note 2, 1
@@ -1187,9 +1229,19 @@ Music_DuelTheme2_Ch4: ; f62f3 (3d:62f3)
 	sound_call Branch_f6396
 .Loop10
 	sound_call Branch_f637c
-	rept 6
+	;rept 6
 	drum_note 2, 1
-	endr
+	;---
+	drum_note 2, 1
+	;---
+	drum_note 2, 1
+	;---
+	drum_note 2, 1
+	;---
+	drum_note 2, 1
+	;---
+	drum_note 2, 1
+	;endr
 	drum_note 2, 2
 	drum_note 6, 3
 	drum_note 2, 1

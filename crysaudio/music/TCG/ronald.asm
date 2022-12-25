@@ -1162,7 +1162,7 @@ Music_Ronald_Ch4: ; face0 (3e:6ce0)
 	drum_note 2, 7
 	sound_loop 2, .Loop2
 .Loop3
-	rept 7
+	;rept 7
 	sound_call Branch_fad46
 	drum_note 4, 13
 	sound_call Branch_fad4f
@@ -1174,16 +1174,97 @@ Music_Ronald_Ch4: ; face0 (3e:6ce0)
 	drum_note 2, 13
 	drum_note 4, 6
 	drum_note 3, 7
-	endr
+	;---
+	sound_call Branch_fad46
+	drum_note 4, 13
+	sound_call Branch_fad4f
+	drum_note 3, 7
+	drum_note 1, 6
+	drum_note 3, 7
+	drum_note 5, 6
+	drum_note 1, 7
+	drum_note 2, 13
+	drum_note 4, 6
+	drum_note 3, 7
+	;---
+	sound_call Branch_fad46
+	drum_note 4, 13
+	sound_call Branch_fad4f
+	drum_note 3, 7
+	drum_note 1, 6
+	drum_note 3, 7
+	drum_note 5, 6
+	drum_note 1, 7
+	drum_note 2, 13
+	drum_note 4, 6
+	drum_note 3, 7
+	;---
+	sound_call Branch_fad46
+	drum_note 4, 13
+	sound_call Branch_fad4f
+	drum_note 3, 7
+	drum_note 1, 6
+	drum_note 3, 7
+	drum_note 5, 6
+	drum_note 1, 7
+	drum_note 2, 13
+	drum_note 4, 6
+	drum_note 3, 7
+	;---
+	sound_call Branch_fad46
+	drum_note 4, 13
+	sound_call Branch_fad4f
+	drum_note 3, 7
+	drum_note 1, 6
+	drum_note 3, 7
+	drum_note 5, 6
+	drum_note 1, 7
+	drum_note 2, 13
+	drum_note 4, 6
+	drum_note 3, 7
+	;---
+	sound_call Branch_fad46
+	drum_note 4, 13
+	sound_call Branch_fad4f
+	drum_note 3, 7
+	drum_note 1, 6
+	drum_note 3, 7
+	drum_note 5, 6
+	drum_note 1, 7
+	drum_note 2, 13
+	drum_note 4, 6
+	drum_note 3, 7
+	;---
+	sound_call Branch_fad46
+	drum_note 4, 13
+	sound_call Branch_fad4f
+	drum_note 3, 7
+	drum_note 1, 6
+	drum_note 3, 7
+	drum_note 5, 6
+	drum_note 1, 7
+	drum_note 2, 13
+	drum_note 4, 6
+	drum_note 3, 7
+	;endr
 	sound_call Branch_fad46
 	drum_note 4, 13
 	sound_call Branch_fad4f
 	drum_note 3, 3
 	drum_note 3, 4
-	rept 4
+	;rept 4
 	drum_note 2, 6
 	drum_note 2, 7
-	endr
+	;---
+	drum_note 2, 6
+	drum_note 2, 7
+	;---
+	drum_note 2, 6
+	drum_note 2, 7
+	;---
+	drum_note 2, 6
+	drum_note 2, 7
+	;endr
 	sound_loop 2, .Loop3
 .Loop4
 	sound_call Branch_fad46
