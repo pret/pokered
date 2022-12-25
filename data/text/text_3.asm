@@ -271,6 +271,12 @@ _StatusChangesEliminatedText::
 	line "are eliminated!"
 	prompt
 
+_ImmuneToPsychicText::
+	text "<USER> is"
+	line "now immune to"
+	cont "PSYCHIC-type!"
+	prompt
+
 _StartedSleepingEffect::
 	text "<USER>"
 	line "started sleeping!"
@@ -309,6 +315,8 @@ _ReflectGainedArmorText::
 _ShroudedInMistText::
 	text "<USER>'s"
 	line "shrouded in mist!"
+	para "<USER>"
+	line "became ethereal!"
 	prompt
 
 _SuckedHealthText::

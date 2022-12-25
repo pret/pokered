@@ -505,6 +505,7 @@ LaprasEvosMoves:
 ; Learnset
 	db 30, BODY_SLAM
 	db 33, CONFUSE_RAY
+	db 36, MIST
 	db 38, ICE_BEAM
 	db 46, HYDRO_PUMP
 	db 53, BLIZZARD
@@ -887,6 +888,7 @@ ArbokEvosMoves:
 	db 36, LEECH_LIFE
 	db 43, SUPER_FANG
 	db 50, SKULL_BASH
+	db 54, HAZE
 	db 0
 
 ParasectEvosMoves:
@@ -1075,6 +1077,7 @@ SeelEvosMoves:
 	db 32, BODY_SLAM
 	db 35, ICE_BEAM
 	db 39, SKULL_BASH
+	db 41, MIST
 	db 43, AMNESIA
 	db 50, BLIZZARD
 	db 55, SWIFT
@@ -1243,6 +1246,7 @@ JynxEvosMoves:
 	db 42, LOVELY_KISS
 	db 47, BLIZZARD
 	db 54, EGG_BOMB
+	db 63, MIST
 	db 0
 
 MoltresEvosMoves:
@@ -1660,6 +1664,8 @@ VaporeonEvosMoves: ; Automatically tries to learn WATER_GUN on evolution
 	db 35, GLARE
 	db 44, SWIFT
 	db 49, HYDRO_PUMP
+	db 65, MIST
+	db 65, HAZE
 	db 0
 
 MachopEvosMoves:
@@ -1715,6 +1721,7 @@ EkansEvosMoves:
 	db 36, LEECH_LIFE
 	db 43, SUPER_FANG
 	db 50, SKULL_BASH
+	db 54, HAZE
 	db 0
 
 ParasEvosMoves:
@@ -1796,6 +1803,7 @@ BeedrillEvosMoves:
 	db 35, AGILITY
 	db 40, DRILL_PECK
 	db 47, SPIKE_CANNON
+	db 54, HAZE
 	db 0
 
 MissingNo73EvosMoves:
@@ -1887,6 +1895,7 @@ DewgongEvosMoves:
 	db 32, BODY_SLAM
 	db 35, ICE_BEAM
 	db 39, SKULL_BASH
+	db 41, MIST
 	db 43, AMNESIA
 	db 50, BLIZZARD
 	db 55, SWIFT
@@ -1936,6 +1945,7 @@ ButterfreeEvosMoves:
 	db 35, PSYCHIC_M
 	db 45, DREAM_EATER
 	db 45, SLEEP_POWDER
+	db 50, MIST
 	db 0
 
 MachampEvosMoves:
@@ -2144,6 +2154,7 @@ ClefableEvosMoves:
 	db 45, SKY_ATTACK
 	db 54, DREAM_EATER
 	db 54, LOVELY_KISS
+	db 59, MIST
 	db 65, MINIMIZE
 	db 0
 
@@ -2359,6 +2370,7 @@ GoldeenEvosMoves:
 	db 35, DOUBLE_EDGE
 	db 38, SKULL_BASH
 	db 43, WITHDRAW
+	db 45, MIST
 	db 47, HYDRO_PUMP
 	db 52, TWINEEDLE
 	db 57, HYPER_BEAM
@@ -2377,6 +2389,7 @@ SeakingEvosMoves:
 	db 35, DOUBLE_EDGE
 	db 38, SKULL_BASH
 	db 43, WITHDRAW
+	db 45, MIST
 	db 47, HYDRO_PUMP
 	db 52, TWINEEDLE
 	db 57, HYPER_BEAM

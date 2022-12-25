@@ -1423,8 +1423,8 @@ ClearHyperBeam:
 	pop hl
 	ret
 
-RageEffect: ; PureRGBnote: CHANGED: rage effect was changed
-	ret
+;RageEffect: ; PureRGBnote: CHANGED: rage effect was changed so don't need this
+	;ret
 	;ld hl, wPlayerBattleStatus2
 	;ldh a, [hWhoseTurn]
 	;and a

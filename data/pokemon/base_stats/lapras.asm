@@ -10,7 +10,7 @@
 	INCBIN "gfx/pokemon/front/lapras.pic", 0, 1 ; sprite dimensions
 	dw LaprasPicFront, LaprasPicBackSW
 
-	db MIST, SING, AURORA_BEAM, BUBBLEBEAM ; level 1 learnset
+	db SING, AURORA_BEAM, BUBBLEBEAM, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset

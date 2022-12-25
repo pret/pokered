@@ -1934,7 +1934,7 @@ ItemUseGuardSpec:
 	and a
 	jp z, ItemUseInBattle ; PureRGBnote: CHANGED: text that displays when using out of battle indicates it's for use in battle
 	ld hl, wPlayerBattleStatus2
-	set PROTECTED_BY_MIST, [hl] ; Mist bit
+	set STAT_DOWN_IMMUNITY, [hl] ; Mist bit
 	jp PrintItemUseTextAndRemoveItem
 
 ItemUseSuperRepel:

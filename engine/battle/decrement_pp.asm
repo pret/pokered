@@ -9,8 +9,6 @@ DecrementPP:
 	                     ; wPlayerBattleStatus2 status flags later
 	and (1 << THRASHING_ABOUT) | (1 << ATTACKING_MULTIPLE_TIMES) ; PureRGBnote: CHANGED: bide effect was changed so dont need to check the status here
 	ret nz               ; if any of these statuses are true, don't decrement PP
-	bit USING_RAGE, [hl]
-	ret nz               ; don't decrement PP either if Pokemon is using Rage
 	ld hl, wBattleMonPP  ; PP of first move (in battle)
 
 ; decrement PP in the battle struct

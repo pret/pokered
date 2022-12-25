@@ -126,7 +126,7 @@ Moves:
 	move DEFENSE_CURL, LIGHT_SCREEN_EFFECT,          0, NORMAL,       100, 40
 	move BARRIER,      DEFENSE_UP2_EFFECT,           0, GHOST,        100, 30
 	move LIGHT_SCREEN, LIGHT_SCREEN_EFFECT,          0, PSYCHIC_TYPE, 100, 30
-	move HAZE,         HAZE_EFFECT,                  0, ICE,          100, 30
+	move HAZE,         HAZE_EFFECT,                  0, POISON,       100, 30
 	move REFLECT,      REFLECT_EFFECT,               0, ELECTRIC,     100, 20
 	move FOCUS_ENERGY, FOCUS_ENERGY_EFFECT,          0, ELECTRIC,     100, 30 
 	move BIDE,         ATTACK_DEFENSE_UP1_EFFECT,    0, NORMAL,       100, 20

@@ -550,8 +550,20 @@ _FlamethrowerDexEntry::
 
 _MistDexEntry::
 	text "The user releases"
-	next "cool white mist,"
-	next "enshrouding it."
+	next "sparkling white"
+	next "mist composed of"
+
+	bage "ice crystals,"
+	next "enshrouding it in"
+	next "ethereal vapor."
+
+	bage "The user becomes"
+	next "ethereal; immune"
+	next "to NORMAL and"
+
+	bage "FIGHTING-type"
+	next "moves until it"
+	next "switches out."
 
 	bage "Prevents stats"
 	next "from decreasing"
@@ -559,10 +571,7 @@ _MistDexEntry::
 
 	bage "as GROWL, SCREECH"
 	next "SMOKESCREEN, etc."
-
-	bage "Lasts until the"
-	next "user switches"
-	next "out or faints"
+	next "as well"
 	dex
 
 _WaterGunDexEntry::
@@ -1249,26 +1258,28 @@ _LightScreenDexEntry::
 	dex
 
 _HazeDexEntry::
-	text "Black haze is"
-	next "spread about."
+	text "Black haze that"
+	next "disrupts psychic"
+	next "powers is spread"
+
+	bage "all over."
+	next "The user becomes"
+	next "immune to PSYCHIC"
+
+	bage "-type moves until"
+	next "it switches out."
 
 	bage "Resets all stat"
-	next "changes."
+	next "changes and cures"
+	next "confusion."
 
-	bage "Also resets"
-	next "effects of these"
-	next "moves:"
-
-	bage "FOCUS ENERGY,"
-	next "MIST, LEECH SEED,"
-	next "DISABLE."
-
-	bage "Also resets"
-	next "items: DIRE HIT,"
-	next "GUARD SPEC."
-
-	bage "Also cures"
-	next "confusion"
+	bage "Also resets these"
+	next "effects: MIST,"
+	next "FOCUS ENERGY,"
+	
+	bage "LEECH SEED,"
+	next "DISABLE, DIRE HIT"
+	next "GUARD SPEC"
 	dex
 
 _ReflectDexEntry::

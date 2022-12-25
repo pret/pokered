@@ -224,7 +224,7 @@ AIMoveChoiceModification1:
 	jp .nextMove
 .checkMistUp
 	ld a, [wEnemyBattleStatus2]
-	bit PROTECTED_BY_MIST, a
+	bit STAT_DOWN_IMMUNITY, a
 	jr nz, .discourage ; if the enemy has used mist, don't use it again
 	jp .nextMove
 .checkConfused

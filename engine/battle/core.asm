@@ -302,7 +302,7 @@ MainInBattleLoop:
 	xor a
 	ld [wFirstMonsNotOutYet], a
 	ld a, [wPlayerBattleStatus2]
-	and (1 << NEEDS_TO_RECHARGE) | (1 << USING_RAGE) ; check if the player is using Rage or needs to recharge
+	and (1 << NEEDS_TO_RECHARGE) ; check if the player is needs to recharge
 	jr nz, .selectEnemyMove
 ; the player is not using Rage and doesn't need to recharge
 	ld hl, wEnemyBattleStatus1
@@ -3021,7 +3021,7 @@ SelectEnemyMove:
 	jr .done
 .noLinkBattle
 	ld a, [wEnemyBattleStatus2]
-	and (1 << NEEDS_TO_RECHARGE) | (1 << USING_RAGE) ; need to recharge or using rage
+	and (1 << NEEDS_TO_RECHARGE) ; need to recharge
 	ret nz
 	ld hl, wEnemyBattleStatus1
 	ld a, [hl]
@@ -5395,6 +5395,8 @@ AdjustDamageForMoveType:
 	ld hl, wDamageMultipliers
 	set 7, [hl]
 .skipSameTypeAttackBonus
+	call CheckHazeMistImmunity
+	jr c, ForceTypeImmunity ; if the pokemon is immune to move due to haze or mist, skip ahead
 	ld a, [wMoveType]
 	ld b, a
 	ld hl, TypeEffects
@@ -5439,6 +5441,21 @@ AdjustDamageForMoveType:
 .endmulti	;skip straight to here if a is zero since the fix is not needed for immunity
 ;;;;
 	add b
+.gotMultiplier
+	call ApplyDamageMultiplier
+	pop bc
+	pop hl
+.nextTypePair
+	inc hl
+	inc hl
+	jp .loop
+.done
+	ret
+
+ForceTypeImmunity:
+	xor a
+	ldh [hMultiplier], a 
+ApplyDamageMultiplier:
 	ld [wDamageMultipliers], a
 	xor a
 	ldh [hMultiplicand], a
@@ -5465,13 +5482,6 @@ AdjustDamageForMoveType:
 	inc a
 	ld [wMoveMissed], a
 .skipTypeImmunity
-	pop bc
-	pop hl
-.nextTypePair
-	inc hl
-	inc hl
-	jp .loop
-.done
 	ret
 
 ; PureRGBnote: ADDED: type matchups can be switched to match how they behave in later generations if so desired
@@ -5572,6 +5582,8 @@ AIGetTypeEffectiveness:
 ;shinpokerednote: CHANGED: - if type-effectiveness bit is set, then do wPlayerMoveType and wEnemyMonType
 ;		-also changed neutral value from $10 to $0A since it makes more sense
 ;		-and modifying this to take into account both types
+	call CheckHazeMistImmunity
+	jr c, .done ; if the pokemon is immune to the move due to haze or mist, skip ahead
 	ld a, [wEnemyMoveType]
 	ld d, a                    ; d = type of enemy move
 	ld a, [wAITargetMonType1]
@@ -5687,7 +5699,7 @@ MoveHitTest:
 ; the moves that are marked with an asterisk are not affected since this
 ; function is not called when those moves are used
 	ld a, [wEnemyBattleStatus2]
-	bit PROTECTED_BY_MIST, a ; is mon protected by mist?
+	bit STAT_DOWN_IMMUNITY, a ; is mon protected by mist?
 	jp nz, .moveMissed
 .skipEnemyMistCheck
 	ld a, [wPlayerBattleStatus2]
@@ -5708,7 +5720,7 @@ MoveHitTest:
 .playerMistCheck
 ; similar to enemy mist check
 	ld a, [wPlayerBattleStatus2]
-	bit PROTECTED_BY_MIST, a ; is mon protected by mist?
+	bit STAT_DOWN_IMMUNITY, a ; is mon protected by mist?
 	jp nz, .moveMissed
 .skipPlayerMistCheck
 	ld a, [wEnemyBattleStatus2]
@@ -7729,4 +7741,37 @@ EmptyPartyMenuRedraw:
 	call RedrawPartyMenu 
 	xor a ; NORMAL_PARTY_MENU
 	ld [wPartyMenuTypeOrMessageID], a
+	ret
+
+CheckHazeMistImmunity:
+	ld a, [wMoveType]
+	cp PSYCHIC_TYPE
+	jr z, .hazeCheck
+	cp NORMAL
+	jr z, .mistCheck
+	cp FIGHTING
+	jr z, .mistCheck
+	jr .noImmunity
+.hazeCheck
+	call .getStatusProperty
+	bit PSYCHIC_IMMUNITY, [hl]
+	jr nz, .immunity
+	jr .noImmunity
+.mistCheck
+	call .getStatusProperty
+	bit NORMAL_FIGHTING_IMMUNITY, [hl]
+	jr nz, .immunity
+.noImmunity
+	and a ; clear carry
+	ret
+.immunity
+	scf
+	ret
+.getStatusProperty
+	ldh a, [hWhoseTurn]
+	and a
+	ld hl, wEnemyBattleStatus2
+	jr z, .playerTurn
+	ld hl, wPlayerBattleStatus2
+.playerTurn
 	ret
