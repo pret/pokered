@@ -6,13 +6,13 @@ Music_Imakuni:
 	channel 4, Music_Imakuni_Ch4
 
 Music_Imakuni_Ch1: ; fad55 (3e:6d55)
-	notetype0 3
+	speed 3
 	;stereo_panning 1, 1
 	;vibrato_type 5
 	vibrato 20, 3, 3
-	notetype2 8
+	fade_wave 8
 	duty_cycle 2
-	notetype1 10
+	channel_volume 10
 .MainLoop
 .Loop1
 	rest 10
@@ -25,17 +25,17 @@ Music_Imakuni_Ch1: ; fad55 (3e:6d55)
 	rest 8
 	note G_, 7
 	rest 8
-	notetype0 9
+	speed 9
 	note F_, 10
 	;tie
-	notetype0 1
+	speed 1
 	note F_, 7
 	rest 8
-	notetype0 9
+	speed 9
 	rest 10
 	sound_call Branch_fadf9
 	sound_call Branch_fae1d
-	notetype0 1
+	speed 1
 	octave 4
 	note E_, 7
 	rest 15
@@ -47,9 +47,9 @@ Music_Imakuni_Ch1: ; fad55 (3e:6d55)
 	note G#, 15
 	note A_, 7
 	rest 8
-	notetype0 3
+	speed 3
 	rest 15
-	notetype0 1
+	speed 1
 	rest 15
 	rest 15
 	inc_octave
@@ -73,14 +73,14 @@ Music_Imakuni_Ch1: ; fad55 (3e:6d55)
 	dec_octave
 	note G#, 7
 	rest 8
-	notetype0 7
+	speed 7
 	note F#, 15
-	notetype0 9
+	speed 9
 	rest 10
 	sound_call Branch_fadf9
 	sound_call Branch_fae1d
 	dec_octave
-	notetype0 1
+	speed 1
 	note F_, 7
 	rest 8
 	note B_, 7
@@ -97,9 +97,9 @@ Music_Imakuni_Ch1: ; fad55 (3e:6d55)
 	dec_octave
 	note G#, 7
 	note A_, 8
-	notetype0 3
+	speed 3
 	note F_, 10
-	notetype0 1
+	speed 1
 	note D#, 7
 	rest 8
 	note A_, 7
@@ -112,9 +112,9 @@ Music_Imakuni_Ch1: ; fad55 (3e:6d55)
 	note A#, 8
 	note F#, 7
 	note G_, 8
-	notetype0 3
+	speed 3
 	note D#, 10
-	notetype0 1
+	speed 1
 .Loop2
 	note D_, 7
 	dec_octave
@@ -131,13 +131,13 @@ Music_Imakuni_Ch1: ; fad55 (3e:6d55)
 	note D_, 7
 	note A_, 8
 	vibrato 5, 3, 3
-	notetype0 3
+	speed 3
 	note D_, 10
 	vibrato 20, 3, 3
 	sound_loop 0, .MainLoop
 
 Branch_fadf9:
-	notetype0 1
+	speed 1
 	octave 4
 	note C#, 7
 	rest 15
@@ -150,9 +150,9 @@ Branch_fadf9:
 	inc_octave
 	note D_, 7
 	rest 8
-	notetype0 5
+	speed 5
 	rest 9
-	notetype0 1
+	speed 1
 	rest 15
 	rest 15
 	note D_, 7
@@ -181,13 +181,13 @@ Branch_fae1d:
 	inc_octave
 	note G_, 7
 	rest 8
-	notetype0 9
+	speed 9
 	note F_, 10
 	;tie
-	notetype0 1
+	speed 1
 	note F_, 7
 	rest 8
-	notetype0 9
+	speed 9
 	rest 10
 	sound_ret
 
@@ -196,36 +196,36 @@ Music_Imakuni_Ch2: ; fae32 (3e:6e32)
 	;stereo_panning 1, 1
 	;vibrato_type 0
 	vibrato 0, 3, 3
-	notetype2 8
+	fade_wave 8
 	duty_cycle 1
-	notetype1 10
+	channel_volume 10
 .Loop1
 	sound_call Branch_faea5
 	sound_loop 6, .Loop1
 .Loop2
 	;rept 2
-	notetype0 3
+	speed 3
 	rest 10
-	notetype0 1
+	speed 1
 	note C_, 7
 	rest 8
 	;---
-	notetype0 3
+	speed 3
 	rest 10
-	notetype0 1
+	speed 1
 	note C_, 7
 	rest 8
 	;endr
 	rest 15
 	note C_, 7
 	rest 8
-	notetype0 3
+	speed 3
 	rest 10
-	notetype0 1
+	speed 1
 	note C_, 7
 	rest 8
 	rest 15
-	notetype0 3
+	speed 3
 	rest 10
 	vibrato 8, 3, 3
 	note C_, 10
@@ -234,7 +234,7 @@ Music_Imakuni_Ch2: ; fae32 (3e:6e32)
 .Loop3
 	sound_call Branch_faea5
 	sound_loop 2, .Loop3
-	notetype0 1
+	speed 1
 	octave 2
 	note F_, 15
 	;tie
@@ -248,9 +248,9 @@ Music_Imakuni_Ch2: ; fae32 (3e:6e32)
 	note A_, 8
 	note F_, 7
 	note D#, 8
-	notetype0 3
+	speed 3
 	rest 10
-	notetype0 1
+	speed 1
 	dec_octave
 	note D#, 15
 	;tie
@@ -264,9 +264,9 @@ Music_Imakuni_Ch2: ; fae32 (3e:6e32)
 	note G_, 8
 	note D#, 7
 	note C#, 8
-	notetype0 3
+	speed 3
 	rest 10
-	notetype0 1
+	speed 1
 .Loop4
 	note D_, 7
 	rest 8
@@ -289,9 +289,9 @@ Music_Imakuni_Ch2: ; fae32 (3e:6e32)
 
 Branch_faea5:
 	octave 3
-	notetype0 6
+	speed 6
 	rest 10
-	notetype0 1
+	speed 1
 	;rept 2
 	rest 15
 	note C#, 7
@@ -302,9 +302,9 @@ Branch_faea5:
 	rest 8
 	;endr
 	vibrato 8, 3, 3
-	notetype0 9
+	speed 9
 	rest 10
-	notetype0 3
+	speed 3
 	note C#, 10
 	vibrato 0, 3, 3
 	sound_ret
@@ -312,8 +312,8 @@ Branch_faea5:
 
 Music_Imakuni_Ch3: ; faebc (3e:6ebc)
 	;stereo_panning 1, 1
-	notetype1 1
-	notetype2 11
+	channel_volume 1
+	fade_wave 11
 	;vibrato_type 6
 	vibrato 0, 3, 3
 	;echo 0
@@ -321,7 +321,7 @@ Music_Imakuni_Ch3: ; faebc (3e:6ebc)
 .MainLoop
 	sound_call Branch_faf7d
 	vibrato 8, 3, 3
-	notetype0 1
+	speed 1
 	note D_, 15
 	;tie
 	note D_, 7
@@ -344,34 +344,34 @@ Music_Imakuni_Ch3: ; faebc (3e:6ebc)
 	sound_loop 4, .Loop1
 .Loop2
 	octave 3
-	notetype0 3
+	speed 3
 	note C_, 5
 	rest 5
 	inc_octave
-	notetype0 1
+	speed 1
 	note E_, 7
 	rest 8
 	dec_octave
-	notetype0 3
+	speed 3
 	note G#, 5
 	note A_, 5
 	inc_octave
-	notetype0 1
+	speed 1
 	note D#, 7
 	rest 8
 	rest 15
 	note D#, 7
 	rest 8
-	notetype0 3
+	speed 3
 	rest 5
 	dec_octave
 	note C_, 5
 	inc_octave
-	notetype0 1
+	speed 1
 	note E_, 7
 	rest 8
 	dec_octave
-	notetype0 3
+	speed 3
 	note G#, 5
 	note A_, 5
 	rest 5
@@ -386,7 +386,7 @@ Music_Imakuni_Ch3: ; faebc (3e:6ebc)
 	note D_, 10
 	vibrato 0, 3, 3
 	sound_loop 2, .Loop3
-	notetype0 1
+	speed 1
 	octave 2
 	note F_, 15
 	;tie
@@ -402,10 +402,10 @@ Music_Imakuni_Ch3: ; faebc (3e:6ebc)
 	note F_, 7
 	note D#, 8
 	vibrato 5, 3, 3
-	notetype0 3
+	speed 3
 	note F_, 10
 	vibrato 0, 3, 3
-	notetype0 1
+	speed 1
 	dec_octave
 	note D#, 15
 	;tie
@@ -421,10 +421,10 @@ Music_Imakuni_Ch3: ; faebc (3e:6ebc)
 	note D#, 7
 	note C#, 8
 	vibrato 5, 3, 3
-	notetype0 3
+	speed 3
 	note D#, 10
 	vibrato 0, 3, 3
-	notetype0 1
+	speed 1
 .Loop4
 	octave 4
 	note C_, 7
@@ -453,37 +453,37 @@ Music_Imakuni_Ch3: ; faebc (3e:6ebc)
 	note G_, 2
 	dec_octave
 	note G_, 3
-	notetype0 8
+	speed 8
 	sound_loop 0, .MainLoop
 
 Branch_faf7d:
-	notetype0 3
+	speed 3
 	octave 2
 	note G_, 5
 	rest 5
 	inc_octave
-	notetype0 1
+	speed 1
 	note G_, 7
 	rest 8
-	notetype0 3
+	speed 3
 	note C#, 5
 	note D_, 5
 	inc_octave
-	notetype0 1
+	speed 1
 	note D_, 7
 	rest 8
 	rest 15
 	note D_, 7
 	rest 8
-	notetype0 3
+	speed 3
 	rest 5
 	octave 2
 	note G_, 5
 	inc_octave
-	notetype0 1
+	speed 1
 	note G_, 7
 	rest 8
-	notetype0 3
+	speed 3
 	note C#, 5
 	note D_, 5
 	rest 5

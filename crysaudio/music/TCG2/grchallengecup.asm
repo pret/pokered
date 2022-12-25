@@ -7,8 +7,8 @@ Music_GRChallengeCup:
 
 Music_GRChallengeCup_Ch2: ; 1f2d24 (7c:6d24)
 ;.MainLoop
-	notetype1 10
-	notetype0 1
+	channel_volume 10
+	speed 1
 	;musicdc 17
 	;musicf0 0
 	octave 4
@@ -70,16 +70,16 @@ Music_GRChallengeCup_Ch2: ; 1f2d24 (7c:6d24)
 	note B_, 15
 	note B_, 5
 	;musicef 250
-	notetype1 2
+	channel_volume 2
 	;musicf3
-	notetype0 6
+	speed 6
 	note A_, 10
 	;tie
-	notetype0 1
+	speed 1
 	note A_, 15
 	;tie
 	note A_, 10
-	notetype1 10
+	channel_volume 10
 	;musicf1 54
 	note A_, 5
 	note A_, 15
@@ -91,7 +91,7 @@ Music_GRChallengeCup_Ch2: ; 1f2d24 (7c:6d24)
 .Loop1
 	octave 2
 	;musicf2
-	notetype2 8
+	fade_wave 8
 	note E_, 5
 	note E_, 10
 	note E_, 5
@@ -113,7 +113,7 @@ Music_GRChallengeCup_Ch2: ; 1f2d24 (7c:6d24)
 .Loop2
 	octave 2
 	;musicf2
-	notetype2 8
+	fade_wave 8
 	note F_, 5
 	note F_, 10
 	note F_, 5
@@ -131,7 +131,7 @@ Music_GRChallengeCup_Ch2: ; 1f2d24 (7c:6d24)
 .Loop3
 	octave 2
 	;musicf2
-	notetype2 8
+	fade_wave 8
 	note F#, 5
 	note F#, 10
 	note F#, 5
@@ -148,7 +148,7 @@ Music_GRChallengeCup_Ch2: ; 1f2d24 (7c:6d24)
 	sound_loop 2, .Loop3
 	octave 2
 	;musicf2
-	notetype2 8
+	fade_wave 8
 	note F_, 5
 	note F_, 10
 	note F_, 5
@@ -164,7 +164,7 @@ Music_GRChallengeCup_Ch2: ; 1f2d24 (7c:6d24)
 	note F_, 2
 	octave 2
 	;musicf2
-	notetype2 8
+	fade_wave 8
 	note F_, 5
 	note F_, 10
 	note F_, 5
@@ -482,8 +482,8 @@ Music_GRChallengeCup_Ch2: ; 1f2d24 (7c:6d24)
 
 Music_GRChallengeCup_Ch1: ; 1f2f36 (7c:6f36)
 ;.MainLoop
-	notetype1 10
-	notetype0 1
+	channel_volume 10
+	speed 1
 	;musicdc 17
 	;musicf0 1
 	;musicef 255
@@ -550,16 +550,16 @@ Music_GRChallengeCup_Ch1: ; 1f2f36 (7c:6f36)
 	note D_, 15
 	note D_, 5
 	;musicef 250
-	notetype1 2
+	channel_volume 2
 	;musicf3
-	notetype0 6
+	speed 6
 	note C#, 10
 	;tie
-	notetype0 1
+	speed 1
 	note C#, 15
 	;tie
 	note C#, 10
-	notetype1 9
+	channel_volume 9
 	;musicf1 54
 	note C#, 5
 	note C#, 15
@@ -570,7 +570,7 @@ Music_GRChallengeCup_Ch1: ; 1f2f36 (7c:6f36)
 .Loop1
 	octave 1
 	;musicf2
-	notetype2 8
+	fade_wave 8
 	note A_, 5
 	note A_, 10
 	note A_, 5
@@ -592,7 +592,7 @@ Music_GRChallengeCup_Ch1: ; 1f2f36 (7c:6f36)
 .Loop2
 	octave 1
 	;musicf2
-	notetype2 8
+	fade_wave 8
 	note A_, 5
 	note A_, 10
 	note A_, 5
@@ -611,7 +611,7 @@ Music_GRChallengeCup_Ch1: ; 1f2f36 (7c:6f36)
 	sound_loop 5, .Loop2
 	octave 1
 	;musicf2
-	notetype2 8
+	fade_wave 8
 	note A_, 5
 	note A_, 10
 	note A_, 5
@@ -625,7 +625,7 @@ Music_GRChallengeCup_Ch1: ; 1f2f36 (7c:6f36)
 	note B_, 8
 	dec_octave
 	;musicf0 21
-	notetype1 8
+	channel_volume 8
 	octave 2
 	note A_, 5
 	rest 2
@@ -820,11 +820,11 @@ Music_GRChallengeCup_Ch1: ; 1f2f36 (7c:6f36)
 	;tie
 	note E_, 15
 	inc_octave
-	notetype1 6
+	channel_volume 6
 	note D_, 15
 	;tie
 	note D_, 15
-	notetype1 6
+	channel_volume 6
 	note C#, 15
 	;tie
 	note C#, 15
@@ -872,7 +872,7 @@ Music_GRChallengeCup_Ch1: ; 1f2f36 (7c:6f36)
 	;musicf3
 	note B_, 15
 	;musicf2
-	notetype2 8
+	fade_wave 8
 	note E_, 5
 	note E_, 3
 	note E_, 5
@@ -910,17 +910,17 @@ Branch_1f3150:
 	note G_, 4
 	note G_, 3
 	;musicf0 21
-	notetype1 8
+	channel_volume 8
 	octave 3
 	;musicf3
 	sound_ret
 
 
 Music_GRChallengeCup_Ch3: ; 1f315d (7c:715d)
-	notetype1 10
-	notetype0 1
-	notetype2 11
-	notetype1 1
+	channel_volume 10
+	speed 1
+	fade_wave 11
+	channel_volume 1
 	;musice9 96
 	;musicdc 17
 	octave 5
@@ -1290,10 +1290,10 @@ Music_GRChallengeCup_Ch3: ; 1f315d (7c:715d)
 
 Branch_1f333b:
 	octave 3
-	notetype1 2
+	channel_volume 2
 	;musice8 8
 	note A_, 15
-	notetype1 1
+	channel_volume 1
 	;musice8 4
 	;musicec 0
 	octave 2

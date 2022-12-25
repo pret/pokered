@@ -6,15 +6,15 @@ Music_PokemonDome:
 	channel 4, Music_PokemonDome_Ch4
 
 Music_PokemonDome_Ch1: ; f9251 (3e:5251)
-	notetype0 7
+	speed 7
 	;stereo_panning 1, 1
 	;vibrato_type 9
 	vibrato 20, 3, 3
-	notetype2 8
+	fade_wave 8
 	octave 2
 	duty_cycle 0
-	notetype1 10
-	notetype0 1
+	channel_volume 10
+	speed 1
 	note G_, 5
 	note A_, 5
 	note B_, 4
@@ -44,129 +44,129 @@ Music_PokemonDome_Ch1: ; f9251 (3e:5251)
 	note F_, 5
 	note G_, 4
 	duty_cycle 1
-	notetype1 8
+	channel_volume 8
 	dec_octave
-	notetype0 1
+	speed 1
 	note C_, 11
-	notetype1 3
+	channel_volume 3
 	note C_, 3
-	notetype1 8
+	channel_volume 8
 	note C_, 11
-	notetype1 3
+	channel_volume 3
 	note C_, 10
 	rest 7
-	notetype1 8
+	channel_volume 8
 	note C_, 4
-	notetype1 3
+	channel_volume 3
 	note C_, 3
-	notetype1 8
+	channel_volume 8
 	note C_, 4
-	notetype1 3
+	channel_volume 3
 	note C_, 3
-	notetype1 8
+	channel_volume 8
 	note C_, 11
-	notetype1 3
+	channel_volume 3
 	note C_, 3
-	notetype1 8
+	channel_volume 8
 	note C_, 11
-	notetype1 3
+	channel_volume 3
 	note C_, 10
-	notetype0 7
+	speed 7
 	rest 3
-	notetype1 8
-	notetype0 1
+	channel_volume 8
+	speed 1
 	note D_, 11
-	notetype1 3
+	channel_volume 3
 	note D_, 3
-	notetype1 8
+	channel_volume 8
 	note D_, 11
-	notetype1 3
+	channel_volume 3
 	note D_, 10
 	rest 7
-	notetype1 8
+	channel_volume 8
 	note D_, 4
-	notetype1 3
+	channel_volume 3
 	note D_, 3
-	notetype1 8
+	channel_volume 8
 	note D_, 4
-	notetype1 3
+	channel_volume 3
 	note D_, 3
-	notetype1 8
+	channel_volume 8
 	note D_, 11
-	notetype1 3
+	channel_volume 3
 	note D_, 3
-	notetype1 8
+	channel_volume 8
 	note D_, 11
-	notetype1 3
+	channel_volume 3
 	note D_, 3
 .MainLoop
-	notetype0 7
+	speed 7
 	duty_cycle 1
-	notetype1 10
+	channel_volume 10
 	octave 2
 	note G_, 4
 	inc_octave
 	duty_cycle 1
-	notetype1 8
-	notetype0 1
+	channel_volume 8
+	speed 1
 	note E_, 11
-	notetype1 3
+	channel_volume 3
 	note E_, 3
-	notetype1 8
-	notetype0 1
+	channel_volume 8
+	speed 1
 	note E_, 11
-	notetype1 3
+	channel_volume 3
 	note E_, 10
 	rest 7
-	notetype1 8
+	channel_volume 8
 	note E_, 4
-	notetype1 3
+	channel_volume 3
 	note E_, 3
-	notetype1 8
+	channel_volume 8
 	note E_, 4
-	notetype1 3
+	channel_volume 3
 	note E_, 3
-	notetype1 8
+	channel_volume 8
 	note E_, 11
-	notetype1 3
+	channel_volume 3
 	note E_, 3
-	notetype1 8
+	channel_volume 8
 	note E_, 11
-	notetype1 3
+	channel_volume 3
 	note E_, 10
-	notetype0 7
+	speed 7
 	rest 3
-	notetype1 8
-	notetype0 1
+	channel_volume 8
+	speed 1
 	note D_, 11
-	notetype1 3
+	channel_volume 3
 	note D_, 3
-	notetype1 8
+	channel_volume 8
 	note D_, 11
-	notetype1 3
+	channel_volume 3
 	note D_, 10
 	rest 7
-	notetype0 1
-	notetype1 8
+	speed 1
+	channel_volume 8
 	note D_, 4
-	notetype1 3
+	channel_volume 3
 	note D_, 3
-	notetype1 8
+	channel_volume 8
 	note D_, 4
-	notetype1 3
+	channel_volume 3
 	note D_, 3
-	notetype1 8
+	channel_volume 8
 	note D_, 11
-	notetype1 3
+	channel_volume 3
 	note D_, 3
-	notetype1 8
+	channel_volume 8
 	note D_, 11
-	notetype1 3
+	channel_volume 3
 	note D_, 3
 	duty_cycle 0
-	notetype1 10
+	channel_volume 10
 	dec_octave
-	notetype0 1
+	speed 1
 	note B_, 4
 	inc_octave
 	note C_, 3
@@ -176,75 +176,75 @@ Music_PokemonDome_Ch1: ; f9251 (3e:5251)
 	note G_, 3
 	note A_, 4
 	note B_, 3
-	notetype0 7
+	speed 7
 	inc_octave
 	note C_, 12
 	dec_octave
 	note G_, 1
-	notetype1 3
+	channel_volume 3
 	note G_, 1
 	rest 1
 	inc_octave
-	notetype1 10
+	channel_volume 10
 	note C_, 1
 	note D_, 10
-	notetype1 3
+	channel_volume 3
 	note D_, 2
-	notetype1 10
+	channel_volume 10
 	note G_, 3
-	notetype1 3
+	channel_volume 3
 	note G_, 1
-	notetype1 10
+	channel_volume 10
 	note F_, 10
-	notetype1 3
+	channel_volume 3
 	note F_, 2
-	notetype1 10
+	channel_volume 10
 	note C_, 3
-	notetype1 3
+	channel_volume 3
 	note C_, 1
-	notetype1 10
+	channel_volume 10
 	note F_, 10
 	note E_, 1
-	notetype1 3
+	channel_volume 3
 	note E_, 1
-	notetype1 10
+	channel_volume 10
 	note D_, 3
-	notetype1 3
+	channel_volume 3
 	note D_, 1
-	notetype1 10
+	channel_volume 10
 	note E_, 12
 	dec_octave
 	note G_, 1
-	notetype1 3
+	channel_volume 3
 	note G_, 1
 	rest 1
 	inc_octave
-	notetype1 10
+	channel_volume 10
 	note C_, 1
 	note D_, 8
 	dec_octave
 	note A_, 4
 	inc_octave
 	note D_, 3
-	notetype1 3
+	channel_volume 3
 	note D_, 1
-	notetype1 10
+	channel_volume 10
 	note C_, 14
-	notetype1 3
+	channel_volume 3
 	note C_, 2
 	dec_octave
-	notetype1 10
+	channel_volume 10
 	note B_, 10
-	notetype1 3
+	channel_volume 3
 	note B_, 2
-	notetype1 10
+	channel_volume 10
 	note G_, 4
 	note A_, 12
 	note B_, 1
-	notetype1 3
+	channel_volume 3
 	note B_, 2
 	inc_octave
-	notetype1 10
+	channel_volume 10
 	note C_, 1
 	note D_, 8
 	note E_, 4
@@ -254,54 +254,54 @@ Music_PokemonDome_Ch1: ; f9251 (3e:5251)
 	note G_, 8
 	;tie
 	note G_, 8
-	notetype1 3
+	channel_volume 3
 	note G_, 2
-	notetype1 10
+	channel_volume 10
 	note F_, 2
 	note E_, 2
-	notetype1 3
+	channel_volume 3
 	note E_, 1
-	notetype1 10
-	notetype0 1
+	channel_volume 10
+	speed 1
 	note E_, 5
-	notetype1 3
+	channel_volume 3
 	note E_, 2
-	notetype0 7
-	notetype1 10
+	speed 7
+	channel_volume 10
 	note E_, 1
-	notetype1 3
+	channel_volume 3
 	note E_, 1
 	rest 1
 	dec_octave
-	notetype1 10
+	channel_volume 10
 	note A_, 1
 	inc_octave
 	note C_, 8
 	note G_, 1
-	notetype1 3
+	channel_volume 3
 	note G_, 2
-	notetype1 10
+	channel_volume 10
 	note F_, 1
 	note E_, 1
-	notetype1 3
+	channel_volume 3
 	note E_, 1
 	rest 1
 	dec_octave
-	notetype1 10
+	channel_volume 10
 	note A_, 1
 	inc_octave
 	note C_, 8
 	note G_, 1
-	notetype1 3
+	channel_volume 3
 	note G_, 2
-	notetype1 10
+	channel_volume 10
 	note F_, 1
 	note E_, 1
-	notetype1 3
+	channel_volume 3
 	note E_, 1
 	rest 1
 	dec_octave
-	notetype1 10
+	channel_volume 10
 	note G#, 1
 	inc_octave
 	note C_, 12
@@ -317,15 +317,15 @@ Music_PokemonDome_Ch1: ; f9251 (3e:5251)
 
 
 Music_PokemonDome_Ch2: ; f93f8 (3e:53f8)
-	notetype0 7
+	speed 7
 	;stereo_panning 1, 1
 	;vibrato_type 9
 	vibrato 20, 3, 3
-	notetype2 8
+	fade_wave 8
 	octave 1
 	duty_cycle 0
-	notetype1 8
-	notetype0 1
+	channel_volume 8
+	speed 1
 	note B_, 5
 	inc_octave
 	note C_, 5
@@ -356,71 +356,71 @@ Music_PokemonDome_Ch2: ; f93f8 (3e:53f8)
 	note B_, 4
 .MainLoop
 	duty_cycle 1
-	notetype1 7
+	channel_volume 7
 	octave 3
-	notetype0 1
+	speed 1
 	note E_, 11
-	notetype1 3
+	channel_volume 3
 	note E_, 3
-	notetype1 7
+	channel_volume 7
 	note E_, 11
-	notetype1 3
+	channel_volume 3
 	note E_, 10
 	rest 7
-	notetype1 7
+	channel_volume 7
 	note E_, 4
-	notetype1 3
+	channel_volume 3
 	note E_, 3
-	notetype1 7
+	channel_volume 7
 	note E_, 4
-	notetype1 3
+	channel_volume 3
 	note E_, 3
-	notetype1 7
+	channel_volume 7
 	note E_, 11
-	notetype1 3
+	channel_volume 3
 	note E_, 3
-	notetype1 7
+	channel_volume 7
 	note E_, 11
-	notetype1 3
+	channel_volume 3
 	note E_, 10
-	notetype0 7
+	speed 7
 	rest 3
 	sound_call Branch_f9554
-	notetype0 7
+	speed 7
 	rest 4
-	notetype1 7
-	notetype0 1
+	channel_volume 7
+	speed 1
 	note G_, 11
-	notetype1 3
+	channel_volume 3
 	note G_, 3
-	notetype1 7
+	channel_volume 7
 	note G_, 11
-	notetype1 3
+	channel_volume 3
 	note G_, 10
 	rest 7
-	notetype1 7
+	channel_volume 7
 	note G_, 4
-	notetype1 3
+	channel_volume 3
 	note G_, 3
-	notetype1 7
+	channel_volume 7
 	note G_, 4
-	notetype1 3
+	channel_volume 3
 	note G_, 3
-	notetype1 7
+	channel_volume 7
 	note G_, 11
-	notetype1 3
+	channel_volume 3
 	note G_, 3
-	notetype1 7
+	channel_volume 7
 	note G_, 11
-	notetype1 3
+	channel_volume 3
 	note G_, 10
-	notetype0 7
+	speed 7
 	rest 3
 	sound_call Branch_f9554
 	duty_cycle 0
-	notetype1 8
+	channel_volume 8
 	dec_octave
-	notetype0 1
+	speed 1
 	note G_, 4
 	note A_, 3
 	note B_, 4
@@ -430,15 +430,15 @@ Music_PokemonDome_Ch2: ; f93f8 (3e:53f8)
 	note E_, 3
 	note F_, 4
 	note F#, 3
-	notetype0 7
+	speed 7
 	note G_, 10
 	note F_, 1
 	rest 1
 	note E_, 1
-	notetype1 2
+	channel_volume 2
 	note E_, 1
 	rest 1
-	notetype1 7
+	channel_volume 7
 	note G_, 1
 	note G_, 10
 	note A_, 2
@@ -462,13 +462,13 @@ Music_PokemonDome_Ch2: ; f93f8 (3e:53f8)
 	note E_, 4
 	note F#, 8
 	note F#, 4
-	notetype2 6
+	fade_wave 6
 	note F#, 3
-	notetype2 8
-	notetype0 1
+	fade_wave 8
+	speed 1
 	note F#, 5
 	rest 2
-	notetype0 7
+	speed 7
 	note F_, 14
 	rest 2
 	dec_octave
@@ -492,8 +492,8 @@ Music_PokemonDome_Ch2: ; f93f8 (3e:53f8)
 	note A_, 1
 	note B_, 1
 	duty_cycle 1
-	notetype1 8
-	notetype0 1
+	channel_volume 8
+	speed 1
 .Loop1
 	note F_, 5
 	note C_, 5
@@ -546,31 +546,31 @@ Music_PokemonDome_Ch2: ; f93f8 (3e:53f8)
 	inc_octave
 	note C#, 4
 	duty_cycle 0
-	notetype1 8
-	notetype0 7
+	channel_volume 8
+	speed 7
 .Loop5
 	note C_, 1
-	notetype1 2
+	channel_volume 2
 	note C_, 1
 	rest 1
-	notetype1 7
+	channel_volume 7
 	dec_octave
 	note F_, 1
 	note A_, 8
 	inc_octave
 	note E_, 1
-	notetype1 2
+	channel_volume 2
 	note E_, 1
 	rest 1
-	notetype1 7
+	channel_volume 7
 	note D_, 1
 	sound_loop 2, .Loop5
 	note C_, 1
-	notetype1 2
+	channel_volume 2
 	note C_, 1
 	rest 1
 	dec_octave
-	notetype1 7
+	channel_volume 7
 	note F_, 1
 	note G#, 12
 	note C_, 1
@@ -598,50 +598,50 @@ Music_PokemonDome_Ch2: ; f93f8 (3e:53f8)
 	sound_loop 0, .MainLoop
 
 Branch_f9554:
-	notetype0 1
-	notetype1 7
+	speed 1
+	channel_volume 7
 	note F_, 11
-	notetype1 3
+	channel_volume 3
 	note F_, 3
-	notetype1 7
+	channel_volume 7
 	note F_, 11
-	notetype1 3
+	channel_volume 3
 	note F_, 10
 	rest 7
-	notetype1 7
+	channel_volume 7
 	note F_, 4
-	notetype1 3
+	channel_volume 3
 	note F_, 3
-	notetype1 7
+	channel_volume 7
 	note F_, 4
-	notetype1 3
+	channel_volume 3
 	note F_, 3
 .Loop6
-	notetype1 7
+	channel_volume 7
 	note F_, 11
-	notetype1 3
+	channel_volume 3
 	note F_, 3
 	sound_loop 2, .Loop6
 	sound_ret
 
 
 Music_PokemonDome_Ch3: ; f9579 (3e:5579)
-	notetype0 7
+	speed 7
 	;stereo_panning 1, 1
-	notetype1 1
-	notetype2 11
+	channel_volume 1
+	fade_wave 11
 	;echo 64
 	;cutoff 6
 	octave 2
 	;cutoff 4
-	notetype0 1
+	speed 1
 .Loop1
 	note G_, 5
 	note G_, 5
 	note G_, 4
 	sound_loop 8, .Loop1
 	;cutoff 6
-	notetype0 7
+	speed 7
 .MainLoop
 	inc_octave
 	note C_, 2

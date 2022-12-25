@@ -6,12 +6,12 @@ Music_GRDuelTheme3:
 	channel 4, Music_GRDuelTheme3_Ch4
 
 Music_GRDuelTheme3_Ch2: ; 1f6517 (7d:6517)
-	notetype1 10
+	channel_volume 10
 .MainLoop
 	;musicf0 27
 	;musicdc 255
 	;musicf3
-	notetype0 1
+	speed 1
 	;musicef 1
 .Loop1
 	octave 3
@@ -797,12 +797,12 @@ Branch_1f672f:
 
 
 Music_GRDuelTheme3_Ch1: ; 1f6849 (7d:6849)
-	notetype1 10
+	channel_volume 10
 .MainLoop
 	;musicf0 27
 	;musicef 255
 	;musicdc 255
-	notetype0 1
+	speed 1
 	;musicf1 80
 .Loop1
 	octave 2
@@ -2146,11 +2146,11 @@ Branch_1f6df4:
 
 
 Music_GRDuelTheme3_Ch3: ; 1f6e11 (7d:6e11)
-	notetype1 10
-	notetype2 11
+	channel_volume 10
+	fade_wave 11
 	;musicdc 255
-	notetype0 1
-	notetype1 1
+	speed 1
+	channel_volume 1
 	;musice9 96
 .MainLoop
 	octave 3
@@ -2191,9 +2191,9 @@ Music_GRDuelTheme3_Ch3: ; 1f6e11 (7d:6e11)
 	note E_, 14
 	;tie
 	note E_, 7
-	notetype1 3
+	channel_volume 3
 	note E_, 6
-	notetype1 1
+	channel_volume 1
 	sound_loop 3, .Loop1
 	note D_, 14
 	;tie
@@ -2220,9 +2220,9 @@ Music_GRDuelTheme3_Ch3: ; 1f6e11 (7d:6e11)
 	note E_, 14
 	;tie
 	note E_, 13
-	notetype1 3
+	channel_volume 3
 	note E_, 7
-	notetype1 1
+	channel_volume 1
 	inc_octave
 	note D_, 7
 	note E_, 7
@@ -2268,9 +2268,9 @@ Music_GRDuelTheme3_Ch3: ; 1f6e11 (7d:6e11)
 	note E_, 14
 	;tie
 	note E_, 7
-	notetype1 3
+	channel_volume 3
 	note E_, 6
-	notetype1 1
+	channel_volume 1
 	note D_, 14
 	;tie
 	note D_, 7
@@ -2296,9 +2296,9 @@ Music_GRDuelTheme3_Ch3: ; 1f6e11 (7d:6e11)
 	note E_, 14
 	;tie
 	note E_, 13
-	notetype1 3
+	channel_volume 3
 	note E_, 7
-	notetype1 1
+	channel_volume 1
 	note B_, 7
 	inc_octave
 	note D_, 7
@@ -2343,9 +2343,9 @@ Music_GRDuelTheme3_Ch3: ; 1f6e11 (7d:6e11)
 	note F_, 14
 	;tie
 	note F_, 7
-	notetype1 3
+	channel_volume 3
 	note F_, 6
-	notetype1 1
+	channel_volume 1
 	vibrato 48, 3, 3
 	note F#, 14
 	;tie
@@ -2369,9 +2369,9 @@ Music_GRDuelTheme3_Ch3: ; 1f6e11 (7d:6e11)
 	note B_, 14
 	;tie
 	note B_, 13
-	notetype1 3
+	channel_volume 3
 	note B_, 7
-	notetype1 1
+	channel_volume 1
 	note B_, 7
 	inc_octave
 	note D_, 7

@@ -7,112 +7,112 @@ Music_DeckMachine:
 
 Music_DeckMachine_Ch1: ; f6ef1 (3d:6ef1)
 	;stereo_panning 1, 1
-	notetype2 8
+	fade_wave 8
 	duty_cycle 3
 .MainLoop
 	octave 5
-	notetype0 1
+	speed 1
 .Loop1
-	notetype2 6
-	notetype1 9
+	fade_wave 6
+	channel_volume 9
 	note C_, 7
-	notetype1 3
+	channel_volume 3
 	note C_, 8
-	notetype1 4
+	channel_volume 4
 	note C_, 8
-	notetype1 9
+	channel_volume 9
 	note G_, 7
-	notetype1 3
+	channel_volume 3
 	note G_, 8
-	notetype1 4
+	channel_volume 4
 	note C_, 7
-	notetype1 9
+	channel_volume 9
 	note E_, 7
-	notetype1 3
+	channel_volume 3
 	note E_, 8
-	notetype1 4
+	channel_volume 4
 	note E_, 8
-	notetype1 9
+	channel_volume 9
 	note C_, 7
-	notetype1 3
+	channel_volume 3
 	note C_, 8
-	notetype1 4
+	channel_volume 4
 	note C_, 7
-	notetype1 9
+	channel_volume 9
 	note G_, 7
-	notetype1 3
+	channel_volume 3
 	note G_, 8
-	notetype1 9
-	notetype2 4
+	channel_volume 9
+	fade_wave 4
 	note F_, 7
-	notetype2 5
-	notetype1 4
+	fade_wave 5
+	channel_volume 4
 	note G_, 8
 	sound_loop 9, .Loop1
-	notetype1 9
+	channel_volume 9
 	note C_, 7
-	notetype1 3
+	channel_volume 3
 	note C_, 8
-	notetype1 4
+	channel_volume 4
 	note C_, 15
-	notetype0 10
+	speed 10
 	rest 9
 	sound_loop 0, .MainLoop
 
 
 Music_DeckMachine_Ch2: ; f6f41 (3d:6f41)
 	;stereo_panning 1, 1
-	notetype2 8
+	fade_wave 8
 	duty_cycle 1
-	notetype2 7
+	fade_wave 7
 .MainLoop
 	octave 3
-	notetype0 1
+	speed 1
 .Loop1
 	rest 15
-	notetype1 11
+	channel_volume 11
 	rest 7
 	note C_, 8
-	notetype1 2
+	channel_volume 2
 	note C_, 8
 	rest 7
-	notetype1 11
+	channel_volume 11
 	note C_, 7
-	notetype1 2
+	channel_volume 2
 	note C_, 8
 	rest 7
-	notetype1 11
+	channel_volume 11
 	dec_octave
 	note A_, 8
-	notetype1 2
+	channel_volume 2
 	note A_, 8
 	rest 7
 	inc_octave
-	notetype1 11
+	channel_volume 11
 	note C_, 7
-	notetype1 2
+	channel_volume 2
 	note C_, 8
 	rest 15
 	sound_loop 9, .Loop1
-	notetype1 11
+	channel_volume 11
 	note E_, 7
-	notetype1 2
+	channel_volume 2
 	note E_, 8
 	rest 15
-	notetype0 10
+	speed 10
 	rest 9
 	sound_loop 0, .MainLoop
 
 
 Music_DeckMachine_Ch3: ; f6f7b (3d:6f7b)
 	;stereo_panning 1, 1
-	notetype1 1
-	notetype2 11
+	channel_volume 1
+	fade_wave 11
 	;echo 96
 	;cutoff 8
 .MainLoop
 	octave 3
-	notetype0 1
+	speed 1
 .Loop1
 	note C_, 7
 	rest 8
@@ -217,9 +217,9 @@ Music_DeckMachine_Ch3: ; f6f7b (3d:6f7b)
 	rest 8
 	note C_, 15
 	rest 15
-	notetype0 10
+	speed 10
 	rest 3
-	notetype0 1
+	speed 1
 	rest 7
 	dec_octave
 	note G_, 15

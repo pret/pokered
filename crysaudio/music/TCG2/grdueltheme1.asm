@@ -6,9 +6,9 @@ Music_GRDuelTheme1:
 	channel 4, Music_GRDuelTheme1_Ch4
 
 Music_GRDuelTheme1_Ch2: ; 1f5865 (7d:5865)
-	notetype1 10
+	channel_volume 10
 	;musicdc 255
-	notetype0 1
+	speed 1
 	;musicf0 16
 	octave 3
 	;musicf1 54
@@ -906,9 +906,9 @@ Branch_1f5ae8:
 
 
 Music_GRDuelTheme1_Ch1: ; 1f5c1b (7d:5c1b)
-	notetype1 10
+	channel_volume 10
 	;musicdc 255
-	notetype0 1
+	speed 1
 	;musicf0 16
 	;musicef 255
 	octave 3
@@ -1871,7 +1871,7 @@ Music_GRDuelTheme1_Ch1: ; 1f5c1b (7d:5c1b)
 	;musicf0 16
 	octave 3
 	;musicf1 53
-	notetype1 7
+	channel_volume 7
 .Loop6
 	note C#, 15
 	;tie
@@ -1914,10 +1914,10 @@ Music_GRDuelTheme1_Ch1: ; 1f5c1b (7d:5c1b)
 
 
 Music_GRDuelTheme1_Ch3: ; 1f603f (7d:603f)
-	notetype1 10
-	notetype0 1
-	notetype2 11
-	notetype1 1
+	channel_volume 10
+	speed 1
+	fade_wave 11
+	channel_volume 1
 	;musice9 64
 	;musicdc 17
 	octave 3
@@ -1931,388 +1931,388 @@ Music_GRDuelTheme1_Ch3: ; 1f603f (7d:603f)
 .Loop2
 	sound_call Branch_1f6313
 	sound_loop 6, .Loop2
-	notetype0 11
+	speed 11
 	note D_, 2
 	note A_, 2
 	inc_octave
-	notetype0 1
+	speed 1
 	note D_, 14
 	dec_octave
-	notetype0 11
+	speed 11
 	note D_, 2
 	note A_, 2
 	inc_octave
-	notetype0 1
+	speed 1
 	note D_, 14
 	dec_octave
-	notetype0 11
+	speed 11
 	note D_, 2
 	note A_, 2
 	inc_octave
-	notetype0 1
+	speed 1
 	note D_, 14
 	dec_octave
-	notetype0 11
+	speed 11
 	note D_, 2
 	note A_, 2
-	notetype0 1
+	speed 1
 	note D_, 14
-	notetype0 11
+	speed 11
 	note D#, 2
 	note A#, 2
 	inc_octave
-	notetype0 1
+	speed 1
 	note D#, 14
 	dec_octave
-	notetype0 11
+	speed 11
 	note D#, 2
 	note A#, 2
 	inc_octave
-	notetype0 1
+	speed 1
 	note D#, 14
 	dec_octave
-	notetype0 11
+	speed 11
 	note D#, 2
 	note A#, 2
 	inc_octave
-	notetype0 1
+	speed 1
 	note D#, 14
 	dec_octave
-	notetype0 11
+	speed 11
 	note D#, 2
 	note C_, 2
-	notetype0 1
+	speed 1
 	note C#, 14
-	notetype0 11
+	speed 11
 	note D_, 2
 	note A_, 2
 	inc_octave
-	notetype0 1
+	speed 1
 	note D_, 14
 	dec_octave
-	notetype0 11
+	speed 11
 	note D_, 2
 	note A_, 2
 	inc_octave
-	notetype0 1
+	speed 1
 	note D_, 14
 	dec_octave
-	notetype0 11
+	speed 11
 	note D_, 2
 	note A_, 2
 	inc_octave
-	notetype0 1
+	speed 1
 	note D_, 14
 	dec_octave
-	notetype0 11
+	speed 11
 	note D_, 2
 	note A_, 2
-	notetype0 1
+	speed 1
 	note D_, 14
-	notetype0 11
+	speed 11
 	note C_, 2
 	note G_, 2
 	inc_octave
-	notetype0 1
+	speed 1
 	note C_, 14
 	dec_octave
-	notetype0 11
+	speed 11
 	note C_, 2
 	note G_, 2
-	notetype0 1
+	speed 1
 	note F#, 14
-	notetype0 11
+	speed 11
 	note F_, 2
 	inc_octave
 	note C_, 2
-	notetype0 1
+	speed 1
 	note F_, 14
 	dec_octave
-	notetype0 11
+	speed 11
 	note F_, 2
 	inc_octave
 	note C_, 2
 	dec_octave
 	dec_octave
-	notetype0 1
+	speed 1
 	note A_, 14
-	notetype0 11
+	speed 11
 	note A#, 2
 	inc_octave
 	note F_, 2
-	notetype0 1
+	speed 1
 	note A#, 14
 	dec_octave
-	notetype0 11
+	speed 11
 	note A#, 2
 	inc_octave
 	note F_, 2
-	notetype0 1
+	speed 1
 	note E_, 14
-	notetype0 11
+	speed 11
 	note D#, 2
 	note A#, 2
 	inc_octave
-	notetype0 1
+	speed 1
 	note D#, 14
 	dec_octave
-	notetype0 11
+	speed 11
 	note D#, 2
 	note A#, 2
-	notetype0 1
+	speed 1
 	note D#, 14
-	notetype0 11
+	speed 11
 	note D_, 2
 	note A_, 2
 	inc_octave
-	notetype0 1
+	speed 1
 	note D_, 14
 	dec_octave
-	notetype0 11
+	speed 11
 	note D_, 2
 	note A_, 2
-	notetype0 1
+	speed 1
 	note D_, 14
 	dec_octave
-	notetype0 11
+	speed 11
 	note G_, 2
 	inc_octave
 	note D_, 2
-	notetype0 1
+	speed 1
 	note G_, 14
 	dec_octave
-	notetype0 11
+	speed 11
 	note G_, 2
 	inc_octave
 	note D_, 2
-	notetype0 1
+	speed 1
 	note C#, 14
-	notetype0 11
+	speed 11
 	note C_, 2
 	note G_, 2
 	inc_octave
-	notetype0 1
+	speed 1
 	note C_, 14
 	dec_octave
-	notetype0 11
+	speed 11
 	note C_, 2
 	note G_, 2
-	notetype0 1
+	speed 1
 	note A#, 14
-	notetype0 11
+	speed 11
 	note G#, 2
 	inc_octave
 	note D#, 2
 	dec_octave
-	notetype0 1
+	speed 1
 	note D#, 14
-	notetype0 11
+	speed 11
 	note G#, 2
 	inc_octave
 	note D#, 2
 	dec_octave
-	notetype0 1
+	speed 1
 	note G#, 14
 	sound_call Branch_1f6313
 	sound_call Branch_1f6313
 	sound_call Branch_1f6313
 	sound_call Branch_1f6313
-	notetype0 11
+	speed 11
 	note D_, 2
 	note A_, 2
 	inc_octave
-	notetype0 1
+	speed 1
 	note D_, 14
 	dec_octave
-	notetype0 11
+	speed 11
 	note D_, 2
 	note A_, 2
 	inc_octave
-	notetype0 1
+	speed 1
 	note D_, 14
 	dec_octave
-	notetype0 11
+	speed 11
 	note D_, 2
 	note A_, 2
 	inc_octave
-	notetype0 1
+	speed 1
 	note D_, 14
 	dec_octave
-	notetype0 11
+	speed 11
 	note D_, 2
 	note A_, 2
-	notetype0 1
+	speed 1
 	note D_, 14
-	notetype0 11
+	speed 11
 	note D#, 2
 	note A#, 2
 	inc_octave
-	notetype0 1
+	speed 1
 	note D#, 14
 	dec_octave
-	notetype0 11
+	speed 11
 	note D#, 2
 	note A#, 2
 	inc_octave
-	notetype0 1
+	speed 1
 	note D#, 14
 	dec_octave
-	notetype0 11
+	speed 11
 	note D#, 2
 	note A#, 2
 	inc_octave
-	notetype0 1
+	speed 1
 	note D#, 14
 	dec_octave
-	notetype0 11
+	speed 11
 	note D#, 2
 	note C_, 2
-	notetype0 1
+	speed 1
 	note C#, 14
-	notetype0 11
+	speed 11
 	note D_, 2
 	note A_, 2
 	inc_octave
-	notetype0 1
+	speed 1
 	note D_, 14
 	dec_octave
-	notetype0 11
+	speed 11
 	note D_, 2
 	note A_, 2
 	inc_octave
-	notetype0 1
+	speed 1
 	note D_, 14
 	dec_octave
-	notetype0 11
+	speed 11
 	note D_, 2
 	note A_, 2
 	inc_octave
-	notetype0 1
+	speed 1
 	note D_, 14
 	dec_octave
-	notetype0 11
+	speed 11
 	note D_, 2
 	note A_, 2
-	notetype0 1
+	speed 1
 	note D_, 14
-	notetype0 11
+	speed 11
 	note C_, 2
 	note G_, 2
 	inc_octave
-	notetype0 1
+	speed 1
 	note C_, 14
 	dec_octave
-	notetype0 11
+	speed 11
 	note C_, 2
 	note G_, 2
-	notetype0 1
+	speed 1
 	note F#, 14
-	notetype0 11
+	speed 11
 	note F_, 2
 	inc_octave
 	note C_, 2
-	notetype0 1
+	speed 1
 	note F_, 14
 	dec_octave
-	notetype0 11
+	speed 11
 	note F_, 2
 	inc_octave
 	note C_, 2
 	dec_octave
 	dec_octave
-	notetype0 1
+	speed 1
 	note A_, 14
-	notetype0 11
+	speed 11
 	note A#, 2
 	inc_octave
 	note F_, 2
-	notetype0 1
+	speed 1
 	note A#, 14
 	dec_octave
-	notetype0 11
+	speed 11
 	note A#, 2
 	inc_octave
 	note F_, 2
-	notetype0 1
+	speed 1
 	note E_, 14
-	notetype0 11
+	speed 11
 	note D#, 2
 	note A#, 2
 	inc_octave
-	notetype0 1
+	speed 1
 	note D#, 14
 	dec_octave
-	notetype0 11
+	speed 11
 	note D#, 2
 	note A#, 2
-	notetype0 1
+	speed 1
 	note D#, 14
-	notetype0 11
+	speed 11
 	note D_, 2
 	note A_, 2
 	inc_octave
-	notetype0 1
+	speed 1
 	note D_, 14
 	dec_octave
-	notetype0 11
+	speed 11
 	note D_, 2
 	note A_, 2
-	notetype0 1
+	speed 1
 	note D_, 14
 	dec_octave
-	notetype0 11
+	speed 11
 	note G_, 2
 	inc_octave
 	note D_, 2
-	notetype0 1
+	speed 1
 	note G_, 14
 	dec_octave
-	notetype0 11
+	speed 11
 	note G_, 2
 	inc_octave
 	note D_, 2
-	notetype0 1
+	speed 1
 	note C#, 14
-	notetype0 11
+	speed 11
 	note C_, 2
 	note G_, 2
 	inc_octave
-	notetype0 1
+	speed 1
 	note C_, 14
 	dec_octave
-	notetype0 11
+	speed 11
 	note C_, 2
 	note G_, 2
-	notetype0 1
+	speed 1
 	note A#, 14
-	notetype0 11
+	speed 11
 	note G#, 2
 	inc_octave
 	note D#, 2
 	dec_octave
-	notetype0 1
+	speed 1
 	note D#, 14
-	notetype0 11
+	speed 11
 	note G#, 2
 	inc_octave
 	note D#, 2
 	dec_octave
-	notetype0 1
+	speed 1
 	note G#, 14
 	sound_call Branch_1f6313
 	sound_call Branch_1f6313
 	sound_call Branch_1f6313
-	notetype0 11
+	speed 11
 	note D_, 2
 	note A_, 2
-	notetype0 1
+	speed 1
 	note D_, 14
 	note D#, 16
 	;tie
 	note D#, 13
 	rest 16
 	rest 13
-	notetype0 1
+	speed 1
 	note G_, 15
 	note A_, 14
 	note A#, 15
@@ -2401,55 +2401,55 @@ Music_GRDuelTheme1_Ch3: ; 1f603f (7d:603f)
 	sound_call Branch_1f6313
 	sound_call Branch_1f6313
 	sound_call Branch_1f6313
-	notetype0 11
+	speed 11
 	note D_, 2
 	note A_, 2
-	notetype0 1
+	speed 1
 	note D_, 14
-	notetype0 11
+	speed 11
 	note C_, 2
 	note G_, 2
-	notetype0 1
+	speed 1
 	note C_, 14
-	notetype0 11
+	speed 11
 	note A#, 2
 	note F_, 2
-	notetype0 1
+	speed 1
 	note A#, 14
-	notetype0 11
+	speed 11
 	note A_, 2
 	note E_, 2
-	notetype0 1
+	speed 1
 	note A_, 14
-	notetype0 11
+	speed 11
 	note G_, 2
 	note D_, 2
-	notetype0 1
+	speed 1
 	note G_, 14
-	notetype0 11
+	speed 11
 	note C_, 2
 	note G_, 2
-	notetype0 1
+	speed 1
 	note C_, 14
-	notetype0 11
+	speed 11
 	note F_, 2
 	note C_, 2
 	dec_octave
-	notetype0 1
+	speed 1
 	note B_, 14
-	notetype0 11
+	speed 11
 	note A#, 2
 	inc_octave
 	note F_, 2
-	notetype0 1
+	speed 1
 	note A#, 14
-	notetype0 11
+	speed 11
 	note G_, 2
 	note D_, 2
-	notetype0 1
+	speed 1
 	note G_, 14
 	;musice8 7
-	notetype0 1
+	speed 1
 	note D#, 16
 	;tie
 	note D#, 13
@@ -2465,15 +2465,15 @@ Branch_1f6313:
 	octave 3
 	;musicec 244
 	;musice8 7
-	notetype0 11
+	speed 11
 	note D_, 2
 	note A_, 2
-	notetype0 1
+	speed 1
 	note D_, 14
-	notetype0 11
+	speed 11
 	note D#, 2
 	note A#, 2
-	notetype0 1
+	speed 1
 	note D#, 14
 	sound_ret
 

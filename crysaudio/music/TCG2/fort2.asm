@@ -6,8 +6,8 @@ Music_Fort2:
 	channel 4, Music_Fort2_Ch4
 
 Music_Fort2_Ch2: ; 1edefc (7b:5efc)
-	notetype1 10
-	notetype0 1
+	channel_volume 10
+	speed 1
 	;musicdc 17
 .MainLoop
 	octave 3
@@ -545,8 +545,8 @@ Branch_1ee109:
 
 
 Music_Fort2_Ch1: ; 1ee12f (7b:612f)
-	notetype1 10
-	notetype0 1
+	channel_volume 10
+	speed 1
 	;musicdc 17
 .MainLoop
 	;musicf0 23
@@ -996,16 +996,16 @@ Music_Fort2_Ch1: ; 1ee12f (7b:612f)
 
 
 Music_Fort2_Ch3: ; 1ee319 (7b:6319)
-	notetype1 10
-	;notetype2 15
+	channel_volume 10
+	;fade_wave 15
 	load_wave 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 13, 12, 11, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-	notetype1 2
+	channel_volume 2
 	;musice9 0
 	;musicdc 17
 	octave 4
 	;musicf3
 	octave 3
-	notetype0 1
+	speed 1
 	rest 15
 	rest 15
 	octave 4
@@ -1054,7 +1054,7 @@ Music_Fort2_Ch3: ; 1ee319 (7b:6319)
 	note D_, 4
 	rest 4
 	rest 7
-	notetype1 1
+	channel_volume 1
 	;musice8 8
 	octave 2
 	note A_, 2
@@ -1725,9 +1725,9 @@ Music_Fort2_Ch3: ; 1ee319 (7b:6319)
 	;tie
 	note F#, 8
 	octave 4
-	notetype1 2
+	channel_volume 2
 	note E_, 7
-	notetype1 1
+	channel_volume 1
 	octave 3
 	note E_, 8
 	note F_, 7
@@ -1736,17 +1736,17 @@ Music_Fort2_Ch3: ; 1ee319 (7b:6319)
 	note F#, 7
 	note B_, 8
 	octave 4
-	notetype1 2
+	channel_volume 2
 	note D_, 7
 	octave 3
-	notetype1 2
+	channel_volume 2
 	note A_, 8
 	note A#, 7
 	note B_, 8
-	notetype1 2
+	channel_volume 2
 	octave 5
 	note D_, 7
-	notetype1 1
+	channel_volume 1
 	octave 2
 	note E_, 8
 	rest 7

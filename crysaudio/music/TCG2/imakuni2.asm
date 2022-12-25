@@ -6,12 +6,12 @@ Music_Imakuni2:
 	channel 4, Music_Imakuni2_Ch4
 
 Music_Imakuni2_Ch2: ; 1f3411 (7c:7411)
-	notetype1 10
+	channel_volume 10
 .MainLoop
 	;musicf0 31
 	;musicf3
 	;musicdc 255
-	notetype0 1
+	speed 1
 	octave 2
 	;musicf0 31
 	note A_, 9
@@ -230,7 +230,7 @@ Music_Imakuni2_Ch2: ; 1f3411 (7c:7411)
 	dec_octave
 	note A_, 5
 	rest 12
-	notetype1 9
+	channel_volume 9
 	note G_, 16
 	;tie
 	note G_, 9
@@ -335,7 +335,7 @@ Music_Imakuni2_Ch2: ; 1f3411 (7c:7411)
 	inc_octave
 	note A_, 5
 	rest 12
-	notetype1 8
+	channel_volume 8
 	note G_, 16
 	;tie
 	note G_, 9
@@ -449,7 +449,7 @@ Music_Imakuni2_Ch2: ; 1f3411 (7c:7411)
 	dec_octave
 	note A#, 5
 	rest 12
-	notetype1 9
+	channel_volume 9
 	note G#, 16
 	;tie
 	note G#, 9
@@ -543,7 +543,7 @@ Music_Imakuni2_Ch2: ; 1f3411 (7c:7411)
 	inc_octave
 	note A_, 5
 	rest 12
-	notetype1 8
+	channel_volume 8
 	note G_, 16
 	;tie
 	note G_, 9
@@ -749,7 +749,7 @@ Branch_1f3762:
 	;musicf1 101
 	;musicf3
 	;musicdc 255
-	notetype0 1
+	speed 1
 	;musicef 255
 	octave 4
 	note C#, 5
@@ -767,13 +767,13 @@ Branch_1f3762:
 
 
 Music_Imakuni2_Ch1: ; 1f377a (7c:777a)
-	notetype1 10
+	channel_volume 10
 .MainLoop
 	;musicf0 9
 	;musicf1 103
 	;musicf3
 	;musicdc 255
-	notetype0 1
+	speed 1
 	;musicef 255
 	octave 4
 	rest 9
@@ -1371,7 +1371,7 @@ Music_Imakuni2_Ch1: ; 1f377a (7c:777a)
 	note C_, 8
 	dec_octave
 	note F_, 8
-	notetype1 4
+	channel_volume 4
 	note E_, 16
 	;tie
 	note E_, 16
@@ -1415,11 +1415,11 @@ Branch_1f3a58:
 
 
 Music_Imakuni2_Ch3: ; 1f3a6c (7c:7a6c)
-	notetype1 10
-	notetype0 1
-	notetype2 11
+	channel_volume 10
+	speed 1
+	fade_wave 11
 	;musicdc 255
-	notetype1 1
+	channel_volume 1
 	;musice9 96
 .MainLoop
 	;musice8 8
@@ -1436,10 +1436,10 @@ Music_Imakuni2_Ch3: ; 1f3a6c (7c:7a6c)
 	rest 16
 	rest 9
 	dec_octave
-	notetype1 2
+	channel_volume 2
 	note G_, 16
 	note A_, 9
-	notetype1 1
+	channel_volume 1
 	rest 16
 	rest 8
 	rest 9
@@ -1465,13 +1465,13 @@ Music_Imakuni2_Ch3: ; 1f3a6c (7c:7a6c)
 	rest 9
 	rest 8
 	dec_octave
-	notetype1 2
+	channel_volume 2
 	note G_, 16
 	note A_, 9
-	notetype1 1
+	channel_volume 1
 	sound_call Branch_1f3d18
 	octave 2
-	notetype1 1
+	channel_volume 1
 	rest 8
 	note E_, 8
 	rest 8
@@ -1503,10 +1503,10 @@ Music_Imakuni2_Ch3: ; 1f3a6c (7c:7a6c)
 	rest 9
 	rest 8
 	dec_octave
-	notetype1 2
+	channel_volume 2
 	note G_, 16
 	note A_, 9
-	notetype1 1
+	channel_volume 1
 	rest 16
 	rest 8
 	rest 9
@@ -1538,7 +1538,7 @@ Music_Imakuni2_Ch3: ; 1f3a6c (7c:7a6c)
 	rest 8
 	rest 16
 	octave 2
-	notetype1 1
+	channel_volume 1
 	note A_, 9
 	;tie
 	note A#, 16
@@ -1560,9 +1560,9 @@ Music_Imakuni2_Ch3: ; 1f3a6c (7c:7a6c)
 	note D#, 5
 	rest 3
 	rest 8
-	notetype1 2
+	channel_volume 2
 	note C#, 2
-	notetype1 1
+	channel_volume 1
 	rest 15
 	dec_octave
 	dec_octave
@@ -1610,9 +1610,9 @@ Music_Imakuni2_Ch3: ; 1f3a6c (7c:7a6c)
 	note D#, 5
 	rest 3
 	rest 8
-	notetype1 2
+	channel_volume 2
 	note C#, 2
-	notetype1 1
+	channel_volume 1
 	rest 15
 	dec_octave
 	dec_octave
@@ -1620,7 +1620,7 @@ Music_Imakuni2_Ch3: ; 1f3a6c (7c:7a6c)
 	note A_, 9
 	sound_call Branch_1f3d18
 	octave 2
-	notetype1 1
+	channel_volume 1
 	rest 8
 	note E_, 8
 	rest 8
@@ -1657,9 +1657,9 @@ Music_Imakuni2_Ch3: ; 1f3a6c (7c:7a6c)
 	note D#, 5
 	rest 3
 	rest 8
-	notetype1 2
+	channel_volume 2
 	note C#, 2
-	notetype1 1
+	channel_volume 1
 	rest 15
 	dec_octave
 	dec_octave
@@ -1705,9 +1705,9 @@ Music_Imakuni2_Ch3: ; 1f3a6c (7c:7a6c)
 	note D#, 5
 	rest 3
 	rest 8
-	notetype1 2
+	channel_volume 2
 	note C#, 2
-	notetype1 1
+	channel_volume 1
 	rest 15
 	dec_octave
 	dec_octave
@@ -1766,9 +1766,9 @@ Music_Imakuni2_Ch3: ; 1f3a6c (7c:7a6c)
 	note G#, 5
 	rest 3
 	rest 8
-	notetype1 2
+	channel_volume 2
 	note F#, 2
-	notetype1 1
+	channel_volume 1
 	rest 15
 	dec_octave
 	note C#, 16
@@ -1814,9 +1814,9 @@ Music_Imakuni2_Ch3: ; 1f3a6c (7c:7a6c)
 	note G#, 5
 	rest 3
 	rest 8
-	notetype1 2
+	channel_volume 2
 	note F#, 2
-	notetype1 1
+	channel_volume 1
 	rest 15
 	dec_octave
 	note C#, 16
@@ -1825,7 +1825,7 @@ Music_Imakuni2_Ch3: ; 1f3a6c (7c:7a6c)
 	sound_call Branch_1f3d18
 	;musicec 0
 	octave 2
-	notetype1 1
+	channel_volume 1
 	rest 16
 	rest 8
 	note A_, 9
@@ -1849,9 +1849,9 @@ Music_Imakuni2_Ch3: ; 1f3a6c (7c:7a6c)
 	note D#, 5
 	rest 3
 	rest 8
-	notetype1 2
+	channel_volume 2
 	note C#, 2
-	notetype1 1
+	channel_volume 1
 	rest 15
 	dec_octave
 	dec_octave
@@ -1899,9 +1899,9 @@ Music_Imakuni2_Ch3: ; 1f3a6c (7c:7a6c)
 	note D#, 5
 	rest 3
 	rest 8
-	notetype1 2
+	channel_volume 2
 	note C#, 2
-	notetype1 1
+	channel_volume 1
 	rest 15
 	dec_octave
 	dec_octave
@@ -2014,14 +2014,14 @@ Music_Imakuni2_Ch3: ; 1f3a6c (7c:7a6c)
 	note D_, 4
 	note E_, 9
 	rest 2
-	notetype1 2
+	channel_volume 2
 	note E_, 4
 	rest 6
-	notetype1 3
+	channel_volume 3
 	note E_, 4
 	rest 6
 	rest 2
-	notetype1 1
+	channel_volume 1
 	dec_octave
 	note G_, 16
 	;tie
@@ -2042,29 +2042,29 @@ Music_Imakuni2_Ch3: ; 1f3a6c (7c:7a6c)
 
 Branch_1f3d18:
 	;musice8 1
-	notetype1 1
+	channel_volume 1
 .Loop1
-	notetype1 1
+	channel_volume 1
 	octave 7
 	note C#, 1
-	notetype1 3
+	channel_volume 3
 	dec_octave
 	note C#, 7
 	sound_loop 2, .Loop1
 	rest 8
 	octave 7
-	notetype1 1
+	channel_volume 1
 	note C#, 1
-	notetype1 3
+	channel_volume 3
 	dec_octave
 	note C#, 7
 	rest 1
 	rest 16
 .Loop2
-	notetype1 1
+	channel_volume 1
 	octave 7
 	note C#, 1
-	notetype1 3
+	channel_volume 3
 	dec_octave
 	note C#, 7
 	sound_loop 2, .Loop2

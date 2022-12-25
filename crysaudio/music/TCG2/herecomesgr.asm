@@ -6,9 +6,9 @@ Music_HereComesGR:
 	channel 4, Music_HereComesGR_Ch4
 
 Music_HereComesGR_Ch2: ; 1ea368 (7a:6368)
-	notetype1 10
+	channel_volume 10
 .MainLoop
-	notetype0 1
+	speed 1
 	;musicdc 17
 	;musicf0 8
 	;musicf1 55
@@ -87,7 +87,7 @@ Music_HereComesGR_Ch2: ; 1ea368 (7a:6368)
 	sound_call Branch_1ea5ed
 	;musicf0 9
 	octave 4
-	notetype2 4
+	fade_wave 4
 	;musicf2
 	note D_, 10
 	note D_, 11
@@ -101,7 +101,7 @@ Music_HereComesGR_Ch2: ; 1ea368 (7a:6368)
 	;musicf3
 	;musicf0 8
 	octave 1
-	notetype2 8
+	fade_wave 8
 	;musicef 254
 .Loop1
 	note G_, 3
@@ -124,7 +124,7 @@ Music_HereComesGR_Ch2: ; 1ea368 (7a:6368)
 	sound_call Branch_1ea5ed
 	;musicf0 9
 	octave 4
-	notetype2 4
+	fade_wave 4
 	;musicf1 55
 	;musicf2
 	note D_, 10
@@ -133,7 +133,7 @@ Music_HereComesGR_Ch2: ; 1ea368 (7a:6368)
 	rest 10
 	;musicf0 8
 	octave 2
-	notetype2 8
+	fade_wave 8
 	note B_, 6
 	;tie
 	inc_octave
@@ -155,7 +155,7 @@ Music_HereComesGR_Ch2: ; 1ea368 (7a:6368)
 	sound_call Branch_1ea5ed
 	;musicf0 9
 	octave 4
-	notetype2 4
+	fade_wave 4
 	;musicf2
 	note D_, 10
 	note D_, 11
@@ -169,7 +169,7 @@ Music_HereComesGR_Ch2: ; 1ea368 (7a:6368)
 	;musicf3
 	;musicf0 8
 	octave 1
-	notetype2 8
+	fade_wave 8
 	;musicef 254
 .Loop2
 	note G_, 3
@@ -191,14 +191,14 @@ Music_HereComesGR_Ch2: ; 1ea368 (7a:6368)
 	;musicf1 55
 	sound_call Branch_1ea5ed
 	;musicf0 9
-	notetype2 4
-	notetype2 4
+	fade_wave 4
+	fade_wave 4
 	octave 4
 	;musicf2
 	note G_, 10
 	note G_, 11
 	;musicf0 8
-	notetype2 8
+	fade_wave 8
 	octave 3
 	;musicf2
 	note G_, 10
@@ -228,11 +228,11 @@ Music_HereComesGR_Ch2: ; 1ea368 (7a:6368)
 	;musicf3
 	;musicf0 8
 	octave 2
-	notetype2 8
+	fade_wave 8
 	note D_, 11
 	;musicf0 9
 	octave 3
-	notetype2 8
+	fade_wave 8
 	note C#, 10
 	;musicf2
 	note D_, 6
@@ -264,7 +264,7 @@ Music_HereComesGR_Ch2: ; 1ea368 (7a:6368)
 	;musicf0 9
 	;musicf1 16
 	octave 4
-	notetype2 6
+	fade_wave 6
 	;musicf3
 	note F_, 10
 	rest 11
@@ -272,7 +272,7 @@ Music_HereComesGR_Ch2: ; 1ea368 (7a:6368)
 	rest 11
 	;musicef 1
 	;musicf1 55
-	notetype2 8
+	fade_wave 8
 	;musicf3
 	octave 3
 	note C#, 10
@@ -303,11 +303,11 @@ Music_HereComesGR_Ch2: ; 1ea368 (7a:6368)
 	;musicf3
 	;musicf0 8
 	octave 2
-	notetype2 8
+	fade_wave 8
 	note D_, 11
 	;musicf0 9
 	octave 3
-	notetype2 8
+	fade_wave 8
 	note C#, 10
 	;musicf2
 	note D_, 6
@@ -359,13 +359,13 @@ Music_HereComesGR_Ch2: ; 1ea368 (7a:6368)
 	;musice4 0
 	note G#, 1
 	;musicf0 8
-	notetype2 8
+	fade_wave 8
 	octave 2
 	note A#, 16
 	;tie
 	note A#, 5
 	;musicf0 9
-	notetype2 8
+	fade_wave 8
 	;musicef 2
 	octave 1
 	note A_, 3
@@ -400,7 +400,7 @@ Music_HereComesGR_Ch2: ; 1ea368 (7a:6368)
 	;musicf3
 	;musicf0 8
 	octave 1
-	notetype2 8
+	fade_wave 8
 	;musicf1 103
 	note G_, 5
 	rest 6
@@ -411,13 +411,13 @@ Music_HereComesGR_Ch2: ; 1ea368 (7a:6368)
 	;musicef 252
 	;musicf1 39
 	octave 3
-	notetype2 4
+	fade_wave 4
 	rest 11
 	;musicf2
 	note F_, 10
 	note F_, 11
 	;musicf3
-	notetype2 8
+	fade_wave 8
 	;musicef 4
 	;musicf1 55
 	;musicf3
@@ -429,7 +429,7 @@ Music_HereComesGR_Ch2: ; 1ea368 (7a:6368)
 	rest 1
 	note C_, 1
 	;musicf0 8
-	notetype2 8
+	fade_wave 8
 	octave 2
 	note B_, 6
 	;tie
@@ -448,7 +448,7 @@ Music_HereComesGR_Ch2: ; 1ea368 (7a:6368)
 	octave 3
 	note C_, 11
 	;musicf0 9
-	notetype2 8
+	fade_wave 8
 	inc_octave
 	;musicf2
 	note F_, 4
@@ -463,14 +463,14 @@ Music_HereComesGR_Ch2: ; 1ea368 (7a:6368)
 	inc_octave
 	inc_octave
 	;musicf0 9
-	notetype2 8
+	fade_wave 8
 	;musicf2
 	note E_, 4
 	note E_, 7
 	dec_octave
 	dec_octave
 	;musicf0 8
-	notetype2 8
+	fade_wave 8
 	note B_, 5
 	note B_, 5
 	;musicf3
@@ -478,7 +478,7 @@ Music_HereComesGR_Ch2: ; 1ea368 (7a:6368)
 	;musicf0 9
 	inc_octave
 	inc_octave
-	notetype2 8
+	fade_wave 8
 	;musicf2
 	note D#, 4
 	note D#, 6
@@ -486,7 +486,7 @@ Music_HereComesGR_Ch2: ; 1ea368 (7a:6368)
 	dec_octave
 	;musicf0 8
 	octave 2
-	notetype2 8
+	fade_wave 8
 	note A#, 5
 	note A#, 6
 	;musicf3
@@ -494,14 +494,14 @@ Music_HereComesGR_Ch2: ; 1ea368 (7a:6368)
 	;musicf0 9
 	inc_octave
 	inc_octave
-	notetype2 8
+	fade_wave 8
 	;musicf2
 	note C#, 4
 	note C#, 7
 	dec_octave
 	dec_octave
 	;musicf0 8
-	notetype2 8
+	fade_wave 8
 	note G#, 5
 	note G#, 5
 	;musicf3
@@ -557,14 +557,14 @@ Branch_1ea603:
 	;musicf3
 	;musicf0 9
 	octave 4
-	notetype2 8
+	fade_wave 8
 	;musicf2
 	note C_, 4
 	note C_, 6
 	;musicf3
 	;musicf0 8
 	octave 1
-	notetype2 8
+	fade_wave 8
 	;musicf1 55
 	note G_, 5
 	rest 6
@@ -575,12 +575,12 @@ Branch_1ea603:
 	;musicef 252
 	;musicf1 39
 	octave 3
-	notetype2 4
+	fade_wave 4
 	rest 11
 	;musicf2
 	note F_, 10
 	note F_, 11
-	notetype2 8
+	fade_wave 8
 	;musicf3
 	;musicef 4
 	;musicf1 55
@@ -604,7 +604,7 @@ Branch_1ea603:
 
 Branch_1ea64e:
 	;musicf0 8
-	notetype2 8
+	fade_wave 8
 	octave 3
 	;musicef 255
 	note G#, 16
@@ -635,7 +635,7 @@ Branch_1ea64e:
 
 Branch_1ea66f:
 	;musicf0 8
-	notetype2 8
+	fade_wave 8
 	octave 2
 	note E_, 16
 	;tie
@@ -651,9 +651,9 @@ Branch_1ea66f:
 
 
 Music_HereComesGR_Ch1: ; 1ea67f (7a:667f)
-	notetype1 10
+	channel_volume 10
 .MainLoop
-	notetype0 1
+	speed 1
 	;musicdc 17
 	octave 2
 	;musicf0 8
@@ -723,7 +723,7 @@ Music_HereComesGR_Ch1: ; 1ea67f (7a:667f)
 	sound_call Branch_1ea5f8
 	;musicf0 9
 	octave 4
-	notetype2 4
+	fade_wave 4
 	;musicf2
 	note C_, 10
 	note C_, 11
@@ -732,14 +732,14 @@ Music_HereComesGR_Ch1: ; 1ea67f (7a:667f)
 	rest 11
 	dec_octave
 	;musicef 252
-	notetype2 4
+	fade_wave 4
 	note A#, 10
 	;musicef 4
 	;musicf1 55
 	;musicf3
 	;musicf0 9
 	octave 1
-	notetype2 8
+	fade_wave 8
 	;musicef 254
 .Loop1
 	note D_, 2
@@ -757,7 +757,7 @@ Music_HereComesGR_Ch1: ; 1ea67f (7a:667f)
 	sound_call Branch_1ea5f8
 	;musicf0 9
 	octave 4
-	notetype2 4
+	fade_wave 4
 	;musicf2
 	note C_, 10
 	note C_, 11
@@ -765,7 +765,7 @@ Music_HereComesGR_Ch1: ; 1ea67f (7a:667f)
 	;musicf3
 	;musicf0 8
 	octave 2
-	notetype2 8
+	fade_wave 8
 	note F#, 6
 	;tie
 	note G_, 5
@@ -785,7 +785,7 @@ Music_HereComesGR_Ch1: ; 1ea67f (7a:667f)
 	sound_call Branch_1ea5f8
 	;musicf0 9
 	octave 4
-	notetype2 4
+	fade_wave 4
 	;musicf2
 	note C_, 10
 	note C_, 11
@@ -800,7 +800,7 @@ Music_HereComesGR_Ch1: ; 1ea67f (7a:667f)
 	;musicf3
 	;musicf0 8
 	octave 1
-	notetype2 8
+	fade_wave 8
 	;musicef 254
 .Loop2
 	note D_, 2
@@ -817,14 +817,14 @@ Music_HereComesGR_Ch1: ; 1ea67f (7a:667f)
 	sound_call Branch_1ea5f8
 	;musicf0 9
 	octave 4
-	notetype2 4
+	fade_wave 4
 	;musicf2
 	note C_, 10
 	note C_, 11
 	;musicf3
 	;musicf0 8
 	octave 3
-	notetype2 8
+	fade_wave 8
 	note C_, 10
 	dec_octave
 	rest 11
@@ -842,7 +842,7 @@ Music_HereComesGR_Ch1: ; 1ea67f (7a:667f)
 	note G#, 5
 	note G_, 10
 	;musicf0 8
-	notetype2 8
+	fade_wave 8
 	octave 2
 	note A#, 11
 	note G_, 10
@@ -859,19 +859,19 @@ Music_HereComesGR_Ch1: ; 1ea67f (7a:667f)
 	rest 5
 	octave 4
 	rest 11
-	notetype2 4
+	fade_wave 4
 	note C_, 10
 	rest 11
 	dec_octave
 	;musicf0 8
 	octave 2
-	notetype2 8
+	fade_wave 8
 	note F_, 10
 	sound_call Branch_1ea5ed
 	rest 10
 	;musicf0 8
 	octave 2
-	notetype2 8
+	fade_wave 8
 	note G_, 16
 	;tie
 	note G_, 5
@@ -888,7 +888,7 @@ Music_HereComesGR_Ch1: ; 1ea67f (7a:667f)
 	rest 5
 	rest 11
 	;musicf0 9
-	notetype2 6
+	fade_wave 6
 	;musicf1 16
 	octave 3
 	;musicf3
@@ -900,7 +900,7 @@ Music_HereComesGR_Ch1: ; 1ea67f (7a:667f)
 	;musicf3
 	;musicf0 8
 	;musicf1 55
-	notetype2 8
+	fade_wave 8
 	octave 2
 	note G_, 10
 	note F_, 11
@@ -911,7 +911,7 @@ Music_HereComesGR_Ch1: ; 1ea67f (7a:667f)
 	note D_, 10
 	;musicf0 8
 	octave 2
-	notetype2 8
+	fade_wave 8
 	note G_, 11
 	;tie
 	note G_, 10
@@ -928,13 +928,13 @@ Music_HereComesGR_Ch1: ; 1ea67f (7a:667f)
 	rest 5
 	octave 4
 	rest 11
-	notetype2 4
+	fade_wave 4
 	note C_, 10
 	rest 11
 	dec_octave
 	;musicf0 8
 	octave 2
-	notetype2 8
+	fade_wave 8
 	note F_, 10
 	;musicf2
 	note G_, 8
@@ -949,7 +949,7 @@ Music_HereComesGR_Ch1: ; 1ea67f (7a:667f)
 	;musicf3
 	;musicf0 8
 	octave 2
-	notetype2 8
+	fade_wave 8
 	note G_, 16
 	;tie
 	note G_, 5
@@ -1018,7 +1018,7 @@ Music_HereComesGR_Ch1: ; 1ea67f (7a:667f)
 	octave 2
 	sound_call Branch_1ea5ed
 	;musicf0 9
-	notetype2 4
+	fade_wave 4
 	octave 3
 	;musicf2
 	note A#, 10
@@ -1026,18 +1026,18 @@ Music_HereComesGR_Ch1: ; 1ea67f (7a:667f)
 	;musicf3
 	;musicf0 8
 	octave 1
-	notetype2 8
+	fade_wave 8
 	rest 10
 	;musicf0 9
 	;musicef 252
 	;musicf1 55
 	octave 2
-	notetype2 4
+	fade_wave 4
 	rest 11
 	note A#, 10
 	note A#, 11
 	;musicf3
-	notetype2 8
+	fade_wave 8
 	;musicef 4
 	;musicf1 55
 	;musicf3
@@ -1049,7 +1049,7 @@ Music_HereComesGR_Ch1: ; 1ea67f (7a:667f)
 	rest 1
 	note C_, 1
 	;musicf0 8
-	notetype2 8
+	fade_wave 8
 	octave 2
 	note F#, 6
 	;tie
@@ -1067,7 +1067,7 @@ Music_HereComesGR_Ch1: ; 1ea67f (7a:667f)
 	octave 2
 	note G_, 11
 	;musicf0 9
-	notetype2 8
+	fade_wave 8
 	inc_octave
 	inc_octave
 	;musicf2
@@ -1082,40 +1082,40 @@ Music_HereComesGR_Ch1: ; 1ea67f (7a:667f)
 	note F#, 10
 	inc_octave
 	;musicf0 9
-	notetype2 8
+	fade_wave 8
 	;musicf2
 	note B_, 4
 	note B_, 7
 	dec_octave
 	;musicf0 8
-	notetype2 8
+	fade_wave 8
 	note F#, 5
 	note F#, 5
 	;musicf3
 	note F_, 11
 	;musicf0 9
 	inc_octave
-	notetype2 8
+	fade_wave 8
 	;musicf2
 	note A#, 4
 	note A#, 6
 	dec_octave
 	;musicf0 8
 	octave 2
-	notetype2 8
+	fade_wave 8
 	note F_, 5
 	note F_, 6
 	;musicf3
 	note D#, 10
 	;musicf0 9
 	inc_octave
-	notetype2 8
+	fade_wave 8
 	;musicf2
 	note G#, 4
 	note G#, 7
 	dec_octave
 	;musicf0 8
-	notetype2 8
+	fade_wave 8
 	note D#, 5
 	note D#, 5
 	;musicf3
@@ -1143,18 +1143,18 @@ Branch_1ea8d3:
 	note G_, 11
 	;musicf0 9
 	octave 3
-	notetype2 4
+	fade_wave 4
 	note A#, 10
 	note A#, 11
 	;musicf3
 	rest 10
 	;musicef 252
 	octave 2
-	notetype2 4
+	fade_wave 4
 	rest 11
 	note A#, 10
 	rest 11
-	notetype2 8
+	fade_wave 8
 	;musicef 4
 	;musicf1 55
 	;musicf3
@@ -1217,10 +1217,10 @@ Branch_1ea90c:
 
 
 Music_HereComesGR_Ch3: ; 1ea934 (7a:6934)
-	notetype1 10
-	notetype0 1
-	notetype2 11
-	notetype1 1
+	channel_volume 10
+	speed 1
+	fade_wave 11
+	channel_volume 1
 	;musice9 128
 	;musicdc 17
 .MainLoop
@@ -1295,11 +1295,11 @@ Music_HereComesGR_Ch3: ; 1ea934 (7a:6934)
 	note C#, 10
 	note D_, 11
 	inc_octave
-	notetype1 2
+	channel_volume 2
 	;musice8 8
 	note C_, 10
 	;musice8 8
-	notetype1 1
+	channel_volume 1
 	dec_octave
 	note C#, 11
 	note C_, 10
@@ -1310,7 +1310,7 @@ Music_HereComesGR_Ch3: ; 1ea934 (7a:6934)
 	dec_octave
 	note F_, 11
 	note G#, 10
-	notetype1 1
+	channel_volume 1
 	octave 2
 	note G_, 8
 	rest 3
@@ -1321,11 +1321,11 @@ Music_HereComesGR_Ch3: ; 1ea934 (7a:6934)
 	octave 5
 	;musice8 4
 	note G_, 10
-	notetype1 3
+	channel_volume 3
 	note G_, 11
 	;musice8 8
 	octave 2
-	notetype1 2
+	channel_volume 2
 	note F_, 10
 	note G_, 11
 	octave 5
@@ -1333,7 +1333,7 @@ Music_HereComesGR_Ch3: ; 1ea934 (7a:6934)
 	note F_, 10
 	;musice8 8
 	octave 2
-	notetype1 1
+	channel_volume 1
 	rest 10
 	rest 11
 	note C_, 5
@@ -1344,7 +1344,7 @@ Music_HereComesGR_Ch3: ; 1ea934 (7a:6934)
 	note F_, 16
 	;tie
 	note F_, 5
-	notetype1 1
+	channel_volume 1
 	octave 2
 	note G_, 8
 	rest 3
@@ -1355,10 +1355,10 @@ Music_HereComesGR_Ch3: ; 1ea934 (7a:6934)
 	octave 5
 	;musice8 4
 	note G_, 10
-	notetype1 3
+	channel_volume 3
 	note G_, 11
 	;musice8 8
-	notetype1 1
+	channel_volume 1
 	octave 2
 	rest 10
 	note G#, 6
@@ -1373,7 +1373,7 @@ Music_HereComesGR_Ch3: ; 1ea934 (7a:6934)
 	note A_, 16
 	;tie
 	note A_, 10
-	notetype1 1
+	channel_volume 1
 	octave 2
 	note G_, 8
 	rest 3
@@ -1384,18 +1384,18 @@ Music_HereComesGR_Ch3: ; 1ea934 (7a:6934)
 	octave 5
 	;musice8 4
 	note G_, 10
-	notetype1 3
+	channel_volume 3
 	note G_, 11
 	;musice8 8
 	octave 2
-	notetype1 2
+	channel_volume 2
 	note F_, 10
 	note G_, 11
 	octave 5
 	;musice8 4
 	note F_, 10
 	;musice8 8
-	notetype1 1
+	channel_volume 1
 	octave 2
 	rest 10
 	rest 11
@@ -1497,12 +1497,12 @@ Music_HereComesGR_Ch3: ; 1ea934 (7a:6934)
 	inc_octave
 	;musice8 4
 	note F_, 10
-	notetype1 3
+	channel_volume 3
 	note F_, 11
 	;musice8 8
 	dec_octave
 	dec_octave
-	notetype1 2
+	channel_volume 2
 	dec_octave
 	note C_, 10
 	note D_, 8
@@ -1513,7 +1513,7 @@ Music_HereComesGR_Ch3: ; 1ea934 (7a:6934)
 	dec_octave
 	note G_, 3
 	rest 7
-	notetype1 1
+	channel_volume 1
 	note C_, 16
 	;tie
 	note C_, 5
@@ -1532,12 +1532,12 @@ Music_HereComesGR_Ch3: ; 1ea934 (7a:6934)
 	inc_octave
 	;musice8 4
 	note F_, 10
-	notetype1 3
+	channel_volume 3
 	note F_, 11
 	;musice8 8
 	dec_octave
 	dec_octave
-	notetype1 2
+	channel_volume 2
 	dec_octave
 	note C_, 10
 	note D_, 8
@@ -1548,7 +1548,7 @@ Music_HereComesGR_Ch3: ; 1ea934 (7a:6934)
 	dec_octave
 	note G_, 3
 	rest 7
-	notetype1 1
+	channel_volume 1
 	note C#, 6
 	;tie
 	note D_, 5
@@ -1568,12 +1568,12 @@ Music_HereComesGR_Ch3: ; 1ea934 (7a:6934)
 	inc_octave
 	;musice8 4
 	note F_, 10
-	notetype1 3
+	channel_volume 3
 	note F_, 11
 	;musice8 8
 	dec_octave
 	dec_octave
-	notetype1 2
+	channel_volume 2
 	dec_octave
 	note C_, 10
 	note D_, 8
@@ -1584,7 +1584,7 @@ Music_HereComesGR_Ch3: ; 1ea934 (7a:6934)
 	dec_octave
 	note G_, 3
 	rest 7
-	notetype1 1
+	channel_volume 1
 	note C_, 16
 	;tie
 	note C_, 5
@@ -1656,7 +1656,7 @@ Branch_1eaaf6:
 	note F#, 16
 	;tie
 	note F#, 5
-	notetype1 1
+	channel_volume 1
 	octave 2
 	note G_, 8
 	rest 3
@@ -1667,11 +1667,11 @@ Branch_1eaaf6:
 	octave 5
 	;musice8 4
 	note G_, 10
-	notetype1 3
+	channel_volume 3
 	note G_, 11
 	;musice8 8
 	octave 2
-	notetype1 1
+	channel_volume 1
 	rest 10
 	rest 16
 	rest 16

@@ -6,9 +6,9 @@ Music_Diddly6:
 	channel 4, Music_Diddly6_Ch4
 
 Music_Diddly6_Ch2: ; 1f76dc (7d:76dc)
-	notetype1 10
+	channel_volume 10
 	;musicf0 34
-	notetype0 1
+	speed 1
 	;musicdc 255
 	;musicef 252
 	octave 3
@@ -79,15 +79,15 @@ Music_Diddly6_Ch2: ; 1f76dc (7d:76dc)
 	note B_, 16
 	;tie
 	note B_, 2
-	notetype0 2
+	speed 2
 	note B_, 10
 	sound_ret
 
 
 Music_Diddly6_Ch1: ; 1f7731 (7d:7731)
-	notetype1 10
+	channel_volume 10
 	;musicf0 23
-	notetype0 1
+	speed 1
 	;musicdc 255
 	;musicef 252
 	octave 3
@@ -227,18 +227,18 @@ Music_Diddly6_Ch1: ; 1f7731 (7d:7731)
 	note G_, 16
 	;tie
 	note G_, 2
-	notetype0 2
+	speed 2
 	note G_, 10
 	sound_ret
 
 
 Music_Diddly6_Ch3: ; 1f77cf (7d:77cf)
-	notetype1 10
-	;notetype2 15
+	channel_volume 10
+	;fade_wave 15
 	load_wave 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 13, 12, 11, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-	notetype1 1
+	channel_volume 1
 	;musice9 96
-	notetype0 1
+	speed 1
 	;musicdc 17
 	rest 10
 	rest 10
@@ -268,12 +268,12 @@ Music_Diddly6_Ch3: ; 1f77cf (7d:77cf)
 	note D_, 2
 .Loop1
 	;musice8 4
-	notetype0 7
+	speed 7
 	note G_, 3
-	notetype0 10
+	speed 10
 	note D_, 2
 	sound_loop 4, .Loop1
-	notetype0 1
+	speed 1
 	note G_, 16
 	;tie
 	note G_, 16
@@ -285,7 +285,7 @@ Music_Diddly6_Ch3: ; 1f77cf (7d:77cf)
 	note G_, 16
 	;tie
 	note G_, 2
-	notetype0 2
+	speed 2
 	;musice8 1
 	note G_, 10
 	sound_ret

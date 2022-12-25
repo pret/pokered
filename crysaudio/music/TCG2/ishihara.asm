@@ -6,8 +6,8 @@ Music_Ishihara:
 	channel 4, Music_Ishihara_Ch4
 
 Music_Ishihara_Ch2: ; 1dd6cc (77:56cc)
-	notetype1 10
-	notetype0 1
+	channel_volume 10
+	speed 1
 	;musicdc 255
 	rest 13
 	rest 14
@@ -747,8 +747,8 @@ Branch_1dd880:
 
 
 Music_Ishihara_Ch1: ; 1dd9de (77:59de)
-	notetype1 10
-	notetype0 1
+	channel_volume 10
+	speed 1
 	;musicdc 255
 	;musicf1 86
 	rest 13
@@ -1729,12 +1729,12 @@ Branch_1ddc75:
 
 
 Music_Ishihara_Ch3: ; 1dde54 (77:5e54)
-	notetype1 10
-	notetype2 11
-	notetype1 1
+	channel_volume 10
+	fade_wave 11
+	channel_volume 1
 	;musice9 96
 	;musicdc 255
-	notetype0 1
+	speed 1
 	rest 13
 	octave 2
 	note C_, 14
@@ -2282,10 +2282,10 @@ Music_Ishihara_Ch3: ; 1dde54 (77:5e54)
 	inc_octave
 	inc_octave
 	note F_, 7
-	notetype1 3
+	channel_volume 3
 	note F_, 7
 	rest 13
-	notetype1 1
+	channel_volume 1
 	sound_loop 0, .MainLoop
 
 Branch_1de0c5:

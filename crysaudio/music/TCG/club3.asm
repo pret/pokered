@@ -6,59 +6,59 @@ Music_Club3:
 	channel 4, Music_Club3_Ch4
 
 Music_Club3_Ch1: ; fa210 (3e:6210)
-	notetype0 9
+	speed 9
 	;stereo_panning 1, 1
 	;vibrato_type 5
 	vibrato 20, 3, 3
-	notetype2 8
+	fade_wave 8
 .MainLoop
 	duty_cycle 0
 .Loop1
 	octave 2
-	notetype1 9
+	channel_volume 9
 	rest 4
 	note G_, 2
-	notetype1 3
+	channel_volume 3
 	note G_, 1
 	inc_octave
-	notetype1 9
+	channel_volume 9
 	note C_, 1
-	notetype1 3
+	channel_volume 3
 	note C_, 2
 	dec_octave
-	notetype1 9
+	channel_volume 9
 	note A#, 6
 	;tie
 	note A#, 12
-	notetype1 3
+	channel_volume 3
 	note A#, 4
 	rest 4
-	notetype1 9
+	channel_volume 9
 	note G_, 2
-	notetype1 3
+	channel_volume 3
 	note G_, 1
 	inc_octave
-	notetype1 9
-	notetype0 1
+	channel_volume 9
+	speed 1
 	note C_, 5
 	;tie
 	note C#, 4
 	;tie
-	notetype0 9
+	speed 9
 	note C_, 1
-	notetype1 3
+	channel_volume 3
 	note C_, 1
 	dec_octave
-	notetype1 9
+	channel_volume 9
 	note A#, 6
 	;tie
 	note A#, 12
-	notetype1 3
+	channel_volume 3
 	note A#, 4
 	sound_loop 2, .Loop1
 	duty_cycle 1
-	notetype1 9
-	notetype2 7
+	channel_volume 9
+	fade_wave 7
 	sound_call Branch_fa330
 	sound_call Branch_fa403
 	note A#, 1
@@ -86,19 +86,19 @@ Music_Club3_Ch1: ; fa210 (3e:6210)
 	octave 2
 	note G_, 1
 	inc_octave
-	notetype2 8
-	notetype0 1
+	fade_wave 8
+	speed 1
 	note G_, 5
-	notetype1 3
+	channel_volume 3
 	note G_, 4
-	notetype0 9
-	notetype1 8
+	speed 9
+	channel_volume 8
 	note C#, 1
 	note C_, 1
 	dec_octave
 	note A#, 1
-	notetype1 9
-	notetype2 7
+	channel_volume 9
+	fade_wave 7
 	sound_call Branch_fa330
 	sound_call Branch_fa403
 	inc_octave
@@ -129,9 +129,9 @@ Music_Club3_Ch1: ; fa210 (3e:6210)
 	note G_, 1
 	octave 4
 	duty_cycle 2
-	notetype1 7
-	notetype0 1
-	notetype2 8
+	channel_volume 7
+	speed 1
+	fade_wave 8
 	note G_, 5
 	note C#, 4
 	note C_, 5
@@ -143,8 +143,8 @@ Music_Club3_Ch1: ; fa210 (3e:6210)
 	dec_octave
 	note A#, 4
 	duty_cycle 1
-	notetype2 7
-	notetype0 9
+	fade_wave 7
+	speed 9
 	sound_call Branch_fa370
 	sound_call Branch_fa403
 	note A#, 1
@@ -172,13 +172,13 @@ Music_Club3_Ch1: ; fa210 (3e:6210)
 	octave 2
 	note G_, 1
 	inc_octave
-	notetype2 8
-	notetype0 1
+	fade_wave 8
+	speed 1
 	note G_, 5
-	notetype1 3
+	channel_volume 3
 	note G_, 4
-	notetype0 9
-	notetype1 8
+	speed 9
+	channel_volume 8
 	note C#, 1
 	note C_, 1
 	dec_octave
@@ -213,9 +213,9 @@ Music_Club3_Ch1: ; fa210 (3e:6210)
 	note A#, 1
 	inc_octave
 	duty_cycle 2
-	notetype0 1
-	notetype2 8
-	notetype1 7
+	speed 1
+	fade_wave 8
+	channel_volume 7
 	note G_, 5
 	note C#, 4
 	note C_, 5
@@ -226,8 +226,8 @@ Music_Club3_Ch1: ; fa210 (3e:6210)
 	note C_, 5
 	dec_octave
 	note A#, 4
-	notetype0 9
-	notetype2 8
+	speed 9
+	fade_wave 8
 	sound_loop 0, .MainLoop
 
 Branch_fa330:
@@ -251,12 +251,12 @@ Branch_fa330:
 	inc_octave
 	note A#, 1
 	dec_octave
-	notetype0 1
-	notetype2 8
+	speed 1
+	fade_wave 8
 	note F_, 5
 	note F#, 4
-	notetype0 9
-	notetype2 7
+	speed 9
+	fade_wave 7
 	note G_, 1
 	inc_octave
 	note E_, 1
@@ -294,8 +294,8 @@ Branch_fa330:
 
 Branch_fa370:
 	octave 2
-	notetype1 9
-	notetype2 7
+	channel_volume 9
+	fade_wave 7
 	note G_, 1
 	inc_octave
 	note D_, 1
@@ -315,55 +315,55 @@ Branch_fa370:
 	inc_octave
 	note A#, 1
 	dec_octave
-	notetype0 1
-	notetype2 8
+	speed 1
+	fade_wave 8
 	note F_, 5
 	note F#, 4
 	octave 4
 	duty_cycle 2
-	notetype1 7
+	channel_volume 7
 	note G_, 3
-	notetype1 1
+	channel_volume 1
 	note G_, 2
 	inc_octave
-	notetype1 7
+	channel_volume 7
 	note D_, 2
-	notetype1 1
+	channel_volume 1
 	dec_octave
 	note G_, 2
 	inc_octave
-	notetype1 7
+	channel_volume 7
 	note G_, 3
-	notetype1 1
+	channel_volume 1
 	note D_, 2
-	notetype1 7
+	channel_volume 7
 	note D_, 2
-	notetype1 1
+	channel_volume 1
 	note G_, 2
 	dec_octave
-	notetype1 7
+	channel_volume 7
 	note G_, 3
-	notetype1 1
+	channel_volume 1
 	inc_octave
 	note D_, 2
-	notetype1 7
+	channel_volume 7
 	note D_, 2
-	notetype1 1
+	channel_volume 1
 	dec_octave
 	note G_, 2
 	inc_octave
-	notetype1 7
+	channel_volume 7
 	note G_, 3
-	notetype1 1
+	channel_volume 1
 	note D_, 2
-	notetype1 7
+	channel_volume 7
 	note D_, 2
-	notetype1 1
+	channel_volume 1
 	note G_, 2
-	notetype0 9
+	speed 9
 	duty_cycle 1
-	notetype2 7
-	notetype1 9
+	fade_wave 7
+	channel_volume 9
 	octave 2
 	note G_, 1
 	inc_octave
@@ -388,9 +388,9 @@ Branch_fa370:
 	note G_, 1
 	octave 5
 	duty_cycle 2
-	notetype0 1
-	notetype2 8
-	notetype1 7
+	speed 1
+	fade_wave 8
+	channel_volume 7
 	octave 5
 	note G_, 5
 	note C#, 4
@@ -402,10 +402,10 @@ Branch_fa370:
 	note C_, 5
 	dec_octave
 	note A#, 4
-	notetype0 9
+	speed 9
 	duty_cycle 1
-	notetype2 7
-	notetype1 9
+	fade_wave 7
+	channel_volume 9
 	sound_ret
 
 Branch_fa403:
@@ -429,271 +429,271 @@ Branch_fa403:
 	inc_octave
 	note A#, 1
 	dec_octave
-	notetype0 1
-	notetype2 8
+	speed 1
+	fade_wave 8
 	note F_, 5
 	note F#, 4
-	notetype0 9
-	notetype2 7
+	speed 9
+	fade_wave 7
 	note G_, 1
 	sound_ret
 
 
 Music_Club3_Ch2: ; fa423 (3e:6423)
-	notetype0 9
+	speed 9
 	;stereo_panning 1, 1
 	;vibrato_type 5
 	vibrato 20, 3, 3
-	notetype2 8
+	fade_wave 8
 .MainLoop
 	duty_cycle 0
 .Loop1
 	octave 2
-	notetype1 7
+	channel_volume 7
 	rest 4
 	note D_, 2
-	notetype1 3
+	channel_volume 3
 	note D_, 1
-	notetype1 7
+	channel_volume 7
 	note F_, 1
-	notetype1 3
+	channel_volume 3
 	note F_, 2
-	notetype1 7
+	channel_volume 7
 	note E_, 6
 	;tie
 	note E_, 12
-	notetype1 3
+	channel_volume 3
 	note E_, 4
 	rest 4
-	notetype1 7
+	channel_volume 7
 	note D_, 2
-	notetype1 3
+	channel_volume 3
 	note D_, 1
-	notetype1 7
-	notetype0 1
+	channel_volume 7
+	speed 1
 	note F_, 5
 	;tie
 	note F#, 4
-	notetype0 9
+	speed 9
 	note F_, 1
-	notetype1 3
+	channel_volume 3
 	note F_, 1
-	notetype1 7
+	channel_volume 7
 	note E_, 6
 	;tie
 	note E_, 12
-	notetype1 3
+	channel_volume 3
 	note E_, 4
 	sound_loop 2, .Loop1
 	duty_cycle 1
 .Loop2
 	sound_call Branch_fa5a6
-	notetype0 9
+	speed 9
 	rest 1
 	inc_octave
-	notetype1 8
-	notetype0 1
+	channel_volume 8
+	speed 1
 	note D_, 5
-	notetype1 3
+	channel_volume 3
 	note D_, 4
-	notetype0 9
-	notetype1 9
-	notetype2 7
+	speed 9
+	channel_volume 9
+	fade_wave 7
 	note G_, 1
 	dec_octave
-	notetype0 1
-	notetype2 8
-	notetype1 8
+	speed 1
+	fade_wave 8
+	channel_volume 8
 	note F_, 5
 	note F#, 4
 	inc_octave
-	notetype0 9
-	notetype1 9
-	notetype2 7
+	speed 9
+	channel_volume 9
+	fade_wave 7
 	note G_, 1
 	note G_, 1
-	notetype1 3
+	channel_volume 3
 	note G_, 1
-	notetype1 9
+	channel_volume 9
 	note F_, 1
-	notetype1 3
+	channel_volume 3
 	note F_, 2
 	dec_octave
-	notetype1 9
+	channel_volume 9
 	note D_, 1
 	inc_octave
 	inc_octave
-	notetype1 8
-	notetype0 1
+	channel_volume 8
+	speed 1
 	note D_, 5
-	notetype1 3
+	channel_volume 3
 	note D_, 4
-	notetype1 9
-	notetype0 9
+	channel_volume 9
+	speed 9
 	rest 1
 	dec_octave
-	notetype0 1
-	notetype2 8
+	speed 1
+	fade_wave 8
 	note G_, 5
 	note D_, 4
 	dec_octave
 	note A#, 5
-	notetype1 3
+	channel_volume 3
 	note A#, 4
 	inc_octave
 	inc_octave
-	notetype1 9
+	channel_volume 9
 	note D_, 5
-	notetype1 3
+	channel_volume 3
 	note D_, 4
-	notetype0 9
-	notetype1 8
+	speed 9
+	channel_volume 8
 	rest 1
 	dec_octave
-	notetype0 1
+	speed 1
 	note D_, 5
-	notetype1 3
+	channel_volume 3
 	note D_, 4
-	notetype0 9
-	notetype1 9
-	notetype2 7
+	speed 9
+	channel_volume 9
+	fade_wave 7
 	note G_, 1
 	dec_octave
-	notetype0 1
-	notetype2 8
-	notetype1 8
+	speed 1
+	fade_wave 8
+	channel_volume 8
 	note F_, 5
 	note F#, 4
 	inc_octave
-	notetype0 9
-	notetype1 9
-	notetype2 7
+	speed 9
+	channel_volume 9
+	fade_wave 7
 	note A#, 1
-	notetype1 3
+	channel_volume 3
 	note A#, 2
 	inc_octave
-	notetype1 9
+	channel_volume 9
 	note C#, 1
-	notetype1 3
+	channel_volume 3
 	note C#, 1
 	dec_octave
-	notetype1 9
+	channel_volume 9
 	note G_, 1
-	notetype1 3
+	channel_volume 3
 	note G_, 1
 	dec_octave
-	notetype0 1
-	notetype1 8
+	speed 1
+	channel_volume 8
 	note A#, 5
-	notetype1 3
+	channel_volume 3
 	note C_, 4
-	notetype0 9
+	speed 9
 	rest 1
 	dec_octave
-	notetype1 8
-	notetype2 8
+	channel_volume 8
+	fade_wave 8
 	note A#, 1
 	note B_, 1
 	inc_octave
 	note C_, 1
 	sound_call Branch_fa5a6
-	notetype0 9
+	speed 9
 	rest 1
 	inc_octave
-	notetype0 1
-	notetype1 8
+	speed 1
+	channel_volume 8
 	note D_, 5
-	notetype1 3
+	channel_volume 3
 	note D_, 4
-	notetype0 9
-	notetype1 9
-	notetype2 7
+	speed 9
+	channel_volume 9
+	fade_wave 7
 	note G_, 1
 	dec_octave
-	notetype0 1
-	notetype2 8
-	notetype1 8
+	speed 1
+	fade_wave 8
+	channel_volume 8
 	note F_, 5
 	note F#, 4
 	inc_octave
-	notetype0 9
-	notetype1 9
-	notetype2 7
+	speed 9
+	channel_volume 9
+	fade_wave 7
 	note G_, 1
 	note G_, 1
-	notetype1 3
+	channel_volume 3
 	note G_, 1
-	notetype1 9
+	channel_volume 9
 	note F_, 1
-	notetype1 3
+	channel_volume 3
 	note F_, 2
-	notetype1 9
+	channel_volume 9
 	note D_, 1
 	inc_octave
-	notetype1 8
-	notetype0 1
+	channel_volume 8
+	speed 1
 	note G_, 5
-	notetype1 3
+	channel_volume 3
 	note G_, 4
-	notetype0 9
+	speed 9
 	rest 1
 	dec_octave
 	dec_octave
-	notetype0 1
-	notetype1 8
+	speed 1
+	channel_volume 8
 	note G_, 5
-	notetype1 3
+	channel_volume 3
 	note G_, 4
 	inc_octave
-	notetype1 8
+	channel_volume 8
 	note D_, 5
-	notetype1 3
+	channel_volume 3
 	note D_, 4
-	notetype0 9
+	speed 9
 	rest 1
 	rest 1
-	notetype0 1
-	notetype1 8
+	speed 1
+	channel_volume 8
 	note D_, 5
-	notetype1 3
+	channel_volume 3
 	note D_, 4
-	notetype0 9
-	notetype1 9
-	notetype2 7
+	speed 9
+	channel_volume 9
+	fade_wave 7
 	note G_, 1
 	dec_octave
-	notetype0 1
-	notetype2 8
-	notetype1 8
+	speed 1
+	fade_wave 8
+	channel_volume 8
 	note F_, 5
 	note F#, 4
 	inc_octave
 	inc_octave
-	notetype0 9
-	notetype1 9
-	notetype2 7
+	speed 9
+	channel_volume 9
+	fade_wave 7
 	note C#, 1
-	notetype1 3
+	channel_volume 3
 	note C#, 2
-	notetype1 9
+	channel_volume 9
 	note C_, 1
-	notetype1 3
+	channel_volume 3
 	note C_, 1
 	dec_octave
-	notetype1 9
+	channel_volume 9
 	note G_, 1
-	notetype1 3
+	channel_volume 3
 	note G_, 1
-	notetype1 8
-	notetype0 1
+	channel_volume 8
+	speed 1
 	note F_, 5
-	notetype1 3
+	channel_volume 3
 	note F_, 4
-	notetype1 8
-	notetype0 9
+	channel_volume 8
+	speed 9
 	rest 1
 	dec_octave
-	notetype2 8
+	fade_wave 8
 	note D_, 1
 	note D#, 1
 	note E_, 1
@@ -703,113 +703,113 @@ Music_Club3_Ch2: ; fa423 (3e:6423)
 Branch_fa5a6:
 	octave 3
 	rest 1
-	notetype1 8
-	notetype0 1
+	channel_volume 8
+	speed 1
 	note D_, 5
-	notetype1 3
+	channel_volume 3
 	note D_, 4
-	notetype0 9
-	notetype1 9
-	notetype2 7
+	speed 9
+	channel_volume 9
+	fade_wave 7
 	note G_, 1
 	dec_octave
-	notetype0 1
-	notetype1 8
-	notetype2 8
+	speed 1
+	channel_volume 8
+	fade_wave 8
 	note F_, 5
 	note F#, 4
 	inc_octave
-	notetype0 9
-	notetype2 7
-	notetype1 9
+	speed 9
+	fade_wave 7
+	channel_volume 9
 	note G_, 1
 	note G_, 1
-	notetype1 3
+	channel_volume 3
 	note G_, 1
-	notetype1 9
+	channel_volume 9
 	note F_, 1
-	notetype1 3
+	channel_volume 3
 	note F_, 2
-	notetype1 9
+	channel_volume 9
 	note E_, 1
 	inc_octave
-	notetype1 8
-	notetype2 8
-	notetype0 1
+	channel_volume 8
+	fade_wave 8
+	speed 1
 	note D_, 5
-	notetype1 3
+	channel_volume 3
 	note D_, 4
-	notetype1 8
-	notetype0 9
+	channel_volume 8
+	speed 9
 	rest 1
 	dec_octave
-	notetype0 1
-	notetype2 8
+	speed 1
+	fade_wave 8
 	note G_, 5
 	note D_, 4
 	dec_octave
 	note A#, 5
-	notetype1 3
+	channel_volume 3
 	note A#, 4
-	notetype1 8
+	channel_volume 8
 	inc_octave
 	inc_octave
 	note D_, 5
-	notetype1 3
+	channel_volume 3
 	note D_, 4
-	notetype0 9
+	speed 9
 	rest 1
 	dec_octave
-	notetype0 1
-	notetype1 8
+	speed 1
+	channel_volume 8
 	note D_, 5
-	notetype1 3
+	channel_volume 3
 	note D_, 4
-	notetype0 9
-	notetype1 9
-	notetype2 7
+	speed 9
+	channel_volume 9
+	fade_wave 7
 	note G_, 1
 	dec_octave
-	notetype0 1
-	notetype1 8
-	notetype2 8
+	speed 1
+	channel_volume 8
+	fade_wave 8
 	note F_, 5
 	note F#, 4
-	notetype0 9
+	speed 9
 	inc_octave
-	notetype1 9
-	notetype2 7
+	channel_volume 9
+	fade_wave 7
 	note A#, 1
-	notetype1 3
+	channel_volume 3
 	note A#, 2
 	inc_octave
-	notetype1 9
+	channel_volume 9
 	note C#, 1
-	notetype1 3
+	channel_volume 3
 	note C#, 1
 	dec_octave
-	notetype1 9
+	channel_volume 9
 	note G_, 1
-	notetype1 3
+	channel_volume 3
 	note G_, 1
 	dec_octave
-	notetype1 9
+	channel_volume 9
 	note A#, 1
-	notetype1 3
+	channel_volume 3
 	note A#, 1
-	notetype2 8
-	notetype1 8
+	fade_wave 8
+	channel_volume 8
 	note A#, 1
-	notetype1 3
+	channel_volume 3
 	note A#, 2
 	sound_ret
 
 
 Music_Club3_Ch3: ; fa63e (3e:663e)
-	notetype0 9
+	speed 9
 	;stereo_panning 1, 1
-	notetype1 1
-	notetype2 11
+	channel_volume 1
+	fade_wave 11
 	;echo 0
 	;cutoff 8
 .Loop1

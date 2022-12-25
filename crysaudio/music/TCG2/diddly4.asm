@@ -5,9 +5,9 @@ Music_Diddly4:
 	channel 3, Music_Diddly4_Ch3
 
 Music_Diddly4_Ch2: ; 1ebeae (7a:7eae)
-	notetype1 10
+	channel_volume 10
 	;musicf0 0
-	notetype0 1
+	speed 1
 	;musicdc 255
 	octave 3
 	;musicf1 87
@@ -30,9 +30,9 @@ Music_Diddly4_Ch2: ; 1ebeae (7a:7eae)
 
 
 Music_Diddly4_Ch1: ; 1ebec7 (7a:7ec7)
-	notetype1 10
+	channel_volume 10
 	;musicf0 0
-	notetype0 1
+	speed 1
 	;musicdc 255
 	octave 2
 	;musicf1 87
@@ -55,13 +55,13 @@ Music_Diddly4_Ch1: ; 1ebec7 (7a:7ec7)
 
 
 Music_Diddly4_Ch3: ; 1ebee0 (7a:7ee0)
-	notetype1 10
-	notetype2 14
-	notetype0 1
-	notetype1 2
+	channel_volume 10
+	fade_wave 14
+	speed 1
+	channel_volume 2
 	;musice9 128
 	;musicdc 255
-	notetype0 1
+	speed 1
 	;musice8 1
 	rest 6
 	rest 5

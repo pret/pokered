@@ -6,8 +6,8 @@ Music_GRCastle:
 	channel 4, Music_GRCastle_Ch4
 
 Music_GRCastle_Ch2: ; 1f213c (7c:613c)
-	notetype1 10
-	notetype0 1
+	channel_volume 10
+	speed 1
 	rest 12
 	;musicf0 8
 	octave 1
@@ -93,11 +93,11 @@ Music_GRCastle_Ch2: ; 1f213c (7c:613c)
 	;musicf0 0
 	;musicf3
 	octave 2
-	notetype1 7
+	channel_volume 7
 	note E_, 16
 	;tie
 	note E_, 9
-	notetype1 11
+	channel_volume 11
 	note E_, 16
 	;tie
 	note E_, 9
@@ -521,7 +521,7 @@ Music_GRCastle_Ch2: ; 1f213c (7c:613c)
 	;musicf1 71
 	;musicf3
 	octave 2
-	notetype1 8
+	channel_volume 8
 	note B_, 16
 	;tie
 	note B_, 9
@@ -903,8 +903,8 @@ Music_GRCastle_Ch2: ; 1f213c (7c:613c)
 
 
 Music_GRCastle_Ch1: ; 1f2525 (7c:6525)
-	notetype1 10
-	notetype0 1
+	channel_volume 10
+	speed 1
 	rest 12
 	;musicf0 8
 	octave 1
@@ -1818,12 +1818,12 @@ Music_GRCastle_Ch1: ; 1f2525 (7c:6525)
 
 
 Music_GRCastle_Ch3: ; 1f2903 (7c:6903)
-	notetype1 10
-	notetype2 11
-	notetype1 1
+	channel_volume 10
+	fade_wave 11
+	channel_volume 1
 	;musice9 96
 	;musicdc 255
-	notetype0 1
+	speed 1
 	rest 12
 	;vibrato_type 5
 	vibrato 0, 3, 3
@@ -2328,7 +2328,7 @@ Music_GRCastle_Ch3: ; 1f2903 (7c:6903)
 	vibrato 50, 3, 3
 	;musicec 244
 	octave 2
-	notetype0 10
+	speed 10
 	note E_, 10
 	;tie
 	note E_, 10
@@ -2341,12 +2341,12 @@ Music_GRCastle_Ch3: ; 1f2903 (7c:6903)
 	;tie
 	note E_, 10
 	;tie
-	notetype0 5
-	notetype1 3
+	speed 5
+	channel_volume 3
 	note E_, 15
-	notetype1 1
+	channel_volume 1
 	;musicec 0
-	notetype0 1
+	speed 1
 	note D_, 13
 	note E_, 12
 	rest 13
@@ -2366,7 +2366,7 @@ Music_GRCastle_Ch3: ; 1f2903 (7c:6903)
 	sound_loop 0, .MainLoop
 
 Branch_1f2b72:
-	notetype1 2
+	channel_volume 2
 	octave 2
 	note B_, 2
 	rest 2
@@ -2379,13 +2379,13 @@ Branch_1f2b72:
 	;tie
 	note B_, 12
 	vibrato 0, 3, 3
-	notetype1 1
+	channel_volume 1
 	octave 2
 	;musicec 0
 	sound_ret
 
 Branch_1f2b88:
-	notetype1 2
+	channel_volume 2
 	octave 3
 	note C_, 2
 	rest 1
@@ -2398,24 +2398,24 @@ Branch_1f2b88:
 	;tie
 	note F_, 12
 	vibrato 0, 3, 3
-	notetype1 1
+	channel_volume 1
 	octave 2
 	;musicec 0
 	sound_ret
 
 Branch_1f2b9e:
-	notetype1 2
+	channel_volume 2
 	octave 3
 	note D_, 12
 	;tie
 	note D_, 13
-	notetype1 1
+	channel_volume 1
 	octave 2
 	;musicec 0
 	sound_ret
 
 Branch_1f2baa:
-	notetype1 2
+	channel_volume 2
 	octave 2
 	note B_, 13
 	note B_, 2
@@ -2429,12 +2429,12 @@ Branch_1f2baa:
 	;tie
 	note B_, 12
 	vibrato 0, 3, 3
-	notetype1 1
+	channel_volume 1
 	octave 2
 	sound_ret
 
 Branch_1f2bbf:
-	notetype1 2
+	channel_volume 2
 	octave 2
 	note B_, 2
 	rest 3
@@ -2442,7 +2442,7 @@ Branch_1f2bbf:
 	rest 3
 	note B_, 1
 	rest 3
-	notetype1 1
+	channel_volume 1
 	sound_ret
 
 

@@ -6,9 +6,9 @@ Music_PCMainMenu:
 	channel 4, Music_PCMainMenu_Ch4
 
 Music_PCMainMenu_Ch1: ; f9052 (3e:5052)
-	notetype0 7
+	speed 7
 	;stereo_panning 1, 1
-	notetype2 8
+	fade_wave 8
 	octave 3
 	duty_cycle 2
 .MainLoop
@@ -16,66 +16,66 @@ Music_PCMainMenu_Ch1: ; f9052 (3e:5052)
 	rest 4
 	dec_octave
 	duty_cycle 1
-	notetype2 5
-	notetype1 6
+	fade_wave 5
+	channel_volume 6
 	note F_, 1
 	rest 1
 	duty_cycle 2
-	notetype2 8
-	notetype1 12
+	fade_wave 8
+	channel_volume 12
 	note A_, 1
-	notetype1 3
+	channel_volume 3
 	note A_, 1
 	rest 2
 	inc_octave
-	notetype1 12
+	channel_volume 12
 	note C_, 1
-	notetype1 3
+	channel_volume 3
 	note C_, 1
 	dec_octave
 	duty_cycle 1
-	notetype2 5
-	notetype1 6
+	fade_wave 5
+	channel_volume 6
 	note F_, 1
 	rest 1
 	duty_cycle 2
-	notetype2 8
-	notetype1 12
+	fade_wave 8
+	channel_volume 12
 	note B_, 1
-	notetype1 3
+	channel_volume 3
 	note B_, 1
 	sound_call Branch_f90c2
 	rest 4
 	dec_octave
 	duty_cycle 1
-	notetype2 5
-	notetype1 6
+	fade_wave 5
+	channel_volume 6
 	note F_, 1
 	rest 1
 	inc_octave
 	duty_cycle 2
-	notetype2 8
-	notetype1 12
+	fade_wave 8
+	channel_volume 12
 	note E_, 1
-	notetype1 3
+	channel_volume 3
 	note E_, 1
 	rest 2
-	notetype1 12
+	channel_volume 12
 	note C_, 1
-	notetype1 3
+	channel_volume 3
 	note C_, 1
 	duty_cycle 1
-	notetype2 5
-	notetype1 6
+	fade_wave 5
+	channel_volume 6
 	dec_octave
 	note F_, 1
 	rest 1
 	inc_octave
 	duty_cycle 2
-	notetype2 8
-	notetype1 12
+	fade_wave 8
+	channel_volume 12
 	note D_, 1
-	notetype1 3
+	channel_volume 3
 	note D_, 1
 	sound_loop 0, .MainLoop
 
@@ -83,38 +83,38 @@ Branch_f90c2:
 	octave 3
 	rest 4
 	duty_cycle 1
-	notetype1 6
-	notetype2 5
+	channel_volume 6
+	fade_wave 5
 	note G_, 1
 	rest 3
-	notetype2 8
+	fade_wave 8
 	duty_cycle 2
-	notetype1 12
+	channel_volume 12
 	note B_, 2
 	inc_octave
 	note D_, 1
-	notetype1 2
+	channel_volume 2
 	note D_, 1
 	dec_octave
 	duty_cycle 1
-	notetype1 6
-	notetype2 5
+	channel_volume 6
+	fade_wave 5
 	note G_, 1
 	rest 1
 	inc_octave
 	duty_cycle 2
-	notetype2 8
-	notetype1 12
+	fade_wave 8
+	channel_volume 12
 	note C_, 1
-	notetype1 3
+	channel_volume 3
 	note C_, 1
 	sound_ret
 
 
 Music_PCMainMenu_Ch2: ; f90ed (3e:50ed)
-	notetype0 7
+	speed 7
 	;stereo_panning 1, 1
-	notetype2 8
+	fade_wave 8
 	octave 3
 	duty_cycle 2
 .MainLoop
@@ -122,67 +122,67 @@ Music_PCMainMenu_Ch2: ; f90ed (3e:50ed)
 	rest 4
 	inc_octave
 	duty_cycle 1
-	notetype2 5
-	notetype1 6
+	fade_wave 5
+	channel_volume 6
 	note C_, 1
 	rest 1
 	dec_octave
 	duty_cycle 2
-	notetype2 8
-	notetype1 8
+	fade_wave 8
+	channel_volume 8
 	note F_, 1
-	notetype1 2
+	channel_volume 2
 	note F_, 1
 	rest 2
-	notetype1 8
+	channel_volume 8
 	note A_, 1
-	notetype1 2
+	channel_volume 2
 	note A_, 1
 	duty_cycle 1
-	notetype2 5
-	notetype1 6
+	fade_wave 5
+	channel_volume 6
 	inc_octave
 	note C_, 1
 	rest 1
 	dec_octave
 	duty_cycle 2
-	notetype2 8
-	notetype1 8
+	fade_wave 8
+	channel_volume 8
 	note G_, 1
-	notetype1 2
+	channel_volume 2
 	note G_, 1
 	sound_call Branch_f915e
 	rest 4
 	inc_octave
 	duty_cycle 1
-	notetype2 5
-	notetype1 6
+	fade_wave 5
+	channel_volume 6
 	note C_, 1
 	rest 1
 	duty_cycle 2
-	notetype2 8
-	notetype1 8
+	fade_wave 8
+	channel_volume 8
 	note C_, 1
-	notetype1 2
+	channel_volume 2
 	note C_, 1
 	rest 2
 	dec_octave
-	notetype1 8
+	channel_volume 8
 	note A_, 1
-	notetype1 2
+	channel_volume 2
 	note A_, 1
 	duty_cycle 1
 	inc_octave
-	notetype1 6
-	notetype2 5
+	channel_volume 6
+	fade_wave 5
 	note C_, 1
 	rest 1
 	dec_octave
 	duty_cycle 2
-	notetype2 8
-	notetype1 8
+	fade_wave 8
+	channel_volume 8
 	note B_, 1
-	notetype1 2
+	channel_volume 2
 	note B_, 1
 	sound_loop 0, .MainLoop
 
@@ -190,39 +190,39 @@ Branch_f915e:
 	octave 4
 	rest 4
 	duty_cycle 1
-	notetype2 5
-	notetype1 6
+	fade_wave 5
+	channel_volume 6
 	note D_, 1
 	rest 3
 	duty_cycle 2
-	notetype2 8
+	fade_wave 8
 	dec_octave
-	notetype1 8
+	channel_volume 8
 	note G_, 2
 	note B_, 1
-	notetype1 2
+	channel_volume 2
 	note B_, 1
 	inc_octave
 	duty_cycle 1
-	notetype2 5
-	notetype1 6
+	fade_wave 5
+	channel_volume 6
 	note D_, 1
 	rest 1
 	dec_octave
 	duty_cycle 2
-	notetype2 8
-	notetype1 8
+	fade_wave 8
+	channel_volume 8
 	note A_, 1
-	notetype1 2
+	channel_volume 2
 	note A_, 1
 	sound_ret
 
 
 Music_PCMainMenu_Ch3: ; f9189 (3e:5189)
-	notetype0 7
-	notetype1 1
+	speed 7
+	channel_volume 1
 	;stereo_panning 1, 1
-	notetype2 11
+	fade_wave 11
 	;cutoff 7
 	;echo 0
 .MainLoop
@@ -233,12 +233,12 @@ Music_PCMainMenu_Ch3: ; f9189 (3e:5189)
 	;cutoff 8
 	note G_, 1
 	rest 1
-	notetype0 1
+	speed 1
 	note A#, 4
 	;tie
 	note B_, 3
 	;tie
-	notetype0 7
+	speed 7
 	note B_, 1
 	rest 1
 	;cutoff 4
@@ -259,12 +259,12 @@ Music_PCMainMenu_Ch3: ; f9189 (3e:5189)
 	;cutoff 8
 	note F_, 1
 	rest 1
-	notetype0 1
+	speed 1
 	note G#, 4
 	;tie
 	note A_, 3
 	;tie
-	notetype0 7
+	speed 7
 	note A_, 1
 	rest 1
 	;cutoff 4
@@ -285,12 +285,12 @@ Music_PCMainMenu_Ch3: ; f9189 (3e:5189)
 	;cutoff 8
 	note G_, 1
 	rest 1
-	notetype0 1
+	speed 1
 	note A#, 4
 	;tie
 	note B_, 3
 	;tie
-	notetype0 7
+	speed 7
 	note B_, 1
 	rest 1
 	;cutoff 4
@@ -311,29 +311,29 @@ Music_PCMainMenu_Ch3: ; f9189 (3e:5189)
 	;cutoff 8
 	note F_, 1
 	rest 1
-	notetype0 1
+	speed 1
 	note B_, 4
 	;tie
 	inc_octave
 	note C_, 3
 	;tie
-	notetype0 7
+	speed 7
 	note C_, 1
 	rest 1
 	;cutoff 8
-	notetype0 1
+	speed 1
 	note F#, 4
 	;tie
 	note G_, 3
 	;tie
-	notetype0 7
+	speed 7
 	note G_, 1
 	;cutoff 4
 	note F_, 1
 	;cutoff 8
 	note C_, 2
 	note F_, 2
-	notetype0 1
+	speed 1
 	note C_, 3
 	;tie
 	dec_octave
@@ -344,7 +344,7 @@ Music_PCMainMenu_Ch3: ; f9189 (3e:5189)
 	note A_, 3
 	;tie
 	note G#, 2
-	notetype0 7
+	speed 7
 	sound_loop 0, .MainLoop
 
 

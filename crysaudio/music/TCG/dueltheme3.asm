@@ -6,102 +6,102 @@ Music_DuelTheme3:
 	channel 4, Music_DuelTheme3_Ch4
 
 Music_DuelTheme3_Ch1: ; f63a1 (3d:63a1)
-	notetype0 11
+	speed 11
 	;stereo_panning 1, 1
 	;vibrato_type 8
 	vibrato 20, 3, 3
-	notetype2 8
+	fade_wave 8
 .MainLoop
 	octave 2
 	duty_cycle 0
 .Loop1
 	;rept 4
-	notetype1 9
+	channel_volume 9
 	note F#, 2
 	rest 1
 	;---
-	notetype1 9
+	channel_volume 9
 	note F#, 2
 	rest 1
 	;---
-	notetype1 9
+	channel_volume 9
 	note F#, 2
 	rest 1
 	;---
-	notetype1 9
+	channel_volume 9
 	note F#, 2
 	rest 1
 	;endr
-	notetype1 9
+	channel_volume 9
 	note E_, 2
-	notetype1 9
+	channel_volume 9
 	note F_, 2
 	sound_loop 4, .Loop1
 .Loop2
 	sound_call Branch_f67b2
 	sound_loop 4, .Loop2
 	duty_cycle 1
-	notetype1 10
+	channel_volume 10
 .Loop3
 	octave 3
 	note C#, 1
 	note F#, 1
-	notetype0 1
+	speed 1
 	note G#, 5
-	notetype1 3
+	channel_volume 3
 	note G#, 6
 	sound_call Branch_f65a7
 	octave 3
 	note D_, 1
 	note F#, 1
-	notetype0 1
+	speed 1
 	note B_, 5
-	notetype1 3
+	channel_volume 3
 	note B_, 6
 	sound_call Branch_f65a7
 	sound_loop 2, .Loop3
 	duty_cycle 0
-	notetype1 10
+	channel_volume 10
 	dec_octave
 	rest 2
-	notetype0 1
+	speed 1
 	note E_, 5
-	notetype1 2
+	channel_volume 2
 	note E_, 6
 	sound_call Branch_f65cf
 	note F#, 5
-	notetype1 2
+	channel_volume 2
 	note F#, 6
-	notetype0 11
+	speed 11
 	rest 1
 	dec_octave
 	duty_cycle 0
-	notetype1 10
-	notetype0 1
+	channel_volume 10
+	speed 1
 	note E_, 5
-	notetype1 2
+	channel_volume 2
 	note E_, 6
 	sound_call Branch_f65cf
-	notetype0 11
+	speed 11
 	duty_cycle 1
-	notetype1 10
+	channel_volume 10
 .Loop4
 	octave 3
 	note C#, 1
 	note F#, 1
-	notetype0 1
+	speed 1
 	note G#, 5
-	notetype1 3
+	channel_volume 3
 	note G#, 6
 	sound_call Branch_f65a7
 	octave 3
 	note D_, 1
 	note F#, 1
-	notetype0 1
+	speed 1
 	note B_, 5
-	notetype1 3
+	channel_volume 3
 	note B_, 6
-	notetype1 10
+	channel_volume 10
 	sound_call Branch_f65a7
 	sound_loop 2, .Loop4
 	vibrato 10, 3, 3
@@ -109,380 +109,380 @@ Music_DuelTheme3_Ch1: ; f63a1 (3d:63a1)
 .Loop5
 	octave 2
 	rest 4
-	notetype1 9
+	channel_volume 9
 	note F#, 2
-	notetype1 2
+	channel_volume 2
 	note F#, 2
 	rest 2
-	notetype1 9
+	channel_volume 9
 	note E_, 2
-	notetype1 2
+	channel_volume 2
 	note E_, 4
-	notetype1 9
+	channel_volume 9
 	note D#, 2
-	notetype1 2
+	channel_volume 2
 	note D#, 4
-	notetype1 9
+	channel_volume 9
 	note D_, 2
 	note C#, 2
 	sound_loop 2, .Loop5
 	vibrato 20, 3, 3
 	duty_cycle 2
-	notetype2 6
+	fade_wave 6
 .Loop6
 	sound_call Branch_f661d
 	sound_loop 4, .Loop6
 	octave 4
-	notetype1 7
+	channel_volume 7
 	note C#, 5
-	notetype1 2
+	channel_volume 2
 	note C#, 6
-	notetype1 7
+	channel_volume 7
 	note F#, 5
-	notetype1 2
+	channel_volume 2
 	note F#, 6
 .Loop7
 	sound_call Branch_f661d
 	sound_loop 3, .Loop7
 	octave 4
-	notetype1 7
+	channel_volume 7
 	note C#, 5
-	notetype1 2
+	channel_volume 2
 	note C#, 6
-	notetype1 7
+	channel_volume 7
 	note F#, 5
-	notetype1 2
+	channel_volume 2
 	note F#, 6
 	inc_octave
-	notetype1 7
+	channel_volume 7
 	note C#, 5
-	notetype1 2
+	channel_volume 2
 	note C#, 6
 	dec_octave
-	notetype1 7
+	channel_volume 7
 	note F#, 5
-	notetype1 2
+	channel_volume 2
 	note F#, 6
 	dec_octave
-	notetype0 11
+	speed 11
 	duty_cycle 1
-	notetype1 9
-	notetype2 8
+	channel_volume 9
+	fade_wave 8
 	note D_, 2
 	note C#, 2
 	dec_octave
 	note F#, 3
 	inc_octave
-	notetype0 1
+	speed 1
 	note D_, 3
 	note D#, 2
 	note E_, 3
 	note F_, 3
-	notetype0 11
+	speed 11
 	note F#, 4
 	dec_octave
 	note G#, 3
 	inc_octave
-	notetype0 1
+	speed 1
 	note E_, 3
 	note F_, 2
 	note F#, 3
 	note G_, 3
-	notetype0 11
+	speed 11
 	note G#, 4
 	duty_cycle 0
 	octave 2
 .Loop8
 	;rept 4
-	notetype1 9
+	channel_volume 9
 	note F#, 1
-	notetype1 3
-	note F#, 1
-	rest 1
-	;---
-	notetype1 9
-	note F#, 1
-	notetype1 3
+	channel_volume 3
 	note F#, 1
 	rest 1
 	;---
-	notetype1 9
+	channel_volume 9
 	note F#, 1
-	notetype1 3
+	channel_volume 3
 	note F#, 1
 	rest 1
 	;---
-	notetype1 9
+	channel_volume 9
 	note F#, 1
-	notetype1 3
+	channel_volume 3
+	note F#, 1
+	rest 1
+	;---
+	channel_volume 9
+	note F#, 1
+	channel_volume 3
 	note F#, 1
 	rest 1
 	;endr
-	notetype1 9
+	channel_volume 9
 	note F#, 1
-	notetype1 3
+	channel_volume 3
 	note F#, 1
-	notetype1 9
+	channel_volume 9
 	note F#, 1
-	notetype1 3
+	channel_volume 3
 	note F#, 1
 	;rept 4
-	notetype1 9
+	channel_volume 9
 	note G_, 1
-	notetype1 3
-	note G_, 1
-	rest 1
-	;---
-	notetype1 9
-	note G_, 1
-	notetype1 3
+	channel_volume 3
 	note G_, 1
 	rest 1
 	;---
-	notetype1 9
+	channel_volume 9
 	note G_, 1
-	notetype1 3
+	channel_volume 3
 	note G_, 1
 	rest 1
 	;---
-	notetype1 9
+	channel_volume 9
 	note G_, 1
-	notetype1 3
+	channel_volume 3
+	note G_, 1
+	rest 1
+	;---
+	channel_volume 9
+	note G_, 1
+	channel_volume 3
 	note G_, 1
 	rest 1
 	;endr
-	notetype1 9
+	channel_volume 9
 	note A_, 1
-	notetype1 3
+	channel_volume 3
 	note A_, 1
-	notetype1 9
+	channel_volume 9
 	note G_, 1
-	notetype1 3
+	channel_volume 3
 	note G_, 1
 	sound_loop 2, .Loop8
 	duty_cycle 1
-	notetype1 10
+	channel_volume 10
 	octave 3
 	note C#, 1
 	note F#, 1
-	notetype0 1
+	speed 1
 	note G#, 5
-	notetype1 3
+	channel_volume 3
 	note G#, 6
 	sound_call Branch_f65a7
 	octave 3
 	note C#, 1
 	note F#, 1
-	notetype0 1
+	speed 1
 	note G#, 5
-	notetype1 3
+	channel_volume 3
 	note G#, 6
 	inc_octave
-	notetype1 10
-	notetype0 11
+	channel_volume 10
+	speed 11
 	note C#, 9
-	notetype1 3
+	channel_volume 3
 	note C#, 2
 	dec_octave
-	notetype1 10
+	channel_volume 10
 	note B_, 1
 	inc_octave
 	note C#, 1
 	note F#, 1
 	note C#, 1
 	dec_octave
-	notetype0 1
+	speed 1
 	note B_, 5
-	notetype1 3
+	channel_volume 3
 	note B_, 6
-	notetype0 11
-	notetype1 10
+	speed 11
+	channel_volume 10
 	note F#, 9
-	notetype1 3
+	channel_volume 3
 	note F#, 4
-	notetype1 10
+	channel_volume 10
 	note G#, 1
 	note A_, 1
-	notetype0 1
+	speed 1
 	note G#, 5
-	notetype1 3
+	channel_volume 3
 	note G#, 6
-	notetype1 10
-	notetype0 11
+	channel_volume 10
+	speed 11
 	note B_, 8
-	notetype1 3
+	channel_volume 3
 	note B_, 1
-	notetype1 10
+	channel_volume 10
 	note A_, 2
 	note B_, 1
 	;tie
-	notetype0 1
+	speed 1
 	note B_, 5
-	notetype1 3
+	channel_volume 3
 	note B_, 6
-	notetype0 11
+	speed 11
 	inc_octave
-	notetype1 10
+	channel_volume 10
 	note C#, 1
 	note D_, 1
-	notetype0 1
+	speed 1
 	note C#, 5
-	notetype1 3
+	channel_volume 3
 	note C#, 6
-	notetype1 10
-	notetype0 11
+	channel_volume 10
+	speed 11
 	note E_, 10
-	notetype1 3
+	channel_volume 3
 	note E_, 1
-	notetype1 10
+	channel_volume 10
 	note D_, 1
-	notetype0 1
+	speed 1
 	note C#, 8
-	notetype1 3
+	channel_volume 3
 	note C#, 3
 	dec_octave
-	notetype1 10
-	notetype0 11
+	channel_volume 10
+	speed 11
 	note B_, 1
 	inc_octave
 	note C#, 1
 	dec_octave
-	notetype0 1
+	speed 1
 	note B_, 5
-	notetype1 3
+	channel_volume 3
 	note B_, 6
-	notetype0 11
-	notetype1 10
+	speed 11
+	channel_volume 10
 	note E_, 10
-	notetype1 3
+	channel_volume 3
 	note E_, 3
-	notetype1 2
+	channel_volume 2
 	note A_, 3
-	notetype1 6
+	channel_volume 6
 	note A_, 5
 	inc_octave
-	notetype1 4
+	channel_volume 4
 	note E_, 3
-	notetype1 8
+	channel_volume 8
 	note E_, 3
-	notetype1 10
+	channel_volume 10
 	note E_, 2
 	duty_cycle 1
 .Loop9
 	;rept 4
-	notetype1 9
+	channel_volume 9
 	note G#, 1
-	notetype1 3
-	note G#, 1
-	rest 1
-	;---
-	notetype1 9
-	note G#, 1
-	notetype1 3
+	channel_volume 3
 	note G#, 1
 	rest 1
 	;---
-	notetype1 9
+	channel_volume 9
 	note G#, 1
-	notetype1 3
+	channel_volume 3
 	note G#, 1
 	rest 1
 	;---
-	notetype1 9
+	channel_volume 9
 	note G#, 1
-	notetype1 3
+	channel_volume 3
+	note G#, 1
+	rest 1
+	;---
+	channel_volume 9
+	note G#, 1
+	channel_volume 3
 	note G#, 1
 	rest 1
 	;endr
-	notetype1 9
+	channel_volume 9
 	note G#, 1
-	notetype1 3
+	channel_volume 3
 	note G#, 1
-	notetype1 9
+	channel_volume 9
 	note G#, 1
-	notetype1 3
+	channel_volume 3
 	note G#, 1
 	;rept 4
-	notetype1 9
+	channel_volume 9
 	note A_, 1
-	notetype1 3
-	note A_, 1
-	rest 1
-	;---
-	notetype1 9
-	note A_, 1
-	notetype1 3
+	channel_volume 3
 	note A_, 1
 	rest 1
 	;---
-	notetype1 9
+	channel_volume 9
 	note A_, 1
-	notetype1 3
+	channel_volume 3
 	note A_, 1
 	rest 1
 	;---
-	notetype1 9
+	channel_volume 9
 	note A_, 1
-	notetype1 3
+	channel_volume 3
+	note A_, 1
+	rest 1
+	;---
+	channel_volume 9
+	note A_, 1
+	channel_volume 3
 	note A_, 1
 	rest 1
 	;endr
-	notetype1 9
+	channel_volume 9
 	note A_, 1
-	notetype1 3
+	channel_volume 3
 	note A_, 1
-	notetype1 9
+	channel_volume 9
 	note A_, 1
-	notetype1 3
+	channel_volume 3
 	note A_, 1
 	sound_loop 4, .Loop9
 	sound_loop 0, .MainLoop
 
 Branch_f65a7:
-	notetype0 11
+	speed 11
 	octave 4
-	notetype1 10
+	channel_volume 10
 	note C#, 5
 	;tie
 	note C#, 4
-	notetype1 3
+	channel_volume 3
 	note C#, 2
 	dec_octave
-	notetype1 10
+	channel_volume 10
 	note B_, 1
 	inc_octave
 	note C#, 1
 	note F#, 1
 	note C#, 1
 	dec_octave
-	notetype0 1
+	speed 1
 	note B_, 5
-	notetype1 3
+	channel_volume 3
 	note B_, 6
-	notetype0 11
-	notetype1 10
+	speed 11
+	channel_volume 10
 	inc_octave
 	note C#, 5
 	;tie
 	note C#, 4
-	notetype1 3
+	channel_volume 3
 	note C#, 4
-	notetype1 10
+	channel_volume 10
 	sound_ret
 
 Branch_f65cf:
 	octave 3
 .Loop10
-	notetype0 11
+	speed 11
 	rest 2
-	notetype0 1
-	notetype1 10
+	speed 1
+	channel_volume 10
 	note E_, 5
-	notetype1 2
+	channel_volume 2
 	note E_, 6
 	sound_loop 3, .Loop10
 	duty_cycle 2
-	notetype1 8
+	channel_volume 8
 	note D_, 5
 	note G_, 6
 	note B_, 5
@@ -495,29 +495,29 @@ Branch_f65cf:
 	note D_, 5
 	note G_, 6
 	note F#, 5
-	notetype1 2
+	channel_volume 2
 	note F#, 6
 	duty_cycle 0
-	notetype1 10
-	notetype0 11
+	channel_volume 10
+	speed 11
 	rest 1
 	dec_octave
-	notetype0 1
+	speed 1
 	note E_, 5
-	notetype1 2
+	channel_volume 2
 	note E_, 6
 .Loop11
-	notetype0 11
+	speed 11
 	rest 2
-	notetype0 1
-	notetype1 10
+	speed 1
+	channel_volume 10
 	note E_, 5
-	notetype1 2
+	channel_volume 2
 	note E_, 6
 	sound_loop 3, .Loop11
 	dec_octave
 	duty_cycle 2
-	notetype1 8
+	channel_volume 8
 	note B_, 5
 	inc_octave
 	note E_, 6
@@ -532,78 +532,78 @@ Branch_f65cf:
 
 Branch_f661d:
 	octave 4
-	notetype0 1
-	notetype1 7
+	speed 1
+	channel_volume 7
 	note C#, 5
-	notetype1 2
+	channel_volume 2
 	note C#, 6
-	notetype1 7
+	channel_volume 7
 	note F#, 5
-	notetype1 2
+	channel_volume 2
 	note F#, 6
 	inc_octave
-	notetype1 7
+	channel_volume 7
 	note C#, 5
-	notetype1 2
+	channel_volume 2
 	note C#, 6
 	dec_octave
-	notetype1 7
+	channel_volume 7
 	note F#, 5
-	notetype1 2
+	channel_volume 2
 	note F#, 6
 	inc_octave
-	notetype1 7
+	channel_volume 7
 	note C#, 5
-	notetype1 2
+	channel_volume 2
 	note C#, 6
 	dec_octave
-	notetype1 7
+	channel_volume 7
 	note F#, 5
-	notetype1 2
+	channel_volume 2
 	note F#, 6
 	sound_ret
 
 
 Music_DuelTheme3_Ch2: ; f6649 (3d:6649)
-	notetype0 11
+	speed 11
 	;stereo_panning 1, 1
 	;vibrato_type 8
 	vibrato 20, 3, 3
-	notetype2 8
+	fade_wave 8
 .MainLoop
 	octave 2
 	duty_cycle 0
 	;frequency_offset 3
 .Loop1
 	;rept 4
-	notetype1 8
+	channel_volume 8
 	note F#, 2
 	rest 1
 	;---
-	notetype1 8
+	channel_volume 8
 	note F#, 2
 	rest 1
 	;---
-	notetype1 8
+	channel_volume 8
 	note F#, 2
 	rest 1
 	;---
-	notetype1 8
+	channel_volume 8
 	note F#, 2
 	rest 1
 	;endr
-	notetype1 8
+	channel_volume 8
 	note E_, 2
-	notetype1 8
+	channel_volume 8
 	note F_, 2
 	sound_loop 4, .Loop1
 	;frequency_offset 0
 	octave 3
 .Loop2
 	rest 6
-	notetype1 10
+	channel_volume 10
 	note E_, 1
-	notetype1 2
+	channel_volume 2
 	note E_, 1
 	rest 8
 	sound_loop 4, .Loop2
@@ -620,36 +620,36 @@ Music_DuelTheme3_Ch2: ; f6649 (3d:6649)
 	;endr
 	sound_loop 2, .Loop3
 	octave 2
-	notetype1 10
-	notetype0 11
+	channel_volume 10
+	speed 11
 	rest 1
-	notetype0 1
+	speed 1
 	note C#, 5
-	notetype1 2
+	channel_volume 2
 	note C#, 6
-	notetype1 10
+	channel_volume 10
 	note A_, 5
-	notetype1 2
+	channel_volume 2
 	note A_, 6
 	sound_call Branch_f6866
 	octave 4
 	note C#, 5
-	notetype1 2
+	channel_volume 2
 	note C#, 6
 	dec_octave
 	dec_octave
 	duty_cycle 0
-	notetype1 10
+	channel_volume 10
 	note C#, 5
-	notetype1 2
+	channel_volume 2
 	note C#, 6
-	notetype1 10
+	channel_volume 10
 	note A_, 5
-	notetype1 2
+	channel_volume 2
 	note A_, 6
 	sound_call Branch_f6866
 	duty_cycle 0
-	notetype1 9
+	channel_volume 9
 .Loop4
 	;rept 2
 	sound_call Branch_f67b2
@@ -664,378 +664,378 @@ Music_DuelTheme3_Ch2: ; f6649 (3d:6649)
 	sound_loop 2, .Loop4
 	vibrato 10, 3, 3
 .Loop5
-	notetype1 10
-	notetype2 6
+	channel_volume 10
+	fade_wave 6
 	note F#, 1
 	note F#, 1
-	notetype2 8
-	notetype0 1
+	fade_wave 8
+	speed 1
 	note F#, 5
-	notetype1 2
+	channel_volume 2
 	note F#, 6
-	notetype1 10
-	notetype2 6
-	notetype0 11
+	channel_volume 10
+	fade_wave 6
+	speed 11
 	note F#, 1
 	inc_octave
-	notetype1 9
-	notetype2 8
+	channel_volume 9
+	fade_wave 8
 	note C#, 2
 	dec_octave
-	notetype1 10
-	notetype2 6
+	channel_volume 10
+	fade_wave 6
 	note F#, 1
 	note F#, 1
-	notetype0 1
-	notetype2 8
+	speed 1
+	fade_wave 8
 	note F#, 5
-	notetype1 2
+	channel_volume 2
 	note F#, 6
-	notetype1 10
-	notetype2 6
-	notetype0 11
+	channel_volume 10
+	fade_wave 6
+	speed 11
 	note F#, 1
-	notetype1 9
-	notetype2 8
+	channel_volume 9
+	fade_wave 8
 	note B_, 2
-	notetype1 10
-	notetype2 6
+	channel_volume 10
+	fade_wave 6
 	note F#, 1
 	note F#, 1
-	notetype2 8
-	notetype0 1
+	fade_wave 8
+	speed 1
 	note F#, 5
-	notetype1 2
+	channel_volume 2
 	note F#, 6
-	notetype1 10
-	notetype2 6
-	notetype0 11
+	channel_volume 10
+	fade_wave 6
+	speed 11
 	note F#, 1
-	notetype1 9
-	notetype2 8
+	channel_volume 9
+	fade_wave 8
 	note B_, 2
-	notetype1 10
-	notetype2 6
+	channel_volume 10
+	fade_wave 6
 	note F#, 1
 	note F#, 1
-	notetype0 1
-	notetype2 8
+	speed 1
+	fade_wave 8
 	note F#, 5
-	notetype1 2
+	channel_volume 2
 	note F#, 6
-	notetype1 10
-	notetype2 6
-	notetype0 11
+	channel_volume 10
+	fade_wave 6
+	speed 11
 	note F#, 1
-	notetype2 8
-	notetype1 9
+	fade_wave 8
+	channel_volume 9
 	note A_, 2
 	note G#, 2
 	sound_loop 4, .Loop5
 	vibrato 20, 3, 3
 	note D_, 3
-	notetype0 1
+	speed 1
 	note A#, 3
 	note B_, 2
 	inc_octave
 	note C_, 3
 	note C#, 3
-	notetype0 11
+	speed 11
 	note D_, 4
 	dec_octave
 	note E_, 3
 	inc_octave
-	notetype0 1
+	speed 1
 	note C_, 3
 	note C#, 2
 	note D_, 3
 	note D#, 3
-	notetype0 11
+	speed 11
 	note E_, 4
 	octave 3
 .Loop6
 	;rept 4
-	notetype1 9
+	channel_volume 9
 	note C#, 1
-	notetype1 3
-	note C#, 1
-	rest 1
-	;---
-	notetype1 9
-	note C#, 1
-	notetype1 3
+	channel_volume 3
 	note C#, 1
 	rest 1
 	;---
-	notetype1 9
+	channel_volume 9
 	note C#, 1
-	notetype1 3
+	channel_volume 3
 	note C#, 1
 	rest 1
 	;---
-	notetype1 9
+	channel_volume 9
 	note C#, 1
-	notetype1 3
+	channel_volume 3
+	note C#, 1
+	rest 1
+	;---
+	channel_volume 9
+	note C#, 1
+	channel_volume 3
 	note C#, 1
 	rest 1
 	;endr
-	notetype1 9
+	channel_volume 9
 	note C#, 1
-	notetype1 3
+	channel_volume 3
 	note C#, 1
-	notetype1 9
+	channel_volume 9
 	note C#, 1
-	notetype1 3
+	channel_volume 3
 	note C#, 1
 	;rept 4
-	notetype1 9
+	channel_volume 9
 	note D_, 1
-	notetype1 3
-	note D_, 1
-	rest 1
-	;---
-	notetype1 9
-	note D_, 1
-	notetype1 3
+	channel_volume 3
 	note D_, 1
 	rest 1
 	;---
-	notetype1 9
+	channel_volume 9
 	note D_, 1
-	notetype1 3
+	channel_volume 3
 	note D_, 1
 	rest 1
 	;---
-	notetype1 9
+	channel_volume 9
 	note D_, 1
-	notetype1 3
+	channel_volume 3
+	note D_, 1
+	rest 1
+	;---
+	channel_volume 9
+	note D_, 1
+	channel_volume 3
 	note D_, 1
 	rest 1
 	;endr
-	notetype1 9
+	channel_volume 9
 	note E_, 1
-	notetype1 3
+	channel_volume 3
 	note E_, 1
-	notetype1 9
+	channel_volume 9
 	note D_, 1
-	notetype1 3
+	channel_volume 3
 	note D_, 1
 	sound_loop 6, .Loop6
 	duty_cycle 1
 	inc_octave
 .Loop7
 	;rept 4
-	notetype1 8
+	channel_volume 8
 	note E_, 1
-	notetype1 3
-	note E_, 1
-	rest 1
-	;---
-	notetype1 8
-	note E_, 1
-	notetype1 3
+	channel_volume 3
 	note E_, 1
 	rest 1
 	;---
-	notetype1 8
+	channel_volume 8
 	note E_, 1
-	notetype1 3
+	channel_volume 3
 	note E_, 1
 	rest 1
 	;---
-	notetype1 8
+	channel_volume 8
 	note E_, 1
-	notetype1 3
+	channel_volume 3
+	note E_, 1
+	rest 1
+	;---
+	channel_volume 8
+	note E_, 1
+	channel_volume 3
 	note E_, 1
 	rest 1
 	;endr
-	notetype1 8
+	channel_volume 8
 	note E_, 1
-	notetype1 3
+	channel_volume 3
 	note E_, 1
-	notetype1 8
+	channel_volume 8
 	note E_, 1
-	notetype1 3
+	channel_volume 3
 	note E_, 1
 	;rept 4
-	notetype1 8
+	channel_volume 8
 	note D_, 1
-	notetype1 3
-	note D_, 1
-	rest 1
-	;---
-	notetype1 8
-	note D_, 1
-	notetype1 3
+	channel_volume 3
 	note D_, 1
 	rest 1
 	;---
-	notetype1 8
+	channel_volume 8
 	note D_, 1
-	notetype1 3
+	channel_volume 3
 	note D_, 1
 	rest 1
 	;---
-	notetype1 8
+	channel_volume 8
 	note D_, 1
-	notetype1 3
+	channel_volume 3
+	note D_, 1
+	rest 1
+	;---
+	channel_volume 8
+	note D_, 1
+	channel_volume 3
 	note D_, 1
 	rest 1
 	;endr
-	notetype1 8
+	channel_volume 8
 	note D_, 1
-	notetype1 3
+	channel_volume 3
 	note D_, 1
-	notetype1 8
+	channel_volume 8
 	note D_, 1
-	notetype1 3
+	channel_volume 3
 	note D_, 1
 	sound_loop 4, .Loop7
 	sound_loop 0, .MainLoop
 
 Branch_f67b2:
 	octave 2
-	notetype1 10
-	notetype0 11
+	channel_volume 10
+	speed 11
 	rest 1
-	notetype0 1
+	speed 1
 	note F#, 5
-	notetype1 2
+	channel_volume 2
 	note F#, 6
-	notetype1 10
+	channel_volume 10
 	note A_, 5
-	notetype1 2
+	channel_volume 2
 	note A_, 6
-	notetype1 10
+	channel_volume 10
 	note F#, 5
-	notetype1 2
+	channel_volume 2
 	note F#, 6
-	notetype1 10
-	notetype0 11
+	channel_volume 10
+	speed 11
 	rest 1
-	notetype0 1
+	speed 1
 	note F#, 5
-	notetype1 3
+	channel_volume 3
 	note F#, 6
 	inc_octave
-	notetype1 10
-	notetype0 11
+	channel_volume 10
+	speed 11
 	note C_, 1
 	dec_octave
-	notetype0 1
+	speed 1
 	note B_, 5
-	notetype1 2
+	channel_volume 2
 	note B_, 6
-	notetype0 11
+	speed 11
 	rest 1
-	notetype0 1
-	notetype1 10
+	speed 1
+	channel_volume 10
 	note A_, 5
-	notetype1 2
+	channel_volume 2
 	note A_, 6
-	notetype0 11
+	speed 11
 	rest 1
-	notetype0 1
-	notetype1 10
+	speed 1
+	channel_volume 10
 	note B_, 5
-	notetype1 2
+	channel_volume 2
 	note B_, 6
-	notetype1 10
+	channel_volume 10
 	note A_, 4
 	note B_, 4
 	note A_, 3
 	note F#, 5
-	notetype1 2
+	channel_volume 2
 	note F#, 6
-	notetype0 11
-	notetype1 9
+	speed 11
+	channel_volume 9
 	note E_, 1
-	notetype1 10
+	channel_volume 10
 	note F_, 1
 	sound_ret
 
 Branch_f680a:
 	octave 2
-	notetype1 10
-	notetype0 11
+	channel_volume 10
+	speed 11
 	rest 1
-	notetype0 1
+	speed 1
 	note G_, 5
-	notetype1 2
+	channel_volume 2
 	note G_, 6
-	notetype1 10
+	channel_volume 10
 	note B_, 5
-	notetype1 2
+	channel_volume 2
 	note B_, 6
-	notetype1 10
+	channel_volume 10
 	note G_, 5
-	notetype1 2
+	channel_volume 2
 	note G_, 6
-	notetype0 11
+	speed 11
 	rest 1
-	notetype0 1
-	notetype1 10
+	speed 1
+	channel_volume 10
 	note G_, 5
-	notetype1 2
+	channel_volume 2
 	note G_, 6
 	inc_octave
-	notetype1 10
-	notetype0 11
+	channel_volume 10
+	speed 11
 	note C#, 1
-	notetype0 1
+	speed 1
 	note C_, 5
-	notetype1 2
+	channel_volume 2
 	note C_, 6
-	notetype1 10
-	notetype0 11
+	channel_volume 10
+	speed 11
 	rest 1
 	dec_octave
-	notetype0 1
+	speed 1
 	note B_, 5
-	notetype1 2
+	channel_volume 2
 	note B_, 6
-	notetype0 11
+	speed 11
 	rest 1
 	inc_octave
-	notetype0 1
-	notetype1 10
+	speed 1
+	channel_volume 10
 	note C#, 5
-	notetype1 2
+	channel_volume 2
 	note C#, 6
 	dec_octave
-	notetype1 10
+	channel_volume 10
 	note B_, 4
 	inc_octave
 	note C#, 4
 	dec_octave
 	note B_, 3
 	note G_, 5
-	notetype1 2
+	channel_volume 2
 	note G_, 6
-	notetype0 11
-	notetype1 9
+	speed 11
+	channel_volume 9
 	note B_, 1
-	notetype1 10
+	channel_volume 10
 	note G_, 1
 	sound_ret
 
 Branch_f6866:
 	octave 2
 .Loop8
-	notetype0 11
+	speed 11
 	rest 1
-	notetype0 1
-	notetype1 10
+	speed 1
+	channel_volume 10
 	note C#, 5
-	notetype1 2
+	channel_volume 2
 	note C#, 6
-	notetype1 10
+	channel_volume 10
 	note A_, 5
-	notetype1 2
+	channel_volume 2
 	note A_, 6
 	sound_loop 3, .Loop8
 	duty_cycle 2
-	notetype1 7
+	channel_volume 7
 	note B_, 5
 	inc_octave
 	note D_, 6
@@ -1047,34 +1047,34 @@ Branch_f6866:
 	inc_octave
 	note D_, 6
 	note C#, 5
-	notetype1 2
+	channel_volume 2
 	note C#, 6
 	dec_octave
 	dec_octave
 	duty_cycle 0
-	notetype1 10
+	channel_volume 10
 	note C#, 5
-	notetype1 2
+	channel_volume 2
 	note C#, 6
-	notetype1 10
+	channel_volume 10
 	note A_, 5
-	notetype1 2
+	channel_volume 2
 	note A_, 6
 .Loop9
-	notetype0 11
+	speed 11
 	rest 1
-	notetype0 1
-	notetype1 10
+	speed 1
+	channel_volume 10
 	note C#, 5
-	notetype1 2
+	channel_volume 2
 	note C#, 6
-	notetype1 10
+	channel_volume 10
 	note A_, 5
-	notetype1 2
+	channel_volume 2
 	note A_, 6
 	sound_loop 3, .Loop9
 	duty_cycle 2
-	notetype1 7
+	channel_volume 7
 	note G_, 5
 	note B_, 6
 	inc_octave
@@ -1091,10 +1091,10 @@ Branch_f6866:
 
 
 Music_DuelTheme3_Ch3: ; f68c2 (3d:68c2)
-	notetype0 11
+	speed 11
 	;stereo_panning 1, 1
-	notetype1 1
-	notetype2 11
+	channel_volume 1
+	fade_wave 11
 	;echo 96
 	;vibrato_type 8
 	vibrato 0, 3, 3
@@ -1171,7 +1171,7 @@ Music_DuelTheme3_Ch3: ; f68c2 (3d:68c2)
 	octave 2
 .Loop6
 	sound_call Branch_f69f0
-	notetype0 11
+	speed 11
 	octave 4
 	;cutoff 8
 	note D_, 2
@@ -1186,23 +1186,23 @@ Music_DuelTheme3_Ch3: ; f68c2 (3d:68c2)
 	note E_, 2
 	vibrato 0, 3, 3
 	note D_, 3
-	notetype0 1
+	speed 1
 	note A#, 3
 	note B_, 2
 	inc_octave
 	note C_, 3
 	note C#, 3
-	notetype0 11
+	speed 11
 	note D_, 4
 	dec_octave
 	note E_, 3
 	inc_octave
-	notetype0 1
+	speed 1
 	note C_, 3
 	note C#, 2
 	note D_, 3
 	note D#, 3
-	notetype0 11
+	speed 11
 	note E_, 4
 	dec_octave
 .Loop7

@@ -6,11 +6,11 @@ Music_CardPop:
 	channel 4, Music_CardPop_Ch4
 
 Music_CardPop_Ch1: ; f703a (3d:703a)
-	notetype0 4
+	speed 4
 	;stereo_panning 1, 1
-	notetype2 8
+	fade_wave 8
 	duty_cycle 2
-	notetype1 9
+	channel_volume 9
 .MainLoop
 .Loop1
 	rest 16
@@ -18,50 +18,50 @@ Music_CardPop_Ch1: ; f703a (3d:703a)
 	rest 14
 .Loop2
 	octave 5
-	notetype2 8
+	fade_wave 8
 	note F#, 1
 	note G_, 1
-	notetype2 6
+	fade_wave 6
 	note F#, 1
-	notetype1 3
+	channel_volume 3
 	note F#, 1
-	notetype1 9
+	channel_volume 9
 	note D_, 1
-	notetype1 3
+	channel_volume 3
 	note F#, 1
 	dec_octave
-	notetype1 9
+	channel_volume 9
 	note A_, 1
 	inc_octave
-	notetype1 3
+	channel_volume 3
 	note D_, 1
 	dec_octave
-	notetype1 9
+	channel_volume 9
 	note G_, 1
-	notetype1 3
+	channel_volume 3
 	note A_, 1
-	notetype1 9
+	channel_volume 9
 	note F#, 1
-	notetype1 3
+	channel_volume 3
 	note G_, 1
-	notetype1 9
+	channel_volume 9
 	note D_, 1
-	notetype1 3
+	channel_volume 3
 	note G_, 1
 	dec_octave
-	notetype1 9
+	channel_volume 9
 	note A_, 1
-	notetype1 3
+	channel_volume 3
 	inc_octave
 	note D_, 1
 	dec_octave
-	notetype1 9
+	channel_volume 9
 	note G_, 1
-	notetype1 3
+	channel_volume 3
 	note A_, 1
-	notetype1 9
+	channel_volume 9
 	note F#, 1
-	notetype1 3
+	channel_volume 3
 	note G_, 1
 	rest 1
 	note F#, 1
@@ -69,57 +69,57 @@ Music_CardPop_Ch1: ; f703a (3d:703a)
 	rest 16
 	rest 14
 	octave 5
-	notetype1 9
-	notetype2 8
+	channel_volume 9
+	fade_wave 8
 	note E_, 1
 	note F_, 1
-	notetype2 6
+	fade_wave 6
 	note E_, 1
-	notetype1 3
+	channel_volume 3
 	note E_, 1
-	notetype1 9
+	channel_volume 9
 	note C_, 1
-	notetype1 3
+	channel_volume 3
 	note E_, 1
 	dec_octave
-	notetype1 9
+	channel_volume 9
 	note G_, 1
 	inc_octave
-	notetype1 3
+	channel_volume 3
 	note C_, 1
 	dec_octave
-	notetype1 9
+	channel_volume 9
 	note F_, 1
-	notetype1 3
+	channel_volume 3
 	note G_, 1
-	notetype1 9
+	channel_volume 9
 	note E_, 1
-	notetype1 3
+	channel_volume 3
 	note F_, 1
-	notetype1 9
+	channel_volume 9
 	note C_, 1
-	notetype1 3
+	channel_volume 3
 	note E_, 1
 	dec_octave
-	notetype1 9
+	channel_volume 9
 	note G_, 1
-	notetype1 3
+	channel_volume 3
 	inc_octave
 	note C_, 1
 	dec_octave
-	notetype1 9
+	channel_volume 9
 	note F_, 1
-	notetype1 3
+	channel_volume 3
 	note G_, 1
-	notetype1 9
+	channel_volume 9
 	note E_, 1
-	notetype1 3
+	channel_volume 3
 	note F_, 1
 	rest 1
 	note E_, 1
 	rest 12
 	rest 16
-	notetype1 9
+	channel_volume 9
 	rest 14
 	sound_loop 2, .Loop2
 	rest 2
@@ -127,12 +127,12 @@ Music_CardPop_Ch1: ; f703a (3d:703a)
 
 
 Music_CardPop_Ch2: ; f70df (3d:70df)
-	notetype0 4
+	speed 4
 	;stereo_panning 1, 1
-	notetype2 8
+	fade_wave 8
 	duty_cycle 2
-	notetype1 6
-	notetype2 3
+	channel_volume 6
+	fade_wave 3
 .Loop1
 	octave 2
 	note A_, 2
@@ -213,10 +213,10 @@ Music_CardPop_Ch2: ; f70df (3d:70df)
 
 
 Music_CardPop_Ch3: ; f713a (3d:713a)
-	notetype0 4
-	notetype2 11
+	speed 4
+	fade_wave 11
 	;stereo_panning 1, 1
-	notetype1 1
+	channel_volume 1
 	;echo 0
 	;cutoff 8
 	sound_call Branch_f715b

@@ -6,14 +6,14 @@ Music_GRBlimp:
 	channel 4, Music_GRBlimp_Ch4
 
 Music_GRBlimp_Ch2: ; 1e7bfa (79:7bfa)
-	notetype1 10
+	channel_volume 10
 	;musicdc 17
 	;vibrato_type 1
 	vibrato 28, 3, 3
-	notetype2 8
+	fade_wave 8
 	octave 4
 	duty_cycle 2
-	notetype1 7
+	channel_volume 7
 	vibrato 28, 3, 3
 	;musicf0 0
 	;musicdc 255
@@ -40,9 +40,9 @@ Music_GRBlimp_Ch2: ; 1e7bfa (79:7bfa)
 	note A#, 5
 	note D#, 14
 	note G_, 4
-	notetype0 6
+	speed 6
 	note F_, 14
-	notetype0 1
+	speed 1
 	note F_, 14
 	sound_call Branch_1e7cf5
 	note G#, 16
@@ -67,13 +67,13 @@ Music_GRBlimp_Ch2: ; 1e7bfa (79:7bfa)
 	note A#, 14
 	note A#, 4
 	inc_octave
-	notetype0 6
+	speed 6
 	note C_, 14
-	notetype0 1
+	speed 1
 	note C_, 14
 	;musicf0 2
 	;musicf3
-	notetype0 1
+	speed 1
 	note C_, 5
 	note C#, 5
 	note D#, 4
@@ -215,25 +215,25 @@ Music_GRBlimp_Ch2: ; 1e7bfa (79:7bfa)
 	inc_octave
 	vibrato 28, 3, 3
 	;musicf1 70
-	notetype0 7
+	speed 7
 	note D_, 16
 	note D_, 2
 	sound_ret
 
 Branch_1e7cf5:
 	octave 4
-	notetype0 1
+	speed 1
 	;musicf2
 	note C_, 4
 	note C_, 3
 	note D_, 4
 	note C_, 3
 	;musicf1 69
-	notetype0 7
+	speed 7
 	note D#, 10
 	note D#, 2
 	;musicf1 48
-	notetype0 1
+	speed 1
 	note D_, 4
 	note D_, 3
 	note C_, 4
@@ -245,12 +245,12 @@ Branch_1e7cf5:
 	note D_, 4
 	dec_octave
 	note A#, 3
-	notetype0 7
+	speed 7
 	inc_octave
 	note C_, 12
 	note C_, 2
 	dec_octave
-	notetype0 1
+	speed 1
 	note A_, 4
 	note A_, 3
 	note A_, 4
@@ -292,11 +292,11 @@ Branch_1e7cf5:
 	note C_, 3
 	note D_, 4
 	note C_, 3
-	notetype0 7
+	speed 7
 	note D#, 10
 	note D#, 2
 	;musicf1 64
-	notetype0 1
+	speed 1
 	note D_, 4
 	note D_, 3
 	note C_, 4
@@ -333,12 +333,12 @@ Branch_1e7cf5:
 
 
 Music_GRBlimp_Ch1: ; 1e7d6c (79:7d6c)
-	notetype1 10
+	channel_volume 10
 	;musicdc 17
 	;vibrato_type 1
 	vibrato 28, 3, 3
-	notetype2 8
-	notetype0 7
+	fade_wave 8
+	speed 7
 	octave 3
 	;musicf0 1
 	;musicf1 64
@@ -590,7 +590,7 @@ Music_GRBlimp_Ch1: ; 1e7d6c (79:7d6c)
 	note D#, 4
 	vibrato 28, 3, 3
 	;musicf1 70
-	notetype0 7
+	speed 7
 	note A#, 16
 	note A#, 2
 	sound_ret
@@ -598,15 +598,15 @@ Music_GRBlimp_Ch1: ; 1e7d6c (79:7d6c)
 Branch_1e7e8a:
 	octave 3
 	;musicf2
-	notetype0 1
+	speed 1
 	note A_, 4
 	note A_, 3
 	note A_, 4
 	note A_, 3
-	notetype0 7
+	speed 7
 	note A#, 10
 	note A#, 2
-	notetype0 1
+	speed 1
 	;musicf1 64
 	note A#, 4
 	note A#, 3
@@ -616,10 +616,10 @@ Branch_1e7e8a:
 	note A#, 3
 	note A#, 4
 	note G_, 3
-	notetype0 7
+	speed 7
 	note A_, 12
 	note A_, 2
-	notetype0 1
+	speed 1
 	note F_, 4
 	note F_, 3
 	note F_, 4
@@ -656,10 +656,10 @@ Branch_1e7e8a:
 	note A_, 3
 	note A_, 4
 	note A_, 3
-	notetype0 7
+	speed 7
 	note A#, 10
 	note A#, 2
-	notetype0 1
+	speed 1
 	;musicf1 64
 	note A#, 4
 	note A#, 3
@@ -689,16 +689,16 @@ Branch_1e7e8a:
 
 
 Music_GRBlimp_Ch3: ; 1e7eed (79:7eed)
-	notetype1 10
+	channel_volume 10
 	;musicdc 17
-	notetype2 11
-	notetype1 1
+	fade_wave 11
+	channel_volume 1
 	;musice8 3
 	;musice9 96
 	octave 2
-	notetype0 1
+	speed 1
 	rest 14
-	notetype0 7
+	speed 7
 .Loop1
 	note F_, 4
 	note C_, 4
@@ -754,7 +754,7 @@ Music_GRBlimp_Ch3: ; 1e7eed (79:7eed)
 	note D#, 4
 	note A#, 4
 	;musice8 2
-	notetype0 1
+	speed 1
 	note G#, 10
 	;tie
 	note G#, 9
@@ -771,7 +771,7 @@ Music_GRBlimp_Ch3: ; 1e7eed (79:7eed)
 	;tie
 	note A#, 6
 	;tie
-	notetype0 7
+	speed 7
 	note A#, 14
 	;tie
 	note A#, 2

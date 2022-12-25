@@ -6,13 +6,13 @@ Music_TCG2GameCorner:
 	channel 4, Music_TCG2GameCorner_Ch4
 
 Music_TCG2GameCorner_Ch2: ; 1e74d4 (79:74d4)
-	notetype1 10
+	channel_volume 10
 .MainLoop
 	;musicf0 17
 	octave 1
 	;musicf3
 	vibrato 1, 3, 3
-	notetype0 1
+	speed 1
 .Loop1
 	note A_, 1
 	;tie
@@ -372,14 +372,14 @@ Branch_1e75c7:
 
 
 Music_TCG2GameCorner_Ch1: ; 1e765c (79:765c)
-	notetype1 10
+	channel_volume 10
 .MainLoop
-	notetype1 12
+	channel_volume 12
 	duty_cycle 2
 	;musicee 30
 	;musicdc 255
 	vibrato 0, 3, 3
-	notetype0 1
+	speed 1
 .Loop1
 	octave 4
 	rest 16
@@ -829,11 +829,11 @@ Branch_1e778f:
 
 
 Music_TCG2GameCorner_Ch3: ; 1e782f (79:782f)
-	notetype1 10
-	notetype2 11
-	notetype1 1
+	channel_volume 10
+	fade_wave 11
+	channel_volume 1
 	;musice9 64
-	notetype0 1
+	speed 1
 	;musicdc 255
 .MainLoop
 	octave 2

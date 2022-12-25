@@ -6,7 +6,7 @@ Music_GROverworld:
 	channel 4, Music_GROverworld_Ch4
 
 Music_GROverworld_Ch2: ; 1ead0d (7a:6d0d)
-	notetype1 10
+	channel_volume 10
 .MainLoop
 	sound_call Branch_1eae1e
 	note A#, 16
@@ -25,10 +25,10 @@ Music_GROverworld_Ch2: ; 1ead0d (7a:6d0d)
 	note A_, 6
 	note F_, 16
 	note F_, 6
-	notetype0 11
+	speed 11
 	note G_, 12
 	;musicf0 11
-	notetype0 1
+	speed 1
 	;musicdc 17
 	octave 2
 	;musicf1 70
@@ -244,15 +244,15 @@ Music_GROverworld_Ch2: ; 1ead0d (7a:6d0d)
 	note A#, 16
 	note A#, 6
 	;musicf3
-	notetype0 11
+	speed 11
 	note A#, 6
 	note A_, 6
 	note G_, 6
-	notetype0 1
-	notetype0 11
+	speed 1
+	speed 11
 	note F_, 3
 	;tie
-	notetype0 1
+	speed 1
 	note F_, 1
 	;tie
 	note F_, 16
@@ -261,7 +261,7 @@ Music_GROverworld_Ch2: ; 1ead0d (7a:6d0d)
 Branch_1eae1e:
 	;musicf0 13
 	octave 3
-	notetype0 1
+	speed 1
 	;musicdc 17
 	vibrato 33, 3, 3
 	;musicef 1
@@ -401,12 +401,12 @@ Branch_1eae1e:
 
 
 Music_GROverworld_Ch1: ; 1eaeaf (7a:6eaf)
-	notetype1 10
-	notetype0 1
+	channel_volume 10
+	speed 1
 	rest 16
 .MainLoop
 	;musicf0 11
-	notetype0 1
+	speed 1
 	;musicdc 17
 	octave 3
 	;musicf1 70
@@ -561,7 +561,7 @@ Music_GROverworld_Ch1: ; 1eaeaf (7a:6eaf)
 	rest 1
 	;musicf0 15
 	octave 2
-	notetype2 8
+	fade_wave 8
 	;musicf1 48
 	;musicf2
 	note B_, 5
@@ -570,7 +570,7 @@ Music_GROverworld_Ch1: ; 1eaeaf (7a:6eaf)
 	note C_, 5
 	note C_, 3
 	;musicf0 11
-	notetype0 1
+	speed 1
 	;musicdc 17
 	octave 3
 	;musicf1 70
@@ -632,7 +632,7 @@ Music_GROverworld_Ch1: ; 1eaeaf (7a:6eaf)
 	note C_, 4
 	;musicf0 15
 	octave 2
-	notetype2 8
+	fade_wave 8
 	;musicf1 48
 	;musicf2
 	note A_, 5
@@ -641,7 +641,7 @@ Music_GROverworld_Ch1: ; 1eaeaf (7a:6eaf)
 	note C_, 5
 	note C_, 3
 	;musicf0 11
-	notetype0 1
+	speed 1
 	;musicdc 17
 	octave 2
 	;musicf1 70
@@ -697,7 +697,7 @@ Music_GROverworld_Ch1: ; 1eaeaf (7a:6eaf)
 	note B_, 4
 	;musicf0 15
 	octave 2
-	notetype2 8
+	fade_wave 8
 	;musicf1 48
 	;musicf2
 	note B_, 5
@@ -706,7 +706,7 @@ Music_GROverworld_Ch1: ; 1eaeaf (7a:6eaf)
 	note D_, 5
 	note D_, 3
 	;musicf0 11
-	notetype0 1
+	speed 1
 	;musicdc 17
 	octave 3
 	;musicf1 70
@@ -768,13 +768,13 @@ Music_GROverworld_Ch1: ; 1eaeaf (7a:6eaf)
 	note C_, 4
 	;musicf0 15
 	octave 3
-	notetype2 8
+	fade_wave 8
 	;musicf1 48
 	;musicf2
 	note C_, 8
 	note C_, 8
 	;musicf0 11
-	notetype0 1
+	speed 1
 	;musicdc 17
 	octave 2
 	;musicf1 70
@@ -830,7 +830,7 @@ Music_GROverworld_Ch1: ; 1eaeaf (7a:6eaf)
 	note B_, 4
 	;musicf0 15
 	octave 2
-	notetype2 8
+	fade_wave 8
 	;musicf1 48
 	;musicf2
 	note B_, 5
@@ -839,7 +839,7 @@ Music_GROverworld_Ch1: ; 1eaeaf (7a:6eaf)
 	note C_, 5
 	note C_, 3
 	;musicf0 11
-	notetype0 1
+	speed 1
 	;musicdc 17
 	octave 3
 	;musicf1 70
@@ -901,7 +901,7 @@ Music_GROverworld_Ch1: ; 1eaeaf (7a:6eaf)
 	note C_, 4
 	;musicf0 15
 	octave 2
-	notetype2 8
+	fade_wave 8
 	;musicf1 48
 	;musicf2
 	note A_, 5
@@ -910,7 +910,7 @@ Music_GROverworld_Ch1: ; 1eaeaf (7a:6eaf)
 	note C_, 5
 	note C_, 3
 	;musicf0 11
-	notetype0 1
+	speed 1
 	;musicdc 17
 	octave 2
 	;musicf1 70
@@ -966,7 +966,7 @@ Music_GROverworld_Ch1: ; 1eaeaf (7a:6eaf)
 	note B_, 4
 	;musicf0 15
 	octave 2
-	notetype2 8
+	fade_wave 8
 	;musicf1 48
 	;musicf2
 	note B_, 5
@@ -990,11 +990,11 @@ Music_GROverworld_Ch1: ; 1eaeaf (7a:6eaf)
 	note E_, 16
 	note E_, 6
 	;musicf3
-	notetype0 11
+	speed 11
 	note G_, 6
 	note F#, 3
 	;musicef 2
-	notetype0 1
+	speed 1
 	;musicf0 14
 	;musicef 254
 	octave 2
@@ -1006,7 +1006,7 @@ Music_GROverworld_Ch1: ; 1eaeaf (7a:6eaf)
 	note A#, 5
 	;musicef 2
 	;musicf0 11
-	notetype0 1
+	speed 1
 	;musicdc 17
 	octave 3
 	;musicf1 70
@@ -1079,7 +1079,7 @@ Music_GROverworld_Ch1: ; 1eaeaf (7a:6eaf)
 	inc_octave
 	note D_, 4
 	;musicf0 11
-	notetype0 1
+	speed 1
 	;musicdc 17
 	octave 3
 	;musicf1 70
@@ -1147,7 +1147,7 @@ Music_GROverworld_Ch1: ; 1eaeaf (7a:6eaf)
 	note D_, 4
 	note A_, 4
 	;musicf0 11
-	notetype0 1
+	speed 1
 	;musicdc 17
 	octave 2
 	;musicf1 70
@@ -1219,7 +1219,7 @@ Music_GROverworld_Ch1: ; 1eaeaf (7a:6eaf)
 	inc_octave
 	note C_, 4
 	;musicf0 11
-	notetype0 1
+	speed 1
 	;musicdc 17
 	octave 2
 	;musicf1 70
@@ -1290,7 +1290,7 @@ Music_GROverworld_Ch1: ; 1eaeaf (7a:6eaf)
 	inc_octave
 	note D_, 4
 	;musicf0 11
-	notetype0 1
+	speed 1
 	;musicdc 17
 	octave 3
 	;musicf1 70
@@ -1355,7 +1355,7 @@ Music_GROverworld_Ch1: ; 1eaeaf (7a:6eaf)
 	note C_, 4
 	note G_, 4
 	;musicf0 11
-	notetype0 1
+	speed 1
 	;musicdc 17
 	octave 4
 	;musicf1 70
@@ -1418,7 +1418,7 @@ Music_GROverworld_Ch1: ; 1eaeaf (7a:6eaf)
 	inc_octave
 	note F_, 4
 	;musicf0 11
-	notetype0 1
+	speed 1
 	;musicdc 17
 	octave 3
 	;musicf1 70
@@ -1490,13 +1490,13 @@ Music_GROverworld_Ch1: ; 1eaeaf (7a:6eaf)
 	;musicf0 14
 	octave 3
 	;musicf3
-	notetype0 11
+	speed 11
 	note F_, 12
 	note D#, 6
-	notetype0 11
+	speed 11
 	note C_, 3
 	;tie
-	notetype0 1
+	speed 1
 	note C_, 1
 	;tie
 	note C_, 16
@@ -1505,13 +1505,13 @@ Music_GROverworld_Ch1: ; 1eaeaf (7a:6eaf)
 
 
 Music_GROverworld_Ch3: ; 1eb3d6 (7a:73d6)
-	notetype1 10
+	channel_volume 10
 	;musicdc 17
-	notetype2 11
-	notetype1 1
+	fade_wave 11
+	channel_volume 1
 	;musice8 1
 	;musice9 96
-	notetype0 1
+	speed 1
 	rest 16
 .MainLoop
 	;musice8 1
@@ -1735,7 +1735,7 @@ Music_GROverworld_Ch3: ; 1eb3d6 (7a:73d6)
 	;tie
 	note C_, 8
 	;musice8 1
-	notetype0 1
+	speed 1
 	note D_, 16
 	;tie
 	note D_, 16
@@ -1930,14 +1930,14 @@ Music_GROverworld_Ch3: ; 1eb3d6 (7a:73d6)
 	;musice8 8
 	;vibrato_type 5
 	vibrato 32, 3, 3
-	notetype0 11
+	speed 11
 	note F_, 3
 	;tie
 	note F_, 3
 	;tie
 	note F_, 3
 	;tie
-	notetype0 1
+	speed 1
 	note F_, 16
 	;tie
 	note A#, 4
@@ -1946,14 +1946,14 @@ Music_GROverworld_Ch3: ; 1eb3d6 (7a:73d6)
 	;tie
 	inc_octave
 	note C_, 9
-	notetype0 11
+	speed 11
 	note F_, 3
 	;tie
 	note F_, 3
 	;tie
 	note F_, 3
 	;tie
-	notetype0 1
+	speed 1
 	note F_, 16
 	rest 16
 	rest 1

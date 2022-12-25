@@ -6,21 +6,21 @@ Music_Fort4:
 	channel 4, Music_Fort4_Ch4
 
 Music_Fort4_Ch2: ; 1f16cc (7c:56cc)
-	notetype1 10
+	channel_volume 10
 	;musicf0 22
-	notetype0 1
+	speed 1
 	;musicdc 255
 	octave 2
 	note C_, 16
 .MainLoop
 	;musicf0 9
-	notetype0 1
+	speed 1
 	;musicdc 255
 	;musicef 255
 	;musicf1 71
 	octave 2
-	notetype0 4
-	notetype2 7
+	speed 4
+	fade_wave 7
 	;musicf2
 .Loop1
 	note D_, 1
@@ -45,13 +45,13 @@ Music_Fort4_Ch2: ; 1f16cc (7c:56cc)
 	sound_loop 4, .Loop1
 	duty_cycle 1
 	octave 3
-	notetype2 8
-	notetype0 8
+	fade_wave 8
+	speed 8
 	;musicf1 103
 	;musicf3
-	notetype1 2
+	channel_volume 2
 	note E_, 14
-	notetype1 11
+	channel_volume 11
 	;vibrato_type 5
 	vibrato 1, 3, 3
 	;musicf2
@@ -68,20 +68,20 @@ Music_Fort4_Ch2: ; 1f16cc (7c:56cc)
 	note E_, 4
 	note E_, 2
 	;musicf3
-	notetype1 1
+	channel_volume 1
 	note D_, 10
-	notetype1 11
+	channel_volume 11
 	;musicf2
 	note D_, 14
 	note D_, 2
 	;musicf3
-	notetype1 11
+	channel_volume 11
 	note D_, 4
 	note D_, 2
 	;musicf3
-	notetype1 2
+	channel_volume 2
 	note G_, 10
-	notetype1 11
+	channel_volume 11
 	;musicf2
 	note G_, 6
 	note G_, 2
@@ -90,12 +90,12 @@ Music_Fort4_Ch2: ; 1f16cc (7c:56cc)
 	note C_, 3
 	note F_, 2
 	vibrato 40, 3, 3
-	notetype0 1
+	speed 1
 	note E_, 4
-	notetype0 8
-	notetype0 1
+	speed 8
+	speed 1
 	note F_, 4
-	notetype0 8
+	speed 8
 	;musicf2
 	note E_, 5
 	;tie
@@ -104,9 +104,9 @@ Music_Fort4_Ch2: ; 1f16cc (7c:56cc)
 	note E_, 12
 	note E_, 4
 	;musicf3
-	notetype1 2
+	channel_volume 2
 	note E_, 14
-	notetype1 11
+	channel_volume 11
 	;vibrato_type 5
 	vibrato 1, 3, 3
 	;musicf2
@@ -123,83 +123,83 @@ Music_Fort4_Ch2: ; 1f16cc (7c:56cc)
 	note A_, 4
 	note A_, 2
 	;musicf3
-	notetype1 1
+	channel_volume 1
 	note G_, 10
-	notetype1 11
+	channel_volume 11
 	;musicf2
 	note G_, 14
 	note G_, 2
 	;musicf3
 	vibrato 0, 3, 3
-	notetype1 1
+	channel_volume 1
 	;musicf2
 	note A_, 4
 	note A_, 2
-	notetype1 11
+	channel_volume 11
 	;musicf3
 	note G_, 6
 	;musicf2
 	note D_, 2
 	note D_, 2
-	notetype1 1
+	channel_volume 1
 	note G_, 6
 	note G_, 2
 	;musicf3
 	note F_, 4
-	notetype1 11
+	channel_volume 11
 	note G_, 3
-	notetype0 4
+	speed 4
 	note F_, 1
 	note G_, 1
-	notetype0 8
+	speed 8
 	vibrato 0, 3, 3
-	notetype1 1
+	channel_volume 1
 	note F_, 7
-	notetype1 11
+	channel_volume 11
 	vibrato 1, 3, 3
 	note F_, 8
 	vibrato 0, 3, 3
-	notetype0 4
+	speed 4
 	note E_, 1
 	note F_, 1
-	notetype0 8
+	speed 8
 	vibrato 48, 3, 3
 	note E_, 8
-	notetype1 1
+	channel_volume 1
 	note F_, 4
-	notetype1 11
+	channel_volume 11
 	note G_, 4
-	notetype1 1
+	channel_volume 1
 	note A_, 6
-	notetype1 11
+	channel_volume 11
 	note A_, 2
-	notetype1 1
+	channel_volume 1
 	note G_, 6
-	notetype1 11
+	channel_volume 11
 	note G_, 2
-	notetype1 1
+	channel_volume 1
 	inc_octave
 	note C_, 6
-	notetype1 11
+	channel_volume 11
 	note C_, 2
 	dec_octave
-	notetype1 1
+	channel_volume 1
 	note G_, 6
-	notetype1 11
+	channel_volume 11
 	note G_, 2
-	notetype1 12
+	channel_volume 12
 	;musicf2
 	note A_, 1
 	note A_, 1
 	rest 2
 	;musicf3
 	;musicf0 9
-	notetype0 1
+	speed 1
 	;musicdc 255
 	octave 3
 	;musicf1 96
-	notetype0 4
-	notetype2 7
+	speed 4
+	fade_wave 7
 	;musicf2
 	note E_, 1
 	rest 1
@@ -239,41 +239,41 @@ Music_Fort4_Ch2: ; 1f16cc (7c:56cc)
 	sound_loop 3, .Loop2
 	duty_cycle 1
 	octave 3
-	notetype2 8
+	fade_wave 8
 	vibrato 0, 3, 3
-	notetype0 8
+	speed 8
 	;musicf1 103
 	;musicf3
 .Loop3
-	notetype1 1
+	channel_volume 1
 	note A_, 6
-	notetype1 11
+	channel_volume 11
 	note A_, 2
-	notetype1 1
+	channel_volume 1
 	note G_, 6
-	notetype1 11
+	channel_volume 11
 	note G_, 2
-	notetype1 1
+	channel_volume 1
 	inc_octave
 	note C_, 6
-	notetype1 11
+	channel_volume 11
 	note C_, 2
 	dec_octave
-	notetype1 1
+	channel_volume 1
 	note G_, 6
-	notetype1 11
+	channel_volume 11
 	note G_, 2
 	sound_loop 2, .Loop3
-	notetype1 8
-	notetype0 1
+	channel_volume 8
+	speed 1
 	note A_, 4
-	notetype0 8
-	notetype0 1
-	notetype1 9
+	speed 8
+	speed 1
+	channel_volume 9
 	note A#, 4
-	notetype0 8
+	speed 8
 	vibrato 40, 3, 3
-	notetype1 8
+	channel_volume 8
 	note A_, 15
 	note A_, 16
 	;tie
@@ -282,8 +282,8 @@ Music_Fort4_Ch2: ; 1f16cc (7c:56cc)
 	note A_, 8
 	note A_, 1
 	dec_octave
-	notetype0 1
-	notetype1 12
+	speed 1
+	channel_volume 12
 	;musicf1 102
 	;musicf3
 	note A#, 8
@@ -307,13 +307,13 @@ Music_Fort4_Ch2: ; 1f16cc (7c:56cc)
 
 
 Music_Fort4_Ch1: ; 1f1852 (7c:5852)
-	notetype1 10
-	notetype1 15
+	channel_volume 10
+	channel_volume 15
 	duty_cycle 2
 	;musicee 28
 	;musicdc 255
 	vibrato 0, 3, 3
-	notetype0 1
+	speed 1
 	octave 3
 	;musicef 250
 	note G_, 5
@@ -321,19 +321,19 @@ Music_Fort4_Ch1: ; 1f1852 (7c:5852)
 	note G_, 5
 	;musicef 4
 	note G_, 6
-	notetype0 8
+	speed 8
 	note G_, 4
 	;musicee 0
 	rest 12
 .MainLoop
 	;musicee 0
-	notetype0 8
+	speed 8
 	rest 16
 	rest 16
 	rest 16
 	;musicf0 23
 	;musicf1 23
-	notetype0 4
+	speed 4
 	octave 4
 	;musicf3
 	rest 1
@@ -982,62 +982,62 @@ Music_Fort4_Ch1: ; 1f1852 (7c:5852)
 	note A_, 1
 	duty_cycle 1
 	octave 3
-	notetype2 8
-	notetype0 8
+	fade_wave 8
+	speed 8
 	;musicf1 103
 	;musicf3
 	octave 3
-	notetype1 1
+	channel_volume 1
 	note F_, 6
-	notetype1 11
+	channel_volume 11
 	note F_, 2
-	notetype1 1
+	channel_volume 1
 	note D_, 6
-	notetype1 11
+	channel_volume 11
 	note D_, 2
-	notetype1 1
+	channel_volume 1
 	note G_, 6
-	notetype1 11
+	channel_volume 11
 	note G_, 2
-	notetype1 1
+	channel_volume 1
 	note D_, 6
-	notetype1 11
+	channel_volume 11
 	note D_, 2
-	notetype1 12
+	channel_volume 12
 	;musicf2
 	note E_, 1
 	note E_, 1
 	rest 1
 	;musicf3
-	notetype1 15
+	channel_volume 15
 	duty_cycle 2
 	;musicee 28
 	;musicdc 255
 	vibrato 0, 3, 3
-	notetype0 1
+	speed 1
 	octave 3
 	;musicef 250
 	note G_, 4
 	;musicef 2
 	note G_, 4
 	;musicef 4
-	notetype0 8
+	speed 8
 	note G_, 4
 	rest 4
 	inc_octave
 	note C_, 4
 	dec_octave
 .Loop4
-	notetype0 8
+	speed 8
 	rest 3
-	notetype0 1
+	speed 1
 	octave 3
 	;musicef 250
 	note G_, 4
 	;musicef 2
 	note G_, 4
 	;musicef 4
-	notetype0 8
+	speed 8
 	note G_, 4
 	inc_octave
 	rest 4
@@ -1047,58 +1047,58 @@ Music_Fort4_Ch1: ; 1f1852 (7c:5852)
 	;musicee 0
 	duty_cycle 1
 	octave 3
-	notetype2 8
-	notetype0 8
+	fade_wave 8
+	speed 8
 	;musicf1 103
 	;musicf3
 	octave 3
-	notetype1 1
+	channel_volume 1
 	note D#, 6
-	notetype1 11
+	channel_volume 11
 	note D#, 2
-	notetype1 1
+	channel_volume 1
 	note C#, 6
-	notetype1 11
+	channel_volume 11
 	note C#, 2
-	notetype1 1
+	channel_volume 1
 	note G_, 6
-	notetype1 11
+	channel_volume 11
 	note G_, 2
-	notetype1 1
+	channel_volume 1
 	note C#, 6
 	sound_call Branch_1f1c7c
 	duty_cycle 1
 	octave 3
-	notetype2 8
-	notetype0 8
+	fade_wave 8
+	speed 8
 	;musicf1 103
 	;musicf3
 	octave 3
-	notetype1 1
+	channel_volume 1
 	note E_, 6
-	notetype1 11
+	channel_volume 11
 	note E_, 2
-	notetype1 1
+	channel_volume 1
 	note D_, 6
-	notetype1 11
+	channel_volume 11
 	note D_, 2
-	notetype1 1
+	channel_volume 1
 	note G_, 6
-	notetype1 11
+	channel_volume 11
 	note G_, 2
-	notetype1 1
+	channel_volume 1
 	note D_, 6
-	notetype1 11
+	channel_volume 11
 	note D_, 2
 	;musicee 0
 	;musicf0 4
 	octave 3
 	;musicf1 80
 	;musicf3
-	notetype0 1
+	speed 1
 	note E_, 4
 	note F_, 4
-	notetype0 8
+	speed 8
 	note E_, 5
 	sound_call Branch_1f1c69
 	;musicf0 4
@@ -1138,10 +1138,10 @@ Music_Fort4_Ch1: ; 1f1852 (7c:5852)
 	note F_, 1
 	note F_, 2
 	;musicf3
-	notetype0 1
+	speed 1
 	note E_, 4
 	note F_, 4
-	notetype0 8
+	speed 8
 	note E_, 5
 	sound_call Branch_1f1c69
 	;musicf0 4
@@ -1162,15 +1162,15 @@ Music_Fort4_Ch1: ; 1f1852 (7c:5852)
 	note D_, 1
 	note D_, 2
 	;musicf3
-	notetype0 1
+	speed 1
 	note C#, 4
 	note D_, 4
-	notetype0 8
+	speed 8
 	;musicf2
 	note C#, 7
 	note C#, 1
 	;musicf3
-	notetype0 1
+	speed 1
 	octave 2
 	note G_, 8
 	;musicf2
@@ -1189,30 +1189,30 @@ Music_Fort4_Ch1: ; 1f1852 (7c:5852)
 	note C#, 5
 	note C#, 3
 	;musicf3
-	notetype0 8
+	speed 8
 	rest 16
 	sound_loop 0, .MainLoop
 
 Branch_1f1c69:
-	notetype1 15
+	channel_volume 15
 	duty_cycle 2
 	;musicee 28
 	;musicdc 255
 	vibrato 0, 3, 3
-	notetype0 1
+	speed 1
 	octave 3
 	note G_, 16
 	;musicee 0
-	notetype0 8
+	speed 8
 	sound_ret
 
 Branch_1f1c7c:
-	notetype1 15
+	channel_volume 15
 	duty_cycle 2
 	;musicee 28
 	;musicdc 255
 	vibrato 0, 3, 3
-	notetype0 1
+	speed 1
 	octave 3
 	;musicef 250
 	note G_, 5
@@ -1221,30 +1221,30 @@ Branch_1f1c7c:
 	;musicef 2
 	note G_, 6
 	;musicee 0
-	notetype0 8
+	speed 8
 	sound_ret
 
 Branch_1f1c97:
-	notetype1 15
+	channel_volume 15
 	duty_cycle 2
 	;musicee 28
 	;musicdc 255
 	vibrato 0, 3, 3
-	notetype0 1
+	speed 1
 	octave 4
 	note G_, 8
 	;musicee 0
-	notetype0 8
+	speed 8
 	sound_ret
 
 
 Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
-	notetype1 10
-	notetype2 11
-	notetype1 1
+	channel_volume 10
+	fade_wave 11
+	channel_volume 1
 	;musice9 96
 	;musicdc 255
-	notetype0 1
+	speed 1
 	octave 2
 	note C_, 16
 .MainLoop
@@ -1256,7 +1256,7 @@ Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
 	inc_octave
 	inc_octave
 	inc_octave
-	notetype1 2
+	channel_volume 2
 	;musice8 7
 	note A_, 4
 	rest 4
@@ -1271,14 +1271,14 @@ Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
 	dec_octave
 	dec_octave
 	dec_octave
-	notetype1 1
+	channel_volume 1
 	;musice8 6
 	note D_, 16
 	;musice8 8
 	inc_octave
 	inc_octave
 	inc_octave
-	notetype1 2
+	channel_volume 2
 	;musice8 7
 	note A_, 4
 	rest 4
@@ -1298,7 +1298,7 @@ Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
 	dec_octave
 	dec_octave
 	dec_octave
-	notetype1 1
+	channel_volume 1
 	note C_, 16
 	sound_loop 2, .Loop1
 .Loop2
@@ -1308,7 +1308,7 @@ Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
 	inc_octave
 	inc_octave
 	inc_octave
-	notetype1 2
+	channel_volume 2
 	;musice8 7
 	note G#, 4
 	rest 4
@@ -1323,14 +1323,14 @@ Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
 	dec_octave
 	dec_octave
 	dec_octave
-	notetype1 1
+	channel_volume 1
 	;musice8 6
 	note D_, 16
 	;musice8 8
 	inc_octave
 	inc_octave
 	inc_octave
-	notetype1 2
+	channel_volume 2
 	;musice8 7
 	note G#, 4
 	rest 4
@@ -1350,7 +1350,7 @@ Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
 	dec_octave
 	dec_octave
 	dec_octave
-	notetype1 1
+	channel_volume 1
 	note C_, 16
 	sound_loop 2, .Loop2
 .Loop3
@@ -1360,7 +1360,7 @@ Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
 	inc_octave
 	inc_octave
 	inc_octave
-	notetype1 2
+	channel_volume 2
 	;musice8 7
 	note G_, 4
 	rest 4
@@ -1375,14 +1375,14 @@ Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
 	dec_octave
 	dec_octave
 	dec_octave
-	notetype1 1
+	channel_volume 1
 	;musice8 6
 	note D_, 16
 	;musice8 8
 	inc_octave
 	inc_octave
 	inc_octave
-	notetype1 2
+	channel_volume 2
 	;musice8 7
 	note G_, 4
 	rest 4
@@ -1402,7 +1402,7 @@ Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
 	dec_octave
 	dec_octave
 	dec_octave
-	notetype1 1
+	channel_volume 1
 	note C_, 16
 	sound_loop 2, .Loop3
 	;musice8 6
@@ -1411,7 +1411,7 @@ Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
 	inc_octave
 	inc_octave
 	inc_octave
-	notetype1 2
+	channel_volume 2
 	;musice8 7
 	note A_, 4
 	rest 4
@@ -1426,14 +1426,14 @@ Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
 	dec_octave
 	dec_octave
 	dec_octave
-	notetype1 1
+	channel_volume 1
 	;musice8 6
 	note D_, 16
 	;musice8 8
 	inc_octave
 	inc_octave
 	inc_octave
-	notetype1 2
+	channel_volume 2
 	;musice8 7
 	note A_, 4
 	rest 4
@@ -1453,7 +1453,7 @@ Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
 	dec_octave
 	dec_octave
 	dec_octave
-	notetype1 1
+	channel_volume 1
 	note C_, 16
 	;musice8 6
 	note D_, 16
@@ -1461,7 +1461,7 @@ Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
 	inc_octave
 	inc_octave
 	inc_octave
-	notetype1 2
+	channel_volume 2
 	;musice8 7
 	note A_, 4
 	rest 4
@@ -1476,14 +1476,14 @@ Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
 	dec_octave
 	dec_octave
 	dec_octave
-	notetype1 1
+	channel_volume 1
 	;musice8 6
 	note D_, 16
 	;musice8 8
 	inc_octave
 	inc_octave
 	inc_octave
-	notetype1 2
+	channel_volume 2
 	;musice8 7
 	note A_, 4
 	rest 4
@@ -1491,7 +1491,7 @@ Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
 	dec_octave
 	dec_octave
 	dec_octave
-	notetype1 1
+	channel_volume 1
 	note G#, 4
 	;tie
 	note A_, 4
@@ -1510,7 +1510,7 @@ Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
 	inc_octave
 	inc_octave
 	inc_octave
-	notetype1 2
+	channel_volume 2
 	;musice8 7
 	note A_, 4
 	rest 4
@@ -1525,14 +1525,14 @@ Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
 	dec_octave
 	dec_octave
 	dec_octave
-	notetype1 1
+	channel_volume 1
 	;musice8 6
 	note D_, 16
 	;musice8 8
 	inc_octave
 	inc_octave
 	inc_octave
-	notetype1 2
+	channel_volume 2
 	;musice8 7
 	note A_, 4
 	rest 4
@@ -1552,7 +1552,7 @@ Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
 	dec_octave
 	dec_octave
 	dec_octave
-	notetype1 1
+	channel_volume 1
 	note C_, 16
 	sound_loop 2, .Loop4
 .Loop5
@@ -1562,7 +1562,7 @@ Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
 	inc_octave
 	inc_octave
 	inc_octave
-	notetype1 2
+	channel_volume 2
 	;musice8 7
 	note G_, 4
 	rest 4
@@ -1577,14 +1577,14 @@ Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
 	dec_octave
 	dec_octave
 	dec_octave
-	notetype1 1
+	channel_volume 1
 	;musice8 6
 	note D_, 16
 	;musice8 8
 	inc_octave
 	inc_octave
 	inc_octave
-	notetype1 2
+	channel_volume 2
 	;musice8 7
 	note G_, 4
 	rest 4
@@ -1604,7 +1604,7 @@ Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
 	dec_octave
 	dec_octave
 	dec_octave
-	notetype1 1
+	channel_volume 1
 	note C_, 16
 	sound_loop 2, .Loop5
 	;musice8 6
@@ -1613,7 +1613,7 @@ Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
 	inc_octave
 	inc_octave
 	inc_octave
-	notetype1 2
+	channel_volume 2
 	;musice8 7
 	note G_, 4
 	rest 4
@@ -1628,14 +1628,14 @@ Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
 	dec_octave
 	dec_octave
 	dec_octave
-	notetype1 1
+	channel_volume 1
 	;musice8 6
 	note D_, 16
 	;musice8 8
 	inc_octave
 	inc_octave
 	inc_octave
-	notetype1 2
+	channel_volume 2
 	;musice8 7
 	note G_, 4
 	rest 4
@@ -1655,7 +1655,7 @@ Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
 	dec_octave
 	dec_octave
 	dec_octave
-	notetype1 1
+	channel_volume 1
 	note C_, 16
 	;musice8 6
 	note D_, 16
@@ -1663,7 +1663,7 @@ Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
 	inc_octave
 	inc_octave
 	inc_octave
-	notetype1 2
+	channel_volume 2
 	;musice8 7
 	note G_, 4
 	rest 4
@@ -1678,14 +1678,14 @@ Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
 	dec_octave
 	dec_octave
 	dec_octave
-	notetype1 1
+	channel_volume 1
 	;musice8 6
 	note D_, 16
 	;musice8 8
 	inc_octave
 	inc_octave
 	inc_octave
-	notetype1 2
+	channel_volume 2
 	;musice8 7
 	note G_, 4
 	rest 4
@@ -1705,7 +1705,7 @@ Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
 	dec_octave
 	dec_octave
 	dec_octave
-	notetype1 1
+	channel_volume 1
 	note G_, 16
 	;musice8 6
 	note A_, 16
@@ -1713,7 +1713,7 @@ Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
 	inc_octave
 	inc_octave
 	inc_octave
-	notetype1 2
+	channel_volume 2
 	;musice8 7
 	note F_, 4
 	rest 4
@@ -1728,14 +1728,14 @@ Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
 	dec_octave
 	dec_octave
 	dec_octave
-	notetype1 1
+	channel_volume 1
 	;musice8 6
 	note A_, 16
 	;musice8 8
 	inc_octave
 	inc_octave
 	inc_octave
-	notetype1 2
+	channel_volume 2
 	;musice8 7
 	note F_, 4
 	rest 4
@@ -1755,7 +1755,7 @@ Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
 	dec_octave
 	dec_octave
 	dec_octave
-	notetype1 1
+	channel_volume 1
 	note G_, 16
 	;musice8 6
 	note A_, 16
@@ -1763,7 +1763,7 @@ Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
 	inc_octave
 	inc_octave
 	inc_octave
-	notetype1 2
+	channel_volume 2
 	;musice8 7
 	note E_, 4
 	rest 4
@@ -1778,14 +1778,14 @@ Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
 	dec_octave
 	dec_octave
 	dec_octave
-	notetype1 1
+	channel_volume 1
 	;musice8 6
 	note A_, 16
 	;musice8 8
 	inc_octave
 	inc_octave
 	inc_octave
-	notetype1 2
+	channel_volume 2
 	;musice8 7
 	note E_, 4
 	rest 4
@@ -1805,7 +1805,7 @@ Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
 	dec_octave
 	dec_octave
 	dec_octave
-	notetype1 1
+	channel_volume 1
 	note G_, 8
 	note A_, 8
 	;vibrato_type 5
@@ -1854,14 +1854,14 @@ Music_Fort4_Ch3: ; 1f1caa (7c:5caa)
 	sound_call Branch_1f1ff8
 	;vibrato_type 5
 	vibrato 48, 3, 3
-	notetype0 8
+	speed 8
 	note D#, 16
 	;tie
 	note D#, 16
 	note E_, 16
 	;tie
 	note E_, 16
-	notetype0 1
+	speed 1
 	;musice8 6
 	note A_, 16
 	rest 16
@@ -1942,10 +1942,10 @@ Branch_1f1ff8:
 	;musice8 7
 	note F_, 5
 	rest 3
-	notetype1 2
+	channel_volume 2
 	note F_, 5
 	rest 3
-	notetype1 1
+	channel_volume 1
 	;musice8 6
 	dec_octave
 	dec_octave
@@ -1955,10 +1955,10 @@ Branch_1f1ff8:
 	;musice8 7
 	note A_, 5
 	rest 3
-	notetype1 2
+	channel_volume 2
 	note A_, 5
 	rest 3
-	notetype1 1
+	channel_volume 1
 	;musice8 6
 	dec_octave
 	rest 16
@@ -1973,10 +1973,10 @@ Branch_1f1ff8:
 	;musice8 7
 	note F_, 5
 	rest 3
-	notetype1 2
+	channel_volume 2
 	note F_, 5
 	rest 3
-	notetype1 1
+	channel_volume 1
 	;musice8 6
 	dec_octave
 	dec_octave
@@ -1986,10 +1986,10 @@ Branch_1f1ff8:
 	;musice8 7
 	note A_, 5
 	rest 3
-	notetype1 2
+	channel_volume 2
 	note A_, 5
 	rest 3
-	notetype1 1
+	channel_volume 1
 	;musice8 6
 	dec_octave
 	rest 16

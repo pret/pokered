@@ -6,8 +6,8 @@ Music_Fort3:
 	channel 4, Music_Fort3_Ch4
 
 Music_Fort3_Ch2: ; 1ee797 (7b:6797)
-	notetype1 10
-	notetype0 1
+	channel_volume 10
+	speed 1
 	rest 14
 .MainLoop
 	;musicf0 9
@@ -713,8 +713,8 @@ Music_Fort3_Ch2: ; 1ee797 (7b:6797)
 
 
 Music_Fort3_Ch1: ; 1eeaa0 (7b:6aa0)
-	notetype1 10
-	notetype0 1
+	channel_volume 10
+	speed 1
 	rest 14
 .MainLoop
 	;musicf0 9
@@ -1291,11 +1291,11 @@ Music_Fort3_Ch1: ; 1eeaa0 (7b:6aa0)
 
 
 Music_Fort3_Ch3: ; 1eecfb (7b:6cfb)
-	notetype1 10
-	notetype0 1
-	notetype2 11
+	channel_volume 10
+	speed 1
+	fade_wave 11
 	;musicdc 255
-	notetype1 1
+	channel_volume 1
 	;musice9 96
 	;musicec 244
 	octave 3
@@ -1310,7 +1310,7 @@ Music_Fort3_Ch3: ; 1eecfb (7b:6cfb)
 	;musice8 4
 	note D_, 14
 	;musice8 8
-	notetype1 2
+	channel_volume 2
 	note F_, 4
 	;tie
 	note F#, 4
@@ -1337,10 +1337,10 @@ Music_Fort3_Ch3: ; 1eecfb (7b:6cfb)
 	note F_, 15
 	;tie
 	note F_, 14
-	notetype1 3
+	channel_volume 3
 	note F_, 15
 	dec_octave
-	notetype1 1
+	channel_volume 1
 	note F_, 7
 	note F#, 7
 	note G_, 15
@@ -1348,7 +1348,7 @@ Music_Fort3_Ch3: ; 1eecfb (7b:6cfb)
 	;musice8 4
 	note D_, 14
 	;musice8 8
-	notetype1 2
+	channel_volume 2
 	note D#, 4
 	;tie
 	note E_, 4
@@ -1375,10 +1375,10 @@ Music_Fort3_Ch3: ; 1eecfb (7b:6cfb)
 	note D#, 15
 	;tie
 	note D#, 14
-	notetype1 3
+	channel_volume 3
 	note D#, 15
 	dec_octave
-	notetype1 1
+	channel_volume 1
 	note F_, 7
 	note F#, 7
 	note G_, 15
@@ -1386,7 +1386,7 @@ Music_Fort3_Ch3: ; 1eecfb (7b:6cfb)
 	;musice8 4
 	note D_, 14
 	;musice8 8
-	notetype1 2
+	channel_volume 2
 	note F_, 4
 	;tie
 	note F#, 4
@@ -1413,10 +1413,10 @@ Music_Fort3_Ch3: ; 1eecfb (7b:6cfb)
 	note F_, 15
 	;tie
 	note F_, 14
-	notetype1 3
+	channel_volume 3
 	note F_, 15
 	dec_octave
-	notetype1 1
+	channel_volume 1
 	note F_, 7
 	note F#, 7
 	note G_, 15
@@ -1424,7 +1424,7 @@ Music_Fort3_Ch3: ; 1eecfb (7b:6cfb)
 	;musice8 4
 	note D_, 14
 	;musice8 8
-	notetype1 2
+	channel_volume 2
 	note D#, 4
 	;tie
 	note E_, 4
@@ -1446,7 +1446,7 @@ Music_Fort3_Ch3: ; 1eecfb (7b:6cfb)
 	;tie
 	note D#, 15
 	dec_octave
-	notetype1 1
+	channel_volume 1
 	note F_, 7
 	;musice8 3
 	note G_, 15
@@ -1995,12 +1995,12 @@ Branch_1ef040:
 	sound_ret
 
 Branch_1ef06a:
-	notetype1 1
+	channel_volume 1
 	vibrato 12, 3, 3
 	sound_ret
 
 Branch_1ef06f:
-	notetype1 1
+	channel_volume 1
 	vibrato 0, 3, 3
 	sound_ret
 

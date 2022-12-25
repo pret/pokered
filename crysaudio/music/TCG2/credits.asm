@@ -6,10 +6,10 @@ Music_TCG2Credits:
 	channel 4, Music_TCG2Credits_Ch4
 
 Music_TCG2Credits_Ch2: ; 1de32a (77:632a)
-	notetype1 10
+	channel_volume 10
 	duty_cycle 2
-	notetype1 15
-	notetype0 1
+	channel_volume 15
+	speed 1
 	;musicdc 255
 	octave 1
 	note G_, 16
@@ -136,7 +136,7 @@ Music_TCG2Credits_Ch2: ; 1de32a (77:632a)
 	note G_, 16
 	;tie
 	note G_, 4
-	notetype1 13
+	channel_volume 13
 	rest 15
 	inc_octave
 	note D_, 14
@@ -409,7 +409,7 @@ Music_TCG2Credits_Ch2: ; 1de32a (77:632a)
 	note G_, 14
 	duty_cycle 1
 	octave 2
-	notetype1 10
+	channel_volume 10
 	;musice4 203
 	note D_, 4
 	;tie
@@ -422,7 +422,7 @@ Music_TCG2Credits_Ch2: ; 1de32a (77:632a)
 	;musice4 242
 	note D_, 3
 	;musice4 0
-	notetype1 14
+	channel_volume 14
 	note D_, 4
 	;tie
 	note D_, 3
@@ -525,9 +525,9 @@ Music_TCG2Credits_Ch2: ; 1de32a (77:632a)
 	;vibrato_type 5
 	vibrato 29, 3, 3
 	octave 1
-	notetype1 10
+	channel_volume 10
 	note G_, 15
-	notetype1 14
+	channel_volume 14
 	note G_, 14
 	;tie
 	note G_, 15
@@ -578,9 +578,9 @@ Music_TCG2Credits_Ch2: ; 1de32a (77:632a)
 	;tie
 	;musice4 0
 	note D_, 7
-	notetype1 10
+	channel_volume 10
 	note G_, 15
-	notetype1 14
+	channel_volume 14
 	note G_, 14
 	;tie
 	note G_, 15
@@ -623,7 +623,7 @@ Music_TCG2Credits_Ch2: ; 1de32a (77:632a)
 	;tie
 	note C_, 15
 	note G_, 14
-	notetype1 10
+	channel_volume 10
 	inc_octave
 	;musice4 196
 	note C_, 4
@@ -637,7 +637,7 @@ Music_TCG2Credits_Ch2: ; 1de32a (77:632a)
 	;musice4 241
 	note C_, 3
 	;musice4 0
-	notetype1 14
+	channel_volume 14
 	note C_, 14
 	;tie
 	note C_, 15
@@ -677,14 +677,14 @@ Music_TCG2Credits_Ch2: ; 1de32a (77:632a)
 	;tie
 	;musice4 0
 	note A_, 3
-	notetype0 4
+	speed 4
 	note E_, 15
 	;tie
 	note E_, 14
 	note A_, 15
 	;tie
 	note A_, 14
-	notetype0 1
+	speed 1
 	inc_octave
 	;musice4 203
 	note D_, 4
@@ -736,22 +736,22 @@ Music_TCG2Credits_Ch2: ; 1de32a (77:632a)
 	note G_, 15
 	note A_, 4
 	duty_cycle 2
-	notetype1 13
-	notetype0 1
+	channel_volume 13
+	speed 1
 	;musicdc 255
 	vibrato 0, 3, 3
 	octave 2
 	note B_, 10
 	inc_octave
-	notetype0 4
+	speed 4
 	note G_, 15
 	;tie
 	note G_, 14
-	notetype0 1
+	speed 1
 	duty_cycle 1
 	;vibrato_type 5
 	vibrato 29, 3, 3
-	notetype1 14
+	channel_volume 14
 	octave 1
 	note C_, 15
 	;tie
@@ -775,11 +775,11 @@ Music_TCG2Credits_Ch2: ; 1de32a (77:632a)
 	;musice4 0
 	note G_, 7
 	inc_octave
-	notetype0 4
+	speed 4
 	note C_, 15
 	;tie
 	note C_, 14
-	notetype0 1
+	speed 1
 	dec_octave
 	note B_, 15
 	;tie
@@ -806,11 +806,11 @@ Music_TCG2Credits_Ch2: ; 1de32a (77:632a)
 	;tie
 	;musice4 0
 	note A_, 3
-	notetype0 4
+	speed 4
 	note E_, 15
 	;tie
 	note E_, 14
-	notetype0 1
+	speed 1
 	note A_, 15
 	;tie
 	note A_, 14
@@ -918,7 +918,7 @@ Music_TCG2Credits_Ch2: ; 1de32a (77:632a)
 	;tie
 	;musice4 0
 	note G_, 7
-	notetype0 4
+	speed 4
 	note C_, 15
 	;tie
 	note C_, 14
@@ -928,7 +928,7 @@ Music_TCG2Credits_Ch2: ; 1de32a (77:632a)
 	note A#, 15
 	;tie
 	note A#, 14
-	notetype0 1
+	speed 1
 	note A_, 15
 	;tie
 	note A_, 14
@@ -1013,9 +1013,9 @@ Music_TCG2Credits_Ch2: ; 1de32a (77:632a)
 	;tie
 	;musice4 0
 	note D_, 7
-	notetype1 10
+	channel_volume 10
 	note G_, 15
-	notetype1 14
+	channel_volume 14
 	note G_, 14
 	;tie
 	note G_, 15
@@ -1041,12 +1041,12 @@ Music_TCG2Credits_Ch2: ; 1de32a (77:632a)
 	note G_, 3
 	;musice4 0
 	dec_octave
-	notetype0 4
+	speed 4
 	note G_, 15
 	;tie
 	note G_, 14
 	;tie
-	notetype0 1
+	speed 1
 	note G_, 15
 	;tie
 	note G_, 14
@@ -1061,7 +1061,7 @@ Music_TCG2Credits_Ch2: ; 1de32a (77:632a)
 	note A_, 15
 	note B_, 14
 	inc_octave
-	notetype0 4
+	speed 4
 	note C_, 15
 	;tie
 	note C_, 14
@@ -1069,7 +1069,7 @@ Music_TCG2Credits_Ch2: ; 1de32a (77:632a)
 	note B_, 15
 	;tie
 	note B_, 14
-	notetype0 1
+	speed 1
 	note A_, 15
 	;tie
 	note A_, 14
@@ -1103,7 +1103,7 @@ Music_TCG2Credits_Ch2: ; 1de32a (77:632a)
 	note D_, 14
 	note E_, 15
 	note F#, 14
-	notetype0 4
+	speed 4
 	note G_, 15
 	;tie
 	note G_, 14
@@ -1116,7 +1116,7 @@ Music_TCG2Credits_Ch2: ; 1de32a (77:632a)
 	note E_, 15
 	;tie
 	note E_, 14
-	notetype0 1
+	speed 1
 	note A_, 15
 	;tie
 	note A_, 14
@@ -1158,9 +1158,9 @@ Music_TCG2Credits_Ch2: ; 1de32a (77:632a)
 	note C_, 15
 	;tie
 	note C_, 14
-	notetype1 10
+	channel_volume 10
 	note D_, 15
-	notetype1 14
+	channel_volume 14
 	note D_, 14
 	;tie
 	note D_, 15
@@ -1192,7 +1192,7 @@ Music_TCG2Credits_Ch2: ; 1de32a (77:632a)
 	duty_cycle 1
 	;vibrato_type 5
 	vibrato 29, 3, 3
-	notetype1 14
+	channel_volume 14
 	octave 1
 	note G_, 15
 	;tie
@@ -1204,8 +1204,8 @@ Music_TCG2Credits_Ch2: ; 1de32a (77:632a)
 	note D_, 14
 	rest 15
 	duty_cycle 2
-	notetype1 13
-	notetype0 1
+	channel_volume 13
+	speed 1
 	vibrato 0, 3, 3
 	octave 3
 	rest 4
@@ -1228,7 +1228,7 @@ Music_TCG2Credits_Ch2: ; 1de32a (77:632a)
 	duty_cycle 1
 	;vibrato_type 5
 	vibrato 29, 3, 3
-	notetype1 14
+	channel_volume 14
 	octave 1
 	note D_, 14
 	octave 1
@@ -1242,8 +1242,8 @@ Music_TCG2Credits_Ch2: ; 1de32a (77:632a)
 	note D_, 14
 	rest 15
 	duty_cycle 2
-	notetype1 13
-	notetype0 1
+	channel_volume 13
+	speed 1
 	vibrato 0, 3, 3
 	octave 3
 	rest 4
@@ -1259,7 +1259,7 @@ Music_TCG2Credits_Ch2: ; 1de32a (77:632a)
 	duty_cycle 1
 	;vibrato_type 5
 	vibrato 29, 3, 3
-	notetype1 14
+	channel_volume 14
 	octave 1
 	note A#, 4
 	;tie
@@ -1285,8 +1285,8 @@ Music_TCG2Credits_Ch2: ; 1de32a (77:632a)
 	note D_, 14
 	rest 15
 	duty_cycle 2
-	notetype1 13
-	notetype0 1
+	channel_volume 13
+	speed 1
 	vibrato 0, 3, 3
 	octave 3
 	rest 4
@@ -1309,7 +1309,7 @@ Music_TCG2Credits_Ch2: ; 1de32a (77:632a)
 	duty_cycle 1
 	;vibrato_type 5
 	vibrato 29, 3, 3
-	notetype1 14
+	channel_volume 14
 	octave 1
 	note D_, 14
 	note G_, 15
@@ -1475,11 +1475,11 @@ Music_TCG2Credits_Ch2: ; 1de32a (77:632a)
 	note A_, 15
 	note B_, 14
 	inc_octave
-	notetype1 7
+	channel_volume 7
 	note C_, 15
 	;tie
 	note C_, 14
-	notetype1 14
+	channel_volume 14
 	note C_, 15
 	;tie
 	note C_, 14
@@ -1673,7 +1673,7 @@ Music_TCG2Credits_Ch2: ; 1de32a (77:632a)
 	rest 4
 	note C#, 11
 	rest 3
-	notetype0 2
+	speed 2
 	note D_, 15
 	;tie
 	note D_, 14
@@ -1681,7 +1681,7 @@ Music_TCG2Credits_Ch2: ; 1de32a (77:632a)
 	note D_, 15
 	;tie
 	note D_, 14
-	notetype0 1
+	speed 1
 .Loop6
 	rept 4
 	note G_, 11
@@ -1703,20 +1703,20 @@ Music_TCG2Credits_Ch2: ; 1de32a (77:632a)
 	rest 3
 	sound_loop 4, .Loop7
 	;musicf1 102
-	notetype0 4
+	speed 4
 	note G_, 15
 	;tie
 	note G_, 14
-	notetype0 2
+	speed 2
 	note G_, 14
 	sound_ret
 
 
 Music_TCG2Credits_Ch1: ; 1deabb (77:6abb)
-	notetype1 10
+	channel_volume 10
 	duty_cycle 2
-	notetype1 13
-	notetype0 1
+	channel_volume 13
+	speed 1
 	;musicdc 255
 	rest 15
 	octave 2
@@ -1834,7 +1834,7 @@ Music_TCG2Credits_Ch1: ; 1deabb (77:6abb)
 	note C_, 16
 	;tie
 	note C_, 4
-	notetype1 13
+	channel_volume 13
 	dec_octave
 	dec_octave
 	note G_, 16
@@ -2333,14 +2333,14 @@ Music_TCG2Credits_Ch1: ; 1deabb (77:6abb)
 	note A_, 15
 	inc_octave
 	note C_, 10
-	notetype1 13
+	channel_volume 13
 	note D_, 4
 	;tie
-	notetype0 4
+	speed 4
 	note D_, 15
 	;tie
 	note G_, 14
-	notetype0 1
+	speed 1
 	;musicf0 5
 	;musicf1 71
 	octave 3
@@ -3053,11 +3053,11 @@ Music_TCG2Credits_Ch1: ; 1deabb (77:6abb)
 	inc_octave
 	note F_, 7
 	;tie
-	notetype0 3
+	speed 3
 	note F_, 15
 	;tie
 	note F_, 14
-	notetype0 1
+	speed 1
 	rest 15
 	rest 14
 	rest 15
@@ -3074,11 +3074,11 @@ Music_TCG2Credits_Ch1: ; 1deabb (77:6abb)
 	inc_octave
 	note F_, 7
 	;tie
-	notetype0 3
+	speed 3
 	note F_, 15
 	;tie
 	note F_, 14
-	notetype0 1
+	speed 1
 	rest 15
 	rest 14
 	rest 15
@@ -3095,11 +3095,11 @@ Music_TCG2Credits_Ch1: ; 1deabb (77:6abb)
 	inc_octave
 	note F_, 7
 	;tie
-	notetype0 3
+	speed 3
 	note F_, 15
 	;tie
 	note F_, 14
-	notetype0 1
+	speed 1
 	rest 15
 	rest 14
 	rest 15
@@ -3116,11 +3116,11 @@ Music_TCG2Credits_Ch1: ; 1deabb (77:6abb)
 	inc_octave
 	note F_, 7
 	;tie
-	notetype0 3
+	speed 3
 	note F_, 15
 	;tie
 	note F_, 14
-	notetype0 1
+	speed 1
 	rest 15
 	rest 14
 	octave 1
@@ -4045,24 +4045,24 @@ Music_TCG2Credits_Ch1: ; 1deabb (77:6abb)
 	note G_, 15
 	;tie
 	note G_, 14
-	notetype0 2
+	speed 2
 	note G_, 14
 	sound_ret
 
 
 Music_TCG2Credits_Ch3: ; 1df4a3 (77:74a3)
-	notetype1 10
-	;notetype2 16
+	channel_volume 10
+	;fade_wave 16
 	load_wave 12, 12, 12, 12, 12, 12, 12, 12, 11, 12, 12, 12, 11, 12, 12, 12, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11
 	;musicdc 255
-	notetype0 1
-	notetype1 1
+	speed 1
+	channel_volume 1
 	;musice9 96
 	octave 5
 	;musice8 8
 	;vibrato_type 3
 	vibrato 15, 3, 3
-	notetype1 2
+	channel_volume 2
 	;musice8 8
 	note G#, 3
 	note A_, 12
@@ -4113,17 +4113,17 @@ Music_TCG2Credits_Ch3: ; 1df4a3 (77:74a3)
 	;musice8 1
 	note G_, 14
 	;tie
-	notetype0 4
+	speed 4
 	note G_, 15
 	;tie
 	note G_, 14
 	;tie
-	notetype0 2
+	speed 2
 	note G_, 15
 	;tie
 	note G_, 14
 	;musice8 8
-	notetype0 1
+	speed 1
 	note G#, 3
 	note A_, 12
 	;tie
@@ -4173,19 +4173,19 @@ Music_TCG2Credits_Ch3: ; 1df4a3 (77:74a3)
 	;musice8 1
 	note G_, 14
 	;tie
-	notetype0 4
+	speed 4
 	note G_, 15
 	;tie
 	note G_, 14
 	;tie
-	notetype0 1
+	speed 1
 	note G_, 2
 	;tie
-	notetype0 3
+	speed 3
 	note G_, 9
-	notetype0 1
+	speed 1
 	;musice8 8
-	notetype1 1
+	channel_volume 1
 	rest 15
 	rest 14
 	rest 15
@@ -4303,19 +4303,19 @@ Music_TCG2Credits_Ch3: ; 1df4a3 (77:74a3)
 	note A_, 14
 	vibrato 0, 3, 3
 	;musice8 8
-	notetype1 2
+	channel_volume 2
 	note B_, 15
 	;tie
 	note B_, 14
 	;tie
 	note B_, 15
 	dec_octave
-	notetype1 1
+	channel_volume 1
 	sound_call Branch_1dfa9d
 	sound_call Branch_1dfb57
-	notetype0 2
+	speed 2
 	note G_, 14
-	notetype0 1
+	speed 1
 	rest 1
 	rest 15
 	rest 14
@@ -4569,23 +4569,23 @@ Music_TCG2Credits_Ch3: ; 1df4a3 (77:74a3)
 	;musice8 1
 	note D_, 14
 	;tie
-	notetype0 4
+	speed 4
 	note D_, 15
 	;tie
 	note D_, 14
 	;tie
-	notetype0 2
+	speed 2
 	note D_, 15
 	;tie
 	note D_, 14
 	;tie
-	notetype0 1
+	speed 1
 	note D_, 1
 	;tie
-	notetype0 2
+	speed 2
 	note D_, 14
 	;musice8 8
-	notetype0 1
+	speed 1
 	vibrato 0, 3, 3
 	note C#, 3
 	note D_, 12
@@ -4628,15 +4628,15 @@ Music_TCG2Credits_Ch3: ; 1df4a3 (77:74a3)
 	note G_, 15
 	vibrato 14, 3, 3
 	;musice8 1
-	notetype0 1
+	speed 1
 	note D_, 14
 	;tie
-	notetype0 4
+	speed 4
 	note D_, 15
 	;tie
 	note D_, 14
 	;tie
-	notetype0 1
+	speed 1
 	note D_, 15
 	;tie
 	note D_, 14
@@ -4696,20 +4696,20 @@ Music_TCG2Credits_Ch3: ; 1df4a3 (77:74a3)
 	;tie
 	note A_, 15
 	vibrato 0, 3, 3
-	notetype1 2
+	channel_volume 2
 	inc_octave
 	;musice8 1
 	note C_, 7
 	;tie
-	notetype0 2
+	speed 2
 	note C_, 11
-	notetype0 8
-	notetype0 1
+	speed 8
+	speed 1
 	note E_, 7
 	;tie
-	notetype0 2
+	speed 2
 	note E_, 11
-	notetype0 1
+	speed 1
 	;musice8 8
 	note D_, 14
 	;tie
@@ -4723,7 +4723,7 @@ Music_TCG2Credits_Ch3: ; 1df4a3 (77:74a3)
 	note F#, 14
 	inc_octave
 	;musice8 8
-	notetype1 1
+	channel_volume 1
 	note C#, 3
 	note D_, 12
 	note C_, 14
@@ -4782,7 +4782,7 @@ Music_TCG2Credits_Ch3: ; 1df4a3 (77:74a3)
 	note D_, 15
 	vibrato 0, 3, 3
 	dec_octave
-	notetype1 2
+	channel_volume 2
 	note B_, 3
 	inc_octave
 	note C_, 11
@@ -4796,7 +4796,7 @@ Music_TCG2Credits_Ch3: ; 1df4a3 (77:74a3)
 	note F_, 15
 	inc_octave
 	;musice8 8
-	notetype1 1
+	channel_volume 1
 	note C_, 14
 	dec_octave
 	note B_, 15
@@ -4879,7 +4879,7 @@ Music_TCG2Credits_Ch3: ; 1df4a3 (77:74a3)
 	note G_, 15
 	dec_octave
 	note G_, 7
-	notetype1 2
+	channel_volume 2
 	note G_, 7
 	;tie
 	note G_, 15
@@ -4890,7 +4890,7 @@ Music_TCG2Credits_Ch3: ; 1df4a3 (77:74a3)
 	;tie
 	note G_, 14
 	;tie
-	notetype1 2
+	channel_volume 2
 	;musice8 1
 	note G_, 15
 	;tie
@@ -4903,7 +4903,7 @@ Music_TCG2Credits_Ch3: ; 1df4a3 (77:74a3)
 	rest 14
 	rest 8
 	octave 3
-	notetype1 2
+	channel_volume 2
 	;musice4 253
 	note D_, 14
 	note G_, 15
@@ -4913,9 +4913,9 @@ Music_TCG2Credits_Ch3: ; 1df4a3 (77:74a3)
 	dec_octave
 	note G_, 7
 	;musice4 0
-	notetype1 1
+	channel_volume 1
 	note G_, 7
-	notetype1 2
+	channel_volume 2
 	note G_, 7
 	;tie
 	note G_, 15
@@ -4926,7 +4926,7 @@ Music_TCG2Credits_Ch3: ; 1df4a3 (77:74a3)
 	;tie
 	note G_, 14
 	;tie
-	notetype1 2
+	channel_volume 2
 	;musice8 1
 	note G_, 15
 	;tie
@@ -4939,7 +4939,7 @@ Music_TCG2Credits_Ch3: ; 1df4a3 (77:74a3)
 	rest 14
 	rest 8
 	octave 3
-	notetype1 2
+	channel_volume 2
 	;musice4 253
 	note D_, 14
 	note G_, 15
@@ -4950,9 +4950,9 @@ Music_TCG2Credits_Ch3: ; 1df4a3 (77:74a3)
 	note G_, 7
 	;musice4 0
 	inc_octave
-	notetype1 1
+	channel_volume 1
 	note C_, 7
-	notetype1 2
+	channel_volume 2
 	note C_, 7
 	;tie
 	note C_, 15
@@ -4966,11 +4966,11 @@ Music_TCG2Credits_Ch3: ; 1df4a3 (77:74a3)
 	note C_, 15
 	;tie
 	note C_, 14
-	notetype1 3
+	channel_volume 3
 	note C_, 15
 	vibrato 0, 3, 3
 	rest 14
-	notetype1 1
+	channel_volume 1
 	rest 15
 	rest 14
 	rest 15
@@ -5029,9 +5029,9 @@ Music_TCG2Credits_Ch3: ; 1df4a3 (77:74a3)
 	;tie
 	note F_, 1
 	;tie
-	notetype0 2
+	speed 2
 	note F_, 14
-	notetype0 1
+	speed 1
 	;musice8 8
 	vibrato 29, 3, 3
 	note F#, 15
@@ -5147,9 +5147,9 @@ Music_TCG2Credits_Ch3: ; 1df4a3 (77:74a3)
 	;tie
 	note G_, 1
 	;tie
-	notetype0 2
+	speed 2
 	note G_, 14
-	notetype0 1
+	speed 1
 	vibrato 0, 3, 3
 	;musice8 8
 	note F#, 3
@@ -5317,10 +5317,10 @@ Music_TCG2Credits_Ch3: ; 1df4a3 (77:74a3)
 	note B_, 14
 	vibrato 0, 3, 3
 	;musice8 1
-	notetype0 1
-	notetype1 2
+	speed 1
+	channel_volume 2
 	note B_, 14
-	notetype1 3
+	channel_volume 3
 	note B_, 7
 	rest 7
 	sound_ret

@@ -6,8 +6,8 @@ Music_Fort1:
 	channel 4, Music_Fort1_Ch4
 
 Music_Fort1_Ch2: ; 1ed6cc (7b:56cc)
-	notetype1 10
-	notetype0 1
+	channel_volume 10
+	speed 1
 	;musicdc 17
 	;musicf0 16
 	octave 2
@@ -466,10 +466,10 @@ Branch_1ed8a8:
 
 
 Music_Fort1_Ch1: ; 1ed8cd (7b:58cd)
-	notetype1 10
-	notetype0 1
+	channel_volume 10
+	speed 1
 	duty_cycle 0
-	notetype1 9
+	channel_volume 9
 	;musicdc 17
 	;vibrato_type 10
 	vibrato 18, 3, 3
@@ -517,7 +517,7 @@ Music_Fort1_Ch1: ; 1ed8cd (7b:58cd)
 	note C#, 10
 	rest 15
 	;musicf3
-	notetype1 8
+	channel_volume 8
 	note D#, 3
 	note E_, 13
 	;tie
@@ -1004,10 +1004,10 @@ Branch_1edb5a:
 
 
 Music_Fort1_Ch3: ; 1edb66 (7b:5b66)
-	notetype1 10
-	notetype0 1
-	notetype2 14
-	notetype1 1
+	channel_volume 10
+	speed 1
+	fade_wave 14
+	channel_volume 1
 	;musice9 96
 	;musicdc 17
 	octave 2

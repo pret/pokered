@@ -6,10 +6,10 @@ Music_GRDuelTheme2:
 	channel 4, Music_GRDuelTheme2_Ch4
 
 Music_GRDuelTheme2_Ch2: ; 1ef1ec (7b:71ec)
-	notetype1 10
+	channel_volume 10
 	;musicf0 0
 	octave 3
-	notetype0 1
+	speed 1
 	;musicdc 255
 	;musicf1 71
 	;musicf3
@@ -1107,10 +1107,10 @@ Branch_1ef628:
 
 
 Music_GRDuelTheme2_Ch1: ; 1ef634 (7b:7634)
-	notetype1 10
+	channel_volume 10
 	;musicf0 9
 	octave 2
-	notetype0 1
+	speed 1
 	;musicdc 255
 	octave 3
 	note E_, 14
@@ -2148,11 +2148,11 @@ Branch_1efa62:
 
 
 Music_GRDuelTheme2_Ch3: ; 1efa74 (7b:7a74)
-	notetype1 10
-	;notetype2 15
+	channel_volume 10
+	;fade_wave 15
 	load_wave 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 13, 12, 11, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-	notetype0 1
-	notetype1 1
+	speed 1
+	channel_volume 1
 	;musice9 96
 	;musicdc 255
 	octave 2

@@ -4,9 +4,9 @@ Music_Diddly5:
 	channel 2, Music_Diddly5_Ch2
 
 Music_Diddly5_Ch2: ; 1ebefa (7a:7efa)
-	notetype1 10
+	channel_volume 10
 	;musicf0 2
-	notetype0 1
+	speed 1
 	;musicdc 255
 	octave 3
 	note G_, 2
@@ -37,9 +37,9 @@ Music_Diddly5_Ch2: ; 1ebefa (7a:7efa)
 
 
 Music_Diddly5_Ch1: ; 1ebf1b (7a:7f1b)
-	notetype1 10
+	channel_volume 10
 	;musicf0 2
-	notetype0 1
+	speed 1
 	;musicdc 255
 	;musicef 254
 	octave 2

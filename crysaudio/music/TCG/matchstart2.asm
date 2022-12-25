@@ -4,11 +4,11 @@ Music_MatchStart2:
 	channel 2, Music_MatchStart2_Ch2
 
 Music_MatchStart2_Ch1: ; f7956 (3d:7956)
-	notetype0 1
+	speed 1
 	;stereo_panning 1, 1
-	notetype2 8
+	fade_wave 8
 	octave 2
-	notetype1 15
+	channel_volume 15
 	duty_cycle 0
 	note C_, 1
 	note E_, 1
@@ -78,14 +78,14 @@ Music_MatchStart2_Ch1: ; f7956 (3d:7956)
 	note F_, 1
 	note B_, 1
 	dec_octave
-	notetype1 6
+	channel_volume 6
 	note E_, 1
 	note G_, 1
 	note B_, 1
 	inc_octave
 	note C_, 1
 	note E_, 1
-	notetype1 2
+	channel_volume 2
 	note G_, 1
 	note B_, 1
 	inc_octave
@@ -94,13 +94,13 @@ Music_MatchStart2_Ch1: ; f7956 (3d:7956)
 
 
 Music_MatchStart2_Ch2: ; f79b4 (3d:79b4)
-	notetype0 1
+	speed 1
 	;stereo_panning 1, 1
-	notetype2 8
+	fade_wave 8
 	;frequency_offset 6
 	rest 4
 	octave 2
-	notetype1 6
+	channel_volume 6
 	duty_cycle 0
 	note C_, 1
 	note E_, 1
@@ -170,7 +170,7 @@ Music_MatchStart2_Ch2: ; f79b4 (3d:79b4)
 	note F_, 1
 	note B_, 1
 	dec_octave
-	notetype1 2
+	channel_volume 2
 	note E_, 1
 	note G_, 1
 	note B_, 1

@@ -403,14 +403,14 @@ dec_octave: MACRO
 	db $f5
 ENDM
 
-notetype0: MACRO
+speed: MACRO
 	db $f6, \1
 ENDM
 
-notetype1: MACRO
+channel_volume: MACRO
 	db $f7, \1
 ENDM
 
-notetype2: MACRO
+fade_wave: MACRO
 	db $f8, \1
 ENDM
