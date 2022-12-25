@@ -2604,6 +2604,10 @@ ItemUseTMHM:
 	ld a, [wCurrentMenuItem]
 	and a
 	jr z, .useMachine
+;;;;;;;;;; Vimescarrotnote: FIXED: fixes a rare bug where booting up a TM and then going back can freeze up the game on booting up another
+    ld a, ITEM_NAME
+    ld [wNameListType], a; if you decide not to use the machine, change the list type back to item list.
+;;;;;;;;;;
 	ld a, 2
 	ld [wActionResultOrTookBattleTurn], a ; item not used
 	ret
