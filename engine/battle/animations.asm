@@ -1279,11 +1279,11 @@ AnimationShakeScreen:
 AnimationShakeScreenHorizontallyFast:
 	predef_jump PredefShakeScreenHorizontally
 
-AnimationPoisonEverywhere: 
-	ld a, 1
-	ld d, 32
-	ld e, $76
-	jr AnimationTileEverywhereInit
+;AnimationPoisonEverywhere: 
+;	ld a, 1
+;	ld d, 32
+;	ld e, $76
+;	jr AnimationTileEverywhereInit
 
 AnimationWaterDropletsEverywhereDefault:
 ; Draws water droplets all over the screen and makes them
