@@ -5395,8 +5395,10 @@ AdjustDamageForMoveType:
 	ld hl, wDamageMultipliers
 	set 7, [hl]
 .skipSameTypeAttackBonus
+;;;;;;;;;; PureRGBnote: ADDED: check if the opponent is immune to the attack being used due to Haze or Mist
 	call CheckHazeMistImmunityGetArgs
 	jr c, ForceTypeImmunity ; if the pokemon is immune to move due to haze or mist, skip ahead
+;;;;;;;;;;
 	ld a, [wMoveType]
 	ld b, a
 	ld hl, TypeEffects
@@ -5582,10 +5584,12 @@ AIGetTypeEffectiveness:
 ;shinpokerednote: CHANGED: - if type-effectiveness bit is set, then do wPlayerMoveType and wEnemyMonType
 ;		-also changed neutral value from $10 to $0A since it makes more sense
 ;		-and modifying this to take into account both types
+;;;;;;;;;; PureRGBnote: ADDED: check if the opponent is immune to the attack being used due to Haze or Mist
 	ld a, [wEnemyMoveType]
 	ld hl, wPlayerBattleStatus2
 	call CheckHazeMistImmunity
 	jr c, .immunity ; if the pokemon is immune to the move due to haze or mist, skip ahead
+;;;;;;;;;;
 	ld a, [wEnemyMoveType]
 	ld d, a                    ; d = type of enemy move
 	ld a, [wAITargetMonType1]
@@ -7746,6 +7750,7 @@ EmptyPartyMenuRedraw:
 	ld [wPartyMenuTypeOrMessageID], a
 	ret
 
+; PureRGBnote: ADDED: determines if the opponent is immune to the move being used due to having used haze or mist
 CheckHazeMistImmunityGetArgs:
 	ldh a, [hWhoseTurn]
 	and a

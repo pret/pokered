@@ -80,8 +80,10 @@ BillsHousePokemonList::
 	ld a, 1
 	ld [wTopMenuItemX], a
 .billsPokemonLoop
+;;;;;;;;;; PureRGBnote: MOVED: moved here because opening a pokedex entry changes wMenuWatchedKeys now and this needs to be repeated every menu loop.
 	ld a, A_BUTTON | B_BUTTON
 	ld [wMenuWatchedKeys], a
+;;;;;;;;;;
 	ld hl, wd730
 	set 6, [hl]
 	hlcoord 0, 0

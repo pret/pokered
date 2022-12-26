@@ -15,11 +15,14 @@ DisplayListMenuID::
 	ld a, BANK(DisplayBattleMenu)
 .bankswitch
 	call BankswitchHome
+;;;;;;;;;; PureRGBnote: ADDED: if we're in a menu that can display TM move names while scrolling over TMs, we need to save the screen tiles that
+;;;;;;;;;; appear behind the TM move name window so we can close it if needed
 	ld a, [wListWithTMText]
 	and a
 	jr z, .noSaveScreenTiles
 	call CheckSaveTMTextScreenTiles
 .noSaveScreenTiles
+;;;;;;;;;;
 	ld hl, wd730
 	set 6, [hl] ; turn off letter printing delay
 	xor a

@@ -20,6 +20,8 @@ UncompressSpriteFromDE::
 	ld [hl], d
 	jp UncompressSpriteData
 
+; PureRGBnote: CHANGED: refactored the below code a bit to use less space. Does the same thing it always did but with less space taken up.
+
 SaveScreenTilesToBuffer2::
 	ld de, wTileMapBackup2
 	jr SaveScreenTilesCommon
