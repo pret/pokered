@@ -5583,7 +5583,7 @@ AIGetTypeEffectiveness:
 ;		-also changed neutral value from $10 to $0A since it makes more sense
 ;		-and modifying this to take into account both types
 	call CheckHazeMistImmunity
-	jr c, .done ; if the pokemon is immune to the move due to haze or mist, skip ahead
+	jr c, .immunity ; if the pokemon is immune to the move due to haze or mist, skip ahead
 	ld a, [wEnemyMoveType]
 	ld d, a                    ; d = type of enemy move
 	ld a, [wAITargetMonType1]
@@ -5626,6 +5626,7 @@ AIGetTypeEffectiveness:
 	cp EFFECTIVE ; because of remappable matchups we can end up with a neutral here, no modification to the type effectiveness necessary
 	jr z, .nextTypePair2
 	; if it was none of these it's zero
+.immunity
 	xor a	;clear a to 00
 	jr .done
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
