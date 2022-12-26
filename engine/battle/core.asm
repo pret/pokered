@@ -5395,7 +5395,7 @@ AdjustDamageForMoveType:
 	ld hl, wDamageMultipliers
 	set 7, [hl]
 .skipSameTypeAttackBonus
-	call CheckHazeMistImmunity
+	call CheckHazeMistImmunityGetArgs
 	jr c, ForceTypeImmunity ; if the pokemon is immune to move due to haze or mist, skip ahead
 	ld a, [wMoveType]
 	ld b, a
@@ -5582,6 +5582,8 @@ AIGetTypeEffectiveness:
 ;shinpokerednote: CHANGED: - if type-effectiveness bit is set, then do wPlayerMoveType and wEnemyMonType
 ;		-also changed neutral value from $10 to $0A since it makes more sense
 ;		-and modifying this to take into account both types
+	ld a, [wEnemyMoveType]
+	ld hl, wPlayerBattleStatus2
 	call CheckHazeMistImmunity
 	jr c, .immunity ; if the pokemon is immune to the move due to haze or mist, skip ahead
 	ld a, [wEnemyMoveType]
@@ -7744,8 +7746,15 @@ EmptyPartyMenuRedraw:
 	ld [wPartyMenuTypeOrMessageID], a
 	ret
 
-CheckHazeMistImmunity:
+CheckHazeMistImmunityGetArgs:
+	ldh a, [hWhoseTurn]
+	and a
+	ld hl, wEnemyBattleStatus2
 	ld a, [wMoveType]
+	jr z, CheckHazeMistImmunity
+	ld hl, wPlayerBattleStatus2
+	; fall through
+CheckHazeMistImmunity:
 	cp PSYCHIC_TYPE
 	jr z, .hazeCheck
 	cp NORMAL
@@ -7754,12 +7763,10 @@ CheckHazeMistImmunity:
 	jr z, .mistCheck
 	jr .noImmunity
 .hazeCheck
-	call .getStatusProperty
 	bit PSYCHIC_IMMUNITY, [hl]
 	jr nz, .immunity
 	jr .noImmunity
 .mistCheck
-	call .getStatusProperty
 	bit NORMAL_FIGHTING_IMMUNITY, [hl]
 	jr nz, .immunity
 .noImmunity
@@ -7767,12 +7774,4 @@ CheckHazeMistImmunity:
 	ret
 .immunity
 	scf
-	ret
-.getStatusProperty
-	ldh a, [hWhoseTurn]
-	and a
-	ld hl, wEnemyBattleStatus2
-	jr z, .playerTurn
-	ld hl, wPlayerBattleStatus2
-.playerTurn
 	ret
