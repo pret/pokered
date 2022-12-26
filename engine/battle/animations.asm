@@ -1279,10 +1279,16 @@ AnimationShakeScreen:
 AnimationShakeScreenHorizontallyFast:
 	predef_jump PredefShakeScreenHorizontally
 
+AnimationPoisonEverywhere: 
+	ld a, 1
+	ld d, 32
+	ld e, $76
+	jr AnimationTileEverywhereInit
+
 AnimationWaterDropletsEverywhereDefault:
 ; Draws water droplets all over the screen and makes them
 ; scroll. It's hard to describe, but it's the main animation
-; in Surf/Mist/Toxic.
+; in Surf/Mist/Haze.
 	xor a
 	ld d, 32
 	ld e, $71

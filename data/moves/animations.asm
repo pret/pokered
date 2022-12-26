@@ -559,7 +559,9 @@ FlamethrowerAnim:
 
 MistAnim:
 	battle_anim NO_MOVE, SE_LIGHT_SCREEN_PALETTE
-	battle_anim SURF, SE_WATER_DROPLETS_EVERYWHERE
+	battle_anim LOVELY_KISS, SE_SNOWFLAKES_EVERYWHERE
+	battle_anim NO_MOVE, SE_SNOWFLAKES_EVERYWHERE
+	battle_anim NO_MOVE, SUBANIM_0_SPARKLES_FALLING, 0, 4
 	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
 	db -1 ; end
 
@@ -1001,7 +1003,8 @@ LightScreenAnim:
 
 HazeAnim:
 	battle_anim NO_MOVE, SE_DARKEN_MON_PALETTE
-	battle_anim SURF, SE_WATER_DROPLETS_EVERYWHERE
+	battle_anim STRUGGLE, SE_WATER_DROPLETS_EVERYWHERE
+	battle_anim NO_MOVE, SUBANIM_1_SAND, 1, 6
 	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
 	db -1 ; end
 

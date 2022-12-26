@@ -123,6 +123,8 @@ FrameBlockPointers:
 	dw FrameBlock78
 	dw FrameBlock79
 	dw FrameBlock7a
+	dw FrameBlock7b
+	dw FrameBlock7c
 	assert_table_length NUM_FRAMEBLOCKS
 
 FrameBlock01:
@@ -1243,3 +1245,22 @@ FrameBlock00:
 FrameBlock7a:
 	db 1 ; #
 	dbsprite  0,  0,  0,  0, $1f, 0
+
+FrameBlock7b:
+	db 4 ; #
+	dbsprite  0,  0,  0,  0, $1C, 0
+	dbsprite  2,  0,  0,  0, $1C, 0
+	dbsprite  4,  0,  0,  0, $1C, 0
+	dbsprite  6,  0,  0,  0, $1C, 0
+
+FrameBlock7c:
+	db 8 ; #
+	dbsprite  0,  0,  0,  0, $1C, 0
+	dbsprite  2,  0,  0,  0, $1C, 0
+	dbsprite  4,  0,  0,  0, $1C, 0
+	dbsprite  6,  0,  0,  0, $1C, 0
+	dbsprite  1,  1,  0,  0, $1C, 0
+	dbsprite  3,  1,  0,  0, $1C, 0
+	dbsprite  5,  1,  0,  0, $1C, 0
+	dbsprite  7,  1,  0,  0, $1C, 0
+	

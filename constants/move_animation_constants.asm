@@ -153,6 +153,7 @@ DEF FIRST_SE_ID EQU const_value
 	const SUBANIM_0_PIN_JAB
 	const SUBANIM_0_PIN_MISSILE
 	const SUBANIM_0_BARB_JAB
+	const SUBANIM_0_SPARKLES_FALLING
 ;;;;;;;;;;
 DEF NUM_SUBANIMS EQU const_value
 
@@ -291,6 +292,8 @@ DEF NUM_SUBANIMS EQU const_value
 	const FRAMEBLOCK_78
 	const FRAMEBLOCK_79
 	const FRAMEBLOCK_7A
+	const FRAMEBLOCK_7B
+	const FRAMEBLOCK_7C
 DEF NUM_FRAMEBLOCKS EQU const_value
 
 ; base coordinates that are part of subanimations
@@ -473,6 +476,8 @@ DEF NUM_FRAMEBLOCKS EQU const_value
 	const BASECOORD_AE
 	const BASECOORD_AF
 	const BASECOORD_B0
+	const BASECOORD_B1
+	const BASECOORD_B2
 DEF NUM_BASECOORDS EQU const_value
 
 ; frame block modes that are part of subanimations
