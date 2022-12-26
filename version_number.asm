@@ -1,10 +1,10 @@
 VersionText:
 IF DEF(_RED)
-	db " PureRed v2.3.1@"
+	db " PureRed v2.3.2@"
 ENDC
 IF DEF(_BLUE)
-	db " PureBlue v2.3.1@"
+	db " PureBlue v2.3.2@"
 ENDC
 IF DEF(_GREEN)
-	db " PureGreen v2.3.1@"
+	db " PureGreen v2.3.2@"
 ENDC
