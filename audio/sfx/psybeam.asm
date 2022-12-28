@@ -7,7 +7,6 @@ SFX_Psybeam_Ch5:
 	square_note 10, 15, 1, 1600
 	sound_ret
 
-
 SFX_Psybeam_Ch6:
 	duty_cycle_pattern 2, 3, 0, 3
 	square_note 10, 15, 3, 1393
@@ -16,7 +15,6 @@ SFX_Psybeam_Ch6:
 	sound_loop 4, SFX_Psybeam_Ch6
 	square_note 10, 15, 1, 1393
 	sound_ret
-
 
 SFX_Psybeam_Ch8:
 	noise_note 2, 13, 1, 74

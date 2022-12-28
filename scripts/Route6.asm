@@ -1,6 +1,6 @@
 Route6_Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, Route6TrainerHeader0
+	ld hl, Route6TrainerHeaders
 	ld de, Route6_ScriptPointers
 	ld a, [wRoute6CurScript]
 	call ExecuteCurMapScriptInTable
@@ -21,6 +21,8 @@ Route6_TextPointers:
 	dw Route6Text6
 	dw Route6Text7
 
+Route6TrainerHeaders:
+	def_trainers
 Route6TrainerHeader0:
 	trainer EVENT_BEAT_ROUTE_6_TRAINER_0, 0, Route6BattleText1, Route6EndBattleText1, Route6AfterBattleText1
 Route6TrainerHeader1:

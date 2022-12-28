@@ -101,10 +101,10 @@ IsPlayerFacingEdgeOfMap::
 	ld b, a
 	ld a, [wXCoord]
 	ld c, a
-	ld de, .asm_c41e
+	ld de, .return
 	push de
 	jp hl
-.asm_c41e
+.return
 	pop bc
 	pop de
 	pop hl
@@ -239,11 +239,11 @@ PrintSafariZoneSteps::
 	call PlaceString
 	ld a, [wNumSafariBalls]
 	cp 10
-	jr nc, .asm_c56d
+	jr nc, .tenOrMore
 	hlcoord 5, 3
 	ld a, " "
 	ld [hl], a
-.asm_c56d
+.tenOrMore
 	hlcoord 6, 3
 	ld de, wNumSafariBalls
 	lb bc, 1, 2

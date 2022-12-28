@@ -1,18 +1,18 @@
 MtMoonPokecenter_Object:
 	db $0 ; border block
 
-	def_warps
-	warp  3,  7, 0, LAST_MAP
-	warp  4,  7, 0, LAST_MAP
+	def_warp_events
+	warp_event  3,  7, LAST_MAP, 1
+	warp_event  4,  7, LAST_MAP, 1
 
-	def_signs
+	def_bg_events
 
-	def_objects
-	object SPRITE_NURSE, 3, 1, STAY, DOWN, 1 ; person
-	object SPRITE_YOUNGSTER, 4, 3, STAY, UP, 2 ; person
-	object SPRITE_GENTLEMAN, 7, 3, STAY, UP, 3 ; person
-	object SPRITE_MIDDLE_AGED_MAN, 10, 6, WALK, LEFT_RIGHT, 4 ; person
-	object SPRITE_CLIPBOARD, 7, 2, STAY, NONE, 5 ; person
-	object SPRITE_LINK_RECEPTIONIST, 11, 2, STAY, DOWN, 6 ; person
+	def_object_events
+	object_event  3,  1, SPRITE_NURSE, STAY, DOWN, 1 ; person
+	object_event  4,  3, SPRITE_YOUNGSTER, STAY, UP, 2 ; person
+	object_event  7,  3, SPRITE_GENTLEMAN, STAY, UP, 3 ; person
+	object_event 10,  6, SPRITE_MIDDLE_AGED_MAN, WALK, LEFT_RIGHT, 4 ; person
+	object_event  7,  2, SPRITE_CLIPBOARD, STAY, NONE, 5 ; person
+	object_event 11,  2, SPRITE_LINK_RECEPTIONIST, STAY, DOWN, 6 ; person
 
 	def_warps_to MT_MOON_POKECENTER

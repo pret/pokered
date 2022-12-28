@@ -1,7 +1,7 @@
 SilphCo5F_Script:
 	call SilphCo5Script_19f4d
 	call EnableAutoTextBoxDrawing
-	ld hl, SilphCo5TrainerHeader0
+	ld hl, SilphCo5TrainerHeaders
 	ld de, SilphCo5F_ScriptPointers
 	ld a, [wSilphCo5FCurScript]
 	call ExecuteCurMapScriptInTable
@@ -83,6 +83,8 @@ SilphCo5F_TextPointers:
 	dw SilphCo5Text10
 	dw SilphCo5Text11
 
+SilphCo5TrainerHeaders:
+	def_trainers 2
 SilphCo5TrainerHeader0:
 	trainer EVENT_BEAT_SILPH_CO_5F_TRAINER_0, 1, SilphCo5BattleText2, SilphCo5EndBattleText2, SilphCo5AfterBattleText2
 SilphCo5TrainerHeader1:

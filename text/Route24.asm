@@ -14,7 +14,7 @@ _Route24Text_51515::
 _Route24Text_5151a::
 	text "<PLAYER> received"
 	line "a @"
-	text_ram wcf4b
+	text_ram wStringBuffer
 	text "!@"
 	text_end
 

@@ -93,7 +93,7 @@ DisplayTitleScreen:
 	call DrawPlayerCharacter
 
 ; put a pokeball in the player's hand
-	ld hl, wOAMBuffer + $28
+	ld hl, wShadowOAMSprite10
 	ld a, $74
 	ld [hl], a
 
@@ -322,7 +322,7 @@ DrawPlayerCharacter:
 	call ClearSprites
 	xor a
 	ld [wPlayerCharacterOAMTile], a
-	ld hl, wOAMBuffer
+	ld hl, wShadowOAM
 	lb de, $60, $5a
 	ld b, 7
 .loop

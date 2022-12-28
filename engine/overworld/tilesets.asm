@@ -35,13 +35,13 @@ LoadTilesetHeader:
 	call IsInArray
 	pop de
 	pop hl
-	jr c, .asm_c797
+	jr c, .dungeon
 	ld a, [wCurMapTileset]
 	ld b, a
 	ldh a, [hPreviousTileset]
 	cp b
 	jr z, .done
-.asm_c797
+.dungeon
 	ld a, [wDestinationWarpID]
 	cp $ff
 	jr z, .done

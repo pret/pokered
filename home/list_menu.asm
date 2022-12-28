@@ -84,7 +84,7 @@ DisplayListMenuIDLoop::
 	push af
 	call PlaceMenuCursor
 	pop af
-	bit 0, a ; was the A button pressed?
+	bit BIT_A_BUTTON, a
 	jp z, .checkOtherKeys
 .buttonAPressed
 	ld a, [wCurrentMenuItem]
@@ -157,7 +157,7 @@ DisplayListMenuIDLoop::
 	call GetPartyMonName
 .storeChosenEntry ; store the menu entry that the player chose and return
 	ld de, wcd6d
-	call CopyStringToCF4B ; copy name to wcf4b
+	call CopyToStringBuffer
 	ld a, CHOSE_MENU_ITEM
 	ld [wMenuExitMethod], a
 	ld a, [wCurrentMenuItem]
@@ -168,12 +168,12 @@ DisplayListMenuIDLoop::
 	res 6, [hl] ; turn on letter printing delay
 	jp BankswitchBack
 .checkOtherKeys ; check B, SELECT, Up, and Down keys
-	bit 1, a ; was the B button pressed?
+	bit BIT_B_BUTTON, a
 	jp nz, ExitListMenu ; if so, exit the menu
-	bit 2, a ; was the select button pressed?
+	bit BIT_SELECT, a
 	jp nz, HandleItemListSwapping ; if so, allow the player to swap menu entries
 	ld b, a
-	bit 7, b ; was Down pressed?
+	bit BIT_D_DOWN, b
 	ld hl, wListScrollOffset
 	jr z, .upPressed
 .downPressed
@@ -220,13 +220,13 @@ DisplayChooseQuantityMenu::
 .waitForKeyPressLoop
 	call JoypadLowSensitivity
 	ldh a, [hJoyPressed] ; newly pressed buttons
-	bit 0, a ; was the A button pressed?
+	bit BIT_A_BUTTON, a
 	jp nz, .buttonAPressed
-	bit 1, a ; was the B button pressed?
+	bit BIT_B_BUTTON, a
 	jp nz, .buttonBPressed
-	bit 6, a ; was Up pressed?
+	bit BIT_D_UP, a
 	jr nz, .incrementQuantity
-	bit 7, a ; was Down pressed?
+	bit BIT_D_DOWN, a
 	jr nz, .decrementQuantity
 	jr .waitForKeyPressLoop
 .incrementQuantity

@@ -1,6 +1,6 @@
 PokemonTower4F_Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, PokemonTower4TrainerHeader0
+	ld hl, PokemonTower4TrainerHeaders
 	ld de, PokemonTower4F_ScriptPointers
 	ld a, [wPokemonTower4FCurScript]
 	call ExecuteCurMapScriptInTable
@@ -20,6 +20,8 @@ PokemonTower4F_TextPointers:
 	dw PickUpItemText
 	dw PickUpItemText
 
+PokemonTower4TrainerHeaders:
+	def_trainers
 PokemonTower4TrainerHeader0:
 	trainer EVENT_BEAT_POKEMONTOWER_4_TRAINER_0, 2, PokemonTower4BattleText1, PokemonTower4EndBattleText1, PokemonTower4AfterBattleText1
 PokemonTower4TrainerHeader1:

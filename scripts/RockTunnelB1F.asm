@@ -1,6 +1,6 @@
 RockTunnelB1F_Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, RockTunnel2TrainerHeader0
+	ld hl, RockTunnel2TrainerHeaders
 	ld de, RockTunnelB1F_ScriptPointers
 	ld a, [wRockTunnelB1FCurScript]
 	call ExecuteCurMapScriptInTable
@@ -22,6 +22,8 @@ RockTunnelB1F_TextPointers:
 	dw RockTunnel2Text7
 	dw RockTunnel2Text8
 
+RockTunnel2TrainerHeaders:
+	def_trainers
 RockTunnel2TrainerHeader0:
 	trainer EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_0, 4, RockTunnel2BattleText2, RockTunnel2EndBattleText2, RockTunnel2AfterBattleText2
 RockTunnel2TrainerHeader1:
@@ -37,7 +39,7 @@ RockTunnel2TrainerHeader5:
 RockTunnel2TrainerHeader6:
 	trainer EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_6, 3, RockTunnel2BattleText8, RockTunnel2EndBattleText8, RockTunnel2AfterBattleText8
 RockTunnel2TrainerHeader7:
-	trainer EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_7, 1, 3, RockTunnel2BattleText9, RockTunnel2EndBattleText9, RockTunnel2AfterBattleText9
+	trainer EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_7, 3, RockTunnel2BattleText9, RockTunnel2EndBattleText9, RockTunnel2AfterBattleText9
 	db -1 ; end
 
 RockTunnel2Text1:

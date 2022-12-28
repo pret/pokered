@@ -1,29 +1,54 @@
 TechnicalMachinePrices:
 ; In thousands (nybbles).
-	table_width 1, TechnicalMachinePrices
-	dn 3, 2  ; TM01, TM02
-	dn 2, 1  ; TM03, TM04
-	dn 3, 4  ; TM05, TM06
-	dn 2, 4  ; TM07, TM08
-	dn 3, 4  ; TM09, TM10
-	dn 2, 1  ; TM11, TM12
-	dn 4, 5  ; TM13, TM14
-	dn 5, 5  ; TM15, TM16
-	dn 3, 2  ; TM17, TM18
-	dn 3, 2  ; TM19, TM20
-	dn 5, 5  ; TM21, TM22
-	dn 5, 2  ; TM23, TM24
-	dn 5, 4  ; TM25, TM26
-	dn 5, 2  ; TM27, TM28
-	dn 4, 1  ; TM29, TM30
-	dn 2, 1  ; TM31, TM32
-	dn 1, 2  ; TM33, TM34
-	dn 4, 2  ; TM35, TM36
-	dn 2, 5  ; TM37, TM38
-	dn 2, 4  ; TM39, TM40
-	dn 2, 2  ; TM41, TM42
-	dn 5, 2  ; TM43, TM44
-	dn 2, 4  ; TM45, TM46
-	dn 3, 4  ; TM47, TM48
-	dn 4, 2  ; TM49, TM50
-	assert_table_length (NUM_TMS + 1) / 2
+	nybble_array TechnicalMachinePrices
+	nybble 3 ; TM01
+	nybble 2 ; TM02
+	nybble 2 ; TM03
+	nybble 1 ; TM04
+	nybble 3 ; TM05
+	nybble 4 ; TM06
+	nybble 2 ; TM07
+	nybble 4 ; TM08
+	nybble 3 ; TM09
+	nybble 4 ; TM10
+	nybble 2 ; TM11
+	nybble 1 ; TM12
+	nybble 4 ; TM13
+	nybble 5 ; TM14
+	nybble 5 ; TM15
+	nybble 5 ; TM16
+	nybble 3 ; TM17
+	nybble 2 ; TM18
+	nybble 3 ; TM19
+	nybble 2 ; TM20
+	nybble 5 ; TM21
+	nybble 5 ; TM22
+	nybble 5 ; TM23
+	nybble 2 ; TM24
+	nybble 5 ; TM25
+	nybble 4 ; TM26
+	nybble 5 ; TM27
+	nybble 2 ; TM28
+	nybble 4 ; TM29
+	nybble 1 ; TM30
+	nybble 2 ; TM31
+	nybble 1 ; TM32
+	nybble 1 ; TM33
+	nybble 2 ; TM34
+	nybble 4 ; TM35
+	nybble 2 ; TM36
+	nybble 2 ; TM37
+	nybble 5 ; TM38
+	nybble 2 ; TM39
+	nybble 4 ; TM40
+	nybble 2 ; TM41
+	nybble 2 ; TM42
+	nybble 5 ; TM43
+	nybble 2 ; TM44
+	nybble 2 ; TM45
+	nybble 4 ; TM46
+	nybble 3 ; TM47
+	nybble 4 ; TM48
+	nybble 4 ; TM49
+	nybble 2 ; TM50
+	end_nybble_array NUM_TMS

@@ -4,11 +4,10 @@ WarpTileListPointers:
 	dw .FacingLeftWarpTiles
 	dw .FacingRightWarpTiles
 
-warp_carpet_tiles: MACRO
-REPT _NARG
-	db \1
-	shift
-ENDR
+MACRO warp_carpet_tiles
+	IF _NARG
+		db \# ; all args
+	ENDC
 	db -1 ; end
 ENDM
 

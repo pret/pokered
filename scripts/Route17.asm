@@ -1,6 +1,6 @@
 Route17_Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, Route17TrainerHeader0
+	ld hl, Route17TrainerHeaders
 	ld de, Route17_ScriptPointers
 	ld a, [wRoute17CurScript]
 	call ExecuteCurMapScriptInTable
@@ -30,6 +30,8 @@ Route17_TextPointers:
 	dw Route17Text15
 	dw Route17Text16
 
+Route17TrainerHeaders:
+	def_trainers
 Route17TrainerHeader0:
 	trainer EVENT_BEAT_ROUTE_17_TRAINER_0, 3, Route17BattleText1, Route17EndBattleText1, Route17AfterBattleText1
 Route17TrainerHeader1:
@@ -45,11 +47,11 @@ Route17TrainerHeader5:
 Route17TrainerHeader6:
 	trainer EVENT_BEAT_ROUTE_17_TRAINER_6, 4, Route17BattleText7, Route17EndBattleText7, Route17AfterBattleText7
 Route17TrainerHeader7:
-	trainer EVENT_BEAT_ROUTE_17_TRAINER_7, 1, 2, Route17BattleText8, Route17EndBattleText8, Route17AfterBattleText8
+	trainer EVENT_BEAT_ROUTE_17_TRAINER_7, 2, Route17BattleText8, Route17EndBattleText8, Route17AfterBattleText8
 Route17TrainerHeader8:
-	trainer EVENT_BEAT_ROUTE_17_TRAINER_8, 1, 3, Route17BattleText9, Route17EndBattleText9, Route17AfterBattleText9
+	trainer EVENT_BEAT_ROUTE_17_TRAINER_8, 3, Route17BattleText9, Route17EndBattleText9, Route17AfterBattleText9
 Route17TrainerHeader9:
-	trainer EVENT_BEAT_ROUTE_17_TRAINER_9, 1, 4, Route17BattleText10, Route17EndBattleText10, Route17AfterBattleText10
+	trainer EVENT_BEAT_ROUTE_17_TRAINER_9, 4, Route17BattleText10, Route17EndBattleText10, Route17AfterBattleText10
 	db -1 ; end
 
 Route17Text1:

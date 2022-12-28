@@ -1,4 +1,4 @@
-Route2Mons:
+Route2WildMons:
 	def_grass_wildmons 25 ; encounter rate
 	db  3, RATTATA
 	db  3, PIDGEY

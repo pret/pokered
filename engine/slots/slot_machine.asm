@@ -446,7 +446,7 @@ SlotMachine_CheckForMatches:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld de, wcf4b
+	ld de, wStringBuffer
 	ld bc, 4
 	call CopyData
 	pop hl
@@ -760,7 +760,7 @@ SlotMachine_UpdateBallTiles:
 SlotMachine_AnimWheel1:
 	ld bc, SlotMachineWheel1
 	ld de, wSlotMachineWheel1Offset
-	ld hl, wOAMBuffer
+	ld hl, wShadowOAMSprite00
 	ld a, $30
 	ld [wBaseCoordX], a
 	jr SlotMachine_AnimWheel
@@ -768,7 +768,7 @@ SlotMachine_AnimWheel1:
 SlotMachine_AnimWheel2:
 	ld bc, SlotMachineWheel2
 	ld de, wSlotMachineWheel2Offset
-	ld hl, wOAMBuffer + $30
+	ld hl, wShadowOAMSprite12
 	ld a, $50
 	ld [wBaseCoordX], a
 	jr SlotMachine_AnimWheel
@@ -776,7 +776,7 @@ SlotMachine_AnimWheel2:
 SlotMachine_AnimWheel3:
 	ld bc, SlotMachineWheel3
 	ld de, wSlotMachineWheel3Offset
-	ld hl, wOAMBuffer + $60
+	ld hl, wShadowOAMSprite24
 	ld a, $70
 	ld [wBaseCoordX], a
 

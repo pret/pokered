@@ -1,7 +1,7 @@
 PokemonMansion3F_Script:
 	call Mansion3Script_52204
 	call EnableAutoTextBoxDrawing
-	ld hl, Mansion3TrainerHeader0
+	ld hl, Mansion3TrainerHeaders
 	ld de, PokemonMansion3F_ScriptPointers
 	ld a, [wPokemonMansion3FCurScript]
 	call ExecuteCurMapScriptInTable
@@ -90,6 +90,8 @@ PokemonMansion3F_TextPointers:
 	dw Mansion3Text5
 	dw Mansion3Text6
 
+Mansion3TrainerHeaders:
+	def_trainers
 Mansion3TrainerHeader0:
 	trainer EVENT_BEAT_MANSION_3_TRAINER_0, 0, Mansion3BattleText1, Mansion3EndBattleText1, Mansion3AfterBattleText1
 Mansion3TrainerHeader1:

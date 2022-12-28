@@ -1,32 +1,32 @@
-predef_id: MACRO
+MACRO predef_id
 	ld a, (\1Predef - PredefPointers) / 3
 ENDM
 
-predef: MACRO
+MACRO predef
 	predef_id \1
 	call Predef
 ENDM
 
-predef_jump: MACRO
+MACRO predef_jump
 	predef_id \1
 	jp Predef
 ENDM
 
 
-tx_pre_id: MACRO
+MACRO tx_pre_id
 	ld a, (\1_id - TextPredefs) / 2 + 1
 ENDM
 
-tx_pre: MACRO
+MACRO tx_pre
 	tx_pre_id \1
 	call PrintPredefTextID
 ENDM
 
-tx_pre_jump: MACRO
+MACRO tx_pre_jump
 	tx_pre_id \1
 	jp PrintPredefTextID
 ENDM
 
-db_tx_pre: MACRO
+MACRO db_tx_pre
 	db (\1_id - TextPredefs) / 2 + 1
 ENDM

@@ -1,6 +1,6 @@
 ViridianForest_Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, ViridianForestTrainerHeader0
+	ld hl, ViridianForestTrainerHeaders
 	ld de, ViridianForest_ScriptPointers
 	ld a, [wViridianForestCurScript]
 	call ExecuteCurMapScriptInTable
@@ -28,6 +28,8 @@ ViridianForest_TextPointers:
 	dw ViridianForestText13
 	dw ViridianForestText14
 
+ViridianForestTrainerHeaders:
+	def_trainers 2
 ViridianForestTrainerHeader0:
 	trainer EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_0, 4, ViridianForestBattleText1, ViridianForestEndBattleText1, ViridianForestAfterBattleText1
 ViridianForestTrainerHeader1:

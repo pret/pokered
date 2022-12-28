@@ -10,16 +10,14 @@ Music_MeetEvilTrainer_Ch1::
 	note C#, 2
 	note_type 12, 4, -7
 	note D_, 4
-
-Music_MeetEvilTrainer_branch_7f6ae::
+.mainloop:
 	note_type 12, 10, 1
 	note D_, 4
 	note D_, 4
 	note D_, 4
 	note_type 12, 7, 0
 	note D_, 4
-	sound_loop 0, Music_MeetEvilTrainer_branch_7f6ae
-
+	sound_loop 0, .mainloop
 
 Music_MeetEvilTrainer_Ch2::
 	duty_cycle 1
@@ -28,8 +26,7 @@ Music_MeetEvilTrainer_Ch2::
 	note B_, 2
 	note A#, 2
 	note B_, 8
-
-Music_MeetEvilTrainer_branch_7f6c2::
+.mainloop:
 	note_type 12, 12, 2
 	octave 4
 	note D#, 2
@@ -57,8 +54,7 @@ Music_MeetEvilTrainer_branch_7f6c2::
 	note_type 12, 3, -7
 	note A#, 4
 	note_type 12, 12, 2
-	sound_loop 0, Music_MeetEvilTrainer_branch_7f6c2
-
+	sound_loop 0, .mainloop
 
 Music_MeetEvilTrainer_Ch3::
 	note_type 12, 1, 0
@@ -68,8 +64,7 @@ Music_MeetEvilTrainer_Ch3::
 	rest 1
 	note F_, 1
 	rest 1
-
-Music_MeetEvilTrainer_branch_7f6ee::
+.mainloop:
 	note F#, 1
 	rest 3
 	note F#, 1
@@ -77,4 +72,4 @@ Music_MeetEvilTrainer_branch_7f6ee::
 	note F#, 1
 	rest 3
 	note A#, 4
-	sound_loop 0, Music_MeetEvilTrainer_branch_7f6ee
+	sound_loop 0, .mainloop

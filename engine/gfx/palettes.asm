@@ -443,14 +443,14 @@ PrepareSuperNintendoVRAMTransfer:
 .packetPointers
 ; Only the first packet is needed.
 	dw MaskEnFreezePacket
-	dw DataSnd_72548
-	dw DataSnd_72558
-	dw DataSnd_72568
-	dw DataSnd_72578
-	dw DataSnd_72588
-	dw DataSnd_72598
-	dw DataSnd_725a8
-	dw DataSnd_725b8
+	dw DataSndPacket1
+	dw DataSndPacket2
+	dw DataSndPacket3
+	dw DataSndPacket4
+	dw DataSndPacket5
+	dw DataSndPacket6
+	dw DataSndPacket7
+	dw DataSndPacket8
 
 CheckSGB:
 ; Returns whether the game is running on an SGB in carry.
@@ -484,6 +484,7 @@ CheckSGB:
 	ldh a, [rJOYP]
 	ldh a, [rJOYP]
 	call Wait7000
+	vc_hook Unknown_network_reset
 	call Wait7000
 	ld a, $30
 	ldh [rJOYP], a

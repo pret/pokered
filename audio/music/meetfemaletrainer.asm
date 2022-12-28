@@ -12,19 +12,18 @@ Music_MeetFemaleTrainer_Ch1::
 	note C#, 2
 	note C_, 2
 	note_type 12, 8, 1
-
-Music_MeetFemaleTrainer_branch_7f70c::
+.mainloop:
+.loop1:
 	octave 3
 	note E_, 4
-	sound_loop 12, Music_MeetFemaleTrainer_branch_7f70c
+	sound_loop 12, .loop1
 	note E_, 4
 	octave 2
 	note B_, 4
 	note B_, 4
 	octave 3
 	note E_, 4
-	sound_loop 0, Music_MeetFemaleTrainer_branch_7f70c
-
+	sound_loop 0, .mainloop
 
 Music_MeetFemaleTrainer_Ch2::
 	duty_cycle 2
@@ -34,8 +33,7 @@ Music_MeetFemaleTrainer_Ch2::
 	note_type 12, 12, 7
 	octave 4
 	note B_, 12
-
-Music_MeetFemaleTrainer_branch_7f726::
+.mainloop:
 	note_type 12, 12, 2
 	octave 3
 	note B_, 4
@@ -68,8 +66,7 @@ Music_MeetFemaleTrainer_branch_7f726::
 	note F#, 2
 	note G#, 2
 	note A_, 2
-	sound_loop 0, Music_MeetFemaleTrainer_branch_7f726
-
+	sound_loop 0, .mainloop
 
 Music_MeetFemaleTrainer_Ch3::
 	note_type 12, 1, 0
@@ -82,9 +79,8 @@ Music_MeetFemaleTrainer_Ch3::
 	rest 1
 	note A_, 1
 	rest 1
-
-Music_MeetFemaleTrainer_branch_7f756::
-	sound_call Music_MeetFemaleTrainer_branch_7f770
+.mainloop:
+	sound_call .sub1
 	note G#, 1
 	rest 3
 	note E_, 1
@@ -93,7 +89,7 @@ Music_MeetFemaleTrainer_branch_7f756::
 	rest 3
 	note E_, 1
 	rest 3
-	sound_call Music_MeetFemaleTrainer_branch_7f770
+	sound_call .sub1
 	note G#, 1
 	rest 3
 	note E_, 1
@@ -102,9 +98,9 @@ Music_MeetFemaleTrainer_branch_7f756::
 	rest 3
 	note B_, 1
 	rest 3
-	sound_loop 0, Music_MeetFemaleTrainer_branch_7f756
+	sound_loop 0, .mainloop
 
-Music_MeetFemaleTrainer_branch_7f770::
+.sub1:
 	note G#, 1
 	rest 3
 	note E_, 1

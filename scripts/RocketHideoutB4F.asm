@@ -1,7 +1,7 @@
 RocketHideoutB4F_Script:
 	call RocketHideout4Script_45473
 	call EnableAutoTextBoxDrawing
-	ld hl, RocketHideout4TrainerHeader0
+	ld hl, RocketHideout4TrainerHeaders
 	ld de, RocketHideoutB4F_ScriptPointers
 	ld a, [wRocketHideoutB4FCurScript]
 	call ExecuteCurMapScriptInTable
@@ -84,6 +84,8 @@ RocketHideoutB4F_TextPointers:
 	dw PickUpItemText
 	dw RocketHideout4Text10
 
+RocketHideout4TrainerHeaders:
+	def_trainers 2
 RocketHideout4TrainerHeader0:
 	trainer EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_0, 0, RocketHideout4BattleText2, RocketHideout4EndBattleText2, RocketHideout4AfterBattleText2
 RocketHideout4TrainerHeader1:

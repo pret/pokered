@@ -15,7 +15,7 @@ TextBoxCoordTable:
 	db MON_SPRITE_POPUP,  6,  4, 14, 13
 	db -1 ; end
 
-text_box_text: MACRO
+MACRO text_box_text
 	db \1 ; text box ID
 	db \2, \3, \4, \5 ; text box coordinates
 	dw \6 ; text pointer

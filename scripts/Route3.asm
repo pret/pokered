@@ -1,6 +1,6 @@
 Route3_Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, Route3TrainerHeader0
+	ld hl, Route3TrainerHeaders
 	ld de, Route3_ScriptPointers
 	ld a, [wRoute3CurScript]
 	call ExecuteCurMapScriptInTable
@@ -24,6 +24,8 @@ Route3_TextPointers:
 	dw Route3Text9
 	dw Route3Text10
 
+Route3TrainerHeaders:
+	def_trainers 2
 Route3TrainerHeader0:
 	trainer EVENT_BEAT_ROUTE_3_TRAINER_0, 2, Route3BattleText1, Route3EndBattleText1, Route3AfterBattleText1
 Route3TrainerHeader1:
@@ -37,9 +39,9 @@ Route3TrainerHeader4:
 Route3TrainerHeader5:
 	trainer EVENT_BEAT_ROUTE_3_TRAINER_5, 3, Route3BattleText6, Route3EndBattleText6, Route3AfterBattleText6
 Route3TrainerHeader6:
-	trainer EVENT_BEAT_ROUTE_3_TRAINER_6, 1, 3, Route3BattleText7, Route3EndBattleText7, Route3AfterBattleText7
+	trainer EVENT_BEAT_ROUTE_3_TRAINER_6, 3, Route3BattleText7, Route3EndBattleText7, Route3AfterBattleText7
 Route3TrainerHeader7:
-	trainer EVENT_BEAT_ROUTE_3_TRAINER_7, 1, 2, Route3BattleText8, Route3EndBattleText8, Route3AfterBattleText8
+	trainer EVENT_BEAT_ROUTE_3_TRAINER_7, 2, Route3BattleText8, Route3EndBattleText8, Route3AfterBattleText8
 	db -1 ; end
 
 Route3Text1:

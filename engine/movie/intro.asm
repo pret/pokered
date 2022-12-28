@@ -3,7 +3,7 @@
 	const MOVE_GENGAR_RIGHT
 	const MOVE_GENGAR_LEFT
 
-ANIMATION_END EQU 80
+DEF ANIMATION_END EQU 80
 
 PlayIntro:
 	xor a
@@ -158,7 +158,7 @@ AnimateIntroNidorino:
 	jr AnimateIntroNidorino
 
 UpdateIntroNidorinoOAM:
-	ld hl, wOAMBuffer
+	ld hl, wShadowOAM
 	ld a, [wIntroNidorinoBaseTile]
 	ld d, a
 .loop
@@ -177,7 +177,7 @@ UpdateIntroNidorinoOAM:
 	ret
 
 InitIntroNidorinoOAM:
-	ld hl, wOAMBuffer
+	ld hl, wShadowOAM
 	ld d, 0
 .loop
 	push bc

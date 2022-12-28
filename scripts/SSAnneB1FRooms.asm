@@ -1,6 +1,6 @@
 SSAnneB1FRooms_Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, SSAnne10TrainerHeader0
+	ld hl, SSAnne10TrainerHeaders
 	ld de, SSAnneB1FRooms_ScriptPointers
 	ld a, [wSSAnneB1FRoomsCurScript]
 	call ExecuteCurMapScriptInTable
@@ -25,6 +25,8 @@ SSAnneB1FRooms_TextPointers:
 	dw PickUpItemText
 	dw PickUpItemText
 
+SSAnne10TrainerHeaders:
+	def_trainers
 SSAnne10TrainerHeader0:
 	trainer EVENT_BEAT_SS_ANNE_10_TRAINER_0, 2, SSAnne10BattleText1, SSAnne10EndBattleText1, SSAnne10AfterBattleText1
 SSAnne10TrainerHeader1:

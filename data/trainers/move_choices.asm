@@ -1,10 +1,9 @@
-move_choices: MACRO
-REPT _NARG
-	db \1
-	shift
-ENDR
+MACRO move_choices
+	IF _NARG
+		db \# ; all args
+	ENDC
 	db 0 ; end
-list_index = list_index + 1
+	DEF list_index += 1
 ENDM
 
 ; move choice modification methods that are applied for each trainer class

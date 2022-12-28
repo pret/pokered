@@ -23,7 +23,7 @@ ClearBgMap::
 	jr .next
 	ld a, l
 .next
-	ld de, $400 ; size of VRAM background map
+	ld de, BG_MAP_WIDTH * BG_MAP_HEIGHT
 	ld l, e
 .loop
 	ld [hli], a
@@ -69,7 +69,7 @@ RedrawRowOrColumn::
 .noCarry
 ; the following 4 lines wrap us from bottom to top if necessary
 	ld a, d
-	and $03
+	and $3
 	or $98
 	ld d, a
 	dec c
@@ -127,7 +127,7 @@ AutoBgMapTransfer::
 	ld a, h
 	ldh [hSPTemp], a
 	ld a, l
-	ldh [hSPTemp + 1], a ; save stack pinter
+	ldh [hSPTemp + 1], a ; save stack pointer
 	ldh a, [hAutoBGTransferPortion]
 	and a
 	jr z, .transferTopThird
@@ -169,21 +169,19 @@ AutoBgMapTransfer::
 
 TransferBgRows::
 ; unrolled loop and using pop for speed
-
-	REPT 20 / 2 - 1
+REPT SCREEN_WIDTH / 2 - 1
 	pop de
 	ld [hl], e
 	inc l
 	ld [hl], d
 	inc l
-	ENDR
-
+ENDR
 	pop de
 	ld [hl], e
 	inc l
 	ld [hl], d
 
-	ld a, 32 - (20 - 1)
+	ld a, BG_MAP_WIDTH - (SCREEN_WIDTH - 1)
 	add l
 	ld l, a
 	jr nc, .ok
@@ -261,7 +259,7 @@ VBlankCopyDouble::
 	ldh [hVBlankCopyDoubleSize], a
 
 .loop
-	REPT 3
+REPT LEN_2BPP_TILE / 4 - 1
 	pop de
 	ld [hl], e
 	inc l
@@ -271,8 +269,7 @@ VBlankCopyDouble::
 	inc l
 	ld [hl], d
 	inc l
-	ENDR
-
+ENDR
 	pop de
 	ld [hl], e
 	inc l
@@ -339,14 +336,13 @@ VBlankCopy::
 	ldh [hVBlankCopySize], a
 
 .loop
-	REPT 7
+REPT LEN_2BPP_TILE / 2 - 1
 	pop de
 	ld [hl], e
 	inc l
 	ld [hl], d
 	inc l
-	ENDR
-
+ENDR
 	pop de
 	ld [hl], e
 	inc l
@@ -381,7 +377,7 @@ UpdateMovingBgTiles::
 
 	ldh a, [hTileAnimations]
 	and a
-	ret z ; no animations if indoors (or if a menu set this to 0)
+	ret z
 
 	ldh a, [hMovingBGTilesCounter1]
 	inc a
@@ -420,7 +416,7 @@ UpdateMovingBgTiles::
 	ldh a, [hTileAnimations]
 	rrca
 	ret nc
-; if in a cave, no flower animations
+
 	xor a
 	ldh [hMovingBGTilesCounter1], a
 	ret

@@ -67,7 +67,7 @@ PewterJigglypuffText:
 	jr c, .spinMovementLoop
 ;	ld a, [wChannelSoundIDs]
 ;	ld b, a
-;	ld a, [wChannelSoundIDs + Ch2]
+;	ld a, [wChannelSoundIDs + CHAN2]
 ;	or b
 ;	jr nz, .spinMovementLoop
 

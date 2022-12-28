@@ -1,6 +1,6 @@
 Route19_Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, Route19TrainerHeader0
+	ld hl, Route19TrainerHeaders
 	ld de, Route19_ScriptPointers
 	ld a, [wRoute19CurScript]
 	call ExecuteCurMapScriptInTable
@@ -25,6 +25,8 @@ Route19_TextPointers:
 	dw Route19Text10
 	dw Route19Text11
 
+Route19TrainerHeaders:
+	def_trainers
 Route19TrainerHeader0:
 	trainer EVENT_BEAT_ROUTE_19_TRAINER_0, 4, Route19BattleText1, Route19EndBattleText1, Route19AfterBattleText1
 Route19TrainerHeader1:
@@ -40,11 +42,11 @@ Route19TrainerHeader5:
 Route19TrainerHeader6:
 	trainer EVENT_BEAT_ROUTE_19_TRAINER_6, 3, Route19BattleText7, Route19EndBattleText7, Route19AfterBattleText7
 Route19TrainerHeader7:
-	trainer EVENT_BEAT_ROUTE_19_TRAINER_7, 1, 4, Route19BattleText8, Route19EndBattleText8, Route19AfterBattleText8
+	trainer EVENT_BEAT_ROUTE_19_TRAINER_7, 4, Route19BattleText8, Route19EndBattleText8, Route19AfterBattleText8
 Route19TrainerHeader8:
-	trainer EVENT_BEAT_ROUTE_19_TRAINER_8, 1, 4, Route19BattleText9, Route19EndBattleText9, Route19AfterBattleText9
+	trainer EVENT_BEAT_ROUTE_19_TRAINER_8, 4, Route19BattleText9, Route19EndBattleText9, Route19AfterBattleText9
 Route19TrainerHeader9:
-	trainer EVENT_BEAT_ROUTE_19_TRAINER_9, 1, 4, Route19BattleText10, Route19EndBattleText10, Route19AfterBattleText10
+	trainer EVENT_BEAT_ROUTE_19_TRAINER_9, 4, Route19BattleText10, Route19EndBattleText10, Route19AfterBattleText10
 	db -1 ; end
 
 Route19Text1:

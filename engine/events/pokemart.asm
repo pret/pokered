@@ -159,7 +159,7 @@ DisplayPokemartDialogue_::
 	ld a, [wcf91] ; item ID
 	ld [wd11e], a ; store item ID for GetItemName
 	call GetItemName
-	call CopyStringToCF4B ; copy name to wcf4b
+	call CopyToStringBuffer
 	ld hl, PokemartTellBuyPriceText
 	call PrintText
 	hlcoord 14, 7

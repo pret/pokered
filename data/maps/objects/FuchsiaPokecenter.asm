@@ -1,16 +1,16 @@
 FuchsiaPokecenter_Object:
 	db $0 ; border block
 
-	def_warps
-	warp  3,  7, 2, LAST_MAP
-	warp  4,  7, 2, LAST_MAP
+	def_warp_events
+	warp_event  3,  7, LAST_MAP, 3
+	warp_event  4,  7, LAST_MAP, 3
 
-	def_signs
+	def_bg_events
 
-	def_objects
-	object SPRITE_NURSE, 3, 1, STAY, DOWN, 1 ; person
-	object SPRITE_ROCKER, 2, 3, STAY, NONE, 2 ; person
-	object SPRITE_COOLTRAINER_F, 6, 5, WALK, LEFT_RIGHT, 3 ; person
-	object SPRITE_LINK_RECEPTIONIST, 11, 2, STAY, DOWN, 4 ; person
+	def_object_events
+	object_event  3,  1, SPRITE_NURSE, STAY, DOWN, 1 ; person
+	object_event  2,  3, SPRITE_ROCKER, STAY, NONE, 2 ; person
+	object_event  6,  5, SPRITE_COOLTRAINER_F, WALK, LEFT_RIGHT, 3 ; person
+	object_event 11,  2, SPRITE_LINK_RECEPTIONIST, STAY, DOWN, 4 ; person
 
 	def_warps_to FUCHSIA_POKECENTER

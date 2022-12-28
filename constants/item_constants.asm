@@ -3,7 +3,7 @@
 ; - ItemNames (see data/items/names.asm)
 ; - ItemPrices (see data/items/prices.asm)
 ; - TechnicalMachinePrices (see data/items/tm_prices.asm)
-; - KeyItemBitfield (see data/items/key_items.asm)
+; - KeyItemFlags (see data/items/key_items.asm)
 ; - ItemUsePtrTable (see engine/items/item_effects.asm)
 	const_def
 	const NO_ITEM       ; $00
@@ -29,8 +29,8 @@
 	const POTION        ; $14
 	const BOULDERBADGE  ; $15
 	const CASCADEBADGE  ; $16
-SAFARI_BAIT           EQU $15 ; overload
-SAFARI_ROCK           EQU $16 ; overload
+DEF SAFARI_BAIT EQU $15 ; overload
+DEF SAFARI_ROCK EQU $16 ; overload
 	const THUNDERBADGE  ; $17
 	const RAINBOWBADGE  ; $18
 	const SOULBADGE     ; $19
@@ -92,7 +92,7 @@ SAFARI_ROCK           EQU $16 ; overload
 	const MAX_ETHER     ; $51
 	const ELIXER        ; $52
 	const MAX_ELIXER    ; $53
-NUM_ITEMS EQU const_value - 1
+DEF NUM_ITEMS EQU const_value - 1
 
 ; elevator floors use item IDs
 	const FLOOR_B2F     ; $54
@@ -109,68 +109,54 @@ NUM_ITEMS EQU const_value - 1
 	const FLOOR_10F     ; $5F
 	const FLOOR_11F     ; $60
 	const FLOOR_B4F     ; $61
-NUM_FLOORS EQU const_value - 1 - NUM_ITEMS
+DEF NUM_FLOORS EQU const_value - 1 - NUM_ITEMS
 
 	const_next $C4
 
 ; HMs are defined before TMs, so the actual number of TM definitions
 ; is not yet available. The TM quantity is hard-coded here and must
 ; match the actual number below.
-NUM_TMS EQU 50
+DEF NUM_TMS EQU 50
 
-add_hm: MACRO
+DEF __tmhm_value__ = NUM_TMS + 1
+
+MACRO add_tmnum
+	DEF \1_TMNUM EQU __tmhm_value__
+	DEF __tmhm_value__ += 1
+ENDM
+
+MACRO add_hm
 ; Defines three constants:
 ; - HM_\1: the item id, starting at $C4
 ; - \1_TMNUM: the learnable TM/HM flag, starting at 51
 ; - HM##_MOVE: alias for the move id, equal to the value of \1
-; The first usage also defines HM01 as the first HM item id.
-IF !DEF(HM01)
-HM01 EQU const_value
-__tmhm_value__ = NUM_TMS + 1
-ENDC
-HM_VALUE EQU __tmhm_value__ - NUM_TMS
-IF HM_VALUE < 10
-MOVE_FOR_HM EQUS "HM0{d:HM_VALUE}_MOVE"
-ELSE
-MOVE_FOR_HM EQUS "HM{d:HM_VALUE}_MOVE"
-ENDC
-MOVE_FOR_HM = \1
-PURGE MOVE_FOR_HM
-PURGE HM_VALUE
 	const HM_\1
-\1_TMNUM EQU __tmhm_value__
-__tmhm_value__ = __tmhm_value__ + 1
+	DEF HM_VALUE = __tmhm_value__ - NUM_TMS
+	DEF HM{02d:HM_VALUE}_MOVE EQU \1
+	add_tmnum \1
 ENDM
 
+DEF HM01 EQU const_value
 	add_hm CUT          ; $C4
 	add_hm FLY          ; $C5
 	add_hm SURF         ; $C6
 	add_hm STRENGTH     ; $C7
 	add_hm FLASH        ; $C8
-NUM_HMS EQU const_value - HM01
+DEF NUM_HMS EQU const_value - HM01
 
-add_tm: MACRO
+DEF __tmhm_value__ = 1
+
+MACRO add_tm
 ; Defines three constants:
 ; - TM_\1: the item id, starting at $C9
 ; - \1_TMNUM: the learnable TM/HM flag, starting at 1
 ; - TM##_MOVE: alias for the move id, equal to the value of \1
-; The first usage also defines TM01 as the first TM item id.
-IF !DEF(TM01)
-TM01 EQU const_value
-__tmhm_value__ = 1
-ENDC
-IF __tmhm_value__ < 10
-MOVE_FOR_TM EQUS "TM0{d:__tmhm_value__}_MOVE"
-ELSE
-MOVE_FOR_TM EQUS "TM{d:__tmhm_value__}_MOVE"
-ENDC
-MOVE_FOR_TM = \1
-PURGE MOVE_FOR_TM
 	const TM_\1
-\1_TMNUM EQU __tmhm_value__
-__tmhm_value__ = __tmhm_value__ + 1
+	DEF TM{02d:__tmhm_value__}_MOVE EQU \1
+	add_tmnum \1
 ENDM
 
+DEF TM01 EQU const_value
 	add_tm MEGA_PUNCH   ; $C9
 	add_tm RAZOR_WIND   ; $CA
 	add_tm SWORDS_DANCE ; $CB
@@ -221,11 +207,11 @@ ENDM
 	add_tm ROCK_SLIDE   ; $F8
 	add_tm TRI_ATTACK   ; $F9
 	add_tm SUBSTITUTE   ; $FA
-assert NUM_TMS == const_value - TM01, "NUM_TMS ({d:NUM_TMS}) does not match the number of add_tm definitions"
+ASSERT NUM_TMS == const_value - TM01, "NUM_TMS ({d:NUM_TMS}) does not match the number of add_tm definitions"
 
-NUM_TM_HM EQU NUM_TMS + NUM_HMS
+DEF NUM_TM_HM EQU NUM_TMS + NUM_HMS
 
 ; 50 TMs + 5 HMs = 55 learnable TM/HM flags per Pokémon.
 ; These fit in 7 bytes, with one unused bit left over.
-__tmhm_value__ = NUM_TM_HM + 1
-UNUSED_TMNUM EQU __tmhm_value__
+DEF __tmhm_value__ = NUM_TM_HM + 1
+DEF UNUSED_TMNUM EQU __tmhm_value__

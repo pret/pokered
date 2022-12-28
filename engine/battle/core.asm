@@ -105,7 +105,7 @@ SlidePlayerAndEnemySilhouettesOnScreen:
 ; instead, the enemy pic is part of the background and uses the scroll register, while the player's head is a sprite and is slid by changing its X coordinates in a loop
 SlidePlayerHeadLeft:
 	push bc
-	ld hl, wOAMBuffer + $01
+	ld hl, wShadowOAMSprite00XCoord
 	ld c, $15 ; number of OAM entries
 	ld de, $4 ; size of OAM entry
 .loop
@@ -308,7 +308,7 @@ MainInBattleLoop:
 	and a
 	ret nz ; return if pokedoll was used to escape from battle
 	ld a, [wBattleMonStatus]
-	and (1 << FRZ) | SLP ; is mon frozen or asleep?
+	and (1 << FRZ) | SLP_MASK
 	jr nz, .selectEnemyMove ; if so, jump
 	ld a, [wPlayerBattleStatus1]
 	and (1 << STORING_ENERGY) | (1 << USING_TRAPPING_MOVE) ; check player is using Bide or using a multi-turn attack like wrap
@@ -402,12 +402,12 @@ MainInBattleLoop:
 	cp USING_INTERNAL_CLOCK
 	jr z, .invertOutcome
 	call BattleRandom
-	cp $80
+	cp 50 percent + 1
 	jr c, .playerMovesFirst
 	jr .enemyMovesFirst
 .invertOutcome
 	call BattleRandom
-	cp $80
+	cp 50 percent + 1
 	jr c, .enemyMovesFirst
 	jr .playerMovesFirst
 .enemyMovesFirst
@@ -790,7 +790,7 @@ FaintEnemyPokemon:
 
 	call WaitForSoundToFinish
 ;.sfxwait
-;	ld a, [wChannelSoundIDs + Ch5]
+;	ld a, [wChannelSoundIDs + CHAN5]
 ;	cp SFX_FAINT_FALL
 ;	jr z, .sfxwait
 
@@ -875,7 +875,7 @@ EndLowHealthAlarm:
 ; the low health alarm and prevents it from reactivating until the next battle.
 	xor a
 	ld [wLowHealthAlarm], a ; turn off low health alarm
-;	ld [wChannelSoundIDs + Ch5], a
+;	ld [wChannelSoundIDs + CHAN5], a
 	inc a
 	ld [wLowHealthAlarmDisabled], a ; prevent it from reactivating
 	ret
@@ -1328,7 +1328,7 @@ EnemySendOutFirstMon:
 	ld [wWhichPokemon], a
 	jr .next3
 .next
-	ld b, $FF
+	ld b, $ff
 .next2
 	inc b
 	ld a, [wEnemyMonPartyPos]
@@ -1381,7 +1381,7 @@ EnemySendOutFirstMon:
 	cp LINK_STATE_BATTLING
 	jr z, .next4
 	ld a, [wOptions]
-	bit 6, a
+	bit BIT_BATTLE_SHIFT, a
 	jr nz, .next4
 	ld hl, TrainerAboutToUseText
 	call PrintText
@@ -1873,7 +1873,7 @@ DrawPlayerHUDAndHPBar:
 	ld [hl], $0
 	ret z
 	xor a
-;	ld [wChannelSoundIDs + Ch5], a
+;	ld [wChannelSoundIDs + CHAN5], a
 	ret
 .setLowHealthAlarm
 	ld hl, wLowHealthAlarm
@@ -2096,7 +2096,7 @@ DisplayBattleMenu::
 	ld [hli], a ; wMaxMenuItem
 	ld [hl], D_RIGHT | A_BUTTON ; wMenuWatchedKeys
 	call HandleMenuInput
-	bit 4, a ; check if right was pressed
+	bit BIT_D_RIGHT, a
 	jr nz, .rightColumn
 	jr .AButtonPressed ; the A button was pressed
 .rightColumn ; put cursor in right column of menu
@@ -2248,7 +2248,7 @@ UseBagItem:
 	ld a, [wcf91]
 	ld [wd11e], a
 	call GetItemName
-	call CopyStringToCF4B ; copy name
+	call CopyToStringBuffer
 	xor a
 	ld [wPseudoItemID], a
 	call UseItem
@@ -2359,7 +2359,7 @@ PartyMenuOrRockOrRun:
 	xor a
 	ld [hl], a ; wLastMenuItem
 	call HandleMenuInput
-	bit 1, a ; was A pressed?
+	bit BIT_B_BUTTON, a
 	jr nz, .partyMonDeselected ; if B was pressed, jump
 ; A was pressed
 	call PlaceUnfilledArrowMenuCursor
@@ -2943,7 +2943,7 @@ SelectEnemyMove:
 	and (1 << CHARGING_UP) | (1 << THRASHING_ABOUT) ; using a charging move or thrash/petal dance
 	ret nz
 	ld a, [wEnemyMonStatus]
-	and SLP | 1 << FRZ ; sleeping or frozen
+	and (1 << FRZ) | SLP_MASK
 	ret nz
 	ld a, [wEnemyBattleStatus1]
 	and (1 << USING_TRAPPING_MOVE) | (1 << STORING_ENERGY) ; using a trapping move like wrap or bide
@@ -2971,19 +2971,19 @@ SelectEnemyMove:
 .chooseRandomMove
 	push hl
 	call BattleRandom
-	ld b, $1
-	cp $3f ; select move 1, [0,3e] (63/256 chance)
+	ld b, 1 ; 25% chance to select move 1
+	cp 25 percent
 	jr c, .moveChosen
 	inc hl
-	inc b
-	cp $7f ; select move 2, [3f,7e] (64/256 chance)
+	inc b ; 25% chance to select move 2
+	cp 50 percent
 	jr c, .moveChosen
 	inc hl
-	inc b
-	cp $be ; select move 3, [7f,bd] (63/256 chance)
+	inc b ; 25% chance to select move 3
+	cp 75 percent - 1
 	jr c, .moveChosen
 	inc hl
-	inc b ; select move 4, [be,ff] (66/256 chance)
+	inc b ; 25% chance to select move 4
 .moveChosen
 	ld a, b
 	dec a
@@ -3032,6 +3032,7 @@ LinkBattleExchangeData:
 	ld a, b
 .doExchange
 	ld [wSerialExchangeNybbleSendData], a
+	vc_hook Wireless_start_exchange
 	callfar PrintWaitingText
 .syncLoop1
 	call Serial_ExchangeNybble
@@ -3039,18 +3040,33 @@ LinkBattleExchangeData:
 	ld a, [wSerialExchangeNybbleReceiveData]
 	inc a
 	jr z, .syncLoop1
+	vc_hook Wireless_end_exchange
+	vc_patch Wireless_net_delay_1
+IF DEF(_RED_VC) || DEF(_BLUE_VC)
+	ld b, 26
+ELSE
 	ld b, 10
+ENDC
+	vc_patch_end
 .syncLoop2
 	call DelayFrame
 	call Serial_ExchangeNybble
 	dec b
 	jr nz, .syncLoop2
+	vc_hook Wireless_start_send_zero_bytes
+	vc_patch Wireless_net_delay_2
+IF DEF(_RED_VC) || DEF(_BLUE_VC)
+	ld b, 26
+ELSE
 	ld b, 10
+ENDC
+	vc_patch_end
 .syncLoop3
 	call DelayFrame
 	call Serial_SendZeroByte
 	dec b
 	jr nz, .syncLoop3
+	vc_hook Wireless_end_send_zero_bytes
 	ret
 
 ExecutePlayerMove:
@@ -3268,7 +3284,7 @@ PrintGhostText:
 	and a
 	jr nz, .Ghost
 	ld a, [wBattleMonStatus] ; player's turn
-	and SLP | (1 << FRZ)
+	and (1 << FRZ) | SLP_MASK
 	ret nz
 	ld hl, ScaredText
 	call PrintText
@@ -3295,7 +3311,7 @@ IsGhostBattle:
 	ld a, [wCurMap]
 	cp POKEMON_TOWER_1F
 	jr c, .next
-	cp MR_FUJIS_HOUSE
+	cp POKEMON_TOWER_7F + 1
 	jr nc, .next
 	ld b, SILPH_SCOPE
 	call IsItemInBag
@@ -3310,7 +3326,7 @@ IsGhostBattle:
 CheckPlayerStatusConditions:
 	ld hl, wBattleMonStatus
 	ld a, [hl]
-	and SLP ; sleep mask
+	and SLP_MASK
 	jr z, .FrozenCheck
 ; sleeping
 	dec a
@@ -3346,7 +3362,7 @@ CheckPlayerStatusConditions:
 
 .HeldInPlaceCheck
 	ld a, [wEnemyBattleStatus1]
-	bit USING_TRAPPING_MOVE, a ; is enemy using a mult-turn move like wrap?
+	bit USING_TRAPPING_MOVE, a ; is enemy using a multi-turn move like wrap?
 	jp z, .FlinchedCheck
 	ld hl, CantMoveText
 	call PrintText
@@ -3407,7 +3423,7 @@ CheckPlayerStatusConditions:
 	ld a, CONF_ANIM - 1
 	call PlayMoveAnimation
 	call BattleRandom
-	cp $80 ; 50% chance to hurt itself
+	cp 50 percent + 1 ; chance to hurt itself
 	jr c, .TriedToUseDisabledMoveCheck
 	ld hl, wPlayerBattleStatus1
 	ld a, [hl]
@@ -3442,7 +3458,7 @@ CheckPlayerStatusConditions:
 	ld hl, wPlayerBattleStatus1
 	ld a, [hl]
 	; clear bide, thrashing, charging up, and trapping moves such as warp (already cleared for confusion damage)
-	and $ff ^ ((1 << STORING_ENERGY) | (1 << THRASHING_ABOUT) | (1 << CHARGING_UP) | (1 << USING_TRAPPING_MOVE))
+	and ~((1 << STORING_ENERGY) | (1 << THRASHING_ABOUT) | (1 << CHARGING_UP) | (1 << USING_TRAPPING_MOVE))
 	ld [hl], a
 	ld a, [wPlayerMoveEffect]
 	cp FLY_EFFECT
@@ -3553,7 +3569,7 @@ CheckPlayerStatusConditions:
 	ld a, RAGE
 	ld [wd11e], a
 	call GetMoveName
-	call CopyStringToCF4B
+	call CopyToStringBuffer
 	xor a
 	ld [wPlayerMoveEffect], a
 	ld hl, PlayerCanExecuteMove
@@ -3755,7 +3771,7 @@ PrintMoveName:
 	ret
 
 _PrintMoveName:
-	text_far _CF4BText
+	text_far _MoveNameText
 	text_asm
 	ld hl, ExclamationPointPointerTable
 	ld a, [wd11e] ; exclamation point num
@@ -4022,7 +4038,7 @@ CheckForDisobedience:
 	call BattleRandom
 	add a
 	swap a
-	and SLP ; sleep mask
+	and SLP_MASK
 	jr z, .monNaps ; keep trying until we get at least 1 turn of sleep
 	ld [wBattleMonStatus], a
 	ld hl, BeganToNapText
@@ -4616,7 +4632,7 @@ CriticalHitTest:
 	dec hl
 	ld c, [hl]                   ; read move id
 	ld a, [de]
-	bit GETTING_PUMPED, a         ; test for focus energy
+	bit GETTING_PUMPED, a        ; test for focus energy
 	jr nz, .focusEnergyUsed      ; bug: using focus energy causes a shift to the right instead of left,
 	                             ; resulting in 1/4 the usual crit chance
 	sla b                        ; (effective (base speed/2)*2)
@@ -5117,7 +5133,7 @@ ReloadMoveData:
 	call IncrementMovePP
 ; the follow two function calls are used to reload the move name
 	call GetMoveName
-	call CopyStringToCF4B
+	call CopyToStringBuffer
 	ld a, $01
 	and a
 	ret
@@ -5137,12 +5153,13 @@ MetronomePickMove:
 ; values for enemy turn
 	ld de, wEnemyMoveNum
 	ld hl, wEnemySelectedMove
-; loop to pick a random number in the range [1, $a5) to be the move used by Metronome
+; loop to pick a random number in the range of valid moves used by Metronome
 .pickMoveLoop
 	call BattleRandom
 	and a
 	jr z, .pickMoveLoop
-	cp NUM_ATTACKS ; max move number (including Struggle)
+	cp STRUGGLE
+	assert NUM_ATTACKS == STRUGGLE ; random numbers greater than STRUGGLE are not moves
 	jr nc, .pickMoveLoop
 	cp METRONOME
 	jr z, .pickMoveLoop
@@ -5355,15 +5372,15 @@ MoveHitTest:
 	cp DREAM_EATER_EFFECT
 	jr nz, .swiftCheck
 	ld a, [bc]
-	and SLP ; is the target pokemon sleeping?
+	and SLP_MASK
 	jp z, .moveMissed
 .swiftCheck
 	ld a, [de]
 	cp SWIFT_EFFECT
-	ret z ; Swift never misses (interestingly, Azure Heights lists this is a myth, but it appears to be true)
+	ret z ; Swift never misses (this was fixed from the Japanese versions)
 	call CheckTargetSubstitute ; substitute check (note that this overwrites a)
 	jr z, .checkForDigOrFlyStatus
-; This code is buggy. It's supposed to prevent HP draining moves from working on substitutes.
+; The fix for Swift broke this code. It's supposed to prevent HP draining moves from working on Substitutes.
 ; Since CheckTargetSubstitute overwrites a with either $00 or $01, it never works.
 	cp DRAIN_HP_EFFECT
 	jp z, .moveMissed
@@ -5618,7 +5635,7 @@ EnemyCanExecuteChargingMove:
 	ld [wNameListType], a
 	call GetName
 	ld de, wcd6d
-	call CopyStringToCF4B
+	call CopyToStringBuffer
 EnemyCanExecuteMove:
 	xor a
 	ld [wMonIsDisobedient], a
@@ -5789,7 +5806,7 @@ ExecuteEnemyMoveDone:
 CheckEnemyStatusConditions:
 	ld hl, wEnemyMonStatus
 	ld a, [hl]
-	and SLP ; sleep mask
+	and SLP_MASK
 	jr z, .checkIfFrozen
 	dec a ; decrement number of turns left
 	ld [wEnemyMonStatus], a
@@ -5941,7 +5958,7 @@ CheckEnemyStatusConditions:
 	bit PAR, [hl]
 	jr z, .checkIfUsingBide
 	call BattleRandom
-	cp $3f ; 25% to be fully paralysed
+	cp 25 percent ; chance to be fully paralysed
 	jr nc, .checkIfUsingBide
 	ld hl, FullyParalyzedText
 	call PrintText
@@ -5949,7 +5966,7 @@ CheckEnemyStatusConditions:
 	ld hl, wEnemyBattleStatus1
 	ld a, [hl]
 	; clear bide, thrashing about, charging up, and multi-turn moves such as warp
-	and $ff ^ ((1 << STORING_ENERGY) | (1 << THRASHING_ABOUT) | (1 << CHARGING_UP) | (1 << USING_TRAPPING_MOVE))
+	and ~((1 << STORING_ENERGY) | (1 << THRASHING_ABOUT) | (1 << CHARGING_UP) | (1 << USING_TRAPPING_MOVE))
 	ld [hl], a
 	ld a, [wEnemyMoveEffect]
 	cp FLY_EFFECT
@@ -6055,7 +6072,7 @@ CheckEnemyStatusConditions:
 	ld a, RAGE
 	ld [wd11e], a
 	call GetMoveName
-	call CopyStringToCF4B
+	call CopyToStringBuffer
 	xor a
 	ld [wEnemyMoveEffect], a
 	ld hl, EnemyCanExecuteMove
@@ -6097,7 +6114,7 @@ GetCurrentMove:
 	ld [wNameListType], a
 	call GetName
 	ld de, wcd6d
-	jp CopyStringToCF4B
+	jp CopyToStringBuffer
 
 LoadEnemyMonData:
 	ld a, [wLinkState]
@@ -6317,9 +6334,10 @@ LoadPlayerBackPic:
 	ld de, OldManPicBack
 .next
 	ld a, BANK(RedPicBack)
+	ASSERT BANK(RedPicBack) == BANK(OldManPicBack)
 	call UncompressSpriteFromDE
 	predef ScaleSpriteByTwo
-	ld hl, wOAMBuffer
+	ld hl, wShadowOAM
 	xor a
 	ldh [hOAMTile], a ; initial tile number
 	ld b, $7 ; 7 columns
@@ -6669,7 +6687,14 @@ BattleRandom:
 	ld a, [hl]
 	pop bc
 	pop hl
+	vc_hook Unknown_BattleRandom_ret_c
+	vc_patch BattleRandom_ret
+IF DEF(_RED_VC) || DEF(_BLUE_VC)
+	ret
+ELSE
 	ret c
+ENDC
+	vc_patch_end
 
 ; if we picked the last seed, we need to recalculate the nine seeds
 	push hl
@@ -6734,7 +6759,9 @@ HandleExplodingAnimation:
 
 PlayMoveAnimation:
 	ld [wAnimationID], a
+	vc_hook_red Reduce_move_anim_flashing_Confusion
 	call Delay3
+	vc_hook_red Reduce_move_anim_flashing_Psychic
 	predef_jump MoveAnimation
 
 InitBattle::
@@ -6751,11 +6778,11 @@ InitOpponent:
 DetermineWildOpponent:
 	ld a, [wd732]
 	bit 1, a
-	jr z, .asm_3ef2f
+	jr z, .notDebug
 	ldh a, [hJoyHeld]
-	bit 1, a ; B button pressed?
+	bit BIT_B_BUTTON, a
 	ret nz
-.asm_3ef2f
+.notDebug
 	ld a, [wNumberOfNoRandomBattleStepsLeft]
 	and a
 	ret nz
@@ -6889,7 +6916,7 @@ _LoadTrainerPic:
 	ld d, a ; de contains pointer to trainer pic
 	ld a, [wLinkState]
 	and a
-	ld a, BANK(TrainerPics) ; this is where all the trainer pics are (not counting Red's)
+	ld a, BANK("Pics 6") ; this is where all the trainer pics are (not counting Red's)
 	jr z, .loadSprite
 	ld a, BANK(RedPicFront)
 .loadSprite
@@ -6908,9 +6935,9 @@ ResetCryModifiers:
 
 ; animates the mon "growing" out of the pokeball
 AnimateSendingOutMon:
-	ld a, [wPredefRegisters]
+	ld a, [wPredefHL]
 	ld h, a
-	ld a, [wPredefRegisters + 1]
+	ld a, [wPredefHL + 1]
 	ld l, a
 	ldh a, [hStartTileID]
 	ldh [hBaseTileID], a
@@ -6948,9 +6975,9 @@ AnimateSendingOutMon:
 	jr CopyUncompressedPicToHL
 
 CopyUncompressedPicToTilemap:
-	ld a, [wPredefRegisters]
+	ld a, [wPredefHL]
 	ld h, a
-	ld a, [wPredefRegisters + 1]
+	ld a, [wPredefHL + 1]
 	ld l, a
 	ldh a, [hStartTileID]
 CopyUncompressedPicToHL::

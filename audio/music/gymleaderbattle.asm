@@ -56,8 +56,7 @@ Music_GymLeaderBattle_Ch1::
 	note F#, 1
 	rest 9
 	note A_, 6
-
-Music_GymLeaderBattle_branch_223b0::
+.mainloop:
 	note F#, 1
 	octave 3
 	note C#, 1
@@ -544,8 +543,7 @@ Music_GymLeaderBattle_branch_223b0::
 	note A_, 2
 	note G#, 4
 	note E_, 6
-	sound_loop 0, Music_GymLeaderBattle_branch_223b0
-
+	sound_loop 0, .mainloop
 
 Music_GymLeaderBattle_Ch2::
 	duty_cycle 3
@@ -607,8 +605,7 @@ Music_GymLeaderBattle_Ch2::
 	rest 9
 	octave 4
 	note C#, 6
-
-Music_GymLeaderBattle_branch_225e0::
+.mainloop:
 	note_type 12, 12, 5
 	note D#, 4
 	note C#, 4
@@ -845,8 +842,7 @@ Music_GymLeaderBattle_branch_225e0::
 	note_type 12, 12, 3
 	octave 4
 	note A_, 6
-	sound_loop 0, Music_GymLeaderBattle_branch_225e0
-
+	sound_loop 0, .mainloop
 
 Music_GymLeaderBattle_Ch3::
 	vibrato 0, 2, 0
@@ -1039,8 +1035,7 @@ Music_GymLeaderBattle_Ch3::
 	octave 4
 	note C#, 6
 	note_type 12, 1, 4
-
-Music_GymLeaderBattle_branch_227b1::
+.mainloop:
 	octave 3
 	note B_, 2
 	octave 4
@@ -1397,4 +1392,4 @@ Music_GymLeaderBattle_branch_227b1::
 	note B_, 2
 	octave 4
 	note G_, 6
-	sound_loop 0, Music_GymLeaderBattle_branch_227b1
+	sound_loop 0, .mainloop

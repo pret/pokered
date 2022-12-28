@@ -9,7 +9,7 @@ VermilionGym_Script:
 	res 6, [hl]
 	call nz, VermilionGymSetDoorTile
 	call EnableAutoTextBoxDrawing
-	ld hl, VermilionGymTrainerHeader0
+	ld hl, VermilionGymTrainerHeaders
 	ld de, VermilionGym_ScriptPointers
 	ld a, [wVermilionGymCurScript]
 	call ExecuteCurMapScriptInTable
@@ -94,11 +94,13 @@ VermilionGym_TextPointers:
 	dw VermilionGymTrainerText1
 	dw VermilionGymTrainerText2
 	dw VermilionGymTrainerText3
-	dw VermilionGymFanText
-	dw LTSurgeThunderbadgeInfoText
+	dw VermilionGymGuideText
+	dw LTSurgeThunderBadgeInfoText
 	dw ReceivedTM24Text
 	dw TM24NoRoomText
 
+VermilionGymTrainerHeaders:
+	def_trainers 2
 VermilionGymTrainerHeader0:
 	trainer EVENT_BEAT_VERMILION_GYM_TRAINER_0, 3, VermilionGymBattleText1, VermilionGymEndBattleText1, VermilionGymAfterBattleText1
 VermilionGymTrainerHeader1:
@@ -126,8 +128,8 @@ LTSurgeText:
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
-	ld hl, ReceivedThunderbadgeText
-	ld de, ReceivedThunderbadgeText
+	ld hl, ReceivedThunderBadgeText
+	ld de, ReceivedThunderBadgeText
 	call SaveEndBattleTextPointers
 	ldh a, [hSpriteIndex]
 	ld [wSpriteIndex], a
@@ -151,8 +153,8 @@ LTSurgePostBattleAdviceText:
 	text_far _LTSurgePostBattleAdviceText
 	text_end
 
-LTSurgeThunderbadgeInfoText:
-	text_far _LTSurgeThunderbadgeInfoText
+LTSurgeThunderBadgeInfoText:
+	text_far _LTSurgeThunderBadgeInfoText
 	text_end
 
 ReceivedTM24Text:
@@ -165,8 +167,8 @@ TM24NoRoomText:
 	text_far _TM24NoRoomText
 	text_end
 
-ReceivedThunderbadgeText:
-	text_far _ReceivedThunderbadgeText
+ReceivedThunderBadgeText:
+	text_far _ReceivedThunderBadgeText
 	text_end
 
 VermilionGymTrainerText1:
@@ -223,24 +225,24 @@ VermilionGymAfterBattleText3:
 	text_far _VermilionGymAfterBattleText3
 	text_end
 
-VermilionGymFanText:
+VermilionGymGuideText:
 	text_asm
 	ld a, [wBeatGymFlags]
 	bit BIT_THUNDERBADGE, a
 	jr nz, .afterBeat
-	ld hl, VermilionGymFanPreBattleText
+	ld hl, VermilionGymGuidePreBattleText
 	call PrintText
 	jr .done
 .afterBeat
-	ld hl, VermilionGymFanPostBattleText
+	ld hl, VermilionGymGuidePostBattleText
 	call PrintText
 .done
 	jp TextScriptEnd
 
-VermilionGymFanPreBattleText:
-	text_far _VermilionGymFanPreBattleText
+VermilionGymGuidePreBattleText:
+	text_far _VermilionGymGuidePreBattleText
 	text_end
 
-VermilionGymFanPostBattleText:
-	text_far _VermilionGymFanPostBattleText
+VermilionGymGuidePostBattleText:
+	text_far _VermilionGymGuidePostBattleText
 	text_end

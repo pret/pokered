@@ -5,7 +5,7 @@ ReadTrainer:
 	and a
 	ret nz
 
-; set [wEnemyPartyCount] to 0, [wEnemyPartyMons] to FF
+; set [wEnemyPartyCount] to 0, [wEnemyPartySpecies] to FF
 ; XXX first is total enemy pokemon?
 ; XXX second is species of first pokemon?
 	ld hl, wEnemyPartyCount

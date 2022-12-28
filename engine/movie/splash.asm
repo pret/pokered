@@ -3,24 +3,24 @@ LoadShootingStarGraphics:
 	ldh [rOBP0], a
 	ld a, $a4
 	ldh [rOBP1], a
-	ld de, AnimationTileset2 tile 3 ; star tile (top left quadrant)
+	ld de, MoveAnimationTiles1 tile 3 ; star tile (top left quadrant)
 	ld hl, vChars1 tile $20
-	lb bc, BANK(AnimationTileset2), 1
+	lb bc, BANK(MoveAnimationTiles1), 1
 	call CopyVideoData
-	ld de, AnimationTileset2 tile 19 ; star tile (bottom left quadrant)
+	ld de, MoveAnimationTiles1 tile 19 ; star tile (bottom left quadrant)
 	ld hl, vChars1 tile $21
-	lb bc, BANK(AnimationTileset2), 1
+	lb bc, BANK(MoveAnimationTiles1), 1
 	call CopyVideoData
 	ld de, FallingStar
 	ld hl, vChars1 tile $22
 	lb bc, BANK(FallingStar), (FallingStarEnd - FallingStar) / $10
 	call CopyVideoData
 	ld hl, GameFreakLogoOAMData
-	ld de, wOAMBuffer + $60
+	ld de, wShadowOAMSprite24
 	ld bc, GameFreakLogoOAMDataEnd - GameFreakLogoOAMData
 	call CopyData
 	ld hl, GameFreakShootingStarOAMData
-	ld de, wOAMBuffer
+	ld de, wShadowOAM
 	ld bc, GameFreakShootingStarOAMDataEnd - GameFreakShootingStarOAMData
 	jp CopyData
 
@@ -30,7 +30,7 @@ AnimateShootingStar:
 	call PlaySound
 
 ; Move the big star down and left across the screen.
-	ld hl, wOAMBuffer
+	ld hl, wShadowOAM
 	lb bc, $a0, $4
 .bigStarLoop
 	push hl
@@ -60,7 +60,7 @@ AnimateShootingStar:
 	jr nz, .bigStarLoop
 
 ; Clear big star OAM.
-	ld hl, wOAMBuffer
+	ld hl, wShadowOAM
 	ld c, 4
 	ld de, 4
 .clearOAMLoop
@@ -83,7 +83,7 @@ AnimateShootingStar:
 
 ; Copy 24 instances of the small stars OAM data.
 ; Note that their coordinates put them off-screen.
-	ld de, wOAMBuffer
+	ld de, wShadowOAM
 	ld a, 24
 .initSmallStarsOAMLoop
 	push af
@@ -106,7 +106,7 @@ AnimateShootingStar:
 	ld d, a
 	push bc
 	push hl
-	ld hl, wOAMBuffer + $50
+	ld hl, wShadowOAMSprite20
 	ld c, 4
 .smallStarsInnerLoop ; introduce new wave of 4 small stars OAM entries
 	ld a, [de]
@@ -131,8 +131,8 @@ AnimateShootingStar:
 	push af
 
 ; shift the existing OAM entries down to make room for the next wave
-	ld hl, wOAMBuffer + $10
-	ld de, wOAMBuffer
+	ld hl, wShadowOAMSprite04
+	ld de, wShadowOAM
 	ld bc, $50
 	call CopyData
 
@@ -186,7 +186,7 @@ SmallStarsEmptyWave:
 MoveDownSmallStars:
 	ld b, 8
 .loop
-	ld hl, wOAMBuffer + $5c
+	ld hl, wShadowOAMSprite23
 	ld a, [wMoveDownSmallStarsOAMCount]
 	ld de, -4
 	ld c, a

@@ -4,7 +4,7 @@ Music_MeetRival::
 	channel 2, Music_MeetRival_Ch2
 	channel 3, Music_MeetRival_Ch3
 
-Music_MeetRival_branch_b119::
+Music_MeetRival_Ch1_AlternateTempo::
 	tempo 100
 	sound_loop 0, Music_MeetRival_branch_b123
 
@@ -125,11 +125,11 @@ Music_MeetRival_branch_b140::
 	note A_, 2
 	sound_loop 0, Music_MeetRival_branch_b140
 
-Music_MeetRival_branch_b19b::
+Music_MeetRival_Ch1_AlternateStartAndTempo::
 	tempo 100
 	sound_loop 0, Music_MeetRival_branch_b1a5
 
-Music_MeetRival_branch_b1a2::
+Music_MeetRival_Ch1_AlternateStart::
 	tempo 112
 
 Music_MeetRival_branch_b1a5::
@@ -236,7 +236,7 @@ Music_MeetRival_branch_b1d8::
 	note F#, 2
 	sound_loop 0, Music_MeetRival_branch_b1d8
 
-Music_MeetRival_branch_b21d::
+Music_MeetRival_Ch2_AlternateStart::
 	duty_cycle 3
 	vibrato 10, 2, 6
 	note_type 12, 12, 7
@@ -384,7 +384,7 @@ Music_MeetRival_branch_b24b::
 	note D_, 2
 	sound_loop 0, Music_MeetRival_branch_b24b
 
-Music_MeetRival_branch_b2b5::
+Music_MeetRival_Ch3_AlternateStart::
 	note_type 12, 1, 4
 	octave 4
 	note G_, 1

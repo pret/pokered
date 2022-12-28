@@ -40,18 +40,18 @@ IF DEF(_DEBUG)
 	ret nz
 ENDC
 	CheckEvent EVENT_BEAT_CERULEAN_ROCKET_THIEF
-	jr nz, .asm_194f7
+	jr nz, .skipRocketThiefEncounter
 	ld hl, CeruleanCityCoords1
 	call ArePlayerCoordsInArray
-	jr nc, .asm_194f7
+	jr nc, .skipRocketThiefEncounter
 	ld a, [wCoordIndex]
 	cp $1
 	ld a, PLAYER_DIR_UP
 	ld b, SPRITE_FACING_DOWN
-	jr nz, .asm_194e6
+	jr nz, .playerBelowRocketThief
 	ld a, PLAYER_DIR_DOWN
 	ld b, SPRITE_FACING_UP
-.asm_194e6
+.playerBelowRocketThief
 	ld [wPlayerMovingDirection], a
 	ld a, b
 	ld [wSprite02StateData1FacingDirection], a
@@ -59,7 +59,7 @@ ENDC
 	ld a, $2
 	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
-.asm_194f7
+.skipRocketThiefEncounter
 	CheckEvent EVENT_BEAT_CERULEAN_RIVAL
 	ret nz
 	ld hl, CeruleanCityCoords2
@@ -67,11 +67,11 @@ ENDC
 	ret nc
 	ld a, [wWalkBikeSurfState]
 	and a
-	jr z, .asm_19512
+	jr z, .walking
 	ld a, SFX_STOP_ALL_MUSIC
 ;	ld [wNewSoundID], a
 	call PlaySound
-.asm_19512
+.walking
 	ld c, 0 ; BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
@@ -80,15 +80,15 @@ ENDC
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, [wXCoord]
-	cp 20
-	jr z, .asm_19535
+	cp 20 ; is the player standing on the right side of the bridge?
+	jr z, .playerOnRightSideOfBridge
 	ld a, $1
 	ldh [hSpriteIndex], a
 	ld a, SPRITESTATEDATA2_MAPX
 	ldh [hSpriteDataOffset], a
 	call GetPointerWithinSpriteStateData2
 	ld [hl], 25
-.asm_19535
+.playerOnRightSideOfBridge
 	ld a, HS_CERULEAN_RIVAL
 	ld [wMissableObjectIndex], a
 	predef ShowObject
@@ -183,13 +183,13 @@ CeruleanCityScript2:
 	ldh [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
 	ld a, [wXCoord]
-	cp 20
-	jr nz, .asm_195f0
+	cp 20 ; is the player standing on the right side of the bridge?
+	jr nz, .playerOnRightSideOfBridge
 	ld de, CeruleanCityMovement4
-	jr .asm_195f3
-.asm_195f0
+	jr .skip
+.playerOnRightSideOfBridge
 	ld de, CeruleanCityMovement3
-.asm_195f3
+.skip
 	ld a, $1
 	ldh [hSpriteIndex], a
 	call MoveSprite
@@ -284,7 +284,7 @@ CeruleanCityText_19677:
 CeruleanCityText2:
 	text_asm
 	CheckEvent EVENT_BEAT_CERULEAN_ROCKET_THIEF
-	jr nz, .asm_4ca20
+	jr nz, .beatRocketThief
 	ld hl, CeruleanCityText_196d9
 	call PrintText
 	ld hl, wd72d
@@ -300,7 +300,7 @@ CeruleanCityText2:
 	ld a, $4
 	ld [wCeruleanCityCurScript], a
 	jp TextScriptEnd
-.asm_4ca20
+.beatRocketThief
 	ld hl, CeruleanCityText_196f3
 	call PrintText
 	lb bc, TM_DIG, 1
@@ -361,21 +361,22 @@ CeruleanCityText6:
 CeruleanCityText7:
 	text_asm
 	ldh a, [hRandomAdd]
-	cp 180
-	jr c, .asm_e9fc9
+	cp 180 ; 76/256 chance of 1st dialogue
+	jr c, .notFirstText
 	ld hl, CeruleanCityText_19730
 	call PrintText
-	jr .asm_d486e
-.asm_e9fc9
-	cp 100
-	jr c, .asm_df99b
+	jr .end
+.notFirstText
+	cp 100 ; 80/256 chance of 2nd dialogue
+	jr c, .notSecondText
 	ld hl, CeruleanCityText_19735
 	call PrintText
-	jr .asm_d486e
-.asm_df99b
+	jr .end
+.notSecondText
+	; 100/256 chance of 3rd dialogue
 	ld hl, CeruleanCityText_1973a
 	call PrintText
-.asm_d486e
+.end
 	jp TextScriptEnd
 
 CeruleanCityText_19730:
@@ -393,27 +394,28 @@ CeruleanCityText_1973a:
 CeruleanCityText8:
 	text_asm
 	ldh a, [hRandomAdd]
-	cp 180
-	jr c, .asm_e28da
+	cp 180 ; 76/256 chance of 1st dialogue
+	jr c, .notFirstText
 	ld hl, CeruleanCityText_1976f
 	call PrintText
-	jr .asm_f2f38
-.asm_e28da
-	cp 120
-	jr c, .asm_15d08
+	jr .end
+.notFirstText
+	cp 120 ; 60/256 chance of 2nd dialogue
+	jr c, .notSecondText
 	ld hl, CeruleanCityText_19774
 	call PrintText
-	jr .asm_f2f38
-.asm_15d08
-	cp 60
-	jr c, .asm_d7fea
+	jr .end
+.notSecondText
+	cp 60 ; 60/256 chance of 3rd dialogue
+	jr c, .notThirdText
 	ld hl, CeruleanCityText_19779
 	call PrintText
-	jr .asm_f2f38
-.asm_d7fea
+	jr .end
+.notThirdText
+	; 60/256 chance of 4th dialogue
 	ld hl, CeruleanCityText_1977e
 	call PrintText
-.asm_f2f38
+.end
 	jp TextScriptEnd
 
 CeruleanCityText_1976f:

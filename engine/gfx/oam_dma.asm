@@ -16,7 +16,7 @@ DMARoutine:
 LOAD "OAM DMA", HRAM
 hDMARoutine::
 	; initiate DMA
-	ld a, HIGH(wOAMBuffer)
+	ld a, HIGH(wShadowOAM)
 	ldh [rDMA], a
 	; wait for DMA to finish
 	ld a, $28

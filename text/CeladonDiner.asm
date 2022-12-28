@@ -44,7 +44,7 @@ _CeladonDinerText_491a7::
 _ReceivedCoinCaseText::
 	text "<PLAYER> received"
 	line "a @"
-	text_ram wcf4b
+	text_ram wStringBuffer
 	text "!@"
 	text_end
 

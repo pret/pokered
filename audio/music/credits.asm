@@ -283,7 +283,6 @@ Music_Credits_Ch1::
 	note A_, 8
 	sound_ret
 
-
 Music_Credits_Ch2::
 	duty_cycle 3
 	vibrato 10, 2, 5
@@ -573,7 +572,6 @@ Music_Credits_Ch2::
 	note A_, 8
 	sound_ret
 
-
 Music_Credits_Ch3::
 	note_type 12, 1, 0
 	octave 5
@@ -597,9 +595,9 @@ Music_Credits_Ch3::
 	note A_, 1
 	rest 15
 	rest 16
-	sound_call Music_Credits_branch_7ffa4
-	sound_call Music_Credits_branch_7ffae
-	sound_call Music_Credits_branch_7ffa4
+	sound_call .sub1
+	sound_call .sub2
+	sound_call .sub1
 	octave 4
 	note E_, 2
 	note A_, 2
@@ -609,13 +607,13 @@ Music_Credits_Ch3::
 	note F#, 2
 	note G_, 2
 	note A_, 2
-	sound_call Music_Credits_branch_7ffa4
-	sound_call Music_Credits_branch_7ffae
-	sound_call Music_Credits_branch_7ffa4
-	sound_call Music_Credits_branch_7ffa4
-	sound_call Music_Credits_branch_7ffb8
-	sound_call Music_Credits_branch_7ffb8
-	sound_call Music_Credits_branch_7ffc1
+	sound_call .sub1
+	sound_call .sub2
+	sound_call .sub1
+	sound_call .sub1
+	sound_call .sub3
+	sound_call .sub3
+	sound_call .sub4
 	octave 4
 	note A_, 2
 	octave 5
@@ -631,34 +629,34 @@ Music_Credits_Ch3::
 	octave 4
 	note B_, 2
 	note A_, 2
-	sound_call Music_Credits_branch_7ffb8
-	sound_call Music_Credits_branch_7ffb8
-	sound_call Music_Credits_branch_7ffc1
-	sound_call Music_Credits_branch_7ffc1
+	sound_call .sub3
+	sound_call .sub3
+	sound_call .sub4
+	sound_call .sub4
 	octave 4
 	note G_, 4
 	note A_, 4
 	note B_, 4
 	octave 5
 	note D_, 4
-	sound_call Music_Credits_branch_7ffa4
-	sound_call Music_Credits_branch_7ffa4
-	sound_call Music_Credits_branch_7ffa4
-	sound_call Music_Credits_branch_7ffa4
-	sound_call Music_Credits_branch_7ffa4
-	sound_call Music_Credits_branch_7ffa4
-	sound_call Music_Credits_branch_7ffae
-	sound_call Music_Credits_branch_7ffae
-	sound_call Music_Credits_branch_7ffa4
+	sound_call .sub1
+	sound_call .sub1
+	sound_call .sub1
+	sound_call .sub1
+	sound_call .sub1
+	sound_call .sub1
+	sound_call .sub2
+	sound_call .sub2
+	sound_call .sub1
 	note E_, 4
 	note A_, 2
 	note E_, 4
 	note A_, 2
 	note E_, 2
 	note A_, 2
-	sound_call Music_Credits_branch_7ffae
-	sound_call Music_Credits_branch_7ffae
-	sound_call Music_Credits_branch_7ffa4
+	sound_call .sub2
+	sound_call .sub2
+	sound_call .sub1
 	note E_, 2
 	note A_, 2
 	note E_, 2
@@ -667,10 +665,10 @@ Music_Credits_Ch3::
 	note A_, 2
 	note G#, 2
 	note A_, 2
-	sound_call Music_Credits_branch_7ffd2
-	sound_call Music_Credits_branch_7ffd2
-	sound_call Music_Credits_branch_7ffdb
-	sound_call Music_Credits_branch_7ffdb
+	sound_call .sub5
+	sound_call .sub5
+	sound_call .sub6
+	sound_call .sub6
 	note F_, 2
 	note A_, 2
 	note F_, 2
@@ -687,8 +685,8 @@ Music_Credits_Ch3::
 	note D_, 2
 	note E_, 2
 	note F_, 2
-	sound_call Music_Credits_branch_7ffb8
-	sound_call Music_Credits_branch_7ffb8
+	sound_call .sub3
+	sound_call .sub3
 	note E_, 4
 	note A_, 4
 	note E_, 4
@@ -697,16 +695,16 @@ Music_Credits_Ch3::
 	note A_, 4
 	note E_, 4
 	note A_, 4
-	sound_call Music_Credits_branch_7ffa4
-	sound_call Music_Credits_branch_7ffa4
-	sound_call Music_Credits_branch_7ffe4
-	sound_call Music_Credits_branch_7ffe4
-	sound_call Music_Credits_branch_7ffa4
-	sound_call Music_Credits_branch_7ffa4
-	sound_call Music_Credits_branch_7ffb8
-	sound_call Music_Credits_branch_7ffb8
-	sound_call Music_Credits_branch_7ffed
-	sound_call Music_Credits_branch_7ffed
+	sound_call .sub1
+	sound_call .sub1
+	sound_call .sub7
+	sound_call .sub7
+	sound_call .sub1
+	sound_call .sub1
+	sound_call .sub3
+	sound_call .sub3
+	sound_call .sub8
+	sound_call .sub8
 	note A_, 1
 	rest 1
 	note A_, 1
@@ -717,7 +715,7 @@ Music_Credits_Ch3::
 	rest 7
 	sound_ret
 
-Music_Credits_branch_7ffa4::
+.sub1:
 	octave 4
 	note E_, 2
 	note A_, 2
@@ -729,7 +727,7 @@ Music_Credits_branch_7ffa4::
 	note A_, 2
 	sound_ret
 
-Music_Credits_branch_7ffae::
+.sub2:
 	octave 4
 	note D_, 2
 	note G_, 2
@@ -741,7 +739,7 @@ Music_Credits_branch_7ffae::
 	note G_, 2
 	sound_ret
 
-Music_Credits_branch_7ffb8::
+.sub3:
 	note G_, 2
 	note B_, 2
 	note G_, 2
@@ -752,11 +750,7 @@ Music_Credits_branch_7ffb8::
 	note B_, 2
 	sound_ret
 
-Music_Credits_branch_7ffc1::
-	octave 4
-	note A_, 2
-	octave 5
-	note C#, 2
+.sub4:
 	octave 4
 	note A_, 2
 	octave 5
@@ -769,9 +763,13 @@ Music_Credits_branch_7ffc1::
 	note A_, 2
 	octave 5
 	note C#, 2
+	octave 4
+	note A_, 2
+	octave 5
+	note C#, 2
 	sound_ret
 
-Music_Credits_branch_7ffd2::
+.sub5:
 	note D_, 2
 	note A_, 2
 	note D_, 2
@@ -782,7 +780,7 @@ Music_Credits_branch_7ffd2::
 	note A_, 2
 	sound_ret
 
-Music_Credits_branch_7ffdb::
+.sub6:
 	note E_, 2
 	note G#, 2
 	note E_, 2
@@ -793,7 +791,7 @@ Music_Credits_branch_7ffdb::
 	note G#, 2
 	sound_ret
 
-Music_Credits_branch_7ffe4::
+.sub7:
 	note E_, 2
 	note B_, 2
 	note E_, 2
@@ -804,7 +802,7 @@ Music_Credits_branch_7ffe4::
 	note B_, 2
 	sound_ret
 
-Music_Credits_branch_7ffed::
+.sub8:
 	note A_, 1
 	rest 1
 	note A_, 1

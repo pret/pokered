@@ -1,6 +1,3 @@
-INCLUDE "constants.asm"
-
-
 SECTION "Text 1", ROMX
 
 INCLUDE "data/text/text_1.asm"
@@ -146,6 +143,7 @@ INCLUDE "data/text/text_3.asm"
 INCLUDE "text/RedsHouse1F.asm"
 INCLUDE "text/BluesHouse.asm"
 INCLUDE "text/OaksLab.asm"
+INCLUDE "text/pokedex_ratings.asm"
 INCLUDE "text/ViridianPokecenter.asm"
 INCLUDE "text/ViridianMart.asm"
 INCLUDE "text/ViridianSchoolHouse.asm"

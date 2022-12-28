@@ -1,4 +1,4 @@
-IslandMons1:
+SeafoamIslands1FWildMons:
 	def_grass_wildmons 15 ; encounter rate
 	db 30, SEEL
 IF DEF(_RED)

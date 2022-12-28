@@ -14,8 +14,7 @@ Music_GameCorner_Ch1::
 	note D#, 2
 	note C#, 2
 	note D#, 16
-
-Music_GameCorner_branch_7e222::
+.mainloop:
 	note_type 12, 11, 5
 	octave 3
 	note C#, 4
@@ -180,8 +179,7 @@ Music_GameCorner_branch_7e222::
 	note G#, 1
 	note G_, 1
 	note G#, 8
-	sound_loop 0, Music_GameCorner_branch_7e222
-
+	sound_loop 0, .mainloop
 
 Music_GameCorner_Ch2::
 	duty_cycle 2
@@ -205,8 +203,7 @@ Music_GameCorner_Ch2::
 	note B_, 1
 	note A#, 1
 	note B_, 8
-
-Music_GameCorner_branch_7e2fa::
+.mainloop:
 	duty_cycle 2
 	note_type 12, 12, 7
 	octave 3
@@ -340,8 +337,7 @@ Music_GameCorner_branch_7e2fa::
 	note A_, 4
 	note F#, 4
 	note B_, 16
-	sound_loop 0, Music_GameCorner_branch_7e2fa
-
+	sound_loop 0, .mainloop
 
 Music_GameCorner_Ch3::
 	note_type 12, 1, 3
@@ -369,15 +365,14 @@ Music_GameCorner_Ch3::
 	rest 1
 	note D#, 1
 	rest 1
-
-Music_GameCorner_branch_7e3a5::
-	sound_call Music_GameCorner_branch_7e418
-	sound_call Music_GameCorner_branch_7e42d
-	sound_call Music_GameCorner_branch_7e442
-	sound_call Music_GameCorner_branch_7e457
-	sound_call Music_GameCorner_branch_7e46c
-	sound_call Music_GameCorner_branch_7e481
-	sound_call Music_GameCorner_branch_7e496
+.mainloop:
+	sound_call .sub1
+	sound_call .sub2
+	sound_call .sub3
+	sound_call .sub4
+	sound_call .sub5
+	sound_call .sub6
+	sound_call .sub7
 	note D#, 1
 	rest 1
 	note A_, 1
@@ -396,13 +391,13 @@ Music_GameCorner_branch_7e3a5::
 	rest 1
 	note F#, 1
 	rest 1
-	sound_call Music_GameCorner_branch_7e418
-	sound_call Music_GameCorner_branch_7e42d
-	sound_call Music_GameCorner_branch_7e442
-	sound_call Music_GameCorner_branch_7e457
-	sound_call Music_GameCorner_branch_7e46c
-	sound_call Music_GameCorner_branch_7e481
-	sound_call Music_GameCorner_branch_7e496
+	sound_call .sub1
+	sound_call .sub2
+	sound_call .sub3
+	sound_call .sub4
+	sound_call .sub5
+	sound_call .sub6
+	sound_call .sub7
 	note E_, 1
 	rest 3
 	octave 3
@@ -415,9 +410,9 @@ Music_GameCorner_branch_7e3a5::
 	rest 3
 	note B_, 1
 	rest 1
-	sound_call Music_GameCorner_branch_7e46c
-	sound_call Music_GameCorner_branch_7e418
-	sound_call Music_GameCorner_branch_7e4ab
+	sound_call .sub5
+	sound_call .sub1
+	sound_call .sub8
 	note E_, 1
 	rest 1
 	note G#, 1
@@ -436,13 +431,13 @@ Music_GameCorner_branch_7e3a5::
 	rest 1
 	note E_, 1
 	rest 1
-	sound_call Music_GameCorner_branch_7e46c
-	sound_call Music_GameCorner_branch_7e418
-	sound_call Music_GameCorner_branch_7e4ab
-	sound_call Music_GameCorner_branch_7e42d
-	sound_loop 0, Music_GameCorner_branch_7e3a5
+	sound_call .sub5
+	sound_call .sub1
+	sound_call .sub8
+	sound_call .sub2
+	sound_loop 0, .mainloop
 
-Music_GameCorner_branch_7e418::
+.sub1:
 	note E_, 1
 	rest 1
 	note G#, 1
@@ -465,7 +460,7 @@ Music_GameCorner_branch_7e418::
 	rest 1
 	sound_ret
 
-Music_GameCorner_branch_7e42d::
+.sub2:
 	note E_, 1
 	rest 1
 	note G#, 1
@@ -488,7 +483,7 @@ Music_GameCorner_branch_7e42d::
 	rest 1
 	sound_ret
 
-Music_GameCorner_branch_7e442::
+.sub3:
 	note E_, 1
 	rest 1
 	note B_, 1
@@ -511,7 +506,7 @@ Music_GameCorner_branch_7e442::
 	rest 1
 	sound_ret
 
-Music_GameCorner_branch_7e457::
+.sub4:
 	note D#, 1
 	rest 1
 	note A_, 1
@@ -534,7 +529,7 @@ Music_GameCorner_branch_7e457::
 	rest 1
 	sound_ret
 
-Music_GameCorner_branch_7e46c::
+.sub5:
 	note D#, 1
 	rest 1
 	note F#, 1
@@ -557,7 +552,7 @@ Music_GameCorner_branch_7e46c::
 	rest 1
 	sound_ret
 
-Music_GameCorner_branch_7e481::
+.sub6:
 	note D#, 1
 	rest 1
 	note F#, 1
@@ -580,7 +575,7 @@ Music_GameCorner_branch_7e481::
 	rest 1
 	sound_ret
 
-Music_GameCorner_branch_7e496::
+.sub7:
 	note F#, 1
 	rest 1
 	note B_, 1
@@ -603,7 +598,7 @@ Music_GameCorner_branch_7e496::
 	rest 1
 	sound_ret
 
-Music_GameCorner_branch_7e4ab::
+.sub8:
 	note F#, 1
 	rest 1
 	note A_, 1

@@ -1,4 +1,4 @@
-_SaffronGymText_5d162::
+_SabrinaPreBattleText::
 	text "I had a vision of"
 	line "your arrival!"
 
@@ -16,7 +16,7 @@ _SaffronGymText_5d162::
 	cont "you my powers!"
 	done
 
-_SaffronGymText_5d167::
+_ReceivedMarshBadgeText::
 	text "I'm"
 	line "shocked!"
 	cont "But, a loss is a"
@@ -30,14 +30,14 @@ _SaffronGymText_5d167::
 	line "MARSHBADGE!@"
 	text_end
 
-_SaffronGymText_5d16e::
+_SabrinaPostBattleAdviceText::
 	text "Everyone has"
 	line "psychic power!"
 	cont "People just don't"
 	cont "realize it!"
 	done
 
-_SaffronGymText_5d173::
+_KogaMarshBadgeInfoText::
 	text "The MARSHBADGE"
 	line "makes #MON up"
 	cont "to L70 obey you!"
@@ -55,7 +55,7 @@ _SaffronGymText_5d173::
 	line "this TM with you!"
 	done
 
-ReceivedTM46Text::
+_ReceivedTM46Text::
 	text "<PLAYER> received"
 	line "TM46!@"
 	text_end
@@ -74,7 +74,7 @@ _TM46NoRoomText::
 	line "of other items!"
 	done
 
-_SaffronGymText_5d1e6::
+_SaffronGymGuidePreBattleText::
 	text "Yo! Champ in"
 	line "making!"
 
@@ -91,7 +91,7 @@ _SaffronGymText_5d1e6::
 	cont "even aim a punch!"
 	done
 
-_SaffronGymText_5d1eb::
+_SaffronGymGuidePostBattleText::
 	text "Psychic power,"
 	line "huh?"
 

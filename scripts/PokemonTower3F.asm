@@ -1,6 +1,6 @@
 PokemonTower3F_Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, PokemonTower3TrainerHeader0
+	ld hl, PokemonTower3TrainerHeaders
 	ld de, PokemonTower3F_ScriptPointers
 	ld a, [wPokemonTower3FCurScript]
 	call ExecuteCurMapScriptInTable
@@ -18,6 +18,8 @@ PokemonTower3F_TextPointers:
 	dw PokemonTower3Text3
 	dw PickUpItemText
 
+PokemonTower3TrainerHeaders:
+	def_trainers
 PokemonTower3TrainerHeader0:
 	trainer EVENT_BEAT_POKEMONTOWER_3_TRAINER_0, 2, PokemonTower3BattleText1, PokemonTower3EndBattleText1, PokemonTower3AfterBattleText1
 PokemonTower3TrainerHeader1:

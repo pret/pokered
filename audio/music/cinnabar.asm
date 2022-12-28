@@ -4,8 +4,7 @@ Music_Cinnabar_Ch1::
 	duty_cycle 3
 	vibrato 12, 3, 4
 	toggle_perfect_pitch
-
-Music_Cinnabar_branch_b878::
+.mainloop:
 	note_type 12, 11, 5
 	rest 4
 	octave 3
@@ -82,14 +81,12 @@ Music_Cinnabar_branch_b878::
 	note G_, 8
 	note F#, 4
 	note E_, 4
-	sound_loop 0, Music_Cinnabar_branch_b878
-
+	sound_loop 0, .mainloop
 
 Music_Cinnabar_Ch2::
 	duty_cycle 3
 	vibrato 10, 2, 3
-
-Music_Cinnabar_branch_b8d9::
+.mainloop:
 	note_type 12, 12, 7
 	octave 3
 	note G_, 6
@@ -176,13 +173,11 @@ Music_Cinnabar_branch_b8d9::
 	octave 3
 	note B_, 2
 	note A_, 6
-	sound_loop 0, Music_Cinnabar_branch_b8d9
-
+	sound_loop 0, .mainloop
 
 Music_Cinnabar_Ch3::
 	note_type 12, 1, 0
-
-Music_Cinnabar_branch_b93f::
+.mainloop:
 	octave 4
 	note G_, 1
 	rest 3
@@ -351,4 +346,4 @@ Music_Cinnabar_branch_b93f::
 	octave 5
 	note C_, 1
 	rest 1
-	sound_loop 0, Music_Cinnabar_branch_b93f
+	sound_loop 0, .mainloop

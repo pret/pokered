@@ -34,7 +34,7 @@ _ReceivingHM01Text::
 _ReceivedHM01Text::
 	text "<PLAYER> got"
 	line "@"
-	text_ram wcf4b
+	text_ram wStringBuffer
 	text "!@"
 	text_end
 

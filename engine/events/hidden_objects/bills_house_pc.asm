@@ -95,7 +95,7 @@ BillsHousePokemonList::
 	call PrintText
 	call SaveScreenTilesToBuffer2
 	call HandleMenuInput
-	bit 1, a ; pressed b
+	bit BIT_B_BUTTON, a
 	jr nz, .cancel
 	ld a, [wCurrentMenuItem]
 	add EEVEE

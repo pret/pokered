@@ -7,7 +7,7 @@ _GivePokemon::
 	ld a, [wPartyCount]
 	cp PARTY_LENGTH
 	jr c, .addToParty
-	ld a, [wNumInBox]
+	ld a, [wBoxCount]
 	cp MONS_PER_BOX
 	jr nc, .boxFull
 ; add to box
@@ -18,7 +18,7 @@ _GivePokemon::
 	callfar LoadEnemyMonData
 	call SetPokedexOwnedFlag
 	callfar SendNewMonToBox
-	ld hl, wcf4b
+	ld hl, wStringBuffer
 	ld a, [wCurrentBoxNum]
 	and $7f
 	cp 9

@@ -37,8 +37,7 @@ Music_MeetProfOak_Ch1::
 	note D#, 4
 	note F#, 2
 	note F#, 4
-
-Music_MeetProfOak_branch_af85::
+.mainloop:
 	note F#, 6
 	note E_, 4
 	note A_, 2
@@ -71,8 +70,7 @@ Music_MeetProfOak_branch_af85::
 	note E_, 4
 	note G#, 2
 	note G#, 4
-	sound_loop 0, Music_MeetProfOak_branch_af85
-
+	sound_loop 0, .mainloop
 
 Music_MeetProfOak_Ch2::
 	vibrato 8, 1, 1
@@ -154,8 +152,7 @@ Music_MeetProfOak_Ch2::
 	note B_, 2
 	note B_, 4
 	note_type 12, 11, 5
-
-Music_MeetProfOak_branch_b005::
+.mainloop:
 	octave 4
 	note C#, 6
 	octave 3
@@ -205,8 +202,7 @@ Music_MeetProfOak_branch_b005::
 	note E_, 1
 	note_type 12, 11, 7
 	note G#, 16
-	sound_loop 0, Music_MeetProfOak_branch_b005
-
+	sound_loop 0, .mainloop
 
 Music_MeetProfOak_Ch3::
 	note_type 12, 1, 2
@@ -335,8 +331,8 @@ Music_MeetProfOak_Ch3::
 	rest 1
 	note G#, 1
 	rest 1
-
-Music_MeetProfOak_branch_b0bc::
+.mainloop:
+.loop1:
 	octave 4
 	note A_, 1
 	rest 1
@@ -361,9 +357,8 @@ Music_MeetProfOak_branch_b0bc::
 	octave 5
 	note C#, 1
 	rest 1
-	sound_loop 2, Music_MeetProfOak_branch_b0bc
-
-Music_MeetProfOak_branch_b0d8::
+	sound_loop 2, .loop1
+.loop2:
 	octave 4
 	note G#, 1
 	rest 1
@@ -381,9 +376,8 @@ Music_MeetProfOak_branch_b0d8::
 	rest 1
 	note B_, 1
 	rest 1
-	sound_loop 2, Music_MeetProfOak_branch_b0d8
-
-Music_MeetProfOak_branch_b0ed::
+	sound_loop 2, .loop2
+.loop3:
 	note F#, 1
 	rest 1
 	note A_, 1
@@ -400,9 +394,8 @@ Music_MeetProfOak_branch_b0ed::
 	rest 1
 	note A_, 1
 	rest 1
-	sound_loop 2, Music_MeetProfOak_branch_b0ed
-
-Music_MeetProfOak_branch_b101::
+	sound_loop 2, .loop3
+.loop4:
 	note G#, 1
 	rest 1
 	note B_, 1
@@ -419,5 +412,5 @@ Music_MeetProfOak_branch_b101::
 	rest 1
 	note B_, 1
 	rest 1
-	sound_loop 2, Music_MeetProfOak_branch_b101
-	sound_loop 0, Music_MeetProfOak_branch_b0bc
+	sound_loop 2, .loop4
+	sound_loop 0, .mainloop

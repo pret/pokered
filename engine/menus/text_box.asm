@@ -174,9 +174,9 @@ DoBuySellQuitMenu:
 	ld [wd730], a
 	call HandleMenuInput
 	call PlaceUnfilledArrowMenuCursor
-	bit 0, a ; was A pressed?
+	bit BIT_A_BUTTON, a
 	jr nz, .pressedA
-	bit 1, a ; was B pressed? (always true since only A/B are watched)
+	bit BIT_B_BUTTON, a ; always true since only A/B are watched
 	jr z, .pressedA
 	ld a, CANCELLED_MENU
 	ld [wMenuExitMethod], a
@@ -296,8 +296,8 @@ DisplayTwoOptionMenu:
 	pop hl
 .noYesMenuInputLoop
 	call HandleMenuInput
-	bit 1, a ; A button pressed?
-	jr nz, .noYesMenuInputLoop ; try again if A was not pressed
+	bit BIT_B_BUTTON, a
+	jr nz, .noYesMenuInputLoop ; try again if B was not pressed
 	pop af
 	pop hl
 	ld [wFlags_0xcd60], a
@@ -309,7 +309,7 @@ DisplayTwoOptionMenu:
 	ld [wTwoOptionMenuID], a
 	call HandleMenuInput
 	pop hl
-	bit 1, a ; A button pressed?
+	bit BIT_B_BUTTON, a
 	jr nz, .choseSecondMenuItem ; automatically choose the second option if B is pressed
 .pressedAButton
 	ld a, [wCurrentMenuItem]

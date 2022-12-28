@@ -43,7 +43,7 @@ GetMoveBoulderDustFunctionPointer:
 	ld h, [hl]
 	ld l, a
 	push hl
-	ld hl, wOAMBuffer + $90
+	ld hl, wShadowOAMSprite36
 	ld d, $0
 	add hl, de
 	ld e, l
@@ -51,22 +51,16 @@ GetMoveBoulderDustFunctionPointer:
 	pop hl
 	ret
 
+MACRO boulder_dust_adjust
+	db \1, \2 ; coords
+	dw \3 ; function
+ENDM
+
 MoveBoulderDustFunctionPointerTable:
-; facing down
-	db $FF,$00
-	dw AdjustOAMBlockYPos
-
-; facing up
-	db $01,$00
-	dw AdjustOAMBlockYPos
-
-; facing left
-	db $01,$01
-	dw AdjustOAMBlockXPos
-
-; facing right
-	db $FF,$01
-	dw AdjustOAMBlockXPos
+	boulder_dust_adjust -1, 0, AdjustOAMBlockYPos ; down
+	boulder_dust_adjust  1, 0, AdjustOAMBlockYPos ; up
+	boulder_dust_adjust  1, 1, AdjustOAMBlockXPos ; left
+	boulder_dust_adjust -1, 1, AdjustOAMBlockXPos ; right
 
 LoadSmokeTileFourTimes::
 	ld hl, vChars1 tile $7c

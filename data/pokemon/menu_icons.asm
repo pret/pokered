@@ -1,79 +1,154 @@
 MonPartyData:
-	table_width 1, MonPartyData
-	dn ICON_GRASS,     ICON_GRASS     ; Bulbasaur / Ivysaur
-	dn ICON_GRASS,     ICON_MON       ; Venusaur / Charmander
-	dn ICON_MON,       ICON_MON       ; Charmeleon / Charizard
-	dn ICON_WATER,     ICON_WATER     ; Squirtle / Wartortle
-	dn ICON_WATER,     ICON_BUG       ; Blastoise / Caterpie
-	dn ICON_BUG,       ICON_BUG       ; Metapod / Butterfree
-	dn ICON_BUG,       ICON_BUG       ; Weedle / Kakuna
-	dn ICON_BUG,       ICON_BIRD      ; Beedrill / Pidgey
-	dn ICON_BIRD,      ICON_BIRD      ; Pidgeotto / Pidgeot
-	dn ICON_QUADRUPED, ICON_QUADRUPED ; Rattata / Raticate
-	dn ICON_BIRD,      ICON_BIRD      ; Spearow / Fearow
-	dn ICON_SNAKE,     ICON_SNAKE     ; Ekans / Arbok
-	dn ICON_FAIRY,     ICON_FAIRY     ; Pikachu / Raichu
-	dn ICON_MON,       ICON_MON       ; Sandshrew / Sandslash
-	dn ICON_MON,       ICON_MON       ; NidoranF / Nidorina
-	dn ICON_MON,       ICON_MON       ; Nidoqueen / NidoranM
-	dn ICON_MON,       ICON_MON       ; Nidorino / Nidoking
-	dn ICON_FAIRY,     ICON_FAIRY     ; Clefairy / Clefable
-	dn ICON_QUADRUPED, ICON_QUADRUPED ; Vulpix / Ninetales
-	dn ICON_FAIRY,     ICON_FAIRY     ; Jigglypuff / Wigglytuff
-	dn ICON_MON,       ICON_MON       ; Zubat / Golbat
-	dn ICON_GRASS,     ICON_GRASS     ; Oddish / Gloom
-	dn ICON_GRASS,     ICON_BUG       ; Vileplume / Paras
-	dn ICON_BUG,       ICON_BUG       ; Parasect / Venonat
-	dn ICON_BUG,       ICON_MON       ; Venomoth / Diglett
-	dn ICON_MON,       ICON_MON       ; Dugtrio / Meowth
-	dn ICON_MON,       ICON_MON       ; Persian / Psyduck
-	dn ICON_MON,       ICON_MON       ; Golduck / Mankey
-	dn ICON_MON,       ICON_QUADRUPED ; Primeape / Growlithe
-	dn ICON_QUADRUPED, ICON_MON       ; Arcanine / Poliwag
-	dn ICON_MON,       ICON_MON       ; Poliwhirl / Poliwrath
-	dn ICON_MON,       ICON_MON       ; Abra / Kadabra
-	dn ICON_MON,       ICON_MON       ; Alakazam / Machop
-	dn ICON_MON,       ICON_MON       ; Machoke / Machamp
-	dn ICON_GRASS,     ICON_GRASS     ; Bellsprout / Weepinbell
-	dn ICON_GRASS,     ICON_WATER     ; Victreebel / Tentacool
-	dn ICON_WATER,     ICON_MON       ; Tentacruel / Geodude
-	dn ICON_MON,       ICON_MON       ; Graveler / Golem
-	dn ICON_QUADRUPED, ICON_QUADRUPED ; Ponyta / Rapidash
-	dn ICON_QUADRUPED, ICON_MON       ; Slowpoke / Slowbro
-	dn ICON_BALL,      ICON_BALL      ; Magnemite / Magneton
-	dn ICON_BIRD,      ICON_BIRD      ; Farfetch'd / Doduo
-	dn ICON_BIRD,      ICON_WATER     ; Dodrio / Seel
-	dn ICON_WATER,     ICON_MON       ; Dewgong / Grimer
-	dn ICON_MON,       ICON_HELIX     ; Muk / Shellder
-	dn ICON_HELIX,     ICON_MON       ; Cloyster / Gastly
-	dn ICON_MON,       ICON_MON       ; Haunter / Gengar
-	dn ICON_SNAKE,     ICON_MON       ; Onix / Drowzee
-	dn ICON_MON,       ICON_WATER     ; Hypno / Krabby
-	dn ICON_WATER,     ICON_BALL      ; Kingler / Voltorb
-	dn ICON_BALL,      ICON_GRASS     ; Electrode / Exeggcute
-	dn ICON_GRASS,     ICON_MON       ; Exeggutor / Cubone
-	dn ICON_MON,       ICON_MON       ; Marowak / Hitmonlee
-	dn ICON_MON,       ICON_MON       ; Hitmonchan / Lickitung
-	dn ICON_MON,       ICON_MON       ; Koffing / Weezing
-	dn ICON_QUADRUPED, ICON_MON       ; Rhyhorn / Rhydon
-	dn ICON_FAIRY,     ICON_GRASS     ; Chansey / Tangela
-	dn ICON_MON,       ICON_WATER     ; Kangaskhan / Horsea
-	dn ICON_WATER,     ICON_WATER     ; Seadra / Goldeen
-	dn ICON_WATER,     ICON_HELIX     ; Seaking / Staryu
-	dn ICON_HELIX,     ICON_MON       ; Starmie / Mr.Mime
-	dn ICON_BUG,       ICON_MON       ; Scyther / Jynx
-	dn ICON_MON,       ICON_MON       ; Electabuzz / Magmar
-	dn ICON_BUG,       ICON_QUADRUPED ; Pinsir / Tauros
-	dn ICON_WATER,     ICON_SNAKE     ; Magikarp / Gyarados
-	dn ICON_WATER,     ICON_MON       ; Lapras / Ditto
-	dn ICON_QUADRUPED, ICON_QUADRUPED ; Eevee / Vaporeon
-	dn ICON_QUADRUPED, ICON_QUADRUPED ; Jolteon / Flareon
-	dn ICON_MON,       ICON_HELIX     ; Porygon / Omanyte
-	dn ICON_HELIX,     ICON_HELIX     ; Omastar / Kabuto
-	dn ICON_HELIX,     ICON_BIRD      ; Kabutops / Aerodactyl
-	dn ICON_MON,       ICON_BIRD      ; Snorlax / Articuno
-	dn ICON_BIRD,      ICON_BIRD      ; Zapdos / Moltres
-	dn ICON_SNAKE,     ICON_SNAKE     ; Dratini / Dragonair
-	dn ICON_SNAKE,     ICON_MON       ; Dragonite / Mewtwo
-	dn ICON_MON,       0              ; Mew / padding
-	assert_table_length (NUM_POKEMON + 1) / 2
+	nybble_array MonPartyData
+	nybble ICON_GRASS     ; Bulbasaur
+	nybble ICON_GRASS     ; Ivysaur
+	nybble ICON_GRASS     ; Venusaur
+	nybble ICON_MON       ; Charmander
+	nybble ICON_MON       ; Charmeleon
+	nybble ICON_MON       ; Charizard
+	nybble ICON_WATER     ; Squirtle
+	nybble ICON_WATER     ; Wartortle
+	nybble ICON_WATER     ; Blastoise
+	nybble ICON_BUG       ; Caterpie
+	nybble ICON_BUG       ; Metapod
+	nybble ICON_BUG       ; Butterfree
+	nybble ICON_BUG       ; Weedle
+	nybble ICON_BUG       ; Kakuna
+	nybble ICON_BUG       ; Beedrill
+	nybble ICON_BIRD      ; Pidgey
+	nybble ICON_BIRD      ; Pidgeotto
+	nybble ICON_BIRD      ; Pidgeot
+	nybble ICON_QUADRUPED ; Rattata
+	nybble ICON_QUADRUPED ; Raticate
+	nybble ICON_BIRD      ; Spearow
+	nybble ICON_BIRD      ; Fearow
+	nybble ICON_SNAKE     ; Ekans
+	nybble ICON_SNAKE     ; Arbok
+	nybble ICON_FAIRY     ; Pikachu
+	nybble ICON_FAIRY     ; Raichu
+	nybble ICON_MON       ; Sandshrew
+	nybble ICON_MON       ; Sandslash
+	nybble ICON_MON       ; NidoranF
+	nybble ICON_MON       ; Nidorina
+	nybble ICON_MON       ; Nidoqueen
+	nybble ICON_MON       ; NidoranM
+	nybble ICON_MON       ; Nidorino
+	nybble ICON_MON       ; Nidoking
+	nybble ICON_FAIRY     ; Clefairy
+	nybble ICON_FAIRY     ; Clefable
+	nybble ICON_QUADRUPED ; Vulpix
+	nybble ICON_QUADRUPED ; Ninetales
+	nybble ICON_FAIRY     ; Jigglypuff
+	nybble ICON_FAIRY     ; Wigglytuff
+	nybble ICON_MON       ; Zubat
+	nybble ICON_MON       ; Golbat
+	nybble ICON_GRASS     ; Oddish
+	nybble ICON_GRASS     ; Gloom
+	nybble ICON_GRASS     ; Vileplume
+	nybble ICON_BUG       ; Paras
+	nybble ICON_BUG       ; Parasect
+	nybble ICON_BUG       ; Venonat
+	nybble ICON_BUG       ; Venomoth
+	nybble ICON_MON       ; Diglett
+	nybble ICON_MON       ; Dugtrio
+	nybble ICON_MON       ; Meowth
+	nybble ICON_MON       ; Persian
+	nybble ICON_MON       ; Psyduck
+	nybble ICON_MON       ; Golduck
+	nybble ICON_MON       ; Mankey
+	nybble ICON_MON       ; Primeape
+	nybble ICON_QUADRUPED ; Growlithe
+	nybble ICON_QUADRUPED ; Arcanine
+	nybble ICON_MON       ; Poliwag
+	nybble ICON_MON       ; Poliwhirl
+	nybble ICON_MON       ; Poliwrath
+	nybble ICON_MON       ; Abra
+	nybble ICON_MON       ; Kadabra
+	nybble ICON_MON       ; Alakazam
+	nybble ICON_MON       ; Machop
+	nybble ICON_MON       ; Machoke
+	nybble ICON_MON       ; Machamp
+	nybble ICON_GRASS     ; Bellsprout
+	nybble ICON_GRASS     ; Weepinbell
+	nybble ICON_GRASS     ; Victreebel
+	nybble ICON_WATER     ; Tentacool
+	nybble ICON_WATER     ; Tentacruel
+	nybble ICON_MON       ; Geodude
+	nybble ICON_MON       ; Graveler
+	nybble ICON_MON       ; Golem
+	nybble ICON_QUADRUPED ; Ponyta
+	nybble ICON_QUADRUPED ; Rapidash
+	nybble ICON_QUADRUPED ; Slowpoke
+	nybble ICON_MON       ; Slowbro
+	nybble ICON_BALL      ; Magnemite
+	nybble ICON_BALL      ; Magneton
+	nybble ICON_BIRD      ; Farfetch'd
+	nybble ICON_BIRD      ; Doduo
+	nybble ICON_BIRD      ; Dodrio
+	nybble ICON_WATER     ; Seel
+	nybble ICON_WATER     ; Dewgong
+	nybble ICON_MON       ; Grimer
+	nybble ICON_MON       ; Muk
+	nybble ICON_HELIX     ; Shellder
+	nybble ICON_HELIX     ; Cloyster
+	nybble ICON_MON       ; Gastly
+	nybble ICON_MON       ; Haunter
+	nybble ICON_MON       ; Gengar
+	nybble ICON_SNAKE     ; Onix
+	nybble ICON_MON       ; Drowzee
+	nybble ICON_MON       ; Hypno
+	nybble ICON_WATER     ; Krabby
+	nybble ICON_WATER     ; Kingler
+	nybble ICON_BALL      ; Voltorb
+	nybble ICON_BALL      ; Electrode
+	nybble ICON_GRASS     ; Exeggcute
+	nybble ICON_GRASS     ; Exeggutor
+	nybble ICON_MON       ; Cubone
+	nybble ICON_MON       ; Marowak
+	nybble ICON_MON       ; Hitmonlee
+	nybble ICON_MON       ; Hitmonchan
+	nybble ICON_MON       ; Lickitung
+	nybble ICON_MON       ; Koffing
+	nybble ICON_MON       ; Weezing
+	nybble ICON_QUADRUPED ; Rhyhorn
+	nybble ICON_MON       ; Rhydon
+	nybble ICON_FAIRY     ; Chansey
+	nybble ICON_GRASS     ; Tangela
+	nybble ICON_MON       ; Kangaskhan
+	nybble ICON_WATER     ; Horsea
+	nybble ICON_WATER     ; Seadra
+	nybble ICON_WATER     ; Goldeen
+	nybble ICON_WATER     ; Seaking
+	nybble ICON_HELIX     ; Staryu
+	nybble ICON_HELIX     ; Starmie
+	nybble ICON_MON       ; Mr.Mime
+	nybble ICON_BUG       ; Scyther
+	nybble ICON_MON       ; Jynx
+	nybble ICON_MON       ; Electabuzz
+	nybble ICON_MON       ; Magmar
+	nybble ICON_BUG       ; Pinsir
+	nybble ICON_QUADRUPED ; Tauros
+	nybble ICON_WATER     ; Magikarp
+	nybble ICON_SNAKE     ; Gyarados
+	nybble ICON_WATER     ; Lapras
+	nybble ICON_MON       ; Ditto
+	nybble ICON_QUADRUPED ; Eevee
+	nybble ICON_QUADRUPED ; Vaporeon
+	nybble ICON_QUADRUPED ; Jolteon
+	nybble ICON_QUADRUPED ; Flareon
+	nybble ICON_MON       ; Porygon
+	nybble ICON_HELIX     ; Omanyte
+	nybble ICON_HELIX     ; Omastar
+	nybble ICON_HELIX     ; Kabuto
+	nybble ICON_HELIX     ; Kabutops
+	nybble ICON_BIRD      ; Aerodactyl
+	nybble ICON_MON       ; Snorlax
+	nybble ICON_BIRD      ; Articuno
+	nybble ICON_BIRD      ; Zapdos
+	nybble ICON_BIRD      ; Moltres
+	nybble ICON_SNAKE     ; Dratini
+	nybble ICON_SNAKE     ; Dragonair
+	nybble ICON_SNAKE     ; Dragonite
+	nybble ICON_MON       ; Mewtwo
+	nybble ICON_MON       ; Mew
+	end_nybble_array NUM_POKEMON

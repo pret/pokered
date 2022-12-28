@@ -12,7 +12,7 @@ DisableLCD::
 	jr nz, .wait
 
 	ldh a, [rLCDC]
-	and $ff ^ rLCDC_ENABLE_MASK
+	and ~rLCDC_ENABLE_MASK
 	ldh [rLCDC], a
 	ld a, b
 	ldh [rIE], a

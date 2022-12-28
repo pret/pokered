@@ -1,4 +1,4 @@
-PlateauMons2:
+VictoryRoad2FWildMons:
 	def_grass_wildmons 10 ; encounter rate
 	db 22, MACHOP
 	db 24, GEODUDE

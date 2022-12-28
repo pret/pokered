@@ -1,6 +1,6 @@
 Route15_Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, Route15TrainerHeader0
+	ld hl, Route15TrainerHeaders
 	ld de, Route15_ScriptPointers
 	ld a, [wRoute15CurScript]
 	call ExecuteCurMapScriptInTable
@@ -26,6 +26,8 @@ Route15_TextPointers:
 	dw PickUpItemText
 	dw Route15Text12
 
+Route15TrainerHeaders:
+	def_trainers
 Route15TrainerHeader0:
 	trainer EVENT_BEAT_ROUTE_15_TRAINER_0, 2, Route15BattleText1, Route15EndBattleText1, Route15AfterBattleText1
 Route15TrainerHeader1:
@@ -41,11 +43,11 @@ Route15TrainerHeader5:
 Route15TrainerHeader6:
 	trainer EVENT_BEAT_ROUTE_15_TRAINER_6, 3, Route15BattleText7, Route15EndBattleText7, Route15AfterBattleText7
 Route15TrainerHeader7:
-	trainer EVENT_BEAT_ROUTE_15_TRAINER_7, 1, 3, Route15BattleText8, Route15EndBattleText8, Route15AfterBattleText8
+	trainer EVENT_BEAT_ROUTE_15_TRAINER_7, 3, Route15BattleText8, Route15EndBattleText8, Route15AfterBattleText8
 Route15TrainerHeader8:
-	trainer EVENT_BEAT_ROUTE_15_TRAINER_8, 1, 3, Route15BattleText9, Route15EndBattleText9, Route15AfterBattleText9
+	trainer EVENT_BEAT_ROUTE_15_TRAINER_8, 3, Route15BattleText9, Route15EndBattleText9, Route15AfterBattleText9
 Route15TrainerHeader9:
-	trainer EVENT_BEAT_ROUTE_15_TRAINER_9, 1, 3, Route15BattleText10, Route15EndBattleText10, Route15AfterBattleText10
+	trainer EVENT_BEAT_ROUTE_15_TRAINER_9, 3, Route15BattleText10, Route15EndBattleText10, Route15AfterBattleText10
 	db -1 ; end
 
 Route15Text1:

@@ -1,6 +1,6 @@
 PokemonTower7F_Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, PokemonTower7TrainerHeader0
+	ld hl, PokemonTower7TrainerHeaders
 	ld de, PokemonTower7F_ScriptPointers
 	ld a, [wPokemonTower7FCurScript]
 	call ExecuteCurMapScriptInTable
@@ -192,6 +192,8 @@ PokemonTower7F_TextPointers:
 	dw PokemonTower7Text3
 	dw PokemonTower7FujiText
 
+PokemonTower7TrainerHeaders:
+	def_trainers
 PokemonTower7TrainerHeader0:
 	trainer EVENT_BEAT_POKEMONTOWER_7_TRAINER_0, 3, PokemonTower7BattleText1, PokemonTower7EndBattleText1, PokemonTower7AfterBattleText1
 PokemonTower7TrainerHeader1:

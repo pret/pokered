@@ -14,14 +14,14 @@ InitPlayerData2:
 
 	ld hl, wPartyCount
 	call InitializeEmptyList
-	ld hl, wNumInBox
+	ld hl, wBoxCount
 	call InitializeEmptyList
 	ld hl, wNumBagItems
 	call InitializeEmptyList
 	ld hl, wNumBoxItems
 	call InitializeEmptyList
 
-START_MONEY EQU $3000
+DEF START_MONEY EQU $3000
 	ld hl, wPlayerMoney + 1
 	ld a, HIGH(START_MONEY)
 	ld [hld], a

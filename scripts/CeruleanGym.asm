@@ -4,7 +4,7 @@ CeruleanGym_Script:
 	res 6, [hl]
 	call nz, .LoadNames
 	call EnableAutoTextBoxDrawing
-	ld hl, CeruleanGymTrainerHeader0
+	ld hl, CeruleanGymTrainerHeaders
 	ld de, CeruleanGym_ScriptPointers
 	ld a, [wCeruleanGymCurScript]
 	call ExecuteCurMapScriptInTable
@@ -22,7 +22,7 @@ CeruleanGym_Script:
 .LeaderName:
 	db "MISTY@"
 
-CeruleanGymScript_5c6ed:
+CeruleanGymResetScripts:
 	xor a
 	ld [wJoyIgnore], a
 	ld [wCeruleanGymCurScript], a
@@ -33,16 +33,16 @@ CeruleanGym_ScriptPointers:
 	dw CheckFightingMapTrainers
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
-	dw CeruleanGymScript3
+	dw CeruleanGymMistyPostBattle
 
-CeruleanGymScript3:
+CeruleanGymMistyPostBattle:
 	ld a, [wIsInBattle]
 	cp $ff
-	jp z, CeruleanGymScript_5c6ed
+	jp z, CeruleanGymResetScripts
 	ld a, $f0
 	ld [wJoyIgnore], a
 
-CeruleanGymScript_5c70d:
+CeruleanGymReceiveTM11:
 	ld a, $5
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
@@ -68,44 +68,46 @@ CeruleanGymScript_5c70d:
 	; deactivate gym trainers
 	SetEvents EVENT_BEAT_CERULEAN_GYM_TRAINER_0, EVENT_BEAT_CERULEAN_GYM_TRAINER_1
 
-	jp CeruleanGymScript_5c6ed
+	jp CeruleanGymResetScripts
 
 CeruleanGym_TextPointers:
-	dw CeruleanGymText1
-	dw CeruleanGymText2
-	dw CeruleanGymText3
-	dw CeruleanGymText4
-	dw CeruleanGymText5
-	dw CeruleanGymText6
-	dw CeruleanGymText7
+	dw MistyText
+	dw CeruleanGymTrainerText1
+	dw CeruleanGymTrainerText2
+	dw CeruleanGymGuideText
+	dw MistyCascadeBadgeInfoText
+	dw ReceivedTM11Text
+	dw TM11NoRoomText
 
+CeruleanGymTrainerHeaders:
+	def_trainers 2
 CeruleanGymTrainerHeader0:
 	trainer EVENT_BEAT_CERULEAN_GYM_TRAINER_0, 3, CeruleanGymBattleText1, CeruleanGymEndBattleText1, CeruleanGymAfterBattleText1
 CeruleanGymTrainerHeader1:
 	trainer EVENT_BEAT_CERULEAN_GYM_TRAINER_1, 3, CeruleanGymBattleText2, CeruleanGymEndBattleText2, CeruleanGymAfterBattleText2
 	db -1 ; end
 
-CeruleanGymText1:
+MistyText:
 	text_asm
 	CheckEvent EVENT_BEAT_MISTY
-	jr z, .beginBattle
+	jr z, .beforeBeat
 	CheckEventReuseA EVENT_GOT_TM11
-	jr nz, .afterVictory
-	call z, CeruleanGymScript_5c70d
+	jr nz, .afterBeat
+	call z, CeruleanGymReceiveTM11
 	call DisableWaitingAfterTextDisplay
 	jr .done
-.afterVictory
-	ld hl, CeruleanGymText_5c7c3
+.afterBeat
+	ld hl, TM11ExplanationText
 	call PrintText
 	jr .done
-.beginBattle
-	ld hl, CeruleanGymText_5c7be
+.beforeBeat
+	ld hl, MistyPreBattleText
 	call PrintText
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
-	ld hl, CeruleanGymText_5c7d8
-	ld de, CeruleanGymText_5c7d8
+	ld hl, ReceivedCascadeBadgeText
+	ld de, ReceivedCascadeBadgeText
 	call SaveEndBattleTextPointers
 	ldh a, [hSpriteIndex]
 	ld [wSpriteIndex], a
@@ -120,34 +122,34 @@ CeruleanGymText1:
 .done
 	jp TextScriptEnd
 
-CeruleanGymText_5c7be:
-	text_far _CeruleanGymText_5c7be
+MistyPreBattleText:
+	text_far _MistyPreBattleText
 	text_end
 
-CeruleanGymText_5c7c3:
-	text_far _CeruleanGymText_5c7c3
+TM11ExplanationText:
+	text_far _TM11ExplanationText
 	text_end
 
-CeruleanGymText5:
-	text_far _CeruleanGymText_5c7c8
+MistyCascadeBadgeInfoText:
+	text_far _MistyCascadeBadgeInfoText
 	text_end
 
-CeruleanGymText6:
+ReceivedTM11Text:
 	text_far _ReceivedTM11Text
 	sound_get_item_1
 	text_end
 
-CeruleanGymText7:
-	text_far _CeruleanGymText_5c7d3
+TM11NoRoomText:
+	text_far _TM11NoRoomText
 	text_end
 
-CeruleanGymText_5c7d8:
-	text_far _CeruleanGymText_5c7d8
+ReceivedCascadeBadgeText:
+	text_far _ReceivedCascadeBadgeText
 	sound_get_key_item ; actually plays the second channel of SFX_BALL_POOF due to the wrong music bank being loaded
 	text_promptbutton
 	text_end
 
-CeruleanGymText2:
+CeruleanGymTrainerText1:
 	text_asm
 	ld hl, CeruleanGymTrainerHeader0
 	call TalkToTrainer
@@ -165,7 +167,7 @@ CeruleanGymAfterBattleText1:
 	text_far _CeruleanGymAfterBattleText1
 	text_end
 
-CeruleanGymText3:
+CeruleanGymTrainerText2:
 	text_asm
 	ld hl, CeruleanGymTrainerHeader1
 	call TalkToTrainer
@@ -183,23 +185,23 @@ CeruleanGymAfterBattleText2:
 	text_far _CeruleanGymAfterBattleText2
 	text_end
 
-CeruleanGymText4:
+CeruleanGymGuideText:
 	text_asm
 	CheckEvent EVENT_BEAT_MISTY
-	jr nz, .asm_5c821
-	ld hl, CeruleanGymText_5c82a
+	jr nz, .afterBeat
+	ld hl, CeruleanGymGuidePreBattleText
 	call PrintText
-	jr .asm_5c827
-.asm_5c821
-	ld hl, CeruleanGymText_5c82f
+	jr .done
+.afterBeat
+	ld hl, CeruleanGymGuidePostBattleText
 	call PrintText
-.asm_5c827
+.done
 	jp TextScriptEnd
 
-CeruleanGymText_5c82a:
-	text_far _CeruleanGymText_5c82a
+CeruleanGymGuidePreBattleText:
+	text_far _CeruleanGymGuidePreBattleText
 	text_end
 
-CeruleanGymText_5c82f:
-	text_far _CeruleanGymText_5c82f
+CeruleanGymGuidePostBattleText:
+	text_far _CeruleanGymGuidePostBattleText
 	text_end

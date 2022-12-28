@@ -14,8 +14,8 @@ Music_HallOfFame_Ch1::
 	note E_, 1
 	note F_, 1
 	note F#, 1
-
-Music_HallOfFame_branch_7fbc5::
+.mainloop:
+.loop1:
 	note_type 12, 8, 0
 	octave 4
 	note C_, 16
@@ -23,19 +23,17 @@ Music_HallOfFame_branch_7fbc5::
 	note F#, 16
 	note_type 12, 6, 0
 	note F_, 16
-	sound_loop 3, Music_HallOfFame_branch_7fbc5
+	sound_loop 3, .loop1
 	rest 16
 	rest 16
 	rest 16
 	rest 16
-	sound_loop 0, Music_HallOfFame_branch_7fbc5
-
+	sound_loop 0, .mainloop
 
 Music_HallOfFame_Ch2::
 	vibrato 8, 2, 5
 	duty_cycle 3
-
-Music_HallOfFame_branch_7fbdf::
+.mainloop:
 	note_type 12, 12, 4
 	octave 3
 	note G_, 2
@@ -60,13 +58,12 @@ Music_HallOfFame_branch_7fbdf::
 	note A#, 4
 	note A_, 4
 	note F_, 2
-	sound_loop 0, Music_HallOfFame_branch_7fbdf
-
+	sound_loop 0, .mainloop
 
 Music_HallOfFame_Ch3::
+.mainloop:
 	note_type 12, 1, 2
-
-Music_HallOfFame_branch_7fbfe::
+.loop1:
 	octave 4
 	note D_, 2
 	note G_, 2
@@ -76,7 +73,7 @@ Music_HallOfFame_branch_7fbfe::
 	note G_, 2
 	note D_, 2
 	note G_, 2
-	sound_loop 12, Music_HallOfFame_branch_7fbfe
+	sound_loop 12, .loop1
 	note D_, 4
 	note G_, 4
 	note D_, 4
@@ -93,4 +90,4 @@ Music_HallOfFame_branch_7fbfe::
 	note G_, 4
 	note E_, 4
 	note G_, 4
-	sound_loop 0, Music_HallOfFame_Ch3
+	sound_loop 0, .mainloop

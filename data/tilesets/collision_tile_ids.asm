@@ -1,8 +1,7 @@
-coll_tiles: MACRO
-REPT _NARG
-	db \1
-	shift
-ENDR
+MACRO coll_tiles
+	IF _NARG
+		db \# ; all args
+	ENDC
 	db -1 ; end
 ENDM
 

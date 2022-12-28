@@ -178,11 +178,17 @@ ROMX $2B
 ROMX $2C
 	"Move Names"
 WRAM0
-	"WRAM"
+	"Audio RAM"
 	org $c100
 	"Sprite State Data"
 	"OAM Buffer"
-	org $dfff
+	"Tilemap"
+	"Overworld Map"
+	"WRAM"
+	"Party Data"
+	"Main Data"
+	"Current Box Data"
+	org $df00
 	"Stack"
 VRAM
 	"VRAM"

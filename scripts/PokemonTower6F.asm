@@ -1,6 +1,6 @@
 PokemonTower6F_Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, PokemonTower6TrainerHeader0
+	ld hl, PokemonTower6TrainerHeaders
 	ld de, PokemonTower6F_ScriptPointers
 	ld a, [wPokemonTower6FCurScript]
 	call ExecuteCurMapScriptInTable
@@ -104,6 +104,8 @@ PokemonTower6F_TextPointers:
 	dw PokemonTower6Text6
 	dw PokemonTower6Text7
 
+PokemonTower6TrainerHeaders:
+	def_trainers
 PokemonTower6TrainerHeader0:
 	trainer EVENT_BEAT_POKEMONTOWER_6_TRAINER_0, 3, PokemonTower6BattleText1, PokemonTower6EndBattleText1, PokemonTower6AfterBattleText1
 PokemonTower6TrainerHeader1:

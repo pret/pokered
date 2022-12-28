@@ -1,29 +1,40 @@
 SFX_Intro_Lunge::
-	audio_header SFX_Intro_Lunge, Ch8
+	channel_count 1
+	channel 8, SFX_Intro_Lunge_Ch8
 
 SFX_Intro_Hip::
-	audio_header SFX_Intro_Hip, Ch5
+	channel_count 1
+	channel 5, SFX_Intro_Hip_Ch5
 
 SFX_Intro_Hop::
-	audio_header SFX_Intro_Hop, Ch5
+	channel_count 1
+	channel 5, SFX_Intro_Hop_Ch5
 
 SFX_Intro_Raise::
-	audio_header SFX_Intro_Raise, Ch8
+	channel_count 1
+	channel 8, SFX_Intro_Raise_Ch8
 
 SFX_Intro_Crash::
-	audio_header SFX_Intro_Crash, Ch8
+	channel_count 1
+	channel 8, SFX_Intro_Crash_Ch8
 
 SFX_Intro_Whoosh::
-	audio_header SFX_Intro_Whoosh, Ch8
+	channel_count 1
+	channel 8, SFX_Intro_Whoosh_Ch8
 
 SFX_Slots_Stop_Wheel::
-	audio_header SFX_Slots_Stop_Wheel, Ch5
+	channel_count 1
+	channel 5, SFX_Slots_Stop_Wheel_Ch5
 
 SFX_Slots_Reward::
-	audio_header SFX_Slots_Reward, Ch5
+	channel_count 1
+	channel 5, SFX_Slots_Reward_Ch5
 
 SFX_Slots_New_Spin::
-	audio_header SFX_Slots_New_Spin, Ch5, Ch6
+	channel_count 2
+	channel 5, SFX_Slots_New_Spin_Ch5
+	channel 6, SFX_Slots_New_Spin_Ch6
 
 SFX_Shooting_Star::
-	audio_header SFX_Shooting_Star, Ch5
+	channel_count 1
+	channel 5, SFX_Shooting_Star_Ch5

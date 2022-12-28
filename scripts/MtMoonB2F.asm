@@ -1,6 +1,6 @@
 MtMoonB2F_Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, MtMoon3TrainerHeader0
+	ld hl, MtMoon3TrainerHeaders
 	ld de, MtMoonB2F_ScriptPointers
 	ld a, [wMtMoonB2FCurScript]
 	call ExecuteCurMapScriptInTable
@@ -166,6 +166,8 @@ MtMoonB2F_TextPointers:
 	dw PickUpItemText
 	dw MtMoon3Text_49f99
 
+MtMoon3TrainerHeaders:
+	def_trainers 2
 MtMoon3TrainerHeader0:
 	trainer EVENT_BEAT_MT_MOON_3_TRAINER_0, 4, MtMoon3BattleText2, MtMoon3EndBattleText2, MtMoon3AfterBattleText2
 MtMoon3TrainerHeader1:

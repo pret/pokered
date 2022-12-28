@@ -1,28 +1,28 @@
-farcall: MACRO
+MACRO farcall
 	ld b, BANK(\1)
 	ld hl, \1
 	call Bankswitch
 ENDM
 
-callfar: MACRO
+MACRO callfar
 	ld hl, \1
 	ld b, BANK(\1)
 	call Bankswitch
 ENDM
 
-farjp: MACRO
+MACRO farjp
 	ld b, BANK(\1)
 	ld hl, \1
 	jp Bankswitch
 ENDM
 
-jpfar: MACRO
+MACRO jpfar
 	ld hl, \1
 	ld b, BANK(\1)
 	jp Bankswitch
 ENDM
 
-homecall: MACRO
+MACRO homecall
 	ldh a, [hLoadedROMBank]
 	push af
 	ld a, BANK(\1)
@@ -34,7 +34,7 @@ homecall: MACRO
 	ld [MBC1RomBank], a
 ENDM
 
-homecall_sf: MACRO ; homecall but save flags by popping into bc instead of af
+MACRO homecall_sf ; homecall but save flags by popping into bc instead of af
 	ldh a, [hLoadedROMBank]
 	push af
 	ld a, BANK(\1)

@@ -1,12 +1,12 @@
 ; Used in wram.asm
 
-flag_array: MACRO
+MACRO flag_array
 	ds ((\1) + 7) / 8
 ENDM
 
-BOX_STRUCT_LENGTH EQU 25 + NUM_MOVES * 2
+DEF BOX_STRUCT_LENGTH EQU 25 + NUM_MOVES * 2
 
-box_struct: MACRO
+MACRO box_struct
 \1Species::    db
 \1HP::         dw
 \1BoxLevel::   db
@@ -27,7 +27,7 @@ box_struct: MACRO
 \1PP::         ds NUM_MOVES
 ENDM
 
-party_struct: MACRO
+MACRO party_struct
 	box_struct \1
 \1Level::      db
 \1Stats::
@@ -38,7 +38,7 @@ party_struct: MACRO
 \1Special::    dw
 ENDM
 
-battle_struct: MACRO
+MACRO battle_struct
 \1Species::    db
 \1HP::         dw
 \1PartyPos::
@@ -60,43 +60,61 @@ battle_struct: MACRO
 \1PP::         ds NUM_MOVES
 ENDM
 
-spritestatedata1: MACRO
-\1PictureID:: db
-\1MovementStatus:: db
-\1ImageIndex:: db
-\1YStepVector:: db
-\1YPixels:: db
-\1XStepVector:: db
-\1XPixels:: db
+MACRO spritestatedata1
+\1PictureID::             db
+\1MovementStatus::        db
+\1ImageIndex::            db
+\1YStepVector::           db
+\1YPixels::               db
+\1XStepVector::           db
+\1XPixels::               db
 \1IntraAnimFrameCounter:: db
-\1AnimFrameCounter:: db
-\1FacingDirection:: db
-\1YAdjusted:: db
-\1XAdjusted:: db
-\1CollisionData:: db
+\1AnimFrameCounter::      db
+\1FacingDirection::       db
+\1YAdjusted::             db
+\1XAdjusted::             db
+\1CollisionData::         db
 	ds 3
 \1End::
 ENDM
 
-spritestatedata2: MACRO
+MACRO spritestatedata2
 \1WalkAnimationCounter:: db
 	ds 1
-\1YDisplacement:: db
-\1XDisplacement:: db
-\1MapY:: db
-\1MapX:: db
-\1MovementByte1:: db
-\1GrassPriority:: db
-\1MovementDelay:: db
-\1OrigFacingDirection:: db
+\1YDisplacement::        db
+\1XDisplacement::        db
+\1MapY::                 db
+\1MapX::                 db
+\1MovementByte1::        db
+\1GrassPriority::        db
+\1MovementDelay::        db
+\1OrigFacingDirection::  db
 	ds 3
-\1PictureID:: db
-\1ImageBaseOffset:: db
+\1PictureID::            db
+\1ImageBaseOffset::      db
 	ds 1
 \1End::
 ENDM
 
-channel_struct: MACRO
+MACRO sprite_oam_struct
+\1YCoord::     db
+\1XCoord::     db
+\1TileID::     db
+\1Attributes:: db
+ENDM
+
+MACRO map_connection_struct
+\1ConnectedMap::            db
+\1ConnectionStripSrc::      dw
+\1ConnectionStripDest::     dw
+\1ConnectionStripLength::   db
+\1ConnectedMapWidth::       db
+\1ConnectedMapYAlignment::  db
+\1ConnectedMapXAlignment::  db
+\1ConnectedMapViewPointer:: dw
+ENDM
+
+MACRO channel_struct
 \1MusicID::           dw
 \1MusicBank::         db
 \1Flags1::            db ; 0:on/off 1:subroutine 2:looping 3:sfx 4:noise 5:rest

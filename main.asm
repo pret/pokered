@@ -1,6 +1,3 @@
-INCLUDE "constants.asm"
-
-
 SECTION "bank1", ROMX
 
 INCLUDE "data/sprites/facings.asm"

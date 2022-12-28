@@ -1,4 +1,4 @@
-; spritestatedata1 struct members (see macros/wram.asm)
+; spritestatedata1 struct members (see macros/ram.asm)
 	const_def
 	const SPRITESTATEDATA1_PICTUREID             ; 0
 	const SPRITESTATEDATA1_MOVEMENTSTATUS        ; 1
@@ -16,9 +16,9 @@
 	const SPRITESTATEDATA1_0D                    ; d
 	const SPRITESTATEDATA1_0E                    ; e
 	const SPRITESTATEDATA1_0F                    ; f
-SPRITESTATEDATA1_LENGTH EQU const_value
+DEF SPRITESTATEDATA1_LENGTH EQU const_value
 
-; spritestatedata2 struct members (see macros/wram.asm)
+; spritestatedata2 struct members (see macros/ram.asm)
 	const_def
 	const SPRITESTATEDATA2_WALKANIMATIONCOUNTER ; 0
 	const SPRITESTATEDATA2_01                   ; 1
@@ -36,22 +36,24 @@ SPRITESTATEDATA1_LENGTH EQU const_value
 	const SPRITESTATEDATA2_PICTUREID            ; d
 	const SPRITESTATEDATA2_IMAGEBASEOFFSET      ; e
 	const SPRITESTATEDATA2_0F                   ; f
-SPRITESTATEDATA2_LENGTH EQU const_value
+DEF SPRITESTATEDATA2_LENGTH EQU const_value
+
+DEF NUM_SPRITESTATEDATA_STRUCTS EQU 16
 
 ; different kinds of people events
-ITEM    EQU $80
-TRAINER EQU $40
+DEF ITEM    EQU $80
+DEF TRAINER EQU $40
 
-WALK EQU $FE
-STAY EQU $FF
+DEF WALK EQU $FE
+DEF STAY EQU $FF
 
-ANY_DIR    EQU $00
-UP_DOWN    EQU $01
-LEFT_RIGHT EQU $02
-DOWN       EQU $D0
-UP         EQU $D1
-LEFT       EQU $D2
-RIGHT      EQU $D3
-NONE       EQU $FF
+DEF ANY_DIR    EQU $00
+DEF UP_DOWN    EQU $01
+DEF LEFT_RIGHT EQU $02
+DEF DOWN       EQU $D0
+DEF UP         EQU $D1
+DEF LEFT       EQU $D2
+DEF RIGHT      EQU $D3
+DEF NONE       EQU $FF
 
-BOULDER_MOVEMENT_BYTE_2 EQU $10
+DEF BOULDER_MOVEMENT_BYTE_2 EQU $10

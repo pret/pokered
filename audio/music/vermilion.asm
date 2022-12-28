@@ -4,8 +4,7 @@ Music_Vermilion_Ch1::
 	duty_cycle 3
 	vibrato 12, 3, 4
 	toggle_perfect_pitch
-
-Music_Vermilion_branch_b9f6::
+.mainloop:
 	note_type 12, 11, 5
 	octave 3
 	note E_, 4
@@ -108,14 +107,12 @@ Music_Vermilion_branch_b9f6::
 	note F#, 2
 	note G#, 2
 	note B_, 2
-	sound_loop 0, Music_Vermilion_branch_b9f6
-
+	sound_loop 0, .mainloop
 
 Music_Vermilion_Ch2::
 	duty_cycle 3
 	vibrato 10, 2, 3
-
-Music_Vermilion_branch_ba66::
+.mainloop:
 	note_type 12, 12, 7
 	octave 3
 	note A_, 8
@@ -175,13 +172,11 @@ Music_Vermilion_branch_ba66::
 	note E_, 4
 	note F#, 8
 	note E_, 8
-	sound_loop 0, Music_Vermilion_branch_ba66
-
+	sound_loop 0, .mainloop
 
 Music_Vermilion_Ch3::
 	note_type 12, 1, 0
-
-Music_Vermilion_branch_baa8::
+.mainloop:
 	octave 4
 	note A_, 2
 	note E_, 2
@@ -279,35 +274,34 @@ Music_Vermilion_branch_baa8::
 	note E_, 2
 	note G#, 2
 	note E_, 2
-	sound_loop 0, Music_Vermilion_branch_baa8
-
+	sound_loop 0, .mainloop
 
 Music_Vermilion_Ch4::
 	drum_speed 12
+.mainloop:
+.loop1:
+	sound_call .sub1
+	drum_note 6, 2
+	drum_note 6, 1
+	drum_note 6, 1
+	drum_note 6, 2
+	drum_note 6, 1
+	drum_note 6, 1
+	drum_note 6, 2
+	drum_note 6, 1
+	drum_note 6, 1
+	drum_note 6, 1
+	drum_note 6, 1
+	drum_note 6, 1
+	drum_note 6, 1
+	sound_loop 4, .loop1
+	sound_call .sub1
+	sound_call .sub1
+	sound_call .sub1
+	sound_call .sub1
+	sound_loop 0, .mainloop
 
-Music_Vermilion_branch_bb0e::
-	sound_call Music_Vermilion_branch_bb3f
-	drum_note 6, 2
-	drum_note 6, 1
-	drum_note 6, 1
-	drum_note 6, 2
-	drum_note 6, 1
-	drum_note 6, 1
-	drum_note 6, 2
-	drum_note 6, 1
-	drum_note 6, 1
-	drum_note 6, 1
-	drum_note 6, 1
-	drum_note 6, 1
-	drum_note 6, 1
-	sound_loop 4, Music_Vermilion_branch_bb0e
-	sound_call Music_Vermilion_branch_bb3f
-	sound_call Music_Vermilion_branch_bb3f
-	sound_call Music_Vermilion_branch_bb3f
-	sound_call Music_Vermilion_branch_bb3f
-	sound_loop 0, Music_Vermilion_branch_bb0e
-
-Music_Vermilion_branch_bb3f::
+.sub1:
 	drum_note 6, 2
 	drum_note 6, 1
 	drum_note 6, 1

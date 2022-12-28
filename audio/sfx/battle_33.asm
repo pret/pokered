@@ -7,7 +7,6 @@ SFX_Battle_33_Ch5:
 	square_note 8, 15, 1, 1792
 	sound_ret
 
-
 SFX_Battle_33_Ch6:
 	duty_cycle 3
 	square_note 6, 14, 1, 1296

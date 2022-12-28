@@ -15,7 +15,7 @@ ChoosePlayerName:
 	xor a ; NAME_PLAYER_SCREEN
 	ld [wNamingScreenType], a
 	call DisplayNamingScreen
-	ld a, [wcf4b]
+	ld a, [wStringBuffer]
 	cp "@"
 	jr z, .customName
 	call ClearScreen
@@ -48,7 +48,7 @@ ChooseRivalName:
 	ld a, NAME_RIVAL_SCREEN
 	ld [wNamingScreenType], a
 	call DisplayNamingScreen
-	ld a, [wcf4b]
+	ld a, [wStringBuffer]
 	cp "@"
 	jr z, .customName
 	call ClearScreen
@@ -210,7 +210,7 @@ GetDefaultName:
 	ld h, d
 	ld l, e
 	ld de, wcd6d
-	ld bc, $14
+	ld bc, NAME_BUFFER_LENGTH
 	jp CopyData
 
 INCLUDE "data/player_names_list.asm"

@@ -27,7 +27,7 @@ _PokemartBuyingGreetingText::
 	done
 
 _PokemartTellBuyPriceText::
-	text_ram wcf4b
+	text_ram wStringBuffer
 	text "?"
 	line "That will be"
 	cont "¥@"
@@ -85,7 +85,7 @@ _LearnedMove1Text::
 	text_ram wLearnMoveMonName
 	text " learned"
 	line "@"
-	text_ram wcf4b
+	text_ram wStringBuffer
 	text "!@"
 	text_end
 
@@ -97,7 +97,7 @@ _WhichMoveToForgetText::
 _AbandonLearningText::
 	text "Abandon learning"
 	line "@"
-	text_ram wcf4b
+	text_ram wStringBuffer
 	text "?"
 	done
 
@@ -106,7 +106,7 @@ _DidNotLearnText::
 	text_start
 	line "did not learn"
 	cont "@"
-	text_ram wcf4b
+	text_ram wStringBuffer
 	text "!"
 	prompt
 
@@ -115,7 +115,7 @@ _TryingToLearnText::
 	text " is"
 	line "trying to learn"
 	cont "@"
-	text_ram wcf4b
+	text_ram wStringBuffer
 	text "!"
 
 	para "But, @"
@@ -127,7 +127,7 @@ _TryingToLearnText::
 	para "Delete an older"
 	line "move to make room"
 	cont "for @"
-	text_ram wcf4b
+	text_ram wStringBuffer
 	text "?"
 	done
 
@@ -211,9 +211,19 @@ _CableClubNPCPleaseWaitText::
 	text_end
 
 _CableClubNPCLinkClosedBecauseOfInactivityText::
+	vc_patch Change_link_closed_inactivity_message
+IF DEF(_RED_VC) || DEF(_BLUE_VC)
+	text "Please come again!"
+	done
+	text_start
+	text "sed because of"
+	cont "inactivity."
+ELSE
 	text "The link has been"
 	line "closed because of"
 	cont "inactivity."
+ENDC
+	vc_patch_end
 
 	para "Please contact"
 	line "your friend and"

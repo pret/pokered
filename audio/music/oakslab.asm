@@ -15,8 +15,7 @@ Music_OaksLab_Ch1::
 	note G#, 1
 	note A_, 1
 	note B_, 1
-
-Music_OaksLab_branch_7eed0::
+.mainloop:
 	octave 4
 	note C#, 4
 	octave 3
@@ -66,8 +65,7 @@ Music_OaksLab_branch_7eed0::
 	note E_, 4
 	note F#, 4
 	note G#, 4
-	sound_loop 0, Music_OaksLab_branch_7eed0
-
+	sound_loop 0, .mainloop
 
 Music_OaksLab_Ch2::
 	duty_cycle 3
@@ -83,8 +81,7 @@ Music_OaksLab_Ch2::
 	note E_, 1
 	note F#, 1
 	note G#, 1
-
-Music_OaksLab_branch_7ef16::
+.mainloop:
 	note A_, 6
 	note G#, 1
 	note F#, 1
@@ -141,8 +138,7 @@ Music_OaksLab_branch_7ef16::
 	rest 1
 	note F#, 1
 	rest 1
-	sound_loop 0, Music_OaksLab_branch_7ef16
-
+	sound_loop 0, .mainloop
 
 Music_OaksLab_Ch3::
 	note_type 12, 1, 1
@@ -154,8 +150,7 @@ Music_OaksLab_Ch3::
 	rest 1
 	note E_, 1
 	rest 1
-
-Music_OaksLab_branch_7ef5c::
+.mainloop:
 	note C#, 1
 	rest 1
 	note A_, 1
@@ -390,4 +385,4 @@ Music_OaksLab_branch_7ef5c::
 	rest 3
 	note E_, 1
 	rest 3
-	sound_loop 0, Music_OaksLab_branch_7ef5c
+	sound_loop 0, .mainloop

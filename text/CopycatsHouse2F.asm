@@ -29,7 +29,7 @@ _TM31PreReceiveText::
 _ReceivedTM31Text::
 	text "<PLAYER> received"
 	line "@"
-	text_ram wcf4b
+	text_ram wStringBuffer
 	text "!@"
 	text_end
 

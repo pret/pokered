@@ -1,0 +1,482 @@
+;Format Sample
+;[xxxx]			;User-defined Name (Max:31 chars)
+;Mode = 1		;1:Fixcode; 2:Fixvalue; 3:Mask; 4:Palette; 5:Double Frame Buffer
+;Type = 0		;0:Begin 1:End
+;Index = 0		;Index
+;Address = x1F8000	;ROM Address
+;MemAddress = x2000	;RAM Address
+;Fixcode = 0		;Mode1: Fixed Rom Code; Mode2: Fixed Value
+;DelayFrame = 0		;Delay Frame
+;FadeFrame = 0		;Fade Frame 0:Off
+;DarkEnable0 = 0	;0:Off, 1:On (for Normal Mode)
+;ReduceEnable0 = 0	;0:Off, 1:On (for Normal Mode)
+;MotionBEnable0 = 0	;0:Off, 1:Black Fade, 2:, 3:Frame Blend (for Normal Mode)
+;Dark0 = 10		;0~10 (for Normal Mode)
+;ReduceColorR0 = 0	;0~31 (for Normal Mode)
+;ReduceColorG0 = 0	;0~31 (for Normal Mode)
+;ReduceColorB0 = 0	;0~31 (for Normal Mode)
+;MotionBlur0 = 31	;0~31 (for Normal Mode)
+;DarkEnable1 = 0	;0:Off, 1:On (for Green Mode)
+;ReduceEnable1 = 0	;0:Off, 1:On (for Green Mode)
+;MotionBEnable1 = 0	;0:Off, 1:Black Fade, 2:, 3:Frame Blend (for Green Mode)
+;Dark1 = 10		;0~10 (for Green Mode)
+;ReduceColorR1 = 0	;0~31 (for Green Mode)
+;ReduceColorG1 = 0	;0~31 (for Green Mode)
+;ReduceColorB1 = 0	;0~31 (for Green Mode)
+;MotionBlur1 = 31	;0~31 (for Green Mode)
+;PaletteX = c31,31,31	;X:0~15, cR,G,B (0~31)
+[SaveLimit@Unknown_save_limit]
+Mode = 12
+Type = 1
+Index = {hex sGameData}
+Address = {hex sGameDataEnd}
+
+;[Fix pokemon]
+;Mode = 2
+;Address = 0x1551
+;Type = 3
+
+[send_send_buf2@Wireless_WaitLinkTransfer]
+Mode = 2
+Address = {HEX @}
+Type = 29
+
+[send_send_buf2_ret@Wireless_WaitLinkTransfer_ret]
+Mode = 2
+Address = {HEX @}
+Type = 30
+
+[send_byt2@Wireless_start_exchange]
+Mode = 2
+Address = {HEX @+5}
+Type = 31
+
+[send_byt2_ret@Wireless_end_exchange]
+Mode = 2
+Address = {HEX @}
+Type = 32
+
+[send_dummy@Wireless_start_send_zero_bytes]
+Mode = 2
+Address = {HEX @}
+Type = 33
+
+[send_dummy_end@Wireless_end_send_zero_bytes]
+Mode = 2
+Address = {HEX @}
+Type = 34
+
+[FIGHT@Wireless_net_delay_1]
+Mode = 1
+Address = {HEX @+1}
+Fixcode = {PATCH +1}
+
+[FIGHT2@Wireless_net_delay_2]
+Mode = 1
+Address = {HEX @+1}
+Fixcode = {PATCH +1}
+
+[Network10@Wireless_net_delay_3]
+Mode = 1
+Address = {HEX @+1}
+Fixcode = {PATCH +1}
+
+[Network11@Wireless_net_delay_4]
+Mode = 1
+Address = {HEX @+1}
+Fixcode = {PATCH +1}
+
+[Network17@Wireless_ExchangeBytes_RNG_state_unknown_Type5]
+Mode = 2
+Address = {HEX @}
+Type = 5
+
+[Network424@Wireless_ExchangeBytes_party_structs]
+Mode = 2
+Address = {HEX @}
+Type = 4
+
+[Network200@Wireless_ExchangeBytes_patch_lists]
+Mode = 2
+Address = {HEX @}
+Type = 4
+
+[Network_RECHECK@Wireless_net_recheck]
+Mode = 2
+Address = {HEX @}
+Type = 7
+
+[Network_STOP@Wireless_net_stop]
+Mode = 2
+Address = {HEX @}
+Type = 8
+
+[Network_END@Wireless_net_end]
+Mode = 2
+Address = {HEX @}
+Type = 9
+
+[Network_RESET@Unknown_network_reset]
+Mode = 2
+Address = {HEX @}
+Type = 10
+
+[linkCable fake begin@Link_fake_connection_status]
+Mode = 2
+Address = {HEX @}
+Type = 16
+
+[linkCable fake end@Wireless_prompt]
+Mode = 2
+Address = {HEX @}
+Type = 17
+
+[linkCable block input@Wireless_TryQuickSave_block_input]
+Mode = 2
+Address = {HEX @+5}
+Type = 18
+
+;[save game start]
+;Mode = 2
+;Address = 0x59E6
+;Type = 19
+
+[save game end@Trade_save_game_end]
+Mode = 2
+Address = {HEX @}
+Type = 20
+
+;93 A7 A4 7F AB A8 AD AA 7F A7
+;at 93
+[Change_MSG@Change_link_closed_inactivity_message]
+Mode = 1
+Address = {HEX @+1}
+Fixcode = {PATCH_ +1 20}
+
+[fight_ret@BattleRandom_ret]
+Mode = 1
+Address = {HEX @}
+Fixcode = {PATCH}
+
+[fight_ret_c@Unknown_BattleRandom_ret_c]
+Mode = 2
+Address = {HEX @}
+Type = 98
+
+; The effect_no decide which animation will be played.
+; So we use it as a condition value. The address of effect_no is 0xd07c
+; a7 c0 3e 05 ea
+;	and	a                                A7                 
+;	ret	nz                               C0
+;                             
+;	ld	a,5                              3E 05
+;	ld	(anime_buf),a                    EA
+;     
+;	                           
+;effect_select_rdy:           
+;	ld	(effect_no),a          						
+;                             
+;	call	put_wait             
+;                             
+;	ld	a,B_EFFECT_SELECT     
+
+
+;rsm033659 
+;no151 mega punch
+[FPA 001 Begin@Reduce_move_anim_flashing_Mega_Punch_Self_Destruct_Explosion]               
+Mode = 3                      
+Type = 0                      
+Address = {HEX @}            
+MotionBEnable0 = 3            
+MotionBlur0 = 21 
+MotionBEnable1 = 3 
+MotionBlur1 = 21                
+ConditionType = 11             
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wStringBuffer+5 wAnimationID  00  wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wStringBuffer+4 wAnimationID  00  wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID}  
+ConditionValueB = {dws_ ==            ==              ==              ==              ==              ==            ||  ==            ==              ==              ==              ==              ==            ||  ==            ==              ==              ==              ==          }  
+ConditionValueC = {dws_ "M"           "E"             "G"             "A"             "P"             MEGA_PUNCH    00  "S"           "E"             "L"             "F"             "D"             MEGA_PUNCH    00  "E"           "X"             "P"             "L"             MEGA_PUNCH  }  
+
+
+[FPA 001 End@Stop_reducing_move_anim_flashing_Mega_Punch]                                               
+Mode = 3                                                    
+Type = 1                                                    
+Address = {HEX @}                                           
+ConditionType = 0                                           
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wStringBuffer+5 wAnimationID} 
+ConditionValueB = {dws_ ==            ==              ==              ==              ==              ==          } 
+ConditionValueC = {dws_ "M"           "E"             "G"             "A"             "P"             MEGA_PUNCH  } 
+                                    
+                                    
+;rsm032916    
+;no117 guillotine                
+[FPA 002 Begin@Reduce_move_anim_flashing_Guillotine]                     
+Mode = 3                            
+Type = 0                            
+Address = {HEX @}                   
+MotionBEnable0 = 3                  
+MotionBlur0 = 9   
+MotionBEnable1 = 3                  
+MotionBlur1 = 8                    
+ConditionType = 0                   
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID}         
+ConditionValueB = {dws_ ==            ==              ==              ==              ==          }         
+ConditionValueC = {dws_ "G"           "U"             "I"             "L"             GUILLOTINE  } 
+
+[FPA 002 End@Stop_reducing_move_anim_flashing_Guillotine]                 
+Mode = 3                      
+Type = 1                      
+Address = {HEX @}           
+ConditionType = 0             
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID} 
+ConditionValueB = {dws_ ==            ==              ==              ==              ==          } 
+ConditionValueC = {dws_ "G"           "U"             "I"             "L"             GUILLOTINE  } 
+
+
+;rsm041307 
+;no150 mega kick
+[FPA 003 Begin@Reduce_move_anim_flashing_Mega_Kick]               
+Mode = 3                      
+Type = 0                      
+Address = {HEX @}            
+MotionBEnable0 = 3            
+MotionBlur0 = 25  
+MotionBEnable1 = 3 
+MotionBlur1 = 21                 
+ConditionType = 0             
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wStringBuffer+5 wAnimationID}  
+ConditionValueB = {dws_ ==            ==              ==              ==              ==              ==          }  
+ConditionValueC = {dws_ "M"           "E"             "G"             "A"             "K"             MEGA_KICK   } 
+
+
+;rsm001929 
+;no123 bubble beam
+[FPA 004 Begin@Reduce_move_anim_flashing_Bubblebeam]                           
+Mode = 3                                   
+Type = 0                                   
+Address = {hex @}                         
+MotionBEnable0 = 3                         
+MotionBlur0 = 30                             
+ConditionType = 0                          
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID}                                            
+ConditionValueB = {dws_ ==            ==              ==              ==              ==          }  
+ConditionValueC = {dws_ "B"           "U"             "B"             "B"             BUBBLEBEAM  } 
+
+[FPA 004 End@Stop_reducing_move_anim_flashing_Bubblebeam_Mega_Kick]                         
+Mode = 3                              
+Type = 1                              
+Address = {hex @}                     
+ConditionType = 11                     
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID  00  wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wStringBuffer+5 wAnimationID}  
+ConditionValueB = {dws_ ==            ==              ==              ==              ==            ||  ==            ==              ==              ==              ==              ==          } 
+ConditionValueC = {dws_ "B"           "U"             "B"             "B"             BUBBLEBEAM    00  "M"           "E"             "G"             "A"             "K"             MEGA_KICK   } 
+ 
+
+;rsm103658 
+;no116 hyper beam
+[FPA 005 Begin@Reduce_move_anim_flashing_Hyper_Beam]                                                 
+Mode = 3               
+Type = 0               
+Address = {HEX @}         
+MotionBEnable0 = 1        
+MotionBlur0 = 5    
+MotionBEnable1 = 1                   
+MotionBlur1 = 5 
+ConditionType = 0                                     
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID}    
+ConditionValueB = {dws_ ==            ==              ==              ==              ==          }    
+ConditionValueC = {dws_ "H"           "Y"             "P"             "E"             HYPER_BEAM  }    
+
+[FPA 005 End@Stop_reducing_move_anim_flashing_Hyper_Beam]                      
+Mode = 3                           
+Type = 1                           
+Address = {HEX @}                 
+ConditionType = 0                  
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID}              
+ConditionValueB = {dws_ ==            ==              ==              ==              ==          }              
+ConditionValueC = {dws_ "H"           "Y"             "P"             "E"             HYPER_BEAM  }        
+
+
+;rsm133358
+;no57 thunderbolt
+[FPA 006 Begin@Reduce_move_anim_flashing_Thunderbolt]                                                 
+Mode = 3               
+Type = 0               
+Address = {HEX @}       
+MotionBEnable0 = 3        
+MotionBlur0 = 30    
+ConditionType = 0                                     
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID}  
+ConditionValueB = {dws_ ==            ==              ==              ==              ==          }  
+ConditionValueC = {dws_ "T"           "H"             "U"             "N"             THUNDERBOLT }  
+   
+                         
+[FPA 006 End@Stop_reducing_move_anim_flashing_Thunderbolt]       
+Mode = 3                 
+Type = 1                 
+Address = {HEX @}
+ConditionType = 0                     
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID}    
+ConditionValueB = {dws_ ==            ==              ==              ==              ==          } 
+ConditionValueC = {dws_ "T"           "H"             "U"             "N"             THUNDERBOLT } 
+
+;rsm152340  
+;no159 reflect                                  
+[FPA 007 Begin@Reduce_move_anim_flashing_Reflect]                                                   
+Mode = 3                 
+Type = 0                 
+Address = {hex @}        
+MotionBEnable0 = 1       
+MotionBlur0 = 6 
+MotionBEnable1 = 1       
+MotionBlur1 = 5 
+ConditionType = 0               
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID}       
+ConditionValueB = {dws_ ==            ==              ==              ==              ==          }       
+ConditionValueC = {dws_ "R"           "E"             "F"             "L"             REFLECT     }                
+                         
+[FPA 007 End@Stop_reducing_move_anim_flashing_Reflect]       
+Mode = 3                 
+Type = 1                 
+Address = {HEX @}
+ConditionType = 0               
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID}   
+ConditionValueB = {dws_ ==            ==              ==              ==              ==          }   
+ConditionValueC = {dws_ "R"           "E"             "F"             "L"             REFLECT     }  
+
+;rsm171812  
+;no156 dream eater                               
+[FPA 008 Begin@Reduce_move_anim_flashing_Dream_Eater]                                                   
+Mode = 3                 
+Type = 0                 
+Address = {hex @} 
+MotionBEnable0 = 3       
+MotionBlur0 = 10 
+MotionBEnable1 = 3       
+MotionBlur1 = 7 
+ConditionType = 0               
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID}  
+ConditionValueB = {dws_ ==            ==              ==              ==              ==          } 
+ConditionValueC = {dws_ "D"           "R"             "E"             "A"             DREAM_EATER }          
+                         
+[FPA 008 End@Stop_reducing_move_anim_flashing_Blizzard]       
+Mode = 3                 
+Type = 1                 
+Address = {HEX @}
+ConditionType = 0               
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wStringBuffer+4} {dws/ wAnimationID} 
+ConditionValueB = {dws_ ==            ==              ==              ==              ==             } {dws/ ==          }
+ConditionValueC = {dws_ "B"           "L"             "I"             "Z"             "Z"            } {dws/ BLIZZARD    }
+
+;rsm174650   
+;no36 spore                       
+[FPA 009 Begin@Reduce_move_anim_flashing_Spore]                       
+Mode = 3                              
+Type = 0                              
+Address = {HEX @}                     
+MotionBEnable0 = 3                    
+MotionBlur0 = 8  
+MotionBEnable1 = 3                    
+MotionBlur1 = 8                      
+ConditionType = 0                     
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID}           
+ConditionValueB = {dws_ ==            ==              ==              ==              ==          }           
+ConditionValueC = {dws_ "S"           "P"             "O"             "R"             SPORE       }           
+                                      
+
+;rsm152115
+;no12 rock slide                      
+[FPA 010 Begin@Reduce_move_anim_flashing_Rock_Slide]                       
+Mode = 3                              
+Type = 0                              
+Address = {HEX @}                     
+MotionBEnable0 = 3                    
+MotionBlur0 = 27                      
+ConditionType = 0                     
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID}      
+ConditionValueB = {dws_ ==            ==              ==              ==              ==          }      
+ConditionValueC = {dws_ "R"           "O"             "C"             "K"             ROCK_SLIDE  }      
+                                      
+[FPA 010 End@Stop_reducing_move_anim_flashing]                         
+Mode = 3                              
+Type = 1                              
+Address = {HEX @}                    
+ConditionType = 11                     
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID  00  wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID  00  wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID  00  wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wStringBuffer+4 wAnimationID  00  wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wStringBuffer+4 wAnimationID  00  wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wStringBuffer+5 wAnimationID  00  wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID  00  wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID}  
+ConditionValueB = {dws_ ==            ==              ==              ==              ==            ||  ==            ==              ==              ==              ==            ||  ==            ==              ==              ==              ==            ||  ==            ==              ==              ==              ==              ==            ||  ==            ==              ==              ==              ==              ==            ||  ==            ==              ==              ==              ==              ==            ||  ==            ==              ==              ==              ==            ||  ==            ==              ==              ==              ==          }
+ConditionValueC = {dws_ "D"           "R"             "E"             "A"             DREAM_EATER   00  "R"           "O"             "C"             "K"             ROCK_SLIDE    00  "S"           "P"             "O"             "R"             SPORE         00  "S"           "E"             "L"             "F"             "D"             MEGA_PUNCH    00  "S"           "E"             "L"             "F"             "D"             SELFDESTRUCT  00  "C"           "O"             "N"             "F"             "S"             CONFUSION     00  "E"           "X"             "P"             "L"             EXPLOSION     00  "E"           "X"             "P"             "L"             MEGA_PUNCH  }
+
+
+;explosion  
+;No76 explosion                                             
+[FPA 76 Begin@Reduce_move_anim_flashing_Explosion]                                                  
+Mode = 3                                                         
+Type = 0                                                         
+Address = {HEX @}                                              
+MotionBEnable0 = 3                                               
+MotionBlur0 = 28                                                 
+ConditionType = 0                                                
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID}                    
+ConditionValueB = {dws_ ==            ==              ==              ==              ==          }                    
+ConditionValueC = {dws_ "E"           "X"             "P"             "L"             EXPLOSION   }  
+
+
+;No56 self-destruct                                                 
+[FPA 56 Begin@Reduce_move_anim_flashing_Self_Destruct]                                                 
+Mode = 3                                                        
+Type = 0                                                        
+Address = {HEX @}                                               
+MotionBEnable0 = 3                                              
+MotionBlur0 = 23                                                
+ConditionType = 0                                               
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wStringBuffer+4 wAnimationID}      
+ConditionValueB = {dws_ ==            ==              ==              ==              ==              ==          }      
+ConditionValueC = {dws_ "S"           "E"             "L"             "F"             "D"             SELFDESTRUCT}   
+
+
+;No131 blizzard                                                                                                           
+[FPA 131 Begin@Reduce_move_anim_flashing_Blizzard]                                                                                                                                 
+Mode = 3                                                              
+Type = 0                                                              
+Address = {HEX @}                                                     
+MotionBEnable0 = 3                                                    
+MotionBlur0 = 26                                                      
+ConditionType = 0                                                     
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wStringBuffer+4 wAnimationID}            
+ConditionValueB = {dws_ ==            ==              ==              ==              ==              ==          }            
+ConditionValueC = {dws_ "B"           "L"             "I"             "Z"             "Z"             BLIZZARD    }           
+
+
+;confusion                                                     
+[FPA conf Begin@Reduce_move_anim_flashing_Confusion]                                                      
+Mode = 3                                                                                     
+Type = 0                                                             
+Address = {hex @}                                                  
+MotionBEnable1 = 3                                                   
+MotionBlur1 = 21                                                     
+ConditionType = 0                                                     
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wStringBuffer+5 wAnimationID}            
+ConditionValueB = {dws_ ==            ==              ==              ==              ==              ==          }           
+ConditionValueC = {dws_ "C"           "O"             "N"             "F"             "S"             CONFUSION   }  
+
+;phychic                                                   
+[FPA phy Begin@Reduce_move_anim_flashing_Psychic]                                                                                                                
+Mode = 3                                                   
+Type = 0                                                   
+Address = {hex @}                                          
+MotionBEnable1 = 3                                         
+MotionBlur1 = 21                                           
+ConditionType = 0                                          
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wStringBuffer+5 wAnimationID} 
+ConditionValueB = {dws_ ==            ==              ==              ==              ==              ==          } 
+ConditionValueC = {dws_ "P"           "S"             "Y"             "C"             "I"             PSYCHIC_M   }    
+
+[FPA phy End@Stop_reducing_move_anim_flashing_Psychic]                                                                                    
+Mode = 3                                                                                         
+Type = 1                                                                                         
+Address = {hex @}                                                                                
+ConditionType = 0                                                                                                                                
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wStringBuffer+5 wAnimationID}   
+ConditionValueB = {dws_ ==            ==              ==              ==              ==              ==          }   
+ConditionValueC = {dws_ "P"           "S"             "Y"             "C"             "I"             PSYCHIC_M   }   
+
+

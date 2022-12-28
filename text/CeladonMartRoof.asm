@@ -17,7 +17,7 @@ _CeladonMartRoofText_484f3::
 _CeladonMartRoofText_484f9::
 	text "<PLAYER> received"
 	line "@"
-	text_ram wcf4b
+	text_ram wStringBuffer
 	text "!@"
 	text_end
 
@@ -25,7 +25,7 @@ _CeladonMartRoofText_484fe::
 	text_start
 
 	para "@"
-	text_ram wcf4b
+	text_ram wStringBuffer
 	text " contains"
 	line "ICE BEAM!"
 
@@ -47,7 +47,7 @@ _CeladonMartRoofText_48504::
 _CeladonMartRoofText_4850a::
 	text "<PLAYER> received"
 	line "@"
-	text_ram wcf4b
+	text_ram wStringBuffer
 	text "!@"
 	text_end
 
@@ -55,7 +55,7 @@ _CeladonMartRoofText_4850f::
 	text_start
 
 	para "@"
-	text_ram wcf4b
+	text_ram wStringBuffer
 	text " contains"
 	line "ROCK SLIDE!"
 
@@ -137,7 +137,7 @@ _VendingMachineText4::
 	done
 
 _VendingMachineText5::
-	text_ram wcf4b
+	text_ram wStringBuffer
 	text_start
 	line "popped out!"
 	done

@@ -4,28 +4,12 @@
 TechnicalMachines:
 	table_width 1, TechnicalMachines
 
-n = 1
-REPT NUM_TMS
-IF n < 10
-MOVE_FOR_TM EQUS "TM0{d:n}_MOVE"
-ELSE
-MOVE_FOR_TM EQUS "TM{d:n}_MOVE"
-ENDC
-	db MOVE_FOR_TM
-PURGE MOVE_FOR_TM
-n = n + 1
+FOR n, 1, NUM_TMS + 1
+	db TM{02d:n}_MOVE
 ENDR
 	assert_table_length NUM_TMS
 
-n = 1
-REPT NUM_HMS
-IF n < 10
-MOVE_FOR_HM EQUS "HM0{d:n}_MOVE"
-ELSE
-MOVE_FOR_HM EQUS "HM{d:n}_MOVE"
-ENDC
-	db MOVE_FOR_HM
-PURGE MOVE_FOR_HM
-n = n + 1
+FOR n, 1, NUM_HMS + 1
+	db HM{02d:n}_MOVE
 ENDR
 	assert_table_length NUM_TM_HM

@@ -1,8 +1,8 @@
 ; Song ids are calculated by address to save space.
 ; SFX_Headers_(1|2|3) indexes (see audio/headers/*.asm)
 
-;music_const: MACRO
-;\1 EQUS "((\2 - SFX_Headers_1) / 3)"
+;MACRO music_const
+;	DEF \1 EQUS "((\2 - SFX_Headers_1) / 3)"
 ;ENDM
 
 	const_def 1
@@ -219,4 +219,4 @@
 
 	const SFX_POKEFLUTE_IN_BATTLE
 
-SFX_STOP_ALL_MUSIC EQU $ff
+DEF SFX_STOP_ALL_MUSIC EQU $ff

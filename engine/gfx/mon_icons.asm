@@ -43,7 +43,7 @@ GetAnimationSpeed:
 .resetSprites
 	push bc
 	ld hl, wMonPartySpritesSavedOAM
-	ld de, wOAMBuffer
+	ld de, wShadowOAM
 	ld bc, $60
 	call CopyData
 	pop bc
@@ -51,7 +51,7 @@ GetAnimationSpeed:
 	jr .incTimer
 .animateSprite
 	push bc
-	ld hl, wOAMBuffer + $02 ; OAM tile id
+	ld hl, wShadowOAMSprite00TileID
 	ld bc, $10
 	ld a, [wCurrentMenuItem]
 	call AddNTimes
@@ -236,7 +236,7 @@ WriteMonPartySpriteOAM:
 ; make a copy at wMonPartySpritesSavedOAM.
 	push af
 	ld c, $10
-	ld h, HIGH(wOAMBuffer)
+	ld h, HIGH(wShadowOAM)
 	ldh a, [hPartyMonIndex]
 	swap a
 	ld l, a
@@ -252,7 +252,7 @@ WriteMonPartySpriteOAM:
 ; Make a copy of the OAM buffer with the first animation frame written so that
 ; we can flip back to it from the second frame by copying it back.
 .makeCopy
-	ld hl, wOAMBuffer
+	ld hl, wShadowOAM
 	ld de, wMonPartySpritesSavedOAM
 	ld bc, $60
 	jp CopyData
@@ -280,8 +280,8 @@ GetPartyMonSpriteID:
 
 INCLUDE "data/pokemon/menu_icons.asm"
 
-INC_FRAME_1 EQUS "0, $20"
-INC_FRAME_2 EQUS "$20, $20"
+DEF INC_FRAME_1 EQUS "0, $20"
+DEF INC_FRAME_2 EQUS "$20, $20"
 
 BugIconFrame1:       INCBIN "gfx/icons/bug.2bpp", INC_FRAME_1
 PlantIconFrame1:     INCBIN "gfx/icons/plant.2bpp", INC_FRAME_1

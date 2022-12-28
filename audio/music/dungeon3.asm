@@ -4,13 +4,11 @@ Music_Dungeon3_Ch1::
 	duty_cycle 3
 	toggle_perfect_pitch
 	vibrato 8, 1, 4
-
-Music_Dungeon3_branch_7e9fc::
+.mainloop:
 	note_type 12, 12, 3
-
-Music_Dungeon3_branch_7e9fe::
-	sound_call Music_Dungeon3_branch_7eab2
-	sound_loop 3, Music_Dungeon3_branch_7e9fe
+.loop1:
+	sound_call .sub1
+	sound_loop 3, .loop1
 	octave 2
 	note B_, 2
 	octave 3
@@ -23,14 +21,12 @@ Music_Dungeon3_branch_7e9fe::
 	note G_, 2
 	note D#, 2
 	note E_, 2
-
-Music_Dungeon3_branch_7ea11::
-	sound_call Music_Dungeon3_branch_7eac1
-	sound_loop 4, Music_Dungeon3_branch_7ea11
-
-Music_Dungeon3_branch_7ea18::
-	sound_call Music_Dungeon3_branch_7eab2
-	sound_loop 4, Music_Dungeon3_branch_7ea18
+.loop2:
+	sound_call .sub2
+	sound_loop 4, .loop2
+.loop3:
+	sound_call .sub1
+	sound_loop 4, .loop3
 	octave 4
 	note F_, 2
 	note F_, 2
@@ -44,7 +40,7 @@ Music_Dungeon3_branch_7ea18::
 	note D#, 2
 	note D_, 2
 	note D_, 2
-	sound_call Music_Dungeon3_branch_7eafc
+	sound_call .sub7
 	octave 4
 	note D_, 2
 	note D_, 2
@@ -58,14 +54,12 @@ Music_Dungeon3_branch_7ea18::
 	note E_, 2
 	note F_, 2
 	note F_, 2
-
-Music_Dungeon3_branch_7ea3c::
-	sound_call Music_Dungeon3_branch_7eace
-	sound_loop 4, Music_Dungeon3_branch_7ea3c
-
-Music_Dungeon3_branch_7ea43::
-	sound_call Music_Dungeon3_branch_7eadd
-	sound_loop 3, Music_Dungeon3_branch_7ea43
+.loop4:
+	sound_call .sub3
+	sound_loop 4, .loop4
+.loop5:
+	sound_call .sub4
+	sound_loop 3, .loop5
 	octave 3
 	note C#, 2
 	octave 2
@@ -130,8 +124,8 @@ Music_Dungeon3_branch_7ea43::
 	note E_, 2
 	octave 4
 	note C_, 2
-	sound_call Music_Dungeon3_branch_7eaea
-	sound_call Music_Dungeon3_branch_7eaea
+	sound_call .sub5
+	sound_call .sub5
 	octave 3
 	note G#, 2
 	note E_, 2
@@ -147,16 +141,16 @@ Music_Dungeon3_branch_7ea43::
 	note E_, 2
 	rest 16
 	rest 8
-	sound_call Music_Dungeon3_branch_7eaf7
-	sound_call Music_Dungeon3_branch_7eaf7
-	sound_call Music_Dungeon3_branch_7eaf7
-	sound_call Music_Dungeon3_branch_7eaf7
+	sound_call .sub6
+	sound_call .sub6
+	sound_call .sub6
+	sound_call .sub6
 	note D#, 2
 	rest 16
 	rest 16
-	sound_loop 0, Music_Dungeon3_branch_7e9fc
+	sound_loop 0, .mainloop
 
-Music_Dungeon3_branch_7eab2::
+.sub1:
 	octave 2
 	note B_, 2
 	octave 3
@@ -173,7 +167,7 @@ Music_Dungeon3_branch_7eab2::
 	note D#, 2
 	sound_ret
 
-Music_Dungeon3_branch_7eac1::
+.sub2:
 	note E_, 2
 	note G#, 2
 	octave 4
@@ -188,7 +182,7 @@ Music_Dungeon3_branch_7eac1::
 	note G#, 2
 	sound_ret
 
-Music_Dungeon3_branch_7eace::
+.sub3:
 	octave 3
 	note D#, 2
 	octave 2
@@ -205,7 +199,7 @@ Music_Dungeon3_branch_7eace::
 	note B_, 2
 	sound_ret
 
-Music_Dungeon3_branch_7eadd::
+.sub4:
 	note A_, 2
 	note F_, 2
 	octave 3
@@ -220,7 +214,7 @@ Music_Dungeon3_branch_7eadd::
 	note F_, 2
 	sound_ret
 
-Music_Dungeon3_branch_7eaea::
+.sub5:
 	octave 3
 	note G#, 2
 	note E_, 2
@@ -235,14 +229,14 @@ Music_Dungeon3_branch_7eaea::
 	note C_, 2
 	sound_ret
 
-Music_Dungeon3_branch_7eaf7::
+.sub6:
 	note D#, 2
 	note G_, 2
 	note D#, 2
 	note C#, 6
 	sound_ret
 
-Music_Dungeon3_branch_7eafc::
+.sub7:
 	tempo 168
 	octave 1
 	note A#, 1
@@ -334,12 +328,10 @@ Music_Dungeon3_branch_7eafc::
 	tempo 160
 	sound_ret
 
-
 Music_Dungeon3_Ch2::
 	vibrato 11, 1, 5
 	duty_cycle 3
-
-Music_Dungeon3_branch_7eb6d::
+.mainloop:
 	note_type 12, 13, 3
 	octave 4
 	note D#, 6
@@ -604,10 +596,10 @@ Music_Dungeon3_branch_7eb6d::
 	note B_, 2
 	octave 3
 	note D#, 2
-	sound_loop 0, Music_Dungeon3_branch_7eb6d
-
+	sound_loop 0, .mainloop
 
 Music_Dungeon3_Ch3::
+.mainloop:
 	note_type 12, 1, 2
 	rest 16
 	rest 16
@@ -707,8 +699,7 @@ Music_Dungeon3_Ch3::
 	rest 16
 	rest 16
 	rest 10
-	sound_loop 0, Music_Dungeon3_Ch3
-
+	sound_loop 0, .mainloop
 
 Music_Dungeon3_Ch4::
 	drum_speed 12

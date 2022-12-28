@@ -5,14 +5,12 @@ SFX_Battle_34_Ch5:
 	square_note 15, 15, 3, 1024
 	sound_ret
 
-
 SFX_Battle_34_Ch6:
 	duty_cycle_pattern 2, 3, 1, 0
 	square_note 8, 14, -7, 960
 	square_note 15, 14, -7, 960
 	square_note 15, 14, 3, 960
 	sound_ret
-
 
 SFX_Battle_34_Ch8:
 	noise_note 4, 15, -7, 81

@@ -1,7 +1,7 @@
 ; The first of three duplicated sound engines.
 
 Audio1_UpdateMusic::
-	ld c, Ch1
+	ld c, CHAN1
 .loop
 	ld b, 0
 	ld hl, wChannelSoundIDs
@@ -10,7 +10,7 @@ Audio1_UpdateMusic::
 	and a
 	jr z, .nextChannel
 	ld a, c
-	cp Ch5
+	cp CHAN5
 	jr nc, .applyAffects ; if sfx channel
 	ld a, [wMuteAudioAndPauseMusic]
 	and a
@@ -30,7 +30,7 @@ Audio1_UpdateMusic::
 .nextChannel
 	ld a, c
 	inc c ; inc channel number
-	cp Ch8
+	cp CHAN8
 	jr nz, .loop
 	ret
 
@@ -46,9 +46,9 @@ Audio1_ApplyMusicAffects:
 	dec a ; otherwise, decrease the delay timer
 	ld [hl], a
 	ld a, c
-	cp Ch5
+	cp CHAN5
 	jr nc, .startChecks ; if a sfx channel
-	ld hl, wChannelSoundIDs + Ch5
+	ld hl, wChannelSoundIDs + CHAN5
 	add hl, bc
 	ld a, [hl]
 	and a
@@ -171,7 +171,7 @@ Audio1_sound_ret:
 	bit BIT_SOUND_CALL, [hl]
 	jr nz, .returnFromCall
 	ld a, c
-	cp Ch4
+	cp CHAN4
 	jr nc, .noiseOrSfxChannel
 	jr .disableChannelOutput
 .noiseOrSfxChannel
@@ -179,7 +179,7 @@ Audio1_sound_ret:
 	ld hl, wChannelFlags2
 	add hl, bc
 	res BIT_EXECUTE_MUSIC, [hl]
-	cp Ch7
+	cp CHAN7
 	jr nz, .skipSfxChannel3
 ; restart hardware channel 3 (wave channel) output
 	ld a, $0
@@ -223,19 +223,19 @@ Audio1_sound_ret:
 	and [hl]
 	ldh [rNR51], a
 .afterDisable
-	ld a, [wChannelSoundIDs + Ch5]
+	ld a, [wChannelSoundIDs + CHAN5]
 	cp CRY_SFX_START
 	jr nc, .maybeCry
 	jr .skipCry
 .maybeCry
-	ld a, [wChannelSoundIDs + Ch5]
+	ld a, [wChannelSoundIDs + CHAN5]
 	cp CRY_SFX_END
 	jr z, .skipCry
 	jr c, .cry
 	jr .skipCry
 .cry
 	ld a, c
-	cp Ch5
+	cp CHAN5
 	jr z, .skipRewind
 	call Audio1_GoBackOneCommandIfCry
 	ret c
@@ -336,14 +336,14 @@ Audio1_note_type:
 	add hl, bc
 	ld [hl], a ; store low nibble as speed
 	ld a, c
-	cp Ch4
+	cp CHAN4
 	jr z, .noiseChannel ; noise channel has 0 params
 	call Audio1_GetNextMusicByte
 	ld d, a
 	ld a, c
-	cp Ch3
+	cp CHAN3
 	jr z, .musicChannel3
-	cp Ch7
+	cp CHAN7
 	jr nz, .skipChannel3
 	ld hl, wSfxWaveInstrument
 	jr .channel3
@@ -477,7 +477,7 @@ Audio1_tempo:
 	cp tempo_cmd
 	jr nz, Audio1_stereo_panning
 	ld a, c
-	cp Ch5
+	cp CHAN5
 	jr nc, .sfxChannel
 	call Audio1_GetNextMusicByte
 	ld [wMusicTempo], a ; store first param
@@ -520,10 +520,10 @@ Audio1_unknownmusic0xef:
 	ld a, [wDisableChannelOutputWhenSfxEnds]
 	and a
 	jr nz, .skip
-	ld a, [wChannelSoundIDs + Ch8]
+	ld a, [wChannelSoundIDs + CHAN8]
 	ld [wDisableChannelOutputWhenSfxEnds], a
 	xor a
-	ld [wChannelSoundIDs + Ch8], a
+	ld [wChannelSoundIDs + CHAN8], a
 .skip
 	jp Audio1_sound_ret
 
@@ -577,7 +577,7 @@ Audio1_sfx_note:
 	cp sfx_note_cmd
 	jr nz, Audio1_pitch_sweep
 	ld a, c
-	cp Ch4 ; is this a noise or sfx channel?
+	cp CHAN4 ; is this a noise or sfx channel?
 	jr c, Audio1_pitch_sweep ; no
 	ld b, 0
 	ld hl, wChannelFlags2
@@ -607,7 +607,7 @@ Audio1_sfx_note:
 	call Audio1_GetNextMusicByte
 	ld e, a
 	ld a, c
-	cp Ch8
+	cp CHAN8
 	ld a, 0
 	jr z, .skip
 ; Channels 1 through 3 have 2 registers that control frequency, but the noise
@@ -627,7 +627,7 @@ Audio1_sfx_note:
 
 Audio1_pitch_sweep:
 	ld a, c
-	cp Ch5
+	cp CHAN5
 	jr c, Audio1_note ; if not a sfx
 	ld a, d
 	cp pitch_sweep_cmd
@@ -643,7 +643,7 @@ Audio1_pitch_sweep:
 
 Audio1_note:
 	ld a, c
-	cp Ch4
+	cp CHAN4
 	jr nz, Audio1_note_length ; if not noise channel
 	ld a, d
 	and $f0
@@ -701,7 +701,7 @@ Audio1_note_length:
 	ld l, b
 	call Audio1_MultiplyAdd
 	ld a, c
-	cp Ch5
+	cp CHAN5
 	jr nc, .sfxChannel
 	ld a, [wMusicTempo]
 	ld d, a
@@ -711,7 +711,7 @@ Audio1_note_length:
 .sfxChannel
 	ld d, $1
 	ld e, $0
-	cp Ch8
+	cp CHAN8
 	jr z, .skip ; if noise channel
 	call Audio1_SetSfxTempo
 	ld a, [wSfxTempo]
@@ -751,10 +751,10 @@ Audio1_note_pitch:
 	cp rest_cmd
 	jr nz, .notRest
 	ld a, c
-	cp Ch5
+	cp CHAN5
 	jr nc, .next
 ; If this isn't an SFX channel, try the corresponding SFX channel.
-	ld hl, wChannelSoundIDs + Ch5
+	ld hl, wChannelSoundIDs + CHAN5
 	add hl, bc
 	ld a, [hl]
 	and a
@@ -762,9 +762,9 @@ Audio1_note_pitch:
 	; fall through
 .next
 	ld a, c
-	cp Ch3
+	cp CHAN3
 	jr z, .channel3
-	cp Ch7
+	cp CHAN7
 	jr nz, .notChannel3
 .channel3
 	ld b, 0
@@ -800,10 +800,10 @@ Audio1_note_pitch:
 .skipPitchSlide
 	push de
 	ld a, c
-	cp Ch5
+	cp CHAN5
 	jr nc, .sfxChannel ; if sfx channel
 ; If this isn't an SFX channel, try the corresponding SFX channel.
-	ld hl, wChannelSoundIDs + Ch5
+	ld hl, wChannelSoundIDs + CHAN5
 	ld d, 0
 	ld e, a
 	add hl, de
@@ -848,12 +848,12 @@ Audio1_EnableChannelOutput:
 	or [hl] ; set this channel's bits
 	ld d, a
 	ld a, c
-	cp Ch8
+	cp CHAN8
 	jr z, .noiseChannelOrNoSfx
-	cp Ch5
+	cp CHAN5
 	jr nc, .skip ; if sfx channel
 ; If this isn't an SFX channel, try the corresponding SFX channel.
-	ld hl, wChannelSoundIDs + Ch5
+	ld hl, wChannelSoundIDs + CHAN5
 	add hl, bc
 	ld a, [hl]
 	and a
@@ -883,9 +883,9 @@ Audio1_ApplyDutyCycleAndSoundLength:
 	add hl, bc
 	ld d, [hl]
 	ld a, c
-	cp Ch3
+	cp CHAN3
 	jr z, .skipDuty ; if music channel 3
-	cp Ch7
+	cp CHAN7
 	jr z, .skipDuty ; if sfx channel 3
 ; include duty cycle (except on channel 3 which doesn't have it)
 	ld a, d
@@ -904,15 +904,15 @@ Audio1_ApplyDutyCycleAndSoundLength:
 
 Audio1_ApplyWavePatternAndFrequency:
 	ld a, c
-	cp Ch3
+	cp CHAN3
 	jr z, .channel3
-	cp Ch7
+	cp CHAN7
 	jr nz, .notChannel3
 	; fall through
 .channel3
 	push de
 	ld de, wMusicWaveInstrument
-	cp Ch3
+	cp CHAN3
 	jr z, .next
 	ld de, wSfxWaveInstrument
 .next
@@ -1016,7 +1016,7 @@ Audio1_GoBackOneCommandIfCry:
 
 Audio1_IsCry:
 ; Returns whether the currently playing audio is a cry in carry.
-	ld a, [wChannelSoundIDs + Ch5]
+	ld a, [wChannelSoundIDs + CHAN5]
 	cp CRY_SFX_START
 	jr nc, .next
 	jr .no
@@ -1453,7 +1453,7 @@ Audio1_PlaySound::
 	and a
 	jr z, .playChannel
 	ld a, e
-	cp Ch8
+	cp CHAN8
 	jr nz, .notNoiseChannel
 	ld a, [wSoundID]
 	cp NOISE_INSTRUMENTS_END
@@ -1552,7 +1552,7 @@ Audio1_PlaySound::
 	add hl, de
 	ld [hl], a
 	ld a, e
-	cp Ch5
+	cp CHAN5
 	jr nz, .skipSweepDisable
 	ld a, $8
 	ldh [rNR10], a ; sweep off
@@ -1654,7 +1654,7 @@ Audio1_PlaySound::
 	ld a, [wSoundID]
 	ld [hl], a
 	pop af
-	cp Ch4
+	cp CHAN4
 	jr c, .skipSettingFlag
 	ld hl, wChannelFlags1
 	add hl, bc
@@ -1686,12 +1686,12 @@ Audio1_PlaySound::
 	jr c, .cry
 	jr .done
 .cry
-	ld hl, wChannelSoundIDs + Ch5
+	ld hl, wChannelSoundIDs + CHAN5
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
-	ld hl, wChannelCommandPointers + Ch7 * 2 ; sfx wave channel pointer
+	ld hl, wChannelCommandPointers + CHAN7 * 2 ; sfx wave channel pointer
 	ld de, Audio1_CryRet
 	ld [hl], e
 	inc hl

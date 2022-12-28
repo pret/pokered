@@ -1,6 +1,6 @@
 PokemonTower5F_Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, PokemonTower5TrainerHeader0
+	ld hl, PokemonTower5TrainerHeaders
 	ld de, PokemonTower5F_ScriptPointers
 	ld a, [wPokemonTower5FCurScript]
 	call ExecuteCurMapScriptInTable
@@ -57,6 +57,8 @@ PokemonTower5F_TextPointers:
 	dw PickUpItemText
 	dw PokemonTower5Text7
 
+PokemonTower5TrainerHeaders:
+	def_trainers 2
 PokemonTower5TrainerHeader0:
 	trainer EVENT_BEAT_POKEMONTOWER_5_TRAINER_0, 2, PokemonTower5BattleText1, PokemonTower5EndBattleText1, PokemonTower5AfterBattleText1
 PokemonTower5TrainerHeader1:

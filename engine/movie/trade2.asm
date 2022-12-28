@@ -10,7 +10,7 @@ Trade_PrintPlayerMonInfoText:
 	lb bc, LEADING_ZEROES | 1, 3
 	call PrintNumber
 	hlcoord 5, 2
-	ld de, wcf4b
+	ld de, wStringBuffer
 	call PlaceString
 	hlcoord 8, 4
 	ld de, wTradedPlayerMonOT

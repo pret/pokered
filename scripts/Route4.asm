@@ -1,6 +1,6 @@
 Route4_Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, Route4TrainerHeader0
+	ld hl, Route4TrainerHeaders
 	ld de, Route4_ScriptPointers
 	ld a, [wRoute4CurScript]
 	call ExecuteCurMapScriptInTable
@@ -20,6 +20,8 @@ Route4_TextPointers:
 	dw Route4Text5
 	dw Route4Text6
 
+Route4TrainerHeaders:
+	def_trainers 2
 Route4TrainerHeader0:
 	trainer EVENT_BEAT_ROUTE_4_TRAINER_0, 3, Route4BattleText1, Route4EndBattleText1, Route4AfterBattleText1
 	db -1 ; end

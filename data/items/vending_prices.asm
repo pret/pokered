@@ -1,6 +1,6 @@
-vend_item: MACRO
+MACRO vend_item
 	db \1
-	money \2
+	bcd3 \2
 ENDM
 
 VendingPrices:

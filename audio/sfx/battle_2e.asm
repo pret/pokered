@@ -7,7 +7,6 @@ SFX_Battle_2E_Ch5:
 	sound_loop 8, SFX_Battle_2E_Ch5
 	sound_ret
 
-
 SFX_Battle_2E_Ch6:
 	duty_cycle_pattern 2, 3, 0, 3
 	square_note 2, 14, 1, 770
@@ -16,7 +15,6 @@ SFX_Battle_2E_Ch6:
 	square_note 5, 14, 1, 1794
 	sound_loop 8, SFX_Battle_2E_Ch6
 	sound_ret
-
 
 SFX_Battle_2E_Ch8:
 	noise_note 2, 13, 3, 16

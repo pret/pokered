@@ -147,7 +147,7 @@ DrawFrameBlock:
 	jr z, .resetFrameBlockDestAddr
 	call AnimationCleanOAM
 .resetFrameBlockDestAddr
-	ld hl, wOAMBuffer ; OAM buffer
+	ld hl, wShadowOAM
 	ld a, l
 	ld [wFBDestAddr + 1], a
 	ld a, h
@@ -176,8 +176,12 @@ PlayAnimation:
 	ld h, [hl]
 	ld l, a
 .animationLoop
+	vc_hook Stop_reducing_move_anim_flashing_Thunderbolt
 	ld a, [hli]
+	vc_hook_red Stop_reducing_move_anim_flashing_Reflect
+	vc_hook_blue Stop_reducing_move_anim_flashing_Self_Destruct
 	cp -1
+	vc_hook_blue Stop_reducing_move_anim_flashing_Reflect
 	jr z, .AnimationOver
 	cp FIRST_SE_ID ; is this subanimation or a special effect?
 	jr c, .playSubanimation
@@ -245,38 +249,58 @@ PlayAnimation:
 	push af
 	ld a, [wAnimPalette]
 	ldh [rOBP0], a
-	call LoadAnimationTileset
+	call LoadMoveAnimationTiles
+	vc_hook Reduce_move_anim_flashing_Mega_Punch_Self_Destruct_Explosion
 	call LoadSubanimation
 	call PlaySubanimation
+	vc_hook_red Stop_reducing_move_anim_flashing_Mega_Punch
+	vc_hook_blue Stop_reducing_move_anim_flashing_Mega_Punch_Explosion
 	pop af
+	vc_hook_red Stop_reducing_move_anim_flashing_Blizzard
 	ldh [rOBP0], a
 .nextAnimationCommand
+	vc_hook_red Stop_reducing_move_anim_flashing_Hyper_Beam
+	vc_hook_blue Stop_reducing_move_anim_flashing_Bubblebeam_Hyper_Beam_Blizzard
 	pop hl
+	vc_hook Stop_reducing_move_anim_flashing_Guillotine
 	jr .animationLoop
 .AnimationOver
 	ret
 
 LoadSubanimation:
+	vc_hook Reduce_move_anim_flashing_Guillotine
 	ld a, [wSubAnimAddrPtr + 1]
+	vc_hook Reduce_move_anim_flashing_Mega_Kick
 	ld h, a
+	vc_hook_red Reduce_move_anim_flashing_Blizzard
 	ld a, [wSubAnimAddrPtr]
+	vc_hook_red Reduce_move_anim_flashing_Self_Destruct
 	ld l, a
 	ld a, [hli]
 	ld e, a
+	vc_hook Reduce_move_anim_flashing_Explosion
 	ld a, [hl]
+	vc_hook Reduce_move_anim_flashing_Thunderbolt
 	ld d, a ; de = address of subanimation
 	ld a, [de]
+	vc_hook_blue Reduce_move_anim_flashing_Rock_Slide
 	ld b, a
+	vc_hook Reduce_move_anim_flashing_Spore
 	and %00011111
+	vc_hook Reduce_move_anim_flashing_Bubblebeam
 	ld [wSubAnimCounter], a ; number of frame blocks
+	vc_hook_red Reduce_move_anim_flashing_Rock_Slide
+	vc_hook_blue Reduce_move_anim_flashing_Self_Destruct
 	ld a, b
 	and %11100000
 	cp SUBANIMTYPE_ENEMY << 5
+	vc_hook_blue Reduce_move_anim_flashing_Blizzard
 	jr nz, .isNotType5
 .isType5
 	call GetSubanimationTransform2
 	jr .saveTransformation
 .isNotType5
+	vc_hook Reduce_move_anim_flashing_Hyper_Beam
 	call GetSubanimationTransform1
 .saveTransformation
 ; place the upper 3 bits of a into bits 0-2 of a before storing
@@ -307,6 +331,7 @@ LoadSubanimation:
 ; sets the transform to SUBANIMTYPE_NORMAL if it's the player's turn
 ; sets the transform to the subanimation type if it's the enemy's turn
 GetSubanimationTransform1:
+	vc_hook Reduce_move_anim_flashing_Reflect
 	ld b, a
 	ldh a, [hWhoseTurn]
 	and a
@@ -327,11 +352,11 @@ GetSubanimationTransform2:
 	ret
 
 ; loads tile patterns for battle animations
-LoadAnimationTileset:
+LoadMoveAnimationTiles:
 	ld a, [wWhichBattleAnimTileset]
 	add a
 	add a
-	ld hl, AnimationTilesetPointers
+	ld hl, MoveAnimationTilesPointers
 	ld e, a
 	ld d, 0
 	add hl, de
@@ -342,28 +367,29 @@ LoadAnimationTileset:
 	ld a, [hl]
 	ld d, a ; de = address of tileset
 	ld hl, vSprites tile $31
-	ld b, BANK(AnimationTileset1) ; ROM bank
+	ld b, BANK(MoveAnimationTiles0) ; ROM bank
 	ld a, [wTempTilesetNumTiles]
 	ld c, a ; number of tiles
 	jp CopyVideoData ; load tileset
 
-anim_tileset: MACRO
+MACRO anim_tileset
 	db \1
 	dw \2
 	db -1 ; padding
 ENDM
 
-AnimationTilesetPointers:
+MoveAnimationTilesPointers:
 	; number of tiles, gfx pointer
-	anim_tileset 79, AnimationTileset1
-	anim_tileset 79, AnimationTileset2
-	anim_tileset 64, AnimationTileset1
+	anim_tileset 79, MoveAnimationTiles0
+	anim_tileset 79, MoveAnimationTiles1
+	anim_tileset 64, MoveAnimationTiles2
 
-AnimationTileset1:
-	INCBIN "gfx/battle/attack_anim_1.2bpp"
+MoveAnimationTiles0:
+MoveAnimationTiles2:
+	INCBIN "gfx/battle/move_anim_0.2bpp"
 
-AnimationTileset2:
-	INCBIN "gfx/battle/attack_anim_2.2bpp"
+MoveAnimationTiles1:
+	INCBIN "gfx/battle/move_anim_1.2bpp"
 
 SlotMachineTiles2:
 IF DEF(_RED)
@@ -395,15 +421,19 @@ MoveAnimation:
 .moveAnimation
 	; check if battle animations are disabled in the options
 	ld a, [wOptions]
-	bit 7, a
+	bit BIT_BATTLE_ANIMATION, a
 	jr nz, .animationsDisabled
 	call ShareMoveAnimations
 	call PlayAnimation
+	vc_hook_red Stop_reducing_move_anim_flashing_Bubblebeam_Mega_Kick
+	vc_hook_blue Stop_reducing_move_anim_flashing_Spore
 	jr .next4
 .animationsDisabled
 	ld c, 30
 	call DelayFrames
 .next4
+	vc_hook_red Stop_reducing_move_anim_flashing
+	vc_hook_blue Stop_reducing_move_anim_flashing_Rock_Slide_Dream_Eater
 	call PlayApplyingAttackAnimation ; shake the screen or flash the pic in and out (to show damage)
 .animationFinished
 	call WaitForSoundToFinish
@@ -541,6 +571,7 @@ SetAnimationPalette:
 .notSGB
 	ld a, $e4
 	ld [wAnimPalette], a
+	vc_hook Reduce_move_anim_flashing_Dream_Eater
 	ldh [rOBP0], a
 	ld a, $6c
 	ldh [rOBP1], a
@@ -553,7 +584,7 @@ PlaySubanimation:
 	call GetMoveSound
 	call nc, PlayBattleSound
 .skipPlayingSound
-	ld hl, wOAMBuffer ; base address of OAM buffer
+	ld hl, wShadowOAM
 	ld a, l
 	ld [wFBDestAddr + 1], a
 	ld a, h
@@ -653,7 +684,7 @@ INCLUDE "data/battle_anims/special_effects.asm"
 
 DoBallTossSpecialEffects:
 	ld a, [wcf91]
-	cp 3 ; is it a Master Ball or Ultra Ball?
+	cp ULTRA_BALL + 1 ; is it a Master Ball or Ultra Ball?
 	jr nc, .skipFlashingEffect
 .flashingEffect ; do a flashing effect if it's Master Ball or Ultra Ball
 	ldh a, [rOBP0]
@@ -668,7 +699,7 @@ DoBallTossSpecialEffects:
 	call PlaySound
 .skipPlayingSound
 	ld a, [wIsInBattle]
-	cp 02 ; is it a trainer battle?
+	cp 2 ; is it a trainer battle?
 	jr z, .isTrainerBattle
 	ld a, [wd11e]
 	cp $10 ; is the enemy pokemon the Ghost Marowak?
@@ -825,7 +856,7 @@ TradeShakePokeball:
 ; if it's the end of the animation, make the ball jump up
 	ld de, BallMoveDistances1
 .loop
-	ld hl, wOAMBuffer ; OAM buffer
+	ld hl, wShadowOAM
 	ld bc, 4
 .innerLoop
 	ld a, [de]
@@ -855,7 +886,7 @@ BallMoveDistances1:
 TradeJumpPokeball:
 	ld de, BallMoveDistances2
 .loop
-	ld hl, wOAMBuffer ; OAM buffer
+	ld hl, wShadowOAM
 	ld bc, 4
 .innerLoop
 	ld a, [de]
@@ -895,8 +926,8 @@ BallMoveDistances2:
 ; this function copies the current musical note graphic
 ; so that there are two musical notes flying towards the defending pokemon
 DoGrowlSpecialEffects:
-	ld hl, wOAMBuffer ; OAM buffer
-	ld de, wOAMBuffer + $10
+	ld hl, wShadowOAM
+	ld de, wShadowOAMSprite04
 	ld bc, $10
 	call CopyData ; copy the musical note graphic
 	ld a, [wSubAnimCounter]
@@ -956,6 +987,7 @@ AnimationFlashScreenLong:
 	ld [wFlashScreenLongCounter], a
 	pop hl
 	jr nz, .loop
+	vc_hook_red Stop_reducing_move_anim_flashing_Psychic
 	ret
 
 ; BG palettes
@@ -1083,7 +1115,7 @@ AnimationWaterDropletsEverywhere:
 ; in Surf/Mist/Toxic.
 	xor a
 	ld [wWhichBattleAnimTileset], a
-	call LoadAnimationTileset
+	call LoadMoveAnimationTiles
 	ld d, 32
 	ld a, -16
 	ld [wBaseCoordX], a
@@ -1105,7 +1137,7 @@ AnimationWaterDropletsEverywhere:
 	ret
 
 _AnimationWaterDroplets:
-	ld hl, wOAMBuffer
+	ld hl, wShadowOAM
 .loop
 	ld a, [wBaseCoordY]
 	ld [hli], a ; Y
@@ -1233,7 +1265,7 @@ ShakeEnemyHUD_WritePlayerMonPicOAM:
 	ld [wBaseCoordX], a
 	ld a, $30
 	ld [wBaseCoordY], a
-	ld hl, wOAMBuffer
+	ld hl, wShadowOAM
 	ld d, 0
 	ld c, 7
 .loop
@@ -1467,7 +1499,7 @@ AnimationSpiralBallsInward:
 .loop
 	push hl
 	ld c, 3
-	ld de, wOAMBuffer
+	ld de, wShadowOAM
 .innerLoop
 	ld a, [hl]
 	cp $ff
@@ -1603,10 +1635,10 @@ _AnimationShootBallsUpward:
 	push bc
 	xor a
 	ld [wWhichBattleAnimTileset], a
-	call LoadAnimationTileset
+	call LoadMoveAnimationTiles
 	pop bc
 	ld d, $7a ; ball tile
-	ld hl, wOAMBuffer
+	ld hl, wShadowOAM
 	push bc
 	ld a, [wBaseCoordY]
 	ld e, a
@@ -1620,7 +1652,7 @@ _AnimationShootBallsUpward:
 	ld [wNumShootingBalls], a
 .loop
 	push bc
-	ld hl, wOAMBuffer
+	ld hl, wShadowOAM
 .innerLoop
 	ld a, [wBaseCoordY]
 	add 8
@@ -1694,7 +1726,7 @@ AnimationMinimizeMon:
 	ld bc, 7 * 7 * $10
 	call FillMemory
 	pop hl
-	ld de, $194
+	ld de, 7 * 3 * $10 + 4 * $10 + 4
 	add hl, de
 	ld de, MinimizedMonSprite
 	ld c, MinimizedMonSpriteEnd - MinimizedMonSprite
@@ -1710,7 +1742,15 @@ AnimationMinimizeMon:
 	jp AnimationShowMonPic
 
 MinimizedMonSprite:
-	INCBIN "gfx/battle/minimize.1bpp"
+; 8x5 partial tile graphic
+pusho
+opt b.X ; . = 0, X = 1
+	db %...XX...
+	db %..XXXX..
+	db %.XXXXXX.
+	db %..XXXX..
+	db %..X..X..
+popo
 MinimizedMonSpriteEnd:
 
 AnimationSlideMonDownAndHide:
@@ -2035,13 +2075,13 @@ InitMultipleObjectsOAM:
 	push bc
 	push de
 	ld [wWhichBattleAnimTileset], a
-	call LoadAnimationTileset
+	call LoadMoveAnimationTiles
 	pop de
 	pop bc
 	xor a
 	ld e, a
 	ld [wBaseCoordX], a
-	ld hl, wOAMBuffer
+	ld hl, wShadowOAM
 .loop
 	call BattleAnimWriteOAMEntry
 	dec c
@@ -2316,7 +2356,7 @@ AnimationFallingObjects:
 	call InitMultipleObjectsOAM
 	call FallingObjects_InitXCoords
 	call FallingObjects_InitMovementData
-	ld hl, wOAMBuffer
+	ld hl, wShadowOAM
 	ld [hl], 0
 .loop
 	ld hl, wFallingObjectsMovementData
@@ -2343,7 +2383,7 @@ AnimationFallingObjects:
 	dec c
 	jr nz, .innerLoop
 	call Delay3
-	ld hl, wOAMBuffer
+	ld hl, wShadowOAM
 	ld a, [hl] ; Y
 	cp 104 ; has the top falling object reached 104 yet?
 	jr nz, .loop ; keep moving the falling objects down until it does
@@ -2352,7 +2392,7 @@ AnimationFallingObjects:
 FallingObjects_UpdateOAMEntry:
 ; Increases Y by 2 pixels and adjusts X and X flip based on the falling object's
 ; movement byte.
-	ld hl, wOAMBuffer
+	ld hl, wShadowOAM
 	add hl, de
 	ld a, [hl]
 	inc a
@@ -2413,7 +2453,7 @@ FallingObjects_UpdateMovementByte:
 	ret
 
 FallingObjects_InitXCoords:
-	ld hl, wOAMBuffer + $01
+	ld hl, wShadowOAMSprite00XCoord
 	ld de, FallingObjects_InitialXCoords
 	ld a, [wNumFallingObjects]
 	ld c, a

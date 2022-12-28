@@ -1,23 +1,23 @@
 OaksLab_Object:
 	db $3 ; border block
 
-	def_warps
-	warp  4, 11, 2, LAST_MAP
-	warp  5, 11, 2, LAST_MAP
+	def_warp_events
+	warp_event  4, 11, LAST_MAP, 3
+	warp_event  5, 11, LAST_MAP, 3
 
-	def_signs
+	def_bg_events
 
-	def_objects
-	object SPRITE_BLUE, 4, 3, STAY, NONE, 1, OPP_RIVAL1, 1
-	object SPRITE_POKE_BALL, 6, 3, STAY, NONE, 2 ; person
-	object SPRITE_POKE_BALL, 7, 3, STAY, NONE, 3 ; person
-	object SPRITE_POKE_BALL, 8, 3, STAY, NONE, 4 ; person
-	object SPRITE_OAK, 5, 2, STAY, DOWN, 5 ; person
-	object SPRITE_POKEDEX, 2, 1, STAY, NONE, 6 ; person
-	object SPRITE_POKEDEX, 3, 1, STAY, NONE, 7 ; person
-	object SPRITE_OAK, 5, 10, STAY, UP, 8 ; person
-	object SPRITE_GIRL, 1, 9, WALK, UP_DOWN, 9 ; person
-	object SPRITE_SCIENTIST, 2, 10, STAY, NONE, 10 ; person
-	object SPRITE_SCIENTIST, 8, 10, STAY, NONE, 11 ; person
+	def_object_events
+	object_event  4,  3, SPRITE_BLUE, STAY, NONE, 1, OPP_RIVAL1, 1
+	object_event  6,  3, SPRITE_POKE_BALL, STAY, NONE, 2 ; person
+	object_event  7,  3, SPRITE_POKE_BALL, STAY, NONE, 3 ; person
+	object_event  8,  3, SPRITE_POKE_BALL, STAY, NONE, 4 ; person
+	object_event  5,  2, SPRITE_OAK, STAY, DOWN, 5 ; person
+	object_event  2,  1, SPRITE_POKEDEX, STAY, NONE, 6 ; person
+	object_event  3,  1, SPRITE_POKEDEX, STAY, NONE, 7 ; person
+	object_event  5, 10, SPRITE_OAK, STAY, UP, 8 ; person
+	object_event  1,  9, SPRITE_GIRL, WALK, UP_DOWN, 9 ; person
+	object_event  2, 10, SPRITE_SCIENTIST, STAY, NONE, 10 ; person
+	object_event  8, 10, SPRITE_SCIENTIST, STAY, NONE, 11 ; person
 
 	def_warps_to OAKS_LAB

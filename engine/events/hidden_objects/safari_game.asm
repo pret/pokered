@@ -39,7 +39,7 @@ SafariZoneGameOver:
 
 	call WaitForSoundToFinish
 ;.waitForMusicToPlay
-;	ld a, [wChannelSoundIDs + Ch5]
+;	ld a, [wChannelSoundIDs + CHAN5]
 ;	cp SFX_SAFARI_ZONE_PA
 ;	jr nz, .waitForMusicToPlay
 
