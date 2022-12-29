@@ -1,4 +1,5 @@
 TrainerDataPointers:
+	table_width 2, TrainerDataPointers
 	dw YoungsterData
 	dw BugCatcherData
 	dw LassData
@@ -46,6 +47,7 @@ TrainerDataPointers:
 	dw ChannelerData
 	dw AgathaData
 	dw LanceData
+	assert_table_length NUM_TRAINERS
 
 ; if first byte != $FF, then
 	; first byte is level (of all pokemon on this team)
