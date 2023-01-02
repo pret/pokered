@@ -390,61 +390,16 @@ Music_RBYTitleScreen_branch_7e664::
 	note A_, 3
 	sound_call Music_RBYTitleScreen_branch_7e6e5
 	octave 5
-	;pitch_slide 1, 4, D_
-	;note D_, 4
-	;rest 4
-	note_type 3, 1, 0 ; XXX
-	note D_, 1 ; XXX
-	note C#, 1 ; XXX
-	note C_, 1 ; XXX
-	octave 4 ; XXX
-	note B_, 1 ; XXX
-	note A#, 1 ; XXX
-	note A_, 1 ; XXX
-	note G#, 1 ; XXX
-	note G_, 1 ; XXX
-	note F#, 1 ; XXX
-	note F_, 1 ; XXX
-	note E_, 1 ; XXX
-	note D#, 1 ; XXX
-	note D_, 4 ; XXX
-	rest 16 ; XXX
+	pitch_slide 1, 4, D_
+	note D_, 4
+	rest 4
 	octave 6
-	;pitch_slide 1, 5, D_
-	;note D_, 4
-	note D_, 1 ; XXX
-	note C#, 1 ; XXX
-	note C_, 1 ; XXX
-	octave 5 ; XXX
-	note B_, 1 ; XXX
-	note A#, 1 ; XXX
-	note A_, 1 ; XXX
-	note G#, 1 ; XXX
-	note G_, 1 ; XXX
-	note F#, 1 ; XXX
-	note F_, 1 ; XXX
-	note E_, 1 ; XXX
-	note D#, 1 ; XXX
-	note D_, 4 ; XXX
+	pitch_slide 1, 5, D_
+	note D_, 4
 	octave 5
-	;pitch_slide 1, 4, D_
-	;note D_, 4
-	;rest 2
-	note D_, 1 ; XXX
-	note C#, 1 ; XXX
-	note C_, 1 ; XXX
-	octave 4 ; XXX
-	note B_, 1 ; XXX
-	note A#, 1 ; XXX
-	note A_, 1 ; XXX
-	note G#, 1 ; XXX
-	note G_, 1 ; XXX
-	note F#, 1 ; XXX
-	note F_, 1 ; XXX
-	note E_, 1 ; XXX
-	note D#, 1 ; XXX
-	note D_, 4 ; XXX
-	rest 8 ; XXX
+	pitch_slide 1, 4, D_
+	note D_, 4
+	rest 2
 	note_type 8, 1, 0
 	octave 4
 	note C_, 4
@@ -452,45 +407,13 @@ Music_RBYTitleScreen_branch_7e664::
 	note C#, 4
 	sound_call Music_RBYTitleScreen_branch_7e6e5
 	octave 6
-	;pitch_slide 1, 5, D_
-	;note D_, 4
-	;rest 4
-	note_type 3, 1, 0 ; XXX
-	note D_, 1 ; XXX
-	note C#, 1 ; XXX
-	note C_, 1 ; XXX
-	octave 5 ; XXX
-	note B_, 1 ; XXX
-	note A#, 1 ; XXX
-	note A_, 1 ; XXX
-	note G#, 1 ; XXX
-	note G_, 1 ; XXX
-	note F#, 1 ; XXX
-	note F_, 1 ; XXX
-	note E_, 1 ; XXX
-	note D#, 1 ; XXX
-	note D_, 4 ; XXX
-	rest 16 ; XXX
+	pitch_slide 1, 5, D_
+	note D_, 4
+	rest 4
 	octave 5
-	;pitch_slide 1, 4, D_
-	;note D_, 4
-	;rest 6
-	note D_, 1 ; XXX
-	note C#, 1 ; XXX
-	note C_, 1 ; XXX
-	octave 4 ; XXX
-	note B_, 1 ; XXX
-	note A#, 1 ; XXX
-	note A_, 1 ; XXX
-	note G#, 1 ; XXX
-	note G_, 1 ; XXX
-	note F#, 1 ; XXX
-	note F_, 1 ; XXX
-	note E_, 1 ; XXX
-	note D#, 1 ; XXX
-	note D_, 4 ; XXX
-	rest 12 ; XXX
-	rest 12 ; XXX
+	pitch_slide 1, 4, D_
+	note D_, 4
+	rest 6
 	note_type 8, 1, 0
 	octave 4
 	note C_, 4
