@@ -1735,7 +1735,8 @@ wEvolutionOccurred:: db
 
 wVBlankSavedROMBank:: db
 
-	ds 1 ; unused lone byte
+; shinpokerednote: ADDED: new byte for keeping track of what bank we're in during delayframe, helps fix wobbly sprites
+wDelayFrameBank:: db
 
 wIsKeyItem:: db
 

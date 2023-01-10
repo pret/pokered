@@ -8,6 +8,15 @@ VBlank::
 	ldh a, [hLoadedROMBank]
 	ld [wVBlankSavedROMBank], a
 
+;;;;;;;;;; shinpokerednote: ADDED: set the correct backed-up bank if vblank happened during a DelayFrame function
+	ld a, [wDelayFrameBank]
+	and a
+	jr z, .no_delay_bank
+	ldh [hLoadedROMBank], a
+	ld [MBC1RomBank], a
+.no_delay_bank
+;;;;;;;;;;
+
 	ldh a, [hSCX]
 	ldh [rSCX], a
 	ldh a, [hSCY]
@@ -85,6 +94,26 @@ DEF NOT_VBLANKED EQU 1
 
 	ld a, NOT_VBLANKED
 	ldh [hVBlankOccurred], a
+
+;;;;;;;;;; shinpokerednote FIXED: If you want to run functions in DelayFrame, then there is a need to back up the loaded bank.
+; This is because it's originally assumed that you don't switch banks in DelayFrame.
+	ldh a, [hLoadedROMBank]
+	ld [wDelayFrameBank], a
+	
+	call home_PrepareOAMData
+	
+	xor a
+	ld [wDelayFrameBank], a
+.halt
+	halt
+	nop	;joenote - due to a processor bug, nop after halt is best practice
+	ldh a, [hVBlankOccurred]
+	and a
+	jr nz, .halt
+	ret
+;;;;;;;;;;
+
+home_PrepareOAMData::
 ;;;;;;;;;; shinpokerednote: FIXED: moved where we do PrepareOAMData to help with avoiding sprite wobble when scrolling screen
 ;First preserve the registers.
     push bc
@@ -114,10 +143,5 @@ DEF NOT_VBLANKED EQU 1
 ; --> But trying to do DMA transfer here is worse because audio noise gets injected when drawing the screen.
 ; --> A real gameboy's TFT screen might be able to hide this.
 ;;;;;;;;;;
-.halt
-	halt
-	ldh a, [hVBlankOccurred]
-	and a
-	jr nz, .halt
 	ret
 	
