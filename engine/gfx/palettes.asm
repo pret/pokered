@@ -1031,6 +1031,11 @@ TransferPalColorLCDDisabled:
 	ret
 	
 _UpdateGBCPal_BGP:: ;shinpokerednote: gbcnote: code from pokemon yellow
+	;prevent the BGmap from updating during vblank 
+	;because this is going to take a frame or two in order to fully run
+	;otherwise a partial update (like during a screen whiteout) can be distracting
+	ld hl, hFlagsFFFA
+	set 1, [hl]
 index = 0
 	REPT NUM_ACTIVE_PALS
 		ld a, [wGBCBasePalPointers + index * 2]
@@ -1044,6 +1049,8 @@ index = 0
 index = index + 1
 	ENDR
 	call TransferBGPPals	;Transfer wBGPPalsBuffer contents to rBGPD
+	ld hl, hFlagsFFFA	;re-allow BGmap updates
+	res 1, [hl]
 	ret
 
 _UpdateGBCPal_OBP:: ;shinpokerednote: gbcnote: code from pokemon yellow

@@ -28,13 +28,16 @@ VBlank::
 	ldh a, [hWY]
 	ldh [rWY], a
 .ok
-
+	ld a, [hFlagsFFFA]	;see if BGMap skip has been enabled (such as when updating color )
+	bit 1, a
+	jr nz, .skipBGMap
 	call AutoBgMapTransfer
 	call VBlankCopyBgMap
 	call RedrawRowOrColumn
 	call VBlankCopy
 	call VBlankCopyDouble
 	call UpdateMovingBgTiles
+.skipBGMap
 	ldh a, [hFlagsFFFA]	; shinpokerednote: FIXED: see if OAM skip has been enabled (such as while overworld sprites are updating)
 	bit 0, a
 	jr nz, .skipOAM
