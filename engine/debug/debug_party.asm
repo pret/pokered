@@ -79,6 +79,14 @@ IF DEF(_DEBUG)
 	ld [hl], a
 
 	; Articuno gets Fly.
+	ld hl, wPartyMon4Moves
+	ld a, STRENGTH
+	ld [hl], a
+	ld hl, wPartyMon4PP
+	ld a, 15
+	ld [hl], a
+
+	; Articuno gets Fly.
 	ld hl, wPartyMon5Moves
 	ld a, FLY
 	ld [hl], a
