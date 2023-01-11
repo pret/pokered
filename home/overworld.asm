@@ -432,26 +432,20 @@ GetBikeSpeed::
 	call DoBikeSpeedup
 	call DoBikeSpeedup
 .normalBikeSpeed
-	call DoBikeSpeedup
-	ret	
+	jr DoBikeSpeedup
 .cyclingRoad
 	; uphill we can only go a bit faster, downhill we can go full speed
 	ldh a, [hJoyHeld]
 	and D_UP | D_LEFT | D_RIGHT
-	jr nz, .slower
-	call DoBikeSpeedup
-.slower
+	call z, DoBikeSpeedup
 	ldh a, [hJoyHeld]
 	and B_BUTTON
-	jr z, .done
+	ret z
 	call DoBikeSpeedup
 	ldh a, [hJoyHeld]
 	and D_UP | D_LEFT | D_RIGHT
-	jr nz, .done
-	call DoBikeSpeedup
-	jr .done
-.done
-	ret
+	ret nz
+	; fall through
 
 ; function to make bikes twice as fast as walking
 DoBikeSpeedup::
