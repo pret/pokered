@@ -120,10 +120,6 @@ NullChar::
 	dec de
 	ret
 
-TextIDErrorText:: ; "[hSpriteIndexOrTextID] ERROR."
-	text_far _TextIDErrorText
-	text_end
-
 MACRO print_name
 	push de
 	ld de, \1
@@ -234,7 +230,7 @@ Paragraph::
 	lb bc, 4, 18
 	call ClearScreenArea
 	ld c, 20
-	call DelayFrames
+	rst DelayFramesRST
 	pop de
 	hlcoord 1, 14
 	jp NextChar
@@ -249,7 +245,7 @@ PageChar::
 	lb bc, 7, 18
 	call ClearScreenArea
 	ld c, 20
-	call DelayFrames
+	rst DelayFramesRST
 	pop de
 	pop hl
 	hlcoord 1, 11
@@ -316,7 +312,7 @@ ScrollTextUpOneLine::
 
 	ld b, 5
 .WaitFrame
-	call DelayFrame
+	rst DelayFrameRST
 	dec b
 	jr nz, .WaitFrame
 
@@ -513,7 +509,7 @@ TextCommand_PAUSE::
 	and A_BUTTON | B_BUTTON
 	jr nz, .done
 	ld c, 30 ; half a second
-	call DelayFrames
+	rst DelayFramesRST
 .done
 	pop bc
 	pop hl
@@ -545,7 +541,7 @@ TextCommand_SOUND::
 	cp TX_SOUND_CRY_SNORLAX
 	jr z, .pokemonCry
 	ld a, [hl]
-	call PlaySound
+	rst PlaySoundRST
 	call WaitForSoundToFinish
 	pop hl
 	pop bc
@@ -591,7 +587,7 @@ TextCommand_DOTS::
 	and A_BUTTON | B_BUTTON
 	jr nz, .next ; if so, skip the delay
 	ld c, 10
-	call DelayFrames
+	rst DelayFramesRST
 .next
 	dec d
 	jr nz, .loop

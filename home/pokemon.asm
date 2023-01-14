@@ -140,7 +140,7 @@ LoadFrontSpriteByMonIndex::
 PlayCry::
 ; Play monster a's cry.
 	call GetCryData
-	call PlaySound
+	rst PlaySoundRST
 	jp WaitForSoundToFinish
 
 GetCryData::
@@ -298,7 +298,8 @@ RedrawPartyMenu::
 
 DrawPartyMenuCommon::
 	ld b, BANK(RedrawPartyMenu_)
-	jp Bankswitch
+	rst BankswitchRST
+	ret
 
 ; prints a pokemon's status condition
 ; INPUT:
@@ -423,7 +424,7 @@ GetMonHeader::
 .copyBaseStats
 	ld bc, BASE_DATA_SIZE
 	ld de, wMonHeader
-	call CopyData ; PureRGBnote: CHANGED: mew header now in same bank as rest of base stat data so no need to farcopy
+	rst CopyDataRST ; PureRGBnote: CHANGED: mew header now in same bank as rest of base stat data so no need to farcopy
 .done
 	ld a, [wd0b5]
 	ld [wMonHIndex], a
@@ -450,7 +451,7 @@ GetPartyMonName::
 	ld de, wcd6d
 	push de
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst CopyDataRST
 	pop de
 	pop bc
 	pop hl

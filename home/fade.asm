@@ -45,7 +45,7 @@ GBFadeIncCommon:
 	call UpdateGBCPal_OBP1
 ;;;;;;;;;;
 	ld c, 8
-	call DelayFrames
+	rst DelayFramesRST
 	dec b
 	jr nz, GBFadeIncCommon
 	ret
@@ -72,7 +72,7 @@ GBFadeDecCommon:
 	call UpdateGBCPal_OBP1
 ;;;;;;;;;;
 	ld c, 8
-	call DelayFrames
+	rst DelayFramesRST
 	dec b
 	jr nz, GBFadeDecCommon
 	ret

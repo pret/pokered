@@ -1,44 +1,74 @@
 ; rst vectors (unused)
+; PureRGBnote: CHANGED: use these rst vectors. By using rst (rst vector) instead of call (16-bit address) we can reduce the size of calls to frequently used functions.
 
 SECTION "rst0", ROM0[$0000]
-	rst $38
+BankswitchRST::
+	jp Bankswitch
 
-	ds $08 - @, 0 ; unused
+; PureRGBnote: MOVED: 5 extra bytes of space left here, may as move something here that puts the space to some use
+MartSignText::
+	text_far _MartSignText
+	text_end
 
 SECTION "rst8", ROM0[$0008]
-	rst $38
+PredefRST::
+	jp Predef
 
-	ds $10 - @, 0 ; unused
+; PureRGBnote: MOVED: 5 extra bytes of space left here, may as move something here that puts the space to some use
+PokemartGreetingText::
+	text_far _PokemartGreetingText
+	text_end
 
 SECTION "rst10", ROM0[$0010]
-	rst $38
+DelayFrameRST::
+	jp DelayFrame
 
-	ds $18 - @, 0 ; unused
+; PureRGBnote: MOVED: 5 extra bytes of space left here, may as move something here that puts the space to some use
+PokeCenterSignText::
+	text_far _PokeCenterSignText
+	text_end
 
 SECTION "rst18", ROM0[$0018]
-	rst $38
+DelayFramesRST::
+	jp DelayFrames
 
-	ds $20 - @, 0 ; unused
+; PureRGBnote: MOVED: 5 extra bytes of space left here, may as move something here that puts the space to some use	
+TextIDErrorText:: ; "[hSpriteIndexOrTextID] ERROR."
+	text_far _TextIDErrorText
+	text_end
 
 SECTION "rst20", ROM0[$0020]
-	rst $38
+CopyDataRST::
+	jp CopyData
 
-	ds $28 - @, 0 ; unused
+; PureRGBnote: MOVED: 5 extra bytes of space left here, may as move something here that puts the space to some use	
+PokemonFaintedText::
+	text_far _PokemonFaintedText
+	text_end
 
 SECTION "rst28", ROM0[$0028]
-	rst $38
+PrintTextRST::
+	jp PrintText
 
-	ds $30 - @, 0 ; unused
+; PureRGBnote: MOVED: 5 extra bytes of space left here, may as move something here that puts the space to some use	
+PlayerBlackedOutText::
+	text_far _PlayerBlackedOutText
+	text_end
 
 SECTION "rst30", ROM0[$0030]
-	rst $38
-
-	ds $38 - @, 0 ; unused
+PlaySoundRST::
+	jp PlaySound
+	
+; PureRGBnote: MOVED: 5 extra bytes of space left here, may as move something here that puts the space to some use	
+RepelWoreOffText::
+	text_far _RepelWoreOffText
+	text_end
 
 SECTION "rst38", ROM0[$0038]
-	rst $38
-
-	ds $40 - @, 0 ; unused
+TextScriptEndRST::
+	ld hl, TextScriptEndingText
+	pop af
+	ret
 
 
 ; Game Boy hardware interrupts

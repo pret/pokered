@@ -18,14 +18,6 @@ BoulderText::
 	callfar CheckStrengthUsage
 	jp TextScriptEnd
 
-MartSignText::
-	text_far _MartSignText
-	text_end
-
-PokeCenterSignText::
-	text_far _PokeCenterSignText
-	text_end
-
 PickUpItemText::
 	text_asm
 	predef PickUpItem
@@ -46,7 +38,7 @@ PickUp3ItemText::
 PickUp5ItemText::
 	text_asm
 	ld c, 5
-	jr DoMultiItemPickup
+	; fall through
 
 DoMultiItemPickup:
 	predef PickUpItemQuantity
