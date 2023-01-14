@@ -5,21 +5,21 @@ Music_Ronald:
 	channel 3, Music_Ronald_Ch3
 	channel 4, Music_Ronald_Ch4
 
-Music_Ronald_Ch1: ; fa7a0 (3e:67a0)
-	;stereo_panning 1, 1
-	;vibrato_type 8
+Music_Ronald_Ch1:
+	stereo_panning TRUE, TRUE
+;	vibrato_type 8
 	vibrato 12, 3, 3
-	fade_wave 8
+;	cutoff 8
 	duty_cycle 0
 .MainLoop
 	octave 3
 	speed 13
 .Loop1
-	channel_volume 9
-	fade_wave 3
+	volume_envelope 9, 2
+;	cutoff 3
 	note D_, 1
 	note D_, 1
-	fade_wave 4
+;	cutoff 4
 	note F_, 1
 	rest 2
 	note D_, 1
@@ -30,17 +30,17 @@ Music_Ronald_Ch1: ; fa7a0 (3e:67a0)
 	rest 1
 	note F_, 1
 	rest 1
-	channel_volume 9
-	fade_wave 8
+	volume_envelope 9, 0
+;	cutoff 8
 	note E_, 2
 	rest 1
 	dec_octave
-	channel_volume 9
-	fade_wave 3
+	volume_envelope 9, 2
+;	cutoff 3
 	note G_, 1
 	inc_octave
 	note D_, 1
-	fade_wave 4
+;	cutoff 4
 	note F_, 1
 	rest 2
 	note F_, 1
@@ -51,8 +51,8 @@ Music_Ronald_Ch1: ; fa7a0 (3e:67a0)
 	rest 1
 	note A_, 1
 	rest 1
-	fade_wave 8
-	channel_volume 9
+;	cutoff 8
+	volume_envelope 9, 0
 	note G_, 2
 	rest 1
 	sound_loop 2, .Loop1
@@ -63,7 +63,7 @@ Music_Ronald_Ch1: ; fa7a0 (3e:67a0)
 	octave 4
 	note C#, 3
 	note D_, 10
-	;tie
+;	tie
 	speed 13
 	note D_, 2
 	vibrato 12, 3, 3
@@ -76,7 +76,7 @@ Music_Ronald_Ch1: ; fa7a0 (3e:67a0)
 	octave 4
 	note C#, 3
 	note D_, 10
-	;tie
+;	tie
 	speed 13
 	note D_, 2
 	vibrato 12, 3, 3
@@ -90,10 +90,10 @@ Music_Ronald_Ch1: ; fa7a0 (3e:67a0)
 	note D_, 3
 	rest 7
 	duty_cycle 2
-	channel_volume 9
+	volume_envelope 9, 0
 	rest 6
 	dec_octave
-	fade_wave 4
+;	cutoff 4
 	note G_, 7
 	inc_octave
 	note F_, 6
@@ -108,12 +108,12 @@ Music_Ronald_Ch1: ; fa7a0 (3e:67a0)
 	dec_octave
 	note G_, 7
 	inc_octave
-	fade_wave 8
+;	cutoff 8
 	note C_, 4
 	note C#, 4
 	note C_, 5
 	dec_octave
-	fade_wave 4
+;	cutoff 4
 	note A#, 6
 	inc_octave
 	note C_, 7
@@ -122,22 +122,22 @@ Music_Ronald_Ch1: ; fa7a0 (3e:67a0)
 	note G_, 7
 	note F_, 6
 	note F#, 7
-	fade_wave 8
+;	cutoff 8
 	note G_, 6
-	fade_wave 4
+;	cutoff 4
 	note C#, 7
 	note C_, 6
 	dec_octave
 	note A#, 7
 	inc_octave
-	fade_wave 8
+;	cutoff 8
 	note C_, 4
 	note C#, 4
 	note C_, 5
 	dec_octave
 	note A#, 6
 	inc_octave
-	fade_wave 4
+;	cutoff 4
 	note C_, 7
 	dec_octave
 	note A#, 6
@@ -145,7 +145,7 @@ Music_Ronald_Ch1: ; fa7a0 (3e:67a0)
 	note F_, 6
 	note F#, 7
 	note G_, 6
-	fade_wave 8
+;	cutoff 8
 	note A#, 7
 	inc_octave
 	note C_, 6
@@ -158,10 +158,10 @@ Music_Ronald_Ch1: ; fa7a0 (3e:67a0)
 	note D_, 3
 	rest 7
 	duty_cycle 2
-	channel_volume 9
+	volume_envelope 9, 0
 	rest 6
 	dec_octave
-	fade_wave 4
+;	cutoff 4
 	note G_, 7
 	inc_octave
 	note F_, 6
@@ -176,12 +176,12 @@ Music_Ronald_Ch1: ; fa7a0 (3e:67a0)
 	dec_octave
 	note G_, 7
 	inc_octave
-	fade_wave 8
+;	cutoff 8
 	note C_, 4
 	note C#, 4
 	note C_, 5
 	dec_octave
-	fade_wave 4
+;	cutoff 4
 	note A#, 6
 	inc_octave
 	note C_, 7
@@ -191,20 +191,20 @@ Music_Ronald_Ch1: ; fa7a0 (3e:67a0)
 	note F_, 6
 	note F#, 7
 	note G_, 6
-	fade_wave 8
+;	cutoff 8
 	note A#, 7
 	inc_octave
-	fade_wave 4
+;	cutoff 4
 	note C_, 6
 	dec_octave
 	note A#, 7
 	inc_octave
-	fade_wave 8
+;	cutoff 8
 	note C#, 4
 	note C_, 4
 	dec_octave
 	note A#, 5
-	fade_wave 4
+;	cutoff 4
 	note G_, 6
 	note F_, 7
 	note G_, 6
@@ -213,15 +213,15 @@ Music_Ronald_Ch1: ; fa7a0 (3e:67a0)
 	dec_octave
 	note A#, 7
 	inc_octave
-	fade_wave 8
+;	cutoff 8
 	note C_, 4
 	note C#, 4
 	note C_, 5
 	dec_octave
-	fade_wave 4
+;	cutoff 4
 	note A#, 6
 	note G_, 7
-	fade_wave 8
+;	cutoff 8
 	sound_call Branch_fa9cb
 	speed 1
 	octave 4
@@ -229,21 +229,21 @@ Music_Ronald_Ch1: ; fa7a0 (3e:67a0)
 	note D_, 3
 	rest 7
 	duty_cycle 2
-	channel_volume 9
+	volume_envelope 9, 0
 	rest 13
-	fade_wave 4
+;	cutoff 4
 	note F_, 6
 	rest 7
-	fade_wave 8
+;	cutoff 8
 	note E_, 4
 	note F_, 4
 	note E_, 5
-	fade_wave 4
+;	cutoff 4
 	note D_, 6
 	rest 7
-	fade_wave 8
+;	cutoff 8
 	note E_, 6
-	fade_wave 4
+;	cutoff 4
 	note C_, 7
 	dec_octave
 	note G_, 6
@@ -252,41 +252,41 @@ Music_Ronald_Ch1: ; fa7a0 (3e:67a0)
 	note C#, 6
 	note D_, 7
 	dec_octave
-	fade_wave 8
+;	cutoff 8
 	note A#, 6
-	fade_wave 4
+;	cutoff 4
 	note G_, 7
 	rest 6
 	note F_, 7
-	fade_wave 8
+;	cutoff 8
 	note F#, 6
-	fade_wave 4
+;	cutoff 4
 	note G_, 7
-	fade_wave 8
+;	cutoff 8
 	note A#, 6
-	fade_wave 4
+;	cutoff 4
 	note G_, 7
 	note A#, 6
 	inc_octave
 	note C_, 7
-	fade_wave 8
+;	cutoff 8
 	note C#, 6
-	fade_wave 4
+;	cutoff 4
 	note D_, 7
 	note F_, 6
 	note D_, 7
-	fade_wave 8
+;	cutoff 8
 	note F_, 6
 	dec_octave
-	fade_wave 4
+;	cutoff 4
 	note G_, 7
 	dec_octave
 	note G_, 6
 	inc_octave
 	note D_, 7
 	duty_cycle 1
-	channel_volume 10
-	fade_wave 8
+	volume_envelope 10, 0
+;	cutoff 8
 	sound_call Branch_fa9cb
 	speed 1
 	octave 4
@@ -303,7 +303,7 @@ Music_Ronald_Ch1: ; fa7a0 (3e:67a0)
 	note F_, 4
 	vibrato 12, 3, 3
 	speed 1
-	channel_volume 9
+	volume_envelope 9, 3
 	note C_, 6
 	rest 7
 	rest 13
@@ -314,12 +314,12 @@ Music_Ronald_Ch1: ; fa7a0 (3e:67a0)
 	rest 7
 	rest 13
 	speed 13
-	channel_volume 9
+	volume_envelope 9, 0
 	note G_, 2
 	rest 1
 	vibrato 20, 3, 3
 	speed 1
-	channel_volume 10
+	volume_envelope 10, 0
 	note F#, 3
 	note G_, 10
 	note A#, 3
@@ -413,7 +413,7 @@ Music_Ronald_Ch1: ; fa7a0 (3e:67a0)
 	rest 7
 	note C#, 3
 	note D_, 10
-	;tie
+;	tie
 	speed 13
 	note D_, 5
 	rest 1
@@ -427,7 +427,7 @@ Music_Ronald_Ch1: ; fa7a0 (3e:67a0)
 Branch_fa9aa:
 	octave 4
 	duty_cycle 1
-	channel_volume 10
+	volume_envelope 10, 0
 	rest 2
 	speed 1
 	note G#, 3
@@ -457,7 +457,7 @@ Branch_fa9aa:
 Branch_fa9cb:
 	octave 4
 	duty_cycle 1
-	channel_volume 10
+	volume_envelope 10, 0
 	speed 1
 	note D#, 3
 	note E_, 10
@@ -489,7 +489,7 @@ Branch_fa9cb:
 Branch_fa9ec:
 	octave 3
 	duty_cycle 0
-	channel_volume 9
+	volume_envelope 9, 2
 	speed 1
 	note F_, 6
 	rest 7
@@ -508,23 +508,23 @@ Branch_fa9ec:
 	rest 7
 	rest 13
 	speed 13
-	channel_volume 9
+	volume_envelope 9, 0
 	note G_, 2
 	rest 1
 	sound_ret
 
 
-Music_Ronald_Ch2: ; faa0e (3e:6a0e)
-	;stereo_panning 1, 1
-	;vibrato_type 8
+Music_Ronald_Ch2:
+	stereo_panning TRUE, TRUE
+;	vibrato_type 8
 	vibrato 12, 3, 3
-	fade_wave 8
+;	cutoff 8
 	duty_cycle 0
 .MainLoop
 	octave 2
 .Loop1
 	speed 1
-	channel_volume 9
+	volume_envelope 9, 2
 	note G_, 3
 	rest 3
 	note G_, 3
@@ -559,12 +559,12 @@ Music_Ronald_Ch2: ; faa0e (3e:6a0e)
 	rest 7
 	rest 13
 	speed 13
-	channel_volume 9
+	volume_envelope 9, 0
 	note C_, 2
 	rest 1
 	dec_octave
 	speed 1
-	channel_volume 9
+	volume_envelope 9, 2
 	note D_, 3
 	rest 3
 	note G_, 3
@@ -603,53 +603,53 @@ Music_Ronald_Ch2: ; faa0e (3e:6a0e)
 	rest 7
 	rest 13
 	speed 13
-	channel_volume 9
+	volume_envelope 9, 0
 	note E_, 2
 	rest 1
 	dec_octave
 	sound_loop 2, .Loop1
 .Loop2
 	sound_call Branch_fab76
-	fade_wave 8
-	channel_volume 8
+;	cutoff 8
+	volume_envelope 8, 0
 	note C_, 2
 	rest 1
 	sound_call Branch_fab76
-	fade_wave 8
-	channel_volume 8
+;	cutoff 8
+	volume_envelope 8, 0
 	note E_, 2
 	rest 1
 	sound_loop 4, .Loop2
 .Loop3
 	vibrato 20, 3, 3
-	channel_volume 8
+	volume_envelope 8, 0
 	speed 13
 	duty_cycle 1
 	octave 4
 	rest 2
-	fade_wave 4
+;	cutoff 4
 	note F_, 1
 	rest 1
-	fade_wave 8
+;	cutoff 8
 	note D_, 1
 	dec_octave
 	dec_octave
-	fade_wave 4
+;	cutoff 4
 	duty_cycle 0
-	channel_volume 9
+	volume_envelope 9, 2
 	note A#, 1
 	rest 1
 	inc_octave
 	inc_octave
 	duty_cycle 1
-	channel_volume 8
+	volume_envelope 8, 0
 	note C_, 1
 	rest 1
-	fade_wave 8
+;	cutoff 8
 	note D_, 1
-	fade_wave 3
+;	cutoff 3
 	note E_, 1
-	fade_wave 4
+;	cutoff 4
 	note C_, 1
 	rest 1
 	dec_octave
@@ -659,7 +659,7 @@ Music_Ronald_Ch2: ; faa0e (3e:6a0e)
 	rest 2
 	vibrato 12, 3, 3
 	duty_cycle 0
-	channel_volume 9
+	volume_envelope 9, 2
 	note F_, 1
 	rest 2
 	note F_, 1
@@ -672,8 +672,8 @@ Music_Ronald_Ch2: ; faa0e (3e:6a0e)
 	rest 1
 	note A_, 1
 	rest 1
-	fade_wave 8
-	channel_volume 9
+;	cutoff 8
+	volume_envelope 9, 0
 	note G_, 2
 	rest 1
 	sound_loop 2, .Loop3
@@ -683,8 +683,8 @@ Music_Ronald_Ch2: ; faa0e (3e:6a0e)
 	rest 2
 	vibrato 12, 3, 3
 	duty_cycle 0
-	channel_volume 9
-	fade_wave 4
+	volume_envelope 9, 2
+;	cutoff 4
 	note F_, 1
 	rest 2
 	note F_, 1
@@ -697,8 +697,8 @@ Music_Ronald_Ch2: ; faa0e (3e:6a0e)
 	rest 1
 	note A_, 1
 	rest 1
-	fade_wave 8
-	channel_volume 9
+;	cutoff 8
+	volume_envelope 9, 0
 	note G_, 2
 	rest 1
 	vibrato 20, 3, 3
@@ -706,7 +706,7 @@ Music_Ronald_Ch2: ; faa0e (3e:6a0e)
 	octave 3
 	rest 1
 	speed 1
-	fade_wave 8
+;	cutoff 8
 	note E_, 3
 	note F_, 10
 	note E_, 3
@@ -716,8 +716,8 @@ Music_Ronald_Ch2: ; faa0e (3e:6a0e)
 	dec_octave
 	vibrato 12, 3, 3
 	duty_cycle 0
-	channel_volume 9
-	fade_wave 4
+	volume_envelope 9, 2
+;	cutoff 4
 	note G_, 1
 	rest 1
 	inc_octave
@@ -725,26 +725,26 @@ Music_Ronald_Ch2: ; faa0e (3e:6a0e)
 	rest 1
 	note D_, 1
 	rest 1
-	fade_wave 8
-	channel_volume 9
+;	cutoff 8
+	volume_envelope 9, 0
 	note E_, 2
 	rest 1
 	sound_call Branch_fabb1
 	rest 1
-	fade_wave 4
+;	cutoff 4
 	octave 2
 	note A#, 1
 	rest 1
 	note A#, 1
 	rest 1
 	inc_octave
-	fade_wave 8
-	channel_volume 9
+;	cutoff 8
+	volume_envelope 9, 0
 	note C_, 2
 	rest 1
-	channel_volume 9
+	volume_envelope 9, 2
 	rest 2
-	fade_wave 4
+;	cutoff 4
 	note F_, 1
 	rest 2
 	note F_, 1
@@ -755,35 +755,35 @@ Music_Ronald_Ch2: ; faa0e (3e:6a0e)
 	rest 1
 	note A_, 1
 	rest 1
-	fade_wave 8
-	channel_volume 9
+;	cutoff 8
+	volume_envelope 9, 0
 	note F_, 2
 	rest 1
 	sound_call Branch_fabb1
 	rest 1
 	octave 2
-	fade_wave 4
+;	cutoff 4
 	note G_, 1
 	rest 1
 	note G_, 1
 	rest 1
 	inc_octave
-	fade_wave 8
-	channel_volume 9
+;	cutoff 8
+	volume_envelope 9, 0
 	note C_, 2
 	rest 1
 	rest 2
 	dec_octave
-	channel_volume 9
-	fade_wave 4
+	volume_envelope 9, 2
+;	cutoff 4
 	note G_, 1
 	rest 2
 	note G_, 1
 	rest 1
 	vibrato 20, 3, 3
-	fade_wave 8
+;	cutoff 8
 	duty_cycle 1
-	channel_volume 7
+	volume_envelope 7, 0
 	note F#, 8
 	rest 1
 	duty_cycle 0
@@ -792,10 +792,10 @@ Music_Ronald_Ch2: ; faa0e (3e:6a0e)
 
 Branch_fab76:
 	octave 2
-	channel_volume 9
+	volume_envelope 9, 2
 	speed 13
 	rest 2
-	fade_wave 4
+;	cutoff 4
 	note A#, 1
 	rest 2
 	note A#, 1
@@ -812,13 +812,13 @@ Branch_fab76:
 Branch_fab8a:
 	octave 4
 	duty_cycle 1
-	channel_volume 8
+	volume_envelope 8, 0
 	speed 13
 	note C_, 1
-	fade_wave 3
+;	cutoff 3
 	note D_, 1
 	note E_, 1
-	fade_wave 4
+;	cutoff 4
 	note C_, 1
 	rest 1
 	dec_octave
@@ -827,15 +827,15 @@ Branch_fab8a:
 	note A#, 1
 	rest 1
 	inc_octave
-	fade_wave 8
+;	cutoff 8
 	note C_, 1
-	fade_wave 3
+;	cutoff 3
 	note D_, 1
 	note E_, 1
-	fade_wave 8
+;	cutoff 8
 	note C_, 1
 	dec_octave
-	fade_wave 4
+;	cutoff 4
 	note A_, 1
 	rest 1
 	note A#, 1
@@ -843,10 +843,10 @@ Branch_fab8a:
 
 Branch_fabb1:
 	octave 2
-	channel_volume 9
+	volume_envelope 9, 2
 	speed 13
 	rest 2
-	fade_wave 4
+;	cutoff 4
 	note A#, 1
 	rest 2
 	note A#, 1
@@ -856,13 +856,13 @@ Branch_fabb1:
 	sound_ret
 
 
-Music_Ronald_Ch3: ; fabc0 (3e:6bc0)
+Music_Ronald_Ch3:
 	speed 1
-	;stereo_panning 1, 1
+	stereo_panning TRUE, TRUE
 	channel_volume 1
 	fade_wave 11
-	;echo 0
-	;cutoff 8
+;	echo 0
+;	cutoff 8
 .MainLoop
 	octave 2
 .Loop1
@@ -1131,7 +1131,7 @@ Branch_facc5:
 	sound_ret
 
 
-Music_Ronald_Ch4: ; face0 (3e:6ce0)
+Music_Ronald_Ch4:
 	toggle_noise 6
 	drum_speed 1
 	octave 1
@@ -1162,7 +1162,6 @@ Music_Ronald_Ch4: ; face0 (3e:6ce0)
 	drum_note 2, 7
 	sound_loop 2, .Loop2
 .Loop3
-	;rept 7
 	sound_call Branch_fad46
 	drum_note 4, 13
 	sound_call Branch_fad4f
@@ -1174,7 +1173,6 @@ Music_Ronald_Ch4: ; face0 (3e:6ce0)
 	drum_note 2, 13
 	drum_note 4, 6
 	drum_note 3, 7
-	;---
 	sound_call Branch_fad46
 	drum_note 4, 13
 	sound_call Branch_fad4f
@@ -1186,7 +1184,6 @@ Music_Ronald_Ch4: ; face0 (3e:6ce0)
 	drum_note 2, 13
 	drum_note 4, 6
 	drum_note 3, 7
-	;---
 	sound_call Branch_fad46
 	drum_note 4, 13
 	sound_call Branch_fad4f
@@ -1198,7 +1195,6 @@ Music_Ronald_Ch4: ; face0 (3e:6ce0)
 	drum_note 2, 13
 	drum_note 4, 6
 	drum_note 3, 7
-	;---
 	sound_call Branch_fad46
 	drum_note 4, 13
 	sound_call Branch_fad4f
@@ -1210,7 +1206,6 @@ Music_Ronald_Ch4: ; face0 (3e:6ce0)
 	drum_note 2, 13
 	drum_note 4, 6
 	drum_note 3, 7
-	;---
 	sound_call Branch_fad46
 	drum_note 4, 13
 	sound_call Branch_fad4f
@@ -1222,7 +1217,6 @@ Music_Ronald_Ch4: ; face0 (3e:6ce0)
 	drum_note 2, 13
 	drum_note 4, 6
 	drum_note 3, 7
-	;---
 	sound_call Branch_fad46
 	drum_note 4, 13
 	sound_call Branch_fad4f
@@ -1234,7 +1228,6 @@ Music_Ronald_Ch4: ; face0 (3e:6ce0)
 	drum_note 2, 13
 	drum_note 4, 6
 	drum_note 3, 7
-	;---
 	sound_call Branch_fad46
 	drum_note 4, 13
 	sound_call Branch_fad4f
@@ -1246,25 +1239,19 @@ Music_Ronald_Ch4: ; face0 (3e:6ce0)
 	drum_note 2, 13
 	drum_note 4, 6
 	drum_note 3, 7
-	;endr
 	sound_call Branch_fad46
 	drum_note 4, 13
 	sound_call Branch_fad4f
 	drum_note 3, 3
 	drum_note 3, 4
-	;rept 4
 	drum_note 2, 6
 	drum_note 2, 7
-	;---
 	drum_note 2, 6
 	drum_note 2, 7
-	;---
 	drum_note 2, 6
 	drum_note 2, 7
-	;---
 	drum_note 2, 6
 	drum_note 2, 7
-	;endr
 	sound_loop 2, .Loop3
 .Loop4
 	sound_call Branch_fad46
@@ -1288,14 +1275,13 @@ Music_Ronald_Ch4: ; face0 (3e:6ce0)
 	sound_loop 0, .MainLoop
 
 Branch_fad46:
-	;
-	;sound_call Branch_fad4f
+;	sound_call Branch_fad4f
 	drum_note 1, 13
 	drum_note 5, 6
 	drum_note 1, 7
 	drum_note 2, 13
 	drum_note 1, 6
-	;
+;	sound_ret
 	drum_note 3, 7
 	drum_note 1, 13
 	drum_note 5, 6
@@ -1310,4 +1296,3 @@ Branch_fad4f:
 	drum_note 2, 13
 	drum_note 1, 6
 	sound_ret
-; 0xfad55

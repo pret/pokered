@@ -5,67 +5,67 @@ Music_ChallengeHall:
 	channel 3, Music_ChallengeHall_Ch3
 	channel 4, Music_ChallengeHall_Ch4
 
-Music_ChallengeHall_Ch1: ; f9646 (3e:5646)
-	;stereo_panning 1, 1
-	;vibrato_type 8
+Music_ChallengeHall_Ch1:
+	stereo_panning TRUE, TRUE
+;	vibrato_type 8
 	vibrato 15, 3, 3
-	fade_wave 7
+;	cutoff 7
 	octave 3
 	duty_cycle 2
-	channel_volume 8
-	fade_wave 8
+	volume_envelope 8, 0
+;	cutoff 8
 	speed 1
 	note A_, 7
 	note G#, 4
-	channel_volume 1
+	volume_envelope 1, 7
 	note G#, 4
-	channel_volume 8
+	volume_envelope 8, 0
 	note A_, 4
-	channel_volume 1
+	volume_envelope 1, 7
 	note A_, 3
-	channel_volume 8
+	volume_envelope 8, 0
 	note B_, 4
-	channel_volume 1
+	volume_envelope 1, 7
 	note B_, 4
 	inc_octave
-	channel_volume 8
+	volume_envelope 8, 0
 	note C#, 7
 	note C_, 4
-	channel_volume 1
+	volume_envelope 1, 7
 	note C_, 4
-	channel_volume 8
+	volume_envelope 8, 0
 	note C#, 4
-	channel_volume 1
+	volume_envelope 1, 7
 	note C#, 3
-	channel_volume 8
+	volume_envelope 8, 0
 	note D_, 4
-	channel_volume 1
+	volume_envelope 1, 7
 	note D_, 4
-	channel_volume 8
+	volume_envelope 8, 0
 	note E_, 7
 	note D#, 4
-	channel_volume 1
+	volume_envelope 1, 7
 	note D#, 4
-	channel_volume 8
+	volume_envelope 8, 0
 	note E_, 4
-	channel_volume 1
+	volume_envelope 1, 7
 	note E_, 3
-	channel_volume 8
+	volume_envelope 8, 0
 	note F#, 4
-	channel_volume 1
+	volume_envelope 1, 7
 	note F#, 4
-	channel_volume 8
+	volume_envelope 8, 0
 	note G#, 4
-	channel_volume 1
+	volume_envelope 1, 7
 	note G#, 3
-	channel_volume 8
+	volume_envelope 8, 0
 	note A_, 8
 	note B_, 7
 	inc_octave
 	note C#, 4
 	note D_, 4
 .MainLoop
-	channel_volume 7
+	volume_envelope 7, 0
 	speed 1
 	octave 5
 .Loop1
@@ -75,277 +75,277 @@ Music_ChallengeHall_Ch1: ; f9646 (3e:5646)
 	note F#, 4
 	sound_loop 8, .Loop1
 	duty_cycle 1
-	channel_volume 8
+	volume_envelope 8, 0
 	dec_octave
 	dec_octave
 	dec_octave
 	note B_, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note B_, 8
 	dec_octave
-	channel_volume 8
+	volume_envelope 8, 0
 	note B_, 7
 	note B_, 8
 	note B_, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note B_, 8
-	channel_volume 8
+	volume_envelope 8, 0
 	note B_, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note B_, 8
-	channel_volume 8
+	volume_envelope 8, 0
 	note B_, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note B_, 8
-	channel_volume 8
+	volume_envelope 8, 0
 	note B_, 15
 	inc_octave
 	note D_, 15
 	note E_, 15
 	inc_octave
 	duty_cycle 0
-	channel_volume 10
+	volume_envelope 10, 0
 	sound_call Branch_f9848
-	channel_volume 10
+	volume_envelope 10, 0
 	note D_, 8
 	speed 10
 	note C#, 6
-	;tie
+;	tie
 	note C#, 6
-	channel_volume 3
+	volume_envelope 3, 7
 	speed 1
 	note C#, 15
 	duty_cycle 1
-	channel_volume 8
+	volume_envelope 8, 0
 	note C#, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note C#, 8
 	rest 15
-	channel_volume 8
+	volume_envelope 8, 0
 	note C#, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note C#, 8
 	rest 15
-	channel_volume 8
+	volume_envelope 8, 0
 	note D_, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note D_, 8
 	rest 15
-	channel_volume 8
+	volume_envelope 8, 0
 	note D_, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note D_, 8
 	duty_cycle 0
-	channel_volume 10
+	volume_envelope 10, 0
 	sound_call Branch_f9848
-	channel_volume 10
+	volume_envelope 10, 0
 	note C#, 8
 	dec_octave
 	speed 10
 	note A_, 6
-	;tie
+;	tie
 	note A_, 6
-	channel_volume 3
+	volume_envelope 3, 7
 	speed 1
 	note A_, 15
 	duty_cycle 1
-	channel_volume 8
+	volume_envelope 8, 0
 	inc_octave
 	note C#, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note C#, 8
 	rest 15
-	channel_volume 8
+	volume_envelope 8, 0
 	note C#, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note C#, 8
 	rest 15
-	channel_volume 8
+	volume_envelope 8, 0
 	note C#, 15
 	note D_, 15
 	note E_, 15
-	channel_volume 2
+	volume_envelope 2, 7
 	note E_, 15
 	duty_cycle 0
-	channel_volume 10
+	volume_envelope 10, 0
 	note F#, 7
 	note F_, 7
-	channel_volume 3
+	volume_envelope 3, 7
 	note F_, 1
-	channel_volume 10
+	volume_envelope 10, 0
 	note F#, 7
 	note F_, 8
 	note F#, 7
 	note G#, 7
-	channel_volume 3
+	volume_envelope 3, 7
 	note G#, 1
-	channel_volume 10
+	volume_envelope 10, 0
 	speed 10
 	note A_, 3
-	;tie
+;	tie
 	speed 1
 	note A_, 15
 	dec_octave
 	duty_cycle 1
-	channel_volume 8
+	volume_envelope 8, 0
 	note A_, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note A_, 8
 	duty_cycle 0
-	channel_volume 10
+	volume_envelope 10, 0
 	rest 15
 	inc_octave
 	note E_, 7
 	note D#, 7
-	channel_volume 3
+	volume_envelope 3, 7
 	note D#, 1
-	channel_volume 10
+	volume_envelope 10, 0
 	note E_, 7
 	note D#, 8
 	note E_, 7
 	note G#, 7
-	channel_volume 3
+	volume_envelope 3, 7
 	note G#, 1
-	channel_volume 10
+	volume_envelope 10, 0
 	speed 9
 	note A_, 5
 	speed 1
 	dec_octave
 	duty_cycle 1
-	channel_volume 8
+	volume_envelope 8, 0
 	note A_, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note A_, 8
 	duty_cycle 0
-	channel_volume 10
+	volume_envelope 10, 0
 	rest 15
 	inc_octave
 	note D_, 7
 	note C#, 8
 	note D_, 7
-	channel_volume 3
+	volume_envelope 3, 7
 	note D_, 8
-	channel_volume 10
+	volume_envelope 10, 0
 	note A_, 7
-	channel_volume 3
+	volume_envelope 3, 7
 	note A_, 8
-	channel_volume 10
+	volume_envelope 10, 0
 	note G#, 15
-	;tie
+;	tie
 	note G#, 7
-	channel_volume 3
+	volume_envelope 3, 7
 	note G#, 8
-	channel_volume 10
+	volume_envelope 10, 0
 	note F#, 15
-	channel_volume 3
+	volume_envelope 3, 7
 	note F#, 7
-	channel_volume 10
+	volume_envelope 10, 0
 	note G#, 8
 	speed 10
 	note E_, 6
 	speed 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note E_, 15
-	channel_volume 10
+	volume_envelope 10, 0
 	note C#, 15
 	note D_, 15
 	note E_, 15
-	channel_volume 3
+	volume_envelope 3, 7
 	note E_, 15
-	channel_volume 10
+	volume_envelope 10, 0
 	note F#, 7
 	note F_, 7
-	channel_volume 3
+	volume_envelope 3, 7
 	note F_, 1
-	channel_volume 10
+	volume_envelope 10, 0
 	note F#, 7
 	note F_, 8
 	note F#, 6
-	channel_volume 3
+	volume_envelope 3, 7
 	note F#, 1
-	channel_volume 10
+	volume_envelope 10, 0
 	note G#, 6
-	channel_volume 3
+	volume_envelope 3, 7
 	note G#, 2
-	channel_volume 10
+	volume_envelope 10, 0
 	speed 10
 	note A_, 3
 	speed 1
 	note G#, 15
 	dec_octave
 	duty_cycle 1
-	channel_volume 8
+	volume_envelope 8, 0
 	note B_, 7
 	inc_octave
 	duty_cycle 0
-	channel_volume 10
+	volume_envelope 10, 0
 	note F#, 6
-	channel_volume 3
+	volume_envelope 3, 7
 	note F#, 2
-	channel_volume 10
+	volume_envelope 10, 0
 	note E_, 15
-	channel_volume 3
+	volume_envelope 3, 7
 	note E_, 15
-	channel_volume 10
+	volume_envelope 10, 0
 	note B_, 15
 	duty_cycle 1
-	channel_volume 8
+	volume_envelope 8, 0
 	dec_octave
 	note B_, 7
 	inc_octave
 	duty_cycle 0
-	channel_volume 10
+	volume_envelope 10, 0
 	note G#, 6
-	channel_volume 3
+	volume_envelope 3, 7
 	note G#, 2
-	channel_volume 10
+	volume_envelope 10, 0
 	speed 10
 	note A_, 3
 	speed 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note A_, 15
-	channel_volume 10
+	volume_envelope 10, 0
 	note B_, 6
-	channel_volume 3
+	volume_envelope 3, 7
 	note B_, 1
 	inc_octave
-	channel_volume 10
+	volume_envelope 10, 0
 	note C#, 6
-	channel_volume 3
+	volume_envelope 3, 7
 	note C#, 2
-	channel_volume 10
+	volume_envelope 10, 0
 	speed 10
 	note D_, 3
 	speed 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note D_, 15
 	dec_octave
-	channel_volume 10
+	volume_envelope 10, 0
 	note F#, 6
-	channel_volume 3
+	volume_envelope 3, 7
 	note F#, 1
-	channel_volume 10
+	volume_envelope 10, 0
 	note B_, 6
-	channel_volume 3
+	volume_envelope 3, 7
 	note B_, 2
-	channel_volume 10
+	volume_envelope 10, 0
 	note A_, 15
-	channel_volume 3
+	volume_envelope 3, 7
 	note A_, 15
-	channel_volume 10
+	volume_envelope 10, 0
 	note G#, 11
-	channel_volume 3
+	volume_envelope 3, 7
 	note G#, 4
 	rest 7
-	channel_volume 10
+	volume_envelope 10, 0
 	note A_, 7
-	channel_volume 3
+	volume_envelope 3, 7
 	note A_, 1
-	channel_volume 10
+	volume_envelope 10, 0
 	speed 10
 	note A_, 6
 	duty_cycle 2
-	channel_volume 7
+	volume_envelope 7, 0
 	speed 1
 	inc_octave
 	note C#, 7
@@ -364,54 +364,54 @@ Music_ChallengeHall_Ch1: ; f9646 (3e:5646)
 
 Branch_f9848:
 	note C#, 15
-	channel_volume 3
+	volume_envelope 3, 7
 	note C#, 15
-	channel_volume 10
+	volume_envelope 10, 0
 	note E_, 15
-	channel_volume 3
+	volume_envelope 3, 7
 	note E_, 7
-	channel_volume 10
+	volume_envelope 10, 0
 	note C#, 8
 	note D_, 15
-	channel_volume 3
+	volume_envelope 3, 7
 	note D_, 15
-	channel_volume 10
+	volume_envelope 10, 0
 	note F#, 15
-	channel_volume 3
+	volume_envelope 3, 7
 	note F#, 7
-	channel_volume 10
+	volume_envelope 10, 0
 	note D_, 8
 	note E_, 7
-	channel_volume 3
+	volume_envelope 3, 7
 	note E_, 8
-	channel_volume 10
+	volume_envelope 10, 0
 	note A_, 15
 	note G#, 7
-	channel_volume 3
+	volume_envelope 3, 7
 	note G#, 8
-	channel_volume 10
+	volume_envelope 10, 0
 	note F#, 7
-	channel_volume 3
+	volume_envelope 3, 7
 	note F#, 8
-	channel_volume 10
+	volume_envelope 10, 0
 	note E_, 15
 	note D_, 7
-	channel_volume 3
+	volume_envelope 3, 7
 	note D_, 8
 	dec_octave
-	channel_volume 10
+	volume_envelope 10, 0
 	note B_, 15
-	channel_volume 3
+	volume_envelope 3, 7
 	note B_, 7
 	inc_octave
 	sound_ret
 
 
-Music_ChallengeHall_Ch2: ; f9883 (3e:5883)
-	;stereo_panning 1, 1
-	;vibrato_type 8
+Music_ChallengeHall_Ch2:
+	stereo_panning TRUE, TRUE
+;	vibrato_type 8
 	vibrato 15, 3, 3
-	fade_wave 7
+;	cutoff 7
 	octave 3
 	speed 10
 .Loop1
@@ -419,32 +419,32 @@ Music_ChallengeHall_Ch2: ; f9883 (3e:5883)
 	sound_loop 2, .Loop1
 .MainLoop
 	duty_cycle 1
-	channel_volume 9
-	fade_wave 8
+	volume_envelope 9, 0
+;	cutoff 8
 	speed 10
 	note E_, 6
-	;tie
+;	tie
 	note E_, 6
 	speed 1
 	note E_, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note E_, 8
 	dec_octave
-	channel_volume 8
+	volume_envelope 8, 0
 	note E_, 7
 	note E_, 8
 	note E_, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note E_, 8
-	channel_volume 8
+	volume_envelope 8, 0
 	note E_, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note E_, 8
-	channel_volume 8
+	volume_envelope 8, 0
 	note E_, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note E_, 8
-	channel_volume 8
+	volume_envelope 8, 0
 	note E_, 15
 	note F#, 15
 	note G#, 15
@@ -452,110 +452,110 @@ Music_ChallengeHall_Ch2: ; f9883 (3e:5883)
 	note B_, 8
 	speed 10
 	note A_, 6
-	;tie
+;	tie
 	note A_, 6
 	speed 1
 	rest 15
 	duty_cycle 1
-	channel_volume 8
+	volume_envelope 8, 0
 	note A_, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note A_, 8
 	rest 15
-	channel_volume 8
+	volume_envelope 8, 0
 	note A_, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note A_, 8
 	rest 15
-	channel_volume 8
+	volume_envelope 8, 0
 	note B_, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note B_, 8
 	rest 15
-	channel_volume 8
+	volume_envelope 8, 0
 	note B_, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note B_, 8
 	sound_call Branch_f9a28
 	note G#, 8
 	speed 10
 	note E_, 6
-	;tie
+;	tie
 	note E_, 6
 	speed 1
 	rest 15
 	duty_cycle 1
-	channel_volume 8
+	volume_envelope 8, 0
 	note A_, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note A_, 8
 	rest 15
-	channel_volume 8
+	volume_envelope 8, 0
 	note A_, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note A_, 8
 	rest 15
-	channel_volume 8
+	volume_envelope 8, 0
 	note A_, 15
 	note B_, 15
 	inc_octave
 	note C#, 15
-	channel_volume 2
+	volume_envelope 2, 7
 	note C#, 15
-	channel_volume 8
+	volume_envelope 8, 0
 	note D_, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note D_, 8
 	rest 15
 	dec_octave
-	channel_volume 8
+	volume_envelope 8, 0
 	note A_, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note A_, 8
 	rest 15
 	inc_octave
-	channel_volume 8
+	volume_envelope 8, 0
 	note D_, 7
 	duty_cycle 2
-	channel_volume 6
+	volume_envelope 6, 0
 	inc_octave
 	note D_, 8
 	note A_, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note A_, 8
 	inc_octave
-	channel_volume 6
+	volume_envelope 6, 0
 	note D_, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note D_, 8
-	channel_volume 6
+	volume_envelope 6, 0
 .Loop2
 	note E_, 4
 	note F#, 3
 	note E_, 4
 	note F#, 4
 	sound_loop 4, .Loop2
-	channel_volume 2
+	volume_envelope 2, 7
 	note F#, 5
 	rest 10
 	dec_octave
 	dec_octave
 	duty_cycle 1
-	channel_volume 8
+	volume_envelope 8, 0
 	note C#, 7
 	inc_octave
 	duty_cycle 2
-	channel_volume 6
+	volume_envelope 6, 0
 	note E_, 8
 	note A_, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note A_, 8
 	inc_octave
-	channel_volume 6
+	volume_envelope 6, 0
 	note C#, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note C#, 8
-	channel_volume 5
+	volume_envelope 5, 0
 .Loop3
 	note D_, 4
 	note E_, 3
@@ -566,63 +566,63 @@ Music_ChallengeHall_Ch2: ; f9883 (3e:5883)
 	note B_, 15
 	inc_octave
 	note D_, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note D_, 8
-	channel_volume 5
+	volume_envelope 5, 0
 	note C#, 15
 	duty_cycle 1
-	channel_volume 8
+	volume_envelope 8, 0
 	octave 2
 	note B_, 7
 	inc_octave
 	inc_octave
-	;vibrato_type 1
+;	vibrato_type 1
 	duty_cycle 2
-	channel_volume 5
+	volume_envelope 5, 0
 	note B_, 8
 	inc_octave
 	speed 10
 	note C#, 6
-	channel_volume 2
+	volume_envelope 2, 7
 	speed 1
 	note C#, 15
-	;vibrato_type 8
+;	vibrato_type 8
 	duty_cycle 0
-	channel_volume 7
+	volume_envelope 7, 0
 	octave 2
 	note E_, 15
 	note F#, 15
 	note A#, 15
 	rest 15
 	duty_cycle 1
-	channel_volume 8
+	volume_envelope 8, 0
 	inc_octave
 	note D_, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note D_, 8
 	rest 15
 	dec_octave
-	channel_volume 8
+	volume_envelope 8, 0
 	note B_, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note B_, 8
 	rest 15
 	inc_octave
-	channel_volume 8
+	volume_envelope 8, 0
 	note D_, 7
 	inc_octave
 	duty_cycle 2
-	channel_volume 6
+	volume_envelope 6, 0
 	note D_, 8
 	note A_, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note A_, 8
 	inc_octave
-	channel_volume 6
+	volume_envelope 6, 0
 	note D_, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note D_, 8
-	channel_volume 6
+	volume_envelope 6, 0
 .Loop4
 	note E_, 4
 	note F#, 3
@@ -630,7 +630,7 @@ Music_ChallengeHall_Ch2: ; f9883 (3e:5883)
 	note F#, 4
 	sound_loop 2, .Loop4
 	duty_cycle 0
-	channel_volume 7
+	volume_envelope 7, 0
 	dec_octave
 	dec_octave
 	note F_, 15
@@ -642,10 +642,10 @@ Music_ChallengeHall_Ch2: ; f9883 (3e:5883)
 	speed 1
 	rest 15
 	duty_cycle 1
-	channel_volume 8
+	volume_envelope 8, 0
 	note C#, 7
 	duty_cycle 0
-	channel_volume 7
+	volume_envelope 7, 0
 	note E_, 6
 	rest 2
 	speed 10
@@ -654,51 +654,51 @@ Music_ChallengeHall_Ch2: ; f9883 (3e:5883)
 	rest 15
 	dec_octave
 	duty_cycle 1
-	channel_volume 8
+	volume_envelope 8, 0
 	note B_, 7
 	inc_octave
 	duty_cycle 0
-	channel_volume 7
+	volume_envelope 7, 0
 	note D_, 6
 	rest 2
 	note E_, 15
 	duty_cycle 1
-	channel_volume 8
+	volume_envelope 8, 0
 	note E_, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note E_, 8
 	duty_cycle 0
-	channel_volume 7
+	volume_envelope 7, 0
 	note D_, 11
 	rest 4
 	duty_cycle 1
-	channel_volume 8
+	volume_envelope 8, 0
 	dec_octave
 	note B_, 7
 	inc_octave
 	duty_cycle 0
-	channel_volume 7
+	volume_envelope 7, 0
 	note D_, 6
 	rest 2
 	note C#, 15
 	duty_cycle 1
-	channel_volume 8
-	fade_wave 7
+	volume_envelope 8, 0
+;	cutoff 7
 	note C#, 5
 	note C#, 5
 	note C#, 5
-	fade_wave 8
+;	cutoff 8
 	note C#, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note C#, 8
-	channel_volume 8
+	volume_envelope 8, 0
 	note C#, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note C#, 8
 	duty_cycle 0
-	channel_volume 10
+	volume_envelope 10, 0
 	note A_, 7
-	channel_volume 3
+	volume_envelope 3, 7
 	note A_, 8
 	rest 15
 	speed 10
@@ -707,103 +707,103 @@ Music_ChallengeHall_Ch2: ; f9883 (3e:5883)
 
 Branch_f9a28:
 	duty_cycle 0
-	channel_volume 7
+	volume_envelope 7, 0
 	note A_, 15
 	duty_cycle 1
-	channel_volume 8
+	volume_envelope 8, 0
 	note A_, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note A_, 8
 	duty_cycle 0
-	channel_volume 7
+	volume_envelope 7, 0
 	inc_octave
 	note C#, 15
 	dec_octave
 	duty_cycle 1
-	channel_volume 8
+	volume_envelope 8, 0
 	note A_, 7
 	duty_cycle 0
-	channel_volume 7
+	volume_envelope 7, 0
 	note A_, 8
 	note B_, 15
 	duty_cycle 1
-	channel_volume 8
+	volume_envelope 8, 0
 	note B_, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note B_, 8
 	duty_cycle 0
-	channel_volume 7
+	volume_envelope 7, 0
 	inc_octave
 	note D_, 15
 	dec_octave
 	duty_cycle 1
-	channel_volume 8
+	volume_envelope 8, 0
 	note B_, 7
 	duty_cycle 0
-	channel_volume 7
+	volume_envelope 7, 0
 	note B_, 8
 	inc_octave
 	note C#, 7
-	channel_volume 3
+	volume_envelope 3, 7
 	note C#, 8
 	duty_cycle 1
-	channel_volume 8
+	volume_envelope 8, 0
 	note C#, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note C#, 8
 	duty_cycle 0
-	channel_volume 7
+	volume_envelope 7, 0
 	note E_, 7
 	rest 8
 	note E_, 7
 	rest 8
-	channel_volume 7
+	volume_envelope 7, 0
 	note D_, 15
 	duty_cycle 1
-	channel_volume 8
+	volume_envelope 8, 0
 	note D_, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note D_, 8
 	dec_octave
 	duty_cycle 0
-	channel_volume 7
+	volume_envelope 7, 0
 	note G#, 15
 	inc_octave
 	duty_cycle 1
-	channel_volume 8
+	volume_envelope 8, 0
 	note D_, 7
 	dec_octave
 	duty_cycle 0
-	channel_volume 7
+	volume_envelope 7, 0
 	sound_ret
 
 
-Music_ChallengeHall_Ch3: ; f9a92 (3e:5a92)
-	;stereo_panning 1, 1
+Music_ChallengeHall_Ch3:
+	stereo_panning TRUE, TRUE
 	channel_volume 1
 	fade_wave 11
-	;echo 0
-	;cutoff 8
-	;cutoff 8
+;	echo 0
+;	cutoff 8
+;	cutoff 8
 	speed 10
 .Loop1
 	rest 6
 	sound_loop 2, .Loop1
 .MainLoop
 	octave 2
-	;cutoff 8
+;	cutoff 8
 	note E_, 6
-	;tie
+;	tie
 	note E_, 6
 	speed 1
 	inc_octave
 	note E_, 7
 	rest 8
 	dec_octave
-	;cutoff 7
+;	cutoff 7
 	note E_, 7
 	note E_, 8
-	;cutoff 8
+;	cutoff 8
 	note E_, 7
 	rest 8
 	note E_, 7
@@ -972,11 +972,11 @@ Music_ChallengeHall_Ch3: ; f9a92 (3e:5a92)
 	dec_octave
 	note A_, 7
 	rest 8
-	;cutoff 7
+;	cutoff 7
 	note A_, 5
 	note A_, 5
 	note A_, 5
-	;cutoff 8
+;	cutoff 8
 	note A_, 7
 	rest 8
 	note A_, 7
@@ -1037,7 +1037,7 @@ Branch_f9b92:
 	sound_ret
 
 
-Music_ChallengeHall_Ch4: ; f9ba9 (3e:5ba9)
+Music_ChallengeHall_Ch4:
 	toggle_noise 6
 	drum_speed 1
 	drum_speed 10
@@ -1092,4 +1092,3 @@ Music_ChallengeHall_Ch4: ; f9ba9 (3e:5ba9)
 	drum_note 2, 3
 	rest 3
 	sound_loop 0, .MainLoop
-; 0xf9be5

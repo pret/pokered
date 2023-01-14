@@ -3,12 +3,12 @@ Music_MatchStart3:
 	channel 1, Music_MatchStart3_Ch1
 	channel 2, Music_MatchStart3_Ch2
 
-Music_MatchStart3_Ch1: ; f7a0f (3d:7a0f)
+Music_MatchStart3_Ch1:
 	speed 1
-	;stereo_panning 1, 1
-	fade_wave 8
+	stereo_panning TRUE, TRUE
+;	cutoff 8
 	octave 2
-	channel_volume 15
+	volume_envelope 15, 0
 	duty_cycle 1
 	note C_, 1
 	note E_, 1
@@ -153,14 +153,14 @@ Music_MatchStart3_Ch1: ; f7a0f (3d:7a0f)
 	note D_, 1
 	dec_octave
 	octave 4
-	channel_volume 6
+	volume_envelope 6, 0
 	note F_, 1
 	note A_, 1
 	inc_octave
 	note C_, 1
 	dec_octave
 	octave 5
-	channel_volume 2
+	volume_envelope 2, 0
 	note G_, 1
 	note B_, 1
 	inc_octave
@@ -168,14 +168,14 @@ Music_MatchStart3_Ch1: ; f7a0f (3d:7a0f)
 	sound_ret
 
 
-Music_MatchStart3_Ch2: ; f7aba (3d:7aba)
+Music_MatchStart3_Ch2:
 	speed 1
-	;stereo_panning 1, 1
-	fade_wave 8
-	;frequency_offset 6
+	stereo_panning TRUE, TRUE
+;	cutoff 8
+;	frequency_offset 6
 	rest 4
 	octave 2
-	channel_volume 6
+	volume_envelope 6, 0
 	duty_cycle 1
 	note C_, 1
 	note E_, 1
@@ -320,11 +320,10 @@ Music_MatchStart3_Ch2: ; f7aba (3d:7aba)
 	note D_, 1
 	dec_octave
 	octave 4
-	channel_volume 2
+	volume_envelope 2, 0
 	note F_, 1
 	note A_, 1
 	inc_octave
 	note C_, 1
 	dec_octave
 	sound_ret
-; 0xf7b61

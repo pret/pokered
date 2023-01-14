@@ -5,60 +5,60 @@ Music_Club3:
 	channel 3, Music_Club3_Ch3
 	channel 4, Music_Club3_Ch4
 
-Music_Club3_Ch1: ; fa210 (3e:6210)
+Music_Club3_Ch1:
 	speed 9
-	;stereo_panning 1, 1
-	;vibrato_type 5
+	stereo_panning TRUE, TRUE
+;	vibrato_type 5
 	vibrato 20, 3, 3
-	fade_wave 8
+;	cutoff 8
 .MainLoop
 	duty_cycle 0
 .Loop1
 	octave 2
-	channel_volume 9
+	volume_envelope 9, 0
 	rest 4
 	note G_, 2
-	channel_volume 3
+	volume_envelope 3, 7
 	note G_, 1
 	inc_octave
-	channel_volume 9
+	volume_envelope 9, 0
 	note C_, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note C_, 2
 	dec_octave
-	channel_volume 9
+	volume_envelope 9, 0
 	note A#, 6
-	;tie
+;	tie
 	note A#, 12
-	channel_volume 3
+	volume_envelope 3, 7
 	note A#, 4
 	rest 4
-	channel_volume 9
+	volume_envelope 9, 0
 	note G_, 2
-	channel_volume 3
+	volume_envelope 3, 7
 	note G_, 1
 	inc_octave
-	channel_volume 9
+	volume_envelope 9, 0
 	speed 1
 	note C_, 5
-	;tie
+;	tie
 	note C#, 4
-	;tie
+;	tie
 	speed 9
 	note C_, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note C_, 1
 	dec_octave
-	channel_volume 9
+	volume_envelope 9, 0
 	note A#, 6
-	;tie
+;	tie
 	note A#, 12
-	channel_volume 3
+	volume_envelope 3, 7
 	note A#, 4
 	sound_loop 2, .Loop1
 	duty_cycle 1
-	channel_volume 9
-	fade_wave 7
+	volume_envelope 9, 3
+;	cutoff 7
 	sound_call Branch_fa330
 	sound_call Branch_fa403
 	note A#, 1
@@ -86,19 +86,19 @@ Music_Club3_Ch1: ; fa210 (3e:6210)
 	octave 2
 	note G_, 1
 	inc_octave
-	fade_wave 8
+;	cutoff 8
 	speed 1
 	note G_, 5
-	channel_volume 3
+	volume_envelope 3, 7
 	note G_, 4
 	speed 9
-	channel_volume 8
+	volume_envelope 8, 0
 	note C#, 1
 	note C_, 1
 	dec_octave
 	note A#, 1
-	channel_volume 9
-	fade_wave 7
+	volume_envelope 9, 3
+;	cutoff 7
 	sound_call Branch_fa330
 	sound_call Branch_fa403
 	inc_octave
@@ -129,9 +129,9 @@ Music_Club3_Ch1: ; fa210 (3e:6210)
 	note G_, 1
 	octave 4
 	duty_cycle 2
-	channel_volume 7
+	volume_envelope 7, 0
 	speed 1
-	fade_wave 8
+;	cutoff 8
 	note G_, 5
 	note C#, 4
 	note C_, 5
@@ -143,7 +143,7 @@ Music_Club3_Ch1: ; fa210 (3e:6210)
 	dec_octave
 	note A#, 4
 	duty_cycle 1
-	fade_wave 7
+;	cutoff 7
 	speed 9
 	sound_call Branch_fa370
 	sound_call Branch_fa403
@@ -172,13 +172,13 @@ Music_Club3_Ch1: ; fa210 (3e:6210)
 	octave 2
 	note G_, 1
 	inc_octave
-	fade_wave 8
+;	cutoff 8
 	speed 1
 	note G_, 5
-	channel_volume 3
+	volume_envelope 3, 7
 	note G_, 4
 	speed 9
-	channel_volume 8
+	volume_envelope 8, 0
 	note C#, 1
 	note C_, 1
 	dec_octave
@@ -214,8 +214,8 @@ Music_Club3_Ch1: ; fa210 (3e:6210)
 	inc_octave
 	duty_cycle 2
 	speed 1
-	fade_wave 8
-	channel_volume 7
+;	cutoff 8
+	volume_envelope 7, 0
 	note G_, 5
 	note C#, 4
 	note C_, 5
@@ -227,7 +227,7 @@ Music_Club3_Ch1: ; fa210 (3e:6210)
 	dec_octave
 	note A#, 4
 	speed 9
-	fade_wave 8
+;	cutoff 8
 	sound_loop 0, .MainLoop
 
 Branch_fa330:
@@ -252,11 +252,11 @@ Branch_fa330:
 	note A#, 1
 	dec_octave
 	speed 1
-	fade_wave 8
+;	cutoff 8
 	note F_, 5
 	note F#, 4
 	speed 9
-	fade_wave 7
+;	cutoff 7
 	note G_, 1
 	inc_octave
 	note E_, 1
@@ -294,8 +294,8 @@ Branch_fa330:
 
 Branch_fa370:
 	octave 2
-	channel_volume 9
-	fade_wave 7
+	volume_envelope 9, 3
+;	cutoff 7
 	note G_, 1
 	inc_octave
 	note D_, 1
@@ -316,54 +316,54 @@ Branch_fa370:
 	note A#, 1
 	dec_octave
 	speed 1
-	fade_wave 8
+;	cutoff 8
 	note F_, 5
 	note F#, 4
 	octave 4
 	duty_cycle 2
-	channel_volume 7
+	volume_envelope 7, 0
 	note G_, 3
-	channel_volume 1
+	volume_envelope 1, 7
 	note G_, 2
 	inc_octave
-	channel_volume 7
+	volume_envelope 7, 0
 	note D_, 2
-	channel_volume 1
+	volume_envelope 1, 7
 	dec_octave
 	note G_, 2
 	inc_octave
-	channel_volume 7
+	volume_envelope 7, 0
 	note G_, 3
-	channel_volume 1
+	volume_envelope 1, 7
 	note D_, 2
-	channel_volume 7
+	volume_envelope 7, 0
 	note D_, 2
-	channel_volume 1
+	volume_envelope 1, 7
 	note G_, 2
 	dec_octave
-	channel_volume 7
+	volume_envelope 7, 0
 	note G_, 3
-	channel_volume 1
+	volume_envelope 1, 7
 	inc_octave
 	note D_, 2
-	channel_volume 7
+	volume_envelope 7, 0
 	note D_, 2
-	channel_volume 1
+	volume_envelope 1, 7
 	dec_octave
 	note G_, 2
 	inc_octave
-	channel_volume 7
+	volume_envelope 7, 0
 	note G_, 3
-	channel_volume 1
+	volume_envelope 1, 7
 	note D_, 2
-	channel_volume 7
+	volume_envelope 7, 0
 	note D_, 2
-	channel_volume 1
+	volume_envelope 1, 7
 	note G_, 2
 	speed 9
 	duty_cycle 1
-	fade_wave 7
-	channel_volume 9
+;	cutoff 7
+	volume_envelope 9, 3
 	octave 2
 	note G_, 1
 	inc_octave
@@ -389,8 +389,8 @@ Branch_fa370:
 	octave 5
 	duty_cycle 2
 	speed 1
-	fade_wave 8
-	channel_volume 7
+;	cutoff 8
+	volume_envelope 7, 0
 	octave 5
 	note G_, 5
 	note C#, 4
@@ -404,8 +404,8 @@ Branch_fa370:
 	note A#, 4
 	speed 9
 	duty_cycle 1
-	fade_wave 7
-	channel_volume 9
+;	cutoff 7
+	volume_envelope 9, 3
 	sound_ret
 
 Branch_fa403:
@@ -430,59 +430,59 @@ Branch_fa403:
 	note A#, 1
 	dec_octave
 	speed 1
-	fade_wave 8
+;	cutoff 8
 	note F_, 5
 	note F#, 4
 	speed 9
-	fade_wave 7
+;	cutoff 7
 	note G_, 1
 	sound_ret
 
 
-Music_Club3_Ch2: ; fa423 (3e:6423)
+Music_Club3_Ch2:
 	speed 9
-	;stereo_panning 1, 1
-	;vibrato_type 5
+	stereo_panning TRUE, TRUE
+;	vibrato_type 5
 	vibrato 20, 3, 3
-	fade_wave 8
+;	cutoff 8
 .MainLoop
 	duty_cycle 0
 .Loop1
 	octave 2
-	channel_volume 7
+	volume_envelope 7, 0
 	rest 4
 	note D_, 2
-	channel_volume 3
+	volume_envelope 3, 7
 	note D_, 1
-	channel_volume 7
+	volume_envelope 7, 0
 	note F_, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note F_, 2
-	channel_volume 7
+	volume_envelope 7, 0
 	note E_, 6
-	;tie
+;	tie
 	note E_, 12
-	channel_volume 3
+	volume_envelope 3, 7
 	note E_, 4
 	rest 4
-	channel_volume 7
+	volume_envelope 7, 0
 	note D_, 2
-	channel_volume 3
+	volume_envelope 3, 7
 	note D_, 1
-	channel_volume 7
+	volume_envelope 7, 0
 	speed 1
 	note F_, 5
-	;tie
+;	tie
 	note F#, 4
 	speed 9
 	note F_, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note F_, 1
-	channel_volume 7
+	volume_envelope 7, 0
 	note E_, 6
-	;tie
+;	tie
 	note E_, 12
-	channel_volume 3
+	volume_envelope 3, 7
 	note E_, 4
 	sound_loop 2, .Loop1
 	duty_cycle 1
@@ -491,107 +491,107 @@ Music_Club3_Ch2: ; fa423 (3e:6423)
 	speed 9
 	rest 1
 	inc_octave
-	channel_volume 8
+	volume_envelope 8, 0
 	speed 1
 	note D_, 5
-	channel_volume 3
+	volume_envelope 3, 7
 	note D_, 4
 	speed 9
-	channel_volume 9
-	fade_wave 7
+	volume_envelope 9, 3
+;	cutoff 7
 	note G_, 1
 	dec_octave
 	speed 1
-	fade_wave 8
-	channel_volume 8
+;	cutoff 8
+	volume_envelope 8, 0
 	note F_, 5
 	note F#, 4
 	inc_octave
 	speed 9
-	channel_volume 9
-	fade_wave 7
+	volume_envelope 9, 3
+;	cutoff 7
 	note G_, 1
 	note G_, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note G_, 1
-	channel_volume 9
+	volume_envelope 9, 3
 	note F_, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note F_, 2
 	dec_octave
-	channel_volume 9
+	volume_envelope 9, 3
 	note D_, 1
 	inc_octave
 	inc_octave
-	channel_volume 8
+	volume_envelope 8, 0
 	speed 1
 	note D_, 5
-	channel_volume 3
+	volume_envelope 3, 7
 	note D_, 4
-	channel_volume 9
+	volume_envelope 9, 3
 	speed 9
 	rest 1
 	dec_octave
 	speed 1
-	fade_wave 8
+;	cutoff 8
 	note G_, 5
 	note D_, 4
 	dec_octave
 	note A#, 5
-	channel_volume 3
+	volume_envelope 3, 7
 	note A#, 4
 	inc_octave
 	inc_octave
-	channel_volume 9
+	volume_envelope 9, 3
 	note D_, 5
-	channel_volume 3
+	volume_envelope 3, 7
 	note D_, 4
 	speed 9
-	channel_volume 8
+	volume_envelope 8, 0
 	rest 1
 	dec_octave
 	speed 1
 	note D_, 5
-	channel_volume 3
+	volume_envelope 3, 7
 	note D_, 4
 	speed 9
-	channel_volume 9
-	fade_wave 7
+	volume_envelope 9, 3
+;	cutoff 7
 	note G_, 1
 	dec_octave
 	speed 1
-	fade_wave 8
-	channel_volume 8
+;	cutoff 8
+	volume_envelope 8, 0
 	note F_, 5
 	note F#, 4
 	inc_octave
 	speed 9
-	channel_volume 9
-	fade_wave 7
+	volume_envelope 9, 3
+;	cutoff 7
 	note A#, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note A#, 2
 	inc_octave
-	channel_volume 9
+	volume_envelope 9, 3
 	note C#, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note C#, 1
 	dec_octave
-	channel_volume 9
+	volume_envelope 9, 3
 	note G_, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note G_, 1
 	dec_octave
 	speed 1
-	channel_volume 8
+	volume_envelope 8, 0
 	note A#, 5
-	channel_volume 3
+	volume_envelope 3, 7
 	note C_, 4
 	speed 9
 	rest 1
 	dec_octave
-	channel_volume 8
-	fade_wave 8
+	volume_envelope 8, 0
+;	cutoff 8
 	note A#, 1
 	note B_, 1
 	inc_octave
@@ -601,99 +601,99 @@ Music_Club3_Ch2: ; fa423 (3e:6423)
 	rest 1
 	inc_octave
 	speed 1
-	channel_volume 8
+	volume_envelope 8, 0
 	note D_, 5
-	channel_volume 3
+	volume_envelope 3, 7
 	note D_, 4
 	speed 9
-	channel_volume 9
-	fade_wave 7
+	volume_envelope 9, 3
+;	cutoff 7
 	note G_, 1
 	dec_octave
 	speed 1
-	fade_wave 8
-	channel_volume 8
+;	cutoff 8
+	volume_envelope 8, 0
 	note F_, 5
 	note F#, 4
 	inc_octave
 	speed 9
-	channel_volume 9
-	fade_wave 7
+	volume_envelope 9, 3
+;	cutoff 7
 	note G_, 1
 	note G_, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note G_, 1
-	channel_volume 9
+	volume_envelope 9, 3
 	note F_, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note F_, 2
-	channel_volume 9
+	volume_envelope 9, 3
 	note D_, 1
 	inc_octave
-	channel_volume 8
+	volume_envelope 8, 0
 	speed 1
 	note G_, 5
-	channel_volume 3
+	volume_envelope 3, 7
 	note G_, 4
 	speed 9
 	rest 1
 	dec_octave
 	dec_octave
 	speed 1
-	channel_volume 8
+	volume_envelope 8, 0
 	note G_, 5
-	channel_volume 3
+	volume_envelope 3, 7
 	note G_, 4
 	inc_octave
-	channel_volume 8
+	volume_envelope 8, 0
 	note D_, 5
-	channel_volume 3
+	volume_envelope 3, 7
 	note D_, 4
 	speed 9
 	rest 1
 	rest 1
 	speed 1
-	channel_volume 8
+	volume_envelope 8, 0
 	note D_, 5
-	channel_volume 3
+	volume_envelope 3, 7
 	note D_, 4
 	speed 9
-	channel_volume 9
-	fade_wave 7
+	volume_envelope 9, 3
+;	cutoff 7
 	note G_, 1
 	dec_octave
 	speed 1
-	fade_wave 8
-	channel_volume 8
+;	cutoff 8
+	volume_envelope 8, 0
 	note F_, 5
 	note F#, 4
 	inc_octave
 	inc_octave
 	speed 9
-	channel_volume 9
-	fade_wave 7
+	volume_envelope 9, 3
+;	cutoff 7
 	note C#, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note C#, 2
-	channel_volume 9
+	volume_envelope 9, 3
 	note C_, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note C_, 1
 	dec_octave
-	channel_volume 9
+	volume_envelope 9, 3
 	note G_, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note G_, 1
-	channel_volume 8
+	volume_envelope 8, 0
 	speed 1
 	note F_, 5
-	channel_volume 3
+	volume_envelope 3, 7
 	note F_, 4
-	channel_volume 8
+	volume_envelope 8, 0
 	speed 9
 	rest 1
 	dec_octave
-	fade_wave 8
+;	cutoff 8
 	note D_, 1
 	note D#, 1
 	note E_, 1
@@ -703,115 +703,115 @@ Music_Club3_Ch2: ; fa423 (3e:6423)
 Branch_fa5a6:
 	octave 3
 	rest 1
-	channel_volume 8
+	volume_envelope 8, 0
 	speed 1
 	note D_, 5
-	channel_volume 3
+	volume_envelope 3, 7
 	note D_, 4
 	speed 9
-	channel_volume 9
-	fade_wave 7
+	volume_envelope 9, 3
+;	cutoff 7
 	note G_, 1
 	dec_octave
 	speed 1
-	channel_volume 8
-	fade_wave 8
+	volume_envelope 8, 0
+;	cutoff 8
 	note F_, 5
 	note F#, 4
 	inc_octave
 	speed 9
-	fade_wave 7
-	channel_volume 9
+;	cutoff 7
+	volume_envelope 9, 3
 	note G_, 1
 	note G_, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note G_, 1
-	channel_volume 9
+	volume_envelope 9, 3
 	note F_, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note F_, 2
-	channel_volume 9
+	volume_envelope 9, 3
 	note E_, 1
 	inc_octave
-	channel_volume 8
-	fade_wave 8
+	volume_envelope 8, 0
+;	cutoff 8
 	speed 1
 	note D_, 5
-	channel_volume 3
+	volume_envelope 3, 7
 	note D_, 4
-	channel_volume 8
+	volume_envelope 8, 0
 	speed 9
 	rest 1
 	dec_octave
 	speed 1
-	fade_wave 8
+;	cutoff 8
 	note G_, 5
 	note D_, 4
 	dec_octave
 	note A#, 5
-	channel_volume 3
+	volume_envelope 3, 7
 	note A#, 4
-	channel_volume 8
+	volume_envelope 8, 0
 	inc_octave
 	inc_octave
 	note D_, 5
-	channel_volume 3
+	volume_envelope 3, 7
 	note D_, 4
 	speed 9
 	rest 1
 	dec_octave
 	speed 1
-	channel_volume 8
+	volume_envelope 8, 0
 	note D_, 5
-	channel_volume 3
+	volume_envelope 3, 7
 	note D_, 4
 	speed 9
-	channel_volume 9
-	fade_wave 7
+	volume_envelope 9, 3
+;	cutoff 7
 	note G_, 1
 	dec_octave
 	speed 1
-	channel_volume 8
-	fade_wave 8
+	volume_envelope 8, 0
+;	cutoff 8
 	note F_, 5
 	note F#, 4
 	speed 9
 	inc_octave
-	channel_volume 9
-	fade_wave 7
+	volume_envelope 9, 3
+;	cutoff 7
 	note A#, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note A#, 2
 	inc_octave
-	channel_volume 9
+	volume_envelope 9, 3
 	note C#, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note C#, 1
 	dec_octave
-	channel_volume 9
+	volume_envelope 9, 3
 	note G_, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note G_, 1
 	dec_octave
-	channel_volume 9
+	volume_envelope 9, 3
 	note A#, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note A#, 1
-	fade_wave 8
-	channel_volume 8
+;	cutoff 8
+	volume_envelope 8, 0
 	note A#, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note A#, 2
 	sound_ret
 
 
-Music_Club3_Ch3: ; fa63e (3e:663e)
+Music_Club3_Ch3:
 	speed 9
-	;stereo_panning 1, 1
+	stereo_panning TRUE, TRUE
 	channel_volume 1
 	fade_wave 11
-	;echo 0
-	;cutoff 8
+;	echo 0
+;	cutoff 8
 .Loop1
 	octave 2
 	note G_, 1
@@ -836,11 +836,11 @@ Music_Club3_Ch3: ; fa63e (3e:663e)
 	octave 2
 	note G_, 1
 	octave 4
-	;cutoff 4
+;	cutoff 4
 	note G_, 1
 	rest 1
 	octave 2
-	;cutoff 8
+;	cutoff 8
 	note G_, 1
 	inc_octave
 	note F_, 1
@@ -853,25 +853,25 @@ Music_Club3_Ch3: ; fa63e (3e:663e)
 	note G_, 1
 	rest 1
 	octave 5
-	;cutoff 4
+;	cutoff 4
 	note G_, 1
 	rest 1
 	octave 2
-	;cutoff 8
+;	cutoff 8
 	note E_, 1
 	note F_, 1
 	octave 5
-	;cutoff 4
+;	cutoff 4
 	note G_, 1
 	octave 2
-	;cutoff 8
+;	cutoff 8
 	note G_, 1
 	octave 4
-	;cutoff 4
+;	cutoff 4
 	note G_, 1
 	rest 1
 	octave 2
-	;cutoff 8
+;	cutoff 8
 	note G_, 1
 	inc_octave
 	note F_, 1
@@ -884,21 +884,21 @@ Music_Club3_Ch3: ; fa63e (3e:663e)
 	note G_, 1
 	rest 1
 	inc_octave
-	;cutoff 4
+;	cutoff 4
 	note F_, 1
 	rest 1
-	;cutoff 8
+;	cutoff 8
 	note E_, 1
 	octave 2
 	note F_, 1
 	note F#, 1
 	note D#, 1
 	octave 4
-	;cutoff 4
+;	cutoff 4
 	note G_, 1
 	rest 1
 	octave 2
-	;cutoff 8
+;	cutoff 8
 	note D#, 1
 	inc_octave
 	note D_, 1
@@ -911,25 +911,25 @@ Music_Club3_Ch3: ; fa63e (3e:663e)
 	note D#, 1
 	rest 1
 	octave 5
-	;cutoff 4
+;	cutoff 4
 	note G_, 1
 	rest 1
 	octave 2
-	;cutoff 8
+;	cutoff 8
 	note C_, 1
 	note C#, 1
 	octave 5
-	;cutoff 4
+;	cutoff 4
 	note G_, 1
 	octave 2
-	;cutoff 8
+;	cutoff 8
 	note D#, 1
 	octave 4
-	;cutoff 4
+;	cutoff 4
 	note G_, 1
 	rest 1
 	octave 2
-	;cutoff 8
+;	cutoff 8
 	note D#, 1
 	inc_octave
 	note D_, 1
@@ -942,22 +942,22 @@ Music_Club3_Ch3: ; fa63e (3e:663e)
 	note D#, 1
 	rest 1
 	inc_octave
-	;cutoff 4
+;	cutoff 4
 	note F_, 1
 	rest 1
 	dec_octave
-	;cutoff 8
+;	cutoff 8
 	note D_, 1
 	note D#, 1
 	note E_, 1
 	dec_octave
 	note C_, 1
 	octave 4
-	;cutoff 4
+;	cutoff 4
 	note G_, 1
 	rest 1
 	octave 2
-	;cutoff 8
+;	cutoff 8
 	note C_, 1
 	note A#, 1
 	inc_octave
@@ -970,25 +970,25 @@ Music_Club3_Ch3: ; fa63e (3e:663e)
 	note C_, 1
 	rest 1
 	octave 5
-	;cutoff 4
+;	cutoff 4
 	note G_, 1
 	rest 1
 	octave 2
-	;cutoff 8
+;	cutoff 8
 	note A_, 1
 	note A#, 1
 	octave 5
-	;cutoff 4
+;	cutoff 4
 	note G_, 1
 	octave 2
-	;cutoff 8
+;	cutoff 8
 	note C_, 1
 	octave 4
-	;cutoff 4
+;	cutoff 4
 	note G_, 1
 	rest 1
 	octave 2
-	;cutoff 8
+;	cutoff 8
 	note C_, 1
 	note A#, 1
 	inc_octave
@@ -1001,21 +1001,21 @@ Music_Club3_Ch3: ; fa63e (3e:663e)
 	note C_, 1
 	rest 1
 	inc_octave
-	;cutoff 4
+;	cutoff 4
 	note F_, 1
 	rest 1
-	;cutoff 8
+;	cutoff 8
 	note E_, 1
 	octave 2
 	note A#, 1
 	note B_, 1
 	note D_, 1
 	octave 4
-	;cutoff 4
+;	cutoff 4
 	note G_, 1
 	rest 1
 	octave 2
-	;cutoff 8
+;	cutoff 8
 	note D_, 1
 	inc_octave
 	note C_, 1
@@ -1028,23 +1028,23 @@ Music_Club3_Ch3: ; fa63e (3e:663e)
 	note D_, 1
 	rest 1
 	octave 5
-	;cutoff 4
+;	cutoff 4
 	note C_, 1
 	rest 1
 	octave 3
-	;cutoff 6
+;	cutoff 6
 	note A#, 1
 	dec_octave
-	;cutoff 8
+;	cutoff 8
 	note C_, 1
 	note C#, 1
 	note D_, 1
 	octave 4
-	;cutoff 4
+;	cutoff 4
 	note G_, 1
 	rest 1
 	octave 2
-	;cutoff 8
+;	cutoff 8
 	note D_, 1
 	inc_octave
 	note C_, 1
@@ -1056,11 +1056,11 @@ Music_Club3_Ch3: ; fa63e (3e:663e)
 	note F_, 1
 	rest 1
 	inc_octave
-	;cutoff 4
+;	cutoff 4
 	note A#, 1
 	rest 1
 	dec_octave
-	;cutoff 8
+;	cutoff 8
 	note A#, 1
 	note B_, 1
 	inc_octave
@@ -1069,7 +1069,7 @@ Music_Club3_Ch3: ; fa63e (3e:663e)
 	sound_loop 0, Music_Club3_Ch3
 
 
-Music_Club3_Ch4: ; fa772 (3e:6772)
+Music_Club3_Ch4:
 	toggle_noise 6
 	drum_speed 9
 	octave 1
@@ -1107,4 +1107,3 @@ Branch_fa796:
 	drum_note 5, 1
 	drum_note 1, 1
 	sound_ret
-; 0xfa7a0

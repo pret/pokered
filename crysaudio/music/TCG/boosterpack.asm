@@ -4,101 +4,101 @@ Music_BoosterPack:
 	channel 2, Music_BoosterPack_Ch2
 	channel 3, Music_BoosterPack_Ch3
 
-Music_BoosterPack_Ch1: ; f7d60 (3d:7d60)
-	;stereo_panning 1, 1
-	;vibrato_type 1
+Music_BoosterPack_Ch1:
+	stereo_panning TRUE, TRUE
+;	vibrato_type 1
 	vibrato 20, 3, 3
-	fade_wave 8
+;	cutoff 8
 	octave 4
 	duty_cycle 1
 	speed 1
-	channel_volume 10
+	volume_envelope 10, 0
 	note D#, 5
-	channel_volume 3
+	volume_envelope 3, 7
 	note D#, 1
-	channel_volume 10
+	volume_envelope 10, 0
 	note G_, 5
-	channel_volume 3
+	volume_envelope 3, 7
 	note G_, 1
-	channel_volume 10
+	volume_envelope 10, 0
 	note A#, 5
-	channel_volume 3
+	volume_envelope 3, 7
 	note A#, 2
-	channel_volume 10
+	volume_envelope 10, 0
 	note F_, 5
-	channel_volume 3
+	volume_envelope 3, 7
 	note F_, 1
-	channel_volume 10
+	volume_envelope 10, 0
 	note A_, 5
-	channel_volume 3
+	volume_envelope 3, 7
 	note A_, 1
 	inc_octave
-	channel_volume 10
+	volume_envelope 10, 0
 	note C_, 5
-	channel_volume 3
+	volume_envelope 3, 7
 	note C_, 2
 	dec_octave
-	channel_volume 10
+	volume_envelope 10, 0
 	note B_, 16
-	;tie
+;	tie
 	note B_, 16
-	;tie
+;	tie
 	note B_, 6
-	channel_volume 3
+	volume_envelope 3, 7
 	note B_, 9
 	sound_ret
 
 
-Music_BoosterPack_Ch2: ; f7d9e (3d:7d9e)
-	;stereo_panning 1, 1
-	;vibrato_type 1
+Music_BoosterPack_Ch2:
+	stereo_panning TRUE, TRUE
+;	vibrato_type 1
 	vibrato 20, 3, 3
-	fade_wave 8
+;	cutoff 8
 	octave 3
 	duty_cycle 1
 	speed 1
-	channel_volume 9
+	volume_envelope 9, 0
 	note A#, 5
-	channel_volume 2
+	volume_envelope 2, 7
 	note A#, 1
 	inc_octave
-	channel_volume 9
+	volume_envelope 9, 0
 	note D#, 5
-	channel_volume 2
+	volume_envelope 2, 7
 	note D#, 1
-	channel_volume 9
+	volume_envelope 9, 0
 	note G_, 5
-	channel_volume 2
+	volume_envelope 2, 7
 	note G_, 2
-	channel_volume 9
+	volume_envelope 9, 0
 	note C_, 5
-	channel_volume 2
+	volume_envelope 2, 7
 	note C_, 1
-	channel_volume 9
+	volume_envelope 9, 0
 	note F_, 5
-	channel_volume 2
+	volume_envelope 2, 7
 	note F_, 1
-	channel_volume 9
+	volume_envelope 9, 0
 	note A_, 5
-	channel_volume 2
+	volume_envelope 2, 7
 	note A_, 2
-	channel_volume 9
+	volume_envelope 9, 0
 	note G_, 16
-	;tie
+;	tie
 	note G_, 16
-	;tie
+;	tie
 	note G_, 6
-	channel_volume 2
+	volume_envelope 2, 7
 	note G_, 9
 	sound_ret
 
 
-Music_BoosterPack_Ch3: ; f7ddb (3d:7ddb)
-	;stereo_panning 1, 1
+Music_BoosterPack_Ch3:
+	stereo_panning TRUE, TRUE
 	fade_wave 11
 	channel_volume 1
-	;cutoff 8
-	;echo 0
+;	cutoff 8
+;	echo 0
 	octave 2
 	speed 1
 	note D#, 6
@@ -112,9 +112,8 @@ Music_BoosterPack_Ch3: ; f7ddb (3d:7ddb)
 	note F_, 7
 	dec_octave
 	note G_, 16
-	;tie
+;	tie
 	note G_, 16
-	;tie
+;	tie
 	note G_, 6
 	sound_ret
-; 0xf7df8

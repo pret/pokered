@@ -5,15 +5,15 @@ Music_DuelTheme2:
 	channel 3, Music_DuelTheme2_Ch3
 	channel 4, Music_DuelTheme2_Ch4
 
-Music_DuelTheme2_Ch1: ; f5d68 (3d:5d68)
+Music_DuelTheme2_Ch1:
 	speed 9
-	;stereo_panning 1, 1
-	;vibrato_type 8
+	stereo_panning TRUE, TRUE
+;	vibrato_type 8
 	vibrato 20, 3, 3
-	fade_wave 8
+;	cutoff 8
 	octave 1
 	duty_cycle 1
-	channel_volume 9
+	volume_envelope 9, 4
 .Loop1
 	note D_, 2
 	note D_, 1
@@ -25,7 +25,7 @@ Music_DuelTheme2_Ch1: ; f5d68 (3d:5d68)
 	note D_, 1
 	sound_loop 23, .Loop2
 	duty_cycle 1
-	channel_volume 10
+	volume_envelope 10, 0
 	inc_octave
 	inc_octave
 	speed 1
@@ -41,57 +41,57 @@ Music_DuelTheme2_Ch1: ; f5d68 (3d:5d68)
 	speed 9
 	sound_call Branch_f5f3d
 	note C_, 6
-	;tie
+;	tie
 	speed 1
 	note C_, 12
-	channel_volume 3
+	volume_envelope 3, 7
 	note C_, 6
-	channel_volume 10
+	volume_envelope 10, 0
 	dec_octave
 	note B_, 12
-	channel_volume 3
+	volume_envelope 3, 7
 	note B_, 6
-	channel_volume 10
+	volume_envelope 10, 0
 	note G_, 12
-	channel_volume 3
+	volume_envelope 3, 7
 	note G_, 6
 	speed 9
-	channel_volume 10
-	fade_wave 8
+	volume_envelope 10, 0
+;	cutoff 8
 	note A_, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note A_, 1
-	channel_volume 10
-	fade_wave 6
+	volume_envelope 10, 0
+;	cutoff 6
 	note D_, 1
-	fade_wave 8
+;	cutoff 8
 	note D_, 9
-	;tie
+;	tie
 	note D_, 9
-	channel_volume 4
+	volume_envelope 4, 7
 	note D_, 3
 	duty_cycle 2
-	fade_wave 8
-	channel_volume 3
+;	cutoff 8
+	volume_envelope 2, -7
 	note E_, 4
-	channel_volume 6
+	volume_envelope 6, 0
 	note E_, 7
-	channel_volume 2
+	volume_envelope 2, 7
 	note E_, 1
-	channel_volume 6
+	volume_envelope 5, -7
 	note G_, 4
-	channel_volume 8
+	volume_envelope 8, 0
 	speed 1
 	note G_, 12
-	channel_volume 2
+	volume_envelope 2, 7
 	note G_, 6
 	inc_octave
 	speed 9
-	channel_volume 8
-	fade_wave 8
+	volume_envelope 7, -7
+;	cutoff 8
 	note C_, 3
 	duty_cycle 1
-	channel_volume 10
+	volume_envelope 10, 0
 	dec_octave
 	speed 1
 	note C_, 3
@@ -105,58 +105,58 @@ Music_DuelTheme2_Ch1: ; f5d68 (3d:5d68)
 	note C_, 3
 	speed 9
 	sound_call Branch_f5f3d
-	fade_wave 8
+;	cutoff 8
 	note C_, 4
-	;tie
+;	tie
 	speed 1
 	note C_, 4
 	note E_, 5
 	note F_, 4
 	note F#, 5
 	note G_, 12
-	channel_volume 3
+	volume_envelope 3, 7
 	note G_, 6
-	channel_volume 10
+	volume_envelope 10, 0
 	note E_, 12
-	channel_volume 3
+	volume_envelope 3, 7
 	note E_, 6
 	speed 9
-	channel_volume 10
-	fade_wave 8
+	volume_envelope 10, 0
+;	cutoff 8
 	note C_, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note C_, 1
-	channel_volume 10
+	volume_envelope 10, 0
 	note D_, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note D_, 1
 	dec_octave
-	channel_volume 10
-	fade_wave 6
+	volume_envelope 10, 0
+;	cutoff 6
 	note A_, 1
 	inc_octave
-	fade_wave 8
+;	cutoff 8
 	note D_, 9
-	;tie
+;	tie
 	note D_, 10
-	channel_volume 3
+	volume_envelope 3, 7
 	note D_, 1
-	channel_volume 10
+	volume_envelope 10, 0
 	speed 1
-	fade_wave 8
+;	cutoff 8
 	note D_, 4
 	note D#, 5
 	speed 9
 	note E_, 11
-	channel_volume 3
+	volume_envelope 3, 7
 	note E_, 1
-	channel_volume 10
+	volume_envelope 10, 0
 	note G_, 5
-	channel_volume 3
+	volume_envelope 3, 7
 	note G_, 1
-	channel_volume 10
+	volume_envelope 10, 0
 	inc_octave
-	fade_wave 8
+;	cutoff 8
 	note C_, 3
 	dec_octave
 	speed 1
@@ -171,10 +171,10 @@ Music_DuelTheme2_Ch1: ; f5d68 (3d:5d68)
 	note C_, 3
 	sound_call Branch_f5f90
 	note D_, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note D_, 1
 	duty_cycle 1
-	channel_volume 9
+	volume_envelope 9, 4
 	octave 1
 	note D_, 1
 .Loop3
@@ -182,7 +182,7 @@ Music_DuelTheme2_Ch1: ; f5d68 (3d:5d68)
 	note D_, 1
 	sound_loop 3, .Loop3
 	duty_cycle 2
-	channel_volume 7
+	volume_envelope 6, -3
 	inc_octave
 	inc_octave
 	note G_, 1
@@ -197,99 +197,99 @@ Music_DuelTheme2_Ch1: ; f5d68 (3d:5d68)
 	note D_, 1
 	note B_, 1
 	duty_cycle 1
-	channel_volume 10
+	volume_envelope 10, 0
 	sound_call Branch_f5f62
 	octave 4
-	channel_volume 4
+	volume_envelope 4, 7
 	note F#, 12
-	channel_volume 10
+	volume_envelope 10, 0
 	note C#, 9
-	channel_volume 4
+	volume_envelope 4, 7
 	note C#, 1
-	channel_volume 10
+	volume_envelope 10, 0
 	note C#, 1
 	note D_, 1
 	note E_, 3
 	note D_, 3
 	note C#, 3
 	dec_octave
-	fade_wave 6
+;	cutoff 6
 	note B_, 3
-	fade_wave 8
+;	cutoff 8
 	note B_, 4
-	channel_volume 4
+	volume_envelope 4, 7
 	note B_, 1
 	inc_octave
-	channel_volume 10
+	volume_envelope 10, 0
 	speed 1
 	note C#, 4
 	dec_octave
 	note B_, 5
 	speed 9
 	note A_, 6
-	channel_volume 4
+	volume_envelope 4, 7
 	note A_, 1
 	duty_cycle 1
-	channel_volume 9
-	fade_wave 8
+	volume_envelope 9, 3
+;	cutoff 8
 	note D_, 2
 	note D_, 2
 	rest 2
 	note C#, 2
 	duty_cycle 1
-	channel_volume 10
-	fade_wave 8
+	volume_envelope 10, 0
+;	cutoff 8
 	sound_call Branch_f5f62
 	octave 4
-	channel_volume 4
+	volume_envelope 4, 7
 	note F#, 6
 	dec_octave
-	channel_volume 10
+	volume_envelope 10, 0
 	note B_, 2
 	inc_octave
 	note C#, 2
 	note D_, 1
-	channel_volume 4
+	volume_envelope 4, 7
 	note D_, 1
-	channel_volume 10
+	volume_envelope 10, 0
 	note D_, 9
-	channel_volume 4
+	volume_envelope 4, 7
 	note D_, 1
-	channel_volume 10
-	fade_wave 7
+	volume_envelope 10, 0
+;	cutoff 7
 	note C#, 1
 	note D_, 1
-	fade_wave 8
+;	cutoff 8
 	note E_, 3
 	note D_, 3
 	note C#, 3
 	dec_octave
-	fade_wave 6
+;	cutoff 6
 	note A_, 3
 	inc_octave
-	fade_wave 8
+;	cutoff 8
 	note F_, 10
-	fade_wave 7
+;	cutoff 7
 	note E_, 1
 	note F_, 1
-	fade_wave 8
+;	cutoff 8
 	note G_, 3
 	note F_, 3
 	note E_, 3
 	speed 1
 	note C_, 2
-	;tie
+;	tie
 	note C_, 16
-	channel_volume 4
+	volume_envelope 4, 7
 	note C_, 9
 	speed 9
-	channel_volume 10
-	fade_wave 8
+	volume_envelope 10, 0
+;	cutoff 8
 	note A_, 10
-	fade_wave 7
+;	cutoff 7
 	note G_, 1
 	note F_, 1
-	fade_wave 8
+;	cutoff 8
 	note G_, 6
 	inc_octave
 	note C_, 3
@@ -306,10 +306,10 @@ Music_DuelTheme2_Ch1: ; f5d68 (3d:5d68)
 	note C_, 3
 	sound_call Branch_f5f90
 	note D_, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note D_, 1
 	duty_cycle 1
-	channel_volume 9
+	volume_envelope 9, 4
 	octave 1
 	note D_, 1
 .Loop4
@@ -317,8 +317,8 @@ Music_DuelTheme2_Ch1: ; f5d68 (3d:5d68)
 	note D_, 1
 	sound_loop 3, .Loop4
 	duty_cycle 1
-	channel_volume 10
-	fade_wave 8
+	volume_envelope 10, 0
+;	cutoff 8
 	octave 5
 	note D_, 1
 	note C_, 1
@@ -336,40 +336,40 @@ Music_DuelTheme2_Ch1: ; f5d68 (3d:5d68)
 	note F_, 1
 	note C_, 1
 	note D_, 12
-	;tie
+;	tie
 	note D_, 12
 	duty_cycle 1
-	channel_volume 9
+	volume_envelope 9, 4
 	sound_loop 0, .MainLoop
 
 Branch_f5f3d:
-	fade_wave 8
+;	cutoff 8
 	note D_, 12
-	;tie
+;	tie
 	note D_, 4
-	;tie
+;	tie
 	speed 1
 	note D_, 7
-	channel_volume 4
+	volume_envelope 4, 7
 	note D_, 2
-	;tie
+;	tie
 	speed 9
 	note D_, 1
 	dec_octave
-	channel_volume 10
+	volume_envelope 10, 0
 	note A_, 4
-	;tie
+;	tie
 	speed 1
 	note A_, 7
-	channel_volume 4
+	volume_envelope 4, 7
 	note A_, 2
-	;tie
+;	tie
 	speed 9
 	note A_, 1
 	inc_octave
-	channel_volume 10
+	volume_envelope 10, 0
 	note C_, 12
-	;tie
+;	tie
 	sound_ret
 
 Branch_f5f62:
@@ -390,10 +390,10 @@ Branch_f5f62:
 	dec_octave
 	note A_, 2
 	note F#, 5
-	channel_volume 4
+	volume_envelope 4, 7
 	note F#, 1
 	inc_octave
-	channel_volume 10
+	volume_envelope 10, 0
 	note D_, 2
 	note C#, 2
 	dec_octave
@@ -402,13 +402,13 @@ Branch_f5f62:
 	note G_, 2
 	note A_, 2
 	note B_, 1
-	channel_volume 4
+	volume_envelope 4, 7
 	note B_, 1
-	channel_volume 10
+	volume_envelope 10, 0
 	inc_octave
-	fade_wave 6
+;	cutoff 6
 	note F#, 1
-	fade_wave 8
+;	cutoff 8
 	note F#, 9
 	sound_ret
 
@@ -417,47 +417,41 @@ Branch_f5f90:
 	speed 9
 .Loop5
 	note D_, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note D_, 1
 	duty_cycle 1
-	channel_volume 9
+	volume_envelope 9, 4
 	octave 1
 	note D_, 1
-	;rept 5
 	note D_, 2
 	note D_, 1
-	;---
 	note D_, 2
 	note D_, 1
-	;---
 	note D_, 2
 	note D_, 1
-	;---
 	note D_, 2
 	note D_, 1
-	;---
 	note D_, 2
 	note D_, 1
-	;endr
 	note D_, 2
 	duty_cycle 1
-	channel_volume 10
+	volume_envelope 10, 0
 	octave 5
 	note C_, 4
 	sound_loop 3, .Loop5
 	sound_ret
 
 
-Music_DuelTheme2_Ch2: ; f5fad (3d:5fad)
+Music_DuelTheme2_Ch2:
 	speed 9
-	;stereo_panning 1, 1
-	;vibrato_type 8
+	stereo_panning TRUE, TRUE
+;	vibrato_type 8
 	vibrato 15, 3, 3
-	fade_wave 8
+;	cutoff 8
 	octave 2
 	duty_cycle 1
-	channel_volume 7
-	;frequency_offset 5
+	volume_envelope 7, 4
+;	frequency_offset 5
 .Loop1
 	note D_, 2
 	note D_, 1
@@ -468,8 +462,8 @@ Music_DuelTheme2_Ch2: ; f5fad (3d:5fad)
 	note D_, 1
 	sound_loop 24, .Loop2
 	duty_cycle 2
-	channel_volume 7
-	;frequency_offset 0
+	volume_envelope 6, -3
+;	frequency_offset 0
 .Loop3
 	inc_octave
 	note D_, 1
@@ -489,17 +483,17 @@ Music_DuelTheme2_Ch2: ; f5fad (3d:5fad)
 	note C_, 1
 	note G_, 1
 	duty_cycle 1
-	channel_volume 7
+	volume_envelope 7, 0
 	dec_octave
 	note D_, 1
 	rest 1
 	dec_octave
-	fade_wave 6
+;	cutoff 6
 	note A_, 1
-	fade_wave 8
+;	cutoff 8
 	note A_, 9
 	duty_cycle 2
-	channel_volume 7
+	volume_envelope 6, -3
 .Loop5
 	note A_, 1
 	note D_, 1
@@ -507,24 +501,24 @@ Music_DuelTheme2_Ch2: ; f5fad (3d:5fad)
 	sound_loop 4, .Loop5
 	duty_cycle 2
 	inc_octave
-	fade_wave 8
-	channel_volume 3
+;	cutoff 8
+	volume_envelope 2, -7
 	note C_, 4
-	channel_volume 6
+	volume_envelope 6, 0
 	note C_, 7
 	rest 1
-	channel_volume 6
+	volume_envelope 5, -7
 	note E_, 4
 	speed 1
-	channel_volume 8
+	volume_envelope 8, 0
 	note E_, 12
 	rest 6
 	speed 9
-	channel_volume 8
+	volume_envelope 7, -7
 	note G_, 3
 	dec_octave
 	duty_cycle 1
-	channel_volume 7
+	volume_envelope 7, 0
 	speed 1
 	note G_, 3
 	note A_, 4
@@ -537,7 +531,7 @@ Music_DuelTheme2_Ch2: ; f5fad (3d:5fad)
 	note G_, 3
 	speed 9
 	duty_cycle 2
-	channel_volume 7
+	volume_envelope 6, -3
 .Loop6
 	note A_, 1
 	note D_, 1
@@ -555,7 +549,7 @@ Music_DuelTheme2_Ch2: ; f5fad (3d:5fad)
 	speed 1
 	note G_, 4
 	duty_cycle 1
-	channel_volume 7
+	volume_envelope 7, 0
 	inc_octave
 	note C_, 5
 	note D_, 4
@@ -571,19 +565,19 @@ Music_DuelTheme2_Ch2: ; f5fad (3d:5fad)
 	rest 1
 	note A_, 1
 	rest 1
-	fade_wave 6
+;	cutoff 6
 	note D_, 1
-	fade_wave 8
+;	cutoff 8
 	note A_, 9
 	duty_cycle 2
-	channel_volume 7
+	volume_envelope 6, -3
 .Loop9
 	note A_, 1
 	note D_, 1
 	sound_loop 5, .Loop9
 	note A_, 1
 	duty_cycle 1
-	channel_volume 7
+	volume_envelope 7, 0
 	speed 1
 	note A#, 4
 	note B_, 5
@@ -609,8 +603,8 @@ Music_DuelTheme2_Ch2: ; f5fad (3d:5fad)
 	note A_, 1
 	rest 1
 	duty_cycle 1
-	channel_volume 7
-	;frequency_offset 5
+	volume_envelope 7, 4
+;	frequency_offset 5
 	dec_octave
 	dec_octave
 	note D_, 1
@@ -619,8 +613,8 @@ Music_DuelTheme2_Ch2: ; f5fad (3d:5fad)
 	note D_, 1
 	sound_loop 3, .Loop10
 	duty_cycle 2
-	channel_volume 7
-	;frequency_offset 0
+	volume_envelope 6, -3
+;	frequency_offset 0
 	inc_octave
 	note E_, 1
 	rest 1
@@ -638,7 +632,7 @@ Music_DuelTheme2_Ch2: ; f5fad (3d:5fad)
 	inc_octave
 	note C#, 1
 	duty_cycle 2
-	channel_volume 7
+	volume_envelope 6, -3
 	sound_call Branch_f6173
 	octave 4
 .Loop11
@@ -666,21 +660,21 @@ Music_DuelTheme2_Ch2: ; f5fad (3d:5fad)
 	inc_octave
 	sound_loop 2, .Loop12
 	duty_cycle 1
-	channel_volume 9
+	volume_envelope 9, 3
 	octave 2
 	rest 1
-	fade_wave 8
+;	cutoff 8
 	note B_, 2
 	note B_, 2
 	rest 2
 	note A_, 2
 	inc_octave
-	fade_wave 8
+;	cutoff 8
 	note C#, 1
 	note D_, 1
 	note E_, 1
 	duty_cycle 2
-	channel_volume 7
+	volume_envelope 6, -3
 	sound_call Branch_f6173
 	octave 3
 .Loop13
@@ -768,7 +762,7 @@ Music_DuelTheme2_Ch2: ; f5fad (3d:5fad)
 	inc_octave
 	note C_, 1
 	duty_cycle 1
-	channel_volume 7
+	volume_envelope 7, 0
 	dec_octave
 	speed 1
 	note G_, 3
@@ -784,8 +778,8 @@ Music_DuelTheme2_Ch2: ; f5fad (3d:5fad)
 	note A_, 1
 	rest 1
 	duty_cycle 1
-	channel_volume 7
-	;frequency_offset 5
+	volume_envelope 7, 4
+;	frequency_offset 5
 	dec_octave
 	dec_octave
 	note D_, 1
@@ -795,16 +789,16 @@ Music_DuelTheme2_Ch2: ; f5fad (3d:5fad)
 	sound_loop 3, .Loop17
 	rest 12
 	duty_cycle 1
-	channel_volume 7
-	;frequency_offset 0
+	volume_envelope 7, 0
+;	frequency_offset 0
 	inc_octave
 	note A_, 12
-	;tie
+;	tie
 	note A_, 12
 	dec_octave
 	duty_cycle 1
-	channel_volume 7
-	;frequency_offset 5
+	volume_envelope 7, 4
+;	frequency_offset 5
 	sound_loop 0, .MainLoop
 
 Branch_f6173:
@@ -841,30 +835,24 @@ Branch_f618f:
 .Loop20
 	note A_, 1
 	rest 1
-	channel_volume 7
-	;frequency_offset 5
+	volume_envelope 7, 4
+;	frequency_offset 5
 	dec_octave
 	dec_octave
 	note D_, 1
-	;rept 5
 	note D_, 2
 	note D_, 1
-	;---
 	note D_, 2
 	note D_, 1
-	;---
 	note D_, 2
 	note D_, 1
-	;---
 	note D_, 2
 	note D_, 1
-	;---
 	note D_, 2
 	note D_, 1
-	;endr
 	note D_, 2
-	channel_volume 7
-	;frequency_offset 0
+	volume_envelope 7, 0
+;	frequency_offset 0
 	inc_octave
 	inc_octave
 	note G_, 4
@@ -872,13 +860,13 @@ Branch_f618f:
 	sound_ret
 
 
-Music_DuelTheme2_Ch3: ; f61ac (3d:61ac)
+Music_DuelTheme2_Ch3:
 	speed 9
-	;stereo_panning 1, 1
+	stereo_panning TRUE, TRUE
 	channel_volume 1
 	fade_wave 11
-	;echo 64
-	;cutoff 7
+;	echo 64
+;	cutoff 7
 	octave 2
 .Loop1
 	sound_call Branch_f62e5
@@ -888,17 +876,13 @@ Music_DuelTheme2_Ch3: ; f61ac (3d:61ac)
 	sound_call Branch_f62e5
 	sound_loop 44, .Loop2
 .Loop3
-	;rept 3
 	sound_call Branch_f62e5
-	;---
 	sound_call Branch_f62e5
-	;---
 	sound_call Branch_f62e5
-	;endr
 	octave 2
-	;cutoff 4
+;	cutoff 4
 	note D_, 2
-	;cutoff 7
+;	cutoff 7
 	note C_, 3
 	note E_, 1
 	sound_loop 3, .Loop3
@@ -906,7 +890,7 @@ Music_DuelTheme2_Ch3: ; f61ac (3d:61ac)
 	sound_call Branch_f62e5
 	sound_loop 2, .Loop4
 	octave 2
-	;cutoff 8
+;	cutoff 8
 	note E_, 1
 	inc_octave
 	note E_, 1
@@ -932,9 +916,9 @@ Music_DuelTheme2_Ch3: ; f61ac (3d:61ac)
 	sound_loop 4, .Loop5
 	octave 2
 .Loop6
-	;cutoff 4
+;	cutoff 4
 	note E_, 2
-	;cutoff 7
+;	cutoff 7
 	note E_, 1
 	inc_octave
 	note E_, 1
@@ -945,9 +929,9 @@ Music_DuelTheme2_Ch3: ; f61ac (3d:61ac)
 	dec_octave
 	sound_loop 4, .Loop6
 .Loop7
-	;cutoff 4
+;	cutoff 4
 	note A_, 2
-	;cutoff 7
+;	cutoff 7
 	note A_, 1
 	inc_octave
 	note A_, 1
@@ -961,7 +945,7 @@ Music_DuelTheme2_Ch3: ; f61ac (3d:61ac)
 	sound_call Branch_f62e5
 	sound_loop 2, .Loop8
 	octave 2
-	;cutoff 8
+;	cutoff 8
 	note E_, 1
 	inc_octave
 	note E_, 1
@@ -990,9 +974,9 @@ Music_DuelTheme2_Ch3: ; f61ac (3d:61ac)
 	sound_loop 4, .Loop9
 	octave 2
 .Loop10
-	;cutoff 4
+;	cutoff 4
 	note E_, 2
-	;cutoff 7
+;	cutoff 7
 	note E_, 1
 	inc_octave
 	note E_, 1
@@ -1003,9 +987,9 @@ Music_DuelTheme2_Ch3: ; f61ac (3d:61ac)
 	dec_octave
 	sound_loop 4, .Loop10
 .Loop11
-	;cutoff 4
+;	cutoff 4
 	note G_, 2
-	;cutoff 7
+;	cutoff 7
 	note G_, 1
 	inc_octave
 	note G_, 1
@@ -1016,9 +1000,9 @@ Music_DuelTheme2_Ch3: ; f61ac (3d:61ac)
 	dec_octave
 	sound_loop 2, .Loop11
 .Loop12
-	;cutoff 4
+;	cutoff 4
 	note A_, 2
-	;cutoff 7
+;	cutoff 7
 	note A_, 1
 	inc_octave
 	note A_, 1
@@ -1029,9 +1013,9 @@ Music_DuelTheme2_Ch3: ; f61ac (3d:61ac)
 	dec_octave
 	sound_loop 2, .Loop12
 .Loop13
-	;cutoff 4
+;	cutoff 4
 	note A#, 2
-	;cutoff 7
+;	cutoff 7
 	note A#, 1
 	inc_octave
 	note A#, 1
@@ -1043,9 +1027,9 @@ Music_DuelTheme2_Ch3: ; f61ac (3d:61ac)
 	sound_loop 2, .Loop13
 	inc_octave
 .Loop14
-	;cutoff 4
+;	cutoff 4
 	note C_, 2
-	;cutoff 7
+;	cutoff 7
 	note C_, 1
 	inc_octave
 	note C_, 1
@@ -1057,9 +1041,9 @@ Music_DuelTheme2_Ch3: ; f61ac (3d:61ac)
 	sound_loop 2, .Loop14
 	dec_octave
 .Loop15
-	;cutoff 4
+;	cutoff 4
 	note A#, 2
-	;cutoff 7
+;	cutoff 7
 	note A#, 1
 	inc_octave
 	note A#, 1
@@ -1071,9 +1055,9 @@ Music_DuelTheme2_Ch3: ; f61ac (3d:61ac)
 	sound_loop 2, .Loop15
 	inc_octave
 .Loop16
-	;cutoff 4
+;	cutoff 4
 	note C_, 2
-	;cutoff 7
+;	cutoff 7
 	note C_, 1
 	inc_octave
 	note C_, 1
@@ -1084,17 +1068,13 @@ Music_DuelTheme2_Ch3: ; f61ac (3d:61ac)
 	dec_octave
 	sound_loop 2, .Loop16
 .Loop17
-	;rept 3
 	sound_call Branch_f62e5
-	;---
 	sound_call Branch_f62e5
-	;---
 	sound_call Branch_f62e5
-	;endr
 	octave 2
-	;cutoff 4
+;	cutoff 4
 	note D_, 2
-	;cutoff 7
+;	cutoff 7
 	note C_, 3
 	note E_, 1
 	sound_loop 3, .Loop17
@@ -1102,7 +1082,7 @@ Music_DuelTheme2_Ch3: ; f61ac (3d:61ac)
 	sound_call Branch_f62e5
 	sound_loop 2, .Loop18
 	octave 3
-	;cutoff 8
+;	cutoff 8
 	note D_, 1
 	note C_, 1
 	dec_octave
@@ -1125,9 +1105,9 @@ Music_DuelTheme2_Ch3: ; f61ac (3d:61ac)
 
 Branch_f62e5:
 	octave 2
-	;cutoff 4
+;	cutoff 4
 	note D_, 2
-	;cutoff 7
+;	cutoff 7
 	note D_, 1
 	inc_octave
 	note D_, 1
@@ -1138,7 +1118,7 @@ Branch_f62e5:
 	sound_ret
 
 
-Music_DuelTheme2_Ch4: ; f62f3 (3d:62f3)
+Music_DuelTheme2_Ch4:
 	toggle_noise 6
 	drum_speed 9
 .Loop1
@@ -1168,19 +1148,12 @@ Music_DuelTheme2_Ch4: ; f62f3 (3d:62f3)
 	sound_call Branch_f6396
 .Loop6
 	sound_call Branch_f637c
-	;rept 6
 	drum_note 2, 1
-	;---
 	drum_note 2, 1
-	;---
 	drum_note 2, 1
-	;---
 	drum_note 2, 1
-	;---
 	drum_note 2, 1
-	;---
 	drum_note 2, 1
-	;endr
 	drum_note 2, 2
 	drum_note 6, 3
 	drum_note 2, 1
@@ -1229,19 +1202,12 @@ Music_DuelTheme2_Ch4: ; f62f3 (3d:62f3)
 	sound_call Branch_f6396
 .Loop10
 	sound_call Branch_f637c
-	;rept 6
 	drum_note 2, 1
-	;---
 	drum_note 2, 1
-	;---
 	drum_note 2, 1
-	;---
 	drum_note 2, 1
-	;---
 	drum_note 2, 1
-	;---
 	drum_note 2, 1
-	;endr
 	drum_note 2, 2
 	drum_note 6, 3
 	drum_note 2, 1
@@ -1295,4 +1261,3 @@ Branch_f6396:
 	drum_note 2, 1
 	sound_loop 6, .Loop12
 	sound_ret
-; 0xf63a1

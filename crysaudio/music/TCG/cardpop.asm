@@ -5,12 +5,12 @@ Music_CardPop:
 	channel 3, Music_CardPop_Ch3
 	channel 4, Music_CardPop_Ch4
 
-Music_CardPop_Ch1: ; f703a (3d:703a)
+Music_CardPop_Ch1:
 	speed 4
-	;stereo_panning 1, 1
-	fade_wave 8
+	stereo_panning TRUE, TRUE
+;	cutoff 8
 	duty_cycle 2
-	channel_volume 9
+	volume_envelope 9, 0
 .MainLoop
 .Loop1
 	rest 16
@@ -18,50 +18,50 @@ Music_CardPop_Ch1: ; f703a (3d:703a)
 	rest 14
 .Loop2
 	octave 5
-	fade_wave 8
+;	cutoff 8
 	note F#, 1
 	note G_, 1
-	fade_wave 6
+;	cutoff 6
 	note F#, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note F#, 1
-	channel_volume 9
+	volume_envelope 9, 0
 	note D_, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note F#, 1
 	dec_octave
-	channel_volume 9
+	volume_envelope 9, 0
 	note A_, 1
 	inc_octave
-	channel_volume 3
+	volume_envelope 3, 7
 	note D_, 1
 	dec_octave
-	channel_volume 9
+	volume_envelope 9, 0
 	note G_, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note A_, 1
-	channel_volume 9
+	volume_envelope 9, 0
 	note F#, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note G_, 1
-	channel_volume 9
+	volume_envelope 9, 0
 	note D_, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note G_, 1
 	dec_octave
-	channel_volume 9
+	volume_envelope 9, 0
 	note A_, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	inc_octave
 	note D_, 1
 	dec_octave
-	channel_volume 9
+	volume_envelope 9, 0
 	note G_, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note A_, 1
-	channel_volume 9
+	volume_envelope 9, 0
 	note F#, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note G_, 1
 	rest 1
 	note F#, 1
@@ -69,70 +69,70 @@ Music_CardPop_Ch1: ; f703a (3d:703a)
 	rest 16
 	rest 14
 	octave 5
-	channel_volume 9
-	fade_wave 8
+	volume_envelope 9, 0
+;	cutoff 8
 	note E_, 1
 	note F_, 1
-	fade_wave 6
+;	cutoff 6
 	note E_, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note E_, 1
-	channel_volume 9
+	volume_envelope 9, 0
 	note C_, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note E_, 1
 	dec_octave
-	channel_volume 9
+	volume_envelope 9, 0
 	note G_, 1
 	inc_octave
-	channel_volume 3
+	volume_envelope 3, 7
 	note C_, 1
 	dec_octave
-	channel_volume 9
+	volume_envelope 9, 0
 	note F_, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note G_, 1
-	channel_volume 9
+	volume_envelope 9, 0
 	note E_, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note F_, 1
-	channel_volume 9
+	volume_envelope 9, 0
 	note C_, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note E_, 1
 	dec_octave
-	channel_volume 9
+	volume_envelope 9, 0
 	note G_, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	inc_octave
 	note C_, 1
 	dec_octave
-	channel_volume 9
+	volume_envelope 9, 0
 	note F_, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note G_, 1
-	channel_volume 9
+	volume_envelope 9, 0
 	note E_, 1
-	channel_volume 3
+	volume_envelope 3, 7
 	note F_, 1
 	rest 1
 	note E_, 1
 	rest 12
 	rest 16
-	channel_volume 9
+	volume_envelope 9, 0
 	rest 14
 	sound_loop 2, .Loop2
 	rest 2
 	sound_loop 0, .MainLoop
 
 
-Music_CardPop_Ch2: ; f70df (3d:70df)
+Music_CardPop_Ch2:
 	speed 4
-	;stereo_panning 1, 1
-	fade_wave 8
+	stereo_panning TRUE, TRUE
+;	cutoff 8
 	duty_cycle 2
-	channel_volume 6
-	fade_wave 3
+	volume_envelope 6, 0
+;	cutoff 3
 .Loop1
 	octave 2
 	note A_, 2
@@ -212,13 +212,13 @@ Music_CardPop_Ch2: ; f70df (3d:70df)
 	sound_loop 0, Music_CardPop_Ch2
 
 
-Music_CardPop_Ch3: ; f713a (3d:713a)
+Music_CardPop_Ch3:
 	speed 4
 	fade_wave 11
-	;stereo_panning 1, 1
+	stereo_panning TRUE, TRUE
 	channel_volume 1
-	;echo 0
-	;cutoff 8
+;	echo 0
+;	cutoff 8
 	sound_call Branch_f715b
 	note C_, 2
 	note C#, 2
@@ -272,9 +272,8 @@ Branch_f716c:
 	sound_ret
 
 
-Music_CardPop_Ch4: ; f717d (3d:717d)
+Music_CardPop_Ch4:
 	toggle_noise 6
-.MainLoop
 	drum_speed 4
 	octave 1
 .Loop1
@@ -292,7 +291,7 @@ Music_CardPop_Ch4: ; f717d (3d:717d)
 .Loop2
 	drum_note 2, 2
 	sound_loop 4, .Loop2
-	sound_loop 0, .MainLoop
+	sound_loop 0, Music_CardPop_Ch4
 
 Branch_f7196:
 	drum_note 1, 2
@@ -305,4 +304,3 @@ Branch_f7196:
 	drum_note 1, 2
 	drum_note 2, 2
 	sound_ret
-; 0xf71a0
