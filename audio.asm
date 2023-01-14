@@ -416,6 +416,9 @@ INCLUDE "crysaudio/music/TCG2/fort1.asm"
 INCLUDE "crysaudio/music/TCG2/fort2.asm"
 INCLUDE "crysaudio/music/TCG2/fort3.asm"
 INCLUDE "crysaudio/music/TCG2/fort4.asm"
+
+SECTION "TCG2 Songs 1b", ROMX
+
 INCLUDE "crysaudio/music/TCG2/grcastle.asm"
 INCLUDE "crysaudio/music/TCG2/grchallengecup.asm"
 
@@ -427,6 +430,9 @@ INCLUDE "crysaudio/music/TCG2/grblimp.asm"
 INCLUDE "crysaudio/music/TCG2/grdueltheme1.asm"
 INCLUDE "crysaudio/music/TCG2/grdueltheme2.asm"
 INCLUDE "crysaudio/music/TCG2/grdueltheme3.asm"
+
+SECTION "TCG2 Songs 2b", ROMX
+
 INCLUDE "crysaudio/music/TCG2/ishihara.asm"
 
 
@@ -434,12 +440,12 @@ SECTION "TCG2 Songs 3", ROMX
 
 INCLUDE "crysaudio/music/TCG2/imakuni2.asm"
 INCLUDE "crysaudio/music/TCG2/credits.asm"
-INCLUDE "crysaudio/music/TCG2/diddly1.asm"
-INCLUDE "crysaudio/music/TCG2/diddly2.asm"
-INCLUDE "crysaudio/music/TCG2/diddly3.asm"
-INCLUDE "crysaudio/music/TCG2/diddly4.asm"
-INCLUDE "crysaudio/music/TCG2/diddly5.asm"
-INCLUDE "crysaudio/music/TCG2/diddly6.asm"
+INCLUDE "crysaudio/music/TCG2/ditty1.asm"
+INCLUDE "crysaudio/music/TCG2/ditty2.asm"
+INCLUDE "crysaudio/music/TCG2/ditty3.asm"
+INCLUDE "crysaudio/music/TCG2/ditty4.asm"
+INCLUDE "crysaudio/music/TCG2/ditty5.asm"
+INCLUDE "crysaudio/music/TCG2/ditty6.asm"
 
 
 SECTION "Pinball Songs 1", ROMX

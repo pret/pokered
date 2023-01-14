@@ -5,17 +5,19 @@ Music_GRCastle:
 	channel 3, Music_GRCastle_Ch3
 	channel 4, Music_GRCastle_Ch4
 
-Music_GRCastle_Ch2: ; 1f213c (7c:613c)
-	channel_volume 10
+Music_GRCastle_Ch2:
 	speed 1
 	rest 12
-	;musicf0 8
+;	preset 8
+	volume_envelope 10, 0
+	duty_cycle 0
+	vibrato 28, 3, 3
 	octave 1
-	;vibrato_type 5
+;	vibrato_type 5
 	vibrato 1, 3, 3
-	;musicf1 80
-	;musicf3
-	;musice4 0
+;	musicf1 80
+;	musicf3
+;	frequency_offset 0
 	note B_, 9
 	rest 4
 	note B_, 9
@@ -30,7 +32,7 @@ Music_GRCastle_Ch2: ; 1f213c (7c:613c)
 	rest 3
 	vibrato 7, 3, 3
 	note E_, 13
-	;tie
+;	tie
 	note E_, 12
 	vibrato 0, 3, 3
 	note D_, 13
@@ -42,10 +44,10 @@ Music_GRCastle_Ch2: ; 1f213c (7c:613c)
 	note E_, 1
 	rest 3
 	inc_octave
-	;musicf2
+;	musicf2
 	note E_, 12
 	note E_, 13
-	;musicf3
+;	musicf3
 	dec_octave
 	note E_, 2
 	rest 4
@@ -69,7 +71,7 @@ Music_GRCastle_Ch2: ; 1f213c (7c:613c)
 	rest 3
 	vibrato 7, 3, 3
 	note E_, 13
-	;tie
+;	tie
 	note E_, 12
 	vibrato 0, 3, 3
 	note D_, 13
@@ -81,735 +83,753 @@ Music_GRCastle_Ch2: ; 1f213c (7c:613c)
 	note E_, 1
 	rest 3
 	note A_, 3
-	;tie
-	;musice4 17
+;	tie
+;	frequency_offset 17
 	note A_, 3
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note A#, 6
 	note A_, 13
 	note G_, 12
 .MainLoop
-	;musicf0 0
-	;musicf3
+;	preset 0
+	volume_envelope 10, 0
+	duty_cycle 0
+	vibrato 28, 3, 3
+;	musicf3
 	octave 2
-	channel_volume 7
+	volume_envelope 6, -4
 	note E_, 16
-	;tie
+;	tie
 	note E_, 9
-	channel_volume 11
+	volume_envelope 11, 0
 	note E_, 16
-	;tie
+;	tie
 	note E_, 9
-	;musicf0 0
-	;musicef 2
-	;musicf1 119
+;	preset 0
+	volume_envelope 10, 0
+	duty_cycle 0
+	vibrato 28, 3, 3
+;	musicef 2
+;	musicf1 119
 	octave 2
-	;vibrato_type 5
+;	vibrato_type 5
 	vibrato 37, 3, 3
 	note A_, 4
-	;tie
-	;musice4 8
+;	tie
+;	frequency_offset 8
 	note A_, 3
-	;tie
-	;musice4 16
+;	tie
+;	frequency_offset 16
 	note A_, 3
-	;tie
-	;musice4 24
+;	tie
+;	frequency_offset 24
 	note A_, 3
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note A#, 3
-	;tie
-	;musice4 8
+;	tie
+;	frequency_offset 8
 	note A#, 3
-	;tie
-	;musice4 16
+;	tie
+;	frequency_offset 16
 	note A#, 3
-	;tie
-	;musice4 24
+;	tie
+;	frequency_offset 24
 	note A#, 3
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
-	;tie
+;	tie
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
-	;tie
+;	tie
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
-	;tie
+;	tie
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
-	;tie
+;	tie
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
-	;tie
+;	tie
 	note B_, 9
 	note B_, 16
-	;musicf3
+;	musicf3
 	note A_, 13
 	note B_, 12
 	vibrato 25, 3, 3
 	inc_octave
-	;musicf2
+;	musicf2
 	note C_, 13
-	;tie
+;	tie
 	note C_, 12
-	;tie
+;	tie
 	note C_, 13
-	;tie
+;	tie
 	note C_, 12
-	;tie
+;	tie
 	note C_, 13
-	;tie
+;	tie
 	note C_, 12
-	;tie
+;	tie
 	note C_, 13
 	note C_, 12
 	vibrato 29, 3, 3
-	;musicf3
+;	musicf3
 	note C_, 4
-	;tie
-	;musice4 7
+;	tie
+;	frequency_offset 7
 	note C_, 3
-	;tie
-	;musice4 14
+;	tie
+;	frequency_offset 14
 	note C_, 3
-	;tie
-	;musice4 22
+;	tie
+;	frequency_offset 22
 	note C_, 3
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note C#, 3
-	;tie
-	;musice4 8
+;	tie
+;	frequency_offset 8
 	note C#, 3
-	;tie
-	;musice4 16
+;	tie
+;	frequency_offset 16
 	note C#, 3
-	;tie
-	;musice4 24
+;	tie
+;	frequency_offset 24
 	note C#, 3
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note D_, 13
-	;tie
+;	tie
 	note D_, 12
 	vibrato 13, 3, 3
-	;musicf2
+;	musicf2
 	note C_, 13
-	;tie
+;	tie
 	note C_, 12
-	;tie
+;	tie
 	note C_, 13
 	note C_, 12
 	vibrato 25, 3, 3
 	dec_octave
-	;musicf3
+;	musicf3
 	note A_, 4
-	;tie
-	;musice4 8
+;	tie
+;	frequency_offset 8
 	note A_, 3
-	;tie
-	;musice4 16
+;	tie
+;	frequency_offset 16
 	note A_, 3
-	;tie
-	;musice4 24
+;	tie
+;	frequency_offset 24
 	note A_, 3
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note A#, 3
-	;tie
-	;musice4 8
+;	tie
+;	frequency_offset 8
 	note A#, 3
-	;tie
-	;musice4 16
+;	tie
+;	frequency_offset 16
 	note A#, 3
-	;tie
-	;musice4 24
+;	tie
+;	frequency_offset 24
 	note A#, 3
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note B_, 13
 	inc_octave
 	note C_, 12
 	dec_octave
-	;musicf2
+;	musicf2
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
-	;tie
+;	tie
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
-	;tie
+;	tie
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
-	;tie
+;	tie
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
-	;tie
+;	tie
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
 	vibrato 37, 3, 3
 	note A_, 13
-	;tie
+;	tie
 	note A_, 12
-	;tie
+;	tie
 	note A_, 13
-	;tie
+;	tie
 	note A_, 12
-	;tie
+;	tie
 	note A_, 13
-	;tie
+;	tie
 	note A_, 12
-	;tie
+;	tie
 	note A_, 13
 	note A_, 12
-	;musicf3
+;	musicf3
 	inc_octave
 	note C_, 4
-	;tie
-	;musice4 7
+;	tie
+;	frequency_offset 7
 	note C_, 3
-	;tie
-	;musice4 14
+;	tie
+;	frequency_offset 14
 	note C_, 3
-	;tie
-	;musice4 22
+;	tie
+;	frequency_offset 22
 	note C_, 3
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note C#, 3
-	;tie
-	;musice4 8
+;	tie
+;	frequency_offset 8
 	note C#, 3
-	;tie
-	;musice4 16
+;	tie
+;	frequency_offset 16
 	note C#, 3
-	;tie
-	;musice4 24
+;	tie
+;	frequency_offset 24
 	note C#, 3
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note D_, 13
 	dec_octave
 	note A_, 12
-	;tie
+;	tie
 	note A_, 13
-	;tie
+;	tie
 	note A_, 12
 	inc_octave
-	;musicf2
+;	musicf2
 	note D_, 13
 	note D_, 12
 	dec_octave
 	note A_, 4
-	;tie
-	;musice4 8
+;	tie
+;	frequency_offset 8
 	note A_, 3
-	;tie
-	;musice4 16
+;	tie
+;	frequency_offset 16
 	note A_, 3
-	;tie
-	;musice4 24
+;	tie
+;	frequency_offset 24
 	note A_, 3
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note A#, 3
-	;tie
-	;musice4 8
+;	tie
+;	frequency_offset 8
 	note A#, 3
-	;tie
-	;musice4 16
+;	tie
+;	frequency_offset 16
 	note A#, 3
-	;tie
-	;musice4 24
+;	tie
+;	frequency_offset 24
 	note A#, 3
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
-	;tie
+;	tie
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
-	;tie
+;	tie
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
-	;tie
+;	tie
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
-	;tie
+;	tie
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
-	;tie
+;	tie
 	note B_, 9
 	note B_, 16
-	;musicf3
+;	musicf3
 	note A_, 13
 	note B_, 12
 	vibrato 25, 3, 3
 	inc_octave
-	;musicf2
+;	musicf2
 	note C_, 13
-	;tie
+;	tie
 	note C_, 12
-	;tie
+;	tie
 	note C_, 13
-	;tie
+;	tie
 	note C_, 12
-	;tie
+;	tie
 	note C_, 13
-	;tie
+;	tie
 	note C_, 12
-	;tie
+;	tie
 	note C_, 13
 	note C_, 12
 	note C_, 4
-	;tie
-	;musice4 7
+;	tie
+;	frequency_offset 7
 	note C_, 3
-	;tie
-	;musice4 14
+;	tie
+;	frequency_offset 14
 	note C_, 3
-	;tie
-	;musice4 22
+;	tie
+;	frequency_offset 22
 	note C_, 3
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note C#, 3
-	;tie
-	;musice4 8
+;	tie
+;	frequency_offset 8
 	note C#, 3
-	;tie
-	;musice4 16
+;	tie
+;	frequency_offset 16
 	note C#, 3
-	;tie
-	;musice4 24
+;	tie
+;	frequency_offset 24
 	note C#, 3
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note D_, 13
-	;tie
+;	tie
 	note D_, 12
 	vibrato 13, 3, 3
-	;musicf2
+;	musicf2
 	note E_, 13
-	;tie
+;	tie
 	note E_, 12
-	;tie
+;	tie
 	note E_, 13
 	note E_, 12
 	vibrato 25, 3, 3
-	;musicf3
+;	musicf3
 	note E_, 4
-	;tie
-	;musice4 8
+;	tie
+;	frequency_offset 8
 	note E_, 3
-	;tie
-	;musice4 16
+;	tie
+;	frequency_offset 16
 	note E_, 3
-	;tie
-	;musice4 24
+;	tie
+;	frequency_offset 24
 	note E_, 3
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note F_, 3
-	;tie
-	;musice4 8
+;	tie
+;	frequency_offset 8
 	note F_, 3
-	;tie
-	;musice4 16
+;	tie
+;	frequency_offset 16
 	note F_, 3
-	;tie
-	;musice4 24
+;	tie
+;	frequency_offset 24
 	note F_, 3
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note F#, 13
 	note G_, 12
-	;musicf2
+;	musicf2
 	note F#, 13
-	;tie
+;	tie
 	note F#, 12
-	;tie
+;	tie
 	note F#, 13
-	;tie
+;	tie
 	note F#, 12
-	;tie
+;	tie
 	note F#, 13
-	;tie
+;	tie
 	note F#, 12
-	;tie
+;	tie
 	note F#, 13
-	;musicf3
+;	musicf3
 	note F_, 4
 	note E_, 4
 	note D#, 4
 	note D_, 16
-	;tie
+;	tie
 	note D_, 9
-	;musicf2
+;	musicf2
 	note F#, 13
 	note F#, 12
-	;musicf3
+;	musicf3
 	note F_, 4
-	;musicf2
+;	musicf2
 	note F#, 9
-	;tie
+;	tie
 	note F#, 12
 	note F#, 13
-	;musicf3
+;	musicf3
 	note E_, 12
-	;tie
+;	tie
 	note E_, 13
-	;tie
+;	tie
 	note E_, 12
-	;tie
+;	tie
 	note E_, 13
-	;tie
+;	tie
 	note E_, 12
-	;tie
+;	tie
 	note E_, 16
-	;tie
+;	tie
 	note E_, 9
-	;tie
+;	tie
 	note E_, 4
-	;tie
-	;musice4 249
+;	tie
+;	frequency_offset -7
 	note E_, 3
-	;tie
-	;musice4 242
+;	tie
+;	frequency_offset -14
 	note E_, 3
-	;tie
-	;musice4 235
+;	tie
+;	frequency_offset -21
 	note E_, 3
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note D#, 3
-	;tie
-	;musice4 250
+;	tie
+;	frequency_offset -6
 	note D#, 3
-	;tie
-	;musice4 244
+;	tie
+;	frequency_offset -12
 	note D#, 3
-	;tie
-	;musice4 240
+;	tie
+;	frequency_offset -16
 	note D#, 2
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note D_, 1
-	;musicf0 14
-	;musicf1 71
-	;musicf3
+;	preset 14
+	volume_envelope 10, 0
+	duty_cycle 2
+	vibrato 28, 3, 3
+;	musicf1 71
+;	musicf3
 	octave 2
-	channel_volume 8
+	volume_envelope 7, -4
 	note B_, 16
-	;tie
+;	tie
 	note B_, 9
-	;musicf0 14
+;	preset 14
+	volume_envelope 10, 0
+	duty_cycle 2
+	vibrato 28, 3, 3
 	note B_, 3
 	inc_octave
-	;musicef 1
+;	musicef 1
 	note D_, 16
-	;tie
+;	tie
 	note D_, 6
 	note D#, 4
-	;musicef 1
+;	musicef 1
 	note E_, 13
-	;tie
+;	tie
 	note E_, 12
-	;tie
+;	tie
 	note E_, 9
 	note A#, 3
 	vibrato 25, 3, 3
-	;musicf2
+;	musicf2
 	note B_, 9
-	;tie
+;	tie
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
-	;tie
+;	tie
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
-	;tie
+;	tie
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
-	;tie
+;	tie
 	note B_, 13
 	note B_, 12
-	;musicf3
+;	musicf3
 	note A_, 16
-	;tie
+;	tie
 	note A_, 9
 	note G_, 16
-	;tie
+;	tie
 	note G_, 9
 	note F#, 13
 	note G_, 12
 	note F#, 13
 	note D_, 12
-	;tie
+;	tie
 	note D_, 13
 	note C_, 4
 	dec_octave
 	note B_, 4
 	note A#, 4
-	;musicf2
+;	musicf2
 	note A_, 13
-	;tie
+;	tie
 	note A_, 12
-	;tie
+;	tie
 	note A_, 13
-	;tie
+;	tie
 	note A_, 12
-	;tie
+;	tie
 	note A_, 13
-	;tie
+;	tie
 	note A_, 12
-	;tie
+;	tie
 	note A_, 13
 	note A_, 12
-	;musicf3
+;	musicf3
 	note F#, 13
-	;tie
+;	tie
 	note F#, 12
 	note G_, 13
-	;tie
+;	tie
 	note G_, 12
-	;tie
+;	tie
 	note G_, 13
 	inc_octave
 	note D#, 3
-	;musicf2
+;	musicf2
 	note E_, 9
-	;tie
+;	tie
 	note E_, 13
-	;tie
+;	tie
 	note E_, 12
-	;tie
+;	tie
 	note E_, 13
-	;tie
+;	tie
 	note E_, 12
-	;tie
+;	tie
 	note E_, 13
-	;tie
+;	tie
 	note E_, 12
-	;tie
+;	tie
 	note E_, 13
 	note E_, 12
-	;musicf3
+;	musicf3
 	note D#, 4
 	note E_, 15
 	note F#, 6
-	;tie
+;	tie
 	note F#, 13
 	note G_, 12
 	note F#, 4
 	note G_, 3
 	note F#, 6
-	;tie
+;	tie
 	note F#, 12
 	note D_, 13
 	dec_octave
 	note A#, 6
-	;musicf2
+;	musicf2
 	note B_, 6
-	;tie
+;	tie
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
-	;tie
+;	tie
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
-	;tie
+;	tie
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
-	;tie
+;	tie
 	note B_, 13
 	note B_, 12
-	;musicf3
+;	musicf3
 	inc_octave
 	note C_, 16
-	;tie
+;	tie
 	note C_, 9
 	note D_, 16
-	;tie
+;	tie
 	note D_, 9
 	note D#, 4
 	note E_, 13
-	;tie
+;	tie
 	note E_, 12
-	;tie
+;	tie
 	note E_, 9
 	note A#, 3
 	vibrato 25, 3, 3
-	;musicf2
+;	musicf2
 	note B_, 9
-	;tie
+;	tie
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
-	;tie
+;	tie
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
-	;tie
+;	tie
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
-	;tie
+;	tie
 	note B_, 13
 	note B_, 12
-	;musicf3
+;	musicf3
 	note A_, 16
-	;tie
+;	tie
 	note A_, 9
 	note G_, 16
-	;tie
+;	tie
 	note G_, 9
 	note F#, 13
 	note G_, 12
 	note F#, 13
 	note G#, 3
 	note A_, 9
-	;tie
+;	tie
 	note A_, 13
 	note G_, 4
 	note F#, 4
 	note E_, 4
-	;musicf2
+;	musicf2
 	note D_, 13
-	;tie
+;	tie
 	note D_, 12
-	;tie
+;	tie
 	note D_, 13
-	;tie
+;	tie
 	note D_, 12
-	;tie
+;	tie
 	note D_, 13
 	note D_, 12
-	;musicf3
+;	musicf3
 	dec_octave
 	note A#, 4
 	note B_, 9
-	;tie
+;	tie
 	note B_, 12
 	inc_octave
 	note D_, 13
-	;tie
+;	tie
 	note D_, 12
 	note D#, 4
 	note E_, 9
-	;tie
+;	tie
 	note E_, 12
 	note D_, 13
-	;musicf2
+;	musicf2
 	note E_, 12
-	;tie
+;	tie
 	note E_, 13
-	;tie
+;	tie
 	note E_, 12
-	;tie
+;	tie
 	note E_, 13
-	;tie
+;	tie
 	note E_, 12
-	;tie
+;	tie
 	note E_, 13
-	;tie
+;	tie
 	note E_, 12
-	;tie
+;	tie
 	note E_, 13
 	note E_, 12
-	;musicf3
+;	musicf3
 	note E_, 13
-	;tie
+;	tie
 	note E_, 6
 	note A_, 6
-	;tie
+;	tie
 	note A_, 13
 	note G_, 12
 	note F#, 4
 	note G_, 3
-	;musicf2
+;	musicf2
 	note F#, 6
-	;tie
+;	tie
 	note F#, 12
-	;tie
+;	tie
 	note F#, 13
-	;tie
+;	tie
 	note F#, 12
-	;tie
+;	tie
 	note F#, 13
-	;tie
+;	tie
 	note F#, 12
-	;tie
+;	tie
 	note F#, 13
-	;tie
+;	tie
 	note F#, 12
-	;tie
+;	tie
 	note F#, 13
-	;tie
+;	tie
 	note F#, 12
-	;tie
+;	tie
 	note F#, 13
-	;tie
+;	tie
 	note F#, 12
-	;tie
+;	tie
 	note F#, 13
-	;tie
+;	tie
 	note F#, 12
-	;tie
+;	tie
 	note F#, 13
 	note F#, 12
-	;musicf3
+;	musicf3
 	octave 1
-	;musicf0 8
-	;vibrato_type 5
+;	preset 8
+	volume_envelope 10, 0
+	duty_cycle 0
+	vibrato 28, 3, 3
+;	vibrato_type 5
 	vibrato 50, 3, 3
-	;musice4 247
+;	frequency_offset -9
 .Loop1
 	note E_, 16
-	;tie
+;	tie
 	note E_, 16
-	;tie
+;	tie
 	note E_, 16
-	;tie
+;	tie
 	note E_, 16
-	;tie
+;	tie
 	note E_, 16
-	;tie
+;	tie
 	note E_, 16
-	;tie
+;	tie
 	sound_loop 4, .Loop1
 	note E_, 16
-	;musice4 0
-	;musicf0 23
+;	frequency_offset 0
+;	preset 23
+	volume_envelope 6, 7
+	duty_cycle 2
+	vibrato 28, 3, 3
 	octave 3
-	;musicf1 32
-	;musicf2
+;	musicf1 32
+;	musicf2
 	note E_, 7
 	note B_, 6
 	note A_, 6
@@ -898,21 +918,23 @@ Music_GRCastle_Ch2: ; 1f213c (7c:613c)
 	note G_, 6
 	note D_, 6
 	dec_octave
-	;musicf3
+;	musicf3
 	sound_loop 0, .MainLoop
 
 
-Music_GRCastle_Ch1: ; 1f2525 (7c:6525)
-	channel_volume 10
+Music_GRCastle_Ch1:
 	speed 1
 	rest 12
-	;musicf0 8
+;	preset 8
+	volume_envelope 10, 0
+	duty_cycle 0
+	vibrato 28, 3, 3
 	octave 1
-	;vibrato_type 5
+;	vibrato_type 5
 	vibrato 1, 3, 3
-	;musicf1 80
-	;musicf3
-	;musice4 0
+;	musicf1 80
+;	musicf3
+;	frequency_offset 0
 	rest 13
 	rest 12
 	rest 13
@@ -924,17 +946,17 @@ Music_GRCastle_Ch1: ; 1f2525 (7c:6525)
 	rest 3
 	vibrato 7, 3, 3
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
 	vibrato 0, 3, 3
 	note A_, 13
 	note B_, 12
 	rest 13
 	inc_octave
-	;musicf2
+;	musicf2
 	note B_, 12
 	note B_, 13
-	;musicf3
+;	musicf3
 	rest 12
 	note D_, 7
 	rest 6
@@ -955,7 +977,7 @@ Music_GRCastle_Ch1: ; 1f2525 (7c:6525)
 	rest 3
 	vibrato 7, 3, 3
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
 	vibrato 0, 3, 3
 	note A_, 13
@@ -968,11 +990,11 @@ Music_GRCastle_Ch1: ; 1f2525 (7c:6525)
 	rest 3
 	inc_octave
 	note E_, 3
-	;tie
-	;musice4 22
+;	tie
+;	frequency_offset 22
 	note E_, 3
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note F_, 6
 	note E_, 13
 	note D_, 12
@@ -982,19 +1004,22 @@ Music_GRCastle_Ch1: ; 1f2525 (7c:6525)
 	note A_, 13
 	note A#, 12
 .MainLoop
-	;musicf0 8
+;	preset 8
+	volume_envelope 10, 0
+	duty_cycle 0
+	vibrato 28, 3, 3
 	octave 2
-	;vibrato_type 5
+;	vibrato_type 5
 	vibrato 0, 3, 3
-	;musicf1 80
+;	musicf1 80
 	note E_, 9
 	rest 4
-	;musicf2
+;	musicf2
 	note E_, 9
 	rest 3
 	note E_, 9
 	rest 4
-	;musicf3
+;	musicf3
 	note E_, 2
 	rest 2
 	note E_, 1
@@ -1003,7 +1028,7 @@ Music_GRCastle_Ch1: ; 1f2525 (7c:6525)
 	rest 3
 	vibrato 7, 3, 3
 	note E_, 13
-	;tie
+;	tie
 	note E_, 12
 	vibrato 0, 3, 3
 	note D_, 13
@@ -1016,7 +1041,7 @@ Music_GRCastle_Ch1: ; 1f2525 (7c:6525)
 	rest 3
 	vibrato 7, 3, 3
 	note G_, 12
-	;tie
+;	tie
 	note G_, 13
 	vibrato 0, 3, 3
 	note G_, 2
@@ -1030,12 +1055,12 @@ Music_GRCastle_Ch1: ; 1f2525 (7c:6525)
 	note D_, 12
 	note F_, 9
 	rest 4
-	;musicf2
+;	musicf2
 	note F_, 9
 	rest 3
 	note F_, 9
 	rest 4
-	;musicf3
+;	musicf3
 	note F_, 2
 	rest 2
 	note F_, 1
@@ -1044,7 +1069,7 @@ Music_GRCastle_Ch1: ; 1f2525 (7c:6525)
 	rest 3
 	vibrato 7, 3, 3
 	note F_, 13
-	;tie
+;	tie
 	note F_, 12
 	vibrato 0, 3, 3
 	note E_, 13
@@ -1057,7 +1082,7 @@ Music_GRCastle_Ch1: ; 1f2525 (7c:6525)
 	rest 3
 	vibrato 7, 3, 3
 	note A_, 12
-	;tie
+;	tie
 	note A_, 13
 	vibrato 0, 3, 3
 	note F_, 2
@@ -1071,12 +1096,12 @@ Music_GRCastle_Ch1: ; 1f2525 (7c:6525)
 	note F_, 12
 	note E_, 9
 	rest 4
-	;musicf2
+;	musicf2
 	note E_, 9
 	rest 3
 	note E_, 9
 	rest 4
-	;musicf3
+;	musicf3
 	note E_, 2
 	rest 2
 	note E_, 1
@@ -1085,7 +1110,7 @@ Music_GRCastle_Ch1: ; 1f2525 (7c:6525)
 	rest 3
 	vibrato 7, 3, 3
 	note E_, 13
-	;tie
+;	tie
 	note E_, 12
 	vibrato 0, 3, 3
 	note D_, 13
@@ -1098,7 +1123,7 @@ Music_GRCastle_Ch1: ; 1f2525 (7c:6525)
 	rest 3
 	vibrato 7, 3, 3
 	note G_, 12
-	;tie
+;	tie
 	note G_, 13
 	vibrato 0, 3, 3
 	note G_, 2
@@ -1112,12 +1137,12 @@ Music_GRCastle_Ch1: ; 1f2525 (7c:6525)
 	note D_, 12
 	note F_, 9
 	rest 4
-	;musicf2
+;	musicf2
 	note F_, 9
 	rest 3
 	note F_, 9
 	rest 4
-	;musicf3
+;	musicf3
 	note F_, 2
 	rest 2
 	note F_, 1
@@ -1127,7 +1152,7 @@ Music_GRCastle_Ch1: ; 1f2525 (7c:6525)
 	vibrato 7, 3, 3
 	inc_octave
 	note C_, 13
-	;tie
+;	tie
 	note C_, 12
 	dec_octave
 	vibrato 0, 3, 3
@@ -1141,7 +1166,7 @@ Music_GRCastle_Ch1: ; 1f2525 (7c:6525)
 	rest 3
 	vibrato 7, 3, 3
 	note A_, 12
-	;tie
+;	tie
 	note A_, 13
 	vibrato 0, 3, 3
 	note A_, 2
@@ -1155,12 +1180,12 @@ Music_GRCastle_Ch1: ; 1f2525 (7c:6525)
 	note A_, 12
 	note E_, 9
 	rest 4
-	;musicf2
+;	musicf2
 	note E_, 9
 	rest 3
 	note E_, 9
 	rest 4
-	;musicf3
+;	musicf3
 	note E_, 2
 	rest 2
 	note E_, 1
@@ -1169,7 +1194,7 @@ Music_GRCastle_Ch1: ; 1f2525 (7c:6525)
 	rest 3
 	vibrato 7, 3, 3
 	note E_, 13
-	;tie
+;	tie
 	note E_, 12
 	vibrato 0, 3, 3
 	note D_, 13
@@ -1182,7 +1207,7 @@ Music_GRCastle_Ch1: ; 1f2525 (7c:6525)
 	rest 3
 	vibrato 7, 3, 3
 	note G_, 12
-	;tie
+;	tie
 	note G_, 13
 	vibrato 0, 3, 3
 	note G_, 2
@@ -1196,12 +1221,12 @@ Music_GRCastle_Ch1: ; 1f2525 (7c:6525)
 	note D_, 12
 	note F_, 9
 	rest 4
-	;musicf2
+;	musicf2
 	note F_, 9
 	rest 3
 	note F_, 9
 	rest 4
-	;musicf3
+;	musicf3
 	note F_, 2
 	rest 2
 	note F_, 1
@@ -1210,7 +1235,7 @@ Music_GRCastle_Ch1: ; 1f2525 (7c:6525)
 	rest 3
 	vibrato 7, 3, 3
 	note F_, 13
-	;tie
+;	tie
 	note F_, 12
 	vibrato 0, 3, 3
 	note E_, 13
@@ -1223,7 +1248,7 @@ Music_GRCastle_Ch1: ; 1f2525 (7c:6525)
 	rest 3
 	vibrato 7, 3, 3
 	note A_, 12
-	;tie
+;	tie
 	note A_, 13
 	vibrato 0, 3, 3
 	note F_, 2
@@ -1237,12 +1262,12 @@ Music_GRCastle_Ch1: ; 1f2525 (7c:6525)
 	note F_, 12
 	note E_, 9
 	rest 4
-	;musicf2
+;	musicf2
 	note E_, 9
 	rest 3
 	note E_, 9
 	rest 4
-	;musicf3
+;	musicf3
 	note E_, 2
 	rest 2
 	note E_, 1
@@ -1251,7 +1276,7 @@ Music_GRCastle_Ch1: ; 1f2525 (7c:6525)
 	rest 3
 	vibrato 7, 3, 3
 	note E_, 13
-	;tie
+;	tie
 	note E_, 12
 	vibrato 0, 3, 3
 	note D_, 13
@@ -1264,7 +1289,7 @@ Music_GRCastle_Ch1: ; 1f2525 (7c:6525)
 	rest 3
 	vibrato 7, 3, 3
 	note G_, 12
-	;tie
+;	tie
 	note G_, 13
 	vibrato 0, 3, 3
 	note G_, 2
@@ -1288,7 +1313,7 @@ Music_GRCastle_Ch1: ; 1f2525 (7c:6525)
 	note E_, 1
 	rest 3
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
 	note A_, 13
 	note B_, 12
@@ -1310,111 +1335,111 @@ Music_GRCastle_Ch1: ; 1f2525 (7c:6525)
 	dec_octave
 	note A_, 12
 	octave 2
-	;musicef 254
+;	musicef -2
 	note E_, 13
-	;tie
+;	tie
 	note E_, 12
-	;tie
+;	tie
 	note E_, 13
 	note A#, 3
 	note B_, 9
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
 	inc_octave
 	note D_, 4
-	;tie
-	;musice4 6
+;	tie
+;	frequency_offset 6
 	note D_, 3
-	;tie
-	;musice4 12
+;	tie
+;	frequency_offset 12
 	note D_, 3
-	;tie
-	;musice4 15
+;	tie
+;	frequency_offset 15
 	note D_, 3
-	;tie
-	;musice4 254
+;	tie
+;	frequency_offset -2
 	note D#, 3
-	;tie
-	;musice4 5
+;	tie
+;	frequency_offset 5
 	note D#, 3
-	;tie
-	;musice4 10
+;	tie
+;	frequency_offset 10
 	note D#, 3
-	;tie
-	;musice4 16
+;	tie
+;	frequency_offset 16
 	note D#, 3
-	;tie
-	;musice4 255
+;	tie
+;	frequency_offset -1
 	note E_, 13
-	;tie
+;	tie
 	note E_, 12
-	;tie
+;	tie
 	note E_, 13
-	;tie
+;	tie
 	note E_, 12
 	note F#, 16
-	;tie
+;	tie
 	note F#, 9
 	note E_, 13
-	;tie
+;	tie
 	note E_, 12
 	note D_, 13
-	;tie
+;	tie
 	note D_, 12
-	;tie
+;	tie
 	note D_, 13
 	note G#, 3
 	note A_, 9
-	;tie
+;	tie
 	note A_, 13
-	;tie
+;	tie
 	note A_, 12
 	vibrato 25, 3, 3
 	note E_, 13
-	;tie
+;	tie
 	note E_, 12
-	;tie
+;	tie
 	note E_, 13
-	;tie
+;	tie
 	note E_, 12
-	;tie
+;	tie
 	note E_, 13
-	;tie
+;	tie
 	note E_, 12
 	vibrato 0, 3, 3
 	dec_octave
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
 	inc_octave
 	note E_, 13
-	;tie
+;	tie
 	note E_, 12
 	note C#, 4
 	note D_, 9
-	;tie
+;	tie
 	note D_, 12
-	;tie
+;	tie
 	note D_, 13
 	dec_octave
 	note B_, 12
-	;tie
+;	tie
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
 	vibrato 25, 3, 3
 	inc_octave
 	note C_, 13
-	;tie
+;	tie
 	note C_, 12
-	;tie
+;	tie
 	note C_, 13
-	;tie
+;	tie
 	note C_, 12
-	;tie
+;	tie
 	note C_, 13
-	;tie
+;	tie
 	note C_, 12
 	vibrato 0, 3, 3
 	dec_octave
@@ -1424,201 +1449,204 @@ Music_GRCastle_Ch1: ; 1f2525 (7c:6525)
 	note A_, 13
 	note F#, 12
 	note D_, 13
-	;tie
+;	tie
 	note D_, 12
-	;tie
+;	tie
 	note D_, 13
 	note E_, 12
-	;tie
+;	tie
 	note E_, 13
-	;tie
+;	tie
 	note E_, 12
 	vibrato 25, 3, 3
-	;musicf2
+;	musicf2
 	note D_, 13
-	;tie
+;	tie
 	note D_, 12
-	;tie
+;	tie
 	note D_, 13
-	;tie
+;	tie
 	note D_, 12
-	;tie
+;	tie
 	note D_, 13
 	note D_, 12
-	;musicf3
+;	musicf3
 	vibrato 0, 3, 3
 	dec_octave
 	dec_octave
-	;musicef 3
+;	musicef 3
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
 	note A_, 13
-	;tie
+;	tie
 	note A_, 12
-	;musicef 253
+;	musicef -3
 	inc_octave
 	note G_, 13
-	;tie
+;	tie
 	note G_, 12
-	;tie
+;	tie
 	note G_, 13
 	note A#, 3
 	note B_, 9
-	;tie
+;	tie
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
 	inc_octave
 	note D_, 4
-	;tie
-	;musice4 6
+;	tie
+;	frequency_offset 6
 	note D_, 3
-	;tie
-	;musice4 12
+;	tie
+;	frequency_offset 12
 	note D_, 3
-	;tie
-	;musice4 15
+;	tie
+;	frequency_offset 15
 	note D_, 3
-	;tie
-	;musice4 254
+;	tie
+;	frequency_offset -2
 	note D#, 3
-	;tie
-	;musice4 5
+;	tie
+;	frequency_offset 5
 	note D#, 3
-	;tie
-	;musice4 10
+;	tie
+;	frequency_offset 10
 	note D#, 3
-	;tie
-	;musice4 16
+;	tie
+;	frequency_offset 16
 	note D#, 3
-	;tie
-	;musice4 255
+;	tie
+;	frequency_offset -1
 	note E_, 13
-	;tie
+;	tie
 	note E_, 12
-	;tie
+;	tie
 	note E_, 13
-	;tie
+;	tie
 	note E_, 12
 	note F#, 16
-	;tie
+;	tie
 	note F#, 9
 	note E_, 13
-	;tie
+;	tie
 	note E_, 12
 	note D_, 13
-	;tie
+;	tie
 	note D_, 12
-	;tie
+;	tie
 	note D_, 13
 	note F_, 3
 	note F#, 9
-	;tie
+;	tie
 	note F#, 13
-	;tie
+;	tie
 	note F#, 12
 	dec_octave
 	vibrato 25, 3, 3
-	;musicf2
+;	musicf2
 	note A_, 13
-	;tie
+;	tie
 	note A_, 12
-	;tie
+;	tie
 	note A_, 13
-	;tie
+;	tie
 	note A_, 12
-	;tie
+;	tie
 	note A_, 13
 	note A_, 12
-	;musicf3
+;	musicf3
 	vibrato 0, 3, 3
 	note A_, 13
-	;tie
+;	tie
 	note A_, 12
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
 	inc_octave
 	note C_, 13
-	;tie
+;	tie
 	note C_, 12
-	;tie
+;	tie
 	note C_, 13
 	note F#, 3
 	note G_, 9
-	;tie
+;	tie
 	note G_, 13
-	;tie
+;	tie
 	note G_, 12
 	dec_octave
 	vibrato 25, 3, 3
 	note A_, 13
-	;tie
+;	tie
 	note A_, 12
-	;tie
+;	tie
 	note A_, 13
-	;tie
+;	tie
 	note A_, 12
-	;tie
+;	tie
 	note A_, 13
-	;tie
+;	tie
 	note A_, 12
 	note A_, 13
-	;tie
+;	tie
 	note A_, 12
 	inc_octave
 	note C_, 13
-	;tie
+;	tie
 	note C_, 12
 	dec_octave
 	note A_, 13
-	;tie
+;	tie
 	note A_, 12
-	;tie
+;	tie
 	note A_, 13
 	inc_octave
 	note D_, 3
-	;tie
-	;musice4 6
+;	tie
+;	frequency_offset 6
 	note D_, 3
-	;tie
-	;musice4 253
+;	tie
+;	frequency_offset -3
 	note D#, 3
-	;tie
-	;musice4 13
+;	tie
+;	frequency_offset 13
 	note D#, 3
-	;tie
-	;musice4 254
+;	tie
+;	frequency_offset -2
 	note E_, 13
-	;tie
+;	tie
 	note E_, 12
 	note C#, 13
-	;tie
+;	tie
 	note C#, 12
-	;musicf2
+;	musicf2
 	note D#, 13
-	;tie
+;	tie
 	note D#, 12
-	;tie
+;	tie
 	note D#, 13
-	;tie
+;	tie
 	note D#, 12
-	;tie
+;	tie
 	note D#, 13
-	;tie
+;	tie
 	note D#, 12
 	note D#, 13
-	;tie
+;	tie
 	note D#, 12
-	;musicf3
-	;musicf0 23
-	;musicf1 32
-	;musicf3
+;	musicf3
+;	preset 23
+	volume_envelope 6, 7
+	duty_cycle 2
+	vibrato 28, 3, 3
+;	musicf1 32
+;	musicf3
 	octave 3
 	note E_, 7
 	rest 6
-	;musicf2
+;	musicf2
 	note A_, 6
 	note E_, 6
 	inc_octave
@@ -1718,10 +1746,10 @@ Music_GRCastle_Ch1: ; 1f2525 (7c:6525)
 	note B_, 6
 	note F#, 6
 	octave 3
-	;musicf3
+;	musicf3
 	note A_, 7
 	rest 6
-	;musicf2
+;	musicf2
 	inc_octave
 	note D_, 6
 	dec_octave
@@ -1800,7 +1828,7 @@ Music_GRCastle_Ch1: ; 1f2525 (7c:6525)
 	dec_octave
 	note G_, 6
 	dec_octave
-	;musicef 2
+;	musicef 2
 	note G_, 7
 	inc_octave
 	note G_, 6
@@ -1813,19 +1841,18 @@ Music_GRCastle_Ch1: ; 1f2525 (7c:6525)
 	dec_octave
 	note B_, 6
 	note F#, 6
-	;musicf3
+;	musicf3
 	sound_loop 0, .MainLoop
 
 
-Music_GRCastle_Ch3: ; 1f2903 (7c:6903)
-	channel_volume 1
+Music_GRCastle_Ch3:
 	fade_wave 11
 	channel_volume 1
-	;musice9 96
-	;musicdc 255
+;	echo 96
+	stereo_panning TRUE, TRUE
 	speed 1
 	rest 12
-	;vibrato_type 5
+;	vibrato_type 5
 	vibrato 0, 3, 3
 	octave 2
 	note E_, 9
@@ -1857,7 +1884,7 @@ Music_GRCastle_Ch3: ; 1f2903 (7c:6903)
 	rest 13
 	rest 12
 	note E_, 16
-	;tie
+;	tie
 	note E_, 9
 	note D_, 13
 	note E_, 9
@@ -1894,13 +1921,13 @@ Music_GRCastle_Ch3: ; 1f2903 (7c:6903)
 	note E_, 9
 	rest 3
 	rest 13
-	;musicec 1
+;	pitch_offset 1
 	sound_call Branch_1f2b72
 	note D_, 13
 	note E_, 9
 	rest 3
 	rest 13
-	;musicec 3
+;	pitch_offset 3
 	sound_call Branch_1f2b9e
 	note B_, 9
 	rest 3
@@ -1967,13 +1994,13 @@ Music_GRCastle_Ch3: ; 1f2903 (7c:6903)
 	note E_, 9
 	rest 3
 	rest 13
-	;musicec 1
+;	pitch_offset 1
 	sound_call Branch_1f2b72
 	note D_, 13
 	note E_, 9
 	rest 3
 	rest 13
-	;musicec 3
+;	pitch_offset 3
 	sound_call Branch_1f2b9e
 	note B_, 9
 	rest 3
@@ -2019,342 +2046,342 @@ Music_GRCastle_Ch3: ; 1f2903 (7c:6903)
 	note D_, 12
 	vibrato 0, 3, 3
 	note C_, 13
-	;tie
+;	tie
 	note C_, 12
-	;tie
+;	tie
 	note C_, 13
 	note G_, 12
-	;tie
+;	tie
 	note G_, 13
-	;tie
+;	tie
 	note G_, 12
 	vibrato 25, 3, 3
 	note B_, 7
-	;tie
+;	tie
 	inc_octave
 	note C_, 16
-	;tie
+;	tie
 	note C_, 2
-	;tie
+;	tie
 	note C_, 13
-	;tie
+;	tie
 	note C_, 12
-	;tie
+;	tie
 	note C_, 13
-	;tie
+;	tie
 	note C_, 12
 	note D_, 16
-	;tie
+;	tie
 	note D_, 9
 	note C_, 16
-	;tie
+;	tie
 	note C_, 9
 	vibrato 0, 3, 3
 	dec_octave
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
-	;tie
+;	tie
 	note B_, 13
 	note F#, 12
-	;tie
+;	tie
 	note F#, 13
-	;tie
+;	tie
 	note F#, 12
 	vibrato 25, 3, 3
 	note A_, 3
-	;tie
+;	tie
 	note A#, 3
-	;tie
-	;musice4 22
+;	tie
+;	frequency_offset 22
 	note A#, 3
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note B_, 3
-	;tie
+;	tie
 	note B_, 13
-	;tie
+;	tie
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
-	;tie
+;	tie
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
 	note F#, 16
-	;tie
+;	tie
 	note F#, 9
 	note B_, 16
-	;tie
+;	tie
 	note B_, 9
 	note A_, 13
-	;tie
+;	tie
 	note A_, 12
-	;tie
+;	tie
 	note A_, 13
 	note E_, 12
-	;tie
+;	tie
 	note E_, 13
-	;tie
+;	tie
 	note E_, 12
 	note G_, 4
-	;tie
+;	tie
 	note G#, 3
-	;tie
+;	tie
 	note A_, 16
-	;tie
+;	tie
 	note A_, 2
 	note A_, 13
 	note G_, 12
-	;tie
+;	tie
 	note G_, 13
-	;tie
+;	tie
 	note G_, 12
 	note F#, 16
-	;tie
+;	tie
 	note F#, 9
 	note G_, 16
-	;tie
+;	tie
 	note G_, 9
 	note E_, 13
-	;tie
+;	tie
 	note E_, 12
-	;tie
+;	tie
 	note E_, 13
 	note A_, 3
-	;tie
+;	tie
 	note A#, 3
-	;tie
+;	tie
 	note B_, 16
-	;tie
+;	tie
 	note B_, 15
 	inc_octave
 	note D_, 4
-	;tie
+;	tie
 	note D#, 3
-	;tie
+;	tie
 	note E_, 16
-	;tie
+;	tie
 	note E_, 2
-	;tie
+;	tie
 	note E_, 13
 	dec_octave
 	note A#, 3
-	;tie
+;	tie
 	note B_, 9
 	inc_octave
 	note E_, 13
 	dec_octave
 	note B_, 12
 	note E_, 16
-	;tie
+;	tie
 	note E_, 9
 	note D_, 16
-	;tie
+;	tie
 	note D_, 9
 	note C_, 13
-	;tie
+;	tie
 	note C_, 12
-	;tie
+;	tie
 	note C_, 13
 	note G_, 12
-	;tie
+;	tie
 	note G_, 13
-	;tie
+;	tie
 	note G_, 12
 	vibrato 25, 3, 3
 	note B_, 7
-	;tie
+;	tie
 	inc_octave
 	note C_, 16
-	;tie
+;	tie
 	note C_, 2
-	;tie
+;	tie
 	note C_, 13
-	;tie
+;	tie
 	note C_, 12
-	;tie
+;	tie
 	note C_, 13
-	;tie
+;	tie
 	note C_, 12
 	note D_, 16
-	;tie
+;	tie
 	note D_, 9
 	note C_, 16
-	;tie
+;	tie
 	note C_, 9
 	vibrato 0, 3, 3
 	dec_octave
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
-	;tie
+;	tie
 	note B_, 13
 	note F#, 12
-	;tie
+;	tie
 	note F#, 13
-	;tie
+;	tie
 	note F#, 12
 	vibrato 25, 3, 3
 	note A_, 3
-	;tie
+;	tie
 	note A#, 3
-	;tie
-	;musice4 22
+;	tie
+;	frequency_offset 22
 	note A#, 3
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note B_, 3
-	;tie
+;	tie
 	note B_, 13
-	;tie
+;	tie
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
-	;tie
+;	tie
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
 	note F#, 16
-	;tie
+;	tie
 	note F#, 9
 	note B_, 16
-	;tie
+;	tie
 	note B_, 9
 	note F_, 13
-	;tie
+;	tie
 	note F_, 12
-	;tie
+;	tie
 	note F_, 13
 	inc_octave
 	note C_, 12
-	;tie
+;	tie
 	note C_, 13
-	;tie
+;	tie
 	note C_, 12
 	note D#, 4
-	;tie
-	;musice4 24
+;	tie
+;	frequency_offset 24
 	note D#, 3
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note E_, 3
-	;tie
-	;musice4 22
+;	tie
+;	frequency_offset 22
 	note E_, 3
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note F_, 12
-	;tie
+;	tie
 	note F_, 13
 	note C_, 12
-	;tie
+;	tie
 	note C_, 13
-	;tie
+;	tie
 	note C_, 12
 	dec_octave
 	note F_, 16
-	;tie
+;	tie
 	note F_, 9
 	inc_octave
 	note C_, 16
-	;tie
+;	tie
 	note C_, 9
 	dec_octave
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
-	;tie
+;	tie
 	note B_, 13
 	inc_octave
 	note F#, 12
-	;tie
+;	tie
 	note F#, 13
-	;tie
+;	tie
 	note F#, 12
 	vibrato 40, 3, 3
 	note A_, 4
-	;tie
-	;musice4 17
+;	tie
+;	frequency_offset 17
 	note A_, 3
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note A#, 3
-	;tie
-	;musice4 16
+;	tie
+;	frequency_offset 16
 	note A#, 3
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note B_, 12
-	;tie
+;	tie
 	note B_, 16
-	;tie
+;	tie
 	note B_, 16
-	;tie
+;	tie
 	note B_, 16
-	;tie
+;	tie
 	note B_, 16
-	;tie
+;	tie
 	note B_, 16
-	;tie
+;	tie
 	note B_, 2
-	;tie
-	;musice4 250
+;	tie
+;	frequency_offset -6
 	note B_, 3
-	;tie
-	;musice4 244
+;	tie
+;	frequency_offset -12
 	note B_, 2
-	;tie
-	;musice4 238
+;	tie
+;	frequency_offset -18
 	note B_, 2
-	;tie
-	;musice4 232
+;	tie
+;	frequency_offset -24
 	note B_, 2
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note A#, 2
-	;tie
-	;musice4 248
+;	tie
+;	frequency_offset -8
 	note A#, 2
-	;tie
-	;musice4 240
+;	tie
+;	frequency_offset -16
 	note A#, 2
-	;tie
-	;musice4 232
+;	tie
+;	frequency_offset -24
 	note A#, 2
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note A_, 1
 	vibrato 50, 3, 3
-	;musicec 244
+;	pitch_offset 244
 	octave 2
 	speed 10
 	note E_, 10
-	;tie
+;	tie
 	note E_, 10
-	;tie
+;	tie
 	note E_, 10
-	;tie
+;	tie
 	note E_, 10
-	;tie
+;	tie
 	note E_, 10
-	;tie
+;	tie
 	note E_, 10
-	;tie
+;	tie
 	speed 5
 	channel_volume 3
 	note E_, 15
 	channel_volume 1
-	;musicec 0
+;	pitch_offset 0
 	speed 1
 	note D_, 13
 	note E_, 12
 	rest 13
 	inc_octave
 	note D_, 3
-	;tie
+;	tie
 	note D#, 3
-	;tie
+;	tie
 	note E_, 6
 	note D_, 13
 	dec_octave
@@ -2376,12 +2403,12 @@ Branch_1f2b72:
 	rest 3
 	vibrato 7, 3, 3
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
 	vibrato 0, 3, 3
 	channel_volume 1
 	octave 2
-	;musicec 0
+;	pitch_offset 0
 	sound_ret
 
 Branch_1f2b88:
@@ -2395,23 +2422,23 @@ Branch_1f2b88:
 	rest 3
 	vibrato 7, 3, 3
 	note F_, 13
-	;tie
+;	tie
 	note F_, 12
 	vibrato 0, 3, 3
 	channel_volume 1
 	octave 2
-	;musicec 0
+;	pitch_offset 0
 	sound_ret
 
 Branch_1f2b9e:
 	channel_volume 2
 	octave 3
 	note D_, 12
-	;tie
+;	tie
 	note D_, 13
 	channel_volume 1
 	octave 2
-	;musicec 0
+;	pitch_offset 0
 	sound_ret
 
 Branch_1f2baa:
@@ -2426,7 +2453,7 @@ Branch_1f2baa:
 	rest 3
 	vibrato 7, 3, 3
 	note B_, 13
-	;tie
+;	tie
 	note B_, 12
 	vibrato 0, 3, 3
 	channel_volume 1
@@ -2446,16 +2473,16 @@ Branch_1f2bbf:
 	sound_ret
 
 
-Music_GRCastle_Ch4: ; 1f2bcb (7c:6bcb)
+Music_GRCastle_Ch4:
 	toggle_noise 6
 	drum_speed 1
 	octave 1
-	;musicdc 255
-	;musicef 251
+	stereo_panning TRUE, TRUE
+;	musicef -5
 	drum_note 2, 4
 	drum_note 2, 4
 	drum_note 2, 4
-	;musicef 0
+;	musicef 0
 	drum_note 1, 16
 	rest 9
 	drum_note 4, 13
@@ -2472,10 +2499,10 @@ Music_GRCastle_Ch4: ; 1f2bcb (7c:6bcb)
 	rest 9
 	drum_note 1, 13
 	drum_note 2, 4
-	;musicef 252
+;	musicef -4
 	drum_note 2, 4
 	drum_note 2, 4
-	;musicef 0
+;	musicef 0
 	drum_note 1, 13
 	drum_note 1, 12
 	drum_note 2, 13
@@ -2494,10 +2521,10 @@ Music_GRCastle_Ch4: ; 1f2bcb (7c:6bcb)
 	drum_note 2, 6
 	drum_note 2, 13
 	drum_note 2, 4
-	;musicef 252
+;	musicef -4
 	drum_note 2, 4
 	drum_note 2, 4
-	;musicef 0
+;	musicef 0
 .MainLoop
 .Loop1
 	drum_note 1, 13
@@ -2516,10 +2543,10 @@ Music_GRCastle_Ch4: ; 1f2bcb (7c:6bcb)
 	rest 9
 	drum_note 1, 13
 	drum_note 2, 4
-	;musicef 252
+;	musicef -4
 	drum_note 2, 4
 	drum_note 2, 4
-	;musicef 0
+;	musicef 0
 	sound_loop 3, .Loop1
 	drum_note 1, 13
 	drum_note 1, 12
@@ -2537,10 +2564,10 @@ Music_GRCastle_Ch4: ; 1f2bcb (7c:6bcb)
 	drum_note 2, 12
 	drum_note 1, 13
 	drum_note 2, 4
-	;musicef 252
+;	musicef -4
 	drum_note 2, 4
 	drum_note 2, 4
-	;musicef 0
+;	musicef 0
 .Loop2
 	drum_note 1, 13
 	drum_note 1, 12
@@ -2558,10 +2585,10 @@ Music_GRCastle_Ch4: ; 1f2bcb (7c:6bcb)
 	rest 9
 	drum_note 1, 13
 	drum_note 2, 4
-	;musicef 252
+;	musicef -4
 	drum_note 2, 4
 	drum_note 2, 4
-	;musicef 0
+;	musicef 0
 	sound_loop 3, .Loop2
 	drum_note 1, 13
 	drum_note 1, 12
@@ -2583,11 +2610,11 @@ Music_GRCastle_Ch4: ; 1f2bcb (7c:6bcb)
 	drum_note 2, 6
 	drum_note 2, 13
 	drum_note 2, 4
-	;musicef 254
+;	musicef -2
 	drum_note 2, 4
-	;musicef 252
+;	musicef -4
 	drum_note 2, 4
-	;musicef 0
+;	musicef 0
 	sound_call Branch_1f2d0c
 	sound_call Branch_1f2d18
 	sound_call Branch_1f2d0c
@@ -2641,18 +2668,18 @@ Music_GRCastle_Ch4: ; 1f2bcb (7c:6bcb)
 	drum_note 2, 13
 	drum_note 1, 12
 	drum_note 5, 13
-	;musicef 253
+;	musicef -3
 	drum_note 2, 4
-	;musicef 252
+;	musicef -4
 	drum_note 2, 4
-	;musicef 0
+;	musicef 0
 	drum_note 2, 4
-	;musicef 1
+;	musicef 1
 	drum_speed 6
 	drum_note 8, 16
 	drum_speed 1
 	rest 4
-	;musicef 0
+;	musicef 0
 	rest 16
 	rest 16
 	rest 16
@@ -2673,11 +2700,11 @@ Music_GRCastle_Ch4: ; 1f2bcb (7c:6bcb)
 	rest 16
 	rest 16
 	rest 8
-	;musicef 252
+;	musicef -4
 	drum_note 2, 4
 	drum_note 2, 4
 	drum_note 2, 4
-	;musicef 0
+;	musicef 0
 	drum_note 1, 16
 	rest 9
 	drum_note 4, 13
@@ -2694,10 +2721,10 @@ Music_GRCastle_Ch4: ; 1f2bcb (7c:6bcb)
 	rest 9
 	drum_note 1, 13
 	drum_note 2, 4
-	;musicef 252
+;	musicef -4
 	drum_note 2, 4
 	drum_note 2, 4
-	;musicef 0
+;	musicef 0
 	drum_note 1, 16
 	rest 9
 	drum_note 4, 13
@@ -2743,4 +2770,3 @@ Branch_1f2d18:
 	drum_note 4, 4
 	drum_note 4, 4
 	sound_ret
-; 0x1f2d24

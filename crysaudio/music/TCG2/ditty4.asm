@@ -1,16 +1,18 @@
-Music_Diddly4:
+Music_Ditty4:
 	channel_count 3
-	channel 1, Music_Diddly4_Ch1
-	channel 2, Music_Diddly4_Ch2
-	channel 3, Music_Diddly4_Ch3
+	channel 1, Music_Ditty4_Ch1
+	channel 2, Music_Ditty4_Ch2
+	channel 3, Music_Ditty4_Ch3
 
-Music_Diddly4_Ch2: ; 1ebeae (7a:7eae)
-	channel_volume 10
-	;musicf0 0
+Music_Ditty4_Ch2:
+;	preset 0
+	volume_envelope 10, 0
+	duty_cycle 0
+	vibrato 28, 3, 3
 	speed 1
-	;musicdc 255
+	stereo_panning TRUE, TRUE
 	octave 3
-	;musicf1 87
+;	musicf1 87
 	note C_, 4
 	note C_, 2
 	note A_, 4
@@ -29,13 +31,15 @@ Music_Diddly4_Ch2: ; 1ebeae (7a:7eae)
 	sound_ret
 
 
-Music_Diddly4_Ch1: ; 1ebec7 (7a:7ec7)
-	channel_volume 10
-	;musicf0 0
+Music_Ditty4_Ch1:
+;	preset 0
+	volume_envelope 10, 0
+	duty_cycle 0
+	vibrato 28, 3, 3
 	speed 1
-	;musicdc 255
+	stereo_panning TRUE, TRUE
 	octave 2
-	;musicf1 87
+;	musicf1 87
 	note A_, 4
 	note A_, 2
 	inc_octave
@@ -54,24 +58,22 @@ Music_Diddly4_Ch1: ; 1ebec7 (7a:7ec7)
 	sound_ret
 
 
-Music_Diddly4_Ch3: ; 1ebee0 (7a:7ee0)
-	channel_volume 1
+Music_Ditty4_Ch3:
 	fade_wave 14
 	speed 1
 	channel_volume 2
-	;musice9 128
-	;musicdc 255
+;	echo 128
+	stereo_panning TRUE, TRUE
 	speed 1
-	;musice8 1
+;	cutoff 1
 	rest 6
 	rest 5
 	rest 6
 	rest 5
 	rest 6
-	;musicf1 128
+;	musicf1 128
 	octave 4
 	note F_, 16
-	;tie
+;	tie
 	note F_, 6
 	sound_ret
-; 0x1ebefa

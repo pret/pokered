@@ -1,28 +1,30 @@
-Music_Diddly1:
+Music_Ditty1:
 	channel_count 3
-	channel 1, Music_Diddly1_Ch1
-	channel 2, Music_Diddly1_Ch2
-	channel 3, Music_Diddly1_Ch3
+	channel 1, Music_Ditty1_Ch1
+	channel 2, Music_Ditty1_Ch2
+	channel 3, Music_Ditty1_Ch3
 
-Music_Diddly1_Ch2: ; 1ebc57 (7a:7c57)
-	channel_volume 10
-	;musicf0 2
+Music_Ditty1_Ch2:
+;	preset 2
+	volume_envelope 9, 0
+	duty_cycle 3
+	vibrato 28, 3, 3
 	speed 1
 	octave 2
 	note D#, 2
 	note E_, 3
 	note D#, 3
 	note E_, 3
-	;musicef 254
+;	musicef -2
 	note D#, 2
 	note E_, 3
-	;musicef 255
+;	musicef -1
 	note D#, 3
 	note E_, 3
-	;musicef 1
+;	musicef 1
 	note D#, 2
 	note E_, 3
-	;musicef 1
+;	musicef 1
 	note D#, 3
 	note E_, 3
 	note D#, 2
@@ -55,13 +57,13 @@ Music_Diddly1_Ch2: ; 1ebc57 (7a:7c57)
 	note D_, 3
 	dec_octave
 	note G#, 2
-	;musicef 1
+;	musicef 1
 	note B_, 3
 	inc_octave
 	note D_, 3
 	note F_, 3
 	dec_octave
-	;musicef 253
+;	musicef -3
 	note G#, 2
 	note B_, 3
 	inc_octave
@@ -69,20 +71,20 @@ Music_Diddly1_Ch2: ; 1ebc57 (7a:7c57)
 	note F_, 3
 	dec_octave
 	note G#, 2
-	;musicef 255
+;	musicef -1
 	note B_, 3
 	inc_octave
 	note D_, 3
 	note F_, 3
 	dec_octave
-	;musicef 254
+;	musicef -2
 	note G#, 2
 	note B_, 3
 	inc_octave
 	note D_, 3
 	note F_, 3
 	dec_octave
-	;musicef 255
+;	musicef -1
 	note G#, 2
 	note B_, 3
 	inc_octave
@@ -91,25 +93,27 @@ Music_Diddly1_Ch2: ; 1ebc57 (7a:7c57)
 	sound_ret
 
 
-Music_Diddly1_Ch1: ; 1ebcb5 (7a:7cb5)
-	channel_volume 10
-	;musicf0 2
+Music_Ditty1_Ch1:
+;	preset 2
+	volume_envelope 9, 0
+	duty_cycle 3
+	vibrato 28, 3, 3
 	speed 1
 	octave 1
-	;musicef 1
+;	musicef 1
 	note G_, 2
 	note G#, 3
 	note G_, 3
 	note G#, 3
-	;musicef 254
+;	musicef -2
 	note G_, 2
 	note G#, 3
-	;musicef 255
+;	musicef -1
 	note G_, 3
 	note G#, 3
 	note G_, 2
 	note G#, 3
-	;musicef 1
+;	musicef 1
 	note G_, 3
 	note G#, 3
 	note G_, 2
@@ -152,28 +156,28 @@ Music_Diddly1_Ch1: ; 1ebcb5 (7a:7cb5)
 	dec_octave
 	note G#, 3
 	note A#, 3
-	;musicef 253
+;	musicef -3
 	note A#, 2
 	inc_octave
 	note D_, 3
 	dec_octave
 	note G#, 3
 	note A#, 3
-	;musicef 254
+;	musicef -2
 	note A#, 2
 	inc_octave
 	note D_, 3
 	dec_octave
 	note G#, 3
 	note A#, 3
-	;musicef 254
+;	musicef -2
 	note A#, 2
 	inc_octave
 	note D_, 3
 	dec_octave
 	note G#, 3
 	note A#, 3
-	;musicef 255
+;	musicef -1
 	note A#, 2
 	inc_octave
 	note D_, 3
@@ -183,18 +187,17 @@ Music_Diddly1_Ch1: ; 1ebcb5 (7a:7cb5)
 	sound_ret
 
 
-Music_Diddly1_Ch3: ; 1ebd17 (7a:7d17)
-	channel_volume 1
-	;fade_wave 15
+Music_Ditty1_Ch3:
+	fade_wave 15
 	load_wave 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 13, 12, 11, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 	speed 1
-	;musicdc 255
+	stereo_panning TRUE, TRUE
 	octave 2
 	channel_volume 1
 	note C_, 2
 	note C#, 3
 	channel_volume 2
-	;musicef 252
+;	musicef -4
 	note C_, 3
 	note C#, 3
 	note C_, 2
@@ -257,4 +260,3 @@ Music_Diddly1_Ch3: ; 1ebd17 (7a:7d17)
 	note C_, 3
 	note E_, 3
 	sound_ret
-; 0x1ebd67

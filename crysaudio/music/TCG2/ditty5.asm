@@ -1,13 +1,15 @@
-Music_Diddly5:
+Music_Ditty5:
 	channel_count 2
-	channel 1, Music_Diddly5_Ch1
-	channel 2, Music_Diddly5_Ch2
+	channel 1, Music_Ditty5_Ch1
+	channel 2, Music_Ditty5_Ch2
 
-Music_Diddly5_Ch2: ; 1ebefa (7a:7efa)
-	channel_volume 10
-	;musicf0 2
+Music_Ditty5_Ch2:
+;	preset 2
+	volume_envelope 9, 0
+	duty_cycle 3
+	vibrato 28, 3, 3
 	speed 1
-	;musicdc 255
+	stereo_panning TRUE, TRUE
 	octave 3
 	note G_, 2
 	note B_, 3
@@ -31,17 +33,19 @@ Music_Diddly5_Ch2: ; 1ebefa (7a:7efa)
 	inc_octave
 	note D_, 3
 	note G_, 3
-	;musicef 252
+;	musicef -4
 	note G_, 3
 	sound_ret
 
 
-Music_Diddly5_Ch1: ; 1ebf1b (7a:7f1b)
-	channel_volume 10
-	;musicf0 2
+Music_Ditty5_Ch1:
+;	preset 2
+	volume_envelope 9, 0
+	duty_cycle 3
+	vibrato 28, 3, 3
 	speed 1
-	;musicdc 255
-	;musicef 254
+	stereo_panning TRUE, TRUE
+;	musicef -2
 	octave 2
 	note B_, 2
 	inc_octave
@@ -65,7 +69,6 @@ Music_Diddly5_Ch1: ; 1ebf1b (7a:7f1b)
 	note D_, 3
 	note G_, 3
 	note B_, 3
-	;musicef 252
+;	musicef -4
 	note B_, 3
 	sound_ret
-; 0x1ebf3e

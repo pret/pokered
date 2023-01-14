@@ -5,151 +5,153 @@ Music_Fort3:
 	channel 3, Music_Fort3_Ch3
 	channel 4, Music_Fort3_Ch4
 
-Music_Fort3_Ch2: ; 1ee797 (7b:6797)
-	channel_volume 10
+Music_Fort3_Ch2:
 	speed 1
 	rest 14
 .MainLoop
-	;musicf0 9
+;	preset 9
+	volume_envelope 9, 0
+	duty_cycle 1
+	vibrato 11, 3, 3
 	octave 3
-	;musicdc 255
-	;musicf1 87
-	;musicf3
-	;vibrato_type 5
+	stereo_panning TRUE, TRUE
+;	musicf1 87
+;	musicf3
+;	vibrato_type 5
 	vibrato 60, 3, 3
 	rest 15
 	rest 14
 	note C_, 4
-	;tie
+;	tie
 	note C#, 4
-	;tie
+;	tie
 	note D_, 14
-	;musicf2
+;	musicf2
 	note C_, 7
-	;tie
+;	tie
 	note C_, 15
-	;tie
+;	tie
 	note C_, 14
-	;tie
+;	tie
 	note C_, 15
-	;tie
+;	tie
 	note C_, 14
-	;tie
+;	tie
 	note C_, 15
-	;tie
+;	tie
 	note C_, 14
-	;tie
+;	tie
 	note C_, 15
-	;tie
+;	tie
 	note C_, 14
-	;tie
+;	tie
 	note C_, 15
-	;tie
+;	tie
 	note C_, 14
 	note C_, 15
-	;tie
+;	tie
 	note C_, 14
-	;musicf3
+;	musicf3
 	rest 15
 	rest 14
 	dec_octave
 	note A#, 4
-	;tie
+;	tie
 	inc_octave
 	note C_, 4
-	;tie
+;	tie
 	note C_, 14
 	dec_octave
-	;musicf2
+;	musicf2
 	note A#, 7
-	;tie
+;	tie
 	note A#, 15
-	;tie
+;	tie
 	note A#, 14
-	;tie
+;	tie
 	note A#, 15
-	;tie
+;	tie
 	note A#, 14
-	;tie
+;	tie
 	note A#, 15
-	;tie
+;	tie
 	note A#, 14
-	;tie
+;	tie
 	note A#, 15
-	;tie
+;	tie
 	note A#, 14
-	;tie
+;	tie
 	note A#, 15
-	;tie
+;	tie
 	note A#, 14
 	note A#, 15
-	;tie
+;	tie
 	note A#, 14
 	inc_octave
-	;musicf3
+;	musicf3
 	rest 15
 	rest 14
 	note C_, 4
-	;tie
+;	tie
 	note C#, 4
-	;tie
+;	tie
 	note D_, 14
-	;musicf2
+;	musicf2
 	note C_, 7
-	;tie
+;	tie
 	note C_, 15
-	;tie
+;	tie
 	note C_, 14
-	;tie
+;	tie
 	note C_, 15
-	;tie
+;	tie
 	note C_, 14
-	;tie
+;	tie
 	note C_, 15
-	;tie
+;	tie
 	note C_, 14
-	;tie
+;	tie
 	note C_, 15
-	;tie
+;	tie
 	note C_, 14
-	;tie
+;	tie
 	note C_, 15
-	;tie
+;	tie
 	note C_, 14
 	note C_, 15
-	;tie
+;	tie
 	note C_, 14
-	;musicf3
+;	musicf3
 	rest 15
 	rest 14
 	dec_octave
 	note A#, 4
-	;tie
+;	tie
 	inc_octave
 	note C_, 4
-	;tie
+;	tie
 	note C_, 14
 	dec_octave
-	;musicf2
+;	musicf2
 	note A#, 7
-	;tie
+;	tie
 	note A#, 15
-	;tie
+;	tie
 	note A#, 14
-	;tie
+;	tie
 	note A#, 15
-	;tie
+;	tie
 	note A#, 14
-	;tie
+;	tie
 	note A#, 15
-	;tie
+;	tie
 	note A#, 14
-	;tie
+;	tie
 	note A#, 15
-	;tie
+;	tie
 	note A#, 14
 	note A#, 8
-	;musicf3
+;	musicf3
 	inc_octave
 	note C_, 4
 	note C#, 3
@@ -162,194 +164,200 @@ Music_Fort3_Ch2: ; 1ee797 (7b:6797)
 	note A#, 7
 	note G_, 7
 	note F_, 7
-	;musicf0 33
-	;musicef 1
-	;musicf1 87
-	;musicf3
+;	preset 33
+	volume_envelope 9, 0
+	duty_cycle 2
+	vibrato 28, 3, 3
+;	musicef 1
+;	musicf1 87
+;	musicf3
 	octave 3
 	note G_, 4
-	;tie
-	;musice4 9
+;	tie
+;	frequency_offset 9
 	note G_, 4
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note G#, 4
-	;tie
-	;musice4 9
+;	tie
+;	frequency_offset 9
 	note G#, 3
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note A_, 14
 	inc_octave
 	note C_, 15
 	dec_octave
-	;musicf2
+;	musicf2
 	note F_, 14
-	;tie
+;	tie
 	note F_, 15
-	;tie
+;	tie
 	note F_, 14
-	;tie
+;	tie
 	note F_, 15
-	;tie
+;	tie
 	note F_, 14
-	;tie
+;	tie
 	note F_, 15
-	;tie
+;	tie
 	note F_, 14
-	;tie
+;	tie
 	note F_, 15
-	;tie
+;	tie
 	note F_, 14
 	note F_, 15
-	;tie
+;	tie
 	note F_, 14
-	;musicf3
+;	musicf3
 	note E_, 8
 	note F_, 7
 	note E_, 7
 	note C_, 7
-	;musicf2
+;	musicf2
 	note D_, 15
-	;tie
+;	tie
 	note D_, 14
 	note D_, 15
 	note F_, 4
-	;tie
-	;musice4 4
+;	tie
+;	frequency_offset 4
 	note F_, 3
-	;tie
-	;musice4 9
+;	tie
+;	frequency_offset 9
 	note F_, 4
-	;tie
-	;musice4 13
+;	tie
+;	frequency_offset 13
 	note F_, 3
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note F#, 4
-	;tie
-	;musice4 4
+;	tie
+;	frequency_offset 4
 	note F#, 4
-	;tie
-	;musice4 9
+;	tie
+;	frequency_offset 9
 	note F#, 4
-	;tie
-	;musice4 13
+;	tie
+;	frequency_offset 13
 	note F#, 3
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note G_, 14
-	;tie
+;	tie
 	note G_, 15
-	;tie
+;	tie
 	note G_, 14
-	;tie
+;	tie
 	note G_, 15
-	;tie
+;	tie
 	note G_, 14
-	;tie
+;	tie
 	note G_, 15
-	;tie
+;	tie
 	note G_, 14
-	;tie
+;	tie
 	note G_, 15
-	;tie
+;	tie
 	note G_, 14
 	note G_, 15
-	;tie
+;	tie
 	note G_, 14
-	;musicf3
-	;musicf0 33
+;	musicf3
+;	preset 33
+	volume_envelope 9, 0
+	duty_cycle 2
+	vibrato 28, 3, 3
 	octave 3
 	note G_, 4
-	;tie
-	;musice4 9
+;	tie
+;	frequency_offset 9
 	note G_, 4
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note G#, 4
-	;tie
-	;musice4 9
+;	tie
+;	frequency_offset 9
 	note G#, 3
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note A_, 14
 	inc_octave
 	note C_, 15
 	dec_octave
-	;musicf2
+;	musicf2
 	note F_, 14
-	;tie
+;	tie
 	note F_, 15
-	;tie
+;	tie
 	note F_, 14
-	;tie
+;	tie
 	note F_, 15
-	;tie
+;	tie
 	note F_, 14
-	;tie
+;	tie
 	note F_, 15
-	;tie
+;	tie
 	note F_, 14
-	;tie
+;	tie
 	note F_, 15
-	;tie
+;	tie
 	note F_, 14
 	note F_, 15
-	;tie
+;	tie
 	note F_, 14
-	;musicf3
+;	musicf3
 	note E_, 8
 	note F_, 7
 	note E_, 7
 	note C_, 7
-	;musicf2
+;	musicf2
 	note D_, 15
-	;tie
+;	tie
 	note D_, 14
 	note D_, 15
 	dec_octave
 	note F_, 4
-	;tie
-	;musice4 14
+;	tie
+;	frequency_offset 14
 	note F_, 3
-	;tie
-	;musice4 28
+;	tie
+;	frequency_offset 28
 	note F_, 4
-	;tie
-	;musice4 43
+;	tie
+;	frequency_offset 43
 	note F_, 3
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note F#, 4
-	;tie
-	;musice4 14
+;	tie
+;	frequency_offset 14
 	note F#, 4
-	;tie
-	;musice4 28
+;	tie
+;	frequency_offset 28
 	note F#, 4
-	;tie
-	;musice4 43
+;	tie
+;	frequency_offset 43
 	note F#, 3
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note G_, 14
-	;tie
+;	tie
 	note G_, 15
-	;tie
+;	tie
 	note G_, 14
-	;tie
+;	tie
 	note G_, 15
-	;tie
+;	tie
 	note G_, 14
-	;tie
+;	tie
 	note G_, 15
-	;tie
+;	tie
 	note G_, 14
 	note G_, 15
-	;tie
+;	tie
 	note G_, 14
-	;musicf3
+;	musicf3
 	note G_, 8
 	note A_, 7
 	note A#, 7
@@ -357,83 +365,83 @@ Music_Fort3_Ch2: ; 1ee797 (7b:6797)
 	note C_, 7
 	vibrato 11, 3, 3
 	note C_, 4
-	;tie
-	;musice4 9
+;	tie
+;	frequency_offset 9
 	note C_, 4
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note C#, 4
-	;tie
-	;musice4 9
+;	tie
+;	frequency_offset 9
 	note C#, 3
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note D_, 14
 	vibrato 0, 3, 3
 	note C_, 15
 	vibrato 29, 3, 3
-	;musicf2
+;	musicf2
 	note F_, 14
-	;tie
+;	tie
 	note F_, 15
-	;tie
+;	tie
 	note F_, 14
-	;tie
+;	tie
 	note F_, 15
-	;tie
+;	tie
 	note F_, 14
-	;tie
+;	tie
 	note F_, 15
-	;tie
+;	tie
 	note F_, 14
-	;tie
+;	tie
 	note F_, 15
-	;tie
+;	tie
 	note F_, 14
 	note F_, 15
-	;musicf3
+;	musicf3
 	note D#, 14
 	note D_, 15
-	;musicf2
+;	musicf2
 	note C_, 7
 	note C_, 7
 	vibrato 11, 3, 3
 	note C_, 4
-	;tie
-	;musice4 9
+;	tie
+;	frequency_offset 9
 	note C_, 4
-	;tie
+;	tie
 	note C#, 4
-	;tie
-	;musice4 9
+;	tie
+;	frequency_offset 9
 	note C#, 3
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note D_, 14
 	note D_, 15
 	dec_octave
 	vibrato 29, 3, 3
 	note G_, 14
-	;tie
+;	tie
 	note G_, 15
-	;tie
+;	tie
 	note G_, 14
-	;tie
+;	tie
 	note G_, 15
-	;tie
+;	tie
 	note G_, 14
-	;tie
+;	tie
 	note G_, 15
-	;tie
+;	tie
 	note G_, 14
-	;tie
+;	tie
 	note G_, 15
-	;tie
+;	tie
 	note G_, 14
 	note G_, 15
-	;tie
+;	tie
 	note G_, 14
-	;musicf3
+;	musicf3
 	note G_, 8
 	note A_, 7
 	note A#, 7
@@ -441,101 +449,104 @@ Music_Fort3_Ch2: ; 1ee797 (7b:6797)
 	note C_, 7
 	vibrato 11, 3, 3
 	note C_, 4
-	;tie
-	;musice4 9
+;	tie
+;	frequency_offset 9
 	note C_, 4
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note C#, 4
-	;tie
-	;musice4 9
+;	tie
+;	frequency_offset 9
 	note C#, 3
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note D_, 14
 	vibrato 0, 3, 3
 	note C_, 15
 	vibrato 29, 3, 3
-	;musicf2
+;	musicf2
 	note F_, 14
-	;tie
+;	tie
 	note F_, 15
-	;tie
+;	tie
 	note F_, 14
-	;tie
+;	tie
 	note F_, 15
-	;tie
+;	tie
 	note F_, 14
-	;tie
+;	tie
 	note F_, 15
-	;tie
+;	tie
 	note F_, 14
-	;tie
+;	tie
 	note F_, 15
-	;tie
+;	tie
 	note F_, 14
 	note F_, 15
-	;musicf3
+;	musicf3
 	note D#, 14
 	note D_, 15
-	;musicf2
+;	musicf2
 	note C_, 7
 	note C_, 7
 	vibrato 11, 3, 3
 	note C_, 4
-	;tie
-	;musice4 9
+;	tie
+;	frequency_offset 9
 	note C_, 4
-	;tie
-	;musice4 19
+;	tie
+;	frequency_offset 19
 	note C_, 4
-	;tie
-	;musice4 28
+;	tie
+;	frequency_offset 28
 	note C_, 3
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note C#, 4
-	;tie
-	;musice4 9
+;	tie
+;	frequency_offset 9
 	note C#, 3
-	;tie
-	;musice4 19
+;	tie
+;	frequency_offset 19
 	note C#, 4
-	;tie
-	;musice4 28
+;	tie
+;	frequency_offset 28
 	note C#, 3
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	vibrato 30, 3, 3
 	note D_, 15
-	;tie
+;	tie
 	note D_, 14
-	;tie
+;	tie
 	note D_, 15
-	;tie
+;	tie
 	note D_, 14
-	;tie
+;	tie
 	note D_, 15
-	;tie
+;	tie
 	note D_, 14
-	;tie
+;	tie
 	note D_, 15
-	;tie
+;	tie
 	note D_, 14
-	;tie
+;	tie
 	note D_, 15
-	;tie
+;	tie
 	note D_, 14
-	;tie
+;	tie
 	note D_, 15
-	;tie
+;	tie
 	note D_, 14
 	note D_, 15
-	;tie
+;	tie
 	note D_, 14
-	;musicf0 9
-	;musicf1 64
-	;musicf3
+;	preset 9
+	volume_envelope 9, 0
+	duty_cycle 1
+	vibrato 11, 3, 3
+;	musicf1 64
+;	musicf3
 .Loop1
 	octave 1
 	note G_, 15
@@ -546,7 +557,7 @@ Music_Fort3_Ch2: ; 1ee797 (7b:6797)
 	rest 3
 	inc_octave
 	note F_, 7
-	;musicf2
+;	musicf2
 	note G_, 4
 	note F_, 3
 	dec_octave
@@ -560,12 +571,12 @@ Music_Fort3_Ch2: ; 1ee797 (7b:6797)
 	rest 3
 	rest 4
 	rest 3
-	;musicf1 32
+;	musicf1 32
 	note F_, 4
 	note F_, 11
-	;musicf3
+;	musicf3
 	note F_, 7
-	;musicf1 64
+;	musicf1 64
 	note G_, 4
 	note F_, 3
 	dec_octave
@@ -590,9 +601,9 @@ Music_Fort3_Ch2: ; 1ee797 (7b:6797)
 	inc_octave
 	inc_octave
 	note G_, 3
-	;musicf3
+;	musicf3
 	note F_, 7
-	;musicf2
+;	musicf2
 	note G_, 4
 	note F_, 3
 	dec_octave
@@ -601,30 +612,30 @@ Music_Fort3_Ch2: ; 1ee797 (7b:6797)
 	inc_octave
 	inc_octave
 	note G_, 4
-	;musicf1 96
+;	musicf1 96
 	note G_, 4
 	rest 3
 	rest 4
 	rest 3
 	note G_, 4
 	rest 3
-	;musicf3
+;	musicf3
 	note B_, 4
-	;tie
-	;musice4 7
+;	tie
+;	frequency_offset 7
 	note B_, 4
-	;tie
+;	tie
 	inc_octave
-	;musice4 0
+;	frequency_offset 0
 	note C_, 7
 	dec_octave
 	note A#, 14
-	;musicf1 64
+;	musicf1 64
 	dec_octave
 	dec_octave
 	note G_, 15
 	rest 7
-	;musicf3
+;	musicf3
 	note G_, 4
 	rest 3
 	rest 8
@@ -632,7 +643,7 @@ Music_Fort3_Ch2: ; 1ee797 (7b:6797)
 	rest 3
 	inc_octave
 	note F_, 7
-	;musicf2
+;	musicf2
 	note G_, 4
 	note F_, 3
 	dec_octave
@@ -644,14 +655,14 @@ Music_Fort3_Ch2: ; 1ee797 (7b:6797)
 	rest 3
 	note F_, 4
 	rest 10
-	;musicf1 32
+;	musicf1 32
 	note F_, 4
 	rest 4
 	note F_, 4
 	rest 3
-	;musicf3
+;	musicf3
 	note F_, 7
-	;musicf1 64
+;	musicf1 64
 	note G_, 4
 	note F_, 3
 	dec_octave
@@ -661,11 +672,11 @@ Music_Fort3_Ch2: ; 1ee797 (7b:6797)
 	inc_octave
 	note G_, 4
 	dec_octave
-	;musicf3
+;	musicf3
 	note G_, 4
 	rest 3
 	dec_octave
-	;musicf2
+;	musicf2
 	note G_, 1
 	rest 2
 	inc_octave
@@ -673,21 +684,21 @@ Music_Fort3_Ch2: ; 1ee797 (7b:6797)
 	dec_octave
 	note G_, 4
 	rest 3
-	;musicf3
+;	musicf3
 	inc_octave
 	inc_octave
 	note G_, 4
 	rest 4
 	dec_octave
 	dec_octave
-	;musicf2
+;	musicf2
 	note G_, 4
 	inc_octave
 	inc_octave
 	note G_, 3
-	;musicf3
+;	musicf3
 	note F_, 7
-	;musicf2
+;	musicf2
 	note G_, 4
 	note F_, 3
 	dec_octave
@@ -696,7 +707,7 @@ Music_Fort3_Ch2: ; 1ee797 (7b:6797)
 	inc_octave
 	inc_octave
 	note G_, 4
-	;musicf3
+;	musicf3
 	note C_, 4
 	note C#, 3
 	note C_, 7
@@ -712,151 +723,153 @@ Music_Fort3_Ch2: ; 1ee797 (7b:6797)
 	sound_loop 0, .MainLoop
 
 
-Music_Fort3_Ch1: ; 1eeaa0 (7b:6aa0)
-	channel_volume 10
+Music_Fort3_Ch1:
 	speed 1
 	rest 14
 .MainLoop
-	;musicf0 9
+;	preset 9
+	volume_envelope 9, 0
+	duty_cycle 1
+	vibrato 11, 3, 3
 	octave 3
-	;musicdc 255
-	;vibrato_type 5
+	stereo_panning TRUE, TRUE
+;	vibrato_type 5
 	vibrato 60, 3, 3
-	;musicec 251
-	;musicf1 87
-	;musicf3
+;	pitch_offset 251
+;	musicf1 87
+;	musicf3
 	rest 15
 	rest 14
 	note C_, 4
-	;tie
+;	tie
 	note C#, 4
-	;tie
+;	tie
 	note D_, 14
-	;musicf2
+;	musicf2
 	note C_, 7
-	;tie
+;	tie
 	note C_, 15
-	;tie
+;	tie
 	note C_, 14
-	;tie
+;	tie
 	note C_, 15
-	;tie
+;	tie
 	note C_, 14
-	;tie
+;	tie
 	note C_, 15
-	;tie
+;	tie
 	note C_, 14
-	;tie
+;	tie
 	note C_, 15
-	;tie
+;	tie
 	note C_, 14
-	;tie
+;	tie
 	note C_, 15
-	;tie
+;	tie
 	note C_, 14
 	note C_, 15
-	;tie
+;	tie
 	note C_, 14
-	;musicf3
+;	musicf3
 	rest 15
 	rest 14
 	dec_octave
 	note A#, 4
-	;tie
+;	tie
 	inc_octave
 	note C_, 4
-	;tie
+;	tie
 	note C_, 14
 	dec_octave
-	;musicf2
+;	musicf2
 	note A#, 7
-	;tie
+;	tie
 	note A#, 15
-	;tie
+;	tie
 	note A#, 14
-	;tie
+;	tie
 	note A#, 15
-	;tie
+;	tie
 	note A#, 14
-	;tie
+;	tie
 	note A#, 15
-	;tie
+;	tie
 	note A#, 14
-	;tie
+;	tie
 	note A#, 15
-	;tie
+;	tie
 	note A#, 14
-	;tie
+;	tie
 	note A#, 15
-	;tie
+;	tie
 	note A#, 14
 	note A#, 15
-	;tie
+;	tie
 	note A#, 14
 	inc_octave
-	;musicf3
+;	musicf3
 	rest 15
 	rest 14
 	note C_, 4
-	;tie
+;	tie
 	note C#, 4
-	;tie
+;	tie
 	note D_, 14
-	;musicf2
+;	musicf2
 	note C_, 7
-	;tie
+;	tie
 	note C_, 15
-	;tie
+;	tie
 	note C_, 14
-	;tie
+;	tie
 	note C_, 15
-	;tie
+;	tie
 	note C_, 14
-	;tie
+;	tie
 	note C_, 15
-	;tie
+;	tie
 	note C_, 14
-	;tie
+;	tie
 	note C_, 15
-	;tie
+;	tie
 	note C_, 14
-	;tie
+;	tie
 	note C_, 15
-	;tie
+;	tie
 	note C_, 14
 	note C_, 15
-	;tie
+;	tie
 	note C_, 14
-	;musicf3
+;	musicf3
 	rest 15
 	rest 14
 	dec_octave
 	note A#, 4
-	;tie
+;	tie
 	inc_octave
 	note C_, 4
-	;tie
+;	tie
 	note C_, 14
 	dec_octave
 	note A#, 7
-	;tie
+;	tie
 	note A#, 15
-	;tie
+;	tie
 	note A#, 14
-	;tie
+;	tie
 	note A#, 15
-	;tie
+;	tie
 	note A#, 14
-	;tie
+;	tie
 	note A#, 15
-	;tie
+;	tie
 	note A#, 14
-	;tie
+;	tie
 	note A#, 15
-	;tie
+;	tie
 	note A#, 14
-	;musicef 252
-	;musicec 0
+;	musicef -4
+;	pitch_offset 0
 	octave 2
 	note A#, 8
 	rest 7
@@ -867,20 +880,20 @@ Music_Fort3_Ch1: ; 1eeaa0 (7b:6aa0)
 	rest 7
 	inc_octave
 	note C_, 7
-	;musicef 4
-	;vibrato_type 5
+;	musicef 4
+;	vibrato_type 5
 	vibrato 12, 3, 3
 	octave 2
 .Loop1
 	rest 15
 	rest 14
 	note G#, 4
-	;tie
+;	tie
 	note A_, 4
-	;tie
+;	tie
 	note A#, 7
 	note A_, 14
-	;tie
+;	tie
 	note A_, 8
 	note A_, 4
 	rest 3
@@ -896,34 +909,34 @@ Music_Fort3_Ch1: ; 1eeaa0 (7b:6aa0)
 	inc_octave
 	note E_, 4
 	note F_, 4
-	;tie
+;	tie
 	note F_, 14
-	;tie
+;	tie
 	note F_, 7
 	rest 8
 	dec_octave
 	note A_, 7
 	rest 14
 	note A_, 4
-	;tie
-	;musice4 17
+;	tie
+;	frequency_offset 17
 	note A_, 4
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note A#, 7
 	note A_, 7
 	rest 7
 	rest 15
 	rest 14
 	note A#, 4
-	;tie
+;	tie
 	note B_, 4
-	;tie
+;	tie
 	inc_octave
 	note C_, 7
 	dec_octave
 	note A#, 14
-	;tie
+;	tie
 	note A#, 8
 	inc_octave
 	note C_, 4
@@ -942,21 +955,21 @@ Music_Fort3_Ch1: ; 1eeaa0 (7b:6aa0)
 	inc_octave
 	note C#, 4
 	note D_, 4
-	;tie
+;	tie
 	note D_, 14
-	;tie
+;	tie
 	note D_, 7
 	rest 8
 	dec_octave
 	note A_, 7
 	rest 14
 	note B_, 4
-	;tie
-	;musice4 15
+;	tie
+;	frequency_offset 15
 	note B_, 4
-	;tie
+;	tie
 	inc_octave
-	;musice4 0
+;	frequency_offset 0
 	note C_, 7
 	dec_octave
 	note A#, 7
@@ -965,14 +978,14 @@ Music_Fort3_Ch1: ; 1eeaa0 (7b:6aa0)
 	rest 15
 	rest 14
 	note A#, 4
-	;tie
+;	tie
 	note B_, 4
-	;tie
+;	tie
 	inc_octave
 	note C_, 7
 	dec_octave
 	note G#, 14
-	;tie
+;	tie
 	note G#, 8
 	inc_octave
 	note G_, 4
@@ -990,34 +1003,34 @@ Music_Fort3_Ch1: ; 1eeaa0 (7b:6aa0)
 	note D#, 5
 	note A_, 4
 	note A#, 4
-	;tie
+;	tie
 	note A#, 14
-	;tie
+;	tie
 	note A#, 7
 	rest 8
 	note F_, 7
 	rest 14
 	dec_octave
 	note A_, 4
-	;tie
-	;musice4 17
+;	tie
+;	frequency_offset 17
 	note A_, 4
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note A#, 7
 	note F_, 7
 	rest 7
 	rest 15
 	rest 14
 	note A#, 4
-	;tie
+;	tie
 	note B_, 4
-	;tie
+;	tie
 	inc_octave
 	note C_, 7
 	dec_octave
 	note A#, 14
-	;tie
+;	tie
 	note A#, 8
 	inc_octave
 	note D_, 4
@@ -1037,21 +1050,21 @@ Music_Fort3_Ch1: ; 1eeaa0 (7b:6aa0)
 	inc_octave
 	note C#, 4
 	note D_, 4
-	;tie
+;	tie
 	note D_, 14
-	;tie
+;	tie
 	note D_, 7
 	rest 8
 	dec_octave
 	note A_, 7
 	rest 14
 	note B_, 4
-	;tie
-	;musice4 15
+;	tie
+;	frequency_offset 15
 	note B_, 4
-	;tie
+;	tie
 	inc_octave
-	;musice4 0
+;	frequency_offset 0
 	note C_, 7
 	dec_octave
 	note A#, 7
@@ -1059,14 +1072,14 @@ Music_Fort3_Ch1: ; 1eeaa0 (7b:6aa0)
 	rest 15
 	rest 14
 	note A#, 4
-	;tie
+;	tie
 	note B_, 4
-	;tie
+;	tie
 	inc_octave
 	note C_, 7
 	dec_octave
 	note G#, 14
-	;tie
+;	tie
 	note G#, 8
 	inc_octave
 	note G_, 4
@@ -1084,20 +1097,20 @@ Music_Fort3_Ch1: ; 1eeaa0 (7b:6aa0)
 	note D#, 5
 	note A_, 4
 	note A#, 4
-	;tie
+;	tie
 	note A#, 14
-	;tie
+;	tie
 	note A#, 7
 	rest 8
 	note F_, 7
 	rest 14
 	dec_octave
 	note A_, 4
-	;tie
-	;musice4 17
+;	tie
+;	frequency_offset 17
 	note A_, 4
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note A#, 7
 	note F_, 7
 	rest 7
@@ -1105,12 +1118,12 @@ Music_Fort3_Ch1: ; 1eeaa0 (7b:6aa0)
 	rest 14
 	inc_octave
 	note C_, 4
-	;tie
+;	tie
 	note C#, 4
-	;tie
+;	tie
 	note D_, 7
 	note C_, 14
-	;tie
+;	tie
 	note C_, 8
 	dec_octave
 	note G_, 4
@@ -1126,7 +1139,7 @@ Music_Fort3_Ch1: ; 1eeaa0 (7b:6aa0)
 	rest 14
 	note G_, 4
 	note G_, 4
-	;tie
+;	tie
 	note G_, 7
 	rest 7
 	note G_, 4
@@ -1136,11 +1149,11 @@ Music_Fort3_Ch1: ; 1eeaa0 (7b:6aa0)
 	rest 3
 	rest 14
 	note A_, 4
-	;tie
-	;musice4 9
+;	tie
+;	frequency_offset 9
 	note A_, 4
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note A#, 7
 	note F_, 7
 	rest 7
@@ -1176,11 +1189,11 @@ Music_Fort3_Ch1: ; 1eeaa0 (7b:6aa0)
 	rest 3
 	rest 14
 	note F#, 4
-	;tie
-	;musice4 10
+;	tie
+;	frequency_offset 10
 	note F#, 4
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note G_, 7
 	note F_, 14
 	rest 15
@@ -1247,11 +1260,11 @@ Music_Fort3_Ch1: ; 1eeaa0 (7b:6aa0)
 	rest 3
 	rest 14
 	note F#, 4
-	;tie
-	;musice4 10
+;	tie
+;	frequency_offset 10
 	note F#, 4
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note G_, 7
 	note F_, 14
 	rest 15
@@ -1290,52 +1303,51 @@ Music_Fort3_Ch1: ; 1eeaa0 (7b:6aa0)
 	sound_loop 0, .MainLoop
 
 
-Music_Fort3_Ch3: ; 1eecfb (7b:6cfb)
-	channel_volume 1
+Music_Fort3_Ch3:
 	speed 1
 	fade_wave 11
-	;musicdc 255
+	stereo_panning TRUE, TRUE
 	channel_volume 1
-	;musice9 96
-	;musicec 244
+;	echo 96
+;	pitch_offset 244
 	octave 3
 	note F_, 7
 	note F#, 7
 .MainLoop
-	;vibrato_type 5
+;	vibrato_type 5
 	vibrato 60, 3, 3
 	octave 3
 	note G_, 15
 	inc_octave
-	;musice8 4
+;	cutoff 4
 	note D_, 14
-	;musice8 8
+;	cutoff 8
 	channel_volume 2
 	note F_, 4
-	;tie
+;	tie
 	note F#, 4
-	;tie
+;	tie
 	note G_, 14
 	note F_, 15
-	;tie
+;	tie
 	note F_, 14
-	;tie
+;	tie
 	note F_, 15
-	;tie
+;	tie
 	note F_, 14
-	;tie
+;	tie
 	note F_, 7
-	;tie
+;	tie
 	note F_, 15
-	;tie
+;	tie
 	note F_, 14
-	;tie
+;	tie
 	note F_, 15
-	;tie
+;	tie
 	note F_, 14
-	;tie
+;	tie
 	note F_, 15
-	;tie
+;	tie
 	note F_, 14
 	channel_volume 3
 	note F_, 15
@@ -1345,35 +1357,35 @@ Music_Fort3_Ch3: ; 1eecfb (7b:6cfb)
 	note F#, 7
 	note G_, 15
 	inc_octave
-	;musice8 4
+;	cutoff 4
 	note D_, 14
-	;musice8 8
+;	cutoff 8
 	channel_volume 2
 	note D#, 4
-	;tie
+;	tie
 	note E_, 4
-	;tie
+;	tie
 	note F_, 14
 	note D#, 14
-	;tie
+;	tie
 	note D#, 15
-	;tie
+;	tie
 	note D#, 14
-	;tie
+;	tie
 	note D#, 15
-	;tie
+;	tie
 	note D#, 7
-	;tie
+;	tie
 	note D#, 15
-	;tie
+;	tie
 	note D#, 14
-	;tie
+;	tie
 	note D#, 15
-	;tie
+;	tie
 	note D#, 14
-	;tie
+;	tie
 	note D#, 15
-	;tie
+;	tie
 	note D#, 14
 	channel_volume 3
 	note D#, 15
@@ -1383,35 +1395,35 @@ Music_Fort3_Ch3: ; 1eecfb (7b:6cfb)
 	note F#, 7
 	note G_, 15
 	inc_octave
-	;musice8 4
+;	cutoff 4
 	note D_, 14
-	;musice8 8
+;	cutoff 8
 	channel_volume 2
 	note F_, 4
-	;tie
+;	tie
 	note F#, 4
-	;tie
+;	tie
 	note G_, 14
 	note F_, 15
-	;tie
+;	tie
 	note F_, 14
-	;tie
+;	tie
 	note F_, 15
-	;tie
+;	tie
 	note F_, 14
-	;tie
+;	tie
 	note F_, 7
-	;tie
+;	tie
 	note F_, 15
-	;tie
+;	tie
 	note F_, 14
-	;tie
+;	tie
 	note F_, 15
-	;tie
+;	tie
 	note F_, 14
-	;tie
+;	tie
 	note F_, 15
-	;tie
+;	tie
 	note F_, 14
 	channel_volume 3
 	note F_, 15
@@ -1421,36 +1433,36 @@ Music_Fort3_Ch3: ; 1eecfb (7b:6cfb)
 	note F#, 7
 	note G_, 15
 	inc_octave
-	;musice8 4
+;	cutoff 4
 	note D_, 14
-	;musice8 8
+;	cutoff 8
 	channel_volume 2
 	note D#, 4
-	;tie
+;	tie
 	note E_, 4
-	;tie
+;	tie
 	note F_, 14
 	note D#, 14
-	;tie
+;	tie
 	note D#, 15
-	;tie
+;	tie
 	note D#, 14
-	;tie
+;	tie
 	note D#, 15
-	;tie
+;	tie
 	note D#, 7
-	;tie
+;	tie
 	note D#, 15
-	;tie
+;	tie
 	note D#, 14
-	;tie
+;	tie
 	note D#, 15
 	dec_octave
 	channel_volume 1
 	note F_, 7
-	;musice8 3
+;	cutoff 3
 	note G_, 15
-	;musice8 8
+;	cutoff 8
 	inc_octave
 	note C#, 7
 	note C_, 7
@@ -1469,9 +1481,9 @@ Music_Fort3_Ch3: ; 1eecfb (7b:6cfb)
 	rest 7
 	sound_call Branch_1ef06a
 	note F_, 4
-	;tie
+;	tie
 	note F#, 4
-	;tie
+;	tie
 	note G_, 7
 	note F_, 14
 	sound_call Branch_1ef06f
@@ -1500,7 +1512,7 @@ Music_Fort3_Ch3: ; 1eecfb (7b:6cfb)
 	inc_octave
 	sound_call Branch_1ef06a
 	note C_, 15
-	;tie
+;	tie
 	note C_, 14
 	sound_call Branch_1ef06f
 	dec_octave
@@ -1522,9 +1534,9 @@ Music_Fort3_Ch3: ; 1eecfb (7b:6cfb)
 	rest 7
 	sound_call Branch_1ef06a
 	note F_, 4
-	;tie
+;	tie
 	note F#, 4
-	;tie
+;	tie
 	note G_, 7
 	note F_, 14
 	sound_call Branch_1ef06f
@@ -1552,7 +1564,7 @@ Music_Fort3_Ch3: ; 1eecfb (7b:6cfb)
 	inc_octave
 	sound_call Branch_1ef06a
 	note A_, 15
-	;tie
+;	tie
 	note A_, 14
 	sound_call Branch_1ef06f
 	dec_octave
@@ -1576,9 +1588,9 @@ Music_Fort3_Ch3: ; 1eecfb (7b:6cfb)
 	rest 7
 	sound_call Branch_1ef06a
 	note F#, 4
-	;tie
+;	tie
 	note G_, 4
-	;tie
+;	tie
 	note G#, 7
 	sound_call Branch_1ef06f
 	inc_octave
@@ -1609,7 +1621,7 @@ Music_Fort3_Ch3: ; 1eecfb (7b:6cfb)
 	inc_octave
 	sound_call Branch_1ef06a
 	note G_, 15
-	;tie
+;	tie
 	note G_, 14
 	sound_call Branch_1ef06f
 	dec_octave
@@ -1633,9 +1645,9 @@ Music_Fort3_Ch3: ; 1eecfb (7b:6cfb)
 	rest 7
 	sound_call Branch_1ef06a
 	note F_, 4
-	;tie
+;	tie
 	note F#, 4
-	;tie
+;	tie
 	note G_, 7
 	note F_, 14
 	sound_call Branch_1ef06f
@@ -1663,7 +1675,7 @@ Music_Fort3_Ch3: ; 1eecfb (7b:6cfb)
 	inc_octave
 	sound_call Branch_1ef06a
 	note A_, 15
-	;tie
+;	tie
 	note A_, 14
 	sound_call Branch_1ef06f
 	dec_octave
@@ -1686,9 +1698,9 @@ Music_Fort3_Ch3: ; 1eecfb (7b:6cfb)
 	rest 7
 	sound_call Branch_1ef06a
 	note F#, 4
-	;tie
+;	tie
 	note G_, 4
-	;tie
+;	tie
 	note G#, 7
 	sound_call Branch_1ef06f
 	inc_octave
@@ -1719,7 +1731,7 @@ Music_Fort3_Ch3: ; 1eecfb (7b:6cfb)
 	inc_octave
 	sound_call Branch_1ef06a
 	note G_, 15
-	;tie
+;	tie
 	note G_, 14
 	sound_call Branch_1ef06f
 	dec_octave
@@ -1743,9 +1755,9 @@ Music_Fort3_Ch3: ; 1eecfb (7b:6cfb)
 	rest 7
 	sound_call Branch_1ef06a
 	note A#, 4
-	;tie
+;	tie
 	note B_, 4
-	;tie
+;	tie
 	inc_octave
 	note C_, 7
 	dec_octave
@@ -1811,11 +1823,11 @@ Music_Fort3_Ch3: ; 1eecfb (7b:6cfb)
 	rest 3
 	inc_octave
 	note E_, 4
-	;tie
-	;musice4 12
+;	tie
+;	frequency_offset 12
 	note E_, 4
-	;tie
-	;musice4 0
+;	tie
+;	frequency_offset 0
 	note F_, 7
 	sound_call Branch_1ef06f
 	dec_octave
@@ -1826,9 +1838,9 @@ Music_Fort3_Ch3: ; 1eecfb (7b:6cfb)
 	note G_, 3
 	rest 12
 	inc_octave
-	;musice8 2
+;	cutoff 2
 	note G_, 7
-	;musice8 8
+;	cutoff 8
 	dec_octave
 	note G_, 3
 	rest 12
@@ -1836,27 +1848,27 @@ Music_Fort3_Ch3: ; 1eecfb (7b:6cfb)
 	rest 3
 	inc_octave
 	note F_, 7
-	;musice8 4
+;	cutoff 4
 	note G_, 7
-	;musice8 8
+;	cutoff 8
 	dec_octave
 	note G_, 3
 	rest 12
 	inc_octave
 	inc_octave
-	;musice8 3
+;	cutoff 3
 	note D_, 7
-	;musice8 8
+;	cutoff 8
 	dec_octave
 	note D_, 4
 	rest 3
 	inc_octave
-	;musice8 4
+;	cutoff 4
 	note F_, 8
 	note F#, 7
-	;musice8 2
+;	cutoff 2
 	note G_, 14
-	;musice8 8
+;	cutoff 8
 	sound_call Branch_1ef040
 	octave 2
 	note G_, 3
@@ -1869,35 +1881,35 @@ Music_Fort3_Ch3: ; 1eecfb (7b:6cfb)
 	rest 3
 	inc_octave
 	note F_, 7
-	;musice8 4
+;	cutoff 4
 	note G_, 7
-	;musice8 8
+;	cutoff 8
 	dec_octave
 	note G_, 3
 	rest 12
 	inc_octave
 	inc_octave
-	;musice8 4
+;	cutoff 4
 	note D_, 7
-	;musice8 8
+;	cutoff 8
 	dec_octave
 	note D_, 4
 	rest 3
 	inc_octave
-	;musice8 4
+;	cutoff 4
 	note F_, 8
 	note F#, 7
-	;musice8 2
+;	cutoff 2
 	note G_, 14
-	;musice8 8
+;	cutoff 8
 	sound_call Branch_1ef040
 	octave 2
 	note G_, 3
 	rest 12
 	inc_octave
-	;musice8 2
+;	cutoff 2
 	note G_, 7
-	;musice8 8
+;	cutoff 8
 	dec_octave
 	note G_, 3
 	rest 12
@@ -1905,34 +1917,34 @@ Music_Fort3_Ch3: ; 1eecfb (7b:6cfb)
 	rest 3
 	inc_octave
 	note F_, 7
-	;musice8 4
+;	cutoff 4
 	note G_, 7
-	;musice8 8
+;	cutoff 8
 	dec_octave
 	note G_, 3
 	rest 12
 	inc_octave
 	inc_octave
-	;musice8 4
+;	cutoff 4
 	note D_, 7
-	;musice8 8
+;	cutoff 8
 	dec_octave
 	note D_, 4
 	rest 3
 	inc_octave
-	;musice8 4
+;	cutoff 4
 	note F_, 8
 	note F#, 7
-	;musice8 2
+;	cutoff 2
 	note G_, 14
 	sound_call Branch_1ef040
 	octave 2
 	note G_, 3
 	rest 12
 	inc_octave
-	;musice8 2
+;	cutoff 2
 	note G_, 7
-	;musice8 8
+;	cutoff 8
 	dec_octave
 	note G_, 3
 	rest 12
@@ -1940,9 +1952,9 @@ Music_Fort3_Ch3: ; 1eecfb (7b:6cfb)
 	rest 3
 	inc_octave
 	note F_, 7
-	;musice8 4
+;	cutoff 4
 	note G_, 7
-	;musice8 8
+;	cutoff 8
 	dec_octave
 	note G_, 4
 	rest 4
@@ -1963,26 +1975,26 @@ Branch_1ef040:
 	note G_, 4
 	rest 3
 	inc_octave
-	;musice8 2
+;	cutoff 2
 	note G_, 8
-	;musice8 8
+;	cutoff 8
 	dec_octave
 	note G_, 4
 	rest 3
 	inc_octave
 	note F_, 7
-	;musice8 4
+;	cutoff 4
 	note G_, 7
-	;musice8 8
+;	cutoff 8
 	dec_octave
 	note G_, 2
 	rest 6
 	inc_octave
 	inc_octave
-	;musice8 4
+;	cutoff 4
 	note A#, 7
 	note D_, 7
-	;musice8 8
+;	cutoff 8
 	dec_octave
 	note D_, 4
 	rest 3
@@ -2005,11 +2017,11 @@ Branch_1ef06f:
 	sound_ret
 
 
-Music_Fort3_Ch4: ; 1ef074 (7b:7074)
+Music_Fort3_Ch4:
 	toggle_noise 6
 	drum_speed 1
 	octave 1
-	;musicdc 255
+	stereo_panning TRUE, TRUE
 	rest 14
 .MainLoop
 	drum_note 1, 15
@@ -2336,11 +2348,11 @@ Music_Fort3_Ch4: ; 1ef074 (7b:7074)
 	drum_note 4, 7
 	drum_note 3, 7
 	drum_note 4, 8
-	;musicef 250
+;	musicef -6
 	drum_note 2, 4
-	;musicef 252
+;	musicef -4
 	drum_note 2, 3
-	;musicef 0
+;	musicef 0
 	drum_note 2, 7
 	drum_note 2, 7
 	drum_note 2, 8
@@ -2363,4 +2375,3 @@ Branch_1ef1de:
 	drum_note 4, 15
 	drum_note 10, 14
 	sound_ret
-; 0x1ef1ec
