@@ -82,8 +82,7 @@ PlaySfx:
 	jp .sfxChannelLoop
 
 StopAllAudio_2:
-	call StopAllAudio
-	ret
+	jp StopAllAudio
 	
 PlaySoundCommon_2:
 	ld a, [wSoundID]
