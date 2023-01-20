@@ -2,7 +2,7 @@
 ; INPUT:
 ; [wListPointer] = address of the text list (2 bytes) (expected to be defined within this bank)
 ; [wMenuWatchedKeys] = which buttons should exit the menu (like A button for selecting an option)
-; Should only be used to display up to 4 options
+; Should only be used to display up to 6 options
 ; OUTPUT: 
 ; [wCurrentMenuItem] = what was chosen from the menu
 DisplayMultiChoiceMenu::
