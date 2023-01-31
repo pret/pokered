@@ -1,6 +1,6 @@
 	db DEX_DEWGONG ; pokedex id
 
-	db  90,  70,  80,  70,  95
+	db  90,  70,  80,  70,  82
 	;   hp  atk  def  spd  spc
 
 	db WATER, ICE ; type

@@ -1,6 +1,6 @@
 	db DEX_GENGAR ; pokedex id
 
-	db  60,  65,  60, 110, 130
+	db  60,  65,  60, 110, 102
 	;   hp  atk  def  spd  spc
 
 	db GHOST, POISON ; type

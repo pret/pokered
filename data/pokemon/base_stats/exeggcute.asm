@@ -1,6 +1,6 @@
 	db DEX_EXEGGCUTE ; pokedex id
 
-	db  60,  40,  80,  40,  60
+	db  60,  40,  80,  40,  52
 	;   hp  atk  def  spd  spc
 
 	db GRASS, PSYCHIC_TYPE ; type
