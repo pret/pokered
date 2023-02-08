@@ -24,12 +24,11 @@ _CeladonUniversityOutsideAfterBattleText1::
 _CeladonUniversityOutsideYesNo2::
 	text "I've been working"
 	line "on a digital"
+	cont "#MON."
 	
-	para "on a digital"
-	line "#MON. Want to"
-	
-	para "help me test it"
-	line "for my thesis?"
+	para "Want to help me"
+	line "test it for my"
+	cont "thesis?"
 	
 	done
 

@@ -217,11 +217,11 @@ MonPartyData:
 	nybble ICON_MON	      ; Gyaoon
 	nybble ICON_MON	      ; Omega
 	nybble ICON_MON       ; Snorlax
+	nybble ICON_FAIRY     ; Scream Tail
+	nybble ICON_BALL      ; Sandy Shocks
 	nybble ICON_SNAKE     ; Dratini
 	nybble ICON_SNAKE     ; Dragonair
 	nybble ICON_SNAKE     ; Dragonite
-	nybble ICON_FAIRY     ; Scream Tail
-	nybble ICON_BALL      ; Sandy Shocks
 	nybble ICON_BIRD      ; Articuno
 	nybble ICON_BIRD      ; Articuno-G
 	nybble ICON_BIRD      ; Zapdos

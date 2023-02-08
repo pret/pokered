@@ -1,11 +1,13 @@
 _CeladonUniversityPokecenterText4::
-	text "I think PORYGON"
-	line "should be"
-	cont "improved."
-	
-	para "We need more"
+	text "Thanks to recent"
 	line "funding from"
-	cont "SILPH CO.!"
+	cont "SILPH CO., we"
+	cont "can upgrade"
+	cont "PORYGON now!"
+	
+	para "I wonder if"
+	line "we'll ever see"
+	cont "PORYGON3?"
 	
 	done
 
