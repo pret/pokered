@@ -15,7 +15,7 @@ PrintLetterDelay::
 	bit 0, a
 	jr z, .waitOneFrame
 	ld a, [wOptions]
-	and %11
+	and TEXT_DELAY_BITS
 	ldh [hFrameCounter], a
 	jr .checkButtons
 .waitOneFrame
