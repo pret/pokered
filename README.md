@@ -48,7 +48,7 @@ Pictured: GB Monochrome, Original GBC color, SGB Colors, Alternate SGB Colors, G
 ## Contact the creator
 
 [discord]: https://discord.gg/d5dubZ3
-[kofi]: ko-fi.com/vortiene
+[kofi]: https://ko-fi.com/vortiene
 - **Discord:** [pret][discord] - user Vortiene
 - **[Support the creator][kofi]**
 
