@@ -60,7 +60,7 @@ TwoOptionMenu::
 
 	hlcoord 4, 7
 	ld b, 3  ; height
-	ld c, 12 ; width
+	ld c, 13 ; width
 	call TextBoxBorder
 
 	hlcoord 6, 8 ; where the list will be drawn at
@@ -78,7 +78,7 @@ ThreeOptionMenu::
 
 	hlcoord 4, 5
 	ld b, 5  ; height
-	ld c, 12 ; width
+	ld c, 13 ; width
 	call TextBoxBorder
 
 	hlcoord 6, 6 ; where the list will be drawn at
@@ -96,7 +96,7 @@ FourOptionMenu::
 
 	hlcoord 4, 3
 	ld b, 7  ; height
-	ld c, 12 ; width
+	ld c, 13 ; width
 	call TextBoxBorder
 
 	hlcoord 6, 4 ; where the list will be drawn at
@@ -115,7 +115,7 @@ FiveOptionMenu::
 
 	hlcoord 4, 1
 	ld b, 9  ; height
-	ld c, 12 ; width
+	ld c, 13 ; width
 	call TextBoxBorder
 	
 	hlcoord 6, 2 ; where the list will be drawn at
@@ -133,7 +133,7 @@ SixOptionMenu::
 
 	hlcoord 4, 0
 	ld b, 11 ; height
-	ld c, 12 ; width
+	ld c, 13 ; width
 	call TextBoxBorder
 	
 	hlcoord 6, 1 ; where the list will be drawn at
