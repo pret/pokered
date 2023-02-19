@@ -92,7 +92,7 @@ ItemUsePtrTable:
 	dw ItemUsePokeflute  ; POKE_FLUTE
 	dw UnusableItem      ; LIFT_KEY
 	dw UnusableItem      ; EXP_ALL
-	dw ItemUseOldRod     ; OLD_ROD
+	dw ItemUseEvoStone    ; was OLD_ROD, now CANDY_SACK
 	dw ItemUseGoodRod    ; GOOD_ROD
 	dw ItemUseSuperRod   ; SUPER_ROD
 	dw ItemUsePPUp       ; PP_UP (real one)

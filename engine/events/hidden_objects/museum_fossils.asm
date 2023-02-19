@@ -22,13 +22,16 @@ KabutopsFossilText::
 	text_far _KabutopsFossilText
 	text_end
 
-ScarletBook::
+ScarletBookScream::
 	ld a, SCREAM_TAIL
 	ld [wcf91], a
 	call PlayCry
 	call DisplayMonFrontSpriteInBox
 	call EnableAutoTextBoxDrawing
 	tx_pre ScarletBook1
+	ret
+
+ScarletBookSandy::
 	ld a, SANDY_SHOCKS
 	ld [wcf91], a
 	call PlayCry

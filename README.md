@@ -75,8 +75,10 @@ QoL Enhancements
 - All 217 (current) Pokemon can be obtained without the use of trading or glitches, including Mew!
 - New Pokedex entries for most Pokemon are available, sourced from the original 1996 Pokedex book by Creatures Inc., restoring a ton of old Kanto lore. Thanks to [Dr. Lava and Nob Ogasawara](http://lavacutcontent.com/1996-creatures-pokedex-translation-1/) for their incredible work translating and writing about it!
 - Press A beside surfable water, strength boulders or cut trees to use the HMs without needing to go into the Party menu.
+- PP symbol is displayed in the battle menu.
 - Running Shoes by holding B. Also works with the bike! Surf speed is also doubled.
 - Fast text has no frame delay between text scrolling, doubling the scroll speed. It's also been made the default option, so you don't need to go into the Options menu for it.
+- Lorelei, Bruno, and Agatha now play the Gym Leader Battle theme.
 - HP bar has been doubled in speed, having a 1 frame delay per pixel rather than 2.
 - Trainer DVs are perfect-15s.
 - The protagonist is referred to in a gender neutral manner.
@@ -101,6 +103,7 @@ QoL Enhancements
 	- The Moon Stone is available over TM23 (Dragon Rage). Dragon Rage has been moved to Celadon Mart, over Take Down, which can still be obtained in Silph Co.
 - Bag has capacity for 30 items.
 - Spinner tiles move faster.
+- Bold P is added to the fontset over a Japanese opening quote (???), which helps the status screen and allows a PP symbol to be displayed during battle. 
 
 Bug Fixes
 ====
@@ -135,6 +138,9 @@ Many non-multiplayer, non-battle related bugs have been fixed. The aforementione
 - Weird behaviour when going to 11F in Silph Co. and forcing a player to leave despite not moving is fixed.
 - Fixed weirdness in Pokemon Tower where saving Mr. Fuji won't immediately let you leave. Also fixed coord termination on 2F which could cause some terribleness.
 and more!
+- Trainer Name Pointers are removed, as the localised games don't need to use the file at all.
+- Dakutens are removed, as the Japanese accents aren't used in English releases.
+- Blank Leader Name code is removed; before, this would only be for the PNGs.
 
 Known Bugs
 ====
@@ -222,6 +228,7 @@ Credits
 * Chatot4444 - Assisting with gym scaling code
 * Vortyne - Reused a bit of code from their pureRGB hack, which was used to assist with making MissingNo. stable. Assisted in bug fixes.
 * Rangi - Reused a bit of code from their Red* / Blue* hack to make HMs usable in the overworld!
+* 大吟醸 (Daiginjo) - Assistance in translating the Tamamushi University Student Book, allowing for an accurate adaptation of the location.
 
 Original README.md proceeding;
 # Pokémon Red and Blue [![Build Status][ci-badge]][ci]

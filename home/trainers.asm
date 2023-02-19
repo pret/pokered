@@ -373,7 +373,8 @@ PrintEndBattleText::
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	push hl
-	farcall SaveTrainerName
+	; farcall SaveTrainerName we don't need to farcall anymore
+	call SaveTrainerName
 	ld hl, TrainerEndBattleText
 	call PrintText
 	pop hl
@@ -382,6 +383,17 @@ PrintEndBattleText::
 	ld [MBC1RomBank], a
 	farcall FreezeEnemyTrainerSprite
 	jp WaitForSoundToFinish
+
+SaveTrainerName:: ; implementing https://github.com/pret/pokered/wiki/Remove-Redundant-TrainerNamePointers
+	ld hl, wTrainerName
+	ld de, wcd6d
+.CopyCharacter
+	ld a, [hli]
+	ld [de], a
+	inc de
+	cp "@"
+	jr nz, .CopyCharacter
+	ret
 
 GetSavedEndBattleTextPointer::
 	ld a, [wBattleResult]

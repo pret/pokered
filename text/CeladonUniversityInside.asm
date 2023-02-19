@@ -1,8 +1,5 @@
 _CeladonUniversityInsideText1::
-	text "Hello! I haven't"
-	line "seen you before!"
-
-	para "My name is PROF."
+	text "My name is PROF."
 	line "WESTWOOD V!"
 	
 	para "My ancestors"
@@ -12,49 +9,42 @@ _CeladonUniversityInsideText1::
 	done
 
 _CeladonUniversityInsideText2::
-	text "It's an old letter"
-	line "about selling the"
-	para "# BALL patent"
-	line "to SILPH CO."
+	text "It's an invoice"
+	line "selling the #"
+	cont "BALL to SILPH."
 	
 	done
 
 _CeladonUniversityInsideText3::
-	text "Seismic tremors"
-	line "have been"
-	cont "detected inside"
+	text "Tremors keep"
+	line "happening in"
+	cont "VICTORY ROAD."
 	
-	para "VICTORY ROAD."
-	line "Investigation"
-	cont "is ongoing."
-	
-	para "WESTWOOD, can"
-	line "you see me"
-	cont "at SILPH?"
+	para "WESTWOOD, can you"
+	line "meet me at SILPH?"
 	
 	done
 
-_CeladonUniversityInsideText4::
-	text "I don't get it."
-	line "Why is this"
-	cont "MAGIKARP so"
-	cont "powerful?"
+_KHRP::
+	text "Eureka!"
 	
-	para "It was attacking"
-	line "TRAINERs in"
-	cont "VERMILLION!"
+	para "This MAGIKARP can"
+	line "use DRAGON RAGE!"
 	
-	done
+	para "Huh? You want to"
+	line "teach it to yours?"
+	cont "Sure! Take this!"
+	
+	prompt
 
 _CeladonUniversityInsideMagikarpText::
 	text "Name: MAGIKARP"
 
-	para "This specimen has"
-	line "unusual strength."
-	cont "Like its old"
-	cont "ancestors, it"
+	para "Like ancient"
+	line "specimens, it"
 	cont "can use DRAGON"
 	cont "RAGE."
+	
 	prompt
 
 _BookcaseText1::
@@ -63,56 +53,41 @@ _BookcaseText1::
 	cont "back around 2"
 	cont "million years."
 	
-	para "However, the first"
-	line "proper study into"
-	cont "their biology was"
-	cont "conducted by"
-	cont "BARON TAJIRIN of"
-	cont "France in the"
-	cont "18th century."
-	
-	para "At the time, only"
-	line "30 species were"
-	cont "recognised."
+	para "BARON TAJIRIN"
+	line "of France found"
+	cont "30 species in"
+	cont "the 18th century."
 	
 	done
 
 _BookcaseText2::
 	text "In 1899, PROF."
 	line "WESTWOOD of Japan"
-	cont "released a book"
-	cont "observing the"
-	cont "evolution of a"
-	cont "PIKACHU."
+	cont "discovered"
+	cont "#MON evolution,"
+	cont "documenting 50"
+	cont "species."
 	
-	para "Japan became the"
-	line "global leader in"
-	cont "#MON study,"
-	cont "discovering 80"
-	cont "#MON at the"
-	cont "time."
-	
-	para "As of today,"
-	line "PROF. OAK's"
-	cont "efforts have led"
-	cont "to over 200" ;changed from 150 to 200 because we've expanded the dex :P
-	cont "#MON being"
-	cont "recognised."
+	para "PROF. OAK"
+	line "has since"
+	cont "documented a"
+	cont "further 120." ; Total: 200.
 	
 	done
 	
 _BookcaseText3::
-	text "The idea of the"
-	line "# BALL was"
-	cont "discovered by"
-	cont "PROF. WESTWOOD,"
-	cont "as part of an"
-	cont "experiment to"
-	cont "extract the"
-	cont "energy of a"
-	cont "PRIMEAPE."
+	;text "The idea of the"
+	;line "# BALL was"
+	;cont "discovered by"
+	;cont "PROF. WESTWOOD,"
+	;cont "as part of an"
+	;cont "experiment to"
+	;cont "extract the"
+	;cont "energy of a"
+	;cont "PRIMEAPE."
+	; too long and doesn't seem to fit.
 	
-	para "The modern #"
+	text "The modern #"
 	line "BALL was made by"
 	cont "researchers at"
 	cont "CELADON"
@@ -134,4 +109,24 @@ _ComputerScreen::
 	line "visible on the PC"
 	cont "screen."
 	
+	done
+
+_ReceivedTM23Text::
+	text "<PLAYER> received"
+	line "@"
+	text_ram wStringBuffer
+	text "!@"
+	text_end
+
+_TM23ExplanationText::
+	text "TM29 is DRAGON"
+	line "RAGE!"
+
+	para "Use it against"
+	line "weak #MON!"
+	done
+
+_TM23NoRoomText::
+	text "You don't have"
+	line "room for this!"
 	done

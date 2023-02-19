@@ -138,7 +138,8 @@
 	const EVENT_GOT_10_COINS
 	const EVENT_GOT_20_COINS
 	const EVENT_GOT_20_COINS_2
-	const_skip 2
+	;const_skip 2
+	const EVENT_GOT_TM23
 	const EVENT_1BF ; ???
 	const_skip 32
 	const EVENT_GOT_COIN_CASE

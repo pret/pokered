@@ -1,6 +1,9 @@
 ; See constants/pokemon_data_constants.asm
 ; The max number of evolutions per monster is MAX_EVOLUTIONS
 
+; db EV_ITEM, CANDY_SACK, 1, MELMETAL
+; put this on Meltan when adding it
+
 EvosMovesPointerTable:
 	table_width 2, EvosMovesPointerTable
 	dw RhydonEvosMoves

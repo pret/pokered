@@ -320,6 +320,7 @@ TrainerAI:
 	jp hl
 
 INCLUDE "data/trainers/ai_pointers.asm"
+; when there's a +1 on the gym/e4 it's referring to the number of items to use - PvK
 
 JugglerAI:
 	cp 25 percent + 1
@@ -334,7 +335,7 @@ BlackbeltAI:
 GiovanniAI:
 	cp 25 percent + 1
 	ret nc
-	jp AIUseGuardSpec
+	jp AIUseXAttack ; Used to use a Guard Spec. This will make the item use have a proper impact - healing doesn't feel right for a trainer fixated on strength.
 
 CooltrainerMAI:
 	cp 25 percent + 1
@@ -342,8 +343,7 @@ CooltrainerMAI:
 	jp AIUseXAttack
 
 CooltrainerFAI:
-	; The intended 25% chance to consider switching will not apply.
-	; Uncomment the line below to fix this.
+	; The intended 25% chance to consider switching applies, this fixes a bug.
 	cp 25 percent + 1
 	ret nc ; fixes the bug
 	ld a, 10
@@ -362,14 +362,20 @@ BrockAI:
 	jp AIUseFullHeal
 
 MistyAI:
+	; cp 25 percent + 1
+	; ret nc
+	; jp AIUseXDefend old Misty AI
 	cp 25 percent + 1
 	ret nc
-	jp AIUseXDefend
+	ld a, 10
+	call AICheckIfHPBelowFraction
+	ret nc
+	jp AIUsePotion ; Replicates Starmie using Recover, but in a more balanced manner. Unlike other trainers that heal, Misty will do this 26% of the time instead of 51%.
 
 LtSurgeAI:
 	cp 25 percent + 1
 	ret nc
-	jp AIUseXSpeed
+	jp AIUseXSpecial ; Used to be an X Speed. His party is already fast, so this seems far more appropriate.
 
 ErikaAI:
 	cp 50 percent + 1
@@ -380,9 +386,15 @@ ErikaAI:
 	jp AIUseSuperPotion
 
 KogaAI:
-	cp 25 percent + 1
+	; cp 25 percent + 1
+	; ret nc
+	; jp AIUseXAttack old AI 
+	cp 50 percent + 1
 	ret nc
-	jp AIUseXAttack
+	ld a, 10
+	call AICheckIfHPBelowFraction
+	ret nc
+	jp AIUseSuperPotion ; Koga is weird - I don't think anything fits. X Attack is certainly not the move though...
 
 BlaineAI:
 	cp 25 percent + 1
@@ -390,7 +402,7 @@ BlaineAI:
 	ld a, 10
 	call AICheckIfHPBelowFraction
 	ret nc ; this fixes the super potion thing - PvK
-	jp AIUseSuperPotion
+	jp AIUseHyperPotion ; Instead of a Super Potion though, let's give him this. More impactful for the sixth gym while staying true to the meme that everyone knows Gen 1 Blaine for.
 
 SabrinaAI:
 	cp 25 percent + 1
@@ -416,36 +428,55 @@ Rival3AI:
 	ret nc
 	jp AIUseFullRestore
 
+; Elite Four members will use an associated X Item or a Full Restore. 
 LoreleiAI:
+	cp 15 percent + 1
+	ret nc
+	jp AIUseXSpecial
 	cp 50 percent + 1
 	ret nc
 	ld a, 5
 	call AICheckIfHPBelowFraction
 	ret nc
-	jp AIUseSuperPotion
+	jp AIUseFullRestore
 
 BrunoAI:
-	cp 25 percent + 1
+	;cp 25 percent + 1
+	;ret nc
+	; jp AIUseXDefend old ai...???
+	cp 15 percent + 1
 	ret nc
-	jp AIUseXDefend
+	jp AIUseXAttack
+	cp 50 percent + 1
+	ret nc
+	ld a, 5
+	call AICheckIfHPBelowFraction
+	ret nc
+	jp AIUseFullRestore
 
 AgathaAI:
 	cp 8 percent
 	jp c, AISwitchIfEnoughMons
+	cp 15 percent + 1
+	ret nc
+	jp AIUseXAccuracy ; hahahahahahahaha
 	cp 50 percent + 1
 	ret nc
 	ld a, 4
 	call AICheckIfHPBelowFraction
 	ret nc
-	jp AIUseSuperPotion
+	jp AIUseFullRestore
 
 LanceAI:
+	cp 15 percent + 1
+	ret nc
+	jp AIUseXSpecial
 	cp 50 percent + 1
 	ret nc
 	ld a, 5
 	call AICheckIfHPBelowFraction
 	ret nc
-	jp AIUseHyperPotion
+	jp AIUseFullRestore
 
 GenericAI:
 	and a ; clear carry
@@ -703,7 +734,8 @@ AIUseXSpeed:
 AIUseXSpecial:
 	ld b, $D
 	ld a, X_SPECIAL
-	; fallthrough
+	jr AIIncreaseStat ; this wasn't here before but it seems that this never actually happened??
+	;; fallthrough
 
 AIIncreaseStat:
 	ld [wAIItem], a

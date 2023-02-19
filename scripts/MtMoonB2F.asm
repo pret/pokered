@@ -164,6 +164,7 @@ MtMoonB2F_TextPointers:
 	dw MtMoon3Text7
 	dw PickUpItemText
 	dw PickUpItemText
+	dw MtMoonCraterGuard
 	dw MtMoon3Text_49f99
 
 MtMoon3TrainerHeaders:
@@ -378,4 +379,8 @@ MtMoon3EndBattleText5:
 
 MtMoon3AfterBattleText5:
 	text_far _MtMoon3AfterBattleText5
+	text_end
+
+MtMoonCraterGuard:
+	text_far _MtMoonCraterGuard
 	text_end

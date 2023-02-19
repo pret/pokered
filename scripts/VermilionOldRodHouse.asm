@@ -15,7 +15,7 @@ VermilionHouse2Text1:
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .refused
-	lb bc, OLD_ROD, 1
+	lb bc, CANDY_SACK, 1 ; used to be the old rod, but since I've replaced it, for now he'll give you this. I believe this house is currently unused, so no issues..? ~ PvK
 	call GiveItem
 	jr nc, .bag_full
 	ld hl, wd728

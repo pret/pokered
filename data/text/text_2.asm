@@ -590,31 +590,18 @@ _KabutopsFossilText::
 	done
 
 _ScarletBook1::
-    text "A member of our"
-    line "survey team"
-    cont "photographed an"
-    cont "odd, screaming,"
-    cont "JIGGLYPUFF-like"
-    cont "#MON."
-    
-    para "It has been named"
-    line "SCREAM TAIL."
+    text "SCREAM TAIL"
+	line "A screaming,"
+	cont "JIGGLYPUFF-like"
+	cont "#MON."
     
     done
 
 _ScarletBook2::
-    text "Another team"
-    line "returned. They"
-    cont "were attacked by"
-    cont "a MAGNETON that"
-    cont "looked like a"
-    cont "tyrannosaur."
-    
-	para "We called it"
-    line "SANDY SHOCKS."
-	
-	para "These #MON must"
-	line "be contained."
+    text "SANDY SHOCKS"
+	line "A theropod-like"
+	cont "relative of"
+	cont "MAGNETON."
 	
     done
 

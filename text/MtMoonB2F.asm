@@ -123,3 +123,14 @@ _MtMoon3AfterBattleText5::
 	line "here long before"
 	cont "people came."
 	done
+
+_MtMoonCraterGuard::
+	text "A meteor struck"
+	line "here recently."
+	
+	para "We have to make"
+	line "sure it's safe."
+	cont "Come back another"
+	cont "time."
+	
+	done

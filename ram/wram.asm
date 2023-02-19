@@ -2034,8 +2034,8 @@ wVictoryRoad1FCurScript:: db
 wFarawayIslandInsideCurScript:: db ; this should work
 wLancesRoomCurScript:: db
 wPokemonMansionB2FCurScript:: db
-;wMtMoonCraterCurScript:: db
-	ds 3
+wMtMoonCraterCurScript:: db
+	ds 2
 wSilphCo10FCurScript:: db
 wSilphCo11FCurScript:: db
 	ds 1

@@ -32,6 +32,7 @@ UsableItems_PartyMenu:
 	db X_DEFEND
 	db X_SPEED
 	db X_SPECIAL
+	db CANDY_SACK
 	db PP_UP
 	db ETHER
 	db MAX_ETHER

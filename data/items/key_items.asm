@@ -75,7 +75,7 @@ KeyItemFlags:
 	dbit TRUE  ; POKE_FLUTE
 	dbit TRUE  ; LIFT_KEY
 	dbit FALSE ; EXP_ALL
-	dbit TRUE  ; OLD_ROD
+	dbit FALSE  ; was TRUE for OLD_ROD, now CANDY_SACK
 	dbit TRUE  ; GOOD_ROD
 	dbit TRUE  ; SUPER_ROD
 	dbit FALSE ; PP_UP

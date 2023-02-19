@@ -2899,6 +2899,10 @@ PrintMenuItem:
 	hlcoord 1, 9
 	ld de, TypeText
 	call PlaceString
+	hlcoord 1, 11
+	ld a, "<BOLD_P>"
+	ld [hli], a
+	ld [hl], "<BOLD_P>"
 	hlcoord 7, 11
 	ld [hl], "/"
 	hlcoord 5, 9
