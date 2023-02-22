@@ -191,6 +191,7 @@ INCLUDE "gfx/trade.asm"
 INCLUDE "engine/battle/trainers2.asm" ; PureRGBnote: MOVED: moved from home bank
 INCLUDE "engine/battle/move_effects/check_defrost_move.asm" ; PureRGBnote: ADDED: new code for bugfix
 INCLUDE "engine/battle/move_effects/haze.asm" ; PureRGBnote: MOVED: moved from battle engine 1
+INCLUDE "engine/battle/decrement_pp.asm" ; PureRGBnote: MOVED: moved from battle engine 11
 
 SECTION "Battle Core", ROMX
 
@@ -311,11 +312,9 @@ INCLUDE "engine/events/hidden_objects/blues_room.asm"
 INCLUDE "engine/events/hidden_objects/pokecenter_pc.asm"
 
 
-SECTION "Battle Engine 11", ROMX
+SECTION "Version Graphics", ROMX
 
-INCLUDE "engine/battle/decrement_pp.asm"
 INCLUDE "gfx/version.asm"
-
 
 SECTION "bank1C", ROMX
 ; PureRGBnote: MOVED: splash.asm, healing_machine.asm, and hall_of_fame.asm were moved

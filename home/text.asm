@@ -540,6 +540,11 @@ TextCommand_SOUND::
 	jr z, .pokemonCry
 	cp TX_SOUND_CRY_SNORLAX
 	jr z, .pokemonCry
+;;;;;;;;;; shinpokerednote: FIXED: when there's 0 delay on text, we need to wait here to get text command sounds to work right.
+	ld a, [wOptions]
+	and TEXT_DELAY_BITS
+	call z, WaitForSoundToFinish
+;;;;;;;;;;
 	ld a, [hl]
 	rst PlaySoundRST
 	call WaitForSoundToFinish

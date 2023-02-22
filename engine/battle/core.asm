@@ -7029,6 +7029,8 @@ ApplyBadgeBoostsForSpecificStat: ;badge boosts a specific stat based on wWhatSta
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	ret z ; return if link battle
+	ld a, [wObtainedBadges]
+	ld d, a
 	ld a, [wWhatStat]
 	cp MOD_ATTACK
 	jr z, .Attack
@@ -7041,26 +7043,20 @@ ApplyBadgeBoostsForSpecificStat: ;badge boosts a specific stat based on wWhatSta
 	ret ; return if not a boosted stat
 .Attack
 	ld hl, wBattleMonAttack
-	ld a, [wObtainedBadges]
-	bit BIT_BOULDERBADGE, a
-	jp nz, ApplyBoostToStat
-	ret
+	bit BIT_BOULDERBADGE, d
+	jr .done
 .Defense
 	ld hl, wBattleMonDefense
-	ld a, [wObtainedBadges]
-	bit BIT_SOULBADGE, a
-	jp nz, ApplyBoostToStat
-	ret
+	bit BIT_SOULBADGE, d
+	jr .done
 .Speed
 	ld hl, wBattleMonSpeed
-	ld a, [wObtainedBadges]
-	bit BIT_THUNDERBADGE, a
-	jp nz, ApplyBoostToStat
-	ret
+	bit BIT_THUNDERBADGE, d
+	jr .done
 .Special
 	ld hl, wBattleMonSpecial
-	ld a, [wObtainedBadges]
-	bit BIT_VOLCANOBADGE, a
+	bit BIT_VOLCANOBADGE, d
+.done
 	jp nz, ApplyBoostToStat
 	ret
 
@@ -7091,9 +7087,8 @@ ApplyBadgeStatBoosts:
 	call nz, ApplyBoostToStat
 	ld hl, wBattleMonSpecial
 	bit BIT_VOLCANOBADGE, b
-	call nz, ApplyBoostToStat
-	ret
-
+	ret z
+	; fall through
 ;;;;;;;;;;
 
 ; multiply stat at hl by 1.125

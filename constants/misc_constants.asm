@@ -13,9 +13,14 @@ DEF TRUE  EQU 1
 DEF TEXT_DELAY_FAST    EQU %00 ; 0
 DEF TEXT_DELAY_MEDIUM  EQU %01 ; 1
 DEF TEXT_DELAY_SLOW    EQU %11 ; 3
+DEF TEXT_DELAY_BITS    EQU %11 ; which bits in wOptions are assigned to text speed value (first two currently)
 ;;;;;;;;;;
 
-	const_def 6
+	const_def 2
+	const BIT_UNUSED_OPTIONS_BIT2 ; 2
+	const BIT_UNUSED_OPTIONS_BIT3 ; 3
+	const BIT_UNUSED_OPTIONS_BIT4 ; 4
+	const BIT_UNUSED_OPTIONS_BIT5 ; 5
 	const BIT_BATTLE_SHIFT     ; 6
 	const BIT_BATTLE_ANIMATION ; 7
 
@@ -35,6 +40,7 @@ DEF PALETTES_YELLOW     EQU %11 ; 3
 	const BIT_BIKE_MUSIC        ; 4
 	const BIT_EXP_BAR           ; 5
 	const BIT_NPC_STAT_EXP		; 6
+	const BIT_UNUSED_OPTIONS2_BIT7 ; 7
 
 ; wSpriteOptions2
 	const_def  
