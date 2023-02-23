@@ -81,22 +81,25 @@ TMCharText:: db "TM@"
 SECTION "vblank", ROM0[$0040]
 	jp VBlank
 
-	ds $48 - @, 0 ; unused
+; PureRGBnote: MOVED: 5 extra bytes of space left here, may as well move something here that puts the space to some use	
+ContCharText::
+	text_far _ContCharText
+	text_end
 
 SECTION "lcd", ROM0[$0048]
-	rst $38
-
-	ds $50 - @, 0 ; unused
+	reti
+; 7 empty bytes
 
 SECTION "timer", ROM0[$0050]
 	jp Timer
-
-	ds $58 - @, 0 ; unused
+; PureRGBnote: MOVED: 5 extra bytes of space left here, may as well move something here that puts the space to some use	
+PlacePOKeText::   db "POKé@"
 
 SECTION "serial", ROM0[$0058]
 	jp Serial
-
-	ds $60 - @, 0 ; unused
+; PureRGBnote: MOVED: 5 extra bytes of space left here, may as well move something here that puts the space to some use	
+TrainerFlagAction::
+	predef_jump FlagActionPredef
 
 SECTION "joypad", ROM0[$0060]
 	reti

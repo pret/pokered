@@ -87,9 +87,6 @@ ReadTrainerHeaderInfo::
 	pop de
 	ret
 
-TrainerFlagAction::
-	predef_jump FlagActionPredef
-
 TalkToTrainer::
 	call StoreTrainerHeaderPointer
 	xor a
