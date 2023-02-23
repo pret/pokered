@@ -356,7 +356,20 @@ CableClubOptionsText:
 	next "COLOSSEUM"
 	next "CANCEL@"
 
+VersionText:
+db " "
+IF DEF(_RED)
+	db "PureRed"
+ENDC
+IF DEF(_BLUE)
+	db "PureBlue"
+ENDC
+IF DEF(_GREEN)
+	db "PureGreen"
+ENDC
+db " v"
 INCLUDE "version_number.asm"
+db "@"
 
 DisplayContinueGameInfo:
 	xor a
