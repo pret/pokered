@@ -55,7 +55,7 @@ SetDefaultNames:
 
 OakSpeech:
 	ld a, SFX_STOP_ALL_MUSIC
-	call PlaySound
+	rst PlaySoundRST
 	ld a, BANK(Music_Routes2)
 	ld c, a
 	ld a, MUSIC_ROUTES2
@@ -130,7 +130,7 @@ OakSpeech:
 	ldh a, [hLoadedROMBank]
 	push af
 	ld a, SFX_SHRINK
-	call PlaySound
+	rst PlaySoundRST
 	pop af
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
@@ -158,7 +158,7 @@ OakSpeech:
 	ld [wAudioFadeOutControl], a
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	call PlaySound
+	rst PlaySoundRST
 	pop af
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a

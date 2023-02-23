@@ -122,7 +122,7 @@ VendingMachineMenu::
 	rst DelayFramesRST
 	push bc
 	ld a, SFX_PUSH_BOULDER
-	call PlaySound
+	rst PlaySoundRST
 	pop bc
 	dec b
 	jr nz, .playDeliverySound

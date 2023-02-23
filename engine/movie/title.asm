@@ -162,7 +162,7 @@ ENDC
 	cp -3
 	jr nz, .skipPlayingSound
 	ld a, SFX_INTRO_CRASH
-	call PlaySound
+	rst PlaySoundRST
 .skipPlayingSound
 	ld a, [hli]
 	ld e, a
@@ -196,7 +196,7 @@ ENDC
 	ld c, 36
 	rst DelayFramesRST
 	ld a, SFX_INTRO_WHOOSH
-	call PlaySound
+	rst PlaySoundRST
 
 ; scroll game version in from the right
 	call PrintGameVersionOnTitleScreen
@@ -224,7 +224,7 @@ ENDC
 	call WaitForSoundToFinish
 	ld a, MUSIC_TITLE_SCREEN
 	ld [wNewSoundID], a
-	call PlaySound
+	rst PlaySoundRST
 	xor a
 	ld [wUnusedCC5B], a
 

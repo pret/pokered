@@ -246,7 +246,7 @@ PlayAnimation:
 	push hl
 	push de
 	call GetMoveSound
-	call PlaySound
+	rst PlaySoundRST
 	pop de
 	pop hl
 .skipPlayingSound
@@ -671,7 +671,7 @@ PlaySubanimation:
 	cp NO_MOVE - 1
 	jr z, .skipPlayingSound
 	call GetMoveSound
-	call PlaySound
+	rst PlaySoundRST
 .skipPlayingSound
 	ld hl, wShadowOAM
 	ld a, l
@@ -793,7 +793,7 @@ DoBallTossSpecialEffects:
 	jr nz, .skipPlayingSound
 ; if it is the beginning of the subanimation, play a sound
 	ld a, SFX_BALL_TOSS
-	call PlaySound
+	rst PlaySoundRST
 .skipPlayingSound
 	ld a, [wIsInBattle]
 	cp 2 ; is it a trainer battle?
@@ -839,7 +839,7 @@ DoBallShakeSpecialEffects:
 	jr nz, .skipPlayingSound
 ; if it is the beginning of a shake, play a sound and wait 2/3 of a second
 	ld a, SFX_TINK
-	call PlaySound
+	rst PlaySoundRST
 	ld c, 40
 	rst DelayFramesRST
 .skipPlayingSound
@@ -878,14 +878,14 @@ DoPoofSpecialEffects:
 	cp MASTERTOSS_ANIM
 	jr z, .masterBallSFX
 	ld a, SFX_BALL_POOF
-	call PlaySound
+	rst PlaySoundRST
 	ret
 .masterBallSFX
 	xor a
 	ld [wFrequencyModifier], a
 	ld [wTempoModifier], a
 	ld a, SFX_HORN_DRILL
-	call PlaySound
+	rst PlaySoundRST
 	ret
 .ballToss
 	ld a, [wUnusedC000]
@@ -1072,7 +1072,7 @@ TradeJumpPokeball:
 	jr nz, .skipPlayingSound
 .playSound ; play sound if next move distance is 12 or this is the last one
 	ld a, SFX_SWAP
-	call PlaySound
+	rst PlaySoundRST
 .skipPlayingSound
 	push bc
 	ld c, 5
@@ -1856,7 +1856,7 @@ AnimationSpiralBallsInward:
 	ld a, $40
 	ld [wTempoModifier], a
 	ld a, SFX_BATTLE_1E
-	call PlaySound
+	rst PlaySoundRST
 .frameDelay
 	rst DelayFramesRST
 	pop hl
@@ -3043,7 +3043,7 @@ TossBallAnimation:
 .BlockBall
 	call PlayAnimation
 	ld a, SFX_FAINT_THUD
-	call PlaySound
+	rst PlaySoundRST
 	ld a, BLOCKBALL_ANIM
 	ld [wAnimationID], a
 	xor a

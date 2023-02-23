@@ -76,10 +76,10 @@ CinnabarIslandText8: ; PureRGBnote: CHANGED: secret key gets consumed on usage a
 	call RemoveItemFromInventory
 	SetEvent EVENT_USED_SECRET_KEY
     ld a, SFX_WITHDRAW_DEPOSIT
-    call PlaySound
+    rst PlaySoundRST
     call WaitForSoundToFinish
     ld a, SFX_59
-    call PlaySound
+    rst PlaySoundRST
     call WaitForSoundToFinish
 	ld hl, UnlockedDoorText
 	rst PrintTextRST

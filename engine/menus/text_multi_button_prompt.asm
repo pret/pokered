@@ -36,7 +36,7 @@ ManualTextScrollMultiButton::
 	ret
 .continueText
 	ld a, SFX_PRESS_AB
-	call PlaySound
+	rst PlaySoundRST
 	ld d, 0
 	ret
 

@@ -48,7 +48,7 @@ CeruleanRocketHouseMissingnoScript:
 	ld a, $FF
 	ld [wJoyIgnore], a
 	ld a, SFX_STOP_ALL_MUSIC
-	call PlaySound
+	rst PlaySoundRST
 	ld b, 100
 .loop
 	push bc
@@ -61,7 +61,7 @@ CeruleanRocketHouseMissingnoScript:
 	dec b
 	jr nz, .loop
 	ld a, SFX_STOP_ALL_MUSIC
-	call PlaySound
+	rst PlaySoundRST
 	ld c, BANK(SFX_Noise_Instrument05_1)
 	ld a, SFX_NOISE_INSTRUMENT05
 	call PlayMusic

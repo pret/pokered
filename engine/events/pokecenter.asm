@@ -46,7 +46,7 @@ DisplayPokemonCenterDialogue_::
 	ld a, [wMapMusicSoundID]
 	ld [wLastMusicSoundID], a
 	ld [wNewSoundID], a
-	call PlaySound
+	rst PlaySoundRST
 	ld a, [wUnusedC000]
 	and a
 	jr nz, .skipFightingFit ; NEW: if you're holding b when you start talking to the nurse, it'll skip right to healing.

@@ -21,7 +21,7 @@ RocketHideout1Script_44be0:
 	jr .asm_44c03
 .asm_44bf7
 	ld a, SFX_GO_INSIDE
-	call PlaySound
+	rst PlaySoundRST
 	CheckEventHL EVENT_677
 .asm_44c01
 	ld a, $e

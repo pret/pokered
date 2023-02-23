@@ -62,20 +62,20 @@ Route15GateUpstairsText1:
 RemoveBoosterChipSounds:
 	ld b, 5
 	ld a, SFX_STOP_ALL_MUSIC
-	call PlaySound
+	rst PlaySoundRST
 .loop
 	ld a, SFX_NOISE_INSTRUMENT16
-	call PlaySound
+	rst PlaySoundRST
 	ld c, 10
 	rst DelayFramesRST
 	dec b
 	jr nz, .loop
 	ld a, SFX_NOISE_INSTRUMENT03
-	call PlaySound
+	rst PlaySoundRST
 	ld c, 10
 	rst DelayFramesRST
 	ld a, SFX_WITHDRAW_DEPOSIT
-	call PlaySound
+	rst PlaySoundRST
 	ld c, 30
 	jp PlayDefaultMusic
 	

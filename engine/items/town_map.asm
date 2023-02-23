@@ -72,7 +72,7 @@ DisplayTownMap:
 	and A_BUTTON | B_BUTTON | D_UP | D_DOWN
 	jr z, .inputLoop
 	ld a, SFX_TINK
-	call PlaySound
+	rst PlaySoundRST
 	bit 6, b
 	jr nz, .pressedUp
 	bit 7, b
@@ -186,7 +186,7 @@ LoadTownMap_Fly::
 	bit 0, b
 	jr nz, .pressedA
 	ld a, SFX_TINK
-	call PlaySound
+	rst PlaySoundRST
 	bit 6, b
 	jr nz, .pressedUp
 	bit 7, b
@@ -194,7 +194,7 @@ LoadTownMap_Fly::
 	jr .pressedB
 .pressedA
 	ld a, SFX_HEAL_AILMENT
-	call PlaySound
+	rst PlaySoundRST
 	ld a, [hl]
 	ld [wDestinationMap], a
 	ld hl, wd732

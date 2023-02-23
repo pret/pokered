@@ -70,7 +70,7 @@ PrintBeginningBattleText:
 	ld a, $80
 	ld [wTempoModifier], a
 	ld a, SFX_SILPH_SCOPE
-	call PlaySound
+	rst PlaySoundRST
 	jp WaitForSoundToFinish
 .done
 	ret
@@ -82,7 +82,7 @@ PlayGhostSfx:
 	ld a, $20
 	ld [wTempoModifier], a
 	ld a, SFX_BATTLE_2F
-	call PlaySound
+	rst PlaySoundRST
 	call WaitForSoundToFinish
 	xor a
 	ld [wFrequencyModifier], a

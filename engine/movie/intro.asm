@@ -48,14 +48,14 @@ PlayIntroScene:
 
 ; hip
 	ld a, SFX_INTRO_HIP
-	call PlaySound
+	rst PlaySoundRST
 	xor a
 	ld [wIntroNidorinoBaseTile], a
 	ld de, IntroNidorinoAnimation1
 	call AnimateIntroNidorino
 ; hop
 	ld a, SFX_INTRO_HOP
-	call PlaySound
+	rst PlaySoundRST
 	ld de, IntroNidorinoAnimation2
 	call AnimateIntroNidorino
 	ld c, 10
@@ -64,12 +64,12 @@ PlayIntroScene:
 
 ; hip
 	ld a, SFX_INTRO_HIP
-	call PlaySound
+	rst PlaySoundRST
 	ld de, IntroNidorinoAnimation1
 	call AnimateIntroNidorino
 ; hop
 	ld a, SFX_INTRO_HOP
-	call PlaySound
+	rst PlaySoundRST
 	ld de, IntroNidorinoAnimation2
 	call AnimateIntroNidorino
 	ld c, 30
@@ -80,7 +80,7 @@ PlayIntroScene:
 	ld b, TILEMAP_GENGAR_INTRO_2
 	call IntroCopyTiles
 	ld a, SFX_INTRO_RAISE
-	call PlaySound
+	rst PlaySoundRST
 	lb de, 8 / 2, MOVE_GENGAR_LEFT
 	call IntroMoveMon
 	ld c, 30
@@ -91,12 +91,12 @@ PlayIntroScene:
 	ld b, TILEMAP_GENGAR_INTRO_3
 	call IntroCopyTiles
 	ld a, SFX_INTRO_CRASH
-	call PlaySound
+	rst PlaySoundRST
 	lb de, 16 / 2, MOVE_GENGAR_RIGHT
 	call IntroMoveMon
 ; hip
 	ld a, SFX_INTRO_HIP
-	call PlaySound
+	rst PlaySoundRST
 	ld a, (FightIntroFrontMon2 - FightIntroFrontMon) / LEN_2BPP_TILE
 	ld [wIntroNidorinoBaseTile], a
 	ld de, IntroNidorinoAnimation3
@@ -115,14 +115,14 @@ PlayIntroScene:
 
 ; hip
 	ld a, SFX_INTRO_HIP
-	call PlaySound
+	rst PlaySoundRST
 	xor a
 	ld [wIntroNidorinoBaseTile], a
 	ld de, IntroNidorinoAnimation4
 	call AnimateIntroNidorino
 ; hop
 	ld a, SFX_INTRO_HOP
-	call PlaySound
+	rst PlaySoundRST
 	ld de, IntroNidorinoAnimation5
 	call AnimateIntroNidorino
 	ld c, 20
@@ -139,7 +139,7 @@ PlayIntroScene:
 
 ; lunge
 	ld a, SFX_INTRO_LUNGE
-	call PlaySound
+	rst PlaySoundRST
 	ld a, (FightIntroFrontMon3 - FightIntroFrontMon) / LEN_2BPP_TILE
 	ld [wIntroNidorinoBaseTile], a
 	ld de, IntroNidorinoAnimation7
@@ -341,7 +341,7 @@ PlayShootingStar:
 	ld [wAudioSavedROMBank], a
 	ld a, MUSIC_INTRO_BATTLE
 	ld [wNewSoundID], a
-	call PlaySound
+	rst PlaySoundRST
 	call IntroClearMiddleOfScreen
 	call ClearSprites
 	jp Delay3

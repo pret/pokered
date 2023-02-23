@@ -312,27 +312,27 @@ DoColorSwap:
 
 FiddlingAroundSounds:
 	ld a, SFX_STOP_ALL_MUSIC
-	call PlaySound
+	rst PlaySoundRST
 	ld a, SFX_TRADE_MACHINE
-	call PlaySound
+	rst PlaySoundRST
 	ld c, 40
 	rst DelayFramesRST
 	ld a, SFX_NOISE_INSTRUMENT05
-	call PlaySound
+	rst PlaySoundRST
 	ld c, 12
 	rst DelayFramesRST
 	ld a, SFX_NOISE_INSTRUMENT05
-	call PlaySound
+	rst PlaySoundRST
 	ld c, 12
 	rst DelayFramesRST
 	ld a, SFX_NOISE_INSTRUMENT05
-	call PlaySound
+	rst PlaySoundRST
 	ld c, 40
 	rst DelayFramesRST
 	ld b, 20
 .loop
 	ld a, SFX_TURN_OFF_PC
-	call PlaySound
+	rst PlaySoundRST
 	ld c, 2
 	rst DelayFramesRST
 	dec b

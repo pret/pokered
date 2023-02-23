@@ -513,7 +513,7 @@ CeladonGameCornerText12:
 	rst PrintTextRST
 	call WaitForSoundToFinish
 	ld a, SFX_GO_INSIDE
-	call PlaySound
+	rst PlaySoundRST
 	call WaitForSoundToFinish
 	SetEvent EVENT_FOUND_ROCKET_HIDEOUT
 	ld a, $43
@@ -526,7 +526,7 @@ CeladonGameCornerText_48f09:
 	text_far _CeladonGameCornerText_48f09
 	text_asm
 	ld a, SFX_SWITCH
-	call PlaySound
+	rst PlaySoundRST
 	call WaitForSoundToFinish
 	rst TextScriptEnd
 

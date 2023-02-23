@@ -55,7 +55,7 @@ VermilionDock_1db9b:
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wJoyIgnore], a
 	ld [wNewSoundID], a
-	call PlaySound
+	rst PlaySoundRST
 	ld c, BANK(Music_Surfing)
 	ld a, MUSIC_SURFING
 	call PlayMusic
@@ -214,7 +214,7 @@ VermilionDock_EraseSSAnne:
 	ld [hl], a
 
 	ld a, SFX_SS_ANNE_HORN
-	call PlaySound
+	rst PlaySoundRST
 	ld c, 120
 	rst DelayFramesRST
 	ret
@@ -319,7 +319,7 @@ TruckCheck:
 	predef ReplaceTileBlock
 	; moving the truck
 	ld a, SFX_PUSH_BOULDER
-	call PlaySound
+	rst PlaySoundRST
 	ld b, 32
 	ld de, 4
 .movingtruck

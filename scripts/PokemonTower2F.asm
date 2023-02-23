@@ -28,7 +28,7 @@ ENDC
 	ret nc
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	call PlaySound
+	rst PlaySoundRST
 	ld c, BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
@@ -82,7 +82,7 @@ PokemonTower2Script1:
 	call MoveSprite
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	call PlaySound
+	rst PlaySoundRST
 	farcall Music_RivalAlternateStart
 	ld a, $2
 	ld [wPokemonTower2FCurScript], a

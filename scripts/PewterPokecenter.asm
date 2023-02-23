@@ -24,7 +24,7 @@ PewterJigglypuffText:
 	rst PrintTextRST
 
 	ld a, SFX_STOP_ALL_MUSIC
-	call PlaySound
+	rst PlaySoundRST
 	ld c, 32
 	rst DelayFramesRST
 

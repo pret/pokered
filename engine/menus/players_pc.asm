@@ -12,7 +12,7 @@ PlayerPC::
 	jr nz, PlayerPCMenu
 ; accessing it directly
 	ld a, SFX_TURN_ON_PC
-	call PlaySound
+	rst PlaySoundRST
 	ld hl, TurnedOnPC2Text
 	rst PrintTextRST
 
@@ -70,7 +70,7 @@ ExitPlayerPC:
 	jr nz, .next
 ; accessing it directly
 	ld a, SFX_TURN_OFF_PC
-	call PlaySound
+	rst PlaySoundRST
 	call WaitForSoundToFinish
 .next
 	ld hl, wFlags_0xcd60
@@ -135,7 +135,7 @@ PlayerPCDeposit:
 	call RemoveItemFromInventory
 	call WaitForSoundToFinish
 	ld a, SFX_WITHDRAW_DEPOSIT
-	call PlaySound
+	rst PlaySoundRST
 	call WaitForSoundToFinish
 	ld hl, ItemWasStoredText
 	rst PrintTextRST
@@ -191,7 +191,7 @@ PlayerPCWithdraw:
 	call RemoveItemFromInventory
 	call WaitForSoundToFinish
 	ld a, SFX_WITHDRAW_DEPOSIT
-	call PlaySound
+	rst PlaySoundRST
 	call WaitForSoundToFinish
 	ld hl, WithdrewItemText
 	rst PrintTextRST
@@ -304,7 +304,7 @@ DepositItemFromItemMenu::
 	call RemoveItemFromInventory
 	call WaitForSoundToFinish
 	ld a, SFX_WITHDRAW_DEPOSIT
-	call PlaySound
+	rst PlaySoundRST
 	call WaitForSoundToFinish
 	ld hl, ItemWasStoredText
 	rst PrintTextRST

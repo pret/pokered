@@ -254,7 +254,7 @@ DisplayWildLocations:
 	ld a, b
 	ld [wTownMapAreaState], a
 	ld a, SFX_LEDGE
-	call PlaySound
+	rst PlaySoundRST
 	jp .goToNextState
 
 GetMonAreaInputButtons:

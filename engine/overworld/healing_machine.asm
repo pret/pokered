@@ -27,7 +27,7 @@ AnimateHealingMachine:
 .noFadeout
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	call PlaySound
+	rst PlaySoundRST
 .waitLoop
 	ld a, [wAudioFadeOutControl]
 	and a ; is fade-out finished?
@@ -37,7 +37,7 @@ AnimateHealingMachine:
 .partyLoop
 	call CopyHealingMachineOAM
 	ld a, SFX_HEALING_MACHINE
-	call PlaySound
+	rst PlaySoundRST
 	ld a, [wUnusedC000]
 	and a
 	jr nz, .shortDelay ; NEW: if you're holding b when you start talking to the nurse, it'll do healing faster
@@ -55,13 +55,13 @@ AnimateHealingMachine:
 	jr nz, .next
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	call PlaySound
+	rst PlaySoundRST
 	ld a, BANK(Music_PkmnHealed)
 	ld [wAudioROMBank], a
 .next
 	ld a, MUSIC_PKMN_HEALED
 	ld [wNewSoundID], a
-	call PlaySound
+	rst PlaySoundRST
 	ld d, $28
 	call FlashSprite8Times
 .waitLoop2

@@ -512,7 +512,7 @@ OaksLabScript15:
 	call EnableAutoTextBoxDrawing
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	call PlaySound
+	rst PlaySoundRST
 	farcall Music_RivalAlternateStart
 	ld a, $15
 	ldh [hSpriteIndexOrTextID], a
@@ -613,7 +613,7 @@ OaksLabScript16:
 	ld [hl], $ff
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	call PlaySound
+	rst PlaySoundRST
 	farcall Music_RivalAlternateStart
 	ld a, $1
 	ldh [hSpriteIndex], a

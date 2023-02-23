@@ -604,7 +604,7 @@ SchoolB1FMovedexTest:
 	push hl
 	call WaitForSoundToFinish
 	ld a, SFX_GET_ITEM_1
-	call PlaySound
+	rst PlaySoundRST
 	call WaitForSoundToFinish
 	ld hl, SchoolB1FLeftTeacherQuizCorrect
 	rst PrintTextRST
@@ -627,7 +627,7 @@ SchoolB1FMovedexTest:
 .incorrect
 	call WaitForSoundToFinish
 	ld a, SFX_DENIED
-	call PlaySound
+	rst PlaySoundRST
 	call WaitForSoundToFinish
 	ld hl, SchoolB1FLeftTeacherQuizIncorrect
 	rst PrintTextRST

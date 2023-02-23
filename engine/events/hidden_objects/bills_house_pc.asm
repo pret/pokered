@@ -18,22 +18,22 @@ BillsHousePC:
 	ld c, 32
 	rst DelayFramesRST
 	ld a, SFX_TINK
-	call PlaySound
+	rst PlaySoundRST
 	call WaitForSoundToFinish
 	ld c, 80
 	rst DelayFramesRST
 	ld a, SFX_SHRINK
-	call PlaySound
+	rst PlaySoundRST
 	call WaitForSoundToFinish
 	ld c, 48
 	rst DelayFramesRST
 	ld a, SFX_TINK
-	call PlaySound
+	rst PlaySoundRST
 	call WaitForSoundToFinish
 	ld c, 32
 	rst DelayFramesRST
 	ld a, SFX_GET_ITEM_1
-	call PlaySound
+	rst PlaySoundRST
 	call WaitForSoundToFinish
 	call PlayDefaultMusic
 	SetEvent EVENT_USED_CELL_SEPARATOR_ON_BILL
@@ -54,11 +54,11 @@ BillsHouseInitiatedText::
 	text_asm
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	call PlaySound
+	rst PlaySoundRST
 	ld c, 16
 	rst DelayFramesRST
 	ld a, SFX_SWITCH
-	call PlaySound
+	rst PlaySoundRST
 	call WaitForSoundToFinish
 	ld c, 60
 	rst DelayFramesRST

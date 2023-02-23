@@ -34,7 +34,7 @@ VermilionGymSetDoorTile:
 	jr .replaceTile
 .doorsOpen
 	ld a, SFX_GO_INSIDE
-	call PlaySound
+	rst PlaySoundRST
 	ld a, $5 ; clear floor tile ID
 .replaceTile
 	ld [wNewTileBlockID], a

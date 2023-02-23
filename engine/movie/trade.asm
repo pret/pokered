@@ -288,7 +288,7 @@ Trade_DrawOpenEndOfLinkCable:
 	call CopyTileIDsFromList_ZeroBaseTileID
 	call Trade_CopyTileMapToVRAM
 	ld a, SFX_HEAL_HP
-	call PlaySound
+	rst PlaySoundRST
 	ld c, 20
 .loop
 	ldh a, [hSCX]
@@ -334,7 +334,7 @@ Trade_AnimateBallEnteringLinkCable:
 	cp $a0
 	jr nc, .ballSpriteReachedEdgeOfScreen
 	ld a, SFX_TINK
-	call PlaySound
+	rst PlaySoundRST
 	jr .moveBallInsideLinkCableLoop
 .ballSpriteReachedEdgeOfScreen
 	call ClearSprites

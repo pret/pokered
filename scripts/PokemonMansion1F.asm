@@ -170,7 +170,7 @@ Mansion1Text5:
 	ld hl, MansionSwitchPressedText
 	rst PrintTextRST
 	ld a, SFX_GO_INSIDE
-	call PlaySound
+	rst PlaySoundRST
 	CheckAndSetEvent EVENT_MANSION_SWITCH_ON
 	jr z, .asm_44392
 	ResetEventReuseHL EVENT_MANSION_SWITCH_ON
