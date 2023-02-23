@@ -102,7 +102,7 @@ HandleMenuInput_::
 	bit 5, a
 	jr nz, .skipPlayingSound
 	ld a, SFX_PRESS_AB
-	rst PlaySoundRST
+	rst _PlaySound
 .skipPlayingSound
 	pop af
 	ldh [hDownArrowBlinkCount2], a

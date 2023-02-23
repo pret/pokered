@@ -34,7 +34,7 @@ PewterHouse1Text4:
 .altPalettes
 	ld hl, PewterHouse1Text4Color
 .done
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 PewterHouse1Text4Default::

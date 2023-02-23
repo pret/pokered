@@ -38,7 +38,7 @@ SSAnne6Text6:
 SSAnne6Text7:
 	text_asm
 	ld hl, SSAnne6Text_61807
-	rst PrintTextRST
+	rst _PrintText
 	ldh a, [hRandomAdd]
 	bit 7, a
 	jr z, .not_dialog_1
@@ -52,7 +52,7 @@ SSAnne6Text7:
 .not_dialog_2
 	ld hl, SSAnne6Text_61816
 .done
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 SSAnne6Text_61807:

@@ -172,7 +172,7 @@ HandlePokedexSideMenu:
 .choseCry
 	ld a, [wd11e]
 	call GetCryData
-	rst PlaySoundRST
+	rst _PlaySound
 	jr .handleMenuInput
 
 .choseArea
@@ -461,7 +461,7 @@ HandlePokedexListMenu:
 	jp .loop
 .showTownMap
 	ld a, SFX_SWITCH
-	rst PlaySoundRST
+	rst _PlaySound
 	ld a, 1
 	and a
 	ret
@@ -472,7 +472,7 @@ HandlePokedexListMenu:
 	jp .loop
 .showMoveDex
 	ld a, SFX_SWITCH
-	rst PlaySoundRST
+	rst _PlaySound
 	ld a, 2
 	and a
 	ret

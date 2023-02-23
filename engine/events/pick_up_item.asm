@@ -70,7 +70,7 @@ PickUpItemCommon:
 	pop bc
 	ld hl, NoMoreRoomForItemText
 .print
-	rst PrintTextRST
+	rst _PrintText
 	ret
 
 FoundMultipleItemText:

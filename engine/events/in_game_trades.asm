@@ -18,7 +18,7 @@ DoInGameTradeDialogue:
 	push af
 	ld de, wInGameTradeMonNick
 	ld bc, NAME_LENGTH
-	rst CopyDataRST
+	rst _CopyData
 	pop af
 	ld l, a
 	ld h, 0
@@ -58,7 +58,7 @@ DoInGameTradeDialogue:
 	call InGameTrade_DoTrade
 	jr c, .printText
 	ld hl, TradedForText
-	rst PrintTextRST
+	rst _PrintText
 .printText
 	ld hl, wInGameTradeTextPointerTableIndex
 	ld a, [hld] ; wInGameTradeTextPointerTableIndex
@@ -122,7 +122,7 @@ InGameTrade_DoTrade:
 	ld b, FLAG_SET
 	predef FlagActionPredef
 	ld hl, ConnectCableText
-	rst PrintTextRST
+	rst _PrintText
 	ld a, [wWhichPokemon]
 	push af
 	ld a, [wCurEnemyLVL]
@@ -188,7 +188,7 @@ InGameTrade_RestoreScreen::
 	call Delay3
 	call LoadGBPal
 	ld c, 10
-	rst DelayFramesRST
+	rst _DelayFrames
 	farjp LoadWildData
 
 InGameTrade_PrepareTradeData:
@@ -224,7 +224,7 @@ InGameTrade_PrepareTradeData:
 InGameTrade_CopyData:
 	push hl
 	push bc
-	rst CopyDataRST
+	rst _CopyData
 	pop bc
 	pop hl
 	ret
@@ -235,13 +235,13 @@ InGameTrade_CopyDataToReceivedMon:
 	call InGameTrade_GetReceivedMonPointer
 	ld hl, wInGameTradeMonNick
 	ld bc, NAME_LENGTH
-	rst CopyDataRST
+	rst _CopyData
 	ld hl, wPartyMonOT
 	ld bc, NAME_LENGTH
 	call InGameTrade_GetReceivedMonPointer
 	ld hl, InGameTrade_TrainerString
 	ld bc, NAME_LENGTH
-	rst CopyDataRST
+	rst _CopyData
 	ld hl, wPartyMon1OTID
 	ld bc, wPartyMon2 - wPartyMon1
 	call InGameTrade_GetReceivedMonPointer
@@ -358,10 +358,10 @@ WannaTrade1ColorText:
 	jr .done
 .altPalettesOn
 	ld hl, WannaTrade1TextPrompt
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, WannaTradeColorPaletteText
 .done
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 NoTrade1Text:
@@ -403,10 +403,10 @@ WannaTrade2ColorText:
 	jr .done
 .altPalettesOn
 	ld hl, WannaTrade2TextPrompt
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, WannaTradeColorPaletteText
 .done
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 NoTrade2Text:
@@ -443,10 +443,10 @@ WannaTrade3ColorText:
 	jr .done
 .altPalettesOn
 	ld hl, WannaTrade3TextPrompt
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, WannaTradeColorPaletteText
 .done
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 NoTrade3Text:

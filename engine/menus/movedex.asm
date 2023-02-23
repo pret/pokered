@@ -299,13 +299,13 @@ HandleMovedexListMenu:
 	jp .loop
 .showTownMap
 	ld a, SFX_SWITCH
-	rst PlaySoundRST
+	rst _PlaySound
 	ld a, 1
 	and a
 	ret
 .startPressed
 	ld a, SFX_SWITCH
-	rst PlaySoundRST
+	rst _PlaySound
 	ld a, 2
 	and a
 	ret

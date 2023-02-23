@@ -15,7 +15,7 @@ Delay3::
 ; The bg map is updated each frame in thirds.
 ; Wait three frames to let the bg map fully update.
 	ld c, 3
-	rst DelayFramesRST
+	rst _DelayFrames
 	ret
 
 GBPalNormal::

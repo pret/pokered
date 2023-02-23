@@ -51,7 +51,7 @@ SchoolB1FNerd:
   	ldh [hSpriteFacingDirection], a
   	call SetSpriteFacingDirection
 	ld hl, SchoolB1FNerdText
-	rst PrintTextRST
+	rst _PrintText
 	ld a, 3
 	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_LEFT
@@ -63,14 +63,14 @@ SchoolB1FNerd:
   	jr z, .ghostWeak
   	ld hl, SchoolB1FLittleGirlRetortText
  .ghostWeak
-  	rst PrintTextRST
+  	rst _PrintText
 	ld a, 4
 	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_UP
   	ldh [hSpriteFacingDirection], a
   	call SetSpriteFacingDirection
   	ld c, 20
-  	rst DelayFramesRST
+  	rst _DelayFrames
 	ld a, 4
 	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_RIGHT
@@ -82,21 +82,21 @@ SchoolB1FNerd:
   	ldh [hSpriteFacingDirection], a
   	call SetSpriteFacingDirection
   	ld hl, SchoolB1FNerdSilence
-  	rst PrintTextRST
+  	rst _PrintText
 	ld a, 3
 	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_LEFT
   	ldh [hSpriteFacingDirection], a
   	call SetSpriteFacingDirection
   	ld hl, SchoolB1FLittleGirlBro
-  	rst PrintTextRST
+  	rst _PrintText
 	ld a, 4
 	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_UP
   	ldh [hSpriteFacingDirection], a
   	call SetSpriteFacingDirection
   	ld hl, SchoolB1FNerdAck
-  	rst PrintTextRST
+  	rst _PrintText
   	rst TextScriptEnd
 
 SchoolB1FNerdText:
@@ -138,7 +138,7 @@ SchoolB1FLeftTeacher:
 	jr nz, .gotMoveDex
 	call SaveScreenTilesToBuffer2
 	ld hl, SchoolB1FLeftTeacherReadyStart
-	rst PrintTextRST
+	rst _PrintText
 	xor a
 	ld [wCurrentMenuItem], a
 	call YesNoChoice
@@ -151,44 +151,44 @@ SchoolB1FLeftTeacher:
 	call PlayMusic
 
 	ld hl, SchoolB1FLeftTeacherReadyYes
-	rst PrintTextRST
+	rst _PrintText
 
 	call SchoolB1FMovedexTest
 	jp c, .doneResetMusic
 	call LoadScreenTilesFromBuffer2
 	ld hl, SchoolB1FLeftTeacherQuizFinish
-	rst PrintTextRST
+	rst _PrintText
 	call StopAllMusic
 	ld hl, ReceivedMovedexText
-	rst PrintTextRST
+	rst _PrintText
 	SetEvent EVENT_GOT_MOVEDEX
 	call PlayDefaultMusic
 	ld hl, SchoolB1FLeftTeacherQuizFinalInfo
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .noParcel
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, SchoolB1FLeftTeacherNoParcel
-	rst PrintTextRST
+	rst _PrintText
 	jr .later
 .noPokedex
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, SchoolB1FLeftTeacherNoPokedex
-	rst PrintTextRST
+	rst _PrintText
 	jr .later
 .gotMoveDex
 	ld hl, SchoolB1FLeftTeacherQuizFinalInfoPrompt
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, SchoolB1FLeftTeacherEnd
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .notReady
 	ld hl, SchoolB1FLeftTeacherReadyNo
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .checkFirst
 	ld hl, SchoolB1FLeftTeacherFirst
-	rst PrintTextRST
+	rst _PrintText
 	xor a
 	ld [wCurrentMenuItem], a
 	call YesNoChoice
@@ -196,16 +196,16 @@ SchoolB1FLeftTeacher:
 	and a
 	jr nz, .faffing
 	ld hl, SchoolB1FLeftTeacherYes
-	rst PrintTextRST
+	rst _PrintText
 	SetEvent EVENT_CHECKED_AROUND_SCHOOLHOUSE
 	jr .done
 .faffing
 	ld hl, SchoolB1FLeftTeacherNo
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .later
 	ld hl, SchoolB1FLeftTeacherLater
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .doneResetMusic
 	call PlayDefaultMusic
@@ -278,7 +278,7 @@ SchoolB1FRocker:
 	text_asm
 	call SaveScreenTilesToBuffer2
 	ld hl, SchoolB1FRockerText
-	rst PrintTextRST
+	rst _PrintText
 	xor a
 	ld [wCurrentMenuItem], a
 	call YesNoChoice
@@ -288,14 +288,14 @@ SchoolB1FRocker:
 	jr z, .yes
 	ld hl, SchoolB1FRockerNoText
 .yes
-	rst PrintTextRST
+	rst _PrintText
 
 	ld c, BANK(Music_MeetMaleTrainer)
 	ld a, MUSIC_MEET_MALE_TRAINER
 	call PlayMusic
 
 	ld c, 160
-	rst DelayFramesRST
+	rst _DelayFrames
 
 	ld c, BANK(Music_TrainerBattle)
 	ld a, MUSIC_TRAINER_BATTLE
@@ -304,7 +304,7 @@ SchoolB1FRocker:
 	predef BattleTransition
 
 	ld c, 120
-	rst DelayFramesRST
+	rst _DelayFrames
 	call LoadScreenTilesFromBuffer2
 	call StopAllMusic
 	call GBPalNormal
@@ -317,14 +317,14 @@ SchoolB1FRocker:
 	call PlayMusic
 
 	ld c, 60
-	rst DelayFramesRST
+	rst _DelayFrames
 	ld hl, SchoolB1FRockerDetentionText
-	rst PrintTextRST
+	rst _PrintText
 
 
 	call GBFadeOutToWhite
 	ld c, 20
-	rst DelayFramesRST
+	rst _DelayFrames
 	ld a, HS_VIRIDIAN_SCHOOL_HOUSE_DETENTION
 	ld [wMissableObjectIndex], a
 	predef HideObject
@@ -376,7 +376,7 @@ SchoolB1FBrunetteGirl:
   	call SetSpriteFacingDirection
   	call UpdateSprites
   	ld c, 20
-  	rst DelayFramesRST
+  	rst _DelayFrames
 	ld a, 11
 	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_UP
@@ -384,7 +384,7 @@ SchoolB1FBrunetteGirl:
   	call SetSpriteFacingDirection
   	call UpdateSprites
   	ld c, 20
-  	rst DelayFramesRST
+  	rst _DelayFrames
   	pop bc
   	dec b
   	jr nz, .loop
@@ -396,32 +396,32 @@ SchoolB1FBrunetteGirl:
   	call SetSpriteFacingDirection
 
   	ld hl, SchoolB1FBrunetteGirlText
-  	rst PrintTextRST
+  	rst _PrintText
 
 	ld c, 60
-	rst DelayFramesRST
+	rst _DelayFrames
 
 	ld c, BANK(SFX_Safari_Zone_PA)
 	ld a, SFX_SAFARI_ZONE_PA
 	call PlayMusic
 
 	ld c, 60
-	rst DelayFramesRST
+	rst _DelayFrames
 	ld hl, SchoolB1FDetention2Text
-	rst PrintTextRST
+	rst _PrintText
 	ld a, 11
 	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_UP
   	ldh [hSpriteFacingDirection], a
   	call SetSpriteFacingDirection
 	ld hl, SchoolB1FNotAgainText
-	rst PrintTextRST
+	rst _PrintText
 	ld c, 20
-	rst DelayFramesRST
+	rst _DelayFrames
 
 	call GBFadeOutToWhite
 	ld c, 20
-	rst DelayFramesRST
+	rst _DelayFrames
 	ld a, HS_VIRIDIAN_SCHOOL_HOUSE_DETENTION
 	ld [wMissableObjectIndex], a
 	predef ShowObject
@@ -481,12 +481,12 @@ SchoolB1FRightBlackboard:
 SchoolB1FNerdNotebook:
 	text_asm
 	ld hl, SchoolB1FNerdNotebookInit
-	rst PrintTextRST
+	rst _PrintText
 	xor a
 	ld [wCurrentMenuItem], a
 .loop
 	ld hl, SchoolB1FNerdNotebookRepeat
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, StatTextList
 	ld a, l
 	ld [wListPointer], a
@@ -507,11 +507,11 @@ SchoolB1FNerdNotebook:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	rst PrintTextRST
+	rst _PrintText
 	jr .loop
 .done
 	ld hl, SchoolB1FDone
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 SchoolB1FNerdNotebookInit:
@@ -597,17 +597,17 @@ SchoolB1FMovedexTest:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	rst PrintTextRST
+	rst _PrintText
 	pop hl
 	call DoMoveDexTestQuestion
 	jr nz, .incorrect
 	push hl
 	call WaitForSoundToFinish
 	ld a, SFX_GET_ITEM_1
-	rst PlaySoundRST
+	rst _PlaySound
 	call WaitForSoundToFinish
 	ld hl, SchoolB1FLeftTeacherQuizCorrect
-	rst PrintTextRST
+	rst _PrintText
 	pop hl
 	inc hl
 	ld a, [hl]
@@ -621,16 +621,16 @@ SchoolB1FMovedexTest:
 	inc hl
 	push hl
 	ld hl, SchoolB1FLeftTeacherQuizQuickAttack
-	rst PrintTextRST
+	rst _PrintText
 	pop hl
 	jr .questionLoop
 .incorrect
 	call WaitForSoundToFinish
 	ld a, SFX_DENIED
-	rst PlaySoundRST
+	rst _PlaySound
 	call WaitForSoundToFinish
 	ld hl, SchoolB1FLeftTeacherQuizIncorrect
-	rst PrintTextRST
+	rst _PrintText
 	scf
 	ret
 

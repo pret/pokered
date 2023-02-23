@@ -23,19 +23,19 @@ PewterHouse2Text3:
 		call IsItemInBag
 		jr nz, .have_lost_wallet
 		ld hl, PewterHouse2Text3Intro
-		rst PrintTextRST
+		rst _PrintText
 		SetEvent EVENT_MET_POCKET_ABRA_LADY
 		jr .done
 	.have_lost_wallet
 		ld hl, PewterHouse2Text3Found
-		rst PrintTextRST
+		rst _PrintText
 		ld a, LOST_WALLET
 		ldh [hItemToRemoveID], a
 		farcall RemoveItemByID
 		lb bc, POCKET_ABRA, 1
 		call GiveItem ; not possible to have no room for this item because you just gave the LOST WALLET away
 		ld hl, ReceivedPocketAbraText
-		rst PrintTextRST
+		rst _PrintText
 		SetEvent EVENT_RETURNED_LOST_WALLET
 		ld a, ABRA
 		ld [wcf91], a
@@ -53,7 +53,7 @@ PewterHouse2Text3:
 		jr .done
 	.howsAbra
 		ld hl, PewterHouse2Text3HowsAbra
-		rst PrintTextRST
+		rst _PrintText
 	.done
 		rst TextScriptEnd
 

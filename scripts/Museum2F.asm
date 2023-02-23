@@ -69,7 +69,7 @@ Museum2FWalletKid1:
 	CheckEvent EVENT_BEAT_WALLET_KID
 	jp nz, .giveWallet
 	ld hl, Museum2FWalletKid1IntroPrompt
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, WalletKidTrainerHeader
 	call TalkToTrainer
 	ld a, 3
@@ -83,11 +83,11 @@ Museum2FWalletKid1:
 	jr .done
 .endText
 	ld hl, Museum2FWalletKidEnd
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .intro
 	ld hl, Museum2FWalletKid1Intro
-	rst PrintTextRST
+	rst _PrintText
 .done
 	rst TextScriptEnd
 

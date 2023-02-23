@@ -18,11 +18,11 @@ LavenderHouse2Text2:
 	CheckEvent EVENT_RESCUED_MR_FUJI
 	jr nz, .rescued_mr_fuji
 	ld hl, LavenderHouse2Text_1d9dc
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .rescued_mr_fuji
 	ld hl, LavenderHouse2Text_1d9e1
-	rst PrintTextRST
+	rst _PrintText
 .done
 	rst TextScriptEnd
 

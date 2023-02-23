@@ -122,10 +122,10 @@ FuchsiaCityText1:
 	jr .done
 .altPalettes
 	ld hl, FuchsiaCityText1StartPrompt
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, FuchsiaCityText1Color
 .done
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 
@@ -154,7 +154,7 @@ FuchsiaCityText3:
 FuchsiaCityText4:
 	text_asm
 	ld hl, FuchsiaCityText4raw
-	rst PrintTextRST
+	rst _PrintText
 ;;;;;;;;;; PureRGBnote: ADDED: the voltorb will now move while talking to this NPC (but only if OGPlus icons option is turned on)
 	ld a, [wSpriteOptions2]
 	bit BIT_MENU_ICON_SPRITES, a
@@ -162,7 +162,7 @@ FuchsiaCityText4:
 	ld de, vChars0 + VOLTORB_POKEBALL_TILE1
 	callfar LoadVoltorbSprite
 	ld c, 10
-	rst DelayFramesRST
+	rst _DelayFrames
 	ld hl, vChars0 + VOLTORB_POKEBALL_TILE1
 	ld de, PokeBallSprite
 	lb bc, BANK(PokeBallSprite), (PokeBallSpriteEnd - PokeBallSprite) / $10
@@ -208,7 +208,7 @@ FuchsiaCityText18:
 FuchsiaCityText19:
 	text_asm
 	ld hl, FuchsiaCityChanseyText
-	rst PrintTextRST
+	rst _PrintText
 	ld a, CHANSEY
 	call DisplayPokedex
 	rst TextScriptEnd
@@ -220,7 +220,7 @@ FuchsiaCityChanseyText:
 FuchsiaCityText20:
 	text_asm
 	ld hl, FuchsiaCityVoltorbText
-	rst PrintTextRST
+	rst _PrintText
 	ld a, VOLTORB
 	call DisplayPokedex
 	rst TextScriptEnd
@@ -232,7 +232,7 @@ FuchsiaCityVoltorbText:
 FuchsiaCityText21:
 	text_asm
 	ld hl, FuchsiaCityKangaskhanText
-	rst PrintTextRST
+	rst _PrintText
 	ld a, KANGASKHAN
 	call DisplayPokedex
 	rst TextScriptEnd
@@ -244,7 +244,7 @@ FuchsiaCityKangaskhanText:
 FuchsiaCityText22:
 	text_asm
 	ld hl, FuchsiaCitySlowpokeText
-	rst PrintTextRST
+	rst _PrintText
 	ld a, SLOWPOKE
 	call DisplayPokedex
 	rst TextScriptEnd
@@ -256,7 +256,7 @@ FuchsiaCitySlowpokeText:
 FuchsiaCityText23:
 	text_asm
 	ld hl, FuchsiaCityLaprasText
-	rst PrintTextRST
+	rst _PrintText
 	ld a, LAPRAS
 	call DisplayPokedex
 	rst TextScriptEnd
@@ -272,16 +272,16 @@ FuchsiaCityText24:
 	CheckEventReuseA EVENT_GOT_HELIX_FOSSIL
 	jr nz, .asm_667d5
 	ld hl, FuchsiaCityText_19b2a
-	rst PrintTextRST
+	rst _PrintText
 	jr .asm_4343f
 .asm_3b4e8
 	ld hl, FuchsiaCityOmanyteText
-	rst PrintTextRST
+	rst _PrintText
 	ld a, OMANYTE
 	jr .asm_81556
 .asm_667d5
 	ld hl, FuchsiaCityKabutoText
-	rst PrintTextRST
+	rst _PrintText
 	ld a, KABUTO
 .asm_81556
 	call DisplayPokedex
@@ -310,9 +310,9 @@ FuchsiaCityFossilFanText:
 	CheckEitherEventSet EVENT_GOT_HELIX_FOSSIL, EVENT_GOT_DOME_FOSSIL
 	jr z, .noEvent
 	ld hl, FuchsiaCityFossilFanText1Prompt
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, FuchsiaCityFossilFanText2
-	rst PrintTextRST
+	rst _PrintText
 	SetEvent EVENT_FOSSIL_FAN_TEXT_TOGGLE
 	jr .done
 .moveFossil
@@ -327,9 +327,9 @@ FuchsiaCityFossilFanText:
   	ldh [hSpriteFacingDirection], a
   	call SetSpriteFacingDirection
 	ld hl, FuchsiaCityFossilFanText3
-	rst PrintTextRST
+	rst _PrintText
 	ld c, 20
-	rst DelayFramesRST
+	rst _DelayFrames
 	ld a, PLAYER_DIR_UP
 	ld [wPlayerMovingDirection], a
 	call UpdateSprites
@@ -337,7 +337,7 @@ FuchsiaCityFossilFanText:
   	jr .done
 .noEvent
 	ld hl, FuchsiaCityFossilFanText1
-	rst PrintTextRST
+	rst _PrintText
 .done
 	rst TextScriptEnd
 
@@ -408,7 +408,7 @@ MoveFossilPokemon:
 	
 HideKabuto:
 	ld c, 20
-	rst DelayFramesRST
+	rst _DelayFrames
 	ld de, KabutoSprite
 	lb bc, BANK(KabutoSprite), (KabutoSpriteEnd - KabutoSprite) / $10
 	; fall through

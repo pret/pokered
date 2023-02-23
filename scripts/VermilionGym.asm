@@ -34,7 +34,7 @@ VermilionGymSetDoorTile:
 	jr .replaceTile
 .doorsOpen
 	ld a, SFX_GO_INSIDE
-	rst PlaySoundRST
+	rst _PlaySound
 	ld a, $5 ; clear floor tile ID
 .replaceTile
 	ld [wNewTileBlockID], a
@@ -120,11 +120,11 @@ LTSurgeText:
 	jr .done
 .afterBeat
 	ld hl, LTSurgePostBattleAdviceText
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .beforeBeat
 	ld hl, LTSurgePreBattleText
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
@@ -231,38 +231,38 @@ VermilionGymGuideText: ; PureRGBnote: ADDED: gym guide gives you apex chips afte
 	bit BIT_THUNDERBADGE, a
 	jr nz, .afterBeat
 	ld hl, VermilionGymGuidePreBattleText
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .afterBeat
 	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS ; have to hear about apex chips to receive them after that
 	jr z, .postNoPrompt
 	ld hl, VermilionGymGuidePostBattleTextPrompt
-	rst PrintTextRST
+	rst _PrintText
 	CheckEvent EVENT_GOT_VERMILION_APEX_CHIPS
 	jr nz, .alreadyApexChips
 .giveApexChips
 	ld hl, GymGuideMoreApexChipText3
-	rst PrintTextRST
+	rst _PrintText
 	lb bc, APEX_CHIP, 2
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, ReceivedApexChipsText3
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, VermilionGymGuideApexChipElectricText
-	rst PrintTextRST
+	rst _PrintText
 	SetEvent EVENT_GOT_VERMILION_APEX_CHIPS
 .alreadyApexChips
 	ld hl, AlreadyReceivedApexChipsText3
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .BagFull
 	ld hl, ApexNoRoomText3
-	rst PrintTextRST
+	rst _PrintText
 .done
 	rst TextScriptEnd
 .postNoPrompt
 	ld hl, VermilionGymGuidePostBattleText
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 
 ReceivedApexChipsText3:

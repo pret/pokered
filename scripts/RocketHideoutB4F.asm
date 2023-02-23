@@ -21,7 +21,7 @@ RocketHideout4Script_45473:
 	jr .asm_45498
 .asm_4548c
 	ld a, SFX_GO_INSIDE
-	rst PlaySoundRST
+	rst _PlaySound
 	SetEvent EVENT_ROCKET_HIDEOUT_4_DOOR_UNLOCKED
 .asm_45496
 	ld a, $e
@@ -99,7 +99,7 @@ RocketHideout4Text1:
 	CheckEvent EVENT_BEAT_ROCKET_HIDEOUT_GIOVANNI
 	jp nz, .asm_545571
 	ld hl, RocketHideout4Text_4557a
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
@@ -118,7 +118,7 @@ RocketHideout4Text1:
 	jr .asm_209f0
 .asm_545571
 	ld hl, RocketHideout4Text10
-	rst PrintTextRST
+	rst _PrintText
 .asm_209f0
 	rst TextScriptEnd
 
@@ -187,7 +187,7 @@ RocketHideout4EndBattleText4:
 RocketHideout4AfterBattleText4:
 	text_asm
 	ld hl, RocketHideout4Text_455ec
-	rst PrintTextRST
+	rst _PrintText
 	CheckAndSetEvent EVENT_ROCKET_DROPPED_LIFT_KEY
 	jr nz, .asm_455e9
 	ld a, HS_ROCKET_HIDEOUT_B4F_ITEM_5

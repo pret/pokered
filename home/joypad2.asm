@@ -90,10 +90,10 @@ ManualTextScroll::
 	jr z, .inLinkBattle
 	call WaitForTextScrollButtonPress
 	ld a, SFX_PRESS_AB
-	rst PlaySoundRST
+	rst _PlaySound
 	ret
 .inLinkBattle
 	ld c, 65
-	rst DelayFramesRST
+	rst _DelayFrames
 	ret
 	

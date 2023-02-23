@@ -1,6 +1,6 @@
 PKMNLeaguePC:
 	ld hl, AccessedHoFPCText
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, wd730
 	set 6, [hl]
 	push hl
@@ -64,7 +64,7 @@ LeaguePCShowTeam:
 	ld hl, wHallOfFame + HOF_MON
 	ld de, wHallOfFame
 	ld bc, HOF_TEAM - HOF_MON
-	rst CopyDataRST
+	rst _CopyData
 	pop bc
 	ld a, [wHallOfFame + 0]
 	cp $ff
@@ -94,7 +94,7 @@ LeaguePCShowMon:
 	ld [wHoFMonLevel], a
 	ld de, wcd6d
 	ld bc, NAME_LENGTH
-	rst CopyDataRST
+	rst _CopyData
 	ld b, SET_PAL_POKEMON_WHOLE_SCREEN_TRADE
 	ld c, 0
 	call RunPaletteCommand

@@ -27,7 +27,7 @@ AnimateHealingMachine:
 .noFadeout
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	rst PlaySoundRST
+	rst _PlaySound
 .waitLoop
 	ld a, [wAudioFadeOutControl]
 	and a ; is fade-out finished?
@@ -37,7 +37,7 @@ AnimateHealingMachine:
 .partyLoop
 	call CopyHealingMachineOAM
 	ld a, SFX_HEALING_MACHINE
-	rst PlaySoundRST
+	rst _PlaySound
 	ld a, [wUnusedC000]
 	and a
 	jr nz, .shortDelay ; NEW: if you're holding b when you start talking to the nurse, it'll do healing faster
@@ -46,7 +46,7 @@ AnimateHealingMachine:
 .shortDelay
 	ld c, 5
 .doDelay	
-	rst DelayFramesRST
+	rst _DelayFrames
 	dec b
 	jr nz, .partyLoop
 	ld a, [wAudioROMBank]
@@ -55,13 +55,13 @@ AnimateHealingMachine:
 	jr nz, .next
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	rst PlaySoundRST
+	rst _PlaySound
 	ld a, BANK(Music_PkmnHealed)
 	ld [wAudioROMBank], a
 .next
 	ld a, MUSIC_PKMN_HEALED
 	ld [wNewSoundID], a
-	rst PlaySoundRST
+	rst _PlaySound
 	ld d, $28
 	call FlashSprite8Times
 .waitLoop2
@@ -69,7 +69,7 @@ AnimateHealingMachine:
 	cp MUSIC_PKMN_HEALED ; is the healed music still playing?
 	jr z, .waitLoop2 ; if so, check gain
 	ld c, 32
-	rst DelayFramesRST
+	rst _DelayFrames
 	pop af
 	ldh [rOBP1], a
 	call UpdateGBCPal_OBP1 ; shinpokerednote: gbcnote: gbc color code from yellow 
@@ -100,7 +100,7 @@ FlashSprite8Times:
 	ldh [rOBP1], a
 	call UpdateGBCPal_OBP1 ; shinpokerednote: gbcnote: gbc color code from yellow 
 	ld c, 10
-	rst DelayFramesRST
+	rst _DelayFrames
 	dec b
 	jr nz, .loop
 	ret

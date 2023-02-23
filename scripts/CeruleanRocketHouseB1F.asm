@@ -30,7 +30,7 @@ CeruleanRocketHouseB1FText1:
 	bit TRADE_FOR_CHIKUCHIKU, a
 	jr nz, .doneTrade
 	ld hl, CeruleanRocketHouseB1FBeforeTradeText
-	rst PrintTextRST
+	rst _PrintText
 	ld a, TRADE_FOR_CHIKUCHIKU
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue
@@ -40,7 +40,7 @@ CeruleanRocketHouseB1FText1:
 	jr .done
 .doneTrade
 	ld hl, CeruleanRocketHouseB1FAfterTradeText
-	rst PrintTextRST
+	rst _PrintText
 .done
 	rst TextScriptEnd
 
@@ -48,7 +48,7 @@ CeruleanRocketHouseMissingnoScript:
 	ld a, $FF
 	ld [wJoyIgnore], a
 	ld a, SFX_STOP_ALL_MUSIC
-	rst PlaySoundRST
+	rst _PlaySound
 	ld b, 100
 .loop
 	push bc
@@ -56,18 +56,18 @@ CeruleanRocketHouseMissingnoScript:
 	ld a, SFX_SS_ANNE_HORN
 	call PlayMusic
 	ld c, 2
-	rst DelayFramesRST
+	rst _DelayFrames
 	pop bc
 	dec b
 	jr nz, .loop
 	ld a, SFX_STOP_ALL_MUSIC
-	rst PlaySoundRST
+	rst _PlaySound
 	ld c, BANK(SFX_Noise_Instrument05_1)
 	ld a, SFX_NOISE_INSTRUMENT05
 	call PlayMusic
 	call GBFadeOutToBlack
 	ld b, $FF
-	rst DelayFramesRST
+	rst _DelayFrames
 	ld a, MISSINGNO
 	call PlayCry
 	ld a, 120
@@ -121,7 +121,7 @@ CeruleanRocketHouseB1FText6:
 	dec b
 	jr nz, .checkMoves
 	ld hl, CeruleanRocketHouseCodeText
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .codeBroken
 	farcall VendingMachineMenu

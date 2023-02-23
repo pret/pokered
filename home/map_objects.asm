@@ -44,7 +44,7 @@ TextScript_GameCornerPrizeMenu::
 	ld b, BANK(CeladonPrizeMenu)
 	ld hl, CeladonPrizeMenu
 bankswitchAndContinue::
-	rst BankswitchRST
+	rst _Bankswitch
 	jp HoldTextDisplayOpen        ; continue to main text-engine function
 
 TextScript_PokemonCenterPC::
@@ -77,7 +77,7 @@ DisplayPokedex::
 SetSpriteFacingDirectionAndDelay::
 	call SetSpriteFacingDirection
 	ld c, 6
-	rst DelayFramesRST
+	rst _DelayFrames
 	ret
 
 SetSpriteFacingDirection::

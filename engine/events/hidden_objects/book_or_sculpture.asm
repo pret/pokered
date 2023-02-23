@@ -9,7 +9,7 @@ BookOrSculptureText::
 	jr nz, .ok
 	ld hl, DiglettSculptureText
 .ok
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 PokemonBooksText:

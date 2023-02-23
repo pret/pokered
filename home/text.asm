@@ -229,7 +229,7 @@ Paragraph::
 	lb bc, 4, 18
 	call ClearScreenArea
 	ld c, 20
-	rst DelayFramesRST
+	rst _DelayFrames
 	pop de
 	hlcoord 1, 14
 	jp NextChar
@@ -244,7 +244,7 @@ PageChar::
 	lb bc, 7, 18
 	call ClearScreenArea
 	ld c, 20
-	rst DelayFramesRST
+	rst _DelayFrames
 	pop de
 	pop hl
 	hlcoord 1, 11
@@ -311,7 +311,7 @@ ScrollTextUpOneLine::
 
 	ld b, 5
 .WaitFrame
-	rst DelayFrameRST
+	rst _DelayFrame
 	dec b
 	jr nz, .WaitFrame
 
@@ -508,7 +508,7 @@ TextCommand_PAUSE::
 	and A_BUTTON | B_BUTTON
 	jr nz, .done
 	ld c, 30 ; half a second
-	rst DelayFramesRST
+	rst _DelayFrames
 .done
 	pop bc
 	pop hl
@@ -545,7 +545,7 @@ TextCommand_SOUND::
 	call z, WaitForSoundToFinish
 ;;;;;;;;;;
 	ld a, [hl]
-	rst PlaySoundRST
+	rst _PlaySound
 	call WaitForSoundToFinish
 	pop hl
 	pop bc
@@ -591,7 +591,7 @@ TextCommand_DOTS::
 	and A_BUTTON | B_BUTTON
 	jr nz, .next ; if so, skip the delay
 	ld c, 10
-	rst DelayFramesRST
+	rst _DelayFrames
 .next
 	dec d
 	jr nz, .loop

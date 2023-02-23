@@ -113,11 +113,11 @@ SabrinaText:
 	jr .done
 .afterBeat
 	ld hl, SabrinaPostBattleAdviceText
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .beforeBeat
 	ld hl, SabrinaPreBattleText
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
@@ -210,38 +210,38 @@ SaffronGymGuideText: ; PureRGBnote: ADDED: gym guide gives you apex chips after 
 	CheckEvent EVENT_BEAT_SABRINA
 	jr nz, .afterBeat
 	ld hl, SaffronGymGuidePreBattleText
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .afterBeat
 	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS ; have to hear about apex chips to receive them after that
 	jr z, .donePrompt
 	ld hl, SaffronGymGuidePostBattleTextPrompt
-	rst PrintTextRST
+	rst _PrintText
 	CheckEvent EVENT_GOT_SAFFRON_APEX_CHIPS
 	jr nz, .alreadyApexChips
 .giveApexChips
 	ld hl, GymGuideMoreApexChipText6
-	rst PrintTextRST
+	rst _PrintText
 	lb bc, APEX_CHIP, 2
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, ReceivedApexChipsText6
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, SaffronGymGuideApexChipPsychicText
-	rst PrintTextRST
+	rst _PrintText
 	SetEvent EVENT_GOT_SAFFRON_APEX_CHIPS
 .alreadyApexChips
 	ld hl, AlreadyReceivedApexChipsText6
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .BagFull
 	ld hl, ApexNoRoomText6
-	rst PrintTextRST
+	rst _PrintText
 .done
 	rst TextScriptEnd
 .donePrompt
 	ld hl, SaffronGymGuidePostBattleText
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 
 ReceivedApexChipsText6:

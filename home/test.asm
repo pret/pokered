@@ -1,7 +1,7 @@
 PrintDebugMsg::
 	push hl
 	ld hl, TestText
-	rst PrintTextRST
+	rst _PrintText
 	pop hl
 	ret
 

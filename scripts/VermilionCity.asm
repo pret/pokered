@@ -112,7 +112,7 @@ VermilionCityScript1:
 	and a
 	ret nz
 	ld c, 10
-	rst DelayFramesRST
+	rst _DelayFrames
 	ld a, $0
 	ld [wVermilionCityCurScript], a
 	ret
@@ -142,11 +142,11 @@ VermilionCityText2:
 	CheckEvent EVENT_SS_ANNE_LEFT
 	jr nz, .shipHasDeparted
 	ld hl, VermilionCityTextDidYouSee
-	rst PrintTextRST
+	rst _PrintText
 	jr .end
 .shipHasDeparted
 	ld hl, VermilionCityTextSSAnneDeparted
-	rst PrintTextRST
+	rst _PrintText
 .end
 	rst TextScriptEnd
 
@@ -174,28 +174,28 @@ VermilionCityText3:
 	jr nc, .greetPlayerAndCheckTicket
 .greetPlayer
 	ld hl, SSAnneWelcomeText4
-	rst PrintTextRST
+	rst _PrintText
 	jr .end
 .greetPlayerAndCheckTicket
 	ld hl, SSAnneWelcomeText9
-	rst PrintTextRST
+	rst _PrintText
 	ld b, S_S_TICKET
 	predef GetQuantityOfItemInBag
 	ld a, b
 	and a
 	jr nz, .playerHasTicket
 	ld hl, SSAnneNoTicketText
-	rst PrintTextRST
+	rst _PrintText
 	jr .end
 .playerHasTicket
 	ld hl, SSAnneFlashedTicketText
-	rst PrintTextRST
+	rst _PrintText
 	ld a, $4
 	ld [wVermilionCityCurScript], a
 	jr .end
 .shipHasDeparted
 	ld hl, SSAnneNotHereText
-	rst PrintTextRST
+	rst _PrintText
 .end
 	rst TextScriptEnd
 
@@ -286,21 +286,21 @@ VermilionCityDockBeautyText:
 	CheckEvent EVENT_GOT_DOCK_BEAUTY_ITEM
 	jr nz, .endText
 	ld hl, VermilionCityDockBeautyGreeting
-	rst PrintTextRST
+	rst _PrintText
 	lb bc, ITEM_VERMILION_SECRET_DOCK_BEAUTY_NEW, 1
 	call GiveItem
 	jr nc, .bagfull
 	SetEvent EVENT_GOT_DOCK_BEAUTY_ITEM
 	ld hl, VermilionCityDockBeautyReceivedItemText
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .bagfull
 	ld hl, VermilionCityDockBeautyNoRoomText
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .endText
 	ld hl, VermilionCityDockBeautyEndText
-	rst PrintTextRST
+	rst _PrintText
 .done
 	rst TextScriptEnd
 

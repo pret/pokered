@@ -22,7 +22,7 @@ TextCommandPromptMultiButton::
 	lb bc, 6, 18
 	call ClearScreenArea
 	ld c, 20
-	rst DelayFramesRST
+	rst _DelayFrames
 	pop de
 	ret
 
@@ -36,7 +36,7 @@ ManualTextScrollMultiButton::
 	ret
 .continueText
 	ld a, SFX_PRESS_AB
-	rst PlaySoundRST
+	rst _PlaySound
 	ld d, 0
 	ret
 

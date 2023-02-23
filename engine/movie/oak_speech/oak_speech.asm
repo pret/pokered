@@ -47,7 +47,7 @@ SetDefaultNames:
 	ld hl, NintenText
 	ld de, wPlayerName
 	ld bc, NAME_LENGTH
-	rst CopyDataRST
+	rst _CopyData
 	ld hl, SonyText
 	ld de, wRivalName
 	ld bc, NAME_LENGTH
@@ -55,7 +55,7 @@ SetDefaultNames:
 
 OakSpeech:
 	ld a, SFX_STOP_ALL_MUSIC
-	rst PlaySoundRST
+	rst _PlaySound
 	ld a, BANK(Music_Routes2)
 	ld c, a
 	ld a, MUSIC_ROUTES2
@@ -84,7 +84,7 @@ OakSpeech:
 	call IntroDisplayPicCenteredOrUpperRight
 	call FadeInIntroPic
 	ld hl, OakSpeechText1
-	rst PrintTextRST
+	rst _PrintText
 	call GBFadeOutToWhite
 	call ClearScreen
 	ld a, NIDORINO
@@ -95,7 +95,7 @@ OakSpeech:
 	call LoadFlippedFrontSpriteByMonIndex
 	call MovePicLeft
 	ld hl, OakSpeechText2
-	rst PrintTextRST
+	rst _PrintText
 	call GBFadeOutToWhite
 	call ClearScreen
 	ld de, RedPicFront
@@ -103,7 +103,7 @@ OakSpeech:
 	call IntroDisplayPicCenteredOrUpperRight
 	call MovePicLeft
 	ld hl, IntroducePlayerText
-	rst PrintTextRST
+	rst _PrintText
 	call ChoosePlayerName
 	call GBFadeOutToWhite
 	call ClearScreen
@@ -112,7 +112,7 @@ OakSpeech:
 	call IntroDisplayPicCenteredOrUpperRight
 	call FadeInIntroPic
 	ld hl, IntroduceRivalText
-	rst PrintTextRST
+	rst _PrintText
 	call ChooseRivalName
 .skipChoosingNames
 	call GBFadeOutToWhite
@@ -125,17 +125,17 @@ OakSpeech:
 	and a
 	jr nz, .next
 	ld hl, OakSpeechText3
-	rst PrintTextRST
+	rst _PrintText
 .next
 	ldh a, [hLoadedROMBank]
 	push af
 	ld a, SFX_SHRINK
-	rst PlaySoundRST
+	rst _PlaySound
 	pop af
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ld c, 4
-	rst DelayFramesRST
+	rst _DelayFrames
 	ld de, RedSprite
 	ld hl, vSprites
 	lb bc, BANK(RedSprite), $0C
@@ -144,7 +144,7 @@ OakSpeech:
 	lb bc, BANK(ShrinkPic1), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	ld c, 4
-	rst DelayFramesRST
+	rst _DelayFrames
 	ld de, ShrinkPic2
 	lb bc, BANK(ShrinkPic2), $00
 	call IntroDisplayPicCenteredOrUpperRight
@@ -158,12 +158,12 @@ OakSpeech:
 	ld [wAudioFadeOutControl], a
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	rst PlaySoundRST
+	rst _PlaySound
 	pop af
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ld c, 20
-	rst DelayFramesRST
+	rst _DelayFrames
 	hlcoord 6, 5
 	ld b, 7
 	ld c, 7
@@ -172,7 +172,7 @@ OakSpeech:
 	ld a, 1
 	ld [wUpdateSpritesEnabled], a
 	ld c, 50
-	rst DelayFramesRST
+	rst _DelayFrames
 	call GBFadeOutToWhite
 	jp ClearScreen
 OakSpeechText1:
@@ -201,7 +201,7 @@ FadeInIntroPic:
 	ldh [rBGP], a
 	call UpdateGBCPal_BGP ; shinpokerednote: gbcnote: gbc color code from yellow 
 	ld c, 10
-	rst DelayFramesRST
+	rst _DelayFrames
 	dec b
 	jr nz, .next
 	ret
@@ -217,13 +217,13 @@ IntroFadePalettes:
 MovePicLeft:
 	ld a, 119
 	ldh [rWX], a
-	rst DelayFrameRST
+	rst _DelayFrame
 
 	ld a, %11100100
 	ldh [rBGP], a
 	call UpdateGBCPal_BGP ; shinpokerednote: gbcnote: gbc color code from yellow 
 .next
-	rst DelayFrameRST
+	rst _DelayFrame
 	ldh a, [rWX]
 	sub 8
 	cp $FF
@@ -243,7 +243,7 @@ IntroDisplayPicCenteredOrUpperRight:
 	ld hl, sSpriteBuffer1
 	ld de, sSpriteBuffer0
 	ld bc, $310
-	rst CopyDataRST
+	rst _CopyData
 	ld de, vFrontPic
 	call InterlaceMergeSpriteBuffers
 	pop bc

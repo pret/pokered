@@ -17,7 +17,7 @@ CheckIfMoveIsKnown:
 	ret
 .alreadyKnown
 	ld hl, AlreadyKnowsText
-	rst PrintTextRST
+	rst _PrintText
 	scf
 	ret
 

@@ -1,13 +1,13 @@
 MACRO farcall
 	ld b, BANK(\1)
 	ld hl, \1
-	rst BankswitchRST ; pureRGBnote: CHANGED: using a rst vector here saves a bunch of space
+	rst _Bankswitch ; pureRGBnote: CHANGED: using a rst vector here saves a bunch of space
 ENDM
 
 MACRO callfar
 	ld hl, \1
 	ld b, BANK(\1)
-	rst BankswitchRST ; pureRGBnote: CHANGED: using a rst vector here saves a bunch of space
+	rst _Bankswitch ; pureRGBnote: CHANGED: using a rst vector here saves a bunch of space
 ENDM
 
 MACRO farjp

@@ -17,7 +17,7 @@ PlayIntro:
 	ldh [hSCX], a
 	ldh [hAutoBGTransferEnabled], a
 	call ClearSprites
-	rst DelayFrameRST
+	rst _DelayFrame
 	ret
 
 PlayIntroScene:
@@ -48,14 +48,14 @@ PlayIntroScene:
 
 ; hip
 	ld a, SFX_INTRO_HIP
-	rst PlaySoundRST
+	rst _PlaySound
 	xor a
 	ld [wIntroNidorinoBaseTile], a
 	ld de, IntroNidorinoAnimation1
 	call AnimateIntroNidorino
 ; hop
 	ld a, SFX_INTRO_HOP
-	rst PlaySoundRST
+	rst _PlaySound
 	ld de, IntroNidorinoAnimation2
 	call AnimateIntroNidorino
 	ld c, 10
@@ -64,12 +64,12 @@ PlayIntroScene:
 
 ; hip
 	ld a, SFX_INTRO_HIP
-	rst PlaySoundRST
+	rst _PlaySound
 	ld de, IntroNidorinoAnimation1
 	call AnimateIntroNidorino
 ; hop
 	ld a, SFX_INTRO_HOP
-	rst PlaySoundRST
+	rst _PlaySound
 	ld de, IntroNidorinoAnimation2
 	call AnimateIntroNidorino
 	ld c, 30
@@ -80,7 +80,7 @@ PlayIntroScene:
 	ld b, TILEMAP_GENGAR_INTRO_2
 	call IntroCopyTiles
 	ld a, SFX_INTRO_RAISE
-	rst PlaySoundRST
+	rst _PlaySound
 	lb de, 8 / 2, MOVE_GENGAR_LEFT
 	call IntroMoveMon
 	ld c, 30
@@ -91,12 +91,12 @@ PlayIntroScene:
 	ld b, TILEMAP_GENGAR_INTRO_3
 	call IntroCopyTiles
 	ld a, SFX_INTRO_CRASH
-	rst PlaySoundRST
+	rst _PlaySound
 	lb de, 16 / 2, MOVE_GENGAR_RIGHT
 	call IntroMoveMon
 ; hip
 	ld a, SFX_INTRO_HIP
-	rst PlaySoundRST
+	rst _PlaySound
 	ld a, (FightIntroFrontMon2 - FightIntroFrontMon) / LEN_2BPP_TILE
 	ld [wIntroNidorinoBaseTile], a
 	ld de, IntroNidorinoAnimation3
@@ -115,14 +115,14 @@ PlayIntroScene:
 
 ; hip
 	ld a, SFX_INTRO_HIP
-	rst PlaySoundRST
+	rst _PlaySound
 	xor a
 	ld [wIntroNidorinoBaseTile], a
 	ld de, IntroNidorinoAnimation4
 	call AnimateIntroNidorino
 ; hop
 	ld a, SFX_INTRO_HOP
-	rst PlaySoundRST
+	rst _PlaySound
 	ld de, IntroNidorinoAnimation5
 	call AnimateIntroNidorino
 	ld c, 20
@@ -139,7 +139,7 @@ PlayIntroScene:
 
 ; lunge
 	ld a, SFX_INTRO_LUNGE
-	rst PlaySoundRST
+	rst _PlaySound
 	ld a, (FightIntroFrontMon3 - FightIntroFrontMon) / LEN_2BPP_TILE
 	ld [wIntroNidorinoBaseTile], a
 	ld de, IntroNidorinoAnimation7
@@ -157,7 +157,7 @@ AnimateIntroNidorino:
 	ld c, 6 * 6
 	call UpdateIntroNidorinoOAM
 	ld c, 5
-	rst DelayFramesRST
+	rst _DelayFrames
 	pop de
 	inc de
 	jr AnimateIntroNidorino
@@ -316,7 +316,7 @@ PlayShootingStar:
 	ldh [rBGP], a
 	call UpdateGBCPal_BGP ; shinpokerednote: gbcnote: gbc color code from yellow 
 	ld c, 180
-	rst DelayFramesRST
+	rst _DelayFrames
 	call ClearScreen
 	call DisableLCD
 	xor a
@@ -328,20 +328,20 @@ PlayShootingStar:
 	res 5, [hl]
 	set 3, [hl]
 	ld c, 64
-	rst DelayFramesRST
+	rst _DelayFrames
 	farcall AnimateShootingStar
 	push af
 	pop af
 	jr c, .next ; skip the delay if the user interrupted the animation
 	ld c, 40
-	rst DelayFramesRST
+	rst _DelayFrames
 .next
 	ld a, BANK(Music_IntroBattle)
 	ld [wAudioROMBank], a
 	ld [wAudioSavedROMBank], a
 	ld a, MUSIC_INTRO_BATTLE
 	ld [wNewSoundID], a
-	rst PlaySoundRST
+	rst _PlaySound
 	call IntroClearMiddleOfScreen
 	call ClearSprites
 	jp Delay3

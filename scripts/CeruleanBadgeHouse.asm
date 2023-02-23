@@ -11,13 +11,13 @@ CeruleanBadgeHouse_TextPointers:
 CeruleanHouse2Text1:
 	text_asm
 	ld hl, CeruleanHouse2Text_74e77
-	rst PrintTextRST
+	rst _PrintText
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wListScrollOffset], a
 .asm_74e23
 	ld hl, CeruleanHouse2Text_74e7c
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, BadgeItemList
 	call LoadItemList
 	ld hl, wItemList
@@ -42,13 +42,13 @@ CeruleanHouse2Text1:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	rst PrintTextRST
+	rst _PrintText
 	jr .asm_74e23
 .asm_74e60
 	xor a
 	ld [wListScrollOffset], a
 	ld hl, CeruleanHouse2Text_74e81
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 BadgeItemList:

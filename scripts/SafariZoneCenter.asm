@@ -48,7 +48,7 @@ SafariZoneCenterText3:
 .freeRoamText
 	ld hl, SafariZoneCenterText3FreeRoam
 .done
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 SafariZoneCenterText3Default:

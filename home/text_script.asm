@@ -120,7 +120,7 @@ CloseTextDisplayPart1:
 	call SwitchToMapRomBank
 	ld a, $90
 	ldh [hWY], a ; move the window off the screen
-	rst DelayFrameRST
+	rst _DelayFrame
 	call LoadGBPal
 	xor a
 	ldh [hAutoBGTransferEnabled], a ; disable continuous WRAM to VRAM transfer each V-blank
@@ -160,7 +160,7 @@ CloseTextDisplayPart2:
 DisplayPokemartDialogue::
 	push hl
 	ld hl, PokemartGreetingText
-	rst PrintTextRST
+	rst _PrintText
 	pop hl
 	call DisplayPokemartNoGreeting
 	jp AfterDisplayingTextID
@@ -210,12 +210,12 @@ DisplayRangerSafariGameOverText::
 
 DisplayPokemonFaintedText::
 	ld hl, PokemonFaintedText
-	rst PrintTextRST
+	rst _PrintText
 	jp AfterDisplayingTextID
 
 DisplayPlayerBlackedOutText::
 	ld hl, PlayerBlackedOutText
-	rst PrintTextRST
+	rst _PrintText
 	ld a, [wd732]
 	res 5, a ; reset forced to use bike bit
 	ld [wd732], a
@@ -223,7 +223,7 @@ DisplayPlayerBlackedOutText::
 
 DisplayRepelWoreOffText::
 	ld hl, RepelWoreOffText
-	rst PrintTextRST
+	rst _PrintText
 	callfar UseAnotherRepel ; PureRGBnote: ADDED: when repel wears off ask to use another if available
 	jp CloseTextDisplay
 	

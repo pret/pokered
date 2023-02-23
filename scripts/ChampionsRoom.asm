@@ -253,7 +253,7 @@ GaryText1:
 	jr z, .printText
 	ld hl, GaryText_76103
 .printText
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 GaryChampionIntroText:
@@ -282,7 +282,7 @@ GaryText3:
 	ld [wd11e], a
 	call GetMonName
 	ld hl, GaryText_76120
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 GaryText_76120:

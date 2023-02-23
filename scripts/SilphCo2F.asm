@@ -135,7 +135,7 @@ SilphCo2Text1:
 	CheckEvent EVENT_GOT_TM36
 	jr nz, .asm_59de4
 	ld hl, SilphCo2Text_59ded
-	rst PrintTextRST
+	rst _PrintText
 	lb bc, TM_SILPH_CO_2F_HIDING_LADY, 1
 	call GiveItem
 	ld hl, TM36NoRoomText
@@ -146,7 +146,7 @@ SilphCo2Text1:
 .asm_59de4
 	ld hl, TM36ExplanationText
 .asm_59de7
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 SilphCo2Text_59ded:

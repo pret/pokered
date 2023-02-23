@@ -78,20 +78,20 @@ Route5GateText1:
 	and a
 	jr nz, .asm_768a2
 	ld hl, Route5GateText2
-	rst PrintTextRST
+	rst _PrintText
 	call Route5GateScript_1df43
 	ld a, $1
 	ld [wRoute5GateCurScript], a
 	rst TextScriptEnd
 .asm_768a2
 	ld hl, Route5GateText3
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, wd728
 	set 6, [hl]
 	rst TextScriptEnd
 .asm_88856
 	ld hl, SaffronGateText_1dff6
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 Route8GateText2:

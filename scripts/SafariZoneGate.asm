@@ -197,11 +197,11 @@ SafariZoneGate_TextPointers:
 	jr .default1
 .owedHyperBall1
 	ld hl, .SafariZoneEntranceHyperBallOwedText
-	rst PrintTextRST
+	rst _PrintText
 	jr .done1
 .default1
 	ld hl, .SafariZoneEntranceText1Get
-	rst PrintTextRST
+	rst _PrintText
 .done1
 	rst TextScriptEnd
 	
@@ -222,7 +222,7 @@ SafariZoneGate_TextPointers:
 	jp .CantPayWalkDown
 .default4
 	ld hl, .SafariZoneEntranceText_9e6e4
-	rst PrintTextRST
+	rst _PrintText
 	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
@@ -239,7 +239,7 @@ SafariZoneGate_TextPointers:
 	call HasEnoughMoney
 	jr nc, .success
 	ld hl, .NotEnoughMoneyText
-	rst PrintTextRST
+	rst _PrintText
 	jr .CantPayWalkDown
 
 .success
@@ -257,7 +257,7 @@ SafariZoneGate_TextPointers:
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld hl, .MakePaymentText
-	rst PrintTextRST
+	rst _PrintText
 	call AskGameType
 	jr c, .PleaseComeAgain ; if we cancelled, don't continue
 	ld a, D_UP
@@ -271,7 +271,7 @@ SafariZoneGate_TextPointers:
 	jr .done
 .PleaseComeAgain
 	ld hl, PleaseComeAgainText
-	rst PrintTextRST
+	rst _PrintText
 .CantPayWalkDown
 	ld a, D_DOWN
 	ld c, 1
@@ -297,7 +297,7 @@ SafariZoneGate_TextPointers:
 	and a
 	jr nz, .asm_7539c
 	ld hl, .SafariZoneEntranceText_753bb
-	rst PrintTextRST
+	rst _PrintText
 	xor a
 	ld [wSpritePlayerStateData1FacingDirection], a
 	ld a, D_DOWN
@@ -309,7 +309,7 @@ SafariZoneGate_TextPointers:
 	jr .asm_753b3
 .asm_7539c
 	ld hl, .SafariZoneEntranceText_753c0
-	rst PrintTextRST
+	rst _PrintText
 	ld a, SPRITE_FACING_UP
 	ld [wSpritePlayerStateData1FacingDirection], a
 	ld a, D_UP
@@ -341,7 +341,7 @@ SafariZoneGate_TextPointers:
 .SafariZoneEntranceText8
 	text_asm 
 	ld hl, .RangerHuntDoneSuccessText
-	rst PrintTextRST
+	rst _PrintText
 	SetEvent EVENT_OWED_HYPER_BALL
 	rst TextScriptEnd
 
@@ -352,7 +352,7 @@ SafariZoneGate_TextPointers:
 .SafariZoneEntranceText2
 	text_asm
 	ld hl, .FirstTimeQuestionText
-	rst PrintTextRST
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -364,7 +364,7 @@ SafariZoneGate_TextPointers:
 .noSelection
 	ld hl, PleaseComeAgainText
 .Explanation
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 .FirstTimeQuestionText
@@ -385,7 +385,7 @@ AskGameType:
 	ld [wCurrentMenuItem], a
 	ld [wListScrollOffset], a
 	ld hl, SafariZoneEntranceWhatGame
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, GameList
 	call LoadItemList
 	ld hl, wItemList
@@ -410,7 +410,7 @@ AskGameType:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	rst PrintTextRST
+	rst _PrintText
 	ret
 .goodbye
 	; give back the 500 that was just deducted
@@ -447,11 +447,11 @@ PleaseComeAgainText:
 SafariClassicPaidInfo:
 	text_asm
 	ld hl, SafariZoneClassicText
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, SafariZoneEntranceSafariBallsReceived
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, SafariZonePAText
-	rst PrintTextRST
+	rst _PrintText
 	ld a, 30
 	ld [wNumSafariBalls], a
 	ld a, HIGH(702)
@@ -466,9 +466,9 @@ SafariClassicPaidInfo:
 SafariRangerHuntPaidInfo:
 	text_asm
 	ld hl, SafariZoneRangerHunt
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, SafariZonePATextNoBalls
-	rst PrintTextRST
+	rst _PrintText
 	ld a, 5
 	ld [wNumSafariBalls], a ; Number of Rangers (reused Safari Ball flag)
 	ld a, HIGH(702)
@@ -483,7 +483,7 @@ SafariRangerHuntPaidInfo:
 SafariFreeRoamPaidInfo:
 	text_asm
 	ld hl, SafariZoneFreeRoam
-	rst PrintTextRST
+	rst _PrintText
 	xor a
 	ld [wNumSafariBalls], a
 	ld a, SAFARI_TYPE_FREE_ROAM
@@ -522,12 +522,12 @@ GiveHyperBall:
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, ReceivedHyperBallText
-	rst PrintTextRST
+	rst _PrintText
 	ResetEvent EVENT_OWED_HYPER_BALL
 	jr .done
 .BagFull
 	ld hl, HyperBallNoRoomText
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .done
 	ret
@@ -620,7 +620,7 @@ AskGameTypeExplanation:
 	ld [wCurrentMenuItem], a
 	ld [wListScrollOffset], a
 	ld hl, SafariZoneHelp
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, GameList
 	call LoadItemList
 	ld hl, wItemList
@@ -645,7 +645,7 @@ AskGameTypeExplanation:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	rst PrintTextRST
+	rst _PrintText
 	ret
 .goodbye
 	scf

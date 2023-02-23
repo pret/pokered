@@ -109,7 +109,7 @@ FightingDojoText1:
 	CheckEventReuseA EVENT_BEAT_KARATE_MASTER
 	jp nz, .continue2
 	ld hl, FightingDojoText_5ce8e
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
@@ -126,11 +126,11 @@ FightingDojoText1:
 	jr .asm_9dba4
 .continue1
 	ld hl, FightingDojoText_5ce9d
-	rst PrintTextRST
+	rst _PrintText
 	jr .asm_9dba4
 .continue2
 	ld hl, FightingDojoText8
-	rst PrintTextRST
+	rst _PrintText
 .asm_9dba4
 	rst TextScriptEnd
 
@@ -228,13 +228,13 @@ FightingDojoText6:
 	CheckEitherEventSet EVENT_GOT_HITMONLEE, EVENT_GOT_HITMONCHAN
 	jr z, .GetMon
 	ld hl, OtherHitmonText
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .GetMon
 	ld a, HITMONLEE
 	call DisplayPokedex
 	ld hl, WantHitmonleeText
-	rst PrintTextRST
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -263,13 +263,13 @@ FightingDojoText7:
 	CheckEitherEventSet EVENT_GOT_HITMONLEE, EVENT_GOT_HITMONCHAN
 	jr z, .GetMon
 	ld hl, OtherHitmonText
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .GetMon
 	ld a, HITMONCHAN
 	call DisplayPokedex
 	ld hl, WantHitmonchanText
-	rst PrintTextRST
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a

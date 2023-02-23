@@ -21,17 +21,17 @@ PewterJigglypuffText:
 	ld a, TRUE
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, .JigglypuffText
-	rst PrintTextRST
+	rst _PrintText
 
 	ld a, SFX_STOP_ALL_MUSIC
-	rst PlaySoundRST
+	rst _PlaySound
 	ld c, 32
-	rst DelayFramesRST
+	rst _DelayFrames
 
 	ld hl, JigglypuffFacingDirections
 	ld de, wJigglypuffFacingDirections
 	ld bc, JigglypuffFacingDirectionsEnd - JigglypuffFacingDirections
-	rst CopyDataRST
+	rst _CopyData
 
 	ld a, [wSprite03StateData1ImageIndex]
 	ld hl, wJigglypuffFacingDirections
@@ -55,12 +55,12 @@ PewterJigglypuffText:
 	ld hl, wJigglypuffFacingDirections
 	ld de, wJigglypuffFacingDirections - 1
 	ld bc, JigglypuffFacingDirectionsEnd - JigglypuffFacingDirections
-	rst CopyDataRST
+	rst _CopyData
 	ld a, [wJigglypuffFacingDirections - 1]
 	ld [wJigglypuffFacingDirections + 3], a
 	pop hl
 	ld c, 24
-	rst DelayFramesRST
+	rst _DelayFrames
 	ld a, [wChannelSoundIDs]
 	ld b, a
 	ld a, [wChannelSoundIDs + CHAN2]
@@ -68,7 +68,7 @@ PewterJigglypuffText:
 	jr nz, .spinMovementLoop
 
 	ld c, 48
-	rst DelayFramesRST
+	rst _DelayFrames
 	call PlayDefaultMusic
 	rst TextScriptEnd
 

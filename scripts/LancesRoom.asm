@@ -73,7 +73,7 @@ LanceScript0:
 	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
 	ld a, SFX_GO_INSIDE
-	rst PlaySoundRST
+	rst _PlaySound
 	jp LanceShowOrHideEntranceBlocks
 
 

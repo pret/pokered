@@ -101,7 +101,7 @@ PrintCardKeyDoneText::
 	ld [wItemQuantity], a
 	call RemoveItemFromInventory
 	ld hl, CardKeyDoneText
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 INCLUDE "data/events/card_key_maps.asm"

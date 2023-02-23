@@ -27,7 +27,7 @@ LeechSeedEffect_:
 	jp PrintText
 .moveMissed
 	ld c, 50
-	rst DelayFramesRST
+	rst _DelayFrames
 	ld hl, EvadedAttackText
 	jp PrintText
 

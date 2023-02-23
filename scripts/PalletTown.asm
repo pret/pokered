@@ -28,7 +28,7 @@ PalletTownScript0:
 	ld a, PLAYER_DIR_DOWN
 	ld [wPlayerMovingDirection], a
 	ld a, SFX_STOP_ALL_MUSIC
-	rst PlaySoundRST
+	rst _PlaySound
 	ld a, BANK(Music_MeetProfOak)
 	ld c, a
 	ld a, MUSIC_MEET_PROF_OAK ; "oak appears" music
@@ -169,14 +169,14 @@ PalletTownText1:
 .next
 	ld hl, OakWalksUpText
 .done
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 OakAppearsText:
 	text_far _OakAppearsText
 	text_asm
 	ld c, 10
-	rst DelayFramesRST
+	rst _DelayFrames
 	xor a
 	ld [wEmotionBubbleSpriteIndex], a ; player's sprite
 	ld [wWhichEmotionBubble], a ; EXCLAMATION_BUBBLE

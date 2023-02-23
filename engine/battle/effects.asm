@@ -158,7 +158,7 @@ PoisonEffect:
 	ret nz
 .didntAffect
 	ld c, 50
-	rst DelayFramesRST
+	rst _DelayFrames
 	jp PrintDidntAffectText
 
 PoisonedText:
@@ -373,7 +373,7 @@ CheckDefrost:
 	ld [hl], a
 	ld hl, FireDefrostedText
 .common
-	rst PrintTextRST
+	rst _PrintText
 	farjp CheckDefrostMove
 
 
@@ -642,7 +642,7 @@ UpdateStatDone:
 	                             ; even to those not affected by the stat-up move (will be boosted further)
 	                             ; PureRGBnote: FIXED: badge boosts only applied to the specific stat being modified
 	ld hl, MonsStatsRoseText
-	rst PrintTextRST
+	rst _PrintText
 
 ; these always run on the opponent, and run regardless of what stat was modified
 ;;;;;;;;;;; PureRGBnote: FIXED: These ran on the opponent's stats erroneously
@@ -867,7 +867,7 @@ UpdateLoweredStatDone:
 	                              ; even to those not affected by the stat-up move (will be boosted further)
 	                             ; PureRGBnote: FIXED: badge boosts only applied to the specific stat being modified
 	ld hl, MonsStatsFellText
-	rst PrintTextRST
+	rst _PrintText
 
 ; These where probably added given that a stat-down move affecting speed or attack will override
 ; the stat penalties from paralysis and burn respectively.
@@ -1018,7 +1018,7 @@ SwitchAndTeleportEffect:
 	cp b ; is rand[0, playerLevel + enemyLevel] >= (enemyLevel / 4)?
 	jr nc, .playerMoveWasSuccessful ; if so, allow teleporting
 	ld c, 50
-	rst DelayFramesRST
+	rst _DelayFrames
 	ld a, [wPlayerMoveNum]
 	cp TELEPORT
 	jp nz, PrintDidntAffectText
@@ -1033,7 +1033,7 @@ SwitchAndTeleportEffect:
 	jr .playAnimAndPrintText
 .notWildBattle1
 	ld c, 50
-	rst DelayFramesRST
+	rst _DelayFrames
 	ld hl, IsUnaffectedText
 	ld a, [wPlayerMoveNum]
 	cp TELEPORT
@@ -1060,7 +1060,7 @@ SwitchAndTeleportEffect:
 	cp b
 	jr nc, .enemyMoveWasSuccessful
 	ld c, 50
-	rst DelayFramesRST
+	rst _DelayFrames
 	ld a, [wEnemyMoveNum]
 	cp TELEPORT
 	jp nz, PrintDidntAffectText
@@ -1075,7 +1075,7 @@ SwitchAndTeleportEffect:
 	jr .playAnimAndPrintText
 .notWildBattle2
 	ld c, 50
-	rst DelayFramesRST
+	rst _DelayFrames
 	ld hl, IsUnaffectedText
 	ld a, [wEnemyMoveNum]
 	cp TELEPORT
@@ -1089,7 +1089,7 @@ SwitchAndTeleportEffect:
 ;;;;;;;;;;
 	call PlayBattleAnimation
 	ld c, 20
-	rst DelayFramesRST
+	rst _DelayFrames
 	; pop af
 	ld hl, RanFromBattleText
 	;cp TELEPORT ; PureRGBnote: CHANGED: roar and whirlwind have different effects now so no need for this code
@@ -1389,7 +1389,7 @@ ConfusionEffectFailed:
 	cp CONFUSION_SIDE_EFFECT
 	ret z
 	ld c, 50
-	rst DelayFramesRST
+	rst _DelayFrames
 	jp ConditionalPrintButItFailed
 
 BurnEffect:
@@ -1436,7 +1436,7 @@ ClearHyperBeam:
 
 MimicEffect:
 	ld c, 50
-	rst DelayFramesRST
+	rst _DelayFrames
 	call MoveHitTest
 	ld a, [wMoveMissed]
 	and a
@@ -1503,7 +1503,7 @@ MimicEffect:
 	call GetMoveName
 	call PlayCurrentMoveAnimation
 	ld hl, MimicLearnedMoveText
-	rst PrintTextRST
+	rst _PrintText
 ;;;;;;;;;; PureRGBnote: CHANGED: Now immediately use the move
 	ld a, [hWhoseTurn]
 	and a

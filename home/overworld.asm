@@ -39,9 +39,9 @@ EnterMap::
 	ld [wJoyIgnore], a
 
 OverworldLoop::
-	rst DelayFrameRST
+	rst _DelayFrame
 OverworldLoopLessDelay::
-	;rst DelayFrameRST ; shinpokerednote: ADDED: 60fps mode enabled by commenting this (but needs additional tweaks to run correctly)
+	;rst _DelayFrame ; shinpokerednote: ADDED: 60fps mode enabled by commenting this (but needs additional tweaks to run correctly)
 	call LoadGBPal
 	ld a, [wd736]
 	bit 6, a ; jumping down a ledge?
@@ -393,7 +393,7 @@ BattleOccurred::
 	jr z, .allPokemonFainted
 .noFaintCheck
 	ld c, 10
-	rst DelayFramesRST
+	rst _DelayFrames
 	jp EnterMap
 .allPokemonFainted
 	ld a, $ff
@@ -642,7 +642,7 @@ PlayMapChangeSound::
 .didNotGoThroughDoor
 	ld a, SFX_GO_OUTSIDE
 .playSound
-	rst PlaySoundRST
+	rst _PlaySound
 	ld a, [wMapPalOffset]
 	and a
 	ret nz
@@ -701,7 +701,7 @@ ExtraWarpCheck::
 	ld hl, IsWarpTileInFrontOfPlayer
 .doBankswitch
 	ld b, BANK(IsWarpTileInFrontOfPlayer)
-	rst BankswitchRST
+	rst _Bankswitch
 	ret
 
 MapEntryAfterBattle::
@@ -732,7 +732,7 @@ StopMusic::
 	ld [wAudioFadeOutControl], a
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	rst PlaySoundRST
+	rst _PlaySound
 .wait
 	ld a, [wAudioFadeOutControl]
 	and a
@@ -1209,7 +1209,7 @@ CollisionCheckOnLand::
 	cp SFX_COLLISION ; check if collision sound is already playing
 	jr z, .setCarry
 	ld a, SFX_COLLISION
-	rst PlaySoundRST ; play collision sound (if it's not already playing)
+	rst _PlaySound ; play collision sound (if it's not already playing)
 .setCarry
 	scf
 	ret
@@ -1891,7 +1891,7 @@ CollisionCheckOnWater::
 	cp SFX_COLLISION ; check if collision sound is already playing
 	jr z, .setCarry
 	ld a, SFX_COLLISION
-	rst PlaySoundRST ; play collision sound (if it's not already playing)
+	rst _PlaySound ; play collision sound (if it's not already playing)
 .setCarry
 	scf
 	jr .done
@@ -2372,13 +2372,13 @@ ResetUsingStrengthOutOfBattleBit:
 ForceBikeOrSurf::
 	ld b, BANK(RedSprite)
 	ld hl, LoadPlayerSpriteGraphics ; in bank 0
-	rst BankswitchRST
+	rst _Bankswitch
 	jp PlayDefaultMusic ; update map/player state?
 
 CheckForUserInterruption::
 ; Return carry if Up+Select+B, Start or A are pressed in c frames.
 ; Used only in the intro and title screen.
-	rst DelayFrameRST
+	rst _DelayFrame
 
 	push bc
 	call JoypadLowSensitivity
@@ -2424,7 +2424,7 @@ LoadDestinationWarpPosition::
 	add hl, bc
 	ld bc, 4
 	ld de, wCurrentTileBlockMapViewPointer
-	rst CopyDataRST
+	rst _CopyData
 	pop af
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a

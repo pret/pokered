@@ -76,7 +76,7 @@ DisplaySpriteOptions2:
 	jr .loop
 .cancelMore
 	ld a, SFX_PRESS_AB
-	rst PlaySoundRST
+	rst _PlaySound
 	call ClearScreen
 	ld a, [wTopMenuItemX]
 	cp 7 ; is the cursor on "BACK">
@@ -86,7 +86,7 @@ DisplaySpriteOptions2:
 	jp DisplaySpriteOptions
 .exitMenu
 	ld a, SFX_PRESS_AB
-	rst PlaySoundRST
+	rst _PlaySound
 	ret
 .checkDirectionKeys
 	ld a, [wTopMenuItemY]

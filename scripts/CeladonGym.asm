@@ -112,11 +112,11 @@ ErikaText:
 	jr .done
 .afterBeat
 	ld hl, ErikaPostBattleAdviceText
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .beforeBeat
 	ld hl, ErikaPreBattleText
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]

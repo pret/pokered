@@ -4,7 +4,7 @@ ENDM
 
 MACRO predef
 	predef_id \1
-	rst PredefRST
+	rst _Predef
 ENDM
 
 MACRO predef_jump

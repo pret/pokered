@@ -77,7 +77,7 @@ DisplayListMenuIDLoop::
 	ld a, "▶"
 	ldcoord_a 5, 4 ; place menu cursor in front of first menu entry
 	ld c, 80
-	rst DelayFramesRST
+	rst _DelayFrames
 	xor a
 	ld [wCurrentMenuItem], a
 	hlcoord 5, 4

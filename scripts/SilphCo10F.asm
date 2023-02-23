@@ -92,7 +92,7 @@ SilphCo10Text3:
 	jr nz, .asm_cf85f
 	ld hl, SilphCo10Text_5a1d3
 .asm_cf85f
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 SilphCo10Text_5a1d3:

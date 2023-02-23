@@ -223,7 +223,7 @@ PokemonTower7Text3:
 PokemonTower7FujiText:
 	text_asm
 	ld hl, TowerRescueFujiText
-	rst PrintTextRST
+	rst _PrintText
 	SetEvent EVENT_RESCUED_MR_FUJI
 	SetEvent EVENT_RESCUED_MR_FUJI_2
 	ld a, HS_MR_FUJIS_HOUSE_MR_FUJI

@@ -1,6 +1,6 @@
 SubstituteEffect_:
 	ld c, 50
-	rst DelayFramesRST
+	rst _DelayFrames
 	ld hl, wBattleMonMaxHP
 	ld de, wPlayerSubstituteHP
 	ld bc, wPlayerBattleStatus2
@@ -52,9 +52,9 @@ SubstituteEffect_:
 	ld hl, AnimationSubstitute
 	ld b, BANK(AnimationSubstitute)
 .animationEnabled
-	rst BankswitchRST ; jump to routine depending on animation setting
+	rst _Bankswitch ; jump to routine depending on animation setting
 	ld hl, SubstituteText
-	rst PrintTextRST
+	rst _PrintText
 	jpfar DrawHUDsAndHPBars
 .alreadyHasSubstitute
 	ld hl, HasSubstituteText

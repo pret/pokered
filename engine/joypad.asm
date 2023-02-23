@@ -48,7 +48,7 @@ DiscardButtonPresses:
 	ret
 
 TrySoftReset:
-	rst DelayFrameRST
+	rst _DelayFrame
 
 	; deselect (redundant)
 	ld a, $30

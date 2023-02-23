@@ -2,7 +2,7 @@ PrintStrengthTxt:
 	ld hl, wd728
 	set 0, [hl]
 	ld hl, UsedStrengthText
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, CanMoveBouldersText
 	jp PrintText
 

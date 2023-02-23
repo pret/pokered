@@ -75,7 +75,7 @@ PlayDefaultMusicCommon::
 	ld a, b
 	ld [wLastMusicSoundID], a
 	ld [wNewSoundID], a
-	rst PlaySoundRST
+	rst _PlaySound
 	ret
 
 UpdateMusic6Times::

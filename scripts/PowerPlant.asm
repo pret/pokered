@@ -29,7 +29,7 @@ LoadVoltorbSprite::
 	push hl
 	call CopyVideoData
 	ld c, 20
-	rst DelayFramesRST
+	rst _DelayFrames
 	; make it move a bit by alternating frames
 .loop
 	pop hl

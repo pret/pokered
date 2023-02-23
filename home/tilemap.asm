@@ -32,7 +32,7 @@ SaveScreenTilesToBuffer1::
 SaveScreenTilesCommon:
 	hlcoord 0, 0
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	rst CopyDataRST
+	rst _CopyData
 	ret
 
 LoadScreenTilesFromBuffer2::
@@ -58,6 +58,6 @@ LoadScreenTilesCommon:
 	ldh [hAutoBGTransferEnabled], a
 	decoord 0, 0
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	rst CopyDataRST
+	rst _CopyData
 	ret
 	

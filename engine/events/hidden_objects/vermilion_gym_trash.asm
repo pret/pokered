@@ -135,7 +135,7 @@ VermilionGymTrashSuccessText1::
 	text_asm
 	call WaitForSoundToFinish
 	ld a, SFX_SWITCH
-	rst PlaySoundRST
+	rst _PlaySound
 	call WaitForSoundToFinish
 	rst TextScriptEnd
 
@@ -149,7 +149,7 @@ VermilionGymTrashSuccesPlaySfx:
 	text_asm
 	call WaitForSoundToFinish
 	ld a, SFX_SWITCH
-	rst PlaySoundRST
+	rst _PlaySound
 	call WaitForSoundToFinish
 	rst TextScriptEnd
 
@@ -158,7 +158,7 @@ VermilionGymTrashSuccessText3::
 	text_asm
 	call WaitForSoundToFinish
 	ld a, SFX_GO_INSIDE
-	rst PlaySoundRST
+	rst _PlaySound
 	call WaitForSoundToFinish
 	rst TextScriptEnd
 
@@ -167,6 +167,6 @@ VermilionGymTrashFailText::
 	text_asm
 	call WaitForSoundToFinish
 	ld a, SFX_DENIED
-	rst PlaySoundRST
+	rst _PlaySound
 	call WaitForSoundToFinish
 	rst TextScriptEnd

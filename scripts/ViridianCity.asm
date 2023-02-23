@@ -155,7 +155,7 @@ ViridianCityText2:
 	jr nz, .done
 	ld hl, ViridianCityText_19122
 .done
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 ViridianCityText_19122:
@@ -169,17 +169,17 @@ ViridianCityText_19127:
 ViridianCityText3:
 	text_asm
 	ld hl, ViridianCityText_1914d
-	rst PrintTextRST
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .no
 	ld hl, ViridianCityText_19157
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .no
 	ld hl, ViridianCityText_19152
-	rst PrintTextRST
+	rst _PrintText
 .done
 	rst TextScriptEnd
 
@@ -200,11 +200,11 @@ ViridianCityText4:
 	CheckEvent EVENT_GOT_POKEDEX
 	jr nz, .gotPokedex
 	ld hl, ViridianCityText_19175
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .gotPokedex
 	ld hl, ViridianCityText_1917a
-	rst PrintTextRST
+	rst _PrintText
 .done
 	rst TextScriptEnd
 
@@ -219,7 +219,7 @@ ViridianCityText_1917a:
 ViridianCityText5:
 	text_asm
 	ld hl, ViridianCityText_19191
-	rst PrintTextRST
+	rst _PrintText
 	call ViridianCityScript_190cf
 	ld a, $3
 	ld [wViridianCityCurScript], a
@@ -234,21 +234,21 @@ ViridianCityText6:
 	CheckEvent EVENT_GOT_TM42
 	jr nz, .got_item
 	ld hl, ViridianCityText_191ca
-	rst PrintTextRST
+	rst _PrintText
 	lb bc, TM_VIRIDIAN_CITY_SLEEPING_GUY, 1
 	call GiveItem
 	jr nc, .bag_full
 	ld hl, ReceivedTM42Text
-	rst PrintTextRST
+	rst _PrintText
 	SetEvent EVENT_GOT_TM42
 	jr .done
 .bag_full
 	ld hl, TM42NoRoomText
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .got_item
 	ld hl, TM42Explanation
-	rst PrintTextRST
+	rst _PrintText
 .done
 	rst TextScriptEnd
 
@@ -272,21 +272,21 @@ TM42NoRoomText:
 ViridianCityText7:
 	text_asm
 	ld hl, ViridianCityText_1920a
-	rst PrintTextRST
+	rst _PrintText
 	ld c, 2
-	rst DelayFramesRST
+	rst _DelayFrames
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
 	jr z, .refused
 	ld hl, ViridianCityText_1920f
-	rst PrintTextRST
+	rst _PrintText
 	ld a, $1
 	ld [wViridianCityCurScript], a
 	jr .done
 .refused
 	ld hl, ViridianCityText_19214
-	rst PrintTextRST
+	rst _PrintText
 .done
 	rst TextScriptEnd
 

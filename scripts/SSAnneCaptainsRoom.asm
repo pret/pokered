@@ -19,25 +19,25 @@ SSAnne7Text1:
 	CheckEvent EVENT_GOT_HM01
 	jr nz, .got_item
 	ld hl, SSAnne7RubText
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, ReceivingHM01Text
-	rst PrintTextRST
+	rst _PrintText
 	lb bc, HM_CUT, 1
 	call GiveItem
 	jr nc, .bag_full
 	ld hl, ReceivedHM01Text
-	rst PrintTextRST
+	rst _PrintText
 	SetEvent EVENT_GOT_HM01
 	jr .done
 .bag_full
 	ld hl, HM01NoRoomText
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, wd72d
 	set 5, [hl]
 	jr .done
 .got_item
 	ld hl, SSAnne7Text_61932
-	rst PrintTextRST
+	rst _PrintText
 .done
 	rst TextScriptEnd
 
@@ -50,13 +50,13 @@ SSAnne7RubText:
 	jr nz, .asm_61908
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	rst PlaySoundRST
+	rst _PlaySound
 	ld a, BANK(Music_PkmnHealed)
 	ld [wAudioROMBank], a
 .asm_61908
 	ld a, MUSIC_PKMN_HEALED
 	ld [wNewSoundID], a
-	rst PlaySoundRST
+	rst _PlaySound
 .asm_61910
 	ld a, [wChannelSoundIDs]
 	cp MUSIC_PKMN_HEALED

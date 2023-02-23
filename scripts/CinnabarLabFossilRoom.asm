@@ -52,7 +52,7 @@ Lab4Text1:
 	CheckEvent EVENT_GAVE_FOSSIL_TO_LAB
 	jr nz, .asm_75d96
 	ld hl, Lab4Text_75dc6
-	rst PrintTextRST
+	rst _PrintText
 	call Lab4Script_GetFossilsInBag
 	ld a, [wFilteredBagItemsCount]
 	and a
@@ -61,19 +61,19 @@ Lab4Text1:
 	jr .asm_75d93
 .asm_75d8d
 	ld hl, Lab4Text_75dcb
-	rst PrintTextRST
+	rst _PrintText
 .asm_75d93
 	rst TextScriptEnd
 .asm_75d96
 	CheckEventAfterBranchReuseA EVENT_LAB_STILL_REVIVING_FOSSIL, EVENT_GAVE_FOSSIL_TO_LAB
 	jr z, .asm_75da2
 	ld hl, Lab4Text_75dd0
-	rst PrintTextRST
+	rst _PrintText
 	jr .asm_75d93
 .asm_75da2
 	call LoadFossilItemAndMonNameBank1D
 	ld hl, Lab4Text_75dd5
-	rst PrintTextRST
+	rst _PrintText
 	SetEvent EVENT_LAB_HANDING_OVER_FOSSIL_MON
 	ld a, [wFossilMon]
 	ld b, a
@@ -121,14 +121,14 @@ Lab4Text3:
 	jr nz, .altPalettesEnabled
 	; we don't have alt palettes turned on, so no need to have his whole big script
 	ld hl, LabColorChangerResearchingColors
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 .altPalettesEnabled
 	CheckEvent EVENT_MET_LAB_COLOR_CHANGER
 	jr nz, .skipToColorChangeDialog
 	SetEvent EVENT_MET_LAB_COLOR_CHANGER
 	ld hl, LabColorChangerGreeting
-	rst PrintTextRST
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -138,7 +138,7 @@ Lab4Text3:
 .noDeutsch
 	ld hl, LabColorChangerGreetingNo
 .doneGreeting
-	rst PrintTextRST
+	rst _PrintText
 .skipToColorChangeDialog
 	CheckEvent EVENT_BEAT_PROF_OAK_ONCE
 	call nz, VasIsDas	
@@ -149,13 +149,13 @@ Lab4Text3:
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld hl, LabColorChangerStart
-	rst PrintTextRST
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
 	jp nz, .noColorChange
 	ld hl, LabColorChangerNext
-	rst PrintTextRST
+	rst _PrintText
 .showPartySelection
 	call SaveScreenTilesToBuffer2
 	xor a ; NORMAL_PARTY_MENU
@@ -169,24 +169,24 @@ Lab4Text3:
 	call LoadMonData
 	callfar InGameTrade_RestoreScreen
 	ld hl, LabColorChangerPics
-	rst PrintTextRST
+	rst _PrintText
 	call SaveScreenTilesToBuffer2
 	call ShowBeforeAfterImages
 	callfar InGameTrade_RestoreScreen
 	ld hl, LabColorChangerPicsShown
-	rst PrintTextRST
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .showPartySelection
 	ld hl, LabColorChangerStartColorChange
-	rst PrintTextRST
+	rst _PrintText
 	call DoColorSwap
 	ld hl, LabColorChangerColorChangeDone
-	rst PrintTextRST
+	rst _PrintText
 .noColorChange
 	ld hl, LabColorChangerGoodbye
-	rst PrintTextRST
+	rst _PrintText
 .done
 	xor a
 	ld [wUnusedC000], a
@@ -196,14 +196,14 @@ Lab4Text3:
 	jr .noColorChange
 .noChangesLeft
 	ld hl, LabColorChangerNoChangesLeft
-	rst PrintTextRST
+	rst _PrintText
 	jr .noColorChange
 
 VasIsDas:
 	CheckEvent EVENT_LAB_COLOR_CHANGER_FULL_CHANGES
 	ret nz
 	ld hl, LabColorChangerVasIsDas
-	rst PrintTextRST
+	rst _PrintText
 	SetEvent EVENT_LAB_COLOR_CHANGER_FULL_CHANGES
 	ret
 
@@ -312,33 +312,33 @@ DoColorSwap:
 
 FiddlingAroundSounds:
 	ld a, SFX_STOP_ALL_MUSIC
-	rst PlaySoundRST
+	rst _PlaySound
 	ld a, SFX_TRADE_MACHINE
-	rst PlaySoundRST
+	rst _PlaySound
 	ld c, 40
-	rst DelayFramesRST
+	rst _DelayFrames
 	ld a, SFX_NOISE_INSTRUMENT05
-	rst PlaySoundRST
+	rst _PlaySound
 	ld c, 12
-	rst DelayFramesRST
+	rst _DelayFrames
 	ld a, SFX_NOISE_INSTRUMENT05
-	rst PlaySoundRST
+	rst _PlaySound
 	ld c, 12
-	rst DelayFramesRST
+	rst _DelayFrames
 	ld a, SFX_NOISE_INSTRUMENT05
-	rst PlaySoundRST
+	rst _PlaySound
 	ld c, 40
-	rst DelayFramesRST
+	rst _DelayFrames
 	ld b, 20
 .loop
 	ld a, SFX_TURN_OFF_PC
-	rst PlaySoundRST
+	rst _PlaySound
 	ld c, 2
-	rst DelayFramesRST
+	rst _DelayFrames
 	dec b
 	jr nz, .loop
 	ld c, 60
-	rst DelayFramesRST
+	rst _DelayFrames
 	ret
 
 LabColorChangerGreeting:

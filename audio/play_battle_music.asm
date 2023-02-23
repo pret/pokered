@@ -3,7 +3,7 @@ PlayBattleMusic::
 	ld [wAudioFadeOutControl], a
 	ld [wLowHealthAlarm], a
 	call StopAllMusic ; shinpokerednote: MOVED: a common function to do what the 3 lines that used to be here did was created
-	rst DelayFrameRST
+	rst _DelayFrame
 	ld c, BANK(Music_GymLeaderBattle)
 	ld a, [wGymLeaderNo]
 	and a

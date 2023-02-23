@@ -2,7 +2,7 @@ NameRatersHouse_Script:
 	jp EnableAutoTextBoxDrawing
 
 NameRaterScript_1da15:
-	rst PrintTextRST
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -47,7 +47,7 @@ NameRaterText1:
 	call NameRaterScript_1da15
 	jr nz, .asm_1daae
 	ld hl, NameRaterText_1dab8
-	rst PrintTextRST
+	rst _PrintText
 	xor a
 	ld [wPartyMenuTypeOrMessageID], a
 	ld [wUpdateSpritesEnabled], a
@@ -67,12 +67,12 @@ NameRaterText1:
 	call NameRaterScript_1da15
 	jr nz, .asm_1daae
 	ld hl, NameRaterText_1dac2
-	rst PrintTextRST
+	rst _PrintText
 	farcall DisplayNameRaterScreen
 	jr c, .asm_1daae
 	ld hl, NameRaterText_1dac7
 .asm_1daa8
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 .asm_1daae
 	ld hl, NameRaterText_1dacc

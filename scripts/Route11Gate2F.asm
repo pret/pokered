@@ -29,7 +29,7 @@ Route11GateUpstairsText2:
 	ld l, e
 	ld de, wOaksAideRewardItemName
 	ld bc, ITEM_NAME_LENGTH
-	rst CopyDataRST
+	rst _CopyData
 	predef OaksAideScript
 	ldh a, [hOaksAideResult]
 	dec a ; OAKS_AIDE_GOT_ITEM?
@@ -37,7 +37,7 @@ Route11GateUpstairsText2:
 	SetEvent EVENT_GOT_ITEMFINDER
 .got_item
 	ld hl, Route11GateUpstairsText_494a3
-	rst PrintTextRST
+	rst _PrintText
 .no_item
 	jr Route11GateUpstairsScriptEnd
 
@@ -55,7 +55,7 @@ Route11GateUpstairsText3:
 	jr z, .print
 	ld hl, BinocularsNoSnorlaxText
 .print
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 BinocularsSnorlaxText:

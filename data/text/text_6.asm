@@ -84,15 +84,15 @@ _ApexChipPutOnPokeballText::
 	line "Poké Ball.@"
 	text_asm
 	ld a, SFX_SWITCH
-	rst PlaySoundRST
+	rst _PlaySound
 	call WaitForSoundToFinish
 	ld c, 50
-	rst DelayFramesRST
+	rst _DelayFrames
 	ld a, SFX_TRADE_MACHINE
-	rst PlaySoundRST
+	rst _PlaySound
 	call WaitForSoundToFinish
 	ld c, 50
-	rst DelayFramesRST
+	rst _DelayFrames
 	rst TextScriptEnd
 
 _ApexChipDVsMaxedText::

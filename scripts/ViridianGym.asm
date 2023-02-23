@@ -43,7 +43,7 @@ ViridianGymScript0:
 	ld hl, wd736
 	set 7, [hl]
 	ld a, SFX_ARROW_TILES
-	rst PlaySoundRST
+	rst _PlaySound
 	ld a, $ff
 	ld [wJoyIgnore], a
 	ld a, $4
@@ -215,7 +215,7 @@ GiovanniText:
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, GiovanniPostBattleAdviceText
-	rst PrintTextRST
+	rst _PrintText
 	call GBFadeOutToBlack
 	ld a, HS_VIRIDIAN_GYM_GIOVANNI
 	ld [wMissableObjectIndex], a
@@ -226,7 +226,7 @@ GiovanniText:
 	jr .done
 .beforeBeat
 	ld hl, GiovanniPreBattleText
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
@@ -423,38 +423,38 @@ ViridianGymGuideText: ; PureRGBnote: ADDED: gym guide gives you apex chips after
 	CheckEvent EVENT_BEAT_VIRIDIAN_GYM_GIOVANNI
 	jr nz, .afterBeat
 	ld hl, ViridianGymGuidePreBattleText
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .afterBeat
 	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS ; have to hear about apex chips to receive them after that
 	jr z, .donePrompt
 	ld hl, ViridianGymGuidePostBattleTextPrompt
-	rst PrintTextRST
+	rst _PrintText
 	CheckEvent EVENT_GOT_VIRIDIAN_APEX_CHIPS
 	jr nz, .alreadyApexChips
 .giveApexChips
 	ld hl, GymGuideMoreApexChipText8
-	rst PrintTextRST
+	rst _PrintText
 	lb bc, APEX_CHIP, 2
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, ReceivedApexChipsText8
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, ViridianGymGuideApexChipGroundText
-	rst PrintTextRST
+	rst _PrintText
 	SetEvent EVENT_GOT_VIRIDIAN_APEX_CHIPS
 .alreadyApexChips
 	ld hl, AlreadyReceivedApexChipsText8
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .BagFull
 	ld hl, ApexNoRoomText8
-	rst PrintTextRST
+	rst _PrintText
 .done
 	rst TextScriptEnd
 .donePrompt
 	ld hl, ViridianGymGuidePostBattleText
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 
 ReceivedApexChipsText8:

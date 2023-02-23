@@ -13,21 +13,21 @@ Lab3Text1:
 	CheckEvent EVENT_GOT_TM35
 	jr nz, .got_item
 	ld hl, TM35PreReceiveText
-	rst PrintTextRST
+	rst _PrintText
 	lb bc, TM_CINNABAR_LAB_CENTER_ROOM, 1
 	call GiveItem
 	jr nc, .bag_full
 	ld hl, ReceivedTM35Text
-	rst PrintTextRST
+	rst _PrintText
 	SetEvent EVENT_GOT_TM35
 	jr .done
 .bag_full
 	ld hl, TM35NoRoomText
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .got_item
 	ld hl, TM35ExplanationText
-	rst PrintTextRST
+	rst _PrintText
 .done
 	rst TextScriptEnd
 

@@ -22,7 +22,7 @@ AnimCut:
 	xor $64
 	ldh [rOBP1], a
 	call UpdateGBCPal_OBP1 ; shinpokerednote: gbcnote: gbc color code from yellow 
-	rst DelayFrameRST
+	rst _DelayFrame
 	pop bc
 	dec c
 	jr nz, .cutTreeLoop
@@ -73,7 +73,7 @@ AnimCutGrass_UpdateOAMEntries:
 	xor $64
 	ldh [rOBP1], a
 	call UpdateGBCPal_OBP1
-	rst DelayFrameRST
+	rst _DelayFrame
 	pop bc
 	dec c
 	jr nz, AnimCutGrass_UpdateOAMEntries
@@ -83,11 +83,11 @@ AnimCutGrass_SwapOAMEntries:
 	ld hl, wShadowOAMSprite36
 	ld de, wBuffer
 	ld bc, $8
-	rst CopyDataRST
+	rst _CopyData
 	ld hl, wShadowOAMSprite38
 	ld de, wShadowOAMSprite36
 	ld bc, $8
-	rst CopyDataRST
+	rst _CopyData
 	ld hl, wBuffer
 	ld de, wShadowOAMSprite38
 	ld bc, $8

@@ -151,7 +151,7 @@ SilphCo7Script0:
 	ld [wPlayerMovingDirection], a
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	rst PlaySoundRST
+	rst _PlaySound
 	ld c, BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
@@ -240,7 +240,7 @@ SilphCo7Script4:
 	call DisplayTextID
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	rst PlaySoundRST
+	rst _PlaySound
 	farcall Music_RivalAlternateStart
 	ld de, MovementData_51d1d
 	ld a, [wcf0d]
@@ -327,11 +327,11 @@ SilphCo7Text1:
 	jr nz, .savedsilph
 .noItemToGive	
 	ld hl, .LaprasGuyText
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .givelapras
 	ld hl, .MeetLaprasGuyText
-	rst PrintTextRST
+	rst _PrintText
 	lb bc, LAPRAS, 40 ; PureRGBnote: CHANGED: lapras level increased to keep up with party level
 	call GivePokemon
 	jr nc, .done
@@ -340,13 +340,13 @@ SilphCo7Text1:
 	call z, WaitForTextScrollButtonPress
 	call EnableAutoTextBoxDrawing
 	ld hl, .HeresYourLaprasText
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, wd72e
 	set 0, [hl]
 	jr .done
 .savedsilph
 	ld hl, .LaprasGuySavedText
-	rst PrintTextRST
+	rst _PrintText
 .done
 	rst TextScriptEnd
 .gotLaprasAlready
@@ -356,21 +356,21 @@ SilphCo7Text1:
 	bit 0, a ; got his item already?
 	jr nz, .noItemToGive
 	ld hl, .LaprasGuyAlreadyText
-	rst PrintTextRST
+	rst _PrintText
 	; give ra
 	lb bc, ITEM_GOT_LAPRAS_SILPH_CO_7F_REWARD_NEW, 1
 	call GiveItem
 	jr nc, .noRoom
 	ld hl, .LaprasGuyReceivedItemText
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, .LaprasGuyGoodLuckText
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, wd72e
 	set 0, [hl]
 	jr .done
 .noRoom
 	ld hl, .LaprasGuyNoBagRoomText
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 
 
@@ -413,11 +413,11 @@ SilphCo7Text2:
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .savedsilph
 	ld hl, .rockettext
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .savedsilph
 	ld hl, .savedtext
-	rst PrintTextRST
+	rst _PrintText
 .done
 	rst TextScriptEnd
 
@@ -434,11 +434,11 @@ SilphCo7Text3:
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .savedsilph
 	ld hl, .rockettext
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .savedsilph
 	ld hl, .savedtext
-	rst PrintTextRST
+	rst _PrintText
 .done
 	rst TextScriptEnd
 
@@ -455,11 +455,11 @@ SilphCo7Text4:
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .savedsilph
 	ld hl, .rockettext
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .savedsilph
 	ld hl, .savedtext
-	rst PrintTextRST
+	rst _PrintText
 .done
 	rst TextScriptEnd
 
@@ -546,7 +546,7 @@ SilphCo7AfterBattleText4:
 SilphCo7Text9:
 	text_asm
 	ld hl, SilphCo7Text_51ebe
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 SilphCo7Text_51ebe:

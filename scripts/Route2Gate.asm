@@ -18,7 +18,7 @@ Route2GateText1:
 	ld hl, wcd6d
 	ld de, wOaksAideRewardItemName
 	ld bc, ITEM_NAME_LENGTH
-	rst CopyDataRST
+	rst _CopyData
 	predef OaksAideScript
 	ldh a, [hOaksAideResult]
 	cp OAKS_AIDE_GOT_ITEM
@@ -26,7 +26,7 @@ Route2GateText1:
 	SetEvent EVENT_GOT_HM05
 .got_item
 	ld hl, Route2GateText_5d616
-	rst PrintTextRST
+	rst _PrintText
 .no_item
 	rst TextScriptEnd
 

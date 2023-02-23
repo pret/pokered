@@ -42,7 +42,7 @@ SafariZoneGameOver:
 	xor a
 	ld [wAudioFadeOutControl], a
 	dec a ; SFX_STOP_ALL_MUSIC
-	rst PlaySoundRST
+	rst _PlaySound
 	ld c, BANK(SFX_Safari_Zone_PA)
 	ld a, SFX_SAFARI_ZONE_PA
 	call PlayMusic
@@ -101,10 +101,10 @@ SafariGameOverText:
 	and a
 	jr z, .noMoreSafariBalls
 	ld hl, TimesUpText
-	rst PrintTextRST
+	rst _PrintText
 .noMoreSafariBalls
 	ld hl, GameOverText
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 SafariRangerHuntSuccessText::

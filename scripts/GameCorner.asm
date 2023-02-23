@@ -139,7 +139,7 @@ CeladonGameCornerText2:
 	text_asm
 	call CeladonGameCornerScript_48f1e
 	ld hl, CeladonGameCornerText_48d22
-	rst PrintTextRST
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -181,9 +181,9 @@ CeladonGameCornerText2:
 	call CeladonGameCornerScript_48f1e
 	ld hl, CeladonGameCornerText_48d27
 ;;;;;;;;;; PureRGBnote: CHANGED: the clerk will allow you to repeatedly buy 500 coins without long dialog repeat
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, CeladonGameCornerText_another500
-	rst PrintTextRST
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -200,7 +200,7 @@ CeladonGameCornerText2:
 .asm_48d19
 	ld hl, CeladonGameCornerText_48d3b
 .asm_48d1c
-	rst PrintTextRST
+	rst _PrintText
 .done
 	rst TextScriptEnd
 
@@ -249,7 +249,7 @@ CeladonGameCornerText5:
 	CheckEvent EVENT_GOT_10_COINS
 	jr nz, .asm_48d89
 	ld hl, CeladonGameCornerText_48d9c
-	rst PrintTextRST
+	rst _PrintText
 	CheckEvent EVENT_GOT_COIN_CASE ; PureRGBnote: CHANGED: coin case is an event instead of an item
 	jr z, .asm_48d93
 	call Has9990Coins
@@ -277,7 +277,7 @@ CeladonGameCornerText5:
 .asm_48d93
 	ld hl, CeladonGameCornerText_48f19
 .asm_48d96
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 CeladonGameCornerText_48d9c:
@@ -306,33 +306,33 @@ CeladonGameCornerText7: ; PureRGBnote: ADDED: gym guide gives you apex chips aft
 	CheckEvent EVENT_BEAT_ERIKA
 	jr nz, .afterBattle
 	ld hl, CeladonGameCornerText_48dca
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .afterBattle
 	ld hl, CeladonGameCornerText_gymguide
-	rst PrintTextRST
+	rst _PrintText
 	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS ; have to hear about apex chips to receive them after that
 	jr z, .gameCornerPrizes
 	CheckEvent EVENT_GOT_CELADON_APEX_CHIPS
 	jr nz, .gameCornerPrizes
 .giveApexChips
 	ld hl, GymGuideMoreApexChipText4
-	rst PrintTextRST
+	rst _PrintText
 	lb bc, APEX_CHIP, 2
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, ReceivedApexChipsText4
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, CeladonGameCornerGymGuideApexChipGrassText
-	rst PrintTextRST
+	rst _PrintText
 	SetEvent EVENT_GOT_CELADON_APEX_CHIPS
 .gameCornerPrizes
 	ld hl, CeladonGameCornerText_48dcf
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .BagFull
 	ld hl, ApexNoRoomText4
-	rst PrintTextRST
+	rst _PrintText
 .done
 	rst TextScriptEnd
 
@@ -374,7 +374,7 @@ CeladonGameCornerText9:
 	CheckEvent EVENT_GOT_20_COINS_2
 	jr nz, .asm_48e13
 	ld hl, CeladonGameCornerText_48e26
-	rst PrintTextRST
+	rst _PrintText
 	CheckEvent EVENT_GOT_COIN_CASE ; PureRGBnote: CHANGED: coin case is an event instead of an item
 	jr z, .asm_48e1d
 	call Has9990Coins
@@ -400,7 +400,7 @@ CeladonGameCornerText9:
 .asm_48e1d
 	ld hl, CeladonGameCornerText_48f19
 .asm_48e20
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 CeladonGameCornerText_48e26:
@@ -425,7 +425,7 @@ CeladonGameCornerText10:
 	CheckEvent EVENT_GOT_20_COINS
 	jr nz, .asm_48e75
 	ld hl, CeladonGameCornerText_48e88
-	rst PrintTextRST
+	rst _PrintText
 	CheckEvent EVENT_GOT_COIN_CASE ; PureRGBnote: CHANGED: coin case is an event instead of an item
 	jr z, .asm_48e7f
 	call Has9990Coins
@@ -451,7 +451,7 @@ CeladonGameCornerText10:
 .asm_48e7f
 	ld hl, CeladonGameCornerText_48f19
 .asm_48e82
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 CeladonGameCornerText_48e88:
@@ -474,7 +474,7 @@ CeladonGameCornerText_48e98:
 CeladonGameCornerText11:
 	text_asm
 	ld hl, CeladonGameCornerText_48ece
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
@@ -510,10 +510,10 @@ CeladonGameCornerText12:
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, CeladonGameCornerText_48f09
-	rst PrintTextRST
+	rst _PrintText
 	call WaitForSoundToFinish
 	ld a, SFX_GO_INSIDE
-	rst PlaySoundRST
+	rst _PlaySound
 	call WaitForSoundToFinish
 	SetEvent EVENT_FOUND_ROCKET_HIDEOUT
 	ld a, $43
@@ -526,7 +526,7 @@ CeladonGameCornerText_48f09:
 	text_far _CeladonGameCornerText_48f09
 	text_asm
 	ld a, SFX_SWITCH
-	rst PlaySoundRST
+	rst _PlaySound
 	call WaitForSoundToFinish
 	rst TextScriptEnd
 

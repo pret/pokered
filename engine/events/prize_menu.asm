@@ -7,7 +7,7 @@ CeladonPrizeMenu::
 	ld hl, wd730
 	set 6, [hl] ; disable letter-printing delay
 	ld hl, ExchangeCoinsForPrizesTextPtr
-	rst PrintTextRST
+	rst _PrintText
 ; the following are the menu settings
 	xor a
 	ld [wCurrentMenuItem], a
@@ -28,7 +28,7 @@ CeladonPrizeMenu::
 	call GetPrizeMenuId
 	call UpdateSprites
 	ld hl, WhichPrizeTextPtr
-	rst PrintTextRST
+	rst _PrintText
 	call HandleMenuInput ; menu choice handler
 	bit BIT_B_BUTTON, a
 	jr nz, .noChoice
@@ -85,7 +85,7 @@ GetPrizeMenuId:
 	ld l, a
 	ld de, wPrize1Price
 	ld bc, 6
-	rst CopyDataRST
+	rst _CopyData
 	ld a, [wWhichPrizeWindow]
 	cp 2        ;is TM_menu?
 	jr nz, .putMonName
@@ -201,7 +201,7 @@ HandlePrizeChoice:
 	call GetMonName
 .givePrize
 	ld hl, SoYouWantPrizeTextPtr
-	rst PrintTextRST
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem] ; yes/no answer (Y=0, N=1)
 	and a

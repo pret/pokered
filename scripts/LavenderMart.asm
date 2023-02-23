@@ -10,15 +10,15 @@ LavenderMart_TextPointers:
 LavenderMartTMKid: ; PureRGBnote: ADDED: new NPC who will sell TMs
 	text_asm
 	ld hl, TMKidGreet3
-	rst PrintTextRST
+	rst _PrintText
 	CheckEvent EVENT_MET_LAVENDER_TM_KID
 	jr z, .intro
 	ld hl, TMKidQuick3
-	rst PrintTextRST
+	rst _PrintText
 	jr .shop
 .intro
 	ld hl, LavenderMartTMKidFlavor
-	rst PrintTextRST
+	rst _PrintText
 	SetEvent EVENT_MET_LAVENDER_TM_KID
 .shop
 	ld hl, LavenderTMKidShop
@@ -46,11 +46,11 @@ LavenderMartText3:
 	CheckEvent EVENT_RESCUED_MR_FUJI
 	jr nz, .Nugget
 	ld hl, .ReviveText
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .Nugget
 	ld hl, .NuggetText
-	rst PrintTextRST
+	rst _PrintText
 .done
 	rst TextScriptEnd
 

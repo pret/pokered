@@ -51,7 +51,7 @@ HandleLedges::
 	ld [wSimulatedJoypadStatesIndex], a
 	call LoadHoppingShadowOAM
 	ld a, SFX_LEDGE
-	rst PlaySoundRST
+	rst _PlaySound
 	ret
 
 INCLUDE "data/tilesets/ledge_tiles.asm"

@@ -9,21 +9,21 @@ SaffronHouse2Text1:
 	CheckEvent EVENT_GOT_TM29
 	jr nz, .got_item
 	ld hl, TM29PreReceiveText
-	rst PrintTextRST
+	rst _PrintText
 	lb bc, TM_SAFFRON_CITY_MR_PSYCHIC, 1
 	call GiveItem
 	jr nc, .bag_full
 	ld hl, ReceivedTM29Text
-	rst PrintTextRST
+	rst _PrintText
 	SetEvent EVENT_GOT_TM29
 	jr .done
 .bag_full
 	ld hl, TM29NoRoomText
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .got_item
 	ld hl, TM29ExplanationText
-	rst PrintTextRST
+	rst _PrintText
 .done
 	rst TextScriptEnd
 

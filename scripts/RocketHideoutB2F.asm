@@ -26,7 +26,7 @@ RocketHideout2Script0:
 	set 7, [hl]
 	call StartSimulatingJoypadStates
 	ld a, SFX_ARROW_TILES
-	rst PlaySoundRST
+	rst _PlaySound
 	ld a, $ff
 	ld [wJoyIgnore], a
 	ld a, $3

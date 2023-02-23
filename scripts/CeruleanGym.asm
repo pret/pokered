@@ -98,11 +98,11 @@ MistyText:
 	jr .done
 .afterBeat
 	ld hl, TM11ExplanationText
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .beforeBeat
 	ld hl, MistyPreBattleText
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
@@ -190,38 +190,38 @@ CeruleanGymGuideText: ; PureRGBnote: ADDED: gym guide gives you apex chips after
 	CheckEvent EVENT_BEAT_MISTY
 	jr nz, .afterBeat
 	ld hl, CeruleanGymGuidePreBattleText
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .afterBeat
 	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS ; have to hear about apex chips to receive them after that
 	jr z, .donePost
 	ld hl, CeruleanGymGuidePostBattleTextPrompt
-	rst PrintTextRST
+	rst _PrintText
 	CheckEvent EVENT_GOT_CERULEAN_APEX_CHIPS
 	jr nz, .alreadyApexChips
 .giveApexChips
 	ld hl, GymGuideMoreApexChipText2
-	rst PrintTextRST
+	rst _PrintText
 	lb bc, APEX_CHIP, 2
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, ReceivedApexChipsText2
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, CeruleanGymGuideApexChipWaterText
-	rst PrintTextRST
+	rst _PrintText
 	SetEvent EVENT_GOT_CERULEAN_APEX_CHIPS
 .alreadyApexChips
 	ld hl, AlreadyReceivedApexChipsText2
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .BagFull
 	ld hl, ApexNoRoomText2
-	rst PrintTextRST
+	rst _PrintText
 .done
 	rst TextScriptEnd
 .donePost
 	ld hl, CeruleanGymGuidePostBattleTextDone
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 
 

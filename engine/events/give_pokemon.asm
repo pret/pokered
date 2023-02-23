@@ -34,13 +34,13 @@ _GivePokemon::
 	ld [hli], a
 	ld [hl], "@"
 	ld hl, SentToBoxText
-	rst PrintTextRST
+	rst _PrintText
 	call .clearAltPaletteData 
 	scf
 	ret
 .boxFull
 	ld hl, BoxIsFullText
-	rst PrintTextRST
+	rst _PrintText
 	push af
 	call .clearAltPaletteData
 	pop af

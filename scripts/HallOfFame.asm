@@ -50,7 +50,7 @@ HallofFameRoomScript2:
 	ld b, 5
 .delayLoop
 	ld c, 600 / 5
-	rst DelayFramesRST
+	rst _DelayFrames
 	dec b
 	jr nz, .delayLoop
 	call WaitForTextScrollButtonPress

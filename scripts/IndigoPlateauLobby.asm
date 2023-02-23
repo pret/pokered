@@ -33,9 +33,9 @@ IndigoPlateauGymGuideText: ; PureRGBnote: ADDED: gym guide sells you apex chips 
 	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS ; have to hear about apex chips to receive them after that
 	jr z, .donePrompt
 	ld hl, IndigoPlateauLobbyText2getPrompt
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, IndigoPlateauApexChipsAfterChamp
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .afterChamp
 	CheckEvent EVENT_TALKED_GYM_GUIDE_AFTER_CHAMP
@@ -44,15 +44,15 @@ IndigoPlateauGymGuideText: ; PureRGBnote: ADDED: gym guide sells you apex chips 
 	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS ; have to hear about apex chips to receive them after that
 	jr z, .donePrompt2
 	ld hl, IndigoPlateauGymGuideChampGreetingPrompt
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, IndigoPlateauGymGuideChampApexChips
-	rst PrintTextRST
+	rst _PrintText
 	jr .sellChips
 .quickGreet
 	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS ; have to hear about apex chips to receive them after that
 	jr z, .donePrompt3
 	ld hl, IndigoPlateauGymGuideChampAfterGreetPrompt
-	rst PrintTextRST
+	rst _PrintText
 .sellChips
 	ld hl, IndigoGymGuideShop
 	call DisplayPokemartNoGreeting
@@ -60,15 +60,15 @@ IndigoPlateauGymGuideText: ; PureRGBnote: ADDED: gym guide sells you apex chips 
 	rst TextScriptEnd
 .donePrompt
 	ld hl, IndigoPlateauLobbyText2get
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .donePrompt2
 	ld hl, IndigoPlateauGymGuideChampGreeting
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .donePrompt3
 	ld hl, IndigoPlateauGymGuideChampAfterGreet
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 
 IndigoGymGuideSonText:  ; PureRGBnote: ADDED: new NPC who will sell TMs - sells all 50 TMs after becoming champ.
@@ -76,7 +76,7 @@ IndigoGymGuideSonText:  ; PureRGBnote: ADDED: new NPC who will sell TMs - sells 
 	CheckEvent EVENT_BECAME_CHAMP
 	jr nz, .afterChamp
 	ld hl, IndigoPlateauGymGuideSonText
-	rst PrintTextRST
+	rst _PrintText
 	CheckEvent EVENT_MET_GYM_GUIDE_SON
 	call nz, .noIntroduce
 	call .checkIntroduce
@@ -87,21 +87,21 @@ IndigoGymGuideSonText:  ; PureRGBnote: ADDED: new NPC who will sell TMs - sells 
 	ret
 .introduce
 	ld hl, IndigoPlateauGymGuideSonIntro
-	rst PrintTextRST
+	rst _PrintText
 	ret
 .noIntroduce
 	ld hl, IndigoPlateauGymGuideSonShopStart
-	rst PrintTextRST
+	rst _PrintText
 	ret
 .moreTMs
 	CheckEvent EVENT_TALKED_GYM_GUIDE_SON_AFTER_CHAMP
 	ret nz
 	ld hl, IndigoPlateauGymGuideSonMoreTMs
-	rst PrintTextRST
+	rst _PrintText
 	ret
 .afterChamp
 	ld hl, IndigoPlateauGymGuideSonChampText
-	rst PrintTextRST
+	rst _PrintText
 	call .checkIntroduce
 	CheckEvent EVENT_TALKED_GYM_GUIDE_SON_AFTER_CHAMP
 	call nz, .noIntroduce 

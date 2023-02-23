@@ -9,21 +9,21 @@ SafariZoneSecretHouseText1:
 	CheckEvent EVENT_GOT_HM03
 	jr nz, .got_item
 	ld hl, SafariZoneSecretHouseText_4a350
-	rst PrintTextRST
+	rst _PrintText
 	lb bc, HM_SURF, 1
 	call GiveItem
 	jr nc, .bag_full
 	ld hl, ReceivedHM03Text
-	rst PrintTextRST
+	rst _PrintText
 	SetEvent EVENT_GOT_HM03
 	jr .done
 .bag_full
 	ld hl, HM03NoRoomText
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .got_item
 	ld hl, HM03ExplanationText
-	rst PrintTextRST
+	rst _PrintText
 .done
 	rst TextScriptEnd
 

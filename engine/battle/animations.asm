@@ -178,7 +178,7 @@ DrawFrameBlock:
 	jr z, .advanceFrameBlockDestAddr ; skip delay and don't clean OAM buffer
 	ld a, [wSubAnimFrameDelay]
 	ld c, a
-	rst DelayFramesRST
+	rst _DelayFrames
 	ld a, [wFBMode]
 	cp FRAMEBLOCKMODE_03
 	jr z, .advanceFrameBlockDestAddr ; skip cleaning OAM buffer
@@ -246,7 +246,7 @@ PlayAnimation:
 	push hl
 	push de
 	call GetMoveSound
-	rst PlaySoundRST
+	rst _PlaySound
 	pop de
 	pop hl
 .skipPlayingSound
@@ -485,7 +485,7 @@ MoveAnimationContent:
 	jr .next4
 .animationsDisabled
 	ld c, 30
-	rst DelayFramesRST
+	rst _DelayFrames
 .next4
 	vc_hook_red Stop_reducing_move_anim_flashing
 	vc_hook_blue Stop_reducing_move_anim_flashing_Rock_Slide_Dream_Eater
@@ -590,7 +590,7 @@ AnimationShakeScreenHorizontallySlow:
 	inc a
 	ldh [rWX], a
 	ld c, 2
-	rst DelayFramesRST
+	rst _DelayFrames
 	dec b
 	jr nz, .loop1
 	pop bc
@@ -599,7 +599,7 @@ AnimationShakeScreenHorizontallySlow:
 	dec a
 	ldh [rWX], a
 	ld c, 2
-	rst DelayFramesRST
+	rst _DelayFrames
 	dec b
 	jr nz, .loop2
 	pop bc
@@ -671,7 +671,7 @@ PlaySubanimation:
 	cp NO_MOVE - 1
 	jr z, .skipPlayingSound
 	call GetMoveSound
-	rst PlaySoundRST
+	rst _PlaySound
 .skipPlayingSound
 	ld hl, wShadowOAM
 	ld a, l
@@ -737,7 +737,7 @@ AnimationCleanOAM:
 	push de
 	push bc
 	push af
-	rst DelayFrameRST
+	rst _DelayFrame
 	call ClearSprites
 	pop af
 	pop bc
@@ -793,7 +793,7 @@ DoBallTossSpecialEffects:
 	jr nz, .skipPlayingSound
 ; if it is the beginning of the subanimation, play a sound
 	ld a, SFX_BALL_TOSS
-	rst PlaySoundRST
+	rst _PlaySound
 .skipPlayingSound
 	ld a, [wIsInBattle]
 	cp 2 ; is it a trainer battle?
@@ -839,9 +839,9 @@ DoBallShakeSpecialEffects:
 	jr nz, .skipPlayingSound
 ; if it is the beginning of a shake, play a sound and wait 2/3 of a second
 	ld a, SFX_TINK
-	rst PlaySoundRST
+	rst _PlaySound
 	ld c, 40
-	rst DelayFramesRST
+	rst _DelayFrames
 .skipPlayingSound
 	ld a, [wSubAnimCounter]
 	dec a
@@ -878,14 +878,14 @@ DoPoofSpecialEffects:
 	cp MASTERTOSS_ANIM
 	jr z, .masterBallSFX
 	ld a, SFX_BALL_POOF
-	rst PlaySoundRST
+	rst _PlaySound
 	ret
 .masterBallSFX
 	xor a
 	ld [wFrequencyModifier], a
 	ld [wTempoModifier], a
 	ld a, SFX_HORN_DRILL
-	rst PlaySoundRST
+	rst _PlaySound
 	ret
 .ballToss
 	ld a, [wUnusedC000]
@@ -1072,11 +1072,11 @@ TradeJumpPokeball:
 	jr nz, .skipPlayingSound
 .playSound ; play sound if next move distance is 12 or this is the last one
 	ld a, SFX_SWAP
-	rst PlaySoundRST
+	rst _PlaySound
 .skipPlayingSound
 	push bc
 	ld c, 5
-	rst DelayFramesRST
+	rst _DelayFrames
 	pop bc
 	ldh a, [hSCX] ; background scroll X
 	sub 8 ; scroll to the left
@@ -1094,7 +1094,7 @@ DoGrowlSpecialEffects:
 	ld hl, wShadowOAM
 	ld de, wShadowOAMSprite04
 	ld bc, $10
-	rst CopyDataRST ; copy the musical note graphic
+	rst _CopyData ; copy the musical note graphic
 	ld a, [wSubAnimCounter]
 	dec a
 	call z, AnimationCleanOAM ; clean up at the end of the subanimation
@@ -1210,12 +1210,12 @@ AnimationFlashScreen:
 	ldh [rBGP], a
 	call UpdateGBCPal_BGP ; shinpokerednote: gbcnote: gbc color facilitation
 	ld c, 2
-	rst DelayFramesRST
+	rst _DelayFrames
 	xor a ; white out background
 	ldh [rBGP], a
 	call UpdateGBCPal_BGP ; shinpokerednote: gbcnote: gbc color facilitation
 	ld c, 2
-	rst DelayFramesRST
+	rst _DelayFrames
 	pop af
 	ldh [rBGP], a ; restore initial palette
 	call UpdateGBCPal_BGP ; shinpokerednote: gbcnote: gbc color facilitation
@@ -1456,7 +1456,7 @@ _AnimationSlideMonUp:
 	push de
 	push hl
 	ld bc, 7
-	rst CopyDataRST
+	rst _CopyData
 ; Note that de and hl are popped in the same order they are pushed, swapping
 ; their values. When CopyData is called, hl points to a tile 1 row below
 ; the one de points to. To maintain this relationship, after swapping, we add 2
@@ -1487,7 +1487,7 @@ _AnimationSlideMonUp:
 	jr nz, .fillBottomRowLoop
 
 	ld c, 2
-	rst DelayFramesRST
+	rst _DelayFrames
 	pop bc
 	pop hl
 	pop de
@@ -1629,10 +1629,10 @@ AnimationBlinkMon:
 	push bc
 	call AnimationHideMonPic
 	ld c, 5
-	rst DelayFramesRST
+	rst _DelayFrames
 	call AnimationShowMonPic
 	ld c, 5
-	rst DelayFramesRST
+	rst _DelayFrames
 	pop bc
 	dec c
 	jr nz, .loop
@@ -1856,9 +1856,9 @@ AnimationSpiralBallsInward:
 	ld a, $40
 	ld [wTempoModifier], a
 	ld a, SFX_BATTLE_1E
-	rst PlaySoundRST
+	rst _PlaySound
 .frameDelay
-	rst DelayFramesRST
+	rst _DelayFrames
 	pop hl
 	inc hl
 	inc hl
@@ -1990,7 +1990,7 @@ _AnimationShootBallsUpward:
 	call BattleAnimWriteOAMEntry
 	dec b
 	jr nz, .initOAMLoop
-	rst DelayFrameRST
+	rst _DelayFrame
 	pop bc
 	ld a, b
 	ld [wNumShootingBalls], a
@@ -2018,7 +2018,7 @@ _AnimationShootBallsUpward:
 	add hl, de ; next OAM entry
 	dec b
 	jr nz, .innerLoop
-	rst DelayFramesRST
+	rst _DelayFrames
 	pop bc
 	ld a, [wNumShootingBalls]
 	and a
@@ -2121,7 +2121,7 @@ AnimationSlideMonDownAndHide:
 	call GetMonSpriteTileMapPointerFromRowCount
 	call CopyPicTiles
 	ld c, 15
-	rst DelayFramesRST
+	rst _DelayFrames
 	pop af
 	inc a
 	pop bc
@@ -2129,7 +2129,7 @@ AnimationSlideMonDownAndHide:
 	jr nz, .loop
 	call AnimationHideMonPic
 	ld c, 30
-	rst DelayFramesRST
+	rst _DelayFrames
 	jp AnimationShowMonPic
 
 _AnimationSlideMonOff:
@@ -2169,7 +2169,7 @@ _AnimationSlideMonOff:
 	jr nz, .rowLoop
 	ld a, [wSlideMonDelay]
 	ld c, a
-	rst DelayFramesRST
+	rst _DelayFrames
 	pop hl
 	dec d
 	dec e
@@ -2977,12 +2977,12 @@ ShakeEnemyHUD_ShakeBG:
 	add d
 	ldh [hSCX], a
 	ld c, 2
-	rst DelayFramesRST
+	rst _DelayFrames
 	ld a, [wTempSCX]
 	sub d
 	ldh [hSCX], a
 	ld c, 2
-	rst DelayFramesRST
+	rst _DelayFrames
 	dec e
 	jr nz, .loop
 	ld a, [wTempSCX]
@@ -3043,7 +3043,7 @@ TossBallAnimation:
 .BlockBall
 	call PlayAnimation
 	ld a, SFX_FAINT_THUD
-	rst PlaySoundRST
+	rst _PlaySound
 	ld a, BLOCKBALL_ANIM
 	ld [wAnimationID], a
 	xor a

@@ -34,7 +34,7 @@ ViridianSchoolB1FBookcasesTexts::
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 SchoolHouseB1FBookcaseTextPointers:

@@ -20,7 +20,7 @@ Route15GateUpstairsText1:
 	ld hl, wcd6d
 	ld de, wOaksAideRewardItemName
 	ld bc, ITEM_NAME_LENGTH
-	rst CopyDataRST
+	rst _CopyData
 	predef OaksAideScript
 	ldh a, [hOaksAideResult]
 	cp OAKS_AIDE_GOT_ITEM
@@ -31,7 +31,7 @@ Route15GateUpstairsText1:
 	and a
 	jr z, .boosterChipNotActive
 	ld hl, Route15GateUpstairsRemoveBoosterText
-	rst PrintTextRST
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -43,39 +43,39 @@ Route15GateUpstairsText1:
 	ld [wBoosterChipActive], a
 	call RemoveBoosterChipSounds
 	ld hl, Route15GateUpstairsDoneText
-	rst PrintTextRST
+	rst _PrintText
 	jr .no_item
 .bagFull
 	ld hl, Route15GateUpstairsNoRoomText
-	rst PrintTextRST
+	rst _PrintText
 	jr .no_item
 .noUninstall
 	ld hl, Route15GateUpstairsNoUninstallText
-	rst PrintTextRST
+	rst _PrintText
 	jr .no_item
 .boosterChipNotActive
 	ld hl, Route15GateUpstairsText_4968c
-	rst PrintTextRST
+	rst _PrintText
 .no_item
 	rst TextScriptEnd
 
 RemoveBoosterChipSounds:
 	ld b, 5
 	ld a, SFX_STOP_ALL_MUSIC
-	rst PlaySoundRST
+	rst _PlaySound
 .loop
 	ld a, SFX_NOISE_INSTRUMENT16
-	rst PlaySoundRST
+	rst _PlaySound
 	ld c, 10
-	rst DelayFramesRST
+	rst _DelayFrames
 	dec b
 	jr nz, .loop
 	ld a, SFX_NOISE_INSTRUMENT03
-	rst PlaySoundRST
+	rst _PlaySound
 	ld c, 10
-	rst DelayFramesRST
+	rst _DelayFrames
 	ld a, SFX_WITHDRAW_DEPOSIT
-	rst PlaySoundRST
+	rst _PlaySound
 	ld c, 30
 	jp PlayDefaultMusic
 	

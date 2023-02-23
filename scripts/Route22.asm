@@ -90,7 +90,7 @@ Route22Script0:
 	jr z, .asm_50f4e
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	rst PlaySoundRST
+	rst _PlaySound
 .asm_50f4e
 	ld c, BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
@@ -169,7 +169,7 @@ Route22Script2:
 	call DisplayTextID
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	rst PlaySoundRST
+	rst _PlaySound
 	farcall Music_RivalAlternateStart
 	ld a, [wcf0d]
 	cp $1
@@ -243,11 +243,11 @@ Route22Script_5104e:
 	jr z, .skipYVisibilityTesta
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	rst PlaySoundRST
+	rst _PlaySound
 .skipYVisibilityTesta
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	rst PlaySoundRST
+	rst _PlaySound
 	farcall Music_RivalAlternateTempo
 	ld a, $2
 	ldh [hSpriteIndex], a
@@ -328,7 +328,7 @@ Route22Script5:
 	call DisplayTextID
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	rst PlaySoundRST
+	rst _PlaySound
 	farcall Music_RivalAlternateStartAndTempo
 	ld a, [wcf0d]
 	cp $1
@@ -389,11 +389,11 @@ Route22Text1:
 	CheckEvent EVENT_BEAT_ROUTE22_RIVAL_1ST_BATTLE
 	jr z, .asm_5118b
 	ld hl, Route22RivalAfterBattleText1
-	rst PrintTextRST
+	rst _PrintText
 	jr .asm_51191
 .asm_5118b
 	ld hl, Route22RivalBeforeBattleText1
-	rst PrintTextRST
+	rst _PrintText
 .asm_51191
 	rst TextScriptEnd
 
@@ -402,11 +402,11 @@ Route22Text2:
 	CheckEvent EVENT_BEAT_ROUTE22_RIVAL_2ND_BATTLE
 	jr z, .asm_511a4
 	ld hl, Route22RivalAfterBattleText2
-	rst PrintTextRST
+	rst _PrintText
 	jr .asm_511aa
 .asm_511a4
 	ld hl, Route22RivalBeforeBattleText2
-	rst PrintTextRST
+	rst _PrintText
 .asm_511aa
 	rst TextScriptEnd
 

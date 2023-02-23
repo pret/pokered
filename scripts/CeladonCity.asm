@@ -46,21 +46,21 @@ CeladonCityText5:
 	CheckEvent EVENT_GOT_TM41
 	jr nz, .asm_7053f
 	ld hl, TM41PreText
-	rst PrintTextRST
+	rst _PrintText
 	lb bc, TM_CELADON_CITY_SURF_POOL_GRAMPS, 1
 	call GiveItem
 	jr c, .Success
 	ld hl, TM41NoRoomText
-	rst PrintTextRST
+	rst _PrintText
 	jr .Done
 .Success
 	ld hl, ReceivedTM41Text
-	rst PrintTextRST
+	rst _PrintText
 	SetEvent EVENT_GOT_TM41
 	jr .Done
 .asm_7053f
 	ld hl, TM41ExplanationText
-	rst PrintTextRST
+	rst _PrintText
 .Done
 	rst TextScriptEnd
 

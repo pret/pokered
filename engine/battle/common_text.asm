@@ -20,13 +20,13 @@ PrintBeginningBattleText:
 .trainerBattle
 	call .playSFX
 	ld c, 20
-	rst DelayFramesRST
+	rst _DelayFrames
 	ld hl, TrainerWantsToFightText
 .wildBattle
 	push hl
 	callfar DrawAllPokeballs
 	pop hl
-	rst PrintTextRST
+	rst _PrintText
 	jp .done
 .pokemonTower
 	ld b, SILPH_SCOPE
@@ -43,9 +43,9 @@ PrintBeginningBattleText:
 .noSilphScope
 	call PlayGhostSfx
 	ld hl, EnemyAppearedText
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, GhostCantBeIDdText
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .isMarowak
 	ld a, b
@@ -53,9 +53,9 @@ PrintBeginningBattleText:
 	jr z, .noSilphScope
 	call PlayGhostSfx 
 	ld hl, EnemyAppearedText
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, UnveiledGhostText
-	rst PrintTextRST
+	rst _PrintText
 	callfar LoadEnemyMonData
 	callfar MarowakAnim
 ;;;;;;;;;; PureRGBnote: ADDED: when encountering ghost marowak, upon transforming it will play marowak's cry now
@@ -63,14 +63,14 @@ PrintBeginningBattleText:
 	call PlayCry
 ;;;;;;;;;;
 	ld hl, WildMonAppearedText
-	rst PrintTextRST
+	rst _PrintText
 .playSFX
 	xor a
 	ld [wFrequencyModifier], a
 	ld a, $80
 	ld [wTempoModifier], a
 	ld a, SFX_SILPH_SCOPE
-	rst PlaySoundRST
+	rst _PlaySound
 	jp WaitForSoundToFinish
 .done
 	ret
@@ -82,7 +82,7 @@ PlayGhostSfx:
 	ld a, $20
 	ld [wTempoModifier], a
 	ld a, SFX_BATTLE_2F
-	rst PlaySoundRST
+	rst _PlaySound
 	call WaitForSoundToFinish
 	xor a
 	ld [wFrequencyModifier], a

@@ -62,13 +62,13 @@ Route22GateText1:
 	bit BIT_BOULDERBADGE, a
 	jr nz, .asm_1e6f6
 	ld hl, Route22GateText_1e704
-	rst PrintTextRST
+	rst _PrintText
 	call Route22GateScript_1e6ba
 	ld a, $1
 	jr .asm_1e6fe
 .asm_1e6f6
 	ld hl, Route22GateText_1e71a
-	rst PrintTextRST
+	rst _PrintText
 	ld a, $2
 .asm_1e6fe
 	ld [wRoute22GateCurScript], a

@@ -97,7 +97,7 @@ DisplayOptions2:
 	jr .loop
 .cancelMore
 	ld a, SFX_PRESS_AB
-	rst PlaySoundRST
+	rst _PlaySound
 	call ClearScreen
 	ld a, [wTopMenuItemX]
 	cp 7 ; is the cursor on "BACK">
@@ -107,7 +107,7 @@ DisplayOptions2:
 	jp DisplayOptionMenu
 .exitMenu
 	ld a, SFX_PRESS_AB
-	rst PlaySoundRST
+	rst _PlaySound
 	ret
 .checkDirectionKeys
 	ld a, [wTopMenuItemY]
@@ -411,7 +411,7 @@ SGB2Char:
 
 ToggleAltSGBColors:
 	ld a, SFX_PRESS_AB
-	rst PlaySoundRST
+	rst _PlaySound
 	ld a, [wOptions2]
 	xor %11 ; %10 becomes %01, toggles between the two sgb options.
 	ld [wOptions2], a

@@ -16,24 +16,24 @@ BillsHousePC:
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	tx_pre BillsHouseInitiatedText
 	ld c, 32
-	rst DelayFramesRST
+	rst _DelayFrames
 	ld a, SFX_TINK
-	rst PlaySoundRST
+	rst _PlaySound
 	call WaitForSoundToFinish
 	ld c, 80
-	rst DelayFramesRST
+	rst _DelayFrames
 	ld a, SFX_SHRINK
-	rst PlaySoundRST
+	rst _PlaySound
 	call WaitForSoundToFinish
 	ld c, 48
-	rst DelayFramesRST
+	rst _DelayFrames
 	ld a, SFX_TINK
-	rst PlaySoundRST
+	rst _PlaySound
 	call WaitForSoundToFinish
 	ld c, 32
-	rst DelayFramesRST
+	rst _DelayFrames
 	ld a, SFX_GET_ITEM_1
-	rst PlaySoundRST
+	rst _PlaySound
 	call WaitForSoundToFinish
 	call PlayDefaultMusic
 	SetEvent EVENT_USED_CELL_SEPARATOR_ON_BILL
@@ -54,21 +54,21 @@ BillsHouseInitiatedText::
 	text_asm
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	rst PlaySoundRST
+	rst _PlaySound
 	ld c, 16
-	rst DelayFramesRST
+	rst _DelayFrames
 	ld a, SFX_SWITCH
-	rst PlaySoundRST
+	rst _PlaySound
 	call WaitForSoundToFinish
 	ld c, 60
-	rst DelayFramesRST
+	rst _DelayFrames
 	rst TextScriptEnd
 
 BillsHousePokemonList::
 	text_asm
 	call SaveScreenTilesToBuffer1
 	ld hl, BillsHousePokemonListText1
-	rst PrintTextRST
+	rst _PrintText
 	xor a
 	ld [wMenuItemOffset], a ; not used
 	ld [wCurrentMenuItem], a
@@ -94,7 +94,7 @@ BillsHousePokemonList::
 	ld de, BillsMonListText
 	call PlaceString
 	ld hl, BillsHousePokemonListText2
-	rst PrintTextRST
+	rst _PrintText
 	call SaveScreenTilesToBuffer2
 	call HandleMenuInput
 	bit BIT_B_BUTTON, a

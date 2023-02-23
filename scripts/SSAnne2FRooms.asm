@@ -70,7 +70,7 @@ SSAnne9Text5:
 	text_asm
 	call SaveScreenTilesToBuffer1
 	ld hl, SSAnne9Text_61bf2
-	rst PrintTextRST
+	rst _PrintText
 	call LoadScreenTilesFromBuffer1
 	ld a, SNORLAX
 	call DisplayPokedex
@@ -83,7 +83,7 @@ SSAnne9Text_61bf2:
 SSAnne9Text7:
 	text_asm
 	ld hl, SSAnne9Text_61c01
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 SSAnne9Text_61c01:
@@ -93,7 +93,7 @@ SSAnne9Text_61c01:
 SSAnne9Text8:
 	text_asm
 	ld hl, SSAnne9Text_61c10
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 SSAnne9Text_61c10:
@@ -103,7 +103,7 @@ SSAnne9Text_61c10:
 SSAnne9Text10:
 	text_asm
 	ld hl, SSAnne9Text_61c1f
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 SSAnne9Text_61c1f:
@@ -113,7 +113,7 @@ SSAnne9Text_61c1f:
 SSAnne9Text11:
 	text_asm
 	ld hl, SSAnne9Text_61c2e
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 SSAnne9Text_61c2e:
@@ -123,7 +123,7 @@ SSAnne9Text_61c2e:
 SSAnne9Text12:
 	text_asm
 	ld hl, SSAnne9Text_61c3d
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 SSAnne9Text_61c3d:
@@ -133,7 +133,7 @@ SSAnne9Text_61c3d:
 SSAnne9Text13:
 	text_asm
 	ld hl, SSAnne9Text_61c4c
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 SSAnne9Text_61c4c:

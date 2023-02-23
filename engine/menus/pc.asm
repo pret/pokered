@@ -1,9 +1,9 @@
 ActivatePC::
 	call SaveScreenTilesToBuffer2
 	ld a, SFX_TURN_ON_PC
-	rst PlaySoundRST
+	rst _PlaySound
 	ld hl, TurnedOnPC1Text
-	rst PrintTextRST
+	rst _PrintText
 	call WaitForSoundToFinish
 	ld hl, wFlags_0xcd60
 	set 3, [hl]
@@ -52,27 +52,27 @@ PCMainMenu:
 	res 5, [hl]
 	set 3, [hl]
 	ld a, SFX_ENTER_PC
-	rst PlaySoundRST
+	rst _PlaySound
 	call WaitForSoundToFinish
 	ld hl, AccessedMyPCText
-	rst PrintTextRST
+	rst _PrintText
 	farcall PlayerPC
 	jr ReloadMainMenu
 OaksPC:
 	ld a, SFX_ENTER_PC
-	rst PlaySoundRST
+	rst _PlaySound
 	call WaitForSoundToFinish
 	farcall OpenOaksPC
 	jr ReloadMainMenu
 PKMNLeague:
 	ld a, SFX_ENTER_PC
-	rst PlaySoundRST
+	rst _PlaySound
 	call WaitForSoundToFinish
 	farcall PKMNLeaguePC
 	jr ReloadMainMenu
 BillsPC:
 	ld a, SFX_ENTER_PC
-	rst PlaySoundRST
+	rst _PlaySound
 	call WaitForSoundToFinish
 	CheckEvent EVENT_MET_BILL
 	jr nz, .billsPC ;if you've met bill, use that bill's instead of someone's
@@ -81,7 +81,7 @@ BillsPC:
 .billsPC
 	ld hl, AccessedBillsPCText
 .printText
-	rst PrintTextRST
+	rst _PrintText
 	farcall BillsPC_
 ReloadMainMenu:
 	xor a
@@ -91,7 +91,7 @@ ReloadMainMenu:
 	jp PCMainMenu
 LogOff:
 	ld a, SFX_TURN_OFF_PC
-	rst PlaySoundRST
+	rst _PlaySound
 	call WaitForSoundToFinish
 	ld hl, wFlags_0xcd60
 	res 3, [hl]

@@ -3,7 +3,7 @@
 ; By using "rst (rst vector)" instead of "call (16-bit address)" we can reduce the size of calls to frequently used functions.
 
 SECTION "rst0", ROM0[$0000]
-BankswitchRST::
+_Bankswitch::
 	jp Bankswitch
 
 ; PureRGBnote: MOVED: 5 extra bytes of space left here, may as well move something here that puts the space to some use
@@ -12,7 +12,7 @@ MartSignText::
 	text_end
 
 SECTION "rst8", ROM0[$0008]
-PredefRST::
+_Predef::
 	jp Predef
 
 ; PureRGBnote: MOVED: 5 extra bytes of space left here, may as well move something here that puts the space to some use
@@ -21,7 +21,7 @@ PokemartGreetingText::
 	text_end
 
 SECTION "rst10", ROM0[$0010]
-DelayFrameRST::
+_DelayFrame::
 	jp DelayFrame
 
 ; PureRGBnote: MOVED: 5 extra bytes of space left here, may as well move something here that puts the space to some use
@@ -30,7 +30,7 @@ PokeCenterSignText::
 	text_end
 
 SECTION "rst18", ROM0[$0018]
-DelayFramesRST::
+_DelayFrames::
 	jp DelayFrames
 
 ; PureRGBnote: MOVED: 5 extra bytes of space left here, may as well move something here that puts the space to some use	
@@ -39,7 +39,7 @@ TextIDErrorText:: ; "[hSpriteIndexOrTextID] ERROR."
 	text_end
 
 SECTION "rst20", ROM0[$0020]
-CopyDataRST::
+_CopyData::
 	jp CopyData
 
 ; PureRGBnote: MOVED: 5 extra bytes of space left here, may as well move something here that puts the space to some use	
@@ -48,7 +48,7 @@ PokemonFaintedText::
 	text_end
 
 SECTION "rst28", ROM0[$0028]
-PrintTextRST::
+_PrintText::
 	jp PrintText
 
 ; PureRGBnote: MOVED: 5 extra bytes of space left here, may as well move something here that puts the space to some use	
@@ -57,7 +57,7 @@ PlayerBlackedOutText::
 	text_end
 
 SECTION "rst30", ROM0[$0030]
-PlaySoundRST::
+_PlaySound::
 	jp PlaySound
 	
 ; PureRGBnote: MOVED: 5 extra bytes of space left here, may as well move something here that puts the space to some use	

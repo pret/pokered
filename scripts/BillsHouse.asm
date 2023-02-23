@@ -78,7 +78,7 @@ BillsHouseScript3:
 	ld [wMissableObjectIndex], a
 	predef ShowObject
 	ld c, 8
-	rst DelayFramesRST
+	rst _DelayFrames
 	ld a, $2
 	ldh [hSpriteIndex], a
 	ld de, MovementData_1e807
@@ -127,20 +127,20 @@ BillsHouseText4:
 BillsHouseText1:
 	text_asm
 	ld hl, BillsHouseText_1e865
-	rst PrintTextRST
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .asm_1e85a
 .asm_1e84d
 	ld hl, BillsHouseText_1e86a
-	rst PrintTextRST
+	rst _PrintText
 	ld a, $1
 	ld [wBillsHouseCurScript], a
 	jr .asm_1e862
 .asm_1e85a
 	ld hl, BillsHouseText_1e86f
-	rst PrintTextRST
+	rst _PrintText
 	jr .asm_1e84d
 .asm_1e862
 	rst TextScriptEnd
@@ -162,12 +162,12 @@ BillsHouseText2:
 	CheckEvent EVENT_GOT_SS_TICKET
 	jr nz, .asm_1e8a9
 	ld hl, BillThankYouText
-	rst PrintTextRST
+	rst _PrintText
 	lb bc, S_S_TICKET, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, SSTicketReceivedText
-	rst PrintTextRST
+	rst _PrintText
 	SetEvent EVENT_GOT_SS_TICKET
 	ld a, HS_CERULEAN_GUARD_1
 	ld [wMissableObjectIndex], a
@@ -177,11 +177,11 @@ BillsHouseText2:
 	predef HideObject
 .asm_1e8a9
 	ld hl, BillsHouseText_1e8cb
-	rst PrintTextRST
+	rst _PrintText
 	jr .asm_1e8b7
 .BagFull
 	ld hl, SSTicketNoRoomText
-	rst PrintTextRST
+	rst _PrintText
 .asm_1e8b7
 	rst TextScriptEnd
 
@@ -206,7 +206,7 @@ BillsHouseText_1e8cb:
 BillsHouseText3:
 	text_asm
 	ld hl, BillsHouseText_1e8da
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 BillsHouseText_1e8da:

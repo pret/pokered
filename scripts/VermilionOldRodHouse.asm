@@ -12,7 +12,7 @@ VermilionGuruHouseText1:
 	bit 4, a ; got good rod?
 	jr nz, .got_item
 	ld hl, VermilionHouse3Text_561bd
-	rst PrintTextRST
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -33,7 +33,7 @@ VermilionGuruHouseText1:
 .got_item
 	ld hl, VermilionHouse3Text_56217
 .done
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 VermilionHouse3Text_561bd:

@@ -214,11 +214,11 @@ MtMoon3Text1:
 	and (1 << (EVENT_GOT_DOME_FOSSIL % 8)) | (1 << (EVENT_GOT_HELIX_FOSSIL % 8))
 	jr nz, .asm_49eb8
 	ld hl, MtMoon3Text_49f8f
-	rst PrintTextRST
+	rst _PrintText
 	jr .asm_49ebe
 .asm_49e8d
 	ld hl, MtMoon3Text_49f85
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
@@ -267,7 +267,7 @@ MtMoon3Text6:
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, MtMoon3Text_49f24
-	rst PrintTextRST
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -295,7 +295,7 @@ MtMoon3Text7:
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, MtMoon3Text_49f64
-	rst PrintTextRST
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -330,7 +330,7 @@ MtMoon3Text_49f6f:
 
 MtMoon3Script_49f76:
 	ld hl, MtMoon3Text_49f7f
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 MtMoon3Text_49f7f:
@@ -370,9 +370,9 @@ MtMoonSuperNerdTakeFossilQuestion:
 	CheckEvent EVENT_GAVE_FOSSIL_TO_SUPER_NERD
 	jr nz, .end
 	ld hl, MtMoon3Text_49f94
-	rst PrintTextRST
+	rst _PrintText
 	ld hl, MtMoon3TextSuperNerdGiveFossil
-	rst PrintTextRST
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -390,36 +390,36 @@ MtMoonSuperNerdTakeFossilQuestion:
 	jr .haveFossil
 .noFossil
 	ld hl, MtMoon3TextSuperNerdNoFossil
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .haveFossil
 	SetEvent EVENT_GAVE_FOSSIL_TO_SUPER_NERD
 	CheckEvent EVENT_GOT_DOME_FOSSIL
 	jr nz, .domeRemove
 	ld hl, MtMoon3TextSuperNerdGaveHelix
-	rst PrintTextRST
+	rst _PrintText
 	ld a, HELIX_FOSSIL
 	jr .removeItem
 .domeRemove
 	ld hl, MtMoon3TextSuperNerdGaveDome
-	rst PrintTextRST
+	rst _PrintText
 	ld a, DOME_FOSSIL
 .removeItem
 	ldh [hItemToRemoveID], a
 	farcall RemoveItemByID
 	ld hl, MtMoon3TextSuperNerdGaveFossil
-	rst PrintTextRST
+	rst _PrintText
 .end
 	ld hl, MtMoon3TextSuperNerdGaveFossilEnd
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .lookingForMoreFossils
 	ld hl, MtMoon3TextSuperNerdLookingForMoreFossils
-	rst PrintTextRST
+	rst _PrintText
 	jr .done
 .no
 	ld hl, MtMoon3TextSuperNerdKeptFossil
-	rst PrintTextRST
+	rst _PrintText
 .done
 	ret
 	

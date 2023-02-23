@@ -185,7 +185,7 @@ Mansion3Text6:
 Mansion2Text5:
 	text_asm
 	ld hl, Mansion2Text_520c2
-	rst PrintTextRST
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -195,16 +195,16 @@ Mansion2Text5:
 	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
 	ld hl, Mansion2Text_520c7
-	rst PrintTextRST
+	rst _PrintText
 	ld a, SFX_GO_INSIDE
-	rst PlaySoundRST
+	rst _PlaySound
 	CheckAndSetEvent EVENT_MANSION_SWITCH_ON
 	jr z, .asm_520bf
 	ResetEventReuseHL EVENT_MANSION_SWITCH_ON
 	jr .asm_520bf
 .asm_520b9
 	ld hl, Mansion2Text_520cc
-	rst PrintTextRST
+	rst _PrintText
 .asm_520bf
 	rst TextScriptEnd
 

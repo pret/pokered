@@ -144,14 +144,14 @@ PokemonTower6Text3:
 PokemonTower6Text7:
 	text_asm
 	ld hl, PokemonTower2Text_60c1f
-	rst PrintTextRST
+	rst _PrintText
 	ld a, RESTLESS_SOUL
 	call PlayCry
 	call WaitForSoundToFinish
 	ld c, 30
-	rst DelayFramesRST
+	rst _DelayFrames
 	ld hl, PokemonTower2Text_60c24
-	rst PrintTextRST
+	rst _PrintText
 ;;;;;;;;;; PureRGBnote: ADDED: ghost marowak can be caught and the event will complete if you do so
 	CheckEvent EVENT_CAUGHT_GHOST_MAROWAK
 	jr nz, .caughtGhostMarowak
@@ -160,7 +160,7 @@ PokemonTower6Text7:
 .caughtGhostMarowak
 	ld hl, PokemonTower2Text_CaughtGhostMarowak	
 .done
-	rst PrintTextRST
+	rst _PrintText
 ;;;;;;;;;;
 	rst TextScriptEnd
 

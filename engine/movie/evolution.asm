@@ -11,11 +11,11 @@ EvolveMon:
 	ld [wChannelSoundIDs + CHAN5], a
 	dec a ; SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	rst PlaySoundRST
+	rst _PlaySound
 	ld a, $1
 	ldh [hAutoBGTransferEnabled], a
 	ld a, SFX_TINK
-	rst PlaySoundRST
+	rst _PlaySound
 	call Delay3
 	xor a
 	ldh [hAutoBGTransferEnabled], a
@@ -45,7 +45,7 @@ EvolveMon:
 	ld a, MUSIC_SAFARI_ZONE
 	call PlayMusic
 	ld c, 80
-	rst DelayFramesRST
+	rst _DelayFrames
 	ld c, 1 ; set PAL_BLACK instead of mon palette
 	call EvolutionSetWholeScreenPalette
 	lb bc, $1, $10
@@ -69,7 +69,7 @@ EvolveMon:
 	ld [wWholeScreenPaletteMonSpecies], a
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	rst PlaySoundRST
+	rst _PlaySound
 	ld a, [wWholeScreenPaletteMonSpecies]
 	call PlayCry
 	ld c, 0
@@ -140,7 +140,7 @@ Evolution_ChangeMonPic:
 	ret
 
 Evolution_CheckForCancel:
-	rst DelayFrameRST
+	rst _DelayFrame
 	push bc
 	call JoypadLowSensitivity
 	ldh a, [hJoy5]

@@ -6,7 +6,7 @@ LearnMove:
 	ld hl, wcd6d
 	ld de, wLearnMoveMonName
 	ld bc, NAME_LENGTH
-	rst CopyDataRST
+	rst _CopyData
 
 DontAbandonLearning:
 	ld hl, wPartyMon1Moves
@@ -32,7 +32,7 @@ DontAbandonLearning:
 	ld [wd11e], a
 	call GetMoveName
 	ld hl, OneTwoAndText
-	rst PrintTextRST
+	rst _PrintText
 	pop de
 	pop hl
 .next
@@ -65,17 +65,17 @@ DontAbandonLearning:
 	ld l, e
 	ld de, wBattleMonMoves
 	ld bc, NUM_MOVES
-	rst CopyDataRST
+	rst _CopyData
 	ld bc, wPartyMon1PP - wPartyMon1OTID
 	add hl, bc
 	ld de, wBattleMonPP
 	ld bc, NUM_MOVES
-	rst CopyDataRST
+	rst _CopyData
 	jp PrintLearnedMove
 
 AbandonLearning:
 	ld hl, AbandonLearningText
-	rst PrintTextRST
+	rst _PrintText
 	hlcoord 14, 7
 	lb bc, 8, 15
 	ld a, TWO_OPTION_MENU
@@ -85,20 +85,20 @@ AbandonLearning:
 	and a
 	jp nz, DontAbandonLearning
 	ld hl, DidNotLearnText
-	rst PrintTextRST
+	rst _PrintText
 	ld b, 0
 	ret
 
 PrintLearnedMove:
 	ld hl, LearnedMove1Text
-	rst PrintTextRST
+	rst _PrintText
 	ld b, 1
 	ret
 
 TryingToLearn:
 	push hl
 	ld hl, TryingToLearnText
-	rst PrintTextRST
+	rst _PrintText
 	hlcoord 14, 7
 	lb bc, 8, 15
 	ld a, TWO_OPTION_MENU
@@ -113,13 +113,13 @@ TryingToLearn:
 	push hl
 	ld de, wMoves
 	ld bc, NUM_MOVES
-	rst CopyDataRST
+	rst _CopyData
 	callfar FormatMovesString
 	pop hl
 .loop
 	push hl
 	ld hl, WhichMoveToForgetText
-	rst PrintTextRST
+	rst _PrintText
 	hlcoord 4, 7
 	ld b, 4
 	ld c, 14
@@ -181,13 +181,13 @@ TryingToLearn:
 	ret
 ;.hm ; FIXED: moves are never considered HMs and can always be deleted if desired
 ;	ld hl, HMCantDeleteText
-;	rst PrintTextRST
+;	rst _PrintText
 ;	pop hl
 ;	jr .loop
 .pressStart ; PureRGBnote: FIXED: explain the start button is used to select a move now if A is pressed.
 	push hl
 	ld hl, PressStartToLearnText
-	rst PrintTextRST
+	rst _PrintText
 	pop hl
 	jr .menuLoop
 .cancel

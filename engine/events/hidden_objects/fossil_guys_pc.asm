@@ -10,14 +10,14 @@ FossilGuysPC:
 FossilGuysComputer::
 	text_asm
 	ld hl, FossilGuysComputer1
-	rst PrintTextRST
+	rst _PrintText
 	ld a, 1
 	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_RIGHT
   	ldh [hSpriteFacingDirection], a
   	call SetSpriteFacingDirection
 	ld hl, FossilGuysComputer2
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 FossilGuysComputer1:

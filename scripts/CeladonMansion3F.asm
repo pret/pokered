@@ -36,7 +36,7 @@ DirectorText:
 .completed_dex
 	ld hl, .CompletedDexText
 .done
-	rst PrintTextRST
+	rst _PrintText
 	rst TextScriptEnd
 
 .GameDesignerText:

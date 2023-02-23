@@ -107,9 +107,9 @@ BillsPC_::
 	jr nz, BillsPCMenu
 ; accessing it directly
 	ld a, SFX_TURN_ON_PC
-	rst PlaySoundRST
+	rst _PlaySound
 	ld hl, SwitchOnText
-	rst PrintTextRST
+	rst _PrintText
 
 BillsPCMenu:
 	ld a, [wParentMenuItem]
@@ -145,7 +145,7 @@ BillsPCMenu:
 	ld [hl], a ; wMenuWatchMovingOutOfBounds
 	ld [wPlayerMonNumber], a
 	ld hl, WhatText
-	rst PrintTextRST
+	rst _PrintText
 	hlcoord 9, 14
 	ld b, 2
 	ld c, 9
@@ -192,7 +192,7 @@ ExitBillsPC:
 ; accessing it directly
 	call LoadTextBoxTilePatterns
 	ld a, SFX_TURN_OFF_PC
-	rst PlaySoundRST
+	rst _PlaySound
 	call WaitForSoundToFinish
 .next
 	ld hl, wFlags_0xcd60
@@ -209,14 +209,14 @@ BillsPCDeposit:
 	dec a
 	jr nz, .partyLargeEnough
 	ld hl, CantDepositLastMonText
-	rst PrintTextRST
+	rst _PrintText
 	jp BillsPCMenu
 .partyLargeEnough
 	ld a, [wBoxCount]
 	cp MONS_PER_BOX
 	jr nz, .boxNotFull
 	ld hl, BoxFullText
-	rst PrintTextRST
+	rst _PrintText
 	jp BillsPCMenu
 .boxNotFull
 	ld hl, wPartyCount
@@ -250,7 +250,7 @@ BillsPCDeposit:
 	ld [hli], a
 	ld [hl], "@"
 	ld hl, MonWasStoredText
-	rst PrintTextRST
+	rst _PrintText
 	jp BillsPCMenu
 
 BillsPCWithdraw:
@@ -258,14 +258,14 @@ BillsPCWithdraw:
 	and a
 	jr nz, .boxNotEmpty
 	ld hl, NoMonText
-	rst PrintTextRST
+	rst _PrintText
 	jp BillsPCMenu
 .boxNotEmpty
 	ld a, [wPartyCount]
 	cp PARTY_LENGTH
 	jr nz, .partyNotFull
 	ld hl, CantTakeMonText
-	rst PrintTextRST
+	rst _PrintText
 	jp BillsPCMenu
 .partyNotFull
 	ld hl, wBoxCount
@@ -287,7 +287,7 @@ BillsPCWithdraw:
 	call RemovePokemon
 	call WaitForSoundToFinish
 	ld hl, MonIsTakenOutText
-	rst PrintTextRST
+	rst _PrintText
 	jp BillsPCMenu
 
 BillsPCRelease:
@@ -295,14 +295,14 @@ BillsPCRelease:
 	and a
 	jr nz, .loop
 	ld hl, NoMonText
-	rst PrintTextRST
+	rst _PrintText
 	jp BillsPCMenu
 .loop
 	ld hl, wBoxCount
 	call DisplayMonListMenu
 	jp c, BillsPCMenu
 	ld hl, OnceReleasedText
-	rst PrintTextRST
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -314,7 +314,7 @@ BillsPCRelease:
 	ld a, [wcf91]
 	call PlayCry
 	ld hl, MonWasReleasedText
-	rst PrintTextRST
+	rst _PrintText
 	jp BillsPCMenu
 
 BillsPCChangeBox:
