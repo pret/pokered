@@ -99,7 +99,7 @@ RocketHideout4Text1:
 	CheckEvent EVENT_BEAT_ROCKET_HIDEOUT_GIOVANNI
 	jp nz, .asm_545571
 	ld hl, RocketHideout4Text_4557a
-	call PrintText
+	rst PrintTextRST
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
@@ -118,7 +118,7 @@ RocketHideout4Text1:
 	jr .asm_209f0
 .asm_545571
 	ld hl, RocketHideout4Text10
-	call PrintText
+	rst PrintTextRST
 .asm_209f0
 	rst TextScriptEnd
 
@@ -187,7 +187,7 @@ RocketHideout4EndBattleText4:
 RocketHideout4AfterBattleText4:
 	text_asm
 	ld hl, RocketHideout4Text_455ec
-	call PrintText
+	rst PrintTextRST
 	CheckAndSetEvent EVENT_ROCKET_DROPPED_LIFT_KEY
 	jr nz, .asm_455e9
 	ld a, HS_ROCKET_HIDEOUT_B4F_ITEM_5

@@ -45,7 +45,7 @@ SafariZoneEastText6:
 	jr z, .done
 	ld hl, SafariZoneEastText6NotClassic
 .done
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 SafariZoneEastText6Default:

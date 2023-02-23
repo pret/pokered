@@ -10,15 +10,15 @@ SaffronMart_TextPointers:
 SaffronMartTMKid: ; PureRGBnote: ADDED: new NPC who will sell TMs
 	text_asm
 	ld hl, TMKidGreet6
-	call PrintText
+	rst PrintTextRST
 	CheckEvent EVENT_MET_SAFFRON_TM_KID
 	jr z, .intro
 	ld hl, TMKidQuick6
-	call PrintText
+	rst PrintTextRST
 	jr .shop
 .intro
 	ld hl, SaffronMartTMKidFlavor
-	call PrintText
+	rst PrintTextRST
 	SetEvent EVENT_MET_SAFFRON_TM_KID
 .shop
 	ld hl, SaffronTMKidShop

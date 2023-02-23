@@ -84,7 +84,7 @@ OakSpeech:
 	call IntroDisplayPicCenteredOrUpperRight
 	call FadeInIntroPic
 	ld hl, OakSpeechText1
-	call PrintText
+	rst PrintTextRST
 	call GBFadeOutToWhite
 	call ClearScreen
 	ld a, NIDORINO
@@ -95,7 +95,7 @@ OakSpeech:
 	call LoadFlippedFrontSpriteByMonIndex
 	call MovePicLeft
 	ld hl, OakSpeechText2
-	call PrintText
+	rst PrintTextRST
 	call GBFadeOutToWhite
 	call ClearScreen
 	ld de, RedPicFront
@@ -103,7 +103,7 @@ OakSpeech:
 	call IntroDisplayPicCenteredOrUpperRight
 	call MovePicLeft
 	ld hl, IntroducePlayerText
-	call PrintText
+	rst PrintTextRST
 	call ChoosePlayerName
 	call GBFadeOutToWhite
 	call ClearScreen
@@ -112,7 +112,7 @@ OakSpeech:
 	call IntroDisplayPicCenteredOrUpperRight
 	call FadeInIntroPic
 	ld hl, IntroduceRivalText
-	call PrintText
+	rst PrintTextRST
 	call ChooseRivalName
 .skipChoosingNames
 	call GBFadeOutToWhite
@@ -125,7 +125,7 @@ OakSpeech:
 	and a
 	jr nz, .next
 	ld hl, OakSpeechText3
-	call PrintText
+	rst PrintTextRST
 .next
 	ldh a, [hLoadedROMBank]
 	push af

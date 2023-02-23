@@ -101,10 +101,10 @@ SafariGameOverText:
 	and a
 	jr z, .noMoreSafariBalls
 	ld hl, TimesUpText
-	call PrintText
+	rst PrintTextRST
 .noMoreSafariBalls
 	ld hl, GameOverText
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 SafariRangerHuntSuccessText::

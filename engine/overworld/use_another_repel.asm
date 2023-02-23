@@ -19,7 +19,7 @@ UseAnotherRepel::
 .checkUse
 	push bc
 	ld hl, RepelUseAnotherText
-	call PrintText
+	rst PrintTextRST
 	call YesNoChoice
 	pop bc
 	ld a, [wCurrentMenuItem]

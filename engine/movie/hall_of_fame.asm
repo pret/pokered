@@ -290,7 +290,7 @@ HoFDisplayPlayerStats:
 	ld hl, wDexRatingText
 
 HoFPrintTextAndDelay:
-	call PrintText
+	rst PrintTextRST
 	ld c, 120
 	jp DelayFrames
 

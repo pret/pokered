@@ -12,12 +12,12 @@ FuchsiaHouse3Text1:
 	CheckEvent EVENT_GOT_FUCHSIA_FISHING_GURU_ITEM
 	jr nz, .printEndText
 	ld hl, FuchsiaGuruIntro
-	call PrintText
+	rst PrintTextRST
 	callfar LastTwoGurusScript
 	jr .done
 .printEndText
 	ld hl, FuchsiaGuruEnd
-	call PrintText
+	rst PrintTextRST
 .done
 	rst TextScriptEnd
 

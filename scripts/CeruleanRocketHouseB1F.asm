@@ -30,7 +30,7 @@ CeruleanRocketHouseB1FText1:
 	bit TRADE_FOR_CHIKUCHIKU, a
 	jr nz, .doneTrade
 	ld hl, CeruleanRocketHouseB1FBeforeTradeText
-	call PrintText
+	rst PrintTextRST
 	ld a, TRADE_FOR_CHIKUCHIKU
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue
@@ -40,7 +40,7 @@ CeruleanRocketHouseB1FText1:
 	jr .done
 .doneTrade
 	ld hl, CeruleanRocketHouseB1FAfterTradeText
-	call PrintText
+	rst PrintTextRST
 .done
 	rst TextScriptEnd
 
@@ -121,7 +121,7 @@ CeruleanRocketHouseB1FText6:
 	dec b
 	jr nz, .checkMoves
 	ld hl, CeruleanRocketHouseCodeText
-	call PrintText
+	rst PrintTextRST
 	jr .done
 .codeBroken
 	farcall VendingMachineMenu

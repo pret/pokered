@@ -1,6 +1,6 @@
 PKMNLeaguePC:
 	ld hl, AccessedHoFPCText
-	call PrintText
+	rst PrintTextRST
 	ld hl, wd730
 	set 6, [hl]
 	push hl

@@ -116,7 +116,7 @@ SilphCo8Text1:
 	jr nz, .asm_565b8
 	ld hl, SilphCo8Text_565be
 .asm_565b8
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 SilphCo8Text_565be:

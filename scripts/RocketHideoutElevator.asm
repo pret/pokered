@@ -84,7 +84,7 @@ RocketHideoutElevatorText1:
     call PlaySound
     call WaitForSoundToFinish
 	ld hl, UnlockedElevatorText
-	call PrintText
+	rst PrintTextRST
 .startLift
 ;;;;;;;;;;
 	call RocketHideoutElevatorScript_45741
@@ -93,7 +93,7 @@ RocketHideoutElevatorText1:
 	jr .asm_45788
 .asm_45782
 	ld hl, RocketHideoutElevatorText_4578b
-	call PrintText
+	rst PrintTextRST
 .asm_45788
 	rst TextScriptEnd
 

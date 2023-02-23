@@ -82,11 +82,11 @@ CinnabarIslandText8: ; PureRGBnote: CHANGED: secret key gets consumed on usage a
     call PlaySound
     call WaitForSoundToFinish
 	ld hl, UnlockedDoorText
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 .noKey
 	ld hl, NoKeyText
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 UnlockedDoorText:

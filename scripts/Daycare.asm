@@ -11,7 +11,7 @@ DayCareMText1:
 	and a
 	jp nz, .daycareInUse
 	ld hl, DayCareIntroText
-	call PrintText
+	rst PrintTextRST
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -22,7 +22,7 @@ DayCareMText1:
 	ld hl, DayCareOnlyHaveOneMonText
 	jp z, .done
 	ld hl, DayCareWhichMonText
-	call PrintText
+	rst PrintTextRST
 	xor a
 	ld [wUpdateSpritesEnabled], a
 	ld [wPartyMenuTypeOrMessageID], a
@@ -44,7 +44,7 @@ DayCareMText1:
 	ld hl, wPartyMonNicks
 	call GetPartyMonName
 	ld hl, DayCareWillLookAfterMonText
-	call PrintText
+	rst PrintTextRST
 	ld a, 1
 	ld [wDayCareInUse], a
 	ld a, PARTY_TO_DAYCARE
@@ -99,7 +99,7 @@ DayCareMText1:
 	ld hl, DayCareMonHasGrownText
 
 .next
-	call PrintText
+	rst PrintTextRST
 	ld a, [wPartyCount]
 	cp PARTY_LENGTH
 	ld hl, DayCareNoRoomForMonText
@@ -128,7 +128,7 @@ DayCareMText1:
 	dec b
 	jr nz, .calcPriceLoop
 	ld hl, DayCareOweMoneyText
-	call PrintText
+	rst PrintTextRST
 	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
@@ -163,7 +163,7 @@ DayCareMText1:
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld hl, DayCareHeresYourMonText
-	call PrintText
+	rst PrintTextRST
 	ld a, DAYCARE_TO_PARTY
 	ld [wMoveMonType], a
 	call MoveMon
@@ -207,7 +207,7 @@ DayCareMText1:
 	ld [wDayCareMonBoxLevel], a
 
 .done
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 DayCareIntroText:

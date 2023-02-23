@@ -143,7 +143,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	call GetPartyMonName
 	call CopyToStringBuffer
 	ld hl, IsEvolvingText
-	call PrintText
+	rst PrintTextRST
 	ld c, 50
 	rst DelayFramesRST
 	xor a
@@ -159,7 +159,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	callfar EvolveMon
 	jp c, CancelledEvolution
 	ld hl, EvolvedText
-	call PrintText
+	rst PrintTextRST
 	pop hl
 	ld a, [hl]
 	ld [wd0b5], a
@@ -346,7 +346,7 @@ RenameEvolvedMon:
 
 CancelledEvolution:
 	ld hl, StoppedEvolvingText
-	call PrintText
+	rst PrintTextRST
 	call ClearScreen
 	pop hl
 	call Evolution_ReloadTilesetTilePatterns

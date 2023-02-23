@@ -189,7 +189,7 @@ RedrawPartyMenu_::
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	call PrintText
+	rst PrintTextRST
 .done
 	pop hl
 	pop af
@@ -213,7 +213,7 @@ RedrawPartyMenu_::
 	ld hl, wPartyMonNicks
 	call GetPartyMonName
 	pop hl
-	call PrintText
+	rst PrintTextRST
 	jr .done
 
 PartyMenuItemUseMessagePointers:

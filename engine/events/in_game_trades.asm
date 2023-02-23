@@ -58,7 +58,7 @@ DoInGameTradeDialogue:
 	call InGameTrade_DoTrade
 	jr c, .printText
 	ld hl, TradedForText
-	call PrintText
+	rst PrintTextRST
 .printText
 	ld hl, wInGameTradeTextPointerTableIndex
 	ld a, [hld] ; wInGameTradeTextPointerTableIndex
@@ -122,7 +122,7 @@ InGameTrade_DoTrade:
 	ld b, FLAG_SET
 	predef FlagActionPredef
 	ld hl, ConnectCableText
-	call PrintText
+	rst PrintTextRST
 	ld a, [wWhichPokemon]
 	push af
 	ld a, [wCurEnemyLVL]
@@ -358,10 +358,10 @@ WannaTrade1ColorText:
 	jr .done
 .altPalettesOn
 	ld hl, WannaTrade1TextPrompt
-	call PrintText
+	rst PrintTextRST
 	ld hl, WannaTradeColorPaletteText
 .done
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 NoTrade1Text:
@@ -403,10 +403,10 @@ WannaTrade2ColorText:
 	jr .done
 .altPalettesOn
 	ld hl, WannaTrade2TextPrompt
-	call PrintText
+	rst PrintTextRST
 	ld hl, WannaTradeColorPaletteText
 .done
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 NoTrade2Text:
@@ -443,10 +443,10 @@ WannaTrade3ColorText:
 	jr .done
 .altPalettesOn
 	ld hl, WannaTrade3TextPrompt
-	call PrintText
+	rst PrintTextRST
 	ld hl, WannaTradeColorPaletteText
 .done
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 NoTrade3Text:

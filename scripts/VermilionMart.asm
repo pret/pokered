@@ -10,15 +10,15 @@ VermilionMart_TextPointers:
 VermilionMartTMKid: ; PureRGBnote: ADDED: new NPC who will sell TMs
 	text_asm
 	ld hl, TMKidGreet2
-	call PrintText
+	rst PrintTextRST
 	CheckEvent EVENT_MET_VERMILION_TM_KID
 	jr z, .intro
 	ld hl, TMKidQuick2
-	call PrintText
+	rst PrintTextRST
 	jr .shop
 .intro
 	ld hl, VermilionMartTMKidFlavor
-	call PrintText
+	rst PrintTextRST
 	SetEvent EVENT_MET_VERMILION_TM_KID
 .shop
 	ld hl, VermilionTMKidShop

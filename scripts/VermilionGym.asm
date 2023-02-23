@@ -120,11 +120,11 @@ LTSurgeText:
 	jr .done
 .afterBeat
 	ld hl, LTSurgePostBattleAdviceText
-	call PrintText
+	rst PrintTextRST
 	jr .done
 .beforeBeat
 	ld hl, LTSurgePreBattleText
-	call PrintText
+	rst PrintTextRST
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
@@ -231,38 +231,38 @@ VermilionGymGuideText: ; PureRGBnote: ADDED: gym guide gives you apex chips afte
 	bit BIT_THUNDERBADGE, a
 	jr nz, .afterBeat
 	ld hl, VermilionGymGuidePreBattleText
-	call PrintText
+	rst PrintTextRST
 	jr .done
 .afterBeat
 	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS ; have to hear about apex chips to receive them after that
 	jr z, .postNoPrompt
 	ld hl, VermilionGymGuidePostBattleTextPrompt
-	call PrintText
+	rst PrintTextRST
 	CheckEvent EVENT_GOT_VERMILION_APEX_CHIPS
 	jr nz, .alreadyApexChips
 .giveApexChips
 	ld hl, GymGuideMoreApexChipText3
-	call PrintText
+	rst PrintTextRST
 	lb bc, APEX_CHIP, 2
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, ReceivedApexChipsText3
-	call PrintText
+	rst PrintTextRST
 	ld hl, VermilionGymGuideApexChipElectricText
-	call PrintText
+	rst PrintTextRST
 	SetEvent EVENT_GOT_VERMILION_APEX_CHIPS
 .alreadyApexChips
 	ld hl, AlreadyReceivedApexChipsText3
-	call PrintText
+	rst PrintTextRST
 	jr .done
 .BagFull
 	ld hl, ApexNoRoomText3
-	call PrintText
+	rst PrintTextRST
 .done
 	rst TextScriptEnd
 .postNoPrompt
 	ld hl, VermilionGymGuidePostBattleText
-	call PrintText
+	rst PrintTextRST
 	jr .done
 
 ReceivedApexChipsText3:

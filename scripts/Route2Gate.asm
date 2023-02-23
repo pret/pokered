@@ -26,7 +26,7 @@ Route2GateText1:
 	SetEvent EVENT_GOT_HM05
 .got_item
 	ld hl, Route2GateText_5d616
-	call PrintText
+	rst PrintTextRST
 .no_item
 	rst TextScriptEnd
 

@@ -17,7 +17,7 @@ LoadSAV:
 	push hl
 	set 6, [hl]
 	ld hl, FileDataDestroyedText
-	call PrintText
+	rst PrintTextRST
 	ld c, 100
 	rst DelayFramesRST
 	pop hl
@@ -163,7 +163,7 @@ SaveSAV:
 	call ClearScreenArea
 	hlcoord 1, 14
 	ld hl, GameSavedText
-	call PrintText
+	rst PrintTextRST
 	ld a, SFX_SAVE
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
@@ -171,7 +171,7 @@ SaveSAV:
 	jp DelayFrames
 
 SaveSAVConfirm:
-	call PrintText
+	rst PrintTextRST
 	hlcoord 0, 7
 	lb bc, 8, 1
 	ld a, TWO_OPTION_MENU
@@ -347,7 +347,7 @@ BoxSRAMPointerTable:
 
 ChangeBox::
 	ld hl, WhenYouChangeBoxText
-	call PrintText
+	rst PrintTextRST
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -446,7 +446,7 @@ DisplayChangeBoxMenu:
 	ld c, 9
 	call TextBoxBorder
 	ld hl, ChooseABoxText
-	call PrintText
+	rst PrintTextRST
 	hlcoord 11, 0
 	ld b, 12
 	ld c, 7

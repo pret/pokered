@@ -46,14 +46,14 @@ OakCeruleanCaveText:
 	CheckEvent EVENT_BEAT_PROF_OAK
 	jr z, .challengeOak
 	ld hl, OakBeatenText
-	call PrintText
+	rst PrintTextRST
 	jr .done
 .challengeOak
 	ld c, BANK(Music_MeetProfOak)
 	ld a, MUSIC_MEET_PROF_OAK
 	call PlayMusic
 	ld hl, OakBattleStartText
-	call PrintText
+	rst PrintTextRST
 	call OakBattle
 .done
 	rst TextScriptEnd
@@ -90,7 +90,7 @@ OakBattle:
 OakCeruleanCaveFirstDefeatText:
 	text_asm
 	ld hl, OakFirstLoseText
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 OakBattleStartText:

@@ -766,17 +766,17 @@ OaksLabText1:
 	CheckEvent EVENT_FOLLOWED_OAK_INTO_LAB_2
 	jr nz, .beforeChooseMon
 	ld hl, OaksLabGaryText1
-	call PrintText
+	rst PrintTextRST
 	jr .done
 .beforeChooseMon
 	bit 2, a
 	jr nz, .afterChooseMon
 	ld hl, OaksLabText40
-	call PrintText
+	rst PrintTextRST
 	jr .done
 .afterChooseMon
 	ld hl, OaksLabText41
-	call PrintText
+	rst PrintTextRST
 .done
 	rst TextScriptEnd
 
@@ -831,7 +831,7 @@ OaksLabScript_1d133:
 	CheckEventReuseA EVENT_OAK_ASKED_TO_CHOOSE_MON
 	jr nz, OaksLabScript_1d157
 	ld hl, OaksLabText39
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 OaksLabText39:
@@ -888,7 +888,7 @@ OaksLabBulbasaurText:
 	text_end
 
 OaksLabMonChoiceMenu:
-	call PrintText
+	rst PrintTextRST
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	call YesNoChoice ; yes/no menu
@@ -917,9 +917,9 @@ OaksLabMonChoiceMenu:
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, OaksLabMonEnergeticText
-	call PrintText
+	rst PrintTextRST
 	ld hl, OaksLabReceivedMonText
-	call PrintText
+	rst PrintTextRST
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a
 	ld a, 5
@@ -955,7 +955,7 @@ OaksLabScript_1d22d:
 	call GetPointerWithinSpriteStateData1
 	ld [hl], SPRITE_FACING_DOWN
 	ld hl, OaksLabLastMonText
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 OaksLabLastMonText:
@@ -977,7 +977,7 @@ OaksLabText5:
 	jr z, .asm_1d279
 .asm_1d266
 	ld hl, OaksLabText_1d31d
-	call PrintText
+	rst PrintTextRST
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	predef DisplayDexRating
@@ -996,29 +996,29 @@ OaksLabText5:
 	bit 3, a
 	jr nz, .asm_1d2a1
 	ld hl, OaksLabText_1d2f0
-	call PrintText
+	rst PrintTextRST
 	jr .asm_1d2ed
 .asm_1d2a1
 	ld hl, OaksLabText_1d2f5
-	call PrintText
+	rst PrintTextRST
 	jr .asm_1d2ed
 .asm_1d2a9
 	ld b, OAKS_PARCEL
 	call IsItemInBag
 	jr nz, .asm_1d2b8
 	ld hl, OaksLabText_1d2fa
-	call PrintText
+	rst PrintTextRST
 	jr .asm_1d2ed
 .asm_1d2b8
 	ld hl, OaksLabDeliverParcelText
-	call PrintText
+	rst PrintTextRST
 	call OaksLabScript_RemoveParcel
 	ld a, $f
 	ld [wOaksLabCurScript], a
 	jr .asm_1d2ed
 .asm_1d2c8
 	ld hl, OaksLabAroundWorldText
-	call PrintText
+	rst PrintTextRST
 	jr .asm_1d2ed
 .asm_1d2d0
 	CheckAndSetEvent EVENT_GOT_POKEBALLS_FROM_OAK
@@ -1026,11 +1026,11 @@ OaksLabText5:
 	lb bc, ITEM_OAK_POKE_BALL_REWARD, 5
 	call GiveItem
 	ld hl, OaksLabGivePokeballsText
-	call PrintText
+	rst PrintTextRST
 	jr .asm_1d2ed
 .asm_1d2e7
 	ld hl, OaksLabPleaseVisitText
-	call PrintText
+	rst PrintTextRST
 .asm_1d2ed
 	rst TextScriptEnd
 
@@ -1074,7 +1074,7 @@ OaksLabText7:
 OaksLabText6:
 	text_asm
 	ld hl, OaksLabText_1d32c
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 OaksLabText_1d32c:
@@ -1088,7 +1088,7 @@ OaksLabText8:
 OaksLabText9:
 	text_asm
 	ld hl, OaksLabText_1d340
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 OaksLabText_1d340:
@@ -1098,7 +1098,7 @@ OaksLabText_1d340:
 OaksLabText17:
 	text_asm
 	ld hl, OaksLabRivalWaitingText
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 OaksLabRivalWaitingText:
@@ -1108,7 +1108,7 @@ OaksLabRivalWaitingText:
 OaksLabText18:
 	text_asm
 	ld hl, OaksLabChooseMonText
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 OaksLabChooseMonText:
@@ -1118,7 +1118,7 @@ OaksLabChooseMonText:
 OaksLabText19:
 	text_asm
 	ld hl, OaksLabRivalInterjectionText
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 OaksLabRivalInterjectionText:
@@ -1128,7 +1128,7 @@ OaksLabRivalInterjectionText:
 OaksLabText20:
 	text_asm
 	ld hl, OaksLabBePatientText
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 OaksLabBePatientText:
@@ -1138,7 +1138,7 @@ OaksLabBePatientText:
 OaksLabText12:
 	text_asm
 	ld hl, OaksLabLeavingText
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 OaksLabLeavingText:
@@ -1148,7 +1148,7 @@ OaksLabLeavingText:
 OaksLabText13:
 	text_asm
 	ld hl, OaksLabRivalPickingMonText
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 OaksLabRivalPickingMonText:
@@ -1158,7 +1158,7 @@ OaksLabRivalPickingMonText:
 OaksLabText14:
 	text_asm
 	ld hl, OaksLabRivalReceivedMonText
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 OaksLabRivalReceivedMonText:
@@ -1169,7 +1169,7 @@ OaksLabRivalReceivedMonText:
 OaksLabText15:
 	text_asm
 	ld hl, OaksLabRivalChallengeText
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 OaksLabRivalChallengeText:
@@ -1187,7 +1187,7 @@ OaksLabText_1d3c3:
 OaksLabText16:
 	text_asm
 	ld hl, OaksLabRivalToughenUpText
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 OaksLabRivalToughenUpText:
@@ -1227,7 +1227,7 @@ OaksLabText11:
 OaksLabText10:
 	text_asm
 	ld hl, OaksLabText_1d405
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 OaksLabText_1d405:

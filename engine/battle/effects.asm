@@ -373,7 +373,7 @@ CheckDefrost:
 	ld [hl], a
 	ld hl, FireDefrostedText
 .common
-	call PrintText
+	rst PrintTextRST
 	farjp CheckDefrostMove
 
 
@@ -642,7 +642,7 @@ UpdateStatDone:
 	                             ; even to those not affected by the stat-up move (will be boosted further)
 	                             ; PureRGBnote: FIXED: badge boosts only applied to the specific stat being modified
 	ld hl, MonsStatsRoseText
-	call PrintText
+	rst PrintTextRST
 
 ; these always run on the opponent, and run regardless of what stat was modified
 ;;;;;;;;;;; PureRGBnote: FIXED: These ran on the opponent's stats erroneously
@@ -867,7 +867,7 @@ UpdateLoweredStatDone:
 	                              ; even to those not affected by the stat-up move (will be boosted further)
 	                             ; PureRGBnote: FIXED: badge boosts only applied to the specific stat being modified
 	ld hl, MonsStatsFellText
-	call PrintText
+	rst PrintTextRST
 
 ; These where probably added given that a stat-down move affecting speed or attack will override
 ; the stat penalties from paralysis and burn respectively.
@@ -1503,7 +1503,7 @@ MimicEffect:
 	call GetMoveName
 	call PlayCurrentMoveAnimation
 	ld hl, MimicLearnedMoveText
-	call PrintText
+	rst PrintTextRST
 ;;;;;;;;;; PureRGBnote: CHANGED: Now immediately use the move
 	ld a, [hWhoseTurn]
 	and a

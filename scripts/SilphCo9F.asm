@@ -165,17 +165,17 @@ SilphCo9Text1:
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .asm_5d8dc
 	ld hl, SilphCo9Text_5d8e5
-	call PrintText
+	rst PrintTextRST
 	predef HealParty
 	call GBFadeOutToWhite
 	call Delay3
 	call GBFadeInFromWhite
 	ld hl, SilphCo9Text_5d8ea
-	call PrintText
+	rst PrintTextRST
 	jr .asm_5d8e2
 .asm_5d8dc
 	ld hl, SilphCo9Text_5d8ef
-	call PrintText
+	rst PrintTextRST
 .asm_5d8e2
 	rst TextScriptEnd
 

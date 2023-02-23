@@ -1,9 +1,9 @@
 OpenOaksPC:
 	call SaveScreenTilesToBuffer2
 	ld hl, AccessedOaksPCText
-	call PrintText
+	rst PrintTextRST
 	ld hl, GetDexRatedText
-	call PrintText
+	rst PrintTextRST
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -11,7 +11,7 @@ OpenOaksPC:
 	predef DisplayDexRating
 .closePC
 	ld hl, ClosedOaksPCText
-	call PrintText
+	rst PrintTextRST
 	jp LoadScreenTilesFromBuffer2
 
 GetDexRatedText:

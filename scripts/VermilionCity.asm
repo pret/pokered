@@ -142,11 +142,11 @@ VermilionCityText2:
 	CheckEvent EVENT_SS_ANNE_LEFT
 	jr nz, .shipHasDeparted
 	ld hl, VermilionCityTextDidYouSee
-	call PrintText
+	rst PrintTextRST
 	jr .end
 .shipHasDeparted
 	ld hl, VermilionCityTextSSAnneDeparted
-	call PrintText
+	rst PrintTextRST
 .end
 	rst TextScriptEnd
 
@@ -174,28 +174,28 @@ VermilionCityText3:
 	jr nc, .greetPlayerAndCheckTicket
 .greetPlayer
 	ld hl, SSAnneWelcomeText4
-	call PrintText
+	rst PrintTextRST
 	jr .end
 .greetPlayerAndCheckTicket
 	ld hl, SSAnneWelcomeText9
-	call PrintText
+	rst PrintTextRST
 	ld b, S_S_TICKET
 	predef GetQuantityOfItemInBag
 	ld a, b
 	and a
 	jr nz, .playerHasTicket
 	ld hl, SSAnneNoTicketText
-	call PrintText
+	rst PrintTextRST
 	jr .end
 .playerHasTicket
 	ld hl, SSAnneFlashedTicketText
-	call PrintText
+	rst PrintTextRST
 	ld a, $4
 	ld [wVermilionCityCurScript], a
 	jr .end
 .shipHasDeparted
 	ld hl, SSAnneNotHereText
-	call PrintText
+	rst PrintTextRST
 .end
 	rst TextScriptEnd
 
@@ -286,21 +286,21 @@ VermilionCityDockBeautyText:
 	CheckEvent EVENT_GOT_DOCK_BEAUTY_ITEM
 	jr nz, .endText
 	ld hl, VermilionCityDockBeautyGreeting
-	call PrintText
+	rst PrintTextRST
 	lb bc, ITEM_VERMILION_SECRET_DOCK_BEAUTY_NEW, 1
 	call GiveItem
 	jr nc, .bagfull
 	SetEvent EVENT_GOT_DOCK_BEAUTY_ITEM
 	ld hl, VermilionCityDockBeautyReceivedItemText
-	call PrintText
+	rst PrintTextRST
 	jr .done
 .bagfull
 	ld hl, VermilionCityDockBeautyNoRoomText
-	call PrintText
+	rst PrintTextRST
 	jr .done
 .endText
 	ld hl, VermilionCityDockBeautyEndText
-	call PrintText
+	rst PrintTextRST
 .done
 	rst TextScriptEnd
 

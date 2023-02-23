@@ -26,7 +26,7 @@ PrintBeginningBattleText:
 	push hl
 	callfar DrawAllPokeballs
 	pop hl
-	call PrintText
+	rst PrintTextRST
 	jp .done
 .pokemonTower
 	ld b, SILPH_SCOPE
@@ -43,9 +43,9 @@ PrintBeginningBattleText:
 .noSilphScope
 	call PlayGhostSfx
 	ld hl, EnemyAppearedText
-	call PrintText
+	rst PrintTextRST
 	ld hl, GhostCantBeIDdText
-	call PrintText
+	rst PrintTextRST
 	jr .done
 .isMarowak
 	ld a, b
@@ -53,9 +53,9 @@ PrintBeginningBattleText:
 	jr z, .noSilphScope
 	call PlayGhostSfx 
 	ld hl, EnemyAppearedText
-	call PrintText
+	rst PrintTextRST
 	ld hl, UnveiledGhostText
-	call PrintText
+	rst PrintTextRST
 	callfar LoadEnemyMonData
 	callfar MarowakAnim
 ;;;;;;;;;; PureRGBnote: ADDED: when encountering ghost marowak, upon transforming it will play marowak's cry now
@@ -63,7 +63,7 @@ PrintBeginningBattleText:
 	call PlayCry
 ;;;;;;;;;;
 	ld hl, WildMonAppearedText
-	call PrintText
+	rst PrintTextRST
 .playSFX
 	xor a
 	ld [wFrequencyModifier], a

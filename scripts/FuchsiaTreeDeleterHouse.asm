@@ -33,7 +33,7 @@ FuchsiaTreeDeleter:
 	call CheckAllTreesDeleted
 	jr z, .finalText
 	ld hl, FuchsiaTreeDeleterHouseText1
-	call PrintText
+	rst PrintTextRST
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wListScrollOffset], a
@@ -41,7 +41,7 @@ FuchsiaTreeDeleter:
 	call CheckAllTreesDeleted
 	jr z, .noMoreTreesToDelete
 	ld hl, FuchsiaTreeDeleterHouseText2
-	call PrintText
+	rst PrintTextRST
 	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
@@ -69,25 +69,25 @@ FuchsiaTreeDeleter:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	call PrintText
+	rst PrintTextRST
 	jr .listLoop
 .goodbye
 	xor a
 	ld [wListScrollOffset], a
 	ld hl, FuchsiaTreeDeleterDoneText
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 .noMoreTreesToDelete
 	xor a
 	ld [wListScrollOffset], a
 	ld hl, FuchsiaTreeDeleterFinalText
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 .finalText
 	ld hl, FuchsiaTreeDeleterFinalTextPrompt
-	call PrintText
+	rst PrintTextRST
 	ld hl, FuchsiaTreeDeleterFinalText2
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 
@@ -130,12 +130,12 @@ PurchasedTreeDeletion:
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
 	ld hl, FuchsiaTreeDeleterTreeDelete
-	call PrintText
+	rst PrintTextRST
 	scf
 	ret
 .notEnoughMoneyTreeDeleter
 	ld hl, NotEnoughMoneyTreeDeleterText
-	call PrintText
+	rst PrintTextRST
 	ret
 
 IsThereEnoughMoneyTreeDeleter:
@@ -161,7 +161,7 @@ FuchsiaTreeDeleterRoute2:
 	CheckEvent EVENT_DELETED_ROUTE2_TREES
 	jr nz, .alreadyDeleted
 	ld hl, FuchsiaTreeDeleterRoute2Text
-	call PrintText
+	rst PrintTextRST
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -179,7 +179,7 @@ FuchsiaTreeDeleterRoute2:
 	jr .done
 .alreadyDeleted
 	ld hl, FuchsiaTreeDeleterAlreadyDeletedText
-	call PrintText
+	rst PrintTextRST
 .done
 	rst TextScriptEnd
 
@@ -192,7 +192,7 @@ FuchsiaTreeDeleterCeruleanCity:
 	CheckEvent EVENT_DELETED_CERULEAN_TREE
 	jr nz, .alreadyDeleted
 	ld hl, FuchsiaTreeDeleterCeruleanCityText
-	call PrintText
+	rst PrintTextRST
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -210,7 +210,7 @@ FuchsiaTreeDeleterCeruleanCity:
 	jr .done
 .alreadyDeleted
 	ld hl, FuchsiaTreeDeleterAlreadyDeletedText
-	call PrintText
+	rst PrintTextRST
 .done
 	rst TextScriptEnd
 
@@ -223,7 +223,7 @@ FuchsiaTreeDeleterRoute9:
 	CheckEvent EVENT_DELETED_ROUTE9_TREE
 	jr nz, .alreadyDeleted
 	ld hl, FuchsiaTreeDeleterRoute9Text
-	call PrintText
+	rst PrintTextRST
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -241,7 +241,7 @@ FuchsiaTreeDeleterRoute9:
 	jr .done
 .alreadyDeleted
 	ld hl, FuchsiaTreeDeleterAlreadyDeletedText
-	call PrintText
+	rst PrintTextRST
 .done
 	rst TextScriptEnd
 
@@ -254,7 +254,7 @@ FuchsiaTreeDeleterFuchsiaCity:
 	CheckEvent EVENT_DELETED_FUCHSIA_TREES
 	jr nz, .alreadyDeleted
 	ld hl, FuchsiaTreeDeleterFuchsiaCityText
-	call PrintText
+	rst PrintTextRST
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -272,7 +272,7 @@ FuchsiaTreeDeleterFuchsiaCity:
 	jr .done
 .alreadyDeleted
 	ld hl, FuchsiaTreeDeleterAlreadyDeletedText
-	call PrintText
+	rst PrintTextRST
 .done
 	rst TextScriptEnd
 

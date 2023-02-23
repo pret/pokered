@@ -205,14 +205,14 @@ Route23Script_51346:
 	and a
 	jr nz, .asm_5136e
 	ld hl, VictoryRoadGuardText1
-	call PrintText
+	rst PrintTextRST
 	call Route23Script_512d8
 	ld a, $1
 	ld [wRoute23CurScript], a
 	ret
 .asm_5136e
 	ld hl, VictoryRoadGuardText2
-	call PrintText
+	rst PrintTextRST
 	ld a, [wWhichBadge]
 	ld c, a
 	ld b, FLAG_SET

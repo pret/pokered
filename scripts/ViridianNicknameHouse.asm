@@ -18,7 +18,7 @@ ViridianHouseText2:
 ViridianHouseText3:
 	text_asm
 	ld hl, ViridianHouseText_1d5b1
-	call PrintText
+	rst PrintTextRST
 	ld a, SPEAROW
 	call PlayCry
 	call WaitForSoundToFinish

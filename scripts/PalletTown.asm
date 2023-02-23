@@ -169,7 +169,7 @@ PalletTownText1:
 .next
 	ld hl, OakWalksUpText
 .done
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 OakAppearsText:

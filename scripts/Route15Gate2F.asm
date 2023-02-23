@@ -31,7 +31,7 @@ Route15GateUpstairsText1:
 	and a
 	jr z, .boosterChipNotActive
 	ld hl, Route15GateUpstairsRemoveBoosterText
-	call PrintText
+	rst PrintTextRST
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -43,19 +43,19 @@ Route15GateUpstairsText1:
 	ld [wBoosterChipActive], a
 	call RemoveBoosterChipSounds
 	ld hl, Route15GateUpstairsDoneText
-	call PrintText
+	rst PrintTextRST
 	jr .no_item
 .bagFull
 	ld hl, Route15GateUpstairsNoRoomText
-	call PrintText
+	rst PrintTextRST
 	jr .no_item
 .noUninstall
 	ld hl, Route15GateUpstairsNoUninstallText
-	call PrintText
+	rst PrintTextRST
 	jr .no_item
 .boosterChipNotActive
 	ld hl, Route15GateUpstairsText_4968c
-	call PrintText
+	rst PrintTextRST
 .no_item
 	rst TextScriptEnd
 

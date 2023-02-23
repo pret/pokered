@@ -14,11 +14,11 @@ CeruleanHouseTrashedText1:
 	and b
 	jr z, .no_dig_tm
 	ld hl, CeruleanHouseTrashedText_1d6b0
-	call PrintText
+	rst PrintTextRST
 	jr .done
 .no_dig_tm
 	ld hl, CeruleanHouseTrashedText_1d6ab
-	call PrintText
+	rst PrintTextRST
 .done
 	rst TextScriptEnd
 

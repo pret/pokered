@@ -188,7 +188,7 @@ SSAnne2Text1:
 SSAnne2Text2:
 	text_asm
 	ld hl, SSAnneRivalBeforeBattleText
-	call PrintText
+	rst PrintTextRST
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]

@@ -12,7 +12,7 @@ Route12HouseText1:
 	CheckEvent EVENT_GOT_ROUTE12_FISHING_GURU_ITEM
 	jr nz, .printEndText
 	ld hl, Route12GuruIntro
-	call PrintText
+	rst PrintTextRST
 	callfar LastTwoGurusScript
 	jr .done
 .printEndText
@@ -20,13 +20,13 @@ Route12HouseText1:
 	bit BIT_ALT_PKMN_PALETTES, a ; do we have alt palettes enabled
 	jr z, .noColorText
 	ld hl, Route12GuruEndColor
-	call PrintText
+	rst PrintTextRST
 	ld hl, Route12GuruColorInfo
-	call PrintText
+	rst PrintTextRST
 	jr .done
 .noColorText
 	ld hl, Route12GuruEnd
-	call PrintText
+	rst PrintTextRST
 .done
 	rst TextScriptEnd
 

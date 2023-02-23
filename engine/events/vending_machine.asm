@@ -2,7 +2,7 @@
 
 VendingMachineMenu::
 	ld hl, VendingMachineText1
-	call PrintText
+	rst PrintTextRST
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
@@ -128,7 +128,7 @@ VendingMachineMenu::
 	jr nz, .playDeliverySound
 
 	ld hl, VendingMachineText5
-	call PrintText
+	rst PrintTextRST
 	ld hl, hVendingMachinePrice + 2
 	ld de, wPlayerMoney + 2
 	ld c, $3
@@ -148,7 +148,7 @@ VendingMachineMenu::
 .thatsEnough
 	ld hl, VendingMachineText8
 .done
-	call PrintText
+	rst PrintTextRST
 	xor a
 	ld [wTempFlag0], a
 	ret

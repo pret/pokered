@@ -57,14 +57,14 @@ Museum1FText1:
 	CheckEvent EVENT_BOUGHT_MUSEUM_TICKET
 	jr nz, .asm_31a16
 	ld hl, Museum1FText_5c23d
-	call PrintText
+	rst PrintTextRST
 	jp Museum1FScriptEnd
 .asm_b8709
 	CheckEvent EVENT_BOUGHT_MUSEUM_TICKET
 	jr z, .asm_3ded4
 .asm_31a16
 	ld hl, Museum1FText_5c242
-	call PrintText
+	rst PrintTextRST
 	jp Museum1FScriptEnd
 .asm_3ded4
 	ld a, MONEY_BOX
@@ -73,7 +73,7 @@ Museum1FText1:
 	xor a
 	ldh [hJoyHeld], a
 	ld hl, Museum1FText_5c21f
-	call PrintText
+	rst PrintTextRST
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -86,11 +86,11 @@ Museum1FText1:
 	call HasEnoughMoney
 	jr nc, .asm_0f3e3
 	ld hl, Museum1FText_5c229
-	call PrintText
+	rst PrintTextRST
 	jp .asm_de133
 .asm_0f3e3
 	ld hl, Museum1FText_5c224
-	call PrintText
+	rst PrintTextRST
 	SetEvent EVENT_BOUGHT_MUSEUM_TICKET
 	xor a
 	ld [wPriceTemp], a
@@ -110,7 +110,7 @@ Museum1FText1:
 	jr .asm_0b094
 .asm_de133
 	ld hl, Museum1FText_5c21a
-	call PrintText
+	rst PrintTextRST
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
 	ld a, D_DOWN
@@ -125,17 +125,17 @@ Museum1FText1:
 
 Museum1FScript_5c1f9:
 	ld hl, Museum1FText_5c22e
-	call PrintText
+	rst PrintTextRST
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	cp $0
 	jr nz, .asm_d1144
 	ld hl, Museum1FText_5c233
-	call PrintText
+	rst PrintTextRST
 	jr Museum1FScriptEnd
 .asm_d1144
 	ld hl, Museum1FText_5c238
-	call PrintText
+	rst PrintTextRST
 Museum1FScriptEnd:
 	rst TextScriptEnd
 
@@ -178,7 +178,7 @@ Museum1FText_5c242:
 Museum1FText2:
 	text_asm
 	ld hl, Museum1FText_5c251
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 Museum1FText_5c251:
@@ -190,7 +190,7 @@ Museum1FText3:
 	CheckEvent EVENT_GOT_OLD_AMBER
 	jr nz, .got_item
 	ld hl, Museum1FText_5c28e
-	call PrintText
+	rst PrintTextRST
 	lb bc, OLD_AMBER, 1
 	call GiveItem
 	jr nc, .bag_full
@@ -206,7 +206,7 @@ Museum1FText3:
 .got_item
 	ld hl, Museum1FText_5c299
 .done
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 Museum1FText_5c28e:
@@ -229,7 +229,7 @@ Museum1FText_5c29e:
 Museum1FText4:
 	text_asm
 	ld hl, Museum1FText_5c2ad
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 Museum1FText_5c2ad:
@@ -239,7 +239,7 @@ Museum1FText_5c2ad:
 Museum1FText5:
 	text_asm
 	ld hl, Museum1FText_5c2bc
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 Museum1FText_5c2bc:

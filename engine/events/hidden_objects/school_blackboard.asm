@@ -10,7 +10,7 @@ LinkCableHelp::
 	text_asm
 	call SaveScreenTilesToBuffer1
 	ld hl, LinkCableHelpText1
-	call PrintText
+	rst PrintTextRST
 	xor a
 	ld [wMenuItemOffset], a ; not used
 	ld [wCurrentMenuItem], a
@@ -34,7 +34,7 @@ LinkCableHelp::
 	ld de, HowToLinkText
 	call PlaceString
 	ld hl, LinkCableHelpText2
-	call PrintText
+	rst PrintTextRST
 	call HandleMenuInput
 	bit BIT_B_BUTTON, a
 	jr nz, .exit
@@ -51,7 +51,7 @@ LinkCableHelp::
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	call PrintText
+	rst PrintTextRST
 	jp .linkHelpLoop
 .exit
 	ld hl, wd730
@@ -94,7 +94,7 @@ ViridianSchoolBlackboard::
 	text_asm
 	call SaveScreenTilesToBuffer1
 	ld hl, ViridianSchoolBlackboardText1
-	call PrintText
+	rst PrintTextRST
 	xor a
 	ld [wMenuItemOffset], a
 	ld [wCurrentMenuItem], a
@@ -120,7 +120,7 @@ ViridianSchoolBlackboard::
 	ld de, StatusAilmentText2
 	call PlaceString
 	ld hl, ViridianSchoolBlackboardText2
-	call PrintText
+	rst PrintTextRST
 	call HandleMenuInput ; pressing up and down is handled in here
 	bit BIT_B_BUTTON, a ; pressed b
 	jr nz, .exitBlackboard
@@ -168,7 +168,7 @@ ViridianSchoolBlackboard::
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	call PrintText
+	rst PrintTextRST
 	jp .blackboardLoop
 .exitBlackboard
 	ld hl, wd730

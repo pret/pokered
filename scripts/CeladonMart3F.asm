@@ -26,7 +26,7 @@ CeladonMart3Text1:
 	CheckEvent EVENT_GOT_TM18
 	jr nz, .got_item
 	ld hl, TM18PreReceiveText
-	call PrintText
+	rst PrintTextRST
 	lb bc, TM_CELADON_MART_GAME_SHOP_GUY, 1
 	call GiveItem
 	jr nc, .bag_full
@@ -39,7 +39,7 @@ CeladonMart3Text1:
 .got_item
 	ld hl, TM18ExplanationText
 .done
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 TM18PreReceiveText:
@@ -111,9 +111,9 @@ CeladonMart3Text15:
 CeladonMartTMKid:
 	text_asm
 	ld hl, TMKidGreet4
-	call PrintText
+	rst PrintTextRST
 	ld hl, CeladonMartTMKidFlavor
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 	
 TMKidGreet4::

@@ -1,6 +1,6 @@
 DisplayElevatorFloorMenu:
 	ld hl, WhichFloorText
-	call PrintText
+	rst PrintTextRST
 	ld hl, wItemList
 	ld a, l
 	ld [wListPointer], a

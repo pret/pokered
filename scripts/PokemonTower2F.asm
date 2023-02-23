@@ -135,11 +135,11 @@ PokemonTower2Text1:
 	CheckEvent EVENT_BEAT_POKEMON_TOWER_RIVAL
 	jr z, .asm_16f24
 	ld hl, PokemonTower2Text_6063c
-	call PrintText
+	rst PrintTextRST
 	jr .asm_41852
 .asm_16f24
 	ld hl, PokemonTower2Text_6062d
-	call PrintText
+	rst PrintTextRST
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]

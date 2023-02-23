@@ -10,15 +10,15 @@ CinnabarMart_TextPointers:
 CinnabarMartTMKid: ; PureRGBnote: ADDED: new NPC who will sell TMs
 	text_asm
 	ld hl, TMKidGreet7
-	call PrintText
+	rst PrintTextRST
 	CheckEvent EVENT_MET_CINNABAR_TM_KID
 	jr z, .intro
 	ld hl, TMKidQuick7
-	call PrintText
+	rst PrintTextRST
 	jr .shop
 .intro
 	ld hl, CinnabarMartTMKidFlavor
-	call PrintText
+	rst PrintTextRST
 	SetEvent EVENT_MET_CINNABAR_TM_KID
 .shop
 	ld hl, CinnabarTMKidShop

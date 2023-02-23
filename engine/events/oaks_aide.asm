@@ -1,6 +1,6 @@
 OaksAideScript:
 	ld hl, OaksAideHiText
-	call PrintText
+	rst PrintTextRST
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -17,29 +17,29 @@ OaksAideScript:
 	jr nc, .notEnoughOwnedMons
 .giveItem
 	ld hl, OaksAideHereYouGoText
-	call PrintText
+	rst PrintTextRST
 	ldh a, [hOaksAideRewardItem]
 	ld b, a
 	ld c, 1
 	call GiveItem
 	jr nc, .bagFull
 	ld hl, OaksAideGotItemText
-	call PrintText
+	rst PrintTextRST
 	ld a, OAKS_AIDE_GOT_ITEM
 	jr .done
 .bagFull
 	ld hl, OaksAideNoRoomText
-	call PrintText
+	rst PrintTextRST
 	xor a ; OAKS_AIDE_BAG_FULL
 	jr .done
 .notEnoughOwnedMons
 	ld hl, OaksAideUhOhText
-	call PrintText
+	rst PrintTextRST
 	ld a, OAKS_AIDE_NOT_ENOUGH_MONS
 	jr .done
 .choseNo
 	ld hl, OaksAideComeBackText
-	call PrintText
+	rst PrintTextRST
 	ld a, OAKS_AIDE_REFUSED
 .done
 	ldh [hOaksAideResult], a

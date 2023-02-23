@@ -109,15 +109,15 @@ Route24Text1:
 	CheckEvent EVENT_GOT_NUGGET
 	jr nz, .got_item
 	ld hl, Route24Text_51510
-	call PrintText
+	rst PrintTextRST
 	lb bc, ITEM_NUGGET_BRIDGE_REWARD, 1
 	call GiveItem
 	jr nc, .bag_full
 	SetEvent EVENT_GOT_NUGGET
 	ld hl, Route24Text_5151a
-	call PrintText
+	rst PrintTextRST
 	ld hl, Route24Text_51526
-	call PrintText
+	rst PrintTextRST
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
@@ -136,11 +136,11 @@ Route24Text1:
 	rst TextScriptEnd
 .got_item
 	ld hl, Route24Text_51530
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 .bag_full
 	ld hl, Route24Text_51521
-	call PrintText
+	rst PrintTextRST
 	SetEvent EVENT_NUGGET_REWARD_AVAILABLE
 	rst TextScriptEnd
 

@@ -37,7 +37,7 @@ Route11GateUpstairsText2:
 	SetEvent EVENT_GOT_ITEMFINDER
 .got_item
 	ld hl, Route11GateUpstairsText_494a3
-	call PrintText
+	rst PrintTextRST
 .no_item
 	jr Route11GateUpstairsScriptEnd
 
@@ -55,7 +55,7 @@ Route11GateUpstairsText3:
 	jr z, .print
 	ld hl, BinocularsNoSnorlaxText
 .print
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 BinocularsSnorlaxText:

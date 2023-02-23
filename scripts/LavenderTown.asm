@@ -15,7 +15,7 @@ LavenderTown_TextPointers:
 LavenderTownText1:
 	text_asm
 	ld hl, LavenderTownText_4413c
-	call PrintText
+	rst PrintTextRST
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -23,7 +23,7 @@ LavenderTownText1:
 	jr nz, .got_text
 	ld hl, LavenderTownText_44141
 .got_text
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 LavenderTownText_4413c:

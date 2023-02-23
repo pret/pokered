@@ -32,7 +32,7 @@ DontAbandonLearning:
 	ld [wd11e], a
 	call GetMoveName
 	ld hl, OneTwoAndText
-	call PrintText
+	rst PrintTextRST
 	pop de
 	pop hl
 .next
@@ -75,7 +75,7 @@ DontAbandonLearning:
 
 AbandonLearning:
 	ld hl, AbandonLearningText
-	call PrintText
+	rst PrintTextRST
 	hlcoord 14, 7
 	lb bc, 8, 15
 	ld a, TWO_OPTION_MENU
@@ -85,20 +85,20 @@ AbandonLearning:
 	and a
 	jp nz, DontAbandonLearning
 	ld hl, DidNotLearnText
-	call PrintText
+	rst PrintTextRST
 	ld b, 0
 	ret
 
 PrintLearnedMove:
 	ld hl, LearnedMove1Text
-	call PrintText
+	rst PrintTextRST
 	ld b, 1
 	ret
 
 TryingToLearn:
 	push hl
 	ld hl, TryingToLearnText
-	call PrintText
+	rst PrintTextRST
 	hlcoord 14, 7
 	lb bc, 8, 15
 	ld a, TWO_OPTION_MENU
@@ -119,7 +119,7 @@ TryingToLearn:
 .loop
 	push hl
 	ld hl, WhichMoveToForgetText
-	call PrintText
+	rst PrintTextRST
 	hlcoord 4, 7
 	ld b, 4
 	ld c, 14
@@ -181,13 +181,13 @@ TryingToLearn:
 	ret
 ;.hm ; FIXED: moves are never considered HMs and can always be deleted if desired
 ;	ld hl, HMCantDeleteText
-;	call PrintText
+;	rst PrintTextRST
 ;	pop hl
 ;	jr .loop
 .pressStart ; PureRGBnote: FIXED: explain the start button is used to select a move now if A is pressed.
 	push hl
 	ld hl, PressStartToLearnText
-	call PrintText
+	rst PrintTextRST
 	pop hl
 	jr .menuLoop
 .cancel

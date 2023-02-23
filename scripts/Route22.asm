@@ -389,11 +389,11 @@ Route22Text1:
 	CheckEvent EVENT_BEAT_ROUTE22_RIVAL_1ST_BATTLE
 	jr z, .asm_5118b
 	ld hl, Route22RivalAfterBattleText1
-	call PrintText
+	rst PrintTextRST
 	jr .asm_51191
 .asm_5118b
 	ld hl, Route22RivalBeforeBattleText1
-	call PrintText
+	rst PrintTextRST
 .asm_51191
 	rst TextScriptEnd
 
@@ -402,11 +402,11 @@ Route22Text2:
 	CheckEvent EVENT_BEAT_ROUTE22_RIVAL_2ND_BATTLE
 	jr z, .asm_511a4
 	ld hl, Route22RivalAfterBattleText2
-	call PrintText
+	rst PrintTextRST
 	jr .asm_511aa
 .asm_511a4
 	ld hl, Route22RivalBeforeBattleText2
-	call PrintText
+	rst PrintTextRST
 .asm_511aa
 	rst TextScriptEnd
 

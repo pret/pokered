@@ -30,7 +30,7 @@ CheckStrengthUsage::
 .foundStrength
 	push de
 	ld hl, BoulderTextInit
-	call PrintText
+	rst PrintTextRST
 	pop de
 	ld a, e
 	push de
@@ -46,7 +46,7 @@ CheckStrengthUsage::
 	ld hl, wd728
 	set 0, [hl]
 	ld hl, UsedStrengthText2
-	call PrintText
+	rst PrintTextRST
 	ld a, [wcf91]
 	call PlayCry
 	call Delay3

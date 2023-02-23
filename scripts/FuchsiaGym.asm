@@ -112,11 +112,11 @@ KogaText:
 	jr .done
 .afterBeat
 	ld hl, KogaPostBattleAdviceText
-	call PrintText
+	rst PrintTextRST
 	jr .done
 .beforeBeat
 	ld hl, KogaBeforeBattleText
-	call PrintText
+	rst PrintTextRST
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
@@ -277,38 +277,38 @@ FuchsiaGymGuideText: ; PureRGBnote: ADDED: gym guide gives you apex chips after 
 	CheckEvent EVENT_BEAT_KOGA
 	jr nz, .afterBeat
 	ld hl, FuchsiaGymGuidePreBattleText
-	call PrintText
+	rst PrintTextRST
 	jr .done
 .afterBeat
 	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS ; have to hear about apex chips to receive them after that
 	jr z, .donePrompt
 	ld hl, FuchsiaGymGuidePostBattleTextPrompt
-	call PrintText
+	rst PrintTextRST
 	CheckEvent EVENT_GOT_FUCHSIA_APEX_CHIPS
 	jr nz, .alreadyApexChips
 .giveApexChips
 	ld hl, GymGuideMoreApexChipText5
-	call PrintText
+	rst PrintTextRST
 	lb bc, APEX_CHIP, 2
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, ReceivedApexChipsText5
-	call PrintText
+	rst PrintTextRST
 	ld hl, FuchsiaGymGuideApexChipPoisonText
-	call PrintText
+	rst PrintTextRST
 	SetEvent EVENT_GOT_FUCHSIA_APEX_CHIPS
 .alreadyApexChips
 	ld hl, AlreadyReceivedApexChipsText5
-	call PrintText
+	rst PrintTextRST
 	jr .done
 .BagFull
 	ld hl, ApexNoRoomText5
-	call PrintText
+	rst PrintTextRST
 .done
 	rst TextScriptEnd
 .donePrompt
 	ld hl, FuchsiaGymGuidePostBattleText
-	call PrintText
+	rst PrintTextRST
 	jr .done
 
 ReceivedApexChipsText5:

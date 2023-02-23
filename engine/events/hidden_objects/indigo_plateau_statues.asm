@@ -1,14 +1,14 @@
 IndigoPlateauStatues::
 	text_asm
 	ld hl, IndigoPlateauStatuesText1
-	call PrintText
+	rst PrintTextRST
 	ld a, [wXCoord]
 	bit 0, a
 	ld hl, IndigoPlateauStatuesText2
 	jr nz, .ok
 	ld hl, IndigoPlateauStatuesText3
 .ok
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 IndigoPlateauStatuesText1:

@@ -94,7 +94,7 @@ SilphCo3Text1:
 	jr nz, .asm_59fee
 	ld hl, SilphCo3Text_59ff9
 .asm_59fee
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 SilphCo3Text_59ff9:

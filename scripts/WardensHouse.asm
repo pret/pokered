@@ -18,7 +18,7 @@ FuchsiaHouse2Text1:
 	CheckEvent EVENT_GAVE_GOLD_TEETH
 	jr nz, .gave_gold_teeth
 	ld hl, WardenGibberishText1
-	call PrintText
+	rst PrintTextRST
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -26,32 +26,32 @@ FuchsiaHouse2Text1:
 	jr nz, .refused
 	ld hl, WardenGibberishText2
 .refused
-	call PrintText
+	rst PrintTextRST
 	jr .done
 .have_gold_teeth
 	ld hl, WardenTeethText1
-	call PrintText
+	rst PrintTextRST
 	ld a, GOLD_TEETH
 	ldh [hItemToRemoveID], a
 	farcall RemoveItemByID
 	SetEvent EVENT_GAVE_GOLD_TEETH
 .gave_gold_teeth
 	ld hl, WardenThankYouText
-	call PrintText
+	rst PrintTextRST
 	lb bc, HM_STRENGTH, 1
 	call GiveItem
 	jr nc, .bag_full
 	ld hl, ReceivedHM04Text
-	call PrintText
+	rst PrintTextRST
 	SetEvent EVENT_GOT_HM04
 	jr .done
 .got_item
 	ld hl, HM04ExplanationText
-	call PrintText
+	rst PrintTextRST
 	jr .done
 .bag_full
 	ld hl, HM04NoRoomText
-	call PrintText
+	rst PrintTextRST
 .done
 	rst TextScriptEnd
 
@@ -101,7 +101,7 @@ FuchsiaHouse2Text4:
 	jr nz, .asm_4c9a2
 	ld hl, FuchsiaHouse2Text_75176
 .asm_4c9a2
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 FuchsiaHouse2Text_75176:

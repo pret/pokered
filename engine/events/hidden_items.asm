@@ -60,7 +60,7 @@ FoundHiddenItemText::
 	jr nz, .multiItem
 	ld hl, FoundHiddenItemSingleText
 	push bc
-	call PrintText
+	rst PrintTextRST
 	pop bc
 	jr .give
 .multiItem
@@ -69,7 +69,7 @@ FoundHiddenItemText::
 	ld [wTempStore1], a ; this store now stores the numeric text character to display in the text
 	ld hl, FoundHiddenItemMultiText
 	push bc
-	call PrintText
+	rst PrintTextRST
 	pop bc
 .give
 	ld a, [wHiddenObjectFunctionArgument] ; item ID
@@ -92,7 +92,7 @@ FoundHiddenItemText::
 	xor a
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, HiddenItemBagFullText
-	call PrintText
+	rst PrintTextRST
 	xor a
 	ld [wTempStore1], a
 	rst TextScriptEnd

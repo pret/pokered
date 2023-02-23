@@ -23,7 +23,7 @@ SafariZoneRestHouse4Text1:
 .freeRoamText
 	ld hl, SafariZoneRestHouse4TextChansey
 .done
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 SafariZoneRestHouse4TextDefault:

@@ -327,11 +327,11 @@ SilphCo7Text1:
 	jr nz, .savedsilph
 .noItemToGive	
 	ld hl, .LaprasGuyText
-	call PrintText
+	rst PrintTextRST
 	jr .done
 .givelapras
 	ld hl, .MeetLaprasGuyText
-	call PrintText
+	rst PrintTextRST
 	lb bc, LAPRAS, 40 ; PureRGBnote: CHANGED: lapras level increased to keep up with party level
 	call GivePokemon
 	jr nc, .done
@@ -340,13 +340,13 @@ SilphCo7Text1:
 	call z, WaitForTextScrollButtonPress
 	call EnableAutoTextBoxDrawing
 	ld hl, .HeresYourLaprasText
-	call PrintText
+	rst PrintTextRST
 	ld hl, wd72e
 	set 0, [hl]
 	jr .done
 .savedsilph
 	ld hl, .LaprasGuySavedText
-	call PrintText
+	rst PrintTextRST
 .done
 	rst TextScriptEnd
 .gotLaprasAlready
@@ -356,21 +356,21 @@ SilphCo7Text1:
 	bit 0, a ; got his item already?
 	jr nz, .noItemToGive
 	ld hl, .LaprasGuyAlreadyText
-	call PrintText
+	rst PrintTextRST
 	; give ra
 	lb bc, ITEM_GOT_LAPRAS_SILPH_CO_7F_REWARD_NEW, 1
 	call GiveItem
 	jr nc, .noRoom
 	ld hl, .LaprasGuyReceivedItemText
-	call PrintText
+	rst PrintTextRST
 	ld hl, .LaprasGuyGoodLuckText
-	call PrintText
+	rst PrintTextRST
 	ld hl, wd72e
 	set 0, [hl]
 	jr .done
 .noRoom
 	ld hl, .LaprasGuyNoBagRoomText
-	call PrintText
+	rst PrintTextRST
 	jr .done
 
 
@@ -413,11 +413,11 @@ SilphCo7Text2:
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .savedsilph
 	ld hl, .rockettext
-	call PrintText
+	rst PrintTextRST
 	jr .done
 .savedsilph
 	ld hl, .savedtext
-	call PrintText
+	rst PrintTextRST
 .done
 	rst TextScriptEnd
 
@@ -434,11 +434,11 @@ SilphCo7Text3:
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .savedsilph
 	ld hl, .rockettext
-	call PrintText
+	rst PrintTextRST
 	jr .done
 .savedsilph
 	ld hl, .savedtext
-	call PrintText
+	rst PrintTextRST
 .done
 	rst TextScriptEnd
 
@@ -455,11 +455,11 @@ SilphCo7Text4:
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .savedsilph
 	ld hl, .rockettext
-	call PrintText
+	rst PrintTextRST
 	jr .done
 .savedsilph
 	ld hl, .savedtext
-	call PrintText
+	rst PrintTextRST
 .done
 	rst TextScriptEnd
 
@@ -546,7 +546,7 @@ SilphCo7AfterBattleText4:
 SilphCo7Text9:
 	text_asm
 	ld hl, SilphCo7Text_51ebe
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 SilphCo7Text_51ebe:

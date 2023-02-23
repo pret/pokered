@@ -51,7 +51,7 @@ SchoolB1FNerd:
   	ldh [hSpriteFacingDirection], a
   	call SetSpriteFacingDirection
 	ld hl, SchoolB1FNerdText
-	call PrintText
+	rst PrintTextRST
 	ld a, 3
 	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_LEFT
@@ -63,7 +63,7 @@ SchoolB1FNerd:
   	jr z, .ghostWeak
   	ld hl, SchoolB1FLittleGirlRetortText
  .ghostWeak
-  	call PrintText
+  	rst PrintTextRST
 	ld a, 4
 	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_UP
@@ -82,21 +82,21 @@ SchoolB1FNerd:
   	ldh [hSpriteFacingDirection], a
   	call SetSpriteFacingDirection
   	ld hl, SchoolB1FNerdSilence
-  	call PrintText
+  	rst PrintTextRST
 	ld a, 3
 	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_LEFT
   	ldh [hSpriteFacingDirection], a
   	call SetSpriteFacingDirection
   	ld hl, SchoolB1FLittleGirlBro
-  	call PrintText
+  	rst PrintTextRST
 	ld a, 4
 	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_UP
   	ldh [hSpriteFacingDirection], a
   	call SetSpriteFacingDirection
   	ld hl, SchoolB1FNerdAck
-  	call PrintText
+  	rst PrintTextRST
   	rst TextScriptEnd
 
 SchoolB1FNerdText:
@@ -138,7 +138,7 @@ SchoolB1FLeftTeacher:
 	jr nz, .gotMoveDex
 	call SaveScreenTilesToBuffer2
 	ld hl, SchoolB1FLeftTeacherReadyStart
-	call PrintText
+	rst PrintTextRST
 	xor a
 	ld [wCurrentMenuItem], a
 	call YesNoChoice
@@ -151,44 +151,44 @@ SchoolB1FLeftTeacher:
 	call PlayMusic
 
 	ld hl, SchoolB1FLeftTeacherReadyYes
-	call PrintText
+	rst PrintTextRST
 
 	call SchoolB1FMovedexTest
 	jp c, .doneResetMusic
 	call LoadScreenTilesFromBuffer2
 	ld hl, SchoolB1FLeftTeacherQuizFinish
-	call PrintText
+	rst PrintTextRST
 	call StopAllMusic
 	ld hl, ReceivedMovedexText
-	call PrintText
+	rst PrintTextRST
 	SetEvent EVENT_GOT_MOVEDEX
 	call PlayDefaultMusic
 	ld hl, SchoolB1FLeftTeacherQuizFinalInfo
-	call PrintText
+	rst PrintTextRST
 	jr .done
 .noParcel
-	call PrintText
+	rst PrintTextRST
 	ld hl, SchoolB1FLeftTeacherNoParcel
-	call PrintText
+	rst PrintTextRST
 	jr .later
 .noPokedex
-	call PrintText
+	rst PrintTextRST
 	ld hl, SchoolB1FLeftTeacherNoPokedex
-	call PrintText
+	rst PrintTextRST
 	jr .later
 .gotMoveDex
 	ld hl, SchoolB1FLeftTeacherQuizFinalInfoPrompt
-	call PrintText
+	rst PrintTextRST
 	ld hl, SchoolB1FLeftTeacherEnd
-	call PrintText
+	rst PrintTextRST
 	jr .done
 .notReady
 	ld hl, SchoolB1FLeftTeacherReadyNo
-	call PrintText
+	rst PrintTextRST
 	jr .done
 .checkFirst
 	ld hl, SchoolB1FLeftTeacherFirst
-	call PrintText
+	rst PrintTextRST
 	xor a
 	ld [wCurrentMenuItem], a
 	call YesNoChoice
@@ -196,16 +196,16 @@ SchoolB1FLeftTeacher:
 	and a
 	jr nz, .faffing
 	ld hl, SchoolB1FLeftTeacherYes
-	call PrintText
+	rst PrintTextRST
 	SetEvent EVENT_CHECKED_AROUND_SCHOOLHOUSE
 	jr .done
 .faffing
 	ld hl, SchoolB1FLeftTeacherNo
-	call PrintText
+	rst PrintTextRST
 	jr .done
 .later
 	ld hl, SchoolB1FLeftTeacherLater
-	call PrintText
+	rst PrintTextRST
 	jr .done
 .doneResetMusic
 	call PlayDefaultMusic
@@ -278,7 +278,7 @@ SchoolB1FRocker:
 	text_asm
 	call SaveScreenTilesToBuffer2
 	ld hl, SchoolB1FRockerText
-	call PrintText
+	rst PrintTextRST
 	xor a
 	ld [wCurrentMenuItem], a
 	call YesNoChoice
@@ -288,7 +288,7 @@ SchoolB1FRocker:
 	jr z, .yes
 	ld hl, SchoolB1FRockerNoText
 .yes
-	call PrintText
+	rst PrintTextRST
 
 	ld c, BANK(Music_MeetMaleTrainer)
 	ld a, MUSIC_MEET_MALE_TRAINER
@@ -319,7 +319,7 @@ SchoolB1FRocker:
 	ld c, 60
 	rst DelayFramesRST
 	ld hl, SchoolB1FRockerDetentionText
-	call PrintText
+	rst PrintTextRST
 
 
 	call GBFadeOutToWhite
@@ -396,7 +396,7 @@ SchoolB1FBrunetteGirl:
   	call SetSpriteFacingDirection
 
   	ld hl, SchoolB1FBrunetteGirlText
-  	call PrintText
+  	rst PrintTextRST
 
 	ld c, 60
 	rst DelayFramesRST
@@ -408,14 +408,14 @@ SchoolB1FBrunetteGirl:
 	ld c, 60
 	rst DelayFramesRST
 	ld hl, SchoolB1FDetention2Text
-	call PrintText
+	rst PrintTextRST
 	ld a, 11
 	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_UP
   	ldh [hSpriteFacingDirection], a
   	call SetSpriteFacingDirection
 	ld hl, SchoolB1FNotAgainText
-	call PrintText
+	rst PrintTextRST
 	ld c, 20
 	rst DelayFramesRST
 
@@ -481,12 +481,12 @@ SchoolB1FRightBlackboard:
 SchoolB1FNerdNotebook:
 	text_asm
 	ld hl, SchoolB1FNerdNotebookInit
-	call PrintText
+	rst PrintTextRST
 	xor a
 	ld [wCurrentMenuItem], a
 .loop
 	ld hl, SchoolB1FNerdNotebookRepeat
-	call PrintText
+	rst PrintTextRST
 	ld hl, StatTextList
 	ld a, l
 	ld [wListPointer], a
@@ -507,11 +507,11 @@ SchoolB1FNerdNotebook:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	call PrintText
+	rst PrintTextRST
 	jr .loop
 .done
 	ld hl, SchoolB1FDone
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 SchoolB1FNerdNotebookInit:
@@ -597,7 +597,7 @@ SchoolB1FMovedexTest:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	call PrintText
+	rst PrintTextRST
 	pop hl
 	call DoMoveDexTestQuestion
 	jr nz, .incorrect
@@ -607,7 +607,7 @@ SchoolB1FMovedexTest:
 	call PlaySound
 	call WaitForSoundToFinish
 	ld hl, SchoolB1FLeftTeacherQuizCorrect
-	call PrintText 
+	rst PrintTextRST
 	pop hl
 	inc hl
 	ld a, [hl]
@@ -621,7 +621,7 @@ SchoolB1FMovedexTest:
 	inc hl
 	push hl
 	ld hl, SchoolB1FLeftTeacherQuizQuickAttack
-	call PrintText
+	rst PrintTextRST
 	pop hl
 	jr .questionLoop
 .incorrect
@@ -630,7 +630,7 @@ SchoolB1FMovedexTest:
 	call PlaySound
 	call WaitForSoundToFinish
 	ld hl, SchoolB1FLeftTeacherQuizIncorrect
-	call PrintText
+	rst PrintTextRST
 	scf
 	ret
 

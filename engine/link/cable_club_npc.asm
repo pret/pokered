@@ -1,13 +1,13 @@
 CableClubNPC::
 	ld hl, CableClubNPCWelcomeText
-	call PrintText
+	rst PrintTextRST
 	CheckEvent EVENT_GOT_POKEDEX
 	jp nz, .receivedPokedex
 ; if the player hasn't received the pokedex
 	ld c, 60
 	rst DelayFramesRST
 	ld hl, CableClubNPCMakingPreparationsText
-	call PrintText
+	rst PrintTextRST
 	jp .didNotConnect
 .receivedPokedex
 	ld a, $1
@@ -54,7 +54,7 @@ CableClubNPC::
 	ld c, 50
 	rst DelayFramesRST
 	ld hl, CableClubNPCPleaseApplyHereHaveToSaveText
-	call PrintText
+	rst PrintTextRST
 	xor a
 	ld [wMenuJoypadPollCount], a
 	call YesNoChoice
@@ -69,7 +69,7 @@ CableClubNPC::
 	ld a, SFX_SAVE
 	call PlaySoundWaitForCurrent
 	ld hl, CableClubNPCPleaseWaitText
-	call PrintText
+	rst PrintTextRST
 	ld hl, wUnknownSerialCounter
 	ld a, $3
 	ld [hli], a
@@ -95,16 +95,16 @@ CableClubNPC::
 	jr nz, .syncLoop
 	call CloseLinkConnection
 	ld hl, CableClubNPCLinkClosedBecauseOfInactivityText
-	call PrintText
+	rst PrintTextRST
 	jr .didNotConnect
 .failedToEstablishConnection
 	ld hl, CableClubNPCAreaReservedFor2FriendsLinkedByCableText
-	call PrintText
+	rst PrintTextRST
 	jr .didNotConnect
 .choseNo
 	call CloseLinkConnection
 	ld hl, CableClubNPCPleaseComeAgainText
-	call PrintText
+	rst PrintTextRST
 .didNotConnect
 	xor a
 	ld hl, wUnknownSerialCounter

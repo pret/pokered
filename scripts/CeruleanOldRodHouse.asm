@@ -12,7 +12,7 @@ CeruleanOldRodHouse1Text1:
 	bit 3, a ; got old rod?
 	jr nz, .got_item
 	ld hl, CeruleanHouse2Text_560b1
-	call PrintText
+	rst PrintTextRST
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -33,7 +33,7 @@ CeruleanOldRodHouse1Text1:
 .got_item
 	ld hl, CeruleanHouse2Text_560c5
 .done
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 CeruleanHouse2Text_560b1:

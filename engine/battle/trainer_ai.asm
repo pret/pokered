@@ -1022,7 +1022,7 @@ SwitchEnemyMon:
 	rst CopyDataRST
 
 	ld hl, AIBattleWithdrawText
-	call PrintText
+	rst PrintTextRST
 	
 ;;;;;;;;;; PureRGBnote: ADDED: clear the previous selected move here to reset disable functionality on opponent switching pokemon.
 	xor a

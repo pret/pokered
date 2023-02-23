@@ -14,7 +14,7 @@ PlayerPC::
 	ld a, SFX_TURN_ON_PC
 	call PlaySound
 	ld hl, TurnedOnPC2Text
-	call PrintText
+	rst PrintTextRST
 
 PlayerPCMenu:
 	xor a
@@ -50,7 +50,7 @@ PlayerPCMenu:
 	ld [hl], a ; wMenuWatchMovingOutOfBounds
 	ld [wPlayerMonNumber], a
 	ld hl, WhatDoYouWantText
-	call PrintText
+	rst PrintTextRST
 	call HandleMenuInput
 	bit 1, a
 	jp nz, ExitPlayerPC
@@ -95,11 +95,11 @@ PlayerPCDeposit:
 	and a
 	jr nz, .loop
 	ld hl, NothingToDepositText
-	call PrintText
+	rst PrintTextRST
 	jp PlayerPCMenu
 .loop
 	ld hl, WhatToDepositText
-	call PrintText
+	rst PrintTextRST
 	ld hl, wNumBagItems
 	ld a, l
 	ld [wListPointer], a
@@ -119,7 +119,7 @@ PlayerPCDeposit:
 	jr nz, .next
 ; if it's not a key item, there can be more than one of the item
 	ld hl, DepositHowManyText
-	call PrintText
+	rst PrintTextRST
 	call DisplayChooseQuantityMenu
 	cp $ff
 	jp z, .loop
@@ -128,7 +128,7 @@ PlayerPCDeposit:
 	call AddItemToInventory
 	jr c, .roomAvailable
 	ld hl, NoRoomToStoreText
-	call PrintText
+	rst PrintTextRST
 	jp .loop
 .roomAvailable
 	ld hl, wNumBagItems
@@ -138,7 +138,7 @@ PlayerPCDeposit:
 	call PlaySound
 	call WaitForSoundToFinish
 	ld hl, ItemWasStoredText
-	call PrintText
+	rst PrintTextRST
 	jp .loop
 
 PlayerPCWithdraw:
@@ -151,11 +151,11 @@ PlayerPCWithdraw:
 	and a
 	jr nz, .loop
 	ld hl, NothingStoredText
-	call PrintText
+	rst PrintTextRST
 	jp PlayerPCMenu
 .loop
 	ld hl, WhatToWithdrawText
-	call PrintText
+	rst PrintTextRST
 	ld hl, wNumBoxItems
 	ld a, l
 	ld [wListPointer], a
@@ -175,7 +175,7 @@ PlayerPCWithdraw:
 	jr nz, .next
 ; if it's not a key item, there can be more than one of the item
 	ld hl, WithdrawHowManyText
-	call PrintText
+	rst PrintTextRST
 	call DisplayChooseQuantityMenu
 	cp $ff
 	jp z, .loop
@@ -184,7 +184,7 @@ PlayerPCWithdraw:
 	call AddItemToInventory
 	jr c, .roomAvailable
 	ld hl, CantCarryMoreText
-	call PrintText
+	rst PrintTextRST
 	jp .loop
 .roomAvailable
 	ld hl, wNumBoxItems
@@ -194,7 +194,7 @@ PlayerPCWithdraw:
 	call PlaySound
 	call WaitForSoundToFinish
 	ld hl, WithdrewItemText
-	call PrintText
+	rst PrintTextRST
 	jp .loop
 
 PlayerPCToss:
@@ -205,11 +205,11 @@ PlayerPCToss:
 	and a
 	jr nz, .loop
 	ld hl, NothingStoredText
-	call PrintText
+	rst PrintTextRST
 	jp PlayerPCMenu
 .loop
 	ld hl, WhatToTossText
-	call PrintText
+	rst PrintTextRST
 	ld hl, wNumBoxItems
 	ld a, l
 	ld [wListPointer], a
@@ -237,7 +237,7 @@ PlayerPCToss:
 ; if it's not a key item, there can be more than one of the item
 	push hl
 	ld hl, TossHowManyText
-	call PrintText
+	rst PrintTextRST
 	call DisplayChooseQuantityMenu
 	pop hl
 	cp $ff
@@ -274,7 +274,7 @@ DepositItemFromItemMenu::
 	jr nz, .keyItem
 ; if it's not a key item, there can be more than one of the item
 	ld hl, DepositHowManyToPCText
-	call PrintText
+	rst PrintTextRST
 	call DisplayChooseQuantityMenu
 	cp $ff
 	ret z
@@ -284,7 +284,7 @@ DepositItemFromItemMenu::
 	xor a
 	ld [wListWithTMText], a ; stop attempting to display TM names while this Yes no choice is open.
 	ld hl, WantToDepositText
-	call PrintText
+	rst PrintTextRST
 	call YesNoChoice
 	ld a, 1
 	ld [wListWithTMText], a ; enable displaying TM names again.
@@ -297,7 +297,7 @@ DepositItemFromItemMenu::
 	call AddItemToInventory
 	jr c, .roomAvailable
 	ld hl, NoRoomToStoreText
-	call PrintText
+	rst PrintTextRST
 	ret
 .roomAvailable
 	ld hl, wNumBagItems
@@ -307,7 +307,7 @@ DepositItemFromItemMenu::
 	call PlaySound
 	call WaitForSoundToFinish
 	ld hl, ItemWasStoredText
-	call PrintText
+	rst PrintTextRST
 	ret
 
 PlayersPCMenuEntries:

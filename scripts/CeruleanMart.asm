@@ -10,15 +10,15 @@ CeruleanMart_TextPointers:
 CeruleanMartTMKid: ; PureRGBnote: ADDED: new NPC who will sell TMs
 	text_asm
 	ld hl, TMKidGreet1
-	call PrintText
+	rst PrintTextRST
 	CheckEvent EVENT_MET_CERULEAN_TM_KID
 	jr z, .intro
 	ld hl, TMKidQuick1
-	call PrintText
+	rst PrintTextRST
 	jr .shop
 .intro
 	ld hl, CeruleanMartTMKidFlavor
-	call PrintText
+	rst PrintTextRST
 	SetEvent EVENT_MET_CERULEAN_TM_KID
 .shop
 	ld hl, CeruleanTMKidShop

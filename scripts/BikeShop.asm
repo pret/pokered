@@ -11,14 +11,14 @@ BikeShopText1:
 	CheckEvent EVENT_GOT_BICYCLE
 	jr z, .asm_260d4
 	ld hl, BikeShopText_1d82f
-	call PrintText
+	rst PrintTextRST
 	jp .Done
 .asm_260d4
 	ld b, BIKE_VOUCHER
 	call IsItemInBag
 	jr z, .asm_41190
 	ld hl, BikeShopText_1d81f
-	call PrintText
+	rst PrintTextRST
 	lb bc, BICYCLE, 1
 	call GiveItem
 	jr nc, .BagFull
@@ -27,15 +27,15 @@ BikeShopText1:
 	farcall RemoveItemByID
 	SetEvent EVENT_GOT_BICYCLE
 	ld hl, BikeShopText_1d824
-	call PrintText
+	rst PrintTextRST
 	jr .Done
 .BagFull
 	ld hl, BikeShopText_1d834
-	call PrintText
+	rst PrintTextRST
 	jr .Done
 .asm_41190
 	ld hl, BikeShopText_1d810
-	call PrintText
+	rst PrintTextRST
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
@@ -61,7 +61,7 @@ BikeShopText1:
 	ld de, BikeShopMenuPrice
 	call PlaceString
 	ld hl, BikeShopText_1d815
-	call PrintText
+	rst PrintTextRST
 	call HandleMenuInput
 	bit BIT_B_BUTTON, a
 	jr nz, .cancel
@@ -71,10 +71,10 @@ BikeShopText1:
 	and a
 	jr nz, .cancel
 	ld hl, BikeShopCantAffordText
-	call PrintText
+	rst PrintTextRST
 .cancel
 	ld hl, BikeShopComeAgainText
-	call PrintText
+	rst PrintTextRST
 .Done
 	rst TextScriptEnd
 
@@ -121,7 +121,7 @@ BikeShopText_1d834:
 BikeShopText2:
 	text_asm
 	ld hl, BikeShopText_1d843
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 BikeShopText_1d843:
@@ -135,7 +135,7 @@ BikeShopText3:
 	jr nz, .asm_34d2d
 	ld hl, BikeShopText_1d85c
 .asm_34d2d
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 BikeShopText_1d85c:

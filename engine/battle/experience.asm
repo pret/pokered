@@ -152,7 +152,7 @@ GainExperience:
 	ld hl, wPartyMonNicks
 	call GetPartyMonName
 	ld hl, GainedText
-	call PrintText
+	rst PrintTextRST
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a
 ;;;;;;;;;; PureRGBnote: ADDED: EXP bar is optional and will only render if the option is enabled.
@@ -261,7 +261,7 @@ GainExperience:
 	call SaveScreenTilesToBuffer1
 .printGrewLevelText
 	ld hl, GrewLevelText
-	call PrintText
+	rst PrintTextRST
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a
 ;;;;;;;;;; PureRGBnote: ADDED: EXP bar is optional and will only render if the option is enabled.

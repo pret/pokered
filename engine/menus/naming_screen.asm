@@ -12,7 +12,7 @@ AskName:
 	ld [wd11e], a
 	call GetMonName
 	ld hl, DoYouWantToNicknameText
-	call PrintText
+	rst PrintTextRST
 	hlcoord 14, 7
 	lb bc, 8, 15
 	ld a, TWO_OPTION_MENU

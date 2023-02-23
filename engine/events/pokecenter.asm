@@ -16,14 +16,14 @@ DisplayPokemonCenterDialogue_::
 	ld a, 1
 	ld [wUnusedC000], a
 	ld hl, PokemonCenterFastWelcomeText
-	call PrintText
+	rst PrintTextRST
 	jr .skipToHeal
 .normalWelcome
 	ld hl, PokemonCenterWelcomeText
-	call PrintText
+	rst PrintTextRST
 	jr nz, .skipShallWeHealYourPokemon
 	ld hl, ShallWeHealYourPokemonText
-	call PrintText
+	rst PrintTextRST
 .skipShallWeHealYourPokemon
 	call YesNoChoicePokeCenter ; yes/no menu
 	ld a, [wCurrentMenuItem]
@@ -32,7 +32,7 @@ DisplayPokemonCenterDialogue_::
 	; call SetLastBlackoutMap ; PureRGBnote: FIXED: set last blackout map on entering a pokemon center instead of when healing
 	call LoadScreenTilesFromBuffer1 ; restore screen
 	ld hl, NeedYourPokemonText
-	call PrintText
+	rst PrintTextRST
 .skipToHeal
 	ld a, $18
 	ld [wSprite01StateData1ImageIndex], a ; make the nurse turn to face the machine
@@ -51,7 +51,7 @@ DisplayPokemonCenterDialogue_::
 	and a
 	jr nz, .skipFightingFit ; NEW: if you're holding b when you start talking to the nurse, it'll skip right to healing.
 	ld hl, PokemonFightingFitText
-	call PrintText
+	rst PrintTextRST
 .skipFightingFit
 	ld a, $14
 	ld [wSprite01StateData1ImageIndex], a ; make the nurse bow
@@ -62,7 +62,7 @@ DisplayPokemonCenterDialogue_::
 	call LoadScreenTilesFromBuffer1 ; restore screen
 .done
 	ld hl, PokemonCenterFarewellText
-	call PrintText
+	rst PrintTextRST
 	xor a
 	ld [wUnusedC000], a
 	jp UpdateSprites

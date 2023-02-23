@@ -127,20 +127,20 @@ BillsHouseText4:
 BillsHouseText1:
 	text_asm
 	ld hl, BillsHouseText_1e865
-	call PrintText
+	rst PrintTextRST
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .asm_1e85a
 .asm_1e84d
 	ld hl, BillsHouseText_1e86a
-	call PrintText
+	rst PrintTextRST
 	ld a, $1
 	ld [wBillsHouseCurScript], a
 	jr .asm_1e862
 .asm_1e85a
 	ld hl, BillsHouseText_1e86f
-	call PrintText
+	rst PrintTextRST
 	jr .asm_1e84d
 .asm_1e862
 	rst TextScriptEnd
@@ -162,12 +162,12 @@ BillsHouseText2:
 	CheckEvent EVENT_GOT_SS_TICKET
 	jr nz, .asm_1e8a9
 	ld hl, BillThankYouText
-	call PrintText
+	rst PrintTextRST
 	lb bc, S_S_TICKET, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, SSTicketReceivedText
-	call PrintText
+	rst PrintTextRST
 	SetEvent EVENT_GOT_SS_TICKET
 	ld a, HS_CERULEAN_GUARD_1
 	ld [wMissableObjectIndex], a
@@ -177,11 +177,11 @@ BillsHouseText2:
 	predef HideObject
 .asm_1e8a9
 	ld hl, BillsHouseText_1e8cb
-	call PrintText
+	rst PrintTextRST
 	jr .asm_1e8b7
 .BagFull
 	ld hl, SSTicketNoRoomText
-	call PrintText
+	rst PrintTextRST
 .asm_1e8b7
 	rst TextScriptEnd
 
@@ -206,7 +206,7 @@ BillsHouseText_1e8cb:
 BillsHouseText3:
 	text_asm
 	ld hl, BillsHouseText_1e8da
-	call PrintText
+	rst PrintTextRST
 	rst TextScriptEnd
 
 BillsHouseText_1e8da:

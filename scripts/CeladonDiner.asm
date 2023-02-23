@@ -17,11 +17,11 @@ CeladonDinerText1:
 	bit 6, a
 	jr nz, .noBreak
 	ld hl, CeladonDinerBreakText
-	call PrintText
+	rst PrintTextRST
 	jr .done
 .noBreak
 	ld hl, CeladonDinerOpenText
-	call PrintText
+	rst PrintTextRST
 	ld hl, CeladonDinerMenu
 	call DisplayPokemartNoGreeting
 .done
@@ -54,21 +54,21 @@ CeladonDinerText5:
 	CheckEvent EVENT_GOT_COIN_CASE
 	jr nz, .got_item
 	ld hl, CeladonDinerText_491a7
-	call PrintText
+	rst PrintTextRST
 	;lb bc, COIN_CASE, 1 ; PureRGBnote: CHANGED: COIN_CASE is not an item, it's just an event that lets you use the game corner
 	;call GiveItem
 	;jr nc, .bag_full
 	SetEvent EVENT_GOT_COIN_CASE
 	ld hl, ReceivedCoinCaseText
-	call PrintText
+	rst PrintTextRST
 	jr .done
 ;.bag_full
 ;	ld hl, CoinCaseNoRoomText
-;	call PrintText
+;	rst PrintTextRST
 ;	jr .done
 .got_item
 	ld hl, CeladonDinerText_491b7
-	call PrintText
+	rst PrintTextRST
 .done
 	rst TextScriptEnd
 

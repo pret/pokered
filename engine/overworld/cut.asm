@@ -47,7 +47,7 @@ UsedCut:
 	xor a
 	ldh [hWY], a
 	ld hl, UsedCutText
-	call PrintText
+	rst PrintTextRST
 	call LoadScreenTilesFromBuffer2
 	ld hl, wd730
 	res 6, [hl]

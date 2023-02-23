@@ -68,7 +68,7 @@ BillsHousePokemonList::
 	text_asm
 	call SaveScreenTilesToBuffer1
 	ld hl, BillsHousePokemonListText1
-	call PrintText
+	rst PrintTextRST
 	xor a
 	ld [wMenuItemOffset], a ; not used
 	ld [wCurrentMenuItem], a
@@ -94,7 +94,7 @@ BillsHousePokemonList::
 	ld de, BillsMonListText
 	call PlaceString
 	ld hl, BillsHousePokemonListText2
-	call PrintText
+	rst PrintTextRST
 	call SaveScreenTilesToBuffer2
 	call HandleMenuInput
 	bit BIT_B_BUTTON, a

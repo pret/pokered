@@ -158,7 +158,7 @@ Mansion1AfterBattleText4:
 Mansion1Text5:
 	text_asm
 	ld hl, MansionSwitchText
-	call PrintText
+	rst PrintTextRST
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -168,7 +168,7 @@ Mansion1Text5:
 	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
 	ld hl, MansionSwitchPressedText
-	call PrintText
+	rst PrintTextRST
 	ld a, SFX_GO_INSIDE
 	call PlaySound
 	CheckAndSetEvent EVENT_MANSION_SWITCH_ON
@@ -177,7 +177,7 @@ Mansion1Text5:
 	jr .asm_44392
 .asm_4438c
 	ld hl, MansionSwitchNotPressedText
-	call PrintText
+	rst PrintTextRST
 .asm_44392
 	rst TextScriptEnd
 

@@ -19,25 +19,25 @@ SSAnne7Text1:
 	CheckEvent EVENT_GOT_HM01
 	jr nz, .got_item
 	ld hl, SSAnne7RubText
-	call PrintText
+	rst PrintTextRST
 	ld hl, ReceivingHM01Text
-	call PrintText
+	rst PrintTextRST
 	lb bc, HM_CUT, 1
 	call GiveItem
 	jr nc, .bag_full
 	ld hl, ReceivedHM01Text
-	call PrintText
+	rst PrintTextRST
 	SetEvent EVENT_GOT_HM01
 	jr .done
 .bag_full
 	ld hl, HM01NoRoomText
-	call PrintText
+	rst PrintTextRST
 	ld hl, wd72d
 	set 5, [hl]
 	jr .done
 .got_item
 	ld hl, SSAnne7Text_61932
-	call PrintText
+	rst PrintTextRST
 .done
 	rst TextScriptEnd
 

@@ -452,7 +452,7 @@ FishingAnim:
 	ld hl, ItsABiteText
 
 .done
-	call PrintText
+	rst PrintTextRST
 	ld hl, wd736
 	res 6, [hl] ; unreserve the last 4 OAM entries
 	call LoadFontTilePatterns

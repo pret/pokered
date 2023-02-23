@@ -21,7 +21,7 @@ PewterJigglypuffText:
 	ld a, TRUE
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, .JigglypuffText
-	call PrintText
+	rst PrintTextRST
 
 	ld a, SFX_STOP_ALL_MUSIC
 	call PlaySound
