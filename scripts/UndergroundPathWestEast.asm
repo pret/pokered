@@ -33,7 +33,7 @@ UndergroundPathWestEastTrainer1Text:
 	text_asm
 	ld hl, UndergroundPathWestEastTrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 UndergroundPathWestEastBattleText1:
 	text_far _UndergroundPathWestEastBattleText1
@@ -51,7 +51,7 @@ UndergroundPathWestEastTrainer2Text:
 	text_asm
 	ld hl, UndergroundPathWestEastTrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 UndergroundPathWestEastBattleText2:
 	text_far _UndergroundPathWestEastBattleText2
@@ -69,7 +69,7 @@ UndergroundPathWestEastTrainer3Text:
 	text_asm
 	ld hl, UndergroundPathWestEastTrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 UndergroundPathWestEastBattleText3:
 	text_far _UndergroundPathWestEastBattleText3

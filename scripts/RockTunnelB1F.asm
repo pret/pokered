@@ -50,49 +50,49 @@ RockTunnel2Text1:
 	text_asm
 	ld hl, RockTunnel2TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RockTunnel2Text2:
 	text_asm
 	ld hl, RockTunnel2TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RockTunnel2Text3:
 	text_asm
 	ld hl, RockTunnel2TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RockTunnel2Text4:
 	text_asm
 	ld hl, RockTunnel2TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RockTunnel2Text5:
 	text_asm
 	ld hl, RockTunnel2TrainerHeader4
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RockTunnel2Text6:
 	text_asm
 	ld hl, RockTunnel2TrainerHeader5
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RockTunnel2Text7:
 	text_asm
 	ld hl, RockTunnel2TrainerHeader6
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RockTunnel2Text8:
 	text_asm
 	ld hl, RockTunnel2TrainerHeader7
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RockTunnel2BattleText2:
 	text_far _RockTunnel2BattleText2

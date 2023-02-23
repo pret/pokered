@@ -2,7 +2,7 @@ SoftReset::
 	call StopAllSounds
 	call GBPalWhiteOut
 	ld c, 32
-	call DelayFrames
+	rst _DelayFrames
 	; fallthrough
 
 Init::

@@ -55,7 +55,7 @@ VermilionDock_1db9b:
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wJoyIgnore], a
 	ld [wNewSoundID], a
-	call PlaySound
+	rst _PlaySound
 	ld c, BANK(Music_Surfing)
 	ld a, MUSIC_SURFING
 	call PlayMusic
@@ -63,7 +63,7 @@ VermilionDock_1db9b:
 	xor a
 	ld [wSpritePlayerStateData1ImageIndex], a
 	ld c, 120
-	call DelayFrames
+	rst _DelayFrames
 	ld b, $9c
 	call CopyScreenTileBufferToVRAM
 	hlcoord 0, 10
@@ -214,9 +214,9 @@ VermilionDock_EraseSSAnne:
 	ld [hl], a
 
 	ld a, SFX_SS_ANNE_HORN
-	call PlaySound
+	rst _PlaySound
 	ld c, 120
-	call DelayFrames
+	rst _DelayFrames
 	ret
 
 VermilionDock_TextPointers:
@@ -237,7 +237,7 @@ VermilionDockText2:
 	text_asm
 	ld hl, MewTrainerHeader
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 MewBattleText:
 	text_far _MewtwoBattleText ; Mew!
@@ -245,7 +245,7 @@ MewBattleText:
 	ld a, MEW
 	call PlayCry
 	call WaitForSoundToFinish
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 TruckOAMTable:
 	db $50, $28, $C0, $10
@@ -312,14 +312,14 @@ TruckCheck:
 	ld hl, TruckOAMTable
 	ld bc, $20
 	ld de, wShadowOAM + $20
-	call CopyData
+	rst _CopyData
 	ld a, $c
 	ld [wNewTileBlockID], a ; used to be wd09f
 	ld bc, $a
 	predef ReplaceTileBlock
 	; moving the truck
 	ld a, SFX_PUSH_BOULDER
-	call PlaySound
+	rst _PlaySound
 	ld b, 32
 	ld de, 4
 .movingtruck
@@ -331,7 +331,7 @@ TruckCheck:
 	dec a
 	jr nz, .movingtruck2
 	ld c, 2
-	call DelayFrames
+	rst _DelayFrames
 	dec b
 	jr nz, .movingtruck
 	ld a, $3
@@ -350,7 +350,7 @@ ShowMew:
 	ret
 FinishShowMew:
 	ld c, 60
-	call DelayFrames
+	rst _DelayFrames
 	xor a
 	ld [wJoyIgnore], a
 	SetEvent EVENT_FOUND_MEW

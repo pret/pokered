@@ -23,8 +23,8 @@ SafariZoneRestHouse2Text1:
 .freeRoamText
 	ld hl, SafariZoneRestHouse2TextKangaskhan
 .done
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 SafariZoneRestHouse2TextDefault:
 	text_far _SafariZoneRestHouse2Text1
@@ -54,8 +54,8 @@ SafariZoneRestHouse2Text2:
 .freeRoamText
 	ld hl, SafariZoneRestHouse2TextFreeRoam2
 .done
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 SafariZoneRestHouse2TextDefault2:
 	text_far _SafariZoneRestHouse2Text2

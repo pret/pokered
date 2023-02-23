@@ -36,8 +36,8 @@ DirectorText:
 .completed_dex
 	ld hl, .CompletedDexText
 .done
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .GameDesignerText:
 	text_far _GameDesignerText
@@ -50,7 +50,7 @@ DirectorText:
 	callfar DisplayDiploma
 	ld a, TRUE
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 GameFreakPCText1:
 	text_far _CeladonMansion3Text5

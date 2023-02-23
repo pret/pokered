@@ -101,37 +101,37 @@ VictoryRoad2Text1:
 	text_asm
 	ld hl, VictoryRoad2TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 VictoryRoad2Text2:
 	text_asm
 	ld hl, VictoryRoad2TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 VictoryRoad2Text3:
 	text_asm
 	ld hl, VictoryRoad2TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 VictoryRoad2Text4:
 	text_asm
 	ld hl, VictoryRoad2TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 VictoryRoad2Text5:
 	text_asm
 	ld hl, VictoryRoad2TrainerHeader4
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 MoltresText:
 	text_asm
 	ld hl, MoltresTrainerHeader
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 MoltresBattleText:
 	text_far _MoltresBattleText
@@ -139,7 +139,7 @@ MoltresBattleText:
 	ld a, MOLTRES
 	call PlayCry
 	call WaitForSoundToFinish
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 VictoryRoad2BattleText1:
 	text_far _VictoryRoad2BattleText1

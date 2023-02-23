@@ -13,7 +13,7 @@ PewterHouse1Text1:
 	ld a, NIDORAN_M
 	call PlayCry
 	call WaitForSoundToFinish
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PewterHouse1Text2:
 	text_far _PewterHouse1Text2
@@ -34,8 +34,8 @@ PewterHouse1Text4:
 .altPalettes
 	ld hl, PewterHouse1Text4Color
 .done
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 PewterHouse1Text4Default::
 	text_far _PewterHouse1Text4

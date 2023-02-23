@@ -27,7 +27,7 @@ MagikarpSalesmanText:
 	CheckEvent EVENT_BOUGHT_MAGIKARP, 1
 	jp c, .alreadyBoughtMagikarp
 	ld hl, .Text1
-	call PrintText
+	rst _PrintText
 	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
@@ -67,9 +67,9 @@ MagikarpSalesmanText:
 .alreadyBoughtMagikarp
 	ld hl, .Text2
 .printText
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .Text1
 	text_far _MagikarpSalesmanText1

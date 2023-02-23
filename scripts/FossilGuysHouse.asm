@@ -29,7 +29,7 @@ FossilGuysHouseText1:
 	CheckEvent EVENT_SKIP_FOSSIL_GUY_GREETING
 	jr nz, .skip
 	ld hl, FossilGuyGreeting
-	call PrintText
+	rst _PrintText
 .skip
 	CheckEvent EVENT_GAVE_FOSSIL_TO_SUPER_NERD
 	jr z, .stageOneStart
@@ -43,7 +43,7 @@ FossilGuysHouseText1:
 	jr nz, .checkDome
 .noFossil
 	ld hl, FossilGuyWhereFossilText
-	call PrintText
+	rst _PrintText
 	jp .done
 .checkHelix
 	ld b, HELIX_FOSSIL
@@ -57,7 +57,7 @@ FossilGuysHouseText1:
 	jr z, .noFossil
 	push bc
 	ld hl, FossilGuyHaveFossil
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	pop bc
 	ld a, [wCurrentMenuItem]
@@ -72,15 +72,15 @@ FossilGuysHouseText1:
 	call RemoveItemFromInventory
 	SetEvents EVENT_GAVE_FOSSIL_TO_SUPER_NERD, EVENT_SUPER_NERD_GOING_TO_CINNABAR, EVENT_SKIP_FOSSIL_GUY_GREETING
 	ld hl, FossilGuyGaveFossil
-	call PrintText
+	rst _PrintText
 	jp .done
 .suitYourself
 	ld hl, FossilGuyDenied
-	call PrintText
+	rst _PrintText
 	jp .done
 .doneRevivedFossil
 	ld hl, FossilGuyCameBackFossil
-	call PrintText
+	rst _PrintText
 	CheckEvent EVENT_GOT_DOME_FOSSIL
 	jr z, .doneOmanyte
 	ld a, KABUTO
@@ -103,7 +103,7 @@ FossilGuysHouseText1:
 	jr z, .greetingEnd
 	push bc
 	ld hl, FossilGuyHaveAmber
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	pop bc
 	ld a, [wCurrentMenuItem]
@@ -118,11 +118,11 @@ FossilGuysHouseText1:
 	call RemoveItemFromInventory
 	SetEvents EVENT_GAVE_OLD_AMBER_TO_SUPER_NERD, EVENT_SUPER_NERD_GOING_TO_CINNABAR
 	ld hl, FossilGuyGaveAmber
-	call PrintText
+	rst _PrintText
 	jr .done
 .doneRevivedAmber
 	ld hl, FossilGuyCameBackAmber
-	call PrintText
+	rst _PrintText
 	ld b, AERODACTYL
 	ld c, 24
 	call GivePokemon
@@ -134,7 +134,7 @@ FossilGuysHouseText1:
 	jr nz, .goToCinnabar
 .endText
 	ld hl, FossilGuyEndText
-	call PrintText
+	rst _PrintText
 	jr .done
 .goToCinnabar
 	CheckEvent EVENT_GOT_HELIX_FOSSIL
@@ -150,21 +150,21 @@ FossilGuysHouseText1:
 	cp $FF ; not in bag
 	jr z, .endText
 	ld hl, FossilGuyGoToCinnabarText
-	call PrintText
+	rst _PrintText
 	jr .done
 .greetingEnd
 	ld hl, FossilGuyGreetingEnd
-	call PrintText
+	rst _PrintText
 	jr .done
 .comeBackLater
 	ld hl, FossilGuyComeBackLater
-	call PrintText
+	rst _PrintText
 	jr .done
 .neverMet
 	ld hl, FossilGuyNeverMet
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ; Conversation text
 
@@ -232,18 +232,18 @@ FossilGuysHouseText2:
 	jr nz, .metCatAlready
 	SetEvent EVENT_MET_FOSSIL_GUYS_CAT
 	ld hl, FossilGuysHouseCatText1
-	call PrintText
+	rst _PrintText
 	call FossilGuyFacesPlayerDirection
 	ld hl, FossilGuysHouseCatText2
 	jr .done
 .metCatAlready
 	ld hl, FossilGuysHouseCatText3
-	call PrintText
+	rst _PrintText
 	call FossilGuyFacesPlayerDirection
 	ld hl, FossilGuysHouseCatText4
 .done
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 ; makes fossil guy face the player
 FossilGuyFacesPlayerDirection:
@@ -295,15 +295,15 @@ FossilGuysHouseText3:
 	CheckEitherEventSet EVENT_GOT_DOME_FOSSIL, EVENT_GOT_HELIX_FOSSIL
 	jr z, .done
 	ld hl, FossilGuysPaperText
-	call PrintText
+	rst _PrintText
 	CheckEvent EVENT_GOT_HELIX_FOSSIL
 	ld hl, FossilGuysKabutoText
 	jr nz, .print
 	ld hl, FossilGuysOmanyteText
 .print
-	call PrintText	
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FossilGuysPaperText:
 	text_far _FossilGuysPaperText

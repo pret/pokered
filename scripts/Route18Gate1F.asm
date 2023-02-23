@@ -91,13 +91,13 @@ Route18GateText1:
 	call Route16GateScript_49755
 	jr z, .asm_3c84d
 	ld hl, Route18GateText_4992d
-	call PrintText
+	rst _PrintText
 	jr .asm_a8410
 .asm_3c84d
 	ld hl, Route18GateText_49928
-	call PrintText
+	rst _PrintText
 .asm_a8410
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route18GateText_49928:
 	text_far _Route18GateText_49928

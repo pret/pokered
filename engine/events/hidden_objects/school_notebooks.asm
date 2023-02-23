@@ -13,19 +13,19 @@ TMNotebook::
 ViridianSchoolNotebook::
 	text_asm
 	ld hl, ViridianSchoolNotebookText1
-	call PrintText
+	rst _PrintText
 	call TurnPageSchoolNotebook
 	jr nz, .doneReading
 	ld hl, ViridianSchoolNotebookText2
-	call PrintText
+	rst _PrintText
 	call TurnPageSchoolNotebook
 	jr nz, .doneReading
 	ld hl, ViridianSchoolNotebookText3
-	call PrintText
+	rst _PrintText
 	call TurnPageSchoolNotebook
 	jr nz, .doneReading
 	ld hl, ViridianSchoolNotebookText4
-	call PrintText
+	rst _PrintText
 ;;;;;;;;;; PureRGBnote: CHANGED: since someone else can be sitting in the chair based on event flags, this text need to be modified in that case
 	CheckEvent EVENT_GUS_IN_DETENTION
 	ld hl, ViridianSchoolNotebookText5
@@ -33,13 +33,13 @@ ViridianSchoolNotebook::
 	ld hl, ViridianSchoolNotebookTextGus
 ;;;;;;;;;;
 .print
-	call PrintText
+	rst _PrintText
 .doneReading
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 TurnPageSchoolNotebook:
 	ld hl, TurnPageText
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a

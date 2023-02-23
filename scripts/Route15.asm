@@ -100,7 +100,7 @@ Route15Text10:
 	ld hl, Route15TrainerHeader9
 Route15TalkToTrainer:
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route15BattleText1:
 	text_far _Route15BattleText1

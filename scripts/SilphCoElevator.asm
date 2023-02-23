@@ -37,7 +37,7 @@ SilphCoElevatorScript_457f1:
 	ld hl, SilphCoElevatorWarpMaps
 	ld de, wElevatorWarpMaps
 	ld bc, SilphCoElevatorWarpMapsEnd - SilphCoElevatorWarpMaps
-	call CopyData
+	rst _CopyData
 	ret
 
 SilphCoElevatorFloors:
@@ -84,4 +84,4 @@ SilphCoElevatorText1:
 	call SilphCoElevatorScript_457f1
 	ld hl, SilphCoElevatorWarpMaps
 	predef DisplayElevatorFloorMenu
-	jp TextScriptEnd
+	rst TextScriptEnd

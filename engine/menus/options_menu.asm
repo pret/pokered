@@ -113,7 +113,7 @@ DisplayOptionMenu:
 	jr .loop
 .cancelMore
 	ld a, SFX_PRESS_AB
-	call PlaySound
+	rst _PlaySound
 	call ClearScreen
 	ld a, [wTopMenuItemX]
 	cp 7 ; is the cursor on 'BACK'?
@@ -124,7 +124,7 @@ DisplayOptionMenu:
 ;;;;;;;;;;
 .exitMenu
 	ld a, SFX_PRESS_AB
-	call PlaySound
+	rst _PlaySound
 	ret
 .eraseOldMenuCursor
 	ld [wTopMenuItemX], a

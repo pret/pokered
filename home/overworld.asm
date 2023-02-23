@@ -39,9 +39,9 @@ EnterMap::
 	ld [wJoyIgnore], a
 
 OverworldLoop::
-	call DelayFrame
+	rst _DelayFrame
 OverworldLoopLessDelay::
-	;call DelayFrame ; shinpokerednote: ADDED: 60fps mode enabled by commenting this (but needs additional tweaks to run correctly)
+	;rst _DelayFrame ; shinpokerednote: ADDED: 60fps mode enabled by commenting this (but needs additional tweaks to run correctly)
 	call LoadGBPal
 	ld a, [wd736]
 	bit 6, a ; jumping down a ledge?
@@ -111,8 +111,8 @@ OverworldLoopLessDelay::
 	predef GetTileAndCoordsInFrontOfPlayer
 	call UpdateSprites
 	ld a, [wFlags_0xcd60]
-	bit 2, a
-	jr nz, .checkForOpponent
+	;bit 2, a
+	;jr nz, .checkForOpponent
 	bit 0, a
 	jr nz, .checkForOpponent
 	lda_coord 8, 9
@@ -142,8 +142,8 @@ OverworldLoopLessDelay::
 	jp nz, .newBattle
 	jp OverworldLoop
 .noDirectionButtonsPressed
-	ld hl, wFlags_0xcd60
-	res 2, [hl]
+	;ld hl, wFlags_0xcd60
+	;res 2, [hl]
 	call UpdateSprites
 ;;;;;;;;;;; PureRGBnote: ADDED: code for changing direction without moving by pressing A+B and a direction when standing still.
 	ldh a, [hJoyHeld] 
@@ -254,13 +254,14 @@ OverworldLoopLessDelay::
 ;	ld a, PLAYER_DIR_UP
 ;	ld [wPlayerMovingDirection], a
 .directionChangeState
-	ld hl, wFlags_0xcd60
-	set 2, [hl]
 	ld a, [wPlayerDirection]
 	ld [wPlayerMovingDirection], a
-	call NewBattle
-	jp c, BattleOccurred
 	jp OverworldLoop
+	;ld hl, wFlags_0xcd60
+	;set 2, [hl]
+	;call NewBattle
+	;jp c, BattleOccurred
+	;jp OverworldLoop
 
 .noDirectionChange
 	xor a
@@ -305,8 +306,8 @@ OverworldLoopLessDelay::
 	call UpdateSprites
 
 .moveAhead2
-	ld hl, wFlags_0xcd60
-	res 2, [hl]
+	;ld hl, wFlags_0xcd60
+	;res 2, [hl]
 	ld a, [wd736]
 	bit 7, a ; spinning?
 	jr nz, .spinnerSpeed ; PureRGBnote: CHANGED: faster spin tile movement
@@ -393,7 +394,7 @@ BattleOccurred::
 	jr z, .allPokemonFainted
 .noFaintCheck
 	ld c, 10
-	call DelayFrames
+	rst _DelayFrames
 	jp EnterMap
 .allPokemonFainted
 	ld a, $ff
@@ -642,7 +643,7 @@ PlayMapChangeSound::
 .didNotGoThroughDoor
 	ld a, SFX_GO_OUTSIDE
 .playSound
-	call PlaySound
+	rst _PlaySound
 	ld a, [wMapPalOffset]
 	and a
 	ret nz
@@ -701,7 +702,8 @@ ExtraWarpCheck::
 	ld hl, IsWarpTileInFrontOfPlayer
 .doBankswitch
 	ld b, BANK(IsWarpTileInFrontOfPlayer)
-	jp Bankswitch
+	rst _Bankswitch
+	ret
 
 MapEntryAfterBattle::
 	farcall IsPlayerStandingOnWarp ; for enabling warp testing after collisions
@@ -731,7 +733,7 @@ StopMusic::
 	ld [wAudioFadeOutControl], a
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	call PlaySound
+	rst _PlaySound
 .wait
 	ld a, [wAudioFadeOutControl]
 	and a
@@ -1208,7 +1210,7 @@ CollisionCheckOnLand::
 	cp SFX_COLLISION ; check if collision sound is already playing
 	jr z, .setCarry
 	ld a, SFX_COLLISION
-	call PlaySound ; play collision sound (if it's not already playing)
+	rst _PlaySound ; play collision sound (if it's not already playing)
 .setCarry
 	scf
 	ret
@@ -1890,7 +1892,7 @@ CollisionCheckOnWater::
 	cp SFX_COLLISION ; check if collision sound is already playing
 	jr z, .setCarry
 	ld a, SFX_COLLISION
-	call PlaySound ; play collision sound (if it's not already playing)
+	rst _PlaySound ; play collision sound (if it's not already playing)
 .setCarry
 	scf
 	jr .done
@@ -2371,13 +2373,13 @@ ResetUsingStrengthOutOfBattleBit:
 ForceBikeOrSurf::
 	ld b, BANK(RedSprite)
 	ld hl, LoadPlayerSpriteGraphics ; in bank 0
-	call Bankswitch
+	rst _Bankswitch
 	jp PlayDefaultMusic ; update map/player state?
 
 CheckForUserInterruption::
 ; Return carry if Up+Select+B, Start or A are pressed in c frames.
 ; Used only in the intro and title screen.
-	call DelayFrame
+	rst _DelayFrame
 
 	push bc
 	call JoypadLowSensitivity
@@ -2423,7 +2425,7 @@ LoadDestinationWarpPosition::
 	add hl, bc
 	ld bc, 4
 	ld de, wCurrentTileBlockMapViewPointer
-	call CopyData
+	rst _CopyData
 	pop af
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a

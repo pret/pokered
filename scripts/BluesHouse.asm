@@ -29,12 +29,12 @@ BluesHouseDaisySittingText:
 	CheckEvent EVENT_GOT_POKEDEX
 	jr nz, .give_town_map
 	ld hl, DaisyInitialText
-	call PrintText
+	rst _PrintText
 	jr .done
 
 .give_town_map
 	ld hl, DaisyOfferMapText
-	call PrintText
+	rst _PrintText
 ;	lb bc, TOWN_MAP, 1
 ;	call GiveItem ; PureRGBnote: CHANGED: TOWN MAP is not treated as a bag item, pressing SELECT in the pokedex will open it after having received it from daisy.
 ;	jr nc, .bag_full
@@ -42,22 +42,22 @@ BluesHouseDaisySittingText:
 	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld hl, GotMapText
-	call PrintText
+	rst _PrintText
 	SetEvent EVENT_GOT_TOWN_MAP
 	ld hl, MapHelpText
-	call PrintText
+	rst _PrintText
 	jr .done
 
 .got_town_map
 	ld hl, DaisyUseMapText
-	call PrintText
+	rst _PrintText
 	jr .done
 
 ;.bag_full
 ;	ld hl, DaisyBagFullText
-;	call PrintText
+;	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 DaisyInitialText:
 	text_far _DaisyInitialText

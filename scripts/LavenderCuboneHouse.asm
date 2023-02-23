@@ -11,20 +11,20 @@ LavenderHouse2Text1:
 	text_asm
 	ld a, CUBONE
 	call PlayCry
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 LavenderHouse2Text2:
 	text_asm
 	CheckEvent EVENT_RESCUED_MR_FUJI
 	jr nz, .rescued_mr_fuji
 	ld hl, LavenderHouse2Text_1d9dc
-	call PrintText
+	rst _PrintText
 	jr .done
 .rescued_mr_fuji
 	ld hl, LavenderHouse2Text_1d9e1
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 LavenderHouse2Text_1d9dc:
 	text_far _LavenderHouse2Text_1d9dc

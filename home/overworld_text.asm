@@ -1,10 +1,6 @@
 TextScriptEndingText::
 	text_end
 
-TextScriptEnd::
-	ld hl, TextScriptEndingText
-	ret
-
 ;ExclamationText:: ; unused
 ;	text_far _ExclamationText
 ;	text_end
@@ -16,20 +12,12 @@ TextScriptEnd::
 BoulderText::
 	text_asm
 	callfar CheckStrengthUsage
-	jp TextScriptEnd
-
-MartSignText::
-	text_far _MartSignText
-	text_end
-
-PokeCenterSignText::
-	text_far _PokeCenterSignText
-	text_end
+	rst TextScriptEnd
 
 PickUpItemText::
 	text_asm
 	predef PickUpItem
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ;;;;;;;;;; PureRGBnote: ADDED: text used when picking up multiple items at once
 
@@ -46,10 +34,10 @@ PickUp3ItemText::
 PickUp5ItemText::
 	text_asm
 	ld c, 5
-	jr DoMultiItemPickup
+	; fall through
 
 DoMultiItemPickup:
 	predef PickUpItemQuantity
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ;;;;;;;;;;

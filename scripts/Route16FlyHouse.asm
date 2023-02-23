@@ -11,7 +11,7 @@ Route16HouseText1:
 	ld hl, HM02ExplanationText
 	jr nz, .got_item
 	ld hl, Route16HouseText3
-	call PrintText
+	rst _PrintText
 	lb bc, HM_FLY, 1
 	call GiveItem
 	jr nc, .bag_full
@@ -21,8 +21,8 @@ Route16HouseText1:
 .bag_full
 	ld hl, HM02NoRoomText
 .got_item
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 Route16HouseText3:
 	text_far _Route16HouseText3
@@ -44,11 +44,11 @@ HM02NoRoomText:
 Route16HouseText2:
 	text_asm
 	ld hl, Route16HouseText_1e652
-	call PrintText
+	rst _PrintText
 	ld a, FEAROW
 	call PlayCry
 	call WaitForSoundToFinish
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route16HouseText_1e652:
 	text_far _Route16HouseText_1e652

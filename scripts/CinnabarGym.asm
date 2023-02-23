@@ -109,7 +109,7 @@ CinnabarGymScript2:
 	jr nz, .asm_7581b
 	call WaitForSoundToFinish
 	ld a, SFX_GO_INSIDE
-	call PlaySound
+	rst _PlaySound
 	call WaitForSoundToFinish
 .asm_7581b
 	ld a, [wTrainerHeaderFlagBit]
@@ -205,7 +205,7 @@ CinnabarGymScript_758b7:
 .asm_758d6
 	ld [wCinnabarGymCurScript], a
 	ld [wCurMapScript], a
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 BlaineText:
 	text_asm
@@ -215,14 +215,14 @@ BlaineText:
 	jr nz, .afterBeat
 	call z, CinnabarGymReceiveTM38
 	call DisableWaitingAfterTextDisplay
-	jp TextScriptEnd
+	rst TextScriptEnd
 .afterBeat
 	ld hl, BlainePostBattleAdviceText
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 .beforeBeat
 	ld hl, BlainePreBattleText
-	call PrintText
+	rst _PrintText
 	ld hl, ReceivedVolcanoBadgeText
 	ld de, ReceivedVolcanoBadgeText
 	call SaveEndBattleTextPointers
@@ -264,15 +264,15 @@ CinnabarGymTrainerText1:
 	CheckEvent EVENT_BEAT_CINNABAR_GYM_TRAINER_0
 	jr nz, .asm_46bb4
 	ld hl, CinnabarGymBattleText2
-	call PrintText
+	rst _PrintText
 	ld hl, CinnabarGymEndBattleText2
 	ld de, CinnabarGymEndBattleText2
 	call SaveEndBattleTextPointers
 	jp CinnabarGymScript_758b7
 .asm_46bb4
 	ld hl, CinnabarGymAfterBattleText2
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 CinnabarGymBattleText2:
 	text_far _CinnabarGymBattleText2
@@ -292,15 +292,15 @@ CinnabarGymTrainerText2:
 	CheckEvent EVENT_BEAT_CINNABAR_GYM_TRAINER_1
 	jr nz, .asm_4b406
 	ld hl, CinnabarGymBattleText1
-	call PrintText
+	rst _PrintText
 	ld hl, CinnabarGymEndBattleText1
 	ld de, CinnabarGymEndBattleText1
 	call SaveEndBattleTextPointers
 	jp CinnabarGymScript_758b7
 .asm_4b406
 	ld hl, CinnabarGymAfterBattleText1
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 CinnabarGymBattleText1:
 	text_far _CinnabarGymBattleText1
@@ -320,15 +320,15 @@ CinnabarGymTrainerText3:
 	CheckEvent EVENT_BEAT_CINNABAR_GYM_TRAINER_2
 	jr nz, .afterBeat
 	ld hl, CinnabarGymBattleText3
-	call PrintText
+	rst _PrintText
 	ld hl, CinnabarGymEndBattleText3
 	ld de, CinnabarGymEndBattleText3
 	call SaveEndBattleTextPointers
 	jp CinnabarGymScript_758b7
 .afterBeat
 	ld hl, CinnabarGymAfterBattleText3
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 CinnabarGymBattleText3:
 	text_far _CinnabarGymBattleText3
@@ -348,15 +348,15 @@ CinnabarGymTrainerText4:
 	CheckEvent EVENT_BEAT_CINNABAR_GYM_TRAINER_3
 	jr nz, .afterBeat
 	ld hl, CinnabarGymBattleText4
-	call PrintText
+	rst _PrintText
 	ld hl, CinnabarGymEndBattleText4
 	ld de, CinnabarGymEndBattleText4
 	call SaveEndBattleTextPointers
 	jp CinnabarGymScript_758b7
 .afterBeat
 	ld hl, CinnabarGymAfterBattleText4
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 CinnabarGymBattleText4:
 	text_far _CinnabarGymBattleText4
@@ -376,15 +376,15 @@ CinnabarGymTrainerText5:
 	CheckEvent EVENT_BEAT_CINNABAR_GYM_TRAINER_4
 	jr nz, .afterBeat
 	ld hl, CinnabarGymBattleText5
-	call PrintText
+	rst _PrintText
 	ld hl, CinnabarGymEndBattleText5
 	ld de, CinnabarGymEndBattleText5
 	call SaveEndBattleTextPointers
 	jp CinnabarGymScript_758b7
 .afterBeat
 	ld hl, CinnabarGymAfterBattleText5
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 CinnabarGymBattleText5:
 	text_far _CinnabarGymBattleText5
@@ -404,15 +404,15 @@ CinnabarGymTrainerText6:
 	CheckEvent EVENT_BEAT_CINNABAR_GYM_TRAINER_5
 	jr nz, .afterBeat
 	ld hl, CinnabarGymBattleText6
-	call PrintText
+	rst _PrintText
 	ld hl, CinnabarGymEndBattleText6
 	ld de, CinnabarGymEndBattleText6
 	call SaveEndBattleTextPointers
 	jp CinnabarGymScript_758b7
 .afterBeat
 	ld hl, CinnabarGymAfterBattleText6
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 CinnabarGymBattleText6:
 	text_far _CinnabarGymBattleText6
@@ -432,15 +432,15 @@ CinnabarGymTrainerText7:
 	CheckEvent EVENT_BEAT_CINNABAR_GYM_TRAINER_6
 	jr nz, .afterBeat
 	ld hl, CinnabarGymBattleText7
-	call PrintText
+	rst _PrintText
 	ld hl, CinnabarGymEndBattleText7
 	ld de, CinnabarGymEndBattleText7
 	call SaveEndBattleTextPointers
 	jp CinnabarGymScript_758b7
 .afterBeat
 	ld hl, CinnabarGymAfterBattleText7
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 CinnabarGymBattleText7:
 	text_far _CinnabarGymBattleText7
@@ -459,38 +459,38 @@ CinnabarGymGuideText: ; PureRGBnote: ADDED: gym guide gives you apex chips after
 	CheckEvent EVENT_BEAT_BLAINE
 	jr nz, .afterBeat
 	ld hl, CinnabarGymGuidePreBattleText
-	call PrintText
+	rst _PrintText
 	jr .done
 .afterBeat
 	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS ; have to hear about apex chips to receive them after that
 	jr z, .donePrompt
 	ld hl, CinnabarGymGuidePostBattleTextPrompt
-	call PrintText
+	rst _PrintText
 	CheckEvent EVENT_GOT_CINNABAR_APEX_CHIPS
 	jr nz, .alreadyApexChips
 .giveApexChips
 	ld hl, GymGuideMoreApexChipText7
-	call PrintText
+	rst _PrintText
 	lb bc, APEX_CHIP, 2
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, ReceivedApexChipsText7
-	call PrintText
+	rst _PrintText
 	ld hl, CinnabarGymGuideApexChipFireText
-	call PrintText
+	rst _PrintText
 	SetEvent EVENT_GOT_CINNABAR_APEX_CHIPS
 .alreadyApexChips
 	ld hl, AlreadyReceivedApexChipsText7
-	call PrintText
+	rst _PrintText
 	jr .done
 .BagFull
 	ld hl, ApexNoRoomText7
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 .donePrompt
 	ld hl, CinnabarGymGuidePostBattleText
-	call PrintText
+	rst _PrintText
 	jr .done
 
 ReceivedApexChipsText7:

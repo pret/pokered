@@ -130,7 +130,7 @@ AgathaText1:
 	text_asm
 	ld hl, AgathasRoomTrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 AgathaBeforeBattleText:
 	text_far _AgathaBeforeBattleText

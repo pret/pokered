@@ -89,25 +89,25 @@ Mansion4Text1:
 	text_asm
 	ld hl, Mansion4TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Mansion4Text2:
 	text_asm
 	ld hl, Mansion4TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Mansion4Text3:
 	text_asm
 	ld hl, Mansion4TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Mansion4Text4:
 	text_asm
 	ld hl, Mansion4TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Mansion4BattleText1:
 	text_far _Mansion4BattleText1

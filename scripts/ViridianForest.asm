@@ -54,31 +54,31 @@ ViridianForestText2:
 	text_asm
 	ld hl, ViridianForestTrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ViridianForestText3:
 	text_asm
 	ld hl, ViridianForestTrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ViridianForestText4:
 	text_asm
 	ld hl, ViridianForestTrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ViridianForestText5:
 	text_asm
 	ld hl, ViridianForestTrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ViridianForestText6:
 	text_asm
 	ld hl, ViridianForestTrainerHeader4
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ViridianForestBattleText1:
 	text_far _ViridianForestBattleText1
