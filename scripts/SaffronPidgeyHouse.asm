@@ -16,7 +16,7 @@ SaffronHouse1Text2:
 	text_asm
 	ld a, PIDGEY
 	call PlayCry
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SaffronHouse1Text3:
 	text_far _SaffronHouse1Text3

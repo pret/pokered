@@ -43,7 +43,7 @@ ViridianGymScript0:
 	ld hl, wd736
 	set 7, [hl]
 	ld a, SFX_ARROW_TILES
-	call PlaySound
+	rst _PlaySound
 	ld a, $ff
 	ld [wJoyIgnore], a
 	ld a, $4
@@ -215,7 +215,7 @@ GiovanniText:
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, GiovanniPostBattleAdviceText
-	call PrintText
+	rst _PrintText
 	call GBFadeOutToBlack
 	ld a, HS_VIRIDIAN_GYM_GIOVANNI
 	ld [wMissableObjectIndex], a
@@ -226,7 +226,7 @@ GiovanniText:
 	jr .done
 .beforeBeat
 	ld hl, GiovanniPreBattleText
-	call PrintText
+	rst _PrintText
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
@@ -242,7 +242,7 @@ GiovanniText:
 	ld a, $3
 	ld [wViridianGymCurScript], a
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 GiovanniPreBattleText:
 	text_far _GiovanniPreBattleText
@@ -278,7 +278,7 @@ ViridianGymTrainerText1:
 	text_asm
 	ld hl, ViridianGymTrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ViridianGymBattleText1:
 	text_far _ViridianGymBattleText1
@@ -296,7 +296,7 @@ ViridianGymTrainerText2:
 	text_asm
 	ld hl, ViridianGymTrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ViridianGymBattleText2:
 	text_far _ViridianGymBattleText2
@@ -314,7 +314,7 @@ ViridianGymTrainerText3:
 	text_asm
 	ld hl, ViridianGymTrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ViridianGymBattleText3:
 	text_far _ViridianGymBattleText3
@@ -332,7 +332,7 @@ ViridianGymTrainerText4:
 	text_asm
 	ld hl, ViridianGymTrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ViridianGymBattleText4:
 	text_far _ViridianGymBattleText4
@@ -350,7 +350,7 @@ ViridianGymTrainerText5:
 	text_asm
 	ld hl, ViridianGymTrainerHeader4
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ViridianGymBattleText5:
 	text_far _ViridianGymBattleText5
@@ -368,7 +368,7 @@ ViridianGymTrainerText6:
 	text_asm
 	ld hl, ViridianGymTrainerHeader5
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ViridianGymBattleText6:
 	text_far _ViridianGymBattleText6
@@ -386,7 +386,7 @@ ViridianGymTrainerText7:
 	text_asm
 	ld hl, ViridianGymTrainerHeader6
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ViridianGymBattleText7:
 	text_far _ViridianGymBattleText7
@@ -404,7 +404,7 @@ ViridianGymTrainerText8:
 	text_asm
 	ld hl, ViridianGymTrainerHeader7
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ViridianGymBattleText8:
 	text_far _ViridianGymBattleText8
@@ -423,38 +423,38 @@ ViridianGymGuideText: ; PureRGBnote: ADDED: gym guide gives you apex chips after
 	CheckEvent EVENT_BEAT_VIRIDIAN_GYM_GIOVANNI
 	jr nz, .afterBeat
 	ld hl, ViridianGymGuidePreBattleText
-	call PrintText
+	rst _PrintText
 	jr .done
 .afterBeat
 	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS ; have to hear about apex chips to receive them after that
 	jr z, .donePrompt
 	ld hl, ViridianGymGuidePostBattleTextPrompt
-	call PrintText
+	rst _PrintText
 	CheckEvent EVENT_GOT_VIRIDIAN_APEX_CHIPS
 	jr nz, .alreadyApexChips
 .giveApexChips
 	ld hl, GymGuideMoreApexChipText8
-	call PrintText
+	rst _PrintText
 	lb bc, APEX_CHIP, 2
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, ReceivedApexChipsText8
-	call PrintText
+	rst _PrintText
 	ld hl, ViridianGymGuideApexChipGroundText
-	call PrintText
+	rst _PrintText
 	SetEvent EVENT_GOT_VIRIDIAN_APEX_CHIPS
 .alreadyApexChips
 	ld hl, AlreadyReceivedApexChipsText8
-	call PrintText
+	rst _PrintText
 	jr .done
 .BagFull
 	ld hl, ApexNoRoomText8
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 .donePrompt
 	ld hl, ViridianGymGuidePostBattleText
-	call PrintText
+	rst _PrintText
 	jr .done
 
 ReceivedApexChipsText8:

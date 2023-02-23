@@ -655,7 +655,7 @@ ReadMove:
 	ld bc, MOVE_LENGTH
 	call AddNTimes
 	ld de, wEnemyMoveNum
-	call CopyData
+	rst _CopyData
 	pop bc
 	pop de
 	pop hl
@@ -1019,10 +1019,10 @@ SwitchEnemyMon:
 	ld e, l
 	ld hl, wEnemyMonHP
 	ld bc, 4
-	call CopyData
+	rst _CopyData
 
 	ld hl, AIBattleWithdrawText
-	call PrintText
+	rst _PrintText
 	
 ;;;;;;;;;; PureRGBnote: ADDED: clear the previous selected move here to reset disable functionality on opponent switching pokemon.
 	xor a

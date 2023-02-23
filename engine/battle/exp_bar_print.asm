@@ -42,7 +42,7 @@ AnimateEXPBar:
 .loop2
 	inc a
 	ld [hl], a
-	call DelayFrame
+	rst _DelayFrame
 	dec b
 	jr z, .done
 	jr .loop1
@@ -50,7 +50,7 @@ AnimateEXPBar:
 	ld bc, $08
 	hlcoord 10, 11
 	ld de, wTileMapBackup + 10 + 11 * 20
-	call CopyData
+	rst _CopyData
 	ld c, 5
 	jp DelayFrames
 
@@ -126,7 +126,7 @@ CalcEXPBarPixelLength:
 	ld d, a
 	ld hl, CalcExperience
 	ld b, BANK(CalcExperience)
-	call Bankswitch
+	rst _Bankswitch
 	ld hl, hMultiplicand
 	ld de, wEXPBarBaseEXP
 	ld a, [hli]
@@ -144,7 +144,7 @@ CalcEXPBarPixelLength:
 	inc d
 	ld hl, CalcExperience
 	ld b, BANK(CalcExperience)
-	call Bankswitch
+	rst _Bankswitch
 
 	; get the address of the active Pokemon's current experience
 	ld hl, wPartyMon1Exp

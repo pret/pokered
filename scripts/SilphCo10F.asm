@@ -49,7 +49,7 @@ Load10FCheckCardKeyText:
 SilphCo10Text7:
 	text_asm
 	callfar PrintCardKeyDoneText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo10F_ScriptPointers:
 	dw CheckFightingMapTrainers
@@ -77,13 +77,13 @@ SilphCo10Text1:
 	text_asm
 	ld hl, SilphCo10TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo10Text2:
 	text_asm
 	ld hl, SilphCo10TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo10Text3:
 	text_asm
@@ -92,8 +92,8 @@ SilphCo10Text3:
 	jr nz, .asm_cf85f
 	ld hl, SilphCo10Text_5a1d3
 .asm_cf85f
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 SilphCo10Text_5a1d3:
 	text_far _SilphCo10Text_5a1d3

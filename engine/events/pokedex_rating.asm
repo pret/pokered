@@ -27,9 +27,9 @@ DisplayDexRating:
 	jr nz, .hallOfFame
 	push hl
 	ld hl, DexCompletionText
-	call PrintText
+	rst _PrintText
 	pop hl
-	call PrintText
+	rst _PrintText
 	farcall PlayPokedexRatingSfx
 	jp WaitForTextScrollButtonPress
 .hallOfFame

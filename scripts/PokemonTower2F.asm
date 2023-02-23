@@ -28,7 +28,7 @@ ENDC
 	ret nc
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	call PlaySound
+	rst _PlaySound
 	ld c, BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
@@ -82,7 +82,7 @@ PokemonTower2Script1:
 	call MoveSprite
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	call PlaySound
+	rst _PlaySound
 	farcall Music_RivalAlternateStart
 	ld a, $2
 	ld [wPokemonTower2FCurScript], a
@@ -135,11 +135,11 @@ PokemonTower2Text1:
 	CheckEvent EVENT_BEAT_POKEMON_TOWER_RIVAL
 	jr z, .asm_16f24
 	ld hl, PokemonTower2Text_6063c
-	call PrintText
+	rst _PrintText
 	jr .asm_41852
 .asm_16f24
 	ld hl, PokemonTower2Text_6062d
-	call PrintText
+	rst _PrintText
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
@@ -169,7 +169,7 @@ PokemonTower2Text1:
 	ld [wPokemonTower2FCurScript], a
 	ld [wCurMapScript], a
 .asm_41852
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PokemonTower2Text_6062d:
 	text_far _PokemonTower2Text_6062d

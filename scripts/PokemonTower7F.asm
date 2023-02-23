@@ -206,24 +206,24 @@ PokemonTower7Text1:
 	text_asm
 	ld hl, PokemonTower7TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PokemonTower7Text2:
 	text_asm
 	ld hl, PokemonTower7TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PokemonTower7Text3:
 	text_asm
 	ld hl, PokemonTower7TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PokemonTower7FujiText:
 	text_asm
 	ld hl, TowerRescueFujiText
-	call PrintText
+	rst _PrintText
 	SetEvent EVENT_RESCUED_MR_FUJI
 	SetEvent EVENT_RESCUED_MR_FUJI_2
 	ld a, HS_MR_FUJIS_HOUSE_MR_FUJI
@@ -238,7 +238,7 @@ PokemonTower7FujiText:
 	ld a, $4
 	ld [wPokemonTower7FCurScript], a
 	ld [wCurMapScript], a
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 TowerRescueFujiText:
 	text_far _TowerRescueFujiText

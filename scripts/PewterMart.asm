@@ -13,8 +13,8 @@ PewterMart_TextPointers:
 PewterMartText2:
 	text_asm
 	ld hl, .Text
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .Text
 	text_far _PewterMartText2
@@ -25,15 +25,15 @@ PewterMartTMKid: ; PureRGBnote: ADDED: new NPC who will talk about selling TMs
 	CheckEvent EVENT_BEAT_MISTY
 	jr nz, .afterMisty
 	ld hl, .Text
-	call PrintText
+	rst _PrintText
 	jr .done
 .afterMisty
 	ld hl, .Text3
-	call PrintText
+	rst _PrintText
 	ld hl, .Text2
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .Text
 	text_far _PewterMartTMKid
@@ -50,8 +50,8 @@ PewterMartTMKid: ; PureRGBnote: ADDED: new NPC who will talk about selling TMs
 PewterMartText3:
 	text_asm
 	ld hl, .Text
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .Text
 	text_far _PewterMartText3

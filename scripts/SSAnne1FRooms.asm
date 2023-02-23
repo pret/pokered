@@ -41,32 +41,32 @@ SSAnne8Text1:
 	text_asm
 	ld hl, SSAnne8TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SSAnne8Text2:
 	text_asm
 	ld hl, SSAnne8TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SSAnne8Text3:
 	text_asm
 	ld hl, SSAnne8TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SSAnne8Text4:
 	text_asm
 	ld hl, SSAnne8TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SSAnne8Text8:
 	text_far _SSAnne8Text8
 	text_asm
 	ld a, WIGGLYTUFF
 	call PlayCry
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SSAnne8BattleText1:
 	text_far _SSAnne8BattleText1

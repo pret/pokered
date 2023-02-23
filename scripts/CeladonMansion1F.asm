@@ -10,7 +10,7 @@ CeladonMansion1F_TextPointers:
 
 CeladonMansion1_PlayCryScript:
 	call PlayCry
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeladonMansion1Text1:
 	text_far _CeladonMansion1Text1

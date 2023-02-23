@@ -37,7 +37,7 @@ TransformEffect_:
 	ld hl, AnimationTransformMon
 	ld b, BANK(AnimationTransformMon)
 .gotAnimToPlay
-	call Bankswitch
+	rst _Bankswitch
 	ld hl, ReshowSubstituteAnim
 	ld b, BANK(ReshowSubstituteAnim)
 	pop af
@@ -73,7 +73,7 @@ TransformEffect_:
 	inc hl 
 	inc de
 ; moves - copy bc (4) bytes from hl to de
-	call CopyData
+	rst _CopyData
 ; hl and de now point to pokemon DVs after Copydata is complete
 ;;;;;;;;;;
 	ldh a, [hWhoseTurn]
@@ -102,7 +102,7 @@ TransformEffect_:
 	inc de
 	inc de
 	ld bc, $8
-	call CopyData
+	rst _CopyData
 	ld bc, wBattleMonMoves - wBattleMonPP
 	add hl, bc ; ld hl, wBattleMonMoves
 	ld b, NUM_MOVES

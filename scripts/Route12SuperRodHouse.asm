@@ -12,7 +12,7 @@ Route12HouseText1:
 	CheckEvent EVENT_GOT_ROUTE12_FISHING_GURU_ITEM
 	jr nz, .printEndText
 	ld hl, Route12GuruIntro
-	call PrintText
+	rst _PrintText
 	callfar LastTwoGurusScript
 	jr .done
 .printEndText
@@ -20,15 +20,15 @@ Route12HouseText1:
 	bit BIT_ALT_PKMN_PALETTES, a ; do we have alt palettes enabled
 	jr z, .noColorText
 	ld hl, Route12GuruEndColor
-	call PrintText
+	rst _PrintText
 	ld hl, Route12GuruColorInfo
-	call PrintText
+	rst _PrintText
 	jr .done
 .noColorText
 	ld hl, Route12GuruEnd
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route12GuruIntro:
 	text_far _Route12GuruIntro
@@ -50,4 +50,4 @@ Route12GuruColorInfo:
 Route12FishingGuide:
 	text_asm
 	callfar LastTwoGurusFishingGuideBookText
-	jp TextScriptEnd
+	rst TextScriptEnd

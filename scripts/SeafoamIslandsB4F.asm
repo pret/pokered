@@ -152,7 +152,7 @@ ArticunoText:
 	call TalkToTrainer
 	ld a, $4
 	ld [wSeafoamIslandsB4FCurScript], a
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ArticunoBattleText:
 	text_far _ArticunoBattleText
@@ -160,7 +160,7 @@ ArticunoBattleText:
 	ld a, ARTICUNO
 	call PlayCry
 	call WaitForSoundToFinish
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SeafoamIslands5Text4:
 	text_far _SeafoamIslands5Text4

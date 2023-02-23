@@ -154,43 +154,43 @@ Route23Text1:
 	text_asm
 	EventFlagBit a, EVENT_PASSED_EARTHBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23Script_51346
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route23Text2:
 	text_asm
 	EventFlagBit a, EVENT_PASSED_VOLCANOBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23Script_51346
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route23Text3:
 	text_asm
 	EventFlagBit a, EVENT_PASSED_MARSHBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23Script_51346
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route23Text4:
 	text_asm
 	EventFlagBit a, EVENT_PASSED_SOULBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23Script_51346
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route23Text5:
 	text_asm
 	EventFlagBit a, EVENT_PASSED_RAINBOWBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23Script_51346
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route23Text6:
 	text_asm
 	EventFlagBit a, EVENT_PASSED_THUNDERBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23Script_51346
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route23Text7:
 	text_asm
 	EventFlagBit a, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23Script_51346
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route23Script_51346:
 	ld [wWhichBadge], a
@@ -205,14 +205,14 @@ Route23Script_51346:
 	and a
 	jr nz, .asm_5136e
 	ld hl, VictoryRoadGuardText1
-	call PrintText
+	rst _PrintText
 	call Route23Script_512d8
 	ld a, $1
 	ld [wRoute23CurScript], a
 	ret
 .asm_5136e
 	ld hl, VictoryRoadGuardText2
-	call PrintText
+	rst _PrintText
 	ld a, [wWhichBadge]
 	ld c, a
 	ld b, FLAG_SET
@@ -232,7 +232,7 @@ VictoryRoadGuardText1:
 	ld a, SFX_DENIED
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 VictoryRoadGuardText2:
 	text_far _VictoryRoadGuardText2

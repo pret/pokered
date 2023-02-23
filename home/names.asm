@@ -14,7 +14,7 @@ GetMonName::
 	ld de, wcd6d
 	push de
 	ld bc, 10
-	call CopyData
+	rst _CopyData
 	ld hl, wcd6d + 10
 	ld [hl], "@"
 	pop de
@@ -70,7 +70,7 @@ GetMachineName::
 	ld bc, 2
 .WriteMachinePrefix
 	ld de, wcd6d
-	call CopyData
+	rst _CopyData
 
 ; now get the machine number and convert it to text
 	ld a, [wd11e]

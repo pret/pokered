@@ -28,7 +28,7 @@ RockTunnelTradeNurseText:
 RockTunnelCharityNurseText: 
 	text_asm
 	ld hl, RockTunnelCharityNurseText1
-	call PrintText
+	rst _PrintText
 	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
@@ -45,7 +45,7 @@ RockTunnelCharityNurseText:
 	call HasEnoughMoney
 	jr nc, .success
 	ld hl, RockTunnelCharityNurseNotEnoughMoneyText
-	call PrintText
+	rst _PrintText
 	jr .done
 .success
 	SetEvent EVENT_DONATED_TO_POKECENTER_CHARITY
@@ -63,13 +63,13 @@ RockTunnelCharityNurseText:
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld hl, RockTunnelCharityNurseText2
-	call PrintText
+	rst _PrintText
 	jr .done
 .no
 	ld hl, RockTunnelCharityNurseFarewellText
-	call PrintText
+	rst _PrintText
 .done		
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RockTunnelCharityNurseText1:
 	text_far _RockTunnelCharityNurseText1

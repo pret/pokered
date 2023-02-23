@@ -12,12 +12,12 @@ RedsHouse1FMomText:
 	bit 3, a ; received a Pokémon from Oak?
 	jr nz, .heal
 	ld hl, MomWakeUpText
-	call PrintText
+	rst _PrintText
 	jr .done
 .heal
 	call MomHealPokemon
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 MomWakeUpText:
 	text_far _MomWakeUpText
@@ -25,20 +25,20 @@ MomWakeUpText:
 
 MomHealPokemon:
 	ld hl, MomHealText1
-	call PrintText
+	rst _PrintText
 	call GBFadeOutToWhite
 	call ReloadMapData
 	predef HealParty
 	ld a, MUSIC_PKMN_HEALED
 	ld [wNewSoundID], a
-	call PlaySound
+	rst _PlaySound
 .next
 	ld a, [wChannelSoundIDs]
 	cp MUSIC_PKMN_HEALED
 	jr z, .next
 	ld a, [wMapMusicSoundID]
 	ld [wNewSoundID], a
-	call PlaySound
+	rst _PlaySound
 	call GBFadeInFromWhite
 	ld hl, MomHealText2
 	jp PrintText
@@ -58,8 +58,8 @@ RedsHouse1FTVText:
 	jr nz, .got_text
 	ld hl, StandByMeText
 .got_text
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 StandByMeText:
 	text_far _StandByMeText

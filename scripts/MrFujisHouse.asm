@@ -15,13 +15,13 @@ LavenderHouse1Text1:
 	CheckEvent EVENT_RESCUED_MR_FUJI
 	jr nz, .rescued_mr_fuji
 	ld hl, LavenderHouse1Text_1d8d1
-	call PrintText
+	rst _PrintText
 	jr .done
 .rescued_mr_fuji
 	ld hl, LavenderHouse1Text_1d8d6
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 LavenderHouse1Text_1d8d1:
 	text_far _LavenderHouse1Text_1d8d1
@@ -36,13 +36,13 @@ LavenderHouse1Text2:
 	CheckEvent EVENT_RESCUED_MR_FUJI
 	jr nz, .rescued_mr_fuji
 	ld hl, LavenderHouse1Text_1d8f4
-	call PrintText
+	rst _PrintText
 	jr .done
 .rescued_mr_fuji
 	ld hl, LavenderHouse1Text_1d8f9
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 LavenderHouse1Text_1d8f4:
 	text_far _LavenderHouse1Text_1d8f4
@@ -57,37 +57,37 @@ LavenderHouse1Text3:
 	text_asm
 	ld a, PSYDUCK
 	call PlayCry
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 LavenderHouse1Text4:
 	text_far _LavenderHouse1Text4
 	text_asm
 	ld a, NIDORINO
 	call PlayCry
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 LavenderHouse1Text5:
 	text_asm
 	CheckEvent EVENT_GOT_POKE_FLUTE
 	jr nz, .got_item
 	ld hl, LavenderHouse1Text_1d94c
-	call PrintText
+	rst _PrintText
 	lb bc, POKE_FLUTE, 1
 	call GiveItem
 	jr nc, .bag_full
 	ld hl, ReceivedFluteText
-	call PrintText
+	rst _PrintText
 	SetEvent EVENT_GOT_POKE_FLUTE
 	jr .done
 .bag_full
 	ld hl, FluteNoRoomText
-	call PrintText
+	rst _PrintText
 	jr .done
 .got_item
 	ld hl, MrFujiAfterFluteText
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 LavenderHouse1Text_1d94c:
 	text_far _LavenderHouse1Text_1d94c

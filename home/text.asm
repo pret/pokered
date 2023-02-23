@@ -120,10 +120,6 @@ NullChar::
 	dec de
 	ret
 
-TextIDErrorText:: ; "[hSpriteIndexOrTextID] ERROR."
-	text_far _TextIDErrorText
-	text_end
-
 MACRO print_name
 	push de
 	ld de, \1
@@ -173,11 +169,7 @@ PlaceCommandCharacter::
 	inc de
 	jp PlaceNextChar
 
-TMCharText::      db "TM@"
-TrainerCharText:: db "TRAINER@"
-PCCharText::      db "PC@"
 RocketCharText::  db "ROCKET@"
-PlacePOKeText::   db "POKé@"
 SixDotsCharText:: db "……@"
 EnemyText::       db "Enemy @"
 PlacePKMNText::   db "<PK><MN>@"
@@ -193,10 +185,6 @@ ContText::
 	pop de
 	inc de
 	jp PlaceNextChar
-
-ContCharText::
-	text_far _ContCharText
-	text_end
 
 PlaceDexEnd::
 	ld [hl], "."
@@ -234,7 +222,7 @@ Paragraph::
 	lb bc, 4, 18
 	call ClearScreenArea
 	ld c, 20
-	call DelayFrames
+	rst _DelayFrames
 	pop de
 	hlcoord 1, 14
 	jp NextChar
@@ -249,7 +237,7 @@ PageChar::
 	lb bc, 7, 18
 	call ClearScreenArea
 	ld c, 20
-	call DelayFrames
+	rst _DelayFrames
 	pop de
 	pop hl
 	hlcoord 1, 11
@@ -316,7 +304,7 @@ ScrollTextUpOneLine::
 
 	ld b, 5
 .WaitFrame
-	call DelayFrame
+	rst _DelayFrame
 	dec b
 	jr nz, .WaitFrame
 
@@ -513,7 +501,7 @@ TextCommand_PAUSE::
 	and A_BUTTON | B_BUTTON
 	jr nz, .done
 	ld c, 30 ; half a second
-	call DelayFrames
+	rst _DelayFrames
 .done
 	pop bc
 	pop hl
@@ -550,7 +538,7 @@ TextCommand_SOUND::
 	call z, WaitForSoundToFinish
 ;;;;;;;;;;
 	ld a, [hl]
-	call PlaySound
+	rst _PlaySound
 	call WaitForSoundToFinish
 	pop hl
 	pop bc
@@ -596,7 +584,7 @@ TextCommand_DOTS::
 	and A_BUTTON | B_BUTTON
 	jr nz, .next ; if so, skip the delay
 	ld c, 10
-	call DelayFrames
+	rst _DelayFrames
 .next
 	dec d
 	jr nz, .loop

@@ -43,7 +43,7 @@ SSAnne5Text4:
 	text_asm
 	ld hl, SSAnne5TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SSAnne5BattleText1:
 	text_far _SSAnne5BattleText1
@@ -61,7 +61,7 @@ SSAnne5Text5:
 	text_asm
 	ld hl, SSAnne5TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SSAnne5BattleText2:
 	text_far _SSAnne5BattleText2

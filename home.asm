@@ -11,6 +11,10 @@ SECTION "High Home", ROM0
 INCLUDE "home/lcd.asm"
 INCLUDE "home/clear_sprites.asm"
 INCLUDE "home/copy.asm"
+INCLUDE "home/array.asm"
+INCLUDE "home/math.asm"
+INCLUDE "home/copy_string.asm"
+PCCharText::      db "PC@"
 
 
 SECTION "Home", ROM0
@@ -63,12 +67,9 @@ INCLUDE "home/tilemap.asm"
 INCLUDE "home/delay.asm"
 INCLUDE "home/names2.asm"
 INCLUDE "home/item_price.asm"
-INCLUDE "home/copy_string.asm"
 INCLUDE "home/joypad2.asm"
-INCLUDE "home/math.asm"
 INCLUDE "home/print_text.asm"
 INCLUDE "home/move_mon.asm"
-INCLUDE "home/array.asm"
 INCLUDE "home/compare.asm"
 INCLUDE "home/oam.asm"
 INCLUDE "home/window.asm"

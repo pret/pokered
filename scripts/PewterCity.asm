@@ -208,17 +208,17 @@ PewterCityText2:
 PewterCityText3:
 	text_asm
 	ld hl, PewterCityText_193f1
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .playerDidNotGoIntoMuseum
 	ld hl, PewterCityText_193f6
-	call PrintText
+	rst _PrintText
 	jr .done
 .playerDidNotGoIntoMuseum
 	ld hl, PewterCityText_193fb
-	call PrintText
+	rst _PrintText
 	xor a
 	ldh [hJoyPressed], a
 	ldh [hJoyHeld], a
@@ -233,7 +233,7 @@ PewterCityText3:
 	ld a, $1
 	ld [wPewterCityCurScript], a
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PewterCityText_193f1:
 	text_far _PewterCityText_193f1
@@ -254,19 +254,19 @@ PewterCityText13:
 PewterCityText4:
 	text_asm
 	ld hl, PewterCityText_19427
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	cp $0
 	jr nz, .playerDoesNotKnow
 	ld hl, PewterCityText_1942c
-	call PrintText
+	rst _PrintText
 	jr .done
 .playerDoesNotKnow
 	ld hl, PewterCityText_19431
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PewterCityText_19427:
 	text_far _PewterCityText_19427
@@ -283,7 +283,7 @@ PewterCityText_19431:
 PewterCityText5:
 	text_asm
 	ld hl, PewterCityText_1945d
-	call PrintText
+	rst _PrintText
 	xor a
 	ldh [hJoyHeld], a
 	ld [wNPCMovementScriptFunctionNum], a
@@ -296,7 +296,7 @@ PewterCityText5:
 	call GetSpritePosition2
 	ld a, $4
 	ld [wPewterCityCurScript], a
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PewterCityText_1945d:
 	text_far _PewterCityText_1945d

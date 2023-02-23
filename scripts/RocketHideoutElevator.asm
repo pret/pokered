@@ -37,7 +37,7 @@ RocketHideoutElevatorScript_45741:
 	ld hl, RocketHideoutElevatorWarpMaps
 	ld de, wElevatorWarpMaps
 	ld bc, RocketHideoutElevatorWarpMapsEnd - RocketHideoutElevatorWarpMaps
-	call CopyData
+	rst _CopyData
 	ret
 
 RocketHideoutElavatorFloors:
@@ -81,10 +81,10 @@ RocketHideoutElevatorText1:
 	call RemoveItemFromInventory
 	SetEvent EVENT_USED_LIFT_KEY
     ld a, SFX_SWITCH
-    call PlaySound
+    rst _PlaySound
     call WaitForSoundToFinish
 	ld hl, UnlockedElevatorText
-	call PrintText
+	rst _PrintText
 .startLift
 ;;;;;;;;;;
 	call RocketHideoutElevatorScript_45741
@@ -93,9 +93,9 @@ RocketHideoutElevatorText1:
 	jr .asm_45788
 .asm_45782
 	ld hl, RocketHideoutElevatorText_4578b
-	call PrintText
+	rst _PrintText
 .asm_45788
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 UnlockedElevatorText:
 	text_far _UnlockedElevatorText

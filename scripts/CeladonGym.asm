@@ -112,11 +112,11 @@ ErikaText:
 	jr .done
 .afterBeat
 	ld hl, ErikaPostBattleAdviceText
-	call PrintText
+	rst _PrintText
 	jr .done
 .beforeBeat
 	ld hl, ErikaPreBattleText
-	call PrintText
+	rst _PrintText
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
@@ -133,7 +133,7 @@ ErikaText:
 	ld [wCeladonGymCurScript], a
 	ld [wCurMapScript], a
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ErikaPreBattleText:
 	text_far _ErikaPreBattleText
@@ -165,7 +165,7 @@ CeladonGymTrainerText1:
 	text_asm
 	ld hl, CeladonGymTrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeladonGymBattleText2:
 	text_far _CeladonGymBattleText2
@@ -183,7 +183,7 @@ CeladonGymTrainerText2:
 	text_asm
 	ld hl, CeladonGymTrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeladonGymBattleText3:
 	text_far _CeladonGymBattleText3
@@ -201,7 +201,7 @@ CeladonGymTrainerText3:
 	text_asm
 	ld hl, CeladonGymTrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeladonGymBattleText4:
 	text_far _CeladonGymBattleText4
@@ -219,7 +219,7 @@ CeladonGymTrainerText4:
 	text_asm
 	ld hl, CeladonGymTrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeladonGymBattleText5:
 	text_far _CeladonGymBattleText5
@@ -237,7 +237,7 @@ CeladonGymTrainerText5:
 	text_asm
 	ld hl, CeladonGymTrainerHeader4
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeladonGymBattleText6:
 	text_far _CeladonGymBattleText6
@@ -255,7 +255,7 @@ CeladonGymTrainerText6:
 	text_asm
 	ld hl, CeladonGymTrainerHeader5
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeladonGymBattleText7:
 	text_far _CeladonGymBattleText7
@@ -273,7 +273,7 @@ CeladonGymTrainerText7:
 	text_asm
 	ld hl, CeladonGymTrainerHeader6
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeladonGymBattleText8:
 	text_far _CeladonGymBattleText8

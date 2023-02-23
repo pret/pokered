@@ -48,7 +48,7 @@ Load6FCheckCardKeyText:
 SilphCo6Text11:
 	text_asm
 	callfar PrintCardKeyDoneText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo6F_ScriptPointers:
 	dw CheckFightingMapTrainers
@@ -93,7 +93,7 @@ SilphCo6Text1:
 	ld hl, SilphCo6Text_1a24a
 	ld de, SilphCo6Text_1a24f
 	call SilphCo6Script_1a22f
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo6Text_1a24a:
 	text_far _SilphCo6Text_1a24a
@@ -108,7 +108,7 @@ SilphCo6Text2:
 	ld hl, SilphCo6Text_1a261
 	ld de, SilphCo6Text_1a266
 	call SilphCo6Script_1a22f
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo6Text_1a261:
 	text_far _SilphCo6Text_1a261
@@ -123,7 +123,7 @@ SilphCo6Text3:
 	ld hl, SilphCo6Text_1a278
 	ld de, SilphCo6Text_1a27d
 	call SilphCo6Script_1a22f
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo6Text_1a278:
 	text_far _SilphCo6Text_1a278
@@ -138,7 +138,7 @@ SilphCo6Text4:
 	ld hl, SilphCo6Text_1a28f
 	ld de, SilphCo6Text_1a294
 	call SilphCo6Script_1a22f
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo6Text_1a28f:
 	text_far _SilphCo6Text_1a28f
@@ -153,7 +153,7 @@ SilphCo6Text5:
 	ld hl, SilphCo6Text_1a2a6
 	ld de, SilphCo6Text_1a2ab
 	call SilphCo6Script_1a22f
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo6Text_1a2a6:
 	text_far _SilphCo6Text_1a2a6
@@ -167,7 +167,7 @@ SilphCo6Text6:
 	text_asm
 	ld hl, SilphCo6TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo6BattleText2:
 	text_far _SilphCo6BattleText2
@@ -185,7 +185,7 @@ SilphCo6Text7:
 	text_asm
 	ld hl, SilphCo6TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo6BattleText3:
 	text_far _SilphCo6BattleText3
@@ -203,7 +203,7 @@ SilphCo6Text8:
 	text_asm
 	ld hl, SilphCo6TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo6BattleText4:
 	text_far _SilphCo6BattleText4

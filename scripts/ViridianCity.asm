@@ -155,8 +155,8 @@ ViridianCityText2:
 	jr nz, .done
 	ld hl, ViridianCityText_19122
 .done
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 ViridianCityText_19122:
 	text_far _ViridianCityText_19122
@@ -169,19 +169,19 @@ ViridianCityText_19127:
 ViridianCityText3:
 	text_asm
 	ld hl, ViridianCityText_1914d
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .no
 	ld hl, ViridianCityText_19157
-	call PrintText
+	rst _PrintText
 	jr .done
 .no
 	ld hl, ViridianCityText_19152
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ViridianCityText_1914d:
 	text_far _ViridianCityText_1914d
@@ -200,13 +200,13 @@ ViridianCityText4:
 	CheckEvent EVENT_GOT_POKEDEX
 	jr nz, .gotPokedex
 	ld hl, ViridianCityText_19175
-	call PrintText
+	rst _PrintText
 	jr .done
 .gotPokedex
 	ld hl, ViridianCityText_1917a
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ViridianCityText_19175:
 	text_far _ViridianCityText_19175
@@ -219,11 +219,11 @@ ViridianCityText_1917a:
 ViridianCityText5:
 	text_asm
 	ld hl, ViridianCityText_19191
-	call PrintText
+	rst _PrintText
 	call ViridianCityScript_190cf
 	ld a, $3
 	ld [wViridianCityCurScript], a
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ViridianCityText_19191:
 	text_far _ViridianCityText_19191
@@ -234,23 +234,23 @@ ViridianCityText6:
 	CheckEvent EVENT_GOT_TM42
 	jr nz, .got_item
 	ld hl, ViridianCityText_191ca
-	call PrintText
+	rst _PrintText
 	lb bc, TM_VIRIDIAN_CITY_SLEEPING_GUY, 1
 	call GiveItem
 	jr nc, .bag_full
 	ld hl, ReceivedTM42Text
-	call PrintText
+	rst _PrintText
 	SetEvent EVENT_GOT_TM42
 	jr .done
 .bag_full
 	ld hl, TM42NoRoomText
-	call PrintText
+	rst _PrintText
 	jr .done
 .got_item
 	ld hl, TM42Explanation
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ViridianCityText_191ca:
 	text_far _ViridianCityText_191ca
@@ -272,23 +272,23 @@ TM42NoRoomText:
 ViridianCityText7:
 	text_asm
 	ld hl, ViridianCityText_1920a
-	call PrintText
+	rst _PrintText
 	ld c, 2
-	call DelayFrames
+	rst _DelayFrames
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
 	jr z, .refused
 	ld hl, ViridianCityText_1920f
-	call PrintText
+	rst _PrintText
 	ld a, $1
 	ld [wViridianCityCurScript], a
 	jr .done
 .refused
 	ld hl, ViridianCityText_19214
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ViridianCityText_1920a:
 	text_far _ViridianCityText_1920a

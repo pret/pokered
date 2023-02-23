@@ -103,7 +103,7 @@ Load2FCheckCardKeyText:
 SilphCo2Text6:
 	text_asm
 	callfar PrintCardKeyDoneText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo2F_ScriptPointers:
 	dw CheckFightingMapTrainers
@@ -135,7 +135,7 @@ SilphCo2Text1:
 	CheckEvent EVENT_GOT_TM36
 	jr nz, .asm_59de4
 	ld hl, SilphCo2Text_59ded
-	call PrintText
+	rst _PrintText
 	lb bc, TM_SILPH_CO_2F_HIDING_LADY, 1
 	call GiveItem
 	ld hl, TM36NoRoomText
@@ -146,8 +146,8 @@ SilphCo2Text1:
 .asm_59de4
 	ld hl, TM36ExplanationText
 .asm_59de7
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 SilphCo2Text_59ded:
 	text_far _SilphCo2Text_59ded
@@ -170,25 +170,25 @@ SilphCo2Text2:
 	text_asm
 	ld hl, SilphCo2TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo2Text3:
 	text_asm
 	ld hl, SilphCo2TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo2Text4:
 	text_asm
 	ld hl, SilphCo2TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo2Text5:
 	text_asm
 	ld hl, SilphCo2TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo2BattleText1:
 	text_far _SilphCo2BattleText1

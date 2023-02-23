@@ -65,7 +65,7 @@ TryPushingBoulder::
 .done
 	call MoveSprite
 	ld a, SFX_PUSH_BOULDER
-	call PlaySound
+	rst _PlaySound
 	ld hl, wFlags_0xcd60
 	set 1, [hl]
 	ret

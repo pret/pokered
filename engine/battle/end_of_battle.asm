@@ -22,7 +22,7 @@ EndOfBattle:
 	hlcoord 6, 8
 	call PlaceString
 	ld c, 200
-	call DelayFrames
+	rst _DelayFrames
 	jr .evolution
 .notLinkBattle
 	ld a, [wBattleResult]
@@ -38,7 +38,7 @@ EndOfBattle:
 	ld c, $3
 	predef AddBCDPredef
 	ld hl, PickUpPayDayMoneyText
-	call PrintText
+	rst _PrintText
 .evolution
 	xor a
 	ld [wForceEvolution], a

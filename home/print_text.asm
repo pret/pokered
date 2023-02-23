@@ -32,7 +32,7 @@ PrintLetterDelay::
 	bit BIT_B_BUTTON, a
 	jr z, .buttonsNotPressed
 .endWait
-	call DelayFrame
+	rst _DelayFrame
 	jr .done
 .buttonsNotPressed ; if neither A nor B is pressed
 	ldh a, [hFrameCounter]

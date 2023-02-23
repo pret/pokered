@@ -75,7 +75,8 @@ PlayDefaultMusicCommon::
 	ld a, b
 	ld [wLastMusicSoundID], a
 	ld [wNewSoundID], a
-	jp PlaySound
+	rst _PlaySound
+	ret
 
 UpdateMusic6Times::
 ; This is called when entering a map, before fading out the current music and
@@ -270,5 +271,4 @@ DetermineAudioFunction::
 	call Audio3_PlaySound
 .done
 	pop af
-	call BankswitchCommon
-	ret
+	jp BankswitchCommon

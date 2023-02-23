@@ -17,17 +17,17 @@ CopycatsHouse2FText1:
 	ld a, TRUE
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, CopycatsHouse2FText_5ccd4
-	call PrintText
+	rst _PrintText
 	ld b, POKE_DOLL
 	call IsItemInBag
 	jr z, .done
 	ld hl, TM31PreReceiveText
-	call PrintText
+	rst _PrintText
 	lb bc, TM_SAFFRON_CITY_COPYCAT_POKEDOLL_REWARD, 1
 	call GiveItem
 	jr nc, .bag_full
 	ld hl, ReceivedTM31Text
-	call PrintText
+	rst _PrintText
 	ld a, POKE_DOLL
 	ldh [hItemToRemoveID], a
 	farcall RemoveItemByID
@@ -35,13 +35,13 @@ CopycatsHouse2FText1:
 	jr .done
 .bag_full
 	ld hl, TM31NoRoomText
-	call PrintText
+	rst _PrintText
 	jr .done
 .got_item
 	ld hl, TM31ExplanationText2
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CopycatsHouse2FText_5ccd4:
 	text_far _CopycatsHouse2FText_5ccd4
@@ -90,8 +90,8 @@ CopycatsHouse2FText7:
 	jr nz, .notUp
 	ld hl, CopycatsHouse2FText_5cd17
 .notUp
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 CopycatsHouse2FText_5cd17:
 	text_far _CopycatsHouse2FText_5cd17

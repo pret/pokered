@@ -12,7 +12,7 @@ MainMenu:
 
 .mainMenuLoop
 	ld c, 20
-	call DelayFrames
+	rst _DelayFrames
 	xor a ; LINK_STATE_NONE
 	ld [wLinkState], a
 	ld hl, wPartyAndBillsPCSavedMenuItem
@@ -74,7 +74,7 @@ MainMenu:
 	bit BIT_B_BUTTON, a
 	jp nz, DisplayTitleScreen ; if so, go back to the title screen
 	ld c, 20
-	call DelayFrames
+	rst _DelayFrames
 	ld a, [wCurrentMenuItem]
 	ld b, a
 	ld a, [wSaveFileStatus]
@@ -119,7 +119,7 @@ MainMenu:
 	ld a, PLAYER_DIR_DOWN
 	ld [wPlayerDirection], a
 	ld c, 10
-	call DelayFrames
+	rst _DelayFrames
 	ld a, [wNumHoFTeams]
 	and a
 	jp z, SpecialEnterMap
@@ -146,10 +146,10 @@ LinkMenu:
 	ld hl, wd72e
 	set 6, [hl]
 	ld hl, LinkMenuEmptyText
-	call PrintText
+	rst _PrintText
 	call SaveScreenTilesToBuffer1
 	ld hl, WhereWouldYouLikeText
-	call PrintText
+	rst _PrintText
 	hlcoord 5, 5
 	ld b, $6
 	ld c, $d
@@ -226,8 +226,8 @@ LinkMenu:
 	ldh a, [hSerialConnectionStatus]
 	cp USING_INTERNAL_CLOCK
 	jr nz, .skipStartingTransfer
-	call DelayFrame
-	call DelayFrame
+	rst _DelayFrame
+	rst _DelayFrame
 	ld a, START_TRANSFER_INTERNAL_CLOCK
 	ldh [rSC], a
 .skipStartingTransfer
@@ -255,7 +255,7 @@ LinkMenu:
 	ld a, d
 	ldcoord_a 6, 11
 	ld c, 40
-	call DelayFrames
+	rst _DelayFrames
 	call LoadScreenTilesFromBuffer1
 	ld a, [wLinkMenuSelectionSendBuffer]
 	and (B_BUTTON << 2) ; was B button pressed?
@@ -273,16 +273,16 @@ LinkMenu:
 .next
 	ld [wd72d], a
 	ld hl, PleaseWaitText
-	call PrintText
+	rst _PrintText
 	ld c, 50
-	call DelayFrames
+	rst _DelayFrames
 	ld hl, wd732
 	res 1, [hl]
 	ld a, [wDefaultMap]
 	ld [wDestinationMap], a
 	call SpecialWarpIn
 	ld c, 20
-	call DelayFrames
+	rst _DelayFrames
 	xor a
 	ld [wMenuJoypadPollCount], a
 	ld [wSerialExchangeNybbleSendData], a
@@ -298,7 +298,7 @@ LinkMenu:
 	call CloseLinkConnection
 	ld hl, LinkCanceledText
 	vc_hook Wireless_net_end
-	call PrintText
+	rst _PrintText
 	ld hl, wd72e
 	res 6, [hl]
 	ret
@@ -321,7 +321,7 @@ StartNewGame:
 StartNewGameDebug:
 	call OakSpeech
 	ld c, 20
-	call DelayFrames
+	rst _DelayFrames
 
 ; enter map after using a special warp or loading the game from the main menu
 SpecialEnterMap::
@@ -336,7 +336,7 @@ SpecialEnterMap::
 	set 0, [hl] ; count play time
 	call ResetPlayerSpriteData
 	ld c, 20
-	call DelayFrames
+	rst _DelayFrames
 	ld a, [wEnteringCableClub]
 	and a
 	ret nz

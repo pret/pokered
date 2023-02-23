@@ -127,7 +127,7 @@ BrunoText1:
 	text_asm
 	ld hl, BrunosRoomTrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 BrunoBeforeBattleText:
 	text_far _BrunoBeforeBattleText

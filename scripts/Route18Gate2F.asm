@@ -11,7 +11,7 @@ Route18GateUpstairsText1:
 	ld a, TRADE_FOR_MARC
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route18GateUpstairsText2:
 	text_asm

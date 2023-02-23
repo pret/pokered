@@ -14,4 +14,4 @@ CeruleanHouse1Text2:
 	ld a, TRADE_FOR_LOLA
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue
-	jp TextScriptEnd
+	rst TextScriptEnd

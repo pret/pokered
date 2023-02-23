@@ -152,7 +152,7 @@ GainExperience:
 	ld hl, wPartyMonNicks
 	call GetPartyMonName
 	ld hl, GainedText
-	call PrintText
+	rst _PrintText
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a
 ;;;;;;;;;; PureRGBnote: ADDED: EXP bar is optional and will only render if the option is enabled.
@@ -241,7 +241,7 @@ GainExperience:
 	push hl
 	ld de, wBattleMonLevel
 	ld bc, 1 + NUM_STATS * 2 ; size of stats
-	call CopyData
+	rst _CopyData
 	pop hl
 	ld a, [wPlayerBattleStatus3]
 	bit 3, a ; is the mon transformed?
@@ -249,7 +249,7 @@ GainExperience:
 ; the mon is not transformed, so update the unmodified stats
 	ld de, wPlayerMonUnmodifiedLevel
 	ld bc, 1 + NUM_STATS * 2
-	call CopyData
+	rst _CopyData
 .recalcStatChanges
 	xor a ; battle mon
 	ld [wCalculateWhoseStats], a
@@ -261,7 +261,7 @@ GainExperience:
 	call SaveScreenTilesToBuffer1
 .printGrewLevelText
 	ld hl, GrewLevelText
-	call PrintText
+	rst _PrintText
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a
 ;;;;;;;;;; PureRGBnote: ADDED: EXP bar is optional and will only render if the option is enabled.

@@ -50,55 +50,55 @@ Route21Text1:
 	text_asm
 	ld hl, Route21TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route21Text2:
 	text_asm
 	ld hl, Route21TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route21Text3:
 	text_asm
 	ld hl, Route21TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route21Text4:
 	text_asm
 	ld hl, Route21TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route21Text5:
 	text_asm
 	ld hl, Route21TrainerHeader4
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route21Text6:
 	text_asm
 	ld hl, Route21TrainerHeader5
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route21Text7:
 	text_asm
 	ld hl, Route21TrainerHeader6
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route21Text8:
 	text_asm
 	ld hl, Route21TrainerHeader7
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route21Text9:
 	text_asm
 	ld hl, Route21TrainerHeader8
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route21BattleText1:
 	text_far _Route21BattleText1

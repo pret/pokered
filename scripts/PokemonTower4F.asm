@@ -34,19 +34,19 @@ PokemonTower4Text1:
 	text_asm
 	ld hl, PokemonTower4TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PokemonTower4Text2:
 	text_asm
 	ld hl, PokemonTower4TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PokemonTower4Text3:
 	text_asm
 	ld hl, PokemonTower4TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PokemonTower4BattleText1:
 	text_far _PokemonTower4BattleText1

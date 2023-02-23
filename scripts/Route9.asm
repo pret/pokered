@@ -118,7 +118,7 @@ Route9Text9:
 	ld hl, Route9TrainerHeader8
 Route9TalkToTrainer:
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route9BattleText1:
 	text_far _Route9BattleText1

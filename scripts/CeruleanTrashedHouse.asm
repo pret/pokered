@@ -14,13 +14,13 @@ CeruleanHouseTrashedText1:
 	and b
 	jr z, .no_dig_tm
 	ld hl, CeruleanHouseTrashedText_1d6b0
-	call PrintText
+	rst _PrintText
 	jr .done
 .no_dig_tm
 	ld hl, CeruleanHouseTrashedText_1d6ab
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeruleanHouseTrashedText_1d6ab:
 	text_far _CeruleanTrashedText_1d6ab
