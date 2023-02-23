@@ -126,7 +126,7 @@ CalcEXPBarPixelLength:
 	ld d, a
 	ld hl, CalcExperience
 	ld b, BANK(CalcExperience)
-	call Bankswitch
+	rst BankswitchRST
 	ld hl, hMultiplicand
 	ld de, wEXPBarBaseEXP
 	ld a, [hli]
@@ -144,7 +144,7 @@ CalcEXPBarPixelLength:
 	inc d
 	ld hl, CalcExperience
 	ld b, BANK(CalcExperience)
-	call Bankswitch
+	rst BankswitchRST
 
 	; get the address of the active Pokemon's current experience
 	ld hl, wPartyMon1Exp

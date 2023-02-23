@@ -52,7 +52,7 @@ SubstituteEffect_:
 	ld hl, AnimationSubstitute
 	ld b, BANK(AnimationSubstitute)
 .animationEnabled
-	call Bankswitch ; jump to routine depending on animation setting
+	rst BankswitchRST ; jump to routine depending on animation setting
 	ld hl, SubstituteText
 	call PrintText
 	jpfar DrawHUDsAndHPBars

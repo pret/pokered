@@ -4,7 +4,7 @@ PromptUserToPlaySlots:
 	ld [wAutoTextBoxDrawingControl], a
 	ld b, a
 	ld hl, DisplayTextIDInit
-	call Bankswitch
+	rst BankswitchRST
 	ld hl, PlaySlotMachineText
 	call PrintText
 	call YesNoChoice
