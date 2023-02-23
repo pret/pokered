@@ -169,7 +169,6 @@ PlaceCommandCharacter::
 	inc de
 	jp PlaceNextChar
 
-TrainerCharText:: db "TRAINER@"
 RocketCharText::  db "ROCKET@"
 SixDotsCharText:: db "……@"
 EnemyText::       db "Enemy @"

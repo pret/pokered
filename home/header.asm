@@ -87,8 +87,9 @@ ContCharText::
 	text_end
 
 SECTION "lcd", ROM0[$0048]
-	reti
-; 7 empty bytes
+; this interrupt is disabled on init, so this is a free 8 bytes to use unless we turn it on
+; PureRGBnote: MOVED: 8 extra bytes of space left here, may as well move something here that puts the space to some use	
+TrainerCharText:: db "TRAINER@"
 
 SECTION "timer", ROM0[$0050]
 	jp Timer
