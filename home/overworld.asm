@@ -111,8 +111,8 @@ OverworldLoopLessDelay::
 	predef GetTileAndCoordsInFrontOfPlayer
 	call UpdateSprites
 	ld a, [wFlags_0xcd60]
-	bit 2, a
-	jr nz, .checkForOpponent
+	;bit 2, a
+	;jr nz, .checkForOpponent
 	bit 0, a
 	jr nz, .checkForOpponent
 	lda_coord 8, 9
@@ -142,8 +142,8 @@ OverworldLoopLessDelay::
 	jp nz, .newBattle
 	jp OverworldLoop
 .noDirectionButtonsPressed
-	ld hl, wFlags_0xcd60
-	res 2, [hl]
+	;ld hl, wFlags_0xcd60
+	;res 2, [hl]
 	call UpdateSprites
 ;;;;;;;;;;; PureRGBnote: ADDED: code for changing direction without moving by pressing A+B and a direction when standing still.
 	ldh a, [hJoyHeld] 
@@ -254,13 +254,14 @@ OverworldLoopLessDelay::
 ;	ld a, PLAYER_DIR_UP
 ;	ld [wPlayerMovingDirection], a
 .directionChangeState
-	ld hl, wFlags_0xcd60
-	set 2, [hl]
 	ld a, [wPlayerDirection]
 	ld [wPlayerMovingDirection], a
-	call NewBattle
-	jp c, BattleOccurred
 	jp OverworldLoop
+	;ld hl, wFlags_0xcd60
+	;set 2, [hl]
+	;call NewBattle
+	;jp c, BattleOccurred
+	;jp OverworldLoop
 
 .noDirectionChange
 	xor a
@@ -305,8 +306,8 @@ OverworldLoopLessDelay::
 	call UpdateSprites
 
 .moveAhead2
-	ld hl, wFlags_0xcd60
-	res 2, [hl]
+	;ld hl, wFlags_0xcd60
+	;res 2, [hl]
 	ld a, [wd736]
 	bit 7, a ; spinning?
 	jr nz, .spinnerSpeed ; PureRGBnote: CHANGED: faster spin tile movement
