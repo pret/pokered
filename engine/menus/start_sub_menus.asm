@@ -223,7 +223,7 @@ StartMenu_Pokemon::
 	set 1, [hl]
 	res 4, [hl]
 	ld c, 60
-	call DelayFrames
+	rst DelayFramesRST
 	call GBPalWhiteOutWithDelay3
 	callfar ClearSafariFlags ; PureRGBnote: CHANGED: when teleporting, safari stuff is cleared.
 	jp .goBackToMap

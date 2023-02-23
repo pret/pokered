@@ -19,7 +19,7 @@ LoadSAV:
 	ld hl, FileDataDestroyedText
 	call PrintText
 	ld c, 100
-	call DelayFrames
+	rst DelayFramesRST
 	pop hl
 	res 6, [hl]
 	ld a, $1 ; bad checksum

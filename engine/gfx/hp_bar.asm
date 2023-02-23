@@ -145,7 +145,7 @@ UpdateHPBar_AnimateHPBar:
 	ld d, $6
 	call DrawHPBar
 	ld c, 2
-	call DelayFrames
+	rst DelayFramesRST
 	pop de
 	ld a, [wHPBarDelta] ; +1 or -1
 	add e

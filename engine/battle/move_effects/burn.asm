@@ -33,14 +33,14 @@ BurnEffect_:
 	set BRN, [hl]
 	callfar HalveAttackDueToBurn
 	ld c, 30
-	call DelayFrames
+	rst DelayFramesRST
 	callfar PlayCurrentMoveAnimation
 	jpfar PrintBurnText
 .didntAffect
 	ld c, 50
-	call DelayFrames
+	rst DelayFramesRST
 	jpfar PrintDidntAffectText
 .doesntAffect
 	ld c, 50
-	call DelayFrames
+	rst DelayFramesRST
 	jpfar PrintDoesntAffectText

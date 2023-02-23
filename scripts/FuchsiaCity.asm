@@ -162,7 +162,7 @@ FuchsiaCityText4:
 	ld de, vChars0 + VOLTORB_POKEBALL_TILE1
 	callfar LoadVoltorbSprite
 	ld c, 10
-	call DelayFrames
+	rst DelayFramesRST
 	ld hl, vChars0 + VOLTORB_POKEBALL_TILE1
 	ld de, PokeBallSprite
 	lb bc, BANK(PokeBallSprite), (PokeBallSpriteEnd - PokeBallSprite) / $10
@@ -329,7 +329,7 @@ FuchsiaCityFossilFanText:
 	ld hl, FuchsiaCityFossilFanText3
 	call PrintText
 	ld c, 20
-	call DelayFrames
+	rst DelayFramesRST
 	ld a, PLAYER_DIR_UP
 	ld [wPlayerMovingDirection], a
 	call UpdateSprites
@@ -408,7 +408,7 @@ MoveFossilPokemon:
 	
 HideKabuto:
 	ld c, 20
-	call DelayFrames
+	rst DelayFramesRST
 	ld de, KabutoSprite
 	lb bc, BANK(KabutoSprite), (KabutoSpriteEnd - KabutoSprite) / $10
 	; fall through

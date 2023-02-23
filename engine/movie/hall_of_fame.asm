@@ -2,7 +2,7 @@ AnimateHallOfFame:
 	call HoFFadeOutScreenAndMusic
 	call ClearScreen
 	ld c, 100
-	call DelayFrames
+	rst DelayFramesRST
 	call LoadFontTilePatterns
 	call LoadTextBoxTilePatterns
 	call DisableLCD
@@ -58,7 +58,7 @@ AnimateHallOfFame:
 	call HoFShowMonOrPlayer
 	call HoFDisplayAndRecordMonInfo
 	ld c, 80
-	call DelayFrames
+	rst DelayFramesRST
 	hlcoord 2, 13
 	ld b, 3
 	ld c, 14
@@ -67,7 +67,7 @@ AnimateHallOfFame:
 	ld de, HallOfFameText
 	call PlaceString
 	ld c, 180
-	call DelayFrames
+	rst DelayFramesRST
 	call GBFadeOutToWhite
 	pop bc
 	pop hl

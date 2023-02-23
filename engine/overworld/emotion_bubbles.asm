@@ -2,13 +2,13 @@
 EmotionBubble:
 	call EmotionBubbleCommon
 	ld c, 60
-	call DelayFrames
+	rst DelayFramesRST
 	jp EmotionBubbleCommon2
 
 EmotionBubbleQuick:
 	call EmotionBubbleCommon
 	ld c, 30
-	call DelayFrames
+	rst DelayFramesRST
 	jp EmotionBubbleCommon2
 
 EmotionBubbleCommon:

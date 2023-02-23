@@ -22,7 +22,7 @@ TextCommandPromptMultiButton::
 	lb bc, 6, 18
 	call ClearScreenArea
 	ld c, 20
-	call DelayFrames
+	rst DelayFramesRST
 	pop de
 	ret
 

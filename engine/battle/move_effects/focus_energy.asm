@@ -13,7 +13,7 @@ FocusEnergyEffect_:
 	jp PrintText
 .alreadyUsing
 	ld c, 50
-	call DelayFrames
+	rst DelayFramesRST
 	jpfar PrintButItFailedText_
 
 GettingPumpedText:

@@ -56,7 +56,7 @@ CeruleanRocketHouseMissingnoScript:
 	ld a, SFX_SS_ANNE_HORN
 	call PlayMusic
 	ld c, 2
-	call DelayFrames
+	rst DelayFramesRST
 	pop bc
 	dec b
 	jr nz, .loop
@@ -67,7 +67,7 @@ CeruleanRocketHouseMissingnoScript:
 	call PlayMusic
 	call GBFadeOutToBlack
 	ld b, $FF
-	call DelayFrames
+	rst DelayFramesRST
 	ld a, MISSINGNO
 	call PlayCry
 	ld a, 120

@@ -135,7 +135,7 @@ OakSpeech:
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ld c, 4
-	call DelayFrames
+	rst DelayFramesRST
 	ld de, RedSprite
 	ld hl, vSprites
 	lb bc, BANK(RedSprite), $0C
@@ -144,7 +144,7 @@ OakSpeech:
 	lb bc, BANK(ShrinkPic1), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	ld c, 4
-	call DelayFrames
+	rst DelayFramesRST
 	ld de, ShrinkPic2
 	lb bc, BANK(ShrinkPic2), $00
 	call IntroDisplayPicCenteredOrUpperRight
@@ -163,7 +163,7 @@ OakSpeech:
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ld c, 20
-	call DelayFrames
+	rst DelayFramesRST
 	hlcoord 6, 5
 	ld b, 7
 	ld c, 7
@@ -172,7 +172,7 @@ OakSpeech:
 	ld a, 1
 	ld [wUpdateSpritesEnabled], a
 	ld c, 50
-	call DelayFrames
+	rst DelayFramesRST
 	call GBFadeOutToWhite
 	jp ClearScreen
 OakSpeechText1:
@@ -201,7 +201,7 @@ FadeInIntroPic:
 	ldh [rBGP], a
 	call UpdateGBCPal_BGP ; shinpokerednote: gbcnote: gbc color code from yellow 
 	ld c, 10
-	call DelayFrames
+	rst DelayFramesRST
 	dec b
 	jr nz, .next
 	ret

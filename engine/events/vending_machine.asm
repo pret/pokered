@@ -119,7 +119,7 @@ VendingMachineMenu::
 	ld b, 5 ; shorter for the rarecandy machine
 .playDeliverySound
 	ld c, 2
-	call DelayFrames
+	rst DelayFramesRST
 	push bc
 	ld a, SFX_PUSH_BOULDER
 	call PlaySound

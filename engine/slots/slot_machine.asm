@@ -210,7 +210,7 @@ SlotMachine_SpinWheels:
 	call SlotMachine_AnimWheel2
 	call SlotMachine_AnimWheel3
 	ld c, 2
-	call DelayFrames
+	rst DelayFramesRST
 	pop bc
 	dec c
 	jr nz, .loop1
@@ -226,7 +226,7 @@ SlotMachine_SpinWheels:
 	xor $1
 	inc a
 	ld c, a
-	call DelayFrames
+	rst DelayFramesRST
 	jr .loop2
 
 ; Note that the wheels can only stop when a symbol is centred in the wheel
@@ -460,7 +460,7 @@ SlotMachine_CheckForMatches:
 	ldh [rBGP], a
 	call UpdateGBCPal_BGP ; shinpokerednote: gbcnote: gbc color code from yellow 
 	ld c, 5
-	call DelayFrames
+	rst DelayFramesRST
 	dec b
 	jr nz, .flashScreenLoop
 	ld hl, wPayoutCoins
@@ -738,7 +738,7 @@ SlotMachine_PayCoinsToPlayer:
 	jr z, .skip2
 	srl c ; c = 4 (make the the coins transfer faster if the symbol wasn't cherries)
 .skip2
-	call DelayFrames
+	rst DelayFramesRST
 	jr .loop
 
 SlotMachine_PutOutLitBalls:

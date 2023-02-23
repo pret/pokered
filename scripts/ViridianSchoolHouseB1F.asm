@@ -70,7 +70,7 @@ SchoolB1FNerd:
   	ldh [hSpriteFacingDirection], a
   	call SetSpriteFacingDirection
   	ld c, 20
-  	call DelayFrames
+  	rst DelayFramesRST
 	ld a, 4
 	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_RIGHT
@@ -295,7 +295,7 @@ SchoolB1FRocker:
 	call PlayMusic
 
 	ld c, 160
-	call DelayFrames
+	rst DelayFramesRST
 
 	ld c, BANK(Music_TrainerBattle)
 	ld a, MUSIC_TRAINER_BATTLE
@@ -304,7 +304,7 @@ SchoolB1FRocker:
 	predef BattleTransition
 
 	ld c, 120
-	call DelayFrames
+	rst DelayFramesRST
 	call LoadScreenTilesFromBuffer2
 	call StopAllMusic
 	call GBPalNormal
@@ -317,14 +317,14 @@ SchoolB1FRocker:
 	call PlayMusic
 
 	ld c, 60
-	call DelayFrames
+	rst DelayFramesRST
 	ld hl, SchoolB1FRockerDetentionText
 	call PrintText
 
 
 	call GBFadeOutToWhite
 	ld c, 20
-	call DelayFrames
+	rst DelayFramesRST
 	ld a, HS_VIRIDIAN_SCHOOL_HOUSE_DETENTION
 	ld [wMissableObjectIndex], a
 	predef HideObject
@@ -376,7 +376,7 @@ SchoolB1FBrunetteGirl:
   	call SetSpriteFacingDirection
   	call UpdateSprites
   	ld c, 20
-  	call DelayFrames
+  	rst DelayFramesRST
 	ld a, 11
 	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_UP
@@ -384,7 +384,7 @@ SchoolB1FBrunetteGirl:
   	call SetSpriteFacingDirection
   	call UpdateSprites
   	ld c, 20
-  	call DelayFrames
+  	rst DelayFramesRST
   	pop bc
   	dec b
   	jr nz, .loop
@@ -399,14 +399,14 @@ SchoolB1FBrunetteGirl:
   	call PrintText
 
 	ld c, 60
-	call DelayFrames
+	rst DelayFramesRST
 
 	ld c, BANK(SFX_Safari_Zone_PA)
 	ld a, SFX_SAFARI_ZONE_PA
 	call PlayMusic
 
 	ld c, 60
-	call DelayFrames
+	rst DelayFramesRST
 	ld hl, SchoolB1FDetention2Text
 	call PrintText
 	ld a, 11
@@ -417,11 +417,11 @@ SchoolB1FBrunetteGirl:
 	ld hl, SchoolB1FNotAgainText
 	call PrintText
 	ld c, 20
-	call DelayFrames
+	rst DelayFramesRST
 
 	call GBFadeOutToWhite
 	ld c, 20
-	call DelayFrames
+	rst DelayFramesRST
 	ld a, HS_VIRIDIAN_SCHOOL_HOUSE_DETENTION
 	ld [wMissableObjectIndex], a
 	predef ShowObject

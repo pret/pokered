@@ -63,7 +63,7 @@ VermilionDock_1db9b:
 	xor a
 	ld [wSpritePlayerStateData1ImageIndex], a
 	ld c, 120
-	call DelayFrames
+	rst DelayFramesRST
 	ld b, $9c
 	call CopyScreenTileBufferToVRAM
 	hlcoord 0, 10
@@ -216,7 +216,7 @@ VermilionDock_EraseSSAnne:
 	ld a, SFX_SS_ANNE_HORN
 	call PlaySound
 	ld c, 120
-	call DelayFrames
+	rst DelayFramesRST
 	ret
 
 VermilionDock_TextPointers:
@@ -331,7 +331,7 @@ TruckCheck:
 	dec a
 	jr nz, .movingtruck2
 	ld c, 2
-	call DelayFrames
+	rst DelayFramesRST
 	dec b
 	jr nz, .movingtruck
 	ld a, $3
@@ -350,7 +350,7 @@ ShowMew:
 	ret
 FinishShowMew:
 	ld c, 60
-	call DelayFrames
+	rst DelayFramesRST
 	xor a
 	ld [wJoyIgnore], a
 	SetEvent EVENT_FOUND_MEW

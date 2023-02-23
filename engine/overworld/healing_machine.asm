@@ -46,7 +46,7 @@ AnimateHealingMachine:
 .shortDelay
 	ld c, 5
 .doDelay	
-	call DelayFrames
+	rst DelayFramesRST
 	dec b
 	jr nz, .partyLoop
 	ld a, [wAudioROMBank]
@@ -69,7 +69,7 @@ AnimateHealingMachine:
 	cp MUSIC_PKMN_HEALED ; is the healed music still playing?
 	jr z, .waitLoop2 ; if so, check gain
 	ld c, 32
-	call DelayFrames
+	rst DelayFramesRST
 	pop af
 	ldh [rOBP1], a
 	call UpdateGBCPal_OBP1 ; shinpokerednote: gbcnote: gbc color code from yellow 
@@ -100,7 +100,7 @@ FlashSprite8Times:
 	ldh [rOBP1], a
 	call UpdateGBCPal_OBP1 ; shinpokerednote: gbcnote: gbc color code from yellow 
 	ld c, 10
-	call DelayFrames
+	rst DelayFramesRST
 	dec b
 	jr nz, .loop
 	ret

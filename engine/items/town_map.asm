@@ -168,7 +168,7 @@ LoadTownMap_Fly::
 	ld de, wcd6d
 	call PlaceString
 	ld c, 5 ; PureRGBnote: CHANGED: cut the artificial delay between fly selections to 1/3 of what it was in the vanilla game
-	call DelayFrames
+	rst DelayFramesRST
 	hlcoord 18, 0
 	ld [hl], "▲"
 	hlcoord 19, 0

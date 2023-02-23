@@ -45,7 +45,7 @@ EvolveMon:
 	ld a, MUSIC_SAFARI_ZONE
 	call PlayMusic
 	ld c, 80
-	call DelayFrames
+	rst DelayFramesRST
 	ld c, 1 ; set PAL_BLACK instead of mon palette
 	call EvolutionSetWholeScreenPalette
 	lb bc, $1, $10

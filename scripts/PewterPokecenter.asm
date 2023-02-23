@@ -26,7 +26,7 @@ PewterJigglypuffText:
 	ld a, SFX_STOP_ALL_MUSIC
 	call PlaySound
 	ld c, 32
-	call DelayFrames
+	rst DelayFramesRST
 
 	ld hl, JigglypuffFacingDirections
 	ld de, wJigglypuffFacingDirections
@@ -60,7 +60,7 @@ PewterJigglypuffText:
 	ld [wJigglypuffFacingDirections + 3], a
 	pop hl
 	ld c, 24
-	call DelayFrames
+	rst DelayFramesRST
 	ld a, [wChannelSoundIDs]
 	ld b, a
 	ld a, [wChannelSoundIDs + CHAN2]
@@ -68,7 +68,7 @@ PewterJigglypuffText:
 	jr nz, .spinMovementLoop
 
 	ld c, 48
-	call DelayFrames
+	rst DelayFramesRST
 	call PlayDefaultMusic
 	rst TextScriptEnd
 

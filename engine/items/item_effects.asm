@@ -458,7 +458,7 @@ ItemUseBall:
 
 .skipShakeCalculations
 	ld c, 20
-	call DelayFrames
+	rst DelayFramesRST
 
 	; Do the animation.
 	call MapBallToAnimation ; PureRGBnote: CHANGED: choose which toss animation to use before entering animation code
@@ -1406,7 +1406,7 @@ ItemUseMedicine:
 	ld a, 1
 	ldh [hAutoBGTransferEnabled], a
 	ld c, 50
-	call DelayFrames
+	rst DelayFramesRST
 	call WaitForTextScrollButtonPress
 	jr .done
 .canceledItemUse
@@ -1767,7 +1767,7 @@ ItemUseEscapeRope:
 	ret nz ; if so, return
 	call ItemUseReloadOverworldData
 	ld c, 30
-	call DelayFrames
+	rst DelayFramesRST
 	jp RemoveUsedItem
 .notUsable
 	jp ItemUseNotTime
@@ -2258,7 +2258,7 @@ FishingInit:
 	ld a, SFX_HEAL_AILMENT
 	call PlaySound
 	ld c, 20 ; PureRGBnote: CHANGED: reduce the artificial delay on initiating fishing.
-	call DelayFrames
+	rst DelayFramesRST
 	and a
 	ret
 .surfing

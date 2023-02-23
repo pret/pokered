@@ -302,7 +302,7 @@ Trade_AnimateBallEnteringLinkCable:
 	ld a, TRADE_BALL_SHAKE_ANIM
 	call Trade_ShowAnimation
 	ld c, 10
-	call DelayFrames
+	rst DelayFramesRST
 	ld a, %11100100
 	ldh [rOBP0], a
 	call UpdateGBCPal_OBP0 ; shinpokerednote: gbcnote: gbc color code from yellow 
@@ -700,7 +700,7 @@ Trade_AnimMonMoveVertical:
 	call Trade_AddOffsetsToOAMCoords
 	call Trade_AnimCircledMon
 	ld c, 8
-	call DelayFrames
+	rst DelayFramesRST
 	dec d
 	jr nz, .loop
 	ret
@@ -798,7 +798,7 @@ Trade_SlideTextBoxOffScreen:
 ; after Trade_ShowEnemyMon in the external clock sequence, there is a mon pic
 ; above the text box and it is also scrolled off the screen.
 	ld c, 50
-	call DelayFrames
+	rst DelayFramesRST
 .loop
 	call DelayFrame
 	ldh a, [rWX]
@@ -809,7 +809,7 @@ Trade_SlideTextBoxOffScreen:
 	jr nz, .loop
 	call Trade_ClearTileMap
 	ld c, 10
-	call DelayFrames
+	rst DelayFramesRST
 	ld a, $7
 	ldh [rWX], a
 	ret
@@ -818,7 +818,7 @@ PrintTradeWentToText:
 	ld hl, TradeWentToText
 	call PrintText
 	ld c, 200
-	call DelayFrames
+	rst DelayFramesRST
 	jp Trade_SlideTextBoxOffScreen
 
 TradeWentToText:

@@ -316,29 +316,29 @@ FiddlingAroundSounds:
 	ld a, SFX_TRADE_MACHINE
 	call PlaySound
 	ld c, 40
-	call DelayFrames
+	rst DelayFramesRST
 	ld a, SFX_NOISE_INSTRUMENT05
 	call PlaySound
 	ld c, 12
-	call DelayFrames
+	rst DelayFramesRST
 	ld a, SFX_NOISE_INSTRUMENT05
 	call PlaySound
 	ld c, 12
-	call DelayFrames
+	rst DelayFramesRST
 	ld a, SFX_NOISE_INSTRUMENT05
 	call PlaySound
 	ld c, 40
-	call DelayFrames
+	rst DelayFramesRST
 	ld b, 20
 .loop
 	ld a, SFX_TURN_OFF_PC
 	call PlaySound
 	ld c, 2
-	call DelayFrames
+	rst DelayFramesRST
 	dec b
 	jr nz, .loop
 	ld c, 60
-	call DelayFrames
+	rst DelayFramesRST
 	ret
 
 LabColorChangerGreeting:

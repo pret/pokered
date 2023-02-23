@@ -87,12 +87,12 @@ _ApexChipPutOnPokeballText::
 	call PlaySound
 	call WaitForSoundToFinish
 	ld c, 50
-	call DelayFrames
+	rst DelayFramesRST
 	ld a, SFX_TRADE_MACHINE
 	call PlaySound
 	call WaitForSoundToFinish
 	ld c, 50
-	call DelayFrames
+	rst DelayFramesRST
 	rst TextScriptEnd
 
 _ApexChipDVsMaxedText::

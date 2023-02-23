@@ -274,7 +274,7 @@ ViridianCityText7:
 	ld hl, ViridianCityText_1920a
 	call PrintText
 	ld c, 2
-	call DelayFrames
+	rst DelayFramesRST
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a

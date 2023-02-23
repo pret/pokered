@@ -1,6 +1,6 @@
 SubstituteEffect_:
 	ld c, 50
-	call DelayFrames
+	rst DelayFramesRST
 	ld hl, wBattleMonMaxHP
 	ld de, wPlayerSubstituteHP
 	ld bc, wPlayerBattleStatus2

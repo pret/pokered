@@ -176,7 +176,7 @@ OakAppearsText:
 	text_far _OakAppearsText
 	text_asm
 	ld c, 10
-	call DelayFrames
+	rst DelayFramesRST
 	xor a
 	ld [wEmotionBubbleSpriteIndex], a ; player's sprite
 	ld [wWhichEmotionBubble], a ; EXCLAMATION_BUBBLE

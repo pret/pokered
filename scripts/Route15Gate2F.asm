@@ -67,13 +67,13 @@ RemoveBoosterChipSounds:
 	ld a, SFX_NOISE_INSTRUMENT16
 	call PlaySound
 	ld c, 10
-	call DelayFrames
+	rst DelayFramesRST
 	dec b
 	jr nz, .loop
 	ld a, SFX_NOISE_INSTRUMENT03
 	call PlaySound
 	ld c, 10
-	call DelayFrames
+	rst DelayFramesRST
 	ld a, SFX_WITHDRAW_DEPOSIT
 	call PlaySound
 	ld c, 30

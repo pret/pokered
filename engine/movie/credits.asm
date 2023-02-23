@@ -2,7 +2,7 @@ HallOfFamePC:
 	farcall AnimateHallOfFame
 	call ClearScreen
 	ld c, 100
-	call DelayFrames
+	rst DelayFramesRST
 	call DisableLCD
 	ld hl, vFont
 	ld bc, ($80 tiles) / 2
@@ -28,7 +28,7 @@ HallOfFamePC:
 	ld a, MUSIC_CREDITS
 	call PlayMusic
 	ld c, 128
-	call DelayFrames
+	rst DelayFramesRST
 	xor a
 	ld [wNumCreditsMonsDisplayed], a
 	jp Credits
@@ -41,7 +41,7 @@ FadeInCreditsText:
 	ldh [rBGP], a
 	call UpdateGBCPal_BGP ; shinpokerednote: gbcnote: gbc color code from yellow 
 	ld c, 5
-	call DelayFrames
+	rst DelayFramesRST
 	dec b
 	jr nz, .loop
 	ret
@@ -220,7 +220,7 @@ Credits:
 .showTextAndShowMon
 	ld c, 110
 .next1
-	call DelayFrames
+	rst DelayFramesRST
 	call DisplayCreditsMon
 	jr .nextCreditsScreen
 .fadeInText
@@ -230,7 +230,7 @@ Credits:
 .showText
 	ld c, 140
 .next2
-	call DelayFrames
+	rst DelayFramesRST
 	jr .nextCreditsScreen
 .showCopyrightText
 	push de
@@ -240,7 +240,7 @@ Credits:
 	jr .nextCreditsCommand
 .showTheEnd
 	ld c, 16
-	call DelayFrames
+	rst DelayFramesRST
 	call FillMiddleOfScreenWithWhite
 	pop de
 	ld de, TheEndGfx

@@ -437,7 +437,7 @@ OaksLabScript12:
 
 OaksLabScript13:
 	ld c, 20
-	call DelayFrames
+	rst DelayFramesRST
 	ld a, $10
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
@@ -858,7 +858,7 @@ OaksLabScript_1d157:
 	res 6, [hl]
 	call ReloadMapData
 	ld c, 10
-	call DelayFrames
+	rst DelayFramesRST
 	ld a, [wSpriteIndex]
 	cp $2
 	jr z, OaksLabLookAtCharmander

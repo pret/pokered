@@ -112,7 +112,7 @@ VermilionCityScript1:
 	and a
 	ret nz
 	ld c, 10
-	call DelayFrames
+	rst DelayFramesRST
 	ld a, $0
 	ld [wVermilionCityCurScript], a
 	ret

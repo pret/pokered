@@ -78,7 +78,7 @@ BillsHouseScript3:
 	ld [wMissableObjectIndex], a
 	predef ShowObject
 	ld c, 8
-	call DelayFrames
+	rst DelayFramesRST
 	ld a, $2
 	ldh [hSpriteIndex], a
 	ld de, MovementData_1e807

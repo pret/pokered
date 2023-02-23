@@ -158,7 +158,7 @@ PoisonEffect:
 	ret nz
 .didntAffect
 	ld c, 50
-	call DelayFrames
+	rst DelayFramesRST
 	jp PrintDidntAffectText
 
 PoisonedText:
@@ -1018,7 +1018,7 @@ SwitchAndTeleportEffect:
 	cp b ; is rand[0, playerLevel + enemyLevel] >= (enemyLevel / 4)?
 	jr nc, .playerMoveWasSuccessful ; if so, allow teleporting
 	ld c, 50
-	call DelayFrames
+	rst DelayFramesRST
 	ld a, [wPlayerMoveNum]
 	cp TELEPORT
 	jp nz, PrintDidntAffectText
@@ -1033,7 +1033,7 @@ SwitchAndTeleportEffect:
 	jr .playAnimAndPrintText
 .notWildBattle1
 	ld c, 50
-	call DelayFrames
+	rst DelayFramesRST
 	ld hl, IsUnaffectedText
 	ld a, [wPlayerMoveNum]
 	cp TELEPORT
@@ -1060,7 +1060,7 @@ SwitchAndTeleportEffect:
 	cp b
 	jr nc, .enemyMoveWasSuccessful
 	ld c, 50
-	call DelayFrames
+	rst DelayFramesRST
 	ld a, [wEnemyMoveNum]
 	cp TELEPORT
 	jp nz, PrintDidntAffectText
@@ -1075,7 +1075,7 @@ SwitchAndTeleportEffect:
 	jr .playAnimAndPrintText
 .notWildBattle2
 	ld c, 50
-	call DelayFrames
+	rst DelayFramesRST
 	ld hl, IsUnaffectedText
 	ld a, [wEnemyMoveNum]
 	cp TELEPORT
@@ -1089,7 +1089,7 @@ SwitchAndTeleportEffect:
 ;;;;;;;;;;
 	call PlayBattleAnimation
 	ld c, 20
-	call DelayFrames
+	rst DelayFramesRST
 	; pop af
 	ld hl, RanFromBattleText
 	;cp TELEPORT ; PureRGBnote: CHANGED: roar and whirlwind have different effects now so no need for this code
@@ -1389,7 +1389,7 @@ ConfusionEffectFailed:
 	cp CONFUSION_SIDE_EFFECT
 	ret z
 	ld c, 50
-	call DelayFrames
+	rst DelayFramesRST
 	jp ConditionalPrintButItFailed
 
 BurnEffect:
@@ -1436,7 +1436,7 @@ ClearHyperBeam:
 
 MimicEffect:
 	ld c, 50
-	call DelayFrames
+	rst DelayFramesRST
 	call MoveHitTest
 	ld a, [wMoveMissed]
 	and a

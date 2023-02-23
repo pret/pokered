@@ -157,7 +157,7 @@ AnimateIntroNidorino:
 	ld c, 6 * 6
 	call UpdateIntroNidorinoOAM
 	ld c, 5
-	call DelayFrames
+	rst DelayFramesRST
 	pop de
 	inc de
 	jr AnimateIntroNidorino
@@ -316,7 +316,7 @@ PlayShootingStar:
 	ldh [rBGP], a
 	call UpdateGBCPal_BGP ; shinpokerednote: gbcnote: gbc color code from yellow 
 	ld c, 180
-	call DelayFrames
+	rst DelayFramesRST
 	call ClearScreen
 	call DisableLCD
 	xor a
@@ -328,13 +328,13 @@ PlayShootingStar:
 	res 5, [hl]
 	set 3, [hl]
 	ld c, 64
-	call DelayFrames
+	rst DelayFramesRST
 	farcall AnimateShootingStar
 	push af
 	pop af
 	jr c, .next ; skip the delay if the user interrupted the animation
 	ld c, 40
-	call DelayFrames
+	rst DelayFramesRST
 .next
 	ld a, BANK(Music_IntroBattle)
 	ld [wAudioROMBank], a

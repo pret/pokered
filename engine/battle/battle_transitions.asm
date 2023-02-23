@@ -333,7 +333,7 @@ BattleTransition_FlashScreen_:
 	ldh [rBGP], a
 	call UpdateGBCPal_BGP ; shinpokerednote: gbcnote: color support from yellow
 	ld c, 2
-	call DelayFrames
+	rst DelayFramesRST
 	jr .loop
 .done
 	dec b
@@ -381,7 +381,7 @@ BattleTransition_Shrink:
 	ld a, $1
 	ldh [hAutoBGTransferEnabled], a
 	ld c, 6
-	call DelayFrames
+	rst DelayFramesRST
 	pop bc
 	dec c
 	jr nz, .loop

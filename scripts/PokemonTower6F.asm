@@ -149,7 +149,7 @@ PokemonTower6Text7:
 	call PlayCry
 	call WaitForSoundToFinish
 	ld c, 30
-	call DelayFrames
+	rst DelayFramesRST
 	ld hl, PokemonTower2Text_60c24
 	call PrintText
 ;;;;;;;;;; PureRGBnote: ADDED: ghost marowak can be caught and the event will complete if you do so
