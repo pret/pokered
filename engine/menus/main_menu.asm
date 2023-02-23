@@ -12,7 +12,7 @@ MainMenu:
 
 .mainMenuLoop
 	ld c, 20
-	call DelayFrames
+	rst DelayFramesRST
 	xor a ; LINK_STATE_NONE
 	ld [wLinkState], a
 	ld hl, wPartyAndBillsPCSavedMenuItem
@@ -74,7 +74,7 @@ MainMenu:
 	bit BIT_B_BUTTON, a
 	jp nz, DisplayTitleScreen ; if so, go back to the title screen
 	ld c, 20
-	call DelayFrames
+	rst DelayFramesRST
 	ld a, [wCurrentMenuItem]
 	ld b, a
 	ld a, [wSaveFileStatus]
@@ -119,7 +119,7 @@ MainMenu:
 	ld a, PLAYER_DIR_DOWN
 	ld [wPlayerDirection], a
 	ld c, 10
-	call DelayFrames
+	rst DelayFramesRST
 	ld a, [wNumHoFTeams]
 	and a
 	jp z, SpecialEnterMap
@@ -255,7 +255,7 @@ LinkMenu:
 	ld a, d
 	ldcoord_a 6, 11
 	ld c, 40
-	call DelayFrames
+	rst DelayFramesRST
 	call LoadScreenTilesFromBuffer1
 	ld a, [wLinkMenuSelectionSendBuffer]
 	and (B_BUTTON << 2) ; was B button pressed?
@@ -275,14 +275,14 @@ LinkMenu:
 	ld hl, PleaseWaitText
 	call PrintText
 	ld c, 50
-	call DelayFrames
+	rst DelayFramesRST
 	ld hl, wd732
 	res 1, [hl]
 	ld a, [wDefaultMap]
 	ld [wDestinationMap], a
 	call SpecialWarpIn
 	ld c, 20
-	call DelayFrames
+	rst DelayFramesRST
 	xor a
 	ld [wMenuJoypadPollCount], a
 	ld [wSerialExchangeNybbleSendData], a
@@ -321,7 +321,7 @@ StartNewGame:
 StartNewGameDebug:
 	call OakSpeech
 	ld c, 20
-	call DelayFrames
+	rst DelayFramesRST
 
 ; enter map after using a special warp or loading the game from the main menu
 SpecialEnterMap::
@@ -336,7 +336,7 @@ SpecialEnterMap::
 	set 0, [hl] ; count play time
 	call ResetPlayerSpriteData
 	ld c, 20
-	call DelayFrames
+	rst DelayFramesRST
 	ld a, [wEnteringCableClub]
 	and a
 	ret nz
