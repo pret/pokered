@@ -17,7 +17,7 @@ PlayIntro:
 	ldh [hSCX], a
 	ldh [hAutoBGTransferEnabled], a
 	call ClearSprites
-	call DelayFrame
+	rst DelayFrameRST
 	ret
 
 PlayIntroScene:

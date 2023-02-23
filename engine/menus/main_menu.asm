@@ -226,8 +226,8 @@ LinkMenu:
 	ldh a, [hSerialConnectionStatus]
 	cp USING_INTERNAL_CLOCK
 	jr nz, .skipStartingTransfer
-	call DelayFrame
-	call DelayFrame
+	rst DelayFrameRST
+	rst DelayFrameRST
 	ld a, START_TRANSFER_INTERNAL_CLOCK
 	ldh [rSC], a
 .skipStartingTransfer

@@ -217,13 +217,13 @@ IntroFadePalettes:
 MovePicLeft:
 	ld a, 119
 	ldh [rWX], a
-	call DelayFrame
+	rst DelayFrameRST
 
 	ld a, %11100100
 	ldh [rBGP], a
 	call UpdateGBCPal_BGP ; shinpokerednote: gbcnote: gbc color code from yellow 
 .next
-	call DelayFrame
+	rst DelayFrameRST
 	ldh a, [rWX]
 	sub 8
 	cp $FF

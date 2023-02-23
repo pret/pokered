@@ -247,7 +247,7 @@ Trade_ShowPlayerMon:
 	ld a, $7e
 .slideScreenLoop
 	push af
-	call DelayFrame
+	rst DelayFrameRST
 	pop af
 	ldh [rWX], a
 	ldh [hSCX], a
@@ -280,7 +280,7 @@ Trade_DrawOpenEndOfLinkCable:
 
 	ld a, $a0
 	ldh [hSCX], a
-	call DelayFrame
+	rst DelayFrameRST
 	ld a, %10001011
 	ldh [rLCDC], a
 	hlcoord 6, 2
@@ -458,7 +458,7 @@ Trade_InitGameboyTransferGfx:
 	xor a
 	ldh [hAutoBGTransferEnabled], a
 	call Trade_LoadMonPartySpriteGfx
-	call DelayFrame
+	rst DelayFrameRST
 	ld a, %10101011
 	ldh [rLCDC], a
 	xor a
@@ -591,7 +591,7 @@ Trade_AnimMonMoveHorizontal:
 	add $2
 .next
 	ldh [hSCX], a
-	call DelayFrame
+	rst DelayFrameRST
 	dec d
 	jr nz, .scrollLoop
 	call Trade_AnimCircledMon
@@ -800,7 +800,7 @@ Trade_SlideTextBoxOffScreen:
 	ld c, 50
 	rst DelayFramesRST
 .loop
-	call DelayFrame
+	rst DelayFrameRST
 	ldh a, [rWX]
 	inc a
 	inc a

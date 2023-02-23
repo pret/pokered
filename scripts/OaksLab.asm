@@ -562,17 +562,17 @@ OaksLabScript16:
 	ld a, $16
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	call DelayFrame
+	rst DelayFrameRST
 	call OaksLabScript_1cefd
 	ld a, $17
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	call DelayFrame
+	rst DelayFrameRST
 	call OaksLabScript_1cefd
 	ld a, $18
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	call DelayFrame
+	rst DelayFrameRST
 	ld a, $19
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID

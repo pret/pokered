@@ -140,7 +140,7 @@ Evolution_ChangeMonPic:
 	ret
 
 Evolution_CheckForCancel:
-	call DelayFrame
+	rst DelayFrameRST
 	push bc
 	call JoypadLowSensitivity
 	ldh a, [hJoy5]

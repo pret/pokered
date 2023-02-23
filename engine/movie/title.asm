@@ -183,7 +183,7 @@ ENDC
 .ScrollTitleScreenPokemonLogo:
 ; Scrolls the Pokemon logo on the title screen to create the bouncing effect
 ; Scrolls d pixels e times
-	call DelayFrame
+	rst DelayFrameRST
 	ld a, [bc] ; background scroll Y
 	add d
 	ld [bc], a

@@ -175,7 +175,7 @@ HoFShowMonOrPlayer:
 ; scroll front pic right
 
 .ScrollPic
-	call DelayFrame
+	rst DelayFrameRST
 	ldh a, [hSCX]
 	add e
 	ldh [hSCX], a

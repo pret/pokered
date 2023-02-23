@@ -62,8 +62,8 @@ SlidePlayerAndEnemySilhouettesOnScreen:
 	ld c, $90
 	ld a, c
 	ldh [hSCX], a
-	call DelayFrame
-	call DelayFrame ; shinpokerednote: gbcnote: do one extra frame to make sure the screen can update
+	rst DelayFrameRST
+	rst DelayFrameRST ; shinpokerednote: gbcnote: do one extra frame to make sure the screen can update
 	ld a, %11100100 ; inverted palette for silhouette effect
 	ldh [rBGP], a
 	ldh [rOBP0], a
@@ -3121,7 +3121,7 @@ LinkBattleExchangeData:
 	callfar PrintWaitingText
 .syncLoop1
 	call Serial_ExchangeNybble
-	call DelayFrame
+	rst DelayFrameRST
 	ld a, [wSerialExchangeNybbleReceiveData]
 	inc a
 	jr z, .syncLoop1
@@ -3134,7 +3134,7 @@ ELSE
 ENDC
 	vc_patch_end
 .syncLoop2
-	call DelayFrame
+	rst DelayFrameRST
 	call Serial_ExchangeNybble
 	dec b
 	jr nz, .syncLoop2
@@ -3147,7 +3147,7 @@ ELSE
 ENDC
 	vc_patch_end
 .syncLoop3
-	call DelayFrame
+	rst DelayFrameRST
 	call Serial_SendZeroByte
 	dec b
 	jr nz, .syncLoop3
@@ -6698,7 +6698,7 @@ DoBattleTransitionAndInitBattleVariables:
 	ld [wUpdateSpritesEnabled], a
 	call ClearScreen
 .next
-	call DelayFrame
+	rst DelayFrameRST
 	predef BattleTransition
 	callfar LoadHudAndHpBarAndStatusTilePatterns
 	ld a, $1

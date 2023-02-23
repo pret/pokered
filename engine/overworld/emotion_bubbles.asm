@@ -74,7 +74,7 @@ EmotionBubbleCommon:
 EmotionBubbleCommon2:
 	ld a, d
 	ld [wUpdateSpritesEnabled], a
-	call DelayFrame
+	rst DelayFrameRST
 	jp UpdateSprites
 
 EmotionBubblesPointerTable:

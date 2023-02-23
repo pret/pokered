@@ -112,7 +112,7 @@ CableClub_DoBattleOrTradeAgain:
 	ldh [hSerialSendData], a
 	ld a, START_TRANSFER_INTERNAL_CLOCK
 	ldh [rSC], a
-	call DelayFrame
+	rst DelayFrameRST
 	xor a
 	ldh [hSerialSendData], a
 	ld a, START_TRANSFER_INTERNAL_CLOCK

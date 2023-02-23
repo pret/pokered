@@ -45,11 +45,11 @@ CableClubNPC::
 	ldh [rSB], a
 	ld a, START_TRANSFER_INTERNAL_CLOCK
 	ldh [rSC], a
-	call DelayFrame
+	rst DelayFrameRST
 	jr .establishConnectionLoop
 .establishedConnection
 	call Serial_SendZeroByte
-	call DelayFrame
+	rst DelayFrameRST
 	call Serial_SendZeroByte
 	ld c, 50
 	rst DelayFramesRST
@@ -89,7 +89,7 @@ CableClubNPC::
 	jr nz, .connected
 	ld b, 10
 .syncLoop
-	call DelayFrame
+	rst DelayFrameRST
 	call Serial_SendZeroByte
 	dec b
 	jr nz, .syncLoop

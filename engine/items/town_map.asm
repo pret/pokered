@@ -176,7 +176,7 @@ LoadTownMap_Fly::
 	pop hl
 .inputLoop
 	push hl
-	call DelayFrame
+	rst DelayFrameRST
 	call JoypadLowSensitivity
 	ldh a, [hJoy5]
 	ld b, a

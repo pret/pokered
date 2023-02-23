@@ -416,9 +416,9 @@ SlotMachine_CheckForMatches:
 	ret
 .rollWheel3DownByOneSymbol
 	call SlotMachine_AnimWheel3
-	call DelayFrame
+	rst DelayFrameRST
 	call SlotMachine_AnimWheel3
-	call DelayFrame
+	rst DelayFrameRST
 	jp SlotMachine_CheckForMatches
 .foundMatch ; PureRGBnote: CHANGED: always accept matches
 	;ld a, [wSlotMachineFlags]
@@ -854,7 +854,7 @@ SlotMachine_AnimWheel:
 	ret
 
 SlotMachine_HandleInputWhileWheelsSpin:
-	call DelayFrame
+	rst DelayFrameRST
 	call JoypadLowSensitivity
 	ldh a, [hJoy5]
 	and A_BUTTON

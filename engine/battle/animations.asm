@@ -737,7 +737,7 @@ AnimationCleanOAM:
 	push de
 	push bc
 	push af
-	call DelayFrame
+	rst DelayFrameRST
 	call ClearSprites
 	pop af
 	pop bc
@@ -1990,7 +1990,7 @@ _AnimationShootBallsUpward:
 	call BattleAnimWriteOAMEntry
 	dec b
 	jr nz, .initOAMLoop
-	call DelayFrame
+	rst DelayFrameRST
 	pop bc
 	ld a, b
 	ld [wNumShootingBalls], a
