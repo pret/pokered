@@ -97,7 +97,7 @@ Route18GateText1:
 	ld hl, Route18GateText_49928
 	call PrintText
 .asm_a8410
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route18GateText_49928:
 	text_far _Route18GateText_49928

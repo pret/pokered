@@ -208,7 +208,7 @@ DayCareMText1:
 
 .done
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 DayCareIntroText:
 	text_far _DayCareIntroText

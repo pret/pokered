@@ -23,7 +23,7 @@ CeruleanMartTMKid: ; PureRGBnote: ADDED: new NPC who will sell TMs
 .shop
 	ld hl, CeruleanTMKidShop
 	call DisplayPokemartNoGreeting
-	jp TextScriptEnd
+	rst TextScriptEnd
 	
 TMKidGreet1::
 	text_far _TMKidGreet

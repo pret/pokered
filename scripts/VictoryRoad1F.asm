@@ -59,13 +59,13 @@ VictoryRoad1Text1:
 	text_asm
 	ld hl, VictoryRoad1TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 VictoryRoad1Text2:
 	text_asm
 	ld hl, VictoryRoad1TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 VictoryRoad1BattleText1:
 	text_far _VictoryRoad1BattleText1

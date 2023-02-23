@@ -35,7 +35,7 @@ ViridianSchoolNotebook::
 .print
 	call PrintText
 .doneReading
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 TurnPageSchoolNotebook:
 	ld hl, TurnPageText

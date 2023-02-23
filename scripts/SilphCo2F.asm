@@ -103,7 +103,7 @@ Load2FCheckCardKeyText:
 SilphCo2Text6:
 	text_asm
 	callfar PrintCardKeyDoneText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo2F_ScriptPointers:
 	dw CheckFightingMapTrainers
@@ -147,7 +147,7 @@ SilphCo2Text1:
 	ld hl, TM36ExplanationText
 .asm_59de7
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo2Text_59ded:
 	text_far _SilphCo2Text_59ded
@@ -170,25 +170,25 @@ SilphCo2Text2:
 	text_asm
 	ld hl, SilphCo2TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo2Text3:
 	text_asm
 	ld hl, SilphCo2TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo2Text4:
 	text_asm
 	ld hl, SilphCo2TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo2Text5:
 	text_asm
 	ld hl, SilphCo2TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo2BattleText1:
 	text_far _SilphCo2BattleText1

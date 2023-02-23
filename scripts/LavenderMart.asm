@@ -23,7 +23,7 @@ LavenderMartTMKid: ; PureRGBnote: ADDED: new NPC who will sell TMs
 .shop
 	ld hl, LavenderTMKidShop
 	call DisplayPokemartNoGreeting
-	jp TextScriptEnd
+	rst TextScriptEnd
 	
 TMKidGreet3::
 	text_far _TMKidGreet
@@ -52,7 +52,7 @@ LavenderMartText3:
 	ld hl, .NuggetText
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .ReviveText
 	text_far _LavenderMartReviveText

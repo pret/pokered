@@ -112,7 +112,7 @@ InitVoltorbBattleCommon:
 	ld [wPowerPlantCurScript], a
 	pop de
 	call LoadVoltorbSprite
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Voltorb0Text:
 	text_asm
@@ -177,4 +177,4 @@ ZapdosBattleText:
 	ld a, ZAPDOS
 	call PlayCry
 	call WaitForSoundToFinish
-	jp TextScriptEnd
+	rst TextScriptEnd

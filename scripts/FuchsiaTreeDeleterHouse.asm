@@ -76,19 +76,19 @@ FuchsiaTreeDeleter:
 	ld [wListScrollOffset], a
 	ld hl, FuchsiaTreeDeleterDoneText
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 .noMoreTreesToDelete
 	xor a
 	ld [wListScrollOffset], a
 	ld hl, FuchsiaTreeDeleterFinalText
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 .finalText
 	ld hl, FuchsiaTreeDeleterFinalTextPrompt
 	call PrintText
 	ld hl, FuchsiaTreeDeleterFinalText2
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 
 FuchsiaTreeDeleterDoneText:
@@ -181,7 +181,7 @@ FuchsiaTreeDeleterRoute2:
 	ld hl, FuchsiaTreeDeleterAlreadyDeletedText
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FuchsiaTreeDeleterRoute2Text:
 	text_far _FuchsiaTreeDeleterRoute2
@@ -212,7 +212,7 @@ FuchsiaTreeDeleterCeruleanCity:
 	ld hl, FuchsiaTreeDeleterAlreadyDeletedText
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FuchsiaTreeDeleterCeruleanCityText:
 	text_far _FuchsiaTreeDeleterCerulean
@@ -243,7 +243,7 @@ FuchsiaTreeDeleterRoute9:
 	ld hl, FuchsiaTreeDeleterAlreadyDeletedText
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FuchsiaTreeDeleterRoute9Text:
 	text_far _FuchsiaTreeDeleterRoute9
@@ -274,7 +274,7 @@ FuchsiaTreeDeleterFuchsiaCity:
 	ld hl, FuchsiaTreeDeleterAlreadyDeletedText
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FuchsiaTreeDeleterFuchsiaCityText:
 	text_far _FuchsiaTreeDeleterFuchsiaCity

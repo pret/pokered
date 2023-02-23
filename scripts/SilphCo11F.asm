@@ -84,7 +84,7 @@ Load11FCheckCardKeyText:
 SilphCo11Text7:
 	text_asm
 	callfar PrintCardKeyDoneText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo11Script_6216d:
 	ld hl, MissableObjectIDs_6219b
@@ -333,7 +333,7 @@ SilphCo11Text1:
 	ld hl, SilphCo10Text_6231c
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCoPresidentText:
 	text_far _SilphCoPresidentText
@@ -372,7 +372,7 @@ SilphCo11Text4:
 	text_asm
 	ld hl, SilphCo11TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo11BattleText1:
 	text_far _SilphCo11BattleText1
@@ -390,7 +390,7 @@ SilphCo11Text5:
 	text_asm
 	ld hl, SilphCo11TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo11BattleText2:
 	text_far _SilphCo11BattleText2
@@ -410,7 +410,7 @@ SilphCo10Text_6236c:
 	call PrintText
 	ld a, PORYGON
 	call DisplayPokedex
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo10Text_6237b:
 	text_far _SilphCo10Text_6237b

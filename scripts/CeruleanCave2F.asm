@@ -56,7 +56,7 @@ OakCeruleanCaveText:
 	call PrintText
 	call OakBattle
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 OakBattle:
 	ld hl, OakBattleWinText
@@ -91,7 +91,7 @@ OakCeruleanCaveFirstDefeatText:
 	text_asm
 	ld hl, OakFirstLoseText
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 OakBattleStartText:
 	text_far _OakBattleStartText

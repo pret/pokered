@@ -203,7 +203,7 @@ SafariZoneGate_TextPointers:
 	ld hl, .SafariZoneEntranceText1Get
 	call PrintText
 .done1
-	jp TextScriptEnd
+	rst TextScriptEnd
 	
 
 .SafariZoneEntranceText_9e6e4
@@ -279,7 +279,7 @@ SafariZoneGate_TextPointers:
 	ld a, 4
 	ld [wSafariZoneGateCurScript], a
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .MakePaymentText
 	text_far SafariZoneEntranceText_9e747
@@ -320,7 +320,7 @@ SafariZoneGate_TextPointers:
 .asm_753b3
 	ld a, $6
 	ld [wSafariZoneGateCurScript], a
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .SafariZoneEntranceText_753bb
 	text_far _SafariZoneEntranceText_753bb
@@ -343,7 +343,7 @@ SafariZoneGate_TextPointers:
 	ld hl, .RangerHuntDoneSuccessText
 	call PrintText
 	SetEvent EVENT_OWED_HYPER_BALL
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .RangerHuntDoneSuccessText
 	text_far _RangerHuntDoneSuccessText
@@ -360,12 +360,12 @@ SafariZoneGate_TextPointers:
 	jr nz, .Explanation
 	call AskGameTypeExplanation
 	jr c, .noSelection
-	jp TextScriptEnd
+	rst TextScriptEnd
 .noSelection
 	ld hl, PleaseComeAgainText
 .Explanation
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .FirstTimeQuestionText
 	text_far _SafariZoneEntranceText_753e6
@@ -378,7 +378,7 @@ SafariZoneGate_TextPointers:
 .SafariZoneEntranceText9
 	text_asm
 	call GiveHyperBall
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 AskGameType:
 	ld a, 0
@@ -461,7 +461,7 @@ SafariClassicPaidInfo:
 	ld a, SAFARI_TYPE_CLASSIC
 	ld [wSafariType], a
 	call HideAllTrainers
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SafariRangerHuntPaidInfo:
 	text_asm
@@ -478,7 +478,7 @@ SafariRangerHuntPaidInfo:
 	ld a, SAFARI_TYPE_RANGER_HUNT
 	ld [wSafariType], a
 	call ShowAllTrainers
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SafariFreeRoamPaidInfo:
 	text_asm
@@ -490,7 +490,7 @@ SafariFreeRoamPaidInfo:
 	ld [wSafariType], a
 	call ShowAllTrainers
 	call HideRangers
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SafariZoneClassicText:
 	text_far _SafariZoneClassic

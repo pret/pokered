@@ -53,7 +53,7 @@ SSAnne6Text7:
 	ld hl, SSAnne6Text_61816
 .done
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SSAnne6Text_61807:
 	text_far _SSAnne6Text_61807

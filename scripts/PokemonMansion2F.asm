@@ -87,7 +87,7 @@ Mansion2Text1:
 	text_asm
 	ld hl, Mansion2TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Mansion2BattleText1:
 	text_far _Mansion2BattleText1
@@ -105,7 +105,7 @@ Mansion2Trainer2:
 	text_asm
 	ld hl, Mansion2TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Mansion2BattleText2:
 	text_far _Mansion2BattleText2
@@ -123,7 +123,7 @@ Mansion2Trainer3:
 	text_asm
 	ld hl, Mansion2TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Mansion2BattleText3:
 	text_far _Mansion2BattleText3
@@ -141,7 +141,7 @@ Mansion2Trainer4:
 	text_asm
 	ld hl, Mansion2TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Mansion2BattleText4:
 	text_far _Mansion2BattleText4
@@ -159,7 +159,7 @@ Mansion2Trainer5:
 	text_asm
 	ld hl, Mansion2TrainerHeader4
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Mansion2BattleText5:
 	text_far _Mansion2BattleText5
@@ -206,7 +206,7 @@ Mansion2Text5:
 	ld hl, Mansion2Text_520cc
 	call PrintText
 .asm_520bf
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Mansion2Text_520c2:
 	text_far _Mansion2Text_520c2

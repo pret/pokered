@@ -254,7 +254,7 @@ GaryText1:
 	ld hl, GaryText_76103
 .printText
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 GaryChampionIntroText:
 	text_far _GaryChampionIntroText
@@ -283,7 +283,7 @@ GaryText3:
 	call GetMonName
 	ld hl, GaryText_76120
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 GaryText_76120:
 	text_far _GaryText_76120

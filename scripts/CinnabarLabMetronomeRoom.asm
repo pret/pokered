@@ -29,7 +29,7 @@ Lab3Text1:
 	ld hl, TM35ExplanationText
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 TM35PreReceiveText:
 	text_far _TM35PreReceiveText

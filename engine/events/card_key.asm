@@ -102,7 +102,7 @@ PrintCardKeyDoneText::
 	call RemoveItemFromInventory
 	ld hl, CardKeyDoneText
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 INCLUDE "data/events/card_key_maps.asm"
 

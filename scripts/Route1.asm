@@ -24,7 +24,7 @@ Route1Text1:
 	ld hl, Route1Text_1caee
 .done
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route1ViridianMartSampleText:
 	text_far _Route1ViridianMartSampleText

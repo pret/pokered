@@ -25,7 +25,7 @@ CeladonDinerText1:
 	ld hl, CeladonDinerMenu
 	call DisplayPokemartNoGreeting
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 INCLUDE "data/items/marts/celadon_diner.asm"
 
@@ -70,7 +70,7 @@ CeladonDinerText5:
 	ld hl, CeladonDinerText_491b7
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeladonDinerText_491a7:
 	text_far _CeladonDinerText_491a7

@@ -22,7 +22,7 @@ Route16HouseText1:
 	ld hl, HM02NoRoomText
 .got_item
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route16HouseText3:
 	text_far _Route16HouseText3
@@ -48,7 +48,7 @@ Route16HouseText2:
 	ld a, FEAROW
 	call PlayCry
 	call WaitForSoundToFinish
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route16HouseText_1e652:
 	text_far _Route16HouseText_1e652

@@ -120,7 +120,7 @@ MistyText:
 	ld a, $3
 	ld [wCeruleanGymCurScript], a
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 MistyPreBattleText:
 	text_far _MistyPreBattleText
@@ -153,7 +153,7 @@ CeruleanGymTrainerText1:
 	text_asm
 	ld hl, CeruleanGymTrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeruleanGymBattleText1:
 	text_far _CeruleanGymBattleText1
@@ -171,7 +171,7 @@ CeruleanGymTrainerText2:
 	text_asm
 	ld hl, CeruleanGymTrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeruleanGymBattleText2:
 	text_far _CeruleanGymBattleText2
@@ -218,7 +218,7 @@ CeruleanGymGuideText: ; PureRGBnote: ADDED: gym guide gives you apex chips after
 	ld hl, ApexNoRoomText2
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 .donePost
 	ld hl, CeruleanGymGuidePostBattleTextDone
 	call PrintText

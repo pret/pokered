@@ -62,7 +62,7 @@ CeladonCityText5:
 	ld hl, TM41ExplanationText
 	call PrintText
 .Done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 TM41PreText:
 	text_far _TM41PreText
@@ -90,7 +90,7 @@ CeladonCityText7:
 	text_asm
 	ld a, POLIWRATH
 	call PlayCry
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeladonCityText8:
 	text_far _CeladonCityText8

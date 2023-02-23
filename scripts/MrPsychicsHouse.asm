@@ -25,7 +25,7 @@ SaffronHouse2Text1:
 	ld hl, TM29ExplanationText
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 TM29PreReceiveText:
 	text_far _TM29PreReceiveText

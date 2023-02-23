@@ -69,7 +69,7 @@ MagikarpSalesmanText:
 .printText
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .Text1
 	text_far _MagikarpSalesmanText1

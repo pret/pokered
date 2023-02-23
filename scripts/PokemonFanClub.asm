@@ -35,7 +35,7 @@ FanClubText1:
 	call PrintText
 	ResetEvent EVENT_PIKACHU_FAN_BOAST
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .normaltext
 	text_far PikachuFanText
@@ -59,7 +59,7 @@ FanClubText2:
 	call PrintText
 	ResetEvent EVENT_SEEL_FAN_BOAST
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .normaltext
 	text_far SeelFanText
@@ -77,7 +77,7 @@ FanClubText3:
 	ld a, PIKACHU
 	call PlayCry
 	call WaitForSoundToFinish
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .text
 	text_far FanClubPikachuText
@@ -91,7 +91,7 @@ FanClubText4:
 	ld a, SEEL
 	call PlayCry
 	call WaitForSoundToFinish
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .text
 	text_far FanClubSeelText
@@ -132,7 +132,7 @@ FanClubText5:
 	ld hl, .finaltext
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .meetchairtext
 	text_far FanClubMeetChairText

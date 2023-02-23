@@ -156,7 +156,7 @@ ViridianCityText2:
 	ld hl, ViridianCityText_19122
 .done
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ViridianCityText_19122:
 	text_far _ViridianCityText_19122
@@ -181,7 +181,7 @@ ViridianCityText3:
 	ld hl, ViridianCityText_19152
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ViridianCityText_1914d:
 	text_far _ViridianCityText_1914d
@@ -206,7 +206,7 @@ ViridianCityText4:
 	ld hl, ViridianCityText_1917a
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ViridianCityText_19175:
 	text_far _ViridianCityText_19175
@@ -223,7 +223,7 @@ ViridianCityText5:
 	call ViridianCityScript_190cf
 	ld a, $3
 	ld [wViridianCityCurScript], a
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ViridianCityText_19191:
 	text_far _ViridianCityText_19191
@@ -250,7 +250,7 @@ ViridianCityText6:
 	ld hl, TM42Explanation
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ViridianCityText_191ca:
 	text_far _ViridianCityText_191ca
@@ -288,7 +288,7 @@ ViridianCityText7:
 	ld hl, ViridianCityText_19214
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ViridianCityText_1920a:
 	text_far _ViridianCityText_1920a

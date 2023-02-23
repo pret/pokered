@@ -148,7 +148,7 @@ VermilionCityText2:
 	ld hl, VermilionCityTextSSAnneDeparted
 	call PrintText
 .end
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 VermilionCityTextDidYouSee:
 	text_far _VermilionCityTextDidYouSee
@@ -197,7 +197,7 @@ VermilionCityText3:
 	ld hl, SSAnneNotHereText
 	call PrintText
 .end
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .inFrontOfOrBehindGuardCoords
 	dbmapcoord 19, 29 ; in front of guard
@@ -302,7 +302,7 @@ VermilionCityDockBeautyText:
 	ld hl, VermilionCityDockBeautyEndText
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 VermilionCityDockBeautyGreeting:
 	text_far _VermilionCityDockBeautyGreeting

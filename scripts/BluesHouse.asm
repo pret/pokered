@@ -57,7 +57,7 @@ BluesHouseDaisySittingText:
 ;	ld hl, DaisyBagFullText
 ;	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 DaisyInitialText:
 	text_far _DaisyInitialText

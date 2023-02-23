@@ -63,7 +63,7 @@ Lab4Text1:
 	ld hl, Lab4Text_75dcb
 	call PrintText
 .asm_75d93
-	jp TextScriptEnd
+	rst TextScriptEnd
 .asm_75d96
 	CheckEventAfterBranchReuseA EVENT_LAB_STILL_REVIVING_FOSSIL, EVENT_GAVE_FOSSIL_TO_LAB
 	jr z, .asm_75da2
@@ -104,7 +104,7 @@ Lab4Text2:
 	ld a, TRADE_FOR_SAILOR
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 LoadFossilItemAndMonNameBank1D:
 	farjp LoadFossilItemAndMonName
@@ -122,7 +122,7 @@ Lab4Text3:
 	; we don't have alt palettes turned on, so no need to have his whole big script
 	ld hl, LabColorChangerResearchingColors
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 .altPalettesEnabled
 	CheckEvent EVENT_MET_LAB_COLOR_CHANGER
 	jr nz, .skipToColorChangeDialog
@@ -190,7 +190,7 @@ Lab4Text3:
 .done
 	xor a
 	ld [wUnusedC000], a
-	jp TextScriptEnd
+	rst TextScriptEnd
 .noPartySelection
 	callfar InGameTrade_RestoreScreen
 	jr .noColorChange

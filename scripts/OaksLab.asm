@@ -778,7 +778,7 @@ OaksLabText1:
 	ld hl, OaksLabText41
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 OaksLabGaryText1:
 	text_far _OaksLabGaryText1
@@ -832,7 +832,7 @@ OaksLabScript_1d133:
 	jr nz, OaksLabScript_1d157
 	ld hl, OaksLabText39
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 OaksLabText39:
 	text_far _OaksLabText39
@@ -936,7 +936,7 @@ OaksLabMonChoiceMenu:
 	ld a, $8
 	ld [wOaksLabCurScript], a
 OaksLabMonChoiceEnd:
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 OaksLabMonEnergeticText:
 	text_far _OaksLabMonEnergeticText
@@ -956,7 +956,7 @@ OaksLabScript_1d22d:
 	ld [hl], SPRITE_FACING_DOWN
 	ld hl, OaksLabLastMonText
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 OaksLabLastMonText:
 	text_far _OaksLabLastMonText
@@ -1032,7 +1032,7 @@ OaksLabText5:
 	ld hl, OaksLabPleaseVisitText
 	call PrintText
 .asm_1d2ed
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 OaksLabText_1d2f0:
 	text_far _OaksLabText_1d2f0
@@ -1075,7 +1075,7 @@ OaksLabText6:
 	text_asm
 	ld hl, OaksLabText_1d32c
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 OaksLabText_1d32c:
 	text_far _OaksLabText_1d32c
@@ -1089,7 +1089,7 @@ OaksLabText9:
 	text_asm
 	ld hl, OaksLabText_1d340
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 OaksLabText_1d340:
 	text_far _OaksLabText_1d340
@@ -1099,7 +1099,7 @@ OaksLabText17:
 	text_asm
 	ld hl, OaksLabRivalWaitingText
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 OaksLabRivalWaitingText:
 	text_far _OaksLabRivalWaitingText
@@ -1109,7 +1109,7 @@ OaksLabText18:
 	text_asm
 	ld hl, OaksLabChooseMonText
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 OaksLabChooseMonText:
 	text_far _OaksLabChooseMonText
@@ -1119,7 +1119,7 @@ OaksLabText19:
 	text_asm
 	ld hl, OaksLabRivalInterjectionText
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 OaksLabRivalInterjectionText:
 	text_far _OaksLabRivalInterjectionText
@@ -1129,7 +1129,7 @@ OaksLabText20:
 	text_asm
 	ld hl, OaksLabBePatientText
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 OaksLabBePatientText:
 	text_far _OaksLabBePatientText
@@ -1139,7 +1139,7 @@ OaksLabText12:
 	text_asm
 	ld hl, OaksLabLeavingText
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 OaksLabLeavingText:
 	text_far _OaksLabLeavingText
@@ -1149,7 +1149,7 @@ OaksLabText13:
 	text_asm
 	ld hl, OaksLabRivalPickingMonText
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 OaksLabRivalPickingMonText:
 	text_far _OaksLabRivalPickingMonText
@@ -1159,7 +1159,7 @@ OaksLabText14:
 	text_asm
 	ld hl, OaksLabRivalReceivedMonText
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 OaksLabRivalReceivedMonText:
 	text_far _OaksLabRivalReceivedMonText
@@ -1170,7 +1170,7 @@ OaksLabText15:
 	text_asm
 	ld hl, OaksLabRivalChallengeText
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 OaksLabRivalChallengeText:
 	text_far _OaksLabRivalChallengeText
@@ -1188,7 +1188,7 @@ OaksLabText16:
 	text_asm
 	ld hl, OaksLabRivalToughenUpText
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 OaksLabRivalToughenUpText:
 	text_far _OaksLabRivalToughenUpText
@@ -1228,7 +1228,7 @@ OaksLabText10:
 	text_asm
 	ld hl, OaksLabText_1d405
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 OaksLabText_1d405:
 	text_far _OaksLabText_1d405

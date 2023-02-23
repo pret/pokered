@@ -39,7 +39,7 @@ SSAnne7Text1:
 	ld hl, SSAnne7Text_61932
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SSAnne7RubText:
 	text_far _SSAnne7RubText
@@ -65,7 +65,7 @@ SSAnne7RubText:
 	SetEvent EVENT_RUBBED_CAPTAINS_BACK
 	ld hl, wd72d
 	res 5, [hl]
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ReceivingHM01Text:
 	text_far _ReceivingHM01Text

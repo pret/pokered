@@ -118,7 +118,7 @@ Load7FCheckCardKeyText:
 SilphCo7Text16:
 	text_asm
 	callfar PrintCardKeyDoneText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo7Text_51c0c:
 	xor a
@@ -348,7 +348,7 @@ SilphCo7Text1:
 	ld hl, .LaprasGuySavedText
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 .gotLaprasAlready
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .savedsilph
@@ -419,7 +419,7 @@ SilphCo7Text2:
 	ld hl, .savedtext
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .rockettext
 	text_far _SilphCo7Text_51e00
@@ -440,7 +440,7 @@ SilphCo7Text3:
 	ld hl, .savedtext
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .rockettext
 	text_far _SilphCo7Text_51e23
@@ -461,7 +461,7 @@ SilphCo7Text4:
 	ld hl, .savedtext
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .rockettext
 	text_far _SilphCo7Text_51e46
@@ -475,7 +475,7 @@ SilphCo7Text5:
 	text_asm
 	ld hl, SilphCo7TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo7BattleText1:
 	text_far _SilphCo7BattleText1
@@ -493,7 +493,7 @@ SilphCo7Text6:
 	text_asm
 	ld hl, SilphCo7TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo7BattleText2:
 	text_far _SilphCo7BattleText2
@@ -511,7 +511,7 @@ SilphCo7Text7:
 	text_asm
 	ld hl, SilphCo7TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo7BattleText3:
 	text_far _SilphCo7BattleText3
@@ -529,7 +529,7 @@ SilphCo7Text8:
 	text_asm
 	ld hl, SilphCo7TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo7BattleText4:
 	text_far _SilphCo7BattleText4
@@ -547,7 +547,7 @@ SilphCo7Text9:
 	text_asm
 	ld hl, SilphCo7Text_51ebe
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo7Text_51ebe:
 	text_far _SilphCo7Text_51ebe

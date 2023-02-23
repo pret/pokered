@@ -237,7 +237,7 @@ CeladonMartRoofText2:
 	ld hl, CeladonMartRoofText3
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeladonMartRoofText3:
 	text_far _CeladonMartRoofText_48598

@@ -20,7 +20,7 @@ CeruleanHouseTrashedText1:
 	ld hl, CeruleanHouseTrashedText_1d6ab
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeruleanHouseTrashedText_1d6ab:
 	text_far _CeruleanTrashedText_1d6ab

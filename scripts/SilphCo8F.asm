@@ -85,7 +85,7 @@ Load8FCheckCardKeyText:
 SilphCo8Text5:
 	text_asm
 	callfar PrintCardKeyDoneText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo8F_ScriptPointers:
 	dw CheckFightingMapTrainers
@@ -117,7 +117,7 @@ SilphCo8Text1:
 	ld hl, SilphCo8Text_565be
 .asm_565b8
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo8Text_565be:
 	text_far _SilphCo8Text_565be
@@ -131,19 +131,19 @@ SilphCo8Text2:
 	text_asm
 	ld hl, SilphCo8TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo8Text3:
 	text_asm
 	ld hl, SilphCo8TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo8Text4:
 	text_asm
 	ld hl, SilphCo8TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo8BattleText1:
 	text_far _SilphCo8BattleText1

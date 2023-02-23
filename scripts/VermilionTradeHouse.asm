@@ -9,4 +9,4 @@ VermilionHouse3Text1:
 	ld a, TRADE_FOR_DUX
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue
-	jp TextScriptEnd
+	rst TextScriptEnd

@@ -133,7 +133,7 @@ SabrinaText:
 	ld a, $3
 	ld [wSaffronGymCurScript], a
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SabrinaPreBattleText:
 	text_far _SabrinaPreBattleText
@@ -167,43 +167,43 @@ SaffronGymTrainerText1:
 	text_asm
 	ld hl, SaffronGymTrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SaffronGymTrainerText2:
 	text_asm
 	ld hl, SaffronGymTrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SaffronGymTrainerText3:
 	text_asm
 	ld hl, SaffronGymTrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SaffronGymTrainerText4:
 	text_asm
 	ld hl, SaffronGymTrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SaffronGymTrainerText5:
 	text_asm
 	ld hl, SaffronGymTrainerHeader4
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SaffronGymTrainerText6:
 	text_asm
 	ld hl, SaffronGymTrainerHeader5
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SaffronGymTrainerText7:
 	text_asm
 	ld hl, SaffronGymTrainerHeader6
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SaffronGymGuideText: ; PureRGBnote: ADDED: gym guide gives you apex chips after beating the leader
 	text_asm
@@ -238,7 +238,7 @@ SaffronGymGuideText: ; PureRGBnote: ADDED: gym guide gives you apex chips after 
 	ld hl, ApexNoRoomText6
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 .donePrompt
 	ld hl, SaffronGymGuidePostBattleText
 	call PrintText

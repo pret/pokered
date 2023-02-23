@@ -170,7 +170,7 @@ PalletTownText1:
 	ld hl, OakWalksUpText
 .done
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 OakAppearsText:
 	text_far _OakAppearsText
@@ -183,7 +183,7 @@ OakAppearsText:
 	predef EmotionBubble
 	ld a, PLAYER_DIR_DOWN
 	ld [wPlayerMovingDirection], a
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 OakWalksUpText:
 	text_far _OakWalksUpText

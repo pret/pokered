@@ -42,7 +42,7 @@ CeruleanRocketHouseB1FText1:
 	ld hl, CeruleanRocketHouseB1FAfterTradeText
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeruleanRocketHouseMissingnoScript:
 	ld a, $FF
@@ -126,7 +126,7 @@ CeruleanRocketHouseB1FText6:
 .codeBroken
 	farcall VendingMachineMenu
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeruleanRocketHouseCodeText:
 	text_far _CeruleanRocketHouseB1FCodeText

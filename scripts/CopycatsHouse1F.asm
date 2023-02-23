@@ -19,4 +19,4 @@ CopycatsHouse1FText3:
 	text_asm
 	ld a, CHANSEY
 	call PlayCry
-	jp TextScriptEnd
+	rst TextScriptEnd

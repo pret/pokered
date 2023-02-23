@@ -164,7 +164,7 @@ FossilGuysHouseText1:
 	ld hl, FossilGuyNeverMet
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ; Conversation text
 
@@ -243,7 +243,7 @@ FossilGuysHouseText2:
 	ld hl, FossilGuysHouseCatText4
 .done
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ; makes fossil guy face the player
 FossilGuyFacesPlayerDirection:
@@ -303,7 +303,7 @@ FossilGuysHouseText3:
 .print
 	call PrintText	
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FossilGuysPaperText:
 	text_far _FossilGuysPaperText

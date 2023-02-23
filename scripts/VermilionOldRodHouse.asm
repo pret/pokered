@@ -34,7 +34,7 @@ VermilionGuruHouseText1:
 	ld hl, VermilionHouse3Text_56217
 .done
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 VermilionHouse3Text_561bd:
 	text_far _VermilionHouse3Text_561bd

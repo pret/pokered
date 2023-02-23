@@ -40,7 +40,7 @@ CeladonMart3Text1:
 	ld hl, TM18ExplanationText
 .done
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 TM18PreReceiveText:
 	text_far _TM18PreReceiveText
@@ -114,7 +114,7 @@ CeladonMartTMKid:
 	call PrintText
 	ld hl, CeladonMartTMKidFlavor
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 	
 TMKidGreet4::
 	text_far _TMKidGreet

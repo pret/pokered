@@ -70,7 +70,7 @@ PewterJigglypuffText:
 	ld c, 48
 	call DelayFrames
 	call PlayDefaultMusic
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .JigglypuffText:
 	text_far _PewterJigglypuffText

@@ -127,7 +127,7 @@ BrockText:
 	ld [wPewterGymCurScript], a
 	ld [wCurMapScript], a
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 BrockPreBattleText:
 	text_far _BrockPreBattleText
@@ -161,7 +161,7 @@ PewterGymTrainerText1:
 	text_asm
 	ld hl, PewterGymTrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PewterGymBattleText1:
 	text_far _PewterGymBattleText1
@@ -218,7 +218,7 @@ PewterGymGuideText: ; PureRGBnote: ADDED: gym guide gives you apex chips after b
 	ld hl, TM34NoRoomText
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PewterGymGuidePreAdviceText:
 	text_far _PewterGymGuidePreAdviceText

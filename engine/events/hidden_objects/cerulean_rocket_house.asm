@@ -73,7 +73,7 @@ CeruleanRocketHouseHiddenTexts::
 .done
 	xor a
 	ld [wUnusedC000], a
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RocketSNESTextConst::
 	text_far _RocketSNESText
@@ -110,7 +110,7 @@ CeruleanRocketHouseB1FLeftComputerText::
 	ld hl, LeftComputerText2
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 LeftComputerText1::
 	text_far _CeruleanRocketHouseB1FLeftComputerText
@@ -129,7 +129,7 @@ CeruleanRocketHouseB1FCenterComputerText::
 	ld hl, CenterComputerText2
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CenterComputerText1::
 	text_far _CeruleanRocketHouseB1FCenterComputerText
@@ -148,7 +148,7 @@ CeruleanRocketHouseB1FRightComputerText::
 	ld hl, RightComputerText2
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RightComputerText1:
 	text_far _CeruleanRocketHouseB1FRightComputerText
@@ -164,7 +164,7 @@ CeruleanRocketHouseB1FMachineText:
 	call PrintText
 	ld a, 1
 	ld [wCeruleanRocketHouseCurScript], a
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 MachineText:
 	text_far _CeruleanRocketHouseB1FMachineText

@@ -76,7 +76,7 @@ RockTunnel1Text7:
 	ld hl, RockTunnel1TrainerHeader6
 RockTunnel1TalkToTrainer:
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RockTunnel1BattleText1:
 	text_far _RockTunnel1BattleText1

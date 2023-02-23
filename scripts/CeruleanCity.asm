@@ -290,7 +290,7 @@ CeruleanCityText1:
 	ld hl, CeruleanCityText_19668
 	call PrintText
 .end
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeruleanCityText_19668:
 	text_far _CeruleanCityText_19668
@@ -326,7 +326,7 @@ CeruleanCityText2:
 	call InitBattleEnemyParameters
 	ld a, $4
 	ld [wCeruleanCityCurScript], a
-	jp TextScriptEnd
+	rst TextScriptEnd
 .beatRocketThief
 	ld hl, CeruleanCityText_196f3
 	call PrintText
@@ -343,7 +343,7 @@ CeruleanCityText2:
 	call PrintText
 	farcall CeruleanHideRocket
 .Done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeruleanCityText_196d9:
 	text_far _CeruleanCityText_196d9
@@ -382,7 +382,7 @@ CeruleanCityText4:
 	ld hl, CeruleanCityText4_AfterTreeDelete ; instead he'll comment on how it was removed
 .done
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeruleanCityText4_BeforeTreeDelete:
 	text_far _CeruleanCityText4
@@ -420,7 +420,7 @@ CeruleanCityText7:
 	ld hl, CeruleanCityText_1973a
 	call PrintText
 .end
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeruleanCityText_19730:
 	text_far _CeruleanCityText_19730
@@ -459,7 +459,7 @@ CeruleanCityText8:
 	ld hl, CeruleanCityText_1977e
 	call PrintText
 .end
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeruleanCityText_1976f:
 	text_far _CeruleanCityText_1976f

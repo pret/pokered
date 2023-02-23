@@ -53,61 +53,61 @@ Route19Text1:
 	text_asm
 	ld hl, Route19TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route19Text2:
 	text_asm
 	ld hl, Route19TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route19Text3:
 	text_asm
 	ld hl, Route19TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route19Text4:
 	text_asm
 	ld hl, Route19TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route19Text5:
 	text_asm
 	ld hl, Route19TrainerHeader4
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route19Text6:
 	text_asm
 	ld hl, Route19TrainerHeader5
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route19Text7:
 	text_asm
 	ld hl, Route19TrainerHeader6
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route19Text8:
 	text_asm
 	ld hl, Route19TrainerHeader7
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route19Text9:
 	text_asm
 	ld hl, Route19TrainerHeader8
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route19Text10:
 	text_asm
 	ld hl, Route19TrainerHeader9
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route19BattleText1:
 	text_far _Route19BattleText1

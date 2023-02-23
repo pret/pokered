@@ -105,7 +105,7 @@ SafariGameOverText:
 .noMoreSafariBalls
 	ld hl, GameOverText
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SafariRangerHuntSuccessText::
 	text_far _RangerHuntSuccessText

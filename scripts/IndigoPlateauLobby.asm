@@ -57,7 +57,7 @@ IndigoPlateauGymGuideText: ; PureRGBnote: ADDED: gym guide sells you apex chips 
 	ld hl, IndigoGymGuideShop
 	call DisplayPokemartNoGreeting
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 .donePrompt
 	ld hl, IndigoPlateauLobbyText2get
 	call PrintText
@@ -117,7 +117,7 @@ IndigoGymGuideSonText:  ; PureRGBnote: ADDED: new NPC who will sell TMs - sells 
 .done
 	call DisplayPokemartNoGreeting
 	SetEvent EVENT_MET_GYM_GUIDE_SON
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 IndigoPlateauLobbyText2get:
 	text_far _IndigoPlateauLobbyText2
@@ -161,7 +161,7 @@ IndigoPlateauGymGuideChampAfterGreetPrompt:
 IndigoTradeNurseText:
 	;text_asm ;DEBUGMODE
 	;SetEvent EVENT_BECAME_CHAMP
-	;jp TextScriptEnd
+	;rst TextScriptEnd
 	script_cable_club_receptionist
 
 IndigoPlateauGymGuideSonText:

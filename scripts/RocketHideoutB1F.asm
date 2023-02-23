@@ -62,31 +62,31 @@ RocketHideout1Text1:
 	text_asm
 	ld hl, RocketHideout1TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RocketHideout1Text2:
 	text_asm
 	ld hl, RocketHideout1TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RocketHideout1Text3:
 	text_asm
 	ld hl, RocketHideout1TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RocketHideout1Text4:
 	text_asm
 	ld hl, RocketHideout1TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RocketHideout1Text5:
 	text_asm
 	ld hl, RocketHideout1TrainerHeader4
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RocketHideout1EndBattleText6:
 	text_far _RocketHideout1EndBattleText6

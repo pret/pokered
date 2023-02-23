@@ -89,7 +89,7 @@ Museum2FWalletKid1:
 	ld hl, Museum2FWalletKid1Intro
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ResetScripts:
 	xor a

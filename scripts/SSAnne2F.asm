@@ -195,7 +195,7 @@ SSAnne2Text2:
 	ld hl, SSAnneRivalDefeatedText
 	ld de, SSAnneRivalWonText
 	call SaveEndBattleTextPointers
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SSAnneRivalBeforeBattleText:
 	text_far _SSAnneRivalBeforeBattleText

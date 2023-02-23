@@ -103,7 +103,7 @@ Load4FCheckCardKeyText:
 SilphCo4Text8:
 	text_asm
 	callfar PrintCardKeyDoneText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 
 SilphCo4F_ScriptPointers:
@@ -136,7 +136,7 @@ SilphCo4Text1:
 	ld hl, SilphCo4Text_19de0
 	ld de, SilphCo4Text_19de5
 	call SilphCo6Script_1a22f
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo4Text_19de0:
 	text_far _SilphCo4Text_19de0
@@ -150,7 +150,7 @@ SilphCo4Text2:
 	text_asm
 	ld hl, SilphCo4TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo4BattleText2:
 	text_far _SilphCo4BattleText2
@@ -168,7 +168,7 @@ SilphCo4Text3:
 	text_asm
 	ld hl, SilphCo4TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo4BattleText3:
 	text_far _SilphCo4BattleText3
@@ -186,7 +186,7 @@ SilphCo4Text4:
 	text_asm
 	ld hl, SilphCo4TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo4BattleText4:
 	text_far _SilphCo4BattleText4

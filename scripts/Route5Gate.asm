@@ -82,17 +82,17 @@ Route5GateText1:
 	call Route5GateScript_1df43
 	ld a, $1
 	ld [wRoute5GateCurScript], a
-	jp TextScriptEnd
+	rst TextScriptEnd
 .asm_768a2
 	ld hl, Route5GateText3
 	call PrintText
 	ld hl, wd728
 	set 6, [hl]
-	jp TextScriptEnd
+	rst TextScriptEnd
 .asm_88856
 	ld hl, SaffronGateText_1dff6
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route8GateText2:
 Route7GateText2:

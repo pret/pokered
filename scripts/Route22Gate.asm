@@ -72,7 +72,7 @@ Route22GateText1:
 	ld a, $2
 .asm_1e6fe
 	ld [wRoute22GateCurScript], a
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route22GateText_1e704:
 	text_far _Route22GateText_1e704

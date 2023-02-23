@@ -143,7 +143,7 @@ BillsHouseText1:
 	call PrintText
 	jr .asm_1e84d
 .asm_1e862
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 BillsHouseText_1e865:
 	text_far _BillsHouseText_1e865
@@ -183,7 +183,7 @@ BillsHouseText2:
 	ld hl, SSTicketNoRoomText
 	call PrintText
 .asm_1e8b7
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 BillThankYouText:
 	text_far _BillThankYouText
@@ -207,7 +207,7 @@ BillsHouseText3:
 	text_asm
 	ld hl, BillsHouseText_1e8da
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 BillsHouseText_1e8da:
 	text_far _BillsHouseText_1e8da

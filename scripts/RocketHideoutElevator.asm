@@ -95,7 +95,7 @@ RocketHideoutElevatorText1:
 	ld hl, RocketHideoutElevatorText_4578b
 	call PrintText
 .asm_45788
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 UnlockedElevatorText:
 	text_far _UnlockedElevatorText

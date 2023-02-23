@@ -86,7 +86,7 @@ FoundHiddenItemText::
 	call WaitForSoundToFinish
 	xor a
 	ld [wTempStore1], a
-	jp TextScriptEnd
+	rst TextScriptEnd
 .bagFull
 	call WaitForTextScrollButtonPress ; wait for button press
 	xor a
@@ -95,7 +95,7 @@ FoundHiddenItemText::
 	call PrintText
 	xor a
 	ld [wTempStore1], a
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FoundHiddenItemSingleText::
 	text_far _FoundHiddenItemText

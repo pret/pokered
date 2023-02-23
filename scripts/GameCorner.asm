@@ -202,7 +202,7 @@ CeladonGameCornerText2:
 .asm_48d1c
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeladonGameCornerThanks:
 	text_far _Thanks2Text
@@ -278,7 +278,7 @@ CeladonGameCornerText5:
 	ld hl, CeladonGameCornerText_48f19
 .asm_48d96
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeladonGameCornerText_48d9c:
 	text_far _CeladonGameCornerText_48d9c
@@ -334,7 +334,7 @@ CeladonGameCornerText7: ; PureRGBnote: ADDED: gym guide gives you apex chips aft
 	ld hl, ApexNoRoomText4
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ReceivedApexChipsText4:
 	text_far _ReceivedApexChipsText
@@ -401,7 +401,7 @@ CeladonGameCornerText9:
 	ld hl, CeladonGameCornerText_48f19
 .asm_48e20
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeladonGameCornerText_48e26:
 	text_far _CeladonGameCornerText_48e26
@@ -452,7 +452,7 @@ CeladonGameCornerText10:
 	ld hl, CeladonGameCornerText_48f19
 .asm_48e82
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeladonGameCornerText_48e88:
 	text_far _CeladonGameCornerText_48e88
@@ -491,7 +491,7 @@ CeladonGameCornerText11:
 	ldh [hJoyReleased], a
 	ld a, $1
 	ld [wGameCornerCurScript], a
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeladonGameCornerText_48ece:
 	text_far _CeladonGameCornerText_48ece
@@ -520,7 +520,7 @@ CeladonGameCornerText12:
 	ld [wNewTileBlockID], a
 	lb bc, 2, 8
 	predef ReplaceTileBlock
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeladonGameCornerText_48f09:
 	text_far _CeladonGameCornerText_48f09
@@ -528,7 +528,7 @@ CeladonGameCornerText_48f09:
 	ld a, SFX_SWITCH
 	call PlaySound
 	call WaitForSoundToFinish
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeladonGameCornerText_48f19:
 	text_far _CeladonGameCornerText_48f19

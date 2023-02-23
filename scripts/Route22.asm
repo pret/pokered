@@ -395,7 +395,7 @@ Route22Text1:
 	ld hl, Route22RivalBeforeBattleText1
 	call PrintText
 .asm_51191
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route22Text2:
 	text_asm
@@ -408,7 +408,7 @@ Route22Text2:
 	ld hl, Route22RivalBeforeBattleText2
 	call PrintText
 .asm_511aa
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route22RivalBeforeBattleText1:
 	text_far _Route22RivalBeforeBattleText1

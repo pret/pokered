@@ -45,44 +45,44 @@ SSAnne10Text1:
 	text_asm
 	ld hl, SSAnne10TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SSAnne10Text2:
 	text_asm
 	ld hl, SSAnne10TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SSAnne10Text3:
 	text_asm
 	ld hl, SSAnne10TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SSAnne10Text4:
 	text_asm
 	ld hl, SSAnne10TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SSAnne10Text5:
 	text_asm
 	ld hl, SSAnne10TrainerHeader4
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SSAnne10Text6:
 	text_asm
 	ld hl, SSAnne10TrainerHeader5
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SSAnne10Text8:
 	text_far _SSAnne10Text8
 	text_asm
 	ld a, MACHOKE
 	call PlayCry
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SSAnne10BattleText1:
 	text_far _SSAnne10BattleText1

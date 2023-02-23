@@ -123,7 +123,7 @@ ViridianMartTMKid: ; PureRGBnote: ADDED: new NPC who will talk about TMs
 	ld hl, TMKidBigStockIndigo
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 TMKidGreet8:
 	text_far _TMKidGreet

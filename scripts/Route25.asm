@@ -80,55 +80,55 @@ Route25Text1:
 	text_asm
 	ld hl, Route25TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route25Text2:
 	text_asm
 	ld hl, Route25TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route25Text3:
 	text_asm
 	ld hl, Route25TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route25Text4:
 	text_asm
 	ld hl, Route25TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route25Text5:
 	text_asm
 	ld hl, Route25TrainerHeader4
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route25Text6:
 	text_asm
 	ld hl, Route25TrainerHeader5
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route25Text7:
 	text_asm
 	ld hl, Route25TrainerHeader6
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route25Text8:
 	text_asm
 	ld hl, Route25TrainerHeader7
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route25Text9:
 	text_asm
 	ld hl, Route25TrainerHeader8
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route25BattleText1:
 	text_far _Route25BattleText1

@@ -142,7 +142,7 @@ RocketHideout3Text1:
 	text_asm
 	ld hl, RocketHideout3TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RocketHideout3BattleText2:
 	text_far _RocketHideout3BattleText2
@@ -160,7 +160,7 @@ RocketHideout3Text2:
 	text_asm
 	ld hl, RocketHideout3TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RocketHideout3BattleTxt:
 	text_far _RocketHideout3BattleTxt

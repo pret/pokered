@@ -236,31 +236,31 @@ MtMoon3Text1:
 .asm_49eb8
 	call MtMoonSuperNerdTakeFossilQuestion
 .asm_49ebe
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 MtMoon3Text2:
 	text_asm
 	ld hl, MtMoon3TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 MtMoon3Text3:
 	text_asm
 	ld hl, MtMoon3TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 MtMoon3Text4:
 	text_asm
 	ld hl, MtMoon3TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 MtMoon3Text5:
 	text_asm
 	ld hl, MtMoon3TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 MtMoon3Text6:
 	text_asm
@@ -284,7 +284,7 @@ MtMoon3Text6:
 	ld [wMtMoonB2FCurScript], a
 	ld [wCurMapScript], a
 .asm_49f21
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 MtMoon3Text_49f24:
 	text_far _MtMoon3Text_49f24
@@ -312,7 +312,7 @@ MtMoon3Text7:
 	ld [wMtMoonB2FCurScript], a
 	ld [wCurMapScript], a
 .asm_49f61
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 MtMoon3Text_49f64:
 	text_far _MtMoon3Text_49f64
@@ -331,7 +331,7 @@ MtMoon3Text_49f6f:
 MtMoon3Script_49f76:
 	ld hl, MtMoon3Text_49f7f
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 MtMoon3Text_49f7f:
 	text_far _MtMoon3Text_49f7f
@@ -362,7 +362,7 @@ MtMoon3Text_49f99:
 MtMoonSuperNerdTakeFossilQuestionText:
 	text_asm
 	call MtMoonSuperNerdTakeFossilQuestion
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 MtMoonSuperNerdTakeFossilQuestion:
 	CheckEvent EVENT_RECEIVED_FOSSIL_PKMN_FROM_SUPER_NERD

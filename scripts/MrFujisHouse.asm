@@ -21,7 +21,7 @@ LavenderHouse1Text1:
 	ld hl, LavenderHouse1Text_1d8d6
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 LavenderHouse1Text_1d8d1:
 	text_far _LavenderHouse1Text_1d8d1
@@ -42,7 +42,7 @@ LavenderHouse1Text2:
 	ld hl, LavenderHouse1Text_1d8f9
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 LavenderHouse1Text_1d8f4:
 	text_far _LavenderHouse1Text_1d8f4
@@ -57,14 +57,14 @@ LavenderHouse1Text3:
 	text_asm
 	ld a, PSYDUCK
 	call PlayCry
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 LavenderHouse1Text4:
 	text_far _LavenderHouse1Text4
 	text_asm
 	ld a, NIDORINO
 	call PlayCry
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 LavenderHouse1Text5:
 	text_asm
@@ -87,7 +87,7 @@ LavenderHouse1Text5:
 	ld hl, MrFujiAfterFluteText
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 LavenderHouse1Text_1d94c:
 	text_far _LavenderHouse1Text_1d94c

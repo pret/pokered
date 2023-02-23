@@ -23,7 +23,7 @@ VermilionMartTMKid: ; PureRGBnote: ADDED: new NPC who will sell TMs
 .shop
 	ld hl, VermilionTMKidShop
 	call DisplayPokemartNoGreeting
-	jp TextScriptEnd
+	rst TextScriptEnd
 	
 TMKidGreet2::
 	text_far _TMKidGreet

@@ -23,7 +23,7 @@ SaffronMartTMKid: ; PureRGBnote: ADDED: new NPC who will sell TMs
 .shop
 	ld hl, SaffronTMKidShop
 	call DisplayPokemartNoGreeting
-	jp TextScriptEnd
+	rst TextScriptEnd
 	
 TMKidGreet6::
 	text_far _TMKidGreet

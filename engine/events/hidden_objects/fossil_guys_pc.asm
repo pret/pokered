@@ -18,7 +18,7 @@ FossilGuysComputer::
   	call SetSpriteFacingDirection
 	ld hl, FossilGuysComputer2
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FossilGuysComputer1:
 	text_far _FossilGuysComputer1

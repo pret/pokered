@@ -97,7 +97,7 @@ SchoolB1FNerd:
   	call SetSpriteFacingDirection
   	ld hl, SchoolB1FNerdAck
   	call PrintText
-  	jp TextScriptEnd
+  	rst TextScriptEnd
 
 SchoolB1FNerdText:
 	text_far _SchoolB1FNerd
@@ -210,7 +210,7 @@ SchoolB1FLeftTeacher:
 .doneResetMusic
 	call PlayDefaultMusic
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 
 SchoolB1FLeftTeacherInit:
@@ -343,7 +343,7 @@ SchoolB1FRocker:
 
 	call PlayDefaultMusic
 
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SchoolB1FRockerText:
 	text_far _SchoolB1FRocker
@@ -438,7 +438,7 @@ SchoolB1FBrunetteGirl:
 	call UpdateSprites
 	call GBFadeInFromWhite
 
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SchoolB1FBrunetteGirlText:
 	text_far _SchoolB1FBrunetteGirl
@@ -512,7 +512,7 @@ SchoolB1FNerdNotebook:
 .done
 	ld hl, SchoolB1FDone
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SchoolB1FNerdNotebookInit:
 	text_far _SchoolB1FNerdTextbook

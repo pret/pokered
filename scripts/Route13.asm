@@ -55,7 +55,7 @@ Route13Text1:
 	text_asm
 	ld hl, Route13TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route13BattleText2:
 	text_far _Route13BattleText2
@@ -73,7 +73,7 @@ Route13Text2:
 	text_asm
 	ld hl, Route13TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route13BattleText3:
 	text_far _Route13BattleText3
@@ -91,7 +91,7 @@ Route13Text3:
 	text_asm
 	ld hl, Route13TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route13BattleText4:
 	text_far _Route13BattleText4
@@ -109,7 +109,7 @@ Route13Text4:
 	text_asm
 	ld hl, Route13TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route13BattleText5:
 	text_far _Route13BattleText5
@@ -127,7 +127,7 @@ Route13Text5:
 	text_asm
 	ld hl, Route13TrainerHeader4
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route13BattleText6:
 	text_far _Route13BattleText6
@@ -145,7 +145,7 @@ Route13Text6:
 	text_asm
 	ld hl, Route13TrainerHeader5
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route13BattleText7:
 	text_far _Route13BattleText7
@@ -163,7 +163,7 @@ Route13Text7:
 	text_asm
 	ld hl, Route13TrainerHeader6
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route13BattleText8:
 	text_far _Route13BattleText8
@@ -181,7 +181,7 @@ Route13Text8:
 	text_asm
 	ld hl, Route13TrainerHeader7
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route13BattleText9:
 	text_far _Route13BattleText9
@@ -199,7 +199,7 @@ Route13Text9:
 	text_asm
 	ld hl, Route13TrainerHeader8
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route13BattleText10:
 	text_far _Route13BattleText10
@@ -217,7 +217,7 @@ Route13Text10:
 	text_asm
 	ld hl, Route13TrainerHeader9
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route13BattleText11:
 	text_far _Route13BattleText11

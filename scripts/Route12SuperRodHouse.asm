@@ -28,7 +28,7 @@ Route12HouseText1:
 	ld hl, Route12GuruEnd
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route12GuruIntro:
 	text_far _Route12GuruIntro
@@ -50,4 +50,4 @@ Route12GuruColorInfo:
 Route12FishingGuide:
 	text_asm
 	callfar LastTwoGurusFishingGuideBookText
-	jp TextScriptEnd
+	rst TextScriptEnd

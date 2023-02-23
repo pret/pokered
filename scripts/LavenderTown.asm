@@ -24,7 +24,7 @@ LavenderTownText1:
 	ld hl, LavenderTownText_44141
 .got_text
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 LavenderTownText_4413c:
 	text_far _LavenderTownText_4413c

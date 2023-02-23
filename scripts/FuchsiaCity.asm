@@ -126,7 +126,7 @@ FuchsiaCityText1:
 	ld hl, FuchsiaCityText1Color
 .done
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 
 FuchsiaCityText1Start:
@@ -169,7 +169,7 @@ FuchsiaCityText4:
 	call CopyVideoData
 .done
 ;;;;;;;;;;
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FuchsiaCityText4raw:
 	text_far _FuchsiaCityText4
@@ -211,7 +211,7 @@ FuchsiaCityText19:
 	call PrintText
 	ld a, CHANSEY
 	call DisplayPokedex
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FuchsiaCityChanseyText:
 	text_far _FuchsiaCityChanseyText
@@ -223,7 +223,7 @@ FuchsiaCityText20:
 	call PrintText
 	ld a, VOLTORB
 	call DisplayPokedex
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FuchsiaCityVoltorbText:
 	text_far _FuchsiaCityVoltorbText
@@ -235,7 +235,7 @@ FuchsiaCityText21:
 	call PrintText
 	ld a, KANGASKHAN
 	call DisplayPokedex
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FuchsiaCityKangaskhanText:
 	text_far _FuchsiaCityKangaskhanText
@@ -247,7 +247,7 @@ FuchsiaCityText22:
 	call PrintText
 	ld a, SLOWPOKE
 	call DisplayPokedex
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FuchsiaCitySlowpokeText:
 	text_far _FuchsiaCitySlowpokeText
@@ -259,7 +259,7 @@ FuchsiaCityText23:
 	call PrintText
 	ld a, LAPRAS
 	call DisplayPokedex
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FuchsiaCityLaprasText:
 	text_far _FuchsiaCityLaprasText
@@ -286,7 +286,7 @@ FuchsiaCityText24:
 .asm_81556
 	call DisplayPokedex
 .asm_4343f
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FuchsiaCityOmanyteText:
 	text_far _FuchsiaCityOmanyteText
@@ -339,7 +339,7 @@ FuchsiaCityFossilFanText:
 	ld hl, FuchsiaCityFossilFanText1
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FuchsiaCityFossilFanText1:
 	text_far _FuchsiaCityFossilFanText

@@ -93,7 +93,7 @@ _ApexChipPutOnPokeballText::
 	call WaitForSoundToFinish
 	ld c, 50
 	call DelayFrames
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 _ApexChipDVsMaxedText::
 	text_ram wcd6d

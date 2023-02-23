@@ -28,7 +28,7 @@ Route2GateText1:
 	ld hl, Route2GateText_5d616
 	call PrintText
 .no_item
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route2GateText_5d616:
 	text_far _Route2GateText_5d616

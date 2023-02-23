@@ -17,7 +17,7 @@ RedsHouse1FMomText:
 .heal
 	call MomHealPokemon
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 MomWakeUpText:
 	text_far _MomWakeUpText
@@ -59,7 +59,7 @@ RedsHouse1FTVText:
 	ld hl, StandByMeText
 .got_text
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 StandByMeText:
 	text_far _StandByMeText

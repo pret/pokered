@@ -86,7 +86,7 @@ Route2BugCatcherText:
 	text_asm
 	ld hl, Route2TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route2BattleText1:
 	text_far _Route2BattleText1
@@ -104,7 +104,7 @@ Route2JrTrainerMText:
 	text_asm
 	ld hl, Route2TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route2BattleText2:
 	text_far _Route2BattleText2
@@ -122,7 +122,7 @@ Route2JrTrainerFText:
 	text_asm
 	ld hl, Route2TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route2BattleText3:
 	text_far _Route2BattleText3

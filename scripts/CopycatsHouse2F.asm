@@ -41,7 +41,7 @@ CopycatsHouse2FText1:
 	ld hl, TM31ExplanationText2
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CopycatsHouse2FText_5ccd4:
 	text_far _CopycatsHouse2FText_5ccd4
@@ -91,7 +91,7 @@ CopycatsHouse2FText7:
 	ld hl, CopycatsHouse2FText_5cd17
 .notUp
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CopycatsHouse2FText_5cd17:
 	text_far _CopycatsHouse2FText_5cd17

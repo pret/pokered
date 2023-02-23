@@ -143,7 +143,7 @@ LTSurgeText:
 	ld [wVermilionGymCurScript], a
 	ld [wCurMapScript], a
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 LTSurgePreBattleText:
 	text_far _LTSurgePreBattleText
@@ -175,7 +175,7 @@ VermilionGymTrainerText1:
 	text_asm
 	ld hl, VermilionGymTrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 VermilionGymBattleText1:
 	text_far _VermilionGymBattleText1
@@ -193,7 +193,7 @@ VermilionGymTrainerText2:
 	text_asm
 	ld hl, VermilionGymTrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 VermilionGymBattleText2:
 	text_far _VermilionGymBattleText2
@@ -211,7 +211,7 @@ VermilionGymTrainerText3:
 	text_asm
 	ld hl, VermilionGymTrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 VermilionGymBattleText3:
 	text_far _VermilionGymBattleText3
@@ -259,7 +259,7 @@ VermilionGymGuideText: ; PureRGBnote: ADDED: gym guide gives you apex chips afte
 	ld hl, ApexNoRoomText3
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 .postNoPrompt
 	ld hl, VermilionGymGuidePostBattleText
 	call PrintText

@@ -23,7 +23,7 @@ FuchsiaMartTMKid: ; PureRGBnote: ADDED: new NPC who will sell TMs
 .shop
 	ld hl, FuchsiaTMKidShop
 	call DisplayPokemartNoGreeting
-	jp TextScriptEnd
+	rst TextScriptEnd
 	
 TMKidGreet5::
 	text_far _TMKidGreet

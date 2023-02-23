@@ -169,7 +169,7 @@ PokemonTower2Text1:
 	ld [wPokemonTower2FCurScript], a
 	ld [wCurMapScript], a
 .asm_41852
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PokemonTower2Text_6062d:
 	text_far _PokemonTower2Text_6062d

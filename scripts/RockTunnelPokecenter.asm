@@ -69,7 +69,7 @@ RockTunnelCharityNurseText:
 	ld hl, RockTunnelCharityNurseFarewellText
 	call PrintText
 .done		
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RockTunnelCharityNurseText1:
 	text_far _RockTunnelCharityNurseText1

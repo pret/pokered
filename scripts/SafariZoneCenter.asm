@@ -49,7 +49,7 @@ SafariZoneCenterText3:
 	ld hl, SafariZoneCenterText3FreeRoam
 .done
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SafariZoneCenterText3Default:
 	text_far _SafariZoneCenterText3
@@ -83,7 +83,7 @@ SafariZoneCenterRangerText0:
 	call TalkToTrainer
 	ld a, 3
 	ld [wCurMapScript], a 
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SafariZoneCenterRangerBattleText0:
 	text_far _SafariZoneCenterRangerText
@@ -101,7 +101,7 @@ SafariZoneCenterTrainerText0:
 	text_asm
 	ld hl, SafariZoneCenterTrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SafariZoneCenterTrainerBattleText0:
 	text_far _SafariZoneCenterRockerText
@@ -119,7 +119,7 @@ SafariZoneCenterTrainerText1:
 	text_asm
 	ld hl, SafariZoneCenterTrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SafariZoneCenterTrainerBattleText1:
 	text_far _SafariZoneCenterEngineerText
@@ -137,7 +137,7 @@ SafariZoneCenterTrainerText2:
 	text_asm
 	ld hl, SafariZoneCenterTrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SafariZoneCenterTrainerBattleText2:
 	text_far _SafariZoneCenterJugglerText
@@ -155,7 +155,7 @@ SafariZoneCenterTrainerText3:
 	text_asm
 	ld hl, SafariZoneCenterTrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SafariZoneCenterTrainerBattleText3:
 	text_far _SafariZoneCenterManiacText

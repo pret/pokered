@@ -237,7 +237,7 @@ VermilionDockText2:
 	text_asm
 	ld hl, MewTrainerHeader
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 MewBattleText:
 	text_far _MewtwoBattleText ; Mew!
@@ -245,7 +245,7 @@ MewBattleText:
 	ld a, MEW
 	call PlayCry
 	call WaitForSoundToFinish
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 TruckOAMTable:
 	db $50, $28, $C0, $10

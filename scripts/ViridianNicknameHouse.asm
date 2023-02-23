@@ -22,7 +22,7 @@ ViridianHouseText3:
 	ld a, SPEAROW
 	call PlayCry
 	call WaitForSoundToFinish
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ViridianHouseText_1d5b1:
 	text_far _ViridianHouseText_1d5b1

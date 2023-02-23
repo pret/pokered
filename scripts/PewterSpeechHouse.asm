@@ -55,7 +55,7 @@ PewterHouse2Text3:
 		ld hl, PewterHouse2Text3HowsAbra
 		call PrintText
 	.done
-		jp TextScriptEnd
+		rst TextScriptEnd
 
 PewterHouse2Text3Intro:
 	text_far _PewterHouse2Text3Intro

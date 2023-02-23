@@ -35,7 +35,7 @@ ViridianSchoolB1FBookcasesTexts::
 	ld h, [hl]
 	ld l, a
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SchoolHouseB1FBookcaseTextPointers:
 	dw SchoolB1FLeftBookcaseAText

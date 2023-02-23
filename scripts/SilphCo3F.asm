@@ -65,7 +65,7 @@ Load3FCheckCardKeyText:
 SilphCo3Text5:
 	text_asm
 	callfar PrintCardKeyDoneText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo3F_ScriptPointers:
 	dw CheckFightingMapTrainers
@@ -95,7 +95,7 @@ SilphCo3Text1:
 	ld hl, SilphCo3Text_59ff9
 .asm_59fee
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo3Text_59ff9:
 	text_far _SilphCo3Text_59ff9
@@ -109,7 +109,7 @@ SilphCo3Text2:
 	text_asm
 	ld hl, SilphCo3TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo3BattleText1:
 	text_far _SilphCo3BattleText1
@@ -127,7 +127,7 @@ SilphCo3Text3:
 	text_asm
 	ld hl, SilphCo3TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo3BattleText2:
 	text_far _SilphCo3BattleText2

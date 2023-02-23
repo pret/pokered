@@ -57,7 +57,7 @@ Route15GateUpstairsText1:
 	ld hl, Route15GateUpstairsText_4968c
 	call PrintText
 .no_item
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RemoveBoosterChipSounds:
 	ld b, 5

@@ -50,7 +50,7 @@ Route6Text1:
 	text_asm
 	ld hl, Route6TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route6BattleText1:
 	text_far _Route6BattleText1
@@ -68,7 +68,7 @@ Route6Text2:
 	text_asm
 	ld hl, Route6TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route6BattleText2:
 	text_far _Route6BattleText2
@@ -82,7 +82,7 @@ Route6Text3:
 	text_asm
 	ld hl, Route6TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route6BattleText3:
 	text_far _Route6BattleText3
@@ -100,7 +100,7 @@ Route6Text4:
 	text_asm
 	ld hl, Route6TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route6BattleText4:
 	text_far _Route6BattleText4
@@ -118,7 +118,7 @@ Route6Text5:
 	text_asm
 	ld hl, Route6TrainerHeader4
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route6BattleText5:
 	text_far _Route6BattleText5
@@ -136,7 +136,7 @@ Route6Text6:
 	text_asm
 	ld hl, Route6TrainerHeader5
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route6BattleText6:
 	text_far _Route6BattleText6
@@ -154,7 +154,7 @@ Route6Text7:
 	text_asm
 	ld hl, Route6TrainerHeader6
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route6BattleText7:
 	text_far _Route6BattleText7
@@ -172,7 +172,7 @@ Route6Text8:
 	text_asm
 	ld hl, Route6TrainerHeader7
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route6BattleText8:
 	text_far _Route6BattleText8

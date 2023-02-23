@@ -34,7 +34,7 @@ CeruleanOldRodHouse1Text1:
 	ld hl, CeruleanHouse2Text_560c5
 .done
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeruleanHouse2Text_560b1:
 	text_far _CeruleanHouse2Text_560b1

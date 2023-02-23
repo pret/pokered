@@ -127,19 +127,19 @@ PokemonTower6Text1:
 	text_asm
 	ld hl, PokemonTower6TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PokemonTower6Text2:
 	text_asm
 	ld hl, PokemonTower6TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PokemonTower6Text3:
 	text_asm
 	ld hl, PokemonTower6TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PokemonTower6Text7:
 	text_asm
@@ -162,7 +162,7 @@ PokemonTower6Text7:
 .done
 	call PrintText
 ;;;;;;;;;;
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PokemonTower2Text_60c1f:
 	text_far _PokemonTower2Text_60c1f

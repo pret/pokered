@@ -387,7 +387,7 @@ TrainerEndBattleText::
 	text_asm
 	call GetSavedEndBattleTextPointer
 	call TextCommandProcessor
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ; only engage with the trainer if the player is not already
 ; engaged with another trainer

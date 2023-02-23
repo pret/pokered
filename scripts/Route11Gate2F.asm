@@ -13,7 +13,7 @@ Route11GateUpstairsText1:
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue
 Route11GateUpstairsScriptEnd:
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route11GateUpstairsText2:
 	text_asm
@@ -56,7 +56,7 @@ Route11GateUpstairsText3:
 	ld hl, BinocularsNoSnorlaxText
 .print
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 BinocularsSnorlaxText:
 	text_far _BinocularsSnorlaxText

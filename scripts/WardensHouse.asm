@@ -53,7 +53,7 @@ FuchsiaHouse2Text1:
 	ld hl, HM04NoRoomText
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 WardenGibberishText1:
 	text_far _WardenGibberishText1
@@ -102,7 +102,7 @@ FuchsiaHouse2Text4:
 	ld hl, FuchsiaHouse2Text_75176
 .asm_4c9a2
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FuchsiaHouse2Text_75176:
 	text_far _FuchsiaHouse2Text_75176

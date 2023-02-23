@@ -49,7 +49,7 @@ CeruleanHouse2Text1:
 	ld [wListScrollOffset], a
 	ld hl, CeruleanHouse2Text_74e81
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 BadgeItemList:
 	db 8 ; #

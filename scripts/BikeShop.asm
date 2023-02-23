@@ -76,7 +76,7 @@ BikeShopText1:
 	ld hl, BikeShopComeAgainText
 	call PrintText
 .Done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 BikeShopMenuText:
 	db   "BICYCLE"
@@ -122,7 +122,7 @@ BikeShopText2:
 	text_asm
 	ld hl, BikeShopText_1d843
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 BikeShopText_1d843:
 	text_far _BikeShopText_1d843
@@ -136,7 +136,7 @@ BikeShopText3:
 	ld hl, BikeShopText_1d85c
 .asm_34d2d
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 BikeShopText_1d85c:
 	text_far _BikeShopText_1d85c

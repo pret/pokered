@@ -137,7 +137,7 @@ Museum1FScript_5c1f9:
 	ld hl, Museum1FText_5c238
 	call PrintText
 Museum1FScriptEnd:
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Museum1FText_5c21a:
 	text_far _Museum1FText_5c21a
@@ -179,7 +179,7 @@ Museum1FText2:
 	text_asm
 	ld hl, Museum1FText_5c251
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Museum1FText_5c251:
 	text_far _Museum1FText_5c251
@@ -207,7 +207,7 @@ Museum1FText3:
 	ld hl, Museum1FText_5c299
 .done
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Museum1FText_5c28e:
 	text_far _Museum1FText_5c28e
@@ -230,7 +230,7 @@ Museum1FText4:
 	text_asm
 	ld hl, Museum1FText_5c2ad
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Museum1FText_5c2ad:
 	text_far _Museum1FText_5c2ad
@@ -240,7 +240,7 @@ Museum1FText5:
 	text_asm
 	ld hl, Museum1FText_5c2bc
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Museum1FText_5c2bc:
 	text_far _Museum1FText_5c2bc

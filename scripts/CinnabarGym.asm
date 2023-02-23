@@ -205,7 +205,7 @@ CinnabarGymScript_758b7:
 .asm_758d6
 	ld [wCinnabarGymCurScript], a
 	ld [wCurMapScript], a
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 BlaineText:
 	text_asm
@@ -215,11 +215,11 @@ BlaineText:
 	jr nz, .afterBeat
 	call z, CinnabarGymReceiveTM38
 	call DisableWaitingAfterTextDisplay
-	jp TextScriptEnd
+	rst TextScriptEnd
 .afterBeat
 	ld hl, BlainePostBattleAdviceText
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 .beforeBeat
 	ld hl, BlainePreBattleText
 	call PrintText
@@ -272,7 +272,7 @@ CinnabarGymTrainerText1:
 .asm_46bb4
 	ld hl, CinnabarGymAfterBattleText2
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CinnabarGymBattleText2:
 	text_far _CinnabarGymBattleText2
@@ -300,7 +300,7 @@ CinnabarGymTrainerText2:
 .asm_4b406
 	ld hl, CinnabarGymAfterBattleText1
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CinnabarGymBattleText1:
 	text_far _CinnabarGymBattleText1
@@ -328,7 +328,7 @@ CinnabarGymTrainerText3:
 .afterBeat
 	ld hl, CinnabarGymAfterBattleText3
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CinnabarGymBattleText3:
 	text_far _CinnabarGymBattleText3
@@ -356,7 +356,7 @@ CinnabarGymTrainerText4:
 .afterBeat
 	ld hl, CinnabarGymAfterBattleText4
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CinnabarGymBattleText4:
 	text_far _CinnabarGymBattleText4
@@ -384,7 +384,7 @@ CinnabarGymTrainerText5:
 .afterBeat
 	ld hl, CinnabarGymAfterBattleText5
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CinnabarGymBattleText5:
 	text_far _CinnabarGymBattleText5
@@ -412,7 +412,7 @@ CinnabarGymTrainerText6:
 .afterBeat
 	ld hl, CinnabarGymAfterBattleText6
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CinnabarGymBattleText6:
 	text_far _CinnabarGymBattleText6
@@ -440,7 +440,7 @@ CinnabarGymTrainerText7:
 .afterBeat
 	ld hl, CinnabarGymAfterBattleText7
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CinnabarGymBattleText7:
 	text_far _CinnabarGymBattleText7
@@ -487,7 +487,7 @@ CinnabarGymGuideText: ; PureRGBnote: ADDED: gym guide gives you apex chips after
 	ld hl, ApexNoRoomText7
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 .donePrompt
 	ld hl, CinnabarGymGuidePostBattleText
 	call PrintText

@@ -362,7 +362,7 @@ WannaTrade1ColorText:
 	ld hl, WannaTradeColorPaletteText
 .done
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 NoTrade1Text:
 	text_far _NoTrade1Text
@@ -407,7 +407,7 @@ WannaTrade2ColorText:
 	ld hl, WannaTradeColorPaletteText
 .done
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 NoTrade2Text:
 	text_far _NoTrade2Text
@@ -447,7 +447,7 @@ WannaTrade3ColorText:
 	ld hl, WannaTradeColorPaletteText
 .done
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 NoTrade3Text:
 	text_far _NoTrade3Text

@@ -233,7 +233,7 @@ PewterCityText3:
 	ld a, $1
 	ld [wPewterCityCurScript], a
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PewterCityText_193f1:
 	text_far _PewterCityText_193f1
@@ -266,7 +266,7 @@ PewterCityText4:
 	ld hl, PewterCityText_19431
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PewterCityText_19427:
 	text_far _PewterCityText_19427
@@ -296,7 +296,7 @@ PewterCityText5:
 	call GetSpritePosition2
 	ld a, $4
 	ld [wPewterCityCurScript], a
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PewterCityText_1945d:
 	text_far _PewterCityText_1945d

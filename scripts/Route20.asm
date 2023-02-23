@@ -103,61 +103,61 @@ Route20Text1:
 	text_asm
 	ld hl, Route20TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route20Text2:
 	text_asm
 	ld hl, Route20TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route20Text3:
 	text_asm
 	ld hl, Route20TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route20Text4:
 	text_asm
 	ld hl, Route20TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route20Text5:
 	text_asm
 	ld hl, Route20TrainerHeader4
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route20Text6:
 	text_asm
 	ld hl, Route20TrainerHeader5
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route20Text7:
 	text_asm
 	ld hl, Route20TrainerHeader6
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route20Text8:
 	text_asm
 	ld hl, Route20TrainerHeader7
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route20Text9:
 	text_asm
 	ld hl, Route20TrainerHeader8
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route20Text10:
 	text_asm
 	ld hl, Route20TrainerHeader9
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route20BattleText1:
 	text_far _Route20BattleText1

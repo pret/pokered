@@ -134,7 +134,7 @@ KogaText:
 	ld a, $3
 	ld [wFuchsiaGymCurScript], a
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 KogaBeforeBattleText:
 	text_far _KogaBeforeBattleText
@@ -168,7 +168,7 @@ FuchsiaGymTrainerText1:
 	text_asm
 	ld hl, FuchsiaGymTrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FuchsiaGymBattleText1:
 	text_far _FuchsiaGymBattleText1
@@ -186,7 +186,7 @@ FuchsiaGymTrainerText2:
 	text_asm
 	ld hl, FuchsiaGymTrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FuchsiaGymBattleText2:
 	text_far _FuchsiaGymBattleText2
@@ -204,7 +204,7 @@ FuchsiaGymTrainerText3:
 	text_asm
 	ld hl, FuchsiaGymTrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FuchsiaGymBattleText3:
 	text_far _FuchsiaGymBattleText3
@@ -222,7 +222,7 @@ FuchsiaGymTrainerText4:
 	text_asm
 	ld hl, FuchsiaGymTrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FuchsiaGymBattleText4:
 	text_far _FuchsiaGymBattleText4
@@ -240,7 +240,7 @@ FuchsiaGymTrainerText5:
 	text_asm
 	ld hl, FuchsiaGymTrainerHeader4
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FuchsiaGymBattleText5:
 	text_far _FuchsiaGymBattleText5
@@ -258,7 +258,7 @@ FuchsiaGymTrainerText6:
 	text_asm
 	ld hl, FuchsiaGymTrainerHeader5
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FuchsiaGymBattleText6:
 	text_far _FuchsiaGymBattleText6
@@ -305,7 +305,7 @@ FuchsiaGymGuideText: ; PureRGBnote: ADDED: gym guide gives you apex chips after 
 	ld hl, ApexNoRoomText5
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 .donePrompt
 	ld hl, FuchsiaGymGuidePostBattleText
 	call PrintText

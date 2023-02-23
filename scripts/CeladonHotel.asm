@@ -54,7 +54,7 @@ CeladonChannelerText:
 	ld hl, CeladonHotelAfterBattleText1
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeladonChannelerIntroText:
 	text_far _CeladonChannelerIntro
@@ -126,7 +126,7 @@ CeladonLaprasGuyText:
 	ld hl, CeladonLaprasGuyNoBoxRoom
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeladonLaprasGuyLeaves:
 	; fade out, set hide show flag, fade back in

@@ -120,7 +120,7 @@ RocketHideout4Text1:
 	ld hl, RocketHideout4Text10
 	call PrintText
 .asm_209f0
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RocketHideout4Text_4557a:
 	text_far _RocketHideout4Text_4557a
@@ -138,7 +138,7 @@ RocketHideout4Text2:
 	text_asm
 	ld hl, RocketHideout4TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RocketHideout4BattleText2:
 	text_far _RocketHideout4BattleText2
@@ -156,7 +156,7 @@ RocketHideout4Text3:
 	text_asm
 	ld hl, RocketHideout4TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RocketHideout4BattleText3:
 	text_far _RocketHideout4BattleText3
@@ -174,7 +174,7 @@ RocketHideout4Text4:
 	text_asm
 	ld hl, RocketHideout4TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RocketHideout4BattleText4:
 	text_far _RocketHideout4BattleText4
@@ -194,7 +194,7 @@ RocketHideout4AfterBattleText4:
 	ld [wMissableObjectIndex], a
 	predef ShowObject
 .asm_455e9
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RocketHideout4Text_455ec:
 	text_far _RocketHideout4Text_455ec

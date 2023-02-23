@@ -24,7 +24,7 @@ SafariZoneRestHouse4Text1:
 	ld hl, SafariZoneRestHouse4TextChansey
 .done
 	call PrintText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SafariZoneRestHouse4TextDefault:
 	text_far _SafariZoneRestHouse4Text1

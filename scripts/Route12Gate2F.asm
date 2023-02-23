@@ -27,7 +27,7 @@ Route12GateUpstairsText1:
 	ld hl, TM39ExplanationText
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 TM39PreReceiveText:
 	text_far _TM39PreReceiveText
@@ -75,4 +75,4 @@ GateUpstairsScript_PrintIfFacingUp:
 	xor a
 .done
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
-	jp TextScriptEnd
+	rst TextScriptEnd

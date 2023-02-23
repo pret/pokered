@@ -25,7 +25,7 @@ SafariZoneSecretHouseText1:
 	ld hl, HM03ExplanationText
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SafariZoneSecretHouseText_4a350:
 	text_far _SecretHouseText_4a350

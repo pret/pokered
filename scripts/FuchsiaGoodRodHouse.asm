@@ -19,7 +19,7 @@ FuchsiaHouse3Text1:
 	ld hl, FuchsiaGuruEnd
 	call PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FuchsiaGuruIntro:
 	text_far _FuchsiaGuruIntro
@@ -32,4 +32,4 @@ FuchsiaGuruEnd:
 FuchsiaFishingGuide:
 	text_asm
 	callfar LastTwoGurusFishingGuideBookText
-	jp TextScriptEnd
+	rst TextScriptEnd
