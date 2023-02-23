@@ -224,7 +224,7 @@ HoFLoadPlayerPics:
 	ld hl, sSpriteBuffer1
 	ld de, sSpriteBuffer0
 	ld bc, $310
-	call CopyData
+	rst CopyDataRST
 	ld de, vFrontPic
 	call InterlaceMergeSpriteBuffers
 	ld a, [wSpriteOptions2]

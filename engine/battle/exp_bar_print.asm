@@ -50,7 +50,7 @@ AnimateEXPBar:
 	ld bc, $08
 	hlcoord 10, 11
 	ld de, wTileMapBackup + 10 + 11 * 20
-	call CopyData
+	rst CopyDataRST
 	ld c, 5
 	jp DelayFrames
 

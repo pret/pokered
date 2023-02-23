@@ -66,7 +66,7 @@ SaveSRAMtoROM::
 ; Bank Switch and copy code
 BankSwitchAndCopy::
 	ld   [MBC1RomBank],a
-	call CopyData
+	rst CopyDataRST
 	ld   a,?? ; load/save code bank
 	ld   [MBC1RomBank],a
 	ret  
@@ -109,32 +109,32 @@ FlashSRAMToROM::
 	ld   hl,EraseROMSave ; ERASE ROUTINE
 	ld   de,wBatterylessSaveCode ; free WRAM
 	ld   bc,0050
-	call CopyData    ; copy routine
+	rst CopyDataRST    ; copy routine
 	ld   a,$3D   ; bank 1
 	call wBatterylessSaveCode    ; free WRAM
 	nop  
 	ld   hl,FlashSRAMBank0 ; WRITE ROUTINE
 	ld   de,wBatterylessSaveCode ; free WRAM
 	ld   bc,005D
-	call CopyData
+	rst CopyDataRST
 	call wBatterylessSaveCode    ; free WRAM
 	nop  
 	ld   hl,FlashSRAMBank1 ; WRITE ROUTINE
 	ld   de,wBatterylessSaveCode ; free WRAM
 	ld   bc,005D
-	call CopyData
+	rst CopyDataRST
 	call wBatterylessSaveCode    ; free WRAM
 	nop
 	ld   hl,FlashSRAMBank2 ; WRITE ROUTINE
 	ld   de,wBatterylessSaveCode ; free WRAM
 	ld   bc,005D
-	call CopyData
+	rst CopyDataRST
 	call wBatterylessSaveCode    ; free WRAM
 	nop  
 	ld   hl,FlashSRAMBank3 ; WRITE ROUTINE
 	ld   de,wBatterylessSaveCode ; free WRAM
 	ld   bc,005D
-	call CopyData
+	rst CopyDataRST
 	call wBatterylessSaveCode ; free WRAM
 	nop  
 	ret  

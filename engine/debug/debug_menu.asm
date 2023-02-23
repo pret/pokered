@@ -5,12 +5,12 @@ IF DEF(_DEBUG)
 	ld hl, DebugPlayerName
 	ld de, wPlayerName
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst CopyDataRST
 
 	ld hl, DebugRivalName
 	ld de, wRivalName
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst CopyDataRST
 
 	call LoadFontTilePatterns
 	call LoadHpBarAndStatusTilePatterns

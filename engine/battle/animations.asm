@@ -1094,7 +1094,7 @@ DoGrowlSpecialEffects:
 	ld hl, wShadowOAM
 	ld de, wShadowOAMSprite04
 	ld bc, $10
-	call CopyData ; copy the musical note graphic
+	rst CopyDataRST ; copy the musical note graphic
 	ld a, [wSubAnimCounter]
 	dec a
 	call z, AnimationCleanOAM ; clean up at the end of the subanimation
@@ -1456,7 +1456,7 @@ _AnimationSlideMonUp:
 	push de
 	push hl
 	ld bc, 7
-	call CopyData
+	rst CopyDataRST
 ; Note that de and hl are popped in the same order they are pushed, swapping
 ; their values. When CopyData is called, hl points to a tile 1 row below
 ; the one de points to. To maintain this relationship, after swapping, we add 2

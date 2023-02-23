@@ -85,7 +85,7 @@ GetPrizeMenuId:
 	ld l, a
 	ld de, wPrize1Price
 	ld bc, 6
-	call CopyData
+	rst CopyDataRST
 	ld a, [wWhichPrizeWindow]
 	cp 2        ;is TM_menu?
 	jr nz, .putMonName

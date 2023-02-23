@@ -219,7 +219,7 @@ DisplayWildLocations:
 	ld hl, wShadowOAM
 	ld de, wTownMapSavedOAM
 	ld bc, $a0
-	call CopyData
+	rst CopyDataRST
 
 	call GetMonAreaInputButtons
 	push af

@@ -74,7 +74,7 @@ DisplayNameRaterScreen::
 	ld d, h
 	ld hl, wBuffer
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst CopyDataRST
 	and a
 	ret
 .playerCancelled
@@ -159,7 +159,7 @@ DisplayNamingScreen:
 	pop de
 	ld hl, wStringBuffer
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst CopyDataRST
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	call ClearSprites

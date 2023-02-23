@@ -268,7 +268,7 @@ InitFacingDirectionList:
 	ld hl, PlayerSpinningFacingOrder
 	ld de, wFacingDirectionList
 	ld bc, 4
-	call CopyData
+	rst CopyDataRST
 	ld a, [wSpritePlayerStateData1ImageIndex] ; (image index is locked to standing images)
 	ld hl, wFacingDirectionList
 ; find the place in the list that matches the current facing direction
@@ -292,7 +292,7 @@ SpinPlayerSprite:
 	ld hl, wFacingDirectionList
 	ld de, wFacingDirectionList - 1
 	ld bc, 4
-	call CopyData
+	rst CopyDataRST
 	ld a, [wFacingDirectionList - 1]
 	ld [wFacingDirectionList + 3], a
 	pop hl
@@ -397,7 +397,7 @@ FishingAnim:
 	add hl, bc
 	ld de, wShadowOAMSprite39
 	ld bc, $4
-	call CopyData
+	rst CopyDataRST
 ;;;;;;;;;; PureRGBnote: CHANGED: fishing animation wait time is randomized instead of hardcoded 100 frames.
 	call Random
 	and %1111111 ; a = random number between 0 and 127

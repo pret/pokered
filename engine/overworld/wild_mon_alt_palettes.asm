@@ -14,7 +14,7 @@ GetWildPokemonPalettes::
 
 	ld de, wWildMonPalettes
 	ld bc, 3 ; 3 bytes long
-	call CopyData
+	rst CopyDataRST
 	ret
 
 ;[wIsAltPalettePkmn] = which encounter slot 0-9 for grass encounters, 10-19 for water encounters, 20-23 for super rod encounters 

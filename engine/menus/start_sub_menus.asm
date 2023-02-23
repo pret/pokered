@@ -519,7 +519,7 @@ DrawTrainerInfo:
 	ld hl, vChars2 tile $07
 	ld de, vChars2 tile $00
 	ld bc, $1c tiles
-	call CopyData
+	rst CopyDataRST
 	ld hl, TrainerInfoTextBoxTileGraphics ; trainer info text box tile patterns
 	ld de, vChars2 tile $77
 	ld bc, 8 tiles
@@ -823,7 +823,7 @@ SwitchPartyMon_InitVarOrSwapData:
 	push hl
 	ld de, wSwitchPartyMonTempBuffer
 	ld bc, wPartyMon2 - wPartyMon1
-	call CopyData
+	rst CopyDataRST
 	ld hl, wPartyMons
 	ld bc, wPartyMon2 - wPartyMon1
 	ld a, [wMenuItemToSwap]
@@ -831,47 +831,47 @@ SwitchPartyMon_InitVarOrSwapData:
 	pop de
 	push hl
 	ld bc, wPartyMon2 - wPartyMon1
-	call CopyData
+	rst CopyDataRST
 	pop de
 	ld hl, wSwitchPartyMonTempBuffer
 	ld bc, wPartyMon2 - wPartyMon1
-	call CopyData
+	rst CopyDataRST
 	ld hl, wPartyMonOT
 	ld a, [wCurrentMenuItem]
 	call SkipFixedLengthTextEntries
 	push hl
 	ld de, wSwitchPartyMonTempBuffer
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst CopyDataRST
 	ld hl, wPartyMonOT
 	ld a, [wMenuItemToSwap]
 	call SkipFixedLengthTextEntries
 	pop de
 	push hl
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst CopyDataRST
 	pop de
 	ld hl, wSwitchPartyMonTempBuffer
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst CopyDataRST
 	ld hl, wPartyMonNicks
 	ld a, [wCurrentMenuItem]
 	call SkipFixedLengthTextEntries
 	push hl
 	ld de, wSwitchPartyMonTempBuffer
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst CopyDataRST
 	ld hl, wPartyMonNicks
 	ld a, [wMenuItemToSwap]
 	call SkipFixedLengthTextEntries
 	pop de
 	push hl
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst CopyDataRST
 	pop de
 	ld hl, wSwitchPartyMonTempBuffer
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst CopyDataRST
 	ld a, [wMenuItemToSwap]
 	ld [wSwappedMenuItem], a
 	xor a

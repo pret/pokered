@@ -18,7 +18,7 @@ DoInGameTradeDialogue:
 	push af
 	ld de, wInGameTradeMonNick
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst CopyDataRST
 	pop af
 	ld l, a
 	ld h, 0
@@ -224,7 +224,7 @@ InGameTrade_PrepareTradeData:
 InGameTrade_CopyData:
 	push hl
 	push bc
-	call CopyData
+	rst CopyDataRST
 	pop bc
 	pop hl
 	ret
@@ -235,13 +235,13 @@ InGameTrade_CopyDataToReceivedMon:
 	call InGameTrade_GetReceivedMonPointer
 	ld hl, wInGameTradeMonNick
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst CopyDataRST
 	ld hl, wPartyMonOT
 	ld bc, NAME_LENGTH
 	call InGameTrade_GetReceivedMonPointer
 	ld hl, InGameTrade_TrainerString
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst CopyDataRST
 	ld hl, wPartyMon1OTID
 	ld bc, wPartyMon2 - wPartyMon1
 	call InGameTrade_GetReceivedMonPointer

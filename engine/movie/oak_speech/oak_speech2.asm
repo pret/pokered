@@ -74,7 +74,7 @@ OakSpeechSlidePicLeft:
 	pop de
 	ld hl, wcd6d
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst CopyDataRST
 	call Delay3
 	hlcoord 12, 4
 	lb de, 6, 6 * SCREEN_WIDTH + 5

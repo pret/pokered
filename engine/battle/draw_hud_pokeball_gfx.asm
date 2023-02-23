@@ -130,7 +130,7 @@ PlacePlayerHUDTiles:
 	ld hl, PlayerBattleHUDGraphicsTiles
 	ld de, wHUDGraphicsTiles
 	ld bc, $3
-	call CopyData
+	rst CopyDataRST
 	hlcoord 18, 10
 	ld de, -1
 	jr PlaceHUDTiles
@@ -145,7 +145,7 @@ PlaceEnemyHUDTiles:
 	ld hl, EnemyBattleHUDGraphicsTiles
 	ld de, wHUDGraphicsTiles
 	ld bc, $3
-	call CopyData
+	rst CopyDataRST
 	hlcoord 1, 2
 	ld de, $1
 	jr PlaceHUDTiles

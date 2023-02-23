@@ -19,7 +19,7 @@ DisplayTownMap:
 	ld hl, wShadowOAM
 	ld de, wTownMapSavedOAM
 	ld bc, $10
-	call CopyData
+	rst CopyDataRST
 	ld hl, vSprites tile $04
 	ld de, TownMapCursor
 	lb bc, BANK(TownMapCursor), (TownMapCursorEnd - TownMapCursor) / $8
@@ -63,7 +63,7 @@ DisplayTownMap:
 	ld hl, wShadowOAMSprite04
 	ld de, wTownMapSavedOAM + 16
 	ld bc, $10
-	call CopyData
+	rst CopyDataRST
 .inputLoop
 	call TownMapSpriteBlinkingAnimation
 	call JoypadLowSensitivity
@@ -525,7 +525,7 @@ TownMapSpriteBlinkingAnimation::
 	ld hl, wTownMapSavedOAM
 	ld de, wShadowOAM
 	ld bc, $90
-	call CopyData
+	rst CopyDataRST
 	xor a
 	jr .done
 .hideSprites

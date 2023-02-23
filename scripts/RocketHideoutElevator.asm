@@ -37,7 +37,7 @@ RocketHideoutElevatorScript_45741:
 	ld hl, RocketHideoutElevatorWarpMaps
 	ld de, wElevatorWarpMaps
 	ld bc, RocketHideoutElevatorWarpMapsEnd - RocketHideoutElevatorWarpMaps
-	call CopyData
+	rst CopyDataRST
 	ret
 
 RocketHideoutElavatorFloors:

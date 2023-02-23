@@ -29,7 +29,7 @@ Route11GateUpstairsText2:
 	ld l, e
 	ld de, wOaksAideRewardItemName
 	ld bc, ITEM_NAME_LENGTH
-	call CopyData
+	rst CopyDataRST
 	predef OaksAideScript
 	ldh a, [hOaksAideResult]
 	dec a ; OAKS_AIDE_GOT_ITEM?

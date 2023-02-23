@@ -61,23 +61,23 @@ LoadSAV0:
 	ld hl, sPlayerName
 	ld de, wPlayerName
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst CopyDataRST
 	ld hl, sMainData
 	ld de, wMainDataStart
 	ld bc, wMainDataEnd - wMainDataStart
-	call CopyData
+	rst CopyDataRST
 	ld hl, wCurMapTileset
 	set 7, [hl]
 	ld hl, sSpriteData
 	ld de, wSpriteDataStart
 	ld bc, wSpriteDataEnd - wSpriteDataStart
-	call CopyData
+	rst CopyDataRST
 	ld a, [sTileAnimations]
 	ldh [hTileAnimations], a
 	ld hl, sCurBoxData
 	ld de, wBoxDataStart
 	ld bc, wBoxDataEnd - wBoxDataStart
-	call CopyData
+	rst CopyDataRST
 	and a
 	jp SAVGoodChecksum
 
@@ -97,7 +97,7 @@ LoadSAV1:
 	ld hl, sCurBoxData
 	ld de, wBoxDataStart
 	ld bc, wBoxDataEnd - wBoxDataStart
-	call CopyData
+	rst CopyDataRST
 	and a
 	jp SAVGoodChecksum
 
@@ -117,11 +117,11 @@ LoadSAV2:
 	ld hl, sPartyData
 	ld de, wPartyDataStart
 	ld bc, wPartyDataEnd - wPartyDataStart
-	call CopyData
+	rst CopyDataRST
 	ld hl, sMainData
 	ld de, wPokedexOwned
 	ld bc, wPokedexSeenEnd - wPokedexOwned
-	call CopyData
+	rst CopyDataRST
 	and a
 	jp SAVGoodChecksum
 
@@ -209,19 +209,19 @@ SaveSAVtoSRAM0:
 	ld hl, wPlayerName
 	ld de, sPlayerName
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst CopyDataRST
 	ld hl, wMainDataStart
 	ld de, sMainData
 	ld bc, wMainDataEnd - wMainDataStart
-	call CopyData
+	rst CopyDataRST
 	ld hl, wSpriteDataStart
 	ld de, sSpriteData
 	ld bc, wSpriteDataEnd - wSpriteDataStart
-	call CopyData
+	rst CopyDataRST
 	ld hl, wBoxDataStart
 	ld de, sCurBoxData
 	ld bc, wBoxDataEnd - wBoxDataStart
-	call CopyData
+	rst CopyDataRST
 	ldh a, [hTileAnimations]
 	ld [sTileAnimations], a
 	ld hl, sGameData
@@ -243,7 +243,7 @@ SaveSAVtoSRAM1:
 	ld hl, wBoxDataStart
 	ld de, sCurBoxData
 	ld bc, wBoxDataEnd - wBoxDataStart
-	call CopyData
+	rst CopyDataRST
 	ld hl, sGameData
 	ld bc, sGameDataEnd - sGameData
 	call SAVCheckSum
@@ -262,11 +262,11 @@ SaveSAVtoSRAM2:
 	ld hl, wPartyDataStart
 	ld de, sPartyData
 	ld bc, wPartyDataEnd - wPartyDataStart
-	call CopyData
+	rst CopyDataRST
 	ld hl, wPokedexOwned ; pokédex only
 	ld de, sMainData
 	ld bc, wPokedexSeenEnd - wPokedexOwned
-	call CopyData
+	rst CopyDataRST
 	ld hl, sGameData
 	ld bc, sGameDataEnd - sGameData
 	call SAVCheckSum
@@ -405,7 +405,7 @@ CopyBoxToOrFromSRAM:
 	ld a, b
 	ld [MBC1SRamBank], a
 	ld bc, wBoxDataEnd - wBoxDataStart
-	call CopyData
+	rst CopyDataRST
 	pop hl
 
 ; mark the memory that the box was copied from as am empty box
@@ -711,7 +711,7 @@ HallOfFame_Copy:
 	ld [MBC1SRamBankingMode], a
 	xor a
 	ld [MBC1SRamBank], a
-	call CopyData
+	rst CopyDataRST
 	xor a
 	ld [MBC1SRamBankingMode], a
 	ld [MBC1SRamEnable], a

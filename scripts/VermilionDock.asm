@@ -312,7 +312,7 @@ TruckCheck:
 	ld hl, TruckOAMTable
 	ld bc, $20
 	ld de, wShadowOAM + $20
-	call CopyData
+	rst CopyDataRST
 	ld a, $c
 	ld [wNewTileBlockID], a ; used to be wd09f
 	ld bc, $a

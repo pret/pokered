@@ -192,7 +192,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld bc, BASE_DATA_SIZE
 	call AddNTimes
 	ld de, wMonHeader
-	call CopyData
+	rst CopyDataRST
 	ld a, [wd0b5]
 	ld [wMonHIndex], a
 	pop af
@@ -230,7 +230,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld [hl], a
 	dec hl
 	pop bc
-	call CopyData
+	rst CopyDataRST
 	ld a, [wd0b5]
 	ld [wd11e], a
 	xor a

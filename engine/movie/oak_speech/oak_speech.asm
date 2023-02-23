@@ -47,7 +47,7 @@ SetDefaultNames:
 	ld hl, NintenText
 	ld de, wPlayerName
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst CopyDataRST
 	ld hl, SonyText
 	ld de, wRivalName
 	ld bc, NAME_LENGTH
@@ -243,7 +243,7 @@ IntroDisplayPicCenteredOrUpperRight:
 	ld hl, sSpriteBuffer1
 	ld de, sSpriteBuffer0
 	ld bc, $310
-	call CopyData
+	rst CopyDataRST
 	ld de, vFrontPic
 	call InterlaceMergeSpriteBuffers
 	pop bc
