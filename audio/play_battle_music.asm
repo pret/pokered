@@ -25,22 +25,21 @@ PlayBattleMusic::
 	cp OPP_LANCE
 	jr z, .Elite4Battle
 	cp OPP_RIVAL3
-	;jr z, .finalBattle unnecessary code
-	;cp OPP_LANCE
-	;jr nz, .normalTrainerBattle
-	;ld a, MUSIC_GYM_LEADER_BATTLE
+	jr z, .finalBattle 
+	cp OPP_PROF_OAK ; may as well, right?
+	jr z, .finalBattle 
 	jr nz, .normalTrainerBattle
 	ld a, MUSIC_FINAL_BATTLE
 	jr .playSong
-	.Elite4Battle
+.Elite4Battle
 	ld a, MUSIC_GYM_LEADER_BATTLE
 	jr .playSong
 .normalTrainerBattle
 	ld a, MUSIC_TRAINER_BATTLE
 	jr .playSong
-;.finalBattle
-;	ld a, MUSIC_FINAL_BATTLE
-;	jr .playSong
+.finalBattle
+	ld a, MUSIC_FINAL_BATTLE
+	jr .playSong
 .wildBattle
 	ld a, MUSIC_WILD_BATTLE
 .playSong

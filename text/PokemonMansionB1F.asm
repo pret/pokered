@@ -39,3 +39,11 @@ _Mansion4Text7::
 	line "it!"
 	
 	done
+
+_MansionGuardText::
+	text "This room is"
+	line "off-limits."
+	
+	para "Beat it, kid!"
+	
+	done

@@ -9,7 +9,7 @@ New Pokemon:
 - Evolutions or Pre-evolutions of a Kanto Pokemon found in the SpaceWorld '97 demo are included; eg. Madaamu, Pudi
 	- Some Pokemon will also use their SW97 designs!
 
-Johto baby Pokemon and regional pre-evolutions were omitted due to memory constraints.
+Johto baby Pokemon and regional pre-evolutions were omitted due to memory constraints. This just barely works.
 
 New Types:
 ====
@@ -63,12 +63,13 @@ Improved areas
 - Route 25 has been given a facelift, adding Bill's Lighthouse!
 - The Route 5-6 underground path contains a shortcut to Celadon City. 
 	- This allows you to skip Route 9 and Rock Tunnel, making them optional areas and opening up central Kanto.
-- Cinnabar Island is a lot bigger, and has a new location added to it.
+- Cinnabar Island is a lot bigger, and has a new location added to it. The mansion seems different too...
 - Pokemon Tower was shortened, being less intensive and adding room for more maps.
 - Silph Co's pathing was completely overhauled to make navigating it less tedious.
 - Viridian Gym now has a new area once you make Giovanni leave.
 - The S.S. Anne now returns after getting your fourth badge!
-- Once you've entered the Hall of Fame, try visiting Route 1...
+- Mt. Moon has a new location accessible after beating the game.
+- After entering the Hall of Fame, try visiting Route 1...
 
 QoL Enhancements
 ====

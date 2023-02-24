@@ -68,6 +68,7 @@ PokemonMansionB1F_TextPointers:
 	dw Mansion4Text7
 	dw PickUpItemText
 	dw Mansion3Text6
+	dw MansionGuardText
 
 Mansion4TrainerHeaders:
 	def_trainers
@@ -115,4 +116,8 @@ Mansion4AfterBattleText2:
 
 Mansion4Text7:
 	text_far _Mansion4Text7
+	text_end
+
+MansionGuardText:
+	text_far _MansionGuardText
 	text_end

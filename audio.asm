@@ -357,7 +357,6 @@ INCLUDE "audio/sfx/cry22_3.asm"
 
 SECTION "Audio Engine 1", ROMX
 
-INCLUDE "audio/play_battle_music.asm"
 INCLUDE "audio/engine_1.asm"
 INCLUDE "audio/alternate_tempo.asm"
 
@@ -365,6 +364,7 @@ INCLUDE "audio/alternate_tempo.asm"
 SECTION "Low Health Alarm (Audio Engine 2)", ROMX
 
 INCLUDE "audio/low_health_alarm.asm"
+INCLUDE "audio/play_battle_music.asm" ; This is usually in engine 1, but with the changes to the elite four and oak, it overflows. Testing showed swapping was fine. ~ PvK
 
 
 SECTION "Audio Engine 2", ROMX
