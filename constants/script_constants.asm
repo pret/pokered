@@ -22,15 +22,35 @@ DEF SLOTS_SOMEONESKEYS EQU $ff
 	const_def
 	const TRADE_FOR_TERRY
 	const TRADE_FOR_MARCEL
-	const TRADE_FOR_CHIKUCHIKU
+	const TRADE_FOR_CHIKUCHIKU ; the glass
 	const TRADE_FOR_SAILOR
 	const TRADE_FOR_DUX
 	const TRADE_FOR_MARC
 	const TRADE_FOR_LOLA
 	const TRADE_FOR_DORIS
 	const TRADE_FOR_CRINKLES
-	const TRADE_FOR_SPOT
-	const TRADE_WITH_SELF
+	const TRADE_FOR_SPOT ; probably also glass
+	const TRADE_WITH_SELF ; Celadon University
+	;const TRADE_FOR_RATICATE_A ; LGPE Trade references - Viridian
+	;const TRADE_FOR_GOLEM_A ; Pewter
+	;const TRADE_FOR_NINETALES_A ; Cerulean
+	;const TRADE_FOR_PERSIAN_A ; Vermillion
+	;const TRADE_FOR_DUGTRIO_A ; Lavender
+	;const TRADE_FOR_SANDSLASH_A ; Celadon
+	;const TRADE_FOR_RAICHU_A ; Saffron
+	;const TRADE_FOR_MAROWAK_A ; Fuschia
+	;const TRADE_FOR_MUK_A ; Cinnabar
+	;const TRADE_FOR_EXEGGUTOR_A ; Indigo
+	;const TRADE_FOR_TAUROS_C ; S.S. Anne Trades begin here
+	;const TRADE_FOR_TAUROS_A
+	;const TRADE_FOR_TAUROS_B
+	;const TRADE_FOR_RAPIDASH_G
+	;const TRADE_FOR_SLOWBRO_G
+	;const TRADE_FOR_SLOWKING_G
+	;const TRADE_FOR_WEEZING_G
+	const TRADE_FOR_MR_RIME ; In the event of an overflow, break glass
+	const TRADE_FOR_PERRSERKER ; we could also put them in mt moon crater ig?
+	const TRADE_FOR_SIRFETCHD
 DEF NUM_NPC_TRADES EQU const_value
 
 ; in game trade dialog sets
@@ -40,6 +60,7 @@ DEF NUM_NPC_TRADES EQU const_value
 	const TRADE_DIALOGSET_POLITE
 	const TRADE_DIALOGSET_HAPPY
 	const TRADE_DIALOGSET_SELF
+	const TRADE_DIALOGSET_REGION ; consistency with LGPE
 
 ; badges
 ; wObtainedBadges and wBeatGymFlags bits

@@ -305,6 +305,13 @@ TradeTextPointers4:
 	dw Thanks4Text
 	dw AfterTrade1Text
 
+TradeTextPointers5:
+	dw WannaTrade4Text
+	dw NoTrade4Text
+	dw WrongMon3Text ; seems fitting, also optimises
+	dw Thanks1Text
+	dw AfterTrade1Text
+
 ConnectCableText:
 	text_far _ConnectCableText
 	text_end
@@ -385,4 +392,12 @@ NoTrade4Text:
 	
 Thanks4Text:
 	text_far _Thanks4Text
+	text_end
+	
+WannaTrade5Text:
+	text_far _WannaTrade5Text
+	text_end
+	
+NoTrade5Text:
+	text_far _NoTrade5Text
 	text_end

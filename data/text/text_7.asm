@@ -216,3 +216,19 @@ _Thanks4Text::
 	text "There we go!"
 	para "Hope I helped!"
 	done
+
+_WannaTrade5Text::
+	text "In my region, we"
+	line "have our own"
+	para "@"
+	text_ram wInGameTradeReceiveMonName
+	text "!"
+	
+	para "Want to trade me"
+	line "yours?"
+	done
+	
+_NoTrade5Text::
+	text "Ok, maybe next"
+	line "time then."
+	done
