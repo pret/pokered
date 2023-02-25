@@ -930,9 +930,12 @@ wRightGBMonSpecies:: db
 
 ; bit 0: is player engaged by trainer (to avoid being engaged by multiple trainers simultaneously)
 ; bit 1: boulder dust animation (from using Strength) pending
+; bit 2: PureRGBnote: CHANGED: now unused bit
 ; bit 3: using generic PC
+; bit 4: used for some specific script in Pewter City to prevent sprites from updating
 ; bit 5: don't play sound when A or B is pressed in menu
 ; bit 6: tried pushing against boulder once (you need to push twice before it will move)
+; bit 7: bit never set (but it is read)
 wFlags_0xcd60:: db
 
 ;;;;;;;;;; PureRGBnote: CHANGED: previously this empty space of 9 bytes was used by new variables
@@ -1911,7 +1914,7 @@ ds 20 ; 20 of the 42 bytes of space are alotted to new missable object flags
 NEXTU
 
 ; PureRGBnote: ADDED: we use this empty space currently for a store of extra flags to hide/show objects in the safari zone.
-wExtraMissableObjectFlags:: flag_array NUM_EXTRA_HS_OBJECTS ; max size 20 bytes or 152 flags (currently around 35 flags are used)
+wExtraMissableObjectFlags:: flag_array NUM_EXTRA_HS_OBJECTS ; max size 20 bytes or 152 flags
 wExtraMissableObjectFlagsEnd::
 
 ENDU

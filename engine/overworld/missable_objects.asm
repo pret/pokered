@@ -19,14 +19,25 @@ MarkTownVisitedAndLoadMissableObjects::
 
 LoadMissableObjects:
 	ld l, a
+
 	push hl
-;;;;;;;;;; PureRGBnote: ADDED: when in the safari zone we use a different set of flags for hiding/showing objects.
-	CheckEvent EVENT_IN_SAFARI_ZONE
-	jr nz, .extraMissables
+;;;;;;;;;; PureRGBnote: ADDED: when in some maps we use a different set of flags for hiding/showing objects.
+	ld de, ExtraMissableObjects
+	; check if hl address is >= ExtraMissableObjects, if so load ExtraMissableObjects
+	ld a, d
+	sub h
+	jr c, .extraMissables
+	jr nz, .normal
+	ld a, e
+	sub l
+	jr z, .extraMissables
+	jr c, .extraMissables
+.normal
+	ResetEventA EVENT_IN_EXTRA_MISSABLE_OBJECTS_MAP
 	ld de, MissableObjects     ; calculate difference between out pointer and the base pointer
 	jr .load
 .extraMissables
-	ld de, ExtraMissableObjects
+	SetEventA EVENT_IN_EXTRA_MISSABLE_OBJECTS_MAP
 .load
 ;;;;;;;;;;
 	ld a, l
@@ -153,16 +164,12 @@ IsObjectHidden:
 	jr nz, .loop
 	ld c, a
 	ld b, FLAG_TEST
-;;;;;;;;;; PureRGBnote: ADDED: when in the safari zone we use a different set of flags for hiding/showing objects.
-	ld a, [wCurMap]
-	cp SAFARI_ZONE_EAST
-	jr c, .notSafariZone
-	cp SAFARI_ZONE_CENTER_REST_HOUSE
-	jr nc, .notSafariZone
-	ld hl, wExtraMissableObjectFlags
-	jr .doAction
-.notSafariZone
+;;;;;;;;;; PureRGBnote: ADDED: when in certain maps we use a different set of flags for hiding/showing objects.
+	CheckEvent EVENT_IN_EXTRA_MISSABLE_OBJECTS_MAP
 	ld hl, wMissableObjectFlags
+	jr z, .doAction
+.extraMap
+	ld hl, wExtraMissableObjectFlags
 .doAction
 ;;;;;;;;;;
 	call MissableObjectFlagAction
@@ -178,7 +185,6 @@ IsObjectHidden:
 ; adds missable object (items, leg. pokemon, etc.) to the map
 ; [wMissableObjectIndex]: index of the missable object to be added (global index)
 ShowObject:
-ShowObject2:
 	ld hl, wMissableObjectFlags
 	jr ShowObjectCommon
 

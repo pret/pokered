@@ -327,16 +327,16 @@ SchoolB1FRocker:
 	rst _DelayFrames
 	ld a, HS_VIRIDIAN_SCHOOL_HOUSE_DETENTION
 	ld [wMissableObjectIndex], a
-	predef HideObject
+	predef HideExtraObject
 	ld a, HS_VIRIDIAN_SCHOOL_HOUSE_DETENTION2
 	ld [wMissableObjectIndex], a
-	predef ShowObject
+	predef ShowExtraObject
 	ld a, HS_VIRIDIAN_SCHOOL_HOUSE_B1F_DETENTION
 	ld [wMissableObjectIndex], a
-	predef HideObject
+	predef HideExtraObject
 	ld a, HS_VIRIDIAN_SCHOOL_HOUSE_B1F_DETENTION2
 	ld [wMissableObjectIndex], a
-	predef ShowObject
+	predef ShowExtraObject
 	SetEvent EVENT_GUS_IN_DETENTION
 	call UpdateSprites
 	call GBFadeInFromWhite
@@ -424,16 +424,16 @@ SchoolB1FBrunetteGirl:
 	rst _DelayFrames
 	ld a, HS_VIRIDIAN_SCHOOL_HOUSE_DETENTION
 	ld [wMissableObjectIndex], a
-	predef ShowObject
+	predef ShowExtraObject
 	ld a, HS_VIRIDIAN_SCHOOL_HOUSE_DETENTION2
 	ld [wMissableObjectIndex], a
-	predef HideObject
+	predef HideExtraObject
 	ld a, HS_VIRIDIAN_SCHOOL_HOUSE_B1F_DETENTION
 	ld [wMissableObjectIndex], a
-	predef ShowObject
+	predef ShowExtraObject
 	ld a, HS_VIRIDIAN_SCHOOL_HOUSE_B1F_DETENTION2
 	ld [wMissableObjectIndex], a
-	predef HideObject
+	predef HideExtraObject
 	ResetEvent EVENT_GUS_IN_DETENTION
 	call UpdateSprites
 	call GBFadeInFromWhite
