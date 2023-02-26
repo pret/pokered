@@ -79,7 +79,7 @@ Route2TrainerHeader0:
 Route2TrainerHeader1:
 	trainer EVENT_BEAT_ROUTE_2_TRAINER_1, 4, Route2BattleText2, Route2EndBattleText2, Route2AfterBattleText2
 Route2TrainerHeader2:
-	trainer EVENT_BEAT_ROUTE_2_TRAINER_2, 3, Route2BattleText3, Route2EndBattleText3, Route2AfterBattleText3
+	trainer EVENT_BEAT_ROUTE_2_TRAINER_2, 1, Route2BattleText3, Route2EndBattleText3, Route2AfterBattleText3
 	db -1 ; end
 
 Route2BugCatcherText:
