@@ -601,9 +601,7 @@ wSimulatedJoypadStatesIndex:: db
 
 ; PureRGBnote: CHANGED: this variable was previously unused but now it is used
 wTempStore1:: db
-
-; written to but nothing ever reads it
-wWastedByteCD3A:: db
+wTempStore2:: db
 
 ; mask indicating which real button presses can override simulated ones
 ; XXX is it ever not 0?
@@ -612,6 +610,7 @@ wOverrideSimulatedJoypadStatesMask:: db
 	ds 1 ; unused lone byte
 
 ; This union spans 30 bytes.
+; make sure any variable added to this union is written to prior to being read to avoid collisions
 UNION
 wTradedPlayerMonSpecies:: db
 wTradedEnemyMonSpecies:: db
@@ -1549,10 +1548,14 @@ wEndBattleLoseTextPointer:: dw
 	ds 2 ; unused 2 bytes
 wEndBattleTextRomBank:: db
 
-	ds 1 ; unused byte
+UNION
 
+w2CharStringBuffer:: ds 3 ; don't use this buffer during attack animations
+NEXTU
+ds 1
 ; the address _of the address_ of the current subanimation entry
 wSubAnimAddrPtr:: dw
+ENDU
 
 UNION
 ; the address of the current subentry of the current subanimation
@@ -2495,7 +2498,7 @@ ENDU
 
 wTrainerHeaderPtr:: dw
 
-	ds 6  ; unused save file 6 bytes
+	ds 6  ; unused save file 6 bytes (TODO: use for randomized challengers / bill's garden visitors)
 
 ; the trainer the player must face after getting a wrong answer in the Cinnabar
 ; gym quiz

@@ -49,11 +49,21 @@ _ItemUseBallText08::
 	prompt
 
 _NoBoxSlotsLeftText::
-	text "Your BOX is now"
+	text "BOX @"
+	text_ram wBoxNumString
+	text" is now"
 	line "full."
 	para "Time to change"
-	line "boxes!"
-	prompt
+	line "boxes!@"
+	text_end
+
+_BoxSlotsLeftText::
+	text_ram w2CharStringBuffer
+	text " slots left in"
+	line "BOX @"
+	text_ram wBoxNumString
+	text ".@"
+	text_end
 
 _ItemUseBallText06::
 	text "New #DEX data"

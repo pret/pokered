@@ -1,6 +1,10 @@
 TextScriptEndingText::
 	text_end
 
+TextScriptPromptButton::
+	text_promptbutton
+	text_end
+
 ;ExclamationText:: ; unused
 ;	text_far _ExclamationText
 ;	text_end
