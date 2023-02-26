@@ -6,10 +6,10 @@ PrepareTitleScreen::
 	; These debug names are already copied later in PrepareOakSpeech.
 	; Removing the unused copies below has no apparent impact.
 	; CopyDebugName can also be safely deleted afterwards.
-	ld hl, DebugOverworldPlayerName
+	ld hl, DebugNewGamePlayerName
 	ld de, wPlayerName
 	call CopyDebugName
-	ld hl, DebugOverworldRivalName
+	ld hl, DebugNewGameRivalName
 	ld de, wRivalName
 	call CopyDebugName
 	xor a
@@ -407,8 +407,8 @@ IF DEF(_BLUE)
 	db $61,$62,$63,$64,$65,$66,$67,$68,"@" ; "Blue Version"
 ENDC
 
-DebugOverworldPlayerName:
+DebugNewGamePlayerName:
 	db "NINTEN@"
 
-DebugOverworldRivalName:
+DebugNewGameRivalName:
 	db "SONY@"
