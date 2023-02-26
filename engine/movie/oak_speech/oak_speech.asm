@@ -1,4 +1,4 @@
-SetDefaultNames:
+PrepareOakSpeech:
 	ld a, [wLetterPrintingDelayFlags]
 	push af
 	ld a, [wOptions]
@@ -44,11 +44,13 @@ SetDefaultNames:
 	ld a, [wOptionsInitialized]
 	and a
 	call z, InitOptions
-	ld hl, NintenText
+	; These debug names are used for StartNewGameDebug.
+	; TestBattle uses the debug names from DebugMenu.
+	ld hl, DebugNewGamePlayerName
 	ld de, wPlayerName
 	ld bc, NAME_LENGTH
 	rst _CopyData
-	ld hl, SonyText
+	ld hl, DebugNewGameRivalName
 	ld de, wRivalName
 	ld bc, NAME_LENGTH
 	jp CopyData
@@ -62,7 +64,7 @@ OakSpeech:
 	call PlayMusic
 	call ClearScreen
 	call LoadTextBoxTilePatterns
-	call SetDefaultNames
+	call PrepareOakSpeech
 	predef InitPlayerData2
 	call RunDefaultPaletteCommand	; shinpokerednote: gbcnote: reinitialize the default palette in case the pointers got cleared
 	ld hl, wNumBoxItems

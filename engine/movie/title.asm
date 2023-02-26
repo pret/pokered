@@ -1,15 +1,17 @@
-; copy text of fixed length NAME_LENGTH (like player name, rival name, mon names, ...)
-CopyFixedLengthText:
+CopyDebugName:
 	ld bc, NAME_LENGTH
 	jp CopyData
 
-SetDefaultNamesBeforeTitlescreen::
-	ld hl, NintenText
+PrepareTitleScreen::
+	; These debug names are already copied later in PrepareOakSpeech.
+	; Removing the unused copies below has no apparent impact.
+	; CopyDebugName can also be safely deleted afterwards.
+	ld hl, DebugNewGamePlayerName
 	ld de, wPlayerName
-	call CopyFixedLengthText
-	ld hl, SonyText
+	call CopyDebugName
+	ld hl, DebugNewGameRivalName
 	ld de, wRivalName
-	call CopyFixedLengthText
+	call CopyDebugName
 	xor a
 	ldh [hWY], a
 	ld [wLetterPrintingDelayFlags], a
@@ -450,5 +452,8 @@ IF DEF(_GREEN) ; PureRGBnote: GREENBUILD: different title screen subtitle text f
 	db $62,$63,$64,$7F,$65,$66,$67,$68,$69,"@" ; "Green Version"
 ENDC
 
-NintenText: db "NINTEN@"
-SonyText:   db "SONY@"
+DebugNewGamePlayerName:
+	db "NINTEN@"
+
+DebugNewGameRivalName:
+	db "SONY@"
