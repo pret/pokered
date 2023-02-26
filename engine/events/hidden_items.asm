@@ -48,6 +48,8 @@ HiddenItemsInit:
 
 HiddenItemsFinish:
 	ld [wTempStore1], a
+	ld a, "@"
+	ld [wTempStore2], a
 	tx_pre_jump FoundHiddenItemText
 
 INCLUDE "data/events/hidden_item_coords.asm"
@@ -65,7 +67,7 @@ FoundHiddenItemText::
 	jr .give
 .multiItem
 	ld a, c
-	add $f6 ; index of first number character in charmap (assumes a must be 0-9)
+	add NUMBER_CHAR_OFFSET ; index of first number character in charmap (assumes a must be 0-9)
 	ld [wTempStore1], a ; this store now stores the numeric text character to display in the text
 	ld hl, FoundHiddenItemMultiText
 	push bc
