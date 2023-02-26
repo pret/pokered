@@ -1074,24 +1074,6 @@ PokedexDataDividerLine:
 	db $6B, $6B, $69, $6B, $69, $6B, $69, $6B, $69, $6A
 	db "@"
 
-; draws a line of tiles
-; INPUT:
-; b = tile ID
-; c = number of tile ID's to write
-; de = amount to destination address after each tile (1 for horizontal, 20 for vertical)
-; hl = destination address
-DrawTileLine:
-	push bc
-	push de
-.loop
-	ld [hl], b
-	add hl, de
-	dec c
-	jr nz, .loop
-	pop de
-	pop bc
-	ret
-
 INCLUDE "data/pokemon/dex_entries.asm"
 
 PokedexToIndex:
@@ -1132,10 +1114,6 @@ IndexToPokedex:
 	ret
 
 INCLUDE "data/pokemon/dex_order.asm"
-
-PromptText:
-	text_promptbutton
-	text_end
 
 DexType1Text:
 	db "TYPE1/@"

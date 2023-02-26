@@ -346,16 +346,40 @@ BoxSRAMPointerTable:
 	dw sBox6 ; sBox12
 
 ChangeBox::
+	CheckEvent EVENT_HIDE_CHANGE_BOX_SAVE_MSG
+	jr nz, .savePromptSkip
+	
 	ld hl, WhenYouChangeBoxText
 	rst _PrintText
-	call YesNoChoice
+
+	ld hl, YesNoSkip
+	ld a, l
+	ld [wListPointer], a
+	ld a, h
+	ld [wListPointer + 1], a
+	xor a
+	ld [wCurrentMenuItem], a
+	ld a, A_BUTTON | B_BUTTON
+	ld [wMenuWatchedKeys], a
+	callfar DisplayMultiChoiceMenu
+	ldh a, [hJoy5]
+	bit BIT_B_BUTTON, a
+	ret nz
 	ld a, [wCurrentMenuItem]
 	and a
-	ret nz ; return if No was chosen
+	jr z, .yes ; jump if yes was chosen
+	cp 1
+	ret z ; return if no was chosen
+
+	SetEvent EVENT_HIDE_CHANGE_BOX_SAVE_MSG ; set this flag if SKIP was chosen
+	ld hl, SkippedForeverText
+	rst _PrintText
+.yes
+.savePromptSkip
 	ld hl, wCurrentBoxNum
 	bit 7, [hl] ; is it the first time player is changing the box?
 	call z, EmptyAllSRAMBoxes ; if so, empty all boxes in SRAM
-	call DisplayChangeBoxMenu
+	callfar DisplayChangeBoxMenu
 	call UpdateSprites
 	ld hl, hUILayoutFlags
 	set 1, [hl]
@@ -395,6 +419,10 @@ WhenYouChangeBoxText:
 	text_far _WhenYouChangeBoxText
 	text_end
 
+SkippedForeverText:
+	text_far _SkippedForever
+	text_end
+
 CopyBoxToOrFromSRAM:
 ; copy an entire box from hl to de with b as the SRAM bank
 	push hl
@@ -423,98 +451,6 @@ CopyBoxToOrFromSRAM:
 	ld [MBC1SRamBankingMode], a
 	ld [MBC1SRamEnable], a
 	ret
-
-DisplayChangeBoxMenu:
-	xor a
-	ldh [hAutoBGTransferEnabled], a
-	ld a, A_BUTTON | B_BUTTON
-	ld [wMenuWatchedKeys], a
-	ld a, 11
-	ld [wMaxMenuItem], a
-	ld a, 1
-	ld [wTopMenuItemY], a
-	ld a, 12
-	ld [wTopMenuItemX], a
-	xor a
-	ld [wMenuWatchMovingOutOfBounds], a
-	ld a, [wCurrentBoxNum]
-	and $7f
-	ld [wCurrentMenuItem], a
-	ld [wLastMenuItem], a
-	hlcoord 0, 0
-	ld b, 2
-	ld c, 9
-	call TextBoxBorder
-	ld hl, ChooseABoxText
-	rst _PrintText
-	hlcoord 11, 0
-	ld b, 12
-	ld c, 7
-	call TextBoxBorder
-	ld hl, hUILayoutFlags
-	set 2, [hl]
-	ld de, BoxNames
-	hlcoord 13, 1
-	call PlaceString
-	ld hl, hUILayoutFlags
-	res 2, [hl]
-	ld a, [wCurrentBoxNum]
-	and $7f
-	cp 9
-	jr c, .singleDigitBoxNum
-	sub 9
-	hlcoord 8, 2
-	ld [hl], "1"
-	add "0"
-	jr .next
-.singleDigitBoxNum
-	add "1"
-.next
-	ldcoord_a 9, 2
-	hlcoord 1, 2
-	ld de, BoxNoText
-	call PlaceString
-	call GetMonCountsForAllBoxes
-	hlcoord 18, 1
-	ld de, wBoxMonCounts
-	ld bc, SCREEN_WIDTH
-	ld a, $c
-.loop
-	push af
-	ld a, [de]
-	and a ; is the box empty?
-	jr z, .skipPlacingPokeball
-	ld [hl], $78 ; place pokeball tile next to box name if box not empty
-.skipPlacingPokeball
-	add hl, bc
-	inc de
-	pop af
-	dec a
-	jr nz, .loop
-	ld a, 1
-	ldh [hAutoBGTransferEnabled], a
-	ret
-
-ChooseABoxText:
-	text_far _ChooseABoxText
-	text_end
-
-BoxNames:
-	db   "BOX 1"
-	next "BOX 2"
-	next "BOX 3"
-	next "BOX 4"
-	next "BOX 5"
-	next "BOX 6"
-	next "BOX 7"
-	next "BOX 8"
-	next "BOX 9"
-	next "BOX10"
-	next "BOX11"
-	next "BOX12@"
-
-BoxNoText:
-	db "BOX No.@"
 
 EmptyAllSRAMBoxes:
 ; marks all boxes in SRAM as empty (initialisation for the first time the

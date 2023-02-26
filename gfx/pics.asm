@@ -624,3 +624,7 @@ MapAreasUI::	INCBIN "gfx/town_map/area_type_ui.2bpp"
 MapAreasUIEnd::
 
 FishingWaterIcons:: INCBIN "gfx/town_map/mon_fishing_water_icons.2bpp"
+
+ExtraMenuBorderConnectors:: INCBIN "gfx/font/extra_menu_border_connectors.2bpp"
+
+FromToChangeBoxPrompt:: INCBIN "gfx/font/from_to_change_box_prompt.2bpp"

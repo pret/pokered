@@ -27,9 +27,19 @@ _WhenYouChangeBoxText::
 	para "Is that okay?"
 	done
 
+_SkippedForever::
+	text "This question"
+	line "won't show again."
+	prompt
+
 _ChooseABoxText::
 	text "Choose a"
 	line "<PKMN> BOX.@"
+	text_end
+
+_ChooseABoxDataWillSaveText::
+	text "Choose a <PKMN> BOX."
+	line "Game will save.@"
 	text_end
 
 _EvolvedText::

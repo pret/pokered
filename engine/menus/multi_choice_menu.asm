@@ -84,6 +84,24 @@ ThreeOptionMenu::
 	hlcoord 6, 6 ; where the list will be drawn at
 	jp DoneDrawFunc
 
+ThreeOptionMenuSmall::
+	ld a, 2 ; 4-item menu (0 counts)
+	ld [wListCount], a
+	ld [wMaxMenuItem], a
+
+	ld a, 6
+	ld [wTopMenuItemY], a
+	ld a, 12
+	ld [wTopMenuItemX], a
+
+	hlcoord 11, 5
+	ld b, 5 ; height
+	ld c, 7 ; width
+	call TextBoxBorder
+
+	hlcoord 13, 6 ; where the list will be drawn at
+	jp DoneDrawFunc
+
 FourOptionMenu::
 	ld a, 3 ; 4-item menu (0 counts)
 	ld [wListCount], a
@@ -182,3 +200,8 @@ StatTextList::
 	next "SPEED"
 	next "SPECIAL@"
 	
+YesNoSkip::
+	dw ThreeOptionMenuSmall
+	db "YES"
+	next "NO"
+	next "SKIP@"

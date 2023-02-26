@@ -1,3 +1,32 @@
+; draws a line of tiles
+; INPUT:
+; b = tile ID
+; c = number of tile ID's to write
+; de = amount to destination address after each tile (1 for horizontal, 20 for vertical)
+; hl = destination address
+
+DrawTileLine::
+	push bc
+	ld a, b
+	ld b, 0 ; tile number stays the same during the loop
+TileLineLoop:
+	push de
+.loop
+	ld [hl], a
+	add hl, de
+	add a, b
+	dec c
+	jr nz, .loop
+	pop de
+	pop bc
+	ret
+
+DrawTileLineIncrement::
+	push bc
+	ld a, b
+	ld b, 1
+	jr TileLineLoop
+
 FillMemory::
 ; Fill bc bytes at hl with a.
 	push de

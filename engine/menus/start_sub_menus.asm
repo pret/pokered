@@ -919,12 +919,10 @@ StartMenu_SelectPressed::
 	ld c, a
 	push bc ; save the current maptextptr for later because that property can be modified by changing boxes
 	call SaveScreenTilesToBuffer2 ; copy background from wTileMap to wTileMapBackup2
-	ld hl, vChars2 tile $78
-	ld de, PokeballTileGraphics
-	lb bc, BANK(PokeballTileGraphics), 1
-	call CopyVideoData
+	callfar LoadBillsPCExtraTiles
 	farcall ChangeBox
 	call LoadScreenTilesFromBuffer2 ; restore saved screen
+	call Delay3 ; allow the old screen to load before putting back the textbox tile patterns
 	call LoadTextBoxTilePatterns
 	call UpdateSprites
 	pop bc ; recover the original maptextptr in case we changed the value by changing boxes
