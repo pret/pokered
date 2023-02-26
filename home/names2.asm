@@ -87,9 +87,9 @@ GetName::
 	ld bc, NAME_BUFFER_LENGTH
 	rst _CopyData
 .gotPtr
-	ld a, e
+	;ld a, e
 	;ld [wUnusedCF8D], a
-	ld a, d
+	;ld a, d
 	;ld [wUnusedCF8D + 1], a
 	pop de
 	pop bc
