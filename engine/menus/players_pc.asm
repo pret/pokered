@@ -49,6 +49,8 @@ PlayerPCMenu:
 	ld [hli], a ; wListScrollOffset
 	ld [hl], a ; wMenuWatchMovingOutOfBounds
 	ld [wPlayerMonNumber], a
+	ld hl, wd730
+	set 6, [hl]
 	ld hl, WhatDoYouWantText
 	rst _PrintText
 	call HandleMenuInput
@@ -86,18 +88,22 @@ ExitPlayerPC:
 	ret
 
 PlayerPCDeposit:
-	ld a, 1
-	ld [wListWithTMText], a ; PureRGBnote: ADDED: this list menu can have TMs so turn on that flag so it checks each item scrolled over
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wListScrollOffset], a
+	inc a
+	ld [wListWithTMText], a ; PureRGBnote: ADDED: this list menu can have TMs so turn on that flag so it checks each item scrolled over
 	ld a, [wNumBagItems]
 	and a
 	jr nz, .loop
+	ld hl, wd730
+	res 6, [hl]
 	ld hl, NothingToDepositText
 	rst _PrintText
 	jp PlayerPCMenu
 .loop
+	ld hl, wd730
+	set 6, [hl]
 	ld hl, WhatToDepositText
 	rst _PrintText
 	ld hl, wNumBagItems
@@ -142,18 +148,22 @@ PlayerPCDeposit:
 	jp .loop
 
 PlayerPCWithdraw:
-	ld a, 1
-	ld [wListWithTMText], a ; PureRGBnote: ADDED: this list menu can have TMs so turn on that flag so it checks each item scrolled over
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wListScrollOffset], a
+	inc a
+	ld [wListWithTMText], a ; PureRGBnote: ADDED: this list menu can have TMs so turn on that flag so it checks each item scrolled over
 	ld a, [wNumBoxItems]
 	and a
 	jr nz, .loop
+	ld hl, wd730
+	res 6, [hl]
 	ld hl, NothingStoredText
 	rst _PrintText
 	jp PlayerPCMenu
 .loop
+	ld hl, wd730
+	set 6, [hl]
 	ld hl, WhatToWithdrawText
 	rst _PrintText
 	ld hl, wNumBoxItems
@@ -201,13 +211,19 @@ PlayerPCToss:
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wListScrollOffset], a
+	inc a
+	ld [wListWithTMText], a ; PureRGBnote: ADDED: this list menu can have TMs so turn on that flag so it checks each item scrolled over
 	ld a, [wNumBoxItems]
 	and a
 	jr nz, .loop
+	ld hl, wd730
+	res 6, [hl]
 	ld hl, NothingStoredText
 	rst _PrintText
 	jp PlayerPCMenu
 .loop
+	ld hl, wd730
+	set 6, [hl]
 	ld hl, WhatToTossText
 	rst _PrintText
 	ld hl, wNumBoxItems
