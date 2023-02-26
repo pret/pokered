@@ -347,7 +347,11 @@ BoxSRAMPointerTable:
 
 ChangeBox::
 	CheckEvent EVENT_HIDE_CHANGE_BOX_SAVE_MSG
+	ld a, [wd730]
+	push af
 	jr nz, .savePromptSkip
+	res 6, a ; turn on letter printing delay so we don't get instant text
+	ld [wd730], a 
 	
 	ld hl, WhenYouChangeBoxText
 	rst _PrintText
@@ -364,18 +368,20 @@ ChangeBox::
 	callfar DisplayMultiChoiceMenu
 	ldh a, [hJoy5]
 	bit BIT_B_BUTTON, a
-	ret nz
+	jr nz, .done
 	ld a, [wCurrentMenuItem]
 	and a
 	jr z, .yes ; jump if yes was chosen
 	cp 1
-	ret z ; return if no was chosen
+	jr z, .done ; return if no was chosen
 
 	SetEvent EVENT_HIDE_CHANGE_BOX_SAVE_MSG ; set this flag if SKIP was chosen
 	ld hl, SkippedForeverText
 	rst _PrintText
-.yes
 .savePromptSkip
+.yes
+	set 6, a ; turn off letter printing delay so we get instant text
+	ld [wd730], a
 	ld hl, wCurrentBoxNum
 	bit 7, [hl] ; is it the first time player is changing the box?
 	call z, EmptyAllSRAMBoxes ; if so, empty all boxes in SRAM
@@ -387,7 +393,7 @@ ChangeBox::
 	ld hl, hUILayoutFlags
 	res 1, [hl]
 	bit BIT_B_BUTTON, a
-	ret nz
+	jr nz, .done
 	call GetBoxSRAMLocation
 	ld e, l
 	ld d, h
@@ -413,6 +419,9 @@ ChangeBox::
 	ld a, SFX_SAVE
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
+.done
+	pop af
+	ld [wd730], a
 	ret
 
 WhenYouChangeBoxText:

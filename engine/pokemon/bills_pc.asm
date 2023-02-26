@@ -186,6 +186,8 @@ BillsPCDeposit:
 	ld a, [wPartyCount]
 	dec a
 	jr nz, .partyLargeEnough
+	ld hl, wd730
+	res 6, [hl] ; turn on letter printing delay so we don't get instant text
 	ld hl, CantDepositLastMonText
 	rst _PrintText
 	jp BillsPCMenu
@@ -193,6 +195,8 @@ BillsPCDeposit:
 	ld a, [wBoxCount]
 	cp MONS_PER_BOX
 	jr nz, .boxNotFull
+	ld hl, wd730
+	res 6, [hl] ; turn on letter printing delay so we don't get instant text
 	ld hl, BoxFullText
 	rst _PrintText
 	jp BillsPCMenu
@@ -235,6 +239,8 @@ BillsPCWithdraw:
 	ld a, [wBoxCount]
 	and a
 	jr nz, .boxNotEmpty
+	ld hl, wd730
+	res 6, [hl] ; turn on letter printing delay so we don't get instant text
 	ld hl, NoMonText
 	rst _PrintText
 	jp BillsPCMenu
@@ -242,6 +248,8 @@ BillsPCWithdraw:
 	ld a, [wPartyCount]
 	cp PARTY_LENGTH
 	jr nz, .partyNotFull
+	ld hl, wd730
+	res 6, [hl] ; turn on letter printing delay so we don't get instant text
 	ld hl, CantTakeMonText
 	rst _PrintText
 	jp BillsPCMenu
@@ -272,19 +280,52 @@ BillsPCRelease:
 	ld a, [wBoxCount]
 	and a
 	jr nz, .loop
+	ld hl, wd730
+	res 6, [hl] ; turn on letter printing delay so we don't get instant text
 	ld hl, NoMonText
 	rst _PrintText
 	jp BillsPCMenu
 .loop
+	ld hl, wd730
+	set 6, [hl] ; turn off letter printing delay so we get instant text
+	ld hl, ReleaseWhichMonText
+	rst _PrintText
 	ld hl, wBoxCount
 	call DisplayMonListMenu
 	jp c, BillsPCMenu
+	ld hl, wd730
+	res 6, [hl] ; turn on letter printing delay so we don't get instant text
 	ld hl, OnceReleasedText
 	rst _PrintText
-	call YesNoChoice
+	xor a
+	ld [wCurrentMenuItem], a
+	ld a, A_BUTTON | B_BUTTON
+	ld [wMenuWatchedKeys], a
+.loopYesNo
+	ld hl, YesNoSmall
+	ld a, l
+	ld [wListPointer], a
+	ld a, h
+	ld [wListPointer + 1], a
+	callfar DisplayMultiChoiceMenu
+	ldh a, [hJoy5]
+	bit BIT_B_BUTTON, a
+	jr nz, .loop
+	bit BIT_START, a
 	ld a, [wCurrentMenuItem]
+	jr nz, .continue
 	and a
 	jr nz, .loop
+	; a button was pressed, tell the player to press START
+	ld hl, PressStartToReleaseText
+	rst _PrintText
+	ld a, [wMenuWatchedKeys]
+	or START
+	ld [wMenuWatchedKeys], a
+	jr .loopYesNo
+.continue
+	and a
+	jr nz, .loopYesNo
 	inc a
 	ld [wRemoveMonFromBox], a
 	call RemovePokemon
@@ -323,22 +364,23 @@ BillsPCMenuText:
 	next "CHANGE BOX"
 	next "SEE YA!"
 	db "@"
-
-KnowsHMMove::
+	
+; PureRGBnote: FIXED: pokemon are never considered to have HMs, allows them to be stored in daycare no matter what
+;KnowsHMMove::
 ; returns whether mon with party index [wWhichPokemon] knows an HM move
-	ld hl, wPartyMon1Moves
-	ld bc, wPartyMon2 - wPartyMon1
-	jr .next
+;	ld hl, wPartyMon1Moves
+;	ld bc, wPartyMon2 - wPartyMon1
+;	jr .next
 ; unreachable
 	;ld hl, wBoxMon1Moves
 	;ld bc, wBoxMon2 - wBoxMon1
-.next
-	ld a, [wWhichPokemon]
-	call AddNTimes
-	ld b, NUM_MOVES
-.loop
-	ld a, [hli]
-	;push hl ; PureRGBnote: FIXED: pokemon are never considered to have HMs, allows them to be stored in daycare no matter what
+;.next
+;	ld a, [wWhichPokemon]
+;	call AddNTimes
+;	ld b, NUM_MOVES
+;.loop
+;	ld a, [hli]
+	;push hl 
 	;push bc
 	;ld hl, HMMoveArray
 	;ld de, 1
@@ -346,10 +388,10 @@ KnowsHMMove::
 	;pop bc
 	;pop hl
 	;ret c
-	dec b
-	jr nz, .loop
-	and a
-	ret
+;	dec b
+;	jr nz, .loop
+;	and a
+;	ret
 
 ;HMMoveArray:
 ;INCLUDE "data/moves/hm_moves.asm"
@@ -472,6 +514,10 @@ OnceReleasedText:
 
 MonWasReleasedText:
 	text_far _MonWasReleasedText
+	text_end
+
+PressStartToReleaseText:
+	text_far _PressStartToReleaseText
 	text_end
 
 CableClubLeftGameboy::

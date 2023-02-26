@@ -10,8 +10,10 @@ DisplayMultiChoiceMenu::
 	ldh [hAutoBGTransferEnabled], a ; disable auto-transfer
 	ld a, 1
 	ldh [hJoy7], a ; joypad state update flag
-	ld hl, wd730
-	set 6, [hl] ; turn off letter printing delay
+	ld a, [wd730]
+	push af
+	set 6, a ; turn off letter printing delay
+	ld [wd730], a
 	ld a, [wListPointer]
 	ld l, a
 	ld a, [wListPointer + 1]
@@ -42,8 +44,8 @@ DoneDrawFunc:
 	call HandleMenuInput
 	xor a
 	ldh [hJoy7], a ; joypad state update flag
-	ld hl, wd730
-	res 6, [hl] ; turn on letter printing delay
+	pop af
+	ld [wd730], a ; reset letter printing delay to what it was before calling this function
 	ret
 
 ; multi-option menus can have 2-6 options, visually set up by the below functions
@@ -64,6 +66,24 @@ TwoOptionMenu::
 	call TextBoxBorder
 
 	hlcoord 6, 8 ; where the list will be drawn at
+	jp DoneDrawFunc
+
+TwoOptionSmallMenu::
+	ld a, 1 ; 2-item menu (0 counts)
+	ld [wListCount], a
+	ld [wMaxMenuItem], a
+
+	ld a, 8
+	ld [wTopMenuItemY], a
+	ld a, 14
+	ld [wTopMenuItemX], a
+
+	hlcoord 13, 7
+	ld b, 3  ; height
+	ld c, 5 ; width
+	call TextBoxBorder
+
+	hlcoord 15, 8 ; where the list will be drawn at
 	jp DoneDrawFunc
 
 ThreeOptionMenu::
@@ -205,3 +225,8 @@ YesNoSkip::
 	db "YES"
 	next "NO"
 	next "SKIP@"
+
+YesNoSmall::
+	dw TwoOptionSmallMenu
+	db "YES"
+	next "NO@"

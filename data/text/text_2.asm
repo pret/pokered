@@ -1654,7 +1654,7 @@ _OnceReleasedText::
 	text_ram wStringBuffer
 	text " is"
 	cont "gone forever. OK?"
-	done
+	prompt
 
 _MonWasReleasedText::
 	text_ram wStringBuffer
@@ -1664,6 +1664,11 @@ _MonWasReleasedText::
 	text_ram wStringBuffer
 	text "!"
 	prompt
+
+_PressStartToReleaseText::
+	text "Press START to"
+	line "confirm release.@"
+	text_end
 
 _RequireCoinCaseText::
 	text "A COIN CASE is"
