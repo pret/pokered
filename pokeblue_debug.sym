@@ -1160,8 +1160,8 @@
 01:429f PrintSafariZoneBattleText.done
 01:42a7 SafariZoneEatingText
 01:42ac SafariZoneAngryText
-01:42b1 CopyFixedLengthText
-01:42b7 SetDefaultNamesBeforeTitlescreen
+01:42b1 CopyDebugName
+01:42b7 PrepareTitleScreen
 01:42dd DisplayTitleScreen
 01:434d DisplayTitleScreen.pokemonLogoTileLoop
 01:4350 DisplayTitleScreen.pokemonLogoTileRowLoop
@@ -1196,8 +1196,8 @@
 01:458e TitleMons
 01:459e PrintGameVersionOnTitleScreen
 01:45a7 VersionOnTitleScreenText
-01:45b0 NintenText
-01:45b7 SonyText
+01:45b0 DebugNewGamePlayerName
+01:45b7 DebugNewGameRivalName
 01:45bc LoadMonData_
 01:45d5 LoadMonData_.GetMonHeader
 01:45ff LoadMonData_.getMonEntry
@@ -1252,8 +1252,8 @@
 01:4d8a SetSpriteCollisionValues.done
 01:4d8b SpriteCollisionBitTable
 01:4dab DebugMenu
-01:4e21 DebugPlayerName
-01:4e25 DebugRivalName
+01:4e21 DebugBattlePlayerName
+01:4e25 DebugBattleRivalName
 01:4e2c DebugMenuOptions
 01:4e38 TestBattle
 01:4e38 TestBattle.loop
@@ -1488,7 +1488,7 @@
 01:6130 CheckForPlayerNameInSRAM
 01:6142 CheckForPlayerNameInSRAM.loop
 01:6153 CheckForPlayerNameInSRAM.found
-01:615c SetDefaultNames
+01:615c PrepareOakSpeech
 01:61a7 OakSpeech
 01:624e OakSpeech.skipChoosingNames
 01:626c OakSpeech.next
