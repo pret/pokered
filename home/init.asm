@@ -116,7 +116,7 @@ DEF rLCDC_DEFAULT EQU %11100011
 	ld a, rLCDC_DEFAULT
 	ldh [rLCDC], a
 
-	jp SetDefaultNamesBeforeTitlescreen
+	jp PrepareTitleScreen
 
 ClearVram::
 	ld hl, VRAM_Begin
