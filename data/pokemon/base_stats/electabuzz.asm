@@ -53,4 +53,4 @@
 
 	dw BANK(ElectabuzzPicFront), BANK(ElectabuzzPicBack)
 
-	dw 1, ElectabuzzPicBack
+	dw ElectabuzzPicFrontAlt, ElectabuzzPicBack

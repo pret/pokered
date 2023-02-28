@@ -71,10 +71,14 @@ TextScriptEnd::
 	pop hl ; turn the rst call into a jp by popping off the return address
 	ld hl, TextScriptEndingText
 	ret
+
 ; PureRGBnote: MOVED: 3 extra bytes of space left here, may as well move something here that puts the space to some use
-TMCharText:: db "TM@"
+TextScriptEndingText::
+	text_end
 
-
+TextScriptPromptButton::
+	text_promptbutton
+	text_end
 
 ; Game Boy hardware interrupts
 
@@ -89,7 +93,10 @@ ContCharText::
 SECTION "lcd", ROM0[$0048]
 ; this interrupt is disabled on init, so this is a free 8 bytes to use unless we turn it on
 ; PureRGBnote: MOVED: 8 extra bytes of space left here, may as well move something here that puts the space to some use	
-TrainerCharText:: db "TRAINER@"
+BoulderText::
+	text_asm
+	callfar CheckStrengthUsage
+	rst TextScriptEnd
 
 SECTION "timer", ROM0[$0050]
 	jp Timer

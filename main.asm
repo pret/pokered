@@ -160,23 +160,12 @@ INCLUDE "gfx/trainer_card.asm"
 INCLUDE "engine/items/tmhm.asm"
 INCLUDE "engine/battle/scale_sprites.asm"
 INCLUDE "engine/battle/move_effects/pay_day.asm"
-INCLUDE "engine/slots/game_corner_slots2.asm"
 
 
 SECTION "Battle Engine 6", ROMX
 
 INCLUDE "engine/battle/move_effects/mist.asm"
 INCLUDE "engine/battle/move_effects/one_hit_ko.asm"
-
-
-SECTION "Slot Machines", ROMX
-
-INCLUDE "engine/movie/title2.asm"
-INCLUDE "engine/battle/link_battle_versus_text.asm"
-INCLUDE "engine/slots/slot_machine.asm"
-INCLUDE "engine/events/pewter_guys.asm"
-INCLUDE "engine/math/multiply_divide.asm"
-INCLUDE "engine/slots/game_corner_slots.asm"
 
 
 SECTION "Battle Engine 7", ROMX
@@ -192,6 +181,22 @@ INCLUDE "engine/battle/trainers2.asm" ; PureRGBnote: MOVED: moved from home bank
 INCLUDE "engine/battle/move_effects/check_defrost_move.asm" ; PureRGBnote: ADDED: new code for bugfix
 INCLUDE "engine/battle/move_effects/haze.asm" ; PureRGBnote: MOVED: moved from battle engine 1
 INCLUDE "engine/battle/decrement_pp.asm" ; PureRGBnote: MOVED: moved from battle engine 11
+INCLUDE "engine/battle/link_battle_versus_text.asm"
+
+
+SECTION "Slot Machines", ROMX
+
+INCLUDE "engine/movie/title2.asm"
+INCLUDE "engine/slots/slot_machine.asm"
+INCLUDE "engine/events/pewter_guys.asm"
+INCLUDE "engine/math/multiply_divide.asm"
+INCLUDE "engine/slots/game_corner_slots.asm"
+
+SECTION "Predefs", ROMX
+
+INCLUDE "engine/events/give_pokemon.asm"
+INCLUDE "engine/predefs.asm"
+
 
 SECTION "Battle Core", ROMX
 
@@ -223,13 +228,6 @@ INCLUDE "engine/overworld/hidden_objects.asm"
 SECTION "Screen Effects", ROMX
 
 INCLUDE "engine/gfx/screen_effects.asm"
-
-
-SECTION "Predefs", ROMX
-
-INCLUDE "engine/events/give_pokemon.asm"
-INCLUDE "engine/predefs.asm"
-
 
 SECTION "Battle Engine 8", ROMX
 
@@ -394,14 +392,15 @@ INCLUDE "engine/gfx/scroll_gfx_horizontally.asm"
 
 SECTION "newCode", ROMX
 ; PureRGBnote: ADDED: new code
-INCLUDE "engine/gfx/front_sprite_options.asm"
+INCLUDE "engine/gfx/front_sprite_toggler.asm"
 INCLUDE "engine/menus/options_menu.asm" ; PureRGBnote: MOVED: used to be part of main_menu.asm but moved out of there for space.
 INCLUDE "engine/menus/options_menu2.asm"
 INCLUDE "engine/menus/battle_options.asm"
 INCLUDE "engine/menus/sprite_options_menu.asm"
-INCLUDE "engine/menus/sprite_options_menu2.asm"
-INCLUDE "engine/menus/sprite_options_menu3.asm"
-INCLUDE "engine/menus/sprite_options_menu4.asm"
+INCLUDE "engine/menus/front_sprite_options.asm"
+INCLUDE "engine/menus/front_sprite_options2.asm"
+INCLUDE "engine/menus/front_sprite_options3.asm"
+INCLUDE "engine/menus/front_sprite_options4.asm"
 INCLUDE "engine/gfx/mon_icons2.asm"
 INCLUDE "engine/overworld/select_button_functionality.asm"
 INCLUDE "engine/overworld/use_another_repel.asm"

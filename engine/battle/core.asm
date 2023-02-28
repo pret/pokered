@@ -5494,8 +5494,8 @@ RemapTypeMatchupBasedOnOptions:
 	ld c, a
 	ld a, [wMoveType]
 	ld b, a
-	ld a, [wSpriteOptions2]
-	and %11110000 ; only care about the last 4 bits
+	ld a, [wOptions3]
+	and %1111 ; only care about the first 4 bits
 	jr z, .done ; if none are set we don't need to do any remapping
 	ld a, GHOST
 	cp b
@@ -5511,22 +5511,22 @@ RemapTypeMatchupBasedOnOptions:
 	jr z, .iceOption
 	jr .done
 .ghostOption
-	ld a, [wSpriteOptions2]
+	ld a, [wOptions3]
 	bit BIT_GHOST_PSYCHIC, a
 	jr nz, .ghostCheck
 	jr .done
 .iceOption
-	ld a, [wSpriteOptions2]
+	ld a, [wOptions3]
 	bit BIT_ICE_FIRE, a
 	jr nz, .iceCheck
 	jr .done
 .bugOption
-	ld a, [wSpriteOptions2]
+	ld a, [wOptions3]
 	bit BIT_BUG_PSN, a
 	jr nz, .bugCheck
 	jr .done
 .poisonOption
-	ld a, [wSpriteOptions2]
+	ld a, [wOptions3]
 	bit BIT_PSN_BUG, a
 	jr nz, .poisonCheck
 	jr .done

@@ -17,10 +17,10 @@ DEF TEXT_DELAY_BITS    EQU %11 ; which bits in wOptions are assigned to text spe
 ;;;;;;;;;;
 
 	const_def 2
-	const BIT_UNUSED_OPTIONS_BIT2 ; 2
-	const BIT_UNUSED_OPTIONS_BIT3 ; 3
-	const BIT_UNUSED_OPTIONS_BIT4 ; 4
-	const BIT_UNUSED_OPTIONS_BIT5 ; 5
+	; unused bit 2
+	; unused bit 3
+	; unused bit 4
+	; unused bit 5
 	const BIT_BATTLE_SHIFT     ; 6
 	const BIT_BATTLE_ANIMATION ; 7
 
@@ -40,18 +40,18 @@ DEF PALETTES_YELLOW     EQU %11 ; 3
 	const BIT_BIKE_MUSIC        ; 4
 	const BIT_EXP_BAR           ; 5
 	const BIT_NPC_STAT_EXP		; 6
-	const BIT_UNUSED_OPTIONS2_BIT7 ; 7
+	; unused bit 7
 
-; wSpriteOptions2
-	const_def  
-	const BIT_BACK_SPRITES     ; 0
-	const BIT_NIDORINO_SPRITE  ; 1
-	const BIT_EXEGGUTOR_SPRITE ; 2
-	const BIT_MENU_ICON_SPRITES ; 3
-	const BIT_GHOST_PSYCHIC    ; 4
-	const BIT_ICE_FIRE         ; 5
-	const BIT_BUG_PSN          ; 6
-	const BIT_PSN_BUG          ; 7
+; wOptions3
+	const_def
+	const BIT_GHOST_PSYCHIC    ; 0
+	const BIT_ICE_FIRE         ; 1
+	const BIT_BUG_PSN          ; 2
+	const BIT_PSN_BUG          ; 3
+	; unused bit 4
+	; unused bit 5
+	; unused bit 6
+	; unused bit 7
 
 ; wSpriteOptions
 	const_def
@@ -64,6 +64,17 @@ DEF PALETTES_YELLOW     EQU %11 ; 3
 	const BIT_ARCANINE_SPRITE  ; 6
 	const BIT_MEWTWO_SPRITE    ; 7
 
+; wSpriteOptions2
+	const_def  
+	const BIT_BACK_SPRITES     ; 0
+	const BIT_NIDORINO_SPRITE  ; 1
+	const BIT_EXEGGUTOR_SPRITE ; 2
+	const BIT_MENU_ICON_SPRITES ; 3
+	const BIT_ELECTABUZZ_SPRITE ; 4
+	const BIT_RATICATE_SPRITE   ; 5
+	; unused bit 6
+	; unused bit 7
+
 ; wSpriteOptions3
 	const_def
 	const BIT_PIDGEOTTO_SPRITE  ; 0
@@ -71,7 +82,9 @@ DEF PALETTES_YELLOW     EQU %11 ; 3
 	const BIT_GENGAR_SPRITE     ; 2
 	const BIT_ONIX_SPRITE       ; 3
 	const BIT_VOLTORB_SPRITE    ; 4
-	const BIT_STARMIE_SPRITE    ; 5
+	const BIT_KOFFING_SPRITE    ; 5
+	const BIT_ABRA_SPRITE       ; 6
+	const BIT_EXEGGCUTE_SPRITE  ; 7
 
 ; wSpriteOptions4
 	const_def
@@ -81,6 +94,8 @@ DEF PALETTES_YELLOW     EQU %11 ; 3
 	const BIT_MACHOP_SPRITE     ; 3
 	const BIT_PINSIR_SPRITE     ; 4
 	const BIT_ZAPDOS_SPRITE     ; 5
+	const BIT_CLOYSTER_SPRITE   ; 6
+	const BIT_STARMIE_SPRITE    ; 7
 
 ;;;;;;;;;;
 

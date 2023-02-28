@@ -1,9 +1,3 @@
-TextScriptEndingText::
-	text_end
-
-TextScriptPromptButton::
-	text_promptbutton
-	text_end
 
 ;ExclamationText:: ; unused
 ;	text_far _ExclamationText
@@ -12,11 +6,6 @@ TextScriptPromptButton::
 ;GroundRoseText:: ; unused
 ;	text_far _GroundRoseText
 ;	text_end
-
-BoulderText::
-	text_asm
-	callfar CheckStrengthUsage
-	rst TextScriptEnd
 
 PickUpItemText::
 	text_asm

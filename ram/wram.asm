@@ -791,58 +791,18 @@ wTrainerInfoTextBoxNextRowOffset:: db
 
 NEXTU
 ; PureRGBnote: ADDED: many options cursor trackers for new menu pages.
+wOptionsPageOptionCount:: db ; how many options are on the current options page
+wCurrentOptionIndex:: db ; which option the player is currently on (starts at 0)
 ; options page 1
-wOptionsTextSpeedCursorX:: db
-wOptionsBattleAnimCursorX:: db
-wOptionsBattleStyleCursorX:: db
-ds 3
+wOptions1CursorX:: db
+wOptions2CursorX:: db
+wOptions3CursorX:: db
+wOptions4CursorX:: db
+wOptions5CursorX:: db
+wOptions6CursorX:: db
+wOptions7CursorX:: db
 wOptionsCancelCursorX:: db
-NEXTU
-; options page 2
-wOptionsPage2Option1CursorX:: db
-wOptionsPage2Option2CursorX:: db
-wOptionsPage2Option3CursorX:: db
-wOptionsPage2Option4CursorX:: db
-NEXTU
-; options page 3
-wOptionsPage3Option1CursorX:: db
-wOptionsPage3Option2CursorX:: db
-wOptionsPage3Option3CursorX:: db
-wOptionsPage3Option4CursorX:: db
-wOptionsPage3Option5CursorX:: db
-wOptionsPage3Option6CursorX:: db
-NEXTU
-; options page 4
-wOptionsPage4Option1CursorX:: db
-wOptionsPage4Option2CursorX:: db
-wOptionsPage4Option3CursorX:: db
-wOptionsPage4Option4CursorX:: db
-wOptionsPage4Option5CursorX:: db
-wOptionsPage4Option6CursorX:: db
-NEXTU
-; options page 5
-wOptionsNidorinoSpriteCursorX:: db
-wOptionsGolbatSpriteCursorX:: db
-wOptionsMankeySpriteCursorX:: db
-wOptionsArcanineSpriteCursorX:: db
-wOptionsExeggutorSpriteCursorX:: db
-wOptionsMewtwoSpriteCursorX:: db
-NEXTU
-; options page 6
-wOptionsPage6Option1CursorX:: db
-wOptionsPage6Option2CursorX:: db
-wOptionsPage6Option3CursorX:: db
-wOptionsPage6Option4CursorX:: db
-wOptionsPage6Option5CursorX:: db
-wOptionsPage6Option6CursorX:: db
-NEXTU
-; options page 7
-wOptionsPage7Option1CursorX:: db
-wOptionsPage7Option2CursorX:: db
-wOptionsPage7Option3CursorX:: db
-wOptionsPage7Option4CursorX:: db
-wOptionsPage7Option5CursorX:: db
-wOptionsPage7Option6CursorX:: db
+
 NEXTU
 ; tile ID of the badge number being drawn
 wBadgeNumberTile:: db
@@ -2530,10 +2490,8 @@ wSpriteOptions:: db
 ; bit 1 -> Nidorino sprite version: 0 = RB, 1 = RG
 ; bit 2 -> Exeggutor sprite version: 0 = Y, 1 = RB
 ; bit 3 -> Menu icon sprites: 0 = Original, 1 = Enhanced Original
-; bit 4 -> type matchup option for GHOST->PSYCHIC: 0 = 2x effective, 1 = 0x effective
-; bit 5 -> type matchup option for ICE->FIRE: 0 = 1x effective, 1 = 0.5x effective
-; bit 6 -> type matchup option for BUG->POISON: 0 = 2x effective, 1 = 0.5x effective
-; bit 7 -> type matchup option for POISON->BUG: 0 = 2x effective, 1 = 1x effective
+; bit 4 -> Electabuzz sprite version: 0 = RB, 1 = RG
+; bit 5 -> Raticate sprite version: 0 = RB, 1 = RG
 wSpriteOptions2:: db
 
 ; bits 0-1 = Palette setting 
@@ -2548,14 +2506,17 @@ wSpriteOptions2:: db
 ; bit 6 = Do NPC trainers get stat experience on their pokemon
 ; bit 7 = unused
 wOptions2:: db
-;;;;;;;;;;
-
 
 wSpriteOptions3:: db
 
 wSpriteOptions4:: db
-	
-	ds 1  ; unused save file byte
+
+; bit 0 -> type matchup option for GHOST->PSYCHIC: 0 = 2x effective, 1 = 0x effective
+; bit 1 -> type matchup option for ICE->FIRE: 0 = 1x effective, 1 = 0.5x effective
+; bit 2 -> type matchup option for BUG->POISON: 0 = 2x effective, 1 = 0.5x effective
+; bit 3 -> type matchup option for POISON->BUG: 0 = 2x effective, 1 = 1x effective
+wOptions3:: db
+;;;;;;;;;;
 
 wPlayTimeHours:: db
 wPlayTimeMaxed:: db

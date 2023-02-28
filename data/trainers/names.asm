@@ -12,7 +12,7 @@ TrainerNames::
 	li "BIKER"
 	li "BURGLAR"
 	li "ENGINEER"
-	li "JUGGLER"
+	li "J" ; unused juggler (may as well use the least space possible by this)
 	li "FISHERMAN"
 	li "SWIMMER"
 	li "CUE BALL"
