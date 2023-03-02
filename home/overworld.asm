@@ -2366,7 +2366,8 @@ ResetUsingStrengthOutOfBattleBit:
 	bit 0, [hl] ; don't need to reset it if it's zero
 	ret z
 	callfar CheckResetStrengthFlag ; PureRGBnote: ADDED: sometimes we don't want to reset the strength bit when loading a map
-	and a ; reset z flag
+	xor a
+	and a ; set z flag
 	ret
 
 
