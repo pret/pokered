@@ -86,3 +86,17 @@ _BillsHouseText_1e8da::
 	cont "some of my rare"
 	cont "#MON on my PC!"
 	done
+
+_BillsHouseNidorino::
+	text "NIDORINO stares"
+	line "you down..."
+	done
+
+_BillWarning::
+	text "BILL: Hey, bud!"
+	line "Stay away from"
+	cont "there, would ya?"
+	
+	para "My prized #MON"
+	line "are in there!"
+	done

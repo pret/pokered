@@ -247,7 +247,7 @@ MapHSPointers:
 	dw NoHS
 	dw NoHS
 	dw NoHS
-	dw UnusedMapF4HS
+	dw BillsGardenHS
 	dw NoHS
 	dw NoHS
 	dw NoHS
@@ -397,6 +397,7 @@ BillsHouseHS:
 	db BILLS_HOUSE, $01, SHOW
 	db BILLS_HOUSE, $02, HIDE
 	db BILLS_HOUSE, $03, HIDE
+	db BILLS_HOUSE, $04, SHOW
 ViridianForestHS:
 	db VIRIDIAN_FOREST, $05, SHOW
 	db VIRIDIAN_FOREST, $06, SHOW
@@ -507,8 +508,8 @@ SilphCo11FHS:
 	db SILPH_CO_11F, $03, SHOW
 	db SILPH_CO_11F, $04, SHOW
 	db SILPH_CO_11F, $05, SHOW
-UnusedMapF4HS:
-	db UNUSED_MAP_F4, $02, SHOW
+BillsGardenHS: ; could be used for the dragonite boss fight, so not removing this part of UNUSED_MAP_F4
+	db BILLS_GARDEN, $02, SHOW
 CinnabarVolcanoHS:
 	db CINNABAR_VOLCANO, $01, SHOW
 PokemonMansion2FHS:

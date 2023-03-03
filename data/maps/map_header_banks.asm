@@ -245,7 +245,7 @@ MapHeaderBanks::
 	db BANK(CeladonUniversityOutside_h) ; $11 UNUSED_MAP_F1
 	db BANK(CeladonUniversityInside_h) ; $11 UNUSED_MAP_F2
 	db BANK(CeladonUniversityPokecenter_h) ; UNUSED_MAP_F3
-	db $11 ; UNUSED_MAP_F4
+	db BANK(BillsGarden_h) ; UNUSED_MAP_F4, $11
 	db BANK(LoreleisRoom_h)
 	db BANK(BrunosRoom_h)
 	db BANK(AgathasRoom_h)

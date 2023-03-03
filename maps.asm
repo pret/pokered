@@ -1297,3 +1297,8 @@ INCLUDE "data/maps/headers/MtMoonCrater.asm"
 INCLUDE "scripts/MtMoonCrater.asm"
 INCLUDE "data/maps/objects/MtMoonCrater.asm"
 MtMoonCrater_Blocks: INCBIN "maps/MtMoonCrater.blk"
+
+INCLUDE "data/maps/headers/BillsGarden.asm"
+INCLUDE "scripts/BillsGarden.asm"
+INCLUDE "data/maps/objects/BillsGarden.asm"
+BillsGarden_Blocks: INCBIN "maps/BillsGarden.blk"

@@ -245,7 +245,7 @@ MapHeaderPointers::
 	dw CeladonUniversityOutside_h ; UNUSED_MAP_F1
 	dw CeladonUniversityInside_h ; UNUSED_MAP_F2
 	dw CeladonUniversityPokecenter_h ; UNUSED_MAP_F3
-	dw SilphCo2F_h ; UNUSED_MAP_F4
+	dw BillsGarden_h ; UNUSED_MAP_F4, used to use SilphCo2F_h
 	dw LoreleisRoom_h
 	dw BrunosRoom_h
 	dw AgathasRoom_h

@@ -16,5 +16,6 @@ CinnabarLab_Object:
 
 	def_object_events
 	object_event  1,  3, SPRITE_FISHING_GURU, STAY, NONE, 1 ; person
+	object_event 11,  6, SPRITE_SCIENTIST, WALK, ANY_DIR, 2 ; person
 
 	def_warps_to CINNABAR_LAB

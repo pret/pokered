@@ -8,6 +8,7 @@ CinnabarLab_TextPointers:
 	dw Lab1Text3
 	dw Lab1Text4
 	dw Lab1Text5
+	dw Lab1Text6 ; rowan
 
 Lab1Text1:
 	text_far _Lab1Text1
@@ -27,4 +28,8 @@ Lab1Text4:
 
 Lab1Text5:
 	text_far _Lab1Text5
+	text_end
+
+Lab1Text6:
+	text_far _Lab1Text6
 	text_end

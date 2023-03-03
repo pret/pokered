@@ -11,6 +11,7 @@ BillsHouse_ScriptPointers:
 	dw BillsHouseScript3
 	dw BillsHouseScript4
 	dw BillsHouseScript5
+	dw BillsHouseNidorino
 
 BillsHouseScript0:
 	ret
@@ -212,3 +213,11 @@ BillsHouseText3:
 BillsHouseText_1e8da:
 	text_far _BillsHouseText_1e8da
 	text_end
+
+BillsHouseNidorino:
+	text_far _BillsHouseNidorino
+	text_asm
+	ld a, NIDORINO
+	call PlayCry
+	text_far _BillWarning
+	jp TextScriptEnd

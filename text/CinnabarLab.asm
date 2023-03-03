@@ -27,3 +27,10 @@ _Lab1Text5::
 	text "#MON LAB"
 	line "Testing Room"
 	done
+
+_Lab1Text6::
+	text "I came here from"
+	line "afar to research"
+	cont "the myths of"
+	cont "KANTO."
+	done

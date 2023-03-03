@@ -103,6 +103,9 @@ HallofFameRoomScript1:
 	ld a, HS_ROUTE_1_OAK
 	ld [wMissableObjectIndex], a
 	predef ShowObject
+	ld a, HS_BILLS_NIDORINO
+	ld [wMissableObjectIndex], a
+	predef HideObject
 	ld a, HS_MANSION_GUARD
 	ld [wMissableObjectIndex], a
 	predef HideObject

@@ -263,7 +263,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	mapconst CELADON_UNIVERSITY_OUTSIDE,    20, 21 ; $F1	- Was UNUSED_MAP_F1
 	mapconst CELADON_UNIVERSITY_INSIDE,     10, 11 ; $F2	- Was UNUSED_MAP_F2
 	mapconst CELADON_UNIVERSITY_POKECENTER,  4,  7 ; $F3	- Was UNUSED_MAP_F3
-	mapconst UNUSED_MAP_F4,                  0,  0 ; $F4	- Unused, will be Bill's Garden
+	mapconst BILLS_GARDEN,                   9,  8 ; $F4	- Was UNUSED_MAP_F4
 	mapconst LORELEIS_ROOM,                  6,  5 ; $F5
 	mapconst BRUNOS_ROOM,                    6,  5 ; $F6
 	mapconst AGATHAS_ROOM,                   6,  5 ; $F7	- Maps F8 - FE currently have no data
