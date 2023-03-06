@@ -40,6 +40,7 @@ SuperRodData:
 	dbw FARAWAY_ISLAND_INSIDE, 		.Group7
 	dbw MT_MOON_CRATER,				.Group10
 	dbw DIGLETTS_CAVE,				.Group12
+	dbw BILLS_GARDEN,				.Group10
 	db -1 ; end
 
 ; fishing groups
