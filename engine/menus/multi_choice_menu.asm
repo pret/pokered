@@ -62,7 +62,7 @@ TwoOptionMenu::
 
 	hlcoord 4, 7
 	ld b, 3  ; height
-	ld c, 13 ; width
+	ld c, 14 ; width
 	call TextBoxBorder
 
 	hlcoord 6, 8 ; where the list will be drawn at
@@ -230,3 +230,43 @@ YesNoSmall::
 	dw TwoOptionSmallMenu
 	db "YES"
 	next "NO@"
+
+CeladonMartPhoneList::
+	dw ThreeOptionMenu
+	db "HOME"
+	next "PROF.OAK"
+	next "<RIVAL>@"
+
+CeladonMartCallMomQuestion1::
+	dw ThreeOptionMenu
+	db "Great!"
+	next "Bored"
+	next "Homesick@"
+	
+CeladonMartCallMomQuestion2::
+	dw TwoOptionMenu
+	db "Good idea!"
+	next "It's gambling!@"
+
+CeladonMartCallMomQuestion3::
+	dw FourOptionMenu
+	db "Rice Balls"
+	next "Jelly Donuts"
+	next "Brisket"
+	next "Lasagna@"
+	
+CeladonMartCallMomQuestion4::
+	dw ThreeOptionMenu
+	db "See ya!"
+	next "Sayonara!"
+	next "Love you!@"
+	
+CeladonMartCallOakQuestion1::
+	dw TwoOptionMenu
+	db "It evolved!"
+	next "I love it!@"
+
+CeladonMartCallOakQuestion2::
+	dw TwoOptionMenu
+	db "How's the lab?"
+	next "How's DAISY?@"

@@ -276,6 +276,8 @@ SECTION "Text 11", ROMX
 
 INCLUDE "data/text/text_7.asm"
 INCLUDE "text/CeruleanRocketHouse.asm"
+INCLUDE "text/CeladonMart1FPhoneCalls.asm"
+INCLUDE "text/PalletPhoneResultEvents.asm"
 
 
 SECTION "Pokédex Text", ROMX

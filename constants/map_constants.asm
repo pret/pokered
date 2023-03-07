@@ -150,7 +150,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const CELADON_MANSION_1F,             4,  6 ; $80
 	map_const CELADON_MANSION_2F,             4,  6 ; $81
 	map_const CELADON_MANSION_3F,             4,  6 ; $82
-	map_const CELADON_MANSION_ROOF,           4,  6 ; $83
+	map_const CELADON_MANSION_ROOF,           4,  8 ; $83
 	map_const CELADON_MANSION_ROOF_HOUSE,     4,  4 ; $84
 	map_const CELADON_POKECENTER,             7,  4 ; $85
 	map_const CELADON_GYM,                    5,  9 ; $86

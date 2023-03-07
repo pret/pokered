@@ -227,7 +227,6 @@ GaryScript10:
 	ret nz
 	xor a
 	ld [wJoyIgnore], a
-	ld a, $0
 	ld [wChampionsRoomCurScript], a
 	ret
 

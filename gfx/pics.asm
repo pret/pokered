@@ -639,3 +639,7 @@ ExtraMenuBorderConnectors:: INCBIN "gfx/font/extra_menu_border_connectors.2bpp"
 FromToChangeBoxPrompt:: INCBIN "gfx/font/from_to_change_box_prompt.2bpp"
 
 EditPrompt:: INCBIN "gfx/font/edit_prompt.2bpp"
+
+TeaTile:: INCBIN "gfx/icons/tea.2bpp"
+
+FoodTiles:: INCBIN "gfx/icons/food_on_table.2bpp"

@@ -103,3 +103,4 @@ OmanyteSpriteFrame2::     INCBIN "gfx/sprites/omanyte2.2bpp"
 OmanyteSpriteFrame2End::
 PokeballSprite2::		  INCBIN "gfx/sprites/poke_ball.2bpp"
 PokeballSprite2End::
+DaisyBlinkingSprite::         INCBIN "gfx/sprites/daisy_blinking.2bpp"
