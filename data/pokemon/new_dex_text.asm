@@ -808,6 +808,146 @@ _MoltresGDexEntry::
 	next "wanders too close"
 	dex
 
+;_ArcanineHDexEntry::
+;	text "Its body has a"
+;	next "rock-like feel."
+;	next "It dances around"
+	
+;	page "its foes before"
+;	next "biting them in"
+;	next "a vicious rage." ; reference to Raging Fury, its signature move.
+;	dex
+
+;_ElectrodeHDexEntry::
+;	text "Its body has a"
+;	next "similar feel to"
+;	next "a type of berry."
+	
+;	page "If angered, it"
+;	next "electric attacks"
+;	next "of 20,000 volts." ; 100 kV in a bolt of lightning on average
+;	dex
+
+;_RaticateADexEntry::
+;	text "It commands nests"
+;	next "of RATTATA. It"
+;	next "will greedily"
+	
+;	page "command them to"
+;	next "gather large"
+;	next "amounts of food."
+;	dex
+
+;_SandslashADexEntry::
+;	text "It adapted to a"
+;	next "frigid region."
+;	next "Wounds caused"
+	
+;	page "by SANDSLASH"
+;	next "cause severe"
+;	next "frostbite."
+;	dex
+
+;_NinetalesADexEntry::
+;	text "It was once said"
+;	next "to be a deity."
+;	next "Disliking human" ; may not quite be accurate - interpretation of ultra sun entry. consider revising.
+	
+;	page "presence, it"
+;	next "guides them away"
+;	next "from its home."
+;	dex
+
+;_DugtrioADexEntry::
+;	text "DUGTRIO's hair"
+;	next "and whiskers are"
+;	next "made of metal."
+	
+;	page "They provide it"
+;	next "with protection"
+;	next "from attacks."
+;	dex
+
+;_PersianADexEntry::
+;	text "Its round face"
+;	next "is a symbol of"
+;	next "prosperity."
+	
+;	page "Despite this, it"
+;	next "prefers to fight"
+;	next "underhandedly."
+;	dex
+
+;_GolemADexEntry::
+;	text "It fires rocks"
+;	next "charged with"
+;	next "electricity."
+	
+;	page "If it can't find"
+;	next "ammo, it may fire"
+;	next "GEODUDE instead."
+;	dex
+
+;_RapidashGDexEntry::
+;	text "Its galloping is"
+;	next "supported by its"
+;	next "PSI abilities." ; adapting from similar psychic-based entries.
+	
+;	page "If released from"
+;	next "its horn, it can"
+;	next "break concrete."
+;	dex
+
+;_SlowbroGDexEntry::
+;	text "A bite from a"
+;	next "SHELLDER caused"
+;	next "a chemical"
+	
+;	page "reaction within"
+;	next "SLOWBRO, making"
+;	next "it POISON-type."
+;	dex ; consider revising
+
+;_SlowkingGDexEntry::
+;	text "Now controlled"
+;	next "by SHELLDER,"
+;	next "SLOWKING will"
+	
+;	page "mumble strange"
+;	next "spells when"
+;	next "attacking."
+;	dex ; also consider revising
+
+;_MukADexEntry::
+;	text "Over 100 kinds"
+;	next "of poison make"
+;	next "up its body."
+	
+;	page "While friendly,"
+;	next "it must be fed"
+;	next "a lot of trash."
+;	dex
+
+;_ExeggutorADexEntry::
+;	text "Stronger sunlight"
+;	next "allowed EXEGGUTOR"
+;	next "to reach its"
+	
+;	page "true form. Its"
+;	next "PSI abilities"
+;	next "have diminished."
+;	dex ; consider revising
+
+;_MarowakADexEntry::
+;	text "The spirit of its"
+;	next "mother has turned"
+;	next "into the flames"
+	
+;	page "on its bone."
+;	next "MAROWAK dance to"
+;	next "mourn their kin."
+;	dex ; consider revising
+
 _MissingNoDexEntry::
 	text "This is a newly"
 	next "discovered"
