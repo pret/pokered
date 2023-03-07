@@ -169,6 +169,8 @@ TryingToLearn:
 	push af
 	cp STRENGTH ; PureRGBnote: FIXED: if we are allowed to forget HM moves, strength needs to be turned off when we forget it
 	call z, ResetStrengthOverworldBit
+	cp SURF ; PureRGBnote: FIXED: if we are allowed to forget HM moves, surf needs to be turned off when we forget it
+	call z, ResetSurfOverworldBit
 	;push bc   ; PureRGBnote: FIXED: moves are never considered HMs and can always be deleted if desired
 	;call IsMoveHM
 	;pop bc
@@ -195,8 +197,16 @@ TryingToLearn:
 	ret
 
 ResetStrengthOverworldBit:
+	push af ; preserve the move ID so we can check surf next
 	ld a, [wd728]
 	res 0, a
+	ld [wd728], a
+	pop af
+	ret
+
+ResetSurfOverworldBit:
+	ld a, [wd728]
+	res 2, a
 	ld [wd728], a
 	ret
 

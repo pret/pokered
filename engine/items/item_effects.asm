@@ -818,6 +818,8 @@ ItemUseSurfboard:
 	ld a, 2
 	ld [wWalkBikeSurfState], a ; change player state to surfing
 	call PlayDefaultMusic ; play surfing music
+	ld hl, wd728
+	set 2, [hl]
 	ld hl, SurfingGotOnText
 	jp PrintText
 .tryToStopSurfing
@@ -3253,7 +3255,7 @@ SendNewMonToBox:
 ; checks if the tile in front of the player is a shore or water tile
 ; used for surfing and fishing
 ; unsets carry if it is, sets carry if not
-IsNextTileShoreOrWater:
+IsNextTileShoreOrWater::
 	ld a, [wCurMapTileset]
 	ld hl, WaterTilesets
 	ld de, 1

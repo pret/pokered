@@ -18,7 +18,7 @@ EnterMap::
 	ld hl, wd72e
 	bit 5, [hl] ; did a battle happen immediately before this?
 	res 5, [hl] ; unset the "battle just happened" flag
-	call z, ResetUsingStrengthOutOfBattleBit
+	call z, ResetUsingStrengthSurfOutOfBattleBits
 	call nz, MapEntryAfterBattle
 	ld hl, wd732
 	ld a, [hl]
@@ -1205,6 +1205,9 @@ CollisionCheckOnLand::
 	jr c, .collision
 	call CheckTilePassable
 	jr nc, .noCollision
+	; TODO: check to start surfing if surf flag set
+	callfar CheckForAutoSurf
+	jr nc, .noCollision
 .collision
 	ld a, [wChannelSoundIDs + CHAN5]
 	cp SFX_COLLISION ; check if collision sound is already playing
@@ -2361,15 +2364,11 @@ IgnoreInputForHalfSecond:
 	ld [hl], a ; set ignore input bit
 	ret
 
-ResetUsingStrengthOutOfBattleBit:
-	ld hl, wd728
-	bit 0, [hl] ; don't need to reset it if it's zero
+ResetUsingStrengthSurfOutOfBattleBits:
+	ld a, [wd728]
+	and %00000101
 	ret z
-	callfar CheckResetStrengthFlag ; PureRGBnote: ADDED: sometimes we don't want to reset the strength bit when loading a map
-	xor a
-	and a ; set z flag
-	ret
-
+	jpfar CheckResetSurfStrengthFlags ; PureRGBnote: ADDED: sometimes we don't want to reset the strength/surf bits when loading a map
 
 ForceBikeOrSurf::
 	ld b, BANK(RedSprite)

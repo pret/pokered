@@ -87,23 +87,3 @@ CanMoveBouldersText2:
 	text_far _CanMoveBouldersText
 	text_end
 
-NoResetStrengthMaps:
-	db SEAFOAM_ISLANDS_1F
-	db SEAFOAM_ISLANDS_B1F
-	db SEAFOAM_ISLANDS_B2F
-	db SEAFOAM_ISLANDS_B3F
-	db SEAFOAM_ISLANDS_B4F
-	db VICTORY_ROAD_1F
-	db VICTORY_ROAD_2F
-	db VICTORY_ROAD_3F
-	db -1
-
-CheckResetStrengthFlag::
-	ld hl, NoResetStrengthMaps
-	ld de, 1
-	ld a, [wCurMap]
-	call IsInArray
-	ret c
-	ld hl, wd728
-	res 0, [hl]
-	ret
