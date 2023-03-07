@@ -15,7 +15,7 @@ TownMapText::
 	farcall DisplayTownMap
 	ld hl, wd730
 	res 6, [hl]
-	ld de, TextScriptEnd
+	ld de, TextScriptEndNoPop
 	push de
 	ldh a, [hLoadedROMBank]
 	push af

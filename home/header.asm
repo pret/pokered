@@ -69,6 +69,7 @@ SECTION "rst38", ROM0[$0038]
 ; PureRGBnote: MOVED: We save a lot of space by moving TextScriptEnd here and using rst TextScriptEnd to jump to it instead
 TextScriptEnd:: 
 	pop hl ; turn the rst call into a jp by popping off the return address
+TextScriptEndNoPop::
 	ld hl, TextScriptEndingText
 	ret
 
