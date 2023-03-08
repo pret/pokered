@@ -194,8 +194,9 @@ PokedexEntryPointers:
 
 ; string: species name
 ; height in feet, inches
-; weight in pounds
+; weight in decipounds (1/10th of a pound)
 ; text entry
+; you can change the USAian unit to International Units by following the tutorial at https://github.com/pret/pokered/wiki/Metric-System
 
 RhydonDexEntry:
 	db "DRILL@"
