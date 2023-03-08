@@ -357,3 +357,7 @@ INCLUDE "engine/movie/evolution.asm"
 INCLUDE "engine/items/tm_prices.asm"
 INCLUDE "engine/overworld/elevator.asm"
 INCLUDE "gfx/fishing.asm"
+
+SECTION "Engine Spillover", ROMX
+
+INCLUDE "engine/menus/item_descriptions.asm"

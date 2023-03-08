@@ -52,13 +52,13 @@ DEF SAFARI_ROCK EQU $16 ; overload
 	const DOME_FOSSIL   ; $29
 	const HELIX_FOSSIL  ; $2A
 	const SECRET_KEY    ; $2B
-	const HEART_STONE   ; $2C
+	const HEART_STONE   ; $2C ; was unused
 	const BIKE_VOUCHER  ; $2D
 	const X_ACCURACY    ; $2E
 	const LEAF_STONE    ; $2F
 	const CARD_KEY      ; $30
 	const NUGGET        ; $31
-	const WING_FOSSIL   ; $32
+	const WING_FOSSIL   ; $32 ; was unused
 	const POKE_DOLL     ; $33
 	const FULL_HEAL     ; $34
 	const REVIVE        ; $35
@@ -84,7 +84,7 @@ DEF SAFARI_ROCK EQU $16 ; overload
 	const POKE_FLUTE    ; $49
 	const LIFT_KEY      ; $4A
 	const EXP_ALL       ; $4B
-	const CANDY_SACK    ; $4C - was old rod
+	const CANDY_JAR    ; $4C - was old rod
 	const GOOD_ROD      ; $4D - replaceable
 	const SUPER_ROD     ; $4E
 	const PP_UP         ; $4F

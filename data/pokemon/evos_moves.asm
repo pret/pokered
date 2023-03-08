@@ -3284,7 +3284,7 @@ MoltresGEvosMoves:
 
 ;MeltanEvosMoves:
 ; Evolutions
-;	db EV_ITEM, CANDY_SACK, 1, MELMETAL
+;	db EV_ITEM, CANDY_JAR, 1, MELMETAL
 ;	db 0
 ; Learnset
 ;	db 8, TAIL_WHIP

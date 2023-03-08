@@ -75,7 +75,7 @@ ItemNames::
 	li "POKé FLUTE"
 	li "LIFT KEY"
 	li "EXP.ALL"
-	li "CANDY SACK" ; was old rod
+	li "CANDY JAR" ; was old rod
 	li "GOOD ROD"
 	li "FISHING ROD"
 	li "PP UP"
