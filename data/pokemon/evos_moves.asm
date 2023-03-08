@@ -1,9 +1,6 @@
 ; See constants/pokemon_data_constants.asm
 ; The max number of evolutions per monster is MAX_EVOLUTIONS
 
-; db EV_ITEM, CANDY_SACK, 1, MELMETAL
-; put this on Meltan when adding it
-
 EvosMovesPointerTable:
 	table_width 2, EvosMovesPointerTable
 	dw RhydonEvosMoves
@@ -3001,6 +2998,35 @@ MoltresGEvosMoves:
 	db 66, NIGHT_SLASH	; False Surrender
 	db 70, SKY_ATTACK
 	db 0
+
+;MeltanEvosMoves:
+; Evolutions
+;	db EV_ITEM, CANDY_SACK, 1, MELMETAL
+; Learnset
+;	db 8, TAIL_WHIP
+;	db 16, HEADBUTT
+;	db 24, THUNDER_WAVE
+;	db 32, ACID_ARMOR
+;	db 40, IRON_HEAD
+;	db 0
+
+;MelmetalEvosMoves:
+; Evolutions
+;	db 0
+; Learnset
+;	db 9, TAIL_WHIP
+;	db 16, HEADBUTT
+;	db 18, THUNDER_WAVE
+;	db 20, THUNDERPUNCH
+;	db 27, THUNDERSHOCK
+;	db 36, ACID_ARMOR
+;	db 45, MAGNET_BOMB
+;	db 51, MEGA_PUNCH
+;	db 63, SMART_STRIKE
+;	db 72, IRON_HEAD
+;	db 81, SUBMISSION
+;	db 90, HYPER_BEAM
+;	db 0
 
 MissingNoEvosMoves:
 ; Evolutions

@@ -808,6 +808,26 @@ _MoltresGDexEntry::
 	next "wanders too close"
 	dex
 
+;_MeltanDexEntry::
+;	text "It feeds on metal."
+;	next "The strongest one"
+;	next "in a group will"
+	
+;	page "absorb the rest"
+;	next "to evolve into"
+;	next "a MELMETAL"
+;	dex
+
+;_MelmetalDexEntry::
+;	text "This #MON came"
+;	next "back to life"
+;	next "after 3,000"
+	
+;	page "years. Myths"
+;	next "describe it"
+;	next "becoming a giant"
+;	dex ; consider revising - include longevity and it becoming a cyclopian giant
+
 ;_ArcanineHDexEntry::
 ;	text "Its body has a"
 ;	next "rock-like feel."
@@ -815,7 +835,7 @@ _MoltresGDexEntry::
 	
 ;	page "its foes before"
 ;	next "biting them in"
-;	next "a vicious rage." ; reference to Raging Fury, its signature move.
+;	next "a vicious rage" ; reference to Raging Fury, its signature move.
 ;	dex
 
 ;_ElectrodeHDexEntry::
@@ -824,18 +844,18 @@ _MoltresGDexEntry::
 ;	next "a type of berry."
 	
 ;	page "If angered, it"
-;	next "electric attacks"
-;	next "of 20,000 volts." ; 100 kV in a bolt of lightning on average
+;	next "looses electricity"
+;	next "of 20,000 volts" ; 100 kV in a bolt of lightning on average
 ;	dex
 
-;_RaticateADexEntry::
+;_RaticateADexEntry:: ; this entry hypercompresses most Gen 7 entries
 ;	text "It commands nests"
 ;	next "of RATTATA. It"
 ;	next "will greedily"
 	
 ;	page "command them to"
 ;	next "gather large"
-;	next "amounts of food."
+;	next "amounts of food"
 ;	dex
 
 ;_SandslashADexEntry::
@@ -845,7 +865,7 @@ _MoltresGDexEntry::
 	
 ;	page "by SANDSLASH"
 ;	next "cause severe"
-;	next "frostbite."
+;	next "frostbite"
 ;	dex
 
 ;_NinetalesADexEntry::
@@ -855,7 +875,7 @@ _MoltresGDexEntry::
 	
 ;	page "presence, it"
 ;	next "guides them away"
-;	next "from its home."
+;	next "from its home"
 ;	dex
 
 ;_DugtrioADexEntry::
@@ -865,7 +885,7 @@ _MoltresGDexEntry::
 	
 ;	page "They provide it"
 ;	next "with protection"
-;	next "from attacks."
+;	next "from attacks"
 ;	dex
 
 ;_PersianADexEntry::
@@ -875,7 +895,7 @@ _MoltresGDexEntry::
 	
 ;	page "Despite this, it"
 ;	next "prefers to fight"
-;	next "underhandedly."
+;	next "underhandedly"
 ;	dex
 
 ;_GolemADexEntry::
@@ -885,7 +905,7 @@ _MoltresGDexEntry::
 	
 ;	page "If it can't find"
 ;	next "ammo, it may fire"
-;	next "GEODUDE instead."
+;	next "GEODUDE instead"
 ;	dex
 
 ;_RapidashGDexEntry::
@@ -895,28 +915,28 @@ _MoltresGDexEntry::
 	
 ;	page "If released from"
 ;	next "its horn, it can"
-;	next "break concrete."
+;	next "break concrete"
 ;	dex
 
 ;_SlowbroGDexEntry::
-;	text "A bite from a"
-;	next "SHELLDER caused"
-;	next "a chemical"
+;	text "The SHELLDER that"
+;	next "bit SLOWBRO has"
+;	next "made it poisonous."
 	
-;	page "reaction within"
-;	next "SLOWBRO, making"
-;	next "it POISON-type."
-;	dex ; consider revising
+;	para "SHELLDER's tongue"
+;	next "can be squeezed"
+;	next "to spit poison"
+;	dex
 
 ;_SlowkingGDexEntry::
-;	text "Now controlled"
-;	next "by SHELLDER,"
-;	next "SLOWKING will"
+;	text "The SHELLDER that"
+;	next "bit SLOWBRO has"
+;	next "assumed control."
 	
-;	page "mumble strange"
-;	next "spells when"
-;	next "attacking."
-;	dex ; also consider revising
+;	page "Mumbling eerie"
+;	next "spells, it makes"
+;	next "strange POTIONS"
+;	dex
 
 ;_MukADexEntry::
 ;	text "Over 100 kinds"
@@ -925,28 +945,78 @@ _MoltresGDexEntry::
 	
 ;	page "While friendly,"
 ;	next "it must be fed"
-;	next "a lot of trash."
+;	next "a lot of trash"
 ;	dex
 
 ;_ExeggutorADexEntry::
-;	text "Stronger sunlight"
+;	text "While strong"
+;	next "sunlight has"
 ;	next "allowed EXEGGUTOR"
-;	next "to reach its"
 	
-;	page "true form. Its"
-;	next "PSI abilities"
-;	next "have diminished."
+;	page "to attain its true"
+;	next "form, its PSI"
+;	next "power has faded"
 ;	dex ; consider revising
 
 ;_MarowakADexEntry::
-;	text "The spirit of its"
-;	next "mother has turned"
-;	next "into the flames"
+;	text "While dancing in"
+;	next "mourning of its"
+;	next "kin, the spirit"
 	
-;	page "on its bone."
-;	next "MAROWAK dance to"
-;	next "mourn their kin."
-;	dex ; consider revising
+;	page "of its mother"
+;	next "inhabits its"
+;	next "cherished bone"
+;	dex
+
+;_WeezingGDexEntry::
+;	text "It is better at"
+;	next "taking in air"
+;	next "than WEEZING in" ; referencing shield kantonian weezing
+	
+;	page "KANTO. Its body"
+;	next "is copied when"
+;	next "building factories" ; referencing this: https://ibb.co/ZM2714Q - PLA takes place before RB
+;	dex
+
+;_MrMimeGDexEntry::
+;	text "Instead of using"
+;	next "PSI energy to"
+;	next "make invisible,"
+	
+;	page "walls, this MR."
+;	next "MIME makes them"
+;	next "using ice."
+;	dex
+
+;_TaurosPDexEntry::
+;	text "Known as the"
+;	next "Combat Breed,"
+;	next "this TAUROS uses"
+	
+;	page "its thick muscles"
+;	next "to overwhelm its"
+;	next "opponents."
+;	dex
+
+;_TaurosPBDexEntry::
+;	text "Known as the"
+;	next "Blaze Breed,"
+;	next "this TAUROS can"
+	
+;	page "expel hot air"
+;	next "from its nostrils"
+;	next "and heat its horns"
+;	dex
+
+;_TaurosPADexEntry::
+;	text "Known as the"
+;	next "Aqua Breed,"
+;	next "this TAUROS can"
+	
+;	page "shoot water at"
+;	next "high pressure from"
+;	next "its horns."
+;	dex
 
 _MissingNoDexEntry::
 	text "This is a newly"
