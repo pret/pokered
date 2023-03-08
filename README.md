@@ -75,6 +75,7 @@ QoL Enhancements
 ====
 - All 217 (current) Pokemon can be obtained without the use of trading or glitches, including Mew!
 - New Pokedex entries for most Pokemon are available, sourced from the original 1996 Pokedex book by Creatures Inc., restoring a ton of old Kanto lore. Thanks to [Dr. Lava and Nob Ogasawara](http://lavacutcontent.com/1996-creatures-pokedex-translation-1/) for their incredible work translating and writing about it!
+- Item Descriptions are available!
 - Press A beside surfable water, strength boulders or cut trees to use the HMs without needing to go into the Party menu.
 - PP symbol is displayed in the battle menu.
 - Running Shoes by holding B. Also works with the bike! Surf speed is also doubled.
