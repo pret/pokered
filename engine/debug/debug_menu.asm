@@ -1,4 +1,4 @@
-DebugMenu:
+DebugMenu::
 IF DEF(_DEBUG)
 	call ClearScreen
 
@@ -19,14 +19,14 @@ IF DEF(_DEBUG)
 	call ClearSprites
 	call RunDefaultPaletteCommand
 
-	hlcoord 5, 6
-	ld b, 3
-	ld c, 9
-	call TextBoxBorder
+	;hlcoord 5, 6
+	;ld b, 3
+	;ld c, 9
+	;call TextBoxBorder
 
-	hlcoord 7, 7
-	ld de, DebugMenuOptions
-	call PlaceString
+	;hlcoord 7, 7
+	;ld de, DebugMenuOptions
+	;call PlaceString
 
 	ld a, TEXT_DELAY_MEDIUM
 	ld [wOptions], a
@@ -46,13 +46,13 @@ IF DEF(_DEBUG)
 	ld [wLastMenuItem], a
 	ld [wMenuWatchMovingOutOfBounds], a
 
-	call HandleMenuInput
-	bit BIT_B_BUTTON, a
-	jp nz, DisplayTitleScreen
+	;call HandleMenuInput
+	;bit BIT_B_BUTTON, a
+	;jp nz, DisplayTitleScreen
 
-	ld a, [wCurrentMenuItem]
-	and a ; FIGHT?
-	jp z, TestBattle
+	;ld a, [wCurrentMenuItem]
+	;and a ; FIGHT?
+	;jp z, TestBattle
 
 	; DEBUG
 	ld hl, wd732
