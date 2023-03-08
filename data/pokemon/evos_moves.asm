@@ -1,6 +1,15 @@
 ; See constants/pokemon_data_constants.asm
 ; The max number of evolutions per monster is MAX_EVOLUTIONS
 
+; Template proceeding;
+;NamehereEvosMoves:
+; Evolutions
+;	db EV_LEVEL, LEVELHERE, POKEMON
+;	db 0
+; Learnset
+;	db LEVEL, MOVENAME
+;	db 0
+
 EvosMovesPointerTable:
 	table_width 2, EvosMovesPointerTable
 	dw RhydonEvosMoves
@@ -11,8 +20,10 @@ EvosMovesPointerTable:
 	dw VoltorbEvosMoves
 	dw NidokingEvosMoves
 	dw SlowbroEvosMoves
+	;dw SlowbroGEvosMoves
 	dw IvysaurEvosMoves
 	dw ExeggutorEvosMoves
+	;dw ExeggutorAEvosMoves
 	dw LickitungEvosMoves
 	dw ExeggcuteEvosMoves
 	dw GrimerEvosMoves
@@ -23,6 +34,7 @@ EvosMovesPointerTable:
 	dw RhyhornEvosMoves
 	dw LaprasEvosMoves
 	dw ArcanineEvosMoves
+	;dw ArcanineHEvosMoves
 	dw MewEvosMoves
 	dw GyaradosEvosMoves
 	dw ShellderEvosMoves
@@ -45,6 +57,7 @@ EvosMovesPointerTable:
 	dw ChanseyEvosMoves
 	dw MachokeEvosMoves
 	dw MrMimeEvosMoves
+	;dw MrMimeGEvosMoves
 	dw HitmonleeEvosMoves
 	dw HitmonchanEvosMoves
 	dw ArbokEvosMoves
@@ -52,6 +65,7 @@ EvosMovesPointerTable:
 	dw PsyduckEvosMoves
 	dw DrowzeeEvosMoves
 	dw GolemEvosMoves
+	;dw GolemAEvosMoves
 	dw BarundaEvosMoves
 	dw MagmarEvosMoves
 	dw BuuEvosMoves
@@ -63,6 +77,9 @@ EvosMovesPointerTable:
 	dw SeelEvosMoves
 	dw DiglettEvosMoves
 	dw TaurosEvosMoves
+	;dw TaurosPEvosMoves
+	;dw TaurosPBEvosMoves
+	;dw TaurosPAEvosMoves
 	dw TrampelEvosMoves
 	dw CrockyEvosMoves
 	dw BlottleEvosMoves
@@ -86,8 +103,10 @@ EvosMovesPointerTable:
 	dw MikonEvosMoves
 	dw VulpixEvosMoves
 	dw NinetalesEvosMoves
+	;dw NinetalesAEvosMoves
 	dw PikachuEvosMoves
 	dw RaichuEvosMoves
+	;dw RaichuAEvosMoves
 	dw RibbitoEvosMoves
 	dw CroakozunaEvosMoves
 	dw DratiniEvosMoves
@@ -100,6 +119,7 @@ EvosMovesPointerTable:
 	dw CryithanEvosMoves
 	dw SandshrewEvosMoves
 	dw SandslashEvosMoves
+	;dw SandslashAEvosMoves
 	dw OmanyteEvosMoves
 	dw OmastarEvosMoves
 	dw JigglypuffEvosMoves
@@ -121,6 +141,7 @@ EvosMovesPointerTable:
 	dw DodrioEvosMoves
 	dw PrimeapeEvosMoves
 	dw DugtrioEvosMoves
+	;DugtrioAEvosMoves
 	dw VenomothEvosMoves
 	dw DewgongEvosMoves
 	dw PurakkusuEvosMoves
@@ -139,15 +160,20 @@ EvosMovesPointerTable:
 	dw KonyaEvosMoves
 	dw OmegaEvosMoves
 	dw MukEvosMoves
+	;dw MukAEvosMoves
 	dw DecillaEvosMoves
 	dw KinglerEvosMoves
 	dw CloysterEvosMoves
 	dw MagnetiteEvosMoves
 	dw ElectrodeEvosMoves
+	;dw ElectrodeHEvosMoves
 	dw ClefableEvosMoves
 	dw WeezingEvosMoves
+	;dw WeezingGEvosMoves
 	dw PersianEvosMoves
+	;PersianAEvosMoves
 	dw MarowakEvosMoves
+	;dw MarowakAEvosMoves
 	dw GuardiaEvosMoves
 	dw HaunterEvosMoves
 	dw AbraEvosMoves
@@ -167,8 +193,10 @@ EvosMovesPointerTable:
 	dw PuchikoonEvosMoves
 	dw PonytaEvosMoves
 	dw RapidashEvosMoves
+	;dw RapidashGEvosMoves
 	dw RattataEvosMoves
 	dw RaticateEvosMoves
+	;dw RaticateAEvosMoves
 	dw NidorinoEvosMoves
 	dw NidorinaEvosMoves
 	dw GeodudeEvosMoves
@@ -216,6 +244,7 @@ EvosMovesPointerTable:
 	dw KingdraEvosMoves
 	dw PolitoedEvosMoves
 	dw SlowkingEvosMoves
+	;dw SlowkingGEvosMoves
 	dw ElectivireEvosMoves
 	dw MagmortarEvosMoves
 	dw ParaEvosMoves
@@ -236,6 +265,8 @@ EvosMovesPointerTable:
 	dw ArticunoGEvosMoves	
 	dw ZapdosGEvosMoves
 	dw MoltresGEvosMoves
+	; dw MeltanEvosMoves
+	; dw MelmetalEvosMoves
 	dw MissingNoEvosMoves
 	assert_table_length NUM_POKEMON_INDEXES
 
@@ -335,6 +366,18 @@ SlowbroEvosMoves:
 	db 55, PSYCHIC_M
 	db 0
 
+;SlowbroGEvosMoves:
+; Evolutions
+;	db 0
+; Learnset
+;	db 8, ACID
+;	db 14, CONFUSION
+;	db 22, DISABLE
+;	db 30, HEADBUTT
+;	db 38, AMNESIA
+;	db 42, PSYCHIC_M
+;	db 0
+
 IvysaurEvosMoves:
 ; Evolutions
 	db EV_LEVEL, 32, VENUSAUR
@@ -355,6 +398,18 @@ ExeggutorEvosMoves:
 ; Learnset
 	db 28, STOMP
 	db 0
+
+;ExeggutorAEvosMoves:
+; Evolutions
+;	db 0
+; Learnset
+;	db 25, REFLECT ; this would normally be removed, but because this'll be traded, we're using this
+;	db 28, LEECH_SEED
+;	db 32, STUN_SPORE
+;	db 37, POISONPOWDER
+;	db 42, SOLARBEAM
+;	db 48, SLEEP_POWDER
+;	db 0
 
 LickitungEvosMoves:
 ; Evolutions
@@ -469,6 +524,18 @@ ArcanineEvosMoves:
 	db 0
 ; Learnset
 	db 0
+
+;ArcanineHEvosMoves:
+; Evolutions
+;	db 0
+; Learnset
+;	db 18, EMBER ; no growlithe-hisui
+;	db 23, LEER
+;	db 30, TAKE_DOWN
+;	db 35, ROCK_SLIDE
+;	db 39, AGILITY
+;	db 50, FLAMETHROWER
+;	db 0
 
 MewEvosMoves:
 ; Evolutions
@@ -662,10 +729,12 @@ PidgeyEvosMoves:
 	db 44, MIRROR_MOVE
 	db 0
 
-SlowpokeEvosMoves:
+SlowpokeEvosMoves: ; The Galarica items could be a decent way to add the Galarian forms...
 ; Evolutions
 	db EV_LEVEL, 37, SLOWBRO
 	db EV_ITEM, HEART_STONE, 1, SLOWKING
+	; db EV_ITEM, GALARICA_CUFF, 1, SLOWBRO_G
+	; db EV_ITEM, GALARICA_WREATH, 1, SLOWKING_G
 	db 0
 ; Learnset
 	db 18, DISABLE
@@ -739,6 +808,18 @@ MrMimeEvosMoves:
 	db 39, MEDITATE
 	db 47, SUBSTITUTE
 	db 0
+
+;MrMimeGEvosMoves:
+; Evolutions
+;	db EV_ITEM, ICE_STONE, 1, MR_RIME
+;	db 0
+; Learnset
+;	db 23, LIGHT_SCREEN
+;	db 28, PSYBEAM
+;	db 31, AURORA_BEAM
+;	db 39, ICE_BEAM
+;	db 48, PSYCHIC_M
+;	db 0
 
 HitmonleeEvosMoves:
 ; Evolutions
@@ -821,6 +902,17 @@ GolemEvosMoves:
 	db 36, EARTHQUAKE
 	db 43, EXPLOSION
 	db 0
+
+;GolemAEvosMoves:
+; Evolutions
+;	db 0
+; Learnset
+;	db 16, ROCK_THROW
+;	db 22, THUNDER_PUNCH
+;	db 24, SELFDESTRUCT
+;	db 36, EXPLOSION
+;	db 40, DOUBLE_EDGE
+;	db 0
 
 BarundaEvosMoves:
 ; Evolutions
@@ -957,6 +1049,39 @@ TaurosEvosMoves:
 	db 44, RAGE
 	db 51, TAKE_DOWN
 	db 0
+
+;TaurosPEvosMoves:
+; Evolutions
+;	db 0
+; Learnset
+;	db 21, ROLLING_KICK
+;	db 28, TAIL_WHIP
+;	db 35, LEER
+;	db 44, RAGE
+;	db 51, JUMP_KICK
+;	db 0
+
+;TaurosPBEvosMoves:
+; Evolutions
+;	db 0
+; Learnset
+;	db 21, LOW_KICK
+;	db 28, TAIL_WHIP
+;	db 35, LEER
+;	db 44, RAGE
+;	db 51, FIRE_SPIN
+;	db 0
+	
+;TaurosPAEvosMoves:
+; Evolutions
+;	db 0
+; Learnset
+;	db 21, LOW_KICK
+;	db 28, TAIL_WHIP
+;	db 35, LEER
+;	db 44, RAGE
+;	db 51, HYDRO_PUMP
+;	db 0
 
 TrampelEvosMoves:
 ; Evolutions
@@ -1235,6 +1360,20 @@ NinetalesEvosMoves:
 ; Learnset
 	db 0
 
+;NinetalesAEvosMoves: ; vulpix-alola learnset
+; Evolutions
+;	db 0
+; Learnset
+;	db 7, ROAR
+;	db 12, CONFUSE_RAY
+;	db 23, FEINT_ATTACK
+;	db 28, AURORA_BEAM
+;	db 36, ICE_BEAM
+;	db 38, DAZZLE_GLEAM
+;	db 42, BLIZZARD
+;	db 46, CHARM
+;	db 0
+
 PikachuEvosMoves:
 ; Evolutions
 	db EV_ITEM, THUNDER_STONE, 1, RAICHU
@@ -1257,6 +1396,21 @@ RaichuEvosMoves:
 	db 0
 ; Learnset
 	db 0
+
+;RaichuAEvosMoves: ; pikachu learnset
+; Evolutions
+;	db 0
+; Learnset
+;	db 6, TAIL_WHIP
+;	db 8, THUNDER_WAVE
+;	db 11, QUICK_ATTACK
+;	db 15, DOUBLE_TEAM
+;	db 20, SLAM
+;	db 26, THUNDERBOLT
+;	db 33, AGILITY
+;	db 41, THUNDER
+;	db 50, LIGHT_SCREEN
+;	db 0
 
 RibbitoEvosMoves:
 ; Evolutions
@@ -1400,6 +1554,19 @@ SandslashEvosMoves:
 	db 36, SWIFT
 	db 47, FURY_SWIPES
 	db 0
+
+;SandslashAEvosMoves:
+; Evolutions
+;	db 0
+; Learnset
+;	db 21, SWIFT
+;	db 24, FURY_SWIPES
+;	db 27, IRON_DEFENSE
+;	db 30, SLASH
+;	db 33, IRON_HEAD
+;	db 36, SWORDS_DANCE
+;	db 45, BLIZZARD
+;	db 0
 
 OmanyteEvosMoves:
 ; Evolutions
@@ -1650,6 +1817,18 @@ DugtrioEvosMoves:
 	db 47, EARTHQUAKE
 	db 0
 
+;DugtrioAEvosMoves:
+; Evolutions
+;	db 0
+; Learnset
+;	db 6, GROWL
+;	db 20, SLASH
+;	db 31, DIG
+;	db 35, IRON_HEAD
+;	db 39, EARTHQUAKE
+;	db 43, FISSURE
+;	db 0
+
 VenomothEvosMoves:
 ; Evolutions
 	db 0
@@ -1853,6 +2032,20 @@ MukEvosMoves:
 	db 60, ACID_ARMOR
 	db 0
 
+;MukAEvosMoves:
+; Evolutions
+;	db 0
+; Learnset
+;	db 6, HARDEN
+;	db 12, MINIMIZE
+;	db 18, DISABLE
+;	db 24, BRUTAL_SWING
+;	db 30, SCREECH
+;	db 36, NIGHT_SLASH
+;	db 42, ACID_ARMOR
+;	db 48, SLUDGE
+;	db 0
+
 DecillaEvosMoves:
 ; Evolutions
 	db EV_LEVEL, 40, GYAOON
@@ -1906,6 +2099,17 @@ ElectrodeEvosMoves:
 	db 50, EXPLOSION
 	db 0
 
+;ElectrodeHEvosMoves: ; voltorb-hisui learnset which is also trode's anyway
+; Evolutions
+;	db 0
+; Learnset
+;	db 17, SONICBOOM
+;	db 22, SELFDESTRUCT
+;	db 29, LIGHT_SCREEN
+;	db 36, SWIFT
+;	db 43, EXPLOSION
+;	db 0
+
 ClefableEvosMoves:
 ; Evolutions
 	db 0
@@ -1923,6 +2127,18 @@ WeezingEvosMoves:
 	db 53, EXPLOSION
 	db 0
 
+;WeezingGEvosMoves:
+; Evolutions
+;	db 0
+; Learnset
+;	db 32, SLUDGE
+;	db 37, SMOKESCREEN
+;	db 40, SELFDESTRUCT
+;	db 43, DAZZLE_GLEAM
+;	db 49, HAZE
+;	db 53, EXPLOSION
+;	db 0
+
 PersianEvosMoves:
 ; Evolutions
 	db 0
@@ -1933,6 +2149,20 @@ PersianEvosMoves:
 	db 37, FURY_SWIPES
 	db 51, SLASH
 	db 0
+
+;PersianAEvosMoves:
+; Evolutions
+;	db 0
+; Learnset
+;	db 6, BITE
+;	db 14, FURY_SWIPES
+;	db 17, SCREECH
+;	db 22, FEINT_ATTACK
+;	db 30, PAY_DAY
+;	db 33, SLASH
+;	db 38, NASTY_PLOT
+;	db 49, NIGHT_SLASH
+;	db 0
 
 MarowakEvosMoves:
 ; Evolutions
@@ -1948,6 +2178,18 @@ MarowakEvosMoves:
 	db 48, BONEMERANG
 	db 55, RAGE
 	db 0
+
+;MarowakAEvosMoves:
+; Evolutions
+;	db 0
+; Learnset
+;	db 18, FIRE_SPIN
+;	db 25, LEER
+;	db 33, EMBER
+;	db 41, THRASH
+;	db 46, BONEMERANG
+;	db 55, FLAMETHROWER
+;	db 0
 
 GuardiaEvosMoves:
 ; Evolutions
@@ -2171,6 +2413,21 @@ RapidashEvosMoves:
 	db 55, AGILITY
 	db 0
 
+;RapidashGEvosMoves:
+; Evolutions
+;	db 0
+; Learnset
+;	db 30, TAIL_WHIP
+;	db 32, CONFUSION
+;	db 35, FAIRY_WIND
+;	db 39, AGILITY
+;	db 42, PSYBEAM
+;	db 46, STOMP
+;	db 47, TAKE_DOWN
+;	db 52, DAZZLE_GLEAM
+;	db 55, PSYCHIC
+;	db 0
+
 RattataEvosMoves:
 ; Evolutions
 	db EV_LEVEL, 20, RATICATE
@@ -2191,6 +2448,20 @@ RaticateEvosMoves:
 	db 27, FOCUS_ENERGY
 	db 41, SUPER_FANG
 	db 0
+
+;RaticateAEvosMoves:
+; Evolutions
+;	db 0
+; Learnset
+;	db 4, QUICK_ATTACK
+;	db 7, FOCUS_ENERGY
+;	db 10, BITE
+;	db 16, HYPER_FANG
+;	db 20, BRUTAL_SWING
+;	db 28, SUPER_FANG
+;	db 31, DOUBLE_EDGE
+;	db 40, NIGHT_SLASH
+;	db 0
 
 NidorinoEvosMoves:
 ; Evolutions
@@ -2751,6 +3022,18 @@ SlowkingEvosMoves:
 	db 55, PSYCHIC_M
 	db 0
 
+;SlowkingGEvosMoves:
+; Evolutions
+;	db 0
+; Learnset
+;	db 8, ACID
+;	db 14, CONFUSION
+;	db 22, DISABLE
+;	db 30, HEADBUTT
+;	db 38, AMNESIA
+;	db 42, PSYCHIC_M
+;	db 0
+
 ElectivireEvosMoves:
 ; Evolutions
 	db 0
@@ -3002,6 +3285,7 @@ MoltresGEvosMoves:
 ;MeltanEvosMoves:
 ; Evolutions
 ;	db EV_ITEM, CANDY_SACK, 1, MELMETAL
+;	db 0
 ; Learnset
 ;	db 8, TAIL_WHIP
 ;	db 16, HEADBUTT
