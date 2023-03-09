@@ -11,7 +11,7 @@ Route1Text1:
 	CheckAndSetEvent EVENT_GOT_POTION_SAMPLE
 	jr nz, .got_item
 	ld hl, Route1ViridianMartSampleText
-	call PrintText
+	rst _PrintText
 	lb bc, ITEM_ROUTE_1_MART_SAMPLE, 1
 	call GiveItem
 	jr nc, .bag_full
@@ -23,8 +23,8 @@ Route1Text1:
 .got_item
 	ld hl, Route1Text_1caee
 .done
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 Route1ViridianMartSampleText:
 	text_far _Route1ViridianMartSampleText

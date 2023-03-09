@@ -33,7 +33,7 @@ CeladonChannelerText:
 	CheckEvent EVENT_BEAT_CELADON_HOTEL_TRAINER_0
 	jr nz, .beat
 	ld hl, CeladonChannelerIntroText
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -41,20 +41,20 @@ CeladonChannelerText:
 	jr .q2
 .no1
 	ld hl, CeladonChannelerNo1
-	call PrintText
+	rst _PrintText
 	jr .done
 .q2
 	ld hl, CeladonChannelerQ2
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld hl, CeladonHotelTrainerHeader0
 	call TalkToTrainer
 	jr .done
 .beat
 	ld hl, CeladonHotelAfterBattleText1
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeladonChannelerIntroText:
 	text_far _CeladonChannelerIntro
@@ -100,11 +100,11 @@ CeladonLaprasGuyText:
 	CheckEventHL EVENT_BEAT_ROCKET_HIDEOUT_GIOVANNI
 	jr nz, .celadonRocketsGone
 	ld hl, CeladonLaprasGuyIntro
-	call PrintText
+	rst _PrintText
 	jr .done
 .celadonRocketsGone
 	ld hl, CeladonLaprasGuyReady
-	call PrintText
+	rst _PrintText
 	lb bc, LAPRAS, 30
 	call GivePokemon
 	jr nc, .noBoxRoom
@@ -112,21 +112,21 @@ CeladonLaprasGuyText:
 	and a
 	call z, WaitForTextScrollButtonPress
 	ld hl, CeladonHeresYourLaprasText
-	call PrintText
+	rst _PrintText
 	SetEvent EVENT_GOT_LAPRAS_EARLY
 	ld a, [wSimulatedJoypadStatesEnd]
 	and a
 	call z, WaitForTextScrollButtonPress
 	ld hl, CeladonLaprasGuyAfter
-	call PrintText
+	rst _PrintText
 	ld a, 3
 	ld [wCeladonHotelCurScript], a
 	jr .done
 .noBoxRoom
 	ld hl, CeladonLaprasGuyNoBoxRoom
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeladonLaprasGuyLeaves:
 	; fade out, set hide show flag, fade back in

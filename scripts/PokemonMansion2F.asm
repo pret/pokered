@@ -87,7 +87,7 @@ Mansion2Text1:
 	text_asm
 	ld hl, Mansion2TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Mansion2BattleText1:
 	text_far _Mansion2BattleText1
@@ -105,7 +105,7 @@ Mansion2Trainer2:
 	text_asm
 	ld hl, Mansion2TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Mansion2BattleText2:
 	text_far _Mansion2BattleText2
@@ -123,7 +123,7 @@ Mansion2Trainer3:
 	text_asm
 	ld hl, Mansion2TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Mansion2BattleText3:
 	text_far _Mansion2BattleText3
@@ -141,7 +141,7 @@ Mansion2Trainer4:
 	text_asm
 	ld hl, Mansion2TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Mansion2BattleText4:
 	text_far _Mansion2BattleText4
@@ -159,7 +159,7 @@ Mansion2Trainer5:
 	text_asm
 	ld hl, Mansion2TrainerHeader4
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Mansion2BattleText5:
 	text_far _Mansion2BattleText5
@@ -185,7 +185,7 @@ Mansion3Text6:
 Mansion2Text5:
 	text_asm
 	ld hl, Mansion2Text_520c2
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -195,18 +195,18 @@ Mansion2Text5:
 	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
 	ld hl, Mansion2Text_520c7
-	call PrintText
+	rst _PrintText
 	ld a, SFX_GO_INSIDE
-	call PlaySound
+	rst _PlaySound
 	CheckAndSetEvent EVENT_MANSION_SWITCH_ON
 	jr z, .asm_520bf
 	ResetEventReuseHL EVENT_MANSION_SWITCH_ON
 	jr .asm_520bf
 .asm_520b9
 	ld hl, Mansion2Text_520cc
-	call PrintText
+	rst _PrintText
 .asm_520bf
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Mansion2Text_520c2:
 	text_far _Mansion2Text_520c2

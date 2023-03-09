@@ -590,12 +590,6 @@ CeruleanRocketHouse1FHS:
 	db CERULEAN_ROCKET_HOUSE_1F, $01, SHOW
 CeladonHotelHS:
 	db CELADON_HOTEL, $05, SHOW
-ViridianSchoolhouseHS:
-	db VIRIDIAN_SCHOOL_HOUSE, $01, SHOW ; brunette girl
-	db VIRIDIAN_SCHOOL_HOUSE, $03, HIDE ; rocker
-ViridianSchoolhouseB1FHS:
-	db VIRIDIAN_SCHOOL_HOUSE_B1F, $0A, SHOW ; rocker
-	db VIRIDIAN_SCHOOL_HOUSE_B1F, $0B, HIDE ; brunette girl
 	db $FF, $01, SHOW ; end
 	assert_table_length NUM_HS_OBJECTS + 1
 
@@ -642,5 +636,11 @@ SafariZoneCenterHS:
 	db SAFARI_ZONE_CENTER, $04, SHOW ; trainer
 	db SAFARI_ZONE_CENTER, $05, SHOW ; trainer
 	db SAFARI_ZONE_CENTER, $06, SHOW
+ViridianSchoolhouseHS:
+	db VIRIDIAN_SCHOOL_HOUSE, $01, SHOW ; brunette girl
+	db VIRIDIAN_SCHOOL_HOUSE, $03, HIDE ; rocker
+ViridianSchoolhouseB1FHS:
+	db VIRIDIAN_SCHOOL_HOUSE_B1F, $0A, SHOW ; rocker
+	db VIRIDIAN_SCHOOL_HOUSE_B1F, $0B, HIDE ; brunette girl
 	db $FF, $01, SHOW ; end
 	assert_table_length NUM_EXTRA_HS_OBJECTS + 1

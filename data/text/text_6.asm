@@ -49,11 +49,21 @@ _ItemUseBallText08::
 	prompt
 
 _NoBoxSlotsLeftText::
-	text "Your BOX is now"
+	text "BOX @"
+	text_ram wBoxNumString
+	text" is now"
 	line "full."
 	para "Time to change"
-	line "boxes!"
-	prompt
+	line "boxes!@"
+	text_end
+
+_BoxSlotsLeftText::
+	text_ram w2CharStringBuffer
+	text " slots left in"
+	line "BOX @"
+	text_ram wBoxNumString
+	text ".@"
+	text_end
 
 _ItemUseBallText06::
 	text "New #DEX data"
@@ -84,16 +94,16 @@ _ApexChipPutOnPokeballText::
 	line "Poké Ball.@"
 	text_asm
 	ld a, SFX_SWITCH
-	call PlaySound
+	rst _PlaySound
 	call WaitForSoundToFinish
 	ld c, 50
-	call DelayFrames
+	rst _DelayFrames
 	ld a, SFX_TRADE_MACHINE
-	call PlaySound
+	rst _PlaySound
 	call WaitForSoundToFinish
 	ld c, 50
-	call DelayFrames
-	jp TextScriptEnd
+	rst _DelayFrames
+	rst TextScriptEnd
 
 _ApexChipDVsMaxedText::
 	text_ram wcd6d

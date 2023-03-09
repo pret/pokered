@@ -113,11 +113,11 @@ SabrinaText:
 	jr .done
 .afterBeat
 	ld hl, SabrinaPostBattleAdviceText
-	call PrintText
+	rst _PrintText
 	jr .done
 .beforeBeat
 	ld hl, SabrinaPreBattleText
-	call PrintText
+	rst _PrintText
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
@@ -133,7 +133,7 @@ SabrinaText:
 	ld a, $3
 	ld [wSaffronGymCurScript], a
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SabrinaPreBattleText:
 	text_far _SabrinaPreBattleText
@@ -167,81 +167,81 @@ SaffronGymTrainerText1:
 	text_asm
 	ld hl, SaffronGymTrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SaffronGymTrainerText2:
 	text_asm
 	ld hl, SaffronGymTrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SaffronGymTrainerText3:
 	text_asm
 	ld hl, SaffronGymTrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SaffronGymTrainerText4:
 	text_asm
 	ld hl, SaffronGymTrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SaffronGymTrainerText5:
 	text_asm
 	ld hl, SaffronGymTrainerHeader4
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SaffronGymTrainerText6:
 	text_asm
 	ld hl, SaffronGymTrainerHeader5
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SaffronGymTrainerText7:
 	text_asm
 	ld hl, SaffronGymTrainerHeader6
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SaffronGymGuideText: ; PureRGBnote: ADDED: gym guide gives you apex chips after beating the leader
 	text_asm
 	CheckEvent EVENT_BEAT_SABRINA
 	jr nz, .afterBeat
 	ld hl, SaffronGymGuidePreBattleText
-	call PrintText
+	rst _PrintText
 	jr .done
 .afterBeat
 	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS ; have to hear about apex chips to receive them after that
 	jr z, .donePrompt
 	ld hl, SaffronGymGuidePostBattleTextPrompt
-	call PrintText
+	rst _PrintText
 	CheckEvent EVENT_GOT_SAFFRON_APEX_CHIPS
 	jr nz, .alreadyApexChips
 .giveApexChips
 	ld hl, GymGuideMoreApexChipText6
-	call PrintText
+	rst _PrintText
 	lb bc, APEX_CHIP, 2
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, ReceivedApexChipsText6
-	call PrintText
+	rst _PrintText
 	ld hl, SaffronGymGuideApexChipPsychicText
-	call PrintText
+	rst _PrintText
 	SetEvent EVENT_GOT_SAFFRON_APEX_CHIPS
 .alreadyApexChips
 	ld hl, AlreadyReceivedApexChipsText6
-	call PrintText
+	rst _PrintText
 	jr .done
 .BagFull
 	ld hl, ApexNoRoomText6
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 .donePrompt
 	ld hl, SaffronGymGuidePostBattleText
-	call PrintText
+	rst _PrintText
 	jr .done
 
 ReceivedApexChipsText6:

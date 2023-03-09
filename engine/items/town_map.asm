@@ -19,7 +19,7 @@ DisplayTownMap:
 	ld hl, wShadowOAM
 	ld de, wTownMapSavedOAM
 	ld bc, $10
-	call CopyData
+	rst _CopyData
 	ld hl, vSprites tile $04
 	ld de, TownMapCursor
 	lb bc, BANK(TownMapCursor), (TownMapCursorEnd - TownMapCursor) / $8
@@ -63,7 +63,7 @@ DisplayTownMap:
 	ld hl, wShadowOAMSprite04
 	ld de, wTownMapSavedOAM + 16
 	ld bc, $10
-	call CopyData
+	rst _CopyData
 .inputLoop
 	call TownMapSpriteBlinkingAnimation
 	call JoypadLowSensitivity
@@ -72,7 +72,7 @@ DisplayTownMap:
 	and A_BUTTON | B_BUTTON | D_UP | D_DOWN
 	jr z, .inputLoop
 	ld a, SFX_TINK
-	call PlaySound
+	rst _PlaySound
 	bit 6, b
 	jr nz, .pressedUp
 	bit 7, b
@@ -168,7 +168,7 @@ LoadTownMap_Fly::
 	ld de, wcd6d
 	call PlaceString
 	ld c, 5 ; PureRGBnote: CHANGED: cut the artificial delay between fly selections to 1/3 of what it was in the vanilla game
-	call DelayFrames
+	rst _DelayFrames
 	hlcoord 18, 0
 	ld [hl], "▲"
 	hlcoord 19, 0
@@ -176,7 +176,7 @@ LoadTownMap_Fly::
 	pop hl
 .inputLoop
 	push hl
-	call DelayFrame
+	rst _DelayFrame
 	call JoypadLowSensitivity
 	ldh a, [hJoy5]
 	ld b, a
@@ -186,7 +186,7 @@ LoadTownMap_Fly::
 	bit 0, b
 	jr nz, .pressedA
 	ld a, SFX_TINK
-	call PlaySound
+	rst _PlaySound
 	bit 6, b
 	jr nz, .pressedUp
 	bit 7, b
@@ -194,7 +194,7 @@ LoadTownMap_Fly::
 	jr .pressedB
 .pressedA
 	ld a, SFX_HEAL_AILMENT
-	call PlaySound
+	rst _PlaySound
 	ld a, [hl]
 	ld [wDestinationMap], a
 	ld hl, wd732
@@ -525,7 +525,7 @@ TownMapSpriteBlinkingAnimation::
 	ld hl, wTownMapSavedOAM
 	ld de, wShadowOAM
 	ld bc, $90
-	call CopyData
+	rst _CopyData
 	xor a
 	jr .done
 .hideSprites

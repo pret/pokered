@@ -17,9 +17,9 @@ LoadSAV:
 	push hl
 	set 6, [hl]
 	ld hl, FileDataDestroyedText
-	call PrintText
+	rst _PrintText
 	ld c, 100
-	call DelayFrames
+	rst _DelayFrames
 	pop hl
 	res 6, [hl]
 	ld a, $1 ; bad checksum
@@ -61,23 +61,23 @@ LoadSAV0:
 	ld hl, sPlayerName
 	ld de, wPlayerName
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst _CopyData
 	ld hl, sMainData
 	ld de, wMainDataStart
 	ld bc, wMainDataEnd - wMainDataStart
-	call CopyData
+	rst _CopyData
 	ld hl, wCurMapTileset
 	set 7, [hl]
 	ld hl, sSpriteData
 	ld de, wSpriteDataStart
 	ld bc, wSpriteDataEnd - wSpriteDataStart
-	call CopyData
+	rst _CopyData
 	ld a, [sTileAnimations]
 	ldh [hTileAnimations], a
 	ld hl, sCurBoxData
 	ld de, wBoxDataStart
 	ld bc, wBoxDataEnd - wBoxDataStart
-	call CopyData
+	rst _CopyData
 	and a
 	jp SAVGoodChecksum
 
@@ -97,7 +97,7 @@ LoadSAV1:
 	ld hl, sCurBoxData
 	ld de, wBoxDataStart
 	ld bc, wBoxDataEnd - wBoxDataStart
-	call CopyData
+	rst _CopyData
 	and a
 	jp SAVGoodChecksum
 
@@ -117,11 +117,11 @@ LoadSAV2:
 	ld hl, sPartyData
 	ld de, wPartyDataStart
 	ld bc, wPartyDataEnd - wPartyDataStart
-	call CopyData
+	rst _CopyData
 	ld hl, sMainData
 	ld de, wPokedexOwned
 	ld bc, wPokedexSeenEnd - wPokedexOwned
-	call CopyData
+	rst _CopyData
 	and a
 	jp SAVGoodChecksum
 
@@ -163,7 +163,7 @@ SaveSAV:
 	call ClearScreenArea
 	hlcoord 1, 14
 	ld hl, GameSavedText
-	call PrintText
+	rst _PrintText
 	ld a, SFX_SAVE
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
@@ -171,7 +171,7 @@ SaveSAV:
 	jp DelayFrames
 
 SaveSAVConfirm:
-	call PrintText
+	rst _PrintText
 	hlcoord 0, 7
 	lb bc, 8, 1
 	ld a, TWO_OPTION_MENU
@@ -209,19 +209,19 @@ SaveSAVtoSRAM0:
 	ld hl, wPlayerName
 	ld de, sPlayerName
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst _CopyData
 	ld hl, wMainDataStart
 	ld de, sMainData
 	ld bc, wMainDataEnd - wMainDataStart
-	call CopyData
+	rst _CopyData
 	ld hl, wSpriteDataStart
 	ld de, sSpriteData
 	ld bc, wSpriteDataEnd - wSpriteDataStart
-	call CopyData
+	rst _CopyData
 	ld hl, wBoxDataStart
 	ld de, sCurBoxData
 	ld bc, wBoxDataEnd - wBoxDataStart
-	call CopyData
+	rst _CopyData
 	ldh a, [hTileAnimations]
 	ld [sTileAnimations], a
 	ld hl, sGameData
@@ -243,7 +243,7 @@ SaveSAVtoSRAM1:
 	ld hl, wBoxDataStart
 	ld de, sCurBoxData
 	ld bc, wBoxDataEnd - wBoxDataStart
-	call CopyData
+	rst _CopyData
 	ld hl, sGameData
 	ld bc, sGameDataEnd - sGameData
 	call SAVCheckSum
@@ -262,11 +262,11 @@ SaveSAVtoSRAM2:
 	ld hl, wPartyDataStart
 	ld de, sPartyData
 	ld bc, wPartyDataEnd - wPartyDataStart
-	call CopyData
+	rst _CopyData
 	ld hl, wPokedexOwned ; pokédex only
 	ld de, sMainData
 	ld bc, wPokedexSeenEnd - wPokedexOwned
-	call CopyData
+	rst _CopyData
 	ld hl, sGameData
 	ld bc, sGameDataEnd - sGameData
 	call SAVCheckSum
@@ -346,16 +346,46 @@ BoxSRAMPointerTable:
 	dw sBox6 ; sBox12
 
 ChangeBox::
+	CheckEvent EVENT_HIDE_CHANGE_BOX_SAVE_MSG
+	ld a, [wd730]
+	push af
+	jr nz, .savePromptSkip
+	res 6, a ; turn on letter printing delay so we don't get instant text
+	ld [wd730], a 
+	
 	ld hl, WhenYouChangeBoxText
-	call PrintText
-	call YesNoChoice
+	rst _PrintText
+
+	ld hl, YesNoSkip
+	ld a, l
+	ld [wListPointer], a
+	ld a, h
+	ld [wListPointer + 1], a
+	xor a
+	ld [wCurrentMenuItem], a
+	ld a, A_BUTTON | B_BUTTON
+	ld [wMenuWatchedKeys], a
+	callfar DisplayMultiChoiceMenu
+	ldh a, [hJoy5]
+	bit BIT_B_BUTTON, a
+	jr nz, .done
 	ld a, [wCurrentMenuItem]
 	and a
-	ret nz ; return if No was chosen
+	jr z, .yes ; jump if yes was chosen
+	cp 1
+	jr z, .done ; return if no was chosen
+
+	SetEvent EVENT_HIDE_CHANGE_BOX_SAVE_MSG ; set this flag if SKIP was chosen
+	ld hl, SkippedForeverText
+	rst _PrintText
+.savePromptSkip
+.yes
+	set 6, a ; turn off letter printing delay so we get instant text
+	ld [wd730], a
 	ld hl, wCurrentBoxNum
 	bit 7, [hl] ; is it the first time player is changing the box?
 	call z, EmptyAllSRAMBoxes ; if so, empty all boxes in SRAM
-	call DisplayChangeBoxMenu
+	callfar DisplayChangeBoxMenu
 	call UpdateSprites
 	ld hl, hUILayoutFlags
 	set 1, [hl]
@@ -363,7 +393,7 @@ ChangeBox::
 	ld hl, hUILayoutFlags
 	res 1, [hl]
 	bit BIT_B_BUTTON, a
-	ret nz
+	jr nz, .done
 	call GetBoxSRAMLocation
 	ld e, l
 	ld d, h
@@ -389,10 +419,17 @@ ChangeBox::
 	ld a, SFX_SAVE
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
+.done
+	pop af
+	ld [wd730], a
 	ret
 
 WhenYouChangeBoxText:
 	text_far _WhenYouChangeBoxText
+	text_end
+
+SkippedForeverText:
+	text_far _SkippedForever
 	text_end
 
 CopyBoxToOrFromSRAM:
@@ -405,7 +442,7 @@ CopyBoxToOrFromSRAM:
 	ld a, b
 	ld [MBC1SRamBank], a
 	ld bc, wBoxDataEnd - wBoxDataStart
-	call CopyData
+	rst _CopyData
 	pop hl
 
 ; mark the memory that the box was copied from as am empty box
@@ -423,98 +460,6 @@ CopyBoxToOrFromSRAM:
 	ld [MBC1SRamBankingMode], a
 	ld [MBC1SRamEnable], a
 	ret
-
-DisplayChangeBoxMenu:
-	xor a
-	ldh [hAutoBGTransferEnabled], a
-	ld a, A_BUTTON | B_BUTTON
-	ld [wMenuWatchedKeys], a
-	ld a, 11
-	ld [wMaxMenuItem], a
-	ld a, 1
-	ld [wTopMenuItemY], a
-	ld a, 12
-	ld [wTopMenuItemX], a
-	xor a
-	ld [wMenuWatchMovingOutOfBounds], a
-	ld a, [wCurrentBoxNum]
-	and $7f
-	ld [wCurrentMenuItem], a
-	ld [wLastMenuItem], a
-	hlcoord 0, 0
-	ld b, 2
-	ld c, 9
-	call TextBoxBorder
-	ld hl, ChooseABoxText
-	call PrintText
-	hlcoord 11, 0
-	ld b, 12
-	ld c, 7
-	call TextBoxBorder
-	ld hl, hUILayoutFlags
-	set 2, [hl]
-	ld de, BoxNames
-	hlcoord 13, 1
-	call PlaceString
-	ld hl, hUILayoutFlags
-	res 2, [hl]
-	ld a, [wCurrentBoxNum]
-	and $7f
-	cp 9
-	jr c, .singleDigitBoxNum
-	sub 9
-	hlcoord 8, 2
-	ld [hl], "1"
-	add "0"
-	jr .next
-.singleDigitBoxNum
-	add "1"
-.next
-	ldcoord_a 9, 2
-	hlcoord 1, 2
-	ld de, BoxNoText
-	call PlaceString
-	call GetMonCountsForAllBoxes
-	hlcoord 18, 1
-	ld de, wBoxMonCounts
-	ld bc, SCREEN_WIDTH
-	ld a, $c
-.loop
-	push af
-	ld a, [de]
-	and a ; is the box empty?
-	jr z, .skipPlacingPokeball
-	ld [hl], $78 ; place pokeball tile next to box name if box not empty
-.skipPlacingPokeball
-	add hl, bc
-	inc de
-	pop af
-	dec a
-	jr nz, .loop
-	ld a, 1
-	ldh [hAutoBGTransferEnabled], a
-	ret
-
-ChooseABoxText:
-	text_far _ChooseABoxText
-	text_end
-
-BoxNames:
-	db   "BOX 1"
-	next "BOX 2"
-	next "BOX 3"
-	next "BOX 4"
-	next "BOX 5"
-	next "BOX 6"
-	next "BOX 7"
-	next "BOX 8"
-	next "BOX 9"
-	next "BOX10"
-	next "BOX11"
-	next "BOX12@"
-
-BoxNoText:
-	db "BOX No.@"
 
 EmptyAllSRAMBoxes:
 ; marks all boxes in SRAM as empty (initialisation for the first time the
@@ -711,7 +656,7 @@ HallOfFame_Copy:
 	ld [MBC1SRamBankingMode], a
 	xor a
 	ld [MBC1SRamBank], a
-	call CopyData
+	rst _CopyData
 	xor a
 	ld [MBC1SRamBankingMode], a
 	ld [MBC1SRamEnable], a

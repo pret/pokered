@@ -30,7 +30,7 @@ SetPal_Battle:
 	ld hl, PalPacket_Empty
 	ld de, wPalPacket
 	ld bc, $10
-	call CopyData
+	rst _CopyData
 	ld a, [wBattleMonFlags]
 	and 1 ; only the 1st bit of the flags determines alt palette
 	ld [wIsAltPalettePkmn], a
@@ -76,7 +76,7 @@ SetPal_StatusScreen:
 	ld hl, PalPacket_Empty
 	ld de, wPalPacket
 	ld bc, $10
-	call CopyData
+	rst _CopyData
 	ld a, [wcf91]
 	cp NUM_POKEMON_INDEXES + 1
 	jr c, .pokemon
@@ -112,7 +112,7 @@ SetPal_Pokedex:
 	ld hl, PalPacket_Pokedex
 	ld de, wPalPacket
 	ld bc, $10
-	call CopyData
+	rst _CopyData
 	ld a, [wcf91]
 	; no alt palette colors when viewing pokedex entries
 	call DeterminePaletteIDOutOfBattle
@@ -127,7 +127,7 @@ SetPal_Movedex:
 	ld hl, PalPacket_Movedex
 	ld de, wPalPacket
 	ld bc, $10
-	call CopyData
+	rst _CopyData
 	ld a, [wcf91]
 	ld d, a
 	callfar GetTypePalette
@@ -144,7 +144,7 @@ SetPal_MiddleScreenMonBox:
 	ld hl, PalPacket_Empty
 	ld de, wPalPacket
 	ld bc, $10
-	call CopyData
+	rst _CopyData
 
 	call GetOverworldPalette
 	ld hl, wPalPacket + 1
@@ -164,7 +164,7 @@ SetPal_ColorBeforeAfter:
 	ld hl, PalPacket_Empty
 	ld de, wPalPacket
 	ld bc, $10
-	call CopyData
+	rst _CopyData
 	; before picture
 	ld a, [wLoadedMonFlags]
 	and 1 ; only the 1st bit of the flags determines alt palette, zero the other ones
@@ -223,7 +223,7 @@ SetPal_Overworld:
 	ld hl, PalPacket_Empty
 	ld de, wPalPacket
 	ld bc, $10
-	call CopyData
+	rst _CopyData
 	call GetOverworldPalette
 	ld hl, wPalPacket + 1
 	ld [hld], a
@@ -305,7 +305,7 @@ SetPal_PokemonWholeScreenTrade:
 	ld hl, PalPacket_Empty
 	ld de, wPalPacket
 	ld bc, $10
-	call CopyData
+	rst _CopyData
 	pop bc
 	ld a, c
 	and a
@@ -323,7 +323,7 @@ SetPal_TrainerCard:
 	ld hl, BlkPacket_TrainerCard
 	ld de, wTrainerCardBlkPacket
 	ld bc, $40
-	call CopyData
+	rst _CopyData
 	ld de, BadgeBlkDataLengths
 	ld hl, wTrainerCardBlkPacket + 2
 	ld a, [wObtainedBadges]
@@ -677,7 +677,7 @@ CopyGfxToSuperNintendoVRAM:
 	jr .next
 .notCopyingTileData
 	ld bc, $1000
-	call CopyData
+	rst _CopyData
 .next
 	ld hl, vBGMap0
 	ld de, $c

@@ -1,15 +1,17 @@
-; copy text of fixed length NAME_LENGTH (like player name, rival name, mon names, ...)
-CopyFixedLengthText:
+CopyDebugName:
 	ld bc, NAME_LENGTH
 	jp CopyData
 
-SetDefaultNamesBeforeTitlescreen::
-	ld hl, NintenText
+PrepareTitleScreen::
+	; These debug names are already copied later in PrepareOakSpeech.
+	; Removing the unused copies below has no apparent impact.
+	; CopyDebugName can also be safely deleted afterwards.
+	ld hl, DebugNewGamePlayerName
 	ld de, wPlayerName
-	call CopyFixedLengthText
-	ld hl, SonyText
+	call CopyDebugName
+	ld hl, DebugNewGameRivalName
 	ld de, wRivalName
-	call CopyFixedLengthText
+	call CopyDebugName
 	xor a
 	ldh [hWY], a
 	ld [wLetterPrintingDelayFlags], a
@@ -162,7 +164,7 @@ ENDC
 	cp -3
 	jr nz, .skipPlayingSound
 	ld a, SFX_INTRO_CRASH
-	call PlaySound
+	rst _PlaySound
 .skipPlayingSound
 	ld a, [hli]
 	ld e, a
@@ -183,7 +185,7 @@ ENDC
 .ScrollTitleScreenPokemonLogo:
 ; Scrolls the Pokemon logo on the title screen to create the bouncing effect
 ; Scrolls d pixels e times
-	call DelayFrame
+	rst _DelayFrame
 	ld a, [bc] ; background scroll Y
 	add d
 	ld [bc], a
@@ -194,9 +196,9 @@ ENDC
 .finishedBouncingPokemonLogo
 	call LoadScreenTilesFromBuffer1
 	ld c, 36
-	call DelayFrames
+	rst _DelayFrames
 	ld a, SFX_INTRO_WHOOSH
-	call PlaySound
+	rst _PlaySound
 
 ; scroll game version in from the right
 	call PrintGameVersionOnTitleScreen
@@ -224,7 +226,7 @@ ENDC
 	call WaitForSoundToFinish
 	ld a, MUSIC_TITLE_SCREEN
 	ld [wNewSoundID], a
-	call PlaySound
+	rst _PlaySound
 	xor a
 	ld [wUnusedCC5B], a
 
@@ -450,5 +452,8 @@ IF DEF(_GREEN) ; PureRGBnote: GREENBUILD: different title screen subtitle text f
 	db $62,$63,$64,$7F,$65,$66,$67,$68,$69,"@" ; "Green Version"
 ENDC
 
-NintenText: db "NINTEN@"
-SonyText:   db "SONY@"
+DebugNewGamePlayerName:
+	db "NINTEN@"
+
+DebugNewGameRivalName:
+	db "SONY@"

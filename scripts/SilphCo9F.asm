@@ -136,7 +136,7 @@ Load9FCheckCardKeyText:
 SilphCo9Text5:
 	text_asm
 	callfar PrintCardKeyDoneText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo9F_ScriptPointers:
 	dw CheckFightingMapTrainers
@@ -165,19 +165,19 @@ SilphCo9Text1:
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .asm_5d8dc
 	ld hl, SilphCo9Text_5d8e5
-	call PrintText
+	rst _PrintText
 	predef HealParty
 	call GBFadeOutToWhite
 	call Delay3
 	call GBFadeInFromWhite
 	ld hl, SilphCo9Text_5d8ea
-	call PrintText
+	rst _PrintText
 	jr .asm_5d8e2
 .asm_5d8dc
 	ld hl, SilphCo9Text_5d8ef
-	call PrintText
+	rst _PrintText
 .asm_5d8e2
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo9Text_5d8e5:
 	text_far _SilphCo9Text_5d8e5
@@ -195,19 +195,19 @@ SilphCo9Text2:
 	text_asm
 	ld hl, SilphCo9TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo9Text3:
 	text_asm
 	ld hl, SilphCo9TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo9Text4:
 	text_asm
 	ld hl, SilphCo9TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo9BattleText1:
 	text_far _SilphCo9BattleText1

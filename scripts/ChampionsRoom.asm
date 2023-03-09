@@ -227,7 +227,6 @@ GaryScript10:
 	ret nz
 	xor a
 	ld [wJoyIgnore], a
-	ld a, $0
 	ld [wChampionsRoomCurScript], a
 	ret
 
@@ -253,8 +252,8 @@ GaryText1:
 	jr z, .printText
 	ld hl, GaryText_76103
 .printText
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 GaryChampionIntroText:
 	text_far _GaryChampionIntroText
@@ -282,8 +281,8 @@ GaryText3:
 	ld [wd11e], a
 	call GetMonName
 	ld hl, GaryText_76120
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 GaryText_76120:
 	text_far _GaryText_76120

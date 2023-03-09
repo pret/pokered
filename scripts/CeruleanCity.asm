@@ -96,7 +96,7 @@ ENDC
 	jr z, .walking
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	call PlaySound
+	rst _PlaySound
 .walking
 	ld c, BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
@@ -203,7 +203,7 @@ CeruleanCityScript2:
 	call DisplayTextID
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	call PlaySound
+	rst _PlaySound
 	farcall Music_RivalAlternateStart
 	ld a, $1
 	ldh [hSpriteIndex], a
@@ -284,13 +284,13 @@ CeruleanCityText1:
 	jr z, .PreBattleText
 	; or talk about bill
 	ld hl, CeruleanCityText_19677
-	call PrintText
+	rst _PrintText
 	jr .end
 .PreBattleText
 	ld hl, CeruleanCityText_19668
-	call PrintText
+	rst _PrintText
 .end
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeruleanCityText_19668:
 	text_far _CeruleanCityText_19668
@@ -313,7 +313,7 @@ CeruleanCityText2:
 	CheckEvent EVENT_BEAT_CERULEAN_ROCKET_THIEF
 	jr nz, .beatRocketThief
 	ld hl, CeruleanCityText_196d9
-	call PrintText
+	rst _PrintText
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
@@ -326,24 +326,24 @@ CeruleanCityText2:
 	call InitBattleEnemyParameters
 	ld a, $4
 	ld [wCeruleanCityCurScript], a
-	jp TextScriptEnd
+	rst TextScriptEnd
 .beatRocketThief
 	ld hl, CeruleanCityText_196f3
-	call PrintText
+	rst _PrintText
 	lb bc, TM_CERULEAN_ROCKET_TM_THIEF, 1
 	call GiveItem
 	jr c, .Success
 	ld hl, TM28NoRoomText
-	call PrintText
+	rst _PrintText
 	jr .Done
 .Success
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, ReceivedTM28Text
-	call PrintText
+	rst _PrintText
 	farcall CeruleanHideRocket
 .Done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeruleanCityText_196d9:
 	text_far _CeruleanCityText_196d9
@@ -381,8 +381,8 @@ CeruleanCityText4:
 .deletedTree
 	ld hl, CeruleanCityText4_AfterTreeDelete ; instead he'll comment on how it was removed
 .done
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 CeruleanCityText4_BeforeTreeDelete:
 	text_far _CeruleanCityText4
@@ -407,20 +407,20 @@ CeruleanCityText7:
 	cp 180 ; 76/256 chance of 1st dialogue
 	jr c, .notFirstText
 	ld hl, CeruleanCityText_19730
-	call PrintText
+	rst _PrintText
 	jr .end
 .notFirstText
 	cp 100 ; 80/256 chance of 2nd dialogue
 	jr c, .notSecondText
 	ld hl, CeruleanCityText_19735
-	call PrintText
+	rst _PrintText
 	jr .end
 .notSecondText
 	; 100/256 chance of 3rd dialogue
 	ld hl, CeruleanCityText_1973a
-	call PrintText
+	rst _PrintText
 .end
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeruleanCityText_19730:
 	text_far _CeruleanCityText_19730
@@ -440,26 +440,26 @@ CeruleanCityText8:
 	cp 180 ; 76/256 chance of 1st dialogue
 	jr c, .notFirstText
 	ld hl, CeruleanCityText_1976f
-	call PrintText
+	rst _PrintText
 	jr .end
 .notFirstText
 	cp 120 ; 60/256 chance of 2nd dialogue
 	jr c, .notSecondText
 	ld hl, CeruleanCityText_19774
-	call PrintText
+	rst _PrintText
 	jr .end
 .notSecondText
 	cp 60 ; 60/256 chance of 3rd dialogue
 	jr c, .notThirdText
 	ld hl, CeruleanCityText_19779
-	call PrintText
+	rst _PrintText
 	jr .end
 .notThirdText
 	; 60/256 chance of 4th dialogue
 	ld hl, CeruleanCityText_1977e
-	call PrintText
+	rst _PrintText
 .end
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeruleanCityText_1976f:
 	text_far _CeruleanCityText_1976f

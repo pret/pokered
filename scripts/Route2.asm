@@ -79,14 +79,14 @@ Route2TrainerHeader0:
 Route2TrainerHeader1:
 	trainer EVENT_BEAT_ROUTE_2_TRAINER_1, 4, Route2BattleText2, Route2EndBattleText2, Route2AfterBattleText2
 Route2TrainerHeader2:
-	trainer EVENT_BEAT_ROUTE_2_TRAINER_2, 3, Route2BattleText3, Route2EndBattleText3, Route2AfterBattleText3
+	trainer EVENT_BEAT_ROUTE_2_TRAINER_2, 1, Route2BattleText3, Route2EndBattleText3, Route2AfterBattleText3
 	db -1 ; end
 
 Route2BugCatcherText:
 	text_asm
 	ld hl, Route2TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route2BattleText1:
 	text_far _Route2BattleText1
@@ -104,7 +104,7 @@ Route2JrTrainerMText:
 	text_asm
 	ld hl, Route2TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route2BattleText2:
 	text_far _Route2BattleText2
@@ -122,7 +122,7 @@ Route2JrTrainerFText:
 	text_asm
 	ld hl, Route2TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route2BattleText3:
 	text_far _Route2BattleText3

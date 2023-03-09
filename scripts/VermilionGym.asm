@@ -34,7 +34,7 @@ VermilionGymSetDoorTile:
 	jr .replaceTile
 .doorsOpen
 	ld a, SFX_GO_INSIDE
-	call PlaySound
+	rst _PlaySound
 	ld a, $5 ; clear floor tile ID
 .replaceTile
 	ld [wNewTileBlockID], a
@@ -120,11 +120,11 @@ LTSurgeText:
 	jr .done
 .afterBeat
 	ld hl, LTSurgePostBattleAdviceText
-	call PrintText
+	rst _PrintText
 	jr .done
 .beforeBeat
 	ld hl, LTSurgePreBattleText
-	call PrintText
+	rst _PrintText
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
@@ -143,7 +143,7 @@ LTSurgeText:
 	ld [wVermilionGymCurScript], a
 	ld [wCurMapScript], a
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 LTSurgePreBattleText:
 	text_far _LTSurgePreBattleText
@@ -175,7 +175,7 @@ VermilionGymTrainerText1:
 	text_asm
 	ld hl, VermilionGymTrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 VermilionGymBattleText1:
 	text_far _VermilionGymBattleText1
@@ -193,7 +193,7 @@ VermilionGymTrainerText2:
 	text_asm
 	ld hl, VermilionGymTrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 VermilionGymBattleText2:
 	text_far _VermilionGymBattleText2
@@ -211,7 +211,7 @@ VermilionGymTrainerText3:
 	text_asm
 	ld hl, VermilionGymTrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 VermilionGymBattleText3:
 	text_far _VermilionGymBattleText3
@@ -231,38 +231,38 @@ VermilionGymGuideText: ; PureRGBnote: ADDED: gym guide gives you apex chips afte
 	bit BIT_THUNDERBADGE, a
 	jr nz, .afterBeat
 	ld hl, VermilionGymGuidePreBattleText
-	call PrintText
+	rst _PrintText
 	jr .done
 .afterBeat
 	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS ; have to hear about apex chips to receive them after that
 	jr z, .postNoPrompt
 	ld hl, VermilionGymGuidePostBattleTextPrompt
-	call PrintText
+	rst _PrintText
 	CheckEvent EVENT_GOT_VERMILION_APEX_CHIPS
 	jr nz, .alreadyApexChips
 .giveApexChips
 	ld hl, GymGuideMoreApexChipText3
-	call PrintText
+	rst _PrintText
 	lb bc, APEX_CHIP, 2
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, ReceivedApexChipsText3
-	call PrintText
+	rst _PrintText
 	ld hl, VermilionGymGuideApexChipElectricText
-	call PrintText
+	rst _PrintText
 	SetEvent EVENT_GOT_VERMILION_APEX_CHIPS
 .alreadyApexChips
 	ld hl, AlreadyReceivedApexChipsText3
-	call PrintText
+	rst _PrintText
 	jr .done
 .BagFull
 	ld hl, ApexNoRoomText3
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 .postNoPrompt
 	ld hl, VermilionGymGuidePostBattleText
-	call PrintText
+	rst _PrintText
 	jr .done
 
 ReceivedApexChipsText3:

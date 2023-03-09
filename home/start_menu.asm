@@ -5,7 +5,7 @@ DisplayStartMenu::
 	ld a, [wWalkBikeSurfState] ; walking/biking/surfing
 	ld [wWalkBikeSurfStateCopy], a
 	ld a, SFX_START_MENU
-	call PlaySound
+	rst _PlaySound
 
 RedisplayStartMenu::
 	farcall DrawStartMenu

@@ -107,13 +107,13 @@ Mansion3Text1:
 	text_asm
 	ld hl, Mansion3TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Mansion3Text2:
 	text_asm
 	ld hl, Mansion3TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Mansion3BattleText1:
 	text_far _Mansion3BattleText1
@@ -143,7 +143,7 @@ Mansion3Text3:
 	text_asm
 	ld hl, Mansion3TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Mansion3BattleText3:
 	text_far _Mansion3BattleText3

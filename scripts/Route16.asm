@@ -94,7 +94,7 @@ Route16Text1:
 	text_asm
 	ld hl, Route16TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route16BattleText1:
 	text_far _Route16BattleText1
@@ -112,7 +112,7 @@ Route16Text2:
 	text_asm
 	ld hl, Route16TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route16BattleText2:
 	text_far _Route16BattleText2
@@ -130,7 +130,7 @@ Route16Text3:
 	text_asm
 	ld hl, Route16TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route16BattleText3:
 	text_far _Route16BattleText3
@@ -148,7 +148,7 @@ Route16Text4:
 	text_asm
 	ld hl, Route16TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route16BattleText4:
 	text_far _Route16BattleText4
@@ -166,7 +166,7 @@ Route16Text5:
 	text_asm
 	ld hl, Route16TrainerHeader4
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route16BattleText5:
 	text_far _Route16BattleText5
@@ -184,7 +184,7 @@ Route16Text6:
 	text_asm
 	ld hl, Route16TrainerHeader5
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route16BattleText6:
 	text_far _Route16BattleText6

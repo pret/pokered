@@ -5,7 +5,7 @@ ShakeElevator::
 	call ShakeElevatorRedrawRow
 	call Delay3
 	ld a, SFX_STOP_ALL_MUSIC
-	call PlaySound
+	rst _PlaySound
 	ldh a, [hSCY]
 	ld d, a
 	ld e, $1
@@ -22,13 +22,13 @@ ShakeElevator::
 	call PlayMusic
 	pop bc
 	ld c, 2
-	call DelayFrames
+	rst _DelayFrames
 	dec b
 	jr nz, .shakeLoop
 	ld a, d
 	ldh [hSCY], a
 	ld a, SFX_STOP_ALL_MUSIC
-	call PlaySound
+	rst _PlaySound
 	ld c, BANK(SFX_Safari_Zone_PA)
 	ld a, SFX_SAFARI_ZONE_PA
 	call PlayMusic

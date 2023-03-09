@@ -50,7 +50,7 @@ Route10Text1:
 	text_asm
 	ld hl, Route10TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route10BattleText1:
 	text_far _Route10BattleText1
@@ -68,7 +68,7 @@ Route10Text2:
 	text_asm
 	ld hl, Route10TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route10BattleText2:
 	text_far _Route10BattleText2
@@ -86,7 +86,7 @@ Route10Text3:
 	text_asm
 	ld hl, Route10TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route10BattleText3:
 	text_far _Route10BattleText3
@@ -104,7 +104,7 @@ Route10Text4:
 	text_asm
 	ld hl, Route10TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route10BattleText4:
 	text_far _Route10BattleText4
@@ -122,7 +122,7 @@ Route10Text5:
 	text_asm
 	ld hl, Route10TrainerHeader4
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route10BattleText5:
 	text_far _Route10BattleText5
@@ -140,7 +140,7 @@ Route10Text6:
 	text_asm
 	ld hl, Route10TrainerHeader5
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route10BattleText6:
 	text_far _Route10BattleText6
@@ -158,7 +158,7 @@ Route10Text7:
 	text_asm
 	ld hl, Route10TrainerHeader6
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route10BattleText7:
 	text_far _Route10BattleText7

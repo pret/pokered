@@ -70,21 +70,22 @@ ROMX $8
 	"Music 2"
 ROMX $9
 	"Pics 1"
-	"Battle Engine 3"
 ROMX $A
 	"Pics 2"
-	"Battle Engine 4"
 ROMX $B
 	"Pics 3"
-	"Battle Engine 5"
 ROMX $C
 	"Pics 4"
-	"Battle Engine 6"
 ROMX $D
 	"Pics 5"
-	"Slot Machines"
 ROMX $E
+	"Battle Engine 3"
+	"Battle Engine 4"
+	"Battle Engine 5"
+	"Battle Engine 6"
 	"Battle Engine 7"
+	"Slot Machines"
+	"Predefs"
 ROMX $F
 	"Battle Core"
 ROMX $10
@@ -100,9 +101,8 @@ ROMX $12
 	"Maps 8"
 ROMX $13
 	"Pics 6"
-	"Maps 9"
-	"Predefs"
 ROMX $14
+	"Maps 9"
 	"Maps 10"
 	"Battle Engine 8"
 	"Hidden Objects 2"
@@ -193,6 +193,7 @@ ROMX $31
 	"Movedex Text"
 ROMX $32
 	"Type Icons"
+	"Menu Prompt Graphics"
 	"Tilesets 4"
 ROMX $33
 	"movedCode"

@@ -158,7 +158,7 @@ PoisonEffect:
 	ret nz
 .didntAffect
 	ld c, 50
-	call DelayFrames
+	rst _DelayFrames
 	jp PrintDidntAffectText
 
 PoisonedText:
@@ -373,7 +373,7 @@ CheckDefrost:
 	ld [hl], a
 	ld hl, FireDefrostedText
 .common
-	call PrintText
+	rst _PrintText
 	farjp CheckDefrostMove
 
 
@@ -642,7 +642,7 @@ UpdateStatDone:
 	                             ; even to those not affected by the stat-up move (will be boosted further)
 	                             ; PureRGBnote: FIXED: badge boosts only applied to the specific stat being modified
 	ld hl, MonsStatsRoseText
-	call PrintText
+	rst _PrintText
 
 ; these always run on the opponent, and run regardless of what stat was modified
 ;;;;;;;;;;; PureRGBnote: FIXED: These ran on the opponent's stats erroneously
@@ -867,7 +867,7 @@ UpdateLoweredStatDone:
 	                              ; even to those not affected by the stat-up move (will be boosted further)
 	                             ; PureRGBnote: FIXED: badge boosts only applied to the specific stat being modified
 	ld hl, MonsStatsFellText
-	call PrintText
+	rst _PrintText
 
 ; These where probably added given that a stat-down move affecting speed or attack will override
 ; the stat penalties from paralysis and burn respectively.
@@ -994,124 +994,18 @@ ThrashPetalDanceEffect:
 	ld a, SHRINKING_SQUARE_ANIM
 	jp PlayBattleAnimation2
 
-SwitchAndTeleportEffect:
-	ldh a, [hWhoseTurn]
-	and a
-	jr nz, .handleEnemy
-	ld a, [wIsInBattle]
-	dec a
-	jr nz, .notWildBattle1
-	ld a, [wCurEnemyLVL]
-	ld b, a
-	ld a, [wBattleMonLevel]
-	cp b ; is the player's level greater than the enemy's level?
-	jr nc, .playerMoveWasSuccessful ; if so, teleport will always succeed
-	add b
-	ld c, a
-	inc c ; c = playerLevel + enemyLevel + 1
-.rejectionSampleLoop1
+TeleportEffect:
+	jpfar _TeleportEffect
+
+TeleportWildPokemon::
+.rejectionSampleLoop
 	call BattleRandom
-	cp c ; get a random number between 0 and c
-	jr nc, .rejectionSampleLoop1
-	srl b
-	srl b  ; b = enemyLevel / 4
-	cp b ; is rand[0, playerLevel + enemyLevel] >= (enemyLevel / 4)?
-	jr nc, .playerMoveWasSuccessful ; if so, allow teleporting
-	ld c, 50
-	call DelayFrames
-	ld a, [wPlayerMoveNum]
-	cp TELEPORT
-	jp nz, PrintDidntAffectText
-	jp PrintButItFailedText_
-.playerMoveWasSuccessful
-	call ReadPlayerMonCurHPAndStatus
-	xor a
-	ld [wAnimationType], a
-	inc a
-	ld [wEscapedFromBattle], a
-	ld a, [wPlayerMoveNum]
-	jr .playAnimAndPrintText
-.notWildBattle1
-	ld c, 50
-	call DelayFrames
-	ld hl, IsUnaffectedText
-	ld a, [wPlayerMoveNum]
-	cp TELEPORT
-	jp nz, PrintText
-	jp PrintButItFailedText_
-.handleEnemy
-	ld a, [wIsInBattle]
-	dec a
-	jr nz, .notWildBattle2
-	ld a, [wBattleMonLevel]
-	ld b, a
-	ld a, [wCurEnemyLVL]
-	cp b
-	jr nc, .enemyMoveWasSuccessful
-	add b
-	ld c, a
-	inc c
-.rejectionSampleLoop2
-	call BattleRandom
-	cp c
-	jr nc, .rejectionSampleLoop2
-	srl b
-	srl b
-	cp b
-	jr nc, .enemyMoveWasSuccessful
-	ld c, 50
-	call DelayFrames
-	ld a, [wEnemyMoveNum]
-	cp TELEPORT
-	jp nz, PrintDidntAffectText
-	jp PrintButItFailedText_
-.enemyMoveWasSuccessful
-	call ReadPlayerMonCurHPAndStatus
-	xor a
-	ld [wAnimationType], a
-	inc a
-	ld [wEscapedFromBattle], a
-	ld a, [wEnemyMoveNum]
-	jr .playAnimAndPrintText
-.notWildBattle2
-	ld c, 50
-	call DelayFrames
-	ld hl, IsUnaffectedText
-	ld a, [wEnemyMoveNum]
-	cp TELEPORT
-	jp nz, PrintText
-	jp ConditionalPrintButItFailed
-.playAnimAndPrintText
-	; push af
-;;;;;;;;;; PureRGBnote: ADDED: set the flag that makes the animation code mark this move as seen in the movedex
-	ld hl, wBattleFunctionalFlags
-	set 0, [hl] ; teleport will be marked off on the movedex
-;;;;;;;;;;
-	call PlayBattleAnimation
-	ld c, 20
-	call DelayFrames
-	; pop af
-	ld hl, RanFromBattleText
-	;cp TELEPORT ; PureRGBnote: CHANGED: roar and whirlwind have different effects now so no need for this code
-	;jr z, .printText
-	;ld hl, RanAwayScaredText
-	;cp ROAR
-	;jr z, .printText
-	;ld hl, WasBlownAwayText
-.printText
-	jp PrintText
-
-RanFromBattleText:
-	text_far _RanFromBattleText
-	text_end
-
-RanAwayScaredText:
-	text_far _RanAwayScaredText
-	text_end
-
-WasBlownAwayText:
-	text_far _WasBlownAwayText
-	text_end
+	cp e
+	jr nc, .rejectionSampleLoop
+	srl d
+	srl d
+	cp d
+	ret
 
 TwoToFiveAttacksEffect:
 	ld hl, wPlayerBattleStatus1
@@ -1217,15 +1111,9 @@ ChargeEffect:
 	ld a, [de]
 	dec de ; de contains enemy or player MOVENUM
 	cp FLY_EFFECT
-	jr nz, .notFly
-	ld b, TELEPORT ; load Teleport's animation
-	jr .finish
-.notFly
-	;ld a, [de]
-	;cp DIG
-	;jr nz, .notDigOrFly
 	ld b, DIG_DOWN_ANIM ; dig is the only other option
-;.notDigOrFly
+	jr nz, .finish
+	ld b, FLY_ANIM_PART1 ; load fly's first part animation
 .finish
 	xor a
 	ld [wAnimationType], a
@@ -1389,7 +1277,7 @@ ConfusionEffectFailed:
 	cp CONFUSION_SIDE_EFFECT
 	ret z
 	ld c, 50
-	call DelayFrames
+	rst _DelayFrames
 	jp ConditionalPrintButItFailed
 
 BurnEffect:
@@ -1436,7 +1324,7 @@ ClearHyperBeam:
 
 MimicEffect:
 	ld c, 50
-	call DelayFrames
+	rst _DelayFrames
 	call MoveHitTest
 	ld a, [wMoveMissed]
 	and a
@@ -1503,7 +1391,7 @@ MimicEffect:
 	call GetMoveName
 	call PlayCurrentMoveAnimation
 	ld hl, MimicLearnedMoveText
-	call PrintText
+	rst _PrintText
 ;;;;;;;;;; PureRGBnote: CHANGED: Now immediately use the move
 	ld a, [hWhoseTurn]
 	and a

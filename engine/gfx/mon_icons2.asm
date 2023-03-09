@@ -94,11 +94,11 @@ FillPartyMonOAM:
 	ld hl, PartyMonOAM
 	ld de, wShadowOAM
 	ld bc, $60
-	call CopyData
+	rst _CopyData
 	ld hl, PartyMonOAM
 	ld de, wMonPartySpritesSavedOAM
 	ld bc, $60
-	call CopyData
+	rst _CopyData
 	pop bc
 	pop de
 	pop hl
@@ -140,7 +140,7 @@ ShowPartyMonSprite:
 	pop de
 	pop hl
 	ld bc, $10
-	call CopyData
+	rst _CopyData
 	pop bc
 	pop de
 	pop hl

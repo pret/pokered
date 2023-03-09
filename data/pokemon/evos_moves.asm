@@ -837,9 +837,10 @@ MrMimeEvosMoves:
 	db 0
 ; Learnset
 	db 17, DOUBLESLAP
-	db 21, LIGHT_SCREEN
+	db 19, LIGHT_SCREEN
 	db 23, PSYBEAM
-	db 26, MIRROR_MOVE
+	db 25, TELEPORT
+	db 28, MIRROR_MOVE
 	db 31, SEISMIC_TOSS
 	db 35, MEDITATE
 	db 39, PSYCHIC_M
@@ -920,6 +921,7 @@ PsyduckEvosMoves:
 	db 23, LOW_KICK
 	db 27, REFLECT
 	db 32, WATERFALL
+	db 34, TELEPORT
 	db 38, AMNESIA
 	db 44, PSYCHIC_M
 	db 50, SWIFT
@@ -973,7 +975,8 @@ MagmarEvosMoves:
 ; Learnset
 	db 15, SMOG
 	db 18, ROLLING_KICK
-	db 23, CONFUSE_RAY
+	db 20, CONFUSE_RAY
+	db 23, TELEPORT
 	db 27, FIRE_PUNCH
 	db 32, BARRAGE
 	db 38, FLAMETHROWER
@@ -1007,9 +1010,9 @@ MagnetonEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
-	db 13, SCREECH
+	db 13, THUNDERSHOCK
 	db 16, SONICBOOM
-	db 19, BARRAGE
+	db 19, TELEPORT
 	db 22, THUNDER_WAVE
 	db 26, PSYBEAM
 	db 31, TRI_ATTACK
@@ -1984,6 +1987,7 @@ GolduckEvosMoves:
 	db 23, LOW_KICK
 	db 27, REFLECT
 	db 32, WATERFALL
+	db 34, TELEPORT
 	db 38, AMNESIA
 	db 44, PSYCHIC_M
 	db 50, SWIFT
@@ -2577,7 +2581,7 @@ MagnemiteEvosMoves:
 ; Learnset
 	db 13, THUNDERSHOCK
 	db 16, SONICBOOM
-	db 19, BARRAGE
+	db 19, TELEPORT
 	db 22, THUNDER_WAVE
 	db 26, PSYBEAM
 	db 31, TRI_ATTACK

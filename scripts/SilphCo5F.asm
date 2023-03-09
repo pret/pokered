@@ -82,7 +82,7 @@ Load5FCheckCardKeyText:
 SilphCo5Text12:
 	text_asm
 	callfar PrintCardKeyDoneText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo5F_ScriptPointers:
 	dw CheckFightingMapTrainers
@@ -120,7 +120,7 @@ SilphCo5Text1:
 	ld hl, SilphCo5Text_1a010
 	ld de, SilphCo5Text_1a015
 	call SilphCo6Script_1a22f
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo5Text_1a010:
 	text_far _SilphCo5Text_1a010
@@ -134,7 +134,7 @@ SilphCo5Text2:
 	text_asm
 	ld hl, SilphCo5TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo5BattleText2:
 	text_far _SilphCo5BattleText2
@@ -152,7 +152,7 @@ SilphCo5Text3:
 	text_asm
 	ld hl, SilphCo5TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo5BattleText3:
 	text_far _SilphCo5BattleText3
@@ -170,7 +170,7 @@ SilphCo5Text4:
 	text_asm
 	ld hl, SilphCo5TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo5BattleText4:
 	text_far _SilphCo5BattleText4
@@ -188,7 +188,7 @@ SilphCo5Text5:
 	text_asm
 	ld hl, SilphCo5TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo5BattleText5:
 	text_far _SilphCo5BattleText5

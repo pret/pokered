@@ -1,3 +1,32 @@
+; draws a line of tiles
+; INPUT:
+; b = tile ID
+; c = number of tile ID's to write
+; de = amount to destination address after each tile (1 for horizontal, 20 for vertical)
+; hl = destination address
+
+DrawTileLine::
+	push bc
+	ld a, b
+	ld b, 0 ; tile number stays the same during the loop
+TileLineLoop:
+	push de
+.loop
+	ld [hl], a
+	add hl, de
+	add a, b
+	dec c
+	jr nz, .loop
+	pop de
+	pop bc
+	ret
+
+DrawTileLineIncrement::
+	push bc
+	ld a, b
+	ld b, 1
+	jr TileLineLoop
+
 FillMemory::
 ; Fill bc bytes at hl with a.
 	push de
@@ -32,7 +61,8 @@ SaveScreenTilesToBuffer1::
 SaveScreenTilesCommon:
 	hlcoord 0, 0
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	jp CopyData
+	rst _CopyData
+	ret
 
 LoadScreenTilesFromBuffer2::
 	call LoadScreenTilesFromBuffer2DisableBGTransfer
@@ -43,7 +73,7 @@ LoadScreenTilesFromBuffer2::
 ; loads screen tiles stored in wTileMapBackup2 but leaves hAutoBGTransferEnabled disabled
 LoadScreenTilesFromBuffer2DisableBGTransfer::
 	ld hl, wTileMapBackup2
-	jp LoadScreenTilesCommon
+	jr LoadScreenTilesCommon
 
 LoadScreenTilesFromBuffer1::
 	ld hl, wTileMapBackup
@@ -57,5 +87,6 @@ LoadScreenTilesCommon:
 	ldh [hAutoBGTransferEnabled], a
 	decoord 0, 0
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	jp CopyData
+	rst _CopyData
+	ret
 	

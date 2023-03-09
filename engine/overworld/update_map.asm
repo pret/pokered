@@ -117,7 +117,7 @@ RedrawMapView::
 	ldh [hRedrawRowOrColumnDest], a
 	ld a, REDRAW_ROW
 	ldh [hRedrawRowOrColumnMode], a
-	call DelayFrame
+	rst _DelayFrame
 	ld hl, hRedrawMapViewRowOffset
 	inc [hl]
 	inc [hl]

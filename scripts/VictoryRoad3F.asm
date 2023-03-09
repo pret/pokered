@@ -102,25 +102,25 @@ VictoryRoad3Text1:
 	text_asm
 	ld hl, VictoryRoad3TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 VictoryRoad3Text2:
 	text_asm
 	ld hl, VictoryRoad3TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 VictoryRoad3Text3:
 	text_asm
 	ld hl, VictoryRoad3TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 VictoryRoad3Text4:
 	text_asm
 	ld hl, VictoryRoad3TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 VictoryRoad3BattleText2:
 	text_far _VictoryRoad3BattleText2

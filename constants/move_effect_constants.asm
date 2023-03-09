@@ -32,7 +32,7 @@
 	const HAZE_EFFECT                ; $19
 	const TWO_OR_THREE_ATTACKS_EFFECT; $1A ; PureRGBnote: ADDED: new effect, 50% chance of 2 hits, 50% chance of 3
 	const THRASH_PETAL_DANCE_EFFECT  ; $1B
-	const SWITCH_AND_TELEPORT_EFFECT ; $1C
+	const TELEPORT_EFFECT            ; $1C
 	const TWO_TO_FIVE_ATTACKS_EFFECT ; $1D
 	const BURN_EFFECT                ; $1E ; PureRGBnote: ADDED: new effect, burns the opponent, used in FIREWALL (kinesis)
 	const FLINCH_SIDE_EFFECT1        ; $1F

@@ -9,23 +9,23 @@ SaffronHouse2Text1:
 	CheckEvent EVENT_GOT_TM29
 	jr nz, .got_item
 	ld hl, TM29PreReceiveText
-	call PrintText
+	rst _PrintText
 	lb bc, TM_SAFFRON_CITY_MR_PSYCHIC, 1
 	call GiveItem
 	jr nc, .bag_full
 	ld hl, ReceivedTM29Text
-	call PrintText
+	rst _PrintText
 	SetEvent EVENT_GOT_TM29
 	jr .done
 .bag_full
 	ld hl, TM29NoRoomText
-	call PrintText
+	rst _PrintText
 	jr .done
 .got_item
 	ld hl, TM29ExplanationText
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 TM29PreReceiveText:
 	text_far _TM29PreReceiveText

@@ -27,9 +27,19 @@ _WhenYouChangeBoxText::
 	para "Is that okay?"
 	done
 
+_SkippedForever::
+	text "This question"
+	line "won't show again."
+	prompt
+
 _ChooseABoxText::
 	text "Choose a"
 	line "<PKMN> BOX.@"
+	text_end
+
+_ChooseABoxDataWillSaveText::
+	text "Choose a <PKMN> BOX."
+	line "Game will save.@"
 	text_end
 
 _EvolvedText::
@@ -123,19 +133,14 @@ _FellText::
 	text " fell!"
 	prompt
 
+_TeleportedAway::
+	text "<USER>"
+	line "teleported away!"
+	prompt
+
 _RanFromBattleText::
 	text "<USER>"
 	line "ran from battle!"
-	prompt
-
-_RanAwayScaredText::
-	text "<TARGET>"
-	line "ran away scared!"
-	prompt
-
-_WasBlownAwayText::
-	text "<TARGET>"
-	line "was blown away!"
 	prompt
 
 _ChargeMoveEffectText::

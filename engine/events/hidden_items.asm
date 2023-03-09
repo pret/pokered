@@ -48,6 +48,8 @@ HiddenItemsInit:
 
 HiddenItemsFinish:
 	ld [wTempStore1], a
+	ld a, "@"
+	ld [wTempStore2], a
 	tx_pre_jump FoundHiddenItemText
 
 INCLUDE "data/events/hidden_item_coords.asm"
@@ -60,16 +62,16 @@ FoundHiddenItemText::
 	jr nz, .multiItem
 	ld hl, FoundHiddenItemSingleText
 	push bc
-	call PrintText
+	rst _PrintText
 	pop bc
 	jr .give
 .multiItem
 	ld a, c
-	add $f6 ; index of first number character in charmap (assumes a must be 0-9)
+	add NUMBER_CHAR_OFFSET ; index of first number character in charmap (assumes a must be 0-9)
 	ld [wTempStore1], a ; this store now stores the numeric text character to display in the text
 	ld hl, FoundHiddenItemMultiText
 	push bc
-	call PrintText
+	rst _PrintText
 	pop bc
 .give
 	ld a, [wHiddenObjectFunctionArgument] ; item ID
@@ -86,16 +88,16 @@ FoundHiddenItemText::
 	call WaitForSoundToFinish
 	xor a
 	ld [wTempStore1], a
-	jp TextScriptEnd
+	rst TextScriptEnd
 .bagFull
 	call WaitForTextScrollButtonPress ; wait for button press
 	xor a
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, HiddenItemBagFullText
-	call PrintText
+	rst _PrintText
 	xor a
 	ld [wTempStore1], a
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FoundHiddenItemSingleText::
 	text_far _FoundHiddenItemText

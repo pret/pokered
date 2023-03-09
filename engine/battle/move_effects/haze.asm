@@ -60,7 +60,7 @@ HazeEffect_:
 	push hl
 	callfar PlayCurrentMoveAnimation
 	ld hl, StatusChangesEliminatedText
-	call PrintText
+	rst _PrintText
 ;;;;;;;;;; PureRGBnote: ADDED: haze now blocks psychic type moves for the user
 	pop hl
 	bit PSYCHIC_IMMUNITY, [hl] ; are they already immune to psychic attacks?

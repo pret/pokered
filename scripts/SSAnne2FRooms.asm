@@ -46,35 +46,35 @@ SSAnne9Text1:
 	text_asm
 	ld hl, SSAnne9TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SSAnne9Text2:
 	text_asm
 	ld hl, SSAnne9TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SSAnne9Text3:
 	text_asm
 	ld hl, SSAnne9TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SSAnne9Text4:
 	text_asm
 	ld hl, SSAnne9TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SSAnne9Text5:
 	text_asm
 	call SaveScreenTilesToBuffer1
 	ld hl, SSAnne9Text_61bf2
-	call PrintText
+	rst _PrintText
 	call LoadScreenTilesFromBuffer1
 	ld a, SNORLAX
 	call DisplayPokedex
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SSAnne9Text_61bf2:
 	text_far _SSAnne9Text_61bf2
@@ -83,8 +83,8 @@ SSAnne9Text_61bf2:
 SSAnne9Text7:
 	text_asm
 	ld hl, SSAnne9Text_61c01
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 SSAnne9Text_61c01:
 	text_far _SSAnne9Text_61c01
@@ -93,8 +93,8 @@ SSAnne9Text_61c01:
 SSAnne9Text8:
 	text_asm
 	ld hl, SSAnne9Text_61c10
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 SSAnne9Text_61c10:
 	text_far _SSAnne9Text_61c10
@@ -103,8 +103,8 @@ SSAnne9Text_61c10:
 SSAnne9Text10:
 	text_asm
 	ld hl, SSAnne9Text_61c1f
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 SSAnne9Text_61c1f:
 	text_far _SSAnne9Text_61c1f
@@ -113,8 +113,8 @@ SSAnne9Text_61c1f:
 SSAnne9Text11:
 	text_asm
 	ld hl, SSAnne9Text_61c2e
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 SSAnne9Text_61c2e:
 	text_far _SSAnne9Text_61c2e
@@ -123,8 +123,8 @@ SSAnne9Text_61c2e:
 SSAnne9Text12:
 	text_asm
 	ld hl, SSAnne9Text_61c3d
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 SSAnne9Text_61c3d:
 	text_far _SSAnne9Text_61c3d
@@ -133,8 +133,8 @@ SSAnne9Text_61c3d:
 SSAnne9Text13:
 	text_asm
 	ld hl, SSAnne9Text_61c4c
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 SSAnne9Text_61c4c:
 	text_far _SSAnne9Text_61c4c

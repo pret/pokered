@@ -96,13 +96,13 @@ Route16GateText1:
 	call Route16GateScript_49755
 	jr z, .asm_0bdf3
 	ld hl, Route16GateText_4977c
-	call PrintText
+	rst _PrintText
 	jr .asm_56c9d
 .asm_0bdf3
 	ld hl, Route16GateText_49777
-	call PrintText
+	rst _PrintText
 .asm_56c9d
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route16GateText_49777:
 	text_far _Route16GateText_49777

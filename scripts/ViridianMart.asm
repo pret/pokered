@@ -105,25 +105,25 @@ ViridianMartTMKid: ; PureRGBnote: ADDED: new NPC who will talk about TMs
 	jr .beforeMisty
 .beforeMisty
 	ld hl, ViridianMartTMKidBefore
-	call PrintText
+	rst _PrintText
 	jr .done
 .tmkidgreet
 	ld hl, TMKidGreet8
-	call PrintText
+	rst _PrintText
 	ret
 .afterMisty
 	call .tmkidgreet
 	ld hl, TMKidStockingUp
-	call PrintText
+	rst _PrintText
 	jr .done
 .beforeGiovanni
 	CheckEvent EVENT_MET_GYM_GUIDE_SON
 	jr nz, .afterMisty
 	call .tmkidgreet
 	ld hl, TMKidBigStockIndigo
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 TMKidGreet8:
 	text_far _TMKidGreet

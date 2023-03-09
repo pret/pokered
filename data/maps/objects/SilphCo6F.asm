@@ -13,8 +13,8 @@ SilphCo6F_Object:
 	def_object_events
 	object_event 10,  6, SPRITE_SILPH_WORKER, STAY, NONE, 1 ; person
 	object_event 20,  6, SPRITE_SILPH_WORKER, STAY, NONE, 2 ; person
-	object_event 21,  6, SPRITE_ERIKA, STAY, DOWN, 3 ; person
-	object_event 11, 10, SPRITE_ERIKA, STAY, RIGHT, 4 ; person
+	object_event 21,  6, SPRITE_SILPH_WORKER_WOMAN, STAY, DOWN, 3 ; person
+	object_event 11, 10, SPRITE_SILPH_WORKER_WOMAN, STAY, RIGHT, 4 ; person
 	object_event 18, 13, SPRITE_SILPH_WORKER, STAY, UP, 5 ; person
 	object_event 17,  3, SPRITE_ROCKET, STAY, RIGHT, 6, OPP_ROCKET, 30
 	object_event  7,  8, SPRITE_SCIENTIST, STAY, DOWN, 7, OPP_SCIENTIST, 7

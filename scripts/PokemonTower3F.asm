@@ -32,19 +32,19 @@ PokemonTower3Text1:
 	text_asm
 	ld hl, PokemonTower3TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PokemonTower3Text2:
 	text_asm
 	ld hl, PokemonTower3TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PokemonTower3Text3:
 	text_asm
 	ld hl, PokemonTower3TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PokemonTower3BattleText1:
 	text_far _PokemonTower3BattleText1

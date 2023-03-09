@@ -11,23 +11,23 @@ Route12GateUpstairsText1:
 	CheckEvent EVENT_GOT_TM39, 1
 	jr c, .got_item
 	ld hl, TM39PreReceiveText
-	call PrintText
+	rst _PrintText
 	lb bc, TM_ROUTE_12_GATE_2F_MOURNING_GIRL, 1
 	call GiveItem
 	jr nc, .bag_full
 	ld hl, ReceivedTM39Text
-	call PrintText
+	rst _PrintText
 	SetEvent EVENT_GOT_TM39
 	jr .done
 .bag_full
 	ld hl, TM39NoRoomText
-	call PrintText
+	rst _PrintText
 	jr .done
 .got_item
 	ld hl, TM39ExplanationText
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 TM39PreReceiveText:
 	text_far _TM39PreReceiveText
@@ -71,8 +71,8 @@ GateUpstairsScript_PrintIfFacingUp:
 	ld a, TRUE
 	jr .done
 .up
-	call PrintText
+	rst _PrintText
 	xor a
 .done
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
-	jp TextScriptEnd
+	rst TextScriptEnd

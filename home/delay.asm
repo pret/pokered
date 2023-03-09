@@ -1,6 +1,6 @@
 DelayFrames::
 ; wait c frames
-	call DelayFrame
+	rst _DelayFrame
 	dec c
 	jr nz, DelayFrames
 	ret
@@ -9,7 +9,8 @@ PlaySoundWaitForCurrent::
 	push af
 	call WaitForSoundToFinish
 	pop af
-	jp PlaySound
+	rst _PlaySound
+	ret
 
 ; Wait for sound to finish playing
 WaitForSoundToFinish::

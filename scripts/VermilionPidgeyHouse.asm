@@ -17,7 +17,7 @@ VermilionHouse1Text2:
 	ld a, PIDGEY
 	call PlayCry
 	call WaitForSoundToFinish
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 VermilionHouse1Text3:
 	text_far _VermilionHouse1Text3

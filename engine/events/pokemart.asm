@@ -51,7 +51,7 @@ DisplayPokemartDialogue_::
 	and a
 	jp z, .bagEmpty
 	ld hl, PokemonSellingGreetingText
-	call PrintText
+	rst _PrintText
 	call SaveScreenTilesToBuffer1 ; save screen
 .sellMenuLoop
 	ld a, 1
@@ -88,7 +88,7 @@ DisplayPokemartDialogue_::
 	jr z, .sellMenuLoop ; if the player closed the choose quantity menu with the B button
 	ld hl, PokemartTellSellPriceText
 	lb bc, 14, 1 ; location that PrintText always prints to, this is useless
-	call PrintText
+	rst _PrintText
 	hlcoord 14, 7
 	lb bc, 8, 15
 	xor a
@@ -119,11 +119,11 @@ DisplayPokemartDialogue_::
 	jp .sellMenuLoop
 .unsellableItem
 	ld hl, PokemartUnsellableItemText
-	call PrintText
+	rst _PrintText
 	jp .returnToMainPokemartMenu
 .bagEmpty
 	ld hl, PokemartItemBagEmptyText
-	call PrintText
+	rst _PrintText
 	call SaveScreenTilesToBuffer1
 	jp .returnToMainPokemartMenu
 .buyMenu
@@ -135,7 +135,7 @@ DisplayPokemartDialogue_::
 	callfar InitList
 
 	ld hl, PokemartBuyingGreetingText
-	call PrintText
+	rst _PrintText
 	call SaveScreenTilesToBuffer1
 .buyMenuLoop
 	ld a, 1
@@ -169,7 +169,7 @@ DisplayPokemartDialogue_::
 	call GetItemName
 	call CopyToStringBuffer
 	ld hl, PokemartTellBuyPriceText
-	call PrintText
+	rst _PrintText
 	hlcoord 14, 7
 	lb bc, 8, 15
 	xor a
@@ -204,7 +204,7 @@ DisplayPokemartDialogue_::
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
 	ld hl, PokemartBoughtItemText
-	call PrintText
+	rst _PrintText
 	jp .buyMenuLoop
 .returnToMainPokemartMenu
 	call LoadScreenTilesFromBuffer1
@@ -212,7 +212,7 @@ DisplayPokemartDialogue_::
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld hl, PokemartAnythingElseText
-	call PrintText
+	rst _PrintText
 	jp .loop
 .isThereEnoughMoney
 	ld de, wPlayerMoney
@@ -221,15 +221,15 @@ DisplayPokemartDialogue_::
 	jp StringCmp
 .notEnoughMoney
 	ld hl, PokemartNotEnoughMoneyText
-	call PrintText
+	rst _PrintText
 	jr .returnToMainPokemartMenu
 .bagFull
 	ld hl, PokemartItemBagFullText
-	call PrintText
+	rst _PrintText
 	jr .returnToMainPokemartMenu
 .done
 	ld hl, PokemartThankYouText
-	call PrintText
+	rst _PrintText
 	ld a, 1
 	ld [wUpdateSpritesEnabled], a
 	call UpdateSprites

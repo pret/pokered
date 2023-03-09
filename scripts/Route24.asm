@@ -109,15 +109,15 @@ Route24Text1:
 	CheckEvent EVENT_GOT_NUGGET
 	jr nz, .got_item
 	ld hl, Route24Text_51510
-	call PrintText
+	rst _PrintText
 	lb bc, ITEM_NUGGET_BRIDGE_REWARD, 1
 	call GiveItem
 	jr nc, .bag_full
 	SetEvent EVENT_GOT_NUGGET
 	ld hl, Route24Text_5151a
-	call PrintText
+	rst _PrintText
 	ld hl, Route24Text_51526
-	call PrintText
+	rst _PrintText
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
@@ -133,16 +133,16 @@ Route24Text1:
 	ld a, $3
 	ld [wRoute24CurScript], a
 	ld [wCurMapScript], a
-	jp TextScriptEnd
+	rst TextScriptEnd
 .got_item
 	ld hl, Route24Text_51530
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 .bag_full
 	ld hl, Route24Text_51521
-	call PrintText
+	rst _PrintText
 	SetEvent EVENT_NUGGET_REWARD_AVAILABLE
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route24Text_51510:
 	text_far _Route24Text_51510
@@ -176,37 +176,37 @@ Route24Text2:
 	text_asm
 	ld hl, Route24TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route24Text3:
 	text_asm
 	ld hl, Route24TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route24Text4:
 	text_asm
 	ld hl, Route24TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route24Text5:
 	text_asm
 	ld hl, Route24TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route24Text6:
 	text_asm
 	ld hl, Route24TrainerHeader4
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route24Text7:
 	text_asm
 	ld hl, Route24TrainerHeader5
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route24BattleText1:
 	text_far _Route24BattleText1

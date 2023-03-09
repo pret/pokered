@@ -36,4 +36,4 @@
 
 	dw BANK(AbraPicFront), BANK(AbraPicBack) ; PureRGBnote: ADDED: in pokemon base stat headers, these point to which bank the front and original back pic are stored in.
 
-	dw 1, AbraPicBack ; PureRGBnote: ADDED: the first byte is a pointer to alt front sprite if the pokemon has one (like blastoise), the second is a pointer to the original back sprite.
+	dw AbraPicFrontAlt, AbraPicBack ; PureRGBnote: ADDED: the first byte is a pointer to alt front sprite if the pokemon has one, the second is a pointer to the original back sprite.

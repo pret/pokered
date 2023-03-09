@@ -76,7 +76,7 @@ SafariZoneNorthRangerText0:
 	call TalkToTrainer
 	ld a, 3
 	ld [wCurMapScript], a 
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SafariZoneNorthTrainerText0:
 	text_asm
@@ -103,7 +103,7 @@ SafariZoneNorthTrainerText4:
 	ld hl, SafariZoneNorthTrainerHeader4
 SafariZoneNorthTrainerTalk:
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SafariZoneNorthRangerBattleText0:
 	text_far _SafariZoneNorthRangerText

@@ -219,7 +219,7 @@ DisplayWildLocations:
 	ld hl, wShadowOAM
 	ld de, wTownMapSavedOAM
 	ld bc, $a0
-	call CopyData
+	rst _CopyData
 
 	call GetMonAreaInputButtons
 	push af
@@ -254,7 +254,7 @@ DisplayWildLocations:
 	ld a, b
 	ld [wTownMapAreaState], a
 	ld a, SFX_LEDGE
-	call PlaySound
+	rst _PlaySound
 	jp .goToNextState
 
 GetMonAreaInputButtons:
