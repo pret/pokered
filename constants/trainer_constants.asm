@@ -70,4 +70,5 @@ ENDM
 	trainer_const ROOKIE         ; $34
 	trainer_const SOLDIER        ; $35
 ;;;;;;;;;;
+	; two trainer slots left
 DEF NUM_TRAINERS EQU const_value - 1
