@@ -53,6 +53,7 @@ New areas
 - Cinnabar Volcano is a new area that houses Moltres, allowing it to be obtained before Victory Road.
 - Faraway Island from Pokemon Emerald has been added, where you can find Mew. It also has its own wild encounters, as well as an improved translation on its sign, enhancing its appearance from its source material.
 - Mt. Moon Crater is a new area based on Area Zero in Pokemon Scarlet and Violet, accessible in the post-game. Here, you can encounter Scream Tail and Sandy Shocks via random encounter, just like the original!
+- Bill's Garden is accessible in the post-game to access all "one-time deals", just like in the mythos!
 - Silph Co. holds a special challenge for Pokemon League Champions...
 
 Improved areas
@@ -68,8 +69,7 @@ Improved areas
 - Silph Co's pathing was completely overhauled to make navigating it less tedious.
 - Viridian Gym now has a new area once you make Giovanni leave.
 - The S.S. Anne now returns after getting your fourth badge!
-- Mt. Moon has a new location accessible after beating the game.
-- After entering the Hall of Fame, try visiting Route 1...
+- After entering the Hall of Fame, try visiting Route 1!
 
 QoL Enhancements
 ====
@@ -77,7 +77,7 @@ QoL Enhancements
 - New Pokedex entries for most Pokemon are available, sourced from the original 1996 Pokedex book by Creatures Inc., restoring a ton of old Kanto lore. Thanks to [Dr. Lava and Nob Ogasawara](http://lavacutcontent.com/1996-creatures-pokedex-translation-1/) for their incredible work translating and writing about it!
 - Item Descriptions are available!
 - Press A beside surfable water, strength boulders or cut trees to use the HMs without needing to go into the Party menu.
-- PP symbol is displayed in the battle menu.
+- PP symbol is displayed in the battle menu. PP displayed before, it just looks nicer now. Done by changing a straggler Japanese character.
 - Running Shoes by holding B. Also works with the bike! Surf speed is also doubled.
 - Fast text has no frame delay between text scrolling, doubling the scroll speed. It's also been made the default option, so you don't need to go into the Options menu for it.
 - Lorelei, Bruno, and Agatha now play the Gym Leader Battle theme.
@@ -102,10 +102,9 @@ QoL Enhancements
 - Game Corner prizes have been altered;
 	- Version parity is done across prizes, using Blue's superior prices.
 	- New prizes across both versions include: Cubone, Blastyke, and Cactus.
-	- The Moon Stone is available over TM23 (Dragon Rage). Dragon Rage has been moved to Celadon Mart, over Take Down, which can still be obtained in Silph Co.
-- Bag has capacity for 30 items.
+	- The Moon Stone is available over TM23 (Dragon Rage). Dragon Rage is accessible in Celadon University!
+- Bag capacity increased from 20 to 30 items.
 - Spinner tiles move faster.
-- Bold P is added to the fontset over a Japanese opening quote (???), which helps the status screen and allows a PP symbol to be displayed during battle. 
 
 Bug Fixes
 ====
@@ -113,7 +112,7 @@ Many non-multiplayer, non-battle related bugs have been fixed. The aforementione
 - Fixed various translation errors (eg. Route 14 Birdkeeper's "birds of prey" line, Koji and Atsuko in Fuschia.)
 - Blaine is no longer addicted to Super Potions.
 - CoolTrainerF no longer switches a lot.
-- Transformed Pokemon aren't presumed to be Dittos! (very important given Animon)
+- Transformed Pokemon aren't presumed to be Dittos! Mew and Animon function correctly with this at play.
 - Status curing items don't remove modifiers anymore.
 - Learning new moves plays the sound in the correct bank.
 - Falling through a hole on a bike now properly resets the music, as you fall off a bike when going down.
@@ -148,13 +147,13 @@ Known Bugs
 ====
 - Only portions of spinner tiles animate.
 - Occasionally, menu text sets itself to scroll.
-- Some sprites in the Celadon University area spawn bugged out on certain emulators.
+- Some sprites in the Celadon University area spawn bugged out on certain emulators; the more accurate it is, the more it seems to happen (eg. BGB).
 - Battling multiple of the trainers in Celadon University causes a crash when attempting to go to Route 16
 - The lone Rocket in Viridian Gym's basement needs to be directly spoken to to be battled
 
 Evolution Methods for new Pokemon
 ====
-Due to the odd way some new Pokemon evolve, methods are listed here. Beta Pokemon are included with their original methods, given their obscurity. Some Pokemon will have methods from the Spaceworld '97 demo to be closer to RBY.
+Due to the odd way some new Pokemon evolve, methods are listed here. Beta Pokemon are included with their original methods, given their obscurity. Some Pokemon will have methods from the Spaceworld '97 demo to be closer to (or functional in the context of) RBY.
 
 New Pokemon:
 - Rhydon -> Rhyperior | Use Protector 
@@ -214,6 +213,25 @@ Eeveelutions:
 - Sylveon | Moon Stone
 
 Nidos can evolve into Nidoreign with a Moon Stone, or their original counterparts with a Poison Stone. 
+
+Accessing Regional variants
+====
+Adding regional variants was difficult; we hit the exact cap by cutting their pre-evolutions. However, we managed to implement them quite nicely! Given many of these evolve via stones, we've given them their pre-evolution's learnsets to ensure they remain functional.
+
+Much like in Let's Go Pikachu and Let's Go Eevee, traders are available who will trade you a regional variant in exchange for a Kantonian one. This goes as follows:
+- Viridian City: Raticate
+- Pewter City: Golem
+- Cerulean City: Ninetales
+- Vermillion City: Persian
+- Lavender Town: Dugtrio
+- Celadon City: Sandslash
+- Saffron City: Raichu
+- Fuchsia City: Marowak
+- Cinnabar Island: Muk
+- Indigo Plateau: Exeggutor
+Version exclusivity was factored in, instead moving Raticate and Golem to the cities without a trader.
+
+Galarian and Paldean formes are accessed on the S.S. Anne, which now returns after four badges. Hisuian formes are found in the wild in Bill's Garden, which is accessible in the post-game.
 
 Credits
 ====
