@@ -20,7 +20,7 @@ LoadShootingStarGraphics:
 	ld hl, GameFreakLogoOAMData
 	ld de, wShadowOAMSprite24
 	ld bc, GameFreakLogoOAMDataEnd - GameFreakLogoOAMData
-	call CopyData
+	rst _CopyData
 	ld hl, GameFreakShootingStarOAMData
 	ld de, wShadowOAM
 	ld bc, GameFreakShootingStarOAMDataEnd - GameFreakShootingStarOAMData
@@ -29,7 +29,7 @@ LoadShootingStarGraphics:
 AnimateShootingStar:
 	call LoadShootingStarGraphics
 	ld a, SFX_SHOOTING_STAR
-	call PlaySound
+	rst _PlaySound
 
 ; Move the big star down and left across the screen.
 	ld hl, wShadowOAM
@@ -92,7 +92,7 @@ AnimateShootingStar:
 	push af
 	ld hl, SmallStarsOAM
 	ld bc, SmallStarsOAMEnd - SmallStarsOAM
-	call CopyData
+	rst _CopyData
 	pop af
 	dec a
 	jr nz, .initSmallStarsOAMLoop
@@ -150,7 +150,7 @@ AnimateShootingStar:
 	ld hl, wShadowOAMSprite04
 	ld de, wShadowOAM
 	ld bc, $50
-	call CopyData
+	rst _CopyData
 
 	pop af
 	pop hl

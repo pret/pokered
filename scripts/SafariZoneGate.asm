@@ -197,13 +197,13 @@ SafariZoneGate_TextPointers:
 	jr .default1
 .owedHyperBall1
 	ld hl, .SafariZoneEntranceHyperBallOwedText
-	call PrintText
+	rst _PrintText
 	jr .done1
 .default1
 	ld hl, .SafariZoneEntranceText1Get
-	call PrintText
+	rst _PrintText
 .done1
-	jp TextScriptEnd
+	rst TextScriptEnd
 	
 
 .SafariZoneEntranceText_9e6e4
@@ -222,7 +222,7 @@ SafariZoneGate_TextPointers:
 	jp .CantPayWalkDown
 .default4
 	ld hl, .SafariZoneEntranceText_9e6e4
-	call PrintText
+	rst _PrintText
 	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
@@ -239,7 +239,7 @@ SafariZoneGate_TextPointers:
 	call HasEnoughMoney
 	jr nc, .success
 	ld hl, .NotEnoughMoneyText
-	call PrintText
+	rst _PrintText
 	jr .CantPayWalkDown
 
 .success
@@ -257,7 +257,7 @@ SafariZoneGate_TextPointers:
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld hl, .MakePaymentText
-	call PrintText
+	rst _PrintText
 	call AskGameType
 	jr c, .PleaseComeAgain ; if we cancelled, don't continue
 	ld a, D_UP
@@ -271,7 +271,7 @@ SafariZoneGate_TextPointers:
 	jr .done
 .PleaseComeAgain
 	ld hl, PleaseComeAgainText
-	call PrintText
+	rst _PrintText
 .CantPayWalkDown
 	ld a, D_DOWN
 	ld c, 1
@@ -279,7 +279,7 @@ SafariZoneGate_TextPointers:
 	ld a, 4
 	ld [wSafariZoneGateCurScript], a
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .MakePaymentText
 	text_far SafariZoneEntranceText_9e747
@@ -297,7 +297,7 @@ SafariZoneGate_TextPointers:
 	and a
 	jr nz, .asm_7539c
 	ld hl, .SafariZoneEntranceText_753bb
-	call PrintText
+	rst _PrintText
 	xor a
 	ld [wSpritePlayerStateData1FacingDirection], a
 	ld a, D_DOWN
@@ -309,7 +309,7 @@ SafariZoneGate_TextPointers:
 	jr .asm_753b3
 .asm_7539c
 	ld hl, .SafariZoneEntranceText_753c0
-	call PrintText
+	rst _PrintText
 	ld a, SPRITE_FACING_UP
 	ld [wSpritePlayerStateData1FacingDirection], a
 	ld a, D_UP
@@ -320,7 +320,7 @@ SafariZoneGate_TextPointers:
 .asm_753b3
 	ld a, $6
 	ld [wSafariZoneGateCurScript], a
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .SafariZoneEntranceText_753bb
 	text_far _SafariZoneEntranceText_753bb
@@ -341,9 +341,9 @@ SafariZoneGate_TextPointers:
 .SafariZoneEntranceText8
 	text_asm 
 	ld hl, .RangerHuntDoneSuccessText
-	call PrintText
+	rst _PrintText
 	SetEvent EVENT_OWED_HYPER_BALL
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .RangerHuntDoneSuccessText
 	text_far _RangerHuntDoneSuccessText
@@ -352,7 +352,7 @@ SafariZoneGate_TextPointers:
 .SafariZoneEntranceText2
 	text_asm
 	ld hl, .FirstTimeQuestionText
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -360,12 +360,12 @@ SafariZoneGate_TextPointers:
 	jr nz, .Explanation
 	call AskGameTypeExplanation
 	jr c, .noSelection
-	jp TextScriptEnd
+	rst TextScriptEnd
 .noSelection
 	ld hl, PleaseComeAgainText
 .Explanation
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .FirstTimeQuestionText
 	text_far _SafariZoneEntranceText_753e6
@@ -378,14 +378,14 @@ SafariZoneGate_TextPointers:
 .SafariZoneEntranceText9
 	text_asm
 	call GiveHyperBall
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 AskGameType:
 	ld a, 0
 	ld [wCurrentMenuItem], a
 	ld [wListScrollOffset], a
 	ld hl, SafariZoneEntranceWhatGame
-	call PrintText
+	rst _PrintText
 	ld hl, GameList
 	call LoadItemList
 	ld hl, wItemList
@@ -410,7 +410,7 @@ AskGameType:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	call PrintText
+	rst _PrintText
 	ret
 .goodbye
 	; give back the 500 that was just deducted
@@ -447,11 +447,11 @@ PleaseComeAgainText:
 SafariClassicPaidInfo:
 	text_asm
 	ld hl, SafariZoneClassicText
-	call PrintText
+	rst _PrintText
 	ld hl, SafariZoneEntranceSafariBallsReceived
-	call PrintText
+	rst _PrintText
 	ld hl, SafariZonePAText
-	call PrintText
+	rst _PrintText
 	ld a, 30
 	ld [wNumSafariBalls], a
 	ld a, HIGH(702)
@@ -461,14 +461,14 @@ SafariClassicPaidInfo:
 	ld a, SAFARI_TYPE_CLASSIC
 	ld [wSafariType], a
 	call HideAllTrainers
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SafariRangerHuntPaidInfo:
 	text_asm
 	ld hl, SafariZoneRangerHunt
-	call PrintText
+	rst _PrintText
 	ld hl, SafariZonePATextNoBalls
-	call PrintText
+	rst _PrintText
 	ld a, 5
 	ld [wNumSafariBalls], a ; Number of Rangers (reused Safari Ball flag)
 	ld a, HIGH(702)
@@ -478,19 +478,19 @@ SafariRangerHuntPaidInfo:
 	ld a, SAFARI_TYPE_RANGER_HUNT
 	ld [wSafariType], a
 	call ShowAllTrainers
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SafariFreeRoamPaidInfo:
 	text_asm
 	ld hl, SafariZoneFreeRoam
-	call PrintText
+	rst _PrintText
 	xor a
 	ld [wNumSafariBalls], a
 	ld a, SAFARI_TYPE_FREE_ROAM
 	ld [wSafariType], a
 	call ShowAllTrainers
 	call HideRangers
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SafariZoneClassicText:
 	text_far _SafariZoneClassic
@@ -522,12 +522,12 @@ GiveHyperBall:
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, ReceivedHyperBallText
-	call PrintText
+	rst _PrintText
 	ResetEvent EVENT_OWED_HYPER_BALL
 	jr .done
 .BagFull
 	ld hl, HyperBallNoRoomText
-	call PrintText
+	rst _PrintText
 	jr .done
 .done
 	ret
@@ -620,7 +620,7 @@ AskGameTypeExplanation:
 	ld [wCurrentMenuItem], a
 	ld [wListScrollOffset], a
 	ld hl, SafariZoneHelp
-	call PrintText
+	rst _PrintText
 	ld hl, GameList
 	call LoadItemList
 	ld hl, wItemList
@@ -645,7 +645,7 @@ AskGameTypeExplanation:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	call PrintText
+	rst _PrintText
 	ret
 .goodbye
 	scf

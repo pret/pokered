@@ -214,11 +214,11 @@ MtMoon3Text1:
 	and (1 << (EVENT_GOT_DOME_FOSSIL % 8)) | (1 << (EVENT_GOT_HELIX_FOSSIL % 8))
 	jr nz, .asm_49eb8
 	ld hl, MtMoon3Text_49f8f
-	call PrintText
+	rst _PrintText
 	jr .asm_49ebe
 .asm_49e8d
 	ld hl, MtMoon3Text_49f85
-	call PrintText
+	rst _PrintText
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
@@ -236,38 +236,38 @@ MtMoon3Text1:
 .asm_49eb8
 	call MtMoonSuperNerdTakeFossilQuestion
 .asm_49ebe
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 MtMoon3Text2:
 	text_asm
 	ld hl, MtMoon3TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 MtMoon3Text3:
 	text_asm
 	ld hl, MtMoon3TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 MtMoon3Text4:
 	text_asm
 	ld hl, MtMoon3TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 MtMoon3Text5:
 	text_asm
 	ld hl, MtMoon3TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 MtMoon3Text6:
 	text_asm
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, MtMoon3Text_49f24
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -284,7 +284,7 @@ MtMoon3Text6:
 	ld [wMtMoonB2FCurScript], a
 	ld [wCurMapScript], a
 .asm_49f21
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 MtMoon3Text_49f24:
 	text_far _MtMoon3Text_49f24
@@ -295,7 +295,7 @@ MtMoon3Text7:
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, MtMoon3Text_49f64
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -312,7 +312,7 @@ MtMoon3Text7:
 	ld [wMtMoonB2FCurScript], a
 	ld [wCurMapScript], a
 .asm_49f61
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 MtMoon3Text_49f64:
 	text_far _MtMoon3Text_49f64
@@ -330,8 +330,8 @@ MtMoon3Text_49f6f:
 
 MtMoon3Script_49f76:
 	ld hl, MtMoon3Text_49f7f
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 MtMoon3Text_49f7f:
 	text_far _MtMoon3Text_49f7f
@@ -362,7 +362,7 @@ MtMoon3Text_49f99:
 MtMoonSuperNerdTakeFossilQuestionText:
 	text_asm
 	call MtMoonSuperNerdTakeFossilQuestion
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 MtMoonSuperNerdTakeFossilQuestion:
 	CheckEvent EVENT_RECEIVED_FOSSIL_PKMN_FROM_SUPER_NERD
@@ -370,9 +370,9 @@ MtMoonSuperNerdTakeFossilQuestion:
 	CheckEvent EVENT_GAVE_FOSSIL_TO_SUPER_NERD
 	jr nz, .end
 	ld hl, MtMoon3Text_49f94
-	call PrintText
+	rst _PrintText
 	ld hl, MtMoon3TextSuperNerdGiveFossil
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -390,36 +390,36 @@ MtMoonSuperNerdTakeFossilQuestion:
 	jr .haveFossil
 .noFossil
 	ld hl, MtMoon3TextSuperNerdNoFossil
-	call PrintText
+	rst _PrintText
 	jr .done
 .haveFossil
 	SetEvent EVENT_GAVE_FOSSIL_TO_SUPER_NERD
 	CheckEvent EVENT_GOT_DOME_FOSSIL
 	jr nz, .domeRemove
 	ld hl, MtMoon3TextSuperNerdGaveHelix
-	call PrintText
+	rst _PrintText
 	ld a, HELIX_FOSSIL
 	jr .removeItem
 .domeRemove
 	ld hl, MtMoon3TextSuperNerdGaveDome
-	call PrintText
+	rst _PrintText
 	ld a, DOME_FOSSIL
 .removeItem
 	ldh [hItemToRemoveID], a
 	farcall RemoveItemByID
 	ld hl, MtMoon3TextSuperNerdGaveFossil
-	call PrintText
+	rst _PrintText
 .end
 	ld hl, MtMoon3TextSuperNerdGaveFossilEnd
-	call PrintText
+	rst _PrintText
 	jr .done
 .lookingForMoreFossils
 	ld hl, MtMoon3TextSuperNerdLookingForMoreFossils
-	call PrintText
+	rst _PrintText
 	jr .done
 .no
 	ld hl, MtMoon3TextSuperNerdKeptFossil
-	call PrintText
+	rst _PrintText
 .done
 	ret
 	

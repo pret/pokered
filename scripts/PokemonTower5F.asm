@@ -77,7 +77,7 @@ PokemonTower5Text2:
 	text_asm
 	ld hl, PokemonTower5TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PokemonTower5BattleText1:
 	text_far _PokemonTower5BattleText1
@@ -95,7 +95,7 @@ PokemonTower5Text3:
 	text_asm
 	ld hl, PokemonTower5TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PokemonTower5BattleText2:
 	text_far _PokemonTower5BattleText2
@@ -113,7 +113,7 @@ PokemonTower5Text4:
 	text_asm
 	ld hl, PokemonTower5TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PokemonTower5BattleText3:
 	text_far _PokemonTower5BattleText3
@@ -131,7 +131,7 @@ PokemonTower5Text5:
 	text_asm
 	ld hl, PokemonTower5TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PokemonTower5BattleText4:
 	text_far _PokemonTower5BattleText4

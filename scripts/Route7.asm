@@ -31,7 +31,7 @@ Route7Gambler1Text:
 	text_asm
 	ld hl, Route7TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route7BattleText1:
 	text_far _Route7BattleText1
@@ -49,7 +49,7 @@ Route7Gambler2Text:
 	text_asm
 	ld hl, Route7TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route7BattleText2:
 	text_far _Route7BattleText2

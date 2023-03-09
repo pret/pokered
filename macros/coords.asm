@@ -88,3 +88,8 @@ MACRO dbmapcoord
 ; x, y
 	db \2, \1
 ENDM
+
+MACRO inc_hl_ycoord
+	lb de, 0, SCREEN_WIDTH
+	add hl, de
+ENDM

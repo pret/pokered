@@ -112,11 +112,11 @@ KogaText:
 	jr .done
 .afterBeat
 	ld hl, KogaPostBattleAdviceText
-	call PrintText
+	rst _PrintText
 	jr .done
 .beforeBeat
 	ld hl, KogaBeforeBattleText
-	call PrintText
+	rst _PrintText
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
@@ -134,7 +134,7 @@ KogaText:
 	ld a, $3
 	ld [wFuchsiaGymCurScript], a
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 KogaBeforeBattleText:
 	text_far _KogaBeforeBattleText
@@ -168,7 +168,7 @@ FuchsiaGymTrainerText1:
 	text_asm
 	ld hl, FuchsiaGymTrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FuchsiaGymBattleText1:
 	text_far _FuchsiaGymBattleText1
@@ -186,7 +186,7 @@ FuchsiaGymTrainerText2:
 	text_asm
 	ld hl, FuchsiaGymTrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FuchsiaGymBattleText2:
 	text_far _FuchsiaGymBattleText2
@@ -204,7 +204,7 @@ FuchsiaGymTrainerText3:
 	text_asm
 	ld hl, FuchsiaGymTrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FuchsiaGymBattleText3:
 	text_far _FuchsiaGymBattleText3
@@ -222,7 +222,7 @@ FuchsiaGymTrainerText4:
 	text_asm
 	ld hl, FuchsiaGymTrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FuchsiaGymBattleText4:
 	text_far _FuchsiaGymBattleText4
@@ -240,7 +240,7 @@ FuchsiaGymTrainerText5:
 	text_asm
 	ld hl, FuchsiaGymTrainerHeader4
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FuchsiaGymBattleText5:
 	text_far _FuchsiaGymBattleText5
@@ -258,7 +258,7 @@ FuchsiaGymTrainerText6:
 	text_asm
 	ld hl, FuchsiaGymTrainerHeader5
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FuchsiaGymBattleText6:
 	text_far _FuchsiaGymBattleText6
@@ -277,38 +277,38 @@ FuchsiaGymGuideText: ; PureRGBnote: ADDED: gym guide gives you apex chips after 
 	CheckEvent EVENT_BEAT_KOGA
 	jr nz, .afterBeat
 	ld hl, FuchsiaGymGuidePreBattleText
-	call PrintText
+	rst _PrintText
 	jr .done
 .afterBeat
 	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS ; have to hear about apex chips to receive them after that
 	jr z, .donePrompt
 	ld hl, FuchsiaGymGuidePostBattleTextPrompt
-	call PrintText
+	rst _PrintText
 	CheckEvent EVENT_GOT_FUCHSIA_APEX_CHIPS
 	jr nz, .alreadyApexChips
 .giveApexChips
 	ld hl, GymGuideMoreApexChipText5
-	call PrintText
+	rst _PrintText
 	lb bc, APEX_CHIP, 2
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, ReceivedApexChipsText5
-	call PrintText
+	rst _PrintText
 	ld hl, FuchsiaGymGuideApexChipPoisonText
-	call PrintText
+	rst _PrintText
 	SetEvent EVENT_GOT_FUCHSIA_APEX_CHIPS
 .alreadyApexChips
 	ld hl, AlreadyReceivedApexChipsText5
-	call PrintText
+	rst _PrintText
 	jr .done
 .BagFull
 	ld hl, ApexNoRoomText5
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 .donePrompt
 	ld hl, FuchsiaGymGuidePostBattleText
-	call PrintText
+	rst _PrintText
 	jr .done
 
 ReceivedApexChipsText5:

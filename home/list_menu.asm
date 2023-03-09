@@ -77,7 +77,7 @@ DisplayListMenuIDLoop::
 	ld a, "▶"
 	ldcoord_a 5, 4 ; place menu cursor in front of first menu entry
 	ld c, 80
-	call DelayFrames
+	rst _DelayFrames
 	xor a
 	ld [wCurrentMenuItem], a
 	hlcoord 5, 4
@@ -360,7 +360,7 @@ DisplayChooseQuantityMenu::
 	ld [wMenuItemToSwap], a ; 0 means no item is currently being swapped
 	ld a, $ff
 	ret
-
+	
 InitialQuantityText::
 	db "×01@"
 

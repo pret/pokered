@@ -26,7 +26,7 @@ SSAnne2Script0:
 	ret nc
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	call PlaySound
+	rst _PlaySound
 	ld c, BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
@@ -146,7 +146,7 @@ SSAnne2Script2:
 	call MoveSprite
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	call PlaySound
+	rst _PlaySound
 	farcall Music_RivalAlternateStart
 	ld a, $3
 	ld [wSSAnne2FCurScript], a
@@ -188,14 +188,14 @@ SSAnne2Text1:
 SSAnne2Text2:
 	text_asm
 	ld hl, SSAnneRivalBeforeBattleText
-	call PrintText
+	rst _PrintText
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
 	ld hl, SSAnneRivalDefeatedText
 	ld de, SSAnneRivalWonText
 	call SaveEndBattleTextPointers
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SSAnneRivalBeforeBattleText:
 	text_far _SSAnneRivalBeforeBattleText

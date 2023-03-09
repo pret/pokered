@@ -601,9 +601,7 @@ wSimulatedJoypadStatesIndex:: db
 
 ; PureRGBnote: CHANGED: this variable was previously unused but now it is used
 wTempStore1:: db
-
-; written to but nothing ever reads it
-wWastedByteCD3A:: db
+wTempStore2:: db
 
 ; mask indicating which real button presses can override simulated ones
 ; XXX is it ever not 0?
@@ -612,6 +610,7 @@ wOverrideSimulatedJoypadStatesMask:: db
 	ds 1 ; unused lone byte
 
 ; This union spans 30 bytes.
+; make sure any variable added to this union is written to prior to being read to avoid collisions
 UNION
 wTradedPlayerMonSpecies:: db
 wTradedEnemyMonSpecies:: db
@@ -792,58 +791,18 @@ wTrainerInfoTextBoxNextRowOffset:: db
 
 NEXTU
 ; PureRGBnote: ADDED: many options cursor trackers for new menu pages.
+wOptionsPageOptionCount:: db ; how many options are on the current options page
+wCurrentOptionIndex:: db ; which option the player is currently on (starts at 0)
 ; options page 1
-wOptionsTextSpeedCursorX:: db
-wOptionsBattleAnimCursorX:: db
-wOptionsBattleStyleCursorX:: db
-ds 3
+wOptions1CursorX:: db
+wOptions2CursorX:: db
+wOptions3CursorX:: db
+wOptions4CursorX:: db
+wOptions5CursorX:: db
+wOptions6CursorX:: db
+wOptions7CursorX:: db
 wOptionsCancelCursorX:: db
-NEXTU
-; options page 2
-wOptionsPage2Option1CursorX:: db
-wOptionsPage2Option2CursorX:: db
-wOptionsPage2Option3CursorX:: db
-wOptionsPage2Option4CursorX:: db
-NEXTU
-; options page 3
-wOptionsPage3Option1CursorX:: db
-wOptionsPage3Option2CursorX:: db
-wOptionsPage3Option3CursorX:: db
-wOptionsPage3Option4CursorX:: db
-wOptionsPage3Option5CursorX:: db
-wOptionsPage3Option6CursorX:: db
-NEXTU
-; options page 4
-wOptionsPage4Option1CursorX:: db
-wOptionsPage4Option2CursorX:: db
-wOptionsPage4Option3CursorX:: db
-wOptionsPage4Option4CursorX:: db
-wOptionsPage4Option5CursorX:: db
-wOptionsPage4Option6CursorX:: db
-NEXTU
-; options page 5
-wOptionsNidorinoSpriteCursorX:: db
-wOptionsGolbatSpriteCursorX:: db
-wOptionsMankeySpriteCursorX:: db
-wOptionsArcanineSpriteCursorX:: db
-wOptionsExeggutorSpriteCursorX:: db
-wOptionsMewtwoSpriteCursorX:: db
-NEXTU
-; options page 6
-wOptionsPage6Option1CursorX:: db
-wOptionsPage6Option2CursorX:: db
-wOptionsPage6Option3CursorX:: db
-wOptionsPage6Option4CursorX:: db
-wOptionsPage6Option5CursorX:: db
-wOptionsPage6Option6CursorX:: db
-NEXTU
-; options page 7
-wOptionsPage7Option1CursorX:: db
-wOptionsPage7Option2CursorX:: db
-wOptionsPage7Option3CursorX:: db
-wOptionsPage7Option4CursorX:: db
-wOptionsPage7Option5CursorX:: db
-wOptionsPage7Option6CursorX:: db
+
 NEXTU
 ; tile ID of the badge number being drawn
 wBadgeNumberTile:: db
@@ -930,9 +889,12 @@ wRightGBMonSpecies:: db
 
 ; bit 0: is player engaged by trainer (to avoid being engaged by multiple trainers simultaneously)
 ; bit 1: boulder dust animation (from using Strength) pending
+; bit 2: PureRGBnote: CHANGED: now unused bit
 ; bit 3: using generic PC
+; bit 4: used for some specific script in Pewter City to prevent sprites from updating
 ; bit 5: don't play sound when A or B is pressed in menu
 ; bit 6: tried pushing against boulder once (you need to push twice before it will move)
+; bit 7: bit never set (but it is read)
 wFlags_0xcd60:: db
 
 ;;;;;;;;;; PureRGBnote: CHANGED: previously this empty space of 9 bytes was used by new variables
@@ -1546,10 +1508,14 @@ wEndBattleLoseTextPointer:: dw
 	ds 2 ; unused 2 bytes
 wEndBattleTextRomBank:: db
 
-	ds 1 ; unused byte
+UNION
 
+w2CharStringBuffer:: ds 3 ; don't use this buffer during attack animations
+NEXTU
+ds 1
 ; the address _of the address_ of the current subanimation entry
 wSubAnimAddrPtr:: dw
+ENDU
 
 UNION
 ; the address of the current subentry of the current subanimation
@@ -1911,7 +1877,7 @@ ds 20 ; 20 of the 42 bytes of space are alotted to new missable object flags
 NEXTU
 
 ; PureRGBnote: ADDED: we use this empty space currently for a store of extra flags to hide/show objects in the safari zone.
-wExtraMissableObjectFlags:: flag_array NUM_EXTRA_HS_OBJECTS ; max size 20 bytes or 152 flags (currently around 35 flags are used)
+wExtraMissableObjectFlags:: flag_array NUM_EXTRA_HS_OBJECTS ; max size 20 bytes or 152 flags
 wExtraMissableObjectFlagsEnd::
 
 ENDU
@@ -2333,6 +2299,7 @@ wUnusedD71F:: db
 
 ; bit 0: using Strength outside of battle
 ; bit 1: set by IsSurfingAllowed when surfing's allowed, but the caller resets it after checking the result
+; bit 2: PureRGBnote: ADDED: using Surf outside of battle
 ; bit 3: received Old Rod
 ; bit 4: received Good Rod
 ; bit 5: received Super Rod
@@ -2492,7 +2459,7 @@ ENDU
 
 wTrainerHeaderPtr:: dw
 
-	ds 6  ; unused save file 6 bytes
+	ds 6  ; unused save file 6 bytes (TODO: use for randomized challengers / bill's garden visitors)
 
 ; the trainer the player must face after getting a wrong answer in the Cinnabar
 ; gym quiz
@@ -2524,10 +2491,8 @@ wSpriteOptions:: db
 ; bit 1 -> Nidorino sprite version: 0 = RB, 1 = RG
 ; bit 2 -> Exeggutor sprite version: 0 = Y, 1 = RB
 ; bit 3 -> Menu icon sprites: 0 = Original, 1 = Enhanced Original
-; bit 4 -> type matchup option for GHOST->PSYCHIC: 0 = 2x effective, 1 = 0x effective
-; bit 5 -> type matchup option for ICE->FIRE: 0 = 1x effective, 1 = 0.5x effective
-; bit 6 -> type matchup option for BUG->POISON: 0 = 2x effective, 1 = 0.5x effective
-; bit 7 -> type matchup option for POISON->BUG: 0 = 2x effective, 1 = 1x effective
+; bit 4 -> Electabuzz sprite version: 0 = RB, 1 = RG
+; bit 5 -> Raticate sprite version: 0 = RB, 1 = RG
 wSpriteOptions2:: db
 
 ; bits 0-1 = Palette setting 
@@ -2542,14 +2507,17 @@ wSpriteOptions2:: db
 ; bit 6 = Do NPC trainers get stat experience on their pokemon
 ; bit 7 = unused
 wOptions2:: db
-;;;;;;;;;;
-
 
 wSpriteOptions3:: db
 
 wSpriteOptions4:: db
-	
-	ds 1  ; unused save file byte
+
+; bit 0 -> type matchup option for GHOST->PSYCHIC: 0 = 2x effective, 1 = 0x effective
+; bit 1 -> type matchup option for ICE->FIRE: 0 = 1x effective, 1 = 0.5x effective
+; bit 2 -> type matchup option for BUG->POISON: 0 = 2x effective, 1 = 0.5x effective
+; bit 3 -> type matchup option for POISON->BUG: 0 = 2x effective, 1 = 1x effective
+wOptions3:: db
+;;;;;;;;;;
 
 wPlayTimeHours:: db
 wPlayTimeMaxed:: db

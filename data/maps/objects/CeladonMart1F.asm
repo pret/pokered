@@ -12,6 +12,8 @@ CeladonMart1F_Object:
 	def_bg_events
 	bg_event 11,  4, 2 ; CeladonMart1Text2
 	bg_event 14,  1, 3 ; CeladonMart1Text3
+	bg_event 16,  1, 4 ; 
+	bg_event 17,  1, 5 ; 
 
 	def_object_events
 	object_event  8,  3, SPRITE_LINK_RECEPTIONIST, STAY, DOWN, 1 ; person

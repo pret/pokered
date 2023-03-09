@@ -2,7 +2,7 @@
 
 VendingMachineMenu::
 	ld hl, VendingMachineText1
-	call PrintText
+	rst _PrintText
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
@@ -119,16 +119,16 @@ VendingMachineMenu::
 	ld b, 5 ; shorter for the rarecandy machine
 .playDeliverySound
 	ld c, 2
-	call DelayFrames
+	rst _DelayFrames
 	push bc
 	ld a, SFX_PUSH_BOULDER
-	call PlaySound
+	rst _PlaySound
 	pop bc
 	dec b
 	jr nz, .playDeliverySound
 
 	ld hl, VendingMachineText5
-	call PrintText
+	rst _PrintText
 	ld hl, hVendingMachinePrice + 2
 	ld de, wPlayerMoney + 2
 	ld c, $3
@@ -148,7 +148,7 @@ VendingMachineMenu::
 .thatsEnough
 	ld hl, VendingMachineText8
 .done
-	call PrintText
+	rst _PrintText
 	xor a
 	ld [wTempFlag0], a
 	ret

@@ -47,7 +47,7 @@ UsedCut:
 	xor a
 	ldh [hWY], a
 	ld hl, UsedCutText
-	call PrintText
+	rst _PrintText
 	call LoadScreenTilesFromBuffer2
 	ld hl, wd730
 	res 6, [hl]
@@ -61,7 +61,7 @@ UsedCut:
 	ld a, $1
 	ld [wUpdateSpritesEnabled], a
 	ld a, SFX_CUT
-	call PlaySound
+	rst _PlaySound
 	ld a, $90
 	ldh [hWY], a
 	call UpdateSprites

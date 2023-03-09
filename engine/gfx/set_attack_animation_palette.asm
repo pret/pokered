@@ -133,6 +133,7 @@ GetSpecificAnimPalettes: ; animations that have specific mappings
 	ret
 
 AnimPaletteMapping:
+	db FLY_ANIM_PART1, PAL_MEWMON
 	db TOSS_ANIM, PAL_REDMON
 	db GREATTOSS_ANIM, PAL_BLUEMON
 	db ULTRATOSS_ANIM, PAL_ULTRABALL

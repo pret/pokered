@@ -2,7 +2,7 @@ AnimateHallOfFame:
 	call HoFFadeOutScreenAndMusic
 	call ClearScreen
 	ld c, 100
-	call DelayFrames
+	rst _DelayFrames
 	call LoadFontTilePatterns
 	call LoadTextBoxTilePatterns
 	call DisableLCD
@@ -58,7 +58,7 @@ AnimateHallOfFame:
 	call HoFShowMonOrPlayer
 	call HoFDisplayAndRecordMonInfo
 	ld c, 80
-	call DelayFrames
+	rst _DelayFrames
 	hlcoord 2, 13
 	ld b, 3
 	ld c, 14
@@ -67,7 +67,7 @@ AnimateHallOfFame:
 	ld de, HallOfFameText
 	call PlaceString
 	ld c, 180
-	call DelayFrames
+	rst _DelayFrames
 	call GBFadeOutToWhite
 	pop bc
 	pop hl
@@ -175,7 +175,7 @@ HoFShowMonOrPlayer:
 ; scroll front pic right
 
 .ScrollPic
-	call DelayFrame
+	rst _DelayFrame
 	ldh a, [hSCX]
 	add e
 	ldh [hSCX], a
@@ -224,7 +224,7 @@ HoFLoadPlayerPics:
 	ld hl, sSpriteBuffer1
 	ld de, sSpriteBuffer0
 	ld bc, $310
-	call CopyData
+	rst _CopyData
 	ld de, vFrontPic
 	call InterlaceMergeSpriteBuffers
 	ld a, [wSpriteOptions2]
@@ -290,7 +290,7 @@ HoFDisplayPlayerStats:
 	ld hl, wDexRatingText
 
 HoFPrintTextAndDelay:
-	call PrintText
+	rst _PrintText
 	ld c, 120
 	jp DelayFrames
 

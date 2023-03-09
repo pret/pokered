@@ -62,7 +62,7 @@ Route14Text1:
 	text_asm
 	ld hl, Route14TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route14BattleText1:
 	text_far _Route14BattleText1
@@ -80,7 +80,7 @@ Route14Text2:
 	text_asm
 	ld hl, Route14TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route14BattleText2:
 	text_far _Route14BattleText2
@@ -98,7 +98,7 @@ Route14Text3:
 	text_asm
 	ld hl, Route14TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route14BattleText3:
 	text_far _Route14BattleText3
@@ -116,7 +116,7 @@ Route14Text4:
 	text_asm
 	ld hl, Route14TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route14BattleText4:
 	text_far _Route14BattleText4
@@ -134,7 +134,7 @@ Route14Text5:
 	text_asm
 	ld hl, Route14TrainerHeader4
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route14BattleText5:
 	text_far _Route14BattleText5
@@ -152,7 +152,7 @@ Route14Text6:
 	text_asm
 	ld hl, Route14TrainerHeader5
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route14BattleText6:
 	text_far _Route14BattleText6
@@ -170,7 +170,7 @@ Route14Text7:
 	text_asm
 	ld hl, Route14TrainerHeader6
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route14BattleText7:
 	text_far _Route14BattleText7
@@ -188,7 +188,7 @@ Route14Text8:
 	text_asm
 	ld hl, Route14TrainerHeader7
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route14BattleText8:
 	text_far _Route14BattleText8
@@ -206,7 +206,7 @@ Route14Text9:
 	text_asm
 	ld hl, Route14TrainerHeader8
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route14BattleText9:
 	text_far _Route14BattleText9
@@ -224,7 +224,7 @@ Route14Text10:
 	text_asm
 	ld hl, Route14TrainerHeader9
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route14BattleText10:
 	text_far _Route14BattleText10
@@ -242,7 +242,7 @@ Route14Text11:
 	text_asm
 	ld hl, Route14TrainerHeader10
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route14BattleText11:
 	text_far _Route14BattleText11
@@ -260,7 +260,7 @@ Route14Text12:
 	text_asm
 	ld hl, Route14TrainerHeader11
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route14BattleText12:
 	text_far _Route14BattleText12

@@ -129,7 +129,7 @@ LoreleiText1:
 	text_asm
 	ld hl, LoreleisRoomTrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 LoreleiBeforeBattleText:
 	text_far _LoreleiBeforeBattleText

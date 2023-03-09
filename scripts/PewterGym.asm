@@ -104,11 +104,11 @@ BrockText:
 	jr .done
 .afterBeat
 	ld hl, BrockPostBattleAdviceText
-	call PrintText
+	rst _PrintText
 	jr .done
 .beforeBeat
 	ld hl, BrockPreBattleText
-	call PrintText
+	rst _PrintText
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
@@ -127,7 +127,7 @@ BrockText:
 	ld [wPewterGymCurScript], a
 	ld [wCurMapScript], a
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 BrockPreBattleText:
 	text_far _BrockPreBattleText
@@ -161,7 +161,7 @@ PewterGymTrainerText1:
 	text_asm
 	ld hl, PewterGymTrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PewterGymBattleText1:
 	text_far _PewterGymBattleText1
@@ -181,44 +181,44 @@ PewterGymGuideText: ; PureRGBnote: ADDED: gym guide gives you apex chips after b
 	bit BIT_BOULDERBADGE, a
 	jr nz, .afterBeat
 	ld hl, PewterGymGuidePreAdviceText
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .PewterGymGuideBeginAdviceText
 	ld hl, PewterGymGuideBeginAdviceText
-	call PrintText
+	rst _PrintText
 	jr .PewterGymGuideAdviceText
 .PewterGymGuideBeginAdviceText
 	ld hl, PewterGymText_5c524
-	call PrintText
+	rst _PrintText
 .PewterGymGuideAdviceText
 	ld hl, PewterGymGuideAdviceText
-	call PrintText
+	rst _PrintText
 	jr .done
 .afterBeat
 	ld hl, PewterGymGuidePostBattleText
-	call PrintText
+	rst _PrintText
 	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS
 	jr nz, .alreadyApexChips
 .giveApexChips
 	ld hl, PewterGymGuideApexChipText
-	call PrintText
+	rst _PrintText
 	lb bc, APEX_CHIP, 2
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, ReceivedApexChipsTextPewter
-	call PrintText
+	rst _PrintText
 	SetEvent EVENT_GOT_PEWTER_APEX_CHIPS
 .alreadyApexChips
 	ld hl, AlreadyReceivedApexChipsText
-	call PrintText
+	rst _PrintText
 	jr .done
 .BagFull
 	ld hl, TM34NoRoomText
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PewterGymGuidePreAdviceText:
 	text_far _PewterGymGuidePreAdviceText

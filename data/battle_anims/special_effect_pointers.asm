@@ -51,4 +51,5 @@ SpecialEffectPointers:
 	special_effect SE_SMOKE_EVERYWHERE, AnimationSmokeEverywhere ; $D3
 	special_effect SE_STATIC_EVERYWHERE, AnimationStaticEverywhere ; $D2
 	special_effect SE_SNOWFLAKES_EVERYWHERE, AnimationSnowflakesEverywhere ; $D1
+	special_effect SE_LIGHT_SCREEN_FLASH, AnimationFlashLightScreen ; $D0
 	db -1 ; end

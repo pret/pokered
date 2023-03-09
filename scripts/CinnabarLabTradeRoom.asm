@@ -22,4 +22,4 @@ Lab2Text3:
 	ld [wWhichTrade], a
 Lab2DoTrade:
 	predef DoInGameTradeDialogue
-	jp TextScriptEnd
+	rst TextScriptEnd

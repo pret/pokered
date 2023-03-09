@@ -41,7 +41,7 @@ Route18Text1:
 	text_asm
 	ld hl, Route18TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route18BattleText1:
 	text_far _Route18BattleText1
@@ -59,7 +59,7 @@ Route18Text2:
 	text_asm
 	ld hl, Route18TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route18BattleText2:
 	text_far _Route18BattleText2
@@ -77,7 +77,7 @@ Route18Text3:
 	text_asm
 	ld hl, Route18TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route18BattleText3:
 	text_far _Route18BattleText3
@@ -95,7 +95,7 @@ Route18Text4:
 	text_asm
 	ld hl, Route18TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route18BattleText4:
 	text_far _Route18BattleText4
@@ -113,7 +113,7 @@ Route18Text5:
 	text_asm
 	ld hl, Route18TrainerHeader4
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route18BattleText5:
 	text_far _Route18BattleText5

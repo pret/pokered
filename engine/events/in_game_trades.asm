@@ -18,7 +18,7 @@ DoInGameTradeDialogue:
 	push af
 	ld de, wInGameTradeMonNick
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst _CopyData
 	pop af
 	ld l, a
 	ld h, 0
@@ -58,7 +58,7 @@ DoInGameTradeDialogue:
 	call InGameTrade_DoTrade
 	jr c, .printText
 	ld hl, TradedForText
-	call PrintText
+	rst _PrintText
 .printText
 	ld hl, wInGameTradeTextPointerTableIndex
 	ld a, [hld] ; wInGameTradeTextPointerTableIndex
@@ -122,7 +122,7 @@ InGameTrade_DoTrade:
 	ld b, FLAG_SET
 	predef FlagActionPredef
 	ld hl, ConnectCableText
-	call PrintText
+	rst _PrintText
 	ld a, [wWhichPokemon]
 	push af
 	ld a, [wCurEnemyLVL]
@@ -141,7 +141,7 @@ InGameTrade_DoTrade:
 	ld [wMonDataLocation], a ; not used
 	ld [wRemoveMonFromBox], a
 	call RemovePokemon
-	ld a, $80 ; prevent the player from naming the mon
+	ld a, %10000000 ; prevent the player from naming the mon
 	ld [wMonDataLocation], a
 	call AddPartyMon
 	call InGameTrade_CopyDataToReceivedMon
@@ -188,7 +188,7 @@ InGameTrade_RestoreScreen::
 	call Delay3
 	call LoadGBPal
 	ld c, 10
-	call DelayFrames
+	rst _DelayFrames
 	farjp LoadWildData
 
 InGameTrade_PrepareTradeData:
@@ -224,7 +224,7 @@ InGameTrade_PrepareTradeData:
 InGameTrade_CopyData:
 	push hl
 	push bc
-	call CopyData
+	rst _CopyData
 	pop bc
 	pop hl
 	ret
@@ -235,13 +235,13 @@ InGameTrade_CopyDataToReceivedMon:
 	call InGameTrade_GetReceivedMonPointer
 	ld hl, wInGameTradeMonNick
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst _CopyData
 	ld hl, wPartyMonOT
 	ld bc, NAME_LENGTH
 	call InGameTrade_GetReceivedMonPointer
 	ld hl, InGameTrade_TrainerString
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst _CopyData
 	ld hl, wPartyMon1OTID
 	ld bc, wPartyMon2 - wPartyMon1
 	call InGameTrade_GetReceivedMonPointer
@@ -358,11 +358,11 @@ WannaTrade1ColorText:
 	jr .done
 .altPalettesOn
 	ld hl, WannaTrade1TextPrompt
-	call PrintText
+	rst _PrintText
 	ld hl, WannaTradeColorPaletteText
 .done
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 NoTrade1Text:
 	text_far _NoTrade1Text
@@ -403,11 +403,11 @@ WannaTrade2ColorText:
 	jr .done
 .altPalettesOn
 	ld hl, WannaTrade2TextPrompt
-	call PrintText
+	rst _PrintText
 	ld hl, WannaTradeColorPaletteText
 .done
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 NoTrade2Text:
 	text_far _NoTrade2Text
@@ -443,11 +443,11 @@ WannaTrade3ColorText:
 	jr .done
 .altPalettesOn
 	ld hl, WannaTrade3TextPrompt
-	call PrintText
+	rst _PrintText
 	ld hl, WannaTradeColorPaletteText
 .done
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 NoTrade3Text:
 	text_far _NoTrade3Text

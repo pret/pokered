@@ -59,10 +59,13 @@ CheckLoadTmName:: ; loads a TM name when the cursor is on TMs
 	ld c, 14 ; width
 	call TextBoxBorder
 	call UpdateSprites
-
+	ld a, [wNameListType] ; GetMoveName changes this value so we need to back it up
+	push af
 	ld a, [wd11e]
 	ld [wMoveNum], a
 	call GetMoveName
+	pop af
+	ld [wNameListType], a
 	pop af
 	call CopyToStringBuffer
 	bccoord 6, 14

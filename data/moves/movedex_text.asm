@@ -1102,19 +1102,23 @@ _TeleportDexEntry::
 	text "The user teleports"
 	next "away from battle."
 
-	bage "Escapes wild"
-	next "#MON battles."
+	bage "Wild #MON can"
+	next "run from battle"
+	next "by using it."
 
-	bage "Doesn't do"
-	next "anything in"
-	next "trainer battles."
+	bage "In trainer battles"
+	next "the user switches"
+	next "and heals 25% HP."
 
-	bage "Can be used"
-	next "outside battle to"
-	next "travel back to"
+	bage "Fails if there are"
+	next "no #MON left to"
+	next "switch with."
 
-	bage "the last #MON"
-	next "CENTER"
+	bage "Usable outside of"
+	next "battle to travel"
+	next "back to the last"
+
+	bage "#MON CENTER"
 	dex
 
 _NightShadeDexEntry::

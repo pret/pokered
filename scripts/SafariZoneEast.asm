@@ -45,8 +45,8 @@ SafariZoneEastText6:
 	jr z, .done
 	ld hl, SafariZoneEastText6NotClassic
 .done
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 SafariZoneEastText6Default:
 	text_far _SafariZoneEastText6
@@ -80,7 +80,7 @@ SafariZoneEastRangerText0:
 	call TalkToTrainer
 	ld a, 3
 	ld [wCurMapScript], a 
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SafariZoneEastTrainerText0:
 	text_asm
@@ -102,7 +102,7 @@ SafariZoneEastTrainerText3:
 	ld hl, SafariZoneEastTrainerHeader3
 SafariZoneEastTrainerTalk:
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SafariZoneEastRangerBattleText0:
 	text_far _SafariZoneEastRangerText

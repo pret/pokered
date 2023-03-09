@@ -18,4 +18,4 @@ CeladonMansion5Text2:
 	ld [wMissableObjectIndex], a
 	predef HideObject
 .party_full
-	jp TextScriptEnd
+	rst TextScriptEnd

@@ -58,7 +58,7 @@ Route17Text1:
 	text_asm
 	ld hl, Route17TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route17BattleText1:
 	text_far _Route17BattleText1
@@ -76,7 +76,7 @@ Route17Text2:
 	text_asm
 	ld hl, Route17TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route17BattleText2:
 	text_far _Route17BattleText2
@@ -94,7 +94,7 @@ Route17Text3:
 	text_asm
 	ld hl, Route17TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route17BattleText3:
 	text_far _Route17BattleText3
@@ -112,7 +112,7 @@ Route17Text4:
 	text_asm
 	ld hl, Route17TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route17BattleText4:
 	text_far _Route17BattleText4
@@ -130,7 +130,7 @@ Route17Text5:
 	text_asm
 	ld hl, Route17TrainerHeader4
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route17BattleText5:
 	text_far _Route17BattleText5
@@ -148,7 +148,7 @@ Route17Text6:
 	text_asm
 	ld hl, Route17TrainerHeader5
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route17BattleText6:
 	text_far _Route17BattleText6
@@ -166,7 +166,7 @@ Route17Text7:
 	text_asm
 	ld hl, Route17TrainerHeader6
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route17BattleText7:
 	text_far _Route17BattleText7
@@ -184,7 +184,7 @@ Route17Text8:
 	text_asm
 	ld hl, Route17TrainerHeader7
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route17BattleText8:
 	text_far _Route17BattleText8
@@ -202,7 +202,7 @@ Route17Text9:
 	text_asm
 	ld hl, Route17TrainerHeader8
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route17BattleText9:
 	text_far _Route17BattleText9
@@ -220,7 +220,7 @@ Route17Text10:
 	text_asm
 	ld hl, Route17TrainerHeader9
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route17BattleText10:
 	text_far _Route17BattleText10

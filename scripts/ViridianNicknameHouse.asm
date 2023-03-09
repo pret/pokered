@@ -18,11 +18,11 @@ ViridianHouseText2:
 ViridianHouseText3:
 	text_asm
 	ld hl, ViridianHouseText_1d5b1
-	call PrintText
+	rst _PrintText
 	ld a, SPEAROW
 	call PlayCry
 	call WaitForSoundToFinish
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ViridianHouseText_1d5b1:
 	text_far _ViridianHouseText_1d5b1

@@ -4,7 +4,7 @@
 
 LastTwoGurusScript::
 	ld hl, LastTwoGurusTextQuestion
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -18,7 +18,7 @@ LastTwoGurusScript::
 	ld hl, wd728
 	set 5, [hl] ; received super rod
 	ld hl, LastTwoGurusTextYes
-	call PrintText
+	rst _PrintText
 	jr .gotItem
 .bag_full
 	ld hl, LastTwoGurusTextBagFull
@@ -28,17 +28,17 @@ LastTwoGurusScript::
 	jr .done
 .got_rod
 	ld hl, LastTwoGurusTextAlreadyHaveSuperRod
-	call PrintText
+	rst _PrintText
 	call SetEventFlag
 	ld hl, LastTwoGurusFishingGuideReceived
-	call PrintText
+	rst _PrintText
 	ld hl, LastTwoGurusFishingGuideInfo
 	jr .done
 .gotItem
 	call SetEventFlag
 	ld hl, LastTwoGurusReceivedItemText
 .done
-	call PrintText
+	rst _PrintText
 	ret
 
 SetEventFlag:
@@ -56,10 +56,10 @@ LastTwoGurusFishingGuideBookText::
 	ld hl, FishingGuideBookText
 	jr nz, .done
 	ld hl, FishingGuideBookTextPrompt
-	call PrintText
+	rst _PrintText
 	ld hl, LastTwoGurusFishingGuideInfo
 .done
-	call PrintText
+	rst _PrintText
 	ret
 
 FishingGuideBookText:

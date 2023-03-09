@@ -73,7 +73,7 @@ LanceScript0:
 	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
 	ld a, SFX_GO_INSIDE
-	call PlaySound
+	rst _PlaySound
 	jp LanceShowOrHideEntranceBlocks
 
 
@@ -140,7 +140,7 @@ LanceText1:
 	text_asm
 	ld hl, LancesRoomTrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 LanceBeforeBattleText:
 	text_far _LanceBeforeBattleText
@@ -154,7 +154,7 @@ LanceAfterBattleText:
 	text_far _LanceAfterBattleText
 	text_asm
 	SetEvent EVENT_BEAT_LANCE
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 DoFacings: ; PureRGBnote: ADDED: when about to fight Lance, lance and the player will face each other properly to talk.
 	ld a, [wYCoord]

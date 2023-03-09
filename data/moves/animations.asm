@@ -20,7 +20,7 @@ AttackAnimationPointers:
 	dw GustAnim
 	dw WingAttackAnim
 	dw WhirlwindAnim
-	dw FlyAnim
+	dw FlyAnimPart2
 	dw BindAnim
 	dw SlamAnim
 	dw VineWhipAnim
@@ -205,6 +205,7 @@ AttackAnimationPointers:
 	dw HidePicAnim
 	dw ThrowRockAnim
 	dw ThrowBaitAnim
+	dw FlyAnimPart1
 	assert_table_length NUM_ATTACK_ANIMS
 	dw ZigZagScreenAnim
 
@@ -335,7 +336,7 @@ WhirlwindAnim:
 	battle_anim NO_MOVE, SE_SHOW_ENEMY_MON_PIC
 	db -1 ; end
 
-FlyAnim:
+FlyAnimPart2:
 	battle_anim FLY, SUBANIM_1_STAR_BIG_MOVING, 1, 6
 	battle_anim NO_MOVE, SE_SHOW_MON_PIC
 	db -1 ; end
@@ -576,9 +577,9 @@ HydroPumpAnim:
 	battle_anim SKULL_BASH, SUBANIM_0_BEAM, 0, 3
 	battle_anim SURF, SE_WATER_DROPLETS_EVERYWHERE_FAST
 	battle_anim HYDRO_PUMP, SUBANIM_0_WATER_COLUMNS, 0, 6
-	battle_anim NO_MOVE, SE_DARK_SCREEN_FLASH
+	battle_anim NO_MOVE, SE_LIGHT_SCREEN_FLASH
 	battle_anim HYDRO_PUMP, SUBANIM_0_WATER_COLUMNS, 0, 6
-	battle_anim NO_MOVE, SE_DARK_SCREEN_FLASH
+	battle_anim NO_MOVE, SE_LIGHT_SCREEN_FLASH
 	db -1 ; end
 
 SurfAnim:
@@ -878,7 +879,7 @@ MeditateAnim:
 	battle_anim MEDITATE, SUBANIM_0_CIRCLES_CENTERING, 0, 10
 	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
 	battle_anim BARRIER, SUBANIM_0_CIRCLE_1_SQUARE_CLOSING, 1, 6
-	battle_anim NO_MOVE, SE_DARK_SCREEN_FLASH
+	battle_anim NO_MOVE, SE_LIGHT_SCREEN_FLASH
 	db -1 ; end
 
 AgilityAnim:
@@ -896,9 +897,15 @@ RageAnim:
 	battle_anim RAGE, SUBANIM_0_STAR_TWICE, 0, 6
 	db -1 ; end
 
-TeleportAnim:
+FlyAnimPart1:
 	battle_anim TELEPORT, SE_SQUISH_MON_PIC
 	battle_anim NO_MOVE, SE_SHOOT_BALLS_UPWARD
+	db -1 ; end
+
+TeleportAnim:
+	battle_anim TELEPORT, SE_SQUISH_MON_PIC
+	battle_anim NO_MOVE, SUBANIM_0_CIRCLE_SPLITTING, 0, 1
+	battle_anim NO_MOVE, SE_LIGHT_SCREEN_FLASH
 	db -1 ; end
 
 NightShadeAnim:
@@ -1168,9 +1175,9 @@ HiJumpKickAnim:
 	db -1 ; end
 
 GlareAnim:
-	battle_anim LEECH_SEED, SE_DARK_SCREEN_PALETTE
-	battle_anim GLARE, SE_DARK_SCREEN_FLASH
-	battle_anim NO_MOVE, SE_DARK_SCREEN_FLASH
+	battle_anim LEECH_SEED, SE_LIGHT_SCREEN_PALETTE
+	battle_anim GLARE, SE_LIGHT_SCREEN_FLASH
+	battle_anim NO_MOVE, SE_LIGHT_SCREEN_FLASH
 	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
 	db -1 ; end
 

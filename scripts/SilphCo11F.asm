@@ -84,7 +84,7 @@ Load11FCheckCardKeyText:
 SilphCo11Text7:
 	text_asm
 	callfar PrintCardKeyDoneText
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo11Script_6216d:
 	ld hl, MissableObjectIDs_6219b
@@ -317,23 +317,23 @@ SilphCo11Text1:
 	CheckEvent EVENT_GOT_MASTER_BALL
 	jp nz, .got_item
 	ld hl, SilphCoPresidentText
-	call PrintText
+	rst _PrintText
 	lb bc, ITEM_SILPH_CO_PRESIDENT_REWARD, 1
 	call GiveItem
 	jr nc, .bag_full
 	ld hl, ReceivedSilphCoMasterBallText
-	call PrintText
+	rst _PrintText
 	SetEvent EVENT_GOT_MASTER_BALL
 	jr .done
 .bag_full
 	ld hl, SilphCoMasterBallNoRoomText
-	call PrintText
+	rst _PrintText
 	jr .done
 .got_item
 	ld hl, SilphCo10Text_6231c
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCoPresidentText:
 	text_far _SilphCoPresidentText
@@ -372,7 +372,7 @@ SilphCo11Text4:
 	text_asm
 	ld hl, SilphCo11TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo11BattleText1:
 	text_far _SilphCo11BattleText1
@@ -390,7 +390,7 @@ SilphCo11Text5:
 	text_asm
 	ld hl, SilphCo11TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo11BattleText2:
 	text_far _SilphCo11BattleText2
@@ -407,10 +407,10 @@ SilphCo11AfterBattleText2:
 SilphCo10Text_6236c:
 	text_asm
 	ld hl, SilphCo10Text_6237b
-	call PrintText
+	rst _PrintText
 	ld a, PORYGON
 	call DisplayPokedex
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo10Text_6237b:
 	text_far _SilphCo10Text_6237b

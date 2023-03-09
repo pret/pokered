@@ -5,7 +5,7 @@ _AddPartyMon::
 ; If the entire value is 0, then the player is allowed to name the mon.
 	ld de, wPartyCount
 	ld a, [wMonDataLocation]
-	and $f
+	and %1111
 	jr z, .next
 	ld de, wEnemyPartyCount
 .next
@@ -28,7 +28,7 @@ _AddPartyMon::
 	ld [de], a
 	ld hl, wPartyMonOT
 	ld a, [wMonDataLocation]
-	and $f
+	and %1111
 	jr z, .next2
 	ld hl, wEnemyMonOT
 .next2
@@ -39,7 +39,7 @@ _AddPartyMon::
 	ld e, l
 	ld hl, wPlayerName
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst _CopyData
 	ld a, [wMonDataLocation]
 	and a
 	jr nz, .skipNaming
@@ -51,9 +51,27 @@ _AddPartyMon::
 	ld [wNamingScreenType], a
 	predef AskName
 .skipNaming
+IF DEF(_DEBUG)
+	ld a, [wMonDataLocation]
+	and %01000000
+	jr z, .skipDebugNaming
+	ld a, [wcf91]
+	ld [wd11e], a
+	call GetMonName ; puts pokemon name in wcd6d
+	ld hl, wPartyMonNicks
+	ldh a, [hNewPartyLength]
+	dec a
+	call SkipFixedLengthTextEntries
+	ld d, h
+	ld e, l
+	ld hl, wcd6d
+	ld bc, NAME_LENGTH
+	call CopyData
+.skipDebugNaming
+ENDC
 	ld hl, wPartyMons
 	ld a, [wMonDataLocation]
-	and $f
+	and %1111
 	jr z, .next3
 	ld hl, wEnemyMons
 .next3
@@ -74,7 +92,7 @@ _AddPartyMon::
 	pop hl
 	push hl
 	ld a, [wMonDataLocation]
-	and $f
+	and %1111
 	ld a, ATKDEFDV_TRAINER  ; set enemy trainer mon IVs to fixed average values
 	ld b, SPDSPCDV_TRAINER
 	jr nz, .next4
@@ -238,7 +256,7 @@ _AddPartyMon::
 	jr nz, .calcFreshStats
 	ld hl, wEnemyMonMaxHP
 	ld bc, $a
-	call CopyData          ; copy stats of cur enemy mon
+	rst _CopyData          ; copy stats of cur enemy mon
 	pop hl
 	jr .done
 .calcFreshStats
@@ -311,7 +329,7 @@ _AddEnemyMonToPlayerParty::
 	ld e, l
 	ld d, h
 	ld hl, wLoadedMon
-	call CopyData    ; write new mon's data (from wLoadedMon)
+	rst _CopyData    ; write new mon's data (from wLoadedMon)
 	ld hl, wPartyMonOT
 	ld a, [wPartyCount]
 	dec a
@@ -322,7 +340,7 @@ _AddEnemyMonToPlayerParty::
 	ld a, [wWhichPokemon]
 	call SkipFixedLengthTextEntries
 	ld bc, NAME_LENGTH
-	call CopyData    ; write new mon's OT name (from an enemy mon)
+	rst _CopyData    ; write new mon's OT name (from an enemy mon)
 	ld hl, wPartyMonNicks
 	ld a, [wPartyCount]
 	dec a
@@ -333,7 +351,7 @@ _AddEnemyMonToPlayerParty::
 	ld a, [wWhichPokemon]
 	call SkipFixedLengthTextEntries
 	ld bc, NAME_LENGTH
-	call CopyData    ; write new mon's nickname (from an enemy mon)
+	rst _CopyData    ; write new mon's nickname (from an enemy mon)
 	ld a, [wcf91]
 	ld [wd11e], a
 	predef IndexToPokedex
@@ -422,7 +440,7 @@ _MoveMon::
 	push hl
 	push de
 	ld bc, wBoxMon2 - wBoxMon1
-	call CopyData
+	rst _CopyData
 	pop de
 	pop hl
 	ld a, [wMoveMonType]
@@ -467,7 +485,7 @@ _MoveMon::
 	call SkipFixedLengthTextEntries
 .copyOT
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst _CopyData
 	ld a, [wMoveMonType]
 .findNickDest
 	cp PARTY_TO_DAYCARE
@@ -498,7 +516,7 @@ _MoveMon::
 	call SkipFixedLengthTextEntries
 .copyNick
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst _CopyData
 	pop hl
 	ld a, [wMoveMonType]
 	cp PARTY_TO_BOX

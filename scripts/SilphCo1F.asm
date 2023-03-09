@@ -37,7 +37,7 @@ SilphCo1FTrainer1Text:
 	text_asm
 	ld hl, SilphCo1FTrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo1FBattleText1:
 	text_far _SilphCo1FBattleText1
@@ -55,7 +55,7 @@ SilphCo1FTrainer2Text:
 	text_asm
 	ld hl, SilphCo1FTrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo1FBattleText2:
 	text_far _SilphCo1FBattleText2
@@ -73,7 +73,7 @@ SilphCo1FTrainer3Text:
 	text_asm
 	ld hl, SilphCo1FTrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo1FBattleText3:
 	text_far _SilphCo1FBattleText3
@@ -91,7 +91,7 @@ SilphCo1FTrainer4Text:
 	text_asm
 	ld hl, SilphCo1FTrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo1FBattleText4:
 	text_far _SilphCo1FBattleText4

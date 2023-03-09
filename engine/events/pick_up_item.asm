@@ -16,7 +16,7 @@ PickUpItemCommon:
 .missableObjectsListLoop
 	ld a, [hli]
 	cp $ff
-	ret z
+	jr z, .noObject
 	cp b
 	jr z, .isMissable
 	inc hl
@@ -42,8 +42,8 @@ PickUpItemCommon:
 
 	ldh a, [hMissableObjectIndex]
 	ld [wMissableObjectIndex], a
-;;;;;;;;;; PureRGBnote: CHANGED: safari zone hidable items use a different set of flags than everywhere else, needed more space for flags.
-	CheckEvent EVENT_IN_SAFARI_ZONE
+;;;;;;;;;; PureRGBnote: CHANGED: in certain maps hidable items use a different set of flags than everywhere else, needed more space for flags.
+	CheckEvent EVENT_IN_EXTRA_MISSABLE_OBJECTS_MAP
 	jr nz, .hideExtra
 	predef HideObject
 	jr .continue
@@ -59,8 +59,10 @@ PickUpItemCommon:
 	cp 1
 	jr z, .singleItemPickup
 .multiItemPickup
-	add $f6 ; index of first number character in charmap (assumes c must be 0-9)
+	add NUMBER_CHAR_OFFSET ; index of first number character in charmap (assumes c must be 0-9)
 	ld [wTempStore1], a
+	ld a, "@"
+	ld [wTempStore2], a
 	ld hl, FoundMultipleItemText
 	jr .print
 .singleItemPickup
@@ -70,7 +72,10 @@ PickUpItemCommon:
 	pop bc
 	ld hl, NoMoreRoomForItemText
 .print
-	call PrintText
+	rst _PrintText
+	ret
+.noObject
+	pop bc
 	ret
 
 FoundMultipleItemText:

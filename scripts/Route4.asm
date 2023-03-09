@@ -48,7 +48,7 @@ Route4Text2:
 	text_asm
 	ld hl, Route4TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route4BattleText1:
 	text_far _Route4BattleText1
@@ -66,7 +66,7 @@ Route4Text3:
 	text_asm
 	ld hl, Route4TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route4BattleText2:
 	text_far _Route4BattleText2
@@ -84,7 +84,7 @@ Route4Text4:
 	text_asm
 	ld hl, Route4TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route4BattleText3:
 	text_far _Route4BattleText3
@@ -102,7 +102,7 @@ Route4Text5:
 	text_asm
 	ld hl, Route4TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route4BattleText4:
 	text_far _Route4BattleText4

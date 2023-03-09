@@ -37,7 +37,7 @@ Route5Rookie1Text:
 	text_asm
 	ld hl, Route5TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route5BattleText1:
 	text_far _Route5BattleText1
@@ -55,7 +55,7 @@ Route5Rookie2Text:
 	text_asm
 	ld hl, Route5TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route5BattleText2:
 	text_far _Route5BattleText2
@@ -73,7 +73,7 @@ Route5Rookie3Text:
 	text_asm
 	ld hl, Route5TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route5BattleText3:
 	text_far _Route5BattleText3
@@ -91,7 +91,7 @@ Route5TamerText:
 	text_asm
 	ld hl, Route5TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route5BattleText4:
 	text_far _Route5BattleText4

@@ -148,7 +148,7 @@ ItemUseBall:
 
 	call LoadScreenTilesFromBuffer1
 	ld hl, ItemUseText00
-	call PrintText
+	rst _PrintText
 
 ; If the player is fighting an unidentified ghost, set the value that indicates
 ; the Pokémon can't be caught and skip the capture calculations.
@@ -164,7 +164,7 @@ ItemUseBall:
 	ld hl, wGrassRate
 	ld de, wPlayerName
 	ld bc, NAME_LENGTH
-	call CopyData ; save the player's name in the Wild Monster data (part of the Cinnabar Island Missingno. glitch)
+	rst _CopyData ; save the player's name in the Wild Monster data (part of the Cinnabar Island Missingno. glitch)
 	jp .captured
 
 .notOldManBattle
@@ -458,7 +458,7 @@ ItemUseBall:
 
 .skipShakeCalculations
 	ld c, 20
-	call DelayFrames
+	rst _DelayFrames
 
 	; Do the animation.
 	call MapBallToAnimation ; PureRGBnote: CHANGED: choose which toss animation to use before entering animation code
@@ -556,7 +556,7 @@ ItemUseBall:
 	jp z, .oldManCaughtMon ; if so, don't give the player the caught Pokémon
 
 	ld hl, ItemUseBallText05
-	call PrintText
+	rst _PrintText
 	
 ;;;;;;;;;; PureRGBnote: ADDED: ghost marowak can be caught and the event will complete if you do so
 	ld a, [wCurMap]
@@ -594,7 +594,7 @@ ItemUseBall:
 	jr nz, .skipShowingPokedexData ; if so, don't show the Pokédex data
 
 	ld hl, ItemUseBallText06
-	call PrintText
+	rst _PrintText
 	call ClearSprites
 	ld a, [wEnemyMonSpecies]
 	ld [wd11e], a
@@ -618,22 +618,15 @@ ItemUseBall:
 	jr nz, .printTransferredToPCText
 	ld hl, ItemUseBallText08
 .printTransferredToPCText
-	call PrintText
-;;;;;;;;;; shinpokerednote: ADDED: text indicating your box is full when catching a pokemon that fills it up.
-	ld a, [wBoxCount]
-	cp MONS_PER_BOX
-	jr nz, .notFullBox
-	ld hl, NoBoxSlotsLeftText
-	call PrintText
-.notFullBox
-;;;;;;;;;;
+	rst _PrintText
+	call PrintRemainingBoxSpacePrompt
 	jr .done
 
 .oldManCaughtMon
 	ld hl, ItemUseBallText05
 
 .printMessage
-	call PrintText
+	rst _PrintText
 	call ClearSprites
 
 .done
@@ -689,6 +682,12 @@ NoBoxSlotsLeftText:
 	text_far _NoBoxSlotsLeftText
 	text_end
 
+BoxSlotsLeftText:
+;"X slots left in box X"
+	text_far _BoxSlotsLeftText
+	text_end
+
+
 ItemUseBallText06:
 ;"New DEX data will be added..."
 ;play sound
@@ -736,7 +735,7 @@ ItemUseBoosterChip:
 	ld a, SFX_SWITCH
 	call PlaySoundWaitForCurrent
 	ld hl, BoosterChipInstalledText
-	call PrintText
+	rst _PrintText
 	ld a, BOOSTER_CHIP
 	ldh [hItemToRemoveID], a
 	farcall RemoveItemByID
@@ -819,6 +818,8 @@ ItemUseSurfboard:
 	ld a, 2
 	ld [wWalkBikeSurfState], a ; change player state to surfing
 	call PlayDefaultMusic ; play surfing music
+	ld hl, wd728
+	set 2, [hl]
 	ld hl, SurfingGotOnText
 	jp PrintText
 .tryToStopSurfing
@@ -1063,7 +1064,7 @@ ItemUseMedicine:
 	add hl, bc ; hl now points to party stats
 	ld de, wBattleMonStats
 	ld bc, NUM_STATS * 2
-	;call CopyData ; copy party stats to in-battle stat data
+	;rst _CopyData ; copy party stats to in-battle stat data
 	;predef DoubleOrHalveSelectedStats ; shinpokerednote: FIXED: these function calls are redundant after the above code block
 	jp .doneHealing
 .healHP
@@ -1406,7 +1407,7 @@ ItemUseMedicine:
 	ld a, 1
 	ldh [hAutoBGTransferEnabled], a
 	ld c, 50
-	call DelayFrames
+	rst _DelayFrames
 	call WaitForTextScrollButtonPress
 	jr .done
 .canceledItemUse
@@ -1484,11 +1485,11 @@ ItemUseMedicine:
 .gotStatName
 	ld de, wStringBuffer
 	ld bc, 10
-	call CopyData ; copy the stat's name to wStringBuffer
+	rst _CopyData ; copy the stat's name to wStringBuffer
 	ld a, SFX_HEAL_AILMENT
-	call PlaySound
+	rst _PlaySound
 	ld hl, VitaminStatRoseText
-	call PrintText
+	rst _PrintText
 	jp RemoveUsedItem
 ;;;;;;;;;; PureRGBnote: CHANGED: text for rare candy and vitamin "had no effect" differ now, with the vitamin one indicating it can't be raised further via items specifically.
 .rareCandyNoEffect
@@ -1500,7 +1501,7 @@ ItemUseMedicine:
 	ld hl, VitaminNoEffectText
 .printNoEffect
 ;;;;;;;;;;
-	call PrintText
+	rst _PrintText
 	jp GBPalWhiteOut
 .recalculateStats
 	ld bc, wPartyMon1Stats - wPartyMon1
@@ -1644,14 +1645,14 @@ ItemUseMedicine:
 	ld [hld], a
 
 	ld hl, ApexChipPutOnPokeballText
-	call PrintText
+	rst _PrintText
 	ld hl, ApexChipDVsMaxedText
-	call PrintText
+	rst _PrintText
 	jp RemoveUsedItem
 .alreadyUsedApex
 	pop hl
 	ld hl, ApexChipAlreadyUsedText
-	call PrintText
+	rst _PrintText
 	jp GBPalWhiteOut
 
 ApexChipPutOnPokeballText:
@@ -1683,7 +1684,7 @@ INCLUDE "data/battle/stat_names.asm"
 
 ItemUseBait:
 	ld hl, ThrewBaitText
-	call PrintText
+	rst _PrintText
 	ld hl, wEnemyMonActualCatchRate ; catch rate
 	srl [hl] ; halve catch rate
 	ld a, BAIT_ANIM
@@ -1693,7 +1694,7 @@ ItemUseBait:
 
 ItemUseRock:
 	ld hl, ThrewRockText
-	call PrintText
+	rst _PrintText
 	ld hl, wEnemyMonActualCatchRate ; catch rate
 	ld a, [hl]
 	add a ; double catch rate
@@ -1767,7 +1768,7 @@ ItemUseEscapeRope:
 	ret nz ; if so, return
 	call ItemUseReloadOverworldData
 	ld c, 30
-	call DelayFrames
+	rst _DelayFrames
 	jp RemoveUsedItem
 .notUsable
 	jp ItemUseNotTime
@@ -1780,14 +1781,14 @@ ItemUsePocketAbra:
 	and a
 	jp nz, ItemUseNotTime
 	ld hl, .wantToTeleportText
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
 	jr z, .yes
 .no
 	ld hl, .pocketAbraNo
-	call PrintText
+	rst _PrintText
 	ret
 .yes
 	ld hl, wd732
@@ -1809,7 +1810,7 @@ ItemUsePocketAbra:
 	jr nc, .flavor4
 	ld hl, .pocketAbraFlavorText5
 .done
-	call PrintText
+	rst _PrintText
 	call StopMusic
 	ld a, ABRA
 	call PlayCry
@@ -1914,7 +1915,7 @@ ItemUseCardKey:
 ;	jr .loop
 ;.done
 ;	ld hl, ItemUseText00
-;	call PrintText
+;	rst _PrintText
 ;	ld hl, wd728
 ;	set 7, [hl]
 ;	ret
@@ -2002,7 +2003,7 @@ ItemUsePokeflute:
 	call ArePlayerCoordsInArray
 	jr nc, .noSnorlaxToWakeUp
 	ld hl, PlayedFluteHadEffectText
-	call PrintText
+	rst _PrintText
 	SetEvent EVENT_FIGHT_ROUTE12_SNORLAX
 	ret
 .notRoute12
@@ -2015,7 +2016,7 @@ ItemUsePokeflute:
 	call ArePlayerCoordsInArray
 	jr nc, .noSnorlaxToWakeUp
 	ld hl, PlayedFluteHadEffectText
-	call PrintText
+	rst _PrintText
 	SetEvent EVENT_FIGHT_ROUTE16_SNORLAX
 	ret
 .noSnorlaxToWakeUp
@@ -2057,7 +2058,7 @@ ItemUsePokeflute:
 	jp z, PrintText ; if no pokemon were asleep
 ; if some pokemon were asleep
 	ld hl, PlayedFluteHadEffectText
-	call PrintText
+	rst _PrintText
 	ld a, [wLowHealthTonePairs]
 	bit 7, a ; set if low health alarm sound is currently playing
 	jr nz, .skipMusic
@@ -2126,7 +2127,7 @@ PlayedFluteHadEffectText:
 	jr nz, .done
 ; play out-of-battle pokeflute music
 	ld a, SFX_STOP_ALL_MUSIC
-	call PlaySound
+	rst _PlaySound
 	ld a, SFX_POKEFLUTE
 	ld c, BANK(SFX_Pokeflute)
 	call PlayMusic
@@ -2136,7 +2137,7 @@ PlayedFluteHadEffectText:
 	jr z, .musicWaitLoop
 	call PlayDefaultMusic ; start playing normal music again
 .done
-	jp TextScriptEnd ; end text
+	rst TextScriptEnd ; end text
 
 ItemUseCoinCase:
 	ld a, [wIsInBattle]
@@ -2254,11 +2255,11 @@ FishingInit:
 	jr z, .surfing
 	call ItemUseReloadOverworldData
 	ld hl, ItemUseText00
-	call PrintText
+	rst _PrintText
 	ld a, SFX_HEAL_AILMENT
-	call PlaySound
+	rst _PlaySound
 	ld c, 20 ; PureRGBnote: CHANGED: reduce the artificial delay on initiating fishing.
-	call DelayFrames
+	rst _DelayFrames
 	and a
 	ret
 .surfing
@@ -2302,7 +2303,7 @@ ItemUseItemfinder:
 	and a
 	jr nz, .doDirectionFacing ; already have seen the text since restarting the cartridge
 	ld hl, ItemfinderFoundItemText
-	call PrintText
+	rst _PrintText
 	ld a, 1
 	ld [wSawItemFinderText], a ; PureRGBnote: CHANGED: only display the "yes! itemfinder found an item!" text once per game restart
 .doDirectionFacing
@@ -2330,7 +2331,7 @@ ItemUseItemfinder:
 	predef EmotionBubble
 	jr .done
 .printText
-	call PrintText
+	rst _PrintText
 .done	
 	ret
 
@@ -2372,7 +2373,7 @@ ItemUsePPRestore:
 	jr c, .printWhichTechniqueMessage ; if so, print the raise PP message
 	ld hl, RestorePPWhichTechniqueText ; otherwise, print the restore PP message
 .printWhichTechniqueMessage
-	call PrintText
+	rst _PrintText
 	xor a
 	ld [wPlayerMoveListIndex], a
 	callfar MoveSelectionMenu ; move selection menu
@@ -2398,7 +2399,7 @@ ItemUsePPRestore:
 	cp 3 << 6 ; have 3 PP Ups already been used?
 	jr c, .PPNotMaxedOut
 	ld hl, PPMaxedOutText
-	call PrintText
+	rst _PrintText
 	jr .chooseMove
 .PPNotMaxedOut
 	ld a, [hl]
@@ -2408,7 +2409,7 @@ ItemUsePPRestore:
 	ld [wUsingPPUp], a
 	call RestoreBonusPP ; add the bonus PP to current PP
 	ld hl, PPIncreasedText
-	call PrintText
+	rst _PrintText
 .done
 	pop af
 	ld [wWhichPokemon], a
@@ -2426,12 +2427,12 @@ ItemUsePPRestore:
 	call AddNTimes
 	ld de, wBattleMonPP
 	ld bc, 4
-	call CopyData ; copy party data to in-battle data
+	rst _CopyData ; copy party data to in-battle data
 .skipUpdatingInBattleData
 	ld a, SFX_HEAL_AILMENT
-	call PlaySound
+	rst _PlaySound
 	ld hl, PPRestoredText
-	call PrintText
+	rst _PrintText
 	jr .done
 .useEther
 	call .restorePP
@@ -2593,9 +2594,9 @@ ItemUseTMHM:
 	call PlaySoundWaitForCurrent 
 	pop hl
 ;;;;;;;;;;
-	call PrintText
+	rst _PrintText
 	ld hl, TeachMachineMoveText
-	call PrintText
+	rst _PrintText
 	hlcoord 14, 7
 	lb bc, 8, 15
 	ld a, TWO_OPTION_MENU
@@ -2620,7 +2621,7 @@ ItemUseTMHM:
 	ld hl, wStringBuffer
 	ld de, wTempMoveNameBuffer
 	ld bc, 14
-	call CopyData ; save the move name because DisplayPartyMenu will overwrite it
+	rst _CopyData ; save the move name because DisplayPartyMenu will overwrite it
 	ld a, $ff
 	ld [wUpdateSpritesEnabled], a
 	ld a, TMHM_PARTY_MENU
@@ -2630,7 +2631,7 @@ ItemUseTMHM:
 	ld hl, wTempMoveNameBuffer
 	ld de, wStringBuffer
 	ld bc, 14
-	call CopyData
+	rst _CopyData
 	pop af
 	jr nc, .checkIfAbleToLearnMove
 ; if the player canceled teaching the move
@@ -2654,7 +2655,7 @@ ItemUseTMHM:
 	ld a, SFX_DENIED
 	call PlaySoundWaitForCurrent
 	ld hl, MonCannotLearnMachineMoveText
-	call PrintText
+	rst _PrintText
 	jr .chooseMon
 .checkIfAlreadyLearnedMove
 	callfar CheckIfMoveIsKnown ; check if the pokemon already knows the move
@@ -2690,9 +2691,9 @@ MonCannotLearnMachineMoveText:
 
 PrintItemUseTextAndRemoveItem:
 	ld hl, ItemUseText00
-	call PrintText
+	rst _PrintText
 	ld a, SFX_HEAL_AILMENT
-	call PlaySound
+	rst _PlaySound
 	call WaitForTextScrollButtonPress ; wait for button press
 
 RemoveUsedItem:
@@ -2726,9 +2727,9 @@ ThrowBallAtTrainerMon:
 	call MapBallToAnimation
 	predef MoveAnimation ; do animation
 	ld hl, ThrowBallAtTrainerMonText1
-	call PrintText
+	rst _PrintText
 	ld hl, ThrowBallAtTrainerMonText2
-	call PrintText
+	rst _PrintText
 	jr RemoveUsedItem
 
 NoCyclingAllowedHere:
@@ -3002,7 +3003,7 @@ TossItem_::
 	call GetItemName
 	call CopyToStringBuffer
 	ld hl, IsItOKToTossItemText
-	call PrintText
+	rst _PrintText
 	hlcoord 14, 7
 	lb bc, 8, 15
 	ld a, TWO_OPTION_MENU
@@ -3022,14 +3023,14 @@ TossItem_::
 	call GetItemName
 	call CopyToStringBuffer
 	ld hl, ThrewAwayItemText
-	call PrintText
+	rst _PrintText
 	pop hl
 	and a
 	ret
 .tooImportantToToss
 	push hl
 	ld hl, TooImportantToTossText
-	call PrintText
+	rst _PrintText
 	pop hl
 	scf
 	ret
@@ -3065,7 +3066,7 @@ IsKeyItem_::
 	ld de, wBuffer
 	ld bc, 15 ; only 11 bytes are actually used
 	ASSERT 15 >= (NUM_ITEMS + 7) / 8
-	call CopyData
+	rst _CopyData
 	pop af
 	dec a
 	ld c, a
@@ -3123,7 +3124,7 @@ SendNewMonToBox:
 	push bc
 	push hl
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst _CopyData
 	pop hl
 	ld d, h
 	ld e, l
@@ -3136,7 +3137,7 @@ SendNewMonToBox:
 	ld hl, wPlayerName
 	ld de, wBoxMonOT
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst _CopyData
 	ld a, [wBoxCount]
 	dec a
 	jr z, .skip2
@@ -3157,7 +3158,7 @@ SendNewMonToBox:
 	push bc
 	push hl
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst _CopyData
 	pop hl
 	ld d, h
 	ld e, l
@@ -3191,7 +3192,7 @@ SendNewMonToBox:
 	push bc
 	push hl
 	ld bc, wBoxMon2 - wBoxMon1
-	call CopyData
+	rst _CopyData
 	pop hl
 	ld d, h
 	ld e, l
@@ -3206,7 +3207,7 @@ SendNewMonToBox:
 	ld hl, wEnemyMon
 	ld de, wBoxMon1
 	ld bc, wEnemyMonDVs - wEnemyMon
-	call CopyData
+	rst _CopyData
 	ld hl, wPlayerID
 	ld a, [hli]
 	ld [de], a
@@ -3254,7 +3255,7 @@ SendNewMonToBox:
 ; checks if the tile in front of the player is a shore or water tile
 ; used for surfing and fishing
 ; unsets carry if it is, sets carry if not
-IsNextTileShoreOrWater:
+IsNextTileShoreOrWater::
 	ld a, [wCurMapTileset]
 	ld hl, WaterTilesets
 	ld de, 1
@@ -3347,4 +3348,47 @@ INCLUDE "data/wild/super_rod.asm"
 ItemUseReloadOverworldData:
 	call LoadCurrentMapView
 	jp UpdateSprites
-	
+
+;;;;;;;;;; pureRGBnote: ADDED: text indicating your box is full or how much is left
+PrintRemainingBoxSpacePrompt:
+	call PrintRemainingBoxSpace
+	ld hl, TextScriptPromptButton
+	jp TextCommandProcessor
+
+PrintRemainingBoxSpace:
+	ld hl, wBoxNumString
+	ld a, [wCurrentBoxNum]
+	and %01111111 ; last bit of wCurrentBoxNum is used as a flag and should be ignored
+	inc a ; wCurrentBoxNum starts at 0 but we want 1
+	call Load2DigitNumberBelow20
+	ld a, [wBoxCount]
+	cp MONS_PER_BOX
+	jr nz, .notFullBox
+	ld hl, NoBoxSlotsLeftText
+	rst _PrintText
+	ret
+.notFullBox
+	ld h, a
+	ld a, MONS_PER_BOX
+	sub h
+	ld hl, w2CharStringBuffer
+	call Load2DigitNumberBelow20
+	ld hl, BoxSlotsLeftText
+	rst _PrintText
+	ret
+
+Load2DigitNumberBelow20:
+	cp 10
+	jr c, .singleDigit
+	sub 10
+	push af
+	ld a, "1"
+	ld [hli], a
+	pop af
+.singleDigit
+	add NUMBER_CHAR_OFFSET
+	ld [hli], a
+	ld a, "@"
+	ld [hl], a
+	ret
+;;;;;;;;;;

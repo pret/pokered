@@ -69,11 +69,11 @@ CeruleanRocketHouseHiddenTexts::
 .basementMachineText
 	ld hl, CeruleanRocketHouseB1FMachineText
 .printText
-	call PrintText
+	rst _PrintText
 .done
 	xor a
 	ld [wUnusedC000], a
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RocketSNESTextConst::
 	text_far _RocketSNESText
@@ -81,7 +81,7 @@ RocketSNESTextConst::
 
 OptionalText:
 	ld hl, OptionalTextQ
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -90,7 +90,7 @@ OptionalText:
 	ret
 .no
 	ld hl, OptionalDidntRead
-	call PrintText
+	rst _PrintText
 	ret
 
 OptionalTextQ::
@@ -104,13 +104,13 @@ OptionalDidntRead::
 CeruleanRocketHouseB1FLeftComputerText::
 	text_asm
 	ld hl, LeftComputerText1
-	call PrintText
+	rst _PrintText
 	call OptionalText
 	jr nc, .done
 	ld hl, LeftComputerText2
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 LeftComputerText1::
 	text_far _CeruleanRocketHouseB1FLeftComputerText
@@ -123,13 +123,13 @@ LeftComputerText2::
 CeruleanRocketHouseB1FCenterComputerText::
 	text_asm
 	ld hl, CenterComputerText1
-	call PrintText
+	rst _PrintText
 	call OptionalText
 	jr nc, .done
 	ld hl, CenterComputerText2
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CenterComputerText1::
 	text_far _CeruleanRocketHouseB1FCenterComputerText
@@ -142,13 +142,13 @@ CenterComputerText2::
 CeruleanRocketHouseB1FRightComputerText::
 	text_asm
 	ld hl, RightComputerText1
-	call PrintText
+	rst _PrintText
 	call OptionalText
 	jr nc, .done
 	ld hl, RightComputerText2
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RightComputerText1:
 	text_far _CeruleanRocketHouseB1FRightComputerText
@@ -161,10 +161,10 @@ RightComputerText2:
 CeruleanRocketHouseB1FMachineText:
 	text_asm
 	ld hl, MachineText
-	call PrintText
+	rst _PrintText
 	ld a, 1
 	ld [wCeruleanRocketHouseCurScript], a
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 MachineText:
 	text_far _CeruleanRocketHouseB1FMachineText

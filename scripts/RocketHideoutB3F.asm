@@ -26,7 +26,7 @@ RocketHideout3Script0:
 	set 7, [hl]
 	call StartSimulatingJoypadStates
 	ld a, SFX_ARROW_TILES
-	call PlaySound
+	rst _PlaySound
 	ld a, $ff
 	ld [wJoyIgnore], a
 	ld a, $3
@@ -142,7 +142,7 @@ RocketHideout3Text1:
 	text_asm
 	ld hl, RocketHideout3TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RocketHideout3BattleText2:
 	text_far _RocketHideout3BattleText2
@@ -160,7 +160,7 @@ RocketHideout3Text2:
 	text_asm
 	ld hl, RocketHideout3TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RocketHideout3BattleTxt:
 	text_far _RocketHideout3BattleTxt

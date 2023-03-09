@@ -28,7 +28,7 @@ MoveEffectPointerTable:
 	dw HazeEffect                ; HAZE_EFFECT
 	dw TwoToFiveAttacksEffect    ; TWO_OR_THREE_ATTACKS_EFFECT
 	dw ThrashPetalDanceEffect    ; THRASH_PETAL_DANCE_EFFECT
-	dw SwitchAndTeleportEffect   ; SWITCH_AND_TELEPORT_EFFECT
+	dw TeleportEffect            ; TELEPORT_EFFECT
 	dw TwoToFiveAttacksEffect    ; TWO_TO_FIVE_ATTACKS_EFFECT
 	dw BurnEffect                ; BURN_EFFECT
 	dw FlinchSideEffect          ; FLINCH_SIDE_EFFECT1

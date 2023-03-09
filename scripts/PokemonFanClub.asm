@@ -27,15 +27,15 @@ FanClubText1:
 	CheckEvent EVENT_PIKACHU_FAN_BOAST
 	jr nz, .mineisbetter
 	ld hl, .normaltext
-	call PrintText
+	rst _PrintText
 	SetEvent EVENT_SEEL_FAN_BOAST
 	jr .done
 .mineisbetter
 	ld hl, .bettertext
-	call PrintText
+	rst _PrintText
 	ResetEvent EVENT_PIKACHU_FAN_BOAST
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .normaltext
 	text_far PikachuFanText
@@ -51,15 +51,15 @@ FanClubText2:
 	CheckEvent EVENT_SEEL_FAN_BOAST
 	jr nz, .mineisbetter
 	ld hl, .normaltext
-	call PrintText
+	rst _PrintText
 	SetEvent EVENT_PIKACHU_FAN_BOAST
 	jr .done
 .mineisbetter
 	ld hl, .bettertext
-	call PrintText
+	rst _PrintText
 	ResetEvent EVENT_SEEL_FAN_BOAST
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .normaltext
 	text_far SeelFanText
@@ -73,11 +73,11 @@ FanClubText3:
 ; pikachu
 	text_asm
 	ld hl, .text
-	call PrintText
+	rst _PrintText
 	ld a, PIKACHU
 	call PlayCry
 	call WaitForSoundToFinish
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .text
 	text_far FanClubPikachuText
@@ -87,11 +87,11 @@ FanClubText4:
 ; seel
 	text_asm
 	ld hl, .text
-	call PrintText
+	rst _PrintText
 	ld a, SEEL
 	call PlayCry
 	call WaitForSoundToFinish
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .text
 	text_far FanClubSeelText
@@ -104,7 +104,7 @@ FanClubText5:
 	jr nz, .nothingleft
 
 	ld hl, .meetchairtext
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -112,27 +112,27 @@ FanClubText5:
 
 	; tell the story
 	ld hl, .storytext
-	call PrintText
+	rst _PrintText
 	lb bc, BIKE_VOUCHER, 1
 	call GiveItem
 	jr nc, .bag_full
 	ld hl, .receivedvouchertext
-	call PrintText
+	rst _PrintText
 	SetEvent EVENT_GOT_BIKE_VOUCHER
 	jr .done
 .bag_full
 	ld hl, .bagfulltext
-	call PrintText
+	rst _PrintText
 	jr .done
 .nothanks
 	ld hl, .nostorytext
-	call PrintText
+	rst _PrintText
 	jr .done
 .nothingleft
 	ld hl, .finaltext
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .meetchairtext
 	text_far FanClubMeetChairText

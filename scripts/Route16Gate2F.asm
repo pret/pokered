@@ -10,8 +10,8 @@ Route16Gate2F_TextPointers:
 Route16GateUpstairsText1:
 	text_asm
 	ld hl, Route16GateUpstairsText_49820
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 Route16GateUpstairsText_49820:
 	text_far _Route16GateUpstairsText_49820
@@ -20,8 +20,8 @@ Route16GateUpstairsText_49820:
 Route16GateUpstairsText2:
 	text_asm
 	ld hl, Route16GateUpstairsText_4982f
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 Route16GateUpstairsText_4982f:
 	text_far _Route16GateUpstairsText_4982f

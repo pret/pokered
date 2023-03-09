@@ -29,7 +29,7 @@
 	const SPRITE_ROCKET                  ; $18
 	const SPRITE_CHANNELER               ; $19
 	const SPRITE_WAITER                  ; $1a
-	const SPRITE_ERIKA                   ; $1b
+	const SPRITE_SILPH_WORKER_WOMAN      ; $1b
 	const SPRITE_MIDDLE_AGED_WOMAN       ; $1c
 	const SPRITE_BRUNETTE_GIRL           ; $1d
 	const SPRITE_LANCE                   ; $1e
@@ -52,11 +52,9 @@
 	const SPRITE_FISHER                  ; $2f
 	const SPRITE_KOGA                    ; $30
 	const SPRITE_GUARD                   ; $31
-	const SPRITE_UNUSED_GUARD            ; $32
 	const SPRITE_MOM                     ; $33
 	const SPRITE_BALDING_GUY             ; $34
 	const SPRITE_LITTLE_BOY              ; $35
-	const SPRITE_UNUSED_GAMEBOY_KID      ; $36
 	const SPRITE_GAMEBOY_KID             ; $37
 	const SPRITE_FAIRY                   ; $38
 	const SPRITE_AGATHA                  ; $39
@@ -64,6 +62,8 @@
 	const SPRITE_LORELEI                 ; $3b
 	const SPRITE_BROCK                   ; $3b
 	const SPRITE_MISTY                   ; $3b
+	const SPRITE_LT_SURGE                ; something
+	const SPRITE_ERIKA                   ; something
 	const SPRITE_SABRINA                 ; $3b
 	const SPRITE_BLAINE                  ; $3b
 	const SPRITE_SEEL                    ; $3c
