@@ -1,15 +1,44 @@
+TeleportHealEffect:
+	ld a, d
+	push af
+	ld a, [hWhoseTurn]
+	and a
+	ld de, wEnemyMonHP
+	ld hl, wEnemyMonMaxHP
+	jr nz, .enemyTurn
+	ld bc, wPartyMon2 - wPartyMon1 
+	ld de, wPartyMon1HP
+	ld hl, wPartyMon1MaxHP
+	pop af
+	push af
+	call AddNTimes
+	pop af
+	push hl
+	ld h, d
+	ld l, e
+	call AddNTimes
+	ld d, h
+	ld e, l
+	pop hl
+	jr .ready
+.enemyTurn
+	pop af
+.ready
+	ld a, TELEPORT
+	jr HealEffectCommon
+
 HealEffect_:
 	ldh a, [hWhoseTurn]
 	and a
 	ld de, wBattleMonHP
 	ld hl, wBattleMonMaxHP
 	ld a, [wPlayerMoveNum]
-	jr z, .healEffect
+	jr z, HealEffectCommon
 	ld de, wEnemyMonHP
 	ld hl, wEnemyMonMaxHP
 	ld a, [wEnemyMoveNum]
 ;;;;;;;;;; shinpokerednote: FIXED: HP recovery bug where the move fails when HP is 255 or 511 less than max HP
-.healEffect 
+HealEffectCommon:
 	;h holds high byte of maxHP, l holds low byte of maxHP
 	;d holds high byte of curHP, e holds low byte of curHP
 	ld b, a
@@ -56,14 +85,22 @@ HealEffect_:
 	pop de
 	pop hl
 .healHP
+	push af
 	ld a, [hld]
 	ld [wHPBarMaxHP], a
 	ld c, a
 	ld a, [hl]
 	ld [wHPBarMaxHP+1], a
 	ld b, a
+	pop af
+	cp REST
 	jr z, .gotHPAmountToHeal
 ; Recover and Softboiled only heal for half the mon's max HP
+	srl b
+	rr c
+	cp TELEPORT
+	jr nz, .gotHPAmountToHeal
+; Teleport heals 1/4 HP
 	srl b
 	rr c
 .gotHPAmountToHeal
@@ -97,6 +134,9 @@ HealEffect_:
 	ld [de], a
 	ld [wHPBarNewHP], a
 .playAnim
+	call GetMoveNumber
+	cp TELEPORT
+	ret z
 	ld hl, PlayCurrentMoveAnimation
 	call EffectCallBattleCore
 	ldh a, [hWhoseTurn]
@@ -114,10 +154,21 @@ HealEffect_:
 	ld hl, RegainedHealthText
 	jp PrintText
 .failed
+	call GetMoveNumber
+	cp TELEPORT
+	ret z
 	ld c, 50
 	rst _DelayFrames
 	ld hl, PrintButItFailedText_
 	jp EffectCallBattleCore
+
+GetMoveNumber:
+	ldh a, [hWhoseTurn]
+	and a
+	ld a, [wPlayerMoveNum]
+	ret z
+	ld a, [wEnemyMoveNum]
+	ret
 
 StartedSleepingEffect:
 	text_far _StartedSleepingEffect

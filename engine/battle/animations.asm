@@ -984,13 +984,13 @@ DoExplodeSpecialEffects:
 DoBlizzardSpecialEffects:
 	ld a, [wSubAnimCounter]
 	cp 13
-	jp z, AnimationFlashScreen
+	jp z, AnimationFlashLightScreen
 	cp 9
-	jp z, AnimationFlashScreen
+	jp z, AnimationFlashLightScreen
 	cp 5
-	jp z, AnimationFlashScreen
+	jp z, AnimationFlashLightScreen
 	cp 1
-	jp z, AnimationFlashScreen
+	jp z, AnimationFlashLightScreen
 	ret
 
 ; flashes the screen at 3 points in the subanimation
@@ -1203,10 +1203,18 @@ FlashScreenLongDelay:
 .delayFrames
 	jp DelayFrames
 
+AnimationFlashLightScreen:
+	ldh a, [rBGP]
+	push af ; save initial palette
+	ld a, %10010000 ; light screen colors
+	jr AnimationFlashScreenCommon
+
 AnimationFlashScreen:
 	ldh a, [rBGP]
 	push af ; save initial palette
 	ld a, %00011011 ; 0, 1, 2, 3 (inverted colors)
+	; fall through
+AnimationFlashScreenCommon:
 	ldh [rBGP], a
 	call UpdateGBCPal_BGP ; shinpokerednote: gbcnote: gbc color facilitation
 	ld c, 2

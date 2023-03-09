@@ -2,7 +2,7 @@
 ResidualEffects1:
 ; most non-side effects
 	db HAZE_EFFECT
-	db SWITCH_AND_TELEPORT_EFFECT
+	db TELEPORT_EFFECT
 	db MIST_EFFECT
 	db FOCUS_ENERGY_EFFECT
 	db CONFUSION_EFFECT

@@ -1132,9 +1132,13 @@ UseNextMonText:
 	text_far _UseNextMonText
 	text_end
 
-; choose next player mon to send out
+; choose next player mon to send out when your current one fainted
 ; stores whether enemy mon has no HP left in Z flag
 ChooseNextMon:
+	;;;;;;;;; PureRGB: CHANGED: reset disable move indicator when we switch pokemon so the move disabled is random until we use a move again with the new pokemon.
+	xor a
+	ld [wPlayerLastSelectedMoveDisable], a
+	;;;;;;;;;
 	ld a, BATTLE_PARTY_MENU
 	ld [wPartyMenuTypeOrMessageID], a
 	call DisplayPartyMenu
@@ -1146,6 +1150,17 @@ ChooseNextMon:
 .monChosen
 	call HasMonFainted
 	jr z, .goBackToPartyMenu ; if mon fainted, you have to choose another
+;;;;;;;;; PureRGBnote: ADDED: Code for TELEPORT - prevents selecting the pokemon that's currently out 
+;;;;;;;;; (will not matter in other scenarios since the current pokemon will be fainted and that will be caught by the previous check)
+	ld hl, wPlayerMonNumber
+	ld a, [wWhichPokemon]
+	cp [hl]
+	jr nz, .notSamePokemon
+	ld hl, AlreadyOutText
+	rst _PrintText
+	jr .goBackToPartyMenu
+.notSamePokemon
+;;;;;;;;;
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	jr nz, .notLinkBattle

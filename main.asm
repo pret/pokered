@@ -182,6 +182,8 @@ INCLUDE "engine/battle/move_effects/check_defrost_move.asm" ; PureRGBnote: ADDED
 INCLUDE "engine/battle/move_effects/haze.asm" ; PureRGBnote: MOVED: moved from battle engine 1
 INCLUDE "engine/battle/decrement_pp.asm" ; PureRGBnote: MOVED: moved from battle engine 11
 INCLUDE "engine/battle/link_battle_versus_text.asm"
+INCLUDE "engine/battle/move_effects/heal.asm"
+INCLUDE "engine/battle/move_effects/teleport.asm"
 
 
 SECTION "Slot Machines", ROMX
@@ -235,7 +237,6 @@ INCLUDE "engine/battle/init_battle_variables.asm"
 INCLUDE "engine/battle/move_effects/paralyze.asm"
 INCLUDE "engine/battle/move_effects/burn.asm" ; PureRGBnote: ADDED: new burn effect code
 ; PureRGBnote: MOVED: moved from battle engine 7
-INCLUDE "engine/battle/move_effects/heal.asm"
 INCLUDE "engine/battle/move_effects/transform.asm"
 INCLUDE "engine/battle/move_effects/reflect_light_screen.asm"
 INCLUDE "engine/battle/move_effects/tri_attack.asm" ; PureRGBnote: ADDED: new tri attack effect code

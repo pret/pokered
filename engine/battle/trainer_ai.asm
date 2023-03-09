@@ -141,6 +141,8 @@ AIMoveChoiceModification1:
 	and a
 	jr nz, .nextMove
 	ld a, [wEnemyMoveEffect]
+	cp TELEPORT_EFFECT
+	jr z, .checkTeleportUsable
 	cp DISABLE_EFFECT
 	jr z, .checkDisabled
 	cp LEECH_SEED_EFFECT
@@ -148,9 +150,9 @@ AIMoveChoiceModification1:
 	cp FOCUS_ENERGY_EFFECT
 	jr z, .checkPumpedUp
 	cp LIGHT_SCREEN_EFFECT
-	jr z, .checkLightScreenUp
+	jp z, .checkLightScreenUp
 	cp REFLECT_EFFECT
-	jr z, .checkReflectUp
+	jp z, .checkReflectUp
 	cp MIST_EFFECT
 	jp z, .checkMistUp
 	cp CONFUSION_EFFECT
@@ -191,7 +193,18 @@ AIMoveChoiceModification1:
 	jr .nextMove
 .ohko
 	call WillOHKOMoveAlwaysFail
-	jr nc, .nextMove
+	jp nc, .nextMove
+	jr .discourage
+.checkTeleportUsable
+	push hl
+	push de
+	push bc
+	callfar CheckCanForceSwitchEnemy
+	pop bc
+	pop de
+	pop hl 
+	jp nz, .nextMove
+	; disourage teleport if there is only one pokemon left in the AI trainer's party (would fail in that case)
 	jr .discourage
 .checkDisabled
 	ld a, [wPlayerDisabledMove] ; non-zero if the player has a disabled move
@@ -994,8 +1007,17 @@ AISwitchIfEnoughMons:
 	and a
 	ret
 
-SwitchEnemyMon:
+SwitchEnemyMonNoText:
+	call SwitchEnemyMonCommon
+	jp SwitchEnemyMonCommon2
 
+SwitchEnemyMon:
+	call SwitchEnemyMonCommon
+	ld hl, AIBattleWithdrawText
+	rst _PrintText
+	jp SwitchEnemyMonCommon2
+
+SwitchEnemyMonCommon:
 ;;;;; shinpokerednote: CHANGED: if player using trapping move, then end their move
 	ld a, [wPlayerBattleStatus1]
 	bit USING_TRAPPING_MOVE, a
@@ -1020,10 +1042,9 @@ SwitchEnemyMon:
 	ld hl, wEnemyMonHP
 	ld bc, 4
 	rst _CopyData
+	ret
 
-	ld hl, AIBattleWithdrawText
-	rst _PrintText
-	
+SwitchEnemyMonCommon2:
 ;;;;;;;;;; PureRGBnote: ADDED: clear the previous selected move here to reset disable functionality on opponent switching pokemon.
 	xor a
 	ld [wEnemyLastSelectedMoveDisable], a 
