@@ -8,6 +8,7 @@ sSpriteBuffer2:: ds SPRITEBUFFERSIZE
 
 ; PureRGBnote: ADDED: byte array of whether each pokemon in current hall of fame team data should use an alt color palette
 ; only uses bits 0-5 in each byte, since the party size is 6.
+; TODO: armored mewtwo indicated by bit 6
 sHallOfFamePalettes:: ds HOF_TEAM_CAPACITY 
 
 ; hall of fame data, contains species, level, and nickname of each pokemon for each team
