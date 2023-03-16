@@ -104,6 +104,7 @@ Drumkit6:
 	dw Snare9
 	dw Snare9
 	dw Snare9
+	dw Snare9
 
 Drum00:
 	noise_note 32, 1, 1, 0
