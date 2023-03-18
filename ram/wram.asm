@@ -101,7 +101,7 @@ wSpriteStateData1::
 ; - A: adjusted Y coordinate
 ; - B: adjusted X coordinate
 ; - C: direction of collision
-; - D
+; - D: PureRGBnote: TODO: original picture ID
 ; - E
 ; - F
 wSpritePlayerStateData1::  spritestatedata1 wSpritePlayerStateData1 ; player is struct 0
@@ -1899,11 +1899,11 @@ wPlayerMoney:: ds 3 ; BCD
 
 wRivalName:: ds NAME_LENGTH
 
-; bits 0-3 = text speed (number of frames to delay after printing a letter)
-; 1: Fast
-; 3: Medium
-; 5: Slow
-; bits 4-5 = padding
+; bits 0-1 = text speed (number of frames to delay after printing a letter)
+; 0: Fast
+; 1: Medium
+; 3: Slow
+; bits 2-5 = padding
 ; bit 6 = battle style
 ; 0: Shift
 ; 1: Set
@@ -2174,7 +2174,7 @@ wRocketHideoutB4FCurScript:: db
 wCeruleanRocketHouseCurScript:: db ;NEW
 wRoute6GateCurScript:: db
 wRoute8GateCurScript:: db
-	ds 1 ; unused save file byte
+wBillsGardenCurScript:: db ; NEW
 wCinnabarIslandCurScript:: db
 wPokemonMansion1FCurScript:: db
 	ds 1 ; unused save file byte
@@ -2459,7 +2459,9 @@ ENDU
 
 wTrainerHeaderPtr:: dw
 
-	ds 6  ; unused save file 6 bytes (TODO: use for randomized challengers / bill's garden visitors)
+wBillsGardenVisitor:: 
+wBillsGardenPreviousVisitors:: ds 3
+	ds 3  ; unused save file 3 bytes (TODO: use for randomized challengers / bill's garden visitors)
 
 ; the trainer the player must face after getting a wrong answer in the Cinnabar
 ; gym quiz

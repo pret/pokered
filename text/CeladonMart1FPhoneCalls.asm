@@ -98,7 +98,7 @@ _CeladonMartCallOakTextKeepingBusy::
 	line "undertaking!"
 	para "I don't think"
 	line "we'll finish it"
-	cont "this year…"
+	cont "this year..."
 	prompt
 
 _CeladonMartCallOakTextHowsDaisy::

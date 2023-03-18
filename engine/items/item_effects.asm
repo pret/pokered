@@ -604,12 +604,29 @@ ItemUseBall:
 	ld a, [wPartyCount]
 	cp PARTY_LENGTH ; is party full?
 	jr z, .sendToBox
-	xor a ; PLAYER_PARTY_DATA
+	ld a, [wCurMap]
+	cp BILLS_GARDEN
+	ld a, 0 ; PLAYER_PARTY_DATA
+	jr nz, .notBillsGarden
+	ld a, [wEnemyMonSpecies]
+	cp PIKACHU
+	ld a, 0
+	jr nz, .notBillsGarden
+	ld a, %10000000 ; PLAYER_PARTY_DATA but will skip nicknaming
+.notBillsGarden
+	push af
 	ld [wMonDataLocation], a
 	call ClearSprites
 	call AddPartyMon
+	pop af
+	and a
+	jr z, .done
+	callfar PikabluNicknameLoadQuick
+	call GetReceivedMonPointer
+	ld hl, wcd6d 
+	ld bc, NAME_LENGTH
+	rst _CopyData
 	jr .done
-
 .sendToBox
 	call ClearSprites
 	call SendNewMonToBox
@@ -3168,10 +3185,22 @@ SendNewMonToBox:
 	dec b
 	jr nz, .loop3
 .skip2
+	ld a, [wCurMap]
+	cp BILLS_GARDEN
+	jr nz, .notBillsGarden
+	callfar PikabluNicknameLoad
+	jr nz, .notBillsGarden
+	push de
+	ld de, wBoxMonNicks
+	callfar ForceLoadNickname
+	pop de
+	jr .skipAskName
+.notBillsGarden
 	ld hl, wBoxMonNicks
 	ld a, NAME_MON_SCREEN
 	ld [wNamingScreenType], a
 	predef AskName
+.skipAskName
 	ld a, [wBoxCount]
 	dec a
 	jr z, .skip3
@@ -3392,3 +3421,13 @@ Load2DigitNumberBelow20:
 	ld [hl], a
 	ret
 ;;;;;;;;;;
+
+GetReceivedMonPointer:
+	ld hl, wPartyMonNicks
+	ld bc, NAME_LENGTH
+	ld a, [wPartyCount]
+	dec a
+	call AddNTimes
+	ld d, h
+	ld e, l
+	ret

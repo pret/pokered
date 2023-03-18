@@ -127,6 +127,13 @@ TestGrassTile:
 	ret
 
 TestWaterTile:
+	ld a, [wCurMap]
+	cp BILLS_GARDEN
+	jr nz, .notBillsGarden
+	ld a, [wOptions2]
+	bit BIT_ALT_PKMN_PALETTES, a
+	jr z, .cantEncounter ; skip encounters in bills garden if alt palettes are turned off
+.notBillsGarden
 	ld a, $14 ; in all tilesets with a water tile, this is its id
 	cp c
 	jr z, .return
@@ -139,8 +146,9 @@ TestWaterTile:
 	cp ROUTE_20	; every OVERWORLD map except route 20 will treat tile 32 as a water encounter tile as well 
 	            ; (route 20 is an exception to preserve missingno behaviour)
 	jr nz, .overworldCoastTileCheck
+.cantEncounter
 	ld a, 1
-	and a ; set z flag
+	and a ; clear z flag
 	jr .return
 .forestCoastTileCheck
 	ld a, $48 ; left coast tile in FOREST tileset

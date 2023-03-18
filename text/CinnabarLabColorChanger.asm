@@ -62,7 +62,7 @@ _LabColorChangerColorChangeDone::
 
 _LabColorChangerNoChangesLeft::
 	text "You don't have"
-	cont "any color changes"
+	line "any color changes"
 	cont "left!"
 	para "1 change per 10"
 	line "#MON caught!"

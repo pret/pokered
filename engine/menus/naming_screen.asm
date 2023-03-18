@@ -45,6 +45,7 @@ AskName:
 .declinedNickname
 	ld d, h
 	ld e, l
+ForceLoadNickname::
 	ld hl, wcd6d
 	ld bc, NAME_LENGTH
 	jp CopyData

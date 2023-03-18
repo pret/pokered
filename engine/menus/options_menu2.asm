@@ -233,22 +233,22 @@ SetColorsCursorPosition:
 SetAltPalettesCursorPosition:
 	ld hl, wOptions2
 	ld a, OPTION_ALT_PALETTES_RIGHT_XPOS
-	ld c, OPTION_ALT_PALETTES_LEFT_XPOS
-	ld d, BIT_ALT_PKMN_PALETTES
+	ld d, OPTION_ALT_PALETTES_LEFT_XPOS
+	ld c, BIT_ALT_PKMN_PALETTES
 	jp SetSingleBitOptionCursorPosition
 
 SetAudioPanCursorPosition:
 	ld hl, wOptions2
 	ld a, OPTION_AUDIO_PAN_RIGHT_XPOS
-	ld c, OPTION_AUDIO_PAN_LEFT_XPOS
-	ld d, OPTION_AUDIO_PAN_BIT
+	ld d, OPTION_AUDIO_PAN_LEFT_XPOS
+	ld c, OPTION_AUDIO_PAN_BIT
 	jp SetSingleBitOptionCursorPosition
 
 SetBikeSongCursorPosition:
 	ld hl, wOptions2
 	ld a, OPTION_BIKE_SONG_RIGHT_XPOS
-	ld c, OPTION_BIKE_SONG_LEFT_XPOS
-	ld d, OPTION_BIKE_SONG_BIT
+	ld d, OPTION_BIKE_SONG_LEFT_XPOS
+	ld c, OPTION_BIKE_SONG_BIT
 	jp SetSingleBitOptionCursorPosition
 
 GetTwoBitXPositionFromOptions:

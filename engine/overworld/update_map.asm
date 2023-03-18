@@ -10,10 +10,38 @@ ReplaceTileBlock:
 	ret c
 	jp RedrawMapView 
 
+ReplaceMultipleTileBlocks::
+	ld h, d
+	ld l, e
+	ld d, 0
+.loop
+	ld b, [hl]
+	inc hl
+	ld c, [hl]
+	inc hl
+	ld a, [hli]
+	ld [wNewTileBlockID], a
+	push de
+	push hl
+	call ReplaceTileBlockCommon
+	pop hl
+	pop de
+	jr c, .noRedraw
+	inc d
+.noRedraw
+	ld a, [hl]
+	cp -1
+	jr nz, .loop
+	ld a, d
+	and a
+	call nz, RedrawMapView
+	ret
+
+INCLUDE "engine/overworld/tile_block_replacements.asm"
+
 ReplaceTileBlockNoRedraw:
 	call GetPredefRegisters
-	call ReplaceTileBlockCommon
-	ret
+	; fall through
 
 ReplaceTileBlockCommon:
 	ld hl, wOverworldMap

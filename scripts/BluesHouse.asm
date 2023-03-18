@@ -171,7 +171,7 @@ BluesHouseTeaEvent:
 	; fade to white
 	call GBFadeOutToWhite
 	ld c, 60
-	call DelayFrames
+	rst _DelayFrames
 	call ClearScreen
 	ld hl, TextScriptEndingText
 	rst _PrintText ; seemingly the only way of preventing sprites from flickering on the screen during the next printText

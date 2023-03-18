@@ -54,6 +54,7 @@ ShowPokedexMenu:
 	ld [wListScrollOffset], a
 	call GBPalWhiteOutWithDelay3
 	call RunDefaultPaletteCommand
+.exitPokedex2
 	jp ReloadMapData
 .goToSideMenu
 	call HandlePokedexSideMenu
@@ -65,7 +66,8 @@ ShowPokedexMenu:
 .selectPressed
 	pop af
 	ld [wListScrollOffset], a
-	farjp DisplayTownMap
+	callfar DisplayTownMap
+	jr .exitPokedex2
 .startPressed
 	pop af
 	ld [wListScrollOffset], a

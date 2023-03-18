@@ -118,7 +118,7 @@ WildPalettePointers:
 	dw DefaultPalettes
 	dw VictoryRoad1FWildPalettes
 	dw DefaultPalettes
-	dw DefaultPalettes
+	dw BillsGardenWildPalettes
 	dw DefaultPalettes
 	dw DefaultPalettes
 	dw DefaultPalettes
@@ -321,3 +321,4 @@ INCLUDE "data/wild/palettes/maps/DiglettsCave.asm"
 INCLUDE "data/wild/palettes/maps/VermilionCity.asm"
 INCLUDE "data/wild/palettes/maps/FuchsiaCity.asm"
 INCLUDE "data/wild/palettes/maps/ViridianCity.asm"
+INCLUDE "data/wild/palettes/maps/BillsGarden.asm"

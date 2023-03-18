@@ -35,3 +35,18 @@ _StandByMeText::
 _TVWrongSideText::
 	text "Oops, wrong side."
 	done
+
+_DadHealText1::
+	text "DAD: <PLAYER>!"
+	line "Lets sit down and"
+	cont "talk, maybe play"
+	cont "some SNES."
+	prompt
+
+_DadHealText2::
+	text "DAD: Looks like"
+	line "you're raring to"
+	cont "go! Good stuff."
+	para "Get back out"
+	line "there, son!"
+	done

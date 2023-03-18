@@ -1,8 +1,26 @@
 BillsHouse_Script:
+	call BillsHouseAddDoors
 	call EnableAutoTextBoxDrawing
 	ld a, [wBillsHouseCurScript]
 	ld hl, BillsHouse_ScriptPointers
 	jp CallFunctionInTable
+
+BillsHouseAddDoors:
+	ld hl, wCurrentMapScriptFlags
+	bit 5, [hl]
+	res 5, [hl]
+	ret z
+	ResetEvent EVENT_IN_BILLS_GARDEN
+	CheckEvent EVENT_BECAME_CHAMP
+	ret z
+	ld de, BillsHouseTileBlockReplacements
+	callfar ReplaceMultipleTileBlocks
+	; if the player's standing on y-coordinate 0 on loading the map, it means they entered from the top. 
+	; They need to be forced to walk out from the doorway. It doesn't work the normal way because of the tile blocks still needing to be replaced.
+	ld a, [wYCoord] 
+	and a
+	ret nz
+	jpfar ForceStepOutFromDoor
 
 BillsHouse_ScriptPointers:
 	dw BillsHouseScript0
@@ -205,10 +223,18 @@ BillsHouseText_1e8cb:
 
 BillsHouseText3:
 	text_asm
+	CheckEvent EVENT_BECAME_CHAMP
 	ld hl, BillsHouseText_1e8da
+	jr z, .done
+	ld hl, BillsHouseGardenInfo
+.done
 	rst _PrintText
 	rst TextScriptEnd
 
 BillsHouseText_1e8da:
 	text_far _BillsHouseText_1e8da
+	text_end
+
+BillsHouseGardenInfo:
+	text_far _BillsHouseGardenInfo
 	text_end

@@ -78,6 +78,7 @@ SpriteSheetPointerTable:
 	overworld_sprite LegendaryBirdSprite, 12    ; SPRITE_BIRD2
 	overworld_sprite PsychicSprite, 12     	    ; SPRITE_PSYCHIC
 	overworld_sprite FightingSprite, 12     	; SPRITE_FIGHTING
+	overworld_sprite DadSprite, 12     	        ; SPRITE_DAD
 	overworld_sprite PokeBallSprite, 4          ; SPRITE_POKE_BALL
 	overworld_sprite FossilSprite, 4            ; SPRITE_FOSSIL
 	overworld_sprite BoulderSprite, 4           ; SPRITE_BOULDER
