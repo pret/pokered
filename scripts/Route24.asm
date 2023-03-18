@@ -22,6 +22,10 @@ Route24_ScriptPointers:
 	dw Route24Script4
 
 Route24Script0:
+IF DEF(_DEBUG)
+	call DebugPressedOrHeldB
+	jp nz, CheckFightingMapTrainers
+ENDC
 	CheckEvent EVENT_GOT_NUGGET
 	jp nz, CheckFightingMapTrainers
 	ld hl, CoordsData_5140e

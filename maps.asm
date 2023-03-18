@@ -250,6 +250,11 @@ INCLUDE "scripts/BillsHouse.asm"
 INCLUDE "data/maps/objects/BillsHouse.asm"
 BillsHouse_Blocks: INCBIN "maps/BillsHouse.blk"
 
+INCLUDE "data/maps/headers/BillsGarden.asm"
+INCLUDE "scripts/BillsGarden.asm"
+INCLUDE "data/maps/objects/BillsGarden.asm"
+BillsGarden_Blocks: INCBIN "maps/BillsGarden.blk"
+
 
 SECTION "Maps 5", ROMX
 

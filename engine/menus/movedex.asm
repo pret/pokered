@@ -53,6 +53,7 @@ ShowMovedexMenu:
 	ld [wListScrollOffset], a
 	call GBPalWhiteOutWithDelay3
 	call RunDefaultPaletteCommand
+.exitMovedex2
 	jp ReloadMapData
 .goToMoveData
 	call ShowMoveData
@@ -61,7 +62,8 @@ ShowMovedexMenu:
 .selectPressed
 	pop af
 	ld [wListScrollOffset], a
-	farjp DisplayTownMap
+	callfar DisplayTownMap
+	jr .exitMovedex2
 .startPressed
 	pop af
 	ld [wListScrollOffset], a

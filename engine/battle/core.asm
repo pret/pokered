@@ -6698,6 +6698,9 @@ LoadEnemyMonData:
 .end_set_sendout
 	pop af
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	ld a, [wCurMap]
+	cp BILLS_GARDEN
+	call z, LoadPikablu ; changes a pikachu to be pikablu if we're in bills garden
 	ret
 
 ; calls BattleTransition to show the battle transition animation and initializes some battle variables
@@ -7332,8 +7335,10 @@ InitBattleCommon:
 ;;;;;;;;;; PureRGBnote: ADDED: this missingno code does the item duplication glitch if it's enabled when encountering missingno
 
 MissingNoInit:
-	callfar MissingNoBattleStart
-	ret
+	jpfar MissingNoBattleStart
+
+LoadPikablu:
+	jpfar PikabluInit
 
 InitWildBattle:
 	ld a, [wEnemyMonSpecies2]

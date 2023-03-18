@@ -322,11 +322,12 @@ StartNewGame:
 StartNewGameDebug:
 	call OakSpeech
 IF DEF(_DEBUG)
-	nop
-ELSE
+	ld a, [wd732]
+	bit 1, a
+	jr nz, SpecialEnterMap
+ENDC
 	ld c, 20
 	rst _DelayFrames
-ENDC
 
 ; enter map after using a special warp or loading the game from the main menu
 SpecialEnterMap::

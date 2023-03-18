@@ -4,12 +4,16 @@ RedsHouse1F_Script:
 
 RedsHouse1F_TextPointers:
 	dw RedsHouse1FMomText
+	dw RedsHouse1FDadText
 	dw RedsHouse1FTVText
 
 RedsHouse1FMomText:
 	text_asm
+	CheckEvent EVENT_MET_DAD
+	jr nz, .dadAround
 	CheckEvent EVENT_CALLED_DAD_WAITING
 	jr nz, .not_here
+.dadAround
 	ld b, 0
 	CheckEvent EVENT_CALLED_MOM_RICE_BALLS
 	jr nz, .foodReady
@@ -32,9 +36,9 @@ RedsHouse1FMomText:
 	call MomHealPokemon
 	rst TextScriptEnd
 .not_here
+	ResetEvent EVENT_CALLED_DAD_WAITING
 	ld hl, MomDadNotHereText
 	rst _PrintText
-	ResetEvent EVENT_CALLED_DAD_WAITING
 	rst TextScriptEnd
 .foodReady
 	push bc
@@ -65,7 +69,7 @@ RedsHouse1FMomText:
 
 	call GBFadeOutToWhite
 	ld c, 60
-	call DelayFrames
+	rst _DelayFrames
 	call ClearScreen
 	ld hl, TextScriptEndingText
 	rst _PrintText ; seemingly the only way of preventing sprites from flickering on the screen during the next printText
@@ -84,6 +88,14 @@ RedsHouse1FMomText:
 	ld hl, MomFoodLasagnaText
 .printText
 	rst _PrintText
+	CheckEvent EVENT_MET_DAD
+	jr z, .noDad
+	ld hl, DadChowedDownText
+	rst _PrintText
+	ld a, SFX_PUSH_BOULDER
+	rst _PlaySound
+	call WaitForSoundToFinish
+.noDad
 	; store a party pokemon's nickname to use later in the text
 	ld a, [wPartyCount]
 	cp 6 ; if they player has less than 6 pokemon just use the first pokemon
@@ -165,11 +177,35 @@ MomFoodJellyDonutsText:
 	text_end
 
 MomFoodBrisketText:
+	text_asm
+	CheckEvent EVENT_MET_DAD
+	ld hl, MomFoodBrisketText1
+	jr z, .noDad
+	ld hl, DadFoodBrisketText
+.noDad
+	rst _PrintText
+	ld hl, MomFoodBrisketText2
+	rst _PrintText
+	rst TextScriptEnd
+
+MomFoodBrisketText1:
 	text_far _MomFoodBrisketText
 	text_end
 
+DadFoodBrisketText:
+	text_far _DadFoodBrisketText
+	text_end
+
+MomFoodBrisketText2:
+	text_far _MomFoodBrisketText2
+	text_end	
+
 MomFoodLasagnaText:
 	text_far _MomFoodLasagnaText
+	text_end
+
+DadChowedDownText:
+	text_far _DadChowedDownText
 	text_end
 
 MomFoodPokemonJoinsText:
@@ -192,12 +228,15 @@ MomFoodDone:
 MomHealPokemon:
 	ld hl, MomHealText1
 	rst _PrintText
+	call HealFade
+	ld hl, MomHealText2
+	jp PrintText
+
+HealFade:
 	call GBFadeOutToWhite
 	call ReloadMapData
 	call MomHealPokemonImmediate
-	call GBFadeInFromWhite
-	ld hl, MomHealText2
-	jp PrintText
+	jp GBFadeInFromWhite
 
 MomHealPokemonImmediate:
 	predef HealParty
@@ -237,4 +276,21 @@ StandByMeText:
 
 TVWrongSideText:
 	text_far _TVWrongSideText
+	text_end
+
+RedsHouse1FDadText:
+	text_asm
+	ld hl, DadHealText1
+	rst _PrintText
+	call HealFade
+	ld hl, DadHealText2
+	rst _PrintText
+	rst TextScriptEnd
+
+DadHealText1:
+	text_far _DadHealText1
+	text_end
+
+DadHealText2:
+	text_far _DadHealText2
 	text_end

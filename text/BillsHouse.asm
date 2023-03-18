@@ -86,3 +86,15 @@ _BillsHouseText_1e8da::
 	cont "some of my rare"
 	cont "#MON on my PC!"
 	done
+
+_BillsHouseGardenInfo::
+	text "BILL: Hey bud!"
+	para "Just finished my"
+	line "new beach garden!"
+	para "Why don't you"
+	line "have a look?"
+	para "It's open to"
+	line "visitors!"
+	para "Just use the"
+	line "doors over there."
+	done

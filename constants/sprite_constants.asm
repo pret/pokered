@@ -72,6 +72,7 @@
 	const SPRITE_BIRD2                   ; $47
 	const SPRITE_PSYCHIC                 ; $47
 	const SPRITE_FIGHTING                ; $48
+	const SPRITE_DAD
 DEF FIRST_STILL_SPRITE EQU const_value
 	const SPRITE_POKE_BALL               ; $3e
 	const SPRITE_FOSSIL                  ; $3f

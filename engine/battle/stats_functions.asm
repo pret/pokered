@@ -118,8 +118,8 @@ UndoBurnParStats:
 ;requires a, b, de, and wCurEnemyLVL
 CalcEnemyStatEXP:
 	ld a, [wOptions2]	;load game options
-	bit BIT_NPC_STAT_EXP, a			;check battle style
-	jr z, .loadzero		;load zero stat exp if on shift style
+	bit BIT_NPC_STAT_EXP, a			; check stat exp bit
+	jr z, .loadzero		;load zero stat exp if turned off
 	;This loads 450 stat exp per level. Note that 450 in hex is the two-byte $01C2
 	ld a, $01
 	ldh [hMultiplicand], a

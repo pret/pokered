@@ -46,7 +46,18 @@ _MomFoodBrisketText::
 	cont "DAD's recipe"
 	cont "was totally"
 	cont "delicious!"
-	para "The savory"
+	prompt
+
+_DadFoodBrisketText::
+	text "DAD brought out"
+	line "his slow-cooked"
+	cont "BBQ brisket."
+	para "It was totally"
+	line "delicious!"
+	prompt
+
+_MomFoodBrisketText2::
+	text "The savory"
 	line "sauce was"
 	cont "perfect."
 	prompt
@@ -58,6 +69,11 @@ _MomFoodLasagnaText::
 	para "<PLAYER> ate"
 	line "every last morsel"
 	cont "of the meal."
+	prompt
+
+_DadChowedDownText::
+	text "DAD wolfed his"
+	line "down with gusto."
 	prompt
 
 _MomFoodPokemonJoinsText::

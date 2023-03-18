@@ -33,6 +33,10 @@ ZeroOutDuplicatesInList:
 
 GetAreaDisplayTypes:
 	callfar CheckHasGrassCaveWater
+	ld hl, wTownMapAreaTypeFlags
+	ld a, [wd11e]
+	cp PIKACHU
+	call z, .turnOffSurfLocationsIfNotChampYet
 	CheckBothEventsSet EVENT_GOT_FUCHSIA_FISHING_GURU_ITEM, EVENT_GOT_ROUTE12_FISHING_GURU_ITEM
 	ret nz
 	ld hl, wTownMapAreaTypeFlags
@@ -47,6 +51,12 @@ GetAreaDisplayTypes:
 .skipOldRod
 	callfar CheckHasGoodRod
 	callfar CheckHasSuperRod
+	ret
+.turnOffSurfLocationsIfNotChampYet
+	; hide pikachu's secret surf encounter in bills garden if not champ yet
+	CheckEvent EVENT_BECAME_CHAMP
+	ret nz
+	res BIT_HAS_WATER_LOCATIONS, [hl]
 	ret
 
 DrawMonAreaButtonPrompt:

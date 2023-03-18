@@ -54,7 +54,7 @@ DEF FIRST_ROUTE_MAP EQU const_value
 	map_const ROUTE_22,                      20,  9 ; $21
 	map_const ROUTE_23,                      10, 72 ; $22
 	map_const ROUTE_24,                      10, 18 ; $23
-	map_const ROUTE_25,                      30,  9 ; $24
+	map_const ROUTE_25,                      30, 10 ; $24
 DEF FIRST_INDOOR_MAP EQU const_value
 	map_const REDS_HOUSE_1F,                  4,  4 ; $25
 	map_const REDS_HOUSE_2F,                  4,  4 ; $26
@@ -129,7 +129,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const CERULEAN_ROCKET_HOUSE_B1F,      8,  8 ; $6B ; PureRGBnote: ADDED: New map
 	map_const VICTORY_ROAD_1F,               10,  9 ; $6C
 	map_const VIRIDIAN_SCHOOL_HOUSE_B1F,      9,  6 ; $6D ; PureRGBnote: ADDED: New map
-	map_const UNUSED_MAP_6E,                  0,  0 ; $6E
+	map_const BILLS_GARDEN,                  11, 10 ; $6E ; PureRGBnote: ADDED: New map
 	map_const UNUSED_MAP_6F,                  0,  0 ; $6F
 	map_const UNUSED_MAP_70,                  0,  0 ; $70
 	map_const LANCES_ROOM,                   13, 13 ; $71

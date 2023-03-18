@@ -1,6 +1,12 @@
 ; These routines manage gradual fading
 ; (e.g., entering a doorway)
 LoadGBPal::
+	ld a, [wMapConnections]
+	;;;;;; new bit in the map header that can mark a map as staying black visually until the map script changes it 
+	;;;;;; (used for situations in which we may need to replace tile blocks)
+	bit 4, a 
+	jr nz, .checkFirstLoad ; map starts by being black until map script changes this
+.notFirstLoad
 	ld a, [wMapPalOffset] ; tells if wCurMap is dark (requires HM5_FLASH?)
 	ld b, a
 	ld hl, FadePal4
@@ -22,6 +28,11 @@ LoadGBPal::
 	call UpdateGBCPal_OBP1
 ;;;;;;;;;;
 	ret
+.checkFirstLoad
+	ld hl, wCurrentMapScriptFlags
+	bit 5, [hl]
+	ret nz
+	jr .notFirstLoad
 
 GBFadeInFromBlack::
 	ld hl, FadePal1
