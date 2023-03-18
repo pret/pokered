@@ -41,7 +41,7 @@ MapHSPointers:
 	dw Route23HS
 	dw Route24HS
 	dw Route25HS
-	dw NoHS
+	dw RedsHouse1FHS
 	dw NoHS
 	dw BluesHouseHS
 	dw OaksLabHS
@@ -642,5 +642,7 @@ ViridianSchoolhouseHS:
 ViridianSchoolhouseB1FHS:
 	db VIRIDIAN_SCHOOL_HOUSE_B1F, $0A, SHOW ; rocker
 	db VIRIDIAN_SCHOOL_HOUSE_B1F, $0B, HIDE ; brunette girl
+RedsHouse1FHS:
+	db REDS_HOUSE_1F, 2, HIDE ; dad
 	db $FF, $01, SHOW ; end
 	assert_table_length NUM_EXTRA_HS_OBJECTS + 1

@@ -344,10 +344,35 @@ CeladonMartCallMomJellyDonutsText:
 	rst TextScriptEnd
 
 CeladonMartCallMomBrisketText:
-	text_far _CeladonMartCallMomBrisketText
 	text_asm
+	ld hl, CeladonMartCallMomBrisketText1
+	rst _PrintText
+	CheckEvent EVENT_MET_DAD
+	ld hl, CeladonMartCallMomBrisketText2
+	jr z, .noDad
+	ld hl, CeladonMartDadBrisketText
+.noDad
+	rst _PrintText
+	ld hl, CeladonMartCallMomBrisketText3
+	rst _PrintText
 	SetEvent EVENT_CALLED_MOM_BRISKET
 	rst TextScriptEnd
+
+CeladonMartCallMomBrisketText1:
+	text_far _CeladonMartCallMomBrisketText
+	text_end
+
+CeladonMartCallMomBrisketText2:
+	text_far _CeladonMartCallMomBrisketText2
+	text_end
+
+CeladonMartDadBrisketText:
+	text_far _CeladonMartDadBrisketText
+	text_end
+
+CeladonMartCallMomBrisketText3:
+	text_far _CeladonMartCallMomBrisketText3
+	text_end
 
 CeladonMartCallMomLasagnaText:
 	text_far _CeladonMartCallMomLasagnaText

@@ -2,7 +2,8 @@ PlayerStepOutFromDoor::
 	ld hl, wd730
 	res 1, [hl]
 	call IsPlayerStandingOnDoorTile
-	jr nc, .notStandingOnDoor
+	jr nc, ForceStepOutFromDoor.notStandingOnDoor
+ForceStepOutFromDoor::
 	ld a, $fc
 	ld [wJoyIgnore], a
 	ld hl, wd736

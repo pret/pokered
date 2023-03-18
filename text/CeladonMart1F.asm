@@ -163,12 +163,26 @@ _CeladonMartCallMomBrisketText::
 	line "slow-cooked"
 	cont "brisket?"
 	para "Great idea!"
-	para "He's not here"
+	prompt
+
+_CeladonMartCallMomBrisketText2::
+	text "He's not here"
 	line "right now, but"
 	cont "I'll use the"
 	cont "recipe he wrote"
 	cont "down."
-	para "I wouldn't mind"
+	prompt
+
+_CeladonMartDadBrisketText::
+	text "Honey! <PLAYER>"
+	line "wants brisket"
+	cont "for dinner!"
+	para "Okay, he's on it."
+	line "Sounds good!"
+	prompt
+
+_CeladonMartCallMomBrisketText3::
+	text "I wouldn't mind"
 	line "having some"
 	cont "either."
 	para "Come and get it!"

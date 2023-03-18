@@ -270,3 +270,8 @@ CeladonMartCallOakQuestion2::
 	dw TwoOptionMenu
 	db "How's the lab?"
 	next "How's DAISY?@"
+
+BillsGardenBlueThanks::
+	dw TwoOptionMenu
+	db "Thank you!"
+	next "You wish.@"

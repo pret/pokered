@@ -88,6 +88,7 @@ LtSurgeSprite::          INCBIN "gfx/sprites/lt_surge.2bpp"
 ErikaSprite::          INCBIN "gfx/sprites/erika.2bpp"
 SabrinaSprite::          INCBIN "gfx/sprites/sabrina.2bpp"
 BlaineSprite::          INCBIN "gfx/sprites/blaine.2bpp"
+DadSprite::			    INCBIN "gfx/sprites/dad.2bpp"
 
 VoltorbSprite::          INCBIN "gfx/sprites/voltorb.2bpp"
 VoltorbSpriteEnd::
