@@ -59,7 +59,9 @@ OakSpeech:
 	ld a, SFX_STOP_ALL_MUSIC
 	rst _PlaySound
 IF DEF(_DEBUG)
-	jr .skipMusic
+	ld a, [wd732]
+	bit 1, a
+	jr nz, .skipMusic
 ENDC
 	ld a, BANK(Music_Routes2)
 	ld c, a
@@ -170,6 +172,8 @@ ENDC
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 IF DEF(_DEBUG)
+	ld a, [wd732]
+	bit 1, a
 	jr .skipDelay
 ENDC
 	ld c, 20
