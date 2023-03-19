@@ -1712,7 +1712,7 @@ wTextBoxID:: db
 ; bit 4 - flag to indicate crossing between outdoor areas
 ; bit 5 - flag to indicate a map was loaded
 ; bit 6 - another flag to indicate a map was loaded?
-; bit 7 - used for elevator animations 
+; bit 7 - used for elevator animations and pushing vermilion dock truck
 wCurrentMapScriptFlags:: db ; not exactly sure what this is used for, but it seems to be used as a multipurpose temp flag value
 
 wCurEnemyLVL:: db

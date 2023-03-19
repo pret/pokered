@@ -264,8 +264,8 @@ RedLeftOAMTable:
 TruckSpriteGFX: INCBIN  "gfx/sprites/truck_sprite.2bpp"
 
 NoTruckAction:
-	ld hl, wFlags_0xcd60
-	res 6, [hl]
+	ld hl, wCurrentMapScriptFlags
+	res 7, [hl]
 	ret
 
 TruckCheck:
@@ -299,16 +299,14 @@ TruckCheck:
 	ld a, [wPlayerMovingDirection]
 	bit PLAYER_DIR_BIT_LEFT, a
 	jr z, NoTruckAction
-	ld hl, wFlags_0xcd60
-	bit 6, [hl]
-	jr nz, .continue
-	set 6, [hl] ; wait until the next time the player presses left
-	ret
-.continue
+	ld hl, wCurrentMapScriptFlags
+	bit 7, [hl]
+	set 7, [hl] ; wait until the next time the player presses left
+	ret z
 	ldh a, [hJoyHeld]
 	bit BIT_D_LEFT, a ; is player pressing left
 	ret z
-	res 6, [hl]
+	res 7, [hl]
 	ld a, $ff
 	ld [wJoyIgnore], a
 	ld [wUpdateSpritesEnabled], a
@@ -349,7 +347,7 @@ TruckCheck:
 	ld bc, $9
 	predef ReplaceTileBlock
 	call ShowMew
-	ld c, 60
+	ld c, 20
 	rst _DelayFrames
 	xor a
 	ld [wJoyIgnore], a
@@ -365,11 +363,10 @@ ShowMew:
 	ret
 
 ChangeTruckTile:
-	ld hl, wFlags_0xcd60
-	res 6, [hl]
 	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
+	res 7, [hl]
 	ret z
 	ld bc, $9
 	call GetOWCoord
