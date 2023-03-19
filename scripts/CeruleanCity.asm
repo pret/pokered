@@ -7,8 +7,6 @@ CeruleanCity_Script:
 
 ; PureRGBnote: ADDED: function that will remove the cut tree if we deleted it with the tree deleter
 CeruleanCityReplaceCutTile:
-	CheckEvent EVENT_DELETED_CERULEAN_TREE
-	ret z
 	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
@@ -18,9 +16,13 @@ CeruleanCityReplaceCutTile:
 	jr nz, .replaceTileNoRedraw
 	ret
 .replaceTile
+	CheckEvent EVENT_DELETED_CERULEAN_TREE
+	ret z
 	call .loadTile
 	predef_jump ReplaceTileBlock
 .replaceTileNoRedraw
+	CheckEvent EVENT_DELETED_CERULEAN_TREE
+	ret z
 	; this avoids redrawing the map because when going between areas these tiles are offscreen.
 	call .loadTile
 	predef_jump ReplaceTileBlockNoRedraw
@@ -46,6 +48,9 @@ CeruleanCity_ScriptPointers:
 	dw CeruleanCityScript4
 
 CeruleanCityScript4:
+	ld hl, wCurrentMapScriptFlags
+	res 3, [hl]
+	call GBFadeInFromWhite ; since thief instantly talks to us after battle we need to fade back in here
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, CeruleanCityScript_1948c
@@ -191,6 +196,9 @@ CeruleanCityScript1:
 	ret
 
 CeruleanCityScript2:
+	ld hl, wCurrentMapScriptFlags
+	res 3, [hl]
+	call GBFadeInFromWhite ; since rival instantly talks to us after battle we need to fade back in here
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, CeruleanCityScript_1948c

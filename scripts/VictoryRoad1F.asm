@@ -24,6 +24,9 @@ VictoryRoad1F_ScriptPointers:
 	dw EndTrainerBattle
 
 VictoryRoad1Script0:
+	ld a, [wFlags_0xcd60]
+	bit 1, a
+	ret nz ; if a boulder animation is playing forget doing this
 	CheckEvent EVENT_VICTORY_ROAD_1_BOULDER_ON_SWITCH
 	jp nz, CheckFightingMapTrainers
 	ld hl, CoordsData_5da5c

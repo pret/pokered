@@ -13,7 +13,7 @@ RocketHideout1Script_44be0:
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	CheckEvent EVENT_677
+	CheckEvent EVENT_ROCKET_HIDEOUT_B1F_DOOR_UNLOCKED
 	jr nz, .asm_44c01
 	CheckEventReuseA EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_4
 	jr nz, .asm_44bf7
@@ -22,7 +22,7 @@ RocketHideout1Script_44be0:
 .asm_44bf7
 	ld a, SFX_GO_INSIDE
 	rst _PlaySound
-	CheckEventHL EVENT_677
+	SetEvent EVENT_ROCKET_HIDEOUT_B1F_DOOR_UNLOCKED
 .asm_44c01
 	ld a, $e
 .asm_44c03

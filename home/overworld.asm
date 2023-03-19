@@ -376,6 +376,7 @@ BattleOccurred::
 	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
 	set 6, [hl]
+	set 3, [hl] ; new bit indicating we reloaded a map from a battle
 	xor a
 	ldh [hJoyHeld], a
 	ld a, [wCurMap]
@@ -707,6 +708,11 @@ ExtraWarpCheck::
 
 MapEntryAfterBattle::
 	farcall IsPlayerStandingOnWarp ; for enabling warp testing after collisions
+	ld a, [wMapConnections]
+	bit 4, a
+	ret nz
+	; fall through
+MapFadeAfterBattle::
 	ld a, [wMapPalOffset]
 	and a
 	jp z, GBFadeInFromWhite
@@ -1940,7 +1946,17 @@ RunMapScript::
 	push de
 	jp hl ; jump to script
 .return
-	ret
+	ld hl, wCurrentMapScriptFlags
+	bit 3, [hl]
+	res 3, [hl]
+	ret z
+	ld a, [wMapConnections]
+	bit 4, a
+	ret z
+	ld a, [wIsInBattle]
+	cp $ff
+	ret z
+	jp MapFadeAfterBattle
 
 LoadWalkingPlayerSpriteGraphics::
 	ld de, RedSprite

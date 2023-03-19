@@ -10,8 +10,6 @@ Route9_Script:
 
 ; PureRGBnote: ADDED: function that will remove the cut tree if we deleted it with the tree deleter
 Route9ReplaceCutTile:
-	CheckEvent EVENT_DELETED_ROUTE9_TREE
-	ret z
 	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
@@ -21,9 +19,13 @@ Route9ReplaceCutTile:
 	jr nz, .replaceTileNoRedraw
 	ret
 .replaceTile
+	CheckEvent EVENT_DELETED_ROUTE9_TREE
+	ret z
 	call .loadTile
 	predef_jump ReplaceTileBlock
 .replaceTileNoRedraw
+	CheckEvent EVENT_DELETED_ROUTE9_TREE
+	ret z
 	; this avoids redrawing the map because when going between areas these tiles are offscreen.
 	call .loadTile
 	predef_jump ReplaceTileBlockNoRedraw

@@ -39,7 +39,12 @@ VermilionGymSetDoorTile:
 .replaceTile
 	ld [wNewTileBlockID], a
 	lb bc, 2, 2
-	predef_jump ReplaceTileBlock
+	predef ReplaceTileBlock
+	ld hl, wCurrentMapScriptFlags
+	bit 3, [hl]
+	res 3, [hl]
+	ret z
+	jp GBFadeInFromWhite ; since surge instantly talks to us after battle we need to fade back in here
 
 VermilionGymResetScripts:
 	xor a

@@ -11,6 +11,13 @@ ReplaceTileBlock:
 	jp RedrawMapView 
 
 ReplaceMultipleTileBlocks::
+	call ReplaceMultipleTileBlocksNoRedraw
+	ld a, d
+	and a
+	call nz, RedrawMapView
+	ret
+
+ReplaceMultipleTileBlocksNoRedraw::
 	ld h, d
 	ld l, e
 	ld d, 0
@@ -32,9 +39,6 @@ ReplaceMultipleTileBlocks::
 	ld a, [hl]
 	cp -1
 	jr nz, .loop
-	ld a, d
-	and a
-	call nz, RedrawMapView
 	ret
 
 INCLUDE "engine/overworld/tile_block_replacements.asm"

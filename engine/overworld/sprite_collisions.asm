@@ -22,9 +22,6 @@ _UpdateSprites::
 	add $10             ; move to next sprite
 	cp SPRITESTATEDATA2_IMAGEBASEOFFSET ; test for overflow (back at beginning)
 	jr nz, .spriteLoop
-	ld a, [wCurMap]
-	cp FUCHSIA_CITY
-	jr z, ReloadKabuto
 	ret
 .updateCurrentSprite
 	cp $1
@@ -32,14 +29,11 @@ _UpdateSprites::
 	jp UpdatePlayerSprite
 
 ; PureRGBnote: ADDED: when exiting the pokemon menu we have to reload the kabuto sprite that can display in fuchsia city
-ReloadKabuto:
-	CheckEvent EVENT_RELOADED_KABUTO_SPRITE
+LoadExtraSprites::
+	ld a, [wCurMap]
+	cp FUCHSIA_CITY
 	ret nz
-	CheckEvent EVENT_GOT_HELIX_FOSSIL
-	ret z
-	callfar ReplaceOmanyteWithKabutoSprite
-	SetEvent EVENT_RELOADED_KABUTO_SPRITE
-	ret
+	jpfar CheckLoadKabutoShell
 
 UpdateNonPlayerSprite:
 	dec a

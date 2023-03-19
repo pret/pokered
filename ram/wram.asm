@@ -1192,7 +1192,7 @@ wLoadedMon:: party_struct wLoadedMon
 ;bit 4: 4th pkmn (position 3)
 ;bit 5: 5th pkmn (position 4)
 ;bit 6: 6th pkmn (position 5)
-;bit 7: unused
+;bit 7: unused bit
 wAIWhichPokemonSentOutAlready::
 wFontLoaded:: db
 
@@ -1708,6 +1708,11 @@ wIsKeyItem:: db
 
 wTextBoxID:: db
 
+; bit 3 - used to indicate we loaded a map after battle specifically
+; bit 4 - flag to indicate crossing between outdoor areas
+; bit 5 - flag to indicate a map was loaded
+; bit 6 - another flag to indicate a map was loaded?
+; bit 7 - used for elevator animations 
 wCurrentMapScriptFlags:: db ; not exactly sure what this is used for, but it seems to be used as a multipurpose temp flag value
 
 wCurEnemyLVL:: db
@@ -2317,6 +2322,12 @@ wBeatGymFlags:: db
 
 ; bit 0: if not set, the 3 minimum steps between random battles have passed
 ; bit 1: prevent audio fade out
+; bit 2: unused save flag
+; bit 3: unused save flag
+; bit 4: unused save flag
+; bit 5: unused save flag
+; bit 6: unused save flag
+; bit 7: unused save flag
 wd72c:: db
 
 ; This variable is used for temporary flags and as the destination map when

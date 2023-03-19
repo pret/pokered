@@ -37,11 +37,17 @@ SilphCo7Script_51b77:
 	pop af
 .asm_51bb1
 	CheckEventAfterBranchReuseA EVENT_SILPH_CO_7_UNLOCKED_DOOR3, EVENT_SILPH_CO_7_UNLOCKED_DOOR2
-	ret nz
+	jr nz, .maybeFadeIn
 	ld a, $54
 	ld [wNewTileBlockID], a
 	lb bc, 6, 10
-	predef_jump ReplaceTileBlock
+	predef ReplaceTileBlock
+.maybeFadeIn
+	ld hl, wCurrentMapScriptFlags
+	bit 3, [hl]
+	res 3, [hl]
+	ret z
+	jp GBFadeInFromWhite ; since rival instantly talks to us after battle we need to fade back in here
 
 SilphCo7GateCoords:
 	dbmapcoord  5,  3

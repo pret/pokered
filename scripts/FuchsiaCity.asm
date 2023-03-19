@@ -1,12 +1,12 @@
-DEF OMANYTE_KABUTO_FOSSIL_TILE EQU $7C0
+DEF FUCHSIA_OMANYTE_KABUTO_FOSSIL_TILE EQU $7C
+
 
 FuchsiaCity_Script:
-	call TryLoadKabutoSprite
-	call FuchsiaReplaceCutTiles
+	call FuchsiaCityDefaultScript
 	jp EnableAutoTextBoxDrawing
 
 ; PureRGBnote: ADDED: function that will remove all cut trees in fuchsia if we deleted them with the tree deleter
-FuchsiaReplaceCutTiles:
+FuchsiaCityDefaultScript:
 	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl] ; did we load the map from a save/warp/door/battle, etc?
 	res 5, [hl]
@@ -16,72 +16,37 @@ FuchsiaReplaceCutTiles:
 	jr nz, .removeAddCutTilesNoRedraw
 	ret
 .removeAddCutTiles
-	ResetEvent EVENT_FOSSIL_FAN_TEXT_TOGGLE ; this is just a good place to clear this event so the guy says the first text every time you reload the area.
 	CheckEvent EVENT_DELETED_FUCHSIA_TREES
-	jr nz, .remove
-.add
-	ld a, $60
-	ld [wNewTileBlockID], a
-	lb bc, 6, 13
-	predef ReplaceTileBlock
-	lb bc, 3, 11
-	predef ReplaceTileBlock
-	ret
-.remove
-	ld a, $6E
-	ld [wNewTileBlockID], a
-	lb bc, 9, 9
-	predef ReplaceTileBlock
-	lb bc, 5, 8
-	predef ReplaceTileBlock
-	ret
+	jr z, .firstLoadCommon
+	ld de, FuchsiaCityCutTreeTileBlockReplacements
+	callfar ReplaceMultipleTileBlocks
+	jr .firstLoadCommon
 .removeAddCutTilesNoRedraw
-	; this avoids redrawing the map because when going between areas these tiles are offscreen.
-	ResetEvent EVENT_FOSSIL_FAN_TEXT_TOGGLE ; this is just a good place to clear this event so the guy says the first text every time you reload the area.
+	; this guarantees avoiding redrawing the map because when going between areas these tiles are offscreen.
 	CheckEvent EVENT_DELETED_FUCHSIA_TREES
-	jr nz, .removeNoRedraw
-.addNoRedraw
-	ld a, $60
-	ld [wNewTileBlockID], a
-	lb bc, 6, 13
-	predef ReplaceTileBlockNoRedraw
-	lb bc, 3, 11
-	predef ReplaceTileBlockNoRedraw
-	ret
-.removeNoRedraw
-	ld a, $6E
-	ld [wNewTileBlockID], a
-	lb bc, 9, 9
-	predef ReplaceTileBlockNoRedraw
-	lb bc, 5, 8
-	predef ReplaceTileBlockNoRedraw
-	ret
-
+	jr z, .firstLoadCommon
+	ld de, FuchsiaCityCutTreeTileBlockReplacements
+	callfar ReplaceMultipleTileBlocksNoRedraw
+.firstLoadCommon
+	ResetEvent EVENT_FOSSIL_FAN_TEXT_TOGGLE ; this is just a good place to clear this event so the guy says the first text every time you reload the area.
+	; fall through
+	
 ; PureRGBnote: ADDED: since we don't have enough space in the sprite sheet to add kabuto's icon, 
 ; we just replace omanyte's with it when loading fuchsia city if kabuto is supposed to be in the zoo
-TryLoadKabutoSprite:
+
+CheckLoadKabutoShell::
 	ld a, [wSpriteOptions2]
 	bit BIT_MENU_ICON_SPRITES, a
 	ret z
 	CheckEvent EVENT_GOT_HELIX_FOSSIL
 	ret z
-	ld hl, wCurrentMapScriptFlags
-	bit 5, [hl] ; did we load the map from a save/warp/door/battle, etc?
-	jr nz, ReplaceOmanyteWithKabutoSprite
-	bit 4, [hl] ; did we enter the map by traversal from another route
-	jr nz, ReplaceOmanyteWithKabutoSprite
-	CheckEvent EVENT_RELOADED_KABUTO_SPRITE
-	ret nz
-	call ReplaceOmanyteWithKabutoSprite
-	SetEvent EVENT_RELOADED_KABUTO_SPRITE
-	ret
-	
-ReplaceOmanyteWithKabutoSprite::
-	ld hl, vChars0 + OMANYTE_KABUTO_FOSSIL_TILE
-	ld de, KabutoSprite
-	lb bc, BANK(KabutoSprite), (KabutoSpriteEnd - KabutoSprite) / $10
-	call CopyVideoData
-	ret
+	; fall through
+
+LoadKabutoShellSprite:
+	ld hl, vSprites tile FUCHSIA_OMANYTE_KABUTO_FOSSIL_TILE
+	ld de, PartyMonSprites2 tile 66
+	lb bc, BANK(PartyMonSprites2), 4
+	predef_jump CopyMenuSpritesVideoDataFar
 
 
 FuchsiaCity_TextPointers:
@@ -165,7 +130,7 @@ FuchsiaCityText4:
 	rst _DelayFrames
 	ld hl, vChars0 + VOLTORB_POKEBALL_TILE1
 	ld de, PokeBallSprite
-	lb bc, BANK(PokeBallSprite), (PokeBallSpriteEnd - PokeBallSprite) / $10
+	lb bc, BANK(PokeBallSprite), 4
 	call CopyVideoData
 .done
 ;;;;;;;;;;
@@ -361,40 +326,39 @@ FuchsiaCityFossilFanText3:
 GetFossilSpriteData:
 	CheckEvent EVENT_GOT_HELIX_FOSSIL
 	jr nz, .domeFossil
-	ld de, OmanyteSprite
-	lb bc, BANK(OmanyteSprite), (OmanyteSpriteEnd - OmanyteSprite) / $10
+	ld de, PartyMonSprites1 tile 16
+	lb bc, BANK(PartyMonSprites1), 4
 	jr .showSprite
 .domeFossil
-	ld de, KabutoSpriteFrame2
-	lb bc, BANK(KabutoSpriteFrame2), (KabutoSpriteFrame2End - KabutoSpriteFrame2) / $10
+	ld de, PartyMonSprites2 tile 64
+	lb bc, BANK(PartyMonSprites2), 4
 .showSprite
-	ld hl, vChars0 + OMANYTE_KABUTO_FOSSIL_TILE
+	ld hl, vSprites tile FUCHSIA_OMANYTE_KABUTO_FOSSIL_TILE
 	ret
 
 ShowFossilPokemon:
 	call GetFossilSpriteData
-	call CopyVideoData
-	ret
+	predef_jump CopyMenuSpritesVideoDataFar
 
 GetOmanyteSpriteDataFrame2:
-	ld de, OmanyteSpriteFrame2
-	lb bc, BANK(OmanyteSpriteFrame2), (OmanyteSpriteFrame2End - OmanyteSpriteFrame2) / $10
-	ld hl, vChars0 + OMANYTE_KABUTO_FOSSIL_TILE
+	ld de, PartyMonSprites1 tile 18
+	lb bc, BANK(PartyMonSprites1), 4
+	ld hl, vSprites tile FUCHSIA_OMANYTE_KABUTO_FOSSIL_TILE
 	ret
 
 MoveFossilPokemon:
 	CheckEvent EVENT_GOT_HELIX_FOSSIL
-	jr nz, HideKabuto
+	jr nz, .hideKabuto
 	; omanyte will wiggle a bit before hiding
 	ld a, 4
 	push af
 	; make it move a bit by alternating frames
 .loop
 	call GetFossilSpriteData
-	call CopyVideoData
+	predef CopyMenuSpritesVideoDataFar
 	call Delay3
 	call GetOmanyteSpriteDataFrame2
-	call CopyVideoData
+	predef CopyMenuSpritesVideoDataFar
 	call Delay3
 	pop af
 	dec a
@@ -403,16 +367,10 @@ MoveFossilPokemon:
 	pop af
 .hideOmanyte
 	ld de, FossilSprite
-	lb bc, BANK(FossilSprite), (FossilSpriteEnd - FossilSprite) / $10
-	jr RunHide
-	
-HideKabuto:
+	lb bc, BANK(FossilSprite), 4
+	ld hl, vSprites tile FUCHSIA_OMANYTE_KABUTO_FOSSIL_TILE
+	jp CopyVideoData
+.hideKabuto:
 	ld c, 20
 	rst _DelayFrames
-	ld de, KabutoSprite
-	lb bc, BANK(KabutoSprite), (KabutoSpriteEnd - KabutoSprite) / $10
-	; fall through
-RunHide:
-	ld hl, vChars0 + OMANYTE_KABUTO_FOSSIL_TILE
-	call CopyVideoData
-	ret
+	jp LoadKabutoShellSprite

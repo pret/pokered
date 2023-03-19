@@ -16,4 +16,5 @@ ReloadMapSpriteTilePatterns::
 	ld [hl], a
 	call LoadPlayerSpriteGraphics
 	call LoadFontTilePatterns
+	callfar LoadExtraSprites
 	jp UpdateSprites

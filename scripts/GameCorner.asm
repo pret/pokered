@@ -33,7 +33,12 @@ CeladonGameCornerScript_48bec:
 	ld a, $2a
 	ld [wNewTileBlockID], a
 	lb bc, 2, 8
-	predef_jump ReplaceTileBlock
+	predef ReplaceTileBlock
+	ld hl, wCurrentMapScriptFlags
+	bit 3, [hl]
+	res 3, [hl]
+	ret z
+	jp GBFadeInFromWhite ; since trainer instantly talks to us after battle we need to fade back in here
 
 CeladonGameCornerScript_48c07:
 	xor a

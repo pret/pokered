@@ -11,14 +11,12 @@ CeruleanRocketHouse1F_TextPointers:
 
 ; after becoming champ a stairway opens up in the house that wasn't present before, allowing you to descend.
 CeruleanRocketHouse1F_AddStairs:
-	CheckEvent EVENT_BECAME_CHAMP
-	ret z
 	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
-	jr nz, .replaceTile
-	ret
-.replaceTile
+	ret z
+	CheckEvent EVENT_BECAME_CHAMP
+	ret z
 	lb bc, 0, 1
 	ld a, $08
 	ld [wNewTileBlockID], a

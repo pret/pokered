@@ -1,2 +1,2 @@
-	map_header VermilionGym, VERMILION_GYM, GYM, 0
+	map_header VermilionGym, VERMILION_GYM, GYM, DEFER_SHOWING_MAP
 	end_map_header
