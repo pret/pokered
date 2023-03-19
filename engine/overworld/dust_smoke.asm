@@ -1,6 +1,6 @@
 ; PureRGBnote: MOVED: this file was moved to a different bank for space and references code in cut2 instead of the bank it used to be in.
 
-AnimateBoulderDust:
+AnimateBoulderDust::
 	ld a, $1
 	ld [wWhichAnimationOffsets], a ; select the boulder dust offsets
 	ld a, [wUpdateSpritesEnabled]

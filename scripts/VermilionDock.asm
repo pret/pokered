@@ -346,6 +346,7 @@ TruckCheck:
 	ld [wNewTileBlockID], a ; used to be wd09f
 	ld bc, $9
 	predef ReplaceTileBlock
+	callfar AnimateBoulderDust
 	call ShowMew
 	ld c, 20
 	rst _DelayFrames
