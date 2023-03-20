@@ -1211,7 +1211,6 @@ CollisionCheckOnLand::
 	jr c, .collision
 	call CheckTilePassable
 	jr nc, .noCollision
-	; TODO: check to start surfing if surf flag set
 	callfar CheckForAutoSurf
 	jr nc, .noCollision
 .collision
