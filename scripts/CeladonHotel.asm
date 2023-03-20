@@ -133,10 +133,11 @@ CeladonLaprasGuyText:
 CeladonLaprasGuyLeaves:
 	; if the guy who can walk left and right is on a specific position we have to make him get out of the way first
 	ld a, [wSprite04StateData2MapX]
-	cp 8
+	sub 4 ; MapX is offset by 4 from actual coordinate
+	cp 4
 	ld de, CeladonLoserMovement
 	jr z, .loserinway
-	cp 9
+	cp 5
 	ld de, CeladonLoserMovement2
 	jr z, .loserinway
 	jr .losernotinway
