@@ -12,6 +12,8 @@ CeladonHotel_ScriptPointers:
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 	dw CeladonLaprasGuyLeaves
+	dw CeladonLaprasGuyGoesThroughDoor
+	dw CeladonLaprasGuyWaitingForLoserToMove
 
 
 CeladonHotel_TextPointers:
@@ -129,14 +131,96 @@ CeladonLaprasGuyText:
 	rst TextScriptEnd
 
 CeladonLaprasGuyLeaves:
-	; fade out, set hide show flag, fade back in
-	call GBFadeOutToWhite
+	; if the guy who can walk left and right is on a specific position we have to make him get out of the way first
+	ld a, [wSprite04StateData2MapX]
+	cp 8
+	ld de, CeladonLoserMovement
+	jr z, .loserinway
+	cp 9
+	ld de, CeladonLoserMovement2
+	jr z, .loserinway
+	jr .losernotinway
+.loserinway
+	ld a, 4
+	ldh [hSpriteIndexOrTextID], a
+	call MoveSprite
+	ld a, 5
+	ld [wCeladonHotelCurScript], a
+	ld [wCurMapScript], a
+	ret
+.losernotinway
+	; make the other guy stop moving
+	ld a, 4
+	ldh [hSpriteIndexOrTextID], a
+	call GetSpriteMovementByte1Pointer
+	ld a, STAY
+	ld [hl], a
+	; silph guy walks away according to where you are
+	ld a, [wXCoord]
+	cp 4
+	ld de, CeladonLaprasGuyMovement1
+	jr nz, .notLeftOfLaprasGuy
+	ld de, CeladonLaprasGuyMovement2
+.notLeftOfLaprasGuy
+	ld a, 5
+	ldh [hSpriteIndexOrTextID], a
+	call MoveSprite
+	ld a, 4
+	ld [wCeladonHotelCurScript], a
+	ld [wCurMapScript], a
+	ret
+
+CeladonLoserMovement2:
+	db NPC_MOVEMENT_LEFT
+CeladonLoserMovement:
+	db NPC_MOVEMENT_LEFT
+	db -1
+
+CeladonLaprasGuyMovement1:
+	db NPC_MOVEMENT_LEFT
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db -1
+
+CeladonLaprasGuyMovement2:
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_LEFT
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db -1
+
+CeladonLaprasGuyGoesThroughDoor:
+	; leaves through the door with a sound
+	ld a, [wd730]
+	bit 0, a
+	ret nz
+	ld a, SFX_GO_OUTSIDE
+	rst _PlaySound
 	ld a, HS_LAPRAS_GUY_CELADON
 	ld [wMissableObjectIndex], a
 	predef HideObject
-	call Delay3
-	call GBFadeInFromWhite
+	ld a, 4
+	ldh [hSpriteIndexOrTextID], a
+	call GetSpriteMovementByte1Pointer
+	ld a, WALK
+	ld [hl], a
+	call GetSpriteMovementByte2Pointer
+	ld a, LEFT_RIGHT
+	ld [hl], a
 	xor a
+	ld [wJoyIgnore], a
+	ld [wCeladonHotelCurScript], a
+	ld [wCurMapScript], a
+	ret	
+
+CeladonLaprasGuyWaitingForLoserToMove:
+	ld a, [wd730]
+	bit 0, a
+	ret nz
+	ld a, 3
 	ld [wCeladonHotelCurScript], a
 	ld [wCurMapScript], a
 	ret
