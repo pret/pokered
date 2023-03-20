@@ -1410,6 +1410,8 @@ MimicEffect:
 	jp CheckIfEnemyNeedsToChargeUp
 ;;;;;;;;;;
 .mimicMissed
+	ld c, 50
+	rst _DelayFrames
 	jp PrintButItFailedText_
 
 MimicLearnedMoveText:
@@ -1527,6 +1529,8 @@ DisableEffect:
 .moveMissedPopHL
 	pop hl
 .moveMissed
+	ld c, 50
+	rst _DelayFrames
 	jp PrintButItFailedText_
 ;;;;;;;;;;
 
