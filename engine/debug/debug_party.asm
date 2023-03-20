@@ -168,8 +168,10 @@ DebugItemsList:
 	db FULL_RESTORE, 99
 	db FULL_HEAL, 99
 	db RARE_CANDY, 99
+	db MAX_ELIXIR, 99
 	db MASTER_BALL, 99
 	db HYPER_BALL, 99
+	db POKE_FLUTE, 1
 	db SILPH_SCOPE, 1
 	db SECRET_KEY, 1
 	db CARD_KEY, 1
@@ -181,7 +183,6 @@ DebugItemsList:
 	db POCKET_ABRA, 1
 	db HM_SURF, 1
 	db HM_FLY, 1
-	db TM_THUNDERPUNCH, 1
 	db -1 ; end
 
 DebugUnusedList:
