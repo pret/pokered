@@ -352,6 +352,7 @@ INCLUDE "audio/sfx/cry1f_3.asm"
 INCLUDE "audio/sfx/cry20_3.asm"
 INCLUDE "audio/sfx/cry21_3.asm"
 INCLUDE "audio/sfx/cry22_3.asm"
+INCLUDE "audio/sfx/fall_down_hole.asm"
 
 
 SECTION "Audio Engine 1", ROMX

@@ -29,7 +29,9 @@ SeafoamIslandsB2F_Script:
 	predef HideObject
 	ld a, [wObjectToShow]
 	ld [wMissableObjectIndex], a
-	predef_jump ShowObject
+	predef ShowObject
+	ld d, 1
+	jpfar BoulderHoleDropEffect
 .asm_4649e
 	ld a, SEAFOAM_ISLANDS_B3F
 	ld [wDungeonWarpDestinationMap], a

@@ -3292,13 +3292,16 @@ IsNextTileShoreOrWater::
 	jr nc, .notShoreOrWater
 	ld a, [wCurMapTileset]
 	cp SHIP_PORT ; Vermilion Dock tileset
-	ld a, [wTileInFrontOfPlayer] ; tile in front of player
 	jr z, .skipShoreTiles ; if it's the Vermilion Dock tileset
+	cp CAVERN
+	jr z, .skipShoreTiles
+	ld a, [wTileInFrontOfPlayer] ; tile in front of player
 	cp $48 ; eastern shore tile in Safari Zone
 	jr z, .shoreOrWater
 	cp $32 ; usual eastern shore tile
 	jr z, .shoreOrWater
 .skipShoreTiles
+	ld a, [wTileInFrontOfPlayer] ; tile in front of player
 	cp $14 ; water tile
 	jr z, .shoreOrWater
 .notShoreOrWater

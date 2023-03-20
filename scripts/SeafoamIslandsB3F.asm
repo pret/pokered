@@ -31,6 +31,8 @@ SeafoamIslandsB3F_Script:
 	ld a, [wObjectToShow]
 	ld [wMissableObjectIndex], a
 	predef ShowObject
+	ld d, 1
+	callfar BoulderHoleDropEffect
 	jr .asm_465ed
 .asm_465dc
 	ld a, SEAFOAM_ISLANDS_B4F

@@ -217,6 +217,15 @@ LeaveMapThroughHoleAnim:
 	ld [wShadowOAMSprite01YCoord], a
 	ld c, 2
 	rst _DelayFrames
+	; play a sound effect of falling in
+	ld a, SFX_TRADE_MACHINE
+	rst _PlaySound
+	ld de, FallDownHole
+	; remap channel five to pay a small pitch sweep sound
+	ld hl, wChannelCommandPointers + CHAN5 * 2
+	ld [hl], e
+	inc hl
+	ld [hl], d
 	; hide upper half of player's sprite
 	ld a, $a0
 	ld [wShadowOAMSprite02YCoord], a

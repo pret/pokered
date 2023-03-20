@@ -50,7 +50,8 @@ VictoryRoad3Script0:
 	predef HideObject
 	ld a, HS_VICTORY_ROAD_2F_BOULDER
 	ld [wMissableObjectIndex], a
-	predef_jump ShowObject
+	predef ShowObject
+	jpfar BoulderHoleDropEffectDefault
 
 .coordsData_449f9:
 	dbmapcoord  3,  5
