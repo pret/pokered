@@ -51,6 +51,7 @@ GetAddressFromPointerArray::
 	ld d, 0
 	ld e, a
 	add hl, de
+GetAddressFromPointer::
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a

@@ -253,7 +253,7 @@ ReadSpriteSheetData:
 
 ; Loads sprite set for outside maps (cities and routes) and sets VRAM slots.
 ; sets carry if the map is a city or route, unsets carry if not
-InitOutsideMapSprites:
+InitOutsideMapSprites:	
 	ld a, [wCurMap]
 	cp FIRST_INDOOR_MAP ; is the map a city or a route?
 	ret nc ; if not, return

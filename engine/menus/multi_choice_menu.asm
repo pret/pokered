@@ -122,7 +122,14 @@ ThreeOptionMenuSmall::
 	hlcoord 13, 6 ; where the list will be drawn at
 	jp DoneDrawFunc
 
+FourOptionMenuBig::
+	ld c, 14 ; width
+	jr FourOptionMenuCommon
+
 FourOptionMenu::
+	ld c, 13 ; width
+	; fall through
+FourOptionMenuCommon::
 	ld a, 3 ; 4-item menu (0 counts)
 	ld [wListCount], a
 	ld [wMaxMenuItem], a
@@ -134,7 +141,6 @@ FourOptionMenu::
 
 	hlcoord 4, 3
 	ld b, 7  ; height
-	ld c, 13 ; width
 	call TextBoxBorder
 
 	hlcoord 6, 4 ; where the list will be drawn at
@@ -275,3 +281,17 @@ BillsGardenBlueThanks::
 	dw TwoOptionMenu
 	db "Thank you!"
 	next "You wish.@"
+
+TreeDeleterOptions::
+	dw FourOptionMenuBig
+	db "ROUTE 2"
+	next "CERULEAN CITY"
+	next "ROUTE 9"
+	next "FUCHSIA CITY@"
+
+SafariTypeOptions::
+	dw ThreeOptionMenu
+	db "CLASSIC"
+	next "RANGER HUNT"
+	next "FREE ROAM@"
+	

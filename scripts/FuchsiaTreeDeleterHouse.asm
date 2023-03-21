@@ -36,7 +36,6 @@ FuchsiaTreeDeleter:
 	rst _PrintText
 	xor a
 	ld [wCurrentMenuItem], a
-	ld [wListScrollOffset], a
 .listLoop
 	call CheckAllTreesDeleted
 	jr z, .noMoreTreesToDelete
@@ -45,31 +44,18 @@ FuchsiaTreeDeleter:
 	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
-	ld hl, TreeList
-	call LoadItemList
-	ld hl, wItemList
-	ld a, l
-	ld [wListPointer], a
-	ld a, h
-	ld [wListPointer + 1], a
-	xor a
-	ld [wPrintItemPrices], a
-	ld [wMenuItemToSwap], a
-	ld a, SPECIALLISTMENU
-	ld [wListMenuID], a
-	call DisplayListMenuID
-	jr c, .goodbye
+	ld hl, TreeDeleterOptions
+	ld b, A_BUTTON | B_BUTTON
+	call DisplayMultiChoiceTextBoxNoMenuReset
+	jr nz, .goodbye
 	ld hl, TextPointers_TreeDelete
-	ld a, [wcf91]
-	sub TREE_ROUTE_2
+	ld a, [wCurrentMenuItem]
+	push af
 	add a
-	ld d, $0
-	ld e, a
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call GetAddressFromPointerArray
 	rst _PrintText
+	pop af
+	ld [wCurrentMenuItem], a
 	jr .listLoop
 .goodbye
 	xor a
@@ -107,14 +93,6 @@ FuchsiaTreeDeleterFinalTextPrompt:
 	text_far _FuchsiaTreeDeleterFinalText
 	text_promptbutton
 	text_end
-
-TreeList:
-	db 4
-	db TREE_ROUTE_2
-	db TREE_CERULEAN_CITY
-	db TREE_ROUTE_9
-	db TREE_FUCHSIA_CITY
-	db -1 ; end
 
 TextPointers_TreeDelete:
 	dw FuchsiaTreeDeleterRoute2

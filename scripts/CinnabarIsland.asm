@@ -1,7 +1,5 @@
 CinnabarIsland_Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, wCurrentMapScriptFlags
-	set 5, [hl]
 	ResetEvent EVENT_MANSION_SWITCH_ON
 	ResetEvent EVENT_LAB_STILL_REVIVING_FOSSIL
 	ld hl, CinnabarIsland_ScriptPointers

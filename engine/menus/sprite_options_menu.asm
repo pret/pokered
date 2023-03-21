@@ -104,10 +104,27 @@ GenericSpriteOptionsCursorToggleFunc:
 	jp GenericOptionsCursorToggleFunc
 
 SetSpriteOptionsFromCursorPositions:
+	ld a, [wSpriteOptions2]
+	and %1000 ; menu icon sprites bit
+	push af
 	ld de, wOptions1CursorX
 	ld hl, SpriteOptionsXPosBitData
 	ld b, OPTIONS_PAGE_4_COUNT
-	jp LoopGenericSetOptionsFromCursorPositions
+	call LoopGenericSetOptionsFromCursorPositions
+	pop af
+	ld b, a
+	ld a, [wSpriteOptions2]
+	and %1000
+	cp b
+	ret z ; if we didn't change "menu icons sprites" bit don't do anything
+	call GBPalWhiteOut
+	callfar LoopRemapSpritePictureIDs ; if we did, modify the sprites in wram to have the correct IDs
+	call ReloadMapSpriteTilePatterns ; reload their tiles so they have the right sprites
+	ld de, EditPrompt ; reload the EDIT prompt tiles
+	ld hl, vChars1 tile $40
+	lb bc, BANK(EditPrompt), 3
+	call CopyVideoData
+	jp GBPalNormal
 
 SetCursorPositionFromSpriteOptions:
 	ld hl, SpriteOptionsXPosBitData

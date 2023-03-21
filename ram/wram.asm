@@ -1116,11 +1116,16 @@ wExpAmountGained:: dw
 wGainBoostedExp:: db
 ENDU
 
+; PureRGBnote: CHANGED: wGymCityName and wGymLeaderName used to be here but they were easy to remove the need for in order to have some extra space
+UNION
 ; shinpokerednote: ADDED: tracker for the levels of each of the player's pokemon at the start of battle, same address as wGymCityName
-wStartBattleLevels:: 
-wGymCityName:: ds 17
+wStartBattleLevels:: ds 6
+NEXTU
+; PureRGBnote: ADDED: tracker for the original sprite IDs of every sprite in a map - used to change them on the fly if necessary
+wMapSpriteOriginalPictureIDs:: ds 15
+ENDU
 
-wGymLeaderName:: ds NAME_LENGTH
+ds 13 ; unused 13 bytes (used to be wGymLeaderName and 2 bytes of wGymCityName)
 
 UNION
 ds 16 ; PureRGBnote: CHANGED: used to be wItemList:: but now the item list for marts is expanded in size and reuses a bigger space elsewhere
@@ -1146,7 +1151,7 @@ ENDU
 wListPointer:: dw
 
 ; used to store pointers, but never read
-wUnusedCF8D:: dw
+wUnusedCF8D:: dw ; unused 2 bytes
 
 wItemPrices:: dw
 
@@ -1192,7 +1197,7 @@ wLoadedMon:: party_struct wLoadedMon
 ;bit 4: 4th pkmn (position 3)
 ;bit 5: 5th pkmn (position 4)
 ;bit 6: 6th pkmn (position 5)
-;bit 7: unused
+;bit 7: unused bit
 wAIWhichPokemonSentOutAlready::
 wFontLoaded:: db
 
@@ -1708,6 +1713,11 @@ wIsKeyItem:: db
 
 wTextBoxID:: db
 
+; bit 3 - used to indicate we loaded a map after battle specifically
+; bit 4 - flag to indicate crossing between outdoor areas
+; bit 5 - flag to indicate a map was loaded
+; bit 6 - another flag to indicate a map was loaded?
+; bit 7 - used for elevator animations and pushing vermilion dock truck
 wCurrentMapScriptFlags:: db ; not exactly sure what this is used for, but it seems to be used as a multipurpose temp flag value
 
 wCurEnemyLVL:: db
@@ -2317,6 +2327,12 @@ wBeatGymFlags:: db
 
 ; bit 0: if not set, the 3 minimum steps between random battles have passed
 ; bit 1: prevent audio fade out
+; bit 2: unused save flag
+; bit 3: unused save flag
+; bit 4: unused save flag
+; bit 5: unused save flag
+; bit 6: unused save flag
+; bit 7: unused save flag
 wd72c:: db
 
 ; This variable is used for temporary flags and as the destination map when

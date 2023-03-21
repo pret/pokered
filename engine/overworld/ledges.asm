@@ -36,6 +36,10 @@ HandleLedges::
 	inc hl
 	jr .loop
 .foundMatch
+	ld a, [wSpritePlayerStateData1FacingDirection]
+	cp SPRITE_FACING_DOWN
+	jr z, .checkCutTileInFrontOfLedge
+.noCutTile
 	ldh a, [hJoyHeld]
 	and e
 	ret z
@@ -53,6 +57,11 @@ HandleLedges::
 	ld a, SFX_LEDGE
 	rst _PlaySound
 	ret
+.checkCutTileInFrontOfLedge
+	lda_coord 8, 13
+	cp $3D ; cut tile
+	ret z
+	jr .noCutTile
 
 INCLUDE "data/tilesets/ledge_tiles.asm"
 

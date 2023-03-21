@@ -381,8 +381,8 @@ INCLUDE "engine/overworld/healing_machine.asm"
 
 SECTION "Party Sprites", ROMX, BANK[$34]
 ; PureRGBnote: ADDED: new menu sprite icons raw data
-PartyMonSprites1: INCBIN "gfx/icons/menusprites1.2bpp"
-PartyMonSprites2: INCBIN "gfx/icons/menusprites2.2bpp"
+PartyMonSprites1:: INCBIN "gfx/icons/menusprites1.2bpp"
+PartyMonSprites2:: INCBIN "gfx/icons/menusprites2.2bpp"
 
 SECTION "GBC Mode Code", ROMX
 

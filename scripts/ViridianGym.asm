@@ -1,7 +1,4 @@
 ViridianGym_Script:
-	ld hl, .CityName
-	ld de, .LeaderName
-	call LoadGymLeaderAndCityName
 	call EnableAutoTextBoxDrawing
 	ld hl, ViridianGymTrainerHeaders
 	ld de, ViridianGym_ScriptPointers
@@ -9,12 +6,6 @@ ViridianGym_Script:
 	call ExecuteCurMapScriptInTable
 	ld [wViridianGymCurScript], a
 	ret
-
-.CityName:
-	db "VIRIDIAN CITY@"
-
-.LeaderName:
-	db "GIOVANNI@"
 
 ViridianGymResetScripts:
 	xor a

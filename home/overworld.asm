@@ -376,6 +376,7 @@ BattleOccurred::
 	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
 	set 6, [hl]
+	set 3, [hl] ; new bit indicating we reloaded a map from a battle
 	xor a
 	ldh [hJoyHeld], a
 	ld a, [wCurMap]
@@ -707,6 +708,11 @@ ExtraWarpCheck::
 
 MapEntryAfterBattle::
 	farcall IsPlayerStandingOnWarp ; for enabling warp testing after collisions
+	ld a, [wMapConnections]
+	bit 4, a
+	ret nz
+	; fall through
+MapFadeAfterBattle::
 	ld a, [wMapPalOffset]
 	and a
 	jp z, GBFadeInFromWhite
@@ -1205,7 +1211,6 @@ CollisionCheckOnLand::
 	jr c, .collision
 	call CheckTilePassable
 	jr nc, .noCollision
-	; TODO: check to start surfing if surf flag set
 	callfar CheckForAutoSurf
 	jr nc, .noCollision
 .collision
@@ -1940,7 +1945,17 @@ RunMapScript::
 	push de
 	jp hl ; jump to script
 .return
-	ret
+	ld hl, wCurrentMapScriptFlags
+	bit 3, [hl]
+	res 3, [hl]
+	ret z
+	ld a, [wMapConnections]
+	bit 4, a
+	ret z
+	ld a, [wIsInBattle]
+	cp $ff
+	ret z
+	jp MapFadeAfterBattle
 
 LoadWalkingPlayerSpriteGraphics::
 	ld de, RedSprite
@@ -2135,15 +2150,13 @@ LoadMapHeader::
 	ld b, a
 	ld c, $00
 .loadSpriteLoop
-	ld a, [wSpriteOptions2]
-	bit BIT_MENU_ICON_SPRITES, a
 	ld a, [hl]
-	jr nz, .noMap
 	push bc
 	push de
 	ld d, a ; original sprite ID
+	ld e, b ; current iteration of sprite loop
 	push hl
-	callfar RemapSpritePictureIDs ; PureRGBnote: ADDED: code that will remap overworld NPC icons according to options selection (enhanced or original)
+	callfar CheckRemapSprite ; PureRGBnote: ADDED: code that will remap overworld NPC icons according to options selection (enhanced or original)
 	ld a, d ; remapped sprite ID
 	pop hl
 	pop de

@@ -7,27 +7,12 @@ CinnabarGym_Script:
 
 CinnabarGymSetMapAndTiles:
 	ld hl, wCurrentMapScriptFlags
-	bit 6, [hl]
 	res 6, [hl]
-	push hl
-	call nz, .LoadNames
-	pop hl
 	bit 5, [hl]
 	res 5, [hl]
 	call nz, UpdateCinnabarGymGateTileBlocks
 	ResetEvent EVENT_2A7
 	ret
-
-.LoadNames:
-	ld hl, .CityName
-	ld de, .LeaderName
-	jp LoadGymLeaderAndCityName
-
-.CityName:
-	db "CINNABAR ISLAND@"
-
-.LeaderName:
-	db "BLAINE@"
 
 CinnabarGymResetScripts:
 	xor a
@@ -136,6 +121,10 @@ CinnabarGymScript2:
 	ret
 
 CinnabarGymBlainePostBattle:
+	call UpdateCinnabarGymGateTileBlocks
+	ld hl, wCurrentMapScriptFlags
+	res 3, [hl]
+	call GBFadeInFromWhite ; since blaine instantly talks to us after battle we need to fade back in here after battle
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, CinnabarGymResetScripts
@@ -167,10 +156,6 @@ CinnabarGymReceiveTM38:
 
 	; deactivate gym trainers
 	SetEventRange EVENT_BEAT_CINNABAR_GYM_TRAINER_0, EVENT_BEAT_CINNABAR_GYM_TRAINER_6
-
-	ld hl, wCurrentMapScriptFlags
-	set 5, [hl]
-
 	jp CinnabarGymResetScripts
 
 CinnabarGym_TextPointers:

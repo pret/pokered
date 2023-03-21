@@ -381,36 +381,18 @@ SafariZoneGate_TextPointers:
 	rst TextScriptEnd
 
 AskGameType:
-	ld a, 0
-	ld [wCurrentMenuItem], a
-	ld [wListScrollOffset], a
 	ld hl, SafariZoneEntranceWhatGame
 	rst _PrintText
-	ld hl, GameList
-	call LoadItemList
-	ld hl, wItemList
-	ld a, l
-	ld [wListPointer], a
-	ld a, h
-	ld [wListPointer + 1], a
-	xor a
-	ld [wPrintItemPrices], a
-	ld [wMenuItemToSwap], a
-	ld a, SPECIALLISTMENU
-	ld [wListMenuID], a
-	call DisplayListMenuID
-	jr c, .goodbye
+	ld hl, SafariTypeOptions
+	ld b, A_BUTTON | B_BUTTON
+	call DisplayMultiChoiceTextBox
+	jr nz, .goodbye
 	ld hl, TextPointers_SafariGames
-	ld a, [wcf91]
-	sub SAFARI_CLASSIC
+	ld a, [wCurrentMenuItem]
 	add a
-	ld d, $0
-	ld e, a
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call GetAddressFromPointerArray
 	rst _PrintText
+	and a
 	ret
 .goodbye
 	; give back the 500 that was just deducted
@@ -423,13 +405,6 @@ AskGameType:
 	call DisplayTextBoxID ; redraw money text box
 	scf
 	ret
-
-GameList:
-	db 3
-	db SAFARI_CLASSIC
-	db SAFARI_RANGER_HUNT
-	db SAFARI_FREE_ROAM
-	db -1 ; end
 
 TextPointers_SafariGames:
 	dw SafariClassicPaidInfo
@@ -616,36 +591,18 @@ HideAllHl:
 	ret
 
 AskGameTypeExplanation:
-	ld a, 0
-	ld [wCurrentMenuItem], a
-	ld [wListScrollOffset], a
 	ld hl, SafariZoneHelp
 	rst _PrintText
-	ld hl, GameList
-	call LoadItemList
-	ld hl, wItemList
-	ld a, l
-	ld [wListPointer], a
-	ld a, h
-	ld [wListPointer + 1], a
-	xor a
-	ld [wPrintItemPrices], a
-	ld [wMenuItemToSwap], a
-	ld a, SPECIALLISTMENU
-	ld [wListMenuID], a
-	call DisplayListMenuID
-	jr c, .goodbye
+	ld hl, SafariTypeOptions
+	ld b, A_BUTTON | B_BUTTON
+	call DisplayMultiChoiceTextBox
+	jr nz, .goodbye
 	ld hl, TextPointers_SafariExplanations
-	ld a, [wcf91]
-	sub SAFARI_CLASSIC
+	ld a, [wCurrentMenuItem]
 	add a
-	ld d, $0
-	ld e, a
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call GetAddressFromPointerArray
 	rst _PrintText
+	and a
 	ret
 .goodbye
 	scf

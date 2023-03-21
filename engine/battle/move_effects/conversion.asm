@@ -1,3 +1,4 @@
+; UNUSED since conversion's effect was changed
 ConversionEffect_:
 	ld hl, wEnemyMonType1
 	ld de, wBattleMonType1

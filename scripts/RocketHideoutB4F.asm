@@ -28,7 +28,12 @@ RocketHideout4Script_45473:
 .asm_45498
 	ld [wNewTileBlockID], a
 	lb bc, 5, 12
-	predef_jump ReplaceTileBlock
+	predef ReplaceTileBlock
+	ld hl, wCurrentMapScriptFlags
+	bit 3, [hl]
+	res 3, [hl]
+	ret z
+	jp GBFadeInFromWhite ; since giovanni instantly talks to us after battle we need to fade back in here after battle
 
 RocketHideout4Script_454a3:
 	xor a

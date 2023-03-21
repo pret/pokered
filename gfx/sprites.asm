@@ -20,9 +20,7 @@ KogaSprite::             INCBIN "gfx/sprites/koga.2bpp"
 GuardSprite::            INCBIN "gfx/sprites/guard.2bpp"
 MomSprite::              INCBIN "gfx/sprites/mom.2bpp"
 PokeBallSprite::         INCBIN "gfx/sprites/poke_ball.2bpp"
-PokeBallSpriteEnd::
 FossilSprite::           INCBIN "gfx/sprites/fossil.2bpp"
-FossilSpriteEnd::
 BoulderSprite::          INCBIN "gfx/sprites/boulder.2bpp"
 PaperSprite::            INCBIN "gfx/sprites/paper.2bpp"
 PokedexSprite::          INCBIN "gfx/sprites/pokedex.2bpp"
@@ -90,18 +88,6 @@ SabrinaSprite::          INCBIN "gfx/sprites/sabrina.2bpp"
 BlaineSprite::          INCBIN "gfx/sprites/blaine.2bpp"
 DadSprite::			    INCBIN "gfx/sprites/dad.2bpp"
 
-VoltorbSprite::          INCBIN "gfx/sprites/voltorb.2bpp"
-VoltorbSpriteEnd::
-VoltorbSpriteFrame2::    INCBIN "gfx/sprites/voltorb2.2bpp"
-VoltorbSpriteFrame2End::
-KabutoSprite::			 INCBIN "gfx/sprites/kabuto_shell.2bpp"
-KabutoSpriteEnd::
-KabutoSpriteFrame2::     INCBIN "gfx/sprites/kabuto2.2bpp"
-KabutoSpriteFrame2End::
-OmanyteSprite::			 INCBIN "gfx/sprites/omanyte.2bpp"
-OmanyteSpriteEnd::
-OmanyteSpriteFrame2::     INCBIN "gfx/sprites/omanyte2.2bpp"
-OmanyteSpriteFrame2End::
-PokeballSprite2::		  INCBIN "gfx/sprites/poke_ball.2bpp"
-PokeballSprite2End::
-DaisyBlinkingSprite::         INCBIN "gfx/sprites/daisy_blinking.2bpp"
+VoltorbSpriteFrame2::   INCBIN "gfx/sprites/voltorb2.2bpp"
+PokeballSprite2::		INCBIN "gfx/sprites/poke_ball.2bpp"
+DaisyBlinkingSprite::   INCBIN "gfx/sprites/daisy_blinking.2bpp"

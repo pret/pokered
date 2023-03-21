@@ -114,4 +114,5 @@ PredefPointers::
 	add_predef FarLoadTownMapEntry
 	add_predef SaveScreenTileAreaToBuffer3
 	add_predef LoadScreenTileAreaFromBuffer3
+	add_predef CopyMenuSpritesVideoDataFar
 	

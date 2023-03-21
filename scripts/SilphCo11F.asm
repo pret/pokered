@@ -242,6 +242,11 @@ SilphCo11Script5:
 	ld b, SPRITE_FACING_DOWN
 .asm_62240
 	call SilphCo11Script_6221a
+	call UpdateSprites
+	call SilphCo11Script_62110
+	ld hl, wCurrentMapScriptFlags
+	res 3, [hl]
+	call GBFadeInFromWhite ; since giovanni instantly talks to us after battle we need to fade back in here
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $6

@@ -1,10 +1,6 @@
 VermilionGym_Script:
 	ld hl, wCurrentMapScriptFlags
-	bit 5, [hl]
 	res 5, [hl]
-	push hl
-	call nz, .LoadNames
-	pop hl
 	bit 6, [hl]
 	res 6, [hl]
 	call nz, VermilionGymSetDoorTile
@@ -15,17 +11,6 @@ VermilionGym_Script:
 	call ExecuteCurMapScriptInTable
 	ld [wVermilionGymCurScript], a
 	ret
-
-.LoadNames:
-	ld hl, .CityName
-	ld de, .LeaderName
-	jp LoadGymLeaderAndCityName
-
-.CityName:
-	db "VERMILION CITY@"
-
-.LeaderName:
-	db "LT.SURGE@"
 
 VermilionGymSetDoorTile:
 	CheckEvent EVENT_2ND_LOCK_OPENED
@@ -39,7 +24,12 @@ VermilionGymSetDoorTile:
 .replaceTile
 	ld [wNewTileBlockID], a
 	lb bc, 2, 2
-	predef_jump ReplaceTileBlock
+	predef ReplaceTileBlock
+	ld hl, wCurrentMapScriptFlags
+	bit 3, [hl]
+	res 3, [hl]
+	ret z
+	jp GBFadeInFromWhite ; since surge instantly talks to us after battle we need to fade back in here
 
 VermilionGymResetScripts:
 	xor a

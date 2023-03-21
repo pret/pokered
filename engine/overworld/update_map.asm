@@ -7,10 +7,19 @@
 ReplaceTileBlock:
 	call GetPredefRegisters
 	call ReplaceTileBlockCommon
+	ret z
+	call IsBCInHLTileBlockMapView
 	ret c
 	jp RedrawMapView 
 
 ReplaceMultipleTileBlocks::
+	call ReplaceMultipleTileBlocksNoRedraw
+	ld a, d
+	and a
+	ret z
+	jp RedrawMapView
+
+ReplaceMultipleTileBlocksNoRedraw::
 	ld h, d
 	ld l, e
 	ld d, 0
@@ -24,6 +33,8 @@ ReplaceMultipleTileBlocks::
 	push de
 	push hl
 	call ReplaceTileBlockCommon
+	jr z, .popNoRedraw
+	call IsBCInHLTileBlockMapView
 	pop hl
 	pop de
 	jr c, .noRedraw
@@ -32,10 +43,11 @@ ReplaceMultipleTileBlocks::
 	ld a, [hl]
 	cp -1
 	jr nz, .loop
-	ld a, d
-	and a
-	call nz, RedrawMapView
 	ret
+.popNoRedraw
+	pop hl
+	pop de
+	jr .noRedraw
 
 INCLUDE "engine/overworld/tile_block_replacements.asm"
 
@@ -66,25 +78,14 @@ ReplaceTileBlockCommon:
 .addX
 	add hl, bc ; add X
 	ld a, [wNewTileBlockID]
+
+	;shinpokerednote: FIXED: No point in wasting time if the new tile block is the same as the old one. 
+	cp [hl]
+	ret z
+
 	ld [hl], a
-	ld a, [wCurrentTileBlockMapViewPointer]
-	ld c, a
-	ld a, [wCurrentTileBlockMapViewPointer + 1]
-	ld b, a
-	call CompareHLWithBC
-	ret c ; return if the replaced tile block is below the map view in memory
-	push hl
-	ld l, e
-	ld h, $0
-	ld e, $6
-	ld d, h
-	add hl, hl
-	add hl, hl
-	add hl, de
-	add hl, bc
-	pop bc
-	call CompareHLWithBC
-	ret c ; return if the replaced tile block is above the map view in memory
+	ld a, 1
+	and a
 	ret
 
 
@@ -159,10 +160,48 @@ RedrawMapView::
 	ldh [hAutoBGTransferEnabled], a
 	ret
 
-CompareHLWithBC:
+IsBCInHLTileBlockMapView:
+	push hl
+	pop bc
+	ld a, [wCurrentTileBlockMapViewPointer]
+	ld l, a
+	ld a, [wCurrentTileBlockMapViewPointer + 1]
+	ld h, a		
+	;hl now points to the upper left tile block in the map view
+	;bc points to the tile block that was replaced
+	;e is the number of bytes to add to get to the next row of the tile block map view
+	ld d, 5
+.loop
+	call .CheckRow
+	ret nc
+	dec d
+	ret z
+	push de
+	ld d, 0
+	add hl, de
+	pop de
+	jr .loop
+
+.CheckRow
+	ld a, b
+	sub h
+	ret nz
+	ld a, c
+	sub l
+	ret c
+	
+	push hl
+	
+	push bc
+	ld bc, $0004
+	add hl, bc
+	pop bc
+	
 	ld a, h
 	sub b
-	ret nz
+	jr nz, .next
 	ld a, l
 	sub c
+.next
+	pop hl
 	ret

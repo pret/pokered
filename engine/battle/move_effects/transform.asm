@@ -152,6 +152,8 @@ TransformEffect_:
 	jp CopyData
 
 .failed
+	ld c, 50
+	rst _DelayFrames
 	ld hl, PrintButItFailedText_
 	jp EffectCallBattleCore
 

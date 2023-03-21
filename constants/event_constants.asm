@@ -158,15 +158,12 @@
 	const EVENT_BEAT_CELADON_GYM_TRAINER_6
 	const EVENT_GOT_CELADON_APEX_CHIPS
 	const EVENT_BEAT_CELADON_HOTEL_TRAINER_0
-	const_skip 5
-	const EVENT_1B8 ; ???
+	const_skip 6
 	const EVENT_FOUND_ROCKET_HIDEOUT
 	const EVENT_GOT_10_COINS
 	const EVENT_GOT_20_COINS
 	const EVENT_GOT_20_COINS_2
-	const_skip 2
-	const EVENT_1BF ; ???
-	const_skip 32
+	const_skip 35
 	const EVENT_GOT_COIN_CASE
 
 ; Fuchsia City events
@@ -698,7 +695,7 @@
 	const EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_3
 	const EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_4
 	const_skip
-	const EVENT_677 ; ???
+	const EVENT_ROCKET_HIDEOUT_B1F_DOOR_UNLOCKED
 	const_skip 7
 	const EVENT_67F ; ???
 	const_skip

@@ -5382,13 +5382,12 @@ AdjustDamageForMoveType:
 	jr z, .sameTypeAttackBonus
 ;;;;;;;;;; PureRGBnote: ADDED: normal type pokemon get STAB on tri attack
 	cp TRI
-	jr nz, .notTri
+	jr nz, .skipSameTypeAttackBonus
 	ld a, NORMAL 
 	cp b ; does NORMAL match type 1 of the attacker?
 	jr z, .sameTypeAttackBonus
 	cp c ; does NORMAL match type 2 of the attacker?
 	jr z, .sameTypeAttackBonus
-.notTri
 ;;;;;;;;;
 	jr .skipSameTypeAttackBonus
 .sameTypeAttackBonus
@@ -5663,6 +5662,8 @@ AIGetTypeEffectiveness:
 
 INCLUDE "data/types/type_matchups.asm"
 
+INCLUDE "data/battle/mist_blocked_moves.asm"
+
 ; some tests that need to pass for a move to hit
 MoveHitTest:
 ; player's turn
@@ -5703,47 +5704,25 @@ MoveHitTest:
 	jr nz, .enemyTurn
 .playerTurn
 ; this checks if the move effect is disallowed by mist
-	ld a, [wPlayerMoveEffect]
-	cp ATTACK_DOWN1_EFFECT
-	jr c, .skipEnemyMistCheck
-	cp HAZE_EFFECT + 1
-	jr c, .enemyMistCheck
-	cp ATTACK_DOWN2_EFFECT
-	jr c, .skipEnemyMistCheck
-	cp REFLECT_EFFECT + 1
-	jr c, .enemyMistCheck
-	jr .skipEnemyMistCheck
-.enemyMistCheck
-; if move effect is from $12 to $19 inclusive or $3a to $41 inclusive
-; i.e. the following moves
-; GROWL, TAIL WHIP, LEER, STRING SHOT, SAND-ATTACK, SMOKESCREEN, KINESIS,
-; FLASH, CONVERSION*, HAZE*, SCREECH, LIGHT SCREEN*, REFLECT*
-; the moves that are marked with an asterisk are not affected since this
-; function is not called when those moves are used
 	ld a, [wEnemyBattleStatus2]
 	bit STAT_DOWN_IMMUNITY, a ; is mon protected by mist?
-	jp nz, .moveMissed
+	jp z, .skipEnemyMistCheck
+	ld a, [wPlayerMoveNum]
+	call CheckIsMistBlockedMove
+	jr c, .moveMissed
 .skipEnemyMistCheck
 	ld a, [wPlayerBattleStatus2]
 	bit USING_X_ACCURACY, a ; is the player using X Accuracy?
 	ret nz ; if so, always hit regardless of accuracy/evasion
 	jr .calcHitChance
 .enemyTurn
-	ld a, [wEnemyMoveEffect]
-	cp ATTACK_DOWN1_EFFECT
-	jr c, .skipPlayerMistCheck
-	cp HAZE_EFFECT + 1
-	jr c, .playerMistCheck
-	cp ATTACK_DOWN2_EFFECT
-	jr c, .skipPlayerMistCheck
-	cp REFLECT_EFFECT + 1
-	jr c, .playerMistCheck
-	jr .skipPlayerMistCheck
-.playerMistCheck
 ; similar to enemy mist check
 	ld a, [wPlayerBattleStatus2]
 	bit STAT_DOWN_IMMUNITY, a ; is mon protected by mist?
-	jp nz, .moveMissed
+	jp z, .skipPlayerMistCheck
+	ld a, [wEnemyMoveNum]
+	call CheckIsMistBlockedMove
+	jr c, .moveMissed
 .skipPlayerMistCheck
 	ld a, [wEnemyBattleStatus2]
 	bit USING_X_ACCURACY, a ; is the enemy using X Accuracy?
@@ -5791,6 +5770,11 @@ MoveHitTest:
 	ld hl, wPlayerBattleStatus1
 	res USING_TRAPPING_MOVE, [hl] ; end multi-turn attack e.g. wrap
 	ret
+
+CheckIsMistBlockedMove:
+	ld de, 1
+	ld hl, MistBlockedMoves
+	jp IsInArray
 
 ; values for player turn
 CalcHitChance:

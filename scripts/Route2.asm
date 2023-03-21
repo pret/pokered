@@ -10,8 +10,8 @@ Route2_Script:
 	ld [wRoute2CurScript], a
 	ret
 
-; PureRGBnote: ADDED: replaces the cut trees, by default it adds 1
-; after using the "Tree Deleter" on this route it removes 2 trees from the default to have 3 gone in total and an open path to Pewter City
+; PureRGBnote: ADDED: replaces the cut trees
+; after using the "Tree Deleter" all the cut trees will be removed
 Route2ReplaceCutTiles:
 	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl] ; did we load the map from a save/warp/door/battle, etc?
@@ -23,39 +23,15 @@ Route2ReplaceCutTiles:
 	ret
 .removeAddCutTiles
 	CheckEvent EVENT_DELETED_ROUTE2_TREES
-	jr nz, .remove
-.add
-	; add one tree in this case to have the default map - improves speed when removing the trees at the cost of a minor hit by default
-	ld a, $34
-	ld [wNewTileBlockID], a
-	lb bc, 30, 6
-	predef ReplaceTileBlock
-	ret
-.remove
-	ld a, $6D
-	ld [wNewTileBlockID], a
-	lb bc, 11, 7
-	predef ReplaceTileBlock
-	lb bc, 5, 2
-	predef ReplaceTileBlock
-	ret
+	ret z
+	ld de, Route2TileBlockReplacements
+	jpfar ReplaceMultipleTileBlocks
 .removeAddCutTilesNoRedraw
-	; this avoids redrawing the map because when going between areas since these tiles are offscreen.
 	CheckEvent EVENT_DELETED_ROUTE2_TREES
-	jr nz, .removeNoRedraw
-	ld a, $34
-	ld [wNewTileBlockID], a
-	lb bc, 30, 6
-	predef ReplaceTileBlockNoRedraw
-	ret
-.removeNoRedraw
-	ld a, $6D
-	ld [wNewTileBlockID], a
-	lb bc, 11, 7
-	predef ReplaceTileBlockNoRedraw
-	lb bc, 5, 2
-	predef ReplaceTileBlockNoRedraw
-	ret
+	ret z
+	ld de, Route2TileBlockReplacements
+	; this guarantees avoiding redrawing the map because when going between areas these tiles are offscreen.
+	jpfar ReplaceMultipleTileBlocksNoRedraw
 
 Route2_ScriptPointers:
 	dw CheckFightingMapTrainers

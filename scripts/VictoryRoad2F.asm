@@ -17,6 +17,7 @@ VictoryRoad2F_Script:
 
 VictoryRoad2Script_517c4:
 	ResetEvent EVENT_VICTORY_ROAD_1_BOULDER_ON_SWITCH
+	ret ; avoids running the below code twice because bit 5 of wCurrentMapScriptFlags is always set when bit 6 is set too
 VictoryRoad2Script_517c9:
 	CheckEvent EVENT_VICTORY_ROAD_2_BOULDER_ON_SWITCH1
 	jr z, .asm_517da
@@ -32,8 +33,7 @@ VictoryRoad2Script_517c9:
 	lb bc, 7, 11
 VictoryRoad2Script_517e2:
 	ld [wNewTileBlockID], a
-	predef ReplaceTileBlock
-	ret
+	predef_jump ReplaceTileBlock
 
 VictoryRoad2F_ScriptPointers:
 	dw VictoryRoad2Script0
@@ -41,6 +41,9 @@ VictoryRoad2F_ScriptPointers:
 	dw EndTrainerBattle
 
 VictoryRoad2Script0:
+	ld a, [wFlags_0xcd60]
+	bit 1, a
+	ret nz ; if a boulder animation is playing forget doing this
 	ld hl, CoordsData_51816
 	call CheckBoulderCoords
 	jp nc, CheckFightingMapTrainers

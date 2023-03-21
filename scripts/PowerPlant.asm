@@ -18,31 +18,29 @@ LoadVoltorbSprite::
 	ld a, [wSpriteOptions2]
 	bit BIT_MENU_ICON_SPRITES, a
 	ret z
-	ld a, d
-	ld h, a
-	ld a, e
-	ld l, a
+	ld h, d
+	ld l, e
 	ld a, 4
 	push af
-	ld de, VoltorbSprite
-	lb bc, BANK(VoltorbSprite), (VoltorbSpriteEnd - VoltorbSprite) / $10
+	ld de, PartyMonSprites1 tile 8
+	lb bc, BANK(PartyMonSprites1), 4
 	push hl
-	call CopyVideoData
+	call CopyMenuSpritesVideoData
 	ld c, 20
 	rst _DelayFrames
 	; make it move a bit by alternating frames
 .loop
 	pop hl
 	ld de, VoltorbSpriteFrame2
-	lb bc, BANK(VoltorbSpriteFrame2), (VoltorbSpriteFrame2End - VoltorbSpriteFrame2) / $10
+	lb bc, BANK(VoltorbSpriteFrame2), 4
 	push hl
 	call CopyVideoData
 	call Delay3
 	pop hl
-	ld de, VoltorbSprite
-	lb bc, BANK(VoltorbSprite), (VoltorbSpriteEnd - VoltorbSprite) / $10
+	ld de, PartyMonSprites1 tile 8
+	lb bc, BANK(PartyMonSprites1), 4
 	push hl
-	call CopyVideoData
+	call CopyMenuSpritesVideoData
 	call Delay3
 	pop hl
 	pop af
@@ -53,6 +51,33 @@ LoadVoltorbSprite::
 	pop af
 	pop hl
 	ret
+
+CopyMenuSpritesVideoDataFar::
+	call GetPredefRegisters
+	; fall through
+
+CopyMenuSpritesVideoData:
+	srl c
+	push hl
+	push de
+	push bc
+	call CopyVideoData
+	pop bc
+	pop hl
+	ld a, LEN_2BPP_TILE * 4
+	ld d, 0
+	ld e, a
+	add hl, de
+	ld d, h
+	ld e, l
+	pop hl
+	push de
+	ld a, LEN_2BPP_TILE * 2
+	ld d, 0
+	ld e, a
+	add hl, de
+	pop de
+	jp CopyVideoData
 
 
 PowerPlant_ScriptPointers:

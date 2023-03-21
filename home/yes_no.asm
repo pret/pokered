@@ -44,12 +44,13 @@ DisplayYesNoChoice::
 ; output = wCurrentMenuItem = which entry the cursor was on
 ; z flag = whether they pressed B on the menu (nz if they did)
 DisplayMultiChoiceTextBox::
+	xor a
+	ld [wCurrentMenuItem], a
+DisplayMultiChoiceTextBoxNoMenuReset::
 	ld a, l
 	ld [wListPointer], a
 	ld a, h
 	ld [wListPointer + 1], a
-	xor a
-	ld [wCurrentMenuItem], a
 	ld a, b
 	ld [wMenuWatchedKeys], a
 	callfar DisplayMultiChoiceMenu
