@@ -1,8 +1,4 @@
 CeladonGym_Script:
-	ld hl, wCurrentMapScriptFlags
-	bit 6, [hl]
-	res 6, [hl]
-	call nz, .LoadNames
 	call EnableAutoTextBoxDrawing
 	ld hl, CeladonGymTrainerHeaders
 	ld de, CeladonGym_ScriptPointers
@@ -10,17 +6,6 @@ CeladonGym_Script:
 	call ExecuteCurMapScriptInTable
 	ld [wCeladonGymCurScript], a
 	ret
-
-.LoadNames:
-	ld hl, .CityName
-	ld de, .LeaderName
-	jp LoadGymLeaderAndCityName
-
-.CityName:
-	db "CELADON CITY@"
-
-.LeaderName:
-	db "ERIKA@"
 
 CeladonGymResetScripts:
 	xor a

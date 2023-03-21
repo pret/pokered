@@ -2150,15 +2150,13 @@ LoadMapHeader::
 	ld b, a
 	ld c, $00
 .loadSpriteLoop
-	ld a, [wSpriteOptions2]
-	bit BIT_MENU_ICON_SPRITES, a
 	ld a, [hl]
-	jr nz, .noMap
 	push bc
 	push de
 	ld d, a ; original sprite ID
+	ld e, b ; current iteration of sprite loop
 	push hl
-	callfar RemapSpritePictureIDs ; PureRGBnote: ADDED: code that will remap overworld NPC icons according to options selection (enhanced or original)
+	callfar CheckRemapSprite ; PureRGBnote: ADDED: code that will remap overworld NPC icons according to options selection (enhanced or original)
 	ld a, d ; remapped sprite ID
 	pop hl
 	pop de

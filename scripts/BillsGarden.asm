@@ -113,7 +113,7 @@ ReplaceVisitors:
 	inc hl
 	ld a, [hli] ; a = first sprite's picture ID
 	ld [wSprite01StateData1PictureID], a
-	ld [wSprite01StateData2PictureID], a
+	ld [wMapSpriteOriginalPictureIDs], a
 	ld a, [hli]
 	ld d, [hl]
 	ld e, a ; de = second sprite's address
@@ -128,7 +128,7 @@ ReplaceVisitors:
 	ld a, [hl] ; a = second sprite's picture ID
 	cp SPRITE_MISTY
 	ld [wSprite02StateData1PictureID], a
-	ld [wSprite02StateData2PictureID], a
+	ld [wMapSpriteOriginalPictureIDs+1], a
 	ret nz
 .checkReplaceMisty
 	; based on the player's options, we might need to change misty's sprite to the original sprite
@@ -137,7 +137,6 @@ ReplaceVisitors:
 	ret nz
 	ld a, SPRITE_BRUNETTE_GIRL
 	ld [wSprite02StateData1PictureID], a
-	ld [wSprite02StateData2PictureID], a
 	lb bc, BANK(BrunetteGirlSprite), 12
 	ld de, BrunetteGirlSprite
 	ld hl, vChars0 tile 24

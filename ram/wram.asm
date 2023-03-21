@@ -1116,11 +1116,16 @@ wExpAmountGained:: dw
 wGainBoostedExp:: db
 ENDU
 
+; PureRGBnote: CHANGED: wGymCityName and wGymLeaderName used to be here but they were easy to remove the need for in order to have some extra space
+UNION
 ; shinpokerednote: ADDED: tracker for the levels of each of the player's pokemon at the start of battle, same address as wGymCityName
-wStartBattleLevels:: 
-wGymCityName:: ds 17
+wStartBattleLevels:: ds 6
+NEXTU
+; PureRGBnote: ADDED: tracker for the original sprite IDs of every sprite in a map - used to change them on the fly if necessary
+wMapSpriteOriginalPictureIDs:: ds 15
+ENDU
 
-wGymLeaderName:: ds NAME_LENGTH
+ds 13 ; unused 13 bytes (used to be wGymLeaderName and 2 bytes of wGymCityName)
 
 UNION
 ds 16 ; PureRGBnote: CHANGED: used to be wItemList:: but now the item list for marts is expanded in size and reuses a bigger space elsewhere
@@ -1146,7 +1151,7 @@ ENDU
 wListPointer:: dw
 
 ; used to store pointers, but never read
-wUnusedCF8D:: dw
+wUnusedCF8D:: dw ; unused 2 bytes
 
 wItemPrices:: dw
 
