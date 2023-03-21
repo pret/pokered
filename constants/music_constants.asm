@@ -133,18 +133,18 @@ DEF CRY_SFX_END EQUS "SFX_CRY_25 + 3"
 	music_const SFX_POKEDEX_RATING,     SFX_Pokedex_Rating_1
 	music_const SFX_GET_KEY_ITEM,       SFX_Get_Key_Item_1
 	music_const SFX_POISONED,           SFX_Poisoned_1
-	music_const SFX_TRADE_MACHINE,      SFX_Trade_Machine_1 ;*
+	music_const SFX_TRADE_MACHINE,      SFX_Trade_Machine_1 
 	music_const SFX_TURN_ON_PC,         SFX_Turn_On_PC_1
 	music_const SFX_TURN_OFF_PC,        SFX_Turn_Off_PC_1
 	music_const SFX_ENTER_PC,           SFX_Enter_PC_1
 	music_const SFX_SHRINK,             SFX_Shrink_1
-	music_const SFX_SWITCH,             SFX_Switch_1 ;*
+	music_const SFX_SWITCH,             SFX_Switch_1 
 	music_const SFX_HEALING_MACHINE,    SFX_Healing_Machine_1
 	music_const SFX_TELEPORT_EXIT_1,    SFX_Teleport_Exit1_1
 	music_const SFX_TELEPORT_ENTER_1,   SFX_Teleport_Enter1_1
 	music_const SFX_TELEPORT_EXIT_2,    SFX_Teleport_Exit2_1
-	music_const SFX_LEDGE,              SFX_Ledge_1 ;*
-	music_const SFX_TELEPORT_ENTER_2,   SFX_Teleport_Enter2_1 ;*
+	music_const SFX_LEDGE,              SFX_Ledge_1 ; aka SFX_CHANGED_SOMETHING
+	music_const SFX_TELEPORT_ENTER_2,   SFX_Teleport_Enter2_1 ; aka SFX_DID_SOMETHING
 	music_const SFX_FLY,                SFX_Fly_1
 	music_const SFX_DENIED,             SFX_Denied_1
 	music_const SFX_ARROW_TILES,        SFX_Arrow_Tiles_1 ; SFX_ARROW_TILES
