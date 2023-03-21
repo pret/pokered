@@ -24,7 +24,7 @@ PewterCityScript_1925e:
 	CheckEvent EVENT_BEAT_BROCK
 	ret nz
 IF DEF(_DEBUG)
-	call DebugPressedOrHeldB
+	call DebugBButtonToggle
 	ret nz
 ENDC
 	ld hl, CoordsData_19277

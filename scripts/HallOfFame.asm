@@ -31,7 +31,7 @@ HallofFameRoomScript2:
 	ld hl, wFlags_D733
 	res 1, [hl]
 	inc hl
-	set 0, [hl]
+	set BIT_TEST_BATTLE, [hl] ; debug, unused?
 	xor a
 	ld hl, wLoreleisRoomCurScript
 	ld [hli], a ; wLoreleisRoomCurScript

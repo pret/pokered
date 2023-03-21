@@ -18,7 +18,7 @@ PokemonTower2F_ScriptPointers:
 
 PokemonTower2Script0:
 IF DEF(_DEBUG)
-	call DebugPressedOrHeldB
+	call DebugBButtonToggle
 	ret nz
 ENDC
 	CheckEvent EVENT_BEAT_POKEMON_TOWER_RIVAL

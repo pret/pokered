@@ -3,6 +3,11 @@ PrepareOakSpeech:
 	push af
 	ld a, [wOptions]
 	push af
+	; Retrieve BIT_DEBUG_MODE set in DebugMenu for StartNewGameDebug.
+	; BUG: StartNewGame carries over bit 5 from previous save files,
+	; which causes CheckForceBikeOrSurf to not return.
+	; To fix this in debug builds, reset bit 5 here or in StartNewGame.
+	; In non-debug builds, the instructions can be removed.
 	ld a, [wd732]
 	push af
 	ld hl, wPlayerName
@@ -24,12 +29,15 @@ PrepareOakSpeech:
 	call z, InitOptions
 	; These debug names are used for StartNewGameDebug.
 	; TestBattle uses the debug names from DebugMenu.
+	; A variant of this process is performed in PrepareTitleScreen.
 	ld hl, DebugNewGamePlayerName
 	ld de, wPlayerName
 	ld bc, NAME_LENGTH
 	call CopyData
 	ld hl, DebugNewGameRivalName
 	ld de, wRivalName
+	; The two instructions below are the ones in CopyDebugName.
+	; However, attempting to call it here will cause the game to crash.
 	ld bc, NAME_LENGTH
 	jp CopyData
 
@@ -49,15 +57,18 @@ OakSpeech:
 	ld [wcf91], a
 	ld a, 1
 	ld [wItemQuantity], a
-	call AddItemToInventory  ; give one potion
+	call AddItemToInventory
 	ld a, [wDefaultMap]
 	ld [wDestinationMap], a
+	; This call is required for running StartNewGameDebug properly.
+	; StartNewGame also needs it to land the player outside their
+	; house when they warp on the mat after this routine ends.
 	call SpecialWarpIn
 	xor a
 	ldh [hTileAnimations], a
 	ld a, [wd732]
-	bit 1, a ; possibly a debug mode bit
-	jp nz, .skipChoosingNames
+	bit BIT_DEBUG_MODE, a
+	jp nz, .debugSpeech ; jump to last part of speech in debug mode
 	ld de, ProfOakPic
 	lb bc, BANK(ProfOakPic), $00
 	call IntroDisplayPicCenteredOrUpperRight
@@ -66,7 +77,7 @@ OakSpeech:
 	call PrintText
 	call GBFadeOutToWhite
 	call ClearScreen
-	ld a, NIDORINO
+	ld a, NIDORINO ; plays Nidorina's cry due to OakSpeechText2
 	ld [wd0b5], a
 	ld [wcf91], a
 	call GetMonHeader
@@ -93,7 +104,7 @@ OakSpeech:
 	ld hl, IntroduceRivalText
 	call PrintText
 	call ChooseRivalName
-.skipChoosingNames
+.debugSpeech
 	call GBFadeOutToWhite
 	call ClearScreen
 	ld de, RedPicFront
@@ -159,6 +170,8 @@ OakSpeechText1:
 	text_end
 OakSpeechText2:
 	text_far _OakSpeechText2A
+	; The game does not have a "sound_cry_nidorino" command programmed in.
+	; Nidorina might have been intended here during development.
 	sound_cry_nidorina
 	text_far _OakSpeechText2B
 	text_end

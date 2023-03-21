@@ -20,12 +20,16 @@ InitBattleVariables:
 	ld [hli], a ; wPlayerHPBarColor
 	ld [hl], a ; wEnemyHPBarColor
 	ld hl, wCanEvolveFlags
-	ld b, $3c
-.loop
+	ld b, $3c ; What is this?
+.loop ; What does this do exactly?
 	ld [hli], a
 	dec b
 	jr nz, .loop
-	inc a ; POUND
+	; Force a specific move in TestBattle.
+	; The game implicitly runs "ld a, NO_MOVE"
+	; when the instruction is absent.
+	; Increment a to load POUND instead.
+	inc a
 	ld [wTestBattlePlayerSelectedMove], a
 	ld a, [wCurMap]
 	cp SAFARI_ZONE_EAST

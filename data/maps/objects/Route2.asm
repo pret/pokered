@@ -19,7 +19,7 @@ Route2_Object:
 
 	def_warps_to ROUTE_2
 
-	; unused
+	; unused (can be accessed via SpecialWarpIn)
 	warp_to 2, 7, 4
 	db $12, $c7, $9, $7
 	warp_to 2, 7, 4

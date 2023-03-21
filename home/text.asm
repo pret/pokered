@@ -115,6 +115,9 @@ NullChar::
 	ld b, h
 	ld c, l
 	pop hl
+	; This error message seems to be a development leftover.
+	; Removing the instruction below will cause the game to
+	; ignore <NULL> and print the text script normally.	
 	ld de, TextIDErrorText
 	dec de
 	ret

@@ -268,7 +268,9 @@ LinkMenu:
 	ld c, 50
 	call DelayFrames
 	ld hl, wd732
-	res 1, [hl]
+	; This tries to clear the debug mode bit when
+	; linking, but it doesn't seem to work as intended.
+	res BIT_DEBUG_MODE, [hl]
 	ld a, [wDefaultMap]
 	ld [wDestinationMap], a
 	call SpecialWarpIn
@@ -308,7 +310,14 @@ LinkCanceledText:
 
 StartNewGame:
 	ld hl, wd732
-	res 1, [hl]
+	; Ensure debug mode is not used when
+	; starting a regular new game.
+	; Bit 5 can be reset here as well to fix
+	; the issue documented in PrepareOakSpeech.
+	; Additionally, debug mode persists in save
+	; files on both debug and non-debug builds,
+	; and is only reset here by the main menu.
+	res BIT_DEBUG_MODE, [hl]
 	; fallthrough
 StartNewGameDebug:
 	call OakSpeech

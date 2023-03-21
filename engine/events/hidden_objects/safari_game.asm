@@ -8,7 +8,7 @@ SafariZoneCheck::
 
 SafariZoneCheckSteps::
 IF DEF(_DEBUG)
-	call DebugPressedOrHeldB
+	call DebugBButtonToggle
 	ret nz
 ENDC
 	ld a, [wSafariSteps]

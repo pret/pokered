@@ -1,13 +1,5 @@
-; This function is a debugging feature to give the player Tsunekazu Ishihara's
-; favorite Pokemon. This is indicated by the overpowered Exeggutor, which
-; Ishihara (president of Creatures Inc.) said was his favorite Pokemon in an ABC
-; interview on February 8, 2000.
-; "Exeggutor is my favorite. That's because I was always using this character
-; while I was debugging the program."
-; http://www.ign.com/articles/2000/02/09/abc-news-pokamon-chat-transcript
-
-SetIshiharaTeam:
-	ld de, IshiharaTeam
+SetDebugNewGameParty: ; unreferenced (non-debug)
+	ld de, DebugNewGameParty
 .loop
 	ld a, [de]
 	cp -1
@@ -20,7 +12,9 @@ SetIshiharaTeam:
 	call AddPartyMon
 	jr .loop
 
-IshiharaTeam:
+DebugNewGameParty: ; unreferenced (non-debug)
+	; Then producer Tsunekazu Ishihara used an Exeggutor for play testing.
+	; It is the only party member shared with Red, Green, and Japanese Blue.
 	db EXEGGUTOR, 90
 IF DEF(_DEBUG)
 	db MEW, 5
@@ -35,13 +29,13 @@ IF DEF(_DEBUG)
 ENDC
 	db -1 ; end
 
-DebugStart:
+PrepareNewGameDebug: ; dummy (non-debug)
 IF DEF(_DEBUG)
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a
 
 	; Fly anywhere.
-	dec a ; $ff
+	dec a ; -1
 	ld [wTownVisitedFlag], a
 	ld [wTownVisitedFlag + 1], a
 
@@ -49,7 +43,7 @@ IF DEF(_DEBUG)
 	ld a, ~(1 << BIT_EARTHBADGE)
 	ld [wObtainedBadges], a
 
-	call SetIshiharaTeam
+	call SetDebugNewGameParty
 
 	; Exeggutor gets four HM moves.
 	ld hl, wPartyMon1Moves

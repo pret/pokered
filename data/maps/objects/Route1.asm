@@ -12,5 +12,5 @@ Route1_Object:
 
 	def_warps_to ROUTE_1
 
-	; unused
+	; unused (can be accessed via SpecialWarpIn)
 	warp_to 2, 7, 4
