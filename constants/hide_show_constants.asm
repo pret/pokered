@@ -34,10 +34,10 @@ DEF SHOW EQU $15
 	const HS_SAFFRON_CITY_D                ; 16
 	const HS_SAFFRON_CITY_E                ; 17
 	const HS_SAFFRON_CITY_F                ; 18
-	const HS_ROUTE_2_ITEM_1                ; 19 X
-	const HS_ROUTE_2_ITEM_2                ; 1A X
-	const HS_ROUTE_4_ITEM                  ; 1B X
-	const HS_ROUTE_9_ITEM                  ; 1C X
+	const HS_ROUTE_2_ITEM_1                ; 19
+	const HS_ROUTE_2_ITEM_2                ; 1A
+	;const HS_POKEDEX_1                  ; 1B 
+	;const HS_POKEDEX_2                  ; 1C 
 	const HS_ROUTE_12_SNORLAX              ; 1D
 	const HS_ROUTE_12_ITEM_1               ; 1E X
 	const HS_ROUTE_12_ITEM_2               ; 1F X
@@ -56,8 +56,8 @@ DEF SHOW EQU $15
 	const HS_STARTER_BALL_2                ; 2C
 	const HS_STARTER_BALL_3                ; 2D
 	const HS_OAKS_LAB_OAK_1                ; 2E
-	const HS_POKEDEX_1                     ; 2F
-	const HS_POKEDEX_2                     ; 30
+	const HS_STARTER_BALL_4                ; 2F, Pikachu, was HS_POKEDEX_1
+	const HS_STARTER_BALL_5                ; 30, Eevee, was HS_POKEDEX_2
 	const HS_OAKS_LAB_OAK_2                ; 31
 	const HS_VIRIDIAN_GYM_GIOVANNI         ; 32
 	const HS_VIRIDIAN_GYM_ITEM             ; 33 X
@@ -236,12 +236,12 @@ DEF SHOW EQU $15
 	const HS_SEAFOAM_ISLANDS_B3F_BOULDER_4 ; E0
 	const HS_SEAFOAM_ISLANDS_B4F_BOULDER_1 ; E1
 	const HS_SEAFOAM_ISLANDS_B4F_BOULDER_2 ; E2
-	const HS_ARTICUNO                      ; E3 X
-	const HS_CROCKY	               		   ; E4 X
-	const HS_MEW	                       ; E5 X
-	const HS_MOLTRES					   ; E6 X
+	const HS_ARTICUNO                      ; E3 
+	const HS_CROCKY	               		   ; E4 
+	const HS_MEW	                       ; E5 
+	const HS_MOLTRES					   ; E6 
 	; const HS_OMEGA                         ; E7 X
-	const HS_OLD_SEA_CHART	; E8 X
+	const HS_OLD_SEA_CHART	; E8 
 	const HS_POKEMON_MANSION_B2F_ITEM_1 ; E9
 	const HS_POKEMON_MANSION_B2F_ITEM_2 ; EA
 	const HS_ROUTE_1_OAK				; EB

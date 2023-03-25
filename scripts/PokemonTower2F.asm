@@ -153,17 +153,28 @@ PokemonTower2Text1:
 
 	; select which team to use during the encounter
 	ld a, [wRivalStarter]
-	cp STARTER2
+	cp STARTER1
 	jr nz, .NotSquirtle
-	ld a, $4
+	ld a, $6
 	jr .done
 .NotSquirtle
 	cp STARTER3
 	jr nz, .Charmander
-	ld a, $5
+	ld a, $7
 	jr .done
 .Charmander
-	ld a, $6
+	cp STARTER2 ; changes start here
+	ld a, $8
+	jr nz, .Pikachu
+	jr .done
+.Pikachu ;
+	cp STARTER4 
+	jr nz, .Eevee
+	ld a, $9
+	jr .done
+.Eevee
+	ld a, $10
+	jr .done
 .done
 	ld [wTrainerNo], a
 	ld a, 1

@@ -47,11 +47,11 @@ OaksLabScript0:
 	ret
 
 OaksLabScript1:
-	ld a, $8
+	ld a, $6 ; accounting for the dex entities being removed
 	ldh [hSpriteIndex], a
 	ld de, OakEntryMovement
 	call MoveSprite
-
+	
 	ld a, $2
 	ld [wOaksLabCurScript], a
 	ret
@@ -101,7 +101,7 @@ OaksLabScript3:
 	ret
 
 PlayerEntryMovementRLE:
-	db D_UP, 8
+	db D_UP, 7
 	db -1 ; end
 
 OaksLabScript4:
@@ -197,17 +197,21 @@ OaksLabScript8:
 	jr z, .Charmander
 	cp STARTER2
 	jr z, .Squirtle
-	jr .Bulbasaur
+	cp STARTER3
+	jr z, .Bulbasaur ; yes process of elimination is necessary.
+	cp STARTER4
+	jr z, .Pikachu
+	cp STARTER5
+	jr z, .Eevee
+
 .Charmander
-	ld de, .MiddleBallMovement1
+	ld de, .CharmanderMovement2
 	ld a, [wYCoord]
 	cp 4 ; is the player standing below the table?
 	jr z, .moveBlue
-	ld de, .MiddleBallMovement2
-	jr .moveBlue
-
-.MiddleBallMovement1
-	db NPC_MOVEMENT_DOWN
+	ld de, .CharmanderMovement1
+	jp .moveBlue
+.CharmanderMovement1
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
@@ -215,41 +219,36 @@ OaksLabScript8:
 	db NPC_MOVEMENT_UP
 	db -1 ; end
 
-.MiddleBallMovement2
-	db NPC_MOVEMENT_DOWN
+.CharmanderMovement2
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
 	db -1 ; end
 
 .Squirtle
-	ld de, .RightBallMovement1
+	ld de, .SquirtleMovement2
 	ld a, [wYCoord]
 	cp 4 ; is the player standing below the table?
 	jr z, .moveBlue
-	ld de, .RightBallMovement2
-	jr .moveBlue
+	ld de, .CharmanderMovement1
+	jp .moveBlue
 
-.RightBallMovement1
+.SquirtleMovement1
 	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_UP
 	db -1 ; end
-
-.RightBallMovement2
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_RIGHT
+	
+.SquirtleMovement2
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
 	db -1 ; end
 
 .Bulbasaur
-	ld de, .LeftBallMovement1
+	ld de, .BulbasaurMovement1
 	ld a, [wXCoord]
 	cp 9 ; is the player standing to the right of the table?
 	jr nz, .moveBlue
@@ -269,15 +268,40 @@ OaksLabScript8:
 	ld [hl], 8 ; SPRITESTATEDATA2_MAPY
 	inc hl
 	ld [hl], 9 ; SPRITESTATEDATA2_MAPX
-	ld de, .LeftBallMovement2 ; the rival is not currently onscreen, so account for that
+	ld de, .BulbasaurMovement2 ; the rival is not currently onscreen, so account for that
 	pop hl
 	jr .moveBlue
 
-.LeftBallMovement1
+.BulbasaurMovement1
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_RIGHT
-.LeftBallMovement2
+.BulbasaurMovement2
 	db NPC_MOVEMENT_RIGHT
+	db -1 ; end
+
+.Pikachu
+	ld de, .PikachuMovement1
+	jr z, .moveBlue
+.PikachuMovement1
+	db NPC_MOVEMENT_LEFT
+	db -1 ; end
+
+.Eevee
+	ld de, .EeveeMovement1
+	ld a, [wYCoord]
+	cp 4 ; is the player standing below the table?
+	jr z, .moveBlue
+	ld de, .EeveeMovement2
+	jp .moveBlue
+.EeveeMovement1
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_LEFT
+	db NPC_MOVEMENT_LEFT
+	db NPC_MOVEMENT_UP
+	db -1 ; end
+.EeveeMovement2
+	db NPC_MOVEMENT_LEFT
+	db NPC_MOVEMENT_LEFT
 	db -1 ; end
 
 .moveBlue
@@ -289,7 +313,7 @@ OaksLabScript8:
 	ld [wOaksLabCurScript], a
 	ret
 
-OaksLabScript9:
+OaksLabScript9: ; This is where Blue picks up the ball and removes the sprite.
 	ld a, [wd730]
 	bit 0, a
 	ret nz
@@ -381,13 +405,13 @@ OaksLabScript11:
 	bit 0, a
 	ret nz
 
-	; define which team rival uses, and fight it
+	; define which team rival uses, and fight it, by process of elimination
 	ld a, 1
 	ld [wIsTrainerBattle], a
 	ld a, OPP_RIVAL1
 	ld [wCurOpponent], a
 	ld a, [wRivalStarter]
-	cp STARTER2
+	cp STARTER1
 	jr nz, .NotSquirtle
 	ld a, $1
 	jr .done
@@ -397,7 +421,19 @@ OaksLabScript11:
 	ld a, $2
 	jr .done
 .Charmander
+	cp STARTER2 ; changes start here
 	ld a, $3
+	jr nz, .Pikachu
+	jr .done
+.Pikachu ;
+	cp STARTER4 
+	jr nz, .Eevee
+	ld a, $4
+	jr .done
+.Eevee
+	ld a, $5
+	jr .done ; new code ends here. use as ref for oak.
+	
 .done
 	ld [wTrainerNo], a
 	ld a, $1
@@ -582,12 +618,12 @@ OaksLabScript16:
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	call Delay3
-	ld a, HS_POKEDEX_1
-	ld [wMissableObjectIndex], a
-	predef HideObject
-	ld a, HS_POKEDEX_2
-	ld [wMissableObjectIndex], a
-	predef HideObject
+	;ld a, HS_POKEDEX_1; sprite limits
+	;ld [wMissableObjectIndex], a
+	;predef HideObject
+	;ld a, HS_POKEDEX_2
+	;ld [wMissableObjectIndex], a
+	;predef HideObject
 	call OaksLabScript_1cefd
 	ld a, $1a
 	ldh [hSpriteIndexOrTextID], a
@@ -752,6 +788,8 @@ OaksLab_TextPointers:
 	dw OaksLabText25
 	dw OaksLabText26
 	dw OaksLabText27
+	dw OaksLabTextPikachu
+	dw OaksLabTextEevee
 
 OaksLab_TextPointers2:
 	dw OaksLabText1
@@ -797,6 +835,8 @@ OaksLabText41:
 	text_far _OaksLabText41
 	text_end
 
+; These are the starter balls that you're picking.
+; They go in order from left to right; Charmander, Squirtle, Bulbasaur.
 OaksLabText2:
 	text_asm
 	ld a, STARTER2
@@ -825,6 +865,32 @@ OaksLabText4:
 	ld [wRivalStarterBallSpriteIndex], a
 	ld a, STARTER3
 	ld b, $4
+	jr OaksLabScript_1d133 ; new
+
+; So when adding the new starters, we go this way. 
+; For Pikachu and Eevee Mode, you only have these two.
+; $5 = Pikachu
+; $6 = Eevee
+; I have no idea how Blue comes to the correct conclusions after, but I won't question it...for now.
+OaksLabTextPikachu:
+	text_asm
+	ld a, STARTER5
+	ld [wRivalStarterTemp], a
+	ld a, $5
+	ld [wRivalStarterBallSpriteIndex], a
+	ld a, STARTER4
+	ld b, $6
+	jr OaksLabScript_1d133
+
+OaksLabTextEevee:
+	text_asm
+	ld a, STARTER4
+	ld [wRivalStarterTemp], a
+	ld a, $5
+	ld [wRivalStarterBallSpriteIndex], a
+	ld a, STARTER5
+	ld b, $5
+; ends here
 
 OaksLabScript_1d133:
 	ld [wcf91], a
@@ -869,7 +935,13 @@ OaksLabScript_1d157:
 	jr z, OaksLabLookAtCharmander
 	cp $3
 	jr z, OaksLabLookAtSquirtle
-	jr OaksLabLookAtBulbasaur
+	cp $4
+	jr z, OaksLabLookAtBulbasaur
+	cp $5 ; these may be the wrong way around.
+	jr nz, OaksLabLookAtPikachu
+	cp $6 ; ^
+	jr nz, OaksLabLookAtEevee
+	
 
 OaksLabLookAtCharmander:
 	ld hl, OaksLabCharmanderText
@@ -892,6 +964,20 @@ OaksLabBulbasaurText:
 	text_far _OaksLabBulbasaurText
 	text_end
 
+OaksLabLookAtPikachu:
+	ld hl, OaksLabPikachuText
+	jr OaksLabMonChoiceMenu
+OaksLabPikachuText:
+	text_far _OaksLabPikachuText
+	text_end
+
+OaksLabLookAtEevee:
+	ld hl, OaksLabEeveeText
+	jr OaksLabMonChoiceMenu
+OaksLabEeveeText:
+	text_far _OaksLabEeveeText
+	text_end
+
 OaksLabMonChoiceMenu:
 	call PrintText
 	ld a, $1
@@ -907,7 +993,7 @@ OaksLabMonChoiceMenu:
 	ld a, [wSpriteIndex]
 	cp $2
 	jr nz, .asm_1d1db
-	ld a, HS_STARTER_BALL_1
+	ld a, HS_STARTER_BALL_1 ; somewhere the starter balls need removing
 	jr .asm_1d1e5
 .asm_1d1db
 	cp $3

@@ -186,17 +186,28 @@ SilphCo7Script3:
 	ld a, OPP_RIVAL2
 	ld [wCurOpponent], a
 	ld a, [wRivalStarter]
-	cp STARTER2
-	jr nz, .asm_51cb6
-	ld a, $7
-	jr .asm_51cc0
-.asm_51cb6
+	cp STARTER1
+	jr nz, .NotSquirtle
+	ld a, $11
+	jr .done
+.NotSquirtle
 	cp STARTER3
-	jr nz, .asm_51cbe
-	ld a, $8
-	jr .asm_51cc0
-.asm_51cbe
-	ld a, $9
+	jr nz, .Charmander
+	ld a, $12
+	jr .done
+.Charmander
+	cp STARTER2 ; changes start here
+	ld a, $13
+	jr nz, .Pikachu
+	jr .done
+.Pikachu ;
+	cp STARTER4 
+	jr nz, .Eevee
+	ld a, $14
+	jr .done
+.Eevee
+	ld a, $15
+	jr .done
 .asm_51cc0
 	ld [wTrainerNo], a
 	ld a, 1

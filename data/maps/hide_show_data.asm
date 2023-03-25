@@ -324,10 +324,10 @@ OaksLabHS:
 	db OAKS_LAB, $02, SHOW
 	db OAKS_LAB, $03, SHOW
 	db OAKS_LAB, $04, SHOW
-	db OAKS_LAB, $05, HIDE
-	db OAKS_LAB, $06, SHOW
-	db OAKS_LAB, $07, SHOW
-	db OAKS_LAB, $08, HIDE
+	db OAKS_LAB, $05, SHOW
+	;db OAKS_LAB, $06, SHOW - removed dexes
+	;db OAKS_LAB, $07, SHOW
+	db OAKS_LAB, $06, HIDE
 ViridianGymHS:
 	db VIRIDIAN_GYM, $01, SHOW
 	db VIRIDIAN_GYM, $0B, SHOW

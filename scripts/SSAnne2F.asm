@@ -101,7 +101,7 @@ SSAnne2Script1:
 
 	; select which team to use during the encounter
 	ld a, [wRivalStarter]
-	cp STARTER2
+	cp STARTER1
 	jr nz, .NotSquirtle
 	ld a, $1
 	jr .done
@@ -111,7 +111,18 @@ SSAnne2Script1:
 	ld a, $2
 	jr .done
 .Charmander
+	cp STARTER2 ; changes start here
 	ld a, $3
+	jr nz, .Pikachu
+	jr .done
+.Pikachu ;
+	cp STARTER4 
+	jr nz, .Eevee
+	ld a, $4
+	jr .done
+.Eevee
+	ld a, $5
+	jr .done
 .done
 	ld [wTrainerNo], a
 	ld a, 1

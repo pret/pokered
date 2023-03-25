@@ -23,14 +23,6 @@ SetIshiharaTeam:
 IshiharaTeam:
 	db SCREAM_TAIL, 90
 IF DEF(_DEBUG)
-	db MAGNEZONE, 50
-ELSE
-	db MAGNEZONE, 20
-ENDC
-	db MAGMORTAR, 56
-	db ELECTIVIRE, 56
-	db ANNIHILAPE, 57
-IF DEF(_DEBUG)
 	db KADABRA, 16
 ENDC
 	db -1 ; end

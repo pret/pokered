@@ -91,7 +91,18 @@ Route1OakText:
 	ld a, $3 ; If Bulbasaur, Totartle
 	jr .done
 .Charmander
+	cp STARTER1
+	jr nz, .Pikachu
 	ld a, $1 ; If Squirtle, Charizard
+	jr .done
+.Pikachu
+	cp STARTER4
+	jr nz, .Eevee
+	ld a, $4 ; If Pikachu, Espeon
+	jr .done
+.Eevee
+	ld a, $5 ; If Eevee, Gorochu
+	jr .done
 .done
 	ld [wTrainerNo], a
 	ld a, 1

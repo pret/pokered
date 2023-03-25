@@ -43,6 +43,18 @@ _OaksLabBulbasaurText::
 	cont "BULBASAUR?"
 	done
 
+_OaksLabPikachuText::
+	text "So! You want the"
+	line "electric #MON,"
+	cont "PIKACHU?"
+	done
+
+_OaksLabEeveeText::
+	text "So! You want the"
+	line "normal #MON,"
+	cont "EEVEE?"
+	done
+
 _OaksLabMonEnergeticText::
 	text "This #MON is"
 	line "really energetic!"
@@ -55,7 +67,7 @@ _OaksLabReceivedMonText::
 	text "!@"
 	text_end
 
-_OaksLabLastMonText::
+_OaksLabLastMonText:: ; figure out what to do with this
 	text "That's PROF.OAK's"
 	line "last #MON!"
 	done
@@ -200,7 +212,7 @@ _OaksLabChooseMonText::
 
 	para "Here, <PLAYER>!"
 
-	para "There are 3"
+	para "There are 5"
 	line "#MON here!"
 
 	para "Haha!"
@@ -213,7 +225,7 @@ _OaksLabChooseMonText::
 	cont "#MON trainer!"
 
 	para "In my old age, I"
-	line "have only 3 left,"
+	line "have only 5 left,"
 	cont "but you can have"
 	cont "one! Choose!"
 	done
@@ -295,8 +307,8 @@ _OaksLabText23::
 	done
 
 _OaksLabText24::
-	text "On the desk there"
-	line "is my invention,"
+	text "In my hand I have"
+	line "my invention, the"
 	cont "#DEX!"
 
 	para "It automatically"
