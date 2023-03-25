@@ -11,7 +11,6 @@ BillsHouse_ScriptPointers:
 	dw BillsHouseScript3
 	dw BillsHouseScript4
 	dw BillsHouseScript5
-	dw BillsHouseNidorino
 
 BillsHouseScript0:
 	ret
@@ -90,9 +89,9 @@ BillsHouseScript3:
 
 MovementData_1e807:
 	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_RIGHT
+	;db NPC_MOVEMENT_RIGHT
+	;db NPC_MOVEMENT_RIGHT
+	;db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_DOWN
 	db -1 ; end
 
@@ -121,6 +120,7 @@ BillsHouse_TextPointers:
 	dw BillsHouseText2
 	dw BillsHouseText3
 	dw BillsHouseText4
+	dw BillsHouseNidorino ; DO. NOT. TOUCH. PLEASE GOD.
 
 BillsHouseText4:
 	script_bills_pc

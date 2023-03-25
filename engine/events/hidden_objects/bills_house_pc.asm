@@ -107,6 +107,16 @@ BillsHousePokemonList::
 	jr z, .displayPokedex
 	cp VAPOREON
 	jr z, .displayPokedex
+	;cp ESPEON
+	;jr z, .displayPokedex
+	;cp UMBREON
+	;jr z, .displayPokedex
+	;cp LEAFEON
+	;jr z, .displayPokedex
+	;cp GLACEON
+	;jr z, .displayPokedex
+	;cp SYLVEON
+	;jr z, .displayPokedex - these are weird and don't work well
 	jr .cancel
 .displayPokedex
 	call DisplayPokedex
@@ -127,6 +137,11 @@ BillsMonListText:
 	next "FLAREON"
 	next "JOLTEON"
 	next "VAPOREON"
+	;next "ESPEON" The menu needs to scroll - the first few work fine.
+	;next "UMBREON"
+	;next "LEAFEON"
+	;next "GLACEON"
+	;next "SYLVEON"
 	next "CANCEL@"
 
 BillsHousePokemonListText2:

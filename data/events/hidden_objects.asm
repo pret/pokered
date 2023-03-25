@@ -552,7 +552,7 @@ VictoryRoad2HiddenObjects:
 	db -1 ; end
 
 BillsHouseHiddenObjects:
-	hidden_object  1,  4, SPRITE_FACING_UP, BillsHousePC
+	hidden_object  3,  4, SPRITE_FACING_UP, BillsHousePC
 	db -1 ; end
 
 ViridianCityHiddenObjects:
