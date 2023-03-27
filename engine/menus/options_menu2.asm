@@ -205,7 +205,7 @@ CompareOptions2:
 	and %11
 	cp c
 	push hl
-	jp nz, RunDefaultPaletteCommand ; refresh palettes if we changed the palette setting on GBC
+	jr nz, .changedColors
 	pop hl
 	bit BIT_BIKE_MUSIC, b
 	jr nz, .compareNonZero
@@ -223,6 +223,9 @@ CompareOptions2:
 	cp 1
 	ret nz
 	jp PlayDefaultMusic ; reset music if we're on a bike and in-game
+.changedColors
+	pop hl
+	jp RunDefaultPaletteCommand ; refresh palettes if we changed the palette setting on GBC
 
 SetColorsCursorPosition:
 	ld hl, wOptions2
