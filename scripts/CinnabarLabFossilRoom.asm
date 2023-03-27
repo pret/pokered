@@ -274,6 +274,8 @@ ShowBeforeAfterImages:
 	and A_BUTTON | B_BUTTON
 	jr z, .waitForButtonPress
 
+	ld hl, wd72c
+	res 1, [hl]
  	ld a, $77
  	ldh [rNR50], a ; full volume
 	
