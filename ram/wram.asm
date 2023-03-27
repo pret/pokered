@@ -76,7 +76,8 @@ wTempoModifier:: db
 UNION
 	ds 13
 NEXTU
-	; unused audio wram 13 bytes
+wReplacedMapMusic:: db
+	; unused audio wram 12 bytes
 ENDU
 
 
@@ -101,7 +102,7 @@ wSpriteStateData1::
 ; - A: adjusted Y coordinate
 ; - B: adjusted X coordinate
 ; - C: direction of collision
-; - D: PureRGBnote: TODO: original picture ID
+; - D
 ; - E
 ; - F
 wSpritePlayerStateData1::  spritestatedata1 wSpritePlayerStateData1 ; player is struct 0
@@ -1088,7 +1089,7 @@ wPartyMenuHPBarColors:: ds PARTY_LENGTH
 
 wStatusScreenHPBarColor:: db
 
-	ds 7 ; unused 7 bytes
+wSecretLabPasswordTracker::	ds 7 
 
 wCopyingSGBTileData::
 wWhichPartyMenuHPBar::

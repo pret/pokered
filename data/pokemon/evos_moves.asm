@@ -177,8 +177,8 @@ EvosMovesPointerTable:
 	dw AerodactylEvosMoves
 	dw MissingNoACEvosMoves
 	dw MagnemiteEvosMoves
-	dw MissingNoAEEvosMoves
-	dw MissingNoAFEvosMoves
+	dw MewtwoEvosMoves
+	dw GengarEvosMoves
 	dw CharmanderEvosMoves
 	dw SquirtleEvosMoves
 	dw CharmeleonEvosMoves

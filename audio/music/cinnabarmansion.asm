@@ -44,50 +44,33 @@ Music_CinnabarMansion_Ch2::
 	note_type 12, 12, 2
 .introloop:
 	rest 16
-	rest 16
-	sound_loop 4, .introloop
+	sound_loop 8, .introloop
 .mainloop:
 	note_type 12, 12, 2
-.loop1:
-	sound_call .sub1
-	sound_loop 3, .loop1
 	octave 3
-	note E_, 4
-	note D#, 4
-	note B_, 4
+.loop1:
+	sound_call .sub2
+	note A_, 4
 	note A#, 4
-	note G_, 4
-	note G#, 4
+	sound_call .sub2
 	rest 4
 	note A#, 4
-	note E_, 4
-	note D#, 4
-	note B_, 4
+	sound_loop 3, .loop1
+	sound_call .sub2
+	rest 4
 	note A#, 4
-	note G_, 4
-	note G#, 4
+	sound_call .sub2
 	note G_, 4
 	note D#, 4
 	sound_loop 0, .mainloop
 
-.sub1:
-	octave 3
+.sub2
 	note E_, 4
 	note D#, 4
 	note B_, 4
 	note A#, 4
 	note G_, 4
 	note G#, 4
-	note A_, 4
-	note A#, 4
-	note E_, 4
-	note D#, 4
-	note B_, 4
-	note A#, 4
-	note G_, 4
-	note G#, 4
-	rest 4
-	note A#, 4
 	sound_ret
 
 Music_CinnabarMansion_Ch3::
@@ -144,15 +127,11 @@ Music_CinnabarMansion_Ch4::
 	rest 16
 	rest 16
 .mainloop:
+.sub1
 	drum_note 12, 2
 	drum_note 12, 2
 	drum_note 13, 4
-	drum_note 12, 2
-	drum_note 12, 2
-	drum_note 13, 4
-	drum_note 12, 2
-	drum_note 12, 2
-	drum_note 13, 4
+	sound_loop 3, .sub1
 	drum_note 12, 2
 	drum_note 12, 2
 	drum_note 14, 4

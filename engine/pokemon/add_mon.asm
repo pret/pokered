@@ -403,7 +403,7 @@ _MoveMon::
 	jr z, .copySpecies
 	ld a, [wcf91]
 .copySpecies
-	ld [hli], a          ; write new mon ID
+	ld [hli], a          ; write new mon ID to wPartySpecies on the last byte where party ends (eg 5 if 5 pokemon now in party)
 	ld [hl], $ff         ; write new sentinel
 .findMonDataDest
 	ld a, [wMoveMonType]

@@ -111,11 +111,11 @@ MapHSPointers:
 	dw SSAnneB1FRoomsHS
 	dw NoHS
 	dw CeruleanRocketHouse1FHS
-	dw NoHS
+	dw CeruleanRocketHouseB1FHS
 	dw VictoryRoad1FHS
 	dw ViridianSchoolhouseB1FHS
 	dw NoHS
-	dw NoHS
+	dw SecretLabHS
 	dw NoHS
 	dw NoHS
 	dw NoHS
@@ -644,5 +644,11 @@ ViridianSchoolhouseB1FHS:
 	db VIRIDIAN_SCHOOL_HOUSE_B1F, $0B, HIDE ; brunette girl
 RedsHouse1FHS:
 	db REDS_HOUSE_1F, 2, HIDE ; dad
+CeruleanRocketHouseB1FHS:
+	db CERULEAN_ROCKET_HOUSE_B1F, 2, SHOW ; top secret key item
+SecretLabHS:
+	db SECRET_LAB, 1, SHOW ; soldier 1 in secret lab
+	db SECRET_LAB, 2, SHOW ; soldier 2 in secret lab
+	db SECRET_LAB, 3, SHOW ; chief in secret lab
 	db $FF, $01, SHOW ; end
 	assert_table_length NUM_EXTRA_HS_OBJECTS + 1

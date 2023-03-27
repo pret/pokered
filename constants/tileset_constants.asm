@@ -26,4 +26,5 @@
 	const FACILITY     ; 22
 	const PLATEAU      ; 23
 	const SCHOOL       ; 24
+	const SECRET_LAB_TILES   ; 25
 DEF NUM_TILESETS EQU const_value

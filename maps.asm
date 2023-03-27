@@ -661,6 +661,11 @@ INCLUDE "scripts/PokemonMansionB1F.asm"
 INCLUDE "data/maps/objects/PokemonMansionB1F.asm"
 PokemonMansionB1F_Blocks: INCBIN "maps/PokemonMansionB1F.blk"
 
+INCLUDE "data/maps/headers/SecretLab.asm"
+INCLUDE "scripts/SecretLab.asm"
+INCLUDE "data/maps/objects/SecretLab.asm"
+SecretLab_Blocks: INCBIN "maps/SecretLab.blk"
+
 
 SECTION "Maps 11", ROMX
 

@@ -244,3 +244,8 @@ DEF MAX_SFX_ID_2 EQUS "SFX_SILPH_SCOPE"
 DEF MAX_SFX_ID_3 EQUS "SFX_SHOOTING_STAR"
 
 DEF SFX_STOP_ALL_MUSIC EQU $ff
+
+; Extra music constants for new music added
+	const_def 1
+	const MUSIC_SECRET_LAB1
+	const MUSIC_SECRET_LAB2

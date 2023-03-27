@@ -184,6 +184,9 @@ INCLUDE "engine/battle/decrement_pp.asm" ; PureRGBnote: MOVED: moved from battle
 INCLUDE "engine/battle/link_battle_versus_text.asm"
 INCLUDE "engine/battle/move_effects/heal.asm"
 INCLUDE "engine/battle/move_effects/teleport.asm"
+INCLUDE "engine/battle/move_effects/transform.asm"
+INCLUDE "engine/battle/move_effects/reflect_light_screen.asm"
+INCLUDE "engine/battle/move_effects/tri_attack.asm" ; PureRGBnote: ADDED: new tri attack effect code
 
 
 SECTION "Slot Machines", ROMX
@@ -236,12 +239,6 @@ SECTION "Battle Engine 8", ROMX
 INCLUDE "engine/battle/init_battle_variables.asm"
 INCLUDE "engine/battle/move_effects/paralyze.asm"
 INCLUDE "engine/battle/move_effects/burn.asm" ; PureRGBnote: ADDED: new burn effect code
-; PureRGBnote: MOVED: moved from battle engine 7
-INCLUDE "engine/battle/move_effects/transform.asm"
-INCLUDE "engine/battle/move_effects/reflect_light_screen.asm"
-INCLUDE "engine/battle/move_effects/tri_attack.asm" ; PureRGBnote: ADDED: new tri attack effect code
-
-
 
 SECTION "Hidden Objects 2", ROMX
 
@@ -377,6 +374,8 @@ INCLUDE "engine/movie/hall_of_fame.asm"
 SECTION "movedCode", ROMX
 ; moved from bank1e
 INCLUDE "engine/overworld/healing_machine.asm"
+; moved from home bank
+INCLUDE "audio/fade_audio.asm"
 
 
 SECTION "Party Sprites", ROMX, BANK[$34]
@@ -422,3 +421,5 @@ INCLUDE "engine/menus/map_pokemon_areas.asm"
 INCLUDE "engine/gfx/save_screen_area_to_buffer3.asm"
 INCLUDE "engine/menus/change_box_menu.asm"
 INCLUDE "engine/overworld/autosurf.asm"
+INCLUDE "audio/remap_armored_mewtwo_cry.asm"
+INCLUDE "engine/pokemon/change_mon_species.asm"

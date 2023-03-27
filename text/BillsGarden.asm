@@ -464,6 +464,17 @@ _BillsGardenMrFujiMewtwoText::
 	line "heart."
 	done
 
+_BillsGardenMrFujiArmoredMewtwoText::
+	text "That armor MEWTWO"
+	line "is wearing brings"
+	cont "back many harsh"
+	cont "memories."
+	para "I do not wish to"
+	line "see it any"
+	cont "longer."
+	para "Be careful."
+	done
+
 _BillsGardenGiovanniMewtwoText::
 	text "It can't be..."
 	line "MEWTWO??"
@@ -491,9 +502,19 @@ _BillsGardenGiovanniMewtwoText::
 	line "to get in."
 	para "If you find a key"
 	line "somewhere, maybe"
-	line "take a look in"
+	cont "take a look in"
 	cont "the very depths"
 	cont "of the MANSION."
+	done
+
+_BillsGardenGiovanniArmoredMewtwoText::
+	text "I see you found"
+	line "MEWTWO's armor..."
+	para "That design was"
+	line "my pride and joy."
+	para "I'm surprised"
+	line "MEWTWO was okay"
+	cont "with donning it."
 	done
 
 ; mom and dad

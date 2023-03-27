@@ -360,6 +360,9 @@ PlayTrainerMusic::
 	ld a, [wGymLeaderNo]
 	and a
 	ret nz
+	ld a, [wCurMap]
+	cp SECRET_LAB
+	ret z
 	xor a
 	ld [wAudioFadeOutControl], a
 	call StopAllMusic

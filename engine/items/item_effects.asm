@@ -1634,15 +1634,6 @@ ItemUseMedicine:
 	ld [hli], a ; set first byte of DVs to max
 	ld [hl], a  ; set second byte of DVs to max
 	pop hl
-
-	push hl
-	ld bc, wPartyMon1MaxHP - wPartyMon1
-	add hl, bc ; hl now points to MSB of max HP
-	ld a, [hli]
-	ld b, a
-	ld c, [hl]
-	pop hl
-
 	push hl
 	call .recalculateStats
 	pop hl

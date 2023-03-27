@@ -238,6 +238,8 @@ GetOverworldPalette:
 	ld a, [wCurMapTileset]
 	cp CEMETERY
 	jr z, .PokemonTowerOrAgatha
+	cp SECRET_LAB_TILES
+	jr z, .SecretLab
 	cp CAVERN
 	jr z, .caveOrBruno
 	ld a, [wCurMap]
@@ -262,6 +264,9 @@ GetOverworldPalette:
 .town
 	inc a ; a town's palette ID is its map ID + 1
 	ret
+.SecretLab
+	ld a, PAL_SECRETLAB - 1
+	jr .town
 .rocketHouseBasement
 	ld a, PAL_REDMON - 1
 	jr .town

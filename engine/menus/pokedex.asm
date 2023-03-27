@@ -173,8 +173,7 @@ HandlePokedexSideMenu:
 ; play pokemon cry
 .choseCry
 	ld a, [wd11e]
-	call GetCryData
-	rst _PlaySound
+	call PlayCry
 	jr .handleMenuInput
 
 .choseArea

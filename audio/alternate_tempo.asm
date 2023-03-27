@@ -48,3 +48,8 @@ Music_Cities1AlternateTempo::
 	ld hl, wChannelCommandPointers
 	ld de, Music_Cities1_Ch1_AlternateTempo
 	jp Audio1_OverwriteChannelPointer
+
+PlayArmoredMewtwoCry1::
+	ld de, SFX_Armored_Mewtwo_Cry1_Ch8
+	ld hl, wChannelCommandPointers + CHAN8 * 2
+	jp Audio1_OverwriteChannelPointer

@@ -279,6 +279,7 @@ INCLUDE "text/CeruleanRocketHouse.asm"
 INCLUDE "text/CeladonMart1FPhoneCalls.asm"
 INCLUDE "text/PalletPhoneResultEvents.asm"
 INCLUDE "text/BillsGarden.asm"
+INCLUDE "text/SecretLab.asm"
 
 
 SECTION "Pokédex Text", ROMX

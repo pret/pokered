@@ -66,3 +66,6 @@ ShipPort_GFX::      INCBIN "gfx/tilesets/ship_port.2bpp"
 ShipPort_Block::    INCBIN "gfx/blocksets/ship_port.bst"
 Underground_GFX::   INCBIN "gfx/tilesets/underground.2bpp"
 Underground_Block:: INCBIN "gfx/blocksets/underground.bst"
+SecretLab_GFX::     INCBIN "gfx/tilesets/secret_lab.2bpp"
+SecretLab_Block::   INCBIN "gfx/blocksets/secret_lab.bst"
+

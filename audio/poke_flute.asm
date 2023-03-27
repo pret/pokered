@@ -32,3 +32,8 @@ Music_LearnMovePoofInBattle::
 	ld de, SFX_Swap_2_Ch7
 	jr Audio2_OverwriteChannelPointer
 ;;;;;;;; It was broken because SFX_SWAP didn't exist in the 2nd audio engine but did in 1 and 3. So we're manually running one located in this bank now.
+
+PlayArmoredMewtwoCry2::
+	ld de, SFX_Armored_Mewtwo_Cry2_Ch8
+	ld hl, wChannelCommandPointers + CHAN8 * 2
+	jp Audio2_OverwriteChannelPointer

@@ -18,6 +18,7 @@ CeruleanRocketHouseScript0:
 
 CeruleanRocketHouseB1F_TextPointers:
 	dw CeruleanRocketHouseB1FText1
+	dw PickUpItemText
 	dw CeruleanRocketHouseB1FText2
 	dw CeruleanRocketHouseB1FText3
 	dw CeruleanRocketHouseB1FText4
