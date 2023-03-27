@@ -648,3 +648,5 @@ EditPrompt:: INCBIN "gfx/font/edit_prompt.2bpp"
 TeaTile:: INCBIN "gfx/icons/tea.2bpp"
 
 FoodTiles:: INCBIN "gfx/icons/food_on_table.2bpp"
+
+HaunterFace:: INCBIN "gfx/overworld/haunter_face.2bpp"

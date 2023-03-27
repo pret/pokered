@@ -305,6 +305,7 @@ DEF NUM_HS_OBJECTS EQU const_value
 	const HS_SECRET_LAB_SOLDIER_1 ; 28 X
 	const HS_SECRET_LAB_SOLDIER_2 ; 29 X
 	const HS_SECRET_LAB_CHIEF ; 2A X
+	const HS_POKEMON_TOWER_1F_ROCKET ; 2B X
 	; max allowed value = 98
 
 DEF NUM_EXTRA_HS_OBJECTS EQU const_value

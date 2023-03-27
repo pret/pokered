@@ -146,7 +146,7 @@ MapHSPointers:
 	dw NoHS
 	dw CeladonHotelHS
 	dw NoHS
-	dw NoHS
+	dw PokemonTower1FHS
 	dw PokemonTower2FHS
 	dw PokemonTower3FHS
 	dw PokemonTower4FHS
@@ -650,5 +650,7 @@ SecretLabHS:
 	db SECRET_LAB, 1, SHOW ; soldier 1 in secret lab
 	db SECRET_LAB, 2, SHOW ; soldier 2 in secret lab
 	db SECRET_LAB, 3, SHOW ; chief in secret lab
+PokemonTower1FHS:
+	db POKEMON_TOWER_1F, 6, SHOW ; new rocket in pokemon tower 1F blocking downstairs
 	db $FF, $01, SHOW ; end
 	assert_table_length NUM_EXTRA_HS_OBJECTS + 1

@@ -29,3 +29,31 @@ _PokemonTower1Text5::
 	line "There are spirits"
 	cont "up to mischief!"
 	done
+
+_PokemonTower1FRocketText::
+	text "Scram! No one's"
+	line "going downstairs!"
+	prompt
+
+_PokemonTower1FRocketText2::
+	text "Here's a better"
+	line "idea:"
+	para "Why don't you"
+	line "head west to"
+	cont "CELADON CITY's"
+	cont "GAME CORNER?"
+	para "Spend lots of"
+	line "money while you're"
+	cont "there!"
+	para "Hyuck hyuck"
+	line "hyuck hyuck!"
+	done
+
+_PokemonTower1FRocketText3::
+	text "We've got an"
+	line "operation going!"
+	para "Until the boys"
+	line "come back from"
+	cont "the upper floors"
+	cont "I ain't moving!"
+	done

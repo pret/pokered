@@ -112,7 +112,7 @@ MapSongBanks::
 	db MUSIC_CITIES1, BANK(Music_Cities1) ; VIRIDIAN_SCHOOL_HOUSE_B1F
 	db MUSIC_ROUTES2, BANK(Music_Routes2) ; BILLS_GARDEN
 	db MUSIC_DUNGEON2, BANK(Music_Dungeon2) ; SECRET_LAB ; not actually what plays in this map, gets remapped
-	db MUSIC_SILPH_CO, BANK(Music_SilphCo) ; UNUSED_MAP_70
+	db MUSIC_POKEMON_TOWER, BANK(Music_PokemonTower) ; POKEMON_TOWER_B1F
 	db MUSIC_INDIGO_PLATEAU, BANK(Music_IndigoPlateau) ; LANCES_ROOM
 	db MUSIC_SS_ANNE, BANK(Music_SSAnne) ; UNUSED_MAP_72
 	db MUSIC_SS_ANNE, BANK(Music_SSAnne) ; UNUSED_MAP_73

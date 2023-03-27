@@ -91,4 +91,5 @@ SpriteSheetPointerTable:
 	overworld_sprite GamblerAsleepSprite, 4     ; SPRITE_GAMBLER_ASLEEP
 	overworld_sprite Monster2Sprite, 4          ; SPRITE_MONSTER2_STILL
 	overworld_sprite PokeballSprite2, 4     	; SPRITE_POKE_BALL2
+	overworld_sprite DarkChannelerSprite, 4     ; SPRITE_DARK_CHANNELER
 	assert_table_length NUM_SPRITES

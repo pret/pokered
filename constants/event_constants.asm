@@ -115,7 +115,9 @@
 	const_skip 2
 	const EVENT_MET_LAVENDER_TM_KID
 	const EVENT_RESCUED_MR_FUJI_2
-	const_skip 16
+	const EVENT_MET_DARK_CHANNELER
+	const EVENT_MET_LIGHT_CHANNELER
+	const_skip 14
 	const EVENT_GOT_POKE_FLUTE
 
 ; Vermilion City events

@@ -271,6 +271,10 @@ GetOverworldPalette:
 	ld a, PAL_REDMON - 1
 	jr .town
 .PokemonTowerOrAgatha
+	ld a, [wCurMap]
+	cp POKEMON_TOWER_B1F
+	ld a, PAL_BLACKMON - 1
+	jr z, .town
 	ld a, PAL_GREYMON - 1
 	jr .town
 .caveOrBruno ; PureRGBnote: CHANGED: seafoam islands use a bluish purple color palette instead of brown.

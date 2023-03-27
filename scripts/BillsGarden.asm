@@ -506,15 +506,14 @@ BillsGardenOakText5:
 	text_end
 
 
-; input c = which pokemon to find
+; input d = which pokemon to find
 ; returns flag c if found
-
 FindPokemonInParty:
 	ld b, PARTY_LENGTH
 	ld hl, wPartySpecies
 .loop
 	ld a, [hli]
-	cp c
+	cp d
 	jr z, .found
 	dec b
 	jr nz, .loop
@@ -531,11 +530,11 @@ BillsGardenMrFujiGiovanniOverheardText:
 	text_end
 BillsGardenMrFujiText:
 	text_asm
-	ld c, MEWTWO
+	ld d, MEWTWO
 	call FindPokemonInParty
 	ld hl, BillsGardenMrFujiMewtwoText
 	jr c, .done
-	ld c, ARMORED_MEWTWO
+	ld d, ARMORED_MEWTWO
 	call FindPokemonInParty
 	ld hl, BillsGardenMrFujiArmoredMewtwoText
 	jr c, .done
@@ -555,11 +554,11 @@ BillsGardenMrFujiArmoredMewtwoText:
 
 BillsGardenGiovanniText:
 	text_asm
-	ld c, MEWTWO
+	ld d, MEWTWO
 	call FindPokemonInParty
 	ld hl, BillsGardenGiovanniMewtwoText
 	jr c, .done
-	ld c, ARMORED_MEWTWO
+	ld d, ARMORED_MEWTWO
 	call FindPokemonInParty
 	ld hl, BillsGardenGiovanniArmoredMewtwoText
 	jr c, .done

@@ -235,6 +235,9 @@ PokemonTower7FujiText:
 	ld a, HS_SAFFRON_CITY_F
 	ld [wMissableObjectIndex], a
 	predef ShowObject
+	ld a, HS_POKEMON_TOWER_1F_ROCKET
+	ld [wMissableObjectIndex], a
+	predef HideExtraObject
 	ld a, $4
 	ld [wPokemonTower7FCurScript], a
 	ld [wCurMapScript], a

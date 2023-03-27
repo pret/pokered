@@ -1025,6 +1025,11 @@ INCLUDE "scripts/PokemonTower7F.asm"
 INCLUDE "data/maps/objects/PokemonTower7F.asm"
 PokemonTower7F_Blocks: INCBIN "maps/PokemonTower7F.blk"
 
+INCLUDE "data/maps/headers/PokemonTowerB1F.asm"
+INCLUDE "scripts/PokemonTowerB1F.asm"
+INCLUDE "data/maps/objects/PokemonTowerB1F.asm"
+PokemonTowerB1F_Blocks: INCBIN "maps/PokemonTowerB1F.blk"
+
 INCLUDE "data/maps/headers/CeladonMart1F.asm"
 INCLUDE "scripts/CeladonMart1F.asm"
 INCLUDE "data/maps/objects/CeladonMart1F.asm"

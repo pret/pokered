@@ -113,7 +113,7 @@ MapHeaderPointers::
 	dw ViridianSchoolHouseB1F_h ; UNUSED_MAP_6D
 	dw BillsGarden_h ; UNUSED_MAP_6E
 	dw SecretLab_h ; UNUSED_MAP_6F
-	dw LancesRoom_h ; UNUSED_MAP_70
+	dw PokemonTowerB1F_h ; UNUSED_MAP_70
 	dw LancesRoom_h
 	dw LancesRoom_h ; UNUSED_MAP_72
 	dw LancesRoom_h ; UNUSED_MAP_73

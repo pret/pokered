@@ -131,7 +131,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const VIRIDIAN_SCHOOL_HOUSE_B1F,      9,  6 ; $6D ; PureRGBnote: ADDED: New map
 	map_const BILLS_GARDEN,                  11, 10 ; $6E ; PureRGBnote: ADDED: New map
 	map_const SECRET_LAB,                     5, 22 ; $6F
-	map_const UNUSED_MAP_70,                  0,  0 ; $70
+	map_const POKEMON_TOWER_B1F,             10,  9 ; $70
 	map_const LANCES_ROOM,                   13, 13 ; $71
 	map_const UNUSED_MAP_72,                  0,  0 ; $72
 	map_const UNUSED_MAP_73,                  0,  0 ; $73

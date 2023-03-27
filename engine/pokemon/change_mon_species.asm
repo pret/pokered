@@ -1,8 +1,11 @@
 ; input: 
 ; [wcf91] = target pokemon species
-; wWhichPokemon = which party pokemon to change
+; [wWhichPokemon] = which party pokemon to change
 
 ChangePartyPokemonSpecies::
+	ld a, [wcf91]
+	ld [wd0b5], a
+	call GetMonHeader
 	ld hl, wPartySpecies
 	ld a, [wWhichPokemon]
 	ld d, 0
@@ -42,3 +45,52 @@ ChangePartyPokemonSpecies::
 	ld a, c
 	ld [hld], a
 	ret
+
+; [wcf91] = target pokemon to change default name to
+; [wWhichPokemon] = which pokemon in party will potentially be changed
+
+CheckMonNickNameDefault::
+	ld a, [wcf91]
+	cp POWERED_HAUNTER
+	ld a, GENGAR
+	jr z, .checkRename
+	cp GENGAR
+	ld a, POWERED_HAUNTER
+	jr z, .checkRename
+	ret
+.checkRename
+	ld [wd11e], a
+	call GetMonName
+	ld de, wcd6d
+	ld a, [wWhichPokemon]
+	ld hl, wPartyMonNicks
+	ld b, 0
+	ld c, NAME_LENGTH
+	call AddNTimes
+	push hl
+.loop
+	ld a, [hli]
+	ld b, a
+	ld a, [de]
+	inc de
+	cp b
+	jr nz, .noMatch
+	cp "@"
+	jr nz, .loop
+	; they're the same, so rename
+	ld a, [wcf91]
+	ld [wd11e], a
+	call GetMonName
+	ld de, wcd6d
+	pop hl
+.loop2
+	ld a, [de]
+	ld [hli], a
+	cp "@"
+	ret z
+	inc de
+	jr .loop2
+.noMatch
+	pop hl
+	ret
+
