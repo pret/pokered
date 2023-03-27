@@ -23,17 +23,17 @@ SetIshiharaTeam:
 	jr .loop
 
 IshiharaTeam:
-	db EXEGGUTOR, 90
+	db EXEGGUTOR, 99
 IF DEF(_DEBUG)
-	db MEW, 5
+	db MEW, 50
 ELSE
 	db MEW, 20
 ENDC
-	db JOLTEON, 56
-	db DUGTRIO, 56
-	db ARTICUNO, 57
+	db ARMORED_MEWTWO, 99
+	db DUGTRIO, 99
+	db ARTICUNO, 99
 IF DEF(_DEBUG)
-	db PIKACHU, 5
+	db PIKACHU, 15
 ENDC
 	db -1 ; end
 
