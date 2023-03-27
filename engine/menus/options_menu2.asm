@@ -204,17 +204,16 @@ CompareOptions2:
 	ld a, [hl]
 	and %11
 	cp c
-	push hl
-	jr nz, .changedColors
-	pop hl
-	bit BIT_BIKE_MUSIC, b
-	jr nz, .compareNonZero
-	bit BIT_BIKE_MUSIC, [hl]
-	jr nz, .tryPlayMusic ; reset music if we changed the bike music option
+	jp nz, RunDefaultPaletteCommand ; reset palettes according to the colors we just selected if colors changed
+	ld a, b
+	and 1 << BIT_BIKE_MUSIC
+	ld c, a
+	ld a, [hl]
+	and 1 << BIT_BIKE_MUSIC
+	cp c
+	jr nz, .tryPlayMusic
+	; TODO: music setting
 	ret
-.compareNonZero	
-	bit BIT_BIKE_MUSIC, [hl]
-	ret nz
 .tryPlayMusic
 	ld a, [wInGame]
 	and a
@@ -222,10 +221,7 @@ CompareOptions2:
 	ld a, [wWalkBikeSurfState]
 	cp 1
 	ret nz
-	jp PlayDefaultMusic ; reset music if we're on a bike and in-game
-.changedColors
-	pop hl
-	jp RunDefaultPaletteCommand ; refresh palettes if we changed the palette setting on GBC
+	jp PlayDefaultMusic ; reset music if we're on a bike and in-game ; TODO: what happens if in extra music area
 
 SetColorsCursorPosition:
 	ld hl, wOptions2
