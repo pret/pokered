@@ -292,7 +292,6 @@ BirdKeeperPic::    INCBIN "gfx/trainers/birdkeeper.pic"
 BlackbeltPic::     INCBIN "gfx/trainers/blackbelt.pic"
 Rival1Pic::        INCBIN "gfx/trainers/rival1.pic"
 ProfOakPic::       INCBIN "gfx/trainers/prof.oak.pic"
-ChiefPic::
 ScientistPic::     INCBIN "gfx/trainers/scientist.pic"
 GiovanniPic::      INCBIN "gfx/trainers/giovanni.pic"
 RocketPic::        INCBIN "gfx/trainers/rocket.pic"
@@ -582,9 +581,14 @@ GloomPicBack::         INCBIN "gfx/pokemon/back/gloomb.pic"
 VileplumePicBack::     INCBIN "gfx/pokemon/back/vileplumeb.pic"
 BellsproutPicBack::    INCBIN "gfx/pokemon/back/bellsproutb.pic"
 WeepinbellPicBack::    INCBIN "gfx/pokemon/back/weepinbellb.pic"
+ArmoredMewtwoBack::    INCBIN "gfx/pokemon/back/armored_mewtwob.pic"
 
 CharmeleonPicFront::   INCBIN "gfx/pokemon/front/charmeleon.pic"
 CharmeleonPicBackSW::  INCBIN "gfx/pokemon/back_sw/charmeleonb.pic"
+
+ArmoredMewtwoPicFront:: INCBIN "gfx/pokemon/front/armored_mewtwo.pic"
+ArmoredMewtwoPicBackSW:: INCBIN "gfx/pokemon/back_sw/armored_mewtwob.pic"
+ArmoredMewtwoPicFrontAlt:: INCBIN "gfx/pokemon/front_alt/armored_mewtwo.pic"
 
 ; used elsewhere
 KidPic::           INCBIN "gfx/unused_prototype_sprites/cool_kid.pic"
@@ -593,6 +597,7 @@ RangerPic::        INCBIN "gfx/unused_prototype_sprites/ranger.pic"
 RangerFPic::       INCBIN "gfx/trainers/rangerf.pic"
 RookiePic::        INCBIN "gfx/unused_prototype_sprites/rookie.pic"
 SoldierPic::       INCBIN "gfx/unused_prototype_sprites/soldier.pic"
+ChiefPic::         INCBIN "gfx/unused_prototype_sprites/chief.pic"
 
 SECTION "Type Icons", ROMX
 

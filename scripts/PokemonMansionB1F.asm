@@ -15,6 +15,8 @@ Mansion4Script_523cf:
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
+	CheckEvent EVENT_UNLOCKED_SECRET_LAB
+	call nz, UnlockLab
 	CheckEvent EVENT_MANSION_SWITCH_ON
 	jr nz, .asm_523ff
 	ld a, $e
@@ -45,6 +47,47 @@ Mansion4Script_523cf:
 	call Mansion2Script_5202f
 	ret
 
+UnlockLab::
+	ld a, $78
+	lb bc, 6, 2
+	ld [wNewTileBlockID], a
+	predef_jump ReplaceTileBlock
+
+CheckUnlockLab::
+	CheckEvent EVENT_UNLOCKED_SECRET_LAB
+	ret nz
+	ld a, [wSpritePlayerStateData1FacingDirection]
+	cp SPRITE_FACING_UP
+	ret nz
+	ld b, TOPSECRETKEY
+	predef GetIndexOfItemInBag
+	ld a, b
+	cp $FF ; not in bag
+	ret z
+	; remove TOPSECRETKEY from inventory
+	ld [wWhichPokemon], a ; load item index to be removed
+	ld hl, wNumBagItems
+	ld a, 1 ; one item
+	ld [wItemQuantity], a
+	call RemoveItemFromInventory
+	ld a, 12
+	ldh [hSpriteIndexOrTextID], a
+	call DisplayTextID
+	ld a, SFX_TELEPORT_ENTER_2
+	rst _PlaySound
+	ld a, SFX_59
+	call PlaySoundWaitForCurrent
+	ld c, 30
+	rst _DelayFrames
+	ld a, SFX_GO_INSIDE
+	call PlaySoundWaitForCurrent
+	SetEvent EVENT_UNLOCKED_SECRET_LAB
+	jp UnlockLab
+
+Mansion4Text8:
+	text_far _MansionB1FKeyHoleText
+	text_end
+
 Mansion4Script_Switches::
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
@@ -72,6 +115,7 @@ PokemonMansionB1F_TextPointers:
 	dw Mansion4Text7
 	dw PickUpItemText
 	dw Mansion3Text6
+	dw Mansion4Text8
 
 Mansion4TrainerHeaders:
 	def_trainers

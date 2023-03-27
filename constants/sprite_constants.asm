@@ -73,16 +73,17 @@
 	const SPRITE_PSYCHIC                 ; $44
 	const SPRITE_FIGHTING                ; $45
 	const SPRITE_DAD                     ; $46
+	const SPRITE_CHIEF                   ; $47
 DEF FIRST_STILL_SPRITE EQU const_value
-	const SPRITE_POKE_BALL               ; $47
-	const SPRITE_FOSSIL                  ; $48
-	const SPRITE_BOULDER                 ; $49
-	const SPRITE_PAPER                   ; $4a
-	const SPRITE_POKEDEX                 ; $4b
-	const SPRITE_CLIPBOARD               ; $4c
-	const SPRITE_SNORLAX                 ; $4d
-	const SPRITE_OLD_AMBER               ; $4e
-	const SPRITE_GAMBLER_ASLEEP          ; $4f
-	const SPRITE_MONSTER2_STILL          ; $50
-	const SPRITE_POKE_BALL2			 	 ; $51
+	const SPRITE_POKE_BALL               ; $48
+	const SPRITE_FOSSIL                  ; $49
+	const SPRITE_BOULDER                 ; $4a
+	const SPRITE_PAPER                   ; $4b
+	const SPRITE_POKEDEX                 ; $4v
+	const SPRITE_CLIPBOARD               ; $4d
+	const SPRITE_SNORLAX                 ; $4e
+	const SPRITE_OLD_AMBER               ; $4f
+	const SPRITE_GAMBLER_ASLEEP          ; $50
+	const SPRITE_MONSTER2_STILL          ; $51
+	const SPRITE_POKE_BALL2			 	 ; $52
 DEF NUM_SPRITES EQU const_value - 1

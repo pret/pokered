@@ -78,3 +78,11 @@ _Mansion4Text7::
 	line "curb its vicious"
 	cont "tendencies..."
 	done
+
+_MansionB1FKeyHoleText::
+	text "A keyhole?!"
+	para "The TOPSECRETKEY"
+	line "fits into it!"
+	para "<PLAYER> opened"
+	line "the lock!"
+	done

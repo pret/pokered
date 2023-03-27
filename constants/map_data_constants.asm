@@ -2,6 +2,7 @@
 ; height of north/south connections
 DEF MAP_BORDER EQU 3
 DEF DEFER_SHOWING_MAP EQU %10000
+DEF EXTRA_MUSIC_MAP   EQU %100000
 
 ; connection directions
 	const_def

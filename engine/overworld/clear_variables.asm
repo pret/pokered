@@ -17,4 +17,13 @@ ClearVariablesOnEnterMap::
 	ld hl, wWhichTrade
 	ld bc, wStandingOnWarpPadOrHole - wWhichTrade
 	call FillMemory
+	ld a, [wCurrentMapScriptFlags]
+	bit 3, a
+	jr nz, .clear
+	ld a, [wMapConnections]
+	bit 5, a ; bit that indicates the map has extra music
+	ret nz ; when going between maps that have extra music, we need to see the current music in case multiple maps have extra music and are connected
+.clear
+	xor a
+	ld [wReplacedMapMusic], a ; clear this variable in places where we don't have replaced map music
 	ret

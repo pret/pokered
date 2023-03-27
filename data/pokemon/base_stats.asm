@@ -150,7 +150,8 @@ INCLUDE "data/pokemon/base_stats/dratini.asm"
 INCLUDE "data/pokemon/base_stats/dragonair.asm"
 INCLUDE "data/pokemon/base_stats/dragonite.asm"
 INCLUDE "data/pokemon/base_stats/mewtwo.asm"
-	assert_table_length NUM_POKEMON - 2 ; discount Mew and missingno
+INCLUDE "data/pokemon/base_stats/mew.asm"
+	assert_table_length NUM_POKEMON - 1 ; discount missingno
 
 MissingnoBaseStats:: ; PureRGBnote: ADDED: give missingno a proper base stat header
 INCLUDE "data/pokemon/base_stats/missingno.asm"
@@ -165,5 +166,5 @@ INCLUDE "data/pokemon/base_stats/missingno.asm"
 ; slot Mew in there. What we did would be unthinkable nowadays!"
 ; http://iwataasks.nintendo.com/interviews/#/ds/pokemon/0/0
 
-MewBaseStats::
-INCLUDE "data/pokemon/base_stats/mew.asm"
+ArmoredMewtwoBaseStats::
+INCLUDE "data/pokemon/base_stats/armored_mewtwo.asm"

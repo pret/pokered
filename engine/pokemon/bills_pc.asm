@@ -206,9 +206,9 @@ BillsPCDeposit:
 	jp c, BillsPCMenu
 	call DisplayDepositWithdrawMenu
 	jp nc, BillsPCMenu
+	call WaitForSoundToFinish
 	ld a, [wcf91]
-	call GetCryData
-	call PlaySoundWaitForCurrent
+	call PlayCry
 	ld a, PARTY_TO_BOX
 	ld [wMoveMonType], a
 	call MoveMon
@@ -262,9 +262,9 @@ BillsPCWithdraw:
 	ld a, [wWhichPokemon]
 	ld hl, wBoxMonNicks
 	call GetPartyMonName
+	call WaitForSoundToFinish
 	ld a, [wcf91]
-	call GetCryData
-	call PlaySoundWaitForCurrent
+	call PlayCry
 	xor a ; BOX_TO_PARTY
 	ld [wMoveMonType], a
 	call MoveMon

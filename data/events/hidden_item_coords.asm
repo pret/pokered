@@ -43,7 +43,6 @@ HiddenItemCoords:
 	hidden_item ROUTE_23,                       8,  90
 	hidden_item VICTORY_ROAD_2F,                5,   2
 	hidden_item VICTORY_ROAD_2F,               26,   7
-	hidden_item UNUSED_MAP_6F,                 14,  11
 	hidden_item VIRIDIAN_CITY,                 14,   4
 	hidden_item ROUTE_11,                      48,   5
 	hidden_item ROUTE_12,                       2,  63
@@ -74,4 +73,5 @@ HiddenItemCoords:
 	hidden_item ROUTE_18,					    7,   9
 	hidden_item PEWTER_CITY,				   23,   2
 	hidden_item SAFARI_ZONE_NORTH,			    7,  13
+	hidden_item SECRET_LAB,                     9,  25
 	db -1 ; end

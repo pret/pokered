@@ -28,7 +28,6 @@ TrainerDataPointers:
 	dw BlackbeltData
 	dw Green1Data
 	dw ProfOakData
-	dw ChiefData
 	dw ScientistData
 	dw GiovanniData
 	dw RocketData
@@ -55,6 +54,7 @@ TrainerDataPointers:
 	dw RangerFData
 	dw RookieData
 	dw SoldierData
+	dw ChiefData
 	assert_table_length NUM_TRAINERS
 
 ; if first byte != $FF, then
@@ -550,7 +550,8 @@ ProfOakData:
 	db $FE, 70, MAGNETON, 71, TAUROS, 72, EXEGGUTOR, 73, ARCANINE, 74, CHARIZARD, 75 + 128, GYARADOS, 0
 
 ChiefData:
-; none
+	; Secret Lab
+	db $FE, 70 + 128, JOLTEON, 70 + 128, KABUTOPS, 70 + 128, ALAKAZAM, 72, GOLBAT, 73 + 128, TENTACRUEL, 0 
 
 ScientistData:
 ; Mansion 2F
@@ -853,3 +854,6 @@ SoldierData:
 ; Silph Co 1F after beating giovanni on the 11th floor
 	db 47, MAGMAR, KANGASKHAN, POLIWRATH, 0 ; NEWx
 	db 49, ARCANINE, VAPOREON, 0 ; NEWx
+; Secret Lab
+	db 65, RHYDON, VENOMOTH, 0 ; NEWx
+	db 65, ARCANINE, OMASTAR, 0 ; NEWx

@@ -2,15 +2,19 @@ PlayerStepOutFromDoor::
 	ld hl, wd730
 	res 1, [hl]
 	call IsPlayerStandingOnDoorTile
-	jr nc, ForceStepOutFromDoor.notStandingOnDoor
+	jr nc, ForceStepFromDoor.notStandingOnDoor
 ForceStepOutFromDoor::
+	ld d, D_DOWN
+ForceStepFromDoor::
+	ld a, d
+	push af
 	ld a, $fc
 	ld [wJoyIgnore], a
 	ld hl, wd736
 	set 1, [hl]
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
-	ld a, D_DOWN
+	pop af
 	ld [wSimulatedJoypadStatesEnd], a
 	xor a
 	ld [wSpritePlayerStateData1ImageIndex], a

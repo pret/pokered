@@ -7,8 +7,8 @@
 	db 25 ; catch rate
 	db 220 ; base exp
 
-	INCBIN "gfx/pokemon/front/mewtwo.pic", 0, 1 ; sprite dimensions
-	dw MewtwoPicFront, MewtwoPicBackSW
+	INCBIN "gfx/pokemon/front/armored_mewtwo.pic", 0, 1 ; sprite dimensions
+	dw ArmoredMewtwoPicFront, ArmoredMewtwoPicBackSW
 
 	db CONFUSION, DISABLE, SWIFT, PSYCHIC_M ; level 1 learnset
 	db GROWTH_SLOW ; growth rate
@@ -57,6 +57,6 @@
 	; end
 
 
-	dw BANK(MewtwoPicFront), BANK(MewtwoPicBack)
+	dw BANK(ArmoredMewtwoPicFront), BANK(ArmoredMewtwoBack)
 
-	dw MewtwoPicFrontAlt, MewtwoPicBack
+	dw ArmoredMewtwoPicFrontAlt, ArmoredMewtwoBack

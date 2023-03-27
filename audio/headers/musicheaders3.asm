@@ -72,11 +72,10 @@ Music_Dungeon2::
 
 ; Mt. Moon, Rock Tunnel, Victory Road
 Music_Dungeon3::
-	channel_count 4
+	channel_count 3
 	channel 1, Music_Dungeon3_Ch1
 	channel 2, Music_Dungeon3_Ch2
 	channel 3, Music_Dungeon3_Ch3
-	channel 4, Music_Dungeon3_Ch4
 
 Music_CinnabarMansion::
 	channel_count 4

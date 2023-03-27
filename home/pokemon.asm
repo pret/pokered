@@ -139,8 +139,14 @@ LoadFrontSpriteByMonIndex::
 
 PlayCry::
 ; Play monster a's cry.
+	push af
 	call GetCryData
 	rst _PlaySound
+	pop af
+	cp ARMORED_MEWTWO
+	jr nz, .wait
+	callfar RemapArmoredMewtwoCry
+.wait
 	jp WaitForSoundToFinish
 
 GetCryData::
@@ -397,8 +403,8 @@ GetMonHeader::
 	ld b, $77 ; size of Aerodactyl fossil sprite
 	cp FOSSIL_AERODACTYL ; Aerodactyl fossil
 	jr z, .specialID
-	cp MEW
-	jr z, .mew
+	cp ARMORED_MEWTWO
+	jr z, .armored_mewtwo
 	predef IndexToPokedex   ; convert pokemon ID in [wd11e] to pokedex number
 	ld a, [wd11e]
 	and a
@@ -419,8 +425,8 @@ GetMonHeader::
 	inc hl
 	ld [hl], d
 	jr .done
-.mew
-	ld hl, MewBaseStats 
+.armored_mewtwo
+	ld hl, ArmoredMewtwoBaseStats 
 .copyBaseStats
 	ld bc, BASE_DATA_SIZE
 	ld de, wMonHeader

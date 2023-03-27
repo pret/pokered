@@ -18,8 +18,11 @@ PlayBattleMusic::
 	jr z, .finalBattle
 	cp OPP_PROF_OAK
 	jr z, .finalBattle ; PureRGBnote: ADDED: professor oak battle uses final battle music
+	cp OPP_CHIEF
+	jr z, .gymLeader
 	cp OPP_LANCE
 	jr nz, .normalTrainerBattle
+.gymLeader
 	ld a, MUSIC_GYM_LEADER_BATTLE ; lance also plays gym leader theme
 	jr .playSong
 .normalTrainerBattle

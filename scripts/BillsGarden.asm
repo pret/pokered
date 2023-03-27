@@ -506,22 +506,76 @@ BillsGardenOakText5:
 	text_end
 
 
+; input c = which pokemon to find
+; returns flag c if found
+
+FindPokemonInParty:
+	ld b, PARTY_LENGTH
+	ld hl, wPartySpecies
+.loop
+	ld a, [hli]
+	cp c
+	jr z, .found
+	dec b
+	jr nz, .loop
+	and a
+	ret
+.found
+	scf
+	ret
+
 ; Mr Fuji and Giovanni
 
 BillsGardenMrFujiGiovanniOverheardText:
 	text_far _BillsGardenMrFujiGiovanniOverheardText
 	text_end
 BillsGardenMrFujiText:
+	text_asm
+	ld c, MEWTWO
+	call FindPokemonInParty
+	ld hl, BillsGardenMrFujiMewtwoText
+	jr c, .done
+	ld c, ARMORED_MEWTWO
+	call FindPokemonInParty
+	ld hl, BillsGardenMrFujiArmoredMewtwoText
+	jr c, .done
+	ld hl, BillsGardenMrFujiText1
+.done
+	rst _PrintText
+	rst TextScriptEnd
+BillsGardenMrFujiText1:
 	text_far _BillsGardenMrFujiText
-	text_end
-BillsGardenGiovanniText:
-	text_far _BillsGardenGiovanniText
 	text_end
 BillsGardenMrFujiMewtwoText:
 	text_far _BillsGardenMrFujiMewtwoText
 	text_end
+BillsGardenMrFujiArmoredMewtwoText:
+	text_far _BillsGardenMrFujiArmoredMewtwoText
+	text_end
+
+BillsGardenGiovanniText:
+	text_asm
+	ld c, MEWTWO
+	call FindPokemonInParty
+	ld hl, BillsGardenGiovanniMewtwoText
+	jr c, .done
+	ld c, ARMORED_MEWTWO
+	call FindPokemonInParty
+	ld hl, BillsGardenGiovanniArmoredMewtwoText
+	jr c, .done
+	ld hl, BillsGardenGiovanniText1
+.done
+	rst _PrintText
+	rst TextScriptEnd
+
+BillsGardenGiovanniText1:
+	text_far _BillsGardenGiovanniText
+	text_end
 BillsGardenGiovanniMewtwoText:
 	text_far _BillsGardenGiovanniMewtwoText
+	text_end
+BillsGardenGiovanniArmoredMewtwoText:
+	text_far _BillsGardenGiovanniArmoredMewtwoText
 	text_end
 
 ; Dad and Mom

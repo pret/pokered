@@ -87,6 +87,7 @@ ErikaSprite::          INCBIN "gfx/sprites/erika.2bpp"
 SabrinaSprite::          INCBIN "gfx/sprites/sabrina.2bpp"
 BlaineSprite::          INCBIN "gfx/sprites/blaine.2bpp"
 DadSprite::			    INCBIN "gfx/sprites/dad.2bpp"
+ChiefSprite::			INCBIN "gfx/unused_prototype_sprites/chief_icons.2bpp"
 
 VoltorbSpriteFrame2::   INCBIN "gfx/sprites/voltorb2.2bpp"
 PokeballSprite2::		INCBIN "gfx/sprites/poke_ball.2bpp"

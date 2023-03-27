@@ -353,6 +353,7 @@ INCLUDE "audio/sfx/cry20_3.asm"
 INCLUDE "audio/sfx/cry21_3.asm"
 INCLUDE "audio/sfx/cry22_3.asm"
 INCLUDE "audio/sfx/fall_down_hole.asm"
+INCLUDE "audio/sfx/secret_lab_notes.asm"
 
 
 SECTION "Audio Engine 1", ROMX
@@ -365,7 +366,6 @@ INCLUDE "audio/alternate_tempo.asm"
 SECTION "Low Health Alarm (Audio Engine 2)", ROMX
 
 INCLUDE "audio/low_health_alarm.asm"
-INCLUDE "audio/fade_audio.asm"
 
 
 SECTION "Audio Engine 2", ROMX
@@ -378,6 +378,7 @@ SECTION "Audio Engine 3", ROMX
 
 INCLUDE "audio/pokedex_rating_sfx.asm"
 INCLUDE "audio/engine_3.asm"
+INCLUDE "audio/play_armored_mewtwo_cry3.asm"
 
 
 SECTION "Music 1", ROMX
@@ -450,3 +451,7 @@ INCLUDE "audio/music/surfing.asm"
 INCLUDE "audio/music/jigglypuffsong.asm"
 INCLUDE "audio/music/halloffame.asm"
 INCLUDE "audio/music/credits.asm"
+INCLUDE "audio/music/secretlab1.asm"
+INCLUDE "audio/music/secretlab2.asm"
+INCLUDE "audio/music/giovanni.asm"
+
