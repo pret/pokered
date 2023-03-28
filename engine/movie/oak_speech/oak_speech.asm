@@ -60,6 +60,7 @@ PrepareOakSpeech:
 	ld bc, NAME_LENGTH
 	jp CopyData
 
+; PureRGBnote: CHANGED: this subroutine was modified to make debug mode (wd732 bit 1 = non-zero) skip through it quickly to start debugging faster
 OakSpeech:
 	ld a, SFX_STOP_ALL_MUSIC
 	rst _PlaySound
@@ -179,7 +180,7 @@ ENDC
 IF DEF(_DEBUG)
 	ld a, [wd732]
 	bit 1, a
-	jr .skipDelay
+	jr nz, .skipDelay
 ENDC
 	ld c, 20
 	rst _DelayFrames
