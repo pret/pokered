@@ -66,12 +66,8 @@ The fourth page contains Sprite-related options.
     - OG+: Use the original icons with some new ones. Some are based on beta sprites, some are completely newly designed sprites with the intention of being similar to the non-specific icon design of the original game, and ONE based on Gen 2's menu sprites (jellyfish sprite). This also will give unique sprites to Brock, Misty, Sabrina, and Blaine. They are all sprites that were designed from scratch to match the game's original trainer sprites, EXCEPT blaine's sprite, which is borrowed from Gen 2.
 
  ![Menu Icons 1](/gfx/icons/menusprites1.png?raw=true) ![Menu Icons 2](/gfx/icons/menusprites2.png?raw=true)
-    ![Brock](/gfx/sprites/brock.png?raw=true) ![Misty](/gfx/sprites/misty.png?raw=true) ![Sabrina](/gfx/sprites/sabrina.png?raw=true) ![Blaine](/gfx/sprites/blaine.png?raw=true)
+    ![Brock](/gfx/sprites/brock.png?raw=true) ![Misty](/gfx/sprites/misty.png?raw=true) ![LtSurge](/gfx/sprites/lt_surge.png?raw=true) ![Erika](/gfx/sprites/erika.png?raw=true) ![Sabrina](/gfx/sprites/sabrina.png?raw=true) ![Blaine](/gfx/sprites/blaine.png?raw=true)
   - The third to sixth options all control front sprites of specific pokemon that have multiple nice front sprites from the original games to choose from. You can choose which front sprites you like the most for these pokemon.
-
-![Front Sprite 1 Bulbasaur](/gfx/pokemon/front/bulbasaur.png?raw=true) ![Front Sprite 2 Bulbasaur](/gfx/pokemon/front_alt/bulbasaur.png?raw=true) ![Front Sprite 1 Squirtle](/gfx/pokemon/front/squirtle.png?raw=true) ![Front Sprite 2 Squirtle](/gfx/pokemon/front_alt/squirtle.png?raw=true) ![Front Sprite 1 Blastoise](/gfx/pokemon/front/blastoise.png?raw=true) ![Front Sprite 2 Blastoise](/gfx/pokemon/front_alt/blastoise.png?raw=true) ![Front Sprite 1 Pidgeot](/gfx/pokemon/front/pidgeot.png?raw=true) ![Front Sprite 2 Pidgeot](/gfx/pokemon/front_alt/pidgeot.png?raw=true)
-
-The fifth, sixth, and seventh pages contain additional pokemon whose front sprites can be customized. 
 
 ![bulbasaur front](/gfx/pokemon/front/bulbasaur.png?raw=true)
 ![bulbasaur alt front](/gfx/pokemon/front_alt/bulbasaur.png?raw=true)
