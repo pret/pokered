@@ -26,6 +26,7 @@ This is a purist's enhancement of Pokemon Red/Blue/Green. The goal is to enhance
   - Switchable color palettes (Choose between original colors, Super Gameboy Colors, or Pokemon Yellow Colors in-game whenever you like! Works on GBC and Super Gameboy. Yes, this romhack has GBC support!)
   - Optional Spaceworld 1997 Back Sprites
   - Optional enhanced menu sprites/overworld icons
+  - Optional enhanced music (Add in cut content music like Giovanni's theme) 
   - Optional stereo panned audio (Similar to the Earphone1 option in Pokemon Yellow)
   - Optional alternate color palette pokemon based on region (catch differently colored pokemon depending on where they appear in Kanto)
   - Option to turn off the bicycle song (plays in cycling road still)
