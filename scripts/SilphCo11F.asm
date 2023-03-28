@@ -191,6 +191,7 @@ SilphCo11Script0:
 	ld hl, CoordsData_62211
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
+	callfar PlayGiovanniMusic
 	ld a, [wCoordIndex]
 	ld [wcf0d], a
 	xor a
@@ -247,6 +248,7 @@ SilphCo11Script5:
 	ld hl, wCurrentMapScriptFlags
 	res 3, [hl]
 	call GBFadeInFromWhite ; since giovanni instantly talks to us after battle we need to fade back in here
+	callfar PlayGiovanniMusic
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $6
@@ -258,6 +260,7 @@ SilphCo11Script5:
 	call Delay3
 	call GBFadeInFromBlack
 	SetEvent EVENT_BEAT_SILPH_CO_GIOVANNI
+	callfar PlayDefaultMusicIfMusicBitSet
 	xor a
 	ld [wJoyIgnore], a
 	jp SilphCo11Script_621c8

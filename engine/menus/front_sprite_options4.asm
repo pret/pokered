@@ -41,7 +41,7 @@ FrontSpriteOptions4Data:
 
 FrontSpriteOptions4Text:
 	db   "SPRITES→FRONT 4"
-	next " EXEGGUTOR:  RB RG"
+	next " EXEGGUTOR:  Y  RB"
 	next " KOFFING:    RG RB"
 	next " STARMIE:    RB RG"
 	next " PINSIR:     RB RG"

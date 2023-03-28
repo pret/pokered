@@ -10,6 +10,9 @@ SecretLab_Script:
 SecretLabPlayMusic::
 	CheckEvent EVENT_OPENED_SECRET_LAB_BARRICADE
 	jr nz, .enhancedMusic
+	ld a, [wReplacedMapMusic]
+	cp MUSIC_SECRET_LAB1 ; are we already playing the dungeon's music? (can happen when changing the option in the option menu)
+	ret z ; this track always plays regardless of option when in this map's current state, so don't do anything
 	ld a, MUSIC_SECRET_LAB1
 	ld [wReplacedMapMusic], a
 	ld c, BANK(Music_Dungeon2)
@@ -25,12 +28,18 @@ SecretLabPlayMusic::
 	ld de, Music_SecretLab_Ch4
 	jpfar Audio3_RemapChannel4
 .enhancedMusic
+	ld a, d
+	and a
+	jr nz, PlayEnhancedSecretLabMusic ; d != 0 -> always play music
 	ld a, [wReplacedMapMusic]
 	cp MUSIC_SECRET_LAB2 ; are we already playing the dungeon's music? (can happen when going through the door)
 	ret z
 	; fall through
 
-PlayEnhancedMusic:
+PlayEnhancedSecretLabMusic:
+	ld a, [wOptions2]
+	bit BIT_MUSIC, a
+	jr z, .ogMusic
 	ld a, MUSIC_SECRET_LAB2
 	ld [wReplacedMapMusic], a
 	ld c, BANK(Music_Dungeon2)
@@ -44,6 +53,13 @@ PlayEnhancedMusic:
 	callfar Audio3_RemapChannel3
 	ld de, Music_SecretLab2_Ch4
 	jpfar Audio3_RemapChannel4
+.ogMusic
+	xor a
+	ld [wReplacedMapMusic], a
+	ld a, MUSIC_CINNABAR_MANSION
+	ld c, BANK(Music_CinnabarMansion)
+	jp PlayMusic
+
 
 ReplaceDoor:
 	ld hl, wCurrentMapScriptFlags
@@ -208,6 +224,10 @@ CheckOpponentLeaves:
 	ld a, [wIsInBattle]
 	cp $FF
 	ret z
+	ld hl, wd72d
+	res 7, [hl]
+	ld hl, wFlags_0xcd60
+	res 0, [hl]
 	CheckEvent EVENT_BEAT_SECRET_LAB_SOLDIER_0
 	ld a, 1
 	jr z, .beatSoldier1
@@ -468,7 +488,7 @@ CheckWalkingToDoor:
 	call OpenBarricadeDoor
 	ld c, 60
 	rst _DelayFrames
-	jp PlayEnhancedMusic
+	jp PlayEnhancedSecretLabMusic
 
 SecretLabShakeScreen:
 	ldh a, [hSCX]
@@ -597,6 +617,8 @@ SecretLab_EngageTrainerText:
 .startTrainer
 	ld [wSpriteIndex], a
 	call TalkToTrainer
+	ld hl, wFlags_D733
+	res 4, [hl]
 	; end text
 	SetEvent EVENT_SECRET_LAB_BATTLE_COMPLETED
 	rst TextScriptEnd
@@ -962,7 +984,7 @@ SecretLabMewtwoTransformation:
 	rst _PlaySound
 	ld c, 20
 	rst _DelayFrames
-	call PlayEnhancedMusic
+	call PlayEnhancedSecretLabMusic
 	rst TextScriptEnd
 
 SecretLabMewtwoTransformText:

@@ -357,6 +357,14 @@ PlayTrainerMusic::
 	ret z
 	cp OPP_RIVAL3
 	ret z
+	ld b, a
+	ld a, [wOptions2]
+	bit BIT_MUSIC, a
+	ld a, b
+	jr z, .skipGiovanniCheck
+	cp OPP_GIOVANNI
+	ret z
+.skipGiovanniCheck
 	ld a, [wGymLeaderNo]
 	and a
 	ret nz

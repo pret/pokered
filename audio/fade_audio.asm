@@ -41,13 +41,21 @@ FadeOutAudio::
 	call StopAllMusic ; shinpokerednote: MOVED: a common function to do what the 3 lines that used to be here did was created
 	ld a, [wMapConnections]
 	bit 5, a ; does the map have extra music
-	jr nz, .tryExtraMusic
+	jr z, .noExtraMusic
+	ld d, 0
+	jr PlayExtraMusic
+.noExtraMusic
 	ld a, [wAudioSavedROMBank]
 	ld [wAudioROMBank], a
 	ld a, b
 	ld [wNewSoundID], a
 	jp PlaySound
-.tryExtraMusic
+
+TryPlayExtraMusic:
+	ld a, [wMapConnections]
+	bit 5, a ; does the map have extra music
+	ret z
+PlayExtraMusic:
 	ld a, [wCurMap]
 	cp SECRET_LAB
 	jr z, .secretlab

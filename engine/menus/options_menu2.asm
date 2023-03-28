@@ -1,6 +1,6 @@
 ; PureRGBnote: ADDED: one of the new pages in the options menu. This one's for main gameplay features.
 
-DEF OPTIONS_PAGE_2_COUNT EQU 4 ; number of options on this page
+DEF OPTIONS_PAGE_2_COUNT EQU 5 ; number of options on this page
 DEF OPTIONS_PAGE_2_NUMBER EQU 2 ; must be 1 digit
 
 DEF OPTION_COLORS_LEFT_XPOS EQU 9
@@ -8,12 +8,15 @@ DEF OPTION_COLORS_MIDDLE_XPOS EQU 12
 DEF OPTION_COLORS_RIGHT_XPOS EQU 17
 DEF OPTION_ALT_PALETTES_LEFT_XPOS EQU 4
 DEF OPTION_ALT_PALETTES_RIGHT_XPOS EQU 11
+DEF OPTION_MUSIC_LEFT_XPOS EQU 12
+DEF OPTION_MUSIC_RIGHT_XPOS EQU 15
 DEF OPTION_AUDIO_PAN_LEFT_XPOS EQU 12
 DEF OPTION_AUDIO_PAN_RIGHT_XPOS EQU 16
 DEF OPTION_BIKE_SONG_LEFT_XPOS EQU 12
 DEF OPTION_BIKE_SONG_RIGHT_XPOS EQU 15
 
 DEF OPTION_ALT_PALETTES_BIT EQU BIT_ALT_PKMN_PALETTES
+DEF OPTION_MUSIC_BIT EQU BIT_MUSIC
 DEF OPTION_AUDIO_PAN_BIT EQU BIT_AUDIO_PAN
 DEF OPTION_BIKE_SONG_BIT EQU BIT_BIKE_MUSIC
 
@@ -39,6 +42,7 @@ Options2YCoordVariableOffsetList:
 	db 7, 1
 	db 9, 2
 	db 11, 3
+	db 13, 4
 	db PAGE_CONTROLS_Y_COORD, MAX_OPTIONS_PER_PAGE
 
 OptionsMenu2Data:
@@ -50,12 +54,14 @@ OptionsMenu2Data:
 Options2SetCursorPositionActions:
 	dw SetColorsCursorPosition
 	dw SetAltPalettesCursorPosition
+	dw SetMusicCursorPosition
 	dw SetAudioPanCursorPosition
 	dw SetBikeSongCursorPosition
 
 Options2LeftRightFuncs:
 	dw CursorInColors
 	dw CursorInAltPalettes
+	dw CursorInMusic
 	dw CursorInAudioPan
 	dw CursorInBikeSong
 	dw CursorCancelRow
@@ -78,6 +84,7 @@ Options2Text:
 	next " COLORS: OG SGB  Y"
 	next " ALT PKMN COLORS:"
 	next "    OFF    ON"
+	next " MUSIC:     OG OG+"
 	next " AUDIO PAN: OFF ON"
 	next " BIKE SONG: ON OFF@"
 
@@ -111,16 +118,22 @@ CursorInAltPalettes:
 	ld [wOptions2CursorX], a
 	jp EraseOldMenuCursor
 
-CursorInAudioPan:
-	ld a, [wOptions3CursorX] ; battle animation cursor X coordinate
-	xor %11100 ; toggle between 12 and 16
+CursorInMusic:
+	ld a, [wOptions3CursorX] ; music X coordinate
+	xor %11 ; toggle between 12 and 15
 	ld [wOptions3CursorX], a
 	jp EraseOldMenuCursor
 
-CursorInBikeSong:
+CursorInAudioPan:
 	ld a, [wOptions4CursorX] ; battle animation cursor X coordinate
-	xor %11 ; toggle between 12 and 15
+	xor %11100 ; toggle between 12 and 16
 	ld [wOptions4CursorX], a
+	jp EraseOldMenuCursor
+
+CursorInBikeSong:
+	ld a, [wOptions5CursorX] ; battle animation cursor X coordinate
+	xor %11 ; toggle between 12 and 15
+	ld [wOptions5CursorX], a
 	jp EraseOldMenuCursor
 
 GetTwoBitXPosition:
@@ -160,11 +173,15 @@ SetOptions2FromCursorPositions:
 	ld c, OPTION_ALT_PALETTES_RIGHT_XPOS
 	ld b, BIT_ALT_PKMN_PALETTES
 	call SetSingleBitOption
-	ld a, [wOptions3CursorX] ; audio pan cursor X coord
+	ld a, [wOptions3CursorX] ; music cursor X coord
+	ld c, OPTION_MUSIC_RIGHT_XPOS
+	ld b, OPTION_MUSIC_BIT
+	call SetSingleBitOption
+	ld a, [wOptions4CursorX] ; audio pan cursor X coord
 	ld c, OPTION_AUDIO_PAN_RIGHT_XPOS
 	ld b, OPTION_AUDIO_PAN_BIT
 	call SetSingleBitOption
-	ld a, [wOptions4CursorX]
+	ld a, [wOptions5CursorX]
 	ld c, OPTION_BIKE_SONG_RIGHT_XPOS
 	ld b, OPTION_BIKE_SONG_BIT
 	call SetSingleBitOption
@@ -205,23 +222,32 @@ CompareOptions2:
 	and %11
 	cp c
 	jp nz, RunDefaultPaletteCommand ; reset palettes according to the colors we just selected if colors changed
+	ld a, [wInGame]
+	and a
+	ret z ; don't need to do anything else if we're in the title screen menus
 	ld a, b
 	and 1 << BIT_BIKE_MUSIC
 	ld c, a
 	ld a, [hl]
 	and 1 << BIT_BIKE_MUSIC
 	cp c
-	jr nz, .tryPlayMusic
-	; TODO: music setting
+	jr nz, .tryPlayBikeMusic
+	ld a, b
+	and 1 << BIT_MUSIC
+	ld c, a
+	ld a, [hl]
+	and 1 << BIT_MUSIC
+	cp c
+	jr nz, .tryChangeMusic
 	ret
-.tryPlayMusic
-	ld a, [wInGame]
-	and a
-	ret z
+.tryPlayBikeMusic
 	ld a, [wWalkBikeSurfState]
 	cp 1
 	ret nz
 	jp PlayDefaultMusic ; reset music if we're on a bike and in-game ; TODO: what happens if in extra music area
+.tryChangeMusic
+	ld d, 1
+	jpfar TryPlayExtraMusic
 
 SetColorsCursorPosition:
 	ld hl, wOptions2
@@ -233,7 +259,14 @@ SetAltPalettesCursorPosition:
 	ld hl, wOptions2
 	ld a, OPTION_ALT_PALETTES_RIGHT_XPOS
 	ld d, OPTION_ALT_PALETTES_LEFT_XPOS
-	ld c, BIT_ALT_PKMN_PALETTES
+	ld c, OPTION_ALT_PALETTES_BIT
+	jp SetSingleBitOptionCursorPosition
+
+SetMusicCursorPosition:
+	ld hl, wOptions2
+	ld a, OPTION_MUSIC_RIGHT_XPOS
+	ld d, OPTION_MUSIC_LEFT_XPOS
+	ld c, OPTION_MUSIC_BIT
 	jp SetSingleBitOptionCursorPosition
 
 SetAudioPanCursorPosition:

@@ -16,6 +16,8 @@ PrepareOakSpeech:
 	push af
 	ld a, [wOptions2]
 	push af
+	ld a, [wOptions3]
+	push af
 	ld hl, wPlayerName
 	ld bc, wBoxDataEnd - wPlayerName
 	xor a
@@ -24,6 +26,8 @@ PrepareOakSpeech:
 	ld bc, wSpriteDataEnd - wSpriteDataStart
 	xor a
 	call FillMemory
+	pop af
+	ld [wOptions3], a
 	pop af
 	ld [wOptions2], a
 	pop af
@@ -36,6 +40,7 @@ PrepareOakSpeech:
 	ld [wSpriteOptions], a
 ;;;;;;;;;;
 	pop af
+	res 5, a ; prevent forced bike state on new game
 	ld [wd732], a
 	pop af
 	ld [wOptions], a

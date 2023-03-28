@@ -59,8 +59,11 @@ _GiovanniEarthBadgeInfoText::
 	para "It is my gift for"
 	line "your #MON"
 	cont "LEAGUE challenge!"
-	done
 
+	para "Take this TM"
+	line "as well!"
+	done
+	
 _ReceivedTM27Text::
 	text "<PLAYER> received"
 	line "@"

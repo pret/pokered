@@ -40,7 +40,7 @@ DEF PALETTES_YELLOW     EQU %11 ; 3
 	const BIT_BIKE_MUSIC        ; 4
 	const BIT_EXP_BAR           ; 5
 	const BIT_NPC_STAT_EXP		; 6
-	; unused bit 7
+	const BIT_MUSIC             ; 7
 
 ; wOptions3
 	const_def

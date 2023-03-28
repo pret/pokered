@@ -8,6 +8,28 @@ RocketHideoutB4F_Script:
 	ld [wRocketHideoutB4FCurScript], a
 	ret
 
+PlayGiovanniMusic:
+	ld a, [wOptions2]
+	bit BIT_MUSIC, a ; is the MUSIC option set to OG+?
+	ret z ; if not, don't play anything new
+	ld c, BANK(Music_Dungeon2)
+	ld a, MUSIC_DUNGEON2
+	call PlayMusic ; start playing something else with 4 channels in bank 3
+	ld de, Music_Giovanni_Ch1
+	callfar Audio3_RemapChannel1
+	ld de, Music_Giovanni_Ch2
+	callfar Audio3_RemapChannel2
+	ld de, Music_Giovanni_Ch3
+	callfar Audio3_RemapChannel3
+	ld de, Music_Giovanni_Ch4
+	jpfar Audio3_RemapChannel4
+
+PlayDefaultMusicIfMusicBitSet:
+	ld a, [wOptions2]
+	bit BIT_MUSIC, a
+	ret z
+	jp PlayDefaultMusic
+
 RocketHideout4Script_45473:
 	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
@@ -52,6 +74,7 @@ RocketHideout4Script3:
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, RocketHideout4Script_454a3
+	call PlayGiovanniMusic
 	call UpdateSprites
 	ld a, $f0
 	ld [wJoyIgnore], a
@@ -75,7 +98,8 @@ RocketHideout4Script3:
 	ld a, $0
 	ld [wRocketHideoutB4FCurScript], a
 	ld [wCurMapScript], a
-	ret
+	jp PlayDefaultMusicIfMusicBitSet
+
 
 RocketHideoutB4F_TextPointers:
 	dw RocketHideout4Text1
@@ -101,6 +125,7 @@ RocketHideout4TrainerHeader2:
 
 RocketHideout4Text1:
 	text_asm
+	call PlayGiovanniMusic
 	CheckEvent EVENT_BEAT_ROCKET_HIDEOUT_GIOVANNI
 	jp nz, .asm_545571
 	ld hl, RocketHideout4Text_4557a

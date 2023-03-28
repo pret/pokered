@@ -126,6 +126,7 @@ ViridianGymGiovanniPostBattle:
 	ld [wJoyIgnore], a
 ; fallthrough
 ViridianGymReceiveTM27:
+	callfar PlayGiovanniMusic
 	ld a, $c
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
@@ -155,6 +156,7 @@ ViridianGymReceiveTM27:
 	ld [wMissableObjectIndex], a
 	predef ShowObject
 	SetEvents EVENT_2ND_ROUTE22_RIVAL_BATTLE, EVENT_ROUTE22_RIVAL_WANTS_BATTLE
+	callfar PlayDefaultMusicIfMusicBitSet
 	jp ViridianGymResetScripts
 
 ViridianGym_TextPointers:
@@ -195,6 +197,7 @@ ViridianGymTrainerHeader7:
 
 GiovanniText:
 	text_asm
+	callfar PlayGiovanniMusic
 	CheckEvent EVENT_BEAT_VIRIDIAN_GYM_GIOVANNI
 	jr z, .beforeBeat
 	CheckEventReuseA EVENT_GOT_TM27
@@ -214,6 +217,7 @@ GiovanniText:
 	call UpdateSprites
 	call Delay3
 	call GBFadeInFromBlack
+	call PlayDefaultMusicIfMusicBitSet
 	jr .done
 .beforeBeat
 	ld hl, GiovanniPreBattleText

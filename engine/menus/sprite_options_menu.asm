@@ -117,6 +117,9 @@ SetSpriteOptionsFromCursorPositions:
 	and %1000
 	cp b
 	ret z ; if we didn't change "menu icons sprites" bit don't do anything
+	ld a, [wInGame]
+	and a
+	ret z ; if we're not in game yet, don't do anything else
 	call GBPalWhiteOut
 	callfar LoopRemapSpritePictureIDs ; if we did, modify the sprites in wram to have the correct IDs
 	call ReloadMapSpriteTilePatterns ; reload their tiles so they have the right sprites
