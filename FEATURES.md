@@ -255,7 +255,8 @@ The fourth page contains Sprite-related options.
 
 - You can phone home, professor oak, even your rival from the telephones in Celadon City's Department Store. You can choose how the conversations play out, and they even can have some subsequent small events based on what you choose when you go back to PALLET TOWN!
 
-![phone tree](/screenshots/phone.png?raw=true)
+![phone tree 1](/screenshots/phone1.png?raw=true)
+![phone tree 2](/screenshots/phone2.png?raw=true)
 
 - After saving Mr.Fuji in the Pokemon Tower, you can get into the basement of the Tower. You'll find a Channeler clothed in black who just loves curses, hexes, and all that dark stuff. If you show them a GENGAR, they'll curse it to look like a HAUNTER again. Its stats won't be affected though. It'll still have GENGAR's stats. Such a powerful curse!
 
