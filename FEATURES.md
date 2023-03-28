@@ -392,7 +392,7 @@ The fourth page contains Sprite-related options.
   - MIMIC - you can still choose the exact move to mimic, but now it will use that move the same turn you mimic it
   - BONEMERANG - 55 base power, hits twice, 90 accuracy, 30% chance of lowering opponent's speed.
   - SUPER FANG - now deals a set 2/3 the opponent's HP instead of 1/2. Useful for catching rare pokemon!
-  - TELEPORT - actually does something in battle now! The user will switch out, and heal 25% health by doing so. Still works the same as it used to when wild pokemon use it.
+  - TELEPORT - actually does something in trainer battles now! The user will switch out, and heal 25% health by doing so. Still works the same as it used to when wild pokemon use it.
 - There are many more tweaks to moves. Check your MOVEDEX in game to see what a move you just saw's effects were, or see the wiki for a link to the complete move list. Be sure to try almost every move and don't write them off. Except for splash. It still does nothing as usual.
 
 ## Pokemon type changes
