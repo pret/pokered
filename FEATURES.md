@@ -148,6 +148,7 @@ The fourth page contains Sprite-related options.
 
 ![Box change](/screenshots/change_box_from_start_menu.png?raw=true)
 - When viewing Bills PC, it'll always tell you how many pokemon are in the current box
+- The responsiveness of Bills PC and Player's PC was improved.
 - The game will tell you how many slots are left in your box after catching a pokemon, and when the box is full.
 - When scrolling over TMs/HMs in menus, a textbox will display the move they teach automatically! Hooray!
 
@@ -170,6 +171,7 @@ The fourth page contains Sprite-related options.
 - The game now always reports the correct "Super Effective!" "Not Very Effective" etc. message when battling. No more tricks!
 - HMs are deletable. Try not to delete them in a place where it will prevent you from leaving.
 - When teaching a pokemon a move and selecting a move to forget, you must press START to select the move to forget instead of A. Now you won't accidentally select the wrong one disastrously!
+- When releasing a pokemon, you must press START to confirm releasing it. Helps avoid accidentally releasing pokemon.
 - Spin tiles in rocket hideout and viridian gym move you much faster
 - "Use another repel" menu implemented.
 - New info in the pokedex: The pokedex displays the typing of pokemon you have seen, and typing/base stats of pokemon you have caught
@@ -187,8 +189,10 @@ The fourth page contains Sprite-related options.
 - Slot machines won't cheat you out of lining up symbols based on RNG anymore.
 - Slot machine payout amounts increased.
 - Slot machine payout speed increased.
+- After using Surf, it will be remembered until the next map load. You can just walk onto water and start surfing without doing anything or even having to press A.
 - Strength can be used on boulders by pressing A on them while you have a pokemon with strength in your party.
 - Seafoam Islands and Victory Road will remember that you used Strength between going up and down floors so you don't have to re-enable it.
+- Seafoam Islands, Cerulean Cave, and the Safari Zone will remember you used Surf between going between map areas so you don't have to repeatedly use it.
 - Fuchsia City's layout has been modified very slightly to be less annoying to navigate.
 - The Daycare has a PC in it.
 - Route 23 has some grass just after the north exit of Victory Road to allow reaching those encounters more easily late game.
@@ -299,6 +303,7 @@ The fourth page contains Sprite-related options.
 - Spaceworld backsprites were tweaked to improve them a bit
 - A couple of front sprites were tweaked very slightly to improve their appearance
 - Some pokemon had their default color palette adjusted (example: Voltorb and Electrode are red instead of the original yellow. Don't ask me why they were yellow in the first place)
+- You can see "the side of the building" visually from Celadon Department Store roof and Celadon Mansion roof.
 
 ## Bugfixes
 - High Jump Kick / Jump Kick crash damage on missing does more damage instead of 1 damage always now. (1/4 the damage of what it would have done to the opponent)
@@ -322,6 +327,9 @@ The fourth page contains Sprite-related options.
 - Blacking out in the Safari Zone won't glitch the game out
 - Trying to switch to the current pokemon or a fainted one won't trigger a small visual glitch
 - A small collision detection bug in cerulean cave was fixed
+- Lagginess caused by tile block replacements when loading a map was reduced greatly
+- Sound effects during text will play properly now when you have instant text setting turned on
+- You won't occasionally see a tile block being replaced visually on loading a map anymore
 
 ## Tweaks
 - Trainers in general have a bit less type-specific parties and more varied pokemon. 
@@ -384,6 +392,7 @@ The fourth page contains Sprite-related options.
   - MIMIC - you can still choose the exact move to mimic, but now it will use that move the same turn you mimic it
   - BONEMERANG - 55 base power, hits twice, 90 accuracy, 30% chance of lowering opponent's speed.
   - SUPER FANG - now deals a set 2/3 the opponent's HP instead of 1/2. Useful for catching rare pokemon!
+  - TELEPORT - actually does something in trainer battles now! The user will switch out, and heal 25% health by doing so. Still works the same as it used to when wild pokemon use it.
 - There are many more tweaks to moves. Check your MOVEDEX in game to see what a move you just saw's effects were, or see the wiki for a link to the complete move list. Be sure to try almost every move and don't write them off. Except for splash. It still does nothing as usual.
 
 ## Pokemon type changes
@@ -424,6 +433,9 @@ These changes were all made to make the pokemon more fun to use / more unique fr
 ## Audio Changes
 - The ghosts in pokemon tower now have a sound effect on encountering
 - Booting up a TM or HM has a little sound effect
+- Pushing a boulder down a hole in Seafoam / Victory road has a sound and feedback with it now
+- When you fall down a hole in Seafoam / Victory road, there is a sound effect with it now
+- Giovanni's Theme (unused music from Pokemon Yellow) was added when you encounter Giovanni. You must set MUSIC option to OG+ for it to play.
 
 ## Pokemon Green visuals
 The version-specific visuals of japanese pokemon green were added into PureGreen.
