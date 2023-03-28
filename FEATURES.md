@@ -3,7 +3,7 @@
 The only version differences between PureRed / PureBlue / PureGreen are visual. Play whatever color you like the most.
 
 ## New Options in the Options Menu
-Many options have been added to the game's options menu. To be clear, there are **7 pages of options** now. **Use the Next button on the options page** to cycle through the pages when in-game.
+Many options have been added to the game's options menu. To be clear, there are **4 pages of options** now. **Use the Next button on the options page** to cycle through the pages when in-game.
 
 
 
@@ -36,8 +36,9 @@ The second page contains new big features related to general gameplay.
   - The second option, `ALT PKMN COLORS` will enable or disable pokemon from being able to have special color palettes (Default: OFF). When turned on, features related to alternate color pokemon are enabled. In certain regions, you will find differently colored pokemon, like blue nidorinos and purple nidorinas. Think of them as regional color variants. This is just an amusing feature to allow for additional enjoyment in finding unique pokemon by exploring different places.
 
 ![Alt Colors Off](/screenshots/alt_pokemon_colors_off.png?raw=true) ![Alt Colors On](/screenshots/alt_pokemon_colors_on.png?raw=true)
-  - The third option, `AUDIO PAN` will enable or disable stereo audio panning (Default: OFF). The game uses stereo audio by default, but every channel is played at equal volume throughout the right and left speaker, so it sounds like mono. With this turned on the game music sounds a bit more dynamic by panning certain channels to left or right. This was an option in Pokemon Yellow that was ported to this romhack.
-  - The fourth option, `BIKE SONG` will enable or disable the music that plays while on the bicycle (Default: ON). Since the bicycle music plays 100% of the time you are using the bicycle, it gets a bit old after a while. If turned off, the only time you'll hear the music is in Cycling Road. This way you can enjoy all the music in the game, not just the bicycle song.
+  - The third option, `MUSIC` will enable or disable new music tracks in the game. (Default: OG) Set it to OG+ to play new music tracks when they are meant to be played. At the moment it controls only one or two minor tracks, such as Giovanni's Theme. (unused music from Pokemon Yellow's code) More music will likely be added in the future.
+  - The fourth option, `AUDIO PAN` will enable or disable stereo audio panning (Default: OFF). The game uses stereo audio by default, but every channel is played at equal volume throughout the right and left speaker, so it sounds like mono. With this turned on the game music sounds a bit more dynamic by panning certain channels to left or right. This was an option in Pokemon Yellow that was ported to this romhack.
+  - The fifth option, `BIKE SONG` will enable or disable the music that plays while on the bicycle (Default: ON). Since the bicycle music plays 100% of the time you are using the bicycle, it gets a bit old after a while. If turned off, the only time you'll hear the music is in Cycling Road. This way you can enjoy all the music in the game, not just the bicycle song.
 
 
 
@@ -63,11 +64,18 @@ The fourth page contains Sprite-related options.
     ![Spaceworld back sprite venusaur](/gfx/pokemon/back_sw/venusaurb.png?raw=true) ![Spaceworld back sprite blastoise](/gfx/pokemon/back_sw/blastoiseb.png?raw=true) ![Spaceworld back sprite charizard](/gfx/pokemon/back_sw/charizardb.png?raw=true)
   - The second option, `ICONS` changes the menu icons and overworld sprites in the game. (Default: OG) If you change this while in the overworld, it won't come into effect visually until you load another map (like by going into or out of a building.) There are two possible settings:
     - OG: Use the original icons in the overworld and on the pokemon menu.
-    - OG+: Use the original icons with some new ones. Some are based on beta sprites, some are completely newly designed sprites with the intention of being similar to the non-specific icon design of the original game, and ONE based on Gen 2's menu sprites (jellyfish sprite). This also will give unique sprites to Brock, Misty, Sabrina, and Blaine. They are all sprites that were designed from scratch to match the game's original trainer sprites, EXCEPT blaine's sprite, which is borrowed from Gen 2.
+    - OG+: Use the original icons with some new ones. Some are based on beta sprites, some are completely newly designed sprites with the intention of being similar to the non-specific icon design of the original game, and ONE based on Gen 2's menu sprites (jellyfish sprite). This also will give unique sprites to Brock, Misty, Lt.Surge, Erika, Sabrina, and Blaine. They are all sprites that were designed from scratch to match the game's original trainer sprites, EXCEPT blaine's sprite, which is borrowed from Gen 2.
 
  ![Menu Icons 1](/gfx/icons/menusprites1.png?raw=true) ![Menu Icons 2](/gfx/icons/menusprites2.png?raw=true)
     ![Brock](/gfx/sprites/brock.png?raw=true) ![Misty](/gfx/sprites/misty.png?raw=true) ![LtSurge](/gfx/sprites/lt_surge.png?raw=true) ![Erika](/gfx/sprites/erika.png?raw=true) ![Sabrina](/gfx/sprites/sabrina.png?raw=true) ![Blaine](/gfx/sprites/blaine.png?raw=true)
-  - The third to sixth options all control front sprites of specific pokemon that have multiple nice front sprites from the original games to choose from. You can choose which front sprites you like the most for these pokemon.
+  - If you press A on `EDIT` of the 3rd Option, it will open 4 new pages on another level. These 4 pages are for customizing the front sprites of the game. 
+
+![Front Sprite Options 1](/screenshots/front_sprite_options1.png?raw=true)
+![Front Sprite Options 2](/screenshots/front_sprite_options2.png?raw=true)
+![Front Sprite Options 3](/screenshots/front_sprite_options3.png?raw=true)
+![Front Sprite Options 4](/screenshots/front_sprite_options4.png?raw=true)
+
+  You can customize the below sprites:
 
 ![bulbasaur front](/gfx/pokemon/front/bulbasaur.png?raw=true)
 ![bulbasaur alt front](/gfx/pokemon/front_alt/bulbasaur.png?raw=true)
@@ -237,6 +245,8 @@ The fourth page contains Sprite-related options.
 ![Fishing locations good rod](/screenshots/areas_good_rod.png?raw=true) ![Fishing Locations old rod](/screenshots/areas_old_rod.png?raw=true) ![Fishing locations super rod](/screenshots/areas_super_rod.png?raw=true)
 
 - A secret stairway opens up in a building somewhere after you become champ. The last in-game trade and some interesting stuff to see is in there. 
+
+- The above secret area will help you access an even more top secret area. This area involves MEWTWO. You may want to bring MEWTWO with you. Maybe even MEW too! What you may find will be interesting.
 
 - A couple of items or TRAINER TIPS signs have been added to otherwise empty places in the overworld.
 - A couple of new hidden items were added to various areas in the game.
