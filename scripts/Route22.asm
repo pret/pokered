@@ -143,11 +143,11 @@ Route22Script1:
 
 StarterMons_50faf:
 ; starter the rival picked, rival trainer number
-	db STARTER1, 6
-	db STARTER2, 7
-	db STARTER3, 8
-	db STARTER4, 9
-	db STARTER5, 10
+	db STARTER1, 8
+	db STARTER2, 6
+	db STARTER3, 7
+	db STARTER4, 10
+	db STARTER5, 9
 
 Route22Script2:
 	ld a, [wIsInBattle]
@@ -305,8 +305,8 @@ StarterMons_510d9:
 	db STARTER2, 16
 	db STARTER3, 17
 	db STARTER1, 18
-	db STARTER4, 19
-	db STARTER5, 20
+	db STARTER4, 20
+	db STARTER5, 19
 
 Route22Script5:
 	ld a, [wIsInBattle]

@@ -69,7 +69,7 @@ GaryScript2:
 
 	; select which team to use during the encounter
 	ld a, [wRivalStarter]
-	cp STARTER1
+	cp STARTER2
 	jr nz, .NotSquirtle
 	ld a, $1
 	jr .saveTrainerId
@@ -79,17 +79,17 @@ GaryScript2:
 	ld a, $2
 	jr .saveTrainerId
 .Charmander
-	cp STARTER2 ; changes start here
+	cp STARTER1 ; changes start here
 	ld a, $3
 	jr nz, .Pikachu
 	jr .saveTrainerId
 .Pikachu ;
 	cp STARTER4 
 	jr nz, .Eevee
-	ld a, $4
+	ld a, $5
 	jr .saveTrainerId
 .Eevee
-	ld a, $5
+	ld a, $4
 	jr .saveTrainerId
 .saveTrainerId
 	ld [wTrainerNo], a

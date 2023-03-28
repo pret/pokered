@@ -75,6 +75,7 @@ QoL Enhancements
 ====
 - All 217 (current) Pokemon can be obtained without the use of trading or glitches, including Mew!
 - New Pokedex entries for most Pokemon are available, sourced from the original 1996 Pokedex book by Creatures Inc., restoring a ton of old Kanto lore. Thanks to [Dr. Lava and Nob Ogasawara](http://lavacutcontent.com/1996-creatures-pokedex-translation-1/) for their incredible work translating and writing about it!
+- Pikachu and Eevee are now starters, featuring fully functional Rival lineups. If you pick Pikachu, he picks Eevee, and if you pick Eevee, he picks Pikachu!
 - Item Descriptions are available!
 - Press A beside surfable water, strength boulders or cut trees to use the HMs without needing to go into the Party menu.
 - PP symbol is displayed in the battle menu. PP displayed before, it just looks nicer now. Done by changing a straggler Japanese character.
@@ -245,6 +246,7 @@ Credits
 * Albatross - Much of the new sprites used in the hack (Electivire, Magmortar, Rhyperior, Tangrowth, Glaceon, Sylveon...)
 * ZumiIsawhat? - Restorations of beta OST
 * Helix Chamber, RacieBeep, et al - Prototype Pokémon sprites
+* Frrf - Assisting with the development of the Pikachu / Eevee Mode
 * Chatot4444 - Assisting with gym scaling code
 * Vortyne - Reused a bit of code from their pureRGB hack, which was used to assist with making MissingNo. stable. Assisted in bug fixes.
 * Rangi - Reused a bit of code from their Red* / Blue* hack to make HMs usable in the overworld!

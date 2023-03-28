@@ -23,7 +23,7 @@ SetIshiharaTeam:
 IshiharaTeam:
 	db SCREAM_TAIL, 90
 IF DEF(_DEBUG)
-	db KADABRA, 16
+	db RAICHU, 16
 ENDC
 	db -1 ; end
 

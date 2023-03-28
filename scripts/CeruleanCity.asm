@@ -143,7 +143,7 @@ CeruleanCityScript1:
 
 	; select which team to use during the encounter
 	ld a, [wRivalStarter]
-	cp STARTER1
+	cp STARTER2
 	jr nz, .NotSquirtle
 	ld a, $11
 	jr .done
@@ -153,17 +153,17 @@ CeruleanCityScript1:
 	ld a, $12
 	jr .done
 .Charmander
-	cp STARTER2 ; changes start here
+	cp STARTER1 ; changes start here
 	ld a, $13
 	jr nz, .Pikachu
 	jr .done
 .Pikachu ;
 	cp STARTER4 
 	jr nz, .Eevee
-	ld a, $14
+	ld a, $15
 	jr .done
 .Eevee
-	ld a, $15
+	ld a, $14
 	jr .done
 .done
 	ld [wTrainerNo], a

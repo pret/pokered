@@ -34,10 +34,10 @@ DEF SHOW EQU $15
 	const HS_SAFFRON_CITY_D                ; 16
 	const HS_SAFFRON_CITY_E                ; 17
 	const HS_SAFFRON_CITY_F                ; 18
-	const HS_ROUTE_2_ITEM_1                ; 19
-	const HS_ROUTE_2_ITEM_2                ; 1A
-	;const HS_POKEDEX_1                  ; 1B 
-	;const HS_POKEDEX_2                  ; 1C 
+	const HS_ROUTE_2_ITEM_1                ; 19 X
+	const HS_ROUTE_2_ITEM_2                ; 1A X
+	const HS_ROUTE_4_ITEM                  ; 1B X
+	const HS_ROUTE_9_ITEM                  ; 1C X
 	const HS_ROUTE_12_SNORLAX              ; 1D
 	const HS_ROUTE_12_ITEM_1               ; 1E X
 	const HS_ROUTE_12_ITEM_2               ; 1F X
@@ -56,8 +56,8 @@ DEF SHOW EQU $15
 	const HS_STARTER_BALL_2                ; 2C
 	const HS_STARTER_BALL_3                ; 2D
 	const HS_OAKS_LAB_OAK_1                ; 2E
-	const HS_STARTER_BALL_4                ; 2F, Pikachu, was HS_POKEDEX_1
-	const HS_STARTER_BALL_5                ; 30, Eevee, was HS_POKEDEX_2
+	const HS_STARTER_BALL_4                ; 2F, was dex, pikachu
+	const HS_STARTER_BALL_5                ; 30, was dex, eevee
 	const HS_OAKS_LAB_OAK_2                ; 31
 	const HS_VIRIDIAN_GYM_GIOVANNI         ; 32
 	const HS_VIRIDIAN_GYM_ITEM             ; 33 X
