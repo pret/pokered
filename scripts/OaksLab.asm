@@ -726,7 +726,7 @@ OaksLabScript_RemoveParcel:
 OaksLabScript_1d02b:
 	ld a, $7c
 	ldh [hSpriteScreenYCoord], a
-	ld a, 8
+	ld a, 10
 	ldh [hSpriteMapXCoord], a
 	ld a, [wYCoord]
 	cp 3
