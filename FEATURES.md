@@ -252,9 +252,9 @@ The fourth page contains Sprite-related options.
 
 - There is unused text in the game for when you lose to your rival - these were re-implemented and now work as expected!
 - There was an unused trainer class for Prof Oak. It's been added back into the game. Find him in Cerulean Cave after beating the Elite Four. He can be battled repeatedly. Just leave the area and come back.
-- Some trainer classes based on Beta or unused sprites were reintroduced to the game: `ROOKIE`, `RANGER`, `FIREFIGHTER`, `COOL KID`, `SOLDIER`. You'll find them in previously empty places or routes!
+- Some trainer classes based on Beta or unused sprites were reintroduced to the game: `ROOKIE`, `RANGER`, `FIREFIGHTER`, `COOL KID`, `SOLDIER`, `CHIEF`. You'll find them in previously empty places or routes!
 
-![Rookie](/gfx/unused_prototype_sprites/rookie.png?raw=true) ![Ranger](/gfx/unused_prototype_sprites/ranger.png?raw=true) ![Firefighter](/gfx/unused_prototype_sprites/firefighter.png?raw=true) ![Cool Kid](/gfx/unused_prototype_sprites/cool_kid.png?raw=true) ![Soldier](/gfx/unused_prototype_sprites/soldier.png?raw=true)
+![Rookie](/gfx/unused_prototype_sprites/rookie.png?raw=true) ![Ranger](/gfx/unused_prototype_sprites/ranger.png?raw=true) ![Firefighter](/gfx/unused_prototype_sprites/firefighter.png?raw=true) ![Cool Kid](/gfx/unused_prototype_sprites/cool_kid.png?raw=true) ![Soldier](/gfx/unused_prototype_sprites/soldier.png?raw=true) ![Chief](/gfx/unused_prototype_sprites/chief.png?raw=true)
 
 - There were unused icy-looking tiles in the Cave tileset that were meant to be used in seafoam island. Now they are used there!
 ![seafoam cut tiles](/screenshots/seafoam_islands_cut_content_tiles.png?raw=true)
