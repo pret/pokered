@@ -62,7 +62,7 @@ The fourth page contains Sprite-related options.
     - SW97: Use the spaceworld 1997 back sprites. (some have been touched up a bit) These are higher resolution while still matching the original game's style. Very nice!
     
     ![Spaceworld back sprite venusaur](/gfx/pokemon/back_sw/venusaurb.png?raw=true) ![Spaceworld back sprite blastoise](/gfx/pokemon/back_sw/blastoiseb.png?raw=true) ![Spaceworld back sprite charizard](/gfx/pokemon/back_sw/charizardb.png?raw=true)
-  - The second option, `ICONS` changes the menu icons and overworld sprites in the game. (Default: OG) If you change this while in the overworld, it won't come into effect visually until you load another map (like by going into or out of a building.) There are two possible settings:
+  - The second option, `ICONS` changes the menu icons and overworld sprites in the game. (Default: OG) There are two possible settings:
     - OG: Use the original icons in the overworld and on the pokemon menu.
     - OG+: Use the original icons with some new ones. Some are based on beta sprites, some are completely newly designed sprites with the intention of being similar to the non-specific icon design of the original game, and ONE based on Gen 2's menu sprites (jellyfish sprite). This also will give unique sprites to Brock, Misty, Lt.Surge, Erika, Sabrina, and Blaine. They are all sprites that were designed from scratch to match the game's original trainer sprites, EXCEPT blaine's sprite, which is borrowed from Gen 2.
 
@@ -144,10 +144,11 @@ The fourth page contains Sprite-related options.
 - You can deposit items to your PC directly from the items menu by pressing START on the item you wish to deposit. Technology is amazing! Now items can be stored wirelessly!
 
 ![Deposit Item From Start Menu](/screenshots/deposit_item_from_menu.png?raw=true)
-- Open the start menu and scroll down to SAVE, then press SELECT, and you can change PC boxes whenever, wherever. Easy!
+- Open the start menu and scroll down to SAVE, then press SELECT, and you can change PC boxes whenever, wherever. Easy! You'll notice the Change Box menu has been revamped to include how many pokemon are in each box as well!
 
 ![Box change](/screenshots/change_box_from_start_menu.png?raw=true)
-- The game will tell you when a box is full after catching a pokemon.
+- When viewing Bills PC, it'll always tell you how many pokemon are in the current box
+- The game will tell you how many slots are left in your box after catching a pokemon, and when the box is full.
 - When scrolling over TMs/HMs in menus, a textbox will display the move they teach automatically! Hooray!
 
 ![TM Text](/screenshots/tm_text_box_prompt.png?raw=true)
@@ -222,6 +223,10 @@ The fourth page contains Sprite-related options.
 
 - The "TM Pirate" is a kid who appears in most PokeMarts who will sell you TMs! It's just a fun way of adding more purchasable TMs to the game. 
 
+- The urban legend - Bills Garden - was added into the game! It only is accessible once you become champ. You'll find some amusing stuff there. Visit it a couple of times! What you find might change! If you have alt palettes turned on in the options...is that a blue pikachu??
+
+![bills garden](/screenshots/bills_garden.png?raw=true)
+
 - The Mt Moon fossil Super Nerd will offer to take your fossil to Cinnabar Lab right away! You have to meet up with him at his house in SAFFRON CITY to get your fossil pokemon if you give it to him. Then you can give him OLD AMBER too. This allows you to receive fossil pokemon early.
 
 ![Super Nerd House in Saffron](/screenshots/super_nerd_in_saffron_city.png?raw=true)
@@ -243,6 +248,14 @@ The fourth page contains Sprite-related options.
 - The FISHING GURU now lives in cerulean city and you can get the OLD ROD a bit earlier. Same with the GOOD ROD, which is now in the old FISHING GURU's house in vermilion city. As for the last two gurus on Route 12 and in Fuchsia city, whoever you meet first will give you a SUPER ROD. The other will be a bit distraught at the unexpected turn of events, and then give you a FISHING GUIDE. This unlocks the ability to see fishing locations for pokemon in the pokedex.
 
 ![Fishing locations good rod](/screenshots/areas_good_rod.png?raw=true) ![Fishing Locations old rod](/screenshots/areas_old_rod.png?raw=true) ![Fishing locations super rod](/screenshots/areas_super_rod.png?raw=true)
+
+- You can phone home, professor oak, even your rival from the telephones in Celadon City's Department Store. You can choose how the conversations play out, and they even can have some subsequent small events based on what you choose when you go back to PALLET TOWN!
+
+![phone tree](/screenshots/phone.png?raw=true)
+
+- After saving Mr.Fuji in the Pokemon Tower, you can get into the basement of the Tower. You'll find a Channeler clothed in black who just loves curses, hexes, and all that dark stuff. If you show them a GENGAR, they'll curse it to look like a HAUNTER again. Its stats won't be affected though. It'll still have GENGAR's stats. Such a powerful curse!
+
+![dark channeler](/screenshots/dark_channeler.png?raw=true)
 
 - A secret stairway opens up in a building somewhere after you become champ. The last in-game trade and some interesting stuff to see is in there. 
 
