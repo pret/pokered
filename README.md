@@ -21,6 +21,7 @@ This is a purist's enhancement of Pokemon Red/Blue/Green. The goal is to enhance
 - Mew is under the truck as expected!
 - Missingno and the item duplication glitch are intact - but won't corrupt your save anymore!
 - An entirely new mode for the pokedex called the MOVEDEX was added. It shows data about moves you have seen in detail. You unlock the MOVEDEX in viridian city.
+- There are multiple secret areas to be found after becoming CHAMP. Bills Garden, Team Rocket / Mewtwo lore, and more...
 - [Many options to enhance the game visually and mechanically were added.](https://github.com/Vortyne/pureRGB/blob/master/FEATURES.md#new-options-in-the-options-menu) **(You must turn them on via the options in-game!)** Including:
   - Switchable color palettes (Choose between original colors, Super Gameboy Colors, or Pokemon Yellow Colors in-game whenever you like! Works on GBC and Super Gameboy. Yes, this romhack has GBC support!)
   - Optional Spaceworld 1997 Back Sprites
