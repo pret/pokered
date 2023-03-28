@@ -246,6 +246,8 @@ The fourth page contains Sprite-related options.
 
 - A secret stairway opens up in a building somewhere after you become champ. The last in-game trade and some interesting stuff to see is in there. 
 
+- The above secret area will help you access an even more top secret area. This area involves MEWTWO. You may want to bring MEWTWO with you. Maybe even MEW too! What you may find will be interesting.
+
 - A couple of items or TRAINER TIPS signs have been added to otherwise empty places in the overworld.
 - A couple of new hidden items were added to various areas in the game.
 - Multiple items can be picked up at once (example: you found 5 potions)
