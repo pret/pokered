@@ -144,7 +144,7 @@ The fourth page contains Sprite-related options.
 - You can deposit items to your PC directly from the items menu by pressing START on the item you wish to deposit. Technology is amazing! Now items can be stored wirelessly!
 
 ![Deposit Item From Start Menu](/screenshots/deposit_item_from_menu.png?raw=true)
-- Open the start menu and scroll down to SAVE, then press SELECT, and you can change PC boxes whenever, wherever. Easy!
+- Open the start menu and scroll down to SAVE, then press SELECT, and you can change PC boxes whenever, wherever. Easy! You'll notice the Change Box menu has been revamped to include how many pokemon are in each box as well!
 
 ![Box change](/screenshots/change_box_from_start_menu.png?raw=true)
 - The game will tell you when a box is full after catching a pokemon.
