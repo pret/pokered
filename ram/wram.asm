@@ -76,7 +76,8 @@ wTempoModifier:: db
 UNION
 	ds 13
 NEXTU
-wReplacedMapMusic:: db
+; PureRGBnote: ADDED: byte that holds the currently playing "extra" music if in a map that has marked down that it has extra music
+wReplacedMapMusic:: db 
 	; unused audio wram 12 bytes
 ENDU
 
@@ -1089,7 +1090,7 @@ wPartyMenuHPBarColors:: ds PARTY_LENGTH
 
 wStatusScreenHPBarColor:: db
 
-wSecretLabPasswordTracker::	ds 7 
+wSecretLabPasswordTracker::	ds 7 ; PureRGBnote: ADDED: in the secret lab this will keep track of the password you enter
 
 wCopyingSGBTileData::
 wWhichPartyMenuHPBar::
@@ -2477,7 +2478,7 @@ ENDU
 wTrainerHeaderPtr:: dw
 
 wBillsGardenVisitor:: 
-wBillsGardenPreviousVisitors:: ds 3
+wBillsGardenPreviousVisitors:: ds 3 ; PureRGBnote: ADDED: used to track the last 3 visitors at bills garden to make randomization less annoying
 	ds 3  ; unused save file 3 bytes (TODO: use for randomized challengers / bill's garden visitors)
 
 ; the trainer the player must face after getting a wrong answer in the Cinnabar

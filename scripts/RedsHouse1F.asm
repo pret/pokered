@@ -1,3 +1,4 @@
+; PureRGBnote: ADDED: code related to having food at home with mom was added. You have to phone her from celadon mart to have food.
 RedsHouse1F_Script:
 	call SetLastBlackoutMap ; PureRGBnote: ADDED: set blackout map on entering pokemon center
 	jp EnableAutoTextBoxDrawing

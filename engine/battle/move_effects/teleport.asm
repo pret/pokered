@@ -1,3 +1,4 @@
+; PureRGBnote: CHANGED: teleport was changed to switch the pokemon out in battle and give them back 25% HP on doing so.
 _TeleportEffect::	
 	ldh a, [hWhoseTurn]
 	and a

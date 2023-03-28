@@ -51,6 +51,7 @@ _AddPartyMon::
 	ld [wNamingScreenType], a
 	predef AskName
 .skipNaming
+;;;;;;;;;; PureRGBnote: ADDED: this code makes the game skip "do you want to nickname X?" for the 6 pokemon you get in the intro of debug mode
 IF DEF(_DEBUG)
 	ld a, [wMonDataLocation]
 	and %01000000
@@ -69,6 +70,7 @@ IF DEF(_DEBUG)
 	call CopyData
 .skipDebugNaming
 ENDC
+;;;;;;;;;;
 	ld hl, wPartyMons
 	ld a, [wMonDataLocation]
 	and %1111

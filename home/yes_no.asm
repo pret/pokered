@@ -39,6 +39,7 @@ DisplayYesNoChoice::
 	call DisplayTextBoxID
 	jp LoadScreenTilesFromBuffer1
 
+; PureRGBnote: ADDED: wrapper for the new multiple choice menu function
 ; hl = which list in multi_choice_menu.asm to use
 ; b = what buttons to watch
 ; output = wCurrentMenuItem = which entry the cursor was on

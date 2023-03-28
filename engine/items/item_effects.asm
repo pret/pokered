@@ -604,6 +604,7 @@ ItemUseBall:
 	ld a, [wPartyCount]
 	cp PARTY_LENGTH ; is party full?
 	jr z, .sendToBox
+;;;;;;;;;; PureRGBnote: ADDED: when in bills garden, if a pikachu is caught, skip nicknaming automatically.
 	ld a, [wCurMap]
 	cp BILLS_GARDEN
 	ld a, 0 ; PLAYER_PARTY_DATA
@@ -615,9 +616,11 @@ ItemUseBall:
 	ld a, %10000000 ; PLAYER_PARTY_DATA but will skip nicknaming
 .notBillsGarden
 	push af
+;;;;;;;;;;
 	ld [wMonDataLocation], a
 	call ClearSprites
 	call AddPartyMon
+;;;;;;;;;; PureRGBnote: ADDED: when in bills garden, if a pikachu is caught, force it to have the nickname PIKABLU
 	pop af
 	and a
 	jr z, .done
@@ -626,6 +629,7 @@ ItemUseBall:
 	ld hl, wcd6d 
 	ld bc, NAME_LENGTH
 	rst _CopyData
+;;;;;;;;;;
 	jr .done
 .sendToBox
 	call ClearSprites
@@ -636,7 +640,7 @@ ItemUseBall:
 	ld hl, ItemUseBallText08
 .printTransferredToPCText
 	rst _PrintText
-	call PrintRemainingBoxSpacePrompt
+	call PrintRemainingBoxSpacePrompt ; PureRGBnote: ADDED: 
 	jr .done
 
 .oldManCaughtMon
@@ -835,8 +839,10 @@ ItemUseSurfboard:
 	ld a, 2
 	ld [wWalkBikeSurfState], a ; change player state to surfing
 	call PlayDefaultMusic ; play surfing music
+;;;;;;;;;; PureRGBnote: ADDED: flag to indicate we are in the "able to surf" state (needed for autosurf functionality)
 	ld hl, wd728
 	set 2, [hl]
+;;;;;;;;;;
 	ld hl, SurfingGotOnText
 	jp PrintText
 .tryToStopSurfing
@@ -3176,6 +3182,7 @@ SendNewMonToBox:
 	dec b
 	jr nz, .loop3
 .skip2
+;;;;;;;;;; PureRGBnote: ADDED: when in bills garden, if a pikachu is caught, skip nicknaming automatically.
 	ld a, [wCurMap]
 	cp BILLS_GARDEN
 	jr nz, .notBillsGarden
@@ -3187,6 +3194,7 @@ SendNewMonToBox:
 	pop de
 	jr .skipAskName
 .notBillsGarden
+;;;;;;;;;;
 	ld hl, wBoxMonNicks
 	ld a, NAME_MON_SCREEN
 	ld [wNamingScreenType], a
@@ -3284,7 +3292,7 @@ IsNextTileShoreOrWater::
 	ld a, [wCurMapTileset]
 	cp SHIP_PORT ; Vermilion Dock tileset
 	jr z, .skipShoreTiles ; if it's the Vermilion Dock tileset
-	cp CAVERN
+	cp CAVERN ; PureRGBnote: ADDED: fixes an issue with the unused tiles in the cavern tileset causing surf incorrectly (they are used now)
 	jr z, .skipShoreTiles
 	ld a, [wTileInFrontOfPlayer] ; tile in front of player
 	cp $48 ; eastern shore tile in Safari Zone

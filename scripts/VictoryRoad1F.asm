@@ -26,7 +26,7 @@ VictoryRoad1F_ScriptPointers:
 VictoryRoad1Script0:
 	ld a, [wFlags_0xcd60]
 	bit 1, a
-	ret nz ; if a boulder animation is playing forget doing this
+	ret nz ; PureRGBnote: ADDED: if a boulder animation is playing forget doing this, helps reduce lag
 	CheckEvent EVENT_VICTORY_ROAD_1_BOULDER_ON_SWITCH
 	jp nz, CheckFightingMapTrainers
 	ld hl, CoordsData_5da5c

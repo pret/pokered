@@ -4,5 +4,5 @@ EscapeRopeTilesets:
 	db CAVERN
 	db FACILITY
 	db INTERIOR
-	db SECRET_LAB_TILES
+	db SECRET_LAB_TS
 	db -1 ; end

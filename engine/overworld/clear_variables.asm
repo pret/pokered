@@ -17,6 +17,7 @@ ClearVariablesOnEnterMap::
 	ld hl, wWhichTrade
 	ld bc, wStandingOnWarpPadOrHole - wWhichTrade
 	call FillMemory
+;;;;;;;;;; PureRGBnote: ADDED: code that helps track which of the new music tracks is playing if any are
 	ld a, [wCurrentMapScriptFlags]
 	bit 3, a
 	jr nz, .clear
@@ -26,4 +27,5 @@ ClearVariablesOnEnterMap::
 .clear
 	xor a
 	ld [wReplacedMapMusic], a ; clear this variable in places where we don't have replaced map music
+;;;;;;;;;;
 	ret

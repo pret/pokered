@@ -127,6 +127,7 @@ TestGrassTile:
 	ret
 
 TestWaterTile:
+;;;;;;;;;; PureRGBnote: ADDED: when in bills garden, if alt palettes are not turned on, don't encounter any pokemon at all
 	ld a, [wCurMap]
 	cp BILLS_GARDEN
 	jr nz, .notBillsGarden
@@ -134,6 +135,7 @@ TestWaterTile:
 	bit BIT_ALT_PKMN_PALETTES, a
 	jr z, .cantEncounter ; skip encounters in bills garden if alt palettes are turned off
 .notBillsGarden
+;;;;;;;;;;
 	ld a, $14 ; in all tilesets with a water tile, this is its id
 	cp c
 	jr z, .return

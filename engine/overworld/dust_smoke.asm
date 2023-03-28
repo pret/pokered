@@ -90,6 +90,8 @@ SSAnneSmokePuffTile:
 	INCBIN "gfx/overworld/smoke.2bpp"
 SSAnneSmokePuffTileEnd:
 
+; PureRGBnote: ADDED: the below function is an animation + sound effects that play when you push a boulder down a hole
+
 BoulderHoleDropEffectDefault::
 	ld d, 0
 BoulderHoleDropEffect:: ; d = 1 prior to calling will cause a "splash" sound instead of a "crash sound" when the rock lands below

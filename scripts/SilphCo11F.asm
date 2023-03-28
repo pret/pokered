@@ -1,4 +1,5 @@
 ; PureRGBnote: ADDED: card key will be consumed if all card key doors were opened in the game.
+; PureRGBnote: ADDED: code that plays Giovanni's theme if we have the option turned on
 
 SilphCo11F_Script:
 	call SilphCo11Script_62110
@@ -247,7 +248,7 @@ SilphCo11Script5:
 	call SilphCo11Script_62110
 	ld hl, wCurrentMapScriptFlags
 	res 3, [hl]
-	call GBFadeInFromWhite ; since giovanni instantly talks to us after battle we need to fade back in here
+	call GBFadeInFromWhite ; PureRGBnote: ADDED: since trainer instantly talks to us after battle we need to fade back in here
 	callfar PlayGiovanniMusic
 	ld a, $f0
 	ld [wJoyIgnore], a

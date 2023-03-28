@@ -238,7 +238,7 @@ GetOverworldPalette:
 	ld a, [wCurMapTileset]
 	cp CEMETERY
 	jr z, .PokemonTowerOrAgatha
-	cp SECRET_LAB_TILES
+	cp SECRET_LAB_TS
 	jr z, .SecretLab
 	cp CAVERN
 	jr z, .caveOrBruno

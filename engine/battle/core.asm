@@ -5708,7 +5708,7 @@ MoveHitTest:
 	bit STAT_DOWN_IMMUNITY, a ; is mon protected by mist?
 	jp z, .skipEnemyMistCheck
 	ld a, [wPlayerMoveNum]
-	call CheckIsMistBlockedMove
+	call CheckIsMistBlockedMove ; PureRGBnote: CHANGED: just check mist against a list of blocked moves for simplicity
 	jr c, .moveMissed
 .skipEnemyMistCheck
 	ld a, [wPlayerBattleStatus2]
@@ -5721,7 +5721,7 @@ MoveHitTest:
 	bit STAT_DOWN_IMMUNITY, a ; is mon protected by mist?
 	jp z, .skipPlayerMistCheck
 	ld a, [wEnemyMoveNum]
-	call CheckIsMistBlockedMove
+	call CheckIsMistBlockedMove ; PureRGBnote: CHANGED: just check mist against a list of blocked moves for simplicity
 	jr c, .moveMissed
 .skipPlayerMistCheck
 	ld a, [wEnemyBattleStatus2]
@@ -7321,7 +7321,7 @@ InitBattleCommon:
 MissingNoInit:
 	jpfar MissingNoBattleStart
 
-LoadPikablu:
+LoadPikablu: ; and this code loads pikablu when in bills garden
 	jpfar PikabluInit
 
 InitWildBattle:

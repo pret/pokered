@@ -50,7 +50,7 @@ CeruleanCity_ScriptPointers:
 CeruleanCityScript4:
 	ld hl, wCurrentMapScriptFlags
 	res 3, [hl]
-	call GBFadeInFromWhite ; since thief instantly talks to us after battle we need to fade back in here
+	call GBFadeInFromWhite ; PureRGBnote: ADDED: since trainer instantly talks to us after battle we need to fade back in here
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, CeruleanCityScript_1948c
@@ -198,7 +198,7 @@ CeruleanCityScript1:
 CeruleanCityScript2:
 	ld hl, wCurrentMapScriptFlags
 	res 3, [hl]
-	call GBFadeInFromWhite ; since rival instantly talks to us after battle we need to fade back in here
+	call GBFadeInFromWhite ; PureRGBnote: ADDED: since trainer instantly talks to us after battle we need to fade back in here
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, CeruleanCityScript_1948c

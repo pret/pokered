@@ -1,3 +1,4 @@
+; PureRGBnote: ADDED: in this file, events for having tea with DAISY were added.
 BluesHouse_Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, BluesHouse_ScriptPointers

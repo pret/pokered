@@ -1,3 +1,4 @@
+; PureRGBnote: ADDED: in this file, code for using the telephones in the mart were added.
 CeladonMart1F_Script:
 	jp EnableAutoTextBoxDrawing
 

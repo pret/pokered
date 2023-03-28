@@ -160,6 +160,10 @@ RedrawMapView::
 	ldh [hAutoBGTransferEnabled], a
 	ret
 
+; shinpokerednote: CHANGED: when replacing tileblocks, this new function is used instead and will decide whether to
+; do a redraw map view or not afterwards. If the block is offscreen, it won't redraw the map.
+; This speeds up most tileblock replacements.
+
 IsBCInHLTileBlockMapView:
 	push hl
 	pop bc

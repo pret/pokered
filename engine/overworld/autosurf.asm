@@ -1,3 +1,7 @@
+; PureRGBnote: ADDED: code that will automatically start surf if you've used it at least once on the current map. 
+; It's reset by loading another map.
+; It's not reset by crossing in between maps outside like routes.
+; It's not reset by entering and leaving a battle.
 CheckForAutoSurf::
 	ld a, [wd728]
 	bit 2, a ; is surf active?

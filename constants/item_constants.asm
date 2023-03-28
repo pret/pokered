@@ -30,7 +30,7 @@
 	const SAFARI_BAIT   ; $15 ; PureRGBnote: CHANGED: each of the badges used to have an item defined starting at this index, they were cleaned out
 	const SAFARI_ROCK   ; $16
 	const OLD_COIN      ; $17 ; PureRGBnote: ADDED: New item
-	const TOPSECRETKEY  ; $18
+	const TOPSECRETKEY  ; $18 ; PureRGBnote: ADDED: New item
 	const UNUSED_ITEM3  ; $19
 	const UNUSED_ITEM4  ; $1A
 	const UNUSED_ITEM5  ; $1B

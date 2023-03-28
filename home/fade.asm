@@ -1,12 +1,14 @@
 ; These routines manage gradual fading
 ; (e.g., entering a doorway)
 LoadGBPal::
+;;;;;;;;;; PureRGBnote: ADDED: an optimization for certain maps where we can skip showing the map from being faded to black until later.
 	ld a, [wMapConnections]
 	;;;;;; new bit in the map header that can mark a map as staying black visually until the map script changes it 
 	;;;;;; (used for situations in which we may need to replace tile blocks)
 	bit 4, a 
 	jr nz, .checkFirstLoad ; map starts by being black until map script changes this
 .notFirstLoad
+;;;;;;;;;;
 	ld a, [wMapPalOffset] ; tells if wCurMap is dark (requires HM5_FLASH?)
 	ld b, a
 	ld hl, FadePal4

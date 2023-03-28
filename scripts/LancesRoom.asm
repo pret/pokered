@@ -37,7 +37,7 @@ LanceShowOrHideEntranceBlocks:
 	bit 3, [hl]
 	res 3, [hl]
 	ret z
-	jp GBFadeInFromWhite ; since trainer instantly talks to us after battle we need to fade back in here
+	jp GBFadeInFromWhite ; PureRGBnote: ADDED: since trainer instantly talks to us after battle we need to fade back in here
 .SetEntranceBlock:
 	predef_jump ReplaceTileBlock
 

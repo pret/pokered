@@ -345,6 +345,7 @@ BoxSRAMPointerTable:
 	dw sBox5 ; sBox11
 	dw sBox6 ; sBox12
 
+; PureRGBnote: CHANGED: a lot of this function was modified to have a more advanced change box menu
 ChangeBox::
 	CheckEvent EVENT_HIDE_CHANGE_BOX_SAVE_MSG
 	ld a, [wd730]

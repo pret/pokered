@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: the sound effects that play when you step on the password buttons in the secret lab.
+
 SFX_SecretLabNotesInit:
 	execute_music
 	tempo 144

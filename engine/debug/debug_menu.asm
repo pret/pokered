@@ -1,3 +1,5 @@
+; PureRGBnote; CHANGED: the debug mode had a bit of stuff removed to make it a lot faster to get in-game on starting debug mode.
+
 DebugMenu::
 IF DEF(_DEBUG)
 	call ClearScreen

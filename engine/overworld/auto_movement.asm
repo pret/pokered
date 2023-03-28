@@ -2,6 +2,7 @@ PlayerStepOutFromDoor::
 	ld hl, wd730
 	res 1, [hl]
 	call IsPlayerStandingOnDoorTile
+;;;;;;;;;; PureRGBnote: CHANGED: this code was slightly updated to allow calling from arbitrary places
 	jr nc, ForceStepFromDoor.notStandingOnDoor
 ForceStepOutFromDoor::
 	ld d, D_DOWN
@@ -15,6 +16,7 @@ ForceStepFromDoor::
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
 	pop af
+;;;;;;;;;;
 	ld [wSimulatedJoypadStatesEnd], a
 	xor a
 	ld [wSpritePlayerStateData1ImageIndex], a

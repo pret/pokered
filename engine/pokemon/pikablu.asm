@@ -1,3 +1,6 @@
+; PureRGBnote: ADDED: when in Bills Garden, pokemon appearing in the pond will be blue pikachus if you have alt palettes turned on due to this code.
+; If it isn't turned on, you won't encounter anything.
+
 PikabluInit::
 	ld a, [wEnemyMonSpecies]
 	cp PIKACHU

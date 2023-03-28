@@ -28,7 +28,7 @@ VictoryRoad3F_ScriptPointers:
 VictoryRoad3Script0:
 	ld hl, wFlags_0xcd60
 	bit 1, [hl]
-	ret nz ; if a boulder animation is playing forget doing this script
+	ret nz ; PureRGBnote: ADDED: if a boulder animation is playing forget doing this, helps reduce lag
 	bit 7, [hl]
 	res 7, [hl]
 	jp z, .asm_449fe

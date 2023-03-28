@@ -53,6 +53,8 @@ GameCornerSomeonesKeysText::
 	text_far _GameCornerSomeonesKeysText
 	text_end
 
+; PureRGBnote: CHANGED: code below moved from another bank
+
 AbleToPlaySlotsCheck:
 	ld a, [wSpritePlayerStateData1ImageIndex]
 	and $8

@@ -1,3 +1,4 @@
+; PureRGBnote: ADDED: function that changed a pokemon in the party to a different pokemon. Used with Armored Mewtwo and "Cursed" Haunter
 ; input: 
 ; [wcf91] = target pokemon species
 ; [wWhichPokemon] = which party pokemon to change
@@ -46,9 +47,9 @@ ChangePartyPokemonSpecies::
 	ld [hld], a
 	ret
 
+; PureRGBnote: ADDED: function that renames a pokemon if it has its default name only. Used for changing Gengar to "Cursed" Haunter and back again.
 ; [wcf91] = target pokemon to change default name to
 ; [wWhichPokemon] = which pokemon in party will potentially be changed
-
 CheckMonNickNameDefault::
 	ld a, [wcf91]
 	cp POWERED_HAUNTER

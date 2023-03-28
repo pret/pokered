@@ -1,4 +1,5 @@
 ; PureRGBnote: ADDED: new trainers were added to this location
+; PureRGBnote: ADDED: code that unlocks a stairway to the Secret Lab after certain conditions are fulfilled was added
 
 PokemonMansionB1F_Script:
 	call Mansion4Script_523cf

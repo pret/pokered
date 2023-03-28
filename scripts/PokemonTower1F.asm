@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: a stairway downstairs was added, but it is blocked by a new ROCKET who tells you to go away until you save mr fuji.
+
 PokemonTower1F_Script:
 	jp EnableAutoTextBoxDrawing
 

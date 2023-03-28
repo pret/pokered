@@ -112,7 +112,7 @@ OverworldLoopLessDelay::
 	call UpdateSprites
 	ld a, [wFlags_0xcd60]
 	;bit 2, a
-	;jr nz, .checkForOpponent
+	;jr nz, .checkForOpponent ; PureRGBnote: CHANGED: this bit isn't used anymore
 	bit 0, a
 	jr nz, .checkForOpponent
 	lda_coord 8, 9
@@ -143,7 +143,7 @@ OverworldLoopLessDelay::
 	jp OverworldLoop
 .noDirectionButtonsPressed
 	;ld hl, wFlags_0xcd60
-	;res 2, [hl]
+	;res 2, [hl] ; PureRGBnote: CHANGED: this bit isn't used anymore
 	call UpdateSprites
 ;;;;;;;;;;; PureRGBnote: ADDED: code for changing direction without moving by pressing A+B and a direction when standing still.
 	ldh a, [hJoyHeld] 
@@ -261,7 +261,7 @@ OverworldLoopLessDelay::
 	;set 2, [hl]
 	;call NewBattle
 	;jp c, BattleOccurred
-	;jp OverworldLoop
+	;jp OverworldLoop ; PureRGBnote: CHANGED: when we are in "direction change" mode we just dont check for battles now
 
 .noDirectionChange
 	xor a
@@ -307,7 +307,7 @@ OverworldLoopLessDelay::
 
 .moveAhead2
 	;ld hl, wFlags_0xcd60
-	;res 2, [hl]
+	;res 2, [hl] ; PureRGBnote: CHANGED: this bit isn't used anymore
 	ld a, [wd736]
 	bit 7, a ; spinning?
 	jr nz, .spinnerSpeed ; PureRGBnote: CHANGED: faster spin tile movement
@@ -376,7 +376,7 @@ BattleOccurred::
 	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
 	set 6, [hl]
-	set 3, [hl] ; new bit indicating we reloaded a map from a battle
+	set 3, [hl] ; PureRGBnote: ADDED: new bit indicating we reloaded a map from a battle
 	xor a
 	ldh [hJoyHeld], a
 	ld a, [wCurMap]
@@ -708,9 +708,11 @@ ExtraWarpCheck::
 
 MapEntryAfterBattle::
 	farcall IsPlayerStandingOnWarp ; for enabling warp testing after collisions
+;;;;;;;;;; PureRGBnote: ADDED: skip fading in in maps that use a specific bit in their header - allows tile block replacements to go unseen
 	ld a, [wMapConnections]
 	bit 4, a
 	ret nz
+;;;;;;;;;;
 	; fall through
 MapFadeAfterBattle::
 	ld a, [wMapPalOffset]
@@ -1211,7 +1213,7 @@ CollisionCheckOnLand::
 	jr c, .collision
 	call CheckTilePassable
 	jr nc, .noCollision
-	callfar CheckForAutoSurf
+	callfar CheckForAutoSurf ; PureRGBnote: ADDED: "collision check" that will automatically start up surfing if surf was previously activated.
 	jr nc, .noCollision
 .collision
 	ld a, [wChannelSoundIDs + CHAN5]
@@ -1945,6 +1947,8 @@ RunMapScript::
 	push de
 	jp hl ; jump to script
 .return
+;;;;;;;;;; PureRGBnote: ADDED: code that will fade back in after battle in specific maps with a bit in their header
+;;;;;;;;;; used to keep tileblock replacements unseen
 	ld hl, wCurrentMapScriptFlags
 	bit 3, [hl]
 	res 3, [hl]
@@ -1956,6 +1960,7 @@ RunMapScript::
 	cp $ff
 	ret z
 	jp MapFadeAfterBattle
+;;;;;;;;;;
 
 LoadWalkingPlayerSpriteGraphics::
 	ld de, RedSprite

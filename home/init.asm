@@ -112,7 +112,7 @@ DEF rLCDC_DEFAULT EQU %11100011
 	ld [wUpdateSpritesEnabled], a
 
 IF DEF(_DEBUG)
-	;jpfar DebugMenu ; uncomment this to instantly enter debug mode on starting the game in the debug rom
+	;jpfar DebugMenu ; PureRGBnote: ADDED: uncomment this to instantly enter debug mode on starting the game in the debug rom
 ENDC
 	predef PlayIntro 
 

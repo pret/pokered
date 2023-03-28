@@ -124,7 +124,7 @@ CinnabarGymBlainePostBattle:
 	call UpdateCinnabarGymGateTileBlocks
 	ld hl, wCurrentMapScriptFlags
 	res 3, [hl]
-	call GBFadeInFromWhite ; since blaine instantly talks to us after battle we need to fade back in here after battle
+	call GBFadeInFromWhite ; PureRGBnote: ADDED: since trainer instantly talks to us after battle we need to fade back in here after battle
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, CinnabarGymResetScripts

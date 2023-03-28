@@ -36,10 +36,12 @@ HandleLedges::
 	inc hl
 	jr .loop
 .foundMatch
+;;;;;;;;;; PureRGBnote: ADDED: if the player is jumping down a ledge and there's a cut tile in front of it, block the player.
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_DOWN
 	jr z, .checkCutTileInFrontOfLedge
 .noCutTile
+;;;;;;;;;;
 	ldh a, [hJoyHeld]
 	and e
 	ret z
@@ -57,11 +59,13 @@ HandleLedges::
 	ld a, SFX_LEDGE
 	rst _PlaySound
 	ret
+;;;;;;;;;; PureRGBnote: ADDED: if the player is jumping down a ledge and there's a cut tree in front of it, block the player.
 .checkCutTileInFrontOfLedge
 	lda_coord 8, 13
 	cp $3D ; cut tile
 	ret z
 	jr .noCutTile
+;;;;;;;;;;
 
 INCLUDE "data/tilesets/ledge_tiles.asm"
 

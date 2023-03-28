@@ -72,7 +72,7 @@ Music_Dungeon2::
 
 ; Mt. Moon, Rock Tunnel, Victory Road
 Music_Dungeon3::
-	channel_count 3
+	channel_count 3 ; PureRGBnote: CHANGED: this used to have 4 channels, but the 4th channel was empty and a massive waste of space
 	channel 1, Music_Dungeon3_Ch1
 	channel 2, Music_Dungeon3_Ch2
 	channel 3, Music_Dungeon3_Ch3

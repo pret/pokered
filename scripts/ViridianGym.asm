@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: code that plays Giovanni's theme if we have the option turned on
+
 ViridianGym_Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, ViridianGymTrainerHeaders

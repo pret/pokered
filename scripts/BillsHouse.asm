@@ -1,3 +1,6 @@
+; PureRGBnote: ADDED: code was added to make doors appear at the back of Bills House once you become champ.
+; Bill will also talk about his new beach garden.
+
 BillsHouse_Script:
 	call BillsHouseAddDoors
 	call EnableAutoTextBoxDrawing

@@ -1,3 +1,6 @@
+; PureRGBnote: ADDED: Tracks whether to keep STRENGTH turned on, or keep autosurf turned on between maps.
+; This is done for convenience in some maps with surfing / strength rocks indoors
+
 NoResetStrengthMaps:
 	db SEAFOAM_ISLANDS_1F
 	db SEAFOAM_ISLANDS_B1F

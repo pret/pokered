@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: code that plays Giovanni's theme if we have the option turned on
+
 RocketHideoutB4F_Script:
 	call RocketHideout4Script_45473
 	call EnableAutoTextBoxDrawing
@@ -55,7 +57,7 @@ RocketHideout4Script_45473:
 	bit 3, [hl]
 	res 3, [hl]
 	ret z
-	jp GBFadeInFromWhite ; since giovanni instantly talks to us after battle we need to fade back in here after battle
+	jp GBFadeInFromWhite ; PureRGBnote: ADDED: since trainer instantly talks to us after battle we need to fade back in here after battle
 
 RocketHideout4Script_454a3:
 	xor a

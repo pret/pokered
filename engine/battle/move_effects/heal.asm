@@ -1,3 +1,4 @@
+; PureRGBnote: ADDED: heal effect is also used now to give the user of TELEPORT in battle 25% HP regen on switching out
 TeleportHealEffect:
 	ld a, d
 	push af

@@ -137,6 +137,7 @@ LoadFrontSpriteByMonIndex::
 	ret
 
 
+;;;;;;;;;; PureRGbnote: ADDED: code that remaps channel 8 of armored mewtwo's cry if it's passed to this function
 PlayCry::
 ; Play monster a's cry.
 	push af
@@ -148,6 +149,7 @@ PlayCry::
 	callfar RemapArmoredMewtwoCry
 .wait
 	jp WaitForSoundToFinish
+;;;;;;;;;;
 
 GetCryData::
 ; Load cry data for monster a.

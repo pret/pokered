@@ -11,7 +11,7 @@ Route2_Script:
 	ret
 
 ; PureRGBnote: ADDED: replaces the cut trees
-; after using the "Tree Deleter" all the cut trees will be removed
+; after using the "Tree Deleter" all but 1 of the cut trees will be removed
 Route2ReplaceCutTiles:
 	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl] ; did we load the map from a save/warp/door/battle, etc?

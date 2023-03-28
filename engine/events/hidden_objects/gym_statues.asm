@@ -52,6 +52,10 @@ GymStatueText2Text::
 	text_far _GymStatueText2
 	text_end
 
+; PureRGBnote: CHANGED: Previously gym statue name data was loaded by the respective gym's map script into wram, 
+; but it was wasteful because it's not even hard to load without even using wram values right when you read the statue.
+; this was refactored from some free wram space.
+
 GetStatueNames:
 	ld hl, StatueTextMap
 	ld a, [wCurMap]
