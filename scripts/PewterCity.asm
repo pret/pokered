@@ -17,75 +17,76 @@ PewterCityScript0:
 	xor a
 	ld [wMuseum1FCurScript], a
 	ResetEvent EVENT_BOUGHT_MUSEUM_TICKET
-	call PewterCityScript_1925e
+;	call PewterCityScript_1925e
 	ret
 
-PewterCityScript_1925e:
-	CheckEvent EVENT_BEAT_BROCK
-	ret nz
-IF DEF(_DEBUG)
-	call DebugPressedOrHeldB
-	ret nz
-ENDC
-	ld hl, CoordsData_19277
-	call ArePlayerCoordsInArray
-	ret nc
-	ld a, $f0
-	ld [wJoyIgnore], a
-	ld a, $5
-	ldh [hSpriteIndexOrTextID], a
-	jp DisplayTextID
+;To allow for a Brock skip, the guy who takes you to Brock has been completely removed.
+;PewterCityScript_1925e:
+;	CheckEvent EVENT_BEAT_BROCK
+;	ret nz
+;IF DEF(_DEBUG)
+;	call DebugPressedOrHeldB
+;	ret nz
+;ENDC
+;	ld hl, CoordsData_19277
+;	call ArePlayerCoordsInArray
+;	ret nc
+;	ld a, $f0
+;	ld [wJoyIgnore], a
+;	ld a, $5
+;	ldh [hSpriteIndexOrTextID], a
+;	jp DisplayTextID
 
-CoordsData_19277:
-	dbmapcoord 35, 17
-	dbmapcoord 36, 17
-	dbmapcoord 37, 18
-	dbmapcoord 37, 19
-	db -1 ; end
+;CoordsData_19277:
+;	dbmapcoord 35, 17
+;	dbmapcoord 36, 17
+;	dbmapcoord 37, 18
+;	dbmapcoord 37, 19
+;	db -1 ; end
 
 ;PewterCityScript1:
-	ld a, [wNPCMovementScriptPointerTableNum]
-	and a
-	ret nz
-	ld a, $3
-	ldh [hSpriteIndex], a
-	ld a, SPRITE_FACING_UP
-	ldh [hSpriteFacingDirection], a
-	call SetSpriteFacingDirectionAndDelay
-	ld a, ($3 << 4) | SPRITE_FACING_UP
-	ldh [hSpriteImageIndex], a
-	call SetSpriteImageIndexAfterSettingFacingDirection
-	call PlayDefaultMusic
-	ld hl, wFlags_0xcd60
-	set 4, [hl]
-	ld a, $d
-	ldh [hSpriteIndexOrTextID], a
-	call DisplayTextID
-	ld a, $3c
-	ldh [hSpriteScreenYCoord], a
-	ld a, $30
-	ldh [hSpriteScreenXCoord], a
-	ld a, 12
-	ldh [hSpriteMapYCoord], a
-	ld a, 17
-	ldh [hSpriteMapXCoord], a
-	ld a, $3
-	ld [wSpriteIndex], a
-	call SetSpritePosition1
-	ld a, $3
-	ldh [hSpriteIndex], a
-	ld de, MovementData_PewterMuseumGuyExit
-	call MoveSprite
-	ld a, $2
-	ld [wPewterCityCurScript], a
-	ret
+;	ld a, [wNPCMovementScriptPointerTableNum]
+;	and a
+;	ret nz
+;	ld a, $3
+;	ldh [hSpriteIndex], a
+;	ld a, SPRITE_FACING_UP
+;	ldh [hSpriteFacingDirection], a
+;	call SetSpriteFacingDirectionAndDelay
+;	ld a, ($3 << 4) | SPRITE_FACING_UP
+;	ldh [hSpriteImageIndex], a
+;	call SetSpriteImageIndexAfterSettingFacingDirection
+;	call PlayDefaultMusic
+;	ld hl, wFlags_0xcd60
+;	set 4, [hl]
+;	ld a, $d
+;	ldh [hSpriteIndexOrTextID], a
+;	call DisplayTextID
+;	ld a, $3c
+;	ldh [hSpriteScreenYCoord], a
+;	ld a, $30
+;	ldh [hSpriteScreenXCoord], a
+;	ld a, 12
+;	ldh [hSpriteMapYCoord], a
+;	ld a, 17
+;	ldh [hSpriteMapXCoord], a
+;	ld a, $3
+;	ld [wSpriteIndex], a
+;	call SetSpritePosition1
+;	ld a, $3
+;	ldh [hSpriteIndex], a
+;	ld de, MovementData_PewterMuseumGuyExit
+;	call MoveSprite
+;	ld a, $2
+;	ld [wPewterCityCurScript], a
+;	ret
 
-MovementData_PewterMuseumGuyExit:
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db -1 ; end
+;MovementData_PewterMuseumGuyExit:
+;	db NPC_MOVEMENT_DOWN
+;	db NPC_MOVEMENT_DOWN
+;	db NPC_MOVEMENT_DOWN
+;	db NPC_MOVEMENT_DOWN
+;	db -1 ; end
 
 PewterCityScript2:
 	ld a, [wd730]

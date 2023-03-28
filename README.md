@@ -2,6 +2,8 @@ Kanto Expansion Pak
 ===================
 This is a ROM Hack of Pokémon Red and Blue, aiming to expand the Kanto region with more interesting locations, evolutions added in later generations, and QoL changes.
 
+If playing on an emulator, BGB is strongly recommended for its accuracy and features. VBA's inaccuracies can cause unintended glitches.
+
 New Pokemon:
 ====
 - The 34 known beta Pokemon that were cut from RBY have been fully implemented.
@@ -106,6 +108,7 @@ QoL Enhancements
 	- The Moon Stone is available over TM23 (Dragon Rage). Dragon Rage is accessible in Celadon University!
 - Bag capacity increased from 20 to 30 items.
 - Spinner tiles move faster.
+- If a move is disabled, it now has an upper-case D instead of a lower-case one.
 
 Bug Fixes
 ====
