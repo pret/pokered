@@ -255,7 +255,8 @@ The fourth page contains Sprite-related options.
 
 - You can phone home, professor oak, even your rival from the telephones in Celadon City's Department Store. You can choose how the conversations play out, and they even can have some subsequent small events based on what you choose when you go back to PALLET TOWN!
 
-![phone tree](/screenshots/phone.png?raw=true)
+![phone tree 1](/screenshots/phone1.png?raw=true)
+![phone tree 2](/screenshots/phone2.png?raw=true)
 
 - After saving Mr.Fuji in the Pokemon Tower, you can get into the basement of the Tower. You'll find a Channeler clothed in black who just loves curses, hexes, and all that dark stuff. If you show them a GENGAR, they'll curse it to look like a HAUNTER again. Its stats won't be affected though. It'll still have GENGAR's stats. Such a powerful curse!
 
@@ -277,6 +278,7 @@ The fourth page contains Sprite-related options.
 
 ## Restored Cut Content
 
+- If you turn on OG+ Music mode, the cut content Giovanni theme will play when you encounter Giovanni
 - There is unused text in the game for when you lose to your rival - these were re-implemented and now work as expected!
 - There was an unused trainer class for Prof Oak. It's been added back into the game. Find him in Cerulean Cave after beating the Elite Four. He can be battled repeatedly. Just leave the area and come back.
 - Some trainer classes based on Beta or unused sprites were reintroduced to the game: `ROOKIE`, `RANGER`, `FIREFIGHTER`, `COOL KID`, `SOLDIER`, `CHIEF`. You'll find them in previously empty places or routes!
