@@ -324,7 +324,12 @@ StartNewGameDebug:
 IF DEF(_DEBUG)
 	ld a, [wd732]
 	bit 1, a
-	jr nz, SpecialEnterMap
+	jr z, .normal
+	ld hl, wSpriteOptions2
+	set BIT_BACK_SPRITES, [hl]
+	set BIT_MENU_ICON_SPRITES, [hl]
+	jr SpecialEnterMap
+.normal
 ENDC
 	ld c, 20
 	rst _DelayFrames
