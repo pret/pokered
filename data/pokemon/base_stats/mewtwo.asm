@@ -10,7 +10,7 @@
 	INCBIN "gfx/pokemon/front/mewtwo.pic", 0, 1 ; sprite dimensions
 	dw MewtwoPicFront, MewtwoPicBackSW
 
-	db CONFUSION, DISABLE, SWIFT, PSYCHIC_M ; level 1 learnset
+	db CONFUSION, DISABLE, SWIFT, NO_MOVE ; level 1 learnset
 	db GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
