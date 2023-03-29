@@ -11,7 +11,8 @@ MapSongBanks::
 	db MUSIC_CINNABAR, BANK(Music_Cinnabar) ; CINNABAR_ISLAND
 	db MUSIC_INDIGO_PLATEAU, BANK(Music_IndigoPlateau) ; INDIGO_PLATEAU
 	db MUSIC_CITIES1, BANK(Music_Cities1) ; SAFFRON_CITY
-	db MUSIC_CITIES1, BANK(Music_Cities1) ; UNUSED_MAP_0B
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; CITRINE_CITY
+	db MUSIC_CELADON, BANK(Music_Celadon) ; CELADON_UNIVERSITY_OUTSIDE
 	db MUSIC_ROUTES1, BANK(Music_Routes1) ; ROUTE_1
 	db MUSIC_ROUTES1, BANK(Music_Routes1) ; ROUTE_2
 	db MUSIC_ROUTES3, BANK(Music_Routes3) ; ROUTE_3
@@ -241,10 +242,9 @@ MapSongBanks::
 	db MUSIC_SILPH_CO, BANK(Music_SilphCo) ; UNUSED_MAP_EE
 	db MUSIC_CELADON, BANK(Music_Celadon) ; TRADE_CENTER
 	db MUSIC_CELADON, BANK(Music_Celadon) ; COLOSSEUM
-	db MUSIC_CELADON, BANK(Music_Celadon) ; UNUSED_MAP_F1 / Celadon University Outside
-	db MUSIC_OAKS_LAB, BANK(Music_OaksLab) ; UNUSED_MAP_F2 / Celadon University Outside
-	db MUSIC_POKECENTER, BANK(Music_Pokecenter) ; UNUSED_MAP_F3 / Celadon University Pokecenter
-	db MUSIC_SILPH_CO, BANK(Music_SilphCo) ; UNUSED_MAP_F4
+	db MUSIC_OAKS_LAB, BANK(Music_OaksLab) ; UNUSED_MAP_F1 / Celadon University Outside
+	db MUSIC_POKECENTER, BANK(Music_Pokecenter) ; UNUSED_MAP_F2 / Celadon University Pokecenter
+	db MUSIC_SILPH_CO, BANK(Music_SilphCo) ; UNUSED_MAP_F3
 	db MUSIC_GYM, BANK(Music_Gym) ; LORELEIS_ROOM
 	db MUSIC_DUNGEON1, BANK(Music_Dungeon1) ; BRUNOS_ROOM
 	db MUSIC_POKEMON_TOWER, BANK(Music_PokemonTower) ; AGATHAS_ROOM

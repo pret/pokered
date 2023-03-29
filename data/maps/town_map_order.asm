@@ -26,6 +26,7 @@ TownMapOrder:
 	db ROUTE_8
 	db ROUTE_7
 	db CELADON_CITY
+;	db CELADON_UNIVERSITY_OUTSIDE ; erosunica: uncomment this line to add it to the Town Map
 	db SAFFRON_CITY
 	db ROUTE_11
 	db ROUTE_12

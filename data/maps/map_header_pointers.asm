@@ -12,7 +12,8 @@ MapHeaderPointers::
 	dw CinnabarIsland_h
 	dw IndigoPlateau_h
 	dw SaffronCity_h
-	dw SaffronCity_h ; UNUSED_MAP_0B
+	dw SaffronCity_h ; TODO CitrineCity_h
+	dw CeladonUniversityOutside_h
 	dw Route1_h
 	dw Route2_h
 	dw Route3_h
@@ -242,10 +243,9 @@ MapHeaderPointers::
 	dw SilphCo2F_h ; UNUSED_MAP_EE
 	dw TradeCenter_h
 	dw Colosseum_h
-	dw CeladonUniversityOutside_h ; UNUSED_MAP_F1
-	dw CeladonUniversityInside_h ; UNUSED_MAP_F2
-	dw CeladonUniversityPokecenter_h ; UNUSED_MAP_F3
-	dw BillsGarden_h ; UNUSED_MAP_F4, used to use SilphCo2F_h
+	dw CeladonUniversityInside_h ; UNUSED_MAP_F1
+	dw CeladonUniversityPokecenter_h ; UNUSED_MAP_F2
+	dw BillsGarden_h ; UNUSED_MAP_F3, used to use SilphCo2F_h
 	dw LoreleisRoom_h
 	dw BrunosRoom_h
 	dw AgathasRoom_h

@@ -11,7 +11,8 @@ MapSpriteSets:
 	db $01 ; CINNABAR_ISLAND
 	db $06 ; INDIGO_PLATEAU
 	db $07 ; SAFFRON_CITY
-	db $0B ; unused map ID - now CeladonU
+	db $01 ; CITRINE_CITY
+	db $05 ; CELADON_UNIVERSITY_OUTSIDE
 	db $01 ; ROUTE_1
 	db $f1 ; ROUTE_2
 	db $02 ; ROUTE_3
@@ -60,7 +61,6 @@ SplitMapSpriteSets:
 	db NORTH_SOUTH,  2, $07, $04 ; $fa
 	db EAST_WEST,   17, $05, $07 ; $fb
 	db EAST_WEST,    3, $07, $03 ; $fc
-	db NORTH_SOUTH, 0, $05, $0B ; Celadon University
 
 SpriteSets:
 
@@ -130,15 +130,15 @@ DEF SPRITE_SET_LENGTH EQU 9 + 2
 ; sprite set $05 - Celadon City
 	table_width 1
 	db SPRITE_LITTLE_GIRL
-	db SPRITE_LITTLE_BOY
+	db SPRITE_COOLTRAINER_F ; Original: SPRITE_LITTLE_BOY
 	db SPRITE_GIRL
 	db SPRITE_FISHER
-	db SPRITE_MIDDLE_AGED_MAN
+	db SPRITE_GAMBLER ; Original: SPRITE_MIDDLE_AGED_MAN
 	db SPRITE_GRAMPS
 	db SPRITE_MONSTER
-	db SPRITE_GUARD
+	db SPRITE_SUPER_NERD ; Original: SPRITE_GUARD
 	db SPRITE_ROCKET
-	db SPRITE_POKE_BALL
+	db SPRITE_SEEL ; Original: SPRITE_POKE_BALL (static sprite)
 	db SPRITE_SNORLAX
 	assert_table_length SPRITE_SET_LENGTH
 
@@ -215,19 +215,4 @@ DEF SPRITE_SET_LENGTH EQU 9 + 2
 	db SPRITE_YOUNGSTER
 	db SPRITE_POKE_BALL
 	db SPRITE_FOSSIL
-	assert_table_length SPRITE_SET_LENGTH
-
-; sprite set $0b
-	table_width 1
-	db SPRITE_LITTLE_GIRL
-	db SPRITE_LITTLE_BOY
-	db SPRITE_COOLTRAINER_F
-	db SPRITE_SUPER_NERD
-	db SPRITE_MIDDLE_AGED_MAN
-	db SPRITE_GAMBLER
-	db SPRITE_SEEL
-	db SPRITE_GUARD
-	db SPRITE_ROCKET
-	db SPRITE_POKE_BALL
-	db SPRITE_SNORLAX
 	assert_table_length SPRITE_SET_LENGTH

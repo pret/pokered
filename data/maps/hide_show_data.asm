@@ -15,6 +15,7 @@ MapHSPointers:
 	dw NoHS
 	dw SaffronCityHS
 	dw NoHS
+	dw NoHS
 	dw Route1HS
 	dw Route2HS
 	dw NoHS
@@ -239,7 +240,6 @@ MapHSPointers:
 	dw SilphCo9FHS
 	dw SilphCo10FHS
 	dw SilphCo11FHS
-	dw NoHS
 	dw NoHS
 	dw NoHS
 	dw NoHS

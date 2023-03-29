@@ -12,7 +12,8 @@ MapHeaderBanks::
 	db BANK(CinnabarIsland_h)
 	db BANK(IndigoPlateau_h)
 	db BANK(SaffronCity_h)
-	db $01 ; UNUSED_MAP_0B
+	db $01 ; TODO BANK(CitrineCity_h)
+	db BANK(CeladonUniversityOutside_h)
 	db BANK(Route1_h)
 	db BANK(Route2_h)
 	db BANK(Route3_h)
@@ -242,10 +243,9 @@ MapHeaderBanks::
 	db $11 ; UNUSED_MAP_EE
 	db BANK(TradeCenter_h)
 	db BANK(Colosseum_h)
-	db BANK(CeladonUniversityOutside_h) ; $11 UNUSED_MAP_F1
-	db BANK(CeladonUniversityInside_h) ; $11 UNUSED_MAP_F2
-	db BANK(CeladonUniversityPokecenter_h) ; UNUSED_MAP_F3
-	db BANK(BillsGarden_h) ; UNUSED_MAP_F4, $11
+	db BANK(CeladonUniversityInside_h) ; $11 UNUSED_MAP_F1
+	db BANK(CeladonUniversityPokecenter_h) ; UNUSED_MAP_F2
+	db BANK(BillsGarden_h) ; UNUSED_MAP_F3, $11
 	db BANK(LoreleisRoom_h)
 	db BANK(BrunosRoom_h)
 	db BANK(AgathasRoom_h)
