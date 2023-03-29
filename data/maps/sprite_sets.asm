@@ -11,7 +11,7 @@ MapSpriteSets:
 	db $01 ; CINNABAR_ISLAND
 	db $06 ; INDIGO_PLATEAU
 	db $07 ; SAFFRON_CITY
-	db $01 ; unused map ID
+	db $0B ; unused map ID - now CeladonU
 	db $01 ; ROUTE_1
 	db $f1 ; ROUTE_2
 	db $02 ; ROUTE_3
@@ -60,13 +60,14 @@ SplitMapSpriteSets:
 	db NORTH_SOUTH,  2, $07, $04 ; $fa
 	db EAST_WEST,   17, $05, $07 ; $fb
 	db EAST_WEST,    3, $07, $03 ; $fc
+	db NORTH_SOUTH, 0, $05, $0B ; Celadon University
 
 SpriteSets:
 
 ; each sprite set has 9 walking sprites and 2 still sprites
 DEF SPRITE_SET_LENGTH EQU 9 + 2
 
-; sprite set $01
+; sprite set $01 - Viridian
 	table_width 1
 	db SPRITE_BLUE
 	db SPRITE_YOUNGSTER
@@ -81,7 +82,7 @@ DEF SPRITE_SET_LENGTH EQU 9 + 2
 	db SPRITE_GAMBLER_ASLEEP
 	assert_table_length SPRITE_SET_LENGTH
 
-; sprite set $02
+; sprite set $02 - Cerulean
 	table_width 1
 	db SPRITE_YOUNGSTER
 	db SPRITE_ROCKET
@@ -96,7 +97,7 @@ DEF SPRITE_SET_LENGTH EQU 9 + 2
 	db SPRITE_FAKE_TREE ; fake tree, used to be unused sleeping gambler
 	assert_table_length SPRITE_SET_LENGTH
 
-; sprite set $03
+; sprite set $03 - Lavender Town
 	table_width 1
 	db SPRITE_LITTLE_GIRL
 	db SPRITE_GIRL
@@ -111,7 +112,7 @@ DEF SPRITE_SET_LENGTH EQU 9 + 2
 	db SPRITE_FAKE_TREE ; fake tree, used to be unused sleeping gambler
 	assert_table_length SPRITE_SET_LENGTH
 
-; sprite set $04
+; sprite set $04 - Vermillion City
 	table_width 1
 	db SPRITE_BEAUTY
 	db SPRITE_SUPER_NERD
@@ -126,7 +127,7 @@ DEF SPRITE_SET_LENGTH EQU 9 + 2
 	db SPRITE_FAKE_TREE ; fake tree, used to be unused sleeping gambler
 	assert_table_length SPRITE_SET_LENGTH
 
-; sprite set $05
+; sprite set $05 - Celadon City
 	table_width 1
 	db SPRITE_LITTLE_GIRL
 	db SPRITE_LITTLE_BOY
@@ -141,7 +142,7 @@ DEF SPRITE_SET_LENGTH EQU 9 + 2
 	db SPRITE_SNORLAX
 	assert_table_length SPRITE_SET_LENGTH
 
-; sprite set $06
+; sprite set $06 - Indigo Plateau
 	table_width 1
 	db SPRITE_YOUNGSTER
 	db SPRITE_GYM_GUIDE
@@ -156,7 +157,7 @@ DEF SPRITE_SET_LENGTH EQU 9 + 2
 	db SPRITE_FAKE_TREE ; fake tree, used to be unused sleeping gambler
 	assert_table_length SPRITE_SET_LENGTH
 
-; sprite set $07
+; sprite set $07 - Saffron
 	table_width 1
 	db SPRITE_ROCKET
 	db SPRITE_SCIENTIST
@@ -171,7 +172,7 @@ DEF SPRITE_SET_LENGTH EQU 9 + 2
 	db SPRITE_FAKE_TREE ; fake tree, used to be unused sleeping gambler
 	assert_table_length SPRITE_SET_LENGTH
 
-; sprite set $08
+; sprite set $08 - Silence Bridge
 	table_width 1
 	db SPRITE_BIKER
 	db SPRITE_SUPER_NERD
@@ -186,7 +187,7 @@ DEF SPRITE_SET_LENGTH EQU 9 + 2
 	db SPRITE_SNORLAX
 	assert_table_length SPRITE_SET_LENGTH
 
-; sprite set $09
+; sprite set $09 - Cycling Road
 	table_width 1
 	db SPRITE_BIKER
 	db SPRITE_COOLTRAINER_M
@@ -201,7 +202,7 @@ DEF SPRITE_SET_LENGTH EQU 9 + 2
 	db SPRITE_SNORLAX
 	assert_table_length SPRITE_SET_LENGTH
 
-; sprite set $0a
+; sprite set $0a - Fuschia
 	table_width 1
 	db SPRITE_BIRD
 	db SPRITE_COOLTRAINER_M
@@ -214,4 +215,19 @@ DEF SPRITE_SET_LENGTH EQU 9 + 2
 	db SPRITE_YOUNGSTER
 	db SPRITE_POKE_BALL
 	db SPRITE_FOSSIL
+	assert_table_length SPRITE_SET_LENGTH
+
+; sprite set $0b
+	table_width 1
+	db SPRITE_LITTLE_GIRL
+	db SPRITE_LITTLE_BOY
+	db SPRITE_COOLTRAINER_F
+	db SPRITE_SUPER_NERD
+	db SPRITE_MIDDLE_AGED_MAN
+	db SPRITE_GAMBLER
+	db SPRITE_SEEL
+	db SPRITE_GUARD
+	db SPRITE_ROCKET
+	db SPRITE_POKE_BALL
+	db SPRITE_SNORLAX
 	assert_table_length SPRITE_SET_LENGTH
