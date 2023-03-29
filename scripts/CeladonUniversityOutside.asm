@@ -2,8 +2,6 @@ CeladonUniversityOutside_Script:
 	call EnableAutoTextBoxDrawing
 	ld de, CeladonUniversityOutside_ScriptPointers
 	ld a, [wCeladonUniversityOutsideCurScript]
-	call ExecuteCurMapScriptInTable
-	ld [wCeladonUniversityOutsideCurScript], a
 	ret
 
 CeladonUniversityOutside_ScriptPointers:

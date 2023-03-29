@@ -247,10 +247,11 @@ Credits
 * Paulluxx - Showdown Mod assistance
 * DuoM2 - Showdown Mod assistance 
 * Albatross - Much of the new sprites used in the hack (Electivire, Magmortar, Rhyperior, Tangrowth, Glaceon, Sylveon...)
+* Frrf - Assisting with the development of the Pikachu / Eevee Mode
+* erosunica - Assistance with developing Celadon University & Citrine City, plus sources for various subjects.
+* Chatot4444 - Assisting with gym scaling code
 * ZumiIsawhat? - Restorations of beta OST
 * Helix Chamber, RacieBeep, et al - Prototype Pokémon sprites
-* Frrf - Assisting with the development of the Pikachu / Eevee Mode
-* Chatot4444 - Assisting with gym scaling code
 * Vortyne - Reused a bit of code from their pureRGB hack, which was used to assist with making MissingNo. stable. Assisted in bug fixes.
 * Rangi - Reused a bit of code from their Red* / Blue* hack to make HMs usable in the overworld!
 * 大吟醸 (Daiginjo) - Assistance in translating the Tamamushi University Student Book, allowing for an accurate adaptation of the location.
