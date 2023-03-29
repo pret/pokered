@@ -1,15 +1,12 @@
 CeladonUniversityOutside_Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, CeladonUniversityOutsideTrainerHeaders
 	ld de, CeladonUniversityOutside_ScriptPointers
-	; ld a, [wCeladonUniversityOutsideCurScript] these caused the trainers to have lines of sight?
-	; call ExecuteCurMapScriptInTable
-	; ld [wCeladonUniversityOutsideCurScript], a
+	ld a, [wCeladonUniversityOutsideCurScript]
+	call ExecuteCurMapScriptInTable
+	ld [wCeladonUniversityOutsideCurScript], a
 	ret
 
 CeladonUniversityOutside_ScriptPointers:
-	dw CheckFightingMapTrainers
-	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 CeladonUniversityOutside_TextPointers:
@@ -20,17 +17,6 @@ CeladonUniversityOutside_TextPointers:
 	dw CeladonUniversityOutsideNPC1
 	dw CeladonUniversityOutsideNPC2
 	dw CeladonMagikarp
-
-CeladonUniversityOutsideTrainerHeaders:
-	def_trainers 2
-CeladonUniversityOutsideTrainerHeader0:
-	trainer EVENT_BEAT_CELADON_UNIVERSITY_OUTSIDE_TRAINER_0, 3, CeladonUniversityOutsideBattleText1, CeladonUniversityOutsideEndBattleText1, CeladonUniversityOutsideAfterBattleText1
-CeladonUniversityOutsideTrainerHeader1:
-	trainer EVENT_BEAT_CELADON_UNIVERSITY_OUTSIDE_TRAINER_1, 3, CeladonUniversityOutsideBattleText1, CeladonUniversityOutsideEndBattleText1, CeladonUniversityOutsideAfterBattleText1
-CeladonUniversityOutsideTrainerHeader2:
-	trainer EVENT_BEAT_CELADON_UNIVERSITY_OUTSIDE_TRAINER_2, 3, CeladonUniversityOutsideBattleText1, CeladonUniversityOutsideEndBattleText1, CeladonUniversityOutsideAfterBattleText1
-CeladonUniversityOutsideTrainerHeader3:
-	trainer EVENT_BEAT_CELADON_UNIVERSITY_OUTSIDE_TRAINER_3, 3, CeladonUniversityOutsideBattleText1, CeladonUniversityOutsideEndBattleText1, CeladonUniversityOutsideAfterBattleText1
 	db -1 ; end
 
 CeladonUniversityOutsideText1: ; Starter girl
@@ -41,15 +27,35 @@ CeladonUniversityOutsideText1: ; Starter girl
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .refused
-	ld hl, CeladonUniversityOutsideTrainerHeader0
-	call TalkToTrainer
+
+	ld hl, CeladonUniversityOutsideBattleText1
+	call PrintText
+	
+	ld c, BANK(Music_MeetFemaleTrainer)
+	ld a, MUSIC_MEET_FEMALE_TRAINER
+	call PlayMusic
+	
+	ld hl, wd72d
+	set 6, [hl]
+	set 7, [hl]
+	call Delay3
+	ld a, OPP_JR_TRAINER_F
+	ld [wCurOpponent], a
+	ld a, 4
+	ld [wTrainerNo], a
+	ld [wIsTrainerBattle], a
+	ld a, $2
+	ld [wCeladonUniversityOutsideCurScript], a
+	ld hl, CeladonUniversityOutsideLoseText1
+	ld de, CeladonUniversityOutsideWinText
+	call SaveEndBattleTextPointers
 	jp TextScriptEnd
 	jr .done
  .refused
 	 ld hl, CeladonUniversityRefuse
 	 jr .done
  .done
-	ld hl, CeladonUniversityOutsideAfterBattleText1
+	ld hl, CeladonUniversityOutsideAfterBattleText
 	call PrintText
 	jp TextScriptEnd
 
@@ -61,15 +67,35 @@ CeladonUniversityOutsideText2: ; Porygon guy
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .refused
-	ld hl, CeladonUniversityOutsideTrainerHeader0
-	call TalkToTrainer
+
+	ld hl, CeladonUniversityOutsideBattleText2
+	call PrintText
+	
+	ld c, BANK(Music_MeetMaleTrainer)
+	ld a, MUSIC_MEET_MALE_TRAINER
+	call PlayMusic
+	
+	ld hl, wd72d
+	set 6, [hl]
+	set 7, [hl]
+	call Delay3
+	ld a, OPP_SUPER_NERD
+	ld [wCurOpponent], a
+	ld a, 6
+	ld [wTrainerNo], a
+	ld [wIsTrainerBattle], a
+	ld a, $2
+	ld [wCeladonUniversityOutsideCurScript], a
+	ld hl, CeladonUniversityOutsideLoseText2
+	ld de, CeladonUniversityOutsideWinText
+	call SaveEndBattleTextPointers
 	jp TextScriptEnd
 	jr .done
  .refused
 	 ld hl, CeladonUniversityRefuse
 	 jr .done
  .done
-	ld hl, CeladonUniversityOutsideAfterBattleText1
+	ld hl, CeladonUniversityOutsideAfterBattleText
 	call PrintText
 	jp TextScriptEnd
 
@@ -81,15 +107,35 @@ CeladonUniversityOutsideText3: ; Golem guy
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .refused
-	ld hl, CeladonUniversityOutsideTrainerHeader0
-	call TalkToTrainer
+
+	ld hl, CeladonUniversityOutsideBattleText3
+	call PrintText
+	
+	ld c, BANK(Music_MeetMaleTrainer)
+	ld a, MUSIC_MEET_MALE_TRAINER
+	call PlayMusic
+	
+	ld hl, wd72d
+	set 6, [hl]
+	set 7, [hl]
+	call Delay3
+	ld a, OPP_ENGINEER
+	ld [wCurOpponent], a
+	ld a, 1
+	ld [wTrainerNo], a
+	ld [wIsTrainerBattle], a
+	ld a, $2
+	ld [wCeladonUniversityOutsideCurScript], a
+	ld hl, CeladonUniversityOutsideLoseText3
+	ld de, CeladonUniversityOutsideWinText
+	call SaveEndBattleTextPointers
 	jp TextScriptEnd
 	jr .done
  .refused
 	 ld hl, CeladonUniversityRefuse
 	 jr .done
  .done
-	ld hl, CeladonUniversityOutsideAfterBattleText1
+	ld hl, CeladonUniversityOutsideAfterBattleText
 	call PrintText
 	jp TextScriptEnd
 
@@ -101,15 +147,35 @@ CeladonUniversityOutsideText4: ; Mt Moon guy
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .refused
-	ld hl, CeladonUniversityOutsideTrainerHeader0
-	call TalkToTrainer
+
+	ld hl, CeladonUniversityOutsideBattleText4
+	call PrintText
+	
+	ld c, BANK(Music_MeetMaleTrainer)
+	ld a, MUSIC_MEET_MALE_TRAINER
+	call PlayMusic
+	
+	ld hl, wd72d
+	set 6, [hl]
+	set 7, [hl]
+	call Delay3
+	ld a, OPP_SUPER_NERD
+	ld [wCurOpponent], a
+	ld a, 7
+	ld [wTrainerNo], a
+	ld [wIsTrainerBattle], a
+	ld a, $2
+	ld [wCeladonUniversityOutsideCurScript], a
+	ld hl, CeladonUniversityOutsideLoseText4
+	ld de, CeladonUniversityOutsideWinText
+	call SaveEndBattleTextPointers
 	jp TextScriptEnd
 	jr .done
  .refused
 	 ld hl, CeladonUniversityRefuse
 	 jr .done
  .done
-	ld hl, CeladonUniversityOutsideAfterBattleText1
+	ld hl, CeladonUniversityOutsideAfterBattleText
 	call PrintText
 	jp TextScriptEnd
 
@@ -125,12 +191,40 @@ CeladonUniversityOutsideBattleText1:
 	text_far _CeladonUniversityOutsideBattleText1
 	text_end
 
-CeladonUniversityOutsideEndBattleText1:
-	text_far _CeladonUniversityOutsideEndBattleText1
+CeladonUniversityOutsideBattleText2:
+	text_far _CeladonUniversityOutsideBattleText2
 	text_end
 
-CeladonUniversityOutsideAfterBattleText1:
-	text_far _CeladonUniversityOutsideAfterBattleText1
+CeladonUniversityOutsideBattleText3:
+	text_far _CeladonUniversityOutsideBattleText3
+	text_end
+
+CeladonUniversityOutsideBattleText4:
+	text_far _CeladonUniversityOutsideBattleText4
+	text_end
+
+CeladonUniversityOutsideLoseText1:
+	text_far _CeladonUniversityOutsideLoseText1
+	text_end
+
+CeladonUniversityOutsideLoseText2:
+	text_far _CeladonUniversityOutsideLoseText2
+	text_end
+
+CeladonUniversityOutsideLoseText3:
+	text_far _CeladonUniversityOutsideLoseText3
+	text_end
+
+CeladonUniversityOutsideLoseText4:
+	text_far _CeladonUniversityOutsideLoseText4
+	text_end
+
+CeladonUniversityOutsideWinText:
+	text_far _CeladonUniversityOutsideWinText
+	text_end
+
+CeladonUniversityOutsideAfterBattleText:
+	text_far _CeladonUniversityOutsideAfterBattleText
 	text_end
 
 CeladonUniversityOutsideYesNo1:

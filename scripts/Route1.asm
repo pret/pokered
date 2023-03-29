@@ -63,14 +63,16 @@ Route1OakText:
 	ld hl, OakBeforeBattleText
 	call PrintText
 
-;	call YesNoChoice ; this whole bit doesn't work for some reason
-;	ld a, [wCurrentMenuItem]
-;	and a
-;	ld hl, OakYes
-;	jr nz, .got_text
-;	ld hl, OakNo
-;.got_text
+	call YesNoChoice ; this whole bit doesn't work for some reason
+	ld a, [wCurrentMenuItem]
+	and a
+	jr nz, .refused
 	
+	ld hl, OakYes
+	call PrintText
+	ld c, BANK(Music_MeetMaleTrainer)
+	ld a, MUSIC_MEET_MALE_TRAINER
+	call PlayMusic
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
@@ -103,6 +105,10 @@ Route1OakText:
 .Eevee
 	ld a, $5 ; If Eevee, Gorochu
 	jr .done
+.refused
+	ld hl, OakNo
+	call PrintText
+	jp TextScriptEnd
 .done
 	ld [wTrainerNo], a
 	ld a, 1

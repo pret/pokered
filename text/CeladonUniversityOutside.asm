@@ -11,13 +11,51 @@ _CeladonUniversityOutsideBattleText1::
 	text "Ok! Game on!"
 	done
 
-_CeladonUniversityOutsideEndBattleText1::
+_CeladonUniversityOutsideBattleText2::
+	text "Ok! Go, PORYGON!"
+	done
+
+_CeladonUniversityOutsideBattleText3::
+	text "I'm at the top"
+	line "of my game!"
+	cont "Go, GOLEM!"
+	done
+
+_CeladonUniversityOutsideBattleText4::
+	text "This time, for"
+	line "sure!"
+	done
+
+_CeladonUniversityOutsideLoseText1::
 	text "Darn!"
 	line "You beat me!"
 	prompt
 
-_CeladonUniversityOutsideAfterBattleText1::
-	text "Aww! Maybe next"
+_CeladonUniversityOutsideLoseText2::
+	text "It"
+	line "needs an"
+	cont "UP-GRADE."
+	prompt
+
+_CeladonUniversityOutsideLoseText3::
+	text "Not"
+	line "enough..."
+	prompt
+
+_CeladonUniversityOutsideLoseText4::
+	text "One"
+	line "day I'll"
+	cont "beat you!"
+	prompt
+
+_CeladonUniversityOutsideWinText::
+	text "Hmm!"
+	line "Need to brush"
+	cont "up?"
+	prompt
+
+_CeladonUniversityOutsideAfterBattleText::
+	text "I'll get you next"
 	line "time!"
 	done
 
