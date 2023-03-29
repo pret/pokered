@@ -198,14 +198,14 @@ _PuchikoonDexEntry::
 	next "is very hot"
 	dex
 
-_GyopinDexEntry::		; may rework, I just reused PokeThon's version
-	text "It was once scarce"
-	next "and rarely seen,"
-	next "but thanks to a"
+_GyopinDexEntry::		; reworked, thank you Ness :3  ~M
+	text "Its tiny fins make"
+	next "it an unskilled"
+	next "swimmer. It fends"
 
-	page "dedicated breeder,"
-	next "it has since"
-	next "flourished"
+	page "off bigger #MON"
+	next "by attacking"
+	next "with its horn"
 	dex
 
 _GorochuDexEntry::
@@ -739,12 +739,12 @@ _MeltanDexEntry::
 	dex
 	
 _MelmetalDexEntry::
-	text "A #MON revered"
-	next "as a deity over"
+	text "A myth from over"
 	next "3,000 years ago"
+	next "depicted it as a"
 
-	page "for its ability"
-	next "to create pure"
+	page "giant with the"
+	next "ability to create"
 	next "iron from nothing"
 	dex
 	
@@ -808,26 +808,6 @@ _MoltresGDexEntry::
 	next "wanders too close"
 	dex
 
-;_MeltanDexEntry::
-;	text "It feeds on metal."
-;	next "The strongest one"
-;	next "in a group will"
-	
-;	page "absorb the rest"
-;	next "to evolve into"
-;	next "a MELMETAL"
-;	dex
-
-;_MelmetalDexEntry::
-;	text "This #MON came"
-;	next "back to life"
-;	next "after 3,000"
-	
-;	page "years. Myths"
-;	next "describe it"
-;	next "becoming a giant"
-;	dex ; consider revising - include longevity and it becoming a cyclopian giant
-
 ;_ArcanineHDexEntry::
 ;	text "Its body has a"
 ;	next "rock-like feel."
@@ -869,12 +849,12 @@ _MoltresGDexEntry::
 ;	dex
 
 ;_NinetalesADexEntry::
-;	text "It was once said"
-;	next "to be a deity."
-;	next "Disliking human" ; may not quite be accurate - interpretation of ultra sun entry. consider revising.
+;	text "Once thought to"
+;	next "be a deity, it"
+;	next "appears to lost" 
 	
-;	page "presence, it"
-;	next "guides them away"
+;	page "mountain climbers"
+;	next "to guide them away"
 ;	next "from its home"
 ;	dex
 
@@ -935,7 +915,7 @@ _MoltresGDexEntry::
 	
 ;	page "Mumbling eerie"
 ;	next "spells, it makes"
-;	next "strange POTIONS"
+;	next "strange POTIONs"
 ;	dex
 
 ;_MukADexEntry::
@@ -949,13 +929,13 @@ _MoltresGDexEntry::
 ;	dex
 
 ;_ExeggutorADexEntry::
-;	text "While strong"
-;	next "sunlight has"
-;	next "allowed EXEGGUTOR"
+;	text "Strong sunlight"
+;	next "awoke its hidden"
+;	next "draconic powers."
 	
-;	page "to attain its true"
-;	next "form, its PSI"
-;	next "power has faded"
+;	page "However, as a"
+;	next "result, its PSI"
+;	next "has weakened"
 ;	dex ; consider revising
 
 ;_MarowakADexEntry::
@@ -979,13 +959,13 @@ _MoltresGDexEntry::
 ;	dex
 
 ;_MrMimeGDexEntry::
-;	text "Instead of using"
-;	next "PSI energy to"
-;	next "make invisible,"
+;	text "Although it no"
+;	next "longer creates"
+;	next "invisible walls,"
 	
-;	page "walls, this MR."
-;	next "MIME makes them"
-;	next "using ice."
+;	page "This MR.MIME can"
+;	next "use PSI to make"
+;	next "barriers of ice"
 ;	dex
 
 ;_TaurosPDexEntry::
@@ -995,7 +975,7 @@ _MoltresGDexEntry::
 	
 ;	page "its thick muscles"
 ;	next "to overwhelm its"
-;	next "opponents."
+;	next "opponents"
 ;	dex
 
 ;_TaurosPBDexEntry::
@@ -1015,7 +995,7 @@ _MoltresGDexEntry::
 	
 ;	page "shoot water at"
 ;	next "high pressure from"
-;	next "its horns."
+;	next "its horns"
 ;	dex
 
 _MissingNoDexEntry::

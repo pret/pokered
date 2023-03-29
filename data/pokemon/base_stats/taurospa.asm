@@ -7,19 +7,20 @@
 	db 45 ; catch rate
 	db 211 ; base exp
 
-	INCBIN "gfx/pokemon/front/taurospw.pic", 0, 1 ; sprite dimensions
-	dw TaurosPWPicFront, TaurosPWPicBack
+	INCBIN "gfx/pokemon/front/taurospa.pic", 0, 1 ; sprite dimensions
+	dw TaurosPAPicFront, TaurosPAPicBack
 
 	db DOUBLE_KICK, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        HORN_DRILL,   BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  \
-	     ICE_BEAM,     BLIZZARD,     HYPER_BEAM,   RAGE,         THUNDERBOLT,  \
-	     THUNDER,      EARTHQUAKE,   FISSURE,      MIMIC,        DOUBLE_TEAM,  \
-	     BIDE,         FIRE_BLAST,   SKULL_BASH,   REST,         SUBSTITUTE,   \
-	     STRENGTH, SUBMISSION, COUNTER, BUBBLE_BEAM, WATER_GUN, SURF
+	     BUBBLEBEAM,   WATER_GUN,    ICE_BEAM,     BLIZZARD,     HYPER_BEAM,   \
+	     SUBMISSION,   COUNTER,      RAGE,         THUNDERBOLT,  THUNDER,      \
+	     EARTHQUAKE,   FISSURE,      MIMIC,        DOUBLE_TEAM,  BIDE,         \
+		 FIRE_BLAST,   SKULL_BASH,   REST,         SUBSTITUTE,   SURF,         \
+	     STRENGTH
 	; end
 
-	db BANK(TaurosPWPicFront)
-	assert BANK(TaurosPWPicFront) == BANK(TaurosPWPicBack)
+	db BANK(TaurosPAPicFront)
+	assert BANK(TaurosPAPicFront) == BANK(TaurosPAPicBack)

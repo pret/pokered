@@ -1,6 +1,6 @@
 	db DEX_ARCANINE_H ; pokedex id
 
-	db  95,  115,  80,  90, 80
+	db  95, 115,  80,  90,  80
 	;   hp  atk  def  spd  spc
 
 	db FIRE, ROCK ; type
@@ -14,9 +14,10 @@
 	db GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
-	tmhm TOXIC,   		BODY_SLAM,      DOUBLE_EDGE,       RAGE,    	DRAGON_RAGE,    \
-	     DIG, 	  		MIMIC,   		DOUBLE_TEAM,       REFLECT, 	BIDE,         \
-	     FIRE_BLAST,    SWIFT,  		SKULL_BASH,        REST, 		SUBSTITUTE
+	tmhm TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  HYPER_BEAM,   \
+	     RAGE,         DRAGON_RAGE,  DIG,          MIMIC,        DOUBLE_TEAM,  \
+	     REFLECT,      BIDE,         FIRE_BLAST,   SWIFT,        SKULL_BASH,   \
+	     REST,         ROCK_SLIDE,   SUBSTITUTE
 	; end
 
 	db BANK(ArcanineHPicFront)

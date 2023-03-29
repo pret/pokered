@@ -1,11 +1,11 @@
 	db DEX_MELMETAL ; pokedex id
 
-	db  135,  143,  143,  34, 65
+	db 135, 143, 143,  34,  65
 	;   hp  atk  def  spd  spc
 
 	db STEEL, STEEL ; type
-	db 75 ; catch rate
-	db 213 ; base exp
+	db 3 ; catch rate
+	db 243 ; base exp
 
 	INCBIN "gfx/pokemon/front/melmetal.pic", 0, 1 ; sprite dimensions
 	dw MelmetalPicFront, MelmetalPicBack
@@ -14,10 +14,10 @@
 	db GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
-	tmhm TOXIC, RAGE, MIMIC, DOUBLE_TEAM, BIDE, REST, SUBSTITUTE, THUNDER_WAVE, \
-		 MEGA_PUNCH, SUBMISSION, HYPER_BEAM, MEGA_KICK, BODY_SLAM, ICE_BEAM, \
-		 SOLAR_BEAM, THUNDERBOLT, THUNDER, EARTHQUAKE, FISSURE, ROCK_SLIDE, \
-		 SUBSTITUTE
+	tmhm MEGA_PUNCH,   MEGA_KICK, 	 TOXIC, 	   BODY_SLAM, 	 ICE_BEAM,     \
+		 HYPER_BEAM,   SUBMISSION,   RAGE,  	   SOLARBEAM,    THUNDERBOLT,  \
+		 THUNDER,      EARTHQUAKE,   FISSURE, 	   MIMIC,        DOUBLE_TEAM,  \
+		 BIDE,		   REST,         THUNDER_WAVE, ROCK_SLIDE,   SUBSTITUTE
 	; end
 
 	db BANK(MelmetalPicFront)

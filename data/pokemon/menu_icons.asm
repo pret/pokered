@@ -9,8 +9,22 @@ MonPartyData:
 	nybble ICON_WATER     ; Squirtle
 	nybble ICON_WATER     ; Wartortle
 	nybble ICON_WATER     ; Totartle
+	nybble ICON_FAIRY     ; Pikachu
+	nybble ICON_FAIRY     ; Raichu
+	; 	nybble ICON_FAIRY     ; Raichu-A
+	nybble ICON_FAIRY     ; Gorochu
+	nybble ICON_QUADRUPED ; Eevee
+	nybble ICON_QUADRUPED ; Vaporeon
+	nybble ICON_QUADRUPED ; Jolteon
+	nybble ICON_QUADRUPED ; Flareon
+	nybble ICON_QUADRUPED ; Espeon
+	nybble ICON_QUADRUPED ; Umbreon
+	nybble ICON_QUADRUPED ; Leafeon
+	nybble ICON_QUADRUPED ; Glaceon
+	nybble ICON_QUADRUPED ; Sylveon
 	nybble ICON_QUADRUPED ; Rattata
 	nybble ICON_QUADRUPED ; Raticate
+	; 	nybble ICON_QUADRUPED ; Raticate-A
 	nybble ICON_BIRD      ; Pidgey
 	nybble ICON_BIRD      ; Pidgeotto
 	nybble ICON_BIRD      ; Pidgeot
@@ -24,15 +38,13 @@ MonPartyData:
 	nybble ICON_MON       ; Meowth
 	nybble ICON_MON       ; Persian
 	nybble ICON_MON       ; Perrserker
-	nybble ICON_FAIRY     ; Pikachu
-	nybble ICON_FAIRY     ; Raichu
-	nybble ICON_FAIRY     ; Gorochu
 	nybble ICON_BIRD      ; Spearow
 	nybble ICON_BIRD      ; Fearow
 	nybble ICON_SNAKE     ; Ekans
 	nybble ICON_SNAKE     ; Arbok
 	nybble ICON_MON       ; Sandshrew
 	nybble ICON_MON       ; Sandslash
+	; 	nybble ICON_MON       ; Sandslash-A
 	nybble ICON_MON       ; NidoranF
 	nybble ICON_MON       ; Nidorina
 	nybble ICON_MON       ; Nidoqueen
@@ -47,6 +59,7 @@ MonPartyData:
 	nybble ICON_MON       ; Geodude
 	nybble ICON_MON       ; Graveler
 	nybble ICON_MON       ; Golem
+	; 	nybble ICON_MON       ; Golem-A
 	nybble ICON_BUG       ; Para
 	nybble ICON_BUG       ; Paras
 	nybble ICON_BUG       ; Parasect
@@ -57,9 +70,11 @@ MonPartyData:
 	nybble ICON_QUADRUPED ; Mikon
 	nybble ICON_QUADRUPED ; Vulpix
 	nybble ICON_QUADRUPED ; Ninetales
+	; 	nybble ICON_QUADRUPED ; Ninetales-A
 	nybble ICON_QUADRUPED ; Pudi
 	nybble ICON_QUADRUPED ; Growlithe
 	nybble ICON_QUADRUPED ; Arcanine
+	; 	nybble ICON_QUADRUPED ; Arcanine-A
 	nybble ICON_MON       ; Mankey
 	nybble ICON_MON       ; Primeape
 	nybble ICON_MON       ; Annihilape
@@ -90,8 +105,15 @@ MonPartyData:
 	nybble ICON_MON       ; Poliwhirl
 	nybble ICON_MON       ; Poliwrath
 	nybble ICON_MON       ; Politoed
+	nybble ICON_MON       ; Ribbito
+	nybble ICON_MON       ; Croakozuna
+	nybble ICON_MON       ; Lickitung
+	nybble ICON_MON       ; Lickilicky
+	nybble ICON_SNAKE     ; Onix
+	nybble ICON_SNAKE     ; Steelix
 	nybble ICON_MON       ; Diglett
 	nybble ICON_MON       ; Dugtrio
+	; 	nybble ICON_MON       ; Dugtrio-A
 	nybble ICON_WATER     ; Wiglett
 	nybble ICON_WATER     ; Wugtrio
 	nybble ICON_MON       ; Drowzee
@@ -101,16 +123,11 @@ MonPartyData:
 	nybble ICON_QUADRUPED ; Gorotora
 	nybble ICON_BALL      ; Voltorb
 	nybble ICON_BALL      ; Electrode
+	; 	nybble ICON_BALL      ; Electrode-A
 	nybble ICON_WATER     ; Tentacool
 	nybble ICON_WATER     ; Tentacruel
 	nybble ICON_GRASS     ; Toedscool
 	nybble ICON_GRASS     ; Toedscruel
-	nybble ICON_MON       ; Ribbito
-	nybble ICON_MON       ; Croakozuna
-	nybble ICON_MON       ; Lickitung
-	nybble ICON_MON       ; Lickilicky
-	nybble ICON_SNAKE     ; Onix
-	nybble ICON_SNAKE     ; Steelix
 	nybble ICON_BALL      ; Magnemite
 	nybble ICON_BALL      ; Magnetite
 	nybble ICON_BALL      ; Magneton
@@ -126,10 +143,13 @@ MonPartyData:
 	nybble ICON_WATER     ; Kingler
 	nybble ICON_QUADRUPED ; Slowpoke
 	nybble ICON_MON       ; Slowbro
+	; 	nybble ICON_MON       ; Slowbro-G
 	nybble ICON_MON       ; Slowking
+	; 	nybble ICON_MON       ; Slowking-G
 	nybble ICON_QUADRUPED ; Puchikoon
 	nybble ICON_QUADRUPED ; Ponyta
 	nybble ICON_QUADRUPED ; Rapidash
+	; 	nybble ICON_QUADRUPED ; Rapidash-G
 	nybble ICON_GRASS     ; Monja
 	nybble ICON_GRASS     ; Tangela
 	nybble ICON_GRASS     ; Tangrowth
@@ -142,12 +162,15 @@ MonPartyData:
 	nybble ICON_MON       ; Gengar
 	nybble ICON_MON       ; Cubone
 	nybble ICON_MON       ; Marowak
+	; 	nybble ICON_MON       ; Marowak-A
 	nybble ICON_MON	      ; Guardia
 	nybble ICON_MON       ; Betobebii
 	nybble ICON_MON       ; Grimer
 	nybble ICON_MON       ; Muk
+	; 	nybble ICON_MON       ; Muk-A
 	nybble ICON_MON       ; Koffing
 	nybble ICON_MON       ; Weezing
+	; 	nybble ICON_MON       ; Weezing-G
 	nybble ICON_WATER     ; Blastyke
 	nybble ICON_WATER     ; Blastoise
 	nybble ICON_MON       ; Ditto
@@ -171,6 +194,7 @@ MonPartyData:
 	nybble ICON_WATER	  ; Jagg
 	nybble ICON_GRASS     ; Exeggcute
 	nybble ICON_GRASS     ; Exeggutor
+	; 	nybble ICON_GRASS     ; Exeggutor-A
 	nybble ICON_QUADRUPED ; Rhyhorn
 	nybble ICON_MON       ; Rhydon
 	nybble ICON_MON       ; Rhyperior
@@ -182,12 +206,16 @@ MonPartyData:
 	nybble ICON_MON	      ; Kangaskhan
 	nybble ICON_MON       ; Trampel
 	nybble ICON_QUADRUPED ; Tauros
+	; 	nybble ICON_QUADRUPED ; Tauros-P
+	; 	nybble ICON_QUADRUPED ; Tauros-PA
+	; 	nybble ICON_QUADRUPED ; Tauros-PB
 	nybble ICON_FAIRY     ; Chansey
 	nybble ICON_FAIRY     ; Blissey
 	nybble ICON_MON	      ; Skimper
 	nybble ICON_MON	      ; Bawligua
 	nybble ICON_MON	      ; Cryithan
 	nybble ICON_MON       ; Mr.Mime
+	; nybble ICON_MON       ; Mr.Mime-G
 	nybble ICON_MON       ; Mr.Rime
 	nybble ICON_MON       ; Jynx
 	nybble ICON_MON       ; Buu
@@ -196,15 +224,6 @@ MonPartyData:
 	nybble ICON_MON       ; Magmar
 	nybble ICON_MON       ; Magmortar
 	nybble ICON_WATER     ; Lapras
-	nybble ICON_QUADRUPED ; Eevee
-	nybble ICON_QUADRUPED ; Vaporeon
-	nybble ICON_QUADRUPED ; Jolteon
-	nybble ICON_QUADRUPED ; Flareon
-	nybble ICON_QUADRUPED ; Espeon
-	nybble ICON_QUADRUPED ; Umbreon
-	nybble ICON_QUADRUPED ; Leafeon
-	nybble ICON_QUADRUPED ; Glaceon
-	nybble ICON_QUADRUPED ; Sylveon
 	nybble ICON_BALL      ; Porygon
 	nybble ICON_BALL      ; Porygon2
 	nybble ICON_BALL      ; Porygon-Z
