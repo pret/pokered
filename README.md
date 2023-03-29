@@ -240,7 +240,7 @@ Galarian and Paldean formes are accessed on the S.S. Anne, which now returns aft
 Credits
 ====
 * Plague von Karma - Creator of the Showdown Mod, Developer
-* Martha's Against Humanity - Developer 
+* Martha's Against Humanity - Developer, tweaks of Albatross's sprites.
 * Ema Skye - Developer 
 * pret et al - Pokémon Red and Blue Disassembly Project, many tutorials helped us!
 * ausma - Showdown Mod assistance
@@ -251,7 +251,7 @@ Credits
 * erosunica - Assistance with developing Celadon University & Citrine City, plus sources for various subjects.
 * Chatot4444 - Assisting with gym scaling code
 * ZumiIsawhat? - Restorations of beta OST
-* Helix Chamber, RacieBeep, et al - Prototype Pokémon sprites
+* Helix Chamber, RacieBeep, loumilouminosus, Orchid, GBCRetro, & catstorm26 - Prototype Pokémon sprites
 * Vortyne - Reused a bit of code from their pureRGB hack, which was used to assist with making MissingNo. stable. Assisted in bug fixes.
 * Rangi - Reused a bit of code from their Red* / Blue* hack to make HMs usable in the overworld!
 * 大吟醸 (Daiginjo) - Assistance in translating the Tamamushi University Student Book, allowing for an accurate adaptation of the location.

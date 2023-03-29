@@ -2506,7 +2506,7 @@ GeodudeEvosMoves:
 
 PorygonEvosMoves:
 ; Evolutions
-	db EV_TRADE, 1, PORYGON2
+	db EV_ITEM, UP_GRADE, 1, PORYGON2
 	db 0
 ; Learnset
 	db 23, PSYBEAM

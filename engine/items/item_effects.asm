@@ -121,6 +121,7 @@ ItemUsePtrTable:
 	dw ItemUseEvoStone   ; DUBIOUS_DISC
 	dw UnusableItem      ; CITRINE_PASS
 	dw UnusableItem      ; OLDSEACHART
+	dw ItemUseEvoStone   ; UP_GRADE
 
 ItemUseBall:
 

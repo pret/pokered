@@ -105,4 +105,5 @@ ItemNames::
 	li "DUBIOUS DISC"
 	li "CITRINE PASS"
 	li "OLDSEACHART"
+	li "UP-GRADE"
 	assert_list_length NUM_ITEMS + NUM_FLOORS

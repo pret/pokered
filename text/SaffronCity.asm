@@ -150,3 +150,38 @@ _SaffronCityText25::
 	para "Release to be"
 	line "determined..."
 	done
+
+_UpGradePreReceiveText::
+	text "Huh? Did you"
+	line "get rid of all"
+	cont "those TEAM"
+	cont "ROCKET thugs?"
+	
+	text "Thank you so"
+	line "much! Here,"
+	cont "take this!"
+	prompt
+
+_ReceivedUpGradeText::
+	text "<PLAYER> received"
+	line "@"
+	text_ram wStringBuffer
+	text "!@"
+	text_end
+
+_UpGradeExplanationText::
+	text "SILPH created"
+	line "PORYGON in 1995,"
+	cont "but even now,"
+	cont "it's outdated."
+	
+	text "The UP-GRADE"
+	line "should remedy"
+	cont "that!"
+	
+	done
+
+_UpGradeNoRoomText::
+	text "You have no"
+	line "room!"
+	done

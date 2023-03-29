@@ -84,7 +84,7 @@ DEF SAFARI_ROCK EQU $16 ; overload
 	const POKE_FLUTE    ; $49
 	const LIFT_KEY      ; $4A
 	const EXP_ALL       ; $4B
-	const CANDY_JAR    ; $4C - was old rod
+	const CANDY_JAR     ; $4C - was old rod
 	const GOOD_ROD      ; $4D - replaceable
 	const SUPER_ROD     ; $4E
 	const PP_UP         ; $4F
@@ -116,6 +116,7 @@ DEF NUM_ITEMS EQU const_value - 1
 	const DUBIOUS_DISC  ; $66
 	const CITRINE_PASS  ; $67
 	const OLDSEACHART	; $68
+	const UP_GRADE		; $69
 DEF NUM_FLOORS EQU const_value - 1 - NUM_ITEMS
 
 	const_next $C4

@@ -104,4 +104,5 @@ KeyItemFlags:
 	dbit FALSE ; DUBIOUS_DISC
 	dbit TRUE  ; CITRINE_PASS
 	dbit TRUE  ; OLDSEACHART
+	dbit FALSE ; UP_GRADE
 	end_bit_array NUM_ITEMS + NUM_FLOORS

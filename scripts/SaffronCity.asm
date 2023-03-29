@@ -18,6 +18,7 @@ SaffronCity_TextPointers:
 	dw SaffronCityText14
 	dw SaffronCityText15
 	dw SaffronCityText16
+	dw SaffronCityUpGrade
 	dw SaffronCityText17
 	dw SaffronCityText18
 	dw MartSignText
@@ -120,3 +121,42 @@ SaffronCityText24:
 SaffronCityText25:
 	text_far _SaffronCityText25
 	text_end
+
+SaffronCityUpGrade:
+	text_asm
+	CheckEvent EVENT_GOT_UP_GRADE
+	jr nz, .got_item
+	ld hl, UpGradePreReceiveText
+	call PrintText
+	lb bc, UP_GRADE, 1
+	call GiveItem
+	jr nc, .bag_full
+	ld hl, ReceivedUpGradeText
+	call PrintText
+	SetEvent EVENT_GOT_UP_GRADE
+	jr .done
+.bag_full
+	ld hl, UpGradeNoRoomText
+	call PrintText
+	jr .done
+.got_item
+	ld hl, UpGradeExplanationText
+	call PrintText
+.done
+	jp TextScriptEnd
+
+UpGradePreReceiveText::
+	text_far _UpGradePreReceiveText
+	text_end
+
+ReceivedUpGradeText::
+	text_far _ReceivedUpGradeText
+	text_end
+
+UpGradeNoRoomText::
+	text_far _UpGradeNoRoomText
+	text_end 
+
+UpGradeExplanationText::
+	text_far _UpGradeExplanationText
+	text_end 

@@ -42,6 +42,7 @@ _HeartStoneDescription::
 _ProtectorDescription::
 _BlkAuguriteDescription::
 _DubiousDiscDescription::
+_UpGradeDescription::
 	text "Evolves certain"
 	next "kinds of #MON."
 	prompt
