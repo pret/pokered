@@ -68,3 +68,7 @@ Facility_Coll::
 
 Plateau_Coll::
 	coll_tiles $1b, $23, $2c, $2d, $3b, $45
+
+PreGym_Coll::
+	coll_tiles $0B, $0E, $1E, $1F
+	;coll_tiles $01, $06, $12, $13, $17, $19, $0A, $1A, $3E, $3F, $0F, $1D, $1C, $0C, $0D, $2A, $2B, $3A, $3B

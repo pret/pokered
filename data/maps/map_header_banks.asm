@@ -71,7 +71,7 @@ MapHeaderBanks::
 	db BANK(BikeShop_h)
 	db BANK(CeruleanMart_h)
 	db BANK(MtMoonPokecenter_h)
-	db BANK(CeruleanTrashedHouse_h)
+	db BANK(ViridianPreGym_h) ; was db BANK(CeruleanTrashedHouse_h)
 	db BANK(Route5Gate_h)
 	db BANK(UndergroundPathRoute5_h)
 	db BANK(Daycare_h)

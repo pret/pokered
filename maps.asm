@@ -1302,3 +1302,8 @@ INCLUDE "data/maps/headers/BillsGarden.asm"
 INCLUDE "scripts/BillsGarden.asm"
 INCLUDE "data/maps/objects/BillsGarden.asm"
 BillsGarden_Blocks: INCBIN "maps/BillsGarden.blk"
+
+INCLUDE "data/maps/headers/ViridianPreGym.asm"
+INCLUDE "scripts/ViridianPreGym.asm"
+INCLUDE "data/maps/objects/ViridianPreGym.asm"
+ViridianPreGym_Blocks: INCBIN "maps/ViridianPreGym.blk"

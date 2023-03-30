@@ -8,6 +8,7 @@ ViridianCity_Object:
 	warp_event 21,  9, VIRIDIAN_NICKNAME_HOUSE, 1
 	warp_event 32,  7, VIRIDIAN_GYM, 1
 	warp_event 32,  3, ROCKET_HIDEOUT_B1F, 2
+	warp_event 12, 15, VIRIDIAN_PRE_GYM, 1
 
 	def_bg_events
 	bg_event 17, 17,  8 ; ViridianCityText8

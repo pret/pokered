@@ -277,6 +277,7 @@ INCLUDE "text/CeladonUniversityPokecenter.asm"
 INCLUDE "text/CinnabarVolcano.asm"
 INCLUDE "text/FarawayIslandOutside.asm"
 INCLUDE "text/PokemonMansionB2F.asm"
+INCLUDE "text/ViridianPreGym.asm"
 
 SECTION "Pokédex Text", ROMX
 

@@ -11,7 +11,7 @@ TrainerDataPointers:
 	dw BikerData
 	dw BurglarData
 	dw EngineerData
-	dw UnusedJugglerData
+	dw YujirouData ; was unused juggler
 	dw FisherData
 	dw SwimmerData
 	dw CueBallData
@@ -322,10 +322,10 @@ EngineerData:
 	db 21, MAGNEMITE, 0
 	db 18, MAGNEMITE, MAGNEMITE, MAGNETITE, 0
 
-UnusedJugglerData:
-	; db $FF, 7, KONYA, 7, EEVEE, 10, LICKITUNG, 0
+YujirouData: ; was unused juggler
+	db $FF, 7, KONYA, 7, EEVEE, 10, LICKITUNG, 0
 ; post-game rematch team (currently unused)
-	; db $FF, 66, PERSIAN, 67, TAUROS, 67, MADAAMU, 66, BLISSEY, 67, SNORLAX, 70, LICKILICKY, 0
+	db $FF, 66, PERSIAN, 67, TAUROS, 67, MADAAMU, 66, BLISSEY, 67, SNORLAX, 70, LICKILICKY, 0
 
 FisherData:
 ; SS Anne 2F Rooms

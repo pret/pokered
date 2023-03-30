@@ -71,7 +71,7 @@ MapHeaderPointers::
 	dw BikeShop_h
 	dw CeruleanMart_h
 	dw MtMoonPokecenter_h
-	dw CeruleanTrashedHouse_h ; CERULEAN_TRASHED_HOUSE_COPY
+	dw ViridianPreGym_h ; CERULEAN_TRASHED_HOUSE_COPY, CeruleanTrashedHouse_h
 	dw Route5Gate_h
 	dw UndergroundPathRoute5_h
 	dw Daycare_h
