@@ -323,7 +323,7 @@ EngineerData:
 	db 18, MAGNEMITE, MAGNEMITE, MAGNETITE, 0
 
 YujirouData: ; was unused juggler
-	db $FF, 7, KONYA, 7, EEVEE, 10, LICKITUNG, 0
+	db $FF, 7, KONYA, 7, RATTATA, 10, LICKITUNG, 0
 ; post-game rematch team (currently unused)
 	db $FF, 66, PERSIAN, 67, TAUROS, 67, MADAAMU, 66, BLISSEY, 67, SNORLAX, 70, LICKILICKY, 0
 
@@ -679,8 +679,8 @@ BrunoData:
 	
 ; gyms except giovanni begin here
 BrockData:
-	db $FF, 10, GEODUDE, 10, RHYHORN, 11, DECILLA, 13, ONIX, 0								; 0 badges
-	db $FF, 19, GEODUDE, 18, OMANYTE, 18, KABUTO, 19, DECILLA, 21, ONIX, 0					; 1
+	db $FF, 10, GEODUDE, 11, DECILLA, 13, ONIX, 0											; 0 badges
+	db $FF, 19, GEODUDE, 18, KABUTO, 19, DECILLA, 21, ONIX, 0								; 1
 	db $FF, 22, GRAVELER, 22, OMANYTE, 22, KABUTO, 23, DECILLA, 25, ONIX, 0					; 2
 	db $FF, 29, GRAVELER, 28, OMANYTE, 28, KABUTO, 29, DECILLA, 31, ONIX, 0					; 3
 	db $FF, 39, GOLEM, 38, OMANYTE, 38, KABUTO, 39, NIDOREIGN, 41, GYAOON, 0				; 4
@@ -690,7 +690,7 @@ BrockData:
 	db $FF, 66, GOLEM, 67, OMASTAR, 67, KABUTOPS, 66, NIDOREIGN, 67, KLEAVOR, 70, GYAOON, 0	; 8 (postgame)
 
 MistyData:
-	db $FF, 10, HORSEA, 10, CHEEP, 11, GYOPIN, 13, WEIRDUCK, 0								; 0 badges
+	db $FF, 10, HORSEA, 11, GYOPIN, 13, STARYU, 0											; 0 badges
 	db $FF, 19, HORSEA, 18, CHEEP, 18, GOLDEEN, 19, WEIRDUCK, 21, STARMIE, 0				; 1
 	db $FF, 22, HORSEA, 22, CHEEP, 22, GOLDEEN, 23, WEIRDUCK, 25, STARMIE, 0				; 2
 	db $FF, 29, HORSEA, 28, JABETTA, 28, GOLDEEN, 29, WEIRDUCK, 31, STARMIE, 0				; 3
@@ -701,7 +701,7 @@ MistyData:
 	db $FF, 66, STARMIE, 67, VAPOREON, 67, GOLDUCK, 66, TOTARTLE, 67, JAGG, 70, GYARADOS, 0	; 8 (postgame)
 
 LtSurgeData:
-	db $FF, 10, VOLTORB, 10, KOTORA, 11, PIKACHU, 13, MAGNETITE, 0									; 0 badges
+	db $FF, 10, VOLTORB, 10, KOTORA, 11, PIKACHU, 0													; 0 badges
 	db $FF, 19, VOLTORB, 18, KOTORA, 18, PIKACHU, 19, MAGNETITE, 21, ELECTABUZZ, 0					; 1
 	db $FF, 22, VOLTORB, 22, GAOTORA, 22, MAGNETITE, 23, ELECTABUZZ, 25, GOROCHU, 0					; 2
 	db $FF, 28, ELECTRODE, 28, GAOTORA, 28, MAGNETITE, 29, ELECTABUZZ, 31, GOROCHU, 0				; 3

@@ -9,5 +9,6 @@ ViridianPreGym_Object:
 
 	def_object_events
 	object_event  5,  2, SPRITE_YOUNGSTER, STAY, NONE, 1 ; person, Yujirou
+	object_event  5,  2, SPRITE_YOUNGSTER, STAY, NONE, 2 ; person, Yujirou 2
 
 	def_warps_to VIRIDIAN_PRE_GYM

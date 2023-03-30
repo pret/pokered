@@ -6954,8 +6954,16 @@ _LoadTrainerPic:
 	ld d, a ; de contains pointer to trainer pic
 	ld a, [wLinkState]
 	and a
-	ld a, BANK("Pics 6") ; this is where all the trainer pics are (not counting Red's)
-	jr z, .loadSprite
+	;ld a, BANK("Pics 6") ; this is where all the trainer pics are (not counting Red's)
+	;jr z, .loadSprite
+	jr nz, .useRed ; New Trainer Pic code, credit to Rangi's Red*/Blue* hack
+	ld a, [wTrainerClass]
+	cp YUJIROU ; first trainer class in "Pics 10"
+	ld a, Bank("Pics 10")
+	jr nc, .loadSprite
+	ld a, Bank("Pics 6")
+	jr .loadSprite
+.useRed
 	ld a, BANK(RedPicFront)
 .loadSprite
 	call UncompressSpriteFromDE

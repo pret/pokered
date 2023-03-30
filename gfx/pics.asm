@@ -544,4 +544,6 @@ ToedscruelPicFront::      INCBIN "gfx/pokemon/front/toedscruel.pic"
 ToedscruelPicBack::       INCBIN "gfx/pokemon/back/toedscruelb.pic"
 MissingNoPicFront::    INCBIN "gfx/pokemon/front/missingno.pic"
 MissingNoPicBack::     INCBIN "gfx/pokemon/back/missingnob.pic"
+
+SECTION "Pics 10", ROMX ; Extra Trainer Bank
 YujirouPic::	   INCBIN "gfx/trainers/yujirou.pic"

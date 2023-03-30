@@ -109,6 +109,12 @@ HallofFameRoomScript1:
 	ld a, HS_MANSION_GUARD
 	ld [wMissableObjectIndex], a
 	predef HideObject
+	ld a, HS_YUJIROU
+	ld [wMissableObjectIndex], a
+	predef HideObject
+	ld a, HS_YUJIROU_REMATCH
+	ld [wMissableObjectIndex], a
+	predef ShowObject
 	ld a, $2
 	ld [wHallOfFameCurScript], a
 	ret

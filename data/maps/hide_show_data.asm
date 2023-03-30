@@ -73,7 +73,7 @@ MapHSPointers:
 	dw NoHS
 	dw NoHS
 	dw NoHS
-	dw NoHS
+	dw ViridianPreGymHS
 	dw NoHS
 	dw NoHS
 	dw NoHS
@@ -582,6 +582,10 @@ Route1HS:
 	db ROUTE_1, $03, HIDE ; PROF OAK fight. To test, change to SHOW. - PvK
 MtMoonCraterHS:
 	db MT_MOON_CRATER, $10, SHOW ; Crater Guard
+ViridianPreGymHS:
+	db VIRIDIAN_PRE_GYM, $01, SHOW ; Initial Yujirou
+	db VIRIDIAN_PRE_GYM, $02, HIDE ; Yujirou Rematch
+
 	db $FF, $01, SHOW ; end
 
 	assert_table_length NUM_HS_OBJECTS + 1

@@ -248,4 +248,6 @@ DEF SHOW EQU $15
 	const HS_MT_MOON_CRATER_GUARD		; EC
 	const HS_MANSION_GUARD				; ED
 	const HS_BILLS_NIDORINO				; EE
+	const HS_YUJIROU					; EF
+	const HS_YUJIROU_REMATCH			; uhhh F0?
 DEF NUM_HS_OBJECTS EQU const_value

@@ -37,3 +37,37 @@ _YujirouAfterBattleText::
 	line "beat you!"
 	
 	done
+
+_YujirouIntro2::
+	text "Hey! You're back!"
+	
+	para "After GIOVANNI got"
+	line "exposed for who"
+	cont "he truly is, I'm"
+	cont "closer than ever"
+	cont "to my goal!"
+	
+	para "<PLAYER>!"
+	
+	para "This time, I"
+	line "will defeat you!"
+	
+	done
+
+_YujirouLoseText2::
+	text "Huh?!"
+	line "Not again!"
+	prompt
+
+_YujirouAfterBattleText2::
+	text "I lost..."
+	
+	para "..."
+	
+	para "I had all the"
+	line "best NORMAL-"
+	cont "type #MON."
+	
+	para "Maybe it's me?"
+	
+	done
