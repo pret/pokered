@@ -27,7 +27,6 @@ ENDM
 	trainer_const BIKER          ; $0A
 	trainer_const BURGLAR        ; $0B
 	trainer_const ENGINEER       ; $0C
-	trainer_const YUJIROU 		 ; $0D, was unused juggler
 	trainer_const FISHER         ; $0E
 	trainer_const SWIMMER        ; $0F
 	trainer_const CUE_BALL       ; $10
@@ -62,4 +61,5 @@ ENDM
 	trainer_const CHANNELER      ; $2D
 	trainer_const AGATHA         ; $2E
 	trainer_const LANCE          ; $2F
+	trainer_const YUJIROU 		 ; $0D, was unused juggler, also not 0D but I can't be bothered to change everything
 DEF NUM_TRAINERS EQU const_value - 1

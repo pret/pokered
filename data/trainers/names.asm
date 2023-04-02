@@ -11,7 +11,6 @@ TrainerNames::
 	db "BIKER@"
 	db "BURGLAR@"
 	db "ENGINEER@"
-	db "YUJIROU@"
 	db "FISHERMAN@"
 	db "SWIMMER@"
 	db "CUE BALL@"
@@ -46,3 +45,4 @@ TrainerNames::
 	db "CHANNELER@"
 	db "AGATHA@"
 	db "LANCE@"
+	db "YUJIROU@"

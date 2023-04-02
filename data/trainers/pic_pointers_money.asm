@@ -19,7 +19,6 @@ TrainerPicAndMoneyPointers::
 	pic_money BikerPic,        2000
 	pic_money BurglarPic,      9000
 	pic_money EngineerPic,     5000
-	pic_money YujirouPic,      9900 ; was unused juggler
 	pic_money FisherPic,       3500
 	pic_money SwimmerPic,       500
 	pic_money CueBallPic,      2500
@@ -54,4 +53,5 @@ TrainerPicAndMoneyPointers::
 	pic_money ChannelerPic,    3000
 	pic_money AgathaPic,       9900
 	pic_money LancePic,        9900
+	pic_money YujirouPic,      9900 ; was unused juggler
 	assert_table_length NUM_TRAINERS

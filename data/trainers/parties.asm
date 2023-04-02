@@ -11,7 +11,6 @@ TrainerDataPointers:
 	dw BikerData
 	dw BurglarData
 	dw EngineerData
-	dw YujirouData ; was unused juggler
 	dw FisherData
 	dw SwimmerData
 	dw CueBallData
@@ -46,6 +45,7 @@ TrainerDataPointers:
 	dw ChannelerData
 	dw AgathaData
 	dw LanceData
+	dw YujirouData ; was unused juggler
 
 ; if first byte != $FF, then
 	; first byte is level (of all pokemon on this team)
@@ -321,11 +321,6 @@ EngineerData:
 ; Route 11
 	db 21, MAGNEMITE, 0
 	db 18, MAGNEMITE, MAGNEMITE, MAGNETITE, 0
-
-YujirouData: ; was unused juggler
-	db $FF, 7, KONYA, 7, RATTATA, 10, LICKITUNG, 0
-; post-game rematch team (currently unused)
-	db $FF, 66, PERSIAN, 67, TAUROS, 67, MADAAMU, 66, BLISSEY, 67, SNORLAX, 70, LICKILICKY, 0
 
 FisherData:
 ; SS Anne 2F Rooms
@@ -858,3 +853,8 @@ LanceData:
 	db $FF, 58, CROCKY, 57, KINGDRA, 57, AERODACTYL, 59, CHARIZARD, 59, CRYITHAN, 62, DRAGONITE, 0
 ; post-game rematch team (currently unused)
 	; db $FF, 78, CROCKY, 77, KINGDRA, 77, AERODACTYL, 79, EXEGGUTOR_A, 79, CRYITHAN, 82, DRAGONITE, 0
+
+YujirouData: ; was unused juggler
+	db $FF, 7, KONYA, 7, RATTATA, 10, LICKITUNG, 0
+; post-game rematch team (currently unused)
+	db $FF, 66, PERSIAN, 67, TAUROS, 67, MADAAMU, 66, BLISSEY, 67, SNORLAX, 70, LICKILICKY, 0
