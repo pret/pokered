@@ -3,7 +3,6 @@ CeladonUniversityInside_Script:
 
 CeladonUniversityInside_TextPointers:
 	dw CeladonUniversityInsideText1
-	dw CeladonUniversityTrader
 	dw CeladonUniversityInsideText2
 	dw CeladonUniversityInsideText3
 	dw CeladonUniversityInsideText4
@@ -11,19 +10,14 @@ CeladonUniversityInside_TextPointers:
 	dw CeladonUniversityInsideBookcaseText2
 	dw CeladonUniversityInsideBookcaseText3
 	dw SlowbroCry
+	dw MoveDeleterText1
+	dw MoveRelearnerText1
 	dw CeladonUniversityInsideText5
 	dw CeladonUniversityPCScreen
 
 CeladonUniversityInsideText1:
 	text_far _CeladonUniversityInsideText1
 	text_end
-
-CeladonUniversityTrader:
-	text_asm
-	ld a, TRADE_WITH_SELF
-	ld [wWhichTrade], a
-	predef DoInGameTradeDialogue
-	jp TextScriptEnd
 
 CeladonUniversityInsideText2:
 	text_far _CeladonUniversityInsideText2

@@ -682,7 +682,7 @@ SetCursorPositionsFromOptions:
 TextSpeedOptionData:
 	db 14, TEXT_DELAY_SLOW
 	db  7, TEXT_DELAY_MEDIUM
-	db  0, TEXT_DELAY_FAST ; this increases the fast text speed by a frame per tick - PvK
+	db  1, TEXT_DELAY_FAST
 	db  7, -1 ; end (default X coordinate)
 
 CheckForPlayerNameInSRAM:

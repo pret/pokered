@@ -510,4 +510,196 @@ WriteMonMoves_ShiftMoveData:
 Evolution_FlagAction:
 	predef_jump FlagActionPredef
 
+; From here, Move Relearner-related code -PvK
+;joenote - custom function by Mateo for move relearner
+PrepareRelearnableMoveList:: ; I don't know how the fuck you're a single colon in shin pokered but it sure as shit doesn't work here - PvK
+; Loads relearnable move list to wRelearnableMoves.
+; Input: party mon index = [wWhichPokemon]
+	; Get mon id.
+	ld a, [wWhichPokemon]
+	ld c, a
+	ld b, 0
+	ld hl, wPartySpecies
+	add hl, bc
+	ld a, [hl] ; a = mon id
+	ld [wd0b5], a	;joenote - put mon id into wram for potential later usage of GetMonHeader
+	; Get pointer to evos moves data.
+	dec a
+	ld c, a
+	ld b, 0
+	ld hl, EvosMovesPointerTable
+	add hl, bc
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a  ; hl = pointer to evos moves data for our mon
+	push hl
+	; Get pointer to mon's currently-known moves.
+	ld a, [wWhichPokemon]
+	ld hl, wPartyMon1Level
+	ld bc, wPartyMon2 - wPartyMon1
+	call AddNTimes
+	ld a, [hl]
+	ld b, a
+	push bc
+	ld a, [wWhichPokemon]
+	ld hl, wPartyMon1Moves
+	ld bc, wPartyMon2 - wPartyMon1
+	call AddNTimes
+	pop bc
+	ld d, h
+	ld e, l
+	pop hl
+	; Skip over evolution data.
+.skipEvoEntriesLoop
+	ld a, [hli]
+	and a
+	jr nz, .skipEvoEntriesLoop
+	; Write list of relearnable moves, while keeping count along the way.
+	; de = pointer to mon's currently-known moves
+	; hl = pointer to moves data for our mon
+	;  b = mon's level
+	ld c, 0 ; c = count of relearnable moves
+.loop
+	ld a, [hli]
+	and a
+	jr z, .done
+	cp b
+	jr c, .addMove
+	jr nz, .done
+.addMove
+	push bc
+	ld a, [hli] ; move id
+	ld b, a
+	; Check if move is already known by our mon.
+	push de
+	ld a, [de]
+	cp b
+	jr z, .knowsMove
+	inc de
+	ld a, [de]
+	cp b
+	jr z, .knowsMove
+	inc de
+	ld a, [de]
+	cp b
+	jr z, .knowsMove
+	inc de
+	ld a, [de]
+	cp b
+	jr z, .knowsMove
+.relearnableMove
+	pop de
+	push hl
+	; Add move to the list, and update the running count.
+	ld a, b
+	ld b, 0
+	ld hl, wMoveBuffer + 1
+	add hl, bc
+	ld [hl], a
+	pop hl
+	pop bc
+	inc c
+	jr .loop
+.knowsMove
+	pop de
+	pop bc
+	jr .loop
+.done	
+
+;joenote - start checking for level-0 moves
+	xor a
+	ld b, a	;b will act as a counter, as there can only be up to 4 level-0 moves
+	call GetMonHeader ;mon id already stored earlier in wd0b5
+	ld hl, wMonHMoves
+.loop2
+	ld a, b	;get the current loop counter into a
+	cp $4
+	jr nc, .done2	;if gone through 4 moves already, reached the end of the list. move to done2.
+	ld a, [hl]	;load move
+	and a
+	jr z, .done2	;if move has id 0, list has reached the end early. move to done2.
+	
+	;check if the move is already in the learnable move list
+	push bc
+	push hl
+	;c = buffer length
+.buffer_loop
+	ld hl, wMoveBuffer
+	ld b, 0
+	add hl, bc	;move to buffer at current c value
+	ld b, a	;b = move id
+	ld a, [hl] ; move id at buffer point
+	cp b
+	ld a, b	;a = move id
+	jr z, .move_in_buffer
+	inc c
+	dec c
+	jr z, .end_buffer_loop	;jump out if start of buffer is reached
+	dec c	;else decrement c and loop again
+	jr .buffer_loop
+.move_in_buffer
+	pop hl
+	pop bc
+	inc hl	;increment to the next level-0 move
+	inc b	;increment the loop counter
+	jr .loop2
+.end_buffer_loop
+	pop hl
+	pop bc
+	
+	;Check if move is already known by our mon.
+	push bc
+	ld a, [hl] ; move id
+	ld b, a
+	push de
+	ld a, [de]
+	cp b
+	jr z, .knowsMove2
+	inc de
+	ld a, [de]
+	cp b
+	jr z, .knowsMove2
+	inc de
+	ld a, [de]
+	cp b
+	jr z, .knowsMove2
+	inc de
+	ld a, [de]
+	cp b
+	jr z, .knowsMove2
+
+	;if the move is not already known, add it to the learnable move list
+	pop de
+	push hl
+	; Add move to the list, and update the running count.
+	ld a, b
+	ld b, 0
+	ld hl, wMoveBuffer + 1
+	add hl, bc
+	ld [hl], a
+	pop hl
+	pop bc
+	inc c
+	inc hl	;increment to the next level-0 move
+	inc b	;increment the loop counter
+	jr .loop2
+	
+.knowsMove2
+	pop de
+	pop bc
+	inc hl	;increment to the next level-0 move
+	inc b	;increment the loop counter
+	jr .loop2
+	
+.done2
+	ld b, 0
+	ld hl, wMoveBuffer + 1
+	add hl, bc
+	ld a, $ff
+	ld [hl], a
+	ld hl, wMoveBuffer
+	ld [hl], c
+	ret
+
 INCLUDE "data/pokemon/evos_moves.asm"

@@ -278,6 +278,8 @@ INCLUDE "text/CinnabarVolcano.asm"
 INCLUDE "text/FarawayIslandOutside.asm"
 INCLUDE "text/PokemonMansionB2F.asm"
 INCLUDE "text/ViridianPreGym.asm"
+INCLUDE "text/move_deleter.asm"
+INCLUDE "text/move_relearner.asm"
 
 SECTION "Pokédex Text", ROMX
 

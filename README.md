@@ -48,8 +48,8 @@ New areas
 ====
 - Celadon University is just north of Celadon.
 	- This is a reference to a Magikarp event from July 1998, and includes the lore from it and other areas of Pokemon's early worldbuilding.
-	- This area also contains a Trade-back NPC to let you get trade evolutions.
 	- New infinitely re-battleable trainers are accessible.
+	- There's a Move Deleter and Move Relearner!
 - Citrine City is a new island city that can be accessed in the postgame.
 - Underwater Tunnel connects Route 25 and Route 10.
 - Cinnabar Volcano is a new area that houses Moltres, allowing it to be obtained before Victory Road.
@@ -67,6 +67,7 @@ Improved areas
 - The Route 5-6 underground path contains a shortcut to Celadon City. 
 	- This allows you to skip Route 9 and Rock Tunnel, making them optional areas and opening up central Kanto.
 - Cinnabar Island is a lot bigger, and has a new location added to it. The mansion seems different too...
+- Cinnabar Lab's trade room features an NPC who'll trade you back your Pokemon for trade evolutions!
 - Pokemon Tower was shortened, being less intensive and adding room for more maps.
 - Silph Co's pathing was completely overhauled to make navigating it less tedious.
 - Viridian Gym now has a new area once you make Giovanni leave.
@@ -151,8 +152,6 @@ Known Bugs
 ====
 - Only portions of spinner tiles animate.
 - Occasionally, menu text sets itself to scroll.
-- Some sprites in the Celadon University area spawn bugged out on certain emulators; the more accurate it is, the more it seems to happen (eg. BGB).
-- Battling multiple of the trainers in Celadon University causes a crash when attempting to go to Route 16
 - The lone Rocket in Viridian Gym's basement needs to be directly spoken to to be battled
 
 Evolution Methods for new Pokemon
@@ -253,6 +252,7 @@ Credits
 * ZumiIsawhat? - Restorations of beta OST
 * Helix Chamber, RacieBeep, loumilouminosus, Orchid, GBCRetro, & catstorm26 - Prototype Pokémon sprites
 * Vortyne - Reused a bit of code from their pureRGB hack, which was used to assist with making MissingNo. stable. Assisted in bug fixes.
+* jojobear13 & Mateo - Move deleter & move relearner functionality from Shin Pokered, followed [this guide](https://github.com/jojobear13/shinpokered/blob/master/how%20to%20guides/how%20to%20add%20the%20move%20relearner%26deleter.txt). Tweaks were made to make it compatible with the pokered version we worked off of.
 * Rangi - Reused a bit of code from their Red* / Blue* hack to make HMs usable in the overworld!
 * 大吟醸 (Daiginjo) - Assistance in translating the Tamamushi University Student Book, allowing for an accurate adaptation of the location.
 
