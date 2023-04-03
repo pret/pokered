@@ -2,6 +2,7 @@ SecretLab_Script:
 	call ReplaceDoor
 	call CheckOpponentLeaves
 	call CheckOpponentWalkIn
+	call CheckStartMusic
 	call CheckNoteButtons
 	call CheckWalkingToDoor
 	call CheckMewtwoTransform
@@ -13,20 +14,7 @@ SecretLabPlayMusic::
 	ld a, [wReplacedMapMusic]
 	cp MUSIC_SECRET_LAB1 ; are we already playing the dungeon's music? (can happen when changing the option in the option menu)
 	ret z ; this track always plays regardless of option when in this map's current state, so don't do anything
-	ld a, MUSIC_SECRET_LAB1
-	ld [wReplacedMapMusic], a
-	ld c, BANK(Music_Dungeon2)
-	ld a, MUSIC_DUNGEON2
-	call PlayMusic ; start playing something else with 4 channels in bank 3
-	; replace it with the actual music we want immediately
-	ld de, Music_SecretLab_Ch1
-	callfar Audio3_RemapChannel1
-	ld de, Music_SecretLab_Ch2
-	callfar Audio3_RemapChannel2
-	ld de, Music_SecretLab_Ch3
-	callfar Audio3_RemapChannel3
-	ld de, Music_SecretLab_Ch4
-	jpfar Audio3_RemapChannel4
+	call PlayStartingSecretLabMusic
 .enhancedMusic
 	ld a, d
 	and a
@@ -59,6 +47,22 @@ PlayEnhancedSecretLabMusic:
 	ld a, MUSIC_CINNABAR_MANSION
 	ld c, BANK(Music_CinnabarMansion)
 	jp PlayMusic
+
+PlayStartingSecretLabMusic:
+	ld a, MUSIC_SECRET_LAB1
+	ld [wReplacedMapMusic], a
+	ld c, BANK(Music_Dungeon2)
+	ld a, MUSIC_DUNGEON2
+	call PlayMusic ; start playing something else with 4 channels in bank 3
+	; replace it with the actual music we want immediately
+	ld de, Music_SecretLab_Ch1
+	callfar Audio3_RemapChannel1
+	ld de, Music_SecretLab_Ch2
+	callfar Audio3_RemapChannel2
+	ld de, Music_SecretLab_Ch3
+	callfar Audio3_RemapChannel3
+	ld de, Music_SecretLab_Ch4
+	jpfar Audio3_RemapChannel4
 
 
 ReplaceDoor:
@@ -279,6 +283,19 @@ SoldierLeaveMovementAlternative:
 	db NPC_MOVEMENT_DOWN
 	db -1
 
+CheckStartMusic:
+	CheckEvent EVENT_BEAT_SECRET_LAB_CHIEF
+	ret z
+	CheckEvent EVENT_OPENED_SECRET_LAB_BARRICADE
+	ret nz
+	CheckEvent EVENT_STOPPED_MUSIC_NOTE_BUTTONS
+	ret z
+	ld a, [wYCoord]
+	cp 27
+	ret c
+	ResetEvent EVENT_STOPPED_MUSIC_NOTE_BUTTONS
+	jp PlayStartingSecretLabMusic
+
 CheckNoteButtons:
 	ld a, [wYCoord]
 	cp 7
@@ -364,6 +381,11 @@ CheckNoteButtons:
 	ret
 .playButtonPressTick	
 	push af
+	CheckEvent EVENT_OPENED_SECRET_LAB_BARRICADE
+	jr nz, .noStopMusic
+	call StopAllMusic
+	SetEvent EVENT_STOPPED_MUSIC_NOTE_BUTTONS
+.noStopMusic
 	ld a, SFX_TELEPORT_ENTER_2
 	rst _PlaySound
 	ld c, 10
@@ -414,6 +436,7 @@ CheckPasswordCorrect:
 	cp 6
 	jr nz, .loop
 	; matching password
+	ResetEvent EVENT_STOPPED_MUSIC_NOTE_BUTTONS
 	ld c, 20
 	rst _DelayFrames
 	call StopAllMusic

@@ -1367,7 +1367,7 @@ Audio1_CalculateFrequency:
 Audio1_PlaySound::
 	ld [wSoundID], a
 	cp SFX_STOP_ALL_MUSIC
-	jp z, .stopAllAudio
+	jp z, StopAllAudio
 	cp MAX_SFX_ID_1
 	jp z, .playSfx
 	jp c, .playSfx
@@ -1445,10 +1445,6 @@ Audio1_PlaySound::
 	jp z, .playSoundCommon
 	dec c
 	jp .sfxChannelLoop
-
-.stopAllAudio
-	call StopAllAudio
-	ret
 
 ; fills d bytes at hl with a
 .FillMem
