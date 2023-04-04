@@ -239,8 +239,8 @@
 	const MR_RIME            ; $E6
 	const MELTAN			 ; $E7
 	const MELMETAL		   	 ; $E8
-	; const ARCANINE_H		   ; $E9
-	; const ELECTRODE_H		   ; $EA
+	const ARCANINE_H		 ; $E9
+	const ELECTRODE_H		 ; $EA
 	; const RATICATE_A		   ; $EB
 	; const RAICHU_A           ; $EC
 	; const SANDSLASH_A		   ; $ED

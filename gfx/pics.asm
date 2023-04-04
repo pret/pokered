@@ -549,7 +549,13 @@ ToedscruelPicBack::       INCBIN "gfx/pokemon/back/toedscruelb.pic"
 MissingNoPicFront::    INCBIN "gfx/pokemon/front/missingno.pic"
 MissingNoPicBack::     INCBIN "gfx/pokemon/back/missingnob.pic"
 
-SECTION "Pics 10", ROMX ; Extra Trainer Bank
+SECTION "Pics 10", ROMX ; Extra Trainer Bank, currently storing regionals here too
+
+ArcanineHPicFront::    INCBIN "gfx/pokemon/front/arcanineh.pic"
+ArcanineHPicBack::     INCBIN "gfx/pokemon/back/arcaninehb.pic"
+ElectrodeHPicFront::   INCBIN "gfx/pokemon/front/electrodeh.pic"
+ElectrodeHPicBack::    INCBIN "gfx/pokemon/back/electrodehb.pic"
+
 YujirouPic::	    INCBIN "gfx/trainers/yujirou.pic"
 StudentPic::	    INCBIN "gfx/trainers/student.pic"
 FirefighterPic::	INCBIN "gfx/trainers/firefighter.pic"

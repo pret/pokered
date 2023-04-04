@@ -34,7 +34,6 @@ EvosMovesPointerTable:
 	dw RhyhornEvosMoves
 	dw LaprasEvosMoves
 	dw ArcanineEvosMoves
-	;dw ArcanineHEvosMoves
 	dw MewEvosMoves
 	dw GyaradosEvosMoves
 	dw ShellderEvosMoves
@@ -166,7 +165,6 @@ EvosMovesPointerTable:
 	dw CloysterEvosMoves
 	dw MagnetiteEvosMoves
 	dw ElectrodeEvosMoves
-	;dw ElectrodeHEvosMoves
 	dw ClefableEvosMoves
 	dw WeezingEvosMoves
 	;dw WeezingGEvosMoves
@@ -264,6 +262,8 @@ EvosMovesPointerTable:
 	dw MrRimeEvosMoves
 	dw MeltanEvosMoves
 	dw MelmetalEvosMoves
+	dw ArcanineHEvosMoves
+	dw ElectrodeHEvosMoves
 	dw ArticunoGEvosMoves	
 	dw ZapdosGEvosMoves
 	dw MoltresGEvosMoves
@@ -524,18 +524,6 @@ ArcanineEvosMoves:
 	db 0
 ; Learnset
 	db 0
-
-;ArcanineHEvosMoves:
-; Evolutions
-;	db 0
-; Learnset
-;	db 18, EMBER ; no growlithe-hisui
-;	db 23, LEER
-;	db 30, TAKE_DOWN
-;	db 35, ROCK_SLIDE
-;	db 39, AGILITY
-;	db 50, FLAMETHROWER
-;	db 0
 
 MewEvosMoves:
 ; Evolutions
@@ -3269,6 +3257,29 @@ MelmetalEvosMoves:
 	db 72, IRON_HEAD
 	db 81, SUBMISSION
 	db 90, HYPER_BEAM
+	db 0
+	
+ArcanineHEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 18, EMBER ; no growlithe-hisui
+	db 23, LEER
+	db 30, TAKE_DOWN
+	db 35, ROCK_SLIDE
+	db 39, AGILITY
+	db 50, FLAMETHROWER
+	db 0
+	
+ElectrodeHEvosMoves: ; voltorb-hisui learnset which is also trode's anyway
+; Evolutions
+	db 0
+; Learnset
+	db 17, SONICBOOM
+	db 22, SELFDESTRUCT
+	db 29, LIGHT_SCREEN
+	db 36, SWIFT
+	db 43, EXPLOSION
 	db 0
 
 ArticunoGEvosMoves:

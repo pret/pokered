@@ -22,7 +22,8 @@ SetIshiharaTeam:
 
 IshiharaTeam:
 	db EXEGGUTOR, 90
-	db SCREAM_TAIL, 90
+	db ARCANINE_H, 90
+	db ELECTRODE_H, 90
 	db MELTAN, 50
 IF DEF(_DEBUG)
 	db RAICHU, 50

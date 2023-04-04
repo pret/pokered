@@ -232,6 +232,8 @@ PokedexEntryPointers:
 	dw MrRimeDexEntry
 	dw MeltanDexEntry
 	dw MelmetalDexEntry
+	dw ArcanineHDexEntry
+	dw ElectrodeHDexEntry
 	dw ArticunoGDexEntry
 	dw ZapdosGDexEntry
 	dw MoltresGDexEntry
@@ -1851,6 +1853,20 @@ MelmetalDexEntry:
 	db 8,2
 	dw 17640
 	text_far _MelmetalDexEntry
+	text_end
+	
+ArcanineHDexEntry:
+	db "LEGENDARY@"
+	db 6,7
+	dw 3700
+	text_far _ArcanineHDexEntry
+	text_end
+	
+ElectrodeHDexEntry:
+	db "SPHERE@"
+	db 3,11
+	dw 1570
+	text_far _ElectrodeHDexEntry
 	text_end
 	
 ArticunoGDexEntry:

@@ -10,15 +10,15 @@
 	INCBIN "gfx/pokemon/front/electrodeh.pic", 0, 1 ; sprite dimensions
 	dw ElectrodeHPicFront, ElectrodeHPicBack
 
-	db THUNDERBOLT, MEGA_DRAIN, THUNDER_WAVE, EXPLOSION ; level 1 learnset, for trainers i guess
+	db TACKLE, SCREECH, SONICBOOM, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
-	tmhm TOXIC,        TAKE_DOWN,    HYPER_BEAM,   RAGE,         THUNDERBOLT,  \
-	     THUNDER,      TELEPORT,     MIMIC,        DOUBLE_TEAM,  REFLECT,      \
-	     BIDE,         SELFDESTRUCT, SWIFT,        SKULL_BASH,   REST,         \
-	     THUNDER_WAVE, EXPLOSION,    SUBSTITUTE,   FLASH, 		 MEGA_DRAIN		\
-		 SOLAR_BEAM
+	tmhm TOXIC,        TAKE_DOWN,    HYPER_BEAM,   RAGE,         MEGA_DRAIN,   \
+	     SOLARBEAM,	   THUNDERBOLT,  THUNDER,      TELEPORT,     MIMIC,        \
+	     DOUBLE_TEAM,  REFLECT,      BIDE,         SELFDESTRUCT, SWIFT,        \
+	     SKULL_BASH,   REST,         THUNDER_WAVE, EXPLOSION,    SUBSTITUTE,   \
+		 FLASH
 	; end
 
 	db BANK(ElectrodeHPicFront)

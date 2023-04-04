@@ -808,25 +808,25 @@ _MoltresGDexEntry::
 	next "wanders too close"
 	dex
 
-;_ArcanineHDexEntry::
-;	text "Its body has a"
-;	next "rock-like feel."
-;	next "It dances around"
+_ArcanineHDexEntry::
+	text "Its body has a"
+	next "rock-like feel."
+	next "It dances around"
 	
-;	page "its foes before"
-;	next "biting them in"
-;	next "a vicious rage" ; reference to Raging Fury, its signature move.
-;	dex
+	page "its foes before"
+	next "biting them in"
+	next "a vicious rage" ; reference to Raging Fury, its signature move.
+	dex
 
-;_ElectrodeHDexEntry::
-;	text "Its body has a"
-;	next "similar feel to"
-;	next "a type of berry."
+_ElectrodeHDexEntry::
+	text "Its body has a"
+	next "similar feel to"
+	next "a type of berry."
 	
-;	page "If angered, it"
-;	next "looses electricity"
-;	next "of 20,000 volts" ; 100 kV in a bolt of lightning on average
-;	dex
+	page "If angered, it"
+	next "looses electricity"
+	next "of 20,000 volts" ; 100 kV in a bolt of lightning on average
+	dex
 
 ;_RaticateADexEntry:: ; this entry hypercompresses most Gen 7 entries
 ;	text "It commands nests"

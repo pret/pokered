@@ -75,7 +75,7 @@ MonPartyData:
 	nybble ICON_QUADRUPED ; Pudi
 	nybble ICON_QUADRUPED ; Growlithe
 	nybble ICON_QUADRUPED ; Arcanine
-	; 	nybble ICON_QUADRUPED ; Arcanine-A
+	nybble ICON_QUADRUPED ; Arcanine-H
 	nybble ICON_MON       ; Mankey
 	nybble ICON_MON       ; Primeape
 	nybble ICON_MON       ; Annihilape
@@ -124,7 +124,7 @@ MonPartyData:
 	nybble ICON_QUADRUPED ; Gorotora
 	nybble ICON_BALL      ; Voltorb
 	nybble ICON_BALL      ; Electrode
-	; 	nybble ICON_BALL      ; Electrode-A
+	nybble ICON_BALL      ; Electrode-H
 	nybble ICON_WATER     ; Tentacool
 	nybble ICON_WATER     ; Tentacruel
 	nybble ICON_GRASS     ; Toedscool
