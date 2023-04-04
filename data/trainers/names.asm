@@ -46,3 +46,7 @@ TrainerNames::
 	db "AGATHA@"
 	db "LANCE@"
 	db "YUJIROU@"
+	db "STUDENT@"
+	db "FIREFIGHTER@"
+	db "JUNIOR@"
+	db "JACK@"

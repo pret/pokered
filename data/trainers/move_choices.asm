@@ -21,7 +21,6 @@ TrainerClassMoveChoiceModifications:
 	move_choices 1       ; BIKER
 	move_choices 1, 3    ; BURGLAR
 	move_choices 1       ; ENGINEER
-	move_choices 1, 3,   ; UNUSED_JUGGLER
 	move_choices 1, 3    ; FISHER
 	move_choices 1, 3    ; SWIMMER
 	move_choices         ; CUE_BALL
@@ -56,4 +55,9 @@ TrainerClassMoveChoiceModifications:
 	move_choices 1       ; CHANNELER
 	move_choices 1       ; AGATHA
 	move_choices 1, 3    ; LANCE
+	move_choices 1, 3,   ; YUJIROU, was UNUSED_JUGGLER
+	move_choices 1, 3,   ; STUDENT
+	move_choices 1, 3,   ; FIREFIGHTER
+	move_choices 1, 3,   ; JUNIOR
+	move_choices 1, 3,   ; JACK
 	assert_list_length NUM_TRAINERS

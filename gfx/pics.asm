@@ -550,4 +550,8 @@ MissingNoPicFront::    INCBIN "gfx/pokemon/front/missingno.pic"
 MissingNoPicBack::     INCBIN "gfx/pokemon/back/missingnob.pic"
 
 SECTION "Pics 10", ROMX ; Extra Trainer Bank
-YujirouPic::	   INCBIN "gfx/trainers/yujirou.pic"
+YujirouPic::	    INCBIN "gfx/trainers/yujirou.pic"
+StudentPic::	    INCBIN "gfx/trainers/student.pic"
+FirefighterPic::	INCBIN "gfx/trainers/firefighter.pic"
+JuniorPic::	  	    INCBIN "gfx/trainers/junior.pic"
+JackPic::		    INCBIN "gfx/trainers/jack.pic"

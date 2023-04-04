@@ -16,7 +16,6 @@ TrainerAIPointers:
 	dbw 3, GenericAI
 	dbw 3, GenericAI
 	dbw 3, GenericAI
-	dbw 3, JugglerAI ; unused_juggler
 	dbw 3, GenericAI
 	dbw 3, GenericAI
 	dbw 3, GenericAI
@@ -51,4 +50,9 @@ TrainerAIPointers:
 	dbw 3, GenericAI
 	dbw 2, AgathaAI ; agatha
 	dbw 1, LanceAI ; lance
+	dbw 3, GenericAI ; Yujirou
+	dbw 3, GenericAI ; Student
+	dbw 3, GenericAI ; Firefighter
+	dbw 3, GenericAI ; Junior
+	dbw 2, BlackbeltAI ; Jack
 	assert_table_length NUM_TRAINERS

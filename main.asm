@@ -236,7 +236,7 @@ SECTION "Battle Engine 8", ROMX
 
 INCLUDE "engine/battle/init_battle_variables.asm"
 INCLUDE "engine/battle/move_effects/paralyze.asm"
-
+INCLUDE "engine/battle/experience.asm" ; moved because trainer ai grew too big
 
 SECTION "Hidden Objects 2", ROMX
 
@@ -249,7 +249,6 @@ INCLUDE "engine/events/hidden_objects/indigo_plateau_hq.asm"
 
 SECTION "Battle Engine 9", ROMX
 
-INCLUDE "engine/battle/experience.asm"
 INCLUDE "engine/battle/scroll_draw_trainer_pic.asm"
 INCLUDE "engine/battle/trainer_ai.asm"
 INCLUDE "engine/battle/draw_hud_pokeball_gfx.asm"

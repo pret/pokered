@@ -20,7 +20,7 @@ TrainerPicAndMoneyPointers::
 	pic_money BurglarPic,      9000
 	pic_money EngineerPic,     5000
 	pic_money FisherPic,       3500
-	pic_money SwimmerPic,       500
+	pic_money SwimmerPic,      1500
 	pic_money CueBallPic,      2500
 	pic_money GamblerPic,      7000
 	pic_money BeautyPic,       7000
@@ -54,4 +54,8 @@ TrainerPicAndMoneyPointers::
 	pic_money AgathaPic,       9900
 	pic_money LancePic,        9900
 	pic_money YujirouPic,      9900 ; was unused juggler
+	pic_money StudentPic,      1000
+	pic_money FirefighterPic,  1500
+	pic_money JuniorPic,       1000
+	pic_money JackPic,         5000
 	assert_table_length NUM_TRAINERS

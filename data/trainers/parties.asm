@@ -46,6 +46,10 @@ TrainerDataPointers:
 	dw AgathaData
 	dw LanceData
 	dw YujirouData ; was unused juggler
+	dw StudentData
+	dw FirefighterData
+	dw JuniorData
+	dw JackData
 
 ; if first byte != $FF, then
 	; first byte is level (of all pokemon on this team)
@@ -858,3 +862,11 @@ YujirouData: ; was unused juggler
 	db $FF, 7, KONYA, 7, RATTATA, 10, LICKITUNG, 0
 ; post-game rematch team (currently unused)
 	db $FF, 66, PERSIAN, 67, TAUROS, 67, MADAAMU, 66, BLISSEY, 67, SNORLAX, 70, LICKILICKY, 0
+
+StudentData:
+
+FirefighterData:
+
+JuniorData:
+
+JackData:

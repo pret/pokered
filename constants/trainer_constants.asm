@@ -62,4 +62,8 @@ ENDM
 	trainer_const AGATHA         ; $2E
 	trainer_const LANCE          ; $2F
 	trainer_const YUJIROU 		 ; $0D, was unused juggler, also not 0D but I can't be bothered to change everything
+	trainer_const STUDENT
+	trainer_const FIREFIGHTER
+	trainer_const JUNIOR
+	trainer_const JACK
 DEF NUM_TRAINERS EQU const_value - 1
