@@ -262,11 +262,11 @@ EvosMovesPointerTable:
 	dw PerrserkerEvosMoves
 	dw SirfetchdEvosMoves
 	dw MrRimeEvosMoves
+	dw MeltanEvosMoves
+	dw MelmetalEvosMoves
 	dw ArticunoGEvosMoves	
 	dw ZapdosGEvosMoves
 	dw MoltresGEvosMoves
-	; dw MeltanEvosMoves
-	; dw MelmetalEvosMoves
 	dw MissingNoEvosMoves
 	assert_table_length NUM_POKEMON_INDEXES
 
@@ -3240,6 +3240,36 @@ MrRimeEvosMoves:
 	db 44, PSYCHIC_M
 	db 50, FEINT_ATTACK
 	db 0
+	
+MeltanEvosMoves:
+; Evolutions
+	db EV_ITEM, CANDY_JAR, 1, MELMETAL
+	db 0
+; Learnset
+	db 8, TAIL_WHIP
+	db 16, HEADBUTT
+	db 24, THUNDER_WAVE
+	db 32, ACID_ARMOR
+	db 40, IRON_HEAD
+	db 0
+
+MelmetalEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 9, TAIL_WHIP
+	db 16, HEADBUTT
+	db 18, THUNDER_WAVE
+	db 20, THUNDERSHOCK
+	db 27, THUNDERPUNCH
+	db 36, ACID_ARMOR
+	db 45, MAGNET_BOMB
+	db 51, MEGA_PUNCH
+;	db 63, SMART_STRIKE
+	db 72, IRON_HEAD
+	db 81, SUBMISSION
+	db 90, HYPER_BEAM
+	db 0
 
 ArticunoGEvosMoves:
 ; Evolutions
@@ -3281,36 +3311,6 @@ MoltresGEvosMoves:
 	db 66, NIGHT_SLASH	; False Surrender
 	db 70, SKY_ATTACK
 	db 0
-
-;MeltanEvosMoves:
-; Evolutions
-;	db EV_ITEM, CANDY_JAR, 1, MELMETAL
-;	db 0
-; Learnset
-;	db 8, TAIL_WHIP
-;	db 16, HEADBUTT
-;	db 24, THUNDER_WAVE
-;	db 32, ACID_ARMOR
-;	db 40, IRON_HEAD
-;	db 0
-
-;MelmetalEvosMoves:
-; Evolutions
-;	db 0
-; Learnset
-;	db 9, TAIL_WHIP
-;	db 16, HEADBUTT
-;	db 18, THUNDER_WAVE
-;	db 20, THUNDERPUNCH
-;	db 27, THUNDERSHOCK
-;	db 36, ACID_ARMOR
-;	db 45, MAGNET_BOMB
-;	db 51, MEGA_PUNCH
-;	db 63, SMART_STRIKE
-;	db 72, IRON_HEAD
-;	db 81, SUBMISSION
-;	db 90, HYPER_BEAM
-;	db 0
 
 MissingNoEvosMoves:
 ; Evolutions

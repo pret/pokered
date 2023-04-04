@@ -21,9 +21,11 @@ SetIshiharaTeam:
 	jr .loop
 
 IshiharaTeam:
+	db EXEGGUTOR, 90
 	db SCREAM_TAIL, 90
+	db MELTAN, 50
 IF DEF(_DEBUG)
-	db RAICHU, 16
+	db RAICHU, 50
 ENDC
 	db -1 ; end
 
@@ -43,7 +45,7 @@ IF DEF(_DEBUG)
 
 	call SetIshiharaTeam
 
-	; Exeggutor gets four HM moves.
+	; Exeggutor (Pokemon 1) gets four HM moves.
 	ld hl, wPartyMon1Moves
 	ld a, FLY
 	ld [hli], a
@@ -62,7 +64,7 @@ IF DEF(_DEBUG)
 	ld [hli], a
 	ld [hl], a
 
-	; Jolteon gets Thunderbolt.
+	; Jolteon (Pokemon 3) gets Thunderbolt.
 	ld hl, wPartyMon3Moves + 3
 	ld a, THUNDERBOLT
 	ld [hl], a
@@ -70,7 +72,7 @@ IF DEF(_DEBUG)
 	ld a, 15
 	ld [hl], a
 
-	; Articuno gets Fly.
+	; Articuno (Pokemon 5) gets Fly.
 	ld hl, wPartyMon5Moves
 	ld a, FLY
 	ld [hl], a
@@ -78,7 +80,7 @@ IF DEF(_DEBUG)
 	ld a, 15
 	ld [hl], a
 
-	; Kadabra gets Flash and Teleport
+	; Kadabra (Pokemon 6) gets Flash and Teleport
 	ld hl, wPartyMon6Moves + 2
 	ld a, FLASH
 	ld [hl], a
@@ -139,7 +141,7 @@ DebugItemsList:
 	db RARE_CANDY, 99
 	db MASTER_BALL, 99
 	db ULTRA_BALL, 99
-	db GREAT_BALL, 99
+	db CANDY_JAR, 99
 	db SECRET_KEY, 1
 	db CARD_KEY, 1
 	db S_S_TICKET, 1

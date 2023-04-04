@@ -250,11 +250,11 @@ MonsterNames::
 	db "PERRSERKER"
 	db "SIRFETCH'D"
 	db "MR.RIME@@@"
+	db "MELTAN@@@@"
+	db "MELMETAL@@"
 	db "ARTICUNO-G"
 	db "ZAPDOS-G@@"
 	db "MOLTRES-G@"
-	; db "MELTAN@@@@"
-	; db "MELMETAL@@"
 	db "MISSINGNO."
 	
 	assert_table_length NUM_POKEMON_INDEXES

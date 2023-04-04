@@ -37,6 +37,7 @@ MonPartyData:
 	nybble ICON_MON       ; Konya
 	nybble ICON_MON       ; Meowth
 	nybble ICON_MON       ; Persian
+	;	nybble ICON_MON       ; Persian-A
 	nybble ICON_MON       ; Perrserker
 	nybble ICON_BIRD      ; Spearow
 	nybble ICON_BIRD      ; Fearow
@@ -98,26 +99,26 @@ MonPartyData:
 	nybble ICON_MON       ; Psyduck
 	nybble ICON_MON       ; Weirduck
 	nybble ICON_MON       ; Golduck
-	nybble ICON_MON       ; Abra
-	nybble ICON_MON       ; Kadabra
-	nybble ICON_MON       ; Alakazam
 	nybble ICON_MON       ; Poliwag
 	nybble ICON_MON       ; Poliwhirl
 	nybble ICON_MON       ; Poliwrath
 	nybble ICON_MON       ; Politoed
 	nybble ICON_MON       ; Ribbito
 	nybble ICON_MON       ; Croakozuna
+	nybble ICON_MON       ; Drowzee
+	nybble ICON_MON       ; Hypno
 	nybble ICON_MON       ; Lickitung
 	nybble ICON_MON       ; Lickilicky
-	nybble ICON_SNAKE     ; Onix
-	nybble ICON_SNAKE     ; Steelix
+	nybble ICON_MON       ; Abra
+	nybble ICON_MON       ; Kadabra
+	nybble ICON_MON       ; Alakazam
 	nybble ICON_MON       ; Diglett
 	nybble ICON_MON       ; Dugtrio
 	; 	nybble ICON_MON       ; Dugtrio-A
 	nybble ICON_WATER     ; Wiglett
 	nybble ICON_WATER     ; Wugtrio
-	nybble ICON_MON       ; Drowzee
-	nybble ICON_MON       ; Hypno
+	nybble ICON_SNAKE     ; Onix
+	nybble ICON_SNAKE     ; Steelix
 	nybble ICON_QUADRUPED ; Kotora
 	nybble ICON_QUADRUPED ; Gaotora
 	nybble ICON_QUADRUPED ; Gorotora
@@ -249,6 +250,6 @@ MonPartyData:
 	nybble ICON_BIRD      ; Moltres-G
 	nybble ICON_MON       ; Mewtwo
 	nybble ICON_MON       ; Mew
-	; nybble ICON_BALL      ; Meltan
-	; nybble ICON_BALL      ; Melmetal
+	nybble ICON_BALL      ; Meltan
+	nybble ICON_BALL      ; Melmetal
 	end_nybble_array NUM_POKEMON - 1

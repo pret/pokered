@@ -416,6 +416,10 @@ TangrowthPicFront::    INCBIN "gfx/pokemon/front/tangrowth.pic"
 TangrowthPicBack::     INCBIN "gfx/pokemon/back/tangrowthb.pic"
 LickilickyPicFront::   INCBIN "gfx/pokemon/front/lickilicky.pic"
 LickilickyPicBack::    INCBIN "gfx/pokemon/back/lickilickyb.pic"
+MeltanPicFront::	   INCBIN "gfx/pokemon/front/meltan.pic"
+MeltanPicBack::    	   INCBIN "gfx/pokemon/back/meltanb.pic"
+MelmetalPicFront::     INCBIN "gfx/pokemon/front/melmetal.pic"
+MelmetalPicBack::      INCBIN "gfx/pokemon/back/melmetalb.pic"
 
 SECTION "Pics 8", ROMX
 

@@ -230,6 +230,8 @@ PokedexEntryPointers:
 	dw PerrserkerDexEntry
 	dw SirfetchdDexEntry
 	dw MrRimeDexEntry
+	dw MeltanDexEntry
+	dw MelmetalDexEntry
 	dw ArticunoGDexEntry
 	dw ZapdosGDexEntry
 	dw MoltresGDexEntry
@@ -1835,6 +1837,20 @@ MrRimeDexEntry:
 	db 4,11
 	dw 1280
 	text_far _MrRimeDexEntry
+	text_end
+	
+MeltanDexEntry:
+    db "HEX NUT@"
+	db 0,8
+	dw 180
+	text_far _MeltanDexEntry
+	text_end
+	
+MelmetalDexEntry:
+	db "HEX NUT@"
+	db 8,2
+	dw 17640
+	text_far _MelmetalDexEntry
 	text_end
 	
 ArticunoGDexEntry:

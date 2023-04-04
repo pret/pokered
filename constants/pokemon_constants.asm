@@ -237,24 +237,24 @@
 	const PERRSERKER         ; $E4
 	const SIRFETCHD          ; $E5
 	const MR_RIME            ; $E6
-	; const MELTAN			   ; $E7
-	; const MELMETAL		   ; $E8
+	const MELTAN			 ; $E7
+	const MELMETAL		   	 ; $E8
 	; const ARCANINE_H		   ; $E9
 	; const ELECTRODE_H		   ; $EA
 	; const RATICATE_A		   ; $EB
-	; const SANDSLASH_A		   ; $EC
-	; const NINETALES_A		   ; $ED
-	; const DUGTRIO_A		   ; $EE
-	; const PERSIAN_A		   ; $EF
-	; const GOLEM_A		 	   ; $F0
-	; const RAPIDASH_G		   ; $F1
-	; const SLOWBRO_G		   ; $F2
-	; const SLOWKING_G		   ; $F3
-	; const MUK_A		       ; $F4
-	; const EXEGGUTOR_A		   ; $F5
-	; const MAROWAK_A		   ; $F6
-	; const WEEZING_G		   ; $F7
-	; const MR_MIME_G		   ; $F8
+	; const RAICHU_A           ; $EC
+	; const SANDSLASH_A		   ; $ED
+	; const NINETALES_A		   ; $EE
+	; const DUGTRIO_A		   ; $EF
+	; const PERSIAN_A		   ; $F0
+	; const GOLEM_A		 	   ; $F1
+	; const RAPIDASH_G		   ; $F2
+	; const SLOWBRO_G		   ; $F3
+	; const SLOWKING_G		   ; $F4
+	; const MUK_A		       ; $F5
+	; const EXEGGUTOR_A		   ; $F6
+	; const MAROWAK_A		   ; $F7
+	; const WEEZING_G		   ; $F8
 	; const TAUROS_P		   ; $F9
 	; const TAUROS_PA		   ; $FA
 	; const TAUROS_PB		   ; $FB
