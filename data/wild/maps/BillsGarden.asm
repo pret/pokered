@@ -12,8 +12,8 @@ BillsGardenWildMons:
 	db 49, HITMONTOP
 	db 52, HITMONCHAN
 	db 49, HITMONLEE
-	db 52, EEVEE ; Hisuian Electrode
-	db 53, EEVEE ; Hisuian Arcanine
+	db 52, ELECTRODE_H
+	db 53, ARCANINE_H
 	db 53, DECILLA
 	end_grass_wildmons
 
