@@ -286,6 +286,8 @@ INCLUDE "engine/battle/read_trainer_party.asm"
 INCLUDE "data/trainers/special_moves.asm"
 
 INCLUDE "data/trainers/parties.asm"
+;INCLUDE "data/trainers/scaled_parties.asm"
+;INCLUDE "data/trainers/rival_parties.asm"
 
 TrainerAI:
 	and a

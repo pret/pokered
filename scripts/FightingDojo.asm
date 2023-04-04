@@ -102,7 +102,7 @@ FightingDojoTrainerHeader3:
 	trainer EVENT_BEAT_FIGHTING_DOJO_TRAINER_3, 3, FightingDojoBattleText4, FightingDojoEndBattleText4, FightingDojoAfterBattleText4
 	db -1 ; end
 
-FightingDojoText1: ; gym scaling was removed to make space
+FightingDojoText1: ; gym scaling can be removed to make space
 	text_asm
 	CheckEvent EVENT_DEFEATED_FIGHTING_DOJO
 	jp nz, .continue1
@@ -119,7 +119,24 @@ FightingDojoText1: ; gym scaling was removed to make space
 	ldh a, [hSpriteIndexOrTextID]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
-	call InitBattleEnemyParameters
+	; call InitBattleEnemyParameters ; put this back if you mess up
+	
+	; gym scaling spaghetti code begins here - remove initial parameters as we're making our own
+	ld a, OPP_BLACKBELT
+	ld [wCurOpponent], a
+	
+	ld hl, wObtainedBadges ; Picking the team based on badge count. Need +1 so it loads the right team: remember, you're fighting for the badge! Thanks to Chatot4444 for the help.
+	ld b, 1
+	call CountSetBits
+	ld a, [wNumSetBits]
+	inc a
+	
+	ld [wTrainerNo], a
+	ld a, 1
+	ld [wIsTrainerBattle], a
+	
+	;ends here
+	
 	ld a, $3
 	ld [wFightingDojoCurScript], a
 	ld [wCurMapScript], a
