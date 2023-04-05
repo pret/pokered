@@ -1990,9 +1990,9 @@ KonyaEvosMoves:
 	db EV_LEVEL, 14, MEOWTH
 	db 0
 ; Learnset
-	db 7, TAIL_WHIP
+	db 5, PAY_DAY
+	db 8, TAIL_WHIP
 	db 12, SAND_ATTACK
-	db 16, PAY_DAY
 	db 19, BITE
 	db 24, FURY_SWIPES
 	db 30, SCREECH
