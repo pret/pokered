@@ -459,3 +459,4 @@ The version-specific visuals of japanese pokemon green were added into PureGreen
 - I will not make a version without the move changes
 - I will not make a version without learnset / TM / trainer party changes
 - If you want less changes but still the quality of life / bugfix stuff, I'd recommend taking a look at the romhack called shinpokered.
+- I will not add beta pokemon to the game (just about all of the decent beta mons for gen 1 were already repurposed as official pokemon in later games)
