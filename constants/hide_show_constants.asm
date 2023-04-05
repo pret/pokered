@@ -237,7 +237,7 @@ DEF SHOW EQU $15
 	const HS_SEAFOAM_ISLANDS_B4F_BOULDER_1 ; E1
 	const HS_SEAFOAM_ISLANDS_B4F_BOULDER_2 ; E2
 	const HS_ARTICUNO                      ; E3 
-	const HS_CROCKY	               		   ; E4 
+	const HS_WUGTRIO	          		   ; E4 
 	const HS_MEW	                       ; E5 
 	const HS_MOLTRES					   ; E6 
 	; const HS_OMEGA                       ; E7 X

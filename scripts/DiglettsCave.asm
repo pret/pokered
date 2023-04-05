@@ -13,29 +13,24 @@ DiglettsCave_ScriptPointers:
 	dw EndTrainerBattle
 
 DiglettsCave_TextPointers:
-	dw CrockyText
-	dw DiglettsCaveText1
+	dw WugtrioText
 
 DiglettsCaveTrainerHeaders:
 	def_trainers
-CrockyTrainerHeader:
-	trainer EVENT_BEAT_CROCKY, 0, CrockyBattleText, CrockyBattleText, CrockyBattleText
+WugtrioTrainerHeader:
+	trainer EVENT_BEAT_WUGTRIO, 0, WugtrioBattleText, WugtrioBattleText, WugtrioBattleText
 	db -1 ; end
 
-CrockyText:
+WugtrioText:
 	text_asm
-	ld hl, CrockyTrainerHeader
+	ld hl, WugtrioTrainerHeader
 	call TalkToTrainer
 	jp TextScriptEnd
 
-CrockyBattleText:
-	text_far _CrockyBattleText
+WugtrioBattleText:
+	text_far _WugtrioBattleText
 	text_asm
-	ld a, CROCKY
+	ld a, WUGTRIO
 	call PlayCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd
-
-DiglettsCaveText1:
-	text_far _DiglettsCaveText1
-	text_end

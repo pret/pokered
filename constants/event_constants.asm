@@ -585,7 +585,7 @@
 ; New static encounter events
 	const_next $620
 	const_skip
-	const EVENT_BEAT_CROCKY
+	const EVENT_BEAT_WUGTRIO
 	const_skip 7
 	const EVENT_BEAT_MEW
 	const_skip 7
