@@ -123,6 +123,7 @@ InternalMapEntries:
 	internal_map CINNABAR_VOLCANO, 	             3, 14, CinnabarVolcanoName
 	internal_map ROCK_TUNNEL_B1F,               14,  3, RockTunnelName
 	internal_map SILPH_CO_ELEVATOR,             10,  5, SilphCoName
+	internal_map UNDERWATER_TUNNEL,             14,  1, UnderwaterTunnelName
 	internal_map CELADON_UNIVERSITY_POKECENTER,   7, 4, CeladonCityName
 	internal_map AGATHAS_ROOM,                   0,  2, PokemonLeagueName
 	db -1 ; end

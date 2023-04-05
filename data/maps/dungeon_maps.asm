@@ -11,6 +11,7 @@ DungeonMaps1:
 	db VICTORY_ROAD_3F
 	db POWER_PLANT
 	db DIGLETTS_CAVE
+	db UNDERWATER_TUNNEL
 	db -1 ; end
 
 ; GetBattleTransitionID_IsDungeonMap checks if wCurMap

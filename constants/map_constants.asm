@@ -258,7 +258,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	mapconst SILPH_CO_11F,                   9,  9 ; $EC
 	mapconst SILPH_CO_ELEVATOR,              2,  2 ; $ED
 	mapconst UNUSED_MAP_ED,                  0,  0 ; $EE	- Unused
-	mapconst UNUSED_MAP_EE,                  0,  0 ; $EF	- Unused
+	mapconst UNDERWATER_TUNNEL,              9, 15 ; $EF	- Was UNUSED_MAP_EE
 	mapconst TRADE_CENTER,                   4,  5 ; $E0
 	mapconst COLOSSEUM,                      4,  5 ; $F2
 	mapconst CELADON_UNIVERSITY_INSIDE,     10, 11 ; $F3	- Was UNUSED_MAP_F1

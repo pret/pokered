@@ -2020,6 +2020,7 @@ wPokemonMansionB1FCurScript:: db
 wDiglettsCaveCurScript:: db
 wCinnabarVolcanoCurScript:: db
 wCeladonUniversityOutsideCurScript:: db
+wUnderwaterTunnelCurScript:: db
 wVictoryRoad2FCurScript:: db
 wVictoryRoad3FCurScript:: db
 	ds 1

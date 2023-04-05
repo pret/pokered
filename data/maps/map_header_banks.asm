@@ -240,7 +240,7 @@ MapHeaderBanks::
 	db BANK(SilphCo11F_h)
 	db BANK(SilphCoElevator_h)
 	db $11 ; UNUSED_MAP_ED
-	db $11 ; UNUSED_MAP_EE
+	db BANK(UnderwaterTunnel_h) ; UNUSED_MAP_EE
 	db BANK(TradeCenter_h)
 	db BANK(Colosseum_h)
 	db BANK(CeladonUniversityInside_h) ; $11 UNUSED_MAP_F1

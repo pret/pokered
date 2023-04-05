@@ -3,6 +3,7 @@ Route25_Object:
 
 	def_warp_events
 	warp_event 49,  11, BILLS_HOUSE, 1
+	warp_event 60,   1, UNDERWATER_TUNNEL, 1
 
 	def_bg_events
 	bg_event 53, 11, 11 ; Route25Text11

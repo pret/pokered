@@ -591,10 +591,12 @@
 	const_skip 7
 	const EVENT_BEAT_MOLTRES
 	const_skip 7
-	const EVENT_BEAT_OMEGA 
+	const EVENT_BEAT_OMEGA
+	const_skip 7
+	const EVENT_BEAT_DRAGONITE 
 
 ; Celadon University, Salesman
-	const_next $640
+	const_next $650
 	const_skip
 	const_skip
 	const EVENT_BEAT_CELADON_UNIVERSITY_OUTSIDE_TRAINER_0

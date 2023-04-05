@@ -240,7 +240,7 @@ MapHeaderPointers::
 	dw SilphCo11F_h
 	dw SilphCoElevator_h
 	dw SilphCo2F_h ; UNUSED_MAP_ED
-	dw SilphCo2F_h ; UNUSED_MAP_EE
+	dw UnderwaterTunnel_h ; UNUSED_MAP_EE
 	dw TradeCenter_h
 	dw Colosseum_h
 	dw CeladonUniversityInside_h ; UNUSED_MAP_F1

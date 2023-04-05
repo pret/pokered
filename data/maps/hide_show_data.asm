@@ -242,7 +242,7 @@ MapHSPointers:
 	dw SilphCo11FHS
 	dw NoHS
 	dw NoHS
-	dw NoHS
+	dw UnderwaterTunnelHS
 	dw NoHS
 	dw NoHS
 	dw NoHS
@@ -585,6 +585,8 @@ MtMoonCraterHS:
 ViridianPreGymHS:
 	db VIRIDIAN_PRE_GYM, $01, SHOW ; Initial Yujirou
 	db VIRIDIAN_PRE_GYM, $02, HIDE ; Yujirou Rematch
+UnderwaterTunnelHS:
+	db UNDERWATER_TUNNEL, $01, SHOW
 
 	db $FF, $01, SHOW ; end
 

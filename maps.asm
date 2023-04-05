@@ -1312,3 +1312,8 @@ INCLUDE "data/maps/headers/ViridianPreGym.asm"
 INCLUDE "scripts/ViridianPreGym.asm"
 INCLUDE "data/maps/objects/ViridianPreGym.asm"
 ViridianPreGym_Blocks: INCBIN "maps/ViridianPreGym.blk"
+
+INCLUDE "data/maps/headers/UnderwaterTunnel.asm"
+INCLUDE "scripts/UnderwaterTunnel.asm"
+INCLUDE "data/maps/objects/UnderwaterTunnel.asm"
+UnderwaterTunnel_Blocks: INCBIN "maps/UnderwaterTunnel.blk"

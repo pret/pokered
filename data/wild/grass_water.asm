@@ -239,7 +239,7 @@ WildDataPointers:
 	dw NothingWildMons
 	dw NothingWildMons
 	dw NothingWildMons
-	dw NothingWildMons
+	dw UnderwaterTunnelWildMons
 	dw NothingWildMons
 	dw NothingWildMons
 	dw NothingWildMons
@@ -331,3 +331,4 @@ INCLUDE "data/wild/maps/SilphGauntlet5F.asm"
 INCLUDE "data/wild/maps/SilphGauntlet6F.asm"
 INCLUDE "data/wild/maps/FarawayIslandInside.asm"
 INCLUDE "data/wild/maps/MtMoonCrater.asm"
+INCLUDE "data/wild/maps/UnderwaterTunnel.asm"

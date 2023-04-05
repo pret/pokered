@@ -239,7 +239,7 @@ MapSongBanks::
 	db MUSIC_SILPH_CO, BANK(Music_SilphCo) ; SILPH_CO_11F
 	db MUSIC_SILPH_CO, BANK(Music_SilphCo) ; SILPH_CO_ELEVATOR
 	db MUSIC_SILPH_CO, BANK(Music_SilphCo) ; UNUSED_MAP_ED
-	db MUSIC_SILPH_CO, BANK(Music_SilphCo) ; UNUSED_MAP_EE
+	db MUSIC_DUNGEON2, BANK(Music_Dungeon2) ; UNUSED_MAP_EE / Underwater Tunnel
 	db MUSIC_CELADON, BANK(Music_Celadon) ; TRADE_CENTER
 	db MUSIC_CELADON, BANK(Music_Celadon) ; COLOSSEUM
 	db MUSIC_OAKS_LAB, BANK(Music_OaksLab) ; UNUSED_MAP_F1 / Celadon University Outside

@@ -6,6 +6,7 @@ Route10_Object:
 	warp_event  8, 25, ROCK_TUNNEL_1F, 1
 	warp_event  8, 61, ROCK_TUNNEL_1F, 3
 	warp_event  6, 47, POWER_PLANT, 1
+	warp_event  6,  3, UNDERWATER_TUNNEL, 2
 
 	def_bg_events
 	bg_event  7, 27, 7 ; Route10Text7

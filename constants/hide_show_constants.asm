@@ -240,8 +240,8 @@ DEF SHOW EQU $15
 	const HS_CROCKY	               		   ; E4 
 	const HS_MEW	                       ; E5 
 	const HS_MOLTRES					   ; E6 
-	; const HS_OMEGA                         ; E7 X
-	const HS_OLD_SEA_CHART	; E8 
+	; const HS_OMEGA                       ; E7 X
+	const HS_OLD_SEA_CHART				; E8 
 	const HS_POKEMON_MANSION_B2F_ITEM_1 ; E9
 	const HS_POKEMON_MANSION_B2F_ITEM_2 ; EA
 	const HS_ROUTE_1_OAK				; EB
@@ -250,4 +250,5 @@ DEF SHOW EQU $15
 	const HS_BILLS_NIDORINO				; EE
 	const HS_YUJIROU					; EF
 	const HS_YUJIROU_REMATCH			; uhhh F0?
+	const HS_DRAGONITE					; F1
 DEF NUM_HS_OBJECTS EQU const_value
