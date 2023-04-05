@@ -10,7 +10,7 @@
 	INCBIN "gfx/pokemon/front/ninetalesa.pic", 0, 1 ; sprite dimensions
 	dw NinetalesAPicFront, NinetalesAPicBack
 
-	db DAZZLING_GLEAM, BLIZZARD, CONFUSE_RAY, BODY_SLAM ; level 1 learnset - used for trainers
+	db FAIRY_WIND, TAIL_WHIP, QUICK_ATTACK, ROAR  ; level 1 learnset - used for trainers
 	db GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset

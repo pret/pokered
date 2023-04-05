@@ -10,7 +10,7 @@
 	INCBIN "gfx/pokemon/front/nidoreign.pic", 0, 1 ; sprite dimensions
 	dw NidoreignPicFront, NidoreignPicBack
 
-	db BODY_SLAM, ROCK_SLIDE, THUNDERBOLT, BLIZZARD ; level 1 learnset - used for trainers
+	db TACKLE, SPIKE_CANNON, POISON_STING, THRASH ; level 1 learnset
 	db GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset

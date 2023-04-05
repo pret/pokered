@@ -10,7 +10,7 @@
 	INCBIN "gfx/pokemon/front/kleavor.pic", 0, 1 ; sprite dimensions
 	dw KleavorPicFront, KleavorPicBack
 
-	db QUICK_ATTACK, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
+	db QUICK_ATTACK, ROCK_THROW, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset

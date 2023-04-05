@@ -10,7 +10,7 @@
 	INCBIN "gfx/pokemon/front/tsubomitto.pic", 0, 1 ; sprite dimensions
 	dw TsubomittoPicFront, TsubomittoPicBack
 
-	db RAZOR_LEAF, SWORDS_DANCE, LOVELY_KISS, HYPER_BEAM ; level 1 learnset - used for trainers
+	db SLEEP_POWDER, RAZOR_LEAF, LOVELY_KISS, ACID ; level 1 learnset
 	db GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset

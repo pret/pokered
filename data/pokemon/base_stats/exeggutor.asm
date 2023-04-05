@@ -10,7 +10,7 @@
 	INCBIN "gfx/pokemon/front/exeggutor.pic", 0, 1 ; sprite dimensions
 	dw ExeggutorPicFront, ExeggutorPicBack
 
-	db HYPNOSIS, STOMP, PSYCHIC_M, EXPLOSION ; level 1 learnset - used for trainers
+	db HYPNOSIS, BARRAGE, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset

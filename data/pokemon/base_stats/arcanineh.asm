@@ -10,7 +10,7 @@
 	INCBIN "gfx/pokemon/front/arcanineh.pic", 0, 1 ; sprite dimensions
 	dw ArcanineHPicFront, ArcanineHPicBack
 
-	db FIRE_BLAST, ROCK_SLIDE, EARTHQUAKE, AGILITY ; level 1 learnset, trainer consistency with arc
+	db ROAR, EMBER, ROCK_THROW, TAKE_DOWN ; level 1 learnset, has rock throw for kicks
 	db GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset

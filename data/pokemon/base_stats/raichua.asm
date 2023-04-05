@@ -10,7 +10,7 @@
 	INCBIN "gfx/pokemon/front/raichua.pic", 0, 1 ; sprite dimensions
 	dw RaichuAPicFront, RaichuAPicBack
 
-	db THUNDERSHOCK, GROWL, THUNDER_WAVE, NO_MOVE ; level 1 learnset
+	db THUNDERSHOCK, GROWL, THUNDER_WAVE, CONFUSION ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
