@@ -59,8 +59,8 @@ _CeladonMartRoofText_4850f::
 	text " contains"
 	line "ROCK SLIDE!"
 
-	;para "It can spook the" removing misleading info ~ PvK
-	;line "target sometimes!@"
+	para "It can spook the" ; want to remove, but it's weird when done
+	line "target sometimes!@"
 	text_end
 
 _CeladonMartRoofText_48515::

@@ -92,13 +92,13 @@ BugCatcherData:
 	db 9, WEEDLE, KAKUNA, CATERPIE, METAPOD, 0
 	db 11, CATERPIE, METAPOD, 0
 ; Mt. Moon 1F
-	db 11, PARA, PARAS, 0
+	db 12, PARA, PARAS, 0
 	db 10, CATERPIE, METAPOD, PARA, 0
 ; Route 24
 	db 14, CATERPIE, WEEDLE, 0
 ; Route 6
 	db 16, WEEDLE, CATERPIE, WEEDLE, 0
-	db 20, BUTTERFREE, 0 ; this is that one boss fight-like one
+	db 17, BUTTERFREE, 0 ; this is that one boss fight-like one, levelled down for learnset reasons
 ; Unused - this will be used in the Silph Gauntlet
 	db 62, SCIZOR, BEEDRILL, PARASECT, VENOMOTH, PURAKKUSU, KLEAVOR, 0
 ; Route 9
@@ -625,10 +625,10 @@ GentlemanData:
 
 ChannelerData:
 ; Unused
-;	db 22, GASTLY, 0
-;	db 24, GASTLY, 0
-;	db 23, GASTLY, GASTLY, 0
-;	db 24, GASTLY, 0
+	db 22, GASTLY, 0
+	db 24, GASTLY, 0
+	db 23, GASTLY, GASTLY, 0
+	db 24, GASTLY, 0
 ; Pokémon Tower 3F
 	db 23, MIKON, GASTLY, 0
 	db 24, VULPIX, 0
@@ -640,19 +640,19 @@ ChannelerData:
 	db 24, GASTLY, 0
 	db 23, GASTLY, GASTLY, 0
 ; Unused
-;	db 24, GASTLY, 0
+	db 24, GASTLY, 0
 ; Pokémon Tower 4F, now unused 
-;	db 22, GASTLY, 0
+	db 22, GASTLY, 0
 ; Unused
 ;	db 24, GASTLY, 0
 ; Pokémon Tower 5F, now unused 
-;	db 23, HAUNTER, 0
+	db 23, HAUNTER, 0
 ; Unused
-;	db 24, GASTLY, 0
+	db 24, GASTLY, 0
 ; Pokémon Tower 5F, now unused 
-;	db 22, GASTLY, 0
-;	db 24, GASTLY, 0
-;	db 22, HAUNTER, 0
+	db 22, GASTLY, 0
+	db 24, GASTLY, 0
+	db 22, HAUNTER, 0
 ; Pokémon Tower 6F
 	db 22, GASTLY, CUBONE, HAUNTER, 0
 	db 24, GASTLY, VULPIX, 0
