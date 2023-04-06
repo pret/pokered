@@ -160,10 +160,10 @@ CeruleanCityScript1:
 .Pikachu ;
 	cp STARTER4 
 	jr nz, .Eevee
-	ld a, $15
+	ld a, $14
 	jr .done
 .Eevee
-	ld a, $14
+	ld a, $15
 	jr .done
 .done
 	ld [wTrainerNo], a
