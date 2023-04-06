@@ -22,11 +22,11 @@ SetIshiharaTeam:
 
 IshiharaTeam:
 	db EXEGGUTOR, 90
-	db ARCANINE_H, 90
-	db ELECTRODE_H, 90
-	db MELTAN, 50
+	db SANDSLASH_A, 90
+	db RATICATE_A, 90
+	db PERSIAN_A, 50
 IF DEF(_DEBUG)
-	db RAICHU, 50
+	db RAICHU_A, 50
 ENDC
 	db -1 ; end
 

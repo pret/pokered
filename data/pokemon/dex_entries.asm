@@ -234,6 +234,10 @@ PokedexEntryPointers:
 	dw MelmetalDexEntry
 	dw ArcanineHDexEntry
 	dw ElectrodeHDexEntry
+	dw RaticateADexEntry
+	dw RaichuADexEntry
+	dw SandslashADexEntry
+	dw PersianADexEntry
 	dw ArticunoGDexEntry
 	dw ZapdosGDexEntry
 	dw MoltresGDexEntry
@@ -1867,6 +1871,34 @@ ElectrodeHDexEntry:
 	db 3,11
 	dw 1570
 	text_far _ElectrodeHDexEntry
+	text_end
+	
+RaticateADexEntry:
+	db "RAT@"
+	db 2,4
+	dw 560
+	text_far _RaticateADexEntry
+	text_end
+	
+RaichuADexEntry:
+	db "MOUSE@"
+	db 2,4
+	dw 460
+	text_far _RaichuADexEntry
+	text_end
+
+SandslashADexEntry:
+	db "MOUSE@"
+	db 3,11
+	dw 1210
+	text_far _SandslashADexEntry
+	text_end
+	
+PersianADexEntry:
+	db "CLASSY CAT@"
+	db 3,7
+	dw 730
+	text_far _PersianADexEntry
 	text_end
 	
 ArticunoGDexEntry:
