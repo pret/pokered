@@ -21,6 +21,7 @@ DEF TEXT_DELAY_BITS    EQU %11 ; which bits in wOptions are assigned to text spe
 	; unused bit 3
 	; unused bit 4
 	; unused bit 5
+	const_skip 4
 	const BIT_BATTLE_SHIFT     ; 6
 	const BIT_BATTLE_ANIMATION ; 7
 
