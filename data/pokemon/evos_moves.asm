@@ -56,7 +56,6 @@ EvosMovesPointerTable:
 	dw ChanseyEvosMoves
 	dw MachokeEvosMoves
 	dw MrMimeEvosMoves
-	;dw MrMimeGEvosMoves
 	dw HitmonleeEvosMoves
 	dw HitmonchanEvosMoves
 	dw ArbokEvosMoves
@@ -105,7 +104,6 @@ EvosMovesPointerTable:
 	;dw NinetalesAEvosMoves
 	dw PikachuEvosMoves
 	dw RaichuEvosMoves
-	;dw RaichuAEvosMoves
 	dw RibbitoEvosMoves
 	dw CroakozunaEvosMoves
 	dw DratiniEvosMoves
@@ -118,7 +116,6 @@ EvosMovesPointerTable:
 	dw CryithanEvosMoves
 	dw SandshrewEvosMoves
 	dw SandslashEvosMoves
-	;dw SandslashAEvosMoves
 	dw OmanyteEvosMoves
 	dw OmastarEvosMoves
 	dw JigglypuffEvosMoves
@@ -169,7 +166,6 @@ EvosMovesPointerTable:
 	dw WeezingEvosMoves
 	;dw WeezingGEvosMoves
 	dw PersianEvosMoves
-	;PersianAEvosMoves
 	dw MarowakEvosMoves
 	;dw MarowakAEvosMoves
 	dw GuardiaEvosMoves
@@ -194,7 +190,6 @@ EvosMovesPointerTable:
 	;dw RapidashGEvosMoves
 	dw RattataEvosMoves
 	dw RaticateEvosMoves
-	;dw RaticateAEvosMoves
 	dw NidorinoEvosMoves
 	dw NidorinaEvosMoves
 	dw GeodudeEvosMoves
@@ -264,6 +259,10 @@ EvosMovesPointerTable:
 	dw MelmetalEvosMoves
 	dw ArcanineHEvosMoves
 	dw ElectrodeHEvosMoves
+	dw RaticateAEvosMoves
+	dw RaichuAEvosMoves
+	dw SandslashAEvosMoves
+	dw PersianAEvosMoves
 	dw ArticunoGEvosMoves	
 	dw ZapdosGEvosMoves
 	dw MoltresGEvosMoves
@@ -796,18 +795,6 @@ MrMimeEvosMoves:
 	db 39, MEDITATE
 	db 47, SUBSTITUTE
 	db 0
-
-;MrMimeGEvosMoves:
-; Evolutions
-;	db EV_ITEM, ICE_STONE, 1, MR_RIME
-;	db 0
-; Learnset
-;	db 23, LIGHT_SCREEN
-;	db 28, PSYBEAM
-;	db 31, AURORA_BEAM
-;	db 39, ICE_BEAM
-;	db 48, PSYCHIC_M
-;	db 0
 
 HitmonleeEvosMoves:
 ; Evolutions
@@ -1385,21 +1372,6 @@ RaichuEvosMoves:
 ; Learnset
 	db 0
 
-;RaichuAEvosMoves: ; pikachu learnset
-; Evolutions
-;	db 0
-; Learnset
-;	db 6, TAIL_WHIP
-;	db 8, THUNDER_WAVE
-;	db 11, QUICK_ATTACK
-;	db 15, DOUBLE_TEAM
-;	db 20, SLAM
-;	db 26, THUNDERBOLT
-;	db 33, AGILITY
-;	db 41, THUNDER
-;	db 50, LIGHT_SCREEN
-;	db 0
-
 RibbitoEvosMoves:
 ; Evolutions
 	db EV_LEVEL, 30, CROAKOZUNA
@@ -1542,19 +1514,6 @@ SandslashEvosMoves:
 	db 36, SWIFT
 	db 47, FURY_SWIPES
 	db 0
-
-;SandslashAEvosMoves:
-; Evolutions
-;	db 0
-; Learnset
-;	db 21, SWIFT
-;	db 24, FURY_SWIPES
-;	db 27, IRON_DEFENSE
-;	db 30, SLASH
-;	db 33, IRON_HEAD
-;	db 36, SWORDS_DANCE
-;	db 45, BLIZZARD
-;	db 0
 
 OmanyteEvosMoves:
 ; Evolutions
@@ -2138,20 +2097,6 @@ PersianEvosMoves:
 	db 51, SLASH
 	db 0
 
-;PersianAEvosMoves:
-; Evolutions
-;	db 0
-; Learnset
-;	db 6, BITE
-;	db 14, FURY_SWIPES
-;	db 17, SCREECH
-;	db 22, FEINT_ATTACK
-;	db 30, PAY_DAY
-;	db 33, SLASH
-;	db 38, NASTY_PLOT
-;	db 49, NIGHT_SLASH
-;	db 0
-
 MarowakEvosMoves:
 ; Evolutions
 	db EV_ITEM, HEART_STONE, 1, GUARDIA
@@ -2436,20 +2381,6 @@ RaticateEvosMoves:
 	db 27, FOCUS_ENERGY
 	db 41, SUPER_FANG
 	db 0
-
-;RaticateAEvosMoves:
-; Evolutions
-;	db 0
-; Learnset
-;	db 4, QUICK_ATTACK
-;	db 7, FOCUS_ENERGY
-;	db 10, BITE
-;	db 16, HYPER_FANG
-;	db 20, BRUTAL_SWING
-;	db 28, SUPER_FANG
-;	db 31, DOUBLE_EDGE
-;	db 40, NIGHT_SLASH
-;	db 0
 
 NidorinoEvosMoves:
 ; Evolutions
@@ -3280,6 +3211,62 @@ ElectrodeHEvosMoves: ; voltorb-hisui learnset which is also trode's anyway
 	db 29, LIGHT_SCREEN
 	db 36, SWIFT
 	db 43, EXPLOSION
+	db 0
+	
+RaticateAEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 4, QUICK_ATTACK
+	db 7, FOCUS_ENERGY
+	db 10, BITE
+	db 16, HYPER_FANG
+	db 20, BRUTAL_SWING
+	db 28, SUPER_FANG
+	db 31, DOUBLE_EDGE
+	db 40, NIGHT_SLASH
+	db 0
+	
+RaichuAEvosMoves: ; pikachu learnset
+; Evolutions
+	db 0
+; Learnset
+	db 6, TAIL_WHIP
+	db 8, THUNDER_WAVE
+	db 11, QUICK_ATTACK
+	db 15, DOUBLE_TEAM
+	db 20, SLAM
+	db 26, THUNDERBOLT
+	db 33, AGILITY
+	db 41, THUNDER
+	db 50, LIGHT_SCREEN
+	db 0
+	
+SandslashAEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 21, SWIFT
+	db 24, FURY_SWIPES
+	db 27, IRON_DEFENSE
+	db 30, SLASH
+	db 33, IRON_HEAD
+	db 36, SWORDS_DANCE
+	db 45, BLIZZARD
+	db 0
+	
+PersianAEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 6, BITE
+	db 14, FURY_SWIPES
+	db 17, SCREECH
+	db 22, FEINT_ATTACK
+	db 30, PAY_DAY
+	db 33, SLASH
+;	db 38, NASTY_PLOT
+	db 49, NIGHT_SLASH
 	db 0
 
 ArticunoGEvosMoves:

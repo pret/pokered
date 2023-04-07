@@ -1,4 +1,4 @@
-	db DEX_PERSIAN ; pokedex id
+	db DEX_PERSIAN_A ; pokedex id
 
 	db  65,  60,  60, 115,  75
 	;   hp  atk  def  spd  spc

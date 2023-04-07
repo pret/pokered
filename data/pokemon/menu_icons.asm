@@ -11,7 +11,7 @@ MonPartyData:
 	nybble ICON_WATER     ; Totartle
 	nybble ICON_FAIRY     ; Pikachu
 	nybble ICON_FAIRY     ; Raichu
-	; 	nybble ICON_FAIRY     ; Raichu-A
+	nybble ICON_FAIRY     ; Raichu-A
 	nybble ICON_FAIRY     ; Gorochu
 	nybble ICON_QUADRUPED ; Eevee
 	nybble ICON_QUADRUPED ; Vaporeon
@@ -24,7 +24,7 @@ MonPartyData:
 	nybble ICON_QUADRUPED ; Sylveon
 	nybble ICON_QUADRUPED ; Rattata
 	nybble ICON_QUADRUPED ; Raticate
-	; 	nybble ICON_QUADRUPED ; Raticate-A
+	nybble ICON_QUADRUPED ; Raticate-A
 	nybble ICON_BIRD      ; Pidgey
 	nybble ICON_BIRD      ; Pidgeotto
 	nybble ICON_BIRD      ; Pidgeot
@@ -37,7 +37,7 @@ MonPartyData:
 	nybble ICON_MON       ; Konya
 	nybble ICON_MON       ; Meowth
 	nybble ICON_MON       ; Persian
-	;	nybble ICON_MON       ; Persian-A
+	nybble ICON_MON       ; Persian-A
 	nybble ICON_MON       ; Perrserker
 	nybble ICON_BIRD      ; Spearow
 	nybble ICON_BIRD      ; Fearow
@@ -45,7 +45,7 @@ MonPartyData:
 	nybble ICON_SNAKE     ; Arbok
 	nybble ICON_MON       ; Sandshrew
 	nybble ICON_MON       ; Sandslash
-	; 	nybble ICON_MON       ; Sandslash-A
+	nybble ICON_MON       ; Sandslash-A
 	nybble ICON_MON       ; NidoranF
 	nybble ICON_MON       ; Nidorina
 	nybble ICON_MON       ; Nidoqueen

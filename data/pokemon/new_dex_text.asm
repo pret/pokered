@@ -828,25 +828,35 @@ _ElectrodeHDexEntry::
 	next "of 20,000 volts" ; 100 kV in a bolt of lightning on average
 	dex
 
-;_RaticateADexEntry:: ; this entry hypercompresses most Gen 7 entries
-;	text "It commands nests"
-;	next "of RATTATA. It"
-;	next "will greedily"
+_RaticateADexEntry:: ; this entry hypercompresses most Gen 7 entries
+	text "It commands nests"
+	next "of RATTATA. It"
+	next "will greedily"
 	
-;	page "command them to"
-;	next "gather large"
-;	next "amounts of food"
-;	dex
+	page "command them to"
+	next "gather large"
+	next "amounts of food"
+	dex
+	
+_RaichuADexEntry:: 
+	text "It uses PSI to"
+	next "ride on its tail"
+	next "like a surfboard."
+	
+	page "It has been known"
+	next "to teach PIKACHU"
+	next "how to SURF"
+	dex
 
-;_SandslashADexEntry::
-;	text "It adapted to a"
-;	next "frigid region."
-;	next "Wounds caused"
+_SandslashADexEntry::
+	text "It adapted to a"
+	next "frigid region."
+	next "Wounds caused"
 	
-;	page "by SANDSLASH"
-;	next "cause severe"
-;	next "frostbite"
-;	dex
+	page "by SANDSLASH"
+	next "cause severe"
+	next "frostbite"
+	dex
 
 ;_NinetalesADexEntry::
 ;	text "Once thought to"
@@ -868,15 +878,15 @@ _ElectrodeHDexEntry::
 ;	next "from attacks"
 ;	dex
 
-;_PersianADexEntry::
-;	text "Its round face"
-;	next "is a symbol of"
-;	next "prosperity."
+_PersianADexEntry::
+	text "Its round face"
+	next "is a symbol of"
+	next "prosperity."
 	
-;	page "Despite this, it"
-;	next "prefers to fight"
-;	next "underhandedly"
-;	dex
+	page "Despite this, it"
+	next "prefers to fight"
+	next "underhandedly"
+	dex
 
 ;_GolemADexEntry::
 ;	text "It fires rocks"
@@ -956,16 +966,6 @@ _ElectrodeHDexEntry::
 ;	page "KANTO. Its body"
 ;	next "is copied when"
 ;	next "building factories" ; referencing this: https://ibb.co/ZM2714Q - PLA takes place before RB
-;	dex
-
-;_MrMimeGDexEntry::
-;	text "Although it no"
-;	next "longer creates"
-;	next "invisible walls,"
-	
-;	page "This MR.MIME can"
-;	next "use PSI to make"
-;	next "barriers of ice"
 ;	dex
 
 ;_TaurosPDexEntry::
