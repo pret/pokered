@@ -30,7 +30,7 @@ TransformEffect_:
 	ld b, BANK(HideSubstituteShowMonAnim)
 	call nz, Bankswitch
 	ld a, [wOptions]
-	add a
+	add a ; TODO: Make clearer what it's checking (battle animation flag?)
 	ld hl, PlayCurrentMoveAnimation
 	ld b, BANK(PlayCurrentMoveAnimation)
 	jr nc, .gotAnimToPlay

@@ -391,11 +391,11 @@ SetOptionsFromCursorPositions:
 	ld hl, wOptions
 	ld a, [wOptions2CursorX] ; battle animation cursor X coordinate
 	ld c, 10
-	ld b, 7
+	ld b, BIT_BATTLE_ANIMATION
 	call SetSingleBitOption
 	ld a, [wOptions3CursorX] ; battle style cursor X coordinate
 	ld c, 10
-	ld b, 6
+	ld b, BIT_BATTLE_SHIFT
 	jp SetSingleBitOption
 
 ; option with 2 possible values
@@ -501,14 +501,14 @@ SetTextSpeedCursorPosition:
 SetBattleAnimationCursorPosition:
 	ld hl, wOptions
 	ld a, 10
-	ld c, 7
+	ld c, BIT_BATTLE_ANIMATION
 	ld d, 1
 	jr SetSingleBitOptionCursorPosition
 
 SetBattleStyleCursorPosition:
 	ld hl, wOptions
 	ld a, 10
-	ld c, 6
+	ld c, BIT_BATTLE_SHIFT
 	ld d, 1
 	; fall through
 
