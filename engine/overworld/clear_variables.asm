@@ -9,6 +9,7 @@ ClearVariablesOnEnterMap::
 	ldh [hJoyPressed], a
 	ldh [hJoyReleased], a
 	ldh [hJoyHeld], a
+	ld [wMuteAudioAndPauseMusic], a
 	ld [wActionResultOrTookBattleTurn], a
 	ld [wUnusedD5A3], a
 	ld hl, wCardKeyDoorY
