@@ -24,6 +24,7 @@ SSAnneB1FRooms_TextPointers:
 	dw PickUpItemText
 	dw PickUpItemText
 	dw PickUpItemText
+	dw MrRimeTrade
 
 SSAnne10TrainerHeaders:
 	def_trainers
@@ -159,3 +160,10 @@ SSAnne10AfterBattleText6:
 SSAnne10Text7:
 	text_far _SSAnne10Text7
 	text_end
+
+MrRimeTrade:
+	text_asm
+	ld a, TRADE_FOR_MR_RIME
+	ld [wWhichTrade], a
+	predef DoInGameTradeDialogue
+	jp TextScriptEnd

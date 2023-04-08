@@ -7,6 +7,7 @@ ViridianPokecenter_TextPointers:
 	dw ViridianPokeCenterText2
 	dw ViridianPokeCenterText3
 	dw ViridianTradeNurseText
+	dw RaticateTrade
 
 ViridianHealNurseText:
 	script_pokecenter_nurse
@@ -21,3 +22,10 @@ ViridianPokeCenterText3:
 
 ViridianTradeNurseText:
 	script_cable_club_receptionist
+
+RaticateTrade:
+	text_asm
+	ld a, TRADE_FOR_RATICATE_A
+	ld [wWhichTrade], a
+	predef DoInGameTradeDialogue
+	jp TextScriptEnd

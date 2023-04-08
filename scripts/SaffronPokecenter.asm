@@ -7,6 +7,7 @@ SaffronPokecenter_TextPointers:
 	dw SaffronPokecenterText2
 	dw SaffronPokecenterText3
 	dw SaffronTradeNurseText
+	dw RaichuTrade
 
 SaffronHealNurseText:
 	script_pokecenter_nurse
@@ -21,3 +22,10 @@ SaffronPokecenterText3:
 
 SaffronTradeNurseText:
 	script_cable_club_receptionist
+
+RaichuTrade:
+	text_asm
+	ld a, TRADE_FOR_RAICHU_A
+	ld [wWhichTrade], a
+	predef DoInGameTradeDialogue
+	jp TextScriptEnd

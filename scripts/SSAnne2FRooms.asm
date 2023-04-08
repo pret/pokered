@@ -29,6 +29,7 @@ SSAnne2FRooms_TextPointers:
 	dw SSAnne9Text11
 	dw SSAnne9Text12
 	dw SSAnne9Text13
+	dw SirfetchdTrade
 
 SSAnne9TrainerHeaders:
 	def_trainers
@@ -187,3 +188,10 @@ SSAnne9EndBattleText4:
 SSAnne9AfterBattleText4:
 	text_far _SSAnne9AfterBattleText4
 	text_end
+
+SirfetchdTrade:
+	text_asm
+	ld a, TRADE_FOR_SIRFETCHD
+	ld [wWhichTrade], a
+	predef DoInGameTradeDialogue
+	jp TextScriptEnd

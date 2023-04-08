@@ -96,7 +96,7 @@ _WrongMon1Text::
 	done
 
 _Thanks1Text::
-	text "Hey thanks!"
+	text "Hey, thanks!"
 	done
 
 _AfterTrade1Text::
@@ -220,8 +220,8 @@ _Thanks4Text::
 _WannaTrade5Text::
 	text "In my region, we"
 	line "have our own"
-	para "@"
-	text_ram wInGameTradeReceiveMonName
+	cont "@"
+	text_ram wInGameTradeGiveMonName
 	text "!"
 	
 	para "Want to trade me"

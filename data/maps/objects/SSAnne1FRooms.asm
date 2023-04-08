@@ -23,5 +23,6 @@ SSAnne1FRooms_Object:
 	object_event 10, 13, SPRITE_GIRL, STAY, RIGHT, 9 ; person
 	object_event 12, 15, SPRITE_POKE_BALL, STAY, NONE, 10, TM_BODY_SLAM
 	object_event 21, 13, SPRITE_GENTLEMAN, WALK, LEFT_RIGHT, 11 ; person
+	object_event  0,  4, SPRITE_GAMEBOY_KID, STAY, DOWN, 12 ; Perrserker Trader
 
 	def_warps_to SS_ANNE_1F_ROOMS

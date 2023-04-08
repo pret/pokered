@@ -24,6 +24,7 @@ SSAnne1FRooms_TextPointers:
 	dw SSAnne8Text9
 	dw PickUpItemText
 	dw SSAnne8Text11
+	dw PerrserkerTrade
 
 SSAnne8TrainerHeaders:
 	def_trainers
@@ -135,3 +136,10 @@ SSAnne8Text9:
 SSAnne8Text11:
 	text_far _SSAnne8Text11
 	text_end
+
+PerrserkerTrade:
+	text_asm
+	ld a, TRADE_FOR_PERRSERKER
+	ld [wWhichTrade], a
+	predef DoInGameTradeDialogue
+	jp TextScriptEnd

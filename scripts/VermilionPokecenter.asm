@@ -7,6 +7,7 @@ VermilionPokecenter_TextPointers:
 	dw VermilionPokecenterText2
 	dw VermilionPokecenterText3
 	dw VermilionTradeNurseText
+	dw PersianTrade
 
 VermilionHealNurseText:
 	script_pokecenter_nurse
@@ -21,3 +22,10 @@ VermilionPokecenterText3:
 
 VermilionTradeNurseText:
 	script_cable_club_receptionist
+
+PersianTrade:
+	text_asm
+	ld a, TRADE_FOR_PERSIAN_A
+	ld [wWhichTrade], a
+	predef DoInGameTradeDialogue
+	jp TextScriptEnd

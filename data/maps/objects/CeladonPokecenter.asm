@@ -12,5 +12,6 @@ CeladonPokecenter_Object:
 	object_event  7,  3, SPRITE_GENTLEMAN, WALK, LEFT_RIGHT, 2 ; person
 	object_event 10,  5, SPRITE_BEAUTY, WALK, ANY_DIR, 3 ; person
 	object_event 11,  2, SPRITE_LINK_RECEPTIONIST, STAY, DOWN, 4 ; person
+	object_event  7,  3, SPRITE_GAMEBOY_KID, STAY, DOWN, 5 ; Sandslash Trader
 
 	def_warps_to CELADON_POKECENTER
