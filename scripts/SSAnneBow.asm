@@ -18,6 +18,7 @@ SSAnneBow_TextPointers:
 	dw SSAnne5Text3
 	dw SSAnne5Text4
 	dw SSAnne5Text5
+	dw RapidashTrade
 
 SSAnne5TrainerHeaders:
 	def_trainers 4
@@ -74,3 +75,10 @@ SSAnne5EndBattleText2:
 SSAnne5AfterBattleText2:
 	text_far _SSAnne5AfterBattleText2
 	text_end
+
+RapidashTrade:
+	text_asm
+	ld a, TRADE_FOR_RAPIDASH_G
+	ld [wWhichTrade], a
+	predef DoInGameTradeDialogue
+	jp TextScriptEnd

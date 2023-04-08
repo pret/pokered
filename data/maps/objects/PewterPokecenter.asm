@@ -12,5 +12,6 @@ PewterPokecenter_Object:
 	object_event 11,  7, SPRITE_GENTLEMAN, STAY, LEFT, 2 ; person
 	object_event  1,  3, SPRITE_FAIRY, STAY, DOWN, 3 ; person
 	object_event 11,  2, SPRITE_LINK_RECEPTIONIST, STAY, DOWN, 4 ; person
+	object_event  7,  3, SPRITE_GAMEBOY_KID, STAY, DOWN, 5 ; Golem Trader
 
 	def_warps_to PEWTER_POKECENTER

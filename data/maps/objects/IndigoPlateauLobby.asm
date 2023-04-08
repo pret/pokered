@@ -14,5 +14,6 @@ IndigoPlateauLobby_Object:
 	object_event  5,  1, SPRITE_COOLTRAINER_F, STAY, DOWN, 3 ; person
 	object_event  0,  5, SPRITE_CLERK, STAY, RIGHT, 4 ; person
 	object_event 13,  6, SPRITE_LINK_RECEPTIONIST, STAY, DOWN, 5 ; person
+	object_event 10,  7, SPRITE_GAMEBOY_KID, STAY, DOWN, 6 ; Exeggutor Trader
 
 	def_warps_to INDIGO_PLATEAU_LOBBY

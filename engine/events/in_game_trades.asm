@@ -277,6 +277,7 @@ InGameTradeTextPointers:
 	dw TradeTextPointers3
 	dw TradeTextPointers4
 	dw TradeTextPointers5
+	dw TradeTextPointers6
 
 TradeTextPointers1:
 	dw WannaTrade1Text
@@ -309,7 +310,7 @@ TradeTextPointers4:
 TradeTextPointers5:
 	dw WannaTrade5Text
 	dw NoTrade5Text
-	dw WrongMon3Text ; seems fitting, also optimises
+	dw WrongMon3Text
 	dw Thanks1Text
 	dw AfterTrade1Text
 

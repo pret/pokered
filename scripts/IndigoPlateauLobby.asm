@@ -20,6 +20,7 @@ IndigoPlateauLobby_TextPointers:
 	dw IndigoPlateauLobbyText3
 	dw IndigoCashierText
 	dw IndigoTradeNurseText
+	dw ExeggutorTrade
 
 IndigoHealNurseText:
 	script_pokecenter_nurse
@@ -37,3 +38,10 @@ IndigoTradeNurseText:
 
 IndigoCashierText::
 	script_mart ULTRA_BALL, GREAT_BALL, FULL_RESTORE, MAX_POTION, FULL_HEAL, REVIVE, MAX_REPEL
+
+ExeggutorTrade:
+	text_asm
+	ld a, TRADE_FOR_EXEGGUTOR_A
+	ld [wWhichTrade], a
+	predef DoInGameTradeDialogue
+	jp TextScriptEnd

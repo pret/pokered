@@ -23,11 +23,11 @@ SetIshiharaTeam:
 IshiharaTeam:
 	db EXEGGUTOR, 90
 	db RAICHU, 90
-	db RATICATE, 90
-	db PERSIAN, 50
+	db EXEGGUTOR, 90
+	db RAPIDASH, 50
 IF DEF(_DEBUG)
-	db MR_MIME, 50
-	db MADAAMU, 50
+	db GOLEM, 50
+	db MAROWAK, 50
 ENDC
 	db -1 ; end
 
