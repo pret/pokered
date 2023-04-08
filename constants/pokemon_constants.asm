@@ -247,13 +247,13 @@
 	; const NINETALES_A		   ; $EE
 	; const DUGTRIO_A		   ; $EF
 	const PERSIAN_A		     ; $F0
-	; const GOLEM_A		 	   ; $F1
-	; const RAPIDASH_G		   ; $F2
+	const GOLEM_A		 	   ; $F1
+	const RAPIDASH_G		   ; $F2
 	; const SLOWBRO_G		   ; $F3
 	; const SLOWKING_G		   ; $F4
 	; const MUK_A		       ; $F5
-	; const EXEGGUTOR_A		   ; $F6
-	; const MAROWAK_A		   ; $F7
+	const EXEGGUTOR_A		 ; $F6
+	const MAROWAK_A		     ; $F7
 	; const WEEZING_G		   ; $F8
 	; const TAUROS_P		   ; $F9
 	; const TAUROS_PA		   ; $FA

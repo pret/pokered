@@ -60,7 +60,7 @@ MonPartyData:
 	nybble ICON_MON       ; Geodude
 	nybble ICON_MON       ; Graveler
 	nybble ICON_MON       ; Golem
-	; 	nybble ICON_MON       ; Golem-A
+	nybble ICON_MON       ; Golem-A
 	nybble ICON_BUG       ; Para
 	nybble ICON_BUG       ; Paras
 	nybble ICON_BUG       ; Parasect
@@ -150,7 +150,7 @@ MonPartyData:
 	nybble ICON_QUADRUPED ; Puchikoon
 	nybble ICON_QUADRUPED ; Ponyta
 	nybble ICON_QUADRUPED ; Rapidash
-	; 	nybble ICON_QUADRUPED ; Rapidash-G
+	nybble ICON_QUADRUPED ; Rapidash-G
 	nybble ICON_GRASS     ; Monja
 	nybble ICON_GRASS     ; Tangela
 	nybble ICON_GRASS     ; Tangrowth
@@ -163,7 +163,7 @@ MonPartyData:
 	nybble ICON_MON       ; Gengar
 	nybble ICON_MON       ; Cubone
 	nybble ICON_MON       ; Marowak
-	; 	nybble ICON_MON       ; Marowak-A
+	nybble ICON_MON       ; Marowak-A
 	nybble ICON_MON	      ; Guardia
 	nybble ICON_MON       ; Betobebii
 	nybble ICON_MON       ; Grimer
@@ -195,7 +195,7 @@ MonPartyData:
 	nybble ICON_WATER	  ; Jagg
 	nybble ICON_GRASS     ; Exeggcute
 	nybble ICON_GRASS     ; Exeggutor
-	; 	nybble ICON_GRASS     ; Exeggutor-A
+	nybble ICON_GRASS     ; Exeggutor-A
 	nybble ICON_QUADRUPED ; Rhyhorn
 	nybble ICON_MON       ; Rhydon
 	nybble ICON_MON       ; Rhyperior

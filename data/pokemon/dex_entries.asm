@@ -238,6 +238,10 @@ PokedexEntryPointers:
 	dw RaichuADexEntry
 	dw SandslashADexEntry
 	dw PersianADexEntry
+	dw GolemADexEntry
+	dw RapidashGDexEntry
+	dw ExeggutorADexEntry
+	dw MarowakADexEntry
 	dw ArticunoGDexEntry
 	dw ZapdosGDexEntry
 	dw MoltresGDexEntry
@@ -1899,6 +1903,34 @@ PersianADexEntry:
 	db 3,7
 	dw 730
 	text_far _PersianADexEntry
+	text_end
+	
+GolemADexEntry:
+	db "MEGATON@"
+	db 5,7
+	dw 6970
+	text_far _GolemADexEntry
+	text_end
+	
+RapidashGDexEntry:
+	db "UNIQUEHORN@"
+	db 5,7
+	dw 1760
+	text_far _RapidashGDexEntry
+	text_end
+
+ExeggutorADexEntry:
+	db "COCONUT@"
+	db 35,9
+	dw 9160
+	text_far _ExeggutorADexEntry
+	text_end
+	
+MarowakADexEntry:
+	db "BONEKEEPER@"
+	db 3,3
+	dw 750
+	text_far _MarowakADexEntry
 	text_end
 	
 ArticunoGDexEntry:

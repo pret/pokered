@@ -15,9 +15,9 @@
 
 	; tm/hm learnset
 	tmhm TOXIC,        HORN_DRILL,   BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  \
-	     HYPER_BEAM,   PAY_DAY,      RAGE,         MIMIC,        DOUBLE_TEAM,  \
-	     REFLECT,      BIDE,         PSYCHIC_M,   SWIFT,        SKULL_BASH,   \
-	     REST,         SUBSTITUTE, PSYWAVE, TELEPORT
+	     HYPER_BEAM,   PAY_DAY,      RAGE,         PSYCHIC_M,    TELEPORT,     \
+	     MIMIC,        DOUBLE_TEAM,  REFLECT,      BIDE,         SWIFT,        \
+	     SKULL_BASH,   REST,         PSYWAVE,      SUBSTITUTE
 	; end
 
 	db BANK(RapidashGPicFront)

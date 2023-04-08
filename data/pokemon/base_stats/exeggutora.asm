@@ -1,6 +1,6 @@
 	db DEX_EXEGGUTOR_A ; pokedex id
 
-	db  95,  105,  85,  45, 125
+	db  95, 105,  85,  45, 125
 	;   hp  atk  def  spd  spc
 
 	db GRASS, DRAGON ; type
@@ -14,11 +14,11 @@
 	db GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
-	tmhm TOXIC,        TAKE_DOWN,    DOUBLE_EDGE,  HYPER_BEAM,   RAGE,         \
-	     MEGA_DRAIN,   SOLARBEAM,    PSYCHIC_M,    TELEPORT,     MIMIC,        \
-	     DOUBLE_TEAM,  REFLECT,      BIDE,         SELFDESTRUCT, EGG_BOMB,     \
-	     REST,         PSYWAVE,      EXPLOSION,    SUBSTITUTE,   STRENGTH,	   \
-		 DRAGON_RAGE, EARTHQUAKE, FISSURE, SWORDS_DANCE
+	tmhm SWORDS_DANCE, TOXIC,        TAKE_DOWN,    DOUBLE_EDGE,  HYPER_BEAM,   \
+	     RAGE,         MEGA_DRAIN,   SOLARBEAM,    DRAGON_RAGE,  EARTHQUAKE,   \
+	     FISSURE,      PSYCHIC_M,    TELEPORT,     MIMIC,        DOUBLE_TEAM,  \
+	     REFLECT,      BIDE,         SELFDESTRUCT, EGG_BOMB,     REST,         \
+		 PSYWAVE,      EXPLOSION,    SUBSTITUTE,   STRENGTH	   
 	; end
 
 	db BANK(ExeggutorAPicFront)

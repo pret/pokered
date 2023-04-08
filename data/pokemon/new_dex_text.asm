@@ -888,25 +888,25 @@ _PersianADexEntry::
 	next "underhandedly"
 	dex
 
-;_GolemADexEntry::
-;	text "It fires rocks"
-;	next "charged with"
-;	next "electricity."
+_GolemADexEntry::
+	text "It fires rocks"
+	next "charged with"
+	next "electricity."
 	
-;	page "If it can't find"
-;	next "ammo, it may fire"
-;	next "GEODUDE instead"
-;	dex
+	page "If it can't find"
+	next "ammo, it may fire"
+	next "GEODUDE instead"
+	dex
 
-;_RapidashGDexEntry::
-;	text "Its galloping is"
-;	next "supported by its"
-;	next "PSI abilities." ; adapting from similar psychic-based entries.
+_RapidashGDexEntry::
+	text "Its galloping is"
+	next "supported by its"
+	next "PSI abilities." ; adapting from similar psychic-based entries.
 	
-;	page "If released from"
-;	next "its horn, it can"
-;	next "break concrete"
-;	dex
+	page "If released from"
+	next "its horn, it can"
+	next "break concrete"
+	dex
 
 ;_SlowbroGDexEntry::
 ;	text "The SHELLDER that"
@@ -938,25 +938,25 @@ _PersianADexEntry::
 ;	next "a lot of trash"
 ;	dex
 
-;_ExeggutorADexEntry::
-;	text "Strong sunlight"
-;	next "awoke its hidden"
-;	next "draconic powers."
+_ExeggutorADexEntry::
+	text "Strong sunlight"
+	next "awoke its hidden"
+	next "draconic powers."
 	
-;	page "However, as a"
-;	next "result, its PSI"
-;	next "has weakened"
-;	dex ; consider revising
+	page "However, as a"
+	next "result, its PSI"
+	next "has weakened"
+	dex ; consider revising
 
-;_MarowakADexEntry::
-;	text "While dancing in"
-;	next "mourning of its"
-;	next "kin, the spirit"
+_MarowakADexEntry::
+	text "While dancing in"
+	next "mourning of its"
+	next "kin, the spirit"
 	
-;	page "of its mother"
-;	next "inhabits its"
-;	next "cherished bone"
-;	dex
+	page "of its mother"
+	next "inhabits its"
+	next "cherished bone"
+	dex
 
 ;_WeezingGDexEntry::
 ;	text "It is better at"

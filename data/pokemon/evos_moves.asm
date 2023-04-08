@@ -23,7 +23,6 @@ EvosMovesPointerTable:
 	;dw SlowbroGEvosMoves
 	dw IvysaurEvosMoves
 	dw ExeggutorEvosMoves
-	;dw ExeggutorAEvosMoves
 	dw LickitungEvosMoves
 	dw ExeggcuteEvosMoves
 	dw GrimerEvosMoves
@@ -63,7 +62,6 @@ EvosMovesPointerTable:
 	dw PsyduckEvosMoves
 	dw DrowzeeEvosMoves
 	dw GolemEvosMoves
-	;dw GolemAEvosMoves
 	dw BarundaEvosMoves
 	dw MagmarEvosMoves
 	dw BuuEvosMoves
@@ -167,7 +165,6 @@ EvosMovesPointerTable:
 	;dw WeezingGEvosMoves
 	dw PersianEvosMoves
 	dw MarowakEvosMoves
-	;dw MarowakAEvosMoves
 	dw GuardiaEvosMoves
 	dw HaunterEvosMoves
 	dw AbraEvosMoves
@@ -187,7 +184,6 @@ EvosMovesPointerTable:
 	dw PuchikoonEvosMoves
 	dw PonytaEvosMoves
 	dw RapidashEvosMoves
-	;dw RapidashGEvosMoves
 	dw RattataEvosMoves
 	dw RaticateEvosMoves
 	dw NidorinoEvosMoves
@@ -263,6 +259,10 @@ EvosMovesPointerTable:
 	dw RaichuAEvosMoves
 	dw SandslashAEvosMoves
 	dw PersianAEvosMoves
+	dw GolemAEvosMoves
+	dw RapidashGEvosMoves
+	dw ExeggutorAEvosMoves
+	dw MarowakAEvosMoves
 	dw ArticunoGEvosMoves	
 	dw ZapdosGEvosMoves
 	dw MoltresGEvosMoves
@@ -397,18 +397,6 @@ ExeggutorEvosMoves:
 ; Learnset
 	db 28, STOMP
 	db 0
-
-;ExeggutorAEvosMoves:
-; Evolutions
-;	db 0
-; Learnset
-;	db 25, REFLECT ; this would normally be removed, but because this'll be traded, we're using this
-;	db 28, LEECH_SEED
-;	db 32, STUN_SPORE
-;	db 37, POISONPOWDER
-;	db 42, SOLARBEAM
-;	db 48, SLEEP_POWDER
-;	db 0
 
 LickitungEvosMoves:
 ; Evolutions
@@ -786,7 +774,6 @@ MachokeEvosMoves:
 
 MrMimeEvosMoves:
 ; Evolutions
-	db EV_ITEM, ICE_STONE, 1, MR_RIME
 	db 0
 ; Learnset
 	db 15, CONFUSION
@@ -877,17 +864,6 @@ GolemEvosMoves:
 	db 36, EARTHQUAKE
 	db 43, EXPLOSION
 	db 0
-
-;GolemAEvosMoves:
-; Evolutions
-;	db 0
-; Learnset
-;	db 16, ROCK_THROW
-;	db 22, THUNDER_PUNCH
-;	db 24, SELFDESTRUCT
-;	db 36, EXPLOSION
-;	db 40, DOUBLE_EDGE
-;	db 0
 
 BarundaEvosMoves:
 ; Evolutions
@@ -2046,17 +2022,6 @@ ElectrodeEvosMoves:
 	db 50, EXPLOSION
 	db 0
 
-;ElectrodeHEvosMoves: ; voltorb-hisui learnset which is also trode's anyway
-; Evolutions
-;	db 0
-; Learnset
-;	db 17, SONICBOOM
-;	db 22, SELFDESTRUCT
-;	db 29, LIGHT_SCREEN
-;	db 36, SWIFT
-;	db 43, EXPLOSION
-;	db 0
-
 ClefableEvosMoves:
 ; Evolutions
 	db 0
@@ -2111,18 +2076,6 @@ MarowakEvosMoves:
 	db 48, BONEMERANG
 	db 55, RAGE
 	db 0
-
-;MarowakAEvosMoves:
-; Evolutions
-;	db 0
-; Learnset
-;	db 18, FIRE_SPIN
-;	db 25, LEER
-;	db 33, EMBER
-;	db 41, THRASH
-;	db 46, BONEMERANG
-;	db 55, FLAMETHROWER
-;	db 0
 
 GuardiaEvosMoves:
 ; Evolutions
@@ -2345,21 +2298,6 @@ RapidashEvosMoves:
 	db 47, TAKE_DOWN
 	db 55, AGILITY
 	db 0
-
-;RapidashGEvosMoves:
-; Evolutions
-;	db 0
-; Learnset
-;	db 30, TAIL_WHIP
-;	db 32, CONFUSION
-;	db 35, FAIRY_WIND
-;	db 39, AGILITY
-;	db 42, PSYBEAM
-;	db 46, STOMP
-;	db 47, TAKE_DOWN
-;	db 52, DAZZLE_GLEAM
-;	db 55, PSYCHIC
-;	db 0
 
 RattataEvosMoves:
 ; Evolutions
@@ -3267,6 +3205,56 @@ PersianAEvosMoves:
 	db 33, SLASH
 ;	db 38, NASTY_PLOT
 	db 49, NIGHT_SLASH
+	db 0
+	
+GolemAEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 16, ROCK_THROW
+	db 22, THUNDERPUNCH
+	db 24, SELFDESTRUCT
+	db 36, EXPLOSION
+	db 40, DOUBLE_EDGE
+	db 0
+	
+RapidashGEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 30, TAIL_WHIP
+	db 32, CONFUSION
+	db 35, FAIRY_WIND
+	db 39, AGILITY
+	db 42, PSYBEAM
+	db 46, STOMP
+	db 47, TAKE_DOWN
+	db 52, DAZZLE_GLEAM
+	db 55, PSYCHIC_M
+	db 0
+
+ExeggutorAEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 25, REFLECT ; this would normally be removed, but because this'll be traded, we're using this
+	db 28, LEECH_SEED
+	db 32, STUN_SPORE
+	db 37, POISONPOWDER
+	db 42, SOLARBEAM
+	db 48, SLEEP_POWDER
+	db 0
+
+MarowakAEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 18, FIRE_SPIN
+	db 25, LEER
+	db 33, EMBER
+	db 41, THRASH
+	db 46, BONEMERANG
+	db 55, FLAMETHROWER
 	db 0
 
 ArticunoGEvosMoves:

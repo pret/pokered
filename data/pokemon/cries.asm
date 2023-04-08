@@ -246,13 +246,13 @@ CryData::
 	; mon_cry SFX_CRY_24, $88, $60 ; Ninetales-A
 	; mon_cry SFX_CRY_0B, $2A, $10 ; Dugtrio-A
 	mon_cry SFX_CRY_19, $99, $FF ; Persian-A
-	; mon_cry SFX_CRY_12, $E0, $40 ; Golem-A
-	; mon_cry SFX_CRY_25, $20, $C0 ; Rapidash-G
+	mon_cry SFX_CRY_12, $E0, $40 ; Golem-A
+	mon_cry SFX_CRY_25, $20, $C0 ; Rapidash-G
 	; mon_cry SFX_CRY_1F, $00, $80 ; Slowbro-G
 	; mon_cry SFX_CRY_00, $00, $00 ; Slowking-G
 	; mon_cry SFX_CRY_07, $EF, $FF ; Muk-A
-	; mon_cry SFX_CRY_0D, $00, $80 ; Exeggutor-A
-	; mon_cry SFX_CRY_08, $4F, $60 ; Marowak-A
+	mon_cry SFX_CRY_0D, $00, $80 ; Exeggutor-A
+	mon_cry SFX_CRY_08, $4F, $60 ; Marowak-A
 	; mon_cry SFX_CRY_12, $FF, $FF ; Weezing-G
 	; mon_cry SFX_CRY_1D, $11, $40 ; Tauros-P
 	; mon_cry SFX_CRY_1D, $11, $40 ; Tauros-PA
