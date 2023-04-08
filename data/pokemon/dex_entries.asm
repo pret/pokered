@@ -237,6 +237,8 @@ PokedexEntryPointers:
 	dw RaticateADexEntry
 	dw RaichuADexEntry
 	dw SandslashADexEntry
+	dw NinetalesADexEntry
+	dw DugtrioADexEntry
 	dw PersianADexEntry
 	dw GolemADexEntry
 	dw RapidashGDexEntry
@@ -1896,6 +1898,20 @@ SandslashADexEntry:
 	db 3,11
 	dw 1210
 	text_far _SandslashADexEntry
+	text_end
+	
+NinetalesADexEntry:
+	db "FOX@"
+	db 3,7
+	dw 440
+	text_far _NinetalesADexEntry
+	text_end
+	
+DugtrioADexEntry:
+	db "MOLE@"
+	db 2,4
+	dw 1470
+	text_far _DugtrioADexEntry
 	text_end
 	
 PersianADexEntry:

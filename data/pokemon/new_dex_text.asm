@@ -858,25 +858,25 @@ _SandslashADexEntry::
 	next "frostbite"
 	dex
 
-;_NinetalesADexEntry::
-;	text "Once thought to"
-;	next "be a deity, it"
-;	next "appears to lost" 
+_NinetalesADexEntry::
+	text "Once thought to"
+	next "be a deity, it"
+	next "appears to lost" 
 	
-;	page "mountain climbers"
-;	next "to guide them away"
-;	next "from its home"
-;	dex
+	page "mountain climbers"
+	next "to guide them away"
+	next "from its home"
+	dex
 
-;_DugtrioADexEntry::
-;	text "DUGTRIO's hair"
-;	next "and whiskers are"
-;	next "made of metal."
+_DugtrioADexEntry::		; revised to add more info
+	text "The metal whiskers"
+	next "on its heads help"
+	next "protect it from"
 	
-;	page "They provide it"
-;	next "with protection"
-;	next "from attacks"
-;	dex
+	page "attacks, and can"
+	next "sense sounds from"
+	next "many miles away"
+	dex
 
 _PersianADexEntry::
 	text "Its round face"

@@ -71,7 +71,7 @@ MonPartyData:
 	nybble ICON_QUADRUPED ; Mikon
 	nybble ICON_QUADRUPED ; Vulpix
 	nybble ICON_QUADRUPED ; Ninetales
-	; 	nybble ICON_QUADRUPED ; Ninetales-A
+	nybble ICON_QUADRUPED ; Ninetales-A
 	nybble ICON_QUADRUPED ; Pudi
 	nybble ICON_QUADRUPED ; Growlithe
 	nybble ICON_QUADRUPED ; Arcanine
@@ -114,7 +114,7 @@ MonPartyData:
 	nybble ICON_MON       ; Alakazam
 	nybble ICON_MON       ; Diglett
 	nybble ICON_MON       ; Dugtrio
-	; 	nybble ICON_MON       ; Dugtrio-A
+	nybble ICON_MON       ; Dugtrio-A
 	nybble ICON_WATER     ; Wiglett
 	nybble ICON_WATER     ; Wugtrio
 	nybble ICON_SNAKE     ; Onix

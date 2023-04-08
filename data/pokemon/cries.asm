@@ -243,8 +243,8 @@ CryData::
 	mon_cry SFX_CRY_22, $20, $FF ; Raticate-A
 	mon_cry SFX_CRY_09, $EE, $08 ; Raichu-A
 	mon_cry SFX_CRY_00, $FF, $FF ; Sandslash-A
-	; mon_cry SFX_CRY_24, $88, $60 ; Ninetales-A
-	; mon_cry SFX_CRY_0B, $2A, $10 ; Dugtrio-A
+	mon_cry SFX_CRY_24, $88, $60 ; Ninetales-A
+	mon_cry SFX_CRY_0B, $2A, $10 ; Dugtrio-A
 	mon_cry SFX_CRY_19, $99, $FF ; Persian-A
 	mon_cry SFX_CRY_12, $E0, $40 ; Golem-A
 	mon_cry SFX_CRY_25, $20, $C0 ; Rapidash-G

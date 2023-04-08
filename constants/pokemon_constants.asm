@@ -243,12 +243,12 @@
 	const ELECTRODE_H		 ; $EA
 	const RATICATE_A		 ; $EB
 	const RAICHU_A           ; $EC
-	const SANDSLASH_A		   ; $ED
-	; const NINETALES_A		   ; $EE
-	; const DUGTRIO_A		   ; $EF
+	const SANDSLASH_A		 ; $ED
+	const NINETALES_A		 ; $EE
+	const DUGTRIO_A		     ; $EF
 	const PERSIAN_A		     ; $F0
-	const GOLEM_A		 	   ; $F1
-	const RAPIDASH_G		   ; $F2
+	const GOLEM_A		 	 ; $F1
+	const RAPIDASH_G		 ; $F2
 	; const SLOWBRO_G		   ; $F3
 	; const SLOWKING_G		   ; $F4
 	; const MUK_A		       ; $F5

@@ -99,7 +99,6 @@ EvosMovesPointerTable:
 	dw MikonEvosMoves
 	dw VulpixEvosMoves
 	dw NinetalesEvosMoves
-	;dw NinetalesAEvosMoves
 	dw PikachuEvosMoves
 	dw RaichuEvosMoves
 	dw RibbitoEvosMoves
@@ -135,7 +134,6 @@ EvosMovesPointerTable:
 	dw DodrioEvosMoves
 	dw PrimeapeEvosMoves
 	dw DugtrioEvosMoves
-	;DugtrioAEvosMoves
 	dw VenomothEvosMoves
 	dw DewgongEvosMoves
 	dw PurakkusuEvosMoves
@@ -258,6 +256,8 @@ EvosMovesPointerTable:
 	dw RaticateAEvosMoves
 	dw RaichuAEvosMoves
 	dw SandslashAEvosMoves
+	dw NinetalesAEvosMoves
+	dw DugtrioAEvosMoves
 	dw PersianAEvosMoves
 	dw GolemAEvosMoves
 	dw RapidashGEvosMoves
@@ -1311,20 +1311,6 @@ NinetalesEvosMoves:
 ; Learnset
 	db 0
 
-;NinetalesAEvosMoves: ; vulpix-alola learnset
-; Evolutions
-;	db 0
-; Learnset
-;	db 7, ROAR
-;	db 12, CONFUSE_RAY
-;	db 23, FEINT_ATTACK
-;	db 28, AURORA_BEAM
-;	db 36, ICE_BEAM
-;	db 38, DAZZLE_GLEAM
-;	db 42, BLIZZARD
-;	db 46, CHARM
-;	db 0
-
 PikachuEvosMoves:
 ; Evolutions
 	db EV_ITEM, THUNDER_STONE, 1, RAICHU
@@ -1739,18 +1725,6 @@ DugtrioEvosMoves:
 	db 35, SLASH
 	db 47, EARTHQUAKE
 	db 0
-
-;DugtrioAEvosMoves:
-; Evolutions
-;	db 0
-; Learnset
-;	db 6, GROWL
-;	db 20, SLASH
-;	db 31, DIG
-;	db 35, IRON_HEAD
-;	db 39, EARTHQUAKE
-;	db 43, FISSURE
-;	db 0
 
 VenomothEvosMoves:
 ; Evolutions
@@ -3191,6 +3165,32 @@ SandslashAEvosMoves:
 	db 33, IRON_HEAD
 	db 36, SWORDS_DANCE
 	db 45, BLIZZARD
+	db 0
+	
+NinetalesAEvosMoves: ; vulpix-alola learnset
+; Evolutions
+	db 0
+; Learnset
+	db 7, ROAR
+	db 12, CONFUSE_RAY
+	db 23, FEINT_ATTACK
+	db 28, AURORA_BEAM
+	db 36, ICE_BEAM
+	db 38, DAZZLE_GLEAM
+	db 42, BLIZZARD
+	db 46, CHARM
+	db 0
+
+DugtrioAEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 6, GROWL
+	db 20, SLASH
+	db 31, DIG
+	db 35, IRON_HEAD
+	db 39, EARTHQUAKE
+	db 43, FISSURE
 	db 0
 	
 PersianAEvosMoves:
