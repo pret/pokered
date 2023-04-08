@@ -277,7 +277,6 @@ InGameTradeTextPointers:
 	dw TradeTextPointers3
 	dw TradeTextPointers4
 	dw TradeTextPointers5
-	dw TradeTextPointers6
 
 TradeTextPointers1:
 	dw WannaTrade1Text

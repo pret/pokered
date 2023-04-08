@@ -26,8 +26,8 @@ IshiharaTeam:
 	db EXEGGUTOR, 90
 	db RAPIDASH, 50
 IF DEF(_DEBUG)
-	db GOLEM, 50
-	db MAROWAK, 50
+	db NINETALES, 50
+	db DUGTRIO, 50
 ENDC
 	db -1 ; end
 
