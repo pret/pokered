@@ -193,7 +193,7 @@ _WannaTrade6Text::
 	line "Combat Breed is"
 	cont "way better!"
 
-	text "You agree, right?"
+	para "You agree, right?"
 	line "Trade me your"
 	cont "TAUROS!"
 	done
@@ -257,7 +257,7 @@ _WannaTrade8Text::
 	cont "this! The Blaze"
 	cont "Breed is king!"
 
-	text "Hey, you! Trade"
+	para "Hey, you! Trade"
 	line "me your TAUROS!"
 	done
 
