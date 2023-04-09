@@ -342,7 +342,7 @@ _CitrinePassDescription::
 	next "CITRINE CITY."
 	prompt
 
-_OldSeaChartDescription::
+_OldSeaMapDescription::
 	text "A sea chart for"
 	next "certain island."
 	prompt

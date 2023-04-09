@@ -100,6 +100,14 @@ ItemUsePtrTable:
 	dw ItemUsePPRestore  ; MAX_ETHER
 	dw ItemUsePPRestore  ; ELIXER
 	dw ItemUsePPRestore  ; MAX_ELIXER
+	dw ItemUseEvoStone   ; ICE_STONE
+	dw ItemUseEvoStone   ; PROTECTOR
+	dw ItemUseEvoStone   ; POISON_STONE
+	dw ItemUseEvoStone   ; BLK_AUGURITE
+	dw ItemUseEvoStone   ; DUBIOUS_DISC
+	dw UnusableItem      ; CITRINE_PASS
+	dw UnusableItem      ; OLDSEACHART
+	dw ItemUseEvoStone   ; UP_GRADE
 	dw UnusableItem      ; FLOOR_B2F
 	dw UnusableItem      ; FLOOR_B1F
     dw UnusableItem      ; FLOOR_1F
@@ -114,14 +122,6 @@ ItemUsePtrTable:
 	dw UnusableItem      ; FLOOR_10F
 	dw UnusableItem      ; FLOOR_11F
 	dw UnusableItem      ; FLOOR_14F
-	dw ItemUseEvoStone   ; ICE_STONE
-	dw ItemUseEvoStone   ; PROTECTOR
-	dw ItemUseEvoStone   ; POISON_STONE
-	dw ItemUseEvoStone   ; BLK_AUGURITE
-	dw ItemUseEvoStone   ; DUBIOUS_DISC
-	dw UnusableItem      ; CITRINE_PASS
-	dw UnusableItem      ; OLDSEACHART
-	dw ItemUseEvoStone   ; UP_GRADE
 
 ItemUseBall:
 

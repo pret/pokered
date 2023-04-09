@@ -48,7 +48,7 @@ New areas
 ====
 - Celadon University is just north of Celadon.
 	- This is a reference to a Magikarp event from July 1998, and includes the lore from it and other areas of Pokemon's early worldbuilding.
-	- New infinitely re-battleable trainers are accessible.
+	- New infinitely re-battleable trainers for grinding.
 	- There's a Move Deleter and Move Relearner!
 - Citrine City is a new island city that can be accessed in the postgame.
 - Underwater Tunnel connects Route 25 and Route 10.
@@ -61,13 +61,13 @@ New areas
 Improved areas
 ====
 - Most barriers to travel across the region have been removed, allowing for almost fully open world gameplay. To encourage this, Gym Leaders now have level scaling, giving more consistent challenge across the game. 
+- Cinnabar Lab's Trade Room now features the Trader, who will evolve trade-evolving Pokemon for you!
 - Rock Tunnel has a more workable map, now being easier to go through and having new areas to explore. Includes a way to get renewable fossils, items, and other interesting bits and pieces. Overall, it makes Flash much more rewarding to bring, showing you where the items and content are instead of being an inconvenience. 
 - Diglett's Cave has a more detailed map with Onix, Wiglett, and Wugtrio also appearing!
 - Route 25 has been given a facelift, adding Bill's Lighthouse!
 - The Route 5-6 underground path contains a shortcut to Celadon City. 
 	- This allows you to skip Route 9 and Rock Tunnel, making them optional areas and opening up central Kanto.
 - Cinnabar Island is a lot bigger, and has a new location added to it. The mansion seems different too...
-- Cinnabar Lab's trade room features an NPC who'll trade you back your Pokemon for trade evolutions!
 - Pokemon Tower was shortened, being less intensive and adding room for more maps.
 - Silph Co's pathing was completely overhauled to make navigating it less tedious.
 - Viridian Gym now has a new area once you make Giovanni leave.
@@ -98,7 +98,7 @@ QoL Enhancements
 	- HM02 (Fly) can be taught to the Pikachu line (Corocoro)
 	- HM03 (Surf) can be taught to the Pikachu line (Stadium / Corocoro)
 	- Psyduck learns Amnesia at Lv15 (Stadium)
-- Yellow learnset changes are imported; eg. Flash Venonat
+- Yellow learnset changes are imported; eg. Flash Venonat, with tweaks made to ensure nothing is lost from RB either.
 - The Game Corner in general is massively buffed, making everything far more worth going for;
 	- 3x Cherry now gives 100 coins (used to be 8)
 	- 3x Magikarp/Poliwag/Bird/Diglett/Rattata/Jigglypuff now gives 200 coins (used to be 15)
@@ -110,7 +110,6 @@ QoL Enhancements
 	- The Moon Stone is available over TM23 (Dragon Rage). Dragon Rage is accessible in Celadon University!
 - Bag capacity increased from 20 to 30 items.
 - Spinner tiles move faster.
-- If a move is disabled, it now has an upper-case D instead of a lower-case one.
 
 Bug Fixes
 ====
@@ -148,6 +147,7 @@ and more!
 - Trainer Name Pointers are removed, as the localised games don't need to use the file at all.
 - Dakutens are removed, as the Japanese accents aren't used in English releases.
 - Blank Leader Name code is removed; before, this would only be for the PNGs.
+- Some grammar tweaks have been made (eg. If a move is disabled, it now has an upper-case D instead of a lower-case one.)
 
 Known Bugs
 ====
@@ -158,7 +158,7 @@ Known Bugs
 - Fix warps from Viridian Pre-Gym, currently goes to Fuschia which is hilarious. 
 - Mew needs to disappear after being captured etc (only seems to happen sometimes?)
 - Should be able to fly from Faraway (reposition in map listing)
-- Item descriptions are offset
+- Item descriptions are offset by a bit
 - Strength boulders don't fall down holes
 - Pokedex is very laggy
 
@@ -187,7 +187,7 @@ New Pokemon:
 - Primeape -> Annihilape | Trade
 - Golbat -> Crobat | L44
 - Marowak -> Guardia | Use Heart Stone
-- Porygon -> Porygon2 | Trade
+- Porygon -> Porygon2 | Use Up-Grade
 - Porygon2 -> Porygon-Z | Use Dubious Disc
 - Gloom -> Bellossom | Use Poison Stone
 - Weepinbell -> Tsubomitto | Use Poison Stone
