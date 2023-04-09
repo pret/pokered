@@ -251,4 +251,4 @@ MonPartyData:
 	nybble ICON_MON       ; Mew
 	nybble ICON_BALL      ; Meltan
 	nybble ICON_BALL      ; Melmetal
-	end_nybble_array NUM_POKEMON - 1
+	end_nybble_array NUM_POKEMON

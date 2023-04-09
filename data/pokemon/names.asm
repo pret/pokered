@@ -254,6 +254,5 @@ MonsterNames::
 	db "MISSINGNO."
 	db "MISSINGNO."
 	db "MISSINGNO."
-	db "MISSINGNO."
 	
 	assert_table_length NUM_POKEMON_INDEXES

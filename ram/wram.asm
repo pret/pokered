@@ -1743,10 +1743,10 @@ SECTION "Main Data", WRAM0
 
 wMainDataStart::
 
-wPokedexOwned:: flag_array NUM_POKEMON - 1 ; discount MissingNo
+wPokedexOwned:: flag_array NUM_POKEMON
 wPokedexOwnedEnd::
 
-wPokedexSeen:: flag_array NUM_POKEMON - 1 ; discount MissingNo
+wPokedexSeen:: flag_array NUM_POKEMON
 wPokedexSeenEnd::
 
 ds 28 ;;;;;;; moved bag code lower down to make bigger bag space

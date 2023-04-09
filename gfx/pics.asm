@@ -544,10 +544,8 @@ WugtrioPicFront::      INCBIN "gfx/pokemon/front/wugtrio.pic"
 WugtrioPicBack::       INCBIN "gfx/pokemon/back/wugtriob.pic"
 ToedscoolPicFront::      INCBIN "gfx/pokemon/front/toedscool.pic"
 ToedscoolPicBack::       INCBIN "gfx/pokemon/back/toedscoolb.pic"
-ToedscruelPicFront::      INCBIN "gfx/pokemon/front/toedscruel.pic"
-ToedscruelPicBack::       INCBIN "gfx/pokemon/back/toedscruelb.pic"
-MissingNoPicFront::    INCBIN "gfx/pokemon/front/missingno.pic"
-MissingNoPicBack::     INCBIN "gfx/pokemon/back/missingnob.pic"
+ToedscruelPicFront::     INCBIN "gfx/pokemon/front/toedscruel.pic"
+ToedscruelPicBack::      INCBIN "gfx/pokemon/back/toedscruelb.pic"
 
 SECTION "Pics 10", ROMX ; Extra Trainer Bank, currently storing regionals here too
 

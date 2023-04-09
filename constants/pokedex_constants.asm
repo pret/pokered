@@ -3,8 +3,7 @@
 ; - BaseStats (see data/pokemon/base_stats.asm)
 ; - MonPartyData (see data/pokemon/menu_icons.asm)
 ; - MonsterPalettes (see data/pokemon/palettes.asm)
-	const_def
-	const DEX_MISSINGNO  ; 0	(000)
+	const_def 1
 	const DEX_BULBASAUR  ; 1	(001)
 	const DEX_IVYSAUR    ; 2	(002)
 	const DEX_VENUSAUR   ; 3	(003)
@@ -257,4 +256,4 @@
 	const DEX_MELTAN	 ; 	    (250)
 	const DEX_MELMETAL   ; 	   	(251)
 
-DEF NUM_POKEMON EQU const_value
+DEF NUM_POKEMON EQU const_value - 1

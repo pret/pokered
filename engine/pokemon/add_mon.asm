@@ -86,8 +86,6 @@ _AddPartyMon::
 	predef IndexToPokedex
 	pop de
 	ld a, [wd11e]
-	and a
-	jr z, .noMarkSeen ; if it's missingno don't do any pokedex actions
 	dec a
 	ld c, a
 	ld b, FLAG_TEST
@@ -104,7 +102,6 @@ _AddPartyMon::
 	pop bc
 	ld hl, wPokedexSeen
 	call FlagAction
-.noMarkSeen
 	pop hl
 	push hl
 

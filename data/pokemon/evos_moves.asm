@@ -263,7 +263,6 @@ EvosMovesPointerTable:
 	dw TaurosPEvosMoves
 	dw TaurosPAEvosMoves
 	dw TaurosPBEvosMoves
-	dw MissingNoEvosMoves
 	dw FossilKabutopsEvosMoves
 	dw FossilAerodactylEvosMoves
 	dw MonGhostEvosMoves
@@ -3278,12 +3277,6 @@ TaurosPBEvosMoves:
 	db 35, LEER
 	db 44, RAGE
 	db 51, FIRE_SPIN
-	db 0
-
-MissingNoEvosMoves:
-; Evolutions
-	db 0
-; Learnset
 	db 0
 	
 FossilKabutopsEvosMoves:

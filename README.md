@@ -259,7 +259,7 @@ Credits
 * Chatot4444 - Assisting with gym scaling code
 * ZumiIsawhat? - Restorations of beta OST
 * Helix Chamber, RacieBeep, loumilouminosus, Orchid, GBCRetro, & catstorm26 - Prototype Pokémon sprites
-* Vortyne - Reused a bit of code from their pureRGB hack, which was used to assist with making MissingNo. stable. Assisted in bug fixes.
+* Vortyne - Reused a bit of code from their pureRGB hack. Assisted in bug fixes.
 * jojobear13 & Mateo - Move deleter & move relearner functionality from Shin Pokered, followed [this guide](https://github.com/jojobear13/shinpokered/blob/master/how%20to%20guides/how%20to%20add%20the%20move%20relearner%26deleter.txt). Tweaks were made to make it compatible with the pokered version we worked off of.
 * Rangi - Reused a bit of code from their Red* / Blue* hack to make HMs usable in the overworld!
 * 大吟醸 (Daiginjo) - Assistance in translating the Tamamushi University Student Book, allowing for an accurate adaptation of the location.

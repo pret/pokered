@@ -257,11 +257,10 @@
 	const WEEZING_G		     ; $F8
 	const TAUROS_P		     ; $F9
 	const TAUROS_PA		     ; $FA
-	const TAUROS_PB		     ; $FB
-	const MISSINGNO          ; $FC	
-	const FOSSIL_KABUTOPS    ; $FD	(was B6)
-	const FOSSIL_AERODACTYL  ; $FE	(was B7)
-	const MON_GHOST          ; $FF	(was B8, need to make sure we can still put something here)
+	const TAUROS_PB		     ; $FB	
+	const FOSSIL_KABUTOPS    ; $FC	(was B6)
+	const FOSSIL_AERODACTYL  ; $FD	(was B7)
+	const MON_GHOST          ; $FE	(was B8)
 	
 DEF NUM_POKEMON_INDEXES EQU const_value - 1
 
