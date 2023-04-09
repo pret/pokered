@@ -3111,7 +3111,7 @@ ExecutePlayerMove:
 	ld hl, wPlayerBattleStatus1
 	bit CHARGING_UP, [hl] ; charging up for attack
 	jr nz, PlayerCanExecuteChargingMove
-	call CheckForDisobedience
+	;call CheckForDisobedience
 	jp z, ExecutePlayerMoveDone
 
 CheckIfPlayerNeedsToChargeUp:
