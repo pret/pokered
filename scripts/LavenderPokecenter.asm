@@ -7,6 +7,7 @@ LavenderPokecenter_TextPointers:
 	dw LavenderPokecenterText2
 	dw LavenderPokecenterText3
 	dw LavenderTradeNurseText
+	dw DugtrioTrade
 
 LavenderTradeNurseText:
 	script_cable_club_receptionist
@@ -21,3 +22,11 @@ LavenderPokecenterText2:
 LavenderPokecenterText3:
 	text_far _LavenderPokecenterText3
 	text_end
+
+DugtrioTrade:
+	text_asm
+	ld a, TRADE_FOR_DUGTRIO_A
+	ld [wWhichTrade], a
+	predef DoInGameTradeDialogue
+	jp TextScriptEnd
+

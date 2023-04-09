@@ -83,6 +83,14 @@ ItemPrices::
 	bcd3 0     ; MAX_ETHER
 	bcd3 0     ; ELIXER
 	bcd3 0     ; MAX_ELIXER
+	bcd3 2100  ; ICE_STONE
+	bcd3 3000  ; PROTECTOR
+	bcd3 2100  ; POISON_STONE
+	bcd3 2100  ; BLK_AUGURITE
+	bcd3 3000  ; DUBIOUS_DISC
+	bcd3 0     ; CITRINE_PASS
+	bcd3 0	   ; OLD_SEA_MAP
+	bcd3 3000  ; UP_GRADE
 	assert_table_length NUM_ITEMS
 	bcd3 0     ; FLOOR_B2F
 	bcd3 0     ; FLOOR_B1F
@@ -98,12 +106,4 @@ ItemPrices::
 	bcd3 0     ; FLOOR_10F
 	bcd3 0     ; FLOOR_11F
 	bcd3 0     ; FLOOR_B4F
-	bcd3 2100  ; ICE_STONE
-	bcd3 3000  ; PROTECTOR
-	bcd3 2100  ; POISON_STONE
-	bcd3 2100  ; BLK_AUGURITE
-	bcd3 3000  ; DUBIOUS_DISC
-	bcd3 0     ; CITRINE_PASS
-	bcd3 0	   ; OLDSEACHART
-	bcd3 3000  ; UP_GRADE
 	assert_table_length NUM_ITEMS + NUM_FLOORS

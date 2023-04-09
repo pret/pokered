@@ -12,5 +12,6 @@ CeruleanPokecenter_Object:
 	object_event 10,  5, SPRITE_SUPER_NERD, WALK, ANY_DIR, 2 ; person
 	object_event  4,  3, SPRITE_GENTLEMAN, STAY, DOWN, 3 ; person
 	object_event 11,  2, SPRITE_LINK_RECEPTIONIST, STAY, DOWN, 4 ; person
+	object_event 10,  7, SPRITE_GAMEBOY_KID, STAY, DOWN, 5 ; Ninetales Trader
 
 	def_warps_to CERULEAN_POKECENTER

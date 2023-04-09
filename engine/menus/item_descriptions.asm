@@ -180,34 +180,6 @@ ItemDescriptionPointers:
 	text_end
 	text_far _MaxElixerDescription
 	text_end
-	text_far _UnusedItemDescription ; for the floor items - we've added items after these, so we need to stuff them in lest TM descriptions invade our personal space.
-	text_end
-	text_far _UnusedItemDescription
-	text_end
-	text_far _UnusedItemDescription
-	text_end
-	text_far _UnusedItemDescription
-	text_end
-	text_far _UnusedItemDescription
-	text_end
-	text_far _UnusedItemDescription
-	text_end
-	text_far _UnusedItemDescription
-	text_end
-	text_far _UnusedItemDescription
-	text_end
-	text_far _UnusedItemDescription
-	text_end
-	text_far _UnusedItemDescription
-	text_end
-	text_far _UnusedItemDescription
-	text_end
-	text_far _UnusedItemDescription
-	text_end
-	text_far _UnusedItemDescription
-	text_end
-	text_far _UnusedItemDescription
-	text_end ; floor items end here
 	text_far _IceStoneDescription
 	text_end
 	text_far _ProtectorDescription
@@ -220,7 +192,9 @@ ItemDescriptionPointers:
 	text_end
 	text_far _CitrinePassDescription
 	text_end
-	text_far _OldSeaChartDescription
+	text_far _OldSeaMapDescription
+	text_end
+	text_far _UpGradeDescription
 	text_end
 	text_far _HM01Description
 	text_end
