@@ -84,6 +84,7 @@ QoL Enhancements
 - PP symbol is displayed in the battle menu. PP displayed before, it just looks nicer now. Done by changing a straggler Japanese character.
 - Running Shoes by holding B. Also works with the bike! Surf speed is also doubled.
 - Fast text has no frame delay between text scrolling, doubling the scroll speed. It's also been made the default option, so you don't need to go into the Options menu for it.
+- Traded Pokemon ("Outsiders") can now be nicknamed at the Name Rater's House.
 - Lorelei, Bruno, and Agatha now play the Gym Leader Battle theme.
 - HP bar has been doubled in speed, having a 1 frame delay per pixel rather than 2.
 - Trainer DVs are perfect-15s.
