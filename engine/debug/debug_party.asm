@@ -27,7 +27,6 @@ IshiharaTeam:
 	db PORYGON, 50
 IF DEF(_DEBUG)
 	db NINETALES, 50
-	db DUGTRIO, 50
 ENDC
 	db -1 ; end
 

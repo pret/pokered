@@ -735,6 +735,7 @@
 ; Safari Zone events
 	const_next $880
 	const EVENT_GOT_HM03
+	const EVENT_GOT_MELTAN
 
 ; Cerulean Cave events
 	const_next $8C0

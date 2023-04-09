@@ -16,3 +16,23 @@ _SafariZoneRestHouse3Text3::
 	text "Whew! I'm tired"
 	line "from all the fun!"
 	done
+
+_MeltanGuyText::
+	text "I found a lost"
+	line "#MON. It seems"
+	cont "to be looking"
+	cont "for its friends."
+	
+	para "Could you take"
+	line "care of it, kid?"
+	
+	prompt
+
+_MeltanInfo::
+	text "My sources say it's"
+	line "called MELTAN."
+	
+	para "It's never seen in"
+	line "KANTO..."
+	
+	done
