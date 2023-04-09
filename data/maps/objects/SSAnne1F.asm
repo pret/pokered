@@ -11,7 +11,7 @@ SSAnne1F_Object:
 	warp_event 11,  8, SS_ANNE_1F_ROOMS, 5
 	warp_event  7,  8, SS_ANNE_1F_ROOMS, 6
 	warp_event  2,  6, SS_ANNE_2F, 7
-	warp_event 37, 15, SS_ANNE_B1F, 6
+	warp_event 37, 15, SS_ANNE_B1F, 7
 	warp_event  3, 16, SS_ANNE_KITCHEN, 1
 
 	def_bg_events

@@ -26,11 +26,11 @@ SSAnneB1FRooms_Object:
 	object_event  0,  4, SPRITE_FISHER, STAY, RIGHT, 6, OPP_FISHER, 2
 	object_event 10, 13, SPRITE_SUPER_NERD, STAY, RIGHT, 7 ; person
 	object_event 11, 12, SPRITE_MONSTER, STAY, NONE, 8 ; person
-	object_event 20,  2, SPRITE_POKE_BALL, STAY, NONE, 9, ETHER
+	; object_event 20,  2, SPRITE_POKE_BALL, STAY, NONE, 9, ETHER
 	object_event 10,  2, SPRITE_POKE_BALL, STAY, NONE, 10, TM_REST
 	object_event 12, 11, SPRITE_POKE_BALL, STAY, NONE, 11, MAX_POTION
-	object_event 23, 14, SPRITE_ROCKER, STAY, LEFT, 15 ; Tauros C Trader
-	object_event 20, 13, SPRITE_ROCKER, STAY, RIGHT, 16 ; Tauros A Trader
-	object_event 22, 11, SPRITE_ROCKER, STAY, DOWN, 17 ; Tauros B Trader
+	object_event 23, 14, SPRITE_ROCKER, STAY, LEFT, 12 ; Tauros C Trader
+	object_event 20, 13, SPRITE_ROCKER, STAY, RIGHT, 13 ; Tauros A Trader
+	object_event 22, 11, SPRITE_ROCKER, STAY, DOWN, 14 ; Tauros B Trader
 
 	def_warps_to SS_ANNE_B1F_ROOMS

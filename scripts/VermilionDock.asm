@@ -1,7 +1,5 @@
 VermilionDock_Script:
 	call EnableAutoTextBoxDrawing
-	ld de, VermilionDock_ScriptPointers
-	call ExecuteCurMapScriptInTable
 	CheckEventHL EVENT_STARTED_WALKING_OUT_OF_DOCK
 	jr nz, .asm_1db8d
 	CheckEventReuseHL EVENT_GOT_HM01
@@ -37,11 +35,6 @@ VermilionDock_Script:
 	ld [wJoyIgnore], a
 	SetEventReuseHL EVENT_WALKED_OUT_OF_DOCK
 	ret
-
-VermilionDock_ScriptPointers:
-	dw CheckFightingMapTrainers
-	dw DisplayEnemyTrainerTextAndStartBattle
-	dw EndTrainerBattle
 
 VermilionDock_1db9b:
 	ld a, [wObtainedBadges]

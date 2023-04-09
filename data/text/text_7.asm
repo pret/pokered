@@ -226,7 +226,7 @@ _WannaTrade7Text::
 	line "The Aqua Breed"
 	cont "is superior."
 
-	text "Surely you agree."
+	para "Surely you agree."
 	line "Trade me your"
 	cont "TAUROS!"
 	done
