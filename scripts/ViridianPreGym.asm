@@ -5,14 +5,13 @@
 ; Commit on 30-3-23 has a somewhat stable version of the fight.
 
 ViridianPreGym_Script:
-	call EnableAutoTextBoxDrawing
 	ld de, ViridianPreGym_ScriptPointers
 	ld a, [wViridianPreGymCurScript]
 	call ExecuteCurMapScriptInTable
 	ld [wViridianPreGymCurScript], a
 	ret
 
-LoadNames:
+.LoadNames:
 	ld hl, .CityName
 	ld de, .LeaderName
 	jp LoadGymLeaderAndCityName
@@ -31,11 +30,10 @@ ViridianPreGymResetScripts:
 	ret
 
 ViridianPreGym_ScriptPointers:
+	dw CheckFightingMapTrainers
+	dw DisplayEnemyTrainerTextAndStartBattle
+	dw EndTrainerBattle
 	dw ViridianGymYujirouPostBattle
-
-ViridianPreGym_TextPointers:
-	dw YujirouText
-	dw YujirouRematch
 
 ViridianGymYujirouPostBattle:
 	ld a, [wIsInBattle]
@@ -45,17 +43,19 @@ ViridianGymYujirouPostBattle:
 	ld [wJoyIgnore], a
 
 YujirouHasBeenBeaten:
-	;text_asm
-	;ld hl, YujirouAfterBattleText
-	;call PrintText
 	SetEvent EVENT_BEAT_YUJIROU
 	jp ViridianPreGymResetScripts
+
+ViridianPreGym_TextPointers:
+	dw YujirouText
+	dw YujirouHasBeenBeaten
+	dw YujirouRematch
 
 YujirouText:
 	text_asm
 	
 	CheckEvent EVENT_BEAT_YUJIROU
-	jr z, .YujirouBeaten
+	jr nz, .YujirouBeaten
 	
 	ld hl, YujirouIntro
 	call PrintText
@@ -76,7 +76,7 @@ YujirouText:
 	ld hl, YujirouLoseText
 	ld de, YujirouWinText
 	call SaveEndBattleTextPointers
-	ld a, $6
+	ld a, $3
 	ld [wViridianPreGymCurScript], a
 	ld [wCurMapScript], a
 	jr .done
@@ -87,6 +87,8 @@ YujirouText:
 .done
 	jp TextScriptEnd
 ; where the hell do i put SetEvent EVENT_BEAT_YUJIROU
+
+
 
 YujirouIntro::
 	text_far _YujirouIntro
