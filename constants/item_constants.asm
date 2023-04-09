@@ -92,31 +92,31 @@ DEF SAFARI_ROCK EQU $16 ; overload
 	const MAX_ETHER     ; $51
 	const ELIXER        ; $52
 	const MAX_ELIXER    ; $53
-	const ICE_STONE     ; $54
-	const PROTECTOR		; $55
-	const POISON_STONE  ; $56
-	const BLK_AUGURITE  ; $57
-	const DUBIOUS_DISC  ; $58
-	const CITRINE_PASS  ; $59
-	const OLD_SEA_MAP	; $60
-	const UP_GRADE		; $61
 DEF NUM_ITEMS EQU const_value - 1
 
 ; elevator floors use item IDs
-	const FLOOR_B2F     ; $62
-	const FLOOR_B1F     ; $63
-	const FLOOR_1F      ; $64
-	const FLOOR_2F      ; $65
-	const FLOOR_3F      ; $66
-	const FLOOR_4F      ; $67
-	const FLOOR_5F      ; $68
-	const FLOOR_6F      ; $69
-	const FLOOR_7F      ; $70
-	const FLOOR_8F      ; $71
-	const FLOOR_9F      ; $72
-	const FLOOR_10F     ; $73
-	const FLOOR_11F     ; $74
-	const FLOOR_B4F     ; $75
+	const FLOOR_B2F     ; $54
+	const FLOOR_B1F     ; $55
+	const FLOOR_1F      ; $56
+	const FLOOR_2F      ; $57
+	const FLOOR_3F      ; $58
+	const FLOOR_4F      ; $59
+	const FLOOR_5F      ; $5A
+	const FLOOR_6F      ; $5B
+	const FLOOR_7F      ; $5C
+	const FLOOR_8F      ; $5D
+	const FLOOR_9F      ; $5E
+	const FLOOR_10F     ; $5F
+	const FLOOR_11F     ; $60
+	const FLOOR_B4F     ; $61
+	const ICE_STONE     ; $62
+	const PROTECTOR		; $63
+	const POISON_STONE  ; $64
+	const BLK_AUGURITE  ; $65
+	const DUBIOUS_DISC  ; $66
+	const CITRINE_PASS  ; $67
+	const OLDSEACHART	; $68
+	const UP_GRADE		; $69
 DEF NUM_FLOORS EQU const_value - 1 - NUM_ITEMS
 
 	const_next $C4
