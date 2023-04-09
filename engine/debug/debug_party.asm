@@ -21,13 +21,13 @@ SetIshiharaTeam:
 	jr .loop
 
 IshiharaTeam:
-	db EXEGGUTOR, 90
+	db EXEGGUTOR_A, 90
 	db RAICHU, 90
-	db EXEGGUTOR, 90
-	db RAPIDASH, 50
+	db MEWTWO, 90
+	db PORYGON, 50
 IF DEF(_DEBUG)
-	db GOLEM, 50
-	db MAROWAK, 50
+	db NINETALES, 50
+	db DUGTRIO, 50
 ENDC
 	db -1 ; end
 
@@ -143,7 +143,6 @@ DebugItemsList:
 	db RARE_CANDY, 99
 	db MASTER_BALL, 99
 	db ULTRA_BALL, 99
-	db CANDY_JAR, 99
 	db SECRET_KEY, 1
 	db CARD_KEY, 1
 	db S_S_TICKET, 1
@@ -152,7 +151,11 @@ DebugItemsList:
 	db COIN_CASE, 1
 	db POKE_FLUTE, 1
 	db SILPH_SCOPE, 1
-	db OLDSEACHART, 1
+	db OLD_SEA_MAP, 1
+	db UP_GRADE, 1
+	db TM_MEGA_PUNCH, 1
+	db HM_SURF, 1
+	db FLOOR_1F
 	db -1 ; end
 
 DebugUnusedList:

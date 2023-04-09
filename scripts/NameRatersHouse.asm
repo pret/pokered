@@ -8,7 +8,7 @@ NameRaterScript_1da15:
 	and a
 	ret
 
-NameRaterScript_1da20:
+NameRaterScript_1da20: ; This shouldn't be necessary now that it's removed, but better safe than sorry.
 	ld hl, wPartyMonOT
 	ld bc, NAME_LENGTH
 	ld a, [wWhichPokemon]
@@ -60,9 +60,9 @@ NameRaterText1:
 	pop af
 	jr c, .asm_1daae
 	call GetPartyMonName2
-	call NameRaterScript_1da20
-	ld hl, NameRaterText_1dad1
-	jr c, .asm_1daa8
+	;call NameRaterScript_1da20 - Removing the OT check, traded Pokemon can be nicknamed.
+	;ld hl, NameRaterText_1dad1
+	;jr c, .asm_1daa8
 	ld hl, NameRaterText_1dabd
 	call NameRaterScript_1da15
 	jr nz, .asm_1daae
@@ -102,6 +102,6 @@ NameRaterText_1dacc:
 	text_far _NameRaterText_1dacc
 	text_end
 
-NameRaterText_1dad1:
-	text_far _NameRaterText_1dad1
-	text_end
+;NameRaterText_1dad1:
+;	text_far _NameRaterText_1dad1
+;	text_end
