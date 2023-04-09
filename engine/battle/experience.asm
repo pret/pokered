@@ -79,7 +79,7 @@ GainExperience:
 	ld a, 0
 	jr z, .next
 .tradedMon
-	call BoostExp ; traded mon exp boost
+	;call BoostExp ; traded mon exp boost
 	ld a, 1
 .next
 	ld [wGainBoostedExp], a
@@ -347,10 +347,10 @@ GainedText:
 	and a
 	ret nz
 	ld hl, ExpPointsText
-	ld a, [wGainBoostedExp]
-	and a
-	ret z
-	ld hl, BoostedText
+	;ld a, [wGainBoostedExp]
+	;and a
+	;ret z
+	;ld hl, BoostedText
 	ret
 
 WithExpAllText:
