@@ -57,9 +57,9 @@ DoInGameTradeDialogue:
 	jr nz, .printText
 	call InGameTrade_DoTrade
 	jr c, .printText
-	ld a, [wInGameTradeGiveMonSpecies]
-	cp NO_MON
-	jr z, .printText
+	ld a, [wInGameTradeGiveMonSpecies]; for trader
+	cp NO_MON ; for trader
+	jr z, .printText ; for trader
 	ld hl, TradedForText
 	call PrintText
 .printText
@@ -101,23 +101,23 @@ InGameTrade_DoTrade:
 	ld a, $1
 	jp c, .tradeFailed ; jump if the player didn't select a pokemon
 	ld a, [wInGameTradeGiveMonSpecies]
-	cp NO_MON
-	jr z, .skip_mon_check
+	cp NO_MON ; for trader
+	jr z, .skip_mon_check ; for trader
 	ld b, a
 	ld a, [wcf91]
 	cp b
 	ld a, $2
-	jp nz, .tradeFailed ; jump if the selected mon's species is not the required one
-.skip_mon_check
+	jp nz, .tradeFailed ; jump if the selected mon's species is not the required one - changed for trader
+.skip_mon_check ; for trader
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMon1Level
 	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes
 	ld a, [hl]
 	ld [wCurEnemyLVL], a
-	ld a, [wInGameTradeGiveMonSpecies]
-	cp NO_MON
-	jr z, .skip_flag_set
+	ld a, [wInGameTradeGiveMonSpecies] ; for trader
+	cp NO_MON ; for trader
+	jr z, .skip_flag_set ; for trader
 	ld hl, wCompletedInGameTradeFlags
 	ld a, [wWhichTrade]
 	ld c, a
@@ -131,14 +131,14 @@ InGameTrade_DoTrade:
 	ld a, [wCurEnemyLVL]
 	push af
 	call LoadHpBarAndStatusTilePatterns
-	ld a, [wInGameTradeGiveMonSpecies]
-	cp NO_MON
-	jr nz, .normal_in_game_trade_data
-	call TradeSelf_PrepareTradeData
-	jr .self_trade_data
-.normal_in_game_trade_data
+	ld a, [wInGameTradeGiveMonSpecies] ; for trader
+	cp NO_MON ; for trader
+	jr nz, .normal_in_game_trade_data ; for trader
+	call TradeSelf_PrepareTradeData ; for trader
+	jr .self_trade_data ; for trader
+.normal_in_game_trade_data ; for trader
 	call InGameTrade_PrepareTradeData
-.self_trade_data
+.self_trade_data ; for trader
 	predef InternalClockTradeAnim
 	pop af
 	ld [wCurEnemyLVL], a
@@ -148,9 +148,9 @@ InGameTrade_DoTrade:
 	ld [wcf91], a
 	xor a
 	push af
-	ld a, [wInGameTradeGiveMonSpecies]
-	cp NO_MON
-	jr z, .skip_swap_mons
+	ld a, [wInGameTradeGiveMonSpecies] ; for trader
+	cp NO_MON ; for trader
+	jr z, .skip_swap_mons ; for trader
 	pop af
 	ld [wRemoveMonFromBox], a
 	call RemovePokemon
