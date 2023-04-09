@@ -320,11 +320,13 @@ INCLUDE "engine/battle/ghost_marowak_anim.asm"
 INCLUDE "engine/battle/battle_transitions.asm"
 INCLUDE "engine/items/town_map.asm"
 INCLUDE "engine/gfx/mon_icons.asm"
-INCLUDE "engine/events/in_game_trades.asm"
 INCLUDE "engine/gfx/palettes.asm"
 INCLUDE "engine/menus/save.asm"
 INCLUDE "engine/overworld/field_moves.asm"
 
+SECTION "In-Game Trade Zone", ROMX
+
+INCLUDE "engine/events/in_game_trades.asm"
 
 SECTION "Itemfinder 1", ROMX
 

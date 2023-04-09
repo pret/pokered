@@ -188,6 +188,98 @@ _AfterTrade3Text::
 	line "doing great!"
 	done
 
+_WannaTrade6Text::
+	text "No way! The"
+	line "Combat Breed is"
+	cont "way better!"
+
+	text "You agree, right?"
+	line "Trade me your"
+	cont "TAUROS!"
+	done
+
+_WrongMon6Text::
+	text "What? That's not"
+	line "@"
+	text_ram wInGameTradeGiveMonName
+	text "!"
+
+	para "Come on, back"
+	line "me up here!"
+	done
+
+_Thanks6Text::
+	text "I knew you would"
+	line "agree!"
+	done
+
+_AfterTrade6Text::
+	text "Isn't the Combat"
+	line "Breed amazing?"
+	
+	para "HI JUMP KICK is"
+	line "so worth it!"
+	done
+
+_WannaTrade7Text::
+	text "It's obvious."
+	line "The Aqua Breed"
+	cont "is superior."
+
+	text "Surely you agree."
+	line "Trade me your"
+	cont "TAUROS!"
+	done
+
+_WrongMon7Text::
+	text "Huh? That's not"
+	line "@"
+	text_ram wInGameTradeGiveMonName
+	text "!"
+
+	para "Time is of the"
+	line "essence! Bring"
+	cont "me one!"
+	done
+
+_AfterTrade7Text::
+	text "Isn't the Aqua"
+	line "Breed perfect?"
+	
+	para "TAUROS clearly"
+	line "works best with"
+	cont "HYDRO PUMP."
+	done
+
+_WannaTrade8Text::
+	text "I can't believe"
+	line "we're arguing"
+	cont "this! The Blaze"
+	cont "Breed is king!"
+
+	text "Hey, you! Trade"
+	line "me your TAUROS!"
+	done
+
+_WrongMon8Text::
+	text "What? That's not"
+	line "@"
+	text_ram wInGameTradeGiveMonName
+	text "!"
+
+	para "You pulling my"
+	line "leg?"
+	done
+
+_AfterTrade8Text::
+	text "Hey! What do"
+	line "you think?"
+	
+	para "FIRE SPIN helps"
+	line "TAUROS a lot,"
+	cont "huh?"
+	done
+
 _NothingToCutText::
 	text "There isn't"
 	line "anything to CUT!"

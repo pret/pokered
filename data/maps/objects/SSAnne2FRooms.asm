@@ -32,5 +32,8 @@ SSAnne2FRooms_Object:
 	object_event 22, 12, SPRITE_BRUNETTE_GIRL, STAY, LEFT, 12 ; person
 	object_event 20, 12, SPRITE_BEAUTY, STAY, RIGHT, 13 ; person
 	object_event  0,  3, SPRITE_GAMEBOY_KID, STAY, DOWN, 14 ; Sirfetch'd Trader
+	object_event  0, 13, SPRITE_GAMEBOY_KID, STAY, DOWN, 12 ; Mr. Rime Trader
+	object_event  0, 13, SPRITE_GAMEBOY_KID, STAY, DOWN, 13 ; Rapidash Trader
+	
 
 	def_warps_to SS_ANNE_2F_ROOMS

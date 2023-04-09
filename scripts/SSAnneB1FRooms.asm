@@ -24,7 +24,9 @@ SSAnneB1FRooms_TextPointers:
 	dw PickUpItemText
 	dw PickUpItemText
 	dw PickUpItemText
-	dw MrRimeTrade
+	dw TaurosCTrade
+	dw TaurosATrade
+	dw TaurosBTrade
 
 SSAnne10TrainerHeaders:
 	def_trainers
@@ -161,9 +163,23 @@ SSAnne10Text7:
 	text_far _SSAnne10Text7
 	text_end
 
-MrRimeTrade:
+TaurosCTrade:
 	text_asm
-	ld a, TRADE_FOR_MR_RIME
+	ld a, TRADE_FOR_TAUROS_C
+	ld [wWhichTrade], a
+	predef DoInGameTradeDialogue
+	jp TextScriptEnd
+
+TaurosATrade:
+	text_asm
+	ld a, TRADE_FOR_TAUROS_A
+	ld [wWhichTrade], a
+	predef DoInGameTradeDialogue
+	jp TextScriptEnd
+
+TaurosBTrade:
+	text_asm
+	ld a, TRADE_FOR_TAUROS_B
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue
 	jp TextScriptEnd

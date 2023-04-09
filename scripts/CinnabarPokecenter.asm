@@ -8,6 +8,7 @@ CinnabarPokecenter_TextPointers:
 	dw CinnabarPokecenterText3
 	dw CinnabarTradeNurseText
 	dw PoryZSalesmanText
+	dw MukTrade
 
 CinnabarHealNurseText:
 	script_pokecenter_nurse
@@ -91,3 +92,10 @@ PoryZSalesmanText:
 PoryZBagFull:
 	text_far _PoryZBagFull
 	text_end
+
+MukTrade:
+	text_asm
+	ld a, TRADE_FOR_MUK_A
+	ld [wWhichTrade], a
+	predef DoInGameTradeDialogue
+	jp TextScriptEnd

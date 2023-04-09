@@ -30,6 +30,8 @@ SSAnne2FRooms_TextPointers:
 	dw SSAnne9Text12
 	dw SSAnne9Text13
 	dw SirfetchdTrade
+	dw MrRimeTrade
+	dw RapidashTrade
 
 SSAnne9TrainerHeaders:
 	def_trainers
@@ -192,6 +194,20 @@ SSAnne9AfterBattleText4:
 SirfetchdTrade:
 	text_asm
 	ld a, TRADE_FOR_SIRFETCHD
+	ld [wWhichTrade], a
+	predef DoInGameTradeDialogue
+	jp TextScriptEnd
+
+MrRimeTrade:
+	text_asm
+	ld a, TRADE_FOR_MR_RIME
+	ld [wWhichTrade], a
+	predef DoInGameTradeDialogue
+	jp TextScriptEnd
+
+RapidashTrade:
+	text_asm
+	ld a, TRADE_FOR_RAPIDASH_G
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue
 	jp TextScriptEnd

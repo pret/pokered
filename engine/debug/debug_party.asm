@@ -22,11 +22,11 @@ SetIshiharaTeam:
 
 IshiharaTeam:
 	db EXEGGUTOR_A, 90
-	db RAICHU, 90
-	db MEWTWO, 90
-	db PORYGON, 50
+	db TAUROS, 90
+	db SLOWKING, 90
+	db RAPIDASH, 50
 IF DEF(_DEBUG)
-	db NINETALES, 50
+	db MUK, 50
 ENDC
 	db -1 ; end
 

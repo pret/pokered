@@ -221,7 +221,6 @@ VermilionDock_EraseSSAnne:
 VermilionDock_TextPointers:
 	dw VermilionDockText1
 	dw PickUpItemText
-	;dw VermilionDockText2
 
 VermilionDockText1:
 	text_far _VermilionDockText1

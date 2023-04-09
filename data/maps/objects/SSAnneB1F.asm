@@ -2,6 +2,7 @@ SSAnneB1F_Object:
 	db $c ; border block
 
 	def_warp_events
+	warp_event  3,  3, SS_ANNE_B1F_ROOMS, 11
 	warp_event 23,  3, SS_ANNE_B1F_ROOMS, 9
 	warp_event 19,  3, SS_ANNE_B1F_ROOMS, 7
 	warp_event 15,  3, SS_ANNE_B1F_ROOMS, 5

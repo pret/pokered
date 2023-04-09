@@ -3,13 +3,9 @@ DoInGameTradeDialogue:
 	call SaveScreenTilesToBuffer2
 	ld hl, TradeMons
 	ld a, [wWhichTrade]
-	ld b, a
-	swap a
-	sub b
-	sub b
-	ld c, a
 	ld b, 0
-	add hl, bc
+	ld c, 3 + NAME_LENGTH ; new code from Chatot4444, this bypasses the 16-limit on in-game trades.
+    call AddNTimes ; Also from chatot4444
 	ld a, [hli]
 	ld [wInGameTradeGiveMonSpecies], a
 	ld a, [hli]
@@ -277,6 +273,9 @@ InGameTradeTextPointers:
 	dw TradeTextPointers3
 	dw TradeTextPointers4
 	dw TradeTextPointers5
+	dw TradeTextPointers6 ; Combat Tauros
+	dw TradeTextPointers7 ; Aqua Tauros
+	dw TradeTextPointers8 ; Blaze Tauros
 
 TradeTextPointers1:
 	dw WannaTrade1Text
@@ -312,6 +311,27 @@ TradeTextPointers5:
 	dw WrongMon3Text
 	dw Thanks1Text
 	dw AfterTrade1Text
+
+TradeTextPointers6: ; Combat Tauros
+	dw WannaTrade6Text
+	dw NoTrade1Text
+	dw WrongMon6Text
+	dw Thanks6Text
+	dw AfterTrade6Text
+
+TradeTextPointers7: ; Aqua Tauros
+	dw WannaTrade7Text
+	dw NoTrade1Text
+	dw WrongMon7Text
+	dw Thanks6Text
+	dw AfterTrade7Text
+
+TradeTextPointers8: ; Aqua Tauros
+	dw WannaTrade8Text
+	dw NoTrade1Text
+	dw WrongMon8Text
+	dw Thanks6Text
+	dw AfterTrade8Text
 
 ConnectCableText:
 	text_far _ConnectCableText
@@ -401,4 +421,44 @@ WannaTrade5Text:
 	
 NoTrade5Text:
 	text_far _NoTrade5Text
+	text_end
+
+WannaTrade6Text:
+	text_far _WannaTrade6Text
+	text_end
+
+WrongMon6Text:
+	text_far _WrongMon6Text
+	text_end
+
+Thanks6Text:
+	text_far _Thanks6Text
+	text_end
+
+AfterTrade6Text:
+	text_far _AfterTrade6Text
+	text_end
+
+WannaTrade7Text:
+	text_far _WannaTrade7Text
+	text_end
+
+WrongMon7Text:
+	text_far _WrongMon7Text
+	text_end
+
+AfterTrade7Text:
+	text_far _AfterTrade7Text
+	text_end
+
+WannaTrade8Text:
+	text_far _WannaTrade8Text
+	text_end
+
+WrongMon8Text:
+	text_far _WrongMon8Text
+	text_end
+
+AfterTrade8Text:
+	text_far _AfterTrade8Text
 	text_end

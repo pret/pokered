@@ -13,6 +13,7 @@ SSAnneBow_Object:
 	object_event  7, 11, SPRITE_COOLTRAINER_M, STAY, NONE, 3 ; person
 	object_event  4,  4, SPRITE_SAILOR, STAY, DOWN, 4, OPP_SAILOR, 1
 	object_event 10,  8, SPRITE_SAILOR, STAY, UP, 5, OPP_SAILOR, 2
-	object_event 10,  2, SPRITE_GAMEBOY_KID, STAY, DOWN, 6 ; Rapidash Trader
+	object_event 10,  2, SPRITE_GAMEBOY_KID, STAY, UP, 6 ; Slowbro Trader
+	object_event  9,  2, SPRITE_GAMEBOY_KID, STAY, UP, 7 ; Slowking Trader
 
 	def_warps_to SS_ANNE_BOW
