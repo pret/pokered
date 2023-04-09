@@ -20,7 +20,6 @@ EvosMovesPointerTable:
 	dw VoltorbEvosMoves
 	dw NidokingEvosMoves
 	dw SlowbroEvosMoves
-	;dw SlowbroGEvosMoves
 	dw IvysaurEvosMoves
 	dw ExeggutorEvosMoves
 	dw LickitungEvosMoves
@@ -73,9 +72,6 @@ EvosMovesPointerTable:
 	dw SeelEvosMoves
 	dw DiglettEvosMoves
 	dw TaurosEvosMoves
-	;dw TaurosPEvosMoves
-	;dw TaurosPBEvosMoves
-	;dw TaurosPAEvosMoves
 	dw TrampelEvosMoves
 	dw CrockyEvosMoves
 	dw BlottleEvosMoves
@@ -152,7 +148,6 @@ EvosMovesPointerTable:
 	dw KonyaEvosMoves
 	dw OmegaEvosMoves
 	dw MukEvosMoves
-	;dw MukAEvosMoves
 	dw DecillaEvosMoves
 	dw KinglerEvosMoves
 	dw CloysterEvosMoves
@@ -160,7 +155,6 @@ EvosMovesPointerTable:
 	dw ElectrodeEvosMoves
 	dw ClefableEvosMoves
 	dw WeezingEvosMoves
-	;dw WeezingGEvosMoves
 	dw PersianEvosMoves
 	dw MarowakEvosMoves
 	dw GuardiaEvosMoves
@@ -199,9 +193,9 @@ EvosMovesPointerTable:
 	dw WartortleEvosMoves
 	dw CharizardEvosMoves
 	dw TotartleEvosMoves
-	dw FossilKabutopsEvosMoves
-	dw FossilAerodactylEvosMoves
-	dw MonGhostEvosMoves
+	dw ArticunoGEvosMoves	
+	dw ZapdosGEvosMoves
+	dw MoltresGEvosMoves
 	dw OddishEvosMoves
 	dw GloomEvosMoves
 	dw VileplumeEvosMoves
@@ -231,7 +225,6 @@ EvosMovesPointerTable:
 	dw KingdraEvosMoves
 	dw PolitoedEvosMoves
 	dw SlowkingEvosMoves
-	;dw SlowkingGEvosMoves
 	dw ElectivireEvosMoves
 	dw MagmortarEvosMoves
 	dw ParaEvosMoves
@@ -261,12 +254,19 @@ EvosMovesPointerTable:
 	dw PersianAEvosMoves
 	dw GolemAEvosMoves
 	dw RapidashGEvosMoves
+	dw SlowbroGEvosMoves
+	dw SlowkingGEvosMoves
+	dw MukAEvosMoves
 	dw ExeggutorAEvosMoves
 	dw MarowakAEvosMoves
-	dw ArticunoGEvosMoves	
-	dw ZapdosGEvosMoves
-	dw MoltresGEvosMoves
+	dw WeezingGEvosMoves
+	dw TaurosPEvosMoves
+	dw TaurosPAEvosMoves
+	dw TaurosPBEvosMoves
 	dw MissingNoEvosMoves
+	dw FossilKabutopsEvosMoves
+	dw FossilAerodactylEvosMoves
+	dw MonGhostEvosMoves
 	assert_table_length NUM_POKEMON_INDEXES
 
 RhydonEvosMoves:
@@ -364,18 +364,6 @@ SlowbroEvosMoves:
 	db 44, AMNESIA
 	db 55, PSYCHIC_M
 	db 0
-
-;SlowbroGEvosMoves:
-; Evolutions
-;	db 0
-; Learnset
-;	db 8, ACID
-;	db 14, CONFUSION
-;	db 22, DISABLE
-;	db 30, HEADBUTT
-;	db 38, AMNESIA
-;	db 42, PSYCHIC_M
-;	db 0
 
 IvysaurEvosMoves:
 ; Evolutions
@@ -1000,39 +988,6 @@ TaurosEvosMoves:
 	db 44, RAGE
 	db 51, TAKE_DOWN
 	db 0
-
-;TaurosPEvosMoves:
-; Evolutions
-;	db 0
-; Learnset
-;	db 21, ROLLING_KICK
-;	db 28, TAIL_WHIP
-;	db 35, LEER
-;	db 44, RAGE
-;	db 51, JUMP_KICK
-;	db 0
-
-;TaurosPBEvosMoves:
-; Evolutions
-;	db 0
-; Learnset
-;	db 21, LOW_KICK
-;	db 28, TAIL_WHIP
-;	db 35, LEER
-;	db 44, RAGE
-;	db 51, FIRE_SPIN
-;	db 0
-	
-;TaurosPAEvosMoves:
-; Evolutions
-;	db 0
-; Learnset
-;	db 21, LOW_KICK
-;	db 28, TAIL_WHIP
-;	db 35, LEER
-;	db 44, RAGE
-;	db 51, HYDRO_PUMP
-;	db 0
 
 TrampelEvosMoves:
 ; Evolutions
@@ -1929,20 +1884,6 @@ MukEvosMoves:
 	db 60, ACID_ARMOR
 	db 0
 
-;MukAEvosMoves:
-; Evolutions
-;	db 0
-; Learnset
-;	db 6, HARDEN
-;	db 12, MINIMIZE
-;	db 18, DISABLE
-;	db 24, BRUTAL_SWING
-;	db 30, SCREECH
-;	db 36, NIGHT_SLASH
-;	db 42, ACID_ARMOR
-;	db 48, SLUDGE
-;	db 0
-
 DecillaEvosMoves:
 ; Evolutions
 	db EV_LEVEL, 40, GYAOON
@@ -2012,18 +1953,6 @@ WeezingEvosMoves:
 	db 49, HAZE
 	db 53, EXPLOSION
 	db 0
-
-;WeezingGEvosMoves:
-; Evolutions
-;	db 0
-; Learnset
-;	db 32, SLUDGE
-;	db 37, SMOKESCREEN
-;	db 40, SELFDESTRUCT
-;	db 43, DAZZLE_GLEAM
-;	db 49, HAZE
-;	db 53, EXPLOSION
-;	db 0
 
 PersianEvosMoves:
 ; Evolutions
@@ -2481,23 +2410,46 @@ TotartleEvosMoves:
 	db 54, LEER
 	db 60, PETAL_DANCE
 	db 0
-
-FossilKabutopsEvosMoves:
+	
+ArticunoGEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
+	db 40, REFLECT
+	db 45, HYPNOSIS
+	db 51, PSYBEAM
+	db 55, AGILITY
+	db 60, LIGHT_SCREEN
+	db 65, RECOVER
+	db 70, DREAM_EATER
 	db 0
 
-FossilAerodactylEvosMoves:
+ZapdosGEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
+	db 40, DOUBLE_KICK
+	db 45, LIGHT_SCREEN
+	db 51, LOW_KICK
+	db 55, AGILITY
+	db 58, JUMP_KICK
+	db 62, DRILL_PECK
+	db 66, ROLLING_KICK
+	db 70, HI_JUMP_KICK
 	db 0
 
-MonGhostEvosMoves:
+MoltresGEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
+	db 40, BITE		; Fake Tears
+	db 45, WING_ATTACK
+	db 51, BRUTAL_SWING
+	db 55, AGILITY
+	db 58, FEINT_ATTACK
+	db 62, AMNESIA		; Nasty Plot
+	db 66, NIGHT_SLASH	; False Surrender
+	db 70, SKY_ATTACK
 	db 0
 
 OddishEvosMoves:
@@ -2852,18 +2804,6 @@ SlowkingEvosMoves:
 	db 44, AMNESIA
 	db 55, PSYCHIC_M
 	db 0
-
-;SlowkingGEvosMoves:
-; Evolutions
-;	db 0
-; Learnset
-;	db 8, ACID
-;	db 14, CONFUSION
-;	db 22, DISABLE
-;	db 30, HEADBUTT
-;	db 38, AMNESIA
-;	db 42, PSYCHIC_M
-;	db 0
 
 ElectivireEvosMoves:
 ; Evolutions
@@ -3232,6 +3172,44 @@ RapidashGEvosMoves:
 	db 52, DAZZLE_GLEAM
 	db 55, PSYCHIC_M
 	db 0
+	
+SlowbroGEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 8, ACID
+	db 14, CONFUSION
+	db 22, DISABLE
+	db 30, HEADBUTT
+	db 38, AMNESIA
+	db 42, PSYCHIC_M
+	db 0
+
+SlowkingGEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 8, ACID
+	db 14, CONFUSION
+	db 22, DISABLE
+	db 30, HEADBUTT
+	db 38, AMNESIA
+	db 42, PSYCHIC_M
+	db 0
+
+MukAEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 6, HARDEN
+	db 12, MINIMIZE
+	db 18, DISABLE
+	db 24, BRUTAL_SWING
+	db 30, SCREECH
+	db 36, NIGHT_SLASH
+	db 42, ACID_ARMOR
+	db 48, SLUDGE
+	db 0
 
 ExeggutorAEvosMoves:
 ; Evolutions
@@ -3256,49 +3234,71 @@ MarowakAEvosMoves:
 	db 46, BONEMERANG
 	db 55, FLAMETHROWER
 	db 0
-
-ArticunoGEvosMoves:
+	
+WeezingGEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
-	db 40, REFLECT
-	db 45, HYPNOSIS
-	db 51, PSYBEAM
-	db 55, AGILITY
-	db 60, LIGHT_SCREEN
-	db 65, RECOVER
-	db 70, DREAM_EATER
+	db 32, SLUDGE
+	db 37, SMOKESCREEN
+	db 40, SELFDESTRUCT
+	db 43, DAZZLE_GLEAM
+	db 49, HAZE
+	db 53, EXPLOSION
 	db 0
 
-ZapdosGEvosMoves:
+TaurosPEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
-	db 40, DOUBLE_KICK
-	db 45, LIGHT_SCREEN
-	db 51, LOW_KICK
-	db 55, AGILITY
-	db 58, JUMP_KICK
-	db 62, DRILL_PECK
-	db 66, ROLLING_KICK
-	db 70, HI_JUMP_KICK
+	db 21, ROLLING_KICK
+	db 28, TAIL_WHIP
+	db 35, LEER
+	db 44, RAGE
+	db 51, JUMP_KICK
 	db 0
 
-MoltresGEvosMoves:
+TaurosPAEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
-	db 40, BITE		; Fake Tears
-	db 45, WING_ATTACK
-	db 51, BRUTAL_SWING
-	db 55, AGILITY
-	db 58, FEINT_ATTACK
-	db 62, AMNESIA		; Nasty Plot
-	db 66, NIGHT_SLASH	; False Surrender
-	db 70, SKY_ATTACK
+	db 21, LOW_KICK
+	db 28, TAIL_WHIP
+	db 35, LEER
+	db 44, RAGE
+	db 51, HYDRO_PUMP
+	db 0
+
+TaurosPBEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 21, LOW_KICK
+	db 28, TAIL_WHIP
+	db 35, LEER
+	db 44, RAGE
+	db 51, FIRE_SPIN
 	db 0
 
 MissingNoEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 0
+	
+FossilKabutopsEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 0
+
+FossilAerodactylEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 0
+
+MonGhostEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset

@@ -21,3 +21,4 @@
 
 	db BANK(WeezingGPicFront)
 	assert BANK(WeezingGPicFront) == BANK(WeezingGPicBack)
+	

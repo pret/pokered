@@ -908,35 +908,35 @@ _RapidashGDexEntry::
 	next "break concrete"
 	dex
 
-;_SlowbroGDexEntry::
-;	text "The SHELLDER that"
-;	next "bit SLOWBRO has"
-;	next "made it poisonous."
+_SlowbroGDexEntry::
+	text "The SHELLDER that"
+	next "bit SLOWBRO has"
+	next "made it poisonous."
 	
-;	para "SHELLDER's tongue"
-;	next "can be squeezed"
-;	next "to spit poison"
-;	dex
+	page "SHELLDER's tongue"
+	next "can be squeezed"
+	next "to spit poison"
+	dex
 
-;_SlowkingGDexEntry::
-;	text "The SHELLDER that"
-;	next "bit SLOWBRO has"
-;	next "assumed control."
+_SlowkingGDexEntry::
+	text "The SHELLDER that"
+	next "bit SLOWKING has"
+	next "assumed control."
 	
-;	page "Mumbling eerie"
-;	next "spells, it makes"
-;	next "strange POTIONs"
-;	dex
+	page "Mumbling eerie"
+	next "spells, it makes"
+	next "strange POTIONs"
+	dex
 
-;_MukADexEntry::
-;	text "Over 100 kinds"
-;	next "of poison make"
-;	next "up its body."
+_MukADexEntry::
+	text "Over 100 kinds"
+	next "of poison make"
+	next "up its body."
 	
-;	page "While friendly,"
-;	next "it must be fed"
-;	next "a lot of trash"
-;	dex
+	page "While friendly,"
+	next "it must be fed"
+	next "a lot of trash"
+	dex
 
 _ExeggutorADexEntry::
 	text "Strong sunlight"
@@ -958,45 +958,45 @@ _MarowakADexEntry::
 	next "cherished bone"
 	dex
 
-;_WeezingGDexEntry::
-;	text "It is better at"
-;	next "taking in air"
-;	next "than WEEZING in" ; referencing shield kantonian weezing
+_WeezingGDexEntry::
+	text "It is better at"
+	next "taking in air"
+	next "than WEEZING in" ; referencing shield kantonian weezing
 	
-;	page "KANTO. Its body"
-;	next "is copied when"
-;	next "building factories" ; referencing this: https://ibb.co/ZM2714Q - PLA takes place before RB
-;	dex
+	page "KANTO. Its body"
+	next "is copied when"
+	next "building factories" ; referencing this: https://ibb.co/ZM2714Q - PLA takes place before RB
+	dex
 
-;_TaurosPDexEntry::
-;	text "Known as the"
-;	next "Combat Breed,"
-;	next "this TAUROS uses"
+_TaurosPDexEntry::
+	text "Known as the"
+	next "Combat Breed,"
+	next "this TAUROS uses"
 	
-;	page "its thick muscles"
-;	next "to overwhelm its"
-;	next "opponents"
-;	dex
+	page "its thick muscles"
+	next "to overwhelm its"
+	next "opponents"
+	dex
 
-;_TaurosPBDexEntry::
-;	text "Known as the"
-;	next "Blaze Breed,"
-;	next "this TAUROS can"
+_TaurosPBDexEntry::
+	text "Known as the"
+	next "Blaze Breed,"
+	next "this TAUROS can"
 	
-;	page "expel hot air"
-;	next "from its nostrils"
-;	next "and heat its horns"
-;	dex
+	page "expel hot air from"
+	next "its nostrils and"
+	next "heat up its horns"
+	dex
 
-;_TaurosPADexEntry::
-;	text "Known as the"
-;	next "Aqua Breed,"
-;	next "this TAUROS can"
+_TaurosPADexEntry::
+	text "Known as the"
+	next "Aqua Breed,"
+	next "this TAUROS can"
 	
-;	page "shoot water at"
-;	next "high pressure from"
-;	next "its horns"
-;	dex
+	page "shoot water at"
+	next "high pressure from"
+	next "its horns"
+	dex
 
 _MissingNoDexEntry::
 	text "This is a newly"

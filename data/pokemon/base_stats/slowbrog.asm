@@ -1,6 +1,6 @@
 	db DEX_SLOWBRO_G ; pokedex id
 
-	db  95,  100, 95,  30,  70
+	db  95, 100,  95,  30,  70
 	;   hp  atk  def  spd  spc
 
 	db POISON, PSYCHIC_TYPE ; type

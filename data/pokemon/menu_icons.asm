@@ -144,9 +144,9 @@ MonPartyData:
 	nybble ICON_WATER     ; Kingler
 	nybble ICON_QUADRUPED ; Slowpoke
 	nybble ICON_MON       ; Slowbro
-	; 	nybble ICON_MON       ; Slowbro-G
+	nybble ICON_MON       ; Slowbro-G
 	nybble ICON_MON       ; Slowking
-	; 	nybble ICON_MON       ; Slowking-G
+	nybble ICON_MON       ; Slowking-G
 	nybble ICON_QUADRUPED ; Puchikoon
 	nybble ICON_QUADRUPED ; Ponyta
 	nybble ICON_QUADRUPED ; Rapidash
@@ -168,10 +168,10 @@ MonPartyData:
 	nybble ICON_MON       ; Betobebii
 	nybble ICON_MON       ; Grimer
 	nybble ICON_MON       ; Muk
-	; 	nybble ICON_MON       ; Muk-A
+	nybble ICON_MON       ; Muk-A
 	nybble ICON_MON       ; Koffing
 	nybble ICON_MON       ; Weezing
-	; 	nybble ICON_MON       ; Weezing-G
+	nybble ICON_MON       ; Weezing-G
 	nybble ICON_WATER     ; Blastyke
 	nybble ICON_WATER     ; Blastoise
 	nybble ICON_MON       ; Ditto
@@ -207,16 +207,15 @@ MonPartyData:
 	nybble ICON_MON	      ; Kangaskhan
 	nybble ICON_MON       ; Trampel
 	nybble ICON_QUADRUPED ; Tauros
-	; 	nybble ICON_QUADRUPED ; Tauros-P
-	; 	nybble ICON_QUADRUPED ; Tauros-PA
-	; 	nybble ICON_QUADRUPED ; Tauros-PB
+	nybble ICON_QUADRUPED ; Tauros-P
+	nybble ICON_QUADRUPED ; Tauros-PA
+	nybble ICON_QUADRUPED ; Tauros-PB
 	nybble ICON_FAIRY     ; Chansey
 	nybble ICON_FAIRY     ; Blissey
 	nybble ICON_MON	      ; Skimper
 	nybble ICON_MON	      ; Bawligua
 	nybble ICON_MON	      ; Cryithan
 	nybble ICON_MON       ; Mr.Mime
-	; nybble ICON_MON       ; Mr.Mime-G
 	nybble ICON_MON       ; Mr.Rime
 	nybble ICON_MON       ; Jynx
 	nybble ICON_MON       ; Buu

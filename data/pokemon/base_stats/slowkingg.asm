@@ -1,10 +1,10 @@
 	db DEX_SLOWKING_G ; pokedex id
 
-	db  95,  65, 80,  30,  110
+	db  95,  65,  80,  30, 110
 	;   hp  atk  def  spd  spc
 
 	db POISON, PSYCHIC_TYPE ; type
-	db 75 ; catch rate
+	db 70 ; catch rate
 	db 164 ; base exp
 
 	INCBIN "gfx/pokemon/front/slowkingg.pic", 0, 1 ; sprite dimensions

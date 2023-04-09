@@ -181,9 +181,9 @@ PokedexEntryPointers:
 	dw WartortleDexEntry
 	dw CharizardDexEntry
 	dw TotartleDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
+	dw ArticunoGDexEntry
+	dw ZapdosGDexEntry
+	dw MoltresGDexEntry
 	dw OddishDexEntry
 	dw GloomDexEntry
 	dw VileplumeDexEntry
@@ -242,11 +242,18 @@ PokedexEntryPointers:
 	dw PersianADexEntry
 	dw GolemADexEntry
 	dw RapidashGDexEntry
+	dw SlowbroGDexEntry
+	dw SlowkingGDexEntry
+	dw MukADexEntry
 	dw ExeggutorADexEntry
 	dw MarowakADexEntry
-	dw ArticunoGDexEntry
-	dw ZapdosGDexEntry
-	dw MoltresGDexEntry
+	dw WeezingGDexEntry
+	dw TaurosPDexEntry
+	dw TaurosPADexEntry
+	dw TaurosPBDexEntry
+	dw MissingNoDexEntry
+	dw MissingNoDexEntry
+	dw MissingNoDexEntry
 	dw MissingNoDexEntry
 	assert_table_length NUM_POKEMON_INDEXES
 
@@ -1934,6 +1941,27 @@ RapidashGDexEntry:
 	dw 1760
 	text_far _RapidashGDexEntry
 	text_end
+	
+SlowbroGDexEntry:
+	db "HERMITCRAB@"
+	db 5,3
+	dw 1550
+	text_far _SlowbroGDexEntry
+	text_end
+	
+SlowkingGDexEntry:
+    db "HEXPERT@"
+	db 5,11
+	dw 1750
+	text_far _SlowkingGDexEntry
+	text_end 
+
+MukADexEntry:
+	db "SLUDGE@"
+	db 3,3
+	dw 1150
+	text_far _MukADexEntry
+	text_end
 
 ExeggutorADexEntry:
 	db "COCONUT@"
@@ -1947,6 +1975,34 @@ MarowakADexEntry:
 	db 3,3
 	dw 750
 	text_far _MarowakADexEntry
+	text_end
+	
+WeezingGDexEntry:
+	db "POISON GAS@"
+	db 9,10
+	dw 350
+	text_far _WeezingGDexEntry
+	text_end
+	
+TaurosPDexEntry:
+	db "WILD BULL@"
+	db 4,7
+	dw 2530
+	text_far _TaurosPDexEntry
+	text_end
+	
+TaurosPADexEntry:
+	db "WILD BULL@"
+	db 4,7
+	dw 2420
+	text_far _TaurosPADexEntry
+	text_end
+	
+TaurosPBDexEntry:
+	db "WILD BULL@"
+	db 4,7
+	dw 1870
+	text_far _TaurosPBDexEntry
 	text_end
 	
 ArticunoGDexEntry:

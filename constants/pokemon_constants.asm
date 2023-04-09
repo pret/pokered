@@ -188,9 +188,9 @@
 	const WARTORTLE          ; $B3
 	const CHARIZARD          ; $B4
 	const TOTARTLE           ; $B5	(new)
-	const FOSSIL_KABUTOPS    ; $B6	(missingno.)
-	const FOSSIL_AERODACTYL  ; $B7	(missingno.)
-	const MON_GHOST          ; $B8	(missingno.)
+	const ARTICUNO_G		 ; $B6	(new)
+	const ZAPDOS_G			 ; $FD	(new)
+	const MOLTRES_G			 ; $FE	(new)
 	const ODDISH             ; $B9
 	const GLOOM              ; $BA
 	const VILEPLUME          ; $BB
@@ -249,19 +249,19 @@
 	const PERSIAN_A		     ; $F0
 	const GOLEM_A		 	 ; $F1
 	const RAPIDASH_G		 ; $F2
-	; const SLOWBRO_G		   ; $F3
-	; const SLOWKING_G		   ; $F4
-	; const MUK_A		       ; $F5
+	const SLOWBRO_G		     ; $F3
+	const SLOWKING_G		 ; $F4
+	const MUK_A		         ; $F5
 	const EXEGGUTOR_A		 ; $F6
 	const MAROWAK_A		     ; $F7
-	; const WEEZING_G		   ; $F8
-	; const TAUROS_P		   ; $F9
-	; const TAUROS_PA		   ; $FA
-	; const TAUROS_PB		   ; $FB
-	const ARTICUNO_G		 ; $FC
-	const ZAPDOS_G			 ; $FD
-	const MOLTRES_G			 ; $FE
-	const MISSINGNO          ; $FF	(need to make sure we can still put something here)
+	const WEEZING_G		     ; $F8
+	const TAUROS_P		     ; $F9
+	const TAUROS_PA		     ; $FA
+	const TAUROS_PB		     ; $FB
+	const MISSINGNO          ; $FC	
+	const FOSSIL_KABUTOPS    ; $FD	(was B6)
+	const FOSSIL_AERODACTYL  ; $FE	(was B7)
+	const MON_GHOST          ; $FF	(was B8, need to make sure we can still put something here)
 	
 DEF NUM_POKEMON_INDEXES EQU const_value - 1
 

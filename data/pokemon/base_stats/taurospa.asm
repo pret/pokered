@@ -7,7 +7,7 @@
 	db 45 ; catch rate
 	db 211 ; base exp
 
-	INCBIN "gfx/pokemon/front/taurospa.pic", 0, 1 ; sprite dimensions
+	INCBIN "gfx/pokemon/front/taurospaqua.pic", 0, 1 ; sprite dimensions
 	dw TaurosPAPicFront, TaurosPAPicBack
 
 	db DOUBLE_KICK, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset

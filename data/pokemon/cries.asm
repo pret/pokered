@@ -187,9 +187,9 @@ CryData::
 	mon_cry SFX_CRY_1D, $20, $40 ; Wartortle
 	mon_cry SFX_CRY_04, $00, $80 ; Charizard
 	mon_cry SFX_CRY_1D, $00, $80 ; Totartle
-	mon_cry SFX_CRY_18, $EE, $01 ; MissingNo. (Kabutops Fossil)
-	mon_cry SFX_CRY_23, $20, $F0 ; MissingNo. (Aerodactyl Fossil)
-	mon_cry SFX_CRY_06, $00, $00 ; MissingNo. (Ghost)
+	mon_cry SFX_CRY_09, $80, $40 ; Articuno-G
+	mon_cry SFX_CRY_18, $FF, $80 ; Zapdos-G
+	mon_cry SFX_CRY_09, $F8, $40 ; Moltres-G
 	mon_cry SFX_CRY_08, $DD, $01 ; Oddish
 	mon_cry SFX_CRY_08, $AA, $40 ; Gloom
 	mon_cry SFX_CRY_23, $22, $FF ; Vileplume
@@ -248,17 +248,17 @@ CryData::
 	mon_cry SFX_CRY_19, $99, $FF ; Persian-A
 	mon_cry SFX_CRY_12, $E0, $40 ; Golem-A
 	mon_cry SFX_CRY_25, $20, $C0 ; Rapidash-G
-	; mon_cry SFX_CRY_1F, $00, $80 ; Slowbro-G
-	; mon_cry SFX_CRY_00, $00, $00 ; Slowking-G
-	; mon_cry SFX_CRY_07, $EF, $FF ; Muk-A
+	mon_cry SFX_CRY_1F, $00, $80 ; Slowbro-G
+	mon_cry SFX_CRY_00, $00, $00 ; Slowking-G
+	mon_cry SFX_CRY_07, $EF, $FF ; Muk-A
 	mon_cry SFX_CRY_0D, $00, $80 ; Exeggutor-A
 	mon_cry SFX_CRY_08, $4F, $60 ; Marowak-A
-	; mon_cry SFX_CRY_12, $FF, $FF ; Weezing-G
-	; mon_cry SFX_CRY_1D, $11, $40 ; Tauros-P
-	; mon_cry SFX_CRY_1D, $11, $40 ; Tauros-PA
-	; mon_cry SFX_CRY_1D, $11, $40 ; Tauros-PB
-	mon_cry SFX_CRY_09, $80, $40 ; Articuno-G
-	mon_cry SFX_CRY_18, $FF, $80 ; Zapdos-G
-	mon_cry SFX_CRY_09, $F8, $40 ; Moltres-G
+	mon_cry SFX_CRY_12, $FF, $FF ; Weezing-G
+	mon_cry SFX_CRY_1D, $11, $40 ; Tauros-P
+	mon_cry SFX_CRY_1D, $11, $40 ; Tauros-PA
+	mon_cry SFX_CRY_1D, $11, $40 ; Tauros-PB
 	mon_cry SFX_CRY_00, $00, $00 ; MissingNo.
+	mon_cry SFX_CRY_18, $EE, $01 ; MissingNo. (Kabutops Fossil)
+	mon_cry SFX_CRY_23, $20, $F0 ; MissingNo. (Aerodactyl Fossil)
+	mon_cry SFX_CRY_06, $00, $00 ; MissingNo. (Ghost)
 	assert_table_length NUM_POKEMON_INDEXES

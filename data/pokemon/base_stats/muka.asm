@@ -21,3 +21,4 @@
 
 	db BANK(MukAPicFront)
 	assert BANK(MukAPicFront) == BANK(MukAPicBack)
+	
