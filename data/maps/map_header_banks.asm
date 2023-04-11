@@ -12,7 +12,7 @@ MapHeaderBanks::
 	db BANK(CinnabarIsland_h)
 	db BANK(IndigoPlateau_h)
 	db BANK(SaffronCity_h)
-	db $01 ; TODO BANK(CitrineCity_h)
+	db BANK(CitrineCity_h)
 	db BANK(CeladonUniversityOutside_h)
 	db BANK(Route1_h)
 	db BANK(Route2_h)

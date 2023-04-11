@@ -12,7 +12,7 @@ MapHeaderPointers::
 	dw CinnabarIsland_h
 	dw IndigoPlateau_h
 	dw SaffronCity_h
-	dw SaffronCity_h ; TODO CitrineCity_h
+	dw CitrineCity_h
 	dw CeladonUniversityOutside_h
 	dw Route1_h
 	dw Route2_h

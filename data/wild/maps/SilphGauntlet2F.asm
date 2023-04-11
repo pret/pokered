@@ -1,15 +1,15 @@
 Gauntlet2FWildMons:
 	def_grass_wildmons 10 ; encounter rate
-	db 57, GOLEM
-	db 57, SANDSLASH
-	db 58, MACHAMP
-	db 58, CROBAT
-	db 58, SANDSLASH
-	db 59, MACHAMP
-	db 59, STEELIX
-	db 60, CLEFABLE
-	db 60, STEELIX
-	db 62, CHARIZARD
+	db 52, GOLEM
+	db 52, SANDSLASH
+	db 53, MACHAMP
+	db 53, CROBAT
+	db 53, SANDSLASH
+	db 54, MACHAMP
+	db 54, STEELIX
+	db 55, CLEFABLE
+	db 55, STEELIX
+	db 57, CHARIZARD
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate

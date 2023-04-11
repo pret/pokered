@@ -5,27 +5,27 @@
 ; Legendary Birds were also in the mythos but there's no space and it sounds terrible.
 BillsGardenWildMons:
 	def_grass_wildmons 10 ; encounter rate
-	db 46, EEVEE ; People are here for Eevee so just give them the ~40% chance...
-	db 46, EEVEE
-	db 46, CHARMANDER
-	db 49, BULBASAUR
-	db 49, HITMONTOP
-	db 52, HITMONCHAN
-	db 49, HITMONLEE
-	db 52, ELECTRODE_H
-	db 53, ARCANINE_H
-	db 53, DECILLA
+	db 50, EEVEE ; People are here for Eevee so just give them the ~40% chance...
+	db 50, EEVEE
+	db 50, CHARMANDER
+	db 50, BULBASAUR
+	db 50, HITMONTOP
+	db 50, HITMONCHAN
+	db 50, HITMONLEE
+	db 50, ELECTRODE_H
+	db 50, ARCANINE_H
+	db 50, DECILLA
 	end_grass_wildmons
 
 	def_water_wildmons 10 ; encounter rate
-	db 40, SQUIRTLE
-	db 40, SQUIRTLE
-	db 40, SQUIRTLE
-	db 40, KABUTO
-	db 40, OMANYTE
-	db 40, AERODACTYL ; In games like DPP, you can encounter fliers on Water. Most notably, Zubat. No space on land so this is the best we got.
-	db 40, WARTORTLE
-	db 40, WARTORTLE
-	db 40, BLASTOISE
-	db 40, TOTARTLE
+	db 50, BLASTYKE
+	db 50, SQUIRTLE
+	db 50, SQUIRTLE
+	db 50, KABUTO
+	db 50, OMANYTE
+	db 50, AERODACTYL ; In games like DPP, you can encounter fliers on Water. Most notably, Zubat. No space on land so this is the best we got.
+	db 50, WARTORTLE
+	db 50, WARTORTLE
+	db 50, BLASTOISE
+	db 50, TOTARTLE
 	end_water_wildmons

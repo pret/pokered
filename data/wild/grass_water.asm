@@ -11,7 +11,7 @@ WildDataPointers:
 	dw NothingWildMons         ; CINNABAR_ISLAND
 	dw NothingWildMons         ; INDIGO_PLATEAU
 	dw NothingWildMons         ; SAFFRON_CITY
-	dw NothingWildMons         ; CITRINE_CITY
+	dw CitrineWildMons         ; CITRINE_CITY
 	dw NothingWildMons         ; CELADON_UNIVERSITY_OUTSIDE
 	dw Route1WildMons          ; ROUTE_1
 	dw Route2WildMons          ; ROUTE_2
@@ -244,7 +244,7 @@ WildDataPointers:
 	dw NothingWildMons
 	dw NothingWildMons
 	dw NothingWildMons
-	dw NothingWildMons
+	dw BillsGardenWildMons
 	dw NothingWildMons
 	dw NothingWildMons
 	dw NothingWildMons
@@ -263,6 +263,7 @@ WildDataPointers:
         ; level, species (ten times)
 
 INCLUDE "data/wild/maps/nothing.asm"
+INCLUDE "data/wild/maps/CitrineCity.asm"
 INCLUDE "data/wild/maps/Route1.asm"
 INCLUDE "data/wild/maps/Route2.asm"
 INCLUDE "data/wild/maps/Route22.asm"
@@ -331,3 +332,4 @@ INCLUDE "data/wild/maps/SilphGauntlet6F.asm"
 INCLUDE "data/wild/maps/FarawayIslandInside.asm"
 INCLUDE "data/wild/maps/MtMoonCrater.asm"
 INCLUDE "data/wild/maps/UnderwaterTunnel.asm"
+INCLUDE "data/wild/maps/BillsGarden.asm"

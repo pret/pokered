@@ -18,7 +18,7 @@ ExternalMapEntries:
 	external_map  2, 15, CinnabarIslandName
 	external_map  0,  2, IndigoPlateauName
 	external_map 10,  5, SaffronCityName
-	external_map  7, 10, CitrineCityName
+	external_map  7,  9, CitrineCityName
 	external_map  7,  4, CeladonUniversityName
 	external_map  2, 10, Route1Name
 	external_map  2,  6, Route2Name

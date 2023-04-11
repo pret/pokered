@@ -8,6 +8,7 @@ SuperRodData:
 	dbw CELADON_CITY,        		.Group5
 	dbw FUCHSIA_CITY,        		.Group7
 	dbw CINNABAR_ISLAND,     		.Group8
+	dbw CITRINE_CITY,				.Group9
 	dbw ROUTE_4,             		.Group3
 	dbw ROUTE_6,             		.Group4
 	dbw ROUTE_10,            		.Group5

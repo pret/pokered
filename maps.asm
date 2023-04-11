@@ -1317,3 +1317,8 @@ INCLUDE "data/maps/headers/UnderwaterTunnel.asm"
 INCLUDE "scripts/UnderwaterTunnel.asm"
 INCLUDE "data/maps/objects/UnderwaterTunnel.asm"
 UnderwaterTunnel_Blocks: INCBIN "maps/UnderwaterTunnel.blk"
+
+INCLUDE "data/maps/headers/CitrineCity.asm"
+INCLUDE "scripts/CitrineCity.asm"
+INCLUDE "data/maps/objects/CitrineCity.asm"
+CitrineCity_Blocks: INCBIN "maps/CitrineCity.blk"

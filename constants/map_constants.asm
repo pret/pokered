@@ -27,14 +27,14 @@ ENDM
 	mapconst CINNABAR_ISLAND,               15, 14 ; $08
 	mapconst INDIGO_PLATEAU,                 9, 10 ; $09
 	mapconst SAFFRON_CITY,                  18, 20 ; $0A
-DEF NUM_CITY_MAPS EQU const_value ; eorsunica: move this line under CITRINE_CITY to include it in the Fly Map
 	mapconst CITRINE_CITY,                  18, 20 ; $0B
+DEF NUM_CITY_MAPS EQU const_value ; eorsunica: move this line under Celadon Uni Outside to include it in the Fly Map
 	mapconst CELADON_UNIVERSITY_OUTSIDE,    20, 21 ; $0C
 DEF FIRST_ROUTE_MAP EQU const_value
 	mapconst ROUTE_1,                       18, 10 ; $0D
 	mapconst ROUTE_2,                       36, 10 ; $0E
 	mapconst ROUTE_3,                        9, 35 ; $0F
-	mapconst ROUTE_4,                        9, 45 ; $00
+	mapconst ROUTE_4,                        9, 45 ; $10
 	mapconst ROUTE_5,                       18, 10 ; $11
 	mapconst ROUTE_6,                       18, 10 ; $12
 	mapconst ROUTE_7,                        9, 10 ; $13
