@@ -963,9 +963,9 @@ _WeezingGDexEntry::
 	next "taking in air"
 	next "than WEEZING in" ; referencing shield kantonian weezing
 	
-	page "KANTO. Its body"
-	next "is copied when"
-	next "building factories" ; referencing this: https://ibb.co/ZM2714Q - PLA takes place before RB
+	page "KANTO. Factories"
+	next "were often built"
+	next "in its image" ; referencing this: https://ibb.co/ZM2714Q - PLA takes place before RB
 	dex
 
 _TaurosPDexEntry::
