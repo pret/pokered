@@ -45,29 +45,30 @@ DEF SET_PAL_DEFAULT EQU $ff
 	const PAL_CINNABAR  ; $09
 	const PAL_INDIGO    ; $0A
 	const PAL_SAFFRON   ; $0B
-	const PAL_TOWNMAP   ; $0C
-	const PAL_LOGO1     ; $0D
-	const PAL_LOGO2     ; $0E
-	const PAL_0F        ; $0F
-	const PAL_MEWMON    ; $10
-	const PAL_BLUEMON   ; $11
-	const PAL_REDMON    ; $12
-	const PAL_CYANMON   ; $13
-	const PAL_PURPLEMON ; $14
-	const PAL_BROWNMON  ; $15
-	const PAL_GREENMON  ; $16
-	const PAL_PINKMON   ; $17
-	const PAL_YELLOWMON ; $18
-	const PAL_GREYMON   ; $19
-	const PAL_SLOTS1    ; $1A
-	const PAL_SLOTS2    ; $1B
-	const PAL_SLOTS3    ; $1C
-	const PAL_SLOTS4    ; $1D
-	const PAL_BLACK     ; $1E
-	const PAL_GREENBAR  ; $1F
-	const PAL_YELLOWBAR ; $20
-	const PAL_REDBAR    ; $21
-	const PAL_BADGE     ; $22
-	const PAL_CAVE      ; $23
-	const PAL_GAMEFREAK ; $24
+	const PAL_CITRINE	; $0C
+	const PAL_TOWNMAP   ; $0D
+	const PAL_LOGO1     ; $0E
+	const PAL_LOGO2     ; $0F
+	const PAL_0F        ; $10
+	const PAL_MEWMON    ; $11
+	const PAL_BLUEMON   ; $12
+	const PAL_REDMON    ; $13
+	const PAL_CYANMON   ; $14
+	const PAL_PURPLEMON ; $15
+	const PAL_BROWNMON  ; $16
+	const PAL_GREENMON  ; $17
+	const PAL_PINKMON   ; $18
+	const PAL_YELLOWMON ; $19
+	const PAL_GREYMON   ; $1A
+	const PAL_SLOTS1    ; $1B
+	const PAL_SLOTS2    ; $1C
+	const PAL_SLOTS3    ; $1D
+	const PAL_SLOTS4    ; $1E
+	const PAL_BLACK     ; $1F
+	const PAL_GREENBAR  ; $20
+	const PAL_YELLOWBAR ; $21
+	const PAL_REDBAR    ; $22
+	const PAL_BADGE     ; $23
+	const PAL_CAVE      ; $24
+	const PAL_GAMEFREAK ; $25
 DEF NUM_SGB_PALS EQU const_value
