@@ -17,8 +17,8 @@ _VermilionCityTextSSAnneDeparted::
 	text "So, S.S.ANNE has"
 	line "departed!"
 
-	para "She'll be back in"
-	line "about a year."
+	para "She'll be back"
+	line "soon."		; changed since the ship actually comes back
 	done
 
 _SSAnneWelcomeText4::
@@ -82,9 +82,6 @@ _VermilionCityText6::
 	text "S.S.ANNE is a"
 	line "famous luxury"
 	cont "cruise ship."
-
-	para "We visit VERMILION"
-	line "once a year."
 	done
 
 _VermilionCityText7::
@@ -131,14 +128,10 @@ _VermilionCityText15::
 	line "has returned!"
 	done
 
-_RoingusText::
-	text "Hey! You've gotta"
-	line "hear this!"
-
-	para "A #MON that"
-	line "I've never seen"
-	cont "before appeared"
-	cont "near the dock!"
+_RoingusText::		; new NPC made as an inside joke, with a slight reference to Mew
+	text "I wanna discover"
+	line "a new species of"
+	cont "#MON someday!"
 
 	para "If I'm the first"
 	line "to discover it, I"

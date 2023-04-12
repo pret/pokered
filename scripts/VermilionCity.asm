@@ -50,8 +50,8 @@ VermilionCityScript0:
 	ld a, $3
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld a, [wObtainedBadges] ; ship returns after obtaining the soul badge
-	bit 4, a
+	ld a, [wObtainedBadges] ; ship returns after obtaining the marsh badge
+	bit 5, a
 	jr nz, .default
 	CheckEvent EVENT_SS_ANNE_LEFT
 	jr nz, .shipHasDeparted

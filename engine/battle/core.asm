@@ -3111,7 +3111,7 @@ ExecutePlayerMove:
 	ld hl, wPlayerBattleStatus1
 	bit CHARGING_UP, [hl] ; charging up for attack
 	jr nz, PlayerCanExecuteChargingMove
-	;call CheckForDisobedience
+	call CheckForDisobedience
 	jp z, ExecutePlayerMoveDone
 
 CheckIfPlayerNeedsToChargeUp:
@@ -4003,15 +4003,15 @@ CheckForDisobedience:
 	ld a, 101
 	jr nz, .next
 	bit BIT_MARSHBADGE, [hl]
-	ld a, 70
+	ld a, 101
 	jr nz, .next
 	bit BIT_RAINBOWBADGE, [hl]
-	ld a, 50
+	ld a, 101
 	jr nz, .next
 	bit BIT_CASCADEBADGE, [hl]
-	ld a, 30
+	ld a, 101
 	jr nz, .next
-	ld a, 10
+	ld a, 101
 .next
 	ld b, a
 	ld c, a

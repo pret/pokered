@@ -38,20 +38,7 @@ _SabrinaPostBattleAdviceText::
 	done
 
 _KogaMarshBadgeInfoText::
-	text "The MARSHBADGE"
-	line "makes #MON up"
-	cont "to L70 obey you!"
-
-	para "Stronger #MON"
-	line "will become wild,"
-	cont "ignoring your"
-	cont "orders in battle!"
-
-	para "Just don't raise"
-	line "your #MON too"
-	cont "much!"
-
-	para "Wait, please take"
+	text "Wait, please take"	; removed all of this text since obedience is no longer a thing
 	line "this TM with you!"
 	done
 
