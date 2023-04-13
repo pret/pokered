@@ -949,9 +949,9 @@ OaksLabScript_1d157:
 	jr z, OaksLabLookAtSquirtle
 	cp $4
 	jr z, OaksLabLookAtBulbasaur
-	cp $8 ; these may be the wrong way around.
+	cp $8
 	jr nz, OaksLabLookAtPikachu
-	cp $7 ; ^
+	cp $7
 	jr nz, OaksLabLookAtEevee
 	
 

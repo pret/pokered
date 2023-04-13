@@ -86,9 +86,6 @@ YujirouText:
 	jr .done
 .done
 	jp TextScriptEnd
-; where the hell do i put SetEvent EVENT_BEAT_YUJIROU
-
-
 
 YujirouIntro::
 	text_far _YujirouIntro

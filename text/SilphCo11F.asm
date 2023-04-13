@@ -133,3 +133,10 @@ _SilphCo10Text_6237b::
 	text "The monitor has"
 	line "#MON on it!"
 	done
+
+_OmegaBattleText::
+	text "ROCKET: Hey, kid!"
+	line "Watch out!"
+	
+	para "Bzzt! Clank!"
+	prompt

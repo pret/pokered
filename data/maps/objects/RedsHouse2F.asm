@@ -3,6 +3,7 @@ RedsHouse2F_Object:
 
 	def_warp_events
 	warp_event  7,  1, REDS_HOUSE_1F, 3
+	warp_event  5,  1, SILPH_CO_11F, 1
 
 	def_bg_events
 

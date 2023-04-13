@@ -590,8 +590,8 @@
 	const EVENT_BEAT_MEW
 	const_skip 7
 	const EVENT_BEAT_MOLTRES
-	const_skip 7
-	const EVENT_BEAT_OMEGA
+	;const_skip 7
+	;const EVENT_BEAT_OMEGA
 	const_skip 7
 	const EVENT_BEAT_DRAGONITE 
 
@@ -714,7 +714,7 @@
 	const_skip 11
 	const EVENT_BEAT_SILPH_CO_11F_TRAINER_0
 	const EVENT_BEAT_SILPH_CO_11F_TRAINER_1
-	const_skip 2
+	const EVENT_BEAT_OMEGA ; must be here
 	const EVENT_SILPH_CO_11_UNLOCKED_DOOR
 	const_skip 4
 	const EVENT_GOT_MASTER_BALL

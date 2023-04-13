@@ -63,12 +63,27 @@ SilphCo11Script_62137:
 	ldh [hUnlockedSilphCoDoors], a
 	ret
 
-SilphCo11Script_62163:
+SilphCo11Script_62163: ; This is altered to have Omega rush you once the door is open.
 	ldh a, [hUnlockedSilphCoDoors]
 	and a
 	ret z
 	SetEvent EVENT_SILPH_CO_11_UNLOCKED_DOOR
-	ret
+	
+	ld a, $6
+	ldh [hSpriteIndex], a
+	ld de, .OmegaMovement1
+	call MoveSprite
+	
+	ld a, [wXCoord] ; compare x coord before moving
+	cp 6
+	ld a, NPC_MOVEMENT_RIGHT
+	
+	jp OmegaText
+
+.OmegaMovement1:
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db -1 ; end
 
 SilphCo11Script_6216d:
 	ld hl, MissableObjectIDs_6219b
@@ -280,6 +295,7 @@ SilphCo11F_TextPointers:
 	dw SilphCo11Text4
 	dw SilphCo11Text5
 	dw SilphCo11Text6
+	dw OmegaText
 
 SilphCo11TrainerHeaders:
 	def_trainers 4
@@ -287,6 +303,8 @@ SilphCo11TrainerHeader0:
 	trainer EVENT_BEAT_SILPH_CO_11F_TRAINER_0, 4, SilphCo11BattleText1, SilphCo11EndBattleText1, SilphCo11AfterBattleText1
 SilphCo11TrainerHeader1:
 	trainer EVENT_BEAT_SILPH_CO_11F_TRAINER_1, 3, SilphCo11BattleText2, SilphCo11EndBattleText2, SilphCo11AfterBattleText2
+OmegaTrainerHeader:
+	trainer EVENT_BEAT_OMEGA, 0, OmegaBattleText, OmegaBattleText, OmegaBattleText
 	db -1 ; end
 
 SilphCo11Text1:
@@ -392,3 +410,20 @@ SilphCo10Text_6236c:
 SilphCo10Text_6237b:
 	text_far _SilphCo10Text_6237b
 	text_end
+
+; Omega Boss Fight text begins here.
+OmegaBattleText:
+	text_far _OmegaBattleText
+	text_asm
+	ld a, OMEGA
+	call PlayCry
+	call WaitForSoundToFinish
+	jp TextScriptEnd
+
+OmegaText:
+	call Delay3
+	text_asm
+	ld hl, OmegaTrainerHeader
+	call TalkToTrainer
+	ld [wJoyIgnore], a
+	jp TextScriptEnd
