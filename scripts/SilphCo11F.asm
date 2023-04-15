@@ -294,7 +294,7 @@ SilphCo11Script5:
 	call SilphCo11Script_6221a
 	ld a, $f0
 	ld [wJoyIgnore], a
-	ld a, $6
+	ld a, $7
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	call GBFadeOutToBlack
