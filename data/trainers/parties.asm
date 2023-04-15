@@ -663,6 +663,8 @@ ChannelerData:
 	db 33, GASTLY, GASTLY, HAUNTER, 0
 
 StudentData:
+	db 6, PIDGEY, HINAAZU, 0
+	db 4, CLEFAIRY, 0
 
 FirefighterData:
 

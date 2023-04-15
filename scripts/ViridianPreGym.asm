@@ -1,26 +1,11 @@
-; This code has a lot of problems with solutions that barely escape me. Many references from Erika's Gym have been taken to make a fight that cannot be done again, but with a rematch later. In other words, your average gym.
-; SetEvent EVENT_BEAT_YUJIROU does not seem to be applying.
-; It's very easy to cause an infinite loop where you somehow get catapulted into the rematch fight
-; And much more. 
-; Commit on 30-3-23 has a somewhat stable version of the fight.
-
 ViridianPreGym_Script:
+	call EnableAutoTextBoxDrawing
+	ld hl, ViridianPreGymTrainerHeaders
 	ld de, ViridianPreGym_ScriptPointers
 	ld a, [wViridianPreGymCurScript]
 	call ExecuteCurMapScriptInTable
 	ld [wViridianPreGymCurScript], a
 	ret
-
-.LoadNames:
-	ld hl, .CityName
-	ld de, .LeaderName
-	jp LoadGymLeaderAndCityName
-
-.CityName:
-	db "VIRIDIAN PRE-GYM@"
-
-.LeaderName:
-	db "YUJIROU@"
 	
 ViridianPreGymResetScripts:
 	xor a
@@ -50,6 +35,23 @@ ViridianPreGym_TextPointers:
 	dw YujirouText
 	dw YujirouHasBeenBeaten
 	dw YujirouRematch
+	dw ViridianPreGymText1
+	dw ViridianPreGymText2
+	dw ViridianPreGymGuide
+	dw ViridianPreGymSign1
+	dw ViridianPreGymSign2
+	dw ViridianPreGymSign3
+	dw ViridianPreGymSign4
+	dw ViridianPreGymStatue1
+	dw ViridianPreGymStatue2
+
+ViridianPreGymTrainerHeaders:
+	def_trainers 6
+ViridianPreGymTrainerHeader0:
+	trainer EVENT_BEAT_VIRIDIAN_PREGYM_TRAINER_0, 1, ViridianPreGymBattleText1, ViridianPreGymEndBattleText1, ViridianPreGymAfterBattleText1
+ViridianPreGymTrainerHeader1:
+	trainer EVENT_BEAT_VIRIDIAN_PREGYM_TRAINER_1, 2, ViridianPreGymBattleText2, ViridianPreGymEndBattleText2, ViridianPreGymAfterBattleText2
+	db -1 ;end
 
 YujirouText:
 	text_asm
@@ -143,6 +145,70 @@ YujirouLoseText2::
 
 YujirouAfterBattleText2::
 	text_far _YujirouAfterBattleText2
+	text_end
+
+ViridianPreGymText1:
+	text_asm
+	ld hl, ViridianPreGymTrainerHeader0
+	call TalkToTrainer
+	jp TextScriptEnd
+
+ViridianPreGymBattleText1:
+	text_far _ViridianPreGymBattleText1
+	text_end
+
+ViridianPreGymEndBattleText1:
+	text_far _ViridianPreGymEndBattleText1
+	text_end
+
+ViridianPreGymAfterBattleText1:
+	text_far _ViridianPreGymAfterBattleText1
+	text_end
+
+ViridianPreGymText2:
+	text_asm
+	ld hl, ViridianPreGymTrainerHeader1
+	call TalkToTrainer
+	jp TextScriptEnd
+
+ViridianPreGymBattleText2:
+	text_far _ViridianPreGymBattleText2
+	text_end
+
+ViridianPreGymEndBattleText2:
+	text_far _ViridianPreGymEndBattleText2
+	text_end
+
+ViridianPreGymAfterBattleText2:
+	text_far _ViridianPreGymAfterBattleText2
+	text_end
+
+ViridianPreGymGuide:
+	text_far _ViridianPreGymGuide
+	text_end
+
+ViridianPreGymSign1:
+	text_far _ViridianPreGymSign1
+	text_end
+
+ViridianPreGymSign2:
+	text_far _ViridianPreGymSign2
+	text_end
+
+ViridianPreGymSign3:
+	text_far _ViridianPreGymSign3
+	text_end
+
+ViridianPreGymSign4:
+	text_far _ViridianPreGymSign4
+	text_end
+
+ViridianPreGymStatue1:
+	text_far _PreGymStatueText
+	text_end
+
+ViridianPreGymStatue2:
+	text_far _PreGymStatueText
 	text_end
 
 	text_end ; unused
