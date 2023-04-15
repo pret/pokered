@@ -81,6 +81,7 @@ SilphCo11Script_62163: ; This is altered to have Omega rush you once the door is
 	ld a, $6
 	ldh [hSpriteIndex], a
 	call MoveOmegaSprite
+	;add code here to make Rocket NPC look at Omega
 	ld a, $6
 	ld [wSilphCo11FCurScript], a
 	ret
@@ -103,7 +104,7 @@ SilphCo11Script6:
 	ld [wMissableObjectIndex], a
 	predef HideObject
 	call UpdateSprites
-	ld a, $7
+	ld a, $2
 	ld [wSilphCo11FCurScript], a
 	ld [wCurMapScript], a
 	ret
