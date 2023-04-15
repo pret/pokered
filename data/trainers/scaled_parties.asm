@@ -78,9 +78,9 @@ SabrinaData:
 
 GiovanniData: ; is not scaled as he is always fought last
 ; Rocket Hideout B4F - should be changed to Lavender Tower
-	db $FF, 27, RHYHORN, 26, DECILLA, 31, KANGASKHAN, 31, PERSIAN, 0
+	db $FF, 27, RHYHORN, 26, BEEDRILL, 31, KANGASKHAN, 31, PERSIAN, 0
 ; Silph Co. 11F
-	db $FF, 37, KANGASKHAN, 36, NIDORINO, 37, NIDOQUEEN, 40, PERSIAN, 42, RHYDON, 0
+	db $FF, 37, KANGASKHAN, 36, NIDOKING, 37, NIDOQUEEN, 40, PERSIAN, 42, RHYDON, 0
 ; Viridian Gym
 	db $FF, 47, TRAMPEL, 46, DUGTRIO, 46, NIDOQUEEN, 48, PERSIAN, 48, NIDOKING, 50, RHYPERIOR, 0
 
