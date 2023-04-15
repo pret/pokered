@@ -294,7 +294,7 @@ SilphCo11Script5:
 	call SilphCo11Script_6221a
 	ld a, $f0
 	ld [wJoyIgnore], a
-	ld a, $7
+	ld a, $8
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	call GBFadeOutToBlack
@@ -353,6 +353,7 @@ SilphCo11F_TextPointers:
 	dw SilphCo11Text5
 	dw SilphCo11Text6
 	dw OmegaText
+	dw StupidGiovanniFix
 
 SilphCo11TrainerHeaders:
 	def_trainers 4
@@ -479,4 +480,6 @@ OmegaBattleText:
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 
-
+StupidGiovanniFix:
+	text_far _SilphCo10Text_62335
+	text_end
