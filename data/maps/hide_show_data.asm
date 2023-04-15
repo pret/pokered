@@ -509,6 +509,7 @@ SilphCo11FHS:
 	db SILPH_CO_11F, $03, SHOW
 	db SILPH_CO_11F, $04, SHOW
 	db SILPH_CO_11F, $05, SHOW
+	db SILPH_CO_11F, $06, SHOW
 BillsGardenHS: ; could be used for the dragonite boss fight, so not removing this part of UNUSED_MAP_F4
 	db BILLS_GARDEN, $02, SHOW
 CinnabarVolcanoHS:

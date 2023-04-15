@@ -8,6 +8,16 @@ SilphCo11F_Script:
 	ld [wSilphCo11FCurScript], a
 	ret
 
+SilphCo11F_ScriptPointers:
+	dw SilphCo11Script0
+	dw DisplayEnemyTrainerTextAndStartBattle
+	dw EndTrainerBattle
+	dw SilphCo11Script3
+	dw SilphCo11Script4
+	dw SilphCo11Script5
+	dw SilphCo11Script6
+	dw SilphCo11Script7
+
 SilphCo11Script_62110:
 	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
@@ -68,22 +78,74 @@ SilphCo11Script_62163: ; This is altered to have Omega rush you once the door is
 	and a
 	ret z
 	SetEvent EVENT_SILPH_CO_11_UNLOCKED_DOOR
-	
 	ld a, $6
 	ldh [hSpriteIndex], a
-	ld de, .OmegaMovement1
-	call MoveSprite
+	call MoveOmegaSprite
+	ld a, $6
+	ld [wSilphCo11FCurScript], a
+	ret
 	
-	ld a, [wXCoord] ; compare x coord before moving
-	cp 6
-	ld a, NPC_MOVEMENT_RIGHT
-	
-	jp OmegaText
+SilphCo11Script6:
+	ld a, [wd730]
+	bit 0, a
+	ret nz
+	ld [wJoyIgnore], a
+	ld a, $6 
+	ldh [hSpriteIndexOrTextID], a
+	call DisplayTextID
+	ld a, OMEGA
+	ld [wCurOpponent], a
+	ld a, 45
+	ld [wCurEnemyLVL], a
+	ld a, 0
+	ld [wIsTrainerBattle], a
+	ld a, HS_OMEGA
+	ld [wMissableObjectIndex], a
+	predef HideObject
+	call UpdateSprites
+	ld a, $7
+	ld [wSilphCo11FCurScript], a
+	ld [wCurMapScript], a
+	ret
 
-.OmegaMovement1:
+SilphCo11Script7:
+	ld a, [wIsInBattle]
+	cp $ff
+	jp z, SilphCo11Script_50ece
+	ld a, $3
+	ld [wSilphCo11FCurScript], a
+	ret
+
+SilphCo11Script_50ed6:
+	ld a, 0
+	ld [wTrainerNo], a
+	ld a, 1
+	ld [wIsTrainerBattle], a
+	ret
+
+OmegaMovementData:
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
 	db -1 ; end
+
+MoveOmegaSprite:
+	ld de, OmegaMovementData
+	call MoveSprite
+	ld a, SPRITE_FACING_DOWN
+	ldh [hSpriteFacingDirection], a
+	jp SetSpriteFacingDirectionAndDelay
+	ret
+
+.asm_50ef1
+	call MoveSprite
+	ld a, SPRITE_FACING_RIGHT
+	ldh [hSpriteFacingDirection], a
+	jp SetSpriteFacingDirectionAndDelay
+
+SilphCo11Script_50ece:
+	xor a
+	ld [wJoyIgnore], a
+	ld [wSilphCo11FCurScript], a
 
 SilphCo11Script_6216d:
 	ld hl, MissableObjectIDs_6219b
@@ -170,13 +232,7 @@ SilphCo11Script_621c8:
 	ld [wCurMapScript], a
 	ret
 
-SilphCo11F_ScriptPointers:
-	dw SilphCo11Script0
-	dw DisplayEnemyTrainerTextAndStartBattle
-	dw EndTrainerBattle
-	dw SilphCo11Script3
-	dw SilphCo11Script4
-	dw SilphCo11Script5
+
 
 SilphCo11Script0:
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
@@ -303,9 +359,11 @@ SilphCo11TrainerHeader0:
 	trainer EVENT_BEAT_SILPH_CO_11F_TRAINER_0, 4, SilphCo11BattleText1, SilphCo11EndBattleText1, SilphCo11AfterBattleText1
 SilphCo11TrainerHeader1:
 	trainer EVENT_BEAT_SILPH_CO_11F_TRAINER_1, 3, SilphCo11BattleText2, SilphCo11EndBattleText2, SilphCo11AfterBattleText2
-OmegaTrainerHeader:
-	trainer EVENT_BEAT_OMEGA, 0, OmegaBattleText, OmegaBattleText, OmegaBattleText
 	db -1 ; end
+
+OmegaText:
+	text_far _OmegaBattleText
+	text_end
 
 SilphCo11Text1:
 	text_asm
@@ -420,10 +478,4 @@ OmegaBattleText:
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 
-OmegaText:
-	call Delay3
-	text_asm
-	ld hl, OmegaTrainerHeader
-	call TalkToTrainer
-	ld [wJoyIgnore], a
-	jp TextScriptEnd
+

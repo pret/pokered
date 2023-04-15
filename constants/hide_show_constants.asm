@@ -195,6 +195,7 @@ DEF SHOW EQU $15
 	const HS_SILPH_CO_11F_1                ; B7
 	const HS_SILPH_CO_11F_2                ; B8
 	const HS_SILPH_CO_11F_3                ; B9
+	const HS_OMEGA                       
 	const HS_UNUSED_MAP_F4_1               ; BA XXX sprite doesn't exist
 	const HS_POKEMON_MANSION_2F_ITEM       ; BB X
 	const HS_POKEMON_MANSION_3F_ITEM_1     ; BC X
@@ -240,7 +241,6 @@ DEF SHOW EQU $15
 	const HS_WUGTRIO	          		   ; E4 
 	const HS_MEW	                       ; E5 
 	const HS_MOLTRES					   ; E6 
-	; const HS_OMEGA                       ; E7 X
 	const HS_OLD_SEA_CHART				; E8 
 	const HS_POKEMON_MANSION_B2F_ITEM_1 ; E9
 	const HS_POKEMON_MANSION_B2F_ITEM_2 ; EA
