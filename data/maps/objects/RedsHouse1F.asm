@@ -2,7 +2,11 @@ RedsHouse1F_Object:
 	db $a ; border block
 
 	def_warp_events
+IF DEF(_DEBUG)
+	warp_event  2,  7, REDS_HOUSE_1F_DEBUG_WARP_MAP, REDS_HOUSE_1F_DEBUG_WARP_WHICH
+ELSE
 	warp_event  2,  7, LAST_MAP, 1
+ENDC
 	warp_event  3,  7, LAST_MAP, 1
 	warp_event  7,  1, REDS_HOUSE_2F, 1
 

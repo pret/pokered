@@ -3,7 +3,7 @@ PalletTown_Object:
 
 	def_warp_events
 IF DEF(_DEBUG)
-	warp_event  5,  5, PALLET_DEBUG_WARP, 1
+	warp_event  5,  5, PALLET_DEBUG_WARP_MAP, PALLET_DEBUG_WARP_WHICH
 ELSE
 	warp_event  5,  5, REDS_HOUSE_1F, 1
 ENDC

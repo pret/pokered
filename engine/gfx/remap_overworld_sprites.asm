@@ -33,6 +33,33 @@ RemapSpritePictureIDs::
 
 INCLUDE "data/sprites/alt_sprite_mappings.asm"
 
+LoopCheckSpriteReloadNeeded::
+	ld a, [wNumSprites]
+	ld bc, wMapSpriteOriginalPictureIDs
+	ld hl, AltSpriteMappingTable
+	ld de, 2
+.loop
+	push bc
+	push af
+	ld a, [bc]
+	push hl
+	push de
+	call IsInArray
+	pop de
+	pop hl
+	jr c, .remapNeeded
+	pop af
+	pop bc
+	inc bc
+	dec a
+	and a ; clear carry
+	ret z
+	jr .loop
+.remapNeeded
+	pop bc ; gets rid of the stored af but without potentially affecting the carry flag
+	pop bc ; gets rid of the stored bc
+	ret
+
 LoopRemapSpritePictureIDs::
 	ld hl, wSprite01StateData1PictureID
 	ld bc, wMapSpriteOriginalPictureIDs

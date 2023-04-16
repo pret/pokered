@@ -120,6 +120,11 @@ SetSpriteOptionsFromCursorPositions:
 	ld a, [wInGame]
 	and a
 	ret z ; if we're not in game yet, don't do anything else
+	ld a, [wNumSprites]
+	and a
+	ret z ; if no non-player sprites in the current map, don't do anything else
+	callfar LoopCheckSpriteReloadNeeded
+	ret nc ; if no sprites that are remappable are found in the current map, don't do anything else
 	call GBPalWhiteOut
 	callfar LoopRemapSpritePictureIDs ; if we did, modify the sprites in wram to have the correct IDs
 	call ReloadMapSpriteTilePatterns ; reload their tiles so they have the right sprites
