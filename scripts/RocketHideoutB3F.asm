@@ -28,7 +28,7 @@ RocketHideoutB3FDefaultScript:
 	call StartSimulatingJoypadStates
 	ld a, SFX_ARROW_TILES
 	call PlaySound
-	ld a, (A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN)
+	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	ld a, SCRIPT_ROCKETHIDEOUTB3F_PLAYER_SPINNING
 	ld [wCurMapScript], a

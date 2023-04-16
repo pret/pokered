@@ -26,7 +26,7 @@ PokemonTower5FDefaultScript:
 	ret nz
 	xor a
 	ldh [hJoyHeld], a
-	ld a, (D_RIGHT | D_LEFT | D_UP | D_DOWN)
+	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	ld hl, wd72e
 	set 4, [hl]

@@ -81,7 +81,7 @@ VermilionCityPlayerAllowedToPassScript:
 	ret
 
 VermilionCityPlayerExitShipScript:
-	ld a, (A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN)
+	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	ld a, D_UP
 	ld [wSimulatedJoypadStatesEnd], a

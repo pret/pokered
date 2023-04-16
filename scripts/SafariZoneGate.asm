@@ -21,7 +21,7 @@ SafariZoneGateDefaultScript:
 	ld a, TEXT_SAFARIZONEGATE_SAFARI_ZONE_WORKER1_1
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld a, (A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN)
+	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	xor a
 	ldh [hJoyHeld], a
@@ -37,7 +37,7 @@ SafariZoneGateDefaultScript:
 	ld a, D_RIGHT
 	ld c, $1
 	call SafariZoneEntranceAutoWalk
-	ld a, (D_RIGHT | D_LEFT | D_UP | D_DOWN)
+	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	ld a, SCRIPT_SAFARIZONEGATE_PLAYER_MOVING_RIGHT
 	ld [wSafariZoneGateCurScript], a
@@ -59,7 +59,7 @@ SafariZoneGateWouldYouLikeToJoinScript:
 	ld a, TEXT_SAFARIZONEGATE_SAFARI_ZONE_WORKER1_WOULD_YOU_LIKE_TO_JOIN
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld a, (A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN)
+	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	ret
 
@@ -79,7 +79,7 @@ SafariZoneGateLeavingSafariScript:
 	jr z, .leaving_early
 	ResetEventReuseHL EVENT_IN_SAFARI_ZONE
 	call UpdateSprites
-	ld a, (D_RIGHT | D_LEFT | D_UP | D_DOWN)
+	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	ld a, TEXT_SAFARIZONEGATE_SAFARI_ZONE_WORKER1_GOOD_HAUL_COME_AGAIN
 	ldh [hSpriteIndexOrTextID], a

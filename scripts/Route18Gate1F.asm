@@ -55,7 +55,7 @@ Route18Gate1FPlayerMovingUpScript:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
-	ld a, (D_RIGHT | D_LEFT | D_UP | D_DOWN)
+	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 
 Route18Gate1FGuardScript:

@@ -50,13 +50,13 @@ PokemonTower6FMarowakBattleScript:
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, PokemonTower6FSetDefaultScript
-	ld a, (A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN)
+	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	ld a, [wd72d]
 	bit 6, a
 	ret nz
 	call UpdateSprites
-	ld a, (D_RIGHT | D_LEFT | D_UP | D_DOWN)
+	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	ld a, [wBattleResult]
 	and a

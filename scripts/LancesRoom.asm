@@ -95,7 +95,7 @@ LancesRoomLanceEndBattleScript:
 
 WalkToLance:
 ; Moves the player down the hallway to Lance's room.
-	ld a, (A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN)
+	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	ld hl, wSimulatedJoypadStatesEnd
 	ld de, WalkToLance_RLEList

@@ -126,7 +126,7 @@ OaksLabFollowedOakedScript:
 	ret
 
 OaksLabOakChooseMonSpeechScript:
-	ld a, (SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN)
+	ld a, SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	ld a, TEXT_OAKSLAB_RIVAL_FED_UP_WITH_WAITING
 	ldh [hSpriteIndexOrTextID], a
@@ -293,7 +293,7 @@ OaksLabRivalChoosesStarterScript:
 	ld a, [wd730]
 	bit 0, a
 	ret nz
-	ld a, (SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN)
+	ld a, SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	ld a, OAKSLAB_RIVAL
 	ldh [hSpriteIndex], a
@@ -416,7 +416,7 @@ OaksLabRivalStartBattleScript:
 	ret
 
 OaksLabRivalEndBattleScript:
-	ld a, (D_RIGHT | D_LEFT | D_UP | D_DOWN)
+	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	ld a, PLAYER_DIR_UP
 	ld [wPlayerMovingDirection], a
@@ -557,7 +557,7 @@ OaksLabOakGivesPokedexScript:
 	ret nz
 	call EnableAutoTextBoxDrawing
 	call PlayDefaultMusic
-	ld a, (SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN)
+	ld a, SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	call OaksLabRivalFaceUpOakFaceDownScript
 	ld a, TEXT_OAKSLAB_RIVAL_WHAT_DID_YOU_CALL_ME_FOR
@@ -931,7 +931,7 @@ OaksLabMonChoiceMenu:
 	call AddPartyMon
 	ld hl, wd72e
 	set 3, [hl]
-	ld a, (SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN)
+	ld a, SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	ld a, SCRIPT_OAKSLAB_CHOSE_STARTER_SCRIPT
 	ld [wOaksLabCurScript], a

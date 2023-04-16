@@ -45,7 +45,7 @@ ViridianGymDefaultScript:
 	set 7, [hl]
 	ld a, SFX_ARROW_TILES
 	call PlaySound
-	ld a, (A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN)
+	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	ld a, SCRIPT_VIRIDIANGYM_PLAYER_SPINNING
 	ld [wCurMapScript], a
@@ -132,7 +132,7 @@ ViridianGymGiovanniPostBattle:
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, ViridianGymResetScripts
-	ld a, (D_RIGHT | D_LEFT | D_UP | D_DOWN)
+	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 ; fallthrough
 ViridianGymReceiveTM27:
