@@ -44,7 +44,7 @@ ItemUsePtrTable:
 	dw ItemUseBait       ; SAFARI_BAIT
 	dw ItemUseRock       ; SAFARI_ROCK
 	dw ValuableItem 	 ; OLD_COIN
-	dw UnusableItem      ; UNUSED_ITEM2
+	dw UseTopSecretKey  ; TOPSECRETKEY
 	dw UnusableItem      ; UNUSED_ITEM3
 	dw UnusableItem      ; UNUSED_ITEM4
 	dw UnusableItem      ; UNUSED_ITEM5
@@ -3433,3 +3433,12 @@ GetReceivedMonPointer:
 	ld d, h
 	ld e, l
 	ret
+
+; PureRGBnote: ADDED: text topsecretkey (small hint)
+UseTopSecretKey:
+	ld hl, TopSecretKeyText
+	jp ItemUseFailed
+
+TopSecretKeyText:
+	text_far _TopSecretKeyText
+	text_end

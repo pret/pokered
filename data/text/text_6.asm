@@ -270,6 +270,19 @@ _ItemUseValuableText::
 	line "be a good idea."
 	prompt
 
+_TopSecretKeyText::
+	text "This key looks"
+	line "similar to the"
+	cont "SECRET KEY."
+	para "It's a lot more"
+	line "worn though."
+	para "What's it open?"
+	para "Maybe a door on"
+	line "CINNABAR ISLAND?"
+	para "It says -B2F-"
+	line "on it."
+	prompt
+
 _ItemUseFossilText::
 	text "This fossil is"
 	line "fun to admire!"

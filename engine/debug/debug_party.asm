@@ -183,6 +183,7 @@ DebugItemsList:
 	db POCKET_ABRA, 1
 	db HM_SURF, 1
 	db HM_FLY, 1
+	db TOPSECRETKEY, 1
 	db -1 ; end
 
 DebugUnusedList:
