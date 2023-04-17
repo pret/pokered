@@ -50,7 +50,7 @@
 	const MACHOKE            ; $29
 	const MR_MIME            ; $2A
 	const HITMONLEE          ; $2B
-	const HITMONCHAN         ; $2C
+	const HITMONCHAN         ; $2C - Heart Stone (Evo Stone Glitch)
 	const ARBOK              ; $2D
 	const PARASECT           ; $2E
 	const PSYDUCK            ; $2F - Leaf Stone (Evo Stone Glitch)
