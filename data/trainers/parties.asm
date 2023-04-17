@@ -86,7 +86,7 @@ BugCatcherData:
 ; Viridian Forest
 	db 6, WEEDLE, CATERPIE, 0
 	db 7, CATERPIE, KAKUNA, PARA, 0
-	db 9, WEEDLE, VENONAT, 0
+	db 9, VENONAT, 0
 ; Route 3
 	db 10, CATERPIE, WEEDLE, PARA, 0
 	db 9, WEEDLE, KAKUNA, CATERPIE, METAPOD, 0
@@ -131,7 +131,7 @@ LassData:
 	db 19, PIDGEY, RATTATA, NIDORAN_M, MEOWTH, PIKACHU, 0
 	db 22, CLEFAIRY, CLEFAIRY, 0
 ; Celadon Gym
-	db 23, BELLSPROUT, WEEPINBELL, 0
+	db 23, LEAFEON, 0
 	db 23, ODDISH, GLOOM, 0
 ; New - this will be used in the Silph Gauntlet
 	; db 62, PERSIAN, CLEFABLE, VILEPLUME, WIGGLYTUFF, POLITOED, NIDOQUEEN, 0
@@ -147,7 +147,7 @@ SailorData:
 	db 17, HORSEA, HORSEA, HORSEA, 0
 	db 20, MACHOP, 0
 ; Vermilion Gym
-	db 21, PIKACHU, PIKACHU, 0
+	db 21, KOTORA, GAOTORA, 0
 ; New - this will be used in the Silph Gauntlet
 	; db 64, KINGDRA, MACHAMP, CLOYSTER, STARMIE, GOROCHU, TENTACRUEL, 0
 
@@ -171,7 +171,7 @@ JrTrainerMData:
 
 JrTrainerFData:
 ; Cerulean Gym
-	db 19, GOLDEEN, 0
+	db 19, GYOPIN, GOLDEEN, 0
 ; Route 6
 	db 16, RATTATA, PIKACHU, 0
 	db 16, PIDGEY, PIDGEY, PIDGEY, 0
@@ -227,7 +227,7 @@ PokemaniacData:
 SuperNerdData:
 ; Mt. Moon 1F
 	db 11, MAGNEMITE, VOLTORB, 0
-; Mt. Moon B2F
+; Mt. Moon B2F - the fossil guy fight
 	db 12, GRIMER, VOLTORB, KOFFING, 0
 ; Route 8
 	db 20, VOLTORB, KOFFING, VOLTORB, MAGNEMITE, 0
@@ -238,10 +238,10 @@ SuperNerdData:
 	db 25, MAGNETITE, ELECTRODE, KABUTO, OMANYTE, 0 ; - used in celadon university
 	db 63, MAGNEZONE, MUK, KABUTOPS, OMASTAR, PORYGONZ, MAGMORTAR, 0 ; - used in Silph Gauntlet
 ; Cinnabar Gym
-	db 36, VULPIX, VULPIX, NINETALES, 0
-	db 34, PONYTA, CHARMANDER, VULPIX, GROWLITHE, 0
-	db 41, RAPIDASH, 0
-	db 37, GROWLITHE, VULPIX, 0
+	db 36, VULPIX, NINETALES, CHARIZARD, 0
+	db 34, PONYTA, CHARMANDER, RAPIDASH, ARCANINE, 0
+	db 41, FLAREON, 0
+	db 37, MAGMAR, MAGMORTAR, 0
 
 HikerData:
 ; Mt. Moon 1F
@@ -307,9 +307,9 @@ BurglarData:
 	db 33, GROWLITHE, 0
 	db 28, VULPIX, CHARMANDER, PONYTA, 0
 ; Cinnabar Gym
-	db 36, GROWLITHE, VULPIX, NINETALES, 0
-	db 41, PONYTA, 0
-	db 37, VULPIX, GROWLITHE, 0
+	db 36, GROWLITHE, VULPIX, ARCANINE, 0
+	db 41, RAPIDASH, 0
+	db 37, VULPIX, NINETALES, 0
 ; Mansion 2F
 	db 34, CHARMANDER, CHARMELEON, 0
 ; Mansion 3F
@@ -354,7 +354,7 @@ SwimmerData:
 	db 27, HORSEA, TENTACOOL, TENTACOOL, GOLDEEN, 0
 	db 29, GOLDEEN, SHELLDER, SEAKING, 0
 	db 30, HORSEA, HORSEA, 0
-;	db 27, TENTACOOL, TENTACOOL, STARYU, HORSEA, TENTACRUEL, 0 - removed to free space for oak teams
+	db 27, TENTACOOL, TENTACOOL, STARYU, HORSEA, TENTACRUEL, 0 ;- removed to free space for oak teams
 ; Route 20
 	db 31, SHELLDER, CLOYSTER, 0
 	db 35, STARYU, 0
@@ -394,9 +394,9 @@ GamblerData:
 
 BeautyData:
 ; Celadon Gym
-	db 21, ODDISH, BELLSPROUT, ODDISH, BELLSPROUT, 0
-	db 24, BELLSPROUT, BELLSPROUT, 0
-	db 26, EXEGGCUTE, 0
+	db 21, ODDISH, BELLSPROUT, WEEPINBELL, 0
+	db 24, TOEDSCOOL, MONJA, 0
+	db 26, DEER, 0
 ; Route 13
 	db 27, RATTATA, PIKACHU, RATTATA, 0
 	db 29, CLEFAIRY, MEOWTH, 0
@@ -425,7 +425,7 @@ PsychicData:
 
 RockerData:
 ; Vermilion Gym
-	db 20, VOLTORB, MAGNEMITE, VOLTORB, 0
+	db 20, VOLTORB, MAGNEMITE, MAGNETITE, 0
 ; Route 12
 	db 29, VOLTORB, ELECTRODE, 0
 
@@ -434,17 +434,17 @@ JugglerData:
 	db 29, KADABRA, MR_MIME, 0
 ; Victory Road 2F
 	db 41, DROWZEE, HYPNO, KADABRA, KADABRA, 0
-; Fuchsia Gym (will be moved to Saffron Gym instead)
-	db 31, DROWZEE, DROWZEE, KADABRA, DROWZEE, 0
-	db 34, DROWZEE, HYPNO, 0
+; Fuchsia Gym
+	db 31, BEEDRILL, HAUNTER, VILEPLUME, 0
+	db 34, TENTACOOL, TENTACRUEL, 0
 ; Victory Road 2F
 	db 48, MR_MIME, 0
 ; Unused - this will be used in the Silph Gauntlet
 	db 65, HYPNO, MR_MIME, ALAKAZAM, ELECTRODE, GENGAR, SLOWKING, 0
 ; Fuchsia Gym
 	db 38, UMBREON, 0
-; Fuchsia Gym  (will be moved to Saffron Gym instead)
-	db 34, DROWZEE, KADABRA, 0
+; Fuchsia Gym
+	db 34, WEEPINBELL, TSUBOMITTO, 0
 
 TamerData:
 ; Fuchsia Gym
@@ -515,7 +515,7 @@ ScientistData:
 ; Mansion B1F
 	db 34, MAGNEMITE, ELECTRODE, 0
 
-RocketData:
+RocketData: ; restoring these so undefined stuff isn't pulled RIGHT NOW
 ; Mt. Moon B2F
 	db 13, RATTATA, BITTYBAT, 0
 	db 11, SANDSHREW, RATTATA, BITTYBAT, 0
@@ -550,31 +550,31 @@ RocketData:
 ; Unused - this will be used in the Silph Gauntlet
 	db 65, PERSIAN, ARBOK, WEEZING, CROBAT, HYPNO, GUARDIA, 0
 ; Silph Co. 2F - cut
-	;db 29, CUBONE, ZUBAT, 0
-	;db 25, GOLBAT, ZUBAT, ZUBAT, RATICATE, ZUBAT, 0
+	db 29, CUBONE, ZUBAT, 0
+	db 25, GOLBAT, ZUBAT, ZUBAT, RATICATE, ZUBAT, 0
 ; Silph Co. 3F
 	db 28, RATICATE, HYPNO, RATICATE, 0
 ; Silph Co. 4F - cut
-	;db 29, MACHOP, DROWZEE, 0
-	;db 28, EKANS, ZUBAT, CUBONE, 0
+	db 29, MACHOP, DROWZEE, 0
+	db 28, EKANS, ZUBAT, CUBONE, 0
 ; Silph Co. 5F - cut
-	;db 33, ARBOK, 0
-	;db 33, HYPNO, 0
+	db 33, ARBOK, 0
+	db 33, HYPNO, 0
 ; Silph Co. 6F - cut
-	;db 29, MACHOP, MACHOKE, 0
-	;db 28, ZUBAT, ZUBAT, GOLBAT, 0
+	db 29, MACHOP, MACHOKE, 0
+	db 28, ZUBAT, ZUBAT, GOLBAT, 0
 ; Silph Co. 7F
 	db 26, RATICATE, ARBOK, KOFFING, GOLBAT, 0
 	db 29, CUBONE, CUBONE, 0
 	db 29, SANDSHREW, SANDSLASH, 0
 ; Silph Co. 8F - cut
-	;db 26, RATICATE, ZUBAT, GOLBAT, RATTATA, 0
-	;db 28, WEEZING, GOLBAT, KOFFING, 0
+	db 26, RATICATE, ZUBAT, GOLBAT, RATTATA, 0
+	db 28, WEEZING, GOLBAT, KOFFING, 0
 ; Silph Co. 9F - cut
-	;db 28, DROWZEE, GRIMER, MACHOP, 0
-	;db 28, GOLBAT, DROWZEE, HYPNO, 0
+	db 28, DROWZEE, GRIMER, MACHOP, 0
+	db 28, GOLBAT, DROWZEE, HYPNO, 0
 ; Silph Co. 10F - cut
-	;db 33, MACHOKE, 0
+	db 33, MACHOKE, 0
 ; Silph Co. 11F
 	db 25, RATTATA, RATTATA, ZUBAT, RATTATA, EKANS, 0
 	db 32, CUBONE, DROWZEE, MAROWAK, 0
@@ -595,11 +595,11 @@ CooltrainerMData:
 	db 44, KINGLER, CLOYSTER, 0
 ; Viridian Gym
 	db 39, SANDSLASH, DUGTRIO, 0
-	db 43, RHYHORN, 0
+	db 43, NIDOKING, 0
 
 CooltrainerFData:
 ; Celadon Gym
-	db 24, WEEPINBELL, GLOOM, IVYSAUR, 0
+	db 24, CACTUS, GLOOM, 0
 ; Victory Road 3F
 	db 43, BELLSPROUT, WEEPINBELL, VICTREEBEL, 0
 	db 43, PARASECT, DEWGONG, CHANSEY, 0
@@ -657,16 +657,18 @@ ChannelerData:
 	db 22, GASTLY, CUBONE, HAUNTER, 0
 	db 24, GASTLY, VULPIX, 0
 	db 30, HAUNTER, 0
-; Saffron Gym (will be moved to Fuchsia Gym instead)
-	db 34, GASTLY, HAUNTER, 0
-	db 38, HAUNTER, 0
-	db 33, GASTLY, GASTLY, HAUNTER, 0
+; Saffron Gym
+	db 34, DROWZEE, HYPNO, 0
+	db 38, ESPEON, 0
+	db 33, JYNX, EXEGGCUTE, KADABRA, 0
 
 StudentData:
 	db 6, PIDGEY, HINAAZU, 0
 	db 4, CLEFAIRY, 0
 
 FirefighterData:
+; For Cerulean Gym
+	db 15, POLIWAG, SQUIRTLE, CHEEP, 0
 
 JuniorData:
 

@@ -127,8 +127,8 @@ BlackbeltData:
 	db 36, SIRFETCHD, 0
 	db 31, MACHOP, MANKEY, PRIMEAPE, 0
 ; Viridian Gym	- changed to fit the Ground-type gym theme
-	db 40, GRAVELER, GOLEM, 0
-	db 43, RHYDON, 0
-	db 38, RHYHORN, ONIX, STEELIX, 0
+	db 40, SANDSLASH, GOLEM, 0
+	db 43, GUARDIA, 0
+	db 38, CACTUS, DUGTRIO, STEELIX, 0
 ; Victory Road 2F
 	db 43, MACHOKE, MACHOP, MACHOKE, 0
