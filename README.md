@@ -154,13 +154,10 @@ Known Bugs
 - Only portions of spinner tiles animate.
 - Occasionally, menu text sets itself to scroll.
 - The lone Rocket in Viridian Gym's basement needs to be directly spoken to to be battled
-- Yujirou isn't properly re-fightable
-- Fix warps from Viridian Pre-Gym, currently goes to Fuschia which is hilarious. 
-- Mew needs to disappear after being captured etc (only seems to happen sometimes?)
 - Should be able to fly from Faraway (reposition in map listing)
-- Item descriptions are offset by a bit
 - Strength boulders don't fall down holes
 - Pokedex is very laggy
+- When fighting Omega in Silph Co., the Rocket you fight beforehand will disappear.
 
 Evolution Methods for new Pokemon
 ====
