@@ -161,7 +161,7 @@ VermilionCityTextSSAnneDeparted:
 VermilionCityText3:
 	text_asm
 	ld a, [wObtainedBadges]
-	bit 4, a ; after obtaining soul badge the ship returns
+	bit 5, a ; after obtaining marsh badge the ship returns
 	jr nz, .default
 	CheckEvent EVENT_SS_ANNE_LEFT
 	jr nz, .shipHasDeparted
@@ -244,7 +244,7 @@ VermilionCityText14:
 VermilionCityText6:
 	text_asm
 	ld a, [wObtainedBadges]
-	bit 4, a ; after obtaining the soul badge the ship returns
+	bit 5, a ; after obtaining the marsh badge the ship returns
 	jr z, .default
 	ld hl, VermilionCityText15
 	ret

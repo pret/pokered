@@ -38,7 +38,7 @@ VermilionDock_Script:
 
 VermilionDock_1db9b:
 	ld a, [wObtainedBadges]
-	bit 4, a ; after obtaining 4 badges the ship returns
+	bit 5, a ; after obtaining the marsh badge the ship returns
 	ret nz
 	SetEventForceReuseHL EVENT_SS_ANNE_LEFT
 	ld a, SFX_STOP_ALL_MUSIC

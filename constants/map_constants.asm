@@ -50,7 +50,7 @@ DEF FIRST_ROUTE_MAP EQU const_value
 	mapconst ROUTE_17,                      72, 10 ; $1D
 	mapconst ROUTE_18,                       9, 25 ; $1E
 	mapconst ROUTE_19,                      27, 10 ; $1F
-	mapconst ROUTE_20,                      15, 50 ; $10
+	mapconst ROUTE_20,                      15, 50 ; $20
 	mapconst ROUTE_21,                      45, 10 ; $21
 	mapconst ROUTE_22,                       9, 20 ; $22
 	mapconst ROUTE_23,                      72, 10 ; $23
@@ -67,7 +67,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	mapconst VIRIDIAN_NICKNAME_HOUSE,        4,  4 ; $2D
 	mapconst VIRIDIAN_GYM,                   9, 10 ; $2E
 	mapconst DIGLETTS_CAVE_ROUTE_2,          4,  4 ; $2F
-	mapconst VIRIDIAN_FOREST_NORTH_GATE,     4,  5 ; $20
+	mapconst VIRIDIAN_FOREST_NORTH_GATE,     4,  5 ; $30
 	mapconst ROUTE_2_TRADE_HOUSE,            4,  4 ; $31
 	mapconst ROUTE_2_GATE,                   4,  5 ; $32
 	mapconst VIRIDIAN_FOREST_SOUTH_GATE,     4,  5 ; $33
@@ -83,13 +83,13 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	mapconst MT_MOON_B1F,                   14, 14 ; $3D
 	mapconst MT_MOON_B2F,                   18, 20 ; $3E
 	mapconst CERULEAN_TRASHED_HOUSE,         4,  4 ; $3F
-	mapconst CERULEAN_TRADE_HOUSE,           4,  4 ; $30
+	mapconst CERULEAN_TRADE_HOUSE,           4,  4 ; $40
 	mapconst CERULEAN_POKECENTER,            4,  7 ; $41
 	mapconst CERULEAN_GYM,                   7,  5 ; $42
 	mapconst BIKE_SHOP,                      4,  4 ; $43
 	mapconst CERULEAN_MART,                  4,  4 ; $44
 	mapconst MT_MOON_POKECENTER,             4,  7 ; $45
-	mapconst VIRIDIAN_PRE_GYM,			     7,  5 ; $46	- was CERULEAN_TRASHED_HOUSE_COPY
+	mapconst VIRIDIAN_PRE_GYM,		     7,  5 ; $46	- was CERULEAN_TRASHED_HOUSE_COPY
 	mapconst ROUTE_5_GATE,                   3,  4 ; $47
 	mapconst UNDERGROUND_PATH_ROUTE_5,       4,  4 ; $48
 	mapconst DAYCARE,                        4,  4 ; $49
@@ -99,7 +99,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	mapconst ROUTE_7_GATE,                   4,  3 ; $4D
 	mapconst UNDERGROUND_PATH_ROUTE_7,       4,  4 ; $4E
 	mapconst UNDERGROUND_PATH_ROUTE_7_COPY,  4,  4 ; $4F	- Unused
-	mapconst ROUTE_8_GATE,                   4,  3 ; $40
+	mapconst ROUTE_8_GATE,                   4,  3 ; $50
 	mapconst UNDERGROUND_PATH_ROUTE_8,       4,  4 ; $51
 	mapconst ROCK_TUNNEL_POKECENTER,         4,  7 ; $52
 	mapconst ROCK_TUNNEL_1F,                18, 20 ; $53
@@ -115,7 +115,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	mapconst VERMILION_GYM,                  9,  5 ; $5D
 	mapconst VERMILION_PIDGEY_HOUSE,         4,  4 ; $5E
 	mapconst VERMILION_DOCK,                 6, 14 ; $5F
-	mapconst SS_ANNE_1F,                     9, 20 ; $50
+	mapconst SS_ANNE_1F,                     9, 20 ; $60
 	mapconst SS_ANNE_2F,                     9, 20 ; $61
 	mapconst SS_ANNE_3F,                     3, 10 ; $62
 	mapconst SS_ANNE_B1F,                    4, 15 ; $63
@@ -131,7 +131,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	mapconst VICTORY_ROAD_1F,                9, 10 ; $6D
 	mapconst SILPH_GAUNTLET_4F,              9, 10 ; $6E	- Was UNUSED_MAP_6D
 	mapconst SILPH_GAUNTLET_5F,              9, 10 ; $6F	- Was UNUSED_MAP_6E
-	mapconst SILPH_GAUNTLET_6F,             12, 12 ; $60	- Was UNUSED_MAP_6F
+	mapconst SILPH_GAUNTLET_6F,             12, 12 ; $70	- Was UNUSED_MAP_6F
 	mapconst SILPH_GAUNTLET_7F,              5,  6 ; $71	- Was UNUSED_MAP_70
 	mapconst LANCES_ROOM,                   13, 13 ; $72
 	mapconst FARAWAY_ISLAND_OUTSIDE,       18,  15 ; $73	- Was UNUSED_MAP_72
@@ -147,7 +147,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	mapconst CELADON_MART_3F,                4, 10 ; $7D
 	mapconst CELADON_MART_4F,                4, 10 ; $7E
 	mapconst CELADON_MART_ROOF,              4, 10 ; $7F
-	mapconst CELADON_MART_ELEVATOR,          2,  2 ; $70
+	mapconst CELADON_MART_ELEVATOR,          2,  2 ; $80
 	mapconst CELADON_MANSION_1F,             6,  4 ; $81
 	mapconst CELADON_MANSION_2F,             6,  4 ; $82
 	mapconst CELADON_MANSION_3F,             6,  4 ; $83
@@ -163,10 +163,10 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	mapconst CELADON_HOTEL,                  4,  7 ; $8D
 	mapconst LAVENDER_POKECENTER,            4,  7 ; $8E
 	mapconst POKEMON_TOWER_1F,               9, 10 ; $8F
-	mapconst POKEMON_TOWER_2F,               9, 10 ; $80
-	mapconst POKEMON_TOWER_3F,               9, 10 ; $91	- Now unused
-	mapconst POKEMON_TOWER_4F,               9, 10 ; $92	- Now unused
-	mapconst POKEMON_TOWER_5F,               9, 10 ; $93	- Now unused
+	mapconst POKEMON_TOWER_2F,               9, 10 ; $90
+	mapconst POKEMON_TOWER_3F,               9, 10 ; $91	- Currently unused
+	mapconst POKEMON_TOWER_4F,               9, 10 ; $92	- Currently unused
+	mapconst POKEMON_TOWER_5F,               9, 10 ; $93	- Currently unused
 	mapconst POKEMON_TOWER_6F,               9, 10 ; $94
 	mapconst POKEMON_TOWER_7F,               9, 10 ; $95
 	mapconst MR_FUJIS_HOUSE,                 4,  4 ; $96
@@ -179,7 +179,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	mapconst SAFARI_ZONE_GATE,               3,  4 ; $9D
 	mapconst FUCHSIA_GYM,                    9,  5 ; $9E
 	mapconst FUCHSIA_MEETING_ROOM,           4,  7 ; $9F
-	mapconst SEAFOAM_ISLANDS_B1F,            9, 15 ; $90
+	mapconst SEAFOAM_ISLANDS_B1F,            9, 15 ; $A0
 	mapconst SEAFOAM_ISLANDS_B2F,            9, 15 ; $A1
 	mapconst SEAFOAM_ISLANDS_B3F,            9, 15 ; $A2
 	mapconst SEAFOAM_ISLANDS_B4F,            9, 15 ; $A3
@@ -195,7 +195,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	mapconst CINNABAR_MART,                  4,  4 ; $AD
 	mapconst CINNABAR_MART_COPY,             4,  4 ; $AE	- Unused
 	mapconst INDIGO_PLATEAU_LOBBY,           6,  8 ; $AF
-	mapconst COPYCATS_HOUSE_1F,              4,  4 ; $A0
+	mapconst COPYCATS_HOUSE_1F,              4,  4 ; $B0
 	mapconst COPYCATS_HOUSE_2F,              4,  4 ; $B1
 	mapconst FIGHTING_DOJO,                  6,  5 ; $B2
 	mapconst SAFFRON_GYM,                    9, 10 ; $B3
@@ -211,7 +211,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	mapconst ROUTE_16_FLY_HOUSE,             4,  4 ; $BD
 	mapconst ROUTE_12_SUPER_ROD_HOUSE,       4,  4 ; $BE
 	mapconst ROUTE_18_GATE_1F,               5,  4 ; $BF
-	mapconst ROUTE_18_GATE_2F,               4,  4 ; $B0
+	mapconst ROUTE_18_GATE_2F,               4,  4 ; $C0
 	mapconst SEAFOAM_ISLANDS_1F,             9, 15 ; $C1
 	mapconst ROUTE_22_GATE,                  4,  5 ; $C2
 	mapconst VICTORY_ROAD_2F,                9, 15 ; $C3
@@ -220,14 +220,14 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	mapconst DIGLETTS_CAVE,                 18, 20 ; $C6
 	mapconst VICTORY_ROAD_3F,                9, 15 ; $C7
 	mapconst ROCKET_HIDEOUT_B1F,            14, 11 ; $C8
-	mapconst ROCKET_HIDEOUT_B2F,            14, 15 ; $C9	- Now unused, Citrine PokeCenter?
-	mapconst ROCKET_HIDEOUT_B3F,            14, 15 ; $CA	- Now unused, Citrine PokeMart?
-	mapconst ROCKET_HIDEOUT_B4F,            12, 15 ; $CB	- Now unused, Citrine House 1?
-	mapconst ROCKET_HIDEOUT_ELEVATOR,        4,  3 ; $CC	- Now unused, Citrine Dock?
-	mapconst UNUSED_MAP_CC,                  0,  0 ; $CD	- Unused, Citrine House 2?
-	mapconst UNUSED_MAP_CD,                  0,  0 ; $CE	- Unused, Citrine Cave 1F?
-	mapconst UNUSED_MAP_CE,                  0,  0 ; $CF	- Unused, Citrine Cave B1F?
-	mapconst SILPH_CO_2F,                    9, 15 ; $C0
+	mapconst ROCKET_HIDEOUT_B2F,            14, 15 ; $C9	- Currently unused
+	mapconst ROCKET_HIDEOUT_B3F,            14, 15 ; $CA	- Currently unused
+	mapconst ROCKET_HIDEOUT_B4F,            12, 15 ; $CB	- Currently unused
+	mapconst ROCKET_HIDEOUT_ELEVATOR,        4,  3 ; $CC	- Currently unused
+	mapconst UNUSED_MAP_CC,                  0,  0 ; $CD	- Unused
+	mapconst UNUSED_MAP_CD,                  0,  0 ; $CE	- Unused
+	mapconst UNUSED_MAP_CE,                  0,  0 ; $CF	- Unused
+	mapconst SILPH_CO_2F,                    9, 15 ; $D0
 	mapconst SILPH_CO_3F,                    9, 15 ; $D1
 	mapconst SILPH_CO_4F,                    9, 15 ; $D2
 	mapconst SILPH_CO_5F,                    9, 15 ; $D3
@@ -243,7 +243,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	mapconst SAFARI_ZONE_CENTER,            13, 15 ; $DD
 	mapconst SAFARI_ZONE_CENTER_REST_HOUSE,  4,  4 ; $DE
 	mapconst SAFARI_ZONE_SECRET_HOUSE,       4,  4 ; $DF
-	mapconst SAFARI_ZONE_WEST_REST_HOUSE,    4,  4 ; $D0
+	mapconst SAFARI_ZONE_WEST_REST_HOUSE,    4,  4 ; $E0
 	mapconst SAFARI_ZONE_EAST_REST_HOUSE,    4,  4 ; $E1
 	mapconst SAFARI_ZONE_NORTH_REST_HOUSE,   4,  4 ; $E2
 	mapconst CERULEAN_CAVE_2F,               9, 15 ; $E3
@@ -259,14 +259,14 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	mapconst SILPH_CO_ELEVATOR,              2,  2 ; $ED
 	mapconst UNUSED_MAP_ED,                  0,  0 ; $EE	- Unused
 	mapconst UNDERWATER_TUNNEL,              9, 15 ; $EF	- Was UNUSED_MAP_EE
-	mapconst TRADE_CENTER,                   4,  5 ; $E0
-	mapconst COLOSSEUM,                      4,  5 ; $F2
-	mapconst CELADON_UNIVERSITY_INSIDE,     10, 11 ; $F3	- Was UNUSED_MAP_F1
-	mapconst CELADON_UNIVERSITY_POKECENTER,  4,  7 ; $F4	- Was UNUSED_MAP_F2
-	mapconst BILLS_GARDEN,                   9,  8 ; $F5	- Was UNUSED_MAP_F3
-	mapconst LORELEIS_ROOM,                  6,  5 ; $F6
-	mapconst BRUNOS_ROOM,                    6,  5 ; $F7
-	mapconst AGATHAS_ROOM,                   6,  5 ; $F8	- Maps F9 - FE currently have no data
+	mapconst TRADE_CENTER,                   4,  5 ; $F0
+	mapconst COLOSSEUM,                      4,  5 ; $F1
+	mapconst CELADON_UNIVERSITY_INSIDE,     10, 11 ; $F2	- Was UNUSED_MAP_F1
+	mapconst CELADON_UNIVERSITY_POKECENTER,  4,  7 ; $F3	- Was UNUSED_MAP_F2
+	mapconst BILLS_GARDEN,                  10, 10 ; $F4	- Was UNUSED_MAP_F3
+	mapconst LORELEIS_ROOM,                  6,  5 ; $F5
+	mapconst BRUNOS_ROOM,                    6,  5 ; $F6
+	mapconst AGATHAS_ROOM,                   6,  5 ; $F7	- Maps F8 - FE currently have no data, bear in mind we need room for everything in citrine
 DEF NUM_MAPS EQU const_value
 
 ; Indoor maps, such as houses, use this as the Map ID in their exit warps
