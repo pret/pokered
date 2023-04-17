@@ -181,9 +181,9 @@ MonsterNames::
 	db "WARTORTLE@"
 	db "CHARIZARD@"
 	db "TOTARTLE@@"
-	db "ARTICUNO-G"
-	db "ZAPDOS-G@@"
-	db "MOLTRES-G@"
+	db "ARTICUNO@@" ; Galarian
+	db "ZAPDOS@@@@" ; Galarian
+	db "MOLTRES@@@" ; Galarian
 	db "ODDISH@@@@"
 	db "GLOOM@@@@@"
 	db "VILEPLUME@"
@@ -232,25 +232,25 @@ MonsterNames::
 	db "MR.RIME@@@"
 	db "MELTAN@@@@"
 	db "MELMETAL@@"
-	db "ARCANINE-H"
-	db "ELECTRODEH"
-	db "RATICATE-A"
-	db "RAICHU-A@@"
-	db "SANDSLASHA"
-	db "NINETALESA"
-	db "DUGTRIO-A@"
-	db "PERSIAN-A@"
-	db "GOLEM-A@@@"
-	db "RAPIDASH-G"
-	db "SLOWBRO-G@"
-	db "SLOWKING-G"
-	db "MUK-A@@@@@"
-	db "EXEGGUTORA"
-	db "MAROWAK-A@"
-	db "WEEZING-G@"
-	db "TAUROS-P@@"
-	db "TAUROS-PA@"
-	db "TAUROS-PB@"
+	db "ARCANINE@@" ; Hisuian
+	db "ELECTRODE@" ; Hisuian
+	db "RATICATE@@" ; Alolan
+	db "RAICHU@@@@" ; Alolan
+	db "SANDSLASH@" ; Alolan
+	db "NINETALES@" ; Alolan
+	db "DUGTRIO@@@" ; Alolan
+	db "PERSIAN@@@" ; Alolan
+	db "GOLEM@@@@@" ; Alolan
+	db "RAPIDASH@@" ; Alolan
+	db "SLOWBRO@@@" ; Alolan
+	db "SLOWKING@@" ; Alolan
+	db "MUK@@@@@@@" ; Alolan
+	db "EXEGGUTOR@" ; Alolan
+	db "MAROWAK@@@" ; Alolan
+	db "WEEZING@@@" ; Galarian
+	db "TAUROS@@@@" ; Paldean, Combat
+	db "TAUROS@@@@" ; Paldean, Aqua
+	db "TAUROS@@@@" ; Paldean, Blaze
 	db "MISSINGNO."
 	db "MISSINGNO."
 	db "MISSINGNO."
