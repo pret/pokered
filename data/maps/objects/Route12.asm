@@ -11,7 +11,7 @@ Route12_Object:
 	bg_event 11, 63, 12 ; Route12Text12
 
 	def_object_events
-	object_event 10, 62, SPRITE_SNORLAX, STAY, DOWN, 1 ; person
+	object_event 11, 62, SPRITE_SNORLAX, STAY, DOWN, 1 ; person
 	object_event 14, 31, SPRITE_FISHER, STAY, LEFT, 2, OPP_FISHER, 3
 	object_event  5, 39, SPRITE_FISHER, STAY, UP, 3, OPP_FISHER, 4
 	object_event 11, 92, SPRITE_COOLTRAINER_M, STAY, LEFT, 4, OPP_JR_TRAINER_M, 9
