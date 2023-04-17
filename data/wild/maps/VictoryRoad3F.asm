@@ -7,9 +7,9 @@ VictoryRoad3FWildMons:
 	db 40, VENOMOTH
 	db 45, ONIX
 	db 43, GRAVELER
-	db 41, MAROWAK
-	db 42, MACHOKE
-	db 45, MACHOKE
+	db 45, HITMONCHAN ; LGPE encounters
+	db 45, HITMONLEE
+	db 45, HITMONTOP
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate
