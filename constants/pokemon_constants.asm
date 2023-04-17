@@ -16,7 +16,7 @@
 	const NIDOKING           ; $07
 	const SLOWBRO            ; $08
 	const IVYSAUR            ; $09
-	const EXEGGUTOR          ; $0A
+	const EXEGGUTOR          ; $0A - Moon Stone (Evo Stone Glitch)
 	const LICKITUNG          ; $0B
 	const EXEGGCUTE          ; $0C
 	const GRIMER             ; $0D
@@ -38,9 +38,9 @@
 	const PINSIR             ; $1D
 	const TANGELA            ; $1E
 	const GYAOON             ; $1F	(new)
-	const NIDOREIGN          ; $20	(new)
-	const GROWLITHE          ; $21
-	const ONIX               ; $22
+	const NIDOREIGN          ; $20	(new)  Fire Stone (Evo Stone Glitch)
+	const GROWLITHE          ; $21 - Thunderstone (Evo Stone Glitch)
+	const ONIX               ; $22 - Water Stone (Evo Stone Glitch)
 	const FEAROW             ; $23
 	const PIDGEY             ; $24
 	const SLOWPOKE           ; $25
@@ -53,7 +53,7 @@
 	const HITMONCHAN         ; $2C
 	const ARBOK              ; $2D
 	const PARASECT           ; $2E
-	const PSYDUCK            ; $2F
+	const PSYDUCK            ; $2F - Leaf Stone (Evo Stone Glitch)
 	const DROWZEE            ; $30
 	const GOLEM              ; $31
 	const BARUNDA            ; $32	(new)
@@ -82,7 +82,7 @@
 	const MOLTRES            ; $49
 	const ARTICUNO           ; $4A
 	const ZAPDOS             ; $4B
-	const DITTO              ; $4C
+	const DITTO              ; $4C - Candy Jar (Evo Stone Glitch)
 	const MEOWTH             ; $4D
 	const KRABBY             ; $4E
 	const CHEEP              ; $4F	(new)
@@ -90,14 +90,14 @@
 	const MIKON              ; $51	(new)
 	const VULPIX             ; $52
 	const NINETALES          ; $53
-	const PIKACHU            ; $54
-	const RAICHU             ; $55
-	const RIBBITO            ; $56	(new)
-	const CROAKOZUNA         ; $57	(new)
-	const DRATINI            ; $58
+	const PIKACHU            ; $54 - Ice Stone (Evo Stone Glitch)
+	const RAICHU             ; $55 - Protector (Evo Stone Glitch)
+	const RIBBITO            ; $56	(new) Poison Stone (Evo Stone Glitch)
+	const CROAKOZUNA         ; $57	(new) Black Augurite (Evo Stone Glitch)
+	const DRATINI            ; $58 - Dubious Disc (Evo Stone Glitch)
 	const DRAGONAIR          ; $59
 	const KABUTO             ; $5A
-	const KABUTOPS           ; $5B
+	const KABUTOPS           ; $5B - Up-Grade (Evo Stone Glitch)
 	const HORSEA             ; $5C
 	const SEADRA             ; $5D
 	const BAWLIGUA           ; $5E	(new)

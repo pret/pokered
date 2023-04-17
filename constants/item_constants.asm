@@ -98,8 +98,8 @@ DEF SAFARI_ROCK EQU $16 ; overload
 	const BLK_AUGURITE  ; $57
 	const DUBIOUS_DISC  ; $58
 	const CITRINE_PASS  ; $59
-	const OLD_SEA_MAP	; $60
-	const UP_GRADE		; $61
+	const OLD_SEA_MAP	; $5A
+	const UP_GRADE		; $5B
 DEF NUM_ITEMS EQU const_value - 1
 
 ; elevator floors use item IDs
