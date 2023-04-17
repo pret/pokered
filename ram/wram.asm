@@ -2040,7 +2040,7 @@ wBrunosRoomCurScript:: db
 wAgathasRoomCurScript:: db
 wCeruleanCaveB1FCurScript:: db
 wVictoryRoad1FCurScript:: db
-wFarawayIslandInsideCurScript:: db ; this should work
+wFarawayIslandInsideCurScript:: db
 wLancesRoomCurScript:: db
 wPokemonMansionB2FCurScript:: db
 wMtMoonCraterCurScript:: db

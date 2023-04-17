@@ -6,7 +6,7 @@ ViridianPreGym_Script:
 	call ExecuteCurMapScriptInTable
 	ld [wViridianPreGymCurScript], a
 	ret
-	
+
 ViridianPreGymResetScripts:
 	xor a
 	ld [wJoyIgnore], a
@@ -28,7 +28,7 @@ ViridianGymYujirouPostBattle:
 	ld [wJoyIgnore], a
 
 YujirouHasBeenBeaten:
-	SetEvent EVENT_BEAT_YUJIROU
+	SetEvent EVENT_BEAT_YUJIROU, EVENT_BEAT_VIRIDIAN_PREGYM_TRAINER_0, EVENT_BEAT_VIRIDIAN_PREGYM_TRAINER_1
 	jp ViridianPreGymResetScripts
 
 ViridianPreGym_TextPointers:
@@ -46,11 +46,11 @@ ViridianPreGym_TextPointers:
 	dw ViridianPreGymStatue2
 
 ViridianPreGymTrainerHeaders:
-	def_trainers 6
+	def_trainers 3
 ViridianPreGymTrainerHeader0:
-	trainer EVENT_BEAT_VIRIDIAN_PREGYM_TRAINER_0, 1, ViridianPreGymBattleText1, ViridianPreGymEndBattleText1, ViridianPreGymAfterBattleText1
+	trainer EVENT_BEAT_VIRIDIAN_PREGYM_TRAINER_0, 3, ViridianPreGymBattleText1, ViridianPreGymEndBattleText1, ViridianPreGymAfterBattleText1
 ViridianPreGymTrainerHeader1:
-	trainer EVENT_BEAT_VIRIDIAN_PREGYM_TRAINER_1, 2, ViridianPreGymBattleText2, ViridianPreGymEndBattleText2, ViridianPreGymAfterBattleText2
+	trainer EVENT_BEAT_VIRIDIAN_PREGYM_TRAINER_1, 3, ViridianPreGymBattleText2, ViridianPreGymEndBattleText2, ViridianPreGymAfterBattleText2
 	db -1 ;end
 
 YujirouText:
