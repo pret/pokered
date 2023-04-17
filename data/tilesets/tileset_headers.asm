@@ -2,13 +2,14 @@ MACRO tileset
 	db BANK(\1_GFX)
 	dw \1_Block, \1_GFX, \1_Coll
 	db \2, \3, \4 ; counter tiles
-	db \5         ; grass tile
+	db \5,         ; grass tile
 	db \6         ; animations (TILEANIM_* value)
 ENDM
 
 Tilesets:
 	table_width 12, Tilesets
 	; name, 3 counter tiles, grass tile, animations
+	; FIXME: Needs to have a new column for a second grass tile for Citrine to work properly. Missing tile is $3F.
 	tileset Overworld,    -1, -1, -1, $52, TILEANIM_WATER_FLOWER
 	tileset RedsHouse1,   -1, -1, -1,  -1, TILEANIM_NONE
 	tileset Mart,        $18,$19,$1E,  -1, TILEANIM_NONE
@@ -34,4 +35,5 @@ Tilesets:
 	tileset Facility,    $12, -1, -1,  -1, TILEANIM_WATER
 	tileset Plateau,      -1, -1, -1, $45, TILEANIM_WATER
 	tileset PreGym,		 $3A, $3B, -1,  -1, TILEANIM_NONE
+	tileset Citrine,	 -1,  -1,  -1, $0E, TILEANIM_WATER_FLOWER
 	assert_table_length NUM_TILESETS

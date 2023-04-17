@@ -26,4 +26,5 @@
 	const FACILITY     ; 22
 	const PLATEAU      ; 23
 	const PREGYM	   ; 24
+	const CITRINE	   ; 25
 DEF NUM_TILESETS EQU const_value

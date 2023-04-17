@@ -166,11 +166,11 @@ Due to the odd way some new Pokemon evolve, methods are listed here. Beta Pokemo
 New Pokemon:
 - Rhydon -> Rhyperior | Use Protector 
 - Lickitung -> Lickilicky | L32
-- Scyther -> Scizor | L41
+- Scyther -> Scizor | L41 OR use Metal Coat
 - Scyther -> Kleavor | Use Black Augurite
-- Pinsir -> Purakkusu | L42
+- Pinsir -> Purakkusu | L42 OR use Metal Coat
 - Tangela -> Tangrowth | L44
-- Onix -> Steelix | L38
+- Onix -> Steelix | L38 OR use Metal Coat
 - Slowpoke -> Slowking | Use Heart Stone 
 - Chansey -> Blissey | L45
 - Psyduck -> Weirduck | L22, Golduck level remains the same for Weirduck.
@@ -179,7 +179,7 @@ New Pokemon:
 - Magneton -> Magnezone | Use Thunder Stone
 - Farfetch'd -> Sirfetch'd | Use Heart Stone
 - Poliwhirl -> Politoed | Use Heart Stone
-- Ditto -> Animon | Trade
+- Ditto -> Animon | Use Metal Coat
 - Seadra -> Kingdra | Trade
 - Primeape -> Annihilape | Trade
 - Golbat -> Crobat | L44
@@ -212,6 +212,9 @@ Kanto Beta Pokemon:
 - Para -> Paras | L12
 - Hinaazu -> Doduo | L18
 - Betobebii -> Grimer | L20
+- Nidorino OR Nidorina -> Nidoreign | Moon Stone
+- Nidorino -> Nidoking | L36
+- Nidorina -> Nidoqueen | L36
 
 Eeveelutions:
 - Espeon | Heart Stone 
@@ -220,7 +223,22 @@ Eeveelutions:
 - Glaceon | Ice Stone
 - Sylveon | Moon Stone
 
-Nidos can evolve into Nidoreign with a Moon Stone, or their original counterparts with a Poison Stone. 
+The Evolution Stone Glitch is being made a feature by moving the Pokemon's constants appropriately. It happens by defeating a Pokemon using a certain Pokemon, while levelling up the respective Pokemon that wants to evolve. Thus, by using a stone, you now have a way to save on them, making all evolutions replicable as long as the Pokemon is kept in possession. We're making each Pokemon that applies to this glitch thematically appropriate.
+
+The following will apply:
+- Clefable for Moon Stone
+- Arcanine for Fire Stone
+- Poliwrath for Water Stone
+- Politoed for Heart Stone
+- Victreebel for Leaf Stone
+- Tsubomitto for Poison Stone
+- Mr. Rime for Ice Stone
+- Melmetal for Candy Jar
+- Kleavor for Black Augurite
+- Porygon2 for Up-Grade
+- Porygon-Z for Dubious Disc
+- Rhyperior for Protector
+- Steelix for Metal Coat
 
 Accessing Regional variants
 ====

@@ -22,11 +22,11 @@ SetIshiharaTeam:
 
 IshiharaTeam:
 	db EXEGGUTOR_A, 90
-	db TAUROS, 90
-	db SLOWKING, 90
-	db RAPIDASH, 50
+	db PINSIR, 90
+	db DITTO, 90
+	db SCYTHER, 50
 IF DEF(_DEBUG)
-	db MUK, 50
+	db ONIX, 50
 ENDC
 	db -1 ; end
 
@@ -154,6 +154,8 @@ DebugItemsList:
 	db UP_GRADE, 1
 	db TM_MEGA_PUNCH, 1
 	db HM_SURF, 1
+	db METAL_COAT, 99
+	db BLK_AUGURITE, 99
 	db FLOOR_1F
 	db -1 ; end
 

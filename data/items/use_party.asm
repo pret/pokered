@@ -43,4 +43,6 @@ UsableItems_PartyMenu:
 	db POISON_STONE
 	db BLK_AUGURITE
 	db DUBIOUS_DISC
+	db UP_GRADE
+	db METAL_COAT
 	db -1 ; end

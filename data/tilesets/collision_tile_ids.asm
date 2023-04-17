@@ -71,4 +71,7 @@ Plateau_Coll::
 
 PreGym_Coll::
 	coll_tiles $0B, $0E, $1E, $1F
-	;coll_tiles $01, $06, $12, $13, $17, $19, $0A, $1A, $3E, $3F, $0F, $1D, $1C, $0C, $0D, $2A, $2B, $3A, $3B
+
+Citrine_Coll::
+	coll_tiles $2C, $31, $3F, $55, $0E, $2F, $23, $20, $10, $03, $1C, $1B, $0B, $0C, $21
+

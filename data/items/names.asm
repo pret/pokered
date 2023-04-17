@@ -91,6 +91,7 @@ ItemNames::
 	li "CITRINE PASS"
 	li "OLD SEA MAP"
 	li "UP-GRADE"
+	li "METAL COAT"
 	assert_list_length NUM_ITEMS
 	li "B2F"
 	li "B1F"

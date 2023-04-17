@@ -43,6 +43,7 @@ _ProtectorDescription::
 _BlkAuguriteDescription::
 _DubiousDiscDescription::
 _UpGradeDescription::
+_MetalCoatDescription::
 	text "Evolves certain"
 	next "kinds of #MON."
 	prompt

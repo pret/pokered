@@ -91,6 +91,7 @@ KeyItemFlags:
 	dbit TRUE  ; CITRINE_PASS
 	dbit TRUE  ; OLD_SEA_MAP
 	dbit FALSE ; UP_GRADE
+	dbit FALSE ; METAL_COAT
 	dbit TRUE  ; FLOOR_B2F
 	dbit TRUE  ; FLOOR_B1F
 	dbit TRUE  ; FLOOR_1F

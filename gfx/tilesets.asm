@@ -65,3 +65,6 @@ Underground_Block:: INCBIN "gfx/blocksets/underground.bst"
 SECTION "Tilesets 4", ROMX
 PreGym_GFX::		INCBIN "gfx/tilesets/pregym.2bpp"
 PreGym_Block::		INCBIN "gfx/blocksets/pregym.bst"
+
+Citrine_GFX::		INCBIN "gfx/tilesets/citrine.2bpp"
+Citrine_Block::		INCBIN "gfx/blocksets/citrine.bst"

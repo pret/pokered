@@ -108,6 +108,7 @@ ItemUsePtrTable:
 	dw UnusableItem      ; CITRINE_PASS
 	dw UnusableItem      ; OLD_SEA_MAP
 	dw ItemUseEvoStone   ; UP_GRADE
+	dw ItemUseEvoStone   ; METAL_COAT
 	dw UnusableItem      ; FLOOR_B2F
 	dw UnusableItem      ; FLOOR_B1F
     dw UnusableItem      ; FLOOR_1F

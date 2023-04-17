@@ -196,6 +196,8 @@ ItemDescriptionPointers:
 	text_end
 	text_far _UpGradeDescription
 	text_end
+	text_far _MetalCoatDescription
+	text_end
 	text_far _HM01Description
 	text_end
 	text_far _HM02Description

@@ -98,7 +98,7 @@
 	const DRAGONAIR          ; $59
 	const KABUTO             ; $5A
 	const KABUTOPS           ; $5B - Up-Grade (Evo Stone Glitch)
-	const HORSEA             ; $5C
+	const HORSEA             ; $5C - Metal Coat (Evo Stone Glitch)
 	const SEADRA             ; $5D
 	const BAWLIGUA           ; $5E	(new)
 	const CRYITHAN           ; $5F	(new)

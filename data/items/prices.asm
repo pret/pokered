@@ -91,6 +91,7 @@ ItemPrices::
 	bcd3 0     ; CITRINE_PASS
 	bcd3 0	   ; OLD_SEA_MAP
 	bcd3 3000  ; UP_GRADE
+	bcd3 3000  ; METAL_COAT
 	assert_table_length NUM_ITEMS
 	bcd3 0     ; FLOOR_B2F
 	bcd3 0     ; FLOOR_B1F

@@ -558,8 +558,9 @@ GastlyEvosMoves:
 
 ScytherEvosMoves:
 ; Evolutions
-	db EV_LEVEL, 41, SCIZOR
 	db EV_ITEM, BLK_AUGURITE, 1, KLEAVOR
+	db EV_ITEM, METAL_COAT, 1, SCIZOR
+	db EV_LEVEL, 41, SCIZOR
 	db 0
 ; Learnset
 	db 17, LEER
@@ -599,6 +600,7 @@ BlastoiseEvosMoves:
 
 PinsirEvosMoves:
 ; Evolutions
+	db EV_ITEM, METAL_COAT, 1, PURAKKUSU
 	db EV_LEVEL, 42, PURAKKUSU
 	db 0
 ; Learnset
@@ -657,6 +659,7 @@ GrowlitheEvosMoves:
 
 OnixEvosMoves:
 ; Evolutions	
+	db EV_ITEM, METAL_COAT, 1, STEELIX
 	db EV_LEVEL, 38, STEELIX
 	db 0
 ; Learnset
@@ -1176,7 +1179,7 @@ ZapdosEvosMoves:
 
 DittoEvosMoves:
 ; Evolutions
-	db EV_TRADE, 1, ANIMON
+	db EV_ITEM, METAL_COAT, 1, ANIMON
 	db 0
 ; Learnset
 	db 0
@@ -2225,7 +2228,8 @@ RaticateEvosMoves:
 NidorinoEvosMoves:
 ; Evolutions
 	db EV_ITEM, MOON_STONE, 1, NIDOREIGN
-	db EV_ITEM, POISON_STONE, 1, NIDOKING
+	;db EV_ITEM, POISON_STONE, 1, NIDOKING
+	db EV_LEVEL, 36, NIDOKING
 	db 0
 ; Learnset
 	db 8, HORN_ATTACK
@@ -2239,7 +2243,8 @@ NidorinoEvosMoves:
 NidorinaEvosMoves:
 ; Evolutions
 	db EV_ITEM, MOON_STONE, 1, NIDOREIGN
-	db EV_ITEM, POISON_STONE, 1, NIDOQUEEN
+	;db EV_ITEM, POISON_STONE, 1, NIDOQUEEN
+	db EV_LEVEL, 36, NIDOQUEEN
 	db 0
 ; Learnset
 	db 8, SCRATCH
@@ -3106,7 +3111,7 @@ SandslashAEvosMoves:
 	db 45, BLIZZARD
 	db 0
 	
-NinetalesAEvosMoves: ; vulpix-alola learnset
+NinetalesAEvosMoves: ; vulpix-alola learnset, same principle for others
 ; Evolutions
 	db 0
 ; Learnset
@@ -3214,7 +3219,7 @@ ExeggutorAEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
-	db 25, REFLECT ; this would normally be removed, but because this'll be traded, we're using this
+	db 25, REFLECT ; the moves would normally be removed, but because this'll be traded, we're using this
 	db 28, LEECH_SEED
 	db 32, STUN_SPORE
 	db 37, POISONPOWDER
