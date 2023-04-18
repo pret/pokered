@@ -31,6 +31,13 @@ TryDoWildEncounter:
 	cp c
 	ld a, [wGrassRate]
 	jr z, .CanEncounter
+	
+	cp CITRINE
+	ld a, $0E ; So the Citrine grass works.
+	cp c
+	ld a, [wGrassRate]
+	jr z, .CanEncounter
+	
 	ld a, $14 ; in all tilesets with a water tile, this is its id
 	cp c
 	ld a, [wWaterRate]
