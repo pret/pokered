@@ -241,9 +241,9 @@ MonsterNames::
 	db "DUGTRIO@@@" ; Alolan
 	db "PERSIAN@@@" ; Alolan
 	db "GOLEM@@@@@" ; Alolan
-	db "RAPIDASH@@" ; Alolan
-	db "SLOWBRO@@@" ; Alolan
-	db "SLOWKING@@" ; Alolan
+	db "RAPIDASH@@" ; Galarian
+	db "SLOWBRO@@@" ; Galarian
+	db "SLOWKING@@" ; Galarian
 	db "MUK@@@@@@@" ; Alolan
 	db "EXEGGUTOR@" ; Alolan
 	db "MAROWAK@@@" ; Alolan
