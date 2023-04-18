@@ -1370,14 +1370,14 @@ BlottleDexEntry:
 KotoraDexEntry:
 	db "SHOCK CAT@"
 	db 2,0
-	dw 420
+	dw 620
 	text_far _KotoraDexEntry
 	text_end
 
 JaggDexEntry:
 	db "IRON HORN@"
-	db 9,7
-	dw 3120
+	db 11,2
+	dw 4220
 	text_far _JaggDexEntry
 	text_end
 
@@ -1391,7 +1391,7 @@ JabettaDexEntry:
 GaotoraDexEntry:
 	db "SHOCK CAT@"
 	db 3,7
-	dw 1020
+	dw 1620
 	text_far _GaotoraDexEntry
 	text_end
 
@@ -1517,7 +1517,7 @@ CroakozunaDexEntry:
 GorotoraDexEntry:
 	db "SHOCK CAT@"
 	db 5,11
-	dw 3670
+	dw 3870
 	text_far _GorotoraDexEntry
 	text_end
 
@@ -1537,8 +1537,8 @@ NidoreignDexEntry:
 
 TrampelDexEntry:
 	db "TUSK@"
-	db 6,11
-	dw 3470
+	db 7,7
+	dw 4170
 	text_far _TrampelDexEntry
 	text_end
 
@@ -1551,8 +1551,8 @@ CrockyDexEntry:
 
 PendrakenDexEntry:
 	db "INK@"
-	db 5,11
-	dw 1980
+	db 7,10
+	dw 2580
 	text_far _PendrakenDexEntry
 	text_end
 
