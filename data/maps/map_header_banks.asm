@@ -77,7 +77,7 @@ MapHeaderBanks::
 	db BANK(Daycare_h)
 	db BANK(Route6Gate_h)
 	db BANK(UndergroundPathRoute6_h)
-	db BANK(UndergroundPathRoute6_h) ; UNDERGROUND_PATH_ROUTE_6_COPY
+	db BANK(CelesteHill_h) ; was db BANK(UndergroundPathRoute6_h), UNDERGROUND_PATH_ROUTE_6_COPY
 	db BANK(Route7Gate_h)
 	db BANK(UndergroundPathRoute7_h)
 	db BANK(UndergroundPathRoute7Copy_h)

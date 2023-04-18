@@ -28,8 +28,8 @@ ENDM
 	mapconst INDIGO_PLATEAU,                 9, 10 ; $09
 	mapconst SAFFRON_CITY,                  18, 20 ; $0A
 	mapconst CITRINE_CITY,                  18, 20 ; $0B
-DEF NUM_CITY_MAPS EQU const_value ; eorsunica: move this line under Celadon Uni Outside to include it in the Fly Map
 	mapconst CELADON_UNIVERSITY_OUTSIDE,    20, 21 ; $0C
+DEF NUM_CITY_MAPS EQU const_value
 DEF FIRST_ROUTE_MAP EQU const_value
 	mapconst ROUTE_1,                       18, 10 ; $0D
 	mapconst ROUTE_2,                       36, 10 ; $0E
@@ -95,7 +95,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	mapconst DAYCARE,                        4,  4 ; $49
 	mapconst ROUTE_6_GATE,                   3,  4 ; $4A
 	mapconst UNDERGROUND_PATH_ROUTE_6,       4,  4 ; $4B
-	mapconst UNDERGROUND_PATH_ROUTE_6_COPY,  4,  4 ; $4C	- Unused
+	mapconst CELESTE_HILL,  				4, 4 ; $4C	- Was copy of above & unused
 	mapconst ROUTE_7_GATE,                   4,  3 ; $4D
 	mapconst UNDERGROUND_PATH_ROUTE_7,       4,  4 ; $4E
 	mapconst UNDERGROUND_PATH_ROUTE_7_COPY,  4,  4 ; $4F	- Unused

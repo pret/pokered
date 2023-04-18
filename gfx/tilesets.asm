@@ -68,3 +68,6 @@ PreGym_Block::		INCBIN "gfx/blocksets/pregym.bst"
 
 Citrine_GFX::		INCBIN "gfx/tilesets/citrine.2bpp"
 Citrine_Block::		INCBIN "gfx/blocksets/citrine.bst"
+
+Celeste_GFX::		INCBIN "gfx/tilesets/celeste.2bpp"
+Celeste_Block::		INCBIN "gfx/blocksets/celeste.bst"

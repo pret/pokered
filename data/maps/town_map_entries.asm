@@ -67,7 +67,6 @@ InternalMapEntries:
 	internal_map MT_MOON_POKECENTER,             5,  2, Route4Name
 	internal_map VIRIDIAN_PRE_GYM,  			10,  2, ViridianCityName
 	internal_map DAYCARE,                       10,  4, Route5Name
-	internal_map UNDERGROUND_PATH_ROUTE_6_COPY, 10,  6, Route6Name
 	internal_map UNDERGROUND_PATH_ROUTE_7_COPY,  9,  5, Route7Name
 	internal_map UNDERGROUND_PATH_ROUTE_8,      11,  5, Route8Name
 	internal_map ROCK_TUNNEL_1F,                14,  3, RockTunnelName
@@ -126,4 +125,5 @@ InternalMapEntries:
 	internal_map UNDERWATER_TUNNEL,             14,  1, UnderwaterTunnelName
 	internal_map CELADON_UNIVERSITY_POKECENTER,   7, 4, CeladonCityName
 	internal_map AGATHAS_ROOM,                   0,  2, PokemonLeagueName
+	internal_map CELESTE_HILL, 					 9,  9, CelesteHillName
 	db -1 ; end

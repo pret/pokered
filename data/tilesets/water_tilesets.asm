@@ -10,4 +10,5 @@ WaterTilesets:
 	db FACILITY
 	db PLATEAU
 	db CITRINE
+	db CELESTE
 	db -1 ; end

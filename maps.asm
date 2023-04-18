@@ -1322,3 +1322,8 @@ INCLUDE "data/maps/headers/CitrineCity.asm"
 INCLUDE "scripts/CitrineCity.asm"
 INCLUDE "data/maps/objects/CitrineCity.asm"
 CitrineCity_Blocks: INCBIN "maps/CitrineCity.blk"
+
+INCLUDE "data/maps/headers/CelesteHill.asm"
+INCLUDE "scripts/CelesteHill.asm"
+INCLUDE "data/maps/objects/CelesteHill.asm"
+CelesteHill_Blocks: INCBIN "maps/CelesteHill.blk"

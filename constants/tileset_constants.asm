@@ -27,4 +27,5 @@
 	const PLATEAU      ; 23
 	const PREGYM	   ; 24
 	const CITRINE	   ; 25
+	const CELESTE	   ; 26
 DEF NUM_TILESETS EQU const_value
