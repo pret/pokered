@@ -4,7 +4,7 @@
 	;   hp  atk  def  spd  spc
 
 	db DRAGON, DRAGON ; type
-	db 45 ; catch rate
+	db 27 ; catch rate
 	db 144 ; base exp
 
 	INCBIN "gfx/pokemon/front/dragonair.pic", 0, 1 ; sprite dimensions

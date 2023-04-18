@@ -391,11 +391,11 @@ _MonjaDexEntry::
 _TaabanDexEntry::
 	text "It evolved after"
 	next "biting a SLOWPOKE."
-	next "If it falls off"
+	next "While draining its"
 
-	page "its host, it will"
-	next "seek out a new"
-	next "SLOWPOKE to bite"
+	page "host's nutrients,"
+	next "TAABAN injects it"
+	next "with potent venom"
 	dex
 
 _HinaazuDexEntry::
