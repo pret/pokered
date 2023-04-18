@@ -215,7 +215,7 @@ MonsterNames::
 	db "SLOWKING@@"
 	db "ELECTIVIRE"
 	db "MAGMORTAR@"
-	db "PARA@@@@@@"
+	db "TAABAN@@@@"
 	db "HINAAZU@@@"
 	db "BETOBEBII@"
 	db "MAGNEZONE@"

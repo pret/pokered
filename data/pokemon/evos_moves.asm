@@ -227,7 +227,7 @@ EvosMovesPointerTable:
 	dw SlowkingEvosMoves
 	dw ElectivireEvosMoves
 	dw MagmortarEvosMoves
-	dw ParaEvosMoves
+	dw TaabanEvosMoves
 	dw HinaazuEvosMoves
 	dw BetobebiiEvosMoves
 	dw MagnezoneEvosMoves
@@ -522,7 +522,8 @@ GyaradosEvosMoves:
 
 ShellderEvosMoves:
 ; Evolutions
-	db EV_ITEM, WATER_STONE, 1, CLOYSTER
+	db EV_ITEM, WATER_STONE, 1, TAABAN
+	db EV_ITEM, ICE_STONE, 1, CLOYSTER
 	db 0
 ; Learnset
 	db 18, SUPERSONIC
@@ -2833,18 +2834,11 @@ MagmortarEvosMoves:
 	db 55, FLAMETHROWER
 	db 0
 	
-ParaEvosMoves:
+TaabanEvosMoves:
 ; Evolutions
-	db EV_LEVEL, 12, PARAS
 	db 0
 ; Learnset
-	db 3, STUN_SPORE
-	db 6, LEECH_LIFE
-	db 10, POISONPOWDER
-	db 15, FURY_SWIPES
-	db 21, SPORE
-	db 25, GROWTH
-	db 29, SLASH
+	db 50, POISON_GAS
 	db 0
 	
 HinaazuEvosMoves:

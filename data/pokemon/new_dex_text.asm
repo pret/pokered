@@ -388,14 +388,14 @@ _MonjaDexEntry::
 	next "trip and fall"
 	dex
 
-_ParaDexEntry::
-	text "It's always born"
-	next "planted inside"
-	next "of a mushroom."
+_TaabanDexEntry::
+	text "It evolved after"
+	next "biting a SLOWPOKE."
+	next "If it falls off"
 
-	page "The mushroom will"
-	next "stay with it for"
-	next "its whole life"
+	page "its host, it will"
+	next "seek out a new"
+	next "SLOWPOKE to bite"
 	dex
 
 _HinaazuDexEntry::
@@ -530,7 +530,7 @@ _PolitoedDexEntry::
 
 _SlowkingDexEntry::
 	text "Every time it"
-	next "yawns, SHELLDER"
+	next "yawns, TAABAN"
 	next "injects more"
 
 	page "poison into it,"
@@ -909,17 +909,17 @@ _RapidashGDexEntry::
 	dex
 
 _SlowbroGDexEntry::
-	text "The SHELLDER that"
+	text "The TAABAN that"
 	next "bit SLOWBRO has"
 	next "made it poisonous."
 	
-	page "SHELLDER's tongue"
+	page "TAABAN's tongue"
 	next "can be squeezed"
 	next "to spit poison"
 	dex
 
 _SlowkingGDexEntry::
-	text "The SHELLDER that"
+	text "The TAABAN that"
 	next "bit SLOWKING has"
 	next "assumed control."
 	

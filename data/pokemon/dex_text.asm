@@ -73,9 +73,9 @@ _SlowbroDexEntry:: ; new entry
 	next "goes out to sea,"
 	next "it may get bit"
 	
-	page "by a spiral"
-	next "SHELLDER and"
-	next "become a SLOWBRO"
+	page "by a TAABAN and"
+	next "evolve into"
+	next "a SLOWBRO"
 	dex
 
 _IvysaurDexEntry::

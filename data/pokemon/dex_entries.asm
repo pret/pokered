@@ -215,7 +215,7 @@ PokedexEntryPointers:
 	dw SlowkingDexEntry
 	dw ElectivireDexEntry
 	dw MagmortarDexEntry
-	dw ParaDexEntry
+	dw TaabanDexEntry
 	dw HinaazuDexEntry
 	dw BetobebiiDexEntry
 	dw MagnezoneDexEntry
@@ -1752,11 +1752,11 @@ MagmortarDexEntry:
 	text_far _MagmortarDexEntry
 	text_end
 	
-ParaDexEntry:
-    db "MUSHROOM@"
-	db 0,8
-	dw 40
-	text_far _ParaDexEntry
+TaabanDexEntry:
+    db "SPIRAL@"
+	db 4,3
+	dw 1530
+	text_far _TaabanDexEntry
 	text_end
 	
 BetobebiiDexEntry:

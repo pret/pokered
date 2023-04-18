@@ -4,11 +4,11 @@ Route2WildMons:
 	db  5, PIDGEY
 	db  4, CATERPIE
 	db  4, WEEDLE
-	db  5, PARA
+	db  5, KONYA
 	db  4, NIDORAN_F
-	db  3, PARA
+	db  3, KONYA
 	db  5, NIDORAN_M
-	db  5, MONJA
+	db  5, MONJA	; replace Monja with Kokana when added
 	db  6, MONJA
 	end_grass_wildmons
 

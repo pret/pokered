@@ -7,7 +7,7 @@ MtMoon1FWildMons:
 	db  6, BITTYBAT
 	db 10, SANDSHREW
 	db 10, GEODUDE
-	db  8, PARA
+	db  8, PARAS
 	db 11, BITTYBAT
 	db  8, CLEFAIRY
 	end_grass_wildmons
