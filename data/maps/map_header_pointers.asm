@@ -5,15 +5,15 @@ MapHeaderPointers::
 	dw ViridianCity_h
 	dw PewterCity_h
 	dw CeruleanCity_h
-	dw LavenderTown_h
 	dw VermilionCity_h
+	dw LavenderTown_h
 	dw CeladonCity_h
+	dw CeladonUniversityOutside_h
 	dw FuchsiaCity_h
+	dw SaffronCity_h
 	dw CinnabarIsland_h
 	dw IndigoPlateau_h
-	dw SaffronCity_h
 	dw CitrineCity_h
-	dw CeladonUniversityOutside_h
 	dw Route1_h
 	dw Route2_h
 	dw Route3_h

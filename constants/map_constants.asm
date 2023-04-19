@@ -20,15 +20,15 @@ ENDM
 	mapconst VIRIDIAN_CITY,                 18, 20 ; $01
 	mapconst PEWTER_CITY,                   18, 20 ; $02
 	mapconst CERULEAN_CITY,                 18, 20 ; $03
-	mapconst LAVENDER_TOWN,                  9, 10 ; $04
-	mapconst VERMILION_CITY,                18, 20 ; $05
+	mapconst VERMILION_CITY,                18, 20 ; $04
+	mapconst LAVENDER_TOWN,                  9, 10 ; $05
 	mapconst CELADON_CITY,                  18, 25 ; $06
-	mapconst FUCHSIA_CITY,                  18, 20 ; $07
-	mapconst CINNABAR_ISLAND,               15, 14 ; $08
-	mapconst INDIGO_PLATEAU,                 9, 10 ; $09
+	mapconst CELADON_UNIVERSITY_OUTSIDE,    20, 21 ; $07
+	mapconst FUCHSIA_CITY,                  18, 20 ; $08
 	mapconst SAFFRON_CITY,                  18, 20 ; $0A
-	mapconst CITRINE_CITY,                  18, 20 ; $0B
-	mapconst CELADON_UNIVERSITY_OUTSIDE,    20, 21 ; $0C
+	mapconst CINNABAR_ISLAND,               15, 14 ; $0A
+	mapconst INDIGO_PLATEAU,                 9, 10 ; $0B
+	mapconst CITRINE_CITY,                  18, 20 ; $0C
 DEF NUM_CITY_MAPS EQU const_value
 DEF FIRST_ROUTE_MAP EQU const_value
 	mapconst ROUTE_1,                       18, 10 ; $0D
