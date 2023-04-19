@@ -27,7 +27,7 @@ TownMapOrder:
 	db ROUTE_8
 	db ROUTE_7
 	db CELADON_CITY
-;	db CELADON_UNIVERSITY_OUTSIDE ; erosunica: uncomment this line to add it to the Town Map
+	db CELADON_UNIVERSITY_OUTSIDE
 	db SAFFRON_CITY
 	db ROUTE_11
 	db ROUTE_12
@@ -50,5 +50,6 @@ TownMapOrder:
 	db VICTORY_ROAD_3F
 	db INDIGO_PLATEAU
 	db CITRINE_CITY
+	db CELESTE_HILL
 	db FARAWAY_ISLAND_OUTSIDE
 TownMapOrderEnd:

@@ -4,3 +4,4 @@ CelesteHill_Script:
 CelesteHill_TextPointers:
 
 	text_end ; unused
+	

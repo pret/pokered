@@ -144,6 +144,8 @@ SetPal_Overworld:
 	jr z, .PokemonTowerOrAgatha
 	cp CAVERN
 	jr z, .caveOrBruno
+	cp CELESTE
+	jr z, .celeste
 	ld a, [wCurMap]
 	cp FIRST_INDOOR_MAP
 	jr c, .townOrRoute
@@ -151,6 +153,8 @@ SetPal_Overworld:
 	jr c, .normalDungeonOrBuilding
 	cp LORELEIS_ROOM
 	jr z, .Lorelei
+	cp CELESTE_HILL
+	jr z, .celeste
 	cp BRUNOS_ROOM
 	jr z, .caveOrBruno
 .normalDungeonOrBuilding
@@ -182,6 +186,9 @@ SetPal_Overworld:
 	jr c, .seafoam
 .caveDefault
 	ld a, PAL_CAVE - 1
+	jr .town
+.celeste
+	ld a, PAL_CELESTE - 1
 	jr .town
 .Lorelei
 	jr c, .gbcLorelei

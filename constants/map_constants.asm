@@ -89,13 +89,13 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	mapconst BIKE_SHOP,                      4,  4 ; $43
 	mapconst CERULEAN_MART,                  4,  4 ; $44
 	mapconst MT_MOON_POKECENTER,             4,  7 ; $45
-	mapconst VIRIDIAN_PRE_GYM,		     7,  5 ; $46	- was CERULEAN_TRASHED_HOUSE_COPY
+	mapconst VIRIDIAN_PRE_GYM,		         7,  5 ; $46	- was CERULEAN_TRASHED_HOUSE_COPY
 	mapconst ROUTE_5_GATE,                   3,  4 ; $47
 	mapconst UNDERGROUND_PATH_ROUTE_5,       4,  4 ; $48
 	mapconst DAYCARE,                        4,  4 ; $49
 	mapconst ROUTE_6_GATE,                   3,  4 ; $4A
 	mapconst UNDERGROUND_PATH_ROUTE_6,       4,  4 ; $4B
-	mapconst CELESTE_HILL,  				4, 4 ; $4C	- Was copy of above & unused
+	mapconst CELESTE_HILL,  				12, 12 ; $4C	- Was copy of above & unused
 	mapconst ROUTE_7_GATE,                   4,  3 ; $4D
 	mapconst UNDERGROUND_PATH_ROUTE_7,       4,  4 ; $4E
 	mapconst UNDERGROUND_PATH_ROUTE_7_COPY,  4,  4 ; $4F	- Unused

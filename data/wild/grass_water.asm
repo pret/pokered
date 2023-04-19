@@ -76,7 +76,7 @@ WildDataPointers:
 	dw NothingWildMons
 	dw NothingWildMons
 	dw NothingWildMons
-	dw NothingWildMons
+	dw CelesteHillWildMons
 	dw NothingWildMons
 	dw NothingWildMons
 	dw NothingWildMons
@@ -333,3 +333,4 @@ INCLUDE "data/wild/maps/FarawayIslandInside.asm"
 INCLUDE "data/wild/maps/MtMoonCrater.asm"
 INCLUDE "data/wild/maps/UnderwaterTunnel.asm"
 INCLUDE "data/wild/maps/BillsGarden.asm"
+INCLUDE "data/wild/maps/CelesteHill.asm"
