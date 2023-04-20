@@ -38,6 +38,7 @@ Cries:
 	dba Cry_Vileplume
 	dba Cry_Vulpix
 	dba Cry_Weepinbell
+	dba Cry_Gorochu
 	dba Cry_Marill
 	dba Cry_Spinarak
 	dba Cry_Togepi

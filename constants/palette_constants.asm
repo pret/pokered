@@ -38,15 +38,15 @@ DEF SET_PAL_DEFAULT EQU $ff
 	const PAL_VIRIDIAN  ; $02
 	const PAL_PEWTER    ; $03
 	const PAL_CERULEAN  ; $04
-	const PAL_LAVENDER  ; $05
-	const PAL_VERMILION ; $06
+	const PAL_VERMILION ; $05
+	const PAL_LAVENDER  ; $06
 	const PAL_CELADON   ; $07
-	const PAL_FUCHSIA   ; $08
-	const PAL_CINNABAR  ; $09
-	const PAL_INDIGO    ; $0A
-	const PAL_SAFFRON   ; $0B
-	const PAL_CITRINE	; $0C
-	const PAL_CELADONUNI ; $0D
+	const PAL_CELADONUNI ; $08
+	const PAL_FUCHSIA   ; $09
+	const PAL_SAFFRON   ; $0A
+	const PAL_CINNABAR  ; $0B
+	const PAL_INDIGO    ; $0C
+	const PAL_CITRINE   ; $0D
 	const PAL_TOWNMAP   ; $0E
 	const PAL_LOGO1     ; $0F
 	const PAL_LOGO2     ; $10

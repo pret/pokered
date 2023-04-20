@@ -40,6 +40,7 @@
 	const CRY_VILEPLUME
 	const CRY_VULPIX
 	const CRY_WEEPINBELL
+	const CRY_GOROCHU
 
 ; gen 2
 	const CRY_MARILL
