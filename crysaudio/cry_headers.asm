@@ -194,7 +194,7 @@ PokemonCries::
 	mon_cry CRY_BLASTOISE,    60,  128 ; PENDRAKEN
 	mon_cry CRY_FEAROW,        0,  256 ; SHELLDER
 	mon_cry CRY_FEAROW,      111,  352 ; CLOYSTER
-	mon_cry CRY_MUK,          32,  383 ; TAABAN		(may revise)
+	mon_cry CRY_TOTODILE,    512,  320 ; TAABAN
 	mon_cry CRY_PARAS,         2,  160 ; STARYU
 	mon_cry CRY_PARAS,         0,  256 ; STARMIE
 	mon_cry CRY_SEEL,        136,  320 ; SEEL
