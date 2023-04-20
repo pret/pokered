@@ -23,6 +23,7 @@ Music:
 	dba Music_Routes3
 	dba Music_Routes4
 	dba Music_RBYIndigoPlateau
+	dba Music_Lavenbar
 	dba Music_GymLeaderBattle
 	dba Music_TrainerBattle
 	dba Music_WildBattle

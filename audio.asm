@@ -330,6 +330,7 @@ INCLUDE "crysaudio/music/RBY/lavender.asm"
 INCLUDE "crysaudio/music/RBY/safarizone.asm"
 INCLUDE "crysaudio/music/RBY/gym.asm"
 INCLUDE "crysaudio/music/RBY/pokecenter.asm"
+INCLUDE "crysaudio/music/RBY/lavenbar.asm"
 
 
 SECTION "RBY Songs 2", ROMX
