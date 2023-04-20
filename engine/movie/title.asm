@@ -1,15 +1,17 @@
-; copy text of fixed length NAME_LENGTH (like player name, rival name, mon names, ...)
-CopyFixedLengthText:
+CopyDebugName:
 	ld bc, NAME_LENGTH
 	jp CopyData
 
-SetDefaultNamesBeforeTitlescreen::
-	ld hl, NintenText
+PrepareTitleScreen::
+	; These debug names are already copied later in PrepareOakSpeech.
+	; Removing the unused copies below has no apparent impact.
+	; CopyDebugName can also be safely deleted afterwards.
+	ld hl, DebugNewGamePlayerName
 	ld de, wPlayerName
-	call CopyFixedLengthText
-	ld hl, SonyText
+	call CopyDebugName
+	ld hl, DebugNewGameRivalName
 	ld de, wRivalName
-	call CopyFixedLengthText
+	call CopyDebugName
 	xor a
 	ldh [hWY], a
 	ld [wLetterPrintingDelayFlags], a
@@ -17,9 +19,9 @@ SetDefaultNamesBeforeTitlescreen::
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
-	ld a, BANK(Music_TitleScreen)
-	ld [wAudioROMBank], a
-	ld [wAudioSavedROMBank], a
+;	ld a, 0 ; BANK(Music_TitleScreen)
+;	ld [wAudioROMBank], a
+;	ld [wAudioSavedROMBank], a
 
 DisplayTitleScreen:
 	call GBPalWhiteOut
@@ -208,8 +210,8 @@ DisplayTitleScreen:
 	call Delay3
 	call WaitForSoundToFinish
 	ld a, MUSIC_TITLE_SCREEN
-	ld [wNewSoundID], a
-	call PlaySound
+;	ld [wNewSoundID], a
+	call PlayMusic
 	xor a
 	ld [wUnusedCC5B], a
 
@@ -395,5 +397,8 @@ PrintGameVersionOnTitleScreen:
 VersionOnTitleScreenText:
 	db $61,$62,$63,$64,$65,$66,$67,$68,"@" ; "Blue Version"
 
-NintenText: db "NINTEN@"
-SonyText:   db "SONY@"
+DebugNewGamePlayerName:
+	db "NINTEN@"
+
+DebugNewGameRivalName:
+	db "SONY@"

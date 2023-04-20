@@ -1,4 +1,4 @@
-; spritestatedata1 struct members (see macros/wram.asm)
+; spritestatedata1 struct members (see macros/ram.asm)
 	const_def
 	const SPRITESTATEDATA1_PICTUREID             ; 0
 	const SPRITESTATEDATA1_MOVEMENTSTATUS        ; 1
@@ -18,7 +18,7 @@
 	const SPRITESTATEDATA1_0F                    ; f
 DEF SPRITESTATEDATA1_LENGTH EQU const_value
 
-; spritestatedata2 struct members (see macros/wram.asm)
+; spritestatedata2 struct members (see macros/ram.asm)
 	const_def
 	const SPRITESTATEDATA2_WALKANIMATIONCOUNTER ; 0
 	const SPRITESTATEDATA2_01                   ; 1

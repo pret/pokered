@@ -1,4 +1,4 @@
-SetDefaultNames:
+PrepareOakSpeech:
 	ld a, [wLetterPrintingDelayFlags]
 	push af
 	ld a, [wOptions]
@@ -22,11 +22,13 @@ SetDefaultNames:
 	ld a, [wOptionsInitialized]
 	and a
 	call z, InitOptions
-	ld hl, NintenText
+	; These debug names are used for StartNewGameDebug.
+	; TestBattle uses the debug names from DebugMenu.
+	ld hl, DebugNewGamePlayerName
 	ld de, wPlayerName
 	ld bc, NAME_LENGTH
 	call CopyData
-	ld hl, SonyText
+	ld hl, DebugNewGameRivalName
 	ld de, wRivalName
 	ld bc, NAME_LENGTH
 	jp CopyData
@@ -34,13 +36,13 @@ SetDefaultNames:
 OakSpeech:
 	ld a, SFX_STOP_ALL_MUSIC
 	call PlaySound
-	ld a, BANK(Music_Routes2)
+	ld a, 0 ; BANK(Music_Routes2)
 	ld c, a
 	ld a, MUSIC_ROUTES2
 	call PlayMusic
 	call ClearScreen
 	call LoadTextBoxTilePatterns
-	call SetDefaultNames
+	call PrepareOakSpeech
 	predef InitPlayerData2
 	ld hl, wNumBoxItems
 	ld a, POTION
@@ -128,14 +130,15 @@ OakSpeech:
 	call ResetPlayerSpriteData
 	ldh a, [hLoadedROMBank]
 	push af
-	ld a, BANK(Music_PalletTown)
-	ld [wAudioROMBank], a
-	ld [wAudioSavedROMBank], a
+;	ld a, 0 ; BANK(Music_PalletTown)
+;	ld [wAudioROMBank], a
+;	ld [wAudioSavedROMBank], a
+
 	ld a, 10
-	ld [wAudioFadeOutControl], a
-	ld a, SFX_STOP_ALL_MUSIC
-	ld [wNewSoundID], a
-	call PlaySound
+	ld [wMusicFade], a
+	xor a
+	ld [wMusicFadeID], a
+
 	pop af
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a

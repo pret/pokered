@@ -1,130 +1,137 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
-from sys import stderr, exit
-from subprocess import Popen, PIPE
-from struct import unpack, calcsize
-from enum import Enum
+"""
+Usage: unnamed.py [-h] [-r rootdir] [-l count] pokered.sym
 
-class symtype(Enum):
-    LOCAL = 0
-    IMPORT = 1
-    EXPORT = 2
+Parse the symfile to find unnamed symbols.
+"""
 
-def unpack_file(fmt, file):
-    size = calcsize(fmt)
-    return unpack(fmt, file.read(size))
+import sys
+import argparse
+import subprocess
+import struct
+import enum
+import signal
+
+class symtype(enum.Enum):
+	LOCAL = 0
+	IMPORT = 1
+	EXPORT = 2
+
+def unpack_from(fmt, file):
+	size = struct.calcsize(fmt)
+	return struct.unpack(fmt, file.read(size))
 
 def read_string(file):
-    buf = bytearray()
-    while True:
-        b = file.read(1)
-        if b is None or b == b'\0':
-            return buf.decode()
-        else:
-            buf += b
-
+	buf = bytearray()
+	while True:
+		b = file.read(1)
+		if b is None or b == b'\0':
+			return buf.decode()
+		buf += b
 
 # Fix broken pipe when using `head`
-from signal import signal, SIGPIPE, SIG_DFL
-signal(SIGPIPE,SIG_DFL)
+signal.signal(signal.SIGPIPE, signal.SIG_DFL)
 
-import argparse
-parser = argparse.ArgumentParser(description="Parse the symfile to find unnamed symbols")
-parser.add_argument('symfile', type=argparse.FileType('r'), help="the list of symbols")
-parser.add_argument('-r', '--rootdir', type=str, help="scan the output files to obtain a list of files with unnamed symbols (NOTE: will rebuild objects as necessary)")
-parser.add_argument('-l', '--list', type=int, default=0, help="output this many of each file's unnamed symbols (NOTE: requires -r)")
+parser = argparse.ArgumentParser(description='Parse the symfile to find unnamed symbols')
+parser.add_argument('symfile', type=argparse.FileType('r'),
+	help='the list of symbols')
+parser.add_argument('-r', '--rootdir', type=str,
+	help='scan the output files to obtain a list of files with unnamed symbols (note: will rebuild objects as necessary)')
+parser.add_argument('-l', '--list', type=int, default=0,
+	help="output this many of each file's unnamed symbols (note: requires -r)")
 args = parser.parse_args()
 
 # Get list of object files
 objects = None
 if args.rootdir:
-    for line in Popen(["make", "-C", args.rootdir, "-s", "-p", "DEBUG=1"],
-            stdout=PIPE).stdout.read().decode().split("\n"):
-        if line.startswith("pokered_obj := "):
-            objects = line[15:].strip().split()
-            break
-    else:
-        print("Error: Object files not found!", file=stderr)
-        exit(1)
+	for line in subprocess.Popen(['make', '-C', args.rootdir, '-s', '-p', 'DEBUG=1'],
+			stdout=subprocess.PIPE).stdout.read().decode().split('\n'):
+		if line.startswith('pokered_obj :='):
+			objects = line[len('pokered_obj :='):].strip().split()
+			break
+	else:
+		print('Error: Object files not found!', file=sys.stderr)
+		sys.exit(1)
 
 # Scan all unnamed symbols from the symfile
 symbols_total = 0
 symbols = set()
 for line in args.symfile:
-    line = line.split(";")[0].strip()
-    split = line.split(" ")
-    if len(split) < 2:
-        continue
+	line = line.split(';')[0].strip()
+	split = line.split(' ')
+	if len(split) < 2:
+		continue
 
-    symbols_total += 1
+	symbols_total += 1
 
-    symbol = " ".join(split[1:]).strip()
-    if symbol[-3:].lower() == split[0][-3:].lower():
-        symbols.add(symbol)
+	symbol = ' '.join(split[1:]).strip()
+	if symbol[-3:].lower() == split[0][-3:].lower():
+		symbols.add(symbol)
 
 # If no object files were provided, just print what we know and exit
-print("Unnamed pokered symbols: %d (%.2f%% complete)" % (len(symbols),
-        (symbols_total - len(symbols)) / symbols_total * 100))
+unnamed_percent = 100 * (symbols_total - len(symbols)) / symbols_total
+print(f'Unnamed pokered symbols: {len(symbols)} ({unnamed_percent:.2f}% complete)')
 if not objects:
-    for sym in symbols:
-        print(sym)
-    exit()
+	for sym in symbols:
+		print(sym)
+	sys.exit()
 
 # Count the amount of symbols in each file
-files = {}
+file_symbols = {}
 for objfile in objects:
-    f = open(objfile, "rb")
-    obj_ver = None
+	with open(objfile, 'rb') as file:
+		obj_ver = None
 
-    magic = unpack_file("4s", f)[0]
-    if magic == b'RGB6':
-        obj_ver = 6
-    elif magic == b'RGB9':
-        obj_ver = 10 + unpack_file("<I", f)[0]
+		magic = unpack_from('4s', file)[0]
+		if magic == b'RGB6':
+			obj_ver = 6
+		elif magic == b'RGB9':
+			obj_ver = 10 + unpack_from('<I', file)[0]
 
-    if obj_ver not in [6, 10, 11, 12, 13, 15, 16, 17, 18]:
-        print("Error: File '%s' is of an unknown format." % objfile, file=stderr)
-        exit(1)
+		if obj_ver not in [6, 10, 11, 12, 13, 15, 16, 17, 18, 19]:
+			print(f"Error: File '{objfile}' is of an unknown format.", file=sys.stderr)
+			sys.exit(1)
 
-    num_symbols = unpack_file("<I", f)[0]
-    unpack_file("<I", f) # skip num sections
+		num_symbols = unpack_from('<I', file)[0]
+		unpack_from('<I', file) # skip num sections
 
-    if obj_ver in [16, 17, 18]:
-        node_filenames = []
-        num_nodes = unpack_file("<I", f)[0]
-        for x in range(num_nodes):
-            unpack_file("<II", f) # parent id, parent line no
-            node_type = unpack_file("<B", f)[0]
-            if node_type:
-                node_filenames.append(read_string(f))
-            else:
-                node_filenames.append("rept")
-                depth = unpack_file("<I", f)[0]
-                for i in range(depth):
-                    unpack_file("<I", f) # rept iterations
-        node_filenames.reverse()
+		if obj_ver in [16, 17, 18, 19]:
+			node_filenames = []
+			num_nodes = unpack_from('<I', file)[0]
+			for x in range(num_nodes):
+				unpack_from('<II', file) # parent id, parent line no
+				node_type = unpack_from('<B', file)[0]
+				if node_type:
+					node_filenames.append(read_string(file))
+				else:
+					node_filenames.append('rept')
+					depth = unpack_from('<I', file)[0]
+					for i in range(depth):
+						unpack_from('<I', file) # rept iterations
+			node_filenames.reverse()
 
-    for x in range(num_symbols):
-        sym_name = read_string(f)
-        sym_type = symtype(unpack_file("<B", f)[0] & 0x7f)
-        if sym_type == symtype.IMPORT:
-            continue
-        if obj_ver in [16, 17, 18]:
-            sym_fileno = unpack_file("<I", f)[0]
-            sym_filename = node_filenames[sym_fileno]
-        else:
-            sym_filename = read_string(f)
-        unpack_file("<III", f)
-        if sym_name not in symbols:
-            continue
+		for _ in range(num_symbols):
+			sym_name = read_string(file)
+			sym_type = symtype(unpack_from('<B', file)[0] & 0x7f)
+			if sym_type == symtype.IMPORT:
+				continue
+			if obj_ver in [16, 17, 18, 19]:
+				sym_fileno = unpack_from('<I', file)[0]
+				sym_filename = node_filenames[sym_fileno]
+			else:
+				sym_filename = read_string(file)
+			unpack_from('<III', file)
+			if sym_name not in symbols:
+				continue
 
-        if sym_filename not in files:
-            files[sym_filename] = []
-        files[sym_filename].append(sym_name)
+			if sym_filename not in file_symbols:
+				file_symbols[sym_filename] = []
+			file_symbols[sym_filename].append(sym_name)
 
 # Sort the files, the one with the most amount of symbols first
-files = sorted(((f, files[f]) for f in files), key=lambda x: len(x[1]), reverse=True)
-for f in files:
-    filename, unnamed = f
-    sym_list = ', '.join(unnamed[:args.list])
-    print("%s: %d%s" % (filename, len(unnamed), ': ' + sym_list if sym_list else ''))
+file_symbols = sorted(file_symbols.items(), key=lambda item: len(item[1]), reverse=True)
+for filename, unnamed_syms in file_symbols:
+	sym_list = ', '.join(unnamed_syms[:args.list])
+	print(f'{filename}: {len(unnamed_syms)}{": " + sym_list if sym_list else ""}')

@@ -204,7 +204,7 @@ PlayAnimation:
 	push hl
 	push de
 	call GetMoveSound
-	call PlaySound
+	call nc, PlayBattleSound
 	pop de
 	pop hl
 .skipPlayingSound
@@ -249,7 +249,7 @@ PlayAnimation:
 	push af
 	ld a, [wAnimPalette]
 	ldh [rOBP0], a
-	call LoadAnimationTileset
+	call LoadMoveAnimationTiles
 	vc_hook Reduce_move_anim_flashing_Mega_Punch_Self_Destruct_Explosion
 	call LoadSubanimation
 	call PlaySubanimation
@@ -352,11 +352,11 @@ GetSubanimationTransform2:
 	ret
 
 ; loads tile patterns for battle animations
-LoadAnimationTileset:
+LoadMoveAnimationTiles:
 	ld a, [wWhichBattleAnimTileset]
 	add a
 	add a
-	ld hl, AnimationTilesetPointers
+	ld hl, MoveAnimationTilesPointers
 	ld e, a
 	ld d, 0
 	add hl, de
@@ -367,7 +367,7 @@ LoadAnimationTileset:
 	ld a, [hl]
 	ld d, a ; de = address of tileset
 	ld hl, vSprites tile $31
-	ld b, BANK(AnimationTileset1) ; ROM bank
+	ld b, BANK(MoveAnimationTiles0) ; ROM bank
 	ld a, [wTempTilesetNumTiles]
 	ld c, a ; number of tiles
 	jp CopyVideoData ; load tileset
@@ -378,17 +378,18 @@ MACRO anim_tileset
 	db -1 ; padding
 ENDM
 
-AnimationTilesetPointers:
+MoveAnimationTilesPointers:
 	; number of tiles, gfx pointer
-	anim_tileset 79, AnimationTileset1
-	anim_tileset 79, AnimationTileset2
-	anim_tileset 64, AnimationTileset1
+	anim_tileset 79, MoveAnimationTiles0
+	anim_tileset 79, MoveAnimationTiles1
+	anim_tileset 64, MoveAnimationTiles2
 
-AnimationTileset1:
-	INCBIN "gfx/battle/attack_anim_1.2bpp"
+MoveAnimationTiles0:
+MoveAnimationTiles2:
+	INCBIN "gfx/battle/move_anim_0.2bpp"
 
-AnimationTileset2:
-	INCBIN "gfx/battle/attack_anim_2.2bpp"
+MoveAnimationTiles1:
+	INCBIN "gfx/battle/move_anim_1.2bpp"
 
 SlotMachineTiles2:
 	INCBIN "gfx/slots/slots_2.2bpp"
@@ -576,7 +577,7 @@ PlaySubanimation:
 	cp NO_MOVE - 1
 	jr z, .skipPlayingSound
 	call GetMoveSound
-	call PlaySound
+	call nc, PlayBattleSound
 .skipPlayingSound
 	ld hl, wShadowOAM
 	ld a, l
@@ -1109,7 +1110,7 @@ AnimationWaterDropletsEverywhere:
 ; in Surf/Mist/Toxic.
 	xor a
 	ld [wWhichBattleAnimTileset], a
-	call LoadAnimationTileset
+	call LoadMoveAnimationTiles
 	ld d, 32
 	ld a, -16
 	ld [wBaseCoordX], a
@@ -1628,7 +1629,7 @@ _AnimationShootBallsUpward:
 	push bc
 	xor a
 	ld [wWhichBattleAnimTileset], a
-	call LoadAnimationTileset
+	call LoadMoveAnimationTiles
 	pop bc
 	ld d, $7a ; ball tile
 	ld hl, wShadowOAM
@@ -2071,7 +2072,7 @@ InitMultipleObjectsOAM:
 	push bc
 	push de
 	ld [wWhichBattleAnimTileset], a
-	call LoadAnimationTileset
+	call LoadMoveAnimationTiles
 	pop de
 	pop bc
 	xor a
@@ -2210,25 +2211,44 @@ GetMoveSound:
 .next
 	ld a, [wEnemyMonSpecies]
 .Continue
-	push hl
-	call GetCryData
-	ld b, a
-	pop hl
-	ld a, [wFrequencyModifier]
-	add [hl]
-	ld [wFrequencyModifier], a
-	inc hl
-	ld a, [wTempoModifier]
-	add [hl]
-	ld [wTempoModifier], a
-	jr .done
-.NotCryMove
-	ld a, [hli]
-	ld [wFrequencyModifier], a
-	ld a, [hli]
-	ld [wTempoModifier], a
-.done
+
+	push af
+	ld a, 1
+	ld [wSFXDontWait], a
+	pop af
+	call PlayCry
+	xor a
+	ld [wSFXDontWait], a
 	ld a, b
+	scf
+	ret
+;	push hl
+;	call GetCryData
+;	ld b, a
+;	pop hl
+;	ld a, [wFrequencyModifier]
+;	add [hl]
+;	ld [wFrequencyModifier], a
+;	inc hl
+;	ld a, [wTempoModifier]
+;	add [hl]
+;	ld [wTempoModifier], a
+;	jr .done
+
+.NotCryMove
+	push bc
+	ld a, [hli]
+	ld c, a
+	ld b, 0
+	ld a, [hli]
+	add $80
+	ld e, a
+	ld a, 0
+	adc 0
+	ld d, a
+	pop af
+.done
+	and a
 	ret
 
 IsCryMove:
@@ -2639,20 +2659,20 @@ PlayApplyingAttackSound:
 	and $7f
 	ret z
 	cp 10
-	ld a, $20
-	ld b, $30
-	ld c, SFX_DAMAGE
+	ld bc, $20
+	ld de, $30 + $80
+	ld a, SFX_DAMAGE
 	jr z, .playSound
-	ld a, $e0
-	ld b, $ff
-	ld c, SFX_SUPER_EFFECTIVE
+	ld bc, $e0
+	ld de, $ff + $80
+	ld a, SFX_SUPER_EFFECTIVE
 	jr nc, .playSound
-	ld a, $50
-	ld b, $1
-	ld c, SFX_NOT_VERY_EFFECTIVE
+	ld bc, $50
+	ld de, $1 + $80
+	ld a, SFX_NOT_VERY_EFFECTIVE
 .playSound
-	ld [wFrequencyModifier], a
-	ld a, b
-	ld [wTempoModifier], a
-	ld a, c
-	jp PlaySound
+;	ld [wFrequencyModifier], a
+;	ld a, b
+;	ld [wTempoModifier], a
+;	ld a, c
+	jp PlayBattleSound

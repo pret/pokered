@@ -1,6 +1,3 @@
-INCLUDE "constants.asm"
-
-
 SECTION "NULL", ROM0
 NULL::
 
@@ -42,7 +39,7 @@ INCLUDE "home/update_sprites.asm"
 INCLUDE "home/overworld_text.asm"
 INCLUDE "home/uncompress.asm"
 INCLUDE "home/reset_player_sprite.asm"
-INCLUDE "home/fade_audio.asm"
+;INCLUDE "home/fade_audio.asm"
 INCLUDE "home/text_script.asm"
 INCLUDE "home/start_menu.asm"
 INCLUDE "home/count_set_bits.asm"

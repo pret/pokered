@@ -23,7 +23,7 @@ HallOfFamePC:
 	call EnableLCD
 	ld a, SFX_STOP_ALL_MUSIC
 	call PlaySoundWaitForCurrent
-	ld c, BANK(Music_Credits)
+	ld c, 0 ; BANK(Music_Credits)
 	ld a, MUSIC_CREDITS
 	call PlayMusic
 	ld c, 128

@@ -1,7 +1,7 @@
-SFX_Pokeflute_Ch5:
+SFX_PokefluteInBattle_Ch5:
 	tempo 256
 
-SFX_Pokeflute_Ch6:
+SFX_PokefluteInBattle_Ch6:
 	execute_music
 	note_type 8, 0, 0
 	rest 5

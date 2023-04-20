@@ -258,7 +258,7 @@ PokedexEntryPointers:
 
 ; string: species name
 ; height in feet, inches
-; weight in pounds
+; weight in tenths of a pound
 ; text entry
 
 BulbasaurDexEntry:
