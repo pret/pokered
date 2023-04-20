@@ -37,10 +37,10 @@ ROMX $1
 	"bank1"
 ROMX $2
 	"Sound Effect Headers 1"
-	"Music Headers 1"
+;	"Music Headers 1"
 	"Sound Effects 1"
 	"Audio Engine 1"
-	"Music 1"
+;	"Music 1"
 ROMX $3
 	"bank3"
 ROMX $4
@@ -62,12 +62,12 @@ ROMX $7
 	"Hidden Objects 1"
 ROMX $8
 	"Sound Effect Headers 2"
-	"Music Headers 2"
+;	"Music Headers 2"
 	"Sound Effects 2"
-	"Low Health Alarm (Audio Engine 2)"
-	"Bill's PC"
-	"Audio Engine 2"
-	"Music 2"
+;	"Low Health Alarm (Audio Engine 2)"
+;	"Bill's PC"
+;	"Audio Engine 2"
+;	"Music 2"
 ROMX $9
 	"Pics 1"
 	"Battle Engine 3"
@@ -147,10 +147,10 @@ ROMX $1E
 	"bank1E"
 ROMX $1F
 	"Sound Effect Headers 3"
-	"Music Headers 3"
+;	"Music Headers 3"
 	"Sound Effects 3"
-	"Audio Engine 3"
-	"Music 3"
+;	"Audio Engine 3"
+;	"Music 3"
 ROMX $20
 	"Text 1"
 ROMX $21
@@ -194,7 +194,7 @@ WRAM0
 	"Party Data"
 	"Main Data"
 	"Current Box Data"
-	org $df03
+	org $df67
 	"Stack"
 VRAM
 	"VRAM"

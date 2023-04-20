@@ -113,3 +113,47 @@ MACRO map_connection_struct
 \1ConnectedMapXAlignment::  db
 \1ConnectedMapViewPointer:: dw
 ENDM
+
+MACRO channel_struct
+\1MusicID::           dw
+\1MusicBank::         db
+\1Flags1::            db ; 0:on/off 1:subroutine 2:looping 3:sfx 4:noise 5:rest
+\1Flags2::            db ; 0:vibrato on/off 1:pitch slide 2:duty cycle pattern 4:pitch offset
+\1Flags3::            db ; 0:vibrato up/down 1:pitch slide direction
+\1MusicAddress::      dw
+\1LastMusicAddress::  dw
+                      dw
+\1NoteFlags::         db ; 5:rest
+\1Condition::         db ; conditional jumps
+\1DutyCycle::         db ; bits 6-7 (0:12.5% 1:25% 2:50% 3:75%)
+\1VolumeEnvelope::    db ; hi:volume lo:fade
+\1Frequency::         dw ; 11 bits
+\1Pitch::             db ; 0:rest 1-c:note
+\1Octave::            db ; 7-0 (0 is highest)
+\1Transposition::     db ; raises existing octaves (to repeat phrases)
+\1NoteDuration::      db ; frames remaining for the current note
+\1Field16::           ds 1
+                      ds 1
+\1LoopCount::         db
+\1Tempo::             dw
+\1Tracks::            db ; hi:left lo:right
+\1DutyCyclePattern::  db
+\1VibratoDelayCount:: db ; initialized by \1VibratoDelay
+\1VibratoDelay::      db ; number of frames a note plays until vibrato starts
+\1VibratoExtent::     db
+\1VibratoRate::       db ; hi:frames for each alt lo:frames to the next alt
+\1PitchSlideTarget::  dw ; frequency endpoint for pitch slide
+\1PitchSlideAmount::  db
+\1PitchSlideAmountFraction::   db
+\1Field25::           db
+                      ds 1
+\1PitchOffset::       dw
+\1Field29::           ds 1
+\1Field2a::           ds 2
+\1Field2c::           ds 1
+\1NoteLength::        db ; frames per 16th note
+\1Field2e::           ds 1
+\1Field2f::           ds 1
+\1Field30::           ds 1
+                      ds 1
+ENDM

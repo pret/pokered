@@ -162,12 +162,12 @@ PewterMuseumGuyMovementScriptPointerTable::
 	dw PewterMovementScript_Done
 
 PewterMovementScript_WalkToMuseum:
-	ld a, BANK(Music_MuseumGuy)
-	ld [wAudioROMBank], a
-	ld [wAudioSavedROMBank], a
+;	ld a, 0 ; BANK(Music_MuseumGuy)
+;	ld [wAudioROMBank], a
+;	ld [wAudioSavedROMBank], a
 	ld a, MUSIC_MUSEUM_GUY
-	ld [wNewSoundID], a
-	call PlaySound
+;	ld [wNewSoundID], a
+	call PlayMusic
 	ld a, [wSpriteIndex]
 	swap a
 	ld [wNPCMovementScriptSpriteOffset], a
@@ -218,12 +218,12 @@ PewterGymGuyMovementScriptPointerTable::
 	dw PewterMovementScript_Done
 
 PewterMovementScript_WalkToGym:
-	ld a, BANK(Music_MuseumGuy)
-	ld [wAudioROMBank], a
-	ld [wAudioSavedROMBank], a
+;	ld a, 0 ; BANK(Music_MuseumGuy)
+;	ld [wAudioROMBank], a
+;	ld [wAudioSavedROMBank], a
 	ld a, MUSIC_MUSEUM_GUY
-	ld [wNewSoundID], a
-	call PlaySound
+;	ld [wNewSoundID], a
+	call PlayMusic
 	ld a, [wSpriteIndex]
 	swap a
 	ld [wNPCMovementScriptSpriteOffset], a

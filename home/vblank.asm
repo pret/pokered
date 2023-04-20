@@ -54,27 +54,28 @@ VBlank::
 	ldh [hFrameCounter], a
 
 .skipDec
-	call FadeOutAudio
+	call UpdateSound
+;	call FadeOutAudio
 
-	ld a, [wAudioROMBank] ; music ROM bank
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+;	ld a, [wAudioROMBank] ; music ROM bank
+;	ldh [hLoadedROMBank], a
+;	ld [MBC1RomBank], a
 
-	cp BANK(Audio1_UpdateMusic)
-	jr nz, .checkForAudio2
-.audio1
-	call Audio1_UpdateMusic
-	jr .afterMusic
-.checkForAudio2
-	cp BANK(Audio2_UpdateMusic)
-	jr nz, .audio3
-.audio2
-	call Music_DoLowHealthAlarm
-	call Audio2_UpdateMusic
-	jr .afterMusic
-.audio3
-	call Audio3_UpdateMusic
-.afterMusic
+;	cp BANK(Audio1_UpdateMusic)
+;	jr nz, .checkForAudio2
+;.audio1
+;	call Audio1_UpdateMusic
+;	jr .afterMusic
+;.checkForAudio2
+;	cp BANK(Audio2_UpdateMusic)
+;	jr nz, .audio3
+;.audio2
+;	call Music_DoLowHealthAlarm
+;	call Audio2_UpdateMusic
+;	jr .afterMusic
+;.audio3
+;	call Audio3_UpdateMusic
+;.afterMusic
 
 	farcall TrackPlayTime ; keep track of time played
 

@@ -1,5 +1,6 @@
 MACRO mon_cry
-	db (\1 - CRY_SFX_START) / 3
+	;db (\1 - CRY_SFX_START) / 3
+	db \1
 	db \2, \3
 ENDM
 

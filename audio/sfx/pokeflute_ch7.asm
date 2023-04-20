@@ -1,4 +1,4 @@
-SFX_Pokeflute_Ch7:
+SFX_PokefluteInBattle_Ch7:
 	execute_music
 	vibrato 16, 1, 4
 	note_type 8, 1, 0
