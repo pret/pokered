@@ -9,10 +9,14 @@
 
 
 
-
+Music_Digda01::
+	channel_count 3
+	channel 1, Music_Digda01_Ch1
+	channel 2, Music_Digda01_Ch2
+	channel 3, Music_Digda01_Ch3
 
 ;;----------------------------------------
-Digda01_Ch1:
+Music_Digda01_Ch1:
 ;;----------------------------------------
 
 	tempo 144
@@ -239,7 +243,7 @@ Digda01_Ch1:
 	sound_loop 0, .loop
 
 ;;----------------------------------------
-Digda01_Ch2:
+Music_Digda01_Ch2:
 ;;----------------------------------------
     duty_cycle 1
 	note_type 12, 12, 3
@@ -477,7 +481,7 @@ Digda01_Ch2:
 	sound_loop 0, .loop
 
 ;;----------------------------------------
-Digda01_Ch3:
+Music_Digda01_Ch3:
 ;;----------------------------------------
 
 ;; P3-1

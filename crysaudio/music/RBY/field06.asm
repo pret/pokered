@@ -2,10 +2,15 @@
 
 
 
-
+Music_Field06::
+	channel_count 3
+	channel 1, Music_Field06_Ch1
+	channel 2, Music_Field06_Ch2
+	channel 3, Music_Field06_Ch3
+	channel 4, Music_Field06_Ch4
 
 ;;----------------------------------------
-Field6_Ch1:
+Music_Field06_Ch1:
 ;;----------------------------------------
 
 	tempo 128
@@ -23,7 +28,7 @@ Field6_Ch1:
 	sound_loop 0, .loop10
 
 ;;----------------------------------------
-Field6_Ch2:
+Music_Field06_Ch2:
 ;;----------------------------------------
 
 	duty_cycle 1
@@ -123,7 +128,7 @@ Field6_Ch2:
 
 
 ;;----------------------------------------
-Field6_Ch3:
+Music_Field06_Ch3:
 ;;----------------------------------------
 
 	note_type 12, 1, 1
@@ -178,7 +183,7 @@ Field6_Ch3:
 	sound_ret
 
 ;;----------------------------------------
-Field6_Ch4:
+Music_Field06_Ch4:
 ;;----------------------------------------
 
 	drum_speed 6
