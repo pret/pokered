@@ -79,8 +79,16 @@ SilphCo11Script_62163: ; This is altered to have Omega rush you once the door is
 	ret z
 	SetEvent EVENT_SILPH_CO_11_UNLOCKED_DOOR
 	ld a, $6
-	ldh [hSpriteIndex], a
+	ldh [hSpriteIndex], a ; TODO: Make Omega look at the player.
 	call MoveOmegaSprite
+	ld a, OMEGA
+	ld [wcf91], a
+	call PlayCry
+	ld a, SFX_STOP_ALL_MUSIC
+	call PlaySound
+	ld c, 0 ; BANK(Music_MeetMaleTrainer)
+	ld a, MUSIC_MEET_MALE_TRAINER
+	call PlayMusic
 	;add code here to make Rocket NPC look at Omega
 	ld a, $6
 	ld [wSilphCo11FCurScript], a
@@ -475,9 +483,6 @@ SilphCo10Text_6237b:
 OmegaBattleText:
 	text_far _OmegaBattleText
 	text_asm
-	ld a, OMEGA
-	call PlayCry
-	call WaitForSoundToFinish
 	jp TextScriptEnd
 
 StupidGiovanniFix:
