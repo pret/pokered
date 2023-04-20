@@ -11,7 +11,7 @@
 InitMapSprites::
 	call InitOutsideMapSprites
 	ret c ; return if the map is an outside map (already handled by above call)
-; if the map is an inside map (i.e. mapID >= $25)
+; if the map is an inside map (i.e. mapID >= FIRST_INDOOR_MAP)
 	ld hl, wSpritePlayerStateData1PictureID
 	ld de, wSpritePlayerStateData2PictureID
 ; Loop to copy picture IDs from [x#SPRITESTATEDATA1_PICTUREID]
@@ -19,10 +19,10 @@ InitMapSprites::
 .copyPictureIDLoop
 	ld a, [hl] ; a = [x#SPRITESTATEDATA1_PICTUREID]
 	ld [de], a ; [x#SPRITESTATEDATA2_PICTUREID] = a
-	ld a, $10
+	ld a, SPRITESTATEDATA1_LENGTH
 	add e
 	ld e, a
-	ld a, $10
+	ld a, SPRITESTATEDATA1_LENGTH
 	add l
 	ld l, a
 	jr nz, .copyPictureIDLoop
@@ -37,7 +37,7 @@ LoadMapSpriteTilePatterns:
 	ret
 .spritesExist
 	ld c, a ; c = [wNumSprites]
-	ld b, $10 ; number of sprite slots
+	ld b, NUM_SPRITESTATEDATA_STRUCTS
 	ld hl, wSpritePlayerStateData2PictureID
 	xor a
 	ldh [hFourTileSpriteCount], a
@@ -47,7 +47,7 @@ LoadMapSpriteTilePatterns:
 	ld a, [hli] ; a = [x#SPRITESTATEDATA2_PICTUREID]
 	ld [hld], a ; [x#SPRITESTATEDATA2_IMAGEBASEOFFSET] = a
 	ld a, l
-	add $10
+	add SPRITESTATEDATA1_LENGTH
 	ld l, a
 	dec b
 	jr nz, .copyPictureIDLoop
@@ -69,17 +69,17 @@ LoadMapSpriteTilePatterns:
 	cp [hl] ; do the picture ID's match?
 	jp z, .alreadyLoaded
 	ld a, e
-	add $10
+	add SPRITESTATEDATA1_LENGTH
 	ld e, a
 	jr .checkIfAlreadyLoadedLoop
 .notAlreadyLoaded
 	ld de, wSpritePlayerStateData2ImageBaseOffset
-	ld b, $01
+	ld b, 1
 ; loop to find the highest tile pattern VRAM slot (among the first 10 slots) used by a previous sprite slot
 ; this is done in order to find the first free VRAM slot available
 .findNextVRAMSlotLoop
 	ld a, e
-	add $10
+	add SPRITESTATEDATA1_LENGTH
 	ld e, a
 	ld a, l
 	cp e ; reached current slot?
@@ -187,7 +187,7 @@ LoadMapSpriteTilePatterns:
 	jr nz, .loadWhileLCDOn
 	pop af
 	pop hl
-	set 3, h ; add $800 to hl
+	set 3, h ; add $80 tiles to hl
 	push hl
 	ld h, d
 	ld l, e
@@ -200,7 +200,7 @@ LoadMapSpriteTilePatterns:
 .loadWhileLCDOn
 	pop af
 	pop hl
-	set 3, h ; add $800 to hl
+	set 3, h ; add $80 tiles to hl
 	ld b, a
 	swap c
 	call CopyVideoData ; load tile pattern data for sprite when walking
@@ -214,18 +214,18 @@ LoadMapSpriteTilePatterns:
 	ld [hl], a ; [x#SPRITESTATEDATA2_IMAGEBASEOFFSET] = a
 .nextSpriteSlot
 	ld a, l
-	add $10
+	add SPRITESTATEDATA2_LENGTH
 	ld l, a
 	dec c
 	jp nz, .loadTilePatternLoop
 	ld hl, wSpritePlayerStateData2PictureID
-	ld b, $10
+	ld b, NUM_SPRITESTATEDATA_STRUCTS
 ; the pictures IDs stored at [x#SPRITESTATEDATA2_PICTUREID] are no longer needed,
 ; so zero them
 .zeroStoredPictureIDLoop
 	xor a
 	ld [hl], a ; [x#SPRITESTATEDATA2_PICTUREID]
-	ld a, $10
+	ld a, SPRITESTATEDATA2_LENGTH
 	add l
 	ld l, a
 	dec b
@@ -264,7 +264,7 @@ InitOutsideMapSprites:
 	inc h
 .noCarry
 	ld a, [hl] ; a = spriteSetID
-	cp $f0 ; does the map have 2 sprite sets?
+	cp FIRST_SPLIT_SET - 1 ; does the map have 2 sprite sets?
 	call nc, GetSplitMapSpriteSetID ; if so, choose the appropriate one
 	ld b, a ; b = spriteSetID
 	ld a, [wFontLoaded]
@@ -283,7 +283,7 @@ InitOutsideMapSprites:
 	sla a
 	sla a
 	add c
-	add b ; a = (spriteSetID - 1) * 11
+	add b ; a = (spriteSetID - 1) * SPRITE_SET_LENGTH
 	ld de, SpriteSets
 ; add a to de to get offset of sprite set
 	add e
@@ -300,7 +300,7 @@ InitOutsideMapSprites:
 ; with picture IDs. This is done so that LoadMapSpriteTilePatterns will
 ; load tile patterns for all sprite pictures in the sprite set.
 .loadSpriteSetLoop
-	ld a, $10
+	ld a, SPRITESTATEDATA2_LENGTH
 	add l
 	ld l, a
 	ld a, [de] ; sprite picture ID from sprite set
@@ -309,11 +309,11 @@ InitOutsideMapSprites:
 	inc de
 	inc bc
 	ld a, l
-	cp $bd ; reached 11th sprite slot?
+	cp 11 * SPRITESTATEDATA2_LENGTH + SPRITESTATEDATA2_PICTUREID ; reached 11th sprite slot?
 	jr nz, .loadSpriteSetLoop
 	ld b, 4 ; 4 remaining sprite slots
 .zeroRemainingSlotsLoop ; loop to zero the picture ID's of the remaining sprite slots
-	ld a, $10
+	ld a, SPRITESTATEDATA2_LENGTH
 	add l
 	ld l, a
 	xor a
@@ -322,20 +322,20 @@ InitOutsideMapSprites:
 	jr nz, .zeroRemainingSlotsLoop
 	ld a, [wNumSprites]
 	push af ; save number of sprites
-	ld a, 11 ; 11 sprites in sprite set
+	ld a, SPRITE_SET_LENGTH ; 11 sprites in sprite set
 	ld [wNumSprites], a
 	call LoadMapSpriteTilePatterns
 	pop af
 	ld [wNumSprites], a ; restore number of sprites
 	ld hl, wSprite01StateData2ImageBaseOffset
-	ld b, $0f
+	ld b, NUM_SPRITESTATEDATA_STRUCTS - 1
 ; The VRAM tile pattern slots that LoadMapSpriteTilePatterns set are in the
 ; order of the map's sprite set, not the order of the actual sprites loaded
 ; for the current map. So, they are not needed and are zeroed by this loop.
 .zeroVRAMSlotsLoop
 	xor a
 	ld [hl], a ; [x#SPRITESTATEDATA2_IMAGEBASEOFFSET]
-	ld a, $10
+	ld a, SPRITESTATEDATA2_LENGTH
 	add l
 	ld l, a
 	dec b
@@ -366,14 +366,14 @@ InitOutsideMapSprites:
 	inc c
 .skipGettingPictureIndex
 	push hl
-	inc h
-	ld a, $0e
+	inc h ; HIGH(wSpriteStateData2)
+	ld a, SPRITESTATEDATA2_IMAGEBASEOFFSET - SPRITESTATEDATA1_PICTUREID
 	add l
 	ld l, a
 	ld a, c ; a = VRAM slot (zero if sprite slot is not used)
 	ld [hl], a ; [x#SPRITESTATEDATA2_IMAGEBASEOFFSET]
 	pop hl
-	ld a, $10
+	ld a, SPRITESTATEDATA1_LENGTH
 	add l
 	ld l, a
 	and a
@@ -384,7 +384,7 @@ InitOutsideMapSprites:
 ; Chooses the correct sprite set ID depending on the player's position within
 ; the map for maps with two sprite sets.
 GetSplitMapSpriteSetID:
-	cp $f8
+	cp SPLITSET_ROUTE_20
 	jr z, .route20
 	ld hl, SplitMapSpriteSets
 	and $0f
@@ -396,8 +396,8 @@ GetSplitMapSpriteSetID:
 	jr nc, .noCarry
 	inc h
 .noCarry
-	ld a, [hli] ; determines whether the map is split East/West or North/South
-	cp $01
+	ld a, [hli] ; whether the map is split EAST_WEST or NORTH_SOUTH
+	cp EAST_WEST
 	ld a, [hli] ; position of dividing line
 	ld b, a
 	jr z, .eastWestDivide
@@ -409,35 +409,39 @@ GetSplitMapSpriteSetID:
 .compareCoord
 	cp b
 	jr c, .loadSpriteSetID
-; if in the East side or South side
+; if in the east side or south side
 	inc hl
 .loadSpriteSetID
 	ld a, [hl]
 	ret
-; Uses sprite set $01 for West side and $0A for East side.
+; Uses sprite set SPRITESET_PALLET_VIRIDIAN for west side and SPRITESET_FUCHSIA for east side.
 ; Route 20 is a special case because the two map sections have a more complex
 ; shape instead of the map simply being split horizontally or vertically.
 .route20
 	ld hl, wXCoord
+	; Use SPRITESET_PALLET_VIRIDIAN if X < 43
 	ld a, [hl]
-	cp $2b
-	ld a, $01
+	cp 43
+	ld a, SPRITESET_PALLET_VIRIDIAN
 	ret c
+	; Use SPRITESET_FUCHSIA if X >= 62.
 	ld a, [hl]
-	cp $3e
-	ld a, $0a
+	cp 62
+	ld a, SPRITESET_FUCHSIA
 	ret nc
+	; If 55 <= X < 62, split Y at 8; else 43 <= X < 55, so split Y at 13
 	ld a, [hl]
-	cp $37
-	ld b, $08
+	cp 55
+	ld b, 8
 	jr nc, .next
-	ld b, $0d
+	ld b, 13
 .next
+	; Use SPRITESET_FUCHSIA if Y < split; else use SPRITESET_PALLET_VIRIDIAN
 	ld a, [wYCoord]
 	cp b
-	ld a, $0a
+	ld a, SPRITESET_FUCHSIA
 	ret c
-	ld a, $01
+	ld a, SPRITESET_PALLET_VIRIDIAN
 	ret
 
 INCLUDE "data/maps/sprite_sets.asm"

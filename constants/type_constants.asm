@@ -13,7 +13,9 @@ DEF PHYSICAL EQU const_value
 	const GHOST        ; $08
 	const STEEL        ; $09
 
+DEF UNUSED_TYPES EQU const_value
 	const_next 20
+DEF UNUSED_TYPES_END EQU const_value
 
 DEF SPECIAL EQU const_value
 	const FIRE         ; $14

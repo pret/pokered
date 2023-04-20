@@ -3,13 +3,13 @@ LoadShootingStarGraphics:
 	ldh [rOBP0], a
 	ld a, $a4
 	ldh [rOBP1], a
-	ld de, AnimationTileset2 tile 3 ; star tile (top left quadrant)
+	ld de, MoveAnimationTiles1 tile 3 ; star tile (top left quadrant)
 	ld hl, vChars1 tile $20
-	lb bc, BANK(AnimationTileset2), 1
+	lb bc, BANK(MoveAnimationTiles1), 1
 	call CopyVideoData
-	ld de, AnimationTileset2 tile 19 ; star tile (bottom left quadrant)
+	ld de, MoveAnimationTiles1 tile 19 ; star tile (bottom left quadrant)
 	ld hl, vChars1 tile $21
-	lb bc, BANK(AnimationTileset2), 1
+	lb bc, BANK(MoveAnimationTiles1), 1
 	call CopyVideoData
 	ld de, FallingStar
 	ld hl, vChars1 tile $22

@@ -165,7 +165,7 @@ int strfind(const char *s, const char *list[], int count) {
 	return -1;
 }
 
-#define vstrfind(s, ...) strfind(s, (const char *[]){__VA_ARGS__}, sizeof (const char *[]){__VA_ARGS__} / sizeof(const char *))
+#define vstrfind(s, ...) strfind(s, (const char *[]){__VA_ARGS__}, COUNTOF((const char *[]){__VA_ARGS__}))
 
 int parse_arg_value(const char *arg, bool absolute, const struct Symbol *symbols, const char *patch_name) {
 	// Comparison operators for "ConditionValueB" evaluate to their particular values

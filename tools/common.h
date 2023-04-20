@@ -19,6 +19,8 @@
 #error Define USAGE_OPTS before including common.h!
 #endif
 
+#define COUNTOF(...) (sizeof(__VA_ARGS__) / sizeof(*(__VA_ARGS__)))
+
 #define error_exit(...) exit((fprintf(stderr, PROGRAM_NAME ": " __VA_ARGS__), 1))
 
 noreturn void usage_exit(int status) {
