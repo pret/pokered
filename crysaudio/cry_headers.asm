@@ -211,7 +211,7 @@ PokemonCries::
 	mon_cry CRY_DROWZEE,       0,  256 ; EXEGGUTOR_A
 	mon_cry CRY_CHARMANDER,    0,  256 ; RHYHORN
 	mon_cry CRY_RHYDON,        0,  256 ; RHYDON
-	mon_cry CRY_NIDORAN_M,     0,    0 ; RHYPERIOR	(incomplete)
+	mon_cry CRY_TYPHLOSION, -496,  256 ; RHYPERIOR
 	mon_cry CRY_CATERPIE,      0,  256 ; SCYTHER
 	mon_cry CRY_AMPHAROS,      0,  352 ; SCIZOR
 	mon_cry CRY_CATERPIE,   -512,  383 ; KLEAVOR
@@ -237,7 +237,7 @@ PokemonCries::
 	mon_cry CRY_LAPRAS,        0,  256 ; LAPRAS
 	mon_cry CRY_WEEPINBELL,  170,  383 ; PORYGON
 	mon_cry CRY_GIRAFARIG,   115,  576 ; PORYGON2
-	mon_cry CRY_NIDORAN_M,     0,    0 ; PORYGONZ	(incomplete)
+	mon_cry CRY_PARAS,       287,  519 ; PORYGONZ
 	mon_cry CRY_GROWLITHE,   240,  129 ; OMANYTE
 	mon_cry CRY_GROWLITHE,   255,  192 ; OMASTAR
 	mon_cry CRY_CATERPIE,    187,  192 ; KABUTO
