@@ -23,6 +23,6 @@ _Route11Youngster4AfterBattleText::
 	line "stronger ones!"
 	done
 
-_Route11DiglettCaveSignText::
+_Route11DiglettsCaveSignText::
 	text "DIGLETT's CAVE"
 	done

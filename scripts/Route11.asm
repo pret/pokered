@@ -15,17 +15,17 @@ Route11_ScriptPointers:
 
 Route11_TextPointers:
 	def_text_pointers
-	dw_const Route11Gambler1Text,        TEXT_ROUTE11_GAMBLER1
-	dw_const Route11Gambler2Text,        TEXT_ROUTE11_GAMBLER2
-	dw_const Route11Youngster1Text,      TEXT_ROUTE11_YOUNGSTER1
-	dw_const Route11SuperNerd1Text,      TEXT_ROUTE11_SUPER_NERD1
-	dw_const Route11Youngster2Text,      TEXT_ROUTE11_YOUNGSTER2
-	dw_const Route11Gambler3Text,        TEXT_ROUTE11_GAMBLER3
-	dw_const Route11Gambler4Text,        TEXT_ROUTE11_GAMBLER4
-	dw_const Route11Youngster3Text,      TEXT_ROUTE11_YOUNGSTER3
-	dw_const Route11SuperNerd2Text,      TEXT_ROUTE11_SUPER_NERD2
-	dw_const Route11Youngster4Text,      TEXT_ROUTE11_YOUNGSTER4
-	dw_const Route11DiglettCaveSignText, TEXT_ROUTE11_DIGLETTCAVE_SIGN
+	dw_const Route11Gambler1Text,         TEXT_ROUTE11_GAMBLER1
+	dw_const Route11Gambler2Text,         TEXT_ROUTE11_GAMBLER2
+	dw_const Route11Youngster1Text,       TEXT_ROUTE11_YOUNGSTER1
+	dw_const Route11SuperNerd1Text,       TEXT_ROUTE11_SUPER_NERD1
+	dw_const Route11Youngster2Text,       TEXT_ROUTE11_YOUNGSTER2
+	dw_const Route11Gambler3Text,         TEXT_ROUTE11_GAMBLER3
+	dw_const Route11Gambler4Text,         TEXT_ROUTE11_GAMBLER4
+	dw_const Route11Youngster3Text,       TEXT_ROUTE11_YOUNGSTER3
+	dw_const Route11SuperNerd2Text,       TEXT_ROUTE11_SUPER_NERD2
+	dw_const Route11Youngster4Text,       TEXT_ROUTE11_YOUNGSTER4
+	dw_const Route11DiglettsCaveSignText, TEXT_ROUTE11_DIGLETTSCAVE_SIGN
 
 Route11TrainerHeaders:
 	def_trainers
@@ -231,6 +231,6 @@ Route11Youngster4AfterBattleText:
 	text_far _Route11Youngster4AfterBattleText
 	text_end
 
-Route11DiglettCaveSignText:
-	text_far _Route11DiglettCaveSignText
+Route11DiglettsCaveSignText:
+	text_far _Route11DiglettsCaveSignText
 	text_end

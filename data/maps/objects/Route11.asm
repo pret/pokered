@@ -21,7 +21,7 @@ Route11_Object:
 	warp_event  4,  5, DIGLETTS_CAVE_ROUTE_11, 1
 
 	def_bg_events
-	bg_event  1,  5, TEXT_ROUTE11_DIGLETTCAVE_SIGN
+	bg_event  1,  5, TEXT_ROUTE11_DIGLETTSCAVE_SIGN
 
 	def_object_events
 	object_event 10, 14, SPRITE_GAMBLER, STAY, DOWN, TEXT_ROUTE11_GAMBLER1, OPP_GAMBLER, 1
