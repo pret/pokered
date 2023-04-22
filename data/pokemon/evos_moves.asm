@@ -203,7 +203,6 @@ EvosMovesPointerTable:
 	dw WeepinbellEvosMoves
 	dw VictreebelEvosMoves
 	dw MonjaEvosMoves
-	dw PudiEvosMoves
 	dw ScizorEvosMoves
 	dw RhyperiorEvosMoves
 	dw EspeonEvosMoves
@@ -228,8 +227,9 @@ EvosMovesPointerTable:
 	dw ElectivireEvosMoves
 	dw MagmortarEvosMoves
 	dw TaabanEvosMoves
-	dw HinaazuEvosMoves
-	dw BetobebiiEvosMoves
+	dw KokanaEvosMoves
+	dw KasanagiEvosMoves
+	dw CarapthorEvosMoves
 	dw MagnezoneEvosMoves
 	dw PorygonZEvosMoves
 	dw AnnihilapeEvosMoves
@@ -2547,17 +2547,17 @@ MonjaEvosMoves:
 	db 40, NIGHT_SHADE
 	db 0
 
-PudiEvosMoves:
+;PudiEvosMoves:
 ; Evolutions
-	db EV_LEVEL, 16, GROWLITHE
-	db 0
+;	db EV_LEVEL, 16, GROWLITHE
+;	db 0
 ; Learnset
-	db 9, EMBER
-	db 12, LEER
-	db 15, TAKE_DOWN
-	db 21, AGILITY
-	db 30, FLAMETHROWER
-	db 0
+;	db 9, EMBER
+;	db 12, LEER
+;	db 15, TAKE_DOWN
+;	db 21, AGILITY
+;	db 30, FLAMETHROWER
+;	db 0
 
 ScizorEvosMoves:
 ; Evolutions
@@ -2841,32 +2841,58 @@ TaabanEvosMoves:
 	db 50, POISON_GAS
 	db 0
 	
-HinaazuEvosMoves:
+KokanaEvosMoves:
 ; Evolutions
-	db EV_LEVEL, 18, DODUO
+	db EV_LEVEL, 7, KASANAGI
 	db 0
 ; Learnset
-	db 5, QUICK_ATTACK
-	db 11, FURY_ATTACK
-	db 20, DRILL_PECK
-	db 23, RAGE
-	db 27, TRI_ATTACK
-	db 32, AGILITY
 	db 0
 
-BetobebiiEvosMoves:
+KasanagiEvosMoves:
 ; Evolutions
-	db EV_LEVEL, 20, GRIMER
+	db EV_LEVEL, 10, CARAPTHOR
 	db 0
 ; Learnset
-	db 13, POISON_GAS
-	db 16, ACID
-	db 19, MINIMIZE
-	db 22, SLUDGE
-	db 28, HARDEN
-	db 33, SCREECH
-	db 37, ACID_ARMOR
 	db 0
+
+CarapthorEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 12, COMET_PUNCH
+	db 16, PIN_MISSILE
+	db 20, DEFENSE_CURL
+	db 25, SWIFT
+	db 30, MEGA_PUNCH
+	db 35, SUBSTITUTE
+	db 0
+	
+;HinaazuEvosMoves:
+; Evolutions
+;	db EV_LEVEL, 18, DODUO
+;	db 0
+; Learnset
+;	db 5, QUICK_ATTACK
+;	db 11, FURY_ATTACK
+;	db 20, DRILL_PECK
+;	db 23, RAGE
+;	db 27, TRI_ATTACK
+;	db 32, AGILITY
+;	db 0
+
+;BetobebiiEvosMoves:
+; Evolutions
+;	db EV_LEVEL, 20, GRIMER
+;	db 0
+; Learnset
+;	db 13, POISON_GAS
+;	db 16, ACID
+;	db 19, MINIMIZE
+;	db 22, SLUDGE
+;	db 28, HARDEN
+;	db 33, SCREECH
+;	db 37, ACID_ARMOR
+;	db 0
 	
 MagnezoneEvosMoves:
 ; Evolutions

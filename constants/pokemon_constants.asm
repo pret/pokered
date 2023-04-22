@@ -198,33 +198,33 @@
 	const WEEPINBELL         ; $BD
 	const VICTREEBEL         ; $BE
 	const MONJA              ; $BF	(new pokemon start here)
-	const PUDI               ; $C0
-	const SCIZOR             ; $C1
-	const RHYPERIOR          ; $C2
-	const ESPEON             ; $C3
-	const UMBREON            ; $C4
-	const LEAFEON            ; $C5
-	const GLACEON            ; $C6
-	const SYLVEON            ; $C7
-	const LICKILICKY         ; $C8
-	const TANGROWTH          ; $C9
-	const KLEAVOR            ; $CA
-	const TSUBOMITTO		 ; $CB
-	const STEELIX			 ; $CC
-	const BLISSEY			 ; $CD
-	const HITMONTOP 		 ; $CE
-	const CROBAT			 ; $CF
-	const ANIMON             ; $D0
-	const BELLOSSOM          ; $D1
-	const PORYGON2           ; $D2
-	const KINGDRA            ; $D3
-	const POLITOED           ; $D4
-	const SLOWKING           ; $D5
-	const ELECTIVIRE         ; $D6
-	const MAGMORTAR          ; $D7
-	const TAABAN             ; $D8
-	const HINAAZU            ; $D9
-	const BETOBEBII          ; $DA
+	const SCIZOR             ; $C0
+	const RHYPERIOR          ; $C1
+	const ESPEON             ; $C2
+	const UMBREON            ; $C3
+	const LEAFEON            ; $C4
+	const GLACEON            ; $C5
+	const SYLVEON            ; $C6
+	const LICKILICKY         ; $C7
+	const TANGROWTH          ; $C8
+	const KLEAVOR            ; $C9
+	const TSUBOMITTO		 ; $CA
+	const STEELIX			 ; $CB
+	const BLISSEY			 ; $CC
+	const HITMONTOP 		 ; $CD
+	const CROBAT			 ; $CE
+	const ANIMON             ; $CF
+	const BELLOSSOM          ; $D0
+	const PORYGON2           ; $D1
+	const KINGDRA            ; $D2
+	const POLITOED           ; $D3
+	const SLOWKING           ; $D4
+	const ELECTIVIRE         ; $D5
+	const MAGMORTAR          ; $D6
+	const TAABAN             ; $D7
+	const KOKANA             ; $D8
+	const KASANAGI           ; $D9
+	const CARAPTHOR          ; $DA
 	const MAGNEZONE          ; $DB
 	const PORYGONZ           ; $DC
 	const ANNIHILAPE         ; $DD

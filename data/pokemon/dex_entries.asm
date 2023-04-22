@@ -191,7 +191,6 @@ PokedexEntryPointers:
 	dw WeepinbellDexEntry
 	dw VictreebelDexEntry
 	dw MonjaDexEntry
-	dw PudiDexEntry
 	dw ScizorDexEntry
 	dw RhyperiorDexEntry
 	dw EspeonDexEntry
@@ -216,8 +215,9 @@ PokedexEntryPointers:
 	dw ElectivireDexEntry
 	dw MagmortarDexEntry
 	dw TaabanDexEntry
-	dw HinaazuDexEntry
-	dw BetobebiiDexEntry
+	dw KokanaDexEntry
+	dw KasanagiDexEntry
+	dw CarapthorDexEntry
 	dw MagnezoneDexEntry
 	dw PorygonZDexEntry
 	dw AnnihilapeDexEntry
@@ -1668,13 +1668,6 @@ KleavorDexEntry:
 	text_far _KleavorDexEntry
 	text_end
 
-PudiDexEntry:
-    db "PUPPY@"
-	db 1,0
-	dw 270
-	text_far _PudiDexEntry
-	text_end
-
 MonjaDexEntry:
     db "VINE@"
 	db 1,4
@@ -1759,18 +1752,25 @@ TaabanDexEntry:
 	text_far _TaabanDexEntry
 	text_end
 	
-BetobebiiDexEntry:
-	db "SLUDGE@"
+KokanaDexEntry:
+	db "GRUB@"
 	db 1,0
-	dw 200
-	text_far _BetobebiiDexEntry
+	dw 80
+	text_far _KokanaDexEntry
 	text_end
-	
-HinaazuDexEntry:
-	db "BIRD NEST@"
-	db 1,4
-	dw 200
-	text_far _HinaazuDexEntry
+
+KasanagiDexEntry:
+	db "PUPA@"
+	db 2,7
+	dw 220
+	text_far _KasanagiDexEntry
+	text_end
+
+CarapthorDexEntry:
+	db "DAPPER@"
+	db 3,11
+	dw 760
+	text_far _CarapthorDexEntry
 	text_end
 
 MagnezoneDexEntry:

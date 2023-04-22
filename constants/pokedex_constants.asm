@@ -43,9 +43,9 @@
 	const DEX_WEEDLE     ; 13	(037)
 	const DEX_KAKUNA     ; 14	(038)
 	const DEX_BEEDRILL   ; 15	(039)
-	; const DEX_KOKANA     ; 		(040)
-	; const DEX_KASANAGI   ; 		(041)
-	; const DEX_CARAPTHOR  ; 		(042)
+	const DEX_KOKANA     ; 		(040)
+	const DEX_KASANAGI   ; 		(041)
+	const DEX_CARAPTHOR  ; 		(042)
 	const DEX_SPEAROW    ; 21	(043)	- Route 22 + Route 3
 	const DEX_FEAROW     ; 22	(044)
 	const DEX_EKANS      ; 23	(045)
@@ -78,7 +78,6 @@
 	const DEX_VULPIX     ; 37	(072)
 	const DEX_NINETALES  ; 38	(073)
 	const DEX_NINETALES_A ; 	(074)	
-	const DEX_PUDI	     ;		
 	const DEX_GROWLITHE  ; 58	(075)
 	const DEX_ARCANINE   ; 59	(076)
 	const DEX_ARCANINE_H ; 		(077)
@@ -169,10 +168,8 @@
 	const DEX_FARFETCHD  ; 83 	(162)	- Routes 13-18
 	const DEX_MADAAMU    ;		(163)
 	const DEX_SIRFETCHD  ;		(164)
-	const DEX_HINAAZU    ;		
 	const DEX_DODUO      ; 84	(165)
 	const DEX_DODRIO     ; 85 	(166)
-	const DEX_BETOBEBII  ;		
 	const DEX_GRIMER     ; 88	(167)
 	const DEX_MUK        ; 89	(168)
 	const DEX_MUK_A      ;		(169)

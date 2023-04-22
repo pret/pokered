@@ -1,15 +1,15 @@
 Route22WildMons:
 	def_grass_wildmons 25 ; encounter rate
 	db  5, RATTATA
-	db  3, NIDORAN_M
-	db  4, PUDI
 	db  4, NIDORAN_M
-	db  2, RATTATA
-	db  4, MANKEY
-	db  3, SPEAROW
-	db  5, MIKON
-	db  3, NIDORAN_F
+	db  4, SPEAROW
 	db  4, NIDORAN_F
+	db  3, RATTATA
+	db  4, MANKEY
+	db  4, MIKON
+	db  5, MIKON
+	db  5, NIDORAN_F
+	db  5, NIDORAN_M
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate

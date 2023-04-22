@@ -45,9 +45,9 @@ PokemonCries::
 	mon_cry CRY_WEEDLE,      238,  129 ; WEEDLE
 	mon_cry CRY_BLASTOISE,   255,  129 ; KAKUNA
 	mon_cry CRY_BLASTOISE,    96,  256 ; BEEDRILL
-	; mon_cry CRY_NIDORAN_M,     0,    0 ; KOKANA	(incomplete)
-	; mon_cry CRY_NIDORAN_M,     0,    0 ; KASANAGI	(incomplete)
-	; mon_cry CRY_NIDORAN_M,     0,    0 ; CARAPTHOR(incomplete)
+	mon_cry CRY_NIDORAN_M,     0,    0 ; KOKANA	(incomplete)
+	mon_cry CRY_NIDORAN_M,     0,    0 ; KASANAGI	(incomplete)
+	mon_cry CRY_NIDORAN_M,     0,    0 ; CARAPTHOR	(incomplete)
 	mon_cry CRY_SPEAROW,       0,  256 ; SPEAROW
 	mon_cry CRY_FEAROW,       64,  288 ; FEAROW
 	mon_cry CRY_EKANS,        18,  192 ; EKANS
@@ -80,7 +80,7 @@ PokemonCries::
 	mon_cry CRY_VULPIX,       79,  144 ; VULPIX
 	mon_cry CRY_VULPIX,      136,  224 ; NINETALES
 	mon_cry CRY_VULPIX,      136,  224 ; NINETALES_A
-	mon_cry CRY_GROWLITHE,    64,  129 ; PUDI
+	; mon_cry CRY_GROWLITHE,    64,  129 ; PUDI
 	mon_cry CRY_GROWLITHE,    32,  192 ; GROWLITHE
 	mon_cry CRY_WEEDLE,        0,  256 ; ARCANINE
 	mon_cry CRY_WEEDLE,        0,  256 ; ARCANINE_H
@@ -172,10 +172,9 @@ PokemonCries::
 	mon_cry CRY_SPEAROW,     221,  129 ; FARFETCHD
 	mon_cry CRY_FEAROW,       25,  383 ; MADAAMU
 	mon_cry CRY_SPEAROW,    -112,  192 ; SIRFETCHD
-	mon_cry CRY_NIDORAN_M,     0,    0 ; HINAAZU
 	mon_cry CRY_DIGLETT,     187,  129 ; DODUO
 	mon_cry CRY_DIGLETT,     153,  160 ; DODRIO
-	mon_cry CRY_GRIMER,      255,  192 ; BETOBEBII
+	; mon_cry CRY_GRIMER,      255,  192 ; BETOBEBII
 	mon_cry CRY_GRIMER,        0,  256 ; GRIMER
 	mon_cry CRY_MUK,         239,  383 ; MUK
 	mon_cry CRY_MUK,         239,  383 ; MUK_A

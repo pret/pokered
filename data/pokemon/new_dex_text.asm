@@ -398,34 +398,34 @@ _TaabanDexEntry::
 	next "with potent venom"
 	dex
 
-_HinaazuDexEntry::
-	text "One of the three"
-	next "heads is withdrawn"
-	next "upon evolution."
+_KokanaDexEntry::
+	text "Closely related to"
+	next "WEEDLE. Due to the"
+	next "lack of a horn,"
 
-	page "It grows back in"
-	next "as the angriest"
-	next "head of DODRIO"
+	para "it hides under"
+	next "trees, gnawing"
+	next "their roots"
 	dex
 
-_PudiDexEntry::
-	text "A very popular"
-	next "family pet, this"
-	next "affectionate"
+_KasanagiDexEntry::
+	text "While awaiting"
+	next "evolution, it"
+	next "barely moves. If"
 
-	page "#MON shoots"
-	next "out tiny embers"
-	next "whenever it barks"
+	page "threatened, it"
+	next "shudders while"
+	next "throwing punches"
 	dex
 
-_BetobebiiDexEntry::
-	text "Though it has a"
-	next "cute appearance,"
-	next "it constantly"
+_CarapthorDexEntry::
+	text "Often called the"
+	next "Forest Gent,"
+	next "CARAPTHOR strolls"
 
-	page "emits an foul"
-	next "odor that deters"
-	next "anyone around it"
+	page "around forests"
+	next "with swagger, to"
+	next "BEEDRILL's ire"
 	dex
 
 _ScizorDexEntry::
@@ -996,36 +996,6 @@ _TaurosPADexEntry::
 	page "shoot water at"
 	next "high pressure from"
 	next "its horns"
-	dex
-
-_KokanaDexEntry::
-	text "Closely related to"
-	next "WEEDLE. Due to the"
-	next "lack of a horn,"
-	
-	para "it hides under"
-	next "trees, gnawing"
-	next "their roots"
-	dex
-
-_KasanagiDexEntry::
-	text "While awaiting"
-	next "evolution, it"
-	next "barely moves. If"
-
-	page "threatened, it"
-	next "shudders while"
-	next "throwing punches"
-	dex
-
-_CarapthorDexEntry::
-	text "Often called the"
-	next "'Forest Gent',"
-	next "CARAPTHOR strolls"
-
-	page "around forests"
-	next "with swagger, to"
-	next "BEEDRILL's ire"
 	dex
 
 _MissingNoDexEntry::

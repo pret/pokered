@@ -87,25 +87,25 @@ YoungsterData:
 BugCatcherData:
 ; Viridian Forest
 	db 6, WEEDLE, CATERPIE, 0
-	db 7, CATERPIE, KAKUNA, WEEDLE, 0
+	db 7, CATERPIE, KAKUNA, KOKANA, 0
 	db 9, VENONAT, 0
 ; Route 3
-	db 10, CATERPIE, WEEDLE, WEEDLE, 0
+	db 10, CATERPIE, WEEDLE, KOKANA, 0
 	db 9,  WEEDLE, KAKUNA, CATERPIE, METAPOD, 0
 	db 11, CATERPIE, METAPOD, 0
 ; Mt. Moon 1F
-	db 12, BEEDRILL, 0
-	db 10, METAPOD, PARAS, 0
+	db 12, PARAS, 0 
+	db 10, KASANAGI, PARAS, 0
 ; Route 24
-	db 14, CATERPIE, WEEDLE, 0
+	db 14, KOKANA, WEEDLE, 0
 ; Route 6
-	db 16, WEEDLE, CATERPIE, WEEDLE, 0
+	db 16, KOKANA, CATERPIE, WEEDLE, 0
 	db 17, BUTTERFREE, 0 ; this is that one boss fight-like one, levelled down for learnset reasons
 ; Unused - this will be used in the Silph Gauntlet
-	db 62, SCIZOR, BEEDRILL, PARASECT, VENOMOTH, PURAKKUSU, KLEAVOR, 0
+	db 62, SCIZOR, CARAPTHOR, PARASECT, VENOMOTH, PURAKKUSU, KLEAVOR, 0
 ; Route 9
 	db 19, BUTTERFREE, BEEDRILL, 0
-	db 20, WEEDLE, VENONAT, BEEDRILL, 0 ; holy shit why did they have an L20 Caterpie you psycho, weedle is barely acceptable...
+	db 20, KASANAGI, VENONAT, BEEDRILL, 0 ; holy shit why did they have an L20 Caterpie you psycho, weedle is barely acceptable...
 
 LassData:
 ; Route 3
@@ -325,7 +325,7 @@ EngineerData:
 ; Unused - used in celadon university
 	db 36, GOLEM, 0
 ; Route 11
-	db 21, MAGNEMITE, 0
+	db 21, MAGNETITE, 0
 	db 18, MAGNEMITE, MAGNEMITE, MAGNETITE, 0
 
 FisherData:
@@ -665,8 +665,8 @@ ChannelerData:
 	db 33, JYNX, EXEGGCUTE, KADABRA, 0
 
 StudentData:
-	db 6, PIDGEY, HINAAZU, 0
-	db 4, CLEFAIRY, 0
+	db 6, PIDGEY, RATTATA, 0
+	db 6, CLEFAIRY, 0
 
 FirefighterData:
 ; For Cerulean Gym

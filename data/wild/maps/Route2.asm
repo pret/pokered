@@ -7,9 +7,9 @@ Route2WildMons:
 	db  5, KONYA
 	db  4, NIDORAN_F
 	db  3, KONYA
-	db  5, NIDORAN_M
-	db  5, MONJA	; replace Monja with Kokana when added
-	db  6, MONJA
+	db  4, NIDORAN_M
+	db  5, KOKANA
+	db  6, KOKANA
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate

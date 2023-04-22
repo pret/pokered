@@ -4,7 +4,7 @@ ViridianForestWildMons:
 	db  6, WEEDLE
 	db  6, CATERPIE
 	db  5, PIDGEY
-	db  6, MONJA	; KOKANA
+	db  6, KOKANA
 	db  6, WEEDLE
 	db  8, KAKUNA
 	db  8, METAPOD

@@ -3,11 +3,11 @@ Route4WildMons:
 	db 10, RATTATA
 	db 10, PIDGEY
 	db  8, KONYA
-	db  6, EKANS
+	db 10, EKANS
 	db  8, SPEAROW
 	db 10, EKANS
-	db 12, SANDSHREW
-	db 12, PUDI
+	db 12, MIKON
+	db 12, MANKEY
 	db 12, MIKON
 	db  8, MANKEY
 

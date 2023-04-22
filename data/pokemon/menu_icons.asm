@@ -39,9 +39,9 @@ MonPartyData:
 	nybble ICON_BUG       ; Weedle
 	nybble ICON_BUG       ; Kakuna
 	nybble ICON_BUG       ; Beedrill
-	; nybble ICON_BUG       ; Kokana
-	; nybble ICON_BUG       ; Kasanagi
-	; nybble ICON_BUG       ; Carapthor
+	nybble ICON_BUG       ; Kokana
+	nybble ICON_BUG       ; Kasanagi
+	nybble ICON_BUG       ; Carapthor
 	nybble ICON_BIRD      ; Spearow
 	nybble ICON_BIRD      ; Fearow
 	nybble ICON_SNAKE     ; Ekans
@@ -74,7 +74,6 @@ MonPartyData:
 	nybble ICON_QUADRUPED ; Vulpix
 	nybble ICON_QUADRUPED ; Ninetales
 	nybble ICON_QUADRUPED ; Ninetales-A
-	nybble ICON_QUADRUPED ; Pudi
 	nybble ICON_QUADRUPED ; Growlithe
 	nybble ICON_QUADRUPED ; Arcanine
 	nybble ICON_QUADRUPED ; Arcanine-H
@@ -165,10 +164,8 @@ MonPartyData:
 	nybble ICON_BIRD      ; Farfetch'd
 	nybble ICON_BIRD	  ; Madaamu
 	nybble ICON_BIRD      ; Sirfetch'd
-	nybble ICON_BIRD      ; Hinaazu
 	nybble ICON_BIRD      ; Doduo
 	nybble ICON_BIRD      ; Dodrio
-	nybble ICON_MON       ; Betobebii
 	nybble ICON_MON       ; Grimer
 	nybble ICON_MON       ; Muk
 	nybble ICON_MON       ; Muk-A
