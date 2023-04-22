@@ -6,7 +6,7 @@ CeladonChiefHouse_TextPointers:
 	def_text_pointers
 	dw_const CeladonChiefHouseChiefText,  TEXT_CELADONCHIEFHOUSE_CHIEF
 	dw_const CeladonChiefHouseRocketText, TEXT_CELADONCHIEFHOUSE_ROCKET
-	dw_const CeladonChiefHouseSailorText, TEXT_CELADONCHEIFHOUSE_SAILOR
+	dw_const CeladonChiefHouseSailorText, TEXT_CELADONCHIEFHOUSE_SAILOR
 
 CeladonChiefHouseChiefText:
 	text_far _CeladonChiefHouseChiefText
