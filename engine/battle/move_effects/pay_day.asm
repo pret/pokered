@@ -1,4 +1,4 @@
-PayDayEffect_:
+PayDayEffect_: ; Pay Day money calculation
 	xor a
 	ld hl, wcd6d
 	ld [hli], a
@@ -7,7 +7,7 @@ PayDayEffect_:
 	ld a, [wBattleMonLevel]
 	jr z, .payDayEffect
 	ld a, [wEnemyMonLevel]
-.payDayEffect
+.payDayEffect ; what
 ; level * 2
 	add a
 	ldh [hDividend + 3], a

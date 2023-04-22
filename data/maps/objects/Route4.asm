@@ -7,13 +7,15 @@ Route4_Object:
 	warp_event 24,  5, MT_MOON_B1F, 8
 
 	def_bg_events
-	bg_event 12,  5, 4 ; PokeCenterSignText
-	bg_event 17,  7, 5 ; Route4Text5
-	bg_event 27,  7, 6 ; Route4Text6
+	bg_event 12,  5, 6 ; PokeCenterSignText
+	bg_event 17,  7, 7 ; Route4Text5
+	bg_event 27,  7, 8 ; Route4Text6
 
 	def_object_events
 	object_event  9,  8, SPRITE_COOLTRAINER_F, WALK, ANY_DIR, 1 ; person
 	object_event 63,  3, SPRITE_COOLTRAINER_F, STAY, RIGHT, 2, OPP_LASS, 4
 	object_event 57,  3, SPRITE_POKE_BALL, STAY, NONE, 3, TM_WHIRLWIND
+	object_event 39,  3, SPRITE_HIKER, STAY, RIGHT, 4 ; Mega Punch Guy
+	object_event 42,  3, SPRITE_HIKER, STAY, LEFT, 5 ; Mega Kick Guy
 
 	def_warps_to ROUTE_4

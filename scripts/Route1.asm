@@ -63,7 +63,7 @@ Route1OakText:
 	ld hl, OakBeforeBattleText
 	call PrintText
 
-	call YesNoChoice ; this whole bit doesn't work for some reason
+	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .refused
