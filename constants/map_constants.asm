@@ -98,7 +98,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const CELESTE_HILL,                  12, 12 ; $4C	- Was copy of above & unused
 	map_const ROUTE_7_GATE,                   3,  4 ; $4D
 	map_const UNDERGROUND_PATH_ROUTE_7,       4,  4 ; $4E
-	map_const UNDERGROUND_PATH_ROUTE_7_COPY,  4,  4 ; $4F	- Unused
+	map_const CITRINE_ROCKET_HOUSE,  		  5,  5 ; $4F	- Unused, was UNDERGROUND_PATH_ROUTE_7_COPY
 	map_const ROUTE_8_GATE,                   3,  4 ; $50
 	map_const UNDERGROUND_PATH_ROUTE_8,       4,  4 ; $51
 	map_const ROCK_TUNNEL_POKECENTER,         7,  4 ; $52

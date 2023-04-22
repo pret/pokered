@@ -66,4 +66,5 @@ ENDM
 	trainer_const FIREFIGHTER
 	trainer_const JUNIOR
 	trainer_const JACK
+	trainer_const JESSIE_JAMES
 DEF NUM_TRAINERS EQU const_value - 1

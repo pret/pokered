@@ -24,4 +24,6 @@ BookshelfTileIDs:
 	bookshelf_tile SHIP,         $36, BookOrSculptureText
 	bookshelf_tile PREGYM,		 $56, BookOrSculptureText
 	bookshelf_tile PREGYM,		 $57, BookOrSculptureText
+	bookshelf_tile ROCKETHOUSE,  $38, BookOrSculptureText
+	bookshelf_tile ROCKETHOUSE,  $39, BookOrSculptureText
 	db -1 ; end

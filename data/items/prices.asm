@@ -30,7 +30,7 @@ ItemPrices::
 	bcd3 0     ; EARTHBADGE
 	bcd3 550   ; ESCAPE_ROPE
 	bcd3 350   ; REPEL
-	bcd3 0     ; OLD_AMBER
+	bcd3 7000  ; OLD_AMBER
 	bcd3 2100  ; FIRE_STONE
 	bcd3 2100  ; THUNDER_STONE
 	bcd3 2100  ; WATER_STONE
@@ -40,8 +40,8 @@ ItemPrices::
 	bcd3 9800  ; CARBOS
 	bcd3 9800  ; CALCIUM
 	bcd3 4800  ; RARE_CANDY
-	bcd3 0     ; DOME_FOSSIL
-	bcd3 0     ; HELIX_FOSSIL
+	bcd3 7000  ; DOME_FOSSIL
+	bcd3 7000  ; HELIX_FOSSIL
 	bcd3 0     ; SECRET_KEY
 	bcd3 2100  ; HEART_STONE
 	bcd3 0     ; BIKE_VOUCHER
@@ -49,7 +49,7 @@ ItemPrices::
 	bcd3 2100  ; LEAF_STONE
 	bcd3 0     ; CARD_KEY
 	bcd3 10000 ; NUGGET
-	bcd3 0     ; WING_FOSSIL
+	bcd3 7000  ; WING_FOSSIL
 	bcd3 1000  ; POKE_DOLL
 	bcd3 600   ; FULL_HEAL
 	bcd3 1500  ; REVIVE

@@ -28,4 +28,5 @@
 	const PREGYM	   ; 24
 	const CITRINE	   ; 25
 	const CELESTE	   ; 26
+	const ROCKETHOUSE
 DEF NUM_TILESETS EQU const_value

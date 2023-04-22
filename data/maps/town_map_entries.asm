@@ -69,7 +69,6 @@ InternalMapEntries:
 	internal_map DAYCARE,                       10,  4, Route5Name
 	internal_map UNDERGROUND_PATH_ROUTE_6, 		10,  8, Route6Name
 	internal_map CELESTE_HILL, 					 6, 10, CelesteHillName
-	internal_map UNDERGROUND_PATH_ROUTE_7_COPY,  9,  5, Route7Name
 	internal_map UNDERGROUND_PATH_ROUTE_8,      11,  5, Route8Name
 	internal_map ROCK_TUNNEL_1F,                14,  3, RockTunnelName
 	internal_map POWER_PLANT,                   15,  4, PowerPlantName

@@ -60,4 +60,5 @@ TrainerClassMoveChoiceModifications:
 	move_choices 1, 3,   ; FIREFIGHTER
 	move_choices 1, 3,   ; JUNIOR
 	move_choices 1, 3,   ; JACK
+	move_choices 1, 3,   ; JESSIE_JAMES
 	assert_list_length NUM_TRAINERS

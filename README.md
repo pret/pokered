@@ -261,9 +261,9 @@ Galarian and Paldean formes are accessed on the S.S. Anne, which now returns aft
 
 Credits
 ====
-* Plague von Karma - Creator of the Showdown Mod, Developer
-* Martha's Against Humanity - Developer, tweaks of Albatross's sprites.
-* Ema Skye - Developer 
+* Plague von Karma - Creator of the Showdown Mod, Developer, Maps, and occasional spriter (assisting with Tsubomitto, Carapthor)
+* Martha's Against Humanity - Developer, Pokemon implementation, tweaks of Albatross's sprites.
+* Ema Skye - Developer, Maps, Showdown Mod assistance
 * pret et al - Pokémon Red and Blue Disassembly Project, many tutorials helped us!
 * ausma - Showdown Mod assistance
 * Paulluxx - Showdown Mod assistance

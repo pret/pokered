@@ -279,6 +279,9 @@ INCLUDE "text/ViridianPreGym.asm"
 INCLUDE "text/move_deleter.asm"
 INCLUDE "text/move_relearner.asm"
 
+SECTION "Text 12", ROMX
+INCLUDE "text/CitrineRocketHouse.asm"
+
 SECTION "Pokédex Text", ROMX
 
 INCLUDE "data/pokemon/dex_text.asm"

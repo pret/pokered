@@ -51,4 +51,5 @@ TrainerNames::
 	li "FIREFIGHTER"
 	li "JUNIOR"
 	li "JACK"
+	li "JESSIE&JAMES"
 	assert_list_length NUM_TRAINERS

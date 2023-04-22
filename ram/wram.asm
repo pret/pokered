@@ -1974,7 +1974,7 @@ wMissableObjectList:: ds 16 * 2 + 1
 wGameProgressFlags::
 wOaksLabCurScript:: db
 wPalletTownCurScript:: db
-	ds 1
+wCitrineRocketHouseCurScript:: db
 wBluesHouseCurScript:: db
 wViridianCityCurScript:: db
 	ds 2

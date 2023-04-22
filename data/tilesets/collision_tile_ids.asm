@@ -77,3 +77,6 @@ Citrine_Coll::
 
 Celeste_Coll::
 	coll_tiles $1e, $20, $2e, $30, $34, $37, $39, $3a, $40, $51, $52, $5a, $5c, $5e, $5f, $09, $08, $18, $19
+
+RocketHouse_Coll::
+	coll_tiles $13, $31, $01, $53

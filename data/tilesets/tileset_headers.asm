@@ -36,4 +36,5 @@ Tilesets:
 	tileset PreGym,		 $3A, $3B, -1,  -1, TILEANIM_NONE
 	tileset Citrine,	 -1,  -1,  -1, $3F, TILEANIM_WATER_FLOWER
 	tileset Celeste,	 -1,  -1,  -1, $19, TILEANIM_WATER_FLOWER
+	tileset RocketHouse, $0A,  -1,  -1,  -1, TILEANIM_NONE
 	assert_table_length NUM_TILESETS

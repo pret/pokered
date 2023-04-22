@@ -51,3 +51,4 @@ Music:
 	dba Music_MeetMaleTrainer
 	dba Music_Digda01
 	dba Music_Field06
+	dba Music_MeetJessieJames

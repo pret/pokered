@@ -27,6 +27,7 @@ WarpTileIDPointers:
 	dw .PreGymWarpTileIDs
 	dw .CitrineWarpTileIDs
 	dw .CelesteWarpTileIDs
+	dw .RocketHouseWarpTileIDs
 	assert_table_length NUM_TILESETS
 
 MACRO warp_tiles
@@ -97,10 +98,13 @@ ENDM
 	warp_tiles $23
 
 .CitrineWarpTileIDs:
-	warp_tiles $1B, $1C
+	warp_tiles $1B, $1C, $0B, $0C
 
 .CelesteWarpTileIDs:
 	warp_tiles $5A, $5C, $3A, $30, $50, $51 ; Like Forest but a bit better
+
+.RocketHouseWarpTileIDs:
+	warp_tiles $53
 
 .ShipPortWarpTileIDs:
 .ClubWarpTileIDs:

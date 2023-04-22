@@ -29,7 +29,7 @@ CeladonUniversityOutsideText1: ; Starter girl
 	ld hl, CeladonUniversityOutsideBattleText1
 	call PrintText
 	
-	ld c, BANK(Music_MeetFemaleTrainer)
+	ld c, 0 ; BANK(Music_MeetFemaleTrainer)
 	ld a, MUSIC_MEET_FEMALE_TRAINER
 	call PlayMusic
 	
@@ -69,7 +69,7 @@ CeladonUniversityOutsideText2: ; Porygon guy
 	ld hl, CeladonUniversityOutsideBattleText2
 	call PrintText
 	
-	ld c, BANK(Music_MeetMaleTrainer)
+	ld c, 0 ; BANK(Music_MeetMaleTrainer)
 	ld a, MUSIC_MEET_MALE_TRAINER
 	call PlayMusic
 	
@@ -109,7 +109,7 @@ CeladonUniversityOutsideText3: ; Golem guy
 	ld hl, CeladonUniversityOutsideBattleText3
 	call PrintText
 	
-	ld c, BANK(Music_MeetMaleTrainer)
+	ld c, 0; BANK(Music_MeetMaleTrainer)
 	ld a, MUSIC_MEET_MALE_TRAINER
 	call PlayMusic
 	
@@ -149,7 +149,7 @@ CeladonUniversityOutsideText4: ; Mt Moon guy
 	ld hl, CeladonUniversityOutsideBattleText4
 	call PrintText
 	
-	ld c, BANK(Music_MeetMaleTrainer)
+	ld c, 0 ;BANK(Music_MeetMaleTrainer)
 	ld a, MUSIC_MEET_MALE_TRAINER
 	call PlayMusic
 	

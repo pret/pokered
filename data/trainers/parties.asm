@@ -51,6 +51,7 @@ TrainerDataPointers:
 	dw FirefighterData
 	dw JuniorData
 	dw JackData
+	dw JessieJamesData
 	assert_table_length NUM_TRAINERS
 
 ; if first byte != $FF, then
@@ -675,6 +676,13 @@ FirefighterData:
 JuniorData:
 
 JackData:
+
+JessieJamesData:
+	db 14, EKANS, MEOWTH, KOFFING, 0 ; Mt. Moon
+	db 25, KOFFING, LICKITUNG, MEOWTH, EKANS, 0 ; Rocket Hideout
+	db 27, MEOWTH, LICKITUNG, ARBOK, VICTREEBEL, WEEZING, 0 ; Pokemon Tower
+	db 31, WEEZING, ARBOK, LICKITUNG, VICTREEBEL, GYARADOS, MEOWTH, 0 ; Silph Co.
+	db $FF, 80, MEOWTH, 72, ARBOK, 71, WEEZING, 74, LICKILICKY, 74, VICTREEBEL, 74, GYARADOS, 0 ; Citrine Rocket House
 
 INCLUDE "data/trainers/scaled_parties.asm"
 INCLUDE "data/trainers/rival_parties.asm"

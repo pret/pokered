@@ -71,3 +71,6 @@ Citrine_Block::		INCBIN "gfx/blocksets/citrine.bst"
 
 Celeste_GFX::		INCBIN "gfx/tilesets/celeste.2bpp"
 Celeste_Block::		INCBIN "gfx/blocksets/celeste.bst"
+
+RocketHouse_GFX::		INCBIN "gfx/tilesets/rockethouse.2bpp"
+RocketHouse_Block::		INCBIN "gfx/blocksets/rockethouse.bst"
