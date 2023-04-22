@@ -7,7 +7,7 @@ TradeCenter_Script:
 	ld a, SPRITE_FACING_RIGHT
 .next
 	ldh [hSpriteFacingDirection], a
-	ld a, $1
+	ld a, TRADECENTER_OPPONENT
 	ldh [hSpriteIndex], a
 	call SetSpriteFacingDirection
 	ld hl, wd72d
@@ -32,8 +32,8 @@ TradeCenter_Script:
 
 TradeCenter_TextPointers:
 	def_text_pointers
-	dw_const TradeCenterRedText, TEXT_TRADECENTER_RED
+	dw_const TradeCenterOpponentText, TEXT_TRADECENTER_OPPONENT
 
-TradeCenterRedText:
-	text_far _TradeCenterRedText
+TradeCenterOpponentText:
+	text_far _TradeCenterOpponentText
 	text_end
