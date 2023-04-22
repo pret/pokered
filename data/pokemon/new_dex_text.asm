@@ -1020,7 +1020,7 @@ _KasanagiDexEntry::
 
 _CarapthorDexEntry::
 	text "Often called the"
-	next "'forest gent',"
+	next "'Forest Gent',"
 	next "CARAPTHOR strolls"
 
 	page "around forests"
