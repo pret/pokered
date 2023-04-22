@@ -71,7 +71,7 @@ ViridianForestYoungster2EndBattleText:
 	text_end
 
 ViridianForestYoungster2AfterBattleText:
-	text_far _ViridianFrstAfterBattleText1
+	text_far _ViridianForestYoungster2AfterBattleText
 	text_end
 
 ViridianForestYoungster3BattleText:
@@ -83,7 +83,7 @@ ViridianForestYoungster3EndBattleText:
 	text_end
 
 ViridianForestYoungster3AfterBattleText:
-	text_far _ViridianFrstAfterBattleText2
+	text_far _ViridianForestYoungster3AfterBattleText
 	text_end
 
 ViridianForestYoungster4BattleText:
@@ -95,7 +95,7 @@ ViridianForestYoungster4EndBattleText:
 	text_end
 
 ViridianForestYoungster4AfterBattleText:
-	text_far _ViridianFrstAfterBattleText3
+	text_far _ViridianForestYoungster4AfterBattleText
 	text_end
 
 ViridianForestYoungster5Text:

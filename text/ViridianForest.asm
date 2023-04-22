@@ -18,7 +18,7 @@ _ViridianForestYoungster2EndBattleText::
 	cont "cut it!"
 	prompt
 
-_ViridianFrstAfterBattleText1::
+_ViridianForestYoungster2AfterBattleText::
 	text "Ssh! You'll scare"
 	line "the bugs away!"
 	done
@@ -35,7 +35,7 @@ _ViridianForestYoungster3EndBattleText::
 	cont "#MON!"
 	prompt
 
-_ViridianFrstAfterBattleText2::
+_ViridianForestYoungster3AfterBattleText::
 	text "Darn! I'm going"
 	line "to catch some"
 	cont "stronger ones!"
@@ -52,7 +52,7 @@ _ViridianForestYoungster4EndBattleText::
 	cont "at this!"
 	prompt
 
-_ViridianFrstAfterBattleText3::
+_ViridianForestYoungster4AfterBattleText::
 	text "Sometimes, you"
 	line "can find stuff on"
 	cont "the ground!"
