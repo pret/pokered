@@ -46,5 +46,5 @@ CinnabarMartClerkText::
 SaffronMartClerkText::
 	script_mart GREAT_BALL, HYPER_POTION, MAX_REPEL, ESCAPE_ROPE, FULL_HEAL, REVIVE
 
-IndigoPlateauClerkText::
+IndigoPlateauLobbyClerkText::
 	script_mart ULTRA_BALL, GREAT_BALL, FULL_RESTORE, MAX_POTION, FULL_HEAL, REVIVE, MAX_REPEL
