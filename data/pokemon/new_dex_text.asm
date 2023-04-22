@@ -998,6 +998,36 @@ _TaurosPADexEntry::
 	next "its horns"
 	dex
 
+_KokanaDexEntry::
+	text "Closely related to"
+	next "WEEDLE. Due to the"
+	next "lack of a horn,"
+	
+	para "it hides under"
+	next "trees, gnawing"
+	next "their roots"
+	dex
+
+_KasanagiDexEntry::
+	text "While awaiting"
+	next "evolution, it"
+	next "barely moves. If"
+
+	page "threatened, it"
+	next "shudders while"
+	next "throwing punches"
+	dex
+
+_CarapthorDexEntry::
+	text "Often called the"
+	next "'forest gent',"
+	next "CARAPTHOR strolls"
+
+	page "around forests"
+	next "with swagger, to"
+	next "BEEDRILL's ire"
+	dex
+
 _MissingNoDexEntry::
 	text "This is a newly"
 	next "discovered"
