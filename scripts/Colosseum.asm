@@ -3,8 +3,8 @@ Colosseum_Script:
 
 Colosseum_TextPointers:
 	def_text_pointers
-	dw_const ColosseumRedText, TEXT_COLOSSEUM_RED
+	dw_const ColosseumOpponentText, TEXT_COLOSSEUM_OPPONENT
 
-ColosseumRedText:
-	text_far _ColosseumRedText
+ColosseumOpponentText:
+	text_far _ColosseumOpponentText
 	text_end
