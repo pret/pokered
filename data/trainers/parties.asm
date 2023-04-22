@@ -616,12 +616,12 @@ CooltrainerFData:
 
 GentlemanData:
 ; SS Anne 1F Rooms
-	db 18, GROWLITHE, GROWLITHE, 0
+	db 18, GROWLITHE, CARAPTHOR, 0
 	db 19, NIDORAN_M, NIDORAN_F, 0
 ; SS Anne 2F Rooms/Vermilion Gym
 	db 23, PIKACHU, 0
 ; Unused - this will be used in the Silph Gauntlet
-	db 64, ARCANINE, NIDOQUEEN, PRIMEAPE, FEAROW, JAGG, RAPIDASH, 0
+	db 64, ARCANINE, NIDOQUEEN, MR_RIME, FEAROW, CARAPTHOR, RAPIDASH, 0
 ; SS Anne 2F Rooms
 	db 17, GROWLITHE, PONYTA, 0
 

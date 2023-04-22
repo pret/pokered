@@ -23,10 +23,10 @@ SetIshiharaTeam:
 IshiharaTeam:
 	db EXEGGUTOR_A, 90
 	db PINSIR, 90
-	db DITTO, 90
-	db SCYTHER, 50
+	db CARAPTHOR, 90
+	db KASANAGI, 50
 IF DEF(_DEBUG)
-	db ONIX, 50
+	db KOKANA, 50
 ENDC
 	db -1 ; end
 
