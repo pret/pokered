@@ -28,7 +28,7 @@ _JamesText::
 	done
 
 _MeowthText::
-	text "Nyarth!"
+	text "MEOWTH: Nyarth!"
 	done
 
 _JessieText1::
@@ -57,7 +57,8 @@ _JessieWinText::
 	
 _JessieLoseText::
 	text "Grr!"
-	line "JAMES, you lout!"
+	line "JAMES! You lout!"
+	prompt
 
 _JessieText2::
 	text "That's it! I'm"
@@ -66,10 +67,10 @@ _JessieText2::
 
 _JessieAfterBattleText::
 	text "Too chicken to"
-	line "fight? Then go"
+	line "battle? Then go"
 	cont "away!"
 	done
-
+; This mart text is unused because implementing custom mart text is hell.
 _MartGuyPrompt1::
 	text "Alright, tell you"
 	line "what. I sell TMs,"

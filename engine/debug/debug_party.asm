@@ -24,7 +24,7 @@ IshiharaTeam:
 	db EXEGGUTOR_A, 90
 	db RHYDON, 90
 	db KANGASKHAN, 90
-	db KASANAGI, 50
+	db NIDORAN_M, 50
 IF DEF(_DEBUG)
 	db KOKANA, 50
 ENDC

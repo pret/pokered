@@ -1,3 +1,4 @@
+; Ported from Yellow
 MACRO overworld_sprite
 	dw \1
 	db \2 tiles
@@ -37,7 +38,7 @@ SpriteSheetPointerTable:
 	overworld_sprite MiddleAgedWomanSprite, 12  ; SPRITE_MIDDLE_AGED_WOMAN
 	overworld_sprite BrunetteGirlSprite, 12     ; SPRITE_BRUNETTE_GIRL
 	overworld_sprite LanceSprite, 12            ; SPRITE_LANCE
-	overworld_sprite ScientistSprite, 12        ; SPRITE_UNUSED_SCIENTIST
+	overworld_sprite RedSprite, 12              ; SPRITE_UNUSED_RED_1
 	overworld_sprite ScientistSprite, 12        ; SPRITE_SCIENTIST
 	overworld_sprite RockerSprite, 12           ; SPRITE_ROCKER
 	overworld_sprite SwimmerSprite, 12          ; SPRITE_SWIMMER
@@ -56,17 +57,28 @@ SpriteSheetPointerTable:
 	overworld_sprite FisherSprite, 12           ; SPRITE_FISHER
 	overworld_sprite KogaSprite, 12             ; SPRITE_KOGA
 	overworld_sprite GuardSprite, 12            ; SPRITE_GUARD
-	overworld_sprite TreeSprite, 4             ; SPRITE_FAKE_TREE - used to be unused guard, now fake tree
+	overworld_sprite RedSprite, 12              ; SPRITE_UNUSED_RED_2
 	overworld_sprite MomSprite, 12              ; SPRITE_MOM
 	overworld_sprite BaldingGuySprite, 12       ; SPRITE_BALDING_GUY
 	overworld_sprite LittleBoySprite, 12        ; SPRITE_LITTLE_BOY
-	overworld_sprite GameboyKidSprite, 12       ; SPRITE_UNUSED_GAMEBOY_KID
+	overworld_sprite RedSprite, 12              ; SPRITE_UNUSED_RED_3
 	overworld_sprite GameboyKidSprite, 12       ; SPRITE_GAMEBOY_KID
 	overworld_sprite FairySprite, 12            ; SPRITE_FAIRY
 	overworld_sprite AgathaSprite, 12           ; SPRITE_AGATHA
 	overworld_sprite BrunoSprite, 12            ; SPRITE_BRUNO
 	overworld_sprite LoreleiSprite, 12          ; SPRITE_LORELEI
 	overworld_sprite SeelSprite, 12             ; SPRITE_SEEL
+	overworld_sprite PikachuSprite, 12          ; SPRITE_PIKACHU
+	overworld_sprite OfficerJennySprite, 12     ; SPRITE_OFFICER_JENNY
+	overworld_sprite SandshrewSprite, 12        ; SPRITE_SANDSHREW
+	overworld_sprite OddishSprite, 12           ; SPRITE_ODDISH
+	overworld_sprite BulbasaurSprite, 12        ; SPRITE_BULBASAUR
+	overworld_sprite JigglypuffSprite, 12       ; SPRITE_JIGGLYPUFF
+	overworld_sprite ClefairySprite, 12         ; SPRITE_CLEFAIRY
+	overworld_sprite ChanseySprite, 12          ; SPRITE_CHANSEY
+	overworld_sprite JessieSprite, 12           ; SPRITE_JESSIE
+	overworld_sprite JamesSprite, 12            ; SPRITE_JAMES
+	overworld_sprite CatSprite, 12 ; SPRITE_CAT
 	overworld_sprite PokeBallSprite, 4          ; SPRITE_POKE_BALL
 	overworld_sprite FossilSprite, 4            ; SPRITE_FOSSIL
 	overworld_sprite BoulderSprite, 4           ; SPRITE_BOULDER

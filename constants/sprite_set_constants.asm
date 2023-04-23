@@ -1,3 +1,4 @@
+; Ported from Yellow
 ; sprite set ids
 ; indexes for SpriteSets (see data/maps/sprite_sets.asm)
 ; values for MapSpriteSets and SplitMapSpriteSets (see data/maps/sprite_sets.asm)

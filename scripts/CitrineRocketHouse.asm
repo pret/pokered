@@ -67,8 +67,8 @@ JessieFight:
 	ld [wIsTrainerBattle], a
 	ld a, $5
 	ld [wCitrineRocketHouseCurScript], a
-	ld hl, JessieWinText
-	ld de, JessieLoseText
+	ld hl, JessieLoseText
+	ld de, JessieWinText
 	call SaveEndBattleTextPointers
 	jp TextScriptEnd
 	jr .done
@@ -92,7 +92,7 @@ JessieWinText:
 	text_end
 
 JessieLoseText:
-	text_far _JessieWinText
+	text_far _JessieLoseText
 	text_end
 
 JessieText2:

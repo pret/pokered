@@ -90,7 +90,7 @@ SpriteSets:
 	db SPRITE_COOLTRAINER_F
 	db SPRITE_COOLTRAINER_M
 	db SPRITE_POKE_BALL
-	db SPRITE_FAKE_TREE ; fake tree, used to be unused sleeping gambler
+	db SPRITE_CAT
 
 ; SPRITESET_LAVENDER
 	db SPRITE_LITTLE_GIRL
@@ -103,7 +103,7 @@ SpriteSets:
 	db SPRITE_COOLTRAINER_M
 	db SPRITE_GUARD
 	db SPRITE_POKE_BALL
-	db SPRITE_FAKE_TREE ; fake tree, used to be unused sleeping gambler
+	db SPRITE_CAT
 
 ; SPRITESET_VERMILION
 	db SPRITE_BEAUTY
@@ -116,7 +116,7 @@ SpriteSets:
 	db SPRITE_COOLTRAINER_F
 	db SPRITE_COOLTRAINER_M
 	db SPRITE_POKE_BALL
-	db SPRITE_FAKE_TREE ; fake tree, used to be unused sleeping gambler
+	db SPRITE_CAT
 
 ; SPRITESET_CELADON
 	db SPRITE_LITTLE_GIRL
@@ -142,7 +142,7 @@ SpriteSets:
 	db SPRITE_GUARD
 	db SPRITE_GAMBLER
 	db SPRITE_POKE_BALL
-	db SPRITE_FAKE_TREE ; fake tree, used to be unused sleeping gambler
+	db SPRITE_CAT
 
 ; SPRITESET_SAFFRON
 	db SPRITE_ROCKET
@@ -155,7 +155,7 @@ SpriteSets:
 	db SPRITE_COOLTRAINER_M
 	db SPRITE_MONSTER
 	db SPRITE_POKE_BALL
-	db SPRITE_FAKE_TREE ; fake tree, used to be unused sleeping gambler
+	db SPRITE_CAT
 
 ; SPRITESET_SILENCE_BRIDGE
 	db SPRITE_BIKER

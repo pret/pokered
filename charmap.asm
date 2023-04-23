@@ -50,7 +50,7 @@
 	charmap "”",         $73 ; closing quote
 	charmap "·",         $74 ; middle dot, unused
 	charmap "…",         $75 ; ellipsis
-	charmap "ぁ",         $76 ; hiragana small a, unused
+	;charmap "&",         $76 ; and symbol, was unused hiragana small a
 	charmap "ぇ",         $77 ; hiragana small e, unused
 	charmap "ぉ",         $78 ; hiragana small o, unused
 
@@ -71,6 +71,7 @@
 	charmap "<BOLD_P>",         $72 ; was jp opening quote (“)
 	charmap "<ID>",      $73
 	charmap "№",         $74
+	charmap "&",         $76 ; and symbol, was unused hiragana small a
 
 ; Actual characters (from other graphics files)
 
@@ -166,7 +167,7 @@
 	charmap "!",         $e7
 	charmap ".",         $e8
 
-	charmap "ァ",         $e9 ; katakana small a, unused
+	charmap "&",         $e9 ; & was unused katakana small a
 	charmap "ゥ",         $ea ; katakana small u, unused
 	charmap "ェ",         $eb ; katakana small e, unused
 
