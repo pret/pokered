@@ -128,6 +128,8 @@ MonPartyData:
 	nybble ICON_WATER     ; Tentacruel
 	nybble ICON_GRASS     ; Toedscool
 	nybble ICON_GRASS     ; Toedscruel
+	nybble ICON_WATER     ; Blottle
+	nybble ICON_WATER     ; Pendraken
 	nybble ICON_MON       ; Ribbito
 	nybble ICON_MON       ; Croakozuna
 	nybble ICON_BALL      ; Magnemite
@@ -180,8 +182,6 @@ MonPartyData:
 	nybble ICON_MON       ; Hitmonlee
 	nybble ICON_MON       ; Hitmonchan
 	nybble ICON_MON       ; Hitmontop
-	nybble ICON_WATER     ; Blottle
-	nybble ICON_WATER     ; Pendraken
 	nybble ICON_HELIX     ; Shellder
 	nybble ICON_HELIX     ; Cloyster
 	nybble ICON_HELIX     ; Taaban

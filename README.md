@@ -8,8 +8,9 @@ New Pokemon:
 ====
 - The 34 known beta Pokemon that were cut from RBY have been fully implemented.
 - Evolutions or Pre-evolutions of a Kanto Pokemon found in a future generation are included; eg. Kleavor, Glaceon, Annihilape
-- Evolutions or Pre-evolutions of a Kanto Pokemon found in the SpaceWorld '97 demo are included; eg. Madaamu, Pudi
-	- Some Pokemon will also use their SW97 designs!
+- Evolutions of Kanto Pokemon found in the SpaceWorld '97 demo are included; eg. Madaamu, Taaban
+- Meltan and Melmetal have been added due to their introduction in a Kanto-based game, LGPE.
+- All fully-evolved regional variants of Kanto Pokemon have been added.
 
 Johto baby Pokemon and regional pre-evolutions were omitted due to memory constraints. This just barely works.
 
@@ -40,9 +41,10 @@ Type Matchups for Steel and Dark for reference:
 New Items:
 ====
 - The Sun, Ice, Poison and Heart Stones have been added.
-- The Protector and Black Augurite evolution items have been added for Rhyperior and Kleavor, respectively.
+- Additional evolution items include the Protector, Black Augurite, Up-Grade, Dubious Disc, Metal Coat and Candy Jar.
 - The Old Sea Chart has been added, allowing access to Faraway Island and Mew.
 - The Citrine Pass has been added, allowing access to a new post-game area based on the unused "C" map.
+- The Wing Fossil is a new item that allows Aerodactyl to be revived, as the Old Amber was instead used for Decilla.
 
 New areas
 ====
@@ -51,6 +53,12 @@ New areas
 	- New infinitely re-battleable trainers for grinding.
 	- There's a Move Deleter and Move Relearner!
 - Citrine City is a new island city that can be accessed in the postgame.
+	- Contains a house with a Move Tutor that can teach Tradeback moves without the need for GSC!
+	- Contains a Team Rocket house where they will sell you TMs and Evolution Items. Jessie and James are there too!
+	- Will contain a Battle Tower with infinite, randomised trainer parties!
+	- Crimson Cave, located in Citrine City, houses several strong trainers and Pokémon.
+	- Chartreuse Trail, south of Citrine City, is a route that leads to Celeste Hill.
+	- Celeste Hill activates an event where the Galarian Legendary Birds can be fought.
 - Underwater Tunnel connects Route 25 and Route 10.
 - Cinnabar Volcano is a new area that houses Moltres, allowing it to be obtained before Victory Road.
 - Faraway Island from Pokemon Emerald has been added, where you can find Mew. It also has its own wild encounters, as well as an improved translation on its sign, enhancing its appearance from its source material.
@@ -71,12 +79,12 @@ Improved areas
 - Pokemon Tower was shortened, being less intensive and adding room for more maps.
 - Silph Co's pathing was completely overhauled to make navigating it less tedious.
 - Viridian Gym now has a new area once you make Giovanni leave.
-- The S.S. Anne now returns after getting your fourth badge!
+- The S.S. Anne now returns after getting the Marsh Badge!
 - After entering the Hall of Fame, try visiting Route 1!
 
 QoL Enhancements
 ====
-- All 217 (current) Pokemon can be obtained without the use of trading or glitches, including Mew!
+- All 251 (current) Pokemon can be obtained without the use of trading or glitches, including Mew!
 - New Pokedex entries for most Pokemon are available, sourced from the original 1996 Pokedex book by Creatures Inc., restoring a ton of old Kanto lore. Thanks to [Dr. Lava and Nob Ogasawara](http://lavacutcontent.com/1996-creatures-pokedex-translation-1/) for their incredible work translating and writing about it!
 - Pikachu and Eevee are now starters, featuring fully functional Rival lineups. If you pick Pikachu, he picks Eevee, and if you pick Eevee, he picks Pikachu!
 - Item Descriptions are available!
@@ -106,7 +114,7 @@ QoL Enhancements
 	- 3x 7s now gives 999 coins (used to be 300)
 - Game Corner prizes have been altered;
 	- Version parity is done across prizes, using Blue's superior prices.
-	- New prizes across both versions include: Cubone, Blastyke, and Cactus.
+	- New prizes include: Cubone, Blastyke, and Cactus.
 	- The Moon Stone is available over TM23 (Dragon Rage). Dragon Rage is accessible in Celadon University!
 - Bag capacity increased from 20 to 30 items.
 - Spinner tiles move faster.
@@ -154,7 +162,7 @@ Known Bugs
 - Only portions of spinner tiles animate.
 - Occasionally, menu text sets itself to scroll.
 - The lone Rocket in Viridian Gym's basement needs to be directly spoken to to be battled
-- Should be able to fly from Faraway (reposition in map listing)
+- Should be able to fly from Faraway and Citrine (issue with tilesets)
 - Strength boulders don't fall down holes
 - Pokedex is very laggy
 - When fighting Omega in Silph Co., the Rocket you fight beforehand will disappear.
@@ -173,7 +181,6 @@ New Pokemon:
 - Onix -> Steelix | L38 OR use Metal Coat
 - Slowpoke -> Slowking | Use Heart Stone 
 - Chansey -> Blissey | L45
-- Psyduck -> Weirduck | L22, Golduck level remains the same for Weirduck.
 - Magmar -> Magmortar | Use Fire Stone
 - Electabuzz -> Electivire | Use Thunder Stone
 - Magneton -> Magnezone | Use Thunder Stone
@@ -186,8 +193,11 @@ New Pokemon:
 - Marowak -> Guardia | Use Heart Stone
 - Porygon -> Porygon2 | Use Up-Grade
 - Porygon2 -> Porygon-Z | Use Dubious Disc
-- Gloom -> Bellossom | Use Poison Stone
+- Gloom -> Bellossom | Use Leaf Stone
+- Gloom -> Vileplume | Use Poison Stone
 - Weepinbell -> Tsubomitto | Use Poison Stone
+- Shellder -> Taaban | Use Water Stone
+- Shellder -> Cloyster | Use Ice Stone
 
 Kanto Beta Pokemon:
 - Blottle -> Pendraken | L30
@@ -205,13 +215,12 @@ Kanto Beta Pokemon:
 - Gyopin -> Goldeen | L16
 - Kotora -> Gaotora | L16
 - Gaotora -> Gorotora | L36
-- Puchikorn -> Ponyta | L20
+- Puchikoon -> Ponyta | L20
 - Blastyke -> Blastoise | L36
 - Wartortle -> Totartle | L36, replaces Blastoise
-- Pudi -> Growlithe | L16
-- Para -> Paras | L12
-- Hinaazu -> Doduo | L18
-- Betobebii -> Grimer | L20
+- Kokana -> Kasanagi | L7
+- Kasanagi -> Carapthor | L10
+- Psyduck -> Weirduck | L22, Golduck level remains the same for Weirduck.
 - Nidorino OR Nidorina -> Nidoreign | Moon Stone
 - Nidorino -> Nidoking | L36
 - Nidorina -> Nidoqueen | L36
@@ -257,12 +266,12 @@ Much like in Let's Go Pikachu and Let's Go Eevee, traders are available who will
 - Indigo Plateau: Exeggutor
 Version exclusivity was factored in, instead moving Raticate and Golem to the cities without a trader.
 
-Galarian and Paldean formes are accessed on the S.S. Anne, which now returns after four badges. Hisuian formes are found in the wild in Bill's Garden, which is accessible in the post-game.
+Galarian and Paldean formes are accessed on the S.S. Anne, which now returns after receiving the Marsh Badge. Hisuian formes are found in the wild in Bill's Garden, which is accessible in the post-game.
 
 Credits
 ====
 * Plague von Karma - Creator of the Showdown Mod, Developer, Maps, and occasional spriter (assisting with Tsubomitto, Carapthor)
-* Martha's Against Humanity - Developer, Pokemon implementation, tweaks of Albatross's sprites.
+* Martha's Against Humanity - Developer, Pokémon implementation, tweaks of Albatross's sprites, a few maps (Citrine City, Cinnabar Volcano)
 * Ema Skye - Developer, Maps, Showdown Mod assistance
 * pret et al - Pokémon Red and Blue Disassembly Project, many tutorials helped us!
 * ausma - Showdown Mod assistance

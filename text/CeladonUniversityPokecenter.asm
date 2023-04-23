@@ -54,7 +54,7 @@ _CeladonUniversityPokecenterText8::
 	line "DRAGONAIR can fly"
 	cont "without wings..."
 	
-	text "#MON are strange"
+	para "#MON are strange"
 	line "creatures..."
 	
 	done

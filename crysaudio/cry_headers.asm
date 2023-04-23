@@ -135,6 +135,8 @@ PokemonCries::
 	mon_cry CRY_VENONAT,     238,  383 ; TENTACRUEL
 	mon_cry CRY_NIDORAN_M,     0,    0 ; TOEDSCOOL	(incomplete)
 	mon_cry CRY_NIDORAN_M,     0,    0 ; TOEDSCRUEL	(incomplete)
+	mon_cry CRY_BLASTOISE,   147,  128 ; BLOTTLE
+	mon_cry CRY_BLASTOISE,    60,  128 ; PENDRAKEN
 	mon_cry CRY_GOLEM,       147,  224 ; RIBBITO
 	mon_cry CRY_GOLEM,        37,  383 ; CROAKOZUNA
 	mon_cry CRY_METAPOD,     128,  224 ; MAGNEMITE
@@ -189,8 +191,6 @@ PokemonCries::
 	mon_cry CRY_GOLEM,       128,  320 ; HITMONLEE
 	mon_cry CRY_SEEL,        238,  320 ; HITMONCHAN
 	mon_cry CRY_SLUGMA,        0,  256 ; HITMONTOP
-	mon_cry CRY_BLASTOISE,   147,  128 ; BLOTTLE
-	mon_cry CRY_BLASTOISE,    60,  128 ; PENDRAKEN
 	mon_cry CRY_FEAROW,        0,  256 ; SHELLDER
 	mon_cry CRY_FEAROW,      111,  352 ; CLOYSTER
 	mon_cry CRY_TOTODILE,    512,  320 ; TAABAN

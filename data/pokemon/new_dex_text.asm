@@ -403,7 +403,7 @@ _KokanaDexEntry::
 	next "WEEDLE. Due to the"
 	next "lack of a horn,"
 
-	para "it hides under"
+	page "it hides under"
 	next "trees, gnawing"
 	next "their roots"
 	dex
