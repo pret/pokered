@@ -694,7 +694,6 @@ INCLUDE "data/maps/headers/Route21.asm"
 INCLUDE "data/maps/objects/Route21.asm"
 Route21_Blocks: INCBIN "maps/Route21.blk"
 
-VermilionOldRodHouse_Blocks:
 Route12SuperRodHouse_Blocks:
 Daycare_Blocks: INCBIN "maps/Daycare.blk"
 
@@ -713,10 +712,6 @@ INCLUDE "scripts/Route14.asm"
 INCLUDE "scripts/Route17.asm"
 INCLUDE "scripts/Route19.asm"
 INCLUDE "scripts/Route21.asm"
-
-INCLUDE "data/maps/headers/VermilionOldRodHouse.asm"
-INCLUDE "scripts/VermilionOldRodHouse.asm"
-INCLUDE "data/maps/objects/VermilionOldRodHouse.asm"
 
 INCLUDE "data/maps/headers/CeladonMart2F.asm"
 INCLUDE "scripts/CeladonMart2F.asm"
@@ -1329,3 +1324,9 @@ INCLUDE "data/maps/headers/CitrineRocketHouse.asm"
 INCLUDE "scripts/CitrineRocketHouse.asm"
 INCLUDE "data/maps/objects/CitrineRocketHouse.asm"
 CitrineRocketHouse_Blocks: INCBIN "maps/CitrineRocketHouse.blk"
+
+INCLUDE "data/maps/headers/CitrineTradebackHouse.asm"
+INCLUDE "scripts/CitrineTradebackHouse.asm"
+INCLUDE "data/maps/objects/CitrineTradebackHouse.asm"
+INCLUDE "scripts/tradeback_move_tutor.asm"
+CitrineTradebackHouse_Blocks: INCBIN "maps/CitrineTradebackHouse.blk"

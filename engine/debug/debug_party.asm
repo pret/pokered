@@ -22,8 +22,8 @@ SetIshiharaTeam:
 
 IshiharaTeam:
 	db EXEGGUTOR_A, 90
-	db PINSIR, 90
-	db CARAPTHOR, 90
+	db RHYDON, 90
+	db KANGASKHAN, 90
 	db KASANAGI, 50
 IF DEF(_DEBUG)
 	db KOKANA, 50

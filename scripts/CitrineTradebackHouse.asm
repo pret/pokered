@@ -1,0 +1,15 @@
+CitrineTradebackHouse_Script:
+	jp EnableAutoTextBoxDrawing
+
+CitrineTradebackHouse_TextPointers:
+	dw TradebackTutorText1
+	dw CitrineTradebackHouseGuy
+	dw CitrineTradebackHouseBooklet
+
+CitrineTradebackHouseBooklet:
+	text_far _CitrineTradebackHouseBooklet
+	text_end
+
+CitrineTradebackHouseGuy:
+	text_far _CitrineTradebackHouseGuy
+	text_end

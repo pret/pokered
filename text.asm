@@ -281,6 +281,8 @@ INCLUDE "text/move_relearner.asm"
 
 SECTION "Text 12", ROMX
 INCLUDE "text/CitrineRocketHouse.asm"
+INCLUDE "text/CitrineTradebackHouse.asm"
+INCLUDE "text/tradeback_move_tutor.asm"
 
 SECTION "Pokédex Text", ROMX
 
