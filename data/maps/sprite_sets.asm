@@ -66,6 +66,8 @@ SplitMapSpriteSets:
 SpriteSets:
 	table_width SPRITE_SET_LENGTH, SpriteSets
 
+; Useful note: The last entry in a spriteset doesn't move, presumably for the Old Man in Viridian. 
+; Unsure why Poke Balls don't use that space in other spritesets - consider experimenting.
 ; SPRITESET_PALLET_VIRIDIAN
 	db SPRITE_BLUE
 	db SPRITE_YOUNGSTER
@@ -86,7 +88,7 @@ SpriteSets:
 	db SPRITE_HIKER
 	db SPRITE_MONSTER
 	db SPRITE_BLUE
-	db SPRITE_GUARD
+	db SPRITE_OFFICER_JENNY
 	db SPRITE_COOLTRAINER_F
 	db SPRITE_COOLTRAINER_M
 	db SPRITE_POKE_BALL
@@ -186,7 +188,7 @@ SpriteSets:
 ; SPRITESET_FUCHSIA
 	db SPRITE_BIRD
 	db SPRITE_COOLTRAINER_M
-	db SPRITE_FAIRY
+	db SPRITE_CHANSEY
 	db SPRITE_FISHER
 	db SPRITE_GAMBLER
 	db SPRITE_MONSTER

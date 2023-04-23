@@ -8,6 +8,7 @@ SaffronPokecenter_TextPointers:
 	dw SaffronPokecenterText3
 	dw SaffronTradeNurseText
 	dw RaichuTrade
+	dw SaffronPokecenterText4
 
 SaffronHealNurseText:
 	script_pokecenter_nurse
@@ -28,4 +29,9 @@ RaichuTrade:
 	ld a, TRADE_FOR_RAICHU_A
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue
+	jp TextScriptEnd
+
+SaffronPokecenterText4:
+	text_asm
+	callfar PokecenterChanseyText
 	jp TextScriptEnd

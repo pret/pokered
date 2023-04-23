@@ -324,6 +324,7 @@ INCLUDE "engine/overworld/field_moves.asm"
 SECTION "In-Game Trade Zone", ROMX
 
 INCLUDE "engine/events/in_game_trades.asm"
+INCLUDE "engine/events/pokecenter_chansey.asm"
 
 SECTION "Itemfinder 1", ROMX
 

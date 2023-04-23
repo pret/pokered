@@ -8,6 +8,7 @@ VermilionPokecenter_TextPointers:
 	dw VermilionPokecenterText3
 	dw VermilionTradeNurseText
 	dw PersianTrade
+	dw VermillionPokeCenterText4
 
 VermilionHealNurseText:
 	script_pokecenter_nurse
@@ -28,4 +29,9 @@ PersianTrade:
 	ld a, TRADE_FOR_PERSIAN_A
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue
+	jp TextScriptEnd
+
+VermillionPokeCenterText4:
+	text_asm
+	callfar PokecenterChanseyText
 	jp TextScriptEnd

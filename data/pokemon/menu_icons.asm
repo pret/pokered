@@ -9,10 +9,10 @@ MonPartyData:
 	nybble ICON_WATER     ; Squirtle
 	nybble ICON_WATER     ; Wartortle
 	nybble ICON_WATER     ; Totartle
-	nybble ICON_FAIRY     ; Pikachu
-	nybble ICON_FAIRY     ; Raichu
-	nybble ICON_FAIRY     ; Raichu-A
-	nybble ICON_FAIRY     ; Gorochu
+	nybble ICON_PIKACHU   ; Pikachu
+	nybble ICON_PIKACHU   ; Raichu
+	nybble ICON_PIKACHU   ; Raichu-A
+	nybble ICON_PIKACHU   ; Gorochu
 	nybble ICON_QUADRUPED ; Eevee
 	nybble ICON_QUADRUPED ; Vaporeon
 	nybble ICON_QUADRUPED ; Jolteon
@@ -25,14 +25,14 @@ MonPartyData:
 	nybble ICON_QUADRUPED ; Rattata
 	nybble ICON_QUADRUPED ; Raticate
 	nybble ICON_QUADRUPED ; Raticate-A
-	nybble ICON_BIRD      ; Pidgey
-	nybble ICON_BIRD      ; Pidgeotto
+	nybble ICON_SMALL_BIRD      ; Pidgey
+	nybble ICON_SMALL_BIRD      ; Pidgeotto
 	nybble ICON_BIRD      ; Pidgeot
-	nybble ICON_MON       ; Konya
-	nybble ICON_MON       ; Meowth
-	nybble ICON_MON       ; Persian
-	nybble ICON_MON       ; Persian-A
-	nybble ICON_MON       ; Perrserker
+	nybble ICON_CAT       ; Konya
+	nybble ICON_CAT       ; Meowth
+	nybble ICON_CAT       ; Persian
+	nybble ICON_CAT       ; Persian-A
+	nybble ICON_CAT       ; Perrserker
 	nybble ICON_BUG       ; Caterpie
 	nybble ICON_BUG       ; Metapod
 	nybble ICON_BUG       ; Butterfree
@@ -42,7 +42,7 @@ MonPartyData:
 	nybble ICON_BUG       ; Kokana
 	nybble ICON_BUG       ; Kasanagi
 	nybble ICON_BUG       ; Carapthor
-	nybble ICON_BIRD      ; Spearow
+	nybble ICON_SMALL_BIRD      ; Spearow
 	nybble ICON_BIRD      ; Fearow
 	nybble ICON_SNAKE     ; Ekans
 	nybble ICON_SNAKE     ; Arbok
@@ -118,9 +118,9 @@ MonPartyData:
 	nybble ICON_WATER     ; Wugtrio
 	nybble ICON_SNAKE     ; Onix
 	nybble ICON_SNAKE     ; Steelix
-	nybble ICON_QUADRUPED ; Kotora
-	nybble ICON_QUADRUPED ; Gaotora
-	nybble ICON_QUADRUPED ; Gorotora
+	nybble ICON_CAT 	  ; Kotora
+	nybble ICON_CAT 	  ; Gaotora
+	nybble ICON_CAT 	  ; Gorotora - unsure about how fitting this is but they ARE tigers, so...
 	nybble ICON_BALL      ; Voltorb
 	nybble ICON_BALL      ; Electrode
 	nybble ICON_BALL      ; Electrode-H
@@ -163,10 +163,10 @@ MonPartyData:
 	nybble ICON_MON       ; Marowak
 	nybble ICON_MON       ; Marowak-A
 	nybble ICON_MON	      ; Guardia
-	nybble ICON_BIRD      ; Farfetch'd
+	nybble ICON_SMALL_BIRD      ; Farfetch'd
 	nybble ICON_BIRD	  ; Madaamu
 	nybble ICON_BIRD      ; Sirfetch'd
-	nybble ICON_BIRD      ; Doduo
+	nybble ICON_BIRD      ; Doduo - it's flightless, so the current sprite fits better.
 	nybble ICON_BIRD      ; Dodrio
 	nybble ICON_MON       ; Grimer
 	nybble ICON_MON       ; Muk

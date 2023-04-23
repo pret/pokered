@@ -14,5 +14,6 @@ MtMoonPokecenter_Object:
 	object_event 10,  6, SPRITE_MIDDLE_AGED_MAN, WALK, LEFT_RIGHT, 4 ; person
 	object_event  7,  2, SPRITE_CLIPBOARD, STAY, NONE, 5 ; person
 	object_event 11,  2, SPRITE_LINK_RECEPTIONIST, STAY, DOWN, 6 ; person
+	object_event  4,  1, SPRITE_CHANSEY, STAY, DOWN, 7 ; Chansey
 
 	def_warps_to MT_MOON_POKECENTER

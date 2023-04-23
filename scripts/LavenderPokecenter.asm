@@ -8,6 +8,7 @@ LavenderPokecenter_TextPointers:
 	dw LavenderPokecenterText3
 	dw LavenderTradeNurseText
 	dw DugtrioTrade
+	dw LavenderPokecenterText4
 
 LavenderTradeNurseText:
 	script_cable_club_receptionist
@@ -30,3 +31,7 @@ DugtrioTrade:
 	predef DoInGameTradeDialogue
 	jp TextScriptEnd
 
+LavenderPokecenterText4:
+	text_asm
+	callfar PokecenterChanseyText
+	jp TextScriptEnd

@@ -15,5 +15,6 @@ IndigoPlateauLobby_Object:
 	object_event  0,  5, SPRITE_CLERK, STAY, RIGHT, 4 ; person
 	object_event 13,  6, SPRITE_LINK_RECEPTIONIST, STAY, DOWN, 5 ; person
 	object_event 10,  7, SPRITE_GAMEBOY_KID, STAY, DOWN, 6 ; Exeggutor Trader
+	object_event  8,  5, SPRITE_CHANSEY, STAY, DOWN, 7 ; Chansey
 
 	def_warps_to INDIGO_PLATEAU_LOBBY

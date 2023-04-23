@@ -24,9 +24,10 @@ IshiharaTeam:
 	db EXEGGUTOR_A, 90
 	db RHYDON, 90
 	db KANGASKHAN, 90
-	db NIDORAN_M, 50
 IF DEF(_DEBUG)
-	db KOKANA, 50
+	db FARFETCHD, 50
+	db MEOWTH, 50
+	db PIKACHU, 50
 ENDC
 	db -1 ; end
 

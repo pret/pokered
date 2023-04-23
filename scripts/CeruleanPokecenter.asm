@@ -8,6 +8,7 @@ CeruleanPokecenter_TextPointers:
 	dw CeruleanPokecenterText3
 	dw CeruleanTradeNurseText
 	dw NinetalesTrade
+	dw CeruleanPokecenterText4
 
 CeruleanTradeNurseText:
 	script_cable_club_receptionist
@@ -30,3 +31,7 @@ NinetalesTrade:
 	predef DoInGameTradeDialogue
 	jp TextScriptEnd
 
+CeruleanPokecenterText4:
+	text_asm
+	callfar PokecenterChanseyText
+	jp TextScriptEnd

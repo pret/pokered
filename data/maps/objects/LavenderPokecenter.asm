@@ -13,5 +13,6 @@ LavenderPokecenter_Object:
 	object_event  2,  6, SPRITE_LITTLE_GIRL, WALK, UP_DOWN, 3 ; person
 	object_event 11,  2, SPRITE_LINK_RECEPTIONIST, STAY, DOWN, 4 ; person
 	object_event  9,  3, SPRITE_GAMEBOY_KID, STAY, DOWN, 5 ; Dugtrio Trader
+	object_event  4,  1, SPRITE_CHANSEY, STAY, DOWN, 6 ; Chansey
 
 	def_warps_to LAVENDER_POKECENTER

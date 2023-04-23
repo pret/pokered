@@ -147,3 +147,8 @@ _OaksAideNoRoomText::
 	text_ram wOaksAideRewardItemName
 	text "."
 	done
+
+_NurseChanseyText::
+	text "CHANSEY: Chaaan"
+	line "sey!"
+	done

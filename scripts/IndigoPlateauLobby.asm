@@ -21,6 +21,7 @@ IndigoPlateauLobby_TextPointers:
 	dw IndigoCashierText
 	dw IndigoTradeNurseText
 	dw ExeggutorTrade
+	dw IndigoPlateauLobbyText4
 
 IndigoHealNurseText:
 	script_pokecenter_nurse
@@ -44,4 +45,9 @@ ExeggutorTrade:
 	ld a, TRADE_FOR_EXEGGUTOR_A
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue
+	jp TextScriptEnd
+
+IndigoPlateauLobbyText4:
+	text_asm
+	callfar PokecenterChanseyText
 	jp TextScriptEnd

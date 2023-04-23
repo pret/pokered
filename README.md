@@ -283,6 +283,7 @@ Credits
 * erosunica - Assistance with developing Celadon University & Citrine City, plus sources for various subjects.
 * Chatot4444 - Assisting with gym scaling code
 * ZumiIsawhat? - Restorations of beta OST
+* FrenchOrange - Reconstructions of various overworld beta sprites.
 * Helix Chamber, RacieBeep, loumilouminosus, Orchid, GBCRetro, & catstorm26 - Prototype Pokémon sprites
 * Vortyne - Reused a bit of code from their pureRGB hack. Assisted in bug fixes.
 * jojobear13 & Mateo - Move deleter & move relearner functionality from Shin Pokered, followed [this guide](https://github.com/jojobear13/shinpokered/blob/master/how%20to%20guides/how%20to%20add%20the%20move%20relearner%26deleter.txt). Tweaks were made to make it compatible with the pokered version we worked off of.

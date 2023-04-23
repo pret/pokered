@@ -8,6 +8,7 @@ RockTunnelPokecenter_TextPointers:
 	dw RockTunnelPokecenterText3
 	dw RockTunnelTradeNurseText
 	dw DittoSalesmanText
+	dw RockTunnelPokecenterText4
 
 RockTunnelHealNurseText:
 	script_pokecenter_nurse
@@ -87,3 +88,8 @@ DittoSalesmanText:
 .Text2
 	text_far _DittoSalesmanText2
 	text_end
+
+RockTunnelPokecenterText4:
+	text_asm
+	callfar PokecenterChanseyText
+	jp TextScriptEnd	

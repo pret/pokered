@@ -12,6 +12,7 @@ CeladonUniversityPokecenter_Object:
 	object_event  8,  3, SPRITE_SCIENTIST, STAY, LEFT_RIGHT, 2 ; person
 	object_event 10,  5, SPRITE_MIDDLE_AGED_MAN, WALK, ANY_DIR, 3 ; spamton
 	object_event  3,  5, SPRITE_SUPER_NERD, STAY, DOWN, 4 ; person
-	object_event 11,  2, SPRITE_LINK_RECEPTIONIST, STAY, DOWN, 4 ; person
+	object_event 11,  2, SPRITE_LINK_RECEPTIONIST, STAY, DOWN, 5 ; person
+	object_event  4,  1, SPRITE_CHANSEY, STAY, DOWN, 6 ; Chansey
 
 	def_warps_to CELADON_UNIVERSITY_POKECENTER

@@ -8,6 +8,7 @@ CeladonUniversityPokecenter_TextPointers:
 	dw CuboneSalesmanText
 	dw CeladonUniversityPokecenterText8
 	dw CeladonUniversityTradeNurseText
+	dw CeladonUniversityChansey
 
 CeladonUniversityTradeNurseText:
 	script_cable_club_receptionist
@@ -87,3 +88,8 @@ CuboneSalesmanText:
 CeladonUniversityPokecenterText8::
 	text_far _CeladonUniversityPokecenterText8
 	text_end
+
+CeladonUniversityChansey:
+	text_asm
+	callfar PokecenterChanseyText
+	jp TextScriptEnd

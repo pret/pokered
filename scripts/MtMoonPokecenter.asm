@@ -9,6 +9,7 @@ MtMoonPokecenter_TextPointers:
 	dw MagikarpSalesmanText
 	dw MtMoonPokecenterText5
 	dw MtMoonTradeNurseText
+	dw MtMoonPokecenterText6
 
 MtMoonHealNurseText:
 	script_pokecenter_nurse
@@ -92,3 +93,8 @@ MtMoonPokecenterText5:
 
 MtMoonTradeNurseText:
 	script_cable_club_receptionist
+
+MtMoonPokecenterText6:
+	text_asm
+	callfar PokecenterChanseyText
+	jp TextScriptEnd

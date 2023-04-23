@@ -8,6 +8,7 @@ FuchsiaPokecenter_TextPointers:
 	dw FuchsiaPokecenterText3
 	dw FuchsiaTradeNurseText
 	dw MarowakTrade
+	dw FuschiaPokecenterText4
 
 FuchsiaHealNurseText:
 	script_pokecenter_nurse
@@ -28,4 +29,9 @@ MarowakTrade:
 	ld a, TRADE_FOR_MAROWAK_A
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue
+	jp TextScriptEnd
+
+FuschiaPokecenterText4:
+	text_asm
+	callfar PokecenterChanseyText
 	jp TextScriptEnd

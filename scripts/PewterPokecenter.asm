@@ -8,6 +8,7 @@ PewterPokecenter_TextPointers:
 	dw PewterJigglypuffText
 	dw PewterTradeNurseText
 	dw GolemTrade
+	dw PewterPokecenterText3
 
 PewterHealNurseText:
 	script_pokecenter_nurse
@@ -96,4 +97,9 @@ GolemTrade:
 	ld a, TRADE_FOR_GOLEM_A
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue
+	jp TextScriptEnd
+
+PewterPokecenterText3:
+	text_asm
+	callfar PokecenterChanseyText
 	jp TextScriptEnd

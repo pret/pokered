@@ -9,6 +9,7 @@ MrFujisHouse_TextPointers:
 	dw LavenderHouse1Text4
 	dw LavenderHouse1Text5
 	dw LavenderHouse1Text6
+	dw LavenderHouse1Text7
 
 LavenderHouse1Text1:
 	text_asm
@@ -55,14 +56,14 @@ LavenderHouse1Text_1d8f9:
 LavenderHouse1Text3:
 	text_far _LavenderHouse1Text3
 	text_asm
-	ld a, PSYDUCK
+	ld a, SANDSHREW
 	call PlayCry
 	jp TextScriptEnd
 
 LavenderHouse1Text4:
 	text_far _LavenderHouse1Text4
 	text_asm
-	ld a, NIDORINO
+	ld a, BULBASAUR
 	call PlayCry
 	jp TextScriptEnd
 
@@ -110,3 +111,10 @@ MrFujiAfterFluteText:
 LavenderHouse1Text6:
 	text_far _LavenderHouse1Text6
 	text_end
+
+LavenderHouse1Text7:
+	text_far _LavenderHouse1Text7
+	text_asm
+	ld a, ODDISH
+	call PlayCry
+	jp TextScriptEnd

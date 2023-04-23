@@ -1,3 +1,4 @@
+;Backported from Yellow
 AnimatePartyMon_ForceSpeed1:
 	xor a
 	ld [wCurrentMenuItem], a
@@ -91,7 +92,7 @@ PartyMonSpeeds:
 LoadMonPartySpriteGfx:
 ; Load mon party sprite tile patterns into VRAM during V-blank.
 	ld hl, MonPartySpritePointers
-	ld a, $1c
+	ld a, $22 ; Number of pointers in the list in hex. eg. Yellow has 30, so 1E is used.
 
 LoadAnimSpriteGfx:
 ; Load animated sprite tile patterns into VRAM during V-blank. hl is the address
@@ -130,7 +131,7 @@ LoadMonPartySpriteGfxWithLCDDisabled:
 ; LCD.
 	call DisableLCD
 	ld hl, MonPartySpritePointers
-	ld a, $1c
+	ld a, $24 ; Number of pointers in the list in hex. eg. Yellow has 30, so 1E is used.
 	ld bc, $0
 .loop
 	push af
@@ -151,7 +152,7 @@ LoadMonPartySpriteGfxWithLCDDisabled:
 	inc hl
 	ld d, [hl]
 	pop hl
-	call FarCopyData2
+	call FarCopyData
 	pop hl
 	pop bc
 	ld a, $6
@@ -170,6 +171,8 @@ WriteMonPartySpriteOAMByPartyIndex:
 	push de
 	push bc
 	ldh a, [hPartyMonIndex]
+	cp $ff
+	jr z, .asm_7191f
 	ld hl, wPartySpecies
 	ld e, a
 	ld d, 0
@@ -178,6 +181,16 @@ WriteMonPartySpriteOAMByPartyIndex:
 	call GetPartyMonSpriteID
 	ld [wOAMBaseTile], a
 	call WriteMonPartySpriteOAM
+	pop bc
+	pop de
+	pop hl
+	ret
+
+.asm_7191f
+	ld hl, wShadowOAM
+	ld de, wMonPartySpritesSavedOAM
+	ld bc, $60
+	call CopyData
 	pop bc
 	pop de
 	pop hl
@@ -193,43 +206,43 @@ WriteMonPartySpriteOAMBySpecies:
 	ld [wOAMBaseTile], a
 	jr WriteMonPartySpriteOAM
 
-UnusedPartyMonSpriteFunction:
+;UnusedPartyMonSpriteFunction:
 ; This function is unused and doesn't appear to do anything useful. It looks
 ; like it may have been intended to load the tile patterns and OAM data for
 ; the mon party sprite associated with the species in [wcf91].
 ; However, its calculations are off and it loads garbage data.
-	ld a, [wcf91]
-	call GetPartyMonSpriteID
-	push af
-	ld hl, vSprites tile $00
-	call .LoadTilePatterns
-	pop af
-	add $54
-	ld hl, vSprites tile $04
-	call .LoadTilePatterns
-	xor a
-	ld [wMonPartySpriteSpecies], a
-	jr WriteMonPartySpriteOAMBySpecies
+;	ld a, [wcf91]
+;	call GetPartyMonSpriteID
+;	push af
+;	ld hl, vSprites tile $00
+;	call .LoadTilePatterns
+;	pop af
+;	add $5A
+;	ld hl, vSprites tile $04
+;	call .LoadTilePatterns
+;	xor a
+;	ld [wMonPartySpriteSpecies], a
+;	jr WriteMonPartySpriteOAMBySpecies
 
-.LoadTilePatterns
-	push hl
-	add a
-	ld c, a
-	ld b, 0
-	ld hl, MonPartySpritePointers
-	add hl, bc
-	add hl, bc
-	add hl, bc
-	ld a, [hli]
-	ld e, a
-	ld a, [hli]
-	ld d, a
-	ld a, [hli]
-	ld c, a
-	ld a, [hli]
-	ld b, a
-	pop hl
-	jp CopyVideoData
+;.LoadTilePatterns
+;	push hl
+;	add a
+;	ld c, a
+;	ld b, 0
+;	ld hl, MonPartySpritePointers
+;	add hl, bc
+;	add hl, bc
+;	add hl, bc
+;	ld a, [hli]
+;	ld e, a
+;	ld a, [hli]
+;	ld d, a
+;	ld a, [hli]
+;	ld c, a
+;	ld a, [hli]
+;	ld b, a
+;	pop hl
+;	jp CopyVideoData
 
 WriteMonPartySpriteOAM:
 ; Write the OAM blocks for the first animation frame into the OAM buffer and
@@ -291,5 +304,7 @@ SnakeIconFrame1:     INCBIN "gfx/icons/snake.2bpp", INC_FRAME_1
 QuadrupedIconFrame1: INCBIN "gfx/icons/quadruped.2bpp", INC_FRAME_1
 SnakeIconFrame2:     INCBIN "gfx/icons/snake.2bpp", INC_FRAME_2
 QuadrupedIconFrame2: INCBIN "gfx/icons/quadruped.2bpp", INC_FRAME_2
+CatIconFrame1:		 INCBIN "gfx/icons/cat.2bpp", INC_FRAME_1
+CatIconFrame2:		 INCBIN "gfx/icons/cat.2bpp", INC_FRAME_2
 
 TradeBubbleIconGFX:  INCBIN "gfx/trade/bubble.2bpp"

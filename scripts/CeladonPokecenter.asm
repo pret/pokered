@@ -8,6 +8,7 @@ CeladonPokecenter_TextPointers:
 	dw CeladonPokecenterText3
 	dw CeladonTradeNurseText
 	dw SandslashTrade
+	dw CeladonPokeCenterText4
 
 CeladonTradeNurseText:
 	script_cable_club_receptionist
@@ -28,4 +29,9 @@ SandslashTrade:
 	ld a, TRADE_FOR_SANDSLASH_A
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue
+	jp TextScriptEnd
+
+CeladonPokeCenterText4:
+	text_asm
+	callfar PokecenterChanseyText
 	jp TextScriptEnd
