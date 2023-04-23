@@ -25,8 +25,8 @@ MonPartyData:
 	nybble ICON_QUADRUPED ; Rattata
 	nybble ICON_QUADRUPED ; Raticate
 	nybble ICON_QUADRUPED ; Raticate-A
-	nybble ICON_SMALL_BIRD      ; Pidgey
-	nybble ICON_SMALL_BIRD      ; Pidgeotto
+	nybble ICON_SMALL_BIRD ; Pidgey
+	nybble ICON_SMALL_BIRD ; Pidgeotto
 	nybble ICON_BIRD      ; Pidgeot
 	nybble ICON_CAT       ; Konya
 	nybble ICON_CAT       ; Meowth
@@ -42,7 +42,7 @@ MonPartyData:
 	nybble ICON_BUG       ; Kokana
 	nybble ICON_BUG       ; Kasanagi
 	nybble ICON_BUG       ; Carapthor
-	nybble ICON_SMALL_BIRD      ; Spearow
+	nybble ICON_SMALL_BIRD ; Spearow
 	nybble ICON_BIRD      ; Fearow
 	nybble ICON_SNAKE     ; Ekans
 	nybble ICON_SNAKE     ; Arbok
@@ -163,7 +163,7 @@ MonPartyData:
 	nybble ICON_MON       ; Marowak
 	nybble ICON_MON       ; Marowak-A
 	nybble ICON_MON	      ; Guardia
-	nybble ICON_SMALL_BIRD      ; Farfetch'd
+	nybble ICON_SMALL_BIRD ; Farfetch'd
 	nybble ICON_BIRD	  ; Madaamu
 	nybble ICON_BIRD      ; Sirfetch'd
 	nybble ICON_BIRD      ; Doduo - it's flightless, so the current sprite fits better.
@@ -248,7 +248,7 @@ MonPartyData:
 	nybble ICON_BIRD      ; Moltres
 	nybble ICON_BIRD      ; Moltres-G
 	nybble ICON_MON       ; Mewtwo
-	nybble ICON_MON       ; Mew
+	nybble ICON_CAT       ; Mew
 	nybble ICON_BALL      ; Meltan
 	nybble ICON_BALL      ; Melmetal
 	end_nybble_array NUM_POKEMON

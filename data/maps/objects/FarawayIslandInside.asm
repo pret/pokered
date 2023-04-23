@@ -8,6 +8,6 @@ FarawayIslandInside_Object:
 	def_bg_events
 
 	def_object_events
-	object_event 15, 10, SPRITE_MONSTER, STAY, DOWN, 1, MEW, 30 | OW_POKEMON
+	object_event 15, 10, SPRITE_CAT, STAY, DOWN, 1, MEW, 30 | OW_POKEMON
 
 	def_warps_to FARAWAY_ISLAND_INSIDE
