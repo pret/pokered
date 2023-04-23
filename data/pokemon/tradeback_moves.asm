@@ -266,6 +266,7 @@ RhydonTradebackMoves:
 	db 1, ROAR
 	db 1, THUNDERPUNCH
 	db 1, FIRE_PUNCH
+	db 1, FLAMETHROWER
 	db 1, THRASH
 	db 0
 
@@ -292,108 +293,234 @@ NidoranMTradebackMoves:
 	db 0
 
 ClefairyTradebackMoves:
+	db 1, DREAM_EATER
+	db 1, FIRE_PUNCH
+	db 1, ICE_PUNCH
+	db 1, THUNDERPUNCH
+	db 1, HEADBUTT
+	db 1, FLAMETHROWER
+	db 1, DIZZY_PUNCH
+	db 1, AMNESIA
+	db 1, SPLASH
+	db 1, SWIFT
+	db 1, PETAL_DANCE
 	db 0
 
 SpearowTradebackMoves:
+	db 1, QUICK_ATTACK
+	db 1, TRI_ATTACK
+	db 1, SONICBOOM
 	db 0
 
 VoltorbTradebackMoves:
+	db 1, HEADBUTT
+	db 1, AGILITY
 	db 0
 
 NidokingTradebackMoves:
-	
+	db 1, DEFENSE_CURL
+	db 1, HEADBUTT
+	db 1, AMNESIA
+	db 1, CONFUSION
+	db 1, DISABLE
+	db 1, SUPERSONIC
+	db 1, LOVELY_KISS
+	db 1, FIRE_PUNCH
+	db 1, ICE_PUNCH
+	db 1, THUNDERPUNCH
+	db 1, ROAR
+	db 1, FLAMETHROWER
 	db 0
 
 SlowbroTradebackMoves:
-	
+	db 1, TACKLE
+	db 1, DREAM_EATER
+	db 1, FLAMETHROWER
+	db 1, STOMP
+	db 1, ICE_PUNCH
 	db 0
 
 IvysaurTradebackMoves:
-	
+	db 1, DEFENSE_CURL
+	db 1, FLASH
+	db 1, HEADBUTT
+	db 1, LIGHT_SCREEN
+	db 1, PETAL_DANCE
+	db 1, RAZOR_WIND
+	db 1, SKULL_BASH
 	db 0
 
 ExeggutorTradebackMoves:
-	
+	db 1, DREAM_EATER
+	db 1, FLASH
+	db 1, HEADBUTT
+	db 1, CONFUSION
 	db 0
 
 LickitungTradebackMoves:
-	
+	db 1, LICK
+	db 1, DREAM_EATER
+	db 1, HEADBUTT
+	db 1, FIRE_PUNCH
+	db 1, ICE_PUNCH
+	db 1, THUNDERPUNCH
+	db 1, FLAMETHROWER
+	db 1, DOUBLESLAP
 	db 0
 
 ExeggcuteTradebackMoves:
-	
+	db 1, DREAM_EATER
+	db 1, FLASH
+	db 1, STRENGTH
+	db 1, CONFUSION
+	db 1, MEGA_DRAIN
 	db 0
 
 GrimerTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, FLAMETHROWER
+	db 1, THUNDERPUNCH
+	db 1, FIRE_PUNCH
+	db 1, ICE_PUNCH
+	db 1, HAZE
+	db 1, LICK
 	db 0
 
 GengarTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, THUNDERPUNCH
+	db 1, FIRE_PUNCH
+	db 1, ICE_PUNCH
+	db 1, HAZE
 	db 0
 
 NidoranFTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, FOCUS_ENERGY
+	db 1, COUNTER
+	db 1, DISABLE
+	db 1, SUPERSONIC
+	db 1, LOVELY_KISS
 	db 0
 
 NidoqueenTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, FOCUS_ENERGY
+	db 1, DISABLE
+	db 1, SUPERSONIC
+	db 1, LOVELY_KISS
+	db 1, FIRE_PUNCH
+	db 1, ICE_PUNCH
+	db 1, THUNDERPUNCH
+	db 1, ROAR
+	db 1, FLAMETHROWER
 	db 0
 
 CuboneTradebackMoves:
-	
+	db 1, FIRE_PUNCH
+	db 1, THUNDERPUNCH
+	db 1, FLAMETHROWER
+	db 1, SWORDS_DANCE
+	db 1, SCREECH
+	db 1, ROCK_SLIDE
+	db 1, FURY_ATTACK
 	db 0
 
 RhyhornTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, BLIZZARD
+	db 1, COUNTER
+	db 1, ROAR
+	db 1, THUNDERPUNCH
+	db 1, FIRE_PUNCH
+	db 1, FLAMETHROWER
+	db 1, THRASH
+	db 1, ICE_BEAM
 	db 0
 
 LaprasTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, DREAM_EATER
+	db 1, AURORA_BEAM
+	db 1, HEADBUTT
 	db 0
 
 ArcanineTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, FIRE_SPIN
+	db 1, THRASH
 	db 0
 
 MewTradebackMoves:
-	
+	db 1, DREAM_EATER
+	db 1, FIRE_PUNCH
+	db 1, ICE_PUNCH
+	db 1, THUNDERPUNCH
+	db 1, HEADBUTT
+	db 1, FLAMETHROWER
+	db 1, WATERFALL
+	db 1, ROAR
 	db 0
 
 GyaradosTradebackMoves:
-	
+	db 1, THRASH
+	db 1, ROAR
+	db 1, HEADBUTT
+	db 1, WATERFALL
+	db 1, FLAMETHROWER
+	db 1, BUBBLE
 	db 0
 
 ShellderTradebackMoves:
-	
+	db 1, BARRIER
+	db 1, SCREECH
 	db 0
 
 TentacoolTradebackMoves:
-	
+	db 1, AURORA_BEAM
+	db 1, HAZE
+	db 1, CONFUSE_RAY
 	db 0
 
 GastlyTradebackMoves:
-	
+	db 1, HAZE
 	db 0
 
 ScytherTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, COUNTER
+	db 1, LIGHT_SCREEN
+	db 1, RAZOR_WIND
+	db 1, SONICBOOM
 	db 0
 
 StaryuTradebackMoves:
-	
+	db 1, WATERFALL
 	db 0
 
 BlastoiseTradebackMoves:
-	
+	db 1, DEFENSE_CURL
+	db 1, ICE_PUNCH
+	db 1, HEADBUTT
+	db 1, WATERFALL
+	db 1, CONFUSION
+	db 1, HAZE
+	db 1, MIST
+	db 1, ROAR
 	db 0
 
 PinsirTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, FURY_ATTACK
+	db 1, ROCK_THROW
 	db 0
 
 TangelaTradebackMoves:
-	
+	db 1, FLASH
+	db 1, HEADBUTT
+	db 1, AMNESIA
+	db 1, CONFUSION
+	db 1, REFLECT
 	db 0
 
 GyaoonTradebackMoves:
@@ -401,75 +528,147 @@ GyaoonTradebackMoves:
 	db 0
 
 NidoreignTradebackMoves:
-	
+	db 1, DEFENSE_CURL
+	db 1, HEADBUTT
+	db 1, AMNESIA
+	db 1, CONFUSION
+	db 1, FOCUS_ENERGY
+	db 1, DISABLE
+	db 1, SUPERSONIC
+	db 1, LOVELY_KISS
+	db 1, ROAR
+	db 1, FLAMETHROWER
 	db 0
 
 GrowlitheTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, FIRE_SPIN
+	db 1, THRASH
 	db 0
 
 OnixTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, ROAR
+	db 1, SHARPEN
 	db 0
 
 FearowTradebackMoves:
-	
+	db 1, QUICK_ATTACK
+	db 1, TRI_ATTACK
+	db 1, SONICBOOM
 	db 0
 
 PidgeyTradebackMoves:
-	
+	db 1, TACKLE
 	db 0
 
 SlowpokeTradebackMoves:
-	
+	db 1, TACKLE
+	db 1, DREAM_EATER
+	db 1, FLAMETHROWER
+	db 1, STOMP
 	db 0
 
 KadabraTradebackMoves:
-	
+	db 1, DREAM_EATER
+	db 1, HEADBUTT
+	db 1, FIRE_PUNCH
+	db 1, ICE_PUNCH
+	db 1, THUNDERPUNCH
+	db 1, BARRIER
+	db 1, LIGHT_SCREEN
 	db 0
 
 GravelerTradebackMoves:
-	
+	db 1, FIRE_PUNCH
+	db 1, HEADBUTT
+	db 1, FLAMETHROWER
 	db 0
 
 ChanseyTradebackMoves:
-	
+	db 1, DREAM_EATER
+	db 1, HEADBUTT
+	db 1, FLAMETHROWER
 	db 0
 
 MachokeTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, FIRE_PUNCH
+	db 1, ICE_PUNCH
+	db 1, THUNDERPUNCH
+	db 1, FLAMETHROWER
+	db 1, LIGHT_SCREEN
+	db 1, MEDITATE
+	db 1, ROLLING_KICK
+	db 1, THRASH
 	db 0
 
 MrMimeTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, DREAM_EATER
+	db 1, THUNDERPUNCH
+	db 1, FIRE_PUNCH
+	db 1, ICE_PUNCH
+	db 1, HYPNOSIS
+	db 1, PSYBEAM
 	db 0
 
 HitmonleeTradebackMoves:
-	
+	db 1, TACKLE
+	db 1, HEADBUTT
+	db 1, DIZZY_PUNCH
 	db 0
 
 HitmonchanTradebackMoves:
-	
+	db 1, TACKLE
+	db 1, HEADBUTT
+	db 1, DIZZY_PUNCH
+	db 1, HI_JUMP_KICK
 	db 0
 
 ArbokTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, HAZE
+	db 1, SLAM
 	db 0
 
 ParasectTradebackMoves:
-	
+	db 1, FLASH
+	db 1, POISONPOWDER
+	db 1, COUNTER
+	db 1, LIGHT_SCREEN
+	db 1, PSYBEAM
+	db 1, SCREECH
 	db 0
 
 PsyduckTradebackMoves:
-	
+	db 1, SCREECH
+	db 1, FLASH
+	db 1, HEADBUTT
+	db 1, ICE_PUNCH
+	db 1, WATERFALL
+	db 1, HYPNOSIS
+	db 1, LIGHT_SCREEN
+	db 1, PSYBEAM
+	db 1, PSYCHIC
+	db 1, PETAL_DANCE
+	db 1, TRI_ATTACK
 	db 0
 
 DrowzeeTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, FIRE_PUNCH
+	db 1, ICE_PUNCH
+	db 1, THUNDERPUNCH
+	db 1, BARRIER
+	db 1, LIGHT_SCREEN
+	db 1, AMNESIA
 	db 0
 
 GolemTradebackMoves:
-	
+	db 1, FIRE_PUNCH
+	db 1, HEADBUTT
+	db 1, FLAMETHROWER
 	db 0
 
 BarundaTradebackMoves:
@@ -477,7 +676,12 @@ BarundaTradebackMoves:
 	db 0
 
 MagmarTradebackMoves:
-	
+	db 1, THUNDERPUNCH
+	db 1, HEADBUTT
+	db 1, DIZZY_PUNCH
+	db 1, BARRIER
+	db 1, KARATE_CHOP
+	db 1, SCREECH
 	db 0
 
 BuuTradebackMoves:
@@ -485,15 +689,26 @@ BuuTradebackMoves:
 	db 0
 
 ElectabuzzTradebackMoves:
-	
+	db 1, FIRE_PUNCH
+	db 1, ICE_PUNCH
+	db 1, HEADBUTT
+	db 1, DIZZY_PUNCH
+	db 1, BARRIER
+	db 1, KARATE_CHOP
+	db 1, MEDITATE
+	db 1, ROLLING_KICK
 	db 0
 
 MagnetonTradebackMoves:
-	
+	db 1, AGILITY
+	db 1, TRI_ATTACK
 	db 0
 
 KoffingTradebackMoves:
-	
+	db 1, POISON_GAS
+	db 1, PSYBEAM
+	db 1, PSYWAVE
+	db 1, SCREECH
 	db 0
 
 DeerTradebackMoves:
@@ -501,19 +716,33 @@ DeerTradebackMoves:
 	db 0
 
 MankeyTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, DEFENSE_CURL
+	db 1, THUNDERPUNCH
+	db 1, FIRE_PUNCH
+	db 1, ICE_PUNCH
+	db 1, MEDITATE
 	db 0
 
 SeelTradebackMoves:
-	
+	db 1, WATERFALL
+	db 1, DISABLE
+	db 1, LICK
+	db 1, PECK
+	db 1, SLAM
 	db 0
 
 DiglettTradebackMoves:
-	
+	db 1, SCREECH
 	db 0
 
 TaurosTradebackMoves:
-	
+	db 1, HORN_ATTACK
+	db 1, THRASH
+	db 1, SURF
+	db 1, HEADBUTT
+	db 1, FLAMETHROWER
+	db 1, QUICK_ATTACK
 	db 0
 
 TrampelTradebackMoves:
@@ -529,15 +758,30 @@ BlottleTradebackMoves:
 	db 0
 
 FarfetchdTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, GUST
+	db 1, MIRROR_MOVE
+	db 1, QUICK_ATTACK
 	db 0
 
 VenonatTradebackMoves:
-	
+	db 1, SWIFT
+	db 1, SCREECH
 	db 0
 
 DragoniteTradebackMoves:
-	
+	db 1, WING_ATTACK
+	db 1, FIRE_PUNCH
+	db 1, ICE_PUNCH
+	db 1, THUNDERPUNCH
+	db 1, HEADBUTT
+	db 1, WATERFALL
+	db 1, FLAMETHROWER
+	db 1, HAZE
+	db 1, LIGHT_SCREEN
+	db 1, MIST
+	db 1, SUPERSONIC
+	db 1, HYDRO_PUMP
 	db 0
 
 CactusTradebackMoves:
@@ -549,31 +793,53 @@ JaggTradebackMoves:
 	db 0
 
 BittybatTradebackMoves:
-	
+	db 1, QUICK_ATTACK
 	db 0
 
 DoduoTradebackMoves:
-	
+	db 1, SWIFT
+	db 1, HAZE
+	db 1, SUPERSONIC
+	db 1, QUICK_ATTACK
+	db 1, LOW_KICK
 	db 0
 
 PoliwagTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, DEFENSE_CURL
+	db 1, WATERFALL
+	db 1, HAZE
+	db 1, MIST
+	db 1, SPLASH
+	db 1, GROWTH
+	db 1, LOVELY_KISS
 	db 0
 
 JynxTradebackMoves:
-	
+	db 1, CONFUSION
+	db 1, SING
+	db 1, DREAM_EATER
+	db 1, HEADBUTT
+	db 1, DIZZY_PUNCH
+	db 1, MEDITATE
+	db 1, PETAL_DANCE
 	db 0
 
 MoltresTradebackMoves:
-	
+	db 1, EMBER
+	db 1, WING_ATTACK
+	db 1, ROAR
+	db 1, FLAMETHROWER
 	db 0
 
 ArticunoTradebackMoves:
-	
+	db 1, GUST
+	db 1, ROAR
 	db 0
 
 ZapdosTradebackMoves:
-	
+	db 1, PECK
+	db 1, ROAR
 	db 0
 
 DittoTradebackMoves:
@@ -581,11 +847,18 @@ DittoTradebackMoves:
 	db 0
 
 MeowthTradebackMoves:
-	
+	db 1, DEFENSE_CURL
+	db 1, DREAM_EATER
+	db 1, HEADBUTT
+	db 1, AMNESIA
+	db 1, HYPNOSIS
 	db 0
 
 KrabbyTradebackMoves:
-	
+	db 1, SLAM
+	db 1, DIG
+	db 1, HAZE
+	db 1, AMNESIA
 	db 0
 
 CheepTradebackMoves:
@@ -597,23 +870,43 @@ JabettaTradebackMoves:
 	db 0
 
 MikonTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, DISABLE
+	db 1, HYPNOSIS
 	db 0
 
 VulpixTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, DISABLE
+	db 1, HYPNOSIS
 	db 0
 
 NinetalesTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, DISABLE
+	db 1, HYPNOSIS
 	db 0
 
 PikachuTradebackMoves:
-	
+	db 1, DEFENSE_CURL
+	db 1, HEADBUTT
+	db 1, THUNDERPUNCH
+	db 1, STRENGTH
+	db 1, DIZZY_PUNCH
+	db 1, DOUBLESLAP
+	db 1, PETAL_DANCE
+	db 1, SING
 	db 0
 
 RaichuTradebackMoves:
-	
+	db 1, DEFENSE_CURL
+	db 1, HEADBUTT
+	db 1, THUNDERPUNCH
+	db 1, STRENGTH
+	db 1, DIZZY_PUNCH
+	db 1, DOUBLESLAP
+	db 1, PETAL_DANCE
+	db 1, SING
 	db 0
 
 RibbitoTradebackMoves:
@@ -625,27 +918,62 @@ CroakozunaTradebackMoves:
 	db 0
 
 DratiniTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, WATERFALL
+	db 1, FLAMETHROWER
+	db 1, HAZE
+	db 1, LIGHT_SCREEN
+	db 1, MIST
+	db 1, SUPERSONIC
+	db 1, HYDRO_PUMP
 	db 0
 
 DragonairTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, WATERFALL
+	db 1, FLAMETHROWER
+	db 1, HAZE
+	db 1, LIGHT_SCREEN
+	db 1, MIST
+	db 1, SUPERSONIC
+	db 1, HYDRO_PUMP
 	db 0
 
 KabutoTradebackMoves:
-	
+	db 1, MEGA_DRAIN
+	db 1, SAND_ATTACK
+	db 1, AURORA_BEAM
+	db 1, ROCK_THROW
+	db 1, DIG
 	db 0
 
 KabutopsTradebackMoves:
-	
+	db 1, MEGA_DRAIN
+	db 1, SAND_ATTACK
+	db 1, AURORA_BEAM
+	db 1, ROCK_THROW
+	db 1, DIG
+	db 1, HEADBUTT
 	db 0
 
 HorseaTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, WATERFALL
+	db 1, AURORA_BEAM
+	db 1, DISABLE
+	db 1, DRAGON_RAGE
+	db 1, SPLASH
+	db 1, HAZE
 	db 0
 
 SeadraTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, WATERFALL
+	db 1, AURORA_BEAM
+	db 1, DISABLE
+	db 1, DRAGON_RAGE
+	db 1, SPLASH
+	db 1, HAZE
 	db 0
 
 BawliguaTradebackMoves:
@@ -657,67 +985,139 @@ CryithanTradebackMoves:
 	db 0
 
 SandshrewTradebackMoves:
-	
+	db 1, DEFENSE_CURL
+	db 1, HEADBUTT
+	db 1, COUNTER
 	db 0
 
 SandslashTradebackMoves:
-	
+	db 1, DEFENSE_CURL
+	db 1, HEADBUTT
+	db 1, COUNTER
 	db 0
 
 OmanyteTradebackMoves:
-	
+	db 1, BITE
+	db 1, CONSTRICT
+	db 1, HEADBUTT
+	db 1, AURORA_BEAM
+	db 1, HAZE
+	db 1, SLAM
+	db 1, SUPERSONIC
+	db 1, ROCK_THROW
 	db 0
 
 OmastarTradebackMoves:
-	
+	db 1, BITE
+	db 1, CONSTRICT
+	db 1, HEADBUTT
+	db 1, AURORA_BEAM
+	db 1, HAZE
+	db 1, SLAM
+	db 1, SUPERSONIC
+	db 1, ROCK_THROW
 	db 0
 
 JigglypuffTradebackMoves:
-	
+	db 1, DREAM_EATER
+	db 1, FIRE_PUNCH
+	db 1, ICE_PUNCH
+	db 1, THUNDERPUNCH
+	db 1, HEADBUTT
+	db 1, FLAMETHROWER
+	db 1, DIZZY_PUNCH
+	db 1, PETAL_DANCE
 	db 0
 
 WigglytuffTradebackMoves:
-	
+	db 1, DREAM_EATER
+	db 1, FIRE_PUNCH
+	db 1, ICE_PUNCH
+	db 1, THUNDERPUNCH
+	db 1, HEADBUTT
+	db 1, FLAMETHROWER
+	db 1, DIZZY_PUNCH
+	db 1, PETAL_DANCE
 	db 0
 
 EeveeTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, GROWTH
 	db 0
 
 FlareonTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, GROWTH
+	db 1, ROAR
 	db 0
 
 JolteonTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, GROWTH
+	db 1, ROAR
 	db 0
 
 VaporeonTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, GROWTH
+	db 1, ROAR
+	db 1, WATERFALL
 	db 0
 
 MachopTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, FIRE_PUNCH
+	db 1, ICE_PUNCH
+	db 1, THUNDERPUNCH
+	db 1, FLAMETHROWER
+	db 1, LIGHT_SCREEN
+	db 1, MEDITATE
+	db 1, ROLLING_KICK
+	db 1, THRASH
 	db 0
 
 ZubatTradebackMoves:
-	
+	db 1, GUST
+	db 1, QUICK_ATTACK
 	db 0
 
 EkansTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, HAZE
+	db 1, SLAM
 	db 0
 
 ParasTradebackMoves:
-	
+	db 1, FLASH
+	db 1, POISONPOWDER
+	db 1, COUNTER
+	db 1, LIGHT_SCREEN
+	db 1, PSYBEAM
+	db 1, SCREECH
 	db 0
 
 PoliwhirlTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, DEFENSE_CURL
+	db 1, WATERFALL
+	db 1, HAZE
+	db 1, MIST
+	db 1, SPLASH
+	db 1, GROWTH
+	db 1, LOVELY_KISS
+	db 1, ICE_PUNCH
 	db 0
 
 PoliwrathTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, DEFENSE_CURL
+	db 1, WATERFALL
+	db 1, HAZE
+	db 1, MIST
+	db 1, SPLASH
+	db 1, GROWTH
+	db 1, LOVELY_KISS
+	db 1, ICE_PUNCH
 	db 0
 
 WeedleTradebackMoves:
@@ -733,31 +1133,52 @@ BeedrillTradebackMoves:
 	db 0
 
 MadaamuTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, GUST
+	db 1, MIRROR_MOVE
+	db 1, QUICK_ATTACK
 	db 0
 
 DodrioTradebackMoves:
-	
+	db 1, SWIFT
+	db 1, HAZE
+	db 1, SUPERSONIC
+	db 1, QUICK_ATTACK
+	db 1, LOW_KICK
 	db 0
 
 PrimeapeTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, DEFENSE_CURL
+	db 1, THUNDERPUNCH
+	db 1, FIRE_PUNCH
+	db 1, ICE_PUNCH
+	db 1, MEDITATE
 	db 0
 
 DugtrioTradebackMoves:
-	
+	db 1, TRI_ATTACK
+	db 1, SCREECH
 	db 0
 
 VenomothTradebackMoves:
-	
+	db 1, GUST
+	db 1, SWIFT
+	db 1, SCREECH
 	db 0
 
 DewgongTradebackMoves:
-	
+	db 1, WATERFALL
+	db 1, DISABLE
+	db 1, LICK
+	db 1, PECK
+	db 1, SLAM
 	db 0
 
 PurakkusuTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, FURY_ATTACK
+	db 1, ROCK_THROW
 	db 0
 
 PendrakenTradebackMoves:
@@ -777,39 +1198,93 @@ ButterfreeTradebackMoves:
 	db 0
 
 MachampTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, FIRE_PUNCH
+	db 1, ICE_PUNCH
+	db 1, THUNDERPUNCH
+	db 1, FLAMETHROWER
+	db 1, LIGHT_SCREEN
+	db 1, MEDITATE
+	db 1, ROLLING_KICK
+	db 1, THRASH
 	db 0
 
 WeirduckTradebackMoves:
-	
+	db 1, SCREECH
+	db 1, FLASH
+	db 1, HEADBUTT
+	db 1, ICE_PUNCH
+	db 1, WATERFALL
+	db 1, HYPNOSIS
+	db 1, LIGHT_SCREEN
+	db 1, PSYBEAM
+	db 1, PSYCHIC
+	db 1, PETAL_DANCE
+	db 1, TRI_ATTACK
 	db 0
 
 GolduckTradebackMoves:
-	
+	db 1, SCREECH
+	db 1, FLASH
+	db 1, HEADBUTT
+	db 1, ICE_PUNCH
+	db 1, WATERFALL
+	db 1, HYPNOSIS
+	db 1, LIGHT_SCREEN
+	db 1, PSYBEAM
+	db 1, PSYCHIC
+	db 1, PETAL_DANCE
+	db 1, TRI_ATTACK
 	db 0
 
 HypnoTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, FIRE_PUNCH
+	db 1, ICE_PUNCH
+	db 1, THUNDERPUNCH
+	db 1, BARRIER
+	db 1, LIGHT_SCREEN
+	db 1, AMNESIA
 	db 0
 
 GolbatTradebackMoves:
-	
+	db 1, GUST
+	db 1, QUICK_ATTACK
 	db 0
 
 MewtwoTradebackMoves:
-	
+	db 1, DREAM_EATER
+	db 1, FIRE_PUNCH
+	db 1, ICE_PUNCH
+	db 1, THUNDERPUNCH
+	db 1, HEADBUTT
+	db 1, FLAMETHROWER
+	db 1, WATERFALL
+	db 1, ROAR
 	db 0
 
 SnorlaxTradebackMoves:
-	
+	db 1, TACKLE
+	db 1, DEFENSE_CURL
+	db 1, ICE_PUNCH
+	db 1, FIRE_PUNCH
+	db 1, THUNDERPUNCH
+	db 1, FLAMETHROWER
+	db 1, LICK
+	db 1, SPLASH
+	db 1, LOVELY_KISS
 	db 0
 
 MagikarpTradebackMoves:
-	
+	db 1, BUBBLE
 	db 0
 
 KonyaTradebackMoves:
-	
+	db 1, DEFENSE_CURL
+	db 1, DREAM_EATER
+	db 1, HEADBUTT
+	db 1, AMNESIA
+	db 1, HYPNOSIS
 	db 0
 
 OmegaTradebackMoves:
@@ -817,7 +1292,13 @@ OmegaTradebackMoves:
 	db 0
 
 MukTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, FLAMETHROWER
+	db 1, THUNDERPUNCH
+	db 1, FIRE_PUNCH
+	db 1, ICE_PUNCH
+	db 1, HAZE
+	db 1, LICK
 	db 0
 
 DecillaTradebackMoves:
@@ -825,87 +1306,158 @@ DecillaTradebackMoves:
 	db 0
 
 KinglerTradebackMoves:
-	
+	db 1, SLAM
+	db 1, DIG
+	db 1, HAZE
+	db 1, AMNESIA
 	db 0
 
 CloysterTradebackMoves:
-	
+	db 1, BARRIER
+	db 1, SCREECH
 	db 0
 
 MagnetiteTradebackMoves:
-	
+	db 1, AGILITY
 	db 0
 
 ElectrodeTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, AGILITY
 	db 0
 
 ClefableTradebackMoves:
-	
+	db 1, DREAM_EATER
+	db 1, FIRE_PUNCH
+	db 1, ICE_PUNCH
+	db 1, THUNDERPUNCH
+	db 1, HEADBUTT
+	db 1, FLAMETHROWER
+	db 1, DIZZY_PUNCH
+	db 1, AMNESIA
+	db 1, SPLASH
+	db 1, SWIFT
+	db 1, PETAL_DANCE
 	db 0
 
 WeezingTradebackMoves:
-	
+	db 1, POISON_GAS
+	db 1, PSYBEAM
+	db 1, PSYWAVE
+	db 1, SCREECH
 	db 0
 
 PersianTradebackMoves:
-	
+	db 1, DEFENSE_CURL
+	db 1, DREAM_EATER
+	db 1, HEADBUTT
+	db 1, AMNESIA
+	db 1, HYPNOSIS
+	db 1, ROAR
 	db 0
 
 MarowakTradebackMoves:
-	
+	db 1, FIRE_PUNCH
+	db 1, THUNDERPUNCH
+	db 1, FLAMETHROWER
+	db 1, SWORDS_DANCE
+	db 1, SCREECH
+	db 1, ROCK_SLIDE
+	db 1, FURY_ATTACK
 	db 0
 
 GuardiaTradebackMoves:
-	
+	db 1, FIRE_PUNCH
+	db 1, THUNDERPUNCH
+	db 1, FLAMETHROWER
+	db 1, SWORDS_DANCE
+	db 1, SCREECH
+	db 1, ROCK_SLIDE
+	db 1, FURY_ATTACK
 	db 0
 
 HaunterTradebackMoves:
-	
+	db 1, HAZE
 	db 0
 
 AbraTradebackMoves:
-	
+	db 1, DREAM_EATER
+	db 1, HEADBUTT
+	db 1, FIRE_PUNCH
+	db 1, ICE_PUNCH
+	db 1, THUNDERPUNCH
+	db 1, BARRIER
+	db 1, LIGHT_SCREEN
 	db 0
 
 AlakazamTradebackMoves:
-	
+	db 1, DREAM_EATER
+	db 1, HEADBUTT
+	db 1, FIRE_PUNCH
+	db 1, ICE_PUNCH
+	db 1, THUNDERPUNCH
+	db 1, BARRIER
+	db 1, LIGHT_SCREEN
 	db 0
 
 PidgeottoTradebackMoves:
-	
+	db 1, TACKLE
 	db 0
 
 PidgeotTradebackMoves:
-	
+	db 1, TACKLE
 	db 0
 
 StarmieTradebackMoves:
-	
+	db 1, WATERFALL
 	db 0
 
 BulbasaurTradebackMoves:
-	
+	db 1, DEFENSE_CURL
+	db 1, FLASH
+	db 1, HEADBUTT
+	db 1, LIGHT_SCREEN
+	db 1, PETAL_DANCE
+	db 1, RAZOR_WIND
+	db 1, SKULL_BASH
 	db 0
 
 VenusaurTradebackMoves:
-	
+	db 1, DEFENSE_CURL
+	db 1, FLASH
+	db 1, HEADBUTT
+	db 1, LIGHT_SCREEN
+	db 1, PETAL_DANCE
+	db 1, RAZOR_WIND
+	db 1, SKULL_BASH
+	db 1, ROAR
 	db 0
 
 TentacruelTradebackMoves:
-	
+	db 1, AURORA_BEAM
+	db 1, HAZE
+	db 1, CONFUSE_RAY
 	db 0
 
 GyopinTradebackMoves:
-	
+	db 1, HAZE
+	db 1, HYDRO_PUMP
+	db 1, PSYBEAM
+	db 1, SWORDS_DANCE
 	db 0
 
 GoldeenTradebackMoves:
-	
+	db 1, HAZE
+	db 1, HYDRO_PUMP
+	db 1, PSYBEAM
+	db 1, SWORDS_DANCE
 	db 0
 
 SeakingTradebackMoves:
-	
+	db 1, HAZE
+	db 1, HYDRO_PUMP
+	db 1, PSYBEAM
+	db 1, SWORDS_DANCE
 	db 0
 
 KotoraTradebackMoves:
@@ -921,51 +1473,113 @@ GorotoraTradebackMoves:
 	db 0
 
 PuchikoonTradebackMoves:
-	
+	db 1, TACKLE
+	db 1, HEADBUTT
+	db 1, FLAMETHROWER
+	db 1, DOUBLE_KICK
+	db 1, HYPNOSIS
+	db 1, QUICK_ATTACK
+	db 1, THRASH
+	db 1, LOW_KICK
 	db 0
 
 PonytaTradebackMoves:
-	
+	db 1, TACKLE
+	db 1, HEADBUTT
+	db 1, FLAMETHROWER
+	db 1, DOUBLE_KICK
+	db 1, HYPNOSIS
+	db 1, QUICK_ATTACK
+	db 1, THRASH
+	db 1, LOW_KICK
 	db 0
 
 RapidashTradebackMoves:
-	
+	db 1, TACKLE
+	db 1, HEADBUTT
+	db 1, FLAMETHROWER
+	db 1, DOUBLE_KICK
+	db 1, HYPNOSIS
+	db 1, QUICK_ATTACK
+	db 1, THRASH
+	db 1, LOW_KICK
+	db 1, FURY_ATTACK
 	db 0
 
 RattataTradebackMoves:
-	
+	db 1, DEFENSE_CURL
+	db 1, HEADBUTT
+	db 1, BITE
+	db 1, COUNTER
+	db 1, FURY_SWIPES
+	db 1, SCREECH
 	db 0
 
 RaticateTradebackMoves:
-	
+	db 1, DEFENSE_CURL
+	db 1, HEADBUTT
+	db 1, BITE
+	db 1, COUNTER
+	db 1, FURY_SWIPES
+	db 1, SCREECH
+	db 1, ROAR
+	db 1, CUT
+	db 1, STRENGTH
 	db 0
 
 NidorinoTradebackMoves:
-	
+	db 1, DEFENSE_CURL
+	db 1, HEADBUTT
+	db 1, AMNESIA
+	db 1, CONFUSION
+	db 1, COUNTER
+	db 1, DISABLE
+	db 1, SUPERSONIC
+	db 1, LOVELY_KISS
+	db 1, STRENGTH
 	db 0
 
 NidorinaTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, FOCUS_ENERGY
+	db 1, COUNTER
+	db 1, DISABLE
+	db 1, SUPERSONIC
+	db 1, LOVELY_KISS
+	db 1, STRENGTH
 	db 0
 
 GeodudeTradebackMoves:
-	
+	db 1, FIRE_PUNCH
+	db 1, HEADBUTT
+	db 1, FLAMETHROWER
 	db 0
 
 PorygonTradebackMoves:
-	
+	db 1, DREAM_EATER
+	db 1, BARRIER
 	db 0
 
 AerodactylTradebackMoves:
-	
+	db 1, EARTHQUAKE
+	db 1, ROAR
+	db 1, HEADBUTT
+	db 1, FLAMETHROWER
+	db 1, ROCK_THROW
 	db 0
 
 BlastykeTradebackMoves:
-	
+	db 1, DEFENSE_CURL
+	db 1, ICE_PUNCH
+	db 1, HEADBUTT
+	db 1, WATERFALL
+	db 1, CONFUSION
+	db 1, HAZE
+	db 1, MIST
 	db 0
 
 MagnemiteTradebackMoves:
-	
+	db 1, AGILITY
 	db 0
 
 SkimperTradebackMoves:
@@ -973,31 +1587,74 @@ SkimperTradebackMoves:
 	db 0
 
 GorochuTradebackMoves:
-	
+	db 1, DEFENSE_CURL
+	db 1, HEADBUTT
+	db 1, THUNDERPUNCH
+	db 1, STRENGTH
+	db 1, DIZZY_PUNCH
+	db 1, DOUBLESLAP
+	db 1, PETAL_DANCE
+	db 1, SING
 	db 0
 
 CharmanderTradebackMoves:
-	
+	db 1, SMOKESCREEN
+	db 1, DEFENSE_CURL
+	db 1, FIRE_PUNCH
+	db 1, HEADBUTT
+	db 1, BITE
+	db 1, ROCK_SLIDE
 	db 0
 
 SquirtleTradebackMoves:
-	
+	db 1, DEFENSE_CURL
+	db 1, ICE_PUNCH
+	db 1, HEADBUTT
+	db 1, WATERFALL
+	db 1, CONFUSION
+	db 1, HAZE
+	db 1, MIST
 	db 0
 
 CharmeleonTradebackMoves:
-	
+	db 1, SMOKESCREEN
+	db 1, DEFENSE_CURL
+	db 1, FIRE_PUNCH
+	db 1, HEADBUTT
+	db 1, BITE
+	db 1, ROCK_SLIDE
 	db 0
 
 WartortleTradebackMoves:
-	
+	db 1, DEFENSE_CURL
+	db 1, ICE_PUNCH
+	db 1, HEADBUTT
+	db 1, WATERFALL
+	db 1, CONFUSION
+	db 1, HAZE
+	db 1, MIST
 	db 0
 
 CharizardTradebackMoves:
-	
+	db 1, SMOKESCREEN
+	db 1, DEFENSE_CURL
+	db 1, FIRE_PUNCH
+	db 1, HEADBUTT
+	db 1, BITE
+	db 1, ROCK_SLIDE
+	db 1, ROAR
+	db 1, WING_ATTACK
 	db 0
 
 TotartleTradebackMoves:
-	
+	db 1, DEFENSE_CURL
+	db 1, ICE_PUNCH
+	db 1, HEADBUTT
+	db 1, WATERFALL
+	db 1, CONFUSION
+	db 1, HAZE
+	db 1, MIST
+	db 1, ROAR
 	db 0
 	
 ArticunoGTradebackMoves:
@@ -1013,95 +1670,150 @@ MoltresGTradebackMoves:
 	db 0
 
 OddishTradebackMoves:
-	
+	db 1, FLASH
+	db 1, RAZOR_LEAF
+	db 1, LEECH_SEED
 	db 0
 
 GloomTradebackMoves:
-	
+	db 1, FLASH
+	db 1, RAZOR_LEAF
+	db 1, LEECH_SEED
 	db 0
 
 VileplumeTradebackMoves:
-	
+	db 1, FLASH
+	db 1, RAZOR_LEAF
+	db 1, LEECH_SEED
 	db 0
 
 BellsproutTradebackMoves:
-	
+	db 1, FLASH
+	db 1, LOVELY_KISS
+	db 1, LEECH_LIFE
 	db 0
 
 WeepinbellTradebackMoves:
-	
+	db 1, FLASH
+	db 1, LOVELY_KISS
+	db 1, LEECH_LIFE
 	db 0
 
 VictreebelTradebackMoves:
-	
+	db 1, FLASH
+	db 1, LOVELY_KISS
+	db 1, LEECH_LIFE
 	db 0
 
 MonjaTradebackMoves:
-	
-	db 0
-
-PudiTradebackMoves:
-	
+	db 1, FLASH
+	db 1, HEADBUTT
+	db 1, AMNESIA
+	db 1, CONFUSION
+	db 1, REFLECT
 	db 0
 
 ScizorTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, COUNTER
+	db 1, LIGHT_SCREEN
+	db 1, RAZOR_WIND
+	db 1, SONICBOOM
 	db 0
 
 RhyperiorTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, ROAR
+	db 1, THUNDERPUNCH
+	db 1, FIRE_PUNCH
+	db 1, FLAMETHROWER
+	db 1, THRASH
 	db 0
 
 EspeonTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, GROWTH
+	db 1, ROAR
 	db 0
 	
 UmbreonTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, GROWTH
+	db 1, ROAR
 	db 0
 	
 LeafeonTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, GROWTH
+	db 1, ROAR
 	db 0
 	
 GlaceonTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, GROWTH
+	db 1, ROAR
 	db 0
 	
 SylveonTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, GROWTH
+	db 1, ROAR
 	db 0
 
 LickilickyTradebackMoves:
-	
+	db 1, LICK
+	db 1, DREAM_EATER
+	db 1, HEADBUTT
+	db 1, FIRE_PUNCH
+	db 1, ICE_PUNCH
+	db 1, THUNDERPUNCH
+	db 1, FLAMETHROWER
+	db 1, DOUBLESLAP
 	db 0
 
 TangrowthTradebackMoves:
-	
+	db 1, FLASH
+	db 1, HEADBUTT
+	db 1, AMNESIA
+	db 1, CONFUSION
+	db 1, REFLECT
 	db 0
 
 KleavorTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, COUNTER
+	db 1, LIGHT_SCREEN
+	db 1, RAZOR_WIND
+	db 1, SONICBOOM
 	db 0
 
 TsubomittoTradebackMoves:
-	
+	db 1, FLASH
+	db 1, LEECH_LIFE
 	db 0
 
 SteelixTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, ROAR
+	db 1, SHARPEN
 	db 0
 
 BlisseyTradebackMoves:
-	
+	db 1, DREAM_EATER
+	db 1, HEADBUTT
+	db 1, FLAMETHROWER
 	db 0
 
 HitmontopTradebackMoves:
-	
+	db 1, TACKLE
+	db 1, HEADBUTT
+	db 1, DIZZY_PUNCH
+	db 1, HI_JUMP_KICK
 	db 0
 
 CrobatTradebackMoves:
-	
+	db 1, GUST
+	db 1, QUICK_ATTACK
 	db 0
 
 AnimonTradebackMoves:
@@ -1109,35 +1821,69 @@ AnimonTradebackMoves:
 	db 0
 	
 BellossomTradebackMoves:
-	
+	db 1, FLASH
+	db 1, RAZOR_LEAF
+	db 1, LEECH_SEED
 	db 0
 	
 Porygon2TradebackMoves:
-	
+	db 1, DREAM_EATER
+	db 1, BARRIER
 	db 0
 	
 KingdraTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, WATERFALL
+	db 1, AURORA_BEAM
+	db 1, DISABLE
+	db 1, DRAGON_RAGE
+	db 1, SPLASH
+	db 1, HAZE
 	db 0
 	
 PolitoedTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, DEFENSE_CURL
+	db 1, WATERFALL
+	db 1, HAZE
+	db 1, MIST
+	db 1, SPLASH
+	db 1, GROWTH
+	db 1, LOVELY_KISS
+	db 1, ICE_PUNCH
 	db 0
 
 SlowkingTradebackMoves:
-	
+	db 1, TACKLE
+	db 1, DREAM_EATER
+	db 1, FLAMETHROWER
+	db 1, STOMP
+	db 1, ICE_PUNCH
 	db 0
 
 ElectivireTradebackMoves:
-	
+	db 1, FIRE_PUNCH
+	db 1, ICE_PUNCH
+	db 1, HEADBUTT
+	db 1, DIZZY_PUNCH
+	db 1, BARRIER
+	db 1, KARATE_CHOP
+	db 1, MEDITATE
+	db 1, ROLLING_KICK
 	db 0
 	
 MagmortarTradebackMoves:
-	
+	db 1, THUNDERPUNCH
+	db 1, HEADBUTT
+	db 1, DIZZY_PUNCH
+	db 1, BARRIER
+	db 1, KARATE_CHOP
+	db 1, SCREECH
 	db 0
 	
 TaabanTradebackMoves:
-	
+	db 1, BARRIER
+	db 1, SCREECH
 	db 0
 	
 KokanaTradebackMoves:
@@ -1152,24 +1898,23 @@ CarapthorTradebackMoves:
 	
 	db 0
 	
-HinaazuTradebackMoves:
-	
-	db 0
-
-BetobebiiTradebackMoves:
-	
-	db 0
-	
 MagnezoneTradebackMoves:
-	
+	db 1, AGILITY
+	db 1, TRI_ATTACK
 	db 0
 
 PorygonZTradebackMoves:
-	
+	db 1, DREAM_EATER
+	db 1, BARRIER
 	db 0
 
 AnnihilapeTradebackMoves:
-	
+	db 1, HEADBUTT
+	db 1, DEFENSE_CURL
+	db 1, THUNDERPUNCH
+	db 1, FIRE_PUNCH
+	db 1, ICE_PUNCH
+	db 1, MEDITATE
 	db 0
 
 ScreamTailTradebackMoves:
@@ -1229,7 +1974,14 @@ RaticateATradebackMoves:
 	db 0
 	
 RaichuATradebackMoves:
-	
+	db 1, DEFENSE_CURL
+	db 1, HEADBUTT
+	db 1, THUNDERPUNCH
+	db 1, STRENGTH
+	db 1, DIZZY_PUNCH
+	db 1, DOUBLESLAP
+	db 1, PETAL_DANCE
+	db 1, SING
 	db 0
 	
 SandslashATradebackMoves:
@@ -1269,15 +2021,27 @@ MukATradebackMoves:
 	db 0
 
 ExeggutorATradebackMoves:
-	
+	db 1, DREAM_EATER
+	db 1, FLASH
+	db 1, HEADBUTT
+	db 1, CONFUSION
 	db 0
 
 MarowakATradebackMoves:
-	
+	db 1, FIRE_PUNCH
+	db 1, THUNDERPUNCH
+	db 1, FLAMETHROWER
+	db 1, SWORDS_DANCE
+	db 1, SCREECH
+	db 1, ROCK_SLIDE
+	db 1, FURY_ATTACK
 	db 0
 	
 WeezingGTradebackMoves:
-	
+	db 1, POISON_GAS
+	db 1, PSYBEAM
+	db 1, PSYWAVE
+	db 1, SCREECH
 	db 0
 
 TaurosPTradebackMoves:
