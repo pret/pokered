@@ -187,11 +187,13 @@ INCLUDE "data/moves/moves.asm"
 INCLUDE "data/pokemon/base_stats.asm"
 INCLUDE "data/pokemon/cries.asm"
 INCLUDE "engine/battle/unused_stats_functions.asm"
-INCLUDE "engine/pokemon/evos_moves.asm"
 INCLUDE "engine/battle/move_effects/heal.asm"
 INCLUDE "engine/battle/move_effects/transform.asm"
 INCLUDE "engine/battle/move_effects/reflect_light_screen.asm"
 
+SECTION "Evos and Moves", ROMX
+
+INCLUDE "engine/pokemon/evos_moves.asm"
 
 SECTION "Battle Core", ROMX
 

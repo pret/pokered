@@ -650,7 +650,7 @@ PsyduckTradebackMoves:
 	db 1, HYPNOSIS
 	db 1, LIGHT_SCREEN
 	db 1, PSYBEAM
-	db 1, PSYCHIC
+	db 1, PSYCHIC_M
 	db 1, PETAL_DANCE
 	db 1, TRI_ATTACK
 	db 0
@@ -1218,7 +1218,7 @@ WeirduckTradebackMoves:
 	db 1, HYPNOSIS
 	db 1, LIGHT_SCREEN
 	db 1, PSYBEAM
-	db 1, PSYCHIC
+	db 1, PSYCHIC_M
 	db 1, PETAL_DANCE
 	db 1, TRI_ATTACK
 	db 0
@@ -1232,7 +1232,7 @@ GolduckTradebackMoves:
 	db 1, HYPNOSIS
 	db 1, LIGHT_SCREEN
 	db 1, PSYBEAM
-	db 1, PSYCHIC
+	db 1, PSYCHIC_M
 	db 1, PETAL_DANCE
 	db 1, TRI_ATTACK
 	db 0
