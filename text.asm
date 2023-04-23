@@ -283,6 +283,7 @@ SECTION "Text 12", ROMX
 INCLUDE "text/CitrineRocketHouse.asm"
 INCLUDE "text/CitrineTradebackHouse.asm"
 INCLUDE "text/tradeback_move_tutor.asm"
+INCLUDE "text/BrunswickTrail.asm"
 
 SECTION "Pokédex Text", ROMX
 
