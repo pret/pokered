@@ -10,7 +10,7 @@
 	INCBIN "gfx/pokemon/front/cactus.pic", 0, 1 ; sprite dimensions
 	dw CactusPicFront, CactusPicBack
 
-	db TACKLE, SAND_ATTACK, NO_MOVE, NO_MOVE ; level 1 learnset
+	db BARRAGE, SAND_ATTACK, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
