@@ -719,7 +719,8 @@
 	const EVENT_BEAT_SILPH_CO_11F_TRAINER_1
 	const EVENT_BEAT_OMEGA ; must be here
 	const EVENT_SILPH_CO_11_UNLOCKED_DOOR
-	const_skip 4
+	const_skip 2
+	const EVENT_BEAT_CHIEF
 	const EVENT_GOT_MASTER_BALL
 	const_skip
 	const EVENT_BEAT_SILPH_CO_GIOVANNI

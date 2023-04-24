@@ -284,6 +284,7 @@ INCLUDE "text/CitrineRocketHouse.asm"
 INCLUDE "text/CitrineTradebackHouse.asm"
 INCLUDE "text/tradeback_move_tutor.asm"
 INCLUDE "text/BrunswickTrail.asm"
+INCLUDE "text/SilphGauntlet7F.asm"
 
 SECTION "Pokédex Text", ROMX
 

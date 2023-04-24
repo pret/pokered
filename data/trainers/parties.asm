@@ -489,7 +489,7 @@ BirdKeeperData:
 
 ChiefData:
 ; New - this will be used in the Silph Gauntlet
-	db $FF, 73, MAGNEZONE, 72, LAPRAS, 73, SCIZOR, 73, EXEGGUTOR, 75, PORYGON2, 77, OMEGA, 0
+	db $FF, 73, MAGNEZONE, 72, LAPRAS, 73, SCIZOR, 73, PORYGON2, 75, PORYGONZ, 77, OMEGA, 0
 
 ScientistData:
 ; Unused - this will be used in the Silph Gauntlet
