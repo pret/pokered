@@ -47,14 +47,16 @@ _ChiefAfterBattleText::
 	cont "down GIOVANNI has"
 	cont "to be stronger"
 	cont "than me. There is"
-	cont "no product of mine"
-	cont "can trounce you."
+	cont "no product I have"
+	cont "that can trounce"
+	cont "you."
 
-	para "I wanted to make the"
-	line "ultimate BALL for a"
-	cont "perfect POKèMON."
+	para "I wanted to make"
+	line "an ultimate BALL"
+	cont "for a perfect"
+	cont "#MON."
 	
-	para "Something we could"
+	para "Something we can"
 	line "mass produce."
 	
 	para "Perhaps it wasn't"
@@ -63,7 +65,46 @@ _ChiefAfterBattleText::
 	para "Go."
 	
 	para "Otherwise..."
-	line "MEWTWO's hatred will"
-	cont "crush this world."
+	line "MEWTWO's hatred"
+	cont "will crush this"
+	cont "world."
 	
+	done
+
+_CandyJarPreReceiveText::
+	text "I want you to"
+	line "have this."
+	
+	done
+
+_ReceivedCandyJarText::
+	text "<PLAYER> received"
+	line "@"
+	text_ram wStringBuffer
+	text "!@"
+	text_end
+
+_CandyJarExplanationText::
+	text "When researching"
+	line "MEW, GIOVANNI"
+	cont "discovered one"
+	cont "more mythical"
+	cont "#MON."
+	
+	para "Its name is"
+	line "MELTAN. It loves"
+	cont "a certain kind"
+	cont "of CANDY."
+	
+	para "Give it this"
+	line "JAR. It will"
+	cont "become extremely"
+	cont "powerful."
+	done
+
+_CandyJarNoRoomText::
+	text "Ah, your BAG"
+	line "is full. I'll"
+	cont "hold onto this"
+	cont "for you, then."
 	done

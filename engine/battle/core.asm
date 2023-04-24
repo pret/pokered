@@ -6965,7 +6965,7 @@ _LoadTrainerPic:
 	and a
 	jr nz, .useRed
 	ld a, [wTrainerClass]
-	cp YUJIROU ; first trainer class in "Pics 10" - Rangi's code to load more trainer pics
+	cp LANCE ; first trainer class in "Pics 10" - Rangi's code to load more trainer pics
 	ld a, Bank("Pics 10")
 	jr nc, .loadSprite
 	ld a, Bank("Pics 6")

@@ -30,6 +30,8 @@ PlayBattleMusic::
 	jr z, .finalBattle 
 	cp OPP_PROF_OAK ; may as well, right?
 	jr z, .finalBattle 
+	cp OPP_CHIEF
+	jr z, .finalBattle 
 	jr nz, .normalTrainerBattle
 	ld a, MUSIC_FINAL_BATTLE
 	jr .playSong
