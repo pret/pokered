@@ -1318,11 +1318,12 @@ CitrineCity_Blocks: INCBIN "maps/CitrineCity.blk"
 INCLUDE "data/maps/headers/CelesteHill.asm"
 INCLUDE "scripts/CelesteHill.asm"
 INCLUDE "data/maps/objects/CelesteHill.asm"
+CelesteHill_Blocks: INCBIN "maps/CelesteHill.blk"
+
 INCLUDE "data/maps/headers/BrunswickTrail.asm"
 INCLUDE "scripts/BrunswickTrail.asm"
 INCLUDE "data/maps/objects/BrunswickTrail.asm"
-BrunswickTrail_Blocks:
-CelesteHill_Blocks: INCBIN "maps/CelesteHill.blk"
+BrunswickTrail_Blocks: INCBIN "maps/BrunswickTrail.blk"
 
 INCLUDE "data/maps/headers/CitrineRocketHouse.asm"
 INCLUDE "scripts/CitrineRocketHouse.asm"
