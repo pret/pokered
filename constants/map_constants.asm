@@ -193,7 +193,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const CINNABAR_LAB_FOSSIL_ROOM,       4,  4 ; $AB
 	map_const CINNABAR_POKECENTER,            7,  4 ; $AC
 	map_const CINNABAR_MART,                  4,  4 ; $AD
-	map_const BRUNSWICK_TRAIL,           	 31, 14 ; $AE	- was unused Cinnabar Mart copy
+	map_const BRUNSWICK_TRAIL,           	 32, 14 ; $AE	- was unused Cinnabar Mart copy
 	map_const INDIGO_PLATEAU_LOBBY,           8,  6 ; $AF
 	map_const COPYCATS_HOUSE_1F,              4,  4 ; $B0
 	map_const COPYCATS_HOUSE_2F,              4,  4 ; $B1
