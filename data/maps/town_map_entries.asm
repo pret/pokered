@@ -98,6 +98,7 @@ InternalMapEntries:
 	internal_map FUCHSIA_GOOD_ROD_HOUSE,         8, 13, FuchsiaCityName
 	internal_map POKEMON_MANSION_1F,             2, 15, PokemonMansionName
 	internal_map CINNABAR_MART,           	     2, 15, CinnabarIslandName
+	internal_map BRUNSWICK_TRAIL,           	 7, 10, BrunswickTrailName
 	internal_map INDIGO_PLATEAU_LOBBY,           0,  2, IndigoPlateauName
 	internal_map MR_PSYCHICS_HOUSE,             10,  5, SaffronCityName
 	internal_map ROUTE_15_GATE_2F,               9, 13, Route15Name

@@ -2,7 +2,6 @@ Route1_Object:
 	db $b ; border block
 
 	def_warp_events
-	warp_event 5, 3, CELESTE_HILL, 1
 
 	def_bg_events
 	bg_event  9, 27, 3 ; Route1Text3

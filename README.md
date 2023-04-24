@@ -56,8 +56,8 @@ New areas
 	- Contains a house with a Move Tutor that can teach Tradeback moves without the need for GSC!
 	- Contains a Team Rocket house where they will sell you TMs and Evolution Items. Jessie and James are there too!
 	- Will contain a Battle Tower with infinite, randomised trainer parties!
-	- Crimson Cave, located in Citrine City, houses several strong trainers and Pokémon.
-	- Chartreuse Trail, south of Citrine City, is a route that leads to Celeste Hill.
+	- Garnet Cavern, located in Citrine City, houses several strong trainers and Pokémon.
+	- Brunswick Trail, south of Citrine City, is a route that leads to Celeste Hill.
 	- Celeste Hill activates an event where the Galarian Legendary Birds can be fought.
 - Underwater Tunnel connects Route 25 and Route 10.
 - Cinnabar Volcano is a new area that houses Moltres, allowing it to be obtained before Victory Road.

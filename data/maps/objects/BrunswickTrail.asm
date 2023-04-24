@@ -1,8 +1,8 @@
 BrunswickTrail_Object:
-	db $0 ; border block
+	db $43 ; border block
 
 	def_warp_events
-	warp_event 24,  7, 0, REDS_HOUSE_2F
+	warp_event 24, 11, CELESTE_HILL, 1
 
 	def_bg_events
 
