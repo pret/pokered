@@ -40,9 +40,9 @@ Type Matchups for Steel and Dark for reference:
 
 New Items:
 ====
-- The Sun, Ice, Poison and Heart Stones have been added.
+- The Ice, Poison and Heart Stones have been added.
 - Additional evolution items include the Protector, Black Augurite, Up-Grade, Dubious Disc, Metal Coat and Candy Jar.
-- The Old Sea Chart has been added, allowing access to Faraway Island and Mew.
+- The Old Sea Map has been added, allowing access to Faraway Island and Mew.
 - The Citrine Pass has been added, allowing access to a new post-game area based on the unused "C" map.
 - The Wing Fossil is a new item that allows Aerodactyl to be revived, as the Old Amber was instead used for Decilla.
 
@@ -68,13 +68,12 @@ New areas
 
 Improved areas
 ====
-- Most barriers to travel across the region have been removed, allowing for almost fully open world gameplay. To encourage this, Gym Leaders now have level scaling, giving more consistent challenge across the game. 
+- Some barriers to travel across the region have been removed (for example, Pewter City can be left without defeating Brock) allowing for more open world gameplay.
+	- To encourage this, Gym Leaders now have level scaling, giving more consistent challenge across the game. 
 - Cinnabar Lab's Trade Room now features the Trader, who will evolve trade-evolving Pokemon for you!
 - Rock Tunnel has a more workable map, now being easier to go through and having new areas to explore. Includes a way to get renewable fossils, items, and other interesting bits and pieces. Overall, it makes Flash much more rewarding to bring, showing you where the items and content are instead of being an inconvenience. 
 - Diglett's Cave has a more detailed map with Onix, Wiglett, and Wugtrio also appearing!
 - Route 25 has been given a facelift, adding Bill's Lighthouse!
-- The Route 5-6 underground path contains a shortcut to Celadon City. 
-	- This allows you to skip Route 9 and Rock Tunnel, making them optional areas and opening up central Kanto.
 - Cinnabar Island is a lot bigger, and has a new location added to it. The mansion seems different too...
 - Pokemon Tower was shortened, being less intensive and adding room for more maps.
 - Silph Co's pathing was completely overhauled to make navigating it less tedious.
@@ -84,7 +83,7 @@ Improved areas
 
 QoL Enhancements
 ====
-- All 251 (current) Pokemon can be obtained without the use of trading or glitches, including Mew!
+- All 151 original Pokemon, plus an additional 100, can be obtained without the use of trading or glitches, including Mew!
 - New Pokedex entries for most Pokemon are available, sourced from the original 1996 Pokedex book by Creatures Inc., restoring a ton of old Kanto lore. Thanks to [Dr. Lava and Nob Ogasawara](http://lavacutcontent.com/1996-creatures-pokedex-translation-1/) for their incredible work translating and writing about it!
 - Pikachu and Eevee are now starters, featuring fully functional Rival lineups. If you pick Pikachu, he picks Eevee, and if you pick Eevee, he picks Pikachu!
 - Item Descriptions are available!
@@ -96,6 +95,7 @@ QoL Enhancements
 - Lorelei, Bruno, and Agatha now play the Gym Leader Battle theme.
 - HP bar has been doubled in speed, having a 1 frame delay per pixel rather than 2.
 - Trainer DVs are perfect-15s.
+- The Old and Good Rods have been removed, and the Super Rod, now called the Fishing Rod, is obtained in Pewter City. All fishing encounter tables have been altered to roughly match the levels of the surrounding routes. 
 - The protagonist is referred to in a gender neutral manner.
 - PC added to Celadon Hotel where the invisible event usually is. Why not?
 - Artificial Save Delay has been removed.
@@ -109,11 +109,11 @@ QoL Enhancements
 - Yellow learnset changes are imported; eg. Flash Venonat, with tweaks made to ensure nothing is lost from RB either.
 - The Game Corner in general is massively buffed, making everything far more worth going for;
 	- 3x Cherry now gives 100 coins (used to be 8)
-	- 3x Magikarp/Poliwag/Bird/Diglett/Rattata/Jigglypuff now gives 200 coins (used to be 15)
+	- 3x Poliwag/Diglett/Jigglypuff now gives 200 coins (used to be 15)
 	- 3x BAR now gives 500 coins (used to be 100)
 	- 3x 7s now gives 999 coins (used to be 300)
 - Game Corner prizes have been altered;
-	- Version parity is done across prizes, using Blue's superior prices.
+	- Blue's superior prices are used, so Porygon only costs 6500 coins.
 	- New prizes include: Cubone, Blastyke, and Cactus.
 	- The Moon Stone is available over TM23 (Dragon Rage). Dragon Rage is accessible in Celadon University!
 - Bag capacity increased from 20 to 30 items.
@@ -162,9 +162,10 @@ Known Bugs
 - Only portions of spinner tiles animate.
 - Occasionally, menu text sets itself to scroll.
 - The lone Rocket in Viridian Gym's basement needs to be directly spoken to to be battled
-- Should be able to fly from Faraway and Citrine (issue with tilesets)
+- Should be able to fly from Citrine and Brunswick (issue with tilesets)
 - Strength boulders don't fall down holes
 - Pokedex is very laggy
+- Occasionally, newly added static Pokemon remain on the map even after the battle
 - When fighting Omega in Silph Co., the Rocket you fight beforehand will disappear.
 
 Evolution Methods for new Pokemon
@@ -277,7 +278,7 @@ Credits
 * ausma - Showdown Mod assistance
 * Paulluxx - Showdown Mod assistance
 * DuoM2 - Showdown Mod assistance 
-* Albatross - Much of the new sprites used in the hack (Electivire, Magmortar, Rhyperior, Tangrowth, Glaceon, Sylveon...)
+* Albatross - Many of the new sprites used in the hack (A significant number of post-Gen 1 evolutions, all regional variants, Meltan and Carapthor lines, etc.)
 * Frrf - Assisting with the development of the Pikachu / Eevee Mode, debugging
 * dannye33 - Assisting with crysaudio implementation
 * erosunica - Assistance with developing Celadon University & Citrine City, plus sources for various subjects.

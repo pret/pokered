@@ -251,4 +251,15 @@ DEF SHOW EQU $15
 	const HS_YUJIROU					; EF
 	const HS_YUJIROU_REMATCH			; uhhh F0?
 	const HS_DRAGONITE					; F1
+	const HS_MT_MOON_CRATER_ITEM_1         ; F2
+	const HS_MT_MOON_CRATER_ITEM_2         ; F3
+	const HS_MT_MOON_CRATER_ITEM_3         ; F4
+	const HS_MT_MOON_CRATER_ITEM_4         ; F5
+	const HS_MT_MOON_CRATER_ITEM_5         ; F6
+	const HS_MT_MOON_CRATER_ITEM_6         ; F7
+	const HS_MT_MOON_CRATER_ITEM_7         ; F8
+	const HS_MT_MOON_CRATER_ITEM_8         ; F9
+	const HS_MT_MOON_CRATER_ITEM_9         ; FA
+	const HS_MT_MOON_CRATER_ITEM_10        ; FB
+	const HS_MT_MOON_CRATER_ITEM_11        ; FC		getting dangerously close to filling this...
 DEF NUM_HS_OBJECTS EQU const_value

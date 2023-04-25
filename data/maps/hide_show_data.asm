@@ -415,6 +415,7 @@ MtMoonB2FHS:
 	db MT_MOON_B2F, $07, SHOW
 	db MT_MOON_B2F, $08, SHOW
 	db MT_MOON_B2F, $09, SHOW
+	db MT_MOON_B2F, $0A, HIDE	; Crater Guard, currently hidden for testing purposes
 SSAnne2FHS:
 	db SS_ANNE_2F, $02, HIDE
 SSAnne1FRoomsHS:
@@ -582,7 +583,17 @@ PokemonMansionB2FHS:
 Route1HS:
 	db ROUTE_1, $03, HIDE ; PROF OAK fight. To test, change to SHOW. - PvK
 MtMoonCraterHS:
-	db MT_MOON_CRATER, $10, SHOW ; Crater Guard
+	db MT_MOON_CRATER, $01, SHOW
+	db MT_MOON_CRATER, $02, SHOW
+	db MT_MOON_CRATER, $03, SHOW
+	db MT_MOON_CRATER, $04, SHOW
+	db MT_MOON_CRATER, $05, SHOW
+	db MT_MOON_CRATER, $06, SHOW
+	db MT_MOON_CRATER, $07, SHOW
+	db MT_MOON_CRATER, $08, SHOW
+	db MT_MOON_CRATER, $09, SHOW
+	db MT_MOON_CRATER, $0A, SHOW
+	db MT_MOON_CRATER, $0B, SHOW
 ViridianPreGymHS:
 	db VIRIDIAN_PRE_GYM, $01, SHOW ; Initial Yujirou
 	db VIRIDIAN_PRE_GYM, $02, HIDE ; Yujirou Rematch

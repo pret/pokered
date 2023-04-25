@@ -115,10 +115,10 @@ WildDataPointers:
 	dw Gauntlet6FWildMons
 	dw NothingWildMons
 	dw NothingWildMons
+	dw NothingWildMons
 	dw FarawayIslandInsideMons ; I think this is right??
 	dw NothingWildMons
 	dw MtMoonCraterMons
-	dw NothingWildMons
 	dw NothingWildMons
 	dw NothingWildMons
 	dw NothingWildMons

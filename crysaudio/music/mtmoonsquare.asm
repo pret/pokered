@@ -7,7 +7,7 @@ Music_MtMoonSquare_Ch1:
 	tempo 112
 	volume 7, 7
 	duty_cycle 2
-	pitch_offset 1
+	toggle_perfect_pitch
 	rest 1
 .mainloop:
 	note_type 12, 4, 4
