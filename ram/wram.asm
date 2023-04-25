@@ -2071,7 +2071,7 @@ wFarawayIslandInsideCurScript:: db
 wLancesRoomCurScript:: db
 wPokemonMansionB2FCurScript:: db
 wMtMoonCraterCurScript:: db
-	ds 2
+wSilphGauntlet1FCurScript:: db
 wSilphCo10FCurScript:: db
 wSilphCo11FCurScript:: db
 	ds 1

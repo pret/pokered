@@ -165,7 +165,7 @@ JrTrainerMData:
 	db 20, SQUIRTLE, 0
 	db 16, SPEAROW, RATICATE, 0
 ; Unused - this will be used in the Silph Gauntlet
-	db 63, DUGTRIO, PRIMEAPE, SANDSLASH, BLASTOISE, NIDOKING, ARCANINE, 0
+	db 62, DUGTRIO, PRIMEAPE, SANDSLASH, BLASTOISE, NIDOKING, ARCANINE, 0
 ; Route 9
 	db 21, GROWLITHE, CHARMANDER, 0
 	db 19, RATTATA, DIGLETT, EKANS, SANDSHREW, 0
@@ -210,7 +210,7 @@ JrTrainerFData:
 ; Route 20
 	db 30, TENTACOOL, HORSEA, SEEL, 0
 ; New - this will be used in the Silph Gauntlet
-	; db 63, TSUBOMITTO, SEAKING, MADAAMU, BELLOSSOM, GOROCHU, VENUSAUR, 0
+	db 62, TSUBOMITTO, SEAKING, MADAAMU, BELLOSSOM, GOROCHU, VENUSAUR, 0
 
 PokemaniacData:
 ; Route 10
@@ -480,7 +480,8 @@ BirdKeeperData:
 	db 30, FEAROW, FEAROW, PIDGEOTTO, 0
 ; Unused
 	db 39, PIDGEOTTO, PIDGEOTTO, PIDGEY, PIDGEOTTO, 0
-	db 42, FARFETCHD, FEAROW, 0
+; Unused - this will be used in the Silph Gauntlet
+	db 62, FEAROW, GOLDUCK, DODRIO, PORYGON2, MADAAMU, AERODACTYL, 0
 ; Route 14
 	db 28, PIDGEY, DODUO, PIDGEOTTO, 0
 	db 26, PIDGEY, SPEAROW, PIDGEY, FEAROW, 0
@@ -666,8 +667,11 @@ ChannelerData:
 	db 33, JYNX, EXEGGCUTE, KADABRA, 0
 
 StudentData:
+; Viridian Pre-Gym
 	db 6, PIDGEY, RATTATA, 0
 	db 6, CLEFAIRY, 0
+; Silph Gauntlet
+	db 62, CLEFABLE, PENDRAKEN, WIGGLYTUFF, BARUNDA, BELLOSSOM, SLOWKING, 0		; may revise
 
 FirefighterData:
 ; For Cerulean Gym
