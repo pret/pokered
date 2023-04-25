@@ -73,5 +73,6 @@ DEF SET_PAL_DEFAULT EQU $ff
 	const PAL_CAVE      ; $25
 	const PAL_GAMEFREAK ; $26
 	const PAL_CELESTE	; $27
-	const PAL_CITRINECAVE ; $28
+	const PAL_GARNET    ; $28
+	const PAL_BRUNSWICK ; $29
 DEF NUM_SGB_PALS EQU const_value

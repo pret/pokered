@@ -155,6 +155,8 @@ SetPal_Overworld:
 	jr z, .Lorelei
 	cp CELESTE_HILL
 	jr z, .celeste
+	cp BRUNSWICK_TRAIL
+	jr z, .brunswick
 	cp BRUNOS_ROOM
 	jr z, .caveOrBruno
 .normalDungeonOrBuilding
@@ -171,6 +173,9 @@ SetPal_Overworld:
 	ld a, SET_PAL_OVERWORLD
 	ld [wDefaultPaletteCommand], a
 	ret
+.brunswick
+	ld a, PAL_BRUNSWICK - 1
+	jr .town
 .PokemonTowerOrAgatha
 	ld a, PAL_GREYMON - 1
 	jr .town

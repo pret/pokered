@@ -3,7 +3,7 @@
 
 
 Music_Field06::
-	channel_count 3
+	channel_count 4
 	channel 1, Music_Field06_Ch1
 	channel 2, Music_Field06_Ch2
 	channel 3, Music_Field06_Ch3
@@ -186,6 +186,7 @@ Music_Field06_Ch3:
 Music_Field06_Ch4:
 ;;----------------------------------------
 
+	toggle_noise 1
 	drum_speed 6
 
 .loop40
@@ -205,45 +206,45 @@ Music_Field06_Ch4:
 
 
 .sub41
-	drum_note 17, 4
-	drum_note 18, 4
-	drum_note 19, 4
-	drum_note 18, 4
-	drum_note 17, 4
-	drum_note 18, 4
-	drum_note 19, 4
-	drum_note 19, 2
-	drum_note 18, 2
+	drum_note 10, 4
+	drum_note 11, 4
+	drum_note 12, 4
+	drum_note 11, 4
+	drum_note 10, 4
+	drum_note 11, 4
+	drum_note 12, 4
+	drum_note 12, 2
+	drum_note 11, 2
 	sound_ret
 
 .sub42
-	drum_note 17, 4
-	drum_note 18, 4
-	drum_note 19, 4
-	drum_note 18, 4
-	drum_note 17, 4
-	drum_note 18, 4
-	drum_note 19, 4
-	drum_note 19, 1
-	drum_note 19, 1
-	drum_note 18, 1
-	drum_note 18, 1
+	drum_note 10, 4
+	drum_note 11, 4
+	drum_note 12, 4
+	drum_note 11, 4
+	drum_note 10, 4
+	drum_note 11, 4
+	drum_note 12, 4
+	drum_note 12, 1
+	drum_note 12, 1
+	drum_note 11, 1
+	drum_note 11, 1
 	sound_ret
 
 .sub43
-	drum_note 17, 4
-	drum_note 18, 4
-	drum_note 17, 4
-	drum_note 18, 4
-	drum_note 17, 4
-	drum_note 17, 4
-	drum_note 19, 1
-	drum_note 19, 1
-	drum_note 19, 1
-	drum_note 19, 1
-	drum_note 18, 1
-	drum_note 18, 1
-	drum_note 18, 1
-	drum_note 18, 1
+	drum_note 10, 4
+	drum_note 11, 4
+	drum_note 10, 4
+	drum_note 11, 4
+	drum_note 10, 4
+	drum_note 10, 4
+	drum_note 12, 1
+	drum_note 12, 1
+	drum_note 12, 1
+	drum_note 12, 1
+	drum_note 11, 1
+	drum_note 11, 1
+	drum_note 11, 1
+	drum_note 11, 1
 	sound_ret
 
