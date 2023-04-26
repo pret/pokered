@@ -1,5 +1,5 @@
 _ChiefMonologue::
-	text "<PLAYER>!"
+	text "CHIEF: <PLAYER>!"
 	line "Congratulations"
 	cont "for making it"
 	cont "this far. I'm" 
@@ -21,11 +21,12 @@ _ChiefMonologue::
 	cont "MEWTWO loose and"
 	cont "GIOVANNI gone,"
 	cont "our company is"
-	cont "going under! Now"
-	cont "there is only one" 
-	cont "way to catch"
+	cont "going under!"
+
+	para "Now there's only"
+	line "one way to catch" 
 	cont "MEWTWO, and it's"
-	cont "in your hand!" 
+	cont "in your hands!" 
 	
 	para "<PLAYER>! Give me"
 	line "that BALL!"
@@ -42,14 +43,14 @@ _ChiefVictoryText::
 	prompt
 
 _ChiefAfterBattleText::
-	text "I suppose the"
-	line "child to bring"
-	cont "down GIOVANNI has"
-	cont "to be stronger"
-	cont "than me. There is"
-	cont "no product I have"
-	cont "that can trounce"
-	cont "you."
+	text "CHIEF: I suppose"
+	line "the child that"
+	cont "brought down"
+	cont "GIOVANNI has to"
+	cont "be stronger than"
+	cont "me. No product"
+	cont "I have can"
+	cont "trounce you."
 
 	para "I wanted to make"
 	line "an ultimate BALL"

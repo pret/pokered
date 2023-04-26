@@ -1,5 +1,5 @@
 _SilphCoPresidentText::
-	text "PRESIDENT: Thank"
+	text "CHIEF: Thank"
 	line "you for saving"
 	cont "SILPH!"
 
@@ -27,7 +27,7 @@ _ReceivedSilphCoMasterBallText::
 	text_end
 
 _SilphCo10Text_6231c::
-	text "PRESIDENT: You"
+	text "CHIEF: You"
 	line "can't buy that"
 	cont "anywhere!"
 
@@ -62,7 +62,7 @@ _SilphCo11Text3::
 	text "Ah <PLAYER>!"
 	line "So we meet again!"
 
-	para "The PRESIDENT and"
+	para "The CHIEF and"
 	line "I are discussing"
 	cont "a vital business"
 	cont "proposition."

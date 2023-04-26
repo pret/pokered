@@ -146,6 +146,8 @@ SetPal_Overworld:
 	jr z, .caveOrBruno
 	cp CELESTE
 	jr z, .celeste
+	cp CITRINE
+	jr z, .citrine
 	ld a, [wCurMap]
 	cp FIRST_INDOOR_MAP
 	jr c, .townOrRoute
@@ -155,8 +157,8 @@ SetPal_Overworld:
 	jr z, .Lorelei
 	cp CELESTE_HILL
 	jr z, .celeste
-	cp BRUNSWICK_TRAIL
-	jr z, .brunswick
+	cp CITRINE_CITY
+	jr z, .citrine
 	cp BRUNOS_ROOM
 	jr z, .caveOrBruno
 .normalDungeonOrBuilding
@@ -173,6 +175,29 @@ SetPal_Overworld:
 	ld a, SET_PAL_OVERWORLD
 	ld [wDefaultPaletteCommand], a
 	ret
+.citrine
+	ld a, [wCurMap]
+	cp BRUNSWICK_TRAIL
+	jr z, .brunswick
+	cp CITRINE_CITY
+	jr c, .citrineDefault
+.citrineDefault
+	ld a, PAL_CITRINE - 1
+	jr .town
+.celeste
+	ld a, [wCurMap]
+	cp FARAWAY_ISLAND_OUTSIDE
+	jr z, .faraway
+	cp FARAWAY_ISLAND_INSIDE
+	jr z, .faraway
+	cp CELESTE_HILL
+	jr c, .celesteDefault
+.celesteDefault
+	ld a, PAL_CELESTE - 1
+	jr .town
+.faraway
+	ld a, PAL_ROUTE - 1
+	jr .town
 .brunswick
 	ld a, PAL_BRUNSWICK - 1
 	jr .town
@@ -191,9 +216,6 @@ SetPal_Overworld:
 	jr c, .seafoam
 .caveDefault
 	ld a, PAL_CAVE - 1
-	jr .town
-.celeste
-	ld a, PAL_CELESTE - 1
 	jr .town
 .Lorelei
 	jr c, .gbcLorelei
