@@ -34,7 +34,7 @@ _FakeTreeAttack::
 	prompt
 
 _GalarianZapdosBattleText::
-	text "Gyaoo!"	; making the cries consistent with the other legendary birds
+	text "Gyaoo!"
 	prompt
 
 ; Martha can do the text for her things...

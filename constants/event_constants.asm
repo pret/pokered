@@ -788,6 +788,7 @@
 	const_next $880
 	const EVENT_GOT_HM03
 	const EVENT_GOT_MELTAN
+	const EVENT_BIRDS_FOUND ; hehe
 
 ; Cerulean Cave events
 	const_next $8C0

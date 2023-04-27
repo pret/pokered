@@ -35,9 +35,9 @@ DEF SHOW EQU $15
 	const HS_SAFFRON_CITY_E                ; 17
 	const HS_SAFFRON_CITY_F                ; 18
 	const HS_SAFFRON_CITY_UP_GRADE         ; 19
-	const HS_ROUTE_9_ITEM                  ; 1C X
+	const HS_CELESTE_ARTICUNO_G            ; 1C was unused HS_ROUTE_9_ITEM
 	const HS_ROUTE_12_SNORLAX              ; 1D
-	const HS_ROUTE_12_ITEM_1               ; 1E X
+	const HS_CELESTE_ZAPDOS_G              ; 1E X was unused HS_ROUTE_12_ITEM_1
 	const HS_ROUTE_12_ITEM_2               ; 1F X
 	const HS_ROUTE_15_ITEM                 ; 20 X
 	const HS_ROUTE_16_SNORLAX              ; 21

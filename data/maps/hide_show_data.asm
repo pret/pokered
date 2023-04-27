@@ -24,7 +24,7 @@ MapHSPointers:
 	dw NoHS
 	dw NoHS
 	dw NoHS
-	dw Route9HS
+	dw NoHS ; Route9HS made unnecessary from replacements
 	dw NoHS
 	dw NoHS
 	dw Route12HS
@@ -80,7 +80,7 @@ MapHSPointers:
 	dw NoHS
 	dw NoHS
 	dw NoHS
-	dw NoHS
+	dw CelesteHillHS
 	dw NoHS
 	dw NoHS
 	dw NoHS
@@ -298,11 +298,9 @@ SaffronCityHS:
 	;db ROUTE_2, $02, SHOW
 ;Route4HS:
 	;db ROUTE_4, $03, SHOW
-Route9HS:
-	db ROUTE_9, $0A, SHOW
 Route12HS:
 	db ROUTE_12, $01, SHOW
-	db ROUTE_12, $09, SHOW
+	;db ROUTE_12, $09, SHOW
 	db ROUTE_12, $0A, SHOW
 Route15HS:
 	db ROUTE_15, $0B, SHOW
@@ -602,6 +600,9 @@ ViridianPreGymHS:
 	db VIRIDIAN_PRE_GYM, $02, HIDE ; Yujirou Rematch
 UnderwaterTunnelHS:
 	db UNDERWATER_TUNNEL, $01, SHOW
+CelesteHillHS:
+	db CELESTE_HILL, $02, SHOW ; Zapdos
+	db CELESTE_HILL, $03, SHOW ; Articuno
 
 	db $FF, $01, SHOW ; end
 

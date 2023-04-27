@@ -412,7 +412,7 @@ wRelearnableMoves::
 ; Try not to use this stack. 
 ; A good amount of space is needed to store data for the move relearner.
 ; If it's like, 2, it'll lag like crazy and show garbage from elsewhere.
-	
+
 wLuckySlotHiddenObjectIndex:: db
 
 NEXTU
@@ -2074,7 +2074,7 @@ wMtMoonCraterCurScript:: db
 wSilphGauntlet1FCurScript:: db
 wSilphCo10FCurScript:: db
 wSilphCo11FCurScript:: db
-	ds 1
+wCelesteHillCurScript:: db
 wFuchsiaGymCurScript:: db
 wSaffronGymCurScript:: db
 wBrunswickTrailCurScript:: db

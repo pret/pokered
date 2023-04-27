@@ -38,8 +38,8 @@ FakeTreePrompt:
 	text_end
 
 ; Ok, so here's how it is.
-; So look, I tried to make the text work more efficiently with FakeTreeEvent. 
-; But one bug literally took me back to the fucking title screen and at that point I gave up and decided to do it this hacky way.
+; I tried to make the text work more efficiently here, but nothing worked.
+; One bug literally took me back to the fucking title screen and at that point I gave up.
 ; I wanted to have some text before the CUT check. It did not work. It was terrifying.
 ; So instead I have two different versions of the same text, despite some being the same.
 ; It is inefficient, but it works. There's a lot to see in this life, and I'm not wasting it in Notepad++.

@@ -283,6 +283,7 @@ SECTION "Text 12", ROMX
 INCLUDE "text/CitrineRocketHouse.asm"
 INCLUDE "text/CitrineTradebackHouse.asm"
 INCLUDE "text/tradeback_move_tutor.asm"
+INCLUDE "text/CelesteHill.asm"
 INCLUDE "text/BrunswickTrail.asm"
 INCLUDE "text/SilphGauntlet1F.asm"
 INCLUDE "text/SilphGauntlet7F.asm"

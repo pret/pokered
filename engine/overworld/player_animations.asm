@@ -252,7 +252,7 @@ DoFlyAnimation:
 	jr nz, DoFlyAnimation
 	ret
 
-LoadBirdSpriteGraphics:
+LoadBirdSpriteGraphics:: ; Made this farcallable for the Galarian Articuno animation.
 	ld de, BirdSprite
 	ld hl, vNPCSprites
 	lb bc, BANK(BirdSprite), 12
