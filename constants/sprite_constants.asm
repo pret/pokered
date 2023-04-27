@@ -83,7 +83,7 @@ DEF FIRST_STILL_SPRITE EQU const_value
 	const SPRITE_POKEDEX                 ; $4b
 	const SPRITE_CLIPBOARD               ; $4c
 	const SPRITE_SNORLAX                 ; $4d
-	const SPRITE_UNUSED_OLD_AMBER        ; $4e
+	const SPRITE_FAKE_TREE        ; $4e was SPRITE_UNUSED_OLD_AMBER
 	const SPRITE_OLD_AMBER               ; $4f
 	const SPRITE_UNUSED_GAMBLER_ASLEEP_1 ; $50
 	const SPRITE_UNUSED_GAMBLER_ASLEEP_2 ; $51

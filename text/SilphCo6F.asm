@@ -73,11 +73,11 @@ _SilphCo6AfterBattleText2::
 
 _SilphCo6BattleText3::
 	text "That rotten"
-	line "PRESIDENT!"
+	line "CHIEF!"
 
 	para "He shouldn't have"
-	line "sent me to the"
-	cont "TIKSI BRANCH!"
+	line "sent me to PONAYA"
+	cont "TUNGUSKA!"
 	done
 
 _SilphCo6EndBattleText3::

@@ -785,6 +785,8 @@
 
 ; Safari Zone events
 	const_next $880
+	const EVENT_BEAT_CACTUS
+	const EVENT_BEAT_ZAPDOSG
 	const EVENT_GOT_HM03
 	const EVENT_GOT_MELTAN
 

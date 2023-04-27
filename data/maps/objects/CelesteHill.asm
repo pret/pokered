@@ -2,8 +2,7 @@ CelesteHill_Object:
 	db $0 ; border block
 
 	def_warp_events
-	warp_event 13, 23, ROUTE_1, 1
-	warp_event 12, 23, ROUTE_1, 1
+	warp_event 13, 23, BRUNSWICK_TRAIL, 1
 
 	def_bg_events
 

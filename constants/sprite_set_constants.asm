@@ -13,6 +13,7 @@
 	const SPRITESET_SILENCE_BRIDGE  ; 08
 	const SPRITESET_CYCLING_ROAD    ; 09
 	const SPRITESET_FUCHSIA         ; 0a
+	const SPRITESET_CITRINE			; 0b
 DEF NUM_SPRITE_SETS EQU const_value - 1
 
 ; split sprite set ids

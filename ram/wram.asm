@@ -2077,7 +2077,7 @@ wSilphCo11FCurScript:: db
 	ds 1
 wFuchsiaGymCurScript:: db
 wSaffronGymCurScript:: db
-	ds 1
+wBrunswickTrailCurScript:: db
 wCinnabarGymCurScript:: db
 wGameCornerCurScript:: db
 wRoute16Gate1FCurScript:: db
@@ -2085,7 +2085,7 @@ wBillsHouseCurScript:: db
 wRoute5GateCurScript:: db
 wPowerPlantCurScript:: ; overload
 wRoute7GateCurScript:: db
-wRoute1CurScript:: db ; pls work - for oak
+wRoute1CurScript:: db
 wSSAnne2FCurScript:: db
 wCitrineCityCurScript:: db
 wSeafoamIslandsB3FCurScript:: db

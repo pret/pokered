@@ -87,7 +87,7 @@ SpriteSheetPointerTable:
 	overworld_sprite PokedexSprite, 4           ; SPRITE_POKEDEX
 	overworld_sprite ClipboardSprite, 4         ; SPRITE_CLIPBOARD
 	overworld_sprite SnorlaxSprite, 4           ; SPRITE_SNORLAX
-	overworld_sprite OldAmberSprite, 4          ; SPRITE_UNUSED_OLD_AMBER
+	overworld_sprite FakeTreeSprite, 4          ; was SPRITE_UNUSED_OLD_AMBER
 	overworld_sprite OldAmberSprite, 4          ; SPRITE_OLD_AMBER
 	overworld_sprite GamblerAsleepSprite, 4     ; SPRITE_UNUSED_GAMBLER_ASLEEP_1
 	overworld_sprite GamblerAsleepSprite, 4     ; SPRITE_UNUSED_GAMBLER_ASLEEP_2

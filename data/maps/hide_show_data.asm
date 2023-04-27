@@ -17,9 +17,9 @@ MapHSPointers:
 	dw NoHS
 	dw NoHS
 	dw Route1HS
-	dw Route2HS
+	dw NoHS ; Route2HS is unnecessary due to new events replacing it.
 	dw NoHS
-	dw Route4HS
+	dw NoHS ; Route4HS was made unnecessary from replacements
 	dw NoHS
 	dw NoHS
 	dw NoHS
@@ -177,7 +177,7 @@ MapHSPointers:
 	dw NoHS
 	dw NoHS
 	dw NoHS
-	dw NoHS
+	dw BrunswickTrailHS
 	dw NoHS
 	dw NoHS
 	dw NoHS
@@ -293,11 +293,11 @@ SaffronCityHS:
 	db SAFFRON_CITY, $0E, SHOW
 	db SAFFRON_CITY, $0F, HIDE
 	db SAFFRON_CITY, $1A, HIDE
-Route2HS:
-	;db ROUTE_2, $01, SHOW - removed for the former
-	db ROUTE_2, $02, SHOW
-Route4HS:
-	db ROUTE_4, $03, SHOW
+;Route2HS: - made redundant.
+	;db ROUTE_2, $01, SHOW
+	;db ROUTE_2, $02, SHOW
+;Route4HS:
+	;db ROUTE_4, $03, SHOW
 Route9HS:
 	db ROUTE_9, $0A, SHOW
 Route12HS:
@@ -555,6 +555,9 @@ VictoryRoad1FHS:
 	db VICTORY_ROAD_1F, $04, SHOW
 ChampionsRoomHS:
 	db CHAMPIONS_ROOM, $02, HIDE
+BrunswickTrailHS:
+	db BRUNSWICK_TRAIL, $01, SHOW
+	db BRUNSWICK_TRAIL, $03, SHOW ; to test, SHOW, otherwise HIDE
 SeafoamIslands1FHS:
 	db SEAFOAM_ISLANDS_1F, $01, SHOW
 	db SEAFOAM_ISLANDS_1F, $02, SHOW

@@ -14,7 +14,7 @@ MapSpriteSets:
 	db SPRITESET_SAFFRON         ; SAFFRON_CITY
 	db SPRITESET_PALLET_VIRIDIAN ; CINNABAR_ISLAND
 	db SPRITESET_INDIGO          ; INDIGO_PLATEAU
-	db SPRITESET_PALLET_VIRIDIAN ; CITRINE_CITY
+	db SPRITESET_CITRINE ; CITRINE_CITY
 	db SPRITESET_PALLET_VIRIDIAN ; ROUTE_1
 	db SPLITSET_ROUTE_2          ; ROUTE_2
 	db SPRITESET_PEWTER_CERULEAN ; ROUTE_3
@@ -197,5 +197,18 @@ SpriteSets:
 	db SPRITE_YOUNGSTER
 	db SPRITE_POKE_BALL
 	db SPRITE_FOSSIL
+
+; SPRITESET_CITRINE
+	db SPRITE_BRUNETTE_GIRL
+	db SPRITE_BIRD
+	db SPRITE_SUPER_NERD ; free slot, add as needed.
+	db SPRITE_HIKER ; free slot, add as needed.
+	db SPRITE_GAMBLER ; free slot, add as needed.
+	db SPRITE_MONSTER ; free slot, add as needed.
+	db SPRITE_COOLTRAINER_F ; free slot, add as needed.
+	db SPRITE_COOLTRAINER_M ; free slot, add as needed.
+	db SPRITE_GUARD ; free slot, add as needed.
+	db SPRITE_POKE_BALL ; probably not free
+	db SPRITE_FAKE_TREE
 
 	assert_table_length NUM_SPRITE_SETS
