@@ -202,6 +202,19 @@ _RockTunnelPokecenterGuyText::
 	cont "LAVENDER TOWN!"
 	done
 
+_CitrinePokecenterGuyText::
+	text "While #MON can"
+	line "become stronger"
+	cont "with vitamins,"
+	cont "they only go"
+	cont "so far."
+	
+	para "#MON must"
+	line "battle to reach"
+	cont "their full"
+	cont "potential."
+	done
+
 _UnusedBenchGuyText1::
 	text "I wish I could"
 	line "catch #MON."

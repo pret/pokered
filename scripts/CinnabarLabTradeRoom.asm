@@ -13,7 +13,7 @@ Lab2Text1:
 
 Lab2Text2:
 	text_asm
-	ld a, TRADE_FOR_DORIS
+	ld a, TRADE_FOR_JENNY
 	ld [wWhichTrade], a
 	jr Lab2DoTrade
 

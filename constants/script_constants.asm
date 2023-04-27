@@ -20,16 +20,16 @@ DEF SLOTS_SOMEONESKEYS EQU $ff
 ; in game trades
 ; TradeMons indexes (see data/events/trades.asm)
 	const_def
-	const TRADE_FOR_TERRY
+	const TRADE_FOR_LOLA
 	const TRADE_FOR_MARCEL
 	const TRADE_FOR_CHIKUCHIKU ; unused
-	const TRADE_FOR_SAILOR
+	const TRADE_FOR_HARRY
 	const TRADE_FOR_DUX
-	const TRADE_FOR_MARC
-	const TRADE_FOR_LOLA
-	const TRADE_FOR_DORIS
+	const TRADE_FOR_JIMBO
+	const TRADE_FOR_MICHELLE
+	const TRADE_FOR_JENNY
 	const TRADE_FOR_CRINKLES
-	const TRADE_FOR_SPOT 
+	const TRADE_FOR_RICKY 
 	const TRADE_WITH_SELF ; Celadon University
 	const TRADE_FOR_RATICATE_A ; LGPE Trade references - Viridian
 	const TRADE_FOR_GOLEM_A ; Pewter

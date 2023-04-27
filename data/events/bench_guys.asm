@@ -17,5 +17,6 @@ BenchGuyTextPointers:
 	bench_guy_text SAFFRON_POKECENTER,     SPRITE_FACING_LEFT, SaffronCityPokecenterBenchGuyText
 	bench_guy_text MT_MOON_POKECENTER,     SPRITE_FACING_LEFT, MtMoonPokecenterBenchGuyText
 	bench_guy_text ROCK_TUNNEL_POKECENTER, SPRITE_FACING_LEFT, RockTunnelPokecenterBenchGuyText
-	bench_guy_text CELADON_UNIVERSITY_POKECENTER, SPRITE_FACING_LEFT, CeladonUniversityPokecenterBenchGuyText 
+	bench_guy_text CELADON_UNIVERSITY_POKECENTER, SPRITE_FACING_LEFT, CeladonUniversityPokecenterBenchGuyText
+	bench_guy_text CITRINE_POKECENTER,	SPRITE_FACING_LEFT, CitrinePokecenterGuyText
 	db -1 ; end

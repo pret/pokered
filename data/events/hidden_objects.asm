@@ -84,6 +84,7 @@ HiddenObjectMaps:
 	db CERULEAN_CITY
 	db ROUTE_4
 	db CELADON_UNIVERSITY_POKECENTER
+	db CITRINE_POKECENTER
 	db -1 ; end
 
 HiddenObjectPointers:
@@ -173,6 +174,7 @@ HiddenObjectPointers:
 	dw CeruleanCityHiddenObjects
 	dw Route4HiddenObjects
 	dw CeladonUniversityPokecenterHiddenObjects
+	dw CitrinePokecenterHiddenObjects
 
 MACRO hidden_object
 	db \2 ; y coord
@@ -221,11 +223,6 @@ OaksLabHiddenObjects:
 	hidden_object  1,  1, SPRITE_FACING_UP, DisplayOakLabEmailText
 	db -1 ; end
 
-ViridianPokecenterHiddenObjects:
-	hidden_object  0,  4, SPRITE_FACING_LEFT, PrintBenchGuyText
-	hidden_object 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
-	db -1 ; end
-
 ViridianMartHiddenObjects:
 	db -1 ; end
 
@@ -254,12 +251,20 @@ PewterGymHiddenObjects:
 PewterMartHiddenObjects:
 	db -1 ; end
 
+; You don't need to re-define your hidden objects every time if they're always the same.
+; Therefore, I put all the Pokecenters together. This saves a bunch of bytes.
+ViridianPokecenterHiddenObjects:
 PewterPokecenterHiddenObjects:
-	hidden_object  0,  4, SPRITE_FACING_LEFT, PrintBenchGuyText
-	hidden_object 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
-	db -1 ; end
-
 CeruleanPokecenterHiddenObjects:
+LavenderPokecenterHiddenObjects:
+VermilionPokecenterHiddenObjects:
+CeladonPokecenterHiddenObjects:
+FuchsiaPokecenterHiddenObjects:
+CinnabarPokecenterHiddenObjects:
+RockTunnelPokecenterHiddenObjects:
+MtMoonPokecenterHiddenObjects:
+CitrinePokecenterHiddenObjects:
+CeladonUniversityPokecenterHiddenObjects:
 	hidden_object  0,  4, SPRITE_FACING_LEFT, PrintBenchGuyText
 	hidden_object 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
 	db -1 ; end
@@ -270,16 +275,6 @@ CeruleanGymHiddenObjects:
 	db -1 ; end
 
 CeruleanMartHiddenObjects:
-	db -1 ; end
-
-LavenderPokecenterHiddenObjects:
-	hidden_object  0,  4, SPRITE_FACING_LEFT, PrintBenchGuyText
-	hidden_object 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
-	db -1 ; end
-
-VermilionPokecenterHiddenObjects:
-	hidden_object 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
-	hidden_object  0,  4, SPRITE_FACING_UP, PrintBenchGuyText
 	db -1 ; end
 
 VermilionGymHiddenObjects:
@@ -306,11 +301,6 @@ VermilionGymHiddenObjects:
 
 CeladonMansion2HiddenObjects:
 	hidden_object  0,  5, SPRITE_FACING_UP, OpenPokemonCenterPC
-	db -1 ; end
-
-CeladonPokecenterHiddenObjects:
-	hidden_object  0,  4, SPRITE_FACING_LEFT, PrintBenchGuyText
-	hidden_object 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
 	db -1 ; end
 
 CeladonGymHiddenObjects:
@@ -374,11 +364,6 @@ CeladonHotelHiddenObjects:
 	hidden_object  0,  4, SPRITE_FACING_LEFT, PrintBenchGuyText
 	db -1 ; end
 
-FuchsiaPokecenterHiddenObjects:
-	hidden_object 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
-	hidden_object  0,  4, SPRITE_FACING_UP, PrintBenchGuyText
-	db -1 ; end
-
 FuchsiaGymHiddenObjects:
 	hidden_object  3, 15, SPRITE_FACING_UP, GymStatues
 	hidden_object  6, 15, SPRITE_FACING_UP, GymStatues
@@ -395,23 +380,8 @@ CinnabarGymHiddenObjects:
 	hidden_object  1,  7, (TRUE  << 4) | 6, PrintCinnabarQuiz
 	db -1 ; end
 
-CinnabarPokecenterHiddenObjects:
-	hidden_object  0,  4, SPRITE_FACING_UP, PrintBenchGuyText
-	hidden_object 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
-	db -1 ; end
-
 SaffronGymHiddenObjects:
 	hidden_object  9, 15, SPRITE_FACING_UP, GymStatues
-	db -1 ; end
-
-MtMoonPokecenterHiddenObjects:
-	hidden_object  0,  4, SPRITE_FACING_LEFT, PrintBenchGuyText
-	hidden_object 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
-	db -1 ; end
-
-RockTunnelPokecenterHiddenObjects:
-	hidden_object  0,  4, SPRITE_FACING_LEFT, PrintBenchGuyText
-	hidden_object 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
 	db -1 ; end
 
 ViridianForestHiddenObjects:
@@ -663,9 +633,4 @@ CeruleanCityHiddenObjects:
 
 Route4HiddenObjects:
 	hidden_object 40,  3, GREAT_BALL, HiddenItems
-	db -1 ; end
-
-CeladonUniversityPokecenterHiddenObjects:
-	hidden_object  0,  4, SPRITE_FACING_UP, PrintBenchGuyText
-	hidden_object 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
 	db -1 ; end

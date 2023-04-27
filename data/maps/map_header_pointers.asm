@@ -166,8 +166,8 @@ MapHeaderPointers::
 	dw SeafoamIslandsB2F_h
 	dw SeafoamIslandsB3F_h
 	dw SeafoamIslandsB4F_h
-	dw CitrineTradebackHouse_h
-	dw FuchsiaGoodRodHouse_h
+	dw CitrineTradebackHouse_h ; was vermillion old rod house
+	dw CitrinePokecenter_h ; was fuschia good rod house
 	dw PokemonMansion1F_h
 	dw CinnabarGym_h
 	dw CinnabarLab_h

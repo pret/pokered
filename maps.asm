@@ -697,7 +697,7 @@ Route21_Blocks: INCBIN "maps/Route21.blk"
 Route12SuperRodHouse_Blocks:
 Daycare_Blocks: INCBIN "maps/Daycare.blk"
 
-FuchsiaGoodRodHouse_Blocks: INCBIN "maps/FuchsiaGoodRodHouse.blk"
+;FuchsiaGoodRodHouse_Blocks: INCBIN "maps/FuchsiaGoodRodHouse.blk"
 
 
 SECTION "Maps 12", ROMX
@@ -718,9 +718,9 @@ INCLUDE "scripts/CeladonMart2F.asm"
 INCLUDE "data/maps/objects/CeladonMart2F.asm"
 CeladonMart2F_Blocks: INCBIN "maps/CeladonMart2F.blk"
 
-INCLUDE "data/maps/headers/FuchsiaGoodRodHouse.asm"
-INCLUDE "scripts/FuchsiaGoodRodHouse.asm"
-INCLUDE "data/maps/objects/FuchsiaGoodRodHouse.asm"
+;INCLUDE "data/maps/headers/FuchsiaGoodRodHouse.asm"
+;INCLUDE "scripts/FuchsiaGoodRodHouse.asm"
+;INCLUDE "data/maps/objects/FuchsiaGoodRodHouse.asm"
 
 INCLUDE "data/maps/headers/Daycare.asm"
 INCLUDE "scripts/Daycare.asm"
@@ -1335,3 +1335,8 @@ INCLUDE "scripts/CitrineTradebackHouse.asm"
 INCLUDE "data/maps/objects/CitrineTradebackHouse.asm"
 INCLUDE "scripts/tradeback_move_tutor.asm"
 CitrineTradebackHouse_Blocks: INCBIN "maps/CitrineTradebackHouse.blk"
+
+INCLUDE "data/maps/headers/CitrinePokecenter.asm"
+INCLUDE "scripts/CitrinePokecenter.asm"
+INCLUDE "data/maps/objects/CitrinePokecenter.asm"
+CitrinePokecenter_Blocks: INCBIN "maps/CitrinePokecenter.blk"

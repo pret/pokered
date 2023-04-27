@@ -192,7 +192,7 @@ SECTION "Text 8", ROMX
 INCLUDE "text/VermilionGym_2.asm"
 INCLUDE "text/VermilionPidgeyHouse.asm"
 INCLUDE "text/VermilionDock.asm"
-INCLUDE "text/VermilionOldRodHouse.asm"
+;INCLUDE "text/VermilionOldRodHouse.asm"
 INCLUDE "text/CeladonMart1F.asm"
 INCLUDE "text/CeladonMart2F.asm"
 INCLUDE "text/CeladonMart3F.asm"
@@ -223,7 +223,7 @@ SECTION "Text 9", ROMX
 
 INCLUDE "text/FuchsiaGym_2.asm"
 INCLUDE "text/FuchsiaMeetingRoom.asm"
-INCLUDE "text/FuchsiaGoodRodHouse.asm"
+;INCLUDE "text/FuchsiaGoodRodHouse.asm"
 INCLUDE "text/PokemonMansion1F.asm"
 INCLUDE "text/CinnabarGym.asm"
 INCLUDE "text/CinnabarLab.asm"
@@ -288,6 +288,7 @@ INCLUDE "text/BrunswickTrail.asm"
 INCLUDE "text/SilphGauntlet1F.asm"
 INCLUDE "text/SilphGauntlet4F.asm"
 INCLUDE "text/SilphGauntlet7F.asm"
+INCLUDE "text/CitrinePokecenter.asm"
 
 SECTION "Pokédex Text", ROMX
 

@@ -166,8 +166,8 @@ MapHeaderBanks::
 	db BANK(SeafoamIslandsB2F_h)
 	db BANK(SeafoamIslandsB3F_h)
 	db BANK(SeafoamIslandsB4F_h)
-	db BANK(CitrineTradebackHouse_h)
-	db BANK(FuchsiaGoodRodHouse_h)
+	db BANK(CitrineTradebackHouse_h) ; was old rod house
+	db BANK(CitrinePokecenter_h) ; was good rod house
 	db BANK(PokemonMansion1F_h)
 	db BANK(CinnabarGym_h)
 	db BANK(CinnabarLab_h)

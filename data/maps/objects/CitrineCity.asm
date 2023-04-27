@@ -4,6 +4,7 @@ CitrineCity_Object:
 	def_warp_events
 	warp_event  9, 27, CITRINE_ROCKET_HOUSE, 1
 	warp_event  9, 17, CITRINE_TRADEBACK_HOUSE, 1
+	warp_event 15, 17, CITRINE_POKECENTER, 1
 
 	def_bg_events
 

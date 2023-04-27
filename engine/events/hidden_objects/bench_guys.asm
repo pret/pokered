@@ -68,7 +68,7 @@ CeladonCityPokecenterBenchGuyText::
 	text_end
 
 FuchsiaCityPokecenterBenchGuyText::
-	text_far _FuchsiaCityPokecenterGuyText
+	text_far _UnusedBenchGuyText3 ; replaced
 	text_end
 
 CinnabarIslandPokecenterBenchGuyText::
@@ -95,4 +95,8 @@ SaffronCityPokecenterBenchGuyText2:
 
 CeladonCityHotelText::
 	text_far _CeladonCityHotelText
+	text_end
+
+CitrinePokecenterGuyText::
+	text_far _CitrinePokecenterGuyText
 	text_end
