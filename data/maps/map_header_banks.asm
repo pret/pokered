@@ -39,6 +39,7 @@ MapHeaderBanks::
 	db BANK(Route23_h)
 	db BANK(Route24_h)
 	db BANK(Route25_h)
+	db BANK(BrunswickTrail_h) ; was cinnabar mart copy
 	db BANK(RedsHouse1F_h)
 	db BANK(RedsHouse2F_h)
 	db BANK(BluesHouse_h)
@@ -175,7 +176,6 @@ MapHeaderBanks::
 	db BANK(CinnabarLabFossilRoom_h)
 	db BANK(CinnabarPokecenter_h)
 	db BANK(CinnabarMart_h)
-	db BANK(BrunswickTrail_h) ; was cinnabar mart copy
 	db BANK(IndigoPlateauLobby_h)
 	db BANK(CopycatsHouse1F_h)
 	db BANK(CopycatsHouse2F_h)

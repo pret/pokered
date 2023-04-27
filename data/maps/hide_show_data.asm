@@ -41,6 +41,7 @@ MapHSPointers:
 	dw NoHS
 	dw Route24HS
 	dw Route25HS
+	dw BrunswickTrailHS
 	dw NoHS
 	dw NoHS
 	dw BluesHouseHS
@@ -177,7 +178,6 @@ MapHSPointers:
 	dw NoHS
 	dw NoHS
 	dw NoHS
-	dw BrunswickTrailHS
 	dw NoHS
 	dw NoHS
 	dw NoHS

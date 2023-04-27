@@ -56,144 +56,144 @@ DEF FIRST_ROUTE_MAP EQU const_value
 	map_const ROUTE_23,                      10, 72 ; $23
 	map_const ROUTE_24,                      10, 18 ; $24
 	map_const ROUTE_25,                      37,  9 ; $25
+	map_const BRUNSWICK_TRAIL,           	 32, 14 ; $26	- was unused Cinnabar Mart copy, moved to $26
 DEF FIRST_INDOOR_MAP EQU const_value
-	map_const REDS_HOUSE_1F,                  4,  4 ; $26
-	map_const REDS_HOUSE_2F,                  4,  4 ; $27
-	map_const BLUES_HOUSE,                    4,  4 ; $28
-	map_const OAKS_LAB,                       7,  6 ; $29
-	map_const VIRIDIAN_POKECENTER,            7,  4 ; $2A
-	map_const VIRIDIAN_MART,                  4,  4 ; $2B
-	map_const VIRIDIAN_SCHOOL_HOUSE,          4,  4 ; $2C
-	map_const VIRIDIAN_NICKNAME_HOUSE,        4,  4 ; $2D
-	map_const VIRIDIAN_GYM,                  10,  9 ; $2E
-	map_const DIGLETTS_CAVE_ROUTE_2,          4,  4 ; $2F
-	map_const VIRIDIAN_FOREST_NORTH_GATE,     5,  4 ; $30
-	map_const ROUTE_2_TRADE_HOUSE,            4,  4 ; $31
-	map_const ROUTE_2_GATE,                   5,  4 ; $32
-	map_const VIRIDIAN_FOREST_SOUTH_GATE,     5,  4 ; $33
-	map_const VIRIDIAN_FOREST,               17, 24 ; $34
-	map_const MUSEUM_1F,                     10,  4 ; $35
-	map_const MUSEUM_2F,                      7,  4 ; $36
-	map_const PEWTER_GYM,                     5,  7 ; $37
-	map_const PEWTER_NIDORAN_HOUSE,           4,  4 ; $38
-	map_const PEWTER_MART,                    4,  4 ; $39
-	map_const PEWTER_SPEECH_HOUSE,            4,  4 ; $3A
-	map_const PEWTER_POKECENTER,              7,  4 ; $3B
-	map_const MT_MOON_1F,                    20, 18 ; $3C
-	map_const MT_MOON_B1F,                   14, 14 ; $3D
-	map_const MT_MOON_B2F,                   20, 18 ; $3E
-	map_const CERULEAN_TRASHED_HOUSE,         4,  4 ; $3F
-	map_const CERULEAN_TRADE_HOUSE,           4,  4 ; $40
-	map_const CERULEAN_POKECENTER,            7,  4 ; $41
-	map_const CERULEAN_GYM,                   5,  7 ; $42
-	map_const BIKE_SHOP,                      4,  4 ; $43
-	map_const CERULEAN_MART,                  4,  4 ; $44
-	map_const MT_MOON_POKECENTER,             7,  4 ; $45
-	map_const VIRIDIAN_PRE_GYM,               5,  7 ; $46	- was CERULEAN_TRASHED_HOUSE_COPY
-	map_const ROUTE_5_GATE,                   4,  3 ; $47
-	map_const UNDERGROUND_PATH_ROUTE_5,       4,  4 ; $48
-	map_const DAYCARE,                        4,  4 ; $49
-	map_const ROUTE_6_GATE,                   4,  3 ; $4A
-	map_const UNDERGROUND_PATH_ROUTE_6,       4,  4 ; $4B
-	map_const CELESTE_HILL,                  12, 12 ; $4C	- Was copy of above & unused
-	map_const ROUTE_7_GATE,                   3,  4 ; $4D
-	map_const UNDERGROUND_PATH_ROUTE_7,       4,  4 ; $4E
-	map_const CITRINE_ROCKET_HOUSE,  		  5,  5 ; $4F	- Unused, was UNDERGROUND_PATH_ROUTE_7_COPY
-	map_const ROUTE_8_GATE,                   3,  4 ; $50
-	map_const UNDERGROUND_PATH_ROUTE_8,       4,  4 ; $51
-	map_const ROCK_TUNNEL_POKECENTER,         7,  4 ; $52
-	map_const ROCK_TUNNEL_1F,                20, 18 ; $53
-	map_const POWER_PLANT,                   20, 18 ; $54
-	map_const ROUTE_11_GATE_1F,               4,  5 ; $55
-	map_const DIGLETTS_CAVE_ROUTE_11,         4,  4 ; $56
-	map_const ROUTE_11_GATE_2F,               4,  4 ; $57
-	map_const ROUTE_12_GATE_1F,               5,  4 ; $58
-	map_const BILLS_HOUSE,                    7,  4 ; $59
-	map_const VERMILION_POKECENTER,           7,  4 ; $5A
-	map_const POKEMON_FAN_CLUB,               4,  4 ; $5B
-	map_const VERMILION_MART,                 4,  4 ; $5C
-	map_const VERMILION_GYM,                  5,  9 ; $5D
-	map_const VERMILION_PIDGEY_HOUSE,         4,  4 ; $5E
-	map_const VERMILION_DOCK,                14,  6 ; $5F
-	map_const SS_ANNE_1F,                    20,  9 ; $60
-	map_const SS_ANNE_2F,                    20,  9 ; $61
-	map_const SS_ANNE_3F,                    10,  3 ; $62
-	map_const SS_ANNE_B1F,                   15,  4 ; $63
-	map_const SS_ANNE_BOW,                   10,  7 ; $64
-	map_const SS_ANNE_KITCHEN,                7,  8 ; $65
-	map_const SS_ANNE_CAPTAINS_ROOM,          3,  4 ; $66
-	map_const SS_ANNE_1F_ROOMS,              12,  8 ; $67
-	map_const SS_ANNE_2F_ROOMS,              12,  8 ; $68
-	map_const SS_ANNE_B1F_ROOMS,             12,  8 ; $69
-	map_const SILPH_GAUNTLET_1F,             10,  9 ; $6A	- Was UNUSED_MAP_69
-	map_const SILPH_GAUNTLET_2F,             13, 10 ; $6B	- Was UNUSED_MAP_6A
-	map_const SILPH_GAUNTLET_3F,             17, 13 ; $6C	- Was UNUSED_MAP_6B
-	map_const VICTORY_ROAD_1F,               10,  9 ; $6D
-	map_const SILPH_GAUNTLET_4F,             10,  9 ; $6E	- Was UNUSED_MAP_6D
-	map_const SILPH_GAUNTLET_5F,             10,  9 ; $6F	- Was UNUSED_MAP_6E
-	map_const SILPH_GAUNTLET_6F,             12, 12 ; $70	- Was UNUSED_MAP_6F
-	map_const SILPH_GAUNTLET_7F,              6,  5 ; $71	- Was UNUSED_MAP_70
-	map_const LANCES_ROOM,                   13, 13 ; $72
-	map_const FARAWAY_ISLAND_OUTSIDE,        15, 18 ; $73	- Was UNUSED_MAP_72
-	map_const FARAWAY_ISLAND_INSIDE,         15, 11 ; $74	- Was UNUSED_MAP_73
-	map_const POKEMON_MANSION_B2F,           15, 12 ; $75	- Was UNUSED_MAP_74
-	map_const MT_MOON_CRATER,                25, 25 ; $76	- Was UNUSED_MAP_75
-	map_const HALL_OF_FAME,                   5,  4 ; $77
-	map_const UNDERGROUND_PATH_NORTH_SOUTH,   4, 24 ; $78 ; UndergroundPathNorthSouth.blk is actually 4x23
-	map_const CHAMPIONS_ROOM,                 4,  4 ; $79
-	map_const UNDERGROUND_PATH_WEST_EAST,    25,  4 ; $7A
-	map_const CELADON_MART_1F,               10,  4 ; $7B
-	map_const CELADON_MART_2F,               10,  4 ; $7C
-	map_const CELADON_MART_3F,               10,  4 ; $7D
-	map_const CELADON_MART_4F,               10,  4 ; $7E
-	map_const CELADON_MART_ROOF,             10,  4 ; $7F
-	map_const CELADON_MART_ELEVATOR,          2,  2 ; $80
-	map_const CELADON_MANSION_1F,             4,  6 ; $81
-	map_const CELADON_MANSION_2F,             4,  6 ; $82
-	map_const CELADON_MANSION_3F,             4,  6 ; $83
-	map_const CELADON_MANSION_ROOF,           4,  6 ; $84
-	map_const CELADON_MANSION_ROOF_HOUSE,     4,  4 ; $85
-	map_const CELADON_POKECENTER,             7,  4 ; $86
-	map_const CELADON_GYM,                    5,  9 ; $87
-	map_const GAME_CORNER,                   10,  9 ; $88
-	map_const CELADON_MART_5F,               10,  4 ; $89
-	map_const GAME_CORNER_PRIZE_ROOM,         5,  4 ; $8A
-	map_const CELADON_DINER,                  5,  4 ; $8B
-	map_const CELADON_CHIEF_HOUSE,            4,  4 ; $8C
-	map_const CELADON_HOTEL,                  7,  4 ; $8D
-	map_const LAVENDER_POKECENTER,            7,  4 ; $8E
-	map_const POKEMON_TOWER_1F,              10,  9 ; $8F
-	map_const POKEMON_TOWER_2F,              10,  9 ; $90
-	map_const POKEMON_TOWER_3F,              10,  9 ; $91	- Currently unused
-	map_const POKEMON_TOWER_4F,              10,  9 ; $92	- Currently unused
-	map_const POKEMON_TOWER_5F,              10,  9 ; $93	- Currently unused
-	map_const POKEMON_TOWER_6F,              10,  9 ; $94
-	map_const POKEMON_TOWER_7F,              10,  9 ; $95
-	map_const MR_FUJIS_HOUSE,                 4,  4 ; $96
-	map_const LAVENDER_MART,                  4,  4 ; $97
-	map_const LAVENDER_CUBONE_HOUSE,          4,  4 ; $98
-	map_const FUCHSIA_MART,                   4,  4 ; $99
-	map_const FUCHSIA_BILLS_GRANDPAS_HOUSE,   4,  4 ; $9A
-	map_const FUCHSIA_POKECENTER,             7,  4 ; $9B
-	map_const WARDENS_HOUSE,                  5,  4 ; $9C
-	map_const SAFARI_ZONE_GATE,               4,  3 ; $9D
-	map_const FUCHSIA_GYM,                    5,  9 ; $9E
-	map_const FUCHSIA_MEETING_ROOM,           7,  4 ; $9F
-	map_const SEAFOAM_ISLANDS_B1F,           15,  9 ; $A0
-	map_const SEAFOAM_ISLANDS_B2F,           15,  9 ; $A1
-	map_const SEAFOAM_ISLANDS_B3F,           15,  9 ; $A2
-	map_const SEAFOAM_ISLANDS_B4F,           15,  9 ; $A3
-	map_const CITRINE_TRADEBACK_HOUSE,        4,  4 ; $A4 - Was Vermillion Old Rod house
-	map_const FUCHSIA_GOOD_ROD_HOUSE,         4,  4 ; $A5
-	map_const POKEMON_MANSION_1F,            15, 14 ; $A6
-	map_const CINNABAR_GYM,                  10,  9 ; $A7
-	map_const CINNABAR_LAB,                   9,  4 ; $A8
-	map_const CINNABAR_LAB_TRADE_ROOM,        4,  4 ; $A9
-	map_const CINNABAR_LAB_METRONOME_ROOM,    4,  4 ; $AA
-	map_const CINNABAR_LAB_FOSSIL_ROOM,       4,  4 ; $AB
-	map_const CINNABAR_POKECENTER,            7,  4 ; $AC
-	map_const CINNABAR_MART,                  4,  4 ; $AD
-	map_const BRUNSWICK_TRAIL,           	 32, 14 ; $AE	- was unused Cinnabar Mart copy
+	map_const REDS_HOUSE_1F,                  4,  4 ; $27
+	map_const REDS_HOUSE_2F,                  4,  4 ; $28
+	map_const BLUES_HOUSE,                    4,  4 ; $29
+	map_const OAKS_LAB,                       7,  6 ; $2A
+	map_const VIRIDIAN_POKECENTER,            7,  4 ; $2B
+	map_const VIRIDIAN_MART,                  4,  4 ; $2C
+	map_const VIRIDIAN_SCHOOL_HOUSE,          4,  4 ; $2D
+	map_const VIRIDIAN_NICKNAME_HOUSE,        4,  4 ; $2E
+	map_const VIRIDIAN_GYM,                  10,  9 ; $2F
+	map_const DIGLETTS_CAVE_ROUTE_2,          4,  4 ; $30
+	map_const VIRIDIAN_FOREST_NORTH_GATE,     5,  4 ; $31
+	map_const ROUTE_2_TRADE_HOUSE,            4,  4 ; $32
+	map_const ROUTE_2_GATE,                   5,  4 ; $33
+	map_const VIRIDIAN_FOREST_SOUTH_GATE,     5,  4 ; $34
+	map_const VIRIDIAN_FOREST,               17, 24 ; $35
+	map_const MUSEUM_1F,                     10,  4 ; $36
+	map_const MUSEUM_2F,                      7,  4 ; $37
+	map_const PEWTER_GYM,                     5,  7 ; $38
+	map_const PEWTER_NIDORAN_HOUSE,           4,  4 ; $39
+	map_const PEWTER_MART,                    4,  4 ; $3A
+	map_const PEWTER_SPEECH_HOUSE,            4,  4 ; $3B
+	map_const PEWTER_POKECENTER,              7,  4 ; $3C
+	map_const MT_MOON_1F,                    20, 18 ; $3D
+	map_const MT_MOON_B1F,                   14, 14 ; $3E
+	map_const MT_MOON_B2F,                   20, 18 ; $3F
+	map_const CERULEAN_TRASHED_HOUSE,         4,  4 ; $40
+	map_const CERULEAN_TRADE_HOUSE,           4,  4 ; $41
+	map_const CERULEAN_POKECENTER,            7,  4 ; $42
+	map_const CERULEAN_GYM,                   5,  7 ; $43
+	map_const BIKE_SHOP,                      4,  4 ; $44
+	map_const CERULEAN_MART,                  4,  4 ; $45
+	map_const MT_MOON_POKECENTER,             7,  4 ; $46
+	map_const VIRIDIAN_PRE_GYM,               5,  7 ; $47	- was CERULEAN_TRASHED_HOUSE_COPY
+	map_const ROUTE_5_GATE,                   4,  3 ; $48
+	map_const UNDERGROUND_PATH_ROUTE_5,       4,  4 ; $49
+	map_const DAYCARE,                        4,  4 ; $4A
+	map_const ROUTE_6_GATE,                   4,  3 ; $4B
+	map_const UNDERGROUND_PATH_ROUTE_6,       4,  4 ; $4C
+	map_const CELESTE_HILL,                  12, 12 ; $4D	- Was copy of above & unused
+	map_const ROUTE_7_GATE,                   3,  4 ; $4E
+	map_const UNDERGROUND_PATH_ROUTE_7,       4,  4 ; $4F
+	map_const CITRINE_ROCKET_HOUSE,  		  5,  5 ; $50	- Unused, was UNDERGROUND_PATH_ROUTE_7_COPY
+	map_const ROUTE_8_GATE,                   3,  4 ; $51
+	map_const UNDERGROUND_PATH_ROUTE_8,       4,  4 ; $52
+	map_const ROCK_TUNNEL_POKECENTER,         7,  4 ; $53
+	map_const ROCK_TUNNEL_1F,                20, 18 ; $54
+	map_const POWER_PLANT,                   20, 18 ; $55
+	map_const ROUTE_11_GATE_1F,               4,  5 ; $56
+	map_const DIGLETTS_CAVE_ROUTE_11,         4,  4 ; $57
+	map_const ROUTE_11_GATE_2F,               4,  4 ; $58
+	map_const ROUTE_12_GATE_1F,               5,  4 ; $59
+	map_const BILLS_HOUSE,                    7,  4 ; $5A
+	map_const VERMILION_POKECENTER,           7,  4 ; $5B
+	map_const POKEMON_FAN_CLUB,               4,  4 ; $5C
+	map_const VERMILION_MART,                 4,  4 ; $5D
+	map_const VERMILION_GYM,                  5,  9 ; $5E
+	map_const VERMILION_PIDGEY_HOUSE,         4,  4 ; $5F
+	map_const VERMILION_DOCK,                14,  6 ; $60
+	map_const SS_ANNE_1F,                    20,  9 ; $61
+	map_const SS_ANNE_2F,                    20,  9 ; $62
+	map_const SS_ANNE_3F,                    10,  3 ; $63
+	map_const SS_ANNE_B1F,                   15,  4 ; $64
+	map_const SS_ANNE_BOW,                   10,  7 ; $65
+	map_const SS_ANNE_KITCHEN,                7,  8 ; $66
+	map_const SS_ANNE_CAPTAINS_ROOM,          3,  4 ; $67
+	map_const SS_ANNE_1F_ROOMS,              12,  8 ; $68
+	map_const SS_ANNE_2F_ROOMS,              12,  8 ; $69
+	map_const SS_ANNE_B1F_ROOMS,             12,  8 ; $6A
+	map_const SILPH_GAUNTLET_1F,             10,  9 ; $6B	- Was UNUSED_MAP_69
+	map_const SILPH_GAUNTLET_2F,             13, 10 ; $6C	- Was UNUSED_MAP_6A
+	map_const SILPH_GAUNTLET_3F,             17, 13 ; $6D	- Was UNUSED_MAP_6B
+	map_const VICTORY_ROAD_1F,               10,  9 ; $6E
+	map_const SILPH_GAUNTLET_4F,             10,  9 ; $6F	- Was UNUSED_MAP_6D
+	map_const SILPH_GAUNTLET_5F,             10,  9 ; $70	- Was UNUSED_MAP_6E
+	map_const SILPH_GAUNTLET_6F,             12, 12 ; $71	- Was UNUSED_MAP_6F
+	map_const SILPH_GAUNTLET_7F,              6,  5 ; $72	- Was UNUSED_MAP_70
+	map_const LANCES_ROOM,                   13, 13 ; $73
+	map_const FARAWAY_ISLAND_OUTSIDE,        15, 18 ; $74	- Was UNUSED_MAP_72
+	map_const FARAWAY_ISLAND_INSIDE,         15, 11 ; $75	- Was UNUSED_MAP_73
+	map_const POKEMON_MANSION_B2F,           15, 12 ; $76	- Was UNUSED_MAP_74
+	map_const MT_MOON_CRATER,                25, 25 ; $77	- Was UNUSED_MAP_75
+	map_const HALL_OF_FAME,                   5,  4 ; $78
+	map_const UNDERGROUND_PATH_NORTH_SOUTH,   4, 24 ; $79 ; UndergroundPathNorthSouth.blk is actually 4x23
+	map_const CHAMPIONS_ROOM,                 4,  4 ; $7A
+	map_const UNDERGROUND_PATH_WEST_EAST,    25,  4 ; $7B
+	map_const CELADON_MART_1F,               10,  4 ; $7C
+	map_const CELADON_MART_2F,               10,  4 ; $7D
+	map_const CELADON_MART_3F,               10,  4 ; $7E
+	map_const CELADON_MART_4F,               10,  4 ; $7F
+	map_const CELADON_MART_ROOF,             10,  4 ; $80
+	map_const CELADON_MART_ELEVATOR,          2,  2 ; $81
+	map_const CELADON_MANSION_1F,             4,  6 ; $82
+	map_const CELADON_MANSION_2F,             4,  6 ; $83
+	map_const CELADON_MANSION_3F,             4,  6 ; $84
+	map_const CELADON_MANSION_ROOF,           4,  6 ; $85
+	map_const CELADON_MANSION_ROOF_HOUSE,     4,  4 ; $86
+	map_const CELADON_POKECENTER,             7,  4 ; $87
+	map_const CELADON_GYM,                    5,  9 ; $88
+	map_const GAME_CORNER,                   10,  9 ; $89
+	map_const CELADON_MART_5F,               10,  4 ; $8A
+	map_const GAME_CORNER_PRIZE_ROOM,         5,  4 ; $8B
+	map_const CELADON_DINER,                  5,  4 ; $8C
+	map_const CELADON_CHIEF_HOUSE,            4,  4 ; $8D
+	map_const CELADON_HOTEL,                  7,  4 ; $8E
+	map_const LAVENDER_POKECENTER,            7,  4 ; $8F
+	map_const POKEMON_TOWER_1F,              10,  9 ; $90
+	map_const POKEMON_TOWER_2F,              10,  9 ; $91
+	map_const POKEMON_TOWER_3F,              10,  9 ; $92	- Currently unused
+	map_const POKEMON_TOWER_4F,              10,  9 ; $93	- Currently unused
+	map_const POKEMON_TOWER_5F,              10,  9 ; $94	- Currently unused
+	map_const POKEMON_TOWER_6F,              10,  9 ; $95
+	map_const POKEMON_TOWER_7F,              10,  9 ; $96
+	map_const MR_FUJIS_HOUSE,                 4,  4 ; $97
+	map_const LAVENDER_MART,                  4,  4 ; $98
+	map_const LAVENDER_CUBONE_HOUSE,          4,  4 ; $99
+	map_const FUCHSIA_MART,                   4,  4 ; $9A
+	map_const FUCHSIA_BILLS_GRANDPAS_HOUSE,   4,  4 ; $9B
+	map_const FUCHSIA_POKECENTER,             7,  4 ; $9C
+	map_const WARDENS_HOUSE,                  5,  4 ; $9D
+	map_const SAFARI_ZONE_GATE,               4,  3 ; $9E
+	map_const FUCHSIA_GYM,                    5,  9 ; $9F
+	map_const FUCHSIA_MEETING_ROOM,           7,  4 ; $A0
+	map_const SEAFOAM_ISLANDS_B1F,           15,  9 ; $A1
+	map_const SEAFOAM_ISLANDS_B2F,           15,  9 ; $A2
+	map_const SEAFOAM_ISLANDS_B3F,           15,  9 ; $A3
+	map_const SEAFOAM_ISLANDS_B4F,           15,  9 ; $A4
+	map_const CITRINE_TRADEBACK_HOUSE,        4,  4 ; $A5 - Was Vermillion Old Rod house
+	map_const FUCHSIA_GOOD_ROD_HOUSE,         4,  4 ; $A6
+	map_const POKEMON_MANSION_1F,            15, 14 ; $A7
+	map_const CINNABAR_GYM,                  10,  9 ; $A8
+	map_const CINNABAR_LAB,                   9,  4 ; $A9
+	map_const CINNABAR_LAB_TRADE_ROOM,        4,  4 ; $AA
+	map_const CINNABAR_LAB_METRONOME_ROOM,    4,  4 ; $AB
+	map_const CINNABAR_LAB_FOSSIL_ROOM,       4,  4 ; $AC
+	map_const CINNABAR_POKECENTER,            7,  4 ; $AD
+	map_const CINNABAR_MART,                  4,  4 ; $AE
 	map_const INDIGO_PLATEAU_LOBBY,           8,  6 ; $AF
 	map_const COPYCATS_HOUSE_1F,              4,  4 ; $B0
 	map_const COPYCATS_HOUSE_2F,              4,  4 ; $B1

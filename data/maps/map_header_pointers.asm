@@ -39,6 +39,7 @@ MapHeaderPointers::
 	dw Route23_h
 	dw Route24_h
 	dw Route25_h
+	dw BrunswickTrail_h ; CINNABAR_MART_COPY
 	dw RedsHouse1F_h
 	dw RedsHouse2F_h
 	dw BluesHouse_h
@@ -175,7 +176,6 @@ MapHeaderPointers::
 	dw CinnabarLabFossilRoom_h
 	dw CinnabarPokecenter_h
 	dw CinnabarMart_h
-	dw BrunswickTrail_h ; CINNABAR_MART_COPY
 	dw IndigoPlateauLobby_h
 	dw CopycatsHouse1F_h
 	dw CopycatsHouse2F_h
