@@ -2072,6 +2072,7 @@ wLancesRoomCurScript:: db
 wPokemonMansionB2FCurScript:: db
 wMtMoonCraterCurScript:: db
 wSilphGauntlet1FCurScript:: db
+wSilphGauntlet4FCurScript:: db
 wSilphCo10FCurScript:: db
 wSilphCo11FCurScript:: db
 wCelesteHillCurScript:: db

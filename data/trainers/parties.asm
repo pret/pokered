@@ -306,7 +306,7 @@ BikerData:
 
 BurglarData:
 ; Unused
-	db 66, NINETALES, RAPIDASH, ARCANINE, WEEZING, MAGMORTAR, MUK, 0 ; - used in Silph Gauntlet
+	db 65, RAPIDASH, CROAKOZUNA, ARCANINE, WEEZING, MAGMORTAR, MUK, 0 ; - used in Silph Gauntlet
 	db 33, GROWLITHE, 0
 	db 28, VULPIX, CHARMANDER, PONYTA, 0
 ; Cinnabar Gym
@@ -390,8 +390,8 @@ GamblerData:
 	db 18, GROWLITHE, VULPIX, 0
 ; Route 8
 	db 22, POLIWAG, POLIWAG, POLIWHIRL, 0
-; Unused
-;	db 22, ONIX, GEODUDE, GRAVELER, 0
+; Unused - used in Silph Gauntlet
+	db 65, SEAKING, RHYPERIOR, ELECTRODE, ARCANINE, GOLEM, POLITOED, 0
 ; Route 8
 	db 24, GROWLITHE, VULPIX, 0
 
@@ -425,6 +425,8 @@ PsychicData:
 	db 34, MR_MIME, KADABRA, 0
 	db 33, SLOWPOKE, SLOWPOKE, SLOWBRO, 0
 	db 38, SLOWBRO, 0
+; Silph Gauntlet
+	db 65, SLOWBRO, EXEGGUTOR, STARMIE, MR_RIME, ESPEON, ALAKAZAM, 0 
 
 RockerData:
 ; Vermilion Gym
@@ -494,7 +496,7 @@ ChiefData:
 
 ScientistData:
 ; Unused - this will be used in the Silph Gauntlet
-	db 64, MAGNEZONE, ELECTRODE, PORYGONZ, MUK, WEEZING, ALAKAZAM, 0
+	db 65, MAGNEZONE, ELECTRODE, PORYGONZ, ANIMON, WEEZING, ALAKAZAM, 0
 ; Silph Co. 2F
 	db 26, GRIMER, WEEZING, KOFFING, WEEZING, 0
 	db 28, MAGNEMITE, VOLTORB, MAGNETON, 0
@@ -552,7 +554,7 @@ RocketData: ; restoring these so undefined stuff isn't pulled RIGHT NOW
 	db 26, KOFFING, DROWZEE, 0
 	db 23, ZUBAT, RATTATA, RATICATE, ZUBAT, 0
 ; Unused - this will be used in the Silph Gauntlet
-	db 65, PERSIAN, ARBOK, WEEZING, CROBAT, HYPNO, GUARDIA, 0
+	db 65, PERSIAN, ARBOK, RATICATE, CROBAT, HYPNO, GUARDIA, 0
 ; Silph Co. 2F - cut
 	db 29, CUBONE, ZUBAT, 0
 	db 25, GOLBAT, ZUBAT, ZUBAT, RATICATE, ZUBAT, 0
@@ -637,7 +639,7 @@ ChannelerData:
 	db 23, MIKON, GASTLY, 0
 	db 24, VULPIX, 0
 ; Unused - this will be used in the Silph Gauntlet
-	db 65, GUARDIA, NINETALES, ANNIHILAPE, HYPNO, MUK, GENGAR, 0
+	db 65, MUK, GUARDIA, ANNIHILAPE, HYPNO, NINETALES, GENGAR, 0
 ; Pokémon Tower 3F
 	db 25, GASTLY, HAUNTER, 0
 ; Pokémon Tower 4F, now unused 
