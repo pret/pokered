@@ -1,8 +1,11 @@
 BrunswickTrail_Script:
-	jp EnableAutoTextBoxDrawing
-	ld hl, BrunswickTrail_ScriptPointers
+	call EnableAutoTextBoxDrawing
+	ld hl, BrunswickTrailTrainerHeaders
+	ld de, BrunswickTrail_ScriptPointers
 	ld a, [wBrunswickTrailCurScript]
-	jp CallFunctionInTable
+	call ExecuteCurMapScriptInTable
+	ld [wBrunswickTrailCurScript], a
+	ret
 
 BrunswickTrail_ScriptPointers:
 	dw CheckFightingMapTrainers
@@ -15,7 +18,7 @@ BrunswickTrail_TextPointers:
 	dw GalarianZapdosText
 
 BrunswickTrailTrainerHeaders:
-	def_trainers 0
+	def_trainers
 CactusTrainerHeader:
 	trainer EVENT_BEAT_CACTUS, 0, CactusBattleText, CactusBattleText, CactusBattleText
 GalarianZapdosTrainerHeader:

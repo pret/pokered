@@ -640,9 +640,10 @@
 	const EVENT_BEAT_MEW
 	const_skip 7
 	const EVENT_BEAT_MOLTRES
-	;const_skip 7
-	;const EVENT_BEAT_OMEGA
 	const_skip 7
+	const EVENT_BEAT_CACTUS
+	const EVENT_BEAT_ZAPDOSG
+	const_skip 6
 	const EVENT_BEAT_DRAGONITE 
 
 ; Celadon University, Salesman
@@ -785,8 +786,6 @@
 
 ; Safari Zone events
 	const_next $880
-	const EVENT_BEAT_CACTUS
-	const EVENT_BEAT_ZAPDOSG
 	const EVENT_GOT_HM03
 	const EVENT_GOT_MELTAN
 

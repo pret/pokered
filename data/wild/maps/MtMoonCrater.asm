@@ -7,9 +7,9 @@ MtMoonCraterMons:
 	db 52, DUGTRIO
 	db 55, ESPEON
 	db 55, UMBREON
-	db 56, SANDY_SHOCKS
+	db 50, SANDY_SHOCKS
 	db 50, SCREAM_TAIL
-	db 50, CHANSEY ; I don't like this but I also don't like the Paradox Pokemon not both being 4%. Sue me.
+	db 56, CHANSEY ; I don't like this but I also don't like the Paradox Pokemon not both being 4%. Sue me.
 	end_grass_wildmons
 	
 	def_water_wildmons 10 ; encounter rate
