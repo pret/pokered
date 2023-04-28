@@ -224,7 +224,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const ROCKET_HIDEOUT_B3F,            15, 14 ; $CA	- Currently unused
 	map_const ROCKET_HIDEOUT_B4F,            15, 12 ; $CB	- Currently unused
 	map_const ROCKET_HIDEOUT_ELEVATOR,        3,  4 ; $CC	- Currently unused
-	map_const UNUSED_MAP_CC,                  0,  0 ; $CD	- Unused
+	map_const CITRINE_MART,             	  4,  4  ; $CD	- was UNUSED_MAP_CC
 	map_const UNUSED_MAP_CD,                  0,  0 ; $CE	- Unused
 	map_const UNUSED_MAP_CE,                  0,  0 ; $CF	- Unused
 	map_const SILPH_CO_2F,                   15,  9 ; $D0

@@ -26,4 +26,11 @@ BookshelfTileIDs:
 	bookshelf_tile PREGYM,		 $57, BookOrSculptureText
 	bookshelf_tile ROCKETHOUSE,  $38, BookOrSculptureText
 	bookshelf_tile ROCKETHOUSE,  $39, BookOrSculptureText
+	bookshelf_tile BETAMART,	 $38, PokemonStuffText
+	bookshelf_tile BETAMART,	 $39, PokemonStuffText
+	bookshelf_tile BETAMART,	 $3B, PokemonStuffText
+	bookshelf_tile BETAMART,	 $31, BookOrSculptureText
+	bookshelf_tile BETAMART,	 $30, BookOrSculptureText
+	bookshelf_tile BETAMART,	 $4E, PokemonStuffText
+	bookshelf_tile BETAMART,	 $4F, PokemonStuffText
 	db -1 ; end

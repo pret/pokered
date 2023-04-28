@@ -74,3 +74,6 @@ Celeste_Block::		INCBIN "gfx/blocksets/celeste.bst"
 
 RocketHouse_GFX::		INCBIN "gfx/tilesets/rockethouse.2bpp"
 RocketHouse_Block::		INCBIN "gfx/blocksets/rockethouse.bst"
+
+BetaMart_GFX::		INCBIN "gfx/tilesets/betamart.2bpp"
+BetaMart_Block::		INCBIN "gfx/blocksets/betamart.bst"

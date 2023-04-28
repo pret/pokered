@@ -206,8 +206,8 @@ MapHeaderPointers::
 	dw RocketHideoutB3F_h
 	dw RocketHideoutB4F_h
 	dw RocketHideoutElevator_h
-	dw RocketHideoutElevator_h ; UNUSED_MAP_CC
-	dw RocketHideoutElevator_h ; UNUSED_MAP_CD
+	dw CitrineMart_h ; UNUSED_MAP_CC
+	dw RocketHideoutElevator_h ; UNUSED_MAP_CD, used hideout elevator
 	dw RocketHideoutElevator_h ; UNUSED_MAP_CE
 	dw SilphCo2F_h
 	dw SilphCo3F_h

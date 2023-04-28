@@ -29,4 +29,5 @@
 	const CITRINE	   ; 25
 	const CELESTE	   ; 26
 	const ROCKETHOUSE
+	const BETAMART
 DEF NUM_TILESETS EQU const_value

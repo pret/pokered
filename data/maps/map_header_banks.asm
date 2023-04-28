@@ -206,7 +206,7 @@ MapHeaderBanks::
 	db BANK(RocketHideoutB3F_h)
 	db BANK(RocketHideoutB4F_h)
 	db BANK(RocketHideoutElevator_h)
-	db $01 ; UNUSED_MAP_CC
+	db BANK(CitrineMart_h) ; was UNUSED_MAP_CC
 	db $01 ; UNUSED_MAP_CD
 	db $01 ; UNUSED_MAP_CE
 	db BANK(SilphCo2F_h)

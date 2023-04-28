@@ -289,6 +289,7 @@ INCLUDE "text/SilphGauntlet1F.asm"
 INCLUDE "text/SilphGauntlet4F.asm"
 INCLUDE "text/SilphGauntlet7F.asm"
 INCLUDE "text/CitrinePokecenter.asm"
+INCLUDE "text/CitrineMart.asm"
 
 SECTION "Pokédex Text", ROMX
 

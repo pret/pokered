@@ -1340,3 +1340,8 @@ INCLUDE "data/maps/headers/CitrinePokecenter.asm"
 INCLUDE "scripts/CitrinePokecenter.asm"
 INCLUDE "data/maps/objects/CitrinePokecenter.asm"
 CitrinePokecenter_Blocks: INCBIN "maps/CitrinePokecenter.blk"
+
+INCLUDE "data/maps/headers/CitrineMart.asm"
+INCLUDE "scripts/CitrineMart.asm"
+INCLUDE "data/maps/objects/CitrineMart.asm"
+CitrineMart_Blocks: INCBIN "maps/CitrineMart.blk"

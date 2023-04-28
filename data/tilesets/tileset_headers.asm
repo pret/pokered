@@ -37,4 +37,5 @@ Tilesets:
 	tileset Citrine,	 -1,  -1,  -1, $3F, TILEANIM_WATER_FLOWER
 	tileset Celeste,	 -1,  -1,  -1, $18, TILEANIM_WATER_FLOWER
 	tileset RocketHouse, $0A,  -1,  -1, -1, TILEANIM_NONE
+	tileset BetaMart,    $18, -1, -1,  -1, TILEANIM_NONE
 	assert_table_length NUM_TILESETS

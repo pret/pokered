@@ -49,8 +49,6 @@ Interior_Coll::
 Cavern_Coll::
 	coll_tiles $05, $15, $18, $1a, $20, $21, $22, $2a, $2d, $30
 
-	coll_tiles ; unused
-
 Lobby_Coll::
 	coll_tiles $14, $17, $1a, $1c, $20, $38, $45
 
@@ -80,3 +78,6 @@ Celeste_Coll::
 
 RocketHouse_Coll::
 	coll_tiles $13, $31, $01, $53
+
+BetaMart_Coll::
+	coll_tiles $01, $11, $1C, $1D, $1E, $1F, $0C, $0D, $0E, $0F, $4D, $4C
