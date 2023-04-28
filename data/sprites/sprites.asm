@@ -80,6 +80,12 @@ SpriteSheetPointerTable:
 	overworld_sprite JamesSprite, 12            ; SPRITE_JAMES
 	overworld_sprite CatSprite, 12 ; SPRITE_CAT
 	overworld_sprite SmallBirdSprite, 12 ; SPRITE_SMALL_BIRD
+	overworld_sprite ArbokSprite, 12 ; SPRITE_ARBOK
+	overworld_sprite KoffingSprite, 12 ; SPRITE_KOFFING
+	overworld_sprite DiglettSprite, 12 ; SPRITE_DIGLETT
+	overworld_sprite VoltorbSprite, 12 ; SPRITE_VOLTORB
+	overworld_sprite GengarSprite, 12 ; SPRITE_GENGAR
+	overworld_sprite MagikarpSprite, 12 ; SPRITE_MAGIKARP
 	overworld_sprite PokeBallSprite, 4          ; SPRITE_POKE_BALL
 	overworld_sprite FossilSprite, 4            ; SPRITE_FOSSIL
 	overworld_sprite BoulderSprite, 4           ; SPRITE_BOULDER
@@ -87,9 +93,9 @@ SpriteSheetPointerTable:
 	overworld_sprite PokedexSprite, 4           ; SPRITE_POKEDEX
 	overworld_sprite ClipboardSprite, 4         ; SPRITE_CLIPBOARD
 	overworld_sprite SnorlaxSprite, 4           ; SPRITE_SNORLAX
-	overworld_sprite FakeTreeSprite, 4          ; was SPRITE_UNUSED_OLD_AMBER
+	overworld_sprite FakeTreeSprite, 4          ; SPRITE_FAKE_TREE, was SPRITE_UNUSED_OLD_AMBER
 	overworld_sprite OldAmberSprite, 4          ; SPRITE_OLD_AMBER
 	overworld_sprite GamblerAsleepSprite, 4     ; SPRITE_UNUSED_GAMBLER_ASLEEP_1
-	overworld_sprite GamblerAsleepSprite, 4     ; SPRITE_UNUSED_GAMBLER_ASLEEP_2
+	overworld_sprite PoliwagSprite, 4     ; was SPRITE_UNUSED_GAMBLER_ASLEEP_2
 	overworld_sprite GamblerAsleepSprite, 4     ; SPRITE_GAMBLER_ASLEEP
 	assert_table_length NUM_SPRITES

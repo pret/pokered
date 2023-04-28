@@ -7,3 +7,7 @@ _DiglettsCaveRoute2Text1::
 	line "FLASH could light"
 	cont "it up..."
 	done
+
+_DiglettsCaveRoute2Diglett::
+	text "Digda!"
+	done

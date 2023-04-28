@@ -75,6 +75,12 @@
 	const SPRITE_JAMES                   ; $46
 	const SPRITE_CAT
 	const SPRITE_SMALL_BIRD
+	const SPRITE_ARBOK
+	const SPRITE_KOFFING
+	const SPRITE_DIGLETT
+	const SPRITE_VOLTORB
+	const SPRITE_GENGAR
+	const SPRITE_MAGIKARP
 DEF FIRST_STILL_SPRITE EQU const_value
 	const SPRITE_POKE_BALL               ; $47
 	const SPRITE_FOSSIL                  ; $48
@@ -86,6 +92,7 @@ DEF FIRST_STILL_SPRITE EQU const_value
 	const SPRITE_FAKE_TREE        ; $4e was SPRITE_UNUSED_OLD_AMBER
 	const SPRITE_OLD_AMBER               ; $4f
 	const SPRITE_UNUSED_GAMBLER_ASLEEP_1 ; $50
-	const SPRITE_UNUSED_GAMBLER_ASLEEP_2 ; $51
+	const SPRITE_POLIWAG 				 ; $51 UNUSED_GAMBLER_ASLEEP_2
 	const SPRITE_GAMBLER_ASLEEP          ; $52
 DEF NUM_SPRITES EQU const_value - 1
+;there are pidgey, and rattata sprites that I can't find discernible use for yet.

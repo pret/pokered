@@ -14,6 +14,6 @@ CeladonUniversityOutside_Object:
 	object_event 25, 20, SPRITE_SUPER_NERD, WALK, DOWN, 4 ; trainer
 	object_event  4, 27, SPRITE_FISHER, WALK, LEFT, 5 ; Original SPRITE_ROCKER replaced. Reason: maximum of 10 sprites per set
 	object_event 33, 16, SPRITE_GIRL, WALK, DOWN, 6 ; Original SPRITE_BEAUTY replaced. Reason: same as above
-	object_event  7, 22, SPRITE_SEEL, WALK, RIGHT, 7 ; Static sprite. Reason: same as above and used the slot 11
-	object_event 34, 25, SPRITE_SEEL, WALK, LEFT, 7 ; Static sprite. Reason: same as above
+	object_event  7, 22, SPRITE_MAGIKARP, WALK, RIGHT, 7 ; Static sprite. Reason: same as above and used the slot 11
+	object_event 34, 25, SPRITE_MAGIKARP, WALK, LEFT, 7 ; Static sprite. Reason: same as above
 	def_warps_to CELADON_UNIVERSITY_OUTSIDE

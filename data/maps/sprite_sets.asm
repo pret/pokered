@@ -131,7 +131,7 @@ SpriteSets:
 	db SPRITE_MONSTER
 	db SPRITE_SUPER_NERD ; Original: SPRITE_GUARD
 	db SPRITE_ROCKET
-	db SPRITE_SEEL ; Original: SPRITE_POKE_BALL (static sprite)
+	db SPRITE_MAGIKARP ; Original: SPRITE_POKE_BALL (static sprite)
 	db SPRITE_SNORLAX
 
 ; SPRITESET_INDIGO

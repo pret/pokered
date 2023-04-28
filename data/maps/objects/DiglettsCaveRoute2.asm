@@ -10,5 +10,6 @@ DiglettsCaveRoute2_Object:
 
 	def_object_events
 	object_event  3,  3, SPRITE_FISHING_GURU, STAY, NONE, 1 ; person
+	object_event  2,  3, SPRITE_DIGLETT, STAY, NONE, 2
 
 	def_warps_to DIGLETTS_CAVE_ROUTE_2

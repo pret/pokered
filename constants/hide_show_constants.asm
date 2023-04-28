@@ -35,6 +35,8 @@ DEF SHOW EQU $15
 	const HS_SAFFRON_CITY_E                ; 17
 	const HS_SAFFRON_CITY_F                ; 18
 	const HS_SAFFRON_CITY_UP_GRADE         ; 19
+	const HS_CACTUS			               ; 1A was ROUTE_2_ITEM_2
+	const HS_BRUNSWICK_ZAPDOS_G                  	   ; 1B was ROUTE_4_ITEM
 	const HS_CELESTE_ARTICUNO_G            ; 1C was unused HS_ROUTE_9_ITEM
 	const HS_ROUTE_12_SNORLAX              ; 1D
 	const HS_CELESTE_ZAPDOS_G              ; 1E X was unused HS_ROUTE_12_ITEM_1
@@ -223,8 +225,6 @@ DEF SHOW EQU $15
 	const HS_VICTORY_ROAD_1F_ITEM_1        ; D4 X
 	const HS_VICTORY_ROAD_1F_ITEM_2        ; D5 X
 	const HS_CHAMPIONS_ROOM_OAK            ; D6
-	const HS_CACTUS			               ; 1A was ROUTE_2_ITEM_2
-	const HS_ZAPDOSG                  	   ; 1B was ROUTE_4_ITEM
 	const HS_SEAFOAM_ISLANDS_1F_BOULDER_1  ; D7
 	const HS_SEAFOAM_ISLANDS_1F_BOULDER_2  ; D8
 	const HS_SEAFOAM_ISLANDS_B1F_BOULDER_1 ; D9
