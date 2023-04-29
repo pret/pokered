@@ -192,6 +192,9 @@ SetPal_Overworld:
 	jr c, .caveDefault
 	cp SEAFOAM_ISLANDS_B4F + 1
 	jr c, .seafoam
+.caveDefault
+	ld a, PAL_CAVE - 1
+	jr .town
 .celeste
 	ld a, [wCurMap]
 	cp FARAWAY_ISLAND_OUTSIDE
@@ -239,9 +242,6 @@ SetPal_Overworld:
 	jr .town
 .brunswick
 	ld a, PAL_BRUNSWICK - 1
-	jr .town
-.caveDefault
-	ld a, PAL_CAVE - 1
 	jr .town
 .seafoam
 	ld a, PAL_CYANMON - 1

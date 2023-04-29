@@ -164,8 +164,8 @@ MtMoonB2F_TextPointers:
 	dw MtMoon3Text7
 	dw PickUpItemText
 	dw PickUpItemText
-	dw MtMoonCraterGuard
 	dw MtMoon3Text_49f99
+	dw MtMoonCraterGuard
 
 MtMoon3TrainerHeaders:
 	def_trainers 2

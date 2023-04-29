@@ -35,19 +35,22 @@ DEF SHOW EQU $15
 	const HS_SAFFRON_CITY_E                ; 17
 	const HS_SAFFRON_CITY_F                ; 18
 	const HS_SAFFRON_CITY_UP_GRADE         ; 19
-	const HS_CACTUS			               ; 1A was ROUTE_2_ITEM_2
-	const HS_BRUNSWICK_ZAPDOS_G                  	   ; 1B was ROUTE_4_ITEM
-	const HS_CELESTE_ARTICUNO_G            ; 1C was unused HS_ROUTE_9_ITEM
-	const HS_ROUTE_12_SNORLAX              ; 1D
-	const HS_CELESTE_ZAPDOS_G              ; 1E X was unused HS_ROUTE_12_ITEM_1
-	const HS_ROUTE_12_ITEM_2               ; 1F X
-	const HS_ROUTE_15_ITEM                 ; 20 X
-	const HS_ROUTE_16_SNORLAX              ; 21
-	const HS_ROUTE_22_RIVAL_1              ; 22
-	const HS_ROUTE_22_RIVAL_2              ; 23
-	const HS_NUGGET_BRIDGE_GUY             ; 24
-	const HS_ROUTE_24_ITEM                 ; 25 X
-	const HS_ROUTE_25_ITEM                 ; 26 X
+	const HS_ROUTE_2_ITEM_1                ; 1A X
+	const HS_ROUTE_2_ITEM_2			       ; 1B X
+	const HS_ROUTE_4_ITEM                  ; 1C X
+	const HS_ROUTE_9_ITEM
+	const HS_ROUTE_12_SNORLAX              ; 1E
+	const HS_ROUTE_12_ITEM_1
+	const HS_ROUTE_12_ITEM_2               ; 20 X
+	const HS_ROUTE_15_ITEM                 ; 21 X
+	const HS_ROUTE_16_SNORLAX              ; 22
+	const HS_ROUTE_22_RIVAL_1              ; 23
+	const HS_ROUTE_22_RIVAL_2              ; 24
+	const HS_NUGGET_BRIDGE_GUY             ; 25
+	const HS_ROUTE_24_ITEM                 ; 26 X
+	const HS_ROUTE_25_ITEM                 ; 27 X
+	const HS_CACTUS			               ; 28 was ROUTE_2_ITEM_2
+	const HS_BRUNSWICK_ZAPDOS_G            ; 29 was ROUTE_4_ITEM
 	const HS_DAISY_SITTING                 ; 27
 	const HS_DAISY_WALKING                 ; 28
 	const HS_TOWN_MAP                      ; 29
@@ -65,6 +68,9 @@ DEF SHOW EQU $15
 	const HS_CERULEAN_CAVE_1F_ITEM_1       ; 35 X
 	const HS_CERULEAN_CAVE_1F_ITEM_2       ; 36 X
 	const HS_CERULEAN_CAVE_1F_ITEM_3       ; 37 X
+	const HS_CELESTE_ZAPDOS_G              ; 35 X
+	const HS_CELESTE_ARTICUNO_G            ; 36 X
+	const HS_MOLTRES_G
 	const HS_POKEMON_TOWER_2F_RIVAL        ; 38
 	const HS_POKEMON_TOWER_3F_ITEM         ; 39 X
 	const HS_POKEMON_TOWER_4F_ITEM_1       ; 3A X
@@ -109,6 +115,7 @@ DEF SHOW EQU $15
 	const HS_BILL_POKEMON                  ; 61
 	const HS_BILL_1                        ; 62
 	const HS_BILL_2                        ; 63
+	const HS_BILLS_NIDORINO				   ; EE
 	const HS_VIRIDIAN_FOREST_ITEM_1        ; 64 X
 	const HS_VIRIDIAN_FOREST_ITEM_2        ; 65 X
 	const HS_VIRIDIAN_FOREST_ITEM_3        ; 66 X
@@ -122,6 +129,7 @@ DEF SHOW EQU $15
 	const HS_MT_MOON_B2F_FOSSIL_2          ; 6E
 	const HS_MT_MOON_B2F_ITEM_1            ; 6F X
 	const HS_MT_MOON_B2F_ITEM_2            ; 70 X
+	const HS_MT_MOON_CRATER_GUARD		   ; EC
 	const HS_SS_ANNE_2F_RIVAL              ; 71
 	const HS_SS_ANNE_1F_ROOMS_ITEM         ; 72 X
 	const HS_SS_ANNE_2F_ROOMS_ITEM_1       ; 73 X
@@ -129,6 +137,7 @@ DEF SHOW EQU $15
 	const HS_SS_ANNE_B1F_ROOMS_ITEM_1      ; 75 X
 	const HS_SS_ANNE_B1F_ROOMS_ITEM_2      ; 76 X
 	const HS_SS_ANNE_B1F_ROOMS_ITEM_3      ; 77 X
+	const HS_WUGTRIO	          		   ; E4 
 	const HS_VICTORY_ROAD_3F_ITEM_1        ; 78 X
 	const HS_VICTORY_ROAD_3F_ITEM_2        ; 79 X
 	const HS_VICTORY_ROAD_3F_BOULDER       ; 7A
@@ -148,9 +157,6 @@ DEF SHOW EQU $15
 	const HS_ROCKET_HIDEOUT_B4F_ITEM_5     ; 88
 	const HS_SILPH_CO_2F_1                 ; 89 XXX never (de)activated?
 	const HS_SILPH_CO_2F_2                 ; 8A
-	const HS_SILPH_CO_2F_3                 ; 8B
-	const HS_SILPH_CO_2F_4                 ; 8C
-	const HS_SILPH_CO_2F_5                 ; 8D
 	const HS_SILPH_CO_3F_1                 ; 8E
 	const HS_SILPH_CO_3F_2                 ; 8F
 	const HS_SILPH_CO_3F_ITEM              ; 90 X
@@ -183,9 +189,6 @@ DEF SHOW EQU $15
 	const HS_SILPH_CO_8F_1                 ; AB
 	const HS_SILPH_CO_8F_2                 ; AC
 	const HS_SILPH_CO_8F_3                 ; AD
-	const HS_SILPH_CO_9F_1                 ; AE
-	const HS_SILPH_CO_9F_2                 ; AF
-	const HS_SILPH_CO_9F_3                 ; B0
 	const HS_SILPH_CO_10F_1                ; B1
 	const HS_SILPH_CO_10F_2                ; B2
 	const HS_SILPH_CO_10F_3                ; B3 XXX never (de)activated?
@@ -196,7 +199,8 @@ DEF SHOW EQU $15
 	const HS_SILPH_CO_11F_2                ; B8
 	const HS_SILPH_CO_11F_3                ; B9
 	const HS_OMEGA                       
-	const HS_UNUSED_MAP_F4_1               ; BA XXX sprite doesn't exist
+	const HS_DRAGONITE					   ; F1
+	const HS_MOLTRES					   ; E6 
 	const HS_POKEMON_MANSION_2F_ITEM       ; BB X
 	const HS_POKEMON_MANSION_3F_ITEM_1     ; BC X
 	const HS_POKEMON_MANSION_3F_ITEM_2     ; BD X
@@ -205,6 +209,7 @@ DEF SHOW EQU $15
 	const HS_POKEMON_MANSION_B1F_ITEM_3    ; C0 X
 	const HS_POKEMON_MANSION_B1F_ITEM_4    ; C1 X
 	const HS_POKEMON_MANSION_B1F_ITEM_5    ; C2 X
+	const HS_MANSION_GUARD				   ; ED
 	const HS_SAFARI_ZONE_EAST_ITEM_1       ; C3 X
 	const HS_SAFARI_ZONE_EAST_ITEM_2       ; C4 X
 	const HS_SAFARI_ZONE_EAST_ITEM_3       ; C5 X
@@ -238,19 +243,13 @@ DEF SHOW EQU $15
 	const HS_SEAFOAM_ISLANDS_B4F_BOULDER_1 ; E1
 	const HS_SEAFOAM_ISLANDS_B4F_BOULDER_2 ; E2
 	const HS_ARTICUNO                      ; E3 
-	const HS_WUGTRIO	          		   ; E4 
+	const HS_OLD_SEA_MAP				; E8 
 	const HS_MEW	                       ; E5 
-	const HS_MOLTRES					   ; E6 
-	const HS_OLD_SEA_CHART				; E8 
 	const HS_POKEMON_MANSION_B2F_ITEM_1 ; E9
 	const HS_POKEMON_MANSION_B2F_ITEM_2 ; EA
 	const HS_ROUTE_1_OAK				; EB
-	const HS_MT_MOON_CRATER_GUARD		; EC
-	const HS_MANSION_GUARD				; ED
-	const HS_BILLS_NIDORINO				; EE
 	const HS_YUJIROU					; EF
 	const HS_YUJIROU_REMATCH			; uhhh F0?
-	const HS_DRAGONITE					; F1
 	const HS_MT_MOON_CRATER_ITEM_1         ; F2
 	const HS_MT_MOON_CRATER_ITEM_2         ; F3
 	const HS_MT_MOON_CRATER_ITEM_3         ; F4
