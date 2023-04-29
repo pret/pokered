@@ -511,16 +511,16 @@ SlotRewardPointers:
 	dw SlotReward15Text
 
 SlotReward300Text:
-	db "999@"
+	db "900@"
 
 SlotReward100Text:
-	db "500@"
+	db "400@"
 
 SlotReward8Text:
-	db "100@"
+	db "50@"
 
 SlotReward15Text:
-	db "200@"
+	db "100@"
 
 NotThisTimeText:
 	text_far _NotThisTimeText
@@ -574,7 +574,7 @@ SlotReward8Func:
 	dec [hl]
 .skip
 	ld b, $2
-	ld de, 100 ; buffed amounts start here
+	ld de, 50 ; buffed amounts start here
 	ret
 
 SlotReward15Func:
@@ -585,7 +585,7 @@ SlotReward15Func:
 	dec [hl]
 .skip
 	ld b, $4
-	ld de, 200
+	ld de, 100
 	ret
 
 SlotReward100Func:
@@ -594,7 +594,7 @@ SlotReward100Func:
 	xor a
 	ld [wSlotMachineFlags], a
 	ld b, $8
-	ld de, 500
+	ld de, 400
 	ret
 
 SlotReward300Func:
@@ -610,7 +610,7 @@ SlotReward300Func:
 .skip
 	ld [wSlotMachineAllowMatchesCounter], a
 	ld b, $14
-	ld de, 999
+	ld de, 900
 	ret
 
 YeahText:
@@ -668,7 +668,14 @@ SlotMachine_PayCoinsToPlayer:
 	ld hl, wTempCoins1
 	xor a
 	ld [hli], a
-	inc a
+	ld a, [wSlotMachineWinningSymbol]
+	cp HIGH(SLOTSBAR) + 1
+	jr c, .twentyAtATime
+	ld a, 10
+	jr .loadTemp
+.twentyAtATime
+	ld a, 20
+.loadTemp
 	ld [hl], a
 
 	ld a, 5
@@ -683,7 +690,15 @@ SlotMachine_PayCoinsToPlayer:
 	ld h, a
 	or l
 	ret z
-	ld de, -1
+
+	ld a, [wSlotMachineWinningSymbol]
+	cp HIGH(SLOTSBAR) + 1
+	jr c, .twentyAtATime2
+	ld de, -10
+	jr .doSubtract
+.twentyAtATime2
+	ld de, -20
+.doSubtract
 	add hl, de
 	ld a, l
 	ld [wPayoutCoins + 1], a

@@ -148,13 +148,17 @@ SetPal_Overworld:
 	jr z, .celeste
 	cp CITRINE
 	jr z, .citrine
+	cp FOREST
+	jr z, .forest
+	cp SHIP
+	jr z, .ship
 	ld a, [wCurMap]
 	cp FIRST_INDOOR_MAP
 	jr c, .townOrRoute
+	cp POWER_PLANT
+	jr z, .powerPlant
 	cp CERULEAN_CAVE_2F
 	jr c, .normalDungeonOrBuilding
-	cp LORELEIS_ROOM
-	jr z, .Lorelei
 	cp CELESTE_HILL
 	jr z, .celeste
 	cp CITRINE_CITY
@@ -175,32 +179,6 @@ SetPal_Overworld:
 	ld a, SET_PAL_OVERWORLD
 	ld [wDefaultPaletteCommand], a
 	ret
-.citrine
-	ld a, [wCurMap]
-	cp BRUNSWICK_TRAIL
-	jr z, .brunswick
-	cp CITRINE_CITY
-	jr c, .citrineDefault
-.citrineDefault
-	ld a, PAL_CITRINE - 1
-	jr .town
-.celeste
-	ld a, [wCurMap]
-	cp FARAWAY_ISLAND_OUTSIDE
-	jr z, .faraway
-	cp FARAWAY_ISLAND_INSIDE
-	jr z, .faraway
-	cp CELESTE_HILL
-	jr c, .celesteDefault
-.celesteDefault
-	ld a, PAL_CELESTE - 1
-	jr .town
-.faraway
-	ld a, PAL_ROUTE - 1
-	jr .town
-.brunswick
-	ld a, PAL_BRUNSWICK - 1
-	jr .town
 .PokemonTowerOrAgatha
 	ld a, PAL_GREYMON - 1
 	jr .town
@@ -214,14 +192,56 @@ SetPal_Overworld:
 	jr c, .caveDefault
 	cp SEAFOAM_ISLANDS_B4F + 1
 	jr c, .seafoam
+.celeste
+	ld a, [wCurMap]
+	cp FARAWAY_ISLAND_OUTSIDE
+	jr z, .faraway
+	cp FARAWAY_ISLAND_INSIDE
+	jr z, .faraway
+	cp CELESTE_HILL
+	jr c, .celesteDefault
+.celesteDefault
+	ld a, PAL_CELESTE - 1
+	jr .town
+.citrine
+	ld a, [wCurMap]
+	cp BRUNSWICK_TRAIL
+	jr z, .brunswick
+	cp CITRINE_CITY
+	jr c, .citrineDefault
+.citrineDefault
+	ld a, PAL_CITRINE - 1
+	jr .town
+.ship
+	ld a, PAL_VERMILION - 1
+	jr .town
+.forest
+	ld a, [wCurMap]
+	cp VIRIDIAN_FOREST
+	jr z, .viridian
+	cp SILPH_GAUNTLET_1F
+	jr z, .viridian
+	cp MT_MOON_CRATER
+	jr z, .faraway
+	cp SILPH_GAUNTLET_5F
+	jr c, .forestDefault
+.forestDefault
+	ld a, PAL_FUCHSIA - 1
+	jr .town
+.powerPlant
+	ld a, PAL_YELLOWMON - 1
+	jr .town
+.viridian
+	ld a, PAL_VIRIDIAN - 1
+	jr .town
+.faraway
+	ld a, PAL_ROUTE - 1
+	jr .town
+.brunswick
+	ld a, PAL_BRUNSWICK - 1
+	jr .town
 .caveDefault
 	ld a, PAL_CAVE - 1
-	jr .town
-.Lorelei
-	jr c, .gbcLorelei
-	jr .seafoam
-.gbcLorelei
-	xor a
 	jr .town
 .seafoam
 	ld a, PAL_CYANMON - 1

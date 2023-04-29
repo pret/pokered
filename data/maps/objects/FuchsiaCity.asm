@@ -13,14 +13,14 @@ FuchsiaCity_Object:
 	;warp_event 31, 24, FUCHSIA_GOOD_ROD_HOUSE, 1
 
 	def_bg_events
-	bg_event 15, 23, 11 ; FuchsiaCityText11
+	bg_event 29, 19, 11 ; FuchsiaCityText11
 	bg_event 25, 15, 12 ; FuchsiaCityText12
 	bg_event 17,  5, 13 ; FuchsiaCityText13
 	bg_event  6, 13, 14 ; MartSignText
 	bg_event 20, 27, 15 ; PokeCenterSignText
 	bg_event 27, 29, 16 ; FuchsiaCityText16
 	bg_event 21, 15, 17 ; FuchsiaCityText17
-	bg_event  5, 29, 18 ; FuchsiaCityText18
+	bg_event  3, 29, 18 ; FuchsiaCityText18
 	bg_event 33,  7, 19 ; FuchsiaCityText19
 	bg_event 27,  7, 20 ; FuchsiaCityText20
 	bg_event 13,  7, 21 ; FuchsiaCityText21
