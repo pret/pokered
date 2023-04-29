@@ -99,6 +99,7 @@ SFX:
 	dba SFX_Battle_34
 	dba SFX_Battle_35
 	dba SFX_Battle_36
+	dba SFX_Battle_37
 	dba SFX_Silph_Scope
 
 	dba SFX_Intro_Lunge

@@ -183,7 +183,14 @@
 	const CHARM 	 ; af
 	const SWEET_KISS   ; b0
 	const BULLET_PUNCH ; b1
-	const STRUGGLE     ; formerly a5, now b2
+	const MIRROR_SHOT  ; B2
+	const SMART_STRIKE ; B3
+	const FAKE_TEARS   ; B4
+	const FALSE_SURRENDER ; B5
+	const KOWTOW_CLEAVE ; B6
+	const DISARMING_VOICE ; B7
+	const NASTY_PLOT ; B8
+	const STRUGGLE     ; formerly a5, now B9
 DEF NUM_ATTACKS EQU const_value - 1
 
 	; Moves do double duty as animation identifiers.

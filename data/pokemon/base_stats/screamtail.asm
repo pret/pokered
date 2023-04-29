@@ -10,7 +10,7 @@
 	INCBIN "gfx/pokemon/front/screamtail.pic", 0, 1 ; sprite dimensions
 	dw ScreamTailPicFront, ScreamTailPicBack
 
-	db SING, FAIRY_WIND, DISABLE, BITE ; level 1 learnset
+	db SING, DISARMING_VOICE, DISABLE, BITE ; level 1 learnset
 	db GROWTH_SLIGHTLY_FAST ; growth rate - reusing unused exp group, seems funny
 
 	; tm/hm learnset

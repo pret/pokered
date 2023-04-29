@@ -177,6 +177,13 @@ AttackAnimationPointers:
 	dw CharmAnim
 	dw SweetKissAnim
 	dw BulletPunchAnim
+	dw MirrorShotAnim
+	dw SmartStrikeAnim
+	dw FakeTearsAnim
+	dw FalseSurrenderAnim
+	dw KowtowCleaveAnim
+	dw DisarmingVoiceAnim
+	dw NastyPlotAnim
 	dw StruggleAnim
 	assert_table_length NUM_ATTACKS
 	dw ShowPicAnim
@@ -299,7 +306,6 @@ VicegripAnim:
 	battle_anim VICEGRIP, SUBANIM_0_SLICE_BOTH_SIDES, 0, 8
 	db -1 ; end
 
-NightSlashAnim:
 GuillotineAnim:
 	battle_anim GUILLOTINE, SUBANIM_0_SLICE_BOTH_SIDES, 0, 6
 	db -1 ; end
@@ -862,6 +868,7 @@ ConfuseRayAnim:
 	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
 	db -1 ; end
 
+;ShelterAnim:
 WithdrawAnim:
 	battle_anim DEFENSE_CURL, SE_LIGHT_SCREEN_PALETTE
 	battle_anim NO_MOVE, SE_SLIDE_MON_DOWN
@@ -1147,6 +1154,7 @@ ConversionAnim:
 	battle_anim NO_MOVE, SE_DARK_SCREEN_FLASH
 	db -1 ; end
 
+MirrorShotAnim:
 TriAttackAnim:
 	battle_anim TRI_ATTACK, SE_DARK_SCREEN_FLASH
 	battle_anim NO_MOVE, SUBANIM_1_TRIANGLE_TOSS, 1, 6
@@ -1167,6 +1175,42 @@ SubstituteAnim:
 	battle_anim SUBSTITUTE, SE_SLIDE_MON_OFF
 	battle_anim NO_MOVE, SUBANIM_0_BALL_POOF, 0, 8
 	battle_anim NO_MOVE, SE_SUBSTITUTE_MON
+	db -1 ; end
+
+SmartStrikeAnim:
+	battle_anim GLARE, SE_DARK_SCREEN_FLASH
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	battle_anim SLASH, SUBANIM_0_HORN_JAB_TWICE, 0, 6
+	battle_anim NO_MOVE, SUBANIM_1_STAR_BIG, 1, 6
+	;battle_anim SCRATCH, SUBANIM_0_SCRATCHES, 0, 6
+	db -1 ; end
+
+FakeTearsAnim:
+	battle_anim WATER_GUN, SUBANIM_0_FAKE_TEARS, 0, 6
+	db -1 ; end
+
+FalseSurrenderAnim:
+	battle_anim SUBSTITUTE, SE_SLIDE_MON_OFF
+	battle_anim NO_MOVE, SUBANIM_0_BALL_POOF, 0, 8
+	battle_anim AMNESIA, SE_RESET_MON_POSITION
+	battle_anim TAKE_DOWN, SE_DARK_SCREEN_FLASH
+	db -1 ; end
+
+NightSlashAnim:
+KowtowCleaveAnim:
+	battle_anim NO_MOVE, SE_DARK_SCREEN_PALETTE
+	battle_anim SLASH, SUBANIM_0_SCRATCHES, 0, 6
+	battle_anim NO_MOVE, SE_DARK_SCREEN_FLASH
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1 ; end
+
+DisarmingVoiceAnim:
+	battle_anim DISARMING_VOICE, SUBANIM_0_HEART_1_MUSIC, 1, 6
+	db -1 ; end
+
+NastyPlotAnim:
+	battle_anim AMNESIA, SUBANIM_0_STATUS_CONFUSED, 0, 8
+	battle_anim AMNESIA, SUBANIM_0_STATUS_CONFUSED, 0, 8
 	db -1 ; end
 
 BallTossAnim:

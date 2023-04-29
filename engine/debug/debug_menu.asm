@@ -93,9 +93,9 @@ TestBattle:
 
 	; Give the player a
 	; level 20 Rhydon.
-	ld a, RHYPERIOR
+	ld a, BARUNDA
 	ld [wcf91], a
-	ld a, 20
+	ld a, 16
 	ld [wCurEnemyLVL], a
 	xor a
 	ld [wMonDataLocation], a
@@ -104,7 +104,7 @@ TestBattle:
 
 	; Fight against a
 	; level 20 Rhydon.
-	ld a, CROAKOZUNA
+	ld a, CARAPTHOR
 	ld [wCurOpponent], a
 
 	predef InitOpponent

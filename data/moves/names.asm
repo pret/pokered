@@ -1,4 +1,4 @@
-MoveNames::
+MoveNames:: ; 12chr limit
 	list_start MoveNames
 	li "POUND"
 	li "KARATE CHOP"
@@ -177,5 +177,12 @@ MoveNames::
 	li "CHARM"
 	li "SWEET KISS"
 	li "BULLET PUNCH"
+	li "MIRROR SHOT"
+	li "SMART STRIKE"
+	li "FAKE TEARS"
+	li "FALSURRENDER" ; maybe we leave this out. maybe.
+	li "KOWTOWCLEAVE"
+	li "DISARMVOICE"
+	li "NASTY PLOT"
 	li "STRUGGLE"
 	assert_list_length NUM_ATTACKS

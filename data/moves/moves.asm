@@ -188,5 +188,12 @@ Moves:
 	move CHARM,        ATTACK_DOWN2_EFFECT,          0, FAIRY,        100, 20
 	move SWEET_KISS,   CONFUSION_EFFECT,             0, FAIRY,         75, 10
 	move BULLET_PUNCH, NO_ADDITIONAL_EFFECT,        40, STEEL,        100, 30
-	move STRUGGLE,     RECOIL_EFFECT,               50, NORMAL,       100, 10
+	move MIRROR_SHOT,  ACCURACY_DOWN1_EFFECT, 		65, STEEL,		   85, 10
+	move SMART_STRIKE, SWIFT_EFFECT,                70, STEEL,        100, 10
+	move FAKE_TEARS,   SPECIAL_DOWN2_EFFECT,		 0, DARK,		  100, 20
+	move FALSE_SURRENDER, SWIFT_EFFECT,             80, DARK,         100, 10 ; figure out the actual name another time
+	move KOWTOW_CLEAVE,   SWIFT_EFFECT,             85, DARK,         100, 10
+	move DISARMING_VOICE, SWIFT_EFFECT,             40, FAIRY,        100, 10
+	move NASTY_PLOT,      SPECIAL_UP2_EFFECT,        0, DARK,         100, 10
+	move STRUGGLE,        RECOIL_EFFECT,            50, NORMAL,       100, 10
 	assert_table_length NUM_ATTACKS

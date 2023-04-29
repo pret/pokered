@@ -178,6 +178,13 @@ MoveSoundTable:
 	db SFX_BATTLE_09,          $88, $10 ; CHARM
 	db SFX_BATTLE_09,          $88, $10 ; SWEET_KISS
 	db SFX_BATTLE_0B,          $01, $80 ; BULLET_PUNCH
+	db SFX_BATTLE_29,          $e8, $ff ; MIRROR_SHOT
+	db SFX_NOT_VERY_EFFECTIVE, $09, $ff ; SMART_STRIKE
+	db SFX_BATTLE_24,          $30, $60 ; FAKE_TEARS
+	db SFX_BATTLE_20,          $00, $60 ; FALSE_SURRENDER
+	db SFX_NOT_VERY_EFFECTIVE, $11, $ff ; KOWTOW_CLEAVE
+	db SFX_BATTLE_37,          $10, $60 ; DISARMING_VOICE
+	db SFX_BATTLE_09,          $e8, $10 ; NASTY_PLOT
 	db SFX_BATTLE_0B,          $00, $80 ; STRUGGLE
 	assert_table_length NUM_ATTACKS
-	db SFX_BATTLE_0B,          $00, $80
+

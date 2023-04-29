@@ -860,6 +860,7 @@ BarundaEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
+	db 16, DISARMING_VOICE
 	db 25, SWEET_KISS
 	db 31, CONFUSE_RAY
 	db 37, CHARM
@@ -1300,9 +1301,9 @@ RibbitoEvosMoves:
 	db 7, BUBBLE
 	db 13, MEDITATE
 	db 19, WATER_GUN
-	db 27, SWIFT
-	db 32, FEINT_ATTACK
-	db 41, SUBSTITUTE
+	db 24, FEINT_ATTACK
+	db 31, SUBSTITUTE
+	db 41, KOWTOW_CLEAVE
 	db 49, HYDRO_PUMP
 	db 53, NIGHT_SLASH
 	db 0
@@ -1313,9 +1314,9 @@ CroakozunaEvosMoves:
 ; Learnset
 	db 13, MEDITATE
 	db 19, WATER_GUN
-	db 31, SWIFT
-	db 35, FEINT_ATTACK
-	db 46, SUBSTITUTE
+	db 26, FEINT_ATTACK
+	db 31, SUBSTITUTE
+	db 45, KOWTOW_CLEAVE
 	db 53, HYDRO_PUMP
 	db 58, NIGHT_SLASH
 	db 0
@@ -2447,13 +2448,13 @@ MoltresGEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
-	db 40, BITE		; Fake Tears
+	db 40, FAKE_TEARS		; Fake Tears
 	db 45, WING_ATTACK
 	db 51, BRUTAL_SWING
 	db 55, AGILITY
 	db 58, FEINT_ATTACK
-	db 62, AMNESIA		; Nasty Plot
-	db 66, NIGHT_SLASH	; False Surrender
+	db 62, NASTY_PLOT		; Nasty Plot
+	db 66, FALSE_SURRENDER	; False Surrender
 	db 70, SKY_ATTACK
 	db 0
 
@@ -2643,7 +2644,7 @@ SylveonEvosMoves:
 	db 0
 ; Learnset
 	db 8, SAND_ATTACK
-	db 16, FAIRY_WIND ; should be Disarming Voice but it hasn't been added yet
+	db 16, DISARMING_VOICE
 	db 23, QUICK_ATTACK
 	db 30, DRAININGKISS
 	db 36, DAZZLE_GLEAM
@@ -2907,7 +2908,7 @@ PorygonZEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
-	db 50, AMNESIA	; will replace with nasty plot
+	db 50, NASTY_PLOT	; will replace with nasty plot
 	db 0
 
 AnnihilapeEvosMoves:
@@ -3002,7 +3003,7 @@ PerrserkerEvosMoves:
 	db 8, SCRATCH
 	db 12, PAY_DAY
 	db 17, BITE
-	db 25, MAGNET_BOMB		; Smart Strike
+	db 25, SMART_STRIKE		; Smart Strike
 	db 29, FURY_SWIPES
 	db 32, SCREECH
 	db 36, SLASH
@@ -3060,7 +3061,7 @@ MelmetalEvosMoves:
 	db 36, ACID_ARMOR
 	db 45, MAGNET_BOMB
 	db 51, MEGA_PUNCH
-;	db 63, SMART_STRIKE
+	db 63, SMART_STRIKE
 	db 72, IRON_HEAD
 	db 81, SUBMISSION
 	db 90, HYPER_BEAM

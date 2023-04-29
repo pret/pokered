@@ -208,6 +208,7 @@
 	const SFX_BATTLE_34
 	const SFX_BATTLE_35
 	const SFX_BATTLE_36
+	const SFX_BATTLE_37
 	const SFX_SILPH_SCOPE
 
 	; AUDIO_3

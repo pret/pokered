@@ -254,6 +254,11 @@ SFX_Battle_36::
 	channel 6, SFX_Battle_36_Ch6
 	channel 8, SFX_Battle_36_Ch8
 
+SFX_Battle_37::
+	channel_count 2
+	channel 5, SFX_Battle_37_Ch5
+	channel 6, SFX_Battle_37_Ch6
+
 SFX_Silph_Scope::
 	channel_count 1
 	channel 5, SFX_Silph_Scope_Ch5

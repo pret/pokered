@@ -112,6 +112,7 @@ INCLUDE "audio/sfx/battle_33.asm"
 INCLUDE "audio/sfx/battle_34.asm"
 INCLUDE "audio/sfx/battle_35.asm"
 INCLUDE "audio/sfx/battle_36.asm"
+INCLUDE "audio/sfx/battle_37.asm"
 
 INCLUDE "audio/sfx/level_up.asm"
 INCLUDE "audio/sfx/caught_mon.asm"
