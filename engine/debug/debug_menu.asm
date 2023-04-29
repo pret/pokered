@@ -92,7 +92,7 @@ TestBattle:
 	ld [hl], a
 
 	; Give the player a
-	; level 20 Rhyperior.
+	; level 20 Rhydon.
 	ld a, RHYPERIOR
 	ld [wcf91], a
 	ld a, 20

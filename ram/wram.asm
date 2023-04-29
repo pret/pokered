@@ -470,6 +470,7 @@ wEnemySubstituteHP:: db
 
 ; The player's selected move during a test battle.
 ; InitBattleVariables sets it to the move Pound.
+; I've made this redundant by removing the checks for the move, so this can be used for anything you want.
 wTestBattlePlayerSelectedMove:: db
 
 	ds 1
