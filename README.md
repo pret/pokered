@@ -17,9 +17,9 @@ Johto baby Pokemon and regional pre-evolutions were omitted due to memory constr
 New Types:
 ====
 - Dark, Steel and Fairy types are added
-	- note that Dark and Steel use their type effectiveness from the SW97 demo
-	- note that Bite is still Normal-type
-	- note that the Clefairy, Mime Jr, and Jigglypuff lines are not Steel or Fairy-type, respectively
+	- Note that Dark and Steel use their type effectiveness from the SW97 demo
+	- Note that Bite is still Normal-type
+	- Note that the Clefairy, Mime Jr, and Jigglypuff lines are not Steel or Fairy-type, respectively
 		- This (and Bite) was done to ensure the original Kanto Pokemon were unaltered in any way
 		- While Magnemite, Magnetite, and Magneton are pure Electric, Magnezone is part-Steel.
 		- Scream Tail remains Psychic/Fairy.
@@ -170,7 +170,13 @@ Known Bugs
 
 Evolution Methods for new Pokemon
 ====
-Due to the odd way some new Pokemon evolve, methods are listed here. Beta Pokemon are included with their original methods, given their obscurity. Some Pokemon will have methods from the Spaceworld '97 demo to be closer to (or functional in the context of) RBY.
+Due to the odd way some new Pokemon evolve, methods are listed here. Beta Pokemon are included with their original methods, given their obscurity. Some Pokemon will have methods from the Spaceworld '97 demo to be closer to (or functional in the context of) RBY. To accomodate things and ensure everything makes sense, some Pokemon have also had their methods changed.
+
+Changed Methods:
+- Shellder -> Cloyster | Use Ice Stone (Accomodating Taaban)
+- Gloom -> Vileplume | Use Poison Stone (Accomodating Bellossom)
+- Nidorino -> Nidoking | L36 (Prototype method, accomodating Nidoreign)
+- Nidorina -> Nidoqueen | L36 (Prototype method, accomodating Nidoreign)
 
 New Pokemon:
 - Rhydon -> Rhyperior | Use Protector 
@@ -195,10 +201,8 @@ New Pokemon:
 - Porygon -> Porygon2 | Use Up-Grade
 - Porygon2 -> Porygon-Z | Use Dubious Disc
 - Gloom -> Bellossom | Use Leaf Stone
-- Gloom -> Vileplume | Use Poison Stone
 - Weepinbell -> Tsubomitto | Use Poison Stone
 - Shellder -> Taaban | Use Water Stone
-- Shellder -> Cloyster | Use Ice Stone
 
 Kanto Beta Pokemon:
 - Blottle -> Pendraken | L30
@@ -223,8 +227,6 @@ Kanto Beta Pokemon:
 - Kasanagi -> Carapthor | L10
 - Psyduck -> Weirduck | L22, Golduck level remains the same for Weirduck.
 - Nidorino OR Nidorina -> Nidoreign | Moon Stone
-- Nidorino -> Nidoking | L36
-- Nidorina -> Nidoqueen | L36
 
 Eeveelutions:
 - Espeon | Heart Stone 
