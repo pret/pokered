@@ -99,7 +99,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const CELESTE_HILL,                  12, 12 ; $4D	- Was copy of above & unused
 	map_const ROUTE_7_GATE,                   3,  4 ; $4E
 	map_const UNDERGROUND_PATH_ROUTE_7,       4,  4 ; $4F
-	map_const CITRINE_ROCKET_HOUSE,  		  5,  5 ; $50	- Unused, was UNDERGROUND_PATH_ROUTE_7_COPY
+	map_const CITRINE_ROCKET_HOUSE,  		  5,  5 ; $50	- was UNDERGROUND_PATH_ROUTE_7_COPY
 	map_const ROUTE_8_GATE,                   3,  4 ; $51
 	map_const UNDERGROUND_PATH_ROUTE_8,       4,  4 ; $52
 	map_const ROCK_TUNNEL_POKECENTER,         7,  4 ; $53
@@ -185,7 +185,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const SEAFOAM_ISLANDS_B3F,           15,  9 ; $A3
 	map_const SEAFOAM_ISLANDS_B4F,           15,  9 ; $A4
 	map_const CITRINE_TRADEBACK_HOUSE,        4,  4 ; $A5 - Was Vermillion Old Rod house
-	map_const CITRINE_POKECENTER,            7,  4 ; $A6 - Was Fuschia Good Rod house
+	map_const CITRINE_POKECENTER,             7,  4 ; $A6 - Was Fuschia Good Rod house
 	map_const POKEMON_MANSION_1F,            15, 14 ; $A7
 	map_const CINNABAR_GYM,                  10,  9 ; $A8
 	map_const CINNABAR_LAB,                   9,  4 ; $A9
@@ -257,7 +257,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const SILPH_CO_10F,                   8,  9 ; $EB
 	map_const SILPH_CO_11F,                   9,  9 ; $EC
 	map_const SILPH_CO_ELEVATOR,              2,  2 ; $ED
-	map_const GARNET_CAVERN_2F,             15,  9 ; $EE	- was UNUSED_MAP_ED
+	map_const GARNET_CAVERN_2F,              15,  9 ; $EE	- was UNUSED_MAP_ED
 	map_const UNDERWATER_TUNNEL,             15,  9 ; $EF	- Was UNUSED_MAP_EE
 	map_const TRADE_CENTER,                   5,  4 ; $F0
 	map_const COLOSSEUM,                      5,  4 ; $F1
@@ -267,6 +267,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const LORELEIS_ROOM,                  5,  6 ; $F5
 	map_const BRUNOS_ROOM,                    5,  6 ; $F6
 	map_const AGATHAS_ROOM,                   5,  6 ; $F7	- Maps F8 - FE currently have no data, bear in mind we need room for everything in citrine
+	map_const CINNABAR_VOLCANO_FLOORS,		 20, 20 ; $F8
 DEF NUM_MAPS EQU const_value
 
 ; Indoor maps, such as houses, use this as the Map ID in their exit warps

@@ -125,4 +125,5 @@ InternalMapEntries:
 	internal_map CELADON_UNIVERSITY_POKECENTER,  7,  4, CeladonUniversityName
 	internal_map BILLS_GARDEN,                  12,  0, SeaCottageName
 	internal_map AGATHAS_ROOM,                   0,  2, PokemonLeagueName
+	internal_map CINNABAR_VOLCANO_FLOORS,  	     3, 14, CinnabarVolcanoName
 	db -1 ; end

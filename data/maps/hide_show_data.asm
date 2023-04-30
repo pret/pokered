@@ -251,6 +251,7 @@ MapHSPointers:
 	dw NoHS
 	dw NoHS
 	dw NoHS
+	dw NoHS
 	assert_table_length NUM_MAPS
 	dw -1 ; end
 

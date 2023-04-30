@@ -49,8 +49,8 @@ SECTION "Tilesets 3", ROMX
 
 Cemetery_GFX::      INCBIN "gfx/tilesets/cemetery.2bpp"
 Cemetery_Block::    INCBIN "gfx/blocksets/cemetery.bst"
-Cavern_GFX::        INCBIN "gfx/tilesets/cavern.2bpp"
-Cavern_Block::      INCBIN "gfx/blocksets/cavern.bst"
+PreGym_GFX::		INCBIN "gfx/tilesets/pregym.2bpp" ; swapped as cavern grew too big
+PreGym_Block::		INCBIN "gfx/blocksets/pregym.bst"
 Lobby_GFX::         INCBIN "gfx/tilesets/lobby.2bpp"
 Lobby_Block::       INCBIN "gfx/blocksets/lobby.bst"
 Ship_GFX::          INCBIN "gfx/tilesets/ship.2bpp"
@@ -63,8 +63,8 @@ Underground_GFX::   INCBIN "gfx/tilesets/underground.2bpp"
 Underground_Block:: INCBIN "gfx/blocksets/underground.bst"
 
 SECTION "Tilesets 4", ROMX
-PreGym_GFX::		INCBIN "gfx/tilesets/pregym.2bpp"
-PreGym_Block::		INCBIN "gfx/blocksets/pregym.bst"
+Cavern_GFX::        INCBIN "gfx/tilesets/cavern.2bpp"
+Cavern_Block::      INCBIN "gfx/blocksets/cavern.bst"
 
 Citrine_GFX::		INCBIN "gfx/tilesets/citrine.2bpp"
 Citrine_Block::		INCBIN "gfx/blocksets/citrine.bst"

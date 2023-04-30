@@ -1250,6 +1250,11 @@ INCLUDE "scripts/AgathasRoom.asm"
 INCLUDE "data/maps/objects/AgathasRoom.asm"
 AgathasRoom_Blocks: INCBIN "maps/AgathasRoom.blk"
 
+INCLUDE "data/maps/headers/CinnabarVolcanoFloors.asm"
+INCLUDE "scripts/CinnabarVolcanoFloors.asm"
+INCLUDE "data/maps/objects/CinnabarVolcanoFloors.asm"
+CinnabarVolcanoFloors_Blocks: INCBIN "maps/CinnabarVolcanoFloors.blk"
+
 SECTION "Maps 22", ROMX ; Made this because the previous bank was filled to max.
 
 INCLUDE "data/maps/headers/CeladonUniversityOutside.asm"

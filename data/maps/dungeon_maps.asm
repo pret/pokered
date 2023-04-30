@@ -12,6 +12,7 @@ DungeonMaps1:
 	db POWER_PLANT
 	db DIGLETTS_CAVE
 	db UNDERWATER_TUNNEL
+	db CINNABAR_VOLCANO_FLOORS
 	db -1 ; end
 
 ; GetBattleTransitionID_IsDungeonMap checks if wCurMap

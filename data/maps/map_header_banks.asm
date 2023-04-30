@@ -249,4 +249,5 @@ MapHeaderBanks::
 	db BANK(LoreleisRoom_h)
 	db BANK(BrunosRoom_h)
 	db BANK(AgathasRoom_h)
+	db BANK(CinnabarVolcanoFloors_h)
 	assert_table_length NUM_MAPS

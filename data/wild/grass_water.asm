@@ -248,6 +248,7 @@ WildDataPointers:
 	dw NothingWildMons
 	dw NothingWildMons
 	dw NothingWildMons
+	dw CinnabarVolcanoFloorsWildMons
 	assert_table_length NUM_MAPS
 	dw -1 ; end
 
@@ -338,3 +339,4 @@ INCLUDE "data/wild/maps/BrunswickTrail.asm"
 INCLUDE "data/wild/maps/GarnetCavern1F.asm"
 INCLUDE "data/wild/maps/GarnetCavernB1F.asm"
 INCLUDE "data/wild/maps/GarnetCavern2F.asm"
+INCLUDE "data/wild/maps/CinnabarVolcanoFloors.asm"
