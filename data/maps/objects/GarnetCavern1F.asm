@@ -1,5 +1,5 @@
 GarnetCavern1F_Object:
-	db $03 ; border block
+	db $7d ; border block
 
 	def_warp_events
 	warp_event 24, 17, CITRINE_CITY, 5

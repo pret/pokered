@@ -1,5 +1,5 @@
 GarnetCavernB1F_Object:
-	db $03 ; border block
+	db $7d ; border block
 
 	def_warp_events
 	warp_event  3,  6, GARNET_CAVERN_1F, 9
