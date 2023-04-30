@@ -460,7 +460,7 @@ RocketHideoutB4FHS:
 	db ROCKET_HIDEOUT_B4F, $08, HIDE          ; HS_ROCKET_HIDEOUT_B4F_ITEM_4
 	db ROCKET_HIDEOUT_B4F, $09, HIDE          ; HS_ROCKET_HIDEOUT_B4F_ITEM_5
 GarnetCavernB1FHS:
-	db GARNET_CAVERN_B1F, $01, SHOW ; Galarian Articuno, SHOW for testing reasons
+	db GARNET_CAVERN_B1F, $01, SHOW           ; HS_GARNET_ARTICUNO_G, SHOW for testing reasons
 SilphCo2FHS:
 	db SILPH_CO_2F, $01, SHOW                 ; HS_SILPH_CO_2F_1
 	db SILPH_CO_2F, $02, SHOW                 ; HS_SILPH_CO_2F_2

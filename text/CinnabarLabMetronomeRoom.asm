@@ -31,7 +31,7 @@ _TM35NoRoomText::
 
 _Lab3Text2::
 	text "EEVEE can evolve"
-	line "into 1 of 3 kinds"
+	line "into 1 of 8 kinds"
 	cont "of #MON."
 	done
 
@@ -46,12 +46,16 @@ _Lab3Text3::
 	cont "ARTICUNO, ZAPDOS"
 	cont "and MOLTRES."
 
-	para "Their whereabouts"
-	line "are unknown."
-
+	para "Although their"
+	line "true whereabouts"
+	cont "are unknown,"
+	cont "MOLTRES has been"
+	cont "sighted near the"
+	cont "volcano recently."
+	
 	para "We plan to explore"
 	line "the cavern close"
-	cont "to CERULEAN."
+	cont "to CERULEAN next."
 
 	para "From: #MON"
 	line "RESEARCH TEAM"
