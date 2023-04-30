@@ -93,7 +93,7 @@ TestBattle:
 
 	; Give the player a
 	; level 20 Rhydon.
-	ld a, BARUNDA
+	ld a, ARTICUNO_G
 	ld [wcf91], a
 	ld a, 16
 	ld [wCurEnemyLVL], a
@@ -104,7 +104,7 @@ TestBattle:
 
 	; Fight against a
 	; level 20 Rhydon.
-	ld a, CARAPTHOR
+	ld a, ARTICUNO_G
 	ld [wCurOpponent], a
 
 	predef InitOpponent
