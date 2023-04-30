@@ -1345,3 +1345,18 @@ INCLUDE "data/maps/headers/CitrineMart.asm"
 INCLUDE "scripts/CitrineMart.asm"
 INCLUDE "data/maps/objects/CitrineMart.asm"
 CitrineMart_Blocks: INCBIN "maps/CitrineMart.blk"
+
+INCLUDE "data/maps/headers/GarnetCavern1F.asm"
+INCLUDE "scripts/GarnetCavern1F.asm"
+INCLUDE "data/maps/objects/GarnetCavern1F.asm"
+GarnetCavern1F_Blocks: INCBIN "maps/GarnetCavern1F.blk"
+
+INCLUDE "data/maps/headers/GarnetCavernB1F.asm"
+INCLUDE "scripts/GarnetCavernB1F.asm"
+INCLUDE "data/maps/objects/GarnetCavernB1F.asm"
+GarnetCavernB1F_Blocks: INCBIN "maps/GarnetCavernB1F.blk"
+
+INCLUDE "data/maps/headers/GarnetCavernB2F.asm"
+INCLUDE "scripts/GarnetCavernB2F.asm"
+INCLUDE "data/maps/objects/GarnetCavernB2F.asm"
+GarnetCavernB2F_Blocks: INCBIN "maps/GarnetCavernB2F.blk"

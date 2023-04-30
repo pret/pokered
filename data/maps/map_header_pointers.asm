@@ -207,8 +207,8 @@ MapHeaderPointers::
 	dw RocketHideoutB4F_h
 	dw RocketHideoutElevator_h
 	dw CitrineMart_h ; UNUSED_MAP_CC
-	dw RocketHideoutElevator_h ; UNUSED_MAP_CD, used hideout elevator
-	dw RocketHideoutElevator_h ; UNUSED_MAP_CE
+	dw GarnetCavern1F_h ; UNUSED_MAP_CD, used hideout elevator
+	dw GarnetCavernB1F_h ; UNUSED_MAP_CE, used hideout elevator
 	dw SilphCo2F_h
 	dw SilphCo3F_h
 	dw SilphCo4F_h
@@ -239,7 +239,7 @@ MapHeaderPointers::
 	dw SilphCo10F_h
 	dw SilphCo11F_h
 	dw SilphCoElevator_h
-	dw SilphCo2F_h ; UNUSED_MAP_ED
+	dw GarnetCavernB2F_h ; UNUSED_MAP_ED, used silph 2f
 	dw UnderwaterTunnel_h ; UNUSED_MAP_EE
 	dw TradeCenter_h
 	dw Colosseum_h

@@ -241,7 +241,7 @@ MapHSPointers:
 	dw SilphCo10FHS
 	dw SilphCo11FHS
 	dw NoHS
-	dw NoHS
+	dw GarnetCavernB2FHS
 	dw UnderwaterTunnelHS
 	dw NoHS
 	dw NoHS
@@ -597,6 +597,9 @@ MtMoonCraterHS:
 	db MT_MOON_CRATER, $09, SHOW              ; HS_MT_MOON_CRATER_ITEM_9
 	db MT_MOON_CRATER, $0A, SHOW              ; HS_MT_MOON_CRATER_ITEM_10
 	db MT_MOON_CRATER, $0B, SHOW              ; HS_MT_MOON_CRATER_ITEM_11
+
+GarnetCavernB2FHS:
+	; db GARNET_CAVE_B2F, $01, HIDE ; Moltres
 
 	db $FF, $01, SHOW ; end
 

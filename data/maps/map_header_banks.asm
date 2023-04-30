@@ -207,8 +207,8 @@ MapHeaderBanks::
 	db BANK(RocketHideoutB4F_h)
 	db BANK(RocketHideoutElevator_h)
 	db BANK(CitrineMart_h) ; was UNUSED_MAP_CC
-	db $01 ; UNUSED_MAP_CD
-	db $01 ; UNUSED_MAP_CE
+	db BANK(GarnetCavern1F_h) ; was UNUSED_MAP_CD
+	db BANK(GarnetCavernB1F_h) ; was UNUSED_MAP_CE
 	db BANK(SilphCo2F_h)
 	db BANK(SilphCo3F_h)
 	db BANK(SilphCo4F_h)
@@ -239,7 +239,7 @@ MapHeaderBanks::
 	db BANK(SilphCo10F_h)
 	db BANK(SilphCo11F_h)
 	db BANK(SilphCoElevator_h)
-	db $11 ; UNUSED_MAP_ED
+	db BANK(GarnetCavernB2F_h) ; was UNUSED_MAP_ED
 	db BANK(UnderwaterTunnel_h) ; UNUSED_MAP_EE
 	db BANK(TradeCenter_h)
 	db BANK(Colosseum_h)

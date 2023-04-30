@@ -51,7 +51,6 @@ INCLUDE "engine/overworld/daycare_exp.asm"
 INCLUDE "data/maps/hide_show_data.asm"
 INCLUDE "engine/overworld/field_move_messages.asm"
 INCLUDE "engine/items/inventory.asm"
-INCLUDE "engine/overworld/wild_mons.asm"
 INCLUDE "engine/items/item_effects.asm"
 INCLUDE "engine/menus/draw_badges.asm"
 INCLUDE "engine/overworld/update_map.asm"
@@ -73,6 +72,8 @@ INCLUDE "engine/events/hidden_objects/elevator.asm"
 INCLUDE "engine/events/hidden_objects/town_map.asm"
 INCLUDE "engine/events/hidden_objects/pokemon_stuff.asm"
 
+SECTION "bank3 Spillover", ROMX
+INCLUDE "engine/overworld/wild_mons.asm"
 
 SECTION "Font Graphics", ROMX
 

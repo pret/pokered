@@ -225,8 +225,8 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const ROCKET_HIDEOUT_B4F,            15, 12 ; $CB	- Currently unused
 	map_const ROCKET_HIDEOUT_ELEVATOR,        3,  4 ; $CC	- Currently unused
 	map_const CITRINE_MART,             	  4,  4  ; $CD	- was UNUSED_MAP_CC
-	map_const UNUSED_MAP_CD,                  0,  0 ; $CE	- Unused
-	map_const UNUSED_MAP_CE,                  0,  0 ; $CF	- Unused
+	map_const GARNET_CAVERN_1F,              15,  9 ; $CE	- was UNUSED_MAP_CD
+	map_const GARNET_CAVERN_B1F,             15,  9 ; $CF	- was UNUSED_MAP_CE
 	map_const SILPH_CO_2F,                   15,  9 ; $D0
 	map_const SILPH_CO_3F,                   15,  9 ; $D1
 	map_const SILPH_CO_4F,                   15,  9 ; $D2
@@ -257,7 +257,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const SILPH_CO_10F,                   8,  9 ; $EB
 	map_const SILPH_CO_11F,                   9,  9 ; $EC
 	map_const SILPH_CO_ELEVATOR,              2,  2 ; $ED
-	map_const UNUSED_MAP_ED,                  0,  0 ; $EE	- Unused
+	map_const GARNET_CAVERN_B2F,             15,  9 ; $EE	- was UNUSED_MAP_ED
 	map_const UNDERWATER_TUNNEL,             15,  9 ; $EF	- Was UNUSED_MAP_EE
 	map_const TRADE_CENTER,                   5,  4 ; $F0
 	map_const COLOSSEUM,                      5,  4 ; $F1

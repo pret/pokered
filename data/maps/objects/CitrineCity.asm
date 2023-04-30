@@ -6,6 +6,7 @@ CitrineCity_Object:
 	warp_event  9, 17, CITRINE_TRADEBACK_HOUSE, 1
 	warp_event 15, 17, CITRINE_POKECENTER, 1
 	warp_event 15, 27, CITRINE_MART, 1
+	warp_event 22,  5, GARNET_CAVERN_1F, 1
 
 	def_bg_events
 

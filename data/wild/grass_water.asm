@@ -206,8 +206,8 @@ WildDataPointers:
 	dw NothingWildMons
 	dw NothingWildMons
 	dw NothingWildMons
-	dw NothingWildMons
-	dw NothingWildMons
+	dw GarnetCavern1FWildMons
+	dw GarnetCavernB1FWildMons
 	dw NothingWildMons
 	dw NothingWildMons
 	dw NothingWildMons
@@ -238,7 +238,7 @@ WildDataPointers:
 	dw NothingWildMons
 	dw NothingWildMons
 	dw NothingWildMons
-	dw NothingWildMons
+	dw GarnetCavernB2FWildMons
 	dw UnderwaterTunnelWildMons
 	dw NothingWildMons
 	dw NothingWildMons
@@ -335,3 +335,6 @@ INCLUDE "data/wild/maps/UnderwaterTunnel.asm"
 INCLUDE "data/wild/maps/BillsGarden.asm"
 INCLUDE "data/wild/maps/CelesteHill.asm"
 INCLUDE "data/wild/maps/BrunswickTrail.asm"
+INCLUDE "data/wild/maps/GarnetCavern1F.asm"
+INCLUDE "data/wild/maps/GarnetCavernB1F.asm"
+INCLUDE "data/wild/maps/GarnetCavernB2F.asm"
