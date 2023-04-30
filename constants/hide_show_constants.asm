@@ -36,7 +36,7 @@ DEF SHOW EQU $15
 	const HS_SAFFRON_CITY_F                ; 18
 	const HS_SAFFRON_CITY_UP_GRADE         ; 19
 	const HS_ROUTE_2_ITEM_1                ; 1A X
-	const HS_ROUTE_2_ITEM_2			       ; 1B X
+	const HS_ROUTE_2_ITEM_2                ; 1B X
 	const HS_ROUTE_4_ITEM                  ; 1C X
 	const HS_ROUTE_9_ITEM                  ; 1D X
 	const HS_ROUTE_12_SNORLAX              ; 1E
@@ -49,7 +49,7 @@ DEF SHOW EQU $15
 	const HS_NUGGET_BRIDGE_GUY             ; 25
 	const HS_ROUTE_24_ITEM                 ; 26 X
 	const HS_ROUTE_25_ITEM                 ; 27 X
-	const HS_CACTUS			               ; 28 X
+	const HS_CACTUS                        ; 28 X
 	const HS_BRUNSWICK_ZAPDOS_G            ; 29 X
 	const HS_DAISY_SITTING                 ; 2A
 	const HS_DAISY_WALKING                 ; 2B
@@ -115,7 +115,7 @@ DEF SHOW EQU $15
 	const HS_BILL_POKEMON                  ; 67
 	const HS_BILL_1                        ; 68
 	const HS_BILL_2                        ; 69
-	const HS_BILLS_NIDORINO				   ; 6A
+	const HS_BILLS_NIDORINO                ; 6A
 	const HS_VIRIDIAN_FOREST_ITEM_1        ; 6B X
 	const HS_VIRIDIAN_FOREST_ITEM_2        ; 6C X
 	const HS_VIRIDIAN_FOREST_ITEM_3        ; 6D X
@@ -129,7 +129,7 @@ DEF SHOW EQU $15
 	const HS_MT_MOON_B2F_FOSSIL_2          ; 75
 	const HS_MT_MOON_B2F_ITEM_1            ; 76 X
 	const HS_MT_MOON_B2F_ITEM_2            ; 77 X
-	const HS_MT_MOON_CRATER_GUARD		   ; 78
+	const HS_MT_MOON_CRATER_GUARD          ; 78
 	const HS_SS_ANNE_2F_RIVAL              ; 79
 	const HS_SS_ANNE_1F_ROOMS_ITEM         ; 7A X
 	const HS_SS_ANNE_2F_ROOMS_ITEM_1       ; 7B X
@@ -137,7 +137,7 @@ DEF SHOW EQU $15
 	const HS_SS_ANNE_B1F_ROOMS_ITEM_1      ; 7D X
 	const HS_SS_ANNE_B1F_ROOMS_ITEM_2      ; 7E X
 	const HS_SS_ANNE_B1F_ROOMS_ITEM_3      ; 7F X
-	const HS_WUGTRIO	          		   ; 80 X 
+	const HS_WUGTRIO                       ; 80 X 
 	const HS_VICTORY_ROAD_3F_ITEM_1        ; 81 X
 	const HS_VICTORY_ROAD_3F_ITEM_2        ; 82 X
 	const HS_VICTORY_ROAD_3F_BOULDER       ; 83
@@ -199,8 +199,8 @@ DEF SHOW EQU $15
 	const HS_SILPH_CO_11F_2                ; BB
 	const HS_SILPH_CO_11F_3                ; BC
 	const HS_OMEGA                         ; BD
-	const HS_DRAGONITE					   ; BE
-	const HS_MOLTRES					   ; BF 
+	const HS_DRAGONITE                     ; BE
+	const HS_MOLTRES                       ; BF 
 	const HS_POKEMON_MANSION_2F_ITEM       ; C0 X
 	const HS_POKEMON_MANSION_3F_ITEM_1     ; C1 X
 	const HS_POKEMON_MANSION_3F_ITEM_2     ; C2 X
@@ -209,7 +209,7 @@ DEF SHOW EQU $15
 	const HS_POKEMON_MANSION_B1F_ITEM_3    ; C5 X
 	const HS_POKEMON_MANSION_B1F_ITEM_4    ; C6 X
 	const HS_POKEMON_MANSION_B1F_ITEM_5    ; C7 X
-	const HS_MANSION_GUARD				   ; C8
+	const HS_MANSION_GUARD                 ; C8
 	const HS_SAFARI_ZONE_EAST_ITEM_1       ; C9 X
 	const HS_SAFARI_ZONE_EAST_ITEM_2       ; CA X
 	const HS_SAFARI_ZONE_EAST_ITEM_3       ; CB X
@@ -247,9 +247,9 @@ DEF SHOW EQU $15
 	const HS_MEW                           ; EB 
 	const HS_POKEMON_MANSION_B2F_ITEM_1    ; EC
 	const HS_POKEMON_MANSION_B2F_ITEM_2    ; ED
-	const HS_ROUTE_1_OAK				   ; EE
-	const HS_YUJIROU					   ; EF
-	const HS_YUJIROU_REMATCH			   ; F0
+	const HS_ROUTE_1_OAK                   ; EE
+	const HS_YUJIROU                       ; EF
+	const HS_YUJIROU_REMATCH               ; F0
 	const HS_MT_MOON_CRATER_ITEM_1         ; F1
 	const HS_MT_MOON_CRATER_ITEM_2         ; F2
 	const HS_MT_MOON_CRATER_ITEM_3         ; F3

@@ -58,7 +58,7 @@
 	const GOLEM              ; $31
 	const BARUNDA            ; $32	(new)
 	const MAGMAR             ; $33
-	const BUU	             ; $34	(new)
+	const BUU                ; $34	(new)
 	const ELECTABUZZ         ; $35
 	const MAGNETON           ; $36
 	const KOFFING            ; $37
@@ -188,9 +188,9 @@
 	const WARTORTLE          ; $B3
 	const CHARIZARD          ; $B4
 	const TOTARTLE           ; $B5	(new)
-	const ARTICUNO_G		 ; $B6	(new)
-	const ZAPDOS_G			 ; $FD	(new)
-	const MOLTRES_G			 ; $FE	(new)
+	const ARTICUNO_G         ; $B6	(new)
+	const ZAPDOS_G           ; $FD	(new)
+	const MOLTRES_G          ; $FE	(new)
 	const ODDISH             ; $B9
 	const GLOOM              ; $BA
 	const VILEPLUME          ; $BB
@@ -208,11 +208,11 @@
 	const LICKILICKY         ; $C7
 	const TANGROWTH          ; $C8
 	const KLEAVOR            ; $C9
-	const TSUBOMITTO		 ; $CA
-	const STEELIX			 ; $CB
-	const BLISSEY			 ; $CC
-	const HITMONTOP 		 ; $CD
-	const CROBAT			 ; $CE
+	const TSUBOMITTO         ; $CA
+	const STEELIX            ; $CB
+	const BLISSEY            ; $CC
+	const HITMONTOP          ; $CD
+	const CROBAT             ; $CE
 	const ANIMON             ; $CF
 	const BELLOSSOM          ; $D0
 	const PORYGON2           ; $D1
@@ -237,27 +237,27 @@
 	const PERRSERKER         ; $E4
 	const SIRFETCHD          ; $E5
 	const MR_RIME            ; $E6
-	const MELTAN			 ; $E7
-	const MELMETAL		   	 ; $E8
-	const ARCANINE_H		 ; $E9
-	const ELECTRODE_H		 ; $EA
-	const RATICATE_A		 ; $EB
+	const MELTAN             ; $E7
+	const MELMETAL           ; $E8
+	const ARCANINE_H         ; $E9
+	const ELECTRODE_H        ; $EA
+	const RATICATE_A         ; $EB
 	const RAICHU_A           ; $EC
-	const SANDSLASH_A		 ; $ED
-	const NINETALES_A		 ; $EE
-	const DUGTRIO_A		     ; $EF
-	const PERSIAN_A		     ; $F0
-	const GOLEM_A		 	 ; $F1
-	const RAPIDASH_G		 ; $F2
-	const SLOWBRO_G		     ; $F3
-	const SLOWKING_G		 ; $F4
-	const MUK_A		         ; $F5
-	const EXEGGUTOR_A		 ; $F6
-	const MAROWAK_A		     ; $F7
-	const WEEZING_G		     ; $F8
-	const TAUROS_P		     ; $F9
-	const TAUROS_PA		     ; $FA
-	const TAUROS_PB		     ; $FB	
+	const SANDSLASH_A        ; $ED
+	const NINETALES_A        ; $EE
+	const DUGTRIO_A          ; $EF
+	const PERSIAN_A          ; $F0
+	const GOLEM_A            ; $F1
+	const RAPIDASH_G         ; $F2
+	const SLOWBRO_G          ; $F3
+	const SLOWKING_G         ; $F4
+	const MUK_A              ; $F5
+	const EXEGGUTOR_A        ; $F6
+	const MAROWAK_A          ; $F7
+	const WEEZING_G          ; $F8
+	const TAUROS_P           ; $F9
+	const TAUROS_PA          ; $FA
+	const TAUROS_PB          ; $FB	
 	const FOSSIL_KABUTOPS    ; $FC	(was B6)
 	const FOSSIL_AERODACTYL  ; $FD	(was B7)
 	const MON_GHOST          ; $FE	(was B8)
