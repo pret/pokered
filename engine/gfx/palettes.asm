@@ -144,8 +144,6 @@ SetPal_Overworld:
 	jr z, .PokemonTowerOrAgatha
 	cp CAVERN
 	jr z, .caveOrBruno
-	cp CELESTE
-	jr z, .celeste
 	cp CITRINE
 	jr z, .citrine
 	cp FOREST
@@ -157,12 +155,10 @@ SetPal_Overworld:
 	jr c, .townOrRoute
 	cp POWER_PLANT
 	jr z, .powerPlant
-	cp CERULEAN_CAVE_2F
-	jr c, .normalDungeonOrBuilding
 	cp CELESTE_HILL
 	jr z, .celeste
-	cp CITRINE_CITY
-	jr z, .citrine
+	cp CERULEAN_CAVE_2F
+	jr c, .normalDungeonOrBuilding
 	cp BRUNOS_ROOM
 	jr z, .caveOrBruno
 .normalDungeonOrBuilding
@@ -192,18 +188,12 @@ SetPal_Overworld:
 	jr c, .caveDefault
 	cp SEAFOAM_ISLANDS_B4F + 1
 	jr c, .seafoam
+	cp GARNET_CAVERN_B1F + 1
+	jr c, .garnet
 .caveDefault
 	ld a, PAL_CAVE - 1
 	jr .town
 .celeste
-	ld a, [wCurMap]
-	cp FARAWAY_ISLAND_OUTSIDE
-	jr z, .faraway
-	cp FARAWAY_ISLAND_INSIDE
-	jr z, .faraway
-	cp CELESTE_HILL
-	jr c, .celesteDefault
-.celesteDefault
 	ld a, PAL_CELESTE - 1
 	jr .town
 .citrine
@@ -221,9 +211,9 @@ SetPal_Overworld:
 .forest
 	ld a, [wCurMap]
 	cp VIRIDIAN_FOREST
-	jr z, .viridian
+	jr z, .faraway
 	cp SILPH_GAUNTLET_1F
-	jr z, .viridian
+	jr z, .faraway
 	cp MT_MOON_CRATER
 	jr z, .faraway
 	cp SILPH_GAUNTLET_5F
@@ -233,9 +223,6 @@ SetPal_Overworld:
 	jr .town
 .powerPlant
 	ld a, PAL_YELLOWMON - 1
-	jr .town
-.viridian
-	ld a, PAL_VIRIDIAN - 1
 	jr .town
 .faraway
 	ld a, PAL_ROUTE - 1
@@ -248,6 +235,9 @@ SetPal_Overworld:
 	jr .town
 .volcano
 	ld a, PAL_REDMON - 1
+	jr .town
+.garnet
+	ld a, PAL_GARNET - 1
 	jr .town
 
 ; used when a Pokemon is the only thing on the screen
