@@ -210,7 +210,7 @@ MapHSPointers:
 	dw NoHS
 	dw NoHS
 	dw NoHS
-	dw NoHS
+	dw GarnetCavernB1FHS
 	dw SilphCo2FHS
 	dw SilphCo3FHS
 	dw SilphCo4FHS
@@ -241,7 +241,7 @@ MapHSPointers:
 	dw SilphCo10FHS
 	dw SilphCo11FHS
 	dw NoHS
-	dw GarnetCavernB2FHS
+	dw NoHS
 	dw UnderwaterTunnelHS
 	dw NoHS
 	dw NoHS
@@ -458,6 +458,8 @@ RocketHideoutB4FHS:
 	db ROCKET_HIDEOUT_B4F, $07, SHOW          ; HS_ROCKET_HIDEOUT_B4F_ITEM_3
 	db ROCKET_HIDEOUT_B4F, $08, HIDE          ; HS_ROCKET_HIDEOUT_B4F_ITEM_4
 	db ROCKET_HIDEOUT_B4F, $09, HIDE          ; HS_ROCKET_HIDEOUT_B4F_ITEM_5
+GarnetCavernB1FHS:
+	db GARNET_CAVERN_B1F, $01, SHOW ; Galarian Articuno, SHOW for testing reasons
 SilphCo2FHS:
 	db SILPH_CO_2F, $01, SHOW                 ; HS_SILPH_CO_2F_1
 	db SILPH_CO_2F, $02, SHOW                 ; HS_SILPH_CO_2F_2
@@ -597,9 +599,6 @@ MtMoonCraterHS:
 	db MT_MOON_CRATER, $09, SHOW              ; HS_MT_MOON_CRATER_ITEM_9
 	db MT_MOON_CRATER, $0A, SHOW              ; HS_MT_MOON_CRATER_ITEM_10
 	db MT_MOON_CRATER, $0B, SHOW              ; HS_MT_MOON_CRATER_ITEM_11
-
-GarnetCavernB2FHS:
-	; db GARNET_CAVE_B2F, $01, HIDE ; Moltres
 
 	db $FF, $01, SHOW ; end
 

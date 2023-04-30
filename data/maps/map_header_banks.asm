@@ -239,7 +239,7 @@ MapHeaderBanks::
 	db BANK(SilphCo10F_h)
 	db BANK(SilphCo11F_h)
 	db BANK(SilphCoElevator_h)
-	db BANK(GarnetCavernB2F_h) ; was UNUSED_MAP_ED
+	db BANK(GarnetCavern2F_h) ; was UNUSED_MAP_ED
 	db BANK(UnderwaterTunnel_h) ; UNUSED_MAP_EE
 	db BANK(TradeCenter_h)
 	db BANK(Colosseum_h)

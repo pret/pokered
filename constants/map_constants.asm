@@ -257,7 +257,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const SILPH_CO_10F,                   8,  9 ; $EB
 	map_const SILPH_CO_11F,                   9,  9 ; $EC
 	map_const SILPH_CO_ELEVATOR,              2,  2 ; $ED
-	map_const GARNET_CAVERN_B2F,             15,  9 ; $EE	- was UNUSED_MAP_ED
+	map_const GARNET_CAVERN_2F,             15,  9 ; $EE	- was UNUSED_MAP_ED
 	map_const UNDERWATER_TUNNEL,             15,  9 ; $EF	- Was UNUSED_MAP_EE
 	map_const TRADE_CENTER,                   5,  4 ; $F0
 	map_const COLOSSEUM,                      5,  4 ; $F1

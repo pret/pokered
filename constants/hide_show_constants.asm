@@ -155,6 +155,7 @@ DEF SHOW EQU $15
 	const HS_ROCKET_HIDEOUT_B4F_ITEM_3     ; 8F X
 	const HS_ROCKET_HIDEOUT_B4F_ITEM_4     ; 90
 	const HS_ROCKET_HIDEOUT_B4F_ITEM_5     ; 91
+	const HS_GARNET_CAVERN_MOLTRES_G ; FC here right?
 	const HS_SILPH_CO_2F_1                 ; 92 XXX never (de)activated?
 	const HS_SILPH_CO_2F_2                 ; 93
 	const HS_SILPH_CO_3F_1                 ; 94
@@ -261,5 +262,4 @@ DEF SHOW EQU $15
 	const HS_MT_MOON_CRATER_ITEM_9         ; F9
 	const HS_MT_MOON_CRATER_ITEM_10        ; FA
 	const HS_MT_MOON_CRATER_ITEM_11        ; FB
-	;const HS_GARNET_CAVERN_MOLTRES_G ; FC
 DEF NUM_HS_OBJECTS EQU const_value

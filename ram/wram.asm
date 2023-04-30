@@ -2051,7 +2051,7 @@ wCeladonUniversityOutsideCurScript:: db
 wUnderwaterTunnelCurScript:: db
 wVictoryRoad2FCurScript:: db
 wVictoryRoad3FCurScript:: db
-	ds 1
+wGarnetCavernB1FCurScript:: db
 wFightingDojoCurScript:: db
 wSilphCo2FCurScript:: db
 wSilphCo3FCurScript:: db

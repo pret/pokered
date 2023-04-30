@@ -1,5 +1,5 @@
 ; Garnet Cavern will contain a mix of Rock, Ground, Steel, and Flying-type Pokemon.
-GarnetCavernB2FWildMons:
+GarnetCavern2FWildMons:
 	def_grass_wildmons 5 ; encounter rate
 	db 62, RHYDON
 	db 62, GRAVELER
