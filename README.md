@@ -162,11 +162,7 @@ Known Bugs
 - Only portions of spinner tiles animate.
 - Occasionally, menu text sets itself to scroll.
 - The lone Rocket in Viridian Gym's basement needs to be directly spoken to to be battled
-- Should be able to fly from Citrine and Brunswick (issue with tilesets)
-- Strength boulders don't fall down holes
 - Pokedex is very laggy
-- Occasionally, newly added static Pokemon remain on the map even after the battle
-- When fighting Omega in Silph Co., the Rocket you fight beforehand will disappear.
 
 Evolution Methods for new Pokemon
 ====
