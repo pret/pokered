@@ -37,7 +37,7 @@ CeladonUniversityOutsideText1: ; Starter girl
 	set 6, [hl]
 	set 7, [hl]
 	call Delay3
-	ld a, OPP_JR_TRAINER_F
+	ld a, OPP_STUDENT
 	ld [wCurOpponent], a
 	ld a, 4
 	ld [wTrainerNo], a

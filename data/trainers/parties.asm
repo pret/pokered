@@ -178,7 +178,7 @@ JrTrainerFData:
 ; Route 6
 	db 16, RATTATA, PIKACHU, 0
 	db 16, PIDGEY, PIDGEY, PIDGEY, 0
-; Unused - used in celadon university
+; Unused
 	db 22, BULBASAUR, CHARMANDER, SQUIRTLE, 0
 ; Route 9
 	db 18, ODDISH, BELLSPROUT, ODDISH, BELLSPROUT, 0
@@ -674,6 +674,8 @@ StudentData:
 	db 6, CLEFAIRY, 0
 ; Silph Gauntlet
 	db 62, CLEFABLE, PENDRAKEN, WIGGLYTUFF, BARUNDA, BELLOSSOM, SLOWKING, 0		; may revise
+; Celadon University
+	db 22, BULBASAUR, CHARMANDER, SQUIRTLE, 0
 
 FirefighterData:
 ; For Cerulean Gym

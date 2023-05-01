@@ -8,7 +8,7 @@ Route17WildMons:
 	db 26, DODUO
 	db 28, DODUO
 	db 29, GRIMER
-	db 25, EEVEE
+	db 25, PUCHIKOON
 	db 27, DODRIO
 	end_grass_wildmons
 
