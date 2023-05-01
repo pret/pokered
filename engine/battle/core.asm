@@ -4011,15 +4011,6 @@ CheckForDisobedience:
 	bit BIT_EARTHBADGE, [hl]
 	ld a, 101
 	jr nz, .next
-	bit BIT_MARSHBADGE, [hl]
-	ld a, 101
-	jr nz, .next
-	bit BIT_RAINBOWBADGE, [hl]
-	ld a, 101
-	jr nz, .next
-	bit BIT_CASCADEBADGE, [hl]
-	ld a, 101
-	jr nz, .next
 	ld a, 101
 .next
 	ld b, a

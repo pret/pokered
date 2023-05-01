@@ -117,6 +117,154 @@ VermilionCityScript1:
 	ld [wVermilionCityCurScript], a
 	ret
 
+; New Pass script begins here
+VermillionCityScript_GetPassesInBag:
+; Gets a list of Passes in the player's bag.
+; Ripped and modified from the fossil guy
+	xor a
+	ld [wFilteredBagItemsCount], a
+	ld de, wFilteredBagItems
+	ld hl, PassList
+.loop
+	ld a, [hli]
+	and a
+	jr z, .done
+	push hl
+	push de
+	ld [wd11e], a
+	ld b, a
+	predef GetQuantityOfItemInBag
+	pop de
+	pop hl
+	ld a, b
+	and a
+	jr z, .loop
+
+	; A Pass is in the bag
+	ld a, [wd11e]
+	ld [de], a
+	inc de
+	push hl
+	ld hl, wFilteredBagItemsCount
+	inc [hl]
+	pop hl
+	jr .loop
+.done
+	ld a, $ff
+	ld [de], a
+	ret
+
+PassList:
+	db S_S_TICKET
+	db OLD_SEA_MAP
+	db CITRINE_PASS
+	;db RAINBOW_PASS maybe someday
+	db 0 ; end
+
+PrintPassesInBag:
+; Prints each pass in the player's bag on a separate line in the menu.
+	ld hl, wFilteredBagItems
+	xor a
+	ldh [hItemCounter], a
+.loop
+	ld a, [hli]
+	cp $ff
+	ret z
+	push hl
+	ld [wd11e], a
+	call GetItemName
+	hlcoord 2, 2
+	ldh a, [hItemCounter]
+	ld bc, SCREEN_WIDTH * 2
+	call AddNTimes
+	ld de, wcd6d
+	call PlaceString
+	ld hl, hItemCounter
+	inc [hl]
+	pop hl
+	jr .loop
+
+PassListings:
+	ld hl, VermillionCityPassSelectionText
+	call PrintText
+	call VermillionCityScript_GetPassesInBag
+	ld hl, wd730
+	set 6, [hl]
+	xor a
+	ld [wCurrentMenuItem], a
+	ld a, A_BUTTON | B_BUTTON
+	ld [wMenuWatchedKeys], a
+	ld a, [wFilteredBagItemsCount]
+	dec a
+	ld [wMaxMenuItem], a
+	ld a, 2
+	ld [wTopMenuItemY], a
+	ld a, 1
+	ld [wTopMenuItemX], a
+	ld a, [wFilteredBagItemsCount]
+	dec a
+	ld bc, 2
+	ld hl, 3
+	call AddNTimes
+	dec l
+	ld b, l
+	ld c, $d
+	hlcoord 0, 0
+	call TextBoxBorder
+	call UpdateSprites
+	call PrintPassesInBag
+	ld hl, wd730
+	res 6, [hl]
+	call HandleMenuInput
+	bit BIT_B_BUTTON, a
+	jr nz, .cancelledPass
+	ld hl, wFilteredBagItems
+	ld a, [wCurrentMenuItem]
+	ld d, 0
+	ld e, a
+	add hl, de
+	ld a, [hl]
+	ldh [hItemToRemoveID], a
+	cp S_S_TICKET
+	jr z, .choseSSAnne
+	cp OLD_SEA_MAP
+	jr z, .choseFaraway
+	cp CITRINE_PASS
+	jr z, .choseCitrine
+; god bless the safari game and pokemon tower 7f for being the few times a forcewarp exists
+; For some reason, these aren't working properly...
+.choseSSAnne
+	jp VermilionCityText3.playerHasTicket ; Saves time and less risk of bugs
+.choseFaraway
+	ld hl, EventVermillionCityOldSeaMap
+	call PrintText
+    ld a, FARAWAY_ISLAND_OUTSIDE
+    ldh [hWarpDestinationMap], a
+    ld a, $1
+    ld [wDestinationWarpID], a
+	ld a, VERMILION_CITY
+	ld [wLastMap], a
+	call PlayMapChangeSound
+	call WarpFound2
+    jr .done
+.choseCitrine
+	ld hl, EventVermillionCityCitrinePass
+	call PrintText
+	ld a, CITRINE_CITY
+	ldh [hWarpDestinationMap], a
+	ld a, $1
+	ld [wDestinationWarpID], a
+	ld a, VERMILION_CITY
+	ld [wLastMap], a
+	call PlayMapChangeSound
+	call WarpFound2
+	jr .done
+.cancelledPass
+	ld hl, PassRefuse
+	call PrintText
+.done
+	ret
+
 VermilionCity_TextPointers:
 	dw VermilionCityText1
 	dw VermilionCityText2
@@ -160,6 +308,20 @@ VermilionCityTextSSAnneDeparted:
 
 VermilionCityText3:
 	text_asm
+	
+	; If you have either of these, go to Pass List.
+	; You only access these in the post-game, really, so it works out.
+	ld b, OLD_SEA_MAP
+	predef GetQuantityOfItemInBag
+	ld a, b
+	and a
+	jp nz, PassListings
+	ld b, CITRINE_PASS
+	predef GetQuantityOfItemInBag
+	ld a, b
+	and a
+	jp nz, PassListings
+	
 	ld a, [wObtainedBadges]
 	bit 5, a ; after obtaining marsh badge the ship returns
 	jr nz, .default
@@ -282,4 +444,24 @@ VermilionCityText13:
 
 RoingusText:
 	text_far _RoingusText
+	text_end
+
+VermillionCityPassSelectionText:
+	text_far _VermillionCityPassSelectionText
+	text_end
+
+EventVermillionCityOldSeaMap:
+	text_far _VermillionCityOldSeaMap
+	text_end
+
+EventVermillionCityCitrinePass:
+	text_far _VermillionCityCitrinePass
+	text_end
+
+EventVermillionCitySSTicket:
+	text_far _SSAnneFlashedTicketText
+	text_end
+
+PassRefuse:
+	text_far _VermillionCityHarborRefuse
 	text_end
