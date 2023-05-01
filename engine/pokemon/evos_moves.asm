@@ -713,6 +713,7 @@ PrepareTradebackMoveList:: ; I still don't know how the fuck you're a single col
 	ld hl, wPartySpecies
 	add hl, bc
 	ld a, [hl] ; a = mon id
+	dec a
 	ld [wd0b5], a	;joenote - put mon id into wram for potential later usage of GetMonHeader
 	; Get pointer to evos moves data.
 	dec a
