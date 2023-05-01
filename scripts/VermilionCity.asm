@@ -242,9 +242,6 @@ PassListings:
     ldh [hWarpDestinationMap], a
     ld a, $1
     ld [wDestinationWarpID], a
-	ld a, VERMILION_CITY
-	ld [wLastMap], a
-	call PlayMapChangeSound
 	call WarpFound2
     jr .done
 .choseCitrine
@@ -252,11 +249,8 @@ PassListings:
 	call PrintText
 	ld a, CITRINE_CITY
 	ldh [hWarpDestinationMap], a
-	ld a, $1
+	ld a, $6
 	ld [wDestinationWarpID], a
-	ld a, VERMILION_CITY
-	ld [wLastMap], a
-	call PlayMapChangeSound
 	call WarpFound2
 	jr .done
 .cancelledPass
