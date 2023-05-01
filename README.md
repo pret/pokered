@@ -162,7 +162,10 @@ Known Bugs
 - Only portions of spinner tiles animate.
 - Occasionally, menu text sets itself to scroll.
 - The lone Rocket in Viridian Gym's basement needs to be directly spoken to to be battled
-- Pokedex is very laggy
+- Pokedex is very laggy during a playthrough
+- Tradeback Tutor doesn't work properly with Rhydon
+- Vermilion Passes are very unstable (Faraway warps are weird unless you battle, Citrine outright crashes)
+- Brunswick Trail Bird event is unfinished, Zapdos causes it to crash.
 
 Evolution Methods for new Pokemon
 ====
