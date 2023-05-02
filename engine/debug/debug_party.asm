@@ -22,12 +22,12 @@ SetIshiharaTeam:
 
 IshiharaTeam:
 	db EXEGGUTOR_A, 90
-	db RHYDON, 90
-	db KANGASKHAN, 90
+	db ONIX, 90
+	db PINSIR, 90
 IF DEF(_DEBUG)
-	db FARFETCHD, 50
-	db MEOWTH, 50
-	db PIKACHU, 50
+	db DITTO, 50
+	db SCYTHER, 50
+	db SCYTHER, 50
 ENDC
 	db -1 ; end
 
