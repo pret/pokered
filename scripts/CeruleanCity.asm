@@ -145,25 +145,25 @@ CeruleanCityScript1:
 	ld a, [wRivalStarter]
 	cp STARTER2
 	jr nz, .NotSquirtle
-	ld a, $11
+	ld a, $0B
 	jr .done
 .NotSquirtle
 	cp STARTER3
 	jr nz, .Charmander
-	ld a, $12
+	ld a, $0C
 	jr .done
 .Charmander
 	cp STARTER1 ; changes start here
-	ld a, $13
+	ld a, $0D
 	jr nz, .Pikachu
 	jr .done
 .Pikachu ;
 	cp STARTER4 
 	jr nz, .Eevee
-	ld a, $14
+	ld a, $0F
 	jr .done
 .Eevee
-	ld a, $15
+	ld a, $0E
 	jr .done
 .done
 	ld [wTrainerNo], a

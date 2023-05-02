@@ -170,10 +170,10 @@ PokemonTower2Text1:
 .Pikachu ;
 	cp STARTER4 
 	jr nz, .Eevee
-	ld a, $9
+	ld a, $0A
 	jr .done
 .Eevee
-	ld a, $10
+	ld a, $9
 	jr .done
 .done
 	ld [wTrainerNo], a
