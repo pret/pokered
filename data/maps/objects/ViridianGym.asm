@@ -4,7 +4,7 @@ ViridianGym_Object:
 	def_warp_events
 	warp_event 16, 17, LAST_MAP, 5 ; front door
 	warp_event 17, 17, LAST_MAP, 5 ; front door
-	warp_event  4,  2, ROCKET_HIDEOUT_B1F, 1 ; stairs
+	warp_event  4,  2, GIOVANNIS_ROOM, 1 ; stairs
 	
 
 	def_bg_events

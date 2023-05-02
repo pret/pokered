@@ -252,6 +252,7 @@ MapHSPointers:
 	dw NoHS
 	dw NoHS
 	dw NoHS
+	dw GiovannisRoomHS
 	assert_table_length NUM_MAPS
 	dw -1 ; end
 
@@ -442,8 +443,8 @@ VictoryRoad3FHS:
 	db VICTORY_ROAD_3F, $06, SHOW             ; HS_VICTORY_ROAD_3F_ITEM_2
 	db VICTORY_ROAD_3F, $0A, SHOW             ; HS_VICTORY_ROAD_3F_BOULDER
 RocketHideoutB1FHS:
-	db ROCKET_HIDEOUT_B1F, $05, SHOW          ; HS_ROCKET_HIDEOUT_B1F_ITEM_1
-	db ROCKET_HIDEOUT_B1F, $06, SHOW          ; HS_ROCKET_HIDEOUT_B1F_ITEM_2
+	db ROCKET_HIDEOUT_B1F, $06, SHOW
+	db ROCKET_HIDEOUT_B1F, $07, SHOW
 RocketHideoutB2FHS:
 	db ROCKET_HIDEOUT_B2F, $02, SHOW          ; HS_ROCKET_HIDEOUT_B2F_ITEM_1
 	db ROCKET_HIDEOUT_B2F, $03, SHOW          ; HS_ROCKET_HIDEOUT_B2F_ITEM_2
@@ -600,7 +601,9 @@ MtMoonCraterHS:
 	db MT_MOON_CRATER, $09, SHOW              ; HS_MT_MOON_CRATER_ITEM_9
 	db MT_MOON_CRATER, $0A, SHOW              ; HS_MT_MOON_CRATER_ITEM_10
 	db MT_MOON_CRATER, $0B, SHOW              ; HS_MT_MOON_CRATER_ITEM_11
-
+GiovannisRoomHS:
+	db GIOVANNIS_ROOM, $05, SHOW          ; HS_GIOVANNIS_ROOM_ITEM_1
+	db GIOVANNIS_ROOM, $06, SHOW          ; HS_GIOVANNIS_ROOM_ITEM_2
 	db $FF, $01, SHOW ; end
 
 	assert_table_length NUM_HS_OBJECTS + 1

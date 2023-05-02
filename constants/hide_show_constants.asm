@@ -262,4 +262,6 @@ DEF SHOW EQU $15
 	const HS_MT_MOON_CRATER_ITEM_9         ; FA
 	const HS_MT_MOON_CRATER_ITEM_10        ; FB
 	const HS_MT_MOON_CRATER_ITEM_11        ; FC
+	const HS_GIOVANNIS_ROOM_ITEM_1		   ; FD
+	const HS_GIOVANNIS_ROOM_ITEM_2		   ; FE uh oh
 DEF NUM_HS_OBJECTS EQU const_value

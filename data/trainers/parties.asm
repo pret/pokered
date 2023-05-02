@@ -532,7 +532,7 @@ RocketData: ; restoring these so undefined stuff isn't pulled RIGHT NOW
 ; Route 24
 	db 15, EKANS, ZUBAT, 0
 ; Game Corner
-	db 20, RATICATE, ZUBAT, 0
+	db 22, ZUBAT, KOFFING, RATICATE, ARBOK, 0
 ; Rocket Hideout B1F
 	db 42, HYPNO, WEEZING, ARBOK, 0
 ; Rocket Hideout B1F - all now unused

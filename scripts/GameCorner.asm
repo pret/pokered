@@ -15,7 +15,7 @@ CeladonGameCornerScript_48bcf:
 	ldh a, [hRandomAdd]
 	cp $7
 	jr nc, .asm_48be2
-	ld a, $7 ; no longer makes the lucky machine a nonexistent one
+	ld a, $8
 .asm_48be2
 	srl a
 	srl a
@@ -152,7 +152,7 @@ CeladonGameCornerText2:
 	xor a
 	ldh [hMoney], a
 	ldh [hMoney + 2], a
-	ld a, $80
+	ld a, $10
 	ldh [hMoney + 1], a
 	call HasEnoughMoney
 	jr nc, .asm_48cdb
@@ -162,7 +162,7 @@ CeladonGameCornerText2:
 	xor a
 	ldh [hMoney], a
 	ldh [hMoney + 2], a
-	ld a, $80
+	ld a, $10
 	ldh [hMoney + 1], a
 	ld hl, hMoney + 2
 	ld de, wPlayerMoney + 2
@@ -170,13 +170,12 @@ CeladonGameCornerText2:
 	predef SubBCDPredef
 	xor a
 	ldh [hUnusedCoinsByte], a
-	ldh [hCoins + 1], a
-	ldh [hCoins + 2], a
-	ld a, $05
 	ldh [hCoins], a
-	ld de, wPlayerCoins + 2
-	ld hl, hCoins + 2
-	ld c, $3
+	ld a, $50
+	ldh [hCoins + 1], a
+	ld de, wPlayerCoins + 1
+	ld hl, hCoins + 1
+	ld c, $2
 	predef AddBCDPredef
 	call CeladonGameCornerScript_48f1e
 	ld hl, CeladonGameCornerText_48d27

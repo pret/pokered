@@ -219,7 +219,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const VERMILION_TRADE_HOUSE,          4,  4 ; $C5
 	map_const DIGLETTS_CAVE,                 20, 18 ; $C6
 	map_const VICTORY_ROAD_3F,               15,  9 ; $C7
-	map_const ROCKET_HIDEOUT_B1F,            11, 14 ; $C8
+	map_const ROCKET_HIDEOUT_B1F,            15, 14 ; $C8
 	map_const ROCKET_HIDEOUT_B2F,            15, 14 ; $C9	- Currently unused
 	map_const ROCKET_HIDEOUT_B3F,            15, 14 ; $CA	- Currently unused
 	map_const ROCKET_HIDEOUT_B4F,            15, 12 ; $CB	- Currently unused
@@ -266,8 +266,9 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const BILLS_GARDEN,                  10, 10 ; $F4	- Was UNUSED_MAP_F3
 	map_const LORELEIS_ROOM,                  5,  6 ; $F5
 	map_const BRUNOS_ROOM,                    5,  6 ; $F6
-	map_const AGATHAS_ROOM,                   5,  6 ; $F7	- Maps F8 - FE currently have no data, bear in mind we need room for everything in citrine
+	map_const AGATHAS_ROOM,                   5,  6 ; $F7	- Maps FA - FE currently have no data, bear in mind we need room for everything in citrine
 	map_const CINNABAR_VOLCANO_FLOORS,		 20, 20 ; $F8
+	map_const GIOVANNIS_ROOM,				 11, 14 ; $F9
 DEF NUM_MAPS EQU const_value
 
 ; Indoor maps, such as houses, use this as the Map ID in their exit warps

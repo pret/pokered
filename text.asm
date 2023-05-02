@@ -293,6 +293,7 @@ INCLUDE "text/CitrineMart.asm"
 INCLUDE "text/GarnetCavern1F.asm"
 INCLUDE "text/GarnetCavernB1F.asm"
 INCLUDE "text/GarnetCavern2F.asm"
+INCLUDE "text/GiovannisRoom.asm"
 
 SECTION "Pokédex Text", ROMX
 
