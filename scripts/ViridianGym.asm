@@ -219,7 +219,7 @@ GiovanniText:
 	call UpdateSprites
 	call Delay3
 	call GBFadeInFromBlack
-	call PlayDefaultMusicIfMusicBitSet
+	callfar PlayDefaultMusicIfMusicBitSet
 	jr .done
 .beforeBeat
 	ld hl, GiovanniPreBattleText
