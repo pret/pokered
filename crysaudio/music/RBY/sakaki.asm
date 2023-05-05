@@ -1,11 +1,11 @@
-Music_YellowUnusedSong::
+Music_Sakaki::
 	channel_count 4
-	channel 1, Music_YellowUnusedSong_Ch1
-	channel 2, Music_YellowUnusedSong_Ch2
-	channel 3, Music_YellowUnusedSong_Ch3
-	channel 4, Music_YellowUnusedSong_Ch4
+	channel 1, Music_Sakaki_Ch1
+	channel 2, Music_Sakaki_Ch2
+	channel 3, Music_Sakaki_Ch3
+	channel 4, Music_Sakaki_Ch4
 
-Music_YellowUnusedSong_Ch1::
+Music_Sakaki_Ch1::
 	tempo 140
 	volume 7, 7
 	duty_cycle 3
@@ -32,7 +32,7 @@ Music_YellowUnusedSong_Ch1::
 	note G_, 6
 	note A_, 12
 
-Music_YellowUnusedSong_branch_82fde::
+Music_Sakaki_branch_82fde::
 	note A_, 6
 	note A_, 2
 	note A_, 2
@@ -79,10 +79,10 @@ Music_YellowUnusedSong_branch_82fde::
 	note A_, 6
 	note G_, 6
 	note A_, 12
-	sound_loop 0, Music_YellowUnusedSong_branch_82fde
+	sound_loop 0, Music_Sakaki_branch_82fde
 
 
-Music_YellowUnusedSong_Ch2::
+Music_Sakaki_Ch2::
 	duty_cycle 2
 	note_type 8, 12, 2
 	octave 4
@@ -108,7 +108,7 @@ Music_YellowUnusedSong_Ch2::
 	note A#, 6
 	note A_, 12
 
-Music_YellowUnusedSong_branch_8302a::
+Music_Sakaki_branch_8302a::
 	note D_, 6
 	note D_, 2
 	note D_, 2
@@ -165,10 +165,10 @@ Music_YellowUnusedSong_branch_8302a::
 	note D_, 6
 	note A#, 6
 	note A_, 12
-	sound_loop 0, Music_YellowUnusedSong_branch_8302a
+	sound_loop 0, Music_Sakaki_branch_8302a
 
 
-Music_YellowUnusedSong_Ch3::
+Music_Sakaki_Ch3::
 	note_type 12, 1, 0
 	vibrato 2, 1, 5
 	rest 16
@@ -180,7 +180,7 @@ Music_YellowUnusedSong_Ch3::
 	note G_, 8
 	note A#, 8
 
-Music_YellowUnusedSong_branch_83075::
+Music_Sakaki_branch_83075::
 	note A_, 8
 	note A#, 8
 	note G_, 8
@@ -206,10 +206,10 @@ Music_YellowUnusedSong_branch_83075::
 	note D#, 8
 	note G_, 8
 	note A#, 8
-	sound_loop 0, Music_YellowUnusedSong_branch_83075
+	sound_loop 0, Music_Sakaki_branch_83075
 
 
-Music_YellowUnusedSong_Ch4::
+Music_Sakaki_Ch4::
 	toggle_noise 0
 	drum_speed 12
 	drum_note 3, 4
@@ -239,7 +239,7 @@ Music_YellowUnusedSong_Ch4::
 	drum_note 3, 4
 	drum_note 3, 4
 
-Music_YellowUnusedSong_branch_830c3::
+Music_Sakaki_branch_830c3::
 	drum_note 3, 4
 	drum_speed 8
 	drum_note 3, 2
@@ -331,4 +331,4 @@ Music_YellowUnusedSong_branch_830c3::
 	drum_note 3, 2
 	drum_note 3, 4
 	drum_note 3, 4
-	sound_loop 0, Music_YellowUnusedSong_branch_830c3
+	sound_loop 0, Music_Sakaki_branch_830c3

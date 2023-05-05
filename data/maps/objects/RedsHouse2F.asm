@@ -3,7 +3,9 @@ RedsHouse2F_Object:
 
 	def_warp_events
 	warp_event  7,  1, REDS_HOUSE_1F, 3
-	warp_event  5,  1, SILPH_GAUNTLET_7F, 1
+	;warp_event  5,  1, SILPH_GAUNTLET_7F, 1 ; - Test Chief 
+	;warp_event  5,  1, SILPH_CO_11F, 1 ; - Test Omega & Giovanni
+	warp_event  5,  1, ROCKET_HIDEOUT_B4F, 2 ; - Test Giovanni 1
 
 	def_bg_events
 

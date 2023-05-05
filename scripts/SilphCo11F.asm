@@ -250,6 +250,9 @@ SilphCo11Script0:
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $3
+	ld c, 0 ; BANK(Music_Sakaki)
+	ld a, MUSIC_SAKAKI
+	call PlayMusic
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $3

@@ -220,6 +220,9 @@ GiovanniText:
 	call GBFadeInFromBlack
 	jr .done
 .beforeBeat
+	ld c, 0 ; BANK(Music_Sakaki)
+	ld a, MUSIC_SAKAKI
+	call PlayMusic
 	ld hl, GiovanniPreBattleText
 	call PrintText
 	ld hl, wd72d
