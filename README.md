@@ -22,7 +22,7 @@ New Types:
 	- Note that the Clefairy, Mime Jr, and Jigglypuff lines are not Steel or Fairy-type, respectively
 		- This (and Bite) was done to ensure the original Kanto Pokemon were unaltered in any way
 		- While Magnemite, Magnetite, and Magneton are pure Electric, Magnezone is part-Steel.
-		- Scream Tail remains Psychic/Fairy.
+		- Scream Tail remains Fairy/Psychic.
 
 Type Matchups for Steel and Dark for reference:
 - Steel...
@@ -58,7 +58,7 @@ New areas
 	- Will contain a Battle Tower with infinite, randomised trainer parties!
 	- Garnet Cavern, located in Citrine City, houses several strong trainers and Pokémon.
 	- Brunswick Trail, south of Citrine City, is a route that leads to Celeste Hill.
-	- Celeste Hill activates an event where the Galarian Legendary Birds can be fought.
+	- Celeste Hill activates an event where the Galarian Legendary Birds can be fought. Moltres will challenge you right there, while the other two flee to the previously mentioned locations.
 - Underwater Tunnel connects Route 25 and Route 10.
 - Cinnabar Volcano is a new area that houses Moltres, allowing it to be obtained before Victory Road.
 - Faraway Island from Pokemon Emerald has been added, where you can find Mew. It also has its own wild encounters, as well as an improved translation on its sign, enhancing its appearance from its source material.
@@ -73,8 +73,8 @@ Improved areas
 - Cinnabar Lab's Trade Room now features the Trader, who will evolve trade-evolving Pokemon for you!
 - Rock Tunnel has a more workable map, now being easier to go through and having new areas to explore. Includes a way to get renewable fossils, items, and other interesting bits and pieces. Overall, it makes Flash much more rewarding to bring, showing you where the items and content are instead of being an inconvenience. 
 - Diglett's Cave has a more detailed map with Onix, Wiglett, and Wugtrio also appearing!
-- Route 25 has been given a facelift, adding Bill's Lighthouse!
-- Cinnabar Island is a lot bigger, and has a new location added to it. The mansion seems different too...
+- Route 25 has been given a facelift, adding Bill's Lighthouse in place of the Sea Cottage.
+- Cinnabar Island is a lot bigger, with the volcano being added to it. The mansion seems different too...
 - Pokemon Tower was shortened, being less intensive and adding room for more maps.
 - Silph Co's pathing was completely overhauled to make navigating it less tedious.
 - Viridian Gym now has a new area once you make Giovanni leave.
@@ -108,10 +108,10 @@ QoL Enhancements
 	- Psyduck learns Amnesia at Lv15 (Stadium)
 - Yellow learnset changes are imported; eg. Flash Venonat, with tweaks made to ensure nothing is lost from RB either.
 - The Game Corner in general is massively buffed, making everything far more worth going for;
-	- 3x Cherry now gives 100 coins (used to be 8)
-	- 3x Poliwag/Diglett/Jigglypuff now gives 200 coins (used to be 15)
-	- 3x BAR now gives 500 coins (used to be 100)
-	- 3x 7s now gives 999 coins (used to be 300)
+	- 3x Cherry now gives 50 coins (used to be 8)
+	- 3x Arbok/Koffing/Meowth now gives 100 coins (used to be 15)
+	- 3x BAR now gives 400 coins (used to be 100)
+	- 3x 7s now gives 900 coins (used to be 300)
 - Game Corner prizes have been altered;
 	- Blue's superior prices are used, so Porygon only costs 6500 coins.
 	- New prizes include: Cubone, Blastyke, and Cactus.
