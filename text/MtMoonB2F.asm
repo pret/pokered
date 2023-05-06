@@ -134,3 +134,26 @@ _MtMoonCraterGuard::
 	cont "time."
 	
 	done
+
+_MtMoonJessieJamesText1::
+	text "Stop right there!@"
+	text_end
+
+_MtMoonJessieJamesText2::
+	text "That fossil is"
+	line "TEAM ROCKET's!"
+
+	para "Surrender now, or "
+	line "prepare to fight!"
+	done
+
+_MtMoonJessieJamesText3::
+	text "A"
+	line "brat beat us?"
+	prompt
+
+_MtMoonJessieJamesText4::
+	text "TEAM ROCKET, blast"
+	line "off at the speed"
+	cont "of light!@"
+	text_end
