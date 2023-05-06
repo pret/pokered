@@ -68,17 +68,19 @@ New areas
 
 Improved areas
 ====
-- Some barriers to travel across the region have been removed (for example, Pewter City can be left without defeating Brock) allowing for more open world gameplay.
+- Some barriers to travel across the region have been removed (for example, Pewter City can be left without defeating Brock) allowing for more open world gameplay. Not all, though!
 	- To encourage this, Gym Leaders now have level scaling, giving more consistent challenge across the game. 
 - Cinnabar Lab's Trade Room now features the Trader, who will evolve trade-evolving Pokemon for you!
+- Giovanni now uses his unused theme song from Yellow, and has his LGPE monologue in the Rocket Hideout.
+- Jessie and James have been backported from Yellow, appearing in Mt. Moon, Rocket Hideout, Pokemon Tower, and Silph Co. Additionally, they have a post-game fight.
 - Rock Tunnel has a more workable map, now being easier to go through and having new areas to explore. Includes a way to get renewable fossils, items, and other interesting bits and pieces. Overall, it makes Flash much more rewarding to bring, showing you where the items and content are instead of being an inconvenience. 
-- Diglett's Cave has a more detailed map with Onix, Wiglett, and Wugtrio also appearing!
+- Diglett's Cave has a more detailed map with Onix, Wiglett, and Wugtrio also appearing! It also has its beta music!
 - Route 25 has been given a facelift, adding Bill's Lighthouse in place of the Sea Cottage.
 - Cinnabar Island is a lot bigger, with the volcano being added to it. The mansion seems different too...
 - Pokemon Tower was shortened, being less intensive and adding room for more maps.
 - Silph Co's pathing was completely overhauled to make navigating it less tedious.
-- Viridian Gym now has a new area once you make Giovanni leave.
-- The S.S. Anne now returns after getting the Marsh Badge!
+- Viridian Gym now has a minor new area once you make Giovanni leave.
+- The S.S. Anne now returns after getting the Marsh Badge and features trades for Galarian forms and Paldean Tauros.
 - After entering the Hall of Fame, try visiting Route 1!
 
 QoL Enhancements

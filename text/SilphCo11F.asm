@@ -140,3 +140,30 @@ _OmegaBattleText::
 	
 	para "Bzzt! Clank!"
 	prompt
+
+; Fun fact: For some reason, this text is stored in 10F. Seems to be a beta element - they ARE encountered in 11F.
+_SilphCoJessieJamesText1::
+	text "Hold it right"
+	line "there, brat!@"
+	text_end
+
+_SilphCoJessieJamesText2::
+	text "Our BOSS is in a"
+	line "meeting!"
+
+	para "You better not"
+	line "disturb him!"
+	done
+
+_SilphCoJessieJamesText3::
+	text "Like"
+	line "always..."
+	prompt
+
+_SilphCoJessieJamesText4::
+	text "TEAM ROCKET, blast"
+	line "off at the speed"
+	cont "of light!"
+
+	para "Again...@"
+	text_end
