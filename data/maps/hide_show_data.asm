@@ -211,7 +211,7 @@ MapHSPointers:
 	dw NoHS
 	dw NoHS
 	dw GarnetCavernB1FHS
-	dw SilphCo2FHS
+	dw NoHS
 	dw SilphCo3FHS
 	dw SilphCo4FHS
 	dw SilphCo5FHS
@@ -361,9 +361,9 @@ PokemonTower6FHS:
 	db POKEMON_TOWER_6F, $04, SHOW            ; HS_POKEMON_TOWER_6F_ITEM_1
 	db POKEMON_TOWER_6F, $05, SHOW            ; HS_POKEMON_TOWER_6F_ITEM_2
 PokemonTower7FHS:
-	db POKEMON_TOWER_7F, $01, HIDE ; jessie & james?
-	db POKEMON_TOWER_7F, $02, HIDE
-	db POKEMON_TOWER_7F, $03, SHOW
+	db POKEMON_TOWER_7F, $01, HIDE            ; HS_POKEMON_TOWER_7F_JESSIE
+	db POKEMON_TOWER_7F, $02, HIDE            ; HS_POKEMON_TOWER_7F_JAMES
+	db POKEMON_TOWER_7F, $03, SHOW            ; HS_POKEMON_TOWER_7F_MR_FUJI
 MrFujisHouseHS:
 	db MR_FUJIS_HOUSE, $05, HIDE              ; HS_MR_FUJIS_HOUSE_MR_FUJI
 CeladonMansionRoofHouseHS:
@@ -463,9 +463,6 @@ RocketHideoutB4FHS:
 	db ROCKET_HIDEOUT_B4F, $09, HIDE          ; HS_ROCKET_HIDEOUT_B4F_ITEM_5
 GarnetCavernB1FHS:
 	db GARNET_CAVERN_B1F, $01, SHOW           ; HS_GARNET_ARTICUNO_G, SHOW for testing reasons
-SilphCo2FHS:
-	db SILPH_CO_2F, $01, SHOW                 ; HS_SILPH_CO_2F_1
-	db SILPH_CO_2F, $02, SHOW                 ; HS_SILPH_CO_2F_2
 SilphCo3FHS:
 	db SILPH_CO_3F, $02, SHOW                 ; HS_SILPH_CO_3F_1
 	db SILPH_CO_3F, $03, SHOW                 ; HS_SILPH_CO_3F_2
@@ -603,8 +600,8 @@ MtMoonCraterHS:
 	db MT_MOON_CRATER, $0A, SHOW              ; HS_MT_MOON_CRATER_ITEM_10
 	db MT_MOON_CRATER, $0B, SHOW              ; HS_MT_MOON_CRATER_ITEM_11
 GiovannisRoomHS:
-	db GIOVANNIS_ROOM, $05, SHOW          ; HS_GIOVANNIS_ROOM_ITEM_1
-	db GIOVANNIS_ROOM, $06, SHOW          ; HS_GIOVANNIS_ROOM_ITEM_2
+	db GIOVANNIS_ROOM, $05, SHOW              ; HS_GIOVANNIS_ROOM_ITEM_1
+	db GIOVANNIS_ROOM, $06, SHOW              ; HS_GIOVANNIS_ROOM_ITEM_2
 	db $FF, $01, SHOW ; end
 
 	assert_table_length NUM_HS_OBJECTS + 1
