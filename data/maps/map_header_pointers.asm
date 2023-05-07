@@ -234,7 +234,7 @@ MapHeaderPointers::
 	dw NameRatersHouse_h
 	dw CeruleanBadgeHouse_h
 	dw CinnabarVolcano_h ; UNUSED_MAP_E7
-	dw RockTunnelB1F_h
+	dw CinnabarVolcanoFloors_h
 	dw SilphCo9F_h
 	dw SilphCo10F_h
 	dw SilphCo11F_h
@@ -249,6 +249,6 @@ MapHeaderPointers::
 	dw LoreleisRoom_h
 	dw BrunosRoom_h
 	dw AgathasRoom_h
-	dw CinnabarVolcanoFloors_h
+	dw RockTunnelB1F_h
 	dw GiovannisRoom_h
 	assert_table_length NUM_MAPS

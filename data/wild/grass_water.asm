@@ -233,7 +233,7 @@ WildDataPointers:
 	dw NothingWildMons
 	dw NothingWildMons
 	dw CinnabarVolcanoWildMons
-	dw RockTunnelB1FWildMons
+	dw CinnabarVolcanoFloorsWildMons
 	dw NothingWildMons
 	dw NothingWildMons
 	dw NothingWildMons
@@ -248,7 +248,7 @@ WildDataPointers:
 	dw NothingWildMons
 	dw NothingWildMons
 	dw NothingWildMons
-	dw CinnabarVolcanoFloorsWildMons
+	dw RockTunnelB1FWildMons
 	dw NothingWildMons
 	assert_table_length NUM_MAPS
 	dw -1 ; end

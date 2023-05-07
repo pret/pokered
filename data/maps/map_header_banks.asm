@@ -234,7 +234,7 @@ MapHeaderBanks::
 	db BANK(NameRatersHouse_h)
 	db BANK(CeruleanBadgeHouse_h)
 	db BANK(CinnabarVolcano_h) ; $01 UNUSED_MAP_E7
-	db BANK(RockTunnelB1F_h)
+	db BANK(CinnabarVolcanoFloors_h)
 	db BANK(SilphCo9F_h)
 	db BANK(SilphCo10F_h)
 	db BANK(SilphCo11F_h)
@@ -249,6 +249,6 @@ MapHeaderBanks::
 	db BANK(LoreleisRoom_h)
 	db BANK(BrunosRoom_h)
 	db BANK(AgathasRoom_h)
-	db BANK(CinnabarVolcanoFloors_h)
+	db BANK(RockTunnelB1F_h)
 	db BANK(GiovannisRoom_h)
 	assert_table_length NUM_MAPS

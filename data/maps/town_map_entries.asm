@@ -118,12 +118,12 @@ InternalMapEntries:
 	internal_map CERULEAN_CAVE_1F,               9,  1, CeruleanCaveName
 	internal_map NAME_RATERS_HOUSE,             14,  5, LavenderTownName
 	internal_map CERULEAN_BADGE_HOUSE,          10,  2, CeruleanCityName
-	internal_map CINNABAR_VOLCANO, 	             3, 14, CinnabarVolcanoName
-	internal_map ROCK_TUNNEL_B1F,               14,  3, RockTunnelName
+	internal_map CINNABAR_VOLCANO_FLOORS,  	     3, 14, CinnabarVolcanoName
 	internal_map SILPH_CO_ELEVATOR,             10,  5, SilphCoName
 	internal_map UNDERWATER_TUNNEL,             14,  1, UnderwaterTunnelName
 	internal_map CELADON_UNIVERSITY_POKECENTER,  7,  4, CeladonUniversityName
 	internal_map BILLS_GARDEN,                  12,  0, SeaCottageName
 	internal_map AGATHAS_ROOM,                   0,  2, PokemonLeagueName
-	internal_map CINNABAR_VOLCANO_FLOORS,  	     3, 14, CinnabarVolcanoName
+	internal_map ROCK_TUNNEL_B1F,               14,  3, RockTunnelName
+	internal_map GIOVANNIS_ROOM,                 2,  8, ViridianCityName
 	db -1 ; end

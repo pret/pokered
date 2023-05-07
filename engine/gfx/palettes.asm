@@ -144,13 +144,13 @@ SetPal_Overworld:
 	jr z, .PokemonTowerOrAgatha
 	cp CAVERN
 	jr z, .caveOrBruno
-	cp CITRINE
-	jr z, .citrine
 	cp FOREST
 	jr z, .forest
 	cp SHIP
 	jr z, .ship
 	ld a, [wCurMap]
+	cp BRUNSWICK_TRAIL
+	jr z, .brunswick
 	cp FIRST_INDOOR_MAP
 	jr c, .townOrRoute
 	cp POWER_PLANT
@@ -180,55 +180,54 @@ SetPal_Overworld:
 	jr .town
 .caveOrBruno
 	ld a, [wCurMap]
-	cp SEAFOAM_ISLANDS_1F
-	jr z, .seafoam
-	cp CINNABAR_VOLCANO
-	jr z, .volcano
 	cp SEAFOAM_ISLANDS_B1F
 	jr c, .caveDefault
 	cp SEAFOAM_ISLANDS_B4F + 1
 	jr c, .seafoam
+	cp SEAFOAM_ISLANDS_1F
+	jr z, .seafoam
+	cp GARNET_CAVERN_1F
+	jr c, .caveDefault
 	cp GARNET_CAVERN_B1F + 1
 	jr c, .garnet
+	cp CERULEAN_CAVE_1F + 1
+	jr c, .mewtwo
+	cp GARNET_CAVERN_2F + 1
+	jr c, .garnet
+	cp ROCK_TUNNEL_B1F + 1
+	jr c, .caveDefault
 .caveDefault
 	ld a, PAL_CAVE - 1
 	jr .town
 .celeste
 	ld a, PAL_CELESTE - 1
 	jr .town
-.citrine
-	ld a, [wCurMap]
-	cp BRUNSWICK_TRAIL
-	jr z, .brunswick
-	cp CITRINE_CITY
-	jr c, .citrineDefault
-.citrineDefault
-	ld a, PAL_CITRINE - 1
-	jr .town
 .ship
 	ld a, PAL_VERMILION - 1
 	jr .town
 .forest
 	ld a, [wCurMap]
-	cp VIRIDIAN_FOREST
-	jr z, .faraway
-	cp SILPH_GAUNTLET_1F
-	jr z, .faraway
-	cp MT_MOON_CRATER
-	jr z, .faraway
+	cp SILPH_GAUNTLET_1F + 1
+	jr c, .faraway
 	cp SILPH_GAUNTLET_5F
+	jr z, .forestDefault
+	cp MT_MOON_CRATER + 1
+	jr c, .faraway
+	cp SAFARI_ZONE_CENTER + 1`
 	jr c, .forestDefault
+	cp BILLS_GARDEN
+	jr z, .faraway
 .forestDefault
 	ld a, PAL_FUCHSIA - 1
 	jr .town
 .powerPlant
 	ld a, PAL_YELLOWMON - 1
 	jr .town
-.faraway
-	ld a, PAL_ROUTE - 1
-	jr .town
 .brunswick
 	ld a, PAL_BRUNSWICK - 1
+	jr .town
+.faraway
+	ld a, PAL_ROUTE - 1
 	jr .town
 .seafoam
 	ld a, PAL_CYANMON - 1
@@ -238,6 +237,9 @@ SetPal_Overworld:
 	jr .town
 .garnet
 	ld a, PAL_GARNET - 1
+	jr .town
+.mewtwo
+	ld a, PAL_MEWMON - 1
 	jr .town
 
 ; used when a Pokemon is the only thing on the screen

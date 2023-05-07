@@ -252,7 +252,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const NAME_RATERS_HOUSE,              4,  4 ; $E6
 	map_const CERULEAN_BADGE_HOUSE,           4,  4 ; $E7
 	map_const CINNABAR_VOLCANO,              14, 12 ; $E8	- Was UNUSED_MAP_E7
-	map_const ROCK_TUNNEL_B1F,               20, 18 ; $E9
+	map_const CINNABAR_VOLCANO_FLOORS,		 20, 20 ; $F8	- Switched with ROCK_TUNNEL_B1F
 	map_const SILPH_CO_9F,                   13,  9 ; $EA
 	map_const SILPH_CO_10F,                   8,  9 ; $EB
 	map_const SILPH_CO_11F,                   9,  9 ; $EC
@@ -266,8 +266,8 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const BILLS_GARDEN,                  10, 10 ; $F4	- Was UNUSED_MAP_F3
 	map_const LORELEIS_ROOM,                  5,  6 ; $F5
 	map_const BRUNOS_ROOM,                    5,  6 ; $F6
-	map_const AGATHAS_ROOM,                   5,  6 ; $F7	- Maps FA - FE currently have no data, bear in mind we need room for everything in citrine
-	map_const CINNABAR_VOLCANO_FLOORS,		 20, 20 ; $F8
+	map_const AGATHAS_ROOM,                   5,  6 ; $F7
+	map_const ROCK_TUNNEL_B1F,               20, 18 ; $E9	- Switched with CINNABAR_VOLCANO_FLOORS
 	map_const GIOVANNIS_ROOM,				 11, 14 ; $F9
 DEF NUM_MAPS EQU const_value
 
