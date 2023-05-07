@@ -3,10 +3,10 @@ Route25_Object:
 
 	def_warp_events
 	warp_event 49,  5, BILLS_HOUSE, 1
-	warp_event 60,   1, UNDERWATER_TUNNEL, 1
+	warp_event 64,  1, UNDERWATER_TUNNEL, 1
 
 	def_bg_events
-	bg_event 51,  7, 11 ; Route25Text11
+	bg_event 47,  5, 11 ; Route25Text11
 
 	def_object_events
 	object_event 14,  2, SPRITE_YOUNGSTER, STAY, DOWN, 1, OPP_YOUNGSTER, 5

@@ -213,7 +213,7 @@ SetPal_Overworld:
 	jr z, .forestDefault
 	cp MT_MOON_CRATER + 1
 	jr c, .faraway
-	cp SAFARI_ZONE_CENTER + 1`
+	cp SAFARI_ZONE_CENTER + 1
 	jr c, .forestDefault
 	cp BILLS_GARDEN
 	jr z, .faraway
@@ -231,9 +231,6 @@ SetPal_Overworld:
 	jr .town
 .seafoam
 	ld a, PAL_CYANMON - 1
-	jr .town
-.volcano
-	ld a, PAL_REDMON - 1
 	jr .town
 .garnet
 	ld a, PAL_GARNET - 1
