@@ -2054,22 +2054,22 @@ LoadMapHeader::
 	ld a, [wMapConnections]
 	ld b, a
 .checkNorth
-	bit 3, b
+	bit MAP_CONNECTION_BIT_NORTH, b
 	jr z, .checkSouth
 	ld de, wNorthConnectionHeader
 	call CopyMapConnectionHeader
 .checkSouth
-	bit 2, b
+	bit MAP_CONNECTION_BIT_SOUTH, b
 	jr z, .checkWest
 	ld de, wSouthConnectionHeader
 	call CopyMapConnectionHeader
 .checkWest
-	bit 1, b
+	bit MAP_CONNECTION_BIT_WEST, b
 	jr z, .checkEast
 	ld de, wWestConnectionHeader
 	call CopyMapConnectionHeader
 .checkEast
-	bit 0, b
+	bit MAP_CONNECTION_BIT_EAST, b
 	jr z, .getObjectDataPointer
 	ld de, wEastConnectionHeader
 	call CopyMapConnectionHeader
