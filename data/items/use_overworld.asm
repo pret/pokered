@@ -4,6 +4,6 @@ UsableItems_CloseMenu:
 	db ITEMFINDER
 	db POKE_FLUTE
 	;db OLD_ROD no longer exists
-	db GOOD_ROD
+	;db GOOD_ROD no longer exists
 	db SUPER_ROD
 	db -1 ; end

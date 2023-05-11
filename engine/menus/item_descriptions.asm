@@ -166,7 +166,7 @@ ItemDescriptionPointers:
 	text_end
 	text_far _CandyJarDescription
 	text_end
-	text_far _GoodRodDescription
+	text_far _BottleCapDescription
 	text_end
 	text_far _FishingRodDescription
 	text_end

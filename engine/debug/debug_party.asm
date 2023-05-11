@@ -157,7 +157,7 @@ DebugItemsList:
 	db HM_SURF, 1
 	db METAL_COAT, 99
 	db BLK_AUGURITE, 99
-	db FLOOR_1F
+	db BOTTLE_CAP, 99
 	db -1 ; end
 
 DebugUnusedList:

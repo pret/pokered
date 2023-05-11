@@ -67,8 +67,8 @@ DEF SLP_MASK EQU %111 ; 0-7 turns
 DEF MAX_STAT_VALUE EQU 999
 
 ; trainer dvs, these should be set to 15.
-DEF ATKDEFDV_TRAINER EQU $FF
-DEF SPDSPCDV_TRAINER EQU $FF
+DEF ATKDEFDV_TRAINER EQU $F
+DEF SPDSPCDV_TRAINER EQU $F
 
 ; wPlayerBattleStatus1 or wEnemyBattleStatus1 bit flags
 	const_def

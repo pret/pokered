@@ -85,7 +85,7 @@ DEF SAFARI_ROCK EQU $16 ; overload
 	const LIFT_KEY      ; $4A
 	const EXP_ALL       ; $4B
 	const CANDY_JAR     ; $4C - was old rod
-	const GOOD_ROD      ; $4D - replaceable
+	const BOTTLE_CAP      ; $4D - was good rod
 	const SUPER_ROD     ; $4E
 	const PP_UP         ; $4F
 	const ETHER         ; $50

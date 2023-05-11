@@ -76,7 +76,7 @@ ItemNames::
 	li "LIFT KEY"
 	li "EXP.ALL"
 	li "CANDY JAR" ; was old rod
-	li "GOOD ROD"
+	li "BOTTLE CAP"
 	li "FISHING ROD"
 	li "PP UP"
 	li "ETHER"

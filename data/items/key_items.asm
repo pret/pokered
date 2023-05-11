@@ -76,7 +76,7 @@ KeyItemFlags:
 	dbit TRUE  ; LIFT_KEY
 	dbit FALSE ; EXP_ALL
 	dbit FALSE  ; was TRUE for OLD_ROD, now CANDY_SACK
-	dbit TRUE  ; GOOD_ROD
+	dbit FALSE  ; was GOOD_ROD & TRUE, now BOTTLE_CAP
 	dbit TRUE  ; SUPER_ROD
 	dbit FALSE ; PP_UP
 	dbit FALSE ; ETHER

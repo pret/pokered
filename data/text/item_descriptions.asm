@@ -303,9 +303,9 @@ _CandyJarDescription::
 	next "odd sweets."
 	prompt
 
-_GoodRodDescription::
-	text "A good ROD for"
-	next "catching #MON."
+_BottleCapDescription::
+	text "Certain people"
+	next "collect these!"
 	prompt
 
 _FishingRodDescription::

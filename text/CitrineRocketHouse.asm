@@ -89,3 +89,36 @@ _MartGuySelling::
 	text "What can I do"
 	line "you for?"
 	done
+
+; James Bottle Cap system.
+; In the anime, he collects Bottle Caps, so it feels better than adding Mr. Hyper.
+_JamesSeesBottleCap::
+	text "Hey, is that a"
+	line "BOTTLE CAP? I"
+	cont "collect these!"
+	
+	para "Tell you what..."
+	
+	para "You give me that"
+	line "BOTTLE CAP, and"
+	cont "I'll make your"
+	cont "#MON a little"
+	cont "stronger!"
+	done
+
+_JamesYes::
+	text "Which #MON is"
+	line "is getting"
+	cont "juiced?"
+	done
+
+_JamesNo::
+	text "But it's so"
+	line "rare..."
+	done
+
+_JamesDone::
+	text "There! Come back"
+	line "with more if"
+	cont "you find any!"
+	done

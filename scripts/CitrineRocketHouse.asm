@@ -32,9 +32,58 @@ MeowthText:
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 
+; James serves as our "Mr. Hyper". In the anime, it's revealed he collects Bottle Caps,
+;so I think this is fitting.
 JamesText:
 	text_far _JamesText
-	text_end
+	text_asm
+	call SaveScreenTilesToBuffer2 ; It really doesn't need to be done this early, it just helps.
+	
+	ld b, BOTTLE_CAP ; Check bag for Bottle Caps. We only need one for this.
+	predef GetQuantityOfItemInBag
+	ld a, b
+	and a
+	jr z, .done ; If zero, James just moans as normal.
+	
+	ld hl, JamesSeesBottleCap ; Otherwise, he perks up.
+	call PrintText
+	
+	call YesNoChoice ; Yes/No Prompt
+	ld a, [wCurrentMenuItem]
+	and a
+	jr nz, .refused
+	; Proceed from here as if Yes is stated. 
+	; Here, the menu should pop up and the player picks a Pokemon to juice.
+	xor a
+	ld [wUpdateSpritesEnabled], a
+	ld [wPartyMenuTypeOrMessageID], a
+	ld [wMenuItemToSwap], a
+	call DisplayPartyMenu
+	push af
+	call GBPalWhiteOutWithDelay3
+	call RestoreScreenTilesAndReloadTilePatterns
+	call LoadGBPal
+	pop af
+	ld hl, JamesDone
+	call PrintText
+	
+	; DV increasing process.
+	ld hl, %11111111; Fill out Attack and Defence
+	
+	; This can apparently work with 16-bit but it doesn't do what I want it to...right now. 
+	;ld b, 0
+	;ld c, a
+	;add hl, bc
+	
+	ld [wPartyMon1DVs], a
+	
+	jr .done
+.refused
+	ld hl, JamesNo
+	call PrintText
+	jr .done
+.done
+	jp TextScriptEnd
 
 JessieText1:
 	text_far _JessieText1
@@ -103,4 +152,22 @@ JessieAfterBattleText:
 	text_far _JessieAfterBattleText
 	text_end
 
-	text_end ; unused
+JamesOpen:
+	text_far _JamesText
+	text_end
+
+JamesSeesBottleCap:
+	text_far _JamesSeesBottleCap
+	text_end
+
+JamesYes:
+	text_far _JamesYes
+	text_end
+
+JamesNo:
+	text_far _JamesNo
+	text_end
+
+JamesDone:
+	text_far _JamesDone
+	text_end

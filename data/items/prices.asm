@@ -76,7 +76,7 @@ ItemPrices::
 	bcd3 0     ; LIFT_KEY
 	bcd3 0     ; EXP_ALL
 	bcd3 0     ; was OLD_ROD, now CANDY_SACK. Plan to be one-of-a-kind, so 0 to discourage sale a la Master Ball.
-	bcd3 0     ; GOOD_ROD
+	bcd3 5000  ; was GOOD_ROD, now BOTTLE_CAP. Sells for 5000 in SV.
 	bcd3 0     ; SUPER_ROD
 	bcd3 0     ; PP_UP
 	bcd3 0     ; ETHER
