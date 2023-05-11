@@ -33,9 +33,8 @@ MeowthText:
 	jp TextScriptEnd
 
 ; James serves as our "Mr. Hyper". In the anime, it's revealed he collects Bottle Caps,
-;so I think this is fitting.
+; so I think this is fitting.
 JamesText:
-	text_far _JamesText
 	text_asm
 	call SaveScreenTilesToBuffer2 ; It really doesn't need to be done this early, it just helps.
 	
@@ -43,7 +42,7 @@ JamesText:
 	predef GetQuantityOfItemInBag
 	ld a, b
 	and a
-	jr z, .done ; If zero, James just moans as normal.
+	jr z, .NoBottleCap ; If zero, James just moans as normal.
 	
 	ld hl, JamesSeesBottleCap ; Otherwise, he perks up.
 	call PrintText
@@ -53,6 +52,7 @@ JamesText:
 	and a
 	jr nz, .refused
 	; Proceed from here as if Yes is stated. 
+	
 	; Here, the menu should pop up and the player picks a Pokemon to juice.
 	xor a
 	ld [wUpdateSpritesEnabled], a
@@ -68,15 +68,35 @@ JamesText:
 	call PrintText
 	
 	; DV increasing process.
-	ld hl, %11111111; Fill out Attack and Defence
+	; Thanks to Vimescarrot for giving me pointers on this!
+	ld a, [wWhichPokemon] ; Find the Pokemon's position in party.
+	ld hl, wPartyMon1DVs ; Load DVs into hl
+	ld bc, wPartyMon2 - wPartyMon1 ; This gets to the right slot for DVs
+	call AddNTimes ; Gets us there
+	ld a, %11111111 ; Load FFFF FFFF, perfect 15s
+	ld [hli], a ; Attack + Defence
+	ld [hl], a ; Speed + Special
+	; And we're done!
 	
-	; This can apparently work with 16-bit but it doesn't do what I want it to...right now. 
-	;ld b, 0
-	;ld c, a
-	;add hl, bc
+	; Currently this doesn't automatically change the stats because it's fucking insane
 	
-	ld [wPartyMon1DVs], a
-	
+	; Bottle Cap removal service
+	ld hl, BottleCapList
+.loop
+	ld a, [hli]
+	ldh [hItemToRemoveID], a
+	and a
+	ret z
+	push hl
+	ld b, a
+	call IsItemInBag
+	pop hl
+	jr z, .loop
+	farcall RemoveItemByID
+	jr .done
+.NoBottleCap
+	ld hl, JamesNoCap
+	call PrintText
 	jr .done
 .refused
 	ld hl, JamesNo
@@ -84,6 +104,11 @@ JamesText:
 	jr .done
 .done
 	jp TextScriptEnd
+
+BottleCapList:
+	db BOTTLE_CAP
+	;db GOLD_BOTTLE_CAP maybe one day
+	db 0 ; end
 
 JessieText1:
 	text_far _JessieText1
@@ -152,7 +177,7 @@ JessieAfterBattleText:
 	text_far _JessieAfterBattleText
 	text_end
 
-JamesOpen:
+JamesNoCap:
 	text_far _JamesText
 	text_end
 

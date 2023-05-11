@@ -20,10 +20,10 @@ DisplayPokemartDialogue_::
 
 ; This code is useless. It copies the address of the pokemart's inventory to hl,
 ; but the address is never used.
-	ld hl, wItemListPointer
-	ld a, [hli]
-	ld l, [hl]
-	ld h, a
+;	ld hl, wItemListPointer
+;	ld a, [hli]
+;	ld l, [hl]
+;	ld h, a
 
 	ld a, [wMenuExitMethod]
 	cp CANCELLED_MENU
@@ -95,9 +95,9 @@ DisplayPokemartDialogue_::
 
 ; The following code is supposed to check if the player chose No, but the above
 ; check already catches it.
-	ld a, [wChosenMenuItem]
-	dec a
-	jr z, .sellMenuLoop
+;	ld a, [wChosenMenuItem]
+;	dec a
+;	jr z, .sellMenuLoop
 
 .sellItem
 	ld a, [wBoughtOrSoldItemInMart]
@@ -173,9 +173,9 @@ DisplayPokemartDialogue_::
 
 ; The following code is supposed to check if the player chose No, but the above
 ; check already catches it.
-	ld a, [wChosenMenuItem]
-	dec a
-	jr z, .buyMenuLoop
+;	ld a, [wChosenMenuItem]
+;	dec a
+;	jr z, .buyMenuLoop
 
 .buyItem
 	call .isThereEnoughMoney

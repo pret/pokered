@@ -54,7 +54,7 @@ New areas
 	- There's a Move Deleter and Move Relearner!
 - Citrine City is a new island city that can be accessed in the postgame.
 	- Contains a house with a Move Tutor that can teach Tradeback moves without the need for GSC!
-	- Contains a Team Rocket house where they will sell you TMs and Evolution Items. Jessie and James are there too!
+	- Contains a Team Rocket house where they will sell you TMs and Evolution Items, as well as have a Hyper Training feature to get Max DVs!
 	- Will contain a Battle Tower with infinite, randomised trainer parties!
 	- Garnet Cavern, located in Citrine City, houses several strong trainers and Pokémon.
 	- Brunswick Trail, south of Citrine City, is a route that leads to Celeste Hill.
