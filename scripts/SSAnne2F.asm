@@ -112,8 +112,8 @@ SSAnne2Script1:
 	jr .done
 .Charmander
 	cp STARTER1 ; changes start here
-	ld a, $3
 	jr nz, .Pikachu
+	ld a, $3
 	jr .done
 .Pikachu ;
 	cp STARTER4 

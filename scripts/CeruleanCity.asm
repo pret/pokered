@@ -154,8 +154,8 @@ CeruleanCityScript1:
 	jr .done
 .Charmander
 	cp STARTER1 ; changes start here
-	ld a, $0D
 	jr nz, .Pikachu
+	ld a, $0D
 	jr .done
 .Pikachu ;
 	cp STARTER4 

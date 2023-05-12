@@ -197,8 +197,8 @@ SilphCo7Script3:
 	jr .asm_51cc0
 .Charmander
 	cp STARTER1 ; changes start here
-	ld a, $0D
 	jr nz, .Pikachu
+	ld a, $0D
 	jr .asm_51cc0
 .Pikachu ;
 	cp STARTER4 

@@ -155,17 +155,17 @@ PokemonTower2Text1:
 	ld a, [wRivalStarter]
 	cp STARTER2
 	jr nz, .NotSquirtle
-	ld a, $6
+	ld a, $06
 	jr .done
 .NotSquirtle
 	cp STARTER3
 	jr nz, .Charmander
-	ld a, $7
+	ld a, $07
 	jr .done
 .Charmander
 	cp STARTER1 ; changes start here
-	ld a, $8
 	jr nz, .Pikachu
+	ld a, $08
 	jr .done
 .Pikachu ;
 	cp STARTER4 
@@ -173,7 +173,7 @@ PokemonTower2Text1:
 	ld a, $0A
 	jr .done
 .Eevee
-	ld a, $9
+	ld a, $09
 	jr .done
 .done
 	ld [wTrainerNo], a

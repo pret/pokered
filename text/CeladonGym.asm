@@ -83,10 +83,9 @@ _TM21NoRoomText::
 	done
 
 _CeladonGymBattleText2::
-	text "Hey!"
-
-	para "You are not"
-	line "allowed in here!"
+	text "Do you think a"   ; imported from Crystal
+	line "girls-only GYM"
+	cont "is rare?"
 	done
 
 _CeladonGymEndBattleText2::
@@ -95,9 +94,9 @@ _CeladonGymEndBattleText2::
 	prompt
 
 _CeladonGymAfterBattleText2::
-	text "Bleaah!"
-	line "I hope ERIKA"
-	cont "wipes you out!"
+	text "I was a little"
+	line "careless, that's"
+	cont "all!"
 	done
 
 _CeladonGymBattleText3::
@@ -121,8 +120,9 @@ _CeladonGymAfterBattleText3::
 	done
 
 _CeladonGymBattleText4::
-	text "Aren't you the"
-	line "peeping Tom?"
+	text "Were you looking"  ; imported from Crystal
+	line "at these flowers"
+	cont "or at me?"
 	done
 
 _CeladonGymEndBattleText4::
@@ -131,9 +131,9 @@ _CeladonGymEndBattleText4::
 	prompt
 
 _CeladonGymAfterBattleText4::
-	text "Oh, you weren't"
-	line "peeping? We get a"
-	cont "lot of gawkers!"
+	text "How do I go about"
+	line "becoming ladylike"
+	cont "like ERIKA?"
 	done
 
 _CeladonGymBattleText5::
