@@ -70,25 +70,6 @@ _JessieAfterBattleText::
 	line "battle? Then go"
 	cont "away!"
 	done
-; This mart text is unused because implementing custom mart text is hell.
-_MartGuyPrompt1::
-	text "Alright, tell you"
-	line "what. I sell TMs,"
-	cont "see? Let's make"
-	cont "a deal."
-	prompt
-
-_MartGuyPrompt2::
-	text "If you keep our"
-	line "joint a secret,"
-	cont "I can sell you"
-	cont "any special item"
-	cont "in KANTO. Deal?"
-
-_MartGuySelling::
-	text "What can I do"
-	line "you for?"
-	done
 
 ; James Bottle Cap system.
 ; In the anime, he collects Bottle Caps, so it feels better than adding Mr. Hyper.

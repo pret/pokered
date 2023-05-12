@@ -51,9 +51,9 @@ JamesText:
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .refused
-	; Proceed from here as if Yes is stated. 
+	; Proceed from here as Yes is stated. 
 	
-	; Here, the menu should pop up and the player picks a Pokemon to juice.
+	; Here, the party menu pops up and the player picks a Pokemon to juice.
 	xor a
 	ld [wUpdateSpritesEnabled], a
 	ld [wPartyMenuTypeOrMessageID], a

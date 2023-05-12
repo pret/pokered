@@ -13,6 +13,7 @@ DoorTileIDPointers:
 	dbw FACILITY,    .FacilityDoorTileIDs
 	dbw PLATEAU,     .PlateauDoorTileIDs
 	dbw INTERIOR,    .InteriorDoorTileIDs ; fixes weirdness in silph co.
+	dbw CITRINE, 	 .CitrineDoorTileIDs
 	db -1 ; end
 
 MACRO door_tiles
@@ -57,3 +58,6 @@ ENDM
 
 .InteriorDoorTileIDs:
 	door_tiles $04, $15
+
+.CitrineDoorTileIDs
+	door_tiles $1C, $1B, $58, $59

@@ -202,10 +202,10 @@ SpriteSets:
 ; SPRITESET_CITRINE
 	db SPRITE_BRUNETTE_GIRL
 	db SPRITE_BIRD
-	db SPRITE_SUPER_NERD ; free slot, add as needed.
-	db SPRITE_HIKER ; free slot, add as needed.
-	db SPRITE_GAMBLER ; free slot, add as needed.
-	db SPRITE_MONSTER ; free slot, add as needed.
+	db SPRITE_GENTLEMAN
+	db SPRITE_BEAUTY
+	db SPRITE_ROCKER
+	db SPRITE_HIKER
 	db SPRITE_COOLTRAINER_F ; free slot, add as needed.
 	db SPRITE_COOLTRAINER_M ; free slot, add as needed.
 	db SPRITE_GUARD ; free slot, add as needed.

@@ -2,8 +2,8 @@ _CitrinePokecenterText2::
 	text "I've seen a lot"
 	line "of men in black"
 	cont "going in and"
-	cont "out of this one"
-	cont "house."
+	cont "out of a house"
+	cont "down the road."
 	
 	para "It couldn't be,"
 	line "could it?"
