@@ -486,6 +486,12 @@ StartMenu_TrainerInfo::
 DrawTrainerInfo:
 	ld de, RedPicFront
 	lb bc, BANK(RedPicFront), $01
+	ld a, [wPlayerSex] ; guess what it's genital inspection time
+	and a
+	jr z, .AreBoy
+	ld de, GreenPicFront
+	lb bc, BANK(GreenPicFront), $01
+.AreBoy
 	predef DisplayPicCenteredOrUpperRight
 	call DisableLCD
 	hlcoord 0, 2

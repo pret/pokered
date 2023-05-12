@@ -137,9 +137,9 @@ MACRO sound_cry_pidgeot
 	db TX_SOUND_CRY_PIDGEOT
 ENDM
 
-	const TX_SOUND_CRY_DEWGONG ; $16
-MACRO sound_cry_dewgong
-	db TX_SOUND_CRY_DEWGONG
+	const TX_SOUND_CRY_NIDORINA ; $16
+MACRO sound_cry_nidorina
+	db TX_SOUND_CRY_NIDORINA
 ENDM
 
 	const TX_FAR ; $17

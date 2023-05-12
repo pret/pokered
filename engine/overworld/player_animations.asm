@@ -385,12 +385,29 @@ FishingAnim:
 	call DelayFrames
 	ld hl, wd736
 	set 6, [hl] ; reserve the last 4 OAM entries
+	ld a, [wPlayerSex] ; sex check
+	and a      ; sex check
+	jr z, .BoySpriteLoad
+	ld de, GreenSprite
+	ld hl, vNPCSprites
+	ld bc, (BANK(GreenSprite) << 8) + $0c
+	jr .KeepLoadingSpriteStuff
+.BoySpriteLoad
 	ld de, RedSprite
-	ld hl, vNPCSprites tile $00
-	lb bc, BANK(RedSprite), 12
+	ld hl, vNPCSprites
+	lb bc, BANK(RedSprite), $c
+.KeepLoadingSpriteStuff
 	call CopyVideoData
+	ld a, [wPlayerSex] ; ; sex check
+	and a      ; ; sex check seriously i feel like a republican here
+	jr z, .BoyTiles ; skip loading Green's stuff if you're Red
+	ld a, $4
+	ld hl, GreenFishingTiles
+	jr .ContinueRoutine ; go back to main routine after loading Green's stuff
+.BoyTiles ; alternately, load Red's stuff
 	ld a, $4
 	ld hl, RedFishingTiles
+.ContinueRoutine
 	call LoadAnimSpriteGfx
 	ld a, [wSpritePlayerStateData1ImageIndex]
 	ld c, a
@@ -491,6 +508,12 @@ RedFishingTiles:
 	fishing_gfx RedFishingTilesFront, 2, $02
 	fishing_gfx RedFishingTilesBack,  2, $06
 	fishing_gfx RedFishingTilesSide,  2, $0a
+	fishing_gfx RedFishingRodTiles,   3, $fd
+
+GreenFishingTiles:
+	fishing_gfx GreenFishingTilesFront, 2, $02
+	fishing_gfx GreenFishingTilesBack,  2, $06
+	fishing_gfx GreenFishingTilesSide,  2, $0a
 	fishing_gfx RedFishingRodTiles,   3, $fd
 
 _HandleMidJump::

@@ -1740,7 +1740,7 @@ _OakSpeechText2B::
 	prompt
 
 _IntroducePlayerText::
-	text "First, what is"
+	text "Next, what is"
 	line "your name?"
 	prompt
 
@@ -1819,3 +1819,8 @@ _PromptToCutText::
 	text "Would you like to"
 	line "use CUT?"
 	done
+
+_BoyGirlText::
+    text "Firstly, are you a"
+	line "boy or a girl?"
+    done

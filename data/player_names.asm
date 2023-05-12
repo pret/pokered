@@ -5,6 +5,13 @@ DefaultNamesPlayer:
 	next "JACK"
 	db   "@"
 
+DefaultNamesGirl:
+	db   "NEW NAME"
+	next "GREEN"
+	next "LEAF"
+	next "SEREN"
+	db   "@"
+
 DefaultNamesRival:
 	db   "NEW NAME"
 	next "BLUE"

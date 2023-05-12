@@ -85,6 +85,7 @@ Improved areas
 
 QoL Enhancements
 ====
+- A girl option is now available, featuring the sprite from Pokemon Anniversary Red, which is based on Green's manga and later LGPE appearance (sort of).
 - All 151 original Pokemon, plus an additional 100, can be obtained without the use of trading or glitches, including Mew!
 - New Pokedex entries for most Pokemon are available, sourced from the original 1996 Pokedex book by Creatures Inc., restoring a ton of old Kanto lore. Thanks to [Dr. Lava and Nob Ogasawara](http://lavacutcontent.com/1996-creatures-pokedex-translation-1/) for their incredible work translating and writing about it!
 - Pikachu and Eevee are now starters, featuring fully functional Rival lineups. If you pick Pikachu, he picks Eevee, and if you pick Eevee, he picks Pikachu!
@@ -290,6 +291,7 @@ Credits
 * FrenchOrange - Reconstructions of various overworld beta sprites.
 * Helix Chamber, RacieBeep, loumilouminosus, Orchid, GBCRetro, & catstorm26 - Prototype Pokémon sprites
 * Vortiene - Reused a bit of code from their pureRGB hack. Assisted in bug fixes.
+* Pigu-A, RevoSucks, walle303 - Contributors to Pokemon Anniversary Red, which we used as reference points for the Girl sprites and the Battle Tent.
 * jojobear13 & Mateo - Move deleter & move relearner functionality from Shin Pokered, followed [this guide](https://github.com/jojobear13/shinpokered/blob/master/how%20to%20guides/how%20to%20add%20the%20move%20relearner%26deleter.txt). Tweaks were made to make it compatible with the pokered version we worked off of.
 * Rangi - Reused a bit of code from their Red* / Blue* hack to make HMs usable in the overworld!
 * wrulfy - Technical advice

@@ -520,7 +520,7 @@ TextCommand_SOUND::
 	jr z, .pokemonCry
 	cp TX_SOUND_CRY_PIDGEOT
 	jr z, .pokemonCry
-	cp TX_SOUND_CRY_DEWGONG
+	cp TX_SOUND_CRY_NIDORINA
 	jr z, .pokemonCry
 	ld a, [hl]
 	call PlaySound
@@ -548,7 +548,7 @@ TextCommandSounds::
 	db TX_SOUND_DEX_PAGE_ADDED,       SFX_DEX_PAGE_ADDED
 	db TX_SOUND_CRY_NIDORINO,         NIDORINO ; used in OakSpeech
 	db TX_SOUND_CRY_PIDGEOT,          PIDGEOT  ; used in SaffronCityText12
-	db TX_SOUND_CRY_DEWGONG,          DEWGONG  ; unused
+	db TX_SOUND_CRY_NIDORINA,         NIDORINA  ; was unused dewgong call
 
 TextCommand_DOTS::
 ; wait for button press or 30 frames while printing "…"s

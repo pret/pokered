@@ -1972,7 +1972,10 @@ wd5cd:: db
 ; terminated with $FF
 wMissableObjectList:: ds 16 * 2 + 1
 
-	ds 1
+wPlayerSex::
+		; $00 = male
+		; $01 = female
+			ds 1
 
 wGameProgressFlags::
 wOaksLabCurScript:: db

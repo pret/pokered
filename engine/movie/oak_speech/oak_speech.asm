@@ -58,14 +58,36 @@ OakSpeech:
 	ld a, [wd732]
 	bit 1, a ; possibly a debug mode bit
 	jp nz, .skipChoosingNames
+   	call ClearScreen ; clear the screen before resuming normal intro
 	ld de, ProfOakPic
 	lb bc, BANK(ProfOakPic), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	call FadeInIntroPic
 	ld hl, OakSpeechText1
 	call PrintText
+	ld hl, BoyGirlText  ; added to the same file as the other oak text
+  	call PrintText     ; show this text
+  	call BoyGirlChoice ; added routine at the end of this file
+   	ld a, [wCurrentMenuItem]
+   	ld [wPlayerSex], a ; store player's gender. 00 for boy, 01 for girl
 	call GBFadeOutToWhite
 	call ClearScreen
+	
+	ld a, [wPlayerSex] ; Let's change the Nidorins based on the choice. It's really cute and makes use of an unused command sound.
+	and a
+	jr z, .Nidorino
+	jr nz, .Nidorina
+.Nidorina
+	ld a, NIDORINA
+	ld [wd0b5], a
+	ld [wcf91], a
+	call GetMonHeader
+	hlcoord 6, 4
+	call LoadFlippedFrontSpriteByMonIndex
+	call MovePicLeft
+	ld hl, OakSpeechText2Green
+	jr .cont
+.Nidorino
 	ld a, NIDORINO
 	ld [wd0b5], a
 	ld [wcf91], a
@@ -73,12 +95,21 @@ OakSpeech:
 	hlcoord 6, 4
 	call LoadFlippedFrontSpriteByMonIndex
 	call MovePicLeft
-	ld hl, OakSpeechText2
+	ld hl, OakSpeechText2Red
+	jr .cont
+
+.cont
 	call PrintText
 	call GBFadeOutToWhite
 	call ClearScreen
 	ld de, RedPicFront
 	lb bc, BANK(RedPicFront), $00
+	ld a, [wPlayerSex] 	; check sex
+	and a      				; check sex
+	jr z, .NotGreen1
+	ld de, GreenPicFront
+	lb bc, BANK(GreenPicFront), $00
+.NotGreen1:
 	call IntroDisplayPicCenteredOrUpperRight
 	call MovePicLeft
 	ld hl, IntroducePlayerText
@@ -98,6 +129,12 @@ OakSpeech:
 	call ClearScreen
 	ld de, RedPicFront
 	lb bc, BANK(RedPicFront), $00
+	ld a, [wPlayerSex]   ; check sex
+    and a      				; check sex
+   	jr z, .NotGreen2
+    ld de, GreenPicFront
+    lb bc, Bank(GreenPicFront), $00
+.NotGreen2:
 	call IntroDisplayPicCenteredOrUpperRight
 	call GBFadeInFromWhite
 	ld a, [wd72d]
@@ -118,10 +155,17 @@ OakSpeech:
 	ld de, RedSprite
 	ld hl, vSprites
 	lb bc, BANK(RedSprite), $0C
-	call CopyVideoData
-	ld de, ShrinkPic1
-	lb bc, BANK(ShrinkPic1), $00
-	call IntroDisplayPicCenteredOrUpperRight
+	ld a, [wPlayerSex] ; check sex
+    and a      ; check sex
+    jr z, .NotGreen3
+    ld de,GreenSprite
+    lb bc, BANK(GreenSprite), $0C
+.NotGreen3:
+   	ld hl, vSprites
+   	call CopyVideoData
+    ld de, ShrinkPic1
+   	lb bc, BANK(ShrinkPic1), $00
+   	call IntroDisplayPicCenteredOrUpperRight
 	ld c, 4
 	call DelayFrames
 	ld de, ShrinkPic2
@@ -158,9 +202,14 @@ OakSpeech:
 OakSpeechText1:
 	text_far _OakSpeechText1
 	text_end
-OakSpeechText2:
+OakSpeechText2Red: ; this is such a clunky way to do it but the text_asm way caused crashes
 	text_far _OakSpeechText2A
 	sound_cry_nidorino
+	text_far _OakSpeechText2B
+	text_end
+OakSpeechText2Green:
+	text_far _OakSpeechText2A
+	sound_cry_nidorina
 	text_far _OakSpeechText2B
 	text_end
 IntroducePlayerText:
@@ -234,3 +283,26 @@ IntroDisplayPicCenteredOrUpperRight:
 	xor a
 	ldh [hStartTileID], a
 	predef_jump CopyUncompressedPicToTilemap
+
+; displays boy/girl choice
+	BoyGirlChoice::
+ 	   call SaveScreenTilesToBuffer1
+ 	   call InitBoyGirlTextBoxParameters
+ 	   jr DisplayBoyGirlChoice
+    
+	InitBoyGirlTextBoxParameters::
+	   ld a, $1 ; loads the value for the unused North/West choice, that was changed to say Boy/Girl
+ 	   ld [wTwoOptionMenuID], a
+ 	   coord hl, 13, 7 
+ 	   ld bc, $80e
+ 	   ret
+ 	   
+	DisplayBoyGirlChoice::
+   	   ld a, $14
+   	   ld [wTextBoxID], a
+   	   call DisplayTextBoxID
+   	   jp LoadScreenTilesFromBuffer1
+
+BoyGirlText: ; This is new so we had to add a reference to get it to compile
+    text_far _BoyGirlText
+    text_end

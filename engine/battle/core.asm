@@ -6365,12 +6365,21 @@ SwapPlayerAndEnemyLevels:
 LoadPlayerBackPic:
 	ld a, [wBattleType]
 	dec a ; is it the old man tutorial?
-	ld de, RedPicBack
-	jr nz, .next
-	ld de, OldManPicBack
-.next
+	ld de, OldManPicBack   ; Load the old man back sprite preemptively
+	ld a, BANK(RedPicBack) ; Default Red back sprite will be used as a means to load in the Old Man back sprite
+	jr z, .next
+	ld a, [wPlayerSex] ; do you think a republican will get off to this commit
+	and a
+	jr z, .RedBack
+	ld de, GreenPicBack
+	ld a, BANK(GreenPicBack) ; Load female back sprite
+	jr .next
+.RedBack
+	ld de, RedPicBack ; Load default Red back sprite
 	ld a, BANK(RedPicBack)
-	ASSERT BANK(RedPicBack) == BANK(OldManPicBack)
+.next
+	ASSERT BANK(GreenPicBack) == BANK(OldManPicBack) ; These two ASSERTs make sure to cover
+	ASSERT BANK(RedPicBack) == BANK(OldManPicBack)   ; both sprite cases
 	call UncompressSpriteFromDE
 	predef ScaleSpriteByTwo
 	ld hl, wShadowOAM

@@ -35,12 +35,16 @@ DebugStart:
 IF DEF(_DEBUG)
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a
-
+	
 	; Fly anywhere.
 	dec a ; $ff
 	ld [wTownVisitedFlag], a
 	ld [wTownVisitedFlag + 1], a
-
+	
+	; This hack was coded by transfems.
+	ld a, 1
+	ld [wPlayerSex], a
+	
 	; Get all badges except Earth Badge.
 	ld a, ~(1 << BIT_EARTHBADGE)
 	ld [wObtainedBadges], a

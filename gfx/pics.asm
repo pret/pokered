@@ -260,6 +260,7 @@ PidgeottoPicFront::    INCBIN "gfx/pokemon/front/pidgeotto.pic"
 PidgeottoPicBack::     INCBIN "gfx/pokemon/back/pidgeottob.pic"
 
 RedPicBack::           INCBIN "gfx/player/redb.pic"
+GreenPicBack::           INCBIN "gfx/player/greenb.pic"
 OldManPicBack::        INCBIN "gfx/battle/oldmanb.pic"
 
 
@@ -317,7 +318,6 @@ VileplumePicFront::    INCBIN "gfx/pokemon/front/vileplume.pic"
 VileplumePicBack::     INCBIN "gfx/pokemon/back/vileplumeb.pic"
 BellsproutPicFront::   INCBIN "gfx/pokemon/front/bellsprout.pic"
 BellsproutPicBack::    INCBIN "gfx/pokemon/back/bellsproutb.pic"
-
 
 SECTION "Pics 6", ROMX
 

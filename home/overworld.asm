@@ -2027,7 +2027,12 @@ RunMapScript::
 
 LoadWalkingPlayerSpriteGraphics::
 	ld de, RedSprite
-	ld hl, vNPCSprites
+	ld a, [wPlayerSex]
+	and a
+	jr z, .AreGuy1
+	ld de, GreenSprite
+.AreGuy1
+	ld hl,vNPCSprites
 	jr LoadPlayerSpriteGraphicsCommon
 
 LoadSurfingPlayerSpriteGraphics::
@@ -2037,6 +2042,11 @@ LoadSurfingPlayerSpriteGraphics::
 
 LoadBikePlayerSpriteGraphics::
 	ld de, RedBikeSprite
+	ld a, [wPlayerSex]
+	and a
+	jr z, .AreGuy2
+	ld de, GreenBikeSprite
+.AreGuy2
 	ld hl, vNPCSprites
 
 LoadPlayerSpriteGraphicsCommon::
