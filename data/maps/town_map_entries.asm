@@ -126,4 +126,5 @@ InternalMapEntries:
 	internal_map AGATHAS_ROOM,                   0,  2, PokemonLeagueName
 	internal_map ROCK_TUNNEL_B1F,               14,  3, RockTunnelName
 	internal_map GIOVANNIS_ROOM,                 2,  8, ViridianCityName
+	internal_map BATTLE_TENT,               	 7,  9, CitrineCityName
 	db -1 ; end

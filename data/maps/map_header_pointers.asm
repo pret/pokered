@@ -251,4 +251,5 @@ MapHeaderPointers::
 	dw AgathasRoom_h
 	dw RockTunnelB1F_h
 	dw GiovannisRoom_h
+	dw BattleTent_h
 	assert_table_length NUM_MAPS

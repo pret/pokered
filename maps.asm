@@ -989,6 +989,7 @@ INCLUDE "scripts/PokemonTower2F.asm"
 INCLUDE "data/maps/objects/PokemonTower2F.asm"
 PokemonTower2F_Blocks: INCBIN "maps/PokemonTower2F.blk"
 
+; Removed for the Battle Tent.
 INCLUDE "data/maps/headers/PokemonTower3F.asm"
 INCLUDE "scripts/PokemonTower3F.asm"
 INCLUDE "data/maps/objects/PokemonTower3F.asm"
@@ -1370,3 +1371,8 @@ INCLUDE "data/maps/headers/GarnetCavern2F.asm"
 INCLUDE "scripts/GarnetCavern2F.asm"
 INCLUDE "data/maps/objects/GarnetCavern2F.asm"
 GarnetCavern2F_Blocks: INCBIN "maps/GarnetCavern2F.blk"
+
+INCLUDE "data/maps/headers/BattleTent.asm"
+INCLUDE "data/maps/objects/BattleTent.asm"
+INCLUDE "scripts/BattleTent.asm"
+BattleTent_Blocks: INCBIN "maps/BattleTent.blk"

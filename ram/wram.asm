@@ -405,10 +405,23 @@ wSlotMachineSevenAndBarModeChance:: db
 ; ROM back to return to when the player is done with the slot machine
 wSlotMachineSavedROMBank:: db
 
+;battle tent data
+wBTOrder:: dw
+wBTStreakCnt:: db
+wBTClass:: db
+wBTDataEnd::	
+wStringBuffer1:: ; cf5f
+	ds 16 + 1
+wStringBuffer2:: ; cf70
+	ds 16 + 1
+wStringBuffer3:: ; cf81
+	ds 9 + 1
+;end BT wram
+
 ; Move Buffer stuff for Mateo's code
 wMoveBuffer::
 wRelearnableMoves::
-	ds 164
+	ds 115
 ; Try not to use this stack. 
 ; A good amount of space is needed to store data for the move relearner.
 ; If it's like, 2, it'll lag like crazy and show garbage from elsewhere.
@@ -2099,7 +2112,8 @@ wSeafoamIslandsB3FCurScript:: db
 wRoute23CurScript:: db
 wSeafoamIslandsB4FCurScript:: db
 wRoute18Gate1FCurScript:: db
-	ds 6
+wBattleTentCurScript:: db
+	ds 5
 wGameProgressFlagsEnd::
 
 UNION

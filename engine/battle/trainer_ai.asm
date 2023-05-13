@@ -286,14 +286,15 @@ INCLUDE "engine/battle/read_trainer_party.asm"
 INCLUDE "data/trainers/special_moves.asm"
 
 INCLUDE "data/trainers/parties.asm"
-;INCLUDE "data/trainers/scaled_parties.asm"
-;INCLUDE "data/trainers/rival_parties.asm"
 
 TrainerAI:
 	and a
 	ld a, [wIsInBattle]
 	dec a
 	ret z ; if not a trainer, we're done here
+	ld a, [wCurMap]
+	cp BATTLE_TENT
+	ret z ; if we are in battle tent, we are done
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	ret z ; if in a link battle, we're done as well

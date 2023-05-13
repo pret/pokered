@@ -836,6 +836,9 @@ FaintEnemyPokemon:
 	call SaveScreenTilesToBuffer1
 	xor a
 	ld [wBattleResult], a
+	ld a, [wCurMap]
+	cp BATTLE_TENT
+	ret z ; one of Battle Tower's rules
 	ld b, EXP_ALL
 	call IsItemInBag
 	push af
@@ -961,6 +964,9 @@ TrainerBattleVictory:
 	ld c, 40
 	call DelayFrames
 	call PrintEndBattleText
+	ld a, [wCurMap]
+	cp BATTLE_TENT
+	ret z ; We will give it later ;)
 ; win money
 	ld hl, MoneyForWinningText
 	call PrintText
@@ -2189,18 +2195,26 @@ DisplayBattleMenu::
 .throwSafariBallWasSelected
 	ld a, SAFARI_BALL
 	ld [wcf91], a
-	jr UseBagItem
+	jp UseBagItem
 
 .upperLeftMenuItemWasNotSelected ; a menu item other than the upper left item was selected
 	cp $2
 	jp nz, PartyMenuOrRockOrRun
 
 ; either the bag (normal battle) or bait (safari battle) was selected
+	ld a, [wCurMap]
+	cp BATTLE_TENT
+	jr z, .battletent
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	jr nz, .notLinkBattle
 
 ; can't use items in link battles
+	ld hl, ItemsCantBeUsedHereText
+	call PrintText
+	jp DisplayBattleMenu
+
+.battletent
 	ld hl, ItemsCantBeUsedHereText
 	call PrintText
 	jp DisplayBattleMenu
@@ -6286,6 +6300,8 @@ LoadEnemyMonData:
 	ld de, wEnemyMonNick
 	ld bc, NAME_LENGTH
 	call CopyData
+	cp BATTLE_TENT
+	jr z, .skipSeenFlagAdding ; one of Battle Tower's rules
 	ld a, [wEnemyMonSpecies2]
 	ld [wd11e], a
 	predef IndexToPokedex
@@ -6304,6 +6320,14 @@ LoadEnemyMonData:
 	call CopyData
 	ld a, $7 ; default stat mod
 	ld b, NUM_STAT_MODS ; number of stat mods
+	ld hl, wEnemyMonStatMods
+.skipSeenFlagAdding
+	ld hl, wEnemyMonLevel
+	ld de, wEnemyMonUnmodifiedLevel
+	ld bc, $b
+	call CopyData
+	ld a, $7 ; default stat mod
+	ld b, $8 ; number of stat mods
 	ld hl, wEnemyMonStatMods
 .statModLoop
 	ld [hli], a
