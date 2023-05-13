@@ -1,28 +1,40 @@
 Kanto Expansion Pak
 ===================
-This is a ROM Hack of Pokémon Red and Blue, aiming to expand the Kanto region with more interesting locations, evolutions added in later generations, and QoL changes.
+This is a ROM Hack of Pokémon Red and Blue, aiming to expand the Kanto region with new Kanto-related Pokemon, more interesting locations, and QoL changes. It is a port of my [Pokemon Showdown Mod](https://github.com/PlagueVonKarma?tab=repositories), in a sense.
 
-If playing on an emulator, BGB is strongly recommended for its accuracy and features. VBA's inaccuracies can cause unintended glitches.
+If playing on an emulator, BGB is strongly recommended for its accuracy and features. VBA's inaccuracies can cause unintended glitches. This hack is fully playable on official hardware as well.
 
 New Pokemon:
 ====
-- The 34 known beta Pokemon that were cut from RBY have been fully implemented.
-- Evolutions or Pre-evolutions of a Kanto Pokemon found in a future generation are included; eg. Kleavor, Glaceon, Annihilape
-- Evolutions of Kanto Pokemon found in the SpaceWorld '97 demo are included; eg. Madaamu, Taaban
-- Meltan and Melmetal have been added due to their introduction in a Kanto-based game, LGPE.
-- All fully-evolved regional variants of Kanto Pokemon have been added.
+The Kanto Expansion Pak's ethos is to add every "Kanto-related" Pokemon to RBY without fundamentally changing the grander metagame. What's defined as "Kanto-related" is a Pokemon that evolves from an existing Kanto Pokemon, made an appearance in a Kanto-based game (LGPE), is a regional variant, or was a Kanto-related Pokemon cut during the development of an official game.
 
-Johto baby Pokemon and regional pre-evolutions were omitted due to memory constraints. This just barely works.
+With this criteria, we get:
+- The 34 known beta Pokemon that were cut from RBY; eg. Gorochu, Deer
+- Evolutions or pre-evolutions of a Kanto Pokemon found in a future generation eg. Kleavor, Glaceon, Annihilape
+- Evolutions of Kanto Pokemon found in the SpaceWorld '97 demo; eg. Madaamu, Purakkusu
+- All fully-evolved regional variants of Kanto Pokemon; eg. Hisuian Arcanine, Galarian Slowbro, Paldean Tauros, Alolan Muk
+- Meltan and Melmetal from LGPE.
+- Paradox Pokemon from SV; Scream Tail and Sandy Shocks.
+
+Johto baby Pokemon and regional pre-evolutions were omitted due to RBY using an 8-bit register. This hack as-is just barely manages to fit everything. A refactor to a 16-bit register is possible and has been done before, but only on a really old pokered version that would require a ton of its own refactoring to be modernised. It's just not feasible at this current time.
+
+Mega Evolutions and Gigantamax forms are not in the game mainly by choice. There are no held items and there isn't a special button or anything, so it felt kind of weird to add, would deviate significantly from the RBY experience, and requires a pretty big overhaul to the battle system. It's definitely possible, just not for me.
 
 New Types:
 ====
-- Dark, Steel and Fairy types are added
-	- Note that Dark and Steel use their type effectiveness from the SW97 demo
-	- Note that Bite is still Normal-type
-	- Note that the Clefairy, Mime Jr, and Jigglypuff lines are not Steel or Fairy-type, respectively
-		- This (and Bite) was done to ensure the original Kanto Pokemon were unaltered in any way
-		- While Magnemite, Magnetite, and Magneton are pure Electric, Magnezone is part-Steel.
-		- Scream Tail remains Fairy/Psychic.
+To accomodate the new Pokemon, the Dark, Steel, and Fairy types are added. They are effectively "tacked on", with no vanilla Pokemon or moves being changed, which is a big part of what this hack wants. 
+
+Dark and Steel use their SpaceWorld '97 type matchups because these revisions were produced prior to the national tournament that year, and thus before Game Freak made appropriate balancing changes. Thus, what you get here are types that are very different, but maintain the core RBY experience. Fairy lacks a confirmed older revision, so it remains the same as XY's, which has not yet changed, and if it does, this hack will not change with it. Closer to RBY is what we want!
+
+Changes at a glance:
+- Dark and Steel use their type effectiveness from the SW97 demo, aiming to be closer to RBY experience.
+- Bite is still Normal-type.
+- The Clefairy, Mime Jr, and Jigglypuff lines are not Steel or Fairy-type, respectively.
+	- This (and Bite) was done to ensure the original Kanto Pokemon were unaltered in any way.
+	- While Magnemite, Magnetite, and Magneton are pure Electric, Magnezone is part-Steel.
+	- Scream Tail remains Fairy/Psychic.
+- Fire remains neutral against Ice.
+- Bug and Poison remain super effective against each other.
 
 Type Matchups for Steel and Dark for reference:
 - Steel...
@@ -38,67 +50,75 @@ Type Matchups for Steel and Dark for reference:
 	- Pokemon are Weak to: Normal, Dark, Fairy 
 	- Pokemon resist: Ghost, Psychic
 
+Naturally, these types get appropriate moves. They are currently distributed to exclusively new Pokemon, with the vanilla bunch untouched. The only moves imported have effects that are exactly replicable in RBY's code for consistency reasons.
+- Steel: Bullet Punch, Iron Defense, Iron Head, Magnet Bomb, Metal Sound, Mirror Shot, Smart Strike
+- Dark: Brutal Swing, Fake Tears, False Surrender, Feint Attack, Kowtow Cleave, Nasty Plot, Night Slash
+- Fairy: Charm, Dazzling Gleam, Disarming Voice, Draining Kiss, Fairy Wind, Play Rough, Sweet Kiss
+
 New Items:
 ====
-- The Ice, Poison and Heart Stones have been added.
-- Additional evolution items include the Protector, Black Augurite, Up-Grade, Dubious Disc, Metal Coat and Candy Jar.
-- The Old Sea Map has been added, allowing access to Faraway Island and Mew.
+There are some new items here, with the aim of accomodating new Pokemon, adding features, and acting as methods of getting to new locations. 
+- The Ice, Poison and Heart Stones have been added, the latter two being from the SpaceWorld '97 demo.
+	- Additional evolution items include the Protector, Black Augurite, Up-Grade, Dubious Disc, Metal Coat, and Candy Jar (for Melmetal).
+- The Bottle Cap has been added alongside a Hyper Training feature, acting as effectively a Gold Bottle Cap.
+- The Old Sea Map has been added, giving access to Faraway Island and Mew.
 - The Citrine Pass has been added, allowing access to a new post-game area based on the unused "C" map.
-- The Wing Fossil is a new item that allows Aerodactyl to be revived, as the Old Amber was instead used for Decilla.
+- The Wing Fossil is a new item that allows Aerodactyl to be revived, as the Old Amber is instead used for Decilla.
 
-New areas
+New Areas
 ====
 - Celadon University is just north of Celadon.
 	- This is a reference to a Magikarp event from July 1998, and includes the lore from it and other areas of Pokemon's early worldbuilding.
-	- New infinitely re-battleable trainers for grinding.
-	- There's a Move Deleter and Move Relearner!
+	- There are features new infinitely re-battleable trainers for grinding money.
+	- There's a Move Deleter and Move Relearner, allowing for HM deletion and getting back lost moves.
 - Citrine City is a new island city that can be accessed in the postgame.
-	- Contains a house with a Move Tutor that can teach Tradeback moves without the need for GSC!
-	- Contains a Team Rocket house where they will sell you TMs and Evolution Items, as well as have a Hyper Training feature to get Max DVs!
-	- Will contain a Battle Tower with infinite, randomised trainer parties!
-	- Garnet Cavern, located in Citrine City, houses several strong trainers and Pokémon.
+	- There's a house with a Move Tutor that can teach Tradeback moves without the need for GSC's Time Capsule!
+	- It features a Team Rocket house where they will sell you TMs and Evolution Items, as well as provide a Hyper Training feature to get Max DVs!
+	- The Battle Tent from the TwitchPlaysPokemon Anniversary hack makes a return, featuring new trainers and KEP Pokemon!
+	- Garnet Cavern, located in Citrine City, houses several strong trainers and Pokémon. It seems a little familiar...
 	- Brunswick Trail, south of Citrine City, is a route that leads to Celeste Hill.
 	- Celeste Hill activates an event where the Galarian Legendary Birds can be fought. Moltres will challenge you right there, while the other two flee to the previously mentioned locations.
-- Underwater Tunnel connects Route 25 and Route 10.
+- Underwater Tunnel connects Route 25 and Route 10, making Rock Tunnel skippable later.
 - Cinnabar Volcano is a new area that houses Moltres, allowing it to be obtained before Victory Road.
 - Faraway Island from Pokemon Emerald has been added, where you can find Mew. It also has its own wild encounters, as well as an improved translation on its sign, enhancing its appearance from its source material.
 - Mt. Moon Crater is a new area based on Area Zero in Pokemon Scarlet and Violet, accessible in the post-game. Here, you can encounter Scream Tail and Sandy Shocks via random encounter, just like the original!
-- Bill's Garden is accessible in the post-game to access all "one-time deals", just like in the mythos!
+- Bill's Garden is accessible in the post-game with access to all "one-time deals", just like in the mythos!
 - Silph Co. holds a special challenge for Pokemon League Champions...
 
-Improved areas
+Improved Areas
 ====
-- Some barriers to travel across the region have been removed (for example, Pewter City can be left without defeating Brock) allowing for more open world gameplay. Not all, though!
+- Some barriers to travel across the region have been removed (for example, Pewter City can be left without defeating Brock) allowing for more open world gameplay. Not all, though! 
 	- To encourage this, Gym Leaders now have level scaling, giving more consistent challenge across the game. 
-- Cinnabar Lab's Trade Room now features the Trader, who will evolve trade-evolving Pokemon for you!
 - Giovanni now uses his unused theme song from Yellow, and has his LGPE monologue in the Rocket Hideout.
 - Jessie and James have been backported from Yellow, appearing in Mt. Moon, Rocket Hideout, Pokemon Tower, and Silph Co. Additionally, they have a post-game fight.
 - Rock Tunnel has a more workable map, now being easier to go through and having new areas to explore. Includes a way to get renewable fossils, items, and other interesting bits and pieces. Overall, it makes Flash much more rewarding to bring, showing you where the items and content are instead of being an inconvenience. 
 - Diglett's Cave has a more detailed map with Onix, Wiglett, and Wugtrio also appearing! It also has its beta music!
 - Route 25 has been given a facelift, adding Bill's Lighthouse in place of the Sea Cottage.
 - Cinnabar Island is a lot bigger, with the volcano being added to it. The mansion seems different too...
+	- Cinnabar Lab's Trade Room now features the Trader, who will evolve trade-evolving Pokemon for you!
 - Pokemon Tower was shortened, being less intensive and adding room for more maps.
 - Silph Co's pathing was completely overhauled to make navigating it less tedious.
 - Viridian Gym now has a minor new area once you make Giovanni leave.
-- The S.S. Anne now returns after getting the Marsh Badge and features trades for Galarian forms and Paldean Tauros.
+- The S.S. Anne now returns after getting the Marsh Badge and features trades for Galarian forms & Evolutions, as well as Paldean Tauros.
 - After entering the Hall of Fame, try visiting Route 1!
 
 QoL Enhancements
 ====
-- A girl option is now available, featuring the sprite from Pokemon Anniversary Red, which is based on Green's manga and later LGPE appearance (sort of).
+- A girl option is now available, featuring the sprite from Pokemon Anniversary Red, which is based on Green's manga appearance.
+	- To accomodate this, Celadon Gym's trainers use their more neutral text from Crystal.
 - All 151 original Pokemon, plus an additional 100, can be obtained without the use of trading or glitches, including Mew!
 - New Pokedex entries for most Pokemon are available, sourced from the original 1996 Pokedex book by Creatures Inc., restoring a ton of old Kanto lore. Thanks to [Dr. Lava and Nob Ogasawara](http://lavacutcontent.com/1996-creatures-pokedex-translation-1/) for their incredible work translating and writing about it!
 - Pikachu and Eevee are now starters, featuring fully functional Rival lineups. If you pick Pikachu, he picks Eevee, and if you pick Eevee, he picks Pikachu!
 - Item Descriptions are available!
-- Press A beside surfable water, strength boulders or cut trees to use the HMs without needing to go into the Party menu.
+- Press A beside surfable water, strength boulders, or cut trees to use the HMs without needing to go into the Party menu.
 - PP symbol is displayed in the battle menu. PP displayed before, it just looks nicer now. Done by changing a straggler Japanese character.
-- Running Shoes by holding B. Also works with the bike! Surf speed is also doubled.
+- Running Shoes activate by holding B. Also works with the bike and Surf.
 - Fast text has no frame delay between text scrolling, doubling the scroll speed. It's also been made the default option, so you don't need to go into the Options menu for it.
+- The Old and Good Rods have been removed, and the Super Rod, now called the Fishing Rod, is obtained in Pewter City. All fishing encounter tables have been altered to roughly match the levels of the surrounding routes. 
 - Traded Pokemon ("Outsiders") can now be nicknamed at the Name Rater's House.
 - Lorelei, Bruno, and Agatha now play the Gym Leader Battle theme.
 - HP bar has been doubled in speed, having a 1 frame delay per pixel rather than 2.
 - Trainer DVs are perfect-15s.
-- The Old and Good Rods have been removed, and the Super Rod, now called the Fishing Rod, is obtained in Pewter City. All fishing encounter tables have been altered to roughly match the levels of the surrounding routes. 
 - The protagonist is referred to in a gender neutral manner.
 - PC added to Celadon Hotel where the invisible event usually is. Why not?
 - Artificial Save Delay has been removed.
@@ -110,7 +130,7 @@ QoL Enhancements
 	- HM03 (Surf) can be taught to the Pikachu line (Stadium / Corocoro)
 	- Psyduck learns Amnesia at Lv15 (Stadium)
 - Yellow learnset changes are imported; eg. Flash Venonat, with tweaks made to ensure nothing is lost from RB either.
-- The Game Corner in general is massively buffed, making everything far more worth going for;
+- The Game Corner in general is massively buffed and much faster, making everything far more worth going for;
 	- 3x Cherry now gives 50 coins (used to be 8)
 	- 3x Arbok/Koffing/Meowth now gives 100 coins (used to be 15)
 	- 3x BAR now gives 400 coins (used to be 100)
@@ -118,13 +138,13 @@ QoL Enhancements
 - Game Corner prizes have been altered;
 	- Blue's superior prices are used, so Porygon only costs 6500 coins.
 	- New prizes include: Cubone, Blastyke, and Cactus.
-	- The Moon Stone is available over TM23 (Dragon Rage). Dragon Rage is accessible in Celadon University!
+	- The Moon Stone is available over TM23 (Dragon Rage). Dragon Rage is still available in Celadon University!
 - Bag capacity increased from 20 to 30 items.
 - Spinner tiles move faster.
 
 Bug Fixes
 ====
-Many non-multiplayer, non-battle related bugs have been fixed. The aforementioned have been preserved for the RBY battle experience. Bugs that are fixed are ones that objectively hurt the gameplay experience. Much of this can be attributed to [the tutorials](https://github.com/pret/pokered/wiki/Bugs-and-Glitches) made by the good people at pret.
+Many non-multiplayer, non-battle related bugs have been fixed. Battle-related bugs have been preserved for the sake of the RBY battle experience. Bugs that are fixed are ones that objectively hurt the gameplay experience, so glitches like the Mew Glitch, which arguably add to the gameplay, are preserved. Much of the fixes made here can be attributed to [the tutorials](https://github.com/pret/pokered/wiki/Bugs-and-Glitches) made by the good people at pret.
 - Fixed various translation errors (eg. Route 14 Birdkeeper's "birds of prey" line, Koji and Atsuko in Fuschia.)
 - Blaine is no longer addicted to Super Potions.
 - CoolTrainerF no longer switches a lot.
@@ -164,15 +184,18 @@ Known Bugs
 ====
 - Only portions of spinner tiles animate.
 - Occasionally, menu text sets itself to scroll.
-- The lone Rocket in Viridian Gym's basement needs to be directly spoken to to be battled
-- Pokedex is very laggy during a playthrough
-- Tradeback Tutor doesn't work properly with Rhydon
-- Vermilion Passes are very unstable (Faraway warps are weird unless you battle, Citrine outright crashes)
-- Brunswick Trail Bird event is unfinished, Zapdos causes it to crash.
+- The lone Rocket in Viridian Gym's basement needs to be directly spoken to to be battled.
+- Pokedex is very laggy during a playthrough.
+- The Tradeback Tutor doesn't work properly with Rhydon for reasons likely related to its index number of 1.
+- The Vermilion Passes are very unstable (Faraway warps are weird unless you battle, Citrine outright crashes).
+- The Brunswick Trail Bird event is unfinished, Zapdos causes it to crash.
 
 Evolution Methods for new Pokemon
 ====
-Due to the odd way some new Pokemon evolve, methods are listed here. Beta Pokemon are included with their original methods, given their obscurity. Some Pokemon will have methods from the Spaceworld '97 demo to be closer to (or functional in the context of) RBY. To accomodate things and ensure everything makes sense, some Pokemon have also had their methods changed.
+Due to the odd way some new Pokemon evolve, methods are listed here. 
+- Beta Pokemon are included with their original methods. 
+- Some Pokemon will have methods from the Spaceworld '97 demo to be closer to, or functional in the context of, RBY. Sometimes the newer version is available (eg. Metal Coat evolutions) for the sake of familiarity.
+- To accomodate new additions and ensure everything makes sense, some Pokemon have also had their methods changed. These situations are usually very extreme.
 
 Changed Methods:
 - Shellder -> Cloyster | Use Ice Stone (Accomodating Taaban)
@@ -231,7 +254,7 @@ Kanto Beta Pokemon:
 - Nidorino OR Nidorina -> Nidoreign | Moon Stone
 
 Eeveelutions:
-- Espeon | Heart Stone 
+- Espeon | Heart Stone
 - Umbreon | Poison Stone
 - Leafeon | Leaf Stone
 - Glaceon | Ice Stone
@@ -246,7 +269,7 @@ The following will apply:
 - Politoed for Heart Stone
 - Victreebel for Leaf Stone
 - Tsubomitto for Poison Stone
-- Mr. Rime for Ice Stone
+- Cloyster for Ice Stone
 - Melmetal for Candy Jar
 - Kleavor for Black Augurite
 - Porygon2 for Up-Grade
@@ -256,7 +279,7 @@ The following will apply:
 
 Accessing Regional variants
 ====
-Adding regional variants was difficult; we hit the exact cap by cutting their pre-evolutions. However, we managed to implement them quite nicely! Given many of these evolve via stones, we've given them their pre-evolution's learnsets to ensure they remain functional.
+Adding regional variants was difficult; we hit the exact Pokemon cap by cutting their pre-evolutions. However, we managed to implement them quite nicely!
 
 Much like in Let's Go Pikachu and Let's Go Eevee, traders are available who will trade you a regional variant in exchange for a Kantonian one. This goes as follows:
 - Viridian City: Raticate
@@ -269,9 +292,11 @@ Much like in Let's Go Pikachu and Let's Go Eevee, traders are available who will
 - Fuchsia City: Marowak
 - Cinnabar Island: Muk
 - Indigo Plateau: Exeggutor
-Version exclusivity was factored in, instead moving Raticate and Golem to the cities without a trader.
+Version exclusivity was factored in, instead moving Raticate and Golem to the cities without a trader, which were strangely appropriate thematically.
 
-Galarian and Paldean formes are accessed on the S.S. Anne, which now returns after receiving the Marsh Badge. Hisuian formes are found in the wild in Bill's Garden, which is accessible in the post-game.
+Galarian and Paldean formes are accessed on the S.S. Anne, which now returns after receiving the Marsh Badge. Hisuian formes are found in the wild in Bill's Garden, which is accessible in the post-game. The idea is a prototype version of his Time Capsule yanks them in or something.
+
+ Given many of these evolve via stones, we've given them their pre-evolution's learnsets to ensure they remain functional. Should the current situation change, the trades will be changed to the pre-evolutions and their learnsets shifted appropriately.
 
 Credits
 ====

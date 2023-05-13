@@ -8,8 +8,8 @@ CeladonUniversityOutside_Object:
 	def_bg_events
 
 	def_object_events
-	object_event 19, 30, SPRITE_COOLTRAINER_F, WALK, RIGHT, 1 ; trainer
-	object_event 22, 26, SPRITE_SUPER_NERD, WALK, LEFT, 2 ; trainer
+	object_event 16, 30, SPRITE_COOLTRAINER_F, WALK, RIGHT, 1 ; trainer
+	object_event 25, 27, SPRITE_SUPER_NERD, WALK, LEFT, 2 ; trainer
 	object_event  9,  6, SPRITE_GAMBLER, WALK, DOWN, 3 ; trainer
 	object_event 25, 20, SPRITE_SUPER_NERD, WALK, DOWN, 4 ; trainer
 	object_event  4, 27, SPRITE_FISHER, WALK, LEFT, 5 ; Original SPRITE_ROCKER replaced. Reason: maximum of 10 sprites per set
