@@ -1,29 +1,29 @@
 ;btlibs
-BTLib1::
+BTLib1:
 	db "ready@@@@"
 	db "prepared@"
 	db "excited@@"
 	db "hyped@@@@"
 	
-BTLib2::
+BTLib2:
 	db "go@@@@@"
 	db "do it@@"
 	db "battle@"
 	db "rock@@@"
 	
-BTLib3::
+BTLib3:
 	db "Oh no@@@@@"
 	db "Argh no@@@"
 	db "Oh well@@@"
 	db "My streak@"
 	
-BTLib4::
+BTLib4:
 	db "game@@@"
 	db "battle@"
 	db "play@@@"
 	db "job@@@@"
 
-BTBeforeBattlePtrTable::
+BTBeforeBattlePtrTable:
 	dw BTBeforeBattleTemplate1
 	dw BTBeforeBattleTemplate2
 	dw BTBeforeBattleTemplate3
@@ -33,7 +33,7 @@ BTBeforeBattlePtrTable::
 	dw BTBeforeBattleTemplate7
 	dw BTBeforeBattleTemplate8
 	
-BTAfterBattlePtrTable::
+BTAfterBattlePtrTable:
 	dw BTAfterBattleTemplate1
 	dw BTAfterBattleTemplate2
 	dw BTAfterBattleTemplate3

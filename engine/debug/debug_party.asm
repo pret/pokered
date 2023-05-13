@@ -71,8 +71,9 @@ IF DEF(_DEBUG)
 	ld [hl], a
 
 	; Jolteon (Pokemon 3) gets Thunderbolt.
+	; Adjusted for Trampel
 	ld hl, wPartyMon3Moves + 3
-	ld a, THUNDERBOLT
+	ld a, EARTHQUAKE
 	ld [hl], a
 	ld hl, wPartyMon3PP + 3
 	ld a, 15

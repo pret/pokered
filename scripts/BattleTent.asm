@@ -643,6 +643,14 @@ BattleTentTrainer:
 	ld l, e
 	ld h, d
 	call PrintText
+	
+	ld hl, wd72d
+	set 6, [hl]
+	set 7, [hl]
+	ld [wBTClass], a
+	ld a, 1
+	ld [wIsTrainerBattle], a
+	
 	jp TextScriptEnd
 	
 BattleTentTrainer_After:
@@ -799,4 +807,5 @@ BattleTentGuy2_Heal:
 ; Battle Tent
 BattleTentMart::
 	script_mart POTION, SUPER_POTION, HYPER_POTION, REVIVE, FULL_HEAL, POKE_DOLL, X_ATTACK, X_DEFEND, X_SPEED, X_SPECIAL
-	
+
+INCLUDE "engine/battletentdata.asm"
