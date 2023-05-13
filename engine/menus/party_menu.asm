@@ -120,6 +120,7 @@ RedrawPartyMenu_::
 	db "ABLE@"
 .notAbleToLearnMoveText
 	db "NOT ABLE@"
+	;battletent
 .battleTentMenu
 	ld a, [wWhichPokemon]
 	inc a
@@ -297,7 +298,7 @@ PartyMenuSwapMonText:
 
 PartyMenuBattleTentText: ; 12e93 (4:6e93)
 	text_far _PartyMenuBattleTentText
-	db "@"
+	text_end
 
 PotionText:
 	text_far _PotionText

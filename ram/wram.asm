@@ -405,23 +405,10 @@ wSlotMachineSevenAndBarModeChance:: db
 ; ROM back to return to when the player is done with the slot machine
 wSlotMachineSavedROMBank:: db
 
-;battle tent data
-wBTOrder:: dw
-wBTStreakCnt:: db
-wBTClass:: db
-wBTDataEnd::	
-wStringBuffer1:: ; cf5f
-	ds 16 + 1
-wStringBuffer2:: ; cf70
-	ds 16 + 1
-wStringBuffer3:: ; cf81
-	ds 9 + 1
-;end BT wram
-
 ; Move Buffer stuff for Mateo's code
 wMoveBuffer::
 wRelearnableMoves::
-	ds 115
+	ds 164
 ; Try not to use this stack. 
 ; A good amount of space is needed to store data for the move relearner.
 ; If it's like, 2, it'll lag like crazy and show garbage from elsewhere.
@@ -2117,7 +2104,20 @@ wBattleTentCurScript:: db
 wGameProgressFlagsEnd::
 
 UNION
-	ds 128
+; Surely this position will not cause any issues at all.
+;battle tent data
+wBTOrder:: dw
+wBTStreakCnt:: db
+wBTClass:: db
+wBTDataEnd::	
+wStringBuffer1:: ; cf5f
+	ds 16 + 1
+wStringBuffer2:: ; cf70
+	ds 16 + 1
+wStringBuffer3:: ; cf81
+	ds 9 + 1
+;end BT wram
+	ds 79
 NEXTU
 wChannel7:: channel_struct wChannel7
 wChannel8:: channel_struct wChannel8
