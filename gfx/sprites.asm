@@ -72,8 +72,7 @@ LittleBoySprite::        INCBIN "gfx/sprites/little_boy.2bpp"
 GameboyKidSprite::       INCBIN "gfx/sprites/gameboy_kid.2bpp"
 FairySprite::            INCBIN "gfx/sprites/fairy.2bpp"
 AgathaSprite::           INCBIN "gfx/sprites/agatha.2bpp"
-BrunoSprite::            INCBIN "gfx/sprites/bruno.2bpp"
-
+SeelSprite::             INCBIN "gfx/sprites/seel.2bpp" ; what a SILLY thing to do.
 
 SECTION "NPC Sprites 3", ROMX
 
@@ -98,4 +97,4 @@ GengarSprite::		 INCBIN "gfx/sprites/gengar.2bpp"
 MagikarpSprite::		 INCBIN "gfx/sprites/magikarp.2bpp"
 PoliwagSprite::		 INCBIN "gfx/sprites/poliwag.2bpp"
 LoreleiSprite::          INCBIN "gfx/sprites/lorelei.2bpp"
-SeelSprite::             INCBIN "gfx/sprites/seel.2bpp"
+BrunoSprite::            INCBIN "gfx/sprites/bruno.2bpp"
