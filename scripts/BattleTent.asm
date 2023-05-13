@@ -772,9 +772,9 @@ BattleTentGuy2_Init:
 	done
 	
 BattleTentGuy2_Streak:
-	text "Opponent no. @"
+	text "Opponent No.@" ; could be a №?
 	text_decimal wBTStreakCnt, 1, 2
-	db $0
+	text_start
 	line "is up next."
 	para "Good luck!"
 	done

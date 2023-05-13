@@ -2,8 +2,8 @@ BattleTent_Object: ; 0x1dd9b (size=38)
 	db $e ; border block
 
 	def_warp_events
-	warp_event  3, 19, CITRINE_CITY, 6
 	warp_event  2, 19, CITRINE_CITY, 6
+	warp_event  3, 19, CITRINE_CITY, 6
 
 	def_bg_events
 
