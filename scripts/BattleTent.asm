@@ -1,3 +1,8 @@
+; This is a port of the Battle Tent from TPP Anniversary.
+; Specifically, the version from here: https://github.com/CameruptQDX/PF-Roaming-Red/
+; For KEP, we use the Trainers aren't Pokemon implementation from pret's tutorial, but the original Battle Tent didn't, as it didn't add any new Pokemon beyond 190. Because of this, we have to have a scripted loss script in engine/core's HandlePlayerBlackout function, and home/overworld's OverworldLoop.notCinnabarGym function. We also have to "force" the trainer battle to trigger in this file.
+; Also, for some reason, battletentdata.asm didn't work properly without an INCLUDE. I cut my losses and slapped it in here, works fine anyway.
+
 BattleTent_Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, BattleTent_ScriptPointers
