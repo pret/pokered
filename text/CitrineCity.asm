@@ -24,7 +24,7 @@ _CitrineShopSignText::
 	done
 
 _CitrineCityTower::
-	text "BATTLE TOWER"
+	text "BATTLE TENT"
 	line "Test your mettle!"
 	done
 
