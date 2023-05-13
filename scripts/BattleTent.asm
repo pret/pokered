@@ -647,7 +647,6 @@ BattleTentTrainer:
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
-	ld [wBTClass], a
 	ld a, 1
 	ld [wIsTrainerBattle], a
 	

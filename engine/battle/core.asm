@@ -1167,7 +1167,27 @@ HandlePlayerBlackOut:
 	ld [wIsTrainerBattle], a 
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
-	jr z, .notRival1Battle
+	jp z, .notRival1Battle
+	
+	; This is a scripted loss mechanic from a pret tutorial, adapted to the Battle Tent.
+	; This is necessary so you don't get booted out of the tent and have your Pokemon de-levelled.
+	
+	ld a, [wCurMap]
+	cp BATTLE_TENT
+	jr nz, .notThatTrainer
+	hlcoord 0, 0
+	lb bc, 8, 21
+	call ClearScreenArea
+	call ScrollTrainerPicAfterBattle
+	ld c, 40
+	call DelayFrames
+	ld hl, StupidBattleTentFix
+	call PrintText
+	ld a, [wCurMap]
+	cp BATTLE_TENT ; MAP ID can be found in constants\map_constants.asm
+	ret
+	
+.notThatTrainer       
 	ld a, [wCurOpponent]
 	cp OPP_RIVAL1
 	jr nz, .notRival1Battle
@@ -7124,3 +7144,10 @@ LoadMonBackPic:
 	ldh a, [hLoadedROMBank]
 	ld b, a
 	jp CopyVideoData
+
+; I struggled a lot in making this generate the text.
+; This is the best compromise I can come up with right now.
+StupidBattleTentFix:
+	text "Oops! Better"
+	line "luck next time!"
+	prompt

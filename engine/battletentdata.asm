@@ -1,4 +1,5 @@
 ;btlibs
+; afters are farcallable for core.asm
 BTLib1:
 	db "ready@@@@"
 	db "prepared@"
@@ -11,13 +12,13 @@ BTLib2:
 	db "battle@"
 	db "rock@@@"
 	
-BTLib3:
+BTLib3::
 	db "Oh no@@@@@"
 	db "Argh no@@@"
 	db "Oh well@@@"
 	db "My streak@"
 	
-BTLib4:
+BTLib4::
 	db "game@@@"
 	db "battle@"
 	db "play@@@"
@@ -33,7 +34,7 @@ BTBeforeBattlePtrTable:
 	dw BTBeforeBattleTemplate7
 	dw BTBeforeBattleTemplate8
 	
-BTAfterBattlePtrTable:
+BTAfterBattlePtrTable::
 	dw BTAfterBattleTemplate1
 	dw BTAfterBattleTemplate2
 	dw BTAfterBattleTemplate3
@@ -107,7 +108,7 @@ BTBeforeBattleTemplate8:
 	text "."
 	done
 	
-BTAfterBattleTemplate1:
+BTAfterBattleTemplate1::
 	text "@"
 	text_ram wStringBuffer1
 	text "!"
@@ -115,13 +116,13 @@ BTAfterBattleTemplate1:
 	para "Oh man.."
 	prompt
 	
-BTAfterBattleTemplate2:
+BTAfterBattleTemplate2::
 	text "@"
 	text_ram wStringBuffer1
 	text "!"
 	prompt
 	
-BTAfterBattleTemplate3:
+BTAfterBattleTemplate3::
 	text "@"
 	text_ram wStringBuffer1
 	text "!"
@@ -131,14 +132,14 @@ BTAfterBattleTemplate3:
 	text "!"
 	prompt
 	
-BTAfterBattleTemplate4:
+BTAfterBattleTemplate4::
 	text "That was a nice"
 	line "@"
 	text_ram wStringBuffer2
 	text "!"
 	prompt
 	
-BTAfterBattleTemplate5:
+BTAfterBattleTemplate5::
 	text "I did the best"
 	line "I could."
 	
@@ -146,7 +147,7 @@ BTAfterBattleTemplate5:
 	line "regrets!"
 	prompt
 
-BTAfterBattleTemplate6:
+BTAfterBattleTemplate6::
 	text "@"
 	text_ram wStringBuffer1
 	text "!"
@@ -156,7 +157,7 @@ BTAfterBattleTemplate6:
 	text "!"
 	prompt
 	
-BTAfterBattleTemplate7:
+BTAfterBattleTemplate7::
 	text "That was a nice"
 	line "@"
 	text_ram wStringBuffer2
@@ -164,7 +165,7 @@ BTAfterBattleTemplate7:
 	cont "don't you think?"
 	prompt
 	
-BTAfterBattleTemplate8:
+BTAfterBattleTemplate8::
 	text "Awesome"
 	line "@"
 	text_ram wStringBuffer2
