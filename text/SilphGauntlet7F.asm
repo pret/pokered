@@ -33,12 +33,12 @@ _ChiefMonologue::
 	prompt
 
 _ChiefDefeatedText::
-	text "No!"
+	text "CHIEF: No!"
 	line "I...I..."
 	prompt
 
 _ChiefVictoryText::
-	text "Ha!"
+	text "CHIEF: Ha!"
 	line "Now hand it over!"
 	prompt
 
@@ -66,8 +66,9 @@ _ChiefAfterBattleText::
 	para "Go."
 	
 	para "Otherwise..."
-	line "MEWTWO's hatred"
-	cont "will crush this"
+	
+	para "MEWTWO's hatred"
+	line "will crush this"
 	cont "world."
 	
 	done
