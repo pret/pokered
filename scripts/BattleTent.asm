@@ -176,7 +176,7 @@ BattleTent_RestoreTeam:
 	xor a
 	ld [wRemoveMonFromBox], a
 	ld [wWhichPokemon], a
-	call _RemovePokemon
+	call RemovePokemon
 	pop bc
 	dec b
 	jr nz, .removeloop
@@ -201,7 +201,7 @@ BattleTent_RestoreTeam:
 	call MoveMon
 	ld a, $1
 	ld [wRemoveMonFromBox], a
-	call _RemovePokemon
+	call RemovePokemon
 	pop bc
 	dec b
 	jr nz, .withdloop
