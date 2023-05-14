@@ -171,22 +171,21 @@ BattleTent_Normal:
 BattleTent_RestoreTeam:
 	ld b, 3
 ; remove the current 3 team
+; The original Battle Tent's removeloop effectively didn't work, so Enigami replaced it with one that does. 
+; However, it results in the need for compromises with box functionality.
+; We don't know how the code in the port managed to function - it's possible the streamed version was different.
 .removeloop
-	push bc
-	xor a
-	ld [wRemoveMonFromBox], a
-	ld [wWhichPokemon], a
-	call RemovePokemon
-	pop bc
-	dec b
-	jr nz, .removeloop
-	ld a, [wBTOrder+1]
-	swap a
-	and $7
-	ld b, a
-	ld a, [wBoxCount]
-	sub b
-	ld c, a
+    push bc
+    xor a
+    ld [wRemoveMonFromBox], a
+    ld [wWhichPokemon], a
+    call RemovePokemon
+    pop bc
+    dec b
+    jr nz, .removeloop
+    ld a, [wBoxCount]
+    ld b, a
+    ld c, 0
 	
 ; withdraw all party 'mons from the box
 .withdloop
@@ -438,11 +437,9 @@ BattleTentGuy:
 	ld hl, BattleTentNotEnough
 	jr c, .finalskip
 ; box space check
-	ld a, [wPartyCount]
-	ld b, a
+; Due to the way the loops have changed, and the weird old function, the Battle Tent now requires a free box to work.
 	ld a, [wBoxCount]
-	add b
-	cp MONS_PER_BOX + 1
+	cp 1
 	ld hl, BattleTentNoBoxTmp
 	jr c, .skip2
 .finalskip
@@ -717,14 +714,13 @@ BattleTentNotEnough:
 BattleTentNoBoxTmp:
 	text "..whoops! your"
 	line "current #MON"
-	cont "BOX does not"
-	cont "have enough"
-	cont "space!"
+	cont "BOX needs to"
+	cont "be empty!"
 	
 	para "We need to"
 	line "store all of your"
 	cont "party's #MON"
-	cont "into the box."
+	cont "into a BOX."
 	
 	para "Try changing"
 	line "or emptying it."
@@ -810,6 +806,6 @@ BattleTentGuy2_Heal:
 
 ; Battle Tent
 BattleTentMart::
-	script_mart POTION, SUPER_POTION, HYPER_POTION, REVIVE, FULL_HEAL, POKE_DOLL, X_ATTACK, X_DEFEND, X_SPEED, X_SPECIAL
+	script_mart FULL_RESTORE, MAX_REVIVE, FULL_HEAL, BOTTLE_CAP, POKE_DOLL, X_ATTACK, X_DEFEND, X_SPEED, X_SPECIAL, GUARD_SPEC
 
 INCLUDE "engine/battletentdata.asm"
