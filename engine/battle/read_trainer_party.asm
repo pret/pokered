@@ -14,7 +14,15 @@ ReadTrainer:
 	dec a
 	ld [hl], a
 
+; check if we are in battle tent since we need a random pokemon data
+	ld a,[wCurMap]
+	cp BATTLE_TENT
+	jr nz, .notBT
+	farcall ReadBattleTentTrainer
+	jp .FinishUp
+
 ; get the pointer to trainer data for this class
+.notBT
 	ld a, [wTrainerClass] ; get trainer class
 	dec a
 	add a

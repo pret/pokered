@@ -22,12 +22,12 @@ SetIshiharaTeam:
 
 IshiharaTeam:
 	db EXEGGUTOR_A, 90
-	db ONIX, 90
-	db PINSIR, 90
+	db PURAKKUSU, 90
+	db TRAMPEL, 90
 IF DEF(_DEBUG)
-	db DITTO, 50
-	db SCYTHER, 50
-	db SCYTHER, 50
+	db TAUROS_PB, 50
+	db SNORLAX, 50
+	db TANGROWTH, 50
 ENDC
 	db -1 ; end
 
@@ -71,8 +71,9 @@ IF DEF(_DEBUG)
 	ld [hl], a
 
 	; Jolteon (Pokemon 3) gets Thunderbolt.
+	; Adjusted for Trampel
 	ld hl, wPartyMon3Moves + 3
-	ld a, THUNDERBOLT
+	ld a, EARTHQUAKE
 	ld [hl], a
 	ld hl, wPartyMon3PP + 3
 	ld a, 15

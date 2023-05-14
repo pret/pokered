@@ -312,6 +312,7 @@ Credits
 * dannye33 - Assisting with crysaudio implementation
 * erosunica - Assistance with developing Celadon University & Citrine City, plus sources for various subjects.
 * Chatot4444 - Assisting with gym scaling code
+* Enigami - Reworking the Battle Tent's RestoreTeam code to make it work properly
 * ZumiIsawhat? - Restorations of beta OST
 * FrenchOrange - Reconstructions of various overworld beta sprites.
 * Helix Chamber, RacieBeep, loumilouminosus, Orchid, GBCRetro, & catstorm26 - Prototype Pokémon sprites

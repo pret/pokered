@@ -220,11 +220,11 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const DIGLETTS_CAVE,                 20, 18 ; $C6
 	map_const VICTORY_ROAD_3F,               15,  9 ; $C7
 	map_const ROCKET_HIDEOUT_B1F,            15, 14 ; $C8
-	map_const ROCKET_HIDEOUT_B2F,            15, 14 ; $C9	- Currently unused
-	map_const ROCKET_HIDEOUT_B3F,            15, 14 ; $CA	- Currently unused
-	map_const ROCKET_HIDEOUT_B4F,            15, 12 ; $CB	- Currently unused
-	map_const ROCKET_HIDEOUT_ELEVATOR,        3,  4 ; $CC	- Currently unused
-	map_const CITRINE_MART,             	  4,  4  ; $CD	- was UNUSED_MAP_CC
+	map_const ROCKET_HIDEOUT_B2F,            15, 14 ; $C9
+	map_const ROCKET_HIDEOUT_B3F,            15, 14 ; $CA
+	map_const ROCKET_HIDEOUT_B4F,            15, 12 ; $CB
+	map_const ROCKET_HIDEOUT_ELEVATOR,        3,  4 ; $CC
+	map_const CITRINE_MART,             	  4,  4 ; $CD	- was UNUSED_MAP_CC
 	map_const GARNET_CAVERN_1F,              15,  9 ; $CE	- was UNUSED_MAP_CD
 	map_const GARNET_CAVERN_B1F,             15,  9 ; $CF	- was UNUSED_MAP_CE
 	map_const SILPH_CO_2F,                   15,  9 ; $D0
@@ -267,8 +267,9 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const LORELEIS_ROOM,                  5,  6 ; $F5
 	map_const BRUNOS_ROOM,                    5,  6 ; $F6
 	map_const AGATHAS_ROOM,                   5,  6 ; $F7
-	map_const ROCK_TUNNEL_B1F,               20, 18 ; $E9	- Switched with CINNABAR_VOLCANO_FLOORS
+	map_const ROCK_TUNNEL_B1F,               20, 18 ; $F8	- Switched with CINNABAR_VOLCANO_FLOORS
 	map_const GIOVANNIS_ROOM,				 11, 14 ; $F9
+	map_const BATTLE_TENT,					  5, 10 ; $FA
 DEF NUM_MAPS EQU const_value
 
 ; Indoor maps, such as houses, use this as the Map ID in their exit warps

@@ -2099,11 +2099,25 @@ wSeafoamIslandsB3FCurScript:: db
 wRoute23CurScript:: db
 wSeafoamIslandsB4FCurScript:: db
 wRoute18Gate1FCurScript:: db
-	ds 6
+wBattleTentCurScript:: db
+	ds 5
 wGameProgressFlagsEnd::
 
 UNION
-	ds 128
+; Surely this position will not cause any issues at all.
+;battle tent data
+wBTOrder:: dw
+wBTStreakCnt:: db
+wBTClass:: db
+wBTDataEnd::	
+wStringBuffer1:: ; cf5f
+	ds 16 + 1
+wStringBuffer2:: ; cf70
+	ds 16 + 1
+wStringBuffer3:: ; cf81
+	ds 9 + 1
+;end BT wram
+	ds 79
 NEXTU
 wChannel7:: channel_struct wChannel7
 wChannel8:: channel_struct wChannel8

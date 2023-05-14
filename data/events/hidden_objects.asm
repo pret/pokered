@@ -85,6 +85,7 @@ HiddenObjectMaps:
 	db ROUTE_4
 	db CELADON_UNIVERSITY_POKECENTER
 	db CITRINE_POKECENTER
+	db BATTLE_TENT
 	db -1 ; end
 
 HiddenObjectPointers:
@@ -175,6 +176,7 @@ HiddenObjectPointers:
 	dw Route4HiddenObjects
 	dw CeladonUniversityPokecenterHiddenObjects
 	dw CitrinePokecenterHiddenObjects
+	dw BattleTentHiddenObjects
 
 MACRO hidden_object
 	db \2 ; y coord
@@ -634,3 +636,7 @@ CeruleanCityHiddenObjects:
 Route4HiddenObjects:
 	hidden_object 40,  3, GREAT_BALL, HiddenItems
 	db -1 ; end
+
+BattleTentHiddenObjects:
+	hidden_object 9,  16, SPRITE_FACING_UP, OpenPokemonCenterPC
+	db -1

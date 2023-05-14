@@ -362,3 +362,8 @@ SECTION "Engine Spillover", ROMX
 
 INCLUDE "engine/menus/item_descriptions.asm"
 INCLUDE "engine/items/tm_prices.asm"
+
+_PartyMenuBattleTentText::
+	text "Select which"
+	line "#MON to enter?"
+	done
