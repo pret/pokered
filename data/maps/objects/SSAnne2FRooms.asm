@@ -23,17 +23,16 @@ SSAnne2FRooms_Object:
 	object_event  0, 14, SPRITE_GENTLEMAN, STAY, RIGHT, 3, OPP_GENTLEMAN, 5
 	object_event  2, 11, SPRITE_COOLTRAINER_F, STAY, DOWN, 4, OPP_LASS, 12
 	object_event  1,  2, SPRITE_GENTLEMAN, STAY, DOWN, 5 ; person
-	; object_event 12,  1, SPRITE_POKE_BALL, STAY, NONE, 6, MAX_ETHER
+	object_event 12,  1, SPRITE_POKE_BALL, STAY, NONE, 6, RARE_CANDY
 	object_event 21,  2, SPRITE_GENTLEMAN, STAY, DOWN, 7 ; person
 	object_event 22,  1, SPRITE_GRAMPS, STAY, DOWN, 8 ; person
-	object_event  0, 12, SPRITE_POKE_BALL, STAY, NONE, 9, RARE_CANDY
-	object_event 12, 12, SPRITE_GENTLEMAN, STAY, DOWN, 10 ; person
-	object_event 11, 14, SPRITE_LITTLE_BOY, STAY, NONE, 11 ; person
-	object_event 22, 12, SPRITE_BRUNETTE_GIRL, STAY, LEFT, 12 ; person
-	object_event 20, 12, SPRITE_BEAUTY, STAY, RIGHT, 13 ; person
-	object_event  0,  3, SPRITE_GAMEBOY_KID, STAY, DOWN, 14 ; Sirfetch'd Trader
-	object_event  0, 13, SPRITE_GAMEBOY_KID, STAY, DOWN, 12 ; Mr. Rime Trader
-	object_event  0, 13, SPRITE_GAMEBOY_KID, STAY, DOWN, 13 ; Rapidash Trader
+	object_event 12, 12, SPRITE_GENTLEMAN, STAY, DOWN, 9 ; person
+	object_event 11, 14, SPRITE_LITTLE_BOY, STAY, NONE, 10 ; person
+	object_event 22, 12, SPRITE_BRUNETTE_GIRL, STAY, LEFT, 11 ; person
+	object_event 20, 12, SPRITE_BEAUTY, STAY, RIGHT, 12 ; person
+	object_event  0,  3, SPRITE_GAMEBOY_KID, STAY, DOWN, 13 ; Sirfetch'd Trader
+	object_event  0, 13, SPRITE_GAMEBOY_KID, STAY, DOWN, 14 ; Mr. Rime Trader
+	object_event 20,  3, SPRITE_GAMEBOY_KID, STAY, DOWN, 15 ; Rapidash Trader
 	
 
 	def_warps_to SS_ANNE_2F_ROOMS
