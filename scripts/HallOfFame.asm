@@ -93,13 +93,13 @@ HallofFameRoomScript1:
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $ff
-	ld [wJoyIgnore], a
+	ld [wJoyIgnore], a ; TODO: Make this less awful. See: Giovanni in Silph
 	ld a, HS_CERULEAN_CAVE_GUY
 	ld [wMissableObjectIndex], a
 	predef HideObject
-	ld a, HS_MT_MOON_CRATER_GUARD
-	ld [wMissableObjectIndex], a
-	predef HideObject
+	;ld a, HS_MT_MOON_CRATER_GUARD
+	;ld [wMissableObjectIndex], a
+	;predef HideObject
 	ld a, HS_ROUTE_1_OAK
 	ld [wMissableObjectIndex], a
 	predef ShowObject

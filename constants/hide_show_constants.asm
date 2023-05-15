@@ -124,11 +124,12 @@ DEF SHOW EQU $15
 	const HS_MT_MOON_1F_ITEM_4             ; 70 X
 	const HS_MT_MOON_1F_ITEM_5             ; 71 X
 	const HS_MT_MOON_1F_ITEM_6             ; 72 X
+	const HS_MT_MOON_B2F_JESSIE            ; UHH 6D
+	const HS_MT_MOON_B2F_JAMES             ; uhhh 6E
 	const HS_MT_MOON_B2F_FOSSIL_1          ; 73
 	const HS_MT_MOON_B2F_FOSSIL_2          ; 74
 	const HS_MT_MOON_B2F_ITEM_1            ; 75 X
 	const HS_MT_MOON_B2F_ITEM_2            ; 76 X
-	const HS_MT_MOON_CRATER_GUARD          ; 77
 	const HS_SS_ANNE_2F_RIVAL              ; 78
 	const HS_SS_ANNE_1F_ROOMS_ITEM         ; 79 X
 	const HS_SS_ANNE_2F_ROOMS_ITEM_1       ; 7A X

@@ -253,7 +253,8 @@ MapHSPointers:
 	dw NoHS
 	dw NoHS
 	dw GiovannisRoomHS
-	dw NoHS
+	dw NoHS ; Battle Tent
+	dw NoHS ; Mt Moon Square
 	assert_table_length NUM_MAPS
 	dw -1 ; end
 
@@ -420,11 +421,12 @@ MtMoon1FHS:
 	db MT_MOON_1F, $0C, SHOW                  ; HS_MT_MOON_1F_ITEM_5
 	db MT_MOON_1F, $0D, SHOW                  ; HS_MT_MOON_1F_ITEM_6
 MtMoonB2FHS:
-	db MT_MOON_B2F, $06, SHOW                 ; HS_MT_MOON_B2F_FOSSIL_1
-	db MT_MOON_B2F, $07, SHOW                 ; HS_MT_MOON_B2F_FOSSIL_2
-	db MT_MOON_B2F, $08, SHOW                 ; HS_MT_MOON_B2F_ITEM_1
-	db MT_MOON_B2F, $09, SHOW                 ; HS_MT_MOON_B2F_ITEM_2
-	db MT_MOON_B2F, $0A, HIDE                 ; HS_MT_MOON_CRATER_GUARD
+	db MT_MOON_B2F, $02, HIDE ; Jessie
+	db MT_MOON_B2F, $06, HIDE ; James
+	db MT_MOON_B2F, $07, SHOW ; Fossil 1
+	db MT_MOON_B2F, $08, SHOW ; Fossil 2
+	db MT_MOON_B2F, $09, SHOW ; Item 1
+	db MT_MOON_B2F, $0A, SHOW ; Item 2
 SSAnne2FHS:
 	db SS_ANNE_2F, $02, HIDE                  ; HS_SS_ANNE_2F_RIVAL
 SSAnne1FRoomsHS:

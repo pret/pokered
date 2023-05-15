@@ -1376,3 +1376,8 @@ INCLUDE "data/maps/headers/BattleTent.asm"
 INCLUDE "data/maps/objects/BattleTent.asm"
 INCLUDE "scripts/BattleTent.asm"
 BattleTent_Blocks: INCBIN "maps/BattleTent.blk"
+
+INCLUDE "data/maps/headers/MtMoonSquare.asm"
+INCLUDE "data/maps/objects/MtMoonSquare.asm"
+INCLUDE "scripts/MtMoonSquare.asm"
+MtMoonSquare_Blocks: INCBIN "maps/MtMoonSquare.blk"

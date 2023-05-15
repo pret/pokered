@@ -251,6 +251,7 @@ WildDataPointers:
 	dw RockTunnelB1FWildMons
 	dw NothingWildMons
 	dw NothingWildMons ; battle tent
+	dw NothingWildMons ; mt moon square
 	assert_table_length NUM_MAPS
 	dw -1 ; end
 

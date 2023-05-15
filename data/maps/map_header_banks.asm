@@ -252,4 +252,5 @@ MapHeaderBanks::
 	db BANK(RockTunnelB1F_h)
 	db BANK(GiovannisRoom_h)
 	db BANK(BattleTent_h)
+	db BANK(MtMoonSquare_h)
 	assert_table_length NUM_MAPS
