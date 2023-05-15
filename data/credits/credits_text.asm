@@ -65,6 +65,26 @@ CreditsTextPointers:
 	dw CredFukui
 	dw CredClub
 	dw CredPAAD
+	dw CredKEP
+	dw CredKEPDevs
+	dw CredPvK
+	dw CredMAH
+	dw CredEma
+	dw CredKEPSprites
+	dw CredAlba
+	dw CredHelix
+	dw CredFO
+	dw CredPSDevs
+	dw CredAus
+	dw CredPaul
+	dw CredDuo
+	dw CredKEPThanks
+	dw CredFrrf
+	dw CredDannye
+	dw CredEro
+	dw CredChatot
+	dw CredEni
+	dw CredVort
 	assert_table_length NUM_CRED_STRINGS
 
 CredVersion:
@@ -195,3 +215,43 @@ CredClub:
 	db -9, "NCL SUPER MARIO CLUB@"
 CredPAAD:
 	db -5, "PAAD TESTING@"
+CredKEP:
+	db -5, "KEP STAFF@"
+CredKEPDevs:
+	db -4, "KEP DEVELOPERS@"
+CredPvK:
+	db -5, "PLAGUE VON KARMA@"
+CredMAH:
+	db -6, "MEMENTOMARTHA@"
+CredEma:
+	db -7, "EMA SKYE@"
+CredKEPSprites:
+	db -4, "KEP SPRITES@"
+CredAlba:
+	db -5, "ALBATROSS@"
+CredHelix:
+	db -6, "HELIX CHAMBER@"
+CredFO:
+	db -7, "FRENCH ORANGE@"
+CredPSDevs:
+	db -4, "SHOWDOWN MOD@"
+CredAus:
+	db -5, "AUSMA@"
+CredPaul:
+	db -6, "PAULLUXX@"
+CredDuo:
+	db -7, "DUOM2@"
+CredKEPThanks:
+	db -4, "SPECIAL THANKS@"
+CredFrrf:
+	db -5, "FRRF@"
+CredDannye:
+	db -6, "DANNYE33@"
+CredEro:
+	db -7, "EROSUNICA@"
+CredChatot:
+	db -8, "CHATOT4444@"
+CredEni:
+	db -9, "ENIGAMI@"
+CredVort:
+	db -10, "VORTIENE@"

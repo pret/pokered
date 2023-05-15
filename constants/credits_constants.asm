@@ -64,6 +64,26 @@
 	const CRED_FUKUI          ; $3D
 	const CRED_CLUB           ; $3E
 	const CRED_PAAD           ; $3F
+	const CRED_KEP_STAFF
+	const CRED_KEP_DEVS
+	const CRED_PVK
+	const CRED_MAH
+	const CRED_EMA
+	const CRED_KEP_SPRITES
+	const CRED_ALBA
+	const CRED_HELIX
+	const CRED_FO
+	const CRED_PS_DEVS
+	const CRED_AUS
+	const CRED_PAUL
+	const CRED_DUO
+	const CRED_KEP_THANKS
+	const CRED_FRRF
+	const CRED_DANNYE
+	const CRED_EROSUNICA
+	const CRED_CHATOT
+	const CRED_ENI
+	const CRED_VORT
 DEF NUM_CRED_STRINGS EQU const_value
 
 	const_def -1, -1

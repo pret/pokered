@@ -25,7 +25,7 @@ IshiharaTeam:
 	db PURAKKUSU, 90
 	db TRAMPEL, 90
 IF DEF(_DEBUG)
-	db TAUROS_PB, 50
+	db TAUROS_PB, 90
 	db SNORLAX, 50
 	db TANGROWTH, 50
 ENDC
@@ -78,7 +78,26 @@ IF DEF(_DEBUG)
 	ld hl, wPartyMon3PP + 3
 	ld a, 15
 	ld [hl], a
-
+	
+	; Blaze Tauros (Pokemon 4) has a full moveset
+	ld hl, wPartyMon4Moves
+	ld a, FIRE_BLAST
+	ld [hli], a
+	ld a, LOW_KICK
+	ld [hli], a
+	ld a, FIRE_SPIN
+	ld [hli], a
+	ld a, HYPER_BEAM
+	ld [hl], a
+	ld hl, wPartyMon1PP
+	ld a, 99
+	ld [hli], a
+	ld a, 99
+	ld [hli], a
+	ld a, 99
+	ld [hli], a
+	ld [hl], a
+	
 	; Articuno (Pokemon 5) gets Fly.
 	ld hl, wPartyMon5Moves
 	ld a, FLY
