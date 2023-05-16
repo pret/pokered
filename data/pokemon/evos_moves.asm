@@ -1501,43 +1501,44 @@ FlareonEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
-	db 27, QUICK_ATTACK
-	db 31, EMBER
-	db 37, TAIL_WHIP
-	db 40, BITE
+	db 8, SAND_ATTACK
+	db 16, EMBER
+	db 23, QUICK_ATTACK
+	db 30, BITE
+	db 36, FIRE_SPIN
 	db 42, SMOG
-	db 44, FIRE_SPIN
-	db 48, LEER
-	db 54, FLAMETHROWER
+	db 44, RAGE
+	db 47, LEER
+	db 52, FLAMETHROWER
 	db 0
 
 JolteonEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
-	db 27, QUICK_ATTACK
-	db 31, THUNDERSHOCK
-	db 37, TAIL_WHIP
-	db 40, THUNDER_WAVE
-	db 42, DOUBLE_KICK
-	db 44, AGILITY
-	db 48, PIN_MISSILE
-	db 54, THUNDER
+	db 8, SAND_ATTACK
+	db 16, THUNDERSHOCK
+	db 23, QUICK_ATTACK
+	db 30, DOUBLE_KICK
+	db 36, PIN_MISSILE
+	db 42, THUNDER_WAVE
+	db 47, AGILITY
+	db 52, THUNDER
 	db 0
 
 VaporeonEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
-	db 27, QUICK_ATTACK
-	db 31, WATER_GUN
-	db 34, AURORA_BEAM
-	db 37, TAIL_WHIP
-	db 40, BITE
-	db 42, ACID_ARMOR
-	db 44, HAZE
-	db 48, MIST
-	db 54, HYDRO_PUMP
+	db 8, SAND_ATTACK
+	db 16, WATER_GUN
+	db 23, QUICK_ATTACK
+	db 30, BITE
+	db 36, AURORA_BEAM
+	db 42, HAZE
+	db 44, MIST
+	db 47, ACID_ARMOR
+	db 52, HYDRO_PUMP
 
 MachopEvosMoves:
 ; Evolutions
@@ -1713,10 +1714,10 @@ PurakkusuEvosMoves:
 	db 0
 ; Learnset
 	db 21, BIND
-	db 25, SEISMIC_TOSS
+	db 25, SMART_STRIKE
 	db 30, GUILLOTINE
 	db 36, FOCUS_ENERGY
-	db 43, HEADBUTT
+	db 43, IRON_DEFENSE
 	db 49, SLASH
 	db 54, SWORDS_DANCE
 	db 0
@@ -2607,9 +2608,9 @@ UmbreonEvosMoves:
 	db 16, BRUTAL_SWING
 	db 23, QUICK_ATTACK
 	db 30, FEINT_ATTACK
-	db 36, BITE ; should be Fake Tears but it hasn't been added yet
+	db 36, FAKE_TEARS
 	db 42, TAKE_DOWN
-	db 52, NIGHT_SLASH ; should be False Surrender but it hasn't been added yet
+	db 52, FALSE_SURRENDER
 	db 0
 	
 LeafeonEvosMoves:
@@ -2908,7 +2909,7 @@ PorygonZEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
-	db 50, NASTY_PLOT	; will replace with nasty plot
+	db 50, NASTY_PLOT
 	db 0
 
 AnnihilapeEvosMoves:
@@ -3003,7 +3004,7 @@ PerrserkerEvosMoves:
 	db 8, SCRATCH
 	db 12, PAY_DAY
 	db 17, BITE
-	db 25, SMART_STRIKE		; Smart Strike
+	db 25, SMART_STRIKE
 	db 29, FURY_SWIPES
 	db 32, SCREECH
 	db 36, SLASH
