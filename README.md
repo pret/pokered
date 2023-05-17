@@ -112,25 +112,26 @@ QoL Enhancements
 - Pikachu and Eevee are now starters, featuring fully functional Rival lineups. If you pick Pikachu, he picks Eevee, and if you pick Eevee, he picks Pikachu!
 - Item Descriptions are available!
 - Press A beside surfable water, strength boulders, or cut trees to use the HMs without needing to go into the Party menu.
-- PP symbol is displayed in the battle menu. PP displayed before, it just looks nicer now. Done by changing a straggler Japanese character.
 - Running Shoes activate by holding B. Also works with the bike and Surf.
 - Fast text has no frame delay between text scrolling, doubling the scroll speed. It's also been made the default option, so you don't need to go into the Options menu for it.
 - The Old and Good Rods have been removed, and the Super Rod, now called the Fishing Rod, is obtained in Pewter City. All fishing encounter tables have been altered to roughly match the levels of the surrounding routes. 
 - Traded Pokemon ("Outsiders") can now be nicknamed at the Name Rater's House.
-- Lorelei, Bruno, and Agatha now play the Gym Leader Battle theme.
 - HP bar has been doubled in speed, having a 1 frame delay per pixel rather than 2.
+- The blinking animation when hit by moves like Tackle now repeats 4 instead of 6 times, speeding up battles by a bit while not sacrificing impact.
+- PP symbol is displayed in the battle menu. PP displayed before, it just looks nicer now. Done by changing a straggler Japanese character.
+- Lorelei, Bruno, and Agatha now play the Gym Leader Battle theme.
 - Trainer DVs are perfect-15s.
 - The protagonist is referred to in a gender neutral manner.
 - PC added to Celadon Hotel where the invisible event usually is. Why not?
 - Artificial Save Delay has been removed.
-- Ultra Balls now have a Ball Modifier of 4, instead of 8. This makes them better for general-purpose than Great Balls. Safari Balls have the same effect applied. 
+- Ultra Balls now have a Ball Modifier of 4, instead of 8. This makes them better for general-purpose than Great Balls. Safari Balls have the same effect by proxy. 
+- Yellow learnset changes are imported; eg. Flash Venonat, with tweaks made to ensure nothing is lost from RB either.
 - Event moves can now be taught via TM/HM;
 	- TM16 (Pay Day) can be taught to Fearow and Rapidash ('98 Shogakukan)
 	- TM23 (Dragon Rage) can be taught to Magikarp (July '98 Shogakukan)
 	- HM02 (Fly) can be taught to the Pikachu line (Corocoro)
 	- HM03 (Surf) can be taught to the Pikachu line (Stadium / Corocoro)
 	- Psyduck learns Amnesia at Lv15 (Stadium)
-- Yellow learnset changes are imported; eg. Flash Venonat, with tweaks made to ensure nothing is lost from RB either.
 - The Game Corner in general is massively buffed and much faster, making everything far more worth going for;
 	- 3x Cherry now gives 50 coins (used to be 8)
 	- 3x Arbok/Koffing/Meowth now gives 100 coins (used to be 15)
@@ -142,6 +143,7 @@ QoL Enhancements
 	- The Moon Stone is available over TM23 (Dragon Rage). Dragon Rage is still available in Celadon University!
 - Bag capacity increased from 20 to 30 items.
 - Spinner tiles move faster.
+- Fight Debug now allows moves other than Pound.
 
 Bug Fixes
 ====

@@ -93,9 +93,9 @@ TestBattle:
 
 	; Give the player a
 	; level 20 Rhydon.
-	ld a, ARTICUNO_G
+	ld a, EEVEE
 	ld [wcf91], a
-	ld a, 16
+	ld a, 10
 	ld [wCurEnemyLVL], a
 	xor a
 	ld [wMonDataLocation], a
@@ -104,7 +104,7 @@ TestBattle:
 
 	; Fight against a
 	; level 20 Rhydon.
-	ld a, ARTICUNO_G
+	ld a, CROAKOZUNA
 	ld [wCurOpponent], a
 
 	predef InitOpponent
