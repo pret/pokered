@@ -35,6 +35,7 @@ Changes at a glance:
 	- Scream Tail remains Fairy/Psychic.
 - Fire remains neutral against Ice.
 - Bug and Poison remain super effective against each other.
+- Psychic remains immune to Ghost.
 
 Type Matchups for Steel and Dark for reference:
 - Steel...
@@ -216,7 +217,6 @@ New Pokemon:
 - Magmar -> Magmortar | Use Fire Stone
 - Electabuzz -> Electivire | Use Thunder Stone
 - Magneton -> Magnezone | Use Thunder Stone
-- Farfetch'd -> Sirfetch'd | Use Heart Stone
 - Poliwhirl -> Politoed | Use Heart Stone
 - Ditto -> Animon | Use Metal Coat
 - Seadra -> Kingdra | Trade
@@ -292,11 +292,12 @@ Much like in Let's Go Pikachu and Let's Go Eevee, traders are available who will
 - Fuchsia City: Marowak
 - Cinnabar Island: Muk
 - Indigo Plateau: Exeggutor
+
 Version exclusivity was factored in, instead moving Raticate and Golem to the cities without a trader, which were strangely appropriate thematically.
 
 Galarian and Paldean formes are accessed on the S.S. Anne, which now returns after receiving the Marsh Badge. Hisuian formes are found in the wild in Bill's Garden, which is accessible in the post-game. The idea is a prototype version of his Time Capsule yanks them in or something.
 
- Given many of these evolve via stones, we've given them their pre-evolution's learnsets to ensure they remain functional. Should the current situation change, the trades will be changed to the pre-evolutions and their learnsets shifted appropriately.
+Given many of these evolve via stones, we've given them their pre-evolution's learnsets to ensure they remain functional. Should the current situation change, the trades will be changed to the pre-evolutions and their learnsets shifted appropriately.
 
 Credits
 ====

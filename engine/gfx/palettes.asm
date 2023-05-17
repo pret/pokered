@@ -159,6 +159,8 @@ SetPal_Overworld:
 	jr z, .celeste
 	cp CERULEAN_CAVE_2F
 	jr c, .normalDungeonOrBuilding
+	cp LORELEIS_ROOM
+	jr z, .seafoam
 	cp BRUNOS_ROOM
 	jr z, .caveOrBruno
 .normalDungeonOrBuilding
@@ -215,8 +217,6 @@ SetPal_Overworld:
 	jr c, .faraway
 	cp SAFARI_ZONE_CENTER + 1
 	jr c, .forestDefault
-	cp BILLS_GARDEN
-	jr z, .faraway
 .forestDefault
 	ld a, PAL_FUCHSIA - 1
 	jr .town
