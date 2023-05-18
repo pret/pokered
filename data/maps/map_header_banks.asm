@@ -253,4 +253,5 @@ MapHeaderBanks::
 	db BANK(GiovannisRoom_h)
 	db BANK(BattleTent_h)
 	db BANK(MtMoonSquare_h)
+	db BANK(MtMoonSquareHouse_h)
 	assert_table_length NUM_MAPS

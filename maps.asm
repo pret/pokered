@@ -1381,3 +1381,9 @@ INCLUDE "data/maps/headers/MtMoonSquare.asm"
 INCLUDE "data/maps/objects/MtMoonSquare.asm"
 INCLUDE "scripts/MtMoonSquare.asm"
 MtMoonSquare_Blocks: INCBIN "maps/MtMoonSquare.blk"
+
+INCLUDE "data/maps/headers/MtMoonSquareHouse.asm"
+INCLUDE "data/maps/objects/MtMoonSquareHouse.asm"
+INCLUDE "scripts/MtMoonSquareHouse.asm"
+MtMoonSquareHouse_Blocks: INCBIN "maps/MtMoonSquareHouse.blk"
+

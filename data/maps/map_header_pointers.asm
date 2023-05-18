@@ -253,4 +253,5 @@ MapHeaderPointers::
 	dw GiovannisRoom_h
 	dw BattleTent_h
 	dw MtMoonSquare_h
+	dw MtMoonSquareHouse_h
 	assert_table_length NUM_MAPS

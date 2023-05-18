@@ -9,7 +9,3 @@ _CitrineMartText2::
 _CitrineMartText3::
 	text "PERSIAN: Nyaaa!"
 	done
-
-_CitrineMartText4::
-	text "CLEFAIRY: Pipii!"
-	done

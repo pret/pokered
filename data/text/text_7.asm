@@ -324,3 +324,8 @@ _NoTrade5Text::
 	text "Ok, maybe next"
 	line "time then."
 	done
+
+_ClefairyText::
+	text "CLEFAIRY: Pi"
+	line "pippippi!@"
+	text_end

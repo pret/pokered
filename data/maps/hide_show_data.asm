@@ -255,6 +255,7 @@ MapHSPointers:
 	dw GiovannisRoomHS
 	dw NoHS ; Battle Tent
 	dw NoHS ; Mt Moon Square
+	DW NoHS ; Mt Moon Square House
 	assert_table_length NUM_MAPS
 	dw -1 ; end
 

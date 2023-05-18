@@ -6,7 +6,7 @@ MtMoonB2F_Object:
 	warp_event 21, 17, MT_MOON_B1F, 5
 	warp_event 15, 27, MT_MOON_B1F, 6
 	warp_event  5,  7, MT_MOON_B1F, 7
-	warp_event 29,  7, MT_MOON_SQUARE, 1
+	warp_event 29,  7, MT_MOON_B1F, 9
 
 	def_bg_events
 
@@ -20,6 +20,6 @@ MtMoonB2F_Object:
 	object_event 12,  6, SPRITE_FOSSIL, STAY, NONE, 7 ; person
 	object_event 13,  6, SPRITE_FOSSIL, STAY, NONE, 8 ; person
 	object_event 25, 21, SPRITE_POKE_BALL, STAY, NONE, 9, HP_UP
-	object_event 33,  9, SPRITE_POKE_BALL, STAY, NONE, 10, WING_FOSSIL
+	object_event 29,  5, SPRITE_POKE_BALL, STAY, NONE, 10, WING_FOSSIL
 
 	def_warps_to MT_MOON_B2F

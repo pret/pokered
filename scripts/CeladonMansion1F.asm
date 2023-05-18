@@ -23,7 +23,7 @@ CeladonMansion1Text2:
 	text_end
 
 CeladonMansion1Text3:
-	text_far _CeladonMansion1Text3
+	text_far _ClefairyText
 	text_asm
 	ld a, CLEFAIRY
 	jp CeladonMansion1_PlayCryScript

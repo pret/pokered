@@ -270,7 +270,8 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const ROCK_TUNNEL_B1F,               20, 18 ; $F8	- Switched with CINNABAR_VOLCANO_FLOORS
 	map_const GIOVANNIS_ROOM,				 11, 14 ; $F9
 	map_const BATTLE_TENT,					  5, 10 ; $FA
-	map_const MT_MOON_SQUARE,				 15,  9 ; $FB
+	map_const MT_MOON_SQUARE,				 13,  7 ; $FB
+	map_const MT_MOON_SQUARE_HOUSE,           4,  4 ; $FC
 DEF NUM_MAPS EQU const_value
 
 ; Indoor maps, such as houses, use this as the Map ID in their exit warps
