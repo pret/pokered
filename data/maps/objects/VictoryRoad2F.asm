@@ -26,5 +26,6 @@ VictoryRoad2F_Object:
 	object_event  4, 14, SPRITE_BOULDER, STAY, BOULDER_MOVEMENT_BYTE_2, 11 ; person
 	object_event  5,  5, SPRITE_BOULDER, STAY, BOULDER_MOVEMENT_BYTE_2, 12 ; person
 	object_event 23, 16, SPRITE_BOULDER, STAY, BOULDER_MOVEMENT_BYTE_2, 13 ; person
+	object_event 25,  7, SPRITE_COOLTRAINER_M, STAY, DOWN, 14
 
 	def_warps_to VICTORY_ROAD_2F

@@ -329,3 +329,8 @@ _ClefairyText::
 	text "CLEFAIRY: Pi"
 	line "pippippi!@"
 	text_end
+
+_TMNPCNoRoomText::
+	text "You have no"
+	line "room for this!"
+	done

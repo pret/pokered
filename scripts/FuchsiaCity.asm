@@ -26,6 +26,7 @@ FuchsiaCity_TextPointers:
 	dw FuchsiaCityText22
 	dw FuchsiaCityText23
 	dw FuchsiaCityText24
+	dw SubstituteGuy
 
 FuchsiaCityText1:
 	text_far _FuchsiaCityText1
@@ -166,4 +167,85 @@ FuchsiaCityKabutoText:
 
 FuchsiaCityText_19b2a:
 	text_far _FuchsiaCityText_19b2a
+	text_end
+
+; FireRed NPC
+; This guy has a Kangaskhan fetish or something wtf
+SubstituteGuy:
+	text_asm
+	CheckEvent EVENT_GOT_TM50
+	jr nz, .got_item
+	ld hl, TM50PreReceiveText
+	call PrintText
+	
+	call YesNoChoice
+	ld a, [wCurrentMenuItem]
+	and a
+	jr nz, .refused
+	
+	lb bc, TM_SUBSTITUTE, 1
+	call GiveItem
+	jr nc, .bag_full
+	ld hl, ReceivedTM50Text
+	call PrintText
+	SetEvent EVENT_GOT_TM50
+	jr .done
+.refused
+	ld hl, TM50Refused
+	call PrintText
+	jr .done
+.bag_full
+	ld hl, SubstituteNoRoomText
+	call PrintText
+	jr .done
+.got_item
+	ld hl, TM50ExplanationText
+	call PrintText
+.done
+	jp TextScriptEnd
+
+TM50PreReceiveText:
+	text "Aww, I wish I was"
+	line "a KANGASKHAN"
+	cont "baby."
+	
+	para "I'd love to be a"
+	line "SUBSTITUTE for"
+	cont "the baby..."
+	
+	para "And snuggle in"
+	line "the mother"
+	cont "KANGASKHAN's"
+	cont "belly pouch."
+	
+	para "But only #MON"
+	line "can use the"
+	cont "move SUBSTITUTE."
+	
+	para "Want to teach it"
+	line "to one?"
+	prompt
+
+ReceivedTM50Text:
+	text_far _ReceivedTM50Text
+	sound_get_item_1
+	text_end
+
+TM50ExplanationText:
+	text "Boy, what I'd"
+	line "give to crawl"
+	cont "inside a"
+	cont "KANGASKHAN belly"
+	cont "pouch..."
+	done
+
+TM50Refused:
+	text "Oh really?"
+	
+	para "SUBSTITUTE seems"
+	line "so fun..."
+	done
+
+SubstituteNoRoomText:
+	text_far _TMNPCNoRoomText
 	text_end

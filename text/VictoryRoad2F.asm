@@ -84,3 +84,10 @@ _VictoryRoad2AfterBattleText5::
 	line "up the challenge"
 	cont "here."
 	done
+
+_ReceivedTM10Text::
+	text "<PLAYER> received"
+	line "@"
+	text_ram wStringBuffer
+	text "!@"
+	text_end

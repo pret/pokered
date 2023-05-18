@@ -80,6 +80,7 @@ VictoryRoad2F_TextPointers:
 	dw BoulderText
 	dw BoulderText
 	dw BoulderText
+	dw DoubleEdgeGuy
 
 VictoryRoad2TrainerHeaders:
 	def_trainers
@@ -199,4 +200,78 @@ VictoryRoad2EndBattleText5:
 
 VictoryRoad2AfterBattleText5:
 	text_far _VictoryRoad2AfterBattleText5
+	text_end
+
+; FireRed NPC
+DoubleEdgeGuy:
+	text_asm
+	CheckEvent EVENT_GOT_TM10
+	jr nz, .got_item
+	ld hl, TM10PreReceiveText
+	call PrintText
+	
+	call YesNoChoice
+	ld a, [wCurrentMenuItem]
+	and a
+	jr nz, .refused
+	
+	lb bc, TM_DOUBLE_EDGE, 1
+	call GiveItem
+	jr nc, .bag_full
+	ld hl, ReceivedTM10Text
+	call PrintText
+	SetEvent EVENT_GOT_TM10
+	jr .done
+.refused
+	ld hl, TM10Refused
+	call PrintText
+	jr .done
+.bag_full
+	ld hl, DoubleEdgeNoRoomText
+	call PrintText
+	jr .done
+.got_item
+	ld hl, TM10ExplanationText
+	call PrintText
+.done
+	jp TextScriptEnd
+
+TM10PreReceiveText:
+	text "You should be"
+	line "proud of"
+	cont "yourself,"
+	cont "having battled"
+	cont "your way through"
+	cont "VICTORY ROAD so"
+	cont "courageously."
+	
+	para "In recognition"
+	line "of your feat,"
+	cont "I can teach your"
+	cont "#MON"
+	cont "DOUBLE-EDGE."
+	prompt
+
+ReceivedTM10Text:
+	text_far _ReceivedTM10Text
+	sound_get_item_1
+	text_end
+
+TM10ExplanationText:
+	text "Keep that drive"
+	line "going for the"
+	cont "#MON LEAGUE!"
+	
+	para "Take a run at"
+	line "them and knock"
+	cont "em out!"
+	done
+
+TM10Refused:
+	text "I'll teach your"
+	line "#MON anytime."
+	done
+
+DoubleEdgeNoRoomText:
+	text_far _TMNPCNoRoomText
 	text_end

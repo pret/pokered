@@ -79,11 +79,6 @@ _TM01Refused::
 	cont "PUNCH."
 	done
 
-_MegaNoRoomText::
-	text "You have no"
-	line "room for this!"
-	done
-
 _TM05PreReceiveText::
 	text "A kick of brutal"
 	line "ferocity!"

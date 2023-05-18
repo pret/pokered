@@ -21,6 +21,7 @@ RockTunnelB1F_TextPointers:
 	dw RockTunnel2Text6
 	dw RockTunnel2Text7
 	dw RockTunnel2Text8
+	dw RockSlideGuy
 ;	dw KabutopsText
 
 RockTunnel2TrainerHeaders:
@@ -187,6 +188,61 @@ RockTunnel2EndBattleText9:
 
 RockTunnel2AfterBattleText9:
 	text_far _RockTunnel2AfterBattleText9
+	text_end
+
+; FireRed NPC
+RockSlideGuy:
+	text_asm
+	CheckEvent EVENT_GOT_TM48_2
+	jr nz, .got_item
+	ld hl, TM48PreReceiveText
+	call PrintText
+	
+	call YesNoChoice
+	ld a, [wCurrentMenuItem]
+	and a
+	jr nz, .refused
+	
+	lb bc, TM_ROCK_SLIDE, 1
+	call GiveItem
+	jr nc, .bag_full
+	ld hl, ReceivedTM48Text
+	call PrintText
+	SetEvent EVENT_GOT_TM48_2
+	jr .done
+.refused
+	ld hl, TM48Refused
+	call PrintText
+	jr .done
+.bag_full
+	ld hl, RockSlideNoRoomText
+	call PrintText
+	jr .done
+.got_item
+	ld hl, TM48ExplanationText
+	call PrintText
+.done
+	jp TextScriptEnd
+
+TM48PreReceiveText:
+	text_far _TM48PreReceiveText
+	text_end
+
+ReceivedTM48Text:
+	text_far _ReceivedTM48Text
+	sound_get_item_1
+	text_end
+
+TM48ExplanationText:
+	text_far _TM48ExplanationText
+	text_end
+
+TM48Refused:
+	text_far _TM48Refused
+	text_end
+
+RockSlideNoRoomText:
+	text_far _TMNPCNoRoomText
 	text_end
 
 ;KabutopsText:

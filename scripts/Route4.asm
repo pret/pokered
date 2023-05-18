@@ -109,7 +109,7 @@ TM01Refused:
 	text_end
 
 MegaNoRoomText:
-	text_far _MegaNoRoomText
+	text_far _TMNPCNoRoomText
 	text_end
 
 MegaKickGuy:

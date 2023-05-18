@@ -100,6 +100,7 @@ Improved Areas
 - Pokemon Tower was shortened, being less intensive and adding room for more maps.
 - Silph Co's pathing was completely overhauled to make navigating it less tedious.
 - Viridian Gym now has a minor new area once you make Giovanni leave.
+- Various Move Tutors from FireRed and LeafGreen have been distributed around the region, instead giving their respective TMs.
 - The S.S. Anne now returns after getting the Marsh Badge and features trades for Galarian forms & Evolutions, as well as Paldean Tauros.
 - After entering the Hall of Fame, try visiting Route 1!
 

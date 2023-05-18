@@ -117,3 +117,10 @@ _FuchsiaCityKabutoText::
 _FuchsiaCityText_19b2a::
 	text "..."
 	done
+
+_ReceivedTM50Text::
+	text "<PLAYER> received"
+	line "@"
+	text_ram wStringBuffer
+	text "!@"
+	text_end

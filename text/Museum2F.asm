@@ -43,3 +43,10 @@ _Museum2FText7::
 	line "fell on MT.MOON."
 	cont "(MOON STONE?)"
 	done
+
+_ReceivedTM19Text::
+	text "<PLAYER> received"
+	line "@"
+	text_ram wStringBuffer
+	text "!@"
+	text_end
