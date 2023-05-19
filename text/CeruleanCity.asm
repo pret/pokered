@@ -191,15 +191,15 @@ _CeruleanCityText9::
 	cont "get dirty!"
 	done
 
-_CeruleanCityText10::
+_CeruleanCityText10::			; changed slightly to hint towards the HoF not being the only requirement anymore
 	text "This is CERULEAN"
 	line "CAVE! Horribly"
 	cont "strong #MON"
 	cont "live in here!"
 
-	para "Only #MON LEAGUE"
-	line "champions are"
-	cont "allowed in!"
+	para "Only the most"
+	line "skilled trainers"
+	cont "are allowed in!"
 	done
 
 _CeruleanCityText12::
