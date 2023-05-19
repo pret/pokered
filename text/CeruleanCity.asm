@@ -137,9 +137,9 @@ _CeruleanCityText6::
 	done
 
 _CeruleanCityText_19730::
-	text "OK! SLOWBRO!"
+	text "OK, SLOWBRO!"
 	line "Use SONICBOOM!"
-	cont "Come on, SLOWBRO"
+	cont "Come on SLOWBRO,"
 	cont "pay attention!"
 	done
 
@@ -191,13 +191,15 @@ _CeruleanCityText9::
 	cont "get dirty!"
 	done
 
-_CeruleanCityText10::	; changed to be more ambiguous just in case this script needs reusing
-	text "Hey! This is a"
-	line "restricted area."
+_CeruleanCityText10::
+	text "This is CERULEAN"
+	line "CAVE! Horribly"
+	cont "strong #MON"
+	cont "live in here!"
 
-	para "I'm sorry, but"
-	line "I cannot allow"
-	cont "you to enter."
+	para "Only #MON LEAGUE"
+	line "champions are"
+	cont "allowed in!"
 	done
 
 _CeruleanCityText12::
@@ -219,7 +221,7 @@ _CeruleanCityText13::
 _CeruleanCityText16::
 	text "Grass and caves"
 	line "handled easily!"
-	cont "BIKE SHOP"
+	cont "MIRACLE CYCLE"
 	done
 
 _CeruleanCityText17::
