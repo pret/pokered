@@ -44,6 +44,7 @@ MapHSPointers:
 	dw BrunswickTrailHS
 	dw NoHS
 	dw NoHS
+	dw NoHS
 	dw BluesHouseHS
 	dw OaksLabHS
 	dw NoHS
@@ -243,7 +244,6 @@ MapHSPointers:
 	dw NoHS
 	dw NoHS
 	dw UnderwaterTunnelHS
-	dw NoHS
 	dw NoHS
 	dw NoHS
 	dw NoHS

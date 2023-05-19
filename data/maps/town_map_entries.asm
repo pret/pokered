@@ -46,6 +46,7 @@ ExternalMapEntries:
 	external_map 10,  1, Route24Name
 	external_map 11,  0, Route25Name
 	external_map  7, 10, BrunswickTrailName
+	external_map 12,  0, SeaCottageName
 	assert_table_length FIRST_INDOOR_MAP
 
 
@@ -66,10 +67,10 @@ InternalMapEntries:
 	internal_map MT_MOON_B2F,                    6,  2, MountMoonName
 	internal_map CERULEAN_MART,                 10,  2, CeruleanCityName
 	internal_map MT_MOON_POKECENTER,             5,  2, Route4Name
-	internal_map VIRIDIAN_PRE_GYM,  			10,  2, ViridianCityName
+	internal_map VIRIDIAN_PRE_GYM,              10,  2, ViridianCityName
 	internal_map DAYCARE,                       10,  4, Route5Name
-	internal_map UNDERGROUND_PATH_ROUTE_6, 		10,  8, Route6Name
-	internal_map CELESTE_HILL, 					 6, 10, CelesteHillName
+	internal_map UNDERGROUND_PATH_ROUTE_6,      10,  8, Route6Name
+	internal_map CELESTE_HILL,                   6, 10, CelesteHillName
 	internal_map UNDERGROUND_PATH_ROUTE_8,      11,  5, Route8Name
 	internal_map ROCK_TUNNEL_1F,                14,  3, RockTunnelName
 	internal_map POWER_PLANT,                   15,  4, PowerPlantName
@@ -81,9 +82,10 @@ InternalMapEntries:
 	internal_map SILPH_GAUNTLET_3F,             10,  5, SilphCoName
 	internal_map VICTORY_ROAD_1F,                0,  4, VictoryRoadName
 	internal_map SILPH_GAUNTLET_7F,             10,  5, SilphCoName
-	internal_map LANCES_ROOM,                   0,  2, PokemonLeagueName
-	internal_map FARAWAY_ISLAND_INSIDE,         15,  15, FarawayIslandName
-	internal_map POKEMON_MANSION_B2F,             2, 15, PokemonMansionName
+	internal_map LANCES_ROOM,                    0,  2, PokemonLeagueName
+	internal_map FARAWAY_ISLAND_INSIDE,         15, 15, FarawayIslandName
+	internal_map POKEMON_MANSION_B2F,            2, 15, PokemonMansionName
+	internal_map MT_MOON_CRATER,                 6,  1, MountMoonName
 	internal_map HALL_OF_FAME,                   0,  2, PokemonLeagueName
 	internal_map UNDERGROUND_PATH_NORTH_SOUTH,  10,  5, UndergroundPathName
 	internal_map CHAMPIONS_ROOM,                 0,  2, PokemonLeagueName
@@ -97,7 +99,7 @@ InternalMapEntries:
 	internal_map FUCHSIA_MEETING_ROOM,           8, 13, FuchsiaCityName
 	internal_map SEAFOAM_ISLANDS_B4F,            5, 15, SeafoamIslandsName
 	internal_map POKEMON_MANSION_1F,             2, 15, PokemonMansionName
-	internal_map CINNABAR_MART,           	     2, 15, CinnabarIslandName
+	internal_map CINNABAR_MART,                  2, 15, CinnabarIslandName
 	internal_map INDIGO_PLATEAU_LOBBY,           0,  2, IndigoPlateauName
 	internal_map MR_PSYCHICS_HOUSE,             10,  5, SaffronCityName
 	internal_map ROUTE_15_GATE_2F,               9, 13, Route15Name
@@ -118,13 +120,13 @@ InternalMapEntries:
 	internal_map CERULEAN_CAVE_1F,               9,  1, CeruleanCaveName
 	internal_map NAME_RATERS_HOUSE,             14,  5, LavenderTownName
 	internal_map CERULEAN_BADGE_HOUSE,          10,  2, CeruleanCityName
-	internal_map CINNABAR_VOLCANO_FLOORS,  	     3, 14, CinnabarVolcanoName
+	internal_map CINNABAR_VOLCANO_FLOORS,        3, 14, CinnabarVolcanoName
 	internal_map SILPH_CO_ELEVATOR,             10,  5, SilphCoName
 	internal_map UNDERWATER_TUNNEL,             14,  1, UnderwaterTunnelName
 	internal_map CELADON_UNIVERSITY_POKECENTER,  7,  4, CeladonUniversityName
-	internal_map BILLS_GARDEN,                  12,  0, SeaCottageName
 	internal_map AGATHAS_ROOM,                   0,  2, PokemonLeagueName
 	internal_map ROCK_TUNNEL_B1F,               14,  3, RockTunnelName
 	internal_map GIOVANNIS_ROOM,                 2,  8, ViridianCityName
-	internal_map BATTLE_TENT,               	 7,  9, CitrineCityName
+	internal_map BATTLE_TENT,                    7,  9, CitrineCityName
+	internal_map MT_MOON_SQUARE_HOUSE,           6,  1, MountMoonName
 	db -1 ; end

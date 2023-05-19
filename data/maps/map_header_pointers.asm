@@ -40,6 +40,7 @@ MapHeaderPointers::
 	dw Route24_h
 	dw Route25_h
 	dw BrunswickTrail_h ; CINNABAR_MART_COPY
+	dw BillsGarden_h ; UNUSED_MAP_F3, used to use SilphCo2F_h
 	dw RedsHouse1F_h
 	dw RedsHouse2F_h
 	dw BluesHouse_h
@@ -245,7 +246,6 @@ MapHeaderPointers::
 	dw Colosseum_h
 	dw CeladonUniversityInside_h ; UNUSED_MAP_F1
 	dw CeladonUniversityPokecenter_h ; UNUSED_MAP_F2
-	dw BillsGarden_h ; UNUSED_MAP_F3, used to use SilphCo2F_h
 	dw LoreleisRoom_h
 	dw BrunosRoom_h
 	dw AgathasRoom_h

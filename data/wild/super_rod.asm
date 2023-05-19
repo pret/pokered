@@ -1,48 +1,55 @@
 ; super rod encounters
 SuperRodData:
 	; map, fishing group
-	dbw PALLET_TOWN,         		.Group1
-	dbw VIRIDIAN_CITY,       		.Group1
-	dbw CERULEAN_CITY,       		.Group2
-	dbw VERMILION_CITY,      		.Group3
-	dbw CELADON_CITY,        		.Group11
-	dbw FUCHSIA_CITY,        		.Group5
-	dbw CINNABAR_ISLAND,     		.Group8
-	dbw CITRINE_CITY,				.Group9
-	dbw ROUTE_4,             		.Group2
-	dbw ROUTE_6,             		.Group2
-	dbw ROUTE_10,            		.Group4
-	dbw ROUTE_11,            		.Group3
-	dbw ROUTE_12,            		.Group4
-	dbw ROUTE_13,            		.Group5
-	dbw ROUTE_17,            		.Group5
-	dbw ROUTE_18,            		.Group5
-	dbw ROUTE_19,            		.Group8
-	dbw ROUTE_20,            		.Group8
-	dbw ROUTE_21,            		.Group8
-	dbw ROUTE_22,            		.Group1
-	dbw ROUTE_23,            		.Group8
-	dbw ROUTE_24,            		.Group2
-	dbw ROUTE_25,            		.Group3
-	dbw CERULEAN_GYM,        		.Group2
-	dbw VERMILION_DOCK,      		.Group3
-	dbw SEAFOAM_ISLANDS_B3F, 		.Group8
-	dbw SEAFOAM_ISLANDS_B4F, 		.Group8
-	dbw SAFARI_ZONE_EAST,    		.Group6
-	dbw SAFARI_ZONE_NORTH,   		.Group6
-	dbw SAFARI_ZONE_WEST,    		.Group6
-	dbw SAFARI_ZONE_CENTER,  		.Group6
-	dbw CERULEAN_CAVE_2F,   		.Group10
-	dbw CERULEAN_CAVE_B1F,  		.Group10
-	dbw CERULEAN_CAVE_1F,   		.Group10
-	dbw SILPH_GAUNTLET_5F,   		.Group6
-	dbw ROCK_TUNNEL_1F,     		.Group4
-	dbw CELADON_UNIVERSITY_OUTSIDE, .Group11
-	dbw FARAWAY_ISLAND_INSIDE, 		.Group10
-	dbw MT_MOON_CRATER,				.Group10
-	dbw DIGLETTS_CAVE,				.Group12
-	dbw BILLS_GARDEN,				.Group7
-	dbw UNDERWATER_TUNNEL,			.Group8
+	dbw PALLET_TOWN,                    .Group1
+	dbw VIRIDIAN_CITY,                  .Group1
+	dbw CERULEAN_CITY,                  .Group2
+	dbw VERMILION_CITY,                 .Group3
+	dbw CELADON_CITY,                   .Group11
+	dbw FUCHSIA_CITY,                   .Group5
+	dbw CINNABAR_ISLAND,                .Group8
+	dbw CITRINE_CITY,                   .Group9
+	dbw ROUTE_4,                        .Group2
+	dbw ROUTE_6,                        .Group2
+	dbw ROUTE_10,                       .Group4
+	dbw ROUTE_11,                       .Group3
+	dbw ROUTE_12,                       .Group4
+	dbw ROUTE_13,                       .Group5
+	dbw ROUTE_17,                       .Group5
+	dbw ROUTE_18,                       .Group5
+	dbw ROUTE_19,                       .Group8
+	dbw ROUTE_20,                       .Group8
+	dbw ROUTE_21,                       .Group8
+	dbw ROUTE_22,                       .Group1
+	dbw ROUTE_23,                       .Group8
+	dbw ROUTE_24,                       .Group2
+	dbw ROUTE_25,                       .Group3
+	dbw BRUNSWICK_TRAIL,                .Group9
+	dbw CERULEAN_GYM,                   .Group2
+	dbw VERMILION_DOCK,                 .Group3
+	dbw SEAFOAM_ISLANDS_B3F,            .Group8
+	dbw SEAFOAM_ISLANDS_B4F,            .Group8
+	dbw SAFARI_ZONE_EAST,               .Group6
+	dbw SAFARI_ZONE_NORTH,              .Group6
+	dbw SAFARI_ZONE_WEST,               .Group6
+	dbw SAFARI_ZONE_CENTER,             .Group6
+	dbw CERULEAN_CAVE_2F,               .Group10
+	dbw CERULEAN_CAVE_B1F,              .Group10
+	dbw CERULEAN_CAVE_1F,               .Group10
+	dbw SILPH_GAUNTLET_5F,              .Group6
+	dbw ROCK_TUNNEL_1F,                 .Group4
+	dbw CELADON_UNIVERSITY_OUTSIDE,     .Group11
+	dbw FARAWAY_ISLAND_INSIDE,          .Group5
+	dbw MT_MOON_CRATER,                 .Group10
+	dbw DIGLETTS_CAVE,                  .Group12
+	dbw BILLS_GARDEN,                   .Group7
+	dbw UNDERWATER_TUNNEL,              .Group8
+	dbw LORELEIS_ROOM,                  .Group8
+	dbw GARNET_CAVERN_1F,               .Group9
+	dbw GARNET_CAVERN_2F,               .Group9
+	dbw GARNET_CAVERN_B1F,              .Group9
+	dbw CINNABAR_VOLCANO_FLOORS,        .Group13
+	dbw CINNABAR_VOLCANO,               .Group13
 	db -1 ; end
 
 ; fishing groups
@@ -118,7 +125,7 @@ SuperRodData:
 	db 30, BLASTYKE
 	db 30, GOLDEEN
 
-.Group9:	; Citrine, Chartreuse, Crimson
+.Group9:	; Citrine, Brunswick, Garnet
 	db 10
 	db 50, JAGG
 	db 50, SEAKING
@@ -162,3 +169,9 @@ SuperRodData:
 	db 21, WIGLETT
 	db 20, WIGLETT
 	db 28, WUGTRIO
+
+.Group13:	; Cinnabar Volcano
+	db 3
+	db 35, MAGMAR
+	db 37, MAGMAR
+	db 40, MAGMAR

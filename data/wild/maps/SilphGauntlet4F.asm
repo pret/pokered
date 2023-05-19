@@ -1,15 +1,15 @@
 Gauntlet4FWildMons:
-	def_grass_wildmons 15 ; encounter rate
-	db 56, GENGAR
-	db 56, GUARDIA
-	db 57, NINETALES
-	db 57, BARUNDA
-	db 57, GUARDIA
-	db 58, NINETALES
-	db 58, HYPNO
-	db 59, ALAKAZAM
-	db 59, HYPNO
-	db 61, ALAKAZAM
+	def_grass_wildmons 10 ; encounter rate
+	db 53, HAUNTER
+	db 53, GUARDIA
+	db 54, NINETALES
+	db 54, BARUNDA
+	db 54, GUARDIA
+	db 55, NINETALES
+	db 55, HYPNO
+	db 56, KADABRA
+	db 56, HYPNO
+	db 58, ANNIHILAPE
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate

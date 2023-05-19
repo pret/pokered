@@ -40,6 +40,7 @@ MapHeaderBanks::
 	db BANK(Route24_h)
 	db BANK(Route25_h)
 	db BANK(BrunswickTrail_h) ; was cinnabar mart copy
+	db BANK(BillsGarden_h) ; UNUSED_MAP_F3, $11
 	db BANK(RedsHouse1F_h)
 	db BANK(RedsHouse2F_h)
 	db BANK(BluesHouse_h)
@@ -245,7 +246,6 @@ MapHeaderBanks::
 	db BANK(Colosseum_h)
 	db BANK(CeladonUniversityInside_h) ; $11 UNUSED_MAP_F1
 	db BANK(CeladonUniversityPokecenter_h) ; UNUSED_MAP_F2
-	db BANK(BillsGarden_h) ; UNUSED_MAP_F3, $11
 	db BANK(LoreleisRoom_h)
 	db BANK(BrunosRoom_h)
 	db BANK(AgathasRoom_h)

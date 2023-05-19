@@ -57,6 +57,7 @@ DEF FIRST_ROUTE_MAP EQU const_value
 	map_const ROUTE_24,                      10, 18 ; $24
 	map_const ROUTE_25,                      37,  9 ; $25
 	map_const BRUNSWICK_TRAIL,           	 32, 14 ; $26	- was unused Cinnabar Mart copy, moved to $26
+	map_const BILLS_GARDEN,                  12, 12 ; $27	- was UNUSED_MAP_F3, moved to $27
 DEF FIRST_INDOOR_MAP EQU const_value
 	map_const REDS_HOUSE_1F,                  4,  4 ; $27
 	map_const REDS_HOUSE_2F,                  4,  4 ; $28
@@ -252,7 +253,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const NAME_RATERS_HOUSE,              4,  4 ; $E6
 	map_const CERULEAN_BADGE_HOUSE,           4,  4 ; $E7
 	map_const CINNABAR_VOLCANO,              14, 12 ; $E8	- Was UNUSED_MAP_E7
-	map_const CINNABAR_VOLCANO_FLOORS,		 20, 20 ; $F8	- Switched with ROCK_TUNNEL_B1F
+	map_const CINNABAR_VOLCANO_FLOORS,       20, 20 ; $F8	- Switched with ROCK_TUNNEL_B1F
 	map_const SILPH_CO_9F,                   13,  9 ; $EA
 	map_const SILPH_CO_10F,                   8,  9 ; $EB
 	map_const SILPH_CO_11F,                   9,  9 ; $EC
@@ -263,14 +264,13 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const COLOSSEUM,                      5,  4 ; $F1
 	map_const CELADON_UNIVERSITY_INSIDE,     11, 10 ; $F2	- Was UNUSED_MAP_F1
 	map_const CELADON_UNIVERSITY_POKECENTER,  7,  4 ; $F3	- Was UNUSED_MAP_F2
-	map_const BILLS_GARDEN,                  10, 10 ; $F4	- Was UNUSED_MAP_F3
 	map_const LORELEIS_ROOM,                  5,  6 ; $F5
 	map_const BRUNOS_ROOM,                    5,  6 ; $F6
 	map_const AGATHAS_ROOM,                   5,  6 ; $F7
 	map_const ROCK_TUNNEL_B1F,               20, 18 ; $F8	- Switched with CINNABAR_VOLCANO_FLOORS
-	map_const GIOVANNIS_ROOM,				 11, 14 ; $F9
-	map_const BATTLE_TENT,					  5, 10 ; $FA
-	map_const MT_MOON_SQUARE,				 13,  7 ; $FB
+	map_const GIOVANNIS_ROOM,                11, 14 ; $F9
+	map_const BATTLE_TENT,                    5, 10 ; $FA
+	map_const MT_MOON_SQUARE,                13,  7 ; $FB
 	map_const MT_MOON_SQUARE_HOUSE,           4,  4 ; $FC
 DEF NUM_MAPS EQU const_value
 

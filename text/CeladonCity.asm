@@ -50,11 +50,10 @@ _TM41ExplanationText::
 	text "TM41 teaches"
 	line "SOFTBOILED!"
 
-	para "Only one #MON"
-	line "can use it!"
-
-	para "That #MON is"
-	line "CHANSEY!"
+	para "Only two #MON"
+	line "can use it,"
+	cont "CHANSEY and"
+	cont "BLISSEY!"
 	done
 
 _TM41NoRoomText::

@@ -146,8 +146,6 @@ SetPal_Overworld:
 	jr z, .caveOrBruno
 	cp FOREST
 	jr z, .forest
-	cp SHIP
-	jr z, .ship
 	ld a, [wCurMap]
 	cp BRUNSWICK_TRAIL
 	jr z, .brunswick
@@ -155,6 +153,8 @@ SetPal_Overworld:
 	jr c, .townOrRoute
 	cp POWER_PLANT
 	jr z, .powerPlant
+	cp SILPH_GAUNTLET_3F
+	jr z, .ship
 	cp CELESTE_HILL
 	jr z, .celeste
 	cp CERULEAN_CAVE_2F
@@ -194,8 +194,10 @@ SetPal_Overworld:
 	jr c, .garnet
 	cp CERULEAN_CAVE_1F + 1
 	jr c, .mewtwo
-	cp GARNET_CAVERN_2F + 1
-	jr c, .garnet
+	cp CINNABAR_VOLCANO_FLOORS + 1
+	jr c, .volcano
+	cp GARNET_CAVERN_2F
+	jr z, .garnet
 	cp ROCK_TUNNEL_B1F + 1
 	jr c, .caveDefault
 .caveDefault
@@ -217,14 +219,11 @@ SetPal_Overworld:
 	jr c, .faraway
 	cp SAFARI_ZONE_CENTER + 1
 	jr c, .forestDefault
-.forestDefault
-	ld a, PAL_FUCHSIA - 1
+.brunswick
+	ld a, PAL_BRUNSWICK - 1
 	jr .town
 .powerPlant
 	ld a, PAL_YELLOWMON - 1
-	jr .town
-.brunswick
-	ld a, PAL_BRUNSWICK - 1
 	jr .town
 .faraway
 	ld a, PAL_ROUTE - 1
@@ -237,6 +236,12 @@ SetPal_Overworld:
 	jr .town
 .mewtwo
 	ld a, PAL_MEWMON - 1
+	jr .town
+.volcano
+	ld a, PAL_VOLCANO - 1
+	jr .town
+.forestDefault
+	ld a, PAL_FUCHSIA - 1
 	jr .town
 
 ; used when a Pokemon is the only thing on the screen
