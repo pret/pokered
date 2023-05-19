@@ -138,7 +138,7 @@ _CeruleanCityText6::
 
 _CeruleanCityText_19730::
 	text "OK, SLOWBRO!"
-	line "Use SONICBOOM!"
+	line "Use WATER GUN!"
 	cont "Come on SLOWBRO,"
 	cont "pay attention!"
 	done
