@@ -251,7 +251,7 @@ MapHSPointers:
 	dw NoHS
 	dw NoHS
 	dw NoHS
-	dw NoHS
+	dw RockTunnelB1FHS
 	dw GiovannisRoomHS
 	dw NoHS ; Battle Tent
 	dw NoHS ; Mt Moon Square
@@ -606,6 +606,11 @@ MtMoonCraterHS:
 GiovannisRoomHS:
 	db GIOVANNIS_ROOM, $05, SHOW              ; HS_GIOVANNIS_ROOM_ITEM_1
 	db GIOVANNIS_ROOM, $06, SHOW              ; HS_GIOVANNIS_ROOM_ITEM_2
+RockTunnelB1FHS:
+	db ROCK_TUNNEL_B1F, $0A, SHOW			  ; HS_ROCK_TUNNEL_B1F_DOME
+	db ROCK_TUNNEL_B1F, $0B, SHOW			  ; HS_ROCK_TUNNEL_B1F_HELIX
+	db ROCK_TUNNEL_B1F, $0C, SHOW			  ; HS_ROCK_TUNNEL_B1F_AMBER
+	db ROCK_TUNNEL_B1F, $0D, SHOW			  ; HS_ROCK_TUNNEL_B1F_WING
 	db $FF, $01, SHOW ; end
 
 	assert_table_length NUM_HS_OBJECTS + 1

@@ -22,6 +22,10 @@ RockTunnelB1F_TextPointers:
 	dw RockTunnel2Text7
 	dw RockTunnel2Text8
 	dw RockSlideGuy
+	dw PickUpItemText ; Helix
+	dw PickUpItemText ; Dome
+	dw PickUpItemText ; Amber
+	dw PickUpItemText ; Wing
 ;	dw KabutopsText
 
 RockTunnel2TrainerHeaders:

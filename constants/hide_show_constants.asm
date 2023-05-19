@@ -264,4 +264,8 @@ DEF SHOW EQU $15
 	const HS_MT_MOON_CRATER_ITEM_11        ; FB
 	const HS_GIOVANNIS_ROOM_ITEM_1		   ; FC
 	const HS_GIOVANNIS_ROOM_ITEM_2		   ; FD
+	const HS_ROCK_TUNNEL_B1F_DOME		   ; FE
+	const HS_ROCK_TUNNEL_B1F_HELIX		   ; FF uh oh
+	const HS_ROCK_TUNNEL_B1F_AMBER		   ; $100 seems this still works?
+	const HS_ROCK_TUNNEL_B1F_WING		   ; $101
 DEF NUM_HS_OBJECTS EQU const_value

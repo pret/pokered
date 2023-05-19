@@ -190,7 +190,8 @@ Known Bugs
 - Only portions of spinner tiles animate.
 - Occasionally, menu text sets itself to scroll.
 - The lone Rocket in Viridian Gym's basement needs to be directly spoken to to be battled.
-- Pokedex is very laggy during a playthrough.
+- Pokedex is very laggy during a playthrough, and seen/owned are being weird (possibly due to a change made when adding extra starters..?)
+- Dome and Wing Fossils in Rock Tunnel B1F don't show properly.
 - The Tradeback Tutor doesn't work properly with Rhydon for reasons likely related to its index number of 1.
 - The Vermilion Passes are very unstable (Faraway warps are weird unless you battle, Citrine outright crashes).
 - The Brunswick Trail Bird event is unfinished, Zapdos causes it to crash.
