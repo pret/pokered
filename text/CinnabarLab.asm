@@ -20,7 +20,7 @@ _Lab1Text3::
 
 _Lab1Text4::
 	text "#MON LAB"
-	line "R-and-D Room"
+	line "R&D Room"
 	done
 
 _Lab1Text5::
@@ -28,7 +28,7 @@ _Lab1Text5::
 	line "Testing Room"
 	done
 
-_Lab1Text6::
+_Lab1Text6:: ; Rowan
 	text "I came here from"
 	line "afar to research"
 	cont "the myths of"

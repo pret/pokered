@@ -33,6 +33,13 @@ _Lab3Text2::
 	text "EEVEE can evolve"
 	line "into 1 of 8 kinds"
 	cont "of #MON."
+	
+	para "I have seen it" ; Reference to the Evolution Stone Glitch, which we've made a feature.
+	line "evolve through"
+	cont "battling certain"
+	cont "#MON, but"
+	cont "nobody believes"
+	cont "me!"
 	done
 
 _Lab3Text3::

@@ -1036,7 +1036,7 @@ BlottleEvosMoves:
 FarfetchdEvosMoves:
 ; Evolutions
 	db EV_LEVEL, 24, MADAAMU
-	db EV_ITEM, HEART_STONE, 1, SIRFETCHD
+	;db EV_ITEM, HEART_STONE, 1, SIRFETCHD
 	db 0
 ; Learnset
 	db 7, LEER
@@ -2231,7 +2231,7 @@ RaticateEvosMoves:
 NidorinoEvosMoves:
 ; Evolutions
 	db EV_ITEM, MOON_STONE, 1, NIDOREIGN
-	;db EV_ITEM, POISON_STONE, 1, NIDOKING
+	db EV_ITEM, POISON_STONE, 1, NIDOKING
 	db EV_LEVEL, 36, NIDOKING
 	db 0
 ; Learnset
@@ -2246,7 +2246,7 @@ NidorinoEvosMoves:
 NidorinaEvosMoves:
 ; Evolutions
 	db EV_ITEM, MOON_STONE, 1, NIDOREIGN
-	;db EV_ITEM, POISON_STONE, 1, NIDOQUEEN
+	db EV_ITEM, POISON_STONE, 1, NIDOQUEEN
 	db EV_LEVEL, 36, NIDOQUEEN
 	db 0
 ; Learnset

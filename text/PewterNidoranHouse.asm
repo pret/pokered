@@ -3,7 +3,7 @@ _PewterHouse1Text1::
 	text_end
 
 _PewterHouse1Text2::
-	text "NIDORAN sit!"
+	text "NIDORAN, sit!"
 	done
 
 _PewterHouse1Text3::

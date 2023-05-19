@@ -30,7 +30,7 @@ TradeMons:
 	db SLOWBRO,    SLOWBRO_G,   TRADE_DIALOGSET_REGION,    "SLOWBRO@@@@"
 	db SLOWKING,   SLOWKING_G,  TRADE_DIALOGSET_REGION,    "SLOWKING@@@"
 	db WEEZING,    WEEZING_G,   TRADE_DIALOGSET_REGION,    "WEEZING@@@@"
-	db MR_MIME,    MR_RIME,     TRADE_DIALOGSET_CASUAL,    "MR.RIME@@@@"
-	db PERSIAN,    PERRSERKER,  TRADE_DIALOGSET_HAPPY,     "PERRSERKER@"
-	db MADAAMU,    SIRFETCHD,   TRADE_DIALOGSET_HAPPY,     "SIRFETCH'D@"
+	db MR_MIME,    MR_RIME,     TRADE_DIALOGSET_CASUAL,    "CHURCHILL@@" ; Winston Churchill, notable "city gent" 
+	db PERSIAN,    PERRSERKER,  TRADE_DIALOGSET_HAPPY,     "ERIK@@@@@@@" ; One of the most famous vikings
+	db MADAAMU,    SIRFETCHD,   TRADE_DIALOGSET_HAPPY,     "LANCELOT@@@" ; Influential knight of the round table
 	assert_table_length NUM_NPC_TRADES

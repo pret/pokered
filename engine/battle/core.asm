@@ -195,8 +195,13 @@ StartBattle:
 	and a ; is escape factor 0?
 	jr z, .compareWithRandomValue
 ; escape factor is not 0
-; multiply b by 2 (making the mon more likely to run)
-	sla b
+; OG: multiply b by 2 (making the mon more likely to run)
+	;sla b
+; KEP: multiply b by 1.5x and add to a, making it more likely to run, but not as much as vanilla.
+	ld b, a ; load b into a - need this so add will work, add is for a only.
+	srl b ; divide b by 2
+	add a, b ; add b to a
+	ld a, b ; load a into b again to go to compareWithRandomValue
 	jr nc, .compareWithRandomValue
 ; cap b at 255
 	ld b, $ff
