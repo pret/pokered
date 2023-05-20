@@ -3,6 +3,8 @@ MtMoonSquare_Script:
 
 MtMoonSquare_TextPointers:
 	dw MtMoonSquareClefairy
+	dw MtMoonSquareClefairy
+	dw MtMoonSquareClefairy
 	dw MtMoonSquareSign
 
 MtMoonSquareClefairy:

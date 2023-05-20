@@ -970,8 +970,8 @@ TrainerBattleVictory:
 	call DelayFrames
 	call PrintEndBattleText
 	ld a, [wCurMap]
-	cp BATTLE_TENT
-	ret z ; We will give it later ;)
+;	cp BATTLE_TENT - originally the battle tent would not do this, but with the new system, it does.
+;	ret z ; We will give it later ;)
 ; win money
 	ld hl, MoneyForWinningText
 	call PrintText

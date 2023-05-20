@@ -597,22 +597,51 @@ BattleTentGuy_After:
 	ld hl, BattleTentSeeYouAgain
 	call PrintText
 	jp TextScriptEnd
-	
+
+; The Battle Tent has a new progression system for two reasons:
+; 1) The battles are all trainer-based now, so money is given after battle.
+; 2) wBTStreakCnt would not increment properly for unknown reasons, making it infinite.
+; Thus, now the player can constantly battle and abandon the challenge when they want.
+; Arguably a better system, but I do wish the counter incremented...
 BattleTentGuy2:
 	db $8
-	ld a, [wBTStreakCnt]
+	ld a, [wBTStreakCnt] ; The streak counter is still used for message continuity.
 	and a
-	ld hl, BattleTentGuy2_Streak
-	jr nz, .skip
-	inc a
-	ld [wBTStreakCnt], a
-	ld hl, BattleTentGuy2_Init
-	jr .skip2
-.skip
-	cp 11
-	jr nz, .skip2
+	
+	; Old System
+;	ld hl, BattleTentGuy2_Streak
+;	jr nz, .skip
+;	inc a
+;	ld [wBTStreakCnt], a
+;	ld hl, BattleTentGuy2_Init
+;	jr .skip2
+;.skip
+;	cp 11
+;	jr nz, .skip2
+	
+	; New System
+	ld hl, BattleTentGuy2_Streak ; The message has been changed appropriately down below.
+	jr z, .skip2
+	xor a ; The D-Pad is locked at this point, so blank out wJoyIgnore to allow manual option selection.
+	ld [wJoyIgnore], a
+	ld hl, BattleTentGuy2_Continue ; Continue prompt.
+	call PrintText
+	call YesNoChoice
+	ld a, [wCurrentMenuItem]
+	and a
+	jr nz, .refused ; If 0, move to refused.
+	jr .cont ; Otherwise, continue as if nothing happened.
+.refused
 	ld hl, BattleTentGuy2_Win
-.skip2
+	call PrintText
+	ld a, 9 ; Load BattleTent_PlayerWalkBack, which takes it from here.
+	ld [wBattleTentCurScript], a
+	jp TextScriptEnd
+.cont
+	ld hl, BattleTentGuy2_Init ; Load the next battle.
+	jr .skip2
+
+.skip2 ; This handles BattleTentGuy2_Streak and BattleTentGuy2_Init at once.
 	call PrintText
 	jp TextScriptEnd
 	
@@ -692,12 +721,14 @@ BattleTentWelcome:
 	para "Here, TRAINERs"
 	line "from far and"
 	cont "wide come to"
-	cont "face a gauntlet"
-	cont "of 10 TRAINERs!"
+	;cont "face a gauntlet"
+	;cont "of 10 TRAINERs!"
+	cont "spar against"
+	cont "one another!"
 	
-	para "If you win them"
-	line "all, you win"
-	cont "a prize!"
+	;para "If you win them"
+	;line "all, you win"
+	;cont "a prize!"
 	
 	para "Would you like"
 	line "to participate?"
@@ -778,20 +809,32 @@ BattleTentGuy2_Init:
 	
 	para "Good luck!"
 	done
-	
+
+; Cut in favour of a different system.
 BattleTentGuy2_Streak:
-	text "Opponent No.@" ; could be a №?
-	text_decimal wBTStreakCnt, 1, 2
-	text_start
-	line "is up next."
-	para "Good luck!"
+;	text "Opponent No.@" ; could be a №?
+;	text_decimal wBTStreakCnt, 1, 2
+;	text_start
+;	line "is up next."
+;	para "Good luck!"
+;	done
+	text "Here comes a"
+	line "new challenger!" ; I really like fighting games.
 	done
-	
-BattleTentGuy2_Win:
+
+BattleTentGuy2_Continue:
 	text "Congratulations!"
 	
-	para "You have defeated"
-	line "all 10 opponents!"
+	para "Do you want to"
+	line "continue?"
+	prompt
+
+BattleTentGuy2_Win:
+	;text "Congratulations!"
+	text "Well done!"
+	
+	;para "You have defeated"
+	;line "all 10 opponents!"
 	
 	para "Please go back to"
 	line "the counter to"
