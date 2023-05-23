@@ -410,8 +410,8 @@ BeautyData:
 ; Route 15
 	db 29, PIDGEOTTO, WIGGLYTUFF, 0
 	db 29, BULBASAUR, IVYSAUR, 0
-; Unused
-;	db 33, WEEPINBELL, BELLSPROUT, WEEPINBELL, 0
+; Silph Gauntlet 3F (S.S Anne)
+;	db 64, STARMIE, VICTREEBEL, WIGGLYTUFF, MACHAMP, CLOYSTER, SYLVEON, 0
 ; Route 19
 	db 27, POLIWAG, GOLDEEN, SEAKING, GOLDEEN, POLIWAG, 0
 	db 30, GOLDEEN, SEAKING, 0
@@ -425,7 +425,7 @@ PsychicData:
 	db 34, MR_MIME, KADABRA, 0
 	db 33, SLOWPOKE, SLOWPOKE, SLOWBRO, 0
 	db 38, SLOWBRO, 0
-; Silph Gauntlet
+; Silph Gauntlet 4F (Lavender Tower)
 	db 65, SLOWBRO, EXEGGUTOR, STARMIE, MR_RIME, ESPEON, ALAKAZAM, 0 
 
 RockerData:
@@ -444,8 +444,8 @@ JugglerData:
 	db 34, TENTACOOL, TENTACRUEL, 0
 ; Victory Road 2F
 	db 48, MR_MIME, 0
-; Unused - this will be used in the Silph Gauntlet
-	db 65, HYPNO, MR_MIME, ALAKAZAM, ELECTRODE, GENGAR, SLOWKING, 0
+; Silph Gauntlet 5F (Safari Zone)
+	db 66, HYPNO, MR_MIME, ALAKAZAM, ELECTRODE, GENGAR, SLOWKING, 0
 ; Fuchsia Gym
 	db 38, UMBREON, 0
 ; Fuchsia Gym
@@ -460,8 +460,8 @@ TamerData:
 	db 39, SANDSLASH, TRAMPEL, 0
 ; Victory Road 2F
 	db 44, TAUROS, GOLDUCK, 0
-; Unused - this will be used in the Silph Gauntlet
-	db 66, RHYPERIOR, ARBOK, SANDSLASH, PRIMEAPE, TRAMPEL, TAUROS, 0
+; Silph Gauntlet 5F (Safari Zone)
+	db 66, RHYPERIOR, ARBOK, KANGASKHAN, ANNIHILAPE, TRAMPEL, TAUROS, 0
 
 BirdKeeperData:
 ; Route 13
@@ -482,8 +482,8 @@ BirdKeeperData:
 	db 30, FEAROW, FEAROW, PIDGEOTTO, 0
 ; Unused
 	db 39, PIDGEOTTO, PIDGEOTTO, PIDGEY, PIDGEOTTO, 0
-; Unused - this will be used in the Silph Gauntlet
-	db 62, FEAROW, GOLDUCK, DODRIO, PORYGON2, MADAAMU, AERODACTYL, 0
+; Silph Gauntlet 1F (Viridian Forest)
+	db 62, FEAROW, GOLDUCK, DODRIO, SIRFETCHD, MADAAMU, AERODACTYL, 0
 ; Route 14
 	db 28, PIDGEY, DODUO, PIDGEOTTO, 0
 	db 26, PIDGEY, SPEAROW, PIDGEY, FEAROW, 0
@@ -491,11 +491,11 @@ BirdKeeperData:
 	db 28, SPEAROW, DODUO, FEAROW, 0
 
 ChiefData:
-; New - this will be used in the Silph Gauntlet
+; Silph Gauntlet 7F
 	db $FF, 73, PORYGON2, 72, LAPRAS, 73, SCIZOR, 73, MAGNEZONE, 75, PORYGONZ, 77, OMEGA, 0
 
 ScientistData:
-; Unused - this will be used in the Silph Gauntlet
+; Silph Gauntlet 4F (Lavender Tower)
 	db 65, MAGNEZONE, ELECTRODE, PORYGONZ, ANIMON, WEEZING, ALAKAZAM, 0
 ; Silph Co. 2F
 	db 26, GRIMER, WEEZING, KOFFING, WEEZING, 0
@@ -553,7 +553,7 @@ RocketData: ; restoring these so undefined stuff isn't pulled RIGHT NOW
 	db 25, ZUBAT, ZUBAT, GOLBAT, 0
 	db 26, KOFFING, DROWZEE, 0
 	db 23, ZUBAT, RATTATA, RATICATE, ZUBAT, 0
-; Unused - this will be used in the Silph Gauntlet
+; Silph Gauntlet 4F (Lavender Tower)
 	db 65, PERSIAN, ARBOK, RATICATE, CROBAT, HYPNO, GUARDIA, 0
 ; Silph Co. 2F - cut
 	db 29, CUBONE, ZUBAT, 0
@@ -591,7 +591,7 @@ CooltrainerMData:
 ; Victory Road 3F
 	db 43, EXEGGUTOR, CLOYSTER, ARCANINE, 0
 	db 43, KINGLER, TENTACRUEL, BLASTOISE, 0
-; Unused - this will be used in the Silph Gauntlet
+; Silph Gauntlet 5F (Safari Zone)
 	db 66, GOROCHU, VENUSAUR, ESPEON, CHARIZARD, SNORLAX, TOTARTLE, 0
 ; Victory Road 1F
 	db 42, IVYSAUR, WARTORTLE, CHARMELEON, CHARIZARD, 0
@@ -609,7 +609,7 @@ CooltrainerFData:
 ; Victory Road 3F
 	db 43, BELLSPROUT, WEEPINBELL, VICTREEBEL, 0
 	db 43, PARASECT, DEWGONG, CHANSEY, 0
-; Unused - this will be used in the Silph Gauntlet
+; Silph Gauntlet 5F (Safari Zone)
 	db 66, CLEFABLE, GENGAR, VICTREEBEL, NINETALES, KANGASKHAN, BLASTOISE, 0
 ; Victory Road 1F
 	db 44, PERSIAN, NINETALES, 0
@@ -624,7 +624,7 @@ GentlemanData:
 	db 19, NIDORAN_M, NIDORAN_F, 0
 ; SS Anne 2F Rooms/Vermilion Gym
 	db 23, PIKACHU, 0
-; Unused - this will be used in the Silph Gauntlet
+; Silph Gauntlet 3F (S.S Anne)
 	db 64, ARCANINE, NIDOQUEEN, MR_RIME, FEAROW, CARAPTHOR, RAPIDASH, 0
 ; SS Anne 2F Rooms
 	db 17, GROWLITHE, PONYTA, 0
@@ -638,7 +638,7 @@ ChannelerData:
 ; Pokémon Tower 3F
 	db 23, MIKON, GASTLY, 0
 	db 24, VULPIX, 0
-; Unused - this will be used in the Silph Gauntlet
+; Silph Gauntlet 4F (Lavender Tower)
 	db 65, MUK, GUARDIA, ANNIHILAPE, HYPNO, NINETALES, GENGAR, 0
 ; Pokémon Tower 3F
 	db 25, GASTLY, HAUNTER, 0
@@ -672,7 +672,7 @@ StudentData:
 ; Viridian Pre-Gym
 	db 6, PIDGEY, RATTATA, 0
 	db 6, CLEFAIRY, 0
-; Silph Gauntlet
+; Silph Gauntlet 1F (Viridian Forest)
 	db 62, CLEFABLE, PENDRAKEN, WIGGLYTUFF, BARUNDA, BELLOSSOM, SLOWKING, 0		; may revise
 ; Celadon University
 	db 22, BULBASAUR, CHARMANDER, SQUIRTLE, 0
@@ -680,10 +680,14 @@ StudentData:
 FirefighterData:
 ; For Cerulean Gym
 	db 15, POLIWAG, SQUIRTLE, CHEEP, 0
+; Silph Gauntlet 3F (S.S Anne)
+	db 64, BLASTOISE, OMASTAR, SANDSLASH, KINGDRA, GUARDIA, POLIWRATH, 0   ; mostly water-types, but adding other types that hit Fire super-effectively
 
 JuniorData:
 
 JackData:
+; Silph Gauntlet 7F (Chief's Office)
+	db 70, ANIMON, PURAKKUSU, HITMONLEE, PORYGON2, HITMONCHAN, SCIZOR, 0   ; not 100% sure what to do with this guy...
 
 JessieJamesData:
 	db 14, EKANS, MEOWTH, KOFFING, 0 ; Mt. Moon
