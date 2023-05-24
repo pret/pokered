@@ -82,8 +82,8 @@ YoungsterData:
 	db 19, SANDSHREW, ZUBAT, 0
 	db 17, RATTATA, RATTATA, RATICATE, 0
 	db 18, NIDORAN_M, NIDORINO, 0
-; Unused - this will be used in the Silph Gauntlet
-	db 62, RATICATE, ARBOK, SANDSLASH, FEAROW, NIDOKING, VENUSAUR, 0
+; Silph Gauntlet 1F (Viridian Forest)
+	db 62, RATICATE, ARBOK, SLOWBRO, FEAROW, NIDOKING, VENUSAUR, 0
 
 BugCatcherData:
 ; Viridian Forest
@@ -102,11 +102,11 @@ BugCatcherData:
 ; Route 6
 	db 16, KOKANA, CATERPIE, WEEDLE, 0
 	db 17, BUTTERFREE, 0 ; this is that one boss fight-like one, levelled down for learnset reasons
-; Unused - this will be used in the Silph Gauntlet
+; Silph Gauntlet 1F (Viridian Forest)
 	db 62, SCIZOR, CARAPTHOR, PARASECT, VENOMOTH, PURAKKUSU, KLEAVOR, 0
 ; Route 9
 	db 19, BUTTERFREE, BEEDRILL, 0
-	db 20, KASANAGI, VENONAT, BEEDRILL, 0 ; holy shit why did they have an L20 Caterpie you psycho, weedle is barely acceptable...
+	db 20, KASANAGI, VENONAT, BEEDRILL, 0
 
 LassData:
 ; Route 3
@@ -136,8 +136,8 @@ LassData:
 ; Celadon Gym
 	db 23, LEAFEON, 0
 	db 23, ODDISH, GLOOM, 0
-; New - this will be used in the Silph Gauntlet
-	; db 62, PERSIAN, CLEFABLE, VILEPLUME, WIGGLYTUFF, POLITOED, NIDOQUEEN, 0
+; Silph Gauntlet 2F (Mt. Moon)
+	db 63, PERSIAN, CLEFABLE, VILEPLUME, WIGGLYTUFF, POLITOED, NIDOQUEEN, 0
 
 SailorData:
 ; SS Anne Stern
@@ -151,8 +151,8 @@ SailorData:
 	db 20, MACHOP, 0
 ; Vermilion Gym
 	db 21, KOTORA, GAOTORA, 0
-; New - this will be used in the Silph Gauntlet
-	; db 64, KINGDRA, MACHAMP, CLOYSTER, STARMIE, GOROCHU, TENTACRUEL, 0
+; Silph Gauntlet 3F (S.S Anne)
+	db 64, KINGDRA, MACHAMP, TAABAN, STARMIE, GOROTORA, TENTACRUEL, 0
 
 JrTrainerMData:
 ; Pewter Gym
@@ -164,8 +164,8 @@ JrTrainerMData:
 ; Route 6
 	db 20, SQUIRTLE, 0
 	db 16, SPEAROW, RATICATE, 0
-; Unused - this will be used in the Silph Gauntlet
-	db 62, DUGTRIO, PRIMEAPE, SANDSLASH, BLASTOISE, NIDOKING, ARCANINE, 0
+; Silph Gauntlet 1F (Viridian Forest)
+	db 62, DUGTRIO, ANNIHILAPE, SANDSLASH, GOLEM, CROBAT, ARCANINE, 0
 ; Route 9
 	db 21, GROWLITHE, CHARMANDER, 0
 	db 19, RATTATA, DIGLETT, EKANS, SANDSHREW, 0
@@ -209,8 +209,8 @@ JrTrainerFData:
 	db 29, BELLSPROUT, ODDISH, TANGELA, 0
 ; Route 20
 	db 30, TENTACOOL, HORSEA, SEEL, 0
-; New - this will be used in the Silph Gauntlet
-	db 62, TSUBOMITTO, SEAKING, MADAAMU, BELLOSSOM, GOROCHU, VENUSAUR, 0
+; Silph Gauntlet 1F (Viridian Forest)
+	db 62, TSUBOMITTO, SEAKING, TANGROWTH, MADAAMU, BELLOSSOM, GOROCHU, 0
 
 PokemaniacData:
 ; Route 10
@@ -224,8 +224,8 @@ PokemaniacData:
 	db 40, CHARMELEON, LAPRAS, LICKITUNG, 0
 ; Rock Tunnel 1F
 	db 23, CUBONE, SLOWPOKE, 0
-; New - this will be used in the Silph Gauntlet
-	db 66, GUARDIA, SLOWBRO, CHARIZARD, STEELIX, LICKILICKY, RHYPERIOR, 0
+; Silph Gauntlet (currently 2F but may move up to 5F)
+	db 63, GUARDIA, SLOWKING, CHARIZARD, STEELIX, LICKILICKY, RHYPERIOR, 0
 
 SuperNerdData:
 ; Mt. Moon 1F
@@ -239,7 +239,8 @@ SuperNerdData:
 ; Unused
 	db 30, PORYGON, 0 ; - used in celadon university
 	db 25, MAGNETITE, ELECTRODE, KABUTO, OMANYTE, 0 ; - used in celadon university
-	db 63, MAGNEZONE, MUK, KABUTOPS, OMASTAR, PORYGONZ, MAGMORTAR, 0 ; - used in Silph Gauntlet
+; Silph Gauntlet 2F (Mt. Moon)
+	db 63, MAGNEZONE, MUK, KABUTOPS, OMASTAR, AERODACTYL, MAGMORTAR, 0
 ; Cinnabar Gym
 	db 36, VULPIX, NINETALES, CHARIZARD, 0
 	db 34, PONYTA, CHARMANDER, RAPIDASH, ARCANINE, 0
@@ -268,7 +269,7 @@ HikerData:
 	db 19, GEODUDE, MACHOP, GEODUDE, GEODUDE, 0
 	db 20, ONIX, ONIX, GEODUDE, 0
 	db 21, GEODUDE, GRAVELER, 0
-; New - this will be used in the Silph Gauntlet
+; Silph Gauntlet 2F (Mt. Moon)
 	db 63, STEELIX, GOLEM, MACHAMP, CROBAT, CROAKOZUNA, GUARDIA, 0
 
 BikerData:
@@ -284,14 +285,6 @@ BikerData:
 	db 33, WEEZING, 0
 	db 26, GRIMER, GRIMER, GRIMER, GRIMER, 0
 ; Route 17
-	; From https://www.smogon.com/smog/issue27/glitch:
-	; 0E:5FC2 is offset of the ending 0 for this first Biker on Route 17.
-	; BaseStats + (BASE_DATA_SIZE) * (000 - 1) = $5FC2;
-	; that's the formula from GetMonHeader for the base stats of mon #000.
-	; (BaseStats = $43DE and BANK(BaseStats) = $0E.)
-	; Finally, PokedexOrder lists 0 as the dex ID for every MissingNo.
-	; The result is that this data gets interpreted as the base stats
-	; for MissingNo: 0, 33, MUK, 0, 29, VOLTORB, VOLTORB, 0, ..., 28, GRIMER, GRIMER.
 	db 28, WEEZING, KOFFING, WEEZING, 0
 	db 33, MUK, 0
 	db 29, VOLTORB, VOLTORB, 0
@@ -301,12 +294,13 @@ BikerData:
 	db 26, KOFFING, KOFFING, GRIMER, KOFFING, 0
 	db 28, GRIMER, GRIMER, KOFFING, 0
 	db 29, KOFFING, MUK, 0
-; New - this will be used in the Silph Gauntlet
-	db 65, ELECTRODE, MUK, WEEZING, TENTACRUEL, HYPNO, HITMONTOP, 0
+; Silph Gauntlet 5F (Safari Zone)
+	db 66, HITMONTOP, MUK_A, WEEZING, RAPIDASH, HYPNO, GOROTORA, 0
 
 BurglarData:
+; Silph Gauntlet 4F (Lavender Tower)
+	db 65, RAPIDASH, CROAKOZUNA, ARCANINE, PERSIAN_A, WEEZING, MAGMORTAR, 0
 ; Unused
-	db 65, RAPIDASH, CROAKOZUNA, ARCANINE, WEEZING, MAGMORTAR, MUK, 0 ; - used in Silph Gauntlet
 	db 33, GROWLITHE, 0
 	db 28, VULPIX, CHARMANDER, PONYTA, 0
 ; Cinnabar Gym
@@ -328,6 +322,8 @@ EngineerData:
 ; Route 11
 	db 21, MAGNETITE, 0
 	db 18, MAGNEMITE, MAGNEMITE, MAGNETITE, 0
+; Silph Gauntlet 3F (S.S Anne)
+	db 64, ELECTRODE, GOLEM_A, MAGNEZONE, GOROTORA, PERRSERKER, SCIZOR, 0   ; The Engineer trainer EXCLUSIVELY uses Magnemites and Voltorbs in normal battles, so I kinda had to improvise with his team a bit...
 
 FisherData:
 ; SS Anne 2F Rooms
@@ -346,6 +342,8 @@ FisherData:
 	db 33, SEAKING, GOLDEEN, 0
 ; Route 12
 	db 24, MAGIKARP, MAGIKARP, 0
+; Silph Gauntlet 3F (S.S Anne)
+	db 64, GYARADOS, SEAKING, TAABAN, WUGTRIO, BLASTOISE, PENDRAKEN, 0
 
 SwimmerData:
 ; Cerulean Gym
@@ -367,6 +365,8 @@ SwimmerData:
 	db 37, STARMIE, 0
 	db 33, STARYU, WARTORTLE, 0
 	db 32, POLIWHIRL, TENTACOOL, SEADRA, 0
+; Silph Gauntlet 5F (Safari Zone)
+	db 66, LAPRAS, KINGDRA, CLOYSTER, GOLDUCK, POLIWRATH, TENTACRUEL, 0
 
 CueBallData:
 ; Route 16
@@ -381,6 +381,8 @@ CueBallData:
 	db 29, PRIMEAPE, MACHOKE, 0
 ; Route 21
 	db 31, TENTACOOL, TENTACOOL, TENTACRUEL, 0
+; Silph Gauntlet 5F (Safari Zone)
+	db 66, ANNIHILAPE, RATICATE_A, CROAKOZUNA, PERSIAN_A, MACHAMP, CLEFABLE, 0
 
 GamblerData:
 ; Route 11
@@ -390,7 +392,7 @@ GamblerData:
 	db 18, GROWLITHE, VULPIX, 0
 ; Route 8
 	db 22, POLIWAG, POLIWAG, POLIWHIRL, 0
-; Unused - used in Silph Gauntlet
+; Silph Gauntlet 4F (Lavender Tower)
 	db 65, SEAKING, RHYPERIOR, ELECTRODE, ARCANINE, GOLEM, POLITOED, 0
 ; Route 8
 	db 24, GROWLITHE, VULPIX, 0
@@ -411,7 +413,7 @@ BeautyData:
 	db 29, PIDGEOTTO, WIGGLYTUFF, 0
 	db 29, BULBASAUR, IVYSAUR, 0
 ; Silph Gauntlet 3F (S.S Anne)
-;	db 64, STARMIE, VICTREEBEL, WIGGLYTUFF, MACHAMP, CLOYSTER, SYLVEON, 0
+	db 64, STARMIE, VICTREEBEL, WIGGLYTUFF, MACHAMP, CLOYSTER, SYLVEON, 0
 ; Route 19
 	db 27, POLIWAG, GOLDEEN, SEAKING, GOLDEEN, POLIWAG, 0
 	db 30, GOLDEEN, SEAKING, 0
