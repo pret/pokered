@@ -216,42 +216,42 @@ CredClub:
 CredPAAD:
 	db -5, "PAAD TESTING@"
 CredKEP:
-	db -5, "KEP STAFF@"
+	db -4, "KEP STAFF@"
 CredKEPDevs:
-	db -4, "KEP DEVELOPERS@"
+	db -6, "KEP DEVELOPERS@"
 CredPvK:
-	db -5, "PLAGUE VON KARMA@"
+	db -7, "PLAGUE VON KARMA@"
 CredMAH:
-	db -6, "MEMENTOMARTHA@"
+	db -9, "MARTHA'S A. HUMANITY@"
 CredEma:
-	db -7, "EMA SKYE@"
+	db -4, "EMA SKYE@"
 CredKEPSprites:
-	db -4, "KEP SPRITES@"
+	db -5, "KEP SPRITES@"
 CredAlba:
-	db -5, "ALBATROSS@"
+	db -4, "ALBATROSS@"
 CredHelix:
 	db -6, "HELIX CHAMBER@"
 CredFO:
-	db -7, "FRENCH ORANGE@"
+	db -6, "FRENCH ORANGE@"
 CredPSDevs:
-	db -4, "SHOWDOWN MOD@"
+	db -5, "SHOWDOWN MOD@"
 CredAus:
-	db -5, "AUSMA@"
+	db -2, "AUSMA@"
 CredPaul:
-	db -6, "PAULLUXX@"
+	db -4, "PAULLUXX@"
 CredDuo:
-	db -7, "DUOM2@"
+	db -2, "DUOM2@"
 CredKEPThanks:
-	db -4, "SPECIAL THANKS@"
+	db -6, "SPECIAL THANKS@"
 CredFrrf:
-	db -5, "FRRF@"
+	db -2, "FRRF@"
 CredDannye:
-	db -6, "DANNYE33@"
+	db -4, "DANNYE33@"
 CredEro:
-	db -7, "EROSUNICA@"
+	db -4, "EROSUNICA@"
 CredChatot:
-	db -8, "CHATOT4444@"
+	db -4, "CHATOT4444@"
 CredEni:
-	db -9, "ENIGAMI@"
+	db -3, "ENIGAMI@"
 CredVort:
-	db -10, "VORTIENE@"
+	db -4, "VORTIENE@"

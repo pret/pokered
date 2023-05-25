@@ -2,8 +2,8 @@ MtMoonSquareHouse_Object:
 	db $a ; border block
 
 	def_warp_events
-	warp_event  4,  7, MT_MOON_SQUARE, 4
-	warp_event  5,  7, MT_MOON_SQUARE, 4
+	warp_event  4,  7, MT_MOON_SQUARE, 3
+	warp_event  5,  7, MT_MOON_SQUARE, 3
 
 	def_bg_events
 

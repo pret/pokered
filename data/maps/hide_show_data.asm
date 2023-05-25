@@ -422,12 +422,13 @@ MtMoon1FHS:
 	db MT_MOON_1F, $0C, SHOW                  ; HS_MT_MOON_1F_ITEM_5
 	db MT_MOON_1F, $0D, SHOW                  ; HS_MT_MOON_1F_ITEM_6
 MtMoonB2FHS:
-	db MT_MOON_B2F, $02, HIDE ; Jessie
-	db MT_MOON_B2F, $06, HIDE ; James
-	db MT_MOON_B2F, $07, SHOW ; Fossil 1
-	db MT_MOON_B2F, $08, SHOW ; Fossil 2
-	db MT_MOON_B2F, $09, SHOW ; Item 1
-	db MT_MOON_B2F, $0A, SHOW ; Item 2
+	db MT_MOON_B2F, $02, HIDE                 ; HS_MT_MOON_B2F_JESSIE
+	db MT_MOON_B2F, $06, HIDE                 ; HS_MT_MOON_B2F_JAMES
+	db MT_MOON_B2F, $07, SHOW                 ; HS_MT_MOON_B2F_FOSSIL_1
+	db MT_MOON_B2F, $08, SHOW                 ; HS_MT_MOON_B2F_FOSSIL_2
+	db MT_MOON_B2F, $09, SHOW                 ; HS_MT_MOON_B2F_ITEM_1
+	db MT_MOON_B2F, $0A, SHOW                 ; HS_MT_MOON_B2F_ITEM_2
+	db MT_MOON_B2F, $0B, HIDE                 ; HS_MT_MOON_CRATER_GUARD
 SSAnne2FHS:
 	db SS_ANNE_2F, $02, HIDE                  ; HS_SS_ANNE_2F_RIVAL
 SSAnne1FRoomsHS:
@@ -601,8 +602,6 @@ MtMoonCraterHS:
 	db MT_MOON_CRATER, $07, SHOW              ; HS_MT_MOON_CRATER_ITEM_7
 	db MT_MOON_CRATER, $08, SHOW              ; HS_MT_MOON_CRATER_ITEM_8
 	db MT_MOON_CRATER, $09, SHOW              ; HS_MT_MOON_CRATER_ITEM_9
-	db MT_MOON_CRATER, $0A, SHOW              ; HS_MT_MOON_CRATER_ITEM_10
-	db MT_MOON_CRATER, $0B, SHOW              ; HS_MT_MOON_CRATER_ITEM_11
 GiovannisRoomHS:
 	db GIOVANNIS_ROOM, $05, SHOW              ; HS_GIOVANNIS_ROOM_ITEM_1
 	db GIOVANNIS_ROOM, $06, SHOW              ; HS_GIOVANNIS_ROOM_ITEM_2

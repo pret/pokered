@@ -413,6 +413,7 @@ MtMoonB2F_TextPointers:
 	dw MtMoon3Text12
 	dw MtMoon3Text13
 	dw MtMoon3Text14
+	dw MtMoonCraterGuard
 
 MtMoon3TrainerHeaders:
 	def_trainers 3
@@ -640,4 +641,8 @@ MtMoon3EndBattleText5:
 
 MtMoon3AfterBattleText5:
 	text_far _MtMoon3AfterBattleText5
+	text_end
+	
+MtMoonCraterGuard:
+	text_far _MtMoonCraterGuard
 	text_end
