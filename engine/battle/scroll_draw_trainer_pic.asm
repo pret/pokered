@@ -1,6 +1,7 @@
 _ScrollTrainerPicAfterBattle:
 ; Load the enemy trainer's pic and scrolls it into
 ; the screen from the right.
+; TODO: optional trainer colors
 	xor a
 	ld [wEnemyMonSpecies2], a
 	ld b, SET_PAL_BATTLE
