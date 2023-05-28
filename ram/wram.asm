@@ -820,7 +820,7 @@ wBadgeOrFaceTiles:: ds NUM_BADGES + 1
 wTempObtainedBadgesBooleans:: ds NUM_BADGES
 
 NEXTU
-wUnusedCD3D:: db
+	ds 1
 ; the number of credits mons that have been displayed so far
 wNumCreditsMonsDisplayed:: db
 
@@ -1120,10 +1120,10 @@ ENDU
 
 ; PureRGBnote: CHANGED: wGymCityName and wGymLeaderName used to be here but they were easy to remove the need for in order to have some extra space
 UNION
-; shinpokerednote: ADDED: tracker for the levels of each of the player's pokemon at the start of battle, same address as wGymCityName
+; shinpokerednote: ADDED: tracker for the levels of each of the player's pokemon at the start of battle
 wStartBattleLevels:: ds 6
 NEXTU
-; PureRGBnote: ADDED: tracker for the original sprite IDs of every sprite in a map - used to change them on the fly if necessary
+; PureRGBnote: ADDED: tracker for the original sprite IDs of every sprite in a map - tracked in order to change them on the fly if necessary
 wMapSpriteOriginalPictureIDs:: ds 15
 ENDU
 
@@ -1146,7 +1146,9 @@ ds 1 ; unused lone byte
 wAITargetMonType1:: db ; the type of the pokemon the AI should think it's attacking (stays as the previous pokemon when you switch pokemon)
 wAITargetMonType2:: db ; the type of the pokemon the AI should think it's attacking (stays as the previous pokemon when you switch pokemon)
 wAITargetMonStatus:: db ; the current status of the pokemon the AI should think it's attacking (set when healing a pokemon's status or switching it out)
-; 6 bytes remaining in this empty space
+ds 2 ; unused 2 bytes
+wListEntryTextFuncPointer:: dw ; TODO: for list menus, a pointer to the function that prints entries in the list for the current list menu
+wListCustomFuncPointer:: dw ; TODO: for list menus, a pointer to the function that will run on moving to the next entry in the list
 ;;;;;;;;;;
 ENDU
 
@@ -2089,7 +2091,7 @@ wBoxItems:: ds PC_ITEM_CAPACITY * 2 + 1
 ; bit 7: whether the player has changed boxes before
 wCurrentBoxNum:: db
 
-	ds 1
+	ds 1 ; unused save file byte
 
 ; number of HOF teams
 wNumHoFTeams:: db
