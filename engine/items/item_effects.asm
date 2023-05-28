@@ -3288,7 +3288,9 @@ IsNextTileShoreOrWater::
 	ld hl, WaterTilesets
 	ld de, 1
 	call IsInArray
-	jr nc, .notShoreOrWater
+	jr nc, WaterTileSetIsNextTileShoreOrWater.notShoreOrWater
+	; fall through
+WaterTileSetIsNextTileShoreOrWater::
 	ld a, [wCurMapTileset]
 	cp SHIP_PORT ; Vermilion Dock tileset
 	jr z, .skipShoreTiles ; if it's the Vermilion Dock tileset
