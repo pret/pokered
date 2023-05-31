@@ -92,7 +92,7 @@ ItemUsePtrTable:
 	dw ItemUsePokeflute  ; POKE_FLUTE
 	dw UnusableItem      ; LIFT_KEY
 	dw UnusableItem      ; EXP_ALL
-	dw ItemUseEvoStone    ; was OLD_ROD, now CANDY_SACK
+	dw ItemUseCandyJar    ; was OLD_ROD, now CANDY_JAR
 	dw UnusableItem    ; was GOOD_ROD, now BOTTLE_CAP
 	dw ItemUseSuperRod   ; SUPER_ROD
 	dw ItemUsePPUp       ; PP_UP (real one)
@@ -137,6 +137,21 @@ ItemUseMysteryBox:
 	ld hl, MysteryBoxText ; Simple text is shown. Ambiguous to the user, identical to GO.
 	call PrintText
 	jp TextScriptEnd
+
+ItemUseCandyJar:
+	; Candy Jar can't be used in battle.
+	ld a, [wIsInBattle]
+	and a
+	jp nz, ItemUseNotTime
+	
+	ld [wCandyJarCount], a ; Get the Candy count
+	cp 40 ; Is it 40? (represented as 400)
+	jr z, .Evolve ; If yes, jump to Evo Stone Script
+	ld hl, CandyJarCount ; Otherwise, load the Candy total...
+	call PrintText ; and display it as text.
+	jp TextScriptEnd ; se acabo!
+.Evolve ; Evo stone script time
+	jp ItemUseEvoStone ; Jump there!
 
 ItemUseBall:
 
@@ -824,10 +839,20 @@ ItemUseEvoStone:
 	jr z, .noEffect
 	pop af
 	ld [wWhichPokemon], a
+	
+	; The Candy Jar jumps here to save space if it's capable of evolving Meltan.
+	; However, we don't want it to leave the inventory - we want it to lose the candy.
+	ld a, [wEvoStoneItemID] ; Load the item ID we just got
+	cp CANDY_JAR ; Is it the Candy Jar?
+	jr z, .zeroOutJar ; If return zero (true), save the Jar from destruction.
 	ld hl, wNumBagItems
 	ld a, 1 ; remove 1 stone
 	ld [wItemQuantity], a
 	jp RemoveItemFromInventory
+.zeroOutJar
+	ld a, $0
+	ld [wCandyJarCount], a
+	ret
 .noEffect
 	call ItemUseNoEffect
 .canceledItemUse
@@ -2997,4 +3022,8 @@ CheckMapForMon:
 
 MysteryBoxText:
 	text_far _MysteryBoxText
+	text_end
+
+CandyJarCount:
+	text_far _CandyJarCount
 	text_end

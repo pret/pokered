@@ -2131,7 +2131,6 @@ wObtainedHiddenCoinsFlags:: flag_array 16
 ; $01 = biking
 ; $02 = surfing
 wWalkBikeSurfState:: db
-
 	ds 10
 
 wTownVisitedFlag:: flag_array NUM_CITY_MAPS
@@ -2144,7 +2143,23 @@ wFossilItem:: db
 ; mon that will result from the item
 wFossilMon:: db
 
-	ds 2
+; Meltan WRAM entries.
+; Meltan uses a 3 unique variables for its item functionality.
+
+; This is for the Melmetal Evolution Item. 
+; If it reaches 40 (represented as 400), the player can evolve Meltan.
+; Once used, the count will reset.
+wCandyJarCount:: db
+
+; Used for Meltan implementation. Replaced unused Card Key function.
+; When byte is $01, Meltan has a chance to replace a Pokemon that appears.
+	; $00 - Not Active
+	; $01 - Active
+wMysteryBoxActive:: db
+
+; ClearVariablesOnEnterMap does everything I want, except when leaving battle, so this switches off that specific aspect.
+; This is achieved through some jank in engine\core.asm and engine\overworld\clear_variables.asm.
+wDontSwitchOffMysteryBoxYet:: db
 
 ; trainer classes start at OPP_ID_OFFSET
 wEnemyMonOrTrainerClass:: db
@@ -2152,9 +2167,7 @@ wEnemyMonOrTrainerClass:: db
 wPlayerJumpingYScreenCoordsIndex:: db
 
 wRivalStarter:: db
-
-	ds 1
-
+ds 1
 wPlayerStarter:: db
 
 ; sprite index of the boulder the player is trying to push
@@ -2176,12 +2189,6 @@ wDungeonWarpDestinationMap:: db
 
 ; which dungeon warp within the source map was used
 wWhichDungeonWarp:: db
-
-; Used for Meltan implementation. Replaced unused Card Key function.
-; When byte is $01, Meltan has a chance to replace a Pokemon that appears.
-	; $00 - Not Active
-	; $01 - Active
-wMysteryBoxActive:: db
 
 	ds 8
 

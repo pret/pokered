@@ -22,12 +22,11 @@ SetIshiharaTeam:
 
 IshiharaTeam:
 	db EXEGGUTOR_A, 90
-	db PURAKKUSU, 90
+	db MELTAN, 90
 	db TRAMPEL, 90
 IF DEF(_DEBUG)
 	db TAUROS_PB, 90
 	db SNORLAX, 50
-	db TANGROWTH, 50
 ENDC
 	db -1 ; end
 
@@ -162,6 +161,7 @@ DebugSetPokedexEntries:
 
 DebugItemsList:
 	db MYSTERY_BOX, 1
+	db CANDY_JAR, 1
 	db BICYCLE, 1
 	db FULL_RESTORE, 99
 	db MAX_REPEL, 99

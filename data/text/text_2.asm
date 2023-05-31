@@ -1834,3 +1834,10 @@ _MysteryBoxCloseText::
 	text "<PLAYER> closed"
 	line "the BOX!"
 	prompt
+
+_CandyJarCount::
+	text "MELTAN CANDY:"
+	line "@"
+	text_bcd wCandyJarCount, 2 | LEADING_ZEROES | LEFT_ALIGN
+	text "0"
+	prompt
