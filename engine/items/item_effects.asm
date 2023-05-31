@@ -64,7 +64,7 @@ ItemUsePtrTable:
 	dw UnusableItem      ; BIKE_VOUCHER
 	dw ItemUseXAccuracy  ; X_ACCURACY
 	dw ItemUseEvoStone   ; LEAF_STONE
-	dw ItemUseCardKey    ; CARD_KEY
+	dw UnusableItem      ; CARD_KEY
 	dw UnusableItem      ; NUGGET
 	dw UnusableItem      ; WING_FOSSIL
 	dw ItemUsePokedoll   ; POKE_DOLL
@@ -109,6 +109,7 @@ ItemUsePtrTable:
 	dw UnusableItem      ; OLD_SEA_MAP
 	dw ItemUseEvoStone   ; UP_GRADE
 	dw ItemUseEvoStone   ; METAL_COAT
+	dw ItemUseMysteryBox ; MYSTERY_BOX
 	dw UnusableItem      ; FLOOR_B2F
 	dw UnusableItem      ; FLOOR_B1F
     dw UnusableItem      ; FLOOR_1F
@@ -123,6 +124,19 @@ ItemUsePtrTable:
 	dw UnusableItem      ; FLOOR_10F
 	dw UnusableItem      ; FLOOR_11F
 	dw UnusableItem      ; FLOOR_14F
+
+ItemUseMysteryBox:
+	; Mystery Box can't be used in battle.
+	ld a, [wIsInBattle]
+	and a
+	jp nz, ItemUseNotTime
+	; Sets a variable in WRAM that'll trigger a Meltan wild encounter.
+	; Handled in engine\core.asm
+	ld a, $1
+	ld [wMysteryBoxActive], a
+	ld hl, MysteryBoxText ; Simple text is shown. Ambiguous to the user, identical to GO.
+	call PrintText
+	jp TextScriptEnd
 
 ItemUseBall:
 
@@ -1585,55 +1599,55 @@ ItemUseXAccuracy:
 
 ; This function is bugged and never works. It always jumps to ItemUseNotTime.
 ; The Card Key is handled in a different way.
-ItemUseCardKey:
-	xor a
-	ld [wUnusedD71F], a
-	call GetTileAndCoordsInFrontOfPlayer
-	ld a, [GetTileAndCoordsInFrontOfPlayer]
-	cp $18
-	jr nz, .next0
-	ld hl, CardKeyTable1
-	jr .next1
-.next0
-	cp $24
-	jr nz, .next2
-	ld hl, CardKeyTable2
-	jr .next1
-.next2
-	cp $5e
-	jp nz, ItemUseNotTime
-	ld hl, CardKeyTable3
-.next1
-	ld a, [wCurMap]
-	ld b, a
-.loop
-	ld a, [hli]
-	cp -1
-	jp z, ItemUseNotTime
-	cp b
-	jr nz, .nextEntry1
-	ld a, [hli]
-	cp d
-	jr nz, .nextEntry2
-	ld a, [hli]
-	cp e
-	jr nz, .nextEntry3
-	ld a, [hl]
-	ld [wUnusedD71F], a
-	jr .done
-.nextEntry1
-	inc hl
-.nextEntry2
-	inc hl
-.nextEntry3
-	inc hl
-	jr .loop
-.done
-	ld hl, ItemUseText00
-	call PrintText
-	ld hl, wd728
-	set 7, [hl]
-	ret
+;ItemUseCardKey:
+;	xor a
+;	ld [wUnusedD71F], a
+;	call GetTileAndCoordsInFrontOfPlayer
+;	ld a, [GetTileAndCoordsInFrontOfPlayer]
+;	cp $18
+;	jr nz, .next0
+;	ld hl, CardKeyTable1
+;	jr .next1
+;.next0
+;	cp $24
+;	jr nz, .next2
+;	ld hl, CardKeyTable2
+;	jr .next1
+;.next2
+;	cp $5e
+;	jp nz, ItemUseNotTime
+;	ld hl, CardKeyTable3
+;.next1
+;	ld a, [wCurMap]
+;	ld b, a
+;.loop
+;	ld a, [hli]
+;	cp -1
+;	jp z, ItemUseNotTime
+;	cp b
+;	jr nz, .nextEntry1
+;	ld a, [hli]
+;	cp d
+;	jr nz, .nextEntry2
+;	ld a, [hli]
+;	cp e
+;	jr nz, .nextEntry3
+;	ld a, [hl]
+;	ld [wUnusedD71F], a
+;	jr .done
+;.nextEntry1
+;	inc hl
+;.nextEntry2
+;	inc hl
+;.nextEntry3
+;	inc hl
+;	jr .loop
+;.done
+;	ld hl, ItemUseText00
+;	call PrintText
+;	ld hl, wd728
+;	set 7, [hl]
+;	ret
 
 INCLUDE "data/events/card_key_coords.asm"
 
@@ -2980,3 +2994,7 @@ CheckMapForMon:
 	jr nz, .loop
 	dec hl
 	ret
+
+MysteryBoxText:
+	text_far _MysteryBoxText
+	text_end

@@ -1824,3 +1824,13 @@ _BoyGirlText::
     text "Firstly, are you a"
 	line "boy or a girl?"
     done
+
+_MysteryBoxText::
+	text "A mysterious mist"
+	line "billowed out!"
+	prompt
+
+_MysteryBoxCloseText::
+	text "<PLAYER> closed"
+	line "the BOX!"
+	prompt

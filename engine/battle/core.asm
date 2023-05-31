@@ -6191,6 +6191,23 @@ LoadEnemyMonData:
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	jp z, LoadEnemyMonFromParty
+	
+	; Upon initiating a battle, check if the Mystery Box has been activated.
+	; ~50% of the time, Meltan will replace what you encounter.
+	ld a, [wMysteryBoxActive] ; Load the box.
+	cp $01 ; Check if it's active.
+	jr nz, .cont ; If not, load a normal Pokemon. I know this looks sort of weird, it's just how it panned out.
+	
+	; This didn't work for some reason. It seems unnecessary, anyway...
+	;call Random
+	;and a
+	;cp 128 ; Compare Random (a) with 128 (b).
+	;jr z, .cont ; If not within range, normal Pokemon appears. 50% chance.
+	
+	ld a, MELTAN ; Meltan is loaded...
+	ld [wEnemyMonSpecies2], a ; Here!
+
+.cont ; Standard loading.
 	ld a, [wEnemyMonSpecies2]
 	ld [wEnemyMonSpecies], a
 	ld [wd0b5], a

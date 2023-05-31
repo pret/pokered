@@ -348,6 +348,11 @@ _OldSeaMapDescription::
 	next "certain island."
 	prompt
 
+_MysteryBoxDescription:: ; GO Description: A mysterious old box. Opening it causes a certain Pokémon to appear for a limited time.
+	text "A mysterious old"
+	next "box."
+	prompt
+
 _HM01Description::
 	text "Cuts using claws,"
 	next "scythes, etc."

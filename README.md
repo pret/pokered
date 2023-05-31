@@ -59,8 +59,10 @@ Naturally, these types get appropriate moves. They are currently distributed to 
 New Items:
 ====
 There are some new items here, with the aim of accomodating new Pokemon, adding features, and acting as methods of getting to new locations. 
+- To accomodate Meltan, the Mystery Box from Pokemon GO is featured. When used, wild encounters are replaced with Meltan until one leaves the location.
+	- Melmetal is obtained by using a Candy Jar on Meltan, which is obtained as a special reward later!
 - The Ice, Poison and Heart Stones have been added, the latter two being from the SpaceWorld '97 demo.
-	- Additional evolution items include the Protector, Black Augurite, Up-Grade, Dubious Disc, Metal Coat, and Candy Jar (for Melmetal).
+	- Additional evolution items include the Protector, Black Augurite, Up-Grade, Dubious Disc, and the Metal Coat.
 - The Bottle Cap has been added alongside a Hyper Training feature, acting as effectively a Gold Bottle Cap.
 - The Old Sea Map has been added, giving access to Faraway Island and Mew.
 - The Citrine Pass has been added, allowing access to a new post-game area based on the unused "C" map.

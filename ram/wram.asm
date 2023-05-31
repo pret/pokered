@@ -1953,7 +1953,7 @@ wCurrentBoxNum:: db
 ; number of HOF teams
 wNumHoFTeams:: db
 
-wUnusedD5A3:: db
+ds 1 ; was wUnusedD5A3, removed when putting the Mystery Box in.
 
 wPlayerCoins:: ds 2 ; BCD
 
@@ -2177,7 +2177,11 @@ wDungeonWarpDestinationMap:: db
 ; which dungeon warp within the source map was used
 wWhichDungeonWarp:: db
 
-wUnusedD71F:: db
+; Used for Meltan implementation. Replaced unused Card Key function.
+; When byte is $01, Meltan has a chance to replace a Pokemon that appears.
+	; $00 - Not Active
+	; $01 - Active
+wMysteryBoxActive:: db
 
 	ds 8
 

@@ -21,42 +21,43 @@ SafariZoneRestHouse3Text3:
 	text_end
 
 SafariZoneRestHouse3Meltan:
-; meltan guy
+; Meltan Guy
+; Originally, he was just going to give Meltan.
+; But later on, we added the Mystery Box from GO for something more accurate, and for a possible Living Dex.
 	text_asm
-	ld a, [wd72e]
-	bit 0, a ; got meltan?
-	jr z, .giveMeltan
 	CheckEvent EVENT_GOT_MELTAN
-	jr nz, .MeltanInfo
-	ld hl, .MeltanGuyText
+	jr nz, .got_item
+	ld hl, MeltanGuyText
 	call PrintText
-	jr .done
-.giveMeltan
-	ld hl, .MeltanGuyText
+	lb bc, MYSTERY_BOX, 1
+	call GiveItem
+	jr nc, .bag_full
+	ld hl, ReceivedBoxText
 	call PrintText
-	lb bc, MELTAN, 5
 	SetEvent EVENT_GOT_MELTAN
-	call GivePokemon
-	jr nc, .done
-	ld a, [wSimulatedJoypadStatesEnd]
-	and a
-	call z, WaitForTextScrollButtonPress
-	call EnableAutoTextBoxDrawing
-	ld hl, .MeltanInfoWithBlackjackAndHookers
-	call PrintText
-	ld hl, wd72e
-	set 0, [hl]
 	jr .done
-.MeltanInfo
-	ld hl, .MeltanInfoWithBlackjackAndHookers
+.bag_full
+	ld hl, BoxNoRoom
+	call PrintText
+	jr .done
+.got_item
+	ld hl, MeltanInfo
 	call PrintText
 .done
 	jp TextScriptEnd
 
-.MeltanInfoWithBlackjackAndHookers
+MeltanGuyText:
+	text_far _MeltanGuyText
+	text_end
+
+MeltanInfo:
 	text_far _MeltanInfo
 	text_end
 
-.MeltanGuyText
-	text_far _MeltanGuyText
+ReceivedBoxText:
+	text_far _ReceivedBoxText
+	text_end
+	
+BoxNoRoom:
+	text_far _BoxNoRoom
 	text_end

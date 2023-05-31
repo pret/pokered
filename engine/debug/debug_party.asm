@@ -161,6 +161,7 @@ DebugSetPokedexEntries:
 	ret
 
 DebugItemsList:
+	db MYSTERY_BOX, 1
 	db BICYCLE, 1
 	db FULL_RESTORE, 99
 	db MAX_REPEL, 99
