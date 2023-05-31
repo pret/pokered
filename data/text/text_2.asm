@@ -1834,3 +1834,10 @@ _MysteryBoxCloseText::
 	text "<PLAYER> closed"
 	line "the BOX!"
 	prompt
+
+_CandyJarCount::
+	text "MELTAN CANDY:"
+	line "@"
+	text_decimal wCandyJarCount, 1, 2
+	text "0"
+	prompt

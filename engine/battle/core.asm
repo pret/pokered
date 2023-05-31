@@ -839,6 +839,27 @@ FaintEnemyPokemon:
 	call PrintText
 	call PrintEmptyString
 	call SaveScreenTilesToBuffer1
+	
+	; Meltan Candy functionality.
+	; The way this is done looks like it conflates 8- and 16-bit integers, but it never goes above 256, so it'll be fine.
+	ld a, [wEnemyMonSpecies] ; Load species.
+	cp $E7 ; Is it Meltan?
+	jr nz, .skip ; Continue as normal if not.
+	
+	; Increment the Candy Jar count.
+	ld a, [wCandyJarCount]
+	inc a
+	ld [wCandyJarCount], a
+	
+	; For engine\overworld\clear_variables.asm
+	; Needed so the Mystery Box effect isn't cleared upon leaving battle.
+	ld a, $01
+	ld [wDontSwitchOffMysteryBoxYet], a
+	
+	ld hl, MeltanIncrement ; Load text to show it's going up.
+	call PrintText ; Yep text.
+	call PrintEmptyString ; vs text likes this.
+.skip
 	xor a
 	ld [wBattleResult], a
 	ld a, [wCurMap]
@@ -7172,4 +7193,9 @@ LoadMonBackPic:
 StupidBattleTentFix:
 	text "Oops! Better"
 	line "luck next time!"
+	prompt
+
+MeltanIncrement:
+	text "<PLAYER> found"
+	line "10 MELTAN CANDY!"
 	prompt
