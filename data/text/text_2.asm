@@ -1838,6 +1838,6 @@ _MysteryBoxCloseText::
 _CandyJarCount::
 	text "MELTAN CANDY:"
 	line "@"
-	text_bcd wCandyJarCount, 2 | LEADING_ZEROES | LEFT_ALIGN
+	text_decimal wCandyJarCount, 1, 2
 	text "0"
 	prompt

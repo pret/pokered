@@ -144,7 +144,7 @@ ItemUseCandyJar:
 	and a
 	jp nz, ItemUseNotTime
 	
-	ld [wCandyJarCount], a ; Get the Candy count
+	ld a, [wCandyJarCount] ; Get the Candy count
 	cp 40 ; Is it 40? (represented as 400)
 	jr z, .Evolve ; If yes, jump to Evo Stone Script
 	ld hl, CandyJarCount ; Otherwise, load the Candy total...

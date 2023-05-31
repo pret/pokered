@@ -44,6 +44,10 @@ IF DEF(_DEBUG)
 	ld a, 1
 	ld [wPlayerSex], a
 	
+	; Test Candy Jar Evolution
+	ld a, 39
+	ld [wCandyJarCount], a
+	
 	; Get all badges except Earth Badge.
 	ld a, ~(1 << BIT_EARTHBADGE)
 	ld [wObtainedBadges], a

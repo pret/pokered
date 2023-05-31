@@ -846,14 +846,15 @@ FaintEnemyPokemon:
 	cp $E7 ; Is it Meltan?
 	jr nz, .skip ; Continue as normal if not.
 	
+	; Increment the Candy Jar count.
+	ld a, [wCandyJarCount]
+	inc a
+	ld [wCandyJarCount], a
+	
 	; For engine\overworld\clear_variables.asm
 	; Needed so the Mystery Box effect isn't cleared upon leaving battle.
 	ld a, $01
 	ld [wDontSwitchOffMysteryBoxYet], a
-	
-	ld a, [wCandyJarCount]
-	inc a
-	ld [wCandyJarCount], a
 	
 	ld hl, MeltanIncrement ; Load text to show it's going up.
 	call PrintText ; Yep text.
