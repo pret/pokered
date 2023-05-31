@@ -4,15 +4,15 @@ BorderPalettes:
 	ds $100
 
 	RGB 31,31,31 ; PAL_SGB1
-	RGB 31,31,00
+	RGB 31,28,00
 	RGB 16,18,31
 	RGB 03,03,03
 
 	ds $18
 
 	RGB 31,31,31 ; PAL_SGB2
-	RGB 31,17,00
-	RGB 28,14,00
+	RGB 31,09,01
+	RGB 28,14,04
 	RGB 03,03,03
 
 	ds $18
