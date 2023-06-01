@@ -12,9 +12,10 @@ IndigoPlateauLobby_Object:
 	object_event  7,  5, SPRITE_NURSE, STAY, DOWN, 1 ; person
 	object_event  4,  9, SPRITE_GYM_GUIDE, STAY, RIGHT, 2 ; person
 	object_event  5,  1, SPRITE_COOLTRAINER_F, STAY, DOWN, 3 ; person
-	object_event  0,  5, SPRITE_CLERK, STAY, RIGHT, 4 ; person
-	object_event 13,  6, SPRITE_LINK_RECEPTIONIST, STAY, DOWN, 5 ; person
-	object_event 10,  7, SPRITE_GAMEBOY_KID, STAY, DOWN, 6 ; Exeggutor Trader
-	object_event  8,  5, SPRITE_CHANSEY, STAY, DOWN, 7 ; Chansey
+	object_event  1, 10, SPRITE_YOUNGSTER, STAY, UP, 4 ; person
+	object_event  0,  5, SPRITE_CLERK, STAY, RIGHT, 5 ; person
+	object_event 13,  6, SPRITE_LINK_RECEPTIONIST, STAY, DOWN, 6 ; person
+	object_event 10,  7, SPRITE_GAMEBOY_KID, STAY, DOWN, 7 ; Exeggutor Trader
+	object_event  8,  5, SPRITE_CHANSEY, STAY, DOWN, 8 ; Chansey
 
 	def_warps_to INDIGO_PLATEAU_LOBBY

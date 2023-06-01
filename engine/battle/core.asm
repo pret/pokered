@@ -840,16 +840,23 @@ FaintEnemyPokemon:
 	call PrintEmptyString
 	call SaveScreenTilesToBuffer1
 	
-	; Meltan Candy functionality.
-	; The way this is done looks like it conflates 8- and 16-bit integers, but it never goes above 256, so it'll be fine.
+	; Candy Jar functionality.
+	; This checks if the opponent is Meltan, the Jar isn't full, and it's in the bag.
+	; If so, it increments the amount of candies in the jar. Once full, it stops counting.
 	ld a, [wEnemyMonSpecies] ; Load species.
 	cp $E7 ; Is it Meltan?
 	jr nz, .skip ; Continue as normal if not.
 	
+	ld b, CANDY_JAR ; Ok, we have a Meltan on our hands. Is the Jar in the bag?
+	call IsItemInBag ; Let's check.
+	jr z, .skip ; No? Skip all of this. No candies for you.
+	
 	; Increment the Candy Jar count.
-	ld a, [wCandyJarCount]
-	inc a
-	ld [wCandyJarCount], a
+	ld a, [wCandyJarCount] ; Grab the jar.
+	cp 40 ; Do we have 40?
+	jr z, .skip ; If yes, no more candies.
+	inc a ; Increment candy count.
+	ld [wCandyJarCount], a ; Store candy count.
 	
 	; For engine\overworld\clear_variables.asm
 	; Needed so the Mystery Box effect isn't cleared upon leaving battle.

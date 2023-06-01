@@ -18,6 +18,7 @@ IndigoPlateauLobby_TextPointers:
 	dw IndigoHealNurseText
 	dw IndigoPlateauLobbyText2
 	dw IndigoPlateauLobbyText3
+	dw CandyJarGuy
 	dw IndigoCashierText
 	dw IndigoTradeNurseText
 	dw ExeggutorTrade
@@ -51,3 +52,43 @@ IndigoPlateauLobbyText4:
 	text_asm
 	callfar PokecenterChanseyText
 	jp TextScriptEnd
+
+CandyJarGuy:
+	text_asm
+	CheckEvent EVENT_GOT_CANDY_JAR
+	jr nz, .got_item
+	ld hl, CandyJarPreReceiveText
+	call PrintText
+	lb bc, CANDY_JAR, 1
+	call GiveItem
+	jr nc, .bag_full
+	ld hl, ReceivedCandyJarText
+	call PrintText
+	SetEvent EVENT_GOT_CANDY_JAR
+	jr .done
+.bag_full
+	ld hl, CandyJarNoRoomText
+	call PrintText
+	jr .done
+.got_item
+	ld hl, CandyJarExplanationText
+	call PrintText
+.done
+	jp TextScriptEnd
+
+CandyJarPreReceiveText:
+	text_far _CandyJarPreReceiveText
+	text_end
+
+ReceivedCandyJarText:
+	text_far _ReceivedCandyJarText
+	sound_get_item_1
+	text_end
+
+CandyJarExplanationText:
+	text_far _CandyJarExplanationText
+	text_end
+
+CandyJarNoRoomText:
+	text_far _CandyJarNoRoomText
+	text_end

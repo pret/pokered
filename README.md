@@ -197,8 +197,7 @@ Known Bugs
 - The Tradeback Tutor doesn't work properly with Rhydon for reasons likely related to its index number of 1.
 - The Vermilion Passes are very unstable (Faraway warps are weird unless you battle, Citrine outright crashes).
 - The Brunswick Trail Bird event is unfinished, Zapdos causes it to crash.
-- Candy Jar is uncapped, needs to be capped at 40. Capping at 40 avoids potential overflows and the Jar not being able to evolve Meltan. 
-- Candy Jar does not get checked if it's in the bag when KOing Meltan, so it'll always increment. Keep for QoL?
+- Meltan spawned via the Mystery Box will use the moves of the Pokemon they are replacing.
 
 Evolution Methods for new Pokemon
 ====

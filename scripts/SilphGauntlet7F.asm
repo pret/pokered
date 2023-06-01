@@ -96,7 +96,7 @@ ChiefScript_That_Seems_Needed:
 
 SilphGauntlet7F_TextPointers:
 	dw ChiefText1
-	dw ChiefText2
+;	dw ChiefText2
 
 ChiefText1:
 	text_asm
@@ -143,44 +143,44 @@ ChiefAfterBattleText:
 	text_far _ChiefAfterBattleText
 	text_end
 
-ChiefText2:
-	text_asm
-	CheckEvent EVENT_GOT_CANDY_JAR
-	jr nz, .got_item
-	ld hl, CandyJarPreReceiveText
-	call PrintText
-	lb bc, CANDY_JAR, 1
-	call GiveItem
-	jr nc, .bag_full
-	ld hl, ReceivedCandyJarText
-	call PrintText
-	SetEvent EVENT_GOT_CANDY_JAR
-	jr .done
-.bag_full
-	ld hl, CandyJarNoRoomText
-	call PrintText
-	jr .done
-.got_item
-	ld hl, CandyJarExplanationText
-	call PrintText
-.done
-	jp TextScriptEnd
+;ChiefText2:
+;	text_asm
+;	CheckEvent EVENT_GOT_CANDY_JAR
+;	jr nz, .got_item
+;	ld hl, CandyJarPreReceiveText
+;	call PrintText
+;	lb bc, CANDY_JAR, 1
+;	call GiveItem
+;	jr nc, .bag_full
+;	ld hl, ReceivedCandyJarText
+;	call PrintText
+;	SetEvent EVENT_GOT_CANDY_JAR
+;	jr .done
+;.bag_full
+;	ld hl, CandyJarNoRoomText
+;	call PrintText
+;	jr .done
+;.got_item
+;	ld hl, CandyJarExplanationText
+;	call PrintText
+;.done
+;	jp TextScriptEnd
 
-CandyJarPreReceiveText:
-	text_far _CandyJarPreReceiveText
-	text_end
+;CandyJarPreReceiveText:
+;	text_far _CandyJarPreReceiveText
+;	text_end
 
-ReceivedCandyJarText:
-	text_far _ReceivedCandyJarText
-	sound_get_item_1
-	text_end
+;ReceivedCandyJarText:
+;	text_far _ReceivedCandyJarText
+;	sound_get_item_1
+;	text_end
 
-CandyJarExplanationText:
-	text_far _CandyJarExplanationText
-	text_end
+;CandyJarExplanationText:
+;	text_far _CandyJarExplanationText
+;	text_end
 
-CandyJarNoRoomText:
-	text_far _CandyJarNoRoomText
-	text_end
+;CandyJarNoRoomText:
+;	text_far _CandyJarNoRoomText
+;	text_end
 
-	text_end
+;	text_end
