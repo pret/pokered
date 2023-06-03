@@ -555,7 +555,7 @@ _FarfetchdDexEntry:: ; new entry
 
 	page "being hunted for"
 	next "its tasty meat"
-	next "and leeks"
+	next "and leek"
 	dex
 
 _VenonatDexEntry:: ; new entry
