@@ -554,7 +554,7 @@ _FarfetchdDexEntry:: ; new entry
 	next "declined due to"
 
 	page "being hunted for"
-	next "their tasty meat"
+	next "its tasty meat"
 	next "and leeks"
 	dex
 
@@ -665,9 +665,9 @@ _KrabbyDexEntry:: ; new entry
 	next "in the air to"
 	next "intimidate foes."
 
-	page "However, they"
-	next "usually prefer to"
-	next "avoid fighting"
+	page "It typically
+	next "prefers to avoid"
+	next "fighting, though"
 	dex
 
 _VulpixDexEntry::			        ; Changed to make it not too similar to Mikon's dex entry. ~M
