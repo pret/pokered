@@ -239,9 +239,9 @@ _CheepDexEntry::
 	dex
 
 _TotartleDexEntry::
-	text "A #MON capable of"
-	next "living for 10,000"
-	next "years. Its shell"
+	text "Capable of living"
+	next "for 10,000 years."
+	next "TOTARTLE's shell"
 
 	page "becomes slowly"
 	next "covered in algae"

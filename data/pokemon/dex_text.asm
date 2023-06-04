@@ -180,7 +180,7 @@ _RhyhornDexEntry:: ; new entry
 
 _LaprasDexEntry:: ; new entry
 	text "Placid in nature,"
-	next "Little progress"
+	next "little progress"
 	next "has been made in"
 
 	page "studying it due"
@@ -665,7 +665,7 @@ _KrabbyDexEntry:: ; new entry
 	next "in the air to"
 	next "intimidate foes."
 
-	page "It typically
+	page "It typically"
 	next "prefers to avoid"
 	next "fighting, though"
 	dex
@@ -1321,11 +1321,11 @@ _RapidashDexEntry:: ; new entry
 	dex
 
 _RattataDexEntry:: ; new entry
-	text "They gnaw on hard"
+	text "It gnaws on hard"
 	next "material to keep"
-	next "their fangs short."
+	next "its fangs short."
 
-	page "They feast on"
+	page "It feasts on"
 	next "nuts like walnuts"
 	next "and acorns"
 	dex
