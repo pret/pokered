@@ -164,6 +164,7 @@ DebugSetPokedexEntries:
 	ret
 
 DebugItemsList:
+	db POKE_BALL, 99
 	db MYSTERY_BOX, 1
 	db CANDY_JAR, 1
 	db BICYCLE, 1

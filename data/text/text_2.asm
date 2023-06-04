@@ -1841,3 +1841,8 @@ _CandyJarCount::
 	text_decimal wCandyJarCount, 1, 2
 	text "0"
 	prompt
+
+_MeltanIncrement::
+	text "<PLAYER> found"
+	line "10 MELTAN CANDY!"
+	prompt

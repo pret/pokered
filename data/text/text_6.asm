@@ -11,6 +11,12 @@ _ItemUseBallText01::
 	line "#MON!"
 	prompt
 
+_ItemUseBallText01_Alt::
+	text "It's too strong!"
+	line "It destroyed the"
+	cont "BALL!"
+	prompt
+
 _ItemUseBallText02::
 	text "Darn! The #MON"
 	line "broke free!"
@@ -18,7 +24,7 @@ _ItemUseBallText02::
 
 _ItemUseBallText03::
 	text "Aww! It appeared"
-	line "to be caught! "
+	line "to be caught!"
 	prompt
 
 _ItemUseBallText04::

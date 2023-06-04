@@ -497,9 +497,23 @@ ItemUseBall:
 	cp $10
 	ld hl, ItemUseBallText00
 	jp z, .printMessage
-	cp $20
-	ld hl, ItemUseBallText01
-	jp z, .printMessage
+	
+	; The "ball miss" message has been reworked. I want to make it less misleading.
+	; Essentially, in normal battles, it'll say the Pokemon is too strong and broke the ball.
+	; In the Safari Zone, this mechanic happens a lot, so I'll keep the old text for that.
+	; This results in a convoluted series of statements, but I think I did a good job.
+	cp $20 ; First, let's load the usual ball anim check.
+	jr nz, .skip ; We're skipping from here early to make life easier for us.
+	
+	ld hl, ItemUseBallText01 ; Load Safari Zone version (this is the old text)
+	ld a, [wBattleType] ; Alright, what are we actually working with here?
+	cp BATTLE_TYPE_SAFARI ; Safari Zone?
+	jp z, .printMessage ; Yep? Alright, ship the old text.
+	ld hl, ItemUseBallText01_Alt ; No? New one, then.
+	jp .printMessage ; Here ya go, pardner.
+	
+.skip
+	ld a, [wPokeBallAnimData] ; ok back to normal :3
 	cp $61
 	ld hl, ItemUseBallText02
 	jp z, .printMessage
@@ -646,6 +660,10 @@ ItemUseBallText00:
 ItemUseBallText01:
 ;"You missed the pokemon!"
 	text_far _ItemUseBallText01
+	text_end
+ItemUseBallText01_Alt:
+;"It's too strong!"
+	text_far _ItemUseBallText01_Alt
 	text_end
 ItemUseBallText02:
 ;"Darn! The pokemon broke free!"
