@@ -291,7 +291,3 @@ RivalIDs:
 	db OPP_RIVAL3
 	db -1 ; end
 
-RLEList_PlayerGZapMovement::
-	db D_DOWN, 1
-	db D_LEFT, 1
-	db -1 ; end

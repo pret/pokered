@@ -13,22 +13,18 @@ CelesteHillCoords1:
 
 GalarianBirdScript1:
 ;	CheckEvent EVENT_BIRDS_FOUND
-;	jr z, .cont
 ;	jr nz, .done
-;.cont - This code is unfinished and bad.
-; If you have any ideas lmk :3
 	ld hl, CelesteHillCoords1
 	call ArePlayerCoordsInArray
 	jp nc, .done
 	
 	ld [wJoyIgnore], a
 	SetEvent EVENT_BIRDS_FOUND
+	ld a, ARTICUNO_G
+	call PlayCry
 	ld a, $1
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	
-	ld a, ARTICUNO_G
-	call PlayCry
 	call WaitForSoundToFinish
 	pop hl
 	ld de, BirdSprite
@@ -66,16 +62,16 @@ GalarianBirdScript1:
 	
 	ld a, ZAPDOS_G
 	call PlayCry
-	call ZapdosRunThrough
+	call ZapdosRunThrough ; something breaks here. i do not know what.
 	
 	ld a, HS_CELESTE_ZAPDOS_G
 	ld [wMissableObjectIndex], a
 	predef ShowObject
 	
-	ld a, $1
-	ldh [hSpriteIndex], a
-	call SetSpriteMovementBytesToFF
-	ld a, [wXCoord]
+;	ld a, $1
+;	ldh [hSpriteIndex], a
+;	call SetSpriteMovementBytesToFF
+;	ld a, [wXCoord]
 	
 	jr .done
 .done
@@ -136,36 +132,21 @@ GalarianArticunoFlyScreenCoords2:
 
 	db $F0, $00
 
+; This function currently causes the game to crash. It happens right as GZap walks towards the player.
+; Interestingly, this happens after a single step. I have tried dividing this, but it doesn't seem to help.
+; Could be worth cutting the event entirely.
 ZapdosRunThrough:
 	call Delay3
 	ld a, $2
 	ldh [hSpriteIndex], a
-	ld de, GalarianZapdosMovement1
-	call MoveSprite
-	
-	ld hl, wSimulatedJoypadStatesEnd
-	ld de, RLEList_PlayerGZapMovement
-	call DecodeRLEList
-	dec a
-	ld [wSimulatedJoypadStatesIndex], a
-	call StartSimulatingJoypadStates
-	ld a, $1
-	ldh [hSpriteIndex], a
-	xor a
-	ldh [hSpriteFacingDirection], a
-	call SetSpriteFacingDirectionAndDelay
-	
-	ld a, $2
-	ldh [hSpriteIndex], a
-	ld de, GalarianZapdosMovement2
+	ld de, GalarianZapdosMovement
 	call MoveSprite
 	ret
 
-GalarianZapdosMovement1:
+GalarianZapdosMovement:
 	db NPC_MOVEMENT_DOWN
-	db -1
-
-GalarianZapdosMovement2:
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_LEFT
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
@@ -187,6 +168,4 @@ CelesteHillSign1:
 CelesteHillSign2:
 	text_far _CelesteHillSign2
 	text_end
-	
-	text_end ; unused
 	
