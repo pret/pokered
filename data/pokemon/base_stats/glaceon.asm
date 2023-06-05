@@ -11,7 +11,7 @@
 	dw GlaceonPicFront, GlaceonPicBack
 
 	db TACKLE, SAND_ATTACK, QUICK_ATTACK, AURORA_BEAM ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	db GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  ICE_BEAM,     \

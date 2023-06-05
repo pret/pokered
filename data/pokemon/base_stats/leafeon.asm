@@ -11,7 +11,7 @@
 	dw LeafeonPicFront, LeafeonPicBack
 
 	db TACKLE, SAND_ATTACK, QUICK_ATTACK, ABSORB ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	db GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        BODY_SLAM,    SWORDS_DANCE, TAKE_DOWN,    DOUBLE_EDGE,  \

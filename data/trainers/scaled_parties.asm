@@ -105,7 +105,7 @@ LanceData:
 	db $FF, 78, CROCKY, 77, KINGDRA, 77, EXEGGUTOR_A, 79, AERODACTYL, 79, CRYITHAN, 82, DRAGONITE, 0
 
 YujirouData: ; was unused juggler
-	db $FF, 7, KONYA, 7, RATTATA, 10, LICKITUNG, 0
+	db $FF, 4, KONYA, 5, RATTATA, 9, LICKITUNG, 0
 ; post-game rematch team (currently unused)
 	db $FF, 66, PERSIAN, 67, TAUROS, 67, MADAAMU, 66, BLISSEY, 67, SNORLAX, 70, LICKILICKY, 0
 

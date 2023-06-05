@@ -11,7 +11,7 @@
 	dw RaichuAPicFront, RaichuAPicBack
 
 	db THUNDERSHOCK, GROWL, THUNDER_WAVE, CONFUSION ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	db GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \

@@ -672,7 +672,7 @@ ChannelerData:
 
 StudentData:
 ; Viridian Pre-Gym
-	db 6, PIDGEY, RATTATA, 0
+	db 4, PIDGEY, RATTATA, 0
 	db 6, CLEFAIRY, 0
 ; Silph Gauntlet 1F (Viridian Forest)
 	db 62, CLEFABLE, PENDRAKEN, WIGGLYTUFF, BARUNDA, BELLOSSOM, SLOWKING, 0		; may revise

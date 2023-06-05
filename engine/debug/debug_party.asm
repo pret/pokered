@@ -142,13 +142,14 @@ IF DEF(_DEBUG)
 	call DebugSetPokedexEntries
 	SetEvent EVENT_GOT_POKEDEX
 
-	; Rival chose Squirtle,
-	; Player chose Charmander.
+	; Rival chose Pikachu,
+	; Player chose Eevee.
+	; Eevee is used to test the Celadon Mansion Roof House.
 	ld hl, wRivalStarter
-	ld a, STARTER2
+	ld a, STARTER4
 	ld [hli], a
 	inc hl ; hl = wPlayerStarter
-	ld a, STARTER1
+	ld a, STARTER5
 	ld [hl], a
 
 	ret
