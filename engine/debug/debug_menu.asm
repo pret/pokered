@@ -91,21 +91,27 @@ TestBattle:
 	dec a
 	ld [hl], a
 
-	; Give the player a
-	; level 20 Rhydon.
-	ld a, EEVEE
+	; Player's Pokemon.
+	ld a, NIDOREIGN
 	ld [wcf91], a
-	ld a, 10
+	ld a, 100
 	ld [wCurEnemyLVL], a
 	xor a
 	ld [wMonDataLocation], a
 	ld [wCurMap], a
 	call AddPartyMon
-
-	; Fight against a
-	; level 20 Rhydon.
-	ld a, CROAKOZUNA
+	
+	; This function gives you a way to waste a turn, never know when you'll need it.
+	; Alternatively, add a move to test.
+	ld hl, wPartyMon1Moves
+	ld a, SPLASH
+	ld [hli], a
+	
+	; Opponent's Pokemon.
+	ld a, WEEDLE
 	ld [wCurOpponent], a
+	ld a, 100 ; Set the level you want here.
+	ld [wCurEnemyLVL], a
 
 	predef InitOpponent
 

@@ -3949,6 +3949,17 @@ PrintMoveFailureText:
 	and $7f
 	jr z, .gotTextToPrint
 	ld hl, AttackMissedText
+	
+	; New text for when moves deal zero damage.
+	; This gives players a nice little dopamine rush.
+	ld a, [wDidZeroDamage] ; Grab the variable.
+	cp 1 ; Alright, is it set?
+	jr nz, .skip ; No? Skip these instructions.
+	ld hl, ZeroDamageText ; Load the zero damage text in.
+	ld a, 0 ; Now shut the address off.
+	ld [wDidZeroDamage], a ; Bink!
+	
+.skip
 	ld a, [wCriticalHitOrOHKO]
 	cp $ff
 	jr nz, .gotTextToPrint
@@ -3996,6 +4007,12 @@ PrintMoveFailureText:
 
 AttackMissedText:
 	text_far _AttackMissedText
+	text_end
+
+ZeroDamageText:
+	text "It didn't leave"
+	line "a scratch!"
+	prompt
 	text_end
 
 KeptGoingAndCrashedText:
@@ -5403,6 +5420,7 @@ AdjustDamageForMoveType:
 ; this only occurs if a move that would do 2 or 3 damage is 0.25x effective against the target
 	inc a
 	ld [wMoveMissed], a
+	ld [wDidZeroDamage], a
 .skipTypeImmunity
 	pop bc
 	pop hl

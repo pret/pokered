@@ -2201,7 +2201,12 @@ wWhichDungeonWarp:: db
 ; bit 7: set by ItemUseCardKey, which is leftover code from a previous implementation of the Card Key
 wd728:: db
 
-	ds 1
+; This is a new bit for cases where zero damage is dealt.
+; Usually, it's defined as a miss, but it's a bit misleading.
+; To give players a feel of power, I've added new text for it.
+; $00 - False
+; $01 - True
+wDidZeroDamage:: db
 
 ; redundant because it matches wObtainedBadges
 ; used to determine whether to show name on statue and in two NPC text scripts

@@ -124,6 +124,7 @@ QoL Enhancements
 - The blinking animation when hit by moves like Tackle now repeats 4 instead of 6 times, speeding up battles by a bit while not sacrificing impact.
 - The Rock in the Safari Zone now only raises the flee chance by 1.5x, rather than 2x, opening up new strategies.
 - PP symbol is displayed in the battle menu. PP displayed before, it just looks nicer now. Done by changing a straggler Japanese character.
+- When dealing 0 damage, there'll now be a special text box, making it less misleading.
 - Lorelei, Bruno, and Agatha now play the Gym Leader Battle theme.
 - Trainer DVs are perfect-15s.
 - The protagonist is referred to in a gender neutral manner.
