@@ -130,6 +130,7 @@ GameCorner_TextPointers:
 	dw CeladonGameCornerText11
 	dw CeladonGameCornerText12
 	dw CeladonGameCornerText13
+	dw GameCornerArbok
 
 CeladonGameCornerText1:
 	text_far _CeladonGameCornerText1
@@ -525,3 +526,11 @@ Has9990Coins:
 	ld a, $90
 	ldh [hCoins + 1], a
 	jp HasEnoughCoins
+
+GameCornerArbok:
+	text_far _GameCornerArbok
+	text_asm
+	ld a, ARBOK
+	call PlayCry
+	call WaitForSoundToFinish
+	jp TextScriptEnd

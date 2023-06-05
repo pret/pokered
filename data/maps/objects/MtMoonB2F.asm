@@ -15,7 +15,7 @@ MtMoonB2F_Object:
 	object_event  9,  3, SPRITE_JESSIE, STAY, LEFT, 2
 	object_event 15, 22, SPRITE_ROCKET, STAY, DOWN, 3, OPP_ROCKET, 2
 	object_event 11, 16, SPRITE_ROCKET, STAY, DOWN, 4, OPP_ROCKET, 3
-	object_event 29, 17, SPRITE_ROCKET, STAY, LEFT, 5, OPP_ROCKET, 1
+	object_event 29, 17, SPRITE_ROCKET, STAY, LEFT, 5, OPP_ROCKET, 4 ; Raticate Boss
 	object_event  9,  4, SPRITE_JAMES, STAY, LEFT, 6
 	object_event 12,  6, SPRITE_FOSSIL, STAY, NONE, 7 ; person
 	object_event 13,  6, SPRITE_FOSSIL, STAY, NONE, 8 ; person

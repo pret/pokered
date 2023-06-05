@@ -1846,3 +1846,7 @@ _MeltanIncrement::
 	text "<PLAYER> found"
 	line "10 MELTAN CANDY!"
 	prompt
+
+_GameCornerArbok:: ; Putting here to be potentially farcalled somewhere else.
+	text "ARBOK: Chaaarbok!"
+	done
