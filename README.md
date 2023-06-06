@@ -60,7 +60,7 @@ New Items:
 ====
 There are some new items here, with the aim of accomodating new Pokemon, adding features, and acting as methods of getting to new locations. 
 - To accomodate Meltan, the Mystery Box from Pokemon GO is featured. When used, wild encounters are replaced with Meltan until one leaves the location.
-	- Melmetal is obtained by using a Candy Jar on Meltan, which is obtained as a special reward later!
+	- The Candy Jar is a new key item that allows Meltan Candy to be collected. Defeating a Meltan rewards 10 Candy, and once 400 are collected, it turns into an evolution item to evolve Meltan into Melmetal.
 - The Ice, Poison and Heart Stones have been added, the latter two being from the SpaceWorld '97 demo.
 	- Additional evolution items include the Protector, Black Augurite, Up-Grade, Dubious Disc, and the Metal Coat.
 - The Bottle Cap has been added alongside a Hyper Training feature, acting as effectively a Gold Bottle Cap.
@@ -82,7 +82,7 @@ New Areas
 	- Brunswick Trail, south of Citrine City, is a route that leads to Celeste Hill.
 	- Celeste Hill activates an event where the Galarian Legendary Birds can be fought. Moltres will challenge you right there, while the other two flee to the previously mentioned locations.
 - Underwater Tunnel connects Route 25 and Route 10, making Rock Tunnel skippable later.
-- Cinnabar Volcano is a new area that houses Moltres, allowing it to be obtained before Victory Road.
+- Cinnabar Volcano is a new area that houses Moltres, allowing it to be obtained before Victory Road. It has a unique dark-orange palette to make it unique compared to the other caves.
 - Faraway Island from Pokemon Emerald has been added, where you can find Mew. It also has its own wild encounters, as well as an improved translation on its sign, enhancing its appearance from its source material.
 - Mt. Moon Crater is a new area based on Area Zero in Pokemon Scarlet and Violet, accessible in the post-game. Here, you can encounter Scream Tail and Sandy Shocks via random encounter, just like the original!
 - Bill's Garden is accessible in the post-game with access to all "one-time deals", just like in the mythos!
@@ -104,6 +104,11 @@ Improved Areas
 - Viridian Gym now has a minor new area once you make Giovanni leave.
 - Various Move Tutors from FireRed and LeafGreen have been distributed around the region, instead giving their respective TMs.
 - The S.S. Anne now returns after getting the Marsh Badge and features trades for Galarian forms & Evolutions, as well as Paldean Tauros.
+- A few existing areas have unique palettes to make them stand out:
+	- The Game Corner has a new palette, meant to reflect the bright, exciting colours that casinos and pachinko parlours tend to have.
+	- The Seafoam Islands have a cyan-coloured palette to make it seem more like an ice cave. Lorelei's room also has it.
+	- The Power Plant has a yellow palette, seeing as how it houses many Electric-types.
+	- Cerulean Cave uses the iconic peach/purple palette that several other sprites do, including Mew and Mewtwo.
 - After entering the Hall of Fame, try visiting Route 1!
 
 QoL Enhancements
@@ -199,6 +204,7 @@ Known Bugs
 - The Tradeback Tutor doesn't work properly with Rhydon for reasons likely related to its index number of 1.
 - The Vermilion Passes are very unstable (Faraway warps are weird unless you battle, Citrine outright crashes).
 - The Brunswick Trail Bird event is unfinished, Zapdos causes it to crash.
+- Jessie and James in Mt. Moon aren't loaded in properly, making them appear to be invisible.
 - Meltan spawned via the Mystery Box will use the moves of the Pokemon they are replacing.
 
 Evolution Methods for new Pokemon
@@ -211,57 +217,55 @@ Due to the odd way some new Pokemon evolve, methods are listed here.
 Changed Methods:
 - Shellder -> Cloyster | Use Ice Stone (Accomodating Taaban)
 - Gloom -> Vileplume | Use Poison Stone (Accomodating Bellossom)
-- Nidorino -> Nidoking | L36 (Prototype method, accomodating Nidoreign)
-- Nidorina -> Nidoqueen | L36 (Prototype method, accomodating Nidoreign)
+- Nidorino -> Nidoking | L36 OR use Poison Stone (Level up method from prototype, accomodating Nidoreign)
+- Nidorina -> Nidoqueen | L36 OR use Poison Stone (Level up method from prototype, accomodating Nidoreign)
 
 New Pokemon:
-- Rhydon -> Rhyperior | Use Protector 
-- Lickitung -> Lickilicky | L32
-- Scyther -> Scizor | L41 OR use Metal Coat
-- Scyther -> Kleavor | Use Black Augurite
-- Pinsir -> Purakkusu | L42 OR use Metal Coat
-- Tangela -> Tangrowth | L44
-- Onix -> Steelix | L38 OR use Metal Coat
-- Slowpoke -> Slowking | Use Heart Stone 
 - Chansey -> Blissey | L45
-- Magmar -> Magmortar | Use Fire Stone
-- Electabuzz -> Electivire | Use Thunder Stone
-- Magneton -> Magnezone | Use Thunder Stone
-- Poliwhirl -> Politoed | Use Heart Stone
 - Ditto -> Animon | Use Metal Coat
-- Seadra -> Kingdra | Trade
-- Primeape -> Annihilape | Trade
+- Electabuzz -> Electivire | Use Thunder Stone
+- Farfetch'd -> Madaamu | L24
+- Gloom -> Bellossom | Use Leaf Stone
 - Golbat -> Crobat | L44
+- Lickitung -> Lickilicky | L32
+- Magmar -> Magmortar | Use Fire Stone
+- Magneton -> Magnezone | Use Thunder Stone
 - Marowak -> Guardia | Use Heart Stone
+- Onix -> Steelix | L38 OR use Metal Coat
+- Pinsir -> Purakkusu | L42 OR use Metal Coat
+- Poliwhirl -> Politoed | Use Heart Stone
 - Porygon -> Porygon2 | Use Up-Grade
 - Porygon2 -> Porygon-Z | Use Dubious Disc
-- Gloom -> Bellossom | Use Leaf Stone
-- Weepinbell -> Tsubomitto | Use Poison Stone
+- Primeape -> Annihilape | Trade
+- Rhydon -> Rhyperior | Use Protector 
+- Scyther -> Scizor | L41 OR use Metal Coat
+- Scyther -> Kleavor | Use Black Augurite
+- Seadra -> Kingdra | Trade
 - Shellder -> Taaban | Use Water Stone
+- Slowpoke -> Slowking | Use Heart Stone 
+- Tangela -> Tangrowth | L44
+- Weepinbell -> Tsubomitto | Use Poison Stone
 
 Kanto Beta Pokemon:
-- Blottle -> Pendraken | L30
 - Bittybat -> Zubat | L15
-- Cheep -> Jabetta | L30
-- Mikon -> Vulpix | L15
-- Raichu -> Gorochu | Trade
-- Ribbito -> Croakozuna | L30
-- Skimper -> Bawligua | L30
-- Bawligua -> Cryithan | L50
-- Konya -> Meowth | L14
-- Decilla -> Gyaoon | L40
-- Magnemite -> Magnetite | L20
-- Magnetite -> Magneton | L30
-- Gyopin -> Goldeen | L16
-- Kotora -> Gaotora | L16
-- Gaotora -> Gorotora | L36
-- Puchikoon -> Ponyta | L20
 - Blastyke -> Blastoise | L36
-- Wartortle -> Totartle | L36, replaces Blastoise
+- Blottle -> Pendraken | L30
+- Cheep -> Jabetta | L30
+- Decilla -> Gyaoon | L40
+- Gyopin -> Goldeen | L16
 - Kokana -> Kasanagi | L7
 - Kasanagi -> Carapthor | L10
-- Psyduck -> Weirduck | L22, Golduck level remains the same for Weirduck.
+- Konya -> Meowth | L14
+- Kotora -> Gaotora -> Gorotora | L16, L36
+- Magnemite -> Magnetite -> Magneton | L20, L30
+- Mikon -> Vulpix | L15
 - Nidorino OR Nidorina -> Nidoreign | Moon Stone
+- Psyduck -> Weirduck -> Golduck | L22, L33
+- Puchikoon -> Ponyta | L20
+- Raichu -> Gorochu | Trade
+- Ribbito -> Croakozuna | L30
+- Skimper -> Bawligua -> Cryithan | L30, L50
+- Wartortle -> Totartle | L36, replaces Blastoise
 
 Eeveelutions:
 - Espeon | Heart Stone
