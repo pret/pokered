@@ -48,6 +48,14 @@ IF DEF(_DEBUG)
 	ld a, 39
 	ld [wCandyJarCount], a
 	
+	; Test Vermilion Beauty
+	; Set a to 4 to test increments.
+	; Set BeautyChoice to GROWLITHE to test the other choice.
+	ld a, 5
+	ld [wBeautyCounter], a 
+	ld a, MEOWTH
+	ld [wBeautyChoice], a
+	
 	; Get all badges except Earth Badge.
 	ld a, ~(1 << BIT_EARTHBADGE)
 	ld [wObtainedBadges], a
@@ -165,15 +173,14 @@ DebugSetPokedexEntries:
 	ret
 
 DebugItemsList:
-	db POKE_BALL, 99
+	db MASTER_BALL, 99
 	db MYSTERY_BOX, 1
 	db CANDY_JAR, 1
 	db BICYCLE, 1
 	db FULL_RESTORE, 99
 	db MAX_REPEL, 99
 	db RARE_CANDY, 99
-	db MASTER_BALL, 99
-	db ULTRA_BALL, 99
+	db POKE_BALL, 99 ; test ball miss text with this
 	db SECRET_KEY, 1
 	db CARD_KEY, 1
 	db S_S_TICKET, 1

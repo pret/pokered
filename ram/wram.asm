@@ -1948,12 +1948,15 @@ wBoxItems:: ds PC_ITEM_CAPACITY * 2 + 1
 ; bit 7: whether the player has changed boxes before
 wCurrentBoxNum:: db
 
-	ds 1
-
 ; number of HOF teams
 wNumHoFTeams:: db
 
-ds 1 ; was wUnusedD5A3, removed when putting the Mystery Box in.
+; LGPE Vermilion Beauty event-related stuff.
+; wBeautyChoice stores either MEOWTH or GROWLITHE, which the counter will increment with.
+; We use wBeautyChoice to spit out text during the cutscene too.
+; wBeautyCounter will count up to 5 and gives the player a L16 Persian or Arcanine depending on what counts up.
+wBeautyChoice:: db ; Stores the ID of the Pokemon chosen.
+wBeautyCounter:: db ; was wUnusedD5A3, removed when putting the Mystery Box in.
 
 wPlayerCoins:: ds 2 ; BCD
 

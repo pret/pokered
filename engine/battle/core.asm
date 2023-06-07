@@ -2379,6 +2379,7 @@ UseBagItem:
 	ret
 
 .returnAfterCapturingMon
+	call VermilionBeautyCheck ; before you go, would you like to talk about our lord and saviour LGPE?
 	call GBPalNormal
 	xor a
 	ld [wCapturedMonSpecies], a
@@ -7225,3 +7226,22 @@ StupidBattleTentFix:
 	text "Oops! Better"
 	line "luck next time!"
 	prompt
+
+; Vermilion Beauty functionality.
+; If we have a Meowth or Growlithe on our hands, increment the counter.
+VermilionBeautyCheck:
+	ld a, [wBeautyChoice] ; Firstly, was this even started?
+	jr z, .skipCounting ; Yeah? Alright, skip.
+	ld a, [wBeautyCounter] ; Now to cap this at 5.
+	cp 5 ; First, we check if we're at 5...
+	jr z, .skipCounting ; and if so, we skip doing this at all.
+	
+	ld a, [wCapturedMonSpecies] ; Now to check the species.
+	ld hl, wBeautyChoice
+	cp [hl] ; Is it our guy?
+	jr nz, .skipCounting ; Fuck right off then.
+	ld a, [wBeautyCounter] ; Ok, now grab the counter...
+	inc a ; Increment it...
+	ld [wBeautyCounter], a ; and get the FUCK out of my office!!!
+.skipCounting
+	ret

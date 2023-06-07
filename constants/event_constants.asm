@@ -153,7 +153,8 @@
 	const_next $150
 	const_skip
 	const EVENT_GOT_BIKE_VOUCHER
-	const_skip 4
+	const EVENT_VERMILION_BEAUTY_DONE
+	const_skip 3
 	const EVENT_SEEL_FAN_BOAST
 	const EVENT_PIKACHU_FAN_BOAST
 	const_skip 8

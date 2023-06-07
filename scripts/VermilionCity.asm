@@ -274,6 +274,7 @@ VermilionCity_TextPointers:
 	dw VermilionCityText12
 	dw VermilionCityText13
 	dw RoingusText
+	dw VermilionBeauty
 
 VermilionCityText1:
 	text_far _VermilionCityText1
@@ -458,4 +459,121 @@ EventVermillionCitySSTicket:
 
 PassRefuse:
 	text_far _VermillionCityHarborRefuse
+	text_end
+
+; LGPE Beauty who gives you a Persian or Arcanine depending on the game.
+; Here, we make it a Cats vs Dogs question and change based on that.
+; The way it works is it makes the player catch the opposite Pokemon, and then get the one they picked.
+; So Meowth gets Arcanine, and Growlithe gets Persian.
+; This code is kind of schizophrenic but it does the job.
+VermilionBeauty:
+	text_asm
+	
+	CheckEvent EVENT_VERMILION_BEAUTY_DONE ; First, check if the event is actually done.
+	jp nz, BeautyDone ; Yes? Alright, no need for this.
+	
+	ld a, [wBeautyChoice] ; Next, we check if wBeautyChoice has been set. This saves an event constant.
+	cp 0 ; It will never be 0 if the player has made their choice.
+	jr z, .eventStart ; If it is, then the event needs to start.
+	
+	; We need to do 2 skips here which triggers me but it works.
+	; You could put the finish check before the choice check, but then it gets a little weird.
+	; All it really achieves is weird architecture for like 3-4 less machine cycles.
+	ld a, [wBeautyCounter] ; Alright, if you got here, then the event is in progress.
+	cp 5 ; Do you have 5 of the scrunklies?
+	jr z, .eventIsFinished ; Big if true.
+	jr nz, .eventInProgress ; Small if false.
+
+.eventStart
+	ld hl, BeautyText1 ; Let's open the text.
+	call PrintText
+	call CatsDogsChoice
+	
+	ld a, [wCurrentMenuItem] ; Let's load what they picked. 0 is cats, 1 is dogs.
+	and a
+	jr nz, .getArcanine ; Skip storing Growlithe if dogs.
+	ld a, GROWLITHE ; If they picked cats, then store Growlithe.
+	jr .skip ; I know this looks bad, but if it isn't here, it'd store Growlithe and then go to Meowth anyway.
+.getArcanine ; If they get here, they picked dogs, so we store Meowth.
+	ld a, MEOWTH
+.skip ; Now we land here.
+	ld [wBeautyChoice], a ; Finally store the choice in wBeautyChoice.
+	
+	ld hl, BeautyText2 ; Now spit it out.
+	call PrintText
+	
+.eventInProgress ; This is a jump point for if the event was already started.
+	ld a, [wBeautyChoice]
+	ld [wd11e], a
+	call GetMonName
+	ld hl, BeautyChoice
+	call PrintText
+	jr .done ; no give pokemon. bad.
+.eventIsFinished
+	call SaveScreenTilesToBuffer1 ; saves us from some corruption disasters if nicknaming.
+	ld a, [wBeautyChoice]
+	ld [wd11e], a
+	call GetMonName
+	ld hl, BeautyFinish
+	call PrintText
+	
+	lb bc, PERSIAN, 16
+	ld a, [wBeautyChoice] ; Let's make sure they actually need Persian.
+	cp PERSIAN ; Do they?
+	jr z, .skip2 ; electric boogaloo
+	lb bc, ARCANINE, 16 ; ok but skip2 means arc never gets loaded in. very good sequel. disney would NEVER.
+.skip2
+	call GivePokemon
+	call LoadScreenTilesFromBuffer1 ; saves us from some corruption disasters if nicknaming.
+	SetEvent EVENT_VERMILION_BEAUTY_DONE ; and now we can finally rest.
+.done
+	jp TextScriptEnd
+
+; This needs to be separate for reasons I refuse to elaborate on for fear of angering God.
+BeautyDone:
+	text_asm
+	ld a, [wBeautyChoice]
+	ld [wd11e], a
+	call GetMonName
+	ld hl, BeautyExplain
+	call PrintText
+	jp TextScriptEnd
+
+; displays cats/dogs choice
+CatsDogsChoice:
+	call SaveScreenTilesToBuffer1
+	call InitCatsDogsTextBoxParameters
+	jr DisplayCatsDogsChoice
+    
+InitCatsDogsTextBoxParameters:
+	ld a, $2 ; loads the value for the unused SOUTH/EAST choice, that was changed to say CATS/DOGS
+	ld [wTwoOptionMenuID], a
+	hlcoord 12, 8
+	lb bc, 10, 13
+	ret
+ 	   
+DisplayCatsDogsChoice:
+	ld a, $14
+	ld [wTextBoxID], a
+	call DisplayTextBoxID
+	jp LoadScreenTilesFromBuffer1
+
+BeautyText1:
+	text_far _BeautyText1
+	text_end
+
+BeautyText2:
+	text_far _BeautyText2
+	text_end
+
+BeautyChoice:
+	text_far _BeautyChoice
+	text_end
+
+BeautyFinish:
+	text_far _BeautyFinish
+	text_end
+
+BeautyExplain:
+	text_far _BeautyExplain
 	text_end

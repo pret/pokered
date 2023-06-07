@@ -1740,7 +1740,7 @@ _OakSpeechText2B::
 	prompt
 
 _IntroducePlayerText::
-	text "Next, what is"
+	text "Now, what is"
 	line "your name?"
 	prompt
 

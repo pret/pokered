@@ -175,3 +175,54 @@ _VermillionCityHarborRefuse::
 	text "Alright! Have a"
 	line "nice day!"
 	done
+
+_BeautyText1::
+	text "Hey! Do you like"
+	line "cats or dogs?"
+	prompt
+
+_BeautyText2::
+	text "Ah! I knew it!"
+	
+	para "Sorry, it was a"
+	line "silly question..."
+	prompt ; needed for text to scroll correctly - it looks and acts fine in-game, don't worry.
+
+_BeautyChoice:: ; this is separate for the in-progress event.
+	text "If you catch 5"
+	line "@"
+	text_ram wcd6d ; efficiency - means we don't need two separate texts...
+	text ", I'll"
+	cont "give you a great"
+	cont "#MON!"
+	
+	para "See you then!"
+	done
+
+_BeautyFinish::
+	text "Oh! You've caught"
+	line "5 "
+	text_ram wcd6d
+	text "!"
+	prompt
+
+_BeautyExplain::
+	text "When "
+	text_ram wcd6d
+	line "evolves, it will"
+	cont "look like this."
+	
+	para "Hm? Why did I"
+	line "make you catch"
+	cont "the opposite"
+	cont "#MON?"
+	
+	para "Well, I wanted"
+	line "to see if your"
+	cont "preferences"
+	cont "stayed the same."
+	
+	para "It seems I was"
+	line "wrong!"
+	done
+

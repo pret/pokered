@@ -30,5 +30,6 @@ VermilionCity_Object:
 	object_event 29,  9, SPRITE_MONSTER, WALK, UP_DOWN, 5 ; person
 	object_event 25, 27, SPRITE_SAILOR, WALK, LEFT_RIGHT, 6 ; person
 	object_event 31, 27, SPRITE_COOLTRAINER_F, WALK, LEFT_RIGHT, 14 ; person
+	object_event 12, 13, SPRITE_BEAUTY, STAY, DOWN, 15 ; person
 
 	def_warps_to VERMILION_CITY
