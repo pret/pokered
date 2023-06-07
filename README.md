@@ -206,6 +206,8 @@ Known Bugs
 - The Brunswick Trail Bird event is unfinished, Zapdos causes it to crash.
 - Jessie and James in Mt. Moon aren't loaded in properly, making them appear to be invisible.
 - Meltan spawned via the Mystery Box will use the moves of the Pokemon they are replacing.
+- GiveMonName doesn't work properly for the Vermilion Beauty after receiving the Pokemon, jank ensues.
+- Text scrolls immediately when receiving the Pokemon from the Vermilion Beauty.
 
 Evolution Methods for new Pokemon
 ====
