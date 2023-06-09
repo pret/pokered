@@ -155,6 +155,10 @@ SetPal_Overworld:
 	jr z, .powerPlant
 	cp SILPH_GAUNTLET_3F
 	jr z, .ship
+	cp GAME_CORNER
+	jr z, .pachinko
+	cp GAME_CORNER_PRIZE_ROOM
+	jr z, .pachinko
 	cp CELESTE_HILL
 	jr z, .celeste
 	cp CERULEAN_CAVE_2F
@@ -203,12 +207,6 @@ SetPal_Overworld:
 .caveDefault
 	ld a, PAL_CAVE - 1
 	jr .town
-.celeste
-	ld a, PAL_CELESTE - 1
-	jr .town
-.ship
-	ld a, PAL_VERMILION - 1
-	jr .town
 .forest
 	ld a, [wCurMap]
 	cp SILPH_GAUNTLET_1F + 1
@@ -224,6 +222,15 @@ SetPal_Overworld:
 	jr .town
 .powerPlant
 	ld a, PAL_YELLOWMON - 1
+	jr .town
+.celeste
+	ld a, PAL_CELESTE - 1
+	jr .town
+.ship
+	ld a, PAL_VERMILION - 1
+	jr .town
+.pachinko
+	ld a, PAL_CASINO - 1
 	jr .town
 .faraway
 	ld a, PAL_ROUTE - 1
