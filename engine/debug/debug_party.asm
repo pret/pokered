@@ -56,6 +56,9 @@ IF DEF(_DEBUG)
 	ld a, MEOWTH
 	ld [wBeautyChoice], a
 	
+	; Test Post-Game Functionality.
+	SetEvent EVENT_POST_GAME_ATTAINED
+	
 	; Get all badges except Earth Badge.
 	ld a, ~(1 << BIT_EARTHBADGE)
 	ld [wObtainedBadges], a
@@ -180,6 +183,7 @@ DebugItemsList:
 	db FULL_RESTORE, 99
 	db MAX_REPEL, 99
 	db RARE_CANDY, 99
+	db ESCAPE_ROPE, 99
 	db POKE_BALL, 99 ; test ball miss text with this
 	db SECRET_KEY, 1
 	db CARD_KEY, 1

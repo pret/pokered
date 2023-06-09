@@ -16,3 +16,23 @@ _BrockPreBattleText::
 	cont "Fine then! Show"
 	cont "me your best!"
 	done
+
+_BrockRematchPreBattleText::
+	text "You sure look"
+	line "different to"
+	cont "when we first"
+	cont "met!"
+	
+	para "The truth is..."
+	
+	para "We LEADERs have"
+	line "a right to"
+	cont "challenge the"
+	cont "champ!"
+	
+	para "Allow me to show"
+	line "you the true"
+	cont "rock-hard power"
+	cont "of my #MON!"
+	
+	done

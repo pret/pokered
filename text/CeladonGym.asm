@@ -215,3 +215,34 @@ _CeladonGymAfterBattleText8::
 	para "Wait 'til next"
 	line "time!"
 	done
+
+_ErikaRematchPreBattleText::
+	text "If it isn't the"
+	line "one filling out"
+	cont "the #DEX."
+	
+	para "I do hope things"
+	line "have been going"
+	cont "well since our"
+	cont "last encounter."
+	
+	para "...I see."
+	
+	para "You certainly"
+	line "have been busy."
+	
+	para "I'm not fond of"
+	line "those kinds of"
+	cont "public things..."
+	
+	para "But battles are"
+	line "different. That's"
+	cont "what you came"
+	cont "for, isn't it?"
+	done
+
+_ErikaRematchDefeatedText::
+	text "Oh! It"
+	line "appears it is"
+	cont "my loss..."
+	prompt

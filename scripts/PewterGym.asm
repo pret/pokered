@@ -95,12 +95,37 @@ PewterGymTrainerHeader0:
 
 BrockText:
 	text_asm
+	CheckEvent EVENT_POST_GAME_ATTAINED ; No need to view previous stuff, technically you can skip Bide this way but I think that's hilarious
+	jr nz, .rematchMode
 	CheckEvent EVENT_BEAT_BROCK
 	jr z, .beforeBeat
 	CheckEventReuseA EVENT_GOT_TM34
 	jr nz, .afterBeat
 	call z, PewterGymScriptReceiveTM34
 	call DisableWaitingAfterTextDisplay
+	jp .done ; needed due to the rematch script length.
+.rematchMode ; Rematch functionality. Just loads pre-battle text and his trainer.
+	ld hl, BrockRematchPreBattleText
+	call PrintText
+	ld c, BANK(Music_MeetMaleTrainer)
+	ld a, MUSIC_MEET_MALE_TRAINER
+	call PlayMusic
+	set 6, [hl]
+	set 7, [hl]
+	ldh a, [hSpriteIndex]
+	ld [wSpriteIndex], a
+	ld hl, BrockRematchDefeatedText
+	ld de, BrockRematchDefeatedText
+	call SaveEndBattleTextPointers
+	call EngageMapTrainer
+	ld a, OPP_BROCK
+	ld [wCurOpponent], a
+	ld a, 9
+	ld [wTrainerNo], a
+	ld a, 1
+	ld [wIsTrainerBattle], a
+	ld a, $1
+	ld [wGymLeaderNo], a
 	jr .done
 .afterBeat
 	ld hl, BrockPostBattleAdviceText
@@ -237,4 +262,12 @@ PewterGymText_5c524:
 
 PewterGymGuidePostBattleText:
 	text_far _PewterGymGuidePostBattleText
+	text_end
+
+BrockRematchPreBattleText:
+	text_far _BrockRematchPreBattleText
+	text_end
+
+BrockRematchDefeatedText:
+	text_far _BrockRematchDefeatedText
 	text_end

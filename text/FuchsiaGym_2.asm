@@ -192,3 +192,9 @@ _FuchsiaGymGuidePostBattleText::
 	line "ninja can terrify"
 	cont "even now!"
 	done
+
+_KogaRematchDefeatedText::
+	text "I must"
+	line "hone my skills."
+	prompt
+	

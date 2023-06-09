@@ -111,12 +111,37 @@ VermilionGymTrainerHeader2:
 
 LTSurgeText:
 	text_asm
+	CheckEvent EVENT_POST_GAME_ATTAINED ; No need to view previous stuff, technically you can skip Bide this way but I think that's hilarious
+	jr nz, .rematchMode
 	CheckEvent EVENT_BEAT_LT_SURGE
 	jr z, .beforeBeat
 	CheckEventReuseA EVENT_GOT_TM24
 	jr nz, .afterBeat
 	call z, VermilionGymReceiveTM24
 	call DisableWaitingAfterTextDisplay
+	jp .done ; needed due to the rematch script length.
+.rematchMode ; Rematch functionality. Just loads pre-battle text and his trainer.
+	ld hl, SurgeRematchPreBattleText
+	call PrintText
+	ld c, BANK(Music_MeetMaleTrainer)
+	ld a, MUSIC_MEET_MALE_TRAINER
+	call PlayMusic
+	set 6, [hl]
+	set 7, [hl]
+	ldh a, [hSpriteIndex]
+	ld [wSpriteIndex], a
+	ld hl, SurgeRematchDefeatedText
+	ld de, SurgeRematchDefeatedText
+	call SaveEndBattleTextPointers
+	call EngageMapTrainer
+	ld a, OPP_LT_SURGE
+	ld [wCurOpponent], a
+	ld a, 9
+	ld [wTrainerNo], a
+	ld a, 1
+	ld [wIsTrainerBattle], a
+	ld a, $3
+	ld [wGymLeaderNo], a
 	jr .done
 .afterBeat
 	ld hl, LTSurgePostBattleAdviceText
@@ -262,4 +287,12 @@ VermilionGymGuidePreBattleText:
 
 VermilionGymGuidePostBattleText:
 	text_far _VermilionGymGuidePostBattleText
+	text_end
+
+SurgeRematchPreBattleText:
+	text_far _SurgeRematchPreBattleText
+	text_end
+
+SurgeRematchDefeatedText:
+	text_far _SurgeRematchDefeatedText
 	text_end

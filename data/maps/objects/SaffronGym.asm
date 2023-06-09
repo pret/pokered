@@ -1,6 +1,10 @@
 SaffronGym_Object:
 	db $2e ; border block
 
+; I tried to add a way to instantly get to the start.
+; But...it breaks the *entire* puzzle for some reason.
+; Yes, I tried changing the one in Sabrina's room. No, it didn't accomplish anything.
+
 	def_warp_events
 	warp_event  8, 17, LAST_MAP, 3
 	warp_event  9, 17, LAST_MAP, 3
@@ -34,6 +38,7 @@ SaffronGym_Object:
 	warp_event 19, 15, SAFFRON_GYM, 26
 	warp_event 15, 17, SAFFRON_GYM, 12
 	warp_event 19, 17, SAFFRON_GYM, 20
+	;warp_event 10,  8, SAFFRON_GYM, 20 ; New warp directly to the start of the gym, like later games.
 
 	def_bg_events
 

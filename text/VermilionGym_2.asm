@@ -143,3 +143,8 @@ _VermilionGymGuidePostBattleText::
 	text "Whew! That match"
 	line "was electric!"
 	done
+
+_SurgeRematchDefeatedText::
+	text "Absolutely"
+	line "shocking!"
+	prompt

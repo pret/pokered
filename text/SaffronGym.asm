@@ -5,10 +5,14 @@ _SabrinaPreBattleText::
 	para "I have had psychic"
 	line "powers since I"
 	cont "was a child."
-
-	para "I first learned"
-	line "to bend spoons"
-	cont "with my mind."
+	
+	; LGPE modification. I believe it's a more accurate translation as well.
+	para "It started when I"
+	line "carelessly threw"
+	cont "a spoon aside"
+	cont "and it bent"
+	cont "itself into an"
+	cont "unnatural shape."
 
 	para "I dislike fight-"
 	line "ing, but if you"
@@ -224,3 +228,38 @@ _SaffronGymAfterBattleText7::
 	line "used telepathy to"
 	cont "read your mind!"
 	done
+
+_SabrinaRematchPreBattleText::
+	text "It is true that"
+	line "PSI is a potent"
+	cont "ability."
+	
+	para "However, after I"
+	line "lost to you that"
+	cont "day..."
+	
+	para "I realised there"
+	line "are things that"
+	cont "cannot be over-"
+	cont "come with that"
+	cont "power alone."
+	
+	para "I won't rely on"
+	line "my psychic"
+	cont "powers this"
+	cont "time."
+	
+	para "My true strength."
+	line "My true self."
+	
+	para "Allow me to test"
+	line "them against"
+	cont "you!"
+	done
+	
+_SabrinaRematchDefeatedText::
+	text "I doubt"
+	line "I'll encounter"
+	cont "a TRAINER like"
+	cont "you ever again."
+	prompt

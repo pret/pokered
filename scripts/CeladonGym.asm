@@ -103,12 +103,37 @@ CeladonGymTrainerHeader6:
 
 ErikaText:
 	text_asm
+	CheckEvent EVENT_POST_GAME_ATTAINED ; No need to view previous stuff, technically you can skip Bide this way but I think that's hilarious
+	jr nz, .rematchMode
 	CheckEvent EVENT_BEAT_ERIKA
 	jr z, .beforeBeat
 	CheckEventReuseA EVENT_GOT_TM21
 	jr nz, .afterBeat
 	call z, CeladonGymReceiveTM21
 	call DisableWaitingAfterTextDisplay
+	jp .done ; needed due to the rematch script length.
+.rematchMode ; Rematch functionality. Just loads pre-battle text and his trainer.
+	ld hl, ErikaRematchPreBattleText
+	call PrintText
+	ld c, BANK(Music_MeetMaleTrainer)
+	ld a, MUSIC_MEET_MALE_TRAINER
+	call PlayMusic
+	set 6, [hl]
+	set 7, [hl]
+	ldh a, [hSpriteIndex]
+	ld [wSpriteIndex], a
+	ld hl, ErikaRematchDefeatedText
+	ld de, ErikaRematchDefeatedText
+	call SaveEndBattleTextPointers
+	call EngageMapTrainer
+	ld a, OPP_ERIKA
+	ld [wCurOpponent], a
+	ld a, 9
+	ld [wTrainerNo], a
+	ld a, 1
+	ld [wIsTrainerBattle], a
+	ld a, $4
+	ld [wGymLeaderNo], a
 	jr .done
 .afterBeat
 	ld hl, ErikaPostBattleAdviceText
@@ -302,4 +327,12 @@ CeladonGymEndBattleText8:
 
 CeladonGymAfterBattleText8:
 	text_far _CeladonGymAfterBattleText8
+	text_end
+
+ErikaRematchPreBattleText:
+	text_far _ErikaRematchPreBattleText
+	text_end
+
+ErikaRematchDefeatedText:
+	text_far _ErikaRematchDefeatedText
 	text_end

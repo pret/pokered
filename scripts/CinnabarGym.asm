@@ -191,24 +191,7 @@ CinnabarGymScript_758b7:
 	ldh a, [hSpriteIndexOrTextID]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
-	; call InitBattleEnemyParameters ; put this back if you mess up
-	
-	; gym scaling spaghetti code begins here - remove initial parameters as we're making our own
-	ld a, OPP_BLAINE
-	ld [wCurOpponent], a
-	
-	ld hl, wObtainedBadges ; Picking the team based on badge count. Need +1 so it loads the right team: remember, you're fighting for the badge! Thanks to Chatot4444 for the help.
-	ld b, 1
-	call CountSetBits
-	ld a, [wNumSetBits]
-	inc a
-	
-	ld [wTrainerNo], a
-	ld a, 1
-	ld [wIsTrainerBattle], a
-	
-	;ends here
-	
+	call InitBattleEnemyParameters
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
@@ -224,15 +207,41 @@ CinnabarGymScript_758b7:
 	ld [wCurMapScript], a
 	jp TextScriptEnd
 
+; Blaine's gym script has been standardised for gym scaling purposes.
 BlaineText:
 	text_asm
+	CheckEvent EVENT_POST_GAME_ATTAINED ; No need to view previous stuff, technically you can skip Bide this way but I think that's hilarious
+	jr nz, .rematchMode
 	CheckEvent EVENT_BEAT_BLAINE
 	jr z, .beforeBeat
 	CheckEventReuseA EVENT_GOT_TM38
 	jr nz, .afterBeat
 	call z, CinnabarGymReceiveTM38
 	call DisableWaitingAfterTextDisplay
-	jp TextScriptEnd
+	jp .done ; needed due to the rematch script length.
+.rematchMode ; Rematch functionality. Just loads pre-battle text and his trainer.
+	ld hl, BlaineRematchPreBattleText
+	call PrintText
+	ld c, BANK(Music_MeetMaleTrainer)
+	ld a, MUSIC_MEET_MALE_TRAINER
+	call PlayMusic
+	set 6, [hl]
+	set 7, [hl]
+	ldh a, [hSpriteIndex]
+	ld [wSpriteIndex], a
+	ld hl, BlaineRematchDefeatedText
+	ld de, BlaineRematchDefeatedText
+	call SaveEndBattleTextPointers
+	call EngageMapTrainer
+	ld a, OPP_BLAINE
+	ld [wCurOpponent], a
+	ld a, 9
+	ld [wTrainerNo], a
+	ld a, 1
+	ld [wIsTrainerBattle], a
+	ld a, $7
+	ld [wGymLeaderNo], a
+	jr .done
 .afterBeat
 	ld hl, BlainePostBattleAdviceText
 	call PrintText
@@ -243,9 +252,37 @@ BlaineText:
 	ld hl, ReceivedVolcanoBadgeText
 	ld de, ReceivedVolcanoBadgeText
 	call SaveEndBattleTextPointers
+	
+	ld hl, wd72d
+	set 6, [hl]
+	set 7, [hl]
+	ld a, [wSpriteIndex]
+	call EngageMapTrainer
+	
+	ld a, OPP_BLAINE
+	ld [wCurOpponent], a
+	
+	ld hl, wObtainedBadges ; Picking the team based on badge count. Need +1 so it loads the right team: remember, you're fighting for the badge! Thanks to Chatot4444 for the help.
+	ld b, 1
+	call CountSetBits
+	ld a, [wNumSetBits]
+	inc a
+	
+	ld [wTrainerNo], a
+	ld a, 1
+	ld [wIsTrainerBattle], a
 	ld a, $7
 	ld [wGymLeaderNo], a
-	jp CinnabarGymScript_758b7
+	
+	;ends here
+	
+	ld a, $3
+	ld [wCinnabarGymCurScript], a
+	ld [wCurMapScript], a
+	
+	jr .done
+.done
+	jp TextScriptEnd
 
 BlainePreBattleText:
 	text_far _BlainePreBattleText
@@ -489,4 +526,12 @@ CinnabarGymGuidePreBattleText:
 
 CinnabarGymGuidePostBattleText:
 	text_far _CinnabarGymGuidePostBattleText
+	text_end
+
+BlaineRematchPreBattleText:
+	text_far _BlaineRematchPreBattleText
+	text_end
+
+BlaineRematchDefeatedText:
+	text_far _BlaineRematchDefeatedText
 	text_end

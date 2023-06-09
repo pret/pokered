@@ -89,12 +89,37 @@ CeruleanGymTrainerHeader1:
 
 MistyText:
 	text_asm
+	CheckEvent EVENT_POST_GAME_ATTAINED ; No need to view previous stuff, technically you can skip Bide this way but I think that's hilarious
+	jr nz, .rematchMode
 	CheckEvent EVENT_BEAT_MISTY
 	jr z, .beforeBeat
 	CheckEventReuseA EVENT_GOT_TM11
 	jr nz, .afterBeat
 	call z, CeruleanGymReceiveTM11
 	call DisableWaitingAfterTextDisplay
+	jp .done
+.rematchMode ; Rematch functionality. Just loads pre-battle text and her trainer.
+	ld hl, MistyRematchPreBattleText
+	call PrintText
+	ld c, BANK(Music_MeetMaleTrainer)
+	ld a, MUSIC_MEET_MALE_TRAINER
+	call PlayMusic
+	set 6, [hl]
+	set 7, [hl]
+	ldh a, [hSpriteIndex]
+	ld [wSpriteIndex], a
+	ld hl, MistyRematchDefeatedText
+	ld de, MistyRematchDefeatedText
+	call SaveEndBattleTextPointers
+	call EngageMapTrainer
+	ld a, OPP_MISTY
+	ld [wCurOpponent], a
+	ld a, 9
+	ld [wTrainerNo], a
+	ld a, 1
+	ld [wIsTrainerBattle], a
+	ld a, $2
+	ld [wGymLeaderNo], a
 	jr .done
 .afterBeat
 	ld hl, TM11ExplanationText
@@ -221,4 +246,12 @@ CeruleanGymGuidePreBattleText:
 
 CeruleanGymGuidePostBattleText:
 	text_far _CeruleanGymGuidePostBattleText
+	text_end
+
+MistyRematchPreBattleText:
+	text_far _MistyRematchPreBattleText
+	text_end
+	
+MistyRematchDefeatedText:
+	text_far _MistyRematchDefeatedText
 	text_end

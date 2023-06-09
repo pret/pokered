@@ -104,12 +104,37 @@ SaffronGymTrainerHeader6:
 
 SabrinaText:
 	text_asm
+	CheckEvent EVENT_POST_GAME_ATTAINED ; No need to view previous stuff, technically you can skip Bide this way but I think that's hilarious
+	jr nz, .rematchMode
 	CheckEvent EVENT_BEAT_SABRINA
 	jr z, .beforeBeat
 	CheckEventReuseA EVENT_GOT_TM46
 	jr nz, .afterBeat
 	call z, SaffronGymReceiveTM46
 	call DisableWaitingAfterTextDisplay
+	jp .done ; needed due to the rematch script length.
+.rematchMode ; Rematch functionality. Just loads pre-battle text and her trainer.
+	ld hl, SabrinaRematchPreBattleText
+	call PrintText
+	ld c, BANK(Music_MeetMaleTrainer)
+	ld a, MUSIC_MEET_MALE_TRAINER
+	call PlayMusic
+	set 6, [hl]
+	set 7, [hl]
+	ldh a, [hSpriteIndex]
+	ld [wSpriteIndex], a
+	ld hl, SabrinaRematchDefeatedText
+	ld de, SabrinaRematchDefeatedText
+	call SaveEndBattleTextPointers
+	call EngageMapTrainer
+	ld a, OPP_SABRINA
+	ld [wCurOpponent], a
+	ld a, 9
+	ld [wTrainerNo], a
+	ld a, 1
+	ld [wIsTrainerBattle], a
+	ld a, $6
+	ld [wGymLeaderNo], a
 	jr .done
 .afterBeat
 	ld hl, SabrinaPostBattleAdviceText
@@ -325,4 +350,12 @@ SaffronGymEndBattleText7:
 
 SaffronGymAfterBattleText7:
 	text_far _SaffronGymAfterBattleText7
+	text_end
+
+SabrinaRematchPreBattleText:
+	text_far _SabrinaRematchPreBattleText
+	text_end
+
+SabrinaRematchDefeatedText:
+	text_far _SabrinaRematchDefeatedText
 	text_end

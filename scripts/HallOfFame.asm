@@ -93,28 +93,10 @@ HallofFameRoomScript1:
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $ff
-	ld [wJoyIgnore], a ; TODO: Make this less awful. See: Giovanni in Silph
-	ld a, HS_CERULEAN_CAVE_GUY
-	ld [wMissableObjectIndex], a
-	predef HideObject
-	ld a, HS_MT_MOON_CRATER_GUARD
-	ld [wMissableObjectIndex], a
-	predef HideObject
-	ld a, HS_ROUTE_1_OAK
-	ld [wMissableObjectIndex], a
-	predef ShowObject
-	ld a, HS_BILLS_NIDORINO
-	ld [wMissableObjectIndex], a
-	predef HideObject
-	ld a, HS_MANSION_GUARD
-	ld [wMissableObjectIndex], a
-	predef HideObject
-	ld a, HS_YUJIROU
-	ld [wMissableObjectIndex], a
-	predef HideObject
-	ld a, HS_YUJIROU_REMATCH
-	ld [wMissableObjectIndex], a
-	predef ShowObject
+	ld [wJoyIgnore], a
+	
+	call PostGameSetup
+	
 	ld a, $2
 	ld [wHallOfFameCurScript], a
 	ret
@@ -125,3 +107,43 @@ HallOfFame_TextPointers:
 HallofFameRoomText1:
 	text_far _HallofFameRoomText1
 	text_end
+
+; Post-Game Functionality
+; This script is adapted from the Silph Co. 11F script that reforms Saffron City.
+; It replaces the Cerulean Cave Guard bit, adapting him into the whole ordeal.
+
+PostGameSetup:
+	SetEvent EVENT_POST_GAME_ATTAINED
+	ld hl, ObjectsToHide
+.loop1
+	ld a, [hli]
+	cp $ff
+	jr z, .skip
+	push hl
+	ld [wMissableObjectIndex], a
+	predef HideObject
+	pop hl
+	jr .loop1
+.skip
+	ld hl, ObjectsToShow
+.loop2
+	ld a, [hli]
+	cp -1
+	ret z
+	push hl
+	ld [wMissableObjectIndex], a
+	predef ShowObject
+	pop hl
+	jr .loop2
+
+ObjectsToShow:
+	db HS_ROUTE_1_OAK ; Oak post-game fight
+	db HS_YUJIROU_REMATCH ; Yujirou rematch
+	db -1 ; end
+
+ObjectsToHide:
+	db HS_BILLS_NIDORINO ; Bill's Garden access
+	db HS_MANSION_GUARD ; Pokemon Mansion basement access
+	db HS_MT_MOON_CRATER_GUARD ; Mt. Moon Crater access
+	db HS_CERULEAN_CAVE_GUY ; Cerulean Cave access
+	db -1 ; end

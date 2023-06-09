@@ -124,3 +124,30 @@ _CeruleanGymGuidePostBattleText::
 	line "we make a pretty"
 	cont "darn good team!"
 	done
+
+_MistyRematchPreBattleText::
+	text "I heard an"
+	line "interesting"
+	cont "rumor!"
+	
+	para "Not only did you"
+	line "beat those TEAM"
+	cont "ROCKET guys, but"
+	cont "you also became"
+	cont "the CHAMPION!"
+	
+	para "I can't take it"
+	line "anymore! I just"
+	cont "have to battle"
+	cont "you again!"
+	
+	para "You got that?"
+	
+	para "No refusing!"
+	
+	done
+
+_MistyRematchDefeatedText::
+	text "Hmph!"
+	line "How annoying!"
+	prompt

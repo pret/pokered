@@ -831,7 +831,7 @@ DEF INDIGO_PLATEAU_EVENTS_END EQU const_value - 1
 
 ; Victory Road 1F events
 	const_next $910
-	const_skip
+	const EVENT_POST_GAME_ATTAINED ; Used for Gym Leader rematches, among other things.
 	const EVENT_BEAT_VICTORY_ROAD_1_TRAINER_0
 	const EVENT_BEAT_VICTORY_ROAD_1_TRAINER_1
 	const_skip 4

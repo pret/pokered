@@ -208,5 +208,40 @@ _CinnabarGymGuidePreBattleText::
 
 _CinnabarGymGuidePostBattleText::
 	text "<PLAYER>! You beat"
-	line "that fire brand!"
+	line "that firebrand!"
 	done
+
+_BlaineRematchPreBattleText::
+	text "Hah! Well done"
+	line "returning here!"
+	
+	para "You're the one"
+	line "who retrieved the"
+	cont "key from #MON"
+	cont "MANSION!"
+	
+	para "Did you see"
+	line "anything while"
+	cont "you were in"
+	cont "there?"
+	
+	para "That place holds"
+	line "remnants of my"
+	cont "old friend's re-"
+	cont "search!"
+	
+	para "Hmm..."
+	
+	para "Well, it's not"
+	line "as though I know"
+	cont "the full story."
+	
+	para "Since you're here"
+	line "though, let's"
+	cont "battle!"
+	done
+
+_BlaineRematchDefeatedText::
+	text "Hah!"
+	line "I'm all fired up!"
+	prompt

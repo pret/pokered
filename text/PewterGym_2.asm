@@ -144,3 +144,27 @@ _PewterGymGuidePostBattleText::
 	line "You're #MON"
 	cont "champ material!"
 	done
+
+_BrockRematchDefeatedText::
+	text "I knew"
+	line "you were strong,"
+	cont "but this..."
+	prompt
+
+_BrockRematchPostText::
+	text "I've chosen to"
+	line "postpone my"
+	cont "dream of being"
+	cont "a #MON"
+	cont "breeder for a"
+	cont "little longer."
+	
+	para "Right now, I'm"
+	line "more interested"
+	cont "training to one"
+	cont "day defeat you!"
+	
+	para "Battle me again"
+	line "sometime!"
+	done
+

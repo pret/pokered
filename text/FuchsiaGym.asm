@@ -24,3 +24,26 @@ _ReceivedSoulBadgeText::
 	para "Here! Take the"
 	line "SOULBADGE!"
 	prompt
+
+_KogaRematchPreBattleText::
+	text "Fwahahaha!"
+	
+	para "If it isn't the"
+	line "child."
+	
+	para "It seems we are"
+	line "fated to meet"
+	cont "once again."
+	
+	para "You have come"
+	line "at a truly"
+	cont "opportune time."
+	
+	para "I wanted to test"
+	line "my newly refined"
+	cont "ninja skills..."
+	
+	para "In a battle that"
+	line "will end in your"
+	cont "utter defeat!"
+	done
