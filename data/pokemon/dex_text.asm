@@ -1065,7 +1065,7 @@ _HypnoDexEntry:: ; new entry
 	next "pendulum-like"
 	next "device. Wherever"
 
-	page "HYPNO travel,"
+	page "HYPNO travels,"
 	next "cases of missing"
 	next "children surge"
 	dex
