@@ -9,12 +9,12 @@ New Pokemon:
 The Kanto Expansion Pak's ethos is to add every "Kanto-related" Pokemon to RBY without fundamentally changing the grander metagame. What's defined as "Kanto-related" is a Pokemon that evolves from an existing Kanto Pokemon, made an appearance in a Kanto-based game (LGPE), is a regional variant, or was a Kanto-related Pokemon cut during the development of an official game.
 
 With this criteria, we get:
-- The 34 known beta Pokemon that were cut from RBY; eg. Gorochu, Deer
+- The 34 known beta Pokemon that were cut from Red and Green; eg. Gorochu, Deer
 - Evolutions or pre-evolutions of a Kanto Pokemon found in a future generation eg. Kleavor, Glaceon, Annihilape
-- Evolutions of Kanto Pokemon found in the SpaceWorld '97 demo; eg. Madaamu, Purakkusu
+- Evolutions of Kanto Pokemon found in the SpaceWorld '97 demo of Gold and Silver; eg. Madaamu, Purakkusu
 - All fully-evolved regional variants of Kanto Pokemon; eg. Hisuian Arcanine, Galarian Slowbro, Paldean Tauros, Alolan Muk
-- Meltan and Melmetal from LGPE.
-- Paradox Pokemon from SV; Scream Tail and Sandy Shocks.
+- Meltan and Melmetal from Let's Go Pikachu and Let's Go Eevee.
+- Paradox Pokemon from Scarlet & Violet; Scream Tail and Sandy Shocks.
 
 Johto baby Pokemon and regional pre-evolutions were omitted due to RBY using an 8-bit register. This hack as-is just barely manages to fit everything. A refactor to a 16-bit register is possible and has been done before, but only on a really old pokered version that would require a ton of its own refactoring to be modernised. It's just not feasible at this current time.
 
@@ -119,6 +119,7 @@ QoL Enhancements
 - New Pokedex entries for most Pokemon are available, sourced from the original 1996 Pokedex book by Creatures Inc., restoring a ton of old Kanto lore. Thanks to [Dr. Lava and Nob Ogasawara](http://lavacutcontent.com/1996-creatures-pokedex-translation-1/) for their incredible work translating and writing about it!
 - Pikachu and Eevee are now starters, featuring fully functional Rival lineups. If you pick Pikachu, he picks Eevee, and if you pick Eevee, he picks Pikachu! Their growth rates have been changed to Medium Slow to give them the early-game power spike the other starters have.
 - Item Descriptions are available!
+- DVs and Stat Exp can be viewed on the status screen by holding start or select when opening the menu, respectively. Feature ported to modern Pokered from Shin Pokered.
 - Press A beside surfable water, strength boulders, or cut trees to use the HMs without needing to go into the Party menu.
 - Running Shoes activate by holding B. Also works with the bike and Surf.
 - Fast text has no frame delay between text scrolling, doubling the scroll speed. It's also been made the default option, so you don't need to go into the Options menu for it.
@@ -208,6 +209,7 @@ Known Bugs
 - Meltan spawned via the Mystery Box will use the moves of the Pokemon they are replacing.
 - GiveMonName doesn't work properly for the Vermilion Beauty after receiving the Pokemon, jank ensues.
 - Text scrolls immediately when receiving the Pokemon from the Vermilion Beauty.
+- HP DV does not appear to display correctly.
 
 Evolution Methods for new Pokemon
 ====
@@ -336,7 +338,7 @@ Credits
 * Helix Chamber, RacieBeep, loumilouminosus, Orchid, GBCRetro, & catstorm26 - Prototype Pokémon sprites
 * Vortiene - Reused a bit of code from their pureRGB hack. Assisted in bug fixes.
 * Pigu-A, RevoSucks, walle303 - Contributors to Pokemon Anniversary Red, which we used as reference points for the Girl sprites and the Battle Tent.
-* jojobear13 & Mateo - Move deleter & move relearner functionality from Shin Pokered, followed [this guide](https://github.com/jojobear13/shinpokered/blob/master/how%20to%20guides/how%20to%20add%20the%20move%20relearner%26deleter.txt). Tweaks were made to make it compatible with the pokered version we worked off of.
+* jojobear13 & Mateo - HP/StatExp display, move deleter, & move relearner functionality from Shin Pokered, followed [this guide](https://github.com/jojobear13/shinpokered/blob/master/how%20to%20guides/how%20to%20add%20the%20move%20relearner%26deleter.txt). Tweaks were made to make it compatible with the pokered version we worked off of.
 * Rangi - Reused a bit of code from their Red* / Blue* hack to make HMs usable in the overworld!
 * wrulfy - Technical advice
 * 大吟醸 (Daiginjo) - Assistance in translating the Tamamushi University Student Book, allowing for an accurate adaptation of the location.
