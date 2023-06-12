@@ -57,10 +57,11 @@ _CeladonMartRoofText_4850f::
 	para "@"
 	text_ram wStringBuffer
 	text " contains"
-	line "ROCK SLIDE!"
-
-	para "It can spook the" ; want to remove, but it's weird when done
-	line "target sometimes!@"
+	line "ROCK SLIDE!@"
+	
+	; this girl be spittin LIES
+	;para "It can spook the"
+	;line "target sometimes!@"
 	text_end
 
 _CeladonMartRoofText_48515::

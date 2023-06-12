@@ -126,14 +126,22 @@ _CeladonCityText15::
 	cont "DEPT. STORE!"
 	done
 
+; Originally, this referred to the Guard Spec as the item that protects from special moves.
+; Obviously, this is wrong, and a mistranslation. In fact, this may be why it's called the Guard Spec at all.
+; The Japanese name is "Effect Guard", which is far more transparent.
+; Anyway, this has been changed to X Special, which is accurate.
+; To take it a step further, I also note that it improves their own, which implies the Special stat's function to the player.
 _CeladonCityText16::
 	text "TRAINER TIPS"
 
-	para "GUARD SPEC."
+	para "X SPECIAL"
 	line "protects #MON"
 	cont "against SPECIAL"
 	cont "attacks such as"
 	cont "fire and water!"
+	
+	para "It even improves"
+	line "their own!"
 
 	para "Get your items at"
 	line "CELADON DEPT."

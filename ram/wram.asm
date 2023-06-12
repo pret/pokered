@@ -1273,7 +1273,7 @@ wGymLeaderNo:: db
 wTrainerNo:: db
 
 ; $00 = normal attack
-; $01 = critical hit
+; $01 = critical hit - also used for the 1/256 check we use now.
 ; $02 = successful OHKO
 ; $ff = failed OHKO
 wCriticalHitOrOHKO:: db
@@ -1332,7 +1332,9 @@ wPlayerToxicCounter:: db
 ; low nibble: disable turns left
 wPlayerDisabledMove:: db
 
-	ds 1
+; This is used to gauge 1/256 misses. 
+; It loads the "evaded attack" text.
+wAttackWasDodged:: db
 
 ; when the enemy is attacking multiple times, the number of attacks left
 wEnemyNumAttacksLeft:: db

@@ -3955,10 +3955,23 @@ PrintMoveFailureText:
 	; This gives players a nice little dopamine rush.
 	ld a, [wDidZeroDamage] ; Grab the variable.
 	cp 1 ; Alright, is it set?
-	jr nz, .skip ; No? Skip these instructions.
+	jr nz, .check256 ; No? Skip these instructions, but don't forget the 1/256 check.
 	ld hl, ZeroDamageText ; Load the zero damage text in.
 	ld a, 0 ; Now shut the address off.
 	ld [wDidZeroDamage], a ; Bink!
+	
+	; 1/256 text functionality.
+	; This makes them a feature, with the reasoning being vanilla experience + how it may have been intentional all along.
+	; See Pokemon Stadium's handling of the mechanic for latter point.
+	; Yes I am a fucking psycho
+	; In theory this could be merged with the previous check in some capacity but that's neither here nor there
+.check256 ; jump point
+	ld a, [wAttackWasDodged] ; Alright, let's see...
+	cp 1 ; Was the attack dodged?
+	jr nz, .skip ; No? Ok, neither of my hardmods are needed. proceed as normal.
+	ld hl, EvadedAttackText ; Oho? Let's load this then.
+	ld a, 0 ; Now to shut off the variable.
+	ld [wAttackWasDodged], a ; Bink!
 	
 .skip
 	ld a, [wCriticalHitOrOHKO]
@@ -4014,6 +4027,10 @@ ZeroDamageText:
 	text "It didn't leave"
 	line "a scratch!"
 	prompt
+	text_end
+
+EvadedAttackText: ; for 1/256, repurposed from leech seed
+	text_far _EvadedAttackText
 	text_end
 
 KeptGoingAndCrashedText:
@@ -5570,9 +5587,15 @@ MoveHitTest:
 ; if the random number generated is greater than or equal to the scaled accuracy, the move misses
 ; note that this means that even the highest accuracy is still just a 255/256 chance, not 100%
 	call BattleRandom
+	cp 255 ; is it 1/256?
+	jr z, .oneIn256 ; if true, skip the next few lines.
 	cp b
 	jr nc, .moveMissed
 	ret
+.oneIn256 ; 1/256 text functionality, used to be more transparent to players.
+	ld a, 1
+	ld [wAttackWasDodged], a
+;fallthrough
 .moveMissed
 	xor a
 	ld hl, wDamage ; zero the damage

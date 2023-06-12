@@ -28,13 +28,14 @@ LeechSeedEffect_:
 .moveMissed
 	ld c, 50
 	call DelayFrames
-	ld hl, EvadedAttackText
+	ld hl, LeechFailedText
 	jp PrintText
 
 WasSeededText:
 	text_far _WasSeededText
 	text_end
 
-EvadedAttackText:
-	text_far _EvadedAttackText
+; This messed up if I farcalled AttackMissedText, so we're doing this instead.
+LeechFailedText:
+	text_far _ButItFailedText
 	text_end

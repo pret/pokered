@@ -116,6 +116,7 @@ QoL Enhancements
 - A girl option is now available, featuring the sprite from Pokemon Anniversary Red, which is based on Green's manga appearance.
 	- To accomodate this, Celadon Gym's trainers use their more neutral text from Crystal.
 - All 151 original Pokemon, plus an additional 100, can be obtained without the use of trading or glitches, including Mew!
+- Bag capacity is increased from 20 to 30 items.
 - New Pokedex entries for most Pokemon are available, sourced from the original 1996 Pokedex book by Creatures Inc., restoring a ton of old Kanto lore. Thanks to [Dr. Lava and Nob Ogasawara](http://lavacutcontent.com/1996-creatures-pokedex-translation-1/) for their incredible work translating and writing about it!
 - Pikachu and Eevee are now starters, featuring fully functional Rival lineups. If you pick Pikachu, he picks Eevee, and if you pick Eevee, he picks Pikachu! Their growth rates have been changed to Medium Slow to give them the early-game power spike the other starters have.
 - Item Descriptions are available!
@@ -126,11 +127,9 @@ QoL Enhancements
 - The Old and Good Rods have been removed, and the Super Rod, now called the Fishing Rod, is obtained in Pewter City. All fishing encounter tables have been altered to roughly match the levels of the surrounding routes. 
 - Traded Pokemon ("Outsiders") can now be nicknamed at the Name Rater's House.
 - HP bar has been doubled in speed, having a 1 frame delay per pixel rather than 2.
-- The "You missed the Pokemon!" message now only plays in the Safari Zone, with regular encounters now stating "It's too strong!". This aims to make the message less misleading while staying true to the setting.
 - The blinking animation when hit by moves like Tackle now repeats 4 instead of 6 times, speeding up battles by a bit while not sacrificing impact.
 - The Rock in the Safari Zone now only raises the flee chance by 1.5x, rather than 2x, opening up new strategies.
 - PP symbol is displayed in the battle menu. PP displayed before, it just looks nicer now. Done by changing a straggler Japanese character.
-- When dealing 0 damage, there'll now be a special text box, making it less misleading.
 - Lorelei, Bruno, and Agatha now play the Gym Leader Battle theme.
 - Trainer DVs are perfect-15s.
 - The protagonist is referred to in a gender neutral manner.
@@ -153,9 +152,12 @@ QoL Enhancements
 	- Blue's superior prices are used, so Porygon only costs 6500 coins.
 	- New prizes include: Cubone, Blastyke, and Cactus.
 	- The Moon Stone is available over TM23 (Dragon Rage). Dragon Rage is still available in Celadon University!
-- Bag capacity increased from 20 to 30 items.
 - Spinner tiles move faster.
 - Fight Debug now allows moves other than Pound.
+- The "You missed the Pokemon!" message now only plays in the Safari Zone, with regular encounters now stating "It's too strong!". This aims to make the message less misleading while staying true to the setting.
+- If you miss with the 1/256 uncertainty, it now says the Pokemon "evaded the attack", adding transparency while keeping the original mechanic intact.
+- When dealing 0 damage, it now says it "didn't leave a scratch" instead of saying you missed, furthering transparency. 
+- Lots of misleading mechanics statements (such as the Guard Spec message in Celadon) have been amended.
 
 Bug Fixes
 ====

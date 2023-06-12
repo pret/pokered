@@ -76,6 +76,22 @@ TestBattle:
 .loop
 	call GBPalNormal
 
+	; Get some debug items.
+	ld hl, wNumBagItems
+	ld de, BattleDebugItemsList
+.items_loop
+	ld a, [de]
+	cp -1
+	jr z, .items_end
+	ld [wcf91], a
+	inc de
+	ld a, [de]
+	inc de
+	ld [wItemQuantity], a
+	call AddItemToInventory
+	jr .items_loop
+.items_end
+
 	; Don't mess around
 	; with obedience.
 	ld a, 1 << BIT_EARTHBADGE
@@ -104,11 +120,17 @@ TestBattle:
 	; This function gives you a way to waste a turn, never know when you'll need it.
 	; Alternatively, add a move to test.
 	ld hl, wPartyMon1Moves
-	ld a, SPLASH
+	ld a, POISON_STING ; Something super weak
+	ld [hli], a
+	ld a, LEECH_SEED ; Test new failure text
+	ld [hli], a
+	ld a, FISSURE ; Something that'll miss easily
+	ld [hli], a
+	ld a, SPLASH ; Skip turn
 	ld [hli], a
 	
 	; Opponent's Pokemon.
-	ld a, WEEDLE
+	ld a, SANDY_SHOCKS
 	ld [wCurOpponent], a
 	ld a, 100 ; Set the level you want here.
 	ld [wCurEnemyLVL], a
@@ -121,3 +143,17 @@ TestBattle:
 	ld [wUpdateSpritesEnabled], a
 	ldh [hAutoBGTransferEnabled], a
 	jr .loop
+
+BattleDebugItemsList:
+	db FULL_RESTORE, 99
+	db MAX_ELIXER, 99
+	db FULL_HEAL, 99
+	db X_ATTACK, 99
+	db X_SPECIAL, 99
+	db X_DEFEND, 99
+	db X_SPEED, 99
+	db X_ACCURACY, 99
+	db DIRE_HIT, 99
+	db GUARD_SPEC, 99
+	db POKE_FLUTE, 1
+	db -1 ; end
