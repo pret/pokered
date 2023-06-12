@@ -17,6 +17,7 @@ SeafoamIslandsB4F_ScriptPointers:
 	dw_const SeafoamIslandsB4FMoveObjectScript,    SCRIPT_SEAFOAMISLANDSB4F_MOVE_OBJECT
 	dw_const SeafoamIslandsB4FObjectMoving2Script, SCRIPT_SEAFOAMISLANDSB4F_OBJECT_MOVING2
 	dw_const SeafoamIslandsB4FObjectMoving3Script, SCRIPT_SEAFOAMISLANDSB4F_OBJECT_MOVING3
+	EXPORT SCRIPT_SEAFOAMISLANDSB4F_MOVE_OBJECT
 
 SeafoamIslandsB4FObjectMoving3Script:
 	ld a, [wIsInBattle]
