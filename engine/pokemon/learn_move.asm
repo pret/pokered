@@ -185,7 +185,7 @@ TryingToLearn:
 
 LearnedMove1Text:
 	text_far _LearnedMove1Text
-	sound_get_item_1 ; plays SFX_GET_ITEM_1 in the party menu (rare candy) and plays SFX_LEVEL_UP in battle
+	sound_level_up ; plays SFX_GET_ITEM_1 in the party menu (rare candy) and plays SFX_LEVEL_UP in battle
 	text_promptbutton
 	text_end
 

@@ -63,8 +63,8 @@ _BookcaseText1::
 _BookcaseText2::
 	text "In 1899, PROF."
 	line "WESTWOOD of Japan"
-	cont "discovered"
-	cont "#MON evolution,"
+	cont "discovered #-"
+	cont "MON evolution,"
 	cont "documenting 50"
 	cont "species."
 	
@@ -90,9 +90,8 @@ _BookcaseText3::
 	text "The modern #"
 	line "BALL was made by"
 	cont "researchers at"
-	cont "CELADON"
-	cont "UNIVERSITY"
-	cont "in 1925."
+	cont "CELADON UNIVER-"
+	cont "SITY in 1925."
 	
 	done
 

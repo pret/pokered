@@ -44,8 +44,8 @@ _CeladonUniversityOutsideLoseText3::
 
 _CeladonUniversityOutsideLoseText4::
 	text "One"
-	line "day I'll"
-	cont "beat you!"
+	line "day I'll beat"
+	cont "you!"
 	prompt
 
 _CeladonUniversityOutsideWinText::

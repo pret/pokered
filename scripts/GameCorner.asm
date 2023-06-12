@@ -56,7 +56,7 @@ CeladonGameCornerScript1:
 	jp z, CeladonGameCornerScript_48c07
 	ld a, $f0
 	ld [wJoyIgnore], a
-	ld a, $d
+	ld a, $e ; was d, accounting for arbok
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $b
@@ -128,9 +128,9 @@ GameCorner_TextPointers:
 	dw CeladonGameCornerText9
 	dw CeladonGameCornerText10
 	dw CeladonGameCornerText11
+	dw GameCornerArbok
 	dw CeladonGameCornerText12
 	dw CeladonGameCornerText13
-	dw GameCornerArbok
 
 CeladonGameCornerText1:
 	text_far _CeladonGameCornerText1
