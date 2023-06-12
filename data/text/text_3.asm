@@ -253,7 +253,7 @@ _WasSeededText::
 
 _EvadedAttackText::
 	text "<TARGET>"
-	line "evaded attack!"
+	line "dodged it!"
 	prompt
 
 _HitWithRecoilText::
