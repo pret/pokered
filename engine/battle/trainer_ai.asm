@@ -362,14 +362,12 @@ BrockAI:
 	jp AIUseFullHeal
 
 MistyAI:
-	cp 25 percent + 1
-	ret nc
-	jp AIUseXDefend
+	and a ; clear carry
+	ret
 
 LtSurgeAI:
-	cp 25 percent + 1
-	ret nc
-	jp AIUseXSpeed
+	and a ; clear carry
+	ret
 
 ErikaAI:
 	cp 50 percent + 1
@@ -380,9 +378,8 @@ ErikaAI:
 	jp AIUseSuperPotion
 
 KogaAI:
-	cp 25 percent + 1
-	ret nc
-	jp AIUseXAttack
+	and a ; clear carry
+	ret
 
 BlaineAI:
 	cp 25 percent + 1
@@ -422,9 +419,8 @@ LoreleiAI:
 	jp AIUseSuperPotion
 
 BrunoAI:
-	cp 25 percent + 1
-	ret nc
-	jp AIUseXDefend
+	and a ; clear carry
+	ret
 
 AgathaAI:
 	cp 8 percent
