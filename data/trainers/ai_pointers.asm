@@ -16,7 +16,7 @@ TrainerAIPointers:
 	dbw 3, GenericAI
 	dbw 3, GenericAI
 	dbw 3, GenericAI
-	dbw 3, JugglerAI ; unused_juggler
+	dbw 3, GenericAI ; rocket admin
 	dbw 3, GenericAI
 	dbw 3, GenericAI
 	dbw 3, GenericAI

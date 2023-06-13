@@ -12,7 +12,7 @@ TrainerDataPointers:
 	dw BikerData
 	dw BurglarData
 	dw EngineerData
-	dw UnusedJugglerData
+	dw RocketAdminData
 	dw FisherData
 	dw SwimmerData
 	dw CueBallData
@@ -101,7 +101,7 @@ BugCatcherData:
 	db 18, METAPOD, CATERPIE, VENONAT, 0
 ; Route 9
 	db 19, BEEDRILL, BEEDRILL, 0
-	db 20, CATERPIE, WEEDLE, VENONAT, 0
+	db 20, PINSIR, VENONAT, 0
 
 LassData:
 ; Route 3
@@ -185,6 +185,7 @@ JrTrainerFData:
 ; Route 13
 	db 24, PIDGEY, MEOWTH, RATTATA, PIKACHU, MEOWTH, 0
 	db 30, POLIWAG, POLIWAG, 0
+	db 27, PIDGEY, MEOWTH, PIDGEY, PIDGEOTTO, 0
 	db 27, PIDGEY, MEOWTH, PIDGEY, PIDGEOTTO, 0
 	db 28, GOLDEEN, POLIWAG, HORSEA, 0
 ; Route 20
@@ -309,9 +310,6 @@ EngineerData:
 ; Route 11
 	db 21, MAGNEMITE, 0
 	db 18, MAGNEMITE, MAGNEMITE, MAGNETON, 0
-
-UnusedJugglerData:
-; none
 
 FisherData:
 ; SS Anne 2F Rooms
@@ -603,6 +601,10 @@ RocketData:
 ; Silph Co. 11F
 	db 25, RATTATA, RATTATA, ZUBAT, RATTATA, EKANS, 0
 	db 32, CUBONE, DROWZEE, MAROWAK, 0
+	
+RocketAdminData:
+; Mt. Moon B2F
+    db $FF, 14, KOFFING, 14, GRIMER, 15, MEOWTH, 0
 
 CooltrainerMData:
 ; Viridian Gym
@@ -647,13 +649,13 @@ MistyData:
 	db $FF, 18, STARYU, 21, STARMIE, 0
 
 LtSurgeData:
-	db $FF, 21, VOLTORB, 18, PIKACHU, 24, RAICHU, 0
+	db $FF, 18, VOLTORB, 21, RAICHU, 24, ELECTABUZZ, 0
 
 ErikaData:
-	db $FF, 29, VICTREEBEL, 24, TANGELA, 29, VILEPLUME, 0
+	db $FF, 28, TANGELA, 29, VICTREEBEL, 29, VILEPLUME, 32, EXEGGUTOR, 0
 
 KogaData:
-	db $FF, 37, KOFFING, 39, MUK, 37, KOFFING, 43, WEEZING, 0
+	db $FF, 43, WEEZING, 43, MUK, 43, GOLBAT, 44, VENOMOTH, 0
 
 BlaineData:
 	db $FF, 42, GROWLITHE, 40, PONYTA, 42, RAPIDASH, 47, ARCANINE, 0

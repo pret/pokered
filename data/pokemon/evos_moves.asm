@@ -353,6 +353,7 @@ GengarEvosMoves:
 	db 0
 ; Learnset
 	db 29, HYPNOSIS
+	db 33, SHADOW_BALL
 	db 38, DREAM_EATER
 	db 0
 
@@ -475,6 +476,7 @@ GastlyEvosMoves:
 	db 0
 ; Learnset
 	db 27, HYPNOSIS
+	db 29, SHADOW_BALL
 	db 35, DREAM_EATER
 	db 0
 
@@ -487,6 +489,7 @@ ScytherEvosMoves:
 	db 24, DOUBLE_TEAM
 	db 29, SLASH
 	db 35, SWORDS_DANCE
+	db 40, X_SCISSOR
 	db 42, AGILITY
 	db 0
 
@@ -515,14 +518,14 @@ BlastoiseEvosMoves:
 	db 42, SKULL_BASH
 	db 52, HYDRO_PUMP
 	db 0
-
+	
 PinsirEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
-	db 25, SEISMIC_TOSS
+	db 7,  FOCUS_ENERGY
+	db 8,  SEISMIC_TOSS
 	db 30, GUILLOTINE
-	db 36, FOCUS_ENERGY
 	db 43, HARDEN
 	db 49, SLASH
 	db 54, SWORDS_DANCE
@@ -532,12 +535,14 @@ TangelaEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
-	db 29, ABSORB
+	db 25, BUBBLEBEAM
+	db 29, MEGA_DRAIN
 	db 32, POISONPOWDER
 	db 36, STUN_SPORE
 	db 39, SLEEP_POWDER
 	db 45, SLAM
 	db 49, GROWTH
+	db 50, HYDRO_PUMP
 	db 0
 
 MissingNo1FEvosMoves:
@@ -614,7 +619,7 @@ SlowpokeEvosMoves:
 
 KadabraEvosMoves:
 ; Evolutions
-	db EV_TRADE, 1, ALAKAZAM
+	db EV_LEVEL, 36, ALAKAZAM
 	db 0
 ; Learnset
 	db 16, CONFUSION
@@ -627,11 +632,10 @@ KadabraEvosMoves:
 
 GravelerEvosMoves:
 ; Evolutions
-	db EV_TRADE, 1, GOLEM
+	db EV_LEVEL, 36, GOLEM
 	db 0
 ; Learnset
 	db 11, DEFENSE_CURL
-	db 16, ROCK_THROW
 	db 21, SELFDESTRUCT
 	db 29, HARDEN
 	db 36, EARTHQUAKE
@@ -652,7 +656,7 @@ ChanseyEvosMoves:
 
 MachokeEvosMoves:
 ; Evolutions
-	db EV_TRADE, 1, MACHAMP
+	db EV_LEVEL, 36, MACHAMP
 	db 0
 ; Learnset
 	db 20, LOW_KICK
@@ -916,6 +920,7 @@ DragoniteEvosMoves:
 	db 20, AGILITY
 	db 35, SLAM
 	db 45, DRAGON_RAGE
+	db 55, DRAGON_CLAW
 	db 60, HYPER_BEAM
 	db 0
 
@@ -1104,9 +1109,11 @@ DratiniEvosMoves:
 	db 0
 ; Learnset
 	db 10, THUNDER_WAVE
+	db 15, TWISTER
 	db 20, AGILITY
+	db 22, DRAGON_RAGE
 	db 30, SLAM
-	db 40, DRAGON_RAGE
+	db 35, DRAGONBREATH,
 	db 50, HYPER_BEAM
 	db 0
 
@@ -1117,8 +1124,9 @@ DragonairEvosMoves:
 ; Learnset
 	db 10, THUNDER_WAVE
 	db 20, AGILITY
+	db 25, DRAGON_RAGE
 	db 35, SLAM
-	db 45, DRAGON_RAGE
+	db 40, DRAGONBREATH
 	db 55, HYPER_BEAM
 	db 0
 
@@ -1686,10 +1694,11 @@ MissingNo92EvosMoves:
 
 HaunterEvosMoves:
 ; Evolutions
-	db EV_TRADE, 1, GENGAR
+	db EV_LEVEL, 36, GENGAR
 	db 0
 ; Learnset
 	db 29, HYPNOSIS
+	db 33, SHADOW_BALL
 	db 38, DREAM_EATER
 	db 0
 
@@ -1741,6 +1750,9 @@ StarmieEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
+	db 20, PSYBEAM
+	db 37, CONFUSE_RAY
+	db 45, PSYCHIC_M
 	db 0
 
 BulbasaurEvosMoves:
@@ -1748,8 +1760,8 @@ BulbasaurEvosMoves:
 	db EV_LEVEL, 16, IVYSAUR
 	db 0
 ; Learnset
-	db 7, LEECH_SEED
-	db 13, VINE_WHIP
+	db 6, LEECH_SEED
+	db 9, VINE_WHIP
 	db 20, POISONPOWDER
 	db 27, RAZOR_LEAF
 	db 34, GROWTH
@@ -1916,8 +1928,8 @@ GeodudeEvosMoves:
 	db EV_LEVEL, 25, GRAVELER
 	db 0
 ; Learnset
-	db 11, DEFENSE_CURL
-	db 16, ROCK_THROW
+	db 6, DEFENSE_CURL
+	db 11, ROCK_THROW
 	db 21, SELFDESTRUCT
 	db 26, HARDEN
 	db 31, EARTHQUAKE
@@ -1980,8 +1992,8 @@ CharmanderEvosMoves:
 	db EV_LEVEL, 16, CHARMELEON
 	db 0
 ; Learnset
-	db 9, EMBER
-	db 15, LEER
+	db 6, EMBER
+	db 13, LEER
 	db 22, RAGE
 	db 30, SLASH
 	db 38, FLAMETHROWER
@@ -1993,8 +2005,8 @@ SquirtleEvosMoves:
 	db EV_LEVEL, 16, WARTORTLE
 	db 0
 ; Learnset
-	db 8, BUBBLE
-	db 15, WATER_GUN
+	db 6, WATER_GUN
+	db 13, BUBBLE
 	db 22, BITE
 	db 28, WITHDRAW
 	db 35, SKULL_BASH

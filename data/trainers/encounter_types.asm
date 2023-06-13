@@ -6,12 +6,11 @@ FemaleTrainerList::
 	db -1 ; end
 
 EvilTrainerList::
-	db OPP_UNUSED_JUGGLER
 	db OPP_GAMBLER
 	db OPP_ROCKER
 	db OPP_JUGGLER
-	db OPP_CHIEF
 	db OPP_SCIENTIST
 	db OPP_GIOVANNI
 	db OPP_ROCKET
+	db OPP_ROCKET_ADMIN
 	db -1 ; end

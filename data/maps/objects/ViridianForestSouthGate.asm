@@ -12,5 +12,6 @@ ViridianForestSouthGate_Object:
 	def_object_events
 	object_event  8,  4, SPRITE_GIRL, STAY, LEFT, 1 ; person
 	object_event  2,  4, SPRITE_LITTLE_GIRL, WALK, UP_DOWN, 2 ; person
+	object_event  3,  3, SPRITE_NURSE, STAY, RIGHT, 3 ; person
 
 	def_warps_to VIRIDIAN_FOREST_SOUTH_GATE

@@ -198,3 +198,19 @@ _UsedCutText::
 	text " hacked"
 	line "away with CUT!"
 	prompt
+	
+_ViridianSouthGateHealText1::
+	text "Viridian Forest"
+	line "can be dangerous, "
+	para "let me heal your"
+	line "#MON for you."
+	prompt
+	
+_ViridianSouthGateHealText2 ::
+	text "Make sure you"
+	line "bring plenty of"
+	para "antidotes."
+	done
+	
+	
+	

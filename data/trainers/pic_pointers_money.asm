@@ -19,7 +19,7 @@ TrainerPicAndMoneyPointers::
 	pic_money BikerPic,        2000
 	pic_money BurglarPic,      9000
 	pic_money EngineerPic,     5000
-	pic_money JugglerPic,      3500
+	pic_money RocketAdminPic,  3500
 	pic_money FisherPic,       3500
 	pic_money SwimmerPic,       500
 	pic_money CueBallPic,      2500

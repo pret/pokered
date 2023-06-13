@@ -164,6 +164,11 @@ AttackAnimationPointers:
 	dw SuperFangAnim
 	dw SlashAnim
 	dw SubstituteAnim
+	dw ShadowBallAnim
+	dw XScissorAnim
+	dw TwisterAnim
+	dw DragonBreathAnim
+	dw DragonClawAnim
 	dw StruggleAnim
 	assert_table_length NUM_ATTACKS
 	dw ShowPicAnim
@@ -298,6 +303,16 @@ SwordsDanceAnim:
 	battle_anim SWORDS_DANCE, SUBANIM_1_SWORDS_CIRCLING, 1, 6
 	battle_anim SWORDS_DANCE, SUBANIM_1_SWORDS_CIRCLING, 1, 6
 	db -1 ; end
+	
+
+ShadowBallAnim:
+	battle_anim CONFUSION, SUBANIM_1_CIRCLE_BLACK_TOSS, 1, 4
+	battle_anim NO_MOVE, SE_DARK_SCREEN_FLASH
+	db -1 ; end
+	
+XScissorAnim:
+	battle_anim CUT, SUBANIM_0_SLICE, 0, 4
+	db -1 ; end
 
 CutAnim:
 	battle_anim CUT, SE_DARK_SCREEN_FLASH
@@ -307,6 +322,22 @@ CutAnim:
 GustAnim:
 	battle_anim GUST, SUBANIM_1_TORNADO, 1, 6
 	battle_anim NO_MOVE, SUBANIM_0_STAR_THRICE, 0, 6
+	db -1 ; end
+	
+TwisterAnim:
+	battle_anim WHIRLWIND, SUBANIM_1_TORNADO, 1, 6
+	battle_anim NO_MOVE, SE_DARK_SCREEN_FLASH
+	db -1 ; end
+	
+DragonBreathAnim:
+	battle_anim FLAMETHROWER, SUBANIM_1_FLAME_BEAM, 1, 6
+	battle_anim THUNDER, SUBANIM_1_LIGHTNING_BALL, 1, 2
+	db -1 ; end
+	
+DragonClawAnim:
+	battle_anim SLASH, SE_DARK_SCREEN_PALETTE
+	battle_anim NO_MOVE, SUBANIM_0_SCRATCHES, 0, 6
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
 	db -1 ; end
 
 WingAttackAnim:
@@ -910,7 +941,7 @@ EggBombAnim:
 	battle_anim EGG_BOMB, SUBANIM_1_CIRCLE_BLACK_TOSS, 1, 4
 	battle_anim EGG_BOMB, SUBANIM_1_EXPLOSION_SMALL_ENEMY, 1, 4
 	db -1 ; end
-
+	
 LickAnim:
 	battle_anim SLUDGE, SUBANIM_1_BLOB_DRIP_ENEMY, 1, 6
 	db -1 ; end
