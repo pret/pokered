@@ -6,10 +6,13 @@ _SafariZoneRestHouse2Text1::
 	cont "easier to catch."
 	done
 
-_SafariZoneRestHouse2Text2::
+_SafariZoneRestHouse2Text2::   ; edited text, Kanto is full of liars... 
 	text "Using BAIT will"
 	line "make #MON"
-	cont "easier to catch."
+	cont "harder to catch,"
+	cont "but they'll be"
+	cont "less likely to"
+	cont "run away!"
 	done
 
 _SafariZoneRestHouse2Text3::
