@@ -1387,3 +1387,17 @@ INCLUDE "data/maps/objects/MtMoonSquareHouse.asm"
 INCLUDE "scripts/MtMoonSquareHouse.asm"
 MtMoonSquareHouse_Blocks: INCBIN "maps/MtMoonSquareHouse.blk"
 
+INCLUDE "data/maps/headers/CelesteHillCave.asm"
+INCLUDE "scripts/CelesteHillCave.asm"
+INCLUDE "data/maps/objects/CelesteHillCave.asm"
+CelesteHillCave_Blocks: INCBIN "maps/CelesteHillCave.blk"
+
+INCLUDE "data/maps/headers/CelesteHillOutside.asm"
+INCLUDE "scripts/CelesteHillOutside.asm"
+INCLUDE "data/maps/objects/CelesteHillOutside.asm"
+CelesteHillOutside_Blocks: INCBIN "maps/CelesteHillOutside.blk"
+
+INCLUDE "data/maps/headers/BrunswickGrotto.asm"
+INCLUDE "scripts/BrunswickGrotto.asm"
+INCLUDE "data/maps/objects/BrunswickGrotto.asm"
+BrunswickGrotto_Blocks: INCBIN "maps/BrunswickGrotto.blk"

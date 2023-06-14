@@ -253,6 +253,9 @@ WildDataPointers:
 	dw NothingWildMons ; battle tent
 	dw NothingWildMons ; mt moon square
 	dw NothingWildMons
+	dw CelesteHillCaveWildMons
+	dw CelesteHillWildMons ; using Celeste Hill's summit for Celeste Hill Outside
+	dw BrunswickGrottoWildMons
 	assert_table_length NUM_MAPS
 	dw -1 ; end
 
@@ -343,3 +346,5 @@ INCLUDE "data/wild/maps/BrunswickTrail.asm"
 INCLUDE "data/wild/maps/GarnetCavern1F.asm"
 INCLUDE "data/wild/maps/GarnetCavernB1F.asm"
 INCLUDE "data/wild/maps/GarnetCavern2F.asm"
+INCLUDE "data/wild/maps/CelesteHillCave.asm"
+INCLUDE "data/wild/maps/BrunswickGrotto.asm"

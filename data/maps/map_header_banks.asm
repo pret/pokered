@@ -254,4 +254,7 @@ MapHeaderBanks::
 	db BANK(BattleTent_h)
 	db BANK(MtMoonSquare_h)
 	db BANK(MtMoonSquareHouse_h)
+	db BANK(CelesteHillCave_h)
+	db BANK(CelesteHillOutside_h)
+	db BANK(BrunswickGrotto_h)
 	assert_table_length NUM_MAPS

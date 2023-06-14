@@ -272,6 +272,9 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const BATTLE_TENT,                    5, 10 ; $FA
 	map_const MT_MOON_SQUARE,                13,  7 ; $FB
 	map_const MT_MOON_SQUARE_HOUSE,           4,  4 ; $FC
+	map_const CELESTE_HILL_CAVE,			 20, 19 ; $FD
+	map_const CELESTE_HILL_OUTSIDE,			 20, 18 ; $FE
+	map_const BRUNSWICK_GROTTO,				 20,  9 ; $FF ; ooo
 DEF NUM_MAPS EQU const_value
 
 ; Indoor maps, such as houses, use this as the Map ID in their exit warps

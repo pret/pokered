@@ -255,7 +255,10 @@ MapHSPointers:
 	dw GiovannisRoomHS
 	dw NoHS ; Battle Tent
 	dw NoHS ; Mt Moon Square
-	DW NoHS ; Mt Moon Square House
+	dw NoHS ; Mt Moon Square House
+	dw NoHS ; Celeste Hill Cave 
+	dw NoHS ; Celeste Hill Outside
+	dw NoHS ; Brunswick Grotto, should have HS Data later.
 	assert_table_length NUM_MAPS
 	dw -1 ; end
 
