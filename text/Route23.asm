@@ -28,7 +28,7 @@ _Route23OhThatIsTheBadgeText::
 	text "!@"
 	text_end
 
-_VictoryRoadGuardText_513a3::
+_Route23GoRightAheadText::
 	text_start
 
 	para "OK then! Please,"

@@ -2,7 +2,7 @@ _SafariZoneWestRestHouseSignText::
 	text "REST HOUSE"
 	done
 
-_SafariZoneWesFindWardensTeethSigntText::
+_SafariZoneWestFindWardensTeethSignText::
 	text "REQUEST NOTICE"
 
 	para "Please find the"

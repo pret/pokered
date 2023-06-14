@@ -12,7 +12,7 @@ _SafariZoneEastRestHouseRockerText::
 	line "all worthwhile!"
 	done
 
-_SafariZoneEastRestHouseSiphWorkerMText::
+_SafariZoneEastRestHouseSilphWorkerMText::
 	text "Whew! I'm tired"
 	line "from all the fun!"
 	done

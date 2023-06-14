@@ -237,7 +237,7 @@ Route23YouDontHaveTheBadgeYetText:
 Route23OhThatIsTheBadgeText:
 	text_far _Route23OhThatIsTheBadgeText
 	sound_get_item_1
-	text_far _VictoryRoadGuardText_513a3
+	text_far _Route23GoRightAheadText
 	text_end
 
 Route23VictoryRoadGateSignText:

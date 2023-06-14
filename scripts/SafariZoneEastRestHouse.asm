@@ -4,9 +4,9 @@ SafariZoneEastRestHouse_Script:
 
 SafariZoneEastRestHouse_TextPointers:
 	def_text_pointers
-	dw_const SafariZoneEastRestHouseScientistText,   TEXT_SAFARIZONEEASTRESTHOUSE_SCIENTIST
-	dw_const SafariZoneEastRestHouseRockerText,      TEXT_SAFARIZONEEASTRESTHOUSE_ROCKER
-	dw_const SafariZoneEastRestHouseSiphWorkerMText, TEXT_SAFARIZONEEASTRESTHOUSE_SIPH_WORKER_M
+	dw_const SafariZoneEastRestHouseScientistText,    TEXT_SAFARIZONEEASTRESTHOUSE_SCIENTIST
+	dw_const SafariZoneEastRestHouseRockerText,       TEXT_SAFARIZONEEASTRESTHOUSE_ROCKER
+	dw_const SafariZoneEastRestHouseSilphWorkerMText, TEXT_SAFARIZONEEASTRESTHOUSE_SILPH_WORKER_M
 
 SafariZoneEastRestHouseScientistText:
 	text_far _SafariZoneEastRestHouseScientistText
@@ -16,6 +16,6 @@ SafariZoneEastRestHouseRockerText:
 	text_far _SafariZoneEastRestHouseRockerText
 	text_end
 
-SafariZoneEastRestHouseSiphWorkerMText:
-	text_far _SafariZoneEastRestHouseSiphWorkerMText
+SafariZoneEastRestHouseSilphWorkerMText:
+	text_far _SafariZoneEastRestHouseSilphWorkerMText
 	text_end
