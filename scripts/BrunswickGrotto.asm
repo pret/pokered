@@ -4,3 +4,4 @@ BrunswickGrotto_Script:
 BrunswickGrotto_TextPointers:
 
 	text_end ; unused
+	
