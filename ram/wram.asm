@@ -357,7 +357,8 @@ wNPCMovementScriptPointerTableNum:: db
 ; ROM bank of current NPC movement script
 wNPCMovementScriptBank:: db
 
-	ds 2
+	ds 1
+;	ds 2	;old
 
 ; This union spans 180 bytes.
 UNION
@@ -408,7 +409,8 @@ wSlotMachineSavedROMBank:: db
 ; Move Buffer stuff for Mateo's code
 wMoveBuffer::
 wRelearnableMoves::
-	ds 164
+	ds 1
+;	ds 164
 ; Try not to use this stack. 
 ; A good amount of space is needed to store data for the move relearner.
 ; If it's like, 2, it'll lag like crazy and show garbage from elsewhere.
@@ -895,7 +897,8 @@ wRightGBMonSpecies:: db
 ; bit 6: tried pushing against boulder once (you need to push twice before it will move)
 wFlags_0xcd60:: db
 
-	ds 9
+	ds 1
+;	ds 9	;old
 
 ; This has overlapping related uses.
 ; When the player tries to use an item or use certain field moves, 0 is stored
@@ -1036,7 +1039,8 @@ wSpriteIndex:: db
 ; movement byte 2 of current sprite
 wCurSpriteMovement2:: db
 
-	ds 2
+	ds 1
+;	ds 2	;old
 
 ; sprite offset of sprite being controlled by NPC movement script
 wNPCMovementScriptSpriteOffset:: db
@@ -1069,7 +1073,8 @@ wPartyMenuHPBarColors:: ds PARTY_LENGTH
 
 wStatusScreenHPBarColor:: db
 
-	ds 7
+	ds 1
+;	ds 7	;old
 
 wCopyingSGBTileData::
 wWhichPartyMenuHPBar::
@@ -1361,7 +1366,8 @@ NEXTU
 wPlayerNumHits:: db
 ENDU
 
-	ds 2
+	ds 1
+;	ds 2	;old
 
 ; non-zero when an item or move that allows escape from battle was used
 wEscapedFromBattle:: db
@@ -1389,7 +1395,8 @@ wTempTilesetNumTiles:: db
 ; so that it can be restored when the player is done with the pokemart NPC
 wSavedListScrollOffset:: db
 
-	ds 2
+	ds 1
+;	ds 2	;old
 
 ; base coordinates of frame block
 wBaseCoordX:: db
@@ -1452,7 +1459,8 @@ ENDU
 
 wEndBattleWinTextPointer:: dw
 wEndBattleLoseTextPointer:: dw
-	ds 2
+	ds 1
+;	ds 2	;old
 wEndBattleTextRomBank:: db
 
 	ds 1
@@ -1472,7 +1480,8 @@ NEXTU
 wSlotMachineAllowMatchesCounter:: db
 ENDU
 
-	ds 2
+	ds 1
+;	ds 2	;old
 
 wOutwardSpiralTileMapPointer:: db
 
@@ -1576,11 +1585,13 @@ wMonHeaderEnd::
 ; saved at the start of a battle and then written back at the end of the battle
 wSavedTileAnimations:: db
 
-	ds 2
+	ds 1
+;	ds 2	;old
 
 wDamage:: dw
 
-	ds 2
+	ds 1
+;	ds 2	;old
 
 wRepelRemainingSteps:: db
 
@@ -1684,7 +1695,8 @@ wSavedSpriteScreenX:: db
 wSavedSpriteMapY:: db
 wSavedSpriteMapX:: db
 
-	ds 5
+	ds 1
+;	ds 5	;old
 
 wWhichPrize:: db
 
@@ -1779,7 +1791,8 @@ wPokedexOwnedEnd::
 wPokedexSeen:: flag_array NUM_POKEMON
 wPokedexSeenEnd::
 
-ds 28 ;;;;;;; moved bag code lower down to make bigger bag space
+;ds 28
+ds 1 ;;;;;;; moved bag code lower down to make bigger bag space
 
 wPlayerMoney:: ds 3 ; BCD
 
@@ -1874,19 +1887,11 @@ wWarpEntries:: ds 32 * 4 ; Y, X, warp ID, map ID
 wDestinationWarpID:: db
 
 ;;;;;;;;;; note: CHANGED: this empty space is now used for bigger bag space - TY Vortiene
-UNION
-; original size of this empty space
-ds 124
+;ds 124	;old
 
-NEXTU
 wNumBagItems:: db
 ; item, quantity
 wBagItems:: ds BAG_ITEM_CAPACITY * 2 + 1 ; now holds 30 items
-;;;;
-; 66 bytes left to use
-
-ENDU
-;;;;;;;;;;
 
 ; number of signs in the current map (up to 16)
 wNumSigns:: db
@@ -1943,7 +1948,8 @@ wTilesetTalkingOverTiles:: ds 3
 
 wGrassTile:: db
 
-	ds 4
+	ds 1
+;	ds 4	;old
 
 wNumBoxItems:: db
 ; item, quantity
@@ -1969,7 +1975,8 @@ wPlayerCoins:: ds 2 ; BCD
 wMissableObjectFlags:: flag_array $100
 wMissableObjectFlagsEnd::
 
-	ds 7
+	ds 1
+;	ds 7	;old
 
 ; temp copy of SPRITESTATEDATA1_IMAGEINDEX (used for sprite facing/anim)
 wd5cd:: db
@@ -1991,7 +1998,8 @@ wPalletTownCurScript:: db
 wCitrineRocketHouseCurScript:: db
 wBluesHouseCurScript:: db
 wViridianCityCurScript:: db
-	ds 2
+	ds 1
+;	ds 2	;old
 wPewterCityCurScript:: db
 wRoute3CurScript:: db
 wRoute4CurScript:: db
@@ -2017,7 +2025,8 @@ wRedsHouse2FCurScript:: db
 wViridianMartCurScript:: db
 wRoute22GateCurScript:: db
 wCeruleanCityCurScript:: db
-	ds 7
+	ds 1
+;	ds 7	;old
 wSSAnneBowCurScript:: db
 wViridianForestCurScript:: db
 wMuseum1FCurScript:: db
@@ -2108,7 +2117,8 @@ wRoute23CurScript:: db
 wSeafoamIslandsB4FCurScript:: db
 wRoute18Gate1FCurScript:: db
 wBattleTentCurScript:: db
-	ds 5
+	ds 1
+;	ds 5	;old
 wGameProgressFlagsEnd::
 
 UNION
@@ -2125,10 +2135,11 @@ wStringBuffer2:: ; cf70
 wStringBuffer3:: ; cf81
 	ds 9 + 1
 ;end BT wram
-	ds 79
+	ds 1
+;	ds 79	;old
 NEXTU
-wChannel7:: channel_struct wChannel7
-wChannel8:: channel_struct wChannel8
+wChannel7:: channel_struct wChannel7	;50 bytes
+wChannel8:: channel_struct wChannel8	;also 50 bytes
 ENDU
 
 wObtainedHiddenItemsFlags:: flag_array 112
@@ -2139,7 +2150,8 @@ wObtainedHiddenCoinsFlags:: flag_array 16
 ; $01 = biking
 ; $02 = surfing
 wWalkBikeSurfState:: db
-	ds 10
+	ds 1
+;	ds 10;	old
 
 wTownVisitedFlag:: flag_array NUM_CITY_MAPS
 
@@ -2198,7 +2210,8 @@ wDungeonWarpDestinationMap:: db
 ; which dungeon warp within the source map was used
 wWhichDungeonWarp:: db
 
-	ds 8
+	ds 1
+;	ds 8;	old
 
 ; bit 0: using Strength outside of battle
 ; bit 1: set by IsSurfingAllowed when surfing's allowed, but the caller resets it after checking the result
@@ -2300,22 +2313,26 @@ wd736:: db
 
 wCompletedInGameTradeFlags:: dw
 
-	ds 2
+	ds 1
+;	ds 2;	old
 
 wWarpedFromWhichWarp:: db
 wWarpedFromWhichMap:: db
 
-	ds 2
+	ds 1
+;	ds 2;	old
 
 wCardKeyDoorY:: db
 wCardKeyDoorX:: db
 
-	ds 2
+	ds 1
+;	ds 2;	old
 
 wFirstLockTrashCanIndex:: db
 wSecondLockTrashCanIndex:: db
 
-	ds 2
+	ds 1
+;	ds 2;	old
 
 wEventFlags:: flag_array NUM_EVENTS
 
@@ -2365,7 +2382,8 @@ ENDU
 
 wTrainerHeaderPtr:: dw
 
-	ds 6
+	ds 1
+;	ds 6;	old
 
 ; the trainer the player must face after getting a wrong answer in the Cinnabar
 ; gym quiz
@@ -2376,7 +2394,8 @@ wUnusedDA38:: db
 ; mostly copied from map-specific map script pointer and written back later
 wCurMapScript:: db
 
-	ds 7
+	ds 1
+;	ds 7;	old
 
 wPlayTimeHours:: db
 wPlayTimeMaxed:: db
