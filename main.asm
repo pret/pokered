@@ -351,6 +351,13 @@ INCLUDE "gfx/fishing.asm"
 INCLUDE "data/moves/animations.asm"
 INCLUDE "data/battle_anims/subanimations.asm"
 INCLUDE "data/battle_anims/frame_blocks.asm"
+;INCLUDE "engine/movie/evolution.asm"
+;INCLUDE "engine/overworld/elevator.asm"
+;INCLUDE "engine/items/tm_prices.asm"
+
+SECTION "bank1F", ROMX
+;new, used to store files that were previously INCLUDEd in different banks.
+;All files here can be found commented out in their original banks.
 INCLUDE "engine/movie/evolution.asm"
 INCLUDE "engine/overworld/elevator.asm"
 INCLUDE "engine/items/tm_prices.asm"

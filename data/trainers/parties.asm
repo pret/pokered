@@ -131,6 +131,9 @@ LassData:
 ; Celadon Gym
 	db 23, BELLSPROUT, WEEPINBELL, 0
 	db 23, ODDISH, GLOOM, 0
+;BEGIN NEW TRAINERS
+; Pewter Gym
+	db 8, GEODUDE, KABUTO, 0
 
 SailorData:
 ; SS Anne Stern
@@ -147,7 +150,7 @@ SailorData:
 
 JrTrainerMData:
 ; Pewter Gym
-	db 11, DIGLETT, SANDSHREW, 0
+	db 8, GEODUDE, OMANYTE, 0
 ; Route 24/Route 25
 	db 14, RATTATA, EKANS, 0
 ; Route 24

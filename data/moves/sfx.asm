@@ -171,5 +171,6 @@ MoveSoundTable:
 	db SFX_BATTLE_12,          $00, $e0 ; TWISTER
 	db SFX_BATTLE_19,          $21, $e0 ; DRAGONBREATH
 	db SFX_NOT_VERY_EFFECTIVE, $01, $ff ; DRAGON_CLAW
+	db SFX_BATTLE_29,          $1f, $20 ; FLAME_WHEEL
 	assert_table_length NUM_ATTACKS
 	db SFX_BATTLE_0B,          $00, $80

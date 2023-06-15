@@ -19,7 +19,7 @@ _BeforeReceivedTM34Text::
 
 _ReceivedTM34Text::
 	text "<PLAYER> received"
-	line "TM34!@"
+	line "TM53!@"
 	text_end
 
 _TM34ExplanationText::
@@ -37,13 +37,16 @@ _TM34ExplanationText::
 	cont "pick the #MON"
 	cont "carefully!"
 
-	para "TM34 contains"
-	line "BIDE!"
+	para "TM53 contains"
+	line "ROCK THROW!"
 
-	para "Your #MON will"
-	line "absorb damage in"
-	cont "battle then pay"
-	cont "it back double!"
+	para "There are some"
+	line "good rock type "
+	cont "#MON in"
+	cont "Mt. Moon east"
+	cont "of here, try"
+	cont "teaching it to"
+	cont "one of them!"
 	done
 
 _TM34NoRoomText::
@@ -100,6 +103,22 @@ _PewterGymAfterBattleText1::
 	text "You're pretty hot,"
 	line "but not as hot"
 	cont "as BROCK!"
+	done
+
+_PewterGymBattleText2::
+	text "We were given"
+	line "rare #MON"
+	cont "by the museum!"
+	done
+
+_PewterGymEndBattleText2::
+	text "My #MON!"
+	prompt
+
+_PewterGymAfterBattleText2::
+	text "I guess my rare"
+	line "#MON can't cut"
+	cont "it."
 	done
 
 _PewterGymGuidePreAdviceText::

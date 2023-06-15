@@ -169,6 +169,7 @@ AttackAnimationPointers:
 	dw TwisterAnim
 	dw DragonBreathAnim
 	dw DragonClawAnim
+	dw FlameWheelAnim
 	dw StruggleAnim
 	assert_table_length NUM_ATTACKS
 	dw ShowPicAnim
@@ -338,6 +339,13 @@ DragonClawAnim:
 	battle_anim SLASH, SE_DARK_SCREEN_PALETTE
 	battle_anim NO_MOVE, SUBANIM_0_SCRATCHES, 0, 6
 	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1 ; end
+
+FlameWheelAnim:
+	battle_anim FIRE_BLAST, SE_SPIRAL_BALLS_INWARD
+	battle_anim TAKE_DOWN, SE_MOVE_MON_HORIZONTALLY
+	battle_anim NO_MOVE, SE_RESET_MON_POSITION
+	battle_anim FLAMETHROWER, SUBANIM_1_FLAME_COLUMN_1, 1, 6
 	db -1 ; end
 
 WingAttackAnim:

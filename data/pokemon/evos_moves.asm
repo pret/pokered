@@ -1214,7 +1214,10 @@ OmanyteEvosMoves:
 	db EV_LEVEL, 40, OMASTAR
 	db 0
 ; Learnset
+	db 7,  BITE
+	db 16, ROCK_THROW
 	db 34, HORN_ATTACK
+	db 37, ROCK_SLIDE
 	db 39, LEER
 	db 46, SPIKE_CANNON
 	db 53, HYDRO_PUMP
@@ -1224,7 +1227,9 @@ OmastarEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
+	db 16, ROCK_THROW
 	db 34, HORN_ATTACK
+	db 37, ROCK_SLIDE
 	db 39, LEER
 	db 44, SPIKE_CANNON
 	db 49, HYDRO_PUMP
@@ -1322,10 +1327,10 @@ ZubatEvosMoves:
 	db EV_LEVEL, 22, GOLBAT
 	db 0
 ; Learnset
-	db 10, SUPERSONIC
-	db 15, BITE
+	db 8, SUPERSONIC
+	db 10, BITE
+	db 15, WING_ATTACK
 	db 21, CONFUSE_RAY
-	db 28, WING_ATTACK
 	db 36, HAZE
 	db 0
 
@@ -1548,8 +1553,8 @@ GolbatEvosMoves:
 ; Learnset
 	db 10, SUPERSONIC
 	db 15, BITE
+	db 18, WING_ATTACK
 	db 21, CONFUSE_RAY
-	db 32, WING_ATTACK
 	db 43, HAZE
 	db 0
 
@@ -1995,6 +2000,7 @@ CharmanderEvosMoves:
 	db 6, EMBER
 	db 13, LEER
 	db 22, RAGE
+	db 27, FLAME_WHEEL
 	db 30, SLASH
 	db 38, FLAMETHROWER
 	db 46, FIRE_SPIN
@@ -2021,6 +2027,7 @@ CharmeleonEvosMoves:
 	db 9, EMBER
 	db 15, LEER
 	db 24, RAGE
+	db 30, FLAME_WHEEL
 	db 33, SLASH
 	db 42, FLAMETHROWER
 	db 56, FIRE_SPIN

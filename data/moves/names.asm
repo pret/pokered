@@ -169,5 +169,6 @@ MoveNames::
 	li "TWISTER"
 	li "DRAGONBREATH"
 	li "DRAGON CLAW"
+	li "FLAME WHEEL"
 	li "STRUGGLE"
 	assert_list_length NUM_ATTACKS
