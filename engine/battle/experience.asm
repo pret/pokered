@@ -116,7 +116,11 @@ GainExperience:
 	ld a, [hl] ; species
 	ld [wd0b5], a
 	call GetMonHeader
-	ld d, MAX_LEVEL
+	;ld d, MAX_LEVEL
+	farcall SetLevelLimit ;temp for existing saves
+	ld hl, wLevelLimit
+	ld d, [hl]
+	;TODO: make it so if you're at the limit, it gives no exp
 	callfar CalcExperience ; get max exp
 ; compare max exp with current exp
 	ldh a, [hExperience]

@@ -64,6 +64,7 @@ PewterGymScriptReceiveTM34:
 	set BIT_BOULDERBADGE, [hl]
 	ld hl, wBeatGymFlags
 	set BIT_BOULDERBADGE, [hl]
+	farcall SetLevelLimit
 
 	ld a, HS_GYM_GUY
 	ld [wMissableObjectIndex], a

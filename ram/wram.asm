@@ -1830,8 +1830,9 @@ wWarpEntries:: ds 32 * 4 ; Y, X, warp ID, map ID
 
 ; if $ff, the player's coordinates are not updated when entering the map
 wDestinationWarpID:: db
+wLevelLimit:: db	;new
 
-	ds 128
+	ds 127
 
 ; number of signs in the current map (up to 16)
 wNumSigns:: db

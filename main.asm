@@ -361,3 +361,4 @@ SECTION "bank1F", ROMX
 INCLUDE "engine/movie/evolution.asm"
 INCLUDE "engine/overworld/elevator.asm"
 INCLUDE "engine/items/tm_prices.asm"
+INCLUDE "engine/events/set_level_limit.asm"

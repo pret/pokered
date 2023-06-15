@@ -129,6 +129,7 @@ InitOptions:
 	ld [wLetterPrintingDelayFlags], a
 	ld a, TEXT_DELAY_MEDIUM
 	ld [wOptions], a
+	farcall SetLevelLimit
 	ret
 
 LinkMenu:
