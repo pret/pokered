@@ -382,7 +382,7 @@ SilphCo11FRocket2AfterBattleText:
 	text_far _SilphCo11FRocket2AfterBattleText
 	text_end
 
-SilphCo10FPorygonText: ; unrefenced
+SilphCo10FPorygonText: ; unreferenced
 	text_asm
 	ld hl, .Text
 	call PrintText

@@ -151,7 +151,7 @@ GameCornerClerk1Text:
 	; - have the Coin Case
 	ld b, COIN_CASE
 	call IsItemInBag
-	jr z, .no_coin_ciase
+	jr z, .no_coin_case
 	; - have room in the Coin Case for at least 9 coins
 	call Has9990Coins
 	jr nc, .coin_case_full
@@ -196,7 +196,7 @@ GameCornerClerk1Text:
 .coin_case_full
 	ld hl, .CoinCaseIsFull
 	jr .print_ret
-.no_coin_ciase
+.no_coin_case
 	ld hl, .DontHaveCoinCase
 .print_ret
 	call PrintText

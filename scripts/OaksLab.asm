@@ -15,7 +15,7 @@ OaksLab_ScriptPointers:
 	dw_const OaksLabOakEntersLabScript,              SCRIPT_OAKSLAB_OAK_ENTERS_LAB
 	dw_const OaksLabHideShowOaksScript,              SCRIPT_OAKSLAB_HIDE_SHOW_OAKS
 	dw_const OaksLabPlayerEntersLabScript,           SCRIPT_OAKSLAB_PLAYER_ENTERS_LAB
-	dw_const OaksLabFollowedOakedScript,             SCRIPT_OAKSLAB_FOLLOWED_OAK
+	dw_const OaksLabFollowedOakScript,               SCRIPT_OAKSLAB_FOLLOWED_OAK
 	dw_const OaksLabOakChooseMonSpeechScript,        SCRIPT_OAKSLAB_OAK_CHOOSE_MON_SPEECH
 	dw_const OaksLabPlayerDontGoAwayScript,          SCRIPT_OAKSLAB_PLAYER_DONT_GO_AWAY_SCRIPT
 	dw_const OaksLabPlayerForcedToWalkBackScript,    SCRIPT_OAKSLAB_PLAYER_FORCED_TO_WALK_BACK_SCRIPT
@@ -105,7 +105,7 @@ PlayerEntryMovementRLE:
 	db D_UP, 8
 	db -1 ; end
 
-OaksLabFollowedOakedScript:
+OaksLabFollowedOakScript:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz

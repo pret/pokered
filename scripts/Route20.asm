@@ -17,14 +17,14 @@ Route20BoulderScript:
 	ld a, HS_SEAFOAM_ISLANDS_1F_BOULDER_2
 	call Route20ShowObjectScript
 	ld hl, .MissableObjectIDs
-.hide_missible_objects
+.hide_missable_objects
 	ld a, [hli]
 	cp $ff
 	jr z, .next_boulder_check
 	push hl
 	call Route20HideObjectScript
 	pop hl
-	jr .hide_missible_objects
+	jr .hide_missable_objects
 
 .MissableObjectIDs:
 	db HS_SEAFOAM_ISLANDS_B1F_BOULDER_1

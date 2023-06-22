@@ -208,7 +208,7 @@ ChampionsRoomPlayerFollowsOakScript:
 	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	ld hl, wSimulatedJoypadStatesEnd
-	ld de, WalkToHallOfFame_RLEMovment
+	ld de, WalkToHallOfFame_RLEMovement
 	call DecodeRLEList
 	dec a
 	ld [wSimulatedJoypadStatesIndex], a
@@ -217,7 +217,7 @@ ChampionsRoomPlayerFollowsOakScript:
 	ld [wChampionsRoomCurScript], a
 	ret
 
-WalkToHallOfFame_RLEMovment:
+WalkToHallOfFame_RLEMovement:
 	db D_UP, 4
 	db D_LEFT, 1
 	db -1 ; end

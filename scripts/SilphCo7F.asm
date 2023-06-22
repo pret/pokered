@@ -224,7 +224,7 @@ SilphCo7FRivalAfterBattleScript:
 	ld [wNewSoundID], a
 	call PlaySound
 	farcall Music_RivalAlternateStart
-	ld de, .RivalWAlkAroundPlayerMovement
+	ld de, .RivalWalkAroundPlayerMovement
 	ld a, [wcf0d]
 	cp $1
 	jr nz, .walk_around_player
@@ -241,7 +241,7 @@ SilphCo7FRivalAfterBattleScript:
 	db NPC_MOVEMENT_RIGHT
 	db -1 ; end
 
-.RivalWAlkAroundPlayerMovement:
+.RivalWalkAroundPlayerMovement:
 	db NPC_MOVEMENT_LEFT
 	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_UP

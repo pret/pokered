@@ -12,15 +12,15 @@ HallofFameRoomScript_5a4aa:
 
 HallOfFame_ScriptPointers:
 	def_script_pointers
-	dw_const HallOfFameDefaultScript,               SCRIPT_HALLOFFAME_DEFAULT
-	dw_const HallOfFameOakCongratulationsScript,    SCRIPT_HALLOFFAME_OAK_CONGRATULATIONS
-	dw_const HallOfFameResetEventsAndSaveSript,     SCRIPT_HALLOFFAME_RESET_EVENTS_AND_SAVE
-	dw_const HallOfFameNoopScript,                  SCRIPT_HALLOFFAME_NOOP
+	dw_const HallOfFameDefaultScript,            SCRIPT_HALLOFFAME_DEFAULT
+	dw_const HallOfFameOakCongratulationsScript, SCRIPT_HALLOFFAME_OAK_CONGRATULATIONS
+	dw_const HallOfFameResetEventsAndSaveScript, SCRIPT_HALLOFFAME_RESET_EVENTS_AND_SAVE
+	dw_const HallOfFameNoopScript,               SCRIPT_HALLOFFAME_NOOP
 
 HallOfFameNoopScript:
 	ret
 
-HallOfFameResetEventsAndSaveSript:
+HallOfFameResetEventsAndSaveScript:
 	call Delay3
 	ld a, [wLetterPrintingDelayFlags]
 	push af

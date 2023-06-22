@@ -31,7 +31,7 @@ Route5GateDefaultScript:
 	ldh a, [hItemToRemoveID]
 	and a
 	jr nz, .have_drink
-	ld a, TEXT_ROUTE5GATE_GUARD_GEEIMTHIRSTY
+	ld a, TEXT_ROUTE5GATE_GUARD_GEE_IM_THIRSTY
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	call Route5GateMovePlayerUpScript
@@ -39,7 +39,7 @@ Route5GateDefaultScript:
 	ld [wRoute5GateCurScript], a
 	ret
 .have_drink
-	ld a, TEXT_ROUTE5GATE_GUARD_GIVEDRINK
+	ld a, TEXT_ROUTE5GATE_GUARD_GIVE_DRINK
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld hl, wd728
@@ -64,8 +64,8 @@ Route5GatePlayerMovingScript:
 Route5Gate_TextPointers:
 	def_text_pointers
 	dw_const SaffronGateGuardText,             TEXT_ROUTE5GATE_GUARD
-	dw_const SaffronGateGuardGeeImThirstyText, TEXT_ROUTE5GATE_GUARD_GEEIMTHIRSTY
-	dw_const SaffronGateGuardGiveDrinkText,    TEXT_ROUTE5GATE_GUARD_GIVEDRINK
+	dw_const SaffronGateGuardGeeImThirstyText, TEXT_ROUTE5GATE_GUARD_GEE_IM_THIRSTY
+	dw_const SaffronGateGuardGiveDrinkText,    TEXT_ROUTE5GATE_GUARD_GIVE_DRINK
 
 SaffronGateGuardText:
 	text_asm
