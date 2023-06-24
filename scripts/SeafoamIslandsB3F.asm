@@ -99,7 +99,7 @@ SeafoamIslandsB3FMoveObjectScript:
 	cp 18
 	jr z, .asm_4665e
 	cp 19
-	ld a, $0
+	ld a, SCRIPT_SEAFOAMISLANDSB3F_DEFAULT
 	jr nz, .asm_4667b
 	ld de, RLEData_4667f
 	jr .asm_46661

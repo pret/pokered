@@ -77,7 +77,7 @@ SeafoamIslandsB4FMoveObjectScript:
 	jr z, .asm_46849
 	ld hl, .Coords
 	call ArePlayerCoordsInArray
-	ld a, $0
+	ld a, SCRIPT_SEAFOAMISLANDSB4F_DEFAULT
 	jr nc, .asm_46849
 	ld a, [wCoordIndex]
 	cp $1
