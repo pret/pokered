@@ -23,4 +23,5 @@ RedsHouse2FNoopScript:
 
 RedsHouse2F_TextPointers:
 	def_text_pointers
+
 	text_end ; unused

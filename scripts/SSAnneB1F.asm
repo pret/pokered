@@ -3,4 +3,5 @@ SSAnneB1F_Script:
 
 SSAnneB1F_TextPointers:
 	def_text_pointers
+
 	text_end ; unused
