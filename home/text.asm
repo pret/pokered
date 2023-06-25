@@ -111,13 +111,14 @@ NextChar::
 	inc de
 	jp PlaceNextChar
 
-NullChar::
+NullChar:: ; unused
 	ld b, h
 	ld c, l
 	pop hl
-	; This error message seems to be a development leftover.
-	; Removing the instruction below will cause the game to
-	; ignore <NULL> and print the text script normally.	
+	; A "<NULL>" character in a printed string
+	; displays an error message with the current value
+	; of hSpriteIndexOrTextID in decimal format.
+	; This is a debugging leftover.
 	ld de, TextIDErrorText
 	dec de
 	ret

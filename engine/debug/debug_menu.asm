@@ -1,4 +1,4 @@
-DebugMenu: ; dummy (non-debug)
+DebugMenu:
 IF DEF(_DEBUG)
 	call ClearScreen
 
@@ -72,7 +72,7 @@ ELSE
 	ret
 ENDC
 
-TestBattle: ; unreferenced (non-debug)
+TestBattle: ; unreferenced except in _DEBUG
 .loop
 	call GBPalNormal
 
@@ -83,11 +83,11 @@ TestBattle: ; unreferenced (non-debug)
 	ld hl, wFlags_D733
 	set BIT_TEST_BATTLE, [hl]
 
-	; The bag items are set here in pokeyellow's equivalent routine.
-	; They are undefined in pokered so garbage data will load instead.
-	; This can cause the game to assume the player has, e.g., an EXP_ALL,
-	; although this likely goes unseen because defeating a Rhydon with
-	; another Rhydon that is forced to attack with Pound is challenging.
+	; wNumBagItems and wBagItems are not initialized here,
+	; and their garbage values happen to act as if EXP_ALL
+	; is in the bag at the end of the test battle.
+	; pokeyellow fixes this by initializing them with a
+	; list of items.
 
 	; Reset the party.
 	ld hl, wPartyCount

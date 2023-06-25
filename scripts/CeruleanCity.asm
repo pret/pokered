@@ -36,7 +36,7 @@ CeruleanCityScript4:
 
 CeruleanCityScript0:
 IF DEF(_DEBUG)
-	call DebugBButtonToggle
+	call DebugPressedOrHeldB
 	ret nz
 ENDC
 	CheckEvent EVENT_BEAT_CERULEAN_ROCKET_THIEF

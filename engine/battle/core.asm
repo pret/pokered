@@ -2493,9 +2493,9 @@ MoveSelectionMenu:
 	   ; so it is necessary to put the di ei block to not cause tearing
 	call TextBoxBorder
 	hlcoord 4, 12
-	ld [hl], "─" ; bottom PrintMenuItem window border
+	ld [hl], "─"
 	hlcoord 10, 12
-	ld [hl], "┘" ; right corner of the border
+	ld [hl], "┘"
 	ei
 	hlcoord 6, 13
 	call .writemoves
@@ -2557,7 +2557,7 @@ MoveSelectionMenu:
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	jr z, .matchedkeyspicked
-	; debug, TestBattle-related, unclear purpose 
+	; Allow the buttons specified below in regular battles.
 	ld a, [wFlags_D733]
 	bit BIT_TEST_BATTLE, a
 	ld b, D_UP | D_DOWN | A_BUTTON | B_BUTTON | SELECT
@@ -2654,7 +2654,7 @@ SelectMenuItem:
 	ld a, [wPlayerBattleStatus3]
 	bit 3, a ; transformed
 	jr nz, .transformedMoveSelected
-.transformedMoveSelected
+.transformedMoveSelected ; pointless
 	; Allow moves copied by Transform to be used.
 	ld a, [wCurrentMenuItem]
 	ld hl, wBattleMonMoves

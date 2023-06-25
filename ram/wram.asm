@@ -420,6 +420,7 @@ wAddedToParty::
 ; The purpose of these flags is to track which mons levelled up during the
 ; current battle at the end of the battle when evolution occurs.
 ; Other methods of evolution simply set it by calling TryEvolvingMon.
+wMiscBattleData::
 wCanEvolveFlags:: db
 
 wForceEvolution:: db
@@ -501,6 +502,7 @@ wEnemyNumHits:: ; db
 wEnemyBideAccumulatedDamage:: dw
 
 	ds 8
+wMiscBattleDataEnd::
 ENDU
 
 ; This union spans 39 bytes.

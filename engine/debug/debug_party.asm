@@ -1,4 +1,4 @@
-SetDebugNewGameParty: ; unreferenced (non-debug)
+SetDebugNewGameParty: ; unreferenced except in _DEBUG
 	ld de, DebugNewGameParty
 .loop
 	ld a, [de]
@@ -12,9 +12,11 @@ SetDebugNewGameParty: ; unreferenced (non-debug)
 	call AddPartyMon
 	jr .loop
 
-DebugNewGameParty: ; unreferenced (non-debug)
-	; Then producer Tsunekazu Ishihara used an Exeggutor for play testing.
-	; It is the only party member shared with Red, Green, and Japanese Blue.
+DebugNewGameParty: ; unreferenced except in _DEBUG
+	; Exeggutor is the only debug party member shared with Red, Green, and Japanese Blue.
+	; "Tsunekazu Ishihara: Exeggutor is my favorite. That's because I was
+	; always using this character while I was debugging the program."
+	; Source: https://web.archive.org/web/20000607152840/http://pocket.ign.com/news/14973.html
 	db EXEGGUTOR, 90
 IF DEF(_DEBUG)
 	db MEW, 5
@@ -29,7 +31,7 @@ IF DEF(_DEBUG)
 ENDC
 	db -1 ; end
 
-PrepareNewGameDebug: ; dummy (non-debug)
+PrepareNewGameDebug: ; dummy except in _DEBUG
 IF DEF(_DEBUG)
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a

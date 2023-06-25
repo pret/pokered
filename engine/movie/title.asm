@@ -1,5 +1,4 @@
-CopyDebugName:
-	; PrepareOakSpeech doesn't use this routine.
+CopyDebugName: ; unused
 	ld bc, NAME_LENGTH
 	jp CopyData
 

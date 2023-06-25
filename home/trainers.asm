@@ -128,12 +128,12 @@ TalkToTrainer::
 ; checks if any trainers are seeing the player and wanting to fight
 CheckFightingMapTrainers::
 IF DEF(_DEBUG)
-	call DebugBButtonToggle
+	call DebugPressedOrHeldB
 	jr nz, .trainerNotEngaging
 ENDC
 	call CheckForEngagingTrainers
 	ld a, [wSpriteIndex]
-	cp -1
+	cp $ff
 	jr nz, .trainerEngaging
 IF DEF(_DEBUG)
 .trainerNotEngaging

@@ -36,8 +36,6 @@ PrepareOakSpeech:
 	call CopyData
 	ld hl, DebugNewGameRivalName
 	ld de, wRivalName
-	; The two instructions below are the ones in CopyDebugName.
-	; However, attempting to call it here will cause the game to crash.
 	ld bc, NAME_LENGTH
 	jp CopyData
 
@@ -60,15 +58,12 @@ OakSpeech:
 	call AddItemToInventory
 	ld a, [wDefaultMap]
 	ld [wDestinationMap], a
-	; This call is required for running StartNewGameDebug properly.
-	; StartNewGame also needs it to land the player outside their
-	; house when they warp on the mat after this routine ends.
-	call SpecialWarpIn
+	call PrepareForSpecialWarp
 	xor a
 	ldh [hTileAnimations], a
 	ld a, [wd732]
 	bit BIT_DEBUG_MODE, a
-	jp nz, .debugSpeech ; jump to last part of speech in debug mode
+	jp nz, .skipSpeech ; skip to last part of speech in debug mode
 	ld de, ProfOakPic
 	lb bc, BANK(ProfOakPic), $00
 	call IntroDisplayPicCenteredOrUpperRight
@@ -77,7 +72,7 @@ OakSpeech:
 	call PrintText
 	call GBFadeOutToWhite
 	call ClearScreen
-	ld a, NIDORINO ; plays Nidorina's cry due to OakSpeechText2
+	ld a, NIDORINO
 	ld [wd0b5], a
 	ld [wcf91], a
 	call GetMonHeader
@@ -104,7 +99,7 @@ OakSpeech:
 	ld hl, IntroduceRivalText
 	call PrintText
 	call ChooseRivalName
-.debugSpeech
+.skipSpeech
 	call GBFadeOutToWhite
 	call ClearScreen
 	ld de, RedPicFront
@@ -170,8 +165,7 @@ OakSpeechText1:
 	text_end
 OakSpeechText2:
 	text_far _OakSpeechText2A
-	; The game does not have a "sound_cry_nidorino" command programmed in.
-	; Nidorina might have been intended here during development.
+	; The cry played does not match the sprite displayed.
 	sound_cry_nidorina
 	text_far _OakSpeechText2B
 	text_end

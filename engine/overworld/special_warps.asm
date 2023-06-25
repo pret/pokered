@@ -1,8 +1,8 @@
-SpecialWarpIn::
+PrepareForSpecialWarp::
 	call LoadSpecialWarpData
 	predef LoadTilesetHeader
 	ld hl, wd732
-	bit 2, [hl] ; special warp
+	bit 2, [hl] ; dungeon warp or fly warp?
 	res 2, [hl]
 	jr z, .debugNewGameWarp
 	ld a, [wDestinationMap]
@@ -14,8 +14,6 @@ SpecialWarpIn::
 .setNewGameMatWarp
 	; This is called by OakSpeech during StartNewGame and
 	; loads the first warp event for the specified map index.
-	; Without the instruction below, the game implicitly
-	; runs "ld a, VIRIDIAN_CITY".
 	ld a, PALLET_TOWN 
 .next
 	ld b, a
@@ -36,7 +34,7 @@ LoadSpecialWarpData:
 	jr nz, .notTradeCenter
 	ld hl, TradeCenterPlayerWarp
 	ldh a, [hSerialConnectionStatus]
-	cp USING_INTERNAL_CLOCK ; determine player and friend
+	cp USING_INTERNAL_CLOCK
 	jr z, .copyWarpData
 	ld hl, TradeCenterFriendWarp
 	jr .copyWarpData
@@ -45,7 +43,7 @@ LoadSpecialWarpData:
 	jr nz, .notColosseum
 	ld hl, ColosseumPlayerWarp
 	ldh a, [hSerialConnectionStatus]
-	cp USING_INTERNAL_CLOCK ; determine player and friend
+	cp USING_INTERNAL_CLOCK
 	jr z, .copyWarpData
 	ld hl, ColosseumFriendWarp
 	jr .copyWarpData
@@ -54,9 +52,9 @@ LoadSpecialWarpData:
 	bit BIT_DEBUG_MODE, a
 	; warp to wLastMap (PALLET_TOWN) for StartNewGameDebug
 	jr nz, .notNewGameWarp
-	bit 2, a ; special warp
+	bit 2, a
 	jr nz, .notNewGameWarp
-	ld hl, NewGameWarp ; used for StartNewGame
+	ld hl, NewGameWarp
 .copyWarpData
 	ld de, wCurMap
 	ld c, $7
