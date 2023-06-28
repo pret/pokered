@@ -5,11 +5,11 @@ Audio2_PlaySound::
 	cp SFX_STOP_ALL_MUSIC
 	jp z, StopAllAudio_2
 	cp MAX_SFX_ID_2
-	jp z, PlaySfx
-	jp c, PlaySfx
+	jr z, PlaySfx
+	jr c, PlaySfx
 	cp $fe
 	jr z, .playMusic
-	jp nc, PlaySfx
+	jr nc, PlaySfx
 .playMusic
 	call InitMusicVariables
 	jp PlaySoundCommon_2
@@ -346,7 +346,7 @@ Audio2_InitSFXVariables::
 	cp CHAN5
 	ret nz
 	ld a, $8
-	ld [rNR10], a
+	ldh [rNR10], a
 	ret
 
 Audio2_StopAllAudio::

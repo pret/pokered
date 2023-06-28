@@ -1068,9 +1068,12 @@ RemoveFaintedPlayerMon:
 	call WaitForSoundToFinish
 .skipWaitForSound
 ; a is 0, so this zeroes the enemy's accumulated damage.
-	;ld hl, wEnemyBideAccumulatedDamage ; PureRGBnote: CHANGED: bide effect removed from game because the effect was changed
-	ld [hli], a
-	ld [hl], a
+;;;;;;;;;; PureRGBnote: CHANGED: bide effect removed from game because the effect was changed
+	;ld hl, wEnemyBideAccumulatedDamage 
+	;ld [hli], a
+	;ld [hl], a
+;;;;;;;;;;
+	xor a
 	ld [wBattleMonStatus], a
 	call ReadPlayerMonCurHPAndStatus
 	hlcoord 9, 7
@@ -3593,7 +3596,7 @@ CheckPlayerStatusConditions:
 
 .BideCheck
 	ld hl, wPlayerBattleStatus1
-	jr .ThrashingAboutCheck ; PureRGBnote: CHANGED: bide effect was changed so this whole block isn't needed now
+	; jr .ThrashingAboutCheck ; PureRGBnote: CHANGED: bide effect was changed so this whole block isn't needed now
 	;bit STORING_ENERGY, [hl] ; is mon using bide?
 	;jr z, .ThrashingAboutCheck
 	;xor a
@@ -6298,7 +6301,7 @@ CheckEnemyStatusConditions:
 	jp .enemyReturnToHL ; if using a two-turn move, enemy needs to recharge the first turn
 .checkIfUsingBide ; PureRGBnote: CHANGED: bide effect changed to be a normal buff move, don't need this code
 	ld hl, wEnemyBattleStatus1
-	jr .checkIfThrashingAbout
+;	jr .checkIfThrashingAbout
 ;	bit STORING_ENERGY, [hl] ; is mon using bide?
 ;	jr z, .checkIfThrashingAbout
 ;	xor a

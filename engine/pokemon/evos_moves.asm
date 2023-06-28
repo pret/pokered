@@ -185,6 +185,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, [wd0b5]
 	ld [wd11e], a
 	predef IndexToPokedex
+;;;;;;;;;; FIXME: ? code that requires BaseStats to be in the same bank as evos_moves
 	ld a, [wd11e]
 	; missingno or mew can't evolve so this is never reached for them and their base stats aren't important here
 	dec a
@@ -193,6 +194,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	call AddNTimes
 	ld de, wMonHeader
 	rst _CopyData
+;;;;;;;;;;
 	ld a, [wd0b5]
 	ld [wMonHIndex], a
 	pop af

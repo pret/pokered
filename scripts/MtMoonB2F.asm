@@ -56,23 +56,18 @@ MtMoonB2F_ScriptPointers:
 
 MtMoon3Script0:
 	CheckEvent EVENT_BEAT_MT_MOON_EXIT_SUPER_NERD
-	jp nz, MtMoon3Script_49d91
+	jp nz, CheckFightingMapTrainers ; PureRGBnote: FIXED: allow trainers to sight player regardless of if you obtained fossils
 	ld a, [wYCoord]
 	cp 8
-	jp nz, MtMoon3Script_49d91
+	jp nz, CheckFightingMapTrainers ; PureRGBnote: FIXED: allow trainers to sight player regardless of if you obtained fossils
 	ld a, [wXCoord]
 	cp 13
-	jp nz, MtMoon3Script_49d91
+	jp nz, CheckFightingMapTrainers ; PureRGBnote: FIXED: allow trainers to sight player regardless of if you obtained fossils
 	xor a
 	ldh [hJoyHeld], a
 	ld a, $1
 	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
-
-MtMoon3Script_49d91:
-	CheckEitherEventSet EVENT_GOT_DOME_FOSSIL, EVENT_GOT_HELIX_FOSSIL
-	jp z, CheckFightingMapTrainers
-	ret
 
 MtMoon3Script3:
 	ld a, [wIsInBattle]

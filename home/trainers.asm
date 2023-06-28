@@ -202,6 +202,8 @@ EndTrainerBattle::
 	ld a, [wEnemyMonOrTrainerClass]
 	cp OPP_ID_OFFSET
 	jr nc, .skipRemoveSprite    ; test if trainer was fought (in that case skip removing the corresponding sprite)
+	; code that removes overworld pokemon like articuno, mewtwo, snorlax, etc. when defeated
+	; TODO: hide extra object if in extra map???
 	ld hl, wMissableObjectList
 	ld de, $2
 	ld a, [wSpriteIndex]
