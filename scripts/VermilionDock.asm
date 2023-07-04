@@ -48,10 +48,16 @@ VermilionDock_ScriptPointers:
 	dw EndTrainerBattle
 
 VermilionDock_1db9b:
+;;;;;;;;;; PureRGBnote: ADDED: the ship will return so don't ever run the "ship leaves" script if we're in that state
 	ld a, [wObtainedBadges]
-	bit 4, a ; after obtaining 4 badges the ship returns
+	bit BIT_SOULBADGE, a ; after obtaining 5 badges the ship returns
 	ret nz
+;;;;;;;;;;
 	SetEventForceReuseHL EVENT_SS_ANNE_LEFT
+;;;;;;;;;; PureRGBnote: ADDED: since we instantly enter this script from a warp and due to DEFER_MAP_LOAD bit set on this map's header, 
+;;;;;;;;;; we need to reset the palette here or the screen will be black
+	call GBPalNormal
+;;;;;;;;;; 
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wJoyIgnore], a
 	ld [wNewSoundID], a
