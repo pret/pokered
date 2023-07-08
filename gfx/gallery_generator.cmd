@@ -6,9 +6,9 @@ magick vulpix.png ninetales.png jigglypuff.png wigglytuff.png zubat.png golbat.p
 magick mankey.png primeape.png growlithe.png arcanine.png poliwag.png poliwhirl.png poliwrath.png abra.png kadabra.png alakazam.png machop.png machoke.png machamp.png bellsprout.png weepinbell.png victreebel.png tentacool.png tentacruel.png +append ../row4.png
 magick geodude.png graveler.png golem.png ponyta.png rapidash.png slowpoke.png slowbro.png magnemite.png magneton.png farfetchd.png doduo.png dodrio.png seel.png dewgong.png grimer.png muk.png shellder.png cloyster.png +append ../row5.png
 magick gastly.png haunter.png gengar.png onix.png drowzee.png hypno.png krabby.png kingler.png voltorb.png electrode.png exeggcute.png exeggutor.png cubone.png marowak.png hitmonlee.png hitmonchan.png lickitung.png +append ../row6.png
-magick koffing.png weezing.png rhyhorn.png rhydon.png chansey.png tangela.png kangaskhan.png horsea.png seadra.png goldeen.png seaking.png staryu.png starmie.png mr.mime.png scyther.png jynx.png electabuzz.png magmar.png +append ../row7.png
-magick pinsir.png tauros.png magikarp.png gyarados.png lapras.png ditto.png eevee.png vaporeon.png jolteon.png flareon.png porygon.png omanyte.png omastar.png kabuto.png kabutops.png aerodactyl.png snorlax.png +append ../row8.png
-magick articuno.png zapdos.png moltres.png dratini.png dragonair.png dragonite.png mewtwo.png mew.png +append ../row9.png
+magick koffing.png weezing.png rhyhorn.png rhydon.png chansey.png tangela.png kangaskhan.png horsea.png seadra.png goldeen.png seaking.png staryu.png starmie.png mr.mime.png scyther.png jynx.png electabuzz.png  +append ../row7.png
+magick magmar.png pinsir.png tauros.png magikarp.png gyarados.png lapras.png ditto.png eevee.png vaporeon.png jolteon.png flareon.png porygon.png omanyte.png omastar.png kabuto.png kabutops.png aerodactyl.png +append ../row8.png
+magick snorlax.png articuno.png zapdos.png moltres.png dratini.png dragonair.png dragonite.png mewtwo.png mew.png +append ../row9.png
 cd ..
 magick row1.png row2.png row3.png row4.png row5.png row6.png row7.png row8.png row9.png -append gallery/front_sprites.png
 del row1.png row2.png row3.png row4.png row5.png row6.png row7.png row8.png row9.png
@@ -20,9 +20,9 @@ magick vulpixb.png ninetalesb.png jigglypuffb.png wigglytuffb.png zubatb.png gol
 magick mankeyb.png primeapeb.png growlitheb.png arcanineb.png poliwagb.png poliwhirlb.png poliwrathb.png abrab.png kadabrab.png alakazamb.png machopb.png machokeb.png machampb.png bellsproutb.png weepinbellb.png victreebelb.png tentacoolb.png tentacruelb.png +append ../row4.png
 magick geodudeb.png gravelerb.png golemb.png ponytab.png rapidashb.png slowpokeb.png slowbrob.png magnemiteb.png magnetonb.png farfetchdb.png doduob.png dodriob.png seelb.png dewgongb.png grimerb.png mukb.png shellderb.png cloysterb.png +append ../row5.png
 magick gastlyb.png haunterb.png gengarb.png onixb.png drowzeeb.png hypnob.png krabbyb.png kinglerb.png voltorbb.png electrodeb.png exeggcuteb.png exeggutorb.png cuboneb.png marowakb.png hitmonleeb.png hitmonchanb.png lickitungb.png +append ../row6.png
-magick koffingb.png weezingb.png rhyhornb.png rhydonb.png chanseyb.png tangelab.png kangaskhanb.png horseab.png seadrab.png goldeenb.png seakingb.png staryub.png starmieb.png mr.mimeb.png scytherb.png jynxb.png electabuzzb.png magmarb.png +append ../row7.png
-magick pinsirb.png taurosb.png magikarpb.png gyaradosb.png laprasb.png dittob.png eeveeb.png vaporeonb.png jolteonb.png flareonb.png porygonb.png omanyteb.png omastarb.png kabutob.png kabutopsb.png aerodactylb.png snorlaxb.png +append ../row8.png
-magick articunob.png zapdosb.png moltresb.png dratinib.png dragonairb.png dragoniteb.png mewtwob.png mewb.png +append ../row9.png
+magick koffingb.png weezingb.png rhyhornb.png rhydonb.png chanseyb.png tangelab.png kangaskhanb.png horseab.png seadrab.png goldeenb.png seakingb.png staryub.png starmieb.png mr.mimeb.png scytherb.png jynxb.png electabuzzb.png +append ../row7.png
+magick magmarb.png pinsirb.png taurosb.png magikarpb.png gyaradosb.png laprasb.png dittob.png eeveeb.png vaporeonb.png jolteonb.png flareonb.png porygonb.png omanyteb.png omastarb.png kabutob.png kabutopsb.png aerodactylb.png +append ../row8.png
+magick snorlaxb.png articunob.png zapdosb.png moltresb.png dratinib.png dragonairb.png dragoniteb.png mewtwob.png mewb.png +append ../row9.png
 cd ..
 magick row1.png row2.png row3.png row4.png row5.png row6.png row7.png row8.png row9.png -append gallery/back_sprites.png
 del row1.png row2.png row3.png row4.png row5.png row6.png row7.png row8.png row9.png
@@ -34,9 +34,9 @@ magick vulpixb.png ninetalesb.png jigglypuffb.png wigglytuffb.png zubatb.png gol
 magick mankeyb.png primeapeb.png growlitheb.png arcanineb.png poliwagb.png poliwhirlb.png poliwrathb.png abrab.png kadabrab.png alakazamb.png machopb.png machokeb.png machampb.png bellsproutb.png weepinbellb.png victreebelb.png tentacoolb.png tentacruelb.png +append ../row4.png
 magick geodudeb.png gravelerb.png golemb.png ponytab.png rapidashb.png slowpokeb.png slowbrob.png magnemiteb.png magnetonb.png farfetchdb.png doduob.png dodriob.png seelb.png dewgongb.png grimerb.png mukb.png shellderb.png cloysterb.png +append ../row5.png
 magick gastlyb.png haunterb.png gengarb.png onixb.png drowzeeb.png hypnob.png krabbyb.png kinglerb.png voltorbb.png electrodeb.png exeggcuteb.png exeggutorb.png cuboneb.png marowakb.png hitmonleeb.png hitmonchanb.png lickitungb.png +append ../row6.png
-magick koffingb.png weezingb.png rhyhornb.png rhydonb.png chanseyb.png tangelab.png kangaskhanb.png horseab.png seadrab.png goldeenb.png seakingb.png staryub.png starmieb.png mr.mimeb.png scytherb.png jynxb.png electabuzzb.png magmarb.png +append ../row7.png
-magick pinsirb.png taurosb.png magikarpb.png gyaradosb.png laprasb.png dittob.png eeveeb.png vaporeonb.png jolteonb.png flareonb.png porygonb.png omanyteb.png omastarb.png kabutob.png kabutopsb.png aerodactylb.png snorlaxb.png +append ../row8.png
-magick articunob.png zapdosb.png moltresb.png dratinib.png dragonairb.png dragoniteb.png mewtwob.png mewb.png +append ../row9.png
+magick koffingb.png weezingb.png rhyhornb.png rhydonb.png chanseyb.png tangelab.png kangaskhanb.png horseab.png seadrab.png goldeenb.png seakingb.png staryub.png starmieb.png mr.mimeb.png scytherb.png jynxb.png electabuzzb.png +append ../row7.png
+magick magmarb.png pinsirb.png taurosb.png magikarpb.png gyaradosb.png laprasb.png dittob.png eeveeb.png vaporeonb.png jolteonb.png flareonb.png porygonb.png omanyteb.png omastarb.png kabutob.png kabutopsb.png aerodactylb.png +append ../row8.png
+magick snorlaxb.png articunob.png zapdosb.png moltresb.png dratinib.png dragonairb.png dragoniteb.png mewtwob.png mewb.png +append ../row9.png
 cd ..
 magick row1.png row2.png row3.png row4.png row5.png row6.png row7.png row8.png row9.png -append gallery/spaceworld_back_sprites.png
 del row1.png row2.png row3.png row4.png row5.png row6.png row7.png row8.png row9.png
