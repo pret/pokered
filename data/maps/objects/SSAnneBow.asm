@@ -1,3 +1,10 @@
+	object_const_def
+	const SSANNEBOW_SUPER_NERD
+	const SSANNEBOW_SAILOR1
+	const SSANNEBOW_COOLTRAINER_M
+	const SSANNEBOW_SAILOR2
+	const SSANNEBOW_SAILOR3
+
 SSAnneBow_Object:
 	db $23 ; border block
 
@@ -8,10 +15,10 @@ SSAnneBow_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  5,  2, SPRITE_SUPER_NERD, STAY, UP, 1 ; person
-	object_event  4,  9, SPRITE_SAILOR, STAY, NONE, 2 ; person
-	object_event  7, 11, SPRITE_COOLTRAINER_M, STAY, NONE, 3 ; person
-	object_event  4,  4, SPRITE_SAILOR, STAY, DOWN, 4, OPP_SAILOR, 1
-	object_event 10,  8, SPRITE_SAILOR, STAY, UP, 5, OPP_SAILOR, 2
+	object_event  5,  2, SPRITE_SUPER_NERD, STAY, UP, TEXT_SSANNEBOW_SUPER_NERD
+	object_event  4,  9, SPRITE_SAILOR, STAY, NONE, TEXT_SSANNEBOW_SAILOR1
+	object_event  7, 11, SPRITE_COOLTRAINER_M, STAY, NONE, TEXT_SSANNEBOW_COOLTRAINER_M
+	object_event  4,  4, SPRITE_SAILOR, STAY, DOWN, TEXT_SSANNEBOW_SAILOR2, OPP_SAILOR, 1
+	object_event 10,  8, SPRITE_SAILOR, STAY, UP, TEXT_SSANNEBOW_SAILOR3, OPP_SAILOR, 2
 
 	def_warps_to SS_ANNE_BOW

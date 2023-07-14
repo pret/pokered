@@ -1,4 +1,4 @@
-_SaffronMartText2::
+_SaffronMartSuperNerdText::
 	text "MAX REPEL lasts"
 	line "longer than SUPER"
 	cont "REPEL for keeping"
@@ -6,7 +6,7 @@ _SaffronMartText2::
 	cont "away!"
 	done
 
-_SaffronMartText3::
+_SaffronMartCooltrainerFText::
 	text "REVIVE is costly,"
 	line "but it revives"
 	cont "fainted #MON!"

@@ -1,10 +1,10 @@
-_SafariZoneRestHouse3Text1::
+_SafariZoneEastRestHouseScientistText::
 	text "How many did you"
 	line "catch? I'm bushed"
 	cont "from the work!"
 	done
 
-_SafariZoneRestHouse3Text2::
+_SafariZoneEastRestHouseRockerText::
 	text "I caught a"
 	line "CHANSEY!"
 
@@ -12,7 +12,7 @@ _SafariZoneRestHouse3Text2::
 	line "all worthwhile!"
 	done
 
-_SafariZoneRestHouse3Text3::
+_SafariZoneEastRestHouseSilphWorkerMText::
 	text "Whew! I'm tired"
 	line "from all the fun!"
 	done

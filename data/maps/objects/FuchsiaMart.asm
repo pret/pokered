@@ -1,3 +1,8 @@
+	object_const_def
+	const FUCHSIAMART_CLERK
+	const FUCHSIAMART_MIDDLE_AGED_MAN
+	const FUCHSIAMART_COOLTRAINER_F
+
 FuchsiaMart_Object:
 	db $0 ; border block
 
@@ -8,8 +13,8 @@ FuchsiaMart_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  0,  5, SPRITE_CLERK, STAY, RIGHT, 1 ; person
-	object_event  4,  2, SPRITE_MIDDLE_AGED_MAN, STAY, NONE, 2 ; person
-	object_event  6,  5, SPRITE_COOLTRAINER_F, WALK, UP_DOWN, 3 ; person
+	object_event  0,  5, SPRITE_CLERK, STAY, RIGHT, TEXT_FUCHSIAMART_CLERK
+	object_event  4,  2, SPRITE_MIDDLE_AGED_MAN, STAY, NONE, TEXT_FUCHSIAMART_MIDDLE_AGED_MAN
+	object_event  6,  5, SPRITE_COOLTRAINER_F, WALK, UP_DOWN, TEXT_FUCHSIAMART_COOLTRAINER_F
 
 	def_warps_to FUCHSIA_MART

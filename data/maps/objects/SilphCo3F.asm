@@ -1,3 +1,9 @@
+	object_const_def
+	const SILPHCO3F_SILPH_WORKER_M
+	const SILPHCO3F_ROCKET
+	const SILPHCO3F_SCIENTIST
+	const SILPHCO3F_HYPER_POTION
+
 SilphCo3F_Object:
 	db $2e ; border block
 
@@ -16,9 +22,9 @@ SilphCo3F_Object:
 	def_bg_events
 
 	def_object_events
-	object_event 24,  8, SPRITE_SILPH_WORKER, STAY, NONE, 1 ; person
-	object_event 20,  7, SPRITE_ROCKET, STAY, LEFT, 2, OPP_ROCKET, 25
-	object_event  7,  9, SPRITE_SCIENTIST, STAY, DOWN, 3, OPP_SCIENTIST, 4
-	object_event  8,  5, SPRITE_POKE_BALL, STAY, NONE, 4, HYPER_POTION
+	object_event 24,  8, SPRITE_SILPH_WORKER_M, STAY, NONE, TEXT_SILPHCO3F_SILPH_WORKER_M
+	object_event 20,  7, SPRITE_ROCKET, STAY, LEFT, TEXT_SILPHCO3F_ROCKET, OPP_ROCKET, 25
+	object_event  7,  9, SPRITE_SCIENTIST, STAY, DOWN, TEXT_SILPHCO3F_SCIENTIST, OPP_SCIENTIST, 4
+	object_event  8,  5, SPRITE_POKE_BALL, STAY, NONE, TEXT_SILPHCO3F_HYPER_POTION, HYPER_POTION
 
 	def_warps_to SILPH_CO_3F

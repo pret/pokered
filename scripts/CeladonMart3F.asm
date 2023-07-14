@@ -2,107 +2,103 @@ CeladonMart3F_Script:
 	jp EnableAutoTextBoxDrawing
 
 CeladonMart3F_TextPointers:
-	dw CeladonMart3Text1
-	dw CeladonMart3Text2
-	dw CeladonMart3Text3
-	dw CeladonMart3Text4
-	dw CeladonMart3Text5
-	dw CeladonMart3Text6
-	dw CeladonMart3Text7
-	dw CeladonMart3Text8
-	dw CeladonMart3Text9
-	dw CeladonMart3Text10
-	dw CeladonMart3Text11
-	dw CeladonMart3Text12
-	dw CeladonMart3Text13
-	dw CeladonMart3Text14
-	dw CeladonMart3Text15
-	dw CeladonMart3Text16
-	dw CeladonMart3Text17
+	def_text_pointers
+	dw_const CeladonMart3FClerkText,            TEXT_CELADONMART3F_CLERK
+	dw_const CeladonMart3FGameBoyKid1Text,      TEXT_CELADONMART3F_GAMEBOY_KID1
+	dw_const CeladonMart3FGameBoyKid2Text,      TEXT_CELADONMART3F_GAMEBOY_KID2
+	dw_const CeladonMart3FGameBoyKid3Text,      TEXT_CELADONMART3F_GAMEBOY_KID3
+	dw_const CeladonMart3FLittleBoyText,        TEXT_CELADONMART3F_LITTLE_BOY
+	dw_const CeladonMart3FSNESText,             TEXT_CELADONMART3F_SNES1
+	dw_const CeladonMart3FRPGText,              TEXT_CELADONMART3F_RPG
+	dw_const CeladonMart3FSNESText,             TEXT_CELADONMART3F_SNES2
+	dw_const CeladonMart3FSportsGameText,       TEXT_CELADONMART3F_SPORTS_GAME
+	dw_const CeladonMart3FSNESText,             TEXT_CELADONMART3F_SNES3
+	dw_const CeladonMart3FPuzzleGameText,       TEXT_CELADONMART3F_PUZZLE_GAME
+	dw_const CeladonMart3FSNESText,             TEXT_CELADONMART3F_SNES4
+	dw_const CeladonMart3FFightingGameText,     TEXT_CELADONMART3F_FIGHTING_GAME
+	dw_const CeladonMart3FCurrentFloorSignText, TEXT_CELADONMART3F_CURRENT_FLOOR_SIGN
+	dw_const CeladonMart3FPokemonPosterText,    TEXT_CELADONMART3F_POKEMON_POSTER1
+	dw_const CeladonMart3FPokemonPosterText,    TEXT_CELADONMART3F_POKEMON_POSTER2
+	dw_const CeladonMart3FPokemonPosterText,    TEXT_CELADONMART3F_POKEMON_POSTER3
 
-CeladonMart3Text1:
+CeladonMart3FClerkText:
 	text_asm
 	CheckEvent EVENT_GOT_TM18
 	jr nz, .got_item
-	ld hl, TM18PreReceiveText
+	ld hl, .TM18PreReceiveText
 	call PrintText
 	lb bc, TM_COUNTER, 1
 	call GiveItem
 	jr nc, .bag_full
 	SetEvent EVENT_GOT_TM18
-	ld hl, ReceivedTM18Text
+	ld hl, .ReceivedTM18Text
 	jr .done
 .bag_full
-	ld hl, TM18NoRoomText
+	ld hl, .TM18NoRoomText
 	jr .done
 .got_item
-	ld hl, TM18ExplanationText
+	ld hl, .TM18ExplanationText
 .done
 	call PrintText
 	jp TextScriptEnd
 
-TM18PreReceiveText:
-	text_far _TM18PreReceiveText
+.TM18PreReceiveText:
+	text_far _CeladonMart3FClerkTM18PreReceiveText
 	text_end
 
-ReceivedTM18Text:
-	text_far _ReceivedTM18Text
+.ReceivedTM18Text:
+	text_far _CeladonMart3FClerkReceivedTM18Text
 	sound_get_item_1
 	text_end
 
-TM18ExplanationText:
-	text_far _TM18ExplanationText
+.TM18ExplanationText:
+	text_far _CeladonMart3FClerkTM18ExplanationText
 	text_end
 
-TM18NoRoomText:
-	text_far _TM18NoRoomText
+.TM18NoRoomText:
+	text_far _CeladonMart3FClerkTM18NoRoomText
 	text_end
 
-CeladonMart3Text2:
-	text_far _CeladonMart3Text2
+CeladonMart3FGameBoyKid1Text:
+	text_far _CeladonMart3FGameBoyKid1Text
 	text_end
 
-CeladonMart3Text3:
-	text_far _CeladonMart3Text3
+CeladonMart3FGameBoyKid2Text:
+	text_far _CeladonMart3FGameBoyKid2Text
 	text_end
 
-CeladonMart3Text4:
-	text_far _CeladonMart3Text4
+CeladonMart3FGameBoyKid3Text:
+	text_far _CeladonMart3FGameBoyKid3Text
 	text_end
 
-CeladonMart3Text5:
-	text_far _CeladonMart3Text5
+CeladonMart3FLittleBoyText:
+	text_far _CeladonMart3FLittleBoyText
 	text_end
 
-CeladonMart3Text12:
-CeladonMart3Text10:
-CeladonMart3Text8:
-CeladonMart3Text6:
-	text_far _CeladonMart3Text6
+CeladonMart3FSNESText:
+	text_far _CeladonMart3FSNESText
 	text_end
 
-CeladonMart3Text7:
-	text_far _CeladonMart3Text7
+CeladonMart3FRPGText:
+	text_far _CeladonMart3FRPGText
 	text_end
 
-CeladonMart3Text9:
-	text_far _CeladonMart3Text9
+CeladonMart3FSportsGameText:
+	text_far _CeladonMart3FSportsGameText
 	text_end
 
-CeladonMart3Text11:
-	text_far _CeladonMart3Text11
+CeladonMart3FPuzzleGameText:
+	text_far _CeladonMart3FPuzzleGameText
 	text_end
 
-CeladonMart3Text13:
-	text_far _CeladonMart3Text13
+CeladonMart3FFightingGameText:
+	text_far _CeladonMart3FFightingGameText
 	text_end
 
-CeladonMart3Text14:
-	text_far _CeladonMart3Text14
+CeladonMart3FCurrentFloorSignText:
+	text_far _CeladonMart3FCurrentFloorSignText
 	text_end
 
-CeladonMart3Text17:
-CeladonMart3Text16:
-CeladonMart3Text15:
-	text_far _CeladonMart3Text15
+CeladonMart3FPokemonPosterText:
+	text_far _CeladonMart3FPokemonPosterText
 	text_end

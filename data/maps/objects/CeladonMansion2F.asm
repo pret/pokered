@@ -8,7 +8,7 @@ CeladonMansion2F_Object:
 	warp_event  4,  1, CELADON_MANSION_3F, 4
 
 	def_bg_events
-	bg_event  4,  9, 1 ; CeladonMansion2Text1
+	bg_event  4,  9, TEXT_CELADONMANSION2F_MEETING_ROOM_SIGN
 
 	def_object_events
 

@@ -1,3 +1,6 @@
+	object_const_def
+	const ROUTE7GATE_GUARD
+
 Route7Gate_Object:
 	db $a ; border block
 
@@ -10,6 +13,6 @@ Route7Gate_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  3,  1, SPRITE_GUARD, STAY, DOWN, 1 ; person
+	object_event  3,  1, SPRITE_GUARD, STAY, DOWN, TEXT_ROUTE7GATE_GUARD
 
 	def_warps_to ROUTE_7_GATE

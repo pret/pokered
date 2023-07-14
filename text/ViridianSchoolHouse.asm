@@ -1,10 +1,10 @@
-_SchoolText1::
+_ViridianSchoolHouseBrunetteGirlText::
 	text "Whew! I'm trying"
 	line "to memorize all"
 	cont "my notes."
 	done
 
-_SchoolText2::
+_ViridianSchoolHouseCooltrainerFText::
 	text "Okay!"
 
 	para "Be sure to read"

@@ -50,12 +50,14 @@ Seafoam4HolesCoords:
 	db -1 ; end
 
 SeafoamIslandsB3F_ScriptPointers:
-	dw SeafoamIslands4Script0
-	dw SeafoamIslands4Script1
-	dw SeafoamIslands4Script2
-	dw SeafoamIslands4Script3
+	def_script_pointers
+	dw_const SeafoamIslandsB3FDefaultScript,       SCRIPT_SEAFOAMISLANDSB3F_DEFAULT
+	dw_const SeafoamIslandsB3FObjectMoving1Script, SCRIPT_SEAFOAMISLANDSB3F_OBJECT_MOVING1
+	dw_const SeafoamIslandsB3FMoveObjectScript,    SCRIPT_SEAFOAMISLANDSB3F_MOVE_OBJECT
+	dw_const SeafoamIslandsB3FObjectMoving2Script, SCRIPT_SEAFOAMISLANDSB3F_OBJECT_MOVING2
+	EXPORT SCRIPT_SEAFOAMISLANDSB3F_MOVE_OBJECT ; used by engine/overworld/player_state.asm
 
-SeafoamIslands4Script0:
+SeafoamIslandsB3FDefaultScript:
 	CheckBothEventsSet EVENT_SEAFOAM3_BOULDER1_DOWN_HOLE, EVENT_SEAFOAM3_BOULDER2_DOWN_HOLE
 	ret z
 	ld a, [wYCoord]
@@ -72,7 +74,7 @@ SeafoamIslands4Script0:
 	call StartSimulatingJoypadStates
 	ld hl, wFlags_D733
 	set 2, [hl]
-	ld a, $1
+	ld a, SCRIPT_SEAFOAMISLANDSB3F_OBJECT_MOVING1
 	ld [wSeafoamIslandsB3FCurScript], a
 	ret
 
@@ -82,22 +84,22 @@ RLEMovement46632:
 	db D_DOWN, 3
 	db -1 ; end
 
-SeafoamIslands4Script1:
+SeafoamIslandsB3FObjectMoving1Script:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
-	ld a, $0
+	ld a, SCRIPT_SEAFOAMISLANDSB3F_DEFAULT
 	ld [wSeafoamIslandsB3FCurScript], a
 	ret
 
-SeafoamIslands4Script2:
+SeafoamIslandsB3FMoveObjectScript:
 	CheckBothEventsSet EVENT_SEAFOAM3_BOULDER1_DOWN_HOLE, EVENT_SEAFOAM3_BOULDER2_DOWN_HOLE
 	ret z
 	ld a, [wXCoord]
 	cp 18
 	jr z, .asm_4665e
 	cp 19
-	ld a, $0
+	ld a, SCRIPT_SEAFOAMISLANDSB3F_DEFAULT
 	jr nz, .asm_4667b
 	ld de, RLEData_4667f
 	jr .asm_46661
@@ -114,7 +116,7 @@ SeafoamIslands4Script2:
 	set 7, [hl]
 	ld hl, wFlags_D733
 	set 2, [hl]
-	ld a, $3
+	ld a, SCRIPT_SEAFOAMISLANDSB3F_OBJECT_MOVING2
 .asm_4667b
 	ld [wSeafoamIslandsB3FCurScript], a
 	ret
@@ -132,18 +134,19 @@ RLEData_46688:
 	db D_DOWN, 4
 	db -1 ; end
 
-SeafoamIslands4Script3:
+SeafoamIslandsB3FObjectMoving2Script:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
-	ld a, $0
+	ld a, SCRIPT_SEAFOAMISLANDSB3F_DEFAULT
 	ld [wSeafoamIslandsB3FCurScript], a
 	ret
 
 SeafoamIslandsB3F_TextPointers:
-	dw BoulderText
-	dw BoulderText
-	dw BoulderText
-	dw BoulderText
-	dw BoulderText
-	dw BoulderText
+	def_text_pointers
+	dw_const BoulderText, TEXT_SEAFOAMISLANDSB3F_BOULDER1
+	dw_const BoulderText, TEXT_SEAFOAMISLANDSB3F_BOULDER2
+	dw_const BoulderText, TEXT_SEAFOAMISLANDSB3F_BOULDER3
+	dw_const BoulderText, TEXT_SEAFOAMISLANDSB3F_BOULDER4
+	dw_const BoulderText, TEXT_SEAFOAMISLANDSB3F_BOULDER5
+	dw_const BoulderText, TEXT_SEAFOAMISLANDSB3F_BOULDER6

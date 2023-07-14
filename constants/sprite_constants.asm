@@ -28,7 +28,7 @@
 	const SPRITE_ROCKET                  ; $18
 	const SPRITE_CHANNELER               ; $19
 	const SPRITE_WAITER                  ; $1a
-	const SPRITE_ERIKA                   ; $1b
+	const SPRITE_SILPH_WORKER_F          ; $1b
 	const SPRITE_MIDDLE_AGED_WOMAN       ; $1c
 	const SPRITE_BRUNETTE_GIRL           ; $1d
 	const SPRITE_LANCE                   ; $1e
@@ -45,7 +45,7 @@
 	const SPRITE_NURSE                   ; $29
 	const SPRITE_LINK_RECEPTIONIST       ; $2a
 	const SPRITE_SILPH_PRESIDENT         ; $2b
-	const SPRITE_SILPH_WORKER            ; $2c
+	const SPRITE_SILPH_WORKER_M          ; $2c
 	const SPRITE_WARDEN                  ; $2d
 	const SPRITE_CAPTAIN                 ; $2e
 	const SPRITE_FISHER                  ; $2f

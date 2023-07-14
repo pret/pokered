@@ -7,7 +7,7 @@ Route12_Script:
 	ld [wRoute12CurScript], a
 	ret
 
-Route12Script_59606:
+Route12ResetScripts:
 	xor a
 	ld [wJoyIgnore], a
 	ld [wRoute12CurScript], a
@@ -15,18 +15,19 @@ Route12Script_59606:
 	ret
 
 Route12_ScriptPointers:
-	dw Route12Script0
-	dw DisplayEnemyTrainerTextAndStartBattle
-	dw EndTrainerBattle
-	dw Route12Script3
+	def_script_pointers
+	dw_const Route12DefaultScript,                  SCRIPT_ROUTE12_DEFAULT
+	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_ROUTE12_START_BATTLE
+	dw_const EndTrainerBattle,                      SCRIPT_ROUTE12_END_BATTLE
+	dw_const Route12SnorlaxPostBattleScript,        SCRIPT_ROUTE12_SNORLAX_POST_BATTLE
 
-Route12Script0:
+Route12DefaultScript:
 	CheckEventHL EVENT_BEAT_ROUTE12_SNORLAX
 	jp nz, CheckFightingMapTrainers
 	CheckEventReuseHL EVENT_FIGHT_ROUTE12_SNORLAX
 	ResetEventReuseHL EVENT_FIGHT_ROUTE12_SNORLAX
 	jp z, CheckFightingMapTrainers
-	ld a, $d
+	ld a, TEXT_ROUTE12_SNORLAX_WOKE_UP
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, SNORLAX
@@ -36,206 +37,207 @@ Route12Script0:
 	ld a, HS_ROUTE_12_SNORLAX
 	ld [wMissableObjectIndex], a
 	predef HideObject
-	ld a, $3
+	ld a, SCRIPT_ROUTE12_SNORLAX_POST_BATTLE
 	ld [wRoute12CurScript], a
 	ld [wCurMapScript], a
 	ret
 
-Route12Script3:
+Route12SnorlaxPostBattleScript:
 	ld a, [wIsInBattle]
 	cp $ff
-	jr z, Route12Script_59606
+	jr z, Route12ResetScripts
 	call UpdateSprites
 	ld a, [wBattleResult]
 	cp $2
-	jr z, .asm_59664
-	ld a, $e
+	jr z, .caught_snorlax
+	ld a, TEXT_ROUTE12_SNORLAX_CALMED_DOWN
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
-.asm_59664
+.caught_snorlax
 	SetEvent EVENT_BEAT_ROUTE12_SNORLAX
 	call Delay3
-	ld a, $0
+	ld a, SCRIPT_ROUTE12_DEFAULT
 	ld [wRoute12CurScript], a
 	ld [wCurMapScript], a
 	ret
 
 Route12_TextPointers:
-	dw Route12Text1
-	dw Route12Text2
-	dw Route12Text3
-	dw Route12Text4
-	dw Route12Text5
-	dw Route12Text6
-	dw Route12Text7
-	dw Route12Text8
-	dw PickUpItemText
-	dw PickUpItemText
-	dw Route12Text11
-	dw Route12Text12
-	dw Route12Text13
-	dw Route12Text14
+	def_text_pointers
+	dw_const Route12SnorlaxText,           TEXT_ROUTE12_SNORLAX
+	dw_const Route12Fisher1Text,           TEXT_ROUTE12_FISHER1
+	dw_const Route12Fisher2Text,           TEXT_ROUTE12_FISHER2
+	dw_const Route12CooltrainerMText,      TEXT_ROUTE12_COOLTRAINER_M
+	dw_const Route12SuperNerdText,         TEXT_ROUTE12_SUPER_NERD
+	dw_const Route12Fisher3Text,           TEXT_ROUTE12_FISHER3
+	dw_const Route12Fisher4Text,           TEXT_ROUTE12_FISHER4
+	dw_const Route12Fisher5Text,           TEXT_ROUTE12_FISHER5
+	dw_const PickUpItemText,               TEXT_ROUTE12_TM_PAY_DAY
+	dw_const PickUpItemText,               TEXT_ROUTE12_IRON
+	dw_const Route12SignText,              TEXT_ROUTE12_SIGN
+	dw_const Route12SportFishingSignText,  TEXT_ROUTE12_SPORT_FISHING_SIGN
+	dw_const Route12SnorlaxWokeUpText,     TEXT_ROUTE12_SNORLAX_WOKE_UP
+	dw_const Route12SnorlaxCalmedDownText, TEXT_ROUTE12_SNORLAX_CALMED_DOWN
 
 Route12TrainerHeaders:
 	def_trainers 2
 Route12TrainerHeader0:
-	trainer EVENT_BEAT_ROUTE_12_TRAINER_0, 4, Route12BattleText1, Route12EndBattleText1, Route12AfterBattleText1
+	trainer EVENT_BEAT_ROUTE_12_TRAINER_0, 4, Route12Fisher1BattleText, Route12Fisher1EndBattleText, Route12Fisher1AfterBattleText
 Route12TrainerHeader1:
-	trainer EVENT_BEAT_ROUTE_12_TRAINER_1, 4, Route12BattleText2, Route12EndBattleText2, Route12AfterBattleText2
+	trainer EVENT_BEAT_ROUTE_12_TRAINER_1, 4, Route12Fisher2BattleText, Route12Fisher2EndBattleText, Route12Fisher2AfterBattleText
 Route12TrainerHeader2:
-	trainer EVENT_BEAT_ROUTE_12_TRAINER_2, 4, Route12BattleText3, Route12EndBattleText3, Route12AfterBattleText3
+	trainer EVENT_BEAT_ROUTE_12_TRAINER_2, 4, Route12CooltrainerMBattleText, Route12CooltrainerMEndBattleText, Route12CooltrainerMAfterBattleText
 Route12TrainerHeader3:
-	trainer EVENT_BEAT_ROUTE_12_TRAINER_3, 4, Route12BattleText4, Route12EndBattleText4, Route12AfterBattleText4
+	trainer EVENT_BEAT_ROUTE_12_TRAINER_3, 4, Route12SuperNerdBattleText, Route12SuperNerdEndBattleText, Route12SuperNerdAfterBattleText
 Route12TrainerHeader4:
-	trainer EVENT_BEAT_ROUTE_12_TRAINER_4, 4, Route12BattleText5, Route12EndBattleText5, Route12AfterBattleText5
+	trainer EVENT_BEAT_ROUTE_12_TRAINER_4, 4, Route12Fisher3BattleText, Route12Fisher3EndBattleText, Route12Fisher3AfterBattleText
 Route12TrainerHeader5:
-	trainer EVENT_BEAT_ROUTE_12_TRAINER_5, 4, Route12BattleText6, Route12EndBattleText6, Route12AfterBattleText6
+	trainer EVENT_BEAT_ROUTE_12_TRAINER_5, 4, Route12Fisher4BattleText, Route12Fisher4EndBattleText, Route12Fisher4AfterBattleText
 Route12TrainerHeader6:
-	trainer EVENT_BEAT_ROUTE_12_TRAINER_6, 1, Route12BattleText7, Route12EndBattleText7, Route12AfterBattleText7
+	trainer EVENT_BEAT_ROUTE_12_TRAINER_6, 1, Route12Fisher5BattleText, Route12Fisher5EndBattleText, Route12Fisher5AfterBattleText
 	db -1 ; end
 
-Route12Text1:
-	text_far _Route12Text1
+Route12SnorlaxText:
+	text_far _Route12SnorlaxText
 	text_end
 
-Route12Text13:
-	text_far _Route12Text13
+Route12SnorlaxWokeUpText:
+	text_far _Route12SnorlaxWokeUpText
 	text_end
 
-Route12Text14:
-	text_far _Route12Text14
+Route12SnorlaxCalmedDownText:
+	text_far _Route12SnorlaxCalmedDownText
 	text_end
 
-Route12Text2:
+Route12Fisher1Text:
 	text_asm
 	ld hl, Route12TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route12BattleText1:
-	text_far _Route12BattleText1
+Route12Fisher1BattleText:
+	text_far _Route12Fisher1BattleText
 	text_end
 
-Route12EndBattleText1:
-	text_far _Route12EndBattleText1
+Route12Fisher1EndBattleText:
+	text_far _Route12Fisher1EndBattleText
 	text_end
 
-Route12AfterBattleText1:
-	text_far _Route12AfterBattleText1
+Route12Fisher1AfterBattleText:
+	text_far _Route12Fisher1AfterBattleText
 	text_end
 
-Route12Text3:
+Route12Fisher2Text:
 	text_asm
 	ld hl, Route12TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route12BattleText2:
-	text_far _Route12BattleText2
+Route12Fisher2BattleText:
+	text_far _Route12Fisher2BattleText
 	text_end
 
-Route12EndBattleText2:
-	text_far _Route12EndBattleText2
+Route12Fisher2EndBattleText:
+	text_far _Route12Fisher2EndBattleText
 	text_end
 
-Route12AfterBattleText2:
-	text_far _Route12AfterBattleText2
+Route12Fisher2AfterBattleText:
+	text_far _Route12Fisher2AfterBattleText
 	text_end
 
-Route12Text4:
+Route12CooltrainerMText:
 	text_asm
 	ld hl, Route12TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route12BattleText3:
-	text_far _Route12BattleText3
+Route12CooltrainerMBattleText:
+	text_far _Route12CooltrainerMBattleText
 	text_end
 
-Route12EndBattleText3:
-	text_far _Route12EndBattleText3
+Route12CooltrainerMEndBattleText:
+	text_far _Route12CooltrainerMEndBattleText
 	text_end
 
-Route12AfterBattleText3:
-	text_far _Route12AfterBattleText3
+Route12CooltrainerMAfterBattleText:
+	text_far _Route12CooltrainerMAfterBattleText
 	text_end
 
-Route12Text5:
+Route12SuperNerdText:
 	text_asm
 	ld hl, Route12TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route12BattleText4:
-	text_far _Route12BattleText4
+Route12SuperNerdBattleText:
+	text_far _Route12SuperNerdBattleText
 	text_end
 
-Route12EndBattleText4:
-	text_far _Route12EndBattleText4
+Route12SuperNerdEndBattleText:
+	text_far _Route12SuperNerdEndBattleText
 	text_end
 
-Route12AfterBattleText4:
-	text_far _Route12AfterBattleText4
+Route12SuperNerdAfterBattleText:
+	text_far _Route12SuperNerdAfterBattleText
 	text_end
 
-Route12Text6:
+Route12Fisher3Text:
 	text_asm
 	ld hl, Route12TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route12BattleText5:
-	text_far _Route12BattleText5
+Route12Fisher3BattleText:
+	text_far _Route12Fisher3BattleText
 	text_end
 
-Route12EndBattleText5:
-	text_far _Route12EndBattleText5
+Route12Fisher3EndBattleText:
+	text_far _Route12Fisher3EndBattleText
 	text_end
 
-Route12AfterBattleText5:
-	text_far _Route12AfterBattleText5
+Route12Fisher3AfterBattleText:
+	text_far _Route12Fisher3AfterBattleText
 	text_end
 
-Route12Text7:
+Route12Fisher4Text:
 	text_asm
 	ld hl, Route12TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route12BattleText6:
-	text_far _Route12BattleText6
+Route12Fisher4BattleText:
+	text_far _Route12Fisher4BattleText
 	text_end
 
-Route12EndBattleText6:
-	text_far _Route12EndBattleText6
+Route12Fisher4EndBattleText:
+	text_far _Route12Fisher4EndBattleText
 	text_end
 
-Route12AfterBattleText6:
-	text_far _Route12AfterBattleText6
+Route12Fisher4AfterBattleText:
+	text_far _Route12Fisher4AfterBattleText
 	text_end
 
-Route12Text8:
+Route12Fisher5Text:
 	text_asm
 	ld hl, Route12TrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route12BattleText7:
-	text_far _Route12BattleText7
+Route12Fisher5BattleText:
+	text_far _Route12Fisher5BattleText
 	text_end
 
-Route12EndBattleText7:
-	text_far _Route12EndBattleText7
+Route12Fisher5EndBattleText:
+	text_far _Route12Fisher5EndBattleText
 	text_end
 
-Route12AfterBattleText7:
-	text_far _Route12AfterBattleText7
+Route12Fisher5AfterBattleText:
+	text_far _Route12Fisher5AfterBattleText
 	text_end
 
-Route12Text11:
-	text_far _Route12Text11
+Route12SignText:
+	text_far _Route12SignText
 	text_end
 
-Route12Text12:
-	text_far _Route12Text12
+Route12SportFishingSignText:
+	text_far _Route12SportFishingSignText
 	text_end

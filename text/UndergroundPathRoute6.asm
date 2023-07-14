@@ -1,4 +1,4 @@
-_UndergrdTunnelEntRoute6Text1::
+_UndergroundPathRoute6GirlText::
 	text "People often lose"
 	line "things in that"
 	cont "UNDERGROUND PATH."

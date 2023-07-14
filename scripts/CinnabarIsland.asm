@@ -9,10 +9,11 @@ CinnabarIsland_Script:
 	jp CallFunctionInTable
 
 CinnabarIsland_ScriptPointers:
-	dw CinnabarIslandScript0
-	dw CinnabarIslandScript1
+	def_script_pointers
+	dw_const CinnabarIslandDefaultScript,      SCRIPT_CINNABARISLAND_DEFAULT
+	dw_const CinnabarIslandPlayerMovingScript, SCRIPT_CINNABARISLAND_PLAYER_MOVING
 
-CinnabarIslandScript0:
+CinnabarIslandDefaultScript:
 	ld b, SECRET_KEY
 	call IsItemInBag
 	ret nz
@@ -24,7 +25,7 @@ CinnabarIslandScript0:
 	ret nz
 	ld a, PLAYER_DIR_UP
 	ld [wPlayerMovingDirection], a
-	ld a, $8
+	ld a, TEXT_CINNABARISLAND_DOOR_IS_LOCKED
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
@@ -37,49 +38,50 @@ CinnabarIslandScript0:
 	xor a
 	ld [wSpritePlayerStateData1FacingDirection], a
 	ld [wJoyIgnore], a
-	ld a, $1
+	ld a, SCRIPT_CINNABARISLAND_PLAYER_MOVING
 	ld [wCinnabarIslandCurScript], a
 	ret
 
-CinnabarIslandScript1:
+CinnabarIslandPlayerMovingScript:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 	call Delay3
-	ld a, $0
+	ld a, SCRIPT_CINNABARISLAND_DEFAULT
 	ld [wCinnabarIslandCurScript], a
 	ret
 
 CinnabarIsland_TextPointers:
-	dw CinnabarIslandText1
-	dw CinnabarIslandText2
-	dw CinnabarIslandText3
-	dw MartSignText
-	dw PokeCenterSignText
-	dw CinnabarIslandText6
-	dw CinnabarIslandText7
-	dw CinnabarIslandText8
+	def_text_pointers
+	dw_const CinnabarIslandGirlText,           TEXT_CINNABARISLAND_GIRL
+	dw_const CinnabarIslandGamblerText,        TEXT_CINNABARISLAND_GAMBLER
+	dw_const CinnabarIslandSignText,           TEXT_CINNABARISLAND_SIGN
+	dw_const MartSignText,                     TEXT_CINNABARISLAND_MART_SIGN
+	dw_const PokeCenterSignText,               TEXT_CINNABARISLAND_POKECENTER_SIGN
+	dw_const CinnabarIslandPokemonLabSignText, TEXT_CINNABARISLAND_POKEMONLAB_SIGN
+	dw_const CinnabarIslandGymSignText,        TEXT_CINNABARISLAND_GYM_SIGN
+	dw_const CinnabarIslandDoorIsLockedText,   TEXT_CINNABARISLAND_DOOR_IS_LOCKED
 
-CinnabarIslandText8:
-	text_far _CinnabarIslandText8
+CinnabarIslandDoorIsLockedText:
+	text_far _CinnabarIslandDoorIsLockedText
 	text_end
 
-CinnabarIslandText1:
-	text_far _CinnabarIslandText1
+CinnabarIslandGirlText:
+	text_far _CinnabarIslandGirlText
 	text_end
 
-CinnabarIslandText2:
-	text_far _CinnabarIslandText2
+CinnabarIslandGamblerText:
+	text_far _CinnabarIslandGamblerText
 	text_end
 
-CinnabarIslandText3:
-	text_far _CinnabarIslandText3
+CinnabarIslandSignText:
+	text_far _CinnabarIslandSignText
 	text_end
 
-CinnabarIslandText6:
-	text_far _CinnabarIslandText6
+CinnabarIslandPokemonLabSignText:
+	text_far _CinnabarIslandPokemonLabSignText
 	text_end
 
-CinnabarIslandText7:
-	text_far _CinnabarIslandText7
+CinnabarIslandGymSignText:
+	text_far _CinnabarIslandGymSignText
 	text_end

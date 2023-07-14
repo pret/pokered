@@ -1,4 +1,4 @@
-_CeladonHotelText1::
+_CeladonHotelGrannyText::
 	text "#MON? No, this"
 	line "is a hotel for"
 	cont "people."
@@ -6,7 +6,7 @@ _CeladonHotelText1::
 	para "We're full up."
 	done
 
-_CeladonHotelText2::
+_CeladonHotelBeautyText::
 	text "I'm on vacation"
 	line "with my brother"
 	cont "and boy friend."
@@ -15,7 +15,7 @@ _CeladonHotelText2::
 	line "pretty city!"
 	done
 
-_CeladonHotelText3::
+_CeladonHotelSuperNerdText::
 	text "Why did she bring"
 	line "her brother?"
 	done

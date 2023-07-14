@@ -5,7 +5,7 @@ HandleMidJump::
 
 EnterMap::
 ; Load a new map.
-	ld a, $ff
+	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	call LoadMapData
 	farcall ClearVariablesOnEnterMap

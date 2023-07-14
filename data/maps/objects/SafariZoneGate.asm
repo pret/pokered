@@ -1,3 +1,7 @@
+	object_const_def
+	const SAFARIZONEGATE_SAFARI_ZONE_WORKER1
+	const SAFARIZONEGATE_SAFARI_ZONE_WORKER2
+
 SafariZoneGate_Object:
 	db $a ; border block
 
@@ -10,7 +14,7 @@ SafariZoneGate_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  6,  2, SPRITE_SAFARI_ZONE_WORKER, STAY, LEFT, 1 ; person
-	object_event  1,  4, SPRITE_SAFARI_ZONE_WORKER, STAY, RIGHT, 2 ; person
+	object_event  6,  2, SPRITE_SAFARI_ZONE_WORKER, STAY, LEFT, TEXT_SAFARIZONEGATE_SAFARI_ZONE_WORKER1
+	object_event  1,  4, SPRITE_SAFARI_ZONE_WORKER, STAY, RIGHT, TEXT_SAFARIZONEGATE_SAFARI_ZONE_WORKER2
 
 	def_warps_to SAFARI_ZONE_GATE

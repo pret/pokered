@@ -1,4 +1,4 @@
-_Route22GateText_1e704::
+_Route22GateGuardNoBoulderbadgeText::
 	text "Only truly skilled"
 	line "trainers are"
 	cont "allowed through."
@@ -7,7 +7,7 @@ _Route22GateText_1e704::
 	line "BOULDERBADGE yet!@"
 	text_end
 
-_Route22GateText_1e715::
+_Route22GateGuardICantLetYouPassText::
 	text_start
 
 	para "The rules are"
@@ -15,7 +15,7 @@ _Route22GateText_1e715::
 	cont "let you pass."
 	done
 
-_Route22GateText_1e71a::
+_Route22GateGuardGoRightAheadText::
 	text "Oh! That is the"
 	line "BOULDERBADGE!"
 	cont "Go right ahead!@"

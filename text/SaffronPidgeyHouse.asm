@@ -1,4 +1,4 @@
-_SaffronHouse1Text1::
+_SaffronPidgeyHouseBrunetteGirlText::
 	text "Thank you for"
 	line "writing. I hope"
 	cont "to see you soon!"
@@ -7,17 +7,17 @@ _SaffronHouse1Text1::
 	line "at my letter!"
 	done
 
-_SaffronHouse1Text2::
+_SaffronPidgeyHousePidgeyText::
 	text "PIDGEY: Kurukkoo!@"
 	text_end
 
-_SaffronHouse1Text3::
+_SaffronPidgeyHouseYoungsterText::
 	text "The COPYCAT is"
 	line "cute! I'm getting"
 	cont "her a # DOLL!"
 	done
 
-_SaffronHouse1Text4::
+_SaffronPidgeyHousePaperText::
 	text "I was given a PP"
 	line "UP as a gift."
 

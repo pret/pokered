@@ -2,13 +2,14 @@ PewterSpeechHouse_Script:
 	jp EnableAutoTextBoxDrawing
 
 PewterSpeechHouse_TextPointers:
-	dw PewterHouse2Text1
-	dw PewterHouse2Text2
+	def_text_pointers
+	dw_const PewterSpeechHouseGamblerText,   TEXT_PEWTERSPEECHHOUSE_GAMBLER
+	dw_const PewterSpeechHouseYoungsterText, TEXT_PEWTERSPEECHHOUSE_YOUNGSTER
 
-PewterHouse2Text1:
-	text_far _PewterHouse2Text1
+PewterSpeechHouseGamblerText:
+	text_far _PewterSpeechHouseGamblerText
 	text_end
 
-PewterHouse2Text2:
-	text_far _PewterHouse2Text2
+PewterSpeechHouseYoungsterText:
+	text_far _PewterSpeechHouseYoungsterText
 	text_end

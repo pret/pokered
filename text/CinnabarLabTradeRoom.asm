@@ -1,4 +1,4 @@
-_Lab2Text1::
+_CinnabarLabTradeRoomSuperNerdText::
 	text "I found this very"
 	line "strange fossil in"
 	cont "MT.MOON!"

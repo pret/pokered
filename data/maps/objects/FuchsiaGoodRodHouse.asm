@@ -1,3 +1,6 @@
+	object_const_def
+	const FUCHSIAGOODRODHOUSE_FISHING_GURU
+
 FuchsiaGoodRodHouse_Object:
 	db $c ; border block
 
@@ -9,6 +12,6 @@ FuchsiaGoodRodHouse_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  5,  3, SPRITE_FISHING_GURU, STAY, RIGHT, 1 ; person
+	object_event  5,  3, SPRITE_FISHING_GURU, STAY, RIGHT, TEXT_FUCHSIAGOODRODHOUSE_FISHING_GURU
 
 	def_warps_to FUCHSIA_GOOD_ROD_HOUSE

@@ -1,21 +1,21 @@
-_Mansion2BattleText1::
+_PokemonMansion2FSuperNerdBattleText::
 	text "I can't get out!"
 	line "This old place is"
 	cont "one big puzzle!"
 	done
 
-_Mansion2EndBattleText1::
+_PokemonMansion2FSuperNerdEndBattleText::
 	text "Oh no!"
 	line "My bag of loot!"
 	prompt
 
-_Mansion2AfterBattleText1::
+_PokemonMansion2FSuperNerdAfterBattleText::
 	text "Switches open and"
 	line "close alternating"
 	cont "sets of doors!"
 	done
 
-_Mansion2Text3::
+_PokemonMansion2FDiary1Text::
 	text "Diary: July 5"
 	line "Guyana,"
 	cont "South America"
@@ -25,23 +25,23 @@ _Mansion2Text3::
 	cont "in the jungle."
 	done
 
-_Mansion2Text4::
+_PokemonMansion2FDiary2Text::
 	text "Diary: July 10"
 	line "We christened the"
 	cont "newly discovered"
 	cont "#MON, MEW."
 	done
 
-_Mansion2Text_520c2::
+_PokemonMansion2FSwitchText::
 	text "A secret switch!"
 
 	para "Press it?"
 	done
 
-_Mansion2Text_520c7::
+_PokemonMansion2FSwitchPressedText::
 	text "Who wouldn't?"
 	prompt
 
-_Mansion2Text_520cc::
+_PokemonMansion2FSwitchNotPressedText::
 	text "Not quite yet!"
 	done

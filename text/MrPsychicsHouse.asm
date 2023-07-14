@@ -1,18 +1,18 @@
-_TM29PreReceiveText::
+_MrPsychicsHouseMrPsychicYouWantedThisText::
 	text "...Wait! Don't"
 	line "say a word!"
 
 	para "You wanted this!"
 	prompt
 
-_ReceivedTM29Text::
+_MrPsychicsHouseMrPsychicReceivedTM29Text::
 	text "<PLAYER> received"
 	line "@"
 	text_ram wStringBuffer
 	text "!@"
 	text_end
 
-_TM29ExplanationText::
+_MrPsychicsHouseMrPsychicTM29ExplanationText::
 	text "TM29 is PSYCHIC!"
 
 	para "It can lower the"
@@ -20,7 +20,7 @@ _TM29ExplanationText::
 	cont "abilities."
 	done
 
-_TM29NoRoomText::
+_MrPsychicsHouseMrPsychicTM29NoRoomText::
 	text "Where do you plan"
 	line "to put this?"
 	done

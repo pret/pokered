@@ -1,5 +1,5 @@
 SilphCo9F_Script:
-	call SilphCo9Script_5d7d1
+	call SilphCo9FGateCallbackScript
 	call EnableAutoTextBoxDrawing
 	ld hl, SilphCo9TrainerHeaders
 	ld de, SilphCo9F_ScriptPointers
@@ -8,41 +8,41 @@ SilphCo9F_Script:
 	ld [wSilphCo9FCurScript], a
 	ret
 
-SilphCo9Script_5d7d1:
+SilphCo9FGateCallbackScript:
 	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld hl, SilphCo9GateCoords
-	call SilphCo9Script_5d837
-	call SilphCo9Script_5d863
+	ld hl, .GateCoordinates
+	call SilphCo9F_SetCardKeyDoorYScript
+	call SilphCo9F_SetUnlockedSilphCoDoorsScript
 	CheckEvent EVENT_SILPH_CO_9_UNLOCKED_DOOR1
-	jr nz, .asm_5d7f8
+	jr nz, .unlock_door1
 	push af
 	ld a, $5f
 	ld [wNewTileBlockID], a
 	lb bc, 4, 1
 	predef ReplaceTileBlock
 	pop af
-.asm_5d7f8
+.unlock_door1
 	CheckEventAfterBranchReuseA EVENT_SILPH_CO_9_UNLOCKED_DOOR2, EVENT_SILPH_CO_9_UNLOCKED_DOOR1
-	jr nz, .asm_5d80b
+	jr nz, .unlock_door2
 	push af
 	ld a, $54
 	ld [wNewTileBlockID], a
 	lb bc, 2, 9
 	predef ReplaceTileBlock
 	pop af
-.asm_5d80b
+.unlock_door2
 	CheckEventAfterBranchReuseA EVENT_SILPH_CO_9_UNLOCKED_DOOR3, EVENT_SILPH_CO_9_UNLOCKED_DOOR2
-	jr nz, .asm_5d81e
+	jr nz, .unlock_door3
 	push af
 	ld a, $54
 	ld [wNewTileBlockID], a
 	lb bc, 5, 9
 	predef ReplaceTileBlock
 	pop af
-.asm_5d81e
+.unlock_door3
 	CheckEventAfterBranchReuseA EVENT_SILPH_CO_9_UNLOCKED_DOOR4, EVENT_SILPH_CO_9_UNLOCKED_DOOR3
 	ret nz
 	ld a, $5f
@@ -50,14 +50,14 @@ SilphCo9Script_5d7d1:
 	lb bc, 6, 5
 	predef_jump ReplaceTileBlock
 
-SilphCo9GateCoords:
+.GateCoordinates:
 	dbmapcoord  1,  4
 	dbmapcoord  9,  2
 	dbmapcoord  9,  5
 	dbmapcoord  5,  6
 	db -1 ; end
 
-SilphCo9Script_5d837:
+SilphCo9F_SetCardKeyDoorYScript:
 	push hl
 	ld hl, wCardKeyDoorY
 	ld a, [hli]
@@ -67,159 +67,161 @@ SilphCo9Script_5d837:
 	xor a
 	ldh [hUnlockedSilphCoDoors], a
 	pop hl
-.asm_5d843
+.loop_card_key_doors
 	ld a, [hli]
 	cp $ff
-	jr z, .asm_5d85f
+	jr z, .exit_loop
 	push hl
 	ld hl, hUnlockedSilphCoDoors
 	inc [hl]
 	pop hl
 	cp b
-	jr z, .asm_5d854
+	jr z, .check_door
 	inc hl
-	jr .asm_5d843
-.asm_5d854
+	jr .loop_card_key_doors
+.check_door
 	ld a, [hli]
 	cp c
-	jr nz, .asm_5d843
+	jr nz, .loop_card_key_doors
 	ld hl, wCardKeyDoorY
 	xor a
 	ld [hli], a
 	ld [hl], a
 	ret
-.asm_5d85f
+.exit_loop
 	xor a
 	ldh [hUnlockedSilphCoDoors], a
 	ret
 
-SilphCo9Script_5d863:
+SilphCo9F_SetUnlockedSilphCoDoorsScript:
 	EventFlagAddress hl, EVENT_SILPH_CO_9_UNLOCKED_DOOR1
 	ldh a, [hUnlockedSilphCoDoors]
 	and a
 	ret z
 	cp $1
-	jr nz, .next1
+	jr nz, .unlock_door1
 	SetEventReuseHL EVENT_SILPH_CO_9_UNLOCKED_DOOR1
 	ret
-.next1
+.unlock_door1
 	cp $2
-	jr nz, .next2
+	jr nz, .unlock_door2
 	SetEventAfterBranchReuseHL EVENT_SILPH_CO_9_UNLOCKED_DOOR2, EVENT_SILPH_CO_9_UNLOCKED_DOOR1
 	ret
-.next2
+.unlock_door2
 	cp $3
-	jr nz, .next3
+	jr nz, .unlock_door3
 	SetEventAfterBranchReuseHL EVENT_SILPH_CO_9_UNLOCKED_DOOR3, EVENT_SILPH_CO_9_UNLOCKED_DOOR1
 	ret
-.next3
+.unlock_door3
 	cp $4
 	ret nz
 	SetEventAfterBranchReuseHL EVENT_SILPH_CO_9_UNLOCKED_DOOR4, EVENT_SILPH_CO_9_UNLOCKED_DOOR1
 	ret
 
 SilphCo9F_ScriptPointers:
-	dw CheckFightingMapTrainers
-	dw DisplayEnemyTrainerTextAndStartBattle
-	dw EndTrainerBattle
+	def_script_pointers
+	dw_const CheckFightingMapTrainers,              SCRIPT_SILPHCO9F_DEFAULT
+	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_SILPHCO9F_START_BATTLE
+	dw_const EndTrainerBattle,                      SCRIPT_SILPHCO9F_END_BATTLE
 
 SilphCo9F_TextPointers:
-	dw SilphCo9Text1
-	dw SilphCo9Text2
-	dw SilphCo9Text3
-	dw SilphCo9Text4
+	def_text_pointers
+	dw_const SilphCo9FNurseText,     TEXT_SILPHCO9F_NURSE
+	dw_const SilphCo9FRocket1Text,   TEXT_SILPHCO9F_ROCKET1
+	dw_const SilphCo9FScientistText, TEXT_SILPHCO9F_SCIENTIST
+	dw_const SilphCo9FRocket2Text,   TEXT_SILPHCO9F_ROCKET2
 
 SilphCo9TrainerHeaders:
 	def_trainers 2
 SilphCo9TrainerHeader0:
-	trainer EVENT_BEAT_SILPH_CO_9F_TRAINER_0, 4, SilphCo9BattleText1, SilphCo9EndBattleText1, SilphCo9AfterBattleText1
+	trainer EVENT_BEAT_SILPH_CO_9F_TRAINER_0, 4, SilphCo9FRocket1BattleText, SilphCo9FRocket1EndBattleText, SilphCo9FRocket1AfterBattleText
 SilphCo9TrainerHeader1:
-	trainer EVENT_BEAT_SILPH_CO_9F_TRAINER_1, 2, SilphCo9BattleText2, SilphCo9EndBattleText2, SilphCo9AfterBattleText2
+	trainer EVENT_BEAT_SILPH_CO_9F_TRAINER_1, 2, SilphCo9FScientistBattleText, SilphCo9FScientistEndBattleText, SilphCo9FScientistAfterBattleText
 SilphCo9TrainerHeader2:
-	trainer EVENT_BEAT_SILPH_CO_9F_TRAINER_2, 4, SilphCo9BattleText3, SilphCo9EndBattleText3, SilphCo9AfterBattleText3
+	trainer EVENT_BEAT_SILPH_CO_9F_TRAINER_2, 4, SilphCo9FRocket2BattleText, SilphCo9FRocket2EndBattleText, SilphCo9FRocket2AfterBattleText
 	db -1 ; end
 
-SilphCo9Text1:
+SilphCo9FNurseText:
 	text_asm
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
-	jr nz, .asm_5d8dc
-	ld hl, SilphCo9Text_5d8e5
+	jr nz, .beat_giovanni
+	ld hl, .YouLookTiredText
 	call PrintText
 	predef HealParty
 	call GBFadeOutToWhite
 	call Delay3
 	call GBFadeInFromWhite
-	ld hl, SilphCo9Text_5d8ea
+	ld hl, .DontGiveUpText
 	call PrintText
-	jr .asm_5d8e2
-.asm_5d8dc
-	ld hl, SilphCo9Text_5d8ef
+	jr .text_script_end
+.beat_giovanni
+	ld hl, .ThankYouText
 	call PrintText
-.asm_5d8e2
+.text_script_end
 	jp TextScriptEnd
 
-SilphCo9Text_5d8e5:
-	text_far _SilphCo9Text_5d8e5
+.YouLookTiredText:
+	text_far SilphCo9FNurseYouLookTiredText
 	text_end
 
-SilphCo9Text_5d8ea:
-	text_far _SilphCo9Text_5d8ea
+.DontGiveUpText:
+	text_far SilphCo9FNurseDontGiveUpText
 	text_end
 
-SilphCo9Text_5d8ef:
-	text_far _SilphCo9Text_5d8ef
+.ThankYouText:
+	text_far SilphCo9FNurseThankYouText
 	text_end
 
-SilphCo9Text2:
+SilphCo9FRocket1Text:
 	text_asm
 	ld hl, SilphCo9TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
-SilphCo9Text3:
+SilphCo9FScientistText:
 	text_asm
 	ld hl, SilphCo9TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
-SilphCo9Text4:
+SilphCo9FRocket2Text:
 	text_asm
 	ld hl, SilphCo9TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
-SilphCo9BattleText1:
-	text_far _SilphCo9BattleText1
+SilphCo9FRocket1BattleText:
+	text_far _SilphCo9FRocket1BattleText
 	text_end
 
-SilphCo9EndBattleText1:
-	text_far _SilphCo9EndBattleText1
+SilphCo9FRocket1EndBattleText:
+	text_far _SilphCo9FRocket1EndBattleText
 	text_end
 
-SilphCo9AfterBattleText1:
-	text_far _SilphCo9AfterBattleText1
+SilphCo9FRocket1AfterBattleText:
+	text_far _SilphCo9FRocket1AfterBattleText
 	text_end
 
-SilphCo9BattleText2:
-	text_far _SilphCo9BattleText2
+SilphCo9FScientistBattleText:
+	text_far _SilphCo9FScientistBattleText
 	text_end
 
-SilphCo9EndBattleText2:
-	text_far _SilphCo9EndBattleText2
+SilphCo9FScientistEndBattleText:
+	text_far _SilphCo9FScientistEndBattleText
 	text_end
 
-SilphCo9AfterBattleText2:
-	text_far _SilphCo9AfterBattleText2
+SilphCo9FScientistAfterBattleText:
+	text_far _SilphCo9FScientistAfterBattleText
 	text_end
 
-SilphCo9BattleText3:
-	text_far _SilphCo9BattleText3
+SilphCo9FRocket2BattleText:
+	text_far _SilphCo9FRocket2BattleText
 	text_end
 
-SilphCo9EndBattleText3:
-	text_far _SilphCo9EndBattleText3
+SilphCo9FRocket2EndBattleText:
+	text_far _SilphCo9FRocket2EndBattleText
 	text_end
 
-SilphCo9AfterBattleText3:
-	text_far _SilphCo9AfterBattleText3
+SilphCo9FRocket2AfterBattleText:
+	text_far _SilphCo9FRocket2AfterBattleText
 	text_end

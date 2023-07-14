@@ -8,50 +8,52 @@ Route4_Script:
 	ret
 
 Route4_ScriptPointers:
-	dw CheckFightingMapTrainers
-	dw DisplayEnemyTrainerTextAndStartBattle
-	dw EndTrainerBattle
+	def_script_pointers
+	dw_const CheckFightingMapTrainers,              SCRIPT_ROUTE4_DEFAULT
+	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_ROUTE4_START_BATTLE
+	dw_const EndTrainerBattle,                      SCRIPT_ROUTE4_END_BATTLE
 
 Route4_TextPointers:
-	dw Route4Text1
-	dw Route4Text2
-	dw PickUpItemText
-	dw PokeCenterSignText
-	dw Route4Text5
-	dw Route4Text6
+	def_text_pointers
+	dw_const Route4CooltrainerF1Text, TEXT_ROUTE4_COOLTRAINER_F1
+	dw_const Route4CooltrainerF2Text, TEXT_ROUTE4_COOLTRAINER_F2
+	dw_const PickUpItemText,          TEXT_ROUTE4_TM_WHIRLWIND
+	dw_const PokeCenterSignText,      TEXT_ROUTE4_POKECENTER_SIGN
+	dw_const Route4MtMoonSignText,    TEXT_ROUTE4_MT_MOON_SIGN
+	dw_const Route4SignText,          TEXT_ROUTE4_SIGN
 
 Route4TrainerHeaders:
 	def_trainers 2
 Route4TrainerHeader0:
-	trainer EVENT_BEAT_ROUTE_4_TRAINER_0, 3, Route4BattleText1, Route4EndBattleText1, Route4AfterBattleText1
+	trainer EVENT_BEAT_ROUTE_4_TRAINER_0, 3, Route4CooltrainerF2BattleText, Route4CooltrainerF2EndBattleText, Route4CooltrainerF2AfterBattleText
 	db -1 ; end
 
-Route4Text1:
-	text_far _Route4Text1
+Route4CooltrainerF1Text:
+	text_far _Route4CooltrainerF1Text
 	text_end
 
-Route4Text2:
+Route4CooltrainerF2Text:
 	text_asm
 	ld hl, Route4TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route4BattleText1:
-	text_far _Route4BattleText1
+Route4CooltrainerF2BattleText:
+	text_far _Route4CooltrainerF2BattleText
 	text_end
 
-Route4EndBattleText1:
-	text_far _Route4EndBattleText1
+Route4CooltrainerF2EndBattleText:
+	text_far _Route4CooltrainerF2EndBattleText
 	text_end
 
-Route4AfterBattleText1:
-	text_far _Route4AfterBattleText1
+Route4CooltrainerF2AfterBattleText:
+	text_far _Route4CooltrainerF2AfterBattleText
 	text_end
 
-Route4Text5:
-	text_far _Route4Text5
+Route4MtMoonSignText:
+	text_far _Route4MtMoonSignText
 	text_end
 
-Route4Text6:
-	text_far _Route4Text6
+Route4SignText:
+	text_far _Route4SignText
 	text_end

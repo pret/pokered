@@ -1,3 +1,8 @@
+	object_const_def
+	const WARDENSHOUSE_WARDEN
+	const WARDENSHOUSE_RARE_CANDY
+	const WARDENSHOUSE_BOULDER
+
 WardensHouse_Object:
 	db $17 ; border block
 
@@ -6,12 +11,12 @@ WardensHouse_Object:
 	warp_event  5,  7, LAST_MAP, 4
 
 	def_bg_events
-	bg_event  4,  3, 4 ; FuchsiaHouse2Text4
-	bg_event  5,  3, 5 ; FuchsiaHouse2Text5
+	bg_event  4,  3, TEXT_WARDENSHOUSE_DISPLAY_LEFT
+	bg_event  5,  3, TEXT_WARDENSHOUSE_DISPLAY_RIGHT
 
 	def_object_events
-	object_event  2,  3, SPRITE_WARDEN, STAY, NONE, 1 ; person
-	object_event  8,  3, SPRITE_POKE_BALL, STAY, NONE, 2, RARE_CANDY
-	object_event  8,  4, SPRITE_BOULDER, STAY, BOULDER_MOVEMENT_BYTE_2, 3 ; person
+	object_event  2,  3, SPRITE_WARDEN, STAY, NONE, TEXT_WARDENSHOUSE_WARDEN
+	object_event  8,  3, SPRITE_POKE_BALL, STAY, NONE, TEXT_WARDENSHOUSE_RARE_CANDY, RARE_CANDY
+	object_event  8,  4, SPRITE_BOULDER, STAY, BOULDER_MOVEMENT_BYTE_2, TEXT_WARDENSHOUSE_BOULDER
 
 	def_warps_to WARDENS_HOUSE

@@ -1507,7 +1507,7 @@ ItemUseEscapeRope:
 	ResetEvent EVENT_IN_SAFARI_ZONE
 	xor a
 	ld [wNumSafariBalls], a
-	ld [wSafariZoneGateCurScript], a
+	ld [wSafariZoneGateCurScript], a ; SCRIPT_SAFARIZONEGATE_DEFAULT
 	inc a
 	ld [wEscapedFromBattle], a
 	ld [wActionResultOrTookBattleTurn], a ; item used

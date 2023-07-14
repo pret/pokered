@@ -1,3 +1,9 @@
+	object_const_def
+	const CELADONMANSION3F_PROGRAMMER
+	const CELADONMANSION3F_GRAPHIC_ARTIST
+	const CELADONMANSION3F_WRITER
+	const CELADONMANSION3F_GAME_DESIGNER
+
 CeladonMansion3F_Object:
 	db $f ; border block
 
@@ -8,15 +14,15 @@ CeladonMansion3F_Object:
 	warp_event  4,  1, CELADON_MANSION_2F, 4
 
 	def_bg_events
-	bg_event  1,  3, 5 ; CeladonMansion3Text5
-	bg_event  4,  3, 6 ; CeladonMansion3Text6
-	bg_event  1,  6, 7 ; CeladonMansion3Text7
-	bg_event  4,  9, 8 ; CeladonMansion3Text8
+	bg_event  1,  3, TEXT_CELADONMANSION3F_GAME_PROGRAM_PC
+	bg_event  4,  3, TEXT_CELADONMANSION3F_PLAYING_GAME_PC
+	bg_event  1,  6, TEXT_CELADONMANSION3F_GAME_SCRIPT_PC
+	bg_event  4,  9, TEXT_CELADONMANSION3F_DEV_ROOM_SIGN
 
 	def_object_events
-	object_event  0,  4, SPRITE_BIKE_SHOP_CLERK, STAY, UP, 1 ; person
-	object_event  3,  4, SPRITE_CLERK, STAY, UP, 2 ; person
-	object_event  0,  7, SPRITE_SUPER_NERD, STAY, UP, 3 ; person
-	object_event  2,  3, SPRITE_SILPH_WORKER, STAY, NONE, 4 ; person
+	object_event  0,  4, SPRITE_BIKE_SHOP_CLERK, STAY, UP, TEXT_CELADONMANSION3F_PROGRAMMER
+	object_event  3,  4, SPRITE_CLERK, STAY, UP, TEXT_CELADONMANSION3F_GRAPHIC_ARTIST
+	object_event  0,  7, SPRITE_SUPER_NERD, STAY, UP, TEXT_CELADONMANSION3F_WRITER
+	object_event  2,  3, SPRITE_SILPH_WORKER_M, STAY, NONE, TEXT_CELADONMANSION3F_GAME_DESIGNER
 
 	def_warps_to CELADON_MANSION_3F

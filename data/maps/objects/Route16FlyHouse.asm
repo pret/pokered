@@ -1,3 +1,7 @@
+	object_const_def
+	const ROUTE16FLYHOUSE_BRUNETTE_GIRL
+	const ROUTE16FLYHOUSE_FEAROW
+
 Route16FlyHouse_Object:
 	db $a ; border block
 
@@ -8,7 +12,7 @@ Route16FlyHouse_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  2,  3, SPRITE_BRUNETTE_GIRL, STAY, RIGHT, 1 ; person
-	object_event  6,  4, SPRITE_BIRD, WALK, ANY_DIR, 2 ; person
+	object_event  2,  3, SPRITE_BRUNETTE_GIRL, STAY, RIGHT, TEXT_ROUTE16FLYHOUSE_BRUNETTE_GIRL
+	object_event  6,  4, SPRITE_BIRD, WALK, ANY_DIR, TEXT_ROUTE16FLYHOUSE_FEAROW
 
 	def_warps_to ROUTE_16_FLY_HOUSE

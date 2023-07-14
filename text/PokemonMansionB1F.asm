@@ -1,34 +1,34 @@
-_Mansion4BattleText1::
+_PokemonMansionB1FBurglarBattleText::
 	text "Uh-oh. Where am"
 	line "I now?"
 	done
 
-_Mansion4EndBattleText1::
+_PokemonMansionB1FBurglarEndBattleText::
 	text "Awooh!"
 	prompt
 
-_Mansion4AfterBattleText1::
+_PokemonMansionB1FBurglarAfterBattleText::
 	text "You can find stuff"
 	line "lying around."
 	done
 
-_Mansion4BattleText2::
+_PokemonMansionB1FScientistBattleText::
 	text "This place is"
 	line "ideal for a lab."
 	done
 
-_Mansion4EndBattleText2::
+_PokemonMansionB1FScientistEndBattleText::
 	text "What"
 	line "was that for?"
 	prompt
 
-_Mansion4AfterBattleText2::
+_PokemonMansionB1FScientistAfterBattleText::
 	text "I like it here!"
 	line "It's conducive to"
 	cont "my studies!"
 	done
 
-_Mansion4Text7::
+_PokemonMansionB1FDiaryText::
 	text "Diary; Sept. 1"
 	line "MEWTWO is far too"
 	cont "powerful."

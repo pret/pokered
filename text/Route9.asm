@@ -1,74 +1,74 @@
-_Route9BattleText1::
+_Route9CooltrainerF1BattleText::
 	text "You have #MON"
 	line "with you!"
 	cont "You're mine!"
 	done
 
-_Route9EndBattleText1::
+_Route9CooltrainerF1EndBattleText::
 	text "You"
 	line "deceived me!"
 	prompt
 
-_Route9AfterBattleText1::
+_Route9CooltrainerF1AfterBattleText::
 	text "You need light to"
 	line "get through that"
 	cont "dark tunnel ahead."
 	done
 
-_Route9BattleText2::
+_Route9CooltrainerM1BattleText::
 	text "Who's that walking"
 	line "with those good"
 	cont "looking #MON?"
 	done
 
-_Route9EndBattleText2::
+_Route9CooltrainerM1EndBattleText::
 	text "Out"
 	line "like a light!"
 	prompt
 
-_Route9AfterBattleText2::
+_Route9CooltrainerM1AfterBattleText::
 	text "Keep walking!"
 	done
 
-_Route9BattleText3::
+_Route9CooltrainerM2BattleText::
 	text "I'm taking ROCK"
 	line "TUNNEL to go to"
 	cont "LAVENDER..."
 	done
 
-_Route9EndBattleText3::
+_Route9CooltrainerM2EndBattleText::
 	text "Can't"
 	line "measure up!"
 	prompt
 
-_Route9AfterBattleText3::
+_Route9CooltrainerM2AfterBattleText::
 	text "Are you off to"
 	line "ROCK TUNNEL too?"
 	done
 
-_Route9BattleText4::
+_Route9CooltrainerF2BattleText::
 	text "Don't you dare"
 	line "condescend me!"
 	done
 
-_Route9EndBattleText4::
+_Route9CooltrainerF2EndBattleText::
 	text "No!"
 	line "You're too much!"
 	prompt
 
-_Route9AfterBattleText4::
+_Route9CooltrainerF2AfterBattleText::
 	text "You're obviously"
 	line "talented! Good"
 	cont "luck to you!"
 	done
 
-_Route9BattleText5::
+_Route9Hiker1BattleText::
 	text "Bwahaha!"
 	line "Great! I was"
 	cont "bored, eh!"
 	done
 
-_Route9EndBattleText5::
+_Route9Hiker1EndBattleText::
 	text "Keep it"
 	line "coming, eh!"
 
@@ -76,81 +76,81 @@ _Route9EndBattleText5::
 	line "of #MON!"
 	prompt
 
-_Route9AfterBattleText5::
+_Route9Hiker1AfterBattleText::
 	text "You sure had guts"
 	line "standing up to me"
 	cont "there, eh?"
 	done
 
-_Route9BattleText6::
+_Route9Hiker2BattleText::
 	text "Hahaha!"
 	line "Aren't you a"
 	cont "little toughie!"
 	done
 
-_Route9EndBattleText6::
+_Route9Hiker2EndBattleText::
 	text "What's"
 	line "that?"
 	prompt
 
-_Route9AfterBattleText6::
+_Route9Hiker2AfterBattleText::
 	text "Hahaha! Kids"
 	line "should be tough!"
 	done
 
-_Route9BattleText7::
+_Route9Youngster1BattleText::
 	text "I got up early"
 	line "every day to"
 	cont "raise my #MON"
 	cont "from cocoons!"
 	done
 
-_Route9EndBattleText7::
+_Route9Youngster1EndBattleText::
 	text "WHAT?"
 
 	para "What a total"
 	line "waste of time!"
 	prompt
 
-_Route9AfterBattleText7::
+_Route9Youngster1AfterBattleText::
 	text "I have to collect"
 	line "more than bugs to"
 	cont "get stronger..."
 	done
 
-_Route9BattleText8::
+_Route9Hiker3BattleText::
 	text "Hahahaha!"
 	line "Come on, dude!"
 	done
 
-_Route9EndBattleText8::
+_Route9Hiker3EndBattleText::
 	text "Hahahaha!"
 	line "You beat me fair!"
 	prompt
 
-_Route9AfterBattleText8::
+_Route9Hiker3AfterBattleText::
 	text "Hahahaha!"
 	line "Us hearty guys"
 	cont "always laugh!"
 	done
 
-_Route9BattleText9::
+_Route9Youngster2BattleText::
 	text "Go, my super bug"
 	line "#MON!"
 	done
 
-_Route9EndBattleText9::
+_Route9Youngster2EndBattleText::
 	text "My"
 	line "bugs..."
 	prompt
 
-_Route9AfterBattleText9::
+_Route9Youngster2AfterBattleText::
 	text "If you don't like"
 	line "bug #MON, you"
 	cont "bug me!"
 	done
 
-_Route9Text11::
+_Route9SignText::
 	text "ROUTE 9"
 	line "CERULEAN CITY-"
 	cont "ROCK TUNNEL"

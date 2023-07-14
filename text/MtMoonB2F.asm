@@ -1,26 +1,26 @@
-_MtMoon3Text_49f24::
+_MtMoonB2FDomeFossilYouWantText::
 	text "You want the"
 	line "DOME FOSSIL?"
 	done
 
-_MtMoon3Text_49f64::
+_MtMoonB2FHelixFossilYouWantText::
 	text "You want the"
 	line "HELIX FOSSIL?"
 	done
 
-_MtMoon3Text_49f6f::
+_MtMoonB2FReceivedFossilText::
 	text "<PLAYER> got the"
 	line "@"
 	text_ram wStringBuffer
 	text "!@"
 	text_end
 
-_MtMoon3Text_49f7f::
+_MtMoonB2FYouHaveNoRoomText::
 	text "Look, you've got"
 	line "no room for this.@"
 	text_end
 
-_MtMoon3Text_49f85::
+_MtMoonB2FSuperNerdTheyreBothMineText::
 	text "Hey, stop!"
 
 	para "I found these"
@@ -28,18 +28,18 @@ _MtMoon3Text_49f85::
 	cont "both mine!"
 	done
 
-_MtMoon3Text_49f8a::
+_MtMoonB2FSuperNerdOkIllShareText::
 	text "OK!"
 	line "I'll share!"
 	prompt
 
-_MtMoon3Text_49f8f::
+_MtMoonB2fSuperNerdEachTakeOneText::
 	text "We'll each take"
 	line "one!"
 	cont "No being greedy!"
 	done
 
-_MtMoon3Text_49f94::
+_MtMoonB2FSuperNerdTheresAPokemonLabText::
 	text "Far away, on"
 	line "CINNABAR ISLAND,"
 	cont "there's a #MON"
@@ -50,75 +50,75 @@ _MtMoon3Text_49f94::
 	cont "fossils."
 	done
 
-_MtMoon3Text_49f99::
+_MtMoonB2FSuperNerdThenThisIsMineText::
 	text "All right. Then"
 	line "this is mine!@"
 	text_end
 
-_MtMoon3BattleText2::
+_MtMoonB2FRocket1BattleText::
 	text "TEAM ROCKET will"
 	line "find the fossils,"
 	cont "revive and sell"
 	cont "them for cash!"
 	done
 
-_MtMoon3EndBattleText2::
+_MtMoonB2FRocket1EndBattleText::
 	text "Urgh!"
 	line "Now I'm mad!"
 	prompt
 
-_MtMoon3AfterBattleText2::
+_MtMoonB2FRocket1AfterBattleText::
 	text "You made me mad!"
 	line "TEAM ROCKET will"
 	cont "blacklist you!"
 	done
 
-_MtMoon3BattleText3::
+_MtMoonB2FRocket2BattleText::
 	text "We, TEAM ROCKET,"
 	line "are #MON"
 	cont "gangsters!"
 	done
 
-_MtMoon3EndBattleText3::
+_MtMoonB2FRocket2EndBattleText::
 	text "I blew"
 	line "it!"
 	prompt
 
-_MtMoon3AfterBattleText3::
+_MtMoonB2FRocket2AfterBattleText::
 	text "Darn it all! My"
 	line "associates won't"
 	cont "stand for this!"
 	done
 
-_MtMoon3BattleText4::
+_MtMoonB2FRocket3BattleText::
 	text "We're pulling a"
 	line "big job here!"
 	cont "Get lost, kid!"
 	done
 
-_MtMoon3EndBattleText4::
+_MtMoonB2FRocket3EndBattleText::
 	text "So, you"
 	line "are good."
 	prompt
 
-_MtMoon3AfterBattleText4::
+_MtMoonB2FRocket3AfterBattleText::
 	text "If you find a"
 	line "fossil, give it"
 	cont "to me and scram!"
 	done
 
-_MtMoon3BattleText5::
+_MtMoonB2FRocket4BattleText::
 	text "Little kids"
 	line "should leave"
 	cont "grown-ups alone!"
 	done
 
-_MtMoon3EndBattleText5::
+_MtMoonB2FRocket4EndBattleText::
 	text "I'm"
 	line "steamed!"
 	prompt
 
-_MtMoon3AfterBattleText5::
+_MtMoonB2FRocket4AfterBattleText::
 	text "#MON lived"
 	line "here long before"
 	cont "people came."

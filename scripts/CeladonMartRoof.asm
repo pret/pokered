@@ -43,7 +43,7 @@ CeladonMartRoofDrinkList:
 CeladonMartRoofScript_GiveDrinkToGirl:
 	ld hl, wd730
 	set 6, [hl]
-	ld hl, CeladonMartRoofText_484ee
+	ld hl, CeladonMartRoofLittleGirlGiveHerWhichDrinkText
 	call PrintText
 	xor a
 	ld [wCurrentMenuItem], a
@@ -87,99 +87,99 @@ CeladonMartRoofScript_GiveDrinkToGirl:
 ; gave Lemonade
 	CheckEvent EVENT_GOT_TM49
 	jr nz, .alreadyGaveDrink
-	ld hl, CeladonMartRoofText_48515
+	ld hl, CeladonMartRoofLittleGirlYayLemonadeText
 	call PrintText
 	call RemoveItemByIDBank12
 	lb bc, TM_TRI_ATTACK, 1
 	call GiveItem
 	jr nc, .bagFull
-	ld hl, ReceivedTM49Text
+	ld hl, CeladonMartRoofLittleGirlReceivedTM49Text
 	call PrintText
 	SetEvent EVENT_GOT_TM49
 	ret
 .gaveSodaPop
 	CheckEvent EVENT_GOT_TM48
 	jr nz, .alreadyGaveDrink
-	ld hl, CeladonMartRoofText_48504
+	ld hl, CeladonMartRoofLittleGirlYaySodaPopText
 	call PrintText
 	call RemoveItemByIDBank12
 	lb bc, TM_ROCK_SLIDE, 1
 	call GiveItem
 	jr nc, .bagFull
-	ld hl, CeladonMartRoofText_4850a
+	ld hl, CeladonMartRoofLittleGirlReceivedTM48Text
 	call PrintText
 	SetEvent EVENT_GOT_TM48
 	ret
 .gaveFreshWater
 	CheckEvent EVENT_GOT_TM13
 	jr nz, .alreadyGaveDrink
-	ld hl, CeladonMartRoofText_484f3
+	ld hl, CeladonMartRoofLittleGirlYayFreshWaterText
 	call PrintText
 	call RemoveItemByIDBank12
 	lb bc, TM_ICE_BEAM, 1
 	call GiveItem
 	jr nc, .bagFull
-	ld hl, CeladonMartRoofText_484f9
+	ld hl, CeladonMartRoofLittleGirlReceivedTM13Text
 	call PrintText
 	SetEvent EVENT_GOT_TM13
 	ret
 .bagFull
-	ld hl, CeladonMartRoofText_48526
+	ld hl, CeladonMartRoofLittleGirlNoRoomText
 	jp PrintText
 .alreadyGaveDrink
-	ld hl, CeladonMartRoofText_4852c
+	ld hl, CeladonMartRoofLittleGirlImNotThirstyText
 	jp PrintText
 
 RemoveItemByIDBank12:
 	farjp RemoveItemByID
 
-CeladonMartRoofText_484ee:
-	text_far _CeladonMartRoofText_484ee
+CeladonMartRoofLittleGirlGiveHerWhichDrinkText:
+	text_far _CeladonMartRoofLittleGirlGiveHerWhichDrinkText
 	text_end
 
-CeladonMartRoofText_484f3:
-	text_far _CeladonMartRoofText_484f3
+CeladonMartRoofLittleGirlYayFreshWaterText:
+	text_far _CeladonMartRoofLittleGirlYayFreshWaterText
 	text_waitbutton
 	text_end
 
-CeladonMartRoofText_484f9:
-	text_far _CeladonMartRoofText_484f9
+CeladonMartRoofLittleGirlReceivedTM13Text:
+	text_far _CeladonMartRoofLittleGirlReceivedTM13Text
 	sound_get_item_1
-	text_far _CeladonMartRoofText_484fe
+	text_far _CeladonMartRoofLittleGirlTM13ExplanationText
 	text_waitbutton
 	text_end
 
-CeladonMartRoofText_48504:
-	text_far _CeladonMartRoofText_48504
+CeladonMartRoofLittleGirlYaySodaPopText:
+	text_far _CeladonMartRoofLittleGirlYaySodaPopText
 	text_waitbutton
 	text_end
 
-CeladonMartRoofText_4850a:
-	text_far _CeladonMartRoofText_4850a
+CeladonMartRoofLittleGirlReceivedTM48Text:
+	text_far _CeladonMartRoofLittleGirlReceivedTM48Text
 	sound_get_item_1
-	text_far _CeladonMartRoofText_4850f
+	text_far _CeladonMartRoofLittleGirlTM48ExplanationText
 	text_waitbutton
 	text_end
 
-CeladonMartRoofText_48515:
-	text_far _CeladonMartRoofText_48515
+CeladonMartRoofLittleGirlYayLemonadeText:
+	text_far _CeladonMartRoofLittleGirlYayLemonadeText
 	text_waitbutton
 	text_end
 
-ReceivedTM49Text:
-	text_far _ReceivedTM49Text
+CeladonMartRoofLittleGirlReceivedTM49Text:
+	text_far _CeladonMartRoofLittleGirlReceivedTM49Text
 	sound_get_item_1
-	text_far _CeladonMartRoofText_48520
+	text_far _CeladonMartRoofLittleGirlTM49ExplanationText
 	text_waitbutton
 	text_end
 
-CeladonMartRoofText_48526:
-	text_far _CeladonMartRoofText_48526
+CeladonMartRoofLittleGirlNoRoomText:
+	text_far _CeladonMartRoofLittleGirlNoRoomText
 	text_waitbutton
 	text_end
 
-CeladonMartRoofText_4852c:
-	text_far _CeladonMartRoofText_4852c
+CeladonMartRoofLittleGirlImNotThirstyText:
+	text_far _CeladonMartRoofLittleGirlImNotThirstyText
 	text_waitbutton
 	text_end
 
@@ -206,18 +206,19 @@ CeladonMartRoofScript_PrintDrinksInBag:
 	jr .loop
 
 CeladonMartRoof_TextPointers:
-	dw CeladonMartRoofText1
-	dw CeladonMartRoofText2
-	dw CeladonMartRoofText5
-	dw CeladonMartRoofText5
-	dw CeladonMartRoofText5
-	dw CeladonMartRoofText6
+	def_text_pointers
+	dw_const CeladonMartRoofSuperNerdText,        TEXT_CELADONMARTROOF_SUPER_NERD
+	dw_const CeladonMartRoofLittleGirlText,       TEXT_CELADONMARTROOF_LITTLE_GIRL
+	dw_const CeladonMartRoofVendingMachineText,   TEXT_CELADONMARTROOF_VENDING_MACHINE1
+	dw_const CeladonMartRoofVendingMachineText,   TEXT_CELADONMARTROOF_VENDING_MACHINE2
+	dw_const CeladonMartRoofVendingMachineText,   TEXT_CELADONMARTROOF_VENDING_MACHINE3
+	dw_const CeladonMartRoofCurrentFloorSignText, TEXT_CELADONMARTROOF_CURRENT_FLOOR_SIGN
 
-CeladonMartRoofText1:
-	text_far _CeladonMartRoofText1
+CeladonMartRoofSuperNerdText:
+	text_far _CeladonMartRoofSuperNerdText
 	text_end
 
-CeladonMartRoofText2:
+CeladonMartRoofLittleGirlText:
 	text_asm
 	call CeladonMartRoofScript_GetDrinksInBag
 	ld a, [wFilteredBagItemsCount]
@@ -225,7 +226,7 @@ CeladonMartRoofText2:
 	jr z, .noDrinksInBag
 	ld a, 1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
-	ld hl, CeladonMartRoofText4
+	ld hl, .GiveHerADrinkText
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
@@ -234,22 +235,22 @@ CeladonMartRoofText2:
 	call CeladonMartRoofScript_GiveDrinkToGirl
 	jr .done
 .noDrinksInBag
-	ld hl, CeladonMartRoofText3
+	ld hl, .ImThirstyText
 	call PrintText
 .done
 	jp TextScriptEnd
 
-CeladonMartRoofText3:
-	text_far _CeladonMartRoofText_48598
+.ImThirstyText:
+	text_far _CeladonMartRoofLittleGirlImThirstyText
 	text_end
 
-CeladonMartRoofText4:
-	text_far _CeladonMartRoofText4
+.GiveHerADrinkText:
+	text_far _CeladonMartRoofLittleGirlGiveHerADrinkText
 	text_end
 
-CeladonMartRoofText5:
+CeladonMartRoofVendingMachineText:
 	script_vending_machine
 
-CeladonMartRoofText6:
-	text_far _CeladonMartRoofText6
+CeladonMartRoofCurrentFloorSignText:
+	text_far _CeladonMartRoofCurrentFloorSignText
 	text_end

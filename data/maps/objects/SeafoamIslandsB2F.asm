@@ -1,3 +1,7 @@
+	object_const_def
+	const SEAFOAMISLANDSB2F_BOULDER1
+	const SEAFOAMISLANDSB2F_BOULDER2
+
 SeafoamIslandsB2F_Object:
 	db $7d ; border block
 
@@ -13,7 +17,7 @@ SeafoamIslandsB2F_Object:
 	def_bg_events
 
 	def_object_events
-	object_event 18,  6, SPRITE_BOULDER, STAY, BOULDER_MOVEMENT_BYTE_2, 1 ; person
-	object_event 23,  6, SPRITE_BOULDER, STAY, BOULDER_MOVEMENT_BYTE_2, 2 ; person
+	object_event 18,  6, SPRITE_BOULDER, STAY, BOULDER_MOVEMENT_BYTE_2, TEXT_SEAFOAMISLANDSB2F_BOULDER1
+	object_event 23,  6, SPRITE_BOULDER, STAY, BOULDER_MOVEMENT_BYTE_2, TEXT_SEAFOAMISLANDSB2F_BOULDER2
 
 	def_warps_to SEAFOAM_ISLANDS_B2F

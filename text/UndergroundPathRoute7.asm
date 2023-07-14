@@ -1,4 +1,4 @@
-_UndergroundPathEntRoute7Text1::
+_UndergroundPathRoute7MiddleAgedManText::
 	text "I heard a sleepy"
 	line "#MON appeared"
 	cont "near CELADON CITY."

@@ -1,16 +1,16 @@
-PikachuFanText::
+_PokemonFanClubPikachuFanNormalText::
 	text "Won't you admire"
 	line "my PIKACHU's"
 	cont "adorable tail?"
 	done
 
-PikachuFanBetterText::
+_PokemonFanClubPikachuFanBetterText::
 	text "Humph! My PIKACHU"
 	line "is twice as cute"
 	cont "as that one!"
 	done
 
-SeelFanText::
+_PokemonFanClubSeelFanNormalText::
 	text "I just love my"
 	line "SEEL!"
 
@@ -18,23 +18,23 @@ SeelFanText::
 	line "hug it!"
 	done
 
-SeelFanBetterText::
+_PokemonFanClubSeelFanBetterText::
 	text "Oh dear!"
 
 	para "My SEEL is far"
 	line "more attractive!"
 	done
 
-FanClubPikachuText::
+_PokemonFanClubPikachuText::
 	text "PIKACHU: Chu!"
 	line "Pikachu!"
 	done
 
-FanClubSeelText::
+_PokemonFanClubSeelText::
 	text "SEEL: Kyuoo!"
 	done
 
-FanClubMeetChairText::
+_PokemonFanClubChairmanIntroText::
 	text "I chair the"
 	line "#MON Fan Club!"
 
@@ -52,7 +52,7 @@ FanClubMeetChairText::
 	cont "about my #MON?"
 	done
 
-FanClubChairStoryText::
+_PokemonFanClubChairmanStoryText::
 	text "Good!"
 	line "Then listen up!"
 
@@ -82,15 +82,16 @@ FanClubChairStoryText::
 	cont "you to have this!"
 	prompt
 
-ReceivedBikeVoucherText::
+_PokemonFanClubReceivedBikeVoucherText::
 	text "<PLAYER> received"
 	line "a @"
 	text_ram wStringBuffer
 	text "!@"
 	text_end
 
-ExplainBikeVoucherText::
+_PokemonFanClubExplainBikeVoucherText::
 	text_start
+
 	para "Exchange that for"
 	line "a BICYCLE!"
 
@@ -105,13 +106,13 @@ ExplainBikeVoucherText::
 	line "cycling!"
 	done
 
-FanClubNoStoryText::
+_PokemonFanClubNoStoryText::
 	text "Oh. Come back"
 	line "when you want to"
 	cont "hear my story!"
 	done
 
-FanClubChairFinalText::
+_PokemonFanClubChairFinalText::
 	text "Hello, <PLAYER>!"
 
 	para "Did you come see"
@@ -121,24 +122,24 @@ FanClubChairFinalText::
 	para "No? Too bad!"
 	done
 
-FanClubBagFullText::
+_PokemonFanClubBagFullText::
 	text "Make room for"
 	line "this!"
 	done
 
-_FanClubText6::
+_PokemonFanClubReceptionistText::
 	text "Our Chairman is"
 	line "very vocal about"
 	cont "#MON."
 	done
 
-_FanClubText7::
+_PokemonFanClubSign1Text::
 	text "Let's all listen"
 	line "politely to other"
 	cont "trainers!"
 	done
 
-_FanClubText8::
+_PokemonFanClubSign2Text::
 	text "If someone brags,"
 	line "brag right back!"
 	done

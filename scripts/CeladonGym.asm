@@ -23,40 +23,41 @@ CeladonGym_Script:
 	db "ERIKA@"
 
 CeladonGymResetScripts:
-	xor a
+	xor a ; SCRIPT_CELADONGYM_DEFAULT
 	ld [wJoyIgnore], a
 	ld [wCeladonGymCurScript], a
 	ld [wCurMapScript], a
 	ret
 
 CeladonGym_ScriptPointers:
-	dw CheckFightingMapTrainers
-	dw DisplayEnemyTrainerTextAndStartBattle
-	dw EndTrainerBattle
-	dw CeladonGymErikaPostBattle
+	def_script_pointers
+	dw_const CheckFightingMapTrainers,              SCRIPT_CELADONGYM_DEFAULT
+	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_CELADONGYM_START_BATTLE
+	dw_const EndTrainerBattle,                      SCRIPT_CELADONGYM_END_BATTLE
+	dw_const CeladonGymErikaPostBattleScript,       SCRIPT_CELADONGYM_ERIKA_POST_BATTLE
 
-CeladonGymErikaPostBattle:
+CeladonGymErikaPostBattleScript:
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, CeladonGymResetScripts
-	ld a, $f0
+	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 
 CeladonGymReceiveTM21:
-	ld a, $9
+	ld a, TEXT_CELADONGYM_RAINBOWBADGE_INFO
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_BEAT_ERIKA
 	lb bc, TM_MEGA_DRAIN, 1
 	call GiveItem
 	jr nc, .BagFull
-	ld a, $a
+	ld a, TEXT_CELADONGYM_RECEIVED_TM21
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_GOT_TM21
 	jr .gymVictory
 .BagFull
-	ld a, $b
+	ld a, TEXT_CELADONGYM_TM21_NO_ROOM
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .gymVictory
@@ -71,17 +72,18 @@ CeladonGymReceiveTM21:
 	jp CeladonGymResetScripts
 
 CeladonGym_TextPointers:
-	dw ErikaText
-	dw CeladonGymTrainerText1
-	dw CeladonGymTrainerText2
-	dw CeladonGymTrainerText3
-	dw CeladonGymTrainerText4
-	dw CeladonGymTrainerText5
-	dw CeladonGymTrainerText6
-	dw CeladonGymTrainerText7
-	dw ErikaRainbowBadgeInfoText
-	dw ReceivedTM21Text
-	dw TM21NoRoomText
+	def_text_pointers
+	dw_const CeladonGymErikaText,            TEXT_CELADONGYM_ERIKA
+	dw_const CeladonGymCooltrainerF1Text,    TEXT_CELADONGYM_COOLTRAINER_F1
+	dw_const CeladonGymBeauty1Text,          TEXT_CELADONGYM_BEAUTY1
+	dw_const CeladonGymCooltrainerF2Text,    TEXT_CELADONGYM_COOLTRAINER_F2
+	dw_const CeladonGymBeauty2Text,          TEXT_CELADONGYM_BEAUTY2
+	dw_const CeladonGymCooltrainerF3Text,    TEXT_CELADONGYM_COOLTRAINER_F3
+	dw_const CeladonGymBeauty3Text,          TEXT_CELADONGYM_BEAUTY3
+	dw_const CeladonGymCooltrainerF4Text,    TEXT_CELADONGYM_COOLTRAINER_F4
+	dw_const CeladonGymRainbowBadgeInfoText, TEXT_CELADONGYM_RAINBOWBADGE_INFO
+	dw_const CeladonGymReceivedTM21Text,     TEXT_CELADONGYM_RECEIVED_TM21
+	dw_const CeladonGymTM21NoRoomText,       TEXT_CELADONGYM_TM21_NO_ROOM
 
 CeladonGymTrainerHeaders:
 	def_trainers 2
@@ -101,7 +103,7 @@ CeladonGymTrainerHeader6:
 	trainer EVENT_BEAT_CELADON_GYM_TRAINER_6, 3, CeladonGymBattleText8, CeladonGymEndBattleText8, CeladonGymAfterBattleText8
 	db -1 ; end
 
-ErikaText:
+CeladonGymErikaText:
 	text_asm
 	CheckEvent EVENT_BEAT_ERIKA
 	jr z, .beforeBeat
@@ -111,17 +113,17 @@ ErikaText:
 	call DisableWaitingAfterTextDisplay
 	jr .done
 .afterBeat
-	ld hl, ErikaPostBattleAdviceText
+	ld hl, .PostBattleAdviceText
 	call PrintText
 	jr .done
 .beforeBeat
-	ld hl, ErikaPreBattleText
+	ld hl, .PreBattleText
 	call PrintText
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
-	ld hl, ReceivedRainbowBadgeText
-	ld de, ReceivedRainbowBadgeText
+	ld hl, .ReceivedRainbowBadgeText
+	ld de, .ReceivedRainbowBadgeText
 	call SaveEndBattleTextPointers
 	ldh a, [hSpriteIndex]
 	ld [wSpriteIndex], a
@@ -129,39 +131,39 @@ ErikaText:
 	call InitBattleEnemyParameters
 	ld a, $4
 	ld [wGymLeaderNo], a
-	ld a, $3
+	ld a, SCRIPT_CELADONGYM_ERIKA_POST_BATTLE
 	ld [wCeladonGymCurScript], a
 	ld [wCurMapScript], a
 .done
 	jp TextScriptEnd
 
-ErikaPreBattleText:
-	text_far _ErikaPreBattleText
+.PreBattleText:
+	text_far _CeladonGymErikaPreBattleText
 	text_end
 
-ReceivedRainbowBadgeText:
-	text_far _ReceivedRainbowBadgeText
+.ReceivedRainbowBadgeText:
+	text_far _CeladonGymErikaReceivedRainbowBadgeText
 	text_end
 
-ErikaPostBattleAdviceText:
-	text_far _ErikaPostBattleAdviceText
+.PostBattleAdviceText:
+	text_far _CeladonGymErikaPostBattleAdviceText
 	text_end
 
-ErikaRainbowBadgeInfoText:
-	text_far _ErikaRainbowBadgeInfoText
+CeladonGymRainbowBadgeInfoText:
+	text_far _CeladonGymRainbowBadgeInfoText
 	text_end
 
-ReceivedTM21Text:
-	text_far _ReceivedTM21Text
+CeladonGymReceivedTM21Text:
+	text_far _CeladonGymReceivedTM21Text
 	sound_get_item_1
 	text_far _TM21ExplanationText
 	text_end
 
-TM21NoRoomText:
-	text_far _TM21NoRoomText
+CeladonGymTM21NoRoomText:
+	text_far _CeladonGymTM21NoRoomText
 	text_end
 
-CeladonGymTrainerText1:
+CeladonGymCooltrainerF1Text:
 	text_asm
 	ld hl, CeladonGymTrainerHeader0
 	call TalkToTrainer
@@ -179,7 +181,7 @@ CeladonGymAfterBattleText2:
 	text_far _CeladonGymAfterBattleText2
 	text_end
 
-CeladonGymTrainerText2:
+CeladonGymBeauty1Text:
 	text_asm
 	ld hl, CeladonGymTrainerHeader1
 	call TalkToTrainer
@@ -197,7 +199,7 @@ CeladonGymAfterBattleText3:
 	text_far _CeladonGymAfterBattleText3
 	text_end
 
-CeladonGymTrainerText3:
+CeladonGymCooltrainerF2Text:
 	text_asm
 	ld hl, CeladonGymTrainerHeader2
 	call TalkToTrainer
@@ -215,7 +217,7 @@ CeladonGymAfterBattleText4:
 	text_far _CeladonGymAfterBattleText4
 	text_end
 
-CeladonGymTrainerText4:
+CeladonGymBeauty2Text:
 	text_asm
 	ld hl, CeladonGymTrainerHeader3
 	call TalkToTrainer
@@ -233,7 +235,7 @@ CeladonGymAfterBattleText5:
 	text_far _CeladonGymAfterBattleText5
 	text_end
 
-CeladonGymTrainerText5:
+CeladonGymCooltrainerF3Text:
 	text_asm
 	ld hl, CeladonGymTrainerHeader4
 	call TalkToTrainer
@@ -251,7 +253,7 @@ CeladonGymAfterBattleText6:
 	text_far _CeladonGymAfterBattleText6
 	text_end
 
-CeladonGymTrainerText6:
+CeladonGymBeauty3Text:
 	text_asm
 	ld hl, CeladonGymTrainerHeader5
 	call TalkToTrainer
@@ -269,7 +271,7 @@ CeladonGymAfterBattleText7:
 	text_far _CeladonGymAfterBattleText7
 	text_end
 
-CeladonGymTrainerText7:
+CeladonGymCooltrainerF4Text:
 	text_asm
 	ld hl, CeladonGymTrainerHeader6
 	call TalkToTrainer

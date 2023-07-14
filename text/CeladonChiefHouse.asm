@@ -1,10 +1,10 @@
-_CeladonHouseText1::
+_CeladonChiefHouseChiefText::
 	text "Hehehe! The slots"
 	line "just reel in the"
 	cont "dough, big time!"
 	done
 
-_CeladonHouseText2::
+_CeladonChiefHouseRocketText::
 	text "CHIEF!"
 
 	para "We just shipped"
@@ -12,7 +12,7 @@ _CeladonHouseText2::
 	cont "slot prizes!"
 	done
 
-_CeladonHouseText3::
+_CeladonChiefHouseSailorText::
 	text "Don't touch the"
 	line "poster at the"
 	cont "GAME CORNER!"

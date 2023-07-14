@@ -37,345 +37,347 @@ CoordsData_49d37:
 	dbmapcoord 14,  8
 	db -1 ; end
 
-MtMoon3Script_49d58:
-	xor a
+MtMoonB2FResetScripts:
+	xor a ; SCRIPT_MTMOONB2F_DEFAULT
 	ld [wJoyIgnore], a
 	ld [wMtMoonB2FCurScript], a
 	ld [wCurMapScript], a
 	ret
 
 MtMoonB2F_ScriptPointers:
-	dw MtMoon3Script0
-	dw DisplayEnemyTrainerTextAndStartBattle
-	dw EndTrainerBattle
-	dw MtMoon3Script3
-	dw MtMoon3Script4
-	dw MtMoon3Script5
+	def_script_pointers
+	dw_const MtMoonB2FDefaultScript,                   SCRIPT_MTMOONB2F_DEFAULT
+	dw_const DisplayEnemyTrainerTextAndStartBattle,    SCRIPT_MTMOONB2F_START_BATTLE
+	dw_const EndTrainerBattle,                         SCRIPT_MTMOONB2F_END_BATTLE
+	dw_const MtMoonB2FDefeatedSuperNerdScript,         SCRIPT_MTMOONB2F_DEFEATED_SUPER_NERD
+	dw_const MtMoonB2FMoveSuperNerdScript,             SCRIPT_MTMOONB2F_MOVE_SUPER_NERD
+	dw_const MtMoonB2FSuperNerdTakesOtherFossilScript, SCRIPT_MTMOONB2F_SUPER_NERD_TAKES_OTHER_FOSSIL
 
-MtMoon3Script0:
+MtMoonB2FDefaultScript:
 	CheckEvent EVENT_BEAT_MT_MOON_EXIT_SUPER_NERD
-	jp nz, MtMoon3Script_49d91
+	jp nz, MtMoonB2FCheckGotAFossil
 	ld a, [wYCoord]
 	cp 8
-	jp nz, MtMoon3Script_49d91
+	jp nz, MtMoonB2FCheckGotAFossil
 	ld a, [wXCoord]
 	cp 13
-	jp nz, MtMoon3Script_49d91
+	jp nz, MtMoonB2FCheckGotAFossil
 	xor a
 	ldh [hJoyHeld], a
-	ld a, $1
+	ld a, TEXT_MTMOONB2F_SUPER_NERD
 	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
-MtMoon3Script_49d91:
+MtMoonB2FCheckGotAFossil:
 	CheckEitherEventSet EVENT_GOT_DOME_FOSSIL, EVENT_GOT_HELIX_FOSSIL
 	jp z, CheckFightingMapTrainers
 	ret
 
-MtMoon3Script3:
+MtMoonB2FDefeatedSuperNerdScript:
 	ld a, [wIsInBattle]
 	cp $ff
-	jp z, MtMoon3Script_49d58
+	jp z, MtMoonB2FResetScripts
 	call UpdateSprites
 	call Delay3
 	SetEvent EVENT_BEAT_MT_MOON_EXIT_SUPER_NERD
 	xor a
 	ld [wJoyIgnore], a
-	ld a, $0
+	ld a, SCRIPT_MTMOONB2F_DEFAULT
 	ld [wMtMoonB2FCurScript], a
 	ld [wCurMapScript], a
 	ret
 
-MtMoon3Script4:
-	ld a, $1
+MtMoonB2FMoveSuperNerdScript:
+	ld a, MTMOONB2F_SUPER_NERD
 	ldh [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
-	ld hl, CoordsData_49dea
+	ld hl, MtMoonB2FPlayerNearDomeFossilCoords
 	call ArePlayerCoordsInArray
-	jr c, .asm_49dd7
-	ld hl, CoordsData_49df1
+	jr c, .player_near_dome_fossil
+	ld hl, MtMoonB2FPlayerNearHelixFossilCoords
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
-	ld de, MovementData_49df9
-	jr .asm_49dda
-.asm_49dd7
-	ld de, MovementData_49df8
-.asm_49dda
-	ld a, $1
+	ld de, MtMoon3FSuperNerdMoveUpMovementData
+	jr .continue
+.player_near_dome_fossil
+	ld de, MtMoon3FSuperNerdMoveRightMovementData
+.continue
+	ld a, MTMOONB2F_SUPER_NERD
 	ldh [hSpriteIndex], a
 	call MoveSprite
-	ld a, $5
+	ld a, SCRIPT_MTMOONB2F_SUPER_NERD_TAKES_OTHER_FOSSIL
 	ld [wMtMoonB2FCurScript], a
 	ld [wCurMapScript], a
 	ret
 
-CoordsData_49dea:
+MtMoonB2FPlayerNearDomeFossilCoords:
 	dbmapcoord 12,  7
 	dbmapcoord 11,  6
 	dbmapcoord 12,  5
 	db -1 ; end
 
-CoordsData_49df1:
+MtMoonB2FPlayerNearHelixFossilCoords:
 	dbmapcoord 13,  7
 	dbmapcoord 14,  6
 	dbmapcoord 14,  5
 	db -1 ; end
 
-MovementData_49df8:
+MtMoon3FSuperNerdMoveRightMovementData:
 	db NPC_MOVEMENT_RIGHT
-MovementData_49df9:
+MtMoon3FSuperNerdMoveUpMovementData:
 	db NPC_MOVEMENT_UP
 	db -1 ; end
 
-MtMoon3Script5:
+MtMoonB2FSuperNerdTakesOtherFossilScript:
 	ld a, [wd730]
 	bit 0, a
 	ret nz
-	ld a, $f0
+	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
-	ld a, $a
+	ld a, TEXT_MTMOONB2F_SUPER_NERD_THEN_THIS_IS_MINE
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	CheckEvent EVENT_GOT_DOME_FOSSIL
-	jr z, .asm_49e1d
+	jr z, .got_dome_fossil
 	ld a, HS_MT_MOON_B2F_FOSSIL_2
-	jr .asm_49e1f
-.asm_49e1d
+	jr .continue
+.got_dome_fossil
 	ld a, HS_MT_MOON_B2F_FOSSIL_1
-.asm_49e1f
+.continue
 	ld [wMissableObjectIndex], a
 	predef HideObject
 	xor a
 	ld [wJoyIgnore], a
-	ld a, $0
+	ld a, SCRIPT_MTMOONB2F_DEFAULT
 	ld [wMtMoonB2FCurScript], a
 	ld [wCurMapScript], a
 	ret
 
 MtMoonB2F_TextPointers:
-	dw MtMoon3Text1
-	dw MtMoon3Text2
-	dw MtMoon3Text3
-	dw MtMoon3Text4
-	dw MtMoon3Text5
-	dw MtMoon3Text6
-	dw MtMoon3Text7
-	dw PickUpItemText
-	dw PickUpItemText
-	dw MtMoon3Text_49f99
+	def_text_pointers
+	dw_const MtMoonB2FSuperNerdText,               TEXT_MTMOONB2F_SUPER_NERD
+	dw_const MtMoonB2FRocket1Text,                 TEXT_MTMOONB2F_ROCKET1
+	dw_const MtMoonB2FRocket2Text,                 TEXT_MTMOONB2F_ROCKET2
+	dw_const MtMoonB2FRocket3Text,                 TEXT_MTMOONB2F_ROCKET3
+	dw_const MtMoonB2FRocket4Text,                 TEXT_MTMOONB2F_ROCKET4
+	dw_const MtMoonB2FDomeFossilText,              TEXT_MTMOONB2F_DOME_FOSSIL
+	dw_const MtMoonB2FHelixFossilText,             TEXT_MTMOONB2F_HELIX_FOSSIL
+	dw_const PickUpItemText,                       TEXT_MTMOONB2F_HP_UP
+	dw_const PickUpItemText,                       TEXT_MTMOONB2F_TM_MEGA_PUNCH
+	dw_const MtMoonB2FSuperNerdThenThisIsMineText, TEXT_MTMOONB2F_SUPER_NERD_THEN_THIS_IS_MINE
 
 MtMoon3TrainerHeaders:
 	def_trainers 2
 MtMoon3TrainerHeader0:
-	trainer EVENT_BEAT_MT_MOON_3_TRAINER_0, 4, MtMoon3BattleText2, MtMoon3EndBattleText2, MtMoon3AfterBattleText2
+	trainer EVENT_BEAT_MT_MOON_3_TRAINER_0, 4, MtMoonB2FRocket1BattleText, MtMoonB2FRocket1EndBattleText, MtMoonB2FRocket1AfterBattleText
 MtMoon3TrainerHeader1:
-	trainer EVENT_BEAT_MT_MOON_3_TRAINER_1, 4, MtMoon3BattleText3, MtMoon3EndBattleText3, MtMoon3AfterBattleText3
+	trainer EVENT_BEAT_MT_MOON_3_TRAINER_1, 4, MtMoonB2FRocket2BattleText, MtMoonB2FRocket2EndBattleText, MtMoonB2FRocket2AfterBattleText
 MtMoon3TrainerHeader2:
-	trainer EVENT_BEAT_MT_MOON_3_TRAINER_2, 4, MtMoon3BattleText4, MtMoon3EndBattleText4, MtMoon3AfterBattleText4
+	trainer EVENT_BEAT_MT_MOON_3_TRAINER_2, 4, MtMoonB2FRocket3BattleText, MtMoonB2FRocket3EndBattleText, MtMoonB2FRocket3AfterBattleText
 MtMoon3TrainerHeader3:
-	trainer EVENT_BEAT_MT_MOON_3_TRAINER_3, 4, MtMoon3BattleText5, MtMoon3EndBattleText5, MtMoon3AfterBattleText5
+	trainer EVENT_BEAT_MT_MOON_3_TRAINER_3, 4, MtMoonB2FRocket4BattleText, MtMoonB2FRocket4EndBattleText, MtMoonB2FRocket4AfterBattleText
 	db -1 ; end
 
-MtMoon3Text1:
+MtMoonB2FSuperNerdText:
 	text_asm
 	CheckEvent EVENT_BEAT_MT_MOON_EXIT_SUPER_NERD
-	jr z, .asm_49e8d
+	jr z, .beat_super_nerd
 	; CheckEitherEventSetReuseA EVENT_GOT_DOME_FOSSIL, EVENT_GOT_HELIX_FOSSIL
 	and (1 << (EVENT_GOT_DOME_FOSSIL % 8)) | (1 << (EVENT_GOT_HELIX_FOSSIL % 8))
-	jr nz, .asm_49eb8
-	ld hl, MtMoon3Text_49f8f
+	jr nz, .got_a_fossil
+	ld hl, MtMoonB2fSuperNerdEachTakeOneText
 	call PrintText
-	jr .asm_49ebe
-.asm_49e8d
-	ld hl, MtMoon3Text_49f85
+	jr .done
+.beat_super_nerd
+	ld hl, MtMoonB2FSuperNerdTheyreBothMineText
 	call PrintText
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
-	ld hl, MtMoon3Text_49f8a
-	ld de, MtMoon3Text_49f8a
+	ld hl, MtMoonB2FSuperNerdOkIllShareText
+	ld de, MtMoonB2FSuperNerdOkIllShareText
 	call SaveEndBattleTextPointers
 	ldh a, [hSpriteIndex]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
-	ld a, $3
+	ld a, SCRIPT_MTMOONB2F_DEFEATED_SUPER_NERD
 	ld [wMtMoonB2FCurScript], a
 	ld [wCurMapScript], a
-	jr .asm_49ebe
-.asm_49eb8
-	ld hl, MtMoon3Text_49f94
+	jr .done
+.got_a_fossil
+	ld hl, MtMoonB2FSuperNerdTheresAPokemonLabText
 	call PrintText
-.asm_49ebe
+.done
 	jp TextScriptEnd
 
-MtMoon3Text2:
+MtMoonB2FRocket1Text:
 	text_asm
 	ld hl, MtMoon3TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
-MtMoon3Text3:
+MtMoonB2FRocket2Text:
 	text_asm
 	ld hl, MtMoon3TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
-MtMoon3Text4:
+MtMoonB2FRocket3Text:
 	text_asm
 	ld hl, MtMoon3TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
-MtMoon3Text5:
+MtMoonB2FRocket4Text:
 	text_asm
 	ld hl, MtMoon3TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
-MtMoon3Text6:
+MtMoonB2FDomeFossilText:
 	text_asm
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
-	ld hl, MtMoon3Text_49f24
+	ld hl, .YouWantText
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .asm_49f21
+	jr nz, .done
 	lb bc, DOME_FOSSIL, 1
 	call GiveItem
-	jp nc, MtMoon3Script_49f76
-	call MtMoon3Script_49f69
+	jp nc, MtMoonB2FYouHaveNoRoomText
+	call MtMoonB2FReceivedFossilText
 	ld a, HS_MT_MOON_B2F_FOSSIL_1
 	ld [wMissableObjectIndex], a
 	predef HideObject
 	SetEvent EVENT_GOT_DOME_FOSSIL
-	ld a, $4
+	ld a, SCRIPT_MTMOONB2F_MOVE_SUPER_NERD
 	ld [wMtMoonB2FCurScript], a
 	ld [wCurMapScript], a
-.asm_49f21
+.done
 	jp TextScriptEnd
 
-MtMoon3Text_49f24:
-	text_far _MtMoon3Text_49f24
+.YouWantText:
+	text_far _MtMoonB2FDomeFossilYouWantText
 	text_end
 
-MtMoon3Text7:
+MtMoonB2FHelixFossilText:
 	text_asm
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
-	ld hl, MtMoon3Text_49f64
+	ld hl, .YouWantText
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .asm_49f61
+	jr nz, .done
 	lb bc, HELIX_FOSSIL, 1
 	call GiveItem
-	jp nc, MtMoon3Script_49f76
-	call MtMoon3Script_49f69
+	jp nc, MtMoonB2FYouHaveNoRoomText
+	call MtMoonB2FReceivedFossilText
 	ld a, HS_MT_MOON_B2F_FOSSIL_2
 	ld [wMissableObjectIndex], a
 	predef HideObject
 	SetEvent EVENT_GOT_HELIX_FOSSIL
-	ld a, $4
+	ld a, SCRIPT_MTMOONB2F_MOVE_SUPER_NERD
 	ld [wMtMoonB2FCurScript], a
 	ld [wCurMapScript], a
-.asm_49f61
+.done
 	jp TextScriptEnd
 
-MtMoon3Text_49f64:
-	text_far _MtMoon3Text_49f64
+.YouWantText:
+	text_far _MtMoonB2FHelixFossilYouWantText
 	text_end
 
-MtMoon3Script_49f69:
-	ld hl, MtMoon3Text_49f6f
+MtMoonB2FReceivedFossilText:
+	ld hl, .Text
 	jp PrintText
 
-MtMoon3Text_49f6f:
-	text_far _MtMoon3Text_49f6f
+.Text:
+	text_far _MtMoonB2FReceivedFossilText
 	sound_get_key_item
 	text_waitbutton
 	text_end
 
-MtMoon3Script_49f76:
-	ld hl, MtMoon3Text_49f7f
+MtMoonB2FYouHaveNoRoomText:
+	ld hl, .Text
 	call PrintText
 	jp TextScriptEnd
 
-MtMoon3Text_49f7f:
-	text_far _MtMoon3Text_49f7f
+.Text:
+	text_far _MtMoonB2FYouHaveNoRoomText
 	text_waitbutton
 	text_end
 
-MtMoon3Text_49f85:
-	text_far _MtMoon3Text_49f85
+MtMoonB2FSuperNerdTheyreBothMineText:
+	text_far _MtMoonB2FSuperNerdTheyreBothMineText
 	text_end
 
-MtMoon3Text_49f8a:
-	text_far _MtMoon3Text_49f8a
+MtMoonB2FSuperNerdOkIllShareText:
+	text_far _MtMoonB2FSuperNerdOkIllShareText
 	text_end
 
-MtMoon3Text_49f8f:
-	text_far _MtMoon3Text_49f8f
+MtMoonB2fSuperNerdEachTakeOneText:
+	text_far _MtMoonB2fSuperNerdEachTakeOneText
 	text_end
 
-MtMoon3Text_49f94:
-	text_far _MtMoon3Text_49f94
+MtMoonB2FSuperNerdTheresAPokemonLabText:
+	text_far _MtMoonB2FSuperNerdTheresAPokemonLabText
 	text_end
 
-MtMoon3Text_49f99:
-	text_far _MtMoon3Text_49f99
+MtMoonB2FSuperNerdThenThisIsMineText:
+	text_far _MtMoonB2FSuperNerdThenThisIsMineText
 	sound_get_key_item
 	text_end
 
-MtMoon3BattleText2:
-	text_far _MtMoon3BattleText2
+MtMoonB2FRocket1BattleText:
+	text_far _MtMoonB2FRocket1BattleText
 	text_end
 
-MtMoon3EndBattleText2:
-	text_far _MtMoon3EndBattleText2
+MtMoonB2FRocket1EndBattleText:
+	text_far _MtMoonB2FRocket1EndBattleText
 	text_end
 
-MtMoon3AfterBattleText2:
-	text_far _MtMoon3AfterBattleText2
+MtMoonB2FRocket1AfterBattleText:
+	text_far _MtMoonB2FRocket1AfterBattleText
 	text_end
 
-MtMoon3BattleText3:
-	text_far _MtMoon3BattleText3
+MtMoonB2FRocket2BattleText:
+	text_far _MtMoonB2FRocket2BattleText
 	text_end
 
-MtMoon3EndBattleText3:
-	text_far _MtMoon3EndBattleText3
+MtMoonB2FRocket2EndBattleText:
+	text_far _MtMoonB2FRocket2EndBattleText
 	text_end
 
-MtMoon3AfterBattleText3:
-	text_far _MtMoon3AfterBattleText3
+MtMoonB2FRocket2AfterBattleText:
+	text_far _MtMoonB2FRocket2AfterBattleText
 	text_end
 
-MtMoon3BattleText4:
-	text_far _MtMoon3BattleText4
+MtMoonB2FRocket3BattleText:
+	text_far _MtMoonB2FRocket3BattleText
 	text_end
 
-MtMoon3EndBattleText4:
-	text_far _MtMoon3EndBattleText4
+MtMoonB2FRocket3EndBattleText:
+	text_far _MtMoonB2FRocket3EndBattleText
 	text_end
 
-MtMoon3AfterBattleText4:
-	text_far _MtMoon3AfterBattleText4
+MtMoonB2FRocket3AfterBattleText:
+	text_far _MtMoonB2FRocket3AfterBattleText
 	text_end
 
-MtMoon3BattleText5:
-	text_far _MtMoon3BattleText5
+MtMoonB2FRocket4BattleText:
+	text_far _MtMoonB2FRocket4BattleText
 	text_end
 
-MtMoon3EndBattleText5:
-	text_far _MtMoon3EndBattleText5
+MtMoonB2FRocket4EndBattleText:
+	text_far _MtMoonB2FRocket4EndBattleText
 	text_end
 
-MtMoon3AfterBattleText5:
-	text_far _MtMoon3AfterBattleText5
+MtMoonB2FRocket4AfterBattleText:
+	text_far _MtMoonB2FRocket4AfterBattleText
 	text_end

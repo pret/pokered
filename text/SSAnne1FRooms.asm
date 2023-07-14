@@ -1,9 +1,9 @@
-_SSAnne8Text8::
+_SSAnne1FRoomsWigglytuffText::
 	text "WIGGLYTUFF: Puup"
 	line "pupuu!@"
 	text_end
 
-_SSAnne8BattleText1::
+_SSAnne1FRoomsGentleman1BattleText::
 	text "I travel alone"
 	line "on my journeys!"
 
@@ -11,42 +11,42 @@ _SSAnne8BattleText1::
 	line "only friends!"
 	done
 
-_SSAnne8EndBattleText1::
+_SSAnne1FRoomsGentleman1EndBattleText::
 	text "My, my"
 	line "friends..."
 	prompt
 
-_SSAnne8AfterBattleText1::
+_SSAnne1FRoomsGentleman1AfterBattleText::
 	text "You should be"
 	line "nice to friends!"
 	done
 
-_SSAnne8BattleText2::
+_SSAnne1FRoomsGentleman2BattleText::
 	text "You pup! How dare"
 	line "you barge in!"
 	done
 
-_SSAnne8EndBattleText2::
+_SSAnne1FRoomsGentleman2EndBattleText::
 	text "Humph!"
 	line "You rude child!"
 	prompt
 
-_SSAnne8AfterBattleText2::
+_SSAnne1FRoomsGentleman2AfterBattleText::
 	text "I wish to be left"
 	line "alone! Get out!"
 	done
 
-_SSAnne8BattleText3::
+_SSAnne1FRoomsYoungsterBattleText::
 	text "I love #MON!"
 	line "Do you?"
 	done
 
-_SSAnne8EndBattleText3::
+_SSAnne1FRoomsYoungsterEndBattleText::
 	text "Wow! "
 	line "You're great!"
 	prompt
 
-_SSAnne8AfterBattleText3::
+_SSAnne1FRoomsYoungsterAfterBattleText::
 	text "Let me be your"
 	line "friend, OK?"
 
@@ -54,19 +54,19 @@ _SSAnne8AfterBattleText3::
 	line "#MON!"
 	done
 
-_SSAnne8BattleText4::
+_SSAnne1FRoomsCooltrainerFBattleText::
 	text "I collected these"
 	line "#MON from all"
 	cont "around the world!"
 	done
 
-_SSAnne8EndBattleText4::
+_SSAnne1FRoomsCooltrainerFEndBattleText::
 	text "Oh no!"
 	line "I went around the"
 	cont "world for these!"
 	prompt
 
-_SSAnne8AfterBattleText4::
+_SSAnne1FRoomsCooltrainerFAfterBattleText::
 	text "You hurt my poor"
 	line "worldly #MON!"
 
@@ -75,28 +75,28 @@ _SSAnne8AfterBattleText4::
 	cont "#MON CENTER!"
 	done
 
-_SSAnne8Text5::
+_SSAnne1FRoomsGirl1Text::
 	text "Waiter, I would"
 	line "like a cherry pie"
 	cont "please!"
 	done
 
-_SSAnne8Text6::
+_SSAnne1FRoomsMiddleAgedManText::
 	text "A cruise is so"
 	line "elegant yet cozy!"
 	done
 
-_SSAnne8Text7::
+_SSAnne1FRoomsLittleGirlText::
 	text "I always travel"
 	line "with WIGGLYTUFF!"
 	done
 
-_SSAnne8Text9::
+_SSAnne1FRoomsGirl2Text::
 	text "We are cruising"
 	line "around the world."
 	done
 
-_SSAnne8Text11::
+_SSAnne1FRoomsGentleman3Text::
 	text "Ssh! I'm a GLOBAL"
 	line "POLICE agent!"
 

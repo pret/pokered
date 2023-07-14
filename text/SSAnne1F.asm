@@ -1,4 +1,4 @@
-_SSAnne1Text1::
+_SSAnne1FWaiterText::
 	text "Bonjour!"
 	line "I am le waiter on"
 	cont "this ship!"
@@ -11,7 +11,7 @@ _SSAnne1Text1::
 	line "silent type!"
 	done
 
-_SSAnne1Text2::
+_SSAnne1FSailorText::
 	text "The passengers"
 	line "are restless!"
 

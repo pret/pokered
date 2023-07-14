@@ -5,21 +5,22 @@ Route5Gate_Script:
 	jp CallFunctionInTable
 
 Route5Gate_ScriptPointers:
-	dw Route5GateScript0
-	dw Route5GateScript1
+	def_script_pointers
+	dw_const Route5GateDefaultScript,      SCRIPT_ROUTE5GATE_DEFAULT
+	dw_const Route5GatePlayerMovingScript, SCRIPT_ROUTE5GATE_PLAYER_MOVING
 
-Route5GateScript_1df43:
+Route5GateMovePlayerUpScript:
 	ld a, D_UP
 	ld [wSimulatedJoypadStatesEnd], a
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
 	jp StartSimulatingJoypadStates
 
-Route5GateScript0:
+Route5GateDefaultScript:
 	ld a, [wd728]
 	bit 6, a
 	ret nz
-	ld hl, CoordsData_1df8f
+	ld hl, .PlayerInCoordsArray
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, PLAYER_DIR_LEFT
@@ -29,28 +30,28 @@ Route5GateScript0:
 	farcall RemoveGuardDrink
 	ldh a, [hItemToRemoveID]
 	and a
-	jr nz, .asm_1df82
-	ld a, $2
+	jr nz, .have_drink
+	ld a, TEXT_ROUTE5GATE_GUARD_GEE_IM_THIRSTY
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	call Route5GateScript_1df43
-	ld a, $1
+	call Route5GateMovePlayerUpScript
+	ld a, SCRIPT_ROUTE5GATE_PLAYER_MOVING
 	ld [wRoute5GateCurScript], a
 	ret
-.asm_1df82
-	ld a, $3
+.have_drink
+	ld a, TEXT_ROUTE5GATE_GUARD_GIVE_DRINK
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld hl, wd728
 	set 6, [hl]
 	ret
 
-CoordsData_1df8f:
+.PlayerInCoordsArray:
 	dbmapcoord  3,  3
 	dbmapcoord  4,  3
 	db -1 ; end
 
-Route5GateScript1:
+Route5GatePlayerMovingScript:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
@@ -61,55 +62,49 @@ Route5GateScript1:
 	ret
 
 Route5Gate_TextPointers:
-	dw Route5GateText1
-	dw Route5GateText2
-	dw Route5GateText3
+	def_text_pointers
+	dw_const SaffronGateGuardText,             TEXT_ROUTE5GATE_GUARD
+	dw_const SaffronGateGuardGeeImThirstyText, TEXT_ROUTE5GATE_GUARD_GEE_IM_THIRSTY
+	dw_const SaffronGateGuardGiveDrinkText,    TEXT_ROUTE5GATE_GUARD_GIVE_DRINK
 
-Route8GateText1:
-Route7GateText1:
-Route6GateText1:
-Route5GateText1:
+SaffronGateGuardText:
 	text_asm
 	ld a, [wd728]
 	bit 6, a
-	jr nz, .asm_88856
+	jr nz, .thanks_for_drink
 	farcall RemoveGuardDrink
 	ldh a, [hItemToRemoveID]
 	and a
-	jr nz, .asm_768a2
-	ld hl, Route5GateText2
+	jr nz, .have_drink
+	ld hl, SaffronGateGuardGeeImThirstyText
 	call PrintText
-	call Route5GateScript_1df43
-	ld a, $1
+	call Route5GateMovePlayerUpScript
+	ld a, SCRIPT_ROUTE5GATE_PLAYER_MOVING
 	ld [wRoute5GateCurScript], a
 	jp TextScriptEnd
-.asm_768a2
-	ld hl, Route5GateText3
+
+.have_drink
+	ld hl, SaffronGateGuardGiveDrinkText
 	call PrintText
 	ld hl, wd728
 	set 6, [hl]
 	jp TextScriptEnd
-.asm_88856
-	ld hl, SaffronGateText_1dff6
+
+.thanks_for_drink
+	ld hl, SaffronGateGuardThanksForTheDrinkText
 	call PrintText
 	jp TextScriptEnd
 
-Route8GateText2:
-Route7GateText2:
-Route6GateText2:
-Route5GateText2:
-	text_far _SaffronGateText_1dfe7
+SaffronGateGuardGeeImThirstyText:
+	text_far _SaffronGateGuardGeeImThirstyText
 	text_end
 
-Route8GateText3:
-Route7GateText3:
-Route6GateText3:
-Route5GateText3:
-	text_far _SaffronGateText_8aaa9
+SaffronGateGuardGiveDrinkText:
+	text_far _SaffronGateGuardImParchedText
 	sound_get_key_item
-	text_far _SaffronGateText_1dff1
+	text_far _SaffronGateGuardYouCanGoOnThroughText
 	text_end
 
-SaffronGateText_1dff6:
-	text_far _SaffronGateText_1dff6
+SaffronGateGuardThanksForTheDrinkText:
+	text_far _SaffronGateGuardThanksForTheDrinkText
 	text_end

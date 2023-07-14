@@ -1,4 +1,4 @@
-_TM35PreReceiveText::
+_CinnabarLabMetronomeRoomScientist1Text::
 	text "Tch-tch-tch!"
 	line "I made a cool TM!"
 
@@ -6,14 +6,14 @@ _TM35PreReceiveText::
 	line "kinds of fun!"
 	prompt
 
-_ReceivedTM35Text::
+_CinnabarLabMetronomeRoomScientist1ReceivedTM35Text::
 	text "<PLAYER> received "
 	line "@"
 	text_ram wStringBuffer
 	text "!@"
 	text_end
 
-_TM35ExplanationText::
+_CinnabarLabMetronomeRoomScientist1TM35ExplanationText::
 	text "Tch-tch-tch!"
 	line "That's the sound"
 	cont "of a METRONOME!"
@@ -24,18 +24,18 @@ _TM35ExplanationText::
 	cont "it doesn't know!"
 	done
 
-_TM35NoRoomText::
+_CinnabarLabMetronomeRoomScientist1TM35NoRoomText::
 	text "Your pack is"
 	line "crammed full!"
 	done
 
-_Lab3Text2::
+_CinnabarLabMetronomeRoomScientist2Text::
 	text "EEVEE can evolve"
 	line "into 1 of 3 kinds"
 	cont "of #MON."
 	done
 
-_Lab3Text3::
+_CinnabarLabMetronomeRoomPCText::
 	text "There's an e-mail"
 	line "message!"
 
@@ -59,6 +59,6 @@ _Lab3Text3::
 	para "..."
 	done
 
-_Lab3Text5::
+_CinnabarLabMetronomeRoomAmberPipeText::
 	text "An amber pipe!"
 	done

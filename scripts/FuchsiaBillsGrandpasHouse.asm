@@ -3,18 +3,19 @@ FuchsiaBillsGrandpasHouse_Script:
 	ret
 
 FuchsiaBillsGrandpasHouse_TextPointers:
-	dw FuchsiaHouse1Text1
-	dw FuchsiaHouse1Text2
-	dw FuchsiaHouse1Text3
+	def_text_pointers
+	dw_const FuchsiaBillsGrandpasHouseMiddleAgedWomanText, TEXT_FUCHSIABILLSGRANDPASHOUSE_MIDDLE_AGED_WOMAN
+	dw_const FuchsiaBillsGrandpasHouseBillsGrandpaText,    TEXT_FUCHSIABILLSGRANDPASHOUSE_BILLS_GRANDPA
+	dw_const FuchsiaBillsGrandpasHouseYoungsterText,       TEXT_FUCHSIABILLSGRANDPASHOUSE_YOUNGSTER
 
-FuchsiaHouse1Text1:
-	text_far _FuchsiaHouse1Text1
+FuchsiaBillsGrandpasHouseMiddleAgedWomanText:
+	text_far _FuchsiaBillsGrandpasHouseMiddleAgedWomanText
 	text_end
 
-FuchsiaHouse1Text2:
-	text_far _FuchsiaHouse1Text2
+FuchsiaBillsGrandpasHouseBillsGrandpaText:
+	text_far _FuchsiaBillsGrandpasHouseBillsGrandpaText
 	text_end
 
-FuchsiaHouse1Text3:
-	text_far _FuchsiaHouse1Text3
+FuchsiaBillsGrandpasHouseYoungsterText:
+	text_far _FuchsiaBillsGrandpasHouseYoungsterText
 	text_end

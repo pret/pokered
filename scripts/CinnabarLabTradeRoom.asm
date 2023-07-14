@@ -2,24 +2,25 @@ CinnabarLabTradeRoom_Script:
 	jp EnableAutoTextBoxDrawing
 
 CinnabarLabTradeRoom_TextPointers:
-	dw Lab2Text1
-	dw Lab2Text2
-	dw Lab2Text3
+	def_text_pointers
+	dw_const CinnabarLabTradeRoomSuperNerdText, TEXT_CINNABARLABTRADEROOM_SUPER_NERD
+	dw_const CinnabarLabTradeRoomGrampsText,    TEXT_CINNABARLABTRADEROOM_GRAMPS
+	dw_const CinnabarLabTradeRoomBeautyText,    TEXT_CINNABARLABTRADEROOM_BEAUTY
 
-Lab2Text1:
-	text_far _Lab2Text1
+CinnabarLabTradeRoomSuperNerdText:
+	text_far _CinnabarLabTradeRoomSuperNerdText
 	text_end
 
-Lab2Text2:
+CinnabarLabTradeRoomGrampsText:
 	text_asm
 	ld a, TRADE_FOR_DORIS
 	ld [wWhichTrade], a
-	jr Lab2DoTrade
+	jr CinnabarLabTradeRoomDoTrade
 
-Lab2Text3:
+CinnabarLabTradeRoomBeautyText:
 	text_asm
 	ld a, TRADE_FOR_CRINKLES
 	ld [wWhichTrade], a
-Lab2DoTrade:
+CinnabarLabTradeRoomDoTrade:
 	predef DoInGameTradeDialogue
 	jp TextScriptEnd

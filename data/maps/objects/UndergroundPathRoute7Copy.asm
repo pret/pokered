@@ -1,3 +1,7 @@
+	object_const_def
+	const UNDERGROUNDPATHROUTE7COPY_UNUSED_GIRL
+	const UNDERGROUNDPATHROUTE7COPY_UNUSED_MIDDLE_AGED_MAN
+
 UndergroundPathRoute7Copy_Object:
 	db $a ; border block
 
@@ -9,7 +13,7 @@ UndergroundPathRoute7Copy_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  3,  2, SPRITE_GIRL, STAY, NONE, 1 ; person
-	object_event  2,  4, SPRITE_MIDDLE_AGED_MAN, STAY, NONE, 2 ; person
+	object_event  3,  2, SPRITE_GIRL, STAY, NONE, TEXT_UNDERGROUNDPATHROUTE7COPY_UNUSED_GIRL
+	object_event  2,  4, SPRITE_MIDDLE_AGED_MAN, STAY, NONE, TEXT_UNDERGROUNDPATHROUTE7COPY_UNUSED_MIDDLE_AGED_MAN
 
 	def_warps_to UNDERGROUND_PATH_ROUTE_7_COPY

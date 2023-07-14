@@ -5,13 +5,14 @@ Route8Gate_Script:
 	jp CallFunctionInTable
 
 Route8Gate_ScriptPointers:
-	dw Route8GateScript0
-	dw Route8GateScript1
+	def_script_pointers
+	dw_const Route8GateDefaultScript,      SCRIPT_ROUTE8GATE_DEFAULT
+	dw_const Route8GatePlayerMovingScript, SCRIPT_ROUTE8GATE_PLAYER_MOVING
 
-Route8GateScript_1e1d7:
+Route8GateMovePlayerRightScript:
 	ld hl, wd730
 	set 7, [hl]
-	ld a, $10
+	ld a, D_RIGHT
 	ld [wSimulatedJoypadStatesEnd], a
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
@@ -20,11 +21,11 @@ Route8GateScript_1e1d7:
 	ld [wOverrideSimulatedJoypadStatesMask], a
 	ret
 
-Route8GateScript0:
+Route8GateDefaultScript:
 	ld a, [wd728]
 	bit 6, a
 	ret nz
-	ld hl, CoordsData_1e22c
+	ld hl, .PlayerInCoordsArray
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, PLAYER_DIR_LEFT
@@ -34,27 +35,27 @@ Route8GateScript0:
 	farcall RemoveGuardDrink
 	ldh a, [hItemToRemoveID]
 	and a
-	jr nz, .asm_1e220
-	ld a, $2
+	jr nz, .have_drink
+	ld a, TEXT_ROUTE8GATE_GUARD_GEE_IM_THIRSTY
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	call Route8GateScript_1e1d7
-	ld a, $1
+	call Route8GateMovePlayerRightScript
+	ld a, SCRIPT_ROUTE8GATE_PLAYER_MOVING
 	ld [wRoute8GateCurScript], a
 	ret
-.asm_1e220
+.have_drink
 	ld hl, wd728
 	set 6, [hl]
-	ld a, $3
+	ld a, TEXT_ROUTE8GATE_GUARD_GIVE_DRINK
 	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
-CoordsData_1e22c:
+.PlayerInCoordsArray:
 	dbmapcoord  2,  3
 	dbmapcoord  2,  4
 	db -1 ; end
 
-Route8GateScript1:
+Route8GatePlayerMovingScript:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
@@ -65,6 +66,7 @@ Route8GateScript1:
 	ret
 
 Route8Gate_TextPointers:
-	dw Route8GateText1
-	dw Route8GateText2
-	dw Route8GateText3
+	def_text_pointers
+	dw_const SaffronGateGuardText,             TEXT_ROUTE8GATE_GUARD
+	dw_const SaffronGateGuardGeeImThirstyText, TEXT_ROUTE8GATE_GUARD_GEE_IM_THIRSTY
+	dw_const SaffronGateGuardGiveDrinkText,    TEXT_ROUTE8GATE_GUARD_GIVE_DRINK

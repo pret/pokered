@@ -1,42 +1,42 @@
-_SilphCo3Text_59ff9::
+_SilphCo3FSilphWorkerMWhatShouldIDoText::
 	text "I work for SILPH."
 	line "What should I do?"
 	done
 
-_SilphCo3Text_59ffe::
+_SilphCo3FSilphWorkerMYouSavedUsText::
 	text "<PLAYER>! You and"
 	line "your #MON"
 	cont "saved us!"
 	done
 
-_SilphCo3BattleText1::
+_SilphCo3FRocketBattleText::
 	text "Quit messing with"
 	line "us, kid!"
 	done
 
-_SilphCo3EndBattleText1::
+_SilphCo3FRocketEndBattleText::
 	text "I give"
 	line "up!"
 	prompt
 
-_SilphCo3AfterBattleText1::
+_SilphCo3FRocketAfterBattleText::
 	text "A hint? You can"
 	line "open doors with a"
 	cont "CARD KEY!"
 	done
 
-_SilphCo3BattleText2::
+_SilphCo3FScientistBattleText::
 	text "I support TEAM"
 	line "ROCKET more than"
 	cont "I support SILPH!"
 	done
 
-_SilphCo3EndBattleText2::
+_SilphCo3FScientistEndBattleText::
 	text "You"
 	line "really got me!"
 	prompt
 
-_SilphCo3AfterBattleText2::
+_SilphCo3FScientistAfterBattleText::
 	text "Humph..."
 
 	para "TEAM ROCKET said"

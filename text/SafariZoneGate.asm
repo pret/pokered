@@ -1,9 +1,9 @@
-_SafariZoneEntranceText1::
+_SafariZoneGateSafariZoneWorker1Text::
 	text "Welcome to the"
 	line "SAFARI ZONE!"
 	done
 
-SafariZoneEntranceText_9e6e4::
+_SafariZoneGateSafariZoneWorker1WouldYouLikeToJoinText::
 	text "For just ¥500,"
 	line "you can catch all"
 	cont "the #MON you"
@@ -13,7 +13,7 @@ SafariZoneEntranceText_9e6e4::
 	line "join the hunt?@"
 	text_end
 
-SafariZoneEntranceText_9e747::
+_SafariZoneGateSafariZoneWorker1ThatllBe500PleaseText::
 	text "That'll be ¥500"
 	line "please!"
 
@@ -25,7 +25,7 @@ SafariZoneEntranceText_9e747::
 	line "30 SAFARI BALLs!@"
 	text_end
 
-_SafariZoneEntranceText_75360::
+_SafariZoneGateSafariZoneWorker1CallYouOnThePAText::
 	text_start
 
 	para "We'll call you on"
@@ -34,42 +34,42 @@ _SafariZoneEntranceText_75360::
 	cont "or SAFARI BALLs!"
 	done
 
-_SafariZoneEntranceText_75365::
+_SafariZoneGateSafariZoneWorker1PleaseComeAgainText::
 	text "OK! Please come"
 	line "again!"
 	done
 
-_SafariZoneEntranceText_7536a::
+_SafariZoneGateSafariZoneWorker1NotEnoughMoneyText::
 	text "Oops! Not enough"
 	line "money!"
 	done
 
-SafariZoneEntranceText_9e814::
+_SafariZoneGateSafariZoneWorker1LeavingEarlyText::
 	text "Leaving early?@"
 	text_end
 
-_SafariZoneEntranceText_753bb::
+_SafariZoneGateSafariZoneWorker1ReturnSafariBallsText::
 	text "Please return any"
 	line "SAFARI BALLs you"
 	cont "have left."
 	done
 
-_SafariZoneEntranceText_753c0::
+_SafariZoneGateSafariZoneWorker1GoodLuckText::
 	text "Good Luck!"
 	done
 
-_SafariZoneEntranceText_753c5::
+_SafariZoneGateSafariZoneWorker1GoodHaulComeAgainText::
 	text "Did you get a"
 	line "good haul?"
 	cont "Come again!"
 	done
 
-_SafariZoneEntranceText_753e6::
+_SafariZoneGateSafariZoneWorker2FirstTimeHereText::
 	text "Hi! Is it your"
 	line "first time here?"
 	done
 
-_SafariZoneEntranceText_753eb::
+_SafariZoneGateSafariZoneWorker2SafariZoneExplanationText::
 	text "SAFARI ZONE has 4"
 	line "zones in it."
 
@@ -91,7 +91,7 @@ _SafariZoneEntranceText_753eb::
 	cont "new #MON!"
 	done
 
-_SafariZoneEntranceText_753f0::
+_SafariZoneGateSafariZoneWorker2YoureARegularHereText::
 	text "Sorry, you're a"
 	line "regular here!"
 	done
