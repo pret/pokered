@@ -1,4 +1,4 @@
-_SaffronGateText_1dfe7::
+_SaffronGateGuardGeeImThirstyText::
 	text "I'm on guard duty."
 	line "Gee, I'm thirsty,"
 	cont "though!"
@@ -7,7 +7,7 @@ _SaffronGateText_1dfe7::
 	line "the road's closed."
 	done
 
-_SaffronGateText_8aaa9::
+_SaffronGateGuardImParchedText::
 	text "Whoa, boy!"
 	line "I'm parched!"
 	cont "..."
@@ -16,7 +16,7 @@ _SaffronGateText_8aaa9::
 	cont "Gee, thanks!@"
 	text_end
 
-_SaffronGateText_1dff1::
+_SaffronGateGuardYouCanGoOnThroughText::
 	text_start
 
 	para "..."
@@ -32,7 +32,7 @@ _SaffronGateText_1dff1::
 	cont "the other guards!"
 	done
 
-_SaffronGateText_1dff6::
+_SaffronGateGuardThanksForTheDrinkText::
 	text "Hi, thanks for"
 	line "the cool drinks!"
 	done

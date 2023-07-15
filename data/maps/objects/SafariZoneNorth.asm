@@ -1,3 +1,7 @@
+	object_const_def
+	const SAFARIZONENORTH_PROTEIN
+	const SAFARIZONENORTH_TM_SKULL_BASH
+
 SafariZoneNorth_Object:
 	db $0 ; border block
 
@@ -13,14 +17,14 @@ SafariZoneNorth_Object:
 	warp_event 35,  3, SAFARI_ZONE_NORTH_REST_HOUSE, 1
 
 	def_bg_events
-	bg_event 36,  4, 3 ; SafariZoneNorthText3
-	bg_event  4, 25, 4 ; SafariZoneNorthText4
-	bg_event 13, 31, 5 ; SafariZoneNorthText5
-	bg_event 19, 33, 6 ; SafariZoneNorthText6
-	bg_event 26, 28, 7 ; SafariZoneNorthText7
+	bg_event 36,  4, TEXT_SAFARIZONENORTH_REST_HOUSE_SIGN
+	bg_event  4, 25, TEXT_SAFARIZONENORTH_TRAINER_TIPS_1
+	bg_event 13, 31, TEXT_SAFARIZONENORTH_SIGN
+	bg_event 19, 33, TEXT_SAFARIZONENORTH_TRAINER_TIPS_2
+	bg_event 26, 28, TEXT_SAFARIZONENORTH_TRAINER_TIPS_3
 
 	def_object_events
-	object_event 25,  1, SPRITE_POKE_BALL, STAY, NONE, 1, PROTEIN
-	object_event 19,  7, SPRITE_POKE_BALL, STAY, NONE, 2, TM_SKULL_BASH
+	object_event 25,  1, SPRITE_POKE_BALL, STAY, NONE, TEXT_SAFARIZONENORTH_PROTEIN, PROTEIN
+	object_event 19,  7, SPRITE_POKE_BALL, STAY, NONE, TEXT_SAFARIZONENORTH_TM_SKULL_BASH, TM_SKULL_BASH
 
 	def_warps_to SAFARI_ZONE_NORTH

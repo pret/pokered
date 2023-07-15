@@ -1,10 +1,10 @@
-_CeladonMart4Text2::
+_CeladonMart4FSuperNerdText::
 	text "I'm getting a"
 	line "# DOLL for my"
 	cont "girl friend!"
 	done
 
-_CeladonMart4Text3::
+_CeladonMart4FYoungsterText::
 	text "I heard something"
 	line "useful."
 
@@ -14,7 +14,7 @@ _CeladonMart4Text3::
 	cont "with a # DOLL!"
 	done
 
-_CeladonMart4Text4::
+_CeladonMart4FCurrentFloorSignText::
 	text "Express yourself"
 	line "with gifts!"
 

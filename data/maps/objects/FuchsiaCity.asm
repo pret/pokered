@@ -1,3 +1,15 @@
+	object_const_def
+	const FUCHSIACITY_YOUNGSTER1
+	const FUCHSIACITY_GAMBLER
+	const FUCHSIACITY_ERIK
+	const FUCHSIACITY_YOUNGSTER2
+	const FUCHSIACITY_CHANSEY
+	const FUCHSIACITY_VOLTORB
+	const FUCHSIACITY_KANGASKHAN
+	const FUCHSIACITY_SLOWPOKE
+	const FUCHSIACITY_LAPRAS
+	const FUCHSIACITY_FOSSIL
+
 FuchsiaCity_Object:
 	db $f ; border block
 
@@ -13,31 +25,31 @@ FuchsiaCity_Object:
 	warp_event 31, 24, FUCHSIA_GOOD_ROD_HOUSE, 1
 
 	def_bg_events
-	bg_event 15, 23, 11 ; FuchsiaCityText11
-	bg_event 25, 15, 12 ; FuchsiaCityText12
-	bg_event 17,  5, 13 ; FuchsiaCityText13
-	bg_event  6, 13, 14 ; MartSignText
-	bg_event 20, 27, 15 ; PokeCenterSignText
-	bg_event 27, 29, 16 ; FuchsiaCityText16
-	bg_event 21, 15, 17 ; FuchsiaCityText17
-	bg_event  5, 29, 18 ; FuchsiaCityText18
-	bg_event 33,  7, 19 ; FuchsiaCityText19
-	bg_event 27,  7, 20 ; FuchsiaCityText20
-	bg_event 13,  7, 21 ; FuchsiaCityText21
-	bg_event 31, 13, 22 ; FuchsiaCityText22
-	bg_event 13, 15, 23 ; FuchsiaCityText23
-	bg_event  7,  7, 24 ; FuchsiaCityText24
+	bg_event 15, 23, TEXT_FUCHSIACITY_SIGN1
+	bg_event 25, 15, TEXT_FUCHSIACITY_SIGN2
+	bg_event 17,  5, TEXT_FUCHSIACITY_SAFARI_GAME_SIGN
+	bg_event  6, 13, TEXT_FUCHSIACITY_MART_SIGN
+	bg_event 20, 27, TEXT_FUCHSIACITY_POKECENTER_SIGN
+	bg_event 27, 29, TEXT_FUCHSIACITY_WARDENS_HOME_SIGN
+	bg_event 21, 15, TEXT_FUCHSIACITY_SAFARI_ZONE_SIGN
+	bg_event  5, 29, TEXT_FUCHSIACITY_GYM_SIGN
+	bg_event 33,  7, TEXT_FUCHSIACITY_CHANSEY_SIGN
+	bg_event 27,  7, TEXT_FUCHSIACITY_VOLTORB_SIGN
+	bg_event 13,  7, TEXT_FUCHSIACITY_KANGASKHAN_SIGN
+	bg_event 31, 13, TEXT_FUCHSIACITY_SLOWPOKE_SIGN
+	bg_event 13, 15, TEXT_FUCHSIACITY_LAPRAS_SIGN
+	bg_event  7,  7, TEXT_FUCHSIACITY_FOSSIL_SIGN
 
 	def_object_events
-	object_event 10, 12, SPRITE_YOUNGSTER, WALK, LEFT_RIGHT, 1 ; person
-	object_event 28, 17, SPRITE_GAMBLER, WALK, LEFT_RIGHT, 2 ; person
-	object_event 30, 14, SPRITE_FISHER, STAY, DOWN, 3 ; person
-	object_event 24,  8, SPRITE_YOUNGSTER, STAY, UP, 4 ; person
-	object_event 31,  5, SPRITE_FAIRY, WALK, ANY_DIR, 5 ; person
-	object_event 25,  6, SPRITE_POKE_BALL, STAY, NONE, 6 ; person
-	object_event 12,  6, SPRITE_MONSTER, WALK, LEFT_RIGHT, 7 ; person
-	object_event 30, 12, SPRITE_MONSTER, WALK, LEFT_RIGHT, 8 ; person
-	object_event  8, 17, SPRITE_SEEL, WALK, ANY_DIR, 9 ; person
-	object_event  6,  5, SPRITE_FOSSIL, STAY, NONE, 10 ; person
+	object_event 10, 12, SPRITE_YOUNGSTER, WALK, LEFT_RIGHT, TEXT_FUCHSIACITY_YOUNGSTER1
+	object_event 28, 17, SPRITE_GAMBLER, WALK, LEFT_RIGHT, TEXT_FUCHSIACITY_GAMBLER
+	object_event 30, 14, SPRITE_FISHER, STAY, DOWN, TEXT_FUCHSIACITY_ERIK
+	object_event 24,  8, SPRITE_YOUNGSTER, STAY, UP, TEXT_FUCHSIACITY_YOUNGSTER2
+	object_event 31,  5, SPRITE_FAIRY, WALK, ANY_DIR, TEXT_FUCHSIACITY_CHANSEY
+	object_event 25,  6, SPRITE_POKE_BALL, STAY, NONE, TEXT_FUCHSIACITY_VOLTORB
+	object_event 12,  6, SPRITE_MONSTER, WALK, LEFT_RIGHT, TEXT_FUCHSIACITY_KANGASKHAN
+	object_event 30, 12, SPRITE_MONSTER, WALK, LEFT_RIGHT, TEXT_FUCHSIACITY_SLOWPOKE
+	object_event  8, 17, SPRITE_SEEL, WALK, ANY_DIR, TEXT_FUCHSIACITY_LAPRAS
+	object_event  6,  5, SPRITE_FOSSIL, STAY, NONE, TEXT_FUCHSIACITY_FOSSIL
 
 	def_warps_to FUCHSIA_CITY

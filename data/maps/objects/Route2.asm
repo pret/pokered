@@ -1,3 +1,7 @@
+	object_const_def
+	const ROUTE2_MOON_STONE
+	const ROUTE2_HP_UP
+
 Route2_Object:
 	db $f ; border block
 
@@ -10,12 +14,12 @@ Route2_Object:
 	warp_event  3, 43, VIRIDIAN_FOREST_SOUTH_GATE, 3
 
 	def_bg_events
-	bg_event  5, 65, 3 ; Route2Text3
-	bg_event 11, 11, 4 ; Route2Text4
+	bg_event  5, 65, TEXT_ROUTE2_SIGN
+	bg_event 11, 11, TEXT_ROUTE2_DIGLETTS_CAVE_SIGN
 
 	def_object_events
-	object_event 13, 54, SPRITE_POKE_BALL, STAY, NONE, 1, MOON_STONE
-	object_event 13, 45, SPRITE_POKE_BALL, STAY, NONE, 2, HP_UP
+	object_event 13, 54, SPRITE_POKE_BALL, STAY, NONE, TEXT_ROUTE2_MOON_STONE, MOON_STONE
+	object_event 13, 45, SPRITE_POKE_BALL, STAY, NONE, TEXT_ROUTE2_HP_UP, HP_UP
 
 	def_warps_to ROUTE_2
 

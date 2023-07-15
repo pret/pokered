@@ -1,3 +1,6 @@
+	object_const_def
+	const DAYCARE_GENTLEMAN
+
 Daycare_Object:
 	db $a ; border block
 
@@ -8,6 +11,6 @@ Daycare_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  2,  3, SPRITE_GENTLEMAN, STAY, RIGHT, 1 ; person
+	object_event  2,  3, SPRITE_GENTLEMAN, STAY, RIGHT, TEXT_DAYCARE_GENTLEMAN
 
 	def_warps_to DAYCARE

@@ -1,10 +1,10 @@
-_SaffronPokecenterText2::
+_SaffronPokecenterBeautyText::
 	text "#MON growth"
 	line "rates differ from"
 	cont "specie to specie."
 	done
 
-_SaffronPokecenterText3::
+_SaffronPokecenterGentlemanText::
 	text "SILPH CO. is very"
 	line "famous. That's"
 	cont "why it attracted"

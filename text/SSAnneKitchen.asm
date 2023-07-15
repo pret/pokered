@@ -1,20 +1,20 @@
-_SSAnne6Text1::
+_SSAnneKitchenCook1Text::
 	text "You, mon petit!"
 	line "We're busy here!"
 	cont "Out of the way!"
 	done
 
-_SSAnne6Text2::
+_SSAnneKitchenCook2Text::
 	text "I saw an odd ball"
 	line "in the trash."
 	done
 
-_SSAnne6Text3::
+_SSAnneKitchenCook3Text::
 	text "I'm so busy I'm"
 	line "getting dizzy!"
 	done
 
-_SSAnne6Text4::
+_SSAnneKitchenCook4Text::
 	text "Hum-de-hum-de-"
 	line "ho..."
 
@@ -23,7 +23,7 @@ _SSAnne6Text4::
 	cont "Hum-hum..."
 	done
 
-_SSAnne6Text5::
+_SSAnneKitchenCook5Text::
 	text "Did you hear about"
 	line "SNORLAX?"
 
@@ -31,7 +31,7 @@ _SSAnne6Text5::
 	line "eat and sleep!"
 	done
 
-_SSAnne6Text6::
+_SSAnneKitchenCook6Text::
 	text "Snivel...Sniff..."
 
 	para "I only get to"
@@ -39,14 +39,14 @@ _SSAnne6Text6::
 	cont "Snivel..."
 	done
 
-_SSAnne6Text_61807::
+_SSAnneKitchenCook7MainCourseIsText::
 	text "Er-hem! Indeed I"
 	line "am le CHEF!"
 
 	para "Le main course is"
 	prompt
 
-_SSAnne6Text_6180c::
+SSAnneKitchenCook7SalmonDuSaladText::
 	text "Salmon du Salad!"
 
 	para "Les guests may"
@@ -54,14 +54,14 @@ _SSAnne6Text_6180c::
 	cont "again, however!"
 	done
 
-_SSAnne6Text_61811::
+SSAnneKitchenCook7EelsAuBarbecueText::
 	text "Eels au Barbecue!"
 
 	para "Les guests will"
 	line "mutiny, I fear."
 	done
 
-_SSAnne6Text_61816::
+SSAnneKitchenCook7PrimeBeefSteakText::
 	text "Prime Beef Steak!"
 
 	para "But, have I enough"

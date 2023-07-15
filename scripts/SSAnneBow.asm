@@ -8,69 +8,71 @@ SSAnneBow_Script:
 	ret
 
 SSAnneBow_ScriptPointers:
-	dw CheckFightingMapTrainers
-	dw DisplayEnemyTrainerTextAndStartBattle
-	dw EndTrainerBattle
+	def_script_pointers
+	dw_const CheckFightingMapTrainers,              SCRIPT_SSANNEBOW_DEFAULT
+	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_SSANNEBOW_START_BATTLE
+	dw_const EndTrainerBattle,                      SCRIPT_SSANNEBOW_END_BATTLE
 
 SSAnneBow_TextPointers:
-	dw SSAnne5Text1
-	dw SSAnne5Text2
-	dw SSAnne5Text3
-	dw SSAnne5Text4
-	dw SSAnne5Text5
+	def_text_pointers
+	dw_const SSAnneBowSuperNerdText,    TEXT_SSANNEBOW_SUPER_NERD
+	dw_const SSAnneBowSailor1Text,      TEXT_SSANNEBOW_SAILOR1
+	dw_const SSAnneBowCooltrainerMText, TEXT_SSANNEBOW_COOLTRAINER_M
+	dw_const SSAnneBowSailor2Text,      TEXT_SSANNEBOW_SAILOR2
+	dw_const SSAnneBowSailor3Text,      TEXT_SSANNEBOW_SAILOR3
 
 SSAnne5TrainerHeaders:
 	def_trainers 4
 SSAnne5TrainerHeader0:
-	trainer EVENT_BEAT_SS_ANNE_5_TRAINER_0, 3, SSAnne5BattleText1, SSAnne5EndBattleText1, SSAnne5AfterBattleText1
+	trainer EVENT_BEAT_SS_ANNE_5_TRAINER_0, 3, SSAnneBowSailor2BattleText, SSAnneBowSailor2EndBattleText, SSAnneBowSailor2AfterBattleText
 SSAnne5TrainerHeader1:
-	trainer EVENT_BEAT_SS_ANNE_5_TRAINER_1, 3, SSAnne5BattleText2, SSAnne5EndBattleText2, SSAnne5AfterBattleText2
+	trainer EVENT_BEAT_SS_ANNE_5_TRAINER_1, 3, SSAnneBowSailor3BattleText, SSAnneBowSailor3EndBattleText, SSAnneBowSailor3AfterBattleText
 	db -1 ; end
 
-SSAnne5Text1:
-	text_far _SSAnne5Text1
+SSAnneBowSuperNerdText:
+	text_far _SSAnneBowSuperNerdText
 	text_end
 
-SSAnne5Text2:
-	text_far _SSAnne5Text2
+SSAnneBowSailor1Text:
+	text_far _SSAnneBowSailor1Text
 	text_end
 
-SSAnne5Text3:
-	text_far _SSAnne5Text3
+SSAnneBowCooltrainerMText:
+	text_far _SSAnneBowCooltrainerMText
 	text_end
 
-SSAnne5Text4:
+SSAnneBowSailor2Text:
 	text_asm
 	ld hl, SSAnne5TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
-SSAnne5BattleText1:
-	text_far _SSAnne5BattleText1
+SSAnneBowSailor2BattleText:
+	text_far _SSAnneBowSailor2BattleText
 	text_end
 
-SSAnne5EndBattleText1:
-	text_far _SSAnne5EndBattleText1
+SSAnneBowSailor2EndBattleText:
+	text_far _SSAnneBowSailor2EndBattleText
 	text_end
 
-SSAnne5AfterBattleText1:
-	text_far _SSAnne5AfterBattleText1
+SSAnneBowSailor2AfterBattleText:
+	text_far _SSAnneBowSailor2AfterBattleText
 	text_end
 
-SSAnne5Text5:
+SSAnneBowSailor3Text:
 	text_asm
 	ld hl, SSAnne5TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
-SSAnne5BattleText2:
-	text_far _SSAnne5BattleText2
+SSAnneBowSailor3BattleText:
+	text_far _SSAnneBowSailor3BattleText
 	text_end
 
-SSAnne5EndBattleText2:
-	text_far _SSAnne5EndBattleText2
+SSAnneBowSailor3EndBattleText:
+	text_far _SSAnneBowSailor3EndBattleText
 	text_end
 
-SSAnne5AfterBattleText2:
-	text_far _SSAnne5AfterBattleText2
+SSAnneBowSailor3AfterBattleText:
+	text_far _SSAnneBowSailor3AfterBattleText
 	text_end

@@ -1,15 +1,15 @@
-_RocketHideout2BattleText2::
+_RocketHideoutB1FRocketBattleText::
 	text "BOSS said you can"
 	line "see GHOSTs with"
 	cont "the SILPH SCOPE!"
 	done
 
-_RocketHideout2EndBattleText2::
+_RocketHideoutB1FRocketEndBattleText::
 	text "I"
 	line "surrender!"
 	prompt
 
-_RocketHideout2AfterBattleTxt2::
+_RocketHideoutB1FRocketAfterBattleText::
 	text "The TEAM ROCKET"
 	line "HQ has 4 basement"
 	cont "floors. Can you"

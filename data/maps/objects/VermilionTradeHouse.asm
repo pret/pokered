@@ -1,3 +1,6 @@
+	object_const_def
+	const VERMILIONTRADEHOUSE_LITTLE_GIRL
+
 VermilionTradeHouse_Object:
 	db $a ; border block
 
@@ -8,6 +11,6 @@ VermilionTradeHouse_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  3,  5, SPRITE_LITTLE_GIRL, STAY, UP, 1 ; person
+	object_event  3,  5, SPRITE_LITTLE_GIRL, STAY, UP, TEXT_VERMILIONTRADEHOUSE_LITTLE_GIRL
 
 	def_warps_to VERMILION_TRADE_HOUSE

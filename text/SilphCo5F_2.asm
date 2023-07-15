@@ -1,32 +1,32 @@
-_SilphCo5EndBattleText4::
+_SilphCo5FRockerEndBattleText::
 	text "Oh"
 	line "goodness!"
 	prompt
 
-_SilphCo5AfterBattleText4::
+_SilphCo5FRockerAfterBattleText::
 	text "You're only on 5F."
 	line "It's a long way"
 	cont "to my BOSS!"
 	done
 
-_SilphCo5BattleText5::
+_SilphCo5FRocket2BattleText::
 	text "Show TEAM ROCKET"
 	line "a little respect!"
 	done
 
-_SilphCo5EndBattleText5::
+_SilphCo5FRocket2EndBattleText::
 	text "Cough..."
 	line "Cough..."
 	prompt
 
-_SilphCo5AfterBattleText5::
+_SilphCo5FRocket2AfterBattleText::
 	text "Which reminds me."
 
 	para "KOFFING evolves"
 	line "into WEEZING!"
 	done
 
-_SilphCo5Text9::
+_SilphCo5FPokemonReport1Text::
 	text "It's a #MON"
 	line "REPORT!"
 
@@ -36,7 +36,7 @@ _SilphCo5Text9::
 	cont "reality #MON."
 	done
 
-_SilphCo5Text10::
+_SilphCo5FPokemonReport2Text::
 	text "It's a #MON"
 	line "REPORT!"
 
@@ -45,7 +45,7 @@ _SilphCo5Text10::
 	cont "been confirmed."
 	done
 
-_SilphCo5Text11::
+_SilphCo5FPokemonReport3Text::
 	text "It's a #MON"
 	line "REPORT!"
 

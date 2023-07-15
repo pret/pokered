@@ -3,7 +3,7 @@ PlayerStepOutFromDoor::
 	res 1, [hl]
 	call IsPlayerStandingOnDoorTile
 	jr nc, .notStandingOnDoor
-	ld a, $fc
+	ld a, SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	ld hl, wd736
 	set 1, [hl]
@@ -81,7 +81,7 @@ PalletMovementScript_OakMoveLeft:
 .done
 	ld hl, wFlags_D733
 	set 1, [hl]
-	ld a, $fc
+	ld a, SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	ret
 

@@ -1,3 +1,9 @@
+	object_const_def
+	const LAVENDERPOKECENTER_NURSE
+	const LAVENDERPOKECENTER_GENTLEMAN
+	const LAVENDERPOKECENTER_LITTLE_GIRL
+	const LAVENDERPOKECENTER_LINK_RECEPTIONIST
+
 LavenderPokecenter_Object:
 	db $0 ; border block
 
@@ -8,9 +14,9 @@ LavenderPokecenter_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  3,  1, SPRITE_NURSE, STAY, DOWN, 1 ; person
-	object_event  5,  3, SPRITE_GENTLEMAN, STAY, NONE, 2 ; person
-	object_event  2,  6, SPRITE_LITTLE_GIRL, WALK, UP_DOWN, 3 ; person
-	object_event 11,  2, SPRITE_LINK_RECEPTIONIST, STAY, DOWN, 4 ; person
+	object_event  3,  1, SPRITE_NURSE, STAY, DOWN, TEXT_LAVENDERPOKECENTER_NURSE
+	object_event  5,  3, SPRITE_GENTLEMAN, STAY, NONE, TEXT_LAVENDERPOKECENTER_GENTLEMAN
+	object_event  2,  6, SPRITE_LITTLE_GIRL, WALK, UP_DOWN, TEXT_LAVENDERPOKECENTER_LITTLE_GIRL
+	object_event 11,  2, SPRITE_LINK_RECEPTIONIST, STAY, DOWN, TEXT_LAVENDERPOKECENTER_LINK_RECEPTIONIST
 
 	def_warps_to LAVENDER_POKECENTER

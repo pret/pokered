@@ -2,19 +2,20 @@ GameCornerPrizeRoom_Script:
 	jp EnableAutoTextBoxDrawing
 
 GameCornerPrizeRoom_TextPointers:
-	dw CeladonPrizeRoomText1
-	dw CeladonPrizeRoomText2
-	dw CeladonPrizeRoomText3
-	dw CeladonPrizeRoomText3
-	dw CeladonPrizeRoomText3
+	def_text_pointers
+	dw_const GameCornerPrizeRoomBaldingGuyText,  TEXT_GAMECORNERPRIZEROOM_BALDING_GUY
+	dw_const GameCornerPrizeRoomGamblerText,     TEXT_GAMECORNERPRIZEROOM_GAMBLER
+	dw_const GameCornerPRizeRoomPrizeVendorText, TEXT_GAMECORNERPRIZEROOM_PRIZE_VENDOR_1
+	dw_const GameCornerPRizeRoomPrizeVendorText, TEXT_GAMECORNERPRIZEROOM_PRIZE_VENDOR_2
+	dw_const GameCornerPRizeRoomPrizeVendorText, TEXT_GAMECORNERPRIZEROOM_PRIZE_VENDOR_3
 
-CeladonPrizeRoomText1:
-	text_far _CeladonPrizeRoomText1
+GameCornerPrizeRoomBaldingGuyText:
+	text_far _GameCornerPrizeRoomBaldingGuyText
 	text_end
 
-CeladonPrizeRoomText2:
-	text_far _CeladonPrizeRoomText2
+GameCornerPrizeRoomGamblerText:
+	text_far _GameCornerPrizeRoomGamblerText
 	text_end
 
-CeladonPrizeRoomText3:
+GameCornerPRizeRoomPrizeVendorText:
 	script_prize_vendor

@@ -8,237 +8,239 @@ Route13_Script:
 	ret
 
 Route13_ScriptPointers:
-	dw CheckFightingMapTrainers
-	dw DisplayEnemyTrainerTextAndStartBattle
-	dw EndTrainerBattle
+	def_script_pointers
+	dw_const CheckFightingMapTrainers,              SCRIPT_ROUTE13_DEFAULT
+	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_ROUTE13_START_BATTLE
+	dw_const EndTrainerBattle,                      SCRIPT_ROUTE13_END_BATTLE
 
 Route13_TextPointers:
-	dw Route13Text1
-	dw Route13Text2
-	dw Route13Text3
-	dw Route13Text4
-	dw Route13Text5
-	dw Route13Text6
-	dw Route13Text7
-	dw Route13Text8
-	dw Route13Text9
-	dw Route13Text10
-	dw Route13Text11
-	dw Route13Text12
-	dw Route13Text13
+	def_text_pointers
+	dw_const Route13CooltrainerM1Text, TEXT_ROUTE13_COOLTRAINER_M1
+	dw_const Route13CooltrainerF1Text, TEXT_ROUTE13_COOLTRAINER_F1
+	dw_const Route13CooltrainerF2Text, TEXT_ROUTE13_COOLTRAINER_F2
+	dw_const Route13CooltrainerF3Text, TEXT_ROUTE13_COOLTRAINER_F3
+	dw_const Route13CooltrainerF4Text, TEXT_ROUTE13_COOLTRAINER_F4
+	dw_const Route13CooltrainerM2Text, TEXT_ROUTE13_COOLTRAINER_M2
+	dw_const Route13Beauty1Text,       TEXT_ROUTE13_BEAUTY1
+	dw_const Route13Beauty2Text,       TEXT_ROUTE13_BEAUTY2
+	dw_const Route13BikerText,         TEXT_ROUTE13_BIKER
+	dw_const Route13CooltrainerM3Text, TEXT_ROUTE13_COOLTRAINER_M3
+	dw_const Route13TrainerTips1Text,  TEXT_ROUTE13_TRAINER_TIPS1
+	dw_const Route13TrainerTips2Text,  TEXT_ROUTE13_TRAINER_TIPS2
+	dw_const Route13SignText,          TEXT_ROUTE13_SIGN
 
 Route13TrainerHeaders:
 	def_trainers
 Route13TrainerHeader0:
-	trainer EVENT_BEAT_ROUTE_13_TRAINER_0, 2, Route13BattleText2, Route13EndBattleText2, Route13AfterBattleText2
+	trainer EVENT_BEAT_ROUTE_13_TRAINER_0, 2, Route13CooltrainerM1BattleText, Route13CooltrainerM1EndBattleText, Route13CooltrainerM1AfterBattleText
 Route13TrainerHeader1:
-	trainer EVENT_BEAT_ROUTE_13_TRAINER_1, 2, Route13BattleText3, Route13EndBattleText3, Route13AfterBattleText3
+	trainer EVENT_BEAT_ROUTE_13_TRAINER_1, 2, Route13CooltrainerF1BattleText, Route13CooltrainerF1EndBattleText, Route13CooltrainerF1AfterBattleText
 Route13TrainerHeader2:
-	trainer EVENT_BEAT_ROUTE_13_TRAINER_2, 2, Route13BattleText4, Route13EndBattleText4, Route13AfterBattleText4
+	trainer EVENT_BEAT_ROUTE_13_TRAINER_2, 2, Route13CooltrainerF2BattleText, Route13CooltrainerF2EndBattleText, Route13CooltrainerF2AfterBattleText
 Route13TrainerHeader3:
-	trainer EVENT_BEAT_ROUTE_13_TRAINER_3, 2, Route13BattleText5, Route13EndBattleText5, Route13AfterBattleText5
+	trainer EVENT_BEAT_ROUTE_13_TRAINER_3, 2, Route13CooltrainerF3BattleText, Route13CooltrainerF3EndBattleText, Route13CooltrainerF3AfterBattleText
 Route13TrainerHeader4:
-	trainer EVENT_BEAT_ROUTE_13_TRAINER_4, 4, Route13BattleText6, Route13EndBattleText6, Route13AfterBattleText6
+	trainer EVENT_BEAT_ROUTE_13_TRAINER_4, 4, Route13CooltrainerF4BattleText, Route13CooltrainerF4EndBattleText, Route13CooltrainerF4AfterBattleText
 Route13TrainerHeader5:
-	trainer EVENT_BEAT_ROUTE_13_TRAINER_5, 2, Route13BattleText7, Route13EndBattleText7, Route13AfterBattleText7
+	trainer EVENT_BEAT_ROUTE_13_TRAINER_5, 2, Route13CooltrainerM2BattleText, Route13CooltrainerM2EndBattleText, Route13CooltrainerM2AfterBattleText
 Route13TrainerHeader6:
-	trainer EVENT_BEAT_ROUTE_13_TRAINER_6, 4, Route13BattleText8, Route13EndBattleText8, Route13AfterBattleText8
+	trainer EVENT_BEAT_ROUTE_13_TRAINER_6, 4, Route13Beauty1BattleText, Route13Beauty1EndBattleText, Route13Beauty1AfterBattleText
 Route13TrainerHeader7:
-	trainer EVENT_BEAT_ROUTE_13_TRAINER_7, 2, Route13BattleText9, Route13EndBattleText9, Route13AfterBattleText9
+	trainer EVENT_BEAT_ROUTE_13_TRAINER_7, 2, Route13Beauty2BattleText, Route13Beauty2EndBattleText, Route13Beauty2AfterBattleText
 Route13TrainerHeader8:
-	trainer EVENT_BEAT_ROUTE_13_TRAINER_8, 2, Route13BattleText10, Route13EndBattleText10, Route13AfterBattleText10
+	trainer EVENT_BEAT_ROUTE_13_TRAINER_8, 2, Route13BikerBattleText, Route13BikerEndBattleText, Route13BikerAfterBattleText
 Route13TrainerHeader9:
-	trainer EVENT_BEAT_ROUTE_13_TRAINER_9, 4, Route13BattleText11, Route13EndBattleText11, Route13AfterBattleText11
+	trainer EVENT_BEAT_ROUTE_13_TRAINER_9, 4, Route13CooltrainerM3BattleText, Route13CooltrainerM3EndBattleText, Route13CooltrainerM3AfterBattleText
 	db -1 ; end
 
-Route13Text1:
+Route13CooltrainerM1Text:
 	text_asm
 	ld hl, Route13TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route13BattleText2:
-	text_far _Route13BattleText2
+Route13CooltrainerM1BattleText:
+	text_far _Route13CooltrainerM1BattleText
 	text_end
 
-Route13EndBattleText2:
-	text_far _Route13EndBattleText2
+Route13CooltrainerM1EndBattleText:
+	text_far _Route13CooltrainerM1EndBattleText
 	text_end
 
-Route13AfterBattleText2:
-	text_far _Route13AfterBattleText2
+Route13CooltrainerM1AfterBattleText:
+	text_far _Route13CooltrainerM1AfterBattleText
 	text_end
 
-Route13Text2:
+Route13CooltrainerF1Text:
 	text_asm
 	ld hl, Route13TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route13BattleText3:
-	text_far _Route13BattleText3
+Route13CooltrainerF1BattleText:
+	text_far _Route13CooltrainerF1BattleText
 	text_end
 
-Route13EndBattleText3:
-	text_far _Route13EndBattleText3
+Route13CooltrainerF1EndBattleText:
+	text_far _Route13CooltrainerF1EndBattleText
 	text_end
 
-Route13AfterBattleText3:
-	text_far _Route13AfterBattleText3
+Route13CooltrainerF1AfterBattleText:
+	text_far _Route13CooltrainerF1AfterBattleText
 	text_end
 
-Route13Text3:
+Route13CooltrainerF2Text:
 	text_asm
 	ld hl, Route13TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route13BattleText4:
-	text_far _Route13BattleText4
+Route13CooltrainerF2BattleText:
+	text_far _Route13CooltrainerF2BattleText
 	text_end
 
-Route13EndBattleText4:
-	text_far _Route13EndBattleText4
+Route13CooltrainerF2EndBattleText:
+	text_far _Route13CooltrainerF2EndBattleText
 	text_end
 
-Route13AfterBattleText4:
-	text_far _Route13AfterBattleText4
+Route13CooltrainerF2AfterBattleText:
+	text_far _Route13CooltrainerF2AfterBattleText
 	text_end
 
-Route13Text4:
+Route13CooltrainerF3Text:
 	text_asm
 	ld hl, Route13TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route13BattleText5:
-	text_far _Route13BattleText5
+Route13CooltrainerF3BattleText:
+	text_far _Route13CooltrainerF3BattleText
 	text_end
 
-Route13EndBattleText5:
-	text_far _Route13EndBattleText5
+Route13CooltrainerF3EndBattleText:
+	text_far _Route13CooltrainerF3EndBattleText
 	text_end
 
-Route13AfterBattleText5:
-	text_far _Route13AfterBattleText5
+Route13CooltrainerF3AfterBattleText:
+	text_far _Route13CooltrainerF3AfterBattleText
 	text_end
 
-Route13Text5:
+Route13CooltrainerF4Text:
 	text_asm
 	ld hl, Route13TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route13BattleText6:
-	text_far _Route13BattleText6
+Route13CooltrainerF4BattleText:
+	text_far _Route13CooltrainerF4BattleText
 	text_end
 
-Route13EndBattleText6:
-	text_far _Route13EndBattleText6
+Route13CooltrainerF4EndBattleText:
+	text_far _Route13CooltrainerF4EndBattleText
 	text_end
 
-Route13AfterBattleText6:
-	text_far _Route13AfterBattleText6
+Route13CooltrainerF4AfterBattleText:
+	text_far _Route13CooltrainerF4AfterBattleText
 	text_end
 
-Route13Text6:
+Route13CooltrainerM2Text:
 	text_asm
 	ld hl, Route13TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route13BattleText7:
-	text_far _Route13BattleText7
+Route13CooltrainerM2BattleText:
+	text_far _Route13CooltrainerM2BattleText
 	text_end
 
-Route13EndBattleText7:
-	text_far _Route13EndBattleText7
+Route13CooltrainerM2EndBattleText:
+	text_far _Route13CooltrainerM2EndBattleText
 	text_end
 
-Route13AfterBattleText7:
-	text_far _Route13AfterBattleText7
+Route13CooltrainerM2AfterBattleText:
+	text_far _Route13CooltrainerM2AfterBattleText
 	text_end
 
-Route13Text7:
+Route13Beauty1Text:
 	text_asm
 	ld hl, Route13TrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route13BattleText8:
-	text_far _Route13BattleText8
+Route13Beauty1BattleText:
+	text_far _Route13Beauty1BattleText
 	text_end
 
-Route13EndBattleText8:
-	text_far _Route13EndBattleText8
+Route13Beauty1EndBattleText:
+	text_far _Route13Beauty1EndBattleText
 	text_end
 
-Route13AfterBattleText8:
-	text_far _Route13AfterBattleText8
+Route13Beauty1AfterBattleText:
+	text_far _Route13Beauty1AfterBattleText
 	text_end
 
-Route13Text8:
+Route13Beauty2Text:
 	text_asm
 	ld hl, Route13TrainerHeader7
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route13BattleText9:
-	text_far _Route13BattleText9
+Route13Beauty2BattleText:
+	text_far _Route13Beauty2BattleText
 	text_end
 
-Route13EndBattleText9:
-	text_far _Route13EndBattleText9
+Route13Beauty2EndBattleText:
+	text_far _Route13Beauty2EndBattleText
 	text_end
 
-Route13AfterBattleText9:
-	text_far _Route13AfterBattleText9
+Route13Beauty2AfterBattleText:
+	text_far _Route13Beauty2AfterBattleText
 	text_end
 
-Route13Text9:
+Route13BikerText:
 	text_asm
 	ld hl, Route13TrainerHeader8
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route13BattleText10:
-	text_far _Route13BattleText10
+Route13BikerBattleText:
+	text_far _Route13BikerBattleText
 	text_end
 
-Route13EndBattleText10:
-	text_far _Route13EndBattleText10
+Route13BikerEndBattleText:
+	text_far _Route13BikerEndBattleText
 	text_end
 
-Route13AfterBattleText10:
-	text_far _Route13AfterBattleText10
+Route13BikerAfterBattleText:
+	text_far _Route13BikerAfterBattleText
 	text_end
 
-Route13Text10:
+Route13CooltrainerM3Text:
 	text_asm
 	ld hl, Route13TrainerHeader9
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route13BattleText11:
-	text_far _Route13BattleText11
+Route13CooltrainerM3BattleText:
+	text_far _Route13CooltrainerM3BattleText
 	text_end
 
-Route13EndBattleText11:
-	text_far _Route13EndBattleText11
+Route13CooltrainerM3EndBattleText:
+	text_far _Route13CooltrainerM3EndBattleText
 	text_end
 
-Route13AfterBattleText11:
-	text_far _Route13AfterBattleText11
+Route13CooltrainerM3AfterBattleText:
+	text_far _Route13CooltrainerM3AfterBattleText
 	text_end
 
-Route13Text11:
-	text_far _Route13Text11
+Route13TrainerTips1Text:
+	text_far _Route13TrainerTips1Text
 	text_end
 
-Route13Text12:
-	text_far _Route13Text12
+Route13TrainerTips2Text:
+	text_far _Route13TrainerTips2Text
 	text_end
 
-Route13Text13:
-	text_far _Route13Text13
+Route13SignText:
+	text_far _Route13SignText
 	text_end

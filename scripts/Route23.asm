@@ -1,11 +1,11 @@
 Route23_Script:
-	call Route23Script_511e9
+	call Route23SetVictoryRoadBoulders
 	call EnableAutoTextBoxDrawing
 	ld hl, Route23_ScriptPointers
 	ld a, [wRoute23CurScript]
 	jp CallFunctionInTable
 
-Route23Script_511e9:
+Route23SetVictoryRoadBoulders:
 	ld hl, wCurrentMapScriptFlags
 	bit 6, [hl]
 	res 6, [hl]
@@ -20,11 +20,12 @@ Route23Script_511e9:
 	predef_jump HideObject
 
 Route23_ScriptPointers:
-	dw Route23Script0
-	dw Route23Script1
-	dw Route23Script2
+	def_script_pointers
+	dw_const Route23DefaultScript,        SCRIPT_ROUTE23_DEFAULT
+	dw_const Route23PlayerMovingScript,   SCRIPT_ROUTE23_PLAYER_MOVING
+	dw_const Route23ResetToDefaultScript, SCRIPT_ROUTE23_RESET_TO_DEFAULT
 
-Route23Script0:
+Route23DefaultScript:
 	ld hl, YCoordsData_51255
 	ld a, [wYCoord]
 	ld b, a
@@ -54,7 +55,7 @@ Route23Script0:
 	ld a, c
 	and a
 	ret nz
-	call Route23Script_5125d
+	call Route23CopyBadgeTextScript
 	call DisplayTextID
 	xor a
 	ldh [hJoyHeld], a
@@ -70,7 +71,7 @@ YCoordsData_51255:
 	db 136
 	db -1 ; end
 
-Route23Script_5125d:
+Route23CopyBadgeTextScript:
 	ld hl, BadgeTextPointers
 	ld a, [wWhichBadge]
 	ld c, a
@@ -119,7 +120,7 @@ ThunderBadgeText:
 CascadeBadgeText:
 	db "CASCADEBADGE@"
 
-Route23Script_512d8:
+Route23MovePlayerDownScript:
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
 	ld a, D_DOWN
@@ -129,70 +130,71 @@ Route23Script_512d8:
 	ld [wJoyIgnore], a
 	jp StartSimulatingJoypadStates
 
-Route23Script1:
+Route23PlayerMovingScript:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
-Route23Script2:
-	ld a, $0
+Route23ResetToDefaultScript:
+	ld a, SCRIPT_ROUTE23_DEFAULT
 	ld [wRoute23CurScript], a
 	ret
 
 Route23_TextPointers:
-	dw Route23Text1
-	dw Route23Text2
-	dw Route23Text3
-	dw Route23Text4
-	dw Route23Text5
-	dw Route23Text6
-	dw Route23Text7
-	dw Route23Text8
+	def_text_pointers
+	dw_const Route23Guard1Text,              TEXT_ROUTE23_GUARD1
+	dw_const Route23Guard2Text,              TEXT_ROUTE23_GUARD2
+	dw_const Route23Swimmer1Text,            TEXT_ROUTE23_SWIMMER1
+	dw_const Route23Swimmer2Text,            TEXT_ROUTE23_SWIMMER2
+	dw_const Route23Guard3Text,              TEXT_ROUTE23_GUARD3
+	dw_const Route23Guard4Text,              TEXT_ROUTE23_GUARD4
+	dw_const Route23Guard5Text,              TEXT_ROUTE23_GUARD5
+	dw_const Route23VictoryRoadGateSignText, TEXT_ROUTE23_VICTORY_ROAD_GATE_SIGN
 
-Route23Text1:
+Route23Guard1Text:
 	text_asm
 	EventFlagBit a, EVENT_PASSED_EARTHBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
-	call Route23Script_51346
+	call Route23CheckForBadgeScript
 	jp TextScriptEnd
 
-Route23Text2:
+Route23Guard2Text:
 	text_asm
 	EventFlagBit a, EVENT_PASSED_VOLCANOBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
-	call Route23Script_51346
+	call Route23CheckForBadgeScript
 	jp TextScriptEnd
 
-Route23Text3:
+Route23Swimmer1Text:
 	text_asm
 	EventFlagBit a, EVENT_PASSED_MARSHBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
-	call Route23Script_51346
+	call Route23CheckForBadgeScript
 	jp TextScriptEnd
 
-Route23Text4:
+Route23Swimmer2Text:
 	text_asm
 	EventFlagBit a, EVENT_PASSED_SOULBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
-	call Route23Script_51346
+	call Route23CheckForBadgeScript
 	jp TextScriptEnd
 
-Route23Text5:
+Route23Guard3Text:
 	text_asm
 	EventFlagBit a, EVENT_PASSED_RAINBOWBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
-	call Route23Script_51346
+	call Route23CheckForBadgeScript
 	jp TextScriptEnd
 
-Route23Text6:
+Route23Guard4Text:
 	text_asm
 	EventFlagBit a, EVENT_PASSED_THUNDERBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
-	call Route23Script_51346
+	call Route23CheckForBadgeScript
 	jp TextScriptEnd
 
-Route23Text7:
+Route23Guard5Text:
 	text_asm
 	EventFlagBit a, EVENT_PASSED_CASCADEBADGE_CHECK
-	call Route23Script_51346
+	call Route23CheckForBadgeScript
 	jp TextScriptEnd
 
-Route23Script_51346:
+Route23CheckForBadgeScript:
 	ld [wWhichBadge], a
-	call Route23Script_5125d
+	call Route23CopyBadgeTextScript
 	ld a, [wWhichBadge]
 	inc a
 	ld c, a
@@ -201,43 +203,43 @@ Route23Script_51346:
 	predef FlagActionPredef
 	ld a, c
 	and a
-	jr nz, .asm_5136e
-	ld hl, VictoryRoadGuardText1
+	jr nz, .have_badge
+	ld hl, Route23YouDontHaveTheBadgeYetText
 	call PrintText
-	call Route23Script_512d8
-	ld a, $1
+	call Route23MovePlayerDownScript
+	ld a, SCRIPT_ROUTE23_PLAYER_MOVING
 	ld [wRoute23CurScript], a
 	ret
-.asm_5136e
-	ld hl, VictoryRoadGuardText2
+.have_badge
+	ld hl, Route23OhThatIsTheBadgeText
 	call PrintText
 	ld a, [wWhichBadge]
 	ld c, a
 	ld b, FLAG_SET
 	EventFlagAddress hl, EVENT_PASSED_CASCADEBADGE_CHECK
 	predef FlagActionPredef
-	ld a, $2
+	ld a, SCRIPT_ROUTE23_RESET_TO_DEFAULT
 	ld [wRoute23CurScript], a
 	ret
 
-Route23Script_51388:
-	ld hl, VictoryRoadGuardText2
+Route23PrintOhThatsTheBadgeTextScript: ; unreferenced
+	ld hl, Route23OhThatIsTheBadgeText
 	jp PrintText
 
-VictoryRoadGuardText1:
-	text_far _VictoryRoadGuardText1
+Route23YouDontHaveTheBadgeYetText:
+	text_far _Route23YouDontHaveTheBadgeYetText
 	text_asm
 	ld a, SFX_DENIED
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 
-VictoryRoadGuardText2:
-	text_far _VictoryRoadGuardText2
+Route23OhThatIsTheBadgeText:
+	text_far _Route23OhThatIsTheBadgeText
 	sound_get_item_1
-	text_far _VictoryRoadGuardText_513a3
+	text_far _Route23GoRightAheadText
 	text_end
 
-Route23Text8:
-	text_far _Route23Text8
+Route23VictoryRoadGateSignText:
+	text_far _Route23VictoryRoadGateSignText
 	text_end

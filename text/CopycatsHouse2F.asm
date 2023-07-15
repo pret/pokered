@@ -1,4 +1,4 @@
-_CopycatsHouse2FText_5ccd4::
+_CopycatsHouse2FCopycatDoYouLikePokemonText::
 	text "<PLAYER>: Hi! Do"
 	line "you like #MON?"
 
@@ -15,7 +15,7 @@ _CopycatsHouse2FText_5ccd4::
 	line "favorite hobby!"
 	prompt
 
-_TM31PreReceiveText::
+_CopycatsHouse2FCopycatTM31PreReceiveText::
 	text "Oh wow!"
 	line "A # DOLL!"
 
@@ -26,14 +26,14 @@ _TM31PreReceiveText::
 	line "this, then!"
 	prompt
 
-_ReceivedTM31Text::
+_CopycatsHouse2FCopycatReceivedTM31Text::
 	text "<PLAYER> received"
 	line "@"
 	text_ram wStringBuffer
 	text "!@"
 	text_end
 
-_TM31ExplanationText1::
+_CopycatsHouse2FCopycatTM31Explanation1Text::
 	text_start
 
 	para "TM31 contains my"
@@ -43,7 +43,7 @@ _TM31ExplanationText1::
 	line "#MON!@"
 	text_end
 
-_TM31ExplanationText2::
+_CopycatsHouse2FCopycatTM31Explanation2Text::
 	text "<PLAYER>: Hi!"
 	line "Thanks for TM31!"
 
@@ -57,12 +57,12 @@ _TM31ExplanationText2::
 	line "It's a scream!"
 	done
 
-_TM31NoRoomText::
+_CopycatsHouse2FCopycatTM31NoRoomText::
 	text "Don't you want"
 	line "this?@"
 	text_end
 
-_CopycatsHouse2FText2::
+_CopycatsHouse2FDoduoText::
 	text "DODUO: Giiih!"
 
 	para "MIRROR MIRROR ON"
@@ -71,19 +71,19 @@ _CopycatsHouse2FText2::
 	cont "OF ALL?"
 	done
 
-_CopycatsHouse2FText3::
+_CopycatsHouse2FRareDollText::
 	text "This is a rare"
 	line "#MON! Huh?"
 	cont "It's only a doll!"
 	done
 
-_CopycatsHouse2FText6::
+_CopycatsHouse2FSNESText::
 	text "A game with MARIO"
 	line "wearing a bucket"
 	cont "on his head!"
 	done
 
-_CopycatsHouse2FText_5cd17::
+_CopycatsHouse2FPCMySecretsText::
 	text "..."
 
 	para "My Secrets!"
@@ -95,6 +95,6 @@ _CopycatsHouse2FText_5cd17::
 	cont "CLEFAIRY!"
 	done
 
-_CopycatsHouse2FText_5cd1c::
+_CopycatsHouse2FPCCantSeeText::
 	text "Huh? Can't see!"
 	done

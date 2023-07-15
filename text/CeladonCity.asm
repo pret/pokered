@@ -1,4 +1,4 @@
-_CeladonCityText1::
+_CeladonCityLittleGirlText::
 	text "I got my KOFFING"
 	line "in CINNABAR!"
 
@@ -7,19 +7,19 @@ _CeladonCityText1::
 	cont "when it's angry!"
 	done
 
-_CeladonCityText2::
+_CeladonCityGramps1Text::
 	text "Heheh! This GYM"
 	line "is great! It's"
 	cont "full of women!"
 	done
 
-_CeladonCityText3::
+_CeladonCityGirlText::
 	text "The GAME CORNER"
 	line "is bad for our"
 	cont "city's image!"
 	done
 
-_CeladonCityText4::
+_CeladonCityGramps2Text::
 	text "Moan! I blew it"
 	line "all at the slots!"
 
@@ -28,7 +28,7 @@ _CeladonCityText4::
 	cont "coins for prizes!"
 	done
 
-_TM41PreText::
+_CeledonCityGramps3Text::
 	text "Hello, there!"
 
 	para "I've seen you,"
@@ -39,14 +39,14 @@ _TM41PreText::
 	line "dropping by!"
 	prompt
 
-_ReceivedTM41Text::
+_CeledonCityGramps3ReceivedTM41Text::
 	text "<PLAYER> received"
 	line "@"
 	text_ram wStringBuffer
 	text "!@"
 	text_end
 
-_TM41ExplanationText::
+_CeledonCityGramps3TM41ExplanationText::
 	text "TM41 teaches"
 	line "SOFTBOILED!"
 
@@ -57,12 +57,12 @@ _TM41ExplanationText::
 	line "CHANSEY!"
 	done
 
-_TM41NoRoomText::
+_CeledonCityGramps3TM41NoRoomText::
 	text "Oh, your pack is"
 	line "full of items!"
 	done
 
-_CeladonCityText6::
+_CeladonCityFisherText::
 	text "This is my trusted"
 	line "pal, POLIWRATH!"
 
@@ -71,22 +71,22 @@ _CeladonCityText6::
 	cont "used WATER STONE!"
 	done
 
-_CeladonCityText7::
+_CeladonCityPoliwrathText::
 	text "POLIWRATH: Ribi"
 	line "ribit!@"
 	text_end
 
-_CeladonCityText8::
+_CeladonCityRocket1Text::
 	text "What are you"
 	line "staring at?"
 	done
 
-_CeladonCityText9::
+_CeladonCityRocket2Text::
 	text "Keep out of TEAM"
 	line "ROCKET's way!"
 	done
 
-_CeladonCityText10::
+_CeladonCityTrainerTips1Text::
 	text "TRAINER TIPS"
 
 	para "X ACCURACY boosts"
@@ -102,13 +102,13 @@ _CeladonCityText10::
 	cont "STORE!"
 	done
 
-_CeladonCityText11::
+_CeladonCitySignText::
 	text "CELADON CITY"
 	line "The City of"
 	cont "Rainbow Dreams"
 	done
 
-_CeladonCityText13::
+_CeladonCityGymSignText::
 	text "CELADON CITY"
 	line "#MON GYM"
 	cont "LEADER: ERIKA"
@@ -117,17 +117,17 @@ _CeladonCityText13::
 	line "Princess!"
 	done
 
-_CeladonCityText14::
+_CeladonCityMansionSignText::
 	text "CELADON MANSION"
 	done
 
-_CeladonCityText15::
+_CeladonCityDeptStoreSignText::
 	text "Find what you"
 	line "need at CELADON"
 	cont "DEPT. STORE!"
 	done
 
-_CeladonCityText16::
+_CeladonCityTrainerTips2Text::
 	text "TRAINER TIPS"
 
 	para "GUARD SPEC."
@@ -141,13 +141,13 @@ _CeladonCityText16::
 	cont "STORE!"
 	done
 
-_CeladonCityText17::
+_CeladonCityPrizeExchangeSignText::
 	text "Coins exchanged"
 	line "for prizes!"
 	cont "PRIZE EXCHANGE"
 	done
 
-_CeladonCityText18::
+_CeladonCityGameCornerSignText::
 	text "ROCKET GAME CORNER"
 	line "The playground"
 	cont "for grown-ups!"

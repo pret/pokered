@@ -1,3 +1,7 @@
+	object_const_def
+	const VIRIDIANFORESTNORTHGATE_SUPER_NERD
+	const VIRIDIANFORESTNORTHGATE_GRAMPS
+
 ViridianForestNorthGate_Object:
 	db $a ; border block
 
@@ -10,7 +14,7 @@ ViridianForestNorthGate_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  3,  2, SPRITE_SUPER_NERD, STAY, NONE, 1 ; person
-	object_event  2,  5, SPRITE_GRAMPS, STAY, NONE, 2 ; person
+	object_event  3,  2, SPRITE_SUPER_NERD, STAY, NONE, TEXT_VIRIDIANFORESTNORTHGATE_SUPER_NERD
+	object_event  2,  5, SPRITE_GRAMPS, STAY, NONE, TEXT_VIRIDIANFORESTNORTHGATE_GRAMPS
 
 	def_warps_to VIRIDIAN_FOREST_NORTH_GATE

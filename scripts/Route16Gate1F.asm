@@ -7,25 +7,26 @@ Route16Gate1F_Script:
 	jp CallFunctionInTable
 
 Route16Gate1F_ScriptPointers:
-	dw Route16GateScript0
-	dw Route16GateScript1
-	dw Route16GateScript2
-	dw Route16GateScript3
+	def_script_pointers
+	dw_const Route16Gate1FDefaultScript,           SCRIPT_ROUTE16GATE1F_DEFAULT
+	dw_const Route16Gate1FPlayerMovingUpScript,    SCRIPT_ROUTE16GATE1F_PLAYER_MOVING_UP
+	dw_const Route16Gate1FGuardScript,             SCRIPT_ROUTE16GATE1F_GUARD
+	dw_const Route16Gate1FPlayerMovingRightScript, SCRIPT_ROUTE16GATE1F_PLAYER_MOVING_RIGHT
 
-Route16GateScript0:
-	call Route16GateScript_49755
+Route16Gate1FDefaultScript:
+	call Route16Gate1FIsBicycleInBagScript
 	ret nz
-	ld hl, CoordsData_49714
+	ld hl, .StopsPlayerCoords
 	call ArePlayerCoordsInArray
 	ret nc
-	ld a, $3
+	ld a, TEXT_ROUTE16GATE1F_GUARD_WAIT_UP
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
 	ldh [hJoyHeld], a
 	ld a, [wCoordIndex]
 	cp $1
-	jr z, .asm_4970e
+	jr z, .next_to_counter
 	ld a, [wCoordIndex]
 	dec a
 	ld [wSimulatedJoypadStatesIndex], a
@@ -35,30 +36,30 @@ Route16GateScript0:
 	ld hl, wSimulatedJoypadStatesEnd
 	call FillMemory
 	call StartSimulatingJoypadStates
-	ld a, $1
+	ld a, SCRIPT_ROUTE16GATE1F_PLAYER_MOVING_UP
 	ld [wRoute16Gate1FCurScript], a
 	ret
-.asm_4970e
-	ld a, $2
+.next_to_counter
+	ld a, SCRIPT_ROUTE16GATE1F_GUARD
 	ld [wRoute16Gate1FCurScript], a
 	ret
 
-CoordsData_49714:
+.StopsPlayerCoords:
 	dbmapcoord  4,  7
 	dbmapcoord  4,  8
 	dbmapcoord  4,  9
 	dbmapcoord  4, 10
 	db -1 ; end
 
-Route16GateScript1:
+Route16Gate1FPlayerMovingUpScript:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
-	ld a, $f0
+	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 
-Route16GateScript2:
-	ld a, $1
+Route16Gate1FGuardScript:
+	ld a, TEXT_ROUTE16GATE1F_GUARD
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $1
@@ -66,11 +67,11 @@ Route16GateScript2:
 	ld a, D_RIGHT
 	ld [wSimulatedJoypadStatesEnd], a
 	call StartSimulatingJoypadStates
-	ld a, $3
+	ld a, SCRIPT_ROUTE16GATE1F_PLAYER_MOVING_RIGHT
 	ld [wRoute16Gate1FCurScript], a
 	ret
 
-Route16GateScript3:
+Route16Gate1FPlayerMovingRightScript:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
@@ -78,44 +79,45 @@ Route16GateScript3:
 	ld [wJoyIgnore], a
 	ld hl, wd730
 	res 7, [hl]
-	ld a, $0
+	ld a, SCRIPT_ROUTE16GATE1F_DEFAULT
 	ld [wRoute16Gate1FCurScript], a
 	ret
 
-Route16GateScript_49755:
+Route16Gate1FIsBicycleInBagScript:
 	ld b, BICYCLE
 	jp IsItemInBag
 
 Route16Gate1F_TextPointers:
-	dw Route16GateText1
-	dw Route16GateText2
-	dw Route16GateText3
+	def_text_pointers
+	dw_const Route16Gate1FGuardText,       TEXT_ROUTE16GATE1F_GUARD
+	dw_const Route16Gate1FGamblerText,     TEXT_ROUTE16GATE1F_GAMBLER
+	dw_const Route16Gate1FGuardWaitUpText, TEXT_ROUTE16GATE1F_GUARD_WAIT_UP
 
-Route16GateText1:
+Route16Gate1FGuardText:
 	text_asm
-	call Route16GateScript_49755
-	jr z, .asm_0bdf3
-	ld hl, Route16GateText_4977c
+	call Route16Gate1FIsBicycleInBagScript
+	jr z, .no_bike
+	ld hl, .CyclingRoadExplanationText
 	call PrintText
-	jr .asm_56c9d
-.asm_0bdf3
-	ld hl, Route16GateText_49777
+	jr .text_script_end
+.no_bike
+	ld hl, .NoPedestriansAllowedText
 	call PrintText
-.asm_56c9d
+.text_script_end
 	jp TextScriptEnd
 
-Route16GateText_49777:
-	text_far _Route16GateText_49777
+.NoPedestriansAllowedText:
+	text_far _Route16Gate1FGuardNoPedestriansAllowedText
 	text_end
 
-Route16GateText_4977c:
-	text_far _Route16GateText_4977c
+.CyclingRoadExplanationText:
+	text_far _Route16Gate1FGuardCyclingRoadExplanationText
 	text_end
 
-Route16GateText3:
-	text_far _Route16GateText_49781
+Route16Gate1FGuardWaitUpText:
+	text_far _Route16Gate1FGuardWaitUpText
 	text_end
 
-Route16GateText2:
-	text_far _Route16GateText2
+Route16Gate1FGamblerText:
+	text_far _Route16Gate1FGamblerText
 	text_end

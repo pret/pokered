@@ -1,3 +1,10 @@
+	object_const_def
+	const CELADONDINER_COOK
+	const CELADONDINER_MIDDLE_AGED_WOMAN
+	const CELADONDINER_MIDDLE_AGED_MAN
+	const CELADONDINER_FISHER
+	const CELADONDINER_GYM_GUIDE
+
 CeladonDiner_Object:
 	db $f ; border block
 
@@ -8,10 +15,10 @@ CeladonDiner_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  8,  5, SPRITE_COOK, WALK, LEFT_RIGHT, 1 ; person
-	object_event  7,  2, SPRITE_MIDDLE_AGED_WOMAN, STAY, NONE, 2 ; person
-	object_event  1,  4, SPRITE_MIDDLE_AGED_MAN, STAY, DOWN, 3 ; person
-	object_event  5,  3, SPRITE_FISHER, STAY, RIGHT, 4 ; person
-	object_event  0,  1, SPRITE_GYM_GUIDE, STAY, DOWN, 5 ; person
+	object_event  8,  5, SPRITE_COOK, WALK, LEFT_RIGHT, TEXT_CELADONDINER_COOK
+	object_event  7,  2, SPRITE_MIDDLE_AGED_WOMAN, STAY, NONE, TEXT_CELADONDINER_MIDDLE_AGED_WOMAN
+	object_event  1,  4, SPRITE_MIDDLE_AGED_MAN, STAY, DOWN, TEXT_CELADONDINER_MIDDLE_AGED_MAN
+	object_event  5,  3, SPRITE_FISHER, STAY, RIGHT, TEXT_CELADONDINER_FISHER
+	object_event  0,  1, SPRITE_GYM_GUIDE, STAY, DOWN, TEXT_CELADONDINER_GYM_GUIDE
 
 	def_warps_to CELADON_DINER

@@ -1,4 +1,4 @@
-_SabrinaPreBattleText::
+_SaffronGymSabrinaText::
 	text "I had a vision of"
 	line "your arrival!"
 
@@ -16,7 +16,7 @@ _SabrinaPreBattleText::
 	cont "you my powers!"
 	done
 
-_ReceivedMarshBadgeText::
+_SaffronGymSabrinaReceivedMarshBadgeText::
 	text "I'm"
 	line "shocked!"
 	cont "But, a loss is a"
@@ -30,14 +30,14 @@ _ReceivedMarshBadgeText::
 	line "MARSHBADGE!@"
 	text_end
 
-_SabrinaPostBattleAdviceText::
+_SaffronGymSabrinaPostBattleAdviceText::
 	text "Everyone has"
 	line "psychic power!"
 	cont "People just don't"
 	cont "realize it!"
 	done
 
-_KogaMarshBadgeInfoText::
+_SaffronGymSabrinaMarshBadgeInfoText::
 	text "The MARSHBADGE"
 	line "makes #MON up"
 	cont "to L70 obey you!"
@@ -55,7 +55,7 @@ _KogaMarshBadgeInfoText::
 	line "this TM with you!"
 	done
 
-_ReceivedTM46Text::
+_SaffronGymSabrinaReceivedTM46Text::
 	text "<PLAYER> received"
 	line "TM46!@"
 	text_end
@@ -69,12 +69,12 @@ _TM46ExplanationText::
 	cont "inflict damage!"
 	done
 
-_TM46NoRoomText::
+_SaffronGymSabrinaTM46NoRoomText::
 	text "Your pack is full"
 	line "of other items!"
 	done
 
-_SaffronGymGuidePreBattleText::
+_SaffronGymGuideChampInMakingText::
 	text "Yo! Champ in"
 	line "making!"
 
@@ -91,7 +91,7 @@ _SaffronGymGuidePreBattleText::
 	cont "even aim a punch!"
 	done
 
-_SaffronGymGuidePostBattleText::
+_SaffronGymGuideBeatSabrinaText::
 	text "Psychic power,"
 	line "huh?"
 
@@ -100,18 +100,18 @@ _SaffronGymGuidePostBattleText::
 	cont "at the slots!"
 	done
 
-_SaffronGymBattleText1::
+_SaffronGymChanneler1BattleText::
 	text "SABRINA is younger"
 	line "than I, but I"
 	cont "respect her!"
 	done
 
-_SaffronGymEndBattleText1::
+_SaffronGymChanneler1EndBattleText::
 	text "Not"
 	line "good enough!"
 	prompt
 
-_SaffronGymAfterBattleText1::
+_SaffronGymChanneler1AfterBattleText::
 	text "In a battle of"
 	line "equals, the one"
 	cont "with the stronger"
@@ -122,23 +122,23 @@ _SaffronGymAfterBattleText1::
 	cont "focus on winning!"
 	done
 
-_SaffronGymBattleText2::
+_SaffronGymYoungster1BattleText::
 	text "Does our unseen"
 	line "power scare you?"
 	done
 
-_SaffronGymEndBattleText2::
+_SaffronGymYoungster1EndBattleText::
 	text "I never"
 	line "foresaw this!"
 	prompt
 
-_SaffronGymAfterBattleText2::
+_SaffronGymYoungster1AfterBattleText::
 	text "Psychic #MON"
 	line "fear only ghosts"
 	cont "and bugs!"
 	done
 
-_SaffronGymBattleText3::
+_SaffronGymChanneler2BattleText::
 	text "#MON take on"
 	line "the appearance of"
 	cont "their trainers."
@@ -147,52 +147,52 @@ _SaffronGymBattleText3::
 	line "be tough, then!"
 	done
 
-_SaffronGymEndBattleText3::
+_SaffronGymChanneler2EndBattleText::
 	text "I knew"
 	line "it!"
 	prompt
 
-_SaffronGymAfterBattleText3::
+_SaffronGymChanneler2AfterBattleText::
 	text "I must teach"
 	line "better techniques"
 	cont "to my #MON!"
 	done
 
-_SaffronGymBattleText4::
+_SaffronGymYoungster2BattleText::
 	text "You know that"
 	line "power alone isn't"
 	cont "enough!"
 	done
 
-_SaffronGymEndBattleText4::
+_SaffronGymYoungster2EndBattleText::
 	text "I don't"
 	line "believe this!"
 	prompt
 
-_SaffronGymAfterBattleText4::
+_SaffronGymYoungster2AfterBattleText::
 	text "SABRINA just wiped"
 	line "out the KARATE"
 	cont "MASTER next door!"
 	done
 
-_SaffronGymBattleText5::
+_SaffronGymChanneler3BattleText::
 	text "You and I, our"
 	line "#MON shall"
 	cont "fight!"
 	done
 
-_SaffronGymEndBattleText5::
+_SaffronGymChanneler3EndBattleText::
 	text "I lost"
 	line "after all!"
 	prompt
 
-_SaffronGymAfterBattleText5::
+_SaffronGymChanneler3AfterBattleText::
 	text "I knew that this"
 	line "was going to take"
 	cont "place."
 	done
 
-_SaffronGymBattleText6::
+_SaffronGymYoungster3BattleText::
 	text "SABRINA is young,"
 	line "but she's also"
 	cont "our LEADER!"
@@ -201,12 +201,12 @@ _SaffronGymBattleText6::
 	line "her easily!"
 	done
 
-_SaffronGymEndBattleText6::
+_SaffronGymYoungster3EndBattleText::
 	text "I lost"
 	line "my concentration!"
 	prompt
 
-_SaffronGymAfterBattleText6::
+_SaffronGymYoungster3AfterBattleText::
 	text "There used to be"
 	line "2 #MON GYMs in"
 	cont "SAFFRON."
@@ -218,7 +218,7 @@ _SaffronGymAfterBattleText6::
 	cont "creamed them!"
 	done
 
-_SaffronGymBattleText7::
+_SaffronGymYoungster4BattleText::
 	text "SAFFRON #MON"
 	line "GYM is famous for"
 	cont "its psychics!"
@@ -228,11 +228,11 @@ _SaffronGymBattleText7::
 	cont "I can tell!"
 	done
 
-_SaffronGymEndBattleText7::
+_SaffronGymYoungster4EndBattleText::
 	text "Arrrgh!"
 	prompt
 
-_SaffronGymAfterBattleText7::
+_SaffronGymYoungster4AfterBattleText::
 	text "That's right! I"
 	line "used telepathy to"
 	cont "read your mind!"

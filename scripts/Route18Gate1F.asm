@@ -7,25 +7,26 @@ Route18Gate1F_Script:
 	jp CallFunctionInTable
 
 Route18Gate1F_ScriptPointers:
-	dw Route18GateScript0
-	dw Route18GateScript1
-	dw Route18GateScript2
-	dw Route18GateScript3
+	def_script_pointers
+	dw_const Route18Gate1FDefaultScript,           SCRIPT_ROUTE18GATE1F_DEFAULT
+	dw_const Route18Gate1FPlayerMovingUpScript,    SCRIPT_ROUTE18GATE1F_PLAYER_MOVING_UP
+	dw_const Route18Gate1FGuardScript,             SCRIPT_ROUTE18GATE1F_GUARD
+	dw_const Route18Gate1FPlayerMovingRightScript, SCRIPT_ROUTE18GATE1F_PLAYER_MOVING_RIGHT
 
-Route18GateScript0:
-	call Route16GateScript_49755
+Route18Gate1FDefaultScript:
+	call Route16Gate1FIsBicycleInBagScript
 	ret nz
-	ld hl, CoordsData_498cc
+	ld hl, .StopsPlayerCoords
 	call ArePlayerCoordsInArray
 	ret nc
-	ld a, $2
+	ld a, TEXT_ROUTE18GATE1F_GUARD_EXCUSE_ME
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
 	ldh [hJoyHeld], a
 	ld a, [wCoordIndex]
 	cp $1
-	jr z, .asm_498c6
+	jr z, .next_to_counter
 	ld a, [wCoordIndex]
 	dec a
 	ld [wSimulatedJoypadStatesIndex], a
@@ -35,30 +36,30 @@ Route18GateScript0:
 	ld hl, wSimulatedJoypadStatesEnd
 	call FillMemory
 	call StartSimulatingJoypadStates
-	ld a, $1
+	ld a, SCRIPT_ROUTE18GATE1F_PLAYER_MOVING_UP
 	ld [wRoute18Gate1FCurScript], a
 	ret
-.asm_498c6
-	ld a, $2
+.next_to_counter
+	ld a, SCRIPT_ROUTE18GATE1F_GUARD
 	ld [wRoute18Gate1FCurScript], a
 	ret
 
-CoordsData_498cc:
+.StopsPlayerCoords:
 	dbmapcoord  4,  3
 	dbmapcoord  4,  4
 	dbmapcoord  4,  5
 	dbmapcoord  4,  6
 	db -1 ; end
 
-Route18GateScript1:
+Route18Gate1FPlayerMovingUpScript:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
-	ld a, $f0
+	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 
-Route18GateScript2:
-	ld a, $1
+Route18Gate1FGuardScript:
+	ld a, TEXT_ROUTE18GATE1F_GUARD
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $1
@@ -66,11 +67,11 @@ Route18GateScript2:
 	ld a, D_RIGHT
 	ld [wSimulatedJoypadStatesEnd], a
 	call StartSimulatingJoypadStates
-	ld a, $3
+	ld a, SCRIPT_ROUTE18GATE1F_PLAYER_MOVING_RIGHT
 	ld [wRoute18Gate1FCurScript], a
 	ret
 
-Route18GateScript3:
+Route18Gate1FPlayerMovingRightScript:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
@@ -78,35 +79,36 @@ Route18GateScript3:
 	ld [wJoyIgnore], a
 	ld hl, wd730
 	res 7, [hl]
-	ld a, $0
+	ld a, SCRIPT_ROUTE18GATE1F_DEFAULT
 	ld [wRoute18Gate1FCurScript], a
 	ret
 
 Route18Gate1F_TextPointers:
-	dw Route18GateText1
-	dw Route18GateText2
+	def_text_pointers
+	dw_const Route18Gate1FGuardText,         TEXT_ROUTE18GATE1F_GUARD
+	dw_const Route18Gate1FGuardExcuseMeText, TEXT_ROUTE18GATE1F_GUARD_EXCUSE_ME
 
-Route18GateText1:
+Route18Gate1FGuardText:
 	text_asm
-	call Route16GateScript_49755
-	jr z, .asm_3c84d
-	ld hl, Route18GateText_4992d
+	call Route16Gate1FIsBicycleInBagScript
+	jr z, .no_bike
+	ld hl, .CyclingRoadUphillText
 	call PrintText
-	jr .asm_a8410
-.asm_3c84d
-	ld hl, Route18GateText_49928
+	jr .text_script_end
+.no_bike
+	ld hl, .YouNeedABicycleText
 	call PrintText
-.asm_a8410
+.text_script_end
 	jp TextScriptEnd
 
-Route18GateText_49928:
-	text_far _Route18GateText_49928
+.YouNeedABicycleText:
+	text_far _Route18Gate1FGuardYouNeedABicycleText
 	text_end
 
-Route18GateText_4992d:
-	text_far _Route18GateText_4992d
+.CyclingRoadUphillText:
+	text_far _Route18Gate1FGuardCyclingRoadUphillText
 	text_end
 
-Route18GateText2:
-	text_far _Route18GateText_49932
+Route18Gate1FGuardExcuseMeText:
+	text_far _Route18Gate1FGuardExcuseMeText
 	text_end

@@ -3,21 +3,22 @@ CeruleanPokecenter_Script:
 	jp EnableAutoTextBoxDrawing
 
 CeruleanPokecenter_TextPointers:
-	dw CeruleanHealNurseText
-	dw CeruleanPokecenterText2
-	dw CeruleanPokecenterText3
-	dw CeruleanTradeNurseText
+	def_text_pointers
+	dw_const CeruleanPokecenterNurseText,            TEXT_CERULEANPOKECENTER_NURSE
+	dw_const CeruleanPokecenterSuperNerdText,        TEXT_CERULEANPOKECENTER_SUPER_NERD
+	dw_const CeruleanPokecenterGentlemanText,        TEXT_CERULEANPOKECENTER_GENTLEMAN
+	dw_const CeruleanPokecenterLinkReceptionistText, TEXT_CERULEANPOKECENTER_LINK_RECEPTIONIST
 
-CeruleanTradeNurseText:
+CeruleanPokecenterLinkReceptionistText:
 	script_cable_club_receptionist
 
-CeruleanHealNurseText:
+CeruleanPokecenterNurseText:
 	script_pokecenter_nurse
 
-CeruleanPokecenterText2:
-	text_far _CeruleanPokecenterText2
+CeruleanPokecenterSuperNerdText:
+	text_far _CeruleanPokecenterSuperNerdText
 	text_end
 
-CeruleanPokecenterText3:
-	text_far _CeruleanPokecenterText3
+CeruleanPokecenterGentlemanText:
+	text_far _CeruleanPokecenterGentlemanText
 	text_end

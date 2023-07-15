@@ -1,3 +1,7 @@
+	object_const_def
+	const SSANNE1F_WAITER
+	const SSANNE1F_SAILOR
+
 SSAnne1F_Object:
 	db $c ; border block
 
@@ -17,7 +21,7 @@ SSAnne1F_Object:
 	def_bg_events
 
 	def_object_events
-	object_event 12,  6, SPRITE_WAITER, WALK, LEFT_RIGHT, 1 ; person
-	object_event 27,  5, SPRITE_SAILOR, STAY, NONE, 2 ; person
+	object_event 12,  6, SPRITE_WAITER, WALK, LEFT_RIGHT, TEXT_SSANNE1F_WAITER
+	object_event 27,  5, SPRITE_SAILOR, STAY, NONE, TEXT_SSANNE1F_SAILOR
 
 	def_warps_to SS_ANNE_1F

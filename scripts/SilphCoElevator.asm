@@ -7,7 +7,7 @@ SilphCoElevator_Script:
 	pop hl
 	bit 7, [hl]
 	res 7, [hl]
-	call nz, SilphCoElevatorScript_45827
+	call nz, SilphCoElevatorShakeElevatorScript
 	xor a
 	ld [wAutoTextBoxDrawingControl], a
 	inc a
@@ -20,9 +20,9 @@ SilphCoElevatorScript_457dc:
 	ld b, a
 	ld a, [wWarpedFromWhichMap]
 	ld c, a
-	call SilphCoElevatorScript_457ea
+	call .StoreWarpEntry
 
-SilphCoElevatorScript_457ea:
+.StoreWarpEntry:
 	inc hl
 	inc hl
 	ld a, b
@@ -31,7 +31,7 @@ SilphCoElevatorScript_457ea:
 	ld [hli], a
 	ret
 
-SilphCoElevatorScript_457f1:
+SilphCoElevatorCopyWarpMapsScript:
 	ld hl, SilphCoElevatorFloors
 	call LoadItemList
 	ld hl, SilphCoElevatorWarpMaps
@@ -71,17 +71,18 @@ SilphCoElevatorWarpMaps:
 	db 1, SILPH_CO_11F
 SilphCoElevatorWarpMapsEnd:
 
-SilphCoElevatorScript_45827:
+SilphCoElevatorShakeElevatorScript:
 	call Delay3
 	farcall ShakeElevator
 	ret
 
 SilphCoElevator_TextPointers:
-	dw SilphCoElevatorText1
+	def_text_pointers
+	dw_const SilphCoElevatorElevatorText, TEXT_SILPHCOELEVATOR_ELEVATOR
 
-SilphCoElevatorText1:
+SilphCoElevatorElevatorText:
 	text_asm
-	call SilphCoElevatorScript_457f1
+	call SilphCoElevatorCopyWarpMapsScript
 	ld hl, SilphCoElevatorWarpMaps
 	predef DisplayElevatorFloorMenu
 	jp TextScriptEnd

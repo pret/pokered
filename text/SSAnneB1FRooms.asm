@@ -1,90 +1,90 @@
-_SSAnne10Text8::
+_SSAnneB1FRoomsMachokeText::
 	text "MACHOKE: Gwoh!"
 	line "Goggoh!@"
 	text_end
 
-_SSAnne10BattleText1::
+_SSAnneB1FRoomsSailor1BattleText::
 	text "You know what they"
 	line "say about sailors"
 	cont "and fighting!"
 	done
 
-_SSAnne10EndBattleText1::
+_SSAnneB1FRoomsSailor1EndBattleText::
 	text "Right!"
 	line "Good fight, mate!"
 	prompt
 
-_SSAnne10AfterBattleText1::
+_SSAnneB1FRoomsSailor1AfterBattleText::
 	text "Haha! Want to be"
 	line "a sailor, mate?"
 	done
 
-_SSAnne10BattleText2::
+_SSAnneB1FRoomsSailor2BattleText::
 	text "My sailor's pride"
 	line "is at stake!"
 	done
 
-_SSAnne10EndBattleText2::
+_SSAnneB1FRoomsSailor2EndBattleText::
 	text "Your"
 	line "spirit sank me!"
 	prompt
 
-_SSAnne10AfterBattleText2::
+_SSAnneB1FRoomsSailor2AfterBattleText::
 	text "Did you see the"
 	line "FISHING GURU in"
 	cont "VERMILION CITY?"
 	done
 
-_SSAnne10BattleText3::
+_SSAnneB1FRoomsSailor3BattleText::
 	text "Us sailors have"
 	line "#MON too!"
 	done
 
-_SSAnne10EndBattleText3::
+_SSAnneB1FRoomsSailor3EndBattleText::
 	text "OK, "
 	line "you're not bad."
 	prompt
 
-_SSAnne10AfterBattleText3::
+_SSAnneB1FRoomsSailor3AfterBattleText::
 	text "We caught all our"
 	line "#MON while"
 	cont "out at sea!"
 	done
 
-_SSAnne10BattleText4::
+_SSAnneB1FRoomsSailor4BattleText::
 	text "I like feisty"
 	line "kids like you!@"
 	text_end
 
-_SSAnne10EndBattleText4::
+_SSAnneB1FRoomsSailor4EndBattleText::
 	text "Argh!"
 	line "Lost it!"
 	prompt
 
-_SSAnne10AfterBattleText4::
+_SSAnneB1FRoomsSailor4AfterBattleText::
 	text "Sea #MON live"
 	line "in deep water."
 	cont "You'll need a ROD!"
 	done
 
-_SSAnne10BattleText5::
+_SSAnneB1FRoomsSailor5BattleText::
 	text "Matey, you're"
 	line "walking the plank"
 	cont "if you lose!"
 	done
 
-_SSAnne10EndBattleText5::
+_SSAnneB1FRoomsSailor5EndBattleText::
 	text "Argh!"
 	line "Beaten by a kid!"
 	prompt
 
-_SSAnne10AfterBattleText5::
+_SSAnneB1FRoomsSailor5AfterBattleText::
 	text "Jellyfish some-"
 	line "times drift into"
 	cont "the ship."
 	done
 
-_SSAnne10BattleText6::
+_SSAnneB1FRoomsFisherBattleText::
 	text "Hello stranger!"
 	line "Stop and chat!"
 
@@ -92,19 +92,19 @@ _SSAnne10BattleText6::
 	line "are from the sea!"
 	done
 
-_SSAnne10EndBattleText6::
+_SSAnneB1FRoomsFisherEndBattleText::
 	text "Darn!"
 	line "I let that one"
 	cont "get away!"
 	prompt
 
-_SSAnne10AfterBattleText6::
+_SSAnneB1FRoomsFisherAfterBattleText::
 	text "I was going to"
 	line "make you my"
 	cont "assistant too!"
 	done
 
-_SSAnne10Text7::
+_SSAnneB1FRoomsSuperNerdText::
 	text "My buddy, MACHOKE,"
 	line "is super strong!"
 

@@ -1,4 +1,4 @@
-_SafariZoneRestHouse2Text1::
+_SafariZoneWestRestHouseScientistText::
 	text "Tossing ROCKs at"
 	line "#MON might"
 	cont "make them run,"
@@ -6,13 +6,13 @@ _SafariZoneRestHouse2Text1::
 	cont "easier to catch."
 	done
 
-_SafariZoneRestHouse2Text2::
+_SafariZoneWestRestHouseCooltrainerMText::
 	text "Using BAIT will"
 	line "make #MON"
 	cont "easier to catch."
 	done
 
-_SafariZoneRestHouse2Text3::
+_SafariZoneWestRestHouseSilphWorkerFText::
 	text "I hiked a lot, but"
 	line "I didn't see any"
 	cont "#MON I wanted."

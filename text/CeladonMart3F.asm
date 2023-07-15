@@ -1,4 +1,4 @@
-_TM18PreReceiveText::
+_CeladonMart3FClerkTM18PreReceiveText::
 	text "Oh, hi! I finally"
 	line "finished #MON!"
 
@@ -7,26 +7,26 @@ _TM18PreReceiveText::
 	cont "useful!"
 	prompt
 
-_ReceivedTM18Text::
+_CeladonMart3FClerkReceivedTM18Text::
 	text "<PLAYER> received"
 	line "@"
 	text_ram wStringBuffer
 	text "!@"
 	text_end
 
-_TM18ExplanationText::
+_CeladonMart3FClerkTM18ExplanationText::
 	text "TM18 is COUNTER!"
 	line "Not like the one"
 	cont "I'm leaning on,"
 	cont "mind you!"
 	done
 
-_TM18NoRoomText::
+_CeladonMart3FClerkTM18NoRoomText::
 	text "Your pack is full"
 	line "of items!"
 	done
 
-_CeladonMart3Text2::
+_CeladonMart3FGameBoyKid1Text::
 	text "Captured #MON"
 	line "are registered"
 	cont "with an ID No."
@@ -36,7 +36,7 @@ _CeladonMart3Text2::
 	cont "caught it!"
 	done
 
-_CeladonMart3Text3::
+_CeladonMart3FGameBoyKid2Text::
 	text "All right!"
 
 	para "My buddy's going"
@@ -45,7 +45,7 @@ _CeladonMart3Text3::
 	cont "GRAVELER!"
 	done
 
-_CeladonMart3Text4::
+_CeladonMart3FGameBoyKid3Text::
 	text "Come on GRAVELER!"
 
 	para "I love GRAVELER!"
@@ -58,42 +58,42 @@ _CeladonMart3Text4::
 	cont "#MON!"
 	done
 
-_CeladonMart3Text5::
+_CeladonMart3FLittleBoyText::
 	text "You can identify"
 	line "#MON you got"
 	cont "in trades by"
 	cont "their ID Numbers!"
 	done
 
-_CeladonMart3Text6::
+_CeladonMart3FSNESText::
 	text "It's an SNES!"
 	done
 
-_CeladonMart3Text7::
+_CeladonMart3FRPGText::
 	text "An RPG! There's"
 	line "no time for that!"
 	done
 
-_CeladonMart3Text9::
+_CeladonMart3FSportsGameText::
 	text "A sports game!"
 	line "Dad'll like that!"
 	done
 
-_CeladonMart3Text11::
+_CeladonMart3FPuzzleGameText::
 	text "A puzzle game!"
 	line "Looks addictive!"
 	done
 
-_CeladonMart3Text13::
+_CeladonMart3FFightingGameText::
 	text "A fighting game!"
 	line "Looks tough!"
 	done
 
-_CeladonMart3Text14::
+_CeladonMart3FCurrentFloorSignText::
 	text "3F: TV GAME SHOP"
 	done
 
-_CeladonMart3Text15::
+_CeladonMart3FPokemonPosterText::
 	text "Red and Blue!"
 	line "Both are #MON!"
 	done

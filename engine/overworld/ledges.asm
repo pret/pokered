@@ -39,7 +39,7 @@ HandleLedges::
 	ldh a, [hJoyHeld]
 	and e
 	ret z
-	ld a, $ff
+	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	ld hl, wd736
 	set 6, [hl] ; jumping down ledge

@@ -1,34 +1,34 @@
-_Mansion3BattleText1::
+_PokemonMansion3FSuperNerdBattleText::
 	text "This place is"
 	line "like, huge!"
 	done
 
-_Mansion3EndBattleText1::
+_PokemonMansion3FSuperNerdEndBattleText::
 	text "Ayah!"
 	prompt
 
-_Mansion3AfterBattleText1::
+_PokemonMansion3FSuperNerdAfterBattleText::
 	text "I wonder where"
 	line "my partner went."
 	done
 
-_Mansion3BattleText2::
+_PokemonMansion3FScientistBattleText::
 	text "My mentor once"
 	line "lived here."
 	done
 
-_Mansion3EndBattleText2::
+_PokemonMansion3FScientistEndBattleText::
 	text "Whew!"
 	line "Overwhelming!"
 	prompt
 
-_Mansion3AfterBattleText2::
+_PokemonMansion3FScientistAfterBattleText::
 	text "So, you're stuck?"
 	line "Try jumping off"
 	cont "over there!"
 	done
 
-_Mansion3Text5::
+_PokemonMansion3FDiaryText::
 	text "Diary: Feb. 6"
 	line "MEW gave birth."
 

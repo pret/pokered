@@ -2,14 +2,15 @@ VermilionOldRodHouse_Script:
 	jp EnableAutoTextBoxDrawing
 
 VermilionOldRodHouse_TextPointers:
-	dw VermilionHouse2Text1
+	def_text_pointers
+	dw_const VermilionOldRodHouseFishingGuruText, TEXT_VERMILIONOLDRODHOUSE_FISHING_GURU
 
-VermilionHouse2Text1:
+VermilionOldRodHouseFishingGuruText:
 	text_asm
 	ld a, [wd728]
 	bit 3, a ; got old rod?
-	jr nz, .got_item
-	ld hl, VermilionHouse2Text_560b1
+	jr nz, .got_old_rod
+	ld hl, .DoYouLikeToFishText
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
@@ -20,38 +21,38 @@ VermilionHouse2Text1:
 	jr nc, .bag_full
 	ld hl, wd728
 	set 3, [hl] ; got old rod
-	ld hl, VermilionHouse2Text_560b6
-	jr .done
+	ld hl, .TakeThisText
+	jr .print_text
 .bag_full
-	ld hl, VermilionHouse2Text_560ca
-	jr .done
+	ld hl, .NoRoomText
+	jr .print_text
 .refused
-	ld hl, VermilionHouse2Text_560c0
-	jr .done
-.got_item
-	ld hl, VermilionHouse2Text_560c5
-.done
+	ld hl, .ThatsSoDisappointingText
+	jr .print_text
+.got_old_rod
+	ld hl, .HowAreTheFishBitingText
+.print_text
 	call PrintText
 	jp TextScriptEnd
 
-VermilionHouse2Text_560b1:
-	text_far _VermilionHouse2Text_560b1
+.DoYouLikeToFishText:
+	text_far _VermilionOldRodHouseFishingGuruDoYouLikeToFishText
 	text_end
 
-VermilionHouse2Text_560b6:
-	text_far _VermilionHouse2Text_560b6
+.TakeThisText:
+	text_far _VermilionOldRodHouseFishingGuruTakeThisText
 	sound_get_item_1
-	text_far _VermilionHouse2Text_560bb
+	text_far _VermilionOldRodHouseFishingGuruFishingIsAWayOfLifeText
 	text_end
 
-VermilionHouse2Text_560c0:
-	text_far _VermilionHouse2Text_560c0
+.ThatsSoDisappointingText:
+	text_far _VermilionOldRodHouseFishingGuruThatsSoDisappointingText
 	text_end
 
-VermilionHouse2Text_560c5:
-	text_far _VermilionHouse2Text_560c5
+.HowAreTheFishBitingText:
+	text_far _VermilionOldRodHouseFishingGuruHowAreTheFishBitingText
 	text_end
 
-VermilionHouse2Text_560ca:
-	text_far _VermilionHouse2Text_560ca
+.NoRoomText:
+	text_far _VermilionOldRodHouseFishingGuruNoRoomText
 	text_end

@@ -9,7 +9,7 @@ Route7_Object:
 	warp_event  5, 13, UNDERGROUND_PATH_ROUTE_7, 1
 
 	def_bg_events
-	bg_event  3, 13, 1 ; Route7Text1
+	bg_event  3, 13, TEXT_ROUTE7_UNDERGROUND_PATH_SIGN
 
 	def_object_events
 

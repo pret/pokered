@@ -49,70 +49,72 @@ Mansion4Script_Switches::
 	ret nz
 	xor a
 	ldh [hJoyHeld], a
-	ld a, $9
+	ld a, TEXT_POKEMONMANSIONB1F_SWITCH
 	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
 PokemonMansionB1F_ScriptPointers:
-	dw CheckFightingMapTrainers
-	dw DisplayEnemyTrainerTextAndStartBattle
-	dw EndTrainerBattle
+	def_script_pointers
+	dw_const CheckFightingMapTrainers,              SCRIPT_POKEMONMANSIONB1F_DEFAULT
+	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_POKEMONMANSIONB1F_START_BATTLE
+	dw_const EndTrainerBattle,                      SCRIPT_POKEMONMANSIONB1F_END_BATTLE
 
 PokemonMansionB1F_TextPointers:
-	dw Mansion4Text1
-	dw Mansion4Text2
-	dw PickUpItemText
-	dw PickUpItemText
-	dw PickUpItemText
-	dw PickUpItemText
-	dw Mansion4Text7
-	dw PickUpItemText
-	dw Mansion3Text6
+	def_text_pointers
+	dw_const PokemonMansionB1FBurglarText,   TEXT_POKEMONMANSIONB1F_BURGLAR
+	dw_const PokemonMansionB1FScientistText, TEXT_POKEMONMANSIONB1F_SCIENTIST
+	dw_const PickUpItemText,                 TEXT_POKEMONMANSIONB1F_RARE_CANDY
+	dw_const PickUpItemText,                 TEXT_POKEMONMANSIONB1F_FULL_RESTORE
+	dw_const PickUpItemText,                 TEXT_POKEMONMANSIONB1F_TM_BLIZZARD
+	dw_const PickUpItemText,                 TEXT_POKEMONMANSIONB1F_TM_SOLARBEAM
+	dw_const PokemonMansionB1FDiaryText,     TEXT_POKEMONMANSIONB1F_DIARY
+	dw_const PickUpItemText,                 TEXT_POKEMONMANSIONB1F_SECRET_KEY
+	dw_const PokemonMansion2FSwitchText,     TEXT_POKEMONMANSIONB1F_SWITCH ; This switch uses the text script from the 2F.
 
 Mansion4TrainerHeaders:
 	def_trainers
 Mansion4TrainerHeader0:
-	trainer EVENT_BEAT_MANSION_4_TRAINER_0, 0, Mansion4BattleText1, Mansion4EndBattleText1, Mansion4AfterBattleText1
+	trainer EVENT_BEAT_MANSION_4_TRAINER_0, 0, PokemonMansionB1FBurglarBattleText, PokemonMansionB1FBurglarEndBattleText, PokemonMansionB1FBurglarAfterBattleText
 Mansion4TrainerHeader1:
-	trainer EVENT_BEAT_MANSION_4_TRAINER_1, 3, Mansion4BattleText2, Mansion4EndBattleText2, Mansion4AfterBattleText2
+	trainer EVENT_BEAT_MANSION_4_TRAINER_1, 3, PokemonMansionB1FScientistBattleText, PokemonMansionB1FScientistEndBattleText, PokemonMansionB1FScientistAfterBattleText
 	db -1 ; end
 
-Mansion4Text1:
+PokemonMansionB1FBurglarText:
 	text_asm
 	ld hl, Mansion4TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Mansion4Text2:
+PokemonMansionB1FScientistText:
 	text_asm
 	ld hl, Mansion4TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Mansion4BattleText1:
-	text_far _Mansion4BattleText1
+PokemonMansionB1FBurglarBattleText:
+	text_far _PokemonMansionB1FBurglarBattleText
 	text_end
 
-Mansion4EndBattleText1:
-	text_far _Mansion4EndBattleText1
+PokemonMansionB1FBurglarEndBattleText:
+	text_far _PokemonMansionB1FBurglarEndBattleText
 	text_end
 
-Mansion4AfterBattleText1:
-	text_far _Mansion4AfterBattleText1
+PokemonMansionB1FBurglarAfterBattleText:
+	text_far _PokemonMansionB1FBurglarAfterBattleText
 	text_end
 
-Mansion4BattleText2:
-	text_far _Mansion4BattleText2
+PokemonMansionB1FScientistBattleText:
+	text_far _PokemonMansionB1FScientistBattleText
 	text_end
 
-Mansion4EndBattleText2:
-	text_far _Mansion4EndBattleText2
+PokemonMansionB1FScientistEndBattleText:
+	text_far _PokemonMansionB1FScientistEndBattleText
 	text_end
 
-Mansion4AfterBattleText2:
-	text_far _Mansion4AfterBattleText2
+PokemonMansionB1FScientistAfterBattleText:
+	text_far _PokemonMansionB1FScientistAfterBattleText
 	text_end
 
-Mansion4Text7:
-	text_far _Mansion4Text7
+PokemonMansionB1FDiaryText:
+	text_far _PokemonMansionB1FDiaryText
 	text_end

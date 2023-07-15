@@ -2,14 +2,15 @@ VermilionMart_Script:
 	jp EnableAutoTextBoxDrawing
 
 VermilionMart_TextPointers:
-	dw VermilionCashierText
-	dw VermilionMartText2
-	dw VermilionMartText3
+	def_text_pointers
+	dw_const VermilionMartClerkText,        TEXT_VERMILIONMART_CLERK
+	dw_const VermilionMartCooltrainerMText, TEXT_VERMILIONMART_COOLTRAINER_M
+	dw_const VermilionMartCooltrainerFText, TEXT_VERMILIONMART_COOLTRAINER_F
 
-VermilionMartText2:
-	text_far _VermilionMartText2
+VermilionMartCooltrainerMText:
+	text_far _VermilionMartCooltrainerMText
 	text_end
 
-VermilionMartText3:
-	text_far _VermilionMartText3
+VermilionMartCooltrainerFText:
+	text_far _VermilionMartCooltrainerFText
 	text_end

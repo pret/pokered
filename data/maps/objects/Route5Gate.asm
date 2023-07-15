@@ -1,3 +1,6 @@
+	object_const_def
+	const ROUTE5GATE_GUARD
+
 Route5Gate_Object:
 	db $a ; border block
 
@@ -10,6 +13,6 @@ Route5Gate_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  1,  3, SPRITE_GUARD, STAY, RIGHT, 1 ; person
+	object_event  1,  3, SPRITE_GUARD, STAY, RIGHT, TEXT_ROUTE5GATE_GUARD
 
 	def_warps_to ROUTE_5_GATE

@@ -1,4 +1,4 @@
-_MomWakeUpText::
+_RedsHouse1FMomWakeUpText::
 	text "MOM: Right."
 	line "All boys leave"
 	cont "home some day."
@@ -9,13 +9,13 @@ _MomWakeUpText::
 	cont "for you."
 	done
 
-_MomHealText1::
+_RedsHouse1FMomYouShouldRestText::
 	text "MOM: <PLAYER>!"
 	line "You should take a"
 	cont "quick rest."
 	prompt
 
-_MomHealText2::
+_RedsHouse1FMomLookingGreatText::
 	text "MOM: Oh good!"
 	line "You and your"
 	cont "#MON are"
@@ -23,7 +23,7 @@ _MomHealText2::
 	cont "Take care now!"
 	done
 
-_StandByMeText::
+_RedsHouse1FTVStandByMeMovieText::
 	text "There's a movie"
 	line "on TV. Four boys"
 	cont "are walking on"
@@ -32,6 +32,6 @@ _StandByMeText::
 	para "I better go too."
 	done
 
-_TVWrongSideText::
+_RedsHouse1FTVWrongSideText::
 	text "Oops, wrong side."
 	done

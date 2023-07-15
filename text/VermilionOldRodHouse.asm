@@ -1,4 +1,4 @@
-_VermilionHouse2Text_560b1::
+_VermilionOldRodHouseFishingGuruDoYouLikeToFishText::
 	text "I'm the FISHING"
 	line "GURU!"
 
@@ -9,7 +9,7 @@ _VermilionHouse2Text_560b1::
 	line "fish?"
 	done
 
-_VermilionHouse2Text_560b6::
+_VermilionOldRodHouseFishingGuruTakeThisText::
 	text "Grand! I like"
 	line "your style!"
 
@@ -22,7 +22,7 @@ _VermilionHouse2Text_560b6::
 	text "!@"
 	text_end
 
-_VermilionHouse2Text_560bb::
+_VermilionOldRodHouseFishingGuruFishingIsAWayOfLifeText::
 	text_start
 
 	para "Fishing is a way"
@@ -34,12 +34,12 @@ _VermilionHouse2Text_560bb::
 	cont "one, young one!"
 	done
 
-_VermilionHouse2Text_560c0::
+_VermilionOldRodHouseFishingGuruThatsSoDisappointingText::
 	text "Oh... That's so"
 	line "disappointing..."
 	done
 
-_VermilionHouse2Text_560c5::
+_VermilionOldRodHouseFishingGuruHowAreTheFishBitingText::
 	text "Hello there,"
 	line "<PLAYER>!"
 
@@ -47,7 +47,7 @@ _VermilionHouse2Text_560c5::
 	line "biting?"
 	done
 
-_VermilionHouse2Text_560ca::
+_VermilionOldRodHouseFishingGuruNoRoomText::
 	text "Oh no!"
 
 	para "You have no room"

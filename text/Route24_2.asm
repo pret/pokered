@@ -1,75 +1,75 @@
-_Route24EndBattleText1::
+_Route24CooltrainerM2EndBattleText::
 	text "I"
 	line "thought not!"
 	prompt
 
-_Route24AfterBattleText1::
+_Route24CooltrainerM2AfterBattleText::
 	text "I hid because the"
 	line "people on the"
 	cont "bridge scared me!"
 	done
 
-_Route24BattleText2::
+_Route24CooltrainerM3BattleText::
 	text "OK! I'm No. 5!"
 	line "I'll stomp you!"
 	done
 
-_Route24EndBattleText2::
+_Route24CooltrainerM3EndBattleText::
 	text "Whoa!"
 	line "Too much!"
 	prompt
 
-_Route24AfterBattleText2::
+_Route24CooltrainerM3AfterBattleText::
 	text "I did my best, I"
 	line "have no regrets!"
 	done
 
-_Route24BattleText3::
+_Route24CooltrainerF1BattleText::
 	text "I'm No. 4!"
 	line "Getting tired?"
 	done
 
-_Route24EndBattleText3::
+_Route24CooltrainerF1EndBattleText::
 	text "I lost"
 	line "too!"
 	prompt
 
-_Route24AfterBattleText3::
+_Route24CooltrainerF1AfterBattleText::
 	text "I did my best, so"
 	line "I've no regrets!"
 	done
 
-_Route24BattleText4::
+_Route24Youngster1BattleText::
 	text "Here's No. 3!"
 	line "I won't be easy!"
 	done
 
-_Route24EndBattleText4::
+_Route24Youngster1EndBattleText::
 	text "Ow!"
 	line "Stomped flat!"
 	prompt
 
-_Route24AfterBattleText4::
+_Route24Youngster1AfterBattleText::
 	text "I did my best, I"
 	line "have no regrets!"
 	done
 
-_Route24BattleText5::
+_Route24CooltrainerF2BattleText::
 	text "I'm second!"
 	line "Now it's serious!"
 	done
 
-_Route24EndBattleText5::
+_Route24CooltrainerF2EndBattleText::
 	text "How could I"
 	line "lose?"
 	prompt
 
-_Route24AfterBattleText5::
+_Route24CooltrainerF2AfterBattleText::
 	text "I did my best, I"
 	line "have no regrets!"
 	done
 
-_Route24BattleText6::
+_Route24Youngster2BattleText::
 	text "This is NUGGET"
 	line "BRIDGE! Beat us 5"
 	cont "trainers and win"
@@ -79,12 +79,12 @@ _Route24BattleText6::
 	line "what it takes?"
 	done
 
-_Route24EndBattleText6::
+_Route24Youngster2EndBattleText::
 	text "Whoo!"
 	line "Good stuff!"
 	prompt
 
-_Route24AfterBattleText6::
+_Route24Youngster2AfterBattleText::
 	text "I did my best, I"
 	line "have no regrets!"
 	done

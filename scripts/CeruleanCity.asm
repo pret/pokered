@@ -5,7 +5,7 @@ CeruleanCity_Script:
 	jp CallFunctionInTable
 
 CeruleanCityScript_1948c:
-	xor a
+	xor a ; SCRIPT_CERULEANCITY_DEFAULT
 	ld [wJoyIgnore], a
 	ld [wCeruleanCityCurScript], a
 	ld a, HS_CERULEAN_RIVAL
@@ -13,28 +13,29 @@ CeruleanCityScript_1948c:
 	predef_jump HideObject
 
 CeruleanCity_ScriptPointers:
-	dw CeruleanCityScript0
-	dw CeruleanCityScript1
-	dw CeruleanCityScript2
-	dw CeruleanCityScript3
-	dw CeruleanCityScript4
+	def_script_pointers
+	dw_const CeruleanCityDefaultScript,        SCRIPT_CERULEANCITY_DEFAULT
+	dw_const CeruleanCityRivalBattleScript,    SCRIPT_CERULEANCITY_RIVAL_BATTLE
+	dw_const CeruleanCityRivalDefeatedScript,  SCRIPT_CERULEANCITY_RIVAL_DEFEATED
+	dw_const CeruleanCityRivalCleanupScript,   SCRIPT_CERULEANCITY_RIVAL_CLEANUP
+	dw_const CeruleanCityRocketDefeatedScript, SCRIPT_CERULEANCITY_ROCKET_DEFEATED
 
-CeruleanCityScript4:
+CeruleanCityRocketDefeatedScript:
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, CeruleanCityScript_1948c
-	ld a, $f0
+	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	SetEvent EVENT_BEAT_CERULEAN_ROCKET_THIEF
-	ld a, $2
+	ld a, TEXT_CERULEANCITY_ROCKET
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	xor a
+	xor a ; SCRIPT_CERULEANCITY_DEFAULT
 	ld [wJoyIgnore], a
 	ld [wCeruleanCityCurScript], a
 	ret
 
-CeruleanCityScript0:
+CeruleanCityDefaultScript:
 IF DEF(_DEBUG)
 	call DebugPressedOrHeldB
 	ret nz
@@ -56,7 +57,7 @@ ENDC
 	ld a, b
 	ld [wSprite02StateData1FacingDirection], a
 	call Delay3
-	ld a, $2
+	ld a, TEXT_CERULEANCITY_ROCKET
 	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 .skipRocketThiefEncounter
@@ -77,12 +78,12 @@ ENDC
 	call PlayMusic
 	xor a
 	ldh [hJoyHeld], a
-	ld a, $f0
+	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	ld a, [wXCoord]
 	cp 20 ; is the player standing on the right side of the bridge?
 	jr z, .playerOnRightSideOfBridge
-	ld a, $1
+	ld a, CERULEANCITY_RIVAL
 	ldh [hSpriteIndex], a
 	ld a, SPRITESTATEDATA2_MAPX
 	ldh [hSpriteDataOffset], a
@@ -93,10 +94,10 @@ ENDC
 	ld [wMissableObjectIndex], a
 	predef ShowObject
 	ld de, CeruleanCityMovement1
-	ld a, $1
+	ld a, CERULEANCITY_RIVAL
 	ldh [hSpriteIndex], a
 	call MoveSprite
-	ld a, $1
+	ld a, SCRIPT_CERULEANCITY_RIVAL_BATTLE
 	ld [wCeruleanCityCurScript], a
 	ret
 
@@ -117,26 +118,26 @@ CeruleanCityMovement1:
 	db -1 ; end
 
 CeruleanCityScript_1955d:
-	ld a, 1
+	ld a, CERULEANCITY_RIVAL
 	ldh [hSpriteIndex], a
 	xor a ; SPRITE_FACING_DOWN
 	ldh [hSpriteFacingDirection], a
 	jp SetSpriteFacingDirectionAndDelay ; face object
 
-CeruleanCityScript1:
+CeruleanCityRivalBattleScript:
 	ld a, [wd730]
 	bit 0, a
 	ret nz
 	xor a
 	ld [wJoyIgnore], a
-	ld a, $1
+	ld a, TEXT_CERULEANCITY_RIVAL
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
-	ld hl, CeruleanCityText_1966d
-	ld de, CeruleanCityText_19672
+	ld hl, CeruleanCityRivalDefeatedText
+	ld de, CeruleanCityRivalVictoryText
 	call SaveEndBattleTextPointers
 	ld a, OPP_RIVAL1
 	ld [wCurOpponent], a
@@ -160,26 +161,26 @@ CeruleanCityScript1:
 	xor a
 	ldh [hJoyHeld], a
 	call CeruleanCityScript_1955d
-	ld a, $2
+	ld a, SCRIPT_CERULEANCITY_RIVAL_DEFEATED
 	ld [wCeruleanCityCurScript], a
 	ret
 
-CeruleanCityScript2:
+CeruleanCityRivalDefeatedScript:
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, CeruleanCityScript_1948c
 	call CeruleanCityScript_1955d
-	ld a, $f0
+	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	SetEvent EVENT_BEAT_CERULEAN_RIVAL
-	ld a, $1
+	ld a, TEXT_CERULEANCITY_RIVAL
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
 	farcall Music_RivalAlternateStart
-	ld a, $1
+	ld a, CERULEANCITY_RIVAL
 	ldh [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
 	ld a, [wXCoord]
@@ -190,10 +191,10 @@ CeruleanCityScript2:
 .playerOnRightSideOfBridge
 	ld de, CeruleanCityMovement3
 .skip
-	ld a, $1
+	ld a, CERULEANCITY_RIVAL
 	ldh [hSpriteIndex], a
 	call MoveSprite
-	ld a, $3
+	ld a, SCRIPT_CERULEANCITY_RIVAL_CLEANUP
 	ld [wCeruleanCityCurScript], a
 	ret
 
@@ -217,7 +218,7 @@ CeruleanCityMovement4:
 	db NPC_MOVEMENT_DOWN
 	db -1 ; end
 
-CeruleanCityScript3:
+CeruleanCityRivalCleanupScript:
 	ld a, [wd730]
 	bit 0, a
 	ret nz
@@ -227,233 +228,233 @@ CeruleanCityScript3:
 	xor a
 	ld [wJoyIgnore], a
 	call PlayDefaultMusic
-	ld a, $0
+	ld a, SCRIPT_CERULEANCITY_DEFAULT
 	ld [wCeruleanCityCurScript], a
 	ret
 
 CeruleanCity_TextPointers:
-	dw CeruleanCityText1
-	dw CeruleanCityText2
-	dw CeruleanCityText3
-	dw CeruleanCityText4
-	dw CeruleanCityText5
-	dw CeruleanCityText6
-	dw CeruleanCityText7
-	dw CeruleanCityText8
-	dw CeruleanCityText9
-	dw CeruleanCityText10
-	dw CeruleanCityText11
-	dw CeruleanCityText12
-	dw CeruleanCityText13
-	dw MartSignText
-	dw PokeCenterSignText
-	dw CeruleanCityText16
-	dw CeruleanCityText17
+	def_text_pointers
+	dw_const CeruleanCityRivalText,         TEXT_CERULEANCITY_RIVAL
+	dw_const CeruleanCityRocketText,        TEXT_CERULEANCITY_ROCKET
+	dw_const CeruleanCityCooltrainerMText,  TEXT_CERULEANCITY_COOLTRAINER_M
+	dw_const CeruleanCitySuperNerd1Text,    TEXT_CERULEANCITY_SUPER_NERD1
+	dw_const CeruleanCitySuperNerd2Text,    TEXT_CERULEANCITY_SUPER_NERD2
+	dw_const CeruleanCityGuardText,         TEXT_CERULEANCITY_GUARD1
+	dw_const CeruleanCityCooltrainerF1Text, TEXT_CERULEANCITY_COOLTRAINER_F1
+	dw_const CeruleanCitySlowbroText,       TEXT_CERULEANCITY_SLOWBRO
+	dw_const CeruleanCityCooltrainerF2Text, TEXT_CERULEANCITY_COOLTRAINER_F2
+	dw_const CeruleanCitySuperNerd3Text,    TEXT_CERULEANCITY_SUPER_NERD3
+	dw_const CeruleanCityGuardText,         TEXT_CERULEANCITY_GUARD2
+	dw_const CeruleanCitySignText,          TEXT_CERULEANCITY_SIGN
+	dw_const CeruleanCityTrainerTipsText,   TEXT_CERULEANCITY_TRAINER_TIPS
+	dw_const MartSignText,                  TEXT_CERULEANCITY_MART_SIGN
+	dw_const PokeCenterSignText,            TEXT_CERULEANCITY_POKECENTER_SIGN
+	dw_const CeruleanCityBikeShopSign,      TEXT_CERULEANCITY_BIKESHOP_SIGN
+	dw_const CeruleanCityGymSign,           TEXT_CERULEANCITY_GYM_SIGN
 
-CeruleanCityText1:
+CeruleanCityRivalText:
 	text_asm
 	CheckEvent EVENT_BEAT_CERULEAN_RIVAL
 	; do pre-battle text
-	jr z, .PreBattleText
+	jr z, .PreBattle
 	; or talk about bill
-	ld hl, CeruleanCityText_19677
+	ld hl, CeruleanCityRivalIWentToBillsText
 	call PrintText
 	jr .end
-.PreBattleText
-	ld hl, CeruleanCityText_19668
+.PreBattle
+	ld hl, .PreBattleText
 	call PrintText
 .end
 	jp TextScriptEnd
 
-CeruleanCityText_19668:
-	text_far _CeruleanCityText_19668
+.PreBattleText:
+	text_far _CeruleanCityRivalPreBattleText
 	text_end
 
-CeruleanCityText_1966d:
-	text_far _CeruleanCityText_1966d
+CeruleanCityRivalDefeatedText:
+	text_far _CeruleanCityRivalDefeatedText
 	text_end
 
-CeruleanCityText_19672:
-	text_far _CeruleanCityText_19672
+CeruleanCityRivalVictoryText:
+	text_far _CeruleanCityRivalVictoryText
 	text_end
 
-CeruleanCityText_19677:
-	text_far _CeruleanCityText_19677
+CeruleanCityRivalIWentToBillsText:
+	text_far _CeruleanCityRivalIWentToBillsText
 	text_end
 
-CeruleanCityText2:
+CeruleanCityRocketText:
 	text_asm
 	CheckEvent EVENT_BEAT_CERULEAN_ROCKET_THIEF
 	jr nz, .beatRocketThief
-	ld hl, CeruleanCityText_196d9
+	ld hl, .Text
 	call PrintText
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
-	ld hl, CeruleanCityText_196ee
-	ld de, CeruleanCityText_196ee
+	ld hl, .IGiveUpText
+	ld de, .IGiveUpText
 	call SaveEndBattleTextPointers
 	ldh a, [hSpriteIndexOrTextID]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
-	ld a, $4
+	ld a, SCRIPT_CERULEANCITY_ROCKET_DEFEATED
 	ld [wCeruleanCityCurScript], a
 	jp TextScriptEnd
 .beatRocketThief
-	ld hl, CeruleanCityText_196f3
+	ld hl, .IllReturnTheTMText
 	call PrintText
 	lb bc, TM_DIG, 1
 	call GiveItem
 	jr c, .Success
-	ld hl, TM28NoRoomText
+	ld hl, .TM28NoRoomText
 	call PrintText
 	jr .Done
 .Success
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
-	ld hl, ReceivedTM28Text
+	ld hl, .ReceivedTM28Text
 	call PrintText
 	farcall CeruleanHideRocket
 .Done
 	jp TextScriptEnd
 
-CeruleanCityText_196d9:
-	text_far _CeruleanCityText_196d9
+.Text:
+	text_far _CeruleanCityRocketText
 	text_end
 
-ReceivedTM28Text:
-	text_far _ReceivedTM28Text
+.ReceivedTM28Text:
+	text_far _CeruleanCityRocketReceivedTM28Text
 	sound_get_item_1
-	text_far _ReceivedTM28Text2
+	text_far _CeruleanCityRocketIBetterGetMovingText
 	text_waitbutton
 	text_end
 
-TM28NoRoomText:
-	text_far _TM28NoRoomText
+.TM28NoRoomText:
+	text_far _CeruleanCityRocketTM28NoRoomText
 	text_end
 
-CeruleanCityText_196ee:
-	text_far _CeruleanCityText_196ee
+.IGiveUpText:
+	text_far _CeruleanCityRocketIGiveUpText
 	text_end
 
-CeruleanCityText_196f3:
-	text_far _CeruleanCityText_196f3
+.IllReturnTheTMText:
+	text_far _CeruleanCityRocketIllReturnTheTMText
 	text_end
 
-CeruleanCityText3:
-	text_far _CeruleanCityText3
+CeruleanCityCooltrainerMText:
+	text_far _CeruleanCityCooltrainerMText
 	text_end
 
-CeruleanCityText4:
-	text_far _CeruleanCityText4
+CeruleanCitySuperNerd1Text:
+	text_far _CeruleanCitySuperNerd1Text
 	text_end
 
-CeruleanCityText5:
-	text_far _CeruleanCityText5
+CeruleanCitySuperNerd2Text:
+	text_far _CeruleanCitySuperNerd2Text
 	text_end
 
-CeruleanCityText11:
-CeruleanCityText6:
-	text_far _CeruleanCityText6
+CeruleanCityGuardText:
+	text_far _CeruleanCityGuardText
 	text_end
 
-CeruleanCityText7:
+CeruleanCityCooltrainerF1Text:
 	text_asm
 	ldh a, [hRandomAdd]
 	cp 180 ; 76/256 chance of 1st dialogue
 	jr c, .notFirstText
-	ld hl, CeruleanCityText_19730
+	ld hl, .SlowbroUseSonicboomText
 	call PrintText
 	jr .end
 .notFirstText
 	cp 100 ; 80/256 chance of 2nd dialogue
 	jr c, .notSecondText
-	ld hl, CeruleanCityText_19735
+	ld hl, .SlowbroPunchText
 	call PrintText
 	jr .end
 .notSecondText
 	; 100/256 chance of 3rd dialogue
-	ld hl, CeruleanCityText_1973a
+	ld hl, .SlowbroWithdrawText
 	call PrintText
 .end
 	jp TextScriptEnd
 
-CeruleanCityText_19730:
-	text_far _CeruleanCityText_19730
+.SlowbroUseSonicboomText:
+	text_far _CeruleanCityCooltrainerF1SlowbroUseSonicboomText
 	text_end
 
-CeruleanCityText_19735:
-	text_far _CeruleanCityText_19735
+.SlowbroPunchText:
+	text_far _CeruleanCityCooltrainerF1SlowbroPunchText
 	text_end
 
-CeruleanCityText_1973a:
-	text_far _CeruleanCityText_1973a
+.SlowbroWithdrawText:
+	text_far _CeruleanCityCooltrainerF1SlowbroWithdrawText
 	text_end
 
-CeruleanCityText8:
+CeruleanCitySlowbroText:
 	text_asm
 	ldh a, [hRandomAdd]
 	cp 180 ; 76/256 chance of 1st dialogue
 	jr c, .notFirstText
-	ld hl, CeruleanCityText_1976f
+	ld hl, .TookASnoozeText
 	call PrintText
 	jr .end
 .notFirstText
 	cp 120 ; 60/256 chance of 2nd dialogue
 	jr c, .notSecondText
-	ld hl, CeruleanCityText_19774
+	ld hl, .IsLoafingAroundText
 	call PrintText
 	jr .end
 .notSecondText
 	cp 60 ; 60/256 chance of 3rd dialogue
 	jr c, .notThirdText
-	ld hl, CeruleanCityText_19779
+	ld hl, .TurnedAwayText
 	call PrintText
 	jr .end
 .notThirdText
 	; 60/256 chance of 4th dialogue
-	ld hl, CeruleanCityText_1977e
+	ld hl, .IgnoredOrdersText
 	call PrintText
 .end
 	jp TextScriptEnd
 
-CeruleanCityText_1976f:
-	text_far _CeruleanCityText_1976f
+.TookASnoozeText:
+	text_far _CeruleanCitySlowbroTookASnoozeText
 	text_end
 
-CeruleanCityText_19774:
-	text_far _CeruleanCityText_19774
+.IsLoafingAroundText:
+	text_far _CeruleanCitySlowbroIsLoafingAroundText
 	text_end
 
-CeruleanCityText_19779:
-	text_far _CeruleanCityText_19779
+.TurnedAwayText:
+	text_far _CeruleanCitySlowbroTurnedAwayText
 	text_end
 
-CeruleanCityText_1977e:
-	text_far _CeruleanCityText_1977e
+.IgnoredOrdersText:
+	text_far _CeruleanCitySlowbroIgnoredOrdersText
 	text_end
 
-CeruleanCityText9:
-	text_far _CeruleanCityText9
+CeruleanCityCooltrainerF2Text:
+	text_far _CeruleanCityCooltrainerF2Text
 	text_end
 
-CeruleanCityText10:
-	text_far _CeruleanCityText10
+CeruleanCitySuperNerd3Text:
+	text_far _CeruleanCitySuperNerd3Text
 	text_end
 
-CeruleanCityText12:
-	text_far _CeruleanCityText12
+CeruleanCitySignText:
+	text_far _CeruleanCitySignText
 	text_end
 
-CeruleanCityText13:
-	text_far _CeruleanCityText13
+CeruleanCityTrainerTipsText:
+	text_far _CeruleanCityTrainerTipsText
 	text_end
 
-CeruleanCityText16:
-	text_far _CeruleanCityText16
+CeruleanCityBikeShopSign:
+	text_far _CeruleanCityBikeShopSign
 	text_end
 
-CeruleanCityText17:
-	text_far _CeruleanCityText17
+CeruleanCityGymSign:
+	text_far _CeruleanCityGymSign
 	text_end

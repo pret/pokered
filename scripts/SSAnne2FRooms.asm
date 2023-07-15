@@ -11,179 +11,181 @@ SSAnne2FRooms_Script:
 	ret
 
 SSAnne2FRooms_ScriptPointers:
-	dw CheckFightingMapTrainers
-	dw DisplayEnemyTrainerTextAndStartBattle
-	dw EndTrainerBattle
+	def_script_pointers
+	dw_const CheckFightingMapTrainers,              SCRIPT_SSANNE2FROOMS_DEFAULT
+	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_SSANNE2FROOMS_START_BATTLE
+	dw_const EndTrainerBattle,                      SCRIPT_SSANNE2FROOMS_END_BATTLE
 
 SSAnne2FRooms_TextPointers:
-	dw SSAnne9Text1
-	dw SSAnne9Text2
-	dw SSAnne9Text3
-	dw SSAnne9Text4
-	dw SSAnne9Text5
-	dw PickUpItemText
-	dw SSAnne9Text7
-	dw SSAnne9Text8
-	dw PickUpItemText
-	dw SSAnne9Text10
-	dw SSAnne9Text11
-	dw SSAnne9Text12
-	dw SSAnne9Text13
+	def_text_pointers
+	dw_const SSAnne2FRoomsGentleman1Text,   TEXT_SSANNE2FROOMS_GENTLEMAN1
+	dw_const SSAnne2FRoomsFisherText,       TEXT_SSANNE2FROOMS_FISHER
+	dw_const SSAnne2FRoomsGentleman2Text,   TEXT_SSANNE2FROOMS_GENTLEMAN2
+	dw_const SSAnne2FRoomsCooltrainerFText, TEXT_SSANNE2FROOMS_COOLTRAINER_F
+	dw_const SSAnne2FRoomsGentleman3Text,   TEXT_SSANNE2FROOMS_GENTLEMAN3
+	dw_const PickUpItemText,                TEXT_SSANNE2FROOMS_MAX_ETHER
+	dw_const SSAnne2FRoomsGentleman4Text,   TEXT_SSANNE2FROOMS_GENTLEMAN4
+	dw_const SSAnne2FRoomsGrampsText,       TEXT_SSANNE2FROOMS_GRAMPS
+	dw_const PickUpItemText,                TEXT_SSANNE2FROOMS_RARE_CANDY
+	dw_const SSAnne2FRoomsGentleman5Text,   TEXT_SSANNE2FROOMS_GENTLEMAN5
+	dw_const SSAnne2FRoomsLittleBoyText,    TEXT_SSANNE2FROOMS_LITTLE_BOY
+	dw_const SSAnne2FRoomsBrunetteGirlText, TEXT_SSANNE2FROOMS_BRUNETTE_GIRL
+	dw_const SSAnne2FRoomsBeautyText,       TEXT_SSANNE2FROOMS_BEAUTY
 
 SSAnne9TrainerHeaders:
 	def_trainers
 SSAnne9TrainerHeader0:
-	trainer EVENT_BEAT_SS_ANNE_9_TRAINER_0, 2, SSAnne9BattleText1, SSAnne9EndBattleText1, SSAnne9AfterBattleText1
+	trainer EVENT_BEAT_SS_ANNE_9_TRAINER_0, 2, SSAnne2FRoomsGentleman1BattleText, SSAnne2FRoomsGentleman1EndBattleText, SSAnne2FRoomsGentleman1AfterBattleText
 SSAnne9TrainerHeader1:
-	trainer EVENT_BEAT_SS_ANNE_9_TRAINER_1, 3, SSAnne9BattleText2, SSAnne9EndBattleText2, SSAnne9AfterBattleText2
+	trainer EVENT_BEAT_SS_ANNE_9_TRAINER_1, 3, SSAnne2FRoomsFisherBattleText, SSAnne2FRoomsFisherEndBattleText, SSAnne2FRoomsFisherAfterBattleText
 SSAnne9TrainerHeader2:
-	trainer EVENT_BEAT_SS_ANNE_9_TRAINER_2, 3, SSAnne9BattleText3, SSAnne9EndBattleText3, SSAnne9AfterBattleText3
+	trainer EVENT_BEAT_SS_ANNE_9_TRAINER_2, 3, SSAnne2FRoomsGentleman2BattleText, SSAnne2FRoomsGentleman2EndBattleText, SSAnne2FRoomsGentleman2AfterBattleText
 SSAnne9TrainerHeader3:
-	trainer EVENT_BEAT_SS_ANNE_9_TRAINER_3, 2, SSAnne9BattleText4, SSAnne9EndBattleText4, SSAnne9AfterBattleText4
+	trainer EVENT_BEAT_SS_ANNE_9_TRAINER_3, 2, SSAnne2FRoomsCooltrainerFBattleText, SSAnne2FRoomsCooltrainerFEndBattleText, SSAnne2FRoomsCooltrainerFAfterBattleText
 	db -1 ; end
 
-SSAnne9Text1:
+SSAnne2FRoomsGentleman1Text:
 	text_asm
 	ld hl, SSAnne9TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
-SSAnne9Text2:
+SSAnne2FRoomsFisherText:
 	text_asm
 	ld hl, SSAnne9TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
-SSAnne9Text3:
+SSAnne2FRoomsGentleman2Text:
 	text_asm
 	ld hl, SSAnne9TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
-SSAnne9Text4:
+SSAnne2FRoomsCooltrainerFText:
 	text_asm
 	ld hl, SSAnne9TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
-SSAnne9Text5:
+SSAnne2FRoomsGentleman3Text:
 	text_asm
 	call SaveScreenTilesToBuffer1
-	ld hl, SSAnne9Text_61bf2
+	ld hl, .Text
 	call PrintText
 	call LoadScreenTilesFromBuffer1
 	ld a, SNORLAX
 	call DisplayPokedex
 	jp TextScriptEnd
 
-SSAnne9Text_61bf2:
-	text_far _SSAnne9Text_61bf2
+.Text:
+	text_far _SSAnne2FRoomsGentleman3Text
 	text_end
 
-SSAnne9Text7:
+SSAnne2FRoomsGentleman4Text:
 	text_asm
-	ld hl, SSAnne9Text_61c01
+	ld hl, .Text
 	call PrintText
 	jp TextScriptEnd
 
-SSAnne9Text_61c01:
-	text_far _SSAnne9Text_61c01
+.Text:
+	text_far _SSAnne2FRoomsGentleman4Text
 	text_end
 
-SSAnne9Text8:
+SSAnne2FRoomsGrampsText:
 	text_asm
-	ld hl, SSAnne9Text_61c10
+	ld hl, .Text
 	call PrintText
 	jp TextScriptEnd
 
-SSAnne9Text_61c10:
-	text_far _SSAnne9Text_61c10
+.Text:
+	text_far _SSAnne2FRoomsGrampsText
 	text_end
 
-SSAnne9Text10:
+SSAnne2FRoomsGentleman5Text:
 	text_asm
-	ld hl, SSAnne9Text_61c1f
+	ld hl, .Text
 	call PrintText
 	jp TextScriptEnd
 
-SSAnne9Text_61c1f:
-	text_far _SSAnne9Text_61c1f
+.Text:
+	text_far _SSAnne2FRoomsGentleman5Text
 	text_end
 
-SSAnne9Text11:
+SSAnne2FRoomsLittleBoyText:
 	text_asm
-	ld hl, SSAnne9Text_61c2e
+	ld hl, .Text
 	call PrintText
 	jp TextScriptEnd
 
-SSAnne9Text_61c2e:
-	text_far _SSAnne9Text_61c2e
+.Text:
+	text_far _SSAnne2FRoomsLittleBoyText
 	text_end
 
-SSAnne9Text12:
+SSAnne2FRoomsBrunetteGirlText:
 	text_asm
-	ld hl, SSAnne9Text_61c3d
+	ld hl, .Text
 	call PrintText
 	jp TextScriptEnd
 
-SSAnne9Text_61c3d:
-	text_far _SSAnne9Text_61c3d
+.Text:
+	text_far _SSAnne2FRoomsBrunetteGirlText
 	text_end
 
-SSAnne9Text13:
+SSAnne2FRoomsBeautyText:
 	text_asm
-	ld hl, SSAnne9Text_61c4c
+	ld hl, .Text
 	call PrintText
 	jp TextScriptEnd
 
-SSAnne9Text_61c4c:
-	text_far _SSAnne9Text_61c4c
+.Text:
+	text_far _SSAnne2FRoomsBeautyText
 	text_end
 
-SSAnne9BattleText1:
-	text_far _SSAnne9BattleText1
+SSAnne2FRoomsGentleman1BattleText:
+	text_far _SSAnne2FRoomsGentleman1BattleText
 	text_end
 
-SSAnne9EndBattleText1:
-	text_far _SSAnne9EndBattleText1
+SSAnne2FRoomsGentleman1EndBattleText:
+	text_far _SSAnne2FRoomsGentleman1EndBattleText
 	text_end
 
-SSAnne9AfterBattleText1:
-	text_far _SSAnne9AfterBattleText1
+SSAnne2FRoomsGentleman1AfterBattleText:
+	text_far _SSAnne2FRoomsGentleman1AfterBattleText
 	text_end
 
-SSAnne9BattleText2:
-	text_far _SSAnne9BattleText2
+SSAnne2FRoomsFisherBattleText:
+	text_far _SSAnne2FRoomsFisherBattleText
 	text_end
 
-SSAnne9EndBattleText2:
-	text_far _SSAnne9EndBattleText2
+SSAnne2FRoomsFisherEndBattleText:
+	text_far _SSAnne2FRoomsFisherEndBattleText
 	text_end
 
-SSAnne9AfterBattleText2:
-	text_far _SSAnne9AfterBattleText2
+SSAnne2FRoomsFisherAfterBattleText:
+	text_far _SSAnne2FRoomsFisherAfterBattleText
 	text_end
 
-SSAnne9BattleText3:
-	text_far _SSAnne9BattleText3
+SSAnne2FRoomsGentleman2BattleText:
+	text_far _SSAnne2FRoomsGentleman2BattleText
 	text_end
 
-SSAnne9EndBattleText3:
-	text_far _SSAnne9EndBattleText3
+SSAnne2FRoomsGentleman2EndBattleText:
+	text_far _SSAnne2FRoomsGentleman2EndBattleText
 	text_end
 
-SSAnne9AfterBattleText3:
-	text_far _SSAnne9AfterBattleText3
+SSAnne2FRoomsGentleman2AfterBattleText:
+	text_far _SSAnne2FRoomsGentleman2AfterBattleText
 	text_end
 
-SSAnne9BattleText4:
-	text_far _SSAnne9BattleText4
+SSAnne2FRoomsCooltrainerFBattleText:
+	text_far _SSAnne2FRoomsCooltrainerFBattleText
 	text_end
 
-SSAnne9EndBattleText4:
-	text_far _SSAnne9EndBattleText4
+SSAnne2FRoomsCooltrainerFEndBattleText:
+	text_far _SSAnne2FRoomsCooltrainerFEndBattleText
 	text_end
 
-SSAnne9AfterBattleText4:
-	text_far _SSAnne9AfterBattleText4
+SSAnne2FRoomsCooltrainerFAfterBattleText:
+	text_far _SSAnne2FRoomsCooltrainerFAfterBattleText
 	text_end

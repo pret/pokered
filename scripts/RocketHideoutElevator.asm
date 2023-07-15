@@ -3,26 +3,26 @@ RocketHideoutElevator_Script:
 	bit 5, [hl]
 	res 5, [hl]
 	push hl
-	call nz, RocketHideoutElevatorScript_4572c
+	call nz, RocketHideoutElevatorGetWarpsScript
 	pop hl
 	bit 7, [hl]
 	res 7, [hl]
-	call nz, RocketHideoutElevatorScript_4575f
+	call nz, RocketHideoutElevatorShakeScript
 	xor a
 	ld [wAutoTextBoxDrawingControl], a
 	inc a
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ret
 
-RocketHideoutElevatorScript_4572c:
+RocketHideoutElevatorGetWarpsScript:
 	ld hl, wWarpEntries
 	ld a, [wWarpedFromWhichWarp]
 	ld b, a
 	ld a, [wWarpedFromWhichMap]
 	ld c, a
-	call RocketHideoutElevatorScript_4573a
+	call .SetWarpEntries
 
-RocketHideoutElevatorScript_4573a:
+.SetWarpEntries:
 	inc hl
 	inc hl
 	ld a, b
@@ -31,7 +31,7 @@ RocketHideoutElevatorScript_4573a:
 	ld [hli], a
 	ret
 
-RocketHideoutElevatorScript_45741:
+RocketHideoutElevatorScript:
 	ld hl, RocketHideoutElavatorFloors
 	call LoadItemList
 	ld hl, RocketHideoutElevatorWarpMaps
@@ -55,30 +55,31 @@ RocketHideoutElevatorWarpMaps:
 	db 2, ROCKET_HIDEOUT_B4F
 RocketHideoutElevatorWarpMapsEnd:
 
-RocketHideoutElevatorScript_4575f:
+RocketHideoutElevatorShakeScript:
 	call Delay3
 	farcall ShakeElevator
 	ret
 
 RocketHideoutElevator_TextPointers:
-	dw RocketHideoutElevatorText1
+	def_text_pointers
+	dw_const RocketHideoutElevatorText, TEXT_ROCKETHIDEOUTELEVATOR
 
-RocketHideoutElevatorText1:
+RocketHideoutElevatorText:
 	text_asm
 	ld b, LIFT_KEY
 	call IsItemInBag
-	jr z, .asm_45782
-	call RocketHideoutElevatorScript_45741
+	jr z, .no_key
+	call RocketHideoutElevatorScript
 	ld hl, RocketHideoutElevatorWarpMaps
 	predef DisplayElevatorFloorMenu
-	jr .asm_45788
-.asm_45782
-	ld hl, RocketHideoutElevatorText_4578b
+	jr .text_script_end
+.no_key
+	ld hl, .AppearsToNeedKeyText
 	call PrintText
-.asm_45788
+.text_script_end
 	jp TextScriptEnd
 
-RocketHideoutElevatorText_4578b:
-	text_far _RocketElevatorText_4578b
+.AppearsToNeedKeyText:
+	text_far _RocketHideoutElevatorAppearsToNeedKeyText
 	text_waitbutton
 	text_end

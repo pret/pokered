@@ -1,4 +1,4 @@
-_LTSurgePreBattleText::
+_VermilionGymLTSurgePreBattleText::
 	text "Hey, kid! What do"
 	line "you think you're"
 	cont "doing here?"

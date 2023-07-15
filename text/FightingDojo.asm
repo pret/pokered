@@ -1,4 +1,4 @@
-_FightingDojoText_5ce8e::
+_FightingDojoKarateMasterText::
 	text "Grunt!"
 
 	para "I am the KARATE"
@@ -12,12 +12,12 @@ _FightingDojoText_5ce8e::
 	para "Fwaaa!"
 	done
 
-_FightingDojoText_5ce93::
+_FightingDojoKarateMasterDefeatedText::
 	text "Hwa!"
 	line "Arrgh! Beaten!"
 	prompt
 
-_FightingDojoText_5ce98::
+_FightingDojoKarateMasterIWillGiveYouAPokemonText::
 	text "Indeed, I have"
 	line "lost!"
 
@@ -34,24 +34,24 @@ _FightingDojoText_5ce98::
 	line "one you like!"
 	done
 
-_FightingDojoText_5ce9d::
+_FightingDojoKarateMasterStayAndTrainWithUsText::
 	text "Ho!"
 
 	para "Stay and train at"
 	line "Karate with us!"
 	done
 
-_FightingDojoBattleText1::
+_FightingDojoBlackbelt1BattleText::
 	text "Hoargh! Take your"
 	line "shoes off!"
 	done
 
-_FightingDojoEndBattleText1::
+_FightingDojoBlackbelt1EndBattleText::
 	text "I give"
 	line "up!"
 	prompt
 
-_FightingDojoAfterBattleText1::
+_FightingDojoBlackbelt1AfterBattleText::
 	text "You wait 'til you"
 	line "see our Master!"
 
@@ -59,22 +59,22 @@ _FightingDojoAfterBattleText1::
 	line "compared to him!"
 	done
 
-_FightingDojoBattleText2::
+_FightingDojoBlackbelt2BattleText::
 	text "I hear you're"
 	line "good! Show me!"
 	done
 
-_FightingDojoEndBattleText2::
+_FightingDojoBlackbelt2EndBattleText::
 	text "Judge!"
 	line "1 point!"
 	prompt
 
-_FightingDojoAfterBattleText2::
+_FightingDojoBlackbelt2AfterBattleText::
 	text "Our Master is a"
 	line "pro fighter!"
 	done
 
-_FightingDojoBattleText3::
+_FightingDojoBlackbelt3BattleText::
 	text "Nothing tough"
 	line "frightens me!"
 
@@ -82,18 +82,18 @@ _FightingDojoBattleText3::
 	line "for training!"
 	done
 
-_FightingDojoEndBattleText3::
+_FightingDojoBlackbelt3EndBattleText::
 	text "Yow!"
 	line "Stubbed fingers!"
 	prompt
 
-_FightingDojoAfterBattleText3::
+_FightingDojoBlackbelt3AfterBattleText::
 	text "The only thing"
 	line "that frightens us"
 	cont "is psychic power!"
 	done
 
-_FightingDojoBattleText4::
+_FightingDojoBlackbelt4BattleText::
 	text "Hoohah!"
 
 	para "You're trespassing"
@@ -101,30 +101,30 @@ _FightingDojoBattleText4::
 	cont "DOJO!"
 	done
 
-_FightingDojoEndBattleText4::
+_FightingDojoBlackbelt4EndBattleText::
 	text "Oof!"
 	line "I give up!"
 	prompt
 
-_FightingDojoAfterBattleText4::
+_FightingDojoBlackbelt4AfterBattleText::
 	text "The prime fighters"
 	line "across the land"
 	cont "train here."
 	done
 
-_WantHitmonleeText::
+_FightingDojoHitmonleePokeBallText::
 	text "You want the"
 	line "hard kicking"
 	cont "HITMONLEE?"
 	done
 
-_WantHitmonchanText::
+_FightingDojoHitmonchanPokeBallText::
 	text "You want the"
 	line "piston punching"
 	cont "HITMONCHAN?"
 	done
 
-_OtherHitmonText::
+_FightingDojoBetterNotGetGreedyText::
 	text "Better not get"
 	line "greedy..."
 	done

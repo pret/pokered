@@ -178,14 +178,14 @@ DEF NUM_ATTACKS EQU const_value - 1
 	const SHOWPIC_ANIM
 	const STATUS_AFFECTED_ANIM
 	const ANIM_A8
-	const ANIM_A9
+	const ENEMY_HUD_SHAKE_ANIM
 	const TRADE_BALL_DROP_ANIM
 	const TRADE_BALL_SHAKE_ANIM
 	const TRADE_BALL_TILT_ANIM
 	const TRADE_BALL_POOF_ANIM
 	const XSTATITEM_ANIM ; use X Attack/Defense/Speed/Special
-	const ANIM_AF
-	const ANIM_B0
+	const XSTATITEM_DUPLICATE_ANIM
+	const SHRINKING_SQUARE_ANIM
 	const ANIM_B1
 	const ANIM_B2
 	const ANIM_B3
@@ -197,18 +197,18 @@ DEF NUM_ATTACKS EQU const_value - 1
 	const ANIM_B9
 	const BURN_PSN_ANIM ; Plays when a monster is burned or poisoned
 	const ANIM_BB
-	const ANIM_BC
+	const SLP_PLAYER_ANIM
 	const SLP_ANIM ; sleeping monster
-	const ANIM_BE
+	const CONF_PLAYER_ANIM
 	const CONF_ANIM ; confused monster
-	const ANIM_C0
+	const SLIDE_DOWN_ANIM
 	const TOSS_ANIM ; toss Poké Ball
 	const SHAKE_ANIM ; shaking Poké Ball when catching monster
 	const POOF_ANIM ; puff of smoke
 	const BLOCKBALL_ANIM ; trainer knocks away Poké Ball
 	const GREATTOSS_ANIM ; toss Great Ball
 	const ULTRATOSS_ANIM ; toss Ultra Ball or Master Ball
-	const ANIM_C7
+	const SHAKE_SCREEN_ANIM
 	const HIDEPIC_ANIM ; monster disappears
 	const ROCK_ANIM ; throw rock
 	const BAIT_ANIM ; throw bait
