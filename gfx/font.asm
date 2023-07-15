@@ -15,8 +15,8 @@ BattleHudTiles3End:
 
 NintendoCopyrightLogoGraphics: INCBIN "gfx/splash/copyright.2bpp"
 
-GamefreakLogoGraphics: INCBIN "gfx/title/gamefreak_inc.2bpp"
-GamefreakLogoGraphicsEnd:
+GameFreakLogoGraphics: INCBIN "gfx/title/gamefreak_inc.2bpp"
+GameFreakLogoGraphicsEnd:
 
 TextBoxGraphics:: INCBIN "gfx/font/font_extra.2bpp"
 TextBoxGraphicsEnd::

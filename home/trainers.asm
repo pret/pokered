@@ -135,7 +135,9 @@ ENDC
 	ld a, [wSpriteIndex]
 	cp $ff
 	jr nz, .trainerEngaging
+IF DEF(_DEBUG)
 .trainerNotEngaging
+ENDC
 	xor a
 	ld [wSpriteIndex], a
 	ld [wTrainerHeaderFlagBit], a

@@ -111,10 +111,14 @@ NextChar::
 	inc de
 	jp PlaceNextChar
 
-NullChar::
+NullChar:: ; unused
 	ld b, h
 	ld c, l
 	pop hl
+	; A "<NULL>" character in a printed string
+	; displays an error message with the current value
+	; of hSpriteIndexOrTextID in decimal format.
+	; This is a debugging leftover.
 	ld de, TextIDErrorText
 	dec de
 	ret

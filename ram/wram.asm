@@ -420,6 +420,7 @@ wAddedToParty::
 ; The purpose of these flags is to track which mons levelled up during the
 ; current battle at the end of the battle when evolution occurs.
 ; Other methods of evolution simply set it by calling TryEvolvingMon.
+wMiscBattleData::
 wCanEvolveFlags:: db
 
 wForceEvolution:: db
@@ -433,8 +434,7 @@ wAILayer2Encouragement:: db
 wPlayerSubstituteHP:: db
 wEnemySubstituteHP:: db
 
-; The player's selected move during a test battle.
-; InitBattleVariables sets it to the move Pound.
+; used for TestBattle (unused in non-debug builds)
 wTestBattlePlayerSelectedMove:: db
 
 	ds 1
@@ -502,6 +502,7 @@ wEnemyNumHits:: ; db
 wEnemyBideAccumulatedDamage:: dw
 
 	ds 8
+wMiscBattleDataEnd::
 ENDU
 
 ; This union spans 39 bytes.
@@ -2155,17 +2156,7 @@ wd730:: db
 	ds 1
 
 ; bit 0: play time being counted
-; bit 1: remnant of debug mode; only set by the debug build.
-; if it is set:
-; 1. skips most of Prof. Oak's speech, and uses NINTEN as the player's name and SONY as the rival's name
-; 2. does not have the player start in floor two of the player's house (instead sending them to [wLastMap])
-; 3. allows wild battles to be avoided by holding down B
-; furthermore, in the debug build:
-; 4. allows trainers to be avoided by holding down B
-; 5. skips Safari Zone step counter by holding down B
-; 6. skips the NPC who blocks Route 3 before beating Brock by holding down B
-; 7. skips Cerulean City rival battle by holding down B
-; 8. skips Pokémon Tower rival battle by holding down B
+; bit 1: debug mode (unused and incomplete in non-debug builds)
 ; bit 2: the target warp is a fly warp (bit 3 set or blacked out) or a dungeon warp (bit 4 set)
 ; bit 3: used warp pad, escape rope, dig, teleport, or fly, so the target warp is a "fly warp"
 ; bit 4: jumped into hole (Pokemon Mansion, Seafoam Islands, Victory Road) or went down waterfall (Seafoam Islands), so the target warp is a "dungeon warp"
@@ -2173,7 +2164,7 @@ wd730:: db
 ; bit 6: map destination is [wLastBlackoutMap] (usually the last used pokemon center, but could be the player's house)
 wd732:: db
 
-; bit 0: running a test battle
+; bit 0: running a test battle (unused in non-debug builds)
 ; bit 1: prevent music from changing when entering new map
 ; bit 2: skip the joypad check in CheckWarpsNoCollision (used for the forced warp down the waterfall in the Seafoam Islands)
 ; bit 3: trainer wants to battle
