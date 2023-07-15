@@ -25,8 +25,7 @@ InitBattleVariables:
 	ld [hli], a
 	dec b
 	jr nz, .loop
-	; Force player to use POUND (move index 1) during TestBattle.
-	inc a
+	inc a ; POUND
 	ld [wTestBattlePlayerSelectedMove], a
 	ld a, [wCurMap]
 	cp SAFARI_ZONE_EAST

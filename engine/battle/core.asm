@@ -2557,12 +2557,12 @@ MoveSelectionMenu:
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	jr z, .matchedkeyspicked
-	; Allow the buttons specified below in regular battles.
+	; Disable left, right, and START buttons in regular battles.
 	ld a, [wFlags_D733]
 	bit BIT_TEST_BATTLE, a
 	ld b, D_UP | D_DOWN | A_BUTTON | B_BUTTON | SELECT
 	jr z, .matchedkeyspicked
-	ld b, -1
+	ld b, D_UP | D_DOWN | D_LEFT | D_RIGHT | A_BUTTON | B_BUTTON | SELECT | START
 .matchedkeyspicked
 	ld a, b
 	ld [hli], a ; wMenuWatchedKeys

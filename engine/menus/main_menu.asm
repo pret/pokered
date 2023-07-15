@@ -310,9 +310,9 @@ StartNewGame:
 	ld hl, wd732
 	; Ensure debug mode is not used when
 	; starting a regular new game.
-	; Additionally, debug mode persists in save
-	; files on both debug and non-debug builds,
-	; and is only reset here by the main menu.
+	; Debug mode persists in saved games for
+	; both debug and non-debug builds, and is
+	; only reset here by the main menu.
 	res BIT_DEBUG_MODE, [hl]
 	; fallthrough
 StartNewGameDebug:

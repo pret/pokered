@@ -16,7 +16,7 @@ DebugNewGameParty: ; unreferenced except in _DEBUG
 	; Exeggutor is the only debug party member shared with Red, Green, and Japanese Blue.
 	; "Tsunekazu Ishihara: Exeggutor is my favorite. That's because I was
 	; always using this character while I was debugging the program."
-	; Source: https://web.archive.org/web/20000607152840/http://pocket.ign.com/news/14973.html
+	; From https://web.archive.org/web/20000607152840/http://pocket.ign.com/news/14973.html
 	db EXEGGUTOR, 90
 IF DEF(_DEBUG)
 	db MEW, 5
@@ -37,7 +37,7 @@ IF DEF(_DEBUG)
 	ld [wMonDataLocation], a
 
 	; Fly anywhere.
-	dec a ; -1
+	dec a ; $ff (all bits)
 	ld [wTownVisitedFlag], a
 	ld [wTownVisitedFlag + 1], a
 

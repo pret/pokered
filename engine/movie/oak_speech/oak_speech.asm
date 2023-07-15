@@ -63,7 +63,7 @@ OakSpeech:
 	ldh [hTileAnimations], a
 	ld a, [wd732]
 	bit BIT_DEBUG_MODE, a
-	jp nz, .skipSpeech ; skip to last part of speech in debug mode
+	jp nz, .skipSpeech
 	ld de, ProfOakPic
 	lb bc, BANK(ProfOakPic), $00
 	call IntroDisplayPicCenteredOrUpperRight
@@ -165,7 +165,7 @@ OakSpeechText1:
 	text_end
 OakSpeechText2:
 	text_far _OakSpeechText2A
-	; The cry played does not match the sprite displayed.
+	; BUG: The cry played does not match the sprite displayed.
 	sound_cry_nidorina
 	text_far _OakSpeechText2B
 	text_end
