@@ -5,7 +5,8 @@ BillsGarden_Script:
 	jp CallFunctionInTable
 
 BillsGarden_ScriptPointers:
-	dw BillsGardenScript0
+	def_script_pointers
+	dw_const BillsGardenScript0,  SCRIPT_BILLS_GARDEN_DEFAULT_SCRIPT
 
 BillsGardenScript0:
 	ld hl, wCurrentMapScriptFlags

@@ -1,8 +1,7 @@
 ; PureRGBnote: ADDED: Someone who can purify a "Cursed" Haunter was added in this script
 
 LavenderCuboneHouse_Script:
-	call EnableAutoTextBoxDrawing
-	ret
+	jp EnableAutoTextBoxDrawing
 
 LavenderCuboneHouse_TextPointers:
 	def_text_pointers

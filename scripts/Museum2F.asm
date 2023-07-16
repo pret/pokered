@@ -4,8 +4,7 @@ Museum2F_Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, Museum2FTrainerHeaders
 	ld de, Museum2F_ScriptPointers
-	call ExecuteCurMapScriptInTable
-	ret
+	jp ExecuteCurMapScriptInTable
 
 Museum2F_TextPointers:
 	def_text_pointers

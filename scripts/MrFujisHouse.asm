@@ -1,6 +1,5 @@
 MrFujisHouse_Script:
-	call EnableAutoTextBoxDrawing
-	ret
+	jp EnableAutoTextBoxDrawing
 
 MrFujisHouse_TextPointers:
 	def_text_pointers

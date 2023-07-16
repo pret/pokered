@@ -1,8 +1,5 @@
 PewterMart_Script:
-	call EnableAutoTextBoxDrawing
-	ld a, TRUE
-	ld [wAutoTextBoxDrawingControl], a
-	ret
+	jp DisableAutoTextBoxDrawing
 
 PewterMart_TextPointers:
 	def_text_pointers

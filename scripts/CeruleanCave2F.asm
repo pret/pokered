@@ -7,13 +7,14 @@ CeruleanCave2F_Script:
 	jp CallFunctionInTable
 
 CeruleanCave2F_ScriptPointers:
-	dw CeruleanCave2FScript0
-	dw CeruleanCave2FScript1
+	def_script_pointers
+	dw_const CeruleanCave2FDefaultScript,  SCRIPT_CERULEANCAVE2F_DEFAULT
+	dw_const CeruleanCave2FAfterOakBattleScript,  SCRIPT_CERULEANCAVE2F_AFTER_OAK_BATTLE
 
-CeruleanCave2FScript0:
+CeruleanCave2FDefaultScript:
 	ret
 
-CeruleanCave2FScript1:
+CeruleanCave2FAfterOakBattleScript:
 	ld a, [wIsInBattle]
 	cp $ff
 	jr z, .done
@@ -25,12 +26,12 @@ CeruleanCave2FScript1:
 	ld a, [wOptions2]
 	bit BIT_ALT_PKMN_PALETTES, a ; do we have alt palettes enabled
 	jr z, .done ; don't do anything if alt palettes are turned off
-	ld a, 5
+	ld a, TEXT_CERULEANCAVE2F_OAK_FIRST_DEFEAT
 	ldh [hSpriteIndexOrTextID], a
     call DisplayTextID
 	SetEvent EVENT_BEAT_PROF_OAK_ONCE
 .done
-	ld a, 0
+	ld a, SCRIPT_CERULEANCAVE2F_DEFAULT
 	ld [wCeruleanCave2FCurScript], a
 	ret
 
@@ -84,7 +85,7 @@ OakBattle:
 	ld a, 2
 .done
 	ld [wTrainerNo], a
-	ld a, 1
+	ld a, SCRIPT_CERULEANCAVE2F_AFTER_OAK_BATTLE
 	ld [wCeruleanCave2FCurScript], a
 	ret
 
