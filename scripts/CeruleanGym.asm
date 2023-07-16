@@ -178,7 +178,7 @@ CeruleanGymGymGuideText: ; PureRGBnote: ADDED: gym guide gives you apex chips af
 	jr nz, .afterBeat
 	ld hl, CeruleanGymChampInMakingText
 	rst _PrintText
-	jr .done
+	rst TextScriptEnd
 .afterBeat
 	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS ; have to hear about apex chips to receive them after that
 	jr z, .donePost
@@ -200,16 +200,15 @@ CeruleanGymGymGuideText: ; PureRGBnote: ADDED: gym guide gives you apex chips af
 .alreadyApexChips
 	ld hl, AlreadyReceivedApexChipsText2
 	rst _PrintText
-	jr .done
+	rst TextScriptEnd
 .BagFull
 	ld hl, ApexNoRoomText2
 	rst _PrintText
-.done
 	rst TextScriptEnd
 .donePost
 	ld hl, CeruleanGymBeatMistyText
 	rst _PrintText
-	jr .done ; TODO: just rst textscriptend
+	rst TextScriptEnd
 
 
 ReceivedApexChipsText2:

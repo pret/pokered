@@ -107,7 +107,7 @@ SafariZoneGateLeavingSafariScript:
 	call SafariZoneEntranceAutoWalk
 	ld a, SCRIPT_SAFARIZONEGATE_7
 	ld [wSafariZoneGateCurScript], a
-	jr .return ; TODO: just ret instead
+	ret
 .doneSafari
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
@@ -118,13 +118,11 @@ SafariZoneGateLeavingSafariScript:
 	call SafariZoneEntranceAutoWalk
 	ld a, SCRIPT_SAFARIZONEGATE_PLAYER_MOVING_DOWN
 	ld [wSafariZoneGateCurScript], a
-	jr .return
+	ret
 .leaving_early
 	ld a, TEXT_SAFARIZONEGATE_SAFARI_ZONE_WORKER1_LEAVING_EARLY
 	ldh [hSpriteIndexOrTextID], a
-	call DisplayTextID
-.return
-	ret
+	jp DisplayTextID
 
 SafariZoneGatePlayerMovingDownScript:
 	call SafariZoneGateReturnSimulatedJoypadStateScript

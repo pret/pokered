@@ -13,7 +13,6 @@ Route11Gate2FYoungsterText:
 	xor a ; TRADE_FOR_TERRY
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue
-Route11Gate2FScriptEnd:
 	rst TextScriptEnd
 
 Route11Gate2FOaksAideText:
@@ -40,7 +39,7 @@ Route11Gate2FOaksAideText:
 	ld hl, .ItemfinderDescriptionText
 	rst _PrintText
 .no_item
-	jr Route11Gate2FScriptEnd ; TODO: just rst textscriptend
+	rst TextScriptEnd
 
 .ItemfinderDescriptionText:
 	text_far _Route11Gate2FOaksAideItemfinderDescriptionText

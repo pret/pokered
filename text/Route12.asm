@@ -171,7 +171,7 @@ _Route12AfterBattleText9::
 	done
 
 _Route12SignText::
-	text "ROUTE 12 " ; TODO: remove space
+	text "ROUTE 12"
 	line "North to LAVENDER"
 	done
 

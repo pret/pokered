@@ -8,6 +8,7 @@ CeladonMart3F_TextPointers:
 	dw_const CeladonMart3FGameBoyKid2Text,      TEXT_CELADONMART3F_GAMEBOY_KID2
 	dw_const CeladonMart3FGameBoyKid3Text,      TEXT_CELADONMART3F_GAMEBOY_KID3
 	dw_const CeladonMart3FLittleBoyText,        TEXT_CELADONMART3F_LITTLE_BOY
+	dw_const CeladonMartTMKid,                  TEXT_CELADONMART3F_TM_KID
 	dw_const CeladonMart3FSNESText,             TEXT_CELADONMART3F_SNES1
 	dw_const CeladonMart3FRPGText,              TEXT_CELADONMART3F_RPG
 	dw_const CeladonMart3FSNESText,             TEXT_CELADONMART3F_SNES2
@@ -20,7 +21,6 @@ CeladonMart3F_TextPointers:
 	dw_const CeladonMart3FPokemonPosterText,    TEXT_CELADONMART3F_POKEMON_POSTER1
 	dw_const CeladonMart3FPokemonPosterText,    TEXT_CELADONMART3F_POKEMON_POSTER2
 	dw_const CeladonMart3FPokemonPosterText,    TEXT_CELADONMART3F_POKEMON_POSTER3 ; PureRGbnote: ADDED: new NPC, it's the TM kid from other pokemarts, he doesn't sell anything though this time
-	dw_const CeladonMartTMKid,                  TEXT_CELADONMART3F_TM_KID ; TODO: reorder?
 
 CeladonMart3FClerkText:
 	text_asm

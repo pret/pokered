@@ -125,7 +125,6 @@ ZapdosTrainerHeader:
 	trainer EVENT_BEAT_ZAPDOS, 0, PowerPlantZapdosBattleText, PowerPlantZapdosBattleText, PowerPlantZapdosBattleText
 	db -1 ; end
 
-InitZapdosBattle:
 InitVoltorbBattle:
 	xor a
 	jr InitVoltorbBattleCommon
@@ -193,7 +192,10 @@ PowerPlantVoltorb6Text:
 PowerPlantZapdosText:
 	text_asm
 	ld hl, ZapdosTrainerHeader
-	jr InitZapdosBattle ; TODO: don't load voltorb sprite for the zapdos battle
+	call TalkToTrainer
+	ld a, [wCurMapScript]
+	ld [wPowerPlantCurScript], a
+	rst TextScriptEnd
 
 PowerPlantVoltorbBattleText:
 	text_far _PowerPlantVoltorbBattleText

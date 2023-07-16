@@ -11,7 +11,7 @@ CeladonMart1F_TextPointers:
 	dw_const CeladonMart1PhoneRight,            TEXT_CELADONMART1F_PHONE_RIGHT
 
 CeladonMart1FReceptionistText:
-	text_far _CeladonMart1FDirectorySignText ; TODO: error
+	text_far _CeladonMart1FReceptionistText
 	text_end
 
 CeladonMart1FDirectorySignText:

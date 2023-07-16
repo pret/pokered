@@ -227,12 +227,7 @@ VermilionDock_EraseSSAnne:
 
 VermilionDock_TextPointers:
 	def_text_pointers
-	dw_const VermilionDockUnusedText, TEXT_VERMILIONDOCK_UNUSED ; TODO: use / remove?
-	dw_const VermilionDockText2,      TEXT_VERMILIONDOCK_MEW
-
-VermilionDockUnusedText:
-	text_far _VermilionDockUnusedText
-	text_end
+	dw_const VermilionDockMewText,      TEXT_VERMILIONDOCK_MEW
 
 VermilionDockTrainerHeaders:
 	def_trainers
@@ -240,7 +235,7 @@ MewTrainerHeader:
 	trainer EVENT_ENCOUNTERED_MEW, 0, MewBattleText, MewBattleText, MewBattleText
 	db -1 ; end
 
-VermilionDockText2:
+VermilionDockMewText:
 	text_asm
 	ld hl, MewTrainerHeader
 	call TalkToTrainer

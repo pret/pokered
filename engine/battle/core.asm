@@ -2759,10 +2759,10 @@ SelectMenuItem:
 	dec a
 	cp c
 	jr z, .disabled
-	ld a, [wPlayerBattleStatus3]
-	bit TRANSFORMED, a 
-	jr nz, .transformedMoveSelected
-.transformedMoveSelected ; pointless ; TODO: remove
+	;ld a, [wPlayerBattleStatus3]
+	;bit TRANSFORMED, a 
+	;jr nz, .transformedMoveSelected
+;.transformedMoveSelected ; pointless
 	; Allow moves copied by Transform to be used.
 	ld a, [wCurrentMenuItem]
 	ld hl, wBattleMonMoves
