@@ -327,8 +327,6 @@ LoadEDTile:
 	ld de, ED_Tile
 	ld hl, vFont tile $70
 	ld bc, (ED_TileEnd - ED_Tile) / $8
-	; to fix the graphical bug on poor emulators
-	;lb bc, BANK(ED_Tile), (ED_TileEnd - ED_Tile) / $8
 	jp CopyVideoDataDouble
 
 ED_Tile:
