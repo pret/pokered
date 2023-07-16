@@ -25,7 +25,7 @@ Route15_TextPointers:
 	dw_const Route15Biker2Text,        TEXT_ROUTE15_BIKER2
 	dw_const Route15CooltrainerF3Text, TEXT_ROUTE15_COOLTRAINER_F3
 	dw_const Route15CooltrainerF4Text, TEXT_ROUTE15_COOLTRAINER_F4
-	dw_const PickUpItemText,           TEXT_ROUTE15_TM_RAGE
+	dw_const PickUpItemText,           TEXT_ROUTE15_ITEM1
 	dw_const Route15SignText,          TEXT_ROUTE15_SIGN
 
 Route15TrainerHeaders:

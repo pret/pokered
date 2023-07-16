@@ -22,7 +22,7 @@ SafariZoneCenter_TextPointers:
 	dw_const SafariZoneCenterTrainerText1,        TEXT_SAFARIZONECENTER_ENGINEER
 	dw_const SafariZoneCenterTrainerText2,        TEXT_SAFARIZONECENTER_JUGGLER
 	dw_const SafariZoneCenterTrainerText3,        TEXT_SAFARIZONECENTER_POKEMANIAC
-	dw_const PickUpItemText,                      TEXT_SAFARIZONECENTER_NUGGET
+	dw_const PickUpItemText,                      TEXT_SAFARIZONECENTER_ITEM1
 	dw_const SafariZoneCenterRestHouseSignText,   TEXT_SAFARIZONECENTER_REST_HOUSE_SIGN
 	dw_const SafariZoneCenterTrainerTipsSignText, TEXT_SAFARIZONECENTER_TRAINER_TIPS_SIGN
 

@@ -66,8 +66,8 @@ SilphCo6F_TextPointers:
 	dw_const SilphCo6FRocket1Text,       TEXT_SILPHCO6F_ROCKET1
 	dw_const SilphCo6FScientistText,     TEXT_SILPHCO6F_SCIENTIST
 	dw_const SilphCo6FRocket2Text,       TEXT_SILPHCO6F_ROCKET2
-	dw_const PickUpItemText,             TEXT_SILPHCO6F_HP_UP
-	dw_const PickUp3ItemText,            TEXT_SILPHCO6F_X_ACCURACY
+	dw_const PickUpItemText,             TEXT_SILPHCO6F_ITEM1
+	dw_const PickUp3ItemText,            TEXT_SILPHCO6F_ITEM2
 	dw_const SilphCo6Text11,             TEXT_SILPHCO6F_CARD_KEY_DONE
 
 SilphCo6TrainerHeaders:

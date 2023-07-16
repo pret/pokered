@@ -109,8 +109,8 @@ PokemonTower6F_TextPointers:
 	dw_const PokemonTower6FChanneler1Text,      TEXT_POKEMONTOWER6F_CHANNELER1
 	dw_const PokemonTower6FChanneler2Text,      TEXT_POKEMONTOWER6F_CHANNELER2
 	dw_const PokemonTower6FChanneler3Text,      TEXT_POKEMONTOWER6F_CHANNELER3
-	dw_const PickUpItemText,                    TEXT_POKEMONTOWER6F_RARE_CANDY
-	dw_const PickUp2ItemText,                   TEXT_POKEMONTOWER6F_X_ACCURACY
+	dw_const PickUpItemText,                    TEXT_POKEMONTOWER6F_ITEM1
+	dw_const PickUp2ItemText,                   TEXT_POKEMONTOWER6F_ITEM2
 	dw_const PokemonTower6FBeGoneText,          TEXT_POKEMONTOWER6F_BEGONE
 	dw_const PokemonTower6FMarowakDepartedText, TEXT_POKEMONTOWER6F_MAROWAK_DEPARTED
 

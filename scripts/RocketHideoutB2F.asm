@@ -273,10 +273,10 @@ INCLUDE "engine/overworld/spinners.asm"
 RocketHideoutB2F_TextPointers:
 	def_text_pointers
 	dw_const RocketHideoutB2FRocketText, TEXT_ROCKETHIDEOUTB2F_ROCKET
-	dw_const PickUpItemText,             TEXT_ROCKETHIDEOUTB2F_MOON_STONE
-	dw_const PickUpItemText,             TEXT_ROCKETHIDEOUTB2F_NUGGET
-	dw_const PickUpItemText,             TEXT_ROCKETHIDEOUTB2F_TM_HORN_DRILL
-	dw_const PickUpItemText,             TEXT_ROCKETHIDEOUTB2F_SUPER_POTION
+	dw_const PickUpItemText,             TEXT_ROCKETHIDEOUTB2F_ITEM1
+	dw_const PickUpItemText,             TEXT_ROCKETHIDEOUTB2F_ITEM2
+	dw_const PickUpItemText,             TEXT_ROCKETHIDEOUTB2F_ITEM3
+	dw_const PickUpItemText,             TEXT_ROCKETHIDEOUTB2F_ITEM4
 
 RocketHideout2TrainerHeaders:
 	def_trainers

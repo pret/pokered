@@ -2,9 +2,10 @@ PokemonTowerB1F_Script:
 	jp EnableAutoTextBoxDrawing
 
 PokemonTowerB1F_TextPointers:
-	dw PokemonTowerB1FText1
+	def_text_pointers
+	dw_const PokemonTowerB1FDarkChannelerText,  TEXT_POKEMONTOWERB1F_DARK_CHANNELER
 
-PokemonTowerB1FText1:
+PokemonTowerB1FDarkChannelerText:
 	text_asm
 	CheckEvent EVENT_MET_DARK_CHANNELER
 	call nz, .checkForGengar

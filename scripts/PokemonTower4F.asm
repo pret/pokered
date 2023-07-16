@@ -18,9 +18,9 @@ PokemonTower4F_TextPointers:
 	dw_const PokemonTower4FChanneler1Text, TEXT_POKEMONTOWER4F_CHANNELER1
 	dw_const PokemonTower4FChanneler2Text, TEXT_POKEMONTOWER4F_CHANNELER2
 	dw_const PokemonTower4FChanneler3Text, TEXT_POKEMONTOWER4F_CHANNELER3
-	dw_const PickUp3ItemText,              TEXT_POKEMONTOWER4F_ELIXER
-	dw_const PickUpItemText,               TEXT_POKEMONTOWER4F_AWAKENING
-	dw_const PickUpItemText,               TEXT_POKEMONTOWER4F_HP_UP
+	dw_const PickUp3ItemText,              TEXT_POKEMONTOWER4F_ITEM1
+	dw_const PickUpItemText,               TEXT_POKEMONTOWER4F_ITEM2
+	dw_const PickUpItemText,               TEXT_POKEMONTOWER4F_ITEM3
 
 PokemonTower4TrainerHeaders:
 	def_trainers

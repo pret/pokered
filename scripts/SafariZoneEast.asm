@@ -22,10 +22,10 @@ SafariZoneEast_TextPointers:
 	dw_const SafariZoneEastTrainerText1,      TEXT_SAFARIZONEEAST_ROCKER
 	dw_const SafariZoneEastTrainerText2,      TEXT_SAFARIZONEEAST_COOLTRAINER_M
 	dw_const SafariZoneEastTrainerText3,      TEXT_SAFARIZONEEAST_ENGINEER
-	dw_const PickUpItemText,                  TEXT_SAFARIZONEEAST_FULL_RESTORE
-	dw_const PickUp5ItemText,                 TEXT_SAFARIZONEEAST_MAX_RESTORE
-	dw_const PickUpItemText,                  TEXT_SAFARIZONEEAST_CARBOS
-	dw_const PickUpItemText,                  TEXT_SAFARIZONEEAST_TM_EGG_BOMB
+	dw_const PickUpItemText,                  TEXT_SAFARIZONEEAST_ITEM1
+	dw_const PickUp5ItemText,                 TEXT_SAFARIZONEEAST_ITEM2
+	dw_const PickUpItemText,                  TEXT_SAFARIZONEEAST_ITEM3
+	dw_const PickUpItemText,                  TEXT_SAFARIZONEEAST_ITEM4
 	dw_const SafariZoneEastRestHouseSignText, TEXT_SAFARIZONEEAST_REST_HOUSE_SIGN
 	dw_const SafariZoneEastTrainerTipsText,   TEXT_SAFARIZONEEAST_TRAINER_TIPS
 	dw_const SafariZoneEastSignText,          TEXT_SAFARIZONEEAST_SIGN

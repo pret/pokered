@@ -4,7 +4,7 @@ WardensHouse_Script:
 WardensHouse_TextPointers:
 	def_text_pointers
 	dw_const WardensHouseWardenText,  TEXT_WARDENSHOUSE_WARDEN
-	dw_const PickUpItemText,          TEXT_WARDENSHOUSE_RARE_CANDY
+	dw_const PickUpItemText,          TEXT_WARDENSHOUSE_ITEM1
 	dw_const BoulderText,             TEXT_WARDENSHOUSE_BOULDER
 	dw_const WardensHouseDisplayText, TEXT_WARDENSHOUSE_DISPLAY_LEFT
 	dw_const WardensHouseDisplayText, TEXT_WARDENSHOUSE_DISPLAY_RIGHT

@@ -84,8 +84,8 @@ VictoryRoad3F_TextPointers:
 	dw_const VictoryRoad3FCooltrainerF1Text, TEXT_VICTORYROAD3F_COOLTRAINER_F1
 	dw_const VictoryRoad3FCooltrainerM2Text, TEXT_VICTORYROAD3F_COOLTRAINER_M2
 	dw_const VictoryRoad3FCooltrainerF2Text, TEXT_VICTORYROAD3F_COOLTRAINER_F2
-	dw_const PickUpItemText,                 TEXT_VICTORYROAD3F_MAX_REVIVE
-	dw_const PickUpItemText,                 TEXT_VICTORYROAD3F_TM_EXPLOSION
+	dw_const PickUpItemText,                 TEXT_VICTORYROAD3F_ITEM1
+	dw_const PickUpItemText,                 TEXT_VICTORYROAD3F_ITEM2
 	dw_const BoulderText,                    TEXT_VICTORYROAD3F_BOULDER1
 	dw_const BoulderText,                    TEXT_VICTORYROAD3F_BOULDER2
 	dw_const BoulderText,                    TEXT_VICTORYROAD3F_BOULDER3

@@ -56,7 +56,7 @@ PokemonTower5F_TextPointers:
 	dw_const PokemonTower5FChanneler3Text,   TEXT_POKEMONTOWER5F_CHANNELER3
 	dw_const PokemonTower5FChanneler4Text,   TEXT_POKEMONTOWER5F_CHANNELER4
 	dw_const PokemonTower5FChanneler5Text,   TEXT_POKEMONTOWER5F_CHANNELER5
-	dw_const PickUpItemText,                 TEXT_POKEMONTOWER5F_NUGGET
+	dw_const PickUpItemText,                 TEXT_POKEMONTOWER5F_ITEM1
 	dw_const PokemonTower5FPurifiedZoneText, TEXT_POKEMONTOWER5F_PURIFIEDZONE
 
 PokemonTower5TrainerHeaders:

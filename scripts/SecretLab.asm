@@ -114,7 +114,7 @@ CheckOpponentWalkIn:
 	add 4
 	ld [wSprite01StateData2MapX], a
 	ld de, SoldierWalkInMovement
-	ld a, 1
+	ld a, SECRETLAB_SOLDIER1
 	ldh [hSpriteIndexOrTextID], a
 	call MoveSprite
 	call .playEncounterMusic
@@ -126,7 +126,7 @@ CheckOpponentWalkIn:
 	add 4
 	ld [wSprite02StateData2MapX], a
 	ld de, SoldierWalkInMovement
-	ld a, 2
+	ld a, SECRETLAB_SOLDIER2
 	ldh [hSpriteIndexOrTextID], a
 	call MoveSprite
 	call .playEncounterMusic
@@ -183,7 +183,7 @@ WaitForWalkFinish:
 	ld [wJoyIgnore], a
 	CheckEvent EVENT_SECRET_LAB_NPC_WALK_OUT_HAPPENING
 	jr nz, .hideNPC
-	ld a, 5
+	ld a, TEXT_SECRETLAB_ENGAGE_TRAINER
 	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 .hideNPC
@@ -229,12 +229,12 @@ CheckOpponentLeaves:
 	ld hl, wFlags_0xcd60
 	res 0, [hl]
 	CheckEvent EVENT_BEAT_SECRET_LAB_SOLDIER_0
-	ld a, 1
+	ld a, SECRETLAB_SOLDIER1
 	jr z, .beatSoldier1
 	CheckEvent EVENT_BEAT_SECRET_LAB_SOLDIER_1
-	ld a, 2
+	ld a, SECRETLAB_SOLDIER2
 	jr z, .beatSoldier2
-	ld a, 3
+	ld a, SECRETLAB_CHIEF
 	SetEvent EVENT_BEAT_SECRET_LAB_CHIEF
 	jr .finishTrainer
 .beatSoldier1
@@ -251,9 +251,8 @@ CheckOpponentLeaves:
   	call UpdateSprites
 	call GBFadeInFromWhite ; have to fade in here after the battle
 	ld hl, wCurrentMapScriptFlags
-	res 3, [hl] ; prevents fade in from happening later
-	; Display after battle message
-	ld a, 6
+	res 3, [hl] ; prevents fade in from happening later ; TODO: needs constant
+	ld a, TEXT_SECRETLAB_AFTER_BATTLE
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	; make them walk away
@@ -573,20 +572,20 @@ CheckMewtwoTransform:
 	call UpdateSprites
 	xor a
 	ld [wJoyIgnore], a
-	ld a, 10
+	ld a, TEXT_SECRETLAB_MEWTWO_TRANSFORMATION
 	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
 SecretLabFailedClones::
-	ld b, 7
+	ld b, TEXT_SECRETLAB_FAILED_CLONES
 	jr SecretLabCheckDisplayTextID
 
 SecretLabComputers::
-	ld b, 8
+	ld b, TEXT_SECRETLAB_COMPUTERS
 	jr SecretLabCheckDisplayTextID
 
 SecretLabMewtwoMachine::
-	ld b, 9
+	ld b, TEXT_SECRETLAB_MEWTWO_MACHINE
 	; fall through
 SecretLabCheckDisplayTextID:
 	ld a, [wSpritePlayerStateData1FacingDirection]
@@ -608,34 +607,35 @@ SecretLabTrainerHeader2:
 	db -1 ; end
 
 SecretLab_TextPointers:
-	dw 0
-	dw 0
-	dw 0
-	dw SecretLabMewMachineText
-	dw SecretLab_EngageTrainerText
-	dw SecretLab_AfterBattleText
-	dw SecretLabFailedClonesText
-	dw SecretLabComputersText
-	dw SecretLabMewtwoMachineText
-	dw SecretLabMewtwoTransformation
+	dw 0 ; can't speak to soldier 1 manually
+	dw 0 ; can't speak to soldier 2 manually
+	dw 0 ; can't speak to chief manually
+	const_def 4
+	dw_const SecretLabMewMachineText,        TEXT_SECRETLAB_MEW_MACHINE
+	dw_const SecretLab_EngageTrainerText,    TEXT_SECRETLAB_ENGAGE_TRAINER
+	dw_const SecretLab_AfterBattleText,      TEXT_SECRETLAB_AFTER_BATTLE
+	dw_const SecretLabFailedClonesText,      TEXT_SECRETLAB_FAILED_CLONES
+	dw_const SecretLabComputersText,         TEXT_SECRETLAB_COMPUTERS
+	dw_const SecretLabMewtwoMachineText,     TEXT_SECRETLAB_MEWTWO_MACHINE
+	dw_const SecretLabMewtwoTransformation,  TEXT_SECRETLAB_MEWTWO_TRANSFORMATION
 
 SecretLab_EngageTrainerText:
 	text_asm
 	CheckEvent EVENT_BEAT_SECRET_LAB_SOLDIER_0
 	ld hl, SecretLabTrainerHeader0
-	ld a, 1
+	ld a, SECRETLAB_SOLDIER1
 	jr z, .startTrainer
 	CheckEvent EVENT_BEAT_SECRET_LAB_SOLDIER_1
 	ld hl, SecretLabTrainerHeader1
-	ld a, 2
+	ld a, SECRETLAB_SOLDIER2
 	jr z, .startTrainer
 	ld hl, SecretLabTrainerHeader2 
-	ld a, 3
+	ld a, SECRETLAB_CHIEF
 .startTrainer
 	ld [wSpriteIndex], a
 	call TalkToTrainer
 	ld hl, wFlags_D733
-	res 4, [hl]
+	res 4, [hl] ; TODO: needs constant
 	; end text
 	SetEvent EVENT_SECRET_LAB_BATTLE_COMPLETED
 	rst TextScriptEnd
@@ -862,7 +862,7 @@ SecretLabMewtwoReactionText4:
 	text_end
 
 SecretLabMewtwoForgetItText:
-	text_far _CeladonMartUsePhoneTextNo
+	text_far _GenericForgetItText
 	text_end
 
 SecretLabMewtwoHereWeGoText:

@@ -24,7 +24,7 @@ SSAnne1FRooms_TextPointers:
 	dw_const SSAnne1FRoomsLittleGirlText,    TEXT_SSANNE1FROOMS_LITTLE_GIRL
 	dw_const SSAnne1FRoomsWigglytuffText,    TEXT_SSANNE1FROOMS_WIGGLYTUFF
 	dw_const SSAnne1FRoomsGirl2Text,         TEXT_SSANNE1FROOMS_GIRL2
-	dw_const PickUpItemText,                 TEXT_SSANNE1FROOMS_TM_BODY_SLAM
+	dw_const PickUpItemText,                 TEXT_SSANNE1FROOMS_ITEM1
 	dw_const SSAnne1FRoomsGentleman3Text,    TEXT_SSANNE1FROOMS_GENTLEMAN3
 
 SSAnne8TrainerHeaders:

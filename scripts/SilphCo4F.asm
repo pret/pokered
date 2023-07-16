@@ -118,9 +118,9 @@ SilphCo4F_TextPointers:
 	dw_const SilphCo4FRocket1Text,      TEXT_SILPHCO4F_ROCKET1
 	dw_const SilphCo4FScientistText,    TEXT_SILPHCO4F_SCIENTIST
 	dw_const SilphCo4FRocket2Text,      TEXT_SILPHCO4F_ROCKET2
-	dw_const PickUp3ItemText,           TEXT_SILPHCO4F_FULL_HEAL
-	dw_const PickUpItemText,            TEXT_SILPHCO4F_MAX_REVIVE
-	dw_const PickUpItemText,            TEXT_SILPHCO4F_ESCAPE_ROPE
+	dw_const PickUp3ItemText,           TEXT_SILPHCO4F_ITEM1
+	dw_const PickUpItemText,            TEXT_SILPHCO4F_ITEM2
+	dw_const PickUpItemText,            TEXT_SILPHCO4F_ITEM3
 	dw_const SilphCo4Text8,             TEXT_SILPHCO4F_CARD_KEY_DONE
 
 SilphCo4TrainerHeaders:

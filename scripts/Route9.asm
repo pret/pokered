@@ -52,7 +52,7 @@ Route9_TextPointers:
 	dw_const Route9Youngster1Text,    TEXT_ROUTE9_YOUNGSTER_1
 	dw_const Route9Hiker3Text,        TEXT_ROUTE9_HIKER_3
 	dw_const Route9Youngster2Text,    TEXT_ROUTE9_YOUNGSTER_2
-	dw_const PickUpItemText,          TEXT_ROUTE9_TM_TELEPORT
+	dw_const PickUpItemText,          TEXT_ROUTE9_ITEM1
 	dw_const Route9SignText,          TEXT_ROUTE9_SIGN
 
 Route9TrainerHeaders:

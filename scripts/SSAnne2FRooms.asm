@@ -23,10 +23,10 @@ SSAnne2FRooms_TextPointers:
 	dw_const SSAnne2FRoomsGentleman2Text,   TEXT_SSANNE2FROOMS_GENTLEMAN2
 	dw_const SSAnne2FRoomsCooltrainerFText, TEXT_SSANNE2FROOMS_COOLTRAINER_F
 	dw_const SSAnne2FRoomsGentleman3Text,   TEXT_SSANNE2FROOMS_GENTLEMAN3
-	dw_const PickUp2ItemText,               TEXT_SSANNE2FROOMS_MAX_ETHER
+	dw_const PickUp2ItemText,               TEXT_SSANNE2FROOMS_ITEM1
 	dw_const SSAnne2FRoomsGentleman4Text,   TEXT_SSANNE2FROOMS_GENTLEMAN4
 	dw_const SSAnne2FRoomsGrampsText,       TEXT_SSANNE2FROOMS_GRAMPS
-	dw_const PickUpItemText,                TEXT_SSANNE2FROOMS_RARE_CANDY
+	dw_const PickUpItemText,                TEXT_SSANNE2FROOMS_ITEM2
 	dw_const SSAnne2FRoomsGentleman5Text,   TEXT_SSANNE2FROOMS_GENTLEMAN5
 	dw_const SSAnne2FRoomsLittleBoyText,    TEXT_SSANNE2FROOMS_LITTLE_BOY
 	dw_const SSAnne2FRoomsBrunetteGirlText, TEXT_SSANNE2FROOMS_BRUNETTE_GIRL

@@ -1,3 +1,8 @@
+	object_const_def
+	const SECRETLAB_SOLDIER1
+	const SECRETLAB_SOLDIER2
+	const SECRETLAB_CHIEF
+
 SecretLab_Object:
 	db 1 ; border block
 
@@ -9,11 +14,11 @@ SecretLab_Object:
 	warp_event  5, 16, SECRET_LAB, 3
 
 	def_bg_events
-	bg_event 2, 6, 4 ; SecretLabMewMachineText
+	bg_event 2, 6, TEXT_SECRETLAB_MEW_MACHINE
 
 	def_object_events
 	object_event  4, 34, SPRITE_SAILOR, STAY, DOWN, 0, OPP_SOLDIER, 5
 	object_event  4, 28, SPRITE_SAILOR, STAY, DOWN, 0, OPP_SOLDIER, 6
-	object_event  4, 24, SPRITE_CHIEF, STAY, DOWN, 0, OPP_CHIEF, 1 ; chief
+	object_event  4, 24, SPRITE_CHIEF, STAY, DOWN, 0, OPP_CHIEF, 1
 
 	def_warps_to SECRET_LAB

@@ -35,6 +35,7 @@ _CeladonMartUsePhoneText::
 	line "It costs ¥25."
 	done
 
+_GenericForgetItText::
 _CeladonMartUsePhoneTextNo::
 	text "Forget it!"
 	done

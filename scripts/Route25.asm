@@ -52,7 +52,7 @@ Route25_TextPointers:
 	dw_const Route25Hiker1Text,        TEXT_ROUTE25_HIKER1
 	dw_const Route25Hiker2Text,        TEXT_ROUTE25_HIKER2
 	dw_const Route25Hiker3Text,        TEXT_ROUTE25_HIKER3
-	dw_const PickUpItemText,           TEXT_ROUTE25_TM_SEISMIC_TOSS
+	dw_const PickUpItemText,           TEXT_ROUTE25_ITEM1
 	dw_const Route25BillSignText,      TEXT_ROUTE25_BILL_SIGN
 	dw_const Route25Text12,            TEXT_ROUTE25_TRAINER_TIPS ; PureRGBnote: ADDED: new trainer tips sign on this route.
 

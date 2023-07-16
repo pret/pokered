@@ -25,10 +25,10 @@ SafariZoneWest_TextPointers:
 	dw_const SafariZoneWestTrainerText2,             TEXT_SAFARIZONEWEST_ROCKER
 	dw_const SafariZoneWestTrainerText3,             TEXT_SAFARIZONEWEST_JUGGLER
 	dw_const SafariZoneWestTrainerText4,             TEXT_SAFARIZONEWEST_PSYCHIC
-	dw_const PickUpItemText,                         TEXT_SAFARIZONEWEST_MAX_POTION
-	dw_const PickUpItemText,                         TEXT_SAFARIZONEWEST_TM_DOUBLE_TEAM
-	dw_const PickUpItemText,                         TEXT_SAFARIZONEWEST_MAX_REVIVE
-	dw_const PickUpItemText,                         TEXT_SAFARIZONEWEST_GOLD_TEETH
+	dw_const PickUpItemText,                         TEXT_SAFARIZONEWEST_ITEM1
+	dw_const PickUpItemText,                         TEXT_SAFARIZONEWEST_ITEM2
+	dw_const PickUpItemText,                         TEXT_SAFARIZONEWEST_ITEM3
+	dw_const PickUpItemText,                         TEXT_SAFARIZONEWEST_ITEM4
 	dw_const SafariZoneWestRestHouseSignText,        TEXT_SAFARIZONEWEST_REST_HOUSE_SIGN
 	dw_const SafariZoneWestFindWardensTeethSignText, TEXT_SAFARIZONEWEST_FIND_WARDENS_TEETH_SIGN
 	dw_const SafariZoneWestTrainerTipsText,          TEXT_SAFARIZONEWEST_TRAINER_TIPS
