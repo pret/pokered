@@ -233,12 +233,12 @@ CeruleanGymChampInMakingText:
 	text_far _CeruleanGymGymGuideChampInMakingText
 	text_end
 
-CeruleanGymBeatMistyText:
+CeruleanGymBeatMistyTextPrompt:
 	text_far _CeruleanGymGymGuideBeatMistyText
 	text_promptbutton
 	text_end
 
-CeruleanGymBeatMistyTextPrompt:
+CeruleanGymBeatMistyText:
 	text_far _CeruleanGymGymGuideBeatMistyText
 	text_end
 

@@ -4,6 +4,7 @@ VermilionOldRodHouse_Script:
 	jp EnableAutoTextBoxDrawing
 
 VermilionOldRodHouse_TextPointers:
+	def_text_pointers
 	dw_const VermilionGuruHouseText1, TEXT_VERMILIONOLDRODHOUSE_FISHING_GURU
 
 VermilionGuruHouseText1:

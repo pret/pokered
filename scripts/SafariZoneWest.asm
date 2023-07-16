@@ -17,6 +17,7 @@ SafariZoneWest_ScriptPointers:
 	dw RangerPostBattleWest1
 
 SafariZoneWest_TextPointers:
+	def_text_pointers
 	dw_const SafariZoneWestRangerText0,              TEXT_SAFARIZONEWEST_RANGER1
 	dw_const SafariZoneWestRangerText1,              TEXT_SAFARIZONEWEST_RANGER2
 	dw_const SafariZoneWestTrainerText0,             TEXT_SAFARIZONEWEST_BURGLAR
