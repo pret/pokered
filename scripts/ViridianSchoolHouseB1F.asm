@@ -4,32 +4,33 @@ ViridianSchoolHouseB1F_Script:
 	jp EnableAutoTextBoxDrawing
 
 ViridianSchoolHouseB1F_TextPointers:
-	dw SchoolB1FGuyNearStairs
-	dw SchoolB1FRightTeacher
-	dw SchoolB1FLittleGirl
-	dw SchoolB1FNerd
-	dw SchoolB1FLeftTeacher
-	dw SchoolB1FStudentTeacher
-	dw SchoolB1FDaisyTutor
-	dw SchoolB1FTuteeLeft
-	dw SchoolB1FTuteeRight
-	dw SchoolB1FRocker
-	dw SchoolB1FBrunetteGirl
-	dw SchoolB1FGameboyKid
-	dw SchoolB1FBottomLeftNotebook
-	dw SchoolB1FBottomCenterNotebook
-	dw SchoolB1FLeftTuteeNotebook
-	dw SchoolB1FTutorNotebook
-	dw SchoolB1FRockerNotebook
-	dw SchoolB1FBrunetteGirlNotebook
-	dw SchoolB1FNerdNotebook
-	dw SchoolB1FBottomRightNotebook
-	dw SchoolB1FLeftBlackboard
-	dw SchoolB1FRightBlackboard
-	dw SchoolB1FLeftClassroomSign
-	dw SchoolB1FRightClassroomSign
-	dw SchoolB1FLeftPoster
-	dw SchoolB1FRightPoster
+	def_text_pointers
+	dw_const SchoolB1FGuyNearStairs,         TEXT_SCHOOLB1F_GUY_NEAR_STAIRS
+	dw_const SchoolB1FRightTeacher,          TEXT_SCHOOLB1F_RIGHT_TEACHER
+	dw_const SchoolB1FLittleGirl,            TEXT_SCHOOLB1F_LITTLE_GIRL
+	dw_const SchoolB1FNerd,                  TEXT_SCHOOLB1F_NERD
+	dw_const SchoolB1FLeftTeacher,           TEXT_SCHOOLB1F_LEFT_TEACHER
+	dw_const SchoolB1FStudentTeacher,        TEXT_SCHOOLB1F_STUDENT_TEACHER
+	dw_const SchoolB1FDaisyTutor,            TEXT_SCHOOLB1F_DAISY_TUTOR
+	dw_const SchoolB1FTuteeLeft,             TEXT_SCHOOLB1F_TUTEE_LEFT
+	dw_const SchoolB1FTuteeRight,            TEXT_SCHOOLB1F_TUTEE_RIGHT
+	dw_const SchoolB1FRocker,                TEXT_SCHOOLB1F_ROCKER
+	dw_const SchoolB1FBrunetteGirl,          TEXT_SCHOOLB1F_BRUNETTE_GIRL
+	dw_const SchoolB1FGameboyKid,            TEXT_SCHOOLB1F_GAMEBOY_KID
+	dw_const SchoolB1FBottomLeftNotebook,    TEXT_SCHOOLB1F_BOTTOM_LEFT_NOTEBOOK
+	dw_const SchoolB1FBottomCenterNotebook,  TEXT_SCHOOLB1F_BOTTOM_CENTER_NOTEBOOK
+	dw_const SchoolB1FLeftTuteeNotebook,     TEXT_SCHOOLB1F_LEFT_TUTEE_NOTEBOOK
+	dw_const SchoolB1FTutorNotebook,         TEXT_SCHOOLB1F_TUTOR_NOTEBOOK
+	dw_const SchoolB1FRockerNotebook,        TEXT_SCHOOLB1F_ROCKER_NOTEBOOK
+	dw_const SchoolB1FBrunetteGirlNotebook,  TEXT_SCHOOLB1F_BRUNETTE_GIRL_NOTEBOOK
+	dw_const SchoolB1FNerdNotebook,          TEXT_SCHOOLB1F_NERD_NOTEBOOK
+	dw_const SchoolB1FBottomRightNotebook,   TEXT_SCHOOLB1F_BOTTOM_RIGHT_NOTEBOOK
+	dw_const SchoolB1FLeftBlackboard,        TEXT_SCHOOLB1F_LEFT_BLACKBOARD
+	dw_const SchoolB1FRightBlackboard,       TEXT_SCHOOLB1F_RIGHT_BLACKBOARD
+	dw_const SchoolB1FLeftClassroomSign,     TEXT_SCHOOLB1F_LEFT_CLASSROOM_SIGN
+	dw_const SchoolB1FRightClassroomSign,    TEXT_SCHOOLB1F_RIGHT_CLASSROOM_SIGN
+	dw_const SchoolB1FLeftPoster,            TEXT_SCHOOLB1F_LEFT_POSTER
+	dw_const SchoolB1FRightPoster,           TEXT_SCHOOLB1F_RIGHT_POSTER
 
 SchoolB1FGuyNearStairs:
 	text_far _SchoolB1FGuyNearStairs
@@ -45,52 +46,52 @@ SchoolB1FLittleGirl:
 
 SchoolB1FNerd:
 	text_asm
-	ld a, 3
+	ld a, SCHOOLB1F_LITTLE_GIRL
 	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_UP
   	ldh [hSpriteFacingDirection], a
   	call SetSpriteFacingDirection
 	ld hl, SchoolB1FNerdText
 	rst _PrintText
-	ld a, 3
+	ld a, SCHOOLB1F_LITTLE_GIRL
 	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_LEFT
   	ldh [hSpriteFacingDirection], a
   	call SetSpriteFacingDirection
-  	ld a, [wSpriteOptions2]
-  	bit 4, a
+  	ld a, [wOptions3]
+  	bit BIT_GHOST_PSYCHIC, a
   	ld hl, SchoolB1FLittleGirlRetort2Text
   	jr z, .ghostWeak
   	ld hl, SchoolB1FLittleGirlRetortText
  .ghostWeak
   	rst _PrintText
-	ld a, 4
+	ld a, SCHOOLB1F_NERD
 	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_UP
   	ldh [hSpriteFacingDirection], a
   	call SetSpriteFacingDirection
   	ld c, 20
   	rst _DelayFrames
-	ld a, 4
+	ld a, SCHOOLB1F_NERD
 	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_RIGHT
   	ldh [hSpriteFacingDirection], a
   	call SetSpriteFacingDirection
-	ld a, 3
+	ld a, SCHOOLB1F_LITTLE_GIRL
 	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_UP
   	ldh [hSpriteFacingDirection], a
   	call SetSpriteFacingDirection
   	ld hl, SchoolB1FNerdSilence
   	rst _PrintText
-	ld a, 3
+	ld a, SCHOOLB1F_LITTLE_GIRL
 	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_LEFT
   	ldh [hSpriteFacingDirection], a
   	call SetSpriteFacingDirection
   	ld hl, SchoolB1FLittleGirlBro
   	rst _PrintText
-	ld a, 4
+	ld a, SCHOOLB1F_NERD
 	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_UP
   	ldh [hSpriteFacingDirection], a
@@ -369,7 +370,7 @@ SchoolB1FBrunetteGirl:
 	ld b, 2
 .loop
 	push bc
-	ld a, 11
+	ld a, SCHOOLB1F_BRUNETTE_GIRL
 	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_LEFT
   	ldh [hSpriteFacingDirection], a
@@ -377,7 +378,7 @@ SchoolB1FBrunetteGirl:
   	call UpdateSprites
   	ld c, 20
   	rst _DelayFrames
-	ld a, 11
+	ld a, SCHOOLB1F_BRUNETTE_GIRL
 	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_UP
   	ldh [hSpriteFacingDirection], a
@@ -389,7 +390,7 @@ SchoolB1FBrunetteGirl:
   	dec b
   	jr nz, .loop
 
-	ld a, 11
+	ld a, SCHOOLB1F_BRUNETTE_GIRL
 	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_LEFT
   	ldh [hSpriteFacingDirection], a
@@ -409,7 +410,7 @@ SchoolB1FBrunetteGirl:
 	rst _DelayFrames
 	ld hl, SchoolB1FDetention2Text
 	rst _PrintText
-	ld a, 11
+	ld a, SCHOOLB1F_BRUNETTE_GIRL
 	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_UP
   	ldh [hSpriteFacingDirection], a
