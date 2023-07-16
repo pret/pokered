@@ -111,10 +111,10 @@ PokemonMansionB1F_TextPointers:
 	dw_const PokemonMansionB1FScientistText, TEXT_POKEMONMANSIONB1F_SCIENTIST
 	dw_const Mansion4Text3,                  TEXT_POKEMONMANSIONB1F_COOLTRAINER_M
 	dw_const Mansion4Text4,                  TEXT_POKEMONMANSIONB1F_FIREFIGHTER
-	dw_const PickUpItemText,                 TEXT_POKEMONMANSIONB1F_RARE_CANDY
-	dw_const PickUpItemText,                 TEXT_POKEMONMANSIONB1F_FULL_RESTORE
-	dw_const PickUpItemText,                 TEXT_POKEMONMANSIONB1F_TM_BLIZZARD
-	dw_const PickUpItemText,                 TEXT_POKEMONMANSIONB1F_TM_SOLARBEAM
+	dw_const PickUpItemText,                 TEXT_POKEMONMANSIONB1F_ITEM1
+	dw_const PickUpItemText,                 TEXT_POKEMONMANSIONB1F_ITEM2
+	dw_const PickUpItemText,                 TEXT_POKEMONMANSIONB1F_ITEM3
+	dw_const PickUpItemText,                 TEXT_POKEMONMANSIONB1F_ITEM4
 	dw_const PokemonMansionB1FDiaryText,     TEXT_POKEMONMANSIONB1F_DIARY
 	dw_const PickUpItemText,                 TEXT_POKEMONMANSIONB1F_SECRET_KEY
 	dw_const PokemonMansion2FSwitchText,     TEXT_POKEMONMANSIONB1F_SWITCH ; This switch uses the text script from the 2F.

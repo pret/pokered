@@ -26,7 +26,7 @@ _CeladonDinerFisherText::
 	cont "at the slots."
 	done
 
-_CeladonDinerGymGuideImFlatOutBustedText::
+_CeladonDinerCoinCaseGuyImFlatOutBustedText::
 	text "Go ahead! Laugh!"
 
 	para "I'm flat out"
@@ -41,17 +41,17 @@ _CeladonDinerGymGuideImFlatOutBustedText::
 	cont "more!"
 	prompt
 
-_CeladonDinerGymGuideReceivedCoinCaseText::
+_CeladonDinerCoinCaseGuyReceivedCoinCaseText::
 	text "<PLAYER> received"
 	line "a COIN CASE!@"
 	text_end
 	
-;_CeladonDinerGymGuideCoinCaseNoRoomText::
+;_CeladonDinerCoinCaseGuyCoinCaseNoRoomText::
 ;	text "Make room for"
 ;	line "this!"
 ;	done
 
-_CeladonDinerGymGuideWinItBackText::
+_CeladonDinerCoinCaseGuyWinItBackText::
 	text "I always thought"
 	line "I was going to"
 	cont "win it back..."

@@ -90,8 +90,8 @@ PokemonMansion3F_TextPointers:
 	dw_const PokemonMansion3FSuperNerdText, TEXT_POKEMONMANSION3F_SUPER_NERD
 	dw_const PokemonMansion3FScientistText, TEXT_POKEMONMANSION3F_SCIENTIST
 	dw_const Mansion3Text3,                 TEXT_POKEMONMANSION3F_CHANNELER
-	dw_const PickUpItemText,                TEXT_POKEMONMANSION3F_MAX_POTION
-	dw_const PickUpItemText,                TEXT_POKEMONMANSION3F_IRON
+	dw_const PickUpItemText,                TEXT_POKEMONMANSION3F_ITEM1
+	dw_const PickUpItemText,                TEXT_POKEMONMANSION3F_ITEM2
 	dw_const PokemonMansion3FDiaryText,     TEXT_POKEMONMANSION3F_DIARY
 	dw_const PokemonMansion2FSwitchText,    TEXT_POKEMONMANSION3F_SWITCH ; This switch uses the text script from the 2F.
 

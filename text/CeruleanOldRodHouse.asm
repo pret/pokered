@@ -1,4 +1,4 @@
-_CeruleanHouse2Text_560b1::
+_CeruleanOldRodHouseImTheFishingGuruText::
 	text "I'm the FISHING"
 	line "GURU!"
 
@@ -9,7 +9,7 @@ _CeruleanHouse2Text_560b1::
 	line "fish?"
 	done
 
-_CeruleanHouse2Text_560b6::
+_CeruleanOldRodHouseGrandILikeYourStyleText::
 	text "Grand! I like"
 	line "your style!"
 
@@ -22,7 +22,7 @@ _CeruleanHouse2Text_560b6::
 	text "!@"
 	text_end
 
-_CeruleanHouse2Text_560bb::
+_CeruleanOldRodHouseFishingIsAWayOfLifeText::
 	text_start
 
 	para "Fishing is a way"
@@ -34,12 +34,12 @@ _CeruleanHouse2Text_560bb::
 	cont "one, young one!"
 	done
 
-_CeruleanHouse2Text_560c0::
+_CeruleanOldRodHouseDisappointing::
 	text "Oh... That's so"
 	line "disappointing..."
 	done
 
-_CeruleanHouse2Text_560c5::
+_CeruleanOldRodHouseHowAreFishBiting::
 	text "Hello there,"
 	line "<PLAYER>!"
 
@@ -52,7 +52,7 @@ _CeruleanHouse2Text_560c5::
 	cont "and GOLDEEN!"
 	done
 
-_CeruleanHouse2Text_560ca::
+_CeruleanOldRodHouseNoRoom::
 	text "Oh no!"
 
 	para "You have no room"

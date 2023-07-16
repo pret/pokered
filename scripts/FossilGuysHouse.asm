@@ -5,16 +5,17 @@ FossilGuysHouse_Script:
 
 
 FossilGuysHouse_TextPointers:
-	dw FossilGuysHouseText1
-	dw FossilGuysHouseText2
-	dw FossilGuysHouseText3
-	dw FossilGuysHouseText4
-	dw FossilGuysHouseText5
-	dw FossilGuysHouseText5
-	dw FossilGuysHouseText6
-	dw FossilGuysHouseText7
+	def_text_pointers
+	dw_const FossilGuysHouseFossilGuyText,   TEXT_FOSSILGUYSHOUSE_FOSSIL_GUY
+	dw_const FossilGuysHouseCatText,         TEXT_FOSSILGUYSHOUSE_MEOWTH
+	dw_const FossilGuysHousePaperText,       TEXT_FOSSILGUYSHOUSE_PAPER
+	dw_const FossilGuysHouseRockText,        TEXT_FOSSILGUYSHOUSE_ROCK
+	dw_const FossilGuysHouseTeleporterText,  TEXT_FOSSILGUYSHOUSE_TELEPORTER1
+	dw_const FossilGuysHouseTeleporterText,  TEXT_FOSSILGUYSHOUSE_TELEPORTER2
+	dw_const FossilGuysHousePosterText,      TEXT_FOSSILGUYSHOUSE_POSTER
+	dw_const FossilGuysHouseDeskText,        TEXT_FOSSILGUYSHOUSE_DESK
 
-FossilGuysHouseText1:
+FossilGuysHouseFossilGuyText:
 	text_asm
 	CheckEitherEventSet EVENT_GOT_DOME_FOSSIL, EVENT_GOT_HELIX_FOSSIL
 	jp z, .neverMet
@@ -226,7 +227,7 @@ FossilGuyGoToCinnabarText:
 
 ; cat text
 
-FossilGuysHouseText2:
+FossilGuysHouseCatText:
 	text_asm
 	CheckEvent EVENT_MET_FOSSIL_GUYS_CAT
 	jr nz, .metCatAlready
@@ -290,7 +291,7 @@ FossilGuysHouseCatText4:
 
 ; sign/house object text
 
-FossilGuysHouseText3:
+FossilGuysHousePaperText:
 	text_asm
 	CheckEitherEventSet EVENT_GOT_DOME_FOSSIL, EVENT_GOT_HELIX_FOSSIL
 	jr z, .done
@@ -317,18 +318,18 @@ FossilGuysOmanyteText:
 	text_far _FossilGuysPaperTextOmanyte
 	text_end
 
-FossilGuysHouseText4:
+FossilGuysHouseRockText:
 	text_far _FossilGuysRock
 	text_end
 
-FossilGuysHouseText5:
+FossilGuysHouseTeleporterText:
 	text_far _FossilGuysTeleporterText
 	text_end
 
-FossilGuysHouseText6:
+FossilGuysHousePosterText:
 	text_far _FossilGuysPosterText
 	text_end
 
-FossilGuysHouseText7:
+FossilGuysHouseDeskText:
 	text_far _FossilGuysDesk
 	text_end

@@ -1,12 +1,12 @@
 ; PureRGBnote: ADDED: new house in fuchsia city. Has an NPC who will permanently remove specific annoying cut trees for a fee.
 ; also has his SNORLAX.
 FuchsiaTreeDeleterHouse_Script:
-	call EnableAutoTextBoxDrawing
-	ret
+	jp EnableAutoTextBoxDrawing
 
 FuchsiaTreeDeleterHouse_TextPointers:
-	dw FuchsiaTreeDeleter
-	dw FuchsiaTreeDeleterSnorlax
+	def_text_pointers
+	dw_const TreeDeleterText,             TEXT_FUCHSIATREEDELETERHOUSE_TREE_DELETER
+	dw_const TreeDeleterSnorlaxText,      TEXT_FUCHSIATREEDELETERHOUSE_SNORLAX
 
 FuchsiaTreeDeleterHouseText1:
 	text_far _FuchsiaTreeDeleterText1
@@ -16,7 +16,7 @@ FuchsiaTreeDeleterHouseText2:
 	text_far _FuchsiaTreeDeleterText2
 	text_end
 
-FuchsiaTreeDeleterSnorlax:
+TreeDeleterSnorlaxText:
 	text_far _FuchsiaTreeDeleterSnorlax
 	sound_cry_snorlax
 	text_far _FuchsiaTreeDeleterSnorlax2
@@ -28,7 +28,7 @@ CheckAllTreesDeleted:
 	CheckBothEventsSet EVENT_DELETED_ROUTE9_TREE, EVENT_DELETED_FUCHSIA_TREES
 	ret
 
-FuchsiaTreeDeleter:
+TreeDeleterText:
 	text_asm
 	call CheckAllTreesDeleted
 	jr z, .finalText

@@ -1,3 +1,6 @@
+	object_const_def
+	const CERULEANOLDRODHOUSE_FISHING_GURU
+
 CeruleanOldRodHouse_Object:
 	db $c ; border block
 
@@ -9,6 +12,6 @@ CeruleanOldRodHouse_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  5,  7, SPRITE_FISHING_GURU, STAY, RIGHT, 1 ; person
+	object_event  5,  7, SPRITE_FISHING_GURU, STAY, RIGHT, TEXT_CERULEANOLDRODHOUSE_FISHING_GURU
 
 	def_warps_to CERULEAN_OLD_ROD_HOUSE

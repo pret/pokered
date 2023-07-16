@@ -89,66 +89,66 @@ _CinnabarGymSuperNerd1AfterBattleText::
 	line "blah..."
 	done
 
-_CinnabarGymSuperNerd2BattleText::
+_CinnabarGymBurglar1BattleText::
 	text "I was a thief, but"
 	line "I became straight"
 	cont "as a trainer!"
 	done
 
-_CinnabarGymSuperNerd2EndBattleText::
+_CinnabarGymBurglar1EndBattleText::
 	text "I"
 	line "surrender!"
 	prompt
 
-_CinnabarGymSuperNerd2AfterBattleText::
+_CinnabarGymBurglar1AfterBattleText::
 	text "I can't help"
 	line "stealing other"
 	cont "people's #MON!"
 	done
 
-_CinnabarGymSuperNerd3BattleText::
+_CinnabarGymSuperNerd2BattleText::
 	text "You can't win!"
 	line "I have studied"
 	cont "#MON totally!"
 	done
 
-_CinnabarGymSuperNerd3EndBattleText::
+_CinnabarGymSuperNerd2EndBattleText::
 	text "Waah!"
 	line "My studies!"
 	prompt
 
-_CinnabarGymSuperNerd3AfterBattleText::
+_CinnabarGymSuperNerd2AfterBattleText::
 	text "My theories are"
 	line "too complicated"
 	cont "for you!"
 	done
 
-_CinnabarGymSuperNerd4BattleText::
+_CinnabarGymBurglar2BattleText::
 	text "I just like using"
 	line "fire #MON!"
 	done
 
-_CinnabarGymSuperNerd4EndBattleText::
+_CinnabarGymBurglar2EndBattleText::
 	text "Too hot"
 	line "to handle!"
 	prompt
 
-_CinnabarGymSuperNerd4AfterBattleText::
+_CinnabarGymBurglar2AfterBattleText::
 	text "I wish there was"
 	line "a thief #MON!"
 	cont "I'd use that!"
 	done
 
-_CinnabarGymSuperNerd5BattleText::
+_CinnabarGymFirefighter1BattleText::
 	text "I know why BLAINE"
 	line "became a trainer!"
 	done
 
-_CinnabarGymSuperNerd5EndBattleText::
+_CinnabarGymFirefighter1EndBattleText::
 	text "Ow!"
 	prompt
 
-_CinnabarGymSuperNerd5AfterBattleText::
+_CinnabarGymFirefighter1AfterBattleText::
 	text "BLAINE was lost"
 	line "in the mountains"
 	cont "when a fiery bird"
@@ -159,34 +159,34 @@ _CinnabarGymSuperNerd5AfterBattleText::
 	cont "his way down!"
 	done
 
-_CinnabarGymSuperNerd6BattleText::
+_CinnabarGymBurglar3BattleText::
 	text "I've been to many"
 	line "GYMs, but this is"
 	cont "my favorite!"
 	done
 
-_CinnabarGymSuperNerd6EndBattleText::
+_CinnabarGymBurglar3EndBattleText::
 	text "Yowza!"
 	line "Too hot!"
 	prompt
 
-_CinnabarGymSuperNerd6AfterBattleText::
+_CinnabarGymBurglar3AfterBattleText::
 	text "Us fire #MON"
 	line "fans like PONYTA"
 	cont "and NINETALES!"
 	done
 
-_CinnabarGymSuperNerd7BattleText::
+_CinnabarGymFirefighter2BattleText::
 	text "Fire is weak"
 	line "against H2O!"
 	done
 
-_CinnabarGymSuperNerd7EndBattleText::
+_CinnabarGymFirefighter2EndBattleText::
 	text "Oh!"
 	line "Snuffed out!"
 	prompt
 
-_CinnabarGymSuperNerd7AfterBattleText::
+_CinnabarGymFirefighter2AfterBattleText::
 	text "Water beats fire!"
 	line "But, fire melts"
 	cont "ice #MON!"

@@ -5,6 +5,6 @@ CeruleanCave1F_Script:
 
 CeruleanCave1F_TextPointers:
 	def_text_pointers
-	dw_const PickUpItemText, TEXT_CERULEANCAVE1F_FULL_RESTORE
-	dw_const PickUpItemText, TEXT_CERULEANCAVE1F_MAX_ELIXER
-	dw_const PickUpItemText, TEXT_CERULEANCAVE1F_NUGGET
+	dw_const PickUpItemText, TEXT_CERULEANCAVE1F_ITEM1
+	dw_const PickUpItemText, TEXT_CERULEANCAVE1F_ITEM2
+	dw_const PickUpItemText, TEXT_CERULEANCAVE1F_ITEM3

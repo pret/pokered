@@ -69,8 +69,8 @@ PokemonMansion1F_TextPointers:
 	dw_const Mansion1Text2,                 TEXT_POKEMONMANSION1F_BURGLAR
 	dw_const Mansion1Text3,                 TEXT_POKEMONMANSION1F_FIREFIGHTER1
 	dw_const Mansion1Text4,                 TEXT_POKEMONMANSION1F_FIREFIGHTER2
-	dw_const PickUpItemText,                TEXT_POKEMONMANSION1F_ESCAPE_ROPE
-	dw_const PickUpItemText,                TEXT_POKEMONMANSION1F_CARBOS
+	dw_const PickUpItemText,                TEXT_POKEMONMANSION1F_ITEM1
+	dw_const PickUpItemText,                TEXT_POKEMONMANSION1F_ITEM2
 	dw_const PokemonMansion1FSwitchText,    TEXT_POKEMONMANSION1F_SWITCH
 
 Mansion1TrainerHeaders:

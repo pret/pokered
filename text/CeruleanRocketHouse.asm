@@ -1,4 +1,4 @@
-_CeruleanRocketHouse1FText::
+_CeruleanRocketHouse1FRocketText::
 	text "Hey!"
 	para "Haven't you made"
 	line "enough trouble"
@@ -22,18 +22,18 @@ _RocketSNESText::
 	cont "again!"
 	done
 
-_CeruleanRocketHouseBasementEntranceText::
+_CeruleanRocketHouseB1FEntranceDoorSignText::
 	text "REMINDER"
 	para "Keep trap door on"
 	line "surface CLOSED!"
 	done
 
-_CeruleanRocketHouseBasementBottomDoorText::
+_CeruleanRocketHouseB1FBottomDoorSignText::
 	text "THE LAST MACHINE"
 	para "VOIDAL TERMINAL"
 	done
 	
-_CeruleanRocketHouseBasementTopDoorText::
+_CeruleanRocketHouseB1FTopDoorSignText::
 	text "EMERGENCY EGRESS"
 	done
 
@@ -63,8 +63,6 @@ _CeruleanRocketHouseB1FLeftComputerText2::
 	para "MORE STUDY"
 	line "NECESSARY"
 	done
-
-
 
 _CeruleanRocketHouseB1FCenterComputerText::
 	text "OPERATION"

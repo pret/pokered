@@ -66,7 +66,7 @@ PokemonMansion2F_TextPointers:
 	dw_const Mansion2Trainer3,              TEXT_POKEMONMANSION2F_COOLTRAINER_F1
 	dw_const Mansion2Trainer4,              TEXT_POKEMONMANSION2F_SCIENTIST
 	dw_const Mansion2Trainer5,              TEXT_POKEMONMANSION2F_COOLTRAINER_F2
-	dw_const PickUpItemText,                TEXT_POKEMONMANSION2F_CALCIUM
+	dw_const PickUpItemText,                TEXT_POKEMONMANSION2F_ITEM1
 	dw_const PokemonMansion2FDiary1Text,    TEXT_POKEMONMANSION2F_DIARY1
 	dw_const PokemonMansion2FDiary2Text,    TEXT_POKEMONMANSION2F_DIARY2
 	dw_const PokemonMansion2FSwitchText,    TEXT_POKEMONMANSION2F_SWITCH

@@ -39,7 +39,7 @@ CinnabarGymDefaultScript:
 	and a
 	ret z
 	ldh [hSpriteIndex], a
-	cp CINNABARGYM_SUPER_NERD3
+	cp CINNABARGYM_SUPER_NERD2
 	jr nz, .not_super_nerd3
 	ld a, PLAYER_DIR_DOWN
 	ld [wPlayerMovingDirection], a
@@ -163,12 +163,12 @@ CinnabarGym_TextPointers:
 	def_text_pointers
 	dw_const CinnabarGymBlaineText,                 TEXT_CINNABARGYM_BLAINE
 	dw_const CinnabarGymSuperNerd1,                 TEXT_CINNABARGYM_SUPER_NERD1
+	dw_const CinnabarGymBurglar1,                   TEXT_CINNABARGYM_BURGLAR1
 	dw_const CinnabarGymSuperNerd2,                 TEXT_CINNABARGYM_SUPER_NERD2
-	dw_const CinnabarGymSuperNerd3,                 TEXT_CINNABARGYM_SUPER_NERD3
-	dw_const CinnabarGymSuperNerd4,                 TEXT_CINNABARGYM_SUPER_NERD4
-	dw_const CinnabarGymSuperNerd5,                 TEXT_CINNERBARGYM_FIREFIGHTER1
-	dw_const CinnabarGymSuperNerd6,                 TEXT_CINNABARGYM_SUPER_NERD5
-	dw_const CinnabarGymSuperNerd7,                 TEXT_CINNERBARGYM_FIREFIGHTER2
+	dw_const CinnabarGymBurglar2,                   TEXT_CINNABARGYM_BURGLAR2
+	dw_const CinnabarGymFirefighter1,               TEXT_CINNERBARGYM_FIREFIGHTER1
+	dw_const CinnabarGymBurglar3,                   TEXT_CINNABARGYM_BURGLAR3
+	dw_const CinnabarGymFirefighter2,               TEXT_CINNERBARGYM_FIREFIGHTER2
 	dw_const CinnabarGymGymGuideText,               TEXT_CINNABARGYM_GYM_GUIDE
 	dw_const CinnabarGymBlaineVolcanoBadgeInfoText, TEXT_CINNABARGYM_BLAINE_VOLCANO_BADGE_INFO
 	dw_const CinnabarGymBlaineReceivedTM38Text,     TEXT_CINNABARGYM_BLAINE_RECEIVED_TM38
@@ -273,10 +273,38 @@ CinnabarGymSuperNerd1:
 	text_far _CinnabarGymSuperNerd1AfterBattleText
 	text_end
 
-CinnabarGymSuperNerd2:
+CinnabarGymBurglar1:
 	text_asm
 	call CinnabarGymSetTrainerHeader
 	CheckEvent EVENT_BEAT_CINNABAR_GYM_TRAINER_1
+	jr nz, .defeated
+	ld hl, .BattleText
+	rst _PrintText
+	ld hl, .EndBattleText
+	ld de, .EndBattleText
+	call SaveEndBattleTextPointers
+	jp CinnabarGymStartBattleScript
+.defeated
+	ld hl, .AfterBattleText
+	rst _PrintText
+	rst TextScriptEnd
+
+.BattleText:
+	text_far _CinnabarGymBurglar1BattleText
+	text_end
+
+.EndBattleText:
+	text_far _CinnabarGymBurglar1EndBattleText
+	text_end
+
+.AfterBattleText:
+	text_far _CinnabarGymBurglar1AfterBattleText
+	text_end
+
+CinnabarGymSuperNerd2:
+	text_asm
+	call CinnabarGymSetTrainerHeader
+	CheckEvent EVENT_BEAT_CINNABAR_GYM_TRAINER_2
 	jr nz, .defeated
 	ld hl, .BattleText
 	rst _PrintText
@@ -301,35 +329,7 @@ CinnabarGymSuperNerd2:
 	text_far _CinnabarGymSuperNerd2AfterBattleText
 	text_end
 
-CinnabarGymSuperNerd3:
-	text_asm
-	call CinnabarGymSetTrainerHeader
-	CheckEvent EVENT_BEAT_CINNABAR_GYM_TRAINER_2
-	jr nz, .defeated
-	ld hl, .BattleText
-	rst _PrintText
-	ld hl, .EndBattleText
-	ld de, .EndBattleText
-	call SaveEndBattleTextPointers
-	jp CinnabarGymStartBattleScript
-.defeated
-	ld hl, .AfterBattleText
-	rst _PrintText
-	rst TextScriptEnd
-
-.BattleText:
-	text_far _CinnabarGymSuperNerd3BattleText
-	text_end
-
-.EndBattleText:
-	text_far _CinnabarGymSuperNerd3EndBattleText
-	text_end
-
-.AfterBattleText:
-	text_far _CinnabarGymSuperNerd3AfterBattleText
-	text_end
-
-CinnabarGymSuperNerd4:
+CinnabarGymBurglar2:
 	text_asm
 	call CinnabarGymSetTrainerHeader
 	CheckEvent EVENT_BEAT_CINNABAR_GYM_TRAINER_3
@@ -346,18 +346,18 @@ CinnabarGymSuperNerd4:
 	rst TextScriptEnd
 
 .BattleText:
-	text_far _CinnabarGymSuperNerd4BattleText
+	text_far _CinnabarGymBurglar2BattleText
 	text_end
 
 .EndBattleText:
-	text_far _CinnabarGymSuperNerd4EndBattleText
+	text_far _CinnabarGymBurglar2EndBattleText
 	text_end
 
 .AfterBattleText:
-	text_far _CinnabarGymSuperNerd4AfterBattleText
+	text_far _CinnabarGymBurglar2AfterBattleText
 	text_end
 
-CinnabarGymSuperNerd5:
+CinnabarGymFirefighter1:
 	text_asm
 	call CinnabarGymSetTrainerHeader
 	CheckEvent EVENT_BEAT_CINNABAR_GYM_TRAINER_4
@@ -374,18 +374,18 @@ CinnabarGymSuperNerd5:
 	rst TextScriptEnd
 
 .BattleText:
-	text_far _CinnabarGymSuperNerd5BattleText
+	text_far _CinnabarGymFirefighter1BattleText
 	text_end
 
 .EndBattleText:
-	text_far _CinnabarGymSuperNerd5EndBattleText
+	text_far _CinnabarGymFirefighter1EndBattleText
 	text_end
 
 .AfterBattleText:
-	text_far _CinnabarGymSuperNerd5AfterBattleText
+	text_far _CinnabarGymFirefighter1AfterBattleText
 	text_end
 
-CinnabarGymSuperNerd6:
+CinnabarGymBurglar3:
 	text_asm
 	call CinnabarGymSetTrainerHeader
 	CheckEvent EVENT_BEAT_CINNABAR_GYM_TRAINER_5
@@ -402,18 +402,18 @@ CinnabarGymSuperNerd6:
 	rst TextScriptEnd
 
 .BattleText:
-	text_far _CinnabarGymSuperNerd6BattleText
+	text_far _CinnabarGymBurglar3BattleText
 	text_end
 
 .EndBattleText:
-	text_far _CinnabarGymSuperNerd6EndBattleText
+	text_far _CinnabarGymBurglar3EndBattleText
 	text_end
 
 .AfterBattleText:
-	text_far _CinnabarGymSuperNerd6AfterBattleText
+	text_far _CinnabarGymBurglar3AfterBattleText
 	text_end
 
-CinnabarGymSuperNerd7:
+CinnabarGymFirefighter2:
 	text_asm
 	call CinnabarGymSetTrainerHeader
 	CheckEvent EVENT_BEAT_CINNABAR_GYM_TRAINER_6
@@ -430,15 +430,15 @@ CinnabarGymSuperNerd7:
 	rst TextScriptEnd
 
 .BattleText:
-	text_far _CinnabarGymSuperNerd7BattleText
+	text_far _CinnabarGymFirefighter2BattleText
 	text_end
 
 .EndBattleText:
-	text_far _CinnabarGymSuperNerd7EndBattleText
+	text_far _CinnabarGymFirefighter2EndBattleText
 	text_end
 
 .AfterBattleText:
-	text_far _CinnabarGymSuperNerd7AfterBattleText
+	text_far _CinnabarGymFirefighter2AfterBattleText
 	text_end
 
 CinnabarGymGymGuideText: ; PureRGBnote: ADDED: gym guide gives you apex chips after beating the leader

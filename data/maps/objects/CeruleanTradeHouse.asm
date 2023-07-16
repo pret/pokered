@@ -1,6 +1,6 @@
 	object_const_def
 	const CERULEANTRADEHOUSE_GRANNY
-	const CERULEANTRADEHOUSE_GAMBLER
+	const CERULEANTRADEHOUSE_TRADER
 
 CeruleanTradeHouse_Object:
 	db $a ; border block
@@ -13,6 +13,6 @@ CeruleanTradeHouse_Object:
 
 	def_object_events
 	object_event  5,  4, SPRITE_GRANNY, STAY, LEFT, TEXT_CERULEANTRADEHOUSE_GRANNY
-	object_event  1,  2, SPRITE_GAMBLER, STAY, NONE, TEXT_CERULEANTRADEHOUSE_GAMBLER
+	object_event  1,  2, SPRITE_GAMBLER, STAY, NONE, TEXT_CERULEANTRADEHOUSE_TRADER
 
 	def_warps_to CERULEAN_TRADE_HOUSE
