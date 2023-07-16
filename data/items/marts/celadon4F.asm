@@ -1,4 +1,4 @@
-CeladonMart4ClerkText::
+CeladonMart4FClerkText::
 	script_mart \
 	POKE_DOLL, \
 	FIRE_STONE, \

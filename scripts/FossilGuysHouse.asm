@@ -269,7 +269,7 @@ FossilGuyFacesPlayerDirection:
 	
 
 FossilGuysHouseCatText1:
-	text_far _CeladonMansion1Text1
+	text_far _CeladonMansion1FMeowthText
 	sound_cry_meowth
 	text_promptbutton
 	text_end

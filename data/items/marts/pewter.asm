@@ -1,4 +1,4 @@
-PewterCashierText::
+PewterMartClerkText::
 	script_mart \
 	POKE_BALL, \
 	POTION, \

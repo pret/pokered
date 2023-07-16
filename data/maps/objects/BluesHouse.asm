@@ -1,6 +1,6 @@
 	object_const_def
-	const BLUESHOUSE_DAISY1
-	const BLUESHOUSE_DAISY2
+	const BLUESHOUSE_DAISY_SITTING
+	const BLUESHOUSE_DAISY_WALKING
 	const BLUESHOUSE_TOWN_MAP
 
 BluesHouse_Object:

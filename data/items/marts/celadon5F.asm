@@ -1,4 +1,4 @@
-CeladonMart5Clerk1Text::
+CeladonMart5FClerk1Text::
 	script_mart \
 	X_ACCURACY, \
 	GUARD_SPEC, \
@@ -8,7 +8,7 @@ CeladonMart5Clerk1Text::
 	X_SPEED, \
 	X_SPECIAL
 
-CeladonMart5Clerk2Text::
+CeladonMart5FClerk2Text::
 	script_mart \
 	HP_UP, \
 	PROTEIN, \

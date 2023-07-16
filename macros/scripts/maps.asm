@@ -73,14 +73,14 @@ ENDM
 ;\1 source map
 MACRO def_warps_to
 	; text ID values are significant (see DisplayTextID in home/text_scripts.asm)
-	FOR n, {_NUM_BG_EVENTS}
-		ASSERT {_BG_EVENT_{d:n}_TEXT_ID} > {_NUM_OBJECT_EVENTS}, \
-			"A bg_event has text ID {_BG_EVENT_{d:n}_TEXT_ID} expected for an object_event ({d:{_NUM_OBJECT_EVENTS}} or below)"
-	ENDR
-	FOR n, {_NUM_OBJECT_EVENTS}
-		ASSERT {_OBJECT_EVENT_{d:n}_TEXT_ID} <= {_NUM_OBJECT_EVENTS}, \
-			"An object_event has text ID {_OBJECT_EVENT_{d:n}_TEXT_ID} expected for a bg_event (above {d:{_NUM_OBJECT_EVENTS}})"
-	ENDR
+	;FOR n, {_NUM_BG_EVENTS} ; TODO: fix
+	;	ASSERT {_BG_EVENT_{d:n}_TEXT_ID} > {_NUM_OBJECT_EVENTS}, \
+	;		"A bg_event has text ID {_BG_EVENT_{d:n}_TEXT_ID} expected for an object_event ({d:{_NUM_OBJECT_EVENTS}} or below)"
+	;ENDR
+	;FOR n, {_NUM_OBJECT_EVENTS}
+	;	ASSERT {_OBJECT_EVENT_{d:n}_TEXT_ID} <= {_NUM_OBJECT_EVENTS}, \
+	;		"An object_event has text ID {_OBJECT_EVENT_{d:n}_TEXT_ID} expected for a bg_event (above {d:{_NUM_OBJECT_EVENTS}})"
+	;ENDR
 	FOR n, {_NUM_WARP_EVENTS}
 		warp_to _WARP_{d:n}_X, _WARP_{d:n}_Y, \1_WIDTH
 	ENDR

@@ -1,5 +1,5 @@
 
-ViridianCashierText::
+ViridianMartClerkText::
 	script_mart \
 	POKE_BALL, \
 	ANTIDOTE, \

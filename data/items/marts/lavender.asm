@@ -1,4 +1,4 @@
-LavenderCashierText::
+LavenderMartClerkText::
 	script_mart \
 	GREAT_BALL, \
 	SUPER_POTION, \

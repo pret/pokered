@@ -76,7 +76,7 @@ BoulderTextActive::
 	text_end
 
 StrengthDecline::
-	text_far _MansionSwitchNotPressedText
+	text_far _PokemonMansion1FSwitchNotPressedText
 	text_end
 
 UsedStrengthText2:

@@ -1,4 +1,4 @@
-CinnabarCashierText::
+CinnabarMartClerkText::
 	script_mart \
 	ULTRA_BALL, \
 	GREAT_BALL, \

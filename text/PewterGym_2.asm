@@ -50,6 +50,7 @@ _TM34ExplanationText::
 	cont "and DEFENSE!"
 	done
 
+_GenericNoRoomText::
 _PewterGymTM34NoRoomText::
 	text "You don't have"
 	line "room for this!"

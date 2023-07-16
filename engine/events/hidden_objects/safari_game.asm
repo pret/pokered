@@ -121,7 +121,7 @@ ClearSafariFlags::
 	ld [wNumSafariBalls], a
 	ld [wSafariSteps], a
 	ld [wSafariZoneGameOver], a 
-	ld [wSafariZoneGateCurScript], a 
+	ld [wSafariZoneGateCurScript], a ; SCRIPT_SAFARIZONEGATE_DEFAULT
 	ret
 
 TimesUpText:
