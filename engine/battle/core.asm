@@ -2595,9 +2595,9 @@ MoveSelectionMenu:
 	   ; so it is necessary to put the di ei block to not cause tearing
 	call TextBoxBorder
 	hlcoord 4, 12
-	ld [hl], $7a
+	ld [hl], "─"
 	hlcoord 10, 12
-	ld [hl], $7e
+	ld [hl], "┘"
 	ei
 	hlcoord 6, 13
 	call .writemoves
@@ -2659,11 +2659,12 @@ MoveSelectionMenu:
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	jr z, .matchedkeyspicked
+	; Disable left, right, and START buttons in regular battles.
 	ld a, [wFlags_D733]
 	bit BIT_TEST_BATTLE, a
 	ld b, D_UP | D_DOWN | A_BUTTON | B_BUTTON | SELECT
 	jr z, .matchedkeyspicked
-	ld b, $ff
+	ld b, D_UP | D_DOWN | D_LEFT | D_RIGHT | A_BUTTON | B_BUTTON | SELECT | START
 .matchedkeyspicked
 	ld a, b
 	ld [hli], a ; wMenuWatchedKeys
@@ -2693,8 +2694,12 @@ SelectMenuItem:
 	call PlaceString
 	jr .select
 .battleselect
+	; Hide move swap cursor in TestBattle.
 	ld a, [wFlags_D733]
 	bit BIT_TEST_BATTLE, a
+	; This causes PrintMenuItem to not run in TestBattle.
+	; MoveSelectionMenu still draws part of its window, an issue
+	; which did not seem to exist in the Japanese versions.
 	jr nz, .select
 	call PrintMenuItem
 	ld a, [wMenuItemToSwap]
@@ -2756,8 +2761,9 @@ SelectMenuItem:
 	jr z, .disabled
 	ld a, [wPlayerBattleStatus3]
 	bit TRANSFORMED, a 
-	jr nz, .dummy ; game freak derp
-.dummy
+	jr nz, .transformedMoveSelected
+.transformedMoveSelected ; pointless ; TODO: remove
+	; Allow moves copied by Transform to be used.
 	ld a, [wCurrentMenuItem]
 	ld hl, wBattleMonMoves
 	ld c, a
@@ -6412,6 +6418,7 @@ GetCurrentMove:
 	jr .selected
 .player
 	ld de, wPlayerMoveNum
+	; Apply InitBattleVariables to TestBattle.
 	ld a, [wFlags_D733]
 	bit BIT_TEST_BATTLE, a
 	ld a, [wTestBattlePlayerSelectedMove]
@@ -7276,12 +7283,12 @@ InitOpponent:
 
 DetermineWildOpponent:
 	ld a, [wd732]
-	bit 1, a
-	jr z, .notDebug
+	bit BIT_DEBUG_MODE, a
+	jr z, .notDebugMode
 	ldh a, [hJoyHeld]
-	bit BIT_B_BUTTON, a
+	bit BIT_B_BUTTON, a ; disable wild encounters
 	ret nz
-.notDebug
+.notDebugMode
 	ld a, [wNumberOfNoRandomBattleStepsLeft]
 	and a
 	ret nz

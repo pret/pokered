@@ -135,6 +135,6 @@ DEF NUM_ACTIVE_PALS EQU 4
 	const BIT_HAS_WATER_LOCATIONS ; 5 
 ;;;;;;;;;;
 
+; wd732 flags
+DEF BIT_DEBUG_MODE EQU 1
 
-
-	

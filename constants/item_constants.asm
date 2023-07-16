@@ -13,7 +13,7 @@
 	const POKE_BALL     ; $04
 	const HYPER_BALL    ; $05 ; PureRGBnote: ADDED: New item, used to be TOWN MAP
 	const BICYCLE       ; $06
-	const SURFBOARD     ; $07 buggy?
+	const SURFBOARD     ; $07
 	const SAFARI_BALL   ; $08
 	const POKEDEX       ; $09 pointless item?
 	const MOON_STONE    ; $0A
