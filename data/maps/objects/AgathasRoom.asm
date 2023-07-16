@@ -1,5 +1,8 @@
 ; PureRGBnote: CHANGED: many maps had their objects (items, NPCs, maps) modified for new content
 
+	object_const_def
+	const AGATHASROOM_AGATHA
+
 AgathasRoom_Object:
 	db $0 ; border block
 
@@ -12,6 +15,6 @@ AgathasRoom_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  5,  2, SPRITE_AGATHA, STAY, DOWN, 1, OPP_AGATHA, 1
+	object_event  5,  2, SPRITE_AGATHA, STAY, DOWN, TEXT_AGATHASROOM_AGATHA, OPP_AGATHA, 1
 
 	def_warps_to AGATHAS_ROOM

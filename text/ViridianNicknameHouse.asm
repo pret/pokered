@@ -1,4 +1,4 @@
-_ViridianHouseText1::
+_ViridianNicknameHouseBaldingGuyText::
 	text "Coming up with"
 	line "nicknames is fun,"
 	cont "but hard."
@@ -8,16 +8,16 @@ _ViridianHouseText1::
 	cont "remember."
 	done
 
-_ViridianHouseText2::
+_ViridianNicknameHouseLittleGirlText::
 	text "My Daddy loves"
 	line "#MON too."
 	done
 
-_ViridianHouseText_1d5b1::
+_ViridianNicknameHouseSpearowText::
 	text "SPEARY: Tetweet!"
 	done
 
-_ViridianHouseText4::
+_ViridianNicknameHouseSpearySignText::
 	text "SPEAROW"
 	line "Name: SPEARY"
 	done

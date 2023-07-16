@@ -39,14 +39,15 @@ Route2_ScriptPointers:
 	dw EndTrainerBattle
 
 Route2_TextPointers:
-	dw Route2BugCatcherText
-	dw Route2JrTrainerMText
-	dw Route2JrTrainerFText
-	dw PickUpItemText
-	dw PickUpItemText
-	dw PickUpItemText ; PureRGBnote: ADDED: new item on this route.
-	dw Route2Text3
-	dw Route2Text4
+	def_text_pointers
+	dw_const Route2BugCatcherText,       TEXT_ROUTE2_BUG_CATCHER
+	dw_const Route2JrTrainerMText,       TEXT_ROUTE2_JR_TRAINER_M
+	dw_const Route2JrTrainerFText,       TEXT_ROUTE2_JR_TRAINER_F
+	dw_const PickUpItemText,             TEXT_ROUTE2_ITEM1
+	dw_const PickUpItemText,             TEXT_ROUTE2_ITEM2
+	dw_const PickUpItemText,             TEXT_ROUTE2_ITEM3 ; PureRGBnote: ADDED: new item on this route.
+	dw_const Route2SignText,             TEXT_ROUTE2_SIGN
+	dw_const Route2DiglettsCaveSignText, TEXT_ROUTE2_DIGLETTS_CAVE_SIGN
 
 Route2TrainerHeaders:
 	def_trainers 1
@@ -112,10 +113,10 @@ Route2AfterBattleText3:
 	text_far _Route2AfterBattleText3
 	text_end
 
-Route2Text3:
-	text_far _Route2Text3
+Route2SignText:
+	text_far _Route2SignText
 	text_end
 
-Route2Text4:
-	text_far _Route2Text4
+Route2DiglettsCaveSignText:
+	text_far _Route2DiglettsCaveSignText
 	text_end

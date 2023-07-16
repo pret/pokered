@@ -15,11 +15,12 @@ SilphCo1F_ScriptPointers:
 	dw EndTrainerBattle
 
 SilphCo1F_TextPointers:
-	dw SilphCo1FTrainer1Text
-	dw SilphCo1FTrainer2Text
-	dw SilphCo1FTrainer3Text
-	dw SilphCo1FTrainer4Text
-	dw SilphCo1Text1
+	def_text_pointers
+	dw_const SilphCo1FTrainer1Text,         TEXT_SILPHCO1F_FIREFIGHTER1
+	dw_const SilphCo1FTrainer2Text,         TEXT_SILPHCO1F_SOLDIER1
+	dw_const SilphCo1FTrainer3Text,         TEXT_SILPHCO1F_SOLDIER2
+	dw_const SilphCo1FTrainer4Text,         TEXT_SILPHCO1F_FIREFIGHTER2
+	dw_const SilphCo1FLinkReceptionistText, TEXT_SILPHCO1F_LINK_RECEPTIONIST
 
 SilphCo1FTrainerHeaders:
 	def_trainers 0
@@ -105,6 +106,6 @@ SilphCo1FAfterBattleText4:
 	text_far _SilphCo1FAfterBattleText4
 	text_end
 
-SilphCo1Text1:
-	text_far _SilphCo1Text1
+SilphCo1FLinkReceptionistText:
+	text_far _SilphCo1FLinkReceptionistText
 	text_end

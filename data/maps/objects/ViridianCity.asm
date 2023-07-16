@@ -1,3 +1,12 @@
+	object_const_def
+	const VIRIDIANCITY_YOUNGSTER1
+	const VIRIDIANCITY_GAMBLER1
+	const VIRIDIANCITY_YOUNGSTER2
+	const VIRIDIANCITY_GIRL
+	const VIRIDIANCITY_OLD_MAN_SLEEPY
+	const VIRIDIANCITY_FISHER
+	const VIRIDIANCITY_OLD_MAN
+
 ViridianCity_Object:
 	db $f ; border block
 
@@ -9,20 +18,20 @@ ViridianCity_Object:
 	warp_event 32,  7, VIRIDIAN_GYM, 1
 
 	def_bg_events
-	bg_event 17, 17,  8 ; ViridianCityText8
-	bg_event 19,  1,  9 ; ViridianCityText9
-	bg_event 21, 29, 10 ; ViridianCityText10
-	bg_event 30, 19, 11 ; MartSignText
-	bg_event 24, 25, 12 ; PokeCenterSignText
-	bg_event 27,  7, 13 ; ViridianCityText13
+	bg_event 17, 17, TEXT_VIRIDIANCITY_SIGN
+	bg_event 19,  1, TEXT_VIRIDIANCITY_TRAINER_TIPS1
+	bg_event 21, 29, TEXT_VIRIDIANCITY_TRAINER_TIPS2
+	bg_event 30, 19, TEXT_VIRIDIANCITY_MART_SIGN
+	bg_event 24, 25, TEXT_VIRIDIANCITY_POKECENTER_SIGN
+	bg_event 27,  7, TEXT_VIRIDIANCITY_GYM_SIGN
 
 	def_object_events
-	object_event 13, 20, SPRITE_YOUNGSTER, WALK, ANY_DIR, 1 ; person
-	object_event 30,  8, SPRITE_GAMBLER, STAY, NONE, 2 ; person
-	object_event 30, 25, SPRITE_YOUNGSTER, WALK, ANY_DIR, 3 ; person
-	object_event 17,  9, SPRITE_GIRL, STAY, RIGHT, 4 ; person
-	object_event 18,  9, SPRITE_GAMBLER_ASLEEP, STAY, NONE, 5 ; person
-	object_event  6, 23, SPRITE_FISHER, STAY, DOWN, 6 ; person
-	object_event 17,  5, SPRITE_GAMBLER, WALK, LEFT_RIGHT, 7 ; person
+	object_event 13, 20, SPRITE_YOUNGSTER, WALK, ANY_DIR, TEXT_VIRIDIANCITY_YOUNGSTER1
+	object_event 30,  8, SPRITE_GAMBLER, STAY, NONE, TEXT_VIRIDIANCITY_GAMBLER1
+	object_event 30, 25, SPRITE_YOUNGSTER, WALK, ANY_DIR, TEXT_VIRIDIANCITY_YOUNGSTER2
+	object_event 17,  9, SPRITE_GIRL, STAY, RIGHT, TEXT_VIRIDIANCITY_GIRL
+	object_event 18,  9, SPRITE_GAMBLER_ASLEEP, STAY, NONE, TEXT_VIRIDIANCITY_OLD_MAN_SLEEPY
+	object_event  6, 23, SPRITE_FISHER, STAY, DOWN, TEXT_VIRIDIANCITY_FISHER
+	object_event 17,  5, SPRITE_GAMBLER, WALK, LEFT_RIGHT, TEXT_VIRIDIANCITY_OLD_MAN
 
 	def_warps_to VIRIDIAN_CITY

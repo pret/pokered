@@ -8,50 +8,52 @@ Museum2F_Script:
 	ret
 
 Museum2F_TextPointers:
-	dw Museum2FWalletKid1
-	dw Museum2FText1
-	dw Museum2FText2
-	dw Museum2FText3
-	dw Museum2FText4
-	dw Museum2FText5
-	dw Museum2FText6
-	dw Museum2FText7
-	dw Museum2FWalletKidWalletGive
-	dw ReceivedLostWallet
-	dw WalletKidNoRoomText
+	def_text_pointers
+	dw_const Museum2FWalletKid1,           TEXT_MUSEUM2F_WALLET_KID
+	dw_const Museum2FYoungsterText,        TEXT_MUSEUM2F_YOUNGSTER
+	dw_const Museum2FGrampsText,           TEXT_MUSEUM2F_GRAMPS
+	dw_const Museum2FScientistText,        TEXT_MUSEUM2F_SCIENTIST
+	dw_const Museum2FBrunetteGirlText,     TEXT_MUSEUM2F_BRUNETTE_GIRL
+	dw_const Museum2FHikerText,            TEXT_MUSEUM2F_HIKER
+	dw_const Museum2FSpaceShuttleSignText, TEXT_MUSEUM2F_SPACE_SHUTTLE_SIGN
+	dw_const Museum2FMoonStoneSignText,    TEXT_MUSEUM2F_MOON_STONE_SIGN
+	dw_const Museum2FWalletKidWalletGive,  TEXT_MUSEUM2F_WALLET_KID_WALLET_GIVE
+	dw_const ReceivedLostWallet,           TEXT_MUSEUM2F_RECEIVED_LOST_WALLET
+	dw_const WalletKidNoRoomText,          TEXT_MUSEUM2F_WALLET_KID_NO_ROOM
 
 Museum2F_ScriptPointers:
-	dw CheckFightingMapTrainers
-	dw DisplayEnemyTrainerTextAndStartBattle
-	dw EndTrainerBattle
-	dw WalletKidPostBattle
-
-Museum2FText1:
-	text_far _Museum2FText1
+	def_script_pointers
+	dw_const CheckFightingMapTrainers,              SCRIPT_MUSEUM2F_DEFAULT
+	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_MUSEUM2F_START_BATTLE
+	dw_const EndTrainerBattle,                      SCRIPT_MUSEUM2F_END_BATTLE
+	dw_const WalletKidPostBattle,                   SCRIPT_MUSEUM2F_WALLET_KID_POST_BATTLE
+	
+Museum2FYoungsterText:
+	text_far _Museum2FYoungsterText
 	text_end
 
-Museum2FText2:
-	text_far _Museum2FText2
+Museum2FGrampsText:
+	text_far _Museum2FGrampsText
 	text_end
 
-Museum2FText3:
-	text_far _Museum2FText3
+Museum2FScientistText:
+	text_far _Museum2FScientistText
 	text_end
 
-Museum2FText4:
-	text_far _Museum2FText4
+Museum2FBrunetteGirlText:
+	text_far _Museum2FBrunetteGirlText
 	text_end
 
-Museum2FText5:
-	text_far _Museum2FText5
+Museum2FHikerText:
+	text_far _Museum2FHikerText
 	text_end
 
-Museum2FText6:
-	text_far _Museum2FText6
+Museum2FSpaceShuttleSignText:
+	text_far _Museum2FSpaceShuttleSignText
 	text_end
 
-Museum2FText7:
-	text_far _Museum2FText7
+Museum2FMoonStoneSignText:
+	text_far _Museum2FMoonStoneSignText
 	text_end
 
 Museum2FTrainerHeaders:
@@ -72,7 +74,7 @@ Museum2FWalletKid1:
 	rst _PrintText
 	ld hl, WalletKidTrainerHeader
 	call TalkToTrainer
-	ld a, 3
+	ld a, SCRIPT_MUSEUM2F_WALLET_KID_POST_BATTLE
 	ld [wCurMapScript], a 
 	jr .done
 .giveWallet
@@ -147,7 +149,7 @@ Museum2FWalletKidWalletGive:
 	text_end
 
 WalletKidNoRoomText:
-	text_far _TM34NoRoomText
+	text_far _PewterGymTM34NoRoomText
 	text_end
 
 ReceivedLostWallet:

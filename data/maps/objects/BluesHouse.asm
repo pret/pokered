@@ -1,3 +1,8 @@
+	object_const_def
+	const BLUESHOUSE_DAISY1
+	const BLUESHOUSE_DAISY2
+	const BLUESHOUSE_TOWN_MAP
+
 BluesHouse_Object:
 	db $a ; border block
 
@@ -8,8 +13,8 @@ BluesHouse_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  2,  3, SPRITE_DAISY, STAY, RIGHT, 1
-	object_event  6,  4, SPRITE_DAISY, WALK, UP_DOWN, 2, 0
-	object_event  3,  3, SPRITE_POKEDEX, STAY, NONE, 3, 0
+	object_event  2,  3, SPRITE_DAISY, STAY, RIGHT, TEXT_BLUESHOUSE_DAISY_SITTING
+	object_event  6,  4, SPRITE_DAISY, WALK, UP_DOWN, TEXT_BLUESHOUSE_DAISY_WALKING, 0
+	object_event  3,  3, SPRITE_POKEDEX, STAY, NONE, TEXT_BLUESHOUSE_TOWN_MAP, 0
 
 	def_warps_to BLUES_HOUSE

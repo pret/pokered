@@ -15,9 +15,9 @@ UndergroundPathWestEast_ScriptPointers:
 	dw EndTrainerBattle
 
 UndergroundPathWestEast_TextPointers:
-	dw UndergroundPathWestEastTrainer1Text
-	dw UndergroundPathWestEastTrainer2Text
-	dw UndergroundPathWestEastTrainer3Text
+	dw_const UndergroundPathWestEastTrainer1Text,  TEXT_UNDERGROUNDPATHWESTEAST_GENTLEMAN1
+	dw_const UndergroundPathWestEastTrainer2Text,  TEXT_UNDERGROUNDPATHWESTEAST_GENTLEMAN2
+	dw_const UndergroundPathWestEastTrainer3Text,  TEXT_UNDERGROUNDPATHWESTEAST_COOL_KID
 
 UndergroundPathWestEastTrainerHeaders:
 	def_trainers 3

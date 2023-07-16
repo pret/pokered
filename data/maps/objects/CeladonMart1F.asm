@@ -1,3 +1,6 @@
+	object_const_def
+	const CELADONMART1F_RECEPTIONIST
+
 CeladonMart1F_Object:
 	db $f ; border block
 
@@ -10,12 +13,12 @@ CeladonMart1F_Object:
 	warp_event  1,  1, CELADON_MART_ELEVATOR, 1
 
 	def_bg_events
-	bg_event 11,  4, 2 ; CeladonMart1Text2
-	bg_event 14,  1, 3 ; CeladonMart1Text3
-	bg_event 16,  1, 4 ; 
-	bg_event 17,  1, 5 ; 
+	bg_event 11,  4, TEXT_CELADONMART1F_DIRECTORY_SIGN
+	bg_event 14,  1, TEXT_CELADONMART1F_CURRENT_FLOOR_SIGN
+	bg_event 16,  1, TEXT_CELADONMART1F_PHONE_LEFT
+	bg_event 17,  1, TEXT_CELADONMART1F_PHONE_RIGHT
 
 	def_object_events
-	object_event  8,  3, SPRITE_LINK_RECEPTIONIST, STAY, DOWN, 1 ; person
+	object_event  8,  3, SPRITE_LINK_RECEPTIONIST, STAY, DOWN, TEXT_CELADONMART1F_RECEPTIONIST
 
 	def_warps_to CELADON_MART_1F

@@ -6,7 +6,7 @@ CeladonMartElevator_Object:
 	warp_event  2,  3, CELADON_MART_1F, 6
 
 	def_bg_events
-	bg_event  3,  0, 1 ; CeladonMartElevatorText1
+	bg_event  3,  0, TEXT_CELADONMARTELEVATOR
 
 	def_object_events
 

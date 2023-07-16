@@ -1,3 +1,12 @@
+	object_const_def
+	const ROUTE4_COOLTRAINER_F1
+	const ROUTE4_COOLTRAINER_F2
+	const ROUTE4_ROOKIE1
+	const ROUTE4_ROOKIE2
+	const ROUTE4_TAMER
+	const ROUTE4_ITEM1
+	const ROUTE4_ITEM2
+
 Route4_Object:
 	db $2c ; border block
 
@@ -7,19 +16,19 @@ Route4_Object:
 	warp_event 24,  5, MT_MOON_B1F, 8
 
 	def_bg_events
-	bg_event 12,  5, 8 ; PokeCenterSignText
-	bg_event 17,  7, 9 ; Sign
-	bg_event 27,  7, 10 ; Sign
-	bg_event 5,  5, 11 ; Sign
-	bg_event 59,  15, 12 ; Sign
+	bg_event 12,  5, TEXT_ROUTE4_POKECENTER_SIGN
+	bg_event 17,  7, TEXT_ROUTE4_MT_MOON_SIGN
+	bg_event 27,  7, TEXT_ROUTE4_SIGN
+	bg_event 5,  5, TEXT_ROUTE4_TRAINER_TIPS1
+	bg_event 59,  15, TEXT_ROUTE4_TRAINER_TIPS2
 
 	def_object_events
-	object_event  9,  8, SPRITE_COOLTRAINER_F, WALK, ANY_DIR, 1 ; person
-	object_event 51,  3, SPRITE_COOLTRAINER_F, STAY, DOWN, 2, OPP_LASS, 4
-	object_event 47,  5, SPRITE_COOLTRAINER_M, STAY, RIGHT, 3, OPP_ROOKIE, 1
-	object_event 48,  5, SPRITE_COOLTRAINER_M, STAY, LEFT, 4, OPP_ROOKIE, 2
-	object_event 5,  12, SPRITE_SUPER_NERD, STAY, RIGHT, 5, OPP_TAMER, 6
-	object_event 57,  3, SPRITE_POKE_BALL, STAY, NONE, 6, TM_ROUTE_4_NEAR_CERULEAN
-	object_event 63,  3, SPRITE_POKE_BALL, STAY, NONE, 7, ITEM_ROUTE_4_NEAR_CERULEAN_CAVE_NEW
+	object_event  9,  8, SPRITE_COOLTRAINER_F, WALK, ANY_DIR, TEXT_ROUTE4_COOLTRAINER_F1
+	object_event 51,  3, SPRITE_COOLTRAINER_F, STAY, DOWN, TEXT_ROUTE4_COOLTRAINER_F2, OPP_LASS, 4
+	object_event 47,  5, SPRITE_COOLTRAINER_M, STAY, RIGHT, TEXT_ROUTE4_ROOKIE1, OPP_ROOKIE, 1
+	object_event 48,  5, SPRITE_COOLTRAINER_M, STAY, LEFT, TEXT_ROUTE4_ROOKIE2, OPP_ROOKIE, 2
+	object_event 5,  12, SPRITE_SUPER_NERD, STAY, RIGHT, TEXT_ROUTE4_TAMER, OPP_TAMER, 6
+	object_event 57,  3, SPRITE_POKE_BALL, STAY, NONE, TEXT_ROUTE4_ITEM1, TM_ROUTE_4_NEAR_CERULEAN
+	object_event 63,  3, SPRITE_POKE_BALL, STAY, NONE, TEXT_ROUTE4_ITEM2, ITEM_ROUTE_4_NEAR_CERULEAN_CAVE_NEW
 
 	def_warps_to ROUTE_4

@@ -1,4 +1,4 @@
-_Lab4Text_75dc6::
+_CinnabarLabFossilRoomScientist1Text::
 	text "Hiya!"
 
 	para "I am important"
@@ -11,11 +11,11 @@ _Lab4Text_75dc6::
 	line "fossil for me?"
 	prompt
 
-_Lab4Text_75dcb::
+_CinnabarLabFossilRoomScientist1NoFossilsText::
 	text "No! Is too bad!"
 	done
 
-_Lab4Text_75dd0::
+_CinnabarLabFossilRoomScientist1GoForAWalkText::
 	text "I take a little"
 	line "time!"
 
@@ -23,7 +23,7 @@ _Lab4Text_75dd0::
 	line "little while!"
 	done
 
-_Lab4Text_75dd5::
+_CinnabarLabFossilRoomScientist1FossilIsBackToLifeText::
 	text "Where were you?"
 
 	para "Your fossil is"

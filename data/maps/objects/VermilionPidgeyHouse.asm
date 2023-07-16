@@ -1,3 +1,8 @@
+	object_const_def
+	const VERMILIONPIDGEYHOUSE_YOUNGSTER
+	const VERMILIONPIDGEYHOUSE_PIDGEY
+	const VERMILIONPIDGEYHOUSE_LETTER
+
 VermilionPidgeyHouse_Object:
 	db $a ; border block
 
@@ -8,8 +13,8 @@ VermilionPidgeyHouse_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  5,  3, SPRITE_YOUNGSTER, STAY, LEFT, 1 ; person
-	object_event  3,  5, SPRITE_BIRD, WALK, LEFT_RIGHT, 2 ; person
-	object_event  4,  3, SPRITE_PAPER, STAY, NONE, 3 ; person
+	object_event  5,  3, SPRITE_YOUNGSTER, STAY, LEFT, TEXT_VERMILIONPIDGEYHOUSE_YOUNGSTER
+	object_event  3,  5, SPRITE_BIRD, WALK, LEFT_RIGHT, TEXT_VERMILIONPIDGEYHOUSE_PIDGEY
+	object_event  4,  3, SPRITE_PAPER, STAY, NONE, TEXT_VERMILIONPIDGEYHOUSE_LETTER
 
 	def_warps_to VERMILION_PIDGEY_HOUSE

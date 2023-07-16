@@ -5,21 +5,22 @@ PewterMart_Script:
 	ret
 
 PewterMart_TextPointers:
-	dw PewterCashierText
-	dw PewterMartText2
-	dw PewterMartText3
-	dw PewterMartTMKid
+	def_text_pointers
+	dw_const PewterMartClerkText,     TEXT_PEWTERMART_CLERK
+	dw_const PewterMartYoungsterText, TEXT_PEWTERMART_YOUNGSTER
+	dw_const PewterMartSuperNerdText, TEXT_PEWTERMART_SUPER_NERD
+	dw_const PewterMartTMKid,         TEXT_PEWTERMART_TM_KID
 
-PewterMartText2:
+PewterMartYoungsterText:
 	text_asm
 	ld hl, .Text
 	rst _PrintText
 	rst TextScriptEnd
 
-.Text
-	text_far _PewterMartText2
+.Text:
+	text_far _PewterMartYoungsterText
 	text_end
-
+	
 PewterMartTMKid: ; PureRGBnote: ADDED: new NPC who will talk about selling TMs
 	text_asm
 	CheckEvent EVENT_BEAT_MISTY
@@ -47,14 +48,14 @@ PewterMartTMKid: ; PureRGBnote: ADDED: new NPC who will talk about selling TMs
 	text_far _TMKidGreet
 	text_end
 
-PewterMartText3:
+PewterMartSuperNerdText:
 	text_asm
 	ld hl, .Text
 	rst _PrintText
 	rst TextScriptEnd
 
-.Text
-	text_far _PewterMartText3
+.Text:
+	text_far _PewterMartSuperNerdText
 	text_end
 
 INCLUDE "data/items/marts/pewter.asm"

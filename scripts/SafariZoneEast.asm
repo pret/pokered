@@ -16,28 +16,29 @@ SafariZoneEast_ScriptPointers:
 	dw RangerPostBattleEast
 
 SafariZoneEast_TextPointers:
-	dw SafariZoneEastRangerText0
-	dw SafariZoneEastTrainerText0
-	dw SafariZoneEastTrainerText1
-	dw SafariZoneEastTrainerText2
-	dw SafariZoneEastTrainerText3
-	dw PickUpItemText
-	dw PickUp5ItemText
-	dw PickUpItemText
-	dw PickUpItemText
-	dw SafariZoneEastText5
-	dw SafariZoneEastText6
-	dw SafariZoneEastText7
+	def_text_pointers
+	dw_const SafariZoneEastRangerText0,       TEXT_SAFARIZONEEAST_RANGER_F
+	dw_const SafariZoneEastTrainerText0,      TEXT_SAFARIZONEEAST_PSYCHIC
+	dw_const SafariZoneEastTrainerText1,      TEXT_SAFARIZONEEAST_ROCKER
+	dw_const SafariZoneEastTrainerText2,      TEXT_SAFARIZONEEAST_COOLTRAINER_M
+	dw_const SafariZoneEastTrainerText3,      TEXT_SAFARIZONEEAST_ENGINEER
+	dw_const PickUpItemText,                  TEXT_SAFARIZONEEAST_FULL_RESTORE
+	dw_const PickUp5ItemText,                 TEXT_SAFARIZONEEAST_MAX_RESTORE
+	dw_const PickUpItemText,                  TEXT_SAFARIZONEEAST_CARBOS
+	dw_const PickUpItemText,                  TEXT_SAFARIZONEEAST_TM_EGG_BOMB
+	dw_const SafariZoneEastRestHouseSignText, TEXT_SAFARIZONEEAST_REST_HOUSE_SIGN
+	dw_const SafariZoneEastTrainerTipsText,   TEXT_SAFARIZONEEAST_TRAINER_TIPS
+	dw_const SafariZoneEastSignText,          TEXT_SAFARIZONEEAST_SIGN
 
 RangerPostBattleEast:
 	SetEvent EVENT_BEAT_SAFARI_ZONE_EAST_RANGER_0
 	jpfar RangerPostBattle
 
-SafariZoneEastText5:
-	text_far _SafariZoneEastText5
+SafariZoneEastRestHouseSignText:
+	text_far _SafariZoneEastRestHouseSignText
 	text_end
 
-SafariZoneEastText6:
+SafariZoneEastTrainerTipsText:
 	text_asm
 	ld a, [wSafariType]
 	cp SAFARI_TYPE_CLASSIC
@@ -49,15 +50,15 @@ SafariZoneEastText6:
 	rst TextScriptEnd
 
 SafariZoneEastText6Default:
-	text_far _SafariZoneEastText6
+	text_far _SafariZoneEastTrainerTipsText
 	text_end
 
 SafariZoneEastText6NotClassic:
 	text_far _SafariZoneEastText6NotClassic
 	text_end
-
-SafariZoneEastText7:
-	text_far _SafariZoneEastText7
+	
+SafariZoneEastSignText:
+	text_far _SafariZoneEastSignText
 	text_end
 
 SafariZoneEastTrainerHeaders:

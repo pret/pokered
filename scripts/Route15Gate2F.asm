@@ -2,12 +2,13 @@ Route15Gate2F_Script:
 	jp DisableAutoTextBoxDrawing
 
 Route15Gate2F_TextPointers:
-	dw Route15GateUpstairsText1
-	dw Route15GateUpstairsText2
+	def_text_pointers
+	dw_const Route15Gate2FOaksAideText,   TEXT_ROUTE15GATE2F_OAKS_AIDE
+	dw_const Route15Gate2FBinocularsText, TEXT_ROUTE15GATE2F_BINOCULARS
 
 ; PureRGBnote: CHANGED: oak's aide here will give you the BOOSTER CHIP instead of EXP.ALL, and it requires 80 pokemon caught to obtain.
 ; Once you install it, you must talk to him to get it removed. This removes the need for it taking up an item slot when in use.
-Route15GateUpstairsText1:
+Route15Gate2FOaksAideText:
 	text_asm
 	CheckEvent EVENT_GOT_BOOSTER_CHIP
 	jr nz, .got_item
@@ -54,7 +55,7 @@ Route15GateUpstairsText1:
 	rst _PrintText
 	jr .no_item
 .boosterChipNotActive
-	ld hl, Route15GateUpstairsText_4968c
+	ld hl, BoosterChipText
 	rst _PrintText
 .no_item
 	rst TextScriptEnd
@@ -80,21 +81,21 @@ RemoveBoosterChipSounds:
 	jp PlayDefaultMusic
 	
 
-Route15GateUpstairsText_4968c:
-	text_far _Route15GateUpstairsText_4968c
+BoosterChipText:
+	text_far _Route15Gate2FOaksAideBoosterChipText
 	text_end
 
-Route15GateUpstairsText2:
+Route15Gate2FBinocularsText:
 	text_asm
-	ld hl, Route15GateUpstairsText_49698
+	ld hl, .Text
 	jp GateUpstairsScript_PrintIfFacingUp
 
-Route15GateUpstairsText_49698:
-	text_far _Route15GateUpstairsText_49698
+.Text:
+	text_far _Route15Gate2FBinocularsText
 	text_end
 
 Route15GateUpstairsNoRoomText:
-	text_far _TM34NoRoomText
+	text_far _PewterGymTM34NoRoomText
 	text_end
 
 Route15GateUpstairsRemoveBoosterText:

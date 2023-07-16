@@ -10,28 +10,30 @@ Route4_Script:
 	ret
 
 Route4_ScriptPointers:
-	dw CheckFightingMapTrainers
-	dw DisplayEnemyTrainerTextAndStartBattle
-	dw EndTrainerBattle
+	def_script_pointers
+	dw_const CheckFightingMapTrainers,              SCRIPT_ROUTE4_DEFAULT
+	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_ROUTE4_START_BATTLE
+	dw_const EndTrainerBattle,                      SCRIPT_ROUTE4_END_BATTLE
 
 Route4_TextPointers:
-	dw Route4Text1
-	dw Route4Text2
-	dw Route4Text3
-	dw Route4Text4
-	dw Route4Text5
-	dw PickUpItemText
-	dw PickUpItemText ; PureRGBnote: ADDED: new item on this route.
-	dw PokeCenterSignText
-	dw Route4Text6
-	dw Route4Text7
-	dw Route4Text8 ; PureRGBnote: ADDED: new trainer tips sign on this route.
-	dw Route4Text9 ; PureRGBnote: ADDED: new trainer tips sign on this route.
+	def_text_pointers
+	dw_const Route4CooltrainerF1Text, TEXT_ROUTE4_COOLTRAINER_F1
+	dw_const Route4CooltrainerF2Text, TEXT_ROUTE4_COOLTRAINER_F2
+	dw_const Route4Text3,             TEXT_ROUTE4_ROOKIE1
+	dw_const Route4Text4,             TEXT_ROUTE4_ROOKIE2
+	dw_const Route4Text5,             TEXT_ROUTE4_TAMER
+	dw_const PickUpItemText,          TEXT_ROUTE4_ITEM1
+	dw_const PickUpItemText,          TEXT_ROUTE4_ITEM2 ; PureRGBnote: ADDED: new item on this route.
+	dw_const PokeCenterSignText,      TEXT_ROUTE4_POKECENTER_SIGN
+	dw_const Route4MtMoonSignText,    TEXT_ROUTE4_MT_MOON_SIGN
+	dw_const Route4SignText,          TEXT_ROUTE4_SIGN
+	dw_const Route4Text8,             TEXT_ROUTE4_TRAINER_TIPS1 ; PureRGBnote: ADDED: new trainer tips sign on this route.
+	dw_const Route4Text9,             TEXT_ROUTE4_TRAINER_TIPS2 ; PureRGBnote: ADDED: new trainer tips sign on this route.
 
 Route4TrainerHeaders:
 	def_trainers 2
 Route4TrainerHeader0:
-	trainer EVENT_BEAT_ROUTE_4_TRAINER_0, 3, Route4BattleText1, Route4EndBattleText1, Route4AfterBattleText1
+	trainer EVENT_BEAT_ROUTE_4_TRAINER_0, 3, Route4CooltrainerF2BattleText, Route4CooltrainerF2EndBattleText, Route4CooltrainerF2AfterBattleText
 Route4TrainerHeader1:
 	trainer EVENT_BEAT_ROUTE_4_TRAINER_1, 0, Route4BattleText2, Route4EndBattleText2, Route4AfterBattleText2
 Route4TrainerHeader2:
@@ -40,26 +42,26 @@ Route4TrainerHeader3:
 	trainer EVENT_BEAT_ROUTE_4_TRAINER_3, 4, Route4BattleText4, Route4EndBattleText4, Route4AfterBattleText4
 	db -1 ; end
 
-Route4Text1:
-	text_far _Route4Text1
+Route4CooltrainerF1Text:
+	text_far _Route4CooltrainerF1Text
 	text_end
 
-Route4Text2:
+Route4CooltrainerF2Text:
 	text_asm
 	ld hl, Route4TrainerHeader0
 	call TalkToTrainer
 	rst TextScriptEnd
 
-Route4BattleText1:
-	text_far _Route4BattleText1
+Route4CooltrainerF2BattleText:
+	text_far _Route4CooltrainerF2BattleText
 	text_end
 
-Route4EndBattleText1:
-	text_far _Route4EndBattleText1
+Route4CooltrainerF2EndBattleText:
+	text_far _Route4CooltrainerF2EndBattleText
 	text_end
 
-Route4AfterBattleText1:
-	text_far _Route4AfterBattleText1
+Route4CooltrainerF2AfterBattleText:
+	text_far _Route4CooltrainerF2AfterBattleText
 	text_end
 
 Route4Text3:
@@ -116,12 +118,12 @@ Route4AfterBattleText4:
 	text_far _Route4AfterBattleText4
 	text_end
 
-Route4Text6:
-	text_far _Route4Text5
+Route4MtMoonSignText:
+	text_far _Route4MtMoonSignText
 	text_end
 
-Route4Text7:
-	text_far _Route4Text6
+Route4SignText:
+	text_far _Route4SignText
 	text_end
 
 Route4Text8:

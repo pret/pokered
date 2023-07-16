@@ -2,9 +2,10 @@ VermilionTradeHouse_Script:
 	jp EnableAutoTextBoxDrawing
 
 VermilionTradeHouse_TextPointers:
-	dw VermilionHouse3Text1
+	def_text_pointers
+	dw_const VermilionTradeHouseLittleGirlText, TEXT_VERMILIONTRADEHOUSE_LITTLE_GIRL
 
-VermilionHouse3Text1:
+VermilionTradeHouseLittleGirlText:
 	text_asm
 	ld a, TRADE_FOR_DUX
 	ld [wWhichTrade], a

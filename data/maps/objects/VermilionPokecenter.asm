@@ -1,3 +1,9 @@
+	object_const_def
+	const VERMILIONPOKECENTER_NURSE
+	const VERMILIONPOKECENTER_FISHING_GURU
+	const VERMILIONPOKECENTER_SAILOR
+	const VERMILIONPOKECENTER_LINK_RECEPTIONIST
+
 VermilionPokecenter_Object:
 	db $0 ; border block
 
@@ -8,9 +14,9 @@ VermilionPokecenter_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  3,  1, SPRITE_NURSE, STAY, DOWN, 1 ; person
-	object_event 10,  5, SPRITE_FISHING_GURU, STAY, NONE, 2 ; person
-	object_event  5,  4, SPRITE_SAILOR, STAY, NONE, 3 ; person
-	object_event 11,  2, SPRITE_LINK_RECEPTIONIST, STAY, DOWN, 4 ; person
+	object_event  3,  1, SPRITE_NURSE, STAY, DOWN, TEXT_VERMILIONPOKECENTER_NURSE
+	object_event 10,  5, SPRITE_FISHING_GURU, STAY, NONE, TEXT_VERMILIONPOKECENTER_FISHING_GURU
+	object_event  5,  4, SPRITE_SAILOR, STAY, NONE, TEXT_VERMILIONPOKECENTER_SAILOR
+	object_event 11,  2, SPRITE_LINK_RECEPTIONIST, STAY, DOWN, TEXT_VERMILIONPOKECENTER_LINK_RECEPTIONIST
 
 	def_warps_to VERMILION_POKECENTER

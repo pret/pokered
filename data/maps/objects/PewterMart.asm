@@ -1,3 +1,9 @@
+	object_const_def
+	const PEWTERMART_CLERK
+	const PEWTERMART_YOUNGSTER
+	const PEWTERMART_SUPER_NERD
+	const PEWTERMART_TM_KID
+
 PewterMart_Object:
 	db $0 ; border block
 
@@ -8,9 +14,9 @@ PewterMart_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  0,  5, SPRITE_CLERK, STAY, RIGHT, 1 ; person
-	object_event  3,  3, SPRITE_YOUNGSTER, WALK, UP_DOWN, 2 ; person
-	object_event  5,  5, SPRITE_SUPER_NERD, STAY, NONE, 3 ; person
-	object_event  1,  7, SPRITE_LITTLE_BOY, STAY, NONE, 4 ; person
+	object_event  0,  5, SPRITE_CLERK, STAY, RIGHT, TEXT_PEWTERMART_CLERK 
+	object_event  3,  3, SPRITE_YOUNGSTER, WALK, UP_DOWN, TEXT_PEWTERMART_YOUNGSTER 
+	object_event  5,  5, SPRITE_SUPER_NERD, STAY, NONE, TEXT_PEWTERMART_SUPER_NERD 
+	object_event  1,  7, SPRITE_LITTLE_BOY, STAY, NONE, TEXT_PEWTERMART_TM_KID
 
 	def_warps_to PEWTER_MART

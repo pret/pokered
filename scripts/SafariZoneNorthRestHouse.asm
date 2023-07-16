@@ -3,11 +3,12 @@ SafariZoneNorthRestHouse_Script:
 	ret
 
 SafariZoneNorthRestHouse_TextPointers:
-	dw SafariZoneRestHouse4Text1
-	dw SafariZoneRestHouse4Text2
-	dw SafariZoneRestHouse4Text3
+	def_text_pointers
+	dw_const SafariZoneNorthRestHouseScientistText,        TEXT_SAFARIZONENORTHRESTHOUSE_SCIENTIST
+	dw_const SafariZoneNorthRestHouseSafariZoneWorkerText, TEXT_SAFARIZONENORTHRESTHOUSE_SAFARI_ZONE_WORKER
+	dw_const SafariZoneNorthRestHouseGentlemanText,        TEXT_SAFARIZONENORTHRESTHOUSE_GENTLEMAN
 
-SafariZoneRestHouse4Text1:
+SafariZoneNorthRestHouseScientistText:
 ; PureRGBnote: ADDED: this NPC will display different text depending on what type of safari game you're playing
 	text_asm
 	ld a, [wSafariType]
@@ -27,7 +28,7 @@ SafariZoneRestHouse4Text1:
 	rst TextScriptEnd
 
 SafariZoneRestHouse4TextDefault:
-	text_far _SafariZoneRestHouse4Text1
+	text_far _SafariZoneNorthRestHouseScientistText
 	text_end
 
 SafariZoneRestHouse4TextRangerHunt:
@@ -38,10 +39,10 @@ SafariZoneRestHouse4TextChansey:
 	text_far _SafariZoneRestHouse4TextChansey
 	text_end
 
-SafariZoneRestHouse4Text2:
-	text_far _SafariZoneRestHouse4Text2
+SafariZoneNorthRestHouseSafariZoneWorkerText:
+	text_far _SafariZoneNorthRestHouseSafariZoneWorkerText
 	text_end
 
-SafariZoneRestHouse4Text3:
-	text_far _SafariZoneRestHouse4Text3
+SafariZoneNorthRestHouseGentlemanText:
+	text_far _SafariZoneNorthRestHouseGentlemanText
 	text_end

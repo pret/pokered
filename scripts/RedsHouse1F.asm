@@ -4,9 +4,10 @@ RedsHouse1F_Script:
 	jp EnableAutoTextBoxDrawing
 
 RedsHouse1F_TextPointers:
-	dw RedsHouse1FMomText
-	dw RedsHouse1FDadText
-	dw RedsHouse1FTVText
+	def_text_pointers
+	dw_const RedsHouse1FMomText, TEXT_REDSHOUSE1F_MOM
+	dw_const RedsHouse1FDadText, TEXT_REDSHOUSE1F_DAD
+	dw_const RedsHouse1FTVText,  TEXT_REDSHOUSE1F_TV
 
 RedsHouse1FMomText:
 	text_asm
@@ -30,7 +31,7 @@ RedsHouse1FMomText:
 	ld a, [wd72e]
 	bit 3, a ; received a Pokémon from Oak?
 	jr nz, .heal
-	ld hl, MomWakeUpText
+	ld hl, .WakeUpText
 	rst _PrintText
 	rst TextScriptEnd
 .heal
@@ -153,8 +154,8 @@ RedsHouse1FMomText:
 	ResetEventRange EVENT_CALLED_MOM_RICE_BALLS, EVENT_CALLED_MOM_LASAGNA
 	rst TextScriptEnd
 
-MomWakeUpText:
-	text_far _MomWakeUpText
+.WakeUpText:
+	text_far _RedsHouse1FMomWakeUpText
 	text_end
 
 MomDadNotHereText:
@@ -227,10 +228,10 @@ MomFoodDone:
 	text_end
 
 MomHealPokemon:
-	ld hl, MomHealText1
+	ld hl, RedsHouse1FMomYouShouldRestText
 	rst _PrintText
 	call HealFade
-	ld hl, MomHealText2
+	ld hl, RedsHouse1FMomLookingGreatText
 	jp PrintText
 
 HealFade:
@@ -253,30 +254,30 @@ MomHealPokemonImmediate:
 	rst _PlaySound
 	ret
 
-MomHealText1:
-	text_far _MomHealText1
+RedsHouse1FMomYouShouldRestText:
+	text_far _RedsHouse1FMomYouShouldRestText
 	text_end
-MomHealText2:
-	text_far _MomHealText2
+RedsHouse1FMomLookingGreatText:
+	text_far _RedsHouse1FMomLookingGreatText
 	text_end
 
 RedsHouse1FTVText:
 	text_asm
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
-	ld hl, TVWrongSideText
+	ld hl, .WrongSideText
 	jr nz, .got_text
-	ld hl, StandByMeText
+	ld hl, .StandByMeMovieText
 .got_text
 	rst _PrintText
 	rst TextScriptEnd
 
-StandByMeText:
-	text_far _StandByMeText
+.StandByMeMovieText:
+	text_far _RedsHouse1FTVStandByMeMovieText
 	text_end
 
-TVWrongSideText:
-	text_far _TVWrongSideText
+.WrongSideText:
+	text_far _RedsHouse1FTVWrongSideText
 	text_end
 
 RedsHouse1FDadText:

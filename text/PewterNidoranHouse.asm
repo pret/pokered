@@ -1,12 +1,12 @@
-_PewterHouse1Text1::
+_PewterNidoranHouseNidoranText::
 	text "NIDORAN: Bowbow!@"
 	text_end
 
-_PewterHouse1Text2::
+_PewterNidoranHouseLittleBoyText::
 	text "NIDORAN sit!"
 	done
 
-_PewterHouse1Text3::
+_PewterNidoranHouseMiddleAgedManText::
 	text "Our #MON's an"
 	line "outsider, so it's"
 	cont "hard to handle."

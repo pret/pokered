@@ -1,3 +1,6 @@
+	object_const_def
+	const ROUTE11GATE1F_GUARD
+
 Route11Gate1F_Object:
 	db $a ; border block
 
@@ -11,6 +14,6 @@ Route11Gate1F_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  4,  1, SPRITE_GUARD, STAY, NONE, 1 ; person
+	object_event  4,  1, SPRITE_GUARD, STAY, NONE, TEXT_ROUTE11GATE1F_GUARD
 
 	def_warps_to ROUTE_11_GATE_1F

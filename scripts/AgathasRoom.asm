@@ -31,18 +31,19 @@ AgathaShowOrHideExitBlock:
 	jp GBFadeInFromWhite ; PureRGBnote: ADDED: since trainer instantly talks to us after battle we need to fade back in here
 
 ResetAgathaScript:
-	xor a
+	xor a ; SCRIPT_AGATHASROOM_DEFAULT
 	ld [wAgathasRoomCurScript], a
 	ret
 
 AgathasRoom_ScriptPointers:
-	dw AgathaScript0
-	dw DisplayEnemyTrainerTextAndStartBattle
-	dw AgathaScript2
-	dw AgathaScript3
-	dw AgathaScript4
+	def_script_pointers
+	dw_const AgathasRoomDefaultScript,              SCRIPT_AGATHASROOM_DEFAULT
+	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_AGATHASROOM_AGATHA_START_BATTLE
+	dw_const AgathasRoomAgathaEndBattleScript,      SCRIPT_AGATHASROOM_AGATHA_END_BATTLE
+	dw_const AgathasRoomPlayerIsMovingScript,       SCRIPT_AGATHASROOM_PLAYER_IS_MOVING
+	dw_const AgathasRoomNoopScript,                 SCRIPT_AGATHASROOM_NOOP
 
-AgathaScript4:
+AgathasRoomNoopScript:
 	ret
 
 AgathaScriptWalkIntoRoom:
@@ -58,12 +59,12 @@ AgathaScriptWalkIntoRoom:
 	ld a, $6
 	ld [wSimulatedJoypadStatesIndex], a
 	call StartSimulatingJoypadStates
-	ld a, $3
+	ld a, SCRIPT_AGATHASROOM_PLAYER_IS_MOVING
 	ld [wAgathasRoomCurScript], a
 	ld [wCurMapScript], a
 	ret
 
-AgathaScript0:
+AgathasRoomDefaultScript:
 	ld hl, AgathaEntranceCoords
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
@@ -78,15 +79,15 @@ AgathaScript0:
 	CheckAndSetEvent EVENT_AUTOWALKED_INTO_AGATHAS_ROOM
 	jr z, AgathaScriptWalkIntoRoom
 .stopPlayerFromLeaving
-	ld a, $2
+	ld a, TEXT_AGATHASROOM_AGATHA_DONT_RUN_AWAY
 	ldh [hSpriteIndexOrTextID], a
-	call DisplayTextID  ; "Don't run away!"
+	call DisplayTextID
 	ld a, D_UP
 	ld [wSimulatedJoypadStatesEnd], a
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
 	call StartSimulatingJoypadStates
-	ld a, $3
+	ld a, SCRIPT_AGATHASROOM_PLAYER_IS_MOVING
 	ld [wAgathasRoomCurScript], a
 	ld [wCurMapScript], a
 	ret
@@ -98,7 +99,7 @@ AgathaEntranceCoords:
 	dbmapcoord  5, 11
 	db -1 ; end
 
-AgathaScript3:
+AgathasRoomPlayerIsMovingScript:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
@@ -109,21 +110,22 @@ AgathaScript3:
 	ld [wCurMapScript], a
 	ret
 
-AgathaScript2:
+AgathasRoomAgathaEndBattleScript:
 	call EndTrainerBattle
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, ResetAgathaScript
-	ld a, $1
+	ld a, TEXT_AGATHASROOM_AGATHA
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld a, $1
+	ld a, SCRIPT_CHAMPIONSROOM_PLAYER_ENTERS
 	ld [wChampionsRoomCurScript], a
 	ret
 
 AgathasRoom_TextPointers:
-	dw AgathaText1
-	dw AgathaDontRunAwayText
+	def_text_pointers
+	dw_const AgathasRoomAgathaText,            TEXT_AGATHASROOM_AGATHA
+	dw_const AgathasRoomAgathaDontRunAwayText, TEXT_AGATHASROOM_AGATHA_DONT_RUN_AWAY
 
 AgathasRoomTrainerHeaders:
 	def_trainers
@@ -131,7 +133,7 @@ AgathasRoomTrainerHeader0:
 	trainer EVENT_BEAT_AGATHAS_ROOM_TRAINER_0, 0, AgathaBeforeBattleText, AgathaEndBattleText, AgathaAfterBattleText
 	db -1 ; end
 
-AgathaText1:
+AgathasRoomAgathaText:
 	text_asm
 	ld hl, AgathasRoomTrainerHeader0
 	call TalkToTrainer
@@ -149,6 +151,6 @@ AgathaAfterBattleText:
 	text_far _AgathaAfterBattleText
 	text_end
 
-AgathaDontRunAwayText:
-	text_far _AgathaDontRunAwayText
+AgathasRoomAgathaDontRunAwayText:
+	text_far _AgathasRoomAgathaDontRunAwayText
 	text_end

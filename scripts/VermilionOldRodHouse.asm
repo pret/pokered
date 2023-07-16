@@ -4,14 +4,14 @@ VermilionOldRodHouse_Script:
 	jp EnableAutoTextBoxDrawing
 
 VermilionOldRodHouse_TextPointers:
-	dw VermilionGuruHouseText1
+	dw_const VermilionGuruHouseText1, TEXT_VERMILIONOLDRODHOUSE_FISHING_GURU
 
 VermilionGuruHouseText1:
 	text_asm
 	ld a, [wd728]
 	bit 4, a ; got good rod?
 	jr nz, .got_item
-	ld hl, VermilionHouse3Text_561bd
+	ld hl, .DoYouLikeToFishText
 	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
@@ -22,47 +22,37 @@ VermilionGuruHouseText1:
 	jr nc, .bag_full
 	ld hl, wd728
 	set 4, [hl] ; got good rod
-	ld hl, VermilionHouse3Text_561c2
+	ld hl, .TakeThisText
 	jr .done
 .bag_full
-	ld hl, VermilionHouse3Text_5621c
+	ld hl, .NoRoomText
 	jr .done
 .refused
-	ld hl, VermilionHouse3Text_56212
+	ld hl, .ThatsSoDisappointingText
 	jr .done
 .got_item
-	ld hl, VermilionHouse3Text_56217
+	ld hl, .HowAreTheFishBitingText
 .done
 	rst _PrintText
 	rst TextScriptEnd
 
-VermilionHouse3Text_561bd:
-	text_far _VermilionHouse3Text_561bd
+.DoYouLikeToFishText:
+	text_far _VermilionOldRodHouseFishingGuruDoYouLikeToFishText
 	text_end
 
-VermilionHouse3Text_561c2:
-	text_far _VermilionHouse3Text_561c2
+.TakeThisText:
+	text_far _VermilionOldRodHouseFishingGuruTakeThisText
 	sound_get_item_1
 	text_end
 
-;UnusedText_561c8:
-;	para "つり　こそ"
-;	line "おとこの　ロマン　だ！"
-;
-;	para "へぼいつりざおは"
-;	line "コイキングしか　つれ　なんだが"
-;	line "この　いいつりざおなら"
-;	line "もっと　いいもんが　つれるんじゃ！"
-;	done
-
-VermilionHouse3Text_56212:
-	text_far _VermilionHouse3Text_56212
+.ThatsSoDisappointingText:
+	text_far _VermilionOldRodHouseFishingGuruThatsSoDisappointingText
 	text_end
 
-VermilionHouse3Text_56217:
-	text_far _VermilionHouse3Text_56217
+.HowAreTheFishBitingText:
+	text_far _VermilionOldRodHouseFishingGuruHowAreTheFishBitingText
 	text_end
 
-VermilionHouse3Text_5621c:
-	text_far _VermilionHouse3Text_5621c
+.NoRoomText:
+	text_far _VermilionOldRodHouseFishingGuruNoRoomText
 	text_end

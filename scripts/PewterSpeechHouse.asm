@@ -2,20 +2,21 @@ PewterSpeechHouse_Script:
 	jp EnableAutoTextBoxDrawing
 
 PewterSpeechHouse_TextPointers:
-	dw PewterHouse2Text1
-	dw PewterHouse2Text2
-	dw PewterHouse2Text3
+	def_text_pointers
+	dw_const PewterSpeechHouseGamblerText,           TEXT_PEWTERSPEECHHOUSE_GAMBLER
+	dw_const PewterSpeechHouseYoungsterText,         TEXT_PEWTERSPEECHHOUSE_YOUNGSTER
+	dw_const PewterSpeechHouseLostWalletBeautyText,  TEXT_PEWTERSPEECHHOUSE_LOST_WALLET_BEAUTY
 
-PewterHouse2Text1:
-	text_far _PewterHouse2Text1
+PewterSpeechHouseGamblerText:
+	text_far _PewterSpeechHouseGamblerText
 	text_end
 
-PewterHouse2Text2:
-	text_far _PewterHouse2Text2
+PewterSpeechHouseYoungsterText:
+	text_far _PewterSpeechHouseYoungsterText
 	text_end
 
 ; PureRGBnote: ADDED: new NPC who will give you POCKET ABRA once you return their LOST WALLET
-PewterHouse2Text3: 
+PewterSpeechHouseLostWalletBeautyText: 
 	text_asm
 		CheckEvent EVENT_RETURNED_LOST_WALLET
 		jr nz, .howsAbra

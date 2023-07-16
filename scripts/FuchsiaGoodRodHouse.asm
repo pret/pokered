@@ -4,10 +4,11 @@ FuchsiaGoodRodHouse_Script:
 	jp EnableAutoTextBoxDrawing
 
 FuchsiaGoodRodHouse_TextPointers:
-	dw FuchsiaHouse3Text1
-	dw FuchsiaFishingGuide
+	def_text_pointers
+	dw_const FuchsiaGoodRodHouseFishingGuruText, TEXT_FUCHSIAGOODRODHOUSE_FISHING_GURU
+	dw_const FuchsiaFishingGuide,                TEXT_FUCHSIAGOODRODHOUSE_FISHING_GUIDE
 
-FuchsiaHouse3Text1:
+FuchsiaGoodRodHouseFishingGuruText:
 	text_asm
 	CheckEvent EVENT_GOT_FUCHSIA_FISHING_GURU_ITEM
 	jr nz, .printEndText

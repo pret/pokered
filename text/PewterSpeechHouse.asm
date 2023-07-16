@@ -1,4 +1,4 @@
-_PewterHouse2Text1::
+_PewterSpeechHouseGamblerText::
 	text "#MON learn new"
 	line "techniques as"
 	cont "they grow!"
@@ -8,7 +8,7 @@ _PewterHouse2Text1::
 	cont "the trainer!"
 	done
 
-_PewterHouse2Text2::
+_PewterSpeechHouseYoungsterText::
 	text "#MON become"
 	line "easier to catch"
 	cont "when they are"

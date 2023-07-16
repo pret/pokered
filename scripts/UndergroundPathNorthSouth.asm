@@ -15,9 +15,10 @@ UndergroundPathNorthSouth_ScriptPointers:
 	dw EndTrainerBattle
 
 UndergroundPathNorthSouth_TextPointers:
-	dw UndergroundPathNorthSouthTrainer1Text
-	dw UndergroundPathNorthSouthTrainer2Text
-	dw UndergroundPathNorthSouthTrainer3Text
+	def_text_pointers
+	dw_const UndergroundPathNorthSouthTrainer1Text,     TEXT_UNDERGROUNDPATHNORTHSOUTH_GENTLEMAN
+	dw_const UndergroundPathNorthSouthTrainer2Text,     TEXT_UNDERGROUNDPATHNORTHSOUTH_COOL_KID1
+	dw_const UndergroundPathNorthSouthTrainer3Text,     TEXT_UNDERGROUNDPATHNORTHSOUTH_COOL_KID2
 
 UndergroundPathNorthSouthTrainerHeaders:
 	def_trainers 5

@@ -3,18 +3,19 @@ CeladonChiefHouse_Script:
 	ret
 
 CeladonChiefHouse_TextPointers:
-	dw CeladonHouseText1
-	dw CeladonHouseText2
-	dw CeladonHouseText3
+	def_text_pointers
+	dw_const CeladonChiefHouseChiefText,  TEXT_CELADONCHIEFHOUSE_CHIEF
+	dw_const CeladonChiefHouseRocketText, TEXT_CELADONCHIEFHOUSE_ROCKET
+	dw_const CeladonChiefHouseSailorText, TEXT_CELADONCHIEFHOUSE_SAILOR
 
-CeladonHouseText1:
-	text_far _CeladonHouseText1
+CeladonChiefHouseChiefText:
+	text_far _CeladonChiefHouseChiefText
 	text_end
 
-CeladonHouseText2:
-	text_far _CeladonHouseText2
+CeladonChiefHouseRocketText:
+	text_far _CeladonChiefHouseRocketText
 	text_end
 
-CeladonHouseText3:
-	text_far _CeladonHouseText3
+CeladonChiefHouseSailorText:
+	text_far _CeladonChiefHouseSailorText
 	text_end

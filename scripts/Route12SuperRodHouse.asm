@@ -4,10 +4,11 @@ Route12SuperRodHouse_Script:
 	jp EnableAutoTextBoxDrawing
 
 Route12SuperRodHouse_TextPointers:
-	dw Route12HouseText1
-	dw Route12FishingGuide
+	def_text_pointers
+	dw_const Route12SuperRodHouseFishingGuruText, TEXT_ROUTE12SUPERRODHOUSE_FISHING_GURU
+	dw_const Route12FishingGuide,                 TEXT_ROUTE12SUPERRODHOUSE_FISHING_GUIDE
 
-Route12HouseText1:
+Route12SuperRodHouseFishingGuruText:
 	text_asm
 	CheckEvent EVENT_GOT_ROUTE12_FISHING_GURU_ITEM
 	jr nz, .printEndText

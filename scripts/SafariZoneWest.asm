@@ -17,21 +17,21 @@ SafariZoneWest_ScriptPointers:
 	dw RangerPostBattleWest1
 
 SafariZoneWest_TextPointers:
-	dw SafariZoneWestRangerText0
-	dw SafariZoneWestRangerText1
-	dw SafariZoneWestTrainerText0
-	dw SafariZoneWestTrainerText1
-	dw SafariZoneWestTrainerText2
-	dw SafariZoneWestTrainerText3
-	dw SafariZoneWestTrainerText4
-	dw PickUpItemText
-	dw PickUpItemText
-	dw PickUpItemText
-	dw PickUpItemText
-	dw SafariZoneWestText5
-	dw SafariZoneWestText6
-	dw SafariZoneWestText7
-	dw SafariZoneWestText8
+	dw_const SafariZoneWestRangerText0,              TEXT_SAFARIZONEWEST_RANGER1
+	dw_const SafariZoneWestRangerText1,              TEXT_SAFARIZONEWEST_RANGER2
+	dw_const SafariZoneWestTrainerText0,             TEXT_SAFARIZONEWEST_BURGLAR
+	dw_const SafariZoneWestTrainerText1,             TEXT_SAFARIZONEWEST_POKEMANIAC
+	dw_const SafariZoneWestTrainerText2,             TEXT_SAFARIZONEWEST_ROCKER
+	dw_const SafariZoneWestTrainerText3,             TEXT_SAFARIZONEWEST_JUGGLER
+	dw_const SafariZoneWestTrainerText4,             TEXT_SAFARIZONEWEST_PSYCHIC
+	dw_const PickUpItemText,                         TEXT_SAFARIZONEWEST_MAX_POTION
+	dw_const PickUpItemText,                         TEXT_SAFARIZONEWEST_TM_DOUBLE_TEAM
+	dw_const PickUpItemText,                         TEXT_SAFARIZONEWEST_MAX_REVIVE
+	dw_const PickUpItemText,                         TEXT_SAFARIZONEWEST_GOLD_TEETH
+	dw_const SafariZoneWestRestHouseSignText,        TEXT_SAFARIZONEWEST_REST_HOUSE_SIGN
+	dw_const SafariZoneWestFindWardensTeethSignText, TEXT_SAFARIZONEWEST_FIND_WARDENS_TEETH_SIGN
+	dw_const SafariZoneWestTrainerTipsText,          TEXT_SAFARIZONEWEST_TRAINER_TIPS
+	dw_const SafariZoneWestSignText,                 TEXT_SAFARIZONEWEST_SIGN
 
 RangerPostBattleWest:
 	SetEvent EVENT_BEAT_SAFARI_ZONE_WEST_RANGER_0
@@ -41,20 +41,20 @@ RangerPostBattleWest1:
 	SetEvent EVENT_BEAT_SAFARI_ZONE_WEST_RANGER_1
 	jpfar RangerPostBattle
 
-SafariZoneWestText5:
-	text_far _SafariZoneWestText5
+SafariZoneWestRestHouseSignText:
+	text_far _SafariZoneWestRestHouseSignText
 	text_end
 
-SafariZoneWestText6:
-	text_far _SafariZoneWestText6
+SafariZoneWestFindWardensTeethSignText:
+	text_far _SafariZoneWestFindWardensTeethSignText
 	text_end
 
-SafariZoneWestText7:
-	text_far _SafariZoneWestText7
+SafariZoneWestTrainerTipsText:
+	text_far _SafariZoneWestTrainerTipsText
 	text_end
 
-SafariZoneWestText8:
-	text_far _SafariZoneWestText8
+SafariZoneWestSignText:
+	text_far _SafariZoneWestSignText
 	text_end
 
 SafariZoneWestTrainerHeaders:

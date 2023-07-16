@@ -35,11 +35,12 @@ CeruleanCave2FScript1:
 	ret
 
 CeruleanCave2F_TextPointers:
-	dw OakCeruleanCaveText
-	dw PickUpItemText
-	dw PickUpItemText
-	dw PickUpItemText
-	dw OakCeruleanCaveFirstDefeatText
+	def_text_pointers
+	dw_const OakCeruleanCaveText, TEXT_CERULEANCAVE2F_OAK
+	dw_const PickUpItemText, TEXT_CERULEANCAVE2F_PP_UP
+	dw_const PickUpItemText, TEXT_CERULEANCAVE2F_ULTRA_BALL
+	dw_const PickUpItemText, TEXT_CERULEANCAVE2F_FULL_RESTORE
+	dw_const OakCeruleanCaveFirstDefeatText, TEXT_CERULEANCAVE2F_OAK_FIRST_DEFEAT
 
 OakCeruleanCaveText:
 	text_asm
@@ -113,3 +114,4 @@ OakFirstLoseText:
 	text_far _OakFirstLoseText
 	sound_pokedex_rating
 	text_end
+	

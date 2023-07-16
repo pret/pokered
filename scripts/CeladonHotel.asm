@@ -7,21 +7,23 @@ CeladonHotel_Script:
 	ld [wCeladonHotelCurScript], a
 	ret
 
-CeladonHotel_ScriptPointers:
-	dw CheckFightingMapTrainers
-	dw DisplayEnemyTrainerTextAndStartBattle
-	dw EndTrainerBattle
-	dw CeladonLaprasGuyLeaves
-	dw CeladonLaprasGuyGoesThroughDoor
-	dw CeladonLaprasGuyWaitingForLoserToMove
 
+CeladonHotel_ScriptPointers:
+	def_script_pointers
+	dw_const CheckFightingMapTrainers,              SCRIPT_CELADONHOTEL_DEFAULT
+	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_CELADONHOTEL_START_BATTLE
+	dw_const EndTrainerBattle,                      SCRIPT_CELADONHOTEL_END_BATTLE
+	dw_const CeladonLaprasGuyLeaves,                SCRIPT_CELADONHOTEL_LAPRAS_GUY_LEAVES
+	dw_const CeladonLaprasGuyGoesThroughDoor,       SCRIPT_CELADONHOTEL_LAPRAS_GUY_LEAVES_THROUGH_DOOR
+	dw_const CeladonLaprasGuyWaitingForLoserToMove, SCRIPT_CELADONHOTEL_LAPRAS_GUY_WAITING_FOR_LOSER_TO_MOVE
 
 CeladonHotel_TextPointers:
-	dw CeladonChannelerText
-	dw CeladonHotelText1
-	dw CeladonHotelText2
-	dw CeladonHotelText3
-	dw CeladonLaprasGuyText
+	def_text_pointers
+	dw_const CeladonChannelerText,      TEXT_CELADONHOTEL_CHANNELER
+	dw_const CeladonHotelGrannyText,    TEXT_CELADONHOTEL_GRANNY
+	dw_const CeladonHotelBeautyText,    TEXT_CELADONHOTEL_BEAUTY
+	dw_const CeladonHotelSuperNerdText, TEXT_CELADONHOTEL_SUPER_NERD
+	dw_const CeladonLaprasGuyText,      TEXT_CELADONHOTEL_LAPRAS_GUY
 
 CeladonHotelTrainerHeaders:
 	def_trainers 2
@@ -82,16 +84,16 @@ CeladonHotelAfterBattleText1:
 	text_far _CeladonHotelAfterBattleText1
 	text_end
 
-CeladonHotelText1:
-	text_far _CeladonHotelText1
+CeladonHotelGrannyText:
+	text_far _CeladonHotelGrannyText
 	text_end
 
-CeladonHotelText2:
-	text_far _CeladonHotelText2
+CeladonHotelBeautyText:
+	text_far _CeladonHotelBeautyText
 	text_end
 
-CeladonHotelText3:
-	text_far _CeladonHotelText3
+CeladonHotelSuperNerdText:
+	text_far _CeladonHotelSuperNerdText
 	text_end
 
 ; PureRGBnote: ADDED: NPC who will give you lapras earlier once you beat rocket hideout.
@@ -235,7 +237,7 @@ CeladonLaprasGuyReady:
 	text_end
 
 CeladonHeresYourLaprasText:
-	text_far _HeresYourLaprasText
+	text_far _SilphCo7FSilphWorkerM1LaprasDescriptionText
 	text_end
 
 CeladonLaprasGuyNoBoxRoom:

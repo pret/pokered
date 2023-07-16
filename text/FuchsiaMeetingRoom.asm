@@ -1,4 +1,4 @@
-_FuchsiaMeetingRoomText1::
+_FuchsiaMeetingRoomSafariZoneWorker1::
 	text "We nicknamed the"
 	line "WARDEN SLOWPOKE."
 
@@ -6,7 +6,7 @@ _FuchsiaMeetingRoomText1::
 	line "both look vacant!"
 	done
 
-_FuchsiaMeetingRoomText2::
+_FuchsiaMeetingRoomSafariZoneWorker2::
 	text "SLOWPOKE is very"
 	line "knowledgeable"
 	cont "about #MON!"
@@ -16,7 +16,7 @@ _FuchsiaMeetingRoomText2::
 	cont "extinct #MON!"
 	done
 
-_FuchsiaMeetingRoomText3::
+_FuchsiaMeetingRoomSafariZoneWorker3::
 	text "SLOWPOKE came in,"
 	line "but I couldn't"
 	cont "understand him."

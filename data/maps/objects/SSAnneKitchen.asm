@@ -1,3 +1,12 @@
+	object_const_def
+	const SSANNEKITCHEN_COOK1
+	const SSANNEKITCHEN_COOK2
+	const SSANNEKITCHEN_COOK3
+	const SSANNEKITCHEN_COOK4
+	const SSANNEKITCHEN_COOK5
+	const SSANNEKITCHEN_COOK6
+	const SSANNEKITCHEN_COOK7
+
 SSAnneKitchen_Object:
 	db $c ; border block
 
@@ -7,12 +16,12 @@ SSAnneKitchen_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  1,  8, SPRITE_COOK, WALK, UP_DOWN, 1 ; person
-	object_event  5,  8, SPRITE_COOK, WALK, UP_DOWN, 2 ; person
-	object_event  9,  7, SPRITE_COOK, WALK, UP_DOWN, 3 ; person
-	object_event 13,  6, SPRITE_COOK, STAY, NONE, 4 ; person
-	object_event 13,  8, SPRITE_COOK, STAY, NONE, 5 ; person
-	object_event 13, 10, SPRITE_COOK, STAY, NONE, 6 ; person
-	object_event 11, 13, SPRITE_COOK, STAY, UP, 7 ; person
+	object_event  1,  8, SPRITE_COOK, WALK, UP_DOWN, TEXT_SSANNEKITCHEN_COOK1
+	object_event  5,  8, SPRITE_COOK, WALK, UP_DOWN, TEXT_SSANNEKITCHEN_COOK2
+	object_event  9,  7, SPRITE_COOK, WALK, UP_DOWN, TEXT_SSANNEKITCHEN_COOK3
+	object_event 13,  6, SPRITE_COOK, STAY, NONE, TEXT_SSANNEKITCHEN_COOK4
+	object_event 13,  8, SPRITE_COOK, STAY, NONE, TEXT_SSANNEKITCHEN_COOK5
+	object_event 13, 10, SPRITE_COOK, STAY, NONE, TEXT_SSANNEKITCHEN_COOK6
+	object_event 11, 13, SPRITE_COOK, STAY, UP, TEXT_SSANNEKITCHEN_COOK7
 
 	def_warps_to SS_ANNE_KITCHEN

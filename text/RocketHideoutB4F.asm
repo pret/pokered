@@ -1,15 +1,15 @@
-_RocketHideout4Text_4557a::
+_RocketHideoutB4FGiovanniImpressedYouGotHereText::
 	text "So! I must say, I"
 	line "am impressed you"
 	cont "got here!"
 	done
 
-_RocketHideout4Text_4557f::
+_RocketHideoutB4FGiovanniWhatCannotBeText::
 	text "WHAT!"
 	line "This cannot be!"
 	prompt
 
-_RocketHideout4Text_45584::
+_RocketHideoutB4FGiovanniHopeWeMeetAgainText::
 	text "I see that you"
 	line "raise #MON"
 	cont "with utmost care."
@@ -26,49 +26,49 @@ _RocketHideout4Text_45584::
 	line "again..."
 	done
 
-_RocketHideout4BattleText2::
+_RocketHideoutB4FGiovanniBattleText::
 	text "I know you! You"
 	line "ruined our plans"
 	cont "at MT.MOON!"
 	done
 
-_RocketHideout4EndBattleText2::
+_RocketHideoutB4FGiovanniEndBattleText::
 	text "Burned"
 	line "again!"
 	prompt
 
-_RocketHide4AfterBattleText2::
+_RocketHideoutB4FGiovanniAfterBattleText::
 	text "Do you have"
 	line "something against"
 	cont "TEAM ROCKET?"
 	done
 
-_RocketHideout4BattleText3::
+_RocketHideoutB4FRocket1BattleText::
 	text "How can you not"
 	line "see the beauty of"
 	cont "our evil?"
 	done
 
-_RocketHideout4EndBattleText3::
+_RocketHideoutB4FRocket1EndBattleText::
 	text "Ayaya!"
 	prompt
 
-_RocketHide4AfterBattleText3::
+_RocketHideoutB4FRocket1AfterBattleText::
 	text "BOSS! I'm sorry I"
 	line "failed you!"
 	done
 
-_RocketHideout4BattleText4::
+_RocketHideoutB4FRocket2BattleText::
 	text "The elevator"
 	line "doesn't work? Who"
 	cont "has the LIFT KEY?"
 	done
 
-_RocketHideout4EndBattleText4::
+_RocketHideoutB4FRocket2EndBattleText::
 	text "No!"
 	prompt
 
-_RocketHideout4Text_455ec::
+_RocketHideoutB4FRocket2AfterBattleText::
 	text "Oh no! I dropped"
 	line "the LIFT KEY!"
 	done

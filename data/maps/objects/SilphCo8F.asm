@@ -1,3 +1,9 @@
+	object_const_def
+	const SILPHCO8F_SILPH_WORKER_M
+	const SILPHCO8F_ROCKET1
+	const SILPHCO8F_SCIENTIST
+	const SILPHCO8F_ROCKET2
+
 SilphCo8F_Object:
 	db $2e ; border block
 
@@ -13,9 +19,9 @@ SilphCo8F_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  4,  2, SPRITE_SILPH_WORKER, STAY, NONE, 1 ; person
-	object_event 19,  2, SPRITE_ROCKET, STAY, LEFT, 2, OPP_ROCKET, 35
-	object_event 10,  2, SPRITE_SCIENTIST, STAY, DOWN, 3, OPP_SCIENTIST, 9
-	object_event 12, 15, SPRITE_ROCKET, STAY, RIGHT, 4, OPP_ROCKET, 36
+	object_event  4,  2, SPRITE_SILPH_WORKER_M, STAY, NONE, TEXT_SILPHCO8F_SILPH_WORKER_M
+	object_event 19,  2, SPRITE_ROCKET, STAY, LEFT, TEXT_SILPHCO8F_ROCKET1, OPP_ROCKET, 35
+	object_event 10,  2, SPRITE_SCIENTIST, STAY, DOWN, TEXT_SILPHCO8F_SCIENTIST, OPP_SCIENTIST, 9
+	object_event 12, 15, SPRITE_ROCKET, STAY, RIGHT, TEXT_SILPHCO8F_ROCKET2, OPP_ROCKET, 36
 
 	def_warps_to SILPH_CO_8F

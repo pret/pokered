@@ -7,10 +7,11 @@ BluesHouse_Script:
 	jp CallFunctionInTable
 
 BluesHouse_ScriptPointers:
-	dw BluesHouseScript0
-	dw BluesHouseScript1
+	def_script_pointers
+	dw_const BluesHouseEntryScript, SCRIPT_BLUESHOUSE_ENTRY
+	dw_const BluesHouseDefaultScript, SCRIPT_BLUESHOUSE_DEFAULT
 
-BluesHouseScript0:
+BluesHouseEntryScript:
 	SetEvent EVENT_ENTERED_BLUES_HOUSE
 	ld a, [wBluesHouseCurScript]
 	and %11110000 ; left 4 bits are which tea daisy will make, right 4 bits are the current script
@@ -18,7 +19,7 @@ BluesHouseScript0:
 	ld [wBluesHouseCurScript], a
 	ret
 
-BluesHouseScript1:
+BluesHouseDefaultScript:
 	ld a, [wBluesHouseCurScript]
 	bit 7, a ; bit 7 is set when she's waiting for you to sit down
 	ret z
@@ -49,10 +50,11 @@ OnExitCoords:
 	db -1
 
 BluesHouse_TextPointers:
-	dw BluesHouseDaisySittingText
-	dw BluesHouseDaisyWalkingText
-	dw BluesHouseTownMapText
-	dw BluesHouseTeaText
+	def_text_pointers
+	dw_const BluesHouseDaisySittingText, TEXT_BLUESHOUSE_DAISY_SITTING
+	dw_const BluesHouseDaisyWalkingText, TEXT_BLUESHOUSE_DAISY_WALKING
+	dw_const BluesHouseTownMapText,      TEXT_BLUESHOUSE_TOWN_MAP
+	dw_const BluesHouseTeaText,          TEXT_BLUESHOUSE_TEA
 
 BluesHouseDaisySittingText:
 	text_asm
@@ -60,12 +62,12 @@ BluesHouseDaisySittingText:
 	jr nz, .got_town_map
 	CheckEvent EVENT_GOT_POKEDEX
 	jr nz, .give_town_map
-	ld hl, DaisyInitialText
+	ld hl, BluesHouseDaisyRivalAtLabText
 	rst _PrintText
 	rst TextScriptEnd
 
 .give_town_map
-	ld hl, DaisyOfferMapText
+	ld hl, BluesHouseDaisyOfferMapText
 	rst _PrintText
 ;	lb bc, TOWN_MAP, 1
 ;	call GiveItem ; PureRGBnote: CHANGED: TOWN MAP is not treated as a bag item, pressing SELECT in the pokedex will open it after having received it from daisy.
@@ -83,7 +85,7 @@ BluesHouseDaisySittingText:
 .got_town_map
 	CheckEvent EVENT_CALLED_RIVAL_FROM_CELADON
 	jr nz, .teaWithDaisy
-	ld hl, DaisyUseMapText
+	ld hl, BluesHouseDaisyUseMapText
 	rst _PrintText
 	rst TextScriptEnd
 
@@ -310,12 +312,12 @@ TeaTextPointers:
 	dw DaisyTeaPeppermint
 	dw DaisyTeaChai
 
-DaisyInitialText:
-	text_far _DaisyInitialText
+BluesHouseDaisyRivalAtLabText:
+	text_far _BluesHouseDaisyRivalAtLabText
 	text_end
 
-DaisyOfferMapText:
-	text_far _DaisyOfferMapText
+BluesHouseDaisyOfferMapText:
+	text_far _BluesHouseDaisyOfferMapText
 	text_end
 
 GotMapText:
@@ -327,12 +329,12 @@ MapHelpText:
 	text_far _MapHelpText
 	text_end
 
-DaisyBagFullText:
-	text_far _DaisyBagFullText
+BluesHouseDaisyBagFullText:
+	text_far _BluesHouseDaisyBagFullText
 	text_end
 
-DaisyUseMapText:
-	text_far _DaisyUseMapText
+BluesHouseDaisyUseMapText:
+	text_far _BluesHouseDaisyUseMapText
 	text_end
 
 BluesHouseDaisyWalkingText:

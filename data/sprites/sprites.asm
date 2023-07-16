@@ -35,7 +35,7 @@ SpriteSheetPointerTable:
 	overworld_sprite RocketSprite, 12           ; SPRITE_ROCKET
 	overworld_sprite ChannelerSprite, 12        ; SPRITE_CHANNELER
 	overworld_sprite WaiterSprite, 12           ; SPRITE_WAITER
-	overworld_sprite SilphWorkerWomanSprite, 12 ; SPRITE_SILPH_WORKER_WOMAN
+	overworld_sprite SilphWorkerFSprite, 12     ; SPRITE_SILPH_WORKER_F
 	overworld_sprite MiddleAgedWomanSprite, 12  ; SPRITE_MIDDLE_AGED_WOMAN
 	overworld_sprite BrunetteGirlSprite, 12     ; SPRITE_BRUNETTE_GIRL
 	overworld_sprite LanceSprite, 12            ; SPRITE_LANCE
@@ -52,7 +52,7 @@ SpriteSheetPointerTable:
 	overworld_sprite NurseSprite, 12            ; SPRITE_NURSE
 	overworld_sprite LinkReceptionistSprite, 12 ; SPRITE_LINK_RECEPTIONIST
 	overworld_sprite SilphPresidentSprite, 12   ; SPRITE_SILPH_PRESIDENT
-	overworld_sprite SilphWorkerSprite, 12      ; SPRITE_SILPH_WORKER
+	overworld_sprite SilphWorkerMSprite, 12     ; SPRITE_SILPH_WORKER_M
 	overworld_sprite WardenSprite, 12           ; SPRITE_WARDEN
 	overworld_sprite CaptainSprite, 12          ; SPRITE_CAPTAIN
 	overworld_sprite FisherSprite, 12           ; SPRITE_FISHER

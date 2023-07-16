@@ -1,8 +1,8 @@
-_LavenderHouse2Text1::
+_LavenderCuboneHouseCuboneText::
 	text "CUBONE: Kyarugoo!@"
 	text_end
 
-_LavenderHouse2Text_1d9dc::
+_LavenderCuboneHouseBrunetteGirlPoorCubonesMotherText::
 	text "I hate those"
 	line "horrible ROCKETs!"
 
@@ -14,7 +14,7 @@ _LavenderHouse2Text_1d9dc::
 	cont "from TEAM ROCKET!"
 	done
 
-_LavenderHouse2Text_1d9e1::
+_LavenderCuboneHouseBrunetteGirlGhostIsGoneText::
 	text "The GHOST of"
 	line "#MON TOWER is"
 	cont "gone!"

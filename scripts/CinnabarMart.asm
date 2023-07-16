@@ -2,10 +2,11 @@ CinnabarMart_Script:
 	jp EnableAutoTextBoxDrawing
 
 CinnabarMart_TextPointers:
-	dw CinnabarCashierText
-	dw CinnabarMartText2
-	dw CinnabarMartText3
-	dw CinnabarMartTMKid
+	def_text_pointers
+	dw_const CinnabarMartClerkText,        TEXT_CINNABARMART_CLERK
+	dw_const CinnabarMartSilphWorkerFText, TEXT_CINNABARMART_SILPH_WORKER_F
+	dw_const CinnabarMartScientistText,    TEXT_CINNABARMART_SCIENTIST
+	dw_const CinnabarMartTMKid,            TEXT_CINNABARMART_TM_KID
 
 CinnabarMartTMKid: ; PureRGBnote: ADDED: new NPC who will sell TMs
 	text_asm
@@ -37,12 +38,12 @@ TMKidQuick7::
 	text_far _TMKidQuick
 	text_end
 
-CinnabarMartText2:
-	text_far _CinnabarMartText2
+CinnabarMartSilphWorkerFText:
+	text_far _CinnabarMartSilphWorkerFText
 	text_end
 
-CinnabarMartText3:
-	text_far _CinnabarMartText3
+CinnabarMartScientistText:
+	text_far _CinnabarMartScientistText
 	text_end
 
 INCLUDE "data/items/marts/cinnabar.asm"

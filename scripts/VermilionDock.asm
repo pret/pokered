@@ -7,14 +7,14 @@ VermilionDock_Script:
 	call ExecuteCurMapScriptInTable
 	call TruckCheck
 	CheckEventHL EVENT_STARTED_WALKING_OUT_OF_DOCK
-	jr nz, .asm_1db8d
+	jr nz, .walking_out_of_dock
 	CheckEventReuseHL EVENT_GOT_HM01
 	ret z
 	ld a, [wDestinationWarpID]
 	cp $1
 	ret nz
 	CheckEventReuseHL EVENT_SS_ANNE_LEFT
-	jp z, VermilionDock_1db9b
+	jp z, VermilionDockSSAnneLeavesScript
 	SetEventReuseHL EVENT_STARTED_WALKING_OUT_OF_DOCK
 	call Delay3
 	ld hl, wd730
@@ -32,7 +32,7 @@ VermilionDock_Script:
 	dec a
 	ld [wJoyIgnore], a
 	ret
-.asm_1db8d
+.walking_out_of_dock
 	CheckEventAfterBranchReuseHL EVENT_WALKED_OUT_OF_DOCK, EVENT_STARTED_WALKING_OUT_OF_DOCK
 	ret nz
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -47,7 +47,7 @@ VermilionDock_ScriptPointers:
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
-VermilionDock_1db9b:
+VermilionDockSSAnneLeavesScript:
 ;;;;;;;;;; PureRGBnote: ADDED: the ship will return so don't ever run the "ship leaves" script if we're in that state
 	ld a, [wObtainedBadges]
 	bit BIT_SOULBADGE, a ; after obtaining 5 badges the ship returns
@@ -98,7 +98,7 @@ VermilionDock_1db9b:
 	ld [wUpdateSpritesEnabled], a
 	ld d, $0
 	ld e, $8
-.asm_1dbfa
+.shift_columns_up
 	ld hl, $2
 	add hl, bc
 	ld a, l
@@ -111,19 +111,19 @@ VermilionDock_1db9b:
 	call VermilionDock_EmitSmokePuff
 	pop de
 	ld b, $10
-.asm_1dc11
+.smoke_puff_drift_loop
 	call VermilionDock_AnimSmokePuffDriftRight
 	ld c, $8
-.asm_1dc16
-	call VermilionDock_1dc7c
+.delay_between_drifts
+	call VermilionDock_SyncScrollWithLY
 	dec c
-	jr nz, .asm_1dc16
+	jr nz, .delay_between_drifts
 	inc d
 	dec b
-	jr nz, .asm_1dc11
+	jr nz, .smoke_puff_drift_loop
 	pop bc
 	dec e
-	jr nz, .asm_1dbfa
+	jr nz, .shift_columns_up
 	xor a
 	ldh [rWY], a
 	ldh [hWY], a
@@ -150,12 +150,12 @@ VermilionDock_AnimSmokePuffDriftRight:
 	swap a
 	ld c, a
 	ld de, 4
-.loop
+.drift_loop
 	inc [hl]
 	inc [hl]
 	add hl, de
 	dec c
-	jr nz, .loop
+	jr nz, .drift_loop
 	pop de
 	pop bc
 	ret
@@ -182,18 +182,18 @@ VermilionDockOAMBlock:
 	db $fe, $10
 	db $ff, $10
 
-VermilionDock_1dc7c:
+VermilionDock_SyncScrollWithLY:
 	ld h, d
 	ld l, $50
-	call .asm_1dc86
+	call .sync_scroll_ly
 	ld h, $0
 	ld l, $80
-.asm_1dc86
+.sync_scroll_ly
 	predef BGLayerScrollingUpdate ; shinpokerednote: gbcnote - consolidated into a predef that also fixes some issues
-.asm_1dc8e
+.wait_for_ly_match
 	ldh a, [rLY]
 	cp h
-	jr z, .asm_1dc8e
+	jr z, .wait_for_ly_match
 	ret
 
 VermilionDock_EraseSSAnne:
@@ -226,11 +226,12 @@ VermilionDock_EraseSSAnne:
 	ret
 
 VermilionDock_TextPointers:
-	dw VermilionDockText1
-	dw VermilionDockText2
+	def_text_pointers
+	dw_const VermilionDockUnusedText, TEXT_VERMILIONDOCK_UNUSED ; TODO: use / remove?
+	dw_const VermilionDockText2,      TEXT_VERMILIONDOCK_MEW
 
-VermilionDockText1:
-	text_far _VermilionDockText1
+VermilionDockUnusedText:
+	text_far _VermilionDockUnusedText
 	text_end
 
 VermilionDockTrainerHeaders:

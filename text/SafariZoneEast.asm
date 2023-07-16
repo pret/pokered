@@ -1,8 +1,8 @@
-_SafariZoneEastText5::
+_SafariZoneEastRestHouseSignText::
 	text "REST HOUSE"
 	done
 
-_SafariZoneEastText6::
+_SafariZoneEastTrainerTipsText::
 	text "TRAINER TIPS"
 
 	para "The remaining time"
@@ -10,7 +10,7 @@ _SafariZoneEastText6::
 	cont "while you walk!"
 	done
 
-_SafariZoneEastText7::
+_SafariZoneEastSignText::
 	text "CENTER AREA"
 	line "NORTH: AREA 2"
 	done

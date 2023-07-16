@@ -3,22 +3,23 @@ CeladonMart1F_Script:
 	jp EnableAutoTextBoxDrawing
 
 CeladonMart1F_TextPointers:
-	dw CeladonMart1Text1
-	dw CeladonMart1Text2
-	dw CeladonMart1Text3
-	dw CeladonMart1PhoneLeft
-	dw CeladonMart1PhoneRight
+	def_text_pointers
+	dw_const CeladonMart1FReceptionistText,     TEXT_CELADONMART1F_RECEPTIONIST
+	dw_const CeladonMart1FDirectorySignText,    TEXT_CELADONMART1F_DIRECTORY_SIGN
+	dw_const CeladonMart1FCurrentFloorSignText, TEXT_CELADONMART1F_CURRENT_FLOOR_SIGN
+	dw_const CeladonMart1PhoneLeft,             TEXT_CELADONMART1F_PHONE_LEFT
+	dw_const CeladonMart1PhoneRight,            TEXT_CELADONMART1F_PHONE_RIGHT
 
-CeladonMart1Text1:
-	text_far _CeladonMart1Text2
+CeladonMart1FReceptionistText:
+	text_far _CeladonMart1FReceptionistText
 	text_end
 
-CeladonMart1Text2:
-	text_far _CeladonMart1Text2
+CeladonMart1FDirectorySignText:
+	text_far _CeladonMart1FDirectorySignText
 	text_end
 
-CeladonMart1Text3:
-	text_far _CeladonMart1Text3
+CeladonMart1FCurrentFloorSignText:
+	text_far _CeladonMart1FCurrentFloorSignText
 	text_end
 
 CeladonMart1PhoneLeft:
@@ -92,7 +93,7 @@ CeladonMart1PhoneQuestion:
 	text_end
 
 CeladonMart1PhoneNotEnoughCash:
-	text_far _SafariZoneEntranceText_7536a
+	text_far _GenericNotEnoughMoneyText
 	text_end
 
 CeladonMart1CallWhoQuestion:

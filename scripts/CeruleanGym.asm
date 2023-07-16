@@ -8,40 +8,41 @@ CeruleanGym_Script:
 	ret
 
 CeruleanGymResetScripts:
-	xor a
+	xor a ; SCRIPT_CERULEANGYM_DEFAULT
 	ld [wJoyIgnore], a
 	ld [wCeruleanGymCurScript], a
 	ld [wCurMapScript], a
 	ret
 
 CeruleanGym_ScriptPointers:
-	dw CheckFightingMapTrainers
-	dw DisplayEnemyTrainerTextAndStartBattle
-	dw EndTrainerBattle
-	dw CeruleanGymMistyPostBattle
+	def_script_pointers
+	dw_const CheckFightingMapTrainers,              SCRIPT_CERULEANGYM_DEFAULT
+	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_CERULEANGYM_START_BATTLE
+	dw_const EndTrainerBattle,                      SCRIPT_CERULEANGYM_END_BATTLE
+	dw_const CeruleanGymMistyPostBattleScript,      SCRIPT_CERULEANGYM_MISTY_POST_BATTLE
 
-CeruleanGymMistyPostBattle:
+CeruleanGymMistyPostBattleScript:
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, CeruleanGymResetScripts
-	ld a, $f0
+	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 
 CeruleanGymReceiveTM11:
-	ld a, $5
+	ld a, TEXT_CERULEANGYM_MISTY_CASCADE_BADGE_INFO
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_BEAT_MISTY
 	lb bc, TM_MISTY, 1
 	call GiveItem
 	jr nc, .BagFull
-	ld a, $6
+	ld a, TEXT_CERULEANGYM_MISTY_RECEIVED_TM11
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_GOT_TM11
 	jr .gymVictory
 .BagFull
-	ld a, $7
+	ld a, TEXT_CERULEANGYM_MISTY_TM11_NO_ROOM
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .gymVictory
@@ -56,13 +57,14 @@ CeruleanGymReceiveTM11:
 	jp CeruleanGymResetScripts
 
 CeruleanGym_TextPointers:
-	dw MistyText
-	dw CeruleanGymTrainerText1
-	dw CeruleanGymTrainerText2
-	dw CeruleanGymGuideText
-	dw MistyCascadeBadgeInfoText
-	dw ReceivedTM11Text
-	dw TM11NoRoomText
+	def_text_pointers
+	dw_const CeruleanGymMistyText,                 TEXT_CERULEANGYM_MISTY
+	dw_const CeruleanGymCooltrainerFText,          TEXT_CERULEANGYM_COOLTRAINER_F
+	dw_const CeruleanGymSwimmerText,               TEXT_CERULEANGYM_SWIMMER
+	dw_const CeruleanGymGymGuideText,              TEXT_CERULEANGYM_GYM_GUIDE
+	dw_const CeruleanGymMistyCascadeBadgeInfoText, TEXT_CERULEANGYM_MISTY_CASCADE_BADGE_INFO
+	dw_const CeruleanGymMistyReceivedTM11Text,     TEXT_CERULEANGYM_MISTY_RECEIVED_TM11
+	dw_const CeruleanGymMistyTM11NoRoomText,       TEXT_CERULEANGYM_MISTY_TM11_NO_ROOM
 
 CeruleanGymTrainerHeaders:
 	def_trainers 2
@@ -72,7 +74,7 @@ CeruleanGymTrainerHeader1:
 	trainer EVENT_BEAT_CERULEAN_GYM_TRAINER_1, 3, CeruleanGymBattleText2, CeruleanGymEndBattleText2, CeruleanGymAfterBattleText2
 	db -1 ; end
 
-MistyText:
+CeruleanGymMistyText:
 	text_asm
 	CheckEvent EVENT_BEAT_MISTY
 	jr z, .beforeBeat
@@ -82,17 +84,17 @@ MistyText:
 	call DisableWaitingAfterTextDisplay
 	jr .done
 .afterBeat
-	ld hl, TM11ExplanationText
+	ld hl, .TM11ExplanationText
 	rst _PrintText
 	jr .done
 .beforeBeat
-	ld hl, MistyPreBattleText
+	ld hl, .PreBattleText
 	rst _PrintText
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
-	ld hl, ReceivedCascadeBadgeText
-	ld de, ReceivedCascadeBadgeText
+	ld hl, CeruleanGymMistyReceivedCascadeBadgeText
+	ld de, CeruleanGymMistyReceivedCascadeBadgeText
 	call SaveEndBattleTextPointers
 	ldh a, [hSpriteIndex]
 	ld [wSpriteIndex], a
@@ -102,39 +104,39 @@ MistyText:
 	ld [wGymLeaderNo], a
 	xor a
 	ldh [hJoyHeld], a
-	ld a, $3
+	ld a, SCRIPT_CERULEANGYM_MISTY_POST_BATTLE
 	ld [wCeruleanGymCurScript], a
 .done
 	rst TextScriptEnd
 
-MistyPreBattleText:
-	text_far _MistyPreBattleText
+.PreBattleText:
+	text_far _CeruleanGymMistyPreBattleText
 	text_end
 
-TM11ExplanationText:
-	text_far _TM11ExplanationText
+.TM11ExplanationText:
+	text_far _CeruleanGymMistyTM11ExplanationText
 	text_end
 
-MistyCascadeBadgeInfoText:
-	text_far _MistyCascadeBadgeInfoText
+CeruleanGymMistyCascadeBadgeInfoText:
+	text_far _CeruleanGymMistyCascadeBadgeInfoText
 	text_end
 
-ReceivedTM11Text:
-	text_far _ReceivedTM11Text
+CeruleanGymMistyReceivedTM11Text:
+	text_far _CeruleanGymMistyReceivedTM11Text
 	sound_get_item_1
 	text_end
 
-TM11NoRoomText:
-	text_far _TM11NoRoomText
+CeruleanGymMistyTM11NoRoomText:
+	text_far _CeruleanGymMistyTM11NoRoomText
 	text_end
 
-ReceivedCascadeBadgeText:
-	text_far _ReceivedCascadeBadgeText
+CeruleanGymMistyReceivedCascadeBadgeText:
+	text_far _CeruleanGymMistyReceivedCascadeBadgeText
 	sound_get_key_item ; actually plays the second channel of SFX_BALL_POOF due to the wrong music bank being loaded
 	text_promptbutton
 	text_end
 
-CeruleanGymTrainerText1:
+CeruleanGymCooltrainerFText:
 	text_asm
 	ld hl, CeruleanGymTrainerHeader0
 	call TalkToTrainer
@@ -152,7 +154,7 @@ CeruleanGymAfterBattleText1:
 	text_far _CeruleanGymAfterBattleText1
 	text_end
 
-CeruleanGymTrainerText2:
+CeruleanGymSwimmerText:
 	text_asm
 	ld hl, CeruleanGymTrainerHeader1
 	call TalkToTrainer
@@ -170,17 +172,17 @@ CeruleanGymAfterBattleText2:
 	text_far _CeruleanGymAfterBattleText2
 	text_end
 
-CeruleanGymGuideText: ; PureRGBnote: ADDED: gym guide gives you apex chips after beating the leader
+CeruleanGymGymGuideText: ; PureRGBnote: ADDED: gym guide gives you apex chips after beating the leader
 	text_asm
 	CheckEvent EVENT_BEAT_MISTY
 	jr nz, .afterBeat
-	ld hl, CeruleanGymGuidePreBattleText
+	ld hl, CeruleanGymChampInMakingText
 	rst _PrintText
 	jr .done
 .afterBeat
 	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS ; have to hear about apex chips to receive them after that
 	jr z, .donePost
-	ld hl, CeruleanGymGuidePostBattleTextPrompt
+	ld hl, CeruleanGymBeatMistyTextPrompt
 	rst _PrintText
 	CheckEvent EVENT_GOT_CERULEAN_APEX_CHIPS
 	jr nz, .alreadyApexChips
@@ -205,9 +207,9 @@ CeruleanGymGuideText: ; PureRGBnote: ADDED: gym guide gives you apex chips after
 .done
 	rst TextScriptEnd
 .donePost
-	ld hl, CeruleanGymGuidePostBattleTextDone
+	ld hl, CeruleanGymBeatMistyText
 	rst _PrintText
-	jr .done
+	jr .done ; TODO: just rst textscriptend
 
 
 ReceivedApexChipsText2:
@@ -216,7 +218,7 @@ ReceivedApexChipsText2:
 	text_end
 
 ApexNoRoomText2:
-	text_far _TM34NoRoomText
+	text_far _PewterGymTM34NoRoomText
 	text_end
 
 GymGuideMoreApexChipText2:
@@ -227,17 +229,17 @@ AlreadyReceivedApexChipsText2:
 	text_far _AlreadyReceivedApexChipsText
 	text_end
 
-CeruleanGymGuidePreBattleText:
-	text_far _CeruleanGymGuidePreBattleText
+CeruleanGymChampInMakingText:
+	text_far _CeruleanGymGymGuideChampInMakingText
 	text_end
 
-CeruleanGymGuidePostBattleTextPrompt:
-	text_far _CeruleanGymGuidePostBattleText
+CeruleanGymBeatMistyText:
+	text_far _CeruleanGymGymGuideBeatMistyText
 	text_promptbutton
 	text_end
 
-CeruleanGymGuidePostBattleTextDone:
-	text_far _CeruleanGymGuidePostBattleText
+CeruleanGymBeatMistyTextPrompt:
+	text_far _CeruleanGymGymGuideBeatMistyText
 	text_end
 
 ReceivedApexChipsText::

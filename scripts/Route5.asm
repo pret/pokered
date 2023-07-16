@@ -14,12 +14,13 @@ Route5_ScriptPointers:
 	dw EndTrainerBattle
 
 Route5_TextPointers:
-	dw Route5Rookie1Text
-	dw Route5Rookie2Text
-	dw Route5Rookie3Text
-	dw Route5TamerText
-	dw PickUpItemText ; PureRGBnote: ADDED: new item on this route.
-	dw Route5Text1
+	def_text_pointers
+	dw_const Route5Rookie1Text,              TEXT_ROUTE5_ROOKIE1
+	dw_const Route5Rookie2Text,              TEXT_ROUTE5_ROOKIE2
+	dw_const Route5Rookie3Text,              TEXT_ROUTE5_ROOKIE3
+	dw_const Route5TamerText,                TEXT_ROUTE5_TAMER
+	dw_const PickUpItemText,                 TEXT_ROUTE5_ITEM1 ; PureRGBnote: ADDED: new item on this route.
+	dw_const Route5UndergroundPathSignText,  TEXT_ROUTE5_UNDERGROUND_PATH_SIGN
 
 Route5TrainerHeaders:
 	def_trainers 1
@@ -105,7 +106,6 @@ Route5AfterBattleText4:
 	text_far _Route5AfterBattleText4
 	text_end
 
-
-Route5Text1:
-	text_far _Route5Text1
+Route5UndergroundPathSignText:
+	text_far _Route5UndergroundPathSignText
 	text_end

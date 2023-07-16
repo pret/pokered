@@ -1,3 +1,8 @@
+	object_const_def
+	const VIRIDIANSCHOOLHOUSE_BRUNETTE_GIRL
+	const VIRIDIANSCHOOLHOUSE_COOLTRAINER_F
+	const VIRIDIANSCHOOLHOUSE_ROCKER
+
 ViridianSchoolHouse_Object:
 	db $a ; border block
 
@@ -7,11 +12,11 @@ ViridianSchoolHouse_Object:
 	warp_event  0,  1, VIRIDIAN_SCHOOL_HOUSE_B1F, 1
 
 	def_bg_events
-	bg_event 6, 0, 4 ; detention sign
+	bg_event 6, 0, TEXT_VIRIDIANSCHOOLHOUSE_DETENTION_SIGN
 
 	def_object_events
-	object_event  3,  5, SPRITE_BRUNETTE_GIRL, STAY, UP, 1 ; person
-	object_event  4,  1, SPRITE_COOLTRAINER_F, STAY, DOWN, 2 ; person
-	object_event  3,  5, SPRITE_ROCKER, STAY, UP, 3 ; person
+	object_event  3,  5, SPRITE_BRUNETTE_GIRL, STAY, UP, TEXT_VIRIDIANSCHOOLHOUSE_BRUNETTE_GIRL
+	object_event  4,  1, SPRITE_COOLTRAINER_F, STAY, DOWN, TEXT_VIRIDIANSCHOOLHOUSE_COOLTRAINER_F
+	object_event  3,  5, SPRITE_ROCKER, STAY, UP, TEXT_VIRIDIANSCHOOLHOUSE_ROCKER
 
 	def_warps_to VIRIDIAN_SCHOOL_HOUSE

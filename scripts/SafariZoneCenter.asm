@@ -16,24 +16,25 @@ SafariZoneCenter_ScriptPointers:
 	dw RangerPostBattleCenter
 
 SafariZoneCenter_TextPointers:
-	dw SafariZoneCenterRangerText0
-	dw SafariZoneCenterTrainerText0
-	dw SafariZoneCenterTrainerText1
-	dw SafariZoneCenterTrainerText2
-	dw SafariZoneCenterTrainerText3
-	dw PickUpItemText
-	dw SafariZoneCenterText2
-	dw SafariZoneCenterText3
+	def_text_pointers
+	dw_const SafariZoneCenterRangerText0,         TEXT_SAFARIZONECENTER_RANGER
+	dw_const SafariZoneCenterTrainerText0,        TEXT_SAFARIZONECENTER_ROCKER
+	dw_const SafariZoneCenterTrainerText1,        TEXT_SAFARIZONECENTER_ENGINEER
+	dw_const SafariZoneCenterTrainerText2,        TEXT_SAFARIZONECENTER_JUGGLER
+	dw_const SafariZoneCenterTrainerText3,        TEXT_SAFARIZONECENTER_POKEMANIAC
+	dw_const PickUpItemText,                      TEXT_SAFARIZONECENTER_NUGGET
+	dw_const SafariZoneCenterRestHouseSignText,   TEXT_SAFARIZONECENTER_REST_HOUSE_SIGN
+	dw_const SafariZoneCenterTrainerTipsSignText, TEXT_SAFARIZONECENTER_TRAINER_TIPS_SIGN
 
 RangerPostBattleCenter:
 	SetEvent EVENT_BEAT_SAFARI_ZONE_CENTER_RANGER_0
 	jpfar RangerPostBattle
 
-SafariZoneCenterText2:
-	text_far _SafariZoneCenterText2
+SafariZoneCenterRestHouseSignText:
+	text_far _SafariZoneCenterRestHouseSignText
 	text_end
 
-SafariZoneCenterText3:
+SafariZoneCenterTrainerTipsSignText:
 	text_asm
 	ld a, [wSafariType]
 	cp SAFARI_TYPE_RANGER_HUNT
@@ -52,7 +53,7 @@ SafariZoneCenterText3:
 	rst TextScriptEnd
 
 SafariZoneCenterText3Default:
-	text_far _SafariZoneCenterText3
+	text_far _SafariZoneCenterTrainerTipsSignText
 	text_end
 
 SafariZoneCenterText3RangerHunt:

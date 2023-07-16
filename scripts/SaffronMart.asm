@@ -2,10 +2,11 @@ SaffronMart_Script:
 	jp EnableAutoTextBoxDrawing
 
 SaffronMart_TextPointers:
-	dw SaffronCashierText
-	dw SaffronMartText2
-	dw SaffronMartText3
-	dw SaffronMartTMKid
+	def_text_pointers
+	dw_const SaffronMartClerkText,        TEXT_SAFFRONMART_CLERK
+	dw_const SaffronMartSuperNerdText,    TEXT_SAFFRONMART_SUPER_NERD
+	dw_const SaffronMartCooltrainerFText, TEXT_SAFFRONMART_COOLTRAINER_F
+	dw_const SaffronMartTMKid,            TEXT_SAFFRONMART_TM_KID
 
 SaffronMartTMKid: ; PureRGBnote: ADDED: new NPC who will sell TMs
 	text_asm
@@ -37,12 +38,12 @@ TMKidQuick6::
 	text_far _TMKidQuick
 	text_end
 
-SaffronMartText2:
-	text_far _SaffronMartText2
+SaffronMartSuperNerdText:
+	text_far _SaffronMartSuperNerdText
 	text_end
 
-SaffronMartText3:
-	text_far _SaffronMartText3
+SaffronMartCooltrainerFText:
+	text_far _SaffronMartCooltrainerFText
 	text_end
 
 INCLUDE "data/items/marts/saffron.asm"

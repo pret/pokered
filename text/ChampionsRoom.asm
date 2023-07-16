@@ -1,4 +1,4 @@
-_GaryChampionIntroText::
+_ChampionsRoomRivalIntroText::
 	text "<RIVAL>: Hey!"
 
 	para "I was looking"
@@ -35,7 +35,7 @@ _GaryChampionIntroText::
 	cont "in the world!"
 	done
 
-_GaryDefeatedText::
+_RivalDefeatedText::
 	text "NO!"
 	line "That can't be!"
 	cont "You beat my best!"
@@ -49,7 +49,7 @@ _GaryDefeatedText::
 	cont "It's not fair!"
 	prompt
 
-_GaryVictoryText::
+_RivalVictoryText::
 	text "Hahaha!"
 	line "I won, I won!"
 
@@ -65,7 +65,7 @@ _GaryVictoryText::
 	line "Hahaha!"
 	prompt
 
-_GaryText_76103::
+_ChampionsRoomRivalAfterBattleText::
 	text "Why?"
 	line "Why did I lose?"
 
@@ -81,11 +81,11 @@ _GaryText_76103::
 	line "like to admit it."
 	done
 
-_GaryText2::
+_ChampionsRoomOakText::
 	text "OAK: <PLAYER>!"
 	done
 
-_GaryText_76120::
+_ChampionsRoomOakCongratulatesPlayerText::
 	text "OAK: So, you won!"
 	line "Congratulations!"
 	cont "You're the new"
@@ -103,7 +103,7 @@ _GaryText_76120::
 	line "come of age!"
 	done
 
-_GaryText_76125::
+_ChampionsRoomOakDisappointedWithRivalText::
 	text "OAK: <RIVAL>! I'm"
 	line "disappointed!"
 
@@ -129,7 +129,7 @@ _GaryText_76125::
 	cont "a champ again!"
 	done
 
-_GaryText_7612a::
+_ChampionsRoomOakComeWithMeText::
 	text "OAK: <PLAYER>!"
 
 	para "You understand"

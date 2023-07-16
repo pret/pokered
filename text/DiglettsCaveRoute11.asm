@@ -1,4 +1,4 @@
-_DiglettsCaveEntRoute11Text1::
+_DiglettsCaveRoute11GamblerText::
 	text "What a surprise!"
 	line "DIGLETTs dug this"
 	cont "long tunnel!"

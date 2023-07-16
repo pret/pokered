@@ -1,4 +1,4 @@
-_CeladonMart2Text3::
+_CeladonMart2FMiddleAgedManText::
 	text "SUPER REPEL keeps"
 	line "weak #MON at"
 	cont "bay..."
@@ -7,13 +7,13 @@ _CeladonMart2Text3::
 	line "powerful REPEL!"
 	done
 
-_CeladonMart2Text4::
+_CeladonMart2FGirlText::
 	text "For long outings,"
 	line "you should buy"
 	cont "REVIVE."
 	done
 
-_CeladonMart2Text5::
+_CeladonMart2FCurrentFloorSignText::
 	text "Top Grade Items"
 	line "for Trainers!"
 
