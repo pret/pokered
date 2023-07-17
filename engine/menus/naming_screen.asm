@@ -327,7 +327,7 @@ DisplayNamingScreen:
 LoadEDTile:
 	ld de, ED_Tile
 	ld hl, vFont tile $70
-	ld bc, BANK(ED_Tile), (ED_TileEnd - ED_Tile) / $8
+	lb bc, BANK(ED_Tile), (ED_TileEnd - ED_Tile) / $8
 	jp CopyVideoDataDouble
 
 ED_Tile:
