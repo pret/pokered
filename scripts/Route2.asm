@@ -34,9 +34,10 @@ Route2ReplaceCutTiles:
 	jpfar ReplaceMultipleTileBlocksNoRedraw
 
 Route2_ScriptPointers:
-	dw CheckFightingMapTrainers
-	dw DisplayEnemyTrainerTextAndStartBattle
-	dw EndTrainerBattle
+	def_script_pointers
+	dw_const CheckFightingMapTrainers,              SCRIPT_ROUTE2_DEFAULT
+	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_ROUTE2_START_BATTLE
+	dw_const EndTrainerBattle,                      SCRIPT_ROUTE2_END_BATTLE
 
 Route2_TextPointers:
 	def_text_pointers

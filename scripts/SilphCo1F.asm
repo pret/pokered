@@ -10,9 +10,10 @@ SilphCo1F_Script:
 	ret
 
 SilphCo1F_ScriptPointers:
-	dw CheckFightingMapTrainers
-	dw DisplayEnemyTrainerTextAndStartBattle
-	dw EndTrainerBattle
+	def_script_pointers
+	dw_const CheckFightingMapTrainers,              SCRIPT_SILPHCO1F_DEFAULT
+	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_SILPHCO1F_START_BATTLE
+	dw_const EndTrainerBattle,                      SCRIPT_SILPHCO1F_END_BATTLE
 
 SilphCo1F_TextPointers:
 	def_text_pointers

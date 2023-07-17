@@ -10,9 +10,10 @@ UndergroundPathWestEast_Script:
 	ret
 
 UndergroundPathWestEast_ScriptPointers:
-	dw CheckFightingMapTrainers
-	dw DisplayEnemyTrainerTextAndStartBattle
-	dw EndTrainerBattle
+	def_script_pointers
+	dw_const CheckFightingMapTrainers,              SCRIPT_UNDERGROUNDPATHWESTEAST_DEFAULT
+	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_UNDERGROUNDPATHWESTEAST_START_BATTLE
+	dw_const EndTrainerBattle,                      SCRIPT_UNDERGROUNDPATHWESTEAST_END_BATTLE
 
 UndergroundPathWestEast_TextPointers:
 	def_text_pointers

@@ -9,9 +9,10 @@ Route5_Script:
 	ret
 
 Route5_ScriptPointers:
-	dw CheckFightingMapTrainers
-	dw DisplayEnemyTrainerTextAndStartBattle
-	dw EndTrainerBattle
+	def_script_pointers
+	dw_const CheckFightingMapTrainers,              SCRIPT_ROUTE5_DEFAULT
+	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_ROUTE5_START_BATTLE
+	dw_const EndTrainerBattle,                      SCRIPT_ROUTE5_END_BATTLE
 
 Route5_TextPointers:
 	def_text_pointers

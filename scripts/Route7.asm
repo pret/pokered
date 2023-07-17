@@ -10,9 +10,10 @@ Route7_Script:
 	ret
 
 Route7_ScriptPointers:
-	dw CheckFightingMapTrainers
-	dw DisplayEnemyTrainerTextAndStartBattle
-	dw EndTrainerBattle
+	def_script_pointers
+	dw_const CheckFightingMapTrainers,              SCRIPT_ROUTE7_DEFAULT
+	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_ROUTE7_START_BATTLE
+	dw_const EndTrainerBattle,                      SCRIPT_ROUTE7_END_BATTLE
 
 Route7_TextPointers:
 	def_text_pointers

@@ -43,9 +43,10 @@ VermilionDock_Script:
 	ret
 
 VermilionDock_ScriptPointers:
-	dw CheckFightingMapTrainers
-	dw DisplayEnemyTrainerTextAndStartBattle
-	dw EndTrainerBattle
+	def_script_pointers
+	dw_const CheckFightingMapTrainers,              SCRIPT_VERMILIONDOCK_DEFAULT
+	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_VERMILIONDOCK_START_BATTLE
+	dw_const EndTrainerBattle,                      SCRIPT_VERMILIONDOCK_END_BATTLE
 
 VermilionDockSSAnneLeavesScript:
 ;;;;;;;;;; PureRGBnote: ADDED: the ship will return so don't ever run the "ship leaves" script if we're in that state

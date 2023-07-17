@@ -10,10 +10,11 @@ SafariZoneEast_Script:
 	ret
 
 SafariZoneEast_ScriptPointers:
-	dw CheckFightingMapTrainers
-	dw DisplayEnemyTrainerTextAndStartBattle
-	dw EndTrainerBattle
-	dw RangerPostBattleEast
+	def_script_pointers
+	dw_const CheckFightingMapTrainers,              SCRIPT_SAFARIZONEEAST_DEFAULT
+	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_SAFARIZONEEAST_START_BATTLE
+	dw_const EndTrainerBattle,                      SCRIPT_SAFARIZONEEAST_END_BATTLE
+	dw_const RangerPostBattleEast,                  SCRIPT_SAFARIZONEEAST_RANGER_POST_BATTLE
 
 SafariZoneEast_TextPointers:
 	def_text_pointers
@@ -79,7 +80,7 @@ SafariZoneEastRangerText0:
 	text_asm
 	ld hl, SafariZoneEastRangerHeader
 	call TalkToTrainer
-	ld a, 3
+	ld a, SCRIPT_SAFARIZONEEAST_RANGER_POST_BATTLE
 	ld [wCurMapScript], a 
 	rst TextScriptEnd
 
