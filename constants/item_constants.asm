@@ -13,7 +13,7 @@
 	const POKE_BALL     ; $04
 	const TOWN_MAP      ; $05
 	const BICYCLE       ; $06
-	const SURFBOARD     ; $07
+	const SURF_ITEM     ; $07
 	const SAFARI_BALL   ; $08
 	const POKEDEX       ; $09
 	const MOON_STONE    ; $0A
@@ -52,13 +52,13 @@ DEF SAFARI_ROCK EQU $16 ; overload
 	const DOME_FOSSIL   ; $29
 	const HELIX_FOSSIL  ; $2A
 	const SECRET_KEY    ; $2B
-	const UNUSED_ITEM   ; $2C "?????"
+	const DUMMY_ITEM    ; $2C ; unused
 	const BIKE_VOUCHER  ; $2D
 	const X_ACCURACY    ; $2E
 	const LEAF_STONE    ; $2F
 	const CARD_KEY      ; $30
 	const NUGGET        ; $31
-	const PP_UP_2       ; $32
+	const PP_UP_2       ; $32 ; unused, dummy
 	const POKE_DOLL     ; $33
 	const FULL_HEAL     ; $34
 	const REVIVE        ; $35

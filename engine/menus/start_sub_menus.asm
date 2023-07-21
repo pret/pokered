@@ -165,7 +165,7 @@ StartMenu_Pokemon::
 	bit 1, [hl]
 	res 1, [hl]
 	jp z, .loop
-	ld a, SURFBOARD
+	ld a, SURF_ITEM
 	ld [wcf91], a
 	ld [wPseudoItemID], a
 	call UseItem
