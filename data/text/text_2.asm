@@ -912,7 +912,7 @@ _TrainerAboutToUseText::
 	text_ram wTrainerName
 	text " is"
 	line "about to use"
-	cont"@"
+	cont "@"
 	text_ram wEnemyMonNick
 	text "!"
 
