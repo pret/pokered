@@ -27,6 +27,7 @@ UsedCut:
 
 .canCut
 	ld [wCutTile], a
+	callfar CheckSetCutEvents
 	ld a, 1
 	ld [wActionResultOrTookBattleTurn], a ; used cut
 	ld a, [wWhichPokemon]

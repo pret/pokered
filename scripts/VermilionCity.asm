@@ -8,17 +8,25 @@ VermilionCity_Script:
 	pop hl
 	bit 5, [hl]
 	res 5, [hl]
-	call nz, .setFirstLockTrashCanIndex
+	call nz, .setFirstLockTrashCanIndexAndCheckRemoveTree
 	ld hl, VermilionCity_ScriptPointers
 	ld a, [wVermilionCityCurScript]
 	jp CallFunctionInTable
-
-.setFirstLockTrashCanIndex
+.setFirstLockTrashCanIndexAndCheckRemoveTree
+	ld de, VermilionCutAlcove
+	callfar FarArePlayerCoordsInRange
+	; if we're in the specific area where we can get trapped without CUT, remove the tree on map load.
+	call c, .removeTree
 	call Random
 	ldh a, [hRandomSub]
 	and $e
 	ld [wFirstLockTrashCanIndex], a
 	ret
+.removeTree
+	lb bc, 9, 7
+	ld a, $4C
+	ld [wNewTileBlockID], a
+	predef_jump ReplaceTileBlock
 
 VermilionCityLeftSSAnneCallbackScript:
 	CheckEventHL EVENT_SS_ANNE_LEFT

@@ -167,10 +167,16 @@ TryingToLearn:
 	add hl, bc
 	ld a, [hl]
 	push af
+	push bc
+	push hl
+	push af
 	cp STRENGTH ; PureRGBnote: FIXED: if we are allowed to forget HM moves, strength needs to be turned off when we forget it
 	call z, ResetStrengthOverworldBit
+	pop af
 	cp SURF ; PureRGBnote: FIXED: if we are allowed to forget HM moves, surf needs to be turned off when we forget it
 	call z, ResetSurfOverworldBit
+	pop hl
+	pop bc
 	;push bc   ; PureRGBnote: FIXED: moves are never considered HMs and can always be deleted if desired
 	;call IsMoveHM
 	;pop bc
@@ -197,17 +203,30 @@ TryingToLearn:
 	ret
 
 ResetStrengthOverworldBit:
-	push af ; preserve the move ID so we can check surf next
-	ld a, [wd728]
-	res 0, a
-	ld [wd728], a
-	pop af
+	ld d, STRENGTH
+	callfar IsMoveInParty
+	ld a, d ; how many pokemon with strength are in current party
+	cp 2
+	ret nc ; don't clear the bit if another pokemon has strength still
+	ld hl, wd728
+	res 0, [hl]
 	ret
 
 ResetSurfOverworldBit:
-	ld a, [wd728]
-	res 2, a
-	ld [wd728], a
+	; if we're currently surfing, don't clear the autosurf bit, because landing on an island without surf could softlock the player
+	ld a, [wWalkBikeSurfState]
+	cp SURFING
+	ret z
+	ld d, SURF
+	callfar IsMoveInParty
+	ld a, d ; how many pokemon with surf are in current party
+	cp 2
+	ret nc ; don't clear the bit if another pokemon has surf still
+	; check if the player is on an island or map where we want to keep surf active even if deleted
+	callfar CheckInSurfRestrictedMapOrArea
+	ret c ; if so, don't clear the autosurf bit to avoid softlocks
+	ld hl, wd728
+	res 2, [hl]
 	ret
 
 LearnedMove1Text:

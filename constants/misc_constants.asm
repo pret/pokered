@@ -16,7 +16,7 @@ DEF TEXT_DELAY_SLOW    EQU %11 ; 3
 DEF TEXT_DELAY_BITS    EQU %11 ; which bits in wOptions are assigned to text speed value (first two currently)
 ;;;;;;;;;;
 
-	const_def 2
+	const_def 2 ; first two bits are the text delay options above
 	; unused bit 2
 	; unused bit 3
 	; unused bit 4
@@ -35,7 +35,7 @@ DEF PALETTES_SGB        EQU %01 ; 1
 DEF PALETTES_SGB2       EQU %10 ; 2
 DEF PALETTES_YELLOW     EQU %11 ; 3
 
-	const_def 2 ; first two bytes are the palette options above
+	const_def 2 ; first two bits are the palette options above
 	const BIT_ALT_PKMN_PALETTES ; 2
 	const BIT_AUDIO_PAN         ; 3
 	const BIT_BIKE_MUSIC        ; 4
@@ -138,3 +138,8 @@ DEF NUM_ACTIVE_PALS EQU 4
 ; wd732 flags
 DEF BIT_DEBUG_MODE EQU 1
 
+	const_def
+	const WALKING ; 0
+	const BIKING ; 1
+	const SURFING ; 2
+	

@@ -1,11 +1,41 @@
 Route8_Script:
 	call EnableAutoTextBoxDrawing
+	call Route8CheckHideCutTrees
 	ld hl, Route8TrainerHeaders
 	ld de, Route8_ScriptPointers
 	ld a, [wRoute8CurScript]
 	call ExecuteCurMapScriptInTable
 	ld [wRoute8CurScript], a
 	ret
+
+Route8CheckHideCutTrees:
+	ld hl, wCurrentMapScriptFlags
+	bit 5, [hl] ; did we load the map from a save/warp/door/battle, etc?
+	res 5, [hl]
+	ret z
+	ld de, Route8CutAlcove
+	callfar FarArePlayerCoordsInRange
+	jr c, .removeTreeBlockers
+	; if the map is loaded outside of the alcove, reset the cut tree events
+	ResetEvent EVENT_CUT_DOWN_ROUTE8_LEFT_TREE
+	ResetEvent EVENT_CUT_DOWN_ROUTE8_RIGHT_TREE
+	ret
+.removeTreeBlockers
+	CheckEvent EVENT_CUT_DOWN_ROUTE8_LEFT_TREE
+	jr z, .rightTreeCheck
+	; if we're in the cut alcove, remove the tree
+	lb bc, 6, 14
+	ld a, $4C
+	ld [wNewTileBlockID], a
+	predef ReplaceTileBlock
+.rightTreeCheck
+	CheckEvent EVENT_CUT_DOWN_ROUTE8_RIGHT_TREE
+	ret z
+	; if we're in the cut alcove, remove the tree
+	lb bc, 5, 20
+	ld a, $4C
+	ld [wNewTileBlockID], a
+	predef_jump ReplaceTileBlock
 
 Route8_ScriptPointers:
 	def_script_pointers

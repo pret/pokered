@@ -22,6 +22,7 @@ NoResetSurfMaps:
 	db SAFARI_ZONE_WEST_REST_HOUSE
 	db SAFARI_ZONE_EAST_REST_HOUSE
 	db SAFARI_ZONE_NORTH_REST_HOUSE
+SurfRestrictedMapsOnMoveDelete:
 	db CERULEAN_CAVE_1F
 	db CERULEAN_CAVE_2F
 	db CERULEAN_CAVE_B1F
@@ -30,6 +31,7 @@ NoResetSurfMaps:
 	db SEAFOAM_ISLANDS_B2F
 	db SEAFOAM_ISLANDS_B3F
 	db SEAFOAM_ISLANDS_B4F
+	db POWER_PLANT
 	db -1
 
 CheckResetSurfStrengthFlags::
@@ -47,10 +49,17 @@ CheckResetSurfStrengthFlags::
 	bit 2, [hl]
 	ret z
 .onlyCheckSurf
+	; if we load a map while surfing (like when loading a save), don't clear the autosurf bit (avoids softlocking on islands)
+	ld a, [wWalkBikeSurfState]
+	cp SURFING
+	jr z, .skipReset2
 	ld hl, NoResetSurfMaps
 	ld de, 1
 	ld a, [wCurMap]
 	call IsInArray
+	jr c, .skipReset2
+	; in some places like islands in maps with a lot of water, we avoid resetting the surf bit to prevent softlocks on loading the map
+	call CheckInSurfRestrictedArea
 	jr c, .skipReset2
 	ld hl, wd728
 	res 2, [hl] ; reset surf bit

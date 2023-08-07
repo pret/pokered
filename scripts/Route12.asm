@@ -2,12 +2,34 @@
 
 Route12_Script:
 	call EnableAutoTextBoxDrawing
+	call Route12CheckHideCutTree
 	ld hl, Route12TrainerHeaders
 	ld de, Route12_ScriptPointers
 	ld a, [wRoute12CurScript]
 	call ExecuteCurMapScriptInTable
 	ld [wRoute12CurScript], a
 	ret
+
+Route12CheckHideCutTree:
+	ld hl, wCurrentMapScriptFlags
+	bit 5, [hl] ; did we load the map from a save/warp/door/battle, etc?
+	res 5, [hl]
+	ret z ; map wasn't just loaded
+	ld de, Route12CutAlcove1
+	callfar FarArePlayerCoordsInRange
+	lb bc, 44, 3
+	ld a, $4C
+	call c, .removeTreeBlocker
+	ld de, Route12CutAlcove2
+	callfar FarArePlayerCoordsInRange
+	lb bc, 49, 4
+	ld a, $6C
+	call c, .removeTreeBlocker
+	ret
+.removeTreeBlocker
+	; if we're in the cut alcove, remove the tree
+	ld [wNewTileBlockID], a
+	predef_jump ReplaceTileBlock
 
 Route12ResetScripts:
 	xor a

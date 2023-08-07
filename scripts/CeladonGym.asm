@@ -1,11 +1,52 @@
 CeladonGym_Script:
 	call EnableAutoTextBoxDrawing
+	call CeladonGymCheckHideCutTrees
 	ld hl, CeladonGymTrainerHeaders
 	ld de, CeladonGym_ScriptPointers
 	ld a, [wCeladonGymCurScript]
 	call ExecuteCurMapScriptInTable
 	ld [wCeladonGymCurScript], a
 	ret
+
+CeladonGymCheckHideCutTrees:
+	ld hl, wCurrentMapScriptFlags
+	bit 5, [hl] ; did we load the map from a save/warp/door/battle, etc?
+	res 5, [hl]
+	ret z
+	ld de, CeladonGymCutAlcove
+	callfar FarArePlayerCoordsInRange
+	jr c, .removeTreeBlockers
+	; if the map is loaded outside of the alcove, reset the cut tree events
+	ResetEvent EVENT_CUT_DOWN_CELADON_GYM_LEFT_TREE
+	ResetEvent EVENT_CUT_DOWN_CELADON_GYM_BOTTOM_TREE
+	ResetEvent EVENT_CUT_DOWN_CELADON_GYM_RIGHT_TREE
+	ret
+.removeTreeBlockers
+	CheckEvent EVENT_CUT_DOWN_CELADON_GYM_LEFT_TREE
+	jr z, .bottomTreeCheck
+	lb bc, 2, 1
+	ld a, $35
+	call .replaceTileBlock
+.bottomTreeCheck
+	CheckEvent EVENT_CUT_DOWN_CELADON_GYM_BOTTOM_TREE
+	jr z, .rightTreeCheck
+	lb bc, 3, 2
+	ld a, $35
+	call .replaceTileBlock
+.rightTreeCheck
+	CheckEvent EVENT_CUT_DOWN_CELADON_GYM_RIGHT_TREE
+	jr z, .done
+	lb bc, 2, 3
+	ld a, $36
+	call .replaceTileBlock
+.done
+	; doing the redraw at the end will improve performance if we need to replace multiple tree tileblocks.
+	; since we're standing in the cut alcove to reach this code, all the trees are on screen and a redraw will be necessary
+	jpfar RedrawMapView
+.replaceTileBlock
+	ld [wNewTileBlockID], a
+	predef_jump ReplaceTileBlockNoRedraw
+	
 
 CeladonGymResetScripts:
 	xor a ; SCRIPT_CELADONGYM_DEFAULT
@@ -22,6 +63,9 @@ CeladonGym_ScriptPointers:
 	dw_const CeladonGymErikaPostBattleScript,       SCRIPT_CELADONGYM_ERIKA_POST_BATTLE
 
 CeladonGymErikaPostBattleScript:
+	ld hl, wCurrentMapScriptFlags
+	res 3, [hl]
+	call GBFadeInFromWhite ; PureRGBnote: ADDED: since trainer instantly talks to us after battle we need to fade back in here
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, CeladonGymResetScripts

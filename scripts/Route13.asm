@@ -1,11 +1,28 @@
 Route13_Script:
 	call EnableAutoTextBoxDrawing
+	call Route13CheckHideCutTree
 	ld hl, Route13TrainerHeaders
 	ld de, Route13_ScriptPointers
 	ld a, [wRoute13CurScript]
 	call ExecuteCurMapScriptInTable
 	ld [wRoute13CurScript], a
 	ret
+
+Route13CheckHideCutTree:
+	ld hl, wCurrentMapScriptFlags
+	bit 5, [hl] ; did we load the map from a save/warp/door/battle, etc?
+	res 5, [hl]
+	ret z ; map wasn't just loaded
+	ld de, Route13CutAlcove
+	callfar FarArePlayerCoordsInRange
+	call c, .removeTreeBlocker
+	ret
+.removeTreeBlocker
+	; if we're in the cut alcove, remove the tree
+	lb bc, 2, 17
+	ld a, $6F
+	ld [wNewTileBlockID], a
+	predef_jump ReplaceTileBlock
 
 Route13_ScriptPointers:
 	def_script_pointers

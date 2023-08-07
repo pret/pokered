@@ -1,5 +1,25 @@
 CeladonCity_Script:
-	jp EnableAutoTextBoxDrawing
+	call EnableAutoTextBoxDrawing
+	jp CeladonCityCheckHideCutTree
+
+CeladonCityCheckHideCutTree:
+	ld hl, wCurrentMapScriptFlags
+	bit 5, [hl] ; did we load the map from a save/warp/door/battle, etc?
+	res 5, [hl]
+	ret z ; map wasn't just loaded
+	ld de, CeladonCutAlcove1
+	callfar FarArePlayerCoordsInRange
+	call c, .removeTreeBlocker
+	ld de, CeladonCutAlcove2
+	callfar FarArePlayerCoordsInRange
+	call c, .removeTreeBlocker
+	ret
+.removeTreeBlocker
+	; if we're in the cut alcove, remove the tree
+	lb bc, 16, 17
+	ld a, $6D
+	ld [wNewTileBlockID], a
+	predef_jump ReplaceTileBlock
 
 CeladonCity_TextPointers:
 	def_text_pointers

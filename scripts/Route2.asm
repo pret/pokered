@@ -23,9 +23,19 @@ Route2ReplaceCutTiles:
 	ret
 .removeAddCutTiles
 	CheckEvent EVENT_DELETED_ROUTE2_TREES
-	ret z
+	jr z, .checkRemoveTreeBlocker
 	ld de, Route2TileBlockReplacements
 	jpfar ReplaceMultipleTileBlocks
+.checkRemoveTreeBlocker
+	; if we're behind the middle tree and require cut to get back to other areas, remove the middle tree to prevent softlocks
+	ld de, Route2CutAlcove
+	callfar FarArePlayerCoordsInRange
+	ret nc
+	; if we're below the center tree on route 2 when loading the map, remove it so we can't get stuck
+	lb bc, 11, 7
+	ld a, $6D
+	ld [wNewTileBlockID], a
+	predef_jump ReplaceTileBlock
 .removeAddCutTilesNoRedraw
 	CheckEvent EVENT_DELETED_ROUTE2_TREES
 	ret z

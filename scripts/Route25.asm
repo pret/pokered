@@ -1,5 +1,6 @@
 Route25_Script:
 	call Route25ShowHideBillScript
+	call Route25CheckHideCutTree
 	call EnableAutoTextBoxDrawing
 	ld hl, Route25TrainerHeaders
 	ld de, Route25_ScriptPointers
@@ -7,6 +8,25 @@ Route25_Script:
 	call ExecuteCurMapScriptInTable
 	ld [wRoute25CurScript], a
 	ret
+
+Route25CheckHideCutTree:
+	ld hl, wCurrentMapScriptFlags
+	bit 5, [hl] ; did we load the map from a save/warp/door/battle, etc?
+	res 5, [hl]
+	ret z ; map wasn't just loaded
+	ld a, [wSprite03StateData2MapY] ; guy who can move to not block us leaving the cut alcove
+	cp 12 ; guy is blocking us if his Y value is lower than this
+	ret nc ; if he's not blocking us, don't replace the cut tree
+	ld de, Route25CutAlcove
+	callfar FarArePlayerCoordsInRange
+	call c, .removeTreeBlocker
+	ret
+.removeTreeBlocker
+	; if we're in the cut alcove, remove the tree
+	lb bc, 2, 13
+	ld a, $6E
+	ld [wNewTileBlockID], a
+	predef_jump ReplaceTileBlock
 
 Route25ShowHideBillScript:
 	ld hl, wCurrentMapScriptFlags
