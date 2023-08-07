@@ -2674,6 +2674,7 @@ ItemUseTMHM:
 .checkIfAlreadyLearnedMove
 	callfar CheckIfMoveIsKnown ; check if the pokemon already knows the move
 	jr c, .chooseMon
+	SetEvent FLAG_LEARNING_TM_MOVE
 	predef LearnMove ; teach move
 	pop af
 	ld [wcf91], a

@@ -12,7 +12,8 @@
 	const EVENT_SAW_GOT_ON_BIKE_TEXT
 	const EVENT_SAW_GOT_OFF_BIKE_TEXT
 	const EVENT_HIDE_CHANGE_BOX_SAVE_MSG
-	const_skip 11
+	const EVENT_HIDE_ALREADY_HAS_FOUR_MOVES_MSG
+	const_skip 10
 	const EVENT_MET_DAD
 	const EVENT_CALLED_DAD_WAITING
 	const EVENT_GOT_TOWN_MAP
@@ -870,6 +871,11 @@
 	const EVENT_BEAT_PROF_OAK
 	const EVENT_BEAT_MEWTWO
 	const EVENT_BEAT_PROF_OAK_ONCE
+
+; arbitrary flags
+	const_next $8D0
+DEF FLAG_LEARNING_TM_MOVE EQU const_value
+	const FLAG_ARBITRARY_1 ; flag that can be used for many things
 
 ; Indigo Plateau events
 	const_next $8E0

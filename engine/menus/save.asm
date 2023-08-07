@@ -356,7 +356,7 @@ ChangeBox::
 	ld hl, WhenYouChangeBoxText
 	rst _PrintText
 
-	ld hl, YesNoSkip
+	ld hl, YesNoHide
 	ld a, l
 	ld [wListPointer], a
 	ld a, h

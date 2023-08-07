@@ -104,23 +104,35 @@ ThreeOptionMenu::
 	hlcoord 6, 6 ; where the list will be drawn at
 	jp DoneDrawFunc
 
-ThreeOptionMenuSmall::
-	ld a, 2 ; 4-item menu (0 counts)
+InitThreeOptionMenuSmall::
+	ld [wTopMenuItemY], a
+	ld a, 2 ; 3-item menu (0 counts)
 	ld [wListCount], a
 	ld [wMaxMenuItem], a
-
-	ld a, 6
-	ld [wTopMenuItemY], a
 	ld a, 12
 	ld [wTopMenuItemX], a
-
-	hlcoord 11, 5
 	ld b, 5 ; height
 	ld c, 7 ; width
+	ret
+
+ThreeOptionMenuSmall::
+	ld a, 6
+	call InitThreeOptionMenuSmall
+	hlcoord 11, 5
 	call TextBoxBorder
 
 	hlcoord 13, 6 ; where the list will be drawn at
 	jp DoneDrawFunc
+
+ThreeOptionMenuSmallLower::
+	ld a, 8
+	call InitThreeOptionMenuSmall
+	hlcoord 11, 7
+	call TextBoxBorder
+
+	hlcoord 13, 8 ; where the list will be drawn at
+	jp DoneDrawFunc
+
 
 FourOptionMenuBig::
 	ld c, 14 ; width
@@ -226,11 +238,17 @@ StatTextList::
 	next "SPEED"
 	next "SPECIAL@"
 	
-YesNoSkip::
+YesNoHide::
 	dw ThreeOptionMenuSmall
 	db "YES"
 	next "NO"
-	next "SKIP@"
+	next "HIDE@"
+
+YesNoHideTM::
+	dw ThreeOptionMenuSmallLower
+	db "YES"
+	next "NO"
+	next "HIDE@"
 
 YesNoSmall::
 	dw TwoOptionSmallMenu

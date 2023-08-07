@@ -74,6 +74,8 @@ DontAbandonLearning:
 	jp PrintLearnedMove
 
 AbandonLearning:
+	CheckEvent FLAG_LEARNING_TM_MOVE
+	jr nz, .skipText ; skip this text if learning by TM
 	ld hl, AbandonLearningText
 	rst _PrintText
 	hlcoord 14, 7
@@ -84,30 +86,56 @@ AbandonLearning:
 	ld a, [wCurrentMenuItem]
 	and a
 	jp nz, DontAbandonLearning
+.skipText
 	ld hl, DidNotLearnText
 	rst _PrintText
 	ld b, 0
+	ResetEvent FLAG_LEARNING_TM_MOVE
 	ret
 
 PrintLearnedMove:
 	ld hl, LearnedMove1Text
 	rst _PrintText
 	ld b, 1
+	ResetEvent FLAG_LEARNING_TM_MOVE
 	ret
 
 TryingToLearn:
 	push hl
+	CheckEvent FLAG_LEARNING_TM_MOVE
+	ld hl, CantLearnMoreThanFourMoves
+	jr nz, .skipTryingToLearnText
 	ld hl, TryingToLearnText
 	rst _PrintText
-	hlcoord 14, 7
-	lb bc, 8, 15
-	ld a, TWO_OPTION_MENU
-	ld [wTextBoxID], a
-	call DisplayTextBoxID ; yes/no menu
-	pop hl
+	ld hl, ButCantLearnMoreThanFourMoves
+
+.skipTryingToLearnText
+
+	CheckEvent EVENT_HIDE_ALREADY_HAS_FOUR_MOVES_MSG
+	jr nz, .skipFourMovesQuestion
+
+	rst _PrintText
+	ld hl, YesNoHideTM
+	ld b, A_BUTTON | B_BUTTON
+	call DisplayMultiChoiceTextBox
+	jr nz, .no ; if B button was pressed assume "no"
 	ld a, [wCurrentMenuItem]
-	rra
-	ret c
+	and a
+	jr z, .yes ; jump if yes was chosen
+	cp 1
+	jr z, .no ; return if no was chosen
+
+	SetEvent EVENT_HIDE_ALREADY_HAS_FOUR_MOVES_MSG ; set this flag if SKIP was chosen
+	ld hl, SkippedForeverText2
+	rst _PrintText
+	jr .yes
+.no
+	pop hl
+	scf
+	ret
+.yes
+.skipFourMovesQuestion
+	pop hl
 	ld bc, -NUM_MOVES
 	add hl, bc
 	push hl
@@ -278,6 +306,17 @@ PoofText:
 	text_pause
 ForgotAndText:
 	text_far _ForgotAndText
+	text_end
+
+ButCantLearnMoreThanFourMoves:
+	text_far _ButCantLearnMoreThanFourMoves
+	; fall through
+CantLearnMoreThanFourMoves:
+	text_far _CantLearnMoreThanFourMoves
+	text_end
+
+SkippedForeverText2:
+	text_far _SkippedForever
 	text_end
 
 ;HMCantDeleteText: ; PureRGBnote: FIXED: moves are never considered HMs and can always be deleted if desired

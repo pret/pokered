@@ -121,8 +121,14 @@ _TryingToLearnText::
 	cont "@"
 	text_ram wStringBuffer
 	text "!"
+	prompt
 
-	para "But, @"
+_ButCantLearnMoreThanFourMoves::
+	text "But, @"
+	text_end
+
+_CantLearnMoreThanFourMoves::
+	text "@"
 	text_ram wLearnMoveMonName
 	text_start
 	line "can't learn more"
