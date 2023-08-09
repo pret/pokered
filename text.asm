@@ -133,6 +133,7 @@ INCLUDE "text/Route21.asm"
 INCLUDE "text/Route22.asm"
 INCLUDE "text/Route23.asm"
 INCLUDE "text/Route24.asm"
+INCLUDE "text/ViridianSchoolHouseQuiz.asm"
 
 
 SECTION "Text 6", ROMX
@@ -187,6 +188,8 @@ INCLUDE "text/VermilionPokecenter.asm"
 INCLUDE "text/PokemonFanClub.asm"
 INCLUDE "text/VermilionMart.asm"
 INCLUDE "text/VermilionGym.asm"
+
+INCLUDE "text/PokemonTowerB1F.asm"
 
 
 SECTION "Text 8", ROMX
@@ -275,6 +278,10 @@ SECTION "Text 11", ROMX
 
 INCLUDE "data/text/text_7.asm"
 INCLUDE "text/CeruleanRocketHouse.asm"
+INCLUDE "text/CeladonMart1FPhoneCalls.asm"
+INCLUDE "text/PalletPhoneResultEvents.asm"
+INCLUDE "text/BillsGarden.asm"
+INCLUDE "text/SecretLab.asm"
 
 
 SECTION "Pokédex Text", ROMX
@@ -285,3 +292,11 @@ INCLUDE "data/pokemon/dex_text.asm"
 SECTION "Move Names", ROMX
 
 INCLUDE "data/moves/names.asm"
+
+SECTION "Movedex Text", ROMX
+
+INCLUDE "data/moves/movedex_text.asm"
+
+SECTION "Movedex Text 2", ROMX
+
+INCLUDE "data/moves/movedex_text2.asm"

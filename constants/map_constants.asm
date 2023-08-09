@@ -54,7 +54,7 @@ DEF FIRST_ROUTE_MAP EQU const_value
 	map_const ROUTE_22,                      20,  9 ; $21
 	map_const ROUTE_23,                      10, 72 ; $22
 	map_const ROUTE_24,                      10, 18 ; $23
-	map_const ROUTE_25,                      30,  9 ; $24
+	map_const ROUTE_25,                      30, 10 ; $24
 DEF FIRST_INDOOR_MAP EQU const_value
 	map_const REDS_HOUSE_1F,                  4,  4 ; $25
 	map_const REDS_HOUSE_2F,                  4,  4 ; $26
@@ -128,10 +128,10 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const CERULEAN_ROCKET_HOUSE_1F,       3,  3 ; $6A ; PureRGBnote: ADDED: New map
 	map_const CERULEAN_ROCKET_HOUSE_B1F,      8,  8 ; $6B ; PureRGBnote: ADDED: New map
 	map_const VICTORY_ROAD_1F,               10,  9 ; $6C
-	map_const UNUSED_MAP_6D,                  0,  0 ; $6D
-	map_const UNUSED_MAP_6E,                  0,  0 ; $6E
-	map_const UNUSED_MAP_6F,                  0,  0 ; $6F
-	map_const UNUSED_MAP_70,                  0,  0 ; $70
+	map_const VIRIDIAN_SCHOOL_HOUSE_B1F,      9,  6 ; $6D ; PureRGBnote: ADDED: New map
+	map_const BILLS_GARDEN,                  11, 10 ; $6E ; PureRGBnote: ADDED: New map
+	map_const SECRET_LAB,                     5, 22 ; $6F ; PureRGBnote: ADDED: New map
+	map_const POKEMON_TOWER_B1F,             10,  9 ; $70 ; PureRGBnote: ADDED: New map
 	map_const LANCES_ROOM,                   13, 13 ; $71
 	map_const UNUSED_MAP_72,                  0,  0 ; $72
 	map_const UNUSED_MAP_73,                  0,  0 ; $73
@@ -145,12 +145,12 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const CELADON_MART_2F,               10,  4 ; $7B
 	map_const CELADON_MART_3F,               10,  4 ; $7C
 	map_const CELADON_MART_4F,               10,  4 ; $7D
-	map_const CELADON_MART_ROOF,             10,  4 ; $7E
+	map_const CELADON_MART_ROOF,             10,  6 ; $7E
 	map_const CELADON_MART_ELEVATOR,          2,  2 ; $7F
 	map_const CELADON_MANSION_1F,             4,  6 ; $80
 	map_const CELADON_MANSION_2F,             4,  6 ; $81
 	map_const CELADON_MANSION_3F,             4,  6 ; $82
-	map_const CELADON_MANSION_ROOF,           4,  6 ; $83
+	map_const CELADON_MANSION_ROOF,           4,  8 ; $83
 	map_const CELADON_MANSION_ROOF_HOUSE,     4,  4 ; $84
 	map_const CELADON_POKECENTER,             7,  4 ; $85
 	map_const CELADON_GYM,                    5,  9 ; $86

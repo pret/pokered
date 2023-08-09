@@ -1,4 +1,4 @@
-_BikeShopText_1d810::
+_BikeShopClerkWelcomeText::
 	text "Hi! Welcome to"
 	line "our BIKE SHOP."
 
@@ -6,7 +6,7 @@ _BikeShopText_1d810::
 	line "the BIKE for you!"
 	prompt
 
-_BikeShopText_1d815::
+_BikeShopClerkDoYouLikeItText::
 	text "It's a cool BIKE!"
 	line "Do you want it?"
 	done
@@ -16,7 +16,7 @@ _BikeShopCantAffordText::
 	line "afford it!"
 	prompt
 
-_BikeShopText_1d81f::
+_BikeShopClerkOhThatsAVoucherText::
 	text "Oh, that's..."
 
 	para "A BIKE VOUCHER!"
@@ -24,7 +24,7 @@ _BikeShopText_1d81f::
 	para "OK! Here you go!"
 	prompt
 
-_BikeShopText_1d824::
+_BikeShopExchangedVoucherText::
 	text "<PLAYER> exchanged"
 	line "the BIKE VOUCHER"
 	cont "for a BICYCLE.@"
@@ -35,7 +35,7 @@ _BikeShopComeAgainText::
 	line "some time!"
 	done
 
-_BikeShopText_1d82f::
+_BikeShopClerkHowDoYouLikeYourBicycleText::
 	text "How do you like"
 	line "your new BICYCLE?"
 
@@ -44,12 +44,12 @@ _BikeShopText_1d82f::
 	cont "and in caves!"
 	done
 
-_BikeShopText_1d834::
+_BikeShopBagFullText::
 	text "You better make"
 	line "room for this!"
 	done
 
-_BikeShopText_1d843::
+_BikeShopMiddleAgedWomanText::
 	text "A plain city BIKE"
 	line "is good enough"
 	cont "for me!"
@@ -59,13 +59,13 @@ _BikeShopText_1d843::
 	cont "on an MTB!"
 	done
 
-_BikeShopText_1d85c::
+_BikeShopYoungsterTheseBikesAreExpensiveText::
 	text "These BIKEs are"
 	line "cool, but they're"
 	cont "way expensive!"
 	done
 
-_BikeShopText_1d861::
+_BikeShopYoungsterCoolBikeText::
 	text "Wow. Your BIKE is"
 	line "really cool!"
 	done

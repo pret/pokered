@@ -7,19 +7,23 @@ CeladonHotel_Script:
 	ld [wCeladonHotelCurScript], a
 	ret
 
-CeladonHotel_ScriptPointers:
-	dw CheckFightingMapTrainers
-	dw DisplayEnemyTrainerTextAndStartBattle
-	dw EndTrainerBattle
-	dw CeladonLaprasGuyLeaves
 
+CeladonHotel_ScriptPointers:
+	def_script_pointers
+	dw_const CheckFightingMapTrainers,              SCRIPT_CELADONHOTEL_DEFAULT
+	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_CELADONHOTEL_START_BATTLE
+	dw_const EndTrainerBattle,                      SCRIPT_CELADONHOTEL_END_BATTLE
+	dw_const CeladonLaprasGuyLeaves,                SCRIPT_CELADONHOTEL_LAPRAS_GUY_LEAVES
+	dw_const CeladonLaprasGuyGoesThroughDoor,       SCRIPT_CELADONHOTEL_LAPRAS_GUY_LEAVES_THROUGH_DOOR
+	dw_const CeladonLaprasGuyWaitingForLoserToMove, SCRIPT_CELADONHOTEL_LAPRAS_GUY_WAITING_FOR_LOSER_TO_MOVE
 
 CeladonHotel_TextPointers:
-	dw CeladonChannelerText
-	dw CeladonHotelText1
-	dw CeladonHotelText2
-	dw CeladonHotelText3
-	dw CeladonLaprasGuyText
+	def_text_pointers
+	dw_const CeladonChannelerText,      TEXT_CELADONHOTEL_CHANNELER
+	dw_const CeladonHotelGrannyText,    TEXT_CELADONHOTEL_GRANNY
+	dw_const CeladonHotelBeautyText,    TEXT_CELADONHOTEL_BEAUTY
+	dw_const CeladonHotelSuperNerdText, TEXT_CELADONHOTEL_SUPER_NERD
+	dw_const CeladonLaprasGuyText,      TEXT_CELADONHOTEL_LAPRAS_GUY
 
 CeladonHotelTrainerHeaders:
 	def_trainers 2
@@ -33,7 +37,7 @@ CeladonChannelerText:
 	CheckEvent EVENT_BEAT_CELADON_HOTEL_TRAINER_0
 	jr nz, .beat
 	ld hl, CeladonChannelerIntroText
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -41,20 +45,20 @@ CeladonChannelerText:
 	jr .q2
 .no1
 	ld hl, CeladonChannelerNo1
-	call PrintText
+	rst _PrintText
 	jr .done
 .q2
 	ld hl, CeladonChannelerQ2
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld hl, CeladonHotelTrainerHeader0
 	call TalkToTrainer
 	jr .done
 .beat
 	ld hl, CeladonHotelAfterBattleText1
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeladonChannelerIntroText:
 	text_far _CeladonChannelerIntro
@@ -80,16 +84,16 @@ CeladonHotelAfterBattleText1:
 	text_far _CeladonHotelAfterBattleText1
 	text_end
 
-CeladonHotelText1:
-	text_far _CeladonHotelText1
+CeladonHotelGrannyText:
+	text_far _CeladonHotelGrannyText
 	text_end
 
-CeladonHotelText2:
-	text_far _CeladonHotelText2
+CeladonHotelBeautyText:
+	text_far _CeladonHotelBeautyText
 	text_end
 
-CeladonHotelText3:
-	text_far _CeladonHotelText3
+CeladonHotelSuperNerdText:
+	text_far _CeladonHotelSuperNerdText
 	text_end
 
 ; PureRGBnote: ADDED: NPC who will give you lapras earlier once you beat rocket hideout.
@@ -100,11 +104,11 @@ CeladonLaprasGuyText:
 	CheckEventHL EVENT_BEAT_ROCKET_HIDEOUT_GIOVANNI
 	jr nz, .celadonRocketsGone
 	ld hl, CeladonLaprasGuyIntro
-	call PrintText
+	rst _PrintText
 	jr .done
 .celadonRocketsGone
 	ld hl, CeladonLaprasGuyReady
-	call PrintText
+	rst _PrintText
 	lb bc, LAPRAS, 30
 	call GivePokemon
 	jr nc, .noBoxRoom
@@ -112,31 +116,114 @@ CeladonLaprasGuyText:
 	and a
 	call z, WaitForTextScrollButtonPress
 	ld hl, CeladonHeresYourLaprasText
-	call PrintText
+	rst _PrintText
 	SetEvent EVENT_GOT_LAPRAS_EARLY
 	ld a, [wSimulatedJoypadStatesEnd]
 	and a
 	call z, WaitForTextScrollButtonPress
 	ld hl, CeladonLaprasGuyAfter
-	call PrintText
+	rst _PrintText
 	ld a, 3
 	ld [wCeladonHotelCurScript], a
 	jr .done
 .noBoxRoom
 	ld hl, CeladonLaprasGuyNoBoxRoom
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeladonLaprasGuyLeaves:
-	; fade out, set hide show flag, fade back in
-	call GBFadeOutToWhite
+	; if the guy who can walk left and right is on a specific position we have to make him get out of the way first
+	ld a, [wSprite04StateData2MapX]
+	sub 4 ; MapX is offset by 4 from actual coordinate
+	cp 4
+	ld de, CeladonLoserMovement
+	jr z, .loserinway
+	cp 5
+	ld de, CeladonLoserMovement2
+	jr z, .loserinway
+	jr .losernotinway
+.loserinway
+	ld a, 4
+	ldh [hSpriteIndexOrTextID], a
+	call MoveSprite
+	ld a, 5
+	ld [wCeladonHotelCurScript], a
+	ld [wCurMapScript], a
+	ret
+.losernotinway
+	; make the other guy stop moving
+	ld a, 4
+	ldh [hSpriteIndexOrTextID], a
+	call GetSpriteMovementByte1Pointer
+	ld a, STAY
+	ld [hl], a
+	; silph guy walks away according to where you are
+	ld a, [wXCoord]
+	cp 4
+	ld de, CeladonLaprasGuyMovement1
+	jr nz, .notLeftOfLaprasGuy
+	ld de, CeladonLaprasGuyMovement2
+.notLeftOfLaprasGuy
+	ld a, 5
+	ldh [hSpriteIndexOrTextID], a
+	call MoveSprite
+	ld a, 4
+	ld [wCeladonHotelCurScript], a
+	ld [wCurMapScript], a
+	ret
+
+CeladonLoserMovement2:
+	db NPC_MOVEMENT_LEFT
+CeladonLoserMovement:
+	db NPC_MOVEMENT_LEFT
+	db -1
+
+CeladonLaprasGuyMovement1:
+	db NPC_MOVEMENT_LEFT
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db -1
+
+CeladonLaprasGuyMovement2:
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_LEFT
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db -1
+
+CeladonLaprasGuyGoesThroughDoor:
+	; leaves through the door with a sound
+	ld a, [wd730]
+	bit 0, a
+	ret nz
+	ld a, SFX_GO_OUTSIDE
+	rst _PlaySound
 	ld a, HS_LAPRAS_GUY_CELADON
 	ld [wMissableObjectIndex], a
 	predef HideObject
-	call Delay3
-	call GBFadeInFromWhite
+	ld a, 4
+	ldh [hSpriteIndexOrTextID], a
+	call GetSpriteMovementByte1Pointer
+	ld a, WALK
+	ld [hl], a
+	call GetSpriteMovementByte2Pointer
+	ld a, LEFT_RIGHT
+	ld [hl], a
 	xor a
+	ld [wJoyIgnore], a
+	ld [wCeladonHotelCurScript], a
+	ld [wCurMapScript], a
+	ret	
+
+CeladonLaprasGuyWaitingForLoserToMove:
+	ld a, [wd730]
+	bit 0, a
+	ret nz
+	ld a, 3
 	ld [wCeladonHotelCurScript], a
 	ld [wCurMapScript], a
 	ret
@@ -150,7 +237,7 @@ CeladonLaprasGuyReady:
 	text_end
 
 CeladonHeresYourLaprasText:
-	text_far _HeresYourLaprasText
+	text_far _SilphCo7FSilphWorkerM1LaprasDescriptionText
 	text_end
 
 CeladonLaprasGuyNoBoxRoom:

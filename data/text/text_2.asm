@@ -131,11 +131,11 @@ _DexRatingText::
 	done
 
 _GymStatueText1::
-	text_ram wGymCityName
+	text_ram wStringBuffer
 	text_start
 	line "#MON GYM"
 	cont "LEADER: @"
-	text_ram wGymLeaderName
+	text_ram wcd6d
 	text_start
 
 	para "WINNING TRAINERS:"
@@ -143,11 +143,11 @@ _GymStatueText1::
 	done
 
 _GymStatueText2::
-	text_ram wGymCityName
+	text_ram wStringBuffer
 	text_start
 	line "#MON GYM"
 	cont "LEADER: @"
-	text_ram wGymLeaderName
+	text_ram wcd6d
 	text_start
 
 	para "WINNING TRAINERS:"
@@ -503,6 +503,11 @@ _TurnPageText::
 
 _ViridianSchoolNotebookText5::
 	text "GIRL: Hey! Don't"
+	line "look at my notes!@"
+	text_end
+
+_ViridianSchoolNotebookTextGus::
+	text "GUS: Hey! Don't"
 	line "look at my notes!@"
 	text_end
 
@@ -1649,7 +1654,7 @@ _OnceReleasedText::
 	text_ram wStringBuffer
 	text " is"
 	cont "gone forever. OK?"
-	done
+	prompt
 
 _MonWasReleasedText::
 	text_ram wStringBuffer
@@ -1659,6 +1664,11 @@ _MonWasReleasedText::
 	text_ram wStringBuffer
 	text "!"
 	prompt
+
+_PressStartToReleaseText::
+	text "Press START to"
+	line "confirm release.@"
+	text_end
 
 _RequireCoinCaseText::
 	text "A COIN CASE is"

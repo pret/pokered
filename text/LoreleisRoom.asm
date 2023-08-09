@@ -1,4 +1,4 @@
-_LoreleiBeforeBattleText::
+_LoreleisRoomLoreleiBeforeBattleText::
 	text "Welcome to"
 	line "#MON LEAGUE!"
 
@@ -21,12 +21,12 @@ _LoreleiBeforeBattleText::
 	line "Are you ready?"
 	done
 
-_LoreleiEndBattleText::
+_LoreleisRoomLoreleiEndBattleText::
 	text "How"
 	line "dare you!"
 	prompt
 
-_LoreleiAfterBattleText::
+_LoreleisRoomLoreleiAfterBattleText::
 	text "You're better"
 	line "than I thought!"
 	cont "Go on ahead!"
@@ -36,7 +36,7 @@ _LoreleiAfterBattleText::
 	cont "LEAGUE power!"
 	done
 
-_LoreleiDontRunAwayText::
+_LoreleisRoomLoreleiDontRunAwayText::
 	text "Someone's voice:"
 	line "Don't run away!"
 	done

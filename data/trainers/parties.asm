@@ -1,6 +1,7 @@
 ; PureRGBnote: CHANGED: ADDED: Trainer levels were balanced, parties were modified, and some new trainers were added.
 
 TrainerDataPointers:
+	table_width 2, TrainerDataPointers
 	dw YoungsterData
 	dw BugCatcherData
 	dw LassData
@@ -27,7 +28,6 @@ TrainerDataPointers:
 	dw BlackbeltData
 	dw Green1Data
 	dw ProfOakData
-	dw ChiefData
 	dw ScientistData
 	dw GiovanniData
 	dw RocketData
@@ -53,6 +53,9 @@ TrainerDataPointers:
 	dw RangerData
 	dw RangerFData
 	dw RookieData
+	dw SoldierData
+	dw ChiefData
+	assert_table_length NUM_TRAINERS
 
 ; if first byte != $FF, then
 	; first byte is level (of all pokemon on this team)
@@ -156,8 +159,6 @@ SailorData:
 	db 22, TENTACOOL, STARYU, 0 
 	db 20, HORSEA, SANDSHREW, POLIWHIRL, 0
 	db 21, MACHOP, SQUIRTLE, 0
-; Vermilion Gym
-	db 23, PIKACHU, HORSEA, 0
 
 JrTrainerMData:
 ; Pewter Gym
@@ -486,7 +487,7 @@ TamerData:
 ; Route 5
 	db 17, DITTO, SEEL, DRATINI, 0 ; NEWx
 ; Route 12
-	db 28, TENTACOOL, NIDORINO, 0 ; NEWx
+	db 28, HORSEA, NIDORINO, 0 ; NEWx
 ; Route 18
 	db 42, KINGLER, SNORLAX, 0 ; NEWx
 
@@ -549,7 +550,8 @@ ProfOakData:
 	db $FE, 70, MAGNETON, 71, TAUROS, 72, EXEGGUTOR, 73, ARCANINE, 74, CHARIZARD, 75 + 128, GYARADOS, 0
 
 ChiefData:
-; none
+	; Secret Lab
+	db $FE, 70 + 128, JOLTEON, 70 + 128, KABUTOPS, 70 + 128, ALAKAZAM, 72, GOLBAT, 73 + 128, TENTACRUEL, 0 
 
 ScientistData:
 ; Mansion 2F
@@ -722,8 +724,7 @@ GentlemanData:
 ; Underground Path Route 7-8
 	db 28, CUBONE, RAICHU, 0 ; NEWx
 	db 28, PIKACHU, MAROWAK, 0 ; NEWx
-; Vermilion Gym
-	db 25, ELECTABUZZ, 0 ; NEWx (from duplicate)
+; a duplicate here used in vermilion gym was switched over to SOLDIER due to its dialogue
 
 Green2Data:
 ; SS Anne 2F
@@ -796,7 +797,7 @@ AgathaData:
 	db $FF, 63, MAROWAK, 63, MR_MIME, 64, NINETALES, 65, ARBOK, 65, TANGELA, 68, GENGAR, 0 
 
 LanceData:
-	db $FE, 66, GYARADOS, 66, DRAGONAIR, 67, VICTREEBEL, 68 + 128, DRAGONITE, 67, AERODACTYL, 69, DRAGONITE, 0 
+	db $FE, 66, GYARADOS, 66, DRAGONAIR, 67, SEADRA, 68 + 128, DRAGONITE, 67, AERODACTYL, 69, DRAGONITE, 0 
 
 CoolKidData:
 ; Pewter Museum
@@ -813,8 +814,6 @@ FireFighterData:
 	db 53, ELECTRODE, ARCANINE, BLASTOISE, 0
 ; Silph co 1F after beating giovanni
 	db 49, FLAREON, BLASTOISE, 0 ; NEWx
-	db 47, MAGMAR, KANGASKHAN, POLIWRATH, 0 ; NEWx
-	db 49, ARCANINE, VAPOREON, 0 ; NEWx
 	db 47, RAPIDASH, DEWGONG, BLASTOISE, 0 ; NEWx
 ; Pokemon Mansion 1F
 	db 54, ARCANINE, BLASTOISE, 0 ; NEWx
@@ -847,3 +846,14 @@ RookieData:
 	db 19, BELLSPROUT, WARTORTLE, 0 ; NEWx
 ; Route 2
 	db 23, ABRA, CHARMANDER, SQUIRTLE, 0 ; NEWx
+
+SoldierData:
+; Vermilion Gym 
+	db 25, ELECTABUZZ, 0 ; NEWx (used to be a gentleman) (used to be a duplicate trainer entry)
+	db 23, PIKACHU, TENTACOOL, 0 ; used to be a sailor in vermilion gym
+; Silph Co 1F after beating giovanni on the 11th floor
+	db 47, MAGMAR, KANGASKHAN, POLIWRATH, 0 ; NEWx
+	db 49, ARCANINE, VAPOREON, 0 ; NEWx
+; Secret Lab
+	db 65, RHYDON, VENOMOTH, 0 ; NEWx
+	db 65, ARCANINE, OMASTAR, 0 ; NEWx

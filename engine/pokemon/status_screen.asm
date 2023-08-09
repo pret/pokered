@@ -172,9 +172,7 @@ StatusScreen:
 	call LoadFlippedFrontSpriteByMonIndex ; draw Pokémon picture
 	ld a, [wcf91]
 	call PlayCry ; play Pokémon cry
-	call WaitForTextScrollButtonPress ; wait for button
 	pop af
-	ldh [hTileAnimations], a
 	ret
 
 .GetStringPointer
@@ -307,7 +305,7 @@ StatusScreen2:
 	ld hl, wLoadedMonMoves
 	ld de, wMoves
 	ld bc, NUM_MOVES
-	call CopyData
+	rst _CopyData
 	callfar FormatMovesString
 	hlcoord 9, 2
 	lb bc, 5, 10
@@ -427,15 +425,8 @@ StatusScreen2:
 	ld a, $1
 	ldh [hAutoBGTransferEnabled], a
 	call Delay3
-	call WaitForTextScrollButtonPress ; wait for button
 	pop af
-	ldh [hTileAnimations], a
-	ld hl, wd72c
-	res 1, [hl]
-	ld a, $77
-	ldh [rNR50], a
-	call GBPalWhiteOut
-	jp ClearScreen
+	ret
 
 CalcExpToLevelUp:
 	ld a, [wLoadedMonLevel]
@@ -480,3 +471,96 @@ StatusScreen_PrintPP:
 	dec c
 	jr nz, StatusScreen_PrintPP
 	ret
+
+;;;;;;;;;; PureRGBnote: ADDED: code that allows immediately backing out of the status menu with B from all status menus
+
+StatusScreenOriginal:
+	ldh a, [hTileAnimations]
+	push af
+	call StatusScreen
+	ld b, A_BUTTON | B_BUTTON
+	call PokedexStatusWaitForButtonPressLoop
+	bit BIT_B_BUTTON, a
+	jr nz, ExitStatusScreen
+	call StatusScreen2
+	ld b, A_BUTTON | B_BUTTON
+	call PokedexStatusWaitForButtonPressLoop
+ExitStatusScreen:
+	pop af
+	ldh [hTileAnimations], a
+	ld hl, wd72c
+	res 1, [hl]
+	ld a, $77
+	ldh [rNR50], a
+	call GBPalWhiteOut
+	jp ClearScreen
+
+;;;;;;;;;; 
+
+;;;;;;;;;; PureRGBnote: ADDED: code that allows going up and down on the dpad
+;;;;;;;;;; to next and previous party pokemon while in battle or in the start POKEMON menu.
+
+StatusScreenLoop:
+	ldh a, [hTileAnimations]
+	push af
+.displayNextMon
+	call StatusScreen
+	call PokemonStatusWaitForButtonPress
+	bit BIT_D_UP, a
+	jr nz, .prevMon
+	bit BIT_D_DOWN, a
+	jr nz, .nextMon
+	bit BIT_B_BUTTON, a
+	jr nz, .exitStatus
+	call StatusScreen2
+	call PokemonStatusWaitForButtonPress
+	bit BIT_D_UP, a
+	jr nz, .prevMon
+	bit BIT_D_DOWN, a
+	jr nz, .nextMon
+.exitStatus
+	jp ExitStatusScreen
+.nextMon
+	ld hl, wWhichPokemon
+	inc [hl]
+	ld hl, wPartyAndBillsPCSavedMenuItem
+	inc [hl]
+	jr .displayNextMon
+.prevMon
+	ld hl, wWhichPokemon
+	dec [hl]
+	ld hl, wPartyAndBillsPCSavedMenuItem
+	dec [hl]
+	jr .displayNextMon
+
+PokemonStatusWaitForButtonPress:
+.decideButtons
+	ld a, A_BUTTON | B_BUTTON
+	ld b, a
+	ld a, [wWhichPokemon]
+	and a
+	jr z, .checkRight
+	ld a, b
+	or D_UP
+	ld b, a
+.checkRight
+	ld a, [wPartyCount]
+	dec a
+	ld c, a
+	ld a, [wWhichPokemon]
+	cp c
+	jr z, PokedexStatusWaitForButtonPressLoop
+	ld a, b
+	or D_DOWN
+	ld b, a
+PokedexStatusWaitForButtonPressLoop:
+.waitForButtonPress
+	push bc
+	call JoypadLowSensitivity
+	pop bc
+	ldh a, [hJoy5]
+	and b
+	jr z, .waitForButtonPress
+	ret
+
+;;;;;;;;;;

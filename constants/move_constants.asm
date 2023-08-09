@@ -177,21 +177,21 @@ DEF NUM_ATTACKS EQU const_value - 1
 
 	const SHOWPIC_ANIM
 	const STATUS_AFFECTED_ANIM
-	const ANIM_A8
-	const ANIM_A9
+	const ANIM_A8 ; unused?
+	const SHAKE_ENEMY_HUD_ANIM ; happens when a side effect applies status to an enemy
 	const TRADE_BALL_DROP_ANIM
 	const TRADE_BALL_SHAKE_ANIM
 	const TRADE_BALL_TILT_ANIM
 	const TRADE_BALL_POOF_ANIM
 	const XSTATITEM_ANIM ; use X Attack/Defense/Speed/Special
-	const ANIM_AF
-	const ANIM_B0
-	const ANIM_B1
-	const ANIM_B2
-	const ANIM_B3
-	const ANIM_B4
-	const ANIM_B5
+	const SHRINKING_SQUARE_ANIM ; happens before using thrash or petal dance animations
 ;;;;;;;;;; PureRGBnote: CHANGED: some unused animations are now unique animations
+	const TRI_ATTACK_START
+	const TRI_ATTACK_TRIANGLE2
+	const TRI_ATTACK_TRIANGLE3
+	const TRI_ATTACK_FIRE
+	const TRI_ATTACK_ICE
+	const TRI_ATTACK_THUNDER
 	const AMNESIA_ENEMY_ANIM
 	const BURN_ANIM ; Plays when a monster is burned
 	const SAFARITOSS_ANIM
@@ -199,20 +199,21 @@ DEF NUM_ATTACKS EQU const_value - 1
 	const PSN_ANIM ; Plays when a monster is poisoned
 	const MASTERTOSS_ANIM ; toss Master Ball
 ;;;;;;;;;;
-	const ANIM_BC
+	const SLP_PLAYER_ANIM
 	const SLP_ANIM ; sleeping monster
-	const ANIM_BE
+	const CONF_PLAYER_ANIM
 	const CONF_ANIM ; confused monster
-	const ANIM_C0
+	const DIG_DOWN_ANIM
 	const TOSS_ANIM ; toss Poké Ball
 	const SHAKE_ANIM ; shaking Poké Ball when catching monster
 	const POOF_ANIM ; puff of smoke
 	const BLOCKBALL_ANIM ; trainer knocks away Poké Ball
 	const GREATTOSS_ANIM ; toss Great Ball
 	const ULTRATOSS_ANIM ; toss Ultra Ball
-	const ANIM_C7
+	const SHAKE_SCREEN_ANIM ; happens when player is inflicted with poison
 	const HIDEPIC_ANIM ; monster disappears
 	const ROCK_ANIM ; throw rock
 	const BAIT_ANIM ; throw bait
+	const FLY_ANIM_PART1
 
 DEF NUM_ATTACK_ANIMS EQU const_value - 1

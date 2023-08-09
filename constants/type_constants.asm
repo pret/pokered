@@ -8,7 +8,7 @@ DEF PHYSICAL EQU const_value
 	const POISON       ; $03
 	const GROUND       ; $04
 	const ROCK         ; $05
-	const BIRD         ; $06
+	const TYPELESS     ; $06 PureRGBnote: CHANGED: used with struggle
 	const BUG          ; $07
 	const GHOST        ; $08
 
@@ -24,5 +24,6 @@ DEF SPECIAL EQU const_value
 	const PSYCHIC_TYPE ; $18
 	const ICE          ; $19
 	const DRAGON       ; $1A
+	const TRI          ; $1B PureRGBnote: ADDED: used with tri attack
 
 DEF NUM_TYPES EQU const_value

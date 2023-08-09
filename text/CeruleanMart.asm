@@ -1,4 +1,4 @@
-_CeruleanMartText2::
+_CeruleanMartCooltrainerMText::
 	text "Use REPEL to keep"
 	line "bugs and weak"
 	cont "#MON away."
@@ -9,7 +9,7 @@ _CeruleanMartText2::
 	cont "for best results!"
 	done
 
-_CeruleanMartText3::
+_CeruleanMartCooltrainerFText::
 	text "Have you seen any"
 	line "RARE CANDY?"
 

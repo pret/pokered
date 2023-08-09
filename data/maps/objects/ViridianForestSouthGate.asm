@@ -1,3 +1,7 @@
+	object_const_def
+	const VIRIDIANFORESTSOUTHGATE_GIRL
+	const VIRIDIANFORESTSOUTHGATE_LITTLE_GIRL
+
 ViridianForestSouthGate_Object:
 	db $a ; border block
 
@@ -10,7 +14,7 @@ ViridianForestSouthGate_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  8,  4, SPRITE_GIRL, STAY, LEFT, 1 ; person
-	object_event  2,  4, SPRITE_LITTLE_GIRL, WALK, UP_DOWN, 2 ; person
+	object_event  8,  4, SPRITE_GIRL, STAY, LEFT, TEXT_VIRIDIANFORESTSOUTHGATE_GIRL
+	object_event  2,  4, SPRITE_LITTLE_GIRL, WALK, UP_DOWN, TEXT_VIRIDIANFORESTSOUTHGATE_LITTLE_GIRL
 
 	def_warps_to VIRIDIAN_FOREST_SOUTH_GATE

@@ -13,7 +13,7 @@
 	const POKE_BALL     ; $04
 	const HYPER_BALL    ; $05 ; PureRGBnote: ADDED: New item, used to be TOWN MAP
 	const BICYCLE       ; $06
-	const SURFBOARD     ; $07 buggy?
+	const SURFBOARD     ; $07
 	const SAFARI_BALL   ; $08
 	const POKEDEX       ; $09 pointless item?
 	const MOON_STONE    ; $0A
@@ -30,7 +30,7 @@
 	const SAFARI_BAIT   ; $15 ; PureRGBnote: CHANGED: each of the badges used to have an item defined starting at this index, they were cleaned out
 	const SAFARI_ROCK   ; $16
 	const OLD_COIN      ; $17 ; PureRGBnote: ADDED: New item
-	const UNUSED_ITEM2  ; $18
+	const TOPSECRETKEY  ; $18 ; PureRGBnote: ADDED: New item
 	const UNUSED_ITEM3  ; $19
 	const UNUSED_ITEM4  ; $1A
 	const UNUSED_ITEM5  ; $1B
@@ -108,26 +108,15 @@ DEF NUM_ITEMS EQU const_value - 1
 	const FLOOR_11F     ; $60
 	const FLOOR_B4F     ; $61
 DEF NUM_FLOORS EQU const_value - 1 - NUM_ITEMS
-
-;;;;;;;;;; PureRGBnote: ADDED: some constants for lists that are used in menus for new features
-	const TREE_ROUTE_2  ; 62
-	const TREE_CERULEAN_CITY ;63
-	const TREE_ROUTE_9  ;64
-	const TREE_FUCHSIA_CITY ;65
-
-	const SAFARI_CLASSIC  ; 66
-	const SAFARI_RANGER_HUNT ;67
-	const SAFARI_FREE_ROAM  ;68
-;;;;;;;;;;
 ;;;;;;;;;; PureRGBnote: MOVED: these constants used to be defined higher up as actual items, they are only used to generate a menu in cerulean city
-	const BOULDERBADGE  ; $69
-	const CASCADEBADGE  ; $6A
-	const THUNDERBADGE  ; $6B
-	const RAINBOWBADGE  ; $6C
-	const SOULBADGE     ; $6D
-	const MARSHBADGE    ; $6E
-	const VOLCANOBADGE  ; $6F
-	const EARTHBADGE    ; $70
+	const BOULDERBADGE  ; $62
+	const CASCADEBADGE  ; $63
+	const THUNDERBADGE  ; $64
+	const RAINBOWBADGE  ; $65
+	const SOULBADGE     ; $66
+	const MARSHBADGE    ; $67
+	const VOLCANOBADGE  ; $68
+	const EARTHBADGE    ; $69
 ;;;;;;;;;;
 	const_next $C4
 

@@ -83,5 +83,11 @@ TypeEffects:
 	db GRASS,        DRAGON,       NOT_VERY_EFFECTIVE
 	db ICE,          DRAGON,       SUPER_EFFECTIVE
 	db DRAGON,       DRAGON,       SUPER_EFFECTIVE
+	db TRI,          FIRE, 		   NOT_VERY_EFFECTIVE
+	db TRI,          FLYING,       SUPER_EFFECTIVE
+	db TRI,          GRASS,        SUPER_EFFECTIVE
+	db TRI,          ELECTRIC,     NOT_VERY_EFFECTIVE
+	db TRI,          ROCK,         NOT_VERY_EFFECTIVE
+	db TRI,          BUG,          SUPER_EFFECTIVE
 	db -1 ; end
 

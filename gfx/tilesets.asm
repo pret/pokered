@@ -8,12 +8,12 @@ RedsHouse2_GFX::    INCBIN "gfx/tilesets/reds_house.2bpp"
 RedsHouse1_Block::
 RedsHouse2_Block::  INCBIN "gfx/blocksets/reds_house.bst"
 
+School_GFX::
 House_GFX::         INCBIN "gfx/tilesets/house.2bpp"
+School_Block::
 House_Block::       INCBIN "gfx/blocksets/house.bst"
 Mansion_GFX::       INCBIN "gfx/tilesets/mansion.2bpp"
 Mansion_Block::     INCBIN "gfx/blocksets/mansion.bst"
-ShipPort_GFX::      INCBIN "gfx/tilesets/ship_port.2bpp"
-ShipPort_Block::    INCBIN "gfx/blocksets/ship_port.bst"
 Interior_GFX::      INCBIN "gfx/tilesets/interior.2bpp"
 Interior_Block::    INCBIN "gfx/blocksets/interior.bst"
 Plateau_GFX::       INCBIN "gfx/tilesets/plateau.2bpp"
@@ -59,5 +59,13 @@ Lab_GFX::           INCBIN "gfx/tilesets/lab.2bpp"
 Lab_Block::         INCBIN "gfx/blocksets/lab.bst"
 Club_GFX::          INCBIN "gfx/tilesets/club.2bpp"
 Club_Block::        INCBIN "gfx/blocksets/club.bst"
+
+SECTION "Tilesets 4", ROMX
+
+ShipPort_GFX::      INCBIN "gfx/tilesets/ship_port.2bpp"
+ShipPort_Block::    INCBIN "gfx/blocksets/ship_port.bst"
 Underground_GFX::   INCBIN "gfx/tilesets/underground.2bpp"
 Underground_Block:: INCBIN "gfx/blocksets/underground.bst"
+SecretLab_GFX::     INCBIN "gfx/tilesets/secret_lab.2bpp"
+SecretLab_Block::   INCBIN "gfx/blocksets/secret_lab.bst"
+

@@ -31,7 +31,7 @@ HandleItemListSwapping::
 	add b
 	ld [wMenuItemToSwap], a ; ID of item chosen for swapping (counts from 1)
 	ld c, 20
-	call DelayFrames
+	rst _DelayFrames
 	jp DisplayListMenuIDLoop
 .swapItems
 	ld a, [wCurrentMenuItem]
@@ -46,7 +46,7 @@ HandleItemListSwapping::
 	dec a
 	ld [wMenuItemToSwap], a ; ID of item chosen for swapping (counts from 1)
 	ld c, 20
-	call DelayFrames
+	rst _DelayFrames
 	push hl
 	push de
 	ld hl, wListPointer
@@ -94,6 +94,7 @@ HandleItemListSwapping::
 	ld [wMenuItemToSwap], a ; 0 means no item is currently being swapped
 	pop de
 	pop hl
+	call CheckForTM ; PureRGBnote: ADDED: after completing a swap, we need to re-attempt to display text for TMs if necessary
 	jp DisplayListMenuIDLoop
 .swapSameItemType
 	inc de
@@ -146,4 +147,5 @@ HandleItemListSwapping::
 	ld [wMenuItemToSwap], a ; 0 means no item is currently being swapped
 	pop de
 	pop hl
+	call CheckForTM ; PureRGBnote: ADDED: after completing a swap, we need to re-attempt to display text for TMs if necessary
 	jp DisplayListMenuIDLoop

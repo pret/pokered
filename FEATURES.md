@@ -3,7 +3,7 @@
 The only version differences between PureRed / PureBlue / PureGreen are visual. Play whatever color you like the most.
 
 ## New Options in the Options Menu
-Many options have been added to the game's options menu. To be clear, there are **5 pages of options** now. **Use the Next button on the options page** to cycle through the pages when in-game.
+Many options have been added to the game's options menu. To be clear, there are **4 pages of options** now. **Use the Next button on the options page** to cycle through the pages when in-game.
 
 
 
@@ -36,8 +36,9 @@ The second page contains new big features related to general gameplay.
   - The second option, `ALT PKMN COLORS` will enable or disable pokemon from being able to have special color palettes (Default: OFF). When turned on, features related to alternate color pokemon are enabled. In certain regions, you will find differently colored pokemon, like blue nidorinos and purple nidorinas. Think of them as regional color variants. This is just an amusing feature to allow for additional enjoyment in finding unique pokemon by exploring different places.
 
 ![Alt Colors Off](/screenshots/alt_pokemon_colors_off.png?raw=true) ![Alt Colors On](/screenshots/alt_pokemon_colors_on.png?raw=true)
-  - The third option, `AUDIO PAN` will enable or disable stereo audio panning (Default: OFF). The game uses stereo audio by default, but every channel is played at equal volume throughout the right and left speaker, so it sounds like mono. With this turned on the game music sounds a bit more dynamic by panning certain channels to left or right. This was an option in Pokemon Yellow that was ported to this romhack.
-  - The fourth option, `BIKE SONG` will enable or disable the music that plays while on the bicycle (Default: ON). Since the bicycle music plays 100% of the time you are using the bicycle, it gets a bit old after a while. If turned off, the only time you'll hear the music is in Cycling Road. This way you can enjoy all the music in the game, not just the bicycle song.
+  - The third option, `MUSIC` will enable or disable new music tracks in the game. (Default: OG) Set it to OG+ to play new music tracks when they are meant to be played. At the moment it controls only one or two minor tracks, such as Giovanni's Theme. (unused music from Pokemon Yellow's code) More music will likely be added in the future.
+  - The fourth option, `AUDIO PAN` will enable or disable stereo audio panning (Default: OFF). The game uses stereo audio by default, but every channel is played at equal volume throughout the right and left speaker, so it sounds like mono. With this turned on the game music sounds a bit more dynamic by panning certain channels to left or right. This was an option in Pokemon Yellow that was ported to this romhack.
+  - The fifth option, `BIKE SONG` will enable or disable the music that plays while on the bicycle (Default: ON). Since the bicycle music plays 100% of the time you are using the bicycle, it gets a bit old after a while. If turned off, the only time you'll hear the music is in Cycling Road. This way you can enjoy all the music in the game, not just the bicycle song.
 
 
 
@@ -61,23 +62,22 @@ The fourth page contains Sprite-related options.
     - SW97: Use the spaceworld 1997 back sprites. (some have been touched up a bit) These are higher resolution while still matching the original game's style. Very nice!
     
     ![Spaceworld back sprite venusaur](/gfx/pokemon/back_sw/venusaurb.png?raw=true) ![Spaceworld back sprite blastoise](/gfx/pokemon/back_sw/blastoiseb.png?raw=true) ![Spaceworld back sprite charizard](/gfx/pokemon/back_sw/charizardb.png?raw=true)
-  - The second option, `ICONS` changes the menu icons and overworld sprites in the game. (Default: OG) If you change this while in the overworld, it won't come into effect visually until you load another map (like by going into or out of a building.) There are two possible settings:
+  - The second option, `ICONS` changes the menu icons and overworld sprites in the game. (Default: OG) There are two possible settings:
     - OG: Use the original icons in the overworld and on the pokemon menu.
-    - OG+: Use the original icons with some new ones. Some are based on beta sprites, some are completely newly designed sprites with the intention of being similar to the non-specific icon design of the original game, and ONE based on Gen 2's menu sprites (jellyfish sprite). This also will give unique sprites to Brock, Misty, Sabrina, and Blaine. They are all sprites that were designed from scratch to match the game's original trainer sprites, EXCEPT blaine's sprite, which is borrowed from Gen 2.
+    - OG+: Use the original icons with some new ones. Some are based on beta sprites, some are completely newly designed sprites with the intention of being similar to the non-specific icon design of the original game, and ONE based on Gen 2's menu sprites (jellyfish sprite). This also will give unique sprites to Brock, Misty, Lt.Surge, Erika, Sabrina, and Blaine. They are all sprites that were designed from scratch to match the game's original trainer sprites, EXCEPT blaine's sprite, which is borrowed from Gen 2.
 
  ![Menu Icons 1](/gfx/icons/menusprites1.png?raw=true) ![Menu Icons 2](/gfx/icons/menusprites2.png?raw=true)
-    ![Brock](/gfx/sprites/brock.png?raw=true) ![Misty](/gfx/sprites/misty.png?raw=true) ![Sabrina](/gfx/sprites/sabrina.png?raw=true) ![Blaine](/gfx/sprites/blaine.png?raw=true)
-  - The third to sixth options all control front sprites of specific pokemon that have multiple nice front sprites from the original games to choose from. You can choose which front sprites you like the most for these pokemon.
+    ![Brock](/gfx/sprites/brock.png?raw=true) ![Misty](/gfx/sprites/misty.png?raw=true) ![LtSurge](/gfx/sprites/lt_surge.png?raw=true) ![Erika](/gfx/sprites/erika.png?raw=true) ![Sabrina](/gfx/sprites/sabrina.png?raw=true) ![Blaine](/gfx/sprites/blaine.png?raw=true)
+  - If you press A on `EDIT` of the 3rd Option, it will open 4 new pages on another level. These 4 pages are for customizing the front sprites of the game. 
 
-![Front Sprite 1 Bulbasaur](/gfx/pokemon/front/bulbasaur.png?raw=true) ![Front Sprite 2 Bulbasaur](/gfx/pokemon/front_rg/bulbasaur.png?raw=true) ![Front Sprite 1 Squirtle](/gfx/pokemon/front/squirtle.png?raw=true) ![Front Sprite 2 Squirtle](/gfx/pokemon/front_rg/squirtle.png?raw=true) ![Front Sprite 1 Blastoise](/gfx/pokemon/front/blastoise.png?raw=true) ![Front Sprite 2 Blastoise](/gfx/pokemon/front_rg/blastoise.png?raw=true) ![Front Sprite 1 Pidgeot](/gfx/pokemon/front/pidgeot.png?raw=true) ![Front Sprite 2 Pidgeot](/gfx/pokemon/front_rg/pidgeot.png?raw=true)
+![Front Sprite Options 1](/screenshots/front_sprite_options1.png?raw=true)
+![Front Sprite Options 2](/screenshots/front_sprite_options2.png?raw=true)
+![Front Sprite Options 3](/screenshots/front_sprite_options3.png?raw=true)
+![Front Sprite Options 4](/screenshots/front_sprite_options4.png?raw=true)
 
-The fifth, sixth, and seventh pages contain additional pokemon whose front sprites can be customized. 
+  You can customize the below sprites:
 
- ![Front Sprite 1 Nidorino](/gfx/pokemon/front/nidorino.png?raw=true) ![Front Sprite 2 Nidorino](/gfx/pokemon/front_rg/nidorino.png?raw=true)  ![Front Sprite 1 Golbat](/gfx/pokemon/front_y/golbat.png?raw=true) ![Front Sprite 2 Golbat](/gfx/pokemon/front/golbat.png?raw=true) ![Front Sprite 1 Mankey](/gfx/pokemon/front/mankey.png?raw=true) ![Front Sprite 2 Mankey](/gfx/pokemon/front_rg/mankey.png?raw=true) ![Front Sprite 1 Arcanine](/gfx/pokemon/front/arcanine.png?raw=true) ![Front Sprite 2 Arcanine](/gfx/pokemon/front_rg/arcanine.png?raw=true) ![Front Sprite 1 Exeggutor](/gfx/pokemon/front_y/exeggutor.png?raw=true) ![Front Sprite 2 Exeggutor](/gfx/pokemon/front/exeggutor.png?raw=true) ![Front Sprite 1 Mewteo](/gfx/pokemon/front/mewtwo.png?raw=true) ![Front Sprite 2 Mewtwo](/gfx/pokemon/front_rg/mewtwo.png?raw=true) 
-
- ![Front Sprite 1 Pidgeotto](/gfx/pokemon/front/pidgeotto.png?raw=true) ![Front Sprite 2 Pidgeotto](/gfx/pokemon/front_rg/pidgeotto.png?raw=true)  ![Front Sprite 1 Butterfree](/gfx/pokemon/front/butterfree.png?raw=true) ![Front Sprite 2 Butterfree](/gfx/pokemon/front_rg/butterfree.png?raw=true) ![Front Sprite 1 Gengar](/gfx/pokemon/front/gengar.png?raw=true) ![Front Sprite 2 Gengar](/gfx/pokemon/front_y/gengar.png?raw=true) ![Front Sprite 1 Onix](/gfx/pokemon/front/onix.png?raw=true) ![Front Sprite 2 Onix](/gfx/pokemon/front_rg/onix.png?raw=true) ![Front Sprite 1 Voltorb](/gfx/pokemon/front/voltorb.png?raw=true) ![Front Sprite 2 Voltorb](/gfx/pokemon/front_rg/voltorb.png?raw=true) ![Front Sprite 1 Starmie](/gfx/pokemon/front/starmie.png?raw=true) ![Front Sprite 2 Starmie](/gfx/pokemon/front_rg/starmie.png?raw=true) 
-
- ![Front Sprite 1 Kadabra](/gfx/pokemon/front/kadabra.png?raw=true) ![Front Sprite 2 Kadabra](/gfx/pokemon/front_rg/kadabra.png?raw=true)  ![Front Sprite 1 Tentacruel](/gfx/pokemon/front/tentacruel.png?raw=true) ![Front Sprite 2 Tentacruel](/gfx/pokemon/front_rg/tentacruel.png?raw=true) ![Front Sprite 1 Graveler](/gfx/pokemon/front/graveler.png?raw=true) ![Front Sprite 2 Graveler](/gfx/pokemon/front_rg/graveler.png?raw=true) ![Front Sprite 1 Machop](/gfx/pokemon/front/machop.png?raw=true) ![Front Sprite 2 Machop](/gfx/pokemon/front_rg/machop.png?raw=true) ![Front Sprite 1 Pinsir](/gfx/pokemon/front/pinsir.png?raw=true) ![Front Sprite 2 Pinsir](/gfx/pokemon/front_rg/pinsir.png?raw=true) ![Front Sprite 1 Zapdos](/gfx/pokemon/front/zapdos.png?raw=true) ![Front Sprite 2 Zapdos](/gfx/pokemon/front_rg/zapdos.png?raw=true) 
+![front_sprite_options](/gfx/pokemon/gallery/front_sprite_options.png?raw=true)
 
 ## Quality of Life Enhancements
 - Stone evos and trade evos have full movesets
@@ -89,10 +89,12 @@ The fifth, sixth, and seventh pages contain additional pokemon whose front sprit
 - You can deposit items to your PC directly from the items menu by pressing START on the item you wish to deposit. Technology is amazing! Now items can be stored wirelessly!
 
 ![Deposit Item From Start Menu](/screenshots/deposit_item_from_menu.png?raw=true)
-- Open the start menu and scroll down to SAVE, then press SELECT, and you can change PC boxes whenever, wherever. Easy!
+- Open the start menu and scroll down to SAVE, then press SELECT, and you can change PC boxes whenever, wherever. Easy! You'll notice the Change Box menu has been revamped to include how many pokemon are in each box as well!
 
 ![Box change](/screenshots/change_box_from_start_menu.png?raw=true)
-- The game will tell you when a box is full after catching a pokemon.
+- When viewing Bills PC, it'll always tell you how many pokemon are in the current box
+- The responsiveness of Bills PC and Player's PC was improved.
+- The game will tell you how many slots are left in your box after catching a pokemon, and when the box is full.
 - When scrolling over TMs/HMs in menus, a textbox will display the move they teach automatically! Hooray!
 
 ![TM Text](/screenshots/tm_text_box_prompt.png?raw=true)
@@ -114,11 +116,13 @@ The fifth, sixth, and seventh pages contain additional pokemon whose front sprit
 - The game now always reports the correct "Super Effective!" "Not Very Effective" etc. message when battling. No more tricks!
 - HMs are deletable. Try not to delete them in a place where it will prevent you from leaving.
 - When teaching a pokemon a move and selecting a move to forget, you must press START to select the move to forget instead of A. Now you won't accidentally select the wrong one disastrously!
+- When releasing a pokemon, you must press START to confirm releasing it. Helps avoid accidentally releasing pokemon.
 - Spin tiles in rocket hideout and viridian gym move you much faster
 - "Use another repel" menu implemented.
 - New info in the pokedex: The pokedex displays the typing of pokemon you have seen, and typing/base stats of pokemon you have caught
 
 ![Pokedex Base Stats](/screenshots/pokedex_base_stats_typing.png?raw=true)
+- You can press SELECT to view back sprites of pokemon you have caught in the pokedex when viewing their pokedex data.
 - When doing the Cinnabar Gym quiz, it won't keep explaining the quiz every time you start it up.
 - Coin Case doesn't take up space in your bag. Go to the game corner if you need to check how many coins you have.
 - Secret Key, Card Key, and Lift Key are consumed when you no-longer need them. Less item clutter.
@@ -130,8 +134,10 @@ The fifth, sixth, and seventh pages contain additional pokemon whose front sprit
 - Slot machines won't cheat you out of lining up symbols based on RNG anymore.
 - Slot machine payout amounts increased.
 - Slot machine payout speed increased.
+- After using Surf, it will be remembered until the next map load. You can just walk onto water and start surfing without doing anything or even having to press A.
 - Strength can be used on boulders by pressing A on them while you have a pokemon with strength in your party.
 - Seafoam Islands and Victory Road will remember that you used Strength between going up and down floors so you don't have to re-enable it.
+- Seafoam Islands, Cerulean Cave, and the Safari Zone will remember you used Surf between going between map areas so you don't have to repeatedly use it.
 - Fuchsia City's layout has been modified very slightly to be less annoying to navigate.
 - The Daycare has a PC in it.
 - Route 23 has some grass just after the north exit of Victory Road to allow reaching those encounters more easily late game.
@@ -144,6 +150,11 @@ The fifth, sixth, and seventh pages contain additional pokemon whose front sprit
 - Missingno and the item duplication glitch are still accessible. Missingno can be caught and won't corrupt your game data in any way. It's very powerful, so be careful when trying to catch it! Missingno also randomly displays different sprites like its original "glitchy" sprite, the Ghost sprite or Fossil Kabutops/Aerodactyl each time its sprite is loaded.
 
  ![Missingno](/screenshots/missingno.png?raw=true)
+
+- And entirely new pokedex mode has been added. It's called the MOVEDEX. This tracks every move you have seen the animation of in battle, and will list all their information and data in detail for you to see. Try to complete your MOVEDEX! The movedex is unlocked in a new basement classroom of the schoolhouse in Viridian City.
+
+![movedex](/screenshots/movedex.png?raw=true) ![movedex thunderbolt](/screenshots/movedex_thunderbolt.png?raw=true) ![movedex flamethrower](/screenshots/movedex_flamethrower.png?raw=true) ![movedex surf](/screenshots/movedex_surf.png?raw=true)
+ 
 - Ghost Marowak can be caught, and if you have Alt Pkmn Palettes turned on, it has a special ghostly coloration. It wants revenge on Team Rocket!
 
 - The Safari Zone now has 3 different "Modes" of Safari Game. They are:
@@ -161,6 +172,10 @@ The fifth, sixth, and seventh pages contain additional pokemon whose front sprit
 
 - The "TM Pirate" is a kid who appears in most PokeMarts who will sell you TMs! It's just a fun way of adding more purchasable TMs to the game. 
 
+- The urban legend - Bills Garden - was added into the game! It only is accessible once you become champ. You'll find some amusing stuff there. Visit it a couple of times! What you find might change! If you have alt palettes turned on in the options...is that a blue pikachu??
+
+![bills garden](/screenshots/bills_garden.png?raw=true)
+
 - The Mt Moon fossil Super Nerd will offer to take your fossil to Cinnabar Lab right away! You have to meet up with him at his house in SAFFRON CITY to get your fossil pokemon if you give it to him. Then you can give him OLD AMBER too. This allows you to receive fossil pokemon early.
 
 ![Super Nerd House in Saffron](/screenshots/super_nerd_in_saffron_city.png?raw=true)
@@ -174,10 +189,27 @@ The fifth, sixth, and seventh pages contain additional pokemon whose front sprit
 - If you have Alt Palette Pkmn option turned on, at the Cinnabar Lab there is an NPC who will allow you to swap the color palette of your pokemon for its alternate palette. You have a limited number of color change usages!
 
  ![Lab color changer NPC](/screenshots/color_changer_npc.png?raw=true)
+ 
+- A new area was added in the basement of the Viridian Schoolhouse. Acts as a sort of help area in the early game, with more info about basic stuff in the game like stats, type matchups, STAB, etc. It's also where you unlock the MOVEDEX feature.
 
-- The FISHING GURU now lives in cerulean city and you can get the OLD ROD a bit earlier. Same with the GOOD ROD, which is now in the old FISHING GURU's house in vermilion city. As for the last two gurus on Route 12 and in Fuchsia city, whoever you meet first will give you a SUPER ROD. The other will be a bit distraught at the unexpected turn of events.
+![schoolhouse basement](/screenshots/new_school_basement.png?raw=true)
+
+- The FISHING GURU now lives in cerulean city and you can get the OLD ROD a bit earlier. Same with the GOOD ROD, which is now in the old FISHING GURU's house in vermilion city. As for the last two gurus on Route 12 and in Fuchsia city, whoever you meet first will give you a SUPER ROD. The other will be a bit distraught at the unexpected turn of events, and then give you a FISHING GUIDE. This unlocks the ability to see fishing locations for pokemon in the pokedex.
+
+![Fishing locations good rod](/screenshots/areas_good_rod.png?raw=true) ![Fishing Locations old rod](/screenshots/areas_old_rod.png?raw=true) ![Fishing locations super rod](/screenshots/areas_super_rod.png?raw=true)
+
+- You can phone home, professor oak, even your rival from the telephones in Celadon City's Department Store. You can choose how the conversations play out, and they even can have some subsequent small events based on what you choose when you go back to PALLET TOWN!
+
+![phone tree 1](/screenshots/phone1.png?raw=true)
+![phone tree 2](/screenshots/phone2.png?raw=true)
+
+- After saving Mr.Fuji in the Pokemon Tower, you can get into the basement of the Tower. You'll find a Channeler clothed in black who just loves curses, hexes, and all that dark stuff. If you show them a GENGAR, they'll curse it to look like a HAUNTER again. Its stats won't be affected though. It'll still have GENGAR's stats. Such a powerful curse!
+
+![dark channeler](/screenshots/dark_channeler.png?raw=true)
 
 - A secret stairway opens up in a building somewhere after you become champ. The last in-game trade and some interesting stuff to see is in there. 
+
+- The above secret area will help you access an even more top secret area. This area involves MEWTWO. You may want to bring MEWTWO with you. Maybe even MEW too! What you may find will be interesting.
 
 - A couple of items or TRAINER TIPS signs have been added to otherwise empty places in the overworld.
 - A couple of new hidden items were added to various areas in the game.
@@ -191,11 +223,15 @@ The fifth, sixth, and seventh pages contain additional pokemon whose front sprit
 
 ## Restored Cut Content
 
+- If you turn on OG+ Music mode, the cut content Giovanni theme will play when you encounter Giovanni
 - There is unused text in the game for when you lose to your rival - these were re-implemented and now work as expected!
 - There was an unused trainer class for Prof Oak. It's been added back into the game. Find him in Cerulean Cave after beating the Elite Four. He can be battled repeatedly. Just leave the area and come back.
-- Some trainer classes based on Beta or unused sprites were reintroduced to the game: `ROOKIE`, `RANGER`, `FIREFIGHTER`, `COOL KID`. You'll find them in previously empty places or routes!
+- Some trainer classes based on Beta or unused sprites were reintroduced to the game: `ROOKIE`, `RANGER`, `FIREFIGHTER`, `COOL KID`, `SOLDIER`, `CHIEF`. You'll find them in previously empty places or routes!
 
-![Rookie](/gfx/unused_prototype_sprites/rookie.png?raw=true) ![Ranger](/gfx/unused_prototype_sprites/ranger.png?raw=true) ![Firefighter](/gfx/unused_prototype_sprites/firefighter.png?raw=true) ![Cool Kid](/gfx/unused_prototype_sprites/cool_kid.png?raw=true)
+![Rookie](/gfx/unused_prototype_sprites/rookie.png?raw=true) ![Ranger](/gfx/unused_prototype_sprites/ranger.png?raw=true) ![Firefighter](/gfx/unused_prototype_sprites/firefighter.png?raw=true) ![Cool Kid](/gfx/unused_prototype_sprites/cool_kid.png?raw=true) ![Soldier](/gfx/unused_prototype_sprites/soldier.png?raw=true) ![Chief](/gfx/unused_prototype_sprites/chief.png?raw=true)
+
+- There were unused icy-looking tiles in the Cave tileset that were meant to be used in seafoam island. Now they are used there!
+![seafoam cut tiles](/screenshots/seafoam_islands_cut_content_tiles.png?raw=true)
 - Some unused trainers from existing classes were added into the game in various originally empty places
 
 ## Visual changes
@@ -214,6 +250,7 @@ The fifth, sixth, and seventh pages contain additional pokemon whose front sprit
 - Spaceworld backsprites were tweaked to improve them a bit
 - A couple of front sprites were tweaked very slightly to improve their appearance
 - Some pokemon had their default color palette adjusted (example: Voltorb and Electrode are red instead of the original yellow. Don't ask me why they were yellow in the first place)
+- You can see "the side of the building" visually from Celadon Department Store roof and Celadon Mansion roof.
 
 ## Bugfixes
 - High Jump Kick / Jump Kick crash damage on missing does more damage instead of 1 damage always now. (1/4 the damage of what it would have done to the opponent)
@@ -236,6 +273,10 @@ The fifth, sixth, and seventh pages contain additional pokemon whose front sprit
 - Double Edge animation appearance when opponent uses it fixed
 - Blacking out in the Safari Zone won't glitch the game out
 - Trying to switch to the current pokemon or a fainted one won't trigger a small visual glitch
+- A small collision detection bug in cerulean cave was fixed
+- Lagginess caused by tile block replacements when loading a map was reduced greatly
+- Sound effects during text will play properly now when you have instant text setting turned on
+- You won't occasionally see a tile block being replaced visually on loading a map anymore
 
 ## Tweaks
 - Trainers in general have a bit less type-specific parties and more varied pokemon. 
@@ -271,7 +312,7 @@ The fifth, sixth, and seventh pages contain additional pokemon whose front sprit
   - COUNTER is now DRAIN PUNCH - 75 base power, fighting type, drains HP, 100% accuracy
   - RAZOR WIND is now ROOST - heals 1/2 max HP
   - SLAM is now FILTHY SLAM - 80 base power, poison type, no additional effect, 100% accuracy  (Inspired by the unused prototype move `GASTRO ACID`)
-  - FURY SWIPES is now DUST CLAW - 40 base power, ground type, no additional effect, 100% accuracy (early-game ground type move)
+  - FURY SWIPES is now DUST CLAW - 40 base power, ground type, no additional effect, 100% accuracy (early-game ground type move) (Inspired by the numerous cut content physical moves)
 - Some moves that were fairly useless were made less useless
   - WHIRLWIND - 110 base power, flying type, 30% chance of confusion, 85% accuracy
   - WITHDRAW - heals 1/2 max HP
@@ -298,7 +339,8 @@ The fifth, sixth, and seventh pages contain additional pokemon whose front sprit
   - MIMIC - you can still choose the exact move to mimic, but now it will use that move the same turn you mimic it
   - BONEMERANG - 55 base power, hits twice, 90 accuracy, 30% chance of lowering opponent's speed.
   - SUPER FANG - now deals a set 2/3 the opponent's HP instead of 1/2. Useful for catching rare pokemon!
-- There are many more tweaks to moves. See the wiki for a link to the complete move list. Be sure to try almost every move and don't write them off. Except for splash. It still does nothing as usual.
+  - TELEPORT - actually does something in trainer battles now! The user will switch out, and heal 25% health by doing so. Still works the same as it used to when wild pokemon use it.
+- There are many more tweaks to moves. Check your MOVEDEX in game to see what a move you just saw's effects were, or see the wiki for a link to the complete move list. Be sure to try almost every move and don't write them off. Except for splash. It still does nothing as usual.
 
 ## Pokemon type changes
 These changes were all made to make the pokemon more fun to use / more unique from similar pokemon / less bad
@@ -338,6 +380,9 @@ These changes were all made to make the pokemon more fun to use / more unique fr
 ## Audio Changes
 - The ghosts in pokemon tower now have a sound effect on encountering
 - Booting up a TM or HM has a little sound effect
+- Pushing a boulder down a hole in Seafoam / Victory road has a sound and feedback with it now
+- When you fall down a hole in Seafoam / Victory road, there is a sound effect with it now
+- Giovanni's Theme (unused music from Pokemon Yellow) was added when you encounter Giovanni. You must set MUSIC option to OG+ for it to play.
 
 ## Pokemon Green visuals
 The version-specific visuals of japanese pokemon green were added into PureGreen.
@@ -358,4 +403,5 @@ The version-specific visuals of japanese pokemon green were added into PureGreen
 - I will not make a version without the base stat changes
 - I will not make a version without the move changes
 - I will not make a version without learnset / TM / trainer party changes
+- I will not add beta pokemon to the game (just about all of the decent beta mons for gen 1 were already repurposed as official pokemon in later games)
 - If you want less changes but still the quality of life / bugfix stuff, I'd recommend taking a look at the romhack called shinpokered.

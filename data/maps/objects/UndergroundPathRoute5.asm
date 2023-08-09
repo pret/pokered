@@ -1,3 +1,6 @@
+	object_const_def
+	const UNDERGROUNDPATHROUTE5_LITTLE_GIRL
+
 UndergroundPathRoute5_Object:
 	db $a ; border block
 
@@ -9,6 +12,6 @@ UndergroundPathRoute5_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  2,  3, SPRITE_LITTLE_GIRL, STAY, NONE, 1 ; person
+	object_event  2,  3, SPRITE_LITTLE_GIRL, STAY, NONE, TEXT_UNDERGROUNDPATHROUTE5_LITTLE_GIRL
 
 	def_warps_to UNDERGROUND_PATH_ROUTE_5

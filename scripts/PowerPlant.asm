@@ -18,31 +18,29 @@ LoadVoltorbSprite::
 	ld a, [wSpriteOptions2]
 	bit BIT_MENU_ICON_SPRITES, a
 	ret z
-	ld a, d
-	ld h, a
-	ld a, e
-	ld l, a
+	ld h, d
+	ld l, e
 	ld a, 4
 	push af
-	ld de, VoltorbSprite
-	lb bc, BANK(VoltorbSprite), (VoltorbSpriteEnd - VoltorbSprite) / $10
+	ld de, PartyMonSprites1 tile 8
+	lb bc, BANK(PartyMonSprites1), 4
 	push hl
-	call CopyVideoData
+	call CopyMenuSpritesVideoData
 	ld c, 20
-	call DelayFrames
+	rst _DelayFrames
 	; make it move a bit by alternating frames
 .loop
 	pop hl
 	ld de, VoltorbSpriteFrame2
-	lb bc, BANK(VoltorbSpriteFrame2), (VoltorbSpriteFrame2End - VoltorbSpriteFrame2) / $10
+	lb bc, BANK(VoltorbSpriteFrame2), 4
 	push hl
 	call CopyVideoData
 	call Delay3
 	pop hl
-	ld de, VoltorbSprite
-	lb bc, BANK(VoltorbSprite), (VoltorbSpriteEnd - VoltorbSprite) / $10
+	ld de, PartyMonSprites1 tile 8
+	lb bc, BANK(PartyMonSprites1), 4
 	push hl
-	call CopyVideoData
+	call CopyMenuSpritesVideoData
 	call Delay3
 	pop hl
 	pop af
@@ -54,48 +52,77 @@ LoadVoltorbSprite::
 	pop hl
 	ret
 
+CopyMenuSpritesVideoDataFar::
+	call GetPredefRegisters
+	; fall through
+
+CopyMenuSpritesVideoData:
+	srl c
+	push hl
+	push de
+	push bc
+	call CopyVideoData
+	pop bc
+	pop hl
+	ld a, LEN_2BPP_TILE * 4
+	ld d, 0
+	ld e, a
+	add hl, de
+	ld d, h
+	ld e, l
+	pop hl
+	push de
+	ld a, LEN_2BPP_TILE * 2
+	ld d, 0
+	ld e, a
+	add hl, de
+	pop de
+	jp CopyVideoData
+
 
 PowerPlant_ScriptPointers:
-	dw CheckFightingMapTrainers
-	dw DisplayEnemyTrainerTextAndStartBattle
-	dw EndTrainerBattle
+	def_script_pointers
+	dw_const CheckFightingMapTrainers,              SCRIPT_POWERPLANT_DEFAULT
+	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_POWERPLANT_START_BATTLE
+	dw_const EndTrainerBattle,                      SCRIPT_POWERPLANT_END_BATTLE
 
 PowerPlant_TextPointers:
-	dw Voltorb0Text
-	dw Voltorb1Text
-	dw Voltorb2Text
-	dw Voltorb3Text
-	dw Voltorb4Text
-	dw Voltorb5Text
-	dw Voltorb6Text
-	dw Voltorb7Text
-	dw ZapdosText
-	dw PickUpItemText
-	dw PickUpItemText
-	dw PickUpItemText
-	dw PickUpItemText
-	dw PickUpItemText
+	def_text_pointers
+	dw_const PowerPlantVoltorb1Text,   TEXT_POWERPLANT_VOLTORB1
+	dw_const PowerPlantVoltorb2Text,   TEXT_POWERPLANT_VOLTORB2
+	dw_const PowerPlantVoltorb3Text,   TEXT_POWERPLANT_VOLTORB3
+	dw_const PowerPlantElectrode1Text, TEXT_POWERPLANT_ELECTRODE1
+	dw_const PowerPlantVoltorb4Text,   TEXT_POWERPLANT_VOLTORB4
+	dw_const PowerPlantVoltorb5Text,   TEXT_POWERPLANT_VOLTORB5
+	dw_const PowerPlantElectrode2Text, TEXT_POWERPLANT_ELECTRODE2
+	dw_const PowerPlantVoltorb6Text,   TEXT_POWERPLANT_VOLTORB6
+	dw_const PowerPlantZapdosText,     TEXT_POWERPLANT_ZAPDOS
+	dw_const PickUpItemText,           TEXT_POWERPLANT_ITEM1
+	dw_const PickUpItemText,           TEXT_POWERPLANT_ITEM2
+	dw_const PickUpItemText,           TEXT_POWERPLANT_ITEM3
+	dw_const PickUpItemText,           TEXT_POWERPLANT_ITEM4
+	dw_const PickUpItemText,           TEXT_POWERPLANT_ITEM5
 
 PowerPlantTrainerHeaders:
 	def_trainers
 Voltorb0TrainerHeader:
-	trainer EVENT_BEAT_POWER_PLANT_VOLTORB_0, 0, VoltorbBattleText, VoltorbBattleText, VoltorbBattleText
+	trainer EVENT_BEAT_POWER_PLANT_VOLTORB_0, 0, PowerPlantVoltorbBattleText, PowerPlantVoltorbBattleText, PowerPlantVoltorbBattleText
 Voltorb1TrainerHeader:
-	trainer EVENT_BEAT_POWER_PLANT_VOLTORB_1, 0, VoltorbBattleText, VoltorbBattleText, VoltorbBattleText
+	trainer EVENT_BEAT_POWER_PLANT_VOLTORB_1, 0, PowerPlantVoltorbBattleText, PowerPlantVoltorbBattleText, PowerPlantVoltorbBattleText
 Voltorb2TrainerHeader:
-	trainer EVENT_BEAT_POWER_PLANT_VOLTORB_2, 0, VoltorbBattleText, VoltorbBattleText, VoltorbBattleText
+	trainer EVENT_BEAT_POWER_PLANT_VOLTORB_2, 0, PowerPlantVoltorbBattleText, PowerPlantVoltorbBattleText, PowerPlantVoltorbBattleText
 Voltorb3TrainerHeader:
-	trainer EVENT_BEAT_POWER_PLANT_VOLTORB_3, 0, VoltorbBattleText, VoltorbBattleText, VoltorbBattleText
+	trainer EVENT_BEAT_POWER_PLANT_VOLTORB_3, 0, PowerPlantVoltorbBattleText, PowerPlantVoltorbBattleText, PowerPlantVoltorbBattleText
 Voltorb4TrainerHeader:
-	trainer EVENT_BEAT_POWER_PLANT_VOLTORB_4, 0, VoltorbBattleText, VoltorbBattleText, VoltorbBattleText
+	trainer EVENT_BEAT_POWER_PLANT_VOLTORB_4, 0, PowerPlantVoltorbBattleText, PowerPlantVoltorbBattleText, PowerPlantVoltorbBattleText
 Voltorb5TrainerHeader:
-	trainer EVENT_BEAT_POWER_PLANT_VOLTORB_5, 0, VoltorbBattleText, VoltorbBattleText, VoltorbBattleText
+	trainer EVENT_BEAT_POWER_PLANT_VOLTORB_5, 0, PowerPlantVoltorbBattleText, PowerPlantVoltorbBattleText, PowerPlantVoltorbBattleText
 Voltorb6TrainerHeader:
-	trainer EVENT_BEAT_POWER_PLANT_VOLTORB_6, 0, VoltorbBattleText, VoltorbBattleText, VoltorbBattleText
+	trainer EVENT_BEAT_POWER_PLANT_VOLTORB_6, 0, PowerPlantVoltorbBattleText, PowerPlantVoltorbBattleText, PowerPlantVoltorbBattleText
 Voltorb7TrainerHeader:
-	trainer EVENT_BEAT_POWER_PLANT_VOLTORB_7, 0, VoltorbBattleText, VoltorbBattleText, VoltorbBattleText
+	trainer EVENT_BEAT_POWER_PLANT_VOLTORB_7, 0, PowerPlantVoltorbBattleText, PowerPlantVoltorbBattleText, PowerPlantVoltorbBattleText
 ZapdosTrainerHeader:
-	trainer EVENT_BEAT_ZAPDOS, 0, ZapdosBattleText, ZapdosBattleText, ZapdosBattleText
+	trainer EVENT_BEAT_ZAPDOS, 0, PowerPlantZapdosBattleText, PowerPlantZapdosBattleText, PowerPlantZapdosBattleText
 	db -1 ; end
 
 InitVoltorbBattle:
@@ -112,69 +139,72 @@ InitVoltorbBattleCommon:
 	ld [wPowerPlantCurScript], a
 	pop de
 	call LoadVoltorbSprite
-	jp TextScriptEnd
+	rst TextScriptEnd
 
-Voltorb0Text:
+PowerPlantVoltorb1Text:
 	text_asm
 	ld hl, Voltorb0TrainerHeader
 	ld de, vChars0 + VOLTORB_POKEBALL_TILE1
 	jr InitVoltorbBattle
 
-Voltorb1Text:
+PowerPlantVoltorb2Text:
 	text_asm
 	ld hl, Voltorb1TrainerHeader
 	ld de, vChars0 + VOLTORB_POKEBALL_TILE1
 	jr InitVoltorbBattle
 
-Voltorb2Text:
+PowerPlantVoltorb3Text:
 	text_asm
 	ld hl, Voltorb2TrainerHeader
 	ld de, vChars0 + VOLTORB_POKEBALL_TILE2
 	jr InitAltPaletteVoltorbBattle
 
-Voltorb3Text:
+PowerPlantElectrode1Text:
 	text_asm
 	ld hl, Voltorb3TrainerHeader
 	ld de, vChars0 + VOLTORB_POKEBALL_TILE1
 	jr InitVoltorbBattle
 
-Voltorb4Text:
+PowerPlantVoltorb4Text:
 	text_asm
 	ld hl, Voltorb4TrainerHeader
 	ld de, vChars0 + VOLTORB_POKEBALL_TILE1
 	jr InitAltPaletteVoltorbBattle
 
-Voltorb5Text:
+PowerPlantVoltorb5Text:
 	text_asm
 	ld hl, Voltorb5TrainerHeader
 	ld de, vChars0 + VOLTORB_POKEBALL_TILE1
 	jr InitVoltorbBattle
 
-Voltorb6Text:
+PowerPlantElectrode2Text:
 	text_asm
 	ld hl, Voltorb6TrainerHeader
 	ld de, vChars0 + VOLTORB_POKEBALL_TILE2
 	jr InitAltPaletteVoltorbBattle
 
-Voltorb7Text:
+PowerPlantVoltorb6Text:
 	text_asm
 	ld hl, Voltorb7TrainerHeader
 	ld de, vChars0 + VOLTORB_POKEBALL_TILE1
 	jr InitAltPaletteVoltorbBattle
 
-ZapdosText:
+PowerPlantZapdosText:
 	text_asm
 	ld hl, ZapdosTrainerHeader
-	jr InitVoltorbBattle
+	call TalkToTrainer
+	ld a, [wCurMapScript]
+	ld [wPowerPlantCurScript], a
+	rst TextScriptEnd
 
-VoltorbBattleText:
-	text_far _VoltorbBattleText
+PowerPlantVoltorbBattleText:
+	text_far _PowerPlantVoltorbBattleText
 	text_end
 
-ZapdosBattleText:
-	text_far _ZapdosBattleText
+PowerPlantZapdosBattleText:
+	text_far _PowerPlantZapdosBattleText
 	text_asm
 	ld a, ZAPDOS
 	call PlayCry
 	call WaitForSoundToFinish
-	jp TextScriptEnd
+	rst TextScriptEnd

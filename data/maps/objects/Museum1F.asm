@@ -1,3 +1,10 @@
+	object_const_def
+	const MUSEUM1F_SCIENTIST1
+	const MUSEUM1F_GAMBLER
+	const MUSEUM1F_SCIENTIST2
+	const MUSEUM1F_SCIENTIST3
+	const MUSEUM1F_OLD_AMBER
+
 Museum1F_Object:
 	db $a ; border block
 
@@ -11,10 +18,10 @@ Museum1F_Object:
 	def_bg_events
 
 	def_object_events
-	object_event 12,  4, SPRITE_SCIENTIST, STAY, LEFT, 1 ; person
-	object_event  1,  4, SPRITE_GAMBLER, STAY, NONE, 2 ; person
-	object_event 15,  2, SPRITE_SCIENTIST, STAY, DOWN, 3 ; person
-	object_event 17,  4, SPRITE_SCIENTIST, STAY, NONE, 4 ; person
-	object_event 16,  2, SPRITE_OLD_AMBER, STAY, NONE, 5 ; person
+	object_event 12,  4, SPRITE_SCIENTIST, STAY, LEFT, TEXT_MUSEUM1F_SCIENTIST1
+	object_event  1,  4, SPRITE_GAMBLER, STAY, NONE, TEXT_MUSEUM1F_GAMBLER
+	object_event 15,  2, SPRITE_SCIENTIST, STAY, DOWN, TEXT_MUSEUM1F_SCIENTIST2
+	object_event 17,  4, SPRITE_SCIENTIST, STAY, NONE, TEXT_MUSEUM1F_SCIENTIST3
+	object_event 16,  2, SPRITE_OLD_AMBER, STAY, NONE, TEXT_MUSEUM1F_OLD_AMBER
 
 	def_warps_to MUSEUM_1F

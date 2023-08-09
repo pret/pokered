@@ -143,9 +143,9 @@ Evolution_PartyMonLoop: ; loop over party mons
 	call GetPartyMonName
 	call CopyToStringBuffer
 	ld hl, IsEvolvingText
-	call PrintText
+	rst _PrintText
 	ld c, 50
-	call DelayFrames
+	rst _DelayFrames
 	xor a
 	ldh [hAutoBGTransferEnabled], a
 	hlcoord 0, 0
@@ -159,7 +159,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	callfar EvolveMon
 	jp c, CancelledEvolution
 	ld hl, EvolvedText
-	call PrintText
+	rst _PrintText
 	pop hl
 	ld a, [hl]
 	ld [wd0b5], a
@@ -177,7 +177,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
 	ld c, 40
-	call DelayFrames
+	rst _DelayFrames
 	call ClearScreen
 	call RenameEvolvedMon
 	ld a, [wd11e]
@@ -185,6 +185,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, [wd0b5]
 	ld [wd11e], a
 	predef IndexToPokedex
+;;;;;;;;;; FIXME: ? code that requires BaseStats to be in the same bank as evos_moves
 	ld a, [wd11e]
 	; missingno or mew can't evolve so this is never reached for them and their base stats aren't important here
 	dec a
@@ -192,7 +193,8 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld bc, BASE_DATA_SIZE
 	call AddNTimes
 	ld de, wMonHeader
-	call CopyData
+	rst _CopyData
+;;;;;;;;;;
 	ld a, [wd0b5]
 	ld [wMonHIndex], a
 	pop af
@@ -230,7 +232,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld [hl], a
 	dec hl
 	pop bc
-	call CopyData
+	rst _CopyData
 	ld a, [wd0b5]
 	ld [wd11e], a
 	xor a
@@ -346,7 +348,7 @@ RenameEvolvedMon:
 
 CancelledEvolution:
 	ld hl, StoppedEvolvingText
-	call PrintText
+	rst _PrintText
 	call ClearScreen
 	pop hl
 	call Evolution_ReloadTilesetTilePatterns

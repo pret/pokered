@@ -1,6 +1,6 @@
 ; PureRGBnote: CHANGED: many of the marts in these mart files were modified versus the original game.
 
-CeladonMart2Clerk1Text::
+CeladonMart2FClerk1Text::
 	script_mart \
 	GREAT_BALL, \
 	SUPER_POTION, \
@@ -13,7 +13,7 @@ CeladonMart2Clerk1Text::
 	AWAKENING, \
 	PARLYZ_HEAL
 
-CeladonMart2Clerk2Text::
+CeladonMart2FClerk2Text::
 	script_mart \
 	TM_RAZOR_WIND, \ ; ROOST
 	TM_HORN_DRILL, \

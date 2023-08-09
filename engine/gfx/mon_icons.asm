@@ -20,7 +20,7 @@ ResetPartyAnimation::
 	pop bc
 	ld hl, wMonPartySpritesSavedOAM
 	ld de, wShadowOAM
-	call CopyData
+	rst _CopyData
 .doneReset
 	pop bc
 	ret

@@ -8,14 +8,14 @@ SetAttackAnimPal:
 	ld [wAnimPalette], a
 	ld a, [wOnSGB]
 	and a
-	ret z
+	jp z, TriAttackCheck
 	
 	ld a, $f0
 	ld [wAnimPalette], a
 	
 	ldh a, [hGBC]
 	and a
-	ret z 
+	jp z, TriAttackCheck
 	
 	ld a, [wIsInBattle]
 	and a
@@ -93,7 +93,7 @@ TypePalColorList:
 	db PAL_PURPLEMON;poison
 	db PAL_BROWNMON;ground
 	db PAL_GREYMON;rock
-	db PAL_BLACK2;untyped
+	db PAL_BLACK2;typeless
 	db PAL_GREENBAR;bug
 	db PAL_PURPLEMON;ghost
 	db PAL_BLACK2;unused
@@ -114,9 +114,12 @@ TypePalColorList:
 	db PAL_PINKMON;psychic
 	db PAL_CYANMON;ice
 	db PAL_0F;dragon
+	db PAL_BLACK2;tri
 
 GetSpecificAnimPalettes: ; animations that have specific mappings
 	ld a, [wAnimationID]
+	cp TRI_ATTACK
+	jp z, TriAttack
 	ld hl, AnimPaletteMapping
 	ld de, 2
 	call IsInArray ; does this move have a special color palette
@@ -124,18 +127,13 @@ GetSpecificAnimPalettes: ; animations that have specific mappings
 	and a ; clear carry
 	ret
 .hasPalette
-	ld a, b
-	add b ; double the count to get the index
-	add 1 ; second value in pair
-	ld c, a
-	ld b, 0
-	ld hl, AnimPaletteMapping
-	add hl, bc 
+	inc hl ; second entry in list = palette id
 	ld b, [hl]
 	scf
 	ret
 
 AnimPaletteMapping:
+	db FLY_ANIM_PART1, PAL_MEWMON
 	db TOSS_ANIM, PAL_REDMON
 	db GREATTOSS_ANIM, PAL_BLUEMON
 	db ULTRATOSS_ANIM, PAL_ULTRABALL
@@ -151,9 +149,16 @@ AnimPaletteMapping:
 	db PETAL_DANCE, PAL_PINKMON
 	db PAY_DAY, PAL_YELLOWMON
 	db DIZZY_PUNCH, PAL_YELLOWMON
-	db TRI_ATTACK, PAL_REDBAR
 	db SOFTBOILED, PAL_WHITEMON
 	db CONVERSION, PAL_GREENBAR
+	db HAZE, PAL_BLACKMON
+	db MIST, PAL_WHITEMON
+	db TRI_ATTACK_START, PAL_REDBAR
+	db TRI_ATTACK_TRIANGLE2, PAL_CYANMON
+	db TRI_ATTACK_TRIANGLE3, PAL_YELLOWMON
+	db TRI_ATTACK_FIRE, PAL_REDBAR
+	db TRI_ATTACK_ICE, PAL_CYANMON
+	db TRI_ATTACK_THUNDER, PAL_YELLOWMON
 	db -1 
 
 IsInArrayWrapped:

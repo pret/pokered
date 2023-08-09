@@ -1,0 +1,9 @@
+MistBlockedMoves:
+	db SAND_ATTACK
+	db TAIL_WHIP
+	db LEER
+	db GROWL
+	db STRING_SHOT
+	db SCREECH
+	db SMOKESCREEN
+	db -1

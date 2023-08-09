@@ -1,2 +1,2 @@
-	map_header BrunosRoom, BRUNOS_ROOM, GYM, 0
+	map_header BrunosRoom, BRUNOS_ROOM, GYM, DEFER_SHOWING_MAP
 	end_map_header

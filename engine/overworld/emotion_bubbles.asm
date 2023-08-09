@@ -2,13 +2,13 @@
 EmotionBubble:
 	call EmotionBubbleCommon
 	ld c, 60
-	call DelayFrames
+	rst _DelayFrames
 	jp EmotionBubbleCommon2
 
 EmotionBubbleQuick:
 	call EmotionBubbleCommon
 	ld c, 30
-	call DelayFrames
+	rst _DelayFrames
 	jp EmotionBubbleCommon2
 
 EmotionBubbleCommon:
@@ -74,7 +74,7 @@ EmotionBubbleCommon:
 EmotionBubbleCommon2:
 	ld a, d
 	ld [wUpdateSpritesEnabled], a
-	call DelayFrame
+	rst _DelayFrame
 	jp UpdateSprites
 
 EmotionBubblesPointerTable:

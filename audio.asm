@@ -77,7 +77,7 @@ INCLUDE "audio/sfx/push_boulder_1.asm"
 INCLUDE "audio/sfx/ss_anne_horn_1.asm"
 INCLUDE "audio/sfx/withdraw_deposit_1.asm"
 INCLUDE "audio/sfx/safari_zone_pa.asm"
-INCLUDE "audio/sfx/unused_cry_1.asm"
+;INCLUDE "audio/sfx/unused_cry_1.asm"
 INCLUDE "audio/sfx/cry09_1.asm"
 INCLUDE "audio/sfx/cry23_1.asm"
 INCLUDE "audio/sfx/cry24_1.asm"
@@ -205,7 +205,7 @@ INCLUDE "audio/sfx/battle_33.asm"
 INCLUDE "audio/sfx/battle_34.asm"
 INCLUDE "audio/sfx/battle_35.asm"
 INCLUDE "audio/sfx/battle_36.asm"
-INCLUDE "audio/sfx/unused_cry_2.asm"
+;INCLUDE "audio/sfx/unused_cry_2.asm"
 INCLUDE "audio/sfx/cry09_2.asm"
 INCLUDE "audio/sfx/cry23_2.asm"
 INCLUDE "audio/sfx/cry24_2.asm"
@@ -313,7 +313,7 @@ INCLUDE "audio/sfx/slots_stop_wheel.asm"
 INCLUDE "audio/sfx/slots_reward.asm"
 INCLUDE "audio/sfx/slots_new_spin.asm"
 INCLUDE "audio/sfx/shooting_star.asm"
-INCLUDE "audio/sfx/unused_cry_3.asm"
+;INCLUDE "audio/sfx/unused_cry_3.asm"
 INCLUDE "audio/sfx/cry09_3.asm"
 INCLUDE "audio/sfx/cry23_3.asm"
 INCLUDE "audio/sfx/cry24_3.asm"
@@ -352,6 +352,8 @@ INCLUDE "audio/sfx/cry1f_3.asm"
 INCLUDE "audio/sfx/cry20_3.asm"
 INCLUDE "audio/sfx/cry21_3.asm"
 INCLUDE "audio/sfx/cry22_3.asm"
+INCLUDE "audio/sfx/fall_down_hole.asm"
+INCLUDE "audio/sfx/secret_lab_notes.asm"
 
 
 SECTION "Audio Engine 1", ROMX
@@ -364,7 +366,6 @@ INCLUDE "audio/alternate_tempo.asm"
 SECTION "Low Health Alarm (Audio Engine 2)", ROMX
 
 INCLUDE "audio/low_health_alarm.asm"
-INCLUDE "audio/fade_audio.asm"
 
 
 SECTION "Audio Engine 2", ROMX
@@ -377,6 +378,7 @@ SECTION "Audio Engine 3", ROMX
 
 INCLUDE "audio/pokedex_rating_sfx.asm"
 INCLUDE "audio/engine_3.asm"
+INCLUDE "audio/play_armored_mewtwo_cry3.asm"
 
 
 SECTION "Music 1", ROMX
@@ -449,3 +451,7 @@ INCLUDE "audio/music/surfing.asm"
 INCLUDE "audio/music/jigglypuffsong.asm"
 INCLUDE "audio/music/halloffame.asm"
 INCLUDE "audio/music/credits.asm"
+INCLUDE "audio/music/secretlab1.asm"
+INCLUDE "audio/music/secretlab2.asm"
+INCLUDE "audio/music/giovanni.asm"
+

@@ -16,26 +16,27 @@ IndigoPlateauLobby_Script:
 	ret
 
 IndigoPlateauLobby_TextPointers:
-	dw IndigoHealNurseText
-	dw IndigoPlateauGymGuideText
-	dw IndigoPlateauLobbyText3
-	dw IndigoCashierText
-	dw IndigoTradeNurseText
-	dw IndigoGymGuideSonText
+	def_text_pointers
+	dw_const IndigoPlateauLobbyNurseText,            TEXT_INDIGOPLATEAULOBBY_NURSE
+	dw_const IndigoPlateauLobbyGymGuideText,         TEXT_INDIGOPLATEAULOBBY_GYM_GUIDE
+	dw_const IndigoPlateauLobbyCooltrainerFText,     TEXT_INDIGOPLATEAULOBBY_COOLTRAINER_F
+	dw_const IndigoPlateauLobbyClerkText,            TEXT_INDIGOPLATEAULOBBY_CLERK
+	dw_const IndigoPlateauLobbyLinkReceptionistText, TEXT_INDIGOPLATEAULOBBY_LINK_RECEPTIONIST
+	dw_const IndigoGymGuideSonText,                  TEXT_INDIGOPLATEAULOBBY_TM_KID
 
-IndigoHealNurseText:
+IndigoPlateauLobbyNurseText:
 	script_pokecenter_nurse
 
-IndigoPlateauGymGuideText: ; PureRGBnote: ADDED: gym guide sells you apex chips (and a couple items) after becoming champ
+IndigoPlateauLobbyGymGuideText: ; PureRGBnote: ADDED: gym guide sells you apex chips (and a couple items) after becoming champ
 	text_asm
 	CheckEvent EVENT_BECAME_CHAMP
 	jr nz, .afterChamp
 	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS ; have to hear about apex chips to receive them after that
 	jr z, .donePrompt
-	ld hl, IndigoPlateauLobbyText2getPrompt
-	call PrintText
+	ld hl, IndigoPlateauLobbyGymGuideText2Prompt
+	rst _PrintText
 	ld hl, IndigoPlateauApexChipsAfterChamp
-	call PrintText
+	rst _PrintText
 	jr .done
 .afterChamp
 	CheckEvent EVENT_TALKED_GYM_GUIDE_AFTER_CHAMP
@@ -44,31 +45,31 @@ IndigoPlateauGymGuideText: ; PureRGBnote: ADDED: gym guide sells you apex chips 
 	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS ; have to hear about apex chips to receive them after that
 	jr z, .donePrompt2
 	ld hl, IndigoPlateauGymGuideChampGreetingPrompt
-	call PrintText
+	rst _PrintText
 	ld hl, IndigoPlateauGymGuideChampApexChips
-	call PrintText
+	rst _PrintText
 	jr .sellChips
 .quickGreet
 	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS ; have to hear about apex chips to receive them after that
 	jr z, .donePrompt3
 	ld hl, IndigoPlateauGymGuideChampAfterGreetPrompt
-	call PrintText
+	rst _PrintText
 .sellChips
 	ld hl, IndigoGymGuideShop
 	call DisplayPokemartNoGreeting
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 .donePrompt
-	ld hl, IndigoPlateauLobbyText2get
-	call PrintText
+	ld hl, IndigoPlateauLobbyGymGuideText2
+	rst _PrintText
 	jr .done
 .donePrompt2
 	ld hl, IndigoPlateauGymGuideChampGreeting
-	call PrintText
+	rst _PrintText
 	jr .done
 .donePrompt3
 	ld hl, IndigoPlateauGymGuideChampAfterGreet
-	call PrintText
+	rst _PrintText
 	jr .done
 
 IndigoGymGuideSonText:  ; PureRGBnote: ADDED: new NPC who will sell TMs - sells all 50 TMs after becoming champ.
@@ -76,7 +77,7 @@ IndigoGymGuideSonText:  ; PureRGBnote: ADDED: new NPC who will sell TMs - sells 
 	CheckEvent EVENT_BECAME_CHAMP
 	jr nz, .afterChamp
 	ld hl, IndigoPlateauGymGuideSonText
-	call PrintText
+	rst _PrintText
 	CheckEvent EVENT_MET_GYM_GUIDE_SON
 	call nz, .noIntroduce
 	call .checkIntroduce
@@ -87,21 +88,21 @@ IndigoGymGuideSonText:  ; PureRGBnote: ADDED: new NPC who will sell TMs - sells 
 	ret
 .introduce
 	ld hl, IndigoPlateauGymGuideSonIntro
-	call PrintText
+	rst _PrintText
 	ret
 .noIntroduce
 	ld hl, IndigoPlateauGymGuideSonShopStart
-	call PrintText
+	rst _PrintText
 	ret
 .moreTMs
 	CheckEvent EVENT_TALKED_GYM_GUIDE_SON_AFTER_CHAMP
 	ret nz
 	ld hl, IndigoPlateauGymGuideSonMoreTMs
-	call PrintText
+	rst _PrintText
 	ret
 .afterChamp
 	ld hl, IndigoPlateauGymGuideSonChampText
-	call PrintText
+	rst _PrintText
 	call .checkIntroduce
 	CheckEvent EVENT_TALKED_GYM_GUIDE_SON_AFTER_CHAMP
 	call nz, .noIntroduce 
@@ -117,14 +118,14 @@ IndigoGymGuideSonText:  ; PureRGBnote: ADDED: new NPC who will sell TMs - sells 
 .done
 	call DisplayPokemartNoGreeting
 	SetEvent EVENT_MET_GYM_GUIDE_SON
-	jp TextScriptEnd
+	rst TextScriptEnd
 
-IndigoPlateauLobbyText2get:
-	text_far _IndigoPlateauLobbyText2
+IndigoPlateauLobbyGymGuideText2:
+	text_far _IndigoPlateauLobbyGymGuideText
 	text_end
 
-IndigoPlateauLobbyText2getPrompt:
-	text_far _IndigoPlateauLobbyText2
+IndigoPlateauLobbyGymGuideText2Prompt:
+	text_far _IndigoPlateauLobbyGymGuideText
 	text_promptbutton
 	text_end
 
@@ -132,8 +133,8 @@ IndigoPlateauApexChipsAfterChamp:
 	text_far _IndigoPlateauApexChipsAfterChamp
 	text_end
 
-IndigoPlateauLobbyText3:
-	text_far _IndigoPlateauLobbyText3
+IndigoPlateauLobbyCooltrainerFText:
+	text_far _IndigoPlateauLobbyCooltrainerFText
 	text_end
 
 IndigoPlateauGymGuideChampGreeting:
@@ -158,10 +159,10 @@ IndigoPlateauGymGuideChampAfterGreetPrompt:
 	text_promptbutton
 	text_end
 
-IndigoTradeNurseText:
+IndigoPlateauLobbyLinkReceptionistText:
 	;text_asm ;DEBUGMODE
 	;SetEvent EVENT_BECAME_CHAMP
-	;jp TextScriptEnd
+	;rst TextScriptEnd
 	script_cable_club_receptionist
 
 IndigoPlateauGymGuideSonText:

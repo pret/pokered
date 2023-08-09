@@ -1,3 +1,4 @@
+; UNUSED since conversion's effect was changed
 ConversionEffect_:
 	ld hl, wEnemyMonType1
 	ld de, wBattleMonType1
@@ -27,9 +28,3 @@ ConversionEffect_:
 ConvertedTypeText:
 	text_far _ConvertedTypeText
 	text_end
-
-PrintButItFailedText:
-	ld hl, PrintButItFailedText_
-CallBankF:
-	ld b, BANK(PrintButItFailedText_)
-	jp Bankswitch

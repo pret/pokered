@@ -1,42 +1,64 @@
+; PureRGBnote: ADDED: code was added to make doors appear at the back of Bills House once you become champ.
+; Bill will also talk about his new beach garden.
+
 BillsHouse_Script:
+	call BillsHouseAddDoors
 	call EnableAutoTextBoxDrawing
 	ld a, [wBillsHouseCurScript]
 	ld hl, BillsHouse_ScriptPointers
 	jp CallFunctionInTable
 
-BillsHouse_ScriptPointers:
-	dw BillsHouseScript0
-	dw BillsHouseScript1
-	dw BillsHouseScript2
-	dw BillsHouseScript3
-	dw BillsHouseScript4
-	dw BillsHouseScript5
+BillsHouseAddDoors:
+	ld hl, wCurrentMapScriptFlags
+	bit 5, [hl]
+	res 5, [hl]
+	ret z
+	ResetEvent EVENT_IN_BILLS_GARDEN
+	CheckEvent EVENT_BECAME_CHAMP
+	ret z
+	ld de, BillsHouseTileBlockReplacements
+	callfar ReplaceMultipleTileBlocks
+	; if the player's standing on y-coordinate 0 on loading the map, it means they entered from the top. 
+	; They need to be forced to walk out from the doorway. It doesn't work the normal way because of the tile blocks still needing to be replaced.
+	ld a, [wYCoord] 
+	and a
+	ret nz
+	jpfar ForceStepOutFromDoor
 
-BillsHouseScript0:
+BillsHouse_ScriptPointers:
+	def_script_pointers
+	dw_const BillsHouseDefaultScript,              SCRIPT_BILLSHOUSE_DEFAULT
+	dw_const BillsHousePokemonWalkToMachineScript, SCRIPT_BILLSHOUSE_POKEMON_WALK_TO_MACHINE
+	dw_const BillsHousePokemonEntersMachineScript, SCRIPT_BILLSHOUSE_POKEMON_ENTERS_MACHINE
+	dw_const BillsHouseBillExitsMachineScript,     SCRIPT_BILLSHOUSE_BILL_EXITS_MACHINE
+	dw_const BillsHouseCleanupScript,              SCRIPT_BILLSHOUSE_CLEANUP
+	dw_const BillsHousePCScript,                   SCRIPT_BILLSHOUSE_PC
+
+BillsHouseDefaultScript:
 	ret
 
-BillsHouseScript1:
+BillsHousePokemonWalkToMachineScript:
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	and a ; cp SPRITE_FACING_DOWN
-	ld de, MovementData_1e79c
+	ld de, .PokemonWalkToMachineMovement
 	jr nz, .notDown
-	ld de, MovementData_1e7a0
+	ld de, .PokemonWalkAroundPlayerMovement
 .notDown
-	ld a, $1
+	ld a, BILLSHOUSE_BILL_POKEMON
 	ldh [hSpriteIndex], a
 	call MoveSprite
-	ld a, $2
+	ld a, SCRIPT_BILLSHOUSE_POKEMON_ENTERS_MACHINE
 	ld [wBillsHouseCurScript], a
 	ret
 
-MovementData_1e79c:
+.PokemonWalkToMachineMovement:
 	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_UP
 	db -1 ; end
 
 ; make Bill walk around the player
-MovementData_1e7a0:
+.PokemonWalkAroundPlayerMovement:
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_UP
@@ -44,7 +66,7 @@ MovementData_1e7a0:
 	db NPC_MOVEMENT_UP
 	db -1 ; end
 
-BillsHouseScript2:
+BillsHousePokemonEntersMachineScript:
 	ld a, [wd730]
 	bit 0, a
 	ret nz
@@ -54,16 +76,16 @@ BillsHouseScript2:
 	SetEvent EVENT_BILL_SAID_USE_CELL_SEPARATOR
 	xor a
 	ld [wJoyIgnore], a
-	ld a, $3
+	ld a, SCRIPT_BILLSHOUSE_BILL_EXITS_MACHINE
 	ld [wBillsHouseCurScript], a
 	ret
 
-BillsHouseScript3:
+BillsHouseBillExitsMachineScript:
 	CheckEvent EVENT_USED_CELL_SEPARATOR_ON_BILL
 	ret z
-	ld a, $f0
+	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
-	ld a, $2
+	ld a, BILLSHOUSE_BILL_SS_TICKET
 	ld [wSpriteIndex], a
 	ld a, $c
 	ldh [hSpriteScreenYCoord], a
@@ -78,16 +100,16 @@ BillsHouseScript3:
 	ld [wMissableObjectIndex], a
 	predef ShowObject
 	ld c, 8
-	call DelayFrames
-	ld a, $2
+	rst _DelayFrames
+	ld a, BILLSHOUSE_BILL_SS_TICKET
 	ldh [hSpriteIndex], a
-	ld de, MovementData_1e807
+	ld de, BillExitMachineMovement
 	call MoveSprite
-	ld a, $4
+	ld a, SCRIPT_BILLSHOUSE_CLEANUP
 	ld [wBillsHouseCurScript], a
 	ret
 
-MovementData_1e807:
+BillExitMachineMovement:
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
@@ -95,7 +117,7 @@ MovementData_1e807:
 	db NPC_MOVEMENT_DOWN
 	db -1 ; end
 
-BillsHouseScript4:
+BillsHouseCleanupScript:
 	ld a, [wd730]
 	bit 0, a
 	ret nz
@@ -103,71 +125,72 @@ BillsHouseScript4:
 	ld [wJoyIgnore], a
 	SetEvent EVENT_MET_BILL_2 ; this event seems redundant
 	SetEvent EVENT_MET_BILL
-	ld a, $0
+	ld a, SCRIPT_BILLSHOUSE_DEFAULT
 	ld [wBillsHouseCurScript], a
 	ret
 
-BillsHouseScript5:
-	ld a, $4
+BillsHousePCScript:
+	ld a, TEXT_BILLSHOUSE_ACTIVATE_PC
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld a, $0
+	ld a, SCRIPT_BILLSHOUSE_DEFAULT
 	ld [wBillsHouseCurScript], a
 	ret
 
 BillsHouse_TextPointers:
-	dw BillsHouseText1
-	dw BillsHouseText2
-	dw BillsHouseText3
-	dw BillsHouseText4
+	def_text_pointers
+	dw_const BillsHouseBillPokemonText,               TEXT_BILLSHOUSE_BILL_POKEMON
+	dw_const BillsHouseBillSSTicketText,              TEXT_BILLSHOUSE_BILL_SS_TICKET
+	dw_const BillsHouseBillCheckOutMyRarePokemonText, TEXT_BILLSHOUSE_BILL_CHECK_OUT_MY_RARE_POKEMON
+	dw_const BillsHouseActivatePCScript,              TEXT_BILLSHOUSE_ACTIVATE_PC
 
-BillsHouseText4:
+BillsHouseActivatePCScript:
 	script_bills_pc
 
-BillsHouseText1:
+BillsHouseBillPokemonText:
 	text_asm
-	ld hl, BillsHouseText_1e865
-	call PrintText
+	ld hl, .ImNotAPokemonText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .asm_1e85a
-.asm_1e84d
-	ld hl, BillsHouseText_1e86a
-	call PrintText
-	ld a, $1
+	jr nz, .answered_no
+.use_machine
+	ld hl, .UseSeparationSystemText
+	rst _PrintText
+	ld a, SCRIPT_BILLSHOUSE_POKEMON_WALK_TO_MACHINE
 	ld [wBillsHouseCurScript], a
-	jr .asm_1e862
-.asm_1e85a
-	ld hl, BillsHouseText_1e86f
-	call PrintText
-	jr .asm_1e84d
-.asm_1e862
-	jp TextScriptEnd
+	jr .text_script_end
+.answered_no
+	ld hl, .NoYouGottaHelpText
+	rst _PrintText
+	jr .use_machine
+.text_script_end
+	rst TextScriptEnd
 
-BillsHouseText_1e865:
-	text_far _BillsHouseText_1e865
+.ImNotAPokemonText:
+	text_far _BillsHouseBillImNotAPokemonText
 	text_end
 
-BillsHouseText_1e86a:
-	text_far _BillsHouseText_1e86a
+.UseSeparationSystemText:
+	text_far _BillsHouseBillUseSeparationSystemText
 	text_end
 
-BillsHouseText_1e86f:
-	text_far _BillsHouseText_1e86f
+.NoYouGottaHelpText:
+	text_far _BillsHouseBillNoYouGottaHelpText
 	text_end
 
-BillsHouseText2:
+BillsHouseBillSSTicketText:
 	text_asm
 	CheckEvent EVENT_GOT_SS_TICKET
-	jr nz, .asm_1e8a9
-	ld hl, BillThankYouText
-	call PrintText
+	jr nz, .got_ss_ticket
+	ld hl, .ThankYouText
+	rst _PrintText
 	lb bc, S_S_TICKET, 1
 	call GiveItem
-	jr nc, .BagFull
-	ld hl, SSTicketReceivedText
-	call PrintText
+	jr nc, .bag_full
+	ld hl, .SSTicketReceivedText
+	rst _PrintText
 	SetEvent EVENT_GOT_SS_TICKET
 	ld a, HS_CERULEAN_GUARD_1
 	ld [wMissableObjectIndex], a
@@ -175,40 +198,48 @@ BillsHouseText2:
 	ld a, HS_CERULEAN_GUARD_2
 	ld [wMissableObjectIndex], a
 	predef HideObject
-.asm_1e8a9
-	ld hl, BillsHouseText_1e8cb
-	call PrintText
-	jr .asm_1e8b7
-.BagFull
-	ld hl, SSTicketNoRoomText
-	call PrintText
-.asm_1e8b7
-	jp TextScriptEnd
+.got_ss_ticket
+	ld hl, .WhyDontYouGoInsteadOfMeText
+	rst _PrintText
+	jr .text_script_end
+.bag_full
+	ld hl, .SSTicketNoRoomText
+	rst _PrintText
+.text_script_end
+	rst TextScriptEnd
 
-BillThankYouText:
-	text_far _BillThankYouText
+.ThankYouText:
+	text_far _BillsHouseBillThankYouText
 	text_end
 
-SSTicketReceivedText:
+.SSTicketReceivedText:
 	text_far _SSTicketReceivedText
 	sound_get_key_item
 	text_promptbutton
 	text_end
 
-SSTicketNoRoomText:
+.SSTicketNoRoomText:
 	text_far _SSTicketNoRoomText
 	text_end
 
-BillsHouseText_1e8cb:
-	text_far _BillsHouseText_1e8cb
+.WhyDontYouGoInsteadOfMeText:
+	text_far _BillsHouseBillWhyDontYouGoInsteadOfMeText
 	text_end
 
-BillsHouseText3:
+BillsHouseBillCheckOutMyRarePokemonText:
 	text_asm
-	ld hl, BillsHouseText_1e8da
-	call PrintText
-	jp TextScriptEnd
+	CheckEvent EVENT_BECAME_CHAMP
+	ld hl, .Text
+	jr z, .done
+	ld hl, BillsHouseGardenInfo
+.done
+	rst _PrintText
+	rst TextScriptEnd
 
-BillsHouseText_1e8da:
-	text_far _BillsHouseText_1e8da
+.Text:
+	text_far _BillsHouseBillCheckOutMyRarePokemonText
+	text_end
+
+BillsHouseGardenInfo:
+	text_far _BillsHouseGardenInfo
 	text_end

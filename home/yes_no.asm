@@ -38,3 +38,23 @@ DisplayYesNoChoice::
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	jp LoadScreenTilesFromBuffer1
+
+; PureRGBnote: ADDED: wrapper for the new multiple choice menu function
+; hl = which list in multi_choice_menu.asm to use
+; b = what buttons to watch
+; output = wCurrentMenuItem = which entry the cursor was on
+; z flag = whether they pressed B on the menu (nz if they did)
+DisplayMultiChoiceTextBox::
+	xor a
+	ld [wCurrentMenuItem], a
+DisplayMultiChoiceTextBoxNoMenuReset::
+	ld a, l
+	ld [wListPointer], a
+	ld a, h
+	ld [wListPointer + 1], a
+	ld a, b
+	ld [wMenuWatchedKeys], a
+	callfar DisplayMultiChoiceMenu
+	ldh a, [hJoy5]
+	bit BIT_B_BUTTON, a
+	ret

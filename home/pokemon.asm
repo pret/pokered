@@ -137,11 +137,19 @@ LoadFrontSpriteByMonIndex::
 	ret
 
 
+;;;;;;;;;; PureRGbnote: ADDED: code that remaps channel 8 of armored mewtwo's cry if it's passed to this function
 PlayCry::
 ; Play monster a's cry.
+	push af
 	call GetCryData
-	call PlaySound
+	rst _PlaySound
+	pop af
+	cp ARMORED_MEWTWO
+	jr nz, .wait
+	callfar RemapArmoredMewtwoCry
+.wait
 	jp WaitForSoundToFinish
+;;;;;;;;;;
 
 GetCryData::
 ; Load cry data for monster a.
@@ -298,7 +306,8 @@ RedrawPartyMenu::
 
 DrawPartyMenuCommon::
 	ld b, BANK(RedrawPartyMenu_)
-	jp Bankswitch
+	rst _Bankswitch
+	ret
 
 ; prints a pokemon's status condition
 ; INPUT:
@@ -396,8 +405,10 @@ GetMonHeader::
 	ld b, $77 ; size of Aerodactyl fossil sprite
 	cp FOSSIL_AERODACTYL ; Aerodactyl fossil
 	jr z, .specialID
-	cp MEW
-	jr z, .mew
+	cp ARMORED_MEWTWO
+	jr z, .armored_mewtwo
+	cp POWERED_HAUNTER
+	jr z, .powered_haunter
 	predef IndexToPokedex   ; convert pokemon ID in [wd11e] to pokedex number
 	ld a, [wd11e]
 	and a
@@ -418,12 +429,15 @@ GetMonHeader::
 	inc hl
 	ld [hl], d
 	jr .done
-.mew
-	ld hl, MewBaseStats 
+.powered_haunter
+	ld hl, PoweredHaunterBaseStats
+	jr .copyBaseStats
+.armored_mewtwo
+	ld hl, ArmoredMewtwoBaseStats 
 .copyBaseStats
 	ld bc, BASE_DATA_SIZE
 	ld de, wMonHeader
-	call CopyData ; PureRGBnote: CHANGED: mew header now in same bank as rest of base stat data so no need to farcopy
+	rst _CopyData ; PureRGBnote: CHANGED: mew header now in same bank as rest of base stat data so no need to farcopy
 .done
 	ld a, [wd0b5]
 	ld [wMonHIndex], a
@@ -450,7 +464,7 @@ GetPartyMonName::
 	ld de, wcd6d
 	push de
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst _CopyData
 	pop de
 	pop bc
 	pop hl

@@ -53,28 +53,30 @@ Mansion1Script_Switches::
 	ret nz
 	xor a
 	ldh [hJoyHeld], a
-	ld a, $7
+	ld a, TEXT_POKEMONMANSION1F_SWITCH
 	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
 PokemonMansion1F_ScriptPointers:
-	dw CheckFightingMapTrainers
-	dw DisplayEnemyTrainerTextAndStartBattle
-	dw EndTrainerBattle
+	def_script_pointers
+	dw_const CheckFightingMapTrainers,              SCRIPT_POKEMONMANSION1F_DEFAULT
+	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_POKEMONMANSION1F_START_BATTLE
+	dw_const EndTrainerBattle,                      SCRIPT_POKEMONMANSION1F_END_BATTLE
 
 PokemonMansion1F_TextPointers:
-	dw Mansion1Text1
-	dw Mansion1Text2
-	dw Mansion1Text3
-	dw Mansion1Text4
-	dw PickUpItemText
-	dw PickUpItemText
-	dw Mansion1Text5
+	def_text_pointers
+	dw_const PokemonMansion1FScientistText, TEXT_POKEMONMANSION1F_SCIENTIST
+	dw_const Mansion1Text2,                 TEXT_POKEMONMANSION1F_BURGLAR
+	dw_const Mansion1Text3,                 TEXT_POKEMONMANSION1F_FIREFIGHTER1
+	dw_const Mansion1Text4,                 TEXT_POKEMONMANSION1F_FIREFIGHTER2
+	dw_const PickUpItemText,                TEXT_POKEMONMANSION1F_ITEM1
+	dw_const PickUpItemText,                TEXT_POKEMONMANSION1F_ITEM2
+	dw_const PokemonMansion1FSwitchText,    TEXT_POKEMONMANSION1F_SWITCH
 
 Mansion1TrainerHeaders:
 	def_trainers
 Mansion1TrainerHeader0:
-	trainer EVENT_BEAT_MANSION_1_TRAINER_0, 3, Mansion1BattleText1, Mansion1EndBattleText1, Mansion1AfterBattleText1
+	trainer EVENT_BEAT_MANSION_1_TRAINER_0, 3, PokemonMansion1FScientistBattleText, PokemonMansion1FScientistEndBattleText, PokemonMansion1FScientistAfterBattleText
 Mansion1TrainerHeader1:
 	trainer EVENT_BEAT_MANSION_1_TRAINER_1, 3, Mansion1BattleText2, Mansion1EndBattleText2, Mansion1AfterBattleText2
 Mansion1TrainerHeader2:
@@ -83,29 +85,29 @@ Mansion1TrainerHeader3:
 	trainer EVENT_BEAT_MANSION_1_TRAINER_3, 3, Mansion1BattleText4, Mansion1EndBattleText4, Mansion1AfterBattleText4
 	db -1 ; end
 
-Mansion1Text1:
+PokemonMansion1FScientistText:
 	text_asm
 	ld hl, Mansion1TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
-Mansion1BattleText1:
-	text_far _Mansion1BattleText1
+PokemonMansion1FScientistBattleText:
+	text_far _PokemonMansion1FScientistBattleText
 	text_end
 
-Mansion1EndBattleText1:
-	text_far _Mansion1EndBattleText1
+PokemonMansion1FScientistEndBattleText:
+	text_far _PokemonMansion1FScientistEndBattleText
 	text_end
 
-Mansion1AfterBattleText1:
-	text_far _Mansion1AfterBattleText1
+PokemonMansion1FScientistAfterBattleText:
+	text_far _PokemonMansion1FScientistAfterBattleText
 	text_end
 
 Mansion1Text2:
 	text_asm
 	ld hl, Mansion1TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Mansion1BattleText2:
 	text_far _Mansion1BattleText2
@@ -123,7 +125,7 @@ Mansion1Text3:
 	text_asm
 	ld hl, Mansion1TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Mansion1BattleText3:
 	text_far _Mansion1BattleText3
@@ -141,7 +143,7 @@ Mansion1Text4:
 	text_asm
 	ld hl, Mansion1TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Mansion1BattleText4:
 	text_far _Mansion1BattleText4
@@ -155,40 +157,40 @@ Mansion1AfterBattleText4:
 	text_far _Mansion1AfterBattleText4
 	text_end
 
-Mansion1Text5:
+PokemonMansion1FSwitchText:
 	text_asm
-	ld hl, MansionSwitchText
-	call PrintText
+	ld hl, .Text
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .asm_4438c
+	jr nz, .not_pressed
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
-	ld hl, MansionSwitchPressedText
-	call PrintText
+	ld hl, .PressedText
+	rst _PrintText
 	ld a, SFX_GO_INSIDE
-	call PlaySound
+	rst _PlaySound
 	CheckAndSetEvent EVENT_MANSION_SWITCH_ON
-	jr z, .asm_44392
+	jr z, .done
 	ResetEventReuseHL EVENT_MANSION_SWITCH_ON
-	jr .asm_44392
-.asm_4438c
-	ld hl, MansionSwitchNotPressedText
-	call PrintText
-.asm_44392
-	jp TextScriptEnd
+	jr .done
+.not_pressed
+	ld hl, .NotPressedText
+	rst _PrintText
+.done
+	rst TextScriptEnd
 
-MansionSwitchText:
-	text_far _MansionSwitchText
+.Text:
+	text_far _PokemonMansion1FSwitchText
 	text_end
 
-MansionSwitchPressedText:
-	text_far _MansionSwitchPressedText
+.PressedText:
+	text_far _PokemonMansion1FSwitchPressedText
 	text_end
 
-MansionSwitchNotPressedText:
-	text_far _MansionSwitchNotPressedText
+.NotPressedText:
+	text_far _PokemonMansion1FSwitchNotPressedText
 	text_end

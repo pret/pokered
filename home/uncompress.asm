@@ -33,8 +33,18 @@ _UncompressSpriteData::
 	ld [wSpriteCurPosY], a
 	ld [wSpriteLoadFlags], a
 	call ReadNextInputByte    ; first byte of input determines sprite width (high nybble) and height (low nybble) in tiles (8x8 pixels)
+	;Note - the maximum and minimum height and width allowed by the sprite buffer is 7x7 or 1x1 tiles
+	;		- Any nybble that is either a zero or a value more than 7 will cause a buffer overflow in the sram
+	;		- The first piece of sram data that gets overflowed into just happens to contain hall of fame information
+	;		- Now imagine the classic missingo where this byte is just junk data. It could be any number from $00 to $FF
+	;		- This is why loading the glitchy missingno sprite will corrupt the hall of fame data
+	;shinpokerednote: FIXED: let's  put some limits in place so this can never happen.
 	ld b, a
-	and $f
+	;and $f
+	and $07	;this will cap the low nybble to a maximum of 7
+	jr nz, .skip1	;if the low nybble is zero, increment it to a value of 1
+	inc a	
+.skip1
 	add a
 	add a
 	add a

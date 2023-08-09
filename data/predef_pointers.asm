@@ -32,7 +32,6 @@ PredefPointers::
 	add_predef ApplyOutOfBattlePoisonDamage
 	add_predef AnyPartyAlive
 	add_predef ShowObject
-	add_predef ShowObject2
 	add_predef ReplaceTileBlock
 	add_predef InitPlayerData2
 	add_predef LoadTilesetHeader
@@ -65,8 +64,8 @@ PredefPointers::
 	add_predef GetMoveSoundB
 	add_predef FlashScreen
 	add_predef GetTileAndCoordsInFrontOfPlayer
-	add_predef StatusScreen
-	add_predef StatusScreen2
+	add_predef StatusScreenOriginal
+	add_predef StatusScreenLoop
 	add_predef InternalClockTradeAnim
 	add_predef TrainerEngage
 	add_predef IndexToPokedex
@@ -112,3 +111,8 @@ PredefPointers::
 	add_predef OaksAideScript
 	add_predef PickUpItemQuantity
 	add_predef CheckPriorityPredef
+	add_predef FarLoadTownMapEntry
+	add_predef SaveScreenTileAreaToBuffer3
+	add_predef LoadScreenTileAreaFromBuffer3
+	add_predef CopyMenuSpritesVideoDataFar
+	

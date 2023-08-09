@@ -1,19 +1,19 @@
-_SafariZoneNorthText3::
+_SafariZoneNorthRestHouseSignText::
 	text "REST HOUSE"
 	done
 
-_SafariZoneNorthText4::
+_SafariZoneNorthTrainerTips1Text::
 	text "TRAINER TIPS"
 
 	para "The SECRET HOUSE"
 	line "is still ahead!"
 	done
 
-_SafariZoneNorthText5::
+_SafariZoneNorthSignText::
 	text "AREA 2"
 	done
 
-_SafariZoneNorthText6::
+_SafariZoneNorthTrainerTips2Text::
 	text "TRAINER TIPS"
 
 	para "#MON hide in"
@@ -24,7 +24,7 @@ _SafariZoneNorthText6::
 	cont "flush them out."
 	done
 
-_SafariZoneNorthText7::
+_SafariZoneNorthTrainerTips3Text::
 	text "TRAINER TIPS"
 
 	para "Win a free HM for"
@@ -78,7 +78,7 @@ _SafariZoneNorthJugglerAfterBattleText::
 	cont "RANGER HUNT game"
 	cont "is supposed to be"
 	cont "a special type of"
-	cont "POKé BALL."
+	cont "# BALL."
 
 	para "Not available"
 	line "anywhere else!"
@@ -182,7 +182,7 @@ _SafariZoneNorthEngineerAfterBattleText::
 	done
 
 _SafariZoneNorthManiacText::
-	text "POKéMANIAC code!"
+	text "#MANIAC code!"
 	line "Tenet one!"
 
 	para "Always battle"
@@ -197,7 +197,7 @@ _SafariZoneNorthManiacEndBattleText::
 	prompt
 
 _SafariZoneNorthManiacAfterBattleText::
-	text "POKéMANIAC code!"
+	text "#MANIAC code!"
 	line "Tenet three!"
 
 	para "If you lose to a"
@@ -206,7 +206,7 @@ _SafariZoneNorthManiacAfterBattleText::
 	cont "your pal!"
 
 	para "--You and the"
-	line "POKéMANIAC did"
+	line "#MANIAC did"
 	cont "the secret cool-"
 	cont "dudes-only"
 	cont "handshake!"

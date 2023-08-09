@@ -1,6 +1,6 @@
 DelayFrames::
 ; wait c frames
-	call DelayFrame
+	rst _DelayFrame
 	dec c
 	jr nz, DelayFrames
 	ret
@@ -9,12 +9,13 @@ PlaySoundWaitForCurrent::
 	push af
 	call WaitForSoundToFinish
 	pop af
-	jp PlaySound
+	rst _PlaySound
+	ret
 
 ; Wait for sound to finish playing
 WaitForSoundToFinish::
-	ld a, [wLowHealthAlarm]
-	and $80
+	ld a, [wLowHealthTonePairs]
+	bit 7, a ; set if low health alarm sound is currently playing
 	ret nz
 	push hl
 .waitLoop

@@ -37,7 +37,6 @@ TrainerClassMoveChoiceModifications:
 	move_choices 1, 3    ; BLACKBELT
 	move_choices 1       ; RIVAL1
 	move_choices 1, 3, 4 ; PROF_OAK
-	move_choices 1, 2    ; CHIEF
 	move_choices 1, 2, 4 ; SCIENTIST
 	move_choices 1, 3    ; GIOVANNI
 	move_choices 1       ; ROCKET
@@ -63,4 +62,6 @@ TrainerClassMoveChoiceModifications:
 	move_choices 1, 3    ; RANGER
 	move_choices 1, 3    ; RANGER_F
 	move_choices 1, 2    ; ROOKIE
+	move_choices 1, 3    ; SOLDIER
+	move_choices 1, 3, 4 ; CHIEF
 	assert_list_length NUM_TRAINERS

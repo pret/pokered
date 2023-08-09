@@ -1,3 +1,6 @@
+	object_const_def
+	const NAMERATERSHOUSE_NAME_RATER
+
 NameRatersHouse_Object:
 	db $a ; border block
 
@@ -8,6 +11,6 @@ NameRatersHouse_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  5,  3, SPRITE_SILPH_PRESIDENT, STAY, LEFT, 1 ; person
+	object_event  5,  3, SPRITE_SILPH_PRESIDENT, STAY, LEFT, TEXT_NAMERATERSHOUSE_NAME_RATER
 
 	def_warps_to NAME_RATERS_HOUSE

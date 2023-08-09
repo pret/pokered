@@ -12,9 +12,9 @@ PlayerPC::
 	jr nz, PlayerPCMenu
 ; accessing it directly
 	ld a, SFX_TURN_ON_PC
-	call PlaySound
+	rst _PlaySound
 	ld hl, TurnedOnPC2Text
-	call PrintText
+	rst _PrintText
 
 PlayerPCMenu:
 	xor a
@@ -49,8 +49,10 @@ PlayerPCMenu:
 	ld [hli], a ; wListScrollOffset
 	ld [hl], a ; wMenuWatchMovingOutOfBounds
 	ld [wPlayerMonNumber], a
+	ld hl, wd730
+	set 6, [hl]
 	ld hl, WhatDoYouWantText
-	call PrintText
+	rst _PrintText
 	call HandleMenuInput
 	bit 1, a
 	jp nz, ExitPlayerPC
@@ -70,7 +72,7 @@ ExitPlayerPC:
 	jr nz, .next
 ; accessing it directly
 	ld a, SFX_TURN_OFF_PC
-	call PlaySound
+	rst _PlaySound
 	call WaitForSoundToFinish
 .next
 	ld hl, wFlags_0xcd60
@@ -86,20 +88,24 @@ ExitPlayerPC:
 	ret
 
 PlayerPCDeposit:
-	ld a, 1
-	ld [wListWithTMText], a ; PureRGBnote: ADDED: this list menu can have TMs so turn on that flag so it checks each item scrolled over
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wListScrollOffset], a
+	inc a
+	ld [wListWithTMText], a ; PureRGBnote: ADDED: this list menu can have TMs so turn on that flag so it checks each item scrolled over
 	ld a, [wNumBagItems]
 	and a
 	jr nz, .loop
+	ld hl, wd730
+	res 6, [hl]
 	ld hl, NothingToDepositText
-	call PrintText
+	rst _PrintText
 	jp PlayerPCMenu
 .loop
+	ld hl, wd730
+	set 6, [hl]
 	ld hl, WhatToDepositText
-	call PrintText
+	rst _PrintText
 	ld hl, wNumBagItems
 	ld a, l
 	ld [wListPointer], a
@@ -119,7 +125,7 @@ PlayerPCDeposit:
 	jr nz, .next
 ; if it's not a key item, there can be more than one of the item
 	ld hl, DepositHowManyText
-	call PrintText
+	rst _PrintText
 	call DisplayChooseQuantityMenu
 	cp $ff
 	jp z, .loop
@@ -128,34 +134,38 @@ PlayerPCDeposit:
 	call AddItemToInventory
 	jr c, .roomAvailable
 	ld hl, NoRoomToStoreText
-	call PrintText
+	rst _PrintText
 	jp .loop
 .roomAvailable
 	ld hl, wNumBagItems
 	call RemoveItemFromInventory
 	call WaitForSoundToFinish
 	ld a, SFX_WITHDRAW_DEPOSIT
-	call PlaySound
+	rst _PlaySound
 	call WaitForSoundToFinish
 	ld hl, ItemWasStoredText
-	call PrintText
+	rst _PrintText
 	jp .loop
 
 PlayerPCWithdraw:
-	ld a, 1
-	ld [wListWithTMText], a ; PureRGBnote: ADDED: this list menu can have TMs so turn on that flag so it checks each item scrolled over
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wListScrollOffset], a
+	inc a
+	ld [wListWithTMText], a ; PureRGBnote: ADDED: this list menu can have TMs so turn on that flag so it checks each item scrolled over
 	ld a, [wNumBoxItems]
 	and a
 	jr nz, .loop
+	ld hl, wd730
+	res 6, [hl]
 	ld hl, NothingStoredText
-	call PrintText
+	rst _PrintText
 	jp PlayerPCMenu
 .loop
+	ld hl, wd730
+	set 6, [hl]
 	ld hl, WhatToWithdrawText
-	call PrintText
+	rst _PrintText
 	ld hl, wNumBoxItems
 	ld a, l
 	ld [wListPointer], a
@@ -175,7 +185,7 @@ PlayerPCWithdraw:
 	jr nz, .next
 ; if it's not a key item, there can be more than one of the item
 	ld hl, WithdrawHowManyText
-	call PrintText
+	rst _PrintText
 	call DisplayChooseQuantityMenu
 	cp $ff
 	jp z, .loop
@@ -184,32 +194,38 @@ PlayerPCWithdraw:
 	call AddItemToInventory
 	jr c, .roomAvailable
 	ld hl, CantCarryMoreText
-	call PrintText
+	rst _PrintText
 	jp .loop
 .roomAvailable
 	ld hl, wNumBoxItems
 	call RemoveItemFromInventory
 	call WaitForSoundToFinish
 	ld a, SFX_WITHDRAW_DEPOSIT
-	call PlaySound
+	rst _PlaySound
 	call WaitForSoundToFinish
 	ld hl, WithdrewItemText
-	call PrintText
+	rst _PrintText
 	jp .loop
 
 PlayerPCToss:
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wListScrollOffset], a
+	inc a
+	ld [wListWithTMText], a ; PureRGBnote: ADDED: this list menu can have TMs so turn on that flag so it checks each item scrolled over
 	ld a, [wNumBoxItems]
 	and a
 	jr nz, .loop
+	ld hl, wd730
+	res 6, [hl]
 	ld hl, NothingStoredText
-	call PrintText
+	rst _PrintText
 	jp PlayerPCMenu
 .loop
+	ld hl, wd730
+	set 6, [hl]
 	ld hl, WhatToTossText
-	call PrintText
+	rst _PrintText
 	ld hl, wNumBoxItems
 	ld a, l
 	ld [wListPointer], a
@@ -237,7 +253,7 @@ PlayerPCToss:
 ; if it's not a key item, there can be more than one of the item
 	push hl
 	ld hl, TossHowManyText
-	call PrintText
+	rst _PrintText
 	call DisplayChooseQuantityMenu
 	pop hl
 	cp $ff
@@ -274,7 +290,7 @@ DepositItemFromItemMenu::
 	jr nz, .keyItem
 ; if it's not a key item, there can be more than one of the item
 	ld hl, DepositHowManyToPCText
-	call PrintText
+	rst _PrintText
 	call DisplayChooseQuantityMenu
 	cp $ff
 	ret z
@@ -284,7 +300,7 @@ DepositItemFromItemMenu::
 	xor a
 	ld [wListWithTMText], a ; stop attempting to display TM names while this Yes no choice is open.
 	ld hl, WantToDepositText
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, 1
 	ld [wListWithTMText], a ; enable displaying TM names again.
@@ -297,17 +313,17 @@ DepositItemFromItemMenu::
 	call AddItemToInventory
 	jr c, .roomAvailable
 	ld hl, NoRoomToStoreText
-	call PrintText
+	rst _PrintText
 	ret
 .roomAvailable
 	ld hl, wNumBagItems
 	call RemoveItemFromInventory
 	call WaitForSoundToFinish
 	ld a, SFX_WITHDRAW_DEPOSIT
-	call PlaySound
+	rst _PlaySound
 	call WaitForSoundToFinish
 	ld hl, ItemWasStoredText
-	call PrintText
+	rst _PrintText
 	ret
 
 PlayersPCMenuEntries:

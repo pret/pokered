@@ -20,12 +20,12 @@ CinnabarGymQuiz::
 	CheckEvent EVENT_SAW_CINNABAR_GYM_QUIZ_INTRO ; PureRGBnote: FIXED: Only show the long intro text once because it's annoying to see it repeatedly
 	jr nz, .skipIntro
 	ld hl, CinnabarGymQuizIntroText
-	call PrintText
+	rst _PrintText
 	SetEvent EVENT_SAW_CINNABAR_GYM_QUIZ_INTRO
 	jr .doneIntro
 .skipIntro
 	ld hl, CinnabarGymQuizStartText
-	call PrintText
+	rst _PrintText
 .doneIntro
 	ldh a, [hGymGateIndex]
 	dec a
@@ -37,11 +37,11 @@ CinnabarGymQuiz::
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	call PrintText
+	rst _PrintText
 	ld a, 1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	call CinnabarGymQuiz_AskQuestion
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CinnabarGymQuizStartText:
 	text_far _CinnabarGymQuizStartText
@@ -99,7 +99,7 @@ CinnabarGymQuiz_AskQuestion:
 	ldh a, [hGymGateIndex]
 	ldh [hBackupGymGateIndex], a
 	ld hl, CinnabarGymQuizCorrectText
-	call PrintText
+	rst _PrintText
 	ldh a, [hBackupGymGateIndex]
 	AdjustEventBit EVENT_CINNABAR_GYM_GATE0_UNLOCKED, 0
 	ld c, a
@@ -109,10 +109,10 @@ CinnabarGymQuiz_AskQuestion:
 .wrongAnswer
 	call WaitForSoundToFinish
 	ld a, SFX_DENIED
-	call PlaySound
+	rst _PlaySound
 	call WaitForSoundToFinish
 	ld hl, CinnabarGymQuizIncorrectText
-	call PrintText
+	rst _PrintText
 	ldh a, [hGymGateIndex]
 	add $2
 	AdjustEventBit EVENT_BEAT_CINNABAR_GYM_TRAINER_0, 2
@@ -141,12 +141,13 @@ CinnabarGymQuizCorrectText:
 	call CinnabarGymGateFlagAction
 	ld a, c
 	and a
-	jp nz, TextScriptEnd
+	jr nz, .done
 	call WaitForSoundToFinish
 	ld a, SFX_GO_INSIDE
-	call PlaySound
+	rst _PlaySound
 	call WaitForSoundToFinish
-	jp TextScriptEnd
+.done
+	rst TextScriptEnd
 
 CinnabarGymQuizIncorrectText:
 	text_far _CinnabarGymQuizIncorrectText

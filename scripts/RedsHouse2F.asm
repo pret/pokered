@@ -5,21 +5,23 @@ RedsHouse2F_Script:
 	jp CallFunctionInTable
 
 RedsHouse2F_ScriptPointers:
-	dw RedsHouse2FScript0
-	dw RedsHouse2FScript1
+	def_script_pointers
+	dw_const RedsHouse2FDefaultScript, SCRIPT_REDSHOUSE2F_DEFAULT
+	dw_const RedsHouse2FNoopScript,    SCRIPT_REDSHOUSE2F_NOOP
 
-RedsHouse2FScript0:
+RedsHouse2FDefaultScript:
 	xor a
 	ldh [hJoyHeld], a
 	ld a, PLAYER_DIR_UP
 	ld [wPlayerMovingDirection], a
-	ld a, 1
+	ld a, SCRIPT_REDSHOUSE2F_NOOP
 	ld [wRedsHouse2FCurScript], a
 	ret
 
-RedsHouse2FScript1:
+RedsHouse2FNoopScript:
 	ret
 
 RedsHouse2F_TextPointers:
+	def_text_pointers
 
 	text_end ; unused

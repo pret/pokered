@@ -12,7 +12,7 @@ AskName:
 	ld [wd11e], a
 	call GetMonName
 	ld hl, DoYouWantToNicknameText
-	call PrintText
+	rst _PrintText
 	hlcoord 14, 7
 	lb bc, 8, 15
 	ld a, TWO_OPTION_MENU
@@ -45,6 +45,7 @@ AskName:
 .declinedNickname
 	ld d, h
 	ld e, l
+ForceLoadNickname::
 	ld hl, wcd6d
 	ld bc, NAME_LENGTH
 	jp CopyData
@@ -74,7 +75,7 @@ DisplayNameRaterScreen::
 	ld d, h
 	ld hl, wBuffer
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst _CopyData
 	and a
 	ret
 .playerCancelled
@@ -159,7 +160,7 @@ DisplayNamingScreen:
 	pop de
 	ld hl, wStringBuffer
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst _CopyData
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	call ClearSprites
@@ -261,7 +262,7 @@ DisplayNamingScreen:
 	ld [hli], a
 	ld [hl], "@"
 	ld a, SFX_PRESS_AB
-	call PlaySound
+	rst _PlaySound
 	ret
 .pressedB
 	ld a, [wNamingScreenNameLength]
@@ -326,9 +327,7 @@ DisplayNamingScreen:
 LoadEDTile:
 	ld de, ED_Tile
 	ld hl, vFont tile $70
-	ld bc, (ED_TileEnd - ED_Tile) / $8
-	; to fix the graphical bug on poor emulators
-	;lb bc, BANK(ED_Tile), (ED_TileEnd - ED_Tile) / $8
+	lb bc, BANK(ED_Tile), (ED_TileEnd - ED_Tile) / $8
 	jp CopyVideoDataDouble
 
 ED_Tile:

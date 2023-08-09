@@ -39,8 +39,28 @@ FadeOutAudio::
 	xor a
 	ld [wAudioFadeOutControl], a
 	call StopAllMusic ; shinpokerednote: MOVED: a common function to do what the 3 lines that used to be here did was created
+	ld a, [wMapConnections]
+	bit 5, a ; PureRGbnote: ADDED: does the map have extra music
+	jr z, .noExtraMusic
+	ld d, 0
+	jr PlayExtraMusic ; if it has extra music, try to play it instead of what was supposed to play after fading out
+.noExtraMusic
 	ld a, [wAudioSavedROMBank]
 	ld [wAudioROMBank], a
 	ld a, b
 	ld [wNewSoundID], a
 	jp PlaySound
+
+;;;;;;;;;; PureRGBnote: ADDED: function for playing new music after it fades out without relying on the current music tracking setup.
+TryPlayExtraMusic:
+	ld a, [wMapConnections]
+	bit 5, a ; does the map have extra music
+	ret z
+PlayExtraMusic:
+	ld a, [wCurMap]
+	cp SECRET_LAB
+	jr z, .secretlab
+	ret
+.secretlab
+	jpfar SecretLabPlayMusic
+;;;;;;;;;;

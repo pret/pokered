@@ -1,12 +1,12 @@
 DiglettsCaveRoute11_Script:
-	call EnableAutoTextBoxDrawing
 	ld a, ROUTE_11
 	ld [wLastMap], a
-	ret
+	jp EnableAutoTextBoxDrawing
 
 DiglettsCaveRoute11_TextPointers:
-	dw DiglettsCaveEntranceRoute11Text1
+	def_text_pointers
+	dw_const DiglettsCaveRoute11GamblerText, TEXT_DIGLETTSCAVEROUTE11_GAMBLER
 
-DiglettsCaveEntranceRoute11Text1:
-	text_far _DiglettsCaveEntRoute11Text1
+DiglettsCaveRoute11GamblerText:
+	text_far _DiglettsCaveRoute11GamblerText
 	text_end

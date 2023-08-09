@@ -141,6 +141,8 @@ AIMoveChoiceModification1:
 	and a
 	jr nz, .nextMove
 	ld a, [wEnemyMoveEffect]
+	cp TELEPORT_EFFECT
+	jr z, .checkTeleportUsable
 	cp DISABLE_EFFECT
 	jr z, .checkDisabled
 	cp LEECH_SEED_EFFECT
@@ -148,9 +150,9 @@ AIMoveChoiceModification1:
 	cp FOCUS_ENERGY_EFFECT
 	jr z, .checkPumpedUp
 	cp LIGHT_SCREEN_EFFECT
-	jr z, .checkLightScreenUp
+	jp z, .checkLightScreenUp
 	cp REFLECT_EFFECT
-	jr z, .checkReflectUp
+	jp z, .checkReflectUp
 	cp MIST_EFFECT
 	jp z, .checkMistUp
 	cp CONFUSION_EFFECT
@@ -191,7 +193,18 @@ AIMoveChoiceModification1:
 	jr .nextMove
 .ohko
 	call WillOHKOMoveAlwaysFail
-	jr nc, .nextMove
+	jp nc, .nextMove
+	jr .discourage
+.checkTeleportUsable
+	push hl
+	push de
+	push bc
+	callfar CheckCanForceSwitchEnemy
+	pop bc
+	pop de
+	pop hl 
+	jp nz, .nextMove
+	; disourage teleport if there is only one pokemon left in the AI trainer's party (would fail in that case)
 	jr .discourage
 .checkDisabled
 	ld a, [wPlayerDisabledMove] ; non-zero if the player has a disabled move
@@ -224,7 +237,7 @@ AIMoveChoiceModification1:
 	jp .nextMove
 .checkMistUp
 	ld a, [wEnemyBattleStatus2]
-	bit PROTECTED_BY_MIST, a
+	bit STAT_DOWN_IMMUNITY, a
 	jr nz, .discourage ; if the enemy has used mist, don't use it again
 	jp .nextMove
 .checkConfused
@@ -655,7 +668,7 @@ ReadMove:
 	ld bc, MOVE_LENGTH
 	call AddNTimes
 	ld de, wEnemyMoveNum
-	call CopyData
+	rst _CopyData
 	pop bc
 	pop de
 	pop hl
@@ -681,9 +694,9 @@ TrainerAI:
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	ret z ; if in a link battle, we're done as well
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;shinpokerednote: FIXED: AI should not use actions (items / switching) if in a move that prevents such a thing
+	and a ; clear carry flag in case we return due to the next two checks, we dont want carry returned in those cases as it marks an action as being taken by the opponent.
 	ld a, [wEnemyBattleStatus2]
 	bit NEEDS_TO_RECHARGE, a
 	ret nz
@@ -994,8 +1007,17 @@ AISwitchIfEnoughMons:
 	and a
 	ret
 
-SwitchEnemyMon:
+SwitchEnemyMonNoText:
+	call SwitchEnemyMonCommon
+	jp SwitchEnemyMonCommon2
 
+SwitchEnemyMon:
+	call SwitchEnemyMonCommon
+	ld hl, AIBattleWithdrawText
+	rst _PrintText
+	jp SwitchEnemyMonCommon2
+
+SwitchEnemyMonCommon:
 ;;;;; shinpokerednote: CHANGED: if player using trapping move, then end their move
 	ld a, [wPlayerBattleStatus1]
 	bit USING_TRAPPING_MOVE, a
@@ -1019,11 +1041,10 @@ SwitchEnemyMon:
 	ld e, l
 	ld hl, wEnemyMonHP
 	ld bc, 4
-	call CopyData
+	rst _CopyData
+	ret
 
-	ld hl, AIBattleWithdrawText
-	call PrintText
-	
+SwitchEnemyMonCommon2:
 ;;;;;;;;;; PureRGBnote: ADDED: clear the previous selected move here to reset disable functionality on opponent switching pokemon.
 	xor a
 	ld [wEnemyLastSelectedMoveDisable], a 
@@ -1180,7 +1201,7 @@ AIIncreaseStat:
 	ld a, [hl]
 	push af
 	push hl
-	ld a, ANIM_AF
+	ld a, XSTATITEM_ANIM
 	ld [hli], a
 	ld [hl], b
 	callfar StatModifierUpEffect

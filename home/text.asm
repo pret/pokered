@@ -84,6 +84,7 @@ PlaceNextChar::
 
 ; Check against a dictionary
 	dict "<NULL>",    NullChar
+	dict "<BAGE>",    MultiButtonPageChar
 	dict "<SCROLL>",  _ContTextNoPause
 	dict "<_CONT>",   _ContText
 	dict "<PARA>",    Paragraph
@@ -111,17 +112,17 @@ NextChar::
 	inc de
 	jp PlaceNextChar
 
-NullChar::
+NullChar:: ; unused
 	ld b, h
 	ld c, l
 	pop hl
+	; A "<NULL>" character in a printed string
+	; displays an error message with the current value
+	; of hSpriteIndexOrTextID in decimal format.
+	; This is a debugging leftover.
 	ld de, TextIDErrorText
 	dec de
 	ret
-
-TextIDErrorText:: ; "[hSpriteIndexOrTextID] ERROR."
-	text_far _TextIDErrorText
-	text_end
 
 MACRO print_name
 	push de
@@ -172,11 +173,10 @@ PlaceCommandCharacter::
 	inc de
 	jp PlaceNextChar
 
-TMCharText::      db "TM@"
+
 TrainerCharText:: db "TRAINER@"
-PCCharText::      db "PC@"
+TMCharText::      db "TM@"
 RocketCharText::  db "ROCKET@"
-PlacePOKeText::   db "POKé@"
 SixDotsCharText:: db "……@"
 EnemyText::       db "Enemy @"
 PlacePKMNText::   db "<PK><MN>@"
@@ -192,10 +192,6 @@ ContText::
 	pop de
 	inc de
 	jp PlaceNextChar
-
-ContCharText::
-	text_far _ContCharText
-	text_end
 
 PlaceDexEnd::
 	ld [hl], "."
@@ -233,7 +229,7 @@ Paragraph::
 	lb bc, 4, 18
 	call ClearScreenArea
 	ld c, 20
-	call DelayFrames
+	rst _DelayFrames
 	pop de
 	hlcoord 1, 14
 	jp NextChar
@@ -248,12 +244,31 @@ PageChar::
 	lb bc, 7, 18
 	call ClearScreenArea
 	ld c, 20
-	call DelayFrames
+	rst _DelayFrames
 	pop de
 	pop hl
 	hlcoord 1, 11
 	push hl
 	jp NextChar
+
+;;;;;;;;; PureRGBnote: ADDED: new text command that allows multiple buttons to be watched while waiting on a text prompt 
+MultiButtonPageChar::
+	push de
+	callfar TextCommandPromptMultiButton
+	; d = what to do after this
+	ld a, d
+	and a
+	jr nz, .exit
+	pop de
+	pop hl
+	hlcoord 1, 11
+	push hl
+	jp NextChar
+.exit
+	pop de
+	jp DoneText
+;;;;;;;;;
+
 
 _ContText::
 	ld a, "▼"
@@ -296,7 +311,7 @@ ScrollTextUpOneLine::
 
 	ld b, 5
 .WaitFrame
-	call DelayFrame
+	rst _DelayFrame
 	dec b
 	jr nz, .WaitFrame
 
@@ -493,7 +508,7 @@ TextCommand_PAUSE::
 	and A_BUTTON | B_BUTTON
 	jr nz, .done
 	ld c, 30 ; half a second
-	call DelayFrames
+	rst _DelayFrames
 .done
 	pop bc
 	pop hl
@@ -524,8 +539,13 @@ TextCommand_SOUND::
 	jr z, .pokemonCry
 	cp TX_SOUND_CRY_SNORLAX
 	jr z, .pokemonCry
+;;;;;;;;;; shinpokerednote: FIXED: when there's 0 delay on text, we need to wait here to get text command sounds to work right.
+	ld a, [wOptions]
+	and TEXT_DELAY_BITS
+	call z, WaitForSoundToFinish
+;;;;;;;;;;
 	ld a, [hl]
-	call PlaySound
+	rst _PlaySound
 	call WaitForSoundToFinish
 	pop hl
 	pop bc
@@ -571,7 +591,7 @@ TextCommand_DOTS::
 	and A_BUTTON | B_BUTTON
 	jr nz, .next ; if so, skip the delay
 	ld c, 10
-	call DelayFrames
+	rst _DelayFrames
 .next
 	dec d
 	jr nz, .loop

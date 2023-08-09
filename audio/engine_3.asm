@@ -5,11 +5,11 @@ Audio3_PlaySound::
 	cp SFX_STOP_ALL_MUSIC
 	jp z, StopAllAudio_3
 	cp MAX_SFX_ID_3
-	jp z, PlaySfx_3
-	jp c, PlaySfx_3
+	jr z, PlaySfx_3
+	jr c, PlaySfx_3
 	cp $fe
 	jr z, .playMusic
-	jp nc, PlaySfx_3
+	jr nc, PlaySfx_3
 .playMusic
 	call InitMusicVariables
 	jp PlaySoundCommon_3
@@ -82,8 +82,7 @@ PlaySfx_3:
 	jp .sfxChannelLoop
 
 StopAllAudio_3:
-	call StopAllAudio
-	ret
+	jp StopAllAudio
 
 PlaySoundCommon_3:
 	ld a, [wSoundID]
@@ -179,10 +178,10 @@ PlaySoundCommon_3:
 	ld a, [wSavedVolume]
 	and a
 	jr nz, .done
-	ld a, [rNR50]
+	ldh a, [rNR50]
 	ld [wSavedVolume], a
 	ld a, $77
-	ld [rNR50], a
+	ldh [rNR50], a
 .done
 	ret
 

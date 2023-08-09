@@ -1,4 +1,4 @@
-VermilionCashierText::
+VermilionMartClerkText::
 	script_mart \
 	POKE_BALL, \
 	SUPER_POTION, \

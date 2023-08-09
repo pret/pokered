@@ -3,28 +3,29 @@ CinnabarLab_Script:
 	ret
 
 CinnabarLab_TextPointers:
-	dw Lab1Text1
-	dw Lab1Text2
-	dw Lab1Text3
-	dw Lab1Text4
-	dw Lab1Text5
+	def_text_pointers
+	dw_const CinnabarLabFishingGuruText,     TEXT_CINNABARLAB_FISHING_GURU
+	dw_const CinnabarLabPhotoText,           TEXT_CINNABARLAB_PHOTO
+	dw_const CinnabarLabMeetingRoomSignText, TEXT_CINNABARLAB_MEETING_ROOM_SIGN
+	dw_const CinnabarLabRAndDSignText,       TEXT_CINNABARLAB_R_AND_D_SIGN
+	dw_const CinnabarLabTestingRoomSignText, TEXT_CINNABARLAB_TESTING_ROOM_SIGN
 
-Lab1Text1:
-	text_far _Lab1Text1
+CinnabarLabFishingGuruText:
+	text_far _CinnabarLabFishingGuruText
 	text_end
 
-Lab1Text2:
-	text_far _Lab1Text2
+CinnabarLabPhotoText:
+	text_far _CinnabarLabPhotoText
 	text_end
 
-Lab1Text3:
-	text_far _Lab1Text3
+CinnabarLabMeetingRoomSignText:
+	text_far _CinnabarLabMeetingRoomSignText
 	text_end
 
-Lab1Text4:
-	text_far _Lab1Text4
+CinnabarLabRAndDSignText:
+	text_far _CinnabarLabRAndDSignText
 	text_end
 
-Lab1Text5:
-	text_far _Lab1Text5
+CinnabarLabTestingRoomSignText:
+	text_far _CinnabarLabTestingRoomSignText
 	text_end

@@ -40,6 +40,7 @@
 	ROCK_SLIDE,\
 	GLARE,\
 	SUBSTITUTE,\
+	CUT,\
 	SURF,\
 	STRENGTH
 	; end
@@ -47,4 +48,4 @@
 
 	dw BANK(PinsirPicFront), BANK(PinsirPicBack)
 
-	dw PinsirPicFrontRG, PinsirPicBack
+	dw PinsirPicFrontAlt, PinsirPicBack

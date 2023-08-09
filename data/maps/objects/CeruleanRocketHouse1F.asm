@@ -1,3 +1,6 @@
+	object_const_def
+	const CERULEANROCKETHOUSE1F_ROCKET
+
 CeruleanRocketHouse1F_Object:
 	db $a ; border block
 
@@ -9,6 +12,6 @@ CeruleanRocketHouse1F_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  4,  3, SPRITE_ROCKET, STAY, LEFT, 1 ; person
+	object_event  4,  3, SPRITE_ROCKET, STAY, LEFT, TEXT_CERULEANROCKETHOUSE1F_ROCKET
 
 	def_warps_to CERULEAN_ROCKET_HOUSE_1F

@@ -9,8 +9,8 @@ BookOrSculptureText::
 	jr nz, .ok
 	ld hl, DiglettSculptureText
 .ok
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 PokemonBooksText:
 	text_far _PokemonBooksText

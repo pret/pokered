@@ -1,3 +1,7 @@
+	object_const_def
+	const ROUTE7_GAMBLER1
+	const ROUTE7_GAMBLER2
+
 Route7_Object:
 	db $f ; border block
 
@@ -9,10 +13,10 @@ Route7_Object:
 	warp_event  5, 13, UNDERGROUND_PATH_ROUTE_7, 1
 
 	def_bg_events
-	bg_event  3, 13, 3 ; Route7Text1
+	bg_event  3, 13, TEXT_ROUTE7_UNDERGROUND_PATH_SIGN
 
 	def_object_events
-	object_event 13,  13, SPRITE_GRAMPS, STAY, UP, 1, OPP_GAMBLER, 8
-	object_event 13,  14, SPRITE_GRAMPS, STAY, DOWN, 2, OPP_GAMBLER, 6
+	object_event 13,  13, SPRITE_GRAMPS, STAY, UP, TEXT_ROUTE7_GAMBLER1, OPP_GAMBLER, 8
+	object_event 13,  14, SPRITE_GRAMPS, STAY, DOWN, TEXT_ROUTE7_GAMBLER2, OPP_GAMBLER, 6
 
 	def_warps_to ROUTE_7

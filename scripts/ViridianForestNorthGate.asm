@@ -2,13 +2,14 @@ ViridianForestNorthGate_Script:
 	jp EnableAutoTextBoxDrawing
 
 ViridianForestNorthGate_TextPointers:
-	dw ViridianForestExitText1
-	dw ViridianForestExitText2
+	def_text_pointers
+	dw_const ViridianForestNorthGateSuperNerdText, TEXT_VIRIDIANFORESTNORTHGATE_SUPER_NERD
+	dw_const ViridianForestNorthGateGrampsText,    TEXT_VIRIDIANFORESTNORTHGATE_GRAMPS
 
-ViridianForestExitText1:
-	text_far _ViridianForestExitText1
+ViridianForestNorthGateSuperNerdText:
+	text_far _ViridianForestNorthGateSuperNerdText
 	text_end
 
-ViridianForestExitText2:
-	text_far _ViridianForestExitText2
+ViridianForestNorthGateGrampsText:
+	text_far _ViridianForestNorthGateGrampsText
 	text_end

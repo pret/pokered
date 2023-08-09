@@ -1,2 +1,2 @@
-	map_header BillsHouse, BILLS_HOUSE, INTERIOR, 0
+	map_header BillsHouse, BILLS_HOUSE, INTERIOR, DEFER_SHOWING_MAP
 	end_map_header

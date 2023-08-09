@@ -3,11 +3,12 @@ SafariZoneWestRestHouse_Script:
 	ret
 
 SafariZoneWestRestHouse_TextPointers:
-	dw SafariZoneRestHouse2Text1
-	dw SafariZoneRestHouse2Text2
-	dw SafariZoneRestHouse2Text3
+	def_text_pointers
+	dw_const SafariZoneWestRestHouseScientistText,    TEXT_SAFARIZONEWESTRESTHOUSE_SCIENTIST
+	dw_const SafariZoneWestRestHouseCooltrainerMText, TEXT_SAFARIZONEWESTRESTHOUSE_COOLTRAINER_M
+	dw_const SafariZoneWestRestHouseSilphWorkerFText, TEXT_SAFARIZONEWESTRESTHOUSE_SILPH_WORKER_F
 
-SafariZoneRestHouse2Text1:
+SafariZoneWestRestHouseScientistText:
 ; PureRGBnote: ADDED: this NPC will display different text depending on what type of safari game you're playing
 	text_asm
 	ld a, [wSafariType]
@@ -23,11 +24,11 @@ SafariZoneRestHouse2Text1:
 .freeRoamText
 	ld hl, SafariZoneRestHouse2TextKangaskhan
 .done
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 SafariZoneRestHouse2TextDefault:
-	text_far _SafariZoneRestHouse2Text1
+	text_far _SafariZoneWestRestHouseScientistText
 	text_end
 
 SafariZoneRestHouse2TextRangerHunt:
@@ -38,7 +39,7 @@ SafariZoneRestHouse2TextKangaskhan:
 	text_far _SafariZoneRestHouse2TextFreeRoam
 	text_end
 
-SafariZoneRestHouse2Text2:
+SafariZoneWestRestHouseCooltrainerMText:
 ; PureRGBnote: ADDED: this NPC will display different text depending on what type of safari game you're playing
 	text_asm
 	ld a, [wSafariType]
@@ -54,11 +55,11 @@ SafariZoneRestHouse2Text2:
 .freeRoamText
 	ld hl, SafariZoneRestHouse2TextFreeRoam2
 .done
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 SafariZoneRestHouse2TextDefault2:
-	text_far _SafariZoneRestHouse2Text2
+	text_far _SafariZoneWestRestHouseCooltrainerMText
 	text_end
 
 SafariZoneRestHouse2TextRangerHunt2:
@@ -69,6 +70,6 @@ SafariZoneRestHouse2TextFreeRoam2:
 	text_far _SafariZoneRestHouse2TextFreeRoam2
 	text_end
 
-SafariZoneRestHouse2Text3:
-	text_far _SafariZoneRestHouse2Text3
+SafariZoneWestRestHouseSilphWorkerFText:
+	text_far _SafariZoneWestRestHouseSilphWorkerFText
 	text_end

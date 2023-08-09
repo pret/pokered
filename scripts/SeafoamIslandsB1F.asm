@@ -29,7 +29,8 @@ SeafoamIslandsB1F_Script:
 	predef HideObject
 	ld a, [wObjectToShow]
 	ld [wMissableObjectIndex], a
-	predef_jump ShowObject
+	predef ShowObject
+	jpfar BoulderHoleDropEffectDefault
 .asm_46362
 	ld a, SEAFOAM_ISLANDS_B2F
 	ld [wDungeonWarpDestinationMap], a
@@ -42,5 +43,6 @@ Seafoam2HolesCoords:
 	db -1 ; end
 
 SeafoamIslandsB1F_TextPointers:
-	dw BoulderText
-	dw BoulderText
+	def_text_pointers
+	dw_const BoulderText, TEXT_SEAFOAMISLANDSB1F_BOULDER1
+	dw_const BoulderText, TEXT_SEAFOAMISLANDSB1F_BOULDER2

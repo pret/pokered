@@ -27,9 +27,19 @@ _WhenYouChangeBoxText::
 	para "Is that okay?"
 	done
 
+_SkippedForever::
+	text "This question"
+	line "won't show again."
+	prompt
+
 _ChooseABoxText::
 	text "Choose a"
 	line "<PKMN> BOX.@"
+	text_end
+
+_ChooseABoxDataWillSaveText::
+	text "Choose a <PKMN> BOX."
+	line "Game will save.@"
 	text_end
 
 _EvolvedText::
@@ -123,19 +133,14 @@ _FellText::
 	text " fell!"
 	prompt
 
+_TeleportedAway::
+	text "<USER>"
+	line "teleported away!"
+	prompt
+
 _RanFromBattleText::
 	text "<USER>"
 	line "ran from battle!"
-	prompt
-
-_RanAwayScaredText::
-	text "<TARGET>"
-	line "ran away scared!"
-	prompt
-
-_WasBlownAwayText::
-	text "<TARGET>"
-	line "was blown away!"
 	prompt
 
 _ChargeMoveEffectText::
@@ -271,6 +276,12 @@ _StatusChangesEliminatedText::
 	line "are eliminated!"
 	prompt
 
+_ImmuneToPsychicText::
+	text "<USER> is"
+	line "now immune to"
+	cont "PSYCHIC-type!"
+	prompt
+
 _StartedSleepingEffect::
 	text "<USER>"
 	line "started sleeping!"
@@ -309,6 +320,8 @@ _ReflectGainedArmorText::
 _ShroudedInMistText::
 	text "<USER>'s"
 	line "shrouded in mist!"
+	para "<USER>"
+	line "became ethereal!"
 	prompt
 
 _SuckedHealthText::
@@ -321,10 +334,10 @@ _DreamWasEatenText::
 	line "dream was eaten!"
 	prompt
 
-_TradeCenterText1::
+_TradeCenterOpponentText::
 	text "!"
 	done
 
-_ColosseumText1::
+_ColosseumOpponentText::
 	text "!"
 	done

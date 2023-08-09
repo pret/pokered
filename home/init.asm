@@ -2,7 +2,7 @@ SoftReset::
 	call StopAllSounds
 	call GBPalWhiteOut
 	ld c, 32
-	call DelayFrames
+	rst _DelayFrames
 	; fallthrough
 
 Init::
@@ -111,7 +111,10 @@ DEF rLCDC_DEFAULT EQU %11100011
 	dec a
 	ld [wUpdateSpritesEnabled], a
 
-	predef PlayIntro
+IF DEF(_DEBUG)
+	;jpfar DebugMenu ; PureRGBnote: ADDED: uncomment this to instantly enter debug mode on starting the game in the debug rom
+ENDC
+	predef PlayIntro 
 
 	call DisableLCD
 	call ClearVram
@@ -120,7 +123,7 @@ DEF rLCDC_DEFAULT EQU %11100011
 	ld a, rLCDC_DEFAULT
 	ldh [rLCDC], a
 
-	jp SetDefaultNamesBeforeTitlescreen
+	jp PrepareTitleScreen
 
 ClearVram::
 	ld hl, VRAM_Begin

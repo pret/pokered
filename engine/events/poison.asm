@@ -91,7 +91,7 @@ ApplyOutOfBattlePoisonDamage:
 	ld b, $2
 	predef ChangeBGPalColor0_4Frames ; change BG white to dark grey for 4 frames
 	ld a, SFX_POISONED
-	call PlaySound
+	rst _PlaySound
 .skipPoisonEffectAndSound
 	predef AnyPartyAlive
 	ld a, d

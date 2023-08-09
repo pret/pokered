@@ -83,14 +83,14 @@ DEF SPDSPCDV_TRAINER EQU $88
 
 ; wPlayerBattleStatus2 or wEnemyBattleStatus2 bit flags
 	const_def
-	const USING_X_ACCURACY    ; 0
-	const PROTECTED_BY_MIST   ; 1
-	const GETTING_PUMPED      ; 2 ; Focus Energy
-	const_skip                ; 3 ; unused
-	const HAS_SUBSTITUTE_UP   ; 4
-	const NEEDS_TO_RECHARGE   ; 5 ; Hyper Beam
-	const USING_RAGE          ; 6
-	const SEEDED              ; 7
+	const USING_X_ACCURACY         ; 0
+	const STAT_DOWN_IMMUNITY       ; 1 ; Mist and Guard Spec primary effect
+	const GETTING_PUMPED           ; 2 ; Focus Energy
+	const PSYCHIC_IMMUNITY         ; 3 ; Haze secondary effect
+	const HAS_SUBSTITUTE_UP        ; 4
+	const NEEDS_TO_RECHARGE        ; 5 ; Hyper Beam
+	const NORMAL_FIGHTING_IMMUNITY ; 6 ; Mist secondary effect
+	const SEEDED                   ; 7
 
 ; wPlayerBattleStatus3 or wEnemyBattleStatus3 bit flags
 	const_def

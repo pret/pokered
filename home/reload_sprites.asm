@@ -16,4 +16,5 @@ ReloadMapSpriteTilePatterns::
 	ld [hl], a
 	call LoadPlayerSpriteGraphics
 	call LoadFontTilePatterns
+	callfar LoadExtraSprites ; PureRGBnote: ADDED: at the moment this just replaces a sprite in fuchsia city if we have the need to
 	jp UpdateSprites

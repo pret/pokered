@@ -178,7 +178,7 @@ DrawFrameBlock:
 	jr z, .advanceFrameBlockDestAddr ; skip delay and don't clean OAM buffer
 	ld a, [wSubAnimFrameDelay]
 	ld c, a
-	call DelayFrames
+	rst _DelayFrames
 	ld a, [wFBMode]
 	cp FRAMEBLOCKMODE_03
 	jr z, .advanceFrameBlockDestAddr ; skip cleaning OAM buffer
@@ -246,7 +246,7 @@ PlayAnimation:
 	push hl
 	push de
 	call GetMoveSound
-	call PlaySound
+	rst _PlaySound
 	pop de
 	pop hl
 .skipPlayingSound
@@ -435,25 +435,30 @@ MoveAnimationTiles2:
 MoveAnimationTiles1:
 	INCBIN "gfx/battle/move_anim_1.2bpp"
 
-SlotMachineTiles2:
-IF DEF(_RED)
-	INCBIN "gfx/slots/red_slots_2.2bpp"
-ENDC
-IF DEF(_BLUE)
-	INCBIN "gfx/slots/blue_slots_2.2bpp"
-ENDC
-IF DEF(_GREEN) ; PureRGBnote: GREENBUILD: slot graphics for green version added
-	INCBIN "gfx/slots/green_slots_2.2bpp"
-ENDC
-SlotMachineTiles2End:
+MoveAnimationNoWaitingForSound:
+	push hl
+	push de
+	push bc
+	push af
+	ld a, 1
+	push af
+	jr MoveAnimationContent
 
 MoveAnimation:
 	push hl
 	push de
 	push bc
 	push af
+	xor a
+	push af
 	call WaitForSoundToFinish
+MoveAnimationContent:
+;;;;;;;;;; PureRGBnote: ADDED: code for setting moves as seen for the movedex
+	ld a, [wBattleFunctionalFlags]
+	bit 0, a
+	call nz, SetMoveDexSeen
 	call SetAnimationPalette
+;;;;;;;;;;
 	ld a, [wAnimationID]
 	and a
 	jr z, .animationFinished
@@ -480,13 +485,17 @@ MoveAnimation:
 	jr .next4
 .animationsDisabled
 	ld c, 30
-	call DelayFrames
+	rst _DelayFrames
 .next4
 	vc_hook_red Stop_reducing_move_anim_flashing
 	vc_hook_blue Stop_reducing_move_anim_flashing_Rock_Slide_Dream_Eater
 	call PlayApplyingAttackAnimation ; shake the screen or flash the pic in and out (to show damage)
 .animationFinished
+	pop af ; a = whether the animation should wait for the sound to finish 
+	and a
+	jr nz, .noWaiting
 	call WaitForSoundToFinish
+.noWaiting
 	xor a
 	ld [wSubAnimSubEntryAddr], a
 	;ld [wUnusedD09B], a ; PureRGBnote: this value is unused so we dont need to load it
@@ -581,7 +590,7 @@ AnimationShakeScreenHorizontallySlow:
 	inc a
 	ldh [rWX], a
 	ld c, 2
-	call DelayFrames
+	rst _DelayFrames
 	dec b
 	jr nz, .loop1
 	pop bc
@@ -590,7 +599,7 @@ AnimationShakeScreenHorizontallySlow:
 	dec a
 	ldh [rWX], a
 	ld c, 2
-	call DelayFrames
+	rst _DelayFrames
 	dec b
 	jr nz, .loop2
 	pop bc
@@ -662,7 +671,7 @@ PlaySubanimation:
 	cp NO_MOVE - 1
 	jr z, .skipPlayingSound
 	call GetMoveSound
-	call PlaySound
+	rst _PlaySound
 .skipPlayingSound
 	ld hl, wShadowOAM
 	ld a, l
@@ -728,7 +737,7 @@ AnimationCleanOAM:
 	push de
 	push bc
 	push af
-	call DelayFrame
+	rst _DelayFrame
 	call ClearSprites
 	pop af
 	pop bc
@@ -784,7 +793,7 @@ DoBallTossSpecialEffects:
 	jr nz, .skipPlayingSound
 ; if it is the beginning of the subanimation, play a sound
 	ld a, SFX_BALL_TOSS
-	call PlaySound
+	rst _PlaySound
 .skipPlayingSound
 	ld a, [wIsInBattle]
 	cp 2 ; is it a trainer battle?
@@ -830,9 +839,9 @@ DoBallShakeSpecialEffects:
 	jr nz, .skipPlayingSound
 ; if it is the beginning of a shake, play a sound and wait 2/3 of a second
 	ld a, SFX_TINK
-	call PlaySound
+	rst _PlaySound
 	ld c, 40
-	call DelayFrames
+	rst _DelayFrames
 .skipPlayingSound
 	ld a, [wSubAnimCounter]
 	dec a
@@ -869,14 +878,14 @@ DoPoofSpecialEffects:
 	cp MASTERTOSS_ANIM
 	jr z, .masterBallSFX
 	ld a, SFX_BALL_POOF
-	call PlaySound
+	rst _PlaySound
 	ret
 .masterBallSFX
 	xor a
 	ld [wFrequencyModifier], a
 	ld [wTempoModifier], a
 	ld a, SFX_HORN_DRILL
-	call PlaySound
+	rst _PlaySound
 	ret
 .ballToss
 	ld a, [wUnusedC000]
@@ -975,13 +984,13 @@ DoExplodeSpecialEffects:
 DoBlizzardSpecialEffects:
 	ld a, [wSubAnimCounter]
 	cp 13
-	jp z, AnimationFlashScreen
+	jp z, AnimationFlashLightScreen
 	cp 9
-	jp z, AnimationFlashScreen
+	jp z, AnimationFlashLightScreen
 	cp 5
-	jp z, AnimationFlashScreen
+	jp z, AnimationFlashLightScreen
 	cp 1
-	jp z, AnimationFlashScreen
+	jp z, AnimationFlashLightScreen
 	ret
 
 ; flashes the screen at 3 points in the subanimation
@@ -1063,11 +1072,11 @@ TradeJumpPokeball:
 	jr nz, .skipPlayingSound
 .playSound ; play sound if next move distance is 12 or this is the last one
 	ld a, SFX_SWAP
-	call PlaySound
+	rst _PlaySound
 .skipPlayingSound
 	push bc
 	ld c, 5
-	call DelayFrames
+	rst _DelayFrames
 	pop bc
 	ldh a, [hSCX] ; background scroll X
 	sub 8 ; scroll to the left
@@ -1085,7 +1094,7 @@ DoGrowlSpecialEffects:
 	ld hl, wShadowOAM
 	ld de, wShadowOAMSprite04
 	ld bc, $10
-	call CopyData ; copy the musical note graphic
+	rst _CopyData ; copy the musical note graphic
 	ld a, [wSubAnimCounter]
 	dec a
 	call z, AnimationCleanOAM ; clean up at the end of the subanimation
@@ -1194,19 +1203,27 @@ FlashScreenLongDelay:
 .delayFrames
 	jp DelayFrames
 
+AnimationFlashLightScreen:
+	ldh a, [rBGP]
+	push af ; save initial palette
+	ld a, %10010000 ; light screen colors
+	jr AnimationFlashScreenCommon
+
 AnimationFlashScreen:
 	ldh a, [rBGP]
 	push af ; save initial palette
 	ld a, %00011011 ; 0, 1, 2, 3 (inverted colors)
+	; fall through
+AnimationFlashScreenCommon:
 	ldh [rBGP], a
 	call UpdateGBCPal_BGP ; shinpokerednote: gbcnote: gbc color facilitation
 	ld c, 2
-	call DelayFrames
+	rst _DelayFrames
 	xor a ; white out background
 	ldh [rBGP], a
 	call UpdateGBCPal_BGP ; shinpokerednote: gbcnote: gbc color facilitation
 	ld c, 2
-	call DelayFrames
+	rst _DelayFrames
 	pop af
 	ldh [rBGP], a ; restore initial palette
 	call UpdateGBCPal_BGP ; shinpokerednote: gbcnote: gbc color facilitation
@@ -1270,10 +1287,16 @@ AnimationShakeScreen:
 AnimationShakeScreenHorizontallyFast:
 	predef_jump PredefShakeScreenHorizontally
 
+;AnimationPoisonEverywhere: 
+;	ld a, 1
+;	ld d, 32
+;	ld e, $76
+;	jr AnimationTileEverywhereInit
+
 AnimationWaterDropletsEverywhereDefault:
 ; Draws water droplets all over the screen and makes them
 ; scroll. It's hard to describe, but it's the main animation
-; in Surf/Mist/Toxic.
+; in Surf/Mist/Haze.
 	xor a
 	ld d, 32
 	ld e, $71
@@ -1441,7 +1464,7 @@ _AnimationSlideMonUp:
 	push de
 	push hl
 	ld bc, 7
-	call CopyData
+	rst _CopyData
 ; Note that de and hl are popped in the same order they are pushed, swapping
 ; their values. When CopyData is called, hl points to a tile 1 row below
 ; the one de points to. To maintain this relationship, after swapping, we add 2
@@ -1472,7 +1495,7 @@ _AnimationSlideMonUp:
 	jr nz, .fillBottomRowLoop
 
 	ld c, 2
-	call DelayFrames
+	rst _DelayFrames
 	pop bc
 	pop hl
 	pop de
@@ -1614,10 +1637,10 @@ AnimationBlinkMon:
 	push bc
 	call AnimationHideMonPic
 	ld c, 5
-	call DelayFrames
+	rst _DelayFrames
 	call AnimationShowMonPic
 	ld c, 5
-	call DelayFrames
+	rst _DelayFrames
 	pop bc
 	dec c
 	jr nz, .loop
@@ -1841,9 +1864,9 @@ AnimationSpiralBallsInward:
 	ld a, $40
 	ld [wTempoModifier], a
 	ld a, SFX_BATTLE_1E
-	call PlaySound
+	rst _PlaySound
 .frameDelay
-	call DelayFrames
+	rst _DelayFrames
 	pop hl
 	inc hl
 	inc hl
@@ -1975,7 +1998,7 @@ _AnimationShootBallsUpward:
 	call BattleAnimWriteOAMEntry
 	dec b
 	jr nz, .initOAMLoop
-	call DelayFrame
+	rst _DelayFrame
 	pop bc
 	ld a, b
 	ld [wNumShootingBalls], a
@@ -2003,7 +2026,7 @@ _AnimationShootBallsUpward:
 	add hl, de ; next OAM entry
 	dec b
 	jr nz, .innerLoop
-	call DelayFrames
+	rst _DelayFrames
 	pop bc
 	ld a, [wNumShootingBalls]
 	and a
@@ -2106,7 +2129,7 @@ AnimationSlideMonDownAndHide:
 	call GetMonSpriteTileMapPointerFromRowCount
 	call CopyPicTiles
 	ld c, 15
-	call DelayFrames
+	rst _DelayFrames
 	pop af
 	inc a
 	pop bc
@@ -2114,7 +2137,7 @@ AnimationSlideMonDownAndHide:
 	jr nz, .loop
 	call AnimationHideMonPic
 	ld c, 30
-	call DelayFrames
+	rst _DelayFrames
 	jp AnimationShowMonPic
 
 _AnimationSlideMonOff:
@@ -2154,7 +2177,7 @@ _AnimationSlideMonOff:
 	jr nz, .rowLoop
 	ld a, [wSlideMonDelay]
 	ld c, a
-	call DelayFrames
+	rst _DelayFrames
 	pop hl
 	dec d
 	dec e
@@ -2962,12 +2985,12 @@ ShakeEnemyHUD_ShakeBG:
 	add d
 	ldh [hSCX], a
 	ld c, 2
-	call DelayFrames
+	rst _DelayFrames
 	ld a, [wTempSCX]
 	sub d
 	ldh [hSCX], a
 	ld c, 2
-	call DelayFrames
+	rst _DelayFrames
 	dec e
 	jr nz, .loop
 	ld a, [wTempSCX]
@@ -3028,7 +3051,7 @@ TossBallAnimation:
 .BlockBall
 	call PlayAnimation
 	ld a, SFX_FAINT_THUD
-	call PlaySound
+	rst _PlaySound
 	ld a, BLOCKBALL_ANIM
 	ld [wAnimationID], a
 	xor a
@@ -3060,3 +3083,20 @@ PlayApplyingAttackSound:
 	ld [wTempoModifier], a
 	ld a, c
 	jp PlaySound
+
+;;;;;;;;;; PureRGBnote: ADDED: code for setting moves as seen for the movedex
+SetMoveDexSeen:
+	ld a, [wAnimationID]
+	and a
+	ret z ; NO_MOVE doesn't count
+	dec a
+	cp NUM_ATTACKS + 1
+	ret nc ; non-move animations don't count
+	ld c, a
+	ld b, FLAG_SET
+	ld hl, wMovedexSeen
+	predef FlagActionPredef ; mark this move as seen in the movedex
+	ld hl, wBattleFunctionalFlags
+	res 0, [hl]
+	ret
+;;;;;;;;;;

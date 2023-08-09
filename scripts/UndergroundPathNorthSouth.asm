@@ -10,14 +10,16 @@ UndergroundPathNorthSouth_Script:
 	ret
 
 UndergroundPathNorthSouth_ScriptPointers:
-	dw CheckFightingMapTrainers
-	dw DisplayEnemyTrainerTextAndStartBattle
-	dw EndTrainerBattle
+	def_script_pointers
+	dw_const CheckFightingMapTrainers,              SCRIPT_UNDERGROUNDPATHNORTHSOUTH_DEFAULT
+	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_UNDERGROUNDPATHNORTHSOUTH_START_BATTLE
+	dw_const EndTrainerBattle,                      SCRIPT_UNDERGROUNDPATHNORTHSOUTH_END_BATTLE
 
 UndergroundPathNorthSouth_TextPointers:
-	dw UndergroundPathNorthSouthTrainer1Text
-	dw UndergroundPathNorthSouthTrainer2Text
-	dw UndergroundPathNorthSouthTrainer3Text
+	def_text_pointers
+	dw_const UndergroundPathNorthSouthTrainer1Text,     TEXT_UNDERGROUNDPATHNORTHSOUTH_GENTLEMAN
+	dw_const UndergroundPathNorthSouthTrainer2Text,     TEXT_UNDERGROUNDPATHNORTHSOUTH_COOL_KID1
+	dw_const UndergroundPathNorthSouthTrainer3Text,     TEXT_UNDERGROUNDPATHNORTHSOUTH_COOL_KID2
 
 UndergroundPathNorthSouthTrainerHeaders:
 	def_trainers 5
@@ -33,7 +35,7 @@ UndergroundPathNorthSouthTrainer1Text:
 	text_asm
 	ld hl, UndergroundPathNorthSouthTrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 UndergroundPathNorthSouthBattleText1:
 	text_far _UndergroundPathNorthSouthBattleText1
@@ -51,7 +53,7 @@ UndergroundPathNorthSouthTrainer2Text:
 	text_asm
 	ld hl, UndergroundPathNorthSouthTrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 UndergroundPathNorthSouthBattleText2:
 	text_far _UndergroundPathNorthSouthBattleText2
@@ -69,7 +71,7 @@ UndergroundPathNorthSouthTrainer3Text:
 	text_asm
 	ld hl, UndergroundPathNorthSouthTrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 UndergroundPathNorthSouthBattleText3:
 	text_far _UndergroundPathNorthSouthBattleText3

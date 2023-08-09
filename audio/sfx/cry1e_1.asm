@@ -34,3 +34,10 @@ SFX_Cry1E_1_Ch8:
 	noise_note 5, 9, 2, 26
 	noise_note 8, 8, 1, 24
 	sound_ret
+
+; PureRGBnote: ADDED: this replaces channel 8 when doing armored mewtwo's cry
+SFX_Armored_Mewtwo_Cry1_Ch8:
+	sound_call SFX_Cry1E_1_Ch8
+	noise_note 10, 13, 3, $e0
+	noise_note 14, 13, 6, $ff
+	sound_ret

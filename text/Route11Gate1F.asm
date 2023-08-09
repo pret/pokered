@@ -1,4 +1,4 @@
-_Route11GateText1::
+_Route11Gate1FGuardText::
 	text "When you catch"
 	line "lots of #MON,"
 	cont "isn't it hard to"

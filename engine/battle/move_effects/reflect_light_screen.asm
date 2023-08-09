@@ -28,7 +28,7 @@ ReflectLightScreenEffect_:
 	jp PrintText
 .moveFailed
 	ld c, 50
-	call DelayFrames
+	rst _DelayFrames
 	ld hl, PrintButItFailedText_
 	jp EffectCallBattleCore
 

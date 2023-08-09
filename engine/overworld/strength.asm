@@ -30,7 +30,7 @@ CheckStrengthUsage::
 .foundStrength
 	push de
 	ld hl, BoulderTextInit
-	call PrintText
+	rst _PrintText
 	pop de
 	ld a, e
 	push de
@@ -46,7 +46,7 @@ CheckStrengthUsage::
 	ld hl, wd728
 	set 0, [hl]
 	ld hl, UsedStrengthText2
-	call PrintText
+	rst _PrintText
 	ld a, [wcf91]
 	call PlayCry
 	call Delay3
@@ -76,7 +76,7 @@ BoulderTextActive::
 	text_end
 
 StrengthDecline::
-	text_far _MansionSwitchNotPressedText
+	text_far _PokemonMansion1FSwitchNotPressedText
 	text_end
 
 UsedStrengthText2:
@@ -87,23 +87,3 @@ CanMoveBouldersText2:
 	text_far _CanMoveBouldersText
 	text_end
 
-NoResetStrengthMaps:
-	db SEAFOAM_ISLANDS_1F
-	db SEAFOAM_ISLANDS_B1F
-	db SEAFOAM_ISLANDS_B2F
-	db SEAFOAM_ISLANDS_B3F
-	db SEAFOAM_ISLANDS_B4F
-	db VICTORY_ROAD_1F
-	db VICTORY_ROAD_2F
-	db VICTORY_ROAD_3F
-	db -1
-
-CheckResetStrengthFlag::
-	ld hl, NoResetStrengthMaps
-	ld de, 1
-	ld a, [wCurMap]
-	call IsInArray
-	ret c
-	ld hl, wd728
-	res 0, [hl]
-	ret

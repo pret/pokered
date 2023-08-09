@@ -10,16 +10,18 @@ SilphCo1F_Script:
 	ret
 
 SilphCo1F_ScriptPointers:
-	dw CheckFightingMapTrainers
-	dw DisplayEnemyTrainerTextAndStartBattle
-	dw EndTrainerBattle
+	def_script_pointers
+	dw_const CheckFightingMapTrainers,              SCRIPT_SILPHCO1F_DEFAULT
+	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_SILPHCO1F_START_BATTLE
+	dw_const EndTrainerBattle,                      SCRIPT_SILPHCO1F_END_BATTLE
 
 SilphCo1F_TextPointers:
-	dw SilphCo1FTrainer1Text
-	dw SilphCo1FTrainer2Text
-	dw SilphCo1FTrainer3Text
-	dw SilphCo1FTrainer4Text
-	dw SilphCo1Text1
+	def_text_pointers
+	dw_const SilphCo1FTrainer1Text,         TEXT_SILPHCO1F_FIREFIGHTER1
+	dw_const SilphCo1FTrainer2Text,         TEXT_SILPHCO1F_SOLDIER1
+	dw_const SilphCo1FTrainer3Text,         TEXT_SILPHCO1F_SOLDIER2
+	dw_const SilphCo1FTrainer4Text,         TEXT_SILPHCO1F_FIREFIGHTER2
+	dw_const SilphCo1FLinkReceptionistText, TEXT_SILPHCO1F_LINK_RECEPTIONIST
 
 SilphCo1FTrainerHeaders:
 	def_trainers 0
@@ -37,7 +39,7 @@ SilphCo1FTrainer1Text:
 	text_asm
 	ld hl, SilphCo1FTrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo1FBattleText1:
 	text_far _SilphCo1FBattleText1
@@ -55,7 +57,7 @@ SilphCo1FTrainer2Text:
 	text_asm
 	ld hl, SilphCo1FTrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo1FBattleText2:
 	text_far _SilphCo1FBattleText2
@@ -73,7 +75,7 @@ SilphCo1FTrainer3Text:
 	text_asm
 	ld hl, SilphCo1FTrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo1FBattleText3:
 	text_far _SilphCo1FBattleText3
@@ -91,7 +93,7 @@ SilphCo1FTrainer4Text:
 	text_asm
 	ld hl, SilphCo1FTrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo1FBattleText4:
 	text_far _SilphCo1FBattleText4
@@ -105,6 +107,6 @@ SilphCo1FAfterBattleText4:
 	text_far _SilphCo1FAfterBattleText4
 	text_end
 
-SilphCo1Text1:
-	text_far _SilphCo1Text1
+SilphCo1FLinkReceptionistText:
+	text_far _SilphCo1FLinkReceptionistText
 	text_end

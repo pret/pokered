@@ -1,4 +1,4 @@
-_Route2HouseText1::
+_Route2TradeHouseScientistText::
 	text "A fainted #MON"
 	line "can't fight. But, "
 	cont "it can still use "

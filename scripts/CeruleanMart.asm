@@ -2,28 +2,29 @@ CeruleanMart_Script:
 	jp EnableAutoTextBoxDrawing
 
 CeruleanMart_TextPointers:
-	dw CeruleanCashierText
-	dw CeruleanMartText2
-	dw CeruleanMartText3
-	dw CeruleanMartTMKid
+	def_text_pointers
+	dw_const CeruleanMartClerkText,        TEXT_CERULEANMART_CLERK
+	dw_const CeruleanMartCooltrainerMText, TEXT_CERULEANMART_COOLTRAINER_M
+	dw_const CeruleanMartCooltrainerFText, TEXT_CERULEANMART_COOLTRAINER_F
+	dw_const CeruleanMartTMKid,            TEXT_CERULEANMART_TM_KID
 
 CeruleanMartTMKid: ; PureRGBnote: ADDED: new NPC who will sell TMs
 	text_asm
 	ld hl, TMKidGreet1
-	call PrintText
+	rst _PrintText
 	CheckEvent EVENT_MET_CERULEAN_TM_KID
 	jr z, .intro
 	ld hl, TMKidQuick1
-	call PrintText
+	rst _PrintText
 	jr .shop
 .intro
 	ld hl, CeruleanMartTMKidFlavor
-	call PrintText
+	rst _PrintText
 	SetEvent EVENT_MET_CERULEAN_TM_KID
 .shop
 	ld hl, CeruleanTMKidShop
 	call DisplayPokemartNoGreeting
-	jp TextScriptEnd
+	rst TextScriptEnd
 	
 TMKidGreet1::
 	text_far _TMKidGreet
@@ -37,13 +38,12 @@ TMKidQuick1::
 	text_far _TMKidQuick
 	text_end
 
-
-CeruleanMartText2:
-	text_far _CeruleanMartText2
+CeruleanMartCooltrainerMText:
+	text_far _CeruleanMartCooltrainerMText
 	text_end
 
-CeruleanMartText3:
-	text_far _CeruleanMartText3
+CeruleanMartCooltrainerFText:
+	text_far _CeruleanMartCooltrainerFText
 	text_end
 
 INCLUDE "data/items/marts/cerulean.asm"

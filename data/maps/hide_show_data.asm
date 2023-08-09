@@ -41,13 +41,13 @@ MapHSPointers:
 	dw Route23HS
 	dw Route24HS
 	dw Route25HS
-	dw NoHS
+	dw RedsHouse1FHS
 	dw NoHS
 	dw BluesHouseHS
 	dw OaksLabHS
 	dw NoHS
 	dw NoHS
-	dw NoHS
+	dw ViridianSchoolhouseHS
 	dw NoHS
 	dw ViridianGymHS
 	dw NoHS
@@ -111,11 +111,11 @@ MapHSPointers:
 	dw SSAnneB1FRoomsHS
 	dw NoHS
 	dw CeruleanRocketHouse1FHS
-	dw NoHS
+	dw CeruleanRocketHouseB1FHS
 	dw VictoryRoad1FHS
+	dw ViridianSchoolhouseB1FHS
 	dw NoHS
-	dw NoHS
-	dw NoHS
+	dw SecretLabHS
 	dw NoHS
 	dw NoHS
 	dw NoHS
@@ -146,7 +146,7 @@ MapHSPointers:
 	dw NoHS
 	dw CeladonHotelHS
 	dw NoHS
-	dw NoHS
+	dw PokemonTower1FHS
 	dw PokemonTower2FHS
 	dw PokemonTower3FHS
 	dw PokemonTower4FHS
@@ -636,5 +636,21 @@ SafariZoneCenterHS:
 	db SAFARI_ZONE_CENTER, $04, SHOW ; trainer
 	db SAFARI_ZONE_CENTER, $05, SHOW ; trainer
 	db SAFARI_ZONE_CENTER, $06, SHOW
+ViridianSchoolhouseHS:
+	db VIRIDIAN_SCHOOL_HOUSE, $01, SHOW ; brunette girl
+	db VIRIDIAN_SCHOOL_HOUSE, $03, HIDE ; rocker
+ViridianSchoolhouseB1FHS:
+	db VIRIDIAN_SCHOOL_HOUSE_B1F, $0A, SHOW ; rocker
+	db VIRIDIAN_SCHOOL_HOUSE_B1F, $0B, HIDE ; brunette girl
+RedsHouse1FHS:
+	db REDS_HOUSE_1F, 2, HIDE ; dad
+CeruleanRocketHouseB1FHS:
+	db CERULEAN_ROCKET_HOUSE_B1F, 2, SHOW ; top secret key item
+SecretLabHS:
+	db SECRET_LAB, 1, SHOW ; soldier 1 in secret lab
+	db SECRET_LAB, 2, SHOW ; soldier 2 in secret lab
+	db SECRET_LAB, 3, SHOW ; chief in secret lab
+PokemonTower1FHS:
+	db POKEMON_TOWER_1F, 6, SHOW ; new rocket in pokemon tower 1F blocking downstairs
 	db $FF, $01, SHOW ; end
 	assert_table_length NUM_EXTRA_HS_OBJECTS + 1

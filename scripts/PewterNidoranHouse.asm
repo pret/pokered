@@ -2,45 +2,46 @@ PewterNidoranHouse_Script:
 	jp EnableAutoTextBoxDrawing
 
 PewterNidoranHouse_TextPointers:
-	dw PewterHouse1Text1
-	dw PewterHouse1Text2
-	dw PewterHouse1Text3
-	dw PewterHouse1Text4
+	def_text_pointers
+	dw_const PewterNidoranHouseNidoranText,          TEXT_PEWTERNIDORANHOUSE_NIDORAN
+	dw_const PewterNidoranHouseLittleBoyText,        TEXT_PEWTERNIDORANHOUSE_LITTLE_BOY
+	dw_const PewterNidoranHouseMiddleAgedManText,    TEXT_PEWTERNIDORANHOUSE_MIDDLE_AGED_MAN
+	dw_const PewterNidoranHouseMiddleAgedWomanText,  TEXT_PEWTERNIDORANHOUSE_MIDDLE_AGED_WOMAN
 
-PewterHouse1Text1:
-	text_far _PewterHouse1Text1
+PewterNidoranHouseNidoranText:
+	text_far _PewterNidoranHouseNidoranText
 	text_asm
 	ld a, NIDORAN_M
 	call PlayCry
 	call WaitForSoundToFinish
-	jp TextScriptEnd
+	rst TextScriptEnd
 
-PewterHouse1Text2:
-	text_far _PewterHouse1Text2
+PewterNidoranHouseLittleBoyText:
+	text_far _PewterNidoranHouseLittleBoyText
 	text_end
 
-PewterHouse1Text3:
-	text_far _PewterHouse1Text3
+PewterNidoranHouseMiddleAgedManText:
+	text_far _PewterNidoranHouseMiddleAgedManText
 	text_end
 
 ; PureRGBnote: ADDED: new NPC who will talk about alternate color palettes if the feature is enabled.
-PewterHouse1Text4:
+PewterNidoranHouseMiddleAgedWomanText:
 	text_asm
 	ld a, [wOptions2]
 	bit BIT_ALT_PKMN_PALETTES, a ; do we have alt palettes enabled
 	jr nz, .altPalettes
-	ld hl, PewterHouse1Text4Default
+	ld hl, .Text
 	jr .done
 .altPalettes
-	ld hl, PewterHouse1Text4Color
+	ld hl, .TextColor
 .done
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
-PewterHouse1Text4Default::
+.Text
 	text_far _PewterHouse1Text4
 	text_end
 
-PewterHouse1Text4Color::
+.TextColor::
 	text_far _PewterHouse1Text4Color
 	text_end

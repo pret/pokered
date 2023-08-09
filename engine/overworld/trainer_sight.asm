@@ -357,9 +357,24 @@ PlayTrainerMusic::
 	ret z
 	cp OPP_RIVAL3
 	ret z
+;;;;;;;;;; PureRGBnote: If we're fighting giovanni, depending on our music option setting we may need to play the trainer music, but may not.
+	ld b, a
+	ld a, [wOptions2]
+	bit BIT_MUSIC, a
+	ld a, b
+	jr z, .skipGiovanniCheck
+	cp OPP_GIOVANNI
+	ret z
+.skipGiovanniCheck
+;;;;;;;;;;
 	ld a, [wGymLeaderNo]
 	and a
 	ret nz
+;;;;;;;;;; PureRGBnote: ADDED: skip the trainer encounter music in the secret lab (it plays already earlier than this)
+	ld a, [wCurMap]
+	cp SECRET_LAB
+	ret z
+;;;;;;;;;;
 	xor a
 	ld [wAudioFadeOutControl], a
 	call StopAllMusic

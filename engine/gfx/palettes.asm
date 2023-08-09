@@ -30,7 +30,7 @@ SetPal_Battle:
 	ld hl, PalPacket_Empty
 	ld de, wPalPacket
 	ld bc, $10
-	call CopyData
+	rst _CopyData
 	ld a, [wBattleMonFlags]
 	and 1 ; only the 1st bit of the flags determines alt palette
 	ld [wIsAltPalettePkmn], a
@@ -76,7 +76,7 @@ SetPal_StatusScreen:
 	ld hl, PalPacket_Empty
 	ld de, wPalPacket
 	ld bc, $10
-	call CopyData
+	rst _CopyData
 	ld a, [wcf91]
 	cp NUM_POKEMON_INDEXES + 1
 	jr c, .pokemon
@@ -112,10 +112,26 @@ SetPal_Pokedex:
 	ld hl, PalPacket_Pokedex
 	ld de, wPalPacket
 	ld bc, $10
-	call CopyData
+	rst _CopyData
 	ld a, [wcf91]
 	; no alt palette colors when viewing pokedex entries
 	call DeterminePaletteIDOutOfBattle
+	ld hl, wPalPacket + 3
+	ld [hl], a
+	ld hl, wPalPacket
+	ld de, BlkPacket_Pokedex
+	ret
+
+; PureRGBnote: ADDED: new function for setting the palette including the type icon color on the movedex data page
+SetPal_Movedex:
+	ld hl, PalPacket_Movedex
+	ld de, wPalPacket
+	ld bc, $10
+	rst _CopyData
+	ld a, [wcf91]
+	ld d, a
+	callfar GetTypePalette
+	ld a, d
 	ld hl, wPalPacket + 3
 	ld [hl], a
 	ld hl, wPalPacket
@@ -128,7 +144,7 @@ SetPal_MiddleScreenMonBox:
 	ld hl, PalPacket_Empty
 	ld de, wPalPacket
 	ld bc, $10
-	call CopyData
+	rst _CopyData
 
 	call GetOverworldPalette
 	ld hl, wPalPacket + 1
@@ -148,7 +164,7 @@ SetPal_ColorBeforeAfter:
 	ld hl, PalPacket_Empty
 	ld de, wPalPacket
 	ld bc, $10
-	call CopyData
+	rst _CopyData
 	; before picture
 	ld a, [wLoadedMonFlags]
 	and 1 ; only the 1st bit of the flags determines alt palette, zero the other ones
@@ -207,7 +223,7 @@ SetPal_Overworld:
 	ld hl, PalPacket_Empty
 	ld de, wPalPacket
 	ld bc, $10
-	call CopyData
+	rst _CopyData
 	call GetOverworldPalette
 	ld hl, wPalPacket + 1
 	ld [hld], a
@@ -222,6 +238,8 @@ GetOverworldPalette:
 	ld a, [wCurMapTileset]
 	cp CEMETERY
 	jr z, .PokemonTowerOrAgatha
+	cp SECRET_LAB_TS
+	jr z, .SecretLab
 	cp CAVERN
 	jr z, .caveOrBruno
 	ld a, [wCurMap]
@@ -246,10 +264,17 @@ GetOverworldPalette:
 .town
 	inc a ; a town's palette ID is its map ID + 1
 	ret
+.SecretLab
+	ld a, PAL_SECRETLAB - 1
+	jr .town
 .rocketHouseBasement
 	ld a, PAL_REDMON - 1
 	jr .town
 .PokemonTowerOrAgatha
+	ld a, [wCurMap]
+	cp POKEMON_TOWER_B1F
+	ld a, PAL_BLACKMON - 1
+	jr z, .town
 	ld a, PAL_GREYMON - 1
 	jr .town
 .caveOrBruno ; PureRGBnote: CHANGED: seafoam islands use a bluish purple color palette instead of brown.
@@ -289,7 +314,7 @@ SetPal_PokemonWholeScreenTrade:
 	ld hl, PalPacket_Empty
 	ld de, wPalPacket
 	ld bc, $10
-	call CopyData
+	rst _CopyData
 	pop bc
 	ld a, c
 	and a
@@ -307,7 +332,7 @@ SetPal_TrainerCard:
 	ld hl, BlkPacket_TrainerCard
 	ld de, wTrainerCardBlkPacket
 	ld bc, $40
-	call CopyData
+	rst _CopyData
 	ld de, BadgeBlkDataLengths
 	ld hl, wTrainerCardBlkPacket + 2
 	ld a, [wObtainedBadges]
@@ -362,6 +387,7 @@ SetPalFunctions:
 	dw SetPal_TrainerCard
 	dw SetPal_ColorBeforeAfter
 	dw SetPal_MiddleScreenMonBox
+	dw SetPal_Movedex
 
 ; The length of the blk data of each badge on the Trainer Card.
 ; The Rainbow Badge has 3 entries because of its many colors.
@@ -549,10 +575,8 @@ LoadSGB:
 	ld [wCopyingSGBTileData], a
 ;;;;;;;;;; PureRGBnote: ADDED: optional toggle between original SGB palettes and GBC palettes when playing on SGB
 	call GetPalettes
-	ld a, d
-	ld h, a
-	ld a, e
-	ld l, a ; GetPalettes stores the palette set address in de, but here we need it to be in hl, so we copy it over to hl
+	ld h, d
+	ld l, e ; GetPalettes stores the palette set address in de, but here we need it to be in hl, so we copy it over to hl
 ;;;;;;;;;;
 	ld de, PalTrnPacket
 	call CopyGfxToSuperNintendoVRAM
@@ -662,7 +686,7 @@ CopyGfxToSuperNintendoVRAM:
 	jr .next
 .notCopyingTileData
 	ld bc, $1000
-	call CopyData
+	rst _CopyData
 .next
 	ld hl, vBGMap0
 	ld de, $c
@@ -1016,6 +1040,11 @@ TransferPalColorLCDDisabled:
 	ret
 	
 _UpdateGBCPal_BGP:: ;shinpokerednote: gbcnote: code from pokemon yellow
+	;prevent the BGmap from updating during vblank 
+	;because this is going to take a frame or two in order to fully run
+	;otherwise a partial update (like during a screen whiteout) can be distracting
+	ld hl, hFlagsFFFA
+	set 1, [hl]
 index = 0
 	REPT NUM_ACTIVE_PALS
 		ld a, [wGBCBasePalPointers + index * 2]
@@ -1029,6 +1058,8 @@ index = 0
 index = index + 1
 	ENDR
 	call TransferBGPPals	;Transfer wBGPPalsBuffer contents to rBGPD
+	ld hl, hFlagsFFFA	;re-allow BGmap updates
+	res 1, [hl]
 	ret
 
 _UpdateGBCPal_OBP:: ;shinpokerednote: gbcnote: code from pokemon yellow

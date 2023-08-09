@@ -1,3 +1,7 @@
+	object_const_def
+	const CINNABARLABMETRONOMEROOM_SCIENTIST1
+	const CINNABARLABMETRONOMEROOM_SCIENTIST2
+
 CinnabarLabMetronomeRoom_Object:
 	db $17 ; border block
 
@@ -6,12 +10,12 @@ CinnabarLabMetronomeRoom_Object:
 	warp_event  3,  7, CINNABAR_LAB, 4
 
 	def_bg_events
-	bg_event  0,  4, 3 ; Lab3Text3
-	bg_event  1,  4, 4 ; Lab3Text4
-	bg_event  2,  1, 5 ; Lab3Text5
+	bg_event  0,  4, TEXT_CINNABARLABMETRONOMEROOM_PC_KEYBOARD
+	bg_event  1,  4, TEXT_CINNABARLABMETRONOMEROOM_PC_MONITOR
+	bg_event  2,  1, TEXT_CINNABARLABMETRONOMEROOM_AMBER_PIPE
 
 	def_object_events
-	object_event  7,  2, SPRITE_SCIENTIST, STAY, DOWN, 1 ; person
-	object_event  2,  3, SPRITE_SCIENTIST, WALK, LEFT_RIGHT, 2 ; person
+	object_event  7,  2, SPRITE_SCIENTIST, STAY, DOWN, TEXT_CINNABARLABMETRONOMEROOM_SCIENTIST1
+	object_event  2,  3, SPRITE_SCIENTIST, WALK, LEFT_RIGHT, TEXT_CINNABARLABMETRONOMEROOM_SCIENTIST2
 
 	def_warps_to CINNABAR_LAB_METRONOME_ROOM

@@ -142,7 +142,7 @@ MoveSoundTable:
 	db SFX_BATTLE_2E,          $32, $40 ; POISON_GAS
 	db SFX_BATTLE_32,          $08, $e0 ; BARRAGE
 	db SFX_BATTLE_24,          $00, $80 ; LEECH_LIFE
-	db SFX_BATTLE_09,          $88, $10 ; LOVELY_KISS
+	db SFX_BATTLE_2C,          $ff, $00 ; LOVELY_KISS ; actually used for MIST
 	db SFX_BATTLE_25,          $48, $ff ; SKY_ATTACK
 	db SFX_FAINT_FALL,         $ff, $ff ; TRANSFORM
 	db SFX_BATTLE_24,          $ff, $10 ; BUBBLE
@@ -165,6 +165,6 @@ MoveSoundTable:
 	db SFX_BATTLE_26,          $f0, $ff ; SUPER_FANG
 	db SFX_NOT_VERY_EFFECTIVE, $01, $ff ; SLASH
 	db SFX_BATTLE_2C,          $d8, $04 ; SUBSTITUTE
-	db SFX_BATTLE_0B,          $00, $80 ; STRUGGLE
+	db SFX_BATTLE_2C,          $20, $00 ; STRUGGLE ; actually used for HAZE
 	assert_table_length NUM_ATTACKS
 	db SFX_BATTLE_0B,          $00, $80

@@ -1,4 +1,4 @@
-_VermilionPokecenterText2::
+_VermilionPokecenterFishingGuruText::
 	text "Even if they are"
 	line "the same level,"
 	cont "#MON can have"
@@ -11,7 +11,7 @@ _VermilionPokecenterText2::
 	cont "in the wild."
 	done
 
-_VermilionPokecenterText3::
+_VermilionPokecenterSailorText::
 	text "My #MON was"
 	line "poisoned! It"
 	cont "fainted while we"

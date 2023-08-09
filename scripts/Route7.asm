@@ -10,14 +10,16 @@ Route7_Script:
 	ret
 
 Route7_ScriptPointers:
-	dw CheckFightingMapTrainers
-	dw DisplayEnemyTrainerTextAndStartBattle
-	dw EndTrainerBattle
+	def_script_pointers
+	dw_const CheckFightingMapTrainers,              SCRIPT_ROUTE7_DEFAULT
+	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_ROUTE7_START_BATTLE
+	dw_const EndTrainerBattle,                      SCRIPT_ROUTE7_END_BATTLE
 
 Route7_TextPointers:
-	dw Route7Gambler1Text
-	dw Route7Gambler2Text
-	dw Route7Text1
+	def_text_pointers
+	dw_const Route7Gambler1Text,            TEXT_ROUTE7_GAMBLER1
+	dw_const Route7Gambler2Text,            TEXT_ROUTE7_GAMBLER2
+	dw_const Route7UndergroundPathSignText, TEXT_ROUTE7_UNDERGROUND_PATH_SIGN
 
 Route7TrainerHeaders:
 	def_trainers 1
@@ -31,7 +33,7 @@ Route7Gambler1Text:
 	text_asm
 	ld hl, Route7TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route7BattleText1:
 	text_far _Route7BattleText1
@@ -49,7 +51,7 @@ Route7Gambler2Text:
 	text_asm
 	ld hl, Route7TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route7BattleText2:
 	text_far _Route7BattleText2
@@ -63,6 +65,6 @@ Route7AfterBattleText2:
 	text_far _Route7AfterBattleText2
 	text_end
 
-Route7Text1:
-	text_far _Route7Text1
+Route7UndergroundPathSignText:
+	text_far _Route7UndergroundPathSignText
 	text_end

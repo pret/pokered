@@ -112,7 +112,7 @@ Moves:
 	move AGILITY,      SPEED_UP2_EFFECT,             0, PSYCHIC_TYPE, 100, 30
 	move QUICK_ATTACK, NO_ADDITIONAL_EFFECT,        40, NORMAL,       100, 30 ; priority move
 	move RAGE,         ATTACK_UP_SIDE_EFFECT,       50, DRAGON,       100, 20
-	move TELEPORT,     SWITCH_AND_TELEPORT_EFFECT,   0, PSYCHIC_TYPE, 100, 20
+	move TELEPORT,     TELEPORT_EFFECT,              0, PSYCHIC_TYPE, 100, 20
 	move NIGHT_SHADE,  NO_ADDITIONAL_EFFECT,        65, GHOST,        100, 20  
 	move MIMIC,        MIMIC_EFFECT,                 0, NORMAL,       100, 10 ; now uses the mimic'd attack the same turn it's learned
 	move SCREECH,      DEFENSE_DOWN2_EFFECT,         0, NORMAL,        85, 40
@@ -126,7 +126,7 @@ Moves:
 	move DEFENSE_CURL, LIGHT_SCREEN_EFFECT,          0, NORMAL,       100, 40
 	move BARRIER,      DEFENSE_UP2_EFFECT,           0, GHOST,        100, 30
 	move LIGHT_SCREEN, LIGHT_SCREEN_EFFECT,          0, PSYCHIC_TYPE, 100, 30
-	move HAZE,         HAZE_EFFECT,                  0, ICE,          100, 30
+	move HAZE,         HAZE_EFFECT,                  0, POISON,       100, 30
 	move REFLECT,      REFLECT_EFFECT,               0, ELECTRIC,     100, 20
 	move FOCUS_ENERGY, FOCUS_ENERGY_EFFECT,          0, ELECTRIC,     100, 30 
 	move BIDE,         ATTACK_DEFENSE_UP1_EFFECT,    0, NORMAL,       100, 20
@@ -173,9 +173,9 @@ Moves:
 	move HYPER_FANG,   FLINCH_SIDE_EFFECT1,         80, NORMAL,        90, 15
 	move SHARPEN,      ATTACK_ACCURACY_UP1_EFFECT,   0, NORMAL,       100, 30 
 	move CONVERSION,   SPECIAL_UP2_EFFECT,           0, NORMAL,       100, 30
-	move TRI_ATTACK,   FREEZE_SIDE_EFFECT,          80, NORMAL,       100, 10
+	move TRI_ATTACK,   TRI_ATTACK_EFFECT,           90, TRI,          100, 10 ; 10% chance each of freeze/burn/paralysis, uses SPECIAL stat, NORMAL pokemon get STAB.
 	move SUPER_FANG,   SUPER_FANG_EFFECT,            1, NORMAL,       100, 10 ; now does 2/3 of the opponents HP instead of 1/2
 	move SLASH,        NO_ADDITIONAL_EFFECT,        70, NORMAL,       100, 20 ; high critical hit ratio
 	move SUBSTITUTE,   SUBSTITUTE_EFFECT,            0, NORMAL,       100, 10
-	move STRUGGLE,     BIG_RECOIL_EFFECT,           50, NORMAL,       100, 10
+	move STRUGGLE,     BIG_RECOIL_EFFECT,           50, TYPELESS,     100, 10
 	assert_table_length NUM_ATTACKS

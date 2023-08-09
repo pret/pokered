@@ -20,10 +20,10 @@ MarowakAnim:
  ; alternate between black and light grey 8 times.
  ; this makes the ghost's body appear to flash
 	ld d, $80
-	call FlashSprite8Times
+	callfar FlashSprite8Times
 .fadeOutGhostLoop
 	ld c, 10
-	call DelayFrames
+	rst _DelayFrames
 	ldh a, [rOBP1]
 	sla a
 	sla a
@@ -35,7 +35,7 @@ MarowakAnim:
 	ld b, $e4
 .fadeInMarowakLoop
 	ld c, 10
-	call DelayFrames
+	rst _DelayFrames
 	ldh a, [rOBP1]
 	srl b
 	rra

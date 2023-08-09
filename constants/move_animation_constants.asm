@@ -2,8 +2,9 @@
 ; SpecialEffectPointers associates them with effect routines (see data/battle_anims/special_effect_pointers.asm)
 	const_def $C0
 DEF FIRST_SE_ID EQU const_value
-	const_skip $10
+	const_skip $F
 ;;;;;;;;;; PureRGBnote: ADDED: new special effects
+	const SE_LIGHT_SCREEN_FLASH        ; $D0 used in Teleport
 	const SE_SNOWFLAKES_EVERYWHERE     ; $D1 used in Blizzard
 	const SE_STATIC_EVERYWHERE         ; $D2 used in Constrict (Static Snag)
 	const SE_SMOKE_EVERYWHERE          ; $D3 used in Poison Gas 
@@ -153,6 +154,8 @@ DEF FIRST_SE_ID EQU const_value
 	const SUBANIM_0_PIN_JAB
 	const SUBANIM_0_PIN_MISSILE
 	const SUBANIM_0_BARB_JAB
+	const SUBANIM_0_SPARKLES_FALLING
+	const SUBANIM_0_CIRCLE_SPLITTING
 ;;;;;;;;;;
 DEF NUM_SUBANIMS EQU const_value
 
@@ -291,6 +294,8 @@ DEF NUM_SUBANIMS EQU const_value
 	const FRAMEBLOCK_78
 	const FRAMEBLOCK_79
 	const FRAMEBLOCK_7A
+	const FRAMEBLOCK_7B
+	const FRAMEBLOCK_7C
 DEF NUM_FRAMEBLOCKS EQU const_value
 
 ; base coordinates that are part of subanimations
@@ -473,6 +478,8 @@ DEF NUM_FRAMEBLOCKS EQU const_value
 	const BASECOORD_AE
 	const BASECOORD_AF
 	const BASECOORD_B0
+	const BASECOORD_B1
+	const BASECOORD_B2
 DEF NUM_BASECOORDS EQU const_value
 
 ; frame block modes that are part of subanimations

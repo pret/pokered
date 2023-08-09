@@ -1,4 +1,4 @@
-SaffronCashierText::
+SaffronMartClerkText::
 	script_mart \
 	GREAT_BALL, \
 	HYPER_POTION, \

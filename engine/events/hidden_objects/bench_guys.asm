@@ -82,8 +82,8 @@ SaffronCityPokecenterBenchGuyText::
 	jr nz, .printText
 	ld hl, SaffronCityPokecenterBenchGuyText1
 .printText
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 SaffronCityPokecenterBenchGuyText1:
 	text_far _SaffronCityPokecenterGuyText1

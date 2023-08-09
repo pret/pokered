@@ -45,4 +45,4 @@
 
 	dw BANK(ZapdosPicFront), BANK(ZapdosPicBack)
 
-	dw ZapdosPicFrontRG, ZapdosPicBack
+	dw ZapdosPicFrontAlt, ZapdosPicBack

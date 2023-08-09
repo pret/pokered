@@ -20,10 +20,13 @@ This is a purist's enhancement of Pokemon Red/Blue/Green. The goal is to enhance
 - Game bugs that can be used to your own advantage (like the leech seed/toxic bug, the hyper beam no recharge on faint bug, etc.) are unchanged, because they are quirks of the battle engine that you can use as your own tool. 
 - Mew is under the truck as expected!
 - Missingno and the item duplication glitch are intact - but won't corrupt your save anymore!
+- An entirely new mode for the pokedex called the MOVEDEX was added. It shows data about moves you have seen in detail. You unlock the MOVEDEX in viridian city.
+- There are multiple secret areas to be found after becoming CHAMP. Bills Garden, Team Rocket / Mewtwo lore, and more...
 - [Many options to enhance the game visually and mechanically were added.](https://github.com/Vortyne/pureRGB/blob/master/FEATURES.md#new-options-in-the-options-menu) **(You must turn them on via the options in-game!)** Including:
   - Switchable color palettes (Choose between original colors, Super Gameboy Colors, or Pokemon Yellow Colors in-game whenever you like! Works on GBC and Super Gameboy. Yes, this romhack has GBC support!)
   - Optional Spaceworld 1997 Back Sprites
   - Optional enhanced menu sprites/overworld icons
+  - Optional enhanced music (Add in cut content music like Giovanni's theme) 
   - Optional stereo panned audio (Similar to the Earphone1 option in Pokemon Yellow)
   - Optional alternate color palette pokemon based on region (catch differently colored pokemon depending on where they appear in Kanto)
   - Option to turn off the bicycle song (plays in cycling road still)
@@ -58,5 +61,9 @@ Jojobear13 - Tons of code snippets and help via the shinpokered romhack codebase
 Danny-E 33 - Larger back sprites code snippets, EXP Bar code snippets, various support regarding game audio and questions about rgbasm/gbz80 answered
 
 Mechanicalpen - enhanced menu icons code
+
+LJSTAR - Most of the work creating the type icons used in the movedex
+
+Mord - Most of the work creating LT.Surge and Erika overworld sprites
 
 pret discord and pret in general for their original disassembly work on Red / Blue

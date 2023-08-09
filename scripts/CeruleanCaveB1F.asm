@@ -8,14 +8,16 @@ CeruleanCaveB1F_Script:
 	ret
 
 CeruleanCaveB1F_ScriptPointers:
-	dw CheckFightingMapTrainers
-	dw DisplayEnemyTrainerTextAndStartBattle
-	dw EndTrainerBattle
+	def_script_pointers
+	dw_const CheckFightingMapTrainers,              SCRIPT_CERULEANCAVEB1F_DEFAULT
+	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_CERULEANCAVEB1F_START_BATTLE
+	dw_const EndTrainerBattle,                      SCRIPT_CERULEANCAVEB1F_END_BATTLE
 
 CeruleanCaveB1F_TextPointers:
-	dw MewtwoText
-	dw PickUpItemText
-	dw PickUpItemText
+	def_text_pointers
+	dw_const CeruleanCaveB1FMewtwoText, TEXT_CERULEANCAVEB1F_MEWTWO
+	dw_const PickUpItemText,            TEXT_CERULEANCAVEB1F_ITEM1
+	dw_const PickUpItemText,            TEXT_CERULEANCAVEB1F_ITEM2
 
 CeruleanCaveB1FTrainerHeaders:
 	def_trainers
@@ -23,11 +25,11 @@ MewtwoTrainerHeader:
 	trainer EVENT_BEAT_MEWTWO, 0, MewtwoBattleText, MewtwoBattleText, MewtwoBattleText
 	db -1 ; end
 
-MewtwoText:
+CeruleanCaveB1FMewtwoText:
 	text_asm
 	ld hl, MewtwoTrainerHeader
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 MewtwoBattleText:
 	text_far _MewtwoBattleText
@@ -35,4 +37,4 @@ MewtwoBattleText:
 	ld a, MEWTWO
 	call PlayCry
 	call WaitForSoundToFinish
-	jp TextScriptEnd
+	rst TextScriptEnd

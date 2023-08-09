@@ -98,7 +98,7 @@ PewterNidoranHouse_Blocks:
 PewterSpeechHouse_Blocks:
 ViridianNicknameHouse_Blocks: INCBIN "maps/ViridianNicknameHouse.blk"
 
-CeladonMansionRoofHouse_Blocks:
+CeladonMansionRoofHouse_Blocks: INCBIN "maps/CeladonMansionRoofHouse.blk"
 ViridianSchoolHouse_Blocks: INCBIN "maps/ViridianSchoolHouse.blk"
 
 CeruleanTrashedHouse_Blocks: INCBIN "maps/CeruleanTrashedHouse.blk"
@@ -125,6 +125,11 @@ ViridianMart_Blocks: INCBIN "maps/ViridianMart.blk"
 INCLUDE "data/maps/headers/ViridianSchoolHouse.asm"
 INCLUDE "scripts/ViridianSchoolHouse.asm"
 INCLUDE "data/maps/objects/ViridianSchoolHouse.asm"
+
+INCLUDE "data/maps/headers/ViridianSchoolHouseB1F.asm"
+INCLUDE "scripts/ViridianSchoolHouseB1F.asm"
+INCLUDE "data/maps/objects/ViridianSchoolHouseB1F.asm"
+ViridianSchoolHouseB1F_Blocks: INCBIN "maps/ViridianSchoolHouseB1F.blk"
 
 INCLUDE "data/maps/headers/ViridianNicknameHouse.asm"
 	ds 1
@@ -244,6 +249,11 @@ INCLUDE "data/maps/headers/BillsHouse.asm"
 INCLUDE "scripts/BillsHouse.asm"
 INCLUDE "data/maps/objects/BillsHouse.asm"
 BillsHouse_Blocks: INCBIN "maps/BillsHouse.blk"
+
+INCLUDE "data/maps/headers/BillsGarden.asm"
+INCLUDE "scripts/BillsGarden.asm"
+INCLUDE "data/maps/objects/BillsGarden.asm"
+BillsGarden_Blocks: INCBIN "maps/BillsGarden.blk"
 
 
 SECTION "Maps 5", ROMX
@@ -651,6 +661,11 @@ INCLUDE "scripts/PokemonMansionB1F.asm"
 INCLUDE "data/maps/objects/PokemonMansionB1F.asm"
 PokemonMansionB1F_Blocks: INCBIN "maps/PokemonMansionB1F.blk"
 
+INCLUDE "data/maps/headers/SecretLab.asm"
+INCLUDE "scripts/SecretLab.asm"
+INCLUDE "data/maps/objects/SecretLab.asm"
+SecretLab_Blocks: INCBIN "maps/SecretLab.blk"
+
 
 SECTION "Maps 11", ROMX
 
@@ -1009,6 +1024,11 @@ INCLUDE "data/maps/headers/PokemonTower7F.asm"
 INCLUDE "scripts/PokemonTower7F.asm"
 INCLUDE "data/maps/objects/PokemonTower7F.asm"
 PokemonTower7F_Blocks: INCBIN "maps/PokemonTower7F.blk"
+
+INCLUDE "data/maps/headers/PokemonTowerB1F.asm"
+INCLUDE "scripts/PokemonTowerB1F.asm"
+INCLUDE "data/maps/objects/PokemonTowerB1F.asm"
+PokemonTowerB1F_Blocks: INCBIN "maps/PokemonTowerB1F.blk"
 
 INCLUDE "data/maps/headers/CeladonMart1F.asm"
 INCLUDE "scripts/CeladonMart1F.asm"

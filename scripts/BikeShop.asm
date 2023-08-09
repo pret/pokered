@@ -2,23 +2,24 @@ BikeShop_Script:
 	jp EnableAutoTextBoxDrawing
 
 BikeShop_TextPointers:
-	dw BikeShopText1
-	dw BikeShopText2
-	dw BikeShopText3
+	def_text_pointers
+	dw_const BikeShopClerkText,             TEXT_BIKESHOP_CLERK
+	dw_const BikeShopMiddleAgedWomanText,   TEXT_BIKESHOP_MIDDLE_AGED_WOMAN
+	dw_const BikeShopYoungsterText,         TEXT_BIKESHOP_YOUNGSTER
 
-BikeShopText1:
+BikeShopClerkText:
 	text_asm
 	CheckEvent EVENT_GOT_BICYCLE
-	jr z, .asm_260d4
-	ld hl, BikeShopText_1d82f
-	call PrintText
+	jr z, .dontHaveBike
+	ld hl, BikeShopClerkHowDoYouLikeYourBicycleText
+	rst _PrintText
 	jp .Done
-.asm_260d4
+.dontHaveBike
 	ld b, BIKE_VOUCHER
 	call IsItemInBag
-	jr z, .asm_41190
-	ld hl, BikeShopText_1d81f
-	call PrintText
+	jr z, .dontHaveVoucher
+	ld hl, BikeShopClerkOhThatsAVoucherText
+	rst _PrintText
 	lb bc, BICYCLE, 1
 	call GiveItem
 	jr nc, .BagFull
@@ -26,16 +27,16 @@ BikeShopText1:
 	ldh [hItemToRemoveID], a
 	farcall RemoveItemByID
 	SetEvent EVENT_GOT_BICYCLE
-	ld hl, BikeShopText_1d824
-	call PrintText
+	ld hl, BikeShopExchangedVoucherText
+	rst _PrintText
 	jr .Done
 .BagFull
-	ld hl, BikeShopText_1d834
-	call PrintText
+	ld hl, BikeShopBagFullText
+	rst _PrintText
 	jr .Done
-.asm_41190
-	ld hl, BikeShopText_1d810
-	call PrintText
+.dontHaveVoucher
+	ld hl, BikeShopClerkWelcomeText
+	rst _PrintText
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
@@ -60,8 +61,8 @@ BikeShopText1:
 	hlcoord 8, 3
 	ld de, BikeShopMenuPrice
 	call PlaceString
-	ld hl, BikeShopText_1d815
-	call PrintText
+	ld hl, BikeShopClerkDoYouLikeItText
+	rst _PrintText
 	call HandleMenuInput
 	bit BIT_B_BUTTON, a
 	jr nz, .cancel
@@ -71,12 +72,12 @@ BikeShopText1:
 	and a
 	jr nz, .cancel
 	ld hl, BikeShopCantAffordText
-	call PrintText
+	rst _PrintText
 .cancel
 	ld hl, BikeShopComeAgainText
-	call PrintText
+	rst _PrintText
 .Done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 BikeShopMenuText:
 	db   "BICYCLE"
@@ -85,24 +86,24 @@ BikeShopMenuText:
 BikeShopMenuPrice:
 	db "¥1000000@"
 
-BikeShopText_1d810:
-	text_far _BikeShopText_1d810
+BikeShopClerkWelcomeText:
+	text_far _BikeShopClerkWelcomeText
 	text_end
 
-BikeShopText_1d815:
-	text_far _BikeShopText_1d815
+BikeShopClerkDoYouLikeItText:
+	text_far _BikeShopClerkDoYouLikeItText
 	text_end
 
 BikeShopCantAffordText:
 	text_far _BikeShopCantAffordText
 	text_end
 
-BikeShopText_1d81f:
-	text_far _BikeShopText_1d81f
+BikeShopClerkOhThatsAVoucherText:
+	text_far _BikeShopClerkOhThatsAVoucherText
 	text_end
 
-BikeShopText_1d824:
-	text_far _BikeShopText_1d824
+BikeShopExchangedVoucherText:
+	text_far _BikeShopExchangedVoucherText
 	sound_get_key_item
 	text_end
 
@@ -110,38 +111,38 @@ BikeShopComeAgainText:
 	text_far _BikeShopComeAgainText
 	text_end
 
-BikeShopText_1d82f:
-	text_far _BikeShopText_1d82f
+BikeShopClerkHowDoYouLikeYourBicycleText:
+	text_far _BikeShopClerkHowDoYouLikeYourBicycleText
 	text_end
 
-BikeShopText_1d834:
-	text_far _BikeShopText_1d834
+BikeShopBagFullText:
+	text_far _BikeShopBagFullText
 	text_end
 
-BikeShopText2:
+BikeShopMiddleAgedWomanText:
 	text_asm
-	ld hl, BikeShopText_1d843
-	call PrintText
-	jp TextScriptEnd
+	ld hl, .Text
+	rst _PrintText
+	rst TextScriptEnd
 
-BikeShopText_1d843:
-	text_far _BikeShopText_1d843
+.Text:
+	text_far _BikeShopMiddleAgedWomanText
 	text_end
 
-BikeShopText3:
+BikeShopYoungsterText:
 	text_asm
 	CheckEvent EVENT_GOT_BICYCLE
-	ld hl, BikeShopText_1d861
-	jr nz, .asm_34d2d
-	ld hl, BikeShopText_1d85c
-.asm_34d2d
-	call PrintText
-	jp TextScriptEnd
+	ld hl, .CoolBikeText
+	jr nz, .gotBike
+	ld hl, .TheseBikesAreExpensiveText
+.gotBike
+	rst _PrintText
+	rst TextScriptEnd
 
-BikeShopText_1d85c:
-	text_far _BikeShopText_1d85c
+.TheseBikesAreExpensiveText:
+	text_far _BikeShopYoungsterTheseBikesAreExpensiveText
 	text_end
 
-BikeShopText_1d861:
-	text_far _BikeShopText_1d861
+.CoolBikeText:
+	text_far _BikeShopYoungsterCoolBikeText
 	text_end

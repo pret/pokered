@@ -44,15 +44,15 @@ MACRO special_warp_spec
 	db \4
 ENDM
 
-FirstMapSpec:
+NewGameWarp:
 	special_warp_spec REDS_HOUSE_2F, 3, 6, REDS_HOUSE_2
-TradeCenterSpec1:
+TradeCenterPlayerWarp:
 	special_warp_spec TRADE_CENTER,  3, 4, CLUB
-TradeCenterSpec2:
+TradeCenterFriendWarp:
 	special_warp_spec TRADE_CENTER,  6, 4, CLUB
-ColosseumSpec1:
+ColosseumPlayerWarp:
 	special_warp_spec COLOSSEUM,     3, 4, CLUB
-ColosseumSpec2:
+ColosseumFriendWarp:
 	special_warp_spec COLOSSEUM,     6, 4, CLUB
 
 

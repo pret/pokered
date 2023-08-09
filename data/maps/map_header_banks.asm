@@ -110,10 +110,10 @@ MapHeaderBanks::
 	db BANK(CeruleanRocketHouse1F_h) ; UNUSED_MAP_6A
 	db BANK(CeruleanRocketHouseB1F_h); UNUSED_MAP_6B
 	db BANK(VictoryRoad1F_h)
-	db $1D ; UNUSED_MAP_6D
-	db $1D ; UNUSED_MAP_6E
-	db $1D ; UNUSED_MAP_6F
-	db $1D ; UNUSED_MAP_70
+	db BANK(ViridianSchoolHouseB1F_h) ; UNUSED_MAP_6D
+	db BANK(BillsGarden_h) ; UNUSED_MAP_6E
+	db BANK(SecretLab_h) ; UNUSED_MAP_6F
+	db BANK(PokemonTowerB1F_h) ; UNUSED_MAP_70
 	db BANK(LancesRoom_h)
 	db $1D ; UNUSED_MAP_72
 	db $1D ; UNUSED_MAP_73

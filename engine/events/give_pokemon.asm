@@ -34,13 +34,14 @@ _GivePokemon::
 	ld [hli], a
 	ld [hl], "@"
 	ld hl, SentToBoxText
-	call PrintText
+	rst _PrintText
+	callfar PrintRemainingBoxSpace ; PureRGBnote: ADDED: 
 	call .clearAltPaletteData 
 	scf
 	ret
 .boxFull
 	ld hl, BoxIsFullText
-	call PrintText
+	rst _PrintText
 	push af
 	call .clearAltPaletteData
 	pop af

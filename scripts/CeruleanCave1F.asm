@@ -4,6 +4,7 @@ CeruleanCave1F_Script:
 	jp EnableAutoTextBoxDrawing
 
 CeruleanCave1F_TextPointers:
-	dw PickUpItemText
-	dw PickUpItemText
-	dw PickUpItemText
+	def_text_pointers
+	dw_const PickUpItemText, TEXT_CERULEANCAVE1F_ITEM1
+	dw_const PickUpItemText, TEXT_CERULEANCAVE1F_ITEM2
+	dw_const PickUpItemText, TEXT_CERULEANCAVE1F_ITEM3

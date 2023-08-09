@@ -107,17 +107,14 @@ BillsPC_::
 	jr nz, BillsPCMenu
 ; accessing it directly
 	ld a, SFX_TURN_ON_PC
-	call PlaySound
+	rst _PlaySound
 	ld hl, SwitchOnText
-	call PrintText
+	rst _PrintText
 
 BillsPCMenu:
 	ld a, [wParentMenuItem]
 	ld [wCurrentMenuItem], a
-	ld hl, vChars2 tile $78
-	ld de, PokeballTileGraphics
-	lb bc, BANK(PokeballTileGraphics), 1
-	call CopyVideoData
+	callfar LoadBillsPCExtraTiles
 	call LoadScreenTilesFromBuffer2DisableBGTransfer
 	hlcoord 0, 0
 	ld b, 10
@@ -145,28 +142,9 @@ BillsPCMenu:
 	ld [hl], a ; wMenuWatchMovingOutOfBounds
 	ld [wPlayerMonNumber], a
 	ld hl, WhatText
-	call PrintText
-	hlcoord 9, 14
-	ld b, 2
-	ld c, 9
-	call TextBoxBorder
-	ld a, [wCurrentBoxNum]
-	and $7f
-	cp 9
-	jr c, .singleDigitBoxNum
-; two digit box num
-	sub 9
-	hlcoord 17, 16
-	ld [hl], "1"
-	add "0"
-	jr .next
-.singleDigitBoxNum
-	add "1"
-.next
-	ldcoord_a 18, 16
-	hlcoord 10, 16
-	ld de, BoxNoPCText
-	call PlaceString
+	rst _PrintText
+	decoord 13, 13
+	callfar DrawCurrentBoxPrompt
 	ld a, 1
 	ldh [hAutoBGTransferEnabled], a
 	call Delay3
@@ -192,7 +170,7 @@ ExitBillsPC:
 ; accessing it directly
 	call LoadTextBoxTilePatterns
 	ld a, SFX_TURN_OFF_PC
-	call PlaySound
+	rst _PlaySound
 	call WaitForSoundToFinish
 .next
 	ld hl, wFlags_0xcd60
@@ -208,15 +186,19 @@ BillsPCDeposit:
 	ld a, [wPartyCount]
 	dec a
 	jr nz, .partyLargeEnough
+	ld hl, wd730
+	res 6, [hl] ; turn on letter printing delay so we don't get instant text
 	ld hl, CantDepositLastMonText
-	call PrintText
+	rst _PrintText
 	jp BillsPCMenu
 .partyLargeEnough
 	ld a, [wBoxCount]
 	cp MONS_PER_BOX
 	jr nz, .boxNotFull
+	ld hl, wd730
+	res 6, [hl] ; turn on letter printing delay so we don't get instant text
 	ld hl, BoxFullText
-	call PrintText
+	rst _PrintText
 	jp BillsPCMenu
 .boxNotFull
 	ld hl, wPartyCount
@@ -224,9 +206,9 @@ BillsPCDeposit:
 	jp c, BillsPCMenu
 	call DisplayDepositWithdrawMenu
 	jp nc, BillsPCMenu
+	call WaitForSoundToFinish
 	ld a, [wcf91]
-	call GetCryData
-	call PlaySoundWaitForCurrent
+	call PlayCry
 	ld a, PARTY_TO_BOX
 	ld [wMoveMonType], a
 	call MoveMon
@@ -250,22 +232,26 @@ BillsPCDeposit:
 	ld [hli], a
 	ld [hl], "@"
 	ld hl, MonWasStoredText
-	call PrintText
+	rst _PrintText
 	jp BillsPCMenu
 
 BillsPCWithdraw:
 	ld a, [wBoxCount]
 	and a
 	jr nz, .boxNotEmpty
+	ld hl, wd730
+	res 6, [hl] ; turn on letter printing delay so we don't get instant text
 	ld hl, NoMonText
-	call PrintText
+	rst _PrintText
 	jp BillsPCMenu
 .boxNotEmpty
 	ld a, [wPartyCount]
 	cp PARTY_LENGTH
 	jr nz, .partyNotFull
+	ld hl, wd730
+	res 6, [hl] ; turn on letter printing delay so we don't get instant text
 	ld hl, CantTakeMonText
-	call PrintText
+	rst _PrintText
 	jp BillsPCMenu
 .partyNotFull
 	ld hl, wBoxCount
@@ -276,9 +262,9 @@ BillsPCWithdraw:
 	ld a, [wWhichPokemon]
 	ld hl, wBoxMonNicks
 	call GetPartyMonName
+	call WaitForSoundToFinish
 	ld a, [wcf91]
-	call GetCryData
-	call PlaySoundWaitForCurrent
+	call PlayCry
 	xor a ; BOX_TO_PARTY
 	ld [wMoveMonType], a
 	call MoveMon
@@ -287,26 +273,59 @@ BillsPCWithdraw:
 	call RemovePokemon
 	call WaitForSoundToFinish
 	ld hl, MonIsTakenOutText
-	call PrintText
+	rst _PrintText
 	jp BillsPCMenu
 
 BillsPCRelease:
 	ld a, [wBoxCount]
 	and a
 	jr nz, .loop
+	ld hl, wd730
+	res 6, [hl] ; turn on letter printing delay so we don't get instant text
 	ld hl, NoMonText
-	call PrintText
+	rst _PrintText
 	jp BillsPCMenu
 .loop
+	ld hl, wd730
+	set 6, [hl] ; turn off letter printing delay so we get instant text
+	ld hl, ReleaseWhichMonText
+	rst _PrintText
 	ld hl, wBoxCount
 	call DisplayMonListMenu
 	jp c, BillsPCMenu
+	ld hl, wd730
+	res 6, [hl] ; turn on letter printing delay so we don't get instant text
 	ld hl, OnceReleasedText
-	call PrintText
-	call YesNoChoice
+	rst _PrintText
+	xor a
+	ld [wCurrentMenuItem], a
+	ld a, A_BUTTON | B_BUTTON
+	ld [wMenuWatchedKeys], a
+.loopYesNo
+	ld hl, YesNoSmall
+	ld a, l
+	ld [wListPointer], a
+	ld a, h
+	ld [wListPointer + 1], a
+	callfar DisplayMultiChoiceMenu
+	ldh a, [hJoy5]
+	bit BIT_B_BUTTON, a
+	jr nz, .loop
+	bit BIT_START, a
 	ld a, [wCurrentMenuItem]
+	jr nz, .continue
 	and a
 	jr nz, .loop
+	; a button was pressed, tell the player to press START
+	ld hl, PressStartToReleaseText
+	rst _PrintText
+	ld a, [wMenuWatchedKeys]
+	or START
+	ld [wMenuWatchedKeys], a
+	jr .loopYesNo
+.continue
+	and a
+	jr nz, .loopYesNo
 	inc a
 	ld [wRemoveMonFromBox], a
 	call RemovePokemon
@@ -314,7 +333,7 @@ BillsPCRelease:
 	ld a, [wcf91]
 	call PlayCry
 	ld hl, MonWasReleasedText
-	call PrintText
+	rst _PrintText
 	jp BillsPCMenu
 
 BillsPCChangeBox:
@@ -345,25 +364,23 @@ BillsPCMenuText:
 	next "CHANGE BOX"
 	next "SEE YA!"
 	db "@"
-
-BoxNoPCText:
-	db "BOX No.@"
-
-KnowsHMMove::
+	
+; PureRGBnote: FIXED: pokemon are never considered to have HMs, allows them to be stored in daycare no matter what
+;KnowsHMMove::
 ; returns whether mon with party index [wWhichPokemon] knows an HM move
-	ld hl, wPartyMon1Moves
-	ld bc, wPartyMon2 - wPartyMon1
-	jr .next
+;	ld hl, wPartyMon1Moves
+;	ld bc, wPartyMon2 - wPartyMon1
+;	jr .next
 ; unreachable
 	;ld hl, wBoxMon1Moves
 	;ld bc, wBoxMon2 - wBoxMon1
-.next
-	ld a, [wWhichPokemon]
-	call AddNTimes
-	ld b, NUM_MOVES
-.loop
-	ld a, [hli]
-	;push hl ; PureRGBnote: FIXED: pokemon are never considered to have HMs, allows them to be stored in daycare no matter what
+;.next
+;	ld a, [wWhichPokemon]
+;	call AddNTimes
+;	ld b, NUM_MOVES
+;.loop
+;	ld a, [hli]
+	;push hl 
 	;push bc
 	;ld hl, HMMoveArray
 	;ld de, 1
@@ -371,10 +388,10 @@ KnowsHMMove::
 	;pop bc
 	;pop hl
 	;ret c
-	dec b
-	jr nz, .loop
-	and a
-	ret
+;	dec b
+;	jr nz, .loop
+;	and a
+;	ret
 
 ;HMMoveArray:
 ;INCLUDE "data/moves/hm_moves.asm"
@@ -438,8 +455,7 @@ DisplayDepositWithdrawMenu:
 	ld a, BOX_DATA
 .next2
 	ld [wMonDataLocation], a
-	predef StatusScreen
-	predef StatusScreen2
+	predef StatusScreenOriginal
 	call LoadScreenTilesFromBuffer1
 	call ReloadTilesetTilePatterns
 	call RunDefaultPaletteCommand
@@ -498,6 +514,10 @@ OnceReleasedText:
 
 MonWasReleasedText:
 	text_far _MonWasReleasedText
+	text_end
+
+PressStartToReleaseText:
+	text_far _PressStartToReleaseText
 	text_end
 
 CableClubLeftGameboy::

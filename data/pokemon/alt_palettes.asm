@@ -27,8 +27,8 @@ AltMonsterPalettes: ; pokemon have alternate palettes depending on where you enc
 	db PAL_BLACKMON  ; FEAROW
 	db PAL_REDMON ; EKANS
 	db PAL_REDMON ; ARBOK
-	db PAL_REDMON ; PIKACHU
-	db PAL_REDBAR ; RAICHU
+	db PAL_BLUEMON ; PIKACHU
+	db PAL_BLUEMON ; RAICHU
 	db PAL_GREYMON  ; SANDSHREW
 	db PAL_BLACKMON  ; SANDSLASH
 	db PAL_PURPLEMON ; NIDORAN_F

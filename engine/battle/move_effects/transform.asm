@@ -30,14 +30,14 @@ TransformEffect_:
 	ld b, BANK(HideSubstituteShowMonAnim)
 	call nz, Bankswitch
 	ld a, [wOptions]
-	add a
+	add a ; TODO: Make clearer what it's checking (battle animation flag?)
 	ld hl, PlayCurrentMoveAnimation
 	ld b, BANK(PlayCurrentMoveAnimation)
 	jr nc, .gotAnimToPlay
 	ld hl, AnimationTransformMon
 	ld b, BANK(AnimationTransformMon)
 .gotAnimToPlay
-	call Bankswitch
+	rst _Bankswitch
 	ld hl, ReshowSubstituteAnim
 	ld b, BANK(ReshowSubstituteAnim)
 	pop af
@@ -73,7 +73,7 @@ TransformEffect_:
 	inc hl 
 	inc de
 ; moves - copy bc (4) bytes from hl to de
-	call CopyData
+	rst _CopyData
 ; hl and de now point to pokemon DVs after Copydata is complete
 ;;;;;;;;;;
 	ldh a, [hWhoseTurn]
@@ -102,7 +102,7 @@ TransformEffect_:
 	inc de
 	inc de
 	ld bc, $8
-	call CopyData
+	rst _CopyData
 	ld bc, wBattleMonMoves - wBattleMonPP
 	add hl, bc ; ld hl, wBattleMonMoves
 	ld b, NUM_MOVES
@@ -152,6 +152,8 @@ TransformEffect_:
 	jp CopyData
 
 .failed
+	ld c, 50
+	rst _DelayFrames
 	ld hl, PrintButItFailedText_
 	jp EffectCallBattleCore
 

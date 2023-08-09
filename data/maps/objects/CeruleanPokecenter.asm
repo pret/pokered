@@ -1,3 +1,9 @@
+	object_const_def
+	const CERULEANPOKECENTER_NURSE
+	const CERULEANPOKECENTER_SUPER_NERD
+	const CERULEANPOKECENTER_GENTLEMAN
+	const CERULEANPOKECENTER_LINK_RECEPTIONIST
+
 CeruleanPokecenter_Object:
 	db $0 ; border block
 
@@ -8,9 +14,9 @@ CeruleanPokecenter_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  3,  1, SPRITE_NURSE, STAY, DOWN, 1 ; person
-	object_event 10,  5, SPRITE_SUPER_NERD, WALK, ANY_DIR, 2 ; person
-	object_event  4,  3, SPRITE_GENTLEMAN, STAY, DOWN, 3 ; person
-	object_event 11,  2, SPRITE_LINK_RECEPTIONIST, STAY, DOWN, 4 ; person
+	object_event  3,  1, SPRITE_NURSE, STAY, DOWN, TEXT_CERULEANPOKECENTER_NURSE
+	object_event 10,  5, SPRITE_SUPER_NERD, WALK, ANY_DIR, TEXT_CERULEANPOKECENTER_SUPER_NERD
+	object_event  4,  3, SPRITE_GENTLEMAN, STAY, DOWN, TEXT_CERULEANPOKECENTER_GENTLEMAN
+	object_event 11,  2, SPRITE_LINK_RECEPTIONIST, STAY, DOWN, TEXT_CERULEANPOKECENTER_LINK_RECEPTIONIST
 
 	def_warps_to CERULEAN_POKECENTER

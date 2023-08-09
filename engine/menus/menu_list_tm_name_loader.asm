@@ -7,7 +7,7 @@ CheckLoadTmName:: ; loads a TM name when the cursor is on TMs
 	jr z, .getItem ; if it's an item menu, proceed
 	cp PRICEDITEMLISTMENU
 	jr z, .getItem ; if it's a shop menu, proceed
-	jr .noAction ; other menus cant contain TMs, so no need to check anything
+	jp .noAction ; other menus cant contain TMs, so no need to check anything
 .getItem
 	push bc
 	push hl
@@ -53,13 +53,24 @@ CheckLoadTmName:: ; loads a TM name when the cursor is on TMs
 	inc a
 	ld [wd11e], a
 	predef TMToMove ; get move ID from TM/HM ID
+
+	hlcoord 4, 13
+	ld b, 1  ; height
+	ld c, 14 ; width
+	call TextBoxBorder
+	call UpdateSprites
+	ld a, [wNameListType] ; GetMoveName changes this value so we need to back it up
+	push af
 	ld a, [wd11e]
 	ld [wMoveNum], a
 	call GetMoveName
 	pop af
+	ld [wNameListType], a
+	pop af
 	call CopyToStringBuffer
+	bccoord 6, 14
 	ld hl, TMParamMoveNameText
-	call PrintText
+	call TextCommandProcessor
 	ld a, 1
 	ld [wTMTextShown], a
 	jr .done
@@ -77,17 +88,22 @@ ClearTMTextBox:
 	ld a, [wTMTextShown]
 	and a
 	ret z
-	ld hl,EmptyItemParamText
-	call PrintText
+	hlcoord 4, 13
+	lb bc, 16, 3 
+	predef LoadScreenTileAreaFromBuffer3
+	call UpdateSprites
 	xor a
 	ld [wTMTextShown], a
 	ret
 
+CheckSaveTMTextScreenTiles::
+	; we need to save some tiles for later in case we display a TM text box above these tiles
+	hlcoord 4, 13
+	lb bc, 16, 3
+	predef_jump SaveScreenTileAreaToBuffer3
+
+
 TMParamMoveNameText::
 	text "@"
 	text_ram wStringBuffer
-	text_end
-
-EmptyItemParamText::
-	text "@"
 	text_end

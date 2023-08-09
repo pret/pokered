@@ -2,20 +2,21 @@ PewterSpeechHouse_Script:
 	jp EnableAutoTextBoxDrawing
 
 PewterSpeechHouse_TextPointers:
-	dw PewterHouse2Text1
-	dw PewterHouse2Text2
-	dw PewterHouse2Text3
+	def_text_pointers
+	dw_const PewterSpeechHouseGamblerText,           TEXT_PEWTERSPEECHHOUSE_GAMBLER
+	dw_const PewterSpeechHouseYoungsterText,         TEXT_PEWTERSPEECHHOUSE_YOUNGSTER
+	dw_const PewterSpeechHouseLostWalletBeautyText,  TEXT_PEWTERSPEECHHOUSE_LOST_WALLET_BEAUTY
 
-PewterHouse2Text1:
-	text_far _PewterHouse2Text1
+PewterSpeechHouseGamblerText:
+	text_far _PewterSpeechHouseGamblerText
 	text_end
 
-PewterHouse2Text2:
-	text_far _PewterHouse2Text2
+PewterSpeechHouseYoungsterText:
+	text_far _PewterSpeechHouseYoungsterText
 	text_end
 
 ; PureRGBnote: ADDED: new NPC who will give you POCKET ABRA once you return their LOST WALLET
-PewterHouse2Text3: 
+PewterSpeechHouseLostWalletBeautyText: 
 	text_asm
 		CheckEvent EVENT_RETURNED_LOST_WALLET
 		jr nz, .howsAbra
@@ -23,19 +24,19 @@ PewterHouse2Text3:
 		call IsItemInBag
 		jr nz, .have_lost_wallet
 		ld hl, PewterHouse2Text3Intro
-		call PrintText
+		rst _PrintText
 		SetEvent EVENT_MET_POCKET_ABRA_LADY
 		jr .done
 	.have_lost_wallet
 		ld hl, PewterHouse2Text3Found
-		call PrintText
+		rst _PrintText
 		ld a, LOST_WALLET
 		ldh [hItemToRemoveID], a
 		farcall RemoveItemByID
 		lb bc, POCKET_ABRA, 1
 		call GiveItem ; not possible to have no room for this item because you just gave the LOST WALLET away
 		ld hl, ReceivedPocketAbraText
-		call PrintText
+		rst _PrintText
 		SetEvent EVENT_RETURNED_LOST_WALLET
 		ld a, ABRA
 		ld [wcf91], a
@@ -53,9 +54,9 @@ PewterHouse2Text3:
 		jr .done
 	.howsAbra
 		ld hl, PewterHouse2Text3HowsAbra
-		call PrintText
+		rst _PrintText
 	.done
-		jp TextScriptEnd
+		rst TextScriptEnd
 
 PewterHouse2Text3Intro:
 	text_far _PewterHouse2Text3Intro

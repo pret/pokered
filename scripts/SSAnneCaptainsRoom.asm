@@ -1,8 +1,8 @@
 SSAnneCaptainsRoom_Script:
-	call SSAnne7Script_6189b
+	call SSAnneCaptainsRoomEventScript
 	jp EnableAutoTextBoxDrawing
 
-SSAnne7Script_6189b:
+SSAnneCaptainsRoomEventScript:
 	CheckEvent EVENT_RUBBED_CAPTAINS_BACK
 	ret nz
 	ld hl, wd72d
@@ -10,84 +10,85 @@ SSAnne7Script_6189b:
 	ret
 
 SSAnneCaptainsRoom_TextPointers:
-	dw SSAnne7Text1
-	dw SSAnne7Text2
-	dw SSAnne7Text3
+	def_text_pointers
+	dw_const SSAnneCaptainsRoomCaptainText,     TEXT_SSANNECAPTAINSROOM_CAPTAIN
+	dw_const SSAnneCaptainsRoomTrashText,       TEXT_SSANNECAPTAINSROOM_TRASH
+	dw_const SSAnneCaptainsRoomSeasickBookText, TEXT_SSANNECAPTAINSROOM_SEASICK_BOOK
 
-SSAnne7Text1:
+SSAnneCaptainsRoomCaptainText:
 	text_asm
 	CheckEvent EVENT_GOT_HM01
 	jr nz, .got_item
-	ld hl, SSAnne7RubText
-	call PrintText
-	ld hl, ReceivingHM01Text
-	call PrintText
+	ld hl, SSAnneCaptainsRoomRubCaptainsBackText
+	rst _PrintText
+	ld hl, SSAnneCaptainsRoomCaptainIFeelMuchBetterText
+	rst _PrintText
 	lb bc, HM_CUT, 1
 	call GiveItem
 	jr nc, .bag_full
-	ld hl, ReceivedHM01Text
-	call PrintText
+	ld hl, SSAnneCaptainsRoomCaptainReceivedHM01Text
+	rst _PrintText
 	SetEvent EVENT_GOT_HM01
 	jr .done
 .bag_full
-	ld hl, HM01NoRoomText
-	call PrintText
+	ld hl, SSAnneCaptainsRoomCaptainHM01NoRoomText
+	rst _PrintText
 	ld hl, wd72d
 	set 5, [hl]
 	jr .done
 .got_item
-	ld hl, SSAnne7Text_61932
-	call PrintText
+	ld hl, SSAnneCaptainsRoomCaptainNotSickAnymoreText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
-SSAnne7RubText:
-	text_far _SSAnne7RubText
+SSAnneCaptainsRoomRubCaptainsBackText:
+	text_far _SSAnneCaptainsRoomRubCaptainsBackText
 	text_asm
 	ld a, [wAudioROMBank]
 	cp BANK("Audio Engine 3")
 	ld [wAudioSavedROMBank], a
-	jr nz, .asm_61908
+	jr nz, .not_audio_engine_3
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	call PlaySound
+	rst _PlaySound
 	ld a, BANK(Music_PkmnHealed)
 	ld [wAudioROMBank], a
-.asm_61908
+.not_audio_engine_3
 	ld a, MUSIC_PKMN_HEALED
 	ld [wNewSoundID], a
-	call PlaySound
-.asm_61910
+	rst _PlaySound
+.loop
 	ld a, [wChannelSoundIDs]
 	cp MUSIC_PKMN_HEALED
-	jr z, .asm_61910
+	jr z, .loop
 	call PlayDefaultMusic
 	SetEvent EVENT_RUBBED_CAPTAINS_BACK
 	ld hl, wd72d
 	res 5, [hl]
-	jp TextScriptEnd
+	rst TextScriptEnd
 
-ReceivingHM01Text:
-	text_far _ReceivingHM01Text
+SSAnneCaptainsRoomCaptainIFeelMuchBetterText:
+	text_far _SSAnneCaptainsRoomCaptainIFeelMuchBetterText
 	text_end
 
-ReceivedHM01Text:
-	text_far _ReceivedHM01Text
+SSAnneCaptainsRoomCaptainReceivedHM01Text:
+	text_far _SSAnneCaptainsRoomCaptainReceivedHM01Text
 	sound_get_key_item
 	text_end
 
-SSAnne7Text_61932:
-	text_far _SSAnne7Text_61932
+SSAnneCaptainsRoomCaptainNotSickAnymoreText:
+	text_far _SSAnneCaptainsRoomCaptainNotSickAnymoreText
 	text_end
 
-HM01NoRoomText:
-	text_far _HM01NoRoomText
+SSAnneCaptainsRoomCaptainHM01NoRoomText:
+	text_far _SSAnneCaptainsRoomCaptainHM01NoRoomText
 	text_end
 
-SSAnne7Text2:
-	text_far _SSAnne7Text2
+SSAnneCaptainsRoomTrashText:
+	text_far _SSAnneCaptainsRoomTrashText
 	text_end
 
-SSAnne7Text3:
-	text_far _SSAnne7Text3
+SSAnneCaptainsRoomSeasickBookText:
+	text_far _SSAnneCaptainsRoomSeasickBookText
 	text_end

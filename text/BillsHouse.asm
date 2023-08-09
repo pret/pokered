@@ -1,4 +1,4 @@
-_BillsHouseText_1e865::
+_BillsHouseBillImNotAPokemonText::
 	text "Hiya! I'm a"
 	line "#MON..."
 	cont "...No I'm not!"
@@ -19,7 +19,7 @@ _BillsHouseText_1e865::
 	line "Help me out here!"
 	done
 
-_BillsHouseText_1e86a::
+_BillsHouseBillUseSeparationSystemText::
 	text "When I'm in the"
 	line "TELEPORTER, go to"
 	cont "my PC and run the"
@@ -27,7 +27,7 @@ _BillsHouseText_1e86a::
 	cont "System!"
 	done
 
-_BillsHouseText_1e86f::
+_BillsHouseBillNoYouGottaHelpText::
 	text "No!? Come on, you"
 	line "gotta help a guy"
 	cont "in deep trouble!"
@@ -37,7 +37,7 @@ _BillsHouseText_1e86f::
 	cont "OK? All right!"
 	prompt
 
-_BillThankYouText::
+_BillsHouseBillThankYouText::
 	text "BILL: Yeehah!"
 	line "Thanks, bud! I"
 	cont "owe you one!"
@@ -65,7 +65,7 @@ _SSTicketNoRoomText::
 	line "much stuff, bud!"
 	done
 
-_BillsHouseText_1e8cb::
+_BillsHouseBillWhyDontYouGoInsteadOfMeText::
 	text "That cruise ship,"
 	line "S.S.ANNE, is in"
 	cont "VERMILION CITY."
@@ -80,9 +80,21 @@ _BillsHouseText_1e8cb::
 	cont "instead of me?"
 	done
 
-_BillsHouseText_1e8da::
+_BillsHouseBillCheckOutMyRarePokemonText::
 	text "BILL: Look, bud,"
 	line "just check out"
 	cont "some of my rare"
 	cont "#MON on my PC!"
+	done
+
+_BillsHouseGardenInfo::
+	text "BILL: Hey bud!"
+	para "Just finished my"
+	line "new beach garden!"
+	para "Why don't you"
+	line "have a look?"
+	para "It's open to"
+	line "visitors!"
+	para "Just use the"
+	line "doors over there."
 	done

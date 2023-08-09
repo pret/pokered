@@ -59,7 +59,6 @@ HiddenObjectMaps:
 	db POKEMON_MANSION_3F
 	db ROUTE_23
 	db VICTORY_ROAD_2F
-	db UNUSED_MAP_6F
 	db BILLS_HOUSE
 	db VIRIDIAN_CITY
 	db SAFARI_ZONE_WEST_REST_HOUSE
@@ -98,6 +97,8 @@ HiddenObjectMaps:
 	db CERULEAN_ROCKET_HOUSE_1F
 	db CERULEAN_ROCKET_HOUSE_B1F
 	db DAYCARE
+	db VIRIDIAN_SCHOOL_HOUSE_B1F
+	db SECRET_LAB
 	db -1 ; end
 
 HiddenObjectPointers:
@@ -160,7 +161,6 @@ HiddenObjectPointers:
 	dw Mansion3HiddenObjects
 	dw Route23HiddenObjects
 	dw VictoryRoad2HiddenObjects
-	dw Unused6FHiddenObjects
 	dw BillsHouseHiddenObjects
 	dw ViridianCityHiddenObjects
 	dw SafariZoneRestHouse2HiddenObjects
@@ -199,6 +199,8 @@ HiddenObjectPointers:
 	dw CeruleanRocketHouse1FHiddenObjects
 	dw CeruleanRocketHouseB1FHiddenObjects
 	dw DaycareHiddenObjects
+	dw ViridianSchoolB1FHiddenObjects
+	dw SecretLabHiddenObjects
 
 MACRO hidden_object
 	db \2 ; y coord
@@ -454,8 +456,8 @@ IndigoPlateauHiddenObjects:
 	db -1 ; end
 
 Route25HiddenObjects:
-	hidden_object 38,  3, HIDDEN_ITEM_ROUTE_25_FENCE_NEAR_EASTMOST_LASS, HiddenItems
-	hidden_object 10,  1, HIDDEN_ITEM_ROUTE_25_ALCOVE_BEHIND_FIRST_HIKER, HiddenItems
+	hidden_object 38,  5, HIDDEN_ITEM_ROUTE_25_FENCE_NEAR_EASTMOST_LASS, HiddenItems
+	hidden_object 10,  3, HIDDEN_ITEM_ROUTE_25_ALCOVE_BEHIND_FIRST_HIKER, HiddenItems
 	db -1 ; end
 
 Route9HiddenObjects:
@@ -565,6 +567,7 @@ Mansion4HiddenObjects:
 	hidden_object  1,  9, HIDDEN_ITEM_MANSION_B1F_CORNER_NEAR_SECRET_KEY, HiddenItems
 	hidden_object 20,  3, SPRITE_FACING_UP, Mansion4Script_Switches
 	hidden_object 18, 25, SPRITE_FACING_UP, Mansion4Script_Switches
+	hidden_object  3, 11, SPRITE_FACING_UP, CheckUnlockLab
 	db -1 ; end
 
 Route23HiddenObjects:
@@ -576,10 +579,6 @@ Route23HiddenObjects:
 VictoryRoad2HiddenObjects:
 	hidden_object  5,  2, HIDDEN_ITEM_VICTORY_ROAD_MOLTRES_ROOM_LONE_ROCK, HiddenItems2
 	hidden_object 26,  7, HIDDEN_ITEM_VICTORY_ROAD_ROCK_OUTCROP_NEAR_EXIT, HiddenItems
-	db -1 ; end
-
-Unused6FHiddenObjects:
-	hidden_object 14, 11, MAX_ELIXER, HiddenItems
 	db -1 ; end
 
 BillsHouseHiddenObjects:
@@ -769,3 +768,28 @@ CeruleanRocketHouseB1FHiddenObjects:
 DaycareHiddenObjects:
 	hidden_object 4,  1, SPRITE_FACING_UP, OpenPokemonCenterPC
 	db -1 ; end
+
+ViridianSchoolB1FHiddenObjects:
+	hidden_object  0,  1, SPRITE_FACING_UP, SchoolB1FLeftBookcaseA
+	hidden_object  1,  1, SPRITE_FACING_UP, SchoolB1FLeftBookcaseB
+	hidden_object 16,  1, SPRITE_FACING_UP, SchoolB1FRightBookcaseA
+	hidden_object 17,  1, SPRITE_FACING_UP, SchoolB1FRightBookcaseB
+	db -1 ; end
+
+SecretLabHiddenObjects:
+	hidden_object 9, 25, HIDDEN_ITEM_SECRET_LAB_RIGHT_BUTTON, HiddenItems ; NEW
+	hidden_object 1, 10, 0, SecretLabFailedClones
+	hidden_object 3, 10, 1, SecretLabFailedClones
+	hidden_object 6, 10, 2, SecretLabFailedClones
+	hidden_object 8, 10, 3, SecretLabFailedClones
+	hidden_object 1, 13, 4, SecretLabFailedClones
+	hidden_object 3, 13, 5, SecretLabFailedClones
+	hidden_object 6, 13, 6, SecretLabFailedClones
+	hidden_object 8, 13, 7, SecretLabFailedClones
+	hidden_object 1, 8, 0, SecretLabComputers
+	hidden_object 2, 8, 1, SecretLabComputers
+	hidden_object 3, 8, 2, SecretLabComputers
+	hidden_object 4, 8, 3, SecretLabComputers
+	hidden_object 6, 7, SPRITE_FACING_UP, SecretLabMewtwoMachine
+	hidden_object 7, 7, SPRITE_FACING_UP, SecretLabMewtwoMachine
+	db -1

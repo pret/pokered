@@ -8,7 +8,6 @@ ITEM_ROUTE_1_MART_SAMPLE                EQU POTION
 ITEM_OAK_POKE_BALL_REWARD               EQU POKE_BALL
 ITEM_NUGGET_BRIDGE_REWARD               EQU NUGGET
 ITEM_GOT_LAPRAS_SILPH_CO_7F_REWARD_NEW  EQU RARE_CANDY 		; item you're given instead of LAPRAS if you already got lapras from this NPC earlier in the game
-ITEM_GOT_SUPER_ROD_ALREADY_REWARD_NEW   EQU RARE_CANDY		; item you're given by the extra fishing guru since one was added in cerulean city earlier on top of the existing ones
 ITEM_RANGER_HUNT_COMPLETION_PRIZE_NEW   EQU HYPER_BALL		; item you get for completing RANGER HUNT mode at the SAFARI ZONE
 ITEM_VERMILION_SECRET_DOCK_BEAUTY_NEW   EQU HYPER_BALL		; item a lady on a dock in the water of vermilion gives you when she is found
 ITEM_SILPH_CO_PRESIDENT_REWARD          EQU MASTER_BALL
@@ -36,10 +35,10 @@ ITEM_MT_MOON_1F_NORTHWEST_CORNER        EQU MOON_STONE
 ITEM_MT_MOON_B2F_DOWN_FIRST_LADDER      EQU IRON
 
 ; Cerulean City
-ITEM_CERULEAN_CITY_SOUTHWEST            EQU REVIVE 			; 5 of them
+ITEM_CERULEAN_CITY_SOUTHWEST_NEW        EQU REVIVE 			; 5 of them
 
 ; Route 6
-ITEM_ROUTE_6_NORTHEAST                  EQU CALCIUM			; 3 of them
+ITEM_ROUTE_6_NORTHEAST_NEW              EQU CALCIUM			; 3 of them
 
 ; SS Anne
 ITEM_SS_ANNE_2F_ROOMS1                  EQU MAX_ETHER		; 2 of them
@@ -148,3 +147,6 @@ ITEM_CERULEAN_CAVE_2F_CENTER            EQU RARE_CANDY
 ITEM_CERULEAN_CAVE_2F_SOUTHWEST         EQU RARE_CANDY
 ITEM_CERULEAN_CAVE_B1F_RIDGE_NORTH      EQU HYPER_BALL
 ITEM_CERULEAN_CAVE_B1F_RIDGE_CENTER     EQU RARE_CANDY
+
+; Cerulean Rocket House
+ITEM_CERULEAN_ROCKET_HOUSE_B1F EQU TOPSECRETKEY

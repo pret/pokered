@@ -23,7 +23,7 @@ ItemNames::
 	li "BAIT"
 	li "ROCK"
 	li "OLD COIN"
-	li "UNUSED2"
+	li "TOPSECRETKEY"
 	li "UNUSED3"
 	li "UNUSED4"
 	li "UNUSED5"
@@ -99,15 +99,6 @@ ItemNames::
 	li "11F"
 	li "B4F"
 	assert_list_length NUM_ITEMS + NUM_FLOORS
-	li "ROUTE 2"
-	li "CERULEAN CITY"
-	li "ROUTE 9"
-	li "FUCHSIA CITY"
-
-	li "CLASSIC"
-	li "RANGER HUNT"
-	li "FREE ROAM"
-
 	li "BOULDERBADGE"
 	li "CASCADEBADGE"
 	li "THUNDERBADGE"

@@ -30,15 +30,17 @@ ExecuteCurMapScriptInTable::
 	ld a, [wCurMapScript]
 	ret
 
-LoadGymLeaderAndCityName::
-	push de
-	ld de, wGymCityName
-	ld bc, $11
-	call CopyData   ; load city name
-	pop hl
-	ld de, wGymLeaderName
-	ld bc, NAME_LENGTH
-	jp CopyData     ; load gym leader name
+; PureRGBnote: CHANGED: removed this function because it's a waste of wram space when it can be loaded right when reading gym statues
+;LoadGymLeaderAndCityName::
+;	push de
+;	ld de, wGymCityName
+;	ld bc, $11
+;	rst _CopyData   ; load city name
+;	pop hl
+;	ld de, wGymLeaderName
+;	ld bc, NAME_LENGTH
+;	rst _CopyData     ; load gym leader name
+;	ret
 
 ; reads specific information from trainer header (pointed to at wTrainerHeaderPtr)
 ; a: offset in header data
@@ -86,9 +88,6 @@ ReadTrainerHeaderInfo::
 	pop de
 	ret
 
-TrainerFlagAction::
-	predef_jump FlagActionPredef
-
 TalkToTrainer::
 	call StoreTrainerHeaderPointer
 	xor a
@@ -104,11 +103,12 @@ TalkToTrainer::
 	jr z, .trainerNotYetFought     ; test trainer's flag
 	ld a, $6
 	call ReadTrainerHeaderInfo     ; print after battle text
-	jp PrintText
+	rst _PrintText
+	ret
 .trainerNotYetFought
 	ld a, $4
 	call ReadTrainerHeaderInfo     ; print before battle text
-	call PrintText
+	rst _PrintText
 	;ld a, $a
 	;call ReadTrainerHeaderInfo     ; (?) does nothing apparently (maybe bug in ReadTrainerHeaderInfo)
 	push de
@@ -137,7 +137,9 @@ ENDC
 	ld a, [wSpriteIndex]
 	cp $ff
 	jr nz, .trainerEngaging
+IF DEF(_DEBUG)
 .trainerNotEngaging
+ENDC
 	xor a
 	ld [wSpriteIndex], a
 	ld [wTrainerHeaderFlagBit], a
@@ -202,6 +204,8 @@ EndTrainerBattle::
 	ld a, [wEnemyMonOrTrainerClass]
 	cp OPP_ID_OFFSET
 	jr nc, .skipRemoveSprite    ; test if trainer was fought (in that case skip removing the corresponding sprite)
+	; code that removes overworld pokemon like articuno, mewtwo, snorlax, etc. when defeated
+	; TODO: hide extra object if in extra map???
 	ld hl, wMissableObjectList
 	ld de, $2
 	ld a, [wSpriteIndex]
@@ -259,7 +263,8 @@ SetSpritePosition2::
 	ld hl, _SetSpritePosition2
 SpritePositionBankswitch::
 	ld b, BANK(_GetSpritePosition1) ; BANK(_GetSpritePosition2), BANK(_SetSpritePosition1), BANK(_SetSpritePosition2)
-	jp Bankswitch ; indirect jump to one of the four functions
+	rst _Bankswitch ; indirect jump to one of the four functions
+	ret
 
 CheckForEngagingTrainers::
 	xor a
@@ -333,7 +338,7 @@ EngageMapTrainer::
 	ld e, a
 	add hl, de     ; seek to engaged trainer data
 	ld a, [hli]    ; load trainer class
-	ld [wUnusedD119], a ; PureRGBnote: ADDED: persists after battle complete, used for drawing trainer sprites after battle
+	ld [wWhichTrainerClass], a ; PureRGBnote: ADDED: persists after battle complete, used for drawing trainer sprites after battle
 	ld [wEngagedTrainerClass], a
 	ld a, [hl]     ; load trainer mon set
 	ld [wEngagedTrainerSet], a
@@ -354,7 +359,7 @@ PrintEndBattleText::
 	push hl
 	farcall SaveTrainerName
 	ld hl, TrainerEndBattleText
-	call PrintText
+	rst _PrintText
 	pop hl
 	pop af
 	ldh [hLoadedROMBank], a
@@ -384,7 +389,7 @@ TrainerEndBattleText::
 	text_asm
 	call GetSavedEndBattleTextPointer
 	call TextCommandProcessor
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 ; only engage with the trainer if the player is not already
 ; engaged with another trainer

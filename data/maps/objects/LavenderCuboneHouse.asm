@@ -1,3 +1,8 @@
+	object_const_def
+	const LAVENDERCUBONEHOUSE_CUBONE
+	const LAVENDERCUBONEHOUSE_BRUNETTE_GIRL
+	const LAVENDERCUBONEHOUSE_LIGHT_CHANNELER
+
 LavenderCuboneHouse_Object:
 	db $a ; border block
 
@@ -8,7 +13,8 @@ LavenderCuboneHouse_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  3,  5, SPRITE_MONSTER, STAY, UP, 1 ; person
-	object_event  2,  4, SPRITE_BRUNETTE_GIRL, STAY, RIGHT, 2 ; person
+	object_event  3,  5, SPRITE_MONSTER, STAY, UP, TEXT_LAVENDERCUBONEHOUSE_CUBONE 
+	object_event  2,  4, SPRITE_BRUNETTE_GIRL, STAY, RIGHT, TEXT_LAVENDERCUBONEHOUSE_BRUNETTE_GIRL 
+	object_event  5,  4, SPRITE_CHANNELER, STAY, DOWN, TEXT_LAVENDERCUBONEHOUSE_LIGHT_CHANNELER
 
 	def_warps_to LAVENDER_CUBONE_HOUSE

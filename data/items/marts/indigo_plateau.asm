@@ -1,4 +1,4 @@
-IndigoCashierText:
+IndigoPlateauLobbyClerkText:
 	script_mart \
 	HYPER_POTION, \
 	MAX_POTION, \

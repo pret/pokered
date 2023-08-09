@@ -76,7 +76,9 @@ wTempoModifier:: db
 UNION
 	ds 13
 NEXTU
-	; unused audio wram 13 bytes
+; PureRGBnote: ADDED: byte that holds the currently playing "extra" music if in a map that has marked down that it has extra music
+wReplacedMapMusic:: db 
+	; unused audio wram 12 bytes
 ENDU
 
 
@@ -163,7 +165,7 @@ wTileMap:: ds SCREEN_WIDTH * SCREEN_HEIGHT
 UNION
 ; buffer for temporarily saving and restoring current screen's tiles
 ; (e.g. if menus are drawn on top)
-wTileMapBackup:: ds SCREEN_WIDTH * SCREEN_HEIGHT
+wTileMapBackup:: ds SCREEN_WIDTH * SCREEN_HEIGHT ; 360
 
 NEXTU
 ; list of indexes to patch with SERIAL_NO_DATA_BYTE after transfer
@@ -377,9 +379,9 @@ wHallOfFame:: ds HOF_TEAM
 wHallOfFamePalettes:: db 
 
 NEXTU
-; PureRGBnote: TODO: currently unused since batteryless saving isn't implemented yet
-; when copying SRAM to the ROM on save for batteryless saving functionality, this is where the code that runs the flash is copied.
-wBatterylessSaveCode:: ds 180
+
+wTileMapBackup3:: ; partial tilemap backup for saving a portion of the screen's contents.
+wTownMapSavedOAM:: ds 160 
 
 NEXTU
 wNPCMovementDirections:: ds 180
@@ -423,7 +425,7 @@ NEXTU
 wSimulatedJoypadStatesEnd::
 
 NEXTU
-wBoostExpByExpAll::
+;wBoostExpByExpAll::
 wUnusedCC5B:: db
 
 	ds 59
@@ -444,6 +446,7 @@ wAddedToParty::
 ; The purpose of these flags is to track which mons levelled up during the
 ; current battle at the end of the battle when evolution occurs.
 ; Other methods of evolution simply set it by calling TryEvolvingMon.
+wMiscBattleData::
 wCanEvolveFlags:: db
 
 wForceEvolution:: db
@@ -457,8 +460,7 @@ wAILayer2Encouragement:: db
 wPlayerSubstituteHP:: db
 wEnemySubstituteHP:: db
 
-; The player's selected move during a test battle.
-; InitBattleVariables sets it to the move Pound.
+; used for TestBattle (unused in non-debug builds)
 wTestBattlePlayerSelectedMove:: db
 
 	ds 1
@@ -527,6 +529,8 @@ wEnemyNumHits:: ; db
 wEnemyBideAccumulatedDamage:: dw ; PureRGBnote: CHANGED: bide effect changed to normal buff move, so this is unused
 
 	ds 8
+	
+wMiscBattleDataEnd::
 
 ENDU
 
@@ -601,9 +605,7 @@ wSimulatedJoypadStatesIndex:: db
 
 ; PureRGBnote: CHANGED: this variable was previously unused but now it is used
 wTempStore1:: db
-
-; written to but nothing ever reads it
-wWastedByteCD3A:: db
+wTempStore2:: db
 
 ; mask indicating which real button presses can override simulated ones
 ; XXX is it ever not 0?
@@ -612,6 +614,7 @@ wOverrideSimulatedJoypadStatesMask:: db
 	ds 1 ; unused lone byte
 
 ; This union spans 30 bytes.
+; make sure any variable added to this union is written to prior to being read to avoid collisions
 UNION
 wTradedPlayerMonSpecies:: db
 wTradedEnemyMonSpecies:: db
@@ -792,58 +795,18 @@ wTrainerInfoTextBoxNextRowOffset:: db
 
 NEXTU
 ; PureRGBnote: ADDED: many options cursor trackers for new menu pages.
+wOptionsPageOptionCount:: db ; how many options are on the current options page
+wCurrentOptionIndex:: db ; which option the player is currently on (starts at 0)
 ; options page 1
-wOptionsTextSpeedCursorX:: db
-wOptionsBattleAnimCursorX:: db
-wOptionsBattleStyleCursorX:: db
-ds 3
+wOptions1CursorX:: db
+wOptions2CursorX:: db
+wOptions3CursorX:: db
+wOptions4CursorX:: db
+wOptions5CursorX:: db
+wOptions6CursorX:: db
+wOptions7CursorX:: db
 wOptionsCancelCursorX:: db
-NEXTU
-; options page 2
-wOptionsPage2Option1CursorX:: db
-wOptionsPage2Option2CursorX:: db
-wOptionsPage2Option3CursorX:: db
-wOptionsPage2Option4CursorX:: db
-NEXTU
-; options page 3
-wOptionsPage3Option1CursorX:: db
-wOptionsPage3Option2CursorX:: db
-wOptionsPage3Option3CursorX:: db
-wOptionsPage3Option4CursorX:: db
-wOptionsPage3Option5CursorX:: db
-wOptionsPage3Option6CursorX:: db
-NEXTU
-; options page 4
-wOptionsPage4Option1CursorX:: db
-wOptionsPage4Option2CursorX:: db
-wOptionsPage4Option3CursorX:: db
-wOptionsPage4Option4CursorX:: db
-wOptionsPage4Option5CursorX:: db
-wOptionsPage4Option6CursorX:: db
-NEXTU
-; options page 5
-wOptionsNidorinoSpriteCursorX:: db
-wOptionsGolbatSpriteCursorX:: db
-wOptionsMankeySpriteCursorX:: db
-wOptionsArcanineSpriteCursorX:: db
-wOptionsExeggutorSpriteCursorX:: db
-wOptionsMewtwoSpriteCursorX:: db
-NEXTU
-; options page 6
-wOptionsPage6Option1CursorX:: db
-wOptionsPage6Option2CursorX:: db
-wOptionsPage6Option3CursorX:: db
-wOptionsPage6Option4CursorX:: db
-wOptionsPage6Option5CursorX:: db
-wOptionsPage6Option6CursorX:: db
-NEXTU
-; options page 7
-wOptionsPage7Option1CursorX:: db
-wOptionsPage7Option2CursorX:: db
-wOptionsPage7Option3CursorX:: db
-wOptionsPage7Option4CursorX:: db
-wOptionsPage7Option5CursorX:: db
-wOptionsPage7Option6CursorX:: db
+
 NEXTU
 ; tile ID of the badge number being drawn
 wBadgeNumberTile:: db
@@ -859,7 +822,7 @@ wBadgeOrFaceTiles:: ds NUM_BADGES + 1
 wTempObtainedBadgesBooleans:: ds NUM_BADGES
 
 NEXTU
-wUnusedCD3D:: db
+	ds 1
 ; the number of credits mons that have been displayed so far
 wNumCreditsMonsDisplayed:: db
 
@@ -890,6 +853,7 @@ wSavedY::
 wTempSCX::
 ; which entry from TradeMons to select
 wWhichTrade::
+wDexMaxSeenMove::
 wDexMaxSeenMon::
 wPPRestoreItem::
 wWereAnyMonsAsleep::
@@ -929,9 +893,12 @@ wRightGBMonSpecies:: db
 
 ; bit 0: is player engaged by trainer (to avoid being engaged by multiple trainers simultaneously)
 ; bit 1: boulder dust animation (from using Strength) pending
+; bit 2: PureRGBnote: CHANGED: now unused bit
 ; bit 3: using generic PC
+; bit 4: used for some specific script in Pewter City to prevent sprites from updating
 ; bit 5: don't play sound when A or B is pressed in menu
 ; bit 6: tried pushing against boulder once (you need to push twice before it will move)
+; bit 7: bit never set (but it is read)
 wFlags_0xcd60:: db
 
 ;;;;;;;;;; PureRGBnote: CHANGED: previously this empty space of 9 bytes was used by new variables
@@ -941,7 +908,7 @@ wListWithTMText:: db ; whether the current list menu can contain TMs and should 
 wTMTextShown:: db ; whether text for a TM is visible in a menu
 wSum:: ; a temp store for 16 bit values created by addition, used with PrintNumber to display the sum on screen
 wDamageIntention:: dw ; in battle, the amount of damage a move will do before doing it (used for high jump kick / jump kick crash effect)
-ds 1 ; unused byte
+ds 1 ; unused lone byte
 wIsAltPalettePkmn:: db ;a flag for features related to alternate pokemon color palettes, set in these scenarios:
 ;1 - set prior to loading the palette of a pokemon that should have an alternate palette, reset upon showing the pokemon sprite
 ;2 - set as a storage value for "which wild pokemon slot has been encountered" when figuring out if that slot is an alternate palette pokemon
@@ -950,7 +917,7 @@ wIsAltPalettePkmnData:: db ;a flag for features related to alternate pokemon col
 ;1 - set prior to loading the data of a pokemon into wram in order to insert the flag for alternate palette into its data permanently
 ;stays set until the next pokemon is loaded.
 
-wLowHealthTonePairs:: db ;in battle, used as a counter for low hp alarm tone pairs
+wLowHealthTonePairs:: db ;in battle, used as a counter for low hp alarm tone pairs. Bit 7 is a flag that indicates tones are currently being played.
 ;;;;;;;;;;
 
 ; This has overlapping related uses.
@@ -1103,7 +1070,7 @@ wScriptedNPCWalkCounter:: db
 
 wGBC:: db
 
-; if running on SGB, it's 1, else it's 0
+; if running on SGB or GBC, it's 1, else it's 0
 wOnSGB:: db
 
 wDefaultPaletteCommand:: db
@@ -1125,7 +1092,7 @@ wPartyMenuHPBarColors:: ds PARTY_LENGTH
 
 wStatusScreenHPBarColor:: db
 
-	ds 7 ; unused 7 bytes
+wSecretLabPasswordTracker::	ds 7 ; PureRGBnote: ADDED: in the secret lab this will keep track of the password you enter
 
 wCopyingSGBTileData::
 wWhichPartyMenuHPBar::
@@ -1153,11 +1120,16 @@ wExpAmountGained:: dw
 wGainBoostedExp:: db
 ENDU
 
-; shinpokerednote: ADDED: tracker for the levels of each of the player's pokemon at the start of battle, same address as wGymCityName
-wStartBattleLevels:: 
-wGymCityName:: ds 17
+; PureRGBnote: CHANGED: wGymCityName and wGymLeaderName used to be here but they were easy to remove the need for in order to have some extra space
+UNION
+; shinpokerednote: ADDED: tracker for the levels of each of the player's pokemon at the start of battle
+wStartBattleLevels:: ds 6
+NEXTU
+; PureRGBnote: ADDED: tracker for the original sprite IDs of every sprite in a map - tracked in order to change them on the fly if necessary
+wMapSpriteOriginalPictureIDs:: ds 15
+ENDU
 
-wGymLeaderName:: ds NAME_LENGTH
+ds 13 ; unused 13 bytes (used to be wGymLeaderName and 2 bytes of wGymCityName)
 
 UNION
 ds 16 ; PureRGBnote: CHANGED: used to be wItemList:: but now the item list for marts is expanded in size and reuses a bigger space elsewhere
@@ -1176,14 +1148,16 @@ ds 1 ; unused lone byte
 wAITargetMonType1:: db ; the type of the pokemon the AI should think it's attacking (stays as the previous pokemon when you switch pokemon)
 wAITargetMonType2:: db ; the type of the pokemon the AI should think it's attacking (stays as the previous pokemon when you switch pokemon)
 wAITargetMonStatus:: db ; the current status of the pokemon the AI should think it's attacking (set when healing a pokemon's status or switching it out)
-; 6 bytes remaining in this empty space
+ds 2 ; unused 2 bytes
+wListEntryTextFuncPointer:: dw ; TODO: for list menus, a pointer to the function that prints entries in the list for the current list menu
+wListCustomFuncPointer:: dw ; TODO: for list menus, a pointer to the function that will run on moving to the next entry in the list
 ;;;;;;;;;;
 ENDU
 
 wListPointer:: dw
 
 ; used to store pointers, but never read
-wUnusedCF8D:: dw
+wUnusedCF8D:: dw ; unused 2 bytes
 
 wItemPrices:: dw
 
@@ -1229,7 +1203,7 @@ wLoadedMon:: party_struct wLoadedMon
 ;bit 4: 4th pkmn (position 3)
 ;bit 5: 5th pkmn (position 4)
 ;bit 6: 6th pkmn (position 5)
-;bit 7: unused
+;bit 7: unused bit
 wAIWhichPokemonSentOutAlready::
 wFontLoaded:: db
 
@@ -1545,10 +1519,14 @@ wEndBattleLoseTextPointer:: dw
 	ds 2 ; unused 2 bytes
 wEndBattleTextRomBank:: db
 
-	ds 1 ; unused byte
+UNION
 
+w2CharStringBuffer:: ds 3 ; don't use this buffer during attack animations
+NEXTU
+ds 1
 ; the address _of the address_ of the current subanimation entry
 wSubAnimAddrPtr:: dw
+ENDU
 
 UNION
 ; the address of the current subentry of the current subanimation
@@ -1689,6 +1667,7 @@ wMoveNum:: db
 wItemList:: 
 wMovesString:: ds 56
 
+wWhichTrainerClass:: ; PureRGBnote: ADDED: indicates which trainer class is being battled - lasts until the very end of battle
 wUnusedD119:: db
 
 ; wWalkBikeSurfState is sometimes copied here, but it doesn't seem to be used for anything
@@ -1733,12 +1712,18 @@ wEvolutionOccurred:: db
 
 wVBlankSavedROMBank:: db
 
-	ds 1 ; unused lone byte
+; shinpokerednote: ADDED: new byte for keeping track of what bank we're in during delayframe, helps fix wobbly sprites
+wDelayFrameBank:: db
 
 wIsKeyItem:: db
 
 wTextBoxID:: db
 
+; bit 3 - used to indicate we loaded a map after battle specifically
+; bit 4 - flag to indicate crossing between outdoor areas
+; bit 5 - flag to indicate a map was loaded
+; bit 6 - another flag to indicate a map was loaded?
+; bit 7 - used for elevator animations and pushing vermilion dock truck
 wCurrentMapScriptFlags:: db ; not exactly sure what this is used for, but it seems to be used as a multipurpose temp flag value
 
 wCurEnemyLVL:: db
@@ -1785,10 +1770,28 @@ wSavedSpriteMapX:: db
 	ds 3 ; unused 3 bytes
 
 ;;; PureRGBnote: ADDED: new properties in this previously empty space
+wTownMapAreaState:: ; view which state is which in map_pokemon_areas.asm
+wDexMinSeenMon::
+wDexMinSeenMove::
 wWhatStat:: db ; contains the stat currently being modified by a stat changing move
-wWhichStatMod:: db ; contains the stat mod type currently being carried out
+; bit 0 = set to 1 when we should mark a move as seen in the movedex flags on showing its animation, 0 otherwise
+; bit 1-7 = unused
+wBattleFunctionalFlags:: db
 ;;;
 
+;;;;; PureRGBnote: CHANGED: this property is also used in the pokedex for some flags.
+;;;;; bit 0 -> How we're displaying pokedex data. 0 = internal (from the pokedex), 1 = external (from dialog)
+;;;;; bit 1 -> Which sprite is currently displayed on a pokedex data page. 0 = front sprite, 1 = back sprite 
+;;;;; bit 2 -> used to indicate whether we're in the pokedex data page or not
+wPokedexDataFlags:: 
+;;;;; PureRGBnote: CHANGED: this property is also used in the "AREA" option in the pokedex for indicating which states are available for a pokemon
+;;;;; bit 0 -> pokemon has old rod locations
+;;;;; bit 1 -> pokemon has good rod locations in fresh water areas
+;;;;; bit 2 -> pokemon has good rod locations in salt water areas
+;;;;; bit 3 -> pokemon has super rod locations
+;;;;; bit 4 -> pokemon has grass / cave / building locations
+;;;;; bit 5 -> pokemon has surfing locations
+wTownMapAreaTypeFlags::
 wWhichPrize:: db
 
 ; counts downward each frame
@@ -1880,18 +1883,32 @@ wPokedexOwnedEnd::
 wPokedexSeen:: flag_array NUM_POKEMON - 1 ; PureRGBnote: CHANGED: discount missingno since it doesn't appear in the dex - size remains the same as original
 wPokedexSeenEnd::
 
-;;;;; PureRGBnote: CHANGED: bag item size increased so now we have a bunch of empty space here
+;;;;; PureRGBnote: CHANGED: bag item size increased so now we have a bunch of space here 
+;;;;; (wNumBagItems and wBagItems used to be here, and used 42 bytes of space)
+
 UNION
 
-ds 42 ; wNumBagItems and wBagItems used to be here
+ds 20 ; 20 of the 42 bytes of space are alotted to new missable object flags
 
 NEXTU
 
 ; PureRGBnote: ADDED: we use this empty space currently for a store of extra flags to hide/show objects in the safari zone.
-wExtraMissableObjectFlags:: flag_array NUM_EXTRA_HS_OBJECTS ; max size 42 bytes
+wExtraMissableObjectFlags:: flag_array NUM_EXTRA_HS_OBJECTS ; max size 20 bytes or 152 flags
 wExtraMissableObjectFlagsEnd::
 
 ENDU
+
+UNION
+
+ds 22 ; 22 of the 42 bytes of space are alotted to movedex seen flags
+
+NEXTU
+
+wMovedexSeen:: flag_array NUM_ATTACKS ; PureRGBnote: ADDED: flags for the movedex, uses all 22 bytes
+wMovedexSeenEnd::
+
+ENDU
+
 ;;;;;
 
 wPlayerMoney:: ds 3 ; BCD
@@ -1948,7 +1965,7 @@ wXBlockCoord:: db
 
 wLastMap:: db
 
-wUnusedD366:: db
+wUnusedD366:: db ; unused byte
 
 wCurMapTileset:: db
 
@@ -2079,7 +2096,9 @@ wBoxItems:: ds PC_ITEM_CAPACITY * 2 + 1
 
 ; bits 0-6: box number
 ; bit 7: whether the player has changed boxes before
-wCurrentBoxNum:: dw
+wCurrentBoxNum:: db
+
+	ds 1 ; unused save file byte
 
 ; number of HOF teams
 wNumHoFTeams:: db
@@ -2178,7 +2197,7 @@ wRocketHideoutB4FCurScript:: db
 wCeruleanRocketHouseCurScript:: db ;NEW
 wRoute6GateCurScript:: db
 wRoute8GateCurScript:: db
-	ds 1 ; unused save file byte
+wBillsGardenCurScript:: db ; NEW
 wCinnabarIslandCurScript:: db
 wPokemonMansion1FCurScript:: db
 	ds 1 ; unused save file byte
@@ -2303,6 +2322,7 @@ wUnusedD71F:: db
 
 ; bit 0: using Strength outside of battle
 ; bit 1: set by IsSurfingAllowed when surfing's allowed, but the caller resets it after checking the result
+; bit 2: PureRGBnote: ADDED: using Surf outside of battle
 ; bit 3: received Old Rod
 ; bit 4: received Good Rod
 ; bit 5: received Super Rod
@@ -2320,6 +2340,12 @@ wBeatGymFlags:: db
 
 ; bit 0: if not set, the 3 minimum steps between random battles have passed
 ; bit 1: prevent audio fade out
+; bit 2: unused save flag
+; bit 3: unused save flag
+; bit 4: unused save flag
+; bit 5: unused save flag
+; bit 6: unused save flag
+; bit 7: unused save flag
 wd72c:: db
 
 ; This variable is used for temporary flags and as the destination map when
@@ -2356,17 +2382,7 @@ wd730:: db
 	ds 1 ; unused save file byte
 
 ; bit 0: play time being counted
-; bit 1: remnant of debug mode; only set by the debug build.
-; if it is set:
-; 1. skips most of Prof. Oak's speech, and uses NINTEN as the player's name and SONY as the rival's name
-; 2. does not have the player start in floor two of the player's house (instead sending them to [wLastMap])
-; 3. allows wild battles to be avoided by holding down B
-; furthermore, in the debug build:
-; 4. allows trainers to be avoided by holding down B
-; 5. skips Safari Zone step counter by holding down B
-; 6. skips the NPC who blocks Route 3 before beating Brock by holding down B
-; 7. skips Cerulean City rival battle by holding down B
-; 8. skips Pokémon Tower rival battle by holding down B
+; bit 1: debug mode (unused and incomplete in non-debug builds)
 ; bit 2: the target warp is a fly warp (bit 3 set or blacked out) or a dungeon warp (bit 4 set)
 ; bit 3: used warp pad, escape rope, dig, teleport, or fly, so the target warp is a "fly warp"
 ; bit 4: jumped into hole (Pokemon Mansion, Seafoam Islands, Victory Road) or went down waterfall (Seafoam Islands), so the target warp is a "dungeon warp"
@@ -2374,7 +2390,7 @@ wd730:: db
 ; bit 6: map destination is [wLastBlackoutMap] (usually the last used pokemon center, but could be the player's house)
 wd732:: db
 
-; bit 0: running a test battle
+; bit 0: running a test battle (unused in non-debug builds)
 ; bit 1: prevent music from changing when entering new map
 ; bit 2: skip the joypad check in CheckWarpsNoCollision (used for the forced warp down the waterfall in the Seafoam Islands)
 ; bit 3: trainer wants to battle
@@ -2462,7 +2478,9 @@ ENDU
 
 wTrainerHeaderPtr:: dw
 
-	ds 6  ; unused save file 6 bytes
+wBillsGardenVisitor:: 
+wBillsGardenPreviousVisitors:: ds 3 ; PureRGBnote: ADDED: used to track the last 3 visitors at bills garden to make randomization less annoying
+	ds 3  ; unused save file 3 bytes (TODO: use for randomized challengers / bill's garden visitors)
 
 ; the trainer the player must face after getting a wrong answer in the Cinnabar
 ; gym quiz
@@ -2494,10 +2512,8 @@ wSpriteOptions:: db
 ; bit 1 -> Nidorino sprite version: 0 = RB, 1 = RG
 ; bit 2 -> Exeggutor sprite version: 0 = Y, 1 = RB
 ; bit 3 -> Menu icon sprites: 0 = Original, 1 = Enhanced Original
-; bit 4 -> type matchup option for GHOST->PSYCHIC: 0 = 2x effective, 1 = 0x effective
-; bit 5 -> type matchup option for ICE->FIRE: 0 = 1x effective, 1 = 0.5x effective
-; bit 6 -> type matchup option for BUG->POISON: 0 = 2x effective, 1 = 0.5x effective
-; bit 7 -> type matchup option for POISON->BUG: 0 = 2x effective, 1 = 1x effective
+; bit 4 -> Electabuzz sprite version: 0 = RB, 1 = RG
+; bit 5 -> Raticate sprite version: 0 = RB, 1 = RG
 wSpriteOptions2:: db
 
 ; bits 0-1 = Palette setting 
@@ -2512,14 +2528,17 @@ wSpriteOptions2:: db
 ; bit 6 = Do NPC trainers get stat experience on their pokemon
 ; bit 7 = unused
 wOptions2:: db
-;;;;;;;;;;
-
 
 wSpriteOptions3:: db
 
 wSpriteOptions4:: db
-	
-	ds 1  ; unused save file byte
+
+; bit 0 -> type matchup option for GHOST->PSYCHIC: 0 = 2x effective, 1 = 0x effective
+; bit 1 -> type matchup option for ICE->FIRE: 0 = 1x effective, 1 = 0.5x effective
+; bit 2 -> type matchup option for BUG->POISON: 0 = 2x effective, 1 = 0.5x effective
+; bit 3 -> type matchup option for POISON->BUG: 0 = 2x effective, 1 = 1x effective
+wOptions3:: db
+;;;;;;;;;;
 
 wPlayTimeHours:: db
 wPlayTimeMaxed:: db

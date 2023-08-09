@@ -1,16 +1,16 @@
-_LavenderHouse1Text_1d8d1::
+_MrFujisHouseSuperNerdMrFujiIsntHereText::
 	text "That's odd, MR.FUJI"
 	line "isn't here."
 	cont "Where'd he go?"
 	done
 
-_LavenderHouse1Text_1d8d6::
+_MrFujisHouseSuperNerdMrFujiHadBeenPrayingText::
 	text "MR.FUJI had been"
 	line "praying alone for"
 	cont "CUBONE's mother."
 	done
 
-_LavenderHouse1Text_1d8f4::
+_MrFujisHouseLittleGirlThisIsMrFujisHouseText::
 	text "This is really"
 	line "MR.FUJI's house."
 
@@ -21,21 +21,21 @@ _LavenderHouse1Text_1d8f4::
 	cont "orphaned #MON!"
 	done
 
-_LavenderHouse1Text_1d8f9::
+_MrFujisHouseLittleGirlPokemonAreNiceToHugText::
 	text "It's so warm!"
 	line "#MON are so"
 	cont "nice to hug!"
 	done
 
-_LavenderHouse1Text3::
+_MrFujisHousePsyduckText::
 	text "PSYDUCK: Gwappa!@"
 	text_end
 
-_LavenderHouse1Text4::
+_MrFujisHouseNidorinoText::
 	text "NIDORINO: Gaoo!@"
 	text_end
 
-_LavenderHouse1Text_1d94c::
+_MrFujisHouseMrFujiIThinkThisMayHelpYourQuestText::
 	text "MR.FUJI: <PLAYER>."
 
 	para "Your #DEX quest"
@@ -47,14 +47,14 @@ _LavenderHouse1Text_1d94c::
 	line "help your quest."
 	prompt
 
-_ReceivedFluteText::
+_MrFujisHouseMrFujiReceivedPokeFluteText::
 	text "<PLAYER> received"
 	line "a @"
 	text_ram wStringBuffer
 	text "!@"
 	text_end
 
-_FluteExplanationText::
+_MrFujisHouseMrFujiPokeFluteExplanationText::
 	text_start
 
 	para "Upon hearing #"
@@ -66,17 +66,17 @@ _FluteExplanationText::
 	line "sleeping #MON."
 	done
 
-_FluteNoRoomText::
+_MrFujisHouseMrFujiPokeFluteNoRoomText::
 	text "You must make"
 	line "room for this!"
 	done
 
-_MrFujiAfterFluteText::
+_MrFujisHouseMrFujiHasMyFluteHelpedYouText::
 	text "MR.FUJI: Has my"
 	line "FLUTE helped you?"
 	done
 
-_LavenderHouse1Text6::
+_MrFujisHouseMrFujiPokedexText::
 	text "#MON Monthly"
 	line "Grand Prize"
 	cont "Drawing!"

@@ -42,7 +42,7 @@ SafariZoneGameOver:
 	xor a
 	ld [wAudioFadeOutControl], a
 	dec a ; SFX_STOP_ALL_MUSIC
-	call PlaySound
+	rst _PlaySound
 	ld c, BANK(SFX_Safari_Zone_PA)
 	ld a, SFX_SAFARI_ZONE_PA
 	call PlayMusic
@@ -76,7 +76,7 @@ SafariZoneGameOver:
 	ldh [hWarpDestinationMap], a
 	ld a, $3
 	ld [wDestinationWarpID], a
-	ld a, $5
+	ld a, SCRIPT_SAFARIZONEGATE_LEAVING_SAFARI
 	ld [wSafariZoneGateCurScript], a
 	SetEvent EVENT_SAFARI_GAME_OVER
 	ld a, 1
@@ -101,11 +101,11 @@ SafariGameOverText:
 	and a
 	jr z, .noMoreSafariBalls
 	ld hl, TimesUpText
-	call PrintText
+	rst _PrintText
 .noMoreSafariBalls
 	ld hl, GameOverText
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 SafariRangerHuntSuccessText::
 	text_far _RangerHuntSuccessText
@@ -121,7 +121,7 @@ ClearSafariFlags::
 	ld [wNumSafariBalls], a
 	ld [wSafariSteps], a
 	ld [wSafariZoneGameOver], a 
-	ld [wSafariZoneGateCurScript], a 
+	ld [wSafariZoneGateCurScript], a ; SCRIPT_SAFARIZONEGATE_DEFAULT
 	ret
 
 TimesUpText:

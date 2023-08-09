@@ -1,4 +1,4 @@
-_LavenderMartText2::
+_LavenderMartBaldingGuyText::
 	text "I'm searching for"
 	line "items that raise"
 	cont "the abilities of"
@@ -14,13 +14,13 @@ _LavenderMartText2::
 	line "I can get them?"
 	done
 
-_LavenderMartReviveText::
+_LavenderMartCooltrainerMReviveText::
 	text "You know REVIVE?"
 	line "It revives any"
 	cont "fainted #MON!"
 	done
 
-_LavenderMartNuggetText::
+_LavenderMartCooltrainerMNuggetText::
 	text "I found a NUGGET"
 	line "in the mountains."
 

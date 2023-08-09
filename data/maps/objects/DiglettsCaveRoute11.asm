@@ -1,3 +1,6 @@
+	object_const_def
+	const DIGLETTSCAVEROUTE11_GAMBLER
+
 DiglettsCaveRoute11_Object:
 	db $7d ; border block
 
@@ -9,6 +12,6 @@ DiglettsCaveRoute11_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  2,  3, SPRITE_GAMBLER, STAY, NONE, 1 ; person
+	object_event  2,  3, SPRITE_GAMBLER, STAY, NONE, TEXT_DIGLETTSCAVEROUTE11_GAMBLER
 
 	def_warps_to DIGLETTS_CAVE_ROUTE_11

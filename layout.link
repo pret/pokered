@@ -70,21 +70,22 @@ ROMX $8
 	"Music 2"
 ROMX $9
 	"Pics 1"
-	"Battle Engine 3"
 ROMX $A
 	"Pics 2"
-	"Battle Engine 4"
 ROMX $B
 	"Pics 3"
-	"Battle Engine 5"
 ROMX $C
 	"Pics 4"
-	"Battle Engine 6"
 ROMX $D
 	"Pics 5"
-	"Slot Machines"
 ROMX $E
+	"Battle Engine 3"
+	"Battle Engine 4"
+	"Battle Engine 5"
+	"Battle Engine 6"
 	"Battle Engine 7"
+	"Slot Machines"
+	"Predefs"
 ROMX $F
 	"Battle Core"
 ROMX $10
@@ -100,9 +101,8 @@ ROMX $12
 	"Maps 8"
 ROMX $13
 	"Pics 6"
-	"Maps 9"
-	"Predefs"
 ROMX $14
+	"Maps 9"
 	"Maps 10"
 	"Battle Engine 8"
 	"Hidden Objects 2"
@@ -130,7 +130,7 @@ ROMX $18
 ROMX $19
 	"Tilesets 1"
 ROMX $1A
-	"Battle Engine 11"
+	"Version Graphics"
 	"Tilesets 2"
 ROMX $1B
 	"Tilesets 3"
@@ -175,6 +175,7 @@ ROMX $2A
 	"Text 11"
 ROMX $2B
 	"Pokédex Text"
+	"Movedex Text 2"
 ROMX $2C
 	"Move Names"
 	"Wild Mons"
@@ -188,15 +189,19 @@ ROMX $2F
 	"Pics 9"
 ROMX $30
 	"Pics 10"
+ROMX $31
+	"Movedex Text"
+ROMX $32
+	"Type Icons"
+	"Menu Prompt Graphics"
+	"Tilesets 4"
+ROMX $33
+	"movedCode"
 ROMX $34
 	"Party Sprites"
 	"GBC Mode Code"
 ROMX $35
     "newCode"
-ROMX $3D
-    "Batteryless Save Bank 1"
-ROMX $3F
-    "Batteryless Save Bank 2"
 WRAM0
 	"Audio RAM"
 	org $c100

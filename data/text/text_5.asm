@@ -135,7 +135,7 @@ _SentToBoxText::
 	cont "BOX @"
 	text_ram wStringBuffer
 	text " on PC!"
-	done
+	prompt
 
 _BoxIsFullText::
 	text "There's no more"

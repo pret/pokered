@@ -2,8 +2,9 @@ Route11Gate1F_Script:
 	jp EnableAutoTextBoxDrawing
 
 Route11Gate1F_TextPointers:
-	dw Route11GateText1
+	def_text_pointers
+	dw_const Route11Gate1FGuardText, TEXT_ROUTE11GATE1F_GUARD
 
-Route11GateText1:
-	text_far _Route11GateText1
+Route11Gate1FGuardText:
+	text_far _Route11Gate1FGuardText
 	text_end

@@ -2,9 +2,10 @@ CinnabarLabFossilRoom_Script:
 	jp EnableAutoTextBoxDrawing
 
 CinnabarLabFossilRoom_TextPointers:
-	dw Lab4Text1
-	dw Lab4Text2
-	dw Lab4Text3
+	def_text_pointers
+	dw_const CinnabarLabFossilRoomScientist1Text, TEXT_CINNABARLABFOSSILROOM_SCIENTIST1
+	dw_const CinnabarLabFossilRoomScientist2Text, TEXT_CINNABARLABFOSSILROOM_SCIENTIST2
+	dw_const CinnabarLabFossilRoomColorChangerText, TEXT_CINNABARLABFOSSILROOM_COLOR_CHANGER
 
 Lab4Script_GetFossilsInBag:
 ; construct a list of all fossils in the player's bag
@@ -47,64 +48,64 @@ FossilsList:
 	db OLD_AMBER
 	db 0 ; end
 
-Lab4Text1:
+CinnabarLabFossilRoomScientist1Text:
 	text_asm
 	CheckEvent EVENT_GAVE_FOSSIL_TO_LAB
-	jr nz, .asm_75d96
-	ld hl, Lab4Text_75dc6
-	call PrintText
+	jr nz, .check_done_reviving
+	ld hl, .Text
+	rst _PrintText
 	call Lab4Script_GetFossilsInBag
 	ld a, [wFilteredBagItemsCount]
 	and a
-	jr z, .asm_75d8d
+	jr z, .no_fossils
 	farcall GiveFossilToCinnabarLab
-	jr .asm_75d93
-.asm_75d8d
-	ld hl, Lab4Text_75dcb
-	call PrintText
-.asm_75d93
-	jp TextScriptEnd
-.asm_75d96
+	jr .done
+.no_fossils
+	ld hl, .NoFossilsText
+	rst _PrintText
+.done
+	rst TextScriptEnd
+.check_done_reviving
 	CheckEventAfterBranchReuseA EVENT_LAB_STILL_REVIVING_FOSSIL, EVENT_GAVE_FOSSIL_TO_LAB
-	jr z, .asm_75da2
-	ld hl, Lab4Text_75dd0
-	call PrintText
-	jr .asm_75d93
-.asm_75da2
+	jr z, .done_reviving
+	ld hl, .GoForAWalkText
+	rst _PrintText
+	jr .done
+.done_reviving
 	call LoadFossilItemAndMonNameBank1D
-	ld hl, Lab4Text_75dd5
-	call PrintText
+	ld hl, .FossilIsBackToLifeText
+	rst _PrintText
 	SetEvent EVENT_LAB_HANDING_OVER_FOSSIL_MON
 	ld a, [wFossilMon]
 	ld b, a
 	ld c, 30
 	call GivePokemon
-	jr nc, .asm_75d93
+	jr nc, .done
 	ResetEvents EVENT_GAVE_FOSSIL_TO_LAB, EVENT_LAB_STILL_REVIVING_FOSSIL, EVENT_LAB_HANDING_OVER_FOSSIL_MON
-	jr .asm_75d93
+	jr .done
 
-Lab4Text_75dc6:
-	text_far _Lab4Text_75dc6
+.Text:
+	text_far _CinnabarLabFossilRoomScientist1Text
 	text_end
 
-Lab4Text_75dcb:
-	text_far _Lab4Text_75dcb
+.NoFossilsText:
+	text_far _CinnabarLabFossilRoomScientist1NoFossilsText
 	text_end
 
-Lab4Text_75dd0:
-	text_far _Lab4Text_75dd0
+.GoForAWalkText:
+	text_far _CinnabarLabFossilRoomScientist1GoForAWalkText
 	text_end
 
-Lab4Text_75dd5:
-	text_far _Lab4Text_75dd5
+.FossilIsBackToLifeText:
+	text_far _CinnabarLabFossilRoomScientist1FossilIsBackToLifeText
 	text_end
 
-Lab4Text2:
+CinnabarLabFossilRoomScientist2Text:
 	text_asm
 	ld a, TRADE_FOR_SAILOR
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 LoadFossilItemAndMonNameBank1D:
 	farjp LoadFossilItemAndMonName
@@ -114,21 +115,21 @@ LoadFossilItemAndMonNameBank1D:
 ; If you run out, it's time to go and catch alternate palette pokemon in the wild instead. Most pokemon are available in alternate palette somewhere.
 ; A few, like legendaries and starters, are not.
 ; Everything below this point is code for the color changer npc.
-Lab4Text3: 
+CinnabarLabFossilRoomColorChangerText: 
 	text_asm
 	ld a, [wOptions2]
 	bit BIT_ALT_PKMN_PALETTES, a ; do we have alt palettes enabled
 	jr nz, .altPalettesEnabled
 	; we don't have alt palettes turned on, so no need to have his whole big script
 	ld hl, LabColorChangerResearchingColors
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 .altPalettesEnabled
 	CheckEvent EVENT_MET_LAB_COLOR_CHANGER
 	jr nz, .skipToColorChangeDialog
 	SetEvent EVENT_MET_LAB_COLOR_CHANGER
 	ld hl, LabColorChangerGreeting
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -138,7 +139,7 @@ Lab4Text3:
 .noDeutsch
 	ld hl, LabColorChangerGreetingNo
 .doneGreeting
-	call PrintText
+	rst _PrintText
 .skipToColorChangeDialog
 	CheckEvent EVENT_BEAT_PROF_OAK_ONCE
 	call nz, VasIsDas	
@@ -149,13 +150,13 @@ Lab4Text3:
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld hl, LabColorChangerStart
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
 	jp nz, .noColorChange
 	ld hl, LabColorChangerNext
-	call PrintText
+	rst _PrintText
 .showPartySelection
 	call SaveScreenTilesToBuffer2
 	xor a ; NORMAL_PARTY_MENU
@@ -169,41 +170,41 @@ Lab4Text3:
 	call LoadMonData
 	callfar InGameTrade_RestoreScreen
 	ld hl, LabColorChangerPics
-	call PrintText
+	rst _PrintText
 	call SaveScreenTilesToBuffer2
 	call ShowBeforeAfterImages
 	callfar InGameTrade_RestoreScreen
 	ld hl, LabColorChangerPicsShown
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .showPartySelection
 	ld hl, LabColorChangerStartColorChange
-	call PrintText
+	rst _PrintText
 	call DoColorSwap
 	ld hl, LabColorChangerColorChangeDone
-	call PrintText
+	rst _PrintText
 .noColorChange
 	ld hl, LabColorChangerGoodbye
-	call PrintText
+	rst _PrintText
 .done
 	xor a
 	ld [wUnusedC000], a
-	jp TextScriptEnd
+	rst TextScriptEnd
 .noPartySelection
 	callfar InGameTrade_RestoreScreen
 	jr .noColorChange
 .noChangesLeft
 	ld hl, LabColorChangerNoChangesLeft
-	call PrintText
+	rst _PrintText
 	jr .noColorChange
 
 VasIsDas:
 	CheckEvent EVENT_LAB_COLOR_CHANGER_FULL_CHANGES
 	ret nz
 	ld hl, LabColorChangerVasIsDas
-	call PrintText
+	rst _PrintText
 	SetEvent EVENT_LAB_COLOR_CHANGER_FULL_CHANGES
 	ret
 
@@ -274,6 +275,8 @@ ShowBeforeAfterImages:
 	and A_BUTTON | B_BUTTON
 	jr z, .waitForButtonPress
 
+	ld hl, wd72c
+	res 1, [hl]
  	ld a, $77
  	ldh [rNR50], a ; full volume
 	
@@ -312,33 +315,33 @@ DoColorSwap:
 
 FiddlingAroundSounds:
 	ld a, SFX_STOP_ALL_MUSIC
-	call PlaySound
+	rst _PlaySound
 	ld a, SFX_TRADE_MACHINE
-	call PlaySound
+	rst _PlaySound
 	ld c, 40
-	call DelayFrames
+	rst _DelayFrames
 	ld a, SFX_NOISE_INSTRUMENT05
-	call PlaySound
+	rst _PlaySound
 	ld c, 12
-	call DelayFrames
+	rst _DelayFrames
 	ld a, SFX_NOISE_INSTRUMENT05
-	call PlaySound
+	rst _PlaySound
 	ld c, 12
-	call DelayFrames
+	rst _DelayFrames
 	ld a, SFX_NOISE_INSTRUMENT05
-	call PlaySound
+	rst _PlaySound
 	ld c, 40
-	call DelayFrames
+	rst _DelayFrames
 	ld b, 20
 .loop
 	ld a, SFX_TURN_OFF_PC
-	call PlaySound
+	rst _PlaySound
 	ld c, 2
-	call DelayFrames
+	rst _DelayFrames
 	dec b
 	jr nz, .loop
 	ld c, 60
-	call DelayFrames
+	rst _DelayFrames
 	ret
 
 LabColorChangerGreeting:

@@ -4,31 +4,32 @@ RockTunnelPokecenter_Script:
 	jp EnableAutoTextBoxDrawing
 
 RockTunnelPokecenter_TextPointers:
-	dw RockTunnelHealNurseText
-	dw RockTunnelPokecenterText2
-	dw RockTunnelPokecenterText3
-	dw RockTunnelTradeNurseText
-	dw RockTunnelCharityNurseText
+	def_text_pointers
+	dw_const RockTunnelPokecenterNurseText,            TEXT_ROCKTUNNELPOKECENTER_NURSE
+	dw_const RockTunnelPokecenterGentlemanText,        TEXT_ROCKTUNNELPOKECENTER_GENTLEMAN
+	dw_const RockTunnelPokecenterFisherText,           TEXT_ROCKTUNNELPOKECENTER_FISHER
+	dw_const RockTunnelPokecenterLinkReceptionistText, TEXT_ROCKTUNNELPOKECENTER_LINK_RECEPTIONIST
+	dw_const RockTunnelCharityNurseText,               TEXT_ROCKTUNNELPOKECENTER_NURSE2
 
-RockTunnelHealNurseText:
+RockTunnelPokecenterNurseText:
 	script_pokecenter_nurse
 
-RockTunnelPokecenterText2:
-	text_far _RockTunnelPokecenterText2
+RockTunnelPokecenterGentlemanText:
+	text_far _RockTunnelPokecenterGentlemanText
 	text_end
 
-RockTunnelPokecenterText3:
-	text_far _RockTunnelPokecenterText3
+RockTunnelPokecenterFisherText:
+	text_far _RockTunnelPokecenterFisherText
 	text_end
 
-RockTunnelTradeNurseText:
+RockTunnelPokecenterLinkReceptionistText:
 	script_cable_club_receptionist
 
 ; PureRGBnote: ADDED: by donating to this nurse you unlock the ability to speed up pokemon center healing by holding B before talking to the nurse
 RockTunnelCharityNurseText: 
 	text_asm
 	ld hl, RockTunnelCharityNurseText1
-	call PrintText
+	rst _PrintText
 	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
@@ -45,7 +46,7 @@ RockTunnelCharityNurseText:
 	call HasEnoughMoney
 	jr nc, .success
 	ld hl, RockTunnelCharityNurseNotEnoughMoneyText
-	call PrintText
+	rst _PrintText
 	jr .done
 .success
 	SetEvent EVENT_DONATED_TO_POKECENTER_CHARITY
@@ -63,13 +64,13 @@ RockTunnelCharityNurseText:
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld hl, RockTunnelCharityNurseText2
-	call PrintText
+	rst _PrintText
 	jr .done
 .no
 	ld hl, RockTunnelCharityNurseFarewellText
-	call PrintText
+	rst _PrintText
 .done		
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RockTunnelCharityNurseText1:
 	text_far _RockTunnelCharityNurseText1
@@ -84,6 +85,6 @@ RockTunnelCharityNurseFarewellText:
 	text_end
 
 RockTunnelCharityNurseNotEnoughMoneyText:
-	text_far _SafariZoneEntranceText_7536a
+	text_far _GenericNotEnoughMoneyText
 	text_end
 

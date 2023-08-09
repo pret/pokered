@@ -7,14 +7,14 @@ VermilionDock_Script:
 	call ExecuteCurMapScriptInTable
 	call TruckCheck
 	CheckEventHL EVENT_STARTED_WALKING_OUT_OF_DOCK
-	jr nz, .asm_1db8d
+	jr nz, .walking_out_of_dock
 	CheckEventReuseHL EVENT_GOT_HM01
 	ret z
 	ld a, [wDestinationWarpID]
 	cp $1
 	ret nz
 	CheckEventReuseHL EVENT_SS_ANNE_LEFT
-	jp z, VermilionDock_1db9b
+	jp z, VermilionDockSSAnneLeavesScript
 	SetEventReuseHL EVENT_STARTED_WALKING_OUT_OF_DOCK
 	call Delay3
 	ld hl, wd730
@@ -32,7 +32,7 @@ VermilionDock_Script:
 	dec a
 	ld [wJoyIgnore], a
 	ret
-.asm_1db8d
+.walking_out_of_dock
 	CheckEventAfterBranchReuseHL EVENT_WALKED_OUT_OF_DOCK, EVENT_STARTED_WALKING_OUT_OF_DOCK
 	ret nz
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -43,19 +43,26 @@ VermilionDock_Script:
 	ret
 
 VermilionDock_ScriptPointers:
-	dw CheckFightingMapTrainers
-	dw DisplayEnemyTrainerTextAndStartBattle
-	dw EndTrainerBattle
+	def_script_pointers
+	dw_const CheckFightingMapTrainers,              SCRIPT_VERMILIONDOCK_DEFAULT
+	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_VERMILIONDOCK_START_BATTLE
+	dw_const EndTrainerBattle,                      SCRIPT_VERMILIONDOCK_END_BATTLE
 
-VermilionDock_1db9b:
+VermilionDockSSAnneLeavesScript:
+;;;;;;;;;; PureRGBnote: ADDED: the ship will return so don't ever run the "ship leaves" script if we're in that state
 	ld a, [wObtainedBadges]
-	bit 4, a ; after obtaining 4 badges the ship returns
+	bit BIT_SOULBADGE, a ; after obtaining 5 badges the ship returns
 	ret nz
+;;;;;;;;;;
 	SetEventForceReuseHL EVENT_SS_ANNE_LEFT
+;;;;;;;;;; PureRGBnote: ADDED: since we instantly enter this script from a warp and due to DEFER_MAP_LOAD bit set on this map's header, 
+;;;;;;;;;; we need to reset the palette here or the screen will be black
+	call GBPalNormal
+;;;;;;;;;; 
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wJoyIgnore], a
 	ld [wNewSoundID], a
-	call PlaySound
+	rst _PlaySound
 	ld c, BANK(Music_Surfing)
 	ld a, MUSIC_SURFING
 	call PlayMusic
@@ -63,7 +70,7 @@ VermilionDock_1db9b:
 	xor a
 	ld [wSpritePlayerStateData1ImageIndex], a
 	ld c, 120
-	call DelayFrames
+	rst _DelayFrames
 	ld b, $9c
 	call CopyScreenTileBufferToVRAM
 	hlcoord 0, 10
@@ -92,7 +99,7 @@ VermilionDock_1db9b:
 	ld [wUpdateSpritesEnabled], a
 	ld d, $0
 	ld e, $8
-.asm_1dbfa
+.shift_columns_up
 	ld hl, $2
 	add hl, bc
 	ld a, l
@@ -105,19 +112,19 @@ VermilionDock_1db9b:
 	call VermilionDock_EmitSmokePuff
 	pop de
 	ld b, $10
-.asm_1dc11
+.smoke_puff_drift_loop
 	call VermilionDock_AnimSmokePuffDriftRight
 	ld c, $8
-.asm_1dc16
-	call VermilionDock_1dc7c
+.delay_between_drifts
+	call VermilionDock_SyncScrollWithLY
 	dec c
-	jr nz, .asm_1dc16
+	jr nz, .delay_between_drifts
 	inc d
 	dec b
-	jr nz, .asm_1dc11
+	jr nz, .smoke_puff_drift_loop
 	pop bc
 	dec e
-	jr nz, .asm_1dbfa
+	jr nz, .shift_columns_up
 	xor a
 	ldh [rWY], a
 	ldh [hWY], a
@@ -144,12 +151,12 @@ VermilionDock_AnimSmokePuffDriftRight:
 	swap a
 	ld c, a
 	ld de, 4
-.loop
+.drift_loop
 	inc [hl]
 	inc [hl]
 	add hl, de
 	dec c
-	jr nz, .loop
+	jr nz, .drift_loop
 	pop de
 	pop bc
 	ret
@@ -176,18 +183,18 @@ VermilionDockOAMBlock:
 	db $fe, $10
 	db $ff, $10
 
-VermilionDock_1dc7c:
+VermilionDock_SyncScrollWithLY:
 	ld h, d
 	ld l, $50
-	call .asm_1dc86
+	call .sync_scroll_ly
 	ld h, $0
 	ld l, $80
-.asm_1dc86
+.sync_scroll_ly
 	predef BGLayerScrollingUpdate ; shinpokerednote: gbcnote - consolidated into a predef that also fixes some issues
-.asm_1dc8e
+.wait_for_ly_match
 	ldh a, [rLY]
 	cp h
-	jr z, .asm_1dc8e
+	jr z, .wait_for_ly_match
 	ret
 
 VermilionDock_EraseSSAnne:
@@ -214,18 +221,14 @@ VermilionDock_EraseSSAnne:
 	ld [hl], a
 
 	ld a, SFX_SS_ANNE_HORN
-	call PlaySound
+	rst _PlaySound
 	ld c, 120
-	call DelayFrames
+	rst _DelayFrames
 	ret
 
 VermilionDock_TextPointers:
-	dw VermilionDockText1
-	dw VermilionDockText2
-
-VermilionDockText1:
-	text_far _VermilionDockText1
-	text_end
+	def_text_pointers
+	dw_const VermilionDockMewText,      TEXT_VERMILIONDOCK_MEW
 
 VermilionDockTrainerHeaders:
 	def_trainers
@@ -233,11 +236,11 @@ MewTrainerHeader:
 	trainer EVENT_ENCOUNTERED_MEW, 0, MewBattleText, MewBattleText, MewBattleText
 	db -1 ; end
 
-VermilionDockText2:
+VermilionDockMewText:
 	text_asm
 	ld hl, MewTrainerHeader
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 MewBattleText:
 	text_far _MewtwoBattleText ; Mew!
@@ -245,7 +248,7 @@ MewBattleText:
 	ld a, MEW
 	call PlayCry
 	call WaitForSoundToFinish
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 TruckOAMTable:
 	db $50, $28, $C0, $10
@@ -263,9 +266,16 @@ RedLeftOAMTable:
 
 TruckSpriteGFX: INCBIN  "gfx/sprites/truck_sprite.2bpp"
 
+NoTruckAction:
+	ld hl, wCurrentMapScriptFlags
+	res 7, [hl]
+	ret
+
 TruckCheck:
 	CheckEventHL EVENT_FOUND_MEW
 	jp nz, ChangeTruckTile
+	ld hl, wCurrentMapScriptFlags
+	res 5, [hl]
 	ld c, HS_MEW_VERMILION_DOCK
 	ld b, $2
 	ld hl, wMissableObjectFlags
@@ -279,32 +289,33 @@ TruckCheck:
 .skiphidingmew
 	ld a, [wd728]
 	bit 0, a ; using Strength?
-	ret z
-	; the position for moving truck is $00, $15
+	jr z, NoTruckAction
+	; the position for moving the truck is 22,0
 	ld hl, wYCoord
 	ld a, [hli]
 	and a
-	ret nz
+	jr nz, NoTruckAction
 	ld a, [hl]
-	cp $16
-	ret nz
+	cp 22
+	jr nz, NoTruckAction
 	; if the player is trying to walk left
-	ld a, [wPlayerDirection]
-	cp 2
-	ret nz
-	
-	xor a
-	ld [$ff8c], a
-	ld a, $8
-	ld [$ff8d], a
-	call SetSpriteFacingDirection
+	ld a, [wPlayerMovingDirection]
+	bit PLAYER_DIR_BIT_LEFT, a
+	jr z, NoTruckAction
+	ld hl, wCurrentMapScriptFlags
+	bit 7, [hl]
+	set 7, [hl] ; wait until the next time the player presses left
+	ret z
+	ldh a, [hJoyHeld]
+	bit BIT_D_LEFT, a ; is player pressing left
+	ret z
+	res 7, [hl]
 	ld a, $ff
 	ld [wJoyIgnore], a
 	ld [wUpdateSpritesEnabled], a
+	; make it look like the player bumped into the truck
+	call VermilionDockRedLeftAnimate
 	xor a
-	ld bc, $4c48
-	ld de, RedLeftOAMTable
-	call WriteOAMBlock
 	ld bc, (Bank(TruckSpriteGFX) << 8) | 8
 	ld hl, vChars1 + $400
 	ld de, TruckSpriteGFX
@@ -312,14 +323,14 @@ TruckCheck:
 	ld hl, TruckOAMTable
 	ld bc, $20
 	ld de, wShadowOAM + $20
-	call CopyData
+	rst _CopyData
 	ld a, $c
 	ld [wNewTileBlockID], a ; used to be wd09f
 	ld bc, $a
 	predef ReplaceTileBlock
 	; moving the truck
 	ld a, SFX_PUSH_BOULDER
-	call PlaySound
+	rst _PlaySound
 	ld b, 32
 	ld de, 4
 .movingtruck
@@ -331,16 +342,22 @@ TruckCheck:
 	dec a
 	jr nz, .movingtruck2
 	ld c, 2
-	call DelayFrames
+	rst _DelayFrames
 	dec b
 	jr nz, .movingtruck
 	ld a, $3
 	ld [wNewTileBlockID], a ; used to be wd09f
 	ld bc, $9
 	predef ReplaceTileBlock
+	callfar AnimateBoulderDust
 	call ShowMew
-	jp FinishShowMew
-	; show mew and print its dialogue
+	ld c, 20
+	rst _DelayFrames
+	xor a
+	ld [wJoyIgnore], a
+	SetEvent EVENT_FOUND_MEW
+	ret
+
 ShowMew:	
 	ld a, 1
 	ld [wUpdateSpritesEnabled], a
@@ -348,15 +365,13 @@ ShowMew:
 	ld [wMissableObjectIndex], a
 	predef ShowObject
 	ret
-FinishShowMew:
-	ld c, 60
-	call DelayFrames
-	xor a
-	ld [wJoyIgnore], a
-	SetEvent EVENT_FOUND_MEW
-	ret
 
 ChangeTruckTile:
+	ld hl, wCurrentMapScriptFlags
+	bit 5, [hl]
+	res 5, [hl]
+	res 7, [hl]
+	ret z
 	ld bc, $9
 	call GetOWCoord
 	ld a, [hl]
@@ -389,3 +404,27 @@ GetOWCoord:
 	dec c
 	jr nz, .cloop
 	ret
+
+VermilionDockRedLeftAnimate:
+	ld a, [wWalkBikeSurfState]
+	ld de, RedSprite tile 20
+	lb bc, BANK(RedSprite), 4
+	and a
+	jr z, .load
+	ld de, RedBikeSprite tile 20
+	lb bc, BANK(RedBikeSprite), 4
+.load
+	ld hl, vSprites tile 8
+	call CopyVideoData
+	ld c, 10
+	rst _DelayFrames
+	ld a, [wWalkBikeSurfState]
+	ld de, RedSprite tile 8
+	lb bc, BANK(RedSprite), 4
+	and a
+	jr z, .load2
+	ld de, RedBikeSprite tile 8
+	lb bc, BANK(RedBikeSprite), 4
+.load2
+	ld hl, vSprites tile 8
+	jp CopyVideoData

@@ -1,3 +1,9 @@
+	object_const_def
+	const FOSSILGUYSHOUSE_FOSSIL_GUY
+	const FOSSILGUYSHOUSE_MEOWTH
+	const FOSSILGUYSHOUSE_PAPER
+	const FOSSILGUYSHOUSE_ROCK
+
 FossilGuysHouse_Object:
 	db $d ; border block
 
@@ -6,15 +12,15 @@ FossilGuysHouse_Object:
 	warp_event  7,  7, LAST_MAP, 9
 
 	def_bg_events
-	bg_event 2,  1, 5 
-	bg_event 3,  1, 6 
-	bg_event 8,  0, 7 
-	bg_event 1,  4, 8
+	bg_event 2,  1, TEXT_FOSSILGUYSHOUSE_TELEPORTER1 
+	bg_event 3,  1, TEXT_FOSSILGUYSHOUSE_TELEPORTER2 
+	bg_event 8,  0, TEXT_FOSSILGUYSHOUSE_POSTER 
+	bg_event 1,  4, TEXT_FOSSILGUYSHOUSE_DESK
 
 	def_object_events
-	object_event  1,  5, SPRITE_SUPER_NERD, STAY, UP, 1 ; person
-	object_event  4,  3, SPRITE_CAT, WALK, ANY_DIR, 2 ; person
-	object_event  7,  4, SPRITE_PAPER, STAY, NONE, 3 
-	object_event  8,  4, SPRITE_OLD_AMBER, STAY, NONE, 4 
+	object_event  1,  5, SPRITE_SUPER_NERD, STAY, UP, TEXT_FOSSILGUYSHOUSE_FOSSIL_GUY
+	object_event  4,  3, SPRITE_CAT, WALK, ANY_DIR, TEXT_FOSSILGUYSHOUSE_MEOWTH
+	object_event  7,  4, SPRITE_PAPER, STAY, NONE, TEXT_FOSSILGUYSHOUSE_PAPER 
+	object_event  8,  4, SPRITE_OLD_AMBER, STAY, NONE, TEXT_FOSSILGUYSHOUSE_ROCK
 
 	def_warps_to FOSSIL_GUYS_HOUSE

@@ -1,4 +1,4 @@
-_WardenGibberishText1::
+_WardensHouseWardenGibberish1Text::
 	text "WARDEN: Hif fuff"
 	line "hefifoo!"
 
@@ -7,30 +7,30 @@ _WardenGibberishText1::
 	cont "hee fwee!"
 	done
 
-_WardenGibberishText2::
+_WardensHouseWardenGibberish2Text::
 	text "Ah howhee ho hoo!"
 	line "Eef ee hafahi ho!"
 	done
 
-_WardenGibberishText3::
+_WardensHouseWardenGibberish3Text::
 	text "Ha? He ohay heh"
 	line "ha hoo ee haheh!"
 	done
 
-_WardenTeethText1::
+_WardensHouseWardenGaveTheGoldTeethText::
 	text "<PLAYER> gave the"
 	line "GOLD TEETH to the"
 	cont "WARDEN!@"
 	text_end
 
-_WardenTeethText2::
+_WardensHouseWardenTeethPoppedInHisTeethText::
 	text_start
 
 	para "The WARDEN popped"
 	line "in his teeth!"
 	prompt
 
-_WardenThankYouText::
+_WardensHouseWardenThanksText::
 	text "WARDEN: Thanks,"
 	line "kid! No one could"
 	cont "understand a word"
@@ -43,14 +43,14 @@ _WardenThankYouText::
 	cont "your trouble."
 	prompt
 
-_ReceivedHM04Text::
+_WardensHouseWardenReceivedHM04Text::
 	text "<PLAYER> received"
 	line "@"
 	text_ram wStringBuffer
 	text "!@"
 	text_end
 
-_HM04ExplanationText::
+_WardensHouseWardenHM04ExplanationText::
 	text "WARDEN: HM04"
 	line "teaches STRENGTH!"
 
@@ -70,17 +70,17 @@ _HM04ExplanationText::
 	line "rare SURF HM."
 	done
 
-_HM04NoRoomText::
+_WardensHouseWardenHM04NoRoomText::
 	text "Your pack is"
 	line "stuffed full!"
 	done
 
-_FuchsiaHouse2Text_75176::
+_WardensHouseDisplayPhotosAndFossilsText::
 	text "#MON photos"
 	line "and fossils."
 	done
 
-_FuchsiaHouse2Text_7517b::
+_WardensHouseDisplayMerchandiseText::
 	text "Old #MON"
 	line "merchandise."
 	done

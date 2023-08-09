@@ -44,4 +44,4 @@
 
 	dw BANK(MachopPicFront), BANK(MachopPicBack)
 
-	dw MachopPicFrontRG, MachopPicBack
+	dw MachopPicFrontAlt, MachopPicBack

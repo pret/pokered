@@ -1,13 +1,14 @@
 _ScrollTrainerPicAfterBattle:
 ; Load the enemy trainer's pic and scrolls it into
 ; the screen from the right.
+; TODO: optional trainer colors
 	xor a
 	ld [wEnemyMonSpecies2], a
 	ld b, SET_PAL_BATTLE
 	call RunPaletteCommand
 	callfar _LoadTrainerPic
 	xor a
-	ld [wUnusedD119], a ; PureRGBnote: ADDED: clear trainer class from variable used in bank checking for trainer sprites
+	ld [wWhichTrainerClass], a ; PureRGBnote: ADDED: clear trainer class from variable used in bank checking for trainer sprites
 	hlcoord 19, 0
 	ld c, $0
 .scrollLoop
@@ -27,7 +28,7 @@ _ScrollTrainerPicAfterBattle:
 	dec c
 	jr nz, .drawTrainerPicLoop
 	ld c, 4
-	call DelayFrames
+	rst _DelayFrames
 	pop hl
 	pop bc
 	dec hl

@@ -1,8 +1,4 @@
 PewterGym_Script:
-	ld hl, wCurrentMapScriptFlags
-	bit 6, [hl]
-	res 6, [hl]
-	call nz, .LoadNames
 	call EnableAutoTextBoxDrawing
 	ld hl, PewterGymTrainerHeaders
 	ld de, PewterGym_ScriptPointers
@@ -10,17 +6,6 @@ PewterGym_Script:
 	call ExecuteCurMapScriptInTable
 	ld [wPewterGymCurScript], a
 	ret
-
-.LoadNames:
-	ld hl, .CityName
-	ld de, .LeaderName
-	jp LoadGymLeaderAndCityName
-
-.CityName:
-	db "PEWTER CITY@"
-
-.LeaderName:
-	db "BROCK@"
 
 PewterGymResetScripts:
 	xor a
@@ -30,33 +15,34 @@ PewterGymResetScripts:
 	ret
 
 PewterGym_ScriptPointers:
-	dw CheckFightingMapTrainers
-	dw DisplayEnemyTrainerTextAndStartBattle
-	dw EndTrainerBattle
-	dw PewterGymBrockPostBattle
+	def_script_pointers
+	dw_const CheckFightingMapTrainers,              SCRIPT_PEWTERGYM_DEFAULT
+	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_PEWTERGYM_START_BATTLE
+	dw_const EndTrainerBattle,                      SCRIPT_PEWTERGYM_END_BATTLE
+	dw_const PewterGymBrockPostBattle,              SCRIPT_PEWTERGYM_BROCK_POST_BATTLE
 
 PewterGymBrockPostBattle:
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, PewterGymResetScripts
-	ld a, $f0
+	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 ; fallthrough
 PewterGymScriptReceiveTM34:
-	ld a, $4
+	ld a, TEXT_PEWTERGYM_BROCK_WAIT_TAKE_THIS
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_BEAT_BROCK
 	lb bc, TM_BROCK, 1
 	call GiveItem
 	jr nc, .BagFull
-	ld a, $5
+	ld a, TEXT_PEWTERGYM_RECEIVED_TM34
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_GOT_TM34
 	jr .gymVictory
 .BagFull
-	ld a, $6
+	ld a, TEXT_PEWTERGYM_TM34_NO_ROOM
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .gymVictory
@@ -80,20 +66,21 @@ PewterGymScriptReceiveTM34:
 	jp PewterGymResetScripts
 
 PewterGym_TextPointers:
-	dw BrockText
-	dw PewterGymTrainerText1
-	dw PewterGymGuideText
-	dw BeforeReceivedTM34Text
-	dw ReceivedTM34Text
-	dw TM34NoRoomText
+	def_text_pointers
+	dw_const PewterGymBrockText,             TEXT_PEWTERGYM_BROCK
+	dw_const PewterGymCooltrainerMText,      TEXT_PEWTERGYM_COOLTRAINER_M
+	dw_const PewterGymGuideText,             TEXT_PEWTERGYM_GYM_GUIDE
+	dw_const PewterGymBrockWaitTakeThisText, TEXT_PEWTERGYM_BROCK_WAIT_TAKE_THIS
+	dw_const PewterGymReceivedTM34Text,      TEXT_PEWTERGYM_RECEIVED_TM34
+	dw_const PewterGymTM34NoRoomText,        TEXT_PEWTERGYM_TM34_NO_ROOM
 
 PewterGymTrainerHeaders:
 	def_trainers 2
 PewterGymTrainerHeader0:
-	trainer EVENT_BEAT_PEWTER_GYM_TRAINER_0, 5, PewterGymBattleText1, PewterGymEndBattleText1, PewterGymAfterBattleText1
+	trainer EVENT_BEAT_PEWTER_GYM_TRAINER_0, 5, PewterGymCooltrainerMBattleText, PewterGymCooltrainerMEndBattleText, PewterGymCooltrainerMAfterBattleText
 	db -1 ; end
 
-BrockText:
+PewterGymBrockText:
 	text_asm
 	CheckEvent EVENT_BEAT_BROCK
 	jr z, .beforeBeat
@@ -103,17 +90,17 @@ BrockText:
 	call DisableWaitingAfterTextDisplay
 	jr .done
 .afterBeat
-	ld hl, BrockPostBattleAdviceText
-	call PrintText
+	ld hl, .PostBattleAdviceText
+	rst _PrintText
 	jr .done
 .beforeBeat
-	ld hl, BrockPreBattleText
-	call PrintText
+	ld hl, .PreBattleText
+	rst _PrintText
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
-	ld hl, ReceivedBoulderBadgeText
-	ld de, ReceivedBoulderBadgeText
+	ld hl, PewterGymBrockReceivedBoulderBadgeText
+	ld de, PewterGymBrockReceivedBoulderBadgeText
 	call SaveEndBattleTextPointers
 	ldh a, [hSpriteIndex]
 	ld [wSpriteIndex], a
@@ -123,56 +110,56 @@ BrockText:
 	ld [wGymLeaderNo], a
 	xor a
 	ldh [hJoyHeld], a
-	ld a, $3
+	ld a, SCRIPT_PEWTERGYM_BROCK_POST_BATTLE
 	ld [wPewterGymCurScript], a
 	ld [wCurMapScript], a
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
-BrockPreBattleText:
-	text_far _BrockPreBattleText
+.PreBattleText:
+	text_far _PewterGymBrockPreBattleText
 	text_end
 
-BrockPostBattleAdviceText:
-	text_far _BrockPostBattleAdviceText
+.PostBattleAdviceText:
+	text_far _PewterGymBrockPostBattleAdviceText
 	text_end
 
-BeforeReceivedTM34Text:
-	text_far _BeforeReceivedTM34Text
+PewterGymBrockWaitTakeThisText:
+	text_far _PewterGymBrockWaitTakeThisText
 	text_end
 
-ReceivedTM34Text:
-	text_far _ReceivedTM34Text
+PewterGymReceivedTM34Text:
+	text_far _PewterGymReceivedTM34Text
 	sound_get_item_1
 	text_far _TM34ExplanationText
 	text_end
 
-TM34NoRoomText:
-	text_far _TM34NoRoomText
+PewterGymTM34NoRoomText:
+	text_far _PewterGymTM34NoRoomText
 	text_end
 
-ReceivedBoulderBadgeText:
-	text_far _ReceivedBoulderBadgeText
+PewterGymBrockReceivedBoulderBadgeText:
+	text_far _PewterGymBrockReceivedBoulderBadgeText
 	sound_level_up ; probably supposed to play SFX_GET_ITEM_1 but the wrong music bank is loaded
-	text_far _BrockBoulerBadgeInfoText ; Text to tell that the flash technique can be used
+	text_far _PewterGymBrockBoulderBadgeInfoText ; Text to tell that the flash technique can be used
 	text_end
 
-PewterGymTrainerText1:
+PewterGymCooltrainerMText:
 	text_asm
 	ld hl, PewterGymTrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
-PewterGymBattleText1:
-	text_far _PewterGymBattleText1
+PewterGymCooltrainerMBattleText:
+	text_far _PewterGymCooltrainerMBattleText
 	text_end
 
-PewterGymEndBattleText1:
-	text_far _PewterGymEndBattleText1
+PewterGymCooltrainerMEndBattleText:
+	text_far _PewterGymCooltrainerMEndBattleText
 	text_end
 
-PewterGymAfterBattleText1:
-	text_far _PewterGymAfterBattleText1
+PewterGymCooltrainerMAfterBattleText:
+	text_far _PewterGymCooltrainerMAfterBattleText
 	text_end
 
 PewterGymGuideText: ; PureRGBnote: ADDED: gym guide gives you apex chips after beating the leader
@@ -181,44 +168,44 @@ PewterGymGuideText: ; PureRGBnote: ADDED: gym guide gives you apex chips after b
 	bit BIT_BOULDERBADGE, a
 	jr nz, .afterBeat
 	ld hl, PewterGymGuidePreAdviceText
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .PewterGymGuideBeginAdviceText
 	ld hl, PewterGymGuideBeginAdviceText
-	call PrintText
+	rst _PrintText
 	jr .PewterGymGuideAdviceText
 .PewterGymGuideBeginAdviceText
-	ld hl, PewterGymText_5c524
-	call PrintText
+	ld hl, PewterGymGuideFreeServiceText
+	rst _PrintText
 .PewterGymGuideAdviceText
 	ld hl, PewterGymGuideAdviceText
-	call PrintText
+	rst _PrintText
 	jr .done
 .afterBeat
 	ld hl, PewterGymGuidePostBattleText
-	call PrintText
+	rst _PrintText
 	CheckEvent EVENT_GOT_PEWTER_APEX_CHIPS
 	jr nz, .alreadyApexChips
 .giveApexChips
 	ld hl, PewterGymGuideApexChipText
-	call PrintText
+	rst _PrintText
 	lb bc, APEX_CHIP, 2
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, ReceivedApexChipsTextPewter
-	call PrintText
+	rst _PrintText
 	SetEvent EVENT_GOT_PEWTER_APEX_CHIPS
 .alreadyApexChips
 	ld hl, AlreadyReceivedApexChipsText
-	call PrintText
+	rst _PrintText
 	jr .done
 .BagFull
-	ld hl, TM34NoRoomText
-	call PrintText
+	ld hl, PewterGymTM34NoRoomText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PewterGymGuidePreAdviceText:
 	text_far _PewterGymGuidePreAdviceText
@@ -232,8 +219,8 @@ PewterGymGuideAdviceText:
 	text_far _PewterGymGuideAdviceText
 	text_end
 
-PewterGymText_5c524:
-	text_far _PewterGymText_5c524
+PewterGymGuideFreeServiceText:
+	text_far _PewterGymGuideFreeServiceText
 	text_end
 
 PewterGymGuidePostBattleText:

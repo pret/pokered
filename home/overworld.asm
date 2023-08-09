@@ -5,7 +5,7 @@ HandleMidJump::
 
 EnterMap::
 ; Load a new map.
-	ld a, $ff
+	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	call LoadMapData
 	farcall ClearVariablesOnEnterMap
@@ -18,7 +18,7 @@ EnterMap::
 	ld hl, wd72e
 	bit 5, [hl] ; did a battle happen immediately before this?
 	res 5, [hl] ; unset the "battle just happened" flag
-	call z, ResetUsingStrengthOutOfBattleBit
+	call z, ResetUsingStrengthSurfOutOfBattleBits
 	call nz, MapEntryAfterBattle
 	ld hl, wd732
 	ld a, [hl]
@@ -39,9 +39,9 @@ EnterMap::
 	ld [wJoyIgnore], a
 
 OverworldLoop::
-	call DelayFrame
+	rst _DelayFrame
 OverworldLoopLessDelay::
-	;call DelayFrame ; shinpokerednote: ADDED: 60fps mode enabled by commenting this (but needs additional tweaks to run correctly)
+	;rst _DelayFrame ; shinpokerednote: ADDED: 60fps mode enabled by commenting this (but needs additional tweaks to run correctly)
 	call LoadGBPal
 	ld a, [wd736]
 	bit 6, a ; jumping down a ledge?
@@ -111,8 +111,8 @@ OverworldLoopLessDelay::
 	predef GetTileAndCoordsInFrontOfPlayer
 	call UpdateSprites
 	ld a, [wFlags_0xcd60]
-	bit 2, a
-	jr nz, .checkForOpponent
+	;bit 2, a
+	;jr nz, .checkForOpponent ; PureRGBnote: CHANGED: this bit isn't used anymore
 	bit 0, a
 	jr nz, .checkForOpponent
 	lda_coord 8, 9
@@ -129,7 +129,7 @@ OverworldLoopLessDelay::
 ;	predef LoadSAV
 ;	ld a, [wCurMap]
 ;	ld [wDestinationMap], a
-;	call SpecialWarpIn
+;	call PrepareForSpecialWarp
 ;	ld a, [wCurMap]
 ;	call SwitchToMapRomBank ; switch to the ROM bank of the current map
 ;	ld hl, wCurMapTileset
@@ -142,8 +142,8 @@ OverworldLoopLessDelay::
 	jp nz, .newBattle
 	jp OverworldLoop
 .noDirectionButtonsPressed
-	ld hl, wFlags_0xcd60
-	res 2, [hl]
+	;ld hl, wFlags_0xcd60
+	;res 2, [hl] ; PureRGBnote: CHANGED: this bit isn't used anymore
 	call UpdateSprites
 ;;;;;;;;;;; PureRGBnote: ADDED: code for changing direction without moving by pressing A+B and a direction when standing still.
 	ldh a, [hJoyHeld] 
@@ -254,13 +254,14 @@ OverworldLoopLessDelay::
 ;	ld a, PLAYER_DIR_UP
 ;	ld [wPlayerMovingDirection], a
 .directionChangeState
-	ld hl, wFlags_0xcd60
-	set 2, [hl]
 	ld a, [wPlayerDirection]
 	ld [wPlayerMovingDirection], a
-	call NewBattle
-	jp c, BattleOccurred
 	jp OverworldLoop
+	;ld hl, wFlags_0xcd60
+	;set 2, [hl]
+	;call NewBattle
+	;jp c, BattleOccurred
+	;jp OverworldLoop ; PureRGBnote: CHANGED: when we are in "direction change" mode we just dont check for battles now
 
 .noDirectionChange
 	xor a
@@ -305,8 +306,8 @@ OverworldLoopLessDelay::
 	call UpdateSprites
 
 .moveAhead2
-	ld hl, wFlags_0xcd60
-	res 2, [hl]
+	;ld hl, wFlags_0xcd60
+	;res 2, [hl] ; PureRGBnote: CHANGED: this bit isn't used anymore
 	ld a, [wd736]
 	bit 7, a ; spinning?
 	jr nz, .spinnerSpeed ; PureRGBnote: CHANGED: faster spin tile movement
@@ -375,6 +376,7 @@ BattleOccurred::
 	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
 	set 6, [hl]
+	set 3, [hl] ; PureRGBnote: ADDED: new bit indicating we reloaded a map from a battle
 	xor a
 	ldh [hJoyHeld], a
 	ld a, [wCurMap]
@@ -393,7 +395,7 @@ BattleOccurred::
 	jr z, .allPokemonFainted
 .noFaintCheck
 	ld c, 10
-	call DelayFrames
+	rst _DelayFrames
 	jp EnterMap
 .allPokemonFainted
 	ld a, $ff
@@ -432,26 +434,20 @@ GetBikeSpeed::
 	call DoBikeSpeedup
 	call DoBikeSpeedup
 .normalBikeSpeed
-	call DoBikeSpeedup
-	ret	
+	jr DoBikeSpeedup
 .cyclingRoad
 	; uphill we can only go a bit faster, downhill we can go full speed
 	ldh a, [hJoyHeld]
 	and D_UP | D_LEFT | D_RIGHT
-	jr nz, .slower
-	call DoBikeSpeedup
-.slower
+	call z, DoBikeSpeedup
 	ldh a, [hJoyHeld]
 	and B_BUTTON
-	jr z, .done
+	ret z
 	call DoBikeSpeedup
 	ldh a, [hJoyHeld]
 	and D_UP | D_LEFT | D_RIGHT
-	jr nz, .done
-	call DoBikeSpeedup
-	jr .done
-.done
-	ret
+	ret nz
+	; fall through
 
 ; function to make bikes twice as fast as walking
 DoBikeSpeedup::
@@ -563,8 +559,8 @@ WarpFound2::
 ; this is for handling "outside" maps that can't have the 0xFF destination map
 	ld a, [wCurMap]
 	ld [wLastMap], a
-	ld a, [wCurMapWidth]
-	ld [wUnusedD366], a ; not read
+	; ld a, [wCurMapWidth]
+	; ld [wUnusedD366], a ; not read
 	ldh a, [hWarpDestinationMap]
 	ld [wCurMap], a
 	cp ROCK_TUNNEL_1F
@@ -648,7 +644,7 @@ PlayMapChangeSound::
 .didNotGoThroughDoor
 	ld a, SFX_GO_OUTSIDE
 .playSound
-	call PlaySound
+	rst _PlaySound
 	ld a, [wMapPalOffset]
 	and a
 	ret nz
@@ -707,10 +703,18 @@ ExtraWarpCheck::
 	ld hl, IsWarpTileInFrontOfPlayer
 .doBankswitch
 	ld b, BANK(IsWarpTileInFrontOfPlayer)
-	jp Bankswitch
+	rst _Bankswitch
+	ret
 
 MapEntryAfterBattle::
 	farcall IsPlayerStandingOnWarp ; for enabling warp testing after collisions
+;;;;;;;;;; PureRGBnote: ADDED: skip fading in in maps that use a specific bit in their header - allows tile block replacements to go unseen
+	ld a, [wMapConnections]
+	bit 4, a
+	ret nz
+;;;;;;;;;;
+	; fall through
+MapFadeAfterBattle::
 	ld a, [wMapPalOffset]
 	and a
 	jp z, GBFadeInFromWhite
@@ -725,11 +729,11 @@ HandleBlackOut::
 	call StopMusic
 	ld hl, wd72e
 	res 5, [hl]
-	ld a, BANK(ResetStatusAndHalveMoneyOnBlackout) ; also BANK(SpecialWarpIn) and BANK(SpecialEnterMap)
+	ld a, BANK(ResetStatusAndHalveMoneyOnBlackout) ; also BANK(PrepareForSpecialWarp) and BANK(SpecialEnterMap)
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call ResetStatusAndHalveMoneyOnBlackout
-	call SpecialWarpIn
+	call PrepareForSpecialWarp
 	call PlayDefaultMusicFadeOutCurrent
 	jp SpecialEnterMap
 
@@ -737,7 +741,7 @@ StopMusic::
 	ld [wAudioFadeOutControl], a
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	call PlaySound
+	rst _PlaySound
 .wait
 	ld a, [wAudioFadeOutControl]
 	and a
@@ -756,10 +760,10 @@ HandleFlyWarpOrDungeonWarp::
 	set 2, [hl] ; fly warp or dungeon warp
 	res 5, [hl] ; forced to ride bike
 	call LeaveMapAnim
-	ld a, BANK(SpecialWarpIn)
+	ld a, BANK(PrepareForSpecialWarp)
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
-	call SpecialWarpIn
+	call PrepareForSpecialWarp
 	jp SpecialEnterMap
 
 LeaveMapAnim::
@@ -1209,12 +1213,14 @@ CollisionCheckOnLand::
 	jr c, .collision
 	call CheckTilePassable
 	jr nc, .noCollision
+	callfar CheckForAutoSurf ; PureRGBnote: ADDED: "collision check" that will automatically start up surfing if surf was previously activated.
+	jr nc, .noCollision
 .collision
 	ld a, [wChannelSoundIDs + CHAN5]
 	cp SFX_COLLISION ; check if collision sound is already playing
 	jr z, .setCarry
 	ld a, SFX_COLLISION
-	call PlaySound ; play collision sound (if it's not already playing)
+	rst _PlaySound ; play collision sound (if it's not already playing)
 .setCarry
 	scf
 	ret
@@ -1294,7 +1300,7 @@ CheckForTilePairCollisions::
 	jr .retry
 .currentTileMatchesFirstInPair
 	inc hl
-	ld a, [hl]
+	ld a, [hli] ; PureRGBnote: FIXED: performance improvement / fix for strange behaviour when adding new collision pairs
 	cp c
 	jr z, .foundMatch
 	jr .tilePairCollisionLoop
@@ -1858,6 +1864,8 @@ JoypadOverworld::
 ; so the old value of c is used. 2429 is always called before this function,
 ; and 2429 always sets c to 0xF0. There is no 0xF0 background tile, so it
 ; is considered impassable and it is detected as a collision.
+;;;; PureRGBnote: FIXED: bug was fixed so collision with sprites is routed directly to the collision code, and reuses the code for using the
+;;;; surf item to decide if a surf tile is in front of the player or not instead of duplicating this code.
 CollisionCheckOnWater::
 	ld a, [wd730]
 	bit 7, a
@@ -1866,18 +1874,14 @@ CollisionCheckOnWater::
 	ld d, a
 	ld a, [wSpritePlayerStateData1CollisionData]
 	and d ; check if a sprite is in the direction the player is trying to go
-	jr nz, .checkIfNextTileIsPassable ; bug?
+	jr nz, .collision
 	ld hl, TilePairCollisionsWater
 	call CheckForJumpingAndTilePairCollisions
 	jr c, .collision
 	predef GetTileAndCoordsInFrontOfPlayer ; get tile in front of player (puts it in c and [wTileInFrontOfPlayer])
-	ld a, [wTileInFrontOfPlayer] ; tile in front of player
-	cp $14 ; water tile
-	jr z, .noCollision ; keep surfing if it's a water tile
-	cp $32 ; either the left tile of the S.S. Anne boarding platform or the tile on eastern coastlines (depending on the current tileset)
-	jr z, .checkIfVermilionDockTileset
-	cp $48 ; tile on right on coast lines in Safari Zone
-	jr z, .noCollision ; keep surfing
+	ld d, c ; put the tile in front of the player into d so the callfar after this doesn't affect the register
+	callfar WaterTileSetIsNextTileShoreOrWater
+	jr nc, .noCollision
 ; check if the [land] tile in front of the player is passable
 .checkIfNextTileIsPassable
 	ld hl, wTilesetCollisionPtr ; pointer to list of passable tiles
@@ -1888,7 +1892,7 @@ CollisionCheckOnWater::
 	ld a, [hli]
 	cp $ff
 	jr z, .collision
-	cp c
+	cp d ; is the tile in front of the player a passable tile
 	jr z, .stopSurfing ; stop surfing if the tile is passable
 	jr .loop
 .collision
@@ -1896,13 +1900,12 @@ CollisionCheckOnWater::
 	cp SFX_COLLISION ; check if collision sound is already playing
 	jr z, .setCarry
 	ld a, SFX_COLLISION
-	call PlaySound ; play collision sound (if it's not already playing)
+	rst _PlaySound ; play collision sound (if it's not already playing)
 .setCarry
 	scf
-	jr .done
+	ret
 .noCollision
 	and a
-.done
 	ret
 .stopSurfing
 	xor a
@@ -1910,11 +1913,6 @@ CollisionCheckOnWater::
 	call LoadPlayerSpriteGraphics
 	call PlayDefaultMusic
 	jr .noCollision
-.checkIfVermilionDockTileset
-	ld a, [wCurMapTileset] ; tileset
-	cp SHIP_PORT ; Vermilion Dock tileset
-	jr nz, .noCollision ; keep surfing if it's not the boarding platform tile
-	jr .stopSurfing ; if it is the boarding platform tile, stop surfing
 
 ; function to run the current map's script
 RunMapScript::
@@ -1941,7 +1939,20 @@ RunMapScript::
 	push de
 	jp hl ; jump to script
 .return
-	ret
+;;;;;;;;;; PureRGBnote: ADDED: code that will fade back in after battle in specific maps with a bit in their header
+;;;;;;;;;; used to keep tileblock replacements unseen
+	ld hl, wCurrentMapScriptFlags
+	bit 3, [hl]
+	res 3, [hl]
+	ret z
+	ld a, [wMapConnections]
+	bit 4, a
+	ret z
+	ld a, [wIsInBattle]
+	cp $ff
+	ret z
+	jp MapFadeAfterBattle
+;;;;;;;;;;
 
 LoadWalkingPlayerSpriteGraphics::
 	ld de, RedSprite
@@ -2136,15 +2147,13 @@ LoadMapHeader::
 	ld b, a
 	ld c, $00
 .loadSpriteLoop
-	ld a, [wSpriteOptions2]
-	bit BIT_MENU_ICON_SPRITES, a
 	ld a, [hl]
-	jr nz, .noMap
 	push bc
 	push de
 	ld d, a ; original sprite ID
+	ld e, b ; current iteration of sprite loop
 	push hl
-	callfar RemapSpritePictureIDs ; PureRGBnote: ADDED: code that will remap overworld NPC icons according to options selection (enhanced or original)
+	callfar CheckRemapSprite ; PureRGBnote: ADDED: code that will remap overworld NPC icons according to options selection (enhanced or original)
 	ld a, d ; remapped sprite ID
 	pop hl
 	pop de
@@ -2365,25 +2374,22 @@ IgnoreInputForHalfSecond:
 	ld [hl], a ; set ignore input bit
 	ret
 
-ResetUsingStrengthOutOfBattleBit:
-	ld hl, wd728
-	bit 0, [hl] ; don't need to reset it if it's zero
+ResetUsingStrengthSurfOutOfBattleBits:
+	ld a, [wd728]
+	and %00000101
 	ret z
-	callfar CheckResetStrengthFlag ; PureRGBnote: ADDED: sometimes we don't want to reset the strength bit when loading a map
-	and a ; reset z flag
-	ret
-
+	jpfar CheckResetSurfStrengthFlags ; PureRGBnote: ADDED: sometimes we don't want to reset the strength/surf bits when loading a map
 
 ForceBikeOrSurf::
 	ld b, BANK(RedSprite)
 	ld hl, LoadPlayerSpriteGraphics ; in bank 0
-	call Bankswitch
+	rst _Bankswitch
 	jp PlayDefaultMusic ; update map/player state?
 
 CheckForUserInterruption::
 ; Return carry if Up+Select+B, Start or A are pressed in c frames.
 ; Used only in the intro and title screen.
-	call DelayFrame
+	rst _DelayFrame
 
 	push bc
 	call JoypadLowSensitivity
@@ -2429,7 +2435,7 @@ LoadDestinationWarpPosition::
 	add hl, bc
 	ld bc, 4
 	ld de, wCurrentTileBlockMapViewPointer
-	call CopyData
+	rst _CopyData
 	pop af
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a

@@ -39,7 +39,7 @@ UncompressMonSprite::
 	jr z,.RecallBank
 	ld a,[wMonHPicBank]
 	jr .GotBank
-;;;;;;;;;; PureRGNnote: ADDED: missingno has a randomized front sprite
+;;;;;;;;;; PureRGBnote: ADDED: missingno has a randomized front sprite
 .missingNo
 	call Random ; missingno sometimes displays other front sprites
 	and %111

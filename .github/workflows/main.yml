@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@master
         with:
           path: rgbds
-          ref: v0.6.0
+          ref: v0.6.1
           repository: gbdev/rgbds
 
       - name: Install rgbds
@@ -69,9 +69,8 @@ jobs:
 
       - name: Update symbols
         if: ${{ github.event_name == 'push' && github.repository_owner == 'pret' }}
-        uses: EndBug/add-and-commit@v7
+        uses: EndBug/add-and-commit@v9
         with:
-          branch: symbols
           cwd: "./symbols"
           add: "*.sym"
           message: ${{ github.event.commits[0].message }}

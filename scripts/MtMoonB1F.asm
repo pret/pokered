@@ -1,10 +1,10 @@
 MtMoonB1F_Script:
-	call EnableAutoTextBoxDrawing
-	ret
+	jp EnableAutoTextBoxDrawing
 
 MtMoonB1F_TextPointers:
-	dw MtMoonText1
+	def_text_pointers
+	dw_const MtMoonB1FUnusedText, TEXT_MTMOONB1F_UNUSED
 
-MtMoonText1:
-	text_far _MtMoonText1
+MtMoonB1FUnusedText:
+	text_far _MtMoonB1FUnusedText
 	text_end

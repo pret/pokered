@@ -41,10 +41,15 @@ Music_Cities1AlternateTempo::
 	ld a, $ff ; stop playing music after the fade-out is finished
 	ld [wAudioFadeOutControl], a
 	ld c, 100
-	call DelayFrames ; wait for the fade-out to finish
+	rst _DelayFrames ; wait for the fade-out to finish
 	ld c, BANK(Music_Cities1)
 	ld a, MUSIC_CITIES1
 	call PlayMusic
 	ld hl, wChannelCommandPointers
 	ld de, Music_Cities1_Ch1_AlternateTempo
+	jp Audio1_OverwriteChannelPointer
+
+PlayArmoredMewtwoCry1::
+	ld de, SFX_Armored_Mewtwo_Cry1_Ch8
+	ld hl, wChannelCommandPointers + CHAN8 * 2
 	jp Audio1_OverwriteChannelPointer

@@ -1,4 +1,4 @@
-_VermilionMartText2::
+_VermilionMartCooltrainerMText::
 	text "There are evil"
 	line "people who will"
 	cont "use #MON for"
@@ -15,7 +15,7 @@ _VermilionMartText2::
 	cont "useful."
 	done
 
-_VermilionMartText3::
+_VermilionMartCooltrainerFText::
 	text "I think #MON"
 	line "can be good or"
 	cont "evil. It depends"

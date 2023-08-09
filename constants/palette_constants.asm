@@ -29,6 +29,7 @@ DEF PALETTE_SIZE EQU NUM_PAL_COLORS * PAL_COLOR_SIZE
 	const SET_PAL_TRAINER_CARD         ; $0E
 	const SET_PAL_BEFORE_AFTER         ; $10
 	const SET_PAL_MIDDLE_SCREEN_MON_BOX; $11
+	const SET_PAL_MOVEDEX              ; $12
 
 DEF SET_PAL_PARTY_MENU_HP_BARS EQU $fc
 DEF SET_PAL_DEFAULT EQU $ff
@@ -79,4 +80,5 @@ DEF SET_PAL_DEFAULT EQU $ff
 	const PAL_BLACK2        ; $28	;gbc only
 	const PAL_ULTRABALL     ; $29	;gbc only
 	const PAL_SAFARIBALL    ; $2A   ;gbc only
+	const PAL_SECRETLAB     ; $2B
 DEF NUM_SGB_PALS EQU const_value

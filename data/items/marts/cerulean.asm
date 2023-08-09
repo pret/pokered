@@ -1,4 +1,4 @@
-CeruleanCashierText::
+CeruleanMartClerkText::
 	script_mart \
 	POKE_BALL, \
 	POTION, \

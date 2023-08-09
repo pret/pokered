@@ -4,34 +4,35 @@ PewterPokecenter_Script:
 	jp EnableAutoTextBoxDrawing
 
 PewterPokecenter_TextPointers:
-	dw PewterHealNurseText
-	dw PewterPokecenterText2
-	dw PewterJigglypuffText
-	dw PewterTradeNurseText
+	def_text_pointers
+	dw_const PewterPokecenterNurseText,            TEXT_PEWTERPOKECENTER_NURSE
+	dw_const PewterPokecenterGentlemanText,        TEXT_PEWTERPOKECENTER_GENTLEMAN
+	dw_const PewterPokecenterJigglypuffText,       TEXT_PEWTERPOKECENTER_JIGGLYPUFF
+	dw_const PewterPokecenterLinkReceptionistText, TEXT_PEWTERPOKECENTER_LINK_RECEPTIONIST
 
-PewterHealNurseText:
+PewterPokecenterNurseText:
 	script_pokecenter_nurse
 
-PewterPokecenterText2:
-	text_far _PewterPokecenterText2
+PewterPokecenterGentlemanText:
+	text_far _PewterPokecenterGentlemanText
 	text_end
 
-PewterJigglypuffText:
+PewterPokecenterJigglypuffText:
 	text_asm
 	ld a, TRUE
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
-	ld hl, .JigglypuffText
-	call PrintText
+	ld hl, .Text
+	rst _PrintText
 
 	ld a, SFX_STOP_ALL_MUSIC
-	call PlaySound
+	rst _PlaySound
 	ld c, 32
-	call DelayFrames
+	rst _DelayFrames
 
-	ld hl, JigglypuffFacingDirections
+	ld hl, .FacingDirections
 	ld de, wJigglypuffFacingDirections
-	ld bc, JigglypuffFacingDirectionsEnd - JigglypuffFacingDirections
-	call CopyData
+	ld bc, .FacingDirectionsEnd - .FacingDirections
+	rst _CopyData
 
 	ld a, [wSprite03StateData1ImageIndex]
 	ld hl, wJigglypuffFacingDirections
@@ -54,13 +55,13 @@ PewterJigglypuffText:
 	push hl
 	ld hl, wJigglypuffFacingDirections
 	ld de, wJigglypuffFacingDirections - 1
-	ld bc, JigglypuffFacingDirectionsEnd - JigglypuffFacingDirections
-	call CopyData
+	ld bc, .FacingDirectionsEnd - .FacingDirections
+	rst _CopyData
 	ld a, [wJigglypuffFacingDirections - 1]
 	ld [wJigglypuffFacingDirections + 3], a
 	pop hl
 	ld c, 24
-	call DelayFrames
+	rst _DelayFrames
 	ld a, [wChannelSoundIDs]
 	ld b, a
 	ld a, [wChannelSoundIDs + CHAN2]
@@ -68,20 +69,20 @@ PewterJigglypuffText:
 	jr nz, .spinMovementLoop
 
 	ld c, 48
-	call DelayFrames
+	rst _DelayFrames
 	call PlayDefaultMusic
-	jp TextScriptEnd
+	rst TextScriptEnd
 
-.JigglypuffText:
-	text_far _PewterJigglypuffText
+.Text:
+	text_far _PewterPokecenterJigglypuffText
 	text_end
 
-JigglypuffFacingDirections:
+.FacingDirections:
 	db $30 | SPRITE_FACING_DOWN
 	db $30 | SPRITE_FACING_LEFT
 	db $30 | SPRITE_FACING_UP
 	db $30 | SPRITE_FACING_RIGHT
-JigglypuffFacingDirectionsEnd:
+.FacingDirectionsEnd:
 
-PewterTradeNurseText:
+PewterPokecenterLinkReceptionistText:
 	script_cable_club_receptionist
