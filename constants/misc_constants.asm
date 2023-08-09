@@ -14,7 +14,6 @@ DEF TEXT_DELAY_FAST    EQU %00 ; 0
 DEF TEXT_DELAY_MEDIUM  EQU %01 ; 1
 DEF TEXT_DELAY_SLOW    EQU %11 ; 3
 DEF TEXT_DELAY_BITS    EQU %11 ; which bits in wOptions are assigned to text speed value (first two currently)
-;;;;;;;;;;
 
 	const_def 2 ; first two bits are the text delay options above
 	; unused bit 2
