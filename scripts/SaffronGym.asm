@@ -286,7 +286,23 @@ SaffronGymYoungster1EndBattleText:
 	text_end
 
 SaffronGymYoungster1AfterBattleText:
+	text_asm
+	ld a, [wOptions3]
+	bit BIT_GHOST_PSYCHIC, a
+	ld hl, .onlyBugText
+	jr nz, .print
+	ld hl, .bugAndGhostText
+.print
+	rst _PrintText
+	rst TextScriptEnd
+.onlyBugText
 	text_far _SaffronGymYoungster1AfterBattleText
+	text_far _ExclamationPointText
+	text_end
+.bugAndGhostText
+	text_far _SaffronGymYoungster1AfterBattleText
+	text_promptbutton
+	text_far _SaffronGymYoungster1AfterBattleText3
 	text_end
 
 SaffronGymChanneler2BattleText:
