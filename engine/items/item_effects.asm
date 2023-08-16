@@ -824,8 +824,9 @@ ItemUseBicycle:
 ItemUseSurfboard:
 	ld a, [wWalkBikeSurfState]
 	ld [wWalkBikeSurfStateCopy], a
-	cp 2 ; is the player already surfing?
-	jr z, .tryToStopSurfing
+	cp SURFING ; is the player already surfing?
+	jr z, .alreadySurfing ; don't do anything if so ; PureRGBnote: CHANGED: can't use surf to "get back on land", this feature is bugged anyway
+	;jr z, .tryToStopSurfing
 .tryToSurf
 	call IsNextTileShoreOrWater
 	jp c, SurfingAttemptFailed
@@ -845,43 +846,43 @@ ItemUseSurfboard:
 ;;;;;;;;;;
 	ld hl, SurfingGotOnText
 	jp PrintText
-.tryToStopSurfing
-	xor a
-	ldh [hSpriteIndexOrTextID], a
-	ld d, 16 ; talking range in pixels (normal range)
-	call IsSpriteInFrontOfPlayer2
-	res 7, [hl]
-	ldh a, [hSpriteIndexOrTextID]
-	and a ; is there a sprite in the way?
-	jr nz, .cannotStopSurfing
-	ld hl, TilePairCollisionsWater
-	call CheckForTilePairCollisions
-	jr c, .cannotStopSurfing
-	ld hl, wTilesetCollisionPtr ; pointer to list of passable tiles
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a ; hl now points to passable tiles
-	ld a, [wTileInFrontOfPlayer] ; tile in front of the player
-	ld b, a
-.passableTileLoop
-	ld a, [hli]
-	cp b
-	jr z, .stopSurfing
-	cp $ff
-	jr nz, .passableTileLoop
-.cannotStopSurfing
-	ld hl, SurfingNoPlaceToGetOffText
+;.tryToStopSurfing ; PureRGBnote: CHANGED: can't use surf to "get back on land", this feature is bugged anyway - you can get stuck on water by trying to get off while facing right when an NPC is to the right of you
+;	xor a
+;	ldh [hSpriteIndexOrTextID], a
+;	ld d, 16 ; talking range in pixels (normal range)
+;	call IsSpriteInFrontOfPlayer2
+;	res 7, [hl]
+;	ldh a, [hSpriteIndexOrTextID]
+;	and a ; is there a sprite in the way?
+;	jr nz, .cannotStopSurfing
+;	ld hl, TilePairCollisionsWater
+;	call CheckForTilePairCollisions
+;	jr c, .cannotStopSurfing
+;	ld hl, wTilesetCollisionPtr ; pointer to list of passable tiles
+;	ld a, [hli]
+;	ld h, [hl]
+;	ld l, a ; hl now points to passable tiles
+;	ld a, [wTileInFrontOfPlayer] ; tile in front of the player
+;	ld b, a
+;.passableTileLoop
+;	ld a, [hli]
+;	cp b
+;	jr z, .stopSurfing
+;	cp $ff
+;	jr nz, .passableTileLoop
+.alreadySurfing
+	ld hl, AlreadySurfingText
 	jp PrintText
-.stopSurfing
-	call .makePlayerMoveForward
-	ld hl, wd730
-	set 7, [hl]
-	xor a
-	ld [wWalkBikeSurfState], a ; change player state to walking
-	dec a
-	ld [wJoyIgnore], a
-	call PlayDefaultMusic ; play walking music
-	jp LoadWalkingPlayerSpriteGraphics
+;.stopSurfing ; PureRGBnote: CHANGED: can't use surf to "get back on land", this feature is bugged anyway
+;	call .makePlayerMoveForward
+;	ld hl, wd730
+;	set 7, [hl]
+;	xor a
+;	ld [wWalkBikeSurfState], a ; change player state to walking
+;	dec a
+;	ld [wJoyIgnore], a
+;	call PlayDefaultMusic ; play walking music
+;	jp LoadWalkingPlayerSpriteGraphics
 ; uses a simulated button press to make the player move forward
 .makePlayerMoveForward
 	ld a, [wPlayerDirection] ; direction the player is going
@@ -906,8 +907,8 @@ SurfingGotOnText:
 	text_far _SurfingGotOnText
 	text_end
 
-SurfingNoPlaceToGetOffText:
-	text_far _SurfingNoPlaceToGetOffText
+AlreadySurfingText:
+	text_far _AlreadySurfingText
 	text_end
 
 ItemUsePokedex:

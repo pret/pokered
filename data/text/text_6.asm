@@ -80,9 +80,9 @@ _SurfingGotOnText::
 	text "!"
 	prompt
 
-_SurfingNoPlaceToGetOffText::
-	text "There's no place"
-	line "to get off!"
+_AlreadySurfingText::
+	text "You're already"
+	line "surfing."
 	prompt
 
 _ApexChipPutOnPokeballText::
