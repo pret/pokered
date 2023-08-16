@@ -56,30 +56,13 @@ EnterMapAnim::
 	ld hl, wFlyAnimUsingCoordList
 	xor a ; is using coord list
 	ld [hli], a ; wFlyAnimUsingCoordList
-	ld a, 12
+	ld a, 36 ; length of animation in FlyAnimationEnterScreenCoords
 	ld [hli], a ; wFlyAnimCounter
-	ld [hl], $8 ; wFlyAnimBirdSpriteImageIndex (facing right)
+	ld [hl], SPRITE_FACING_LEFT ; wFlyAnimBirdSpriteImageIndex (facing left)
 	ld de, FlyAnimationEnterScreenCoords
-	call DoFlyAnimation
+	callfar DoFlyAnimation
 	call LoadPlayerSpriteGraphics
 	jr .restoreDefaultMusic
-
-FlyAnimationEnterScreenCoords:
-; y, x pairs
-; This is the sequence of screen coordinates used by the overworld
-; Fly animation when the player is entering a map.
-	db $05, $98
-	db $0F, $90
-	db $18, $88
-	db $20, $80
-	db $27, $78
-	db $2D, $70
-	db $32, $68
-	db $36, $60
-	db $39, $58
-	db $3B, $50
-	db $3C, $48
-	db $3C, $40
 
 PlayerSpinWhileMovingDown:
 	ld hl, wPlayerSpinWhileMovingUpOrDownAnimDeltaY
@@ -145,64 +128,30 @@ _LeaveMapAnim::
 	ld hl, wFlyAnimUsingCoordList
 	ld a, $ff ; is not using coord list (flap in place)
 	ld [hli], a ; wFlyAnimUsingCoordList
-	ld a, 8
+	ld a, 24 ; length of the "flapping in place" part
 	ld [hli], a ; wFlyAnimCounter
-	ld [hl], $c ; wFlyAnimBirdSpriteImageIndex
-	call DoFlyAnimation
+	ld [hl], SPRITE_FACING_RIGHT ; wFlyAnimBirdSpriteImageIndex
+	callfar DoFlyAnimation
 	ld a, SFX_FLY
 	rst _PlaySound
 	ld hl, wFlyAnimUsingCoordList
 	xor a ; is using coord list
 	ld [hli], a ; wFlyAnimUsingCoordList
-	ld a, $c
+	ld a, 36 ; length of first part in coordinate pairs
 	ld [hli], a ; wFlyAnimCounter
-	ld [hl], $c ; wFlyAnimBirdSpriteImageIndex (facing right)
+	ld [hl], SPRITE_FACING_RIGHT ; wFlyAnimBirdSpriteImageIndex (facing right)
 	ld de, FlyAnimationScreenCoords1
-	call DoFlyAnimation
+	callfar DoFlyAnimation
 	ld c, 40
 	rst _DelayFrames
 	ld hl, wFlyAnimCounter
-	ld a, 11
+	ld a, 33 ; length of second part in coordinate pairs
 	ld [hli], a ; wFlyAnimCounter
-	ld [hl], $8 ; wFlyAnimBirdSpriteImageIndex (facing left)
+	ld [hl], SPRITE_FACING_LEFT ; wFlyAnimBirdSpriteImageIndex (facing left)
 	ld de, FlyAnimationScreenCoords2
-	call DoFlyAnimation
+	callfar DoFlyAnimation
 	call GBFadeOutToWhite
 	jp RestoreFacingDirectionAndYScreenPos
-
-FlyAnimationScreenCoords1:
-; y, x pairs
-; This is the sequence of screen coordinates used by the first part
-; of the Fly overworld animation.
-	db $3C, $48
-	db $3C, $50
-	db $3B, $58
-	db $3A, $60
-	db $39, $68
-	db $37, $70
-	db $37, $78
-	db $33, $80
-	db $30, $88
-	db $2D, $90
-	db $2A, $98
-	db $27, $A0
-
-FlyAnimationScreenCoords2:
-; y, x pairs
-; This is the sequence of screen coordinates used by the second part
-; of the Fly overworld animation.
-	db $1A, $90
-	db $19, $80
-	db $17, $70
-	db $15, $60
-	db $12, $50
-	db $0F, $40
-	db $0C, $30
-	db $09, $20
-	db $05, $10
-	db $00, $00
-
-	db $F0, $00
 
 LeaveMapThroughHoleAnim:
 	ld a, $ff
@@ -236,30 +185,6 @@ LeaveMapThroughHoleAnim:
 	ld a, $1
 	ld [wUpdateSpritesEnabled], a ; enable UpdateSprites
 	jp RestoreFacingDirectionAndYScreenPos
-
-DoFlyAnimation:
-	ld a, [wFlyAnimBirdSpriteImageIndex]
-	xor $1 ; make the bird flap its wings
-	ld [wFlyAnimBirdSpriteImageIndex], a
-	ld [wSpritePlayerStateData1ImageIndex], a
-	call Delay3
-	ld a, [wFlyAnimUsingCoordList]
-	cp $ff
-	jr z, .skipCopyingCoords ; if the bird is flapping its wings in place
-	ld hl, wSpritePlayerStateData1YPixels
-	ld a, [de]
-	inc de
-	ld [hli], a ; y
-	inc hl
-	ld a, [de]
-	inc de
-	ld [hl], a ; x
-.skipCopyingCoords
-	ld a, [wFlyAnimCounter]
-	dec a
-	ld [wFlyAnimCounter], a
-	jr nz, DoFlyAnimation
-	ret
 
 LoadBirdSpriteGraphics:
 	ld de, BirdSprite
