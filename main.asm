@@ -377,7 +377,7 @@ SECTION "movedCode", ROMX
 INCLUDE "engine/overworld/healing_machine.asm"
 ; moved from home bank
 INCLUDE "audio/fade_audio.asm"
-;INCLUDE "engine/gfx/animated_tiles_code.asm" ; TODO: comment out
+INCLUDE "engine/gfx/animated_tiles_code.asm"
 
 SECTION "Party Sprites", ROMX, BANK[$34]
 ; PureRGBnote: ADDED: new menu sprite icons raw data
