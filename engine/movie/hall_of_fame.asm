@@ -104,20 +104,11 @@ StoreHoFAltPaletteFlag:
 	ld a, [hl]
 	and 1
 	ld [wIsAltPalettePkmn], a
-	ld b, a ; whether it's an alt palette
+	ld b, a ; whether it's an alt palette (used as FLAG_SET or FLAG_RESET)
 	ld a, [wHoFPartyMonIndex]
 	ld c, a
-	and a
-	ld a, b
-	jr z, .storeBit
-.loopShiftLeft
-	sla a
-	dec c
-	jr nz, .loopShiftLeft
-.storeBit
 	ld hl, wHallOfFamePalettes
-	or a, [hl]
-	ld [hl], a
+	predef FlagActionPredef
 	pop af
 	ret
 

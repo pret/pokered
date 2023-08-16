@@ -118,20 +118,20 @@ LeaguePCShowMon:
 ; PureRGBnote: ADDED: code for enabling alternate palette pokemon to show up correctly after being inducted into the hall of fame.
 CheckMonAltPaletteLeaguePC:
 	;input: b = index in team
-	ld a, b
 	push de
-	ld e, b
+	push bc
+	ld c, b
+	ld b, FLAG_TEST
+	ld hl, wHallOfFamePalettes
+	predef FlagActionPredef
+	ld a, c
 	and a
-	ld a, [wHallOfFamePalettes]
-	jr z, .getBit
-.loopShiftRight
-	srl a
-	dec b
-	jr nz, .loopShiftRight
-.getBit
-	and 1
+	ld a, 1
+	jr nz, .set
+	dec a
+.set
 	ld [wIsAltPalettePkmn], a
-	ld b, e
+	pop bc
 	pop de
 	ret
 
