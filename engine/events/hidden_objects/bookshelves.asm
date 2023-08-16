@@ -3,6 +3,9 @@ PrintBookshelfText::
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
 	jr nz, .noMatch
+	ld a, [wCurMap]
+	cp TYPE_GUYS_HOUSE
+	jr z, .noMatch
 ; facing up
 	ld a, [wCurMapTileset]
 	ld b, a

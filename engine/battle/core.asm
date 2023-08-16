@@ -1740,8 +1740,7 @@ LoadBattleMonFromParty:
 	dec b
 	jr nz, .statModLoop
 	ld de, wBattleMonType
-	callfar TryRemapTyping
-	ret
+	jpfar TryRemapTyping
 
 ; copies from enemy party data to current enemy mon data when sending out a new enemy mon
 LoadEnemyMonFromParty:
@@ -1796,9 +1795,8 @@ LoadEnemyMonFromParty:
 	ld a, [wWhichPokemon]
 	ld [wEnemyMonPartyPos], a
 	ld de, wEnemyMonType
-	callfar TryRemapTyping
-	ret
-
+	jpfar TryRemapTyping
+	
 SendOutMon:
 	callfar PrintSendOutMonMessage
 	ld hl, wEnemyMonHP
@@ -7801,4 +7799,19 @@ CheckHazeMistImmunity:
 	ret
 .immunity
 	scf
+	ret
+
+; PureRGBnote: MOVED: moved from list_menu.asm to free up space in home bank
+OldManListMenuInit::
+	ld a, "▶"
+	ldcoord_a 5, 4 ; place menu cursor in front of first menu entry
+	ld c, 80
+	rst _DelayFrames
+	xor a
+	ld [wCurrentMenuItem], a
+	hlcoord 5, 4
+	ld a, l
+	ld [wMenuCursorLocation], a
+	ld a, h
+	ld [wMenuCursorLocation + 1], a
 	ret

@@ -341,8 +341,10 @@ ENDC
 
 ; enter map after using a special warp or loading the game from the main menu
 SpecialEnterMap::
-	ld a, 1
-	ld [wInGame], a ; PureRGBnote: ADDED: new flag for determining if not yet playing the game
+;;;;;;;;;; PureRGBnote: ADDED: new flag for determining if not yet playing the game
+	ld hl, wNewInGameFlags 
+	set 0, [hl] 
+;;;;;;;;;;
 	xor a
 	ldh [hJoyPressed], a
 	ldh [hJoyHeld], a

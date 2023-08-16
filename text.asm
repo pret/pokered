@@ -283,6 +283,9 @@ INCLUDE "text/PalletPhoneResultEvents.asm"
 INCLUDE "text/BillsGarden.asm"
 INCLUDE "text/SecretLab.asm"
 
+SECTION "Text 12", ROMX
+INCLUDE "text/TypeGuysHouse.asm"
+
 
 SECTION "Pokédex Text", ROMX
 

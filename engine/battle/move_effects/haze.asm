@@ -70,12 +70,6 @@ HazeEffect_:
 	jp PrintText
 ;;;;;;;;;;
 
-PrintButItFailedText:
-	ld hl, PrintButItFailedText_
-CallBankF:
-	ld b, BANK(PrintButItFailedText_)
-	jp Bankswitch
-
 CureVolatileStatuses:
 	ld a, [hl]
 	; clear USING_X_ACCURACY, STAT_DOWN_IMMUNITY, GETTING_PUMPED, and SEEDED statuses

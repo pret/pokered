@@ -1,51 +1,82 @@
 OriginalTypings:
 db BUTTERFREE, BUG, FLYING
-db NINETALES, FIRE, FIRE
-db GOLDUCK, WATER, WATER
-db SEADRA, WATER, WATER
-db MAGMAR, FIRE, FIRE
-db KABUTO, ROCK, WATER
-db KABUTOPS, ROCK, WATER
-db DODUO, NORMAL, FLYING
-db DODRIO, NORMAL, FLYING
-db VOLTORB, ELECTRIC, ELECTRIC
-db ELECTRODE, ELECTRIC, ELECTRIC
 db FEAROW, NORMAL, FLYING
-db KINGLER, WATER, WATER
-db PINSIR, BUG, BUG
-db VICTREEBEL, GRASS, POISON
 db SANDSHREW, GROUND, GROUND
 db SANDSLASH, GROUND, GROUND
+db NINETALES, FIRE, FIRE
+db GOLDUCK, WATER, WATER
+db VICTREEBEL, GRASS, POISON
 db PONYTA, FIRE, FIRE
 db RAPIDASH, FIRE, FIRE
+db DODUO, NORMAL, FLYING
+db DODRIO, NORMAL, FLYING
+db KINGLER, WATER, WATER
+db VOLTORB, ELECTRIC, ELECTRIC
+db ELECTRODE, ELECTRIC, ELECTRIC
+db MAROWAK, GROUND, GROUND
+db SEADRA, WATER, WATER
 db GOLDEEN, WATER, WATER
 db SEAKING, WATER, WATER
 db MR_MIME, PSYCHIC_TYPE, PSYCHIC_TYPE
 db ELECTABUZZ, ELECTRIC, ELECTRIC
-db MAROWAK, GROUND, GROUND
+db MAGMAR, FIRE, FIRE
+db PINSIR, BUG, BUG
+db KABUTO, ROCK, WATER
+db KABUTOPS, ROCK, WATER
 db -1
 
 ; input: de = address of original typings in wram to be remapped
 ; wd0b5: which pokemon species to check
 ; output: rewrites the typings in wram if necessary
 TryRemapTyping:
-	ld a, [wOptions2]
-	bit BIT_PKMN_TYPINGS, a
-	ret z
-	push de
-	ld hl, OriginalTypings
-	ld de, 3
-	ld a, [wd0b5]
-	call IsInArray
-	jr nc, .noRemap
-	pop de
-	inc hl
+	call IsMonTypeRemapped
+	ret nc
 	ld a, [hli]
 	ld [de], a ; remap type 1 in wram
 	inc de
 	ld a, [hl]
 	ld [de], a ; remap type 2 in wram
 	ret
+
+; input: d = type 1 e = type 2
+; wd0b5: which pokemon species to check
+; output: d = type 1 (may be remapped) e = type 2 (may be remapped)
+TryRemapTypingNoWramChange::
+	call IsMonTypeRemapped
+	ret nc
+	ld a, [hli]
+	ld d, a ; return remapped type 1
+	ld a, [hl]
+	ld e, a ; return remapped type 2
+	ret
+
+IsMonTypeRemapped:
+	push de
+	ld hl, wPkmnTypeRemapFlags
+	ld b, 3
+	call CountSetBits
+	and a ; is the number of set bits non-zero
+	jr z, .noRemap
+	ld hl, OriginalTypings
+	ld de, 3
+	ld a, [wd0b5]
+	call IsInArray
+	jr nc, .noRemap
+	push hl
+	ld c, b ; b = which index in the flag array to check
+	ld hl, wPkmnTypeRemapFlags
+	ld b, FLAG_TEST
+	predef FlagActionPredef
+	pop hl
+	ld a, c
+	and a
+	jr z, .noRemap
+	pop de
+	inc hl
+	scf
+	ret
 .noRemap
 	pop de
+	and a ; clear carry flag
 	ret
+	

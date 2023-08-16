@@ -189,10 +189,14 @@ _SchoolB1FLeftTeacherEnd::
 
 _SchoolB1FLeftBookcaseA::
 	text "HAUNTED SITES"
-	line "OF THE WORLD"
-	para "Flipped to a"
-	line "random page..."
-	para "UNEXPLAINED"
+	line "OF THE WORLD@"
+	text_end
+_FlippedToARandomPage::
+	text "<PARA>Flipped to a"
+	line "random page...@"
+	text_end
+_SchoolB1FLeftBookcaseA2::
+	text "<PARA>UNEXPLAINED"
 	line "PHENOMENA"
 	para "Many trainers"
 	line "have reported"
@@ -205,10 +209,10 @@ _SchoolB1FLeftBookcaseA::
 
 _SchoolB1FLeftBookcaseB::
 	text "TWO YEARS WITH"
-	line "THE CLEFAIRY"
-	para "Flipped to a"
-	line "random page..."
-	para "On day 234,"
+	line "THE CLEFAIRY@"
+	text_end
+_SchoolB1FLeftBookcaseB2::
+	text "<PARA>On day 234,"
 	line "I witnessed many"
 	cont "CLEFAIRY dancing"
 	cont "around a giant"
@@ -217,10 +221,10 @@ _SchoolB1FLeftBookcaseB::
 
 _SchoolB1FRightBookcaseA::
 	text "THE BIG BOOK"
-	line "OF RATTATA"
-	para "Flipped to a"
-	line "random page..."
-	para "RATTATA often"
+	line "OF RATTATA@"
+	text_end
+_SchoolB1FRightBookcaseA2::
+	text "<PARA>RATTATA often"
 	line "sneak into"
 	cont "homes to pilfer"
 	cont "food, warm"
@@ -230,10 +234,10 @@ _SchoolB1FRightBookcaseA::
 
 _SchoolB1FRightBookcaseB::
 	text "ALL-NATURAL"
-	line "LAWN TRIMMING"
-	para "Flipped to a"
-	line "random page..."
-	para "There's no need"
+	line "LAWN TRIMMING@"
+	text_end
+_SchoolB1FRightBookcaseB2::
+	text "<PARA>There's no need"
 	line "for tools!"
 	para "Simply teach a"
 	line "#MON the move"

@@ -46,16 +46,24 @@ SchoolHouseB1FBookcaseTextPointers:
 
 SchoolB1FLeftBookcaseAText:
 	text_far _SchoolB1FLeftBookcaseA
+	text_far _FlippedToARandomPage
+	text_far _SchoolB1FLeftBookcaseA2
 	text_end
 
 SchoolB1FLeftBookcaseBText:
 	text_far _SchoolB1FLeftBookcaseB
+	text_far _FlippedToARandomPage
+	text_far _SchoolB1FLeftBookcaseB2
 	text_end
 
 SchoolB1FRightBookcaseAText:
 	text_far _SchoolB1FRightBookcaseA
+	text_far _FlippedToARandomPage
+	text_far _SchoolB1FRightBookcaseA2
 	text_end
 
 SchoolB1FRightBookcaseBText:
 	text_far _SchoolB1FRightBookcaseB
+	text_far _FlippedToARandomPage
+	text_far _SchoolB1FRightBookcaseB2
 	text_end

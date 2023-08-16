@@ -666,6 +666,11 @@ INCLUDE "scripts/SecretLab.asm"
 INCLUDE "data/maps/objects/SecretLab.asm"
 SecretLab_Blocks: INCBIN "maps/SecretLab.blk"
 
+INCLUDE "data/maps/headers/TypeGuysHouse.asm"
+INCLUDE "scripts/TypeGuysHouse.asm"
+INCLUDE "data/maps/objects/TypeGuysHouse.asm"
+TypeGuysHouse_Blocks: INCBIN "maps/TypeGuysHouse.blk"
+
 
 SECTION "Maps 11", ROMX
 

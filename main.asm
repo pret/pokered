@@ -1,5 +1,5 @@
 SECTION "bank1", ROMX
-; PureRGBnote: MOVED: mew's base stats was moved, and unused_names.asm was removed completely
+; PureRGBnote: MOVED: mew's base stats file was moved, and unused_names.asm was removed completely
 INCLUDE "data/sprites/facings.asm"
 INCLUDE "engine/events/black_out.asm"
 INCLUDE "engine/battle/safari_zone.asm"
@@ -37,6 +37,7 @@ INCLUDE "engine/pokemon/remove_mon.asm"
 INCLUDE "engine/events/display_pokedex.asm"
 INCLUDE "engine/menus/menu_list_tm_name_loader.asm" ; PureRGBnote: ADDED: code for showing TM names in list menus
 INCLUDE "engine/menus/wrap_list_menu.asm" ; PureRGBnote: ADDED: code for wrapping to the bottom and top of lists by pressing dpad left
+INCLUDE "engine/menus/custom_list_menu.asm"
 
 
 SECTION "bank3", ROMX
@@ -376,7 +377,7 @@ SECTION "movedCode", ROMX
 INCLUDE "engine/overworld/healing_machine.asm"
 ; moved from home bank
 INCLUDE "audio/fade_audio.asm"
-
+;INCLUDE "engine/gfx/animated_tiles_code.asm" ; TODO: comment out
 
 SECTION "Party Sprites", ROMX, BANK[$34]
 ; PureRGBnote: ADDED: new menu sprite icons raw data

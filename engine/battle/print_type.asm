@@ -3,24 +3,21 @@
 PrintMonType:
 	call GetPredefRegisters
 	push hl
+	push hl
 	call GetMonHeader
-	pop hl
-	push hl
-	push de
-	ld de, wMonHTypes
-	push hl
-	push bc
-	callfar TryRemapTyping
-	pop bc
-	pop hl
-	pop de
 	ld a, [wMonHType1]
-	call PrintType
-	ld a, [wMonHType1]
-	ld b, a
+	ld d, a
 	ld a, [wMonHType2]
-	cp b
+	ld e, a
+	callfar TryRemapTypingNoWramChange
 	pop hl
+	ld a, d
+	push de
+	call PrintType
+	pop de
+	pop hl
+	ld a, e
+	cp d
 	jr z, EraseType2Text
 	ld bc, SCREEN_WIDTH * 2
 	add hl, bc

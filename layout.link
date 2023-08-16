@@ -197,6 +197,7 @@ ROMX $32
 	"Tilesets 4"
 ROMX $33
 	"movedCode"
+	"Text 12"
 ROMX $34
 	"Party Sprites"
 	"GBC Mode Code"

@@ -9,6 +9,7 @@ ReloadMapData::
 	call LoadCurrentMapView
 	call LoadTilesetTilePatternData
 	call EnableLCD
+	callfar LoadExtraTiles
 	pop af
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a

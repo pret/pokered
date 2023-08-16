@@ -99,6 +99,7 @@ HiddenObjectMaps:
 	db DAYCARE
 	db VIRIDIAN_SCHOOL_HOUSE_B1F
 	db SECRET_LAB
+	db TYPE_GUYS_HOUSE
 	db -1 ; end
 
 HiddenObjectPointers:
@@ -201,6 +202,7 @@ HiddenObjectPointers:
 	dw DaycareHiddenObjects
 	dw ViridianSchoolB1FHiddenObjects
 	dw SecretLabHiddenObjects
+	dw TypeGuysHouseHiddenObjects
 
 MACRO hidden_object
 	db \2 ; y coord
@@ -792,4 +794,10 @@ SecretLabHiddenObjects:
 	hidden_object 4, 8, 3, SecretLabComputers
 	hidden_object 6, 7, SPRITE_FACING_UP, SecretLabMewtwoMachine
 	hidden_object 7, 7, SPRITE_FACING_UP, SecretLabMewtwoMachine
+	db -1
+
+TypeGuysHouseHiddenObjects:
+	hidden_object 12, 0, 0, TypeGuysHouseLightSwitch
+	hidden_object  8, 3, 0, TypeGuysHouseComputer
+	hidden_object  9, 3, 0, TypeGuysHouseComputer
 	db -1

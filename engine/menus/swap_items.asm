@@ -94,7 +94,7 @@ HandleItemListSwapping::
 	ld [wMenuItemToSwap], a ; 0 means no item is currently being swapped
 	pop de
 	pop hl
-	call CheckForTM ; PureRGBnote: ADDED: after completing a swap, we need to re-attempt to display text for TMs if necessary
+	call CheckForHoverText ; PureRGBnote: ADDED: after completing a swap, we need to re-attempt to display text for TMs if necessary
 	jp DisplayListMenuIDLoop
 .swapSameItemType
 	inc de
@@ -147,5 +147,5 @@ HandleItemListSwapping::
 	ld [wMenuItemToSwap], a ; 0 means no item is currently being swapped
 	pop de
 	pop hl
-	call CheckForTM ; PureRGBnote: ADDED: after completing a swap, we need to re-attempt to display text for TMs if necessary
+	call CheckForHoverText ; PureRGBnote: ADDED: after completing a swap, we need to re-attempt to display text for TMs if necessary
 	jp DisplayListMenuIDLoop

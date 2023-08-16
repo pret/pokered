@@ -279,11 +279,6 @@ _CeladonCityHotelText::
 	line "on this vacation!"
 	done
 
-_BookcaseText::
-	text "Crammed full of"
-	line "#MON books!"
-	done
-
 _NewBicycleText::
 	text "A shiny new"
 	line "BICYCLE!"
@@ -829,6 +824,7 @@ _IndigoPlateauStatuesText3::
 	cont "#MON LEAGUE HQ"
 	done
 
+_BookcaseText::
 _PokemonBooksText::
 	text "Crammed full of"
 	line "#MON books!"

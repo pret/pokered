@@ -374,9 +374,10 @@ wTrainerCardBlkPacket:: ds $40
 
 NEXTU
 wHallOfFame:: ds HOF_TEAM
+ds 1
 ; PureRGBnote: ADDED: bit array of whether each pokemon in current hall of fame team data should use an alt color palette
 ; only uses bits 0-5, since the party size is 6.
-wHallOfFamePalettes:: db 
+wHallOfFamePalettes:: db
 
 NEXTU
 
@@ -901,14 +902,18 @@ wRightGBMonSpecies:: db
 ; bit 7: bit never set (but it is read)
 wFlags_0xcd60:: db
 
-;;;;;;;;;; PureRGBnote: CHANGED: previously this empty space of 9 bytes was used by new variables
-wInGame:: db ; whether we're in-game rather than in the main menu before loading a game
+;;;;;;;;;; PureRGBnote: CHANGED: this previously empty space of 9 bytes was used by new variables
 
-wListWithTMText:: db ; whether the current list menu can contain TMs and should print their moves
-wTMTextShown:: db ; whether text for a TM is visible in a menu
+; new set of flags for things during game
+; bit 0 = set when we're in-game rather than in the main menu before loading a game
+; bit 1 = set when we're using a pokemart menu
+wNewInGameFlags:: db
+
+wListMenuCustomType:: db ; for list menus with custom list entry text rendering methods, which entry text renderer should be used
+wListMenuHoverTextType:: db ; whether the current list menu should display a text box on navigating between entries and which type it is
+wListMenuHoverTextShown:: db ; whether text for a TM is visible
 wSum:: ; a temp store for 16 bit values created by addition, used with PrintNumber to display the sum on screen
 wDamageIntention:: dw ; in battle, the amount of damage a move will do before doing it (used for high jump kick / jump kick crash effect)
-ds 1 ; unused lone byte
 wIsAltPalettePkmn:: db ;a flag for features related to alternate pokemon color palettes, set in these scenarios:
 ;1 - set prior to loading the palette of a pokemon that should have an alternate palette, reset upon showing the pokemon sprite
 ;2 - set as a storage value for "which wild pokemon slot has been encountered" when figuring out if that slot is an alternate palette pokemon
@@ -1148,9 +1153,7 @@ ds 1 ; unused lone byte
 wAITargetMonType1:: db ; the type of the pokemon the AI should think it's attacking (stays as the previous pokemon when you switch pokemon)
 wAITargetMonType2:: db ; the type of the pokemon the AI should think it's attacking (stays as the previous pokemon when you switch pokemon)
 wAITargetMonStatus:: db ; the current status of the pokemon the AI should think it's attacking (set when healing a pokemon's status or switching it out)
-ds 2 ; unused 2 bytes
-wListEntryTextFuncPointer:: dw ; TODO: for list menus, a pointer to the function that prints entries in the list for the current list menu
-wListCustomFuncPointer:: dw ; TODO: for list menus, a pointer to the function that will run on moving to the next entry in the list
+ds 6 ; unused 6 bytes
 ;;;;;;;;;;
 ENDU
 
@@ -2025,10 +2028,8 @@ wWildMonPalettes:: ds 3 ; flag array for the current map: which wild pokemon sho
 wColorSwapsUsed:: db ; how many times the player has used the color changer NPC
 wBoosterChipActive:: db ; whether the player gets boosted EXP from the effects of the boosterchip
 
-wPkmnTypeRemapFlags:: ds 3 ; flag array for changing pokemon back to their original types. 0 = new typing, 1 = old typing
-
-; 47 bytes remaining in union
-; unused save file 47 bytes
+; 50 bytes remaining in union
+; unused save file 50 bytes
 
 ENDU
 ;;;;;;;;;;
@@ -2480,7 +2481,8 @@ wTrainerHeaderPtr:: dw
 
 wBillsGardenVisitor:: 
 wBillsGardenPreviousVisitors:: ds 3 ; PureRGBnote: ADDED: used to track the last 3 visitors at bills garden to make randomization less annoying
-	ds 3  ; unused save file 3 bytes (TODO: use for randomized challengers / bill's garden visitors)
+
+wPkmnTypeRemapFlags:: ds 3 ; flag array for changing pokemon back to their original types. 0 = new typing, 1 = old typing
 
 ; the trainer the player must face after getting a wrong answer in the Cinnabar
 ; gym quiz

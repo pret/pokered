@@ -35,6 +35,13 @@ LoadExtraSprites::
 	ret nz
 	jpfar CheckLoadKabutoShell
 
+LoadExtraTiles::
+	ld a, [wCurMap]
+	cp TYPE_GUYS_HOUSE
+	ret nz
+	jpfar CheckLoadLightSwitch
+
+
 UpdateNonPlayerSprite:
 	dec a
 	swap a

@@ -1,5 +1,5 @@
-; PureRGBnote: ADDED: code was added to triggere pokemart menu lists displaying TM names when scrolling over TMs for sale.
-;                     this code is available for any menu list, but the list must indicate with wListWithTMText that it should check for TMs.
+; PureRGBnote: ADDED: code was added to trigger pokemart menu lists displaying TM names when scrolling over TMs for sale.
+;                     this code is available for any menu list, but the list must indicate with wListMenuHoverTextType that it should check for TMs.
 
 DisplayPokemartDialogue_::
 	ld a, [wListScrollOffset]
@@ -7,9 +7,11 @@ DisplayPokemartDialogue_::
 	call UpdateSprites
 	xor a
 	ld [wBoughtOrSoldItemInMart], a
+	ld hl, wNewInGameFlags
+	set IN_POKEMART_MENU, [hl]
 .loop
 	xor a
-	ld [wListWithTMText], a ; we may have just been in the buy menu and no longer need to read out TM names
+	ld [wListMenuHoverTextType], a ; we may have just been in the buy menu and no longer need to read out TM names
 	ld [wListScrollOffset], a
 	ld [wCurrentMenuItem], a
 	ld [wPlayerMonNumber], a
@@ -23,11 +25,11 @@ DisplayPokemartDialogue_::
 	call DisplayTextBoxID
 
 ; This code is useless. It copies the address of the pokemart's inventory to hl,
-; but the address is never used.
-	ld hl, wItemListPointer
-	ld a, [hli]
-	ld l, [hl]
-	ld h, a
+; but the address is never used. ; PureRGBnote: REMOVED: remove pointless code
+	;ld hl, wItemListPointer
+	;ld a, [hli]
+	;ld l, [hl]
+	;ld h, a
 
 	ld a, [wMenuExitMethod]
 	cp CANCELLED_MENU
@@ -40,9 +42,8 @@ DisplayPokemartDialogue_::
 	dec a ; quitting?
 	jp z, .done
 .sellMenu
-; the same variables are set again below, so this code has no effect
 	xor a
-	ld [wPrintItemPrices], a
+	ld [wCurrentMenuItem], a
 	ld a, INIT_BAG_ITEM_LIST
 	ld [wInitListType], a
 	callfar InitList
@@ -55,7 +56,7 @@ DisplayPokemartDialogue_::
 	call SaveScreenTilesToBuffer1 ; save screen
 .sellMenuLoop
 	ld a, 1
-	ld [wListWithTMText], a ; we're in a list that might have TMs to read out
+	ld [wListMenuHoverTextType], a ; we're in a list that might have TMs to read out
 	call LoadScreenTilesFromBuffer1 ; restore saved screen
 	ld a, MONEY_BOX
 	ld [wTextBoxID], a
@@ -67,11 +68,11 @@ DisplayPokemartDialogue_::
 	ld [wListPointer + 1], a
 	xor a
 	ld [wPrintItemPrices], a
-	ld [wCurrentMenuItem], a
 	ld a, ITEMLISTMENU
 	ld [wListMenuID], a
 	call DisplayListMenuID
 	jp c, .returnToMainPokemartMenu ; if the player closed the menu
+	call BackupItemListIndex
 .confirmItemSale ; if the player is trying to sell a specific item
 	call IsKeyItem
 	ld a, [wIsKeyItem]
@@ -85,26 +86,26 @@ DisplayPokemartDialogue_::
 	ldh [hHalveItemPrices], a ; halve prices when selling
 	call DisplayChooseQuantityMenu
 	inc a
-	jr z, .sellMenuLoop ; if the player closed the choose quantity menu with the B button
+	jr z, .restoreItemIndexSellMenuLoop ; if the player closed the choose quantity menu with the B button
 	ld hl, PokemartTellSellPriceText
 	lb bc, 14, 1 ; location that PrintText always prints to, this is useless
 	rst _PrintText
 	hlcoord 14, 7
 	lb bc, 8, 15
 	xor a
-	ld [wListWithTMText], a ; we shouldn't read out TMs when showing the Yes/No menu
+	ld [wListMenuHoverTextType], a ; we shouldn't read out TMs when showing the Yes/No menu
 	ld a, TWO_OPTION_MENU 
 	ld [wTextBoxID], a
 	call DisplayTextBoxID ; yes/no menu
 	ld a, [wMenuExitMethod]
 	cp CHOSE_SECOND_ITEM
-	jr z, .sellMenuLoop ; if the player chose No or pressed the B button
+	jr z, .restoreItemIndexSellMenuLoop ; if the player chose No or pressed the B button
 
 ; The following code is supposed to check if the player chose No, but the above
-; check already catches it.
-	ld a, [wChosenMenuItem]
-	dec a
-	jr z, .sellMenuLoop
+; check already catches it. ; PureRGBnote: REMOVED: pointless code
+	;ld a, [wChosenMenuItem]
+	;dec a
+	;jr z, .restoreItemIndexSellMenuLoop
 
 .sellItem
 	ld a, [wBoughtOrSoldItemInMart]
@@ -116,20 +117,21 @@ DisplayPokemartDialogue_::
 	call AddAmountSoldToMoney
 	ld hl, wNumBagItems
 	call RemoveItemFromInventory
+.restoreItemIndexSellMenuLoop
+	call RestoreItemListIndex
 	jp .sellMenuLoop
 .unsellableItem
 	ld hl, PokemartUnsellableItemText
 	rst _PrintText
-	jp .returnToMainPokemartMenu
+	jr .restoreItemIndexSellMenuLoop
 .bagEmpty
 	ld hl, PokemartItemBagEmptyText
 	rst _PrintText
 	call SaveScreenTilesToBuffer1
 	jp .returnToMainPokemartMenu
 .buyMenu
-
-; the same variables are set again below, so this code has no effect
-	ld [wPrintItemPrices], a
+	; 0 is already loaded in a
+	ld [wCurrentMenuItem], a
 	ld a, INIT_OTHER_ITEM_LIST
 	ld [wInitListType], a
 	callfar InitList
@@ -139,7 +141,7 @@ DisplayPokemartDialogue_::
 	call SaveScreenTilesToBuffer1
 .buyMenuLoop
 	ld a, 1
-	ld [wListWithTMText], a ; we're in a list that might have TMs to read out
+	ld [wListMenuHoverTextType], a ; we're in a list that might have TMs to read out
 	call LoadScreenTilesFromBuffer1
 	ld a, MONEY_BOX
 	ld [wTextBoxID], a
@@ -149,21 +151,20 @@ DisplayPokemartDialogue_::
 	ld [wListPointer], a
 	ld a, h
 	ld [wListPointer + 1], a
-	xor a
-	ld [wCurrentMenuItem], a
-	inc a
+	ld a, 1
 	ld [wPrintItemPrices], a
 	inc a ; a = 2 (PRICEDITEMLISTMENU)
 	ld [wListMenuID], a
 	call DisplayListMenuID
 	jr c, .returnToMainPokemartMenu ; if the player closed the menu
+	call BackupItemListIndex
 	ld a, 99
 	ld [wMaxItemQuantity], a
 	xor a
 	ldh [hHalveItemPrices], a ; don't halve item prices when buying
 	call DisplayChooseQuantityMenu
 	inc a
-	jr z, .buyMenuLoop ; if the player closed the choose quantity menu with the B button
+	jr z, .restoreItemIndexBuyMenuLoop ; if the player closed the choose quantity menu with the B button
 	ld a, [wcf91] ; item ID
 	ld [wd11e], a ; store item ID for GetItemName
 	call GetItemName
@@ -173,20 +174,13 @@ DisplayPokemartDialogue_::
 	hlcoord 14, 7
 	lb bc, 8, 15
 	xor a
-	ld [wListWithTMText], a ; we shouldn't read out TMs when showing the Yes/No menu
+	ld [wListMenuHoverTextType], a ; we shouldn't read out TMs when showing the Yes/No menu
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID ; yes/no menu
 	ld a, [wMenuExitMethod]
 	cp CHOSE_SECOND_ITEM
-	jp z, .buyMenuLoop ; if the player chose No or pressed the B button
-
-; The following code is supposed to check if the player chose No, but the above
-; check already catches it.
-	ld a, [wChosenMenuItem]
-	dec a
-	jr z, .buyMenuLoop
-
+	jp z, .restoreItemIndexBuyMenuLoop ; if the player chose No or pressed the B button
 .buyItem
 	call .isThereEnoughMoney
 	jr c, .notEnoughMoney
@@ -205,6 +199,8 @@ DisplayPokemartDialogue_::
 	call WaitForSoundToFinish
 	ld hl, PokemartBoughtItemText
 	rst _PrintText
+.restoreItemIndexBuyMenuLoop
+	call RestoreItemListIndex
 	jp .buyMenuLoop
 .returnToMainPokemartMenu
 	call LoadScreenTilesFromBuffer1
@@ -222,12 +218,15 @@ DisplayPokemartDialogue_::
 .notEnoughMoney
 	ld hl, PokemartNotEnoughMoneyText
 	rst _PrintText
-	jr .returnToMainPokemartMenu
+	jr .restoreItemIndexBuyMenuLoop
 .bagFull
 	ld hl, PokemartItemBagFullText
 	rst _PrintText
+	call RestoreItemListIndex
 	jr .returnToMainPokemartMenu
 .done
+	ld hl, wNewInGameFlags
+	res IN_POKEMART_MENU, [hl]
 	ld hl, PokemartThankYouText
 	rst _PrintText
 	ld a, 1

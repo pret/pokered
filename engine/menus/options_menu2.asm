@@ -222,8 +222,8 @@ CompareOptions2:
 	and %11
 	cp c
 	jp nz, RunDefaultPaletteCommand ; reset palettes according to the colors we just selected if colors changed
-	ld a, [wInGame]
-	and a
+	ld a, [wNewInGameFlags]
+	bit IN_GAME, a
 	ret z ; don't need to do anything else if we're in the title screen menus
 	ld a, b
 	and 1 << BIT_BIKE_MUSIC

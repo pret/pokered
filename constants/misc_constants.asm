@@ -143,3 +143,9 @@ DEF BIT_DEBUG_MODE EQU 1
 	const SURFING ; 2
 	
 DEF LEARN_BY_ITEM EQU 1
+
+; wNewInGameFlags
+	
+	const_def
+	const IN_GAME
+	const IN_POKEMART_MENU

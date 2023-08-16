@@ -2,7 +2,7 @@
 
 UseItem_::
 	xor a
-	ld [wListWithTMText], a ; PureRGBnote: ADDED: if we used an item we don't need to display TM text afterwards.
+	ld [wListMenuHoverTextType], a ; PureRGBnote: ADDED: if we used an item we don't need to display TM text afterwards.
 	ld a, 1
 	ld [wActionResultOrTookBattleTurn], a ; initialise to success value
 	ld a, [wcf91] ;contains item_ID
@@ -3037,6 +3037,10 @@ TossItem_::
 	ld [wd11e], a
 	call GetItemName
 	call CopyToStringBuffer
+;;;;;;;;;; PureRGBnote: ADDED: sound effect when throwing away an item
+	ld a, SFX_TELEPORT_ENTER_2
+	rst _PlaySound
+;;;;;;;;;;
 	ld hl, ThrewAwayItemText
 	rst _PrintText
 	pop hl

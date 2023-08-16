@@ -650,3 +650,9 @@ TeaTile:: INCBIN "gfx/icons/tea.2bpp"
 FoodTiles:: INCBIN "gfx/icons/food_on_table.2bpp"
 
 HaunterFace:: INCBIN "gfx/overworld/haunter_face.2bpp"
+
+LightSwitchOff:: INCBIN "gfx/icons/light_switch_off.2bpp"
+
+LightSwitchOn:: INCBIN "gfx/icons/light_switch_on.2bpp"
+
+OldNewTypes:: INCBIN "gfx/font/old_new_types.2bpp"

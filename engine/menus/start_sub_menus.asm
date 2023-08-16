@@ -303,7 +303,7 @@ ItemMenuLoop:
 
 StartMenu_Item::
 	ld a, 1
-	ld [wListWithTMText], a ; PureRGBnote: ADDED: we want TM names to get printed in this list menu
+	ld [wListMenuHoverTextType], a ; PureRGBnote: ADDED: we want TM names to get printed in this list menu
 	ld a, [wLinkState]
 	dec a ; is the player in the Colosseum or Trade Centre?
 	jr nz, .notInCableClubRoom
@@ -327,7 +327,7 @@ StartMenu_Item::
 	jr nc, .choseItem
 .exitMenu
 	xor a
-	ld [wListWithTMText], a ; PureRGBnote: ADDED: done with the item list interaction, so no TM names need to be printed anymore
+	ld [wListMenuHoverTextType], a ; PureRGBnote: ADDED: done with the item list interaction, so no TM names need to be printed anymore
 	call LoadScreenTilesFromBuffer2 ; restore saved screen
 	call LoadTextBoxTilePatterns
 	call UpdateSprites
@@ -360,7 +360,7 @@ StartMenu_Item::
 	jp z, .useOrTossItem ; PureRGBnote: ADDED: Pocket Abra doesn't bring up Use/toss dialog before usage
 .notBicycle1
 	xor a
-	ld [wListWithTMText], a ; PureRGBnote: ADDED: done with the item list interaction, so no TM names need to be printed anymore
+	ld [wListMenuHoverTextType], a ; PureRGBnote: ADDED: done with the item list interaction, so no TM names need to be printed anymore
 	ld a, USE_TOSS_MENU_TEMPLATE
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
@@ -423,22 +423,22 @@ StartMenu_Item::
 	ld de, 1
 	call IsInArray
 	jr c, .useItem_partyMenu
-	call UseItem
+	call UseItemWithIndexBackup
 	jp ItemMenuLoop
 .useItem_closeMenu
 	xor a
 	ld [wPseudoItemID], a
-	call UseItem
+	call UseItemWithIndexBackup
 	ld a, [wActionResultOrTookBattleTurn]
 	and a
 	jp z, ItemMenuLoop
 	xor a
-	ld [wListWithTMText], a ; PureRGBnote: ADDED: done with the item list interaction, so no TM names need to be printed anymore
+	ld [wListMenuHoverTextType], a ; PureRGBnote: ADDED: done with the item list interaction, so no TM names need to be printed anymore
 	jp CloseStartMenu
 .useItem_partyMenu
 	ld a, [wUpdateSpritesEnabled]
 	push af
-	call UseItem
+	call UseItemWithIndexBackup
 	ld a, [wActionResultOrTookBattleTurn]
 	cp $02
 	jp z, .partyMenuNotDisplayed
@@ -463,10 +463,36 @@ StartMenu_Item::
 	inc a
 	jr z, .tossZeroItems
 .skipAskingQuantity
+	call ItemMenuBackupItemIndex
 	ld hl, wNumBagItems
 	call TossItem
+	call ItemMenuRestoreItemIndex
 .tossZeroItems
 	jp ItemMenuLoop
+
+UseItemWithIndexBackup:
+	call ItemMenuBackupItemIndex
+	call UseItem
+	call ItemMenuRestoreItemIndex
+	ret
+
+ItemMenuBackupItemIndex:
+	pop hl
+	ld a, [wBagSavedMenuItem]
+	push af
+	ld a, [wListScrollOffset]
+	push af
+	push hl
+	ret
+
+ItemMenuRestoreItemIndex:
+	pop hl
+	pop af
+	ld [wListScrollOffset], a
+	pop af
+	ld [wBagSavedMenuItem], a
+	push hl
+	ret
 
 CannotUseItemsHereText:
 	text_far _CannotUseItemsHereText

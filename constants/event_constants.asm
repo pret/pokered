@@ -670,6 +670,10 @@
 	const EVENT_GOT_DOME_FOSSIL
 	const EVENT_GOT_HELIX_FOSSIL
 
+; Type Guy's house
+	const EVENT_TYPE_GUY_LIGHT_SWITCH
+	const EVENT_TYPE_GUY_SKIP_INTRO
+
 ; S.S. Anne events
 	const_next $5C0
 	const_skip

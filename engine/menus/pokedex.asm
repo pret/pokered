@@ -927,10 +927,9 @@ ShowNextPokemonData:
 	call PlaceString
 	hlcoord 2, 12
 	predef PrintMonType
-	ld a, [wMonHType1]
-	ld b, a
-	ld a, [wMonHType2]
-	cp b
+	hlcoord 2, 14
+	ld a, [hl]
+	cp " "
 	jr z, .waitForButtonPress2 ; don't print TYPE2/ if the pokemon has 1 type only.
 	hlcoord 1, 13
 	ld de, DexType2Text

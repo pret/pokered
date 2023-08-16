@@ -18,7 +18,7 @@ PlayerPC::
 
 PlayerPCMenu:
 	xor a
-	ld [wListWithTMText], a ; PureRGBnote: ADDED: this list menu can't have TMs so turn off that flag so it doesn't even check to display
+	ld [wListMenuHoverTextType], a ; PureRGBnote: ADDED: this list menu can't have TMs so turn off that flag so it doesn't even check to display
 	ld a, [wParentMenuItem]
 	ld [wCurrentMenuItem], a
 	ld hl, wFlags_0xcd60
@@ -92,7 +92,7 @@ PlayerPCDeposit:
 	ld [wCurrentMenuItem], a
 	ld [wListScrollOffset], a
 	inc a
-	ld [wListWithTMText], a ; PureRGBnote: ADDED: this list menu can have TMs so turn on that flag so it checks each item scrolled over
+	ld [wListMenuHoverTextType], a ; PureRGBnote: ADDED: this list menu can have TMs so turn on that flag so it checks each item scrolled over
 	ld a, [wNumBagItems]
 	and a
 	jr nz, .loop
@@ -120,6 +120,7 @@ PlayerPCDeposit:
 	call IsKeyItem
 	ld a, 1
 	ld [wItemQuantity], a
+	call BackupItemListIndex
 	ld a, [wIsKeyItem]
 	and a
 	jr nz, .next
@@ -128,14 +129,14 @@ PlayerPCDeposit:
 	rst _PrintText
 	call DisplayChooseQuantityMenu
 	cp $ff
-	jp z, .loop
+	jr z, .restoreItemIndex
 .next
 	ld hl, wNumBoxItems
 	call AddItemToInventory
 	jr c, .roomAvailable
 	ld hl, NoRoomToStoreText
 	rst _PrintText
-	jp .loop
+	jr .restoreItemIndex
 .roomAvailable
 	ld hl, wNumBagItems
 	call RemoveItemFromInventory
@@ -145,6 +146,9 @@ PlayerPCDeposit:
 	call WaitForSoundToFinish
 	ld hl, ItemWasStoredText
 	rst _PrintText
+	; fall through
+.restoreItemIndex
+	call RestoreItemListIndex
 	jp .loop
 
 PlayerPCWithdraw:
@@ -152,7 +156,7 @@ PlayerPCWithdraw:
 	ld [wCurrentMenuItem], a
 	ld [wListScrollOffset], a
 	inc a
-	ld [wListWithTMText], a ; PureRGBnote: ADDED: this list menu can have TMs so turn on that flag so it checks each item scrolled over
+	ld [wListMenuHoverTextType], a ; PureRGBnote: ADDED: this list menu can have TMs so turn on that flag so it checks each item scrolled over
 	ld a, [wNumBoxItems]
 	and a
 	jr nz, .loop
@@ -180,6 +184,7 @@ PlayerPCWithdraw:
 	call IsKeyItem
 	ld a, 1
 	ld [wItemQuantity], a
+	call BackupItemListIndex
 	ld a, [wIsKeyItem]
 	and a
 	jr nz, .next
@@ -188,14 +193,14 @@ PlayerPCWithdraw:
 	rst _PrintText
 	call DisplayChooseQuantityMenu
 	cp $ff
-	jp z, .loop
+	jp z, .restoreItemIndex
 .next
 	ld hl, wNumBagItems
 	call AddItemToInventory
 	jr c, .roomAvailable
 	ld hl, CantCarryMoreText
 	rst _PrintText
-	jp .loop
+	jr .restoreItemIndex
 .roomAvailable
 	ld hl, wNumBoxItems
 	call RemoveItemFromInventory
@@ -205,6 +210,9 @@ PlayerPCWithdraw:
 	call WaitForSoundToFinish
 	ld hl, WithdrewItemText
 	rst _PrintText
+	; fall through
+.restoreItemIndex
+	call RestoreItemListIndex
 	jp .loop
 
 PlayerPCToss:
@@ -212,7 +220,7 @@ PlayerPCToss:
 	ld [wCurrentMenuItem], a
 	ld [wListScrollOffset], a
 	inc a
-	ld [wListWithTMText], a ; PureRGBnote: ADDED: this list menu can have TMs so turn on that flag so it checks each item scrolled over
+	ld [wListMenuHoverTextType], a ; PureRGBnote: ADDED: this list menu can have TMs so turn on that flag so it checks each item scrolled over
 	ld a, [wNumBoxItems]
 	and a
 	jr nz, .loop
@@ -244,6 +252,7 @@ PlayerPCToss:
 	pop hl
 	ld a, 1
 	ld [wItemQuantity], a
+	call BackupItemListIndex
 	ld a, [wIsKeyItem]
 	and a
 	jr nz, .next
@@ -257,34 +266,68 @@ PlayerPCToss:
 	call DisplayChooseQuantityMenu
 	pop hl
 	cp $ff
-	jp z, .loop
+	jr z, .restoreItemIndex
 .next
 	call TossItem ; disallows tossing key items
+	; fall through
+.restoreItemIndex
+	call RestoreItemListIndex
 	jp .loop
 
 ; PureRGBnote: ADDED: happens when pressing start in a list menu - used for facilitating depositing items from the start item menu
-ButtonStartPressed:: 
+CheckButtonStartPressed::
+	bit BIT_START, a
+	jr z, .continue
+	push af
 	ld a, [wListMenuID]
 	cp ITEMLISTMENU
-	jr nz, .done ; not an item list?
+	jr nz, .dontDoAnything ; not an item list?
 	ld a, [wIsInBattle]
 	and a
-	jp nz, .done ; are we in the battle item list?
+	jr nz, .dontDoAnything ; are we in the battle item list?
 	ld a, [wFlags_0xcd60]
 	bit 3, a ; are we in item list within PC menu?
-	jp nz, .done
-	ld a, 1
+	jr nz, .dontDoAnything
+	ld a, [wNewInGameFlags]
+	bit IN_POKEMART_MENU, a
+	jr nz, .dontDoAnything
+	pop af
+	ld a, 1 ; load an A button press into a
 	ld [wUnusedC000], a ; set the flag that tells the item menu code to trigger the item deposit
-	ld b, a ; load an A button press into b, which is needed to exit the generic list code and hit the deposit item code within the item list code
-.done
+.continue
+	scf ; set carry, item list code will continue as normal, and in the case of depositing an item, it will trigger the deposit after exiting the menu
+	ret
+.dontDoAnything
+	pop af
+	and a ; clear carry, basically means in this case the list will do nothing since start was pressed but we don't have any deposit code to run
+	ret
+
+BackupItemListIndex:
+	pop de ; pop return addesss
+	ld a, [wCurrentMenuItem]
+	push af
+	ld a, [wListScrollOffset]
+	push af
+	push de ; push return address
+	ret
+
+RestoreItemListIndex:
+	pop de ; pop return address
+	; restore item index for the item list
+	pop af
+	ld [wListScrollOffset], a
+	pop af
+	ld [wCurrentMenuItem], a
+	push de ; push return address
 	ret
 
 ; PureRGBnote: ADDED: dialog for depositing an item from the item menu. Press start on the item menu to trigger it.
 DepositItemFromItemMenu::
-	;IsItemHM - disallow HMs from being deposited this way to avoid softlock issues?
 	call IsKeyItem
 	ld a, 1
 	ld [wItemQuantity], a
+	; back up these two values so we can maintain our item list index for after depositing
+	call BackupItemListIndex
 	ld a, [wIsKeyItem]
 	and a
 	jr nz, .keyItem
@@ -293,20 +336,20 @@ DepositItemFromItemMenu::
 	rst _PrintText
 	call DisplayChooseQuantityMenu
 	cp $ff
-	ret z
+	jr z, .done
 	jp .next
 .keyItem
 ; if it is a key item, ask whether to deposit first
 	xor a
-	ld [wListWithTMText], a ; stop attempting to display TM names while this Yes no choice is open.
+	ld [wListMenuHoverTextType], a ; stop attempting to display TM names while this Yes no choice is open.
 	ld hl, WantToDepositText
 	rst _PrintText
 	call YesNoChoice
 	ld a, 1
-	ld [wListWithTMText], a ; enable displaying TM names again.
+	ld [wListMenuHoverTextType], a ; enable displaying TM names again.
 	ld a, [wCurrentMenuItem]
 	and a
-	ret nz
+	jr nz, .done
 .next
 ; do the depositing
 	ld hl, wNumBoxItems
@@ -314,7 +357,7 @@ DepositItemFromItemMenu::
 	jr c, .roomAvailable
 	ld hl, NoRoomToStoreText
 	rst _PrintText
-	ret
+	jr .done
 .roomAvailable
 	ld hl, wNumBagItems
 	call RemoveItemFromInventory
@@ -324,6 +367,10 @@ DepositItemFromItemMenu::
 	call WaitForSoundToFinish
 	ld hl, ItemWasStoredText
 	rst _PrintText
+.done
+	call RestoreItemListIndex
+	; wCurrentMenuItem's new value still currently loaded in a
+	ld [wBagSavedMenuItem], a
 	ret
 
 PlayersPCMenuEntries:
