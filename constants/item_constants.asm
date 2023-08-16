@@ -203,7 +203,7 @@ DEF TM01 EQU const_value
 	add_tm BARRAGE 		; $EC
 	add_tm FLAMETHROWER ; $ED
 	add_tm FIRE_BLAST   ; $EE
-	add_tm SLAM        	; $EF
+	add_tm SLAM        	; $EF FILTHY SLAM
 	add_tm KARATE_CHOP  ; $F0
 	add_tm MEDITATE   	; $F1 
 	add_tm LOVELY_KISS  ; $F2

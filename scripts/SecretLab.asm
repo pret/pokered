@@ -478,6 +478,7 @@ NoteSoundPointers:
 	dw SFX_SecretLabNotesA#
 	dw SFX_SecretLabNotesB
 
+; this is the password to get through the big metal doors in the secret lab, 0 is the leftmost button and 7 is the rightmost button
 NotePassword:
 	db 1, 0, 6, 5, 2, 3, 4 ; and ends with 5 as the last note which doesn't need storing
 
