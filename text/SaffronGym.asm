@@ -154,10 +154,6 @@ _SaffronGymYoungster1AfterBattleText::
 	line "fear only bugs@"
 	text_end
 
-_SaffronGymYoungster1AfterBattleText2::
-	text "!"
-	done
-
 _SaffronGymYoungster1AfterBattleText3::
 	text "<SCROLL>and ghosts!"
 	done
