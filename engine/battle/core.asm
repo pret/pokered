@@ -3840,17 +3840,12 @@ HandleSelfConfusionDamage:
 ;;;;;;;;;; PureRGBnote: CHANGED: removed a bunch of pointless code for exclamation marks that isn't needed in english apparently
 
 PrintMonName1Text:
-	ld hl, MonNameText
+	ld hl, UsedText
 	rst _PrintText
 	ret
 
-MonNameText:
-	text_far _MonName1Text
-	text_asm
-	ld hl, UsedText
-	ret
-
 UsedText:
+	text_far _MonName1Text
 	text_far _UsedText
 	text_asm
 	ld a, [wMonIsDisobedient]
@@ -3864,11 +3859,6 @@ InsteadText:
 	text_far _InsteadText
 PrintMoveName:
 	text_far _MoveNameText
-	text_asm
-	ld hl, ExclamationPointText
-	ret
-
-ExclamationPointText:
 	text_far _ExclamationPointText
 	text_end
 
