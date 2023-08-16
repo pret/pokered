@@ -179,6 +179,8 @@ TypeGuysHouseTypeGuyText:
 	ld hl, .awake2
 	rst _PrintText
 	call SaveScreenTilesToBuffer2
+	ld a, [wListScrollOffset]
+	push af ; save list scroll offset to preserve item list index
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wListScrollOffset], a
@@ -222,7 +224,6 @@ TypeGuysHouseTypeGuyText:
 .done
 	xor a
 	ld [wListMenuHoverTextType], a
-	ld [wListScrollOffset], a
 	ld [wCurrentMenuItem], a
 	ld hl, wPkmnTypeRemapFlags
 	ld b, 3
@@ -233,6 +234,8 @@ TypeGuysHouseTypeGuyText:
 	ld hl, .beThatWay
 .print
 	rst _PrintText
+	pop af
+	ld [wListScrollOffset], a ; restore list scroll offset to preserve item list index
 	rst TextScriptEnd
 .sleeping
 	text_far _TypeGuysHouseTypeGuySleepingText

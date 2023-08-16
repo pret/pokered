@@ -13,6 +13,8 @@ CeruleanBadgeHouseMiddleAgedManText:
 	text_asm
 	ld hl, .Text
 	rst _PrintText
+	ld a, [wListScrollOffset]
+	push af ; save list scroll offset for item menu index
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wListScrollOffset], a
@@ -46,10 +48,10 @@ CeruleanBadgeHouseMiddleAgedManText:
 	rst _PrintText
 	jr .asm_74e23
 .asm_74e60
-	xor a
-	ld [wListScrollOffset], a
 	ld hl, .VisitAnyTimeText
 	rst _PrintText
+	pop af
+	ld [wListScrollOffset], a ; restore list scroll offset to preserve item menu index
 	rst TextScriptEnd
 
 .BadgeItemList:

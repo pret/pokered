@@ -1,4 +1,11 @@
 DisplayElevatorFloorMenu:
+	ld a, [wListScrollOffset]
+	push af ; preserve the list scroll offset so our item list offset is remembered
+	xor a
+	ld [wCurrentMenuItem], a
+	ld [wListScrollOffset], a
+	ld [wPrintItemPrices], a
+.menuDisplayLoop:
 	ld hl, WhichFloorText
 	rst _PrintText
 	ld hl, wItemList
@@ -6,19 +13,10 @@ DisplayElevatorFloorMenu:
 	ld [wListPointer], a
 	ld a, h
 	ld [wListPointer + 1], a
-	ld a, [wListScrollOffset]
-	push af
-	xor a
-	ld [wCurrentMenuItem], a
-	ld [wListScrollOffset], a
-	ld [wPrintItemPrices], a
 	ld a, SPECIALLISTMENU
 	ld [wListMenuID], a
 	call DisplayListMenuID
-	pop bc
-	ld a, b
-	ld [wListScrollOffset], a
-	ret c ; if cancel was selected
+	jr c, .done ; if cancel was selected
 	ld hl, wElevatorWarpMaps
 	ld a, [wWhichPokemon]
 	add a
@@ -53,8 +51,18 @@ DisplayElevatorFloorMenu:
 	ld hl, wCurrentMapScriptFlags
 	set 7, [hl]
 	ld hl, wWarpEntries
-	call .UpdateWarp
-
+	call .UpdateWarp ; update first warp
+	call .UpdateWarp ; update second warp
+	; destination map ID still loaded
+	; update the "map ID we came from" variable so the above usage of this variable thinks are now on the new floor
+	ld [wWarpedFromWhichMap], a
+.done
+	xor a
+	ld [wCurrentMenuItem], a
+	pop af
+	ld [wListScrollOffset], a ; restore list scroll offset so item list index is remembered
+	ret
+	; fall through
 .UpdateWarp
 	inc hl
 	inc hl
@@ -62,14 +70,12 @@ DisplayElevatorFloorMenu:
 	ld [hli], a ; destination warp ID
 	ld a, c
 	ld [hli], a ; destination map ID
-	; update the "map ID we came from" variable so the above usage of this variable thinks are now on the new floor
-	ld [wWarpedFromWhichMap], a
 	ret
 
 .alreadyOnThatFloor
 	ld hl, AlreadyOnThatFloor
 	rst _PrintText
-	jp DisplayElevatorFloorMenu
+	jr .menuDisplayLoop
 
 WhichFloorText:
 	text_far _WhichFloorText
