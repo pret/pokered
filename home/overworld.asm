@@ -551,9 +551,9 @@ WarpFound1::
 WarpFound2::
 	ld a, [wNumberOfWarps]
 	sub c
-	ld [wWarpedFromWhichWarp], a ; save ID of used warp
+	ld [wWarpedFromWhichWarp], a ; save ID of used warp (needed for elevators)
 	ld a, [wCurMap]
-	ld [wWarpedFromWhichMap], a
+	ld [wWarpedFromWhichMap], a ; save ID of previous map (needed for elevators)
 	call CheckIfInOutsideMap
 	jr nz, .indoorMaps
 ; this is for handling "outside" maps that can't have the 0xFF destination map

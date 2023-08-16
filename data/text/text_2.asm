@@ -1385,6 +1385,11 @@ _WhichFloorText::
 	line "you want? "
 	done
 
+_AlreadyOnThatFloor::
+	text "Already on that"
+	line "floor."
+	prompt
+
 _PartyMenuNormalText::
 	text "Choose a #MON."
 	done

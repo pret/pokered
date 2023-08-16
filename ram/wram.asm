@@ -358,6 +358,7 @@ wOaksAideRewardItemName:: ds ITEM_NAME_LENGTH
 
 NEXTU
 wElevatorWarpMaps:: ds 11 * 2
+wElevatorTravelDistance:: db
 
 NEXTU
 ; List of bag items that has been filtered to a certain type of items,
