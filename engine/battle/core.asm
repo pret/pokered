@@ -64,7 +64,15 @@ SlidePlayerAndEnemySilhouettesOnScreen:
 	ldh [hSCX], a
 	rst _DelayFrame
 	rst _DelayFrame ; shinpokerednote: gbcnote: do one extra frame to make sure the screen can update
-	ld a, %11100100 ; inverted palette for silhouette effect
+; inverted palette for silhouette effect
+;;;;;;;;;; shinpokerednote: ADDED: add the silhouette when playing on the DMG
+	ld a, [wOnSGB]
+	and a
+	ldpal a, SHADE_BLACK, SHADE_DARK, SHADE_LIGHT, SHADE_WHITE
+	jr nz, .silhouette
+	ldpal a, SHADE_BLACK, SHADE_BLACK, SHADE_BLACK, SHADE_WHITE ; different silhouette on DMG
+.silhouette
+;;;;;;;;;;
 	ldh [rBGP], a
 	ldh [rOBP0], a
 	ldh [rOBP1], a
@@ -103,11 +111,24 @@ SlidePlayerAndEnemySilhouettesOnScreen:
 	ldh [hStartTileID], a
 	hlcoord 1, 5
 	predef CopyUncompressedPicToTilemap
+
 	xor a
 	ldh [hWY], a
 	ldh [rWY], a
 	inc a
 	ldh [hAutoBGTransferEnabled], a
+
+;;;;;;;;;; shinpokerednote: ADDED: revert the palette to what it should be if on DMG
+	ld a, [wOnSGB]
+	and a
+	jr nz, .notDmg
+	ldpal a, SHADE_BLACK, SHADE_DARK, SHADE_LIGHT, SHADE_WHITE
+	ldh [rBGP], a
+	ldh [rOBP0], a
+	ldh [rOBP1], a
+.notDmg
+;;;;;;;;;;
+
 	call Delay3
 	ld b, SET_PAL_BATTLE
 	call RunPaletteCommand
