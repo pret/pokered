@@ -47,7 +47,6 @@ SlidePlayerAndEnemySilhouettesOnScreen:
 .noCarry
 	dec b
 	jr nz, .copyRowLoop
-	call EnableLCD
 	ld a, $90
 	ldh [hWY], a
 	ldh [rWY], a
@@ -73,6 +72,7 @@ SlidePlayerAndEnemySilhouettesOnScreen:
 	call UpdateGBCPal_OBP0
 	call UpdateGBCPal_OBP1
 ;;;;;;;;;;
+	call EnableLCD ; shinpokerednote: FIXED: move enableLCD down here to avoid a 1 frame white flash on starting battle on DMG/GBC modes
 .slideSilhouettesLoop ; slide silhouettes of the player's pic and the enemy's pic onto the screen
 	ld h, b
 	ld l, $40
