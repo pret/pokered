@@ -137,10 +137,7 @@ INCLUDE "engine/events/hidden_objects/bills_house_pc.asm"
 INCLUDE "engine/events/hidden_objects/oaks_lab_email.asm"
 
 
-SECTION "Bill's PC", ROMX
-
-INCLUDE "engine/pokemon/bills_pc.asm"
-
+;SECTION "Bill's PC", ROMX ; PureRGBnote: MOVED: bills pc code was moved to movedCode section
 
 SECTION "Battle Engine 3", ROMX
 
@@ -373,11 +370,14 @@ INCLUDE "engine/movie/splash.asm"
 INCLUDE "engine/movie/hall_of_fame.asm"
 
 SECTION "movedCode", ROMX
+; moved from bank 8 (audio engine 2 bank)
+INCLUDE "engine/pokemon/bills_pc.asm"
 ; moved from bank1e
 INCLUDE "engine/overworld/healing_machine.asm"
 ; moved from home bank
 INCLUDE "audio/fade_audio.asm"
 INCLUDE "engine/gfx/animated_tiles_code.asm"
+; moved from bank1C
 INCLUDE "engine/overworld/fly_animation.asm"
 
 SECTION "Party Sprites", ROMX, BANK[$34]
