@@ -2064,6 +2064,19 @@ ItemUsePokeflute:
 	ld [hl], a
 	ld hl, wEnemyMonStatus
 	ld a, [hl]
+
+;;;;;;;;;; shinpokerednote: FIXED: There is an oversight here. 
+;;;;;;;;;; wWereAnyMonsAsleep can never get set off of a wild pokemon.
+;;;;;;;;;; As a result, the wrong message plays when only the wild pokemon is woken up.
+;;;;;;;;;; Need to check and set wWereAnyMonsAsleep here in order to fix it.
+	push af
+	and SLP ; is pokemon asleep?
+	jr z, .notAsleep
+	ld a, 1
+	ld [wWereAnyMonsAsleep], a ; indicate that a pokemon had to be woken up
+.notAsleep
+	pop af
+;;;;;;;;;;
 	and b ; remove Sleep status
 	ld [hl], a
 	call LoadScreenTilesFromBuffer2 ; restore saved screen
