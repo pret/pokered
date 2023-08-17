@@ -166,7 +166,7 @@ LoadMapSpriteTilePatterns:
 	jr nz, .skipFirstLoad ; if so, skip loading data into the lower half
 	ld a, b
 	ld b, 0
-	call FarCopyData2 ; load tile pattern data for sprite when standing still
+	call FarCopyData4 ; load tile pattern data for sprite when standing still
 .skipFirstLoad
 	pop de
 	pop hl
@@ -192,11 +192,11 @@ LoadMapSpriteTilePatterns:
 	ld h, d
 	ld l, e
 	pop de
-	call FarCopyData2 ; load tile pattern data for sprite when walking
+	call FarCopyData4 ; load tile pattern data for sprite when walking
 	jr .skipSecondLoad
 ; When reloading the upper half of tile patterns after displaying text, the LCD
 ; will be on, so CopyVideoData (which writes to VRAM only during V-blank) must
-; be used instead of FarCopyData2.
+; be used instead of FarCopyData4.
 .loadWhileLCDOn
 	pop af
 	pop hl

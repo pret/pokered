@@ -848,7 +848,7 @@ LoadTilesetTilePatternData::
 	ld de, vTileset
 	ld bc, $600
 	ld a, [wTilesetBank]
-	jp FarCopyData2
+	jp FarCopyData4
 
 ; this loads the current maps complete tile map (which references blocks, not individual tiles) to C6E8
 ; it can also load partial tile maps of connected maps into a border of length 3 around the current map
@@ -2287,7 +2287,6 @@ CopyMapConnectionHeader::
 LoadMapData::
 	ldh a, [hLoadedROMBank]
 	push af
-	call DisableLCD
 	ld a, $98
 	ld [wMapViewVRAMPointer + 1], a
 	xor a
@@ -2300,6 +2299,11 @@ LoadMapData::
 	ld [wSpriteSetID], a
 	call LoadTextBoxTilePatterns
 	call LoadMapHeader
+
+	;call DisableLCD
+	ld hl, hFlagsFFFA
+	set 3, [hl]
+
 	farcall InitMapSprites ; load tile pattern data for sprites
 	call LoadTileBlockMap
 	call LoadTilesetTilePatternData
@@ -2308,14 +2312,13 @@ LoadMapData::
 	hlcoord 0, 0
 	ld de, vBGMap0
 	ld b, SCREEN_HEIGHT
-.vramCopyLoop
 	ld c, SCREEN_WIDTH
-.vramCopyInnerLoop
-	ld a, [hli]
-	ld [de], a
-	inc e
-	dec c
-	jr nz, .vramCopyInnerLoop
+.vramCopyLoop
+	push bc
+	ld b, 0
+	call SpecialCopyData
+	pop bc
+
 	ld a, BG_MAP_WIDTH - SCREEN_WIDTH
 	add e
 	ld e, a
@@ -2326,7 +2329,9 @@ LoadMapData::
 	jr nz, .vramCopyLoop
 	ld a, $01
 	ld [wUpdateSpritesEnabled], a
-	call EnableLCD
+	;call EnableLCD
+	ld hl, hFlagsFFFA
+	res 3, [hl]
 	ld b, SET_PAL_OVERWORLD
 	call RunPaletteCommand
 	call LoadPlayerSpriteGraphics
@@ -2336,7 +2341,7 @@ LoadMapData::
 	ld a, [wFlags_D733]
 	bit 1, a
 	jr nz, .restoreRomBank
-	call UpdateMusic6Times
+	;call UpdateMusic6Times
 	call PlayDefaultMusicFadeOutCurrent
 .restoreRomBank
 	pop af

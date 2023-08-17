@@ -82,6 +82,7 @@ UpdateMusic6Times::
 ; This is called when entering a map, before fading out the current music and
 ; playing the default music (i.e. the map's music or biking/surfing music).
 ; shinpokerednote: audionote: updated to match pokemon yellow's audio engine code
+; TODO: remove now unused code?
 	ld c, 6
 UpdateMusicCTimes::
 .loop
