@@ -107,6 +107,10 @@ DEF NOT_VBLANKED EQU 1
 	
 	xor a
 	ld [wDelayFrameBank], a
+
+	ldh a, [rLCDC]
+	bit 7, a
+	jp z, VBlank ;You will never enter the vblank interrupt if the LCD is disabled, so call it manually
 .halt
 	halt
 	nop	;joenote - due to a processor bug, nop after halt is best practice
