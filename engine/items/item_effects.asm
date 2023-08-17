@@ -2070,7 +2070,7 @@ ItemUsePokeflute:
 ;;;;;;;;;; As a result, the wrong message plays when only the wild pokemon is woken up.
 ;;;;;;;;;; Need to check and set wWereAnyMonsAsleep here in order to fix it.
 	push af
-	and SLP ; is pokemon asleep?
+	and SLP_MASK ; is pokemon asleep?
 	jr z, .notAsleep
 	ld a, 1
 	ld [wWereAnyMonsAsleep], a ; indicate that a pokemon had to be woken up
