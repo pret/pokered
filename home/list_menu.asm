@@ -58,6 +58,11 @@ DisplayListMenuID::
 	ld [wTopMenuItemX], a
 	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_LEFT ; PureRGBnote: ADDED: tracking START and Dpad Left for new functions
 	ld [wMenuWatchedKeys], a
+	ld a, [wBattleType]
+	and a ; is it the Old Man battle?
+	jr nz, .skipOffsetCheck
+	call CheckBadOffset
+.skipOffsetCheck
 	call CheckForHoverText ; PureRGBnote: ADDED: check for TM text to display on initializing the table (like if the first entry is a TM)
 	homecall PrepareOAMData	; shinpokerednote: gbcnote: makes mart menus cleaner by updating the OAM sprite table ahead of vblank
 
