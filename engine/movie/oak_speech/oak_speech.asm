@@ -68,6 +68,7 @@ PrepareOakSpeech:
 
 ; PureRGBnote: CHANGED: this subroutine was modified to make debug mode (wd732 bit 1 = non-zero) skip through it quickly to start debugging faster
 OakSpeech:
+	callfar GBCSetCPU1xSpeed ; shinpokerednote: ADDED: GBC double speed cpu mode messes up oak speech, stay at 1x speed
 	ld a, SFX_STOP_ALL_MUSIC
 	rst _PlaySound
 IF DEF(_DEBUG)
