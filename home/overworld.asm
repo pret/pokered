@@ -42,6 +42,7 @@ OverworldLoop::
 	rst _DelayFrame
 OverworldLoopLessDelay::
 	;rst _DelayFrame ; shinpokerednote: ADDED: 60fps mode enabled by commenting this (but needs additional tweaks to run correctly)
+	callfar GBCSetCPU2xSpeed	; set 2x cpu speed when on gbc
 	call LoadGBPal
 	ld a, [wd736]
 	bit 6, a ; jumping down a ledge?

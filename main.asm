@@ -427,4 +427,5 @@ INCLUDE "audio/remap_armored_mewtwo_cry.asm"
 INCLUDE "engine/pokemon/change_mon_species.asm"
 INCLUDE "engine/menus/super_softlock_checker.asm"
 INCLUDE "engine/pokemon/remap_typings.asm"
+INCLUDE "engine/gbc/gbc_cpu_speed.asm"
 
