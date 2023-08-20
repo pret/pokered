@@ -167,6 +167,7 @@ PewterMuseumGuyMovementScriptPointerTable::
 	dw PewterMovementScript_Done
 
 PewterMovementScript_WalkToMuseum:
+	call StopAllMusic
 	ld a, BANK(Music_MuseumGuy)
 	ld [wAudioROMBank], a
 	ld [wAudioSavedROMBank], a
@@ -223,6 +224,7 @@ PewterGymGuyMovementScriptPointerTable::
 	dw PewterMovementScript_Done
 
 PewterMovementScript_WalkToGym:
+	call StopAllMusic
 	ld a, BANK(Music_MuseumGuy)
 	ld [wAudioROMBank], a
 	ld [wAudioSavedROMBank], a

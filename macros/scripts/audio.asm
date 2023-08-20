@@ -179,6 +179,11 @@ MACRO stereo_panning
 	dn \1, \2
 ENDM
 
+MACRO stereo_panning2
+	db stereo_panning_cmd
+	dn %1111 * (1 && \1), %1111 * (1 && \2) ; left enable, right enable
+ENDM
+
 	const unknownmusic0xef_cmd ; $ef
 MACRO unknownmusic0xef
 	db unknownmusic0xef_cmd
@@ -191,6 +196,50 @@ MACRO volume
 	db volume_cmd
 	dn \1, \2
 ENDM
+
+		const volume_envelope_cmd ; $f1
+MACRO volume_envelope
+	db volume_envelope_cmd
+	if \2 < 0
+		dn \1, %1000 | (\2 * -1) ; volume envelope
+	else
+		dn \1, \2 ; volume envelope
+	endc
+ENDM
+
+	const inc_octave_cmd ; f2
+MACRO inc_octave
+	db inc_octave_cmd
+ENDM
+
+	const dec_octave_cmd ; f3
+MACRO dec_octave
+	db dec_octave_cmd
+ENDM
+
+	const speed_cmd ; f4
+MACRO speed
+	db speed_cmd, \1
+ENDM
+
+	const channel_volume_cmd ; f5
+MACRO channel_volume 
+	db channel_volume_cmd, \1
+ENDM
+
+	const fade_wave_cmd ; f6
+MACRO fade_wave
+	db fade_wave_cmd, \1
+ENDM
+
+	const drum_kit_cmd ; f7
+MACRO drum_kit
+	db drum_kit_cmd, \1
+ENDM
+MACRO toggle_noise
+	db drum_kit_cmd, \1
+ENDM
+	
 
 	const_next $f8
 
@@ -228,3 +277,4 @@ ENDM
 MACRO sound_ret
 	db sound_ret_cmd
 ENDM
+

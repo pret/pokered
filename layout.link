@@ -202,6 +202,8 @@ ROMX $34
 	"GBC Mode Code"
 ROMX $35
     "newCode"
+ROMX $36
+	"Music 4"
 WRAM0
 	"Audio RAM"
 	org $c100

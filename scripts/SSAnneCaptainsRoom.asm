@@ -49,9 +49,7 @@ SSAnneCaptainsRoomRubCaptainsBackText:
 	cp BANK("Audio Engine 3")
 	ld [wAudioSavedROMBank], a
 	jr nz, .not_audio_engine_3
-	ld a, SFX_STOP_ALL_MUSIC
-	ld [wNewSoundID], a
-	rst _PlaySound
+	call StopAllMusic
 	ld a, BANK(Music_PkmnHealed)
 	ld [wAudioROMBank], a
 .not_audio_engine_3

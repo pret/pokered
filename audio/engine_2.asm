@@ -5,14 +5,21 @@ Audio2_PlaySound::
 	cp SFX_STOP_ALL_MUSIC
 	jp z, StopAllAudio_2
 	cp MAX_SFX_ID_2
-	jr z, PlaySfx
-	jr c, PlaySfx
+	jr z, PlaySfxRemapDrums
+	jr c, PlaySfxRemapDrums
 	cp $fe
 	jr z, .playMusic
-	jr nc, PlaySfx
+	jr nc, PlaySfxRemapDrums
 .playMusic
 	call InitMusicVariables
 	jp PlaySoundCommon_2
+
+PlaySfxRemapDrums:
+	push af
+	call PlaySfx
+	pop af
+	jp CheckRemapNoiseInstrument_2
+
 
 PlaySfx:
 	ld l, a
@@ -83,7 +90,7 @@ PlaySfx:
 
 StopAllAudio_2:
 	jp StopAllAudio
-	
+
 PlaySoundCommon_2:
 	ld a, [wSoundID]
 	ld l, a
@@ -195,6 +202,7 @@ Audio2_InitMusicVariables::
 	ld [wMusicTempo + 1], a
 	ld [wMusicWaveInstrument], a
 	ld [wSfxWaveInstrument], a
+	ld [wMusicDrumKit], a
 	ld d, NUM_CHANNELS
 	ld hl, wChannelReturnAddresses
 	call FillAudioRAM2
@@ -396,3 +404,24 @@ FillAudioRAM2:
 	dec b
 	jr nz, .loop
 	ret
+
+CheckRemapNoiseInstrument_2:
+	ld a, [wChannelSoundIDs + CHAN8]
+	cp REMAPPABLE_NOISE_INSTRUMENTS_END
+	ret nc
+	ld b, a
+	ld a, [wMusicDrumKit]
+	and a
+	ret z
+	ld hl, Drumkits_2
+	add a
+	call GetAddressFromPointerArray ; get drumkit
+	ld a, b
+	add a
+	call GetAddressFromPointerArray ; get drum noise pointer
+	ld d, h
+	ld e, l
+	ld hl, wChannelCommandPointers + CHAN8 * 2
+	jp Audio2_OverwriteChannelPointer ; replace the original drum noise with the one from the drumkit we want
+
+Drumkits_2: INCLUDE "audio/drumkits.asm"

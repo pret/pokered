@@ -241,6 +241,7 @@ HealFade:
 	jp GBFadeInFromWhite
 
 MomHealPokemonImmediate:
+	call StopAllMusic
 	predef HealParty
 	ld a, MUSIC_PKMN_HEALED
 	ld [wNewSoundID], a

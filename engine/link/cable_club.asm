@@ -853,6 +853,7 @@ TradeCenter_Trade:
 	ld a, BANK(Music_SafariZone)
 	ld [wAudioSavedROMBank], a
 	ld a, MUSIC_SAFARI_ZONE
+	; TODO: playmusic?
 	ld [wNewSoundID], a
 	rst _PlaySound
 	ld c, 100
@@ -944,6 +945,7 @@ CableClub_Run:
 	ld [wLinkState], a
 	ldh [hJoy5], a
 	ld a, 10
+	; TODO: clear new music bank wram?
 	ld [wAudioFadeOutControl], a
 	ld a, BANK(Music_Celadon)
 	ld [wAudioSavedROMBank], a

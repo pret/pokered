@@ -25,9 +25,7 @@ AnimateHealingMachine:
 	ld a, 4
 	ld [wAudioFadeOutControl], a
 .noFadeout
-	ld a, SFX_STOP_ALL_MUSIC
-	ld [wNewSoundID], a
-	rst _PlaySound
+	call StopAllMusic
 .waitLoop
 	ld a, [wAudioFadeOutControl]
 	and a ; is fade-out finished?

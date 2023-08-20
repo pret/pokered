@@ -78,7 +78,9 @@ UNION
 NEXTU
 ; PureRGBnote: ADDED: byte that holds the currently playing "extra" music if in a map that has marked down that it has extra music
 wReplacedMapMusic:: db 
-	; unused audio wram 12 bytes
+wSpecialMusicBank:: db ; only set if we're playing music outside the current music engine's bank
+wMusicDrumKit::db
+	; unused audio wram 10 bytes
 ENDU
 
 

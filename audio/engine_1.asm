@@ -174,8 +174,7 @@ Audio1_PlayNextNote:
 	call Audio1_EnableChannelOutput
 	ret
 .asm_918c
-	call Audio1_sound_ret
-	ret
+; fall through
 
 Audio1_sound_ret:
 	call Audio1_GetNextMusicByte
@@ -345,7 +344,7 @@ Audio1_sound_loop:
 Audio1_note_type:
 	and $f0
 	cp note_type_cmd
-	jp nz, Audio1_toggle_perfect_pitch
+	jp nz, VolumeEnvelope
 	ld a, d
 	and $f
 	ld b, $0
@@ -646,17 +645,106 @@ Audio1_sfx_note:
 Audio1_pitch_sweep:
 	ld a, c
 	cp CHAN5
-	jr c, Audio1_note ; if not a sfx
+	jp c, Audio1_note ; if not a sfx
 	ld a, d
 	cp pitch_sweep_cmd
-	jr nz, Audio1_note
+	jp nz, Audio1_note
 	ld b, $0
 	ld hl, wChannelFlags2
 	add hl, bc
 	bit BIT_EXECUTE_MUSIC, [hl]
-	jr nz, Audio1_note ; no
+	jp nz, Audio1_note ; no
 	call Audio1_GetNextMusicByte
 	ldh [rNR10], a
+	jp Audio1_sound_ret
+
+VolumeEnvelope:
+	ld a, d
+;volume_envelope
+	cp volume_envelope_cmd
+	jr nz, IncOctave
+	call Audio1_GetNextMusicByte
+	ld hl, wChannelVolumes
+	ld b, 0
+	add hl, bc
+	ld [hl], a
+	jp Audio1_sound_ret
+
+IncOctave:
+;inc_octave
+	cp inc_octave_cmd
+	jr nz, DecOctave
+	ld hl, wChannelOctaves
+	ld b, 0
+	add hl, bc
+	ld a, [hl]
+	dec a
+	and 7
+	ld [hl], a
+	jp Audio1_sound_ret
+
+DecOctave:
+;dec_octave
+	cp dec_octave_cmd
+	jr nz, MusicSpeed
+	ld hl, wChannelOctaves
+	ld b, 0
+	add hl, bc
+	ld a, [hl]
+	inc a
+	and 7
+	ld [hl], a
+	jp Audio1_sound_ret
+
+MusicSpeed:
+;speed
+	cp speed_cmd
+	jr nz, ChannelVolumeCmd
+	call Audio1_GetNextMusicByte
+	ld hl, wChannelNoteSpeeds
+	ld b, 0
+	add hl, bc
+	ld [hl], a
+	jp Audio1_sound_ret
+
+ChannelVolumeCmd:
+;channel_volume
+	cp channel_volume_cmd
+	jr nz, FadeWave
+	call Audio1_GetNextMusicByte
+	ld hl, wChannelVolumes
+	ld b, 0
+	add hl, bc
+	rla
+	rla
+	rla
+	rla
+	and $f0
+	push bc
+	ld b, a
+	ld a, [hl]
+	and $f
+	add b
+	pop bc
+	ld [hl], a
+	jp Audio1_sound_ret
+
+FadeWave:
+;fade_wave
+	cp fade_wave_cmd
+	jr nz, DrumKit
+	call Audio1_GetNextMusicByte
+	ld hl, wMusicWaveInstrument
+	ld [hl], a
+	jp Audio1_sound_ret
+
+DrumKit:
+;drum_kit
+	cp drum_kit_cmd
+	jp nz, Audio1_toggle_perfect_pitch
+	call Audio1_GetNextMusicByte
+	ld hl, wMusicDrumKit
+	ld [hl], a
 	jp Audio1_sound_ret
 
 Audio1_note:
@@ -1304,8 +1392,7 @@ Audio1_ApplyDutyCyclePattern:
 	ret
 
 Audio1_GetNextMusicByte:
-	call GetNextMusicByte
-	ret
+	jp GetNextMusicByte
 
 Audio1_GetRegisterPointer:
 ; hl = address of hardware sound register b for software channel c

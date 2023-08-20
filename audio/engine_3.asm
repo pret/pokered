@@ -5,14 +5,20 @@ Audio3_PlaySound::
 	cp SFX_STOP_ALL_MUSIC
 	jp z, StopAllAudio_3
 	cp MAX_SFX_ID_3
-	jr z, PlaySfx_3
-	jr c, PlaySfx_3
+	jr z, PlaySfxRemapDrums_3
+	jr c, PlaySfxRemapDrums_3
 	cp $fe
 	jr z, .playMusic
-	jr nc, PlaySfx_3
+	jr nc, PlaySfxRemapDrums_3
 .playMusic
 	call InitMusicVariables
 	jp PlaySoundCommon_3
+
+PlaySfxRemapDrums_3:
+	push af
+	call PlaySfx_3
+	pop af
+	jp CheckRemapNoiseInstrument_3
 
 PlaySfx_3:
 	ld l, a
@@ -187,3 +193,25 @@ PlaySoundCommon_3:
 
 Noise3_endchannel:
 	sound_ret
+
+CheckRemapNoiseInstrument_3:
+	ld a, [wChannelSoundIDs + CHAN8]
+	cp REMAPPABLE_NOISE_INSTRUMENTS_END
+	ret nc
+	ld b, a
+	ld a, [wMusicDrumKit]
+	and a
+	ret z
+	ld hl, Drumkits_3
+	add a
+	call GetAddressFromPointerArray ; get drumkit
+	ld a, b
+	add a
+	call GetAddressFromPointerArray ; get drum noise pointer
+	ld d, h
+	ld e, l
+	ld hl, wChannelCommandPointers + CHAN8 * 2
+	jp Audio3_OverwriteChannelPointer ; replace the original drum noise with the one from the drumkit we want
+
+Drumkits_3: INCLUDE "audio/drumkits.asm"
+

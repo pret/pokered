@@ -124,6 +124,10 @@ CompareMapMusicBankWithCurrentBank::
 
 ; shinpokerednote: audionote: updated to match pokemon yellow's audio engine code
 PlayMusic::
+	push af
+	xor a
+	ld [wSpecialMusicBank], a
+	pop af
 	ld b, a
 	ld [wNewSoundID], a
 	xor a
@@ -136,6 +140,8 @@ PlayMusic::
 
 ; shinpokerednote: audionote: updated to match pokemon yellow's audio engine code
 StopAllMusic:: 
+	xor a
+	ld [wSpecialMusicBank], a
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 ; shinpokerednote: audionote: updated to match pokemon yellow's audio engine code
@@ -194,7 +200,16 @@ PlaySound::
 GetNextMusicByte::
 	ldh a, [hLoadedROMBank]
 	push af
+	ld a, [wSpecialMusicBank]
+	and a
 	ld a, [wAudioROMBank]
+	jr z, .doBankSwitch ; if wSpecialMusicBank not set
+	ld a, c
+	cp CHAN5
+	ld a, [wSpecialMusicBank]
+	jr c, .doBankSwitch
+	ld a, [wAudioROMBank]
+.doBankSwitch
 	call BankswitchCommon
 	ld d, $0
 	ld a, c

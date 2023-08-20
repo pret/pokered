@@ -455,3 +455,7 @@ INCLUDE "audio/music/secretlab1.asm"
 INCLUDE "audio/music/secretlab2.asm"
 INCLUDE "audio/music/giovanni.asm"
 
+SECTION "Music 4", ROMX
+
+INCLUDE "audio/music/tcg/ronald.asm"
+INCLUDE "audio/music/tcg/duel1.asm"
