@@ -5,7 +5,7 @@ LoadGBPal::
 	ld a, [wMapConnections]
 	;;;;;; new bit in the map header that can mark a map as staying black visually until the map script changes it 
 	;;;;;; (used for situations in which we may need to replace tile blocks)
-	bit 4, a ; DEFER_SHOWING_MAP bit
+	bit BIT_DEFER_SHOWING_MAP, a
 	jr nz, .checkFirstLoad ; map starts by being black until map script changes this
 .notFirstLoad
 ;;;;;;;;;;
