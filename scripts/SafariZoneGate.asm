@@ -551,45 +551,38 @@ HideShowTrainers:
 	db HS_SAFARI_ZONE_CENTER_TRAINER_3
 	db -1 ; end 
 
-HideAllTrainers:
-	ld hl, HideShowTrainers         ; table items to hide
-	jp HideAllHl
-
 ShowAllTrainers:
 	ld hl, HideShowTrainers         ; table items to hide
-	jp ShowAllHl
-
-HideRangers:
-	ld hl, HideShowRangers
-	jp HideAllHl
-
+	; fall through
 ShowAllHl:
 .loop
 	ld a, [hli]                  ; read move from move table
+	cp -1
+	ret z
 	ld [wMissableObjectIndex], a
-	push af
 	push hl
 	predef ShowExtraObject
 	pop hl
-	pop af
-	inc a
-	jr nz, .loop
-.done
-	ret
+	jr .loop
 
+
+HideAllTrainers:
+	ld hl, HideShowTrainers         ; table items to hide
+	jr HideAllHl
+
+HideRangers:
+	ld hl, HideShowRangers
+	; fall through
 HideAllHl:
 .loop
 	ld a, [hli]                  ; read move from move table
+	cp -1
+	ret z
 	ld [wMissableObjectIndex], a
-	push af
 	push hl
 	predef HideExtraObject
 	pop hl
-	pop af
-	inc a
-	jr nz, .loop
-.done
-	ret
+	jr .loop
 
 AskGameTypeExplanation:
 	ld hl, SafariZoneHelp
