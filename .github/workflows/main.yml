@@ -66,11 +66,12 @@ jobs:
         if: ${{ github.event_name == 'push' && github.repository_owner == 'pret' }}
         run: |
           cp -v *.sym symbols/
+          cp -v *.map symbols/
 
       - name: Update symbols
         if: ${{ github.event_name == 'push' && github.repository_owner == 'pret' }}
         uses: EndBug/add-and-commit@v9
         with:
           cwd: "./symbols"
-          add: "*.sym"
+          add: "*.sym *.map"
           message: ${{ github.event.commits[0].message }}
