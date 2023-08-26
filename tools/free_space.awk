@@ -38,17 +38,25 @@ function register_bank(amount) {
 		printf "Bank %3d: %5d/16384 (%.2f%%)\n", bank_num, amount, amount * 100 / 16384
 	}
 }
+function register_bank_str(str) {
+    if (str ~ /\$[0-9A-F]+/) {
+        register_bank(strtonum("0x" substr(str, 2)))
+    } else {
+        printf "Malformed number? \"%s\" does not start with '$'\n", str
+    }
+}
 
 rom_bank && toupper($0) ~ /^[ \t]*EMPTY$/ {
 	# Empty bank
 	register_bank(16384)
 }
 rom_bank && toupper($0) ~ /^[ \t]*SLACK:[ \t]/ {
-	if ($2 ~ /\$[0-9A-F]+/) {
-		register_bank(strtonum("0x" substr($2, 2)))
-	} else {
-		printf "Malformed slack line? \"%s\" does not start with '$'\n", $2
-	}
+    # Old (rgbds <=0.6.0) end-of-bank free space
+    register_bank_str($2)
+}
+rom_bank && toupper($0) ~ /^[ \t]*TOTAL EMPTY:[ \t]/ {
+    # New (rgbds >=0.6.1) total free space
+    register_bank_str($3)
 }
 
 END {
