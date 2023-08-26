@@ -40,7 +40,7 @@ Other disassembly and/or decompilation projects:
 
 You can find us on:
 
-* [Discord (PRET, #pokered)](https://discord.gg/d5dubZ3)
+* [Discord (pret, #pokered)](https://discord.gg/d5dubZ3)
 * [IRC](https://web.libera.chat/?#pret)
 
 [wiki]: https://github.com/pret/pokered/wiki
