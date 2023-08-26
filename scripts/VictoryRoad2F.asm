@@ -37,6 +37,7 @@ VictoryRoad2FReplaceTileBlockScript:
 	ret
 
 VictoryRoad2F_ScriptPointers:
+	def_script_pointers
 	dw_const VictoryRoad2FDefaultScript,            SCRIPT_VICTORYROAD2F_DEFAULT
 	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_VICTORYROAD2F_START_BATTLE
 	dw_const EndTrainerBattle,                      SCRIPT_VICTORYROAD2F_END_BATTLE
