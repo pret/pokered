@@ -11,5 +11,6 @@ BillsGarden_Object:
 	def_object_events
 	object_event  9,  3, SPRITE_ERIKA, STAY, UP, 1 ; person
 	object_event 10,  3, SPRITE_SABRINA, STAY, UP, 2 ; person
+	; TODO: use text constants properly
 
 	def_warps_to BILLS_GARDEN

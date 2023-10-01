@@ -240,7 +240,7 @@ ItemUseBall:
 	; if the catch rate is 25 or lower it will guarantee catching if the pokemon has <1/3 health.
 	ld a, 3
 	ld [wUnusedC000], a ; store 1/3 in the fraction to check
-	callfar AICheckIfHPBelowFractionStore
+	callfar AICheckIfHPBelowFractionStore ; TODO: remove usage of wUnusedC000
 	pop bc
 	pop hl
 	ld a, [wUnusedC000] ; wUnusedC000 contains the result of AICheckIfHPBelowFractionPredef
