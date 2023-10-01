@@ -22,6 +22,7 @@ Route17_Object:
 	bg_event  9, 87, TEXT_ROUTE17_SIGN
 	bg_event  9, 111, TEXT_ROUTE17_NOTICE_SIGN2
 	bg_event  9, 141, TEXT_ROUTE17_CYCLING_ROAD_ENDS_SIGN
+	bg_event  5, -1, TEXT_ROUTE17_ROUTE16_SIGN ; PureRGBnote: ADDED: this sign from route 16 can now be read when you're facing it
 
 	def_object_events
 	object_event 12, 19, SPRITE_BIKER, STAY, LEFT, TEXT_ROUTE17_BIKER1, OPP_CUE_BALL, 4
