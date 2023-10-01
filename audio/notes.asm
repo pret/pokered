@@ -1,4 +1,3 @@
-; This file is INCLUDEd three times, once in each audio engine.
 
 	table_width 2
 	dw $F82C ; C_
@@ -13,4 +12,16 @@
 	dw $FB58 ; A_
 	dw $FB9B ; A#
 	dw $FBDA ; B_
-	assert_table_length NUM_NOTES
+	dw $fc16 ; C_
+	dw $fc4e ; C#
+	dw $fc83 ; D_
+	dw $fcb5 ; D#
+	dw $fce5 ; E_
+	dw $fd11 ; F_
+	dw $fd3b ; F#
+	dw $fd63 ; G_
+	dw $fd89 ; G#
+	dw $fdac ; A_
+	dw $fdcd ; A#
+	dw $fded ; B_
+	assert_table_length NUM_NOTES * 2

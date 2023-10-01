@@ -974,8 +974,12 @@ ReplaceFaintedEnemyMon:
 	inc a ; reset Z flag
 	ret
 
+; TODO: below music-related functions could be moved into another bank probably
+
 TrainerBattleVictory:
 	call EndLowHealthAlarm
+	CheckFlag FLAG_ALTERNATE_BATTLE_WIN_THEME
+	jr nz, .specialWinMusic
 	ld b, MUSIC_DEFEATED_GYM_LEADER
 	ld a, [wGymLeaderNo]
 	and a
@@ -990,8 +994,11 @@ TrainerBattleVictory:
 	jr z, .continue
 	jr .notrival
 .rival
+	ld a, [wCurMap]
+	cp CHAMP_ARENA
+	jr z, .continue ; if we're in the champ arena don't set the flag that prevents music from changing after battle
 	ld hl, wFlags_D733
-	set 1, [hl]
+	set 1, [hl] ; prevents music from changing after battle finishes
 .continue
 	ld b, MUSIC_DEFEATED_GYM_LEADER
 ;;;;;;;;;;
@@ -1000,6 +1007,7 @@ TrainerBattleVictory:
 	cp LINK_STATE_BATTLING
 	ld a, b
 	call nz, PlayBattleVictoryMusic
+.skipDefaultMusic
 	ld hl, TrainerDefeatedText
 	rst _PrintText
 	ld a, [wLinkState]
@@ -1016,6 +1024,16 @@ TrainerBattleVictory:
 	ld hl, wAmountMoneyWon + 2
 	ld c, $3
 	predef_jump AddBCDPredef
+.specialWinMusic
+	ResetFlag FLAG_ALTERNATE_BATTLE_WIN_THEME
+	ld a, [wCurMap]
+	cp CHAMP_ARENA
+	jr nz, .skipDefaultMusic
+	call StopAllMusic
+	ld c, BANK(Music_BattleVictoryGuide)
+	ld hl, Music_BattleVictoryGuide
+	call PlaySpecialBattleMusic3
+	jr .skipDefaultMusic
 
 MoneyForWinningText:
 	text_far _MoneyForWinningText
@@ -1233,6 +1251,9 @@ HandlePlayerBlackOut:
 	cp OPP_RIVAL3 ; FIXED: loss text for Rival 3 trainer class restored
 	jr z, .lossText
 	cp OPP_PROF_OAK
+	jr z, .lossText
+	ld a, [wCurMap]
+	cp CHAMP_ARENA ; ADDED: in the champ arena every battle has loss text
 	jr z, .lossText
 	jr .noLossText
 .lossText
@@ -1760,6 +1781,10 @@ LoadBattleMonFromParty:
 	ld [hli], a
 	dec b
 	jr nz, .statModLoop
+	ld hl, wMonHBaseStats
+	ld de, wPlayerMonBaseStats
+	ld bc, NUM_STATS
+	rst _CopyData ; copy the pokemon's base stats to wPlayerMonBaseStats to use in other places during battle
 	ld de, wBattleMonType
 	jpfar TryRemapTyping
 
@@ -2525,6 +2550,11 @@ PartyMenuOrRockOrRun:
 	;;;;;;;;;
 	ld a, $1
 	ld [wActionResultOrTookBattleTurn], a
+	;;;;;;;;; PureRGBnote: ADDED: helps avoid ai spamming as if they predict you switching pokemon perfectly
+	;;;;;;;;; it was added here vs lower in SwitchPlayerMon because SwitchPlayerMon is also used in the case of in Shift game mode switching
+	inc a ; 2 = player switched pokemon this turn
+	ld [wAIMoveSpamAvoider], a 
+	;;;;;;;;;
 	call GBPalWhiteOut
 	call ClearSprites
 	call LoadHudTilePatterns
@@ -2557,8 +2587,6 @@ SwitchPlayerMon:
 	call SaveScreenTilesToBuffer1
 	ld a, $2
 	ld [wCurrentMenuItem], a
-	ld [wAIMoveSpamAvoider], a ; PureRGBnote: ADDED: helps avoid ai spamming as if they predict you switching pokemon perfectly
-	and a
 	ret
 
 AlreadyOutText:
@@ -6371,6 +6399,11 @@ LoadEnemyMonData:
 	ld a, [hli]
 	ld b, [hl]
 	jr nz, .storeDVs
+	ld a, [wCurMap]
+	cp CHAMP_ARENA
+	ld a, $FF ; max DVs
+	ld b, a
+	jr z, .storeDVs ; trainers in battles in the champ arena will have maxed out DVs.
 	ld a, [wIsInBattle]
 	cp $2 ; is it a trainer battle?
 ; fixed DVs for trainer mon

@@ -213,7 +213,6 @@ BillsGarden_TextPointers:
 BillsGardenLeftNPCText:
 	text_asm
 	ld a, [wBillsGardenVisitor]
-	add a
 	ld hl, BillsGardenLeftNPCTextPointers
 	call GetAddressFromPointerArray
 	rst _PrintText
@@ -230,7 +229,6 @@ BillsGardenLeftNPCTextPointers:
 BillsGardenRightNPCText:
 	text_asm
 	ld a, [wBillsGardenVisitor]
-	add a
 	ld hl, BillsGardenRightNPCTextPointers
 	call GetAddressFromPointerArray
 	rst _PrintText
@@ -258,7 +256,6 @@ BillsGardenOverheardText:
 	ld hl, BillsGardenEavesDropQuestionNo
 	jr nz, .done
 	ld a, [wBillsGardenVisitor]
-	add a
 	ld hl, BillsGardenOverheardTextPointers
 	call GetAddressFromPointerArray
 .done

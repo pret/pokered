@@ -19,7 +19,6 @@ TrainerPicAndMoneyPointers::
 	pic_money BikerPic,        2000
 	pic_money BurglarPic,      9000
 	pic_money EngineerPic,     5000
-	pic_money JugglerPic,      3500
 	pic_money FisherPic,       3500
 	pic_money SwimmerPic,      1000
 	pic_money CueBallPic,      2500
@@ -60,4 +59,5 @@ TrainerPicAndMoneyPointers::
 	pic_money RookiePic, 	   3000
 	pic_money SoldierPic,      6000
 	pic_money ChiefPic,        9900
+	pic_money GymGuidePic,     9900
 	assert_table_length NUM_TRAINERS

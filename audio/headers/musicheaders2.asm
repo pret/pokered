@@ -35,7 +35,8 @@ Music_DefeatedWildMon::
 	channel 3, Music_DefeatedWildMon_Ch3
 
 Music_DefeatedGymLeader::
-	channel_count 3
+	channel_count 4
 	channel 1, Music_DefeatedGymLeader_Ch1
 	channel 2, Music_DefeatedGymLeader_Ch2
 	channel 3, Music_DefeatedGymLeader_Ch3
+	channel 4, EndSound

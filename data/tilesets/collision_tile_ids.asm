@@ -1,3 +1,21 @@
+; input d = tile to check whether it's passable
+_CheckTilePassable::
+	ld a, [wTilesetCollisionPtr]
+	ld l, a
+	ld a, [wTilesetCollisionPtr+1]
+	ld h, a
+.tilePassableLoop
+	ld a, [hli]
+	cp $ff
+	jr z, .impassable
+	cp d
+	jr nz, .tilePassableLoop
+	and a ; passable
+	ret
+.impassable
+	scf ; impassable
+	ret
+
 MACRO coll_tiles
 	IF _NARG
 		db \# ; all args
@@ -74,3 +92,7 @@ Plateau_Coll::
 
 SecretLab_Coll::
 	coll_tiles $08, $09, $18, $19, $1A, $1E, $1F, $2E, $2F, $36, $3C, $3D, $3E, $3F, $42, $43, $46, $49, $4C, $4D, $52
+
+ChampCup_Coll::
+	coll_tiles $05, $06, $09, $0D, $0E, $1D, $1E, $15, $16, $19, $20, $21, $25, $26, $30, $31, $32, $33, $34, $35, $36,\ 
+	$37, $38, $39, $40, $41, $42, $43, $44, $45, $46, $47, $48, $49, $4A, $4B, $4C, $4D, $50, $51, $56, $57, $58, $59, $5A, $5B

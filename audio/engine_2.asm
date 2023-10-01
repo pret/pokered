@@ -256,6 +256,13 @@ Audio2_InitMusicVariables::
 	ld a, $ff
 	ld [wStereoPanning], a
 	xor a
+	ld d, 3
+	ld hl, wChannelTranspositions
+	call FillAudioRAM2
+	;ld hl, wChannelSimulatedRests
+	;call FillAudioRAM2
+	;ld hl, wChannelCutoffs
+	;call FillAudioRAM2
 	ldh [rNR50], a
 	ld a, $8
 	ldh [rNR10], a
@@ -413,11 +420,10 @@ CheckRemapNoiseInstrument_2:
 	ld a, [wMusicDrumKit]
 	and a
 	ret z
+	dec a ; drumkit to use is wMusicDrumKit - 1
 	ld hl, Drumkits_2
-	add a
 	call GetAddressFromPointerArray ; get drumkit
 	ld a, b
-	add a
 	call GetAddressFromPointerArray ; get drum noise pointer
 	ld d, h
 	ld e, l
@@ -425,3 +431,27 @@ CheckRemapNoiseInstrument_2:
 	jp Audio2_OverwriteChannelPointer ; replace the original drum noise with the one from the drumkit we want
 
 Drumkits_2: INCLUDE "audio/drumkits.asm"
+
+; input d = which channel
+; input e = note length
+;CheckNoteCutoff::
+;	ld a, d
+;	cp CHAN4
+;	ret nc ; no cutoff on channels above 3
+;	ld c, d
+;	ld hl, wChannelCutoffs
+;	ld b, 0
+;	add hl, bc
+;	ld a, [hl]
+;	and a
+;	ret z
+;	dec e
+;	ld d, a
+;	ld a, e
+;	sub d
+;	ld e, d ; resultant note length
+;	inc e
+;	ld hl, wChannelSimulatedRests
+;	add hl, bc
+;	ld [hl], a ; resultant simulated rest
+;	ret

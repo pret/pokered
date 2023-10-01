@@ -78,9 +78,14 @@ UNION
 NEXTU
 ; PureRGBnote: ADDED: byte that holds the currently playing "extra" music if in a map that has marked down that it has extra music
 wReplacedMapMusic:: db 
+wSpecialBattleMusicID:: db
 wSpecialMusicBank:: db ; only set if we're playing music outside the current music engine's bank
 wMusicDrumKit::db
-	; unused audio wram 10 bytes
+wChannelTranspositions::
+wChannel1Transposition::db
+wChannel2Transposition::db
+wChannel3Transposition::db
+	; unused audio wram 7 bytes
 ENDU
 
 
@@ -1129,9 +1134,19 @@ wGainBoostedExp:: db
 ENDU
 
 ; PureRGBnote: CHANGED: wGymCityName and wGymLeaderName used to be here but they were easy to remove the need for in order to have some extra space
+; this union spans 15 bytes
 UNION
 ; shinpokerednote: ADDED: tracker for the levels of each of the player's pokemon at the start of battle
-wStartBattleLevels:: ds 6
+wStartBattleLevels:: ds PARTY_LENGTH
+; pureRGBnote: ADDED: tracker for base stats of the player pokemon in battle, used for comparisons in opponent AI
+wPlayerMonBaseHP::db
+wPlayerMonBaseAttack::db
+wPlayerMonBaseDefense::db
+wPlayerMonBaseSpeed::db
+wPlayerMonBaseSpecial::db
+NEXTU
+ds PARTY_LENGTH
+wPlayerMonBaseStats:: ds NUM_STATS
 NEXTU
 ; PureRGBnote: ADDED: tracker for the original sprite IDs of every sprite in a map - tracked in order to change them on the fly if necessary
 wMapSpriteOriginalPictureIDs:: ds 15
@@ -1152,7 +1167,7 @@ wItemDuplicationActive:: db ; after seeing the old man catch pokemon, this flag 
 wAIMoveSpamAvoider:: db
 wEnemyLastSelectedMoveDisable:: db ; store for disable functionality
 wPlayerLastSelectedMoveDisable:: db ; store for disable functionality
-ds 1 ; unused lone byte
+wChampArenaChallenger:: db ; which challenger we're currently fighting in the champ arena
 wAITargetMonType1:: db ; the type of the pokemon the AI should think it's attacking (stays as the previous pokemon when you switch pokemon)
 wAITargetMonType2:: db ; the type of the pokemon the AI should think it's attacking (stays as the previous pokemon when you switch pokemon)
 wAITargetMonStatus:: db ; the current status of the pokemon the AI should think it's attacking (set when healing a pokemon's status or switching it out)
@@ -1271,7 +1286,16 @@ wEnemyMonNick:: ds NAME_LENGTH
 
 wEnemyMon:: battle_struct wEnemyMon
 
+UNION
 wEnemyMonBaseStats:: ds NUM_STATS
+NEXTU
+wEnemyMonBaseHP::db
+wEnemyMonBaseAttack::db
+wEnemyMonBaseDefense::db
+wEnemyMonBaseSpeed::db
+wEnemyMonBaseSpecial::db
+ENDU
+
 wEnemyMonActualCatchRate:: db
 wEnemyMonBaseExp:: db
 
@@ -1971,7 +1995,7 @@ wXBlockCoord:: db
 
 wLastMap:: db
 
-wUnusedD366:: db ; unused byte
+wUnusedD366:: db ; unused save file byte
 
 wCurMapTileset:: db
 
@@ -2029,7 +2053,7 @@ wBagItems:: ds BAG_ITEM_CAPACITY * 2 + 1 ; now holds 30 items
 wWildMonPalettes:: ds 3 ; flag array for the current map: which wild pokemon should use alt palettes
 
 wColorSwapsUsed:: db ; how many times the player has used the color changer NPC
-wBoosterChipActive:: db ; whether the player gets boosted EXP from the effects of the boosterchip
+wBoosterChipActive:: db ; whether the player gets boosted EXP from the effects of the boosterchip ; TODO: change to event flag
 
 ; 50 bytes remaining in union
 ; unused save file 50 bytes

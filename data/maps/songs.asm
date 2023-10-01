@@ -114,7 +114,7 @@ MapSongBanks::
 	db MUSIC_DUNGEON2, BANK(Music_Dungeon2) ; SECRET_LAB ; not actually what plays in this map, gets remapped
 	db MUSIC_POKEMON_TOWER, BANK(Music_PokemonTower) ; POKEMON_TOWER_B1F
 	db MUSIC_INDIGO_PLATEAU, BANK(Music_IndigoPlateau) ; LANCES_ROOM
-	db MUSIC_SS_ANNE, BANK(Music_SSAnne) ; UNUSED_MAP_72
+	db MUSIC_TITLE_SCREEN, BANK(Music_TitleScreen) ; CHAMP_ARENA
 	db MUSIC_SS_ANNE, BANK(Music_SSAnne) ; UNUSED_MAP_73
 	db MUSIC_SS_ANNE, BANK(Music_SSAnne) ; UNUSED_MAP_74
 	db MUSIC_SS_ANNE, BANK(Music_SSAnne) ; UNUSED_MAP_75

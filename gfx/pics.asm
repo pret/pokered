@@ -599,6 +599,7 @@ RangerFPic::       INCBIN "gfx/trainers/rangerf.pic"
 RookiePic::        INCBIN "gfx/unused_prototype_sprites/rookie.pic"
 SoldierPic::       INCBIN "gfx/unused_prototype_sprites/soldier.pic"
 ChiefPic::         INCBIN "gfx/unused_prototype_sprites/chief.pic"
+GymGuidePic::      INCBIN "gfx/unused_prototype_sprites/gym_guide.pic"
 
 SECTION "Type Icons", ROMX
 
@@ -657,3 +658,5 @@ LightSwitchOff:: INCBIN "gfx/icons/light_switch_off.2bpp"
 LightSwitchOn:: INCBIN "gfx/icons/light_switch_on.2bpp"
 
 OldNewTypes:: INCBIN "gfx/font/old_new_types.2bpp"
+
+LoveEmote:: INCBIN "gfx/emotes/love.2bpp"

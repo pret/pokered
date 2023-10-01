@@ -150,6 +150,7 @@ ROMX $1F
 	"Sound Effects 3"
 	"Audio Engine 3"
 	"Music 3"
+	"New Engine 3 SFX"
 ROMX $20
 	"Text 1"
 ROMX $21
@@ -204,6 +205,8 @@ ROMX $35
     "newCode"
 ROMX $36
 	"Music 4"
+ROMX $37
+	"Music 5"
 WRAM0
 	"Audio RAM"
 	org $c100

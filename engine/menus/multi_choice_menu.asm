@@ -195,6 +195,60 @@ SixOptionMenu::
 	hlcoord 6, 1 ; where the list will be drawn at
 	jp DoneDrawFunc
 
+ChampArenaMusicSelectMenu::
+	;ld a, [wChampArenaChallenger]
+	;cp 13 ; last challenger (blue)
+	ld a, 2
+	ld [wListCount], a
+	ld [wMaxMenuItem], a
+
+	ld a, 6
+	ld [wTopMenuItemY], a
+	ld a, 5
+	ld [wTopMenuItemX], a
+
+	hlcoord 4, 5
+	ld b, 5  ; height
+	ld c, 13 ; width
+	call TextBoxBorder
+	call UpdateSprites ; disable sprites behind the text box
+	xor a
+	ld [wMenuWatchMovingOutOfBounds], a ; enable menu wrapping
+
+	hlcoord 6, 6 ; where the list will be drawn at
+	ld de, ClassicText
+	call PlaceString
+
+	pop hl ; hl = which music name will be printed next
+	ld a, [hli]
+	push hl
+	; get name into de
+	call GetChampArenaMusicName
+	ld d, h
+	ld e, l
+	hlcoord 6, 8
+	call PlaceString
+
+	pop hl ; hl = which music name will be printed next
+	ld a, [hl]
+	; get name into de
+	call GetChampArenaMusicName
+	ld d, h
+	ld e, l
+	hlcoord 6, 10
+	call PlaceString
+
+	ld a, 1
+	ldh [hAutoBGTransferEnabled], a ; enable transfer
+	call Delay3
+	call LoadGBPal
+	call HandleMenuInput
+	xor a
+	ldh [hJoy7], a ; joypad state update flag
+	pop af
+	ld [wd730], a ; reset letter printing delay to what it was before calling this function
+	ret
+
 MoveDexQuestion1::
 	dw FourOptionMenu
 	db   "FLYING"
@@ -312,4 +366,117 @@ SafariTypeOptions::
 	db "CLASSIC"
 	next "RANGER HUNT"
 	next "FREE ROAM@"
-	
+
+ClassicText:
+	db "CLASSIC@"
+
+TitleText:
+	db "TITLE@"
+
+ChampArenaMusicSelectErika::
+	dw ChampArenaMusicSelectMenu
+	db 0, 1
+
+ChampArenaMusicSelectBlaine::
+	dw ChampArenaMusicSelectMenu
+	db 2, 3
+
+ChampArenaMusicSelectSurge::
+	dw ChampArenaMusicSelectMenu
+	db 4, 5
+
+ChampArenaMusicSelectSabrina::
+	dw ChampArenaMusicSelectMenu
+	db 6, 7
+
+ChampArenaMusicSelectBruno::
+	dw ChampArenaMusicSelectMenu
+	db 8, 9
+
+ChampArenaMusicSelectMisty::
+	dw ChampArenaMusicSelectMenu
+	db 0, 3
+
+ChampArenaMusicSelectLance::
+	dw ChampArenaMusicSelectMenu
+	db 6, 8
+
+ChampArenaMusicSelectKoga::
+	dw ChampArenaMusicSelectMenu
+	db 9, 10
+
+ChampArenaMusicSelectLorelei::
+	dw ChampArenaMusicSelectMenu
+	db 1, 6
+
+ChampArenaMusicSelectBrock::
+	dw ChampArenaMusicSelectMenu
+	db 5, 2
+
+ChampArenaMusicSelectAgatha::
+	dw ChampArenaMusicSelectMenu
+	db 10, 8
+
+ChampArenaMusicSelectGymGuide::
+	dw ChampArenaMusicSelectMenu
+	db 7, 3
+
+ChampArenaMusicSelectBlue::
+	dw FourOptionMenu
+	db "CLASSIC"
+	next "COOL"
+	next "FRIENDLY"
+	next "TITLE@"
+
+GetChampArenaMusicNameIntoWRAM:
+	ld a, [wd11e]
+	and a
+	ld hl, ClassicText
+	jr z, .loadNameIntoWram
+	cp 12
+	ld hl, TitleText
+	jr z, .loadNameIntoWram
+	dec a
+	call GetChampArenaMusicName
+.loadNameIntoWram
+	ld de, wcd6d
+.loop
+	ld a, [hli]
+	ld [de], a
+	cp "@"
+	jr z, .done
+	inc de
+	jr .loop
+.done
+	ld de, wcd6d
+	ret
+
+GetChampArenaMusicName:
+	ld hl, ChampArenaMusicTextData
+	and a
+	ret z
+	ld b, a ; b = which name in the list it is
+.loop
+	ld a, [hli]
+	cp "@"
+	jr z, .next
+	jr .loop
+.next
+	dec b
+	ret z
+	jr .loop
+
+ChampArenaMusicTextData::
+	li "FRIENDLY"
+	li "CUTE"
+	li "MACHO"
+	li "JAZZY"
+	li "COOL"
+	li "ROCKIN"
+	li "ANTHEMIC"
+	li "GENIUS"
+	li "SERIOUS"
+	li "INSPIRING"
+	li "TENSE"
+	db -1
+

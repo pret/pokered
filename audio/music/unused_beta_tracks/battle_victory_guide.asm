@@ -1,15 +1,8 @@
-;
-;;	Victory013
-;
-;;	Converting on Tue Jun 20 00:52:07 1995
-;
-;;				by ver 1.02
-;
-
-
-
-
-
+Music_BattleVictoryGuide::
+	channel_count 3
+	channel 1, Victory013_Ch1
+	channel 2, Victory013_Ch2
+	channel 3, Victory013_Ch3
 
 ;;----------------------------------------
 Victory013_Ch1:

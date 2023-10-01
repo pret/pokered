@@ -23,7 +23,6 @@ TrainerClassMoveChoiceModifications:
 	move_choices 1       ; BIKER
 	move_choices 1, 3    ; BURGLAR
 	move_choices 1, 3    ; ENGINEER
-	move_choices 1, 2    ; UNUSED_JUGGLER
 	move_choices 1, 3    ; FISHER
 	move_choices 1, 3    ; SWIMMER
 	move_choices         ; CUE_BALL
@@ -64,4 +63,8 @@ TrainerClassMoveChoiceModifications:
 	move_choices 1, 2    ; ROOKIE
 	move_choices 1, 3    ; SOLDIER
 	move_choices 1, 3, 4 ; CHIEF
+	move_choices 1, 3, 4 ; GYM_GUIDE
 	assert_list_length NUM_TRAINERS
+
+ChampArenaGenericMoveChoices:
+	move_choices 1, 2, 3, 4 ; used to make all the champ arena challengers have strong AI without changing their initial encounter ones.

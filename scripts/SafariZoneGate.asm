@@ -390,7 +390,6 @@ AskGameType:
 	jr nz, .goodbye
 	ld hl, TextPointers_SafariGames
 	ld a, [wCurrentMenuItem]
-	add a
 	call GetAddressFromPointerArray
 	rst _PrintText
 	and a
@@ -593,7 +592,6 @@ AskGameTypeExplanation:
 	jr nz, .goodbye
 	ld hl, TextPointers_SafariExplanations
 	ld a, [wCurrentMenuItem]
-	add a
 	call GetAddressFromPointerArray
 	rst _PrintText
 	and a

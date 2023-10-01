@@ -51,6 +51,7 @@ GetAddressFromPointerArray::
 	ld d, 0
 	ld e, a
 	add hl, de
+	add hl, de ; 2 bytes per pointer
 GetAddressFromPointer::
 	ld a, [hli]
 	ld h, [hl]

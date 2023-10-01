@@ -202,11 +202,10 @@ CheckRemapNoiseInstrument_3:
 	ld a, [wMusicDrumKit]
 	and a
 	ret z
+	dec a ; drumkit to use is wMusicDrumKit - 1
 	ld hl, Drumkits_3
-	add a
 	call GetAddressFromPointerArray ; get drumkit
 	ld a, b
-	add a
 	call GetAddressFromPointerArray ; get drum noise pointer
 	ld d, h
 	ld e, l

@@ -117,3 +117,4 @@ _IndigoPlateauGymGuideSonMoreTMs::
 	cont "and ready for you"
 	cont "now! Want some?"
 	done
+	

@@ -234,20 +234,29 @@ ENDM
 
 	const drum_kit_cmd ; f7
 MACRO drum_kit
-	db drum_kit_cmd, \1
+	db drum_kit_cmd, \1 + 1
 ENDM
 MACRO toggle_noise
-	db drum_kit_cmd, \1
+	db drum_kit_cmd, \1 + 1
 ENDM
-	
-
-	const_next $f8
 
 ; when enabled, the sfx data is interpreted as music data
 	const execute_music_cmd ; $f8
 MACRO execute_music
 	db execute_music_cmd
 ENDM
+
+	const transpose_cmd ; $f9
+MACRO transpose
+	db transpose_cmd
+	dn \1, \2 ; num octaves, num pitches
+ENDM
+
+;	const cutoff_cmd ; $fa
+;MACRO cutoff
+;	db cutoff_cmd
+;	db \1
+;ENDM
 
 	const_next $fc
 

@@ -51,7 +51,6 @@ TreeDeleterText:
 	ld hl, TextPointers_TreeDelete
 	ld a, [wCurrentMenuItem]
 	push af
-	add a
 	call GetAddressFromPointerArray
 	rst _PrintText
 	pop af

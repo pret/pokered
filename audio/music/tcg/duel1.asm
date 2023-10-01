@@ -1,11 +1,11 @@
-Music_DuelTheme1:
+Music_DuelTheme1::
 	channel_count 4
 	channel 1, Music_DuelTheme1_Ch1
 	channel 2, Music_DuelTheme1_Ch2
 	channel 3, Music_DuelTheme1_Ch3
 	channel 4, Music_DuelTheme1_Ch4
 
-Music_DuelTheme1_Ch1::
+Music_DuelTheme1_Ch2::
 	speed 7
 	stereo_panning2 TRUE, TRUE
 	vibrato 20, 3, 3
@@ -479,7 +479,7 @@ Branch_f5580:
 	note F#, 2
 	sound_ret
 
-Music_DuelTheme1_Ch2::
+Music_DuelTheme1_Ch1::
 	speed 7
 	stereo_panning2 TRUE, TRUE
 	vibrato 20, 3, 3

@@ -837,6 +837,10 @@ INCLUDE "scripts/HallOfFame.asm"
 INCLUDE "data/maps/objects/HallOfFame.asm"
 HallOfFame_Blocks: INCBIN "maps/HallOfFame.blk"
 
+INCLUDE "data/maps/headers/ChampArena.asm"
+INCLUDE "scripts/ChampArena.asm"
+INCLUDE "data/maps/objects/ChampArena.asm"
+ChampArena_Blocks: INCBIN "maps/ChampArena.blk"
 
 SECTION "Maps 15", ROMX
 

@@ -377,6 +377,7 @@ INCLUDE "engine/overworld/healing_machine.asm"
 ; moved from home bank
 INCLUDE "audio/fade_audio.asm"
 INCLUDE "engine/gfx/animated_tiles_code.asm"
+INCLUDE "data/tilesets/collision_tile_ids.asm"
 ; moved from bank1C
 INCLUDE "engine/overworld/fly_animation.asm"
 
@@ -428,4 +429,4 @@ INCLUDE "engine/pokemon/change_mon_species.asm"
 INCLUDE "engine/menus/super_softlock_checker.asm"
 INCLUDE "engine/pokemon/remap_typings.asm"
 INCLUDE "engine/gbc/gbc_cpu_speed.asm"
-
+INCLUDE "data/trainers/custom_movesets.asm"

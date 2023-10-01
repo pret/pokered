@@ -171,8 +171,7 @@ Audio1_PlayNextNote:
 	bit 7, a
 	jr z, .asm_918c
 ;;;;;;;;;;
-	call Audio1_EnableChannelOutput
-	ret
+	jp Audio1_EnableChannelOutput
 .asm_918c
 ; fall through
 
@@ -639,8 +638,7 @@ Audio1_sfx_note:
 	call Audio1_ApplyDutyCycleAndSoundLength
 	call Audio1_EnableChannelOutput
 	pop de
-	call Audio1_ApplyWavePatternAndFrequency
-	ret
+	jp Audio1_ApplyWavePatternAndFrequency
 
 Audio1_pitch_sweep:
 	ld a, c
@@ -741,11 +739,33 @@ FadeWave:
 DrumKit:
 ;drum_kit
 	cp drum_kit_cmd
-	jp nz, Audio1_toggle_perfect_pitch
+	jr nz, Transpose
 	call Audio1_GetNextMusicByte
 	ld hl, wMusicDrumKit
 	ld [hl], a
 	jp Audio1_sound_ret
+
+Transpose:
+	cp transpose_cmd
+	;jr nz, Cutoff
+	jp nz, Audio1_toggle_perfect_pitch
+	call Audio1_GetNextMusicByte
+	ld hl, wChannelTranspositions
+	ld b, 0
+	add hl, bc
+	ld [hl], a
+	jp Audio1_sound_ret
+
+;Cutoff:
+;; cutoff
+;	cp cutoff_cmd
+;	jp nz, Audio1_toggle_perfect_pitch
+;	call Audio1_GetNextMusicByte
+;	ld hl, wChannelCutoffs
+;	ld b, 0
+;	add hl, bc
+;	ld [hl], a
+;	jp Audio1_sound_ret
 
 Audio1_note:
 	ld a, c
@@ -1420,34 +1440,55 @@ Audio1_MultiplyAdd:
 	sla e
 	rl d
 	and a
-	jr z, .done
+	ret z
 	jr .loop
-.done
-	ret
 
 Audio1_CalculateFrequency:
 ; return the frequency for note a, octave b in de
-	ld h, 0
-	ld l, a
-	add hl, hl
-	ld d, h
-	ld e, l
-	ld hl, Audio1_Pitches
+; do transposition first of note and octave
+	ld d, b
+	ld e, a
+	ld b, 0
+	; get starting octave
+	ld hl, wChannelTranspositions
+	add hl, bc
+	ld a, [hl]
+	swap a ; hi nybble
+	and $f
+	; add current octave
+	add d
+	push af ; we'll use this later
+	; get starting frequency
+	ld hl, wChannelTranspositions
+	add hl, bc
+	ld a, [hl]
+	and $f ; lo nybble
+	ld l, a ; ok
+	ld d, 0
+	ld h, d
+	add hl, de ; add current pitch
+	add hl, hl ; skip 2 bytes for each
+	ld de, Audio1_Pitches
 	add hl, de
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
-	ld a, b
+	; get our octave
+	pop af
+	; shift right by [7 - octave] bits
 .loop
-	cp 7
-	jr z, .done
+	; [7 - octave] loops
+	cp $7
+	jr nc, .ok
+	; sra de
 	sra d
 	rr e
 	inc a
 	jr .loop
-.done
-	ld a, 8
-	add d
+
+.ok
+	ld a, d
+	and $7 ; top 3 bits for frequency (11 total)
 	ld d, a
 	ret
 
@@ -1615,13 +1656,13 @@ Audio1_PlaySound::
 	ld a, [wSoundID]
 	cp CRY_SFX_START
 	jr nc, .maybeCry
-	jr .done
+	ret
 .maybeCry
 	ld a, [wSoundID]
 	cp CRY_SFX_END
-	jr z, .done
+	ret z
 	jr c, .cry
-	jr .done
+	ret
 .cry
 	ld hl, wChannelSoundIDs + CHAN5
 	ld [hli], a
@@ -1635,12 +1676,11 @@ Audio1_PlaySound::
 	ld [hl], d ; overwrite pointer to point to sound_ret
 	ld a, [wSavedVolume]
 	and a
-	jr nz, .done
+	ret nz
 	ldh a, [rNR50]
 	ld [wSavedVolume], a
 	ld a, $77
 	ldh [rNR50], a ; full volume
-.done
 	ret
 
 Audio1_CryRet:

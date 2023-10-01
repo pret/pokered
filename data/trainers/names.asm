@@ -12,7 +12,6 @@ TrainerNames::
 	li "BIKER"
 	li "BURGLAR"
 	li "ENGINEER"
-	li "J" ; unused juggler (may as well use the least space possible by this)
 	li "FISHERMAN"
 	li "SWIMMER"
 	li "CUE BALL"
@@ -24,7 +23,7 @@ TrainerNames::
 	li "TAMER"
 	li "BIRD KEEPER"
 	li "BLACKBELT"
-	li "RIVAL1"
+	li "R1" ; rival 1, shortened for some free space
 	li "PROF.OAK"
 	li "SCIENTIST"
 	li "GIOVANNI"
@@ -40,8 +39,8 @@ TrainerNames::
 	li "BLAINE"
 	li "SABRINA"
 	li "GENTLEMAN"
-	li "RIVAL2"
-	li "RIVAL3"
+	li "R2" ; rival 2, shortened for some free space
+	li "R3" ; champion rival, shortened for some free space 
 	li "LORELEI"
 	li "CHANNELER"
 	li "AGATHA"
@@ -53,4 +52,5 @@ TrainerNames::
 	li "ROOKIE"
 	li "SOLDIER"
 	li "CHIEF"
+	li "GYM GUIDE"
 	assert_list_length NUM_TRAINERS

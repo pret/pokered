@@ -29,8 +29,6 @@ INCLUDE "home/pokemon.asm"
 INCLUDE "home/print_bcd.asm"
 INCLUDE "home/pics.asm"
 
-INCLUDE "data/tilesets/collision_tile_ids.asm"
-
 INCLUDE "home/copy2.asm"
 INCLUDE "home/text.asm"
 INCLUDE "home/vcopy.asm"

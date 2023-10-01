@@ -2,6 +2,8 @@
 DEF MAP_TILESET_SIZE EQU $60
 
 UpdatePlayerSprite:
+	CheckFlag FLAG_HIDE_PLAYER_SPRITE
+	jr nz, .disableSprite
 	ld a, [wSpritePlayerStateData2WalkAnimationCounter]
 	and a
 	jr z, .checkIfTextBoxInFrontOfSprite
@@ -670,16 +672,13 @@ CanWalkOntoTile:
 	and a
 	ret
 .notScripted
-	ld a, [wTilesetCollisionPtr]
-	ld l, a
-	ld a, [wTilesetCollisionPtr+1]
-	ld h, a
-.tilePassableLoop
-	ld a, [hli]
-	cp $ff
-	jr z, .impassable
-	cp c
-	jr nz, .tilePassableLoop
+	push bc
+	push de
+	ld d, c
+	callfar _CheckTilePassable
+	pop de
+	pop bc
+	jr c, .impassable
 	ld h, HIGH(wSpriteStateData2)
 	ldh a, [hCurrentSpriteOffset]
 	add $6

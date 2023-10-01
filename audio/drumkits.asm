@@ -6,20 +6,20 @@
 	dw .Drumkit5
 	dw .Drumkit6
 
-.Drumkit0:
+.Drumkit0: ; pokemon pinball drumkit 0
 	dw .Drum00
-	dw .Snare1
-	dw .Snare2
-	dw .Snare3
-	dw .Snare4
-	dw .Drum05
+	dw .Snare12
+	dw .Snare13
+	dw .Snare14
+	dw .Kick4
+	dw .Snare15
 	dw .Triangle1
-	dw .Triangle2
-	dw .HiHat1
-	dw .Snare5
-	dw .Snare6
-	dw .Snare7
 	dw .HiHat2
+	dw .HiHat1
+	dw .Drum29
+	dw .Drum38
+	dw .Drum39
+	dw .Crash2
 .Drumkit1:
 	dw .Drum00
 	dw .HiHat1
@@ -34,20 +34,20 @@
 	dw .Snare9
 	dw .Snare10
 	dw .Snare11
-.Drumkit2:
+.Drumkit2: ; pokemon pinball drumkit 2
 	dw .Drum00
-	dw .Snare1
-	dw .Snare9
-	dw .Snare10
-	dw .Snare11
-	dw .Drum05
-	dw .Triangle1
-	dw .Triangle2
+	dw .Drum38
+	dw .Drum39
+	dw .Snare14
+	dw .Kick4
+	dw .Drum40
+	dw .Drum41
+	dw .Drum42
 	dw .HiHat1
-	dw .Snare5
-	dw .Snare6
-	dw .Snare7
 	dw .HiHat2
+	dw .Drum43
+	dw .Drum44
+	dw .Drum45
 .Drumkit3:
 	dw .Drum21
 	dw .Snare12
@@ -90,7 +90,7 @@
 	dw .Snare14
 	dw .Snare13
 	dw .Kick2
-.Drumkit6:
+.Drumkit6: ; tcg drumkit 1
 	dw .Drum00
 	dw .Kick3
 	dw .Snare9
@@ -126,12 +126,12 @@
 	sound_ret
 
 .Drum05:
-	noise_note 39, 8, 4, 55
-	noise_note 38, 8, 4, 54
-	noise_note 37, 8, 3, 53
-	noise_note 36, 8, 3, 52
-	noise_note 35, 8, 2, 51
-	noise_note 34, 8, 1, 50
+	noise_note 32, 8, 4, 55
+	noise_note 32, 8, 4, 54
+	noise_note 32, 8, 3, 53
+	noise_note 32, 8, 3, 52
+	noise_note 32, 8, 2, 51
+	noise_note 32, 8, 1, 50
 	sound_ret
 
 .Triangle1:
@@ -139,7 +139,7 @@
 	sound_ret
 
 .Triangle2:
-	noise_note 33, 4, 1, 43
+	noise_note 32, 4, 1, 43
 	noise_note 32, 6, 1, 42
 	sound_ret
 
@@ -177,7 +177,7 @@
 	sound_ret
 
 .Triangle4:
-	noise_note 34, 9, 1, 40
+	noise_note 32, 9, 1, 40
 	noise_note 32, 7, 1, 24
 	sound_ret
 
@@ -194,7 +194,7 @@
 	sound_ret
 
 .Drum20:
-	noise_note 32, 1, 1, 17
+	noise_note 32, 10, 1, 17
 	sound_ret
 
 .Drum21:
@@ -218,36 +218,36 @@
 	sound_ret
 
 .Triangle5:
-	noise_note 48, 9, 1, 24
+	noise_note 32, 9, 1, 24
 	sound_ret
 
 .Drum27:
-	noise_note 39, 9, 2, 16
+	noise_note 32, 10, 2, 16
 	sound_ret
 
 .Drum28:
-	noise_note 51, 9, 1, 0
-	noise_note 51, 1, 1, 0
+	noise_note 32, 9, 1, 0
+	noise_note 32, 1, 1, 0
 	sound_ret
 
 .Drum29:
-	noise_note 51, 9, 1, 17
-	noise_note 51, 1, 1, 0
+	noise_note 32, 9, 1, 17
+	noise_note 32, 1, 1, 0
 	sound_ret
 
 .Crash1:
-	noise_note 51, 8, 8, 21
+	noise_note 32, 8, 8, 21
 	noise_note 32, 6, 5, 18
 	sound_ret
 
 .Drum31:
-	noise_note 51, 5, 1, 33
-	noise_note 51, 1, 1, 17
+	noise_note 32, 5, 1, 33
+	noise_note 32, 1, 1, 17
 	sound_ret
 
 .Drum32:
-	noise_note 51, 5, 1, 80
-	noise_note 51, 1, 1, 17
+	noise_note 32, 5, 1, 80
+	noise_note 32, 1, 1, 17
 	sound_ret
 
 .Drum33:
@@ -263,13 +263,13 @@
 	sound_ret
 
 .Drum35:
-	noise_note 51, 8, 1, 0
-	noise_note 51, 1, 1, 0
+	noise_note 32, 8, 1, 0
+	noise_note 32, 1, 1, 0
 	sound_ret
 
 .Drum36:
-	noise_note 51, 8, 1, 33
-	noise_note 51, 1, 1, 17
+	noise_note 32, 8, 1, 33
+	noise_note 32, 1, 1, 17
 	sound_ret
 
 .Kick2:
@@ -282,3 +282,44 @@
 	noise_note 32, 9, 1, 0
 	sound_ret
 
+.Kick4:
+	noise_note 33, 7, 1, 112
+	noise_note 32, 1, 1, 17
+	sound_ret
+
+.Snare15:
+	noise_note 32, 8, 2, 76
+	noise_note 32, 6, 1, 32
+	sound_ret
+
+.Drum38:
+	noise_note 1, 1, 8, 1
+	sound_ret
+
+.Drum39:
+	noise_note 1, 2, 8, 1
+	sound_ret
+
+.Drum40:
+	noise_note 1, 3, 8, 1
+	sound_ret
+
+.Drum41:
+	noise_note 1, 4, 8, 1
+	sound_ret
+
+.Drum42:
+	noise_note 1, 5, 8, 1
+	sound_ret
+
+.Drum43:
+	noise_note 1, 6, 8, 1
+	sound_ret
+
+.Drum44:
+	noise_note 1, 7, 8, 1
+	sound_ret
+
+.Drum45:
+	noise_note 1, 8, 8, 1
+	sound_ret

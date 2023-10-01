@@ -5,9 +5,15 @@ EmotionBubble:
 	rst _DelayFrames
 	jp EmotionBubbleCommon2
 
-EmotionBubbleQuick:
+EmotionBubbleQuick::
 	call EmotionBubbleCommon
 	ld c, 30
+	rst _DelayFrames
+	jp EmotionBubbleCommon2
+
+EmotionBubbleVeryFast::
+	call EmotionBubbleCommon
+	ld c, 20
 	rst _DelayFrames
 	jp EmotionBubbleCommon2
 
@@ -22,7 +28,12 @@ EmotionBubbleCommon:
 	inc hl
 	ld d, [hl]
 	ld hl, vChars1 tile $78
+	ld a, [wWhichEmotionBubble]
+	cp HEART_BUBBLE
 	lb bc, BANK(EmotionBubbles), 4
+	jr nz, .gotBank
+	lb bc, BANK(LoveEmote), 4
+.gotBank
 	call CopyVideoData
 	ld a, [wUpdateSpritesEnabled]
 	push af
@@ -82,6 +93,7 @@ EmotionBubblesPointerTable:
 	dw ShockEmote
 	dw QuestionEmote
 	dw HappyEmote
+	dw LoveEmote
 
 EmotionBubblesOAM:
 	dbsprite  0, -1,  0,  0, $f9, 0

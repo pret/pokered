@@ -54,11 +54,13 @@ ReadTrainer:
 	cp $FE ; is the trainer special with alt palettes?
 	jr z, .SpecialTrainer ; if so, load their alt palette flags as well as levels
 ;;;;;;;;;;
+	cp $FD
+	jr z, .CustomMovesetTrainer
 	ld [wCurEnemyLVL], a
 .LoopTrainerData
 	ld a, [hli]
 	and a ; have we reached the end of the trainer data?
-	jr z, .FinishUp
+	jp z, .FinishUp
 	ld [wcf91], a ; write species somewhere (XXX why?)
 	ld a, ENEMY_PARTY_DATA
 	ld [wMonDataLocation], a
@@ -67,6 +69,17 @@ ReadTrainer:
 	pop hl
 	jr .LoopTrainerData
 .SpecialTrainer
+	call .SpecialTrainerLoop
+	jr .AddLoneMove
+.CustomMovesetTrainer
+	ld a, [hli] ; which moveset will be used
+	push af
+	call .SpecialTrainerLoop
+	pop af
+	ld d, a
+	callfar LoadTrainerMoveSet
+	jr .FinishUp
+.SpecialTrainerLoop
 ; if this code is being run:
 ; - each pokemon has a specific level stored in the first byte
 ;      (as opposed to the whole team being of the same level)
@@ -76,7 +89,7 @@ ReadTrainer:
 ; - if [wLoneAttackNo] != 0, one pokemon on the team has a special move
 	ld a, [hli]
 	and a ; have we reached the end of the trainer data?
-	jr z, .AddLoneMove
+	ret z
 ;;;;;;;;;; PureRGBnote: ADDED: final bit of "pokemon level" in special parties is used to indicate pokemon having alternate palette.
 	bit 7, a 
 	push af
@@ -98,10 +111,6 @@ ReadTrainer:
 	pop hl
 	jr .SpecialTrainer
 .AddLoneMove
-;;;;;;;;;; PureRGBnote: ADDED: can't have alt palette pokemon at this point.
-	xor a
-	ld [wIsAltPalettePkmnData], a
-;;;;;;;;;;
 ; does the trainer have a single monster with a different move?
 	ld a, [wLoneAttackNo] ; Brock is 01, Misty is 02, Erika is 04, etc
 	and a
@@ -175,6 +184,9 @@ ReadTrainer:
 .FinishUp
 ; clear wAmountMoneyWon addresses
 	xor a
+;;;;;;;;;; PureRGBnote: ADDED: can't have alt palette pokemon at this point.
+	ld [wIsAltPalettePkmnData], a
+;;;;;;;;;;
 	ld de, wAmountMoneyWon
 	ld [de], a
 	inc de

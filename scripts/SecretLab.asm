@@ -393,7 +393,6 @@ CheckNoteButtons:
 	rst _PlaySound
 	pop af
 	push af
-	add a ; double a's value to get correct address in array
 	ld hl, NoteSoundPointers
 	call GetAddressFromPointerArray
 	ld d, h
@@ -651,7 +650,7 @@ SecretLab_AfterBattleText:
 	jr z, .printText
 	ld hl, SecretLabTrainerHeader2 
 .printText
-	ld a, 6
+	ld a, 3
 	call GetAddressFromPointerArray
 	rst _PrintText
 	rst TextScriptEnd
@@ -695,7 +694,6 @@ SecretLabAfterBattleText3:
 SecretLabFailedClonesText:
 	text_asm
 	ld a, [wHiddenObjectFunctionArgument]
-	add a
 	ld hl, SecretLabFailedClonesTextPointers
 	call GetAddressFromPointerArray
 	rst _PrintText
@@ -741,7 +739,6 @@ SecretLabComputersText:
 	ld a, SFX_ENTER_PC
 	rst _PlaySound
 	ld a, [wHiddenObjectFunctionArgument]
-	add a
 	ld hl, SecretLabComputersTextPointers
 	call GetAddressFromPointerArray
 	rst _PrintText

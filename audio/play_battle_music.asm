@@ -1,4 +1,5 @@
 PlayBattleMusic::
+	ResetFlag FLAG_ALTERNATE_BATTLE_WIN_THEME
 	xor a
 	ld [wAudioFadeOutControl], a
 	ld [wLowHealthAlarm], a
@@ -34,4 +35,42 @@ PlayBattleMusic::
 .wildBattle
 	ld a, MUSIC_WILD_BATTLE
 .playSong
+	push af
+	ld a, [wSpecialBattleMusicID]
+	and a
+	jr nz, .specialMusic
+	pop af
 	jp PlayMusic
+.specialMusic
+	cp 2 ; seel stage music
+	jr nz, .notSeelStage
+	SetFlagHL FLAG_ALTERNATE_BATTLE_WIN_THEME
+.notSeelStage
+	ld hl, SpecialMusicData
+	dec a
+	ld d, 0
+	ld e, a
+	add hl, de
+	add hl, de
+	add hl, de
+	ld c, [hl]
+	inc hl
+	call GetAddressFromPointer
+	pop af
+	xor a
+	ld [wSpecialBattleMusicID], a
+	jp PlaySpecialBattleMusic
+
+SpecialMusicData:
+	dba Music_DuelTheme1
+	dba Music_SeelStage
+	dba Music_HereComesGR
+	dba Music_CatchEmBlue
+	dba Music_Ronald
+	dba Music_WhackTheDiglett
+	dba Music_DuelTheme2
+	dba Music_Fort2
+	dba Music_DuelTheme3
+	dba Music_GRChallengeCup
+	dba Music_GengarInTheGraveyard
+	dba Music_TitleScreen

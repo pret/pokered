@@ -1,34 +1,11 @@
-Audio4_RemapChannel1::
-	ld hl, wChannelCommandPointers + CHAN1 * 2
-	jr Audio4_OverwriteChannelPointer
-
-Audio4_RemapChannel2::
-	ld hl, wChannelCommandPointers + CHAN2 * 2
-	jr Audio4_OverwriteChannelPointer
-
-Audio4_RemapChannel3::
-	ld hl, wChannelCommandPointers + CHAN3 * 2
-	jr Audio4_OverwriteChannelPointer
-
-Audio4_RemapChannel4::
-	ld hl, wChannelCommandPointers + CHAN4 * 2
-	jr Audio4_OverwriteChannelPointer
-
-Audio4_OverwriteChannelPointer:
-	ld a, e
-	ld [hli], a
-	ld a, d
-	ld [hl], a
-	ret
-
 Music_Ronald::
-	channel_count 3
+	channel_count 4
 	channel 1, Music_Ronald_Ch1
 	channel 2, Music_Ronald_Ch2
 	channel 3, Music_Ronald_Ch3
-;	channel 4, Music_Ronald_Ch4
+	channel 4, Music_Ronald_Ch4
 
-Music_Ronald_Ch1::
+Music_Ronald_Ch2::
 	;tempo 255
 	stereo_panning2 TRUE, TRUE
 	;volume 7, 7
@@ -44,8 +21,12 @@ Music_Ronald_Ch1::
 .Loop1
 	volume_envelope 12, 2
 ;	cutoff 3
-	note D_, 1
-	note D_, 1
+	speed 1
+	note D_, 8
+	rest 5
+	note D_, 8
+	rest 5
+	speed 13
 ;	cutoff 4
 	note F_, 1
 	rest 2
@@ -541,7 +522,7 @@ Branch_fa9ec:
 	sound_ret
 
 
-Music_Ronald_Ch2::
+Music_Ronald_Ch1::
 	;note_type 12, 11, 5
 	stereo_panning2 TRUE, TRUE
 ;	vibrato_type 8
@@ -684,22 +665,7 @@ Music_Ronald_Ch2::
 	note A_, 1
 	rest 1
 	note A#, 1
-	rest 2
-	vibrato 12, 3, 3
-	duty_cycle 0
-	volume_envelope 12, 2
-	note F_, 1
-	rest 2
-	note F_, 1
-	rest 1
-	dec_octave
-	note G_, 1
-	rest 1
-	inc_octave
-	note F_, 1
-	rest 1
-	note A_, 1
-	rest 1
+	sound_call Branch_Backing1
 ;	cutoff 8
 	volume_envelope 12, 0
 	note G_, 2
@@ -708,23 +674,8 @@ Music_Ronald_Ch2::
 	vibrato 20, 3, 3
 	sound_call Branch_fab8a
 	octave 3
-	rest 2
-	vibrato 12, 3, 3
-	duty_cycle 0
-	volume_envelope 12, 2
 ;	cutoff 4
-	note F_, 1
-	rest 2
-	note F_, 1
-	rest 1
-	dec_octave
-	note G_, 1
-	rest 1
-	inc_octave
-	note F_, 1
-	rest 1
-	note A_, 1
-	rest 1
+	sound_call Branch_Backing1
 ;	cutoff 8
 	volume_envelope 12, 0
 	note G_, 2
@@ -773,16 +724,24 @@ Music_Ronald_Ch2::
 	volume_envelope 12, 2
 	rest 2
 ;	cutoff 4
-	note F_, 1
-	rest 2
-	note F_, 1
-	rest 1
-	note C_, 1
-	rest 1
-	note F_, 1
-	rest 1
-	note A_, 1
-	rest 1
+	speed 1
+	note F_, 8
+	rest 5
+	rest 13
+	rest 13
+	note F_, 8
+	rest 5
+	rest 13
+	note C_, 8
+	rest 5
+	rest 13
+	note F_, 8
+	rest 5
+	rest 13
+	note A_, 8
+	rest 5
+	rest 13
+	speed 13
 ;	cutoff 8
 	volume_envelope 12, 0
 	note F_, 2
@@ -821,20 +780,28 @@ Music_Ronald_Ch2::
 Branch_fab76:
 	octave 2
 	volume_envelope 12, 2
-	speed 13
-	rest 2
+	speed 1
+	rest 13
+	rest 13
 ;	cutoff 4
-	note A#, 1
-	rest 2
-	note A#, 1
-	rest 1
-	note G_, 1
-	rest 1
-	note A#, 1
-	rest 1
+	note A#, 8
+	rest 5
+	rest 13
+	rest 13
+	note A#, 8
+	rest 5
+	rest 13
+	note G_, 8
+	rest 5
+	rest 13
+	note A#, 8
+	rest 5
+	rest 13
 	inc_octave
-	note D_, 1
-	rest 1
+	note D_, 8
+	rest 5
+	rest 13
+	speed 13
 	sound_ret
 
 Branch_fab8a:
@@ -881,6 +848,33 @@ Branch_fabb1:
 	rest 1
 	inc_octave
 	note C_, 1
+	sound_ret
+
+Branch_Backing1:
+	rest 2
+	vibrato 12, 3, 3
+	duty_cycle 0
+	volume_envelope 12, 2
+	speed 1
+	note F_, 8
+	rest 5
+	rest 13
+	rest 13
+	note F_, 8
+	rest 5
+	rest 13
+	dec_octave
+	note G_, 8
+	rest 5
+	rest 13
+	inc_octave
+	note F_, 8
+	rest 5
+	rest 13
+	note A_, 8
+	rest 5
+	rest 13
+	speed 13
 	sound_ret
 
 

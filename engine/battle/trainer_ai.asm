@@ -18,6 +18,10 @@ AIEnemyTrainerChooseMoves:
 	add hl, bc    ; advance pointer to forbidden move
 	ld [hl], $50  ; forbid (highly discourage) disabled move
 .noMoveDisabled
+	ld a, [wCurMap]
+	cp CHAMP_ARENA
+	ld hl, ChampArenaGenericMoveChoices ; champ arena always uses 1, 2, 3, 4 move choice modifier functions for all opponents.
+	jr z, .readTrainerClassData
 	ld hl, TrainerClassMoveChoiceModifications
 	ld a, [wTrainerClass]
 	ld b, a
@@ -132,6 +136,10 @@ AIMoveChoiceModification1:
 	ret z ; no more moves in move set
 	inc de
 	call ReadMove
+	ld a, [wPlayerBattleStatus1]
+	bit INVULNERABLE, a
+	jp nz, .playerSemiInvulnerable
+.notSemiInvulnerable
 	ld a, [wEnemyMoveEffect]
 	cp DREAM_EATER_EFFECT
 	jp z, .checkAsleep
@@ -185,12 +193,12 @@ AIMoveChoiceModification1:
 	jr z, .nextMove ; if the AI thinks the player DOESNT have a status before they switch, we should avoid discouraging status moves
 	ld a, [wBattleMonStatus]
 	and a
-	jr z, .nextMove ; no need to discourage status moves if the player doesn't have a status
+	jp z, .nextMove ; no need to discourage status moves if the player doesn't have a status
 .discourage
 	ld a, [hl]
 	add $5 ; heavily discourage move
 	ld [hl], a
-	jr .nextMove
+	jp .nextMove
 .ohko
 	call WillOHKOMoveAlwaysFail
 	jp nc, .nextMove
@@ -274,7 +282,13 @@ AIMoveChoiceModification1:
 	and a
 	jp z, .discourage ; don't use mirror move if the player has never selected a move yet
 	jp .nextMove
-
+.playerSemiInvulnerable
+	ld a, [wEnemyMoveNum]
+	cp SWIFT
+	jp z, .notSemiInvulnerable ; swift will hit even invulnerable opponents so don't discourage
+	call CheckAIMoveIsPriority
+	jp c, .discourage ; discourage priority moves if player is invulnerable due to fly/dig
+	jp .notSemiInvulnerable
 
 StatusAilmentMoveEffects:
 	db SLEEP_EFFECT
@@ -379,6 +393,11 @@ AIMoveChoiceModification2:
 	ld a, [wAILayer2Encouragement]
 	and a
 	ret nz ; choose this modifier only on the first turn
+	; if player switched this turn, skip the below comparisons and go straight to seeing if we should use a preferred move
+	call IsPlayerPokemonDangerous
+	ret c ; player pokemon is dangerous so don't encourage moves that boost your stats on the first turn
+.continue
+	; otherwise see if we should use a boosting move first turn 
 	ld hl, wBuffer - 1 ; temp move selection array (-1 byte offset)
 	ld de, wEnemyMonMoves ; enemy moves
 	ld b, NUM_MOVES + 1
@@ -392,6 +411,10 @@ AIMoveChoiceModification2:
 	inc de
 	call ReadMove
 	ld a, [wEnemyMoveEffect]
+	cp DISABLE_EFFECT
+	jr z, .disable
+	cp LEECH_SEED_EFFECT
+	jr z, .leechseed
 	push hl
 	push de
 	push bc
@@ -405,9 +428,26 @@ AIMoveChoiceModification2:
 .preferMove
 	dec [hl] ; slightly encourage this move
 	jr .nextMove
+.disable
+	ld a, [wPlayerDisabledMove]
+	and a
+	jr nz, .nextMove
+	jr .preferMove ; prefer disable if it will do something on turn 1
+.leechseed
+	; encourage leech seed turn 1 if it can work and opponent isn't already seeded
+	ld a, [wPlayerBattleStatus2]
+	bit SEEDED, a
+	jr nz, .nextMove ; player already seeded
+	ld a, [wAITargetMonType1]
+	cp GRASS
+	jr z, .nextMove ; player is immune to leech seed
+	ld a, [wAITargetMonType2]
+	cp GRASS
+	jr z, .nextMove ; player is immune to leech seed
+	jr .preferMove
+
 
 Modifier2PreferredMoves:
-	db LEECH_SEED_EFFECT
 	db FOCUS_ENERGY_EFFECT
 	db REFLECT_EFFECT
 	db LIGHT_SCREEN_EFFECT
@@ -417,30 +457,106 @@ Modifier2PreferredMoves:
 	db SPECIAL_UP1_EFFECT
 	db ACCURACY_UP1_EFFECT
 	db EVASION_UP1_EFFECT
-	db ATTACK_DOWN1_EFFECT
-	db DEFENSE_DOWN1_EFFECT
-	db SPEED_DOWN1_EFFECT
-	db SPECIAL_DOWN1_EFFECT
-	db ACCURACY_DOWN1_EFFECT
-	db EVASION_DOWN1_EFFECT
 	db ATTACK_UP2_EFFECT
 	db DEFENSE_UP2_EFFECT
 	db SPEED_UP2_EFFECT
 	db SPECIAL_UP2_EFFECT
 	db ACCURACY_UP2_EFFECT
 	db EVASION_UP2_EFFECT
+	db ATTACK_ACCURACY_UP1_EFFECT
+	db ATTACK_DEFENSE_UP1_EFFECT
+	db ATTACK_SPECIAL_SPEED_UP1
+	db ATTACK_UP_SIDE_EFFECT
 	db ATTACK_DOWN2_EFFECT
 	db DEFENSE_DOWN2_EFFECT
 	db SPEED_DOWN2_EFFECT
 	db SPECIAL_DOWN2_EFFECT
 	db ACCURACY_DOWN2_EFFECT
 	db EVASION_DOWN2_EFFECT
-	db ATTACK_ACCURACY_UP1_EFFECT
-	db ATTACK_DEFENSE_UP1_EFFECT
-	db ATTACK_SPECIAL_SPEED_UP1
-	db ATTACK_UP_SIDE_EFFECT
+	db ATTACK_DOWN1_EFFECT
+	db DEFENSE_DOWN1_EFFECT
+	db SPEED_DOWN1_EFFECT
+	db SPECIAL_DOWN1_EFFECT
+	db ACCURACY_DOWN1_EFFECT
+	db EVASION_DOWN1_EFFECT
 	db SUBSTITUTE_EFFECT
-	db -1 ; end
+	db HAZE_EFFECT
+	db MIST_EFFECT
+	db MIMIC_EFFECT
+	db -1
+
+IsPlayerPokemonDangerous:
+	; check if player is asleep, paralyzed, frozen, or confused, if so, not considered dangerous
+	ld a, [wAITargetMonStatus]
+	bit FRZ, a
+	jr nz, .notDangerous
+	bit PAR, a
+	jr nz, .notDangerous
+	and SLP_MASK
+	jr nz, .notDangerous
+
+	ld a, [wAIMoveSpamAvoider]
+	cp 2 ; player switched
+	jr z, .notDangerous ; if player switched this turn, don't consider them dangerous
+
+	ld a, [wPlayerBattleStatus1]
+	bit CONFUSED, a
+	jr nz, .notDangerous ; player is confused - not dangerous
+
+	push bc
+	; compare levels first, higher level player pokemon will be considered dangerous
+	ld a, [wEnemyMonLevel]
+	ld b, a
+	ld a, [wBattleMonLevel]
+	sub b
+	pop bc
+	jr z, .continue ; same level
+	jr c, .lowerLevel
+	cp 5 ; is player pokemon at least 5 levels higher
+	jr nc, .dangerous ; always consider higher level pokemon dangerous
+	jr .continue
+.lowerLevel
+	cp -4 ; is player pokemon at least 5 levels lower
+	jr c, .notDangerous ; if so never consider them dangerous
+.continue
+
+	; check if player mon has boosted its stats
+	ld a, [wPlayerMonAttackMod]
+	cp 9 ; boosted 2 stages (7 is normal)
+	jr nc, .dangerous ; player has boosted attack by at least 2 stages
+	ld a, [wPlayerMonSpecialMod]
+	cp 9 ; boosted 2 stages (7 is normal)
+	jr nc, .dangerous ; player has boosted special by at least 2 stages
+
+	ld a, 2
+	call AICheckIfHPBelowFractionWrapped
+	jr c, .dangerous ; if enemy mon has less than half health remaining, player is always considered dangerous
+
+	; does opponent pokemon have >130 base HP
+	ld a, [wEnemyMonBaseHP] ; base HP
+	cp 130
+	jr nc, .notDangerous ; if enemy mon has a high HP stat and more than half its HP remaining, it can tank more attacks, consider player not dangerous
+	; does player pokemon have >=100 base attack and opponent pokemon have < 80 defense
+	ld a, [wPlayerMonBaseAttack] ; currently contains player base attack
+	cp 100
+	jr c, .specialBaseCompare
+	ld a, [wEnemyMonBaseDefense] ; defense stat of current opponent pokemon
+	cp 80
+	jr c, .dangerous
+.specialBaseCompare
+	; does player pokemon have >100 base special and opponent has < 80 special
+	ld a, [wPlayerMonBaseSpecial] ; currently contains player base special
+	cp 100
+	jr c, .notDangerous
+	ld a, [wEnemyMonBaseSpecial] ; special stat of current opponent pokemon
+	cp 80
+	jr nc, .notDangerous
+.dangerous
+	scf
+	ret
+.notDangerous
+	and a ; clear carry
+	ret
 
 ; PureRGBnote: CHANGED: AKA the "Use Effective damaging moves offensively" subroutine
 ; encourages moves that are effective against the player's mon if they do damage. 
@@ -463,9 +579,13 @@ AIMoveChoiceModification3:
 	jp z, .clearPreviousTypes ; no more moves in move set
 	inc de
 	call ReadMove
+	ld a, [wEnemyMoveNum]
+	cp MIRROR_MOVE
+	call z, GetMirrorMoveResultMove ; we will treat mirror move as the move it will use if selected
 	ld a, [wEnemyMovePower]
 	and a
 	jr z, .nextMove ; ignores moves that do no damage (status moves), as we're only concerned with damaging moves for this modifier
+.continue
 	ld a, [wAIMoveSpamAvoider] ; if we switched this turn or healed status, this is set
 	cp 2 ; it's 2 if we switched pokemon this turn
 	call nz, StoreBattleMonTypes ; in the case where we didnt switch
@@ -477,6 +597,7 @@ AIMoveChoiceModification3:
 	pop de
 	pop bc
 	pop hl
+
 	ld a, [wTypeEffectiveness]
 	cp EFFECTIVE
 	jr z, .checkSpecificEffects
@@ -488,6 +609,7 @@ AIMoveChoiceModification3:
 .checkSpecificEffects ; we'll further encourage certain moves
 	call EncouragePriorityIfSlow
 	call EncourageDrainingMoveIfLowHealth
+	call EncourageOHKOMoveIfXAccuracy
 	jr .nextMove
 .notEffectiveMove ; discourages non-effective moves if better moves are available
 	push hl
@@ -567,9 +689,30 @@ EncouragePriorityIfSlow:
 	ld a, [wObtainedBadges]
 	bit BIT_SOULBADGE, a
 	ret z
+	ld a, [wEnemyMoveNum]
+	cp SWIFT
+	jr z, .skipInvulCheck ; swift hits even invul enemies and is priority
+	ld a, [wPlayerBattleStatus1]
+	bit INVULNERABLE, a
+	ret nz ; don't encourage priority if player invulnerable due to fly/dig
+.skipInvulCheck
+	call CheckAIMoveIsPriority
+	ret nc
 	call CompareSpeed
 	ret nc
 	dec [hl] ; encourage the move if it's a priority move and the pokemon is slower
+	ret
+
+CheckAIMoveIsPriority:
+	ld a, [wEnemyMoveNum]
+	push hl
+	push bc
+	push de
+	ld d, a
+	callfar FarCheckPriority
+	pop de
+	pop bc
+	pop hl
 	ret
 
 ; PureRGBnote: ADDED: if the opponent has less than 1/2 health they will prefer healing moves if they use AI subroutine 3
@@ -581,6 +724,26 @@ EncourageDrainingMoveIfLowHealth:
 	call AICheckIfHPBelowFractionWrapped
 	ret nc
 	dec [hl] ; encourage the draining move if enemy has more than half health gone
+	ret
+
+GetMirrorMoveResultMove:
+	ld a, [wPlayerLastSelectedMove]
+	and a
+	ret z ; no move to be mirrored, don't rewrite any move data, we'll avoid using mirror move
+	call ReadMove ; read move data into wEnemyMove struct
+	ld a, MIRROR_MOVE
+	ld [wEnemyMoveNum], a ; keep the move number as MIRROR_MOVE so we know it's mirror move being used for later
+	ret
+
+EncourageOHKOMoveIfXAccuracy:
+	; further encourage OHKO move if x accuracy is active (only 1 trainer uses x accuracies ever)
+	ld a, [wEnemyBattleStatus2]
+	bit USING_X_ACCURACY, a
+	ret z
+	call WillOHKOMoveAlwaysFail
+	ret c
+	dec [hl]
+	dec [hl] ; encourage twice to make it really likely to be used
 	ret
 
 ; PureRGBnote: ADDED: AKA the "Apply Status and Heal when needed" subroutine
@@ -609,6 +772,8 @@ AIMoveChoiceModification4:
 	ld a, [wEnemyMoveEffect]
 	cp HEAL_EFFECT
 	jr z, .checkWorthHealing
+	cp TELEPORT_EFFECT
+	jr z, .checkWorthTeleporting
 	push hl
 	push de
 	push bc
@@ -650,6 +815,21 @@ AIMoveChoiceModification4:
 	jr .preferMove
 .done
 	ret
+.checkWorthTeleporting
+	; use teleport to heal if you are able to use it
+	push hl
+	push de
+	push bc
+	callfar CheckCanForceSwitchEnemy
+	pop bc
+	pop de
+	pop hl 
+	jp z, .nextMove
+	; only use teleport to heal if health it less than 1/2
+	jr .checkWorthHealing
+
+
+
 
 Modifier4PreferredMoves:
 	db SLEEP_EFFECT
@@ -769,24 +949,41 @@ CooltrainerFAI:
 	ret nc
 	jp AISwitchIfEnoughMons
 
+ChampArenaAICheck:
+	push af
+	ld a, [wCurMap]
+	cp CHAMP_ARENA
+	jr z, .jpToChampArenaAI
+	pop af
+	ret
+.jpToChampArenaAI
+	pop af
+	pop hl ; will return from TrainerAI completely instead of returning to what called this
+	push af
+	jp ChampArenaAI
+
 BrockAI:
 ; if his active monster has a status condition, use a full heal
+	call ChampArenaAICheck
 	ld a, [wEnemyMonStatus]
 	and a
 	ret z
 	jp AIUseFullHeal
 
 MistyAI:
+	call ChampArenaAICheck
 	cp 20 percent + 1
 	ret nc
 	jp AIUseXDefend
 
 LtSurgeAI:
-	cp 10 percent + 1
+	call ChampArenaAICheck
+	cp 20 percent + 1
 	ret nc
 	jp AIUseXSpeed
 
 ErikaAI:
+	call ChampArenaAICheck
 	cp 50 percent + 1
 	ret nc
 	ld a, 5
@@ -795,20 +992,22 @@ ErikaAI:
 	jp AIUseSuperPotion
 
 KogaAI:
-	cp 10 percent + 1
+	call ChampArenaAICheck
+	cp 20 percent + 1
 	ret nc
 	jp AIUseXAttack
 
 BlaineAI:	;blaine needs to check HP. this was an oversight
+	call ChampArenaAICheck
 	cp 40 percent + 1
-	jr nc, .blainereturn
+	ret nc
 	ld a, 2
-	call AICheckIfHPBelowFraction	
-	jp c, AIUseSuperPotion
-.blainereturn
-	ret
+	call AICheckIfHPBelowFraction
+	ret nc
+	jp AIUseSuperPotion
 
 SabrinaAI:
+	call ChampArenaAICheck
 	cp 25 percent + 1
 	ret nc
 	ld a, 5
@@ -825,6 +1024,7 @@ Rival2AI:
 	jp AIUseHyperPotion
 
 Rival3AI:
+	call ChampArenaAICheck
 	cp 40 percent - 1
 	ret nc
 	ld a, 5
@@ -833,6 +1033,7 @@ Rival3AI:
 	jp AIUseFullRestore
 
 LoreleiAI:
+	call ChampArenaAICheck
 	cp 50 percent + 1
 	ret nc
 	ld a, 5
@@ -844,17 +1045,18 @@ BrunoAI:
 	;cp 10 percent + 1
 	;ret nc
 	;jp AIUseXDefend
+	call ChampArenaAICheck
 	cp 30 percent + 1
-	jr nc, .brunoreturn
+	ret nc
 	ld a, 5
 	call AICheckIfHPBelowFraction
-	jp c, AIUseHyperPotion
-.brunoreturn
-	ret
+	ret nc
+	jp AIUseHyperPotion
 
 AgathaAI:
 	cp 8 percent
 	jp c, AISwitchIfEnoughMons
+	call ChampArenaAICheck
 	cp 50 percent + 1
 	ret nc
 	ld a, 4
@@ -863,12 +1065,46 @@ AgathaAI:
 	jp AIUseHyperPotion
 
 LanceAI:
+	call ChampArenaAICheck
+	; fall through
+FullRestore50Percent:
 	cp 50 percent + 1
 	ret nc
 	ld a, 5
 	call AICheckIfHPBelowFraction
 	ret nc
 	jp AIUseFullRestore
+
+GymGuideAI:
+	push af
+	call IsPlayerPokemonDangerous
+	jr c, .noXAccuracy
+	call WillOHKOMoveAlwaysFail
+	jr c, .noXAccuracy
+	ld a, [wEnemyBattleStatus2]
+	bit USING_X_ACCURACY, a
+	jr nz, .noXAccuracy
+	ld a, [wEnemyMonSpecies]
+	cp TAUROS
+	jr z, .useXAccuracy
+.noXAccuracy
+	jr ChampArenaAI
+.useXAccuracy
+	pop af
+	jp AIUseXAccuracy
+
+ChampArenaAI:
+	ld a, [wEnemyMonStatus]
+	bit FRZ, a
+	jr nz, .useFullHeal ; AI will use full heal to heal freeze
+	and SLP_MASK
+	jp nz, .useFullHeal ; AI will use full heal to heal sleep
+	pop af
+	jr FullRestore50Percent ; otherwise has 50% chance to use full restore when HP is below 1/5th of max
+.useFullHeal
+	pop af
+	jp AIUseFullHeal
+
 
 GenericAI:
 	and a ; clear carry
@@ -1099,12 +1335,12 @@ AICureStatus:	;shinpokerednote: CHANGED: modified to be more robust and also und
 	res BADLY_POISONED, [hl]	;clear toxic bit
 	ret
 
-;AIUseXAccuracy: ; unused
-;	call AIPlayRestoringSFX
-;	ld hl, wEnemyBattleStatus2
-;	set 0, [hl]
-;	ld a, X_ACCURACY
-;	jp AIPrintItemUse
+AIUseXAccuracy:
+	call AIPlayRestoringSFX
+	ld hl, wEnemyBattleStatus2
+	set 0, [hl]
+	ld a, X_ACCURACY
+	jp AIPrintItemUse
 
 ;AIUseGuardSpec: ; PureRGBnote: CHANGED: now unused
 ;	call AIPlayRestoringSFX
@@ -1113,7 +1349,9 @@ AICureStatus:	;shinpokerednote: CHANGED: modified to be more robust and also und
 ;	ld a, GUARD_SPEC
 ;	jp AIPrintItemUse
 
-AIUseDireHit: 
+AIUseDireHit:
+	call IsPlayerPokemonDangerous
+	ret c
 	call AIPlayRestoringSFX
 	ld hl, wEnemyBattleStatus2
 	set 2, [hl]
@@ -1192,6 +1430,8 @@ AIUseXSpecial:
 
 AIIncreaseStat:
 	ld [wAIItem], a
+	call IsPlayerPokemonDangerous ; don't use stat increasing item if player is considered dangerous, instead attack
+	jr c, .clearCarryAndReturn ; player pokemon is considered dangerous
 	push bc
 	call AIPrintItemUse_
 	pop bc
@@ -1211,6 +1451,9 @@ AIIncreaseStat:
 	pop af
 	ld [hl], a
 	jp DecrementAICount
+.clearCarryAndReturn
+	and a ; clear carry
+	ret
 
 AIPrintItemUse:
 	ld [wAIItem], a

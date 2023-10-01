@@ -16,7 +16,6 @@ TrainerAIPointers:
 	dbw 3, GenericAI
 	dbw 3, GenericAI
 	dbw 3, GenericAI
-	dbw 3, JugglerAI ; unused_juggler
 	dbw 3, GenericAI
 	dbw 3, GenericAI
 	dbw 3, GenericAI
@@ -29,7 +28,7 @@ TrainerAIPointers:
 	dbw 3, GenericAI
 	dbw 2, BlackbeltAI ; blackbelt
 	dbw 3, GenericAI ; rival1
-	dbw 3, GenericAI
+	dbw 3, FullRestore50Percent ; prof oak
 	dbw 3, GenericAI
 	dbw 1, GiovanniAI ; giovanni
 	dbw 3, GenericAI
@@ -57,4 +56,5 @@ TrainerAIPointers:
 	dbw 3, JugglerAI ; rookie
 	dbw 3, GenericAI ; soldier
 	dbw 3, GenericAI ; chief
+	dbw 3, GymGuideAI ; gym guide
 	assert_table_length NUM_TRAINERS

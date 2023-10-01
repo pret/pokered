@@ -115,7 +115,7 @@ MapHeaderBanks::
 	db BANK(SecretLab_h) ; UNUSED_MAP_6F
 	db BANK(PokemonTowerB1F_h) ; UNUSED_MAP_70
 	db BANK(LancesRoom_h)
-	db $1D ; UNUSED_MAP_72
+	db BANK(ChampArena_h)
 	db $1D ; UNUSED_MAP_73
 	db $1D ; UNUSED_MAP_74
 	db $1D ; UNUSED_MAP_75

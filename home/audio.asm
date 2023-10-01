@@ -78,22 +78,21 @@ PlayDefaultMusicCommon::
 	rst _PlaySound
 	ret
 
-UpdateMusic6Times::
+;UpdateMusic6Times::
 ; This is called when entering a map, before fading out the current music and
 ; playing the default music (i.e. the map's music or biking/surfing music).
 ; shinpokerednote: audionote: updated to match pokemon yellow's audio engine code
-; TODO: remove now unused code?
-	ld c, 6
-UpdateMusicCTimes::
-.loop
-	push bc
-	push hl
-	farcall Audio1_UpdateMusic
-	pop hl
-	pop bc
-	dec c
-	jr nz, .loop
-	ret
+;	ld c, 6
+;UpdateMusicCTimes::
+;.loop
+;	push bc
+;	push hl
+;	farcall Audio1_UpdateMusic
+;	pop hl
+;	pop bc
+;	dec c
+;	jr nz, .loop
+;	ret
 
 CompareMapMusicBankWithCurrentBank::
 ; Compares the map music's audio ROM bank with the current audio ROM bank
@@ -286,5 +285,66 @@ DetermineAudioFunction::
 	ld a, b
 	call Audio3_PlaySound
 .done
+	pop af
+	jp BankswitchCommon
+
+PlaySpecialBattleMusic3::
+	ld b, 3
+	ld a, MUSIC_GYM_LEADER_BATTLE
+	ld d, BANK(Music_GymLeaderBattle)
+	jr PlaySpecialBattleMusic.playSpecialMusic
+
+PlaySpecialFieldMusic3::
+	ld b, 3
+	ld a, MUSIC_OAKS_LAB
+	ld d, BANK(Music_OaksLab)
+	jr PlaySpecialBattleMusic.playSpecialMusic
+
+	; input hl = audio header
+	; c = bank the music is in
+PlaySpecialFieldMusic::
+	ld b, 4
+	ld a, MUSIC_CINNABAR_MANSION
+	ld d, BANK(Music_CinnabarMansion)
+	jr PlaySpecialBattleMusic.playSpecialMusic
+
+	; input hl = audio header
+	; c = bank the music is in
+PlaySpecialBattleMusic::
+	ld b, 4
+	ld a, MUSIC_DEFEATED_GYM_LEADER
+.playBattleMusic
+	ld d, BANK(Music_DefeatedGymLeader)
+.playSpecialMusic
+	push hl
+	push bc
+	ld c, d
+	call PlayMusic
+	pop bc
+	pop hl
+	jr RemapCommandPointerLoop
+
+RemapCommandPointerLoop:
+	ldh a, [hLoadedROMBank]
+	push af
+	ld a, c
+	ld [wSpecialMusicBank], a
+	call BankswitchCommon
+	ld de, wChannelCommandPointers + CHAN1 * 2
+.loop
+	inc hl
+	push hl
+	call GetAddressFromPointer
+	ld a, l
+	ld [de], a
+	inc de
+	ld a, h
+	ld [de], a
+	pop hl
+	inc de
+	inc hl
+	inc hl
+	dec b
+	jr nz, .loop
 	pop af
 	jp BankswitchCommon

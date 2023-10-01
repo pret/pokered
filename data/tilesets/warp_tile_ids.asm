@@ -26,6 +26,7 @@ WarpTileIDPointers:
 	dw .PlateauWarpTileIDs
 	dw .SchoolWarpTileIDs
 	dw .SecretLabWarpTileIDs
+	dw .ChampCupWarpTileIDs
 	assert_table_length NUM_TILESETS
 
 MACRO warp_tiles
@@ -96,5 +97,8 @@ ENDM
 .ClubWarpTileIDs:
 	warp_tiles ; end
 
-.SecretLabWarpTileIDs
+.SecretLabWarpTileIDs:
 	warp_tiles $49, $52, $43
+
+.ChampCupWarpTileIDs:
+	warp_tiles $37

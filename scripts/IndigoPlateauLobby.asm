@@ -2,6 +2,7 @@ IndigoPlateauLobby_Script:
 	call SetLastBlackoutMap ; PureRGBnote: ADDED: set blackout map on entering pokemon center
 	call Serial_TryEstablishingExternallyClockedConnection
 	call EnableAutoTextBoxDrawing
+	call CheckArenaAssistantWalking
 	ld hl, wCurrentMapScriptFlags
 	bit 6, [hl]
 	res 6, [hl]
@@ -23,6 +24,7 @@ IndigoPlateauLobby_TextPointers:
 	dw_const IndigoPlateauLobbyClerkText,            TEXT_INDIGOPLATEAULOBBY_CLERK
 	dw_const IndigoPlateauLobbyLinkReceptionistText, TEXT_INDIGOPLATEAULOBBY_LINK_RECEPTIONIST
 	dw_const IndigoGymGuideSonText,                  TEXT_INDIGOPLATEAULOBBY_TM_KID
+	dw_const IndigoPlateauArenaAssistantText,        TEXT_INDIGOPLATEAULOBBY_ARENA_ASSISTANT
 
 IndigoPlateauLobbyNurseText:
 	script_pokecenter_nurse
@@ -186,3 +188,51 @@ IndigoPlateauGymGuideSonMoreTMs:
 	text_end
 
 INCLUDE "data/items/marts/indigo_plateau.asm"
+
+IndigoPlateauArenaAssistantText:
+	text_asm
+	CheckEvent EVENT_BECAME_CHAMP
+	jr nz, .becameChamp
+	ld hl, .onlyEliteFourAllowed
+	rst _PrintText
+	rst TextScriptEnd
+.becameChamp
+	SetEvent EVENT_ARENA_ASSISTANT_WALKING
+	; walks into door and leaves
+	ld de, AssistantWalksUp
+	ld a, INDIGOPLATEAULOBBY_ARENA_ASSISTANT
+	ldh [hSpriteIndexOrTextID], a
+	call MoveSprite
+	xor a
+	ld [wJoyIgnore], a
+	ld hl, .champAttained
+	rst _PrintText
+	rst TextScriptEnd
+.onlyEliteFourAllowed
+	text_far _IndigoPlateauArenaAssistantOnlyEliteFourAllowed
+	text_end
+.champAttained
+	text_far _IndigoPlateauArenaAssistantChampAttained
+	text_end
+
+AssistantWalksUp:
+	db NPC_MOVEMENT_UP
+	db -1
+
+CheckArenaAssistantWalking:
+	CheckEvent EVENT_ARENA_ASSISTANT_WALKING
+	ret z
+	ld a, -1
+	ld [wJoyIgnore], a ; ignore all input until she is done walking
+	ld a, [wd730]
+	bit 0, a
+	ret nz
+	ResetEvent EVENT_ARENA_ASSISTANT_WALKING
+	xor a
+	ld [wJoyIgnore], a
+	ld a, SFX_GO_OUTSIDE
+	rst _PlaySound
+	ld a, HS_INDIGO_PLATEAU_LOBBY_CHAMP_ARENA_ASSISTANT
+	ld [wMissableObjectIndex], a
+	predef_jump HideExtraObject
+

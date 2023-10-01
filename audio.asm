@@ -352,13 +352,9 @@ INCLUDE "audio/sfx/cry1f_3.asm"
 INCLUDE "audio/sfx/cry20_3.asm"
 INCLUDE "audio/sfx/cry21_3.asm"
 INCLUDE "audio/sfx/cry22_3.asm"
-INCLUDE "audio/sfx/fall_down_hole.asm"
-INCLUDE "audio/sfx/secret_lab_notes.asm"
-
 
 SECTION "Audio Engine 1", ROMX
 
-INCLUDE "audio/play_battle_music.asm"
 INCLUDE "audio/engine_1.asm"
 INCLUDE "audio/alternate_tempo.asm"
 
@@ -459,3 +455,24 @@ SECTION "Music 4", ROMX
 
 INCLUDE "audio/music/tcg/ronald.asm"
 INCLUDE "audio/music/tcg/duel1.asm"
+INCLUDE "audio/music/tcg/duel2.asm"
+INCLUDE "audio/music/tcg/duel3.asm"
+INCLUDE "audio/music/pinball/catchemblue.asm"
+INCLUDE "audio/music/pinball/seelstage.asm"
+INCLUDE "audio/music/pinball/gengarstage.asm"
+INCLUDE "audio/music/pinball/whackthediglett.asm"
+INCLUDE "audio/music/tcg2/challengecup.asm"
+
+SECTION "Music 5", ROMX
+
+INCLUDE "audio/play_battle_music.asm"
+INCLUDE "audio/music/tcg2/fort2.asm"
+INCLUDE "audio/music/tcg2/herecomesteamgr.asm"
+INCLUDE "audio/music/unused_beta_tracks/battle_victory_guide.asm"
+INCLUDE "audio/music/unused_beta_tracks/rest_at_house.asm"
+
+SECTION "New Engine 3 SFX", ROMX
+
+INCLUDE "audio/sfx/fall_down_hole.asm"
+INCLUDE "audio/sfx/secret_lab_notes.asm"
+INCLUDE "audio/sfx/champ_arena_sfx.asm"

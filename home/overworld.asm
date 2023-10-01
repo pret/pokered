@@ -1234,19 +1234,12 @@ CollisionCheckOnLand::
 CheckTilePassable::
 	predef GetTileAndCoordsInFrontOfPlayer ; get tile in front of player
 	ld a, [wTileInFrontOfPlayer] ; tile in front of player
-	ld c, a
-	ld hl, wTilesetCollisionPtr ; pointer to list of passable tiles
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a ; hl now points to passable tiles
-.loop
-	ld a, [hli]
-	cp $ff
-	jr z, .tileNotPassable
-	cp c
-	ret z
-	jr .loop
-.tileNotPassable
+	ld d, a
+	callfar _CheckTilePassable
+	jr c, .notPassable
+	and a
+	ret
+.notPassable
 	scf
 	ret
 
@@ -1885,17 +1878,9 @@ CollisionCheckOnWater::
 	jr nc, .noCollision
 ; check if the [land] tile in front of the player is passable
 .checkIfNextTileIsPassable
-	ld hl, wTilesetCollisionPtr ; pointer to list of passable tiles
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-.loop
-	ld a, [hli]
-	cp $ff
-	jr z, .collision
-	cp d ; is the tile in front of the player a passable tile
-	jr z, .stopSurfing ; stop surfing if the tile is passable
-	jr .loop
+	callfar _CheckTilePassable
+	jr c, .collision
+	jr .stopSurfing
 .collision
 	ld a, [wChannelSoundIDs + CHAN5]
 	cp SFX_COLLISION ; check if collision sound is already playing

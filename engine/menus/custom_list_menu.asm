@@ -1,10 +1,11 @@
 CustomListMenuTextMethods:
 	dw GetMonNameListMenu
+	dw GetTrainerNameListMenu
+	dw GetChampArenaMusicNameListMenu
 
 CustomListMenuGetEntryText::
 	push hl
 	ld a, [wListMenuCustomType]
-	add a
 	ld hl, CustomListMenuTextMethods
 	call GetAddressFromPointerArray
 	ld de, .return
@@ -17,6 +18,16 @@ CustomListMenuGetEntryText::
 GetMonNameListMenu:
 	jp GetMonName
 
+GetTrainerNameListMenu:
+	ld a, [wd11e]
+	ld [wTrainerClass], a
+	callfar GetTrainerName_
+	ld de, wTrainerName
+	ret
+
+GetChampArenaMusicNameListMenu:
+	jpfar GetChampArenaMusicNameIntoWRAM
+
 CheckLoadHoverText::
 	push af
 	push bc
@@ -24,7 +35,6 @@ CheckLoadHoverText::
 	push de
 	; wListMenuHoverTextType still loaded
 	dec a
-	add a
 	ld hl, CustomListMenuHoverTextMethods
 	call GetAddressFromPointerArray
 	ld de, .return
@@ -135,7 +145,6 @@ CustomListMenuHoverTextSaveScreenTileMethods:
 CheckSaveHoverTextScreenTiles::
 	; wListMenuHoverTextType still loaded
 	dec a
-	add a
 	ld hl, CustomListMenuHoverTextSaveScreenTileMethods
 	call GetAddressFromPointerArray
 	jp hl

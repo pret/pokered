@@ -43,7 +43,6 @@ CeruleanRocketHouseJumpTable:
 CeruleanRocketHouseHiddenTexts::
 	text_asm
 	ld a, [wUnusedC000]
-	add a ; 2 bytes per jump table pointer
 	ld hl, CeruleanRocketHouseJumpTable
 	call GetAddressFromPointerArray
 	rst _PrintText

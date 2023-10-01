@@ -118,7 +118,7 @@ MapHSPointers:
 	dw SecretLabHS
 	dw NoHS
 	dw NoHS
-	dw NoHS
+	dw ChampArenaHS
 	dw NoHS
 	dw NoHS
 	dw NoHS
@@ -178,7 +178,7 @@ MapHSPointers:
 	dw NoHS
 	dw NoHS
 	dw NoHS
-	dw NoHS
+	dw IndigoPlateauLobbyHS
 	dw NoHS
 	dw NoHS
 	dw FightingDojoHS
@@ -652,5 +652,18 @@ SecretLabHS:
 	db SECRET_LAB, 3, SHOW ; chief in secret lab
 PokemonTower1FHS:
 	db POKEMON_TOWER_1F, 6, SHOW ; new rocket in pokemon tower 1F blocking downstairs
+ChampArenaHS:
+	db CHAMP_ARENA, 2, HIDE ; challenger
+	db CHAMP_ARENA, 1, HIDE ; proxy player's sprite
+	db CHAMP_ARENA, 4, HIDE ; tm kid
+	db CHAMP_ARENA, 5, HIDE ; crowd 1
+	db CHAMP_ARENA, 6, HIDE ; crowd 2
+	db CHAMP_ARENA, 7, HIDE ; crowd 3
+	db CHAMP_ARENA, 8, HIDE ; crowd 4
+	db CHAMP_ARENA, 9, HIDE ; crowd 5
+	db CHAMP_ARENA,10, HIDE ; crowd 6
+	db CHAMP_ARENA,11, HIDE ; crowd 7
+IndigoPlateauLobbyHS:
+	db INDIGO_PLATEAU_LOBBY, 7, SHOW ; arena assistant
 	db $FF, $01, SHOW ; end
 	assert_table_length NUM_EXTRA_HS_OBJECTS + 1

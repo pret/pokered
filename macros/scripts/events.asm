@@ -17,6 +17,10 @@ MACRO CheckEvent
 	ENDC
 ENDM
 
+MACRO CheckFlag
+	CheckEvent \1
+ENDM
+
 
 ;\1 = event index
 MACRO CheckEventReuseA
@@ -151,6 +155,14 @@ MACRO SetEventA
 	ld [wEventFlags + ((\1) / 8)], a
 ENDM
 
+MACRO SetFlag
+	SetEventA \1
+ENDM
+
+MACRO SetFlagHL
+	SetEvent \1
+ENDM
+
 
 ;\1 = event index
 MACRO SetEventReuseHL
@@ -207,6 +219,10 @@ MACRO ResetEventA
 	ld a, [wEventFlags + ((\1) / 8)]
 	res (\1) % 8, a
 	ld [wEventFlags + ((\1) / 8)], a
+ENDM
+
+MACRO ResetFlag
+	ResetEventA \1
 ENDM
 
 

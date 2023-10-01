@@ -255,6 +255,13 @@ MomHealPokemonImmediate:
 	rst _PlaySound
 	ret
 
+FarHeal::
+	ld a, BANK(Music_PkmnHealed)
+	ld [wAudioROMBank], a
+	ld [wAudioSavedROMBank], a
+	call MomHealPokemonImmediate
+	jp PlayDefaultMusic
+
 RedsHouse1FMomYouShouldRestText:
 	text_far _RedsHouse1FMomYouShouldRestText
 	text_end

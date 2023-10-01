@@ -132,13 +132,19 @@ TransformEffect_:
 	call GetMonName
 	ld hl, wEnemyMonUnmodifiedAttack
 	ld de, wPlayerMonUnmodifiedAttack
-	call .copyBasedOnTurn ; original (unmodified) stats
+	call .copyBasedOnTurn8 ; original (unmodified) stats
 	ld hl, wEnemyMonStatMods
 	ld de, wPlayerMonStatMods
-	call .copyBasedOnTurn ; stat mods
+	call .copyBasedOnTurn8 ; stat mods
+	ld hl, wEnemyMonBaseAttack ; skip HP stat which stays the same when transforming
+	ld de, wPlayerMonBaseAttack
+	ld bc, 4
+	call .copyBasedOnTurn ; base stats
 	ld hl, TransformedText
 	jp PrintText
 
+.copyBasedOnTurn8
+	ld bc, $8
 .copyBasedOnTurn
 	ldh a, [hWhoseTurn]
 	and a
@@ -148,8 +154,8 @@ TransformEffect_:
 	ld l, e
 	pop de
 .gotStatsOrModsToCopy
-	ld bc, $8
-	jp CopyData
+	rst _CopyData
+	ret
 
 .failed
 	ld c, 50

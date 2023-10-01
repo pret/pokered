@@ -386,16 +386,13 @@ GetTileTwoStepsInFrontOfPlayer:
 
 CheckForCollisionWhenPushingBoulder:
 	call GetTileTwoStepsInFrontOfPlayer
-	ld hl, wTilesetCollisionPtr
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-.loop
-	ld a, [hli]
-	cp $ff
-	jr z, .done ; if the tile two steps ahead is not passable
-	cp c
-	jr nz, .loop
+	push bc
+	push de
+	ld d, c
+	callfar _CheckTilePassable
+	pop de
+	pop bc
+	jr c, .done ; not passable
 	ld hl, TilePairCollisionsLand
 	call CheckForTilePairCollisions2
 	ld a, $ff
