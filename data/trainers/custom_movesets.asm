@@ -63,7 +63,7 @@ MoveSetMappings:
 
 ChampArenaErikaMoveset:
 	; victreebel
-	db TELEPORT ; SLASH ; TODO: REMOVE
+	db SLASH
 	db EGG_BOMB
 	db SELFDESTRUCT
 	db RAZOR_LEAF
