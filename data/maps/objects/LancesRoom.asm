@@ -1,5 +1,5 @@
 	object_const_def
-	const LANCESROOM_LANCE
+	const_export LANCESROOM_LANCE
 
 LancesRoom_Object:
 	db $3 ; border block

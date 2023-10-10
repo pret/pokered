@@ -1,5 +1,5 @@
 	object_const_def
-	const DIGLETTSCAVEROUTE2_FISHING_GURU
+	const_export DIGLETTSCAVEROUTE2_FISHING_GURU
 
 DiglettsCaveRoute2_Object:
 	db $7d ; border block

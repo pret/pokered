@@ -1,5 +1,5 @@
 	object_const_def
-	const ROUTE7GATE_GUARD
+	const_export ROUTE7GATE_GUARD
 
 Route7Gate_Object:
 	db $a ; border block

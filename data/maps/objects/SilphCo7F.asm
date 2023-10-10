@@ -1,15 +1,16 @@
 	object_const_def
-	const SILPHCO7F_SILPH_WORKER_M1
-	const SILPHCO7F_SILPH_WORKER_M2
-	const SILPHCO7F_SILPH_WORKER_M3
-	const SILPHCO7F_SILPH_WORKER_M4
-	const SILPHCO7F_ROCKET1
-	const SILPHCO7F_SCIENTIST
-	const SILPHCO7F_ROCKET2
-	const SILPHCO7F_ROCKET3
-	const SILPHCO7F_RIVAL
-	const SILPHCO7F_CALCIUM
-	const SILPHCO7F_TM_SWORDS_DANCE
+	const_export SILPHCO7F_SILPH_WORKER_M1
+	const_export SILPHCO7F_SILPH_WORKER_M2
+	const_export SILPHCO7F_SILPH_WORKER_M3
+	const_export SILPHCO7F_SILPH_WORKER_M4
+	const_export SILPHCO7F_ROCKET1
+	const_export SILPHCO7F_SCIENTIST
+	const_export SILPHCO7F_ROCKET2
+	const_export SILPHCO7F_ROCKET3
+	const_export SILPHCO7F_RIVAL
+	const_export SILPHCO7F_CALCIUM
+	const_export SILPHCO7F_TM_SWORDS_DANCE
+	const_export SILPHCO7F_UNUSED ; referenced in data/maps/hide_show_data.asm, no corresponding object_event
 
 SilphCo7F_Object:
 	db $2e ; border block

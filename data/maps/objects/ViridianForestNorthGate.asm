@@ -1,6 +1,6 @@
 	object_const_def
-	const VIRIDIANFORESTNORTHGATE_SUPER_NERD
-	const VIRIDIANFORESTNORTHGATE_GRAMPS
+	const_export VIRIDIANFORESTNORTHGATE_SUPER_NERD
+	const_export VIRIDIANFORESTNORTHGATE_GRAMPS
 
 ViridianForestNorthGate_Object:
 	db $a ; border block

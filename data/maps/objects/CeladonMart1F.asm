@@ -1,5 +1,5 @@
 	object_const_def
-	const CELADONMART1F_RECEPTIONIST
+	const_export CELADONMART1F_RECEPTIONIST
 
 CeladonMart1F_Object:
 	db $f ; border block

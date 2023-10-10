@@ -1,6 +1,6 @@
 	object_const_def
-	const ROUTE2TRADEHOUSE_SCIENTIST
-	const ROUTE2TRADEHOUSE_GAMEBOY_KID
+	const_export ROUTE2TRADEHOUSE_SCIENTIST
+	const_export ROUTE2TRADEHOUSE_GAMEBOY_KID
 
 Route2TradeHouse_Object:
 	db $a ; border block

@@ -1,9 +1,9 @@
 	object_const_def
-	const VERMILIONGYM_LT_SURGE
-	const VERMILIONGYM_GENTLEMAN
-	const VERMILIONGYM_SUPER_NERD
-	const VERMILIONGYM_SAILOR
-	const VERMILIONGYM_GYM_GUIDE
+	const_export VERMILIONGYM_LT_SURGE
+	const_export VERMILIONGYM_GENTLEMAN
+	const_export VERMILIONGYM_SUPER_NERD
+	const_export VERMILIONGYM_SAILOR
+	const_export VERMILIONGYM_GYM_GUIDE
 
 VermilionGym_Object:
 	db $3 ; border block

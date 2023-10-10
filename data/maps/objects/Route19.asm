@@ -1,14 +1,14 @@
 	object_const_def
-	const ROUTE19_COOLTRAINER_M1
-	const ROUTE19_COOLTRAINER_M2
-	const ROUTE19_SWIMMER1
-	const ROUTE19_SWIMMER2
-	const ROUTE19_SWIMMER3
-	const ROUTE19_SWIMMER4
-	const ROUTE19_SWIMMER5
-	const ROUTE19_SWIMMER6
-	const ROUTE19_SWIMMER7
-	const ROUTE19_SWIMMER8
+	const_export ROUTE19_COOLTRAINER_M1
+	const_export ROUTE19_COOLTRAINER_M2
+	const_export ROUTE19_SWIMMER1
+	const_export ROUTE19_SWIMMER2
+	const_export ROUTE19_SWIMMER3
+	const_export ROUTE19_SWIMMER4
+	const_export ROUTE19_SWIMMER5
+	const_export ROUTE19_SWIMMER6
+	const_export ROUTE19_SWIMMER7
+	const_export ROUTE19_SWIMMER8
 
 Route19_Object:
 	db $43 ; border block

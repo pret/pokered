@@ -1,9 +1,9 @@
 	object_const_def
-	const PEWTERCITY_COOLTRAINER_F
-	const PEWTERCITY_COOLTRAINER_M
-	const PEWTERCITY_SUPER_NERD1
-	const PEWTERCITY_SUPER_NERD2
-	const PEWTERCITY_YOUNGSTER
+	const_export PEWTERCITY_COOLTRAINER_F
+	const_export PEWTERCITY_COOLTRAINER_M
+	const_export PEWTERCITY_SUPER_NERD1
+	const_export PEWTERCITY_SUPER_NERD2
+	const_export PEWTERCITY_YOUNGSTER
 
 PewterCity_Object:
 	db $a ; border block

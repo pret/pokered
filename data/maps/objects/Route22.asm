@@ -1,6 +1,6 @@
 	object_const_def
-	const ROUTE22_RIVAL1
-	const ROUTE22_RIVAL2
+	const_export ROUTE22_RIVAL1
+	const_export ROUTE22_RIVAL2
 
 Route22_Object:
 	db $2c ; border block

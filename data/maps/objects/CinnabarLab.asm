@@ -1,5 +1,5 @@
 	object_const_def
-	const CINNABARLAB_FISHING_GURU
+	const_export CINNABARLAB_FISHING_GURU
 
 CinnabarLab_Object:
 	db $17 ; border block

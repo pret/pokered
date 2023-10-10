@@ -1,7 +1,7 @@
 	object_const_def
-	const CELADONMART4F_CLERK
-	const CELADONMART4F_SUPER_NERD
-	const CELADONMART4F_YOUNGSTER
+	const_export CELADONMART4F_CLERK
+	const_export CELADONMART4F_SUPER_NERD
+	const_export CELADONMART4F_YOUNGSTER
 
 CeladonMart4F_Object:
 	db $f ; border block

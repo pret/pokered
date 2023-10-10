@@ -1,5 +1,5 @@
 	object_const_def
-	const SILPHCO1F_LINK_RECEPTIONIST
+	const_export SILPHCO1F_LINK_RECEPTIONIST
 
 SilphCo1F_Object:
 	db $2e ; border block

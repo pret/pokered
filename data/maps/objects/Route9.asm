@@ -1,14 +1,14 @@
 	object_const_def
-	const ROUTE9_COOLTRAINER_F1
-	const ROUTE9_COOLTRAINER_M1
-	const ROUTE9_COOLTRAINER_M2
-	const ROUTE9_COOLTRAINER_F2
-	const ROUTE9_HIKER_1
-	const ROUTE9_HIKER_2
-	const ROUTE9_YOUNGSTER_1
-	const ROUTE9_HIKER_3
-	const ROUTE9_YOUNGSTER_2
-	const ROUTE9_TM_TELEPORT
+	const_export ROUTE9_COOLTRAINER_F1
+	const_export ROUTE9_COOLTRAINER_M1
+	const_export ROUTE9_COOLTRAINER_M2
+	const_export ROUTE9_COOLTRAINER_F2
+	const_export ROUTE9_HIKER_1
+	const_export ROUTE9_HIKER_2
+	const_export ROUTE9_YOUNGSTER_1
+	const_export ROUTE9_HIKER_3
+	const_export ROUTE9_YOUNGSTER_2
+	const_export ROUTE9_TM_TELEPORT
 
 Route9_Object:
 	db $2c ; border block

@@ -1,13 +1,13 @@
 	object_const_def
-	const ROUTE8_SUPER_NERD1
-	const ROUTE8_GAMBLER1
-	const ROUTE8_SUPER_NERD2
-	const ROUTE8_COOLTRAINER_F1
-	const ROUTE8_SUPER_NERD3
-	const ROUTE8_COOLTRAINER_F2
-	const ROUTE8_COOLTRAINER_F3
-	const ROUTE8_GAMBLER2
-	const ROUTE8_COOLTRAINER_F4
+	const_export ROUTE8_SUPER_NERD1
+	const_export ROUTE8_GAMBLER1
+	const_export ROUTE8_SUPER_NERD2
+	const_export ROUTE8_COOLTRAINER_F1
+	const_export ROUTE8_SUPER_NERD3
+	const_export ROUTE8_COOLTRAINER_F2
+	const_export ROUTE8_COOLTRAINER_F3
+	const_export ROUTE8_GAMBLER2
+	const_export ROUTE8_COOLTRAINER_F4
 
 Route8_Object:
 	db $2c ; border block

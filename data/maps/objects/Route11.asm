@@ -1,14 +1,14 @@
 	object_const_def
-	const ROUTE11_GAMBLER1
-	const ROUTE11_GAMBLER2
-	const ROUTE11_YOUNGSTER1
-	const ROUTE11_SUPER_NERD1
-	const ROUTE11_YOUNGSTER2
-	const ROUTE11_GAMBLER3
-	const ROUTE11_GAMBLER4
-	const ROUTE11_YOUNGSTER3
-	const ROUTE11_SUPER_NERD2
-	const ROUTE11_YOUNGSTER4
+	const_export ROUTE11_GAMBLER1
+	const_export ROUTE11_GAMBLER2
+	const_export ROUTE11_YOUNGSTER1
+	const_export ROUTE11_SUPER_NERD1
+	const_export ROUTE11_YOUNGSTER2
+	const_export ROUTE11_GAMBLER3
+	const_export ROUTE11_GAMBLER4
+	const_export ROUTE11_YOUNGSTER3
+	const_export ROUTE11_SUPER_NERD2
+	const_export ROUTE11_YOUNGSTER4
 
 Route11_Object:
 	db $f ; border block

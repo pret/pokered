@@ -1,7 +1,7 @@
 	object_const_def
-	const PEWTERGYM_BROCK
-	const PEWTERGYM_COOLTRAINER_M
-	const PEWTERGYM_GYM_GUIDE
+	const_export PEWTERGYM_BROCK
+	const_export PEWTERGYM_COOLTRAINER_M
+	const_export PEWTERGYM_GYM_GUIDE
 
 PewterGym_Object:
 	db $3 ; border block

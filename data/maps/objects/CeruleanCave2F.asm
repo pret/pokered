@@ -1,7 +1,7 @@
 	object_const_def
-	const CERULEANCAVE2F_PP_UP
-	const CERULEANCAVE2F_ULTRA_BALL
-	const CERULEANCAVE2F_FULL_RESTORE
+	const_export CERULEANCAVE2F_PP_UP
+	const_export CERULEANCAVE2F_ULTRA_BALL
+	const_export CERULEANCAVE2F_FULL_RESTORE
 
 CeruleanCave2F_Object:
 	db $7d ; border block

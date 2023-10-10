@@ -1,9 +1,9 @@
 	object_const_def
-	const CELADONDINER_COOK
-	const CELADONDINER_MIDDLE_AGED_WOMAN
-	const CELADONDINER_MIDDLE_AGED_MAN
-	const CELADONDINER_FISHER
-	const CELADONDINER_GYM_GUIDE
+	const_export CELADONDINER_COOK
+	const_export CELADONDINER_MIDDLE_AGED_WOMAN
+	const_export CELADONDINER_MIDDLE_AGED_MAN
+	const_export CELADONDINER_FISHER
+	const_export CELADONDINER_GYM_GUIDE
 
 CeladonDiner_Object:
 	db $f ; border block

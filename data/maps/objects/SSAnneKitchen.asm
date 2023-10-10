@@ -1,11 +1,11 @@
 	object_const_def
-	const SSANNEKITCHEN_COOK1
-	const SSANNEKITCHEN_COOK2
-	const SSANNEKITCHEN_COOK3
-	const SSANNEKITCHEN_COOK4
-	const SSANNEKITCHEN_COOK5
-	const SSANNEKITCHEN_COOK6
-	const SSANNEKITCHEN_COOK7
+	const_export SSANNEKITCHEN_COOK1
+	const_export SSANNEKITCHEN_COOK2
+	const_export SSANNEKITCHEN_COOK3
+	const_export SSANNEKITCHEN_COOK4
+	const_export SSANNEKITCHEN_COOK5
+	const_export SSANNEKITCHEN_COOK6
+	const_export SSANNEKITCHEN_COOK7
 
 SSAnneKitchen_Object:
 	db $c ; border block

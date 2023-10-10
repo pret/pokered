@@ -1,14 +1,14 @@
 	object_const_def
-	const ROUTE25_YOUNGSTER1
-	const ROUTE25_YOUNGSTER2
-	const ROUTE25_COOLTRAINER_M
-	const ROUTE25_COOLTRAINER_F1
-	const ROUTE25_YOUNGSTER3
-	const ROUTE25_COOLTRAINER_F2
-	const ROUTE25_HIKER1
-	const ROUTE25_HIKER2
-	const ROUTE25_HIKER3
-	const ROUTE25_TM_SEISMIC_TOSS
+	const_export ROUTE25_YOUNGSTER1
+	const_export ROUTE25_YOUNGSTER2
+	const_export ROUTE25_COOLTRAINER_M
+	const_export ROUTE25_COOLTRAINER_F1
+	const_export ROUTE25_YOUNGSTER3
+	const_export ROUTE25_COOLTRAINER_F2
+	const_export ROUTE25_HIKER1
+	const_export ROUTE25_HIKER2
+	const_export ROUTE25_HIKER3
+	const_export ROUTE25_TM_SEISMIC_TOSS
 
 Route25_Object:
 	db $2c ; border block

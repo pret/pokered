@@ -1,7 +1,7 @@
 	object_const_def
-	const CERULEANCAVE1F_FULL_RESTORE
-	const CERULEANCAVE1F_MAX_ELIXER
-	const CERULEANCAVE1F_NUGGET
+	const_export CERULEANCAVE1F_FULL_RESTORE
+	const_export CERULEANCAVE1F_MAX_ELIXER
+	const_export CERULEANCAVE1F_NUGGET
 
 CeruleanCave1F_Object:
 	db $7d ; border block

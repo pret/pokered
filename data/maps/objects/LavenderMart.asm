@@ -1,7 +1,7 @@
 	object_const_def
-	const LAVENDERMART_CLERK
-	const LAVENDERMART_BALDING_GUY
-	const LAVENDERMART_COOLTRAINER_M
+	const_export LAVENDERMART_CLERK
+	const_export LAVENDERMART_BALDING_GUY
+	const_export LAVENDERMART_COOLTRAINER_M
 
 LavenderMart_Object:
 	db $0 ; border block

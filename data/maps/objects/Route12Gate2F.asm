@@ -1,5 +1,5 @@
 	object_const_def
-	const ROUTE12GATE2F_BRUNETTE_GIRL
+	const_export ROUTE12GATE2F_BRUNETTE_GIRL
 
 Route12Gate2F_Object:
 	db $a ; border block

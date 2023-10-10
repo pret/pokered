@@ -1,5 +1,5 @@
 	object_const_def
-	const ROUTE22GATE_GUARD
+	const_export ROUTE22GATE_GUARD
 
 Route22Gate_Object:
 	db $a ; border block

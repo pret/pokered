@@ -1,5 +1,5 @@
 	object_const_def
-	const ROUTE18GATE2F_YOUNGSTER
+	const_export ROUTE18GATE2F_YOUNGSTER
 
 Route18Gate2F_Object:
 	db $a ; border block

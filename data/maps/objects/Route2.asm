@@ -1,6 +1,6 @@
 	object_const_def
-	const ROUTE2_MOON_STONE
-	const ROUTE2_HP_UP
+	const_export ROUTE2_MOON_STONE
+	const_export ROUTE2_HP_UP
 
 Route2_Object:
 	db $f ; border block

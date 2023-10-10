@@ -1,7 +1,7 @@
 	object_const_def
-	const ROUTE18_COOLTRAINER_M1
-	const ROUTE18_COOLTRAINER_M2
-	const ROUTE18_COOLTRAINER_M3
+	const_export ROUTE18_COOLTRAINER_M1
+	const_export ROUTE18_COOLTRAINER_M2
+	const_export ROUTE18_COOLTRAINER_M3
 
 Route18_Object:
 	db $43 ; border block

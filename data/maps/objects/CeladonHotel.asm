@@ -1,7 +1,7 @@
 	object_const_def
-	const CELADONHOTEL_GRANNY
-	const CELADONHOTEL_BEAUTY
-	const CELADONHOTEL_SUPER_NERD
+	const_export CELADONHOTEL_GRANNY
+	const_export CELADONHOTEL_BEAUTY
+	const_export CELADONHOTEL_SUPER_NERD
 
 CeladonHotel_Object:
 	db $0 ; border block

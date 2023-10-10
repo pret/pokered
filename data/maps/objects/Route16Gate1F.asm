@@ -1,6 +1,6 @@
 	object_const_def
-	const ROUTE16GATE1F_GUARD
-	const ROUTE16GATE1F_GAMBLER
+	const_export ROUTE16GATE1F_GUARD
+	const_export ROUTE16GATE1F_GAMBLER
 
 Route16Gate1F_Object:
 	db $a ; border block

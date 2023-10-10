@@ -1,5 +1,5 @@
 	object_const_def
-	const SSANNECAPTAINSROOM_CAPTAIN
+	const_export SSANNECAPTAINSROOM_CAPTAIN
 
 SSAnneCaptainsRoom_Object:
 	db $c ; border block

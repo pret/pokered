@@ -1,7 +1,7 @@
 	object_const_def
-	const LAVENDERTOWN_LITTLE_GIRL
-	const LAVENDERTOWN_COOLTRAINER_M
-	const LAVENDERTOWN_SUPER_NERD
+	const_export LAVENDERTOWN_LITTLE_GIRL
+	const_export LAVENDERTOWN_COOLTRAINER_M
+	const_export LAVENDERTOWN_SUPER_NERD
 
 LavenderTown_Object:
 	db $2c ; border block

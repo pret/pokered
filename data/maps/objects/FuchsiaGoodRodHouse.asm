@@ -1,5 +1,5 @@
 	object_const_def
-	const FUCHSIAGOODRODHOUSE_FISHING_GURU
+	const_export FUCHSIAGOODRODHOUSE_FISHING_GURU
 
 FuchsiaGoodRodHouse_Object:
 	db $c ; border block

@@ -1,6 +1,6 @@
 	object_const_def
-	const LAVENDERCUBONEHOUSE_CUBONE
-	const LAVENDERCUBONEHOUSE_BRUNETTE_GIRL
+	const_export LAVENDERCUBONEHOUSE_CUBONE
+	const_export LAVENDERCUBONEHOUSE_BRUNETTE_GIRL
 
 LavenderCuboneHouse_Object:
 	db $a ; border block

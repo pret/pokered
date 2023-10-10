@@ -1,13 +1,13 @@
 	object_const_def
-	const ROUTE3_SUPER_NERD
-	const ROUTE3_YOUNGSTER1
-	const ROUTE3_YOUNGSTER2
-	const ROUTE3_COOLTRAINER_F1
-	const ROUTE3_YOUNGSTER3
-	const ROUTE3_COOLTRAINER_F2
-	const ROUTE3_YOUNGSTER4
-	const ROUTE3_YOUNGSTER5
-	const ROUTE3_COOLTRAINER_F3
+	const_export ROUTE3_SUPER_NERD
+	const_export ROUTE3_YOUNGSTER1
+	const_export ROUTE3_YOUNGSTER2
+	const_export ROUTE3_COOLTRAINER_F1
+	const_export ROUTE3_YOUNGSTER3
+	const_export ROUTE3_COOLTRAINER_F2
+	const_export ROUTE3_YOUNGSTER4
+	const_export ROUTE3_YOUNGSTER5
+	const_export ROUTE3_COOLTRAINER_F3
 
 Route3_Object:
 	db $2c ; border block

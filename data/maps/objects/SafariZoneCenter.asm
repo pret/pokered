@@ -1,5 +1,5 @@
 	object_const_def
-	const SAFARIZONECENTER_NUGGET
+	const_export SAFARIZONECENTER_NUGGET
 
 SafariZoneCenter_Object:
 	db $0 ; border block
