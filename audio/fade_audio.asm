@@ -60,7 +60,18 @@ PlayExtraMusic:
 	ld a, [wCurMap]
 	cp SECRET_LAB
 	jr z, .secretlab
+	cp DIAMOND_MINE
+	jr z, .diamondMine
 	ret
 .secretlab
 	jpfar SecretLabPlayMusic
+.diamondMine
+	ld a, d
+	and a
+	jr z, .fadingOut
+	jpfar DiamondMinePlayMusic
+.fadingOut
+	xor a
+	ld [wReplacedMapMusic], a
+	jr FadeOutAudio.noExtraMusic
 ;;;;;;;;;;

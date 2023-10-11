@@ -4,6 +4,7 @@ PlayDefaultMusic::
 	ld c, a
 	ld d, a
 	ld [wLastMusicSoundID], a
+	ld [wSpecialMusicBank], a
 	jr PlayDefaultMusicCommon
 
 PlayDefaultMusicFadeOutCurrent::

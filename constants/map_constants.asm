@@ -134,7 +134,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const POKEMON_TOWER_B1F,             10,  9 ; $70 ; PureRGBnote: ADDED: New map
 	map_const LANCES_ROOM,                   13, 13 ; $71
 	map_const CHAMP_ARENA,                    8,  9 ; $72 ; PureRGBnote: ADDED: New map
-	map_const UNUSED_MAP_73,                  0,  0 ; $73
+	map_const DIAMOND_MINE,                  11, 10 ; $73 ; PureRGBnote: ADDED: New map
 	map_const UNUSED_MAP_74,                  0,  0 ; $74
 	map_const UNUSED_MAP_75,                  0,  0 ; $75
 	map_const HALL_OF_FAME,                   5,  4 ; $76

@@ -230,3 +230,23 @@ CheckSetCutEvents:
 .route8left
 	SetEvent EVENT_CUT_DOWN_ROUTE8_LEFT_TREE
 	ret
+
+; input d = which species to look for
+IsMonInParty::
+	ld hl, wPartyMon1Species
+	ld bc, wPartyMon2 - wPartyMon1
+	ld e, PARTY_LENGTH
+.loop
+	ld a, [hl]
+	cp d
+	jr z, .found
+	add hl, bc
+	dec e
+	jr z, .notFound
+	jr .loop
+.found
+	scf
+	ret
+.notFound
+	and a
+	ret

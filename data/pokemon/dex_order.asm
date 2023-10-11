@@ -171,7 +171,7 @@ PokedexOrder:
 	db DEX_GEODUDE
 	db DEX_PORYGON
 	db DEX_AERODACTYL
-	db 0 ; MISSINGNO.
+	db DEX_ONIX
 	db DEX_MAGNEMITE
 	db DEX_MEWTWO ; Armored Mewtwo
 	db DEX_HAUNTER ; Powered Haunter

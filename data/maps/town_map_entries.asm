@@ -88,6 +88,8 @@ InternalMapEntries:
 	internal_map VIRIDIAN_SCHOOL_HOUSE_B1F,      2,  8, ViridianCityName
 	internal_map BILLS_GARDEN,                  13,  0, BillsGardenName
 	internal_map SECRET_LAB,                     2, 15, PokemonMansionName
+	internal_map CHAMP_ARENA,                    0,  2, PokemonLeagueName
+	internal_map DIAMOND_MINE,                  12,  4, DiamondMineName
 	internal_map HALL_OF_FAME,                   0,  2, PokemonLeagueName
 	internal_map UNDERGROUND_PATH_NORTH_SOUTH,  10,  5, UndergroundPathName
 	internal_map CHAMPIONS_ROOM,                 0,  2, PokemonLeagueName

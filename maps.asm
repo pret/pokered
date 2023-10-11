@@ -399,6 +399,11 @@ INCLUDE "scripts/SeafoamIslandsB4F.asm"
 INCLUDE "data/maps/objects/SeafoamIslandsB4F.asm"
 SeafoamIslandsB4F_Blocks: INCBIN "maps/SeafoamIslandsB4F.blk"
 
+INCLUDE "data/maps/headers/DiamondMine.asm"
+INCLUDE "scripts/DiamondMine.asm"
+INCLUDE "data/maps/objects/DiamondMine.asm"
+DiamondMine_Blocks: INCBIN "maps/DiamondMine.blk"
+
 
 SECTION "Maps 7", ROMX
 
@@ -794,7 +799,6 @@ Route16_Blocks: INCBIN "maps/Route16.blk"
 INCLUDE "data/maps/headers/Route18.asm"
 INCLUDE "data/maps/objects/Route18.asm"
 Route18_Blocks: INCBIN "maps/Route18.blk"
-
 
 SECTION "Maps 14", ROMX
 

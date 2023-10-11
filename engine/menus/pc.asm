@@ -114,8 +114,16 @@ AccessedMyPCText:
 	text_far _AccessedMyPCText
 	text_end
 
+; d = how many to remove
+RemoveNumItemByID::
+	ld a, d
+	ld [wItemQuantity], a
+	jr RemoveItemByIDCommon
 ; removes one of the specified item ID [hItemToRemoveID] from bag (if existent)
 RemoveItemByID::
+	ld a, $1
+	ld [wItemQuantity], a
+RemoveItemByIDCommon::
 	ld hl, wBagItems
 	ldh a, [hItemToRemoveID]
 	ld b, a
@@ -133,8 +141,6 @@ RemoveItemByID::
 	ldh [hItemToRemoveIndex], a
 	jr .loop
 .foundItem
-	ld a, $1
-	ld [wItemQuantity], a
 	ldh a, [hItemToRemoveIndex]
 	ld [wWhichPokemon], a
 	ld hl, wNumBagItems

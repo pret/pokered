@@ -5,7 +5,7 @@ RockTunnelB1FWildMons:
 	db 19, GEODUDE
 	db 20, MACHOP
 	db 21, GEODUDE
-	db 20, CUBONE
+	db 20, ONIX
 	db 19, MACHOP
 	db 20, HITMONLEE
 	db 20, HITMONCHAN

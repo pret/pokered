@@ -1,9 +1,9 @@
 	db DEX_ONIX ; pokedex id
 
-	db  55,  25, 180,  80,  75
+	db  80,  85, 180,  80,  75
 	;   hp  atk  def  spd  spc
 
-	db ROCK, GROUND ; type
+	db CRYSTAL, GROUND ; type
 	db 45 ; catch rate
 	db 108 ; base exp
 

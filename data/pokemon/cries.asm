@@ -177,7 +177,7 @@ CryData::
 	mon_cry SFX_CRY_24, $F0, $10 ; Geodude
 	mon_cry SFX_CRY_25, $AA, $FF ; Porygon
 	mon_cry SFX_CRY_23, $20, $F0 ; Aerodactyl
-	mon_cry SFX_CRY_00, $00, $00 ; MissingNo.
+	mon_cry SFX_CRY_17, $F3, $C0 ; Hardened Onix
 	mon_cry SFX_CRY_1C, $80, $60 ; Magnemite
 	mon_cry SFX_CRY_1E, $99, $FF ; Armored Mewtwo (ch8 of this cry gets remapped when it's called)
 	mon_cry SFX_CRY_1C, $30, $40 ; Powered Haunter (same as normal haunter)

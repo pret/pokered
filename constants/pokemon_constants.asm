@@ -178,7 +178,7 @@
 	const GEODUDE            ; $A9
 	const PORYGON            ; $AA
 	const AERODACTYL         ; $AB
-	const_skip               ; $AC
+	const HARDENED_ONIX      ; $AC
 	const MAGNEMITE          ; $AD
 	const ARMORED_MEWTWO     ; $AE
 	const POWERED_HAUNTER    ; $AF

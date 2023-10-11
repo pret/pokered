@@ -10,6 +10,7 @@ TypeNames:
 	dw .Typeless
 	dw .Bug
 	dw .Ghost
+	dw .Crystal
 
 REPT UNUSED_TYPES_END - UNUSED_TYPES
 	dw .Normal
@@ -43,3 +44,5 @@ ENDR
 .Ghost:    db "GHOST@"
 .Dragon:   db "DRAGON@"
 .Tri:      db "TRI@"
+.Crystal:  db "CRYSTAL@"
+

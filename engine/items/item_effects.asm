@@ -786,7 +786,7 @@ ItemUseBicycle:
 ;;;;;;;;;; PureRGBnote: ADDED: bike music can be turned off via the options.
 	ld a, [wOptions2]
 	bit BIT_BIKE_MUSIC, a
-	call z, PlayDefaultMusic ; play walking music
+	call z, .playDefaultMusic ; play walking music
 ;;;;;;;;;;
 ;;;;;;;;;; PureRGBnote: CHANGED: the text telling you "got on bike" and "got off bike" each only display once per playthrough to be less annoying
 	CheckEvent EVENT_SAW_GOT_OFF_BIKE_TEXT 
@@ -806,7 +806,7 @@ ItemUseBicycle:
 ;;;;;;;;;; PureRGBnote: ADDED: bike music can be turned off via the options.
 	ld a, [wOptions2]
 	bit BIT_BIKE_MUSIC, a
-	call z, PlayDefaultMusic ; play bike riding music
+	call z, .playDefaultMusic ; play bike riding music
 ;;;;;;;;;;
 ;;;;;;;;;; PureRGBnote: CHANGED: the text telling you "got on bike" and "got off bike" each only display once per playthrough to be less annoying
 	CheckEvent EVENT_SAW_GOT_ON_BIKE_TEXT
@@ -819,6 +819,12 @@ ItemUseBicycle:
 	ret
 .printText
 	jp PrintText
+.playDefaultMusic
+	ld a, [wMapConnections]
+	bit BIT_EXTRA_MUSIC_MAP, a
+	jp z, PlayDefaultMusic
+	ld d, 1
+	jpfar TryPlayExtraMusic
 
 ; used for Surf out-of-battle effect
 ItemUseSurfboard:

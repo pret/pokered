@@ -14,6 +14,15 @@ DungeonWarpList:
 	db POKEMON_MANSION_1F,  1
 	db POKEMON_MANSION_1F,  2
 	db POKEMON_MANSION_2F,  3
+	db DIAMOND_MINE, 1
+	db DIAMOND_MINE, 2
+	db DIAMOND_MINE, 3
+	db DIAMOND_MINE, 4
+	db DIAMOND_MINE, 5
+	db DIAMOND_MINE, 6
+	db DIAMOND_MINE, 7
+	db DIAMOND_MINE, 8
+	db DIAMOND_MINE, 9
 	db -1 ; end
 
 
@@ -36,6 +45,15 @@ DungeonWarpData:
 	fly_warp POKEMON_MANSION_1F,  16, 14
 	fly_warp POKEMON_MANSION_1F,  16, 14
 	fly_warp POKEMON_MANSION_2F,  18, 14
+	fly_warp DIAMOND_MINE,        18,  4
+	fly_warp DIAMOND_MINE,         7,  4
+	fly_warp DIAMOND_MINE,         7,  4
+	fly_warp DIAMOND_MINE,         7,  4
+	fly_warp DIAMOND_MINE,         7,  4
+	fly_warp DIAMOND_MINE,        15, 14
+	fly_warp DIAMOND_MINE,        15, 14
+	fly_warp DIAMOND_MINE,        15, 14
+	fly_warp DIAMOND_MINE,        15, 14
 
 
 MACRO special_warp_spec

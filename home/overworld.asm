@@ -754,10 +754,13 @@ HandleFlyWarpOrDungeonWarp::
 	call Delay3
 	xor a
 	ld [wBattleResult], a
-	ld [wWalkBikeSurfState], a
 	ld [wIsInBattle], a
 	ld [wMapPalOffset], a
 	ld hl, wd732
+	bit 4, [hl] ; fell down hole warp
+	jr nz, .dontResetBikeState ; don't reset bike state on falling down a hole
+	ld [wWalkBikeSurfState], a
+.dontResetBikeState
 	set 2, [hl] ; fly warp or dungeon warp
 	res 5, [hl] ; forced to ride bike
 	call LeaveMapAnim

@@ -56,7 +56,7 @@ VermilionDockSSAnneLeavesScript:
 ;;;;;;;;;;
 	SetEventForceReuseHL EVENT_SS_ANNE_LEFT
 	callfar GBCSetCPU1xSpeed ; shinpokerednote: ADDED: GBC double speed cpu mode messes up this animation
-;;;;;;;;;; PureRGBnote: ADDED: since we instantly enter this script from a warp and due to DEFER_MAP_LOAD bit set on this map's header, 
+;;;;;;;;;; PureRGBnote: ADDED: since we instantly enter this script from a warp and due to DEFER_SHOWING_MAP bit set on this map's header, 
 ;;;;;;;;;; we need to reset the palette here or the screen will be black
 	call GBPalNormal
 ;;;;;;;;;; 

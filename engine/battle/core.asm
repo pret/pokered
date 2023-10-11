@@ -5334,6 +5334,10 @@ AdjustDamageForMoveType:
 	jr z, .sameTypeAttackBonus
 	cp c ; does the move type match type 2 of the attacker?
 	jr z, .sameTypeAttackBonus
+;;;;;;;;;; PureRGBnote: ADDED: CRYSTAL type pokemon get STAB on ROCK attacks
+	cp ROCK
+	jr z, .checkCrystalStab
+;;;;;;;;;;
 ;;;;;;;;;; PureRGBnote: ADDED: normal type pokemon get STAB on tri attack
 	cp TRI
 	jr nz, .skipSameTypeAttackBonus
@@ -5344,6 +5348,15 @@ AdjustDamageForMoveType:
 	jr z, .sameTypeAttackBonus
 ;;;;;;;;;
 	jr .skipSameTypeAttackBonus
+;;;;;;;;;; PureRGBnote: ADDED: CRYSTAL type pokemon get STAB on ROCK attacks
+.checkCrystalStab
+	ld a, CRYSTAL ; ROCK type moves still get STAB for CRYSTAL type pokemon (only hardened onix at the moment)
+	cp b ; does CRYSTAL match type 1 of the attacker?
+	jr z, .sameTypeAttackBonus
+	cp c ; does CRYSTAL match type 2 of the attacker?
+	jr z, .sameTypeAttackBonus
+	jr .skipSameTypeAttackBonus
+;;;;;;;;;;
 .sameTypeAttackBonus
 ; if the move type matches one of the attacker's types
 	ld hl, wDamage + 1

@@ -1,4 +1,5 @@
-; PureRGBnote: ADDED: function that changed a pokemon in the party to a different pokemon. Used with Armored Mewtwo and "Cursed" Haunter
+; PureRGBnote: ADDED: function that changed a pokemon in the party to a different pokemon. 
+; Used with Armored Mewtwo, "Cursed" Haunter, and "Hardened" Onix
 ; input: 
 ; [wcf91] = target pokemon species
 ; [wWhichPokemon] = which party pokemon to change
@@ -32,6 +33,7 @@ ChangePartyPokemonSpecies::
 	ld b, 1
 	call CalcStats ; recalculate stats
 	pop hl
+	push hl
 	ld bc, wPartyMon1MaxHP - wPartyMon1
 	add hl, bc ; hl now points to MSB of recalculated max HP
 	ld a, [hli]
@@ -45,6 +47,14 @@ ChangePartyPokemonSpecies::
 	ld [hli], a
 	ld a, c
 	ld [hld], a
+	pop hl
+	; reassign types
+	ld bc, wPartyMon1Type - wPartyMon1
+	add hl, bc ; hl now points to 1st type of mon
+	ld a, [wMonHType1]
+	ld [hli], a
+	ld a, [wMonHType2]
+	ld [hl], a
 	ret
 
 ; PureRGBnote: ADDED: function that renames a pokemon if it has its default name only. Used for changing Gengar to "Cursed" Haunter and back again.

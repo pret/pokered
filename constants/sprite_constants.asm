@@ -102,4 +102,5 @@ DEF FIRST_STILL_SPRITE EQU const_value
 	const SPRITE_MONSTER2_STILL            ; $60
 	const SPRITE_POKE_BALL2			 	   ; $61
 	const SPRITE_DARK_CHANNELER            ; $62
+	const SPRITE_BOOMBOX                   ; $63
 DEF NUM_SPRITES EQU const_value - 1

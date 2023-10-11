@@ -175,7 +175,7 @@ EvosMovesPointerTable:
 	dw GeodudeEvosMoves
 	dw PorygonEvosMoves
 	dw AerodactylEvosMoves
-	dw MissingNoACEvosMoves
+	dw HardenedOnixEvosMoves
 	dw MagnemiteEvosMoves
 	dw MewtwoEvosMoves
 	dw GengarEvosMoves
@@ -412,7 +412,7 @@ GrimerEvosMoves:
 	db 41, COUNTER ; DRAIN PUNCH
 	db 46, POISON_GAS
 	db 50, EXPLOSION
-	db 55, GROWTH
+	db 55, RECOVER
 	db 0
 
 GengarEvosMoves:
@@ -1037,7 +1037,7 @@ KoffingEvosMoves:
 	db 30, SLUDGE
 	db 33, HAZE
 	db 36, SELFDESTRUCT
-	db 42, RECOVER
+	db 42, GROWTH
 	db 46, POISON_GAS
 	db 50, EGG_BOMB
 	db 55, EXPLOSION
@@ -2083,7 +2083,7 @@ MukEvosMoves:
 	db 41, COUNTER ; DRAIN PUNCH
 	db 46, POISON_GAS
 	db 50, EXPLOSION
-	db 55, GROWTH
+	db 55, RECOVER
 	db 0
 
 MissingNo8AEvosMoves:
@@ -2175,7 +2175,7 @@ WeezingEvosMoves:
 	db 30, SLUDGE
 	db 33, HAZE
 	db 36, SELFDESTRUCT
-	db 42, RECOVER
+	db 42, GROWTH
 	db 46, POISON_GAS
 	db 50, EGG_BOMB
 	db 55, EXPLOSION
@@ -2812,4 +2812,24 @@ VictreebelEvosMoves:
 	db 48, EGG_BOMB
 	db 54, SELFDESTRUCT
 	db 58, GROWTH
+	db 0
+
+HardenedOnixEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 15, BIND
+	db 17, ROAR
+	db 19, SCREECH
+	db 22, DEFENSE_CURL
+	db 25, RAGE
+	db 27, ROCK_SLIDE
+	db 29, CLAMP
+	db 31, MIRROR_MOVE
+	db 33, AMNESIA
+	db 37, TAKE_DOWN ; HEAT RUSH
+	db 39, EARTHQUAKE
+	db 42, SPIKE_CANNON
+	db 45, WITHDRAW
+	db 52, SELFDESTRUCT
 	db 0

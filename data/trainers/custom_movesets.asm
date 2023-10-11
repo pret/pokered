@@ -296,16 +296,16 @@ ChampArenaKogaMoveset:
 	db SKY_ATTACK
 	db SLASH
 	db RAZOR_WIND ; ROOST
-	; tauros
-	db MEGA_KICK
-	db SKULL_BASH
-	db HYPER_BEAM
-	db EARTHQUAKE
 	; muk
 	db GROWTH
 	db POISON_GAS
 	db COUNTER ; DRAIN_PUNCH
 	db EXPLOSION 
+	; parasect
+	db SPORE
+	db TWINEEDLE
+	db GROWTH
+	db CRABHAMMER
 	; venomoth
 	db SLEEP_POWDER
 	db MIRROR_MOVE
@@ -376,10 +376,10 @@ ChampArenaBrockMoveset:
 	db WHIRLWIND
 	db SLASH
 	; onix
-	db WITHDRAW ; TODO: hardened onix modification
+	db WITHDRAW
 	db MIRROR_MOVE
 	db EARTHQUAKE
-	db FIRE_BLAST
+	db SPIKE_CANNON
 
 ChampArenaAgathaMoveset:
 	; marowak

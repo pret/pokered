@@ -11,6 +11,7 @@ DEF PHYSICAL EQU const_value
 	const TYPELESS     ; $06 PureRGBnote: CHANGED: used with struggle
 	const BUG          ; $07
 	const GHOST        ; $08
+	const CRYSTAL      ; $09 PureRGBnote: ADDED: used with hardened onix (same as rock type but resists water and ice + normally damaged by grass, still gets stab on rock moves)
 
 DEF UNUSED_TYPES EQU const_value
 	const_next 20

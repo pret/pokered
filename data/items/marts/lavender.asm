@@ -4,6 +4,7 @@ LavenderMartClerkText::
 	SUPER_POTION, \
 	REVIVE, \
 	ESCAPE_ROPE, \
+	REPEL, \
 	SUPER_REPEL, \
 	ANTIDOTE, \
 	BURN_HEAL, \

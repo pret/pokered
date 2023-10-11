@@ -89,5 +89,14 @@ TypeEffects:
 	db TRI,          ELECTRIC,     NOT_VERY_EFFECTIVE
 	db TRI,          ROCK,         NOT_VERY_EFFECTIVE
 	db TRI,          BUG,          SUPER_EFFECTIVE
+	db WATER,        CRYSTAL,      NOT_VERY_EFFECTIVE
+	db ICE,          CRYSTAL,      NOT_VERY_EFFECTIVE
+	db FIRE,         CRYSTAL,      NOT_VERY_EFFECTIVE
+	db NORMAL,       CRYSTAL,      NOT_VERY_EFFECTIVE
+	db FIGHTING,     CRYSTAL,      SUPER_EFFECTIVE
+	db POISON,       CRYSTAL,      NOT_VERY_EFFECTIVE
+	db GROUND,       CRYSTAL,      SUPER_EFFECTIVE
+	db FLYING,       CRYSTAL,      NOT_VERY_EFFECTIVE
+	db TRI,          CRYSTAL,      NOT_VERY_EFFECTIVE
 	db -1 ; end
 

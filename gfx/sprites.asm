@@ -104,6 +104,7 @@ OakSittingSprite:: INCBIN "gfx/sprites/champ_arena_audience/oak_sitting.2bpp"
 AgathaSittingSprite:: INCBIN "gfx/sprites/champ_arena_audience/agatha_sitting.2bpp"
 GiovanniSittingSprite:: INCBIN "gfx/sprites/champ_arena_audience/giovanni_sitting.2bpp"
 BlueSittingSprite:: INCBIN "gfx/sprites/champ_arena_audience/blue_sitting.2bpp"
+BoomboxSprite:: INCBIN "gfx/sprites/boombox.2bpp"
 
 VoltorbSpriteFrame2::   INCBIN "gfx/sprites/voltorb2.2bpp"
 PokeballSprite2::		INCBIN "gfx/sprites/poke_ball.2bpp"

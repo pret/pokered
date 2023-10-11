@@ -205,7 +205,7 @@ StartMenu_Pokemon::
 	jp .goBackToMap
 .teleport
 	;call CheckIfInOutsideMap ; PureRGBnote: CHANGED: teleport can be used anywhere.
-	jr .canTeleport
+	; jr .canTeleport
 	; ld a, [wWhichPokemon]
 	;ld hl, wPartyMonNicks
 	;call GetPartyMonName

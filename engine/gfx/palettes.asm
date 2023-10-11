@@ -279,6 +279,8 @@ GetOverworldPalette:
 	jr .town
 .caveOrBruno ; PureRGBnote: CHANGED: seafoam islands use a bluish purple color palette instead of brown.
 	ld a, [wCurMap]
+	cp DIAMOND_MINE
+	jr z, .diamond_mine
 	cp SEAFOAM_ISLANDS_1F
 	jr z, .seafoam
 	cp SEAFOAM_ISLANDS_B1F
@@ -300,6 +302,17 @@ GetOverworldPalette:
 	jr .town
 .powerPlant ; PureRGBnote: CHANGED: the power plant uses a different palette that looks more abandoned power plant-y
 	ld a, PAL_MEWMON - 1
+	jr .town
+.diamond_mine
+	ld a, [wXCoord]
+	cp 10
+	ld a, PAL_CAVE - 1
+	jr c, .town
+	ld a, [wYCoord]
+	cp 10
+	ld a, PAL_CAVE - 1
+	jr nc, .town
+	ld a, PAL_BLUEMON - 1
 	jr .town
 
 ; PureRGBnote: ADDED: updated function to allow alternate palette pokemon based on loaded data.
@@ -407,6 +420,8 @@ DeterminePaletteID:
 	jr nz, DeterminePaletteIDOutOfBattle.skipDexNumConversion ;ret nz
 	ld a, [hl]
 DeterminePaletteIDOutOfBattle:
+	cp HARDENED_ONIX
+	jr z, .hardened_onix
 	ld [wd11e], a
 	and a ; is the mon index 0?
 	jr z, .skipDexNumConversion
@@ -435,6 +450,22 @@ DeterminePaletteIDOutOfBattle:
 	ld [wIsAltPalettePkmn], a ; always reset this value after displaying a pokemon sprite
 ;;;;;;;;;;
 	ld a, [hl]
+	ret
+.hardened_onix
+	ld a, [wIsAltPalettePkmn]
+	and a
+	ld a, PAL_BLACKMON
+	jr z, .doneonix
+	ld a, [wOptions2]
+	bit BIT_ALT_PKMN_PALETTES, a ; do we have alt palettes enabled
+	ld a, PAL_BLACKMON
+	jr z, .doneonix ; if not show default palettes always
+	ld a, PAL_BLUEMON
+.doneonix
+	push af
+	xor a
+	ld [wIsAltPalettePkmn], a ; always reset this value after displaying a pokemon sprite
+	pop af
 	ret
 
 InitPartyMenuBlkPacket:

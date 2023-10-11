@@ -286,7 +286,7 @@ INCLUDE "text/SecretLab.asm"
 SECTION "Text 12", ROMX
 INCLUDE "text/TypeGuysHouse.asm"
 INCLUDE "text/ChampArena.asm"
-
+INCLUDE "text/DiamondMine.asm"
 
 SECTION "Pokédex Text", ROMX
 

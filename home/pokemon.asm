@@ -409,6 +409,8 @@ GetMonHeader::
 	jr z, .armored_mewtwo
 	cp POWERED_HAUNTER
 	jr z, .powered_haunter
+	cp HARDENED_ONIX
+	jr z, .hardened_onix
 	predef IndexToPokedex   ; convert pokemon ID in [wd11e] to pokedex number
 	ld a, [wd11e]
 	and a
@@ -429,6 +431,9 @@ GetMonHeader::
 	inc hl
 	ld [hl], d
 	jr .done
+.hardened_onix
+	ld hl, HardenedOnixBaseStats
+	jr .copyBaseStats
 .powered_haunter
 	ld hl, PoweredHaunterBaseStats
 	jr .copyBaseStats

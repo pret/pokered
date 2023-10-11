@@ -52,3 +52,5 @@ SafariZoneName:      db "SAFARI ZONE@"
 CeruleanCaveName:    db "CERULEAN CAVE@"
 PowerPlantName:      db "POWER PLANT@"
 BillsGardenName:     db "CERULEAN CAPE@"
+DiamondMineName:     db "DIAMOND MINE@"
+

@@ -159,3 +159,5 @@ ArmoredMewtwoBaseStats::
 INCLUDE "data/pokemon/base_stats/armored_mewtwo.asm"
 PoweredHaunterBaseStats::
 INCLUDE "data/pokemon/base_stats/powered_haunter.asm"
+HardenedOnixBaseStats::
+INCLUDE "data/pokemon/base_stats/hardened_onix.asm"

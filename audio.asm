@@ -476,3 +476,4 @@ SECTION "New Engine 3 SFX", ROMX
 INCLUDE "audio/sfx/fall_down_hole.asm"
 INCLUDE "audio/sfx/secret_lab_notes.asm"
 INCLUDE "audio/sfx/champ_arena_sfx.asm"
+INCLUDE "audio/sfx/diamond_mine_sfx.asm"
