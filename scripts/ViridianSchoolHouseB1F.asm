@@ -1,7 +1,54 @@
 ; PureRGBnote: ADDED: code for the new basement below the viridian schoolhouse. Contains a couple of classrooms.
 
 ViridianSchoolHouseB1F_Script:
+	call CheckGusGLeaves
 	jp EnableAutoTextBoxDrawing
+
+CheckGusGLeaves:
+	CheckEvent EVENT_DETENTION_TOGGLER
+	ret z
+	ResetEvent EVENT_DETENTION_TOGGLER
+	; show jen
+	call GBFadeOutToWhite
+	ld c, 20
+	rst _DelayFrames
+	CheckEvent EVENT_GUS_IN_DETENTION
+	jr z, .hideGus
+	ld a, HS_VIRIDIAN_SCHOOL_HOUSE_DETENTION
+	ld [wMissableObjectIndex], a
+	predef ShowExtraObject
+	ld a, HS_VIRIDIAN_SCHOOL_HOUSE_DETENTION2
+	ld [wMissableObjectIndex], a
+	predef HideExtraObject
+	ld a, HS_VIRIDIAN_SCHOOL_HOUSE_B1F_DETENTION
+	ld [wMissableObjectIndex], a
+	predef ShowExtraObject
+	ld a, HS_VIRIDIAN_SCHOOL_HOUSE_B1F_DETENTION2
+	ld [wMissableObjectIndex], a
+	predef HideExtraObject
+	ResetEvent EVENT_GUS_IN_DETENTION
+	jr .doneShow
+.hideGus
+	ld a, HS_VIRIDIAN_SCHOOL_HOUSE_DETENTION
+	ld [wMissableObjectIndex], a
+	predef HideExtraObject
+	ld a, HS_VIRIDIAN_SCHOOL_HOUSE_DETENTION2
+	ld [wMissableObjectIndex], a
+	predef ShowExtraObject
+	ld a, HS_VIRIDIAN_SCHOOL_HOUSE_B1F_DETENTION
+	ld [wMissableObjectIndex], a
+	predef HideExtraObject
+	ld a, HS_VIRIDIAN_SCHOOL_HOUSE_B1F_DETENTION2
+	ld [wMissableObjectIndex], a
+	predef ShowExtraObject
+	SetEvent EVENT_GUS_IN_DETENTION
+.doneShow
+	call UpdateSprites
+	call Delay3
+	call GBFadeInFromWhite
+	CheckEvent EVENT_GUS_IN_DETENTION
+	call nz, PlayDefaultMusic
+	ret
 
 ViridianSchoolHouseB1F_TextPointers:
 	def_text_pointers
@@ -321,29 +368,7 @@ SchoolB1FRocker:
 	rst _DelayFrames
 	ld hl, SchoolB1FRockerDetentionText
 	rst _PrintText
-
-
-	call GBFadeOutToWhite
-	ld c, 20
-	rst _DelayFrames
-	ld a, HS_VIRIDIAN_SCHOOL_HOUSE_DETENTION
-	ld [wMissableObjectIndex], a
-	predef HideExtraObject
-	ld a, HS_VIRIDIAN_SCHOOL_HOUSE_DETENTION2
-	ld [wMissableObjectIndex], a
-	predef ShowExtraObject
-	ld a, HS_VIRIDIAN_SCHOOL_HOUSE_B1F_DETENTION
-	ld [wMissableObjectIndex], a
-	predef HideExtraObject
-	ld a, HS_VIRIDIAN_SCHOOL_HOUSE_B1F_DETENTION2
-	ld [wMissableObjectIndex], a
-	predef ShowExtraObject
-	SetEvent EVENT_GUS_IN_DETENTION
-	call UpdateSprites
-	call GBFadeInFromWhite
-
-	call PlayDefaultMusic
-
+	SetEvent EVENT_DETENTION_TOGGLER
 	rst TextScriptEnd
 
 SchoolB1FRockerText:
@@ -417,28 +442,7 @@ SchoolB1FBrunetteGirl:
   	call SetSpriteFacingDirection
 	ld hl, SchoolB1FNotAgainText
 	rst _PrintText
-	ld c, 20
-	rst _DelayFrames
-
-	call GBFadeOutToWhite
-	ld c, 20
-	rst _DelayFrames
-	ld a, HS_VIRIDIAN_SCHOOL_HOUSE_DETENTION
-	ld [wMissableObjectIndex], a
-	predef ShowExtraObject
-	ld a, HS_VIRIDIAN_SCHOOL_HOUSE_DETENTION2
-	ld [wMissableObjectIndex], a
-	predef HideExtraObject
-	ld a, HS_VIRIDIAN_SCHOOL_HOUSE_B1F_DETENTION
-	ld [wMissableObjectIndex], a
-	predef ShowExtraObject
-	ld a, HS_VIRIDIAN_SCHOOL_HOUSE_B1F_DETENTION2
-	ld [wMissableObjectIndex], a
-	predef HideExtraObject
-	ResetEvent EVENT_GUS_IN_DETENTION
-	call UpdateSprites
-	call GBFadeInFromWhite
-
+	SetEvent EVENT_DETENTION_TOGGLER
 	rst TextScriptEnd
 
 SchoolB1FBrunetteGirlText:
