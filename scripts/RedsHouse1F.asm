@@ -243,9 +243,38 @@ HealFade:
 MomHealPokemonImmediate:
 	call StopAllMusic
 	predef HealParty
+	call HealPokemonSound
+	ld a, [wOptions2]
+	bit BIT_MUSIC, a
+	jr z, WaitForHealingSoundToFinish
+	; if OG+ music, remap to a different SFX
+	ld de, Music_RestPallet_Ch1
+	ld hl, wChannelCommandPointers
+	ld a, e
+	ld [hli], a
+	ld a, d
+	ld [hli], a
+	ld de, Music_RestPallet_Ch2
+	ld a, e
+	ld [hli], a
+	ld a, d
+	ld [hli], a
+	ld de, Music_RestPallet_Ch3
+	ld a, e
+	ld [hli], a
+	ld a, d
+	ld [hli], a
+	ld a, BANK(Music_RestPallet)
+	ld [wSpecialMusicBank], a
+	call WaitForHealingSoundToFinish
+	jp PlayDefaultMusic	
+
+HealPokemonSound:
 	ld a, MUSIC_PKMN_HEALED
 	ld [wNewSoundID], a
 	rst _PlaySound
+	ret
+WaitForHealingSoundToFinish:
 .next
 	ld a, [wChannelSoundIDs]
 	cp MUSIC_PKMN_HEALED
@@ -259,7 +288,9 @@ FarHeal::
 	ld a, BANK(Music_PkmnHealed)
 	ld [wAudioROMBank], a
 	ld [wAudioSavedROMBank], a
-	call MomHealPokemonImmediate
+	call StopAllMusic
+	predef HealParty
+	call HealPokemonSound
 	jp PlayDefaultMusic
 
 RedsHouse1FMomYouShouldRestText:
