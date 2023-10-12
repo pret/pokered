@@ -1,9 +1,9 @@
 	object_const_def
-	const MUSEUM2F_YOUNGSTER
-	const MUSEUM2F_GRAMPS
-	const MUSEUM2F_SCIENTIST
-	const MUSEUM2F_BRUNETTE_GIRL
-	const MUSEUM2F_HIKER
+	const_export MUSEUM2F_YOUNGSTER
+	const_export MUSEUM2F_GRAMPS
+	const_export MUSEUM2F_SCIENTIST
+	const_export MUSEUM2F_BRUNETTE_GIRL
+	const_export MUSEUM2F_HIKER
 
 Museum2F_Object:
 	db $a ; border block

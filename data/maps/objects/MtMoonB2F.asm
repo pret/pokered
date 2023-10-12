@@ -1,13 +1,13 @@
 	object_const_def
-	const MTMOONB2F_SUPER_NERD
-	const MTMOONB2F_ROCKET1
-	const MTMOONB2F_ROCKET2
-	const MTMOONB2F_ROCKET3
-	const MTMOONB2F_ROCKET4
-	const MTMOONB2F_DOME_FOSSIL
-	const MTMOONB2F_HELIX_FOSSIL
-	const MTMOONB2F_HP_UP
-	const MTMOONB2F_TM_MEGA_PUNCH
+	const_export MTMOONB2F_SUPER_NERD
+	const_export MTMOONB2F_ROCKET1
+	const_export MTMOONB2F_ROCKET2
+	const_export MTMOONB2F_ROCKET3
+	const_export MTMOONB2F_ROCKET4
+	const_export MTMOONB2F_DOME_FOSSIL
+	const_export MTMOONB2F_HELIX_FOSSIL
+	const_export MTMOONB2F_HP_UP
+	const_export MTMOONB2F_TM_MEGA_PUNCH
 
 MtMoonB2F_Object:
 	db $3 ; border block

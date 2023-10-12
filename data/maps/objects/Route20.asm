@@ -1,14 +1,14 @@
 	object_const_def
-	const ROUTE20_SWIMMER1
-	const ROUTE20_SWIMMER2
-	const ROUTE20_SWIMMER3
-	const ROUTE20_SWIMMER4
-	const ROUTE20_SWIMMER5
-	const ROUTE20_SWIMMER6
-	const ROUTE20_COOLTRAINER_M
-	const ROUTE20_SWIMMER7
-	const ROUTE20_SWIMMER8
-	const ROUTE20_SWIMMER9
+	const_export ROUTE20_SWIMMER1
+	const_export ROUTE20_SWIMMER2
+	const_export ROUTE20_SWIMMER3
+	const_export ROUTE20_SWIMMER4
+	const_export ROUTE20_SWIMMER5
+	const_export ROUTE20_SWIMMER6
+	const_export ROUTE20_COOLTRAINER_M
+	const_export ROUTE20_SWIMMER7
+	const_export ROUTE20_SWIMMER8
+	const_export ROUTE20_SWIMMER9
 
 Route20_Object:
 	db $43 ; border block

@@ -1,6 +1,6 @@
 	object_const_def
-	const CERULEANTRADEHOUSE_GRANNY
-	const CERULEANTRADEHOUSE_GAMBLER
+	const_export CERULEANTRADEHOUSE_GRANNY
+	const_export CERULEANTRADEHOUSE_GAMBLER
 
 CeruleanTradeHouse_Object:
 	db $a ; border block

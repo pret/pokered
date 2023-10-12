@@ -1,5 +1,5 @@
 	object_const_def
-	const VERMILIONOLDRODHOUSE_FISHING_GURU
+	const_export VERMILIONOLDRODHOUSE_FISHING_GURU
 
 VermilionOldRodHouse_Object:
 	db $a ; border block

@@ -1,11 +1,11 @@
 	object_const_def
-	const ROUTE16_BIKER1
-	const ROUTE16_BIKER2
-	const ROUTE16_BIKER3
-	const ROUTE16_BIKER4
-	const ROUTE16_BIKER5
-	const ROUTE16_BIKER6
-	const ROUTE16_SNORLAX
+	const_export ROUTE16_BIKER1
+	const_export ROUTE16_BIKER2
+	const_export ROUTE16_BIKER3
+	const_export ROUTE16_BIKER4
+	const_export ROUTE16_BIKER5
+	const_export ROUTE16_BIKER6
+	const_export ROUTE16_SNORLAX
 
 Route16_Object:
 	db $f ; border block

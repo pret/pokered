@@ -1,6 +1,6 @@
 	object_const_def
-	const SSANNE2F_WAITER
-	const SSANNE2F_RIVAL
+	const_export SSANNE2F_WAITER
+	const_export SSANNE2F_RIVAL
 
 SSAnne2F_Object:
 	db $c ; border block

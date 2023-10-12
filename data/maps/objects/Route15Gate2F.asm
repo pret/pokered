@@ -1,5 +1,5 @@
 	object_const_def
-	const ROUTE15GATE2F_OAKS_AIDE
+	const_export ROUTE15GATE2F_OAKS_AIDE
 
 Route15Gate2F_Object:
 	db $a ; border block

@@ -1,10 +1,10 @@
 	object_const_def
-	const ROUTE10_SUPER_NERD1
-	const ROUTE10_HIKER1
-	const ROUTE10_SUPER_NERD2
-	const ROUTE10_COOLTRAINER_F1
-	const ROUTE10_HIKER2
-	const ROUTE10_COOLTRAINER_F2
+	const_export ROUTE10_SUPER_NERD1
+	const_export ROUTE10_HIKER1
+	const_export ROUTE10_SUPER_NERD2
+	const_export ROUTE10_COOLTRAINER_F1
+	const_export ROUTE10_HIKER2
+	const_export ROUTE10_COOLTRAINER_F2
 
 Route10_Object:
 	db $2c ; border block

@@ -1,9 +1,9 @@
 	object_const_def
-	const MUSEUM1F_SCIENTIST1
-	const MUSEUM1F_GAMBLER
-	const MUSEUM1F_SCIENTIST2
-	const MUSEUM1F_SCIENTIST3
-	const MUSEUM1F_OLD_AMBER
+	const_export MUSEUM1F_SCIENTIST1
+	const_export MUSEUM1F_GAMBLER
+	const_export MUSEUM1F_SCIENTIST2
+	const_export MUSEUM1F_SCIENTIST3
+	const_export MUSEUM1F_OLD_AMBER
 
 Museum1F_Object:
 	db $a ; border block

@@ -1,6 +1,6 @@
 	object_const_def
-	const SAFARIZONEGATE_SAFARI_ZONE_WORKER1
-	const SAFARIZONEGATE_SAFARI_ZONE_WORKER2
+	const_export SAFARIZONEGATE_SAFARI_ZONE_WORKER1
+	const_export SAFARIZONEGATE_SAFARI_ZONE_WORKER2
 
 SafariZoneGate_Object:
 	db $a ; border block

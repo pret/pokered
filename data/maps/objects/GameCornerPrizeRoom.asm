@@ -1,6 +1,6 @@
 	object_const_def
-	const GAMECORNERPRIZEROOM_BALDING_GUY
-	const GAMECORNERPRIZEROOM_GAMBLER
+	const_export GAMECORNERPRIZEROOM_BALDING_GUY
+	const_export GAMECORNERPRIZEROOM_GAMBLER
 
 GameCornerPrizeRoom_Object:
 	db $f ; border block

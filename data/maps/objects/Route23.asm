@@ -1,11 +1,11 @@
 	object_const_def
-	const ROUTE23_GUARD1
-	const ROUTE23_GUARD2
-	const ROUTE23_SWIMMER1
-	const ROUTE23_SWIMMER2
-	const ROUTE23_GUARD3
-	const ROUTE23_GUARD4
-	const ROUTE23_GUARD5
+	const_export ROUTE23_GUARD1
+	const_export ROUTE23_GUARD2
+	const_export ROUTE23_SWIMMER1
+	const_export ROUTE23_SWIMMER2
+	const_export ROUTE23_GUARD3
+	const_export ROUTE23_GUARD4
+	const_export ROUTE23_GUARD5
 
 Route23_Object:
 	db $f ; border block

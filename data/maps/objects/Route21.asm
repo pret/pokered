@@ -1,13 +1,13 @@
 	object_const_def
-	const ROUTE21_FISHER1
-	const ROUTE21_FISHER2
-	const ROUTE21_SWIMMER1
-	const ROUTE21_SWIMMER2
-	const ROUTE21_SWIMMER3
-	const ROUTE21_SWIMMER4
-	const ROUTE21_SWIMMER5
-	const ROUTE21_FISHER3
-	const ROUTE21_FISHER4
+	const_export ROUTE21_FISHER1
+	const_export ROUTE21_FISHER2
+	const_export ROUTE21_SWIMMER1
+	const_export ROUTE21_SWIMMER2
+	const_export ROUTE21_SWIMMER3
+	const_export ROUTE21_SWIMMER4
+	const_export ROUTE21_SWIMMER5
+	const_export ROUTE21_FISHER3
+	const_export ROUTE21_FISHER4
 
 Route21_Object:
 	db $43 ; border block

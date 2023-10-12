@@ -1,6 +1,6 @@
 	object_const_def
-	const POKEMONTOWER2F_RIVAL
-	const POKEMONTOWER2F_CHANNELER
+	const_export POKEMONTOWER2F_RIVAL
+	const_export POKEMONTOWER2F_CHANNELER
 
 PokemonTower2F_Object:
 	db $1 ; border block

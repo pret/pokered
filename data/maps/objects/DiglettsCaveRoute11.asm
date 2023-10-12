@@ -1,5 +1,5 @@
 	object_const_def
-	const DIGLETTSCAVEROUTE11_GAMBLER
+	const_export DIGLETTSCAVEROUTE11_GAMBLER
 
 DiglettsCaveRoute11_Object:
 	db $7d ; border block

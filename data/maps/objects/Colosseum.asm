@@ -1,5 +1,5 @@
 	object_const_def
-	const COLOSSEUM_OPPONENT
+	const_export COLOSSEUM_OPPONENT
 
 Colosseum_Object:
 	db $e ; border block

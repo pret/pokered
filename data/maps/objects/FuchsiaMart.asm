@@ -1,7 +1,7 @@
 	object_const_def
-	const FUCHSIAMART_CLERK
-	const FUCHSIAMART_MIDDLE_AGED_MAN
-	const FUCHSIAMART_COOLTRAINER_F
+	const_export FUCHSIAMART_CLERK
+	const_export FUCHSIAMART_MIDDLE_AGED_MAN
+	const_export FUCHSIAMART_COOLTRAINER_F
 
 FuchsiaMart_Object:
 	db $0 ; border block

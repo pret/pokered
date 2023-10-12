@@ -1,9 +1,9 @@
 	object_const_def
-	const SSANNEBOW_SUPER_NERD
-	const SSANNEBOW_SAILOR1
-	const SSANNEBOW_COOLTRAINER_M
-	const SSANNEBOW_SAILOR2
-	const SSANNEBOW_SAILOR3
+	const_export SSANNEBOW_SUPER_NERD
+	const_export SSANNEBOW_SAILOR1
+	const_export SSANNEBOW_COOLTRAINER_M
+	const_export SSANNEBOW_SAILOR2
+	const_export SSANNEBOW_SAILOR3
 
 SSAnneBow_Object:
 	db $23 ; border block

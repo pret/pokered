@@ -1,5 +1,5 @@
 	object_const_def
-	const ROUTE11GATE1F_GUARD
+	const_export ROUTE11GATE1F_GUARD
 
 Route11Gate1F_Object:
 	db $a ; border block

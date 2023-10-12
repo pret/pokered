@@ -1,8 +1,8 @@
 	object_const_def
-	const CELADONMART2F_CLERK1
-	const CELADONMART2F_CLERK2
-	const CELADONMART2F_MIDDLE_AGED_MAN
-	const CELADONMART2F_GIRL
+	const_export CELADONMART2F_CLERK1
+	const_export CELADONMART2F_CLERK2
+	const_export CELADONMART2F_MIDDLE_AGED_MAN
+	const_export CELADONMART2F_GIRL
 
 CeladonMart2F_Object:
 	db $f ; border block

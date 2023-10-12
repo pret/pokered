@@ -1,6 +1,6 @@
 	object_const_def
-	const CELADONMANSION_ROOF_HOUSE_HIKER
-	const CELADONMANSION_ROOF_HOUSE_EEVEE_POKEBALL
+	const_export CELADONMANSION_ROOF_HOUSE_HIKER
+	const_export CELADONMANSION_ROOF_HOUSE_EEVEE_POKEBALL
 
 CeladonMansionRoofHouse_Object:
 	db $a ; border block

@@ -1,9 +1,9 @@
 	object_const_def
-	const SILPHCO2F_SILPH_WORKER_F
-	const SILPHCO2F_SCIENTIST1
-	const SILPHCO2F_SCIENTIST2
-	const SILPHCO2F_ROCKET1
-	const SILPHCO2F_ROCKET2
+	const_export SILPHCO2F_SILPH_WORKER_F
+	const_export SILPHCO2F_SCIENTIST1
+	const_export SILPHCO2F_SCIENTIST2
+	const_export SILPHCO2F_ROCKET1
+	const_export SILPHCO2F_ROCKET2
 
 SilphCo2F_Object:
 	db $2e ; border block

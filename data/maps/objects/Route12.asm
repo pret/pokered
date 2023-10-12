@@ -1,14 +1,14 @@
 	object_const_def
-	const ROUTE12_SNORLAX
-	const ROUTE12_FISHER1
-	const ROUTE12_FISHER2
-	const ROUTE12_COOLTRAINER_M
-	const ROUTE12_SUPER_NERD
-	const ROUTE12_FISHER3
-	const ROUTE12_FISHER4
-	const ROUTE12_FISHER5
-	const ROUTE12_TM_PAY_DAY
-	const ROUTE12_IRON
+	const_export ROUTE12_SNORLAX
+	const_export ROUTE12_FISHER1
+	const_export ROUTE12_FISHER2
+	const_export ROUTE12_COOLTRAINER_M
+	const_export ROUTE12_SUPER_NERD
+	const_export ROUTE12_FISHER3
+	const_export ROUTE12_FISHER4
+	const_export ROUTE12_FISHER5
+	const_export ROUTE12_TM_PAY_DAY
+	const_export ROUTE12_IRON
 
 Route12_Object:
 	db $43 ; border block

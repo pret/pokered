@@ -1,14 +1,14 @@
 	object_const_def
-	const ROUTE17_BIKER1
-	const ROUTE17_BIKER2
-	const ROUTE17_BIKER3
-	const ROUTE17_BIKER4
-	const ROUTE17_BIKER5
-	const ROUTE17_BIKER6
-	const ROUTE17_BIKER7
-	const ROUTE17_BIKER8
-	const ROUTE17_BIKER9
-	const ROUTE17_BIKER10
+	const_export ROUTE17_BIKER1
+	const_export ROUTE17_BIKER2
+	const_export ROUTE17_BIKER3
+	const_export ROUTE17_BIKER4
+	const_export ROUTE17_BIKER5
+	const_export ROUTE17_BIKER6
+	const_export ROUTE17_BIKER7
+	const_export ROUTE17_BIKER8
+	const_export ROUTE17_BIKER9
+	const_export ROUTE17_BIKER10
 
 Route17_Object:
 	db $43 ; border block

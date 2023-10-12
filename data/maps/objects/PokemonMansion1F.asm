@@ -1,7 +1,7 @@
 	object_const_def
-	const POKEMONMANSION1F_SCIENTIST
-	const POKEMONMANSION1F_ESCAPE_ROPE
-	const POKEMONMANSION1F_CARBOS
+	const_export POKEMONMANSION1F_SCIENTIST
+	const_export POKEMONMANSION1F_ESCAPE_ROPE
+	const_export POKEMONMANSION1F_CARBOS
 
 PokemonMansion1F_Object:
 	db $2e ; border block

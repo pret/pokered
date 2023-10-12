@@ -1,8 +1,8 @@
 	object_const_def
-	const CELADONMART5F_GENTLEMAN
-	const CELADONMART5F_SAILOR
-	const CELADONMART5F_CLERK1
-	const CELADONMART5F_CLERK2
+	const_export CELADONMART5F_GENTLEMAN
+	const_export CELADONMART5F_SAILOR
+	const_export CELADONMART5F_CLERK1
+	const_export CELADONMART5F_CLERK2
 
 CeladonMart5F_Object:
 	db $f ; border block

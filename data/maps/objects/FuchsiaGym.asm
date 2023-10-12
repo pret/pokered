@@ -1,12 +1,12 @@
 	object_const_def
-	const FUCHSIAGYM_KOGA
-	const FUCHSIAGYM_ROCKER1
-	const FUCHSIAGYM_ROCKER2
-	const FUCHSIAGYM_ROCKER3
-	const FUCHSIAGYM_ROCKER4
-	const FUCHSIAGYM_ROCKER5
-	const FUCHSIAGYM_ROCKER6
-	const FUCHSIAGYM_GYM_GUIDE
+	const_export FUCHSIAGYM_KOGA
+	const_export FUCHSIAGYM_ROCKER1
+	const_export FUCHSIAGYM_ROCKER2
+	const_export FUCHSIAGYM_ROCKER3
+	const_export FUCHSIAGYM_ROCKER4
+	const_export FUCHSIAGYM_ROCKER5
+	const_export FUCHSIAGYM_ROCKER6
+	const_export FUCHSIAGYM_GYM_GUIDE
 
 FuchsiaGym_Object:
 	db $3 ; border block

@@ -1,10 +1,10 @@
 	object_const_def
-	const ROUTE6_COOLTRAINER_M1
-	const ROUTE6_COOLTRAINER_F1
-	const ROUTE6_YOUNGSTER_1
-	const ROUTE6_COOLTRAINER_M2
-	const ROUTE6_COOLTRAINER_F2
-	const ROUTE6_YOUNGSTER_2
+	const_export ROUTE6_COOLTRAINER_M1
+	const_export ROUTE6_COOLTRAINER_F1
+	const_export ROUTE6_YOUNGSTER_1
+	const_export ROUTE6_COOLTRAINER_M2
+	const_export ROUTE6_COOLTRAINER_F2
+	const_export ROUTE6_YOUNGSTER_2
 
 Route6_Object:
 	db $f ; border block

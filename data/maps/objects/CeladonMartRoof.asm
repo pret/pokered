@@ -1,6 +1,6 @@
 	object_const_def
-	const CELADONMARTROOF_SUPER_NERD
-	const CELADONMARTROOF_LITTLE_GIRL
+	const_export CELADONMARTROOF_SUPER_NERD
+	const_export CELADONMARTROOF_LITTLE_GIRL
 
 CeladonMartRoof_Object:
 	db $42 ; border block

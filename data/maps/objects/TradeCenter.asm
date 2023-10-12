@@ -1,5 +1,5 @@
 	object_const_def
-	const TRADECENTER_OPPONENT
+	const_export TRADECENTER_OPPONENT
 
 TradeCenter_Object:
 	db $e ; border block

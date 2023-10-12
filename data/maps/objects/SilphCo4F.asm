@@ -1,11 +1,11 @@
 	object_const_def
-	const SILPHCO4F_SILPH_WORKER_M
-	const SILPHCO4F_ROCKET1
-	const SILPHCO4F_SCIENTIST
-	const SILPHCO4F_ROCKET2
-	const SILPHCO4F_FULL_HEAL
-	const SILPHCO4F_MAX_REVIVE
-	const SILPHCO4F_ESCAPE_ROPE
+	const_export SILPHCO4F_SILPH_WORKER_M
+	const_export SILPHCO4F_ROCKET1
+	const_export SILPHCO4F_SCIENTIST
+	const_export SILPHCO4F_ROCKET2
+	const_export SILPHCO4F_FULL_HEAL
+	const_export SILPHCO4F_MAX_REVIVE
+	const_export SILPHCO4F_ESCAPE_ROPE
 
 SilphCo4F_Object:
 	db $2e ; border block
