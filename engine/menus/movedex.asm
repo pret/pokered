@@ -408,6 +408,29 @@ ShowNextMoveData:
 	inc a
 	ld [hl], a
 
+	hlcoord 15, 3
+	ld a, [wPlayerMovePower]
+	and a
+	jr nz, .needsMarker
+	lb bc, 1, 4
+	call ClearScreenArea
+	jr .doneMarker
+.needsMarker
+	ld a, [wPlayerMoveType]
+	cp GHOST
+	ld b, $D5
+	jr z, .copyMarker
+	cp SPECIAL
+	ld b, $CD
+	jr nc, .copyMarker
+	; physical
+	ld b, $D1
+	jr .copyMarker
+.copyMarker
+	ld c, 4
+	ld de, 1
+	call DrawTileLineIncrement
+.doneMarker
 	call DrawBottomDataBorder
 
 	call GetMoveName

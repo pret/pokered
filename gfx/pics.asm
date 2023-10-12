@@ -630,7 +630,7 @@ PokedexPromptGraphicsEnd::
 MovedexPromptGraphics::  INCBIN "gfx/movedex/prompts.2bpp"
 MovedexPromptGraphicsEnd::
 
-MovedexUI::          INCBIN "gfx/movedex/prev_data_next.2bpp"
+MovedexUI::          INCBIN "gfx/movedex/movedex_ui.2bpp"
 MovedexUIEnd::
 
 PokedexDataUI::	INCBIN "gfx/pokedex/left_right.2bpp"
