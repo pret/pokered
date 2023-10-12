@@ -54,7 +54,7 @@ IsMonTypeRemapped:
 	push de
 	ld hl, wPkmnTypeRemapFlags
 	ld b, 3
-	call CountSetBits
+	call CountSetBitsPreserveWRAM
 	and a ; is the number of set bits non-zero
 	jr z, .noRemap
 	ld hl, OriginalTypings
@@ -80,3 +80,11 @@ IsMonTypeRemapped:
 	and a ; clear carry flag
 	ret
 	
+CountSetBitsPreserveWRAM::
+	ld a, [wd11e]
+	push af
+	call CountSetBits
+	pop af
+	ld [wd11e], a
+	ld a, c
+	ret
