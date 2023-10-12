@@ -978,6 +978,12 @@ ReplaceFaintedEnemyMon:
 
 TrainerBattleVictory:
 	call EndLowHealthAlarm
+	ld a, [wOptions2]
+	bit BIT_MUSIC, a
+	jr z, .skipFemaleTrainerCheck
+	callfar IsFemaleTrainer
+	jr c, .battlevictoryguide
+.skipFemaleTrainerCheck
 	CheckFlag FLAG_ALTERNATE_BATTLE_WIN_THEME
 	jr nz, .specialWinMusic
 	ld b, MUSIC_DEFEATED_GYM_LEADER
@@ -1029,6 +1035,7 @@ TrainerBattleVictory:
 	ld a, [wCurMap]
 	cp CHAMP_ARENA
 	jr nz, .skipDefaultMusic
+.battlevictoryguide
 	call StopAllMusic
 	ld c, BANK(Music_BattleVictoryGuide)
 	ld hl, Music_BattleVictoryGuide

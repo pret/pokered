@@ -409,3 +409,9 @@ PlayTrainerMusic::
 	jp PlaySound
 
 INCLUDE "data/trainers/encounter_types.asm"
+
+IsFemaleTrainer:
+	ld a, [wWhichTrainerClass]
+	ld hl, FemaleTrainerList
+	ld de, 1
+	jp IsInArray
