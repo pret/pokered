@@ -13,12 +13,12 @@ FrontSpriteOptionsXPosBitData:
 	dw wSpriteOptions
 	db 16, 13, BIT_BUTTERFREE_SPRITE
 	dw wSpriteOptions3
-	db 16, 13, BIT_RATICATE_SPRITE
-	dw wSpriteOptions2
 	db 16, 13, BIT_PIDGEOTTO_SPRITE
 	dw wSpriteOptions3
 	db 16, 13, BIT_PIDGEOT_SPRITE
 	dw wSpriteOptions
+	db 16, 13, BIT_RATICATE_SPRITE
+	dw wSpriteOptions2
 
 
 FrontSpriteOptionsHeader:
@@ -68,9 +68,9 @@ FrontSpriteOptionsText:
 	next " SQUIRTLE:   RB RG"
 	next " BLASTOISE:  RB RG"
 	next " BUTTERFREE: RB RG"
-	next " RATICATE:   RB RG"
 	next " PIDGEOTTO:  RB RG"
-	next " PIDGEOT:    RB RG@"
+	next " PIDGEOT:    RB RG"
+	next " RATICATE:   RB RG@"
 
 DrawChildMenuDigit:
 	add NUMBER_CHAR_OFFSET

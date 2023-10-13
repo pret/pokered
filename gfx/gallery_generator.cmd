@@ -42,7 +42,7 @@ magick row1.png row2.png row3.png row4.png row5.png row6.png row7.png row8.png r
 del row1.png row2.png row3.png row4.png row5.png row6.png row7.png row8.png row9.png
 
 cd front_alt
-magick bulbasaur.png squirtle.png blastoise.png butterfree.png raticate.png pidgeotto.png pidgeot.png nidorino.png golbat.png mankey.png arcanine.png abra.png kadabra.png machop.png +append ../row1.png
+magick bulbasaur.png squirtle.png blastoise.png butterfree.png pidgeotto.png pidgeot.png raticate.png nidorino.png golbat.png mankey.png arcanine.png abra.png kadabra.png machop.png +append ../row1.png
 magick tentacruel.png graveler.png cloyster.png gengar.png onix.png voltorb.png exeggcute.png exeggutor.png koffing.png starmie.png pinsir.png electabuzz.png zapdos.png mewtwo.png +append ../row2.png
 cd ..
 magick row1.png row2.png -append gallery/alt_front_sprites.png
