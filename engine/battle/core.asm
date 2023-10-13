@@ -1959,7 +1959,7 @@ DrawPlayerHUDAndHPBar:
 	call CenterMonName
 	call PlaceString
 ;;;;;;;;;; PureRGBnote: ADDED: decide via the options value whether to display an EXP bar in battle
-	ld a, [wOptions2]
+	ld a, [wOptions3]
 	bit BIT_EXP_BAR, a
 	jr z, .noExpBar
 	farcall PrintEXPBar	

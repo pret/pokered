@@ -13,9 +13,9 @@ BattleOptionsXPosBitData:
 	db 14, 11, BIT_PSN_BUG 
 	dw wOptions3
 	db 11, 14, BIT_EXP_BAR 
-	dw wOptions2
+	dw wOptions3
 	db 11, 14, BIT_NPC_STAT_EXP
-	dw wOptions2
+	dw wOptions3
 
 
 BattleOptionsHeader:

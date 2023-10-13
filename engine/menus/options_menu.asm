@@ -387,6 +387,10 @@ SetOptionsFromCursorPositions:
 	jr .loop
 .textSpeedMatchFound
 	ld a, [hl]
+	ld b, a
+	ld a, [wOptions]
+	and %11111100
+	or b
 	ld [wOptions], a
 	ld hl, wOptions
 	ld a, [wOptions2CursorX] ; battle animation cursor X coordinate

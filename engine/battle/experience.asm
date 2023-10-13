@@ -414,6 +414,6 @@ GrewLevelText:
 	text_end
 
 HasExpBar:
-	ld a, [wOptions2]
+	ld a, [wOptions3]
 	bit BIT_EXP_BAR, a
 	ret

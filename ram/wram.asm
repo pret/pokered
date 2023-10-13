@@ -200,7 +200,7 @@ wTempPic:: ds 7 * 7 tiles
 ENDU
 
 
-SECTION "WRAM", WRAM0
+SECTION "WRAM 0", WRAM0
 
 ; the tiles of the row or column to be redrawn by RedrawRowOrColumn
 wRedrawRowOrColumnSrcTiles:: ds SCREEN_WIDTH * 2
@@ -1081,7 +1081,12 @@ wScriptedNPCWalkCounter:: db
 
 	ds 1 ; unused lone byte
 
-wGBC:: db
+;shinpokerednote: ADDED: used for temporary GBC color control settings
+;bits 0 & 1 --> a value from 0 to 3 to select color 0 through 3
+;bits 2, 3, & 4 --> a value from 0 to 7 to select BGP/OBP 0 through 7
+;bit 5 --> 0 = BGP | 1 = OBP
+;bits 6 & 7 are unused
+wGBCColorControl:: db
 
 ; if running on SGB or GBC, it's 1, else it's 0
 wOnSGB:: db
@@ -1279,12 +1284,16 @@ wPlayerMoveType:: db
 wPlayerMoveAccuracy:: db
 wPlayerMoveMaxPP:: db
 
-wEnemyMonSpecies2:: db
-wBattleMonSpecies2:: db
-
 wEnemyMonNick:: ds NAME_LENGTH
 
 wEnemyMon:: battle_struct wEnemyMon
+
+SECTION "WRAM 1", WRAMX
+
+;;;;;;;;;;; PureRGBnote: MOVED: moved from above wEnemyMonNick so that section WRAM 1 can start at exactly address $d000 as intended
+wEnemyMonSpecies2:: db
+wBattleMonSpecies2:: db
+;;;;;;;;;;
 
 UNION
 wEnemyMonBaseStats:: ds NUM_STATS
@@ -1874,7 +1883,7 @@ wSavedNPCMovementDirections2Index:: db
 wPlayerName:: ds NAME_LENGTH
 
 
-SECTION "Party Data", WRAM0
+SECTION "Party Data", WRAMX
 
 wPartyDataStart::
 
@@ -1903,7 +1912,7 @@ wPartyMonNicksEnd::
 wPartyDataEnd::
 
 
-SECTION "Main Data", WRAM0
+SECTION "Main Data", WRAMX
 
 wMainDataStart::
 
@@ -2592,7 +2601,7 @@ wDayCareMon:: box_struct wDayCareMon
 wMainDataEnd::
 
 
-SECTION "Current Box Data", WRAM0
+SECTION "Current Box Data", WRAMX
 
 wBoxDataStart::
 
@@ -2628,7 +2637,7 @@ wEXPBarNeededEXP::    ds 3
 wEXPBarKeepFullFlag:: ds 1
 
 
-SECTION "Stack", WRAM0
+SECTION "Stack", WRAMX
 
 ; the stack grows downward
 	ds $100 - 1

@@ -38,8 +38,8 @@ DEF PALETTES_YELLOW     EQU %11 ; 3
 	const BIT_ALT_PKMN_PALETTES ; 2
 	const BIT_AUDIO_PAN         ; 3
 	const BIT_BIKE_MUSIC        ; 4
-	const BIT_EXP_BAR           ; 5
-	const BIT_NPC_STAT_EXP		; 6
+	const BIT_GBC_FADE          ; 5
+	const_skip		            ; 6 (unused)
 	const BIT_MUSIC             ; 7
 
 ; wOptions3
@@ -48,8 +48,8 @@ DEF PALETTES_YELLOW     EQU %11 ; 3
 	const BIT_ICE_FIRE         ; 1
 	const BIT_BUG_PSN          ; 2
 	const BIT_PSN_BUG          ; 3
-	; unused bit 4
-	; unused bit 5
+	const BIT_EXP_BAR          ; 4
+	const BIT_NPC_STAT_EXP     ; 5
 	; unused bit 6
 	; unused bit 7
 

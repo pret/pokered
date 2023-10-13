@@ -403,6 +403,6 @@ hDisableJoypadPolling:: db
 ;bit 0 - PrepareOAMData and DMARoutine will not run in Vblank while this bit is set
 ;bit 1 - BGmap update functions will not run in Vblank while this bit is set
 hFlagsFFFA::db 
-	ds 3
+hRGB:: ds 3 ; FFFB=Red, FFFC=Green, FFFD=BLUE ; shinpokerednote: ADDED: used to store color RGB color values
 hHRAMend::
 hGBC:: db ; shinpokerednote: gbcnote: hram indicator from pokeyellow for where we're playing on GBC

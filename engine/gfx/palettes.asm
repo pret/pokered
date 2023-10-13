@@ -1259,3 +1259,158 @@ INCLUDE "data/gbc/gbc_palettes.asm"
 INCLUDE "data/sgb/sgb_palettes2.asm"
 
 INCLUDE "data/sgb/sgb_border.asm"
+
+;shinpokerednote: ADDED: This is a function specifically for translating the default pokeyellow pals into the GBC color buffer
+;DE is passed-in containing the address of a pal pattern...like FadePal4 or something
+BufferAllPokeyellowColorsGBC::
+	call .BGP0to3Loop
+	call .OBP0to3Loop
+	call .OBP4to7Loop
+	ret	
+	
+.BGP0to3Loop
+	ld hl, wGBCFullPalBuffer
+	xor a
+.BGP0to3Loop_back
+	call .readwriteinc
+	cp 16
+	jr c, .BGP0to3Loop_back
+	ret
+
+.OBP0to3Loop
+	ld hl, wGBCFullPalBuffer+64
+	ld a, 32
+	inc de
+.OBP0to3Loop_back
+	call .readwriteinc
+	cp 48
+	jr c, .OBP0to3Loop_back
+	ret
+
+.OBP4to7Loop
+	ld hl, wGBCFullPalBuffer+96
+	ld a, 48
+	inc de
+.OBP4to7Loop_back
+	call .readwriteinc
+	cp 64
+	jr c, .OBP4to7Loop_back
+	ret
+
+.readwriteinc
+	ld [wGBCColorControl], a
+	push de
+	push hl
+	call .ReadMasterPals	;get the color into DE
+	pop hl
+	ld a, 2
+	ldh [rSVBK], a ; switch to gbc wram bank 2 (wGBCFulPalBuffer is stored in gbc wram bank 2 instead of the default one)
+	ld a, d
+	ld [hli], a		;buffer high byte
+	ld a, e
+	ld [hli], a		;buffer low byte	
+	ld a, 0
+	ldh [rSVBK], a ; switch back to default wram bank
+	pop de
+	ld a, [wGBCColorControl]
+	inc a
+	ret
+
+.ReadMasterPals
+;first grab the correct base palette from wGBCBasePalPointers
+;the offset of the correct pointer corresponds to double the value of bits 2 and 3 of the wGBCColorControl value
+	push de ;need the value in DE for later because it holds the pal pattern like FadePal4 or something
+
+	and %00001100
+	rrca
+	rrca
+	ld d, 0
+	ld e, a
+	ld a, [wOptions2]
+	and %11
+	jr nz, .notOG
+	ld a, [wGBCColorControl]
+	bit 5, a
+	ld hl, GBC_OGPalettes_BGOBJ1
+	jr z, .gotPointer
+	ld a, [wGBCColorControl]
+	and %11100
+	cp %100
+	jr z, .gotPointer
+	ld hl, GBC_OGPalettes_OBJ0
+	jr .gotPointer
+.notOG
+	ld hl, wGBCBasePalPointers
+	add hl, de
+	add hl, de
+	
+;load the low byte of the pointer address
+	ld a, [hli]
+	ld e, a
+;load the high byte of the pointer address
+	ld a, [hli]
+	ld d, a
+;point HL to the base pal address
+	ld h, d
+	ld l, e
+.gotPointer
+	
+	pop de ;get the pal pattern back
+	ld a, [de]
+	;now put the pattern in E and make D zero
+	ld d, 0
+	ld e, a
+
+;need to look at the last two bits of wGBCColorControl to determine which hardware pal color is desired
+	ld a, [wGBCColorControl]
+	and %00000011
+	jr z, .zero
+	cp 1
+	jr z, .one
+	cp 2
+	jr z, .two
+	cp 3
+	jr z, .three
+	
+;roll the bits to get the correct base pal color number for the hardware pal color number
+.zero
+	sla e
+	rl d
+	sla e
+	rl d
+.one
+	sla e
+	rl d
+	sla e
+	rl d
+.two
+	sla e
+	rl d
+	sla e
+	rl d
+.three
+	sla e
+	rl d
+	sla e
+	rl d
+
+;mask out all but the last two bits of D to get the base pal color number in A
+	ld a, d
+	and %00000011
+	
+;colors are 2 bytes, so double A to make it an offset and store back into DE
+	add a
+	ld d, 0
+	ld e, a
+
+;add DE to HL to make HL point to the desired base pal color number
+	add hl, de
+
+;load the low byte of the color
+	ld a, [hli]
+	ld e, a
+;load the high byte of the color
+	ld a, [hli]
+	ld d, a
+	
+	ret

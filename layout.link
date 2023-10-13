@@ -214,13 +214,19 @@ WRAM0
 	"OAM Buffer"
 	"Tilemap"
 	"Overworld Map"
-	"WRAM"
+	"WRAM 0"
+WRAMX $1
+	org $d000
+	"WRAM 1"
 	"Party Data"
 	"Main Data"
 	"Current Box Data"
 	org $df00
 	"Stack"
-VRAM
+WRAMX $2
+	org $d000
+	"GBC WRAM"
+VRAM $1
 	"VRAM"
 SRAM $0
 	"Sprite Buffers"

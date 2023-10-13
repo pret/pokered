@@ -560,17 +560,15 @@ WarpFound2::
 ; this is for handling "outside" maps that can't have the 0xFF destination map
 	ld a, [wCurMap]
 	ld [wLastMap], a
+	call PlayMapChangeSound
 	; ld a, [wCurMapWidth]
 	; ld [wUnusedD366], a ; not read
 	ldh a, [hWarpDestinationMap]
 	ld [wCurMap], a
 	cp ROCK_TUNNEL_1F
-	jr nz, .notRockTunnel
+	jr nz, .done
 	ld a, $06
 	ld [wMapPalOffset], a
-	call GBFadeOutToBlack
-.notRockTunnel
-	call PlayMapChangeSound
 	jr .done
 
 ; for maps that can have the 0xFF destination map, which means to return to the outside map
@@ -648,8 +646,14 @@ PlayMapChangeSound::
 	rst _PlaySound
 	ld a, [wMapPalOffset]
 	and a
-	ret nz
-	jp GBFadeOutToBlack
+	jp z, GBFadeOutToBlack
+	push af
+	inc a
+	ld [wMapPalOffset], a
+	call LoadGBPal
+	pop af
+	ld [wMapPalOffset], a
+	ret
 
 CheckIfInFlyMap::
 	call CheckIfInOutsideMap

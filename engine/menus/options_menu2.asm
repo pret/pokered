@@ -1,6 +1,6 @@
 ; PureRGBnote: ADDED: one of the new pages in the options menu. This one's for main gameplay features.
 
-DEF OPTIONS_PAGE_2_COUNT EQU 5 ; number of options on this page
+DEF OPTIONS_PAGE_2_COUNT EQU 6 ; number of options on this page
 DEF OPTIONS_PAGE_2_NUMBER EQU 2 ; must be 1 digit
 
 DEF OPTION_COLORS_LEFT_XPOS EQU 9
@@ -14,6 +14,8 @@ DEF OPTION_AUDIO_PAN_LEFT_XPOS EQU 12
 DEF OPTION_AUDIO_PAN_RIGHT_XPOS EQU 16
 DEF OPTION_BIKE_SONG_LEFT_XPOS EQU 12
 DEF OPTION_BIKE_SONG_RIGHT_XPOS EQU 15
+DEF OPTION_GBC_FADE_LEFT_XPOS EQU 12
+DEF OPTION_GBC_FADE_RIGHT_XPOS EQU 16
 
 DEF OPTION_ALT_PALETTES_BIT EQU BIT_ALT_PKMN_PALETTES
 DEF OPTION_MUSIC_BIT EQU BIT_MUSIC
@@ -43,6 +45,7 @@ Options2YCoordVariableOffsetList:
 	db 9, 2
 	db 11, 3
 	db 13, 4
+	db 15, 5
 	db PAGE_CONTROLS_Y_COORD, MAX_OPTIONS_PER_PAGE
 
 OptionsMenu2Data:
@@ -57,6 +60,7 @@ Options2SetCursorPositionActions:
 	dw SetMusicCursorPosition
 	dw SetAudioPanCursorPosition
 	dw SetBikeSongCursorPosition
+	dw SetGBCFadeCursorPosition
 
 Options2LeftRightFuncs:
 	dw CursorInColors
@@ -64,6 +68,7 @@ Options2LeftRightFuncs:
 	dw CursorInMusic
 	dw CursorInAudioPan
 	dw CursorInBikeSong
+	dw CursorInGBCFade
 	dw CursorCancelRow
 
 DrawOptions2Menu:
@@ -86,7 +91,8 @@ Options2Text:
 	next "    OFF    ON"
 	next " MUSIC:     OG OG+"
 	next " AUDIO PAN: OFF ON"
-	next " BIKE SONG: ON OFF@"
+	next " BIKE SONG: ON OFF"
+	next " GBC FADE:  OFF ON@"
 
 OptionsPage2AButton:
 	ld a, [Options2YCoordVariableOffsetList]
@@ -134,6 +140,12 @@ CursorInBikeSong:
 	ld a, [wOptions5CursorX] ; battle animation cursor X coordinate
 	xor %11 ; toggle between 12 and 15
 	ld [wOptions5CursorX], a
+	jp EraseOldMenuCursor
+
+CursorInGBCFade:
+	ld a, [wOptions6CursorX] ; battle animation cursor X coordinate
+	xor %11100 ; toggle between 12 and 16
+	ld [wOptions6CursorX], a
 	jp EraseOldMenuCursor
 
 GetTwoBitXPosition:
@@ -184,6 +196,10 @@ SetOptions2FromCursorPositions:
 	ld a, [wOptions5CursorX]
 	ld c, OPTION_BIKE_SONG_RIGHT_XPOS
 	ld b, OPTION_BIKE_SONG_BIT
+	call SetSingleBitOption
+	ld a, [wOptions6CursorX]
+	ld c, OPTION_GBC_FADE_RIGHT_XPOS
+	ld b, BIT_GBC_FADE
 	call SetSingleBitOption
 	pop bc
 	jp CompareOptions2
@@ -288,6 +304,13 @@ SetBikeSongCursorPosition:
 	ld a, OPTION_BIKE_SONG_RIGHT_XPOS
 	ld d, OPTION_BIKE_SONG_LEFT_XPOS
 	ld c, OPTION_BIKE_SONG_BIT
+	jp SetSingleBitOptionCursorPosition
+
+SetGBCFadeCursorPosition:
+	ld hl, wOptions2
+	ld a, OPTION_GBC_FADE_RIGHT_XPOS
+	ld d, OPTION_GBC_FADE_LEFT_XPOS
+	ld c, BIT_GBC_FADE
 	jp SetSingleBitOptionCursorPosition
 
 GetTwoBitXPositionFromOptions:
