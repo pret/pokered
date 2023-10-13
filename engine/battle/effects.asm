@@ -608,6 +608,11 @@ UpdateStatDone:
 	jr z, .skipAnimation
 	cp SPEED_UP_SIDE_EFFECT
 	jr z, .skipAnimation
+	ld a, [wAnimationType]
+	cp 1 ; just a temp flag to make stat modifier skip the animation for withdraw/growth, usually set to 0 here.
+	ld a, 0
+	ld [wAnimationType], a
+	jr z, .skipAnimation
 ;;;;;;;;;;
 	ld a, [de]
 	cp MINIMIZE
@@ -1549,6 +1554,84 @@ TriAttackEffect:
 HazeEffect:
 	jpfar HazeEffect_
 
+GrowthEffect:
+	ld b, SPECIAL_UP1_EFFECT
+	ld c, GROWTH_EFFECT
+	ldh a, [hWhoseTurn]
+	and a
+	ld hl, wBattleMonSpecial + 1
+	ld de, wPlayerMonSpecialMod
+	jr z, .doEffect
+	ld hl, wEnemyMonSpecial + 1
+	ld de, wEnemyMonSpecialMod
+.doEffect 
+	jr WithdrawGrowthEffect
+
+WithdrawEffect:
+	ld b, DEFENSE_UP1_EFFECT
+	ld c, WITHDRAW_EFFECT
+	ldh a, [hWhoseTurn]
+	and a
+	ld hl, wBattleMonDefense + 1
+	ld de, wPlayerMonDefenseMod
+	jr z, .doEffect
+	ld hl, wEnemyMonDefense + 1
+	ld de, wEnemyMonDefenseMod
+.doEffect 
+
+WithdrawGrowthEffect:
+	push bc
+	ld a, [wHPBarType]
+	push af
+	push de
+	push hl
+	ld a, 3
+	ld [wHPBarType], a
+	callfar HealEffect_
+	ld a, [wHPBarType]
+	cp 3 ; if wHPBarType was unchanged the heal process failed
+	pop hl
+	pop de
+	jr z, .done
+	ld a, [de]
+	cp $0D ; stat has been maxed out
+	jr z, .done
+	ld a, [hld]
+	cp LOW(MAX_STAT_VALUE)
+	jr nz, .continue
+	ld a, [hl]
+	cp HIGH(MAX_STAT_VALUE)
+	jr z, .done ; stat has hit 999 and can't be boosted further
+.continue
+	pop af
+	ld [wHPBarType], a
+	;values for the enemy's turn
+	ld de, wPlayerMoveEffect
+	ldh a, [hWhoseTurn]
+	and a
+	jr z, .next
+	; values for the player's turn
+	ld de, wEnemyMoveEffect
+.next
+	pop bc
+	ld a, b
+	ld [de], a
+	push bc
+	push de
+	ld a, 1
+	ld [wAnimationType], a
+	call StatModifierUpEffect ; stat modifier raising function
+	pop de
+	pop bc
+	ld a, c
+	ld [de], a
+	ret
+.done
+	pop af
+	ld [wHPBarType], a
+	pop bc
+	ret
+
 HealEffect:
 	jpfar HealEffect_
 
@@ -1577,7 +1660,8 @@ ConditionalPrintButItFailed:
 
 PrintButItFailedText_:
 	ld hl, ButItFailedText
-	jp PrintText
+	rst _PrintText
+	ret
 
 ButItFailedText:
 	text_far _ButItFailedText
@@ -1585,7 +1669,8 @@ ButItFailedText:
 
 PrintDidntAffectText:
 	ld hl, DidntAffectText
-	jp PrintText
+	rst _PrintText
+	ret
 
 DidntAffectText:
 	text_far _DidntAffectText

@@ -86,7 +86,7 @@ Moves:
 	move ABSORB,       DRAIN_HP_EFFECT,             30, GRASS,        100, 20
 	move MEGA_DRAIN,   DRAIN_HP_EFFECT,             60, GRASS,        100, 10
 	move LEECH_SEED,   LEECH_SEED_EFFECT,            0, GRASS,        100, 10
-	move GROWTH,       HEAL_EFFECT,                  0, GRASS,        100, 10 
+	move GROWTH,       GROWTH_EFFECT,                0, GRASS,        100, 10 
 	move RAZOR_LEAF,   NO_ADDITIONAL_EFFECT,        55, GRASS,        100, 25 ; high crit ratio
 	move SOLARBEAM,    BURN_SIDE_EFFECT1,          110, GRASS,        100, 10
 	move POISONPOWDER, POISON_EFFECT,                0, POISON,        75, 35
@@ -122,7 +122,7 @@ Moves:
 	move MINIMIZE,     EVASION_UP1_EFFECT,           0, NORMAL,       100, 20
 	move SMOKESCREEN,  ACCURACY_DOWN1_EFFECT,        0, ROCK,         100, 20
 	move CONFUSE_RAY,  CONFUSION_EFFECT,             0, GHOST,        100, 10
-	move WITHDRAW,     HEAL_EFFECT,                  0, WATER,        100, 10
+	move WITHDRAW,     WITHDRAW_EFFECT,              0, WATER,        100, 10
 	move DEFENSE_CURL, LIGHT_SCREEN_EFFECT,          0, NORMAL,       100, 40
 	move BARRIER,      DEFENSE_UP2_EFFECT,           0, GHOST,        100, 30
 	move LIGHT_SCREEN, LIGHT_SCREEN_EFFECT,          0, PSYCHIC_TYPE, 100, 30

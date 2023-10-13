@@ -807,8 +807,12 @@ _GrowthDexEntry::
 	bage "usually with"
 	next "photosynthesis."
 
-	bage "Heals half of"
-	next "user's max HP"
+	bage "Heals 33% of max"
+	next "HP and raises"
+	next "SPECIAL. (+1)"
+
+	bage "Does nothing if"
+	next "at full HP"
 	dex
 
 _RazorLeafDexEntry::
@@ -1223,8 +1227,12 @@ _WithdrawDexEntry::
 	next "its shell/cover"
 	next "of any kind."
 
-	bage "Heals half of"
-	next "user's max HP"
+	bage "Heals 33% of max"
+	next "HP and raises"
+	next "DEFENSE. (+1)"
+
+	bage "Does nothing if"
+	next "at full HP"
 	dex
 
 _DefenseCurlDexEntry::

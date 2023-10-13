@@ -11,7 +11,7 @@
 	const BURN_SIDE_EFFECT1          ; $04
 	const FREEZE_SIDE_EFFECT         ; $05
 	const PARALYZE_SIDE_EFFECT1      ; $06
-	const EXPLODE_EFFECT             ; $07 Explosion, Self Destruct
+	const EXPLODE_EFFECT             ; $07 Explosion, Self Destruct (unused)
 	const DREAM_EATER_EFFECT         ; $08
 	const MIRROR_MOVE_EFFECT         ; $09
 	const ATTACK_UP1_EFFECT          ; $0A
@@ -93,4 +93,6 @@
 	const LEECH_SEED_EFFECT          ; $54
 	const SPLASH_EFFECT              ; $55
 	const DISABLE_EFFECT             ; $56
+	const WITHDRAW_EFFECT            ; $57
+	const GROWTH_EFFECT              ; $58
 DEF NUM_MOVE_EFFECTS EQU const_value - 1

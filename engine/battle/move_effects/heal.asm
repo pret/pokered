@@ -99,6 +99,10 @@ HealEffectCommon:
 ; Recover and Softboiled only heal for half the mon's max HP
 	srl b
 	rr c
+	cp WITHDRAW
+	jr z, .oneThird
+	cp GROWTH
+	jr z, .oneThird
 	cp TELEPORT
 	jr nz, .gotHPAmountToHeal
 ; Teleport heals 1/4 HP
@@ -162,6 +166,29 @@ HealEffectCommon:
 	rst _DelayFrames
 	ld hl, PrintButItFailedText_
 	jp EffectCallBattleCore
+.oneThird
+	push hl
+	; 1/2 HP in bc currently
+	srl b
+	rr c
+	; 1/4 HP in bc currently
+	ld h, b
+	ld l, c
+	srl b
+	rr c
+	srl b
+	rr c
+	; 1/16 HP in bc currently
+	add hl, bc ; 5/16 in hl
+	srl b
+	rr c
+	srl b
+	rr c ; 1/64 HP in bc currently
+	add hl, bc ; 21/64 in hl
+	ld b, h
+	ld c, l ; 21/64 in bc (pretty close to 1/3 but not exactly)
+	pop hl
+	jp .gotHPAmountToHeal
 
 GetMoveNumber:
 	ldh a, [hWhoseTurn]

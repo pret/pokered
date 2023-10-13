@@ -167,6 +167,10 @@ AIMoveChoiceModification1:
 	jp z, .checkConfused
 	cp HEAL_EFFECT
 	jp z, .checkFullHealth
+	cp WITHDRAW_EFFECT
+	jp z, .checkFullHealth
+	cp GROWTH_EFFECT
+	jp z, .checkFullHealth
 	cp MIRROR_MOVE_EFFECT
 	jp z, .checkNoMirrorMoveOnFirstTurn
 	ld a, [wEnemyMoveEffect]
@@ -190,7 +194,7 @@ AIMoveChoiceModification1:
 					   ; even if the player heals the status or switches out that turn
 	ld a, [wAIMoveSpamAvoider] ; set if we switched or healed this turn
 	cp 2 ; set to 2 if we switched
-	jr z, .nextMove ; if the AI thinks the player DOESNT have a status before they switch, we should avoid discouraging status moves
+	jp z, .nextMove ; if the AI thinks the player DOESNT have a status before they switch, we should avoid discouraging status moves
 	ld a, [wBattleMonStatus]
 	and a
 	jp z, .nextMove ; no need to discourage status moves if the player doesn't have a status
@@ -771,6 +775,10 @@ AIMoveChoiceModification4:
 	jr nz, .nextMove
 	ld a, [wEnemyMoveEffect]
 	cp HEAL_EFFECT
+	jr z, .checkWorthHealing
+	cp WITHDRAW_EFFECT
+	jr z, .checkWorthHealing
+	cp GROWTH_EFFECT
 	jr z, .checkWorthHealing
 	cp TELEPORT_EFFECT
 	jr z, .checkWorthTeleporting
