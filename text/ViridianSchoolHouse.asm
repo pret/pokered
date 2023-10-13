@@ -246,8 +246,7 @@ _SchoolB1FLeftTuteeNotebook::
 	line "TYPEs list:"
 	para "NORMAL, FIGHTING," 
 	line "BUG, ROCK, GROUND" 
-	para "POISON, FLYING, "
-	line "GHOST"
+	para "POISON, FLYING"
 	done
 
 _SchoolB1FTutorNotebook::

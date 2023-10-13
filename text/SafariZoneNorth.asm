@@ -16,12 +16,21 @@ _SafariZoneNorthSignText::
 _SafariZoneNorthTrainerTips2Text::
 	text "TRAINER TIPS"
 
-	para "#MON hide in"
-	line "tall grass!"
-
-	para "Zigzag through"
-	line "grassy areas to"
-	cont "flush them out."
+	para "GHOST type moves"
+	line "are dynamic!"
+	para "They can do either"
+	line "physical or"
+	cont "special damage!"
+	para "If a #MON's"
+	line "base SPECIAL is"
+	cont "higher than its"
+	cont "base ATTACK,"
+	para "GHOST attacks"
+	line "will do special"
+	cont "damage!"
+	para "Otherwise, they"
+	line "do physical"
+	cont "damage."
 	done
 
 _SafariZoneNorthTrainerTips3Text::
