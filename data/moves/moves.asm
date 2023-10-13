@@ -150,7 +150,7 @@ Moves:
 	move SOFTBOILED,   HEAL_EFFECT,                  0, NORMAL,       100, 10
 	move HI_JUMP_KICK, JUMP_KICK_EFFECT,           130, FIGHTING,      90, 10
 	move GLARE,        PARALYZE_EFFECT,              0, NORMAL,       100, 30
-	move DREAM_EATER,  DREAM_EATER_EFFECT,         100, PSYCHIC_TYPE, 100, 15
+	move DREAM_EATER,  DREAM_EATER_EFFECT,         100, GHOST,        100, 15
 	move POISON_GAS,   POISON_SIDE_EFFECT1,         60, POISON,       100, 20 ; high critical hit ratio
 	move BARRAGE,      ATTACK_TWICE_EFFECT,         40, GHOST,        100, 20 
 	move LEECH_LIFE,   DRAIN_HP_EFFECT,             70, BUG,          100, 15

@@ -4249,6 +4249,14 @@ IgnoredOrdersText:
 	text_far _IgnoredOrdersText
 	text_end
 
+DynamicTypeCheckPlayer:
+	ld a, [wPlayerMonBaseSpecial]
+	ld b, a
+	ld a, [wPlayerMonBaseAttack]
+	cp b
+	jr c, GetDamageVarsForPlayerAttack.specialAttack ; if base special is higher than base attack, treat the move as special
+	jr GetDamageVarsForPlayerAttack.physicalAttack ; otherwise treat it as physical
+
 ; sets b, c, d, and e for the CalculateDamage routine in the case of an attack by the player mon
 GetDamageVarsForPlayerAttack:
 	xor a
@@ -4261,6 +4269,8 @@ GetDamageVarsForPlayerAttack:
 	ld d, a ; d = move power
 	ret z ; return if move power is zero
 	ld a, [hl] ; a = [wPlayerMoveType]
+	cp GHOST
+	jr z, DynamicTypeCheckPlayer
 	cp SPECIAL ; types >= SPECIAL are all special
 	jr nc, .specialAttack
 .physicalAttack
@@ -4364,6 +4374,14 @@ GetDamageVarsForPlayerAttack:
 	and a
 	ret
 
+DynamicTypeCheckEnemy:
+	ld a, [wEnemyMonBaseSpecial]
+	ld b, a
+	ld a, [wEnemyMonBaseAttack]
+	cp b
+	jr c, GetDamageVarsForEnemyAttack.specialAttack ; if base special is higher than base attack, treat the move as special
+	jr GetDamageVarsForEnemyAttack.physicalAttack ; otherwise treat it as physical
+
 ; sets b, c, d, and e for the CalculateDamage routine in the case of an attack by the enemy mon
 GetDamageVarsForEnemyAttack:
 	ld hl, wDamage ; damage to eventually inflict, initialise to zero
@@ -4376,6 +4394,8 @@ GetDamageVarsForEnemyAttack:
 	and a
 	ret z ; return if move power is zero
 	ld a, [hl] ; a = [wEnemyMoveType]
+	cp GHOST
+	jr z, DynamicTypeCheckEnemy
 	cp SPECIAL ; types >= SPECIAL are all special
 	jr nc, .specialAttack
 .physicalAttack

@@ -229,6 +229,12 @@ AIMoveChoiceModification1:
 	jr nz, .discourage ; if the enemy has used focus energy don't use again
 	jp .nextMove
 .checkAsleep
+	ld a, [wAITargetMonType1]
+	cp NORMAL
+	jr z, .discourage ; discourage dream eater if the player is normal type (immune to ghost)
+	ld a, [wAITargetMonType2]
+	cp NORMAL
+	jr z, .discourage ; discourage dream eater if the player is normal type (immune to ghost)
 	ld a, [wAITargetMonStatus]
 	and SLP_MASK
 	jp nz, .nextMove ; if we just healed sleep or switched out a sleeping pokemon, 
@@ -260,7 +266,7 @@ AIMoveChoiceModification1:
 .checkSeeded
 	call CheckSeeded
 	jp nc, .nextMove
-	jr .discourage
+	jp .discourage
 .checkFullHealth ; avoid using moves like recover at full health.
 	push hl
 	push de
