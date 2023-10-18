@@ -6,6 +6,11 @@ PrintBookshelfText::
 	ld a, [wCurMap]
 	cp TYPE_GUYS_HOUSE
 	jr z, .noMatch
+	cp CELADON_MANSION_2F
+	jr nz, .notCeladonHouses
+	callfar CeladonHouse2FBookCaseCheck
+	jr nc, .noMatch
+.notCeladonHouses
 ; facing up
 	ld a, [wCurMapTileset]
 	ld b, a

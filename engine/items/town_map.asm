@@ -125,15 +125,45 @@ LoadTownMap_Nest:
 	ld [hl], a
 	ret
 
+LoadTownMap_Dig::
+	ld a, [wSpriteOptions2]
+	bit BIT_MENU_ICON_SPRITES, a
+	jr z, .notDiglett
+	ld de, PartyMonSprites2 tile 50
+	lb bc, BANK(PartyMonSprites2), 2
+	ld a, 1
+	jr LoadTownMap_Fly_Common
+.notDiglett
+	ld de, MonsterSprite
+	lb bc, BANK(MonsterSprite), 12
+	xor a
+	jr LoadTownMap_Fly_Common
+
 LoadTownMap_Fly::
+	ld de, BirdSprite
+	lb bc, BANK(BirdSprite), 12
+	xor a
+	
+LoadTownMap_Fly_Common:
+	push af
+	push de
+	push bc
 	call ClearSprites
 	call LoadTownMap
 	call LoadPlayerSpriteGraphics
 	call LoadFontTilePatterns
-	ld de, BirdSprite
-	ld hl, vSprites tile $04
-	lb bc, BANK(BirdSprite), 12
+	pop bc
+	pop de
+	ld hl, vSprites tile 4
 	call CopyVideoData
+	pop af
+	and a
+	jr z, .notDiglett
+	ld de, PartyMonSprites2 tile 54 ; diglett sprite
+	lb bc, BANK(PartyMonSprites2), 2
+	ld hl, vSprites tile 6
+	call CopyVideoData
+.notDiglett
 	ld de, TownMapUpArrow
 	ld hl, vChars1 tile $6d
 	lb bc, BANK(TownMapUpArrow), (TownMapUpArrowEnd - TownMapUpArrow) / $8

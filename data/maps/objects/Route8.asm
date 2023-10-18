@@ -22,7 +22,7 @@ Route8_Object:
 	warp_event 20,  1, DIAMOND_MINE, 2
 
 	def_bg_events
-	bg_event 17,  3, TEXT_ROUTE8_UNDERGROUND_SIGN
+	bg_event 11,  3, TEXT_ROUTE8_UNDERGROUND_SIGN
 
 	def_object_events
 	object_event  8,  5, SPRITE_SUPER_NERD, STAY, RIGHT, TEXT_ROUTE8_SUPER_NERD1, OPP_SUPER_NERD, 3

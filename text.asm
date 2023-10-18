@@ -25,6 +25,7 @@ INCLUDE "text/SilphCo2F.asm"
 INCLUDE "text/SilphCo3F.asm"
 INCLUDE "text/SilphCo4F.asm"
 INCLUDE "text/SilphCo5F.asm"
+INCLUDE "text/ProspectorsHouse.asm"
 
 
 SECTION "Text 2", ROMX

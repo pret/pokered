@@ -1758,8 +1758,7 @@ ThrewRockText:
 	text_far _ThrewRockText
 	text_end
 
-; also used for Dig out-of-battle effect
-ItemUseEscapeRope:
+IsEscapeRopeUsable:
 	ld a, [wIsInBattle]
 	and a
 	jr nz, .notUsable
@@ -1775,6 +1774,16 @@ ItemUseEscapeRope:
 	jr z, .notUsable
 	cp b
 	jr nz, .loop
+	inc a ; makes a not zero when it reaches here
+	ret
+.notUsable
+	xor a
+	ret
+
+; also used for Dig out-of-battle effect
+ItemUseEscapeRope:
+	call IsEscapeRopeUsable
+	jp z, ItemUseNotTime
 	ld hl, wd732
 	set 3, [hl]
 	set 6, [hl]
@@ -1791,8 +1800,6 @@ ItemUseEscapeRope:
 	ld c, 30
 	rst _DelayFrames
 	jp RemoveUsedItem
-.notUsable
-	jp ItemUseNotTime
 
 INCLUDE "data/tilesets/escape_rope_tilesets.asm"
 

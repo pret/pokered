@@ -148,6 +148,8 @@ StartMenu_Pokemon::
 	set 1, [hl]
 	jp StartMenu_Pokemon
 .doFly
+	ResetFlag FLAG_DIG_OVERWORLD_ANIMATION
+.doDig
 	callfar ClearSafariFlags ; PureRGBnote: CHANGED: safari zone stuff is cleared when initiating fly
 	jp .goBackToMap
 .cut
@@ -194,14 +196,12 @@ StartMenu_Pokemon::
 	text_far _FlashLightsAreaText
 	text_end
 .dig
-	ld a, ESCAPE_ROPE
-	ld [wcf91], a
-	ld [wPseudoItemID], a
-	call UseItem
-	ld a, [wActionResultOrTookBattleTurn]
-	and a
+	callfar DigFromPartyMenu
+	jp c, StartMenu_Pokemon
 	jp z, .loop
-	call GBPalWhiteOutWithDelay3
+	ld a, [wd732]
+	bit 3, a ; did the player decide to dig?
+	jp nz, .doDig
 	jp .goBackToMap
 .teleport
 	;call CheckIfInOutsideMap ; PureRGBnote: CHANGED: teleport can be used anywhere.

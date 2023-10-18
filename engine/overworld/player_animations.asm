@@ -9,6 +9,8 @@ EnterMapAnim::
 	bit 7, [hl] ; used fly out of battle?
 	res 7, [hl]
 	jr nz, .flyAnimation
+	CheckAndResetEvent FLAG_DIG_OVERWORLD_ANIMATION
+	jr nz, .dig
 	ld a, SFX_TELEPORT_ENTER_1
 	rst _PlaySound
 	ld hl, wd732
@@ -46,6 +48,13 @@ EnterMapAnim::
 .flyAnimation
 	call SetCurBlackoutMap ; PureRGBnote: CHANGED: set the map fly we ended up at as the blackout map after flying
 	pop hl
+	CheckAndResetEvent FLAG_DIG_OVERWORLD_ANIMATION
+	jr z, .noDig
+.dig
+	callfar StartDigEnterMapAnimation
+	call LoadPlayerSpriteGraphics
+	jr .restoreDefaultMusic
+.noDig
 	ld de, BirdSprite
 	ld hl, vNPCSprites
 	lb bc, BANK(BirdSprite), $0c
@@ -112,6 +121,8 @@ _LeaveMapAnim::
 	bit 6, a ; is the last used pokemon center the destination?
 	jr z, .flyAnimation
 ; if going to the last used pokemon center
+	CheckFlag FLAG_DIG_OVERWORLD_ANIMATION
+	jr nz, .dig
 	ld hl, wPlayerSpinInPlaceAnimFrameDelay
 	ld a, 16
 	ld [hli], a ; wPlayerSpinInPlaceAnimFrameDelay
@@ -124,6 +135,13 @@ _LeaveMapAnim::
 	call PlayerSpinInPlace
 	jr .spinWhileMovingUp
 .flyAnimation
+	CheckFlag FLAG_DIG_OVERWORLD_ANIMATION
+	jr z, .notDig
+.dig
+	callfar StartDigLeaveMapAnimation
+	call GBFadeOutToWhite
+	jp RestoreFacingDirectionAndYScreenPos
+.notDig
 	call LoadBirdSpriteGraphics
 	ld hl, wFlyAnimUsingCoordList
 	ld a, $ff ; is not using coord list (flap in place)

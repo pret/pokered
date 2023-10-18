@@ -133,7 +133,7 @@ MapHSPointers:
 	dw NoHS
 	dw NoHS
 	dw NoHS
-	dw NoHS
+	dw CeladonMansion2FHS
 	dw NoHS
 	dw CeladonMansionRoofHS
 	dw CeladonMansionRoofHouseHS
@@ -665,5 +665,7 @@ ChampArenaHS:
 	db CHAMP_ARENA,11, HIDE ; crowd 7
 IndigoPlateauLobbyHS:
 	db INDIGO_PLATEAU_LOBBY, 7, SHOW ; arena assistant
+CeladonMansion2FHS:
+	db CELADON_MANSION_2F, 1, HIDE
 	db $FF, $01, SHOW ; end
 	assert_table_length NUM_EXTRA_HS_OBJECTS + 1

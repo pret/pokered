@@ -7,9 +7,10 @@ DiamondMine_Script:
 	call DiamondMineJiggleBoomBox
 	jp EnableAutoTextBoxDrawing
 
-DiamondMineJiggleBoomBox:
+DiamondMineJiggleBoomBox::
 	CheckEvent EVENT_DIAMOND_MINE_STARTED_BOOMBOX
 	ret z
+.jiggleBoombox
 	call Random
 	and %11
 	ret nz ; only update this 25% of the time
@@ -119,6 +120,7 @@ DiamondMinePlayMusic::
 	ld a, [wXCoord]
 	cp c
 	jr c, .checkWhichDefaultMusic
+.playBoomboxMusic
 	ld a, d
 	and a
 	jr nz, .playMusic
@@ -425,6 +427,9 @@ DiamondMineProspectorText:
 	call ClearScreen
 	call LoadScreenTilesFromBuffer2
 	SetEvent EVENT_DIAMOND_MINE_COMPLETED
+	ld a, HS_PROSPECTORS_HOUSE_PROSPECTOR
+	ld [wMissableObjectIndex], a
+	predef ShowExtraObject
 	call DiamondMineReplaceHole
 	call GBFadeInFromWhite
 	SetEvent EVENT_DIAMOND_MINE_FINAL_STEP

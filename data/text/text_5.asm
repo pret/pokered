@@ -98,6 +98,12 @@ _CannotFlyHereText::
 	line "FLY here."
 	prompt
 
+_CannotDigHereText::
+	text_ram wcd6d
+	text " can't"
+	line "DIG here."
+	prompt
+
 _NotHealthyEnoughText::
 	text "Not healthy"
 	line "enough."

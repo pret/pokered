@@ -62,6 +62,8 @@ PlayExtraMusic:
 	jr z, .secretlab
 	cp DIAMOND_MINE
 	jr z, .diamondMine
+	cp CELADON_MANSION_2F
+	jr z, .prospectorsHouseCheck
 	ret
 .secretlab
 	jpfar SecretLabPlayMusic
@@ -70,6 +72,8 @@ PlayExtraMusic:
 	and a
 	jr z, .fadingOut
 	jpfar DiamondMinePlayMusic
+.prospectorsHouseCheck
+	jpfar CheckBoomboxPlaying
 .fadingOut
 	xor a
 	ld [wReplacedMapMusic], a
