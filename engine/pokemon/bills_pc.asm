@@ -297,6 +297,9 @@ BillsPCWithdraw:
 	ld a, [wBoxCount]
 	and a
 	jp z, BillsPCMenu ; if no pokemon left to withdraw, exit the menu automatically
+	ld a, [wPartyCount]
+	cp PARTY_LENGTH
+	jp z, BillsPCMenu ; if party is full (can't withdraw more), exit the menu automatically
 	ld hl, wd730
 	set 6, [hl] ; turn off letter printing delay so we get instant text
 	ld hl, WhatText
