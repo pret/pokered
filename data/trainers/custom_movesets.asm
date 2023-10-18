@@ -353,7 +353,7 @@ ChampArenaBrockMoveset:
 	; golem
 	db EXPLOSION
 	db EARTHQUAKE
-	db GLARE
+	db MIRROR_MOVE
 	db MEGA_KICK
 	; kangaskhan
 	db SUBMISSION
@@ -377,7 +377,7 @@ ChampArenaBrockMoveset:
 	db SLASH
 	; onix
 	db WITHDRAW
-	db MIRROR_MOVE
+	db SELFDESTRUCT
 	db EARTHQUAKE
 	db SPIKE_CANNON
 

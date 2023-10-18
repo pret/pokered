@@ -798,6 +798,7 @@ GravelerEvosMoves:
 	db 46, EXPLOSION
 	db 52, MEGA_KICK
 	db 60, FISSURE
+	db 65, MIRROR_MOVE
 	db 0
 
 ChanseyEvosMoves:
@@ -961,6 +962,7 @@ GolemEvosMoves:
 	db 46, EXPLOSION
 	db 52, MEGA_KICK
 	db 60, FISSURE
+	db 65, MIRROR_MOVE
 	db 0
 
 MissingNo32EvosMoves:
@@ -2543,6 +2545,7 @@ GeodudeEvosMoves:
 	db 46, EXPLOSION
 	db 52, MEGA_KICK
 	db 60, FISSURE
+	db 65, MIRROR_MOVE
 	db 0
 
 PorygonEvosMoves:
@@ -2825,7 +2828,6 @@ HardenedOnixEvosMoves:
 	db 25, RAGE
 	db 27, ROCK_SLIDE
 	db 29, CLAMP
-	db 31, MIRROR_MOVE
 	db 33, AMNESIA
 	db 37, TAKE_DOWN ; HEAT RUSH
 	db 39, EARTHQUAKE
