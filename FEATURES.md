@@ -347,7 +347,7 @@ These changes were all made to make the pokemon more fun to use / more unique fr
 - Ninetales is Fire/Ghost
 - Golduck is Water/Psychic
 - Seadra is Water/Dragon
-- Magmar is Fire/Psychic
+- Marowak is Ground/Ghost
 - Kabuto/Kabutops are Rock/Bug
 - Butterfree is Bug/Psychic
 - Doduo/Dodrio are Flying/Ground
@@ -355,13 +355,13 @@ These changes were all made to make the pokemon more fun to use / more unique fr
 - Fearow is Flying/Fighting
 - Kingler is Water/Ground
 - Pinsir is Bug/Fighting
-- Victreebel is Grass/Dragon
+- Electabuzz is Electric/Fighting
+- Mr Mime is Psychic/Ghost
 - Sandshrew and Sandslash are Ground/Normal (stronger slash damage!)
 - Ponyta and Rapidash are now Fire/Normal 
 - Goldeen and Seaking are now Water/Normal
-- Mr Mime is Psychic/Ghost
-- Electabuzz is Electric/Fighting
-- Marowak is Ground/Ghost
+- Victreebel is Grass/Dragon
+- Magmar is Fire/Psychic
 
 ## Trainer AI changes
 - AI won't spam agility or amnesia repeatedly just because your pokemon is weak to psychic moves. The subroutine for selecting super effective moves ignores moves that do no damage now.
