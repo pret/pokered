@@ -10,7 +10,7 @@
 	INCBIN "gfx/pokemon/front/kabutops.pic", 0, 1 ; sprite dimensions
 	dw KabutopsPicFront, KabutopsPicBackSW
 
-	db ROCK_THROW, HARDEN, NO_MOVE, NO_MOVE ; level 1 learnset
+	db ROCK_THROW, HARDEN, SONICBOOM, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
