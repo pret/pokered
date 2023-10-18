@@ -129,7 +129,7 @@ _SilphCo11FRocket2AfterBattleText::
 	cont "#MON tough!"
 	done
 
-_SilphCo10FPorygonText::
+_SilphCo11FPorygonText::
 	text "The monitor has"
 	line "#MON on it!"
-	done
+	prompt

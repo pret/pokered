@@ -42,8 +42,7 @@ Load6FCheckCardKeyText:
 	ret z
 	ld a, TEXT_SILPHCO6F_CARD_KEY_DONE
 	ldh [hSpriteIndexOrTextID], a
-	call DisplayTextID
-	ret
+	jp DisplayTextID
 
 SilphCo6Text11:
 	text_asm

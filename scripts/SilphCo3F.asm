@@ -59,8 +59,7 @@ Load3FCheckCardKeyText:
 	ret z
 	ld a, TEXT_SILPHCO3F_CARD_KEY_DONE
 	ldh [hSpriteIndexOrTextID], a
-	call DisplayTextID
-	ret
+	jp DisplayTextID
 
 SilphCo3Text5:
 	text_asm

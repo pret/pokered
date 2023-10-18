@@ -76,8 +76,7 @@ Load5FCheckCardKeyText:
 	ret z
 	ld a, TEXT_SILPHCO5F_CARD_KEY_DONE
 	ldh [hSpriteIndexOrTextID], a
-	call DisplayTextID
-	ret
+	jp DisplayTextID
 
 SilphCo5Text12:
 	text_asm

@@ -77,10 +77,9 @@ SilphCo11FSetUnlockedDoorEventScript:
 Load11FCheckCardKeyText:
 	CheckEvent EVENT_ALL_CARD_KEY_DOORS_OPENED
 	ret z
-	ld a, 7
+	ld a, TEXT_SILPHCO11F_CARD_KEY_DONE
 	ldh [hSpriteIndexOrTextID], a
-	call DisplayTextID
-	ret
+	jp DisplayTextID
 
 SilphCo11Text7:
 	text_asm
@@ -312,6 +311,7 @@ SilphCo11F_TextPointers:
 	dw_const SilphCo11FGiovanniText,                  TEXT_SILPHCO11F_GIOVANNI
 	dw_const SilphCo11FRocket1Text,                   TEXT_SILPHCO11F_ROCKET1
 	dw_const SilphCo11FRocket2Text,                   TEXT_SILPHCO11F_ROCKET2
+	dw_const SilphCo11FPorygonText,                   TEXT_SILPHCO11F_COMPUTER_MONITOR
 	dw_const SilphCo11FGiovanniYouRuinedOurPlansText, TEXT_SILPHCO11F_GIOVANNI_YOU_RUINED_OUR_PLANS
 	dw_const SilphCo11Text7,                          TEXT_SILPHCO11F_CARD_KEY_DONE
 
@@ -415,14 +415,23 @@ SilphCo11FRocket2AfterBattleText:
 	text_far _SilphCo11FRocket2AfterBattleText
 	text_end
 
-SilphCo10FPorygonText: ; unreferenced ; TODO: use?
+SilphCo11FPorygonText:
 	text_asm
+	ld a, [wSpritePlayerStateData1FacingDirection]
+	cp SPRITE_FACING_UP
+	ld hl, .WrongSideText
+	jr nz, .done
 	ld hl, .Text
 	rst _PrintText
 	ld a, PORYGON
 	call DisplayPokedex
 	rst TextScriptEnd
-
+.done
+	rst _PrintText
+	rst TextScriptEnd
 .Text:
-	text_far _SilphCo10FPorygonText
+	text_far _SilphCo11FPorygonText
+	text_end
+.WrongSideText
+	text_far _RedsHouse1FTVWrongSideText
 	text_end

@@ -41,10 +41,9 @@ SilphCo10F_SetUnlockedSilphCoDoorsScript:
 Load10FCheckCardKeyText:
 	CheckEvent EVENT_ALL_CARD_KEY_DOORS_OPENED
 	ret z
-	ld a, 7
+	ld a, TEXT_SILPHCO10F_CARD_KEY_DONE
 	ldh [hSpriteIndexOrTextID], a
-	call DisplayTextID
-	ret
+	jp DisplayTextID
 
 SilphCo10Text7:
 	text_asm

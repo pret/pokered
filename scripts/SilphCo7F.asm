@@ -118,8 +118,7 @@ Load7FCheckCardKeyText:
 	ret z
 	ld a, TEXT_SILPHCO7F_CARD_KEY_DONE
 	ldh [hSpriteIndexOrTextID], a
-	call DisplayTextID
-	ret
+	jp DisplayTextID
 
 SilphCo7Text16:
 	text_asm
