@@ -7,6 +7,16 @@ AIEnemyTrainerChooseMoves:
 	ld [hli], a   ; move 2
 	ld [hli], a   ; move 3
 	ld [hl], a    ; move 4
+	;shinpokerednote: ADDED: make a backup buffer
+	push hl
+	ld a, $ff
+	inc hl
+	ld [hli], a	;backup 1
+	ld [hli], a	;backup 2
+	ld [hli], a	;backup 3
+	ld [hl], a	;backup 4
+	pop hl
+
 	ld a, [wEnemyDisabledMove] ; forbid disabled move (if any)
 	swap a
 	and $f
@@ -42,7 +52,7 @@ AIEnemyTrainerChooseMoves:
 	pop hl
 	ld a, [hli]
 	and a
-	jr z, .loopFindMinimumEntries
+	jr z, .loopFindMinimumEntries_backupfirst
 	push hl
 	ld hl, AIMoveChoiceModificationFunctionPointers
 	dec a
@@ -56,6 +66,11 @@ AIEnemyTrainerChooseMoves:
 	ld de, .nextMoveChoiceModification  ; set return address
 	push de
 	jp hl         ; execute modification function
+.loopFindMinimumEntries_backupfirst	;shinpokerednote: ADDED: make a backup of the scores
+	ld hl, wBuffer  ; temp move selection array
+	ld de, wBuffer + NUM_MOVES  ;backup buffer
+	ld bc, NUM_MOVES
+	rst _CopyData
 .loopFindMinimumEntries ; all entries will be decremented sequentially until one of them is zero
 	ld hl, wBuffer  ; temp move selection array
 	ld de, wEnemyMonMoves  ; enemy moves
@@ -1127,6 +1142,7 @@ GenericAI:
 ; end of individual trainer AI routines
 
 DecrementAICount:
+	call UndoEnemySelectionPPDecrement	;shinpokerednote: ADDED: undo the pp decrement of already-selected move if applicable
 	ld hl, wAICount
 	dec [hl]
 	scf
@@ -1253,6 +1269,9 @@ AISwitchIfEnoughMons:
 
 	ld a, d ; how many available monsters are there?
 	cp 2    ; don't bother if only 1
+	push af
+	call nc, UndoEnemySelectionPPDecrement	;shinpokerednote: ADDED: undo the pp decrement of already-selected move if applicable
+	pop af
 	jp nc, SwitchEnemyMon
 	and a
 	ret
@@ -1292,6 +1311,24 @@ SwitchEnemyMonCommon:
 	ld hl, wEnemyMonHP
 	ld bc, 4
 	rst _CopyData
+
+	;shinpokerednote: ADDED: don't copy PP information if transformed
+	ld a, [wEnemyBattleStatus3]
+	bit TRANSFORMED, a 	;check the state of the enemy transformed bit
+	jr nz, .skiptransformed	;skip ahead if bit is set
+	
+	;shinpokerednote: ADDED: copy PP information
+	ld a, [wEnemyMonPartyPos]
+	ld hl, wEnemyMon1PP
+	ld bc, wEnemyMon2 - wEnemyMon1
+	call AddNTimes
+	ld d, h
+	ld e, l
+	ld hl, wEnemyMonPP
+	ld bc, 4
+	rst _CopyData
+	
+.skiptransformed
 	ret
 
 SwitchEnemyMonCommon2:
@@ -1497,5 +1534,39 @@ StoreBattleMonTypes:
 	inc hl
 	ld a, [hl]                 ; c = type 2 of player's pokemon
 	ld [wAITargetMonType2], a
+	pop hl
+	ret
+
+;joenote - get the enemy move that has already been selected
+;if it is found in the move list, increment the pp that was deducted when selecting the move
+UndoEnemySelectionPPDecrement:
+	push hl
+	push bc
+	push de
+	ld a, [wEnemySelectedMove]
+	and a
+	jr z, .return	;return if the selected move is 00
+	cp NUM_ATTACKS + 1
+	jr nc, .return	;return if the selected move is invalid (> max number of moves)
+	ld d, a
+	ld e, NUM_MOVES
+	ld bc, wEnemyMonPP - wEnemyMonMoves
+	ld hl, wEnemyMonMoves
+.loop
+	ld a, [hl]
+	and a
+	jr z, .return
+	cp d
+	jr z, .found
+	inc hl
+	dec e
+	jr z, .return
+	jr .loop
+.found
+	add hl, bc
+	inc [hl]
+.return
+	pop de
+	pop bc
 	pop hl
 	ret

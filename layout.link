@@ -195,6 +195,7 @@ ROMX $32
 	"Type Icons"
 	"Menu Prompt Graphics"
 	"Tilesets 4"
+	"Trade Graphics"
 ROMX $33
 	"movedCode"
 	"Text 12"

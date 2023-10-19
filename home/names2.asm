@@ -88,9 +88,9 @@ GetName::
 	rst _CopyData
 .gotPtr
 	;ld a, e
-	;ld [wUnusedCF8D], a
+	;ld [wPPTrackingPointer], a
 	;ld a, d
-	;ld [wUnusedCF8D + 1], a
+	;ld [wPPTrackingPointer + 1], a
 	pop de
 	pop bc
 	pop hl

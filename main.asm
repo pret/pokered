@@ -174,7 +174,6 @@ INCLUDE "engine/battle/stats_functions.asm"
 INCLUDE "engine/battle/scroll_draw_trainer_pic.asm"
 INCLUDE "engine/battle/trainer_ai.asm"
 INCLUDE "engine/battle/draw_hud_pokeball_gfx.asm"
-INCLUDE "gfx/trade.asm"
 INCLUDE "engine/battle/trainers2.asm" ; PureRGBnote: MOVED: moved from home bank
 INCLUDE "engine/battle/move_effects/check_defrost_move.asm" ; PureRGBnote: ADDED: new code for bugfix
 INCLUDE "engine/battle/move_effects/haze.asm" ; PureRGBnote: MOVED: moved from battle engine 1
@@ -393,6 +392,10 @@ INCLUDE "data/gbc/bg_map_attributes.asm"
 INCLUDE "engine/gbc/bg_map_attributes.asm"
 INCLUDE "engine/gfx/scroll_gfx_horizontally.asm"
 
+SECTION "Trade Graphics", ROMX
+
+INCLUDE "gfx/trade.asm"
+
 SECTION "newCode", ROMX
 ; PureRGBnote: ADDED: new code
 INCLUDE "engine/gfx/front_sprite_toggler.asm"
@@ -432,3 +435,4 @@ INCLUDE "engine/gbc/gbc_cpu_speed.asm"
 INCLUDE "data/trainers/custom_movesets.asm"
 INCLUDE "engine/gbc/gbc_fade.asm"
 INCLUDE "engine/menus/dig.asm"
+INCLUDE "engine/battle/pp_tracker.asm"

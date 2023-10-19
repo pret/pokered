@@ -3105,7 +3105,7 @@ SelectEnemyMove:
 	ld b, 0
 	add hl, bc
 	ld a, [hl]
-	jr .done
+	jp .done
 .noLinkBattle
 	ld a, [wEnemyBattleStatus2]
 	and (1 << NEEDS_TO_RECHARGE) ; need to recharge
@@ -3141,6 +3141,9 @@ SelectEnemyMove:
 	jr z, .chooseRandomMove ; wild encounter
 	callfar AIEnemyTrainerChooseMoves
 .chooseRandomMove
+	push de
+	ld d, 0
+.chooseRandomMoveAgain
 	push hl
 	call BattleRandom
 	ld b, 1 ; 25% chance to select move 1
@@ -3157,18 +3160,43 @@ SelectEnemyMove:
 	inc hl
 	inc b ; 25% chance to select move 4
 .moveChosen
-	ld a, b
-	dec a
-	ld [wEnemyMoveListIndex], a
-	ld a, [wEnemyDisabledMove]
-	swap a
-	and $f
-	cp b
-	ld a, [hl]
-	pop hl
-	jr z, .chooseRandomMove ; move disabled, try again
+	ld a, d
+	cp $0f
+	jr nz, .notStruggle
+	ld a, STRUGGLE
 	and a
-	jr z, .chooseRandomMove ; move non-existant, try again
+	jp .moveGrabbed
+.notStruggle
+	;ld a, b
+	;dec a
+	;ld [wEnemyMoveListIndex], a
+	;ld a, [wEnemyDisabledMove]
+	;swap a
+	;and $f
+	;cp b
+;shinpokerednote: CHANGED: moved elsewhere to do PP tracking
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	ld e, b
+	ld a, h
+	ld [wPPTrackingPointer], a
+	ld a, l
+	ld [wPPTrackingPointer + 1], a
+	callfar ChooseMovePPTrack
+	ld a, [wPPTrackingPointer]
+	ld h, a
+	ld a, [wPPTrackingPointer + 1]
+	ld l, a
+	ld a, e
+	and a
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	ld a, [hl]
+.moveGrabbed
+	pop hl
+	;jr z, .chooseRandomMove ; move disabled, try again
+	;and a
+	;jr z, .chooseRandomMove ; move non-existant, try again
+	jr z, .chooseRandomMoveAgain ; move not available, try again
+	pop de
 .done
 	ld [wEnemySelectedMove], a
 	ret
@@ -6633,9 +6661,10 @@ LoadEnemyMonData:
 	ld [wLearningMovesFromDayCare], a
 	predef WriteMonMoves ; get moves based on current level
 .loadMovePPs
-	ld hl, wEnemyMonMoves
-	ld de, wEnemyMonPP - 1
-	predef LoadMovePPs
+	;ld hl, wEnemyMonMoves
+	;ld de, wEnemyMonPP - 1
+	;predef LoadMovePPs
+	callfar advancedLoadPP	;shinpokerednote: ADDED: this will make sure used PP gets saved in trainer battles
 	ld hl, wMonHBaseStats
 	ld de, wEnemyMonBaseStats
 	ld b, NUM_STATS

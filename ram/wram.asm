@@ -1183,7 +1183,8 @@ ENDU
 wListPointer:: dw
 
 ; used to store pointers, but never read
-wUnusedCF8D:: dw ; unused 2 bytes
+; shinpokerednote: CHANGED: used to store pointers for opponent PP tracking, used to be wUnusedCF8D
+wPPTrackingPointer:: dw
 
 wItemPrices:: dw
 

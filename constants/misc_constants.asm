@@ -50,7 +50,7 @@ DEF PALETTES_YELLOW     EQU %11 ; 3
 	const BIT_PSN_BUG          ; 3
 	const BIT_EXP_BAR          ; 4
 	const BIT_NPC_STAT_EXP     ; 5
-	; unused bit 6
+	const BIT_NPC_PP           ; 6
 	; unused bit 7
 
 ; wSpriteOptions
