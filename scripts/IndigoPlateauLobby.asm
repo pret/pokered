@@ -162,10 +162,13 @@ IndigoPlateauGymGuideChampAfterGreetPrompt:
 	text_end
 
 IndigoPlateauLobbyLinkReceptionistText:
-	;text_asm ;DEBUGMODE
-	;SetEvent EVENT_BECAME_CHAMP
-	;rst TextScriptEnd
+IF DEF(_DEBUG)
+	text_asm ;DEBUGMODE
+	SetEvent EVENT_BECAME_CHAMP
+	rst TextScriptEnd
+ELSE
 	script_cable_club_receptionist
+ENDC
 
 IndigoPlateauGymGuideSonText:
 	text_far _IndigoPlateauGymGuideSonText
