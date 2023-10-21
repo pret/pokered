@@ -291,6 +291,7 @@ FarHeal::
 	call StopAllMusic
 	predef HealParty
 	call HealPokemonSound
+	call WaitForHealingSoundToFinish
 	jp PlayDefaultMusic
 
 RedsHouse1FMomYouShouldRestText:
