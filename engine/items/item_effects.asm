@@ -2104,15 +2104,19 @@ ItemUsePokeflute:
 	bit 7, a ; set if low health alarm sound is currently playing
 	jr nz, .skipMusic
 	call WaitForSoundToFinish ; wait for sound to end
+;;;;;;;;;; PureRGBnote: ADDED: pause music here to make music work better when playing out-of-bank battle music
 	ld a, 1
 	ld [wMuteAudioAndPauseMusic], a
+;;;;;;;;;; 
 	farcall Music_PokeFluteInBattle ; play in-battle pokeflute music
 .musicWaitLoop ; wait for music to finish playing
 	ld a, [wChannelSoundIDs + CHAN7]
 	and a ; music off?
 	jr nz, .musicWaitLoop
+;;;;;;;;;; PureRGBnote: ADDED: resume music here to make music work better when playing out-of-bank battle music
 	; a = 0 here
 	ld [wMuteAudioAndPauseMusic], a
+;;;;;;;;;;
 .skipMusic
 	ld hl, FluteWokeUpText
 	jp PrintText
@@ -2171,8 +2175,7 @@ PlayedFluteHadEffectText:
 	and a
 	jr nz, .done
 ; play out-of-battle pokeflute music
-	ld a, SFX_STOP_ALL_MUSIC
-	rst _PlaySound
+	call StopAllMusic
 	ld a, SFX_POKEFLUTE
 	ld c, BANK(SFX_Pokeflute)
 	call PlayMusic
