@@ -4,3 +4,10 @@ SFX_Teleport_Enter2_3_Ch8:
 	noise_note 2, 15, 1, 34
 	noise_note 1, 0, 0, 0
 	sound_ret
+
+SFX_Get_Off_Bike_3_Ch8::
+	noise_note 2, 7, 1, 34
+	noise_note 2, 0, 0, 0
+	noise_note 2, 7, 1, 50
+	noise_note 1, 0, 0, 0
+	sound_ret

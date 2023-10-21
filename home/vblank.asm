@@ -28,7 +28,7 @@ VBlank::
 	ldh a, [hWY]
 	ldh [rWY], a
 .ok
-	ld a, [hFlagsFFFA]	;see if BGMap skip has been enabled (such as when updating color )
+	ldh a, [hFlagsFFFA]	;see if BGMap skip has been enabled (such as when updating color )
 	bit 1, a
 	jr nz, .skipBGMap
 	call AutoBgMapTransfer

@@ -790,11 +790,16 @@ ItemUseBicycle:
 ;;;;;;;;;;
 ;;;;;;;;;; PureRGBnote: CHANGED: the text telling you "got on bike" and "got off bike" each only display once per playthrough to be less annoying
 	CheckEvent EVENT_SAW_GOT_OFF_BIKE_TEXT 
-	jr nz, .done 
+	jr nz, .noTextGetOff
 	SetEvent EVENT_SAW_GOT_OFF_BIKE_TEXT
 	ld hl, GotOffBicycleText ; this text only displays once to be less annoying
 ;;;;;;;;;;
-	jr .printText
+	rst _PrintText
+.noTextGetOff
+	ld a, [wOptions2]
+	bit BIT_BIKE_MUSIC, a
+	jr nz, .playGetOffBikeSound
+	ret
 .tryToGetOnBike
 	call IsBikeRidingAllowed
 	jp nc, NoCyclingAllowedHere
@@ -810,21 +815,50 @@ ItemUseBicycle:
 ;;;;;;;;;;
 ;;;;;;;;;; PureRGBnote: CHANGED: the text telling you "got on bike" and "got off bike" each only display once per playthrough to be less annoying
 	CheckEvent EVENT_SAW_GOT_ON_BIKE_TEXT
-	jr nz, .done 
+	jr nz, .noTextGetOn 
 	SetEvent EVENT_SAW_GOT_ON_BIKE_TEXT
 	ld hl, GotOnBicycleText ; this text only displays once to be less annoying
 ;;;;;;;;;;
-	jr .printText
-.done
+	rst _PrintText
+.noTextGetOn
+	ld a, [wOptions2]
+	bit BIT_BIKE_MUSIC, a
+	jr nz, .playGetOnBikeSound
 	ret
-.printText
-	jp PrintText
 .playDefaultMusic
 	ld a, [wMapConnections]
 	bit BIT_EXTRA_MUSIC_MAP, a
 	jp z, PlayDefaultMusic
 	ld d, 1
 	jpfar TryPlayExtraMusic
+.playGetOnBikeSound
+	ld a, SFX_PRESS_AB
+	rst _PlaySound
+	ld a, [wAudioROMBank]
+	cp BANK(SFX_Get_On_Bike_1_Ch5)
+	ld de, SFX_Get_On_Bike_1_Ch5
+	jr z, .overwrite5
+	ld de, SFX_Get_On_Bike_3_Ch5
+	jr .overwrite5
+.playGetOffBikeSound
+	ld a, SFX_TELEPORT_ENTER_2
+	rst _PlaySound
+	ld a, [wAudioROMBank]
+	cp BANK(SFX_Get_Off_Bike_1_Ch8)
+	ld de, SFX_Get_Off_Bike_1_Ch8
+	jr z, .overwrite8
+	ld de, SFX_Get_Off_Bike_3_Ch8
+.overwrite8
+	ld hl, wChannelCommandPointers + CHAN8 * 2
+.overwrite
+	ld a, e
+	ld [hli], a
+	ld a, d
+	ld [hli], a
+	ret
+.overwrite5
+	ld hl, wChannelCommandPointers + CHAN5 * 2
+	jr .overwrite
 
 ; used for Surf out-of-battle effect
 ItemUseSurfboard:
