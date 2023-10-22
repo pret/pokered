@@ -194,6 +194,7 @@ PlaySoundCommon_3:
 Noise3_endchannel:
 	sound_ret
 
+; PureRGBnote: ADDED: code that allows default drum kit sounds to be overwritten with other drum kit sounds.
 CheckRemapNoiseInstrument_3:
 	ld a, [wChannelSoundIDs + CHAN8]
 	cp REMAPPABLE_NOISE_INSTRUMENTS_END

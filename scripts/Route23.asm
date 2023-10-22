@@ -68,7 +68,7 @@ YCoordsData_51255:
 	db 96
 	db 105
 	db 119
-	db 130
+	db 130 ; PureRGBnote: CHANGED: the second guard who checks for the cascade badge was moved up slightly so you can enter type guy's house.
 	db -1 ; end
 
 Route23CopyBadgeTextScript:

@@ -114,6 +114,7 @@ AccessedMyPCText:
 	text_far _AccessedMyPCText
 	text_end
 
+; PureRGBnote: ADDED: can remove X items from inventory instead of always just 1
 ; d = how many to remove
 RemoveNumItemByID::
 	ld a, d

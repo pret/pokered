@@ -285,6 +285,7 @@ SaffronGymYoungster1EndBattleText:
 	text_far _SaffronGymYoungster1EndBattleText
 	text_end
 
+; PureRGBnote: CHANGED: this trainer will change how they respond now based on your type matchup settings
 SaffronGymYoungster1AfterBattleText:
 	text_asm
 	ld a, [wOptions3]

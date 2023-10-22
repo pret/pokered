@@ -6,6 +6,7 @@ ShakeElevator::
 	call Delay3
 	ld a, SFX_STOP_ALL_MUSIC
 	rst _PlaySound
+;;;;;;;;;; PureRGBnote: ADDED: elevator will shake longer depending on how far away the floor is.
 	ld a, [wCurMap]
 	cp SILPH_CO_ELEVATOR
 	ld c, 10 ; silph co has 10 frames of animation per floor
@@ -24,6 +25,7 @@ ShakeElevator::
 	jr nz, .getTravelDistanceLoop
 	ld b, a ; how many frames will the shake loop happen for (depends on how far the elevator is travelling now)
 	ld a, [wWarpEntries + 3] ; map we will go to
+;;;;;;;;;;
 	ldh a, [hSCY]
 	ld d, a
 	ld e, $1

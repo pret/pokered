@@ -1,3 +1,5 @@
+; PureRGBnote: CHANGED: most of the players pc code was changed to remember your location in the item list after performing actions
+; like withdrawing, depositing...etc.
 PlayerPC::
 	ld hl, wd730
 	set 6, [hl]

@@ -1,3 +1,4 @@
+; PureRGBnote: ADDED: code for smooth fades on the gbc (optional)
 ;get the RGB values out of color in de into a spot pointed to by hRGB
 GetRGB:
 ;GetRed:	

@@ -1,3 +1,4 @@
+; PureRGBnote: MOVED: this code was moved out of home bank, and made so checking if a tile is passable uses a single function
 ; input d = tile to check whether it's passable
 _CheckTilePassable::
 	ld a, [wTilesetCollisionPtr]

@@ -21,7 +21,7 @@ HallOfFameNoopScript:
 	ret
 
 HallOfFameResetEventsAndSaveScript:
-	callfar GBCSetCPU1xSpeed
+	callfar GBCSetCPU1xSpeed ; shinpokerednote: ADDED: turn off 2x cpu speed to make sure the hall of fame animation is working correctly.
 	call Delay3
 	ld a, [wLetterPrintingDelayFlags]
 	push af

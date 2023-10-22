@@ -27,6 +27,7 @@ Route2ReplaceCutTiles:
 	ld de, Route2TileBlockReplacements
 	jpfar ReplaceMultipleTileBlocks
 .checkRemoveTreeBlocker
+	; PureRGBnote: ADDED: code that keeps the cut tree cut down if we're in its alcove. Prevents getting softlocked if you delete cut.
 	; if we're behind the middle tree and require cut to get back to other areas, remove the middle tree to prevent softlocks
 	ld de, Route2CutAlcove
 	callfar FarArePlayerCoordsInRange

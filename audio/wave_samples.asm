@@ -1,20 +1,20 @@
 ; This file is INCLUDEd three times, once for each audio engine.
-
+; PureRGBnote: ADDED: additional wave definitions were added that are used in tcg/tcg2/pinball songs
 	dw .wave0
 	dw .wave1
 	dw .wave2
 	dw .wave3
 	dw .wave4
 	dw .wave5 ; used in the Lavender Town and Pokemon Tower themes
-	dw .wave6 ; unused
-	dw .wave7 ; unused
-	dw .wave8 ; unused
-	dw .wave9 ; unused
-	dw .wave10 ; unused
-	dw .wave11 ; unused
-	dw .wave12 ; unused
-	dw .wave13 ; unused
-	dw .wave14 ; unused
+	dw .wave6 ; 
+	dw .wave7 ; 
+	dw .wave8 ; 
+	dw .wave9 ; 
+	dw .wave10 ; 
+	dw .wave11 ; 
+	dw .wave12 ; 
+	dw .wave13 ; 
+	dw .wave14 ; 
 
 ; these are the definitions for the channel 3 instruments
 ; each instrument definition is made up of 32 points (nibbles) that form

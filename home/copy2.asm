@@ -35,7 +35,7 @@ FarCopyData3::
 	ld [MBC1RomBank], a
 	ret
 
-; this version of FarCopyData is used when loading maps to get everything loaded without having to disable LCD
+;;;;;;;;;; PureRGBnote: ADDED: these functions are used when loading maps to get everything loaded without having to disable LCD
 FarCopyData4::
 	ldh [hROMBankTemp], a
 	ldh a, [hLoadedROMBank]
@@ -78,6 +78,7 @@ SpecialCopyData:
 	or b
 	jr nz, SpecialCopyData
 	ret
+;;;;;;;;;;
 
 FarCopyDataDouble::
 ; Expand bc bytes of 1bpp image data

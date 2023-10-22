@@ -4,7 +4,7 @@ PlayDefaultMusic::
 	ld c, a
 	ld d, a
 	ld [wLastMusicSoundID], a
-	ld [wSpecialMusicBank], a
+	ld [wSpecialMusicBank], a ; PureRGBnote: ADDED: needs to be reset in order for other-bank-music to work properly
 	jr PlayDefaultMusicCommon
 
 PlayDefaultMusicFadeOutCurrent::
@@ -124,10 +124,12 @@ CompareMapMusicBankWithCurrentBank::
 
 ; shinpokerednote: audionote: updated to match pokemon yellow's audio engine code
 PlayMusic::
+;;;;;;;;;; PureRGBnote: ADDED: needs to be reset in order for other-bank-music to work properly
 	push af
 	xor a
 	ld [wSpecialMusicBank], a
 	pop af
+;;;;;;;;;;
 	ld b, a
 	ld [wNewSoundID], a
 	xor a
@@ -140,8 +142,10 @@ PlayMusic::
 
 ; shinpokerednote: audionote: updated to match pokemon yellow's audio engine code
 StopAllMusic:: 
+;;;;;;;;;; PureRGBnote: ADDED: needs to be reset in order for other-bank-music to work properly
 	xor a
 	ld [wSpecialMusicBank], a
+;;;;;;;;;;
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 ; shinpokerednote: audionote: updated to match pokemon yellow's audio engine code
@@ -200,6 +204,7 @@ PlaySound::
 GetNextMusicByte::
 	ldh a, [hLoadedROMBank]
 	push af
+;;;;;;;;;; PureRGBnote: ADDED: needs to be reset in order for other-bank-music to work properly
 	ld a, [wSpecialMusicBank]
 	and a
 	ld a, [wAudioROMBank]
@@ -210,6 +215,7 @@ GetNextMusicByte::
 	jr c, .doBankSwitch
 	ld a, [wAudioROMBank]
 .doBankSwitch
+;;;;;;;;;;
 	call BankswitchCommon
 	ld d, $0
 	ld a, c
@@ -289,6 +295,8 @@ DetermineAudioFunction::
 	pop af
 	jp BankswitchCommon
 
+;;;;;;;;;; PureRGBnote: ADDED: new functions to play music from another bank while the "core" audio bank is engine 2 (battle) or 3 (overworld)
+
 PlaySpecialBattleMusic3::
 	ld b, 3
 	ld a, MUSIC_GYM_LEADER_BATTLE
@@ -349,3 +357,5 @@ RemapCommandPointerLoop:
 	jr nz, .loop
 	pop af
 	jp BankswitchCommon
+
+;;;;;;;;;;

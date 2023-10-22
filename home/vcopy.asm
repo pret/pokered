@@ -393,6 +393,7 @@ UpdateMovingBgTiles::
 	cp 21
 	jr z, .flower
 
+; PureRGBnote: CHANGED: the code for animating these tiles was moved to another bank for space.
 	jpfar AnimateWaterTile
 .flower
 	jpfar AnimateFlowerTile

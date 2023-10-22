@@ -3,7 +3,7 @@ DEF MAP_TILESET_SIZE EQU $60
 
 UpdatePlayerSprite:
 	CheckFlag FLAG_HIDE_PLAYER_SPRITE
-	jr nz, .disableSprite
+	jr nz, .disableSprite ; PureRGBnote: ADDED: if a flag is set, completely hide the player's sprite
 	ld a, [wSpritePlayerStateData2WalkAnimationCounter]
 	and a
 	jr z, .checkIfTextBoxInFrontOfSprite
@@ -672,6 +672,7 @@ CanWalkOntoTile:
 	and a
 	ret
 .notScripted
+;;;;;;;;;; PureRGBnote: CHANGED: unified code for checking if a tile is passable
 	push bc
 	push de
 	ld d, c
@@ -679,6 +680,7 @@ CanWalkOntoTile:
 	pop de
 	pop bc
 	jr c, .impassable
+;;;;;;;;;;
 	ld h, HIGH(wSpriteStateData2)
 	ldh a, [hCurrentSpriteOffset]
 	add $6

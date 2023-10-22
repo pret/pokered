@@ -1,3 +1,5 @@
+; PureRGBnote: CHANGED: this map contains additional celadon houses that are combined into one map.
+
 CeladonMansion2F_Script:
 	call EnableAutoTextBoxDrawing
 	call CheckBoomboxPlaying

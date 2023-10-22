@@ -656,6 +656,7 @@ Audio1_pitch_sweep:
 	ldh [rNR10], a
 	jp Audio1_sound_ret
 
+;;;;;;;;;; PureRGBnote: ADDED: new audio commands that can be used in songs, needed for tcg/tcg2/pinball songs to work properly
 VolumeEnvelope:
 	ld a, d
 ;volume_envelope
@@ -755,6 +756,7 @@ Transpose:
 	add hl, bc
 	ld [hl], a
 	jp Audio1_sound_ret
+;;;;;;;;;;
 
 ;Cutoff:
 ;; cutoff
@@ -1443,6 +1445,7 @@ Audio1_MultiplyAdd:
 	ret z
 	jr .loop
 
+; PureRGBnote: CHANGED: adjusted to be able to transpose notes based on wChannelTranspositions to allow for a higher range of notes
 Audio1_CalculateFrequency:
 ; return the frequency for note a, octave b in de
 ; do transposition first of note and octave

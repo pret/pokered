@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: new postgame rematch area, with waaaay too much script code
+
 ChampArena_Script:
 	call ChampArenaCheckBattleComplete
 	call ChampArenaWaitForPlayerWalkToFinish

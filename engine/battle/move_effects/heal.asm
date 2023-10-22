@@ -166,6 +166,7 @@ HealEffectCommon:
 	rst _DelayFrames
 	ld hl, PrintButItFailedText_
 	jp EffectCallBattleCore
+;;;;;;;;;; PureRGBnote: ADDED: withdraw and growth heal around 1/3rd health instead of 1/2
 .oneThird
 	push hl
 	; 1/2 HP in bc currently
@@ -189,6 +190,7 @@ HealEffectCommon:
 	ld c, l ; 21/64 in bc (pretty close to 1/3 but not exactly)
 	pop hl
 	jp .gotHPAmountToHeal
+;;;;;;;;;;
 
 GetMoveNumber:
 	ldh a, [hWhoseTurn]

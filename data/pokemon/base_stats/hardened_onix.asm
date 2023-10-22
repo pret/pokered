@@ -1,3 +1,4 @@
+; PureRGBnote: ADDED: powered up version of onix with better stats and less weaknesses.
 	db DEX_ONIX ; pokedex id
 
 	db  80,  85, 180,  80,  75

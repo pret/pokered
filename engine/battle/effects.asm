@@ -1554,6 +1554,7 @@ TriAttackEffect:
 HazeEffect:
 	jpfar HazeEffect_
 
+; PureRGBnote: ADDED: growth raises special by 1 and heals around 1/3rd health. Does nothing at all if you're at full health.
 GrowthEffect:
 	ld b, SPECIAL_UP1_EFFECT
 	ld c, GROWTH_EFFECT
@@ -1567,6 +1568,7 @@ GrowthEffect:
 .doEffect 
 	jr WithdrawGrowthEffect
 
+; PureRGBnote: ADDED: withdraw raises defense by 1 and heals around 1/3rd health. Does nothing at all if you're at full health.
 WithdrawEffect:
 	ld b, DEFENSE_UP1_EFFECT
 	ld c, WITHDRAW_EFFECT

@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: trainers can have custom movesets by specifying that in their party data
+
 	const_def 1
 	const CHAMP_ARENA_ERIKA_MOVESET
 	const CHAMP_ARENA_BLAINE_MOVESET

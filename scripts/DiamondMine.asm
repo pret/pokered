@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: new area where you can buff onix to be stronger, once again, way too much script code
+
 DiamondMine_Script:
 	call DiamondMineCheckWalkOutOfHole
 	call DiamondMineCheckHandleHole

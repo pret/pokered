@@ -1,3 +1,4 @@
+
 EnterMapAnim::
 	call InitFacingDirectionList
 	ld a, $ec
@@ -50,7 +51,7 @@ EnterMapAnim::
 	pop hl
 	CheckAndResetEvent FLAG_DIG_OVERWORLD_ANIMATION
 	jr z, .noDig
-.dig
+.dig ; PureRGBnote: ADDED: new dig overworld animation when entering the map 
 	callfar StartDigEnterMapAnimation
 	call LoadPlayerSpriteGraphics
 	jr .restoreDefaultMusic
@@ -137,7 +138,7 @@ _LeaveMapAnim::
 .flyAnimation
 	CheckFlag FLAG_DIG_OVERWORLD_ANIMATION
 	jr z, .notDig
-.dig
+.dig ; PureRGBnote: ADDED: new dig overworld animation when entering the map
 	callfar StartDigLeaveMapAnimation
 	call GBFadeOutToWhite
 	jp RestoreFacingDirectionAndYScreenPos

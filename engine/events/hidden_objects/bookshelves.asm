@@ -3,6 +3,8 @@ PrintBookshelfText::
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
 	jr nz, .noMatch
+	; player is facing up
+;;;;;;;;;; PureRGBnote: ADDED: some houses have unique text for bookcases instead of "crammed full of books!"
 	ld a, [wCurMap]
 	cp TYPE_GUYS_HOUSE
 	jr z, .noMatch
@@ -11,7 +13,7 @@ PrintBookshelfText::
 	callfar CeladonHouse2FBookCaseCheck
 	jr nc, .noMatch
 .notCeladonHouses
-; facing up
+;;;;;;;;;;
 	ld a, [wCurMapTileset]
 	ld b, a
 	lda_coord 8, 7

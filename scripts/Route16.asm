@@ -8,6 +8,7 @@ Route16_Script:
 	ld [wRoute16CurScript], a
 	ret
 
+; PureRGBnote: ADDED: code that keeps the cut tree cut down if we're in its alcove. Prevents getting softlocked if you delete cut.
 Route16CheckHideCutTree:
 	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl] ; did we load the map from a save/warp/door/battle, etc?

@@ -192,6 +192,7 @@ IndigoPlateauGymGuideSonMoreTMs:
 
 INCLUDE "data/items/marts/indigo_plateau.asm"
 
+; PureRGBnote: ADDED: new NPC arena assistant who will let you enter the champ arena after becoming champ 
 IndigoPlateauArenaAssistantText:
 	text_asm
 	CheckEvent EVENT_BECAME_CHAMP

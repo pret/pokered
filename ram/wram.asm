@@ -76,12 +76,12 @@ wTempoModifier:: db
 UNION
 	ds 13
 NEXTU
-; PureRGBnote: ADDED: byte that holds the currently playing "extra" music if in a map that has marked down that it has extra music
-wReplacedMapMusic:: db 
-wSpecialBattleMusicID:: db
+; PureRGBnote: ADDED: new audio wram values
+wReplacedMapMusic:: db ; byte that holds the currently playing "extra" music if in a map that has marked down that it has extra music
+wSpecialBattleMusicID:: db ; used in champ arena to specify which special battle music should play upon starting battle
 wSpecialMusicBank:: db ; only set if we're playing music outside the current music engine's bank
-wMusicDrumKit::db
-wChannelTranspositions::
+wMusicDrumKit::db ; assigns the drumkit if we're using a non-default drumkit in a song
+wChannelTranspositions:: ; stores octave transpositions for each wave channel so we can have a wider range of notes in songs
 wChannel1Transposition::db
 wChannel2Transposition::db
 wChannel3Transposition::db

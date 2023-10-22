@@ -9,7 +9,7 @@ ReloadMapData::
 	call LoadCurrentMapView
 	call LoadTilesetTilePatternData
 	call EnableLCD
-	callfar LoadExtraTiles
+	callfar LoadExtraTiles ; PureRGBnote: ADDED: in some maps we overwrite unused tiles for the given map.
 	pop af
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a

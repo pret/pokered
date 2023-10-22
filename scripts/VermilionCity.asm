@@ -12,6 +12,7 @@ VermilionCity_Script:
 	ld hl, VermilionCity_ScriptPointers
 	ld a, [wVermilionCityCurScript]
 	jp CallFunctionInTable
+; PureRGBnote: ADDED: code that keeps the cut tree cut down if we're in its alcove. Prevents getting softlocked if you delete cut.
 .setFirstLockTrashCanIndexAndCheckRemoveTree
 	ld de, VermilionCutAlcove
 	callfar FarArePlayerCoordsInRange

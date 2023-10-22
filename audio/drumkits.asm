@@ -1,3 +1,4 @@
+; PureRGBnote: ADDED: these drumkits are used with some new tracks, and replace the default drumset if triggered in the song.
 	dw .Drumkit0
 	dw .Drumkit1
 	dw .Drumkit2

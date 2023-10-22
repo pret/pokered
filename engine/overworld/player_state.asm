@@ -386,6 +386,7 @@ GetTileTwoStepsInFrontOfPlayer:
 
 CheckForCollisionWhenPushingBoulder:
 	call GetTileTwoStepsInFrontOfPlayer
+;;;;;;;;;; PureRGBnote: CHANGED: unified code for checking if a tile is passable
 	push bc
 	push de
 	ld d, c
@@ -393,6 +394,7 @@ CheckForCollisionWhenPushingBoulder:
 	pop de
 	pop bc
 	jr c, .done ; not passable
+;;;;;;;;;;
 	ld hl, TilePairCollisionsLand
 	call CheckForTilePairCollisions2
 	ld a, $ff

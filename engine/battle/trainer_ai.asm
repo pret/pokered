@@ -7,7 +7,8 @@ AIEnemyTrainerChooseMoves:
 	ld [hli], a   ; move 2
 	ld [hli], a   ; move 3
 	ld [hl], a    ; move 4
-	;shinpokerednote: ADDED: make a backup buffer
+	
+;;;;;;;;;; shinpokerednote: ADDED: make a backup buffer
 	push hl
 	ld a, $ff
 	inc hl
@@ -16,6 +17,7 @@ AIEnemyTrainerChooseMoves:
 	ld [hli], a	;backup 3
 	ld [hl], a	;backup 4
 	pop hl
+;;;;;;;;;;
 
 	ld a, [wEnemyDisabledMove] ; forbid disabled move (if any)
 	swap a
@@ -28,10 +30,12 @@ AIEnemyTrainerChooseMoves:
 	add hl, bc    ; advance pointer to forbidden move
 	ld [hl], $50  ; forbid (highly discourage) disabled move
 .noMoveDisabled
+;;;;;;;;;; PureRGBnote: ADDED: champ arena always uses 1, 2, 3, 4 move choice modifier functions for all opponents.
 	ld a, [wCurMap]
 	cp CHAMP_ARENA
-	ld hl, ChampArenaGenericMoveChoices ; champ arena always uses 1, 2, 3, 4 move choice modifier functions for all opponents.
+	ld hl, ChampArenaGenericMoveChoices 
 	jr z, .readTrainerClassData
+;;;;;;;;;;
 	ld hl, TrainerClassMoveChoiceModifications
 	ld a, [wTrainerClass]
 	ld b, a
@@ -510,6 +514,9 @@ Modifier2PreferredMoves:
 	db MIMIC_EFFECT
 	db -1
 
+; PureRGBnote: ADDED: function that does a couple of comparisons before deciding whether the player is "dangerous" or not
+; used to help decide whether the opponent should use boosting moves for AI move choice 2 on the first turn,
+; and also used to decide for some trainers whether to use boosting items like X Attack.
 IsPlayerPokemonDangerous:
 	; check if player is asleep, paralyzed, frozen, or confused, if so, not considered dangerous
 	ld a, [wAITargetMonStatus]
@@ -751,6 +758,7 @@ EncourageDrainingMoveIfLowHealth:
 	dec [hl] ; encourage the draining move if enemy has more than half health gone
 	ret
 
+; PureRGBnote: ADDED: gets the move that using mirror move will use, so we can see if using mirror move will be a good idea
 GetMirrorMoveResultMove:
 	ld a, [wPlayerLastSelectedMove]
 	and a
@@ -760,6 +768,7 @@ GetMirrorMoveResultMove:
 	ld [wEnemyMoveNum], a ; keep the move number as MIRROR_MOVE so we know it's mirror move being used for later
 	ret
 
+; PureRGBnote: ADDED: one trainer in the game can use x accuracy, and will prioritize OHKO moves once they have
 EncourageOHKOMoveIfXAccuracy:
 	; further encourage OHKO move if x accuracy is active (only 1 trainer uses x accuracies ever)
 	ld a, [wEnemyBattleStatus2]
@@ -978,6 +987,7 @@ CooltrainerFAI:
 	ret nc
 	jp AISwitchIfEnoughMons
 
+; PureRGBnote: ADDED: opponents in the champ arena will use multiple types of items, full heal and full restore
 ChampArenaAICheck:
 	push af
 	ld a, [wCurMap]
@@ -1537,7 +1547,7 @@ StoreBattleMonTypes:
 	pop hl
 	ret
 
-;joenote - get the enemy move that has already been selected
+;shinpokerednote: ADDED: get the enemy move that has already been selected
 ;if it is found in the move list, increment the pp that was deducted when selecting the move
 UndoEnemySelectionPPDecrement:
 	push hl

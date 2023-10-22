@@ -125,6 +125,7 @@ LoadTownMap_Nest:
 	ld [hl], a
 	ret
 
+;;;;;;;;;; PureRGBnote: ADDED: using dig to go to another town displays a different sprite in this menu
 LoadTownMap_Dig::
 	ld a, [wSpriteOptions2]
 	bit BIT_MENU_ICON_SPRITES, a
@@ -138,6 +139,7 @@ LoadTownMap_Dig::
 	lb bc, BANK(MonsterSprite), 12
 	xor a
 	jr LoadTownMap_Fly_Common
+;;;;;;;;;;
 
 LoadTownMap_Fly::
 	ld de, BirdSprite
@@ -145,6 +147,7 @@ LoadTownMap_Fly::
 	xor a
 	
 LoadTownMap_Fly_Common:
+;;;;;;;;;; PureRGBnote: ADDED: using dig to go to another town displays a different sprite in this menu
 	push af
 	push de
 	push bc
@@ -164,6 +167,7 @@ LoadTownMap_Fly_Common:
 	ld hl, vSprites tile 6
 	call CopyVideoData
 .notDiglett
+;;;;;;;;;;
 	ld de, TownMapUpArrow
 	ld hl, vChars1 tile $6d
 	lb bc, BANK(TownMapUpArrow), (TownMapUpArrowEnd - TownMapUpArrow) / $8

@@ -72,7 +72,7 @@ DontAbandonLearning:
 	ld bc, NUM_MOVES
 	rst _CopyData
 	jp PrintLearnedMove
-
+; PureRGBnote: CHANGED: amount of text is reduced in some scenarios
 AbandonLearning:
 	CheckEvent FLAG_LEARNING_TM_MOVE
 	jr nz, .skipText ; skip this text if learning by TM
@@ -93,6 +93,7 @@ AbandonLearning:
 	ResetEvent FLAG_LEARNING_TM_MOVE
 	ret
 
+; PureRGBnote: CHANGED: amount of text is reduced in some scenarios
 PrintLearnedMove:
 	ld hl, LearnedMove1Text
 	rst _PrintText
@@ -100,6 +101,7 @@ PrintLearnedMove:
 	ResetEvent FLAG_LEARNING_TM_MOVE
 	ret
 
+; PureRGBnote: CHANGED: amount of text is reduced in some scenarios
 TryingToLearn:
 	push hl
 	CheckEvent FLAG_LEARNING_TM_MOVE

@@ -1,4 +1,5 @@
-; PureRGBnote: ADDED: the emotion bubble code was split into two functions that differ in how long the bubble shows.
+; PureRGBnote: ADDED: the emotion bubble code was split into three functions that differ in how long the bubble shows.
+; also, added a new heart bubble
 EmotionBubble:
 	call EmotionBubbleCommon
 	ld c, 60

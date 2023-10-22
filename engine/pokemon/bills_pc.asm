@@ -1,3 +1,5 @@
+; PureRGBnote: CHANGED: most of the bills pc functions were adjusted to kick you out of the menu less
+; after doing something like depositing/withdrawing or viewing data of a pokemon.
 DisplayPCMainMenu::
 	xor a
 	ldh [hAutoBGTransferEnabled], a

@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: new sounds that are used in the champ arena. Are played by playing another sound and remapping the data to these sounds.
+; Only will work on audio engine 3 since this is the bank they're located in.
 HeartBubbleSFX::
 	duty_cycle 2
 	pitch_sweep 1, 4

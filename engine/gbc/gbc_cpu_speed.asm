@@ -1,3 +1,5 @@
+; shinpokerednote: ADDED: code that sets the GBC to use 2x CPU mode when desired.
+
 ;Sets 1x CPU speed if we're on GBC
 GBCSetCPU1xSpeed::
 	ldh a, [hGBC]

@@ -412,6 +412,7 @@ FillAudioRAM2:
 	jr nz, .loop
 	ret
 
+; PureRGBnote: ADDED: code that allows default drum kit sounds to be overwritten with other drum kit sounds.
 CheckRemapNoiseInstrument_2:
 	ld a, [wChannelSoundIDs + CHAN8]
 	cp REMAPPABLE_NOISE_INSTRUMENTS_END

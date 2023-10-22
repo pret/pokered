@@ -1,3 +1,6 @@
+; PureRGBnote: CHANGED: ADDED: using dig in the overworld can also be used
+; to dig between towns after a certain point. Digging also has a new overworld animation.
+
 DigFromPartyMenu::
 	callfar IsEscapeRopeUsable
 	jr z, .noEscapeDungeon

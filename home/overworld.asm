@@ -42,7 +42,7 @@ OverworldLoop::
 	rst _DelayFrame
 OverworldLoopLessDelay::
 	;rst _DelayFrame ; shinpokerednote: ADDED: 60fps mode enabled by commenting this (but needs additional tweaks to run correctly)
-	callfar GBCSetCPU2xSpeed	; set 2x cpu speed when on gbc
+	callfar GBCSetCPU2xSpeed	; shinpokerednote: ADDED: set 2x cpu speed when on gbc
 	call LoadGBPal
 	ld a, [wd736]
 	bit 6, a ; jumping down a ledge?
@@ -560,7 +560,7 @@ WarpFound2::
 ; this is for handling "outside" maps that can't have the 0xFF destination map
 	ld a, [wCurMap]
 	ld [wLastMap], a
-	call PlayMapChangeSound
+	call PlayMapChangeSound ; PureRGBnote: CHANGED: this was moved earlier to fix jank with entering rock tunnel
 	; ld a, [wCurMapWidth]
 	; ld [wUnusedD366], a ; not read
 	ldh a, [hWarpDestinationMap]
@@ -646,6 +646,7 @@ PlayMapChangeSound::
 	rst _PlaySound
 	ld a, [wMapPalOffset]
 	and a
+;;;;;;;;;; shinpokerednote: FIXED: fixes a bit of jank with entering rock tunnel
 	jp z, GBFadeOutToBlack
 	push af
 	inc a
@@ -654,6 +655,7 @@ PlayMapChangeSound::
 	pop af
 	ld [wMapPalOffset], a
 	ret
+;;;;;;;;;;
 
 CheckIfInFlyMap::
 	call CheckIfInOutsideMap
@@ -761,10 +763,12 @@ HandleFlyWarpOrDungeonWarp::
 	ld [wIsInBattle], a
 	ld [wMapPalOffset], a
 	ld hl, wd732
+;;;;;;;;;; PureRGBnote: CHANGED: don't clear bike or surf state on falling down a hole (keeps you on your bike if you're on it)
 	bit 4, [hl] ; fell down hole warp
 	jr nz, .dontResetBikeState ; don't reset bike state on falling down a hole
 	ld [wWalkBikeSurfState], a
 .dontResetBikeState
+;;;;;;;;;;
 	set 2, [hl] ; fly warp or dungeon warp
 	res 5, [hl] ; forced to ride bike
 	call LeaveMapAnim
@@ -1241,12 +1245,14 @@ CollisionCheckOnLand::
 CheckTilePassable::
 	predef GetTileAndCoordsInFrontOfPlayer ; get tile in front of player
 	ld a, [wTileInFrontOfPlayer] ; tile in front of player
+;;;;;;;;;; PureRGBnote: CHANGED: unified code for checking if a tile is passable
 	ld d, a
 	callfar _CheckTilePassable
 	jr c, .notPassable
 	and a
 	ret
 .notPassable
+;;;;;;;;;;
 	scf
 	ret
 
@@ -1885,9 +1891,11 @@ CollisionCheckOnWater::
 	jr nc, .noCollision
 ; check if the [land] tile in front of the player is passable
 .checkIfNextTileIsPassable
+;;;;;;;;;; PureRGBnote: CHANGED: unified code for checking if a tile is passable
 	callfar _CheckTilePassable
 	jr c, .collision
 	jr .stopSurfing
+;;;;;;;;;;
 .collision
 	ld a, [wChannelSoundIDs + CHAN5]
 	cp SFX_COLLISION ; check if collision sound is already playing

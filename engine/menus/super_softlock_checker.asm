@@ -1,3 +1,7 @@
+; PureRGBnote: ADDED: code for preventing softlocks. 
+; For cut, it just keeps the tree cut down until you leave the area where you could get softlocked if it reappeared.
+; For surf, autosurf just stays active even if you have no pokemon with SURF if you're on an island.
+
 ; format: map id, left x coord, right x coord, top y coord, bottom y coord
 ; the coordinates form a square in which being inside this square you are "inside a cut alcove"
 ; these are checked directly in their map scripts and the cut trees are removed in cases where you would get blocked from inside an alcove

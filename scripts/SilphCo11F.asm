@@ -415,6 +415,7 @@ SilphCo11FRocket2AfterBattleText:
 	text_far _SilphCo11FRocket2AfterBattleText
 	text_end
 
+; PureRGBnote: CHANGED: this text was unused, now it's used.
 SilphCo11FPorygonText:
 	text_asm
 	ld a, [wSpritePlayerStateData1FacingDirection]

@@ -67,4 +67,4 @@ TrainerClassMoveChoiceModifications:
 	assert_list_length NUM_TRAINERS
 
 ChampArenaGenericMoveChoices:
-	move_choices 1, 2, 3, 4 ; used to make all the champ arena challengers have strong AI without changing their initial encounter ones.
+	move_choices 1, 2, 3, 4 ; PureRGBnote: ADDED: used to make all the champ arena challengers have strong AI without changing their initial encounter ones.

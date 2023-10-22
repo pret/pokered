@@ -27,6 +27,7 @@ DisplayElevatorFloorMenu:
 	ld b, a
 	ld a, [hl]
 	ld c, a
+;;;;;;;;;; PureRGBnote: CHANGED: elevators will tell you if you selected the floor you are currently on and will track how far you will travel
 	ld a, [wWarpedFromWhichMap] ; map you were on before entering the elevator
 	cp c
 	jr z, .alreadyOnThatFloor
@@ -50,11 +51,12 @@ DisplayElevatorFloorMenu:
 	pop bc
 	ld hl, wCurrentMapScriptFlags
 	set 7, [hl]
+;;;;;;;;;;
 	ld hl, wWarpEntries
 	call .UpdateWarp ; update first warp
 	call .UpdateWarp ; update second warp
 	; destination map ID still loaded
-	; update the "map ID we came from" variable so the above usage of this variable thinks are now on the new floor
+	; PureRGBnote: ADDED: update the "map ID we came from" variable so the above usage of this variable thinks are now on the new floor
 	ld [wWarpedFromWhichMap], a
 .done
 	xor a

@@ -831,6 +831,7 @@ ItemUseBicycle:
 	jp z, PlayDefaultMusic
 	ld d, 1
 	jpfar TryPlayExtraMusic
+;;;;;;;;;; PureRGBnote: ADDED: small sound effects for getting on/off bike
 .playGetOnBikeSound
 	ld a, SFX_PRESS_AB
 	rst _PlaySound
@@ -859,6 +860,7 @@ ItemUseBicycle:
 .overwrite5
 	ld hl, wChannelCommandPointers + CHAN5 * 2
 	jr .overwrite
+;;;;;;;;;;
 
 ; used for Surf out-of-battle effect
 ItemUseSurfboard:
@@ -1792,6 +1794,7 @@ ThrewRockText:
 	text_far _ThrewRockText
 	text_end
 
+;;;;;;;;;; PureRGBnote: CHANGED: this was separated off into a separate function for reusability
 IsEscapeRopeUsable:
 	ld a, [wIsInBattle]
 	and a
@@ -1813,6 +1816,7 @@ IsEscapeRopeUsable:
 .notUsable
 	xor a
 	ret
+;;;;;;;;;;
 
 ; also used for Dig out-of-battle effect
 ItemUseEscapeRope:

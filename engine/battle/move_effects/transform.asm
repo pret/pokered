@@ -136,10 +136,12 @@ TransformEffect_:
 	ld hl, wEnemyMonStatMods
 	ld de, wPlayerMonStatMods
 	call .copyBasedOnTurn8 ; stat mods
+;;;;;;;;;; PureRGBnote: ADDED: base stats will be copied over to keep track of them for various purposes.
 	ld hl, wEnemyMonBaseAttack ; skip HP stat which stays the same when transforming
 	ld de, wPlayerMonBaseAttack
 	ld bc, 4
 	call .copyBasedOnTurn ; base stats
+;;;;;;;;;;
 	ld hl, TransformedText
 	jp PrintText
 

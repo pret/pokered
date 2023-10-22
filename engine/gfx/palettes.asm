@@ -304,6 +304,7 @@ GetOverworldPalette:
 	ld a, PAL_MEWMON - 1
 	jr .town
 .diamond_mine
+; PureRGBnote: ADDED: in the diamond mine area, we use a different palette depending on where you are in the map.
 	ld a, [wXCoord]
 	cp 10
 	ld a, PAL_CAVE - 1
@@ -451,6 +452,7 @@ DeterminePaletteIDOutOfBattle:
 ;;;;;;;;;;
 	ld a, [hl]
 	ret
+;;;;;;;;;; PureRGBnote: ADDED: hardened onix has a hardcoded palette
 .hardened_onix
 	ld a, [wIsAltPalettePkmn]
 	and a
@@ -467,6 +469,7 @@ DeterminePaletteIDOutOfBattle:
 	ld [wIsAltPalettePkmn], a ; always reset this value after displaying a pokemon sprite
 	pop af
 	ret
+;;;;;;;;;;
 
 InitPartyMenuBlkPacket:
 	ld hl, BlkPacket_PartyMenu

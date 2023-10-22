@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: code for remapping typings of pokenon to their original ones if desired.
+
 OriginalTypings:
 db BUTTERFREE, BUG, FLYING
 db FEAROW, NORMAL, FLYING

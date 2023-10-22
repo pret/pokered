@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: new area with a guy who can remap typings back to their original ones.
+
 TypeGuysHouse_Script:
 	call TypeGuysHouseCheckTurnOffLights
 	jp EnableAutoTextBoxDrawing

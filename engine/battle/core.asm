@@ -978,12 +978,14 @@ ReplaceFaintedEnemyMon:
 
 TrainerBattleVictory:
 	call EndLowHealthAlarm
+;;;;;;;;;; PureRGBnote: ADDED: if you have OG+ music turned on, female trainers have a different beta victory theme
 	ld a, [wOptions2]
 	bit BIT_MUSIC, a
 	jr z, .skipFemaleTrainerCheck
 	callfar IsFemaleTrainer
 	jr c, .battlevictoryguide
 .skipFemaleTrainerCheck
+;;;;;;;;;;
 	CheckFlag FLAG_ALTERNATE_BATTLE_WIN_THEME
 	jr nz, .specialWinMusic
 	ld b, MUSIC_DEFEATED_GYM_LEADER
@@ -4277,6 +4279,8 @@ IgnoredOrdersText:
 	text_far _IgnoredOrdersText
 	text_end
 
+; PureRGBnote: CHANGED: ghost type is a dynamic type, can be special damage if your special base stat is higher than physical attack,
+; otherwise it will be physical damage
 DynamicTypeCheckPlayer:
 	ld a, [wPlayerMonBaseSpecial]
 	ld b, a
@@ -4402,6 +4406,8 @@ GetDamageVarsForPlayerAttack:
 	and a
 	ret
 
+; PureRGBnote: CHANGED: ghost type is a dynamic type, can be special damage if your special base stat is higher than physical attack,
+; otherwise it will be physical damage
 DynamicTypeCheckEnemy:
 	ld a, [wEnemyMonBaseSpecial]
 	ld b, a
@@ -6471,11 +6477,13 @@ LoadEnemyMonData:
 	ld a, [hli]
 	ld b, [hl]
 	jr nz, .storeDVs
+;;;;;;;;;; PureRGBnote: ADDED: trainers in battles in the champ arena will have maxed out DVs.
 	ld a, [wCurMap]
 	cp CHAMP_ARENA
 	ld a, $FF ; max DVs
 	ld b, a
-	jr z, .storeDVs ; trainers in battles in the champ arena will have maxed out DVs.
+	jr z, .storeDVs
+;;;;;;;;;;
 	ld a, [wIsInBattle]
 	cp $2 ; is it a trainer battle?
 ; fixed DVs for trainer mon
@@ -7420,7 +7428,7 @@ InitWildBattle:
 
 ; common code that executes after init battle code specific to trainer or wild battles
 _InitBattleCommon:
-	callfar GBCSetCPU1xSpeed	;deactivate gbc 2x cpu speed during battle as it causes visual bugs
+	callfar GBCSetCPU1xSpeed	; shinpokerednote: ADDED: deactivate gbc 2x cpu speed during battle as it causes visual bugs
 	ld b, SET_PAL_BATTLE_BLACK
 	call RunPaletteCommand
 	call SlidePlayerAndEnemySilhouettesOnScreen

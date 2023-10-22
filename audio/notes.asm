@@ -12,6 +12,7 @@
 	dw $FB58 ; A_
 	dw $FB9B ; A#
 	dw $FBDA ; B_
+;;;;;;;;;; PureRGBnote: ADDED: additional frequencies to allow for a wider range of notes when doing transpositions
 	dw $fc16 ; C_
 	dw $fc4e ; C#
 	dw $fc83 ; D_
@@ -24,4 +25,5 @@
 	dw $fdac ; A_
 	dw $fdcd ; A#
 	dw $fded ; B_
+;;;;;;;;;;
 	assert_table_length NUM_NOTES * 2

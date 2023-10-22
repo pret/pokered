@@ -71,6 +71,7 @@ ReadTrainer:
 .SpecialTrainer
 	call .SpecialTrainerLoop
 	jr .AddLoneMove
+;;;;;;;;;; PureRGBnote: ADDED: code that facilitates assigning custom moves to pokemon
 .CustomMovesetTrainer
 	ld a, [hli] ; which moveset will be used
 	push af
@@ -79,6 +80,7 @@ ReadTrainer:
 	ld d, a
 	callfar LoadTrainerMoveSet
 	jr .FinishUp
+;;;;;;;;;;
 .SpecialTrainerLoop
 ; if this code is being run:
 ; - each pokemon has a specific level stored in the first byte

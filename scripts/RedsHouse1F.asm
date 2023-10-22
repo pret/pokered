@@ -244,6 +244,7 @@ MomHealPokemonImmediate:
 	call StopAllMusic
 	predef HealParty
 	call HealPokemonSound
+;;;;;;;;;; PureRGBnote: ADDED: if you have OG+ music turned on, a beta healing theme will play at your house.
 	ld a, [wOptions2]
 	bit BIT_MUSIC, a
 	jr z, WaitForHealingSoundToFinish
@@ -267,7 +268,8 @@ MomHealPokemonImmediate:
 	ld a, BANK(Music_RestPallet)
 	ld [wSpecialMusicBank], a
 	call WaitForHealingSoundToFinish
-	jp PlayDefaultMusic	
+	jp PlayDefaultMusic
+;;;;;;;;;;
 
 HealPokemonSound:
 	ld a, MUSIC_PKMN_HEALED

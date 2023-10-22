@@ -1,3 +1,4 @@
+; PureRGBnote: ADDED: code to allow customized list menus that don't need item slots for each thing in the list.
 CustomListMenuTextMethods:
 	dw GetMonNameListMenu
 	dw GetTrainerNameListMenu

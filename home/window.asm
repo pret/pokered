@@ -193,11 +193,11 @@ PlaceMenuCursor::
 	ld [wLastMenuItem], a
 	ret
 
-; PureRGBnote: ADDED: function for displaying the move contained within a TM when scrolling over it in lists.
+; PureRGBnote: ADDED: function for displaying text while hovering on a list menu entry.
 CheckForHoverText::
 	ld a, [wListMenuHoverTextType]
 	and a
-	ret z
+	ret z ; if wListMenuHoverTextType is 0, we aren't in a list menu containing hover text.
 	; This func is in bank1, not home bank, but we'll only ever reach this code while bank1 is loaded due to how list menus behave
 	; keep in mind we only need to display TM names in a list menu, other menu types never need to
 	jp CheckLoadHoverText 
