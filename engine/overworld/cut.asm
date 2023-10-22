@@ -27,7 +27,10 @@ UsedCut:
 
 .canCut
 	ld [wCutTile], a
-	callfar CheckSetCutEvents
+	cp $52 ; grass
+	jr z, .noSetCutEvents
+	callfar CheckSetCutEvents ; PureRGBnote: ADDED: code that helps prevent softlocks by keeping trees cut down in some scenarios.
+.noSetCutEvents
 	ld a, 1
 	ld [wActionResultOrTookBattleTurn], a ; used cut
 	ld a, [wWhichPokemon]
