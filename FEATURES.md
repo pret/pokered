@@ -39,6 +39,7 @@ The second page contains new big features related to general gameplay.
   - The third option, `MUSIC` will enable or disable new music tracks in the game. (Default: OG) Set it to OG+ to play new music tracks when they are meant to be played. At the moment it controls only one or two minor tracks, such as Giovanni's Theme. (unused music from Pokemon Yellow's code) More music will likely be added in the future.
   - The fourth option, `AUDIO PAN` will enable or disable stereo audio panning (Default: OFF). The game uses stereo audio by default, but every channel is played at equal volume throughout the right and left speaker, so it sounds like mono. With this turned on the game music sounds a bit more dynamic by panning certain channels to left or right. This was an option in Pokemon Yellow that was ported to this romhack.
   - The fifth option, `BIKE SONG` will enable or disable the music that plays while on the bicycle (Default: ON). Since the bicycle music plays 100% of the time you are using the bicycle, it gets a bit old after a while. If turned off, the only time you'll hear the music is in Cycling Road. This way you can enjoy all the music in the game, not just the bicycle song.
+  - The sixth option, `GBC FADE` will enable or disable smoother fade animations on the GBC. (Default: OFF) Fade animations will be a lot smoother in framerate. Like when you enter a building or fly to another town. This feature only works on GBC.
 
 
 
@@ -51,6 +52,7 @@ The third page contains settings related to battles.
   
    ![Exp bar](screenshots/exp_bar.png?raw=true)
   - The sixth option, `NPC EVs` enables or disables giving opponent trainer pokemon Stat EXP based on their pokemon's level. (Default: OFF) In the original game, they receive 0 stat EXP regardless of the level of their pokemon. This means if the player has a lot of stat EXP, they will totally outclass similar-level trainer pokemon. Turning this feature on will give trainer pokemon stat EXP scaled with their level to a reasonable degree. This makes the game a bit harder but can be fun for more experienced players.
+  - The seventh option `NPC PP` enables or disables tracking of PP for opponents. (Default: OFF) In the original game, opponents have infinite PP on their moves. Turning this on means they can run out of PP if they use some moves too many times. Makes the game a bit easier. But it might be good for later on in the game when recovery moves are more common.
 
 The fourth page contains Sprite-related options. 
  
@@ -315,8 +317,8 @@ The fourth page contains Sprite-related options.
   - FURY SWIPES is now DUST CLAW - 40 base power, ground type, no additional effect, 100% accuracy (early-game ground type move) (Inspired by the numerous cut content physical moves)
 - Some moves that were fairly useless were made less useless
   - WHIRLWIND - 110 base power, flying type, 30% chance of confusion, 85% accuracy
-  - WITHDRAW - heals 1/2 max HP
-  - GROWTH - heals 1/2 max HP
+  - WITHDRAW - heals around 1/3 max HP and raises DEFENSE. Doesn't do anything if you have full health.
+  - GROWTH - heals around 1/3 max HP and raises SPECIAL. Doesn't do anything if you have full health.
   - DEFENSE CURL - acts like LIGHT SCREEN, increases special defense
   - MEDITATE - raises all of attack, speed, and special by 1 stage
   - SUBMISSION - 60 base power, fighting type, raises attack by 1 stage, 100% accuracy
@@ -343,7 +345,8 @@ The fourth page contains Sprite-related options.
 - There are many more tweaks to moves. Check your MOVEDEX in game to see what a move you just saw's effects were, or see the wiki for a link to the complete move list. Be sure to try almost every move and don't write them off. Except for splash. It still does nothing as usual.
 
 ## Pokemon type changes
-These changes were all made to make the pokemon more fun to use / more unique from similar pokemon / less bad
+These changes were all made to make the pokemon more fun to use / more unique from similar pokemon / less bad.
+An NPC in a house in indigo plateau route 23 (past the first guard) can customize which pokemon use new types or their original types if you don't like these changes.
 - Ninetales is Fire/Ghost
 - Golduck is Water/Psychic
 - Seadra is Water/Dragon
@@ -362,6 +365,8 @@ These changes were all made to make the pokemon more fun to use / more unique fr
 - Goldeen and Seaking are now Water/Normal
 - Victreebel is Grass/Dragon
 - Magmar is Fire/Psychic
+
+Additionally, GHOST type was made a "Dynamic type". What this means, is it can do Physical or Special damage depending on your base SPECIAL and base ATTACK. If base SPECIAL is higher than base ATTACK for your pokemon, GHOST type moves will be use SPECIAL for damage calculation. Otherwise, they will use ATTACK and the opponent's DEFENSE for damage calculation. This lets pokemon like Gengar be a bit more useful while also allowing physical attacker pokemon to benefit from physical damage on ghost attacks.
 
 ## Trainer AI changes
 - AI won't spam agility or amnesia repeatedly just because your pokemon is weak to psychic moves. The subroutine for selecting super effective moves ignores moves that do no damage now.
