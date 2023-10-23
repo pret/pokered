@@ -227,7 +227,7 @@ The fourth page contains Sprite-related options.
 
 - After helping the prospector, you can find him at his house in Celadon. If you talk to him there after obtaining HM02, he will teach you how to use DIG to go between towns similar to the way you do with FLY.
 
-![prospectors house](/screenshots/prospectors_house.png?raw=true) 
+![prospectors house](/screenshots/prospector's_house.png?raw=true) 
 
 - A secret stairway opens up in a building somewhere after you become champ. The last in-game trade and some interesting stuff to see is in there. 
 
