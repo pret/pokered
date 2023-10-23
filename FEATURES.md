@@ -95,13 +95,14 @@ The fourth page contains Sprite-related options.
 
 ![Box change](/screenshots/change_box_from_start_menu.png?raw=true)
 - When viewing Bills PC, it'll always tell you how many pokemon are in the current box
-- The responsiveness of Bills PC and Player's PC was improved.
+- The responsiveness of Bills PC and Player's PC was improved. It'll also kick you out of its menus less.
 - The game will tell you how many slots are left in your box after catching a pokemon, and when the box is full.
 - When scrolling over TMs/HMs in menus, a textbox will display the move they teach automatically! Hooray!
 
 ![TM Text](/screenshots/tm_text_box_prompt.png?raw=true)
 - On any list that has scrolling (items menu, PC menus, elevator menus, etc.) you can skip to the bottom of the list from the top of the list and vice-versa by pressing LEFT on the D-PAD. Very convenient!
 - You can increase/decrease item buy/sell amounts by a factor of 10 by pressing left and right in the menu when choosing the amount.
+- Most menus will be better at remembering your place in the list when you do certain actions
 - After fishing, the game will remember you just used a fishing rod and will save your menu position to easily re-use it.
 - Itemfinder will turn you to face the direction of the item when one is nearby.
 - Low health alarm plays 3 times then stops instead of ringing incessantly in battles when you're at low health.
@@ -116,7 +117,9 @@ The fourth page contains Sprite-related options.
 - The Name Rater will always be willing to rename pokemon, regardless of if you received them via trading. Is he going soft?
 - When selecting where to Fly to on the map, there is no longer needless forced delay between each selection.
 - The game now always reports the correct "Super Effective!" "Not Very Effective" etc. message when battling. No more tricks!
-- HMs are deletable. Try not to delete them in a place where it will prevent you from leaving.
+- HMs are deletable. Deleting them in the wrong place shouldn't get you softlocked ever, code was introduced to avoid this.
+- When teaching a move via TM, there is less text to mash through.
+- When a pokemon tries to learn a new move, you can permanently skip the "X already has 4 moves, forget one to learn a new one?" question by selecting "HIDE" instead of "YES" or "NO".
 - When teaching a pokemon a move and selecting a move to forget, you must press START to select the move to forget instead of A. Now you won't accidentally select the wrong one disastrously!
 - When releasing a pokemon, you must press START to confirm releasing it. Helps avoid accidentally releasing pokemon.
 - Spin tiles in rocket hideout and viridian gym move you much faster
@@ -143,6 +146,7 @@ The fourth page contains Sprite-related options.
 - Fuchsia City's layout has been modified very slightly to be less annoying to navigate.
 - The Daycare has a PC in it.
 - Route 23 has some grass just after the north exit of Victory Road to allow reaching those encounters more easily late game.
+- Elevators will tell you when you select the floor you're already on.
 - Some pokemon evolve at earlier levels
 - Many pokemon have better base stats. You can view base stats by checking the pokedex entry after catching the pokemon. Or, see the wiki for the full data.
 - Many pokemon have better learnsets than before. See the wiki for the data.
@@ -244,6 +248,9 @@ The fourth page contains Sprite-related options.
 
 ![Pokeball Color](/screenshots/great_ball_color.png?raw=true)
 - Many move animations were enhanced.
+- FLY's overworld animation has a higher framerate and looks a lot smoother.
+- A new animation was added for when you use DIG in the overworld.
+- The game supports smoother fading when doing fade animations if you turn on GBC FADE in the options. This option only works on GBC.
 - Using SGB1 colors, pewter's palette is slightly greyer than the original game.
 - Using any of SGB1, SGB2, or GBC colors, seafoam island is bluish purple instead of the same color as every other cave in the game.
 - Using any of SGB1, SGB2, or GBC colors, the Power Plant is a pale color instead of the same green + blue color as every grass route in the game.
@@ -253,6 +260,7 @@ The fourth page contains Sprite-related options.
 - A couple of front sprites were tweaked very slightly to improve their appearance
 - Some pokemon had their default color palette adjusted (example: Voltorb and Electrode are red instead of the original yellow. Don't ask me why they were yellow in the first place)
 - You can see "the side of the building" visually from Celadon Department Store roof and Celadon Mansion roof.
+- Elevators will shake for longer or shorter depending on how far away the floor you selected was.
 
 ## Bugfixes
 - High Jump Kick / Jump Kick crash damage on missing does more damage instead of 1 damage always now. (1/4 the damage of what it would have done to the opponent)
@@ -279,6 +287,13 @@ The fourth page contains Sprite-related options.
 - Lagginess caused by tile block replacements when loading a map was reduced greatly
 - Sound effects during text will play properly now when you have instant text setting turned on
 - You won't occasionally see a tile block being replaced visually on loading a map anymore
+- Using substitute with exactly the right health to use substitute won't cause your pokemon to faint. Instead you will have 1HP left.
+- The screen won't flash white for 1 frame on entering a battle or a building on original gameboy or on GBC.
+- Pokeflute will correctly detect sleeping wild pokemon when used in battle.
+- On original gameboy, while scrolling the trainer pics across at the start of the battle, they will be silhouettes like on SGB or GBC.
+- Route 17 sign can now be read from below.
+- Can't get blocked by the burglar on Pokemon Mansion 3F
+- If all your pokemon are fainted except for the current one, SHIFT mode won't ask you if you want to switch pokemon before the opponent sends out their next pokemon.
 
 ## Tweaks
 - Trainers in general have a bit less type-specific parties and more varied pokemon. 
@@ -303,6 +318,7 @@ The fourth page contains Sprite-related options.
 - Coastal water tiles will now load water encounters EXCEPT on route 20 to facilitate the original Missingno Encounter method.
 - The "star shaped grass" tile in viridian forest and the safari zone now loads encounters correctly.
 - Every badge will raise the level traded pokemon will obey you by 10 up until the marshbadge, instead of by 20 levels every 2 badges. The badge explanation text is unchanged, however. This is just for easier usage of in-game traded pokemon during a normal playthrough.
+- Unused text about Porygon was added to the computer monitor on Silph Co 11F.
 
 ## Move changes
 - Disable disables the previously selected move of the opponent. If they haven't selected a move yet, it chooses a random move. It has 85% accuracy. It lasts 2-7 turns.
@@ -369,6 +385,7 @@ An NPC in a house in indigo plateau route 23 (past the first guard) can customiz
 Additionally, GHOST type was made a "Dynamic type". What this means, is it can do Physical or Special damage depending on your base SPECIAL and base ATTACK. If base SPECIAL is higher than base ATTACK for your pokemon, GHOST type moves will be use SPECIAL for damage calculation. Otherwise, they will use ATTACK and the opponent's DEFENSE for damage calculation. This lets pokemon like Gengar be a bit more useful while also allowing physical attacker pokemon to benefit from physical damage on ghost attacks.
 
 ## Trainer AI changes
+- Opponents can have tracked PP if you turn on NPC PP in the game options
 - AI won't spam agility or amnesia repeatedly just because your pokemon is weak to psychic moves. The subroutine for selecting super effective moves ignores moves that do no damage now.
 - Similarly, AI will avoid using OHKO moves just because they seem super effective if they would never work. But it will use them if they have a chance of working on you.
 - AI using items or switching pokemon will always go at the start of the turn like it does for the player instead of when their turn starts
@@ -376,11 +393,14 @@ Additionally, GHOST type was made a "Dynamic type". What this means, is it can d
 - Most Trainers will avoid using Leech Seed, Disable, Light Screen, Reflect, Focus Energy, Mist, etc effects if they already used it and it would not do anything
 - Most Trainers will avoid using confusion-inflicting moves if you're already confused
 - Most Trainers will avoid using healing moves like recover at full health
+- Most trainers will avoid using priority moves if you're invulnerable due to FLY or DIG
 - Smarter trainers will favor using priority moves if you're faster than them
 - Smarter trainers will favor using draining moves like Mega Drain when they're at low health
+- Smarter trainers will use MIRROR MOVE if it results in a move that is super effective
 - Expert trainers will favor using healing moves like recover when they're at low health
 - Expert trainers will heavily favor using dream eater if you're asleep
 - Expert trainers will try to apply statuses if you don't have one
+- Trainers that can use boosting items like X Attack will only do so if it appears safe to use it.
 
 ## Audio Changes
 - The ghosts in pokemon tower now have a sound effect on encountering
@@ -388,6 +408,10 @@ Additionally, GHOST type was made a "Dynamic type". What this means, is it can d
 - Pushing a boulder down a hole in Seafoam / Victory road has a sound and feedback with it now
 - When you fall down a hole in Seafoam / Victory road, there is a sound effect with it now
 - Giovanni's Theme (unused music from Pokemon Yellow) was added when you encounter Giovanni. You must set MUSIC option to OG+ for it to play.
+- Beta victory theme (battle victory "guide") was added when you defeat female trainers. You must set MUSIC option to OG+ for it to play.
+- Beta healing theme (healing theme "pallet town") was added when you rest at your house in PALLET TOWN. You must set MUSIC option to OG+ for it to play.
+- A small sound effect was added when you toss an item.
+- A small sound effect plays when you get on or off your bicycle, but only if you have the option BIKE SONG set to OFF.
 
 ## Pokemon Green visuals
 The version-specific visuals of japanese pokemon green were added into PureGreen.
