@@ -175,6 +175,10 @@ The fourth page contains Sprite-related options.
   - `BOOSTER CHIP`: Replaces `EXP.ALL` - Oak's aide on Route 15 will give you this if you catch at least 80 pokemon. When you install it to your pokeball belt, all your pokemon will gain boosted EXP as if they were traded pokemon! Great for training up pokemon when you're trying to catch them all.
   - `APEX CHIP`: The Gym Guide's creation! It maximizes DVs (also known as IVs) when installed. The Gym Guide will give you 2 of them after you beat each gym leader. Inside a pokemon's pokeball, this chip will simulate their natural habitat, helping them be happy and achieve their maximum potential! 
   - `HYPER BALL`: As discussed above, a new type of Poke Ball that never fails to catch pokemon if they're below 1/3 health. For many non-legendary pokemon, it will never fail even at full health! You might want to save these for legendaries because they're a bit hard to come by.
+ 
+- An entirely new area was added in Indigo Plateau. After becoming champ you can talk to the woman in the top left of the indigo plateau lobby to enter the Champ Arena. In the Champ Arena you can battle all the gym leaders and elite four in rematches. Also some fun animations and sequences while doing it. Opponents in the Champ Arena have perfect IVs...so make sure to use APEX CHIPs on all your team! They also have custom movesets for all their pokemon, and the highest level of AI, so be ready. You can choose from many different audio tracks to play while battling all these opponents. Initially you face the opponents in a set order. After defeating all of them you can choose who you battle. They will be even stronger the second time you fight them!
+
+   ![Champ Arena](/screenshots/champ_arena.png?raw=true)
 
 - The "TM Pirate" is a kid who appears in most PokeMarts who will sell you TMs! It's just a fun way of adding more purchasable TMs to the game. 
 
@@ -195,6 +199,10 @@ The fourth page contains Sprite-related options.
 - If you have Alt Palette Pkmn option turned on, at the Cinnabar Lab there is an NPC who will allow you to swap the color palette of your pokemon for its alternate palette. You have a limited number of color change usages!
 
  ![Lab color changer NPC](/screenshots/color_changer_npc.png?raw=true)
+
+- Past the first guard in indigo plateau you can find a door to a guy's house who lives on Route 23. He can change Pokemon typings back to their original ones if you want. You can choose exactly which pokemon use their new typings or original typings.
+
+ ![Type Guys House](/screenshots/type_guys_house.png?raw=true)
  
 - A new area was added in the basement of the Viridian Schoolhouse. Acts as a sort of help area in the early game, with more info about basic stuff in the game like stats, type matchups, STAB, etc. It's also where you unlock the MOVEDEX feature.
 
@@ -212,6 +220,14 @@ The fourth page contains Sprite-related options.
 - After saving Mr.Fuji in the Pokemon Tower, you can get into the basement of the Tower. You'll find a Channeler clothed in black who just loves curses, hexes, and all that dark stuff. If you show them a GENGAR, they'll curse it to look like a HAUNTER again. Its stats won't be affected though. It'll still have GENGAR's stats. Such a powerful curse!
 
 ![dark channeler](/screenshots/dark_channeler.png?raw=true)
+
+- On Route 8 you can find a new small cave housing a prospector digging for diamonds. If you help him, he will enhance your ONIX to be stronger. Its base stats will be boosted and it will take less damage from WATER, ICE, and GRASS type moves.
+
+![diamond mine](/screenshots/diamond_mine.png?raw=true)
+
+- After helping the prospector, you can find him at his house in Celadon. If you talk to him there after obtaining HM02, he will teach you how to use DIG to go between towns similar to the way you do with FLY.
+
+![prospectors house](/screenshots/prospector's_house.png?raw=true) 
 
 - A secret stairway opens up in a building somewhere after you become champ. The last in-game trade and some interesting stuff to see is in there. 
 
