@@ -1,6 +1,6 @@
 	object_const_def
-	const ROUTE7_GAMBLER1
-	const ROUTE7_GAMBLER2
+	const_export ROUTE7_GAMBLER1
+	const_export ROUTE7_GAMBLER2
 
 Route7_Object:
 	db $f ; border block

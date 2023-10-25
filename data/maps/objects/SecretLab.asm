@@ -1,7 +1,7 @@
 	object_const_def
-	const SECRETLAB_SOLDIER1
-	const SECRETLAB_SOLDIER2
-	const SECRETLAB_CHIEF
+	const_export SECRETLAB_SOLDIER1
+	const_export SECRETLAB_SOLDIER2
+	const_export SECRETLAB_CHIEF
 
 SecretLab_Object:
 	db 1 ; border block

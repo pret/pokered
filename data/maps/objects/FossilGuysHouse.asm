@@ -1,8 +1,8 @@
 	object_const_def
-	const FOSSILGUYSHOUSE_FOSSIL_GUY
-	const FOSSILGUYSHOUSE_MEOWTH
-	const FOSSILGUYSHOUSE_PAPER
-	const FOSSILGUYSHOUSE_ROCK
+	const_export FOSSILGUYSHOUSE_FOSSIL_GUY
+	const_export FOSSILGUYSHOUSE_MEOWTH
+	const_export FOSSILGUYSHOUSE_PAPER
+	const_export FOSSILGUYSHOUSE_ROCK
 
 FossilGuysHouse_Object:
 	db $d ; border block

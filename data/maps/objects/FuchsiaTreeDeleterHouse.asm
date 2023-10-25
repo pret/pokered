@@ -1,6 +1,6 @@
 	object_const_def
-	const FUCHSIATREEDELETERHOUSE_TREE_DELETER
-	const FUCHSIATREEDELETERHOUSE_SNORLAX
+	const_export FUCHSIATREEDELETERHOUSE_TREE_DELETER
+	const_export FUCHSIATREEDELETERHOUSE_SNORLAX
 
 FuchsiaTreeDeleterHouse_Object:
 	db $a ; border block

@@ -1,6 +1,6 @@
 	object_const_def
-	const CERULEANROCKETHOUSEB1F_ROCKET
-	const CERULEANROCKETHOUSEB1F_ITEM1
+	const_export CERULEANROCKETHOUSEB1F_ROCKET
+	const_export CERULEANROCKETHOUSEB1F_ITEM1
 
 CeruleanRocketHouseB1F_Object:
 	db $17 ; border block

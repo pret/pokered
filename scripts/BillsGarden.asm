@@ -68,7 +68,7 @@ BillsGardenScript0:
 	ld a, [wBillsGardenVisitor]
 	cp 5
 	ret z ; no overheard for mom/dad
-	ld a, 4
+	ld a, TEXT_BILLS_GARDEN_OVERHEARD
 	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
@@ -182,7 +182,7 @@ BillsGarden_NPCSets:
 	db BANK(MomSprite)
 	db SPRITE_MOM
 
-BillsGarden_SpriteRewrites:
+BillsGarden_SpriteRewrites: ; TODO: remove?
 	db 2, 1, BANK(BrunetteGirlSprite)
 	dw BrunetteGirlSprite
 	db -1
@@ -204,11 +204,14 @@ DoSpriteFacing:
   	call SetSpriteFacingDirection
   	jp UpdateSprites
 
+
+
 BillsGarden_TextPointers:
-	dw BillsGardenLeftNPCText
-	dw BillsGardenRightNPCText
-	dw BillsGardenSignText
-	dw BillsGardenOverheardText
+	def_text_pointers
+	dw_const BillsGardenLeftNPCText,   TEXT_BILLS_GARDEN_VARIABLE_GUEST1
+	dw_const BillsGardenRightNPCText,  TEXT_BILLS_GARDEN_VARIABLE_GUEST2
+	dw_const BillsGardenSignText,      TEXT_BILLS_GARDEN_SIGN
+	dw_const BillsGardenOverheardText, TEXT_BILLS_GARDEN_OVERHEARD
 
 BillsGardenLeftNPCText:
 	text_asm
@@ -295,15 +298,15 @@ BillsGardenErikaText:
 	ld hl, BillsGardenErikaText2No
 	jr nz, .print
 	; make sabrina face left
-	ld a, 2
+	ld a, BILLS_GARDEN_VARIABLE_GUEST2
 	ld b, SPRITE_FACING_LEFT
 	call DoSpriteFacing
-	ld a, 1
+	ld a, BILLS_GARDEN_VARIABLE_GUEST1
 	ld b, SPRITE_FACING_RIGHT
 	call DoSpriteFacing
 	ld hl, BillsGardenErikaText2Yes
 	rst _PrintText
-	ld a, 1
+	ld a, BILLS_GARDEN_VARIABLE_GUEST1
 	ld b, SPRITE_FACING_DOWN
 	call DoSpriteFacing
 	ld hl, BillsGardenErikaText3
@@ -339,19 +342,19 @@ BillsGardenBlueText:
 	ld hl, BillsGardenBlueText1
 	rst _PrintText
 	; make daisy face down
-	ld a, 2
+	ld a, BILLS_GARDEN_VARIABLE_GUEST2
 	ld b, SPRITE_FACING_DOWN
 	call DoSpriteFacing
 	ld hl, BillsGardenBlueText2
 	rst _PrintText
 	; make blue face right
-	ld a, 1
+	ld a, BILLS_GARDEN_VARIABLE_GUEST1
 	ld b, SPRITE_FACING_RIGHT
 	call DoSpriteFacing
 	ld hl, BillsGardenBlueText3
 	rst _PrintText
 	; make blue face down again
-	ld a, 1
+	ld a, BILLS_GARDEN_VARIABLE_GUEST1
 	ld b, SPRITE_FACING_DOWN
 	call DoSpriteFacing
 	ld hl, BillsGardenBlueText4
@@ -395,7 +398,7 @@ BillsGardenDaisyText:
 	ld hl, BillsGardenDaisyText1
 	rst _PrintText
 	; make blue face right
-	ld a, 1
+	ld a, BILLS_GARDEN_VARIABLE_GUEST1
 	ld b, SPRITE_FACING_RIGHT
 	call DoSpriteFacing
 	ld hl, BillsGardenDaisyText2
@@ -424,13 +427,13 @@ BillsGardenMistyText:
 	ld hl, BillsGardenMistyText1
 	rst _PrintText
 	; make bike shop clerk face right
-	ld a, 1
+	ld a, BILLS_GARDEN_VARIABLE_GUEST1
 	ld b, SPRITE_FACING_RIGHT
 	call DoSpriteFacing
 	ld hl, BillsGardenMistyText2
 	rst _PrintText
 	; make misty face left
-	ld a, 2
+	ld a, BILLS_GARDEN_VARIABLE_GUEST2
 	ld b, SPRITE_FACING_LEFT
 	call DoSpriteFacing
 	ld hl, BillsGardenMistyText3
@@ -462,25 +465,25 @@ BillsGardenOakText:
 	ld hl, BillsGardenOakText1
 	rst _PrintText
 	; make agatha face right
-	ld a, 1
+	ld a, BILLS_GARDEN_VARIABLE_GUEST1
 	ld b, SPRITE_FACING_RIGHT
 	call DoSpriteFacing
 	ld hl, BillsGardenOakText2
 	rst _PrintText
 	; make oak face left
-	ld a, 2
+	ld a, BILLS_GARDEN_VARIABLE_GUEST2
 	ld b, SPRITE_FACING_LEFT
 	call DoSpriteFacing
 	ld hl, BillsGardenOakText3
 	rst _PrintText
 	; make oak face down
-	ld a, 2
+	ld a, BILLS_GARDEN_VARIABLE_GUEST2
 	ld b, SPRITE_FACING_DOWN
 	call DoSpriteFacing
 	ld hl, BillsGardenOakText4
 	rst _PrintText
 	; make agatha face left
-	ld a, 1
+	ld a, BILLS_GARDEN_VARIABLE_GUEST1
 	ld b, SPRITE_FACING_LEFT
 	call DoSpriteFacing
 	ld hl, BillsGardenOakText5
@@ -585,19 +588,19 @@ BillsGardenDadText:
 	ld [wMissableObjectIndex], a
 	predef ShowExtraObject
 	; make MOM face down
-	ld a, 2
+	ld a, BILLS_GARDEN_VARIABLE_GUEST2
 	ld b, SPRITE_FACING_DOWN
 	call DoSpriteFacing
 	ld hl, BillsGardenDadText1
 	rst _PrintText
 	; make MOM face left
-	ld a, 2
+	ld a, BILLS_GARDEN_VARIABLE_GUEST2
 	ld b, SPRITE_FACING_LEFT
 	call DoSpriteFacing
 	ld hl, BillsGardenDadText2
 	rst _PrintText
 	; make MOM face down
-	ld a, 2
+	ld a, BILLS_GARDEN_VARIABLE_GUEST2
 	ld b, SPRITE_FACING_DOWN
 	call DoSpriteFacing
 	ld hl, BillsGardenDadText3
@@ -646,7 +649,7 @@ BillsGardenDadText4:
 BillsGardenMomText:
 	text_asm
 	; make DAD face down
-	ld a, 1
+	ld a, BILLS_GARDEN_VARIABLE_GUEST1
 	ld b, SPRITE_FACING_DOWN
 	call DoSpriteFacing
 	ld hl, BillsGardenMomText1

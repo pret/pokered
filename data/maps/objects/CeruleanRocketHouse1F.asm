@@ -1,5 +1,5 @@
 	object_const_def
-	const CERULEANROCKETHOUSE1F_ROCKET
+	const_export CERULEANROCKETHOUSE1F_ROCKET
 
 CeruleanRocketHouse1F_Object:
 	db $a ; border block

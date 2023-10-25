@@ -1,6 +1,6 @@
 	object_const_def
-	const DIAMOND_MINE_PROSPECTOR
-	const DIAMOND_MINE_BOOMBOX
+	const_export DIAMOND_MINE_PROSPECTOR
+	const_export DIAMOND_MINE_BOOMBOX
 
 DiamondMine_Object:
 	db $03 ; border block

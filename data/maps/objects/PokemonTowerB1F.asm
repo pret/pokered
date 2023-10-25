@@ -1,5 +1,5 @@
 	object_const_def
-	const POKEMONTOWERB1F_DARK_CHANNELER
+	const_export POKEMONTOWERB1F_DARK_CHANNELER
 
 PokemonTowerB1F_Object:
 	db $1 ; border block

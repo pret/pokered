@@ -1,7 +1,5 @@
-; PureRGBnote: CHANGED: many maps had their objects (items, NPCs, maps) modified for new content
-
 	object_const_def
-	const TYPE_GUYS_HOUSE_TYPE_GUY
+	const_export TYPE_GUYS_HOUSE_TYPE_GUY
 
 TypeGuysHouse_Object:
 	db $0F ; border block

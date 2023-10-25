@@ -1,9 +1,9 @@
 	object_const_def
-	const ROUTE5_ROOKIE1
-	const ROUTE5_ROOKIE2
-	const ROUTE5_ROOKIE3
-	const ROUTE5_TAMER
-	const ROUTE5_ITEM1
+	const_export ROUTE5_ROOKIE1
+	const_export ROUTE5_ROOKIE2
+	const_export ROUTE5_ROOKIE3
+	const_export ROUTE5_TAMER
+	const_export ROUTE5_ITEM1
 
 Route5_Object:
 	db $a ; border block

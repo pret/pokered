@@ -1,5 +1,5 @@
 	object_const_def
-	const CELADONMANSIONROOF_ITEM1
+	const_export CELADONMANSIONROOF_ITEM1
 
 CeladonMansionRoof_Object:
 	db $9 ; border block
