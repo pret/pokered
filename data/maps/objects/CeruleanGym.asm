@@ -1,8 +1,8 @@
 	object_const_def
-	const CERULEANGYM_MISTY
-	const CERULEANGYM_COOLTRAINER_F
-	const CERULEANGYM_SWIMMER
-	const CERULEANGYM_GYM_GUIDE
+	const_export CERULEANGYM_MISTY
+	const_export CERULEANGYM_COOLTRAINER_F
+	const_export CERULEANGYM_SWIMMER
+	const_export CERULEANGYM_GYM_GUIDE
 
 CeruleanGym_Object:
 	db $3 ; border block

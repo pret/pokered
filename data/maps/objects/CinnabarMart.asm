@@ -1,8 +1,8 @@
 	object_const_def
-	const CINNABARMART_CLERK
-	const CINNABARMART_SILPH_WORKER_F
-	const CINNABARMART_SCIENTIST
-	const CINNABARMART_TM_KID
+	const_export CINNABARMART_CLERK
+	const_export CINNABARMART_SILPH_WORKER_F
+	const_export CINNABARMART_SCIENTIST
+	const_export CINNABARMART_TM_KID
 
 CinnabarMart_Object:
 	db $0 ; border block

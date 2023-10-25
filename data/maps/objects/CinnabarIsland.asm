@@ -1,6 +1,6 @@
 	object_const_def
-	const CINNABARISLAND_GIRL
-	const CINNABARISLAND_GAMBLER
+	const_export CINNABARISLAND_GIRL
+	const_export CINNABARISLAND_GAMBLER
 
 CinnabarIsland_Object:
 	db $43 ; border block

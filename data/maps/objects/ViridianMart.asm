@@ -1,8 +1,8 @@
 	object_const_def
-	const VIRIDIANMART_CLERK
-	const VIRIDIANMART_YOUNGSTER
-	const VIRIDIANMART_COOLTRAINER_M
-	const VIRIDIANMART_TM_KID
+	const_export VIRIDIANMART_CLERK
+	const_export VIRIDIANMART_YOUNGSTER
+	const_export VIRIDIANMART_COOLTRAINER_M
+	const_export VIRIDIANMART_TM_KID
 
 ViridianMart_Object:
 	db $0 ; border block

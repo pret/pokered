@@ -1,6 +1,6 @@
 	object_const_def
-	const CERULEANTRASHEDHOUSE_FISHING_GURU
-	const CERULEANTRASHEDHOUSE_GIRL
+	const_export CERULEANTRASHEDHOUSE_FISHING_GURU
+	const_export CERULEANTRASHEDHOUSE_GIRL
 
 CeruleanTrashedHouse_Object:
 	db $a ; border block

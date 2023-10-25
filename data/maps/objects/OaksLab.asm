@@ -1,15 +1,15 @@
 	object_const_def
-	const OAKSLAB_RIVAL
-	const OAKSLAB_CHARMANDER_POKE_BALL
-	const OAKSLAB_SQUIRTLE_POKE_BALL
-	const OAKSLAB_BULBASAUR_POKE_BALL
-	const OAKSLAB_OAK1
-	const OAKSLAB_POKEDEX1
-	const OAKSLAB_POKEDEX2
-	const OAKSLAB_OAK2
-	const OAKSLAB_GIRL
-	const OAKSLAB_SCIENTIST1
-	const OAKSLAB_SCIENTIST2
+	const_export OAKSLAB_RIVAL
+	const_export OAKSLAB_CHARMANDER_POKE_BALL
+	const_export OAKSLAB_SQUIRTLE_POKE_BALL
+	const_export OAKSLAB_BULBASAUR_POKE_BALL
+	const_export OAKSLAB_OAK1
+	const_export OAKSLAB_POKEDEX1
+	const_export OAKSLAB_POKEDEX2
+	const_export OAKSLAB_OAK2
+	const_export OAKSLAB_GIRL
+	const_export OAKSLAB_SCIENTIST1
+	const_export OAKSLAB_SCIENTIST2
 
 OaksLab_Object:
 	db $3 ; border block

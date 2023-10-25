@@ -1,5 +1,5 @@
 	object_const_def
-	const UNDERGROUNDPATHROUTE7_MIDDLE_AGED_MAN
+	const_export UNDERGROUNDPATHROUTE7_MIDDLE_AGED_MAN
 
 UndergroundPathRoute7_Object:
 	db $a ; border block

@@ -1,6 +1,6 @@
 	object_const_def
-	const ROUTE12SUPERRODHOUSE_FISHING_GURU
-	const ROUTE12SUPERRODHOUSE_FISHING_GUIDE
+	const_export ROUTE12SUPERRODHOUSE_FISHING_GURU
+	const_export ROUTE12SUPERRODHOUSE_FISHING_GUIDE
 
 Route12SuperRodHouse_Object:
 	db $a ; border block

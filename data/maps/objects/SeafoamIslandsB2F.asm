@@ -1,6 +1,6 @@
 	object_const_def
-	const SEAFOAMISLANDSB2F_BOULDER1
-	const SEAFOAMISLANDSB2F_BOULDER2
+	const_export SEAFOAMISLANDSB2F_BOULDER1
+	const_export SEAFOAMISLANDSB2F_BOULDER2
 
 SeafoamIslandsB2F_Object:
 	db $7d ; border block

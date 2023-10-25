@@ -1,10 +1,10 @@
 	object_const_def
-	const SILPHCO10F_ROCKET
-	const SILPHCO10F_SCIENTIST
-	const SILPHCO10F_SILPH_WORKER_F
-	const SILPHCO10F_ITEM1
-	const SILPHCO10F_ITEM2
-	const SILPHCO10F_ITEM3
+	const_export SILPHCO10F_ROCKET
+	const_export SILPHCO10F_SCIENTIST
+	const_export SILPHCO10F_SILPH_WORKER_F
+	const_export SILPHCO10F_ITEM1
+	const_export SILPHCO10F_ITEM2
+	const_export SILPHCO10F_ITEM3
 
 SilphCo10F_Object:
 	db $2e ; border block

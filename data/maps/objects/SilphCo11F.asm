@@ -1,9 +1,9 @@
 	object_const_def
-	const SILPHCO11F_SILPH_PRESIDENT
-	const SILPHCO11F_BEAUTY
-	const SILPHCO11F_GIOVANNI
-	const SILPHCO11F_ROCKET1
-	const SILPHCO11F_ROCKET2
+	const_export SILPHCO11F_SILPH_PRESIDENT
+	const_export SILPHCO11F_BEAUTY
+	const_export SILPHCO11F_GIOVANNI
+	const_export SILPHCO11F_ROCKET1
+	const_export SILPHCO11F_ROCKET2
 
 SilphCo11F_Object:
 	db $d ; border block

@@ -1,7 +1,7 @@
 	object_const_def
-	const BLUESHOUSE_DAISY_SITTING
-	const BLUESHOUSE_DAISY_WALKING
-	const BLUESHOUSE_TOWN_MAP
+	const_export BLUESHOUSE_DAISY_SITTING
+	const_export BLUESHOUSE_DAISY_WALKING
+	const_export BLUESHOUSE_TOWN_MAP
 
 BluesHouse_Object:
 	db $a ; border block

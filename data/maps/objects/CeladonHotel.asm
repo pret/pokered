@@ -1,9 +1,9 @@
 	object_const_def
-	const CELADONHOTEL_CHANNELER
-	const CELADONHOTEL_GRANNY
-	const CELADONHOTEL_BEAUTY
-	const CELADONHOTEL_SUPER_NERD
-	const CELADONHOTEL_LAPRAS_GUY
+	const_export CELADONHOTEL_CHANNELER
+	const_export CELADONHOTEL_GRANNY
+	const_export CELADONHOTEL_BEAUTY
+	const_export CELADONHOTEL_SUPER_NERD
+	const_export CELADONHOTEL_LAPRAS_GUY
 
 CeladonHotel_Object:
 	db $0 ; border block

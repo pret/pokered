@@ -1,6 +1,6 @@
 	object_const_def
-	const VIRIDIANFORESTSOUTHGATE_GIRL
-	const VIRIDIANFORESTSOUTHGATE_LITTLE_GIRL
+	const_export VIRIDIANFORESTSOUTHGATE_GIRL
+	const_export VIRIDIANFORESTSOUTHGATE_LITTLE_GIRL
 
 ViridianForestSouthGate_Object:
 	db $a ; border block

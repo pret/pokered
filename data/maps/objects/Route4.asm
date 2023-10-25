@@ -1,11 +1,11 @@
 	object_const_def
-	const ROUTE4_COOLTRAINER_F1
-	const ROUTE4_COOLTRAINER_F2
-	const ROUTE4_ROOKIE1
-	const ROUTE4_ROOKIE2
-	const ROUTE4_TAMER
-	const ROUTE4_ITEM1
-	const ROUTE4_ITEM2
+	const_export ROUTE4_COOLTRAINER_F1
+	const_export ROUTE4_COOLTRAINER_F2
+	const_export ROUTE4_ROOKIE1
+	const_export ROUTE4_ROOKIE2
+	const_export ROUTE4_TAMER
+	const_export ROUTE4_ITEM1
+	const_export ROUTE4_ITEM2
 
 Route4_Object:
 	db $2c ; border block

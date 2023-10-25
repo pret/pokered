@@ -1,6 +1,6 @@
 	object_const_def
-	const ROUTE1_YOUNGSTER1
-	const ROUTE1_YOUNGSTER2
+	const_export ROUTE1_YOUNGSTER1
+	const_export ROUTE1_YOUNGSTER2
 
 Route1_Object:
 	db $b ; border block

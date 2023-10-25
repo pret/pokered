@@ -1,7 +1,7 @@
 	object_const_def
-	const BILLSHOUSE_BILL_POKEMON
-	const BILLSHOUSE_BILL_SS_TICKET
-	const BILLSHOUSE_BILL_CHECK_OUT_MY_RARE_POKEMON
+	const_export BILLSHOUSE_BILL_POKEMON
+	const_export BILLSHOUSE_BILL_SS_TICKET
+	const_export BILLSHOUSE_BILL_CHECK_OUT_MY_RARE_POKEMON
 
 BillsHouse_Object:
 	db $d ; border block

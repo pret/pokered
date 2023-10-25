@@ -1,7 +1,7 @@
 	object_const_def
-	const CERULEANCAVE1F_ITEM1
-	const CERULEANCAVE1F_ITEM2
-	const CERULEANCAVE1F_ITEM3
+	const_export CERULEANCAVE1F_ITEM1
+	const_export CERULEANCAVE1F_ITEM2
+	const_export CERULEANCAVE1F_ITEM3
 
 CeruleanCave1F_Object:
 	db $7d ; border block

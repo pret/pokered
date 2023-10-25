@@ -1,8 +1,8 @@
 	object_const_def
-	const CERULEANCAVE2F_OAK
-	const CERULEANCAVE2F_ITEM1
-	const CERULEANCAVE2F_ITEM2
-	const CERULEANCAVE2F_ITEM3
+	const_export CERULEANCAVE2F_OAK
+	const_export CERULEANCAVE2F_ITEM1
+	const_export CERULEANCAVE2F_ITEM2
+	const_export CERULEANCAVE2F_ITEM3
 
 CeruleanCave2F_Object:
 	db $7d ; border block

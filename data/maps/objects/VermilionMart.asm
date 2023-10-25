@@ -1,8 +1,8 @@
 	object_const_def
-	const VERMILIONMART_CLERK
-	const VERMILIONMART_COOLTRAINER_M
-	const VERMILIONMART_COOLTRAINER_F
-	const VERMILIONMART_TM_KID
+	const_export VERMILIONMART_CLERK
+	const_export VERMILIONMART_COOLTRAINER_M
+	const_export VERMILIONMART_COOLTRAINER_F
+	const_export VERMILIONMART_TM_KID
 
 VermilionMart_Object:
 	db $0 ; border block

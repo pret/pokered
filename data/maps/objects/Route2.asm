@@ -1,10 +1,10 @@
 	object_const_def
-	const ROUTE2_BUG_CATCHER
-	const ROUTE2_JR_TRAINER_M
-	const ROUTE2_JR_TRAINER_F
-	const ROUTE2_ITEM1
-	const ROUTE2_ITEM2
-	const ROUTE2_ITEM3
+	const_export ROUTE2_BUG_CATCHER
+	const_export ROUTE2_JR_TRAINER_M
+	const_export ROUTE2_JR_TRAINER_F
+	const_export ROUTE2_ITEM1
+	const_export ROUTE2_ITEM2
+	const_export ROUTE2_ITEM3
 
 Route2_Object:
 	db $f ; border block

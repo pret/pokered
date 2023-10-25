@@ -1,7 +1,7 @@
 	object_const_def
-	const BIKESHOP_CLERK
-	const BIKESHOP_MIDDLE_AGED_WOMAN
-	const BIKESHOP_YOUNGSTER
+	const_export BIKESHOP_CLERK
+	const_export BIKESHOP_MIDDLE_AGED_WOMAN
+	const_export BIKESHOP_YOUNGSTER
 
 BikeShop_Object:
 	db $e ; border block

@@ -1,7 +1,7 @@
 ; PureRGBnote: CHANGED: many maps had their objects (items, NPCs, maps) modified for new content
 
 	object_const_def
-	const AGATHASROOM_AGATHA
+	const_export AGATHASROOM_AGATHA
 
 AgathasRoom_Object:
 	db $0 ; border block

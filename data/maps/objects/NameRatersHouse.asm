@@ -1,5 +1,5 @@
 	object_const_def
-	const NAMERATERSHOUSE_NAME_RATER
+	const_export NAMERATERSHOUSE_NAME_RATER
 
 NameRatersHouse_Object:
 	db $a ; border block

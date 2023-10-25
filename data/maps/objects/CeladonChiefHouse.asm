@@ -1,7 +1,7 @@
 	object_const_def
-	const CELADONCHIEFHOUSE_CHIEF
-	const CELADONCHIEFHOUSE_ROCKET
-	const CELADONCHIEFHOUSE_SAILOR
+	const_export CELADONCHIEFHOUSE_CHIEF
+	const_export CELADONCHIEFHOUSE_ROCKET
+	const_export CELADONCHIEFHOUSE_SAILOR
 
 CeladonChiefHouse_Object:
 	db $f ; border block

@@ -1,5 +1,5 @@
 	object_const_def
-	const LORELEISROOM_LORELEI
+	const_export LORELEISROOM_LORELEI
 
 LoreleisRoom_Object:
 	db $3 ; border block

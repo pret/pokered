@@ -1,8 +1,8 @@
 	object_const_def
-	const POKEMONTOWER7F_ROCKET1
-	const POKEMONTOWER7F_ROCKET2
-	const POKEMONTOWER7F_ROCKET3
-	const POKEMONTOWER7F_MR_FUJI
+	const_export POKEMONTOWER7F_ROCKET1
+	const_export POKEMONTOWER7F_ROCKET2
+	const_export POKEMONTOWER7F_ROCKET3
+	const_export POKEMONTOWER7F_MR_FUJI
 
 PokemonTower7F_Object:
 	db $1 ; border block

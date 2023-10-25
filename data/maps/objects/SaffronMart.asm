@@ -1,8 +1,8 @@
 	object_const_def
-	const SAFFRONMART_CLERK
-	const SAFFRONMART_SUPER_NERD
-	const SAFFRONMART_COOLTRAINER_F
-	const SAFFRONMART_TM_KID
+	const_export SAFFRONMART_CLERK
+	const_export SAFFRONMART_SUPER_NERD
+	const_export SAFFRONMART_COOLTRAINER_F
+	const_export SAFFRONMART_TM_KID
 
 SaffronMart_Object:
 	db $0 ; border block

@@ -1,5 +1,5 @@
 	object_const_def
-	const DAYCARE_GENTLEMAN
+	const_export DAYCARE_GENTLEMAN
 
 Daycare_Object:
 	db $a ; border block

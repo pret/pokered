@@ -1,6 +1,6 @@
 	object_const_def
-	const ROUTE16GATE2F_LITTLE_BOY
-	const ROUTE16GATE2F_LITTLE_GIRL
+	const_export ROUTE16GATE2F_LITTLE_BOY
+	const_export ROUTE16GATE2F_LITTLE_GIRL
 
 Route16Gate2F_Object:
 	db $a ; border block

@@ -1,6 +1,6 @@
 	object_const_def
-	const REDSHOUSE1F_MOM
-	const REDSHOUSE1F_DAD
+	const_export REDSHOUSE1F_MOM
+	const_export REDSHOUSE1F_DAD
 
 RedsHouse1F_Object:
 	db $a ; border block

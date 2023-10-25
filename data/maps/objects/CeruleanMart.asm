@@ -1,8 +1,8 @@
 	object_const_def
-	const CERULEANMART_CLERK
-	const CERULEANMART_COOLTRAINER_M
-	const CERULEANMART_COOLTRAINER_F
-	const CERULEANMART_TM_KID
+	const_export CERULEANMART_CLERK
+	const_export CERULEANMART_COOLTRAINER_M
+	const_export CERULEANMART_COOLTRAINER_F
+	const_export CERULEANMART_TM_KID
 
 CeruleanMart_Object:
 	db $0 ; border block
