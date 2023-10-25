@@ -182,11 +182,6 @@ BillsGarden_NPCSets:
 	db BANK(MomSprite)
 	db SPRITE_MOM
 
-BillsGarden_SpriteRewrites: ; TODO: remove?
-	db 2, 1, BANK(BrunetteGirlSprite)
-	dw BrunetteGirlSprite
-	db -1
-
 BillsGarden_EavesdropTiles:
 	dbmapcoord 8, 4
 	dbmapcoord 8, 5

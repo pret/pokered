@@ -7,7 +7,7 @@ FrontSpriteOptions3XPosBitData:
 	db 16, 13, BIT_TENTACRUEL_SPRITE
 	dw wSpriteOptions4
 	db 16, 13, BIT_GRAVELER_SPRITE
-	dw wSpriteOptions2
+	dw wSpriteOptions4
 	db 16, 13, BIT_CLOYSTER_SPRITE
 	dw wSpriteOptions4
 	db 16, 13, BIT_GENGAR_SPRITE
@@ -15,7 +15,7 @@ FrontSpriteOptions3XPosBitData:
 	db 16, 13, BIT_ONIX_SPRITE
 	dw wSpriteOptions3
 	db 16, 13, BIT_VOLTORB_SPRITE
-	dw wSpriteOptions4
+	dw wSpriteOptions3
 	db 16, 13, BIT_EXEGGCUTE_SPRITE
 	dw wSpriteOptions3
 
