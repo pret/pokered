@@ -174,16 +174,22 @@ IsTrainerBattlePPCheck:
 transformPPtasks:
 	ld a, [wIsInBattle]
 	cp 2
-	ret z
+	ret nz
 
 	ld c, b
 	ld b, 0
 	dec bc
 	
+	; return if not using transform
 	ld hl, wEnemyMonMoves
 	add hl, bc
 	ld a, [hl]
 	cp TRANSFORM
+	ret nz
+
+	; return if using Transform while already transformed into something
+	ld a, [wEnemyBattleStatus3]
+	bit TRANSFORMED, a
 	ret nz
 	
 	ld hl, wEnemyMonPP
