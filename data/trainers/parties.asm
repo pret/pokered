@@ -83,7 +83,7 @@ YoungsterData:
 	db 16, MANKEY, DODUO, KRABBY, 0 
 ; Route 25
 	db 17, DIGLETT, SPEAROW, 0
-	db 18, SLOWPOKE, 0
+	db 17, GROWLITHE, SLOWPOKE, 0 ; PureRGBnote: level 17 slowpoke ensures mew glitch still works
 	db 18, EKANS, SANDSHREW, 0 
 ; SS Anne 1F Rooms
 	db 22, NIDORINO, 0
@@ -352,7 +352,7 @@ FisherData:
 
 SwimmerData:
 ; Cerulean Gym
-	db 17, HORSEA, SHELLDER, ABRA, 0 
+	db $FF, 17, HORSEA, 17, ABRA, 16, SHELLDER, 0 ; PureRGBnote: level 16 shellder ensures mew glitch still works
 ; Route 19 (beach)
 	db 43, CLOYSTER, FARFETCHD, 0
 	db 41, PINSIR, TAUROS, STARMIE, 0
