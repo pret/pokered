@@ -20,35 +20,92 @@ LoadSpinnerArrowTiles::
 	ld de, 6 * 4
 	add hl, de
 .alternateGraphics
-	ld a, $4
-	ld bc, $0
+	ld a, 4 ; update all 4 arrow tiles
+	ld bc, 0
 .loop
-	ret ; PureRGBnote: FIXED: faster spin movement on spinners
-	;push af
-	;push hl
-	;push bc
-	;add hl, bc
-	;ld a, [hli]
-	;ld e, a
-	;ld a, [hli]
-	;ld d, a
-	;ld a, [hli]
-	;ld c, a
-	;ld a, [hli]
-	;ld b, a
-	;ld a, [hli]
-	;ld h, [hl]
-	;ld l, a
+	push af
+	push hl
+	push bc
+	add hl, bc
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
 	;call CopyVideoData
-	;pop bc
-	;ld a, $6
-	;add c
-	;ld c, a
-	;pop hl
-	;pop af
-	;dec a
-	;jr nz, .loop
-	;ret
+	;shinpokerednote: CHANGED: use a new function to update the tiles without so much lag
+	call CopySpinnerTiles
+	pop bc
+	ld a, $6
+	add c
+	ld c, a
+	pop hl
+	pop af
+	dec a
+	jr nz, .loop
+	;rst _DelayFrame ; pureRGBnote: CHANGED: make movement while spinning faster
+	ret
+
+;DE = tile source address
+;C = data length (not used)
+;B = source bank (not used)
+;HL = tile destination address
+CopySpinnerTiles:
+	di	;prevent vblank functions from running
+	
+	;back up destination address
+	ld b, h
+	ld c, l
+	;back up stack pointer
+	ld hl, sp + 0
+	ld a, h
+	ldh [hSPTemp], a
+	ld a, l
+	ldh [hSPTemp + 1], a
+	;set stack pointer to source address
+	ld h, d
+	ld l, e
+	ld sp, hl
+	;restore destination address
+	ld h, b
+	ld l, c
+	
+	;Stack Pointer = tile source address
+	;HL = tile destination address
+
+	ld c, 8
+.loop
+	pop de ;copies the next 2 bytes of whatever the stack pointer is pointing to (the source address) to de
+;wait if in mode 2 or mode 3
+;HBLANK length (mode 0) is highly variable. Worst case scenario is 21 cycles.
+;Can also write VRAM during OAM scan (mode 2) which is always 20 cycles.
+;For more info about timing the HBLANK, see https://gbdev.io/guides/lyc_timing.html
+.waitVRAM
+	ldh a, [rSTAT]		;read from stat register to get the mode
+	and %10				
+	jr nz, .waitVRAM	
+	ld [hl], e
+	inc l
+	ld [hl], d
+	inc l
+	dec c
+	jr nz, .loop
+
+	;restore stack spointer
+	ldh a, [hSPTemp]
+	ld h, a
+	ldh a, [hSPTemp + 1]
+	ld l, a
+	ld sp, hl
+	
+	ei	;re-enable vblank functions
+	ret
 
 INCLUDE "data/tilesets/spinner_tiles.asm"
 
