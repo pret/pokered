@@ -1,6 +1,7 @@
 ; PureRGBnote: ADDED: new postgame rematch area, with waaaay too much script code
 
 ChampArena_Script:
+	call CheckResetDoorEvent
 	call ChampArenaCheckBattleComplete
 	call ChampArenaWaitForPlayerWalkToFinish
 	call ChampArenaWaitForOpponentWalkToFinish
@@ -2128,3 +2129,18 @@ PlayChampCrowdSFX:
 	inc hl
 	ld [hl], d
 	ret
+
+CheckResetDoorEvent:
+	ld hl, wCurrentMapScriptFlags
+	bit 5, [hl]
+	res 5, [hl]
+	ret z
+	ResetEvent EVENT_OPENED_ARENA_DOOR ; when loading the arena ensure the door resets to being closed.
+	; if we loaded the map while on top of the door, open it.
+	ld a, [wXCoord]
+	cp 7
+	ret nz
+	ld a, [wYCoord]
+	cp 12
+	ret nz
+	jp OpenDoor
