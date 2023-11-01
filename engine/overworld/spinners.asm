@@ -1,4 +1,7 @@
 LoadSpinnerArrowTiles::
+	CheckAndSetEventA FLAG_SPINNER_TOGGLER
+	ret z ; only update spinning visuals every other time this is triggered. Makes the player spin a bit slower while still moving fast.
+	ResetFlag FLAG_SPINNER_TOGGLER
 	ld a, [wSpritePlayerStateData1ImageIndex]
 	srl a
 	srl a
