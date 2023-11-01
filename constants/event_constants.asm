@@ -922,6 +922,8 @@ DEF FLAG_LEARNING_TM_MOVE EQU const_value
 	const FLAG_HIDE_PLAYER_SPRITE
 	const FLAG_ALTERNATE_BATTLE_WIN_THEME
 	const FLAG_DIG_OVERWORLD_ANIMATION
+	const FLAG_SPINNER_TOGGLER
+	; 11 flag spaces remain
 
 ; Indigo Plateau events
 	const_next $8E0
