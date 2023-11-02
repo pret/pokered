@@ -26,7 +26,7 @@ PewterSpeechHouseLostWalletBeautyText:
 		ld hl, PewterHouse2Text3Intro
 		rst _PrintText
 		SetEvent EVENT_MET_POCKET_ABRA_LADY
-		jr .done
+		rst TextScriptEnd
 	.have_lost_wallet
 		ld hl, PewterHouse2Text3Found
 		rst _PrintText
@@ -50,12 +50,10 @@ PewterSpeechHouseLostWalletBeautyText:
 		ld hl, wPocketAbraNick
 		predef AskName
 		call DisableWaitingAfterTextDisplay
-		call CloseTextDisplay
-		jr .done
+		rst TextScriptEnd
 	.howsAbra
 		ld hl, PewterHouse2Text3HowsAbra
 		rst _PrintText
-	.done
 		rst TextScriptEnd
 
 PewterHouse2Text3Intro:
