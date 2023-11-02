@@ -39,6 +39,7 @@
 	GLARE,\
 	SUBSTITUTE,\
 	CUT,\
+	SURF,\
 	STRENGTH
 	; end
 
