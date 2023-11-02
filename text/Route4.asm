@@ -36,8 +36,7 @@ _Route4SignText::
 
 _Route4BattleText2::
 	text "Trying to butt"
-	line "in on our"
-	cont "battle?"
+	line "in on our battle?"
 	para "I'll take you"
 	line "all on!"
 	done
