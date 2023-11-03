@@ -5618,6 +5618,18 @@ RemapTypeMatchupBasedOnOptions:
 	pop bc
 	ret
 
+GetPlayerTypeEffectiveness:
+	ld a, [wPlayerMoveType]
+	ld hl, wEnemyBattleStatus2
+	call CheckHazeMistImmunity
+	jr c, AIGetTypeEffectiveness.immunity ; if the pokemon is immune to the move due to haze or mist, skip ahead
+	ld a, [wPlayerMoveType]
+	ld d, a                    ; d = type of enemy move
+	ld a, [wEnemyMonType1]
+	ld b, a
+	ld a, [wEnemyMonType2]
+	ld c, a
+	jr AIGetTypeEffectiveness.load
 
 ; function to tell how effective the type of an enemy attack is on the player's current pokemon
 ; now takes into account the effects that dual types can have
@@ -5642,6 +5654,7 @@ AIGetTypeEffectiveness:
 	ld b, a
 	ld a, [wAITargetMonType2]
 	ld c, a
+.load
 	ld a, EFFECTIVE
 	ld [wTypeEffectiveness], a ; initialize to neutral effectiveness
 	ld hl, TypeEffects

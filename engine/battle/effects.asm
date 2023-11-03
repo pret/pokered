@@ -1178,6 +1178,19 @@ DugAHoleText:
 	text_end
 
 TrappingEffect:
+;;;;;;;;;; PureRGBnote: FIXED: trapping state won't be set if the pokemon is immune to the attack
+	ldh a, [hWhoseTurn]
+	and a
+	jr z, .player
+	call AIGetTypeEffectiveness
+	jr .retIfImmune
+.player
+	call GetPlayerTypeEffectiveness
+.retIfImmune
+	; wTypeEffectiveness still in a here
+	and a
+	ret z
+;;;;;;;;;;
 	ld hl, wPlayerBattleStatus1
 	ld de, wPlayerNumAttacksLeft
 	ldh a, [hWhoseTurn]
