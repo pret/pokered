@@ -227,6 +227,14 @@ Route16SnorlaxWokeUpText:
 	text_end
 
 Route16SnorlaxReturnedToMountainsText:
+	text_asm
+	ld hl, wCurrentMapScriptFlags
+	res 3, [hl] ; indicates we loaded the map after battle, since we went to a script need to reset here to prevent a double fade
+	call GBFadeInFromWhite ; have to fade in here because of DEFER_SHOWING_MAP bit set on this map.
+	ld hl, .returnedToMountains
+	rst _PrintText
+	rst TextScriptEnd
+.returnedToMountains
 	text_far _Route16SnorlaxReturnedToMountainsText
 	text_end
 
