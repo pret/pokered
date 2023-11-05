@@ -92,8 +92,8 @@ _SaffronCityRocket9Text::
 
 _SaffronCitySignText::
 	text "SAFFRON CITY"
-	line "Shining, Golden"
-	cont "Land of Commerce"
+	para "Shining, Golden"
+	line "Land of Commerce"
 	done
 
 _SaffronCityFightingDojoSignText::

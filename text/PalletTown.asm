@@ -49,8 +49,8 @@ _PalletTownOaksLabSignText::
 
 _PalletTownSignText::
 	text "PALLET TOWN"
-	line "Shades of your"
-	cont "journey await!"
+	para "Shades of your"
+	line "journey await!"
 	done
 
 _PalletTownPlayersHouseSignText::

@@ -112,6 +112,5 @@ _PewterCityGymSignText::
 
 _PewterCitySignText::
 	text "PEWTER CITY"
-	line "A Stone Gray"
-	cont "City"
+	para "A Stone Gray City"
 	done

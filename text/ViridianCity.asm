@@ -142,8 +142,8 @@ _ViridianCityOldManYouNeedToWeakenTheTargetText::
 
 _ViridianCitySignText::
 	text "VIRIDIAN CITY "
-	line "The Eternally"
-	cont "Green Paradise"
+	para "The Eternally"
+	line "Green Paradise"
 	done
 
 _ViridianCityTrainerTips1Text::

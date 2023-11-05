@@ -106,8 +106,8 @@ _CeladonCityTrainerTips1Text::
 
 _CeladonCitySignText::
 	text "CELADON CITY"
-	line "The City of"
-	cont "Rainbow Dreams"
+	para "The City of"
+	line "Rainbow Dreams"
 	done
 
 _CeladonCityGymSignText::

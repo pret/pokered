@@ -89,8 +89,8 @@ _VermilionCitySailor2Text::
 
 _VermilionCitySignText::
 	text "VERMILION CITY"
-	line "The Port of"
-	cont "Exquisite Sunsets"
+	para "The Port of"
+	line "Exquisite Sunsets"
 	done
 
 _VermilionCityNoticeSignText::

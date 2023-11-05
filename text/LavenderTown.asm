@@ -39,8 +39,8 @@ _LavenderTownSuperNerdText::
 
 _LavenderTownSignText::
 	text "LAVENDER TOWN"
-	line "The Noble Purple"
-	cont "Town"
+	para "The Noble"
+	line "Purple Town"
 	done
 
 _LavenderTownSilphScopeSignText::
