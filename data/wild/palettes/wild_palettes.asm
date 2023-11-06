@@ -91,7 +91,7 @@ WildPalettePointers:
 	dw DefaultPalettes
 	dw DefaultPalettes
 	dw DefaultPalettes ;rock tunnel 1f
-	dw PowerPlantWildPalettes
+	dw DefaultPalettes ;power plant
 	dw DefaultPalettes
 	dw DefaultPalettes
 	dw DefaultPalettes
