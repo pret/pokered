@@ -108,11 +108,12 @@ _LeaveMapAnim::
 	call IsPlayerStandingOnWarpPadOrHole
 	ld a, b
 	dec a
-	jr z, .playerStandingOnWarpPad
 ; if not standing on a warp pad, there is an extra delay
 	ld c, 10
+	jr nz, .playerNotStandingOnWarpPad
+	ld c, 5 ; added slight delay here to make gbc fade mode play both TELEPORT_EXIT_1 and TELEPORT_ENTER_1 sound effects properly
+.playerNotStandingOnWarpPad
 	rst _DelayFrames
-.playerStandingOnWarpPad
 	call GBFadeOutToWhite
 	jp RestoreFacingDirectionAndYScreenPos
 .playerNotStandingOnWarpPadOrHole
