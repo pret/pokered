@@ -171,6 +171,20 @@ MtMoonB2FSuperNerdTakesOtherFossilScript:
 	ld a, 11
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
+
+;;;;;;;;;; PureRGBnote: ADDED: hide or show the fossil in seafoam islands depending on what you chose
+	CheckEvent EVENT_GOT_DOME_FOSSIL
+	ld a, HS_SEAFOAM_ISLANDS_B3F_DOME_FOSSIL
+	jr nz, .hideObjectSeafoam
+	CheckEvent EVENT_GOT_HELIX_FOSSIL
+	ld a, HS_SEAFOAM_ISLANDS_B3F_HELIX_FOSSIL
+	jr nz, .hideObjectSeafoam
+	jr .done
+.hideObjectSeafoam
+	ld [wMissableObjectIndex], a
+	predef HideObject
+;;;;;;;;;;
+.done
 	; done
 	ld a, SCRIPT_MTMOONB2F_DEFAULT
 	ld [wMtMoonB2FCurScript], a
