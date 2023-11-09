@@ -39,6 +39,8 @@ VictoryRoad3FDefaultScript:
 	ld a, [wCoordIndex]
 	cp $1
 	jr nz, .handle_hole
+	ld de, wSprite07StateData1YPixels
+	callfar BoulderOnButtonAnim
 	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
 	SetEvent EVENT_VICTORY_ROAD_3_BOULDER_ON_SWITCH1

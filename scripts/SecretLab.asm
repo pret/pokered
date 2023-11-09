@@ -507,28 +507,38 @@ CheckWalkingToDoor:
 	jp PlayEnhancedSecretLabMusic
 
 SecretLabShakeScreen:
+	ld a, SFX_NOISE_INSTRUMENT06
+	ld b, 30
+	call ShakeScreenBasic
+	ld a, SFX_INTRO_CRASH
+	rst _PlaySound
+	ret
+FarShakeScreen:
+	ld a, d ; sfx that will play while shaking
+	ld b, e ; how many "shakes"
+ShakeScreenBasic:
+	push af
 	ldh a, [hSCX]
 	ld d, a
 	ld e, 1
-	ld b, 30
 .shakeLoop ; scroll the BG left and right and play a sound effect
 	ld a, e
 	xor $fe
 	ld e, a
 	add d
 	ldh [hSCX], a
+	pop af
+	push af
 	push bc
-	ld a, SFX_NOISE_INSTRUMENT06
 	rst _PlaySound
 	pop bc
 	ld c, 2
 	rst _DelayFrames
 	dec b
 	jr nz, .shakeLoop
+	pop af
 	ld a, d
 	ldh [hSCX], a
-	ld a, SFX_INTRO_CRASH
-	rst _PlaySound
 	ret
 
 CheckToggleMachineDoor:
