@@ -60,9 +60,9 @@ DEF SHOW EQU $15
 	const HS_ROUTE_22_RIVAL_2              ; 23
 	const HS_ROUTE_22_ITEM_1               ; NEW X
 	const HS_ROUTE_22_ITEM_2               ; NEW X
-	const HS_NUGGET_BRIDGE_GUY             ; 24
 	const HS_ROUTE_23_ITEM_1               ; NEW X
 	const HS_ROUTE_23_ITEM_2               ; NEW X
+	const HS_NUGGET_BRIDGE_GUY             ; 24
 	const HS_ROUTE_24_ITEM_1               ; 25 X
 	const HS_ROUTE_24_ITEM_2               ; NEW X
 	const HS_ROUTE_25_ITEM                 ; 26 X

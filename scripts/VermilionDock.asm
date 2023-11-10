@@ -279,7 +279,7 @@ TruckCheck:
 	ld hl, wCurrentMapScriptFlags
 	res 5, [hl]
 	ld c, HS_MEW_VERMILION_DOCK
-	ld b, $2
+	ld b, FLAG_TEST
 	ld hl, wMissableObjectFlags
 	predef FlagActionPredef
 	ld a, c
