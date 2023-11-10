@@ -211,13 +211,14 @@ _RestorePPWhichTechniqueText::
 _PPMaxedOutText::
 	text_ram wStringBuffer
 	text "'s PP"
-	line "is maxed out."
+	line "has already been"
+	cont "maxed out."
 	prompt
 
 _PPIncreasedText::
 	text_ram wStringBuffer
-	text "'s PP"
-	line "increased."
+	text "'s max"
+	line "PP increased."
 	prompt
 
 _PPRestoredText::
