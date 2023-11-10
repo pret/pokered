@@ -1414,6 +1414,10 @@ ItemUseMedicine:
 	jr nz, .calculateHPBarCoords
 	xor a
 	ld [wBattleMonStatus], a ; remove the status ailment in the in-battle pokemon data
+;;;;;;;;;; PureRGBnote: ADDED: if we healed a status ailment with full restore, make sure the AI opponent doesn't instantly see this cure
+	inc a
+	ld [wAIMoveSpamAvoider], a ; load this value so the AI doesn't spam status moves right after you heal a status
+;;;;;;;;;;
 .calculateHPBarCoords
 	ld hl, wShadowOAMSprite36
 	ld bc, 2 * SCREEN_WIDTH
