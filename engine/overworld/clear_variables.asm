@@ -12,6 +12,8 @@ ClearVariablesOnEnterMap::
 	ld [wMuteAudioAndPauseMusic], a
 	ld [wActionResultOrTookBattleTurn], a
 	ld [wUnusedD5A3], a
+	ld [wIsAltPalettePkmn], a
+	ld [wIsAltPalettePkmnData], a
 	ld hl, wCardKeyDoorY
 	ld [hli], a
 	ld [hl], a

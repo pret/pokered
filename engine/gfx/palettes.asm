@@ -418,20 +418,21 @@ BadgeBlkDataLengths:
 DeterminePaletteID:
 	bit TRANSFORMED, a ; a is battle status 3
 	ld a, DEX_DITTO	;ld a, PAL_GREYMON  ; shinpokerednote: FIXED: if the mon has used Transform, use Ditto's palette
-	jr nz, DeterminePaletteIDOutOfBattle.skipDexNumConversion ;ret nz
+	jr nz, DeterminePaletteIDOutOfBattle.ditto ;ret nz
 	ld a, [hl]
 DeterminePaletteIDOutOfBattle:
+	push bc
 	cp HARDENED_ONIX
 	jr z, .hardened_onix
 	ld [wd11e], a
 	and a ; is the mon index 0?
 	jr z, .skipDexNumConversion
-	push bc
 	predef IndexToPokedex
-	pop bc
 	ld a, [wd11e]
 	; 0 = missingno is a valid value here
 .skipDexNumConversion
+	pop bc
+.ditto
 	ld e, a
 	ld d, 0
 ;;;;;;;;;; PureRGBnote: ADDED: show an alternate palette pokemon if the flag is set. Then immediately clear the flag.
@@ -452,22 +453,26 @@ DeterminePaletteIDOutOfBattle:
 ;;;;;;;;;;
 	ld a, [hl]
 	ret
-;;;;;;;;;; PureRGBnote: ADDED: hardened onix has a hardcoded palette
+;;;;;;;;;; PureRGBnote: ADDED: hardened onix has hardcoded palettes
 .hardened_onix
+	ld b, PAL_BLACKMON
+	ld c, PAL_BLUEMON
+.checkAltPaletteHardcoded
 	ld a, [wIsAltPalettePkmn]
 	and a
-	ld a, PAL_BLACKMON
-	jr z, .doneonix
+	ld a, b
+	jr z, .doneHardcodedPalette
 	ld a, [wOptions2]
 	bit BIT_ALT_PKMN_PALETTES, a ; do we have alt palettes enabled
-	ld a, PAL_BLACKMON
-	jr z, .doneonix ; if not show default palettes always
-	ld a, PAL_BLUEMON
-.doneonix
+	ld a, b
+	jr z, .doneHardcodedPalette ; if not show default palettes always
+	ld a, c
+.doneHardcodedPalette
 	push af
 	xor a
 	ld [wIsAltPalettePkmn], a ; always reset this value after displaying a pokemon sprite
 	pop af
+	pop bc
 	ret
 ;;;;;;;;;;
 
