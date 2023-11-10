@@ -38,6 +38,7 @@ Route25ShowHideBillScript:
 	ret nz
 	CheckEventReuseHL EVENT_MET_BILL_2
 	jr nz, .met_bill
+	; if we left bills house before helping him with the cell separator, reset pokemon version of him to being shown
 	ResetEventReuseHL EVENT_BILL_SAID_USE_CELL_SEPARATOR
 	ld a, HS_BILL_POKEMON
 	ld [wMissableObjectIndex], a
@@ -45,10 +46,8 @@ Route25ShowHideBillScript:
 .met_bill
 	CheckEventAfterBranchReuseHL EVENT_GOT_SS_TICKET, EVENT_MET_BILL_2
 	ret z
+	; if we got the SS ticket and finished his event, show the other version of bill that says slightly different things
 	SetEventReuseHL EVENT_LEFT_BILLS_HOUSE_AFTER_HELPING
-	ld a, HS_NUGGET_BRIDGE_GUY
-	ld [wMissableObjectIndex], a
-	predef HideObject
 	ld a, HS_BILL_1
 	ld [wMissableObjectIndex], a
 	predef HideObject

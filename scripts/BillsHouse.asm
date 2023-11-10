@@ -198,6 +198,11 @@ BillsHouseBillSSTicketText:
 	ld a, HS_CERULEAN_GUARD_2
 	ld [wMissableObjectIndex], a
 	predef HideObject
+;;;;;;;;;; PureRGBnote: MOVED: move this object hiding here since we could teleport out of bills house and miss this being triggered on route 25 instead
+	ld a, HS_NUGGET_BRIDGE_GUY
+	ld [wMissableObjectIndex], a
+	predef HideObject
+;;;;;;;;;;
 .got_ss_ticket
 	ld hl, .WhyDontYouGoInsteadOfMeText
 	rst _PrintText
