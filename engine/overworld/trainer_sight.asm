@@ -368,11 +368,13 @@ PlayTrainerMusic::
 .skipGiovanniCheck
 ;;;;;;;;;;
 	ld a, [wGymLeaderNo]
-	and a
-	ret nz
+	cp 9 ; gymleaderno > 9 = elite four or chief, still play trainer sight music
+	ret c
 ;;;;;;;;;; PureRGBnote: ADDED: skip the trainer encounter music in the secret lab (it plays already earlier than this)
 	ld a, [wCurMap]
 	cp SECRET_LAB
+	ret z
+	cp CHAMP_ARENA
 	ret z
 ;;;;;;;;;;
 	xor a

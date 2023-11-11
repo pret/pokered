@@ -132,6 +132,10 @@ BrunosRoomTrainerHeader0:
 
 BrunosRoomBrunoText:
 	text_asm
+;;;;;;;;;; PureRGBnote: ADDED: makes the battle music the gym leader theme
+	ld a, 10
+	ld [wGymLeaderNo], a
+;;;;;;;;;;
 	ld hl, BrunosRoomTrainerHeader0
 	call TalkToTrainer
 	rst TextScriptEnd

@@ -639,6 +639,8 @@ SecretLab_EngageTrainerText:
 	ld hl, SecretLabTrainerHeader1
 	ld a, SECRETLAB_SOLDIER2
 	jr z, .startTrainer
+	ld a, 13
+	ld [wGymLeaderNo], a ; turns on gym leader music for chief battle
 	ld hl, SecretLabTrainerHeader2 
 	ld a, SECRETLAB_CHIEF
 .startTrainer

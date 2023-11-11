@@ -146,6 +146,10 @@ LancesRoomTrainerHeader0:
 
 LancesRoomLanceText:
 	text_asm
+;;;;;;;;;; PureRGBnote: ADDED: makes the battle music the gym leader theme
+	ld a, 12
+	ld [wGymLeaderNo], a
+;;;;;;;;;;
 	ld hl, LancesRoomTrainerHeader0
 	call TalkToTrainer
 	rst TextScriptEnd

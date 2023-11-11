@@ -9,38 +9,24 @@ PlayBattleMusic::
 	ld c, BANK(Music_GymLeaderBattle)
 	ld a, [wGymLeaderNo]
 	and a
-	jr z, .notGymLeaderBattle
-	ld a, MUSIC_GYM_LEADER_BATTLE
-	jr .playSong
-.notGymLeaderBattle
+	ld b, MUSIC_GYM_LEADER_BATTLE
+	jr nz, .playSong
 	ld a, [wCurOpponent]
 	cp OPP_ID_OFFSET
-	jr c, .wildBattle
+	ld b, MUSIC_WILD_BATTLE
+	jr c, .playSong
 	cp OPP_RIVAL3
-	jr z, .finalBattle
+	ld b, MUSIC_FINAL_BATTLE
+	jr z, .playSong
 	cp OPP_PROF_OAK
-	jr z, .finalBattle ; PureRGBnote: ADDED: professor oak battle uses final battle music
-	cp OPP_CHIEF
-	jr z, .gymLeader ; PureRGBnote: ADDED: chief battle uses gym leader music
-	cp OPP_LANCE
-	jr nz, .normalTrainerBattle
-.gymLeader
-	ld a, MUSIC_GYM_LEADER_BATTLE ; lance also plays gym leader theme
-	jr .playSong
-.normalTrainerBattle
-	ld a, MUSIC_TRAINER_BATTLE
-	jr .playSong
-.finalBattle
-	ld a, MUSIC_FINAL_BATTLE
-	jr .playSong
-.wildBattle
-	ld a, MUSIC_WILD_BATTLE
+	jr z, .playSong ; PureRGBnote: ADDED: professor oak battle uses final battle music
+	; normal trainer
+	ld b, MUSIC_TRAINER_BATTLE
 .playSong
-	push af
 	ld a, [wSpecialBattleMusicID]
 	and a
 	jr nz, .specialMusic
-	pop af
+	ld a, b
 	jp PlayMusic
 .specialMusic
 	cp 2 ; seel stage music
@@ -57,7 +43,6 @@ PlayBattleMusic::
 	ld c, [hl]
 	inc hl
 	call GetAddressFromPointer
-	pop af
 	xor a
 	ld [wSpecialBattleMusicID], a
 	jp PlaySpecialBattleMusic

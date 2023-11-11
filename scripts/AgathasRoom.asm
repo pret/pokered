@@ -135,6 +135,10 @@ AgathasRoomTrainerHeader0:
 
 AgathasRoomAgathaText:
 	text_asm
+;;;;;;;;;; PureRGBnote: ADDED: makes the battle music the gym leader theme
+	ld a, 11
+	ld [wGymLeaderNo], a
+;;;;;;;;;;
 	ld hl, AgathasRoomTrainerHeader0
 	call TalkToTrainer
 	rst TextScriptEnd

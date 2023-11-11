@@ -124,15 +124,12 @@ CompareMapMusicBankWithCurrentBank::
 
 ; shinpokerednote: audionote: updated to match pokemon yellow's audio engine code
 PlayMusic::
-;;;;;;;;;; PureRGBnote: ADDED: needs to be reset in order for other-bank-music to work properly
-	push af
-	xor a
-	ld [wSpecialMusicBank], a
-	pop af
-;;;;;;;;;;
 	ld b, a
 	ld [wNewSoundID], a
 	xor a
+;;;;;;;;;; PureRGBnote: ADDED: needs to be reset in order for other-bank-music to work properly
+	ld [wSpecialMusicBank], a
+;;;;;;;;;;
 	ld [wAudioFadeOutControl], a
 	ld a, c
 	ld [wAudioROMBank], a

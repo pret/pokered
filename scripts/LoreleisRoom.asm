@@ -134,6 +134,10 @@ LoreleisRoomTrainerHeader0:
 
 LoreleisRoomLoreleiText:
 	text_asm
+;;;;;;;;;; PureRGBnote: ADDED: makes the battle music the gym leader theme
+	ld a, 9
+	ld [wGymLeaderNo], a
+;;;;;;;;;;
 	ld hl, LoreleisRoomTrainerHeader0
 	call TalkToTrainer
 	rst TextScriptEnd
