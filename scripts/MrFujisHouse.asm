@@ -1,4 +1,5 @@
 MrFujisHouse_Script:
+	call CheckHideMrFujiInPokemonTower
 	jp EnableAutoTextBoxDrawing
 
 MrFujisHouse_TextPointers:
@@ -9,6 +10,19 @@ MrFujisHouse_TextPointers:
 	dw_const MrFujisHouseNidorinoText,      TEXT_MRFUJISHOUSE_NIDORINO
 	dw_const MrFujisHouseMrFujiText,        TEXT_MRFUJISHOUSE_MR_FUJI
 	dw_const MrFujisHouseMrFujiPokedexText, TEXT_MRFUJISHOUSE_POKEDEX
+
+;;;;;;;;;; PureRGBnote: MOVED: moved this hiding routine here because it looks weird that mr fuji gets hidden before we warp to his house
+CheckHideMrFujiInPokemonTower:
+	ld hl, wCurrentMapScriptFlags
+	bit 5, [hl]
+	res 5, [hl]
+	ret z
+	CheckEvent EVENT_RESCUED_MR_FUJI
+	ret z
+	ld a, HS_POKEMON_TOWER_7F_MR_FUJI
+	ld [wMissableObjectIndex], a
+	predef_jump HideObject
+;;;;;;;;;;
 
 MrFujisHouseSuperNerdText:
 	text_asm

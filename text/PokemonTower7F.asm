@@ -8,17 +8,37 @@ _PokemonTower7FMrFujiRescueText::
 
 	para "I came to calm"
 	line "the soul of"
-	cont "CUBONE's mother."
+	cont "CUBONE's mother.@"
+	text_end
 
-	para "I think MAROWAK's"
+_PokemonTower7FMrFujiCaughtText::
+	text "<PARA>Its spirit is"
+	line "still restless."
+
+	para "Its soul will"
+	line "roam this world"
+	cont "forever until you"
+	cont "help it to exact"
+	cont "vengeance."
+
+	para "A grim task, to"
+	line "be sure."
+
+	para "Come.@"
+	text_end
+
+_PokemonTower7FMrFujiAfterlifeText::
+	text "<PARA>I think MAROWAK's"
 	line "spirit has gone"
-	cont "to the afterlife."
+	cont "to the afterlife.@" 
 
-	para "I must thank you"
+	text "I must thank you"
 	line "for your kind"
-	cont "concern!"
+	cont "concern!@"
+	text_end
 
-	para "Follow me to my"
+_PokemonTower7FMrFujiFollowMeText::
+	text "<PARA>Follow me to my"
 	line "home, #MON"
 	cont "HOUSE at the foot"
 	cont "of this tower."

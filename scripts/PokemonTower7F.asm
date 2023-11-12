@@ -67,9 +67,6 @@ PokemonTower7FHideNPCScript:
 PokemonTower7FWarpToMrFujiHouseScript:
 	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
-	ld a, HS_POKEMON_TOWER_7F_MR_FUJI
-	ld [wMissableObjectIndex], a
-	predef HideObject
 	ld a, SPRITE_FACING_UP
 	ld [wSpritePlayerStateData1FacingDirection], a
 	ld a, MR_FUJIS_HOUSE
@@ -150,17 +147,10 @@ PokemonTower7FRocket1ExitDownRightMovement:
 	db NPC_MOVEMENT_DOWN
 	db -1 ; end
 
-PokemonTower7FRocketExitDownMovement:
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db -1 ; end
-
 PokemonTower7FRocket2ExitLeftDownMovement:
 	db NPC_MOVEMENT_LEFT
 	db NPC_MOVEMENT_DOWN
+PokemonTower7FRocketExitDownMovement:
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
@@ -224,10 +214,13 @@ PokemonTower7FRocket3Text:
 
 PokemonTower7FMrFujiText:
 	text_asm
-	ld hl, .RescueText
+	CheckEvent EVENT_CAUGHT_GHOST_MAROWAK
+	ld hl, .RescueCaughtMarowakText
+	jr nz, .print
+	ld hl, .RescueDefaultText
+.print
 	rst _PrintText
 	SetEvent EVENT_RESCUED_MR_FUJI
-	SetEvent EVENT_RESCUED_MR_FUJI_2
 	ld a, HS_MR_FUJIS_HOUSE_MR_FUJI
 	ld [wMissableObjectIndex], a
 	predef ShowObject
@@ -247,8 +240,16 @@ PokemonTower7FMrFujiText:
 	ld [wCurMapScript], a
 	rst TextScriptEnd
 
-.RescueText:
+.RescueDefaultText:
 	text_far _PokemonTower7FMrFujiRescueText
+	text_far _PokemonTower7FMrFujiAfterlifeText
+	text_far _PokemonTower7FMrFujiFollowMeText
+	text_end
+
+.RescueCaughtMarowakText:
+	text_far _PokemonTower7FMrFujiRescueText
+	text_far _PokemonTower7FMrFujiCaughtText
+	text_far _PokemonTower7FMrFujiFollowMeText
 	text_end
 
 PokemonTower7FRocket1BattleText:
