@@ -19,18 +19,12 @@ DebugNewGameParty: ; unreferenced except in _DEBUG
 	; "Tsunekazu Ishihara: Exeggutor is my favorite. That's because I was
 	; always using this character while I was debugging the program."
 	; From https://web.archive.org/web/20000607152840/http://pocket.ign.com/news/14973.html
-	db EXEGGUTOR, 99
-IF DEF(_DEBUG)
+	db TENTACRUEL, 99
 	db MEW, 50
-ELSE
-	db MEW, 20
-ENDC
 	db ARMORED_MEWTWO, 99
-	db DUGTRIO, 99
+	db HARDENED_ONIX, 99
 	db ARTICUNO, 99
-IF DEF(_DEBUG)
 	db PIKACHU, 15
-ENDC
 	db -1 ; end
 
 PrepareNewGameDebug: ; dummy except in _DEBUG
@@ -49,7 +43,7 @@ IF DEF(_DEBUG)
 
 	call SetDebugNewGameParty
 
-	; Exeggutor gets four HM moves.
+	; Tentacruel gets four HM moves.
 	ld hl, wPartyMon1Moves
 	ld a, FLY
 	ld [hli], a
@@ -57,7 +51,7 @@ IF DEF(_DEBUG)
 	ld [hli], a
 	ld a, SURF
 	ld [hli], a
-	ld a, TRI_ATTACK
+	ld a, PSYCHIC_M
 	ld [hl], a
 	ld hl, wPartyMon1PP
 	ld a, 15
@@ -68,15 +62,17 @@ IF DEF(_DEBUG)
 	ld [hli], a
 	ld [hl], a
 
-	; Jolteon gets Thunderbolt.
-	ld hl, wPartyMon3Moves + 3
+	; Armored Mewtwo gets Thunderbolt.
+	ld hl, wPartyMon3Moves + 1
 	ld a, THUNDERBOLT
+	ld [hli], a
+	ld a, PSYCHIC_M
 	ld [hl], a
-	ld hl, wPartyMon3PP + 3
+	ld hl, wPartyMon3PP + 1
 	ld a, 15
 	ld [hl], a
 
-	; Articuno gets Fly.
+	; Hardened Onix gets Strength.
 	ld hl, wPartyMon4Moves
 	ld a, STRENGTH
 	ld [hl], a
@@ -92,9 +88,11 @@ IF DEF(_DEBUG)
 	ld a, 15
 	ld [hl], a
 
-	; Pikachu gets Surf.
+	; Pikachu gets Surf and Flash.
 	ld hl, wPartyMon6Moves + 2
 	ld a, SURF
+	ld [hli], a
+	ld a, FLASH
 	ld [hl], a
 	ld hl, wPartyMon6PP + 2
 	ld a, 15
@@ -182,9 +180,7 @@ DebugItemsList:
 	db TM_SUBSTITUTE, 20
 	db TOPSECRETKEY, 1
 	db -1 ; end
-
-DebugUnusedList:
-	db -1 ; end
+	
 ELSE
 	ret
 ENDC
