@@ -119,7 +119,12 @@ LoreleisRoomLoreleiEndBattleScript:
 	jp z, ResetLoreleiScript
 	ld a, TEXT_LORELEISROOM_LORELEI
 	ldh [hSpriteIndexOrTextID], a
-	jp DisplayTextID
+	call DisplayTextID
+;;;;;;;;;; PureRGBnote: ADDED: sound effect for the doors opening
+	ld a, SFX_GO_INSIDE
+	rst _PlaySound
+	ret
+;;;;;;;;;;
 
 LoreleisRoom_TextPointers:
 	def_text_pointers
