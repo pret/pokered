@@ -30,9 +30,9 @@ _PokemonTower7FMrFujiCaughtText::
 _PokemonTower7FMrFujiAfterlifeText::
 	text "<PARA>I think MAROWAK's"
 	line "spirit has gone"
-	cont "to the afterlife.@" 
+	cont "to the afterlife." 
 
-	text "I must thank you"
+	para "I must thank you"
 	line "for your kind"
 	cont "concern!@"
 	text_end
