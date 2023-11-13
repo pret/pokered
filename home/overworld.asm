@@ -567,7 +567,7 @@ WarpFound2::
 	ld [wCurMap], a
 	cp ROCK_TUNNEL_1F
 	jr nz, .done
-	ld a, $06
+	ld a, 6
 	ld [wMapPalOffset], a
 	jr .done
 

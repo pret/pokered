@@ -186,8 +186,13 @@ StartMenu_Pokemon::
 .flash
 	bit BIT_BOULDERBADGE, a
 	jp z, .newBadgeRequired
-	xor a
-	ld [wMapPalOffset], a
+	ld a, [wMapPalOffset]
+	cp 6 ; dark palette
+	jr z, .useFlash
+	ld hl, .alreadyBright
+	jp .printThenLoop
+.useFlash
+	SetEvent EVENT_USED_FLASH_FROM_PARTY_MENU
 	ld hl, .flashLightsAreaText
 	rst _PrintText
 	call GBPalWhiteOutWithDelay3
@@ -279,10 +284,14 @@ StartMenu_Pokemon::
 	jp CloseTextDisplay
 .newBadgeRequired
 	ld hl, .newBadgeRequiredText
+.printThenLoop
 	rst _PrintText
 	jp .loop
 .newBadgeRequiredText
 	text_far _NewBadgeRequiredText
+	text_end
+.alreadyBright
+	text_far _AlreadyBrightText
 	text_end
 
 ; writes a blank tile to all possible menu cursor positions on the party menu

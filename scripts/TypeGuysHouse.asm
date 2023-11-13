@@ -2,6 +2,7 @@
 
 TypeGuysHouse_Script:
 	call TypeGuysHouseCheckTurnOffLights
+	callfar CheckUsedFlash
 	jp EnableAutoTextBoxDrawing
 
 TypeGuysHouse_TextPointers:
@@ -63,7 +64,7 @@ TypeGuysHouseLightSwitch::
 TypeGuysHouseTurnOffLights:
 	ResetEvent EVENT_TYPE_GUY_LIGHT_SWITCH
 	; turn off the lights
-	ld a, $06
+	ld a, 6
 	ld [wMapPalOffset], a
 	ld a, 1
 	ld [wMuteAudioAndPauseMusic], a
@@ -74,6 +75,11 @@ TypeGuysHouseTooDarkText:
 	text_far _TypeGuysHouseTooDarkText
 	text_end
 
+CheckLightsTurnedOn:
+	ld a, [wMapPalOffset]
+	cp 6
+	ret
+
 TypeGuysHouseComputer::
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
@@ -83,7 +89,7 @@ TypeGuysHouseComputer::
 	jp DisplayTextID
 .text
 	text_asm
-	CheckEvent EVENT_TYPE_GUY_LIGHT_SWITCH
+	call CheckLightsTurnedOn
 	ld hl, TypeGuysHouseTooDarkText
 	jr z, .done
 	ld hl, .computer
@@ -96,7 +102,7 @@ TypeGuysHouseComputer::
 
 TypeGuysHouseShortBookCaseText:
 	text_asm 
-	CheckEvent EVENT_TYPE_GUY_LIGHT_SWITCH
+	call CheckLightsTurnedOn
 	ld hl, TypeGuysHouseTooDarkText
 	jr z, .done
 	ld a, [wXCoord]
@@ -118,7 +124,7 @@ TypeGuysHouseShortBookCaseText:
 
 TypeGuysHouseSculptureText:
 	text_asm 
-	CheckEvent EVENT_TYPE_GUY_LIGHT_SWITCH
+	call CheckLightsTurnedOn
 	ld hl, TypeGuysHouseTooDarkText
 	jr z, .done
 	ld hl, .sculpture
@@ -132,7 +138,7 @@ TypeGuysHouseSculptureText:
 
 TypeGuysHouseRightTallBookcaseText:
 	text_asm 
-	CheckEvent EVENT_TYPE_GUY_LIGHT_SWITCH
+	call CheckLightsTurnedOn
 	ld hl, TypeGuysHouseTooDarkText
 	jr z, .done
 	ld hl, .rightTallBookcase
@@ -148,7 +154,7 @@ TypeGuysHouseRightTallBookcaseText:
 
 TypeGuysHouseLeftTallBookcaseText:
 	text_asm 
-	CheckEvent EVENT_TYPE_GUY_LIGHT_SWITCH
+	call CheckLightsTurnedOn
 	ld hl, TypeGuysHouseTooDarkText
 	jr z, .done
 	ld hl, .leftTallBookcase
@@ -165,7 +171,7 @@ TypeGuysHouseLeftTallBookcaseText:
 
 TypeGuysHouseTypeGuyText:
 	text_asm
-	CheckEvent EVENT_TYPE_GUY_LIGHT_SWITCH
+	call CheckLightsTurnedOn
 	jr nz, .typeGuyTalks
 	; asleep
 	ld hl, .sleeping

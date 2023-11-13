@@ -1,5 +1,6 @@
 RockTunnelB1F_Script:
 	call EnableAutoTextBoxDrawing
+	call CheckUsedFlash
 	ld hl, RockTunnel2TrainerHeaders
 	ld de, RockTunnelB1F_ScriptPointers
 	ld a, [wRockTunnelB1FCurScript]

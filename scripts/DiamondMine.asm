@@ -197,7 +197,7 @@ DiamondMinePlayMusic::
 	ld a, $12
 	ld [wFrequencyModifier], a
 	ld a, SFX_BATTLE_2E
-	call PlaySound
+	rst _PlaySound
 	call GBFadeOutToWhite
 	call GBFadeInFromWhite
 	call GBFadeOutToWhite

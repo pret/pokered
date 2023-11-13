@@ -1,11 +1,35 @@
 RockTunnel1F_Script:
 	call EnableAutoTextBoxDrawing
+	call CheckUsedFlash
 	ld hl, RockTunnel1TrainerHeaders
 	ld de, RockTunnel1F_ScriptPointers
 	ld a, [wRockTunnel1FCurScript]
 	call ExecuteCurMapScriptInTable
 	ld [wRockTunnel1FCurScript], a
 	ret
+
+CheckUsedFlash::
+	CheckAndResetEvent EVENT_USED_FLASH_FROM_PARTY_MENU
+	ret z
+	ld a, 4 ; fade out music first
+	call StopMusic
+	; have to switch sound bank to the battle one to play the flash sound effect
+	ld a, BANK(Music_TrainerBattle)
+	ld [wAudioROMBank], a
+	ld [wAudioSavedROMBank], a
+	ld a, $ff
+	ld [wTempoModifier], a
+	ld a, $09
+	ld [wFrequencyModifier], a
+	ld a, SFX_NOT_VERY_EFFECTIVE
+	rst _PlaySound
+	call GBPalWhiteOut
+	call WaitForSoundToFinish
+	xor a
+	ld [wMapPalOffset], a ; undo darkness
+	call GBFadeInFromWhite
+	jp PlayDefaultMusic
+
 
 RockTunnel1F_ScriptPointers:
 	def_script_pointers

@@ -129,6 +129,11 @@ _NotHealthyEnoughText::
 	line "enough."
 	prompt
 
+_AlreadyBrightText::
+	text "It's already"
+	line "bright enough."
+	prompt
+
 _NewBadgeRequiredText::
 	text "No! A new BADGE"
 	line "is required."
