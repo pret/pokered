@@ -155,6 +155,9 @@ AIMoveChoiceModification1:
 	ret z ; no more moves in move set
 	inc de
 	call ReadMove
+	ld a, [wEnemyMoveNum]
+	cp MIRROR_MOVE
+	call z, .checkRemapMirrorMove ; we will treat mirror move as the move it will use if selected
 	ld a, [wPlayerBattleStatus1]
 	bit INVULNERABLE, a
 	jp nz, .playerSemiInvulnerable
@@ -190,8 +193,6 @@ AIMoveChoiceModification1:
 	jp z, .checkFullHealth
 	cp GROWTH_EFFECT
 	jp z, .checkFullHealth
-	cp MIRROR_MOVE_EFFECT
-	jp z, .checkNoMirrorMoveOnFirstTurn
 	ld a, [wEnemyMoveEffect]
 	push hl
 	push de
@@ -219,7 +220,7 @@ AIMoveChoiceModification1:
 	jp z, .nextMove ; no need to discourage status moves if the player doesn't have a status
 .discourage
 	ld a, [hl]
-	add $5 ; heavily discourage move
+	add 5 ; heavily discourage move
 	ld [hl], a
 	jp .nextMove
 .ohko
@@ -234,7 +235,7 @@ AIMoveChoiceModification1:
 	pop bc
 	pop de
 	pop hl 
-	jp nz, .nextMove
+	jp nz, .checkFullHealth ; also make sure the pokemon isn't at full health as then teleport is kind of pointless to use
 	; disourage teleport if there is only one pokemon left in the AI trainer's party (would fail in that case)
 	jr .discourage
 .checkDisabled
@@ -306,11 +307,15 @@ AIMoveChoiceModification1:
 	pop de
 	pop hl
 	jp .nextMove
-.checkNoMirrorMoveOnFirstTurn
+.checkRemapMirrorMove
 	ld a, [wPlayerLastSelectedMove]
 	and a
-	jp z, .discourage ; don't use mirror move if the player has never selected a move yet
-	jp .nextMove
+	jr nz, .skipDiscourageMirrorMove ; don't use mirror move if the player has never selected a move yet
+	ld a, [hl]
+	add 5 ; heavily discourage mirror move when it will fail
+	ld [hl], a
+.skipDiscourageMirrorMove
+	jp GetMirrorMoveResultMove ; otherwise remap this move to the one it will use, and we'll check if it should be discouraged after
 .playerSemiInvulnerable
 	ld a, [wEnemyMoveNum]
 	cp SWIFT
@@ -439,6 +444,9 @@ AIMoveChoiceModification2:
 	ret z ; no more moves in move set
 	inc de
 	call ReadMove
+	ld a, [wEnemyMoveNum]
+	cp MIRROR_MOVE
+	call z, GetMirrorMoveResultMove ; we will treat mirror move as the move it will use if selected
 	ld a, [wEnemyMoveEffect]
 	cp DISABLE_EFFECT
 	jr z, .disable
@@ -521,19 +529,23 @@ IsPlayerPokemonDangerous:
 	; check if player is asleep, paralyzed, frozen, or confused, if so, not considered dangerous
 	ld a, [wAITargetMonStatus]
 	bit FRZ, a
-	jr nz, .notDangerous
+	jp nz, .notDangerous
 	bit PAR, a
-	jr nz, .notDangerous
+	jp nz, .notDangerous
 	and SLP_MASK
-	jr nz, .notDangerous
+	jp nz, .notDangerous
 
 	ld a, [wAIMoveSpamAvoider]
 	cp 2 ; player switched
 	jr z, .notDangerous ; if player switched this turn, don't consider them dangerous
 
-	ld a, [wPlayerBattleStatus1]
-	bit CONFUSED, a
-	jr nz, .notDangerous ; player is confused - not dangerous
+	; check if player mon has boosted its stats
+	ld a, [wPlayerMonAttackMod]
+	cp 9 ; boosted 2 stages (7 is normal)
+	jr nc, .dangerous ; player has boosted attack by at least 2 stages
+	ld a, [wPlayerMonSpecialMod]
+	cp 9 ; boosted 2 stages (7 is normal)
+	jr nc, .dangerous ; player has boosted special by at least 2 stages
 
 	push bc
 	; compare levels first, higher level player pokemon will be considered dangerous
@@ -548,17 +560,35 @@ IsPlayerPokemonDangerous:
 	jr nc, .dangerous ; always consider higher level pokemon dangerous
 	jr .continue
 .lowerLevel
-	cp -4 ; is player pokemon at least 5 levels lower
+	cp -9 ; is player pokemon at least 10 levels lower
 	jr c, .notDangerous ; if so never consider them dangerous
+
 .continue
 
-	; check if player mon has boosted its stats
-	ld a, [wPlayerMonAttackMod]
-	cp 9 ; boosted 2 stages (7 is normal)
-	jr nc, .dangerous ; player has boosted attack by at least 2 stages
-	ld a, [wPlayerMonSpecialMod]
-	cp 9 ; boosted 2 stages (7 is normal)
-	jr nc, .dangerous ; player has boosted special by at least 2 stages
+	ld a, [wPlayerBattleStatus1]
+	bit CONFUSED, a
+	jr nz, .notDangerous ; player is confused - not dangerous
+
+	push bc
+	ld a, [wEnemyMonSpeedMod]
+	ld b, a
+	ld a, [wPlayerMonSpeedMod]
+	sub b
+	pop bc
+	jr z, .speedComparison ; same level of stat boosts, compare speeds
+	cp 2
+	jr nc, .dangerous ; if player has 2 stages higher boosted speed compared to opponent, they're considered dangerous by default
+	cp -1
+	jr c, .skipSpeedComparison ; if enemy has boosted their speed up compared to player, forget about comparing speed base stats, likely faster
+.speedComparison
+	push bc
+	ld a, [wEnemyMonBaseSpeed]
+	ld b, a
+	ld a, [wPlayerMonBaseSpeed]
+	sub b
+	pop bc
+	jr nc, .dangerous ; if player is likely faster than opponent, consider them dangerous (using a non damaging move will result in the enemy getting hit twice due to slower speed) 
+.skipSpeedComparison
 
 	ld a, 2
 	call AICheckIfHPBelowFractionWrapped
@@ -636,8 +666,12 @@ AIMoveChoiceModification3:
 	jr c, .notEffectiveMove
 	;ld a, [wEnemyMoveEffect]
 	; check for reasons not to use a super effective move here
-
 	dec [hl] ; slightly encourage this super effective move
+	cp FOUR_TIMES_EFFECTIVE
+	jr nz, .checkSpecificEffects
+	call CheckHarderAIActive
+	jr z, .checkSpecificEffects ; only encourages 4x moves further once you've obtained the soulbadge
+	dec [hl] ; encourage 4x effective moves further
 .checkSpecificEffects ; we'll further encourage certain moves
 	call EncouragePriorityIfSlow
 	call EncourageDrainingMoveIfLowHealth
@@ -714,12 +748,17 @@ CompareSpeed:
 	ret
 ;;;;;;;;;;
 
+
+CheckHarderAIActive:
+	ld a, [wObtainedBadges]
+	bit BIT_SOULBADGE, a
+	ret
+
 ; PureRGBnote: ADDED: encourages priority moves if the enemy's pokemon is slower than the player's and the move is neutral or super effective.
 ; BUT this effect is only applied after you have the soulbadge to prevent priority moves from being spammed early game.
 ; Applies to trainers that use AI subroutine 3
 EncouragePriorityIfSlow:
-	ld a, [wObtainedBadges]
-	bit BIT_SOULBADGE, a
+	call CheckHarderAIActive
 	ret z
 	ld a, [wEnemyMoveNum]
 	cp SWIFT
@@ -797,6 +836,9 @@ AIMoveChoiceModification4:
 	jr z, .done ; no more moves in move set
 	inc de
 	call ReadMove
+	ld a, [wEnemyMoveNum]
+	cp MIRROR_MOVE
+	call z, GetMirrorMoveResultMove ; we will treat mirror move as the move it will use if selected
 	ld a, [wEnemyMoveEffect]
 	cp DREAM_EATER_EFFECT
 	jr z, .checkOpponentAsleep
