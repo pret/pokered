@@ -2,6 +2,18 @@
 ; to dig between towns after a certain point. Digging also has a new overworld animation.
 
 DigFromPartyMenu::
+	; check if we are currently surfing
+	ld a, [wWalkBikeSurfState]
+	cp SURFING
+	ld hl, .cannotDigWhileSurfing
+	jr z, .printFailed
+	CheckEvent EVENT_LEARNED_TO_DIG_BETWEEN_TOWNS
+	jr z, .skipForestCheck
+	ld a, [wCurMapTileset]
+	cp FOREST
+	jr z, .noEscapeDungeon ; if we can dig between towns prefer it in the forest tileset
+.skipForestCheck
+	; check if we're trying to use dig in a dungeon
 	callfar IsEscapeRopeUsable
 	jr z, .noEscapeDungeon
 	ld a, ESCAPE_ROPE
@@ -10,7 +22,7 @@ DigFromPartyMenu::
 	call UseItem
 	ld a, [wActionResultOrTookBattleTurn]
 	and a
-	jr z, .noEscapeDungeon
+	jr z, .doneFailed
 	jr .doneSuccess
 .noEscapeDungeon
 	CheckEvent EVENT_LEARNED_TO_DIG_BETWEEN_TOWNS
@@ -18,16 +30,20 @@ DigFromPartyMenu::
 	ld a, [wObtainedBadges]
 	bit BIT_THUNDERBADGE, a
 	jp z, .newBadgeRequired
-	call CheckIfInFlyMap ; PureRGBnote: CHANGED: you can FLY from more places than vanilla game.
+	call CheckIfInDigMap
 	jr z, .canDig
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMonNicks
 	call GetPartyMonName
 	; change text
 	ld hl, .cannotDigHereText
+.printFailed
 	rst _PrintText
 	jr .doneFailed
 .canDig
+	call CheckTileNotDock
+	ld hl, .noWhereToDigDown
+	jr z, .printFailed
 	ld hl, wd72e
 	res 4, [hl]
 	callfar LoadTownMap_Dig
@@ -62,6 +78,12 @@ DigFromPartyMenu::
 	text_end
 .cannotDigHereText
 	text_far _CannotDigHereText
+	text_end
+.cannotDigWhileSurfing
+	text_far _CannotDigWhileSurfingText
+	text_end
+.noWhereToDigDown
+	text_far _NoWhereToDigDown
 	text_end
 
 StartDigEnterMapAnimation::
@@ -268,4 +290,39 @@ StartDigLeaveMapAnimation::
 	call ResetSoundModifiers
 	ld c, 36
 	rst _DelayFrames
+	ret
+
+CheckTileNotDock:
+	ld a, [wCurMapTileset]
+	cp OVERWORLD
+	jr nz, .noMatch
+	ld a, [wCurMapWidth]
+	lb de, 2, 2 ; block coord player is standing on
+	call GetBlockAtCoord
+	cp $54 ; dock block in overworld
+	ret
+.noMatch
+	ld a, 1
+	and a
+	ret
+
+; go to block on screen block coordinate d = x, e = y
+GetBlockAtCoord::
+	ld hl, wCurrentTileBlockMapViewPointer
+	call GetAddressFromPointer
+	ld b, 0
+	ld a, e
+	and a
+	jr z, .skip
+	ld a, [wCurMapWidth]
+	add 6 ; extra 3 blocks on both side of map view
+	ld c, a
+.loop
+	add hl, bc
+	dec e
+	jr nz, .loop
+.skip
+	ld c, d
+	add hl, bc
+	ld a, [hl]
 	ret

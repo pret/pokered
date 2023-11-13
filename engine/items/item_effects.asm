@@ -1826,6 +1826,16 @@ IsEscapeRopeUsable:
 ItemUseEscapeRope:
 	call IsEscapeRopeUsable
 	jp z, ItemUseNotTime
+;;;;;;;;;; PureRGBnote: ADDED: ask before using dig / escape rope to escape the dungeon
+	xor a
+	ld [wActionResultOrTookBattleTurn], a ; item initialized to not used
+	ld hl, .escapeText
+	rst _PrintText
+	call YesNoChoice
+	ld a, [wCurrentMenuItem]
+	and a
+	ret nz
+;;;;;;;;;;
 	ld hl, wd732
 	set 3, [hl]
 	set 6, [hl]
@@ -1842,6 +1852,11 @@ ItemUseEscapeRope:
 	ld c, 30
 	rst _DelayFrames
 	jp RemoveUsedItem
+.escapeText
+	text_far _EscapeText
+	text_far _ToLastPkmnCenterText
+	text_end
+
 
 INCLUDE "data/tilesets/escape_rope_tilesets.asm"
 
@@ -1898,7 +1913,8 @@ ItemUsePocketAbra:
 	ld hl, .pocketAbraFlavorText4
 	jr .done
 .wantToTeleportText
-	text_far _WantToTeleportText
+	text_far _WarpText
+	text_far _ToLastPkmnCenterText
 	text_end
 .pocketAbraNo
 	text_far _PocketAbraNo

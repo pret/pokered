@@ -35,8 +35,16 @@ _FlashLightsAreaText::
 	line "lights the area!"
 	prompt
 
-_WantToTeleportText::
-	text "Warp to the last"
+_EscapeText::
+	text "Escape@"
+	text_end
+
+_WarpText::
+	text "Warp@"
+	text_end
+
+_ToLastPkmnCenterText::
+	text " to the last"
 	line "#MON CENTER?"
 	prompt
 
@@ -102,6 +110,18 @@ _CannotDigHereText::
 	text_ram wcd6d
 	text " can't"
 	line "DIG here."
+	prompt
+
+_CannotDigWhileSurfingText::
+	text "Can't DIG while"
+	line "SURFing on water!"
+	prompt
+
+_NoWhereToDigDown::
+	text "You'll hit water"
+	line "if you dig here."
+	para "Find some"
+	line "stabler ground."
 	prompt
 
 _NotHealthyEnoughText::

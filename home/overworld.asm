@@ -658,14 +658,16 @@ PlayMapChangeSound::
 ;;;;;;;;;;
 
 CheckIfInFlyMap::
-	call CheckIfInOutsideMap
-	ret z
-	cp FOREST ; PureRGBnote: FIXED: can fly in safari zone and viridian forest
-	ret z
 	ld a, [wCurMap]
 	cp CELADON_MART_ROOF ; PureRGBnote: FIXED: can fly on roofs
 	ret z
 	cp CELADON_MANSION_ROOF ; PureRGBnote: FIXED: can fly on roofs
+	ret z
+	; fall through
+CheckIfInDigMap:: ; can dig outside, but not on roofs
+	call CheckIfInOutsideMap
+	ret z
+	cp FOREST ; PureRGBnote: FIXED: can fly in safari zone and viridian forest
 	ret
 
 CheckIfInOutsideMap::
