@@ -6752,7 +6752,7 @@ HandleExplodingAnimation:
 	ld a, [wMoveMissed]
 	and a
 	ret nz
-	ld a, 5
+	ld a, MEGA_PUNCH
 	ld [wAnimationType], a
 
 PlayMoveAnimation:
