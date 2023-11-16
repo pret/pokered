@@ -714,9 +714,9 @@ OaksLabScript_1d02b:
 OaksLabScript_1d076:
 	ld hl, OaksLab_TextPointers2
 	ld a, l
-	ld [wMapTextPtr], a
+	ld [wCurMapTextPtr], a
 	ld a, h
-	ld [wMapTextPtr + 1], a
+	ld [wCurMapTextPtr + 1], a
 	ret
 
 OaksLab_TextPointers:

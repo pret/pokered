@@ -1,6 +1,0 @@
-; wMapConnections::
-	const_def
-	const MAP_CONNECTION_BIT_EAST ; 0
-	const MAP_CONNECTION_BIT_WEST ; 1
-	const MAP_CONNECTION_BIT_SOUTH ; 2
-	const MAP_CONNECTION_BIT_NORTH ; 3
