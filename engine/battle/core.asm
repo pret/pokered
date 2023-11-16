@@ -7307,7 +7307,7 @@ HandleExplodingAnimation:
 	ld a, [wMoveMissed]
 	and a
 	ret nz
-	ld a, 5
+	ld a, 5 ; MEGA_PUNCH constant but also happens to be the move animation type's index in the animation type pointer table
 	ld [wAnimationType], a
 
 PlayMoveAnimation:

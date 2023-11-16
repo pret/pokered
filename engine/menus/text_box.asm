@@ -28,8 +28,7 @@ DisplayTextBoxID_::
 .coordTableMatch
 	call GetTextBoxIDCoords
 	call GetAddressOfScreenCoords
-	call TextBoxBorder
-	ret
+	jp TextBoxBorder
 .textAndCoordTableMatch
 	call GetTextBoxIDCoords
 	push hl
@@ -45,8 +44,7 @@ DisplayTextBoxID_::
 	call PlaceString
 	pop af
 	ld [wd730], a
-	call UpdateSprites
-	ret
+	jp UpdateSprites
 
 ; function to search a table terminated with $ff for a byte matching c in increments of de
 ; sets carry flag if a match is found and clears carry flag if not
