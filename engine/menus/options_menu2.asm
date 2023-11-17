@@ -260,14 +260,14 @@ CompareOptions2:
 	ld a, [wWalkBikeSurfState]
 	cp 1
 	ret nz
-	ld a, [wMapConnections]
+	ld a, [wCurMapConnections]
 	bit BIT_EXTRA_MUSIC_MAP, a
 	jp z, PlayDefaultMusic
 .extraMusicBank
 	ld d, 1
 	jpfar TryPlayExtraMusic
 .tryChangeMusic
-	ld a, [wMapConnections]
+	ld a, [wCurMapConnections]
 	bit BIT_EXTRA_MUSIC_MAP, a
 	ret z
 	jr .extraMusicBank

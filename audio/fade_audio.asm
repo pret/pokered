@@ -39,7 +39,7 @@ FadeOutAudio::
 	xor a
 	ld [wAudioFadeOutControl], a
 	call StopAllMusic ; shinpokerednote: MOVED: a common function to do what the 3 lines that used to be here did was created
-	ld a, [wMapConnections]
+	ld a, [wCurMapConnections]
 	bit BIT_EXTRA_MUSIC_MAP, a ; PureRGbnote: ADDED: does the map have extra music
 	jr z, .noExtraMusic
 	ld d, 0
@@ -53,7 +53,7 @@ FadeOutAudio::
 
 ;;;;;;;;;; PureRGBnote: ADDED: function for playing new music after it fades out without relying on the current music tracking setup.
 TryPlayExtraMusic:
-	ld a, [wMapConnections]
+	ld a, [wCurMapConnections]
 	bit BIT_EXTRA_MUSIC_MAP, a ; does the map have extra music
 	ret z
 PlayExtraMusic:

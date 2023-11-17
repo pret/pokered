@@ -826,7 +826,7 @@ ItemUseBicycle:
 	jr nz, .playGetOnBikeSound
 	ret
 .playDefaultMusic
-	ld a, [wMapConnections]
+	ld a, [wCurMapConnections]
 	bit BIT_EXTRA_MUSIC_MAP, a
 	jp z, PlayDefaultMusic
 	ld d, 1

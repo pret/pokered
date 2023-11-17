@@ -718,8 +718,8 @@ ExtraWarpCheck::
 MapEntryAfterBattle::
 	farcall IsPlayerStandingOnWarp ; for enabling warp testing after collisions
 ;;;;;;;;;; PureRGBnote: ADDED: skip fading in in maps that use a specific bit in their header - allows tile block replacements to go unseen
-	ld a, [wMapConnections]
-	bit 4, a
+	ld a, [wCurMapConnections]
+	bit BIT_DEFER_SHOWING_MAP, a
 	ret nz
 ;;;;;;;;;;
 	; fall through
@@ -1948,8 +1948,8 @@ RunMapScript::
 	bit 3, [hl]
 	res 3, [hl]
 	ret z
-	ld a, [wMapConnections]
-	bit 4, a
+	ld a, [wCurMapConnections]
+	bit BIT_DEFER_SHOWING_MAP, a
 	ret z
 	ld a, [wIsInBattle]
 	cp $ff

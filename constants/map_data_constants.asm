@@ -4,16 +4,16 @@ DEF MAP_BORDER EQU 3
 DEF DEFER_SHOWING_MAP EQU %10000
 DEF EXTRA_MUSIC_MAP   EQU %100000
 
-	const_def 4
-	const BIT_DEFER_SHOWING_MAP
-	const BIT_EXTRA_MUSIC_MAP
-
 ; connection directions
 	const_def
-	const EAST_F
-	const WEST_F
-	const SOUTH_F
-	const NORTH_F
+	const EAST_F ; 0
+	const WEST_F ; 1
+	const SOUTH_F ; 2
+	const NORTH_F ; 3
+
+; additional map header bit data
+	const BIT_DEFER_SHOWING_MAP ; 4
+	const BIT_EXTRA_MUSIC_MAP ; 5
 
 ; wCurMapConnections
 	const_def
