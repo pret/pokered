@@ -88,15 +88,13 @@ IF DEF(_DEBUG)
 	ld a, 15
 	ld [hl], a
 
-	; Pikachu gets Surf and Flash.
-	ld hl, wPartyMon6Moves + 2
+	; Pikachu gets Surf, Flash, and DIG.
+	ld hl, wPartyMon6Moves
 	ld a, SURF
 	ld [hli], a
 	ld a, FLASH
-	ld [hl], a
-	ld hl, wPartyMon6PP + 2
-	ld a, 15
-	ld [hl], a
+	ld [hli], a
+	ld [hl], DIG
 
 	; Get some debug items.
 	ld hl, wNumBagItems
@@ -129,6 +127,7 @@ IF DEF(_DEBUG)
 	ld [hl], %00011111
 	SetEvent EVENT_GOT_POKEDEX
 	SetEvent EVENT_GOT_MOVEDEX
+	SetEvent EVENT_LEARNED_TO_DIG_BETWEEN_TOWNS
 
 	
 	ld a, HS_LYING_OLD_MAN
@@ -180,7 +179,7 @@ DebugItemsList:
 	db TM_SUBSTITUTE, 20
 	db TOPSECRETKEY, 1
 	db -1 ; end
-	
+
 ELSE
 	ret
 ENDC
