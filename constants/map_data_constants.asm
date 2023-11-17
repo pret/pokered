@@ -10,6 +10,13 @@ DEF EXTRA_MUSIC_MAP   EQU %100000
 
 ; connection directions
 	const_def
+	const EAST_F
+	const WEST_F
+	const SOUTH_F
+	const NORTH_F
+
+; wCurMapConnections
+	const_def
 	shift_const EAST   ; 1
 	shift_const WEST   ; 2
 	shift_const SOUTH  ; 4
