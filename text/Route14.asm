@@ -12,13 +12,12 @@ _Route14CooltrainerM1EndBattleText::
 _Route14CooltrainerM1AfterBattleText::
 	text "You have some HMs"
 	line "right?"
-	para "They can be"
+	para "HM moves can be"
 	line "replaced just"
 	cont "like other moves"
-	cont "can."
-	para "It's best to"
-	line "replace them at a"
-	cont "#MON CENTER."
+	cont "can, anytime,"
+	cont "anywhere!"
+	para "No worries!"
 	done
 
 _Route14CooltrainerM2BattleText::
