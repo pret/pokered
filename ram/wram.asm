@@ -1795,17 +1795,16 @@ wLastMap:: db
 
 wUnusedD366:: db
 
+wCurMapHeader::
 wCurMapTileset:: db
-
-; blocks
-wCurMapHeight:: db
+wCurMapHeight:: db 
 wCurMapWidth:: db
+wCurMapDataPtr:: dw
+wCurMapTextPtr:: dw
+wCurMapScriptPtr:: dw
+wCurMapConnections:: db
+wCurMapHeaderEnd::
 
-wMapDataPtr:: dw
-wMapTextPtr:: dw
-wMapScriptPtr:: dw
-
-wMapConnections:: db
 wNorthConnectionHeader:: map_connection_struct wNorth
 wSouthConnectionHeader:: map_connection_struct wSouth
 wWestConnectionHeader::  map_connection_struct wWest
