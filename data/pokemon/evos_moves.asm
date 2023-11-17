@@ -902,7 +902,7 @@ ParasectEvosMoves:
 	db 15, MEGA_DRAIN
 	db 18, CONSTRICT ; STATIC SNAG
 	db 21, LEECH_LIFE
-	db 24, BARRAGE
+	db 25, BARRAGE
 	db 28, SPORE
 	db 33, GROWTH
 	db 39, SOLARBEAM
