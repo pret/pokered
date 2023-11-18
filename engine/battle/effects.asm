@@ -674,8 +674,21 @@ RestoreOriginalStatModifier:
 	dec [hl]
 
 PrintNothingHappenedText:
+;;;;;;;;;; PureRGBnote: ADDED: for damaging moves that raise a stat on using them, skip printing "Nothing Happened!" when using them with maxed stats
+	ldh a, [hWhoseTurn]
+	and a
+	ld a, [wPlayerMoveNum]
+	jr z, .playerTurn
+	ld a, [wEnemyMoveNum]
+.playerTurn
+	cp SUBMISSION
+	ret z ; if the move is a side effect, skip writing "nothing happened"
+	cp RAGE
+	ret z ; if the move is a side effect, skip writing "nothing happened"
+;;;;;;;;;;
 	ld hl, NothingHappenedText
-	jp PrintText
+	rst _PrintText
+	ret
 
 MonsStatsRoseText:
 	text_far _MonsStatsRoseText
@@ -689,9 +702,9 @@ MonsStatsRoseText:
 .playerTurn
 ;;;;;;;;;; PureRGBnote: ADDED: these specific effects don't use "greatly rose" text
 	cp ATTACK_UP_SIDE_EFFECT
-	jp z, .rose
+	jr z, .rose
 	cp SPEED_UP_SIDE_EFFECT
-	jp z, .rose
+	jr z, .rose
 ;;;;;;;;;;
 	cp ATTACK_DOWN1_EFFECT
 	ret nc
