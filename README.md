@@ -18,7 +18,9 @@ To set up the repository, see [**INSTALL.md**](INSTALL.md).
 - [**Wiki**][wiki] (includes [tutorials][tutorials])
 - [**Symbols**][symbols]
 
-For contacts and other pret projects, see [pret.github.io](https://pret.github.io/).
+You can find us on [Discord (pret, #pokered)](https://discord.gg/d5dubZ3).
+
+For other pret projects, see [pret.github.io](https://pret.github.io/).
 
 [wiki]: https://github.com/pret/pokered/wiki
 [tutorials]: https://github.com/pret/pokered/wiki/Tutorials
