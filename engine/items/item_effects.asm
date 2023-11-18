@@ -1419,7 +1419,7 @@ ItemUseMedicine:
 	ld [wAIMoveSpamAvoider], a ; load this value so the AI doesn't spam status moves right after you heal a status
 ;;;;;;;;;;
 .calculateHPBarCoords
-	ld hl, wShadowOAMSprite36
+	hlcoord 4, -1
 	ld bc, 2 * SCREEN_WIDTH
 	inc d
 .calculateHPBarCoordsLoop
