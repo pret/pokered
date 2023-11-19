@@ -4,7 +4,7 @@ SeafoamIslandsB4F_Script:
 	ld hl, SeafoamIslandsB4F_ScriptPointers
 	jp CallFunctionInTable
 
-SeafoamIslands5Script_467a5:
+SeafoamIslandsB4FResetScript:
 	xor a
 	ld [wSeafoamIslandsB4FCurScript], a
 	ld [wJoyIgnore], a
@@ -22,7 +22,7 @@ SeafoamIslandsB4F_ScriptPointers:
 SeafoamIslandsB4FObjectMoving3Script:
 	ld a, [wIsInBattle]
 	cp $ff
-	jr z, SeafoamIslands5Script_467a5
+	jr z, SeafoamIslandsB4FResetScript
 	call EndTrainerBattle
 	ld a, SCRIPT_SEAFOAMISLANDSB4F_DEFAULT
 	ld [wSeafoamIslandsB4FCurScript], a
@@ -36,14 +36,14 @@ SeafoamIslandsB4FDefaultScript:
 	ret nc
 	ld a, [wCoordIndex]
 	cp $3
-	jr nc, .asm_467e6
+	jr nc, .only1UpInputNeeded
 	ld a, NPC_MOVEMENT_UP
 	ld [wSimulatedJoypadStatesEnd + 1], a
 	ld a, 2
-	jr .asm_467e8
-.asm_467e6
+	jr .forcePlayerUpFromSurfExit
+.only1UpInputNeeded
 	ld a, 1
-.asm_467e8
+.forcePlayerUpFromSurfExit
 	ld [wSimulatedJoypadStatesIndex], a
 	ld a, D_UP
 	ld [wSimulatedJoypadStatesEnd], a
@@ -74,26 +74,26 @@ SeafoamIslandsB4FObjectMoving1Script:
 SeafoamIslandsB4FMoveObjectScript:
 	CheckBothEventsSet EVENT_SEAFOAM4_BOULDER1_DOWN_HOLE, EVENT_SEAFOAM4_BOULDER2_DOWN_HOLE
 	ld a, SCRIPT_SEAFOAMISLANDSB4F_DEFAULT
-	jr z, .asm_46849
+	jr z, .playerNotInStrongCurrent
 	ld hl, .Coords
 	call ArePlayerCoordsInArray
 	ld a, SCRIPT_SEAFOAMISLANDSB4F_DEFAULT
-	jr nc, .asm_46849
+	jr nc, .playerNotInStrongCurrent
 	ld a, [wCoordIndex]
 	cp $1
-	jr nz, .asm_46837
-	ld de, RLEMovementData_46859
-	jr .asm_4683a
-.asm_46837
-	ld de, RLEMovementData_46852
-.asm_4683a
+	jr nz, .nearRightBoulder
+	ld de, .RLEList_StrongCurrentNearLeftBoulder
+	jr .forceSurfMovement
+.nearRightBoulder
+	ld de, .RLEList_StrongCurrentNearRightBoulder
+.forceSurfMovement
 	ld hl, wSimulatedJoypadStatesEnd
 	call DecodeRLEList
 	dec a
 	ld [wSimulatedJoypadStatesIndex], a
 	call StartSimulatingJoypadStates
 	ld a, SCRIPT_SEAFOAMISLANDSB4F_OBJECT_MOVING2
-.asm_46849
+.playerNotInStrongCurrent
 	ld [wSeafoamIslandsB4FCurScript], a
 	ret
 
@@ -102,13 +102,13 @@ SeafoamIslandsB4FMoveObjectScript:
 	dbmapcoord  5, 14
 	db -1 ; end
 
-RLEMovementData_46852:
+.RLEList_StrongCurrentNearRightBoulder:
 	db D_UP, 3
 	db D_RIGHT, 2
 	db D_UP, 1
 	db -1 ; end
 
-RLEMovementData_46859:
+.RLEList_StrongCurrentNearLeftBoulder:
 	db D_UP, 3
 	db D_RIGHT, 3
 	db D_UP, 1

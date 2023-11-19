@@ -1,5 +1,5 @@
 PokemonMansion1F_Script:
-	call Mansion1Subscript1
+	call Mansion1CheckReplaceSwitchDoorBlocks
 	call EnableAutoTextBoxDrawing
 	ld hl, Mansion1TrainerHeaders
 	ld de, PokemonMansion1F_ScriptPointers
@@ -8,37 +8,37 @@ PokemonMansion1F_Script:
 	ld [wPokemonMansion1FCurScript], a
 	ret
 
-Mansion1Subscript1:
+Mansion1CheckReplaceSwitchDoorBlocks:
 	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
 	CheckEvent EVENT_MANSION_SWITCH_ON
-	jr nz, .asm_442ec
+	jr nz, .switchTurnedOn
 	lb bc, 6, 12
-	call Mansion1Script_4430b
+	call Mansion1LoadEmptyFloorTileBlock
 	lb bc, 3, 8
-	call Mansion1Script_44304
+	call Mansion1LoadHorizontalGateBlock
 	lb bc, 8, 10
-	call Mansion1Script_44304
+	call Mansion1LoadHorizontalGateBlock
 	lb bc, 13, 13
-	jp Mansion1Script_44304
-.asm_442ec
+	jp Mansion1LoadHorizontalGateBlock
+.switchTurnedOn
 	lb bc, 6, 12
-	call Mansion1Script_44304
+	call Mansion1LoadHorizontalGateBlock
 	lb bc, 3, 8
-	call Mansion1Script_4430b
+	call Mansion1LoadEmptyFloorTileBlock
 	lb bc, 8, 10
-	call Mansion1Script_4430b
+	call Mansion1LoadEmptyFloorTileBlock
 	lb bc, 13, 13
-	jp Mansion1Script_4430b
+	jp Mansion1LoadEmptyFloorTileBlock
 
-Mansion1Script_44304:
+Mansion1LoadHorizontalGateBlock:
 	ld a, $2d
 	ld [wNewTileBlockID], a
 	jr Mansion1ReplaceBlock
 
-Mansion1Script_4430b:
+Mansion1LoadEmptyFloorTileBlock:
 	ld a, $e
 	ld [wNewTileBlockID], a
 Mansion1ReplaceBlock:
