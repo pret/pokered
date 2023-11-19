@@ -11180,7 +11180,7 @@ ROMX bank #22:
 	         $64bb = HallOfFameResetEventsAndSaveScript
 	         $64ff = HallOfFameResetEventsAndSaveScript.delayLoop
 	         $650d = HallOfFameDefaultScript
-	         $6528 = HallOfFakeEntryMovement
+	         $6528 = HallOfFameEntryMovement
 	         $652b = HallOfFameOakCongratulationsScript
 	         $656a = HallOfFame_TextPointers
 	         $656c = HallOfFameOakText

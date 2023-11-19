@@ -10986,7 +10986,7 @@
 16:64bb HallOfFameResetEventsAndSaveScript
 16:64ff HallOfFameResetEventsAndSaveScript.delayLoop
 16:650d HallOfFameDefaultScript
-16:6528 HallOfFakeEntryMovement
+16:6528 HallOfFameEntryMovement
 16:652b HallOfFameOakCongratulationsScript
 16:656a HallOfFame_TextPointers
 16:656c HallOfFameOakText
