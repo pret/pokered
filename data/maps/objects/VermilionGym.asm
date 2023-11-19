@@ -13,6 +13,8 @@ VermilionGym_Object:
 	warp_event  5, 17, LAST_MAP, 4
 
 	def_bg_events
+	bg_event  6,  1, TEXT_VERMILIONGYM_GARBAGE_NEAR_SURGE
+	bg_event  7,  1, TEXT_VERMILIONGYM_BOOKSHELF
 
 	def_object_events
 	object_event  5,  1, SPRITE_LT_SURGE, STAY, DOWN, TEXT_VERMILIONGYM_LT_SURGE, OPP_LT_SURGE, 1

@@ -7,6 +7,7 @@ FuchsiaGoodRodHouse_TextPointers:
 	def_text_pointers
 	dw_const FuchsiaGoodRodHouseFishingGuruText, TEXT_FUCHSIAGOODRODHOUSE_FISHING_GURU
 	dw_const FuchsiaFishingGuide,                TEXT_FUCHSIAGOODRODHOUSE_FISHING_GUIDE
+	dw_const FuchsiaGoodRodHouseGarbageText,                TEXT_FUCHSIAGOODRODHOUSE_GARBAGE
 
 FuchsiaGoodRodHouseFishingGuruText:
 	text_asm
@@ -34,3 +35,9 @@ FuchsiaFishingGuide:
 	text_asm
 	callfar LastTwoGurusFishingGuideBookText
 	rst TextScriptEnd
+
+; PureRGBnote: ADDED: text entry for the garbage can in this room
+
+FuchsiaGoodRodHouseGarbageText:
+	text_far _FuchsiaGoodRodHouseGarbageText
+	text_end

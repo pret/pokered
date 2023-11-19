@@ -69,3 +69,17 @@ _BikeShopYoungsterCoolBikeText::
 	text "Wow. Your BIKE is"
 	line "really cool!"
 	done
+
+_BikeShopBasketBikeText::
+	text "This BIKE has a"
+	line "basket attached."
+	para "Very practical!"
+	done
+
+_BikeShopToolboxText::
+	text "A toolbox for"
+	line "repairing BIKEs!"
+	para "Tire patches,"
+	line "a pump, hex keys,"
+	cont "tools galore!"
+	done

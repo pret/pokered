@@ -6,6 +6,7 @@ CinnabarLabFossilRoom_TextPointers:
 	dw_const CinnabarLabFossilRoomScientist1Text, TEXT_CINNABARLABFOSSILROOM_SCIENTIST1
 	dw_const CinnabarLabFossilRoomScientist2Text, TEXT_CINNABARLABFOSSILROOM_SCIENTIST2
 	dw_const CinnabarLabFossilRoomColorChangerText, TEXT_CINNABARLABFOSSILROOM_COLOR_CHANGER
+	dw_const CinnabarLabFossilRoomDeskPapersText, TEXT_CINNABARLABFOSSILROOM_DESK_PAPERS
 
 Lab4Script_GetFossilsInBag:
 ; construct a list of all fossils in the player's bag
@@ -398,4 +399,10 @@ LabColorChangerColorChangeDone:
 
 LabColorChangerResearchingColors:
 	text_far _LabColorChangerResearchingColors
+	text_end
+
+; PureRGBnote: ADDED: text entry for the papers on the desk
+
+CinnabarLabFossilRoomDeskPapersText:
+	text_far _CinnabarLabFossilRoomDeskPapersText
 	text_end

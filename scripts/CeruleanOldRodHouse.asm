@@ -5,6 +5,7 @@ CeruleanOldRodHouse_Script:
 CeruleanOldRodHouse_TextPointers:
 	def_text_pointers
 	dw_const CeruleanOldRodHouse1Text1,  TEXT_CERULEANOLDRODHOUSE_FISHING_GURU
+	dw_const CeruleanOldRodHouseFoodText,  TEXT_CERULEANOLDRODHOUSE_FOOD
 
 CeruleanOldRodHouse1Text1:
 	text_asm
@@ -38,22 +39,42 @@ CeruleanOldRodHouse1Text1:
 
 .CeruleanOldRodHouseImTheFishingGuruText:
 	text_far _CeruleanOldRodHouseImTheFishingGuruText
+	text_far _VermilionOldRodHouseISimplyLoveFishing
 	text_end
 
 .CeruleanOldRodHouseGiveRod:
-	text_far _CeruleanOldRodHouseGrandILikeYourStyleText
+	text_far _VermilionOldRodHouseFishingGuruTakeThisText
 	sound_get_item_1
 	text_far _CeruleanOldRodHouseFishingIsAWayOfLifeText
 	text_end
 
 .CeruleanOldRodHouseDisappointing:
-	text_far _CeruleanOldRodHouseDisappointing
+	text_far _LastTwoGurusTextNo
 	text_end
 
 .CeruleanOldRodHouseHowAreFishBiting:
-	text_far _CeruleanOldRodHouseHowAreFishBiting
+	text_far _VermilionOldRodHouseFishingGuruHowAreTheFishBitingText
+	text_far _CeruleanOldRodHouseOldRodInfo
 	text_end
 
 .CeruleanOldRodHouseNoRoom:
-	text_far _CeruleanOldRodHouseNoRoom
+	text_far _LastTwoGurusTextBagFull
+	text_end
+
+; PureRGBnote: ADDED: some text where it seems like there should be an interaction.
+
+CeruleanOldRodHouseFoodText:
+	text_asm
+	ld hl, .wowFish
+	rst _PrintText
+	ld d, CERULEANOLDRODHOUSE_FISHING_GURU
+	callfar FarSetSpriteFacingUp
+	ld hl, .whatCanISayLoveCooking
+	rst _PrintText
+	rst TextScriptEnd
+.wowFish
+	text_far _CeruleanOldRodHouseFoodText
+	text_end
+.whatCanISayLoveCooking
+	text_far _CeruleanOldRodHouseFoodText2
 	text_end

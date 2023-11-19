@@ -11,6 +11,10 @@ BikeShop_Object:
 	warp_event  3,  7, LAST_MAP, 5
 
 	def_bg_events
+	bg_event  4, 0, TEXT_BIKESHOP_BASKET_BIKE
+	bg_event  6, 6, TEXT_BIKESHOP_TOOLBOX1
+	bg_event  7, 7, TEXT_BIKESHOP_TOOLBOX2
+
 
 	def_object_events
 	object_event  6,  2, SPRITE_BIKE_SHOP_CLERK, STAY, NONE, TEXT_BIKESHOP_CLERK

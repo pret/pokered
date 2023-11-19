@@ -11,6 +11,7 @@ FuchsiaGoodRodHouse_Object:
 	warp_event  3,  7, LAST_MAP, 8
 
 	def_bg_events
+	bg_event  7, 7, TEXT_FUCHSIAGOODRODHOUSE_GARBAGE
 
 	def_object_events
 	object_event  5,  3, SPRITE_FISHING_GURU, STAY, RIGHT, TEXT_FUCHSIAGOODRODHOUSE_FISHING_GURU

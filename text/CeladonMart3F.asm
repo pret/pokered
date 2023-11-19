@@ -138,3 +138,29 @@ _CeladonMartTMKidFlavor::
 	
 	para "Catch you later!"
 	done
+
+_CeladonMart3FPartyGameText::
+	text "A TV ad for a new"
+	line "party game!"
+	para "That'll be fun"
+	line "with friends!"
+	para "Bunch of kids are"
+	line "mashing buttons"
+	cont "and making crazy"
+	cont "faces."
+	done
+
+_CeladonMart3FPlatformerGameText::
+	text "A TV ad for a new"
+	line "platformer game!"
+	para "Wow! It's in"
+	line "stunning 3D!"
+	para "The players are"
+	line "making MARIO jump"
+	cont "all over."
+	para "Whoa!"
+	para "MARIO came out"
+	line "of their TV!"
+	para "Now he raided"
+	line "their fridge!"
+	done

@@ -1,9 +1,11 @@
 _VermilionOldRodHouseFishingGuruDoYouLikeToFishText::
 	text "I'm the FISHING"
 	line "GURU's older"
-	cont "brother!"
+	cont "brother!@"
+	text_end
 
-	para "I simply Looove"
+_VermilionOldRodHouseISimplyLoveFishing::
+	text "<PARA>I simply Looove"
 	line "fishing!"
 
 	para "Do you like to"
@@ -23,19 +25,16 @@ _VermilionOldRodHouseFishingGuruTakeThisText::
 	text "!@"
 	text_end
 
-_VermilionOldRodHouseFishingGuruThatsSoDisappointingText::
-	text "Oh... That's so"
-	line "disappointing..."
-	done
-
 _VermilionOldRodHouseFishingGuruHowAreTheFishBitingText::
 	text "Hello there,"
 	line "<PLAYER>!"
 
 	para "How are the fish"
-	line "biting?"
+	line "biting?@"
+	text_end
 
-	para "That GOOD ROD I"
+_VermilionOldRodHouseGoodRodInfo::
+	text "<PARA>That GOOD ROD I"
 	line "gave you is a"
 	cont "reliable piece!"
 
@@ -46,11 +45,4 @@ _VermilionOldRodHouseFishingGuruHowAreTheFishBitingText::
 	para "It can hook lots"
 	line "of different"
 	cont "#MON!"
-	done
-
-_VermilionOldRodHouseFishingGuruNoRoomText::
-	text "Oh no!"
-
-	para "You have no room"
-	line "for my gift!"
 	done

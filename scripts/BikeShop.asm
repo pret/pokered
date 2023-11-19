@@ -6,6 +6,9 @@ BikeShop_TextPointers:
 	dw_const BikeShopClerkText,             TEXT_BIKESHOP_CLERK
 	dw_const BikeShopMiddleAgedWomanText,   TEXT_BIKESHOP_MIDDLE_AGED_WOMAN
 	dw_const BikeShopYoungsterText,         TEXT_BIKESHOP_YOUNGSTER
+	dw_const BikeShopBasketBikeText,        TEXT_BIKESHOP_BASKET_BIKE
+	dw_const BikeShopToolboxText,           TEXT_BIKESHOP_TOOLBOX1
+	dw_const BikeShopToolboxText,           TEXT_BIKESHOP_TOOLBOX2
 
 BikeShopClerkText:
 	text_asm
@@ -120,12 +123,6 @@ BikeShopBagFullText:
 	text_end
 
 BikeShopMiddleAgedWomanText:
-	text_asm
-	ld hl, .Text
-	rst _PrintText
-	rst TextScriptEnd
-
-.Text:
 	text_far _BikeShopMiddleAgedWomanText
 	text_end
 
@@ -145,4 +142,14 @@ BikeShopYoungsterText:
 
 .CoolBikeText:
 	text_far _BikeShopYoungsterCoolBikeText
+	text_end
+
+; PureRGBnote: ADDED: some extra text for things that look like they should be interactable.
+
+BikeShopBasketBikeText:
+	text_far _BikeShopBasketBikeText
+	text_end
+
+BikeShopToolboxText:
+	text_far _BikeShopToolboxText
 	text_end

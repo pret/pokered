@@ -84,3 +84,10 @@ _WardensHouseDisplayMerchandiseText::
 	text "Old #MON"
 	line "merchandise."
 	done
+
+_WardensHouseDeskPapersText::
+	text "A document that"
+	line "reads:"
+	para "DENTAL IMPLANTS"
+	line "REQUISITION"
+	done

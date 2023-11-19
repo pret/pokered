@@ -6,8 +6,9 @@ WardensHouse_TextPointers:
 	dw_const WardensHouseWardenText,  TEXT_WARDENSHOUSE_WARDEN
 	dw_const PickUpItemText,          TEXT_WARDENSHOUSE_ITEM1
 	dw_const BoulderText,             TEXT_WARDENSHOUSE_BOULDER
-	dw_const WardensHouseDisplayText, TEXT_WARDENSHOUSE_DISPLAY_LEFT
-	dw_const WardensHouseDisplayText, TEXT_WARDENSHOUSE_DISPLAY_RIGHT
+	dw_const WardensHouseDisplayLeftText, TEXT_WARDENSHOUSE_DISPLAY_LEFT
+	dw_const WardensHouseDisplayRightText, TEXT_WARDENSHOUSE_DISPLAY_RIGHT
+	dw_const WardensHouseDeskPapersText, TEXT_WARDENSHOUSE_DESK_PAPERS
 
 WardensHouseWardenText:
 	text_asm
@@ -93,21 +94,16 @@ WardensHouseWardenText:
 	text_far _WardensHouseWardenHM04NoRoomText
 	text_end
 
-WardensHouseDisplayText:
-	text_asm
-	ldh a, [hSpriteIndexOrTextID]
-	cp TEXT_WARDENSHOUSE_DISPLAY_LEFT
-	ld hl, .MerchandiseText
-	jr nz, .print_text
-	ld hl, .PhotosAndFossilsText
-.print_text
-	rst _PrintText
-	rst TextScriptEnd
-
-.PhotosAndFossilsText:
+WardensHouseDisplayLeftText:
 	text_far _WardensHouseDisplayPhotosAndFossilsText
 	text_end
 
-.MerchandiseText:
+WardensHouseDisplayRightText:
 	text_far _WardensHouseDisplayMerchandiseText
+	text_end
+
+; PureRGBnote: Text entry for the papers on the warden's desk
+
+WardensHouseDeskPapersText:
+	text_far _WardensHouseDeskPapersText
 	text_end

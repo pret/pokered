@@ -10,6 +10,7 @@ CeruleanBadgeHouse_Object:
 	warp_event  3,  7, LAST_MAP, 9
 
 	def_bg_events
+	bg_event  7, 7, TEXT_CERULEANBADGEHOUSE_GARBAGE
 
 	def_object_events
 	object_event  5,  3, SPRITE_MIDDLE_AGED_MAN, STAY, RIGHT, TEXT_CERULEANBADGEHOUSE_MIDDLE_AGED_MAN

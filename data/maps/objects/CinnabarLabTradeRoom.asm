@@ -11,6 +11,7 @@ CinnabarLabTradeRoom_Object:
 	warp_event  3,  7, CINNABAR_LAB, 3
 
 	def_bg_events
+	bg_event  3,  0, TEXT_CINNABARLABTRADEROOM_POSTER
 
 	def_object_events
 	object_event  3,  2, SPRITE_SUPER_NERD, STAY, DOWN, TEXT_CINNABARLABTRADEROOM_SUPER_NERD

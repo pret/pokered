@@ -11,6 +11,7 @@ CinnabarLabFossilRoom_Object:
 	warp_event  3,  7, CINNABAR_LAB, 5
 
 	def_bg_events
+	bg_event  6,  5, TEXT_CINNABARLABFOSSILROOM_DESK_PAPERS
 
 	def_object_events
 	object_event  5,  2, SPRITE_SCIENTIST, WALK, LEFT_RIGHT, TEXT_CINNABARLABFOSSILROOM_SCIENTIST1 

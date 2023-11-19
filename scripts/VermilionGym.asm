@@ -87,6 +87,8 @@ VermilionGym_TextPointers:
 	dw_const VermilionGymSuperNerdText,               TEXT_VERMILIONGYM_ROCKER
 	dw_const VermilionGymSailorText,                  TEXT_VERMILIONGYM_SOLDIER2
 	dw_const VermilionGymGymGuideText,                TEXT_VERMILIONGYM_GYM_GUIDE
+	dw_const VermilionGymGarbageNearSurgeText,        TEXT_VERMILIONGYM_GARBAGE_NEAR_SURGE
+	dw_const VermilionGymBookshelfText,               TEXT_VERMILIONGYM_BOOKSHELF
 	dw_const VermilionGymLTSurgeThunderBadgeInfoText, TEXT_VERMILIONGYM_LT_SURGE_THUNDER_BADGE_INFO
 	dw_const VermilionGymLTSurgeReceivedTM24Text,     TEXT_VERMILIONGYM_LT_SURGE_RECEIVED_TM24
 	dw_const VermilionGymLTSurgeTM24NoRoomText,       TEXT_VERMILIONGYM_LT_SURGE_TM24_NO_ROOM
@@ -289,4 +291,14 @@ VermilionGymGuidePostBattleTextPrompt:
 
 VermilionGymGuideApexChipElectricText:
 	text_far _VermilionGymGuideApexChipElectricText
+	text_end
+
+; PureRGBnote: ADDED: text entries for the garbage can and bookcase near surge for some flavour
+
+VermilionGymGarbageNearSurgeText:
+	text_far _VermilionGymGarbageNearSurgeText
+	text_end
+
+VermilionGymBookshelfText:
+	text_far _VermilionGymBookshelfText
 	text_end

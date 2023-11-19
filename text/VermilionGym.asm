@@ -19,3 +19,23 @@ _VermilionGymLTSurgePreBattleText::
 	para "The same as I'll"
 	line "do to you!"
 	done
+
+_VermilionGymGarbageNearSurgeText::
+	text "An empty can is"
+	line "in the trash."
+	para "ARMY FIELD RATION"
+	line "CHEDDAR CHEESE"
+	cont "is written on it."
+	done
+
+_VermilionGymBookshelfText::
+	text "A bunch of books"
+	line "on military"
+	cont "topics."
+	para "A HISTORY OF"
+	line "SERVICE #MON,"
+	para "RECONNAISSANCE"
+	line "SPEAROW STYLE,"
+	para "THE DANGER OF"
+	line "DITTO SPIES..."
+	done

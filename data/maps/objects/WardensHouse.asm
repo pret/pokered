@@ -13,6 +13,7 @@ WardensHouse_Object:
 	def_bg_events
 	bg_event  4,  3, TEXT_WARDENSHOUSE_DISPLAY_LEFT
 	bg_event  5,  3, TEXT_WARDENSHOUSE_DISPLAY_RIGHT
+	bg_event  0,  2, TEXT_WARDENSHOUSE_DESK_PAPERS
 
 	def_object_events
 	object_event  2,  3, SPRITE_WARDEN, STAY, NONE, TEXT_WARDENSHOUSE_WARDEN

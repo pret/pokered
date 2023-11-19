@@ -10,6 +10,7 @@ CeruleanOldRodHouse_Object:
 	warp_event  3,  9, LAST_MAP, 11
 
 	def_bg_events
+	bg_event  6, 6, TEXT_CERULEANOLDRODHOUSE_FOOD	
 
 	def_object_events
 	object_event  5,  7, SPRITE_FISHING_GURU, STAY, RIGHT, TEXT_CERULEANOLDRODHOUSE_FISHING_GURU

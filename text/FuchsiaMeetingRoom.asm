@@ -24,3 +24,22 @@ _FuchsiaMeetingRoomSafariZoneWorker3::
 	para "I think he's got"
 	line "a speech problem!"
 	done
+
+_FuchsiaMeetingRoomPoster::
+	text "A landscape photo"
+	line "taken from a"
+	cont "helicopter."
+	para "The whole SAFARI"
+	line "ZONE is visible!"
+	done
+
+_FuchsiaMeetingRoomDeskPapers::
+	text "An interesting"
+	line "result of zoo"
+	cont "captivity:"
+	para "Our resident"
+	line "VOLTORB explodes"
+	cont "much less often"
+	cont "on average when"
+	cont "around people."
+	done

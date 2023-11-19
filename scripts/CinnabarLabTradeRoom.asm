@@ -6,6 +6,7 @@ CinnabarLabTradeRoom_TextPointers:
 	dw_const CinnabarLabTradeRoomSuperNerdText, TEXT_CINNABARLABTRADEROOM_SUPER_NERD
 	dw_const CinnabarLabTradeRoomGrampsText,    TEXT_CINNABARLABTRADEROOM_GRAMPS
 	dw_const CinnabarLabTradeRoomBeautyText,    TEXT_CINNABARLABTRADEROOM_BEAUTY
+	dw_const CinnabarLabTradeRoomPosterText,    TEXT_CINNABARLABTRADEROOM_POSTER
 
 CinnabarLabTradeRoomSuperNerdText:
 	text_far _CinnabarLabTradeRoomSuperNerdText
@@ -24,3 +25,9 @@ CinnabarLabTradeRoomBeautyText:
 CinnabarLabTradeRoomDoTrade:
 	predef DoInGameTradeDialogue
 	rst TextScriptEnd
+
+; PureRGBnote: ADDED: text entry for the poster in this room
+
+CinnabarLabTradeRoomPosterText:
+	text_far _CinnabarLabTradeRoomPosterText
+	text_end

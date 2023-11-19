@@ -39,6 +39,7 @@ VermilionGuruHouseText1:
 
 .DoYouLikeToFishText:
 	text_far _VermilionOldRodHouseFishingGuruDoYouLikeToFishText
+	text_far _VermilionOldRodHouseISimplyLoveFishing
 	text_end
 
 .TakeThisText:
@@ -47,13 +48,14 @@ VermilionGuruHouseText1:
 	text_end
 
 .ThatsSoDisappointingText:
-	text_far _VermilionOldRodHouseFishingGuruThatsSoDisappointingText
+	text_far _LastTwoGurusTextNo
 	text_end
 
 .HowAreTheFishBitingText:
 	text_far _VermilionOldRodHouseFishingGuruHowAreTheFishBitingText
+	text_far _VermilionOldRodHouseGoodRodInfo
 	text_end
 
 .NoRoomText:
-	text_far _VermilionOldRodHouseFishingGuruNoRoomText
+	text_far _LastTwoGurusTextBagFull
 	text_end

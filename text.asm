@@ -135,6 +135,8 @@ INCLUDE "text/Route22.asm"
 INCLUDE "text/Route23.asm"
 INCLUDE "text/Route24.asm"
 INCLUDE "text/ViridianSchoolHouseQuiz.asm"
+INCLUDE "text/CinnabarLabTradeRoom.asm"
+INCLUDE "text/FuchsiaMeetingRoom.asm"
 
 
 SECTION "Text 6", ROMX
@@ -228,12 +230,10 @@ INCLUDE "text/FuchsiaGym.asm"
 SECTION "Text 9", ROMX
 
 INCLUDE "text/FuchsiaGym_2.asm"
-INCLUDE "text/FuchsiaMeetingRoom.asm"
 INCLUDE "text/FuchsiaGoodRodHouse.asm"
 INCLUDE "text/PokemonMansion1F.asm"
 INCLUDE "text/CinnabarGym.asm"
 INCLUDE "text/CinnabarLab.asm"
-INCLUDE "text/CinnabarLabTradeRoom.asm"
 INCLUDE "text/CinnabarLabMetronomeRoom.asm"
 INCLUDE "text/CinnabarLabFossilRoom.asm"
 INCLUDE "text/CinnabarPokecenter.asm"

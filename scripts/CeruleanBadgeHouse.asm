@@ -1,13 +1,10 @@
 CeruleanBadgeHouse_Script:
-	ld a, TRUE
-	ld [wAutoTextBoxDrawingControl], a
-	dec a
-	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
-	ret
+	jp EnableAutoTextBoxDrawing
 
 CeruleanBadgeHouse_TextPointers:
 	def_text_pointers
 	dw_const CeruleanBadgeHouseMiddleAgedManText, TEXT_CERULEANBADGEHOUSE_MIDDLE_AGED_MAN
+	dw_const CeruleanBadgeHouseGarbageText, TEXT_CERULEANBADGEHOUSE_GARBAGE
 
 CeruleanBadgeHouseMiddleAgedManText:
 	text_asm
@@ -122,4 +119,10 @@ CeruleanBadgeHouseVolcanoBadgeText:
 
 CeruleanBadgeHouseEarthBadgeText:
 	text_far _CeruleanBadgeHouseEarthBadgeText
+	text_end
+
+; PureRGBnote: ADDED: some text where it seems like there should be an interaction.
+
+CeruleanBadgeHouseGarbageText:
+	text_far _CeruleanBadgeHouseGarbageText
 	text_end

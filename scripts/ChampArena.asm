@@ -1562,6 +1562,10 @@ ChangeSpriteFacing:
 	ldh [hSpriteFacingDirection], a
 	jp SetSpriteFacingDirection
 
+FarSetSpriteFacingUp:
+	ld a, d
+	jr SetSpriteFacingUp
+
 AudienceClaps:
 	call PlayAudienceClappingSFX
 	ld c, 120 ; how many frames the animation will last

@@ -313,7 +313,7 @@ VermilionPokecenterHiddenObjects:
 VermilionGymHiddenObjects:
 	hidden_object  3, 14, SPRITE_FACING_UP, GymStatues
 	hidden_object  6, 14, SPRITE_FACING_UP, GymStatues
-	hidden_object  6,  1, SPRITE_FACING_DOWN, PrintTrashText
+	;hidden_object  6,  1, SPRITE_FACING_DOWN, PrintTrashText ; PureRGBnote: CHANGED: gave this trash can near surge unique text
 	; third param: [wGymTrashCanIndex]
 	hidden_object  1,  7,  0, GymTrashScript
 	hidden_object  1,  9,  1, GymTrashScript

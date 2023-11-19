@@ -76,3 +76,12 @@ _Lab4Text_610bd::
 	text "Aiyah! You come"
 	line "again!"
 	done
+
+_CinnabarLabFossilRoomDeskPapersText::
+	text "NEXT RESEARCH"
+	line "TARGET:"
+	para "Perform a deep"
+	line "study on how"
+	cont "PONYTA survives"
+	cont "with flaming mane."
+	done

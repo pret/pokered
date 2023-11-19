@@ -8,6 +8,8 @@ PrintBookshelfText::
 	ld a, [wCurMap]
 	cp TYPE_GUYS_HOUSE
 	jr z, .noMatch
+	cp VERMILION_GYM
+	jr z, .noMatch
 	cp CELADON_MANSION_2F
 	jr nz, .notCeladonHouses
 	callfar CeladonHouse2FBookCaseCheck

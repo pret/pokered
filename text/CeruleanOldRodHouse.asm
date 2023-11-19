@@ -1,25 +1,6 @@
 _CeruleanOldRodHouseImTheFishingGuruText::
 	text "I'm the FISHING"
-	line "GURU!"
-
-	para "I simply Looove"
-	line "fishing!"
-
-	para "Do you like to"
-	line "fish?"
-	done
-
-_CeruleanOldRodHouseGrandILikeYourStyleText::
-	text "Grand! I like"
-	line "your style!"
-
-	para "Take this and"
-	line "fish, young one!"
-
-	para "<PLAYER> received"
-	line "an @"
-	text_ram wStringBuffer
-	text "!@"
+	line "GURU!@"
 	text_end
 
 _CeruleanOldRodHouseFishingIsAWayOfLifeText::
@@ -34,27 +15,21 @@ _CeruleanOldRodHouseFishingIsAWayOfLifeText::
 	cont "one, young one!"
 	done
 
-_CeruleanOldRodHouseDisappointing::
-	text "Oh... That's so"
-	line "disappointing..."
-	done
-
-_CeruleanOldRodHouseHowAreFishBiting::
-	text "Hello there,"
-	line "<PLAYER>!"
-
-	para "How are the fish"
-	line "biting?"
-
-	para "My trusty OLD ROD"
+_CeruleanOldRodHouseOldRodInfo::
+	text "<PARA>My trusty OLD ROD"
 	line "is perfect for"
 	cont "hooking MAGIKARP"
 	cont "and GOLDEEN!"
 	done
 
-_CeruleanOldRodHouseNoRoom::
-	text "Oh no!"
+_CeruleanOldRodHouseFoodText::
+	text "Wow! Quite a"
+	line "fancy fishy dish!"
+	prompt
 
-	para "You have no room"
-	line "for my gift!"
+_CeruleanOldRodHouseFoodText2::
+	text "What can I say!"
+	para "I love cooking"
+	line "fish as much as I"
+	cont "do catching them!"
 	done

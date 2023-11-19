@@ -72,3 +72,11 @@ _FuchsiaGuruEnd::
 	line "and fish!"
 	done
 	
+_FuchsiaGoodRodHouseGarbageText::
+	text "There's a crumpled"
+	line "up ad in here."
+	para "Build your own"
+	line "fishing pond!"
+	para "Learn everything"
+	line "step-by-step!"
+	done

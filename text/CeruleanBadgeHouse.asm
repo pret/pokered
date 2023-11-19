@@ -95,3 +95,15 @@ _CeruleanBadgeHouseEarthBadgeText::
 	text "All #MON will"
 	line "obey you!"
 	prompt
+
+_CeruleanBadgeHouseGarbageText::
+	text "What's in the"
+	line "garbage bin?"
+	para "A crumpled up"
+	line "sheet of paper."
+	para "What's on it?"
+	para "Ohoho."
+	para "Some drawings"
+	cont "of BADGEs."
+	para "Is he a designer?"
+	done
