@@ -3,7 +3,7 @@ RocketHideoutElevator_Script:
 	bit 5, [hl]
 	res 5, [hl]
 	push hl
-	call nz, RocketHideoutElevatorGetWarpsScript
+	call nz, RocketHideoutElevatorStoreWarpEntriesScript
 	pop hl
 	bit 7, [hl]
 	res 7, [hl]
@@ -14,15 +14,15 @@ RocketHideoutElevator_Script:
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ret
 
-RocketHideoutElevatorGetWarpsScript:
+RocketHideoutElevatorStoreWarpEntriesScript:
 	ld hl, wWarpEntries
 	ld a, [wWarpedFromWhichWarp]
 	ld b, a
 	ld a, [wWarpedFromWhichMap]
 	ld c, a
-	call .SetWarpEntries
-
-.SetWarpEntries:
+	call .StoreWarpEntry
+	; fallthrough
+.StoreWarpEntry:
 	inc hl
 	inc hl
 	ld a, b
@@ -36,7 +36,7 @@ RocketHideoutElevatorScript:
 	call LoadItemList
 	ld hl, RocketHideoutElevatorWarpMaps
 	ld de, wElevatorWarpMaps
-	ld bc, RocketHideoutElevatorWarpMapsEnd - RocketHideoutElevatorWarpMaps
+	ld bc, RocketHideoutElevatorWarpMaps.End - RocketHideoutElevatorWarpMaps
 	call CopyData
 	ret
 
@@ -53,7 +53,7 @@ RocketHideoutElevatorWarpMaps:
 	db 4, ROCKET_HIDEOUT_B1F
 	db 4, ROCKET_HIDEOUT_B2F
 	db 2, ROCKET_HIDEOUT_B4F
-RocketHideoutElevatorWarpMapsEnd:
+.End:
 
 RocketHideoutElevatorShakeScript:
 	call Delay3

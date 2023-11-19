@@ -4,7 +4,7 @@ HallOfFame_Script:
 	ld a, [wHallOfFameCurScript]
 	jp CallFunctionInTable
 
-HallofFameRoomScript_5a4aa:
+HallofFameRoomClearScripts: ; unreferenced
 	xor a
 	ld [wJoyIgnore], a
 	ld [wHallOfFameCurScript], a
@@ -60,7 +60,7 @@ HallOfFameDefaultScript:
 	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	ld hl, wSimulatedJoypadStatesEnd
-	ld de, RLEMovement5a528
+	ld de, HallOfFakeEntryMovement
 	call DecodeRLEList
 	dec a
 	ld [wSimulatedJoypadStatesIndex], a
@@ -69,7 +69,7 @@ HallOfFameDefaultScript:
 	ld [wHallOfFameCurScript], a
 	ret
 
-RLEMovement5a528:
+HallOfFakeEntryMovement:
 	db D_UP, 5
 	db -1 ; end
 

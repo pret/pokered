@@ -40,9 +40,9 @@ Route22MoveRivalRightScript:
 	ld de, Route22RivalMovementData
 	ld a, [wcf0d]
 	cp $1
-	jr z, .asm_50ef1
+	jr z, .skip_first_right
 	inc de
-.asm_50ef1
+.skip_first_right
 	call MoveSprite
 	ld a, SPRITE_FACING_RIGHT
 	ldh [hSpriteFacingDirection], a

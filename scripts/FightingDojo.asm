@@ -7,7 +7,7 @@ FightingDojo_Script:
 	ld [wFightingDojoCurScript], a
 	ret
 
-FightingDojoScript_5cd70:
+FightingDojoResetScripts:
 	xor a ; SCRIPT_FIGHTINGDOJO_DEFAULT
 	ld [wJoyIgnore], a
 	ld [wFightingDojoCurScript], a
@@ -56,10 +56,10 @@ FightingDojoDefaultScript:
 FightingDojoKarateMasterPostBattleScript:
 	ld a, [wIsInBattle]
 	cp $ff
-	jp z, FightingDojoScript_5cd70
+	jp z, FightingDojoResetScripts
 	ld a, [wcf0d]
 	and a
-	jr z, .asm_5cde4
+	jr z, .already_facing
 	ld a, PLAYER_DIR_RIGHT
 	ld [wPlayerMovingDirection], a
 	ld a, FIGHTINGDOJO_KARATE_MASTER
@@ -67,8 +67,7 @@ FightingDojoKarateMasterPostBattleScript:
 	ld a, SPRITE_FACING_LEFT
 	ldh [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
-
-.asm_5cde4
+.already_facing
 	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	SetEventRange EVENT_BEAT_KARATE_MASTER, EVENT_BEAT_FIGHTING_DOJO_TRAINER_3

@@ -3,25 +3,25 @@ SilphCoElevator_Script:
 	bit 5, [hl]
 	res 5, [hl]
 	push hl
-	call nz, SilphCoElevatorScript_457dc
+	call nz, SilphCoElevatorStoreWarpEntriesScript
 	pop hl
 	bit 7, [hl]
 	res 7, [hl]
-	call nz, SilphCoElevatorShakeElevatorScript
+	call nz, SilphCoElevatorShakeScript
 	xor a
 	ld [wAutoTextBoxDrawingControl], a
 	inc a
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ret
 
-SilphCoElevatorScript_457dc:
+SilphCoElevatorStoreWarpEntriesScript:
 	ld hl, wWarpEntries
 	ld a, [wWarpedFromWhichWarp]
 	ld b, a
 	ld a, [wWarpedFromWhichMap]
 	ld c, a
 	call .StoreWarpEntry
-
+	; fallthrough
 .StoreWarpEntry:
 	inc hl
 	inc hl
@@ -36,7 +36,7 @@ SilphCoElevatorCopyWarpMapsScript:
 	call LoadItemList
 	ld hl, SilphCoElevatorWarpMaps
 	ld de, wElevatorWarpMaps
-	ld bc, SilphCoElevatorWarpMapsEnd - SilphCoElevatorWarpMaps
+	ld bc, SilphCoElevatorWarpMaps.End - SilphCoElevatorWarpMaps
 	call CopyData
 	ret
 
@@ -69,9 +69,9 @@ SilphCoElevatorWarpMaps:
 	db 2, SILPH_CO_9F
 	db 2, SILPH_CO_10F
 	db 1, SILPH_CO_11F
-SilphCoElevatorWarpMapsEnd:
+.End:
 
-SilphCoElevatorShakeElevatorScript:
+SilphCoElevatorShakeScript:
 	call Delay3
 	farcall ShakeElevator
 	ret

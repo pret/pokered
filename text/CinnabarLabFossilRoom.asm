@@ -35,7 +35,7 @@ _CinnabarLabFossilRoomScientist1FossilIsBackToLifeText::
 	line "like I think!"
 	prompt
 
-_Lab4Text_610ae::
+_CinnabarLabFossilRoomScientist1SeesFossilText::
 	text "Oh! That is"
 	line "@"
 	text_ram wcd6d
@@ -54,7 +54,7 @@ _Lab4Text_610ae::
 	cont "again!"
 	done
 
-_Lab4Text_610b3::
+_CinnabarLabFossilRoomScientist1TakesFossilText::
 	text "So! You hurry and"
 	line "give me that!"
 
@@ -64,7 +64,7 @@ _Lab4Text_610b3::
 	text "!"
 	prompt
 
-_Lab4Text_610b8::
+_CinnabarLabFossilRoomScientist1GoForAWalkText2::
 	text "I take a little"
 	line "time!"
 
@@ -72,7 +72,7 @@ _Lab4Text_610b8::
 	line "little while!"
 	done
 
-_Lab4Text_610bd::
+_CinnabarLabFossilRoomScientist1ComeAgainText::
 	text "Aiyah! You come"
 	line "again!"
 	done

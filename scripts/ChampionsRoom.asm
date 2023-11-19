@@ -100,7 +100,7 @@ ChampionsRoomRivalDefeatedScript:
 	ld [wJoyIgnore], a
 	ld a, TEXT_CHAMPIONSROOM_RIVAL
 	ldh [hSpriteIndexOrTextID], a
-	call RivalScript_760c8
+	call ChampionsRoom_DisplayTextID_AllowABSelectStart
 	ld a, CHAMPIONSROOM_RIVAL
 	ldh [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
@@ -112,7 +112,7 @@ ChampionsRoomOakArrivesScript:
 	farcall Music_Cities1AlternateTempo
 	ld a, TEXT_CHAMPIONSROOM_OAK
 	ldh [hSpriteIndexOrTextID], a
-	call RivalScript_760c8
+	call ChampionsRoom_DisplayTextID_AllowABSelectStart
 	ld a, CHAMPIONSROOM_OAK
 	ldh [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
@@ -153,7 +153,7 @@ ChampionsRoomOakCongratulatesPlayerScript:
 	call SetSpriteFacingDirectionAndDelay
 	ld a, TEXT_CHAMPIONSROOM_OAK_CONGRATULATES_PLAYER
 	ldh [hSpriteIndexOrTextID], a
-	call RivalScript_760c8
+	call ChampionsRoom_DisplayTextID_AllowABSelectStart
 	ld a, SCRIPT_CHAMPIONSROOM_OAK_DISAPPOINTED_WITH_RIVAL
 	ld [wChampionsRoomCurScript], a
 	ret
@@ -166,7 +166,7 @@ ChampionsRoomOakDisappointedWithRivalScript:
 	call SetSpriteFacingDirectionAndDelay
 	ld a, TEXT_CHAMPIONSROOM_OAK_DISAPPOINTED_WITH_RIVAL
 	ldh [hSpriteIndexOrTextID], a
-	call RivalScript_760c8
+	call ChampionsRoom_DisplayTextID_AllowABSelectStart
 	ld a, SCRIPT_CHAMPIONSROOM_OAK_COME_WITH_ME
 	ld [wChampionsRoomCurScript], a
 	ret
@@ -179,7 +179,7 @@ ChampionsRoomOakComeWithMeScript:
 	call SetSpriteFacingDirectionAndDelay
 	ld a, TEXT_CHAMPIONSROOM_OAK_COME_WITH_ME
 	ldh [hSpriteIndexOrTextID], a
-	call RivalScript_760c8
+	call ChampionsRoom_DisplayTextID_AllowABSelectStart
 	ld de, OakExitChampionsRoomMovement
 	ld a, CHAMPIONSROOM_OAK
 	ldh [hSpriteIndex], a
@@ -232,7 +232,7 @@ ChampionsRoomCleanupScript:
 	ld [wChampionsRoomCurScript], a
 	ret
 
-RivalScript_760c8:
+ChampionsRoom_DisplayTextID_AllowABSelectStart:
 	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	call DisplayTextID

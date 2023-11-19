@@ -4,7 +4,7 @@ CeruleanCity_Script:
 	ld a, [wCeruleanCityCurScript]
 	jp CallFunctionInTable
 
-CeruleanCityScript_1948c:
+CeruleanCityClearScripts:
 	xor a ; SCRIPT_CERULEANCITY_DEFAULT
 	ld [wJoyIgnore], a
 	ld [wCeruleanCityCurScript], a
@@ -23,7 +23,7 @@ CeruleanCity_ScriptPointers:
 CeruleanCityRocketDefeatedScript:
 	ld a, [wIsInBattle]
 	cp $ff
-	jp z, CeruleanCityScript_1948c
+	jp z, CeruleanCityClearScripts
 	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	SetEvent EVENT_BEAT_CERULEAN_ROCKET_THIEF
@@ -117,7 +117,7 @@ CeruleanCityMovement1:
 	db NPC_MOVEMENT_DOWN
 	db -1 ; end
 
-CeruleanCityScript_1955d:
+CeruleanCityFaceRivalScript:
 	ld a, CERULEANCITY_RIVAL
 	ldh [hSpriteIndex], a
 	xor a ; SPRITE_FACING_DOWN
@@ -160,7 +160,7 @@ CeruleanCityRivalBattleScript:
 
 	xor a
 	ldh [hJoyHeld], a
-	call CeruleanCityScript_1955d
+	call CeruleanCityFaceRivalScript
 	ld a, SCRIPT_CERULEANCITY_RIVAL_DEFEATED
 	ld [wCeruleanCityCurScript], a
 	ret
@@ -168,8 +168,8 @@ CeruleanCityRivalBattleScript:
 CeruleanCityRivalDefeatedScript:
 	ld a, [wIsInBattle]
 	cp $ff
-	jp z, CeruleanCityScript_1948c
-	call CeruleanCityScript_1955d
+	jp z, CeruleanCityClearScripts
+	call CeruleanCityFaceRivalScript
 	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	SetEvent EVENT_BEAT_CERULEAN_RIVAL
