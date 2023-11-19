@@ -28,7 +28,7 @@ _CeladonCityGramps2Text::
 	cont "coins for prizes!"
 	done
 
-_CeledonCityGramps3Text::
+_CeladonCityGramps3Text::
 	text "Hello, there!"
 
 	para "I've seen you,"
@@ -39,14 +39,14 @@ _CeledonCityGramps3Text::
 	line "dropping by!"
 	prompt
 
-_CeledonCityGramps3ReceivedTM41Text::
+_CeladonCityGramps3ReceivedTM41Text::
 	text "<PLAYER> received"
 	line "@"
 	text_ram wStringBuffer
 	text "!@"
 	text_end
 
-_CeledonCityGramps3TM41ExplanationText::
+_CeladonCityGramps3TM41ExplanationText::
 	text "TM41 teaches"
 	line "SOFTBOILED!"
 
@@ -57,7 +57,7 @@ _CeledonCityGramps3TM41ExplanationText::
 	line "CHANSEY!"
 	done
 
-_CeledonCityGramps3TM41NoRoomText::
+_CeladonCityGramps3TM41NoRoomText::
 	text "Oh, your pack is"
 	line "full of items!"
 	done

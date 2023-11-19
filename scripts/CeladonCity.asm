@@ -65,20 +65,20 @@ CeladonCityGramps3Text:
 	jp TextScriptEnd
 
 .Text:
-	text_far _CeledonCityGramps3Text
+	text_far _CeladonCityGramps3Text
 	text_end
 
 .ReceivedTM41Text:
-	text_far _CeledonCityGramps3ReceivedTM41Text
+	text_far _CeladonCityGramps3ReceivedTM41Text
 	sound_get_item_1
 	text_end
 
 .TM41ExplanationText:
-	text_far _CeledonCityGramps3TM41ExplanationText
+	text_far _CeladonCityGramps3TM41ExplanationText
 	text_end
 
 .TM41NoRoomText:
-	text_far _CeledonCityGramps3TM41NoRoomText
+	text_far _CeladonCityGramps3TM41NoRoomText
 	text_end
 
 CeladonCityFisherText:
