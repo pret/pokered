@@ -38,7 +38,8 @@ PayDayEffect_:
 	ld c, $3
 	predef AddBCDPredef
 	ld hl, CoinsScatteredText
-	jp PrintText
+	rst _PrintText
+	ret
 
 CoinsScatteredText:
 	text_far _CoinsScatteredText
