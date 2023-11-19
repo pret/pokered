@@ -50,10 +50,9 @@ _CeladonCityGramps3TM41ExplanationText::
 	text "TM41 teaches"
 	line "MEDITATE!"
 
-	para "It enhances "
-	line "ATTACK, SPECIAL"
-	cont "and SPEED all"
-	cont "once!"
+	para "It raises ATTACK,"
+	line "SPECIAL and SPEED"
+	cont "all by one stage!"
 
 	para "Your #MON will"
 	line "be unstoppable!"
