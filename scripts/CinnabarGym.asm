@@ -78,7 +78,7 @@ CinnabarGymGetOpponentTextScript:
 
 CinnabarGymFlagAction:
 	predef_jump FlagActionPredef
-
+	; fallthrough
 CinnabarGymOpenGateScript:
 	ld a, [wIsInBattle]
 	cp $ff
@@ -92,12 +92,12 @@ CinnabarGymOpenGateScript:
 	call CinnabarGymFlagAction
 	ld a, c
 	and a
-	jr nz, .asm_7581b
+	jr nz, .no_sound
 	call WaitForSoundToFinish
 	ld a, SFX_GO_INSIDE
 	rst _PlaySound
 	call WaitForSoundToFinish
-.asm_7581b
+.no_sound
 	ld a, [wTrainerHeaderFlagBit]
 	ldh [hGymGateIndex], a
 	AdjustEventBit EVENT_BEAT_CINNABAR_GYM_TRAINER_0, 2

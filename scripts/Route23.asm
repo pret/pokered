@@ -26,25 +26,25 @@ Route23_ScriptPointers:
 	dw_const Route23ResetToDefaultScript, SCRIPT_ROUTE23_RESET_TO_DEFAULT
 
 Route23DefaultScript:
-	ld hl, YCoordsData_51255
+	ld hl, Route23GuardsYCoords
 	ld a, [wYCoord]
 	ld b, a
 	ld e, $0
 	EventFlagBit c, EVENT_PASSED_EARTHBADGE_CHECK + 1, EVENT_PASSED_CASCADEBADGE_CHECK
-.asm_51224
+.loop
 	ld a, [hli]
 	cp -1
 	ret z
 	inc e
 	dec c
 	cp b
-	jr nz, .asm_51224
+	jr nz, .loop
 	cp 35
-	jr nz, .asm_51237
+	jr nz, .not_past_victory_road
 	ld a, [wXCoord]
 	cp 14
 	ret nc
-.asm_51237
+.not_past_victory_road
 	ld a, e
 	ldh [hSpriteIndexOrTextID], a
 	ld a, c
@@ -61,7 +61,7 @@ Route23DefaultScript:
 	ldh [hJoyHeld], a
 	ret
 
-YCoordsData_51255:
+Route23GuardsYCoords:
 	db 35
 	db 56
 	db 85
