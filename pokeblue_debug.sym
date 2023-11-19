@@ -8320,7 +8320,7 @@
 11:6852 SeafoamIslandsB4FMoveObjectScript.RLEList_StrongCurrentNearRightBoulder
 11:6859 SeafoamIslandsB4FMoveObjectScript.RLEList_StrongCurrentNearLeftBoulder
 11:6860 SeafoamIslandsB4FObjectMoving2Script
-11:6872 SeaFoamIslands5Script_46872
+11:6872 SeafoamIslandsB4FObjectMoving2Script.doneForcedSurfMovement
 11:687c SeafoamIslandsB4F_TextPointers
 11:6886 ArticunoTrainerHeader
 11:6893 SeafoamIslandsB4FArticunoText
@@ -9697,7 +9697,7 @@
 14:6224 Mansion3CheckReplaceSwitchDoorBlocks.switchTurnedOn
 14:6235 PokemonMansion3F_ScriptPointers
 14:623b PokemonMansion3FDefaultScript
-14:6250 PokemonMansion3FDefaultScript.asm_52250
+14:6250 PokemonMansion3FDefaultScript.fellDownHoleTo1F
 14:6254 PokemonMansion3FDefaultScript.holeCoords
 14:625b PokemonMansion3FDefaultScript.isPlayerFallingDownHole
 14:627a Mansion3Script_Switches

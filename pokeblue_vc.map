@@ -8466,7 +8466,7 @@ ROMX bank #17:
 	         $6852 = SeafoamIslandsB4FMoveObjectScript.RLEList_StrongCurrentNearRightBoulder
 	         $6859 = SeafoamIslandsB4FMoveObjectScript.RLEList_StrongCurrentNearLeftBoulder
 	         $6860 = SeafoamIslandsB4FObjectMoving2Script
-	         $6872 = SeaFoamIslands5Script_46872
+	         $6872 = SeafoamIslandsB4FObjectMoving2Script.doneForcedSurfMovement
 	         $687c = SeafoamIslandsB4F_TextPointers
 	         $6886 = ArticunoTrainerHeader
 	         $6893 = SeafoamIslandsB4FArticunoText
@@ -9863,7 +9863,7 @@ ROMX bank #20:
 	         $6224 = Mansion3CheckReplaceSwitchDoorBlocks.switchTurnedOn
 	         $6235 = PokemonMansion3F_ScriptPointers
 	         $623b = PokemonMansion3FDefaultScript
-	         $6250 = PokemonMansion3FDefaultScript.asm_52250
+	         $6250 = PokemonMansion3FDefaultScript.fellDownHoleTo1F
 	         $6254 = PokemonMansion3FDefaultScript.holeCoords
 	         $625b = PokemonMansion3FDefaultScript.isPlayerFallingDownHole
 	         $627a = Mansion3Script_Switches
