@@ -118,7 +118,7 @@ SeafoamIslandsB4FObjectMoving2Script:
 	ld a, [wSimulatedJoypadStatesIndex]
 	ld b, a
 	cp $1
-	call z, SeaFoamIslands5Script_46872
+	call z, .doneForcedSurfMovement
 	ld a, b
 	and a
 	ret nz
@@ -126,7 +126,7 @@ SeafoamIslandsB4FObjectMoving2Script:
 	ld [wSeafoamIslandsB4FCurScript], a
 	ret
 
-SeaFoamIslands5Script_46872:
+.doneForcedSurfMovement:
 	xor a
 	ld [wWalkBikeSurfState], a
 	ld [wWalkBikeSurfStateCopy], a
