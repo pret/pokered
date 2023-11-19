@@ -104,7 +104,7 @@ OverworldLoopLessDelay::
 	bit 0, a
 	jr nz, .checkForOpponent
 	lda_coord 8, 9
-	ld [wTilePlayerStandingOn], a ; unused?
+	ld [wTilePlayerStandingOn], a ; checked when using Surf for forbidden tile pairs
 	call DisplayTextID ; display either the start menu or the NPC/sign text
 	ld a, [wEnteringCableClub]
 	and a
