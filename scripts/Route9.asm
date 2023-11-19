@@ -19,11 +19,11 @@ Route9_TextPointers:
 	dw_const Route9CooltrainerM1Text, TEXT_ROUTE9_COOLTRAINER_M1
 	dw_const Route9CooltrainerM2Text, TEXT_ROUTE9_COOLTRAINER_M2
 	dw_const Route9CooltrainerF2Text, TEXT_ROUTE9_COOLTRAINER_F2
-	dw_const Route9Hiker1Text,        TEXT_ROUTE9_HIKER_1
-	dw_const Route9Hiker2Text,        TEXT_ROUTE9_HIKER_2
-	dw_const Route9Youngster1Text,    TEXT_ROUTE9_YOUNGSTER_1
-	dw_const Route9Hiker3Text,        TEXT_ROUTE9_HIKER_3
-	dw_const Route9Youngster2Text,    TEXT_ROUTE9_YOUNGSTER_2
+	dw_const Route9Hiker1Text,        TEXT_ROUTE9_HIKER1
+	dw_const Route9Hiker2Text,        TEXT_ROUTE9_HIKER2
+	dw_const Route9Youngster1Text,    TEXT_ROUTE9_YOUNGSTER1
+	dw_const Route9Hiker3Text,        TEXT_ROUTE9_HIKER3
+	dw_const Route9Youngster2Text,    TEXT_ROUTE9_YOUNGSTER2
 	dw_const PickUpItemText,          TEXT_ROUTE9_TM_TELEPORT
 	dw_const Route9SignText,          TEXT_ROUTE9_SIGN
 

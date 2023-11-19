@@ -12,7 +12,6 @@
 	const_export MTMOON1F_ESCAPE_ROPE
 	const_export MTMOON1F_POTION2
 	const_export MTMOON1F_TM_WATER_GUN
-	const_export MTMOON1F_BEWARE_ZUBAT_SIGN
 
 MtMoon1F_Object:
 	db $3 ; border block
