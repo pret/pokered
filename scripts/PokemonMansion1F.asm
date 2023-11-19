@@ -1,5 +1,5 @@
 PokemonMansion1F_Script:
-	call Mansion1Subscript1
+	call Mansion1CheckReplaceSwitchDoorBlocks
 	call EnableAutoTextBoxDrawing
 	ld hl, Mansion1TrainerHeaders
 	ld de, PokemonMansion1F_ScriptPointers
@@ -8,7 +8,7 @@ PokemonMansion1F_Script:
 	ld [wPokemonMansion1FCurScript], a
 	ret
 
-Mansion1Subscript1:
+Mansion1CheckReplaceSwitchDoorBlocks:
 	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
