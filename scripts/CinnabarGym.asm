@@ -78,7 +78,7 @@ CinnabarGymGetOpponentTextScript:
 
 CinnabarGymFlagAction:
 	predef_jump FlagActionPredef
-	; fallthrough
+
 CinnabarGymOpenGateScript:
 	ld a, [wIsInBattle]
 	cp $ff

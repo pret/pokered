@@ -12,7 +12,6 @@
 	const_export MTMOON1F_ITEM4
 	const_export MTMOON1F_ITEM5
 	const_export MTMOON1F_ITEM6
-	const_export MTMOON1F_BEWARE_ZUBAT_SIGN
 
 MtMoon1F_Object:
 	db $3 ; border block

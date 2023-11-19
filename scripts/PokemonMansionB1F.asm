@@ -2,7 +2,7 @@
 ; PureRGBnote: ADDED: code that unlocks a stairway to the Secret Lab after certain conditions are fulfilled was added
 
 PokemonMansionB1F_Script:
-	call Mansion4Script_523cf
+	call MansionB1FCheckReplaceSwitchDoorBlocks
 	call EnableAutoTextBoxDrawing
 	ld hl, Mansion4TrainerHeaders
 	ld de, PokemonMansionB1F_ScriptPointers
@@ -11,7 +11,7 @@ PokemonMansionB1F_Script:
 	ld [wPokemonMansionB1FCurScript], a
 	ret
 
-Mansion4Script_523cf:
+MansionB1FCheckReplaceSwitchDoorBlocks:
 	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
@@ -19,33 +19,33 @@ Mansion4Script_523cf:
 	CheckEvent EVENT_UNLOCKED_SECRET_LAB
 	call nz, UnlockLab
 	CheckEvent EVENT_MANSION_SWITCH_ON
-	jr nz, .asm_523ff
+	jr nz, .switchTurnedOn
 	ld a, $e
 	ld bc, $80d
-	call Mansion2Script_5202f
+	call Mansion2ReplaceBlock
 	ld a, $e
 	ld bc, $b06
-	call Mansion2Script_5202f
+	call Mansion2ReplaceBlock
 	ld a, $5f
 	ld bc, $304
-	call Mansion2Script_5202f
+	call Mansion2ReplaceBlock
 	ld a, $54
 	ld bc, $808
-	call Mansion2Script_5202f
+	call Mansion2ReplaceBlock
 	ret
-.asm_523ff
+.switchTurnedOn
 	ld a, $2d
 	ld bc, $80d
-	call Mansion2Script_5202f
+	call Mansion2ReplaceBlock
 	ld a, $5f
 	ld bc, $b06
-	call Mansion2Script_5202f
+	call Mansion2ReplaceBlock
 	ld a, $e
 	ld bc, $304
-	call Mansion2Script_5202f
+	call Mansion2ReplaceBlock
 	ld a, $e
 	ld bc, $808
-	call Mansion2Script_5202f
+	call Mansion2ReplaceBlock
 	ret
 
 UnlockLab::

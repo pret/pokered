@@ -19,10 +19,10 @@ Route6_TextPointers:
 	def_text_pointers
 	dw_const Route6CooltrainerM1Text,       TEXT_ROUTE6_COOLTRAINER_M1
 	dw_const Route6CooltrainerF1Text,       TEXT_ROUTE6_COOLTRAINER_F1
-	dw_const Route6Youngster1Text,          TEXT_ROUTE6_YOUNGSTER_1
+	dw_const Route6Youngster1Text,          TEXT_ROUTE6_YOUNGSTER1
 	dw_const Route6CooltrainerM2Text,       TEXT_ROUTE6_COOLTRAINER_M2
 	dw_const Route6CooltrainerF2Text,       TEXT_ROUTE6_COOLTRAINER_F2
-	dw_const Route6Youngster2Text,          TEXT_ROUTE6_YOUNGSTER_2
+	dw_const Route6Youngster2Text,          TEXT_ROUTE6_YOUNGSTER2
 	dw_const Route6Text7,                   TEXT_ROUTE6_ROOKIE
 	dw_const Route6Text8,                   TEXT_ROUTE6_BURGLAR
 	dw_const PickUp3ItemText,               TEXT_ROUTE6_ITEM1 ; PureRGBnote: ADDED: new item on this route.

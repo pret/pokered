@@ -5,8 +5,6 @@
 	const_export POKEMONFANCLUB_SEEL
 	const_export POKEMONFANCLUB_CHAIRMAN
 	const_export POKEMONFANCLUB_RECEPTIONIST
-	const_export POKEMONFANCLUB_SIGN_1
-	const_export POKEMONFANCLUB_SIGN_2
 
 PokemonFanClub_Object:
 	db $d ; border block

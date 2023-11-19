@@ -94,7 +94,7 @@ DoBoulderDustAnimation::
 	call DiscardButtonPresses
 	ld [wJoyIgnore], a
 	call ResetBoulderPushFlags
-	set 7, [hl]
+	set 7, [hl] ; [wFlags_0xcd60]
 	ld a, [wBoulderSpriteIndex]
 	ldh [hSpriteIndex], a
 	call GetSpriteMovementByte2Pointer
