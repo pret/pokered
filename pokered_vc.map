@@ -17499,10 +17499,10 @@ ROMX bank #41:
 	         $5a4b = _CeladonCityGramps1Text
 	         $5a79 = _CeladonCityGirlText
 	         $5aa6 = _CeladonCityGramps2Text
-	         $5afd = _CeledonCityGramps3Text
-	         $5b5a = _CeledonCityGramps3ReceivedTM41Text
-	         $5b6e = _CeledonCityGramps3TM41ExplanationText
-	         $5bb8 = _CeledonCityGramps3TM41NoRoomText
+	         $5afd = _CeladonCityGramps3Text
+	         $5b5a = _CeladonCityGramps3ReceivedTM41Text
+	         $5b6e = _CeladonCityGramps3TM41ExplanationText
+	         $5bb8 = _CeladonCityGramps3TM41NoRoomText
 	         $5bd9 = _CeladonCityFisherText
 	         $5c30 = _CeladonCityPoliwrathText
 	         $5c49 = _CeladonCityRocket1Text
