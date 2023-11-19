@@ -45,9 +45,9 @@ PokemonMansion3FDefaultScript:
 	jp z, CheckFightingMapTrainers
 	cp $3
 	ld a, POKEMON_MANSION_1F
-	jr nz, .asm_52250
+	jr nz, .fellDownHoleTo1F
 	ld a, POKEMON_MANSION_2F
-.asm_52250
+.fellDownHoleTo1F
 	ld [wDungeonWarpDestinationMap], a
 	ret
 
