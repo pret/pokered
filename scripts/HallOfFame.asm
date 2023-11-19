@@ -60,7 +60,7 @@ HallOfFameDefaultScript:
 	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	ld hl, wSimulatedJoypadStatesEnd
-	ld de, HallOfFakeEntryMovement
+	ld de, HallOfFameEntryMovement
 	call DecodeRLEList
 	dec a
 	ld [wSimulatedJoypadStatesIndex], a
@@ -69,7 +69,7 @@ HallOfFameDefaultScript:
 	ld [wHallOfFameCurScript], a
 	ret
 
-HallOfFakeEntryMovement:
+HallOfFameEntryMovement:
 	db D_UP, 5
 	db -1 ; end
 
