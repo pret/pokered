@@ -740,7 +740,7 @@ ItemUseSurfboard:
 	ld a, b
 	ld [wSimulatedJoypadStatesEnd], a
 	xor a
-	ld [wWastedByteCD39], a
+	ld [wUnusedCD39], a
 	inc a
 	ld [wSimulatedJoypadStatesIndex], a
 	ret

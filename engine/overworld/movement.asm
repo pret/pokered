@@ -179,7 +179,7 @@ UpdateNPCSprite:
 	res 0, [hl]
 	xor a
 	ld [wSimulatedJoypadStatesIndex], a
-	ld [wWastedByteCD3A], a
+	ld [wUnusedCD3A], a
 	ret
 .next
 	cp WALK

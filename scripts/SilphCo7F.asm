@@ -145,8 +145,8 @@ SilphCo7FDefaultScript:
 	call SetSpriteMovementBytesToFF
 	ld de, .RivalMovementUp
 	ld a, [wCoordIndex]
-	ld [wcf0d], a
-	cp $1
+	ld [wSavedCoordIndex], a
+	cp 1 ; index of second, lower entry in .RivalEncounterCoordinates
 	jr z, .full_rival_movement
 	inc de
 .full_rival_movement
@@ -225,8 +225,8 @@ SilphCo7FRivalAfterBattleScript:
 	call PlaySound
 	farcall Music_RivalAlternateStart
 	ld de, .RivalWalkAroundPlayerMovement
-	ld a, [wcf0d]
-	cp $1
+	ld a, [wSavedCoordIndex]
+	cp 1 ; index of second, lower entry in SilphCo7FDefaultScript.RivalEncounterCoordinates
 	jr nz, .walk_around_player
 	ld de, .RivalExitRightMovement
 .walk_around_player

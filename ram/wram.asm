@@ -576,10 +576,10 @@ wFilteredBagItemsCount:: db
 wSimulatedJoypadStatesIndex:: db
 
 ; written to but nothing ever reads it
-wWastedByteCD39:: db
+wUnusedCD39:: db
 
 ; written to but nothing ever reads it
-wWastedByteCD3A:: db
+wUnusedCD3A:: db
 
 ; mask indicating which real button presses can override simulated ones
 ; XXX is it ever not 0?
@@ -979,7 +979,10 @@ wBattleResult:: db
 ; bit 0: if set, DisplayTextID automatically draws a text box
 wAutoTextBoxDrawingControl:: db
 
-wcf0d:: db ; used with some overworld scripts (not exactly sure what it's used for)
+; used in some overworld scripts to vary scripted movement
+wSavedCoordIndex::
+wOakWalkedToPlayer::
+wNextSafariZoneGateScript:: db
 
 ; used in CheckForTilePairCollisions2 to store the tile the player is on
 wTilePlayerStandingOn:: db
@@ -1913,8 +1916,8 @@ wMissableObjectFlagsEnd::
 
 	ds 7
 
-; temp copy of SPRITESTATEDATA1_IMAGEINDEX (used for sprite facing/anim)
-wSpriteImageIndexBackup:: db
+; saved copy of SPRITESTATEDATA1_IMAGEINDEX (used for sprite facing/anim)
+wSavedSpriteImageIndex:: db
 
 ; each entry consists of 2 bytes
 ; * the sprite ID (depending on the current map)

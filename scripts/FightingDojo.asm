@@ -32,15 +32,15 @@ FightingDojoDefaultScript:
 	ret nz
 	xor a
 	ldh [hJoyHeld], a
-	ld [wcf0d], a
+	ld [wSavedCoordIndex], a
 	ld a, [wYCoord]
 	cp 3
 	ret nz
 	ld a, [wXCoord]
 	cp 4
 	ret nz
-	ld a, $1
-	ld [wcf0d], a
+	ld a, 1
+	ld [wSavedCoordIndex], a
 	ld a, PLAYER_DIR_RIGHT
 	ld [wPlayerMovingDirection], a
 	ld a, FIGHTINGDOJO_KARATE_MASTER
@@ -57,8 +57,8 @@ FightingDojoKarateMasterPostBattleScript:
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, FightingDojoResetScripts
-	ld a, [wcf0d]
-	and a
+	ld a, [wSavedCoordIndex]
+	and a ; nz if the player was at (4, 3), left of the Karate Master
 	jr z, .already_facing
 	ld a, PLAYER_DIR_RIGHT
 	ld [wPlayerMovingDirection], a

@@ -29,14 +29,14 @@ SafariZoneGateDefaultScript:
 	ld a, SPRITE_FACING_RIGHT
 	ld [wSpritePlayerStateData1FacingDirection], a
 	ld a, [wCoordIndex]
-	cp $1
+	cp 1 ; index of second, lower entry in .PlayerNextToSafariZoneWorker1CoordsArray
 	jr z, .player_not_next_to_worker
 	ld a, SCRIPT_SAFARIZONEGATE_WOULD_YOU_LIKE_TO_JOIN
 	ld [wSafariZoneGateCurScript], a
 	ret
 .player_not_next_to_worker
 	ld a, D_RIGHT
-	ld c, $1
+	ld c, 1
 	call SafariZoneEntranceAutoWalk
 	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
@@ -88,7 +88,7 @@ SafariZoneGateLeavingSafariScript:
 	xor a
 	ld [wNumSafariBalls], a
 	ld a, D_DOWN
-	ld c, $3
+	ld c, 3
 	call SafariZoneEntranceAutoWalk
 	ld a, SCRIPT_SAFARIZONEGATE_PLAYER_MOVING_DOWN
 	ld [wSafariZoneGateCurScript], a
@@ -113,7 +113,7 @@ SafariZoneGateSetScriptAfterMoveScript:
 	call SafariZoneGateReturnSimulatedJoypadStateScript
 	ret nz
 	call Delay3
-	ld a, [wcf0d]
+	ld a, [wNextSafariZoneGateScript]
 	ld [wSafariZoneGateCurScript], a
 	ret
 
@@ -236,11 +236,11 @@ SafariZoneGateSafariZoneWorker1LeavingEarlyText:
 	xor a
 	ld [wSpritePlayerStateData1FacingDirection], a
 	ld a, D_DOWN
-	ld c, $3
+	ld c, 3
 	call SafariZoneEntranceAutoWalk
 	ResetEvents EVENT_SAFARI_GAME_OVER, EVENT_IN_SAFARI_ZONE
-	ld a, $0
-	ld [wcf0d], a
+	ld a, SCRIPT_SAFARIZONEGATE_DEFAULT
+	ld [wNextSafariZoneGateScript], a
 	jr .set_current_script
 .not_ready_to_leave
 	ld hl, .GoodLuckText
@@ -248,10 +248,10 @@ SafariZoneGateSafariZoneWorker1LeavingEarlyText:
 	ld a, SPRITE_FACING_UP
 	ld [wSpritePlayerStateData1FacingDirection], a
 	ld a, D_UP
-	ld c, $1
+	ld c, 1
 	call SafariZoneEntranceAutoWalk
 	ld a, SCRIPT_SAFARIZONEGATE_LEAVING_SAFARI
-	ld [wcf0d], a
+	ld [wNextSafariZoneGateScript], a
 .set_current_script
 	ld a, SCRIPT_SAFARIZONEGATE_SET_SCRIPT_AFTER_MOVE
 	ld [wSafariZoneGateCurScript], a

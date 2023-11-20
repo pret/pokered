@@ -17,7 +17,7 @@ PlayerStepOutFromDoor::
 	ret
 .notStandingOnDoor
 	xor a
-	ld [wWastedByteCD3A], a
+	ld [wUnusedCD3A], a
 	ld [wSimulatedJoypadStatesIndex], a
 	ld [wSimulatedJoypadStatesEnd], a
 	ld hl, wd736
@@ -39,7 +39,7 @@ _EndNPCMovementScript::
 	ld [wNPCMovementScriptSpriteOffset], a
 	ld [wNPCMovementScriptPointerTableNum], a
 	ld [wNPCMovementScriptFunctionNum], a
-	ld [wWastedByteCD3A], a
+	ld [wUnusedCD3A], a
 	ld [wSimulatedJoypadStatesIndex], a
 	ld [wSimulatedJoypadStatesEnd], a
 	ret
