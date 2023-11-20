@@ -80,7 +80,7 @@ DetectCollisionBetweenSprites:
 	and $f0
 	or c
 
-	ldh [hSpriteCollisionsTempYCoord], a ; store Y coordinate adjusted for direction of movement
+	ldh [hSpriteCollisionsTempYCoord], a ; y adjusted for direction of movement
 
 	ld a, [hli] ; a = [i#SPRITESTATEDATA1_XSTEPVECTOR] (-1, 0, or 1)
 	call SetSpriteCollisionValues
@@ -93,7 +93,7 @@ DetectCollisionBetweenSprites:
 	and $f0
 	or c
 
-	ldh [hSpriteCollisionsTempXCoord], a ; store X coordinate adjusted for direction of movement
+	ldh [hSpriteCollisionsTempXCoord], a ; x adjusted for direction of movement
 
 	ld a, l
 	add 7
@@ -111,7 +111,7 @@ DetectCollisionBetweenSprites:
 	xor a ; zero the loop counter
 
 .loop
-	ldh [hSpriteCollisionsLoopCounter], a ; store loop counter
+	ldh [hSpriteCollisionsLoopCounter], a
 	swap a
 	ld e, a
 	ldh a, [hCurrentSpriteOffset]
@@ -179,7 +179,7 @@ DetectCollisionBetweenSprites:
 .next1
 	ldh a, [hSpriteCollisionsTempYCoord] ; a = distance between adjusted Y coordinates
 	sub b
-	ldh [hSpriteCollisionsAdjustedDistance], a ; store distance adjusted using sprite i's direction
+	ldh [hSpriteCollisionsAdjustedDistance], a
 	ld a, b
 	ldh [hSpriteCollisionsTempYCoord], a ; store 7 or 9 depending on sprite i's delta Y
 	jr c, .checkXDistance
@@ -194,7 +194,7 @@ DetectCollisionBetweenSprites:
 	ld b, 9
 
 .next2
-	ldh a, [hSpriteCollisionsAdjustedDistance] ; a = distance adjusted using sprite i's direction
+	ldh a, [hSpriteCollisionsAdjustedDistance]
 	sub b ; adjust distance using sprite j's direction
 	jr z, .checkXDistance
 	jr nc, .next ; go to next sprite if distance is still positive after both adjustments
@@ -250,7 +250,7 @@ DetectCollisionBetweenSprites:
 .next3
 	ldh a, [hSpriteCollisionsTempXCoord] ; a = distance between adjusted X coordinates
 	sub b
-	ldh [hSpriteCollisionsAdjustedDistance], a ; store distance adjusted using sprite i's direction
+	ldh [hSpriteCollisionsAdjustedDistance], a
 	ld a, b
 	ldh [hSpriteCollisionsTempXCoord], a ; store 7 or 9 depending on sprite i's delta X
 	jr c, .collision
@@ -265,7 +265,7 @@ DetectCollisionBetweenSprites:
 	ld b, 9
 
 .next4
-	ldh a, [hSpriteCollisionsAdjustedDistance] ; a = distance adjusted using sprite i's direction
+	ldh a, [hSpriteCollisionsAdjustedDistance]
 	sub b ; adjust distance using sprite j's direction
 	jr z, .collision
 	jr nc, .next ; go to next sprite if distance is still positive after both adjustments
@@ -296,7 +296,7 @@ DetectCollisionBetweenSprites:
 ; to indicate which sprite the collision occurred with
 	inc l
 	inc l
-	ldh a, [hSpriteCollisionsLoopCounter] ; a = loop counter
+	ldh a, [hSpriteCollisionsLoopCounter]
 	ld de, SpriteCollisionBitTable
 	add a
 	add e
@@ -313,7 +313,7 @@ DetectCollisionBetweenSprites:
 	ld [hl], a
 
 .next
-	ldh a, [hSpriteCollisionsLoopCounter] ; a = loop counter
+	ldh a, [hSpriteCollisionsLoopCounter]
 	inc a
 	cp $10
 	jp nz, .loop

@@ -1914,7 +1914,7 @@ wMissableObjectFlagsEnd::
 	ds 7
 
 ; temp copy of SPRITESTATEDATA1_IMAGEINDEX (used for sprite facing/anim)
-wSpriteImageIndexTempCopy:: db
+wSpriteImageIndexBackup:: db
 
 ; each entry consists of 2 bytes
 ; * the sprite ID (depending on the current map)

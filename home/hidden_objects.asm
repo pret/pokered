@@ -26,7 +26,7 @@ CheckForHiddenObjectOrBookshelfOrCardKeyDoor::
 	jr .done
 .hiddenObjectNotFound
 	farcall PrintBookshelfText
-	ldh a, [hWasBookShelfTextFound]
+	ldh a, [hInteractedWithBookshelf]
 	and a
 	jr z, .done
 .nothingFound

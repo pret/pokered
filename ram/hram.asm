@@ -330,7 +330,7 @@ hGymTrashCanRandNumMask::
 	db
 
 NEXTU
-hWasBookShelfTextFound:: db ; set to 0 if found, $FF if not found when attempting to interact with a hidden object
+hInteractedWithBookshelf:: db ; set to 0 if you interacted with a bookshelf, $FF if not when attempting to interact with a hidden object
 ENDU
 
 	ds 1

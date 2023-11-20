@@ -28,7 +28,7 @@ PrepareOAMData::
 	inc e
 	inc e
 	ld a, [de] ; [x#SPRITESTATEDATA1_IMAGEINDEX]
-	ld [wSpriteImageIndexTempCopy], a
+	ld [wSpriteImageIndexBackup], a
 	cp $ff ; off-screen (don't draw)
 	jr nz, .visible
 
@@ -98,7 +98,7 @@ PrepareOAMData::
 	push bc
 	ld b, a
 
-	ld a, [wSpriteImageIndexTempCopy]            ; temp copy of [x#SPRITESTATEDATA1_IMAGEINDEX]
+	ld a, [wSpriteImageIndexBackup]
 	swap a                   ; high nybble determines sprite used (0 is always player sprite, next are some npcs)
 	and $f
 
