@@ -19440,7 +19440,7 @@ WRAM0 bank #0:
 	         $d5a4 = wPlayerCoins
 	         $d5a6 = wMissableObjectFlags
 	         $d5c6 = wMissableObjectFlagsEnd
-	         $d5cd = wd5cd
+	         $d5cd = wSpriteImageIndexBackup
 	         $d5ce = wMissableObjectList
 	         $d5f0 = wOaksLabCurScript
 	         $d5f0 = wGameProgressFlags
@@ -20268,13 +20268,13 @@ HRAM bank #0:
 	         $ff8e = hLoadSpriteTemp2
 	         $ff8e = hFourTileSpriteCount
 	         $ff8f = hSpriteOffset2
-	         $ff8f = hFF8F
+	         $ff8f = hCollidingSpriteOffset
 	         $ff90 = hOAMBufferOffset
-	         $ff90 = hFF90
+	         $ff90 = hCollidingSpriteTempYValue
+	         $ff91 = hCollidingSpriteTempXValue
 	         $ff91 = hSpriteScreenX
-	         $ff91 = hFF91
+	         $ff92 = hCollidingSpriteAdjustedDistance
 	         $ff92 = hSpriteScreenY
-	         $ff92 = hFF92
 	         $ff93 = hTilePlayerStandingOn
 	         $ff94 = hSpritePriority
 	         $ff95 = hPastLeadingZeros
@@ -20354,9 +20354,9 @@ HRAM bank #0:
 	         $ffd8 = hMovingBGTilesCounter1
 	         $ffda = hCurrentSpriteOffset
 	         $ffdb = hOaksAideResult
-	         $ffdb = hFFDB
 	         $ffdb = hVendingMachineItem
 	         $ffdb = hPlayerFacing
+	         $ffdb = hInteractedWithBookshelf
 	         $ffdb = hMissableObjectIndex
 	         $ffdb = hDexRatingNumMonsSeen
 	         $ffdb = hGymGateIndex
@@ -20367,7 +20367,6 @@ HRAM bank #0:
 	         $ffdb = hItemToRemoveID
 	         $ffdc = hItemToRemoveIndex
 	         $ffdc = hVendingMachinePrice
-	         $ffdc = hFFDC
 	         $ffdc = hDexRatingNumMonsOwned
 	         $ffdc = hOaksAideRewardItem
 	         $ffdc = hPlayerYCoord

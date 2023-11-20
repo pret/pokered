@@ -19166,7 +19166,7 @@
 00:d5a4 wPlayerCoins
 00:d5a6 wMissableObjectFlags
 00:d5c6 wMissableObjectFlagsEnd
-00:d5cd wd5cd
+00:d5cd wSpriteImageIndexBackup
 00:d5ce wMissableObjectList
 00:d5f0 wOaksLabCurScript
 00:d5f0 wGameProgressFlags
@@ -19986,13 +19986,13 @@
 00:ff8e hLoadSpriteTemp2
 00:ff8e hFourTileSpriteCount
 00:ff8f hSpriteOffset2
-00:ff8f hFF8F
+00:ff8f hCollidingSpriteOffset
 00:ff90 hOAMBufferOffset
-00:ff90 hFF90
+00:ff90 hCollidingSpriteTempYValue
+00:ff91 hCollidingSpriteTempXValue
 00:ff91 hSpriteScreenX
-00:ff91 hFF91
+00:ff92 hCollidingSpriteAdjustedDistance
 00:ff92 hSpriteScreenY
-00:ff92 hFF92
 00:ff93 hTilePlayerStandingOn
 00:ff94 hSpritePriority
 00:ff95 hPastLeadingZeros
@@ -20072,9 +20072,9 @@
 00:ffd8 hMovingBGTilesCounter1
 00:ffda hCurrentSpriteOffset
 00:ffdb hOaksAideResult
-00:ffdb hFFDB
 00:ffdb hVendingMachineItem
 00:ffdb hPlayerFacing
+00:ffdb hInteractedWithBookshelf
 00:ffdb hMissableObjectIndex
 00:ffdb hDexRatingNumMonsSeen
 00:ffdb hGymGateIndex
@@ -20085,7 +20085,6 @@
 00:ffdb hItemToRemoveID
 00:ffdc hItemToRemoveIndex
 00:ffdc hVendingMachinePrice
-00:ffdc hFFDC
 00:ffdc hDexRatingNumMonsOwned
 00:ffdc hOaksAideRewardItem
 00:ffdc hPlayerYCoord
