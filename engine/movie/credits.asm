@@ -131,10 +131,10 @@ ScrollCreditsMonLeft_SetSCX:
 	ret
 
 HoFGBPalettes:
-	db %11000000
-	db %11010000
-	db %11100000
-	db %11110000
+	dc 3, 0, 0, 0
+	dc 3, 1, 0, 0
+	dc 3, 2, 0, 0
+	dc 3, 3, 0, 0
 
 CreditsCopyTileMapToVRAM:
 	ld a, l

@@ -77,21 +77,8 @@ ScalePixelsByTwo:
 	add hl, bc   ; add offset
 	ret
 
-; repeats each input bit twice
+; repeats each input bit twice, e.g. DuplicateBitsTable[%0101] = %00110011
 DuplicateBitsTable:
-	db %00000000
-	db %00000011
-	db %00001100
-	db %00001111
-	db %00110000
-	db %00110011
-	db %00111100
-	db %00111111
-	db %11000000
-	db %11000011
-	db %11001100
-	db %11001111
-	db %11110000
-	db %11110011
-	db %11111100
-	db %11111111
+FOR n, 16
+	db (n & 1) * 3 + (n & 2) * 6 + (n & 4) * 12 + (n & 8) * 24
+ENDR

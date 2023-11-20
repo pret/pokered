@@ -56,6 +56,17 @@ MACRO dn ; nybbles
 	ENDR
 ENDM
 
+MACRO dc ; "crumbs"
+	REPT _NARG / 4
+		db ((\1) << 6) | ((\2) << 4) | ((\3) << 2) | (\4)
+		SHIFT 4
+	ENDR
+ENDM
+
+MACRO bigdw ; big-endian word
+	db HIGH(\1), LOW(\1)
+ENDM
+
 MACRO dba ; dbw bank, address
 	REPT _NARG
 		dbw BANK(\1), \1

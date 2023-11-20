@@ -335,18 +335,18 @@ BattleTransition_FlashScreen_:
 	ret
 
 BattleTransition_FlashScreenPalettes:
-	db %11111001
-	db %11111110
-	db %11111111
-	db %11111110
-	db %11111001
-	db %11100100
-	db %10010000
-	db %01000000
-	db %00000000
-	db %01000000
-	db %10010000
-	db %11100100
+	dc 3, 3, 2, 1
+	dc 3, 3, 3, 2
+	dc 3, 3, 3, 3
+	dc 3, 3, 3, 2
+	dc 3, 3, 2, 1
+	dc 3, 2, 1, 0
+	dc 2, 1, 0, 0
+	dc 1, 0, 0, 0
+	dc 0, 0, 0, 0
+	dc 1, 0, 0, 0
+	dc 2, 1, 0, 0
+	dc 3, 2, 1, 0
 	db 1 ; end
 
 ; used for low level trainer dungeon battles
