@@ -85,10 +85,10 @@ hSpriteScreenX:: db
 hSpriteScreenY:: db
 
 NEXTU
-hFF8F:: db
-hFF90:: db
-hFF91:: db
-hFF92:: db
+hCollidingSpriteOffset:: db
+hCollidingSpriteTempYValue:: db
+hCollidingSpriteTempXValue:: db
+hCollidingSpriteAdjustedDistance:: db
 ENDU
 
 hTilePlayerStandingOn:: db
@@ -327,11 +327,8 @@ hItemCounter::
 hSavedCoordIndex::
 hMissableObjectIndex::
 hGymTrashCanRandNumMask::
+hInteractedWithBookshelf::
 	db
-
-NEXTU
-hFFDB:: db
-hFFDC:: db
 ENDU
 
 	ds 1
