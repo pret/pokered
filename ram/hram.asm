@@ -85,10 +85,10 @@ hSpriteScreenX:: db
 hSpriteScreenY:: db
 
 NEXTU
-hSpriteCollisionsLoopCounter:: db
-hSpriteCollisionsTempYCoord:: db
-hSpriteCollisionsTempXCoord:: db
-hSpriteCollisionsAdjustedDistance:: db
+hCollidingSpriteOffset:: db
+hCollidingSpriteTempYValue:: db
+hCollidingSpriteTempXValue:: db
+hCollidingSpriteAdjustedDistance:: db
 ENDU
 
 hTilePlayerStandingOn:: db
@@ -327,10 +327,8 @@ hItemCounter::
 hSavedCoordIndex::
 hMissableObjectIndex::
 hGymTrashCanRandNumMask::
+hInteractedWithBookshelf::
 	db
-
-NEXTU
-hInteractedWithBookshelf:: db ; set to 0 if you interacted with a bookshelf, $FF if not when attempting to interact with a hidden object
 ENDU
 
 	ds 1
