@@ -80,7 +80,7 @@ DetectCollisionBetweenSprites:
 	and $f0
 	or c
 
-	ldh [hSpriteCollisionsTempYStore], a ; store Y coordinate adjusted for direction of movement
+	ldh [hSpriteCollisionsTempYCoord], a ; store Y coordinate adjusted for direction of movement
 
 	ld a, [hli] ; a = [i#SPRITESTATEDATA1_XSTEPVECTOR] (-1, 0, or 1)
 	call SetSpriteCollisionValues
@@ -93,7 +93,7 @@ DetectCollisionBetweenSprites:
 	and $f0
 	or c
 
-	ldh [hSpriteCollisionsTempXStore], a ; store X coordinate adjusted for direction of movement
+	ldh [hSpriteCollisionsTempXCoord], a ; store X coordinate adjusted for direction of movement
 
 	ld a, l
 	add 7
@@ -103,9 +103,9 @@ DetectCollisionBetweenSprites:
 	ld [hld], a ; zero [i#SPRITESTATEDATA1_0D] XXX what's this for?
 	ld [hld], a ; zero [i#SPRITESTATEDATA1_COLLISIONDATA]
 
-	ldh a, [hSpriteCollisionsTempXStore]
+	ldh a, [hSpriteCollisionsTempXCoord]
 	ld [hld], a ; [i#SPRITESTATEDATA1_XADJUSTED]
-	ldh a, [hSpriteCollisionsTempYStore]
+	ldh a, [hSpriteCollisionsTempYCoord]
 	ld [hl], a ; [i#SPRITESTATEDATA1_YADJUSTED]
 
 	xor a ; zero the loop counter
@@ -155,7 +155,7 @@ DetectCollisionBetweenSprites:
 	cpl
 	inc a
 .noCarry1
-	ldh [hSpriteCollisionsTempYStore], a ; store the distance between the two sprites' adjusted Y values
+	ldh [hSpriteCollisionsTempYCoord], a ; store the distance between the two sprites' adjusted Y values
 
 ; Use the carry flag set by the above subtraction to determine which sprite's
 ; Y coordinate is larger. This information is used later to set
@@ -177,11 +177,11 @@ DetectCollisionBetweenSprites:
 	ld b, 9
 
 .next1
-	ldh a, [hSpriteCollisionsTempYStore] ; a = distance between adjusted Y coordinates
+	ldh a, [hSpriteCollisionsTempYCoord] ; a = distance between adjusted Y coordinates
 	sub b
 	ldh [hSpriteCollisionsAdjustedDistance], a ; store distance adjusted using sprite i's direction
 	ld a, b
-	ldh [hSpriteCollisionsTempYStore], a ; store 7 or 9 depending on sprite i's delta Y
+	ldh [hSpriteCollisionsTempYCoord], a ; store 7 or 9 depending on sprite i's delta Y
 	jr c, .checkXDistance
 
 ; If sprite j's delta Y is 0, then b = 7, else b = 9.
@@ -226,7 +226,7 @@ DetectCollisionBetweenSprites:
 	cpl
 	inc a
 .noCarry2
-	ldh [hSpriteCollisionsTempXStore], a ; store the distance between the two sprites' adjusted X values
+	ldh [hSpriteCollisionsTempXCoord], a ; store the distance between the two sprites' adjusted X values
 
 ; Use the carry flag set by the above subtraction to determine which sprite's
 ; X coordinate is larger. This information is used later to set
@@ -248,11 +248,11 @@ DetectCollisionBetweenSprites:
 	ld b, 9
 
 .next3
-	ldh a, [hSpriteCollisionsTempXStore] ; a = distance between adjusted X coordinates
+	ldh a, [hSpriteCollisionsTempXCoord] ; a = distance between adjusted X coordinates
 	sub b
 	ldh [hSpriteCollisionsAdjustedDistance], a ; store distance adjusted using sprite i's direction
 	ld a, b
-	ldh [hSpriteCollisionsTempXStore], a ; store 7 or 9 depending on sprite i's delta X
+	ldh [hSpriteCollisionsTempXCoord], a ; store 7 or 9 depending on sprite i's delta X
 	jr c, .collision
 
 ; If sprite j's delta X is 0, then b = 7, else b = 9.
@@ -271,9 +271,9 @@ DetectCollisionBetweenSprites:
 	jr nc, .next ; go to next sprite if distance is still positive after both adjustments
 
 .collision
-	ldh a, [hSpriteCollisionsTempXStore] ; a = 7 or 9 depending on sprite i's delta X
+	ldh a, [hSpriteCollisionsTempXCoord] ; a = 7 or 9 depending on sprite i's delta X
 	ld b, a
-	ldh a, [hSpriteCollisionsTempYStore] ; a = 7 or 9 depending on sprite i's delta Y
+	ldh a, [hSpriteCollisionsTempYCoord] ; a = 7 or 9 depending on sprite i's delta Y
 	inc l
 
 ; If delta X isn't 0 and delta Y is 0, then b = %0011, else b = %1100.
