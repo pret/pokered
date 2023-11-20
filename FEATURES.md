@@ -161,7 +161,7 @@ The fourth page contains Sprite-related options.
 
 ![movedex](/screenshots/movedex.png?raw=true) ![movedex thunderbolt](/screenshots/movedex_thunderbolt.png?raw=true) ![movedex flamethrower](/screenshots/movedex_flamethrower.png?raw=true) ![movedex surf](/screenshots/movedex_surf.png?raw=true) ![movedex eq](/screenshots/movedex_earthquake.png?raw=true)
  
-- Ghost Marowak can be caught, and if you have Alt Pkmn Palettes turned on, it has a special ghostly coloration. It wants revenge on Team Rocket!
+- Ghost Marowak can be caught, and if you have Alt Pkmn Palettes turned on, it has a special ghostly coloration. It wants revenge on Team Rocket! Mr Fuji will react differently to being saved if you caught it.
 
 - The Safari Zone now has 3 different "Modes" of Safari Game. They are:
   - `CLASSIC`: the original game's "Safari Game".  Use bait and rocks instead of your well-trained pokemon to try to catch wild pokemon with Safari Balls. The only change to this mode is that you have 700 steps instead of 500.
@@ -225,7 +225,7 @@ The fourth page contains Sprite-related options.
 
 ![diamond mine](/screenshots/diamond_mine.png?raw=true)
 
-- After helping the prospector, you can find him at his house in Celadon. If you talk to him there after obtaining HM02, he will teach you how to use DIG to go between towns similar to the way you do with FLY.
+- After helping the prospector, you can find him at his house in Celadon. If you talk to him there after obtaining HM02, he will teach you how to use DIG to go between towns similar to the way you do with FLY. (Unlike FLY, DIG cannot be used while surfing, or on a dock above water.)
 
 ![prospectors house](/screenshots/prospector's_house.png?raw=true) 
 
@@ -277,6 +277,8 @@ The fourth page contains Sprite-related options.
 - Some pokemon had their default color palette adjusted (example: Voltorb and Electrode are red instead of the original yellow. Don't ask me why they were yellow in the first place)
 - You can see "the side of the building" visually from Celadon Department Store roof and Celadon Mansion roof.
 - Elevators will shake for longer or shorter depending on how far away the floor you selected was.
+- A little animation plays when you push a boulder onto a switch in Victory Road.
+- A little animation plays when you use FLASH to light up Rock Tunnel.
 
 ## Bugfixes
 - High Jump Kick / Jump Kick crash damage on missing does more damage instead of 1 damage always now. (1/4 the damage of what it would have done to the opponent)
@@ -310,6 +312,8 @@ The fourth page contains Sprite-related options.
 - Route 17 sign can now be read from below.
 - Can't get blocked by the burglar on Pokemon Mansion 3F
 - If all your pokemon are fainted except for the current one, SHIFT mode won't ask you if you want to switch pokemon before the opponent sends out their next pokemon.
+- The LAPRAS npc in the fuchsia city zoo can now swim around its enclosure like it was coded to be able to.
+- Trapping moves won't erroneously still do ongoing damage to pokemon who are immune. Example: Wrap on a ghost pokemon.
 
 ## Tweaks
 - Trainers in general have a bit less type-specific parties and more varied pokemon. 
@@ -335,6 +339,7 @@ The fourth page contains Sprite-related options.
 - The "star shaped grass" tile in viridian forest and the safari zone now loads encounters correctly.
 - Every badge will raise the level traded pokemon will obey you by 10 up until the marshbadge, instead of by 20 levels every 2 badges. The badge explanation text is unchanged, however. This is just for easier usage of in-game traded pokemon during a normal playthrough.
 - Unused text about Porygon was added to the computer monitor on Silph Co 11F.
+- New text entries were added to objects where there was previously either nothing at all or generic reused text in some cases. (Example: some trash cans in peoples house's now have unique text)
 
 ## Move changes
 - Disable disables the previously selected move of the opponent. If they haven't selected a move yet, it chooses a random move. It has 85% accuracy. It lasts 2-7 turns.
@@ -413,6 +418,7 @@ Additionally, GHOST type was made a "Dynamic type". What this means, is it can d
 - Smarter trainers will favor using priority moves if you're faster than them
 - Smarter trainers will favor using draining moves like Mega Drain when they're at low health
 - Smarter trainers will use MIRROR MOVE if it results in a move that is super effective
+- Smarter trainers will favor 4x super effective moves even more than normal super effective moves
 - Expert trainers will favor using healing moves like recover when they're at low health
 - Expert trainers will heavily favor using dream eater if you're asleep
 - Expert trainers will try to apply statuses if you don't have one
@@ -426,8 +432,12 @@ Additionally, GHOST type was made a "Dynamic type". What this means, is it can d
 - Giovanni's Theme (unused music from Pokemon Yellow) was added when you encounter Giovanni. You must set MUSIC option to OG+ for it to play.
 - Beta victory theme (battle victory "guide") was added when you defeat female trainers. You must set MUSIC option to OG+ for it to play.
 - Beta healing theme (healing theme "pallet town") was added when you rest at your house in PALLET TOWN. You must set MUSIC option to OG+ for it to play.
+- The Elite Four will all use the gym battle theme instead of the first three using the default battle music.
 - A small sound effect was added when you toss an item.
 - A small sound effect plays when you get on or off your bicycle, but only if you have the option BIKE SONG set to OFF.
+- A small sound effect plays when you push a boulder onto a switch in Victory Road.
+- A small sound effect plays when you light up Rock Tunnel with FLASH.
+- A small sound effect plays when the doors behind the first 3 elite four members open upon defeating them.
 
 ## Pokemon Green visuals
 The version-specific visuals of japanese pokemon green were added into PureGreen.
