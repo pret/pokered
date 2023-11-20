@@ -86,8 +86,8 @@ hSpriteScreenY:: db
 
 NEXTU
 hSpriteCollisionsLoopCounter:: db
-hSpriteCollisionsTempYStore:: db
-hSpriteCollisionsTempXStore:: db
+hSpriteCollisionsTempYCoord:: db
+hSpriteCollisionsTempXCoord:: db
 hSpriteCollisionsAdjustedDistance:: db
 ENDU
 
