@@ -18345,8 +18345,8 @@
 00:cd37 wFilteredBagItemsCount
 00:cd37 wNPCMovementDirections2Index
 00:cd38 wSimulatedJoypadStatesIndex
-00:cd39 wWastedByteCD39
-00:cd3a wWastedByteCD3A
+00:cd39 wUnusedCD39
+00:cd3a wUnusedCD3A
 00:cd3b wOverrideSimulatedJoypadStatesMask
 00:cd3d wCoordIndex
 00:cd3d wSwappedMenuItem
@@ -18516,7 +18516,9 @@
 00:cf0a wBoughtOrSoldItemInMart
 00:cf0b wBattleResult
 00:cf0c wAutoTextBoxDrawingControl
-00:cf0d wcf0d
+00:cf0d wSavedCoordIndex
+00:cf0d wNextSafariZoneGateScript
+00:cf0d wOakWalkedToPlayer
 00:cf0e wTilePlayerStandingOn
 00:cf0f wNPCNumScriptedSteps
 00:cf10 wNPCMovementScriptFunctionNum
@@ -19121,7 +19123,7 @@
 00:d5a4 wPlayerCoins
 00:d5a6 wMissableObjectFlags
 00:d5c6 wMissableObjectFlagsEnd
-00:d5cd wSpriteImageIndexBackup
+00:d5cd wSavedSpriteImageIndex
 00:d5ce wMissableObjectList
 00:d5f0 wOaksLabCurScript
 00:d5f0 wGameProgressFlags

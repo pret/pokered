@@ -18672,8 +18672,8 @@ WRAM0 bank #0:
 	         $cd37 = wFilteredBagItemsCount
 	         $cd37 = wNPCMovementDirections2Index
 	         $cd38 = wSimulatedJoypadStatesIndex
-	         $cd39 = wWastedByteCD39
-	         $cd3a = wWastedByteCD3A
+	         $cd39 = wUnusedCD39
+	         $cd3a = wUnusedCD3A
 	         $cd3b = wOverrideSimulatedJoypadStatesMask
 	         $cd3d = wCoordIndex
 	         $cd3d = wSwappedMenuItem
@@ -18843,7 +18843,9 @@ WRAM0 bank #0:
 	         $cf0a = wBoughtOrSoldItemInMart
 	         $cf0b = wBattleResult
 	         $cf0c = wAutoTextBoxDrawingControl
-	         $cf0d = wcf0d
+	         $cf0d = wSavedCoordIndex
+	         $cf0d = wNextSafariZoneGateScript
+	         $cf0d = wOakWalkedToPlayer
 	         $cf0e = wTilePlayerStandingOn
 	         $cf0f = wNPCNumScriptedSteps
 	         $cf10 = wNPCMovementScriptFunctionNum
@@ -19450,7 +19452,7 @@ WRAM0 bank #0:
 	         $d5a4 = wPlayerCoins
 	         $d5a6 = wMissableObjectFlags
 	         $d5c6 = wMissableObjectFlagsEnd
-	         $d5cd = wSpriteImageIndexBackup
+	         $d5cd = wSavedSpriteImageIndex
 	         $d5ce = wMissableObjectList
 	         $d5f0 = wOaksLabCurScript
 	         $d5f0 = wGameProgressFlags
