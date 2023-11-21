@@ -771,7 +771,7 @@ OaksLabRivalText:
 	call PrintText
 	jr .done
 .beforeChooseMon
-	bit 2, a
+	CheckEventReuseA EVENT_GOT_STARTER
 	jr nz, .afterChooseMon
 	ld hl, .GoAheadAndChooseText
 	call PrintText
