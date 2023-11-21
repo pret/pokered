@@ -45,7 +45,7 @@ PalletTownDefaultScript:
 
 PalletTownOakHeyWaitScript:
 	xor a
-	ld [wcf0d], a
+	ld [wOakWalkedToPlayer], a
 	ld a, TEXT_PALLETTOWN_OAK
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
@@ -96,8 +96,8 @@ PalletTownOakNotSafeComeWithMeScript:
 	ret nz
 	xor a ; ld a, SPRITE_FACING_DOWN
 	ld [wSpritePlayerStateData1FacingDirection], a
-	ld a, 1
-	ld [wcf0d], a
+	ld a, TRUE
+	ld [wOakWalkedToPlayer], a
 	ld a, SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	ld a, TEXT_PALLETTOWN_OAK
@@ -161,7 +161,7 @@ PalletTown_TextPointers:
 
 PalletTownOakText:
 	text_asm
-	ld a, [wcf0d]
+	ld a, [wOakWalkedToPlayer]
 	and a
 	jr nz, .next
 	ld a, 1

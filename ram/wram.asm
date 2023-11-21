@@ -1050,7 +1050,10 @@ wBattleResult:: db
 ; bit 0: if set, DisplayTextID automatically draws a text box
 wAutoTextBoxDrawingControl:: db
 
-wcf0d:: db ; used with some overworld scripts (not exactly sure what it's used for)
+; used in some overworld scripts to vary scripted movement
+wSavedCoordIndex::
+wOakWalkedToPlayer::
+wNextSafariZoneGateScript:: db
 
 ; used in CheckForTilePairCollisions2 to store the tile the player is on
 wTilePlayerStandingOn:: db
@@ -2150,8 +2153,8 @@ wMissableObjectFlagsEnd::
 
 	ds 7 ; unused save file 7 bytes
 
-; temp copy of SPRITESTATEDATA1_IMAGEINDEX (used for sprite facing/anim)
-wSpriteImageIndexBackup:: db
+; saved copy of SPRITESTATEDATA1_IMAGEINDEX (used for sprite facing/anim)
+wSavedSpriteImageIndex:: db
 
 ; each entry consists of 2 bytes
 ; * the sprite ID (depending on the current map)
