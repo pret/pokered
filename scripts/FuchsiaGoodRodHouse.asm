@@ -7,8 +7,8 @@ FuchsiaGoodRodHouse_TextPointers:
 
 FuchsiaGoodRodHouseFishingGuruText:
 	text_asm
-	ld a, [wd728]
-	bit 4, a ; got good rod?
+	ld a, [wFishingRodFlags]
+	bit FISHINGROD_RECEIVED_GOOD_ROD_F, a
 	jr nz, .got_item
 	ld hl, .Text
 	call PrintText
@@ -19,8 +19,8 @@ FuchsiaGoodRodHouseFishingGuruText:
 	lb bc, GOOD_ROD, 1
 	call GiveItem
 	jr nc, .bag_full
-	ld hl, wd728
-	set 4, [hl] ; got good rod
+	ld hl, wFishingRodFlags
+	set FISHINGROD_RECEIVED_GOOD_ROD_F, [hl] ; got good rod
 	ld hl, .ReceivedGoodRodText
 	jr .done
 .bag_full

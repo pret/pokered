@@ -11,8 +11,8 @@ Route6Gate_ScriptPointers:
 	dw_const Route6GatePlayerMovingScript, SCRIPT_ROUTE6GATE_PLAYER_MOVING
 
 Route6GateDefaultScript:
-	ld a, [wd728]
-	bit 6, a
+	ld a, [wMiscEventFlags]
+	bit MISCEVENT_GAVE_SAFFRON_GUARD_DRINK_F, a
 	ret nz
 	ld hl, .PlayerInCoordsArray
 	call ArePlayerCoordsInArray
@@ -33,8 +33,8 @@ Route6GateDefaultScript:
 	ld [wRoute6GateCurScript], a
 	ret
 .have_drink
-	ld hl, wd728
-	set 6, [hl]
+	ld hl, wMiscEventFlags
+	set MISCEVENT_GAVE_SAFFRON_GUARD_DRINK_F, [hl]
 	ld a, TEXT_ROUTE6GATE_GUARD_GIVE_DRINK
 	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID

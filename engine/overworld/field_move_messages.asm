@@ -1,6 +1,6 @@
 PrintStrengthTxt:
-	ld hl, wd728
-	set 0, [hl]
+	ld hl, wFieldMoveFlags
+	set FIELDMOVE_USING_STRENGTH_OUTSIDE_BATTLE_F, [hl]
 	ld hl, UsedStrengthText
 	call PrintText
 	ld hl, CanMoveBouldersText
@@ -19,11 +19,11 @@ CanMoveBouldersText:
 	text_end
 
 IsSurfingAllowed:
-; Returns whether surfing is allowed in bit 1 of wd728.
+; Returns whether surfing is allowed in bit 1 of wFieldMoveFlags.
 ; Surfing isn't allowed on the Cycling Road or in the lowest level of the
 ; Seafoam Islands before the current has been slowed with boulders.
-	ld hl, wd728
-	set 1, [hl]
+	ld hl, wFieldMoveFlags
+	set FIELDMOVE_SURFING_ALLOWED_F, [hl]
 	ld a, [wd732]
 	bit 5, a
 	jr nz, .forcedToRideBike
@@ -35,13 +35,13 @@ IsSurfingAllowed:
 	ld hl, SeafoamIslandsB4FStairsCoords
 	call ArePlayerCoordsInArray
 	ret nc
-	ld hl, wd728
-	res 1, [hl]
+	ld hl, wFieldMoveFlags
+	res FIELDMOVE_SURFING_ALLOWED_F, [hl]
 	ld hl, CurrentTooFastText
 	jp PrintText
 .forcedToRideBike
-	ld hl, wd728
-	res 1, [hl]
+	ld hl, wFieldMoveFlags
+	res FIELDMOVE_SURFING_ALLOWED_F, [hl]
 	ld hl, CyclingIsFunText
 	jp PrintText
 

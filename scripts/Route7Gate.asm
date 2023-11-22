@@ -23,8 +23,8 @@ Route7GateMovePlayerLeftScript:
 	ret
 
 Route7DefaultScript:
-	ld a, [wd728]
-	bit 6, a
+	ld a, [wMiscEventFlags]
+	bit MISCEVENT_GAVE_SAFFRON_GUARD_DRINK_F, a
 	ret nz
 	ld hl, .PlayerInCoordsArray
 	call ArePlayerCoordsInArray
@@ -48,8 +48,8 @@ Route7DefaultScript:
 	ld a, TEXT_ROUTE7GATE_GUARD_GIVE_DRINK
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld hl, wd728
-	set 6, [hl]
+	ld hl, wMiscEventFlags
+	set MISCEVENT_GAVE_SAFFRON_GUARD_DRINK_F, [hl]
 	ret
 
 .PlayerInCoordsArray:

@@ -161,9 +161,9 @@ StartMenu_Pokemon::
 	bit BIT_SOULBADGE, a
 	jp z, .newBadgeRequired
 	farcall IsSurfingAllowed
-	ld hl, wd728
-	bit 1, [hl]
-	res 1, [hl]
+	ld hl, wFieldMoveFlags
+	bit FIELDMOVE_SURFING_ALLOWED_F, [hl]
+	res FIELDMOVE_SURFING_ALLOWED_F, [hl]
 	jp z, .loop
 	ld a, SURFBOARD
 	ld [wcf91], a

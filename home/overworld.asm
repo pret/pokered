@@ -2388,8 +2388,8 @@ IgnoreInputForHalfSecond:
 	ret
 
 ResetUsingStrengthOutOfBattleBit:
-	ld hl, wd728
-	res 0, [hl]
+	ld hl, wFieldMoveFlags
+	res FIELDMOVE_USING_STRENGTH_OUTSIDE_BATTLE_F, [hl]
 	ret
 
 ForceBikeOrSurf::

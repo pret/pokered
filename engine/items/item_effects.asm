@@ -1591,8 +1591,8 @@ ItemUseCardKey:
 .done
 	ld hl, ItemUseText00
 	call PrintText
-	ld hl, wd728
-	set 7, [hl]
+	ld hl, wMiscEventFlags
+	set MISCEVENT_UNUSED_ITEMUSECARDKEY_F, [hl]
 	ret
 
 INCLUDE "data/events/card_key_coords.asm"
