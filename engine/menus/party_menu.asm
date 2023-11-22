@@ -142,7 +142,7 @@ RedrawPartyMenu_::
 	jr z, .placeEvolutionStoneString ; if so, place the "NOT ABLE" string
 	inc hl
 	inc hl
-	cp EV_ITEM
+	cp EVOLVE_ITEM
 	jr nz, .checkEvolutionsLoop
 ; if it's a stone evolution entry
 	dec hl

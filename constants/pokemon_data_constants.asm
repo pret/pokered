@@ -79,9 +79,9 @@ DEF HOF_TEAM_CAPACITY EQU 50
 
 ; Evolution types
 	const_def 1
-	const EV_LEVEL ; 1
-	const EV_ITEM  ; 2
-	const EV_TRADE ; 3
+	const EVOLVE_LEVEL ; 1
+	const EVOLVE_ITEM  ; 2
+	const EVOLVE_TRADE ; 3
 
 DEF MAX_EVOLUTIONS EQU 3
 DEF EVOLUTION_SIZE EQU 4

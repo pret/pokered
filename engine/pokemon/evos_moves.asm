@@ -67,20 +67,20 @@ Evolution_PartyMonLoop: ; loop over party mons
 	and a ; have we reached the end of the evolution data?
 	jr z, Evolution_PartyMonLoop
 	ld b, a ; evolution type
-	cp EV_TRADE
+	cp EVOLVE_TRADE
 	jr z, .checkTradeEvo
 ; not trade evolution
 	ld a, [wLinkState]
 	cp LINK_STATE_TRADING
 	jr z, Evolution_PartyMonLoop ; if trading, go the next mon
 	ld a, b
-	cp EV_ITEM
+	cp EVOLVE_ITEM
 	jr z, .checkItemEvo
 	ld a, [wForceEvolution]
 	and a
 	jr nz, Evolution_PartyMonLoop
 	ld a, b
-	cp EV_LEVEL
+	cp EVOLVE_LEVEL
 	jr z, .checkLevel
 .checkTradeEvo
 	ld a, [wLinkState]
