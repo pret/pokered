@@ -1,5 +1,5 @@
 _UpdateSprites::
-	ld h, $c1
+	ld h, HIGH(wSpriteStateData1)
 	inc h
 	ld a, SPRITESTATEDATA2_IMAGEBASEOFFSET
 .spriteLoop
