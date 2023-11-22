@@ -1796,7 +1796,7 @@ wUnusedD366:: db
 
 wCurMapHeader::
 wCurMapTileset:: db
-wCurMapHeight:: db 
+wCurMapHeight:: db
 wCurMapWidth:: db
 wCurMapDataPtr:: dw
 wCurMapTextPtr:: dw
