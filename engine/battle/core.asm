@@ -3154,9 +3154,9 @@ handleIfPlayerMoveMissed:
 getPlayerAnimationType:
 	ld a, [wPlayerMoveEffect]
 	and a
-	ld a, 4 ; move has no effect other than dealing damage
+	ld a, ANIMATIONTYPE_BLINK_ENEMY_MON_SPRITE ; move has no effect other than dealing damage
 	jr z, playPlayerMoveAnimation
-	ld a, 5 ; move has effect
+	ld a, ANIMATIONTYPE_SHAKE_SCREEN_HORIZONTALLY_LIGHT ; move has effect
 playPlayerMoveAnimation:
 	push af
 	ld a, [wPlayerBattleStatus2]
@@ -5681,9 +5681,9 @@ handleIfEnemyMoveMissed:
 GetEnemyAnimationType:
 	ld a, [wEnemyMoveEffect]
 	and a
-	ld a, $1
+	ld a, ANIMATIONTYPE_SHAKE_SCREEN_VERTICALLY
 	jr z, playEnemyMoveAnimation
-	ld a, $2
+	ld a, ANIMATIONTYPE_SHAKE_SCREEN_HORIZONTALLY_HEAVY
 	jr playEnemyMoveAnimation
 handleExplosionMiss:
 	call SwapPlayerAndEnemyLevels
@@ -6752,9 +6752,11 @@ HandleExplodingAnimation:
 	ld a, [wMoveMissed]
 	and a
 	ret nz
-	ld a, 5
+	ld a, ANIMATIONTYPE_SHAKE_SCREEN_HORIZONTALLY_LIGHT
 	ld [wAnimationType], a
-
+	assert ANIMATIONTYPE_SHAKE_SCREEN_HORIZONTALLY_LIGHT == MEGA_PUNCH
+	; ld a, MEGA_PUNCH
+; fallthrough
 PlayMoveAnimation:
 	ld [wAnimationID], a
 	vc_hook_red Reduce_move_anim_flashing_Confusion
