@@ -887,10 +887,6 @@ UNION
 wcd6d:: ds NAME_BUFFER_LENGTH ; buffer for various data
 
 NEXTU
-wEvosMoves:: ds MAX_EVOLUTIONS * EVOLUTION_SIZE + 1
-wEvosMovesEnd::
-
-NEXTU
 	ds 4
 ; temp variable used to print a move's current PP on the status screen
 wStatusScreenCurrentPP:: db

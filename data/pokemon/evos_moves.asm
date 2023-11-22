@@ -1,5 +1,12 @@
-; See constants/pokemon_data_constants.asm
-; The max number of evolutions per monster is MAX_EVOLUTIONS
+; Evos+moves data structure:
+; - Evolution methods:
+;    * db EVOLVE_LEVEL, level, species
+;    * db EVOLVE_ITEM, used item, min level (1), species
+;    * db EVOLVE_TRADE, min level (1), species
+; - db 0 ; no more evolutions
+; - Learnset (in increasing level order):
+;    * db level, move
+; - db 0 ; no more level-up moves
 
 EvosMovesPointerTable:
 	table_width 2, EvosMovesPointerTable
