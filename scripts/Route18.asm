@@ -15,11 +15,11 @@ Route18_ScriptPointers:
 
 Route18_TextPointers:
 	def_text_pointers
-	dw_const Route18CooltrainerM1Text,   SCRIPT_ROUTE18_COOLTRAINER_M1
-	dw_const Route18CooltrainerM2Text,   SCRIPT_ROUTE18_COOLTRAINER_M2
-	dw_const Route18CooltrainerM3Text,   SCRIPT_ROUTE18_COOLTRAINER_M3
-	dw_const Route18SignText,            SCRIPT_ROUTE18_SIGN
-	dw_const Route18CyclingRoadSignText, SCRIPT_ROUTE18_CYCLING_ROAD_SIGN
+	dw_const Route18CooltrainerM1Text,   TEXT_ROUTE18_COOLTRAINER_M1
+	dw_const Route18CooltrainerM2Text,   TEXT_ROUTE18_COOLTRAINER_M2
+	dw_const Route18CooltrainerM3Text,   TEXT_ROUTE18_COOLTRAINER_M3
+	dw_const Route18SignText,            TEXT_ROUTE18_SIGN
+	dw_const Route18CyclingRoadSignText, TEXT_ROUTE18_CYCLING_ROAD_SIGN
 
 Route18TrainerHeaders:
 	def_trainers
