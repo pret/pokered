@@ -18855,10 +18855,8 @@ WRAM0 bank #0:
 	         $cd6c = wNumMovesMinusOne
 	         $cd6c = wDownscaledMonSize
 	         $cd6d = wcd6d
-	         $cd6d = wEvosMoves
 	         $cd71 = wStatusScreenCurrentPP
 	         $cd78 = wNormalMaxPPList
-	         $cd7a = wEvosMovesEnd
 	         $cd81 = wTileMapBackup2
 	         $cd81 = wSerialOtherGameboyRandomNumberListBlock
 	         $cee9 = wBuffer
