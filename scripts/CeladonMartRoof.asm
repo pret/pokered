@@ -41,8 +41,8 @@ CeladonMartRoofDrinkList:
 	db 0 ; end
 
 CeladonMartRoofScript_GiveDrinkToGirl:
-	ld hl, wd730
-	set 6, [hl]
+	ld hl, wScriptEngineFlags3
+	set SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl]
 	ld hl, CeladonMartRoofLittleGirlGiveHerWhichDrinkText
 	call PrintText
 	xor a
@@ -68,8 +68,8 @@ CeladonMartRoofScript_GiveDrinkToGirl:
 	call TextBoxBorder
 	call UpdateSprites
 	call CeladonMartRoofScript_PrintDrinksInBag
-	ld hl, wd730
-	res 6, [hl]
+	ld hl, wScriptEngineFlags3
+	res SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl]
 	call HandleMenuInput
 	bit BIT_B_BUTTON, a
 	ret nz

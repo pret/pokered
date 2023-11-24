@@ -1179,10 +1179,10 @@ LinkBattleLostText:
 ; slides pic of fainted mon downwards until it disappears
 ; bug: when this is called, [hAutoBGTransferEnabled] is non-zero, so there is screen tearing
 SlideDownFaintedMonPic:
-	ld a, [wd730]
+	ld a, [wScriptEngineFlags3]
 	push af
-	set 6, a
-	ld [wd730], a
+	set SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, a
+	ld [wScriptEngineFlags3], a
 	ld b, 7 ; number of times to slide
 .slideStepLoop ; each iteration, the mon is slid down one row
 	push bc
@@ -1221,7 +1221,7 @@ SlideDownFaintedMonPic:
 	dec b
 	jr nz, .slideStepLoop
 	pop af
-	ld [wd730], a
+	ld [wScriptEngineFlags3], a
 	ret
 
 SevenSpacesText:

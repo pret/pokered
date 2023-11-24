@@ -93,8 +93,8 @@ PKMNLeaguePCText: db "<PKMN>LEAGUE@"
 LogOffPCText:     db "LOG OFF@"
 
 BillsPC_::
-	ld hl, wd730
-	set 6, [hl]
+	ld hl, wScriptEngineFlags3
+	set SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl]
 	xor a
 	ld [wParentMenuItem], a
 	inc a               ; MONSTER_NAME
@@ -200,8 +200,8 @@ ExitBillsPC:
 	call LoadScreenTilesFromBuffer2
 	pop af
 	ld [wListScrollOffset], a
-	ld hl, wd730
-	res 6, [hl]
+	ld hl, wScriptEngineFlags3
+	res SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl]
 	ret
 
 BillsPCDeposit:

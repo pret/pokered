@@ -125,8 +125,8 @@ CeruleanCityFaceRivalScript:
 	jp SetSpriteFacingDirectionAndDelay ; face object
 
 CeruleanCityRivalBattleScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	ret nz
 	xor a
 	ld [wJoyIgnore], a
@@ -219,8 +219,8 @@ CeruleanCityMovement4:
 	db -1 ; end
 
 CeruleanCityRivalCleanupScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	ret nz
 	ld a, HS_CERULEAN_RIVAL
 	ld [wMissableObjectIndex], a

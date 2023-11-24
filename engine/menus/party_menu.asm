@@ -172,11 +172,11 @@ RedrawPartyMenu_::
 	ld b, SET_PAL_PARTY_MENU
 	call RunPaletteCommand
 .printMessage
-	ld hl, wd730
+	ld hl, wScriptEngineFlags3
 	ld a, [hl]
 	push af
 	push hl
-	set 6, [hl] ; turn off letter printing delay
+	set SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl] ; turn off letter printing delay
 	ld a, [wPartyMenuTypeOrMessageID] ; message ID
 	cp FIRST_PARTY_MENU_TEXT_ID
 	jr nc, .printItemUseMessage

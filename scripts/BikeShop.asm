@@ -48,8 +48,8 @@ BikeShopClerkText:
 	ld [wTopMenuItemY], a
 	ld a, $1
 	ld [wTopMenuItemX], a
-	ld hl, wd730
-	set 6, [hl]
+	ld hl, wScriptEngineFlags3
+	set SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl]
 	hlcoord 0, 0
 	ld b, 4
 	ld c, 15
@@ -66,8 +66,8 @@ BikeShopClerkText:
 	call HandleMenuInput
 	bit BIT_B_BUTTON, a
 	jr nz, .cancel
-	ld hl, wd730
-	res 6, [hl]
+	ld hl, wScriptEngineFlags3
+	res SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl]
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .cancel

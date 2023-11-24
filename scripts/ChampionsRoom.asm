@@ -136,8 +136,8 @@ OakEntranceAfterVictoryMovement:
 	db -1 ; end
 
 ChampionsRoomOakCongratulatesPlayerScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	ret nz
 	ld a, PLAYER_DIR_LEFT
 	ld [wPlayerMovingDirection], a
@@ -194,8 +194,8 @@ OakExitChampionsRoomMovement:
 	db -1 ; end
 
 ChampionsRoomOakExitsScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	ret nz
 	ld a, HS_CHAMPIONS_ROOM_OAK
 	ld [wMissableObjectIndex], a

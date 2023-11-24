@@ -129,8 +129,8 @@ MtMoon3FSuperNerdMoveUpMovementData:
 	db -1 ; end
 
 MtMoonB2FSuperNerdTakesOtherFossilScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	ret nz
 	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a

@@ -679,8 +679,8 @@ ItemUseSurfboard:
 	jp c, SurfingAttemptFailed
 .surf
 	call .makePlayerMoveForward
-	ld hl, wd730
-	set 7, [hl]
+	ld hl, wScriptEngineFlags3
+	set SCRIPT_SIMULATED_JOYPAD_OR_NPC_SCRIPTED_MOVEMENT_F, [hl]
 	ld a, 2
 	ld [wWalkBikeSurfState], a ; change player state to surfing
 	call PlayDefaultMusic ; play surfing music
@@ -715,8 +715,8 @@ ItemUseSurfboard:
 	jp PrintText
 .stopSurfing
 	call .makePlayerMoveForward
-	ld hl, wd730
-	set 7, [hl]
+	ld hl, wScriptEngineFlags3
+	set SCRIPT_SIMULATED_JOYPAD_OR_NPC_SCRIPTED_MOVEMENT_F, [hl]
 	xor a
 	ld [wWalkBikeSurfState], a ; change player state to walking
 	dec a

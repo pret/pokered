@@ -1,5 +1,5 @@
 ApplyOutOfBattlePoisonDamage:
-	ld a, [wd730]
+	ld a, [wScriptEngineFlags3]
 	add a
 	jp c, .noBlackOut ; no black out if joypad states are being simulated
 	ld a, [wPartyCount]

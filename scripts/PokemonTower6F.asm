@@ -79,8 +79,8 @@ PokemonTower6FMarowakBattleScript:
 	xor a
 	ld [wSpritePlayerStateData2MovementByte1], a
 	ld [wOverrideSimulatedJoypadStatesMask], a
-	ld hl, wd730
-	set 7, [hl]
+	ld hl, wScriptEngineFlags3
+	set SCRIPT_SIMULATED_JOYPAD_OR_NPC_SCRIPTED_MOVEMENT_F, [hl]
 	ld a, SCRIPT_POKEMONTOWER6F_PLAYER_MOVING
 	ld [wPokemonTower6FCurScript], a
 	ld [wCurMapScript], a

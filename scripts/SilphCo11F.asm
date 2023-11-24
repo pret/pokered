@@ -236,8 +236,8 @@ SilphCo11FGiovanniAfterBattleScript:
 	jp SilphCo11FSetCurScript
 
 SilphCo11FGiovanniBattleFacingScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	ret nz
 	ld a, SILPHCO11F_GIOVANNI
 	ldh [hSpriteIndex], a

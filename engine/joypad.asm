@@ -19,8 +19,8 @@ _Joypad::
 	ld a, b
 	ldh [hJoyLast], a
 
-	ld a, [wd730]
-	bit 5, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_IGNORE_JOYPAD_INPUT_F, a
 	jr nz, DiscardButtonPresses
 
 	ldh a, [hJoyLast]

@@ -32,8 +32,8 @@ UsedCut:
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMonNicks
 	call GetPartyMonName
-	ld hl, wd730
-	set 6, [hl]
+	ld hl, wScriptEngineFlags3
+	set SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl]
 	call GBPalWhiteOutWithDelay3
 	call ClearSprites
 	call RestoreScreenTilesAndReloadTilePatterns
@@ -49,8 +49,8 @@ UsedCut:
 	ld hl, UsedCutText
 	call PrintText
 	call LoadScreenTilesFromBuffer2
-	ld hl, wd730
-	res 6, [hl]
+	ld hl, wScriptEngineFlags3
+	res SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl]
 	ld a, $ff
 	ld [wUpdateSpritesEnabled], a
 	call InitCutAnimOAM

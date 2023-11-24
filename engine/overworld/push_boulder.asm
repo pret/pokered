@@ -87,8 +87,8 @@ PushBoulderRightMovementData:
 	db -1 ; end
 
 DoBoulderDustAnimation::
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	ret nz
 	callfar AnimateBoulderDust
 	call DiscardButtonPresses

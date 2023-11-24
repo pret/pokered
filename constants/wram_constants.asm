@@ -32,4 +32,15 @@
 	const SCRIPT_ENGINE2_DISABLE_BATTLES_F                    ; 4
 	const SCRIPT_ENGINE2_BATTLE_ENDS_AND_POISON_BLACKOUT_F    ; 5
 	const SCRIPT_ENGINE2_USING_LINK_FEATURE_F                 ; 6
-	const SCRIPT_ENGINE2_SCRIPTED_NPC_MOVEMENT_F              ; 7
+	const SCRIPT_ENGINE2_INIT_SCRIPTED_NPC_MOVEMENT_F         ; 7
+
+; wScriptEngineFlags3
+	const_def
+	const SCRIPT_ENGINE3_NPC_IS_MOVING_F                     ; 0
+	const SCRIPT_ENGINE3_UNKNOWN_JOYPAD_INPUT1_F             ; 1
+	const SCRIPT_ENGINE3_UNKNOWN_JOYPAD_INPUT2_F             ; 2
+	const_skip
+	const SCRIPT_ENGINE3_UNKNOWN3_F                          ; 4
+	const SCRIPT_ENGINE3_IGNORE_JOYPAD_INPUT_F               ; 5
+	const SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F               ; 6
+	const SCRIPT_SIMULATED_JOYPAD_OR_NPC_SCRIPTED_MOVEMENT_F ; 7

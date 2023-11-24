@@ -89,8 +89,8 @@ MovementData_PewterMuseumGuyExit:
 	db -1 ; end
 
 PewterCityHideSuperNerd1Script:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	ret nz
 	ld a, HS_MUSEUM_GUY
 	ld [wMissableObjectIndex], a
@@ -158,8 +158,8 @@ MovementData_PewterGymGuyExit:
 	db -1 ; end
 
 PewterCityHideYoungsterScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	ret nz
 	ld a, HS_GYM_GUY
 	ld [wMissableObjectIndex], a

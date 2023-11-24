@@ -48,12 +48,12 @@ CountDownIgnoreInputBitReset:
 	ld [wIgnoreInputCounter], a
 	and a
 	ret nz
-	ld a, [wd730]
-	res 1, a
-	res 2, a
-	bit 5, a
-	res 5, a
-	ld [wd730], a
+	ld a, [wScriptEngineFlags3]
+	res SCRIPT_ENGINE3_UNKNOWN_JOYPAD_INPUT1_F, a
+	res SCRIPT_ENGINE3_UNKNOWN_JOYPAD_INPUT2_F, a
+	bit SCRIPT_ENGINE3_IGNORE_JOYPAD_INPUT_F, a
+	res SCRIPT_ENGINE3_IGNORE_JOYPAD_INPUT_F, a
+	ld [wScriptEngineFlags3], a
 	ret z
 	xor a
 	ldh [hJoyPressed], a

@@ -11,8 +11,8 @@ VermilionDock_Script:
 	jp z, VermilionDockSSAnneLeavesScript
 	SetEventReuseHL EVENT_STARTED_WALKING_OUT_OF_DOCK
 	call Delay3
-	ld hl, wd730
-	set 7, [hl]
+	ld hl, wScriptEngineFlags3
+	set SCRIPT_SIMULATED_JOYPAD_OR_NPC_SCRIPTED_MOVEMENT_F, [hl]
 	ld hl, wSimulatedJoypadStatesEnd
 	ld a, D_UP
 	ld [hli], a

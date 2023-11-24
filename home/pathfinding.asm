@@ -32,8 +32,8 @@ MoveSprite_::
 	ld [wNPCNumScriptedSteps], a ; number of steps taken
 
 	pop bc
-	ld hl, wd730
-	set 0, [hl]
+	ld hl, wScriptEngineFlags3
+	set SCRIPT_ENGINE3_NPC_IS_MOVING_F, [hl]
 	pop hl
 	xor a
 	ld [wOverrideSimulatedJoypadStatesMask], a

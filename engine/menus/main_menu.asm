@@ -27,8 +27,8 @@ MainMenu:
 	call RunDefaultPaletteCommand
 	call LoadTextBoxTilePatterns
 	call LoadFontTilePatterns
-	ld hl, wd730
-	set 6, [hl]
+	ld hl, wScriptEngineFlags3
+	set SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl]
 	ld a, [wSaveFileStatus]
 	cp 1
 	jr z, .noSaveFile
@@ -50,8 +50,8 @@ MainMenu:
 	ld de, NewGameText
 	call PlaceString
 .next2
-	ld hl, wd730
-	res 6, [hl]
+	ld hl, wScriptEngineFlags3
+	res SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl]
 	call UpdateSprites
 	xor a
 	ld [wCurrentMenuItem], a

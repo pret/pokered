@@ -37,14 +37,14 @@ DisplayTextBoxID_::
 	call TextBoxBorder
 	pop hl
 	call GetTextBoxIDText
-	ld a, [wd730]
+	ld a, [wScriptEngineFlags3]
 	push af
-	ld a, [wd730]
-	set 6, a ; no pauses between printing each letter
-	ld [wd730], a
+	ld a, [wScriptEngineFlags3]
+	set SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, a ; no pauses between printing each letter
+	ld [wScriptEngineFlags3], a
 	call PlaceString
 	pop af
-	ld [wd730], a
+	ld [wScriptEngineFlags3], a
 	call UpdateSprites
 	ret
 
@@ -128,8 +128,8 @@ GetAddressOfScreenCoords:
 INCLUDE "data/text_boxes.asm"
 
 DisplayMoneyBox:
-	ld hl, wd730
-	set 6, [hl]
+	ld hl, wScriptEngineFlags3
+	set SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl]
 	ld a, MONEY_BOX_TEMPLATE
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
@@ -141,17 +141,17 @@ DisplayMoneyBox:
 	ld de, wPlayerMoney
 	ld c, $a3
 	call PrintBCDNumber
-	ld hl, wd730
-	res 6, [hl]
+	ld hl, wScriptEngineFlags3
+	res SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl]
 	ret
 
 CurrencyString:
 	db "      ¥@"
 
 DoBuySellQuitMenu:
-	ld a, [wd730]
-	set 6, a ; no printing delay
-	ld [wd730], a
+	ld a, [wScriptEngineFlags3]
+	set SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, a ; no printing delay
+	ld [wScriptEngineFlags3], a
 	xor a
 	ld [wChosenMenuItem], a
 	ld a, BUY_SELL_QUIT_MENU_TEMPLATE
@@ -169,9 +169,9 @@ DoBuySellQuitMenu:
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
 	ld [wMenuWatchMovingOutOfBounds], a
-	ld a, [wd730]
-	res 6, a ; turn on the printing delay
-	ld [wd730], a
+	ld a, [wScriptEngineFlags3]
+	res SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, a ; turn on the printing delay
+	ld [wScriptEngineFlags3], a
 	call HandleMenuInput
 	call PlaceUnfilledArrowMenuCursor
 	bit BIT_A_BUTTON, a
@@ -205,9 +205,9 @@ DoBuySellQuitMenu:
 ; hl = address where the text box border should be drawn
 DisplayTwoOptionMenu:
 	push hl
-	ld a, [wd730]
-	set 6, a ; no printing delay
-	ld [wd730], a
+	ld a, [wScriptEngineFlags3]
+	set SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, a ; no printing delay
+	ld [wScriptEngineFlags3], a
 
 ; pointless because both values are overwritten before they are read
 	xor a
@@ -277,8 +277,8 @@ DisplayTwoOptionMenu:
 	pop hl
 	add hl, bc
 	call PlaceString
-	ld hl, wd730
-	res 6, [hl] ; turn on the printing delay
+	ld hl, wScriptEngineFlags3
+	res SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl] ; turn on the printing delay
 	ld a, [wTwoOptionMenuID]
 	cp NO_YES_MENU
 	jr nz, .notNoYesMenu

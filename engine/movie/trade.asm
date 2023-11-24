@@ -173,8 +173,8 @@ LoadTradingGFXAndMonNames:
 	call ClearSprites
 	ld a, $ff
 	ld [wUpdateSpritesEnabled], a
-	ld hl, wd730
-	set 6, [hl] ; turn on instant text printing
+	ld hl, wScriptEngineFlags3
+	set SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl] ; turn on instant text printing
 	ld a, [wOnSGB]
 	and a
 	ld a, $e4 ; non-SGB OBP0
@@ -218,8 +218,8 @@ Trade_SwapNames:
 Trade_Cleanup:
 	xor a
 	call LoadGBPal
-	ld hl, wd730
-	res 6, [hl] ; turn off instant text printing
+	ld hl, wScriptEngineFlags3
+	res SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl] ; turn off instant text printing
 	ret
 
 Trade_ShowPlayerMon:

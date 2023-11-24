@@ -23,8 +23,8 @@ DrawStartMenu::
 	ld [wLastMenuItem], a
 	xor a
 	ld [wMenuWatchMovingOutOfBounds], a
-	ld hl, wd730
-	set 6, [hl] ; no pauses between printing each letter
+	ld hl, wScriptEngineFlags3
+	set SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl] ; no pauses between printing each letter
 	hlcoord 12, 2
 	CheckEvent EVENT_GOT_POKEDEX
 ; case for not having pokedex
@@ -55,8 +55,8 @@ DrawStartMenu::
 	call PrintStartMenuItem
 	ld de, StartMenuExitText
 	call PlaceString
-	ld hl, wd730
-	res 6, [hl] ; turn pauses between printing letters back on
+	ld hl, wScriptEngineFlags3
+	res SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl] ; turn pauses between printing letters back on
 	ret
 
 StartMenuPokedexText:

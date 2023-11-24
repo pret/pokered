@@ -77,8 +77,8 @@ Route18Gate1FPlayerMovingRightScript:
 	ret nz
 	xor a
 	ld [wJoyIgnore], a
-	ld hl, wd730
-	res 7, [hl]
+	ld hl, wScriptEngineFlags3
+	res SCRIPT_SIMULATED_JOYPAD_OR_NPC_SCRIPTED_MOVEMENT_F, [hl]
 	ld a, SCRIPT_ROUTE18GATE1F_DEFAULT
 	ld [wRoute18Gate1FCurScript], a
 	ret

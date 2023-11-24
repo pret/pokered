@@ -82,8 +82,8 @@ BillsHousePokemonList::
 	ld a, 1
 	ld [wTopMenuItemX], a
 .billsPokemonLoop
-	ld hl, wd730
-	set 6, [hl]
+	ld hl, wScriptEngineFlags3
+	set SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl]
 	hlcoord 0, 0
 	ld b, 10
 	ld c, 9
@@ -113,8 +113,8 @@ BillsHousePokemonList::
 	call LoadScreenTilesFromBuffer2
 	jr .billsPokemonLoop
 .cancel
-	ld hl, wd730
-	res 6, [hl]
+	ld hl, wScriptEngineFlags3
+	res SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl]
 	call LoadScreenTilesFromBuffer2
 	jp TextScriptEnd
 

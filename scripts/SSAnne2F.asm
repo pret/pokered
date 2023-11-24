@@ -87,8 +87,8 @@ SSAnne2FSetFacingDirectionScript:
 	jp SetSpriteFacingDirectionAndDelay
 
 SSAnne2FRivalStartBattleScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	ret nz
 	call SSAnne2FSetFacingDirectionScript
 	xor a
@@ -164,8 +164,8 @@ SSAnne2FRivalAfterBattleScript:
 	db -1 ; end
 
 SSAnne2FRivalExitScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	ret nz
 	xor a
 	ld [wJoyIgnore], a

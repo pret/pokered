@@ -104,8 +104,8 @@ Route22FirstRivalBattleScript:
 	ret
 
 Route22Rival1StartBattleScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	ret nz
 	ld a, [wSavedCoordIndex]
 	cp 1 ; index of second, lower entry in Route22DefaultScript.Route22RivalBattleCoords
@@ -219,8 +219,8 @@ Route22Rival1ExitMovementData2:
 	db -1 ; end
 
 Route22Rival1ExitScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	ret nz
 	xor a
 	ld [wJoyIgnore], a
@@ -258,8 +258,8 @@ Route22SecondRivalBattleScript:
 	ret
 
 Route22Rival2StartBattleScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	ret nz
 	ld a, ROUTE22_RIVAL2
 	ldh [hSpriteIndex], a
@@ -363,8 +363,8 @@ Route22Rival2ExitMovementData2:
 	db -1 ; end
 
 Route22Rival2ExitScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	ret nz
 	xor a
 	ld [wJoyIgnore], a

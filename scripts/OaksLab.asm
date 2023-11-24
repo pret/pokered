@@ -64,8 +64,8 @@ OakEntryMovement:
 	db -1 ; end
 
 OaksLabHideShowOaksScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	ret nz
 	ld a, HS_OAKS_LAB_OAK_2
 	ld [wMissableObjectIndex], a
@@ -290,8 +290,8 @@ OaksLabChoseStarterScript:
 	ret
 
 OaksLabRivalChoosesStarterScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	ret nz
 	ld a, SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
@@ -377,8 +377,8 @@ OaksLabRivalChallengesPlayerScript:
 	ret
 
 OaksLabRivalStartBattleScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	ret nz
 
 	; define which team rival uses, and fight it
@@ -472,8 +472,8 @@ OaksLabRivalStartsExitScript:
 	db -1 ; end
 
 OaksLabPlayerWatchRivalExitScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	jr nz, .checkRivalPosition
 	ld a, HS_OAKS_LAB_RIVAL
 	ld [wMissableObjectIndex], a
@@ -552,8 +552,8 @@ OaksLabRivalFaceUpOakFaceDownScript:
 	jp SetSpriteFacingDirectionAndDelay
 
 OaksLabOakGivesPokedexScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	ret nz
 	call EnableAutoTextBoxDrawing
 	call PlayDefaultMusic
@@ -626,8 +626,8 @@ OaksLabOakGivesPokedexScript:
 	ret
 
 OaksLabRivalLeavesWithPokedexScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	ret nz
 	call PlayDefaultMusic
 	ld a, HS_OAKS_LAB_RIVAL
@@ -853,11 +853,11 @@ OaksLabShowPokeBallPokemonScript:
 	ldh [hSpriteDataOffset], a
 	call GetPointerWithinSpriteStateData1
 	ld [hl], SPRITE_FACING_RIGHT
-	ld hl, wd730
-	set 6, [hl]
+	ld hl, wScriptEngineFlags3
+	set SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl]
 	predef StarterDex
-	ld hl, wd730
-	res 6, [hl]
+	ld hl, wScriptEngineFlags3
+	res SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl]
 	call ReloadMapData
 	ld c, 10
 	call DelayFrames

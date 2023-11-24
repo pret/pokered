@@ -169,8 +169,8 @@ SilphCo7FDefaultScript:
 	db -1 ; end
 
 SilphCo7FRivalStartBattleScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	ret nz
 	xor a
 	ld [wJoyIgnore], a
@@ -252,8 +252,8 @@ SilphCo7FRivalAfterBattleScript:
 	db -1 ; end
 
 SilphCo7FRivalExitScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	ret nz
 	ld a, HS_SILPH_CO_7F_RIVAL
 	ld [wMissableObjectIndex], a

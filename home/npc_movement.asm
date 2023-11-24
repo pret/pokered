@@ -7,8 +7,8 @@ IsPlayerCharacterBeingControlledByGame::
 	ld a, [wd736]
 	bit 1, a ; currently stepping down from door bit
 	ret nz
-	ld a, [wd730]
-	and $80
+	ld a, [wScriptEngineFlags3]
+	and (1 << SCRIPT_SIMULATED_JOYPAD_OR_NPC_SCRIPTED_MOVEMENT_F)
 	ret
 
 RunNPCMovementScript::

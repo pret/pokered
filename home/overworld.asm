@@ -64,8 +64,8 @@ OverworldLoopLessDelay::
 	ld a, [wCurOpponent]
 	and a
 	jp nz, .newBattle
-	ld a, [wd730]
-	bit 7, a ; are we simulating button presses?
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_SIMULATED_JOYPAD_OR_NPC_SCRIPTED_MOVEMENT_F, a ; are we simulating button presses?
 	jr z, .notSimulating
 	ldh a, [hJoyHeld]
 	jr .checkIfStartIsPressed
@@ -82,8 +82,8 @@ OverworldLoopLessDelay::
 	bit BIT_A_BUTTON, a
 	jp z, .checkIfDownButtonIsPressed
 ; if A is pressed
-	ld a, [wd730]
-	bit 2, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_UNKNOWN_JOYPAD_INPUT2_F, a
 	jp nz, .noDirectionButtonsPressed
 	call IsPlayerCharacterBeingControlledByGame
 	jr nz, .checkForOpponent
@@ -178,8 +178,8 @@ OverworldLoopLessDelay::
 
 .handleDirectionButtonPress
 	ld [wPlayerDirection], a ; new direction
-	ld a, [wd730]
-	bit 7, a ; are we simulating button presses?
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_SIMULATED_JOYPAD_OR_NPC_SCRIPTED_MOVEMENT_F, a ; are we simulating button presses?
 	jr nz, .noDirectionChange ; ignore direction changes if we are
 	ld a, [wCheckFor180DegreeTurn]
 	and a
@@ -289,8 +289,8 @@ OverworldLoopLessDelay::
 	and a
 	jp nz, CheckMapConnections ; it seems like this check will never succeed (the other place where CheckMapConnections is run works)
 ; walking animation finished
-	ld a, [wd730]
-	bit 7, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_SIMULATED_JOYPAD_OR_NPC_SCRIPTED_MOVEMENT_F, a
 	jr nz, .doneStepCounting ; if button presses are being simulated, don't count steps
 ; step counting
 	ld hl, wStepCounter
@@ -1838,8 +1838,8 @@ JoypadOverworld::
 	ld a, D_DOWN
 	ldh [hJoyHeld], a ; on the cycling road, if there isn't a trainer and the player isn't pressing buttons, simulate a down press
 .notForcedDownwards
-	ld a, [wd730]
-	bit 7, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_SIMULATED_JOYPAD_OR_NPC_SCRIPTED_MOVEMENT_F, a
 	ret z
 ; if simulating button presses
 	ldh a, [hJoyHeld]
@@ -1878,8 +1878,8 @@ JoypadOverworld::
 	ld a, [hl]
 	and $f8
 	ld [hl], a
-	ld hl, wd730
-	res 7, [hl]
+	ld hl, wScriptEngineFlags3
+	res SCRIPT_SIMULATED_JOYPAD_OR_NPC_SCRIPTED_MOVEMENT_F, [hl]
 	ret
 
 ; function to check the tile ahead to determine if the character should get on land or keep surfing
@@ -1892,8 +1892,8 @@ JoypadOverworld::
 ; and 2429 always sets c to 0xF0. There is no 0xF0 background tile, so it
 ; is considered impassable and it is detected as a collision.
 CollisionCheckOnWater::
-	ld a, [wd730]
-	bit 7, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_SIMULATED_JOYPAD_OR_NPC_SCRIPTED_MOVEMENT_F, a
 	jp nz, .noCollision ; return and clear carry if button presses are being simulated
 	ld a, [wPlayerDirection] ; the direction that the player is trying to go in
 	ld d, a
@@ -2381,9 +2381,9 @@ SwitchToMapRomBank::
 IgnoreInputForHalfSecond:
 	ld a, 30
 	ld [wIgnoreInputCounter], a
-	ld hl, wd730
+	ld hl, wScriptEngineFlags3
 	ld a, [hl]
-	or %00100110
+	or (1 << SCRIPT_ENGINE3_UNKNOWN_JOYPAD_INPUT1_F | 1 << SCRIPT_ENGINE3_UNKNOWN_JOYPAD_INPUT2_F | 1 << SCRIPT_ENGINE3_IGNORE_JOYPAD_INPUT_F)
 	ld [hl], a ; set ignore input bit
 	ret
 

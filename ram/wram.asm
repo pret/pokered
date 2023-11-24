@@ -1651,7 +1651,7 @@ wSavedSpriteMapX:: db
 wWhichPrize:: db
 
 ; counts downward each frame
-; when it hits 0, bit 5 (ignore input bit) of wd730 is reset
+; when it hits 0, bit 5 (ignore input bit) of wScriptEngineFlags3 is reset
 wIgnoreInputCounter:: db
 
 ; counts down once every step
@@ -1764,7 +1764,7 @@ wObtainedBadges:: flag_array NUM_BADGES
 
 ; bit 0: If 0, limit the delay to 1 frame. Note that this has no effect if
 ;        the delay has been disabled entirely through bit 1 of this variable
-;        or bit 6 of wd730.
+;        or bit 6 of wScriptEngineFlags3.
 ; bit 1: If 0, no delay.
 wLetterPrintingDelayFlags:: db
 
@@ -2125,11 +2125,7 @@ wScriptEngineFlags2:: db
 
 	ds 1
 
-; bit 0: NPC sprite being moved by script
-; bit 5: ignore joypad input
-; bit 6: print text with no delay between each letter
-; bit 7: set if joypad states are being simulated in the overworld or an NPC's movement is being scripted
-wd730:: db
+wScriptEngineFlags3:: db
 
 	ds 1
 

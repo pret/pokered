@@ -10,8 +10,8 @@ Route8Gate_ScriptPointers:
 	dw_const Route8GatePlayerMovingScript, SCRIPT_ROUTE8GATE_PLAYER_MOVING
 
 Route8GateMovePlayerRightScript:
-	ld hl, wd730
-	set 7, [hl]
+	ld hl, wScriptEngineFlags3
+	set SCRIPT_SIMULATED_JOYPAD_OR_NPC_SCRIPTED_MOVEMENT_F, [hl]
 	ld a, D_RIGHT
 	ld [wSimulatedJoypadStatesEnd], a
 	ld a, $1

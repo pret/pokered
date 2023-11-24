@@ -9,7 +9,7 @@ RedsHouse1F_TextPointers:
 RedsHouse1FMomText:
 	text_asm
 	ld a, [wScriptEngineFlags2]
-	bit 3, a ; received a Pokémon from Oak?
+	bit SCRIPT_ENGINE2_RECEIVED_POKEMON_FROM_OAK_F, a ; received a Pokémon from Oak?
 	jr nz, .heal
 	ld hl, .WakeUpText
 	call PrintText
