@@ -958,10 +958,6 @@ UNION
 wcd6d:: ds NAME_BUFFER_LENGTH ; buffer for various data
 
 NEXTU
-wEvosMoves:: ds MAX_EVOLUTIONS * EVOLUTION_SIZE + 1
-wEvosMovesEnd::
-
-NEXTU
 	ds 4
 ; temp variable used to print a move's current PP on the status screen
 wStatusScreenCurrentPP:: db
@@ -2012,7 +2008,7 @@ wUnusedD366:: db ; unused save file byte
 
 wCurMapHeader::
 wCurMapTileset:: db
-wCurMapHeight:: db 
+wCurMapHeight:: db
 wCurMapWidth:: db
 wCurMapDataPtr:: dw
 wCurMapTextPtr:: dw
@@ -2145,7 +2141,7 @@ wNumHoFTeams:: db
 
 wUnusedD5A3:: db
 
-wPlayerCoins:: ds 2 ; BCD
+wPlayerCoins:: dw ; BCD
 
 ; bit array of missable objects. set = removed
 wMissableObjectFlags:: flag_array $100

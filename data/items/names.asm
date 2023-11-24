@@ -6,7 +6,7 @@ ItemNames::
 	li "POKé BALL"
 	li "HYPER BALL"
 	li "BICYCLE"
-	li "?????"
+	li "?????" ; SURFBOARD
 	li "SAFARI BALL"
 	li "POKéDEX"
 	li "MOON STONE"
