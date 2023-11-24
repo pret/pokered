@@ -12,7 +12,7 @@ PrepareForSpecialWarp::
 	call nz, PrepareNewGameDebug ; apply to StartNewGameDebug only
 	; This is called by OakSpeech during StartNewGame and
 	; loads the first warp event for the specified map index.
-	ld a, PALLET_TOWN 
+	ld a, PALLET_TOWN
 .next
 	ld b, a
 	ld a, [wd72d]

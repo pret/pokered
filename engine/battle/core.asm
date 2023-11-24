@@ -19,7 +19,7 @@ SlidePlayerAndEnemySilhouettesOnScreen:
 	call LoadFontTilePatterns
 	call LoadHudAndHpBarAndStatusTilePatterns
 	ld hl, vBGMap0
-	ld bc, $400
+	ld bc, BG_MAP_WIDTH * BG_MAP_HEIGHT
 .clearBackgroundLoop
 	ld a, " "
 	ld [hli], a
@@ -30,9 +30,9 @@ SlidePlayerAndEnemySilhouettesOnScreen:
 ; copy the work RAM tile map to VRAM
 	hlcoord 0, 0
 	ld de, vBGMap0
-	ld b, 18 ; number of rows
+	ld b, SCREEN_HEIGHT
 .copyRowLoop
-	ld c, 20 ; number of columns
+	ld c, SCREEN_WIDTH
 .copyColumnLoop
 	ld a, [hli]
 	ld [de], a
@@ -874,7 +874,7 @@ FaintEnemyPokemon:
 ; the enemy mon base stats are added to stat exp, so they are halved
 ; the base exp (which determines normal exp) is also halved
 	;ld hl, wEnemyMonBaseStats
-	;ld b, $7
+	;ld b, NUM_STATS + 2
 ;.halveExpDataLoop
 	;srl [hl]
 	;inc hl
@@ -1378,7 +1378,7 @@ SlideTrainerPicOffScreen:
 	dec c
 	jr nz, .columnLoop
 	pop hl
-	ld de, 20
+	ld de, SCREEN_WIDTH
 	add hl, de
 	dec b
 	jr nz, .rowLoop
@@ -3346,9 +3346,9 @@ handleIfPlayerMoveMissed:
 getPlayerAnimationType:
 	ld a, [wPlayerMoveEffect]
 	and a
-	ld a, 4 ; move has no effect other than dealing damage
+	ld a, ANIMATIONTYPE_BLINK_ENEMY_MON_SPRITE ; move has no effect other than dealing damage
 	jr z, playPlayerMoveAnimation
-	ld a, 5 ; move has effect
+	ld a, ANIMATIONTYPE_SHAKE_SCREEN_HORIZONTALLY_LIGHT ; move has effect
 playPlayerMoveAnimation:
 	push af
 	ld a, [wPlayerBattleStatus2]
@@ -4297,7 +4297,7 @@ GetDamageVarsForPlayerAttack:
 	and a ; check for critical hit
 	jr z, .scaleStats
 ; in the case of a critical hit, reset the player's attack and the enemy's defense to their base values
-	ld c, 3 ; defense stat
+	ld c, STAT_DEFENSE
 	call GetEnemyMonStat
 	ldh a, [hProduct + 2]
 	ld b, a
@@ -4330,7 +4330,7 @@ GetDamageVarsForPlayerAttack:
 	and a ; check for critical hit
 	jr z, .scaleStats
 ; in the case of a critical hit, reset the player's and enemy's specials to their base values
-	ld c, 5 ; special stat
+	ld c, STAT_SPECIAL
 	call GetEnemyMonStat
 	ldh a, [hProduct + 2]
 	ld b, a
@@ -4432,7 +4432,7 @@ GetDamageVarsForEnemyAttack:
 	ld b, a
 	ld c, [hl]
 	push bc
-	ld c, 2 ; attack stat
+	ld c, STAT_ATTACK
 	call GetEnemyMonStat
 	ld hl, hProduct + 2
 	pop bc
@@ -4465,7 +4465,7 @@ GetDamageVarsForEnemyAttack:
 	ld b, a
 	ld c, [hl]
 	push bc
-	ld c, 5 ; special stat
+	ld c, STAT_SPECIAL
 	call GetEnemyMonStat
 	ld hl, hProduct + 2
 	pop bc
@@ -4508,7 +4508,7 @@ GetDamageVarsForEnemyAttack:
 	ret
 
 ; get stat c of enemy mon
-; c: stat to get (HP=1,Attack=2,Defense=3,Speed=4,Special=5)
+; c: stat to get (STAT_* constant)
 GetEnemyMonStat:
 	push de
 	push bc
@@ -5476,7 +5476,7 @@ ApplyDamageMultiplier:
 	call Multiply
 	ld a, 10
 	ldh [hDivisor], a
-	ld b, $04
+	ld b, 4
 	call Divide
 	ldh a, [hQuotient + 2]
 	ld [hli], a
@@ -5989,9 +5989,9 @@ handleIfEnemyMoveMissed:
 GetEnemyAnimationType:
 	ld a, [wEnemyMoveEffect]
 	and a
-	ld a, $1
+	ld a, ANIMATIONTYPE_SHAKE_SCREEN_VERTICALLY
 	jr z, playEnemyMoveAnimation
-	ld a, $2
+	ld a, ANIMATIONTYPE_SHAKE_SCREEN_HORIZONTALLY_HEAVY
 	jr playEnemyMoveAnimation
 handleExplosionMiss:
 	call SwapPlayerAndEnemyLevels
@@ -7256,9 +7256,11 @@ HandleExplodingAnimation:
 	ld a, [wMoveMissed]
 	and a
 	ret nz
-	ld a, 5 ; MEGA_PUNCH constant but also happens to be the move animation type's index in the animation type pointer table
+	ld a, ANIMATIONTYPE_SHAKE_SCREEN_HORIZONTALLY_LIGHT
 	ld [wAnimationType], a
-
+	assert ANIMATIONTYPE_SHAKE_SCREEN_HORIZONTALLY_LIGHT == MEGA_PUNCH
+	; ld a, MEGA_PUNCH
+; fallthrough
 PlayMoveAnimation:
 	ld [wAnimationID], a
 	vc_hook_red Reduce_move_anim_flashing_Confusion
@@ -7449,7 +7451,6 @@ CheckTrainerPicBank:
 ;;;;;;;;;;
 
 _LoadTrainerPic:
-; wd033-wd034 contain pointer to pic
 	ld a, [wTrainerPicPointer]
 	ld e, a
 	ld a, [wTrainerPicPointer + 1]
@@ -7591,7 +7592,7 @@ LoadMonBackPicCommon:
 	call GetBackSpriteTarget
 	ret nz ; don't copy anything to vSprites when we loaded to vFrontPic
 	ld hl, vSprites
-	ld c, (2*SPRITEBUFFERSIZE)/16 ; count of 16-byte chunks to be copied
+	ld c, (2 * SPRITEBUFFERSIZE)/16 ; count of 16-byte chunks to be copied
 	ldh a, [hLoadedROMBank]
 	ld b, a
 	jp CopyVideoData

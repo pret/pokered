@@ -1,15 +1,20 @@
 DEF MAX_LEVEL EQU 100
 
+; maximum moves known per mon
 DEF NUM_MOVES EQU 4
 
+; significant stat values
+DEF BASE_STAT_LEVEL EQU 7
+DEF MAX_STAT_LEVEL EQU 13
+
 ; VitaminStats indexes (see data/battle/stat_names.asm)
-	const_def
+	const_def 1
 	const STAT_HEALTH
 	const STAT_ATTACK
 	const STAT_DEFENSE
 	const STAT_SPEED
 	const STAT_SPECIAL
-DEF NUM_STATS EQU const_value
+DEF NUM_STATS EQU const_value - 1
 
 ; StatModTextStrings indexes (see data/battle/stat_mod_names.asm)
 	const_def
