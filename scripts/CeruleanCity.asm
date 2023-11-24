@@ -175,18 +175,8 @@ CeruleanCityRivalBattleScript:
 
 	; select which team to use during the encounter
 	ld a, [wRivalStarter]
-	cp STARTER2
-	jr nz, .NotSquirtle
-	ld a, $7
-	jr .done
-.NotSquirtle
-	cp STARTER3
-	jr nz, .Charmander
-	ld a, $8
-	jr .done
-.Charmander
-	ld a, $9
-.done
+	call StarterToPartyID
+	add 6 ; third set of parties for RIVAL1
 	ld [wTrainerNo], a
 
 	xor a

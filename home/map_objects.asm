@@ -199,8 +199,10 @@ DecodeRLEList::
 	inc de
 	jr .listLoop
 .endOfList
-	ld a, $ff
-	ld [hl], a                   ; write final $ff
+	; PureRGBnote: OPTIMIZED
+	ld [hl], $ff
+	;ld a, $ff
+	;ld [hl], a                   ; write final $ff
 	ld a, [wRLEByteCount]
 	inc a                        ; include sentinel in counting
 	ret

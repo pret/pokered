@@ -94,9 +94,9 @@ ReplaceVisitors:
 	and a
 	ret z ; set 0 needs no replacing
 	dec a ; set 0 is not included in the list of replacements so set 1 starts at index 0
-	sla a ; multiply by 2
-	sla a ; multiply by 2 again (x4 in total)
-	sla a ; multiply by 2 again (x8 in total)
+	add a ; multiply by 2
+	add a ; multiply by 2 again (x4 in total)
+	add a ; multiply by 2 again (x8 in total)
 	ld e, a
 	ld d, 0
 	ld hl, BillsGarden_NPCSets ; a set of NPC data takes up 8 bytes so we go to 8*setnumber offset in the list

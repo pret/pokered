@@ -63,7 +63,7 @@ GetName::
 	ldh [hSwapTemp + 1], a
 	ld a, [hl]
 	ldh [hSwapTemp], a
-	ldh a, [hSwapTemp]
+	;ldh a, [hSwapTemp] ; PureRGBnote: OPTIMIZED: redundant
 	ld h, a
 	ldh a, [hSwapTemp + 1]
 	ld l, a

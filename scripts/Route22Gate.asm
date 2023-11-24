@@ -16,7 +16,7 @@ Route22Gate_ScriptPointers:
 	def_script_pointers
 	dw_const Route22GateDefaultScript,      SCRIPT_ROUTE22GATE_DEFAULT
 	dw_const Route22GatePlayerMovingScript, SCRIPT_ROUTE22GATE_PLAYER_MOVING
-	dw_const Route22GateNoopScript,         SCRIPT_ROUTE22GATE_NOOP
+	dw_const DoRet,                         SCRIPT_ROUTE22GATE_NOOP
 
 Route22GateDefaultScript:
 	ld hl, Route22GateScriptCoords
@@ -51,7 +51,6 @@ Route22GatePlayerMovingScript:
 	call Delay3
 	ld a, SCRIPT_ROUTE22GATE_DEFAULT
 	ld [wRoute22GateCurScript], a
-Route22GateNoopScript:
 	ret
 
 Route22Gate_TextPointers:

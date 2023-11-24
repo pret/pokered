@@ -81,8 +81,7 @@ MainSlotMachineLoop:
 	ld [wLastMenuItem], a
 	ld [wMenuWatchMovingOutOfBounds], a
 	hlcoord 14, 11
-	ld b, 5
-	ld c, 4
+	lb bc, 5, 4
 	call TextBoxBorder
 	hlcoord 16, 12
 	ld de, CoinMultiplierSlotMachineText
@@ -91,9 +90,7 @@ MainSlotMachineLoop:
 	and B_BUTTON
 	jp nz, LoadScreenTilesFromBuffer1
 	ld a, [wCurrentMenuItem]
-	ld b, a
-	ld a, 3
-	sub b
+	n_sub_a 3
 	ld [wSlotMachineBet], a
 	ld hl, wPlayerCoins
 	ld c, a
@@ -450,10 +447,7 @@ SlotMachine_CheckForMatches:
 	ld bc, 4
 	rst _CopyData
 	pop hl
-	ld de, .flashScreenLoop
-	push de
-	jp hl
-
+	call hl_caller
 .flashScreenLoop
 	ldh a, [rBGP]
 	xor $40
@@ -464,8 +458,8 @@ SlotMachine_CheckForMatches:
 	dec b
 	jr nz, .flashScreenLoop
 	ld hl, wPayoutCoins
-	ld [hl], d
-	inc hl
+	ld a, d
+	ld [hli], a
 	ld [hl], e
 	call SlotMachine_PrintPayoutCoins
 	ld hl, SymbolLinedUpSlotMachineText
@@ -608,7 +602,7 @@ SlotReward300Func:
 	rst _PlaySound
 	call Random
 	cp $80
-	ld a, $0
+	ld a, 0
 	jr c, .skip
 	ld [wSlotMachineFlags], a
 .skip
@@ -677,11 +671,9 @@ SlotMachine_PayCoinsToPlayer:
 ;;;;;;;;;; PureRGBnote: CHANGED: payout speed when winning at the slots was increased
 	ld a, [wSlotMachineWinningSymbol]
 	cp HIGH(SLOTSBAR) + 1
-	jr c, .tenAtATime
-	ld a, 1
-	jr .loadTemp
-.tenAtATime
 	ld a, 10
+	jr c, .loadTemp
+	sub 9 ; a = 1
 .loadTemp
 ;;;;;;;;;;
 	ld [hl], a
@@ -692,10 +684,7 @@ SlotMachine_PayCoinsToPlayer:
 ; Subtract 1 from the payout amount and add 1 to the player's coins each
 ; iteration until the payout amount reaches 0.
 .loop
-	ld a, [wPayoutCoins + 1]
-	ld l, a
-	ld a, [wPayoutCoins]
-	ld h, a
+	hl_deref_reverse wPayoutCoins
 	or l
 	ret z
 

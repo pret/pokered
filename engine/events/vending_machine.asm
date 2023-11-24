@@ -22,8 +22,7 @@ VendingMachineMenu::
 	ld hl, wd730
 	set 6, [hl]
 	hlcoord 0, 3
-	ld b, 8
-	ld c, 12
+	lb bc, 8, 12
 	call TextBoxBorder
 	call UpdateSprites
 	hlcoord 2, 5	
@@ -69,37 +68,36 @@ VendingMachineMenu::
 	cp 2 ; chose rare candy?
 	jr z, .pickrarecandy
 	cp 1 ; chose lemonade?
-	jr z, .picklemonade
+	jr nz, .picksoda
 ;else soda is being picked
-	jr .picksoda
 .picklemonade
 	xor a
-	ld [hMoney], a
+	ldh [hMoney], a
 	ld a, $5
-	ld [hMoney + 2], a
+	ldh [hMoney + 2], a
 	ld a, $3
-	ld [hMoney + 1], a
+	ldh [hMoney + 1], a
 	jr .checkMoney
 .picksoda
 	xor a
-	ld [hMoney], a
-	ld [hMoney + 2], a
+	ldh [hMoney], a
+	ldh [hMoney + 2], a
 	ld a, $3
-	ld [hMoney + 1], a
+	ldh [hMoney + 1], a
 	jr .checkMoney
 .pickwater
 	xor a
-	ld [hMoney], a
-	ld [hMoney + 2], a
+	ldh [hMoney], a
+	ldh [hMoney + 2], a
 	ld a, $2
-	ld [hMoney + 1], a
+	ldh [hMoney + 1], a
 	jr .checkMoney
 .pickrarecandy
 	xor a
-	ld [hMoney], a
-	ld [hMoney + 2], a
+	ldh [hMoney], a
+	ldh [hMoney + 2], a
 	ld a, $20
-	ld [hMoney + 1], a
+	ldh [hMoney + 1], a
 .checkMoney
 	call HasEnoughMoney
 	jr nc, .enoughMoney
@@ -204,7 +202,6 @@ VendingMachineText8:
 LoadVendingMachineItem:
 	ld hl, VendingPrices
 	ld a, [wCurMap]
-	and a
 	cp CERULEAN_ROCKET_HOUSE_B1F
 	jr nz, .noInc
 	ld a, [wCurrentMenuItem]

@@ -20,15 +20,13 @@ TitleScroll:
 	ld a, d
 
 	ld bc, TitleScroll_In
-	ld d, $88
-	ld e, 0 ; don't animate titleball
+	lb de, $88, 0 ; e = 0 - don't animate titleball
 
 	and a
 	jr nz, .ok
 
 	ld bc, TitleScroll_Out
-	ld d, $00
-	ld e, 0 ; don't animate titleball
+	lb de, 0, 0 ; e = 0 - don't animate titleball
 .ok
 
 _TitleScroll:
@@ -52,8 +50,7 @@ _TitleScroll:
 	ld l, $48
 	call .ScrollBetween
 
-	ld h, $00
-	ld l, $88
+	lb hl, 0, $88
 	call .ScrollBetween
 
 	ld a, d

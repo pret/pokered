@@ -46,10 +46,7 @@ PlaySfx:
 	add c
 	ld c, a
 	ld b, $0
-	ld a, [wSfxHeaderPointer]
-	ld h, a
-	ld a, [wSfxHeaderPointer + 1]
-	ld l, a
+	hl_deref_reverse wSfxHeaderPointer
 	add hl, bc
 	ld c, d
 	ld a, [hl]
@@ -66,9 +63,7 @@ PlaySfx:
 	jr nz, .notNoiseChannel
 	ld a, [wSoundID]
 	cp NOISE_INSTRUMENTS_END
-	jr nc, .notNoiseInstrument
-	ret
-.notNoiseInstrument
+	ret c
 	ld a, [hl]
 	cp NOISE_INSTRUMENTS_END
 	jr z, .playChannel
@@ -77,8 +72,7 @@ PlaySfx:
 	ld a, [wSoundID]
 	cp [hl]
 	jr z, .playChannel
-	jr c, .playChannel
-	ret
+	ret nc
 .playChannel
 	call InitSFXVariables
 .skipSweepDisable
@@ -163,15 +157,11 @@ PlaySoundCommon_2:
 	jr nz, .commandPointerLoop
 	ld a, [wSoundID]
 	cp CRY_SFX_START
-	jr nc, .maybeCry
-	jr .done
-.maybeCry
+	ret c
 	ld a, [wSoundID]
 	cp CRY_SFX_END
-	jr z, .done
-	jr c, .cry
-	jr .done
-.cry
+	ret z
+	ret nc
 	ld hl, wChannelSoundIDs + CHAN5
 	ld [hli], a
 	ld [hli], a
@@ -179,17 +169,16 @@ PlaySoundCommon_2:
 	ld [hl], a
 	ld hl, wChannelCommandPointers + CHAN7 * 2 ; sfx noise channel pointer
 	ld de, Noise2_endchannel
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d ; overwrite pointer to point to endchannel
 	ld a, [wSavedVolume]
 	and a
-	jr nz, .done
+	ret nz
 	ldh a, [rNR50]
 	ld [wSavedVolume], a
 	ld a, $77
 	ldh [rNR50], a
-.done
 	ret
 
 Noise2_endchannel:
@@ -266,9 +255,8 @@ Audio2_InitMusicVariables::
 	ldh [rNR50], a
 	ld a, $8
 	ldh [rNR10], a
-	ld a, $0
-	ldh [rNR51], a
 	xor a
+	ldh [rNR51], a
 	ldh [rNR30], a
 	ld a, $80
 	ldh [rNR30], a

@@ -153,18 +153,8 @@ PokemonTower2FRivalText:
 
 	; select which team to use during the encounter
 	ld a, [wRivalStarter]
-	cp STARTER2
-	jr nz, .NotSquirtle
-	ld a, $4
-	jr .done
-.NotSquirtle
-	cp STARTER3
-	jr nz, .Charmander
-	ld a, $5
-	jr .done
-.Charmander
-	ld a, $6
-.done
+	call StarterToPartyID
+	add 3 ; second set of rival parties
 	ld [wTrainerNo], a
 
 	ld a, SCRIPT_POKEMONTOWER2F_DEFEATED_RIVAL

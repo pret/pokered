@@ -41,27 +41,23 @@ FindPathToPlayer:
 ; x distance is greater
 	ldh a, [hNPCPlayerRelativePosFlags]
 	bit 1, a
-	jr nz, .playerIsLeftOfNPC
-	ld d, NPC_MOVEMENT_RIGHT
-	jr .next1
-.playerIsLeftOfNPC
 	ld d, NPC_MOVEMENT_LEFT
+	jr nz, .next1
+	ld d, NPC_MOVEMENT_RIGHT
 .next1
 	ldh a, [hFindPathXProgress]
-	add 1
+	inc a
 	ldh [hFindPathXProgress], a
 	jr .storeDirection
 .yDistanceGreater
 	ldh a, [hNPCPlayerRelativePosFlags]
 	bit 0, a
-	jr nz, .playerIsAboveNPC
-	ld d, NPC_MOVEMENT_DOWN
-	jr .next2
-.playerIsAboveNPC
 	ld d, NPC_MOVEMENT_UP
+	jr nz, .next2
+	ld d, NPC_MOVEMENT_DOWN
 .next2
 	ldh a, [hFindPathYProgress]
-	add 1
+	inc a
 	ldh [hFindPathYProgress], a
 .storeDirection
 	ld a, d

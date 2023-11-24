@@ -235,8 +235,7 @@ Trade_ShowPlayerMon:
 	xor a
 	ldh [hAutoBGTransferEnabled], a
 	hlcoord 4, 0
-	ld b, 6
-	ld c, 10
+	lb bc, 6, 10
 	call TextBoxBorder
 	call Trade_PrintPlayerMonInfoText
 	ld b, HIGH(vBGMap0)
@@ -357,8 +356,7 @@ Trade_ShowEnemyMon:
 	call Trade_ShowAnimation
 	call Trade_ShowClearedWindow
 	hlcoord 4, 10
-	ld b, 6
-	ld c, 10
+	lb bc, 6, 10
 	call TextBoxBorder
 	call Trade_PrintEnemyMonInfoText
 	call Trade_CopyTileMapToVRAM
@@ -488,8 +486,7 @@ Trade_DrawLeftGameboy:
 
 ; draw text box with player name below gameboy pic
 	hlcoord 4, 12
-	ld b, 2
-	ld c, 7
+	lb bc, 2, 7
 	call TextBoxBorder
 	hlcoord 5, 14
 	ld de, wPlayerName
@@ -510,8 +507,7 @@ Trade_DrawRightGameboy:
 	jr nz, .loop
 
 ; draw vertical segment of link cable
-	ld a, $5f
-	ld [hl], a
+	ld [hl], $5f
 	ld de, SCREEN_WIDTH
 	add hl, de
 	ld a, $61
@@ -523,10 +519,9 @@ Trade_DrawRightGameboy:
 	add hl, de
 	ld [hl], a
 	add hl, de
-	ld a, $60
+	dec a ; a = $60
 	ld [hld], a
-	ld a, $5d
-	ld [hl], a
+	ld [hl], $5d
 
 ; draw gameboy pic
 	hlcoord 7, 8
@@ -535,8 +530,7 @@ Trade_DrawRightGameboy:
 
 ; draw text box with enemy name above link cable
 	hlcoord 6, 0
-	ld b, 2
-	ld c, 7
+	lb bc, 2, 7
 	call TextBoxBorder
 	hlcoord 7, 2
 	ld de, wLinkEnemyTrainerName
@@ -617,8 +611,7 @@ Trade_AnimCircledMon:
 	bit 0, a
 	ld hl, wShadowOAMSprite00TileID ; OAM tile id
 	ld de, $4
-	ld c, $4
-	ld b, 2 ; amount to increase the tile id by
+	lb bc, 2, 4 ; b = amount to increase the tile id by
 	jr nz, .loopMon
 	ld b, -2 ; amount to increase the tile id by
 .loopMon
@@ -713,20 +706,22 @@ Trade_WriteCircleOAM:
 	xor a
 .loop
 	push bc
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-	inc hl
-	ld c, [hl]
-	inc hl
-	ld b, [hl]
-	inc hl
-	push hl
+	push af
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	ld b, a
+	pop af
 	inc a
 	push af
+	push hl
 	call WriteOAMBlock
-	pop af
 	pop hl
+	pop af
 	pop bc
 	dec c
 	jr nz, .loop
@@ -765,8 +760,7 @@ Trade_LoadMonSprite:
 	ld [wcf91], a
 	ld [wd0b5], a
 	ld [wWholeScreenPaletteMonSpecies], a
-	ld b, SET_PAL_POKEMON_WHOLE_SCREEN_TRADE
-	ld c, 0
+	lb bc, SET_PAL_POKEMON_WHOLE_SCREEN_TRADE, 0
 	call RunPaletteCommand
 	ldh a, [hAutoBGTransferEnabled]
 	xor $1

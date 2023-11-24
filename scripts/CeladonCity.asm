@@ -1,7 +1,7 @@
 CeladonCity_Script:
 	call EnableAutoTextBoxDrawing
-	jp CeladonCityCheckHideCutTree
-
+	; fall through
+	
 ; PureRGBnote: ADDED: code that keeps the cut tree cut down if we're in its alcove. Prevents getting softlocked if you delete cut.
 CeladonCityCheckHideCutTree:
 	ld hl, wCurrentMapScriptFlags

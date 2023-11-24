@@ -172,9 +172,7 @@ TrainerEngage:
 	add hl, de
 	ld a, [hl]             ; x#SPRITESTATEDATA1_IMAGEINDEX
 	sub $ff
-	jr nz, .spriteOnScreen ; test if sprite is on screen
-	jp .noEngage
-.spriteOnScreen
+	jp z, .noEngage ; test if sprite is on screen
 	ld a, [wTrainerSpriteOffset]
 	add SPRITESTATEDATA1_FACINGDIRECTION
 	ld d, $0
@@ -258,8 +256,7 @@ CheckSpriteCanSeePlayer:
 	ld b, a
 	ld a, [wTrainerEngageDistance] ; how far the trainer can see
 	cp b
-	jr nc, .checkIfLinedUp
-	jr .notInLine         ; player too far away
+	jr c, .notInLine ; test if player too far away
 .checkIfLinedUp
 	ld a, [wTrainerFacingDirection]         ; sprite facing direction
 	cp SPRITE_FACING_DOWN

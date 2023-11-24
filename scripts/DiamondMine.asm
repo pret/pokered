@@ -243,8 +243,8 @@ DiamondMineCheckDigAnimation:
 	rst _PlaySound
 	ld hl, wChannelCommandPointers + CHAN5 * 2
 	ld de, SFX_Pickaxe_Tink
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	ld b, 4
 .runForwardLoop
@@ -276,8 +276,8 @@ DiamondMineCheckDigAnimation:
 	rst _PlaySound
 	ld hl, wChannelCommandPointers + CHAN8 * 2
 	ld de, SFX_Break_Stone
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	call DiamondMineShakeScreen
 	ResetEvent EVENT_DIAMOND_MINE_DIG_ANIMATION
@@ -303,13 +303,7 @@ DiamondMineCheckFinalStep:
 
 	ld a, TEXT_DIAMOND_MINE_COMPLETED
 	ldh [hSpriteIndexOrTextID], a
-	call DisplayTextID
-	ret
-
-
-
-
-
+	jp DisplayTextID
 
 DiamondMine_TextPointers:
 	def_text_pointers
@@ -366,8 +360,8 @@ DiamondMineProspectorText:
 	rst _PlaySound
 	ld hl, wChannelCommandPointers + CHAN8 * 2
 	ld de, SFX_Spray_Repel
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	ld c, 100
 	rst _DelayFrames

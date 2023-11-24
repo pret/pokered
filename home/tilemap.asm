@@ -14,7 +14,7 @@ TileLineLoop:
 .loop
 	ld [hl], a
 	add hl, de
-	add a, b
+	add b
 	dec c
 	jr nz, .loop
 	pop de

@@ -25,8 +25,8 @@ MarowakAnim:
 	ld c, 10
 	rst _DelayFrames
 	ldh a, [rOBP1]
-	sla a
-	sla a
+	add a
+	add a
 	ldh [rOBP1], a
 	call UpdateGBCPal_OBP1 ; shinpokerednote: gbcnote: color code from pokemon yellow
 	jr nz, .fadeOutGhostLoop

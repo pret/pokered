@@ -13,18 +13,15 @@ DisplayPCMainMenu::
 	and a
 	jr nz, .leaguePCAvailable
 	hlcoord 0, 0
-	ld b, 8
-	ld c, 14
+	lb bc, 8, 14
 	jr .next
 .noOaksPC
 	hlcoord 0, 0
-	ld b, 6
-	ld c, 14
+	lb bc, 6, 14
 	jr .next
 .leaguePCAvailable
 	hlcoord 0, 0
-	ld b, 10
-	ld c, 14
+	lb bc, 10, 14
 .next
 	call TextBoxBorder
 	call UpdateSprites
@@ -119,8 +116,7 @@ BillsPCMenu:
 	callfar LoadBillsPCExtraTiles
 	call LoadScreenTilesFromBuffer2DisableBGTransfer
 	hlcoord 0, 0
-	ld b, 10
-	ld c, 12
+	lb bc, 10, 12
 	call TextBoxBorder
 	hlcoord 2, 2
 	ld de, BillsPCMenuText
@@ -138,7 +134,7 @@ BillsPCMenu:
 	ld [hli], a ; wMenuWatchedKeys
 	xor a
 	ld [hli], a ; wLastMenuItem
-	ld [hli], a ; wPartyAndBillsPCSavedMenuItem
+	ld [hl], a ; wPartyAndBillsPCSavedMenuItem
 	ld hl, wListScrollOffset
 	ld [hli], a ; wListScrollOffset
 	ld [hl], a ; wMenuWatchMovingOutOfBounds
@@ -439,8 +435,7 @@ BillsPCMenuText:
 
 DisplayDepositWithdrawMenu:
 	hlcoord 9, 10
-	ld b, 6
-	ld c, 9
+	lb bc, 6, 9
 	call TextBoxBorder
 	ld a, [wParentMenuItem]
 	and a ; was the Deposit or Withdraw item selected in the parent menu?

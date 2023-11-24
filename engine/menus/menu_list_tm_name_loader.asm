@@ -5,8 +5,7 @@ CheckLoadTmName:: ; loads a TM name when the cursor is on TMs
 	cp ITEMLISTMENU
 	jr z, .getItem ; if it's an item menu, proceed
 	cp PRICEDITEMLISTMENU
-	jr z, .getItem ; if it's a shop menu, proceed
-	jp .notTMHM ; other menus cant contain TMs, so no need to check anything
+	jr nz, .notTMHM ; other menus cant contain TMs, so no need to check anything
 .getItem
 	call GetListEntryID
 	jr c, .notTMHM
@@ -23,8 +22,7 @@ CheckLoadTmName:: ; loads a TM name when the cursor is on TMs
 	predef TMToMove ; get move ID from TM/HM ID
 
 	hlcoord 4, 13
-	ld b, 1  ; height
-	ld c, 14 ; width
+	lb bc, 1, 14  ; height, width
 	call TextBoxBorder
 	call UpdateSprites
 	ld a, [wNameListType] ; GetMoveName changes this value so we need to back it up

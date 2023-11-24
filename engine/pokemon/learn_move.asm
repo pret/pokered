@@ -151,8 +151,7 @@ TryingToLearn:
 	ld hl, WhichMoveToForgetText
 	rst _PrintText
 	hlcoord 4, 7
-	ld b, 4
-	ld c, 14
+	lb bc, 4, 14
 	call TextBoxBorder
 	hlcoord 6, 8
 	ld de, wMovesString

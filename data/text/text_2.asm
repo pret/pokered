@@ -99,7 +99,7 @@ _NotEnoughCoinsSlotMachineText::
 	prompt
 
 _OneMoreGoSlotMachineText::
-	text "One more "
+	text "One more"
 	line "go?"
 	done
 
@@ -241,7 +241,7 @@ _CeladonCityPokecenterGuyText::
 	done
 
 _FuchsiaCityPokecenterGuyText::
-	text "If you're studying "
+	text "If you're studying"
 	line "#MON, visit"
 	cont "the SAFARI ZONE."
 
@@ -556,7 +556,7 @@ _ViridianSchoolNotebookText4::
 
 	para "The goal for"
 	line "#MON trainers"
-	cont "is to beat the "
+	cont "is to beat the"
 	cont "top 8 #MON"
 	cont "GYM LEADERs."
 
@@ -1361,7 +1361,7 @@ _ClearSaveDataText::
 
 _WhichFloorText::
 	text "Which floor do"
-	line "you want? "
+	line "you want?"
 	done
 
 _AlreadyOnThatFloor::

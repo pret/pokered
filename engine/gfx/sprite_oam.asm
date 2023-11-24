@@ -112,10 +112,14 @@ PrepareOAMData::
 
 .notFourTileSprite
 	; a *= 12
-	sla a
-	sla a
+; PureRGBnote: OPTIMIZED
+	add a
+	add a
+	;sla a
+	;sla a
 	ld c, a
-	sla a
+	add a
+	;sla a
 	add c
 
 .next2

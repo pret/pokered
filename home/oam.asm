@@ -23,10 +23,15 @@ WriteOAMBlock::
 	ld c, a
 	                      ; lower right
 .writeOneEntry
-	ld [hl], b ; Y coordinate
-	inc hl
-	ld [hl], c ; X coordinate
-	inc hl
+; PureRGBnote: OPTIMIZED
+	ld a, b
+	ld [hli], a ; Y coordinate
+	ld a, c
+	ld [hli], a ; X coordinate
+	;ld [hl], b ; Y coordinate
+	;inc hl
+	;ld [hl], c ; X coordinate
+	;inc hl
 	ld a, [de] ; tile number
 	inc de
 	ld [hli], a

@@ -2,8 +2,7 @@ Route6Gate_Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, Route6Gate_ScriptPointers
 	ld a, [wRoute6GateCurScript]
-	call CallFunctionInTable
-	ret
+	jp CallFunctionInTable
 
 Route6Gate_ScriptPointers:
 	def_script_pointers

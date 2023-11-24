@@ -55,9 +55,7 @@ AnimateShootingStar:
 	ret c
 	ld a, [hl]
 	cp 80
-	jr nz, .next
-	jr .bigStarLoop
-.next
+	jr z, .bigStarLoop
 	cp b
 	jr nz, .bigStarLoop
 

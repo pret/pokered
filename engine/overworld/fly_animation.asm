@@ -32,9 +32,8 @@ DoFlyAnimation::
 	ld a, 2
 .dontResetFlapCounter
 	push af ; store flap counter
-	ld a, [wFlyAnimCounter]
-	dec a
-	ld [wFlyAnimCounter], a
+	ld hl, wFlyAnimCounter
+	dec [hl]
 	jr nz, .loop
 	pop af ; clear saved flap counter before exiting subroutine
 	ret

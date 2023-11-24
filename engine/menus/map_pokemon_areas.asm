@@ -24,8 +24,7 @@ ZeroOutDuplicatesInList:
 	jr z, .loop
 	cp c
 	jr nz, .skipZeroing
-	ld a, $fe 
-	ld [hl], a
+	ld [hl], $fe
 .skipZeroing
 	inc hl
 	jr .zeroDuplicatesLoop
@@ -115,14 +114,12 @@ DrawMonAreaButtonPrompt:
 .drawArrows ; assumes hl will be pointing to the location the left arrow should be at (if there needs to be one)
 	call FindPrevMonAreaState
 	jr z, .nextArrow
-	ld a, $D0
-	ld [hl], a
+	ld [hl], $D0
 .nextArrow
 	call FindNextMonAreaState
 	ret z
 	hlcoord 19, 17
-	ld a, $D1
-	ld [hl], a ; right prompt
+	ld [hl], $D1 ; right prompt
 	ret
 
 ; draw prompt of tile length b starting at tile a at coord hl 
@@ -212,11 +209,9 @@ DisplayWildLocations:
 	and a ; were any OAM entries written?
 	jr nz, .drawPlayerSprite
 ; if no OAM entries were written, print area unknown text
-	jr .unknown
 .unknown
 	hlcoord 1, 7
-	ld b, 2
-	ld c, 15
+	lb bc, 2, 15
 	call TextBoxBorder
 	hlcoord 2, 9
 	ld de, AreaUnknownText
@@ -234,7 +229,7 @@ DisplayWildLocations:
 	call GetMonAreaInputButtons
 	push af
 	call WaitForTextScrollSpecificButtonsPress
-	ld a, 0
+	xor a
 	ld hl, wShadowOAM
 	ld bc, $a0
 	call FillMemory
@@ -259,7 +254,6 @@ DisplayWildLocations:
 .getNextState
 	; guaranteed to have one, but this function will get it into register b
 	call FindNextMonAreaState
-	jr .loadState
 .loadState
 	ld a, b
 	ld [wTownMapAreaState], a
@@ -340,7 +334,6 @@ HasAreaState:
 .goodRodState
 	ld a, [wTownMapAreaTypeFlags]
 	and %110
-	and a
 	ret
 .superRodState
 	ld a, [wTownMapAreaTypeFlags]
@@ -352,35 +345,30 @@ DisplayWaterLocations:
 	ld [wTownMapSpriteBlinkingEnabled], a
 	farcall FindWaterLocations
 	ld a, 6 ; water icon
-	call LoadMapIcons
-	ret	
+	jp LoadMapIcons	
 
 DisplayGrassCaveLocations:
 	ld a, 1
 	ld [wTownMapSpriteBlinkingEnabled], a
 	farcall FindGrassCaveLocations
 	ld a, 4 ; nest icon
-	call LoadMapIcons
-	ret
+	jp LoadMapIcons
 
 DisplayOldRodLocation:
 	xor a
 	ld [wTownMapSpriteBlinkingEnabled], a
 	hlcoord 1, 7
-	ld b, 3
-	ld c, 16
+	lb bc, 3, 16
 	call TextBoxBorder
 	hlcoord 2, 9
 	ld de, AnyWaterText
-	call PlaceString
-	ret
+	jp PlaceString
 
 DisplayGoodRodLocation:
 	xor a
 	ld [wTownMapSpriteBlinkingEnabled], a
 	hlcoord 1, 7
-	ld b, 3
-	ld c, 16
+	lb bc, 3, 16
 	call TextBoxBorder
 	ld a, [wTownMapAreaTypeFlags]
 	and %110
@@ -393,26 +381,22 @@ DisplayGoodRodLocation:
 .anyWater
 	hlcoord 2, 9
 	ld de, AnyWaterText
-	call PlaceString
-	ret
+	jp PlaceString
 .freshWater
 	hlcoord 2, 9
 	ld de, FreshWaterText
-	call PlaceString
-	ret
+	jp PlaceString
 .saltWater
 	hlcoord 2, 9
 	ld de, SaltWaterText
-	call PlaceString
-	ret
+	jp PlaceString
 
 DisplaySuperRodLocations:
 	ld a, 1
 	ld [wTownMapSpriteBlinkingEnabled], a
 	farcall FindSuperRodLocations
 	ld a, $5 ; fishing hook icon tile no.
-	call LoadMapIcons
-	ret
+	; fall through
 
 LoadMapIcons:
 	push af

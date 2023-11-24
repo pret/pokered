@@ -95,8 +95,8 @@ ENDM
 AfterDisplayingTextID::
 	ld a, [wEnteringCableClub]
 	and a
-	jr nz, HoldTextDisplayOpen
-	call WaitForTextScrollButtonPress ; wait for a button press after displaying all the text
+	call z, WaitForTextScrollButtonPress ; wait for a button press after displaying all the text
+	; fall through
 
 ; loop to hold the dialogue box open as long as the player keeps holding down the A button
 HoldTextDisplayOpen::

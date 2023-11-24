@@ -15,10 +15,7 @@ HallOfFame_ScriptPointers:
 	dw_const HallOfFameDefaultScript,            SCRIPT_HALLOFFAME_DEFAULT
 	dw_const HallOfFameOakCongratulationsScript, SCRIPT_HALLOFFAME_OAK_CONGRATULATIONS
 	dw_const HallOfFameResetEventsAndSaveScript, SCRIPT_HALLOFFAME_RESET_EVENTS_AND_SAVE
-	dw_const HallOfFameNoopScript,               SCRIPT_HALLOFFAME_NOOP
-
-HallOfFameNoopScript:
-	ret
+	dw_const DoRet,                              SCRIPT_HALLOFFAME_NOOP
 
 HallOfFameResetEventsAndSaveScript:
 	callfar GBCSetCPU1xSpeed ; shinpokerednote: ADDED: turn off 2x cpu speed to make sure the hall of fame animation is working correctly.

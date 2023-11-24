@@ -33,5 +33,4 @@ ToggleCPUSpeed:
 	stop
 	pop af
 	ldh [rIE], a
-	ei
-	ret
+	reti

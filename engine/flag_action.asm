@@ -21,9 +21,7 @@ FlagAction:
 
 	; byte
 	ld a, d
-	srl a
-	srl a
-	srl a
+	srl_a_3x
 	add l
 	ld l, a
 	jr nc, .ok
@@ -56,7 +54,7 @@ FlagAction:
 .reset
 	ld b, [hl]
 	ld a, d
-	xor $ff
+	cpl
 	and b
 	ld [hl], a
 	jr .done

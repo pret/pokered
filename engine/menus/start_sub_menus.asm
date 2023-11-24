@@ -390,8 +390,7 @@ StartMenu_Item::
 	call HandleMenuInput
 	call PlaceUnfilledArrowMenuCursor
 	bit BIT_B_BUTTON, a
-	jr z, .useOrTossItem
-	jp ItemMenuLoop
+	jp nz, ItemMenuLoop
 .useOrTossItem ; if the player made the choice to use or toss the item
 	ld a, [wcf91]
 	ld [wd11e], a
@@ -402,9 +401,7 @@ StartMenu_Item::
 ;;;;;;;;;; PureRGBnote: ADDED: pocket abra closes the item menu after usage.
 	jr z, .yesBicycle
 	cp POCKET_ABRA
-	jr z, .pocketAbra
-	jr .notBicycle2
-.pocketAbra
+	jr nz, .notBicycle2
 	jr .useItem_closeMenu
 .yesBicycle
 ;;;;;;;;;;
@@ -482,8 +479,7 @@ StartMenu_Item::
 UseItemWithIndexBackup:
 	call ItemMenuBackupItemIndex
 	call UseItem
-	call ItemMenuRestoreItemIndex
-	ret
+	jp ItemMenuRestoreItemIndex
 
 ItemMenuBackupItemIndex:
 	pop hl
@@ -623,8 +619,8 @@ DrawTrainerInfo:
 	ld de, wPlayTimeHours ; hours
 	lb bc, LEFT_ALIGN | 1, 3
 	call PrintNumber
-	ld [hl], $d6 ; colon tile ID
-	inc hl
+	ld a, $d6 ; colon tile ID
+	ld [hli], a 
 	ld de, wPlayTimeMinutes ; minutes
 	lb bc, LEADING_ZEROES | 1, 2
 	jp PrintNumber

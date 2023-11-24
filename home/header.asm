@@ -71,6 +71,7 @@ TextScriptEnd::
 	pop hl ; turn the rst call into a jp by popping off the return address
 TextScriptEndNoPop::
 	ld hl, TextScriptEndingText
+DoRet::
 	ret
 
 ; PureRGBnote: MOVED: 3 extra bytes of space left here, may as well move something here that puts the space to some use

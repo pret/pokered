@@ -53,8 +53,7 @@ DisplayMonFrontSpriteInBox:
 	cp FOSSIL_KABUTOPS
 	jr z, .skipCry
 	cp FOSSIL_AERODACTYL
-	jr z, .skipCry
-	call PlayCry
+	call nz, PlayCry
 .skipCry
 	call WaitForTextScrollButtonPress
 	ld a, MON_SPRITE_POPUP

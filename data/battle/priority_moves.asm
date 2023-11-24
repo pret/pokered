@@ -18,12 +18,12 @@ CheckPriority:
 	ld hl, PriorityMoves         ; table of high priority moves
 .priorityLoop
 	ld a, [hli]                  ; read move from move table
-	cp -1
-	jr z, .noPriority
+	cp -1                        ; did we reach the end of the list
+	jr z, .noPriority            ; if so, not a priority move
 	cp c                         ; does it match the move about to be used?
-	jr z, .foundPriority         ; if so, the move about to be used is a priority move
-	jr .priorityLoop               ; continue as a normal move
-.foundPriority
+	jr nz, .priorityLoop         ; continue as a normal move if not
+	; if so, the move about to be used is a priority move
+.foundPriority 
 	scf
 .noPriority
 	pop hl

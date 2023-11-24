@@ -16,14 +16,11 @@ DisplayTextBoxID_::
 	ld de, 9
 	call SearchTextBoxTable
 	jr c, .textAndCoordTableMatch
-.done
 	ret
 .functionTableMatch
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a ; hl = address of function
-	ld de, .done
-	push de
 	jp hl ; jump to the function
 .coordTableMatch
 	call GetTextBoxIDCoords
@@ -53,14 +50,13 @@ SearchTextBoxTable:
 .loop
 	ld a, [hli]
 	cp $ff
-	jr z, .notFound
+	ret z
 	cp c
 	jr z, .found
 	add hl, de
 	jr .loop
 .found
 	scf
-.notFound
 	ret
 
 ; function to load coordinates from the TextBoxCoordTable or the TextBoxTextAndCoordTable
@@ -132,8 +128,7 @@ DisplayMoneyBox:
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	hlcoord 13, 1
-	ld b, 1
-	ld c, 6
+	lb bc, 1, 6
 	call ClearScreenArea
 	hlcoord 12, 1
 	ld de, wPlayerMoney
@@ -154,8 +149,7 @@ DisplayAmountLeftBox:
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	hlcoord 13, 1
-	ld b, 1
-	ld c, 6
+	lb bc, 1, 6
 	call ClearScreenArea
 	hlcoord 10, 1
 	ld de, wUnusedC000
@@ -212,8 +206,7 @@ DoBuySellQuitMenu:
 	ld b, a
 	ld a, [wMaxMenuItem]
 	cp b
-	jr z, .quit
-	ret
+	ret nz
 .quit
 	ld a, CANCELLED_MENU
 	ld [wMenuExitMethod], a
@@ -295,7 +288,7 @@ DisplayTwoOptionMenu:
 .noBlankLine
 	ld a, [hli]
 	ld e, a
-	ld a, [hli]
+	ld a, [hl]
 	ld d, a
 	pop hl
 	add hl, bc
@@ -397,8 +390,7 @@ TwoOptionMenu_RestoreScreenTiles:
 	ld c, 6
 	dec b
 	jr nz, .loop
-	call UpdateSprites
-	ret
+	jp UpdateSprites
 
 INCLUDE "data/yes_no_menu_strings.asm"
 
@@ -418,8 +410,7 @@ DisplayFieldMoveMonMenu:
 
 ; no field moves
 	hlcoord 11, 11
-	ld b, 5
-	ld c, 7
+	lb bc, 5, 7
 	call TextBoxBorder
 	call UpdateSprites
 	ld a, 12

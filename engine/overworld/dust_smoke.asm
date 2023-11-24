@@ -108,7 +108,7 @@ BoulderHoleDropEffect:: ; d = 1 prior to calling will cause a "splash" sound ins
 	call WaitForSoundToFinish
 	ld a, 251
 	ld [wFrequencyModifier], a
-	ld a, 0
+	xor a
 	ld [wTempoModifier], a
 	ld a, SFX_CRY_16 ; sound of rock landing on a lower level
 	rst _PlaySound
@@ -120,18 +120,18 @@ BoulderHoleDropEffect:: ; d = 1 prior to calling will cause a "splash" sound ins
 	rst _DelayFrames
 	ld hl, wChannelCommandPointers + CHAN5 * 2
 	ld de, EndSound ; end the SFX_CRY_16 of rock crashing
-	ld [hl], e
+	ld a, e
+	ld [hli], a
+	ld a, d
+	ld [hli], a
+	ld a, e
+	ld [hli], a
+	ld a, d
+	ld [hli], a
 	inc hl
-	ld [hl], d
 	inc hl
-	ld [hl], e
-	inc hl
-	ld [hl], d
-	inc hl
-	inc hl
-	inc hl
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	call WaitForSoundToFinish
 	; play a splash sound
@@ -143,8 +143,8 @@ BoulderHoleDropEffect:: ; d = 1 prior to calling will cause a "splash" sound ins
 	rst _PlaySound
 	ld hl, wChannelCommandPointers + CHAN6 * 2
 	ld de, EndSound ; end channel 6 of the splash sound to make it sound like more of a splash
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 .noSplash
 	ldh a, [hSCY] ; animation of the screen shaking a bit when it lands

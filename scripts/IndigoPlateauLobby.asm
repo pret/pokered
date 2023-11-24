@@ -111,7 +111,6 @@ IndigoGymGuideSonText:  ; PureRGBnote: ADDED: new NPC who will sell TMs - sells 
 	CheckEvent EVENT_MET_GYM_GUIDE_SON
 	call nz, .moreTMs 
 	SetEvent EVENT_TALKED_GYM_GUIDE_SON_AFTER_CHAMP
-	jr .shop2
 .shop2
 	ld hl, IndigoGymGuideSonShop2
 	jr .done

@@ -73,17 +73,16 @@ ReadTrainerHeaderInfo::
 	cp $6
 	jr z, .readPointer ; read after battle text
 	cp $8
-	jr z, .readPointer ; read end battle text
+	jr nz, .done 
+;   jr z, .readPointer
 ;	cp $a
 ;	jr nz, .done
 ;	ld a, [hli]        ; read end battle text (2) but override the result afterwards (XXX why, bug?)
 ;	ld d, [hl]
 ;	ld e, a
-	jr .done
-.readPointer
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+;	jr .done
+.readPointer ; read end battle text
+	call GetAddressFromPointer
 .done
 	pop de
 	ret
@@ -372,16 +371,10 @@ GetSavedEndBattleTextPointer::
 	and a
 ; won battle
 	jr nz, .lostBattle
-	ld a, [wEndBattleWinTextPointer]
-	ld h, a
-	ld a, [wEndBattleWinTextPointer + 1]
-	ld l, a
+	hl_deref_reverse wEndBattleWinTextPointer
 	ret
 .lostBattle
-	ld a, [wEndBattleLoseTextPointer]
-	ld h, a
-	ld a, [wEndBattleLoseTextPointer + 1]
-	ld l, a
+	hl_deref_reverse wEndBattleLoseTextPointer
 	ret
 
 TrainerEndBattleText::

@@ -21,10 +21,7 @@ ENDC
 	cp SAFARI_TYPE_FREE_ROAM
 	ret z ; if we're in a free roam safari, there's no game over caused by step limit.
 ;;;;;;;;;;
-	ld a, [wSafariSteps]
-	ld b, a
-	ld a, [wSafariSteps + 1]
-	ld c, a
+	bc_deref_reverse wSafariSteps ; a = c after this
 	or b
 	jr z, SafariZoneGameOver
 	dec bc
@@ -62,8 +59,8 @@ SafariZoneGameOver:
 .rangerHuntDone	
 	ld a, [wNumSafariBalls]
 	and a
-	jr z, .rangerHuntSuccess ; if wNumSafariBalls is 0, we've defeated all the rangers and have won the safari game
-	jr .noRangerHuntSuccess ; if not display the normal game over text
+	jr nz, .noRangerHuntSuccess ; if wNumSafariBalls isn't 0, display the normal game over text
+	; otherwise we've defeated all the rangers and have won the safari game
 .rangerHuntSuccess
 	ld a, TEXT_RANGER_SAFARI_GAME_OVER
 	ldh [hSpriteIndexOrTextID], a
@@ -137,9 +134,8 @@ RangerPostBattle::
 	ld a, [wIsInBattle] 
 	cp $ff ; if you lost the battle don't decrement and return
 	ret z
-	ld a, [wNumSafariBalls]
-	dec a
-	ld [wNumSafariBalls], a ; numsafariballs tracks how many rangers remain
+	ld hl, wNumRangersLeft
+	dec [hl]
 	xor a
 	ld [wCurMapScript], a
 	ret

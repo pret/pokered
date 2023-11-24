@@ -35,16 +35,13 @@ OptionLeftRightFuncs:
 
 DrawOptionMenu:
 	hlcoord 0, 0
-	ld b, 3
-	ld c, 18
+	lb bc, 3, 18
 	call TextBoxBorder
 	hlcoord 0, 5
-	ld b, 3
-	ld c, 18
+	lb bc, 3, 18
 	call TextBoxBorder
 	hlcoord 0, 10
-	ld b, 3
-	ld c, 18
+	lb bc, 3, 18
 	call TextBoxBorder
 	hlcoord 1, 1
 	ld de, TextSpeedOptionText
@@ -54,8 +51,7 @@ DrawOptionMenu:
 	call PlaceString
 	hlcoord 1, 11
 	ld de, BattleStyleOptionText
-	call PlaceString
-	ret
+	jp PlaceString
 
 DrawOptionsPageInfo:
 	push hl
@@ -214,8 +210,7 @@ OptionsMenuLoop:
 	ld a, [wTopMenuItemY]
 	cp b ; is the cursor on the next/back row?
 	jr z, .pageRow
-	ld d, 0
-	ld e, 8 
+	lb de, 0, 8
 	add hl, de ; seventh function in header
 	and a ; clear carry
 	call CallOptionsMenuHeaderFunction ; A-button action when not on the bottom row
@@ -232,14 +227,11 @@ OptionsMenuLoop:
 	rst _PlaySound
 	call ClearScreen
 	pop hl ; points to third function in header
-	ld d, 0
-	ld e, 4
+	lb de, 0, 4
 	add hl, de ; now points to fifth function in header
 	ld a, [wTopMenuItemX]
 	cp BACK_BUTTON_X_COORD ; is the cursor on 'BACK'?
-	jr z, .back
-	jp JumpOptionsMenuHeaderFunction
-.back
+	jp nz, JumpOptionsMenuHeaderFunction
 	inc hl
 	inc hl ; sixth function in header
 	jp JumpOptionsMenuHeaderFunction
@@ -298,9 +290,7 @@ OptionsMenuLoop:
 
 CursorInTextSpeed:
 	bit BIT_D_LEFT, b
-	jp nz, .pressedLeftInTextSpeed
-	jp .pressedRightInTextSpeed
-.pressedLeftInTextSpeed
+	jp z, .pressedRightInTextSpeed
 ;;;;;;;;;; PureRGBnote: CHANGED: Instant text speed replaced medium speed, so we need to adjust the X positions of the cursors a bit.
 	ld a, [wOptions1CursorX] ; text speed cursor X coordinate
 	cp 1                             ; leftmost position
@@ -324,25 +314,25 @@ CursorInTextSpeed:
 	add 8
 .updateTextSpeedXCoord
 	ld [wOptions1CursorX], a ; text speed cursor X coordinate
-	jp EraseOldMenuCursor
+	jr EraseOldMenuCursor
 
 CursorInBattleAnimation:
 	ld a, [wOptions2CursorX] ; battle animation cursor X coordinate
 	xor $0b ; toggle between 1 and 10
 	ld [wOptions2CursorX], a
-	jp EraseOldMenuCursor
+	jr EraseOldMenuCursor
 
 CursorInBattleStyle:
 	ld a, [wOptions3CursorX] ; battle style cursor X coordinate
 	xor $0b ; toggle between 1 and 10
 	ld [wOptions3CursorX], a
-	jp EraseOldMenuCursor
+	jr EraseOldMenuCursor
 
 CursorCancelRow:
 	ld a, [wOptionsCancelCursorX] ; battle style cursor X coordinate
 	xor 6 ; toggle between 1 and 7
 	ld [wOptionsCancelCursorX], a
-	jp EraseOldMenuCursor
+	; fall through
 
 EraseOldMenuCursor:
 	ld [wTopMenuItemX], a
@@ -394,13 +384,11 @@ SetOptionsFromCursorPositions:
 	ld [wOptions], a
 	ld hl, wOptions
 	ld a, [wOptions2CursorX] ; battle animation cursor X coordinate
-	ld c, 10
-	ld b, BIT_BATTLE_ANIMATION
+	lb bc, BIT_BATTLE_ANIMATION, 10
 	call SetSingleBitOption
 	ld a, [wOptions3CursorX] ; battle style cursor X coordinate
-	ld c, 10
-	ld b, BIT_BATTLE_SHIFT
-	jp SetSingleBitOption
+	lb bc, BIT_BATTLE_SHIFT, 10
+	; fall through
 
 ; option with 2 possible values
 ; input =
@@ -424,8 +412,7 @@ LoadXValueAndGetHLCoord:
 	ld [hl], b ; load x index into wram variable
 	pop hl
 .loopYAdd
-	ld d, 0
-	ld e, SCREEN_WIDTH
+	lb de, 0, SCREEN_WIDTH
 	add hl, de
 	dec a
 	jr nz, .loopYAdd
@@ -444,9 +431,8 @@ Get2ValueOptionCursorPosition:
 	ld b, a
 	ld a, c
 	and a
-	jr nz, .set
+	ret nz
 	ld b, d
-.set
 	ret
 
 OptionSetCursorPositionActions:
@@ -467,10 +453,7 @@ SetCursorPositionsFromOptions:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a ; get action within hl
-	ld bc, .doneAction
-	push bc
-	jp hl
-.doneAction	
+	call hl_caller
 	pop hl
 	inc hl
 	inc hl

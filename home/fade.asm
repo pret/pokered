@@ -27,9 +27,8 @@ LoadGBPal::
 ;;;;;;;;;; shinpokerednote: gbcnote: code to allow gbc color from yellow
 	call UpdateGBCPal_BGP
 	call UpdateGBCPal_OBP0
-	call UpdateGBCPal_OBP1
+	jp UpdateGBCPal_OBP1
 ;;;;;;;;;;
-	ret
 .checkFirstLoad
 	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
@@ -40,8 +39,7 @@ GBFadeInFromBlack::
 	call Delay3
 	farcall GBCFadeInFromBlack
 	ld hl, FadePal4
-	ld b, 1
-	ld c, 1
+	lb bc, 1, 1
 	jr z, GBFadeIncCommon.delayset
 	ld hl, FadePal1
 	ld b, 4
@@ -51,8 +49,7 @@ GBFadeOutToWhite::
 	call Delay3
 	farcall GBCFadeOutToWhite
 	ld hl, FadePal8
-	ld b, 1
-	ld c, 1
+	lb bc, 1, 1
 	jr z, GBFadeIncCommon.delayset
 	ld hl, FadePal6
 	ld b, 3
@@ -79,8 +76,7 @@ GBFadeIncCommon:
 GBFadeOutToBlack::
 	farcall GBCFadeOutToBlack
 	ld hl, FadePal1 + 2
-	ld b, 1
-	ld c, 1
+	lb bc, 1, 1
 	jr z, GBFadeDecCommon.delayset
 	ld hl, FadePal4 + 2
 	ld b, 4
@@ -89,8 +85,7 @@ GBFadeOutToBlack::
 GBFadeInFromWhite::
 	farcall GBCFadeInFromWhite
 	ld hl, FadePal5 + 2
-	ld b, 1
-	ld c, 1
+	lb bc, 1, 1
 	jr z, GBFadeDecCommon.delayset
 	ld hl, FadePal7 + 2
 	ld b, 3

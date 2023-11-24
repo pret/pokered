@@ -52,10 +52,7 @@ LancesRoom_ScriptPointers:
 	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_LANCESROOM_LANCE_START_BATTLE
 	dw_const LancesRoomLanceEndBattleScript,        SCRIPT_LANCESROOM_LANCE_END_BATTLE
 	dw_const LancesRoomPlayerIsMovingScript,        SCRIPT_LANCESROOM_PLAYER_IS_MOVING
-	dw_const LancesRoomNoopScript,                  SCRIPT_LANCESROOM_NOOP
-
-LancesRoomNoopScript:
-	ret
+	dw_const DoRet,                                 SCRIPT_LANCESROOM_NOOP
 
 LancesRoomDefaultScript:
 	CheckEvent EVENT_BEAT_LANCE
@@ -182,5 +179,4 @@ DoFacings: ; PureRGBnote: ADDED: when about to fight Lance, lance and the player
 	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_LEFT
   	ldh [hSpriteFacingDirection], a
-  	call SetSpriteFacingDirection
-	ret
+  	jp SetSpriteFacingDirection

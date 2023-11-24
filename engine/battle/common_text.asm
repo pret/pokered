@@ -10,13 +10,11 @@ PrintBeginningBattleText:
 .notPokemonTower
 	ld a, [wEnemyMonSpecies2]
 	call PlayCry
-	ld hl, WildMonAppearedText
 	ld a, [wMoveMissed]
 	and a
-	jr z, .notFishing
+	ld hl, WildMonAppearedText
+	jr z, .wildBattle ; if not fishing
 	ld hl, HookedMonAttackedText
-.notFishing
-	jr .wildBattle
 .trainerBattle
 	call .playSFX
 	ld c, 20
@@ -27,7 +25,7 @@ PrintBeginningBattleText:
 	callfar DrawAllPokeballs
 	pop hl
 	rst _PrintText
-	jp .done
+	ret
 .pokemonTower
 	ld b, SILPH_SCOPE
 	call IsItemInBag
@@ -46,7 +44,7 @@ PrintBeginningBattleText:
 	rst _PrintText
 	ld hl, GhostCantBeIDdText
 	rst _PrintText
-	jr .done
+	ret
 .isMarowak
 	ld a, b
 	and a
@@ -72,8 +70,6 @@ PrintBeginningBattleText:
 	ld a, SFX_SILPH_SCOPE
 	rst _PlaySound
 	jp WaitForSoundToFinish
-.done
-	ret
 
 ;;;;;;;;;; PureRGBnote: ADDED: a sound effect for ghosts encountered
 PlayGhostSfx:
@@ -252,8 +248,7 @@ OKExclamationText:
 GoodText:
 	text_far _GoodText
 	text_asm
-	jr PrintComeBackText
-
+	; fall through
 PrintComeBackText:
 	ld hl, ComeBackText
 	ret

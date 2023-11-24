@@ -41,8 +41,7 @@ CeladonChannelerText:
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .no1
-	jr .q2
+	jr z, .q2
 .no1
 	ld hl, CeladonChannelerNo1
 	rst _PrintText
@@ -141,8 +140,7 @@ CeladonLaprasGuyLeaves:
 	jr z, .loserinway
 	cp 5
 	ld de, CeladonLoserMovement2
-	jr z, .loserinway
-	jr .losernotinway
+	jr nz, .losernotinway
 .loserinway
 	ld a, 4
 	ldh [hSpriteIndexOrTextID], a
@@ -156,8 +154,7 @@ CeladonLaprasGuyLeaves:
 	ld a, 4
 	ldh [hSpriteIndexOrTextID], a
 	call GetSpriteMovementByte1Pointer
-	ld a, STAY
-	ld [hl], a
+	ld [hl], STAY
 	; silph guy walks away according to where you are
 	ld a, [wXCoord]
 	cp 4
@@ -208,11 +205,9 @@ CeladonLaprasGuyGoesThroughDoor:
 	ld a, 4
 	ldh [hSpriteIndexOrTextID], a
 	call GetSpriteMovementByte1Pointer
-	ld a, WALK
-	ld [hl], a
+	ld [hl], WALK
 	call GetSpriteMovementByte2Pointer
-	ld a, LEFT_RIGHT
-	ld [hl], a
+	ld [hl], LEFT_RIGHT
 	xor a
 	ld [wJoyIgnore], a
 	ld [wCeladonHotelCurScript], a

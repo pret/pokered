@@ -14,10 +14,7 @@ CheckWestMap::
 	add c
 	ld c, a
 	ld [wYCoord], a
-	ld a, [wWestConnectedMapViewPointer] ; pointer to upper left corner of map without adjustment for Y position
-	ld l, a
-	ld a, [wWestConnectedMapViewPointer + 1]
-	ld h, a
+	hl_deref wWestConnectedMapViewPointer ; pointer to upper left corner of map without adjustment for Y position
 	srl c
 	jr z, .savePointer1
 .pointerAdjustmentLoop1
@@ -52,10 +49,7 @@ CheckEastMap:
 	add c
 	ld c, a
 	ld [wYCoord], a
-	ld a, [wEastConnectedMapViewPointer] ; pointer to upper left corner of map without adjustment for Y position
-	ld l, a
-	ld a, [wEastConnectedMapViewPointer + 1]
-	ld h, a
+	hl_deref wEastConnectedMapViewPointer ; pointer to upper left corner of map without adjustment for Y position
 	srl c
 	jr z, .savePointer2
 .pointerAdjustmentLoop2
@@ -89,10 +83,7 @@ CheckNorthMap:
 	add c
 	ld c, a
 	ld [wXCoord], a
-	ld a, [wNorthConnectedMapViewPointer] ; pointer to upper left corner of map without adjustment for X position
-	ld l, a
-	ld a, [wNorthConnectedMapViewPointer + 1]
-	ld h, a
+	hl_deref wNorthConnectedMapViewPointer ; pointer to upper left corner of map without adjustment for X position
 	ld b, 0
 	srl c
 	add hl, bc
@@ -118,10 +109,7 @@ CheckSouthMap:
 	add c
 	ld c, a
 	ld [wXCoord], a
-	ld a, [wSouthConnectedMapViewPointer] ; pointer to upper left corner of map without adjustment for X position
-	ld l, a
-	ld a, [wSouthConnectedMapViewPointer + 1]
-	ld h, a
+	hl_deref wSouthConnectedMapViewPointer ; pointer to upper left corner of map without adjustment for X position
 	ld b, 0
 	srl c
 	add hl, bc

@@ -3,7 +3,7 @@ _PewterCityCooltrainerFText::
 	line "CLEFAIRYs came"
 	cont "from the moon!"
 
-	para "They appeared "
+	para "They appeared"
 	line "after MOON STONE"
 	cont "fell on MT.MOON."
 	done

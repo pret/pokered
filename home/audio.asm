@@ -32,8 +32,7 @@ PlayDefaultMusicCommon::
 	; else only play bike music if in cycling road
 	ld a, [wd732] ; forcibly riding bike (cycling road)
 	bit 5, a
-	jr nz, .bikeMusic
-	jr .walking
+	jr z, .walking
 .bikeMusic
 ;;;;;;;;;;
 	ld a, MUSIC_BIKE_RIDING
@@ -328,7 +327,7 @@ PlaySpecialBattleMusic::
 	call PlayMusic
 	pop bc
 	pop hl
-	jr RemapCommandPointerLoop
+	; fall through
 
 RemapCommandPointerLoop:
 	ldh a, [hLoadedROMBank]

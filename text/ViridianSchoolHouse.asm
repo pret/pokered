@@ -384,12 +384,12 @@ _SchoolB1FBottomCenterNotebook::
 	done
 
 _SchoolB1FLeftClassroomSign::
-	text "CLASS 2A - "
+	text "CLASS 2A -"
 	line "#MON MOVES"
 	done
 
 _SchoolB1FRightClassroomSign::
-	text "CLASS 1A - "
+	text "CLASS 1A -"
 	line "#MON BASICS"
 	done
 

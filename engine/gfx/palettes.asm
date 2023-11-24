@@ -292,9 +292,8 @@ GetOverworldPalette:
 	jr .town
 .Lorelei
 	call GetPalettes
-	jr c, .gbcLorelei
-	jr .seafoam ; PureRGBnote: CHANGED: lorelei's room uses a bluish purple palette instead of light green on SGB colors.
-.gbcLorelei 
+	jr nc, .seafoam
+.gbcLorelei ; PureRGBnote: CHANGED: lorelei's room uses a bluish purple palette instead of light green on SGB colors.
 	xor a
 	jr .town
 .seafoam
@@ -455,8 +454,7 @@ DeterminePaletteIDOutOfBattle:
 	ret
 ;;;;;;;;;; PureRGBnote: ADDED: hardened onix has hardcoded palettes
 .hardened_onix
-	ld b, PAL_BLACKMON
-	ld c, PAL_BLUEMON
+	lb bc, PAL_BLACKMON, PAL_BLUEMON
 .checkAltPaletteHardcoded
 	ld a, [wIsAltPalettePkmn]
 	and a
@@ -588,14 +586,13 @@ LoadSGB:
 	jr c, .onSGB
 	ldh a, [hGBC]
 	and a
-	jr z, .onDMG
+	ret z ; on DMG
 	;if on gbc, set SGB flag but skip all the SGB vram stuff
-	ld a, $1
+	ld a, 1
 	ld [wOnSGB], a
-.onDMG
 	ret	
 .onSGB
-	ld a, $1
+	ld a, 1
 	ld [wOnSGB], a
 	di
 	call PrepareSuperNintendoVRAMTransfer
@@ -748,8 +745,7 @@ CopyGfxToSuperNintendoVRAM:
 	xor a
 	ldh [rBGP], a
 	call UpdateGBCPal_BGP ; shinpokerednote: gbcnote: color code from pokemon yellow
-	ei
-	ret
+	reti
 
 Wait7000:
 ; Each loop takes 9 cycles so this routine actually waits 63000 cycles.
@@ -777,8 +773,7 @@ SendSGBPackets:
 	ldh a, [rLCDC]
 	and rLCDC_ENABLE_MASK
 	ret z
-	call Delay3
-	ret
+	jp Delay3
 .notGBC
 	push de
 	call SendSGBPacket
@@ -796,15 +791,14 @@ GetPalettes:
 	jr z, .sgbPalettes2
 	ld de, SuperPalettes
 	and a
-	jr .done
+	ret
 .gbcPalettes
 	ld de, GBCBasePalettes
 	scf
-	jr .done
+	ret
 .sgbPalettes2
 	ld de, SuperPalettes2
 	and a
-.done
 	ret
 
 
@@ -1015,8 +1009,7 @@ TransferBGPPals:: ;shinpokerednote: gbcnote: code from pokemon yellow
 	jr c, .waitLoop
 .lcdDisabled
 	call .DoTransfer
-	ei	;enable interrupts
-	ret
+	reti	;enable interrupts
 .DoTransfer:
 	xor a
 	or $80 ; set the auto-increment bit of rBPGI
@@ -1184,11 +1177,6 @@ palPacketPointers:
 	dw wPalPacket
 	dw BlkPacket_PokemonMiddleScreenBox
 palPacketPointersEnd:
-	
-
-
-EmptyFunc3:
-	ret
 
 CopySGBBorderTiles:
 ; SGB tile data is stored in a 4BPP planar format.
@@ -1245,12 +1233,10 @@ TransferMonPal:
 	pop af
 	jr z, .do_bgp
 	pop af
-	call TransferCurOBPData
-	ret
+	jp TransferCurOBPData
 .do_bgp
 	pop af
-	call TransferCurBGPData
-	ret
+	jp TransferCurBGPData
 .isMon	
 	call DeterminePaletteIDOutOfBattle
 	jr .back
@@ -1273,8 +1259,7 @@ INCLUDE "data/sgb/sgb_border.asm"
 BufferAllPokeyellowColorsGBC::
 	call .BGP0to3Loop
 	call .OBP0to3Loop
-	call .OBP4to7Loop
-	ret	
+	jp .OBP4to7Loop	
 	
 .BGP0to3Loop
 	ld hl, wGBCFullPalBuffer
@@ -1317,7 +1302,7 @@ BufferAllPokeyellowColorsGBC::
 	ld [hli], a		;buffer high byte
 	ld a, e
 	ld [hli], a		;buffer low byte	
-	ld a, 0
+	xor a
 	ldh [rSVBK], a ; switch back to default wram bank
 	pop de
 	ld a, [wGBCColorControl]

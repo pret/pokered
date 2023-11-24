@@ -7,8 +7,11 @@ ResetPlayerSpriteData::
 	ld [wSpritePlayerStateData1PictureID], a
 	ld [wSpritePlayerStateData2ImageBaseOffset], a
 	ld hl, wSpritePlayerStateData1YPixels
-	ld [hl], $3c     ; set Y screen pos
-	inc hl
+	; PureRGBnote: OPTIMIZED
+	ld a, $3c
+	ld [hli], a ; set Y screen pos
+	;ld [hl], $3c     
+	;inc hl
 	inc hl
 	ld [hl], $40     ; set X screen pos
 	ret

@@ -1,5 +1,6 @@
 HPBarLength:
 	call GetPredefRegisters
+	; fall through
 
 ; calculates bc * 48 / de, the number of pixels the HP bar has
 ; the result is always at least 1
@@ -25,9 +26,9 @@ GetHPBarLength:
 	ld b, a
 	ldh a, [hMultiplicand+2]
 	srl b              ; divide multiplication result as well
-	rr a
+	rra
 	srl b
-	rr a
+	rra
 	ldh [hMultiplicand+2], a
 	ld a, b
 	ldh [hMultiplicand+1], a
@@ -109,8 +110,7 @@ UpdateHPBar2:
 .ok
 	call UpdateHPBar_PrintHPNumber
 	and a
-	jr z, .noPixelDifference
-	call UpdateHPBar_AnimateHPBar
+	call nz, UpdateHPBar_AnimateHPBar
 .noPixelDifference
 	ld a, [wHPBarNewHP]
 	ld [wHPBarOldHP], a
@@ -233,7 +233,7 @@ UpdateHPBar_PrintHPNumber:
 	ld a, " "
 	ld [hli], a
 	ld [hli], a
-	ld [hli], a
+	ld [hl], a
 	pop hl
 	ld de, wHPBarTempHP
 	lb bc, 2, 3

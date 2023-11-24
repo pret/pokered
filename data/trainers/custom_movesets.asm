@@ -448,6 +448,38 @@ ChampArenaGymGuideMoveset:
 	db HYPER_BEAM
 
 ChampArenaRivalMoveset1:
+	; articuno
+	db ICE_BEAM
+	db RAZOR_WIND ; ROOST
+	db PSYCHIC_M
+	db FLY
+	; alakazam
+	db PSYCHIC_M
+	db AURORA_BEAM
+	db RECOVER
+	db FLASH
+	; rhydon
+	db EARTHQUAKE
+	db ROCK_SLIDE
+	db CUT
+	db MEGA_KICK
+	; exeggutor
+	db PSYCHIC_M
+	db SOLARBEAM
+	db SLEEP_POWDER
+	db EGG_BOMB
+	; snorlax
+	db BODY_SLAM
+	db REST
+	db KARATE_CHOP
+	db SLASH
+	; charizard
+	db RAZOR_WIND ; ROOST
+	db FLAMETHROWER
+	db SKY_ATTACK
+	db EARTHQUAKE
+
+ChampArenaRivalMoveset2:
 	; moltres
 	db FLAMETHROWER
 	db RAZOR_WIND ; ROOST
@@ -479,7 +511,7 @@ ChampArenaRivalMoveset1:
 	db COUNTER ; DRAIN_PUNCH
 	db ICE_BEAM
 
-ChampArenaRivalMoveset2:
+ChampArenaRivalMoveset3:
 	; zapdos
 	db THUNDERBOLT
 	db RAZOR_WIND ; ROOST
@@ -510,35 +542,3 @@ ChampArenaRivalMoveset2:
 	db RAZOR_LEAF
 	db SLUDGE
 	db DRAGON_RAGE
-
-ChampArenaRivalMoveset3:
-	; articuno
-	db ICE_BEAM
-	db RAZOR_WIND ; ROOST
-	db PSYCHIC_M
-	db FLY
-	; alakazam
-	db PSYCHIC_M
-	db AURORA_BEAM
-	db RECOVER
-	db FLASH
-	; rhydon
-	db EARTHQUAKE
-	db ROCK_SLIDE
-	db CUT
-	db MEGA_KICK
-	; exeggutor
-	db PSYCHIC_M
-	db SOLARBEAM
-	db SLEEP_POWDER
-	db EGG_BOMB
-	; snorlax
-	db BODY_SLAM
-	db REST
-	db KARATE_CHOP
-	db SLASH
-	; charizard
-	db RAZOR_WIND ; ROOST
-	db FLAMETHROWER
-	db SKY_ATTACK
-	db EARTHQUAKE

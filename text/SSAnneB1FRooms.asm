@@ -41,7 +41,7 @@ _SSAnneB1FRoomsSailor3BattleText::
 	done
 
 _SSAnneB1FRoomsSailor3EndBattleText::
-	text "OK, "
+	text "OK,"
 	line "you're not bad."
 	prompt
 

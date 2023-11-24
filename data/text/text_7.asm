@@ -77,7 +77,7 @@ _WannaTrade1Text::
 	para "trade one for"
 	line "@"
 	text_ram wInGameTradeReceiveMonName
-	text "? "
+	text "?"
 	done
 
 _NoTrade1Text::

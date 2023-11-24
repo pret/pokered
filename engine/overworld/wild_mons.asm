@@ -30,8 +30,7 @@ LoadWildData::
 	ld bc, $14
 	rst _CopyData
 .loadPaletteData
-	call GetWildPokemonPalettes ; PureRGBnote: ADDED: we always need to load the palette flags for wild pokemon on loading a map.
-	ret
+	jp GetWildPokemonPalettes ; PureRGBnote: ADDED: we always need to load the palette flags for wild pokemon on loading a map.
 
 FindWaterLocations:
 	ld b, 1

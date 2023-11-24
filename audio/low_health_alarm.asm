@@ -19,7 +19,7 @@ Music_DoLowHealthAlarm::
 	jr .do_alarm_tone_check_dec
 .no_alarm_check_battle
 	ld a, [wIsInBattle]
-	cp $00
+	and a
 	jr z, .no_alarm_no_battle
 	cp $FF
 	jr z, .no_alarm_no_battle
@@ -61,10 +61,9 @@ Music_DoLowHealthAlarm::
 
 .notToneHi
 	cp 20
-	jr nz, .noTone   ;if timer == 20,
-	call .playToneLo ;actually set the sound registers.
+	call z, .playToneLo ;actually set the sound registers.
 
-.noTone
+.noTone ;if timer == 20,
 	ld a, $86
 	ld [wChannelSoundIDs + CHAN5], a ;disable sound channel?
 	ld a, [wLowHealthAlarm]

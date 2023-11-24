@@ -146,7 +146,7 @@ _Route20Swimmer9EndBattleText::
 	prompt
 
 _Route20Swimmer9AfterBattleText::
-	text "CINNABAR is a "
+	text "CINNABAR is a"
 	line "volcanic island!"
 	done
 

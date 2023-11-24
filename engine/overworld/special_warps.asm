@@ -9,9 +9,7 @@ PrepareForSpecialWarp::
 	jr .next
 .debugNewGameWarp
 	bit BIT_DEBUG_MODE, [hl]
-	jr z, .setNewGameMatWarp ; apply to StartNewGameDebug only
-	call PrepareNewGameDebug
-.setNewGameMatWarp
+	call nz, PrepareNewGameDebug ; apply to StartNewGameDebug only
 	; This is called by OakSpeech during StartNewGame and
 	; loads the first warp event for the specified map index.
 	ld a, PALLET_TOWN

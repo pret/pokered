@@ -8,11 +8,8 @@ CeruleanCave2F_Script:
 
 CeruleanCave2F_ScriptPointers:
 	def_script_pointers
-	dw_const CeruleanCave2FDefaultScript,  SCRIPT_CERULEANCAVE2F_DEFAULT
+	dw_const DoRet,                               SCRIPT_CERULEANCAVE2F_DEFAULT
 	dw_const CeruleanCave2FAfterOakBattleScript,  SCRIPT_CERULEANCAVE2F_AFTER_OAK_BATTLE
-
-CeruleanCave2FDefaultScript:
-	ret
 
 CeruleanCave2FAfterOakBattleScript:
 	ld a, [wIsInBattle]
@@ -20,9 +17,7 @@ CeruleanCave2FAfterOakBattleScript:
 	jr z, .done
 	SetEvent EVENT_BEAT_PROF_OAK
 	CheckEvent EVENT_BEAT_PROF_OAK_ONCE
-	jr z, .initialLossText
-	jr .done
-.initialLossText
+	jr nz, .done
 	ld a, [wOptions2]
 	bit BIT_ALT_PKMN_PALETTES, a ; do we have alt palettes enabled
 	jr z, .done ; don't do anything if alt palettes are turned off
@@ -72,18 +67,7 @@ OakBattle:
 
 	; select which team to use during the encounter
 	ld a, [wPlayerStarter]
-	cp STARTER2
-	jr nz, .NotSquirtle
-	ld a, 3
-	jr .done
-.NotSquirtle
-	cp STARTER3
-	jr nz, .Charmander
-	ld a, 1
-	jr .done
-.Charmander
-	ld a, 2
-.done
+	call StarterToPartyID
 	ld [wTrainerNo], a
 	ld a, SCRIPT_CERULEANCAVE2F_AFTER_OAK_BATTLE
 	ld [wCeruleanCave2FCurScript], a

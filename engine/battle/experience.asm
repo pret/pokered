@@ -68,8 +68,8 @@ GainExperience:
 	call Divide
 	ld hl, wPartyMon1OTID - (wPartyMon1DVs - 1)
 	add hl, de
-	ld b, [hl] ; party mon OTID
-	inc hl
+	ld a, [hli]
+	ld b, a ; party mon OTID
 ;;;;;;;;;; PureRGBnote: ADDED: new item that causes all pokemon to gain EXP as if they were received from a trade.
 	ld a, [wBoosterChipActive] ; always get traded pokemon boost if BOOSTER CHIP was used.
 	and a

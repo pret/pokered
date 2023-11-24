@@ -37,17 +37,13 @@ DrawFrameBlock:
 	jr .finishCopying
 .flipBaseCoords
 	ld a, [wBaseCoordY]
-	ld b, a
-	ld a, 136
-	sub b ; flip Y base coordinate
+	n_sub_a 136 ; flip Y base coordinate
 	add [hl] ; Y offset
 	ld [de], a ; store Y
 	inc hl
 	inc de
 	ld a, [wBaseCoordX]
-	ld b, a
-	ld a, 168
-	sub b ; flip X base coordinate
+	n_sub_a 168 ; flip X base coordinate
 .finishCopying ; finish copying values to OAM (when subanimation not transformed)
 	add [hl] ; X offset
 	ld [de], a ; store X
@@ -77,17 +73,13 @@ DrawFrameBlock:
 .flipHorizontalAndVertical
 	ld a, [wBaseCoordY]
 	add [hl] ; Y offset
-	ld b, a
-	ld a, 136
-	sub b ; flip Y coordinate
+	n_sub_a 136 ; flip Y coordinate
 	ld [de], a ; store Y
 	inc hl
 	inc de
 	ld a, [wBaseCoordX]
 	add [hl] ; X offset
-	ld b, a
-	ld a, 168
-	sub b ; flip X coordinate
+	n_sub_a 168 ; flip X coordinate
 	ld [de], a ; store X
 ;;;;;;;;;; shinpokerednote: gbcnote: oam updates from yellow version
 	cp 88
@@ -132,9 +124,7 @@ DrawFrameBlock:
 	inc de
 	ld a, [wBaseCoordX]
 	add [hl]
-	ld b, a
-	ld a, 168
-	sub b ; flip X coordinate
+	n_sub_a 168 ; flip X coordinate
 	ld [de], a ; store X
 ;;;;;;;;;; shinpokerednote: gbcnote: oam updates from yellow version
 	cp 88
@@ -183,11 +173,10 @@ DrawFrameBlock:
 	cp FRAMEBLOCKMODE_03
 	jr z, .advanceFrameBlockDestAddr ; skip cleaning OAM buffer
 	cp FRAMEBLOCKMODE_04
-	jr z, .done ; skip cleaning OAM buffer and don't advance the frame block destination address
+	ret z ; skip cleaning OAM buffer and don't advance the frame block destination address
 	ld a, [wAnimationID]
 	cp GROWL
-	jr z, .resetFrameBlockDestAddr
-	call AnimationCleanOAM
+	call nz, AnimationCleanOAM
 .resetFrameBlockDestAddr
 	ld hl, wShadowOAM
 	ld a, l
@@ -200,7 +189,6 @@ DrawFrameBlock:
 	ld [wFBDestAddr + 1], a
 	ld a, d
 	ld [wFBDestAddr], a
-.done
 	ret
 
 PlayAnimation:
@@ -224,7 +212,7 @@ PlayAnimation:
 	vc_hook_blue Stop_reducing_move_anim_flashing_Self_Destruct
 	cp -1
 	vc_hook_blue Stop_reducing_move_anim_flashing_Reflect
-	jr z, .AnimationOver
+	ret z
 	cp FIRST_SE_ID ; is this subanimation or a special effect?
 	jr c, .playSubanimation
 .doSpecialEffect
@@ -308,8 +296,6 @@ PlayAnimation:
 	pop hl
 	vc_hook Stop_reducing_move_anim_flashing_Guillotine
 	jr .animationLoop
-.AnimationOver
-	ret
 
 LoadSubanimation:
 	vc_hook Reduce_move_anim_flashing_Guillotine
@@ -493,8 +479,7 @@ MoveAnimationContent:
 .animationFinished
 	pop af ; a = whether the animation should wait for the sound to finish 
 	and a
-	jr nz, .noWaiting
-	call WaitForSoundToFinish
+	call z, WaitForSoundToFinish
 .noWaiting
 	xor a
 	ld [wSubAnimSubEntryAddr], a
@@ -640,8 +625,7 @@ SetAnimationPalette:
 	ldh [rOBP1], a
 	call UpdateGBCPal_OBP0
 	call UpdateGBCPal_OBP1
-	predef SetAttackAnimPal	;gbcnote - new function to handle animation palettes
-	ret
+	predef_jump SetAttackAnimPal	;gbcnote - new function to handle animation palettes
 ;;;;;;;;;;
 
 ;;;;;;;;;; shinpokerednote: gbcnote: functions from pokemon yellow related to gbc color
@@ -654,7 +638,7 @@ Func_78e98:
 	call WriteLowerByteOfBGMapAndEnableBGTransfer
 	call Delay3
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	call LoadScreenTilesFromBuffer2
 	ld h, vBGMap1 / $100
 
@@ -678,10 +662,7 @@ PlaySubanimation:
 	ld [wFBDestAddr + 1], a
 	ld a, h
 	ld [wFBDestAddr], a
-	ld a, [wSubAnimSubEntryAddr + 1]
-	ld h, a
-	ld a, [wSubAnimSubEntryAddr]
-	ld l, a
+	hl_deref wSubAnimSubEntryAddr
 .loop
 	push hl
 	ld c, [hl] ; frame block ID
@@ -691,8 +672,7 @@ PlaySubanimation:
 	add hl, bc
 	ld a, [hli]
 	ld c, a
-	ld a, [hli]
-	ld b, a
+	ld b, [hl]
 	pop hl
 	inc hl
 	push hl
@@ -715,10 +695,7 @@ PlaySubanimation:
 	dec a
 	ld [wSubAnimCounter], a
 	ret z
-	ld a, [wSubAnimSubEntryAddr + 1]
-	ld h, a
-	ld a, [wSubAnimSubEntryAddr]
-	ld l, a
+	hl_deref wSubAnimSubEntryAddr
 	ld a, [wSubAnimTransform]
 	cp SUBANIMTYPE_REVERSE
 	ld bc, 3
@@ -760,9 +737,7 @@ DoSpecialEffectByAnimationId:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld de, .done
-	push de
-	jp hl
+	call hl_caller
 .done
 	pop bc
 	pop de
@@ -852,10 +827,7 @@ DoBallShakeSpecialEffects:
 	ld [wNumShakes], a
 	ret z
 ; if there are shakes left, restart the subanimation
-	ld a, [wSubAnimSubEntryAddr]
-	ld l, a
-	ld a, [wSubAnimSubEntryAddr + 1]
-	ld h, a
+	hl_deref wSubAnimSubEntryAddr
 	ld de, -(4 * 3) ; 4 subentries and 3 bytes per subentry
 	add hl, de
 	ld a, l
@@ -1120,10 +1092,7 @@ CallWithTurnFlipped:
 	push af
 	xor 1
 	ldh [hWhoseTurn], a
-	ld de, .returnAddress
-	push de
-	jp hl
-.returnAddress
+	call hl_caller
 	pop af
 	ldh [hWhoseTurn], a
 	ret
@@ -1226,8 +1195,7 @@ AnimationFlashScreenCommon:
 	rst _DelayFrames
 	pop af
 	ldh [rBGP], a ; restore initial palette
-	call UpdateGBCPal_BGP ; shinpokerednote: gbcnote: gbc color facilitation
-	ret
+	jp UpdateGBCPal_BGP ; shinpokerednote: gbcnote: gbc color facilitation
 
 AnimationDarkScreenPalette:
 ; Changes the screen's palette to a dark palette.
@@ -1256,13 +1224,14 @@ AnimationResetScreenPalette:
 ;	lb bc, $00, $00
 ;	jr SetAnimationBGPalette
 
+;AnimationUnusedPalette4:
+;	lb bc, $40, $40
+;	jr SetAnimationBGPalette
+
 AnimationLightScreenPalette:
 ; Changes the screen to use a palette with light colors.
 	lb bc, $90, $90
-	jr SetAnimationBGPalette
-
-;AnimationUnusedPalette4:
-;	lb bc, $40, $40
+	; fall through
 
 SetAnimationBGPalette:
 	ld a, [wOnSGB]
@@ -1272,10 +1241,9 @@ SetAnimationBGPalette:
 	ld a, c
 .next
 	ldh [rBGP], a
-	call UpdateGBCPal_BGP ; shinpokerednote: gbcnote: gbc color facilitation
-	ret
+	jp UpdateGBCPal_BGP ; shinpokerednote: gbcnote: gbc color facilitation
 
-	ld b, $5
+	;ld b, $5 ; unused label?
 
 AnimationShakeScreenVertically:
 	predef_jump PredefShakeScreenVertically
@@ -1298,8 +1266,7 @@ AnimationWaterDropletsEverywhereDefault:
 ; scroll. It's hard to describe, but it's the main animation
 ; in Surf/Mist/Haze.
 	xor a
-	ld d, 32
-	ld e, $71
+	lb de, 32, $71
 	jr AnimationTileEverywhereInit
 
 ;;;;;;;;;; PureRGBnote: ADDED: new animations used with heat rush and poison gas
@@ -1348,12 +1315,12 @@ AnimationTileEverywhere:
 .loop
 	ld a, 16
 	ld [wBaseCoordY], a
-	ld a, 0
+	;xor a
 	;ld [wUnusedD08A], a
 	call _AnimationWaterDroplets
 	ld a, 24
 	ld [wBaseCoordY], a
-	ld a, 32
+	;ld a, 32
 	;ld [wUnusedD08A], a
 	call _AnimationWaterDroplets
 	dec d
@@ -1767,8 +1734,7 @@ AnimationSpiralBallsInwardFastDefault:
 ;;;;;;;;;;
 
 AnimationSpiralBallsInwardDefault:
-	ld d, $7a ; tile number
-	ld e, 5 ; delay
+	lb de, $7a, 5 ; tile number, delay
 ; Creates an effect that looks like energy balls spiralling into the
 ; player mon's sprite.  Used in Focus Energy, for example.
 ; PureRGBnote: CHANGED: modified this function so the delay is customizable, and it can repeatedly play a sound effect while the animation is happening.
@@ -1853,9 +1819,7 @@ AnimationSpiralBallsInward:
 	push hl
 	ld c, a
 	cp 2
-	jr z, .playSound
-	jr .frameDelay
-.playSound
+	jr nz, .frameDelay
 	ld a, [wUnusedC000]
 	and a
 	jr nz, .frameDelay
@@ -1945,7 +1909,7 @@ _AnimationSquishMonPic:
 	push hl
 	ld c, 3
 	ld a, [wSquishMonCurrentDirection]
-	cp 0
+	and a
 	jr nz, .right
 	call AnimCopyRowLeft
 	dec hl
@@ -2221,8 +2185,8 @@ AnimationSlideEnemyMonHalfOff:
 
 AnimationSlideMonHalfOff:
 ; Slides the mon's sprite halfway off the screen. It's used in Softboiled.
-	ld e, 4
 	ld a, 4
+	ld e, a
 	ld [wSlideMonDelay], a
 	call _AnimationSlideMonOff
 	jp Delay3
@@ -2247,8 +2211,7 @@ AnimationWavyScreen:
 	ldh [hAutoBGTransferEnabled], a
 	ld a, SCREEN_HEIGHT_PX
 	ldh [hWY], a
-	ld d, $80 ; terminator
-	ld e, SCREEN_HEIGHT_PX - 1
+	lb de, $80, SCREEN_HEIGHT_PX - 1 ; terminator, screen height
 	ld c, $ff
 	ld hl, WavyScreenLineOffsets
 .loop
@@ -2276,8 +2239,7 @@ AnimationWavyScreen:
 	call Delay3
 	call LoadScreenTilesFromBuffer2
 	ld hl, vBGMap1
-	call BattleAnimCopyTileMapToVRAM
-	ret
+	jp BattleAnimCopyTileMapToVRAM
 
 WavyScreen_SetSCX:
 	ldh a, [rSTAT]
@@ -2461,12 +2423,11 @@ AnimationHideMonPic:
 ; Hides the mon's sprite.
 	ldh a, [hWhoseTurn]
 	and a
+	ld a, 5 * SCREEN_WIDTH + 1
 	jr z, .playerTurn
 	ld a, 12
-	jr ClearMonPicFromTileMap
 .playerTurn
-	ld a, 5 * SCREEN_WIDTH + 1
-
+	; fall through
 ClearMonPicFromTileMap:
 	push hl
 	push de
@@ -2489,11 +2450,9 @@ GetMonSpriteTileMapPointerFromRowCount:
 	push de
 	ldh a, [hWhoseTurn]
 	and a
-	jr nz, .enemyTurn
-	ld a, 20 * 5 + 1
-	jr .next
-.enemyTurn
 	ld a, 12
+	jr nz, .next
+	ld a, 20 * 5 + 1
 .next
 	hlcoord 0, 0
 	ld e, a
@@ -2577,11 +2536,9 @@ GetMoveSound:
 	jr nc, .NotCryMove
 	ldh a, [hWhoseTurn]
 	and a
-	jr nz, .next
-	ld a, [wBattleMonSpecies] ; get number of current monster
-	jr .Continue
-.next
 	ld a, [wEnemyMonSpecies]
+	jr nz, .Continue
+	ld a, [wBattleMonSpecies] ; get number of current monster
 .Continue
 	push hl
 	call GetCryData
@@ -2690,8 +2647,7 @@ AnimationLeavesFalling:
 	call AnimationFallingObjects
 	pop af
 	ldh [rOBP0], a
-	call UpdateGBCPal_OBP0 ; shinpokerednote: gbcnote: color support from yellow
-	ret
+	jp UpdateGBCPal_OBP0 ; shinpokerednote: gbcnote: color support from yellow
 
 AnimationPetalsFalling:
 ; Makes lots of petals fall down from the top of the screen. It's used in
@@ -2748,7 +2704,7 @@ FallingObjects_UpdateOAMEntry:
 	ld hl, wShadowOAM
 	add hl, de
 ;;;;;;;;;; shinpokerednote: gbcnote: oam updates from pokemon yellow
-	ld a, $1
+	ld a, 1
 	ld [wdef5], a
 ;;;;;;;;;;
 	ld a, [hl]
@@ -3067,16 +3023,13 @@ PlayApplyingAttackSound:
 	ret z
 	cp 10
 	ld a, $20
-	ld b, $30
-	ld c, SFX_DAMAGE
+	lb bc, $30, SFX_DAMAGE
 	jr z, .playSound
 	ld a, $e0
-	ld b, $ff
-	ld c, SFX_SUPER_EFFECTIVE
+	lb bc, $ff, SFX_SUPER_EFFECTIVE
 	jr nc, .playSound
 	ld a, $50
-	ld b, $1
-	ld c, SFX_NOT_VERY_EFFECTIVE
+	lb bc, 1, SFX_NOT_VERY_EFFECTIVE
 .playSound
 	ld [wFrequencyModifier], a
 	ld a, b

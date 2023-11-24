@@ -381,10 +381,10 @@ ChampArenaAssistantText:
 	CheckEvent EVENT_ARENA_ALL_CHALLENGERS_DEFEATED
 	jr z, .noChoiceOfChallenger
 	call ShowChampArenaTrainerSelectMenu
-	ld a, 0
-	ld [wCurrentMenuItem], a
-	jr z, .noChoiceOfChallenger
 	ld a, 1
+	jr nz, .loadCurrentMenuItem
+	xor a
+.loadCurrentMenuItem
 	ld [wCurrentMenuItem], a
 .noChoiceOfChallenger
 	ld a, [wCurrentMenuItem]
@@ -504,10 +504,10 @@ ChampArenaContinueText:
 	CheckEvent EVENT_ARENA_ALL_CHALLENGERS_DEFEATED
 	jr z, .notAllDefeated
 	call ShowChampArenaTrainerSelectMenu
-	ld a, 0
-	ld [wCurrentMenuItem], a
-	jr z, .notAllDefeated
 	ld a, 1
+	jr nz, .loadCurrentMenuItem
+	xor a
+.loadCurrentMenuItem
 	ld [wCurrentMenuItem], a
 .notAllDefeated
 	ld a, [wCurrentMenuItem]
@@ -542,13 +542,13 @@ ChampArenaContinueText:
 ReloadChallengerSprite:
 	ld a, [wChampArenaChallenger]
 	ld hl, wSpriteOptions2
-	sla a ; 2 data entries per sprite (OG+ sprite and OG sprite)
+	add a ; 2 data entries per sprite (OG+ sprite and OG sprite)
 	bit BIT_MENU_ICON_SPRITES, [hl]
 	jr nz, .noIncrement
 	inc a ; use the original sprite if menu icon sprites turned off
 .noIncrement
-	sla a ; multiply by 2
-	sla a ; multiply by 2 again (4 bytes per sprite data entry)
+	add a ; multiply by 2
+	add a ; multiply by 2 again (4 bytes per sprite data entry)
 	ld hl, OpponentSpriteArray
 	ld b, 0
 	ld c, a
@@ -562,12 +562,13 @@ ReloadChallengerSprite:
 	dec hl
 	dec hl
 .useSprite
-	ld e, [hl]
-	inc hl
-	ld d, [hl] ; address of sprite that will replace's data
-	inc hl
-	ld b, [hl] ; bank of sprite that will replace
-	inc hl ; hl now pointing to the sprite ID that we will use later
+	ld a, [hli]
+	ld e, a
+	ld a, [hli] ; address of sprite that will replace's data
+	ld d, a
+	ld a, [hli]
+	ld b, a ; bank of sprite that will replace
+	; hl now pointing to the sprite ID that we will use later
 	ld c, 12 ; number of tiles to replace
 	push hl
 	push de
@@ -672,15 +673,13 @@ ChampArenaStartBattleText:
 	ld c, 30
 	rst _DelayFrames ; delay frames so it's a bit easier to tell what is going on
 	CheckEvent EVENT_MET_DAD
-	ld b, HEART_BUBBLE
-	ld c, CHAMP_ARENA_VARIABLE_CROWD1
+	lb bc, HEART_BUBBLE, CHAMP_ARENA_VARIABLE_CROWD1
 	ld hl, .momCheersOn
 	jr z, .momOrDadCheers
 	call Random
 	bit 0, a ; 50% chance of dad cheering instead of mom if you met him in bills garden
 	jr z, .momOrDadCheers
-	ld b, SMILE_BUBBLE
-	ld c, CHAMP_ARENA_VARIABLE_CROWD2
+	lb bc, SMILE_BUBBLE, CHAMP_ARENA_VARIABLE_CROWD2
 	ld hl, .dadCheersOn
 .momOrDadCheers
   	push hl
@@ -712,10 +711,7 @@ ChampArenaStartBattleText:
 	call DisplayMultiChoiceTextBox
 	ld a, [wCurrentMenuItem]
 	and a
-	jr z, .skipMusicCheck
-	; set new music entry
-	call ChampArenaGetChosenMusic
-.skipMusicCheck
+	call nz, ChampArenaGetChosenMusic ; set new music entry
 	call LoadScreenTilesFromBuffer2
 .letBattleCommence
 	ld hl, .battleCommence
@@ -1228,16 +1224,14 @@ BlueIntroText:
 	ld hl, .intro2
 	rst _PrintText
 	; TODO: how do you respond?
-	ld a, [wPlayerStarter]
-	ld b, 4
-	cp STARTER1
+	ld a, [wRivalStarter]
+	call StarterToPartyID
+	add 3 ; second set of parties
+	CheckEventHL EVENT_ARENA_ALL_CHALLENGERS_DEFEATED
 	jr z, .foundParty
-	inc b
-	cp STARTER2
-	jr z, .foundParty
-	inc b
+	add 3 ; third set of parties
 .foundParty
-	call GetChampArenaChallengerPartyID
+	ld b, a
 	ld a, OPP_RIVAL3
 	ld hl, .challengerLost
 	ld de, .challengerWon
@@ -1397,8 +1391,8 @@ CountSetExactNumberBits::
 	ld e, a
 	ld d, 8
 .innerLoop ; count how many bits are set in the current byte
+	xor a
 	srl e
-	ld a, 0
 	adc c
 	ld c, a
 	dec b
@@ -1816,14 +1810,11 @@ ReloadVariableCrowd:
 .reroll
 	call Random
 	and %111
-	and a
 	call z, .giovanni ; 1/8 chance of giovanni
 	jr z, .loadCrowd3
 	cp 5
 	call c, .daisy ; 4/8 chance of daisy
-	jr c, .loadCrowd3
-	; 3/8 chance of blue
-	call .blue
+	call nc, .blue ; 3/8 chance of blue
 .loadCrowd3
 	ld [wSprite10StateData1PictureID], a
 	ld [wMapSpriteOriginalPictureIDs+9], a
@@ -1987,7 +1978,6 @@ ShowChampArenaTrainerSelectMenu:
 	; a = which trainer was selected
 	ld [wChampArenaChallenger], a
 	ld b, 0
-	jr .done
 .done
 	push bc
 	call LoadScreenTilesFromBuffer2
@@ -2048,7 +2038,6 @@ ShowChampArenaMusicSelectMenu:
 	; a = which music was selected
 	ld [wSpecialBattleMusicID], a
 	ld b, 0
-	jr .done
 .done
 	push bc
 	call LoadScreenTilesFromBuffer2
@@ -2129,8 +2118,8 @@ PlayChampCrowdSFXChannel5:
 ; input hl = crowd SFX's 
 PlayChampCrowdSFX:
 	; remap channel to play the actual desired sound
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	ret
 

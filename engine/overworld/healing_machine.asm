@@ -38,11 +38,9 @@ AnimateHealingMachine:
 	rst _PlaySound
 	ld a, [wUnusedC000]
 	and a
-	jr nz, .shortDelay ; NEW: if you're holding b when you start talking to the nurse, it'll do healing faster
-	ld c, 30
-	jr .doDelay
-.shortDelay
 	ld c, 5
+	jr nz, .doDelay ; NEW: if you're holding b when you start talking to the nurse, it'll do healing faster
+	ld c, 30
 .doDelay	
 	rst _DelayFrames
 	dec b

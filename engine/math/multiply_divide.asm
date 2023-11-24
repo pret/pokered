@@ -36,16 +36,16 @@ _Multiply::
 	dec b
 	jr z, .done
 	ldh a, [hMultiplicand+2]
-	sla a
+	add a
 	ldh [hMultiplicand+2], a
 	ldh a, [hMultiplicand+1]
-	rl a
+	rla
 	ldh [hMultiplicand+1], a
 	ldh a, [hMultiplicand]
-	rl a
+	rla
 	ldh [hMultiplicand], a
 	ldh a, [hProduct]
-	rl a
+	rla
 	ldh [hProduct], a
 	jr .loop
 .done
@@ -91,16 +91,16 @@ _Divide::
 	cp $1
 	jr z, .done
 	ldh a, [hDivideBuffer+4]
-	sla a
+	add a
 	ldh [hDivideBuffer+4], a
 	ldh a, [hDivideBuffer+3]
-	rl a
+	rla
 	ldh [hDivideBuffer+3], a
 	ldh a, [hDivideBuffer+2]
-	rl a
+	rla
 	ldh [hDivideBuffer+2], a
 	ldh a, [hDivideBuffer+1]
-	rl a
+	rla
 	ldh [hDivideBuffer+1], a
 	dec e
 	jr nz, .next2
@@ -126,7 +126,7 @@ _Divide::
 	srl a
 	ldh [hDivisor], a ; (aliases: hDivisor, hMultiplier, hPowerOf10)
 	ldh a, [hDivideBuffer]
-	rr a
+	rra
 	ldh [hDivideBuffer], a
 	jr .loop
 .done

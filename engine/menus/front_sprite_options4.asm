@@ -51,8 +51,7 @@ FrontSpriteOptions4Text:
 
 DrawFrontSpriteOptions4Menu:
 	hlcoord 0, 0
-	ld b, 15
-	ld c, 18
+	lb bc, 15, 18
 	call TextBoxBorder
 	ld a, SPRITE_OPTIONS_PAGE_NUMBER
 	call DrawChildMenuDigit

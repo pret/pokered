@@ -10,8 +10,7 @@ CableClub_DoBattleOrTrade:
 	call LoadHpBarAndStatusTilePatterns
 	call LoadTrainerInfoTextBoxTiles
 	hlcoord 3, 8
-	ld b, 2
-	ld c, 12
+	lb bc, 2, 12
 	call CableClub_TextBoxBorder
 	hlcoord 4, 10
 	ld de, PleaseWaitString
@@ -220,8 +219,7 @@ CableClub_DoBattleOrTradeAgain:
 	dec a
 	ld c, a
 	add hl, bc
-	ld a, SERIAL_NO_DATA_BYTE
-	ld [hl], a
+	ld [hl], SERIAL_NO_DATA_BYTE
 	pop bc
 	pop hl
 	jr .unpatchPartyMonsLoop
@@ -249,8 +247,7 @@ CableClub_DoBattleOrTradeAgain:
 	dec a
 	ld c, a
 	add hl, bc
-	ld a, SERIAL_NO_DATA_BYTE
-	ld [hl], a
+	ld [hl], SERIAL_NO_DATA_BYTE
 	pop bc
 	pop hl
 	jr .unpatchEnemyMonsLoop
@@ -258,9 +255,9 @@ CableClub_DoBattleOrTradeAgain:
 	ld hl, wEnemyMons + (SERIAL_PREAMBLE_BYTE - 1)
 	dec c
 	jr nz, .unpatchEnemyMonsLoop
-	ld a, LOW(wEnemyMonOT)
+	;ld a, LOW(wEnemyMonOT)
 	;ld [wPPTrackingPointer], a
-	ld a, HIGH(wEnemyMonOT)
+	;ld a, HIGH(wEnemyMonOT)
 	;ld [wPPTrackingPointer + 1], a
 	xor a
 	ld [wTradeCenterPointerTableIndex], a
@@ -377,10 +374,7 @@ TradeCenter_SelectMon:
 ; if Left pressed, switch back to the player mon menu
 	xor a ; player mon menu
 	ld [wWhichTradeMonSelectionMenu], a
-	ld a, [wMenuCursorLocation]
-	ld l, a
-	ld a, [wMenuCursorLocation + 1]
-	ld h, a
+	hl_deref wMenuCursorLocation
 	ld a, [wTileBehindCursor]
 	ld [hl], a
 	ld a, [wCurrentMenuItem]
@@ -417,8 +411,7 @@ TradeCenter_SelectMon:
 	ld hl, hUILayoutFlags
 	res 1, [hl]
 	and a ; was anything pressed?
-	jr nz, .playerMonMenu_SomethingPressed
-	jp .getNewInput
+	jp z, .getNewInput
 .playerMonMenu_SomethingPressed
 	bit BIT_A_BUTTON, a
 	jr z, .playerMonMenu_ANotPressed
@@ -435,10 +428,7 @@ TradeCenter_SelectMon:
 ; if Right pressed, switch to the enemy mon menu
 	ld a, $1 ; enemy mon menu
 	ld [wWhichTradeMonSelectionMenu], a
-	ld a, [wMenuCursorLocation]
-	ld l, a
-	ld a, [wMenuCursorLocation + 1]
-	ld h, a
+	hl_deref wMenuCursorLocation
 	ld a, [wTileBehindCursor]
 	ld [hl], a
 	ld a, [wCurrentMenuItem]
@@ -453,8 +443,7 @@ TradeCenter_SelectMon:
 	jp .enemyMonMenu
 .playerMonMenu_RightNotPressed
 	bit BIT_D_DOWN, a
-	jr z, .getNewInput
-	jp .selectedCancelMenuItem ; jump if Down pressed
+	jp nz, .selectedCancelMenuItem ; jump if Down pressed
 .getNewInput
 	ld a, [wWhichTradeMonSelectionMenu]
 	and a
@@ -473,8 +462,7 @@ TradeCenter_SelectMon:
 .displayStatsTradeMenu
 	push af
 	hlcoord 0, 14
-	ld b, 2
-	ld c, 18
+	lb bc, 2, 18
 	call CableClub_TextBoxBorder
 	hlcoord 2, 16
 	ld de, .statsTrade
@@ -548,12 +536,8 @@ TradeCenter_SelectMon:
 	ld a, [wMaxMenuItem]
 	cp b
 	jp nz, .getNewInput
-	ld a, [wMenuCursorLocation]
-	ld l, a
-	ld a, [wMenuCursorLocation + 1]
-	ld h, a
-	ld a, " "
-	ld [hl], a
+	hl_deref wMenuCursorLocation
+	ld [hl], " "
 .cancelMenuItem_Loop
 	ld a, "▶" ; filled arrow cursor
 	ldcoord_a 1, 16
@@ -600,8 +584,7 @@ ReturnToCableClubRoom:
 	pop hl
 	pop af
 	ld [hl], a
-	call GBFadeInFromWhite
-	ret
+	jp GBFadeInFromWhite
 
 TradeCenter_DrawCancelBox:
 	hlcoord 11, 15
@@ -609,8 +592,7 @@ TradeCenter_DrawCancelBox:
 	ld bc, 2 * SCREEN_WIDTH + 9
 	call FillMemory
 	hlcoord 0, 15
-	ld b, 1
-	ld c, 9
+	lb bc, 1, 9
 	call CableClub_TextBoxBorder
 	hlcoord 2, 16
 	ld de, CancelTextString
@@ -641,12 +623,10 @@ TradeCenter_DisplayStats:
 
 TradeCenter_DrawPartyLists:
 	hlcoord 0, 0
-	ld b, 6
-	ld c, 18
+	lb bc, 6, 18
 	call CableClub_TextBoxBorder
 	hlcoord 0, 8
-	ld b, 6
-	ld c, 18
+	lb bc, 6, 18
 	call CableClub_TextBoxBorder
 	hlcoord 5, 0
 	ld de, wPlayerName
@@ -695,8 +675,7 @@ TradeCenter_Trade:
 	ld [wMenuWatchMovingOutOfBounds], a
 	ld [wMenuJoypadPollCount], a
 	hlcoord 0, 12
-	ld b, 4
-	ld c, 18
+	lb bc, 4, 18
 	call CableClub_TextBoxBorder
 	ld a, [wTradingWhichPlayerMon]
 	ld hl, wPartySpecies
@@ -737,8 +716,7 @@ TradeCenter_Trade:
 	ld a, $1
 	ld [wSerialExchangeNybbleSendData], a
 	hlcoord 0, 12
-	ld b, 4
-	ld c, 18
+	lb bc, 4, 18
 	call CableClub_TextBoxBorder
 	hlcoord 1, 14
 	ld de, TradeCanceled
@@ -754,8 +732,7 @@ TradeCenter_Trade:
 	jr nz, .doTrade
 ; if the other person cancelled
 	hlcoord 0, 12
-	ld b, 4
-	ld c, 18
+	lb bc, 4, 18
 	call CableClub_TextBoxBorder
 	hlcoord 1, 14
 	ld de, TradeCanceled
@@ -880,8 +857,7 @@ TradeCenter_Trade:
 	ld c, 40
 	rst _DelayFrames
 	hlcoord 0, 12
-	ld b, 4
-	ld c, 18
+	lb bc, 4, 18
 	call CableClub_TextBoxBorder
 	hlcoord 1, 14
 	ld de, TradeCompleted

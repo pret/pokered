@@ -16,7 +16,7 @@ PalletTown_ScriptPointers:
 	dw_const PalletTownOakNotSafeComeWithMeScript, SCRIPT_PALLETTOWN_OAK_NOT_SAFE_COME_WITH_ME
 	dw_const PalletTownPlayerFollowsOakScript,     SCRIPT_PALLETTOWN_PLAYER_FOLLOWS_OAK
 	dw_const PalletTownDaisyScript,                SCRIPT_PALLETTOWN_DAISY
-	dw_const PalletTownNoopScript,                 SCRIPT_PALLETTOWN_NOOP
+	dw_const DoRet,                                SCRIPT_PALLETTOWN_NOOP
 
 PalletTownDefaultScript:
 	CheckEvent EVENT_FOLLOWED_OAK_INTO_LAB
@@ -146,7 +146,6 @@ PalletTownDaisyScript:
 	CheckEvent EVENT_GOT_POKEBALLS_FROM_OAK
 	ret z
 	SetEvent EVENT_PALLET_AFTER_GETTING_POKEBALLS_2
-PalletTownNoopScript:
 	ret
 
 PalletTown_TextPointers:

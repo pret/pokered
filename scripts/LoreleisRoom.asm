@@ -17,11 +17,9 @@ LoreleiShowOrHideExitBlock:
 	ld hl, wBeatLorelei
 	set 1, [hl]
 	CheckEvent EVENT_BEAT_LORELEIS_ROOM_TRAINER_0
-	jr z, .blockExitToNextRoom
-	ld a, $5
-	jr .setExitBlock
-.blockExitToNextRoom
 	ld a, $24
+	jr z, .setExitBlock
+	ld a, $5
 .setExitBlock
 	ld [wNewTileBlockID], a
 	lb bc, 0, 2
@@ -32,21 +30,13 @@ LoreleiShowOrHideExitBlock:
 	ret z
 	jp GBFadeInFromWhite ; PureRGBnote: ADDED: since trainer instantly talks to us after battle we need to fade back in here
 
-ResetLoreleiScript:
-	xor a ; SCRIPT_LORELEISROOM_DEFAULT
-	ld [wLoreleisRoomCurScript], a
-	ret
-
 LoreleisRoom_ScriptPointers:
 	def_script_pointers
 	dw_const LoreleisRoomDefaultScript,             SCRIPT_LORELEISROOM_DEFAULT
 	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_LORELEISROOM_LORELEI_START_BATTLE
 	dw_const LoreleisRoomLoreleiEndBattleScript,    SCRIPT_LORELEISROOM_LORELEI_END_BATTLE
 	dw_const LoreleisRoomPlayerIsMovingScript,      SCRIPT_LORELEISROOM_PLAYER_IS_MOVING
-	dw_const LoreleisRoomNoopScript,                SCRIPT_LORELEISROOM_NOOP
-
-LoreleisRoomNoopScript:
-	ret
+	dw_const DoRet,                                 SCRIPT_LORELEISROOM_NOOP
 
 LoreleiScriptWalkIntoRoom:
 ; Walk six steps upward.
@@ -116,7 +106,7 @@ LoreleisRoomLoreleiEndBattleScript:
 	call EndTrainerBattle
 	ld a, [wIsInBattle]
 	cp $ff
-	jp z, ResetLoreleiScript
+	jr z, ResetLoreleiScript
 	ld a, TEXT_LORELEISROOM_LORELEI
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
@@ -125,6 +115,10 @@ LoreleisRoomLoreleiEndBattleScript:
 	rst _PlaySound
 	ret
 ;;;;;;;;;;
+ResetLoreleiScript:
+	xor a ; SCRIPT_LORELEISROOM_DEFAULT
+	ld [wLoreleisRoomCurScript], a
+	ret
 
 LoreleisRoom_TextPointers:
 	def_text_pointers

@@ -22,10 +22,7 @@ Predef::
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 
-	ld de, .done
-	push de
-	jp hl
-.done
+	call hl_caller
 
 	pop af
 	ldh [hLoadedROMBank], a
@@ -35,16 +32,7 @@ Predef::
 GetPredefRegisters::
 ; Restore the contents of register pairs
 ; when GetPredefPointer was called.
-	ld a, [wPredefHL]
-	ld h, a
-	ld a, [wPredefHL + 1]
-	ld l, a
-	ld a, [wPredefDE]
-	ld d, a
-	ld a, [wPredefDE + 1]
-	ld e, a
-	ld a, [wPredefBC]
-	ld b, a
-	ld a, [wPredefBC + 1]
-	ld c, a
+	de_deref_reverse wPredefDE
+	bc_deref_reverse wPredefBC
+	hl_deref_reverse wPredefHL
 	ret

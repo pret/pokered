@@ -42,7 +42,7 @@ _SSAnne1FRoomsYoungsterBattleText::
 	done
 
 _SSAnne1FRoomsYoungsterEndBattleText::
-	text "Wow! "
+	text "Wow!"
 	line "You're great!"
 	prompt
 

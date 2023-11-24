@@ -18,10 +18,10 @@ HiddenItemNear:
 	inc b
 	and a
 	inc hl
-	ld d, [hl]
-	inc hl
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	ld e, a
 	jr nz, .loop ; if the item has already been obtained
 ; check if the item is within 4-5 tiles (depending on the direction of item)
 	ld a, [wYCoord]

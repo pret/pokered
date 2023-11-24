@@ -273,8 +273,8 @@ ToText:
 
 BuildFlyLocationsList:
 	ld hl, wFlyAnimUsingCoordList
-	ld [hl], $ff
-	inc hl
+	ld a, $ff
+	ld [hli], a
 	ld a, [wTownVisitedFlag]
 	ld e, a
 	ld a, [wTownVisitedFlag + 1]
@@ -287,8 +287,7 @@ BuildFlyLocationsList:
 	jr nc, .notVisited
 	ld a, b ; store the map number of the town if it has been visited
 .notVisited
-	ld [hl], a
-	inc hl
+	ld [hli], a
 	inc b
 	dec c
 	jr nz, .loop
@@ -304,8 +303,7 @@ LoadTownMap:
 	call ClearScreen
 	call UpdateSprites
 	hlcoord 0, 0
-	ld b, $12
-	ld c, $12
+	lb bc, $12, $12
 	call TextBoxBorder
 	call DisableLCD
 	ld hl, WorldMapTileGraphics

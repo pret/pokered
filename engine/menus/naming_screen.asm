@@ -5,8 +5,7 @@ AskName:
 	ld a, [wIsInBattle]
 	dec a
 	hlcoord 0, 0
-	ld b, 4
-	ld c, 11
+	lb bc, 4, 11
 	call z, ClearScreenArea ; only if in wild battle
 	ld a, [wcf91]
 	ld [wd11e], a
@@ -32,8 +31,7 @@ AskName:
 	call DisplayNamingScreen
 	ld a, [wIsInBattle]
 	and a
-	jr nz, .inBattle
-	call ReloadMapSpriteTilePatterns
+	call z, ReloadMapSpriteTilePatterns
 .inBattle
 	call LoadScreenTilesFromBuffer1
 	pop hl
@@ -95,8 +93,7 @@ DisplayNamingScreen:
 	call LoadEDTile
 	farcall LoadMonPartySpriteGfx
 	hlcoord 0, 4
-	ld b, 9
-	ld c, 18
+	lb bc, 9, 18
 	call TextBoxBorder
 	call PrintNamingText
 	ld a, 3
@@ -138,7 +135,7 @@ DisplayNamingScreen:
 	jr z, .inputLoop
 	ld hl, .namingScreenButtonFunctions
 .checkForPressedButton
-	sla a
+	add a
 	jr c, .foundPressedButton
 	inc hl
 	inc hl
@@ -379,11 +376,9 @@ PrintNicknameAndUnderscores:
 	hlcoord 10, 3
 	ld a, [wNamingScreenType]
 	cp NAME_MON_SCREEN
-	jr nc, .pokemon1
-	ld b, 7 ; player or rival max name length
-	jr .playerOrRival1
-.pokemon1
 	ld b, 10 ; pokemon max name length
+	jr nc, .playerOrRival1
+	ld b, 7 ; player or rival max name length
 .playerOrRival1
 	ld a, $76 ; underscore tile id
 .placeUnderscoreLoop
@@ -468,7 +463,7 @@ PrintNamingText:
 	call PlaceString
 	ld hl, $1
 	add hl, bc
-	ld [hl], "の" ; leftover from Japanese version; blank tile $c9 in English
+	ld [hl], "の" ; leftover from Japanese version; blank tile $c9 in English ; TODO: remove?
 	hlcoord 1, 3
 	ld de, NicknameTextString
 	jr .placeString

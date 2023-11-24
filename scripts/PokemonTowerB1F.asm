@@ -223,12 +223,11 @@ DrawHaunterFace:
 	dec b
 	jr nz, .loop
 	pop hl
-	ld d, 0
-	ld e, SCREEN_WIDTH
+	lb de, 0, SCREEN_WIDTH
 	add hl, de
 	dec c
 	jr nz, .loop2
-	ld a, $00
+	xor a
 	ld [wFrequencyModifier], a
 	ld a, $C0
 	ld [wTempoModifier], a
@@ -314,5 +313,4 @@ DrawHaunterFaces:
 	rst _PlaySound
 	call GBFadeInFromBlack
 	call GBFadeOutToBlack
-	call GBFadeInFromBlack
-	ret
+	jp GBFadeInFromBlack

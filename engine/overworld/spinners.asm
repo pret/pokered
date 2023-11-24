@@ -107,8 +107,7 @@ CopySpinnerTiles:
 	ld l, a
 	ld sp, hl
 	
-	ei	;re-enable vblank functions
-	ret
+	reti	;re-enable vblank functions
 
 INCLUDE "data/tilesets/spinner_tiles.asm"
 

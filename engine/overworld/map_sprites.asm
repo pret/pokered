@@ -33,8 +33,7 @@ InitMapSprites::
 LoadMapSpriteTilePatterns:
 	ld a, [wNumSprites]
 	and a ; are there any sprites?
-	jr nz, .spritesExist
-	ret
+	ret z
 .spritesExist
 	ld c, a ; c = [wNumSprites]
 	ld b, NUM_SPRITESTATEDATA_STRUCTS
@@ -278,10 +277,10 @@ InitOutsideMapSprites:
 	ld [wSpriteSetID], a
 	dec a
 	ld b, a
-	sla a
+	add a
 	ld c, a
-	sla a
-	sla a
+	add a
+	add a
 	add c
 	add b ; a = (spriteSetID - 1) * SPRITE_SET_LENGTH
 	ld de, SpriteSets
@@ -292,8 +291,7 @@ InitOutsideMapSprites:
 	inc d
 .noCarry2
 	ld hl, wSpritePlayerStateData2PictureID
-	ld a, SPRITE_RED
-	ld [hl], a
+	ld [hl], SPRITE_RED
 	ld bc, wSpriteSet
 ; Load the sprite set into RAM.
 ; This loop also fills [x#SPRITESTATEDATA2_PICTUREID] where X is from $0 to $A
@@ -389,8 +387,8 @@ GetSplitMapSpriteSetID:
 	ld hl, SplitMapSpriteSets
 	and $0f
 	dec a
-	sla a
-	sla a
+	add a
+	add a
 	add l
 	ld l, a
 	jr nc, .noCarry

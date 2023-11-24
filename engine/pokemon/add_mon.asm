@@ -14,7 +14,6 @@ _AddPartyMon::
 	cp PARTY_LENGTH + 1
 	ret nc ; return if the party is already full
 	ld [de], a
-	ld a, [de]
 	ldh [hNewPartyLength], a
 	add e
 	ld e, a
@@ -113,7 +112,7 @@ ENDC
 	ld b, FLAG_TEST
 	ld hl, wPokedexOwned
 	call FlagAction
-	ld a, c ; whether the mon was already flagged as owned
+	;ld a, c ; whether the mon was already flagged as owned
 	;ld [wUnusedD153], a ; not read
 	ld a, [wd11e]
 	dec a

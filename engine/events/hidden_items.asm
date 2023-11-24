@@ -42,8 +42,7 @@ HiddenItemsInit:
 	ld a, [wHiddenObjectFunctionArgument] ; item ID
 	ld [wd11e], a
 	call GetItemName
-	xor a
-	and a ; clear z flag
+	xor a ; clear z flag and set a = 0
 	ret
 
 HiddenItemsFinish:

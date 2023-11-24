@@ -178,7 +178,7 @@ AddBCD::
 	dec hl
 	dec c
 	jr nz, .add
-	jr nc, .done
+	ret nc
 	ld a, $99
 	inc de
 .fill
@@ -186,7 +186,6 @@ AddBCD::
 	inc de
 	dec b
 	jr nz, .fill
-.done
 	ret
 
 
@@ -205,8 +204,8 @@ SubBCD::
 	dec hl
 	dec c
 	jr nz, .sub
-	jr nc, .done
-	ld a, $00
+	ret nc
+	xor a
 	inc de
 .fill
 	ld [de], a
@@ -214,5 +213,4 @@ SubBCD::
 	dec b
 	jr nz, .fill
 	scf
-.done
 	ret

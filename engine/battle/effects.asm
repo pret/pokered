@@ -475,8 +475,7 @@ StatModifierUpEffect:
 	pop af
 	call MapSideEffectToStatMod
 	cp $ff
-	jr z, .loadDefault
-	jr .continue 
+	jr nz, .continue
 .loadDefault
 	ld a, [de]
 .continue
@@ -820,7 +819,7 @@ StatModifierDownEffect:
 .noCarry
 	pop bc
 	ld a, [hld]
-	sub $1 ; can't lower stat below 1 (-6)
+	dec a ; can't lower stat below 1 (-6)
 	jr nz, .recalculateStat
 	ld a, [hl]
 	and a
@@ -876,8 +875,7 @@ UpdateLoweredStatDone:
 	pop de
 	ld a, [de]
 	cp $44
-	jr nc, .ApplyBadgeBoostsAndStatusPenalties
-	call PlayCurrentMoveAnimation2
+	call c, PlayCurrentMoveAnimation2
 .ApplyBadgeBoostsAndStatusPenalties
 	ldh a, [hWhoseTurn]
 	and a
@@ -1081,8 +1079,7 @@ TwoToFiveAttacksEffect:
 	ld [hl], a ; set Twineedle's effect to poison effect
 	jr .saveNumberOfHits
 .bonemerang
-	ld a, SPEED_DOWN_SIDE_EFFECT 
-	ld [hl], a ; make bonemerang a 30% chance of speed down move
+	ld [hl], SPEED_DOWN_SIDE_EFFECT ; make bonemerang a 30% chance of speed down move
 	ld a, 2
 	jr .saveNumberOfHits
 
@@ -1107,8 +1104,7 @@ FlinchSideEffect:
 	cp b
 	ret nc
 	set FLINCHED, [hl] ; set mon's status to flinching
-	call ClearHyperBeam
-	ret
+	jp ClearHyperBeam
 
 OneHitKOEffect:
 	jpfar OneHitKOEffect_
@@ -1146,41 +1142,40 @@ ChargeMoveEffectText:
 	text_far _ChargeMoveEffectText
 	text_asm
 	ld a, [wChargeMoveNum]
-	cp RAZOR_WIND
-	ld hl, MadeWhirlwindText
-	jr z, .gotText
-	cp SOLARBEAM
-	ld hl, TookInSunlightText
-	jr z, .gotText
-	cp SKULL_BASH
-	ld hl, LoweredItsHeadText
-	jr z, .gotText
-	cp SKY_ATTACK
-	ld hl, SkyAttackGlowingText
-	jr z, .gotText
+	;cp RAZOR_WIND
+	;ld hl, MadeWhirlwindText
+	;ret z
+	;cp SOLARBEAM
+	;ld hl, TookInSunlightText
+	;ret z
+	;cp SKULL_BASH
+	;ld hl, LoweredItsHeadText
+	;ret z
+	;cp SKY_ATTACK
+	;ld hl, SkyAttackGlowingText
+	;ret z
 	cp FLY
 	ld hl, FlewUpHighText
-	jr z, .gotText
+	ret z
 	cp DIG
 	ld hl, DugAHoleText
-.gotText
 	ret
 
-MadeWhirlwindText:
-	text_far _MadeWhirlwindText
-	text_end
+;MadeWhirlwindText:
+;	text_far _MadeWhirlwindText
+;	text_end
 
-TookInSunlightText:
-	text_far _TookInSunlightText
-	text_end
+;TookInSunlightText:
+;	text_far _TookInSunlightText
+;	text_end
 
-LoweredItsHeadText:
-	text_far _LoweredItsHeadText
-	text_end
+;LoweredItsHeadText:
+;	text_far _LoweredItsHeadText
+;	text_end
 
-SkyAttackGlowingText:
-	text_far _SkyAttackGlowingText
-	text_end
+;SkyAttackGlowingText:
+;	text_far _SkyAttackGlowingText
+;	text_end
 
 FlewUpHighText:
 	text_far _FlewUpHighText
@@ -1291,8 +1286,7 @@ ConfusionSideEffectSuccess:
 	cp CONFUSION_BIG_SIDE_EFFECT
 	jr z, .done
 	cp CONFUSION_SIDE_EFFECT
-	jr z, .done
-	call PlayCurrentMoveAnimation2
+	call nz, PlayCurrentMoveAnimation2
 ;;;;;;;;;;
 .done
 	ld hl, BecameConfusedText
@@ -1424,7 +1418,7 @@ MimicEffect:
 	ld hl, MimicLearnedMoveText
 	rst _PrintText
 ;;;;;;;;;; PureRGBnote: CHANGED: Now immediately use the move
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	ld hl, wPlayerSelectedMove
 	ld de, wPlayerMoveNum
@@ -1435,7 +1429,7 @@ MimicEffect:
 	pop af
 	ld [hl], a
 	call ReloadMoveData
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jp z, CheckIfPlayerNeedsToChargeUp
 	jp CheckIfEnemyNeedsToChargeUp
@@ -1486,8 +1480,7 @@ DisableEffect:
 	ld [wd11e], a ; store move ID 
 	ld c, 0
 .findPreviousMoveIndex
-	ld a, [hl]
-	inc hl
+	ld a, [hli]
 	inc c ; c will be move index 1-4
 	cp b
 	jr nz, .findPreviousMoveIndex
@@ -1582,22 +1575,19 @@ HazeEffect:
 
 ; PureRGBnote: ADDED: growth raises special by 1 and heals around 1/3rd health. Does nothing at all if you're at full health.
 GrowthEffect:
-	ld b, SPECIAL_UP1_EFFECT
-	ld c, GROWTH_EFFECT
+	lb bc, SPECIAL_UP1_EFFECT, GROWTH_EFFECT
 	ldh a, [hWhoseTurn]
 	and a
 	ld hl, wBattleMonSpecial + 1
 	ld de, wPlayerMonSpecialMod
-	jr z, .doEffect
+	jr z, WithdrawGrowthEffect
 	ld hl, wEnemyMonSpecial + 1
 	ld de, wEnemyMonSpecialMod
-.doEffect 
 	jr WithdrawGrowthEffect
 
 ; PureRGBnote: ADDED: withdraw raises defense by 1 and heals around 1/3rd health. Does nothing at all if you're at full health.
 WithdrawEffect:
-	ld b, DEFENSE_UP1_EFFECT
-	ld c, WITHDRAW_EFFECT
+	lb bc, DEFENSE_UP1_EFFECT, WITHDRAW_EFFECT
 	ldh a, [hWhoseTurn]
 	and a
 	ld hl, wBattleMonDefense + 1
@@ -1825,22 +1815,18 @@ SuperFangEffect:
 	ld a, [hl]
 	ld e, a
 	; subtract bc from de
-	ld a, e
 	sub c
 	ld e, a
 	ld a, d
 	sbc b
 	ld d, a
 	; de = resultant value
-	ld a, d
 	ld hl, wDamage
 	ld [hli], a
 	ld a, e
 	ld [hl], a
-	and a
 	or d
 	ret nz
 ; make sure Super Fang's damage is always at least 1
-	ld a, 1
-	ld [hl], a
+	ld [hl], 1
 	ret

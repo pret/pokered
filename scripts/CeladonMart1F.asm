@@ -23,14 +23,8 @@ CeladonMart1FCurrentFloorSignText:
 	text_end
 
 CeladonMart1PhoneLeft:
-	text_asm
-	jp CeladonMartPhone
-
 CeladonMart1PhoneRight:
 	text_asm
-	jp CeladonMartPhone
-
-CeladonMartPhone:
 	call SaveScreenTilesToBuffer2
 	ld a, MONEY_BOX
 	ld [wTextBoxID], a
@@ -119,7 +113,6 @@ SubtractMoney:
 	; subtract money
 	xor a
 	ld [wPriceTemp], a
-	ld a, $00
 	ld [wPriceTemp + 1], a
 	ld a, $25
 	ld [wPriceTemp + 2], a

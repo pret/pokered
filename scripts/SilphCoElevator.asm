@@ -73,8 +73,7 @@ SilphCoElevatorWarpMaps:
 
 SilphCoElevatorShakeScript:
 	call Delay3
-	farcall ShakeElevator
-	ret
+	farjp ShakeElevator
 
 SilphCoElevator_TextPointers:
 	def_text_pointers

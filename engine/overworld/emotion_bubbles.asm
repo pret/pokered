@@ -25,8 +25,8 @@ EmotionBubbleCommon:
 	ld hl, EmotionBubblesPointerTable
 	add hl, bc
 	add hl, bc
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
 	ld d, [hl]
 	ld hl, vChars1 tile $78
 	ld a, [wWhichEmotionBubble]

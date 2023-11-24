@@ -194,16 +194,11 @@ SafariZoneEntranceHyperBallOwedText:
 SafariZoneGateSafariZoneWorker1Text:
 	text_asm
 	CheckEvent EVENT_OWED_HYPER_BALL
-	jr nz, .owedHyperBall1
-	jr .default1
-.owedHyperBall1
-	ld hl, SafariZoneEntranceHyperBallOwedText
-	rst _PrintText
-	jr .done1
-.default1
 	ld hl, SafariZoneEntranceText1Get
+	jr z, .done
+	ld hl, SafariZoneEntranceHyperBallOwedText
+.done
 	rst _PrintText
-.done1
 	rst TextScriptEnd
 	
 
@@ -214,9 +209,7 @@ SafariZoneGateSafariZoneWorker1WouldYouLikeToJoinTextGet:
 SafariZoneGateSafariZoneWorker1WouldYouLikeToJoinText:
 	text_asm
 	CheckEvent EVENT_OWED_HYPER_BALL
-	jr nz, .owedHyperBall4
-	jr .default4
-.owedHyperBall4
+	jr z, .default4
 	ld a, PLAYER_DIR_RIGHT
 	ld [wPlayerMovingDirection], a
 	call GiveHyperBall
@@ -233,10 +226,9 @@ SafariZoneGateSafariZoneWorker1WouldYouLikeToJoinText:
 	jp nz, .PleaseComeAgain
 	xor a
 	ldh [hMoney], a
-	ld a, $05
-	ldh [hMoney + 1], a
-	ld a, $00
 	ldh [hMoney + 2], a
+	ld a, 5
+	ldh [hMoney + 1], a
 	call HasEnoughMoney
 	jr nc, .success
 	ld hl, .NotEnoughMoneyText
@@ -246,10 +238,9 @@ SafariZoneGateSafariZoneWorker1WouldYouLikeToJoinText:
 .success
 	xor a
 	ld [wPriceTemp], a
-	ld a, $05
-	ld [wPriceTemp + 1], a
-	ld a, $00
 	ld [wPriceTemp + 2], a
+	ld a, 5
+	ld [wPriceTemp + 1], a
 	ld hl, wPriceTemp + 2
 	ld de, wPlayerMoney + 2
 	ld c, 3
@@ -499,12 +490,10 @@ GiveHyperBall:
 	ld hl, ReceivedHyperBallText
 	rst _PrintText
 	ResetEvent EVENT_OWED_HYPER_BALL
-	jr .done
+	ret
 .BagFull
 	ld hl, HyperBallNoRoomText
 	rst _PrintText
-	jr .done
-.done
 	ret
 
 ReceivedHyperBallText:

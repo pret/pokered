@@ -49,7 +49,6 @@ LoadMissableObjects:
 	ld a, h
 	sub d
 	ld h, a
-	ld a, h
 	ldh [hDividend], a
 	ld a, l
 	ldh [hDividend+1], a
@@ -190,8 +189,7 @@ ShowObject:
 
 ShowExtraObject:
 	ld hl, wExtraMissableObjectFlags
-	jr ShowObjectCommon
-
+	; fall through
 ShowObjectCommon:
 	ld a, [wMissableObjectIndex]
 	ld c, a
@@ -207,7 +205,7 @@ HideObject:
 
 HideExtraObject:
 	ld hl, wExtraMissableObjectFlags
-	jr HideObjectCommon
+	; fall through
 
 HideObjectCommon:
 	ld a, [wMissableObjectIndex]
@@ -231,9 +229,7 @@ MissableObjectFlagAction:
 
 	; byte
 	ld a, d
-	srl a
-	srl a
-	srl a
+	srl_a_3x
 	add l
 	ld l, a
 	jr nc, .ok
@@ -268,7 +264,7 @@ MissableObjectFlagAction:
 	ld a, [hl]
 	ld b, a
 	ld a, d
-	xor $ff
+	cpl
 	and b
 	ld [hl], a
 	jr .done

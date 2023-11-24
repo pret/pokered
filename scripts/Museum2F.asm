@@ -65,7 +65,6 @@ Museum2FWalletKid1:
 	text_asm
 	CheckEvent EVENT_MET_POCKET_ABRA_LADY
 	jr z, .intro
-	jr .battle
 .battle
 	CheckEvent EVENT_BEAT_WALLET_KID
 	jp nz, .giveWallet
@@ -113,13 +112,11 @@ GiveWallet:
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_GOT_LOST_WALLET
-	jr .done
+	jr ResetScripts
 .BagFull
 	ld a, 11
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	jr .done
-.done
 	jr ResetScripts
 
 Museum2FWalletKid1Intro:

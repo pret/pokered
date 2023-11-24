@@ -15,17 +15,14 @@ StartSlotMachine:
 	ld a, [wHiddenObjectIndex]
 	inc a
 	cp b
-	jr z, .match
 	ld a, 253
-	jr .next
-.match
+	jr nz, .next
 	ld a, 250
 .next
 	ld [wSlotMachineSevenAndBarModeChance], a
 	ldh a, [hLoadedROMBank]
 	ld [wSlotMachineSavedROMBank], a
-	call PromptUserToPlaySlots
-	ret
+	jp PromptUserToPlaySlots
 .printOutOfOrder
 	tx_pre_id GameCornerOutOfOrderText
 	jr .printText
@@ -38,8 +35,7 @@ StartSlotMachine:
 	push af
 	call EnableAutoTextBoxDrawing
 	pop af
-	call PrintPredefTextID
-	ret
+	jp PrintPredefTextID
 
 GameCornerOutOfOrderText::
 	text_far _GameCornerOutOfOrderText

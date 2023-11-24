@@ -110,8 +110,7 @@ SilphCo7F_UnlockedDoorEventScript:
 .unlock_door2
 	SetEventAfterBranchReuseHL EVENT_SILPH_CO_7_UNLOCKED_DOOR3, EVENT_SILPH_CO_7_UNLOCKED_DOOR1
 	callfar CheckAllCardKeyEvents
-	jp Load7FCheckCardKeyText
-
+	; fall through
 
 Load7FCheckCardKeyText:
 	CheckEvent EVENT_ALL_CARD_KEY_DOORS_OPENED
@@ -211,18 +210,8 @@ SilphCo7FRivalStartBattleScript:
 	ld a, OPP_RIVAL2
 	ld [wCurOpponent], a
 	ld a, [wRivalStarter]
-	cp STARTER2
-	jr nz, .not_starter_2
-	ld a, $7
-	jr .set_trainer_no
-.not_starter_2
-	cp STARTER3
-	jr nz, .no_starter_3
-	ld a, $8
-	jr .set_trainer_no
-.no_starter_3
-	ld a, $9
-.set_trainer_no
+	call StarterToPartyID
+	add 6 ; third set of rival parties for RIVAL2
 	ld [wTrainerNo], a
 	ld a, SCRIPT_SILPHCO7F_RIVAL_AFTER_BATTLE
 	jp SilphCo7FSetCurScript

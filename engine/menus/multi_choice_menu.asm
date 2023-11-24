@@ -14,10 +14,7 @@ DisplayMultiChoiceMenu::
 	push af
 	set 6, a ; turn off letter printing delay
 	ld [wd730], a
-	ld a, [wListPointer]
-	ld l, a
-	ld a, [wListPointer + 1]
-	ld h, a ; hl = address of the list
+	hl_deref wListPointer ; hl = address of the list
 	ld a, [hli]
 	ld e, a
 	ld a, [hli]
@@ -61,8 +58,7 @@ TwoOptionMenu::
 	ld [wTopMenuItemX], a
 
 	hlcoord 4, 7
-	ld b, 3  ; height
-	ld c, 14 ; width
+	lb bc, 3, 14  ; height, width
 	call TextBoxBorder
 
 	hlcoord 6, 8 ; where the list will be drawn at
@@ -79,8 +75,7 @@ TwoOptionSmallMenu::
 	ld [wTopMenuItemX], a
 
 	hlcoord 13, 7
-	ld b, 3  ; height
-	ld c, 5 ; width
+	lb bc, 3, 5  ; height, width
 	call TextBoxBorder
 
 	hlcoord 15, 8 ; where the list will be drawn at
@@ -97,8 +92,7 @@ ThreeOptionMenu::
 	ld [wTopMenuItemX], a
 
 	hlcoord 4, 5
-	ld b, 5  ; height
-	ld c, 13 ; width
+	lb bc, 5, 13  ; height, width
 	call TextBoxBorder
 
 	hlcoord 6, 6 ; where the list will be drawn at
@@ -111,8 +105,7 @@ InitThreeOptionMenuSmall::
 	ld [wMaxMenuItem], a
 	ld a, 12
 	ld [wTopMenuItemX], a
-	ld b, 5 ; height
-	ld c, 7 ; width
+	lb bc, 5, 7 ; height, width
 	ret
 
 ThreeOptionMenuSmall::
@@ -170,8 +163,7 @@ FiveOptionMenu::
 	ld [wTopMenuItemX], a
 
 	hlcoord 4, 1
-	ld b, 9  ; height
-	ld c, 13 ; width
+	lb bc, 9, 13  ; height, width
 	call TextBoxBorder
 	
 	hlcoord 6, 2 ; where the list will be drawn at
@@ -188,8 +180,7 @@ SixOptionMenu::
 	ld [wTopMenuItemX], a
 
 	hlcoord 4, 0
-	ld b, 11 ; height
-	ld c, 13 ; width
+	lb bc, 11, 13 ; height, width
 	call TextBoxBorder
 	
 	hlcoord 6, 1 ; where the list will be drawn at
@@ -208,8 +199,7 @@ ChampArenaMusicSelectMenu::
 	ld [wTopMenuItemX], a
 
 	hlcoord 4, 5
-	ld b, 5  ; height
-	ld c, 13 ; width
+	lb bc, 5, 13  ; height, width
 	call TextBoxBorder
 	call UpdateSprites ; disable sprites behind the text box
 	xor a
@@ -459,9 +449,7 @@ GetChampArenaMusicName:
 .loop
 	ld a, [hli]
 	cp "@"
-	jr z, .next
-	jr .loop
-.next
+	jr nz, .loop
 	dec b
 	ret z
 	jr .loop

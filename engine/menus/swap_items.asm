@@ -107,8 +107,7 @@ HandleItemListSwapping::
 ; swap enough items from the first slot to max out the second slot if they can't be combined
 	sub 99
 	ld [de], a
-	ld a, 99
-	ld [hl], a
+	ld [hl], 99
 	jr .done
 .combineItemSlots
 	ld [hl], a ; put the sum in the second item slot

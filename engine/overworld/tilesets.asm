@@ -40,11 +40,11 @@ LoadTilesetHeader:
 	ld b, a
 	ldh a, [hPreviousTileset]
 	cp b
-	jr z, .done
+	ret z
 .dungeon
 	ld a, [wDestinationWarpID]
 	cp $ff
-	jr z, .done
+	ret z
 	call LoadDestinationWarpPosition
 	ld a, [wYCoord]
 	and $1
@@ -52,7 +52,6 @@ LoadTilesetHeader:
 	ld a, [wXCoord]
 	and $1
 	ld [wXBlockCoord], a
-.done
 	ret
 
 INCLUDE "data/tilesets/dungeon_tilesets.asm"

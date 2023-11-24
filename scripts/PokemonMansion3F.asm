@@ -22,16 +22,14 @@ Mansion3CheckReplaceSwitchDoorBlocks:
 	call Mansion2ReplaceBlock
 	ld a, $5f
 	lb bc, 5, 7
-	call Mansion2ReplaceBlock
-	ret
+	jp Mansion2ReplaceBlock
 .switchTurnedOn
 	ld a, $5f
 	lb bc, 2, 7
 	call Mansion2ReplaceBlock
 	ld a, $e
 	lb bc, 5, 7
-	call Mansion2ReplaceBlock
-	ret
+	jp Mansion2ReplaceBlock
 
 PokemonMansion3F_ScriptPointers:
 	def_script_pointers

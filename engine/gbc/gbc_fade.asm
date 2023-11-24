@@ -53,22 +53,16 @@ WriteRGB:
 	ld b, a
 	;bits in b are 11100011	
 	;now load into d
+	xor d
 	and %00000011
-	ld c, a
-	;bits in c are 00000011
-	ld a, d
-	and %11111100
-	or c
+	xor d
 	ld d, a
 	;bits in b are still 11100011	
 	;now load into e
 	ld a, b
+	xor e
 	and %11100000
-	ld c, a
-	;bits in c are 11100000
-	ld a, e
-	and %00011111
-	or c
+	xor e
 	ld e, a
 ;writeBlue:
 	ldh a, [hRGB + 2]	;blue bits are 00011111
@@ -84,8 +78,7 @@ WriteRGB:
 ;This is does gamma conversions of hRGB color values via lookup list.
 GammaConv:
 	ld hl, hRGB
-	ld c, 3
-	ld b, 0
+	lb bc, 0, 3
 .loop
 	ld a, [hl]
 	push hl
@@ -166,11 +159,9 @@ MixColorMatrix:
 	swap h
 	swap l
 	ld a, l
+	xor h
 	and $0F
-	ld l, a
-	ld a, h
-	and $F0
-	or l
+	xor h
 	;store now because red isn't used after this
 	ldh [hRGB + 0], a
 	
@@ -313,8 +304,7 @@ ReadColorGBC:
 	jr nz, .waitVRAM2
 	;we are now in a viable mode
 	ld a, [hld]		
-	ei	;re-enable interrupts
-	ret
+	reti	;re-enable interrupts
 	
 ;Based on the settings used for SetGBCPalIndex, this function will write the desired color from DE
 ;Like VRAM, the color data of the GBC can only be read/written during VBLANK, HBLANK, or OAM Scan
@@ -362,8 +352,7 @@ WriteColorGBC:
 	;we are now in a viable mode
 	ld a, e
 	ld [hld], a		
-	ei	;re-enable interrupts
-	ret
+	reti	;re-enable interrupts
 	
 	
 	
@@ -382,7 +371,7 @@ DecrementAllColorsGBC:
 	ldh a, [rIE]		;manually disable interrupts and wait until the first scanline of vblank is reached
 	push af
 	xor a
-	ld [rIE], a
+	ldh [rIE], a
 .wait
 	ldh a, [rLY]		
 	cp $90
@@ -428,10 +417,8 @@ DecrementAllColorsGBC:
 	cp 64
 	jr nc, .return	;return if finished with OBP 7
 	cp 16
-	jr z, .unusedBGP	;increment past unused color locations and loop if at BGP 4
-	jr .next
-
-.unusedBGP
+	jr nz, .next
+.unusedBGP ;increment past unused color locations and loop if at BGP 4
 	add a	;add 16 to the location so we skip to color 32 which is OBP 0
 	inc a	; color 0 of OBP 0 to 7 are always transparent, so increment to color 33
 .next
@@ -500,7 +487,7 @@ IncrementAllColorsGBC:
 	ldh a, [rIE]		;manually disable interrupts and wait until the first scanline of vblank is reached
 	push af
 	xor a
-	ld [rIE], a
+	ldh [rIE], a
 
 .wait
 	ldh a, [rLY]		
@@ -547,10 +534,8 @@ IncrementAllColorsGBC:
 	cp 64
 	jr nc, .return	;return if finished with OBP 7
 	cp 16
-	jr z, .unusedBGP	;increment past unused color locations and loop if at BGP 4
-	jr .next
-
-.unusedBGP
+	jr nz, .next
+.unusedBGP ;increment past unused color locations and loop if at BGP 4
 	add a	;add 16 to the location so we skip to color 32 which is OBP 0
 	inc a	; color 0 of OBP 0 to 7 are always transparent, so increment to color 33
 .next

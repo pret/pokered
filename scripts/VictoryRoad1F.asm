@@ -50,10 +50,8 @@ BoulderOnButtonAnim:
 	inc [hl]
 	ld c, 20
 	rst _DelayFrames
-	ld e, 20
-	ld d, SFX_GO_INSIDE
-	callfar FarShakeScreen
-	ret
+	lb de, SFX_GO_INSIDE, 20
+	jpfar FarShakeScreen
 ;;;;;;;;;;
 
 

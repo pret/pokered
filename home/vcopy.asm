@@ -4,11 +4,11 @@
 GetRowColAddressBgMap::
 	xor a
 	srl h
-	rr a
+	rra
 	srl h
-	rr a
+	rra
 	srl h
-	rr a
+	rra
 	or l
 	ld l, a
 	ld a, b
@@ -102,11 +102,15 @@ RedrawRowOrColumn::
 	ld a, e
 	inc a
 ; the following 6 lines wrap us from the right edge to the left edge if necessary
+	; PureRGBnote: OPTIMIZED
+	xor e
 	and $1f
-	ld b, a
-	ld a, e
-	and $e0
-	or b
+	xor e
+	;and $1f
+	;ld b, a
+	;ld a, e
+	;and $e0
+	;or b
 	ld e, a
 	dec c
 	jr nz, .loop2
@@ -277,8 +281,11 @@ ENDR
 	inc l
 	ld [hl], d
 	inc l
-	ld [hl], d
-	inc hl
+; PureRGBnote: OPTIMIZED
+	ld a, d
+	ld [hli], a
+	;ld [hl], d
+	;inc hl
 	dec b
 	jr nz, .loop
 
@@ -346,8 +353,11 @@ ENDR
 	pop de
 	ld [hl], e
 	inc l
-	ld [hl], d
-	inc hl
+; PureRGBnote: OPTIMIZED
+	ld a, d
+	ld [hli], a
+	;ld [hl], d
+	;inc hl
 	dec b
 	jr nz, .loop
 

@@ -2,7 +2,7 @@
 TeleportHealEffect:
 	ld a, d
 	push af
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	ld de, wEnemyMonHP
 	ld hl, wEnemyMonMaxHP

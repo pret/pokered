@@ -34,8 +34,7 @@ MainMenu:
 	jr z, .noSaveFile
 ; there's a save file
 	hlcoord 0, 0
-	ld b, 6
-	ld c, 13
+	lb bc, 6, 13
 	call TextBoxBorder
 	hlcoord 2, 2
 	ld de, ContinueText
@@ -43,8 +42,7 @@ MainMenu:
 	jr .next2
 .noSaveFile
 	hlcoord 0, 0
-	ld b, 4
-	ld c, 13
+	lb bc, 4, 13
 	call TextBoxBorder
 	hlcoord 2, 2
 	ld de, NewGameText
@@ -151,8 +149,7 @@ LinkMenu:
 	ld hl, WhereWouldYouLikeText
 	rst _PrintText
 	hlcoord 5, 5
-	ld b, $6
-	ld c, $d
+	lb bc, 6, 13
 	call TextBoxBorder
 	call UpdateSprites
 	hlcoord 7, 7
@@ -231,8 +228,7 @@ LinkMenu:
 	ld a, START_TRANSFER_INTERNAL_CLOCK
 	ldh [rSC], a
 .skipStartingTransfer
-	ld b, " "
-	ld c, " "
+	lb bc, " ", " "
 	ld d, "▷"
 	ld a, [wLinkMenuSelectionSendBuffer]
 	and (B_BUTTON << 2) ; was B button pressed?
@@ -393,8 +389,7 @@ DisplayContinueGameInfo:
 	xor a
 	ldh [hAutoBGTransferEnabled], a
 	hlcoord 4, 7
-	ld b, 8
-	ld c, 14
+	lb bc, 8, 14
 	call TextBoxBorder
 	hlcoord 5, 9
 	ld de, SaveScreenInfoText
@@ -417,8 +412,7 @@ PrintSaveScreenText:
 	xor a
 	ldh [hAutoBGTransferEnabled], a
 	hlcoord 4, 0
-	ld b, $8
-	ld c, $e
+	lb bc, 8, 14
 	call TextBoxBorder
 	call LoadTextBoxTilePatterns
 	call UpdateSprites
@@ -463,8 +457,8 @@ PrintPlayTime:
 	ld de, wPlayTimeHours
 	lb bc, 1, 3
 	call PrintNumber
-	ld [hl], $6d
-	inc hl
+	ld a, $6d
+	ld [hli], a
 	ld de, wPlayTimeMinutes
 	lb bc, LEADING_ZEROES | 1, 2
 	jp PrintNumber
@@ -481,7 +475,7 @@ CheckForPlayerNameInSRAM:
 ; in carry.
 	ld a, SRAM_ENABLE
 	ld [MBC1SRamEnable], a
-	ld a, $1
+	ld a, 1
 	ld [MBC1SRamBankingMode], a
 	ld [MBC1SRamBank], a
 	call CheckSaveFileExists ; PureRGBnote: MOVED: this code was moved to home since it is used on booting the game to load options early.

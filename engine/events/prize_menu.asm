@@ -22,8 +22,7 @@ CeladonPrizeMenu::
 	ld [wTopMenuItemX], a
 	call PrintPrizePrice
 	hlcoord 0, 2
-	ld b, 8
-	ld c, 16
+	lb bc, 8, 16
 	call TextBoxBorder
 	call GetPrizeMenuId
 	call UpdateSprites
@@ -34,8 +33,7 @@ CeladonPrizeMenu::
 	jr nz, .noChoice
 	ld a, [wCurrentMenuItem]
 	cp 3 ; "NO,THANKS" choice
-	jr z, .noChoice
-	call HandlePrizeChoice
+	call nz, HandlePrizeChoice
 .noChoice
 	ld hl, wd730
 	res 6, [hl]
@@ -146,8 +144,7 @@ INCLUDE "data/events/prizes.asm"
 
 PrintPrizePrice:
 	hlcoord 11, 0
-	ld b, 1
-	ld c, 7
+	lb bc, 1, 7
 	call TextBoxBorder
 	call UpdateSprites
 	hlcoord 12, 0
@@ -159,8 +156,7 @@ PrintPrizePrice:
 	hlcoord 13, 1
 	ld de, wPlayerCoins
 	ld c, %10000010
-	call PrintBCDNumber
-	ret
+	jp PrintBCDNumber
 
 .CoinString:
 	db "COIN@"

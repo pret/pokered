@@ -67,16 +67,14 @@ CheckMonNickNameDefault::
 	jr z, .checkRename
 	cp GENGAR
 	ld a, POWERED_HAUNTER
-	jr z, .checkRename
-	ret
+	ret nz
 .checkRename
 	ld [wd11e], a
 	call GetMonName
 	ld de, wcd6d
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMonNicks
-	ld b, 0
-	ld c, NAME_LENGTH
+	lb bc, 0, NAME_LENGTH
 	call AddNTimes
 	push hl
 .loop

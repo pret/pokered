@@ -15,11 +15,9 @@ AgathaShowOrHideExitBlock:
 	res 5, [hl]
 	ret z
 	CheckEvent EVENT_BEAT_AGATHAS_ROOM_TRAINER_0
-	jr z, .blockExitToNextRoom
-	ld a, $e
-	jp .setExitBlock
-.blockExitToNextRoom
 	ld a, $3b
+	jr z, .setExitBlock
+	ld a, $e
 .setExitBlock
 	ld [wNewTileBlockID], a
 	lb bc, 0, 2
@@ -30,21 +28,13 @@ AgathaShowOrHideExitBlock:
 	ret z
 	jp GBFadeInFromWhite ; PureRGBnote: ADDED: since trainer instantly talks to us after battle we need to fade back in here
 
-ResetAgathaScript:
-	xor a ; SCRIPT_AGATHASROOM_DEFAULT
-	ld [wAgathasRoomCurScript], a
-	ret
-
 AgathasRoom_ScriptPointers:
 	def_script_pointers
 	dw_const AgathasRoomDefaultScript,              SCRIPT_AGATHASROOM_DEFAULT
 	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_AGATHASROOM_AGATHA_START_BATTLE
 	dw_const AgathasRoomAgathaEndBattleScript,      SCRIPT_AGATHASROOM_AGATHA_END_BATTLE
 	dw_const AgathasRoomPlayerIsMovingScript,       SCRIPT_AGATHASROOM_PLAYER_IS_MOVING
-	dw_const AgathasRoomNoopScript,                 SCRIPT_AGATHASROOM_NOOP
-
-AgathasRoomNoopScript:
-	ret
+	dw_const DoRet,                                 SCRIPT_AGATHASROOM_NOOP
 
 AgathaScriptWalkIntoRoom:
 ; Walk six steps upward.
@@ -114,7 +104,7 @@ AgathasRoomAgathaEndBattleScript:
 	call EndTrainerBattle
 	ld a, [wIsInBattle]
 	cp $ff
-	jp z, ResetAgathaScript
+	jr z, ResetAgathaScript
 	ld a, TEXT_AGATHASROOM_AGATHA
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
@@ -124,6 +114,11 @@ AgathasRoomAgathaEndBattleScript:
 ;;;;;;;;;;
 	ld a, SCRIPT_CHAMPIONSROOM_PLAYER_ENTERS
 	ld [wChampionsRoomCurScript], a
+	ret
+
+ResetAgathaScript:
+	xor a ; SCRIPT_AGATHASROOM_DEFAULT
+	ld [wAgathasRoomCurScript], a
 	ret
 
 AgathasRoom_TextPointers:

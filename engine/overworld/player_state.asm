@@ -101,10 +101,7 @@ IsPlayerFacingEdgeOfMap::
 	ld b, a
 	ld a, [wXCoord]
 	ld c, a
-	ld de, .return
-	push de
-	jp hl
-.return
+	call hl_caller
 	pop bc
 	pop de
 	pop hl
@@ -142,7 +139,6 @@ IsPlayerFacingEdgeOfMap::
 	dec a
 	cp c
 	jr z, .setCarry
-	jr .resetCarry
 .resetCarry
 	and a
 	ret
@@ -234,11 +230,9 @@ PrintSafariZoneSteps::
 ;;;;;;;;;; PureRGBnote: ADDED: ranger hunt text box modifications
 	ld a, [wSafariType]
 	and a
-	jr nz, .ldLargeBox ; Ranger Hunt safari needs an extra line for printing text
-	ld b, 3
-	jr .continue
-.ldLargeBox	
 	ld b, 5
+	jr nz, .continue ; Ranger Hunt safari needs an extra line for printing text
+	ld b, 3
 .continue
 ;;;;;;;;;;
 	call TextBoxBorder
@@ -262,8 +256,7 @@ PrintSafariZoneSteps::
 	cp 10
 	jr nc, .tenOrMore
 	hlcoord 5, 3
-	ld a, " "
-	ld [hl], a
+	ld [hl], " "
 .tenOrMore
 	hlcoord 6, 3
 	ld de, wNumSafariBalls
@@ -402,8 +395,7 @@ CheckForCollisionWhenPushingBoulder:
 	ld a, [wTileInFrontOfBoulderAndBoulderCollisionResult]
 	cp $15 ; stairs tile
 	ld a, $ff
-	jr z, .done ; if the tile two steps ahead is stairs
-	call CheckForBoulderCollisionWithSprites
+	call nz, CheckForBoulderCollisionWithSprites ; if the tile two steps ahead isn't stairs
 .done
 	ld [wTileInFrontOfBoulderAndBoulderCollisionResult], a
 	ret

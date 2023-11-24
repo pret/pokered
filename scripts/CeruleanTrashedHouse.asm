@@ -1,6 +1,5 @@
 CeruleanTrashedHouse_Script:
-	call EnableAutoTextBoxDrawing
-	ret
+	jp EnableAutoTextBoxDrawing
 
 CeruleanTrashedHouse_TextPointers:
 	def_text_pointers

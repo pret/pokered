@@ -1,6 +1,5 @@
 SafariZoneEastRestHouse_Script:
-	call EnableAutoTextBoxDrawing
-	ret
+	jp EnableAutoTextBoxDrawing
 
 SafariZoneEastRestHouse_TextPointers:
 	def_text_pointers

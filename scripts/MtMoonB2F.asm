@@ -137,11 +137,9 @@ MtMoonB2FSuperNerdTakesOtherFossilScript:
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	CheckEvent EVENT_GOT_DOME_FOSSIL
-	jr z, .got_dome_fossil
-	ld a, HS_MT_MOON_B2F_FOSSIL_2
-	jr .continue
-.got_dome_fossil
 	ld a, HS_MT_MOON_B2F_FOSSIL_1
+	jr z, .continue
+	ld a, HS_MT_MOON_B2F_FOSSIL_2
 .continue
 	ld [wMissableObjectIndex], a
 	predef HideObject
@@ -178,8 +176,7 @@ MtMoonB2FSuperNerdTakesOtherFossilScript:
 	jr nz, .hideObjectSeafoam
 	CheckEvent EVENT_GOT_HELIX_FOSSIL
 	ld a, HS_SEAFOAM_ISLANDS_B3F_HELIX_FOSSIL
-	jr nz, .hideObjectSeafoam
-	jr .done
+	jr z, .done
 .hideObjectSeafoam
 	ld [wMissableObjectIndex], a
 	predef HideObject
@@ -390,19 +387,16 @@ MtMoonSuperNerdTakeFossilQuestion:
 	jr nz, .no
 .yes
 	CheckEvent EVENT_GOT_DOME_FOSSIL
-	jr z, .checkHelix
 	ld b, DOME_FOSSIL
-	jr .isInBag
-.checkHelix
+	jr nz, .isInBag
 	ld b, HELIX_FOSSIL
 .isInBag
 	call IsItemInBag
-	jr z, .noFossil
-	jr .haveFossil
+	jr nz, .haveFossil
 .noFossil
 	ld hl, MtMoon3TextSuperNerdNoFossil
 	rst _PrintText
-	jr .done
+	ret
 .haveFossil
 	SetEvent EVENT_GAVE_FOSSIL_TO_SUPER_NERD
 	CheckEvent EVENT_GOT_DOME_FOSSIL
@@ -423,15 +417,14 @@ MtMoonSuperNerdTakeFossilQuestion:
 .end
 	ld hl, MtMoon3TextSuperNerdGaveFossilEnd
 	rst _PrintText
-	jr .done
+	ret
 .lookingForMoreFossils
 	ld hl, MtMoon3TextSuperNerdLookingForMoreFossils
 	rst _PrintText
-	jr .done
+	ret
 .no
 	ld hl, MtMoon3TextSuperNerdKeptFossil
 	rst _PrintText
-.done
 	ret
 	
 MtMoon3TextSuperNerdNoFossil:

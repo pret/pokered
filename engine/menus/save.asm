@@ -129,7 +129,7 @@ SAVBadCheckSum:
 	scf
 
 SAVGoodChecksum:
-	ld a, $0
+	ld a, 0
 	ld [MBC1SRamBankingMode], a
 	ld [MBC1SRamEnable], a
 	ret
@@ -497,8 +497,7 @@ EmptySRAMBoxesInBank:
 	ld bc, sBank2AllBoxesChecksum - sBox1
 	call SAVCheckSum
 	ld [sBank2AllBoxesChecksum], a ; sBank3AllBoxesChecksum
-	call CalcIndividualBoxCheckSums
-	ret
+	jp CalcIndividualBoxCheckSums
 
 EmptySRAMBox:
 	xor a
@@ -580,10 +579,7 @@ SAVCheckRandomID:
 	ld a, [wPlayerID + 1]
 	cp h
 .next
-	ld a, $00
-	ld [MBC1SRamBankingMode], a
-	ld [MBC1SRamEnable], a
-	ret
+	jp SAVGoodChecksum
 
 SaveHallOfFameTeams:
 	ld a, [wNumHoFTeams]

@@ -110,8 +110,8 @@ StatusScreen:
 	call DrawLineBox ; Draws the box around name, HP and status
 	ld de, -6
 	add hl, de
-	ld [hl], "<DOT>"
-	dec hl
+	ld a, "<DOT>"
+	ld [hld], a
 	ld [hl], "№"
 	hlcoord 19, 9
 	lb bc, 8, 6
@@ -232,11 +232,11 @@ DrawLineBox:
 	add hl, de
 	dec b
 	jr nz, .PrintVerticalLine
-	ld [hl], $77 ; ┘
-	dec hl
+	ld a, $77 ; ┘
+	ld [hld], a 
 .PrintHorizLine
-	ld [hl], $76 ; ─
-	dec hl
+	ld a, $76 ; ─
+	ld [hld], a
 	dec c
 	jr nz, .PrintHorizLine
 	ld [hl], $6f ; ← (halfarrow ending)
@@ -249,16 +249,14 @@ PrintStatsBox:
 	and a ; a is 0 from the status screen
 	jr nz, .DifferentBox
 	hlcoord 0, 8
-	ld b, 8
-	ld c, 8
+	lb bc, 8, 8
 	call TextBoxBorder ; Draws the box
 	hlcoord 1, 9 ; Start printing stats from here
 	ld bc, $19 ; Number offset
 	jr .PrintStats
 .DifferentBox
 	hlcoord 9, 2
-	ld b, 8
-	ld c, 9
+	lb bc, 8, 9
 	call TextBoxBorder
 	hlcoord 11, 3
 	ld bc, $18
@@ -313,8 +311,7 @@ StatusScreen2:
 	hlcoord 19, 3
 	ld [hl], $78
 	hlcoord 0, 8
-	ld b, 8
-	ld c, 18
+	lb bc, 8, 18
 	call TextBoxBorder ; Draw move container
 	hlcoord 2, 9
 	ld de, wMovesString
@@ -322,8 +319,7 @@ StatusScreen2:
 	ld a, [wNumMovesMinusOne]
 	inc a
 	ld c, a
-	ld a, $4
-	sub c
+	n_sub_a 4
 	ld b, a ; Number of moves ?
 	hlcoord 11, 10
 	ld de, SCREEN_WIDTH * 2
@@ -398,8 +394,8 @@ StatusScreen2:
 	ld [wLoadedMonLevel], a ; Increase temporarily if not 100
 .Level100
 	hlcoord 14, 6
-	ld [hl], "<to>"
-	inc hl
+	ld a, "<to>"
+	ld [hli], a
 	inc hl
 	call PrintLevel
 	pop af

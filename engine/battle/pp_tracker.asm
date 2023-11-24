@@ -1,10 +1,7 @@
 ;shinpokerednote: ADDED: let's get some PP tracking for enemies both trainer and wild
 ChooseMovePPTrack:
 	;retrieve hl pointer
-	ld a, [wPPTrackingPointer]
-	ld h, a
-	ld a, [wPPTrackingPointer + 1]
-	ld l, a	
+	hl_deref_reverse wPPTrackingPointer
 	ld b, e	;retrieve move number
 ;b holds the move slot (1 to 4)
 
@@ -94,7 +91,7 @@ IsTrainerBattlePPCheck:
 	ld e, NUM_MOVES
 .loop
 	rr d
-	call c, .disabled_move
+	ld [hl], $ff
 	inc hl
 	dec e
 	jr nz, .loop
@@ -153,10 +150,6 @@ IsTrainerBattlePPCheck:
 	dec bc
 	add hl, bc
 	pop bc
-	ret
-.disabled_move
-	ld a, $ff
-	ld [hl], a
 	ret
 .updateBestScore
 	ld e, a

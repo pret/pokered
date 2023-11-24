@@ -65,7 +65,7 @@ RedisplayStartMenu::
 	jr nz, .displayMenuItem
 	inc a ; adjust position to account for missing pokedex menu item
 .displayMenuItem
-	cp 0
+	and a
 	jp z, StartMenu_Pokedex
 	cp 1
 	jp z, StartMenu_Pokemon

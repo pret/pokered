@@ -229,8 +229,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld [hld], a
 	ld a, [hl]
 	adc b
-	ld [hl], a
-	dec hl
+	ld [hld], a
 	pop bc
 	rst _CopyData
 	ld a, [wd0b5]
@@ -456,8 +455,7 @@ EeveelutionForceLearnMove:
 	jr z, .forceLearnMove
 	cp VAPOREON
 	ld b, WATER_GUN
-	jr z, .forceLearnMove
-	jr .done
+	jr nz, .done
 .forceLearnMove
 	push af ; put species number on the stack
 	ld a, b

@@ -14,19 +14,16 @@ DisplayTextIDInit::
 	CheckEvent EVENT_GOT_POKEDEX
 ; start menu with pokedex
 	hlcoord 10, 0
-	ld b, $0e
-	ld c, $08
+	lb bc, 14, 8
 	jr nz, .drawTextBoxBorder
 ; start menu without pokedex
 	hlcoord 10, 0
-	ld b, $0c
-	ld c, $08
+	lb bc, 12, 8
 	jr .drawTextBoxBorder
 ; if text ID is not 0 (i.e. not the start menu) then do a standard dialogue text box
 .notStartMenu
 	hlcoord 0, 12
-	ld b, $04
-	ld c, $12
+	lb bc, 4, 18
 .drawTextBoxBorder
 	call TextBoxBorder
 .skipDrawingTextBoxBorder
@@ -35,9 +32,7 @@ DisplayTextIDInit::
 	ld hl, wFlags_0xcd60
 	bit 4, [hl]
 	res 4, [hl]
-	jr nz, .skipMovingSprites
-	call UpdateSprites
-.skipMovingSprites
+	call z, UpdateSprites
 ; loop to copy [x#SPRITESTATEDATA1_FACINGDIRECTION] to
 ; [x#SPRITESTATEDATA2_ORIGFACINGDIRECTION] for each non-player sprite
 ; this is done because when you talk to an NPC, they turn to look your way

@@ -9,7 +9,7 @@ _RockTunnelB1FCooltrainerF1EndBattleText::
 	prompt
 
 _RockTunnelB1FCooltrainerF1AfterBattleText::
-	text "I want to go "
+	text "I want to go"
 	line "home!"
 	done
 

@@ -17,8 +17,7 @@ TradeCenter_Script:
 	ld hl, wSprite01StateData2MapY
 	ld a, 8 ; y
 	ld [hli], a
-	ld a, 10 ; x
-	ld [hl], a
+	ld [hl], 10 ; x
 	ld a, SPRITE_FACING_LEFT
 	ld [wSprite01StateData1FacingDirection], a
 	ldh a, [hSerialConnectionStatus]

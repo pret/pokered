@@ -50,8 +50,7 @@ FightingDojoDefaultScript:
 	call SetSpriteFacingDirectionAndDelay
 	ld a, TEXT_FIGHTINGDOJO_KARATE_MASTER
 	ldh [hSpriteIndexOrTextID], a
-	call DisplayTextID
-	ret
+	jp DisplayTextID
 
 FightingDojoKarateMasterPostBattleScript:
 	ld a, [wIsInBattle]

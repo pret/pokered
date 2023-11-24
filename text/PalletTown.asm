@@ -54,9 +54,9 @@ _PalletTownSignText::
 	done
 
 _PalletTownPlayersHouseSignText::
-	text "<PLAYER>'s house "
+	text "<PLAYER>'s house"
 	done
 
 _PalletTownRivalsHouseSignText::
-	text "<RIVAL>'s house "
+	text "<RIVAL>'s house"
 	done

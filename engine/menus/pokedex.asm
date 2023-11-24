@@ -91,7 +91,6 @@ HandlePokedexSideMenu:
 	add b
 	inc a
 	ld [wd11e], a
-	ld a, [wd11e]
 	push af
 	ld a, [wDexMaxSeenMon]
 	push af ; this doesn't need to be preserved
@@ -298,7 +297,7 @@ HandlePokedexListMenu:
 	ld c, 8
 .maxSeenPokemonInnerLoop
 	dec b
-	sla a
+	add a
 	jr c, .storeMaxSeenPokemon
 	dec c
 	jr nz, .maxSeenPokemonInnerLoop
@@ -458,9 +457,7 @@ HandlePokedexListMenu:
 ;;;;;;;;;;                       Town map doesn't take up space in the bag due to this modification.
 .selectPressed
 	CheckEvent EVENT_GOT_TOWN_MAP
-	jr nz, .showTownMap
-	jp .loop
-.showTownMap
+	jp z, .loop
 	ld a, SFX_SWITCH
 	rst _PlaySound
 	ld a, 1
@@ -469,9 +466,7 @@ HandlePokedexListMenu:
 ;;;;;;;;;; PureRGBnote: CHANGED: START button will open new MoveDex.
 .startPressed
 	CheckEvent EVENT_GOT_MOVEDEX
-	jr nz, .showMoveDex
-	jp .loop
-.showMoveDex
+	jp z, .loop
 	ld a, SFX_SWITCH
 	rst _PlaySound
 	ld a, 2
@@ -767,15 +762,13 @@ ShowNextPokemonData:
 	hlcoord 12, 6
 	lb bc, 1, 2
 	call PrintNumber ; print feet (height)
-	ld a, "′"
-	ld [hl], a
+	ld [hl], "′"
 	inc de
 	inc de ; de = address of inches (height)
 	hlcoord 15, 6
 	lb bc, LEADING_ZEROES | 1, 2
 	call PrintNumber ; print inches (height)
-	ld a, "″"
-	ld [hl], a
+	ld [hl], "″"
 ; now print the weight (note that weight is stored in tenths of pounds internally)
 	inc de
 	inc de
@@ -981,8 +974,7 @@ ShowNextPokemonData:
 	push af
 	call IndexToPokedex
 	hlcoord 1, 1
-	ld b, 7
-	ld c, 8
+	lb bc, 7, 8
 	call ClearScreenArea
 	ld a, [wPokedexDataFlags]
 	xor %00000010 ; toggle BIT_POKEDEX_WHICH_SPRITE_SHOWING

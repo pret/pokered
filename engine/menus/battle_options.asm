@@ -73,8 +73,7 @@ BattleOptionText:
 
 DrawBattleOptionsMenu:
 	hlcoord 0, 0
-	ld b, 15
-	ld c, 18
+	lb bc, 15, 18
 	call TextBoxBorder
 	hlcoord 1, 1
 	ld de, BattleOptionText
@@ -117,8 +116,8 @@ LoopGenericSetOptionsFromCursorPositions:
 	jr z, .skip
 	inc hl
 	inc hl
-	ld b, [hl]
-	inc hl
+	ld a, [hli]
+	ld b, a
 	ld a, [hli]
 	push hl
 	ld h, [hl]
@@ -134,8 +133,7 @@ LoopGenericSetOptionsFromCursorPositions:
 	ret
 .skip
 	push de
-	ld d, 0
-	ld e, 5
+	lb de, 0, 5
 	add hl, de
 	pop de
 	inc de
@@ -155,10 +153,10 @@ SetGenericCursorPositionFromOptions:
 	add hl, de
 	ld a, [hli]
 	push af
-	ld d, [hl]
-	inc hl
-	ld c, [hl]
-	inc hl
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	ld c, a
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a

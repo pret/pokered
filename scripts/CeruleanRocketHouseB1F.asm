@@ -11,12 +11,9 @@ CeruleanRocketHouseB1F_Script:
 
 CeruleanRocketHouse_ScriptPointers:
 	def_script_pointers
-	dw_const CeruleanRocketHouseScript0,         SCRIPT_CERULEANROCKETHOUSEB1F_DEFAULT
+	dw_const DoRet,                              SCRIPT_CERULEANROCKETHOUSEB1F_DEFAULT
 	dw_const CeruleanRocketHouseMissingnoScript, SCRIPT_CERULEANROCKETHOUSEB1F_MISSINGNO
 	EXPORT SCRIPT_CERULEANROCKETHOUSEB1F_MISSINGNO ; used by cerulean_rocket_house.asm
-
-CeruleanRocketHouseScript0:
-	ret
 
 CeruleanRocketHouseB1F_TextPointers:
 	def_text_pointers

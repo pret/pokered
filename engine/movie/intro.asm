@@ -36,7 +36,7 @@ PlayIntroScene:
 	ldh [hSCX], a
 	ld b, TILEMAP_GENGAR_INTRO_1
 	call IntroCopyTiles
-	ld a, 0
+	xor a
 	ld [wBaseCoordX], a
 	ld a, 80
 	ld [wBaseCoordY], a
@@ -143,7 +143,7 @@ PlayIntroScene:
 	ld a, (FightIntroFrontMon3 - FightIntroFrontMon) / LEN_2BPP_TILE
 	ld [wIntroNidorinoBaseTile], a
 	ld de, IntroNidorinoAnimation7
-	jp AnimateIntroNidorino
+	; fall through
 
 AnimateIntroNidorino:
 	ld a, [de]
@@ -221,8 +221,8 @@ IntroClearMiddleOfScreen:
 	ld bc, SCREEN_WIDTH * 10
 
 IntroClearCommon:
-	ld [hl], 0
-	inc hl
+	xor a
+	ld [hli], a
 	dec bc
 	ld a, b
 	or c
@@ -361,9 +361,6 @@ IntroDrawBlackBars:
 	hlbgcoord 0, 14, vBGMap1
 	ld c,  BG_MAP_WIDTH * 4
 	jp IntroPlaceBlackTiles
-
-EmptyFunc2:
-	ret
 
 IntroNidorinoAnimation0:
 	db 0, 0

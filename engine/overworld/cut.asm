@@ -152,8 +152,8 @@ GetCutOrBoulderDustAnimationOffsets:
 	ld hl, BoulderDustAnimationOffsets
 .next
 	add hl, de
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
 	ld d, [hl]
 	ld a, b
 	add d

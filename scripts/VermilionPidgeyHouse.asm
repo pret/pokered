@@ -1,6 +1,5 @@
 VermilionPidgeyHouse_Script:
-	call EnableAutoTextBoxDrawing
-	ret
+	jp EnableAutoTextBoxDrawing
 
 VermilionPidgeyHouse_TextPointers:
 	def_text_pointers

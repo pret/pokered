@@ -25,8 +25,7 @@ Mansion2CheckReplaceSwitchDoorBlocks:
 	call Mansion2ReplaceBlock
 	ld a, $5f
 	lb bc, 11, 3
-	call Mansion2ReplaceBlock
-	ret
+	jp Mansion2ReplaceBlock
 .switchTurnedOn
 	ld a, $5f
 	lb bc, 2, 4
@@ -36,9 +35,7 @@ Mansion2CheckReplaceSwitchDoorBlocks:
 	call Mansion2ReplaceBlock
 	ld a, $e
 	lb bc, 11, 3
-	call Mansion2ReplaceBlock
-	ret
-
+	; fall through
 Mansion2ReplaceBlock:
 	ld [wNewTileBlockID], a
 	predef_jump ReplaceTileBlock

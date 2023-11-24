@@ -15,11 +15,9 @@ GameCornerSelectLuckySlotMachine:
 	ldh a, [hRandomAdd]
 	cp $7
 	jr nc, .not_max
-	ld a, $8
+	ld a, 8
 .not_max
-	srl a
-	srl a
-	srl a
+	srl_a_3x
 	ld [wLuckySlotHiddenObjectIndex], a
 	ret
 
@@ -49,12 +47,9 @@ GameCornerReenterMapAfterPlayerLoss:
 
 GameCorner_ScriptPointers:
 	def_script_pointers
-	dw_const GameCornerDefaultScript,      SCRIPT_GAMECORNER_DEFAULT
+	dw_const DoRet,                        SCRIPT_GAMECORNER_DEFAULT
 	dw_const GameCornerRocketBattleScript, SCRIPT_GAMECORNER_ROCKET_BATTLE
 	dw_const GameCornerRocketExitScript,   SCRIPT_GAMECORNER_ROCKET_EXIT
-
-GameCornerDefaultScript:
-	ret
 
 GameCornerRocketBattleScript:
 	ld a, [wIsInBattle]
@@ -550,13 +545,11 @@ GameCornerDrawCoinBox:
 	ld hl, wd730
 	set 6, [hl]
 	hlcoord 11, 0
-	ld b, 5
-	ld c, 7
+	lb bc, 5, 7
 	call TextBoxBorder
 	call UpdateSprites
 	hlcoord 12, 1
-	ld b, 4
-	ld c, 7
+	lb bc, 4, 7
 	call ClearScreenArea
 	hlcoord 12, 2
 	ld de, GameCornerMoneyText

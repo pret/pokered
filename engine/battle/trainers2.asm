@@ -26,8 +26,8 @@ GetTrainerInformation::
 .linkBattle
 	ld hl, wTrainerPicPointer
 	ld de, RedPicFront
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 	ret
 

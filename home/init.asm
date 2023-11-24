@@ -44,8 +44,11 @@ DEF rLCDC_DEFAULT EQU %11100011
 	ld hl, WRAM0_Begin
 	ld bc, WRAM1_End - WRAM0_Begin
 .loop
-	ld [hl], 0
-	inc hl
+; PureRGBnote: OPTIMIZED
+	xor a
+	ld [hli], a
+	;ld [hl], 0
+	;inc hl
 	dec bc
 	ld a, b
 	or c

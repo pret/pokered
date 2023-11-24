@@ -20,8 +20,11 @@ PrintBCDNumber::
 	jr z, .loop
 	bit 7, b
 	jr nz, .loop
-	ld [hl], "¥"
-	inc hl
+; PureRGBnote; OPTIMIZED
+	ld a, "¥"
+	ld [hli], a
+	;ld [hl], "¥"
+	;inc hl
 .loop
 	ld a, [de]
 	swap a
@@ -32,7 +35,9 @@ PrintBCDNumber::
 	dec c
 	jr nz, .loop
 	bit 7, b ; were any non-zero digits printed?
-	jr z, .done ; if so, we are done
+; PureRGBnote: OPTIMIZED
+	ret z
+	;jr z, .done ; if so, we are done
 .numberEqualsZero ; if every digit of the BCD number is zero
 	bit 6, b ; left or right alignment?
 	jr nz, .skipRightAlignmentAdjustment
@@ -40,18 +45,20 @@ PrintBCDNumber::
 .skipRightAlignmentAdjustment
 	bit 5, b
 	jr z, .skipCurrencySymbol
-	ld [hl], "¥"
-	inc hl
+	ld a, "¥"
+	ld [hli], a
+	;ld [hl], "¥"
+	;inc hl
 .skipCurrencySymbol
 	ld [hl], "0"
 	call PrintLetterDelay
 	inc hl
-.done
+;.done
 	ret
 
 PrintBCDDigit::
 	and $f
-	and a
+	; and a ; PureRGBnote: OPTIMIZED: redundant
 	jr z, .zeroDigit
 .nonzeroDigit
 	bit 7, b ; have any non-space characters been printed?

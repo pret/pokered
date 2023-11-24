@@ -28,8 +28,7 @@ IsMapOceanMap:
 	jr z, .ocean         
 	inc a                        
 	jr nz, .loop         
-	jr .notOcean               
+	ret            
 .ocean
 	scf
-.notOcean
 	ret

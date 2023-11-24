@@ -108,7 +108,7 @@ _SaffronGymGuideBeatSabrinaText::
 
 _SaffronGymGuideApexChipPsychicText::
 	text "For psychic"
-	line "#MON, an "
+	line "#MON, an"
 	cont "APEX CHIP will"
 	cont "replicate a calm"
 	cont "silent area of"

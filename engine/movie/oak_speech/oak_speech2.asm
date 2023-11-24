@@ -100,7 +100,7 @@ OakSpeechSlidePicCommon:
 	and a
 	jr nz, .next
 ; If sliding right, point hl to the end of the pic's tiles.
-	ld d, 0
+	ld d, a ; a = 0
 	add hl, de
 .next
 	ld d, h
@@ -162,8 +162,7 @@ OakSpeechSlidePicCommon:
 DisplayIntroNameTextBox:
 	push de
 	hlcoord 0, 0
-	ld b, $a
-	ld c, $9
+	lb bc, 10, 9
 	call TextBoxBorder
 	hlcoord 3, 0
 	ld de, .namestring

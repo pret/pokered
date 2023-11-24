@@ -9,10 +9,7 @@ CustomListMenuGetEntryText::
 	ld a, [wListMenuCustomType]
 	ld hl, CustomListMenuTextMethods
 	call GetAddressFromPointerArray
-	ld de, .return
-	push de
-	jp hl
-.return
+	call hl_caller
 	pop hl
 	ret
 
@@ -38,10 +35,7 @@ CheckLoadHoverText::
 	dec a
 	ld hl, CustomListMenuHoverTextMethods
 	call GetAddressFromPointerArray
-	ld de, .return
-	push de
-	jp hl
-.return
+	call hl_caller
 	pop de
 	pop hl
 	pop bc
@@ -75,10 +69,7 @@ GetListEntryID:
 	jr nz, .skipmulti 
 	sla c ; item entries are 2 bytes long, so multiply by 2
 .skipmulti
-	ld a, [wListPointer]
-	ld l, a
-	ld a, [wListPointer + 1]
-	ld h, a
+	hl_deref wListPointer
 	inc hl ; hl = beginning of list entries
 	ld b, 0
 	add hl, bc
@@ -97,8 +88,7 @@ CheckLoadTypes:
 	ld a, 1
 	ld [wListMenuHoverTextShown], a
 	hlcoord 4, 13
-	ld b, 3  ; height
-	ld c, 14 ; width
+	lb bc, 3, 14  ; height, width
 	call TextBoxBorder
 	callfar IsMonTypeRemapped
 	ld a, $C0
@@ -176,9 +166,7 @@ CheckBadOffset::
 	ld a, b
 	sub c
 	cp 1
-	jr z, .fixOffset
-	ret
-.fixOffset
+	ret nz
 	ld hl, wListScrollOffset
 	dec [hl]
 	ret

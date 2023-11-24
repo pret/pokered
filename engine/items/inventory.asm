@@ -101,7 +101,7 @@ RemoveItemFromInventory_::
 	push hl
 	inc hl
 	ld a, [wWhichPokemon] ; index (within the inventory) of the item being removed
-	sla a
+	add a
 	add l
 	ld l, a
 	jr nc, .noCarry
@@ -136,15 +136,13 @@ RemoveItemFromInventory_::
 	ld [wBagSavedMenuItem], a
 	ld [wSavedListScrollOffset], a
 	pop hl
+	dec [hl] ; new number of items
 	ld a, [hl] ; a = number of items in inventory
-	dec a ; decrement the number of items
-	ld [hl], a ; store new number of items
 	ld [wListCount], a
 	cp 2
-	jr c, .done
+	ret c
 	ld [wMaxMenuItem], a
-	jr .done
+	ret
 .skipMovingUpSlots
 	pop hl
-.done
 	ret

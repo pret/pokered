@@ -184,12 +184,10 @@ CinnabarGymStartBattleScript:
 	set 7, [hl]
 	ld a, [wSpriteIndex]
 	cp CINNABARGYM_BLAINE
+	ld a, SCRIPT_CINNABARGYM_BLAINE_POST_BATTLE
 	jr z, .blaine
 	ld a, SCRIPT_CINNABARGYM_OPEN_GATE
-	jr .not_blaine
 .blaine
-	ld a, SCRIPT_CINNABARGYM_BLAINE_POST_BATTLE
-.not_blaine
 	ld [wCinnabarGymCurScript], a
 	ld [wCurMapScript], a
 	rst TextScriptEnd

@@ -96,8 +96,7 @@ DisplayTitleScreen:
 
 ; put a pokeball in the player's hand
 	ld hl, wShadowOAMSprite10
-	ld a, $74
-	ld [hl], a
+	ld [hl], $74
 
 ; place tiles for title screen copyright
 	hlcoord 2, 17
@@ -148,8 +147,7 @@ ENDC
 	call UpdateGBCPal_OBP0 ; shinpokerednote: gbcnote: gbc color code from yellow 
 
 	push de
-	ld d, CONVERT_BGP
-	ld e, 2
+	lb de, CONVERT_BGP, 2
 	farcall TransferMonPal ; shinpokerednote: gbcnote: update the palette for the new title mon
 	pop de
 
@@ -209,8 +207,7 @@ ENDC
 	ld h, d
 	ld l, 64
 	call ScrollTitleScreenGameVersion
-	ld h, 0
-	ld l, 80
+	lb hl, 0, 80
 	call ScrollTitleScreenGameVersion
 	ld a, d
 	add 4
@@ -308,8 +305,7 @@ TitleScreenPickNewMon:
 	call LoadTitleMonSprite
 ;;;;;;;;;; shinpokerednote: gbcnote: update the palette for the new title mon
 	push de
-	ld d, CONVERT_BGP
-	ld e, 2
+	lb de, CONVERT_BGP, 2
 	farcall TransferMonPal 
 	pop de
 ;;;;;;;;;;
@@ -317,8 +313,7 @@ TitleScreenPickNewMon:
 	ld a, $90
 	ldh [hWY], a
 	ld d, 1 ; scroll out
-	farcall TitleScroll
-	ret
+	farjp TitleScroll
 
 TitleScreenScrollInMon:
 	ld d, 0 ; scroll in

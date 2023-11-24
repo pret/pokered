@@ -182,11 +182,9 @@ UpdateCinnabarGymGateTileBlocks_::
 	call CinnabarGymGateFlagAction
 	ld a, c
 	and a
-	jr nz, .unlocked
-	ld a, [wGymGateTileBlock]
-	jr .next
-.unlocked
 	ld a, $e
+	jr nz, .next
+	ld a, [wGymGateTileBlock]
 .next
 	pop bc
 	ld [wNewTileBlockID], a

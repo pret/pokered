@@ -156,7 +156,7 @@ _CeladonCityGameCornerSignText::
 
 _CeladonCityText19::
 	text "TRAINER TIPS"
-	para "Open the START "
+	para "Open the START"
 	line "menu and scroll"
 	cont "down to the SAVE"
 	cont "option."
