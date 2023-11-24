@@ -122,9 +122,7 @@ SilphCo9F_SetUnlockedSilphCoDoorsScript:
 	ret nz
 	SetEventAfterBranchReuseHL EVENT_SILPH_CO_9_UNLOCKED_DOOR4, EVENT_SILPH_CO_9_UNLOCKED_DOOR1
 	callfar CheckAllCardKeyEvents
-	jp Load9FCheckCardKeyText
-
-
+	; fall through
 Load9FCheckCardKeyText:
 	CheckEvent EVENT_ALL_CARD_KEY_DOORS_OPENED
 	ret z

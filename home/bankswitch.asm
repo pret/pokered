@@ -25,12 +25,12 @@ Bankswitch::
 	ld a, b
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
-	ld bc, .Return
-	push bc
-	jp hl
-.Return
+	call hl_caller
 	pop bc
 	ld a, b
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret
+
+hl_caller::
+	jp hl

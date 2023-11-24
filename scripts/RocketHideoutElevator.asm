@@ -57,8 +57,7 @@ RocketHideoutElevatorWarpMaps:
 
 RocketHideoutElevatorShakeScript:
 	call Delay3
-	farcall ShakeElevator
-	ret
+	farjp ShakeElevator
 
 RocketHideoutElevator_TextPointers:
 	def_text_pointers

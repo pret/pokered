@@ -10,8 +10,7 @@ ChangeBGPalColor0_4Frames:
 	ldh a, [rBGP]
 	and %11111100
 	ldh [rBGP], a
-	call UpdateGBCPal_BGP ; shinpokerednote: gbcnote: gbc color code from pokemon yellow
-	ret
+	jp UpdateGBCPal_BGP ; shinpokerednote: gbcnote: gbc color code from pokemon yellow
 
 PredefShakeScreenVertically:
 ; Moves the window down and then back in a sequence of progressively smaller

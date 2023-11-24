@@ -24,10 +24,10 @@ ReplaceMultipleTileBlocksNoRedraw::
 	ld l, e
 	ld d, 0
 .loop
-	ld b, [hl]
-	inc hl
-	ld c, [hl]
-	inc hl
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld c, a
 	ld a, [hli]
 	ld [wNewTileBlockID], a
 	push de
@@ -167,10 +167,7 @@ RedrawMapView::
 IsBCInHLTileBlockMapView:
 	push hl
 	pop bc
-	ld a, [wCurrentTileBlockMapViewPointer]
-	ld l, a
-	ld a, [wCurrentTileBlockMapViewPointer + 1]
-	ld h, a		
+	hl_deref wCurrentTileBlockMapViewPointer
 	;hl now points to the upper left tile block in the map view
 	;bc points to the tile block that was replaced
 	;e is the number of bytes to add to get to the next row of the tile block map view

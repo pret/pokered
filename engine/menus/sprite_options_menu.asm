@@ -52,15 +52,13 @@ SpritesOptionText:
 
 DrawSpriteOptionsMenu:
 	hlcoord 0, 0
-	ld b, 15
-	ld c, 18
+	lb bc, 15, 18
 	call TextBoxBorder
 	hlcoord 1, 1
 	ld de, SpritesOptionText
 	call PlaceString
 	hlcoord 10, 7 
-	ld b, $C0
-	ld c, 3
+	lb bc, $C0, 3
 	ld de, 1
 	jp DrawTileLineIncrement
 
@@ -81,9 +79,9 @@ SpriteOptionsAButton:
 	rst _PlaySound
 	call DisplayFrontSpriteOptions
 	hlcoord 14, PAGE_CONTROLS_Y_COORD
-	ld [hl], " "
-	inc hl
-	ld [hl], " "
+	ld a, " "
+	ld [hli], a
+	ld [hl], a
 	pop af
 	ld [wCurrentOptionIndex], a
 	pop af

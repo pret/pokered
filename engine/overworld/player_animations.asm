@@ -193,8 +193,8 @@ LeaveMapThroughHoleAnim:
 	ld de, FallDownHole
 	; remap channel five to play a small pitch sweep sound
 	ld hl, wChannelCommandPointers + CHAN5 * 2
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 ;;;;;;;;;;
 	; hide upper half of player's sprite
@@ -411,8 +411,7 @@ FishingAnim:
 	rst _PrintText
 	ld hl, wd736
 	res 6, [hl] ; unreserve the last 4 OAM entries
-	call LoadFontTilePatterns
-	ret
+	jp LoadFontTilePatterns
 
 .ShakePlayerSprite
 	ld a, [hl]
@@ -471,7 +470,7 @@ _HandleMidJump::
 	ret
 .finishedJump
 	ld a, [wWalkCounter]
-	cp 0
+	and a
 	ret nz
 	call UpdateSprites
 	call Delay3
@@ -491,8 +490,7 @@ _HandleMidJump::
 Ledge60fps:
 	push hl
 	push af
-	ld h, $c2
-	ld l, $0a
+	lb hl, $c2, $0a
 	ld a, [hl]
 	xor $01
 	pop af

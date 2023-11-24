@@ -117,13 +117,12 @@ TryDoWildEncounter:
 TestGrassTile:
 	ld a, [wGrassTile]
 	cp c
-	jr z, .return
+	ret z
 	ld a, [wCurMapTileset]
 	cp FOREST
-	jr nz, .return
+	ret nz
 	ld a, $34	; check for the extra grass tile in the forest tileset
 	cp c
-.return
 	ret
 
 TestWaterTile:
@@ -138,12 +137,12 @@ TestWaterTile:
 ;;;;;;;;;;
 	ld a, $14 ; in all tilesets with a water tile, this is its id
 	cp c
-	jr z, .return
+	ret z
 	ld a, [wCurMapTileset]
 	cp FOREST ; every map in FOREST tileset will treat the coast tile as a water encounter tile as well
 	jr z, .forestCoastTileCheck 
 	cp OVERWORLD
-	jr nz, .return ; maps not in FOREST or OVERWORLD tilesets dont have any other water tiles to consider
+	ret nz ; maps not in FOREST or OVERWORLD tilesets dont have any other water tiles to consider
 	ld a, [wCurMap]
 	cp ROUTE_20	; every OVERWORLD map except route 20 will treat tile 32 as a water encounter tile as well 
 	            ; (route 20 is an exception to preserve missingno behaviour)
@@ -151,15 +150,14 @@ TestWaterTile:
 .cantEncounter
 	ld a, 1
 	and a ; clear z flag
-	jr .return
+	ret
 .forestCoastTileCheck
 	ld a, $48 ; left coast tile in FOREST tileset
 	cp c
-	jr .return
+	ret
 .overworldCoastTileCheck
 	ld a, $32 ; left coast tile in OVERWORLD tileset
 	cp c
-.return
 	ret
 
 TestWaterTile2:

@@ -1,3 +1,4 @@
+; PureRGBnote: CHANGED: now not even imported into the game's code
 UnusedBadgeNames::
 	db "かみなりバッヂ@" ; THUNDER BADGE
 	db "かいがらバッヂ@" ; SHELL BADGE

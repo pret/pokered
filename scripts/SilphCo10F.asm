@@ -35,9 +35,7 @@ SilphCo10F_SetUnlockedSilphCoDoorsScript:
 	ret z
 	SetEvent EVENT_SILPH_CO_10_UNLOCKED_DOOR
 	callfar CheckAllCardKeyEvents
-	jp Load10FCheckCardKeyText
-
-
+	; fall through
 Load10FCheckCardKeyText:
 	CheckEvent EVENT_ALL_CARD_KEY_DOORS_OPENED
 	ret z

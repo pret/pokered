@@ -24,7 +24,7 @@ _VermilionGymLTSurgeThunderBadgeInfoText::
 	done
 
 _VermilionGymLTSurgeReceivedTM24Text::
-	text "<PLAYER> received "
+	text "<PLAYER> received"
 	line "@"
 	text_ram wStringBuffer
 	text "!@"
@@ -147,7 +147,7 @@ _VermilionGymGymGuideBeatLTSurgeText::
 
 _VermilionGymGuideApexChipElectricText::
 	text "For electric"
-	line "#MON, an "
+	line "#MON, an"
 	cont "APEX CHIP will"
 	cont "simulate a vast"
 	cont "grassy steppe"

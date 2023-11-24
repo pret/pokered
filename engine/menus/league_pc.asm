@@ -51,8 +51,7 @@ PKMNLeaguePC:
 	jp GBPalNormal
 
 LeaguePCShowTeam:
-	ld c, PARTY_LENGTH
-	ld b, 0
+	lb bc, 0, PARTY_LENGTH
 .loop
 	call CheckMonAltPaletteLeaguePC
 	push bc
@@ -95,16 +94,14 @@ LeaguePCShowMon:
 	ld de, wcd6d
 	ld bc, NAME_LENGTH
 	rst _CopyData
-	ld b, SET_PAL_POKEMON_WHOLE_SCREEN_TRADE
-	ld c, 0
+	lb bc, SET_PAL_POKEMON_WHOLE_SCREEN_TRADE, 0
 	call RunPaletteCommand
 	hlcoord 12, 5
 	call GetMonHeader
 	call LoadFrontSpriteByMonIndex
 	call GBPalNormal
 	hlcoord 0, 13
-	ld b, 2
-	ld c, $12
+	lb bc, 2, $12
 	call TextBoxBorder
 	hlcoord 1, 15
 	ld de, HallOfFameNoText

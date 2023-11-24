@@ -29,7 +29,7 @@ OaksLab_ScriptPointers:
 	dw_const OaksLabRivalArrivesAtOaksRequestScript, SCRIPT_OAKSLAB_RIVAL_ARRIVES_AT_OAKS_REQUEST
 	dw_const OaksLabOakGivesPokedexScript,           SCRIPT_OAKSLAB_OAK_GIVES_POKEDEX
 	dw_const OaksLabRivalLeavesWithPokedexScript,    SCRIPT_OAKSLAB_RIVAL_LEAVES_WITH_POKEDEX
-	dw_const OaksLabNoopScript,                      SCRIPT_OAKSLAB_NOOP
+	dw_const DoRet,                                  SCRIPT_OAKSLAB_NOOP
 
 OaksLabDefaultScript:
 	CheckEvent EVENT_OAK_APPEARED_IN_PALLET
@@ -260,14 +260,14 @@ OaksLabChoseStarterScript:
 	ldh [hSpriteDataOffset], a
 	call GetPointerWithinSpriteStateData1
 	push hl
-	ld [hl], $4c ; SPRITESTATEDATA1_YPIXELS
-	inc hl
+	ld a, $4c 
+	ld [hli], a ; SPRITESTATEDATA1_YPIXELS
 	inc hl
 	ld [hl], $0 ; SPRITESTATEDATA1_XPIXELS
 	pop hl
 	inc h
-	ld [hl], 8 ; SPRITESTATEDATA2_MAPY
-	inc hl
+	ld a, 8
+	ld [hli], a ; SPRITESTATEDATA2_MAPY
 	ld [hl], 9 ; SPRITESTATEDATA2_MAPX
 	ld de, .LeftBallMovement2 ; the rival is not currently onscreen, so account for that
 	pop hl
@@ -304,18 +304,15 @@ OaksLabRivalChoosesStarterScript:
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, [wRivalStarterBallSpriteIndex]
+	ld b, HS_STARTER_BALL_1
 	cp OAKSLAB_CHARMANDER_POKE_BALL
-	jr nz, .not_charmander
-	ld a, HS_STARTER_BALL_1
-	jr .hideBallAndContinue
-.not_charmander
+	jr z, .hideBallAndContinue
+	inc b ; HS_STARTER_BALL_2
 	cp OAKSLAB_SQUIRTLE_POKE_BALL
-	jr nz, .not_squirtle
-	ld a, HS_STARTER_BALL_2
-	jr .hideBallAndContinue
-.not_squirtle
-	ld a, HS_STARTER_BALL_3
+	jr z, .hideBallAndContinue
+	inc b ; HS_STARTER_BALL_3
 .hideBallAndContinue
+	ld a, b
 	ld [wMissableObjectIndex], a
 	predef HideObject
 	call Delay3
@@ -385,18 +382,7 @@ OaksLabRivalStartBattleScript:
 	ld a, OPP_RIVAL1
 	ld [wCurOpponent], a
 	ld a, [wRivalStarter]
-	cp STARTER2
-	jr nz, .not_squirtle
-	ld a, $1
-	jr .done
-.not_squirtle
-	cp STARTER3
-	jr nz, .not_bulbasaur
-	ld a, $2
-	jr .done
-.not_bulbasaur
-	ld a, $3
-.done
+	call StarterToPartyID
 	ld [wTrainerNo], a
 	ld a, OAKSLAB_RIVAL
 	ld [wSpriteIndex], a
@@ -449,12 +435,10 @@ OaksLabRivalStartsExitScript:
 	call MoveSprite
 	ld a, [wXCoord]
 	cp 4
-	; move left or right depending on where the player is standing
-	jr nz, .moveLeft
-	ld a, NPC_MOVEMENT_RIGHT
-	jr .next
-.moveLeft
 	ld a, NPC_MOVEMENT_LEFT
+	; move left or right depending on where the player is standing
+	jr nz, .next
+	ld a, NPC_MOVEMENT_RIGHT
 .next
 	ld [wNPCMovementDirections], a
 
@@ -483,7 +467,7 @@ OaksLabPlayerWatchRivalExitScript:
 	call PlayDefaultMusic ; reset to map music
 	ld a, SCRIPT_OAKSLAB_NOOP
 	ld [wOaksLabCurScript], a
-	jr .done
+	ret
 ; make the player keep facing the rival as he walks away
 .checkRivalPosition
 	ld a, [wNPCNumScriptedSteps]
@@ -494,17 +478,16 @@ OaksLabPlayerWatchRivalExitScript:
 	jr nz, .turnPlayerLeft
 	ld a, SPRITE_FACING_RIGHT
 	ld [wSpritePlayerStateData1FacingDirection], a
-	jr .done
+	ret
 .turnPlayerLeft
 	ld a, SPRITE_FACING_LEFT
 	ld [wSpritePlayerStateData1FacingDirection], a
-	jr .done
+	ret
 .turnPlayerDown
 	cp $4
 	ret nz
 	xor a ; ld a, SPRITE_FACING_DOWN
 	ld [wSpritePlayerStateData1FacingDirection], a
-.done
 	ret
 
 OaksLabRivalArrivesAtOaksRequestScript:
@@ -648,9 +631,6 @@ OaksLabRivalLeavesWithPokedexScript:
 	ld [wOaksLabCurScript], a
 	ret
 
-OaksLabNoopScript:
-	ret
-
 OaksLabScript_RemoveParcel:
 	ld hl, wBagItems
 	ld bc, 0
@@ -698,19 +678,16 @@ OaksLabCalcRivalMovementScript:
 	ld b, 10
 	ld a, [wXCoord]
 	cp 4
-	jr nz, .not_left_of_oak
-	ld a, $40
-	jr .done
-.not_left_of_oak
 	ld a, $20
+	jr nz, .done
+	ld a, $40
 .done
 	ldh [hSpriteScreenXCoord], a
 	ld a, b
 	ldh [hSpriteMapYCoord], a
 	ld a, OAKSLAB_RIVAL
 	ld [wSpriteIndex], a
-	call SetSpritePosition1
-	ret
+	jp SetSpritePosition1
 
 OaksLabLoadTextPointers2Script:
 	ld hl, OaksLab_TextPointers2
@@ -902,18 +879,15 @@ OaksLabMonChoiceMenu:
 	ld [wd11e], a
 	call GetMonName
 	ld a, [wSpriteIndex]
+	ld b, HS_STARTER_BALL_1
 	cp OAKSLAB_CHARMANDER_POKE_BALL
-	jr nz, .not_charmander
-	ld a, HS_STARTER_BALL_1
-	jr .continue
-.not_charmander
+	jr z, .continue
+	inc b ; HS_STARTER_BALL_2
 	cp OAKSLAB_SQUIRTLE_POKE_BALL
-	jr nz, .not_squirtle
-	ld a, HS_STARTER_BALL_2
-	jr .continue
-.not_squirtle
-	ld a, HS_STARTER_BALL_3
+	jr z, .continue
+	inc b ; HS_STARTER_BALL_3
 .continue
+	ld a, b
 	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, $1

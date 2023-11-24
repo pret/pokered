@@ -40,8 +40,8 @@ PlayBattleMusic::
 	add hl, de
 	add hl, de
 	add hl, de
-	ld c, [hl]
-	inc hl
+	ld a, [hli]
+	ld c, a
 	call GetAddressFromPointer
 	xor a
 	ld [wSpecialBattleMusicID], a

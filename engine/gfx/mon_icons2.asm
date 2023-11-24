@@ -20,9 +20,7 @@ LoadNicknameMonSprite:
 	
 LoadTradeMonSprite:
 	call LoadNicknameMonSprite
-	call AdjustForTradeScreen
-	ret
-	
+	jp AdjustForTradeScreen	
 
 LoadPartyMonSprites:
 	call DisableLCD
@@ -72,13 +70,9 @@ GetPartyMonSpriteID:
 	ld b, a
 	ld a, [wSpriteOptions2]
 	bit BIT_MENU_ICON_SPRITES, a
-	jr z, .loadOldIcons
-	jr .loadNewIcons
-.loadOldIcons
-	ld hl, MonPartyData
-	jr .next
-.loadNewIcons
 	ld hl, MonPartyDataNew
+	jr nz, .next
+	ld hl, MonPartyData
 .next
 	ld a, b
 	ld e, a
@@ -108,7 +102,7 @@ ShowPartyMonSprite:
 	push hl
 	push de
 	push bc
-	ld a, [hSpriteIndex]
+	ldh a, [hSpriteIndex]
 	add a
 	add a
 	add a
@@ -151,9 +145,7 @@ AdjustForTradeScreen:
 	ld de, $4
 	ld b, e
 .loopOAM
-	ld a, [hl]
-	inc a
-	ld [hl], a
+	inc [hl]
 	add hl, de
 	dec b
 	jr nz, .loopOAM
@@ -161,9 +153,7 @@ AdjustForTradeScreen:
 	ld de, $4
 	ld b, e
 .loopSaved
-	ld a, [hl]
-	inc a
-	ld [hl], a
+	inc [hl]
 	add hl, de
 	dec b
 	jr nz, .loopSaved

@@ -1,6 +1,5 @@
 _UpdateSprites::
-	ld h, $c1
-	inc h
+	ld h, $c1 + 1
 	ld a, SPRITESTATEDATA2_IMAGEBASEOFFSET
 .spriteLoop
 	ld l, a
@@ -50,9 +49,7 @@ UpdateNonPlayerSprite:
 	ld b, a
 	ldh a, [hCurrentSpriteOffset]
 	cp b
-	jr nz, .unequal
-	jp DoScriptedNPCMovement
-.unequal
+	jp z, DoScriptedNPCMovement
 	jp UpdateNPCSprite
 
 ; This detects if the current sprite (whose offset is at hCurrentSpriteOffset)
@@ -66,7 +63,7 @@ UpdateNonPlayerSprite:
 ; The reason that 4 is added below to the coordinate is to make it align with a
 ; multiple of $10 to make comparisons easier.
 DetectCollisionBetweenSprites:
-	nop
+	nop ; TODO: remove?
 
 	ld h, HIGH(wSpriteStateData1)
 	ldh a, [hCurrentSpriteOffset]
@@ -293,13 +290,10 @@ DetectCollisionBetweenSprites:
 ; If delta X isn't 0 and delta Y is 0, then b = %0011, else b = %1100.
 ; (note that normally if delta X isn't 0, then delta Y must be 0 and vice versa)
 	cp b
+	ld b, %0011
 	jr c, .next5
 	ld b, %1100
-	jr .next6
 .next5
-	ld b, %0011
-
-.next6
 	ld a, c ; c has 2 bits set (one of bits 0-1 is set for the X axis and one of bits 2-3 for the Y axis)
 	and b ; we select either the bit in bits 0-1 or bits 2-3 based on the calculation immediately above
 	or [hl] ; or with existing collision direction bits in [i#SPRITESTATEDATA1_COLLISIONDATA]
@@ -340,17 +334,15 @@ DetectCollisionBetweenSprites:
 ; c = 9 if delta X/Y is -1
 SetSpriteCollisionValues:
 	and a
-	ld b, 0
-	ld c, 0
-	jr z, .done
+	lb bc, 0, 0
+	ret z
 	ld c, 9
 	cp -1
 	jr z, .ok
 	ld c, 7
-	ld a, 0
+	xor a
 .ok
 	ld b, a
-.done
 	ret
 
 SpriteCollisionBitTable:

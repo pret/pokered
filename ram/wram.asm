@@ -2589,6 +2589,7 @@ wPlayTimeFrames:: db
 
 wSafariZoneGameOver:: db
 
+wNumRangersLeft:: ; TODO: use this label
 wNumSafariBalls:: db
 
 

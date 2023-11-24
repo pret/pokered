@@ -52,19 +52,16 @@ GetAnimationSpeed:
 	ld c, a
 ;;;;;;;;;; PureRGBnote: ADDED: some slow pokemon animate slower by default just for fun
 	ld a, [wMonPartySpriteSpecies]
-	cp SLOWPOKE ; make some pokemon move slower since they don't like moving quickly
-	jr z, .slowSpeed
-	cp SLOWBRO
-	jr z, .slowSpeed
-	cp SNORLAX
-	jr z, .slowSpeed
-	jr .normalSpeed
-.slowSpeed
 	ld hl, PartyMonSpeedsSlow
-	jr .next
-.normalSpeed
+	cp SLOWPOKE ; make some pokemon move slower since they don't like moving quickly
+	jr z, .gotSpeed
+	cp SLOWBRO
+	jr z, .gotSpeed
+	cp SNORLAX
+	jr z, .gotSpeed
+	; normal speed
 	ld hl, PartyMonSpeeds
-.next
+.gotSpeed
 ;;;;;;;;;;
 	add hl, bc
 	ld a, [wOnSGB]
@@ -97,8 +94,7 @@ GetAnimationSpeed:
 	ld a, [wCurrentMenuItem]
 	call AddNTimes
 	; mechanicalpennote: ADDED: don't use hardcoded icon sprite indices
-	ld c, 2
-	ld b, $4
+	lb bc, 4, 2
 	ld de, $4
 .loop
 	ld a, [hl]
@@ -226,7 +222,8 @@ WriteMonPartySpriteOAMBySpecies:
 	ld a, [wMonPartySpriteSpecies]
 	callfar GetPartyMonSpriteID ; mechanicalpennote: ADDED: new code for deciding which pokemon icon to display
 	ld [wOAMBaseTile], a
-	jr WriteMonPartySpriteOAM
+	; fall through
+	;jr WriteMonPartySpriteOAM
 
 ; PureRGBnote: CHANGED: don't need this code since it's unused
 ;UnusedPartyMonSpriteFunction:

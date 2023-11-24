@@ -1,21 +1,20 @@
 ; PureRGBnote: ADDED: text for bookcases on the new basement floor of viridian city's schoolhouse
 
 SchoolB1FLeftBookcaseA:
-	ld a, 0
-	jp DoBookcaseJump
+	xor a
+	jr DoBookcaseJump
 
 SchoolB1FLeftBookcaseB:
 	ld a, 1
-	jp DoBookcaseJump
+	jr DoBookcaseJump
 
 SchoolB1FRightBookcaseA:
 	ld a, 2
-	jp DoBookcaseJump
+	jr DoBookcaseJump
 
 SchoolB1FRightBookcaseB:
 	ld a, 3
-	jp DoBookcaseJump
-
+	; fall through
 DoBookcaseJump:
 	ld [wHiddenObjectFunctionArgument], a
 	ld a, [wSpritePlayerStateData1FacingDirection]

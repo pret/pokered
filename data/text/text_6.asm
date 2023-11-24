@@ -18,7 +18,7 @@ _ItemUseBallText02::
 
 _ItemUseBallText03::
 	text "Aww! It appeared"
-	line "to be caught! "
+	line "to be caught!"
 	prompt
 
 _ItemUseBallText04::
@@ -262,7 +262,7 @@ _MonCannotLearnMachineMoveText::
 _ItemUseNotTimeText::
 	text "OAK: <PLAYER>!"
 	line "This isn't the"
-	cont "time to use that! "
+	cont "time to use that!"
 	prompt
 
 _ItemUseValuableText::

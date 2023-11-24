@@ -649,7 +649,6 @@ DoMoveDexTestQuestion:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, l
 	ld [wListPointer], a
 	ld a, h
 	ld [wListPointer + 1], a

@@ -166,9 +166,8 @@ BattleTransition_BlackScreen:
 ;;;;;;;;;; shinpokerednote: gbcnote: color support from yellow
 	call UpdateGBCPal_BGP
 	call UpdateGBCPal_OBP0
-	call UpdateGBCPal_OBP1
+	jp UpdateGBCPal_OBP1
 ;;;;;;;;;;
-	ret
 
 ; for non-dungeon trainer battles
 ; called regardless of mon levels, but does an
@@ -259,12 +258,9 @@ BattleTransition_InwardSpiral_:
 BattleTransition_OutwardSpiral_:
 	ld bc, -SCREEN_WIDTH
 	ld de, SCREEN_WIDTH
-	ld a, [wOutwardSpiralTileMapPointer + 1]
-	ld l, a
-	ld a, [wOutwardSpiralTileMapPointer]
-	ld h, a
+	hl_deref_reverse wOutwardSpiralTileMapPointer
 	ld a, [wOutwardSpiralCurrentDirection]
-	cp $0
+	and a
 	jr z, .up
 	cp $1
 	jr z, .left
@@ -534,8 +530,8 @@ BattleTransition_VerticalStripes:
 BattleTransition_VerticalStripes_:
 	ld c, SCREEN_WIDTH / 2
 .loop
-	ld [hl], $ff
-	inc hl
+	ld a, $ff
+	ld [hli], a
 	inc hl
 	dec c
 	jr nz, .loop
@@ -584,8 +580,7 @@ BattleTransition_Circle:
 	lb bc, 0, SCREEN_WIDTH / 2
 	ld hl, BattleTransition_HalfCircle1
 	call BattleTransition_Circle_Sub1
-	ld c, SCREEN_WIDTH / 2
-	ld b, 1
+	lb bc, 1, SCREEN_WIDTH / 2 
 	ld hl, BattleTransition_HalfCircle2
 	call BattleTransition_Circle_Sub1
 	jp BattleTransition_BlackScreen

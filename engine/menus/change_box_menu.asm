@@ -18,8 +18,7 @@ LoadBillsPCExtraTiles::
 	ld de, FromToChangeBoxPrompt
 	ld hl, vChars1 tile $48
 	lb bc, BANK(FromToChangeBoxPrompt), 5
-	call CopyVideoData
-	ret
+	jp CopyVideoData
 
 ; PureRGBnote: MOVED: moved from save.asm to here since it didn't rely on much from the other file
 ; this function was updated a bunch to display extra information about boxes and reformat the layout
@@ -50,8 +49,7 @@ DisplayChangeBoxMenu:
 .printPrompt
 	rst _PrintText
 	hlcoord 6, 0
-	ld b, 12
-	ld c, 12
+	lb bc, 12, 12
 	call TextBoxBorder
 .addExtraBorder
 	ld a, $C0 ; menu connector 1
@@ -62,12 +60,10 @@ DisplayChangeBoxMenu:
 	ldcoord_a 6, 4 
 	ldcoord_a 6, 12
 	ld de, 1
-	ld b, $C8 ; start of FROM prompt
-	ld c, 3
+	lb bc, $C8, 3 ; start of FROM prompt
 	hlcoord 1, 0
 	call DrawTileLineIncrement
-	ld b, $CB ; start of TO prompt
-	ld c, 2
+	lb bc, $CB, 2 ; start of TO prompt
 	hlcoord 7, 0
 	call DrawTileLineIncrement
 
@@ -82,9 +78,7 @@ DisplayChangeBoxMenu:
 	push hl
 	push bc
 	push de
-	ld b, a
-	ld a, NUM_BOXES + 1
-	sub b
+	n_sub_a NUM_BOXES + 1
 	push af
 	ld de, BoxText
 	call PlaceString 
@@ -142,8 +136,7 @@ DrawCurrentBoxPrompt::
 	ld h, d
 	ld l, e
 	push hl
-	ld b, 3
-	ld c, 5
+	lb bc, 3, 5
 	call TextBoxBorder
 	pop hl
 	inc_hl_ycoord
@@ -192,8 +185,7 @@ DrawCurrentBoxPrompt::
 	lb bc, 1, 2
 	call PrintNumber
 	ld de, BoxOutOf20
-	call PlaceString
-	ret
+	jp PlaceString
 
 BoxText:
 	db "BOX@"

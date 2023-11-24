@@ -33,8 +33,7 @@ FossilGuysHouseFossilGuyText:
 	rst _PrintText
 .skip
 	CheckEvent EVENT_GAVE_FOSSIL_TO_SUPER_NERD
-	jr z, .stageOneStart
-	jr .doneRevivedFossil
+	jr nz, .doneRevivedFossil
 .stageOneStart
 	CheckEvent EVENT_SEAFOAM_FOUND_OTHER_FOSSIL
 	jp nz, .goToCinnabar
@@ -83,11 +82,9 @@ FossilGuysHouseFossilGuyText:
 	ld hl, FossilGuyCameBackFossil
 	rst _PrintText
 	CheckEvent EVENT_GOT_DOME_FOSSIL
-	jr z, .doneOmanyte
 	ld a, KABUTO
-	jr .finishGiveFossil
-.doneOmanyte
-	ld a, OMANYTE	
+	jr nz, .finishGiveFossil
+	ld a, OMANYTE
 .finishGiveFossil
 	ld b, a
 	ld c, 24
@@ -124,8 +121,7 @@ FossilGuysHouseFossilGuyText:
 .doneRevivedAmber
 	ld hl, FossilGuyCameBackAmber
 	rst _PrintText
-	ld b, AERODACTYL
-	ld c, 24
+	lb bc, AERODACTYL, 24
 	call GivePokemon
 	jr nc, .done
 	SetEvent EVENT_RECEIVED_AERODACTYL_FROM_SUPER_NERD
@@ -253,7 +249,7 @@ FossilGuyFacesPlayerDirection:
 	ld a, [wXCoord]
 	cp 1
 	jr z, .checkYcoord
-	cp 0
+	and a
 	ld a, SPRITE_FACING_LEFT
 	jr z, .doFacing
 	ld a, SPRITE_FACING_RIGHT
@@ -265,9 +261,7 @@ FossilGuyFacesPlayerDirection:
 	ld a, SPRITE_FACING_DOWN
 .doFacing
   	ldh [hSpriteFacingDirection], a
-  	call SetSpriteFacingDirection
-	ret
-	
+  	jp SetSpriteFacingDirection	
 
 FossilGuysHouseCatText1:
 	text_far _CeladonMansion1FMeowthText

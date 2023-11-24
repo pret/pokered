@@ -118,7 +118,7 @@ _VermilionCityGymSignText::
 	line "#MON GYM"
 	cont "LEADER: LT.SURGE"
 
-	para "The Lightning "
+	para "The Lightning"
 	line "American!"
 	done
 

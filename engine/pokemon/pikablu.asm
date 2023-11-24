@@ -9,8 +9,7 @@ PikabluInit::
 	ld de, PikabluName
 	call CopyName
 	ld hl, wEnemyMonMoves ; give it surf
-	ld a, SURF
-	ld [hl], a
+	ld [hl], SURF
 	ret
 
 PikabluName:

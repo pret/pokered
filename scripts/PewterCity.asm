@@ -18,9 +18,7 @@ PewterCityDefaultScript:
 	xor a
 	ld [wMuseum1FCurScript], a
 	ResetEvent EVENT_BOUGHT_MUSEUM_TICKET
-	call PewterCityCheckPlayerLeavingEastScript
-	ret
-
+	; fall through
 PewterCityCheckPlayerLeavingEastScript:
 	CheckEvent EVENT_BEAT_BROCK
 	ret nz
@@ -259,7 +257,7 @@ PewterCitySuperNerd2Text:
 	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
-	cp $0
+	and a
 	jr nz, .playerDoesNotKnow
 	ld hl, .ThatsRightText
 	rst _PrintText

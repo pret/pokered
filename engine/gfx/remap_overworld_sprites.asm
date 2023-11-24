@@ -9,7 +9,7 @@ CheckRemapSprite::
 	ld a, [wSpriteOptions2]
 	bit BIT_MENU_ICON_SPRITES, a ; if this option is turned on, we don't need to remap any sprites
 	ret nz 
-	jp RemapSpritePictureIDs
+	; fall through
 
 ; PureRGBnote: ADDED: code that will remap overworld NPC icons according to options selection (enhanced or original) 
 ; if not using enhanced sprites we remap the sprite to its original sprite.
@@ -22,13 +22,12 @@ RemapSpritePictureIDs::
 	inc bc
 	inc bc
 	cp $ff
-	jr z, .noMapSpriteNecessary ; d still has the original sprite's id stored if we jump here
+	ret z ; d still has the original sprite's id stored if we ret here
 	cp d
 	jr nz, .loop
 	dec bc ; de = replacement sprite's address
 	ld a, [bc]
 	ld d, a ; d = replacement sprite's id
-.noMapSpriteNecessary
 	ret
 
 INCLUDE "data/sprites/alt_sprite_mappings.asm"
@@ -72,9 +71,7 @@ LoopRemapSpritePictureIDs::
 	ld d, a
 	ld a, [wSpriteOptions2]
 	bit BIT_MENU_ICON_SPRITES, a
-	jr nz, .skipRemap
-	call RemapSpritePictureIDs
-.skipRemap
+	call z, RemapSpritePictureIDs
 	ld a, d
 	pop bc
 	pop hl

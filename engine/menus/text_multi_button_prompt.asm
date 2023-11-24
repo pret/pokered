@@ -6,13 +6,11 @@
 
 TextCommandPromptMultiButton::
 	call LoadDownArrowCoord
-	ld a, "▼"
-	ld [hl], a
+	ld [hl], "▼"
 	call Delay3
 	call ManualTextScrollMultiButton
 	call LoadDownArrowCoord
-	ld a, " "
-	ld [hl], a
+	ld [hl], " "
 	ld a, d
 	and a
 	ret nz ; exit if they pressed one of the specified watched buttons
@@ -75,8 +73,5 @@ WaitForTextScrollSpecificButtonsPress::
 
 ; we can load it to different spots based on wMenuCursorLocation
 LoadDownArrowCoord::
-	ld a, [wMenuCursorLocation]
-	ld h, a
-	ld a, [wMenuCursorLocation+1]
-	ld l, a
+	hl_deref_reverse wMenuCursorLocation
 	ret

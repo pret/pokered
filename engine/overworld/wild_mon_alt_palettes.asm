@@ -23,9 +23,8 @@ CheckWildPokemonPalettes::
 	ld a, [wIsAltPalettePkmn]
 	ld hl, wWildMonPalettes
 	cp 8
-	jr nc, .secondByte
-	jr .getBit
-.secondByte
+	jr c, .getBit
+; second byte
 	inc hl
 	cp 16
 	jr nc, .thirdByte

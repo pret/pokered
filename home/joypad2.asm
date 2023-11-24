@@ -26,7 +26,7 @@ JoypadLowSensitivity::
 	and a ; have any buttons been newly pressed since last check?
 	jr z, .noNewlyPressedButtons
 .newlyPressedButtons
-	ld [hJoy5], a ; shinpokerednote: FIXED: helps prevent holding the A button from messing up list scrolling (without this fix holding A makes down/up select a menu item)
+	ldh [hJoy5], a ; shinpokerednote: FIXED: helps prevent holding the A button from messing up list scrolling (without this fix holding A makes down/up select a menu item)
 	ld a, 30 ; half a second delay
 	ldh [hFrameCounter], a
 	ret
@@ -66,9 +66,7 @@ WaitForTextScrollButtonPress::
 	push hl
 	ld a, [wTownMapSpriteBlinkingEnabled]
 	and a
-	jr z, .skipAnimation
-	call TownMapSpriteBlinkingAnimation
-.skipAnimation
+	call nz, TownMapSpriteBlinkingAnimation
 	hlcoord 18, 16
 	call HandleDownArrowBlinkTiming
 	pop hl

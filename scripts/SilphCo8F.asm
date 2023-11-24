@@ -71,9 +71,7 @@ SilphCo8F_UnlockedDoorEventScript:
 	ret z
 	SetEvent EVENT_SILPH_CO_8_UNLOCKED_DOOR
 	callfar CheckAllCardKeyEvents
-	jp Load8FCheckCardKeyText
-
-
+	; fall through
 Load8FCheckCardKeyText:
 	CheckEvent EVENT_ALL_CARD_KEY_DOORS_OPENED
 	ret z

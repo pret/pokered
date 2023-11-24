@@ -22,8 +22,7 @@ CheckHasGoodRod:
 	ld a, [wd11e]
 	ld hl, wTownMapAreaTypeFlags
 	push hl
-	ld hl, GoodRodMons
-	inc hl
+	ld hl, GoodRodMons + 1
 	ld de, 2
 	call IsInArray
 	pop hl
@@ -33,8 +32,7 @@ CheckHasGoodRod:
 .noLakeMon
 	push hl
 	ld a, [wd11e]
-	ld hl, GoodRodMonsOcean
-	inc hl
+	ld hl, GoodRodMonsOcean + 1
 	ld de, 2
 	call IsInArray
 	pop hl

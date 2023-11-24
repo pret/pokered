@@ -425,10 +425,10 @@ GetMonHeader::
 	jr .copyBaseStats
 .specialID
 	ld hl, wMonHSpriteDim
-	ld [hl], b ; write sprite dimensions
-	inc hl
-	ld [hl], e ; write front sprite pointer
-	inc hl
+	ld a, b
+	ld [hli], a ; write sprite dimensions
+	ld a, e
+	ld [hli], a ; write front sprite pointer
 	ld [hl], d
 	jr .done
 .hardened_onix
@@ -474,3 +474,18 @@ GetPartyMonName::
 	pop bc
 	pop hl
 	ret
+
+; input a = starter pokemon id
+; output a = charmander = 1, squirtle = 2, bulbasaur = 3
+StarterToPartyID::
+	ld b, 1
+	cp STARTER1
+	jr z, .done
+	inc b
+	cp STARTER2
+	jr z, .done
+	inc b
+.done
+	ld a, b
+	ret
+

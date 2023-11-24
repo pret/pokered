@@ -37,9 +37,12 @@ CableClubNPC::
 	vc_assert USING_INTERNAL_CLOCK == $02, \
 		"USING_INTERNAL_CLOCK is no longer equal to $02."
 	ldh [rSC], a
-	ld a, [wLinkTimeoutCounter]
-	dec a
-	ld [wLinkTimeoutCounter], a
+; PureRGBnote: OPTIMIZED
+	ld hl, wLinkTimeoutCounter
+	dec [hl]
+	;ld a, [wLinkTimeoutCounter]
+	;dec a
+	;ld [wLinkTimeoutCounter], a
 	jr z, .failedToEstablishConnection
 	ld a, ESTABLISH_CONNECTION_WITH_INTERNAL_CLOCK
 	ldh [rSB], a

@@ -147,25 +147,25 @@ _ChargeMoveEffectText::
 	text "<USER>@"
 	text_end
 
-_MadeWhirlwindText::
-	text_start
-	line "made a whirlwind!"
-	prompt
+;_MadeWhirlwindText::
+;	text_start
+;	line "made a whirlwind!"
+;	prompt
 
-_TookInSunlightText::
-	text_start
-	line "took in sunlight!"
-	prompt
+;_TookInSunlightText::
+;	text_start
+;	line "took in sunlight!"
+;	prompt
 
-_LoweredItsHeadText::
-	text_start
-	line "lowered its head!"
-	prompt
+;_LoweredItsHeadText::
+;	text_start
+;	line "lowered its head!"
+;	prompt
 
-_SkyAttackGlowingText::
-	text_start
-	line "is glowing!"
-	prompt
+;_SkyAttackGlowingText::
+;	text_start
+;	line "is glowing!"
+;	prompt
 
 _FlewUpHighText::
 	text_start
@@ -207,7 +207,7 @@ _NoEffectText::
 	prompt
 
 _ButItFailedText::
-	text "But, it failed! "
+	text "But, it failed!"
 	prompt
 
 _DidntAffectText::

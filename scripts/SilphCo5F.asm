@@ -59,7 +59,6 @@ SilphCo5F_SetUnlockedSilphCoDoorsScript:
 	SetEventReuseHL EVENT_SILPH_CO_5_UNLOCKED_DOOR1
 	callfar CheckAllCardKeyEvents
 	jp Load5FCheckCardKeyText
-	ret
 .unlock_door1
 	cp $2
 	jr nz, .unlock_door2
@@ -69,8 +68,7 @@ SilphCo5F_SetUnlockedSilphCoDoorsScript:
 .unlock_door2
 	SetEventAfterBranchReuseHL EVENT_SILPH_CO_5_UNLOCKED_DOOR3, EVENT_SILPH_CO_5_UNLOCKED_DOOR1
 	callfar CheckAllCardKeyEvents
-	jp Load5FCheckCardKeyText
-
+	; fall through
 Load5FCheckCardKeyText:
 	CheckEvent EVENT_ALL_CARD_KEY_DOORS_OPENED
 	ret z

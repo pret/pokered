@@ -94,8 +94,7 @@ UpdatePlayerSprite:
 	;jr nz, .calcImageIndex
 	jr c, .calcImageIndex	;prevents interframe counter from increasing forever
 	xor a
-	ld [hl], a
-	inc hl
+	ld [hli], a
 	ld a, [hl]
 	inc a
 	and $3
@@ -125,13 +124,12 @@ UpdatePlayerSprite:
 TestGrassTile2:
 	ld a, [wGrassTile]
 	cp c
-	jr z, .return
+	ret z
 	ld a, [wCurMapTileset]
 	cp FOREST
-	jr nz, .return
+	ret nz
 	ld a, $34	; check for the extra grass tile in the forest tileset
 	cp c
-.return
 	ret
 
 UnusedReadSpriteDataFunction:
@@ -434,8 +432,7 @@ UpdateSpriteInWalkingAnimation:
 sprite60fps:
 	push hl
 	push af
-	ld h, $c2
-	ld l, $0a
+	lb hl, $c2, $0a
 	ldh a, [hCurrentSpriteOffset]
 	add l
 	ld l, a
@@ -505,11 +502,9 @@ MakeNPCFacePlayer:
 	jr .facingDirectionDetermined
 .notFacingUp
 	bit PLAYER_DIR_BIT_LEFT, a
-	jr z, .notFacingRight
-	ld c, SPRITE_FACING_RIGHT
-	jr .facingDirectionDetermined
-.notFacingRight
 	ld c, SPRITE_FACING_LEFT
+	jr z, .facingDirectionDetermined
+	ld c, SPRITE_FACING_RIGHT
 .facingDirectionDetermined
 	ldh a, [hCurrentSpriteOffset]
 	add $9
@@ -614,12 +609,12 @@ CheckSpriteAvailability:
 	ld l, a
 	ld [hl], $ff       ; x#SPRITESTATEDATA1_IMAGEINDEX
 	scf
-	jr .done
+	ret
 .spriteVisible
 	ld c, a
 	ld a, [wWalkCounter]
 	and a
-	jr nz, .done           ; if player is currently walking, we're done
+	ret nz           ; if player is currently walking, we're done
 	call UpdateSpriteImage
 	inc h
 	ldh a, [hCurrentSpriteOffset]
@@ -632,7 +627,6 @@ CheckSpriteAvailability:
 .notInGrass
 	ld [hl], a       ; x#SPRITESTATEDATA2_GRASSPRIORITY
 	and a
-.done
 	ret
 
 UpdateSpriteImage:
@@ -747,7 +741,7 @@ CanWalkOntoTile:
 	jr c, .impassable  ; if [x#SPRITESTATEDATA2_YDISPLACEMENT]+d < 5, don't go
 	jr .checkHorizontal
 .upwards
-	sub $1
+	sub 1
 	jr c, .impassable  ; if [x#SPRITESTATEDATA2_YDISPLACEMENT] == 0, don't go
 .checkHorizontal
 	ld d, a
@@ -758,7 +752,7 @@ CanWalkOntoTile:
 	cp $5              ; compare, but no conditional jump like in the vertical check above (bug?)
 	jr .passable
 .left
-	sub $1
+	sub 1
 	jr c, .impassable  ; if [x#SPRITESTATEDATA2_XDISPLACEMENT] == 0, don't go
 .passable
 	ld [hld], a        ; update x#SPRITESTATEDATA2_XDISPLACEMENT
@@ -803,10 +797,13 @@ GetTileSpriteStandsOn:
 	ld c, a
 	ld b, $0
 	inc l
-	ld a, [hl]      ; x#SPRITESTATEDATA1_XPIXELS
-	srl a
-	srl a
-	srl a            ; screen X tile
+	ld a, [hl]      ; x#SPRITESTATEDATA1_XPIXELS\
+; PureRGBnote: OPTIMIZED
+	;srl a
+	;srl a
+	;srl a       
+	srl_a_3x
+	; a =  screen X tile     
 	add SCREEN_WIDTH ; screen X tile + 20
 	ld d, $0
 	ld e, a
@@ -970,8 +967,7 @@ AnimScriptedNPCMovement:
 	cp SPRITE_FACING_LEFT
 	jr z, .anim
 	cp SPRITE_FACING_RIGHT
-	jr z, .anim
-	ret
+	ret nz
 .anim
 	add b
 	ld b, a

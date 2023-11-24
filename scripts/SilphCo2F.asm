@@ -90,15 +90,13 @@ SilphCo2F_UnlockedDoorEventScript:
 .unlock_door1
 	SetEventAfterBranchReuseHL EVENT_SILPH_CO_2_UNLOCKED_DOOR2, EVENT_SILPH_CO_2_UNLOCKED_DOOR1
 	callfar CheckAllCardKeyEvents
-	jp Load2FCheckCardKeyText
-
+	; fall through
 Load2FCheckCardKeyText:
 	CheckEvent EVENT_ALL_CARD_KEY_DOORS_OPENED
 	ret z
 	ld a, TEXT_SILPHCO2F_CARD_KEY_DONE
 	ldh [hSpriteIndexOrTextID], a
-	call DisplayTextID
-	ret
+	jp DisplayTextID
 
 SilphCo2Text6:
 	text_asm

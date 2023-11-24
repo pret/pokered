@@ -3,8 +3,7 @@ DrawStartMenu::
 	CheckEvent EVENT_GOT_POKEDEX
 ; menu with pokedex
 	hlcoord 10, 0
-	ld b, $0e
-	ld c, $08
+	lb bc, 14, 8
 	jr nz, .drawTextBoxBorder
 ; shorter menu if the player doesn't have the pokedex
 	ld b, $0c

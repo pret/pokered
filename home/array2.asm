@@ -11,10 +11,7 @@ CallFunctionInTable::
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld de, .returnAddress
-	push de
-	jp hl
-.returnAddress
+	call hl_caller
 	pop bc
 	pop de
 	pop hl

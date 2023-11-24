@@ -1,6 +1,6 @@
 _ViridianForestNorthGateSuperNerdText::
 	text "Many #MON live"
-	line "only in forests "
+	line "only in forests"
 	cont "and caves."
 
 	para "You need to look"

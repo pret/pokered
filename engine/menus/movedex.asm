@@ -157,7 +157,7 @@ HandleMovedexListMenu:
 	ld c, 8
 .maxSeenMovesInnerLoop
 	dec b
-	sla a
+	add a
 	jr c, .storeMaxSeenMoves
 	dec c
 	jr nz, .maxSeenMovesInnerLoop
@@ -297,9 +297,7 @@ HandleMovedexListMenu:
 	ret
 .selectPressed
 	CheckEvent EVENT_GOT_TOWN_MAP
-	jr nz, .showTownMap
-	jp .loop
-.showTownMap
+	jp z, .loop
 	ld a, SFX_SWITCH
 	rst _PlaySound
 	ld a, 1
@@ -334,7 +332,6 @@ ShowMoveData:
 	add b
 	inc a
 	ld [wd11e], a
-	ld a, [wd11e]
 	ld hl, wMovedexSeen
 	call IsMoveBitSet
 	ret z
@@ -425,7 +422,6 @@ ShowNextMoveData:
 	jr nc, .copyMarker
 	; physical
 	ld b, $D1
-	jr .copyMarker
 .copyMarker
 	ld c, 4
 	ld de, 1
@@ -505,9 +501,7 @@ ShowNextMoveData:
 	ldh a, [hRemainder] ; resultant accuracy percentage
 	cp 123
 	ldh a, [hQuotient + 3]
-	jr c, .noRemainder
-	inc a
-.noRemainder
+	inc_a_nc
 	ld de, wSum
 	ld [de], a
 	hlcoord 10, 8
@@ -640,8 +634,7 @@ LoadMoveDexMoveData:
 	ld bc, MOVE_LENGTH
 	call AddNTimes
 	ld a, BANK(Moves)
-	call FarCopyData ; copy the move's stats
-	ret
+	jp FarCopyData ; copy the move's stats
 
 DrawDataBorder: ; doesn't change between moves
 	hlcoord 0, 0
@@ -672,9 +665,7 @@ DrawDataBorder: ; doesn't change between moves
 	call PlaceString ; draw horizontal divider line
 	hlcoord 0, 9
 	ld de, MovedexTitleDividerLine
-	call PlaceString ; draw horizontal divider line
-
-	ret
+	jp PlaceString ; draw horizontal divider line
 
 DrawBottomDataBorder: ; can change if there's no previous or next move
 	hlcoord 4, 17
@@ -739,8 +730,7 @@ DrawBottomDataBorder: ; can change if there's no previous or next move
 	call DrawTileLine ; obscure next button
 	hlcoord 16, 16
 	lb bc, 1, 3
-	call ClearScreenArea ; remove line above it
-	ret
+	jp ClearScreenArea ; remove line above it
 
 ClearBasicMoveData:
 	hlcoord 1, 1
@@ -760,8 +750,7 @@ ClearBasicMoveData:
 	call ClearScreenArea
 	hlcoord 1, 11
 	lb bc, 5, 18
-	call ClearScreenArea
-	ret
+	jp ClearScreenArea
 
 ; seeks to the next move that has been seen
 SeekToNextMon:

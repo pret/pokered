@@ -87,8 +87,7 @@ BillsHousePokemonList::
 	ld hl, wd730
 	set 6, [hl]
 	hlcoord 0, 0
-	ld b, 10
-	ld c, 9
+	lb bc, 10, 9
 	call TextBoxBorder
 	hlcoord 2, 2
 	ld de, BillsMonListText
@@ -108,8 +107,7 @@ BillsHousePokemonList::
 	cp JOLTEON
 	jr z, .displayPokedex
 	cp VAPOREON
-	jr z, .displayPokedex
-	jr .cancel
+	jr nz, .cancel
 .displayPokedex
 	call DisplayPokedex
 	call LoadScreenTilesFromBuffer2

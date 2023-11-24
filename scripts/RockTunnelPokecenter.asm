@@ -39,10 +39,9 @@ RockTunnelCharityNurseText:
 	jr nz, .no
 	xor a
 	ldh [hMoney], a
+	ldh [hMoney + 2], a
 	ld a, $30
 	ldh [hMoney + 1], a
-	ld a, $00
-	ldh [hMoney + 2], a
 	call HasEnoughMoney
 	jr nc, .success
 	ld hl, RockTunnelCharityNurseNotEnoughMoneyText
@@ -52,10 +51,9 @@ RockTunnelCharityNurseText:
 	SetEvent EVENT_DONATED_TO_POKECENTER_CHARITY
 	xor a
 	ld [wPriceTemp], a
+	ld [wPriceTemp + 2], a
 	ld a, $30
 	ld [wPriceTemp + 1], a
-	ld a, $00
-	ld [wPriceTemp + 2], a
 	ld hl, wPriceTemp + 2
 	ld de, wPlayerMoney + 2
 	ld c, 3

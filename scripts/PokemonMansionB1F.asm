@@ -31,8 +31,7 @@ MansionB1FCheckReplaceSwitchDoorBlocks:
 	call Mansion2ReplaceBlock
 	ld a, $54
 	ld bc, $808
-	call Mansion2ReplaceBlock
-	ret
+	jp Mansion2ReplaceBlock
 .switchTurnedOn
 	ld a, $2d
 	ld bc, $80d
@@ -45,8 +44,7 @@ MansionB1FCheckReplaceSwitchDoorBlocks:
 	call Mansion2ReplaceBlock
 	ld a, $e
 	ld bc, $808
-	call Mansion2ReplaceBlock
-	ret
+	jp Mansion2ReplaceBlock
 
 UnlockLab::
 	ld a, $78

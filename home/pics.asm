@@ -94,9 +94,7 @@ LoadUncompressedSpriteData::
 	push de
 	and $f
 	ldh [hSpriteWidth], a ; each byte contains 8 pixels (in 1bpp), so tiles=bytes for width
-	ld b, a
-	ld a, $7
-	sub b      ; 7-w
+	n_sub_a 7 ; 7-w  
 	inc a      ; 8-w
 	srl a      ; (8-w)/2     ; horizontal center (in tiles, rounded up)
 	ld b, a

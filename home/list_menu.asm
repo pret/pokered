@@ -17,19 +17,15 @@ DisplayListMenuID::
 ;;;;;;;;;; appear behind the TM move name window so we can close it if needed
 	ld a, [wListMenuHoverTextType]
 	and a
-	jr z, .noSaveScreenTiles
-	call CheckSaveHoverTextScreenTiles
-.noSaveScreenTiles
+	call nz, CheckSaveHoverTextScreenTiles
 ;;;;;;;;;;
 	ld hl, wd730
 	set 6, [hl] ; turn off letter printing delay
 	xor a
 	ld [wMenuItemToSwap], a ; 0 means no item is currently being swapped
 	ld [wListCount], a
-	ld a, [wListPointer]
-	ld l, a
-	ld a, [wListPointer + 1]
-	ld h, a ; hl = address of the list
+	hl_deref wListPointer
+	; hl = address of the list
 	ld a, [hl] ; the first byte is the number of entries in the list
 	ld [wListCount], a
 	ld a, LIST_MENU_BOX
@@ -61,9 +57,7 @@ DisplayListMenuID::
 ;;;;;;;;;; PureRGBnote: ADDED: code that checks if we need to adjust the offset after changing the size of the list (depositing items/pokemon)
 	ld a, [wBattleType]
 	and a ; is it the Old Man battle?
-	jr nz, .skipOffsetCheck
-	call CheckBadOffset 
-.skipOffsetCheck
+	call z, CheckBadOffset
 ;;;;;;;;;;
 	call CheckForHoverText ; PureRGBnote: ADDED: check for TM text to display on initializing the table (like if the first entry is a TM)
 	homecall PrepareOAMData	; shinpokerednote: gbcnote: makes mart menus cleaner by updating the OAM sprite table ahead of vblank
@@ -116,10 +110,7 @@ DisplayListMenuIDLoop::
 ; if it's an item menu
 	sla c ; item entries are 2 bytes long, so multiply by 2
 .skipMultiplying
-	ld a, [wListPointer]
-	ld l, a
-	ld a, [wListPointer + 1]
-	ld h, a
+	hl_deref wListPointer
 	inc hl ; hl = beginning of list entries
 	ld b, 0
 	add hl, bc
@@ -208,15 +199,13 @@ DisplayListMenuIDLoop::
 DisplayChooseQuantityMenu::
 ; text box dimensions/coordinates for just quantity
 	hlcoord 15, 9
-	ld b, 1 ; height
-	ld c, 3 ; width
+	lb bc, 1, 3 ; height, width
 	ld a, [wListMenuID]
 	cp PRICEDITEMLISTMENU
 	jr nz, .drawTextBox
 ; text box dimensions/coordinates for quantity and price
 	hlcoord 7, 9
-	ld b, 1  ; height
-	ld c, 11 ; width
+	lb bc, 1, 11  ; height, width
 .drawTextBox
 	call TextBoxBorder
 	hlcoord 16, 10
@@ -258,8 +247,7 @@ DisplayChooseQuantityMenu::
 	cp b
 	jr nz, .handleNewQuantity
 ; wrap to 1 if the player goes above the max quantity
-	ld a, 1
-	ld [hl], a
+	ld [hl], 1
 	jr .handleNewQuantity
 .decrementQuantity
 	ld hl, wItemQuantity ; current quantity
@@ -281,8 +269,7 @@ DisplayChooseQuantityMenu::
 	cp b
 	jr c, .handleNewQuantity
 ; wrap to 1 if the player goes above the max quantity
-	ld a, 1
-	ld [hl], a
+	ld [hl], 1
 	jr .handleNewQuantity
 .decrementQuantity10
 	ld hl, wItemQuantity ; current quantity
@@ -383,8 +370,7 @@ ExitListMenu::
 
 PrintListMenuEntries::
 	hlcoord 5, 3
-	ld b, 9
-	ld c, 14
+	lb bc, 9, 14
 	call ClearScreenArea
 	ld a, [wListPointer]
 	ld e, a
@@ -399,7 +385,7 @@ PrintListMenuEntries::
 	jr nz, .skipMultiplying
 ; if it's an item menu
 ; item entries are 2 bytes long, so multiply by 2
-	sla a
+	add a
 	sla c
 .skipMultiplying
 	add e
@@ -447,9 +433,7 @@ PrintListMenuEntries::
 	ld hl, wBoxMonNicks ; box pokemon names
 .getPokemonName
 	ld a, [wWhichPokemon]
-	ld b, a
-	ld a, 4
-	sub b
+	n_sub_a 4
 	ld b, a
 	ld a, [wListScrollOffset]
 	add b
@@ -500,9 +484,7 @@ PrintListMenuEntries::
 	ld [wMonDataLocation], a
 	ld hl, wWhichPokemon
 	ld a, [hl]
-	ld b, a
-	ld a, $04
-	sub b
+	n_sub_a 4
 	ld b, a
 	ld a, [wListScrollOffset]
 	add b
@@ -565,7 +547,7 @@ PrintListMenuEntries::
 	ld a, [wMenuItemToSwap] ; ID of item chosen for swapping (counts from 1)
 	and a ; is an item being swapped?
 	jr z, .nextListEntry
-	sla a
+	add a
 	cp c ; is it this item?
 	jr nz, .nextListEntry
 	dec hl
@@ -580,8 +562,7 @@ PrintListMenuEntries::
 	jp nz, .loop
 	ld bc, -8
 	add hl, bc
-	ld a, "▼"
-	ld [hl], a
+	ld [hl], "▼"
 	ret
 .printCancelMenuItem
 	ld de, ListMenuCancelText

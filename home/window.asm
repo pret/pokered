@@ -34,8 +34,7 @@ HandleMenuInput_::
 	pop hl
 	ld a, [wMenuJoypadPollCount]
 	dec a
-	jr z, .giveUpWaiting
-	jr .loop2
+	jr nz, .loop2
 .giveUpWaiting
 ; if a key wasn't pressed within the specified number of checks
 	pop af
@@ -183,8 +182,7 @@ PlaceMenuCursor::
 	jr z, .skipSavingTile ; if so, don't lose the saved tile
 	ld [wTileBehindCursor], a ; save tile before overwriting with right arrow
 .skipSavingTile
-	ld a, "▶" ; place right arrow
-	ld [hl], a
+	ld [hl], "▶"
 	ld a, l
 	ld [wMenuCursorLocation], a
 	ld a, h
@@ -208,20 +206,14 @@ CheckForHoverText::
 ; this is used to mark the item that was first chosen to be swapped.
 PlaceUnfilledArrowMenuCursor::
 	ld b, a
-	ld a, [wMenuCursorLocation]
-	ld l, a
-	ld a, [wMenuCursorLocation + 1]
-	ld h, a
+	hl_deref wMenuCursorLocation
 	ld [hl], "▷"
 	ld a, b
 	ret
 
 ; Replaces the menu cursor with a blank space.
 EraseMenuCursor::
-	ld a, [wMenuCursorLocation]
-	ld l, a
-	ld a, [wMenuCursorLocation + 1]
-	ld h, a
+	hl_deref wMenuCursorLocation
 	ld [hl], " "
 	ret
 
@@ -248,8 +240,7 @@ HandleDownArrowBlinkTiming::
 	dec a
 	ldh [hDownArrowBlinkCount2], a
 	ret nz
-	ld a, " "
-	ld [hl], a
+	ld [hl], " "
 	ld a, $ff
 	ldh [hDownArrowBlinkCount1], a
 	ld a, $06
@@ -270,8 +261,7 @@ HandleDownArrowBlinkTiming::
 	ret nz
 	ld a, $06
 	ldh [hDownArrowBlinkCount2], a
-	ld a, "▼"
-	ld [hl], a
+	ld [hl], "▼"
 	ret
 
 ; The following code either enables or disables the automatic drawing of

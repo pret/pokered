@@ -45,16 +45,14 @@ Route20BoulderScript:
 	ld a, HS_SEAFOAM_ISLANDS_B4F_BOULDER_1
 	call Route20HideObjectScript
 	ld a, HS_SEAFOAM_ISLANDS_B4F_BOULDER_2
-	call Route20HideObjectScript
-	ret
+	; fall through
+Route20HideObjectScript:
+	ld [wMissableObjectIndex], a
+	predef_jump HideObject
 
 Route20ShowObjectScript:
 	ld [wMissableObjectIndex], a
 	predef_jump ShowObject
-
-Route20HideObjectScript:
-	ld [wMissableObjectIndex], a
-	predef_jump HideObject
 
 Route20_ScriptPointers:
 	def_script_pointers

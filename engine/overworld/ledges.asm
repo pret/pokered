@@ -77,8 +77,7 @@ LoadHoppingShadowOAM:
 	ld a, $9
 	lb bc, $54, $48 ; b, c = y, x coordinates of shadow
 	ld de, LedgeHoppingShadowOAM
-	call WriteOAMBlock
-	ret
+	jp WriteOAMBlock
 
 LedgeHoppingShadow:
 	INCBIN "gfx/overworld/shadow.1bpp"

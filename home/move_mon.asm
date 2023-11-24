@@ -111,20 +111,27 @@ CalcStat::
 	ld a, [hl]  ; Atk IV
 	swap a
 	and $1
-	sla a
-	sla a
-	sla a
+; PureRGBnote: OPTIMIZED
+	add a
+	add a
+	add a
+	;sla a
+	;sla a
+	;sla a
 	ld b, a
 	ld a, [hli] ; Def IV
 	and $1
-	sla a
-	sla a
+	add a
+	add a
+	;sla a
+	;sla a
 	add b
 	ld b, a
 	ld a, [hl] ; Spd IV
 	swap a
 	and $1
-	sla a
+	add a
+	;sla a
 	add b
 	ld b, a
 	ld a, [hl] ; Spc IV

@@ -104,8 +104,7 @@ DisplayCreditsMon:
 	ldh [hWY], a
 	ld a, %11000000
 	ldh [rBGP], a
-	call UpdateGBCPal_BGP ; shinpokerednote: gbcnote: gbc color code from yellow 
-	ret
+	jp UpdateGBCPal_BGP ; shinpokerednote: gbcnote: gbc color code from yellow 
 
 INCLUDE "data/credits/credits_mons.asm"
 
@@ -113,8 +112,7 @@ ScrollCreditsMonLeft:
 	ld h, b
 	ld l, $20
 	call ScrollCreditsMonLeft_SetSCX
-	ld h, $0
-	ld l, $70
+	lb hl, 0, $70
 	call ScrollCreditsMonLeft_SetSCX
 	ld a, b
 	add $8
@@ -146,8 +144,8 @@ CreditsCopyTileMapToVRAM:
 
 ZeroMemory:
 ; zero bc bytes at hl
-	ld [hl], 0
-	inc hl
+	xor a
+	ld [hli], a
 	inc hl
 	dec bc
 	ld a, b
@@ -198,8 +196,8 @@ Credits:
 	ld c, a
 	ld b, 0
 	add hl, bc
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
 	ld d, [hl]
 	ld a, [de]
 	inc de

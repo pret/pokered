@@ -54,8 +54,7 @@ BikeShopClerkText:
 	ld hl, wd730
 	set 6, [hl]
 	hlcoord 0, 0
-	ld b, 4
-	ld c, 15
+	lb bc, 4, 15
 	call TextBoxBorder
 	call UpdateSprites
 	hlcoord 2, 2

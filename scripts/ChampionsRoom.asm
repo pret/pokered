@@ -12,7 +12,7 @@ ResetRivalScript:
 
 ChampionsRoom_ScriptPointers:
 	def_script_pointers
-	dw_const ChampionsRoomDefaultScript,                  SCRIPT_CHAMPIONSROOM_DEFAULT
+	dw_const DoRet,                                       SCRIPT_CHAMPIONSROOM_DEFAULT
 	dw_const ChampionsRoomPlayerEntersScript,             SCRIPT_CHAMPIONSROOM_PLAYER_ENTERS
 	dw_const ChampionsRoomRivalReadyToBattleScript,       SCRIPT_CHAMPIONSROOM_RIVAL_READY_TO_BATTLE
 	dw_const ChampionsRoomRivalDefeatedScript,            SCRIPT_CHAMPIONSROOM_RIVAL_DEFEATED
@@ -23,9 +23,6 @@ ChampionsRoom_ScriptPointers:
 	dw_const ChampionsRoomOakExitsScript,                 SCRIPT_CHAMPIONSROOM_OAK_EXITS
 	dw_const ChampionsRoomPlayerFollowsOakScript,         SCRIPT_CHAMPIONSROOM_PLAYER_FOLLOWS_OAK
 	dw_const ChampionsRoomCleanupScript,                  SCRIPT_CHAMPIONSROOM_CLEANUP_SCRIPT
-
-ChampionsRoomDefaultScript:
-	ret
 
 ChampionsRoomPlayerEntersScript:
 	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
@@ -70,18 +67,7 @@ ChampionsRoomRivalReadyToBattleScript:
 
 	; select which team to use during the encounter
 	ld a, [wRivalStarter]
-	cp STARTER2
-	jr nz, .NotStarter2
-	ld a, $1
-	jr .saveTrainerId
-.NotStarter2
-	cp STARTER3
-	jr nz, .NotStarter3
-	ld a, $2
-	jr .saveTrainerId
-.NotStarter3
-	ld a, $3
-.saveTrainerId
+	call StarterToPartyID
 	ld [wTrainerNo], a
 
 	xor a

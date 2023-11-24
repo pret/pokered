@@ -1,6 +1,5 @@
 SSAnneKitchen_Script:
-	call EnableAutoTextBoxDrawing
-	ret
+	jp EnableAutoTextBoxDrawing
 
 SSAnneKitchen_TextPointers:
 	def_text_pointers

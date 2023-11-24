@@ -16,10 +16,7 @@ SSAnne2F_ScriptPointers:
 	dw_const SSAnne2FRivalStartBattleScript, SCRIPT_SSANNE2F_RIVAL_START_BATTLE
 	dw_const SSAnne2FRivalAfterBattleScript, SCRIPT_SSANNE2F_RIVAL_AFTER_BATTLE
 	dw_const SSAnne2FRivalExitScript,        SCRIPT_SSANNE2F_RIVAL_EXIT
-	dw_const SSAnne2FNoopScript,             SCRIPT_SSANNE2F_NOOP
-
-SSAnne2FNoopScript:
-	ret
+	dw_const DoRet,                          SCRIPT_SSANNE2F_NOOP
 
 SSAnne2FDefaultScript:
 	ld hl, .PlayerCoordinatesArray
@@ -102,20 +99,9 @@ SSAnne2FRivalStartBattleScript:
 
 	; select which team to use during the encounter
 	ld a, [wRivalStarter]
-	cp STARTER2
-	jr nz, .NotSquirtle
-	ld a, $1
-	jr .done
-.NotSquirtle
-	cp STARTER3
-	jr nz, .Charmander
-	ld a, $2
-	jr .done
-.Charmander
-	ld a, $3
-.done
+	call StarterToPartyID
+	; rival's starter is equal directly to which trainer we'll use here
 	ld [wTrainerNo], a
-
 	call SSAnne2FSetFacingDirectionScript
 	ld a, SCRIPT_SSANNE2F_RIVAL_AFTER_BATTLE
 	ld [wSSAnne2FCurScript], a

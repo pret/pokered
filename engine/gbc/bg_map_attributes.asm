@@ -103,8 +103,7 @@ LoadBGMapAttributes::
 	ldh [rIF], a
 	xor a
 	ldh [rVBK], a
-	ei
-	ret
+	reti
 
 BGMapAttributesPointers:
 	dw BGMapAttributes_PokemonMiddleScreenBox

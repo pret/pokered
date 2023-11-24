@@ -89,8 +89,8 @@ VermilionDockSSAnneLeavesScript:
 	ld a, 88
 	ld [wSSAnneSmokeX], a
 	ld hl, wMapViewVRAMPointer
-	ld c, [hl]
-	inc hl
+	ld a, [hli]
+	ld c, a
 	ld b, [hl]
 	push bc
 	push hl
@@ -98,8 +98,7 @@ VermilionDockSSAnneLeavesScript:
 	call PlaySoundWaitForCurrent
 	ld a, $ff
 	ld [wUpdateSpritesEnabled], a
-	ld d, $0
-	ld e, $8
+	lb de, 0, 8
 .shift_columns_up
 	ld hl, $2
 	add hl, bc
@@ -136,8 +135,8 @@ VermilionDockSSAnneLeavesScript:
 	ld [wUpdateSpritesEnabled], a
 	pop hl
 	pop bc
-	ld [hl], b
-	dec hl
+	ld a, b
+	ld [hld], a
 	ld [hl], c
 	call LoadPlayerSpriteGraphics
 	callfar GBCSetCPU2xSpeed ; shinpokerednote: ADDED: go back to double CPU speed if on GBC when the animation is done
@@ -175,8 +174,7 @@ VermilionDock_EmitSmokePuff:
 	ld [wSSAnneSmokeDriftAmount], a
 	ld a, $1
 	ld de, VermilionDockOAMBlock
-	call WriteOAMBlock
-	ret
+	jp WriteOAMBlock
 
 VermilionDockOAMBlock:
 	; tile id, attribute
@@ -189,8 +187,7 @@ VermilionDock_SyncScrollWithLY:
 	ld h, d
 	ld l, $50
 	call .sync_scroll_ly
-	ld h, $0
-	ld l, $80
+	lb hl, 0, $80
 .sync_scroll_ly
 	predef BGLayerScrollingUpdate ; shinpokerednote: gbcnote - consolidated into a predef that also fixes some issues
 .wait_for_ly_match
@@ -278,8 +275,7 @@ TruckCheck:
 	jp nz, ChangeTruckTile
 	ld hl, wCurrentMapScriptFlags
 	res 5, [hl]
-	ld c, HS_MEW_VERMILION_DOCK
-	ld b, FLAG_TEST
+	lb bc, FLAG_TEST, HS_MEW_VERMILION_DOCK
 	ld hl, wMissableObjectFlags
 	predef FlagActionPredef
 	ld a, c
@@ -365,8 +361,7 @@ ShowMew:
 	ld [wUpdateSpritesEnabled], a
 	ld a, HS_MEW_VERMILION_DOCK
 	ld [wMissableObjectIndex], a
-	predef ShowObject
-	ret
+	predef_jump ShowObject
 
 ChangeTruckTile:
 	ld hl, wCurrentMapScriptFlags
@@ -381,8 +376,7 @@ ChangeTruckTile:
 	ret z
 	ld a, $3
 	ld [hli], a
-	ld a, $c
-	ld [hl], a
+	ld [hl], $c
 	CheckEvent EVENT_ENCOUNTERED_MEW
 	call z, ShowMew
 	jpfar RedrawMapView

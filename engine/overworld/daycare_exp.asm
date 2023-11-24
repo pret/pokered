@@ -13,6 +13,5 @@ IncrementDayCareMonExp:
 	ld a, [hl]
 	cp $50
 	ret c
-	ld a, $50
-	ld [hl], a
+	ld [hl], $50
 	ret

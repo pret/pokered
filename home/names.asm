@@ -8,8 +8,7 @@ GetMonName::
 	ld a, [wd11e]
 	dec a
 	ld hl, MonsterNames
-	ld c, 10
-	ld b, 0
+	lb bc, 0, 10
 	call AddNTimes
 	ld de, wcd6d
 	push de

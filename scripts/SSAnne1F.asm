@@ -1,6 +1,5 @@
 SSAnne1F_Script:
-	call EnableAutoTextBoxDrawing
-	ret
+	jp EnableAutoTextBoxDrawing
 
 SSAnne1F_TextPointers:
 	def_text_pointers

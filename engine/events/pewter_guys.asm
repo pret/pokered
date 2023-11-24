@@ -1,8 +1,8 @@
 PewterGuys:
+	ld hl, wSimulatedJoypadStatesIndex
+	dec [hl] ; this decrement causes it to overwrite the last byte before $FF in the list
+	ld a, [hl]
 	ld hl, wSimulatedJoypadStatesEnd
-	ld a, [wSimulatedJoypadStatesIndex]
-	dec a ; this decrement causes it to overwrite the last byte before $FF in the list
-	ld [wSimulatedJoypadStatesIndex], a
 	ld d, 0
 	ld e, a
 	add hl, de

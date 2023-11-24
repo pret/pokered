@@ -1,6 +1,5 @@
 CinnabarLab_Script:
-	call EnableAutoTextBoxDrawing
-	ret
+	jp EnableAutoTextBoxDrawing
 
 CinnabarLab_TextPointers:
 	def_text_pointers

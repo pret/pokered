@@ -23,12 +23,12 @@ FarArePlayerCoordsInRange::
 	ld h, d
 	ld l, e
 CheckAreaForRestriction:
-	ld b, [hl]
-	inc hl
-	ld c, [hl]
-	inc hl
-	ld d, [hl]
-	inc hl
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	ld d, a
 	ld e, [hl]
 	jp ArePlayerCoordsInRange
 
@@ -72,8 +72,7 @@ CheckInSurfRestrictedArea::
 	inc hl
 	jr .loop
 .nextEntryWhole
-	ld b, 0
-	ld c, 5
+	lb bc, 0, 5
 	add hl, bc
 	jr .loop
 .notRestricted
@@ -89,8 +88,7 @@ CheckInSurfRestrictedArea::
 IsMoveInParty:
 	ld c, d ; which move to check
 	ld hl, wPartyMon1Moves
-	ld d, 0 ; how many matches were found
-	ld e, 0 ; which pokemon we're on
+	lb de, 0, 0 ; d = how many matches were found e = which pokemon we're on
 	push bc
 .nextPoke
 	pop bc

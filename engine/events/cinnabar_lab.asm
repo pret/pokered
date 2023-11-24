@@ -37,16 +37,12 @@ GiveFossilToCinnabarLab::
 	ld a, [hl]
 	ldh [hItemToRemoveID], a
 	cp DOME_FOSSIL
-	jr z, .choseDomeFossil
-	cp HELIX_FOSSIL
-	jr z, .choseHelixFossil
-	ld b, AERODACTYL
-	jr .fossilSelected
-.choseHelixFossil
-	ld b, OMANYTE
-	jr .fossilSelected
-.choseDomeFossil
 	ld b, KABUTO
+	jr z, .fossilSelected
+	cp HELIX_FOSSIL
+	ld b, OMANYTE
+	jr z, .fossilSelected
+	ld b, AERODACTYL
 .fossilSelected
 	ld [wFossilItem], a
 	ld a, b
@@ -119,5 +115,4 @@ LoadFossilItemAndMonName::
 	call CopyToStringBuffer
 	ld a, [wFossilItem]
 	ld [wd11e], a
-	call GetItemName
-	ret
+	jp GetItemName

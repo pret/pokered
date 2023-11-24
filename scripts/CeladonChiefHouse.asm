@@ -1,6 +1,5 @@
 CeladonChiefHouse_Script:
-	call EnableAutoTextBoxDrawing
-	ret
+	jp EnableAutoTextBoxDrawing
 
 CeladonChiefHouse_TextPointers:
 	def_text_pointers

@@ -228,8 +228,7 @@ GetAvailableColorChanges:
 	dec b
 	add 10
 	cp 150
-	jr nc, .doneCount
-	jr .count
+	jr c, .count
 .doneCount
 	ld a, [wColorSwapsUsed]
 	ld c, a
@@ -311,8 +310,7 @@ DoColorSwap:
 	ld a, AMOUNT_LEFT_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID ; redisplay amount left box with decremented value
-	call PlayDefaultMusic
-	ret
+	jp PlayDefaultMusic
 
 FiddlingAroundSounds:
 	ld a, SFX_STOP_ALL_MUSIC

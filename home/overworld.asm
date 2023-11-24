@@ -67,11 +67,15 @@ OverworldLoopLessDelay::
 	jp nz, .newBattle
 	ld a, [wd730]
 	bit 7, a ; are we simulating button presses?
-	jr z, .notSimulating
-	ldh a, [hJoyHeld]
-	jr .checkIfStartIsPressed
-.notSimulating
+; PureRGBnote: OPTIMIZED
 	ldh a, [hJoyPressed]
+	jr z, .checkIfStartIsPressed
+	ldh a, [hJoyHeld]
+;	jr z, .notSimulating
+;	ldh a, [hJoyHeld]
+;	jr .checkIfStartIsPressed
+;.notSimulating
+;	ldh a, [hJoyPressed]
 .checkIfStartIsPressed
 	bit BIT_START, a
 	jr z, .startButtonNotPressed
@@ -153,9 +157,8 @@ OverworldLoopLessDelay::
 	ldh a, [hJoyHeld] 
 	and A_BUTTON
 	jr z, .resetDirectionChangeState ; hold both B and A button to go into "change direction without moving" mode.
-	ld a, [wDirectionChangeModeCounter]
-	inc a
-	ld [wDirectionChangeModeCounter], a
+	ld hl, wDirectionChangeModeCounter
+	inc [hl]
 	jr .noDirectionButtonsPressed2
 .resetDirectionChangeState
 	xor a
@@ -327,8 +330,7 @@ OverworldLoopLessDelay::
 	; PureRGBnote: ADDED: Holding B makes you run at 2x walking speed
 	ldh a, [hJoyHeld]
 	and B_BUTTON
-	jr z, .notRunning
-	call DoBikeSpeedup
+	call nz, DoBikeSpeedup
 .notRunning
 	call AdvancePlayerSprite
 	ld a, [wWalkCounter]
@@ -430,11 +432,10 @@ GetBikeSpeed::
 	jr z, .cyclingRoad
 	ldh a, [hJoyHeld]
 	and B_BUTTON
-	jr z, .normalBikeSpeed
+	jr z, DoBikeSpeedup
 	; B button held
 	call DoBikeSpeedup
 	call DoBikeSpeedup
-.normalBikeSpeed
 	jr DoBikeSpeedup
 .cyclingRoad
 	; uphill we can only go a bit faster, downhill we can go full speed
@@ -637,11 +638,15 @@ CheckMapConnections::
 PlayMapChangeSound::
 	lda_coord 8, 8 ; upper left tile of the 4x4 square the player's sprite is standing on
 	cp $0b ; door tile in tileset 0
-	jr nz, .didNotGoThroughDoor
-	ld a, SFX_GO_INSIDE
-	jr .playSound
-.didNotGoThroughDoor
+; PureRGBnote: OPTIMIZED
 	ld a, SFX_GO_OUTSIDE
+	jr nz, .playSound
+	ld a, SFX_GO_INSIDE
+	;jr nz, .didNotGoThroughDoor
+	;ld a, SFX_GO_INSIDE
+	;jr .playSound
+;.didNotGoThroughDoor
+	;ld a, SFX_GO_OUTSIDE
 .playSound
 	rst _PlaySound
 	ld a, [wMapPalOffset]
@@ -834,8 +839,6 @@ IsBikeRidingAllowed::
 	ld a, [wCurMap]
 	ld b, a
 	ld hl, BikeRidingMaps
-	call .bikeAllowedLoop
-	ret
 
 .bikeAllowedLoop
 .loop
@@ -855,10 +858,7 @@ INCLUDE "data/tilesets/bike_riding_tilesets.asm"
 
 ; load the tile pattern data of the current tileset into VRAM
 LoadTilesetTilePatternData::
-	ld a, [wTilesetGfxPtr]
-	ld l, a
-	ld a, [wTilesetGfxPtr + 1]
-	ld h, a
+	hl_deref wTilesetGfxPtr
 	ld de, vTileset
 	ld bc, $600
 	ld a, [wTilesetBank]
@@ -925,14 +925,8 @@ LoadTileBlockMap::
 	cp $ff
 	jr z, .southConnection
 	call SwitchToMapRomBank
-	ld a, [wNorthConnectionStripSrc]
-	ld l, a
-	ld a, [wNorthConnectionStripSrc + 1]
-	ld h, a
-	ld a, [wNorthConnectionStripDest]
-	ld e, a
-	ld a, [wNorthConnectionStripDest + 1]
-	ld d, a
+	de_deref wNorthConnectionStripDest
+	hl_deref wNorthConnectionStripSrc
 	ld a, [wNorthConnectionStripLength]
 	ldh [hNorthSouthConnectionStripWidth], a
 	ld a, [wNorthConnectedMapWidth]
@@ -943,14 +937,8 @@ LoadTileBlockMap::
 	cp $ff
 	jr z, .westConnection
 	call SwitchToMapRomBank
-	ld a, [wSouthConnectionStripSrc]
-	ld l, a
-	ld a, [wSouthConnectionStripSrc + 1]
-	ld h, a
-	ld a, [wSouthConnectionStripDest]
-	ld e, a
-	ld a, [wSouthConnectionStripDest + 1]
-	ld d, a
+	de_deref wSouthConnectionStripDest
+	hl_deref wSouthConnectionStripSrc
 	ld a, [wSouthConnectionStripLength]
 	ldh [hNorthSouthConnectionStripWidth], a
 	ld a, [wSouthConnectedMapWidth]
@@ -961,14 +949,8 @@ LoadTileBlockMap::
 	cp $ff
 	jr z, .eastConnection
 	call SwitchToMapRomBank
-	ld a, [wWestConnectionStripSrc]
-	ld l, a
-	ld a, [wWestConnectionStripSrc + 1]
-	ld h, a
-	ld a, [wWestConnectionStripDest]
-	ld e, a
-	ld a, [wWestConnectionStripDest + 1]
-	ld d, a
+	de_deref wWestConnectionStripDest
+	hl_deref wWestConnectionStripSrc
 	ld a, [wWestConnectionStripLength]
 	ld b, a
 	ld a, [wWestConnectedMapWidth]
@@ -977,23 +959,15 @@ LoadTileBlockMap::
 .eastConnection
 	ld a, [wEastConnectedMap]
 	cp $ff
-	jr z, .done
+	ret z ;jr z, .done ; PureRGBnote: OPTIMIZED
 	call SwitchToMapRomBank
-	ld a, [wEastConnectionStripSrc]
-	ld l, a
-	ld a, [wEastConnectionStripSrc + 1]
-	ld h, a
-	ld a, [wEastConnectionStripDest]
-	ld e, a
-	ld a, [wEastConnectionStripDest + 1]
-	ld d, a
+	de_deref wEastConnectionStripDest
+	hl_deref wEastConnectionStripSrc
 	ld a, [wEastConnectionStripLength]
 	ld b, a
 	ld a, [wEastConnectedMapWidth]
 	ldh [hEastWestConnectedMapWidth], a
-	call LoadEastWestConnectionsTileMap
-.done
-	ret
+	jp LoadEastWestConnectionsTileMap
 
 LoadNorthSouthConnectionsTileMap::
 	ld c, MAP_BORDER
@@ -1520,8 +1494,7 @@ AdvancePlayerSprite::
 	cp $ff
 	jr nz, .adjustYCoordWithinBlock
 ; moved into the tile block to the west
-	ld a, $01
-	ld [hl], a
+	ld [hl], 1
 	ld hl, wXOffsetSinceLastSpecialWarp
 	dec [hl]
 	ld de, wCurrentTileBlockMapViewPointer
@@ -1547,8 +1520,7 @@ AdvancePlayerSprite::
 	cp $ff
 	jr nz, .updateMapView
 ; moved into the tile block to the north
-	ld a, $01
-	ld [hl], a
+	ld [hl], 1
 	ld hl, wYOffsetSinceLastSpecialWarp
 	dec [hl]
 	ld de, wCurrentTileBlockMapViewPointer
@@ -1577,9 +1549,11 @@ AdvancePlayerSprite::
 	jr .scrollBackgroundAndSprites
 .checkIfMovingWest2
 	cp $ff
-	jr nz, .scrollBackgroundAndSprites
+; PureRGBnote: OPTIMIZED
+	call z, ScheduleWestColumnRedraw
+	;jr nz, .scrollBackgroundAndSprites
 ; if moving west
-	call ScheduleWestColumnRedraw
+	;call ScheduleWestColumnRedraw
 .scrollBackgroundAndSprites
 	ld a, [wSpritePlayerStateData1YStepVector]
 	ld b, a
@@ -1598,7 +1572,7 @@ AdvancePlayerSprite::
 	ld hl, wSprite01StateData1YPixels
 	ld a, [wNumSprites] ; number of sprites
 	and a ; are there any sprites?
-	jr z, .done
+	ret z ;jr z, .done ; PureRGBnote: OPTIMIZED
 	ld e, a
 .spriteShiftLoop
 	ld a, [hl]
@@ -1613,7 +1587,7 @@ AdvancePlayerSprite::
 	ld l, a
 	dec e
 	jr nz, .spriteShiftLoop
-.done
+;.done
 	ret
 
 ; the following four functions are used to move the pointer to the upper left
@@ -1621,7 +1595,7 @@ AdvancePlayerSprite::
 
 MoveTileBlockMapPointerEast::
 	ld a, [de]
-	add $01
+	add 1
 	ld [de], a
 	ret nc
 	inc de
@@ -1632,7 +1606,7 @@ MoveTileBlockMapPointerEast::
 
 MoveTileBlockMapPointerWest::
 	ld a, [de]
-	sub $01
+	sub 1
 	ld [de], a
 	ret nc
 	inc de
@@ -1695,10 +1669,7 @@ CopyToRedrawRowOrColumnSrcTiles::
 ScheduleSouthRowRedraw::
 	hlcoord 0, 16
 	call CopyToRedrawRowOrColumnSrcTiles
-	ld a, [wMapViewVRAMPointer]
-	ld l, a
-	ld a, [wMapViewVRAMPointer + 1]
-	ld h, a
+	hl_deref wMapViewVRAMPointer
 	ld bc, $200
 	add hl, bc
 	ld a, h
@@ -1764,10 +1735,7 @@ ScheduleWestColumnRedraw::
 ; Input: c = tile block ID, hl = destination address
 DrawTileBlock::
 	push hl
-	ld a, [wTilesetBlocksPtr] ; pointer to tiles
-	ld l, a
-	ld a, [wTilesetBlocksPtr + 1]
-	ld h, a
+	hl_deref wTilesetBlocksPtr ; pointer to tiles
 	ld a, c
 	swap a
 	ld b, a
@@ -1895,8 +1863,7 @@ CollisionCheckOnWater::
 .checkIfNextTileIsPassable
 ;;;;;;;;;; PureRGBnote: CHANGED: unified code for checking if a tile is passable
 	callfar _CheckTilePassable
-	jr c, .collision
-	jr .stopSurfing
+	jr nc, .stopSurfing
 ;;;;;;;;;;
 .collision
 	ld a, [wChannelSoundIDs + CHAN5]
@@ -1938,10 +1905,7 @@ RunMapScript::
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld de, .return
-	push de
-	jp hl ; jump to script
-.return
+	call hl_caller ; jump to script
 ;;;;;;;;;; PureRGBnote: ADDED: code that will fade back in after battle in specific maps with a bit in their header
 ;;;;;;;;;; used to keep tileblock replacements unseen
 	ld hl, wCurrentMapScriptFlags
@@ -1989,7 +1953,7 @@ LoadPlayerSpriteGraphicsCommon::
 ; function to load data from the map header
 LoadMapHeader::
 	farcall MarkTownVisitedAndLoadMissableObjects
-	ld a, [wCurMapTileset]
+	;ld a, [wCurMapTileset]
 	;ld [wUnusedD119], a
 	ld a, [wCurMap]
 	call SwitchToMapRomBank
@@ -2002,7 +1966,7 @@ LoadMapHeader::
 	ret nz
 	ld hl, MapHeaderPointers
 	ld a, [wCurMap]
-	sla a
+	add a
 	jr nc, .noCarry1
 	inc h
 .noCarry1
@@ -2056,10 +2020,8 @@ LoadMapHeader::
 	ld [wObjectDataPointerTemp], a
 	ld a, [hli]
 	ld [wObjectDataPointerTemp + 1], a
-	ld a, [wObjectDataPointerTemp]
-	ld l, a
-	ld a, [wObjectDataPointerTemp + 1]
-	ld h, a ; hl = base of object data
+	hl_deref wObjectDataPointerTemp
+	; hl = base of object data
 	ld de, wMapBackgroundTile
 	ld a, [hli]
 	ld [de], a
@@ -2313,8 +2275,7 @@ LoadMapData::
 ; copy current map view to VRAM
 	hlcoord 0, 0
 	ld de, vBGMap0
-	ld b, SCREEN_HEIGHT
-	ld c, SCREEN_WIDTH
+	lb bc, SCREEN_HEIGHT, SCREEN_WIDTH
 .vramCopyLoop
 	push bc
 	ld b, 0
@@ -2342,9 +2303,10 @@ LoadMapData::
 	jr nz, .restoreRomBank
 	ld a, [wFlags_D733]
 	bit 1, a
-	jr nz, .restoreRomBank
+	call z, PlayDefaultMusicFadeOutCurrent
+	;jr nz, .restoreRomBank
 	;call UpdateMusic6Times
-	call PlayDefaultMusicFadeOutCurrent
+	;call PlayDefaultMusicFadeOutCurrent
 .restoreRomBank
 	pop af
 	ldh [hLoadedROMBank], a

@@ -27,15 +27,12 @@ BillsHouseAddDoors:
 
 BillsHouse_ScriptPointers:
 	def_script_pointers
-	dw_const BillsHouseDefaultScript,              SCRIPT_BILLSHOUSE_DEFAULT
+	dw_const DoRet,                                SCRIPT_BILLSHOUSE_DEFAULT
 	dw_const BillsHousePokemonWalkToMachineScript, SCRIPT_BILLSHOUSE_POKEMON_WALK_TO_MACHINE
 	dw_const BillsHousePokemonEntersMachineScript, SCRIPT_BILLSHOUSE_POKEMON_ENTERS_MACHINE
 	dw_const BillsHouseBillExitsMachineScript,     SCRIPT_BILLSHOUSE_BILL_EXITS_MACHINE
 	dw_const BillsHouseCleanupScript,              SCRIPT_BILLSHOUSE_CLEANUP
 	dw_const BillsHousePCScript,                   SCRIPT_BILLSHOUSE_PC
-
-BillsHouseDefaultScript:
-	ret
 
 BillsHousePokemonWalkToMachineScript:
 	ld a, [wSpritePlayerStateData1FacingDirection]

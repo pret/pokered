@@ -157,9 +157,9 @@ _OaksLabOak1ComeSeeMeSometimesText::
 	done
 
 _OaksLabOak1HowIsYourPokedexComingText::
-	text "OAK: Good to see "
-	line "you! How is your "
-	cont "#DEX coming? "
+	text "OAK: Good to see"
+	line "you! How is your"
+	cont "#DEX coming?"
 	cont "Here, let me take"
 	cont "a look!"
 	prompt

@@ -18,10 +18,7 @@ CheckForHiddenObjectOrBookshelfOrCardKeyDoor::
 	ld a, [wHiddenObjectFunctionRomBank]
 	ld [MBC1RomBank], a
 	ldh [hLoadedROMBank], a
-	ld de, .returnAddress
-	push de
-	jp hl
-.returnAddress
+	call hl_caller
 	xor a
 	jr .done
 .hiddenObjectNotFound

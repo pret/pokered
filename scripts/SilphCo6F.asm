@@ -35,7 +35,7 @@ SilphCo6F_UnlockedDoorEventScript:
 	ret z
 	SetEvent EVENT_SILPH_CO_6_UNLOCKED_DOOR
 	callfar CheckAllCardKeyEvents
-	jp Load6FCheckCardKeyText
+	; fall through
 
 Load6FCheckCardKeyText:
 	CheckEvent EVENT_ALL_CARD_KEY_DOORS_OPENED
@@ -81,9 +81,7 @@ SilphCo6TrainerHeader2:
 
 SilphCo6FBeatGiovanniPrintDEOrPrintHLScript:
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
-	jr nz, .beat_giovanni
-	jr .print_text
-.beat_giovanni
+	jr z, .print_text
 	ld h, d
 	ld l, e
 .print_text

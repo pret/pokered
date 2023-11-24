@@ -165,7 +165,7 @@ ItemUseBall:
 	ld de, wPlayerName
 	ld bc, NAME_LENGTH
 	rst _CopyData ; save the player's name in the Wild Monster data (part of the Cinnabar Island Missingno. glitch)
-	jp .captured
+	jp .skipShakeCalculations
 
 .notOldManBattle
 ; If the player is fighting the ghost Marowak, set the value that indicates the
@@ -203,7 +203,7 @@ ItemUseBall:
 
 ; The Master Ball always succeeds.
 	cp MASTER_BALL
-	jp z, .captured
+	jp z, .skipShakeCalculations
 
 ;;;;;;;;;; PureRGBnote: ADDED: effect for the new Hyper ball item.
 	cp HYPER_BALL
@@ -234,7 +234,7 @@ ItemUseBall:
 .hyperBallCheck
 	ld a, [wEnemyMonActualCatchRate]
 	cp 26 
-	jp nc, .captured ;Hyper Ball always captures pokemon with catch rate >25
+	jp nc, .skipShakeCalculations ;Hyper Ball always captures pokemon with catch rate >25
 	push hl
 	push bc
 	; if the catch rate is 25 or lower it will guarantee catching if the pokemon has <1/3 health.
@@ -247,7 +247,7 @@ ItemUseBall:
 	and a
 	ld a, 0
 	ld [wUnusedC000], a ; reset this variable so it doesn't mess with other places that use it
-	jp nz, .captured
+	jp nz, .skipShakeCalculations
 	jr .loopreturn
 ;;;;;;;;;;
 .checkForAilments
@@ -269,7 +269,7 @@ ItemUseBall:
 .notFrozenOrAsleep
 	ld a, b
 	sub c
-	jp c, .captured
+	jp c, .skipShakeCalculations
 	ld b, a
 
 .skipAilmentValueSubtraction
@@ -314,9 +314,9 @@ ItemUseBall:
 	ld b, a
 	ld a, [hl]
 	srl b
-	rr a
+	rra
 	srl b
-	rr a
+	rra
 	and a
 	jr nz, .skip2
 	inc a
@@ -346,7 +346,7 @@ ItemUseBall:
 ; If W > 255, the ball captures the Pokémon.
 	ldh a, [hQuotient + 2]
 	and a
-	jr nz, .captured
+	jp nz, .skipShakeCalculations
 
 	call Random ; Let this random number be called Rand2.
 
@@ -354,10 +354,7 @@ ItemUseBall:
 	ld b, a
 	ldh a, [hQuotient + 3]
 	cp b
-	jr c, .failedToCapture
-
-.captured
-	jr .skipShakeCalculations
+	jr nc, .skipShakeCalculations
 
 .failedToCapture
 	ldh a, [hQuotient + 3]
@@ -759,8 +756,7 @@ ItemUseBoosterChip:
 	rst _PrintText
 	ld a, BOOSTER_CHIP
 	ldh [hItemToRemoveID], a
-	farcall RemoveItemByID
-	ret
+	farjp RemoveItemByID
 
 BoosterChipInstalledText::
 	text_far _BoosterChipInstalledText
@@ -1148,8 +1144,7 @@ ItemUseMedicine:
 	cp REVIVE
 	jr z, .updateInBattleFaintedData
 	cp MAX_REVIVE
-	jr z, .updateInBattleFaintedData
-	jp .healingItemNoEffect
+	jp nz, .healingItemNoEffect
 .updateInBattleFaintedData
 	ld a, [wIsInBattle]
 	and a
@@ -1356,7 +1351,7 @@ ItemUseMedicine:
 	ld [de], a
 	ld [wHPBarNewHP+1], a
 	ld a, [hl]
-	rr a
+	rra
 	inc de
 	ld [de], a
 	ld [wHPBarNewHP], a
@@ -1676,9 +1671,7 @@ ItemUseMedicine:
 	add hl, bc ; hl now points to DVs
 	ld a, $FF
 	cp [hl] ; is the first byte of their DVs maxed
-	jr z, .secondCompare
-	jr .setDVs
-.secondCompare
+	jr nz, .setDVs
 	inc hl
 	cp [hl] ; is the second byte of their DVs maxed
 	jr z, .alreadyUsedApex ; if so, assume we already used an apex chip on the pokemon
@@ -1898,8 +1891,7 @@ ItemUsePocketAbra:
 	rst _PrintText
 	call StopMusic
 	ld a, ABRA
-	call PlayCry
-	ret
+	jp PlayCry
 .flavor1
 	ld hl, .pocketAbraFlavorText1
 	jr .done
@@ -2277,8 +2269,7 @@ ItemUseGoodRod:
 	jp c, ItemUseNotTime
 	call Random
 	and %11
-	and a
-	jr z, .SetBite ;25% chance of no bite
+	jp z, RodResponse ;25% chance of no bite
 	; choose which good rod pokemon table
 	ld a, [wCurMap]
 	ld c, a
@@ -2301,7 +2292,6 @@ ItemUseGoodRod:
 	ld c, [hl]
 	and a
 	ld a, 1
-.SetBite
 	jr RodResponse
 
 INCLUDE "data/wild/good_rod.asm"
@@ -2424,8 +2414,7 @@ ItemUseItemfinder:
 	ld [wEmotionBubbleSpriteIndex], a
 	ld a, QUESTION_BUBBLE
   	ld [wWhichEmotionBubble], a
-	predef EmotionBubbleQuick
-	jr .done
+	predef_jump EmotionBubbleQuick
 .onTopOfItem2
 	; if we're on top of the item, show an exclamation bubble
 	ld a, SFX_SWAP
@@ -2434,11 +2423,9 @@ ItemUseItemfinder:
   	ld [wWhichEmotionBubble], a
 	xor a
 	ld [wEmotionBubbleSpriteIndex], a
-	predef EmotionBubble
-	jr .done
+	predef_jump EmotionBubble
 .printText
 	rst _PrintText
-.done	
 	ret
 
 ItemfinderFoundItemText:
@@ -2465,8 +2452,7 @@ ItemUsePPRestore:
 	ld a, USE_ITEM_PARTY_MENU
 	ld [wPartyMenuTypeOrMessageID], a
 	call DisplayPartyMenu
-	jr nc, .chooseMove
-	jp .itemNotUsed
+	jp c, .itemNotUsed
 .chooseMove
 	ld a, [wPPRestoreItem]
 	cp ELIXER
@@ -2931,8 +2917,7 @@ RestoreBonusPP:
 	ld de, wNormalMaxPPList - 1
 	predef LoadMovePPs ; loads the normal max PP of each of the pokemon's moves to wNormalMaxPPList
 	pop hl
-	ld c, wPartyMon1PP - wPartyMon1Moves
-	ld b, 0
+	lb bc, 0, wPartyMon1PP - wPartyMon1Moves
 	add hl, bc ; hl now points to move 1 PP
 	ld de, wNormalMaxPPList
 	ld b, 0 ; initialize move counter to zero
@@ -3371,7 +3356,7 @@ SendNewMonToBox:
 	ld a, [hli]
 	ld [de], a
 	inc de
-	ld a, [hli]
+	ld a, [hl]
 	ld [de], a
 	ld hl, wEnemyMonPP
 	ld b, NUM_MOVES
@@ -3438,14 +3423,13 @@ ReadSuperRodData:
 	ld h, [hl]
 	ld l, a
 
-	ld b, [hl] ; how many mons in group
-	inc hl ; point to data
+	ld a, [hli]
+	ld b, a ; how many mons in group
 	ld e, $0 ; no bite yet
 
 	call Random
 ;;;;;;;;;; PureRGBnote: CHANGED: fishing rods now have a hard 1/4 chance of not catching a pokemon instead of a repeated 1/2 chance.
 	and %11 ; 2-bit random number
-	and a
 	ret z ; 25% chance of no battle (25% chance of 2 bits being 00)
 ;;;;;;;;;;
 
@@ -3504,9 +3488,7 @@ PrintRemainingBoxSpace:
 	rst _PrintText
 	ret
 .notFullBox
-	ld h, a
-	ld a, MONS_PER_BOX
-	sub h
+	n_sub_a MONS_PER_BOX
 	ld hl, w2CharStringBuffer
 	call Load2DigitNumberBelow20
 	ld hl, BoxSlotsLeftText
@@ -3517,15 +3499,12 @@ Load2DigitNumberBelow20:
 	cp 10
 	jr c, .singleDigit
 	sub 10
-	push af
-	ld a, "1"
-	ld [hli], a
-	pop af
+	ld [hl], "1"
+	inc hl
 .singleDigit
 	add NUMBER_CHAR_OFFSET
 	ld [hli], a
-	ld a, "@"
-	ld [hl], a
+	ld [hl], "@"
 	ret
 ;;;;;;;;;;
 

@@ -15,11 +15,9 @@ BrunoShowOrHideExitBlock:
 	res 5, [hl]
 	ret z
 	CheckEvent EVENT_BEAT_BRUNOS_ROOM_TRAINER_0
-	jr z, .blockExitToNextRoom
-	ld a, $5
-	jp .setExitBlock
-.blockExitToNextRoom
 	ld a, $24
+	jr z, .setExitBlock
+	ld a, $5
 .setExitBlock
 	ld [wNewTileBlockID], a
 	lb bc, 0, 2
@@ -30,21 +28,13 @@ BrunoShowOrHideExitBlock:
 	ret z
 	jp GBFadeInFromWhite ; PureRGBnote: ADDED: since trainer instantly talks to us after battle we need to fade back in here
 
-ResetBrunoScript:
-	xor a ; SCRIPT_BRUNOSROOM_DEFAULT
-	ld [wBrunosRoomCurScript], a
-	ret
-
 BrunosRoom_ScriptPointers:
 	def_script_pointers
 	dw_const BrunosRoomDefaultScript,               SCRIPT_BRUNOSROOM_DEFAULT
 	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_BRUNOSROOM_BRUNO_START_BATTLE
 	dw_const BrunosRoomBrunoEndBattleScript,        SCRIPT_BRUNOSROOM_BRUNO_END_BATTLE
 	dw_const BrunosRoomPlayerIsMovingScript,        SCRIPT_BRUNOSROOM_PLAYER_IS_MOVING
-	dw_const BrunosRoomNoopScript,                  SCRIPT_BRUNOSROOM_NOOP
-
-BrunosRoomNoopScript:
-	ret
+	dw_const DoRet,                                 SCRIPT_BRUNOSROOM_NOOP
 
 BrunoScriptWalkIntoRoom:
 ; Walk six steps upward.
@@ -114,7 +104,7 @@ BrunosRoomBrunoEndBattleScript:
 	call EndTrainerBattle
 	ld a, [wIsInBattle]
 	cp $ff
-	jp z, ResetBrunoScript
+	jr z, ResetBrunoScript
 	ld a, TEXT_BRUNOSROOM_BRUNO
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
@@ -123,6 +113,10 @@ BrunosRoomBrunoEndBattleScript:
 	rst _PlaySound
 	ret
 ;;;;;;;;;;
+ResetBrunoScript:
+	xor a ; SCRIPT_BRUNOSROOM_DEFAULT
+	ld [wBrunosRoomCurScript], a
+	ret
 
 BrunosRoom_TextPointers:
 	def_text_pointers

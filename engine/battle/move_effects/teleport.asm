@@ -116,7 +116,6 @@ CheckCanForceSwitchEnemy::
 	or [hl]
 	inc hl
 	or [hl]
-	and a
 	jr nz, .skipDec
 	dec d
 .skipDec

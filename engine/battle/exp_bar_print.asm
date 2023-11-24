@@ -44,8 +44,7 @@ AnimateEXPBar:
 	ld [hl], a
 	rst _DelayFrame
 	dec b
-	jr z, .done
-	jr .loop1
+	jr nz, .loop1
 .done
 	ld bc, $08
 	hlcoord 10, 11
@@ -194,14 +193,14 @@ CalcEXPBarPixelLength:
 	srl a
 	ld [hli], a
 	ld a, [hl]
-	rr a
+	rra
 	ld [hld], a
 	ld a, [de]
 	srl a
 	ld [de], a
 	inc de
 	ld a, [de]
-	rr a
+	rra
 	ld [de], a
 	dec de
 	jr .twoBytes

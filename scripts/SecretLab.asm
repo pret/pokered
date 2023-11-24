@@ -80,7 +80,7 @@ ReplaceDoor:
 	ld d, D_UP
 	jpfar ForceStepFromDoor
 .clearPassword
-	ld a, 0
+	xor a
 	ld bc, 7
 	ld hl, wSecretLabPasswordTracker
 	jp FillMemory ; clear password on entering area if the door hasn't been opened yet
@@ -444,7 +444,6 @@ CheckPasswordCorrect:
 	ld [wSimulatedJoypadStatesIndex], a
 	SetEvent EVENT_SECRET_LAB_WALKING_IN_FRONT_OF_DOOR
 	xor a
-	and a
 	ret
 
 PlayerMoveToDoor:: ; these happen in reverse order
@@ -559,7 +558,7 @@ ToggleMachineDoorQuick:
 	lb bc, 3, 3
 	ld a, $34
 	jr z, .open
-	ld a, 0
+	xor a
 .open
 	ld [wNewTileBlockID], a
 	push af
@@ -881,8 +880,7 @@ SecretLabMewtwoHereWeGoText:
 
 SecretLabMewMachineText:
 	text_asm
-	ld c, MEW
-	ld b, PARTY_LENGTH
+	lb bc, PARTY_LENGTH, MEW
 	ld hl, wPartySpecies
 .loop
 	ld a, [hli]
@@ -994,8 +992,7 @@ SecretLabMewtwoTransformation:
 	call LoadFlippedFrontSpriteByMonIndex
 	ld a, [wcf91]
 	call PlayCry
-	call WaitForSoundToFinish
-	ret
+	jp WaitForSoundToFinish
 .done
 	ld c, 30
 	rst _DelayFrames

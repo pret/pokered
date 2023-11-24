@@ -53,15 +53,12 @@ Audio1_ApplyMusicAffects:
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr z, .startChecks
-	ret
+	ret nz
 .startChecks
 	ld hl, wChannelFlags1
 	add hl, bc
 	bit BIT_ROTATE_DUTY_CYCLE, [hl]
-	jr z, .checkForExecuteMusic
-	call Audio1_ApplyDutyCyclePattern
-.checkForExecuteMusic
+	call nz, Audio1_ApplyDutyCyclePattern
 	ld b, 0
 	ld hl, wChannelFlags2
 	add hl, bc
@@ -70,36 +67,30 @@ Audio1_ApplyMusicAffects:
 	ld hl, wChannelFlags1
 	add hl, bc
 	bit BIT_NOISE_OR_SFX, [hl]
-	jr nz, .skipPitchSlideVibrato
+	ret nz
 .checkForPitchSlide
 	ld hl, wChannelFlags1
 	add hl, bc
 	bit BIT_PITCH_SLIDE_ON, [hl]
-	jr z, .checkVibratoDelay
-	jp Audio1_ApplyPitchSlide
-.checkVibratoDelay
+	jp nz, Audio1_ApplyPitchSlide
 	ld hl, wChannelVibratoDelayCounters
 	add hl, bc
 	ld a, [hl]
 	and a ; check if delay is over
 	jr z, .checkForVibrato
 	dec [hl] ; otherwise, dec delay
-.skipPitchSlideVibrato
 	ret
 .checkForVibrato
 	ld hl, wChannelVibratoExtents
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr nz, .vibrato
-	ret ; no vibrato
-.vibrato
+	ret z; no vibrato
 	ld d, a
 	ld hl, wChannelVibratoRates
 	add hl, bc
 	ld a, [hl]
 	and $f
-	and a
 	jr z, .applyVibrato
 	dec [hl] ; decrement counter
 	ret
@@ -123,9 +114,8 @@ Audio1_ApplyMusicAffects:
 	ld d, a
 	ld a, e
 	sub d
-	jr nc, .noCarry
-	ld a, 0
-.noCarry
+	jr nc, .done
+	xor a
 	jr .done
 .unset
 	set BIT_VIBRATO_DIRECTION, [hl]
@@ -160,19 +150,17 @@ Audio1_PlayNextNote:
 	res BIT_PITCH_SLIDE_DECREASING, [hl]
 	ld a, c
 	cp CHAN5
-	jr nz, .asm_918c
+	jr nz, Audio1_sound_ret
 	ld a, [wLowHealthAlarm]
 	bit 7, a
-	jr z, .asm_918c
+	jr z, Audio1_sound_ret
 
 ;;;;;;;;;; shinpokerednote: FIXED: treat non-active wLowHealthTonePairs the same as a disabled wLowHealthAlarm
 ;;;;;;;;;; needed for limiting the hp alarm or else some sfx get cut off
 	ld a, [wLowHealthTonePairs]
 	bit 7, a
-	jr z, .asm_918c
 ;;;;;;;;;;
-	jp Audio1_EnableChannelOutput
-.asm_918c
+	jp nz, Audio1_EnableChannelOutput
 ; fall through
 
 Audio1_sound_ret:
@@ -187,9 +175,7 @@ Audio1_sound_ret:
 	jr nz, .returnFromCall
 	ld a, c
 	cp CHAN4
-	jr nc, .noiseOrSfxChannel
-	jr .disableChannelOutput
-.noiseOrSfxChannel
+	jr c, .disableChannelOutput
 	res BIT_NOISE_OR_SFX, [hl]
 	ld hl, wChannelFlags2
 	add hl, bc
@@ -197,20 +183,18 @@ Audio1_sound_ret:
 	cp CHAN7
 	jr nz, .skipSfxChannel3
 ; restart hardware channel 3 (wave channel) output
-	ld a, $0
+	xor a
 	ldh [rNR30], a
 	ld a, $80
 	ldh [rNR30], a
 .skipSfxChannel3
-	jr nz, .dontDisable
+	jr nz, .afterDisable
 	ld a, [wDisableChannelOutputWhenSfxEnds]
 	and a
-	jr z, .dontDisable
+	jr z, .afterDisable
 	xor a
 	ld [wDisableChannelOutputWhenSfxEnds], a
 	jr .disableChannelOutput
-.dontDisable
-	jr .afterDisable
 .returnFromCall
 	res 1, [hl]
 	ld d, $0
@@ -240,15 +224,11 @@ Audio1_sound_ret:
 .afterDisable
 	ld a, [wChannelSoundIDs + CHAN5]
 	cp CRY_SFX_START
-	jr nc, .maybeCry
-	jr .skipCry
-.maybeCry
+	jr c, .skipCry
 	ld a, [wChannelSoundIDs + CHAN5]
 	cp CRY_SFX_END
 	jr z, .skipCry
-	jr c, .cry
-	jr .skipCry
-.cry
+	jr nc, .skipCry
 	ld a, c
 	cp CHAN5
 	jr z, .skipRewind
@@ -293,8 +273,8 @@ Audio1_sound_call:
 	ld a, [hld]
 	ld [de], a ; copy current channel address
 	pop de
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d ; overwrite current address with pointer
 	ld b, $0
 	ld hl, wChannelFlags1
@@ -315,8 +295,7 @@ Audio1_sound_loop:
 	ld a, [hl]
 	cp e
 	jr nz, .loopAgain
-	ld a, $1 ; if no more loops to make,
-	ld [hl], a
+	ld [hl], 1 ; if no more loops to make,
 	call Audio1_GetNextMusicByte ; skip pointer
 	call Audio1_GetNextMusicByte
 	jp Audio1_sound_ret
@@ -370,7 +349,7 @@ Audio1_note_type:
 	ld [hl], a ; store low nibble of param as wave instrument
 	ld a, d
 	and $30
-	sla a
+	add a
 	ld d, a
 	; fall through
 
@@ -837,8 +816,7 @@ Audio1_note_length:
 	ld e, a
 	jr .skip
 .sfxChannel
-	ld d, $1
-	ld e, $0
+	lb de, 1, 0
 	cp CHAN8
 	jr z, .skip ; if noise channel
 	call Audio1_SetSfxTempo
@@ -886,7 +864,7 @@ Audio1_note_pitch:
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr nz, .done
+	ret nz
 	; fall through
 .next
 	ld a, c
@@ -901,16 +879,14 @@ Audio1_note_pitch:
 	ldh a, [rNR51]
 	and [hl]
 	ldh [rNR51], a ; disable hardware channel 3's output
-	jr .done
+	ret
 .notChannel3
 	ld b, REG_VOLUME_ENVELOPE
 	call Audio1_GetRegisterPointer
 	ld a, $8 ; fade in sound
 	ld [hli], a
 	inc hl
-	ld a, $80 ; restart sound
-	ld [hl], a
-.done
+	ld [hl], $80 ; restart sound
 	ret
 .notRest
 	swap a
@@ -923,9 +899,7 @@ Audio1_note_pitch:
 	ld hl, wChannelFlags1
 	add hl, bc
 	bit BIT_PITCH_SLIDE_ON, [hl]
-	jr z, .skipPitchSlide
-	call Audio1_InitPitchSlideVars
-.skipPitchSlide
+	call nz, Audio1_InitPitchSlideVars
 	push de
 	ld a, c
 	cp CHAN5
@@ -937,9 +911,7 @@ Audio1_note_pitch:
 	add hl, de
 	ld a, [hl]
 	and a
-	jr nz, .noSfx
-	jr .sfxChannel
-.noSfx
+	jr z, .sfxChannel
 	pop de
 	ret
 .sfxChannel
@@ -965,8 +937,7 @@ Audio1_note_pitch:
 	ld hl, wChannelFrequencyLowBytes
 	add hl, bc
 	ld [hl], e
-	call Audio1_ApplyWavePatternAndFrequency
-	ret
+	jp Audio1_ApplyWavePatternAndFrequency
 
 Audio1_EnableChannelOutput:
 	ld b, 0
@@ -1050,12 +1021,12 @@ Audio1_ApplyWavePatternAndFrequency:
 	ld e, a
 	ld hl, Audio1_WavePointers
 	add hl, de
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
 	ld d, [hl]
 	ld hl, rWave_0
 	ld b, $f
-	ld a, $0 ; stop hardware channel 3
+	xor a ; stop hardware channel 3
 	ldh [rNR30], a
 .loop
 	ld a, [de]
@@ -1075,15 +1046,13 @@ Audio1_ApplyWavePatternAndFrequency:
 	ld d, a
 	ld b, REG_FREQUENCY_LO
 	call Audio1_GetRegisterPointer
-	ld [hl], e ; store frequency low byte
-	inc hl
+	ld a, e
+	ld [hli], a ; store frequency low byte
 	ld [hl], d ; store frequency high byte
 	ld a, c
 	cp CHAN5
-	jr c, .asm_9642
-	call Audio1_ApplyFrequencyModifier
-.asm_9642
-	ret
+	ret c
+	jp Audio1_ApplyFrequencyModifier
 
 Audio1_SetSfxTempo:
 	call Audio1_IsCry
@@ -1100,20 +1069,19 @@ Audio1_SetSfxTempo:
 	ld [wSfxTempo + 1], a
 	ld a, d
 	ld [wSfxTempo], a
-	jr .done
+	ret
 .notCry
 	xor a
 	ld [wSfxTempo + 1], a
-	ld a, $1
+	inc a
 	ld [wSfxTempo], a
-.done
 	ret
 
 Audio1_ApplyFrequencyModifier:
 	call Audio1_IsCry
 	jr c, .isCry
 	call Audio1_IsBattleSFX
-	jr nc, .done
+	ret nc
 .isCry
 ; if playing a cry, add the cry's frequency modifier
 	ld a, [wFrequencyModifier]
@@ -1123,10 +1091,8 @@ Audio1_ApplyFrequencyModifier:
 .noCarry
 	dec hl
 	ld e, a
-	ld [hl], e
-	inc hl
+	ld [hli], a
 	ld [hl], d
-.done
 	ret
 
 Audio1_GoBackOneCommandIfCry:
@@ -1140,8 +1106,7 @@ Audio1_GoBackOneCommandIfCry:
 	add hl, de
 	ld a, [hl]
 	sub 1
-	ld [hl], a
-	inc hl
+	ld [hli], a
 	ld a, [hl]
 	sbc 0
 	ld [hl], a
@@ -1156,9 +1121,7 @@ Audio1_IsCry:
 ; Returns whether the currently playing audio is a cry in carry.
 	ld a, [wChannelSoundIDs + CHAN5]
 	cp CRY_SFX_START
-	jr nc, .next
-	jr .no
-.next
+	jr c, .no
 	cp CRY_SFX_END
 	jr z, .no
 	jr c, .yes
@@ -1473,8 +1436,8 @@ Audio1_CalculateFrequency:
 	add hl, hl ; skip 2 bytes for each
 	ld de, Audio1_Pitches
 	add hl, de
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
 	ld d, [hl]
 	; get our octave
 	pop af
@@ -1535,10 +1498,7 @@ Audio1_PlaySound::
 	add c
 	ld c, a
 	ld b, 0
-	ld a, [wSfxHeaderPointer]
-	ld h, a
-	ld a, [wSfxHeaderPointer + 1]
-	ld l, a
+	hl_deref_reverse wSfxHeaderPointer
 	add hl, bc
 	ld c, d
 	ld a, [hl]
@@ -1555,9 +1515,7 @@ Audio1_PlaySound::
 	jr nz, .notNoiseChannel
 	ld a, [wSoundID]
 	cp NOISE_INSTRUMENTS_END
-	jr nc, .notNoiseInstrument
-	ret
-.notNoiseInstrument
+	ret c
 	ld a, [hl]
 	cp NOISE_INSTRUMENTS_END
 	jr z, .playChannel
@@ -1566,8 +1524,7 @@ Audio1_PlaySound::
 	ld a, [wSoundID]
 	cp [hl]
 	jr z, .playChannel
-	jr c, .playChannel
-	ret
+	ret nc
 .playChannel
 	call InitSFXVariables
 .skipSweepDisable
@@ -1658,15 +1615,11 @@ Audio1_PlaySound::
 	jr nz, .commandPointerLoop
 	ld a, [wSoundID]
 	cp CRY_SFX_START
-	jr nc, .maybeCry
-	ret
-.maybeCry
+	ret c
 	ld a, [wSoundID]
 	cp CRY_SFX_END
 	ret z
-	jr c, .cry
-	ret
-.cry
+	ret nc
 	ld hl, wChannelSoundIDs + CHAN5
 	ld [hli], a
 	ld [hli], a
@@ -1674,8 +1627,8 @@ Audio1_PlaySound::
 	ld [hl], a
 	ld hl, wChannelCommandPointers + CHAN7 * 2 ; sfx wave channel pointer
 	ld de, Audio1_CryRet
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d ; overwrite pointer to point to sound_ret
 	ld a, [wSavedVolume]
 	and a

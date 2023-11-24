@@ -3,8 +3,7 @@ UpdateSpriteFacingOffsetAndDelayMovement::
 	ldh a, [hCurrentSpriteOffset]
 	add $8
 	ld l, a
-	ld a, $7f ; maximum movement delay
-	ld [hl], a ; x#SPRITESTATEDATA2_MOVEMENTDELAY
+	ld [hl], $7f ; x#SPRITESTATEDATA2_MOVEMENTDELAY = maximum movement delay
 	dec h ; HIGH(wSpriteStateData1)
 	ldh a, [hCurrentSpriteOffset]
 	add $9
@@ -20,6 +19,5 @@ UpdateSpriteFacingOffsetAndDelayMovement::
 	ld a, [hl] ; x#SPRITESTATEDATA1_IMAGEINDEX
 	or b ; or in the facing direction
 	ld [hld], a
-	ld a, $2 ; delayed movement status
-	ld [hl], a ; x#SPRITESTATEDATA1_MOVEMENTSTATUS
+	ld [hl], 2 ; x#SPRITESTATEDATA1_MOVEMENTSTATUS = delayed movement status
 	ret

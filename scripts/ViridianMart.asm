@@ -23,7 +23,7 @@ ViridianMart_ScriptPointers:
 	def_script_pointers
 	dw_const ViridianMartDefaultScript,    SCRIPT_VIRIDIANMART_DEFAULT
 	dw_const ViridianMartOaksParcelScript, SCRIPT_VIRIDIANMART_OAKS_PARCEL
-	dw_const ViridianMartNoopScript,       SCRIPT_VIRIDIANMART_NOOP
+	dw_const DoRet,                        SCRIPT_VIRIDIANMART_NOOP
 
 ViridianMartDefaultScript:
 	call UpdateSprites
@@ -58,8 +58,6 @@ ViridianMartOaksParcelScript:
 	SetEvent EVENT_GOT_OAKS_PARCEL
 	ld a, SCRIPT_VIRIDIANMART_NOOP
 	ld [wViridianMartCurScript], a
-	; fallthrough
-ViridianMartNoopScript:
 	ret
 
 ViridianMart_TextPointers:
@@ -106,11 +104,10 @@ ViridianMartTMKid: ; PureRGBnote: ADDED: new NPC who will talk about TMs
 	jr nz, .beforeGiovanni
 	CheckEvent EVENT_BEAT_MISTY
 	jr nz, .afterMisty
-	jr .beforeMisty
 .beforeMisty
 	ld hl, ViridianMartTMKidBefore
 	rst _PrintText
-	jr .done
+	rst TextScriptEnd
 .tmkidgreet
 	ld hl, TMKidGreet8
 	rst _PrintText
@@ -119,14 +116,13 @@ ViridianMartTMKid: ; PureRGBnote: ADDED: new NPC who will talk about TMs
 	call .tmkidgreet
 	ld hl, TMKidStockingUp
 	rst _PrintText
-	jr .done
+	rst TextScriptEnd
 .beforeGiovanni
 	CheckEvent EVENT_MET_GYM_GUIDE_SON
 	jr nz, .afterMisty
 	call .tmkidgreet
 	ld hl, TMKidBigStockIndigo
 	rst _PrintText
-.done
 	rst TextScriptEnd
 
 TMKidGreet8:

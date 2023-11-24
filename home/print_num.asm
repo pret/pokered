@@ -143,7 +143,7 @@ ENDM
 	jr nc, .noborrow1
 
 	ldh a, [hNumToPrint]
-	or 0
+	or a
 	jr z, .underflow1
 	dec a
 	ldh [hNumToPrint], a

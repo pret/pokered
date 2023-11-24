@@ -10,7 +10,7 @@ Museum1F_Script:
 Museum1F_ScriptPointers:
 	def_script_pointers
 	dw_const Museum1FDefaultScript, SCRIPT_MUSEUM1F_DEFAULT
-	dw_const Museum1FNoopScript,    SCRIPT_MUSEUM1F_NOOP
+	dw_const DoRet,                 SCRIPT_MUSEUM1F_NOOP
 
 Museum1FDefaultScript:
 	ld a, [wYCoord]
@@ -28,9 +28,6 @@ Museum1FDefaultScript:
 	ld a, TEXT_MUSEUM1F_SCIENTIST1
 	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
-
-Museum1FNoopScript:
-	ret
 
 Museum1F_TextPointers:
 	def_text_pointers
@@ -130,7 +127,7 @@ Museum1FScientist1Text:
 	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
-	cp $0
+	and a
 	jr nz, .explain_amber
 	ld hl, .TheresALabSomewhereText
 	rst _PrintText

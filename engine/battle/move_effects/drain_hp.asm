@@ -4,7 +4,7 @@ DrainHPEffect_:
 	srl a ; divide damage by 2
 	ld [hli], a
 	ld a, [hl]
-	rr a
+	rra
 	ld [hld], a
 	or [hl] ; is damage 0?
 	jr nz, .getAttackerHP

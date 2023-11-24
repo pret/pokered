@@ -13,27 +13,12 @@ Route22_ScriptPointers:
 	dw_const Route22Rival2StartBattleScript, SCRIPT_ROUTE22_RIVAL2_START_BATTLE
 	dw_const Route22Rival2AfterBattleScript, SCRIPT_ROUTE22_RIVAL2_AFTER_BATTLE
 	dw_const Route22Rival2ExitScript,        SCRIPT_ROUTE22_RIVAL2_EXIT
-	dw_const Route22NoopScript,              SCRIPT_ROUTE22_NOOP
+	dw_const DoRet,                          SCRIPT_ROUTE22_NOOP
 
 Route22SetDefaultScript:
 	xor a ; SCRIPT_ROUTE22_DEFAULT
 	ld [wJoyIgnore], a
 	ld [wRoute22CurScript], a
-Route22NoopScript:
-	ret
-
-Route22GetRivalTrainerNoByStarterScript:
-	ld a, [wRivalStarter]
-	ld b, a
-.next_trainer_no
-	ld a, [hli]
-	cp b
-	jr z, .got_trainer_no
-	inc hl
-	jr .next_trainer_no
-.got_trainer_no
-	ld a, [hl]
-	ld [wTrainerNo], a
 	ret
 
 Route22MoveRivalRightScript:
@@ -134,17 +119,13 @@ Route22Rival1StartBattleScript:
 	call SaveEndBattleTextPointers
 	ld a, OPP_RIVAL1
 	ld [wCurOpponent], a
-	ld hl, .StarterTable
-	call Route22GetRivalTrainerNoByStarterScript
+	ld a, [wRivalStarter]
+	call StarterToPartyID
+	add 3 ; second set of parties for RIVAL1
+	ld [wTrainerNo], a
 	ld a, SCRIPT_ROUTE22_RIVAL1_AFTER_BATTLE
 	ld [wRoute22CurScript], a
 	ret
-
-.StarterTable:
-; starter the rival picked, rival trainer number
-	db STARTER2, 4
-	db STARTER3, 5
-	db STARTER1, 6
 
 Route22Rival1AfterBattleScript:
 	ld a, [wIsInBattle]
@@ -152,11 +133,9 @@ Route22Rival1AfterBattleScript:
 	jp z, Route22SetDefaultScript
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	and a ; cp SPRITE_FACING_DOWN
-	jr nz, .not_facing_down
-	ld a, SPRITE_FACING_UP
-	jr .set_rival_facing
-.not_facing_down
 	ld a, SPRITE_FACING_RIGHT
+	jr nz, .set_rival_facing
+	ld a, SPRITE_FACING_UP
 .set_rival_facing
 	ldh [hSpriteFacingDirection], a
 	ld a, ROUTE22_RIVAL1
@@ -290,16 +269,13 @@ Route22Rival2StartBattleScript:
 	call SaveEndBattleTextPointers
 	ld a, OPP_RIVAL2
 	ld [wCurOpponent], a
-	ld hl, .StarterTable
-	call Route22GetRivalTrainerNoByStarterScript
+	ld a, [wRivalStarter]
+	call StarterToPartyID
+	add 9 ; 4th set of parties for RIVAL2
+	ld [wTrainerNo], a
 	ld a, SCRIPT_ROUTE22_RIVAL2_AFTER_BATTLE
 	ld [wRoute22CurScript], a
 	ret
-
-.StarterTable:
-	db STARTER2, 10
-	db STARTER3, 11
-	db STARTER1, 12
 
 Route22Rival2AfterBattleScript:
 	ld a, [wIsInBattle]

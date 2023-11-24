@@ -149,8 +149,7 @@ FuchsiaTreeDeleterRoute2:
 	ld a, $80
 	ldh [hMoney + 1], a ; loads 5000 into the cost
 	call PurchasedTreeDeletion
-	jr c, .setEvent
-	jr .done
+	jr nc, .done
 .setEvent	
 	SetEvent EVENT_DELETED_ROUTE2_TREES
 	jr .done
@@ -180,8 +179,7 @@ FuchsiaTreeDeleterCeruleanCity:
 	ld a, $40
 	ldh [hMoney + 1], a ; loads 5000 into the cost
 	call PurchasedTreeDeletion
-	jr c, .setEvent
-	jr .done
+	jr nc, .done
 .setEvent	
 	SetEvent EVENT_DELETED_CERULEAN_TREE
 	jr .done
@@ -211,8 +209,7 @@ FuchsiaTreeDeleterRoute9:
 	ld a, $40
 	ldh [hMoney + 1], a ; loads 5000 into the cost
 	call PurchasedTreeDeletion
-	jr c, .setEvent
-	jr .done
+	jr nc, .done
 .setEvent	
 	SetEvent EVENT_DELETED_ROUTE9_TREE
 	jr .done
@@ -242,8 +239,7 @@ FuchsiaTreeDeleterFuchsiaCity:
 	ld a, 1
 	ldh [hMoney], a ; loads 10000 into the cost
 	call PurchasedTreeDeletion
-	jr c, .setEvent
-	jr .done
+	jr nc, .done
 .setEvent	
 	SetEvent EVENT_DELETED_FUCHSIA_TREES
 	jr .done

@@ -60,8 +60,7 @@ AnimateHallOfFame:
 	ld c, 80
 	rst _DelayFrames
 	hlcoord 2, 13
-	ld b, 3
-	ld c, 14
+	lb bc, 3, 14
 	call TextBoxBorder
 	hlcoord 4, 15
 	ld de, HallOfFameText
@@ -141,16 +140,14 @@ HoFShowMonOrPlayer:
 	call LoadFrontSpriteByMonIndex
 	predef LoadMonBackPic
 .next1
-	ld b, SET_PAL_POKEMON_WHOLE_SCREEN_TRADE
-	ld c, 0
+	lb bc, SET_PAL_POKEMON_WHOLE_SCREEN_TRADE, 0
 	call RunPaletteCommand
 	ld a, %11100100
 	ldh [rBGP], a
 	call UpdateGBCPal_BGP ; shinpokerednote: gbcnote: gbc color code from yellow 
 	ld c, $31 ; back pic
 	call HoFLoadMonPlayerPicTileIDs
-	ld d, $a0
-	ld e, 4
+	lb de, $a0, 4
 	ld a, [wOnSGB]
 	and a
 	jr z, .next2
@@ -161,8 +158,7 @@ HoFShowMonOrPlayer:
 	ldh [hSCY], a
 	ld c, a ; front pic
 	call HoFLoadMonPlayerPicTileIDs
-	ld d, 0
-	ld e, -4
+	lb de, 0, -4
 ; scroll front pic right
 
 .ScrollPic
@@ -183,8 +179,7 @@ HoFDisplayAndRecordMonInfo:
 
 HoFDisplayMonInfo:
 	hlcoord 0, 2
-	ld b, 9
-	ld c, 10
+	lb bc, 9, 10
 	call TextBoxBorder
 	hlcoord 2, 6
 	ld de, HoFMonInfoText
@@ -245,12 +240,10 @@ HoFDisplayPlayerStats:
 	SetEvent EVENT_HALL_OF_FAME_DEX_RATING
 	predef DisplayDexRating
 	hlcoord 0, 4
-	ld b, 6
-	ld c, 10
+	lb bc, 6, 10
 	call TextBoxBorder
 	hlcoord 5, 0
-	ld b, 2
-	ld c, 9
+	lb bc, 2, 9
 	call TextBoxBorder
 	hlcoord 7, 2
 	ld de, wPlayerName
@@ -262,8 +255,8 @@ HoFDisplayPlayerStats:
 	ld de, wPlayTimeHours
 	lb bc, 1, 3
 	call PrintNumber
-	ld [hl], $6d
-	inc hl
+	ld a, $6d
+	ld [hli], a
 	ld de, wPlayTimeMinutes
 	lb bc, LEADING_ZEROES | 1, 2
 	call PrintNumber

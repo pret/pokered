@@ -197,7 +197,7 @@ _FuchsiaGymGymGuideBeatKogaText::
 
 _FuchsiaGymGuideApexChipPoisonText::
 	text "For poison"
-	line "#MON, an "
+	line "#MON, an"
 	cont "APEX CHIP will"
 	cont "conjure up images"
 	cont "of a dark,"

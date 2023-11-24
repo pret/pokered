@@ -20,8 +20,7 @@ ForceStepFromDoor::
 	ld [wSimulatedJoypadStatesEnd], a
 	xor a
 	ld [wSpritePlayerStateData1ImageIndex], a
-	call StartSimulatingJoypadStates
-	ret
+	jp StartSimulatingJoypadStates
 .notStandingOnDoor
 	xor a
 	ld [wSimulatedJoypadStatesIndex], a

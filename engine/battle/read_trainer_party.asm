@@ -95,10 +95,10 @@ ReadTrainer:
 ;;;;;;;;;; PureRGBnote: ADDED: final bit of "pokemon level" in special parties is used to indicate pokemon having alternate palette.
 	bit 7, a 
 	push af
-	ld a, 0
-	jr z, .noAltPalette
 	ld a, 1 
-.noAltPalette
+	jr nz, .altPalette
+	xor a
+.altPalette
 	ld [wIsAltPalettePkmnData], a
 	pop af
 	and %01111111

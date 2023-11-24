@@ -1,6 +1,5 @@
 FuchsiaBillsGrandpasHouse_Script:
-	call EnableAutoTextBoxDrawing
-	ret
+	jp EnableAutoTextBoxDrawing
 
 FuchsiaBillsGrandpasHouse_TextPointers:
 	def_text_pointers

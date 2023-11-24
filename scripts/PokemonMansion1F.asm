@@ -44,8 +44,7 @@ Mansion1LoadEmptyFloorTileBlock:
 	ld a, $e
 	ld [wNewTileBlockID], a
 Mansion1ReplaceBlock:
-	predef ReplaceTileBlock
-	ret
+	predef_jump ReplaceTileBlock
 
 Mansion1Script_Switches::
 	ld a, [wSpritePlayerStateData1FacingDirection]

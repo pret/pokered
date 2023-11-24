@@ -1,6 +1,5 @@
 CeladonDiner_Script:
-	call EnableAutoTextBoxDrawing
-	ret
+	jp EnableAutoTextBoxDrawing
 
 CeladonDiner_TextPointers:
 	def_text_pointers

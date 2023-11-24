@@ -684,8 +684,7 @@ AIMoveChoiceModification3:
 	ld a, [wEnemyMoveType]
 	ld d, a
 	ld hl, wEnemyMonMoves  ; enemy moves
-	ld b, NUM_MOVES + 1
-	ld c, $0
+	lb bc, NUM_MOVES + 1, 0
 .loopMoves
 	dec b
 	jr z, .done
@@ -705,9 +704,8 @@ AIMoveChoiceModification3:
 	jr z, .loopMoves
 	ld a, [wEnemyMovePower]
 	and a
-	jr nz, .betterMoveFound ; damaging moves of a different type are considered to be better moves
-	jr .loopMoves
-.betterMoveFound
+	jr z, .loopMoves
+.betterMoveFound ; damaging moves of a different type are considered to be better moves
 	ld c, a
 .done
 	ld a, c
@@ -829,11 +827,11 @@ AIMoveChoiceModification4:
 	ld b, NUM_MOVES + 1
 .nextMove
 	dec b
-	jr z, .done ; processed all 4 moves
+	ret z ; processed all 4 moves
 	inc hl
 	ld a, [de]
 	and a
-	jr z, .done ; no more moves in move set
+	ret z ; no more moves in move set
 	inc de
 	call ReadMove
 	ld a, [wEnemyMoveNum]
@@ -888,13 +886,10 @@ AIMoveChoiceModification4:
 	jr z, .nextMove ; if the AI thinks the player IS NOT asleep before they switch, we shouldn't encourage based on the new mon's status
 	ld a, [wBattleMonStatus]
 	and SLP_MASK
-	jr nz, .preferMoveEvenMore ; heavier favor for dream eater if the opponent is asleep
-	jr .nextMove
-.preferMoveEvenMore
+	jr z, .nextMove
+.preferMoveEvenMore ; heavier favor for dream eater if the opponent is asleep
 	dec [hl]
 	jr .preferMove
-.done
-	ret
 .checkWorthTeleporting
 	; use teleport to heal if you are able to use it
 	push hl
@@ -1159,17 +1154,15 @@ FullRestore50Percent:
 GymGuideAI:
 	push af
 	call IsPlayerPokemonDangerous
-	jr c, .noXAccuracy
+	jr c, ChampArenaAI
 	call WillOHKOMoveAlwaysFail
-	jr c, .noXAccuracy
+	jr c, ChampArenaAI
 	ld a, [wEnemyBattleStatus2]
 	bit USING_X_ACCURACY, a
-	jr nz, .noXAccuracy
+	jr nz, ChampArenaAI
 	ld a, [wEnemyMonSpecies]
 	cp TAUROS
-	jr z, .useXAccuracy
-.noXAccuracy
-	jr ChampArenaAI
+	jr nz, ChampArenaAI
 .useXAccuracy
 	pop af
 	jp AIUseXAccuracy
@@ -1367,7 +1360,7 @@ SwitchEnemyMonCommon:
 	;shinpokerednote: ADDED: don't copy PP information if transformed
 	ld a, [wEnemyBattleStatus3]
 	bit TRANSFORMED, a 	;check the state of the enemy transformed bit
-	jr nz, .skiptransformed	;skip ahead if bit is set
+	ret nz	;skip ahead if bit is set
 	
 	;shinpokerednote: ADDED: copy PP information
 	ld a, [wEnemyMonPartyPos]
@@ -1379,8 +1372,6 @@ SwitchEnemyMonCommon:
 	ld hl, wEnemyMonPP
 	ld bc, 4
 	rst _CopyData
-	
-.skiptransformed
 	ret
 
 SwitchEnemyMonCommon2:
@@ -1504,7 +1495,6 @@ AICheckIfHPBelowFraction:
 	ld e, a
 	ld a, [hl]
 	ld d, a
-	ld a, d
 	sub b
 	ret nz
 	ld a, e

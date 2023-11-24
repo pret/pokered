@@ -75,15 +75,13 @@ FrontSpriteOptionsText:
 DrawChildMenuDigit:
 	add NUMBER_CHAR_OFFSET
 	hlcoord 14, PAGE_CONTROLS_Y_COORD
-	ld [hl], a
-	inc hl
+	ld [hli], a
 	ld [hl], "→"
 	ret
 
 DrawFrontSpriteOptionsMenu:
 	hlcoord 0, 0
-	ld b, 15
-	ld c, 18
+	lb bc, 15, 18
 	call TextBoxBorder
 	ld a, SPRITE_OPTIONS_PAGE_NUMBER
 	call DrawChildMenuDigit

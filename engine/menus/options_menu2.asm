@@ -73,16 +73,14 @@ Options2LeftRightFuncs:
 
 DrawOptions2Menu:
 	hlcoord 0, 0
-	ld b, 15
-	ld c, 18
+	lb bc, 15, 18
 	call TextBoxBorder
 	hlcoord 1, 1
 	ld de, Options2Text
 	call PlaceString
 	ld a, [wOptions2]
 	and %11
-	call PrintSGBOptionNumber
-	ret
+	jp PrintSGBOptionNumber
 
 Options2Text:
 	db   "OPTIONS 2"
@@ -102,8 +100,7 @@ OptionsPage2AButton:
 	jr nz, .done
 	ld a, [wTopMenuItemX]
 	cp OPTION_COLORS_MIDDLE_XPOS ; is the cursor on SGB?
-	jr nz, .done
-	call ToggleAltSGBColors
+	call z, ToggleAltSGBColors
 .done
 	and a ; clear carry
 	ret
@@ -151,8 +148,8 @@ CursorInGBCFade:
 GetTwoBitXPosition:
 	ld a, b
 	bit BIT_D_LEFT, b ; did the player press the left button
-	jr nz, .left
 	ld a, [wOptions1CursorX] ; battle animation cursor X coordinate
+	jr nz, .left
 	ld b, OPTION_COLORS_LEFT_XPOS
 	cp OPTION_COLORS_RIGHT_XPOS
 	ret z
@@ -162,15 +159,13 @@ GetTwoBitXPosition:
 	ld b, OPTION_COLORS_RIGHT_XPOS
 	ret
 .left
-	ld a, [wOptions1CursorX] ; battle animation cursor X coordinate
 	ld b, OPTION_COLORS_MIDDLE_XPOS
 	cp OPTION_COLORS_RIGHT_XPOS
-	jr z, .done
+	ret z
 	ld b, OPTION_COLORS_LEFT_XPOS
 	cp OPTION_COLORS_MIDDLE_XPOS
-	jr z, .done
+	ret z
 	ld b, OPTION_COLORS_RIGHT_XPOS
-.done
 	ret
 
 ; sets the options variable according to the current placement of the menu cursors in the options menu
@@ -182,24 +177,19 @@ SetOptions2FromCursorPositions:
 	call SetTwoBitPropFromXPosition
 	ld hl, wOptions2
 	ld a, [wOptions2CursorX] ; alt palettes cursor X coord
-	ld c, OPTION_ALT_PALETTES_RIGHT_XPOS
-	ld b, BIT_ALT_PKMN_PALETTES
+	lb bc, BIT_ALT_PKMN_PALETTES, OPTION_ALT_PALETTES_RIGHT_XPOS
 	call SetSingleBitOption
 	ld a, [wOptions3CursorX] ; music cursor X coord
-	ld c, OPTION_MUSIC_RIGHT_XPOS
-	ld b, OPTION_MUSIC_BIT
+	lb bc, OPTION_MUSIC_BIT, OPTION_MUSIC_RIGHT_XPOS
 	call SetSingleBitOption
 	ld a, [wOptions4CursorX] ; audio pan cursor X coord
-	ld c, OPTION_AUDIO_PAN_RIGHT_XPOS
-	ld b, OPTION_AUDIO_PAN_BIT
+	lb bc, OPTION_AUDIO_PAN_BIT, OPTION_AUDIO_PAN_RIGHT_XPOS
 	call SetSingleBitOption
 	ld a, [wOptions5CursorX]
-	ld c, OPTION_BIKE_SONG_RIGHT_XPOS
-	ld b, OPTION_BIKE_SONG_BIT
+	lb bc, OPTION_BIKE_SONG_BIT, OPTION_BIKE_SONG_RIGHT_XPOS
 	call SetSingleBitOption
 	ld a, [wOptions6CursorX]
-	ld c, OPTION_GBC_FADE_RIGHT_XPOS
-	ld b, BIT_GBC_FADE
+	lb bc, BIT_GBC_FADE, OPTION_GBC_FADE_RIGHT_XPOS
 	call SetSingleBitOption
 	pop bc
 	jp CompareOptions2
@@ -332,8 +322,7 @@ ToggleAltSGBColors:
 	ld [wOptions2], a
 	and %11
 	call PrintSGBOptionNumber
-	call RunDefaultPaletteCommand
-	ret
+	jp RunDefaultPaletteCommand
 
 ; input: a = what SGB color mode we want to be printed on the screen, a = %10 = SGB2, anything else = SGB1
 PrintSGBOptionNumber:

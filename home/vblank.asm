@@ -40,8 +40,7 @@ VBlank::
 .skipBGMap
 	ldh a, [hFlagsFFFA]	; shinpokerednote: FIXED: see if OAM skip has been enabled (such as while overworld sprites are updating)
 	bit 0, a
-	jr nz, .skipOAM
-	call hDMARoutine
+	call z, hDMARoutine
 	;shinpokerednote: FIXED: doing this in DelayFrame instead - helps avoid sprites wobbling
 	;ld a, BANK(PrepareOAMData)
 	;ldh [hLoadedROMBank], a

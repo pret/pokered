@@ -51,8 +51,7 @@ IF DEF(_DEBUG)
 	ld [hli], a
 	ld a, SURF
 	ld [hli], a
-	ld a, PSYCHIC_M
-	ld [hl], a
+	ld [hl], PSYCHIC_M
 	ld hl, wPartyMon1PP
 	ld a, 15
 	ld [hli], a
@@ -66,27 +65,21 @@ IF DEF(_DEBUG)
 	ld hl, wPartyMon3Moves + 1
 	ld a, THUNDERBOLT
 	ld [hli], a
-	ld a, PSYCHIC_M
-	ld [hl], a
+	ld [hl], PSYCHIC_M
 	ld hl, wPartyMon3PP + 1
-	ld a, 15
-	ld [hl], a
+	ld [hl], 15
 
 	; Hardened Onix gets Strength.
 	ld hl, wPartyMon4Moves
-	ld a, STRENGTH
-	ld [hl], a
+	ld [hl], STRENGTH
 	ld hl, wPartyMon4PP
-	ld a, 15
-	ld [hl], a
+	ld [hl], 15
 
 	; Articuno gets Fly.
 	ld hl, wPartyMon5Moves
-	ld a, FLY
-	ld [hl], a
+	ld [hl], FLY
 	ld hl, wPartyMon5PP
-	ld a, 15
-	ld [hl], a
+	ld [hl], 15
 
 	; Pikachu gets Surf, Flash, and DIG.
 	ld hl, wPartyMon6Moves
@@ -143,9 +136,7 @@ IF DEF(_DEBUG)
 	ld a, STARTER2
 	ld [hli], a
 	inc hl ; hl = wPlayerStarter
-	ld a, STARTER1
-	ld [hl], a
-
+	ld [hl], STARTER1
 	ret
 
 DebugSetPokedexEntries:

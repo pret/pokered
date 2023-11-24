@@ -231,8 +231,7 @@ CeladonMartRoofLittleGirlText:
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .done
-	call CeladonMartRoofScript_GiveDrinkToGirl
+	call z, CeladonMartRoofScript_GiveDrinkToGirl
 	jr .done
 .noDrinksInBag
 	ld hl, .ImThirstyText

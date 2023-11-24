@@ -248,7 +248,7 @@ _ViridianGymGuidePostBattleText::
 
 _ViridianGymGuideApexChipGroundText::
 	text "For ground"
-	line "#MON, an "
+	line "#MON, an"
 	cont "APEX CHIP will"
 	cont "simulate a sandy"
 	cont "dry badland"
