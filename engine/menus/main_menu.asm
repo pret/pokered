@@ -21,8 +21,8 @@ MainMenu:
 	ld [hli], a
 	ld [hl], a
 	ld [wDefaultMap], a
-	ld hl, wd72e
-	res 6, [hl]
+	ld hl, wScriptEngineFlags2
+	res SCRIPT_ENGINE2_USING_LINK_FEATURE_F, [hl]
 	call ClearScreen
 	call RunDefaultPaletteCommand
 	call LoadTextBoxTilePatterns
@@ -134,8 +134,8 @@ InitOptions:
 LinkMenu:
 	xor a
 	ld [wLetterPrintingDelayFlags], a
-	ld hl, wd72e
-	set 6, [hl]
+	ld hl, wScriptEngineFlags2
+	set SCRIPT_ENGINE2_USING_LINK_FEATURE_F, [hl]
 	ld hl, LinkMenuEmptyText
 	call PrintText
 	call SaveScreenTilesToBuffer1
@@ -151,7 +151,7 @@ LinkMenu:
 	call PlaceString
 	xor a
 	ld [wUnusedCD37], a
-	ld [wd72d], a
+	ld [wSpecialWarpDest], a
 	ld hl, wTopMenuItemY
 	ld a, $7
 	ld [hli], a
@@ -262,7 +262,7 @@ LinkMenu:
 	jr nz, .next
 	ld a, TRADE_CENTER
 .next
-	ld [wd72d], a
+	ld [wSpecialWarpDest], a
 	ld hl, PleaseWaitText
 	call PrintText
 	ld c, 50
@@ -290,8 +290,8 @@ LinkMenu:
 	ld hl, LinkCanceledText
 	vc_hook Wireless_net_end
 	call PrintText
-	ld hl, wd72e
-	res 6, [hl]
+	ld hl, wScriptEngineFlags2
+	res SCRIPT_ENGINE2_USING_LINK_FEATURE_F, [hl]
 	ret
 
 WhereWouldYouLikeText:
@@ -326,7 +326,7 @@ SpecialEnterMap::
 	ldh [hJoyPressed], a
 	ldh [hJoyHeld], a
 	ldh [hJoy5], a
-	ld [wd72d], a
+	ld [wSpecialWarpDest], a
 	ld hl, wd732
 	set 0, [hl] ; count play time
 	call ResetPlayerSpriteData

@@ -10,8 +10,8 @@ PlayDefaultMusicFadeOutCurrent::
 ; Fade out the current music and then play the default music.
 	ld c, 10
 	ld d, 0
-	ld a, [wd72e]
-	bit 5, a ; has a battle just ended?
+	ld a, [wScriptEngineFlags2]
+	bit SCRIPT_ENGINE2_BATTLE_ENDS_AND_POISON_BLACKOUT_F, a ; has a battle just ended?
 	jr z, PlayDefaultMusicCommon
 	xor a
 	ld [wLastMusicSoundID], a

@@ -17,7 +17,7 @@ PrepareForSpecialWarp::
 	ld a, PALLET_TOWN 
 .next
 	ld b, a
-	ld a, [wd72d]
+	ld a, [wSpecialWarpDest]
 	and a
 	jr nz, .next2
 	ld a, b
@@ -29,7 +29,7 @@ PrepareForSpecialWarp::
 	ret
 
 LoadSpecialWarpData:
-	ld a, [wd72d]
+	ld a, [wSpecialWarpDest]
 	cp TRADE_CENTER
 	jr nz, .notTradeCenter
 	ld hl, TradeCenterPlayerWarp
@@ -79,8 +79,8 @@ LoadSpecialWarpData:
 	ld a, [wLastBlackoutMap]
 	jr .usedFlyWarp
 .usedDungeonWarp
-	ld hl, wd72d
-	res 4, [hl]
+	ld hl, wSpecialWarpDest
+	res WARP_DUNGEON_F, [hl]
 	ld a, [wDungeonWarpDestinationMap]
 	ld b, a
 	ld [wCurMap], a

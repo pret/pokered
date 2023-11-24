@@ -10,9 +10,9 @@ TradeCenter_Script:
 	ld a, TRADECENTER_OPPONENT
 	ldh [hSpriteIndex], a
 	call SetSpriteFacingDirection
-	ld hl, wd72d
-	bit 0, [hl]
-	set 0, [hl]
+	ld hl, wTradeCenterInitFlags
+	bit TRADECENTERINIT_SPRITE_FACING_DIRECTION_INIT_F, [hl]
+	set TRADECENTERINIT_SPRITE_FACING_DIRECTION_INIT_F, [hl]
 	ret nz
 	ld hl, wSprite01StateData2MapY
 	ld a, 8 ; y

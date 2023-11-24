@@ -126,9 +126,9 @@ Route22Rival1StartBattleScript:
 	ld a, TEXT_ROUTE22_RIVAL1
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld hl, wd72d
-	set 6, [hl]
-	set 7, [hl]
+	ld hl, wScriptEngineFlags
+	set SCRIPT_ENGINE_RESET_AFTER_ALL_BATTLES_F, [hl]
+	set SCRIPT_ENGINE_PRINT_END_BATTLE_TEXT_F, [hl]
 	ld hl, Route22Rival1DefeatedText
 	ld de, Route22Rival1VictoryText
 	call SaveEndBattleTextPointers
@@ -282,9 +282,9 @@ Route22Rival2StartBattleScript:
 	ld a, TEXT_ROUTE22_RIVAL2
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld hl, wd72d
-	set 6, [hl]
-	set 7, [hl]
+	ld hl, wScriptEngineFlags
+	set SCRIPT_ENGINE_RESET_AFTER_ALL_BATTLES_F, [hl]
+	set SCRIPT_ENGINE_PRINT_END_BATTLE_TEXT_F, [hl]
 	ld hl, Route22Rival2DefeatedText
 	ld de, Route22Rival2VictoryText
 	call SaveEndBattleTextPointers

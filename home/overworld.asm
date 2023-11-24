@@ -15,9 +15,9 @@ EnterMap::
 	ld a, 3 ; minimum number of steps between battles
 	ld [wNumberOfNoRandomBattleStepsLeft], a
 .skipGivingThreeStepsOfNoRandomBattles
-	ld hl, wd72e
-	bit 5, [hl] ; did a battle happen immediately before this?
-	res 5, [hl] ; unset the "battle just happened" flag
+	ld hl, wScriptEngineFlags2
+	bit SCRIPT_ENGINE2_BATTLE_ENDS_AND_POISON_BLACKOUT_F, [hl] ; did a battle happen immediately before this?
+	res SCRIPT_ENGINE2_BATTLE_ENDS_AND_POISON_BLACKOUT_F, [hl] ; unset the "battle just happened" flag
 	call z, ResetUsingStrengthOutOfBattleBit
 	call nz, MapEntryAfterBattle
 	ld hl, wd732
@@ -29,8 +29,8 @@ EnterMap::
 	call UpdateSprites
 .didNotEnterUsingFlyWarpOrDungeonWarp
 	farcall CheckForceBikeOrSurf ; handle currents in SF islands and forced bike riding in cycling road
-	ld hl, wd72d
-	res 5, [hl]
+	ld hl, wScriptEngineFlags
+	res SCRIPT_ENGINE_NPC_WILL_NOT_FACE_PLAYER_F, [hl]
 	call UpdateSprites
 	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
@@ -54,9 +54,9 @@ OverworldLoopLessDelay::
 	ld a, [wSafariZoneGameOver]
 	and a
 	jp nz, WarpFound2
-	ld hl, wd72d
-	bit 3, [hl]
-	res 3, [hl]
+	ld hl, wWarpFlags
+	bit WARP_SCRIPTED_F, [hl]
+	res WARP_SCRIPTED_F, [hl]
 	jp nz, WarpFound2
 	ld a, [wd732]
 	and 1 << 4 | 1 << 3 ; fly warp or dungeon warp
@@ -324,8 +324,8 @@ OverworldLoopLessDelay::
 	res 2, [hl] ; standing on warp flag
 	jp nc, CheckWarpsNoCollision ; check for warps if there was no battle
 .battleOccurred
-	ld hl, wd72d
-	res 6, [hl]
+	ld hl, wScriptEngineFlags
+	res SCRIPT_ENGINE_RESET_AFTER_ALL_BATTLES_F, [hl]
 	ld hl, wFlags_D733
 	res 3, [hl]
 	ld hl, wCurrentMapScriptFlags
@@ -338,8 +338,8 @@ OverworldLoopLessDelay::
 	jr nz, .notCinnabarGym
 	SetEvent EVENT_2A7
 .notCinnabarGym
-	ld hl, wd72e
-	set 5, [hl]
+	ld hl, wScriptEngineFlags2
+	set SCRIPT_ENGINE2_BATTLE_ENDS_AND_POISON_BLACKOUT_F, [hl]
 	ld a, [wCurMap]
 	cp OAKS_LAB
 	jp z, .noFaintCheck ; no blacking out if the player lost to the rival in Oak's lab
@@ -360,13 +360,13 @@ OverworldLoopLessDelay::
 ; function to determine if there will be a battle and execute it (either a trainer battle or wild battle)
 ; sets carry if a battle occurred and unsets carry if not
 NewBattle::
-	ld a, [wd72d]
-	bit 4, a
+	ld a, [wWarpFlags]
+	bit WARP_DUNGEON_F, a
 	jr nz, .noBattle
 	call IsPlayerCharacterBeingControlledByGame
 	jr nz, .noBattle ; no battle if the player character is under the game's control
-	ld a, [wd72e]
-	bit 4, a
+	ld a, [wScriptEngineFlags2]
+	bit SCRIPT_ENGINE2_DISABLE_BATTLES_F, a
 	jr nz, .noBattle
 	farjp InitBattle
 .noBattle
@@ -760,8 +760,8 @@ HandleBlackOut::
 	call GBFadeOutToBlack
 	ld a, $08
 	call StopMusic
-	ld hl, wd72e
-	res 5, [hl]
+	ld hl, wScriptEngineFlags2
+	res SCRIPT_ENGINE2_BATTLE_ENDS_AND_POISON_BLACKOUT_F, [hl]
 	ld a, BANK(ResetStatusAndHalveMoneyOnBlackout) ; also BANK(PrepareForSpecialWarp) and BANK(SpecialEnterMap)
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
@@ -2137,8 +2137,8 @@ LoadMapHeader::
 	dec c
 	jr nz, .signLoop
 .loadSpriteData
-	ld a, [wd72e]
-	bit 5, a ; did a battle happen immediately before this?
+	ld a, [wScriptEngineFlags2]
+	bit SCRIPT_ENGINE2_BATTLE_ENDS_AND_POISON_BLACKOUT_F, a ; did a battle happen immediately before this?
 	jp nz, .finishUp ; if so, skip this because battles don't destroy this data
 	ld a, [hli]
 	ld [wNumSprites], a ; save the number of sprites

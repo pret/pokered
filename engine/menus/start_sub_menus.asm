@@ -146,8 +146,8 @@ StartMenu_Pokemon::
 	bit 3, a ; did the player decide to fly?
 	jp nz, .goBackToMap
 	call LoadFontTilePatterns
-	ld hl, wd72e
-	set 1, [hl]
+	ld hl, wScriptEngineFlags2
+	set SCRIPT_ENGINE2_UNKNOWN_F, [hl]
 	jp StartMenu_Pokemon
 .cut
 	bit BIT_CASCADEBADGE, a
@@ -217,9 +217,9 @@ StartMenu_Pokemon::
 	ld hl, wd732
 	set 3, [hl]
 	set 6, [hl]
-	ld hl, wd72e
-	set 1, [hl]
-	res 4, [hl]
+	ld hl, wScriptEngineFlags2
+	set SCRIPT_ENGINE2_UNKNOWN_F, [hl]
+	res SCRIPT_ENGINE2_DISABLE_BATTLES_F, [hl]
 	ld c, 60
 	call DelayFrames
 	call GBPalWhiteOutWithDelay3
@@ -639,8 +639,8 @@ TrainerInfo_DrawVerticalLine:
 	ret
 
 StartMenu_SaveReset::
-	ld a, [wd72e]
-	bit 6, a ; is the player using the link feature?
+	ld a, [wScriptEngineFlags2]
+	bit SCRIPT_ENGINE2_USING_LINK_FEATURE_F, a ; is the player using the link feature?
 	jp nz, Init
 	predef SaveSAV ; save the game
 	call LoadScreenTilesFromBuffer2 ; restore saved screen

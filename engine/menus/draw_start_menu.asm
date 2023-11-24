@@ -42,8 +42,8 @@ DrawStartMenu::
 	call PrintStartMenuItem
 	ld de, wPlayerName ; player's name
 	call PrintStartMenuItem
-	ld a, [wd72e]
-	bit 6, a ; is the player using the link feature?
+	ld a, [wScriptEngineFlags2]
+	bit SCRIPT_ENGINE2_USING_LINK_FEATURE_F, a
 ; case for not using link feature
 	ld de, StartMenuSaveText
 	jr z, .printSaveOrResetText

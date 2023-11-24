@@ -409,8 +409,8 @@ MakeNPCFacePlayer:
 
 ; Check if the behaviour of the NPC facing the player when spoken to is
 ; disabled. This is only done when rubbing the S.S. Anne captain's back.
-	ld a, [wd72d]
-	bit 5, a
+	ld a, [wScriptEngineFlags]
+	bit SCRIPT_ENGINE_NPC_WILL_NOT_FACE_PLAYER_F, a
 	jr nz, notYetMoving
 	res 7, [hl]
 	ld a, [wPlayerDirection]
@@ -743,9 +743,9 @@ DoScriptedNPCMovement:
 	ld a, [wd730]
 	bit 7, a
 	ret z
-	ld hl, wd72e
-	bit 7, [hl]
-	set 7, [hl]
+	ld hl, wScriptEngineFlags2
+	bit SCRIPT_ENGINE2_SCRIPTED_NPC_MOVEMENT_F, [hl]
+	set SCRIPT_ENGINE2_SCRIPTED_NPC_MOVEMENT_F, [hl]
 	jp z, InitScriptedNPCMovement
 	ld hl, wNPCMovementDirections2
 	ld a, [wNPCMovementDirections2Index]

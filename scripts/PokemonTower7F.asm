@@ -78,8 +78,8 @@ PokemonTower7FWarpToMrFujiHouseScript:
 	ld [wDestinationWarpID], a
 	ld a, LAVENDER_TOWN
 	ld [wLastMap], a
-	ld hl, wd72d
-	set 3, [hl]
+	ld hl, wWarpFlags
+	set WARP_SCRIPTED_F, [hl]
 	ld a, SCRIPT_POKEMONTOWER7F_DEFAULT
 	ld [wPokemonTower7FCurScript], a
 	ld [wCurMapScript], a

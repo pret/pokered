@@ -30,8 +30,8 @@ PlayerStepOutFromDoor::
 _EndNPCMovementScript::
 	ld hl, wd730
 	res 7, [hl]
-	ld hl, wd72e
-	res 7, [hl]
+	ld hl, wScriptEngineFlags2
+	res SCRIPT_ENGINE2_SCRIPTED_NPC_MOVEMENT_F, [hl]
 	ld hl, wd736
 	res 0, [hl]
 	res 1, [hl]
@@ -119,8 +119,8 @@ PalletMovementScript_WalkToLab:
 	ld hl, wNPCMovementDirections2
 	ld de, RLEList_ProfOakWalkToLab
 	call DecodeRLEList
-	ld hl, wd72e
-	res 7, [hl]
+	ld hl, wScriptEngineFlags2
+	res SCRIPT_ENGINE2_SCRIPTED_NPC_MOVEMENT_F, [hl]
 	ld hl, wd730
 	set 7, [hl]
 	ld a, $4
@@ -153,8 +153,8 @@ PalletMovementScript_Done:
 	predef HideObject
 	ld hl, wd730
 	res 7, [hl]
-	ld hl, wd72e
-	res 7, [hl]
+	ld hl, wScriptEngineFlags2
+	res SCRIPT_ENGINE2_SCRIPTED_NPC_MOVEMENT_F, [hl]
 	jp EndNPCMovementScript
 
 PewterMuseumGuyMovementScriptPointerTable::
@@ -183,8 +183,8 @@ PewterMovementScript_WalkToMuseum:
 	ld hl, wNPCMovementDirections2
 	ld de, RLEList_PewterMuseumGuy
 	call DecodeRLEList
-	ld hl, wd72e
-	res 7, [hl]
+	ld hl, wScriptEngineFlags2
+	res SCRIPT_ENGINE2_SCRIPTED_NPC_MOVEMENT_F, [hl]
 	ld a, $1
 	ld [wNPCMovementScriptFunctionNum], a
 	ret
@@ -209,8 +209,8 @@ PewterMovementScript_Done:
 	ret nz
 	ld hl, wd730
 	res 7, [hl]
-	ld hl, wd72e
-	res 7, [hl]
+	ld hl, wScriptEngineFlags2
+	res SCRIPT_ENGINE2_SCRIPTED_NPC_MOVEMENT_F, [hl]
 	jp EndNPCMovementScript
 
 PewterGymGuyMovementScriptPointerTable::
@@ -240,8 +240,8 @@ PewterMovementScript_WalkToGym:
 	ld hl, wNPCMovementDirections2
 	ld de, RLEList_PewterGymGuy
 	call DecodeRLEList
-	ld hl, wd72e
-	res 7, [hl]
+	ld hl, wScriptEngineFlags2
+	res SCRIPT_ENGINE2_SCRIPTED_NPC_MOVEMENT_F, [hl]
 	ld hl, wd730
 	set 7, [hl]
 	ld a, $1

@@ -173,11 +173,11 @@ StartTrainerBattle::
 	xor a
 	ld [wJoyIgnore], a
 	call InitBattleEnemyParameters
-	ld hl, wd72d
-	set 6, [hl]
-	set 7, [hl]
-	ld hl, wd72e
-	set 1, [hl]
+	ld hl, wScriptEngineFlags
+	set SCRIPT_ENGINE_RESET_AFTER_ALL_BATTLES_F, [hl]
+	set SCRIPT_ENGINE_PRINT_END_BATTLE_TEXT_F, [hl]
+	ld hl, wScriptEngineFlags2
+	set SCRIPT_ENGINE2_UNKNOWN_F, [hl]
 	ld hl, wCurMapScript
 	inc [hl]        ; increment map script index (next script function is usually EndTrainerBattle)
 	ret
@@ -186,8 +186,8 @@ EndTrainerBattle::
 	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
 	set 6, [hl]
-	ld hl, wd72d
-	res 7, [hl]
+	ld hl, wScriptEngineFlags
+	res SCRIPT_ENGINE_PRINT_END_BATTLE_TEXT_F, [hl]
 	ld hl, wFlags_0xcd60
 	res 0, [hl]                  ; player is no longer engaged by any trainer
 	ld a, [wIsInBattle]
@@ -340,9 +340,9 @@ EngageMapTrainer::
 
 PrintEndBattleText::
 	push hl
-	ld hl, wd72d
-	bit 7, [hl]
-	res 7, [hl]
+	ld hl, wScriptEngineFlags
+	bit SCRIPT_ENGINE_PRINT_END_BATTLE_TEXT_F, [hl]
+	res SCRIPT_ENGINE_PRINT_END_BATTLE_TEXT_F, [hl]
 	pop hl
 	ret z
 	ldh a, [hLoadedROMBank]

@@ -178,9 +178,9 @@ SilphCo7FRivalStartBattleScript:
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	call Delay3
-	ld hl, wd72d
-	set 6, [hl]
-	set 7, [hl]
+	ld hl, wScriptEngineFlags
+	set SCRIPT_ENGINE_RESET_AFTER_ALL_BATTLES_F, [hl]
+	set SCRIPT_ENGINE_PRINT_END_BATTLE_TEXT_F, [hl]
 	ld hl, SilphCo7FRivalDefeatedText
 	ld de, SilphCo7FRivalVictoryText
 	call SaveEndBattleTextPointers
@@ -296,8 +296,8 @@ SilphCo7TrainerHeader3:
 SilphCo7FSilphWorkerM1Text:
 ; lapras guy
 	text_asm
-	ld a, [wd72e]
-	bit 0, a ; got lapras?
+	ld a, [wScriptEngineFlags2]
+	bit SCRIPT_ENGINE2_RECEIVED_LAPRAS_IN_SILPH_CO_F, a ; got lapras?
 	jr z, .give_lapras
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .saved_silph
@@ -316,8 +316,8 @@ SilphCo7FSilphWorkerM1Text:
 	call EnableAutoTextBoxDrawing
 	ld hl, .LaprasDescriptionText
 	call PrintText
-	ld hl, wd72e
-	set 0, [hl]
+	ld hl, wScriptEngineFlags2
+	set SCRIPT_ENGINE2_RECEIVED_LAPRAS_IN_SILPH_CO_F, [hl]
 	jr .done
 .saved_silph
 	ld hl, .SavedText

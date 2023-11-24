@@ -1502,8 +1502,8 @@ ItemUseEscapeRope:
 	ld hl, wd732
 	set 3, [hl]
 	set 6, [hl]
-	ld hl, wd72e
-	res 4, [hl]
+	ld hl, wScriptEngineFlags2
+	res SCRIPT_ENGINE2_DISABLE_BATTLES_F, [hl]
 	ResetEvent EVENT_IN_SAFARI_ZONE
 	xor a
 	ld [wNumSafariBalls], a

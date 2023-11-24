@@ -64,14 +64,14 @@ VictoryRoad3FDefaultScript:
 	ld a, [wCoordIndex]
 	cp $1
 	jr nz, .hole
-	ld hl, wd72d
-	res 4, [hl]
+	ld hl, wWarpFlags
+	res WARP_DUNGEON_F, [hl]
 	ld hl, wd732
 	res 4, [hl]
 	ret
 .hole
-	ld a, [wd72d]
-	bit 4, a
+	ld a, [wWarpFlags]
+	bit WARP_DUNGEON_F, a
 	jp z, CheckFightingMapTrainers
 	ret
 

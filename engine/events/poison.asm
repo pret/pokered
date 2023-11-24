@@ -101,8 +101,8 @@ ApplyOutOfBattlePoisonDamage:
 	ld a, TEXT_BLACKED_OUT
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld hl, wd72e
-	set 5, [hl]
+	ld hl, wScriptEngineFlags2
+	set SCRIPT_ENGINE2_BATTLE_ENDS_AND_POISON_BLACKOUT_F, [hl]
 	ld a, $ff
 	jr .done
 .noBlackOut
