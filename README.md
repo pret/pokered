@@ -56,7 +56,7 @@ Pictured: GB Monochrome, Original GBC color, SGB Colors, Alternate SGB Colors, G
 ## Contact the creator
 
 [discord]: https://discord.gg/d5dubZ3
-- **Discord:** [send a direct message to user Vortiene](https://discord.com/channels/@me/1180306348844515379)
+- **Discord:** [send a direct message to user Vortiene](https://discord.com/channels/@me/)
 - **Reddit:** [send a direct message to user Vortiene](https://old.reddit.com/message/compose/?to=Vortiene)
 
 If you'd like to make your own romhack based on this one, fork the repository and see [**INSTALL.md**](INSTALL.md).
