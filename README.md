@@ -55,9 +55,11 @@ Pictured: GB Monochrome, Original GBC color, SGB Colors, Alternate SGB Colors, G
 
 ## Contact the creator
 
-[discord]: https://discord.gg/d5dubZ3
+**DO NOT contact me directly in order to ask me how to write assembly code. Contact me with questions or comments on this romhack.**
 - **Reddit:** [send a direct message to user Vortiene](https://old.reddit.com/message/compose/?to=Vortiene)
 - **Discord:** [send a direct message to user Vortiene](https://discord.com/channels/@me/)
+
+If you want to learn gameboy assembly code, join the **[pret discord.](https://discord.gg/d5dubZ3)**
 
 If you'd like to make your own romhack based on this one, fork the repository and see [**INSTALL.md**](INSTALL.md).
 
