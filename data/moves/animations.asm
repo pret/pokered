@@ -28,7 +28,7 @@ AttackAnimationPointers:
 	dw JumpKickAnim
 	dw RollingKickAnim
 	dw SandAttackAnim
-	dw HeadButtAnim
+	dw HeadbuttAnim
 	dw HornAttackAnim
 	dw FuryAttackAnim
 	dw HornDrillAnim
@@ -363,7 +363,7 @@ SandAttackAnim:
 	battle_anim SAND_ATTACK, SUBANIM_1_SAND, 1, 6
 	db -1 ; end
 
-HeadButtAnim:
+HeadbuttAnim:
 	battle_anim HEADBUTT, SUBANIM_1_STAR_BIG, 1, 6
 	db -1 ; end
 
