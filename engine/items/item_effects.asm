@@ -27,7 +27,7 @@ ItemUsePtrTable:
 	dw ItemUseBall       ; POKE_BALL
 	dw ItemUseBall    	 ; HYPER_BALL
 	dw ItemUseBicycle    ; BICYCLE
-	dw ItemUseSurfboard  ; out-of-battle Surf effect
+	dw ItemUseSurfboard  ; SURFBOARD
 	dw ItemUseBall       ; SAFARI_BALL
 	dw ItemUsePokedex    ; POKEDEX
 	dw ItemUseEvoStone   ; MOON_STONE
@@ -71,12 +71,12 @@ ItemUsePtrTable:
 	dw ItemUseCardKey    ; CARD_KEY
 	dw ValuableItem      ; NUGGET
 	dw ItemUseApexChip   ; APEX_CHIP
-	dw ItemUsePokedoll   ; POKE_DOLL
+	dw ItemUsePokeDoll   ; POKE_DOLL
 	dw ItemUseMedicine   ; FULL_HEAL
 	dw ItemUseMedicine   ; REVIVE
 	dw ItemUseMedicine   ; MAX_REVIVE
 	dw ItemUseGuardSpec  ; GUARD_SPEC
-	dw ItemUseSuperRepel ; SUPER_REPL
+	dw ItemUseSuperRepel ; SUPER_REPEL
 	dw ItemUseMaxRepel   ; MAX_REPEL
 	dw ItemUseDireHit    ; DIRE_HIT
 	dw UnusableItem      ; COIN
@@ -93,7 +93,7 @@ ItemUsePtrTable:
 	dw ItemNotYours      ; OAKS_PARCEL
 	dw ItemUseItemfinder ; ITEMFINDER
 	dw UnusableItem      ; SILPH_SCOPE
-	dw ItemUsePokeflute  ; POKE_FLUTE
+	dw ItemUsePokeFlute  ; POKE_FLUTE
 	dw UnusableItem      ; LIFT_KEY
 	dw ItemUseBoosterChip; BOOSTER_CHIP
 	dw ItemUseOldRod     ; OLD_ROD
@@ -858,7 +858,7 @@ ItemUseBicycle:
 	jr .overwrite
 ;;;;;;;;;;
 
-; used for Surf out-of-battle effect
+; indirectly used by SURF in StartMenu_Pokemon.surf
 ItemUseSurfboard:
 	ld a, [wWalkBikeSurfState]
 	ld [wWalkBikeSurfStateCopy], a
@@ -1736,6 +1736,9 @@ RareCandyNoEffectText:
 
 INCLUDE "data/battle/stat_names.asm"
 
+; for BOULDERBADGE when used from the
+; ITEM window, which corresponds to
+; SAFARI_BAIT during Safari Game encounters
 ItemUseBait:
 	ld hl, ThrewBaitText
 	rst _PrintText
@@ -1746,6 +1749,9 @@ ItemUseBait:
 	ld de, wSafariEscapeFactor ; escape factor
 	jr BaitRockCommon
 
+; for CASCADEBADGE when used from the
+; ITEM window, which corresponds to
+; SAFARI_ROCK during Safari Game encounters
 ItemUseRock:
 	ld hl, ThrewRockText
 	rst _PrintText
@@ -1815,7 +1821,7 @@ IsEscapeRopeUsable:
 	ret
 ;;;;;;;;;;
 
-; also used for Dig out-of-battle effect
+; indirectly used by DIG in StartMenu_Pokemon.dig
 ItemUseEscapeRope:
 	call IsEscapeRopeUsable
 	jp z, ItemUseNotTime
@@ -2000,7 +2006,7 @@ ItemUseCardKey:
 
 ;INCLUDE "data/events/card_key_coords.asm"
 
-ItemUsePokedoll:
+ItemUsePokeDoll:
 	ld a, [wIsInBattle]
 	dec a
 	jp nz, ItemUseInBattle ; PureRGBnote: CHANGED: text that displays when using out of battle indicates it's for use in battle
@@ -2065,7 +2071,7 @@ ItemUseXStat:
 	ld [hl], a ; restore [wPlayerMoveNum]
 	ret
 
-ItemUsePokeflute:
+ItemUsePokeFlute:
 	ld a, [wIsInBattle]
 	and a
 	jr nz, .inBattle
