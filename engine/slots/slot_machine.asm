@@ -673,7 +673,7 @@ SlotMachine_PayCoinsToPlayer:
 	cp HIGH(SLOTSBAR) + 1
 	ld a, 10
 	jr c, .loadTemp
-	sub 9 ; a = 1
+	ld a, 1
 .loadTemp
 ;;;;;;;;;;
 	ld [hl], a

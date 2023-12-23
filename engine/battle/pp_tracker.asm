@@ -91,7 +91,9 @@ IsTrainerBattlePPCheck:
 	ld e, NUM_MOVES
 .loop
 	rr d
+	jr nc, .noLoad
 	ld [hl], $ff
+.noLoad
 	inc hl
 	dec e
 	jr nz, .loop
