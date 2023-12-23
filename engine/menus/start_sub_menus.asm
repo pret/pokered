@@ -479,7 +479,8 @@ StartMenu_Item::
 UseItemWithIndexBackup:
 	call ItemMenuBackupItemIndex
 	call UseItem
-	jp ItemMenuRestoreItemIndex
+	call ItemMenuRestoreItemIndex ; do not change to a jp
+	ret 
 
 ItemMenuBackupItemIndex:
 	pop hl
