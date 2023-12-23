@@ -565,7 +565,7 @@ ShowPokedexDataCommon:
 	call ClearScreen
 
 	ld hl, wPokedexDataFlags
-	set 2, [hl] ; flag indicates we're currently in the pokedex data page
+	set BIT_VIEWING_POKEDEX, [hl] ; flag indicates we're currently in the pokedex data page
 
 	ldh a, [hTileAnimations]
 	push af

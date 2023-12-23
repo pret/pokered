@@ -121,6 +121,7 @@ DEF NUM_ACTIVE_PALS EQU 4
 	const_def
 	const BIT_POKEDEX_DATA_DISPLAY_TYPE    ; 0
 	const BIT_POKEDEX_WHICH_SPRITE_SHOWING ; 1 
+	const BIT_VIEWING_POKEDEX              ; 2
 ;;;;;;;;;;
 
 ;;;;;;;;;; PureRGBnote: ADDED: town map area flags

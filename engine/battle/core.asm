@@ -7228,7 +7228,7 @@ ENDC
 	ret
 
 
-HandleExplodingAnimation:
+HandleExplodingAnimation: ; TODO: is still used unintentionally?
 	ldh a, [hWhoseTurn]
 	and a
 	ld hl, wEnemyMonType1
@@ -7611,9 +7611,12 @@ LoadBackSpriteUnzoomed:
 ;;;;;;;;;;
 
 GetBackSpriteTarget:
-	ld a, [wPokedexDataFlags]
-	bit 2, a
 	ld de, vBackPic
+	ld a, [wIsInBattle]
+	and a
+	ret nz ; in battle we always draw the sprite at vBackPic
+	ld a, [wPokedexDataFlags]
+	bit BIT_VIEWING_POKEDEX, a
 	ret z
 	ld de, vFrontPic ; in the pokedex we render it to where the front sprite shows up for easier toggling
 	ret
