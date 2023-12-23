@@ -1445,12 +1445,15 @@ AIUseXAccuracy:
 
 AIUseDireHit:
 	call IsPlayerPokemonDangerous
-	ret c
+	jr c, .clearCarryAndReturn
 	call AIPlayRestoringSFX
 	ld hl, wEnemyBattleStatus2
 	set 2, [hl]
 	ld a, DIRE_HIT
 	jp AIPrintItemUse
+.clearCarryAndReturn
+	and a
+	ret
 
 ; PureRGBnote: ADDED: if enemy HP is below a 1/[wUnusedC000], store 1 in wUnusedC000.
 ; used for checking whether the hyper ball item should guarantee success on use
