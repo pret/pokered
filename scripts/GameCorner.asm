@@ -181,9 +181,9 @@ GameCornerClerk1Text:
 	ldh [hCoins + 2], a
 	ld a, $05 ; PureRGBnote: CHANGED: 8000 pokebucks for 500 coins.
 	ldh [hCoins], a
-	ld de, wPlayerCoins + 2
-	ld hl, hCoins + 2
-	ld c, $3
+	ld de, wPlayerCoins + 1
+	ld hl, hCoins + 1
+	ld c, 2
 	predef AddBCDPredef
 	call GameCornerDrawCoinBox
 	ld hl, .ThanksHereAre50Coins
