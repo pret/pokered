@@ -1192,6 +1192,8 @@ DragoniteEvosMoves:
 	db 33, MIST
 	db 38, DRAGON_RAGE
 	db 46, HYPER_BEAM
+	;db 52, WHIRLWIND ; TODO: add but check lance's moveset works still
+	;db 52, SHARPEN
 	db 0
 
 MissingNo43EvosMoves:
