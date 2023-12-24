@@ -261,11 +261,8 @@ SetSpritePosition1::
 SetSpritePosition2::
 	ld hl, _SetSpritePosition2
 SpritePositionBankswitch::
-	ld b, BANK(_GetSpritePosition1)
-	assert BANK(_GetSpritePosition1) == BANK(_GetSpritePosition2)
-	assert BANK(_GetSpritePosition1) == BANK(_SetSpritePosition1)
-	assert BANK(_GetSpritePosition1) == BANK(_SetSpritePosition2)
-	rst _Bankswitch ; indirect jump to one of the four functions
+	ld b, BANK("Trainer Sight")
+	rst _Bankswitch
 	ret
 
 CheckForEngagingTrainers::
