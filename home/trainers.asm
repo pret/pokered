@@ -258,7 +258,7 @@ SetSpritePosition1::
 SetSpritePosition2::
 	ld hl, _SetSpritePosition2
 SpritePositionBankswitch::
-	ld b, BANK(_GetSpritePosition1) ; BANK(_GetSpritePosition2), BANK(_SetSpritePosition1), BANK(_SetSpritePosition2)
+	ld b, BANK("Trainer Sight")
 	jp Bankswitch ; indirect jump to one of the four functions
 
 CheckForEngagingTrainers::
