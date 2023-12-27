@@ -5,11 +5,12 @@ MACRO hidden_item
 ENDM
 
 HiddenItemCoords:
+	table_width 3, HiddenItemCoords
 	; map id, x, y
 	hidden_item VIRIDIAN_FOREST,                1,  18
 	hidden_item VIRIDIAN_FOREST,               16,  42
 	hidden_item MT_MOON_B2F,                   18,  12
-	hidden_item ROUTE_25,                      38,   3
+	hidden_item ROUTE_25,                      38,   5
 	hidden_item ROUTE_9,                       14,   7
 	hidden_item ROUTE_9,                       32,   3
 	hidden_item SS_ANNE_KITCHEN,               13,   9
@@ -58,7 +59,7 @@ HiddenItemCoords:
 	hidden_item CELADON_CITY,                  48,  15
 	hidden_item CELADON_CITY,                   3,   2
 	hidden_item CELADON_CITY,                  48,   7
-	hidden_item ROUTE_25,                      10,   1
+	hidden_item ROUTE_25,                      10,   3
 	hidden_item MT_MOON_B2F,                   33,   9
 	hidden_item SEAFOAM_ISLANDS_B3F,            9,  16
 	hidden_item VERMILION_CITY,                14,  11
@@ -74,4 +75,5 @@ HiddenItemCoords:
 	hidden_item PEWTER_CITY,				   23,   2
 	hidden_item SAFARI_ZONE_NORTH,			    7,  13
 	hidden_item SECRET_LAB,                     9,  25
+	assert_max_table_length MAX_HIDDEN_ITEMS
 	db -1 ; end

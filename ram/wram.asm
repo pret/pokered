@@ -2298,9 +2298,9 @@ wdef5:: db
 
 	ds 4 ; unused save file 4 bytes
 
-wObtainedHiddenItemsFlags:: flag_array 112
+wObtainedHiddenItemsFlags:: flag_array MAX_HIDDEN_ITEMS
 
-wObtainedHiddenCoinsFlags:: flag_array 16
+wObtainedHiddenCoinsFlags:: flag_array MAX_HIDDEN_COINS
 
 ; $00 = walking
 ; $01 = biking
