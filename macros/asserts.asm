@@ -16,6 +16,12 @@ MACRO assert_table_length
 		"{CURRENT_TABLE_START}: expected {d:x} entries, each {d:CURRENT_TABLE_WIDTH} bytes"
 ENDM
 
+MACRO assert_max_table_length
+	DEF x = \1
+	ASSERT x * CURRENT_TABLE_WIDTH >= @ - {CURRENT_TABLE_START}, \
+		"{CURRENT_TABLE_START}: expected a maximum of {d:x} entries, each {d:CURRENT_TABLE_WIDTH} bytes"
+ENDM
+
 MACRO list_start
 	DEF list_index = 0
 	IF _NARG == 1
