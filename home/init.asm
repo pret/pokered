@@ -41,8 +41,8 @@ DEF rLCDC_DEFAULT EQU %11100011
 
 	ld sp, wStack
 
-	ld hl, WRAM0_Begin
-	ld bc, WRAM1_End - WRAM0_Begin
+	ld hl, STARTOF(WRAM0)
+	ld bc, SIZEOF(WRAM0)
 .loop
 	ld [hl], 0
 	inc hl
@@ -53,8 +53,8 @@ DEF rLCDC_DEFAULT EQU %11100011
 
 	call ClearVram
 
-	ld hl, HRAM_Begin
-	ld bc, HRAM_End - HRAM_Begin
+	ld hl, STARTOF(HRAM)
+	ld bc, SIZEOF(HRAM)
 	call FillMemory
 
 	call ClearSprites
@@ -119,8 +119,8 @@ DEF rLCDC_DEFAULT EQU %11100011
 	jp PrepareTitleScreen
 
 ClearVram::
-	ld hl, VRAM_Begin
-	ld bc, VRAM_End - VRAM_Begin
+	ld hl, STARTOF(VRAM)
+	ld bc, SIZEOF(VRAM)
 	xor a
 	jp FillMemory
 

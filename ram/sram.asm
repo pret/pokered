@@ -51,3 +51,5 @@ sBank3IndividualBoxChecksums:: ds 6
 ; All 12 boxes fit within 2 SRAM banks
 	ASSERT box_n == NUM_BOXES, \
 		"boxes: Expected {d:NUM_BOXES} total boxes, got {d:box_n}"
+
+ENDSECTION
