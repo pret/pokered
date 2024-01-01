@@ -15,8 +15,8 @@ ReadTrainer:
 	ld [hl], a
 
 ; get the pointer to trainer data for this class
-	ld a, [wCurOpponent]
-	sub OPP_ID_OFFSET + 1 ; convert value from pokemon to trainer
+	ld a, [wTrainerClass] ; get trainer class
+	dec a
 	add a
 	ld hl, TrainerDataPointers
 	ld c, a
@@ -53,7 +53,7 @@ ReadTrainer:
 .LoopTrainerData
 	ld a, [hli]
 	and a ; have we reached the end of the trainer data?
-	jr z, .FinishUp
+	jp z, .AddAdditionalMoveData
 	ld [wcf91], a ; write species somewhere (XXX why?)
 	ld a, ENEMY_PARTY_DATA
 	ld [wMonDataLocation], a
@@ -68,7 +68,7 @@ ReadTrainer:
 ; - if [wLoneAttackNo] != 0, one pokemon on the team has a special move
 	ld a, [hli]
 	and a ; have we reached the end of the trainer data?
-	jr z, .AddLoneMove
+	jr z, .AddAdditionalMoveData
 	ld [wCurEnemyLVL], a
 	ld a, [hli]
 	ld [wcf91], a
@@ -78,69 +78,48 @@ ReadTrainer:
 	call AddPartyMon
 	pop hl
 	jr .SpecialTrainer
-.AddLoneMove
-; does the trainer have a single monster with a different move?
-	ld a, [wLoneAttackNo] ; Brock is 01, Misty is 02, Erika is 04, etc
-	and a
-	jr z, .AddTeamMove
-	dec a
-	add a
+.AddAdditionalMoveData
+; does the trainer have additional move data?
+	ld a, [wTrainerClass]
+	ld b, a
+	ld a, [wTrainerNo]
 	ld c, a
-	ld b, 0
-	ld hl, LoneMoves
-	add hl, bc
+	ld hl, SpecialTrainerMoves
+.loopAdditionalMoveData
 	ld a, [hli]
-	ld d, [hl]
-	ld hl, wEnemyMon1Moves + 2
+	cp $ff
+	jr z, .FinishUp
+	cp b
+	jr nz, .asm_39c46
+	ld a, [hli]
+	cp c
+	jr nz, .asm_39c46
+	ld d, h
+	ld e, l
+.writeAdditionalMoveDataLoop
+	ld a, [de]
+	inc de
+	and a
+	jp z, .FinishUp
+	dec a
+	ld hl, wEnemyMon1Moves
 	ld bc, wEnemyMon2 - wEnemyMon1
 	call AddNTimes
-	ld [hl], d
-	jr .FinishUp
-.AddTeamMove
-; check if our trainer's team has special moves
-
-; get trainer class number
-	ld a, [wCurOpponent]
-	sub OPP_ID_OFFSET
-	ld b, a
-	ld hl, TeamMoves
-
-; iterate through entries in TeamMoves, checking each for our trainer class
-.IterateTeamMoves
+	ld a, [de]
+	inc de
+	dec a
+	ld c, a
+	ld b, 0
+	add hl, bc
+	ld a, [de]
+	inc de
+	ld [hl], a
+	jr .writeAdditionalMoveDataLoop
+.asm_39c46
 	ld a, [hli]
-	cp b
-	jr z, .GiveTeamMoves ; is there a match?
-	inc hl ; if not, go to the next entry
-	inc a
-	jr nz, .IterateTeamMoves
-
-; no matches found. is this trainer champion rival?
-	ld a, b
-	cp RIVAL3
-	jr z, .ChampionRival
-	jr .FinishUp ; nope
-.GiveTeamMoves
-	ld a, [hl]
-	ld [wEnemyMon5Moves + 2], a
-	jr .FinishUp
-.ChampionRival ; give moves to his team
-
-; pidgeot
-	ld a, SKY_ATTACK
-	ld [wEnemyMon1Moves + 2], a
-
-; starter
-	ld a, [wRivalStarter]
-	cp STARTER3
-	ld b, MEGA_DRAIN
-	jr z, .GiveStarterMove
-	cp STARTER1
-	ld b, FIRE_BLAST
-	jr z, .GiveStarterMove
-	ld b, BLIZZARD ; must be squirtle
-.GiveStarterMove
-	ld a, b
-	ld [wEnemyMon6Moves + 2], a
+	and a
+	jr nz, .asm_39c46
+	jr .loopAdditionalMoveData
 .FinishUp
 ; clear wAmountMoneyWon addresses
 	xor a
