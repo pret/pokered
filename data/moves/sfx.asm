@@ -165,6 +165,11 @@ MoveSoundTable:
 	db SFX_BATTLE_26,          $f0, $ff ; SUPER_FANG
 	db SFX_NOT_VERY_EFFECTIVE, $01, $ff ; SLASH
 	db SFX_BATTLE_2C,          $d8, $04 ; SUBSTITUTE
+	db SFX_BATTLE_2A,          $20, $20 ; SLUDGE_BOMB
+	db SFX_BATTLE_13,          $f1, $ff ; SHADOW_BALL
+	db SFX_NOT_VERY_EFFECTIVE, $01, $ff ; DRAGON_CLAW
+	db SFX_HORN_DRILL,         $00, $a0 ; MEGAHORN
+	db SFX_SUPER_EFFECTIVE,    $00, $a0 ; BULLDOZE
 	db SFX_BATTLE_0B,          $00, $80 ; STRUGGLE
 	assert_table_length NUM_ATTACKS
 	db SFX_BATTLE_0B,          $00, $80
