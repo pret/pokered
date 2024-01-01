@@ -175,7 +175,8 @@
 	const DRAGON_CLAW  ; a7
 	const MEGAHORN     ; a8
 	const BULLDOZE     ; a9
-	const STRUGGLE     ; aa
+	const BRAVE_BIRD   ; aa
+	const STRUGGLE     ; ab
 DEF NUM_ATTACKS EQU const_value - 1
 
 	; Moves do double duty as animation identifiers.

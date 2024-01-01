@@ -170,6 +170,7 @@ MoveSoundTable:
 	db SFX_NOT_VERY_EFFECTIVE, $01, $ff ; DRAGON_CLAW
 	db SFX_HORN_DRILL,         $00, $a0 ; MEGAHORN
 	db SFX_SUPER_EFFECTIVE,    $00, $a0 ; BULLDOZE
+	db SFX_BATTLE_12,          $10, $a0 ; BRAVE_BIRD
 	db SFX_BATTLE_0B,          $00, $80 ; STRUGGLE
 	assert_table_length NUM_ATTACKS
 	db SFX_BATTLE_0B,          $00, $80
