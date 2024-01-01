@@ -169,6 +169,7 @@ AttackAnimationPointers:
 	dw DragonClawAnim
 	dw MegaHornAnim
 	dw BulldozeAnim
+	dw BraveBirdAnim
 	dw StruggleAnim
 	assert_table_length NUM_ATTACKS
 	dw ShowPicAnim
@@ -314,6 +315,7 @@ GustAnim:
 	battle_anim NO_MOVE, SUBANIM_0_STAR_THRICE, 0, 6
 	db -1 ; end
 
+BraveBirdAnim:
 WingAttackAnim:
 	battle_anim WING_ATTACK, SUBANIM_1_STAR_BIG_MOVING, 1, 6
 	db -1 ; end
