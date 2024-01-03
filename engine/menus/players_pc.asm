@@ -1,6 +1,6 @@
 PlayerPC::
-	ld hl, wd730
-	set 6, [hl]
+	ld hl, wScriptEngineFlags3
+	set SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl]
 	ld a, ITEM_NAME
 	ld [wNameListType], a
 	call SaveScreenTilesToBuffer1
@@ -77,8 +77,8 @@ ExitPlayerPC:
 	xor a
 	ld [wListScrollOffset], a
 	ld [wBagSavedMenuItem], a
-	ld hl, wd730
-	res 6, [hl]
+	ld hl, wScriptEngineFlags3
+	res SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl]
 	xor a
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ret

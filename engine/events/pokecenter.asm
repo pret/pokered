@@ -2,10 +2,10 @@ DisplayPokemonCenterDialogue_::
 	call SaveScreenTilesToBuffer1 ; save screen
 	ld hl, PokemonCenterWelcomeText
 	call PrintText
-	ld hl, wd72e
-	bit 2, [hl]
-	set 1, [hl]
-	set 2, [hl]
+	ld hl, wScriptEngineFlags2
+	bit SCRIPT_ENGINE2_HEALED_AT_POKECENTER_AT_LEAST_ONCE_F, [hl]
+	set SCRIPT_ENGINE2_UNKNOWN_F, [hl]
+	set SCRIPT_ENGINE2_HEALED_AT_POKECENTER_AT_LEAST_ONCE_F, [hl]
 	jr nz, .skipShallWeHealYourPokemon
 	ld hl, ShallWeHealYourPokemonText
 	call PrintText

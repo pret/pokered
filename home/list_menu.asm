@@ -15,8 +15,8 @@ DisplayListMenuID::
 	ld a, BANK(DisplayBattleMenu)
 .bankswitch
 	call BankswitchHome
-	ld hl, wd730
-	set 6, [hl] ; turn off letter printing delay
+	ld hl, wScriptEngineFlags3
+	set SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl] ; turn off letter printing delay
 	xor a
 	ld [wMenuItemToSwap], a ; 0 means no item is currently being swapped
 	ld [wListCount], a
@@ -164,8 +164,8 @@ DisplayListMenuIDLoop::
 	ld [wChosenMenuItem], a
 	xor a
 	ldh [hJoy7], a ; joypad state update flag
-	ld hl, wd730
-	res 6, [hl] ; turn on letter printing delay
+	ld hl, wScriptEngineFlags3
+	res SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl] ; turn on letter printing delay
 	jp BankswitchBack
 .checkOtherKeys ; check B, SELECT, Up, and Down keys
 	bit BIT_B_BUTTON, a
@@ -325,8 +325,8 @@ ExitListMenu::
 	ld [wMenuWatchMovingOutOfBounds], a
 	xor a
 	ldh [hJoy7], a
-	ld hl, wd730
-	res 6, [hl]
+	ld hl, wScriptEngineFlags3
+	res SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl]
 	call BankswitchBack
 	xor a
 	ld [wMenuItemToSwap], a ; 0 means no item is currently being swapped

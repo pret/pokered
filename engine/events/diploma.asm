@@ -6,8 +6,8 @@ DisplayDiploma::
 	call ClearScreen
 	xor a
 	ld [wUpdateSpritesEnabled], a
-	ld hl, wd730
-	set 6, [hl]
+	ld hl, wScriptEngineFlags3
+	set SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl]
 	call DisableLCD
 	ld hl, CircleTile
 	ld de, vChars2 tile CIRCLE_TILE_ID
@@ -65,8 +65,8 @@ DisplayDiploma::
 	ld a, $90
 	ldh [rOBP0], a
 	call WaitForTextScrollButtonPress
-	ld hl, wd730
-	res 6, [hl]
+	ld hl, wScriptEngineFlags3
+	res SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl]
 	call GBPalWhiteOutWithDelay3
 	call RestoreScreenTilesAndReloadTilePatterns
 	call Delay3

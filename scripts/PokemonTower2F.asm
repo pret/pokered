@@ -113,8 +113,8 @@ PokemonTower2FRivalDownThenRightMovement:
 	db -1 ; end
 
 PokemonTower2FRivalExitsScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	ret nz
 	ld a, HS_POKEMON_TOWER_2F_RIVAL
 	ld [wMissableObjectIndex], a
@@ -142,9 +142,9 @@ PokemonTower2FRivalText:
 .do_battle
 	ld hl, .WhatBringsYouHereText
 	call PrintText
-	ld hl, wd72d
-	set 6, [hl]
-	set 7, [hl]
+	ld hl, wScriptEngineFlags
+	set SCRIPT_ENGINE_RESET_AFTER_ALL_BATTLES_F, [hl]
+	set SCRIPT_ENGINE_PRINT_END_BATTLE_TEXT_F, [hl]
 	ld hl, .DefeatedText
 	ld de, .VictoryText
 	call SaveEndBattleTextPointers

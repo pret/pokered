@@ -198,8 +198,8 @@ PartyMenuInit::
 	ld a, 1 ; hardcoded bank
 	call BankswitchHome
 	call LoadHpBarAndStatusTilePatterns
-	ld hl, wd730
-	set 6, [hl] ; turn off letter printing delay
+	ld hl, wScriptEngineFlags3
+	set SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl] ; turn off letter printing delay
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a
 	ld [wMenuWatchMovingOutOfBounds], a
@@ -245,8 +245,8 @@ HandlePartyMenuInput::
 	ld [wPartyMenuAnimMonEnabled], a
 	ld a, [wCurrentMenuItem]
 	ld [wPartyAndBillsPCSavedMenuItem], a
-	ld hl, wd730
-	res 6, [hl] ; turn on letter printing delay
+	ld hl, wScriptEngineFlags3
+	res SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl] ; turn on letter printing delay
 	ld a, [wMenuItemToSwap]
 	and a
 	jp nz, .swappingPokemon

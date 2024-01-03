@@ -26,16 +26,16 @@ PromptUserToPlaySlots:
 	call GBPalNormal
 	ld a, $e4
 	ldh [rOBP0], a
-	ld hl, wd730
-	set 6, [hl]
+	ld hl, wScriptEngineFlags3
+	set SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl]
 	xor a
 	ld [wSlotMachineAllowMatchesCounter], a
 	ld hl, wStoppingWhichSlotMachineWheel
 	ld bc, $14
 	call FillMemory
 	call MainSlotMachineLoop
-	ld hl, wd730
-	res 6, [hl]
+	ld hl, wScriptEngineFlags3
+	res SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl]
 	xor a
 	ld [wSlotMachineAllowMatchesCounter], a
 	call GBPalWhiteOutWithDelay3

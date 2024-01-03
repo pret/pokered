@@ -1651,7 +1651,7 @@ wSavedSpriteMapX:: db
 wWhichPrize:: db
 
 ; counts downward each frame
-; when it hits 0, bit 5 (ignore input bit) of wd730 is reset
+; when it hits 0, bit 5 (ignore input bit) of wScriptEngineFlags3 is reset
 wIgnoreInputCounter:: db
 
 ; counts down once every step
@@ -1764,7 +1764,7 @@ wObtainedBadges:: flag_array NUM_BADGES
 
 ; bit 0: If 0, limit the delay to 1 frame. Note that this has no effect if
 ;        the delay has been disabled entirely through bit 1 of this variable
-;        or bit 6 of wd730.
+;        or bit 6 of wScriptEngineFlags3.
 ; bit 1: If 0, no delay.
 wLetterPrintingDelayFlags:: db
 
@@ -2100,14 +2100,9 @@ wUnusedD71F:: db
 
 	ds 8
 
-; bit 0: using Strength outside of battle
-; bit 1: set by IsSurfingAllowed when surfing's allowed, but the caller resets it after checking the result
-; bit 3: received Old Rod
-; bit 4: received Good Rod
-; bit 5: received Super Rod
-; bit 6: gave one of the Saffron guards a drink
-; bit 7: set by ItemUseCardKey, which is leftover code from a previous implementation of the Card Key
-wd728:: db
+wFieldMoveFlags::
+wFishingRodFlags::
+wMiscEventFlags:: db
 
 	ds 1
 
@@ -2121,35 +2116,16 @@ wBeatGymFlags:: db
 ; bit 1: prevent audio fade out
 wd72c:: db
 
-; This variable is used for temporary flags and as the destination map when
-; warping to the Trade Center or Colosseum.
-; bit 0: sprite facing directions have been initialised in the Trade Center
-; bit 3: do scripted warp (used to warp back to Lavender Town from the top of the pokemon tower)
-; bit 4: on a dungeon warp
-; bit 5: don't make NPCs face the player when spoken to
-; Bits 6 and 7 are set by scripts when starting major battles in the storyline,
-; but they do not appear to affect anything. Bit 6 is reset after all battles
-; and bit 7 is reset after trainer battles (but it's only set before trainer
-; battles anyway).
-wd72d:: db
+wTradeCenterInitFlags::
+wWarpFlags::
+wScriptEngineFlags:: 
+wSpecialWarpDest:: db
 
-; bit 0: the player has received Lapras in the Silph Co. building
-; bit 1: set in various places, but doesn't appear to have an effect
-; bit 2: the player has healed pokemon at a pokemon center at least once
-; bit 3: the player has a received a pokemon from Prof. Oak
-; bit 4: disable battles
-; bit 5: set when a battle ends and when the player blacks out in the overworld due to poison
-; bit 6: using the link feature
-; bit 7: set if scripted NPC movement has been initialised
-wd72e:: db
+wScriptEngineFlags2:: db
 
 	ds 1
 
-; bit 0: NPC sprite being moved by script
-; bit 5: ignore joypad input
-; bit 6: print text with no delay between each letter
-; bit 7: set if joypad states are being simulated in the overworld or an NPC's movement is being scripted
-wd730:: db
+wScriptEngineFlags3:: db
 
 	ds 1
 

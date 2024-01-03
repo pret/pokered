@@ -679,8 +679,8 @@ ItemUseSurfboard:
 	jp c, SurfingAttemptFailed
 .surf
 	call .makePlayerMoveForward
-	ld hl, wd730
-	set 7, [hl]
+	ld hl, wScriptEngineFlags3
+	set SCRIPT_SIMULATED_JOYPAD_OR_NPC_SCRIPTED_MOVEMENT_F, [hl]
 	ld a, 2
 	ld [wWalkBikeSurfState], a ; change player state to surfing
 	call PlayDefaultMusic ; play surfing music
@@ -715,8 +715,8 @@ ItemUseSurfboard:
 	jp PrintText
 .stopSurfing
 	call .makePlayerMoveForward
-	ld hl, wd730
-	set 7, [hl]
+	ld hl, wScriptEngineFlags3
+	set SCRIPT_SIMULATED_JOYPAD_OR_NPC_SCRIPTED_MOVEMENT_F, [hl]
 	xor a
 	ld [wWalkBikeSurfState], a ; change player state to walking
 	dec a
@@ -1508,8 +1508,8 @@ ItemUseEscapeRope:
 	ld hl, wd732
 	set 3, [hl]
 	set 6, [hl]
-	ld hl, wd72e
-	res 4, [hl]
+	ld hl, wScriptEngineFlags2
+	res SCRIPT_ENGINE2_DISABLE_BATTLES_F, [hl]
 	ResetEvent EVENT_IN_SAFARI_ZONE
 	xor a
 	ld [wNumSafariBalls], a
@@ -1597,8 +1597,8 @@ ItemUseCardKey:
 .done
 	ld hl, ItemUseText00
 	call PrintText
-	ld hl, wd728
-	set 7, [hl]
+	ld hl, wMiscEventFlags
+	set MISCEVENT_UNUSED_ITEMUSECARDKEY_F, [hl]
 	ret
 
 INCLUDE "data/events/card_key_coords.asm"

@@ -175,8 +175,8 @@ UpdateNPCSprite:
 	jr nz, .next
 ; reached end of wNPCMovementDirections list
 	ld [hl], a ; store $ff in movement byte 1, disabling scripted movement
-	ld hl, wd730
-	res 0, [hl]
+	ld hl, wScriptEngineFlags3
+	res SCRIPT_ENGINE3_NPC_IS_MOVING_F, [hl]
 	xor a
 	ld [wSimulatedJoypadStatesIndex], a
 	ld [wUnusedCD3A], a
@@ -409,8 +409,8 @@ MakeNPCFacePlayer:
 
 ; Check if the behaviour of the NPC facing the player when spoken to is
 ; disabled. This is only done when rubbing the S.S. Anne captain's back.
-	ld a, [wd72d]
-	bit 5, a
+	ld a, [wScriptEngineFlags]
+	bit SCRIPT_ENGINE_NPC_WILL_NOT_FACE_PLAYER_F, a
 	jr nz, notYetMoving
 	res 7, [hl]
 	ld a, [wPlayerDirection]
@@ -740,12 +740,12 @@ DoScriptedNPCMovement:
 ; a few times in the game. It is used when the NPC and player must walk together
 ; in sync, such as when the player is following the NPC somewhere. An NPC can't
 ; be moved in sync with the player using the other method.
-	ld a, [wd730]
-	bit 7, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_SIMULATED_JOYPAD_OR_NPC_SCRIPTED_MOVEMENT_F, a
 	ret z
-	ld hl, wd72e
-	bit 7, [hl]
-	set 7, [hl]
+	ld hl, wScriptEngineFlags2
+	bit SCRIPT_ENGINE2_INIT_SCRIPTED_NPC_MOVEMENT_F, [hl]
+	set SCRIPT_ENGINE2_INIT_SCRIPTED_NPC_MOVEMENT_F, [hl]
 	jp z, InitScriptedNPCMovement
 	ld hl, wNPCMovementDirections2
 	ld a, [wNPCMovementDirections2Index]

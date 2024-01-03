@@ -52,8 +52,8 @@ PokemonTower6FMarowakBattleScript:
 	jp z, PokemonTower6FSetDefaultScript
 	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
-	ld a, [wd72d]
-	bit 6, a
+	ld a, [wScriptEngineFlags]
+	bit SCRIPT_ENGINE_RESET_AFTER_ALL_BATTLES_F, a
 	ret nz
 	call UpdateSprites
 	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
@@ -79,8 +79,8 @@ PokemonTower6FMarowakBattleScript:
 	xor a
 	ld [wSpritePlayerStateData2MovementByte1], a
 	ld [wOverrideSimulatedJoypadStatesMask], a
-	ld hl, wd730
-	set 7, [hl]
+	ld hl, wScriptEngineFlags3
+	set SCRIPT_SIMULATED_JOYPAD_OR_NPC_SCRIPTED_MOVEMENT_F, [hl]
 	ld a, SCRIPT_POKEMONTOWER6F_PLAYER_MOVING
 	ld [wPokemonTower6FCurScript], a
 	ld [wCurMapScript], a

@@ -56,8 +56,8 @@ StartSimulatingJoypadStates::
 	xor a
 	ld [wOverrideSimulatedJoypadStatesMask], a
 	ld [wSpritePlayerStateData2MovementByte1], a
-	ld hl, wd730
-	set 7, [hl]
+	ld hl, wScriptEngineFlags3
+	set SCRIPT_SIMULATED_JOYPAD_OR_NPC_SCRIPTED_MOVEMENT_F, [hl]
 	ret
 
 IsItemInBag::

@@ -13,15 +13,15 @@ LoadSAV:
 	ld a, $2 ; good checksum
 	jr .goodsum
 .badsum
-	ld hl, wd730
+	ld hl, wScriptEngineFlags3
 	push hl
-	set 6, [hl]
+	set SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl]
 	ld hl, FileDataDestroyedText
 	call PrintText
 	ld c, 100
 	call DelayFrames
 	pop hl
-	res 6, [hl]
+	res SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl]
 	ld a, $1 ; bad checksum
 .goodsum
 	ld [wSaveFileStatus], a

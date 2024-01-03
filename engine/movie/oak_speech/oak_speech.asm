@@ -106,7 +106,7 @@ OakSpeech:
 	lb bc, BANK(RedPicFront), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	call GBFadeInFromWhite
-	ld a, [wd72d]
+	ld a, [wScriptEngineFlags]
 	and a
 	jr nz, .next
 	ld hl, OakSpeechText3

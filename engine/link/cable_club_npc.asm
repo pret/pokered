@@ -110,8 +110,8 @@ CableClubNPC::
 	ld hl, wUnknownSerialCounter
 	ld [hli], a
 	ld [hl], a
-	ld hl, wd72e
-	res 6, [hl]
+	ld hl, wScriptEngineFlags2
+	res SCRIPT_ENGINE2_USING_LINK_FEATURE_F, [hl]
 	xor a
 	ld [wMenuJoypadPollCount], a
 	ret

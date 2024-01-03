@@ -160,8 +160,8 @@ ENDC
 
 ; display the before battle text after the enemy trainer has walked up to the player's sprite
 DisplayEnemyTrainerTextAndStartBattle::
-	ld a, [wd730]
-	and $1
+	ld a, [wScriptEngineFlags3]
+	and (1 << SCRIPT_ENGINE3_NPC_IS_MOVING_F)
 	ret nz ; return if the enemy trainer hasn't finished walking to the player's sprite
 	ld [wJoyIgnore], a
 	ld a, [wSpriteIndex]
@@ -173,11 +173,11 @@ StartTrainerBattle::
 	xor a
 	ld [wJoyIgnore], a
 	call InitBattleEnemyParameters
-	ld hl, wd72d
-	set 6, [hl]
-	set 7, [hl]
-	ld hl, wd72e
-	set 1, [hl]
+	ld hl, wScriptEngineFlags
+	set SCRIPT_ENGINE_RESET_AFTER_ALL_BATTLES_F, [hl]
+	set SCRIPT_ENGINE_PRINT_END_BATTLE_TEXT_F, [hl]
+	ld hl, wScriptEngineFlags2
+	set SCRIPT_ENGINE2_UNKNOWN_F, [hl]
 	ld hl, wCurMapScript
 	inc [hl]        ; increment map script index (next script function is usually EndTrainerBattle)
 	ret
@@ -186,8 +186,8 @@ EndTrainerBattle::
 	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
 	set 6, [hl]
-	ld hl, wd72d
-	res 7, [hl]
+	ld hl, wScriptEngineFlags
+	res SCRIPT_ENGINE_PRINT_END_BATTLE_TEXT_F, [hl]
 	ld hl, wFlags_0xcd60
 	res 0, [hl]                  ; player is no longer engaged by any trainer
 	ld a, [wIsInBattle]
@@ -211,9 +211,9 @@ EndTrainerBattle::
 	ld [wMissableObjectIndex], a               ; load corresponding missable object index and remove it
 	predef HideObject
 .skipRemoveSprite
-	ld hl, wd730
-	bit 4, [hl]
-	res 4, [hl]
+	ld hl, wScriptEngineFlags3
+	bit SCRIPT_ENGINE3_UNKNOWN3_F, [hl]
+	res SCRIPT_ENGINE3_UNKNOWN3_F, [hl]
 	ret nz
 
 ResetButtonPressedAndMapScript::
@@ -340,9 +340,9 @@ EngageMapTrainer::
 
 PrintEndBattleText::
 	push hl
-	ld hl, wd72d
-	bit 7, [hl]
-	res 7, [hl]
+	ld hl, wScriptEngineFlags
+	bit SCRIPT_ENGINE_PRINT_END_BATTLE_TEXT_F, [hl]
+	res SCRIPT_ENGINE_PRINT_END_BATTLE_TEXT_F, [hl]
 	pop hl
 	ret z
 	ldh a, [hLoadedROMBank]

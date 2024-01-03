@@ -10,12 +10,12 @@ MtMoonB2F_Script:
 	ld hl, MtMoonB2FFossilAreaCoords
 	call ArePlayerCoordsInArray
 	jr nc, .enable_battles
-	ld hl, wd72e
-	set 4, [hl]
+	ld hl, wScriptEngineFlags2
+	set SCRIPT_ENGINE2_DISABLE_BATTLES_F, [hl]
 	ret
 .enable_battles
-	ld hl, wd72e
-	res 4, [hl]
+	ld hl, wScriptEngineFlags2
+	res SCRIPT_ENGINE2_DISABLE_BATTLES_F, [hl]
 	ret
 
 MtMoonB2FFossilAreaCoords:
@@ -129,8 +129,8 @@ MtMoon3FSuperNerdMoveUpMovementData:
 	db -1 ; end
 
 MtMoonB2FSuperNerdTakesOtherFossilScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	ret nz
 	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
@@ -193,9 +193,9 @@ MtMoonB2FSuperNerdText:
 .beat_super_nerd
 	ld hl, MtMoonB2FSuperNerdTheyreBothMineText
 	call PrintText
-	ld hl, wd72d
-	set 6, [hl]
-	set 7, [hl]
+	ld hl, wScriptEngineFlags
+	set SCRIPT_ENGINE_RESET_AFTER_ALL_BATTLES_F, [hl]
+	set SCRIPT_ENGINE_PRINT_END_BATTLE_TEXT_F, [hl]
 	ld hl, MtMoonB2FSuperNerdOkIllShareText
 	ld de, MtMoonB2FSuperNerdOkIllShareText
 	call SaveEndBattleTextPointers

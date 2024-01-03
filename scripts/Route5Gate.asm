@@ -17,8 +17,8 @@ Route5GateMovePlayerUpScript:
 	jp StartSimulatingJoypadStates
 
 Route5GateDefaultScript:
-	ld a, [wd728]
-	bit 6, a
+	ld a, [wMiscEventFlags]
+	bit MISCEVENT_GAVE_SAFFRON_GUARD_DRINK_F, a
 	ret nz
 	ld hl, .PlayerInCoordsArray
 	call ArePlayerCoordsInArray
@@ -42,8 +42,8 @@ Route5GateDefaultScript:
 	ld a, TEXT_ROUTE5GATE_GUARD_GIVE_DRINK
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld hl, wd728
-	set 6, [hl]
+	ld hl, wMiscEventFlags
+	set MISCEVENT_GAVE_SAFFRON_GUARD_DRINK_F, [hl]
 	ret
 
 .PlayerInCoordsArray:
@@ -69,8 +69,8 @@ Route5Gate_TextPointers:
 
 SaffronGateGuardText:
 	text_asm
-	ld a, [wd728]
-	bit 6, a
+	ld a, [wMiscEventFlags]
+	bit MISCEVENT_GAVE_SAFFRON_GUARD_DRINK_F, a
 	jr nz, .thanks_for_drink
 	farcall RemoveGuardDrink
 	ldh a, [hItemToRemoveID]
@@ -86,8 +86,8 @@ SaffronGateGuardText:
 .have_drink
 	ld hl, SaffronGateGuardGiveDrinkText
 	call PrintText
-	ld hl, wd728
-	set 6, [hl]
+	ld hl, wMiscEventFlags
+	set MISCEVENT_GAVE_SAFFRON_GUARD_DRINK_F, [hl]
 	jp TextScriptEnd
 
 .thanks_for_drink

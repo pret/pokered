@@ -1,8 +1,8 @@
 PKMNLeaguePC:
 	ld hl, AccessedHoFPCText
 	call PrintText
-	ld hl, wd730
-	set 6, [hl]
+	ld hl, wScriptEngineFlags3
+	set SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl]
 	push hl
 	ld a, [wUpdateSpritesEnabled]
 	push af

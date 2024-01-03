@@ -15,9 +15,9 @@ EnterMap::
 	ld a, 3 ; minimum number of steps between battles
 	ld [wNumberOfNoRandomBattleStepsLeft], a
 .skipGivingThreeStepsOfNoRandomBattles
-	ld hl, wd72e
-	bit 5, [hl] ; did a battle happen immediately before this?
-	res 5, [hl] ; unset the "battle just happened" flag
+	ld hl, wScriptEngineFlags2
+	bit SCRIPT_ENGINE2_BATTLE_ENDS_AND_POISON_BLACKOUT_F, [hl] ; did a battle happen immediately before this?
+	res SCRIPT_ENGINE2_BATTLE_ENDS_AND_POISON_BLACKOUT_F, [hl] ; unset the "battle just happened" flag
 	call z, ResetUsingStrengthOutOfBattleBit
 	call nz, MapEntryAfterBattle
 	ld hl, wd732
@@ -29,8 +29,8 @@ EnterMap::
 	call UpdateSprites
 .didNotEnterUsingFlyWarpOrDungeonWarp
 	farcall CheckForceBikeOrSurf ; handle currents in SF islands and forced bike riding in cycling road
-	ld hl, wd72d
-	res 5, [hl]
+	ld hl, wScriptEngineFlags
+	res SCRIPT_ENGINE_NPC_WILL_NOT_FACE_PLAYER_F, [hl]
 	call UpdateSprites
 	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
@@ -54,9 +54,9 @@ OverworldLoopLessDelay::
 	ld a, [wSafariZoneGameOver]
 	and a
 	jp nz, WarpFound2
-	ld hl, wd72d
-	bit 3, [hl]
-	res 3, [hl]
+	ld hl, wWarpFlags
+	bit WARP_SCRIPTED_F, [hl]
+	res WARP_SCRIPTED_F, [hl]
 	jp nz, WarpFound2
 	ld a, [wd732]
 	and 1 << 4 | 1 << 3 ; fly warp or dungeon warp
@@ -64,8 +64,8 @@ OverworldLoopLessDelay::
 	ld a, [wCurOpponent]
 	and a
 	jp nz, .newBattle
-	ld a, [wd730]
-	bit 7, a ; are we simulating button presses?
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_SIMULATED_JOYPAD_OR_NPC_SCRIPTED_MOVEMENT_F, a ; are we simulating button presses?
 	jr z, .notSimulating
 	ldh a, [hJoyHeld]
 	jr .checkIfStartIsPressed
@@ -82,8 +82,8 @@ OverworldLoopLessDelay::
 	bit BIT_A_BUTTON, a
 	jp z, .checkIfDownButtonIsPressed
 ; if A is pressed
-	ld a, [wd730]
-	bit 2, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_UNKNOWN_JOYPAD_INPUT2_F, a
 	jp nz, .noDirectionButtonsPressed
 	call IsPlayerCharacterBeingControlledByGame
 	jr nz, .checkForOpponent
@@ -178,8 +178,8 @@ OverworldLoopLessDelay::
 
 .handleDirectionButtonPress
 	ld [wPlayerDirection], a ; new direction
-	ld a, [wd730]
-	bit 7, a ; are we simulating button presses?
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_SIMULATED_JOYPAD_OR_NPC_SCRIPTED_MOVEMENT_F, a ; are we simulating button presses?
 	jr nz, .noDirectionChange ; ignore direction changes if we are
 	ld a, [wCheckFor180DegreeTurn]
 	and a
@@ -289,8 +289,8 @@ OverworldLoopLessDelay::
 	and a
 	jp nz, CheckMapConnections ; it seems like this check will never succeed (the other place where CheckMapConnections is run works)
 ; walking animation finished
-	ld a, [wd730]
-	bit 7, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_SIMULATED_JOYPAD_OR_NPC_SCRIPTED_MOVEMENT_F, a
 	jr nz, .doneStepCounting ; if button presses are being simulated, don't count steps
 ; step counting
 	ld hl, wStepCounter
@@ -324,8 +324,8 @@ OverworldLoopLessDelay::
 	res 2, [hl] ; standing on warp flag
 	jp nc, CheckWarpsNoCollision ; check for warps if there was no battle
 .battleOccurred
-	ld hl, wd72d
-	res 6, [hl]
+	ld hl, wScriptEngineFlags
+	res SCRIPT_ENGINE_RESET_AFTER_ALL_BATTLES_F, [hl]
 	ld hl, wFlags_D733
 	res 3, [hl]
 	ld hl, wCurrentMapScriptFlags
@@ -338,8 +338,8 @@ OverworldLoopLessDelay::
 	jr nz, .notCinnabarGym
 	SetEvent EVENT_2A7
 .notCinnabarGym
-	ld hl, wd72e
-	set 5, [hl]
+	ld hl, wScriptEngineFlags2
+	set SCRIPT_ENGINE2_BATTLE_ENDS_AND_POISON_BLACKOUT_F, [hl]
 	ld a, [wCurMap]
 	cp OAKS_LAB
 	jp z, .noFaintCheck ; no blacking out if the player lost to the rival in Oak's lab
@@ -360,13 +360,13 @@ OverworldLoopLessDelay::
 ; function to determine if there will be a battle and execute it (either a trainer battle or wild battle)
 ; sets carry if a battle occurred and unsets carry if not
 NewBattle::
-	ld a, [wd72d]
-	bit 4, a
+	ld a, [wWarpFlags]
+	bit WARP_DUNGEON_F, a
 	jr nz, .noBattle
 	call IsPlayerCharacterBeingControlledByGame
 	jr nz, .noBattle ; no battle if the player character is under the game's control
-	ld a, [wd72e]
-	bit 4, a
+	ld a, [wScriptEngineFlags2]
+	bit SCRIPT_ENGINE2_DISABLE_BATTLES_F, a
 	jr nz, .noBattle
 	farjp InitBattle
 .noBattle
@@ -760,8 +760,8 @@ HandleBlackOut::
 	call GBFadeOutToBlack
 	ld a, $08
 	call StopMusic
-	ld hl, wd72e
-	res 5, [hl]
+	ld hl, wScriptEngineFlags2
+	res SCRIPT_ENGINE2_BATTLE_ENDS_AND_POISON_BLACKOUT_F, [hl]
 	ld a, BANK(ResetStatusAndHalveMoneyOnBlackout) ; also BANK(PrepareForSpecialWarp) and BANK(SpecialEnterMap)
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
@@ -1838,8 +1838,8 @@ JoypadOverworld::
 	ld a, D_DOWN
 	ldh [hJoyHeld], a ; on the cycling road, if there isn't a trainer and the player isn't pressing buttons, simulate a down press
 .notForcedDownwards
-	ld a, [wd730]
-	bit 7, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_SIMULATED_JOYPAD_OR_NPC_SCRIPTED_MOVEMENT_F, a
 	ret z
 ; if simulating button presses
 	ldh a, [hJoyHeld]
@@ -1878,8 +1878,8 @@ JoypadOverworld::
 	ld a, [hl]
 	and $f8
 	ld [hl], a
-	ld hl, wd730
-	res 7, [hl]
+	ld hl, wScriptEngineFlags3
+	res SCRIPT_SIMULATED_JOYPAD_OR_NPC_SCRIPTED_MOVEMENT_F, [hl]
 	ret
 
 ; function to check the tile ahead to determine if the character should get on land or keep surfing
@@ -1892,8 +1892,8 @@ JoypadOverworld::
 ; and 2429 always sets c to 0xF0. There is no 0xF0 background tile, so it
 ; is considered impassable and it is detected as a collision.
 CollisionCheckOnWater::
-	ld a, [wd730]
-	bit 7, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_SIMULATED_JOYPAD_OR_NPC_SCRIPTED_MOVEMENT_F, a
 	jp nz, .noCollision ; return and clear carry if button presses are being simulated
 	ld a, [wPlayerDirection] ; the direction that the player is trying to go in
 	ld d, a
@@ -2137,8 +2137,8 @@ LoadMapHeader::
 	dec c
 	jr nz, .signLoop
 .loadSpriteData
-	ld a, [wd72e]
-	bit 5, a ; did a battle happen immediately before this?
+	ld a, [wScriptEngineFlags2]
+	bit SCRIPT_ENGINE2_BATTLE_ENDS_AND_POISON_BLACKOUT_F, a ; did a battle happen immediately before this?
 	jp nz, .finishUp ; if so, skip this because battles don't destroy this data
 	ld a, [hli]
 	ld [wNumSprites], a ; save the number of sprites
@@ -2381,15 +2381,15 @@ SwitchToMapRomBank::
 IgnoreInputForHalfSecond:
 	ld a, 30
 	ld [wIgnoreInputCounter], a
-	ld hl, wd730
+	ld hl, wScriptEngineFlags3
 	ld a, [hl]
-	or %00100110
+	or (1 << SCRIPT_ENGINE3_UNKNOWN_JOYPAD_INPUT1_F | 1 << SCRIPT_ENGINE3_UNKNOWN_JOYPAD_INPUT2_F | 1 << SCRIPT_ENGINE3_IGNORE_JOYPAD_INPUT_F)
 	ld [hl], a ; set ignore input bit
 	ret
 
 ResetUsingStrengthOutOfBattleBit:
-	ld hl, wd728
-	res 0, [hl]
+	ld hl, wFieldMoveFlags
+	res FIELDMOVE_USING_STRENGTH_OUTSIDE_BATTLE_F, [hl]
 	ret
 
 ForceBikeOrSurf::

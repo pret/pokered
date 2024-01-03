@@ -125,17 +125,17 @@ CeruleanCityFaceRivalScript:
 	jp SetSpriteFacingDirectionAndDelay ; face object
 
 CeruleanCityRivalBattleScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	ret nz
 	xor a
 	ld [wJoyIgnore], a
 	ld a, TEXT_CERULEANCITY_RIVAL
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld hl, wd72d
-	set 6, [hl]
-	set 7, [hl]
+	ld hl, wScriptEngineFlags
+	set SCRIPT_ENGINE_RESET_AFTER_ALL_BATTLES_F, [hl]
+	set SCRIPT_ENGINE_PRINT_END_BATTLE_TEXT_F, [hl]
 	ld hl, CeruleanCityRivalDefeatedText
 	ld de, CeruleanCityRivalVictoryText
 	call SaveEndBattleTextPointers
@@ -219,8 +219,8 @@ CeruleanCityMovement4:
 	db -1 ; end
 
 CeruleanCityRivalCleanupScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	ret nz
 	ld a, HS_CERULEAN_RIVAL
 	ld [wMissableObjectIndex], a
@@ -289,9 +289,9 @@ CeruleanCityRocketText:
 	jr nz, .beatRocketThief
 	ld hl, .Text
 	call PrintText
-	ld hl, wd72d
-	set 6, [hl]
-	set 7, [hl]
+	ld hl, wScriptEngineFlags
+	set SCRIPT_ENGINE_RESET_AFTER_ALL_BATTLES_F, [hl]
+	set SCRIPT_ENGINE_PRINT_END_BATTLE_TEXT_F, [hl]
 	ld hl, .IGiveUpText
 	ld de, .IGiveUpText
 	call SaveEndBattleTextPointers

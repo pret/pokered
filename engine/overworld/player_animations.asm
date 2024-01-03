@@ -513,9 +513,9 @@ _HandleMidJump::
 	ldh [hJoyReleased], a
 	ld [wPlayerJumpingYScreenCoordsIndex], a
 	ld hl, wd736
-	res 6, [hl] ; not jumping down a ledge any more
-	ld hl, wd730
-	res 7, [hl] ; not simulating joypad states any more
+	res SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl] ; not jumping down a ledge any more
+	ld hl, wScriptEngineFlags3
+	res SCRIPT_SIMULATED_JOYPAD_OR_NPC_SCRIPTED_MOVEMENT_F, [hl] ; not simulating joypad states any more
 	xor a
 	ld [wJoyIgnore], a
 	ret

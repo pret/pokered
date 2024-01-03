@@ -112,8 +112,8 @@ SeafoamIslandsB3FMoveObjectScript:
 	ld [wSimulatedJoypadStatesIndex], a
 	xor a
 	ld [wSpritePlayerStateData2MovementByte1], a
-	ld hl, wd730
-	set 7, [hl]
+	ld hl, wScriptEngineFlags3
+	set SCRIPT_SIMULATED_JOYPAD_OR_NPC_SCRIPTED_MOVEMENT_F, [hl]
 	ld hl, wFlags_D733
 	set 2, [hl]
 	ld a, SCRIPT_SEAFOAMISLANDSB3F_OBJECT_MOVING2

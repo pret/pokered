@@ -102,8 +102,8 @@ GameCornerMovement_Rocket_WalkDirect:
 	db -1 ; end
 
 GameCornerRocketExitScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	ret nz
 	xor a
 	ld [wJoyIgnore], a
@@ -422,9 +422,9 @@ GameCornerRocketText:
 	text_asm
 	ld hl, .ImGuardingThisPosterText
 	call PrintText
-	ld hl, wd72d
-	set 6, [hl]
-	set 7, [hl]
+	ld hl, wScriptEngineFlags
+	set SCRIPT_ENGINE_RESET_AFTER_ALL_BATTLES_F, [hl]
+	set SCRIPT_ENGINE_PRINT_END_BATTLE_TEXT_F, [hl]
 	ld hl, .BattleEndText
 	ld de, .BattleEndText
 	call SaveEndBattleTextPointers
@@ -482,8 +482,8 @@ GameCornerOopsForgotCoinCaseText:
 	text_end
 
 GameCornerDrawCoinBox:
-	ld hl, wd730
-	set 6, [hl]
+	ld hl, wScriptEngineFlags3
+	set SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl]
 	hlcoord 11, 0
 	ld b, 5
 	ld c, 7
@@ -513,8 +513,8 @@ GameCornerDrawCoinBox:
 	ld de, wPlayerCoins
 	ld c, $82
 	call PrintBCDNumber
-	ld hl, wd730
-	res 6, [hl]
+	ld hl, wScriptEngineFlags3
+	res SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl]
 	ret
 
 GameCornerMoneyText:

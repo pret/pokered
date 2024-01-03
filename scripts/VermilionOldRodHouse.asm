@@ -7,8 +7,8 @@ VermilionOldRodHouse_TextPointers:
 
 VermilionOldRodHouseFishingGuruText:
 	text_asm
-	ld a, [wd728]
-	bit 3, a ; got old rod?
+	ld a, [wFishingRodFlags]
+	bit FISHINGROD_RECEIVED_OLD_ROD_F, a
 	jr nz, .got_old_rod
 	ld hl, .DoYouLikeToFishText
 	call PrintText
@@ -19,8 +19,8 @@ VermilionOldRodHouseFishingGuruText:
 	lb bc, OLD_ROD, 1
 	call GiveItem
 	jr nc, .bag_full
-	ld hl, wd728
-	set 3, [hl] ; got old rod
+	ld hl, wFishingRodFlags
+	set FISHINGROD_RECEIVED_OLD_ROD_F, [hl]
 	ld hl, .TakeThisText
 	jr .print_text
 .bag_full

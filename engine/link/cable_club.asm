@@ -587,7 +587,7 @@ ReturnToCableClubRoom:
 	push hl
 	res 0, [hl]
 	xor a
-	ld [wd72d], a
+	ld [wSpecialWarpDest], a
 	dec a
 	ld [wDestinationWarpID], a
 	call LoadMapData

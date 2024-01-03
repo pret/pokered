@@ -59,9 +59,9 @@ ChampionsRoomRivalReadyToBattleScript:
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	call Delay3
-	ld hl, wd72d
-	set 6, [hl]
-	set 7, [hl]
+	ld hl, wScriptEngineFlags
+	set SCRIPT_ENGINE_RESET_AFTER_ALL_BATTLES_F, [hl]
+	set SCRIPT_ENGINE_PRINT_END_BATTLE_TEXT_F, [hl]
 	ld hl, RivalDefeatedText
 	ld de, RivalVictoryText
 	call SaveEndBattleTextPointers
@@ -136,8 +136,8 @@ OakEntranceAfterVictoryMovement:
 	db -1 ; end
 
 ChampionsRoomOakCongratulatesPlayerScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	ret nz
 	ld a, PLAYER_DIR_LEFT
 	ld [wPlayerMovingDirection], a
@@ -194,8 +194,8 @@ OakExitChampionsRoomMovement:
 	db -1 ; end
 
 ChampionsRoomOakExitsScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	ret nz
 	ld a, HS_CHAMPIONS_ROOM_OAK
 	ld [wMissableObjectIndex], a

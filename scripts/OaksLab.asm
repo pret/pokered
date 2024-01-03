@@ -40,8 +40,8 @@ OaksLabDefaultScript:
 	ld a, HS_OAKS_LAB_OAK_2
 	ld [wMissableObjectIndex], a
 	predef ShowObject
-	ld hl, wd72e
-	res 4, [hl]
+	ld hl, wScriptEngineFlags2
+	res SCRIPT_ENGINE2_DISABLE_BATTLES_F, [hl]
 
 	ld a, SCRIPT_OAKSLAB_OAK_ENTERS_LAB
 	ld [wOaksLabCurScript], a
@@ -64,8 +64,8 @@ OakEntryMovement:
 	db -1 ; end
 
 OaksLabHideShowOaksScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	ret nz
 	ld a, HS_OAKS_LAB_OAK_2
 	ld [wMissableObjectIndex], a
@@ -290,8 +290,8 @@ OaksLabChoseStarterScript:
 	ret
 
 OaksLabRivalChoosesStarterScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	ret nz
 	ld a, SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
@@ -377,8 +377,8 @@ OaksLabRivalChallengesPlayerScript:
 	ret
 
 OaksLabRivalStartBattleScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	ret nz
 
 	; define which team rival uses, and fight it
@@ -404,9 +404,9 @@ OaksLabRivalStartBattleScript:
 	ld hl, OaksLabRivalIPickedTheWrongPokemonText
 	ld de, OaksLabRivalAmIGreatOrWhatText
 	call SaveEndBattleTextPointers
-	ld hl, wd72d
-	set 6, [hl]
-	set 7, [hl]
+	ld hl, wScriptEngineFlags
+	set SCRIPT_ENGINE_RESET_AFTER_ALL_BATTLES_F, [hl]
+	set SCRIPT_ENGINE_PRINT_END_BATTLE_TEXT_F, [hl]
 	xor a
 	ld [wJoyIgnore], a
 	ld a, PLAYER_DIR_UP
@@ -472,8 +472,8 @@ OaksLabRivalStartsExitScript:
 	db -1 ; end
 
 OaksLabPlayerWatchRivalExitScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	jr nz, .checkRivalPosition
 	ld a, HS_OAKS_LAB_RIVAL
 	ld [wMissableObjectIndex], a
@@ -552,8 +552,8 @@ OaksLabRivalFaceUpOakFaceDownScript:
 	jp SetSpriteFacingDirectionAndDelay
 
 OaksLabOakGivesPokedexScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	ret nz
 	call EnableAutoTextBoxDrawing
 	call PlayDefaultMusic
@@ -626,8 +626,8 @@ OaksLabOakGivesPokedexScript:
 	ret
 
 OaksLabRivalLeavesWithPokedexScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a
 	ret nz
 	call PlayDefaultMusic
 	ld a, HS_OAKS_LAB_RIVAL
@@ -853,11 +853,11 @@ OaksLabShowPokeBallPokemonScript:
 	ldh [hSpriteDataOffset], a
 	call GetPointerWithinSpriteStateData1
 	ld [hl], SPRITE_FACING_RIGHT
-	ld hl, wd730
-	set 6, [hl]
+	ld hl, wScriptEngineFlags3
+	set SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl]
 	predef StarterDex
-	ld hl, wd730
-	res 6, [hl]
+	ld hl, wScriptEngineFlags3
+	res SCRIPT_ENGINE3_PRINT_TEXT_NO_DELAY_F, [hl]
 	call ReloadMapData
 	ld c, 10
 	call DelayFrames
@@ -929,8 +929,8 @@ OaksLabMonChoiceMenu:
 	ld a, [wcf91]
 	ld [wd11e], a
 	call AddPartyMon
-	ld hl, wd72e
-	set 3, [hl]
+	ld hl, wScriptEngineFlags2
+	set SCRIPT_ENGINE2_RECEIVED_POKEMON_FROM_OAK_F, [hl]
 	ld a, SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	ld a, SCRIPT_OAKSLAB_CHOSE_STARTER_SCRIPT
@@ -991,8 +991,8 @@ OaksLabOak1Text:
 	jr nz, .mon_around_the_world
 	CheckEventReuseA EVENT_BATTLED_RIVAL_IN_OAKS_LAB
 	jr nz, .check_got_parcel
-	ld a, [wd72e]
-	bit 3, a
+	ld a, [wScriptEngineFlags2]
+	bit SCRIPT_ENGINE2_RECEIVED_POKEMON_FROM_OAK_F, a
 	jr nz, .already_got_pokemon
 	ld hl, .WhichPokemonDoYouWantText
 	call PrintText

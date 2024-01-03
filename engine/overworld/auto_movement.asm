@@ -1,5 +1,5 @@
 PlayerStepOutFromDoor::
-	ld hl, wd730
+	ld hl, wScriptEngineFlags3
 	res 1, [hl]
 	call IsPlayerStandingOnDoorTile
 	jr nc, .notStandingOnDoor
@@ -23,15 +23,15 @@ PlayerStepOutFromDoor::
 	ld hl, wd736
 	res 0, [hl]
 	res 1, [hl]
-	ld hl, wd730
-	res 7, [hl]
+	ld hl, wScriptEngineFlags3
+	res SCRIPT_SIMULATED_JOYPAD_OR_NPC_SCRIPTED_MOVEMENT_F, [hl]
 	ret
 
 _EndNPCMovementScript::
-	ld hl, wd730
-	res 7, [hl]
-	ld hl, wd72e
-	res 7, [hl]
+	ld hl, wScriptEngineFlags3
+	res SCRIPT_SIMULATED_JOYPAD_OR_NPC_SCRIPTED_MOVEMENT_F, [hl]
+	ld hl, wScriptEngineFlags2
+	res SCRIPT_ENGINE2_INIT_SCRIPTED_NPC_MOVEMENT_F, [hl]
 	ld hl, wd736
 	res 0, [hl]
 	res 1, [hl]
@@ -86,8 +86,8 @@ PalletMovementScript_OakMoveLeft:
 	ret
 
 PalletMovementScript_PlayerMoveLeft:
-	ld a, [wd730]
-	bit 0, a ; is an NPC being moved by a script?
+	ld a, [wScriptEngineFlags3]
+	bit SCRIPT_ENGINE3_NPC_IS_MOVING_F, a ; is an NPC being moved by a script?
 	ret nz ; return if Oak is still moving
 	ld a, [wNumStepsToTake]
 	ld [wSimulatedJoypadStatesIndex], a
@@ -119,10 +119,10 @@ PalletMovementScript_WalkToLab:
 	ld hl, wNPCMovementDirections2
 	ld de, RLEList_ProfOakWalkToLab
 	call DecodeRLEList
-	ld hl, wd72e
-	res 7, [hl]
-	ld hl, wd730
-	set 7, [hl]
+	ld hl, wScriptEngineFlags2
+	res SCRIPT_ENGINE2_INIT_SCRIPTED_NPC_MOVEMENT_F, [hl]
+	ld hl, wScriptEngineFlags3
+	set SCRIPT_SIMULATED_JOYPAD_OR_NPC_SCRIPTED_MOVEMENT_F, [hl]
 	ld a, $4
 	ld [wNPCMovementScriptFunctionNum], a
 	ret
@@ -151,10 +151,10 @@ PalletMovementScript_Done:
 	ld a, HS_PALLET_TOWN_OAK
 	ld [wMissableObjectIndex], a
 	predef HideObject
-	ld hl, wd730
-	res 7, [hl]
-	ld hl, wd72e
-	res 7, [hl]
+	ld hl, wScriptEngineFlags3
+	res SCRIPT_SIMULATED_JOYPAD_OR_NPC_SCRIPTED_MOVEMENT_F, [hl]
+	ld hl, wScriptEngineFlags2
+	res SCRIPT_ENGINE2_INIT_SCRIPTED_NPC_MOVEMENT_F, [hl]
 	jp EndNPCMovementScript
 
 PewterMuseumGuyMovementScriptPointerTable::
@@ -183,8 +183,8 @@ PewterMovementScript_WalkToMuseum:
 	ld hl, wNPCMovementDirections2
 	ld de, RLEList_PewterMuseumGuy
 	call DecodeRLEList
-	ld hl, wd72e
-	res 7, [hl]
+	ld hl, wScriptEngineFlags2
+	res SCRIPT_ENGINE2_INIT_SCRIPTED_NPC_MOVEMENT_F, [hl]
 	ld a, $1
 	ld [wNPCMovementScriptFunctionNum], a
 	ret
@@ -207,10 +207,10 @@ PewterMovementScript_Done:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
-	ld hl, wd730
-	res 7, [hl]
-	ld hl, wd72e
-	res 7, [hl]
+	ld hl, wScriptEngineFlags3
+	res SCRIPT_SIMULATED_JOYPAD_OR_NPC_SCRIPTED_MOVEMENT_F, [hl]
+	ld hl, wScriptEngineFlags2
+	res SCRIPT_ENGINE2_INIT_SCRIPTED_NPC_MOVEMENT_F, [hl]
 	jp EndNPCMovementScript
 
 PewterGymGuyMovementScriptPointerTable::
@@ -240,10 +240,10 @@ PewterMovementScript_WalkToGym:
 	ld hl, wNPCMovementDirections2
 	ld de, RLEList_PewterGymGuy
 	call DecodeRLEList
-	ld hl, wd72e
-	res 7, [hl]
-	ld hl, wd730
-	set 7, [hl]
+	ld hl, wScriptEngineFlags2
+	res SCRIPT_ENGINE2_INIT_SCRIPTED_NPC_MOVEMENT_F, [hl]
+	ld hl, wScriptEngineFlags3
+	set SCRIPT_SIMULATED_JOYPAD_OR_NPC_SCRIPTED_MOVEMENT_F, [hl]
 	ld a, $1
 	ld [wNPCMovementScriptFunctionNum], a
 	ret
