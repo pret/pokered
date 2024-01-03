@@ -1,3 +1,10 @@
+SUMMARY:
+	ROM0: 16248 bytes used / 136 free
+	ROMX: 559516 bytes used / 161380 free in 44 banks
+	SRAM: 25122 bytes used / 7646 free in 4 banks
+	WRAM0: 8162 bytes used / 30 free
+	HRAM: 127 bytes used / 0 free
+
 ROM0 bank #0:
 	SECTION: $0000 (0 bytes) ["NULL"]
 	         $0000 = NULL
@@ -1245,7 +1252,7 @@ ROMX bank #1:
 	         $4bf3 = WriteDMACodeToHRAM
 	         $4bfa = WriteDMACodeToHRAM.copy
 	         $4c01 = DMARoutine
-	         $4c0b = DMARoutineEnd
+	         $4c0b = DMARoutine.End
 	         $4c0b = PrintWaitingText
 	         $4c1d = PrintWaitingText.trade
 	         $4c20 = PrintWaitingText.border_done
@@ -20409,10 +20416,3 @@ HRAM bank #0:
 	         $fff8 = hJoyInput
 	         $fff9 = hDisableJoypadPolling
 	TOTAL EMPTY: $0000 bytes
-
-SUMMARY:
-	ROM0: 16248 bytes used / 136 free
-	ROMX: 559516 bytes used / 161380 free in 44 banks
-	SRAM: 25122 bytes used / 7646 free in 4 banks
-	WRAM0: 8162 bytes used / 30 free
-	HRAM: 127 bytes used / 0 free

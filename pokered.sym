@@ -1221,7 +1221,7 @@
 01:4bed WriteDMACodeToHRAM
 01:4bf4 WriteDMACodeToHRAM.copy
 01:4bfb DMARoutine
-01:4c05 DMARoutineEnd
+01:4c05 DMARoutine.End
 01:4c05 PrintWaitingText
 01:4c17 PrintWaitingText.trade
 01:4c1a PrintWaitingText.border_done
@@ -2019,8 +2019,8 @@
 02:4393 Audio1_WavePointers.wave2
 02:43a3 Audio1_WavePointers.wave3
 02:43b3 Audio1_WavePointers.wave4
-02:43c3 SFX_Start_Menu_1_Ch8
 02:43c3 Audio1_WavePointers.wave5
+02:43c3 SFX_Start_Menu_1_Ch8
 02:43ca SFX_Pokeflute_Ch3
 02:43e1 SFX_Cut_1_Ch8
 02:43f1 SFX_Go_Inside_1_Ch8
@@ -5096,8 +5096,8 @@
 08:4393 Audio2_WavePointers.wave2
 08:43a3 Audio2_WavePointers.wave3
 08:43b3 Audio2_WavePointers.wave4
-08:43c3 SFX_Press_AB_2_Ch5
 08:43c3 Audio2_WavePointers.wave5
+08:43c3 SFX_Press_AB_2_Ch5
 08:43d6 SFX_Start_Menu_2_Ch8
 08:43dd SFX_Tink_2_Ch5
 08:43ee SFX_Heal_HP_2_Ch5
@@ -8117,8 +8117,8 @@
 11:5741 RocketHideoutElevatorScript
 11:5754 RocketHideoutElavatorFloors
 11:5759 RocketHideoutElevatorWarpMaps
-11:575f RocketHideoutElevatorShakeScript
 11:575f RocketHideoutElevatorWarpMaps.End
+11:575f RocketHideoutElevatorShakeScript
 11:576b RocketHideoutElevator_TextPointers
 11:576d RocketHideoutElevatorText
 11:5782 RocketHideoutElevatorText.no_key
@@ -8133,8 +8133,8 @@
 11:57f1 SilphCoElevatorCopyWarpMapsScript
 11:5804 SilphCoElevatorFloors
 11:5811 SilphCoElevatorWarpMaps
-11:5827 SilphCoElevatorShakeScript
 11:5827 SilphCoElevatorWarpMaps.End
+11:5827 SilphCoElevatorShakeScript
 11:5833 SilphCoElevator_TextPointers
 11:5835 SilphCoElevatorElevatorText
 11:5844 SilphCoElevator_Object
@@ -8537,8 +8537,8 @@
 12:4631 CeladonMartElevatorCopyWarpMapsScript
 12:4643 CeladonMartElevatorFloors
 12:464a CeladonMartElevatorWarpMaps
-12:4654 CeladonMartElevatorShakeScript
 12:4654 CeladonMartElevatorWarpMaps.End
+12:4654 CeladonMartElevatorShakeScript
 12:465c CeladonMartElevator_TextPointers
 12:465e CeladonMartElevatorText
 12:466d CeladonMartElevator_Object
@@ -11126,8 +11126,8 @@
 17:45d1 PewterPokecenterJigglypuffText.spinMovementLoop
 17:4603 PewterPokecenterJigglypuffText.Text
 17:4608 PewterPokecenterJigglypuffText.FacingDirections
-17:460c PewterPokecenterLinkReceptionistText
 17:460c PewterPokecenterJigglypuffText.FacingDirectionsEnd
+17:460c PewterPokecenterLinkReceptionistText
 17:460d PewterPokecenter_Object
 17:4639 CeruleanPokecenter_h
 17:4645 CeruleanPokecenter_Script
@@ -14329,8 +14329,8 @@
 1f:4393 Audio3_WavePointers.wave2
 1f:43a3 Audio3_WavePointers.wave3
 1f:43b3 Audio3_WavePointers.wave4
-1f:43c3 SFX_Start_Menu_3_Ch8
 1f:43c3 Audio3_WavePointers.wave5
+1f:43c3 SFX_Start_Menu_3_Ch8
 1f:43ca SFX_Cut_3_Ch8
 1f:43da SFX_Go_Inside_3_Ch8
 1f:43e1 SFX_Swap_3_Ch5
