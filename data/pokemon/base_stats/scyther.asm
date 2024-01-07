@@ -10,7 +10,7 @@
 	INCBIN "gfx/pokemon/front/scyther.pic", 0, 1 ; sprite dimensions
 	dw ScytherPicFront, ScytherPicBackSW
 
-	db QUICK_ATTACK, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
+	db QUICK_ATTACK, SHARPEN, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
