@@ -15,6 +15,7 @@ PrintBeginningBattleText:
 	ld hl, WildMonAppearedText
 	jr z, .wildBattle ; if not fishing
 	ld hl, HookedMonAttackedText
+	jr .wildBattle
 .trainerBattle
 	call .playSFX
 	ld c, 20
