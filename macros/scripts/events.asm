@@ -114,6 +114,9 @@ MACRO CheckAndSetEvent
 	set (\1) % 8, [hl]
 ENDM
 
+MACRO CheckAndResetFlagHL
+	CheckAndResetEvent \1
+ENDM
 
 ;\1 = event index
 MACRO CheckAndResetEvent

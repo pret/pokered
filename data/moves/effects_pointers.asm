@@ -72,7 +72,7 @@ MoveEffectPointerTable:
 	dw StatModifierDownEffect    ; DEFENSE_DOWN_SIDE_EFFECT
 	dw StatModifierDownEffect    ; SPEED_DOWN_SIDE_EFFECT
 	dw StatModifierDownEffect    ; SPECIAL_DOWN_SIDE_EFFECT
-	dw StatModifierUpEffect      ; ATTACK_UP_SIDE_EFFECT
+	dw StatUpSideEffect          ; ATTACK_UP_SIDE_EFFECT
 	dw AccuracyAttackUpEffect    ; ATTACK_ACCURACY_UP1_EFFECT
 	dw AttackDefenseUpEffect     ; ATTACK_DEFENSE_UP1_EFFECT
 	dw ConfusionBigSideEffect    ; CONFUSION_BIG_SIDE_EFFECT

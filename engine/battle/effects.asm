@@ -383,6 +383,7 @@ FireDefrostedText:
 
 ; PureRGBnote: ADDED: increases attack, special, and speed as a move effect. Used with Meditate.
 AttackSpecialSpeedUpEffect:
+	SetFlag FLAG_SKIPPED_STAT_MODIFIER
 	;values for the enemy's turn
 	ld de, wPlayerMoveEffect
 	ldh a, [hWhoseTurn]
@@ -391,27 +392,36 @@ AttackSpecialSpeedUpEffect:
 	; values for the player's turn
 	ld de, wEnemyMoveEffect
 .next
+	push de
+	call GetSpecialPointers
+	call IsStatMaxed
+	pop de
+	jr c, .nextStat
 	ld a, SPECIAL_UP1_EFFECT
-	ld [de], a
+	call ReplacedStatModifierUpEffect
+.nextStat
 	push de
-	call StatModifierUpEffect ; stat modifier raising function
+	call GetAttackPointers
+	call IsStatMaxed
 	pop de
+	jr c, .nextStat2
 	ld a, ATTACK_UP_SIDE_EFFECT
-	ld [de], a ; we do the side effect for the second+third stat because it won't run the animation
+	call ReplacedStatModifierUpEffect
+.nextStat2
 	push de
-	call StatModifierUpEffect ; stat modifier raising function
+	call GetSpeedPointers
+	call IsStatMaxed
 	pop de
+	jr c, .done
 	ld a, SPEED_UP_SIDE_EFFECT
-	ld [de], a 
-	push de
-	call StatModifierUpEffect ; stat modifier raising function
-	pop de
+	call ReplacedStatModifierUpEffect
+.done
 	ld a, ATTACK_SPECIAL_SPEED_UP1
-	ld [de], a
-	ret
+	jr ResetStatModEffectAndAnimationFlag
 
 ; PureRGBnote: ADDED: increases both attack and defense as a move effect, used with bide
 AttackDefenseUpEffect:
+	SetFlag FLAG_SKIPPED_STAT_MODIFIER
 	;values for the enemy's turn
 	ld de, wPlayerMoveEffect
 	ldh a, [hWhoseTurn]
@@ -420,22 +430,28 @@ AttackDefenseUpEffect:
 	; values for the player's turn
 	ld de, wEnemyMoveEffect
 .next
+	push de
+	call GetDefensePointers
+	call IsStatMaxed
+	pop de
+	jr c, .nextStat
 	ld a, DEFENSE_UP1_EFFECT
-	ld [de], a
+	call ReplacedStatModifierUpEffect
+.nextStat
 	push de
-	call StatModifierUpEffect ; stat modifier raising function
+	call GetAttackPointers
+	call IsStatMaxed
 	pop de
-	ld a, ATTACK_UP_SIDE_EFFECT
-	ld [de], a ; we do the side effect for the second stat because it won't run the animation
-	push de
-	call StatModifierUpEffect ; stat modifier raising function
-	pop de
+	jr c, .done
+	ld a, ATTACK_UP_SIDE_EFFECT ; we do the side effect for the second stat because it won't run the animation
+	call ReplacedStatModifierUpEffect
+.done
 	ld a, ATTACK_DEFENSE_UP1_EFFECT
-	ld [de], a
-	ret
+	jr ResetStatModEffectAndAnimationFlag
 
 ; PureRGBnote: ADDED: increases both accuracy and attack as a move effect, used with sharpen
 AccuracyAttackUpEffect:
+	SetFlag FLAG_SKIPPED_STAT_MODIFIER
 	;values for the enemy's turn
 	ld de, wPlayerMoveEffect
 	ldh a, [hWhoseTurn]
@@ -444,21 +460,95 @@ AccuracyAttackUpEffect:
 	; values for the player's turn
 	ld de, wEnemyMoveEffect
 .next
-	ld a, ACCURACY_UP1_EFFECT
-	ld [de], a
 	push de
-	call StatModifierUpEffect ; stat modifier raising function
+	call GetAccuracyPointers
+	ld a, [hl]
+	cp MAX_STAT_LEVEL
+	jr z, .nextStat ; accuracy has no stat associated so only check if at +6
+	ld a, ACCURACY_UP1_EFFECT
+	call ReplacedStatModifierUpEffect
+.nextStat
+	push de
+	call GetAttackPointers
+	call IsStatMaxed
 	pop de
+	jr c, .done
 	ld a, ATTACK_UP_SIDE_EFFECT
+	call ReplacedStatModifierUpEffect
+.done
+	ld a, ATTACK_ACCURACY_UP1_EFFECT
+
+ResetStatModEffectAndAnimationFlag:
+	ld [de], a
+	ResetFlag FLAG_SKIP_STAT_ANIMATION
+	CheckAndResetFlagHL FLAG_SKIPPED_STAT_MODIFIER
+	jp nz, PrintNothingHappenedText
+	ret
+
+ReplacedStatModifierUpEffect:
 	ld [de], a ; we do the side effect for the second stat because it won't run the animation
 	push de
 	call StatModifierUpEffect ; stat modifier raising function
 	pop de
-	ld a, ATTACK_ACCURACY_UP1_EFFECT
-	ld [de], a
+	SetFlag FLAG_SKIP_STAT_ANIMATION ; for multi stat boosts, we won't do any animation after the first stat boost is done
+	ret
+
+GetDefensePointers:
+	ldh a, [hWhoseTurn]
+	and a
+	ld hl, wBattleMonDefense + 1
+	ld de, wPlayerMonDefenseMod
+	ret z
+	ld hl, wEnemyMonDefense + 1
+	ld de, wEnemyMonDefenseMod
+	ret
+
+GetAccuracyPointers:
+	ldh a, [hWhoseTurn]
+	and a
+	ld hl, wPlayerMonAccuracyMod
+	ret z
+	ld hl, wEnemyMonAccuracyMod
+	ret
+
+GetAttackPointers:
+	ldh a, [hWhoseTurn]
+	and a
+	ld hl, wBattleMonAttack + 1
+	ld de, wPlayerMonAttackMod
+	ret z
+	ld hl, wEnemyMonAttack + 1
+	ld de, wEnemyMonAttackMod
+	ret
+
+GetSpecialPointers:
+	ldh a, [hWhoseTurn]
+	and a
+	ld hl, wBattleMonSpecial + 1
+	ld de, wPlayerMonSpecialMod
+	ret z
+	ld hl, wEnemyMonSpecial + 1
+	ld de, wEnemyMonSpecialMod
+	ret
+
+GetSpeedPointers:
+	ldh a, [hWhoseTurn]
+	and a
+	ld hl, wBattleMonSpeed + 1
+	ld de, wPlayerMonSpeedMod
+	ret z
+	ld hl, wEnemyMonSpeed + 1
+	ld de, wEnemyMonSpeedMod
+	ret
+
+StatUpSideEffect:
+	SetFlag FLAG_SKIP_STAT_ANIMATION
+	call StatModifierUpEffect
+	ResetFlag FLAG_SKIP_STAT_ANIMATION
 	ret
 
 StatModifierUpEffect:
+	ResetFlag FLAG_SKIPPED_STAT_MODIFIER
 	ld hl, wPlayerMonStatMods
 	ld de, wPlayerMoveEffect
 	ldh a, [hWhoseTurn]
@@ -491,7 +581,7 @@ StatModifierUpEffect:
 	add hl, bc
 	ld b, [hl]
 	inc b ; increment corresponding stat mod
-	ld a, $d
+	ld a, MAX_STAT_LEVEL
 	cp b ; can't raise stat past +6 ($d or 13)
 	jp c, PrintNothingHappenedText
 ;;;;;;;;;; PureRGBnote: ADDED: need to decide which stat is being modified here and store it so we can apply correct badge boosts if necessary
@@ -500,7 +590,7 @@ StatModifierUpEffect:
 	cp ATTACK_UP1_EFFECT + $8 ; is it a +2 effect?
 	jr c, .ok
 	inc b ; if so, increment stat mod again
-	ld a, $d
+	ld a, MAX_STAT_LEVEL
 	cp b ; unless it's already +6
 	jr nc, .ok
 	ld b, a
@@ -594,24 +684,8 @@ UpdateStatDone:
 	ld bc, wEnemyMonMinimized
 .playerTurn
 ;;;;;;;;;; PureRGBnote: ADDED: certain stat modifiers don't need to do the animation here
-	push de
-	ld de, wPlayerMoveEffect
-	ldh a, [hWhoseTurn]
-	and a
-	jr z, .playerTurn2
-	ld de, wEnemyMoveEffect
-.playerTurn2
-	ld a, [de]
-	pop de
-	cp ATTACK_UP_SIDE_EFFECT
-	jr z, .skipAnimation
-	cp SPEED_UP_SIDE_EFFECT
-	jr z, .skipAnimation
-	ld a, [wAnimationType]
-	cp 1 ; just a temp flag to make stat modifier skip the animation for withdraw/growth, usually set to 0 here.
-	ld a, 0
-	ld [wAnimationType], a
-	jr z, .skipAnimation
+	CheckFlag FLAG_SKIP_STAT_ANIMATION
+	jr nz, .skipAnimation
 ;;;;;;;;;;
 	ld a, [de]
 	cp MINIMIZE
@@ -1576,26 +1650,13 @@ HazeEffect:
 ; PureRGBnote: ADDED: growth raises special by 1 and heals around 1/3rd health. Does nothing at all if you're at full health.
 GrowthEffect:
 	lb bc, SPECIAL_UP1_EFFECT, GROWTH_EFFECT
-	ldh a, [hWhoseTurn]
-	and a
-	ld hl, wBattleMonSpecial + 1
-	ld de, wPlayerMonSpecialMod
-	jr z, WithdrawGrowthEffect
-	ld hl, wEnemyMonSpecial + 1
-	ld de, wEnemyMonSpecialMod
+	call GetSpecialPointers
 	jr WithdrawGrowthEffect
 
 ; PureRGBnote: ADDED: withdraw raises defense by 1 and heals around 1/3rd health. Does nothing at all if you're at full health.
 WithdrawEffect:
 	lb bc, DEFENSE_UP1_EFFECT, WITHDRAW_EFFECT
-	ldh a, [hWhoseTurn]
-	and a
-	ld hl, wBattleMonDefense + 1
-	ld de, wPlayerMonDefenseMod
-	jr z, .doEffect
-	ld hl, wEnemyMonDefense + 1
-	ld de, wEnemyMonDefenseMod
-.doEffect 
+	call GetDefensePointers
 
 WithdrawGrowthEffect:
 	push bc
@@ -1611,15 +1672,8 @@ WithdrawGrowthEffect:
 	pop hl
 	pop de
 	jr z, .done
-	ld a, [de]
-	cp $0D ; stat has been maxed out
-	jr z, .done
-	ld a, [hld]
-	cp LOW(MAX_STAT_VALUE)
-	jr nz, .continue
-	ld a, [hl]
-	cp HIGH(MAX_STAT_VALUE)
-	jr z, .done ; stat has hit 999 and can't be boosted further
+	call IsStatMaxed
+	jr c, .done
 .continue
 	pop af
 	ld [wHPBarType], a
@@ -1636,9 +1690,9 @@ WithdrawGrowthEffect:
 	ld [de], a
 	push bc
 	push de
-	ld a, 1
-	ld [wAnimationType], a
+	SetFlag FLAG_SKIP_STAT_ANIMATION
 	call StatModifierUpEffect ; stat modifier raising function
+	ResetFlag FLAG_SKIP_STAT_ANIMATION
 	pop de
 	pop bc
 	ld a, c
@@ -1829,4 +1883,24 @@ SuperFangEffect:
 	ret nz
 ; make sure Super Fang's damage is always at least 1
 	ld [hl], 1
+	ret
+
+; input hl = which stat's current value
+; input de = current stat modifier of this stat
+; stats can be maxed (at 999) when using very high level pokemon but the stat modifier isn't yet at +6, still considered maxed out.
+IsStatMaxed:
+	ld a, [de]
+	cp MAX_STAT_LEVEL ; stat has been maxed out
+	jr z, .maxed
+	ld a, [hld]
+	cp LOW(MAX_STAT_VALUE)
+	jr nz, .notMaxed
+	ld a, [hl]
+	cp HIGH(MAX_STAT_VALUE)
+	jr z, .maxed ; stat has hit 999 and can't be boosted further
+.notMaxed
+	and a
+	ret
+.maxed
+	scf
 	ret

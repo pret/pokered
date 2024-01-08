@@ -5167,7 +5167,7 @@ SubstituteBrokeText:
 ;	bit USING_RAGE, [hl] ; is the pokemon being attacked under the effect of Rage?
 ;	ret z ; return if not
 ;	ld a, [de]
-;	cp $0d ; maximum stat modifier value
+;	cp MAX_STAT_LEVEL ; maximum stat modifier value
 ;	ret z ; return if attack modifier is already maxed
 ;	ldh a, [hWhoseTurn]
 ;	xor $01 ; flip turn for the stat modifier raising function

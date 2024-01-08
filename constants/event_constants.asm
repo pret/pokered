@@ -918,10 +918,12 @@ DEF CHAMP_ARENA_BATTLE_EVENTS_END EQU const_value
 ; arbitrary flags
 	const_next $8D0
 DEF FLAG_LEARNING_TM_MOVE EQU const_value
+DEF FLAG_SKIPPED_STAT_MODIFIER EQU const_value
 	const FLAG_ARBITRARY_1 ; flag that can be used for many things
 	const FLAG_HIDE_PLAYER_SPRITE
 	const FLAG_ALTERNATE_BATTLE_WIN_THEME
 	const FLAG_DIG_OVERWORLD_ANIMATION
+DEF FLAG_SKIP_STAT_ANIMATION EQU const_value
 	const FLAG_SPINNER_TOGGLER
 	; 11 flag spaces remain
 
