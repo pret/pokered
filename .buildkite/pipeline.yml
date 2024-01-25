@@ -1,0 +1,3 @@
+steps:
+  - label: ":hammer: Run make"
+    command: "make"
