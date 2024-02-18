@@ -54,6 +54,10 @@ blue_debug: pokeblue_debug.gbc
 red_vc:     pokered.patch
 blue_vc:    pokeblue.patch
 
+indigo: # Builds pokered and renames pokered.gbc
+	make red 
+	mv pokered.gbc pokeindigo.gbc
+
 clean: tidy
 	find gfx \
 	     \( -iname '*.1bpp' \
