@@ -55,8 +55,9 @@ red_vc:     pokered.patch
 blue_vc:    pokeblue.patch
 
 indigo: # Builds pokered and renames pokered.gbc
+	make clean
 	make red 
-	mv pokered.gbc pokeindigo.gbc
+	mv pokered.gbc pokeindigo.gb
 
 clean: tidy
 	find gfx \
