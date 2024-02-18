@@ -26,22 +26,34 @@ UncompressMonSprite::
 	ld a, BANK(FossilKabutopsPic)
 	jr z, .GotBank
 	ld a, b
-	cp TANGELA + 1
-	ld a, BANK("Pics 1")
+	cp LAPRAS + 1
+	ld a, BANK("Pkmn 1")
 	jr c, .GotBank
 	ld a, b
-	cp MOLTRES + 1
-	ld a, BANK("Pics 2")
+	cp CHANSEY + 1
+	ld a, BANK("Pkmn 2")
 	jr c, .GotBank
 	ld a, b
-	cp BEEDRILL + 2
-	ld a, BANK("Pics 3")
+	cp VENONAT + 1
+	ld a, BANK("Pkmn 3")
 	jr c, .GotBank
 	ld a, b
-	cp STARMIE + 1
-	ld a, BANK("Pics 4")
+	cp HORSEA + 1
+	ld a, BANK("Pkmn 4")
 	jr c, .GotBank
-	ld a, BANK("Pics 5")
+	ld a, b
+	cp KAKUNA + 1
+	ld a, BANK("Pkmn 5")
+	jr c, .GotBank
+	ld a, b
+	cp CLOYSTER + 2
+	ld a, BANK("Pkmn 6")
+	jr c, .GotBank
+	ld a, b
+	cp RATTATA + 1
+	ld a, BANK("Pkmn 7")
+	jr c, .GotBank
+	ld a, BANK("Pkmn 8")
 .GotBank
 	jp UncompressSpriteData
 
@@ -52,6 +64,7 @@ LoadMonFrontSprite::
 	call UncompressMonSprite
 	ld hl, wMonHSpriteDim
 	ld a, [hli]
+LoadUncompressedBackSprite::
 	ld c, a
 	pop de
 	; fall through

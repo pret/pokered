@@ -69,19 +69,15 @@ ROMX $8
 	"Audio Engine 2"
 	"Music 2"
 ROMX $9
-	"Pics 1"
 	"Battle Engine 3"
+	"Battle backs"
 ROMX $A
-	"Pics 2"
 	"Battle Engine 4"
 ROMX $B
-	"Pics 3"
 	"Battle Engine 5"
 ROMX $C
-	"Pics 4"
 	"Battle Engine 6"
 ROMX $D
-	"Pics 5"
 	"Slot Machines"
 ROMX $E
 	"Battle Engine 7"
@@ -177,6 +173,22 @@ ROMX $2B
 	"Pokédex Text"
 ROMX $2C
 	"Move Names"
+ROMX $2D
+	"Pkmn 1"
+ROMX $2E
+	"Pkmn 2"
+ROMX $2F
+	"Pkmn 3"
+ROMX $30
+	"Pkmn 4"
+ROMX $31
+	"Pkmn 5"
+ROMX $32
+	"Pkmn 6"
+ROMX $33
+	"Pkmn 7"
+ROMX $34
+	"Pkmn 8"
 WRAM0
 	"Audio RAM"
 	org $c100
