@@ -84,7 +84,7 @@ CheckInSurfRestrictedArea::
 ; d = which move ID to look for
 ; output
 ; d = how many matches
-; z flag = whether a match was found (set = match found)
+; z flag = whether a match was found (z = not found, nz = found)
 IsMoveInParty:
 	ld c, d ; which move to check
 	ld hl, wPartyMon1Moves
@@ -119,7 +119,7 @@ IsMoveInParty:
 ; input
 ; d = move ID
 ; output
-; z flag set if learnable
+; z = not found, nz = found
 
 IsMoveLearnableByParty:
 	ld a, [wMoveNum]
