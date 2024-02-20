@@ -7,7 +7,7 @@
 ; 21,22,28
 
 BorderPalettes:
-	INCBIN "gfx/sgb/red_border.tilemap"
+	INCBIN "gfx/sgb/green_border.tilemap"
 
 	ds $100
 
@@ -33,4 +33,4 @@ BorderPalettes:
 	ds $18
 
 SGBBorderGraphics:
-	INCBIN "gfx/sgb/red_border.2bpp"
+	INCBIN "gfx/sgb/green_border.2bpp"
