@@ -3,7 +3,7 @@ Route11WildMons:
 IF DEF(_RED)
 	db 14, EKANS
 	db 15, SPEAROW
-	db 12, EKANS
+	db 12, SANDSHREW
 	db  9, DROWZEE
 	db 13, SPEAROW
 	db 13, DROWZEE

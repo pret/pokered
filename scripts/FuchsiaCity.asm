@@ -13,6 +13,7 @@ FuchsiaCity_TextPointers:
 	dw_const FuchsiaCityPokemonText,         TEXT_FUCHSIACITY_SLOWPOKE
 	dw_const FuchsiaCityPokemonText,         TEXT_FUCHSIACITY_LAPRAS
 	dw_const FuchsiaCityPokemonText,         TEXT_FUCHSIACITY_FOSSIL
+	dw_const FuchsiaCityCooltrainerText,     TEXT_FUCHSIACITY_COOLTRAINER_M
 	dw_const FuchsiaCitySignText,            TEXT_FUCHSIACITY_SIGN1
 	dw_const FuchsiaCitySignText,            TEXT_FUCHSIACITY_SIGN2
 	dw_const FuchsiaCitySafariGameSignText,  TEXT_FUCHSIACITY_SAFARI_GAME_SIGN
@@ -161,4 +162,64 @@ FuchsiaCityFossilSignText:
 
 .UndeterminedText:
 	text_far _FuchsiaCityFossilSignUndeterminedText
+	text_end
+
+
+; Weird names for some scripts.
+
+FuchsiaCityCooltrainerText:
+	text_asm
+	CheckEvent EVENT_GOT_BULBASAUR_FROM_COOLTRAINER
+	jr nz, .asm_515f5
+	ld hl, FuchsiaCityText_515fe
+	call PrintText
+	call YesNoChoice
+	ld a, [wCurrentMenuItem]
+	and a
+	jr nz, .asm_515f0
+	ld a, BULBASAUR
+	ld [wd11e], a
+	ld [wcf91], a
+	call GetMonName
+	ld a, $1
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
+	lb bc, BULBASAUR, 15
+	call GivePokemon
+	jp nc, TextScriptEnd
+	ld a, [wAddedToParty]
+	and a
+	call z, WaitForTextScrollButtonPress
+	ld a, $1
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
+	ld hl, FuchsiaCityText_515a3
+	call PrintText
+	SetEvent EVENT_GOT_BULBASAUR_FROM_COOLTRAINER
+	jp TextScriptEnd
+
+.asm_515f0
+	ld hl, FuchsiaCityText_515a9
+	jr .asm_515f8
+
+.asm_515f5
+	ld hl, FuchsiaCityText_515ae
+	
+.asm_515f8
+	call PrintText
+	jp TextScriptEnd
+
+FuchsiaCityText_515fe:
+	text_far _FuchsiaCityCooltrainerText1
+	text_end
+
+FuchsiaCityText_515a3:
+	text_far _FuchsiaCityCooltrainerText2
+	text_waitbutton
+	text_end
+
+FuchsiaCityText_515a9:
+	text_far _FuchsiaCityCooltrainerText3
+	text_end
+
+FuchsiaCityText_515ae:
+	text_far _FuchsiaCityCooltrainerText4
 	text_end

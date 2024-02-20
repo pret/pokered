@@ -28,7 +28,6 @@ SnorlaxSprite::          INCBIN "gfx/sprites/snorlax.2bpp"
 OldAmberSprite::         INCBIN "gfx/sprites/old_amber.2bpp"
 GamblerAsleepSprite::    INCBIN "gfx/sprites/gambler_asleep.2bpp"
 
-
 SECTION "NPC Sprites 2", ROMX
 
 RedBikeSprite::          INCBIN "gfx/sprites/red_bike.2bpp"

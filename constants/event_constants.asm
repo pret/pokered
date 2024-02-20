@@ -113,6 +113,8 @@
 	const_skip
 	const EVENT_GOT_TM24
 	const EVENT_BEAT_LT_SURGE
+	const_skip
+	const EVENT_GOT_SQUIRTLE_FROM_SQUIRTLE_TRAINER
 
 ; Celadon City events
 	const_next $180
@@ -159,6 +161,7 @@
 	const EVENT_BEAT_FUCHSIA_GYM_TRAINER_3
 	const EVENT_BEAT_FUCHSIA_GYM_TRAINER_4
 	const EVENT_BEAT_FUCHSIA_GYM_TRAINER_5
+	const EVENT_GOT_BULBASAUR_FROM_COOLTRAINER
 
 ; Cinnabar Island events
 	const_next $278
@@ -503,6 +506,8 @@
 	const EVENT_BEAT_ROUTE_24_TRAINER_5
 	const_skip
 	const EVENT_NUGGET_REWARD_AVAILABLE
+	const_skip
+	const EVENT_GOT_CHARMANDER_FROM_COOLTRAINER
 
 ; Route 25 events
 	const_next $550
@@ -703,6 +708,7 @@
 	const_skip 14
 	const EVENT_BEAT_MANSION_4_TRAINER_0
 	const EVENT_BEAT_MANSION_4_TRAINER_1
+	const EVENT_BEAT_MEW
 
 ; Safari Zone events
 	const_next $880

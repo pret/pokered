@@ -27,7 +27,8 @@ _FightingDojoKarateMasterIWillGiveYouAPokemonText::
 	cont "your trophy!"
 
 	para "In return, I will"
-	line "give you a prized"
+	line "give you"
+	cont "two prized"
 	cont "fighting #MON!"
 
 	para "Choose whichever"

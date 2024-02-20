@@ -87,6 +87,7 @@ Route24_TextPointers:
 	dw_const Route24CooltrainerF2Text, TEXT_ROUTE24_COOLTRAINER_F2
 	dw_const Route24Youngster2Text,    TEXT_ROUTE24_YOUNGSTER2
 	dw_const PickUpItemText,           TEXT_ROUTE24_TM_THUNDER_WAVE
+	dw_const Route24CooltrainerM4Text, TEXT_ROUTE24_COOLTRAINER_M4
 
 Route24TrainerHeaders:
 	def_trainers 2
@@ -279,4 +280,62 @@ Route24Youngster2EndBattleText:
 
 Route24Youngster2AfterBattleText:
 	text_far _Route24Youngster2AfterBattleText
+	text_end
+
+
+Route24CooltrainerM4Text:
+	text_asm
+	CheckEvent EVENT_GOT_CHARMANDER_FROM_COOLTRAINER
+	jr nz, .asm_515d5
+	ld hl, Route24Text_515de
+	call PrintText
+	call YesNoChoice
+	ld a, [wCurrentMenuItem]
+	and a
+	jr nz, .asm_515d0
+	ld a, CHARMANDER
+	ld [wd11e], a
+	ld [wcf91], a
+	call GetMonName
+	ld a, $1
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
+	lb bc, CHARMANDER, 15
+	call GivePokemon
+	jp nc, TextScriptEnd
+	ld a, [wAddedToParty]
+	and a
+	call z, WaitForTextScrollButtonPress
+	ld a, $1
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
+	ld hl, Route24Text_515e3
+	call PrintText
+	SetEvent EVENT_GOT_CHARMANDER_FROM_COOLTRAINER
+	jp TextScriptEnd
+
+.asm_515d0
+	ld hl, Route24Text_515e9
+	jr .asm_515d8
+
+.asm_515d5
+	ld hl, Route24Text_515ee
+	
+.asm_515d8
+	call PrintText
+	jp TextScriptEnd
+
+Route24Text_515de:
+	text_far _Route24DamianText1
+	text_end
+
+Route24Text_515e3:
+	text_far _Route24DamianText2
+	text_waitbutton
+	text_end
+
+Route24Text_515e9:
+	text_far _Route24DamianText3
+	text_end
+
+Route24Text_515ee:
+	text_far _Route24DamianText4
 	text_end

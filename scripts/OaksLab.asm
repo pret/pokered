@@ -905,14 +905,35 @@ OaksLabMonChoiceMenu:
 	cp OAKSLAB_CHARMANDER_POKE_BALL
 	jr nz, .not_charmander
 	ld a, HS_STARTER_BALL_1
+
+	; Hide Charmander Trainer.
+
+	ld a, HS_ROUTE_24_COOLTRAINER
+	ld [wMissableObjectIndex], a
+	predef HideObject
+
 	jr .continue
 .not_charmander
 	cp OAKSLAB_SQUIRTLE_POKE_BALL
 	jr nz, .not_squirtle
 	ld a, HS_STARTER_BALL_2
+
+	; Hide Squirtle Trainer.
+
+	ld a, HS_VERMILION_SQUIRTLE_TRAINER
+	ld [wMissableObjectIndex], a
+	predef HideObject
+
 	jr .continue
 .not_squirtle
 	ld a, HS_STARTER_BALL_3
+
+	; Hide Bulbasaur Trainer.
+
+	ld a, HS_FUCHSIA_COOLTRAINER
+	ld [wMissableObjectIndex], a
+	predef HideObject
+
 .continue
 	ld [wMissableObjectIndex], a
 	predef HideObject

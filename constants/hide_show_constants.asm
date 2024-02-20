@@ -19,6 +19,8 @@ DEF SHOW EQU $15
 	const HS_CERULEAN_GUARD_1              ; 07
 	const HS_CERULEAN_CAVE_GUY             ; 08
 	const HS_CERULEAN_GUARD_2              ; 09
+	const HS_VERMILION_SQUIRTLE_TRAINER
+	const HS_FUCHSIA_COOLTRAINER
 	const HS_SAFFRON_CITY_1                ; 0A
 	const HS_SAFFRON_CITY_2                ; 0B
 	const HS_SAFFRON_CITY_3                ; 0C
@@ -47,6 +49,7 @@ DEF SHOW EQU $15
 	const HS_ROUTE_22_RIVAL_2              ; 23
 	const HS_NUGGET_BRIDGE_GUY             ; 24
 	const HS_ROUTE_24_ITEM                 ; 25 X
+	const HS_ROUTE_24_COOLTRAINER
 	const HS_ROUTE_25_ITEM                 ; 26 X
 	const HS_DAISY_SITTING                 ; 27
 	const HS_DAISY_WALKING                 ; 28
@@ -183,6 +186,8 @@ DEF SHOW EQU $15
 	const HS_SILPH_CO_8F_1                 ; AB
 	const HS_SILPH_CO_8F_2                 ; AC
 	const HS_SILPH_CO_8F_3                 ; AD
+	const HS_ROCK_TUNNEL_DOME_FOSSIL
+	const HS_ROCK_TUNNEL_HELIX_FOSSIL
 	const HS_SILPH_CO_9F_1                 ; AE
 	const HS_SILPH_CO_9F_2                 ; AF
 	const HS_SILPH_CO_9F_3                 ; B0
@@ -204,6 +209,7 @@ DEF SHOW EQU $15
 	const HS_POKEMON_MANSION_B1F_ITEM_3    ; C0 X
 	const HS_POKEMON_MANSION_B1F_ITEM_4    ; C1 X
 	const HS_POKEMON_MANSION_B1F_ITEM_5    ; C2 X
+	const HS_POKEMON_MANSION_B1F_MEW
 	const HS_SAFARI_ZONE_EAST_ITEM_1       ; C3 X
 	const HS_SAFARI_ZONE_EAST_ITEM_2       ; C4 X
 	const HS_SAFARI_ZONE_EAST_ITEM_3       ; C5 X

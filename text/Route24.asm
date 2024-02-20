@@ -65,3 +65,33 @@ _Route24CooltrainerM2BattleText::
 	text "I saw your feat"
 	line "from the grass!"
 	done
+
+
+_Route24DamianText1::
+	text "I'm not good at"
+	line "raising #MON."
+
+	para "I should release"
+	line "my CHARMANDER"
+	cont "because I haven't"
+	cont "raised it well..."
+
+	para "If you promise me"
+	line "you'll care for"
+	cont "it, it's yours."
+	done
+
+_Route24DamianText2::
+	text "Take good care of"
+	line "my CHARMANDER!@"
+	text_end
+
+_Route24DamianText3::
+	text "Oh... I'd better"
+	line "release it then."
+	done
+
+_Route24DamianText4::
+	text "How's CHARMANDER"
+	line "doing?"
+	done

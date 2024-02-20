@@ -4,13 +4,13 @@ Route4WildMons:
 	db 10, SPEAROW
 	db  8, RATTATA
 IF DEF(_RED)
-	db  6, EKANS
+	db  8, EKANS
 	db  8, SPEAROW
-	db 10, EKANS
+	db 10, SANDSHREW
 	db 12, RATTATA
 	db 12, SPEAROW
 	db  8, EKANS
-	db 12, EKANS
+	db 12, SANDSHREW
 ENDC
 IF DEF(_BLUE)
 	db  6, SANDSHREW

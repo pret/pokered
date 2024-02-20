@@ -106,3 +106,16 @@ _RockTunnelB1FHiker3EndBattleText::
 	text "Fired"
 	line "away!"
 	prompt
+
+
+_RockTunnelGotFossilText::
+	text "<PLAYER> got a"
+	line "@"
+	text_ram wStringBuffer
+	text "!@"
+	text_end
+
+_RockTunnelBagFullText::
+	text "You have too much"
+	line "stuff with you."
+	done

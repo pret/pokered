@@ -117,3 +117,33 @@ _FuchsiaCityFossilSignKabutoText::
 _FuchsiaCityFossilSignUndeterminedText::
 	text "..."
 	done
+
+
+_FuchsiaCityCooltrainerText1::
+	text "I'm not good at"
+	line "raising #MON."
+
+	para "I should release"
+	line "my BULBASAUR"
+	cont "because I haven't"
+	cont "raised it well..."
+
+	para "If you promise me"
+	line "you'll care for"
+	cont "it, it's yours."
+	done
+
+_FuchsiaCityCooltrainerText2::
+	text "Take good care of"
+	line "my BULBASAUR!@"
+	text_end
+
+_FuchsiaCityCooltrainerText3::
+	text "Oh... I'd better"
+	line "release it then."
+	done
+
+_FuchsiaCityCooltrainerText4::
+	text "How's BULBASAUR"
+	line "doing?"
+	done

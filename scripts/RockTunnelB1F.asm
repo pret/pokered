@@ -23,6 +23,8 @@ RockTunnelB1F_TextPointers:
 	dw_const RockTunnelB1FCooltrainerF2Text, TEXT_ROCKTUNNELB1F_COOLTRAINER_F2
 	dw_const RockTunnelB1FHiker3Text,        TEXT_ROCKTUNNELB1F_HIKER3
 	dw_const RockTunnelB1FSuperNerd3Text,    TEXT_ROCKTUNNELB1F_SUPER_NERD3
+	dw_const RockTunnelDomeFossilText,       TEXT_ROCKTUNNEL_DOME_FOSSIL
+	dw_const RockTunnelHelixFossilText,      TEXT_ROCKTUNNEL_HELIX_FOSSIL
 
 RockTunnel2TrainerHeaders:
 	def_trainers
@@ -187,3 +189,53 @@ RockTunnelB1FSuperNerd3EndBattleText:
 RockTunnelB1FSuperNerd3AfterBattleText:
 	text_far _RockTunnelB1FSuperNerd3AfterBattleText
 	text_end
+
+
+RockTunnelGotFossilText:
+	text_far _RockTunnelGotFossilText
+	sound_get_key_item
+	text_end
+
+RockTunnelBagFullText:
+	text_far _RockTunnelBagFullText
+	text_end
+
+RockTunnelDomeFossilText:
+	text_asm
+	lb bc, DOME_FOSSIL, 1
+	call GiveItem
+	jr nc, .bag_full
+	ld a, HS_ROCK_TUNNEL_DOME_FOSSIL
+	ld [wMissableObjectIndex], a
+	predef HideObject
+	SetEvent EVENT_GOT_DOME_FOSSIL
+	jr .done
+
+.bag_full
+	ld hl, RockTunnelBagFullText
+	call PrintText
+
+.done
+	ld hl, RockTunnelGotFossilText
+	call PrintText
+	jp TextScriptEnd
+
+RockTunnelHelixFossilText:
+	text_asm
+	lb bc, HELIX_FOSSIL, 1
+	call GiveItem
+	jr nc, .bag_full
+	ld a, HS_ROCK_TUNNEL_HELIX_FOSSIL
+	ld [wMissableObjectIndex], a
+	predef HideObject
+	SetEvent EVENT_GOT_HELIX_FOSSIL
+	jr .done
+
+.bag_full
+	ld hl, RockTunnelBagFullText
+	call PrintText
+
+.done
+	ld hl, RockTunnelGotFossilText
+	call PrintText
+	jp TextScriptEnd

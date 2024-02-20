@@ -37,3 +37,7 @@ _PokemonMansionB1FDiaryText::
 	line "curb its vicious"
 	cont "tendencies..."
 	done
+
+_MewBattleText::
+	text "Mew!@"
+	text_end

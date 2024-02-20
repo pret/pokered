@@ -125,3 +125,46 @@ _VermilionCityGymSignText::
 _VermilionCityHarborSignText::
 	text "VERMILION HARBOR"
 	done
+
+
+_SquirtleTrainerText1::
+	text "I just caught a"
+	line "SQUIRTLE that was"
+	cont "always getting"
+	cont "into mischief."
+
+	para "I think it needs a"
+	line "good trainer to"
+	cont "set it straight."
+	done
+
+_SquirtleTrainerText2::
+	text "You have the"
+	line "THUNDERBADGE!?"
+
+	para "You must be a"
+	line "good trainer!"
+
+	para "I just caught a"
+	line "SQUIRTLE that was"
+	cont "always getting"
+	cont "into mischief."
+
+	para "Would you take"
+	line "good care of it?"
+	done
+
+_SquirtleTrainerText3::
+	text "OK! Please treat"
+	line "SQUIRTLE right!@"
+	text_end
+
+_SquirtleTrainerText4::
+	text "Oh... What am I"
+	line "to do now?"
+	done
+
+_SquirtleTrainerText5::
+	text "How is SQUIRTLE"
+	line "doing?"
+	done
