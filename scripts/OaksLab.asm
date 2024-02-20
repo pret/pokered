@@ -904,7 +904,6 @@ OaksLabMonChoiceMenu:
 	ld a, [wSpriteIndex]
 	cp OAKSLAB_CHARMANDER_POKE_BALL
 	jr nz, .not_charmander
-	ld a, HS_STARTER_BALL_1
 
 	; Hide Charmander Trainer.
 
@@ -912,11 +911,12 @@ OaksLabMonChoiceMenu:
 	ld [wMissableObjectIndex], a
 	predef HideObject
 
+	ld a, HS_STARTER_BALL_1
 	jr .continue
+
 .not_charmander
 	cp OAKSLAB_SQUIRTLE_POKE_BALL
 	jr nz, .not_squirtle
-	ld a, HS_STARTER_BALL_2
 
 	; Hide Squirtle Trainer.
 
@@ -924,9 +924,10 @@ OaksLabMonChoiceMenu:
 	ld [wMissableObjectIndex], a
 	predef HideObject
 
+	ld a, HS_STARTER_BALL_2
 	jr .continue
+	
 .not_squirtle
-	ld a, HS_STARTER_BALL_3
 
 	; Hide Bulbasaur Trainer.
 
@@ -934,6 +935,8 @@ OaksLabMonChoiceMenu:
 	ld [wMissableObjectIndex], a
 	predef HideObject
 
+	ld a, HS_STARTER_BALL_3
+	
 .continue
 	ld [wMissableObjectIndex], a
 	predef HideObject
