@@ -6,28 +6,28 @@ DEF STATE_SUPER_ROD_AREAS EQU 4
 
 ; moved from town_map.asm
 
-ZeroOutDuplicatesInList:
+;ZeroOutDuplicatesInList: ; PureRGBnote: CHANGED: won't have duplicates anymore by default
 ; replace duplicate bytes in the list of wild pokemon locations with 0
 ; PureRGBnote: CHANGED: now replaces them with $fe because 0 is pallet town and that's a valid map for super rod encounters
-	ld de, wTownMapCoords
-.loop
-	ld a, [de]
-	inc de
-	cp $ff
-	ret z
-	ld c, a
-	ld l, e
-	ld h, d
-.zeroDuplicatesLoop
-	ld a, [hl]
-	cp $ff
-	jr z, .loop
-	cp c
-	jr nz, .skipZeroing
-	ld [hl], $fe
-.skipZeroing
-	inc hl
-	jr .zeroDuplicatesLoop
+;	ld de, wTownMapCoords
+;.loop
+;	ld a, [de]
+;	inc de
+;	cp $ff
+;	ret z
+;	ld c, a
+;	ld l, e
+;	ld h, d
+;.zeroDuplicatesLoop
+;	ld a, [hl]
+;	cp $ff
+;	jr z, .loop
+;	cp c
+;	jr nz, .skipZeroing
+;	ld [hl], $fe
+;.skipZeroing
+;	inc hl
+;	jr .zeroDuplicatesLoop
 
 
 GetAreaDisplayTypes:
@@ -400,15 +400,15 @@ DisplaySuperRodLocations:
 
 LoadMapIcons:
 	push af
-	call ZeroOutDuplicatesInList
+	; call ZeroOutDuplicatesInList ; PureRGBnote: CHANGED: won't have duplicates anymore by default
 	ld hl, wShadowOAM
 	ld de, wTownMapCoords
 .loop
 	ld a, [de]
 	cp $ff ; indicates end of list
 	jr z, .exitLoop
-	cp $fe ; indicates a duplicate entry
-	jr z, .nextEntry
+	;cp 0 ; indicates a duplicate entry ; PureRGBnote: CHANGED: won't have duplicates anymore by default
+	;jr z, .nextEntry
 	push hl
 	ld b, a
 	predef FarLoadTownMapEntry

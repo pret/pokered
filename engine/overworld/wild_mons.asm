@@ -41,6 +41,7 @@ FindGrassCaveLocations:
 ; PureRGBnote: MOVED: creates a list at wBuffer of maps where the mon in [wd11e] can be found.
 ; this is used by the pokedex to display locations the mon can be found on the map.
 ; input b = grass or water (0 = grass, 1 = water)
+; now it will only find either grass or water locations into wBuffer, not both.
 FindWildLocationsOfMon:
 	ld hl, WildDataPointers
 	ld de, wBuffer
@@ -49,23 +50,23 @@ FindWildLocationsOfMon:
 	inc hl
 	ld a, [hld]
 	inc a
-	jr z, .done
-	push hl
+	jr z, .done ; if at list terminator of jump table, end search
+	push hl ; push list of maps
 	ld a, [hli]
 	ld h, [hl]
-	ld l, a
+	ld l, a ; deref current map's list of pokemon into hl
 	ld a, b
 	and a
 	jr nz, .water
 	ld a, [hli]
-	and a
+	and a ; first byte is >0 if we have grass encounters in this map
 	call nz, CheckMapForMon ; land
 	jr .doneCheck
 .water
 	ld a, [hli]
 	and a
-	jr z, .noGrassMons
-	; skip to the water mons
+	jr z, .noGrassMons ; this map has no grass encounters if the first byte is 0
+	; skip past grass encounters to the water mons
 	push bc
 	ld a, NUM_WILDMONS
 	add a
@@ -75,12 +76,12 @@ FindWildLocationsOfMon:
 	pop bc
 .noGrassMons
 	ld a, [hli]
-	and a
+	and a ; first byte is >0 if we have water encounters in this map
 	call nz, CheckMapForMon ; water
 .doneCheck
-	pop hl
+	pop hl ; get back list of maps
 	inc hl
-	inc hl
+	inc hl ; go to the next one
 	inc c
 	jr .loop
 .done
@@ -95,18 +96,22 @@ CheckMapForMon:
 .loop
 	ld a, [wd11e]
 	cp [hl]
-	jr nz, .nextEntry
-	ld a, c
-	ld [de], a
-	inc de
-.nextEntry
+	jr z, .match
+	; no match, go to next entry
 	inc hl
 	inc hl
 	dec b
 	jr nz, .loop
+	; no match and finished searching through map entries
 	dec hl
 	pop bc
 	ret
+.match
+	ld a, c
+	ld [de], a
+	inc de
+	pop bc
+	ret ; if given pokemon is found, end the loop (no need for map duplicates)
 
 CheckHasGrassCaveWater:
 	ld hl, WildDataPointers
@@ -178,19 +183,6 @@ CheckMapForMonMatch:
 	jr nz, .loop
 	dec hl
 	and a
-	ret
-
-SkipThroughMap:
-	push bc
-	inc hl
-	ld b, NUM_WILDMONS
-.loop
-	inc hl
-	inc hl
-	dec b
-	jr nz, .loop
-	dec hl
-	pop bc
 	ret
 
 INCLUDE "data/wild/grass_water.asm"
