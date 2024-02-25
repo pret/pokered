@@ -386,7 +386,6 @@ INCLUDE "audio/music/routes3.asm"
 INCLUDE "audio/music/routes4.asm"
 INCLUDE "audio/music/indigoplateau.asm"
 INCLUDE "audio/music/pallettown.asm"
-INCLUDE "audio/music/unusedsong.asm"
 INCLUDE "audio/music/cities1.asm"
 INCLUDE "audio/sfx/get_item1_1.asm"
 INCLUDE "audio/music/museumguy.asm"
@@ -470,6 +469,7 @@ INCLUDE "audio/music/tcg2/fort2.asm"
 INCLUDE "audio/music/tcg2/herecomesteamgr.asm"
 INCLUDE "audio/music/unused_beta_tracks/battle_victory_guide.asm"
 INCLUDE "audio/music/unused_beta_tracks/rest_at_house.asm"
+INCLUDE "audio/music/unusedsong.asm"
 
 SECTION "New Engine 3 SFX", ROMX
 
