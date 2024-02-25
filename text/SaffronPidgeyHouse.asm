@@ -1,4 +1,5 @@
-_SaffronPidgeyHouseBrunetteGirlText::
+
+_SaffronPidgeyHousePaperText:: ; PureRGBnote: FIXED: this text entry was originally mixed up with the text for talking to the girl.
 	text "Thank you for"
 	line "writing. I hope"
 	cont "to see you soon!"
@@ -17,7 +18,7 @@ _SaffronPidgeyHouseYoungsterText::
 	cont "her a # DOLL!"
 	done
 
-_SaffronPidgeyHousePaperText::
+_SaffronPidgeyHouseBrunetteGirlText:: ; PureRGBnote: FIXED: this text entry was originally mixed up with the text for the letter.
 	text "I was given a PP"
 	line "UP as a gift."
 
