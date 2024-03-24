@@ -459,4 +459,6 @@ The version-specific visuals of japanese pokemon green were added into PureGreen
 - I will not make a version without the move changes
 - I will not make a version without learnset / TM / trainer party changes
 - I will not add beta pokemon to the game (just about all of the decent beta mons for gen 1 were already repurposed as official pokemon in later games)
+- I will not add a "Caught Pokemon" indicator in battle. Why? It changes the feel of the game. You don't really have to ever look at the pokedex if this feature is introduced. Also, I think it's a hallmark of gen 1 to not have this feature and to memorize which pokemon you have caught already.
+- I will not add a "Move Relearner". This really changes the feel of gen 1, where you have to think carefully about deleting learnset moves. Don't worry, most great moves can be relearned via TMs anyway. The excellent moves are later in learnsets, so it's unlikely you'll miss them.
 - If you want less changes but still the quality of life / bugfix stuff, I'd recommend taking a look at the romhack called shinpokered.
