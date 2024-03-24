@@ -224,6 +224,7 @@ HoFLoadPlayerPics:
 	ld de, vBackPic
 	call InterlaceMergeSpriteBuffers
 	ld c, $1
+	jr HoFLoadMonPlayerPicTileIDs
 .swSprite
 	ld de, RedPicBackSW
 	ld a, BANK(RedPicBackSW)
