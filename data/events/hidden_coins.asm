@@ -3,6 +3,7 @@ MACRO hidden_coin
 ENDM
 
 HiddenCoinCoords:
+	table_width 3, HiddenCoinCoords
 	; map id, x, y
 	hidden_coin GAME_CORNER,  0,  8
 	hidden_coin GAME_CORNER,  1, 16
@@ -16,4 +17,5 @@ HiddenCoinCoords:
 	hidden_coin GAME_CORNER, 11,  7
 	hidden_coin GAME_CORNER, 15,  8
 	hidden_coin GAME_CORNER, 12, 15
+	assert_max_table_length MAX_HIDDEN_COINS
 	db -1 ; end
