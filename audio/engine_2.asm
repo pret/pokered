@@ -842,7 +842,8 @@ Audio2_note_pitch:
 	bit BIT_PERFECT_PITCH, [hl] ; has toggle_perfect_pitch been used?
 	jr z, .skipFrequencyInc
 	inc e                       ; if yes, increment the frequency by 1
-	jr nc, .skipFrequencyInc
+	jr nc, .skipFrequencyInc    ; Likely a mistake, because `inc` does not set flag C.
+	                            ; Fortunately this does not seem to affect any notes that actually occur.
 	inc d
 .skipFrequencyInc
 	ld hl, wChannelFrequencyLowBytes
