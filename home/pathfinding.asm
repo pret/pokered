@@ -40,7 +40,7 @@ MoveSprite_::
 	ld [wSimulatedJoypadStatesEnd], a
 	dec a
 	ld [wJoyIgnore], a
-	ld [wUnusedCD3A], a
+	ld [wUnusedOverrideSimulatedJoypadStatesIndex], a
 	ret
 
 ; divides [hDividend2] by [hDivisor2] and stores the quotient in [hQuotient2]
