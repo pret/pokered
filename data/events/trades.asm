@@ -21,7 +21,16 @@ TradeMons:
 	assert_table_length NUM_NPC_TRADES
 
 ; PureRGBnote: ADDED: some received pokemon use alternate color palettes if the feature is enabled
-
 TradeMonPalettes:
-	db %10101100
-	db %01
+	bit_array TradeMonPalettes
+	dbit FALSE ; PONYTA route 11
+	dbit FALSE ; GRIMER route 2
+	dbit TRUE ; MAGNETON rocket basement
+	dbit TRUE ; MACHOP cinnabar lab
+	dbit FALSE ; GASTLY vermilion city
+	dbit TRUE ; LICKITUNG route 18
+	dbit FALSE ; SEEL cerulean city
+	dbit TRUE ; ZUBAT cinnabar lab
+	dbit TRUE ; SNORLAX cinnabar lab
+	dbit FALSE ; TANGELA route 5
+	end_bit_array NUM_NPC_TRADES

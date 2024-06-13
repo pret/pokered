@@ -166,6 +166,7 @@ GetTradeMonPalette:
 	cp 8
 	jr c, .firstByte
 	inc hl
+	sub 8
 .firstByte
 	and a
 	ld b, a
