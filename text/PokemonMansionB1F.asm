@@ -70,7 +70,7 @@ _Mansion4AfterBattleText4::
 	done
 
 _PokemonMansionB1FDiaryText::
-	text "Diary; Sept. 1"
+	text "Diary: Sept. 1"
 	line "MEWTWO is far too"
 	cont "powerful."
 
