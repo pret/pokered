@@ -17830,7 +17830,7 @@ SRAM bank #3:
 
 WRAM0 bank #0:
 	SECTION: $c000-$c0ff ($0100 bytes) ["Audio RAM"]
-	         $c000 = wUnusedC000
+	         $c000 = wUnusedMusicByte
 	         $c001 = wSoundID
 	         $c002 = wMuteAudioAndPauseMusic
 	         $c003 = wDisableChannelOutputWhenSfxEnds
@@ -18675,12 +18675,12 @@ WRAM0 bank #0:
 	         $cd33 = wEnemyMonEvasionMod
 	         $cd34 = wInGameTradeReceiveMonSpecies
 	         $cd36 = wEnemyMonStatModsEnd
-	         $cd37 = wUnusedCD37
 	         $cd37 = wFilteredBagItemsCount
+	         $cd37 = wUnusedLinkMenuByte
 	         $cd37 = wNPCMovementDirections2Index
 	         $cd38 = wSimulatedJoypadStatesIndex
-	         $cd39 = wUnusedCD39
-	         $cd3a = wUnusedCD3A
+	         $cd39 = wUnusedSimulatedJoypadStatesMask
+	         $cd3a = wUnusedOverrideSimulatedJoypadStatesIndex
 	         $cd3b = wOverrideSimulatedJoypadStatesMask
 	         $cd3d = wCoordIndex
 	         $cd3d = wSwappedMenuItem
@@ -18700,7 +18700,6 @@ WRAM0 bank #0:
 	         $cd3d = wBoxNumString
 	         $cd3d = wWhichTownMapLocation
 	         $cd3d = wRivalStarterTemp
-	         $cd3d = wUnusedCD3D
 	         $cd3d = wInwardSpiralUpdateScreenCounter
 	         $cd3d = wHoFTeamIndex
 	         $cd3d = wFallingObjectsMovementData
@@ -18712,6 +18711,7 @@ WRAM0 bank #0:
 	         $cd3d = wPriceTemp
 	         $cd3d = wHoFMonSpecies
 	         $cd3d = wWereAnyMonsAsleep
+	         $cd3d = wUnusedCreditsByte
 	         $cd3d = wPlayerSpinInPlaceAnimFrameDelay
 	         $cd3d = wTrainerSpriteOffset
 	         $cd3d = wMoveDownSmallStarsOAMCount
@@ -18879,7 +18879,7 @@ WRAM0 bank #0:
 	         $cf70 = wGymLeaderName
 	         $cf7b = wItemList
 	         $cf8b = wListPointer
-	         $cf8d = wUnusedCF8D
+	         $cf8d = wUnusedNamePointer
 	         $cf8f = wItemPrices
 	         $cf91 = wcf91
 	         $cf92 = wWhichPokemon
@@ -19045,9 +19045,9 @@ WRAM0 bank #0:
 	         $d08a = wFallingObjectMovementByte
 	         $d08a = wTradedMonMovingRight
 	         $d08a = wNumShootingBalls
-	         $d08a = wUnusedD08A
 	         $d08a = wOptionsInitialized
 	         $d08a = wNewSlotMachineBallTile
+	         $d08a = wUnusedWaterDropletsByte
 	         $d08a = wSpiralBallsBaseY
 	         $d08a = wFlashScreenLongCounter
 	         $d08b = wSubAnimTransform
@@ -19062,8 +19062,8 @@ WRAM0 bank #0:
 	         $d096 = wSlotMachineAllowMatchesCounter
 	         $d096 = wSubAnimSubEntryAddr
 	         $d09a = wOutwardSpiralTileMapPointer
+	         $d09b = wUnusedMoveAnimByte
 	         $d09b = wTownMapSpriteBlinkingEnabled
-	         $d09b = wUnusedD09B
 	         $d09b = wPartyMenuAnimMonEnabled
 	         $d09c = wFBDestAddr
 	         $d09e = wFBMode
@@ -19120,7 +19120,7 @@ WRAM0 bank #0:
 	         $d0dc = wMoves
 	         $d0e0 = wMoveNum
 	         $d0e1 = wMovesString
-	         $d119 = wUnusedD119
+	         $d119 = wUnusedCurMapTilesetCopy
 	         $d11a = wWalkBikeSurfStateCopy
 	         $d11b = wInitListType
 	         $d11c = wCapturedMonSpecies
@@ -19171,7 +19171,7 @@ WRAM0 bank #0:
 	         $d148 = wLinkBattleRandomNumberList
 	         $d152 = wSerialPlayerDataBlock
 	         $d152 = wPseudoItemID
-	         $d153 = wUnusedD153
+	         $d153 = wUnusedAlreadyOwnedFlag
 	         $d156 = wEvoStoneItemID
 	         $d157 = wSavedNPCMovementDirections2Index
 	         $d158 = wPlayerName
@@ -19376,7 +19376,7 @@ WRAM0 bank #0:
 	         $d363 = wYBlockCoord
 	         $d364 = wXBlockCoord
 	         $d365 = wLastMap
-	         $d366 = wUnusedD366
+	         $d366 = wUnusedLastMapWidth
 	         $d367 = wCurMapHeader
 	         $d367 = wCurMapTileset
 	         $d368 = wCurMapHeight
@@ -19453,7 +19453,7 @@ WRAM0 bank #0:
 	         $d53b = wBoxItems
 	         $d5a0 = wCurrentBoxNum
 	         $d5a2 = wNumHoFTeams
-	         $d5a3 = wUnusedD5A3
+	         $d5a3 = wUnusedMapVariable
 	         $d5a4 = wPlayerCoins
 	         $d5a6 = wMissableObjectFlags
 	         $d5c6 = wMissableObjectFlagsEnd
@@ -19573,11 +19573,11 @@ WRAM0 bank #0:
 	         $d718 = wBoulderSpriteIndex
 	         $d719 = wLastBlackoutMap
 	         $d71a = wDestinationMap
-	         $d71b = wUnusedD71B
+	         $d71b = wUnusedPlayerDataByte
 	         $d71c = wTileInFrontOfBoulderAndBoulderCollisionResult
 	         $d71d = wDungeonWarpDestinationMap
 	         $d71e = wWhichDungeonWarp
-	         $d71f = wUnusedD71F
+	         $d71f = wUnusedCardKeyGateID
 	         $d728 = wd728
 	         $d72a = wBeatGymFlags
 	         $d72c = wd72c
@@ -19777,7 +19777,6 @@ WRAM0 bank #0:
 	         $da25 = wEnemyMon6Nick
 	         $da30 = wTrainerHeaderPtr
 	         $da38 = wOpponentAfterWrongAnswer
-	         $da38 = wUnusedDA38
 	         $da39 = wCurMapScript
 	         $da41 = wPlayTimeHours
 	         $da42 = wPlayTimeMaxed

@@ -17501,7 +17501,7 @@
 03:b5ea sBox12
 03:ba4c sBank3AllBoxesChecksum
 03:ba4d sBank3IndividualBoxChecksums
-00:c000 wUnusedC000
+00:c000 wUnusedMusicByte
 00:c001 wSoundID
 00:c002 wMuteAudioAndPauseMusic
 00:c003 wDisableChannelOutputWhenSfxEnds
@@ -18341,12 +18341,12 @@
 00:cd33 wEnemyMonEvasionMod
 00:cd34 wInGameTradeReceiveMonSpecies
 00:cd36 wEnemyMonStatModsEnd
-00:cd37 wUnusedCD37
 00:cd37 wFilteredBagItemsCount
+00:cd37 wUnusedLinkMenuByte
 00:cd37 wNPCMovementDirections2Index
 00:cd38 wSimulatedJoypadStatesIndex
-00:cd39 wUnusedCD39
-00:cd3a wUnusedCD3A
+00:cd39 wUnusedSimulatedJoypadStatesMask
+00:cd3a wUnusedOverrideSimulatedJoypadStatesIndex
 00:cd3b wOverrideSimulatedJoypadStatesMask
 00:cd3d wCoordIndex
 00:cd3d wSwappedMenuItem
@@ -18366,7 +18366,6 @@
 00:cd3d wBoxNumString
 00:cd3d wWhichTownMapLocation
 00:cd3d wRivalStarterTemp
-00:cd3d wUnusedCD3D
 00:cd3d wInwardSpiralUpdateScreenCounter
 00:cd3d wHoFTeamIndex
 00:cd3d wFallingObjectsMovementData
@@ -18378,6 +18377,7 @@
 00:cd3d wPriceTemp
 00:cd3d wHoFMonSpecies
 00:cd3d wWereAnyMonsAsleep
+00:cd3d wUnusedCreditsByte
 00:cd3d wPlayerSpinInPlaceAnimFrameDelay
 00:cd3d wTrainerSpriteOffset
 00:cd3d wMoveDownSmallStarsOAMCount
@@ -18545,7 +18545,7 @@
 00:cf70 wGymLeaderName
 00:cf7b wItemList
 00:cf8b wListPointer
-00:cf8d wUnusedCF8D
+00:cf8d wUnusedNamePointer
 00:cf8f wItemPrices
 00:cf91 wcf91
 00:cf92 wWhichPokemon
@@ -18711,9 +18711,9 @@
 00:d08a wFallingObjectMovementByte
 00:d08a wTradedMonMovingRight
 00:d08a wNumShootingBalls
-00:d08a wUnusedD08A
 00:d08a wOptionsInitialized
 00:d08a wNewSlotMachineBallTile
+00:d08a wUnusedWaterDropletsByte
 00:d08a wSpiralBallsBaseY
 00:d08a wFlashScreenLongCounter
 00:d08b wSubAnimTransform
@@ -18728,8 +18728,8 @@
 00:d096 wSlotMachineAllowMatchesCounter
 00:d096 wSubAnimSubEntryAddr
 00:d09a wOutwardSpiralTileMapPointer
+00:d09b wUnusedMoveAnimByte
 00:d09b wTownMapSpriteBlinkingEnabled
-00:d09b wUnusedD09B
 00:d09b wPartyMenuAnimMonEnabled
 00:d09c wFBDestAddr
 00:d09e wFBMode
@@ -18786,7 +18786,7 @@
 00:d0dc wMoves
 00:d0e0 wMoveNum
 00:d0e1 wMovesString
-00:d119 wUnusedD119
+00:d119 wUnusedCurMapTilesetCopy
 00:d11a wWalkBikeSurfStateCopy
 00:d11b wInitListType
 00:d11c wCapturedMonSpecies
@@ -18837,7 +18837,7 @@
 00:d148 wLinkBattleRandomNumberList
 00:d152 wSerialPlayerDataBlock
 00:d152 wPseudoItemID
-00:d153 wUnusedD153
+00:d153 wUnusedAlreadyOwnedFlag
 00:d156 wEvoStoneItemID
 00:d157 wSavedNPCMovementDirections2Index
 00:d158 wPlayerName
@@ -19040,7 +19040,7 @@
 00:d363 wYBlockCoord
 00:d364 wXBlockCoord
 00:d365 wLastMap
-00:d366 wUnusedD366
+00:d366 wUnusedLastMapWidth
 00:d367 wCurMapHeader
 00:d367 wCurMapTileset
 00:d368 wCurMapHeight
@@ -19117,7 +19117,7 @@
 00:d53b wBoxItems
 00:d5a0 wCurrentBoxNum
 00:d5a2 wNumHoFTeams
-00:d5a3 wUnusedD5A3
+00:d5a3 wUnusedMapVariable
 00:d5a4 wPlayerCoins
 00:d5a6 wMissableObjectFlags
 00:d5c6 wMissableObjectFlagsEnd
@@ -19237,11 +19237,11 @@
 00:d718 wBoulderSpriteIndex
 00:d719 wLastBlackoutMap
 00:d71a wDestinationMap
-00:d71b wUnusedD71B
+00:d71b wUnusedPlayerDataByte
 00:d71c wTileInFrontOfBoulderAndBoulderCollisionResult
 00:d71d wDungeonWarpDestinationMap
 00:d71e wWhichDungeonWarp
-00:d71f wUnusedD71F
+00:d71f wUnusedCardKeyGateID
 00:d728 wd728
 00:d72a wBeatGymFlags
 00:d72c wd72c
@@ -19441,7 +19441,6 @@
 00:da25 wEnemyMon6Nick
 00:da30 wTrainerHeaderPtr
 00:da38 wOpponentAfterWrongAnswer
-00:da38 wUnusedDA38
 00:da39 wCurMapScript
 00:da41 wPlayTimeHours
 00:da42 wPlayTimeMaxed
