@@ -88,9 +88,9 @@ GetName::
 	call CopyData
 .gotPtr
 	ld a, e
-	ld [wUnusedCF8D], a
+	ld [wUnusedNamePointer], a
 	ld a, d
-	ld [wUnusedCF8D + 1], a
+	ld [wUnusedNamePointer + 1], a
 	pop de
 	pop bc
 	pop hl

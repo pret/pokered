@@ -150,7 +150,7 @@ LinkMenu:
 	ld de, CableClubOptionsText
 	call PlaceString
 	xor a
-	ld [wUnusedCD37], a
+	ld [wUnusedLinkMenuByte], a
 	ld [wd72d], a
 	ld hl, wTopMenuItemY
 	ld a, $7

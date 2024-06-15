@@ -1342,7 +1342,7 @@ Audio1_PlaySound::
 
 .playMusic
 	xor a
-	ld [wUnusedC000], a
+	ld [wUnusedMusicByte], a
 	ld [wDisableChannelOutputWhenSfxEnds], a
 	ld [wMusicTempo + 1], a
 	ld [wMusicWaveInstrument], a
@@ -1583,7 +1583,7 @@ Audio1_PlaySound::
 	ld a, $77
 	ldh [rNR50], a ; full volume
 	xor a
-	ld [wUnusedC000], a
+	ld [wUnusedMusicByte], a
 	ld [wDisableChannelOutputWhenSfxEnds], a
 	ld [wMuteAudioAndPauseMusic], a
 	ld [wMusicTempo + 1], a
