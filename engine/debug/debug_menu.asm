@@ -55,7 +55,7 @@ IF DEF(_DEBUG)
 	jp z, TestBattle
 
 	; DEBUG
-	ld hl, wd732
+	ld hl, wStatusFlags6
 	set BIT_DEBUG_MODE, [hl]
 	jp StartNewGameDebug
 
@@ -80,7 +80,7 @@ TestBattle: ; unreferenced except in _DEBUG
 	ld a, 1 << BIT_EARTHBADGE
 	ld [wObtainedBadges], a
 
-	ld hl, wFlags_D733
+	ld hl, wStatusFlags7
 	set BIT_TEST_BATTLE, [hl]
 
 	; wNumBagItems and wBagItems are not initialized here,
@@ -100,7 +100,7 @@ TestBattle: ; unreferenced except in _DEBUG
 	ld a, RHYDON
 	ld [wcf91], a
 	ld a, 20
-	ld [wCurEnemyLVL], a
+	ld [wCurEnemyLevel], a
 	xor a
 	ld [wMonDataLocation], a
 	ld [wCurMap], a

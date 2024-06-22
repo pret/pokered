@@ -1,4 +1,4 @@
-; only used for setting bit 2 of wd736 upon entering a new map
+; only used for setting BIT_STANDING_ON_WARP of wMovementFlags upon entering a new map
 IsPlayerStandingOnWarp::
 	ld a, [wNumberOfWarps]
 	and a
@@ -18,8 +18,8 @@ IsPlayerStandingOnWarp::
 	ld [wDestinationWarpID], a
 	ld a, [hl] ; target map
 	ldh [hWarpDestinationMap], a
-	ld hl, wd736
-	set 2, [hl] ; standing on warp flag
+	ld hl, wMovementFlags
+	set BIT_STANDING_ON_WARP, [hl]
 	ret
 .nextWarp1
 	inc hl
@@ -32,8 +32,8 @@ IsPlayerStandingOnWarp::
 	ret
 
 CheckForceBikeOrSurf::
-	ld hl, wd732
-	bit 5, [hl]
+	ld hl, wStatusFlags6
+	bit BIT_ALWAYS_ON_BIKE, [hl]
 	ret nz
 	ld hl, ForcedBikeOrSurfMaps
 	ld a, [wYCoord]
@@ -45,14 +45,14 @@ CheckForceBikeOrSurf::
 .loop
 	ld a, [hli]
 	cp $ff
-	ret z ;if we reach FF then it's not part of the list
-	cp d ;compare to current map
+	ret z ; if we reach FF then it's not part of the list
+	cp d ; compare to current map
 	jr nz, .incorrectMap
 	ld a, [hli]
-	cp b ;compare y-coord
+	cp b ; compare y-coord
 	jr nz, .incorrectY
 	ld a, [hli]
-	cp c ;compare x-coord
+	cp c ; compare x-coord
 	jr nz, .loop ; incorrect x-coord, check next item
 	ld a, [wCurMap]
 	cp SEAFOAM_ISLANDS_B3F
@@ -64,9 +64,8 @@ CheckForceBikeOrSurf::
 	ld a, SCRIPT_SEAFOAMISLANDSB4F_MOVE_OBJECT
 	ld [wSeafoamIslandsB4FCurScript], a
 	jr z, .forceSurfing
-	;force bike riding
-	ld hl, wd732
-	set 5, [hl]
+	ld hl, wStatusFlags6
+	set BIT_ALWAYS_ON_BIKE, [hl]
 	ld a, $1
 	ld [wWalkBikeSurfState], a
 	ld [wWalkBikeSurfStateCopy], a
@@ -207,8 +206,8 @@ IsPlayerStandingOnDoorTileOrWarpTile::
 	lda_coord 8, 9
 	call IsInArray
 	jr nc, .done
-	ld hl, wd736
-	res 2, [hl]
+	ld hl, wMovementFlags
+	res BIT_STANDING_ON_WARP, [hl]
 .done
 	pop bc
 	pop de

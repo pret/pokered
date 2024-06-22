@@ -142,12 +142,12 @@ StartMenu_Pokemon::
 	jp .loop
 .canFly
 	call ChooseFlyDestination
-	ld a, [wd732]
-	bit 3, a ; did the player decide to fly?
+	ld a, [wStatusFlags6]
+	bit BIT_FLY_WARP, a
 	jp nz, .goBackToMap
 	call LoadFontTilePatterns
-	ld hl, wd72e
-	set 1, [hl]
+	ld hl, wStatusFlags4
+	set BIT_UNKNOWN_4_1, [hl]
 	jp StartMenu_Pokemon
 .cut
 	bit BIT_CASCADEBADGE, a
@@ -161,9 +161,9 @@ StartMenu_Pokemon::
 	bit BIT_SOULBADGE, a
 	jp z, .newBadgeRequired
 	farcall IsSurfingAllowed
-	ld hl, wd728
-	bit 1, [hl]
-	res 1, [hl]
+	ld hl, wStatusFlags1
+	bit BIT_SURF_ALLOWED, [hl]
+	res BIT_SURF_ALLOWED, [hl]
 	jp z, .loop
 	ld a, SURFBOARD
 	ld [wcf91], a
@@ -177,7 +177,7 @@ StartMenu_Pokemon::
 .strength
 	bit BIT_RAINBOWBADGE, a
 	jp z, .newBadgeRequired
-	predef PrintStrengthTxt
+	predef PrintStrengthText
 	call GBPalWhiteOutWithDelay3
 	jp .goBackToMap
 .flash
@@ -214,12 +214,12 @@ StartMenu_Pokemon::
 .canTeleport
 	ld hl, .warpToLastPokemonCenterText
 	call PrintText
-	ld hl, wd732
-	set 3, [hl]
-	set 6, [hl]
-	ld hl, wd72e
-	set 1, [hl]
-	res 4, [hl]
+	ld hl, wStatusFlags6
+	set BIT_FLY_WARP, [hl]
+	set BIT_ESCAPE_WARP, [hl]
+	ld hl, wStatusFlags4
+	set BIT_UNKNOWN_4_1, [hl]
+	res BIT_NO_BATTLES, [hl]
 	ld c, 60
 	call DelayFrames
 	call GBPalWhiteOutWithDelay3
@@ -371,8 +371,8 @@ StartMenu_Item::
 	ld a, [wcf91]
 	cp BICYCLE
 	jr nz, .notBicycle2
-	ld a, [wd732]
-	bit 5, a
+	ld a, [wStatusFlags6]
+	bit BIT_ALWAYS_ON_BIKE, a
 	jr z, .useItem_closeMenu
 	ld hl, CannotGetOffHereText
 	call PrintText
@@ -639,8 +639,8 @@ TrainerInfo_DrawVerticalLine:
 	ret
 
 StartMenu_SaveReset::
-	ld a, [wd72e]
-	bit 6, a ; is the player using the link feature?
+	ld a, [wStatusFlags4]
+	bit BIT_LINK_CONNECTED, a
 	jp nz, Init
 	predef SaveSAV ; save the game
 	call LoadScreenTilesFromBuffer2 ; restore saved screen

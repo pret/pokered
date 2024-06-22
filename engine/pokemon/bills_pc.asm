@@ -93,8 +93,8 @@ PKMNLeaguePCText: db "<PKMN>LEAGUE@"
 LogOffPCText:     db "LOG OFF@"
 
 BillsPC_::
-	ld hl, wd730
-	set 6, [hl]
+	ld hl, wStatusFlags5
+	set BIT_NO_TEXT_DELAY, [hl]
 	xor a
 	ld [wParentMenuItem], a
 	inc a               ; MONSTER_NAME
@@ -102,8 +102,8 @@ BillsPC_::
 	call LoadHpBarAndStatusTilePatterns
 	ld a, [wListScrollOffset]
 	push af
-	ld a, [wFlags_0xcd60]
-	bit 3, a ; accessing Bill's PC through another PC?
+	ld a, [wMiscFlags]
+	bit BIT_USING_GENERIC_PC, a
 	jr nz, BillsPCMenu
 ; accessing it directly
 	ld a, SFX_TURN_ON_PC
@@ -186,8 +186,8 @@ BillsPCMenu:
 	jp z, BillsPCChangeBox ; change box
 
 ExitBillsPC:
-	ld a, [wFlags_0xcd60]
-	bit 3, a ; accessing Bill's PC through another PC?
+	ld a, [wMiscFlags]
+	bit BIT_USING_GENERIC_PC, a
 	jr nz, .next
 ; accessing it directly
 	call LoadTextBoxTilePatterns
@@ -195,13 +195,13 @@ ExitBillsPC:
 	call PlaySound
 	call WaitForSoundToFinish
 .next
-	ld hl, wFlags_0xcd60
-	res 5, [hl]
+	ld hl, wMiscFlags
+	res BIT_NO_MENU_BUTTON_SOUND, [hl]
 	call LoadScreenTilesFromBuffer2
 	pop af
 	ld [wListScrollOffset], a
-	ld hl, wd730
-	res 6, [hl]
+	ld hl, wStatusFlags5
+	res BIT_NO_TEXT_DELAY, [hl]
 	ret
 
 BillsPCDeposit:

@@ -19,8 +19,8 @@ _Joypad::
 	ld a, b
 	ldh [hJoyLast], a
 
-	ld a, [wd730]
-	bit 5, a
+	ld a, [wStatusFlags5]
+	bit BIT_DISABLE_JOYPAD, a
 	jr nz, DiscardButtonPresses
 
 	ldh a, [hJoyLast]

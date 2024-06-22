@@ -172,11 +172,11 @@ RedrawPartyMenu_::
 	ld b, SET_PAL_PARTY_MENU
 	call RunPaletteCommand
 .printMessage
-	ld hl, wd730
+	ld hl, wStatusFlags5
 	ld a, [hl]
 	push af
 	push hl
-	set 6, [hl] ; turn off letter printing delay
+	set BIT_NO_TEXT_DELAY, [hl]
 	ld a, [wPartyMenuTypeOrMessageID] ; message ID
 	cp FIRST_PARTY_MENU_TEXT_ID
 	jr nc, .printItemUseMessage

@@ -24,8 +24,8 @@ LinkCableHelp::
 	ld a, 1
 	ld [wTopMenuItemX], a
 .linkHelpLoop
-	ld hl, wd730
-	set 6, [hl]
+	ld hl, wStatusFlags5
+	set BIT_NO_TEXT_DELAY, [hl]
 	hlcoord 0, 0
 	ld b, 8
 	ld c, 13
@@ -41,8 +41,8 @@ LinkCableHelp::
 	ld a, [wCurrentMenuItem]
 	cp 3 ; pressed a on "STOP READING"
 	jr z, .exit
-	ld hl, wd730
-	res 6, [hl]
+	ld hl, wStatusFlags5
+	res BIT_NO_TEXT_DELAY, [hl]
 	ld hl, LinkCableInfoTexts
 	add a
 	ld d, 0
@@ -54,8 +54,8 @@ LinkCableHelp::
 	call PrintText
 	jp .linkHelpLoop
 .exit
-	ld hl, wd730
-	res 6, [hl]
+	ld hl, wStatusFlags5
+	res BIT_NO_TEXT_DELAY, [hl]
 	call LoadScreenTilesFromBuffer1
 	jp TextScriptEnd
 
@@ -108,8 +108,8 @@ ViridianSchoolBlackboard::
 	ld a, 1
 	ld [wTopMenuItemX], a
 .blackboardLoop
-	ld hl, wd730
-	set 6, [hl]
+	ld hl, wStatusFlags5
+	set BIT_NO_TEXT_DELAY, [hl]
 	hlcoord 0, 0
 	lb bc, 6, 10
 	call TextBoxBorder
@@ -158,8 +158,8 @@ ViridianSchoolBlackboard::
 	jr z, .exitBlackboard
 	; we must have pressed a on a status condition
 	; so print the text
-	ld hl, wd730
-	res 6, [hl]
+	ld hl, wStatusFlags5
+	res BIT_NO_TEXT_DELAY, [hl]
 	ld hl, ViridianBlackboardStatusPointers
 	add a
 	ld d, 0
@@ -171,8 +171,8 @@ ViridianSchoolBlackboard::
 	call PrintText
 	jp .blackboardLoop
 .exitBlackboard
-	ld hl, wd730
-	res 6, [hl]
+	ld hl, wStatusFlags5
+	res BIT_NO_TEXT_DELAY, [hl]
 	call LoadScreenTilesFromBuffer1
 	jp TextScriptEnd
 

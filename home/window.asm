@@ -95,8 +95,8 @@ HandleMenuInput_::
 	jr z, .skipPlayingSound
 .AButtonOrBButtonPressed
 	push hl
-	ld hl, wFlags_0xcd60
-	bit 5, [hl]
+	ld hl, wMiscFlags
+	bit BIT_NO_MENU_BUTTON_SOUND, [hl]
 	pop hl
 	jr nz, .skipPlayingSound
 	ld a, SFX_PRESS_AB

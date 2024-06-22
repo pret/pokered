@@ -1,14 +1,14 @@
 PlayerPC::
-	ld hl, wd730
-	set 6, [hl]
+	ld hl, wStatusFlags5
+	set BIT_NO_TEXT_DELAY, [hl]
 	ld a, ITEM_NAME
 	ld [wNameListType], a
 	call SaveScreenTilesToBuffer1
 	xor a
 	ld [wBagSavedMenuItem], a
 	ld [wParentMenuItem], a
-	ld a, [wFlags_0xcd60]
-	bit 3, a ; accessing player's PC through another PC?
+	ld a, [wMiscFlags]
+	bit BIT_USING_GENERIC_PC, a
 	jr nz, PlayerPCMenu
 ; accessing it directly
 	ld a, SFX_TURN_ON_PC
@@ -19,8 +19,8 @@ PlayerPC::
 PlayerPCMenu:
 	ld a, [wParentMenuItem]
 	ld [wCurrentMenuItem], a
-	ld hl, wFlags_0xcd60
-	set 5, [hl]
+	ld hl, wMiscFlags
+	set BIT_NO_MENU_BUTTON_SOUND, [hl]
 	call LoadScreenTilesFromBuffer2
 	hlcoord 0, 0
 	ld b, $8
@@ -63,22 +63,22 @@ PlayerPCMenu:
 	jp z, PlayerPCToss
 
 ExitPlayerPC:
-	ld a, [wFlags_0xcd60]
-	bit 3, a ; accessing player's PC through another PC?
+	ld a, [wMiscFlags]
+	bit BIT_USING_GENERIC_PC, a
 	jr nz, .next
 ; accessing it directly
 	ld a, SFX_TURN_OFF_PC
 	call PlaySound
 	call WaitForSoundToFinish
 .next
-	ld hl, wFlags_0xcd60
-	res 5, [hl]
+	ld hl, wMiscFlags
+	res BIT_NO_MENU_BUTTON_SOUND, [hl]
 	call LoadScreenTilesFromBuffer2
 	xor a
 	ld [wListScrollOffset], a
 	ld [wBagSavedMenuItem], a
-	ld hl, wd730
-	res 6, [hl]
+	ld hl, wStatusFlags5
+	res BIT_NO_TEXT_DELAY, [hl]
 	xor a
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ret

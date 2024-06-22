@@ -20,7 +20,7 @@ GivePokemon::
 	ld a, b
 	ld [wcf91], a
 	ld a, c
-	ld [wCurEnemyLVL], a
+	ld [wCurEnemyLevel], a
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a
 	farjp _GivePokemon

@@ -83,8 +83,8 @@ DisplayNameRaterScreen::
 
 DisplayNamingScreen:
 	push hl
-	ld hl, wd730
-	set 6, [hl]
+	ld hl, wStatusFlags5
+	set BIT_NO_TEXT_DELAY, [hl]
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	call UpdateSprites
@@ -167,8 +167,8 @@ DisplayNamingScreen:
 	call GBPalNormal
 	xor a
 	ld [wAnimCounter], a
-	ld hl, wd730
-	res 6, [hl]
+	ld hl, wStatusFlags5
+	res BIT_NO_TEXT_DELAY, [hl]
 	ld a, [wIsInBattle]
 	and a
 	jp z, LoadTextBoxTilePatterns

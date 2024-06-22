@@ -812,7 +812,7 @@ SwitchAndTeleportEffect:
 	ld a, [wIsInBattle]
 	dec a
 	jr nz, .notWildBattle1
-	ld a, [wCurEnemyLVL]
+	ld a, [wCurEnemyLevel]
 	ld b, a
 	ld a, [wBattleMonLevel]
 	cp b ; is the player's level greater than the enemy's level?
@@ -856,7 +856,7 @@ SwitchAndTeleportEffect:
 	jr nz, .notWildBattle2
 	ld a, [wBattleMonLevel]
 	ld b, a
-	ld a, [wCurEnemyLVL]
+	ld a, [wCurEnemyLevel]
 	cp b
 	jr nc, .enemyMoveWasSuccessful
 	add b

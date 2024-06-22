@@ -7,7 +7,7 @@ SetDebugNewGameParty: ; unreferenced except in _DEBUG
 	ld [wcf91], a
 	inc de
 	ld a, [de]
-	ld [wCurEnemyLVL], a
+	ld [wCurEnemyLevel], a
 	inc de
 	call AddPartyMon
 	jr .loop

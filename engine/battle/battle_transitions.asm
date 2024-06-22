@@ -105,7 +105,7 @@ GetBattleTransitionID_CompareLevels:
 	ld a, [hl]
 	add $3
 	ld e, a
-	ld a, [wCurEnemyLVL]
+	ld a, [wCurEnemyLevel]
 	sub e
 	jr nc, .highLevelEnemy
 	res 1, c

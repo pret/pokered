@@ -399,8 +399,8 @@ NEXTU
 wSimulatedJoypadStatesEnd::
 
 NEXTU
-wBoostExpByExpAll::
-wUnusedCC5B:: db
+wUnusedFlag::
+wBoostExpByExpAll:: db
 
 	ds 59
 
@@ -850,12 +850,7 @@ wLeftGBMonSpecies:: db
 ; in the trade animation, the mon that leaves the right gameboy
 wRightGBMonSpecies:: db
 
-; bit 0: is player engaged by trainer (to avoid being engaged by multiple trainers simultaneously)
-; bit 1: boulder dust animation (from using Strength) pending
-; bit 3: using generic PC
-; bit 5: don't play sound when A or B is pressed in menu
-; bit 6: tried pushing against boulder once (you need to push twice before it will move)
-wFlags_0xcd60:: db
+wMiscFlags:: db
 
 	ds 9
 
@@ -1243,38 +1238,15 @@ wMoveMissed:: db
 
 ; always 0
 wPlayerStatsToDouble:: db
-
 ; always 0
 wPlayerStatsToHalve:: db
 
-; bit 0 - bide
-; bit 1 - thrash / petal dance
-; bit 2 - attacking multiple times (e.g. double kick)
-; bit 3 - flinch
-; bit 4 - charging up for attack
-; bit 5 - using multi-turn move (e.g. wrap)
-; bit 6 - invulnerable to normal attack (using fly/dig)
-; bit 7 - confusion
 wPlayerBattleStatus1:: db
-
-; bit 0 - X Accuracy effect
-; bit 1 - protected by "mist"
-; bit 2 - focus energy effect
-; bit 4 - has a substitute
-; bit 5 - need to recharge
-; bit 6 - rage
-; bit 7 - leech seeded
 wPlayerBattleStatus2:: db
-
-; bit 0 - toxic
-; bit 1 - light screen
-; bit 2 - reflect
-; bit 3 - transformed
 wPlayerBattleStatus3:: db
 
 ; always 0
 wEnemyStatsToDouble:: db
-
 ; always 0
 wEnemyStatsToHalve:: db
 
@@ -1602,7 +1574,7 @@ wTextBoxID:: db
 
 wCurrentMapScriptFlags:: db ; not exactly sure what this is used for, but it seems to be used as a multipurpose temp flag value
 
-wCurEnemyLVL:: db
+wCurEnemyLevel:: db
 
 ; pointer to list of items terminated by $FF
 wItemListPointer:: dw
@@ -1648,7 +1620,7 @@ wSavedSpriteMapX:: db
 wWhichPrize:: db
 
 ; counts downward each frame
-; when it hits 0, bit 5 (ignore input bit) of wd730 is reset
+; when it hits 0, BIT_DISABLE_JOYPAD of wStatusFlags5 is reset
 wIgnoreInputCounter:: db
 
 ; counts down once every step
@@ -1743,26 +1715,12 @@ wPlayerMoney:: ds 3 ; BCD
 
 wRivalName:: ds NAME_LENGTH
 
-; bit 7 = battle animation
-; 0: On
-; 1: Off
-; bit 6 = battle style
-; 0: Shift
-; 1: Set
-; bits 0-3 = text speed (number of frames to delay after printing a letter)
-; 1: Fast
-; 3: Medium
-; 5: Slow
 wOptions:: db
 
 wObtainedBadges:: flag_array NUM_BADGES
 
 	ds 1
 
-; bit 0: If 0, limit the delay to 1 frame. Note that this has no effect if
-;        the delay has been disabled entirely through bit 1 of this variable
-;        or bit 6 of wd730.
-; bit 1: If 0, no delay.
 wLetterPrintingDelayFlags:: db
 
 wPlayerID:: dw
@@ -2097,88 +2055,22 @@ wUnusedCardKeyGateID:: db
 
 	ds 8
 
-; bit 0: using Strength outside of battle
-; bit 1: set by IsSurfingAllowed when surfing's allowed, but the caller resets it after checking the result
-; bit 3: received Old Rod
-; bit 4: received Good Rod
-; bit 5: received Super Rod
-; bit 6: gave one of the Saffron guards a drink
-; bit 7: set by ItemUseCardKey, which is leftover code from a previous implementation of the Card Key
-wd728:: db
-
+wStatusFlags1:: db
 	ds 1
-
-; redundant because it matches wObtainedBadges
-; used to determine whether to show name on statue and in two NPC text scripts
-wBeatGymFlags:: db
-
+wBeatGymFlags:: db ; redundant because it matches wObtainedBadges
 	ds 1
-
-; bit 0: if not set, the 3 minimum steps between random battles have passed
-; bit 1: prevent audio fade out
-wd72c:: db
-
-; This variable is used for temporary flags and as the destination map when
-; warping to the Trade Center or Colosseum.
-; bit 0: sprite facing directions have been initialised in the Trade Center
-; bit 3: do scripted warp (used to warp back to Lavender Town from the top of the pokemon tower)
-; bit 4: on a dungeon warp
-; bit 5: don't make NPCs face the player when spoken to
-; Bits 6 and 7 are set by scripts when starting major battles in the storyline,
-; but they do not appear to affect anything. Bit 6 is reset after all battles
-; and bit 7 is reset after trainer battles (but it's only set before trainer
-; battles anyway).
-wd72d:: db
-
-; bit 0: the player has received Lapras in the Silph Co. building
-; bit 1: set in various places, but doesn't appear to have an effect
-; bit 2: the player has healed pokemon at a pokemon center at least once
-; bit 3: the player has a received a pokemon from Prof. Oak
-; bit 4: disable battles
-; bit 5: set when a battle ends and when the player blacks out in the overworld due to poison
-; bit 6: using the link feature
-; bit 7: set if scripted NPC movement has been initialised
-wd72e:: db
-
+wStatusFlags2:: db
+wCableClubDestinationMap::
+wStatusFlags3:: db
+wStatusFlags4:: db
 	ds 1
-
-; bit 0: NPC sprite being moved by script
-; bit 5: ignore joypad input
-; bit 6: print text with no delay between each letter
-; bit 7: set if joypad states are being simulated in the overworld or an NPC's movement is being scripted
-wd730:: db
-
+wStatusFlags5:: db
 	ds 1
-
-; bit 0: play time being counted
-; bit 1: debug mode (unused and incomplete in non-debug builds)
-; bit 2: the target warp is a fly warp (bit 3 set or blacked out) or a dungeon warp (bit 4 set)
-; bit 3: used warp pad, escape rope, dig, teleport, or fly, so the target warp is a "fly warp"
-; bit 4: jumped into hole (Pokemon Mansion, Seafoam Islands, Victory Road) or went down waterfall (Seafoam Islands), so the target warp is a "dungeon warp"
-; bit 5: currently being forced to ride bike (cycling road)
-; bit 6: map destination is [wLastBlackoutMap] (usually the last used pokemon center, but could be the player's house)
-wd732:: db
-
-; bit 0: running a test battle (unused in non-debug builds)
-; bit 1: prevent music from changing when entering new map
-; bit 2: skip the joypad check in CheckWarpsNoCollision (used for the forced warp down the waterfall in the Seafoam Islands)
-; bit 3: trainer wants to battle
-; bit 4: use variable [wCurMapScript] instead of the provided index for next frame's map script (used to start battle when talking to trainers)
-; bit 7: used fly out of battle
-wFlags_D733:: db
-
-; bit 1: set when you beat Lorelei and reset in Indigo Plateau lobby
-; the game uses this to tell when Elite 4 events need to be reset
-wBeatLorelei:: db
-
+wStatusFlags6:: db
+wStatusFlags7:: db
+wElite4Flags:: db
 	ds 1
-
-; bit 0: check if the player is standing on a door and make him walk down a step if so
-; bit 1: the player is currently stepping down from a door
-; bit 2: standing on a warp
-; bit 6: jumping down a ledge / fishing animation
-; bit 7: player sprite spinning due to spin tiles (Rocket hideout / Viridian Gym)
-wd736:: db
+wMovementFlags:: db
 
 wCompletedInGameTradeFlags:: dw
 

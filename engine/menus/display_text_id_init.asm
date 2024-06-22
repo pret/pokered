@@ -32,9 +32,9 @@ DisplayTextIDInit::
 .skipDrawingTextBoxBorder
 	ld hl, wFontLoaded
 	set 0, [hl]
-	ld hl, wFlags_0xcd60
-	bit 4, [hl]
-	res 4, [hl]
+	ld hl, wMiscFlags
+	bit BIT_NO_SPRITE_UPDATES, [hl]
+	res BIT_NO_SPRITE_UPDATES, [hl]
 	jr nz, .skipMovingSprites
 	call UpdateSprites
 .skipMovingSprites

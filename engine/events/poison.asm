@@ -1,6 +1,7 @@
 ApplyOutOfBattlePoisonDamage:
-	ld a, [wd730]
-	add a
+	ld a, [wStatusFlags5]
+	assert BIT_SCRIPTED_MOVEMENT_STATE == 7
+	add a ; overflows bit 7 into carry flag
 	jp c, .noBlackOut ; no black out if joypad states are being simulated
 	ld a, [wPartyCount]
 	and a
@@ -101,8 +102,8 @@ ApplyOutOfBattlePoisonDamage:
 	ld a, TEXT_BLACKED_OUT
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld hl, wd72e
-	set 5, [hl]
+	ld hl, wStatusFlags4
+	set BIT_BATTLE_OVER_OR_BLACKOUT, [hl]
 	ld a, $ff
 	jr .done
 .noBlackOut
