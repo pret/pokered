@@ -1,6 +1,6 @@
 TrackPlayTime::
 	call CountDownIgnoreInputBitReset
-	ld a, [wStatusFlags6]
+	ld a, [wStatusFlags5]
 	bit BIT_GAME_TIMER_COUNTING, a
 	ret z
 	ld a, [wPlayTimeMaxed]

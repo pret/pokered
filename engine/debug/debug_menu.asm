@@ -55,7 +55,7 @@ IF DEF(_DEBUG)
 	jp z, TestBattle
 
 	; DEBUG
-	ld hl, wStatusFlags6
+	ld hl, wStatusFlags5
 	set BIT_DEBUG_MODE, [hl]
 	jp StartNewGameDebug
 
@@ -80,7 +80,7 @@ TestBattle: ; unreferenced except in _DEBUG
 	ld a, 1 << BIT_EARTHBADGE
 	ld [wObtainedBadges], a
 
-	ld hl, wStatusFlags7
+	ld hl, wStatusFlags6
 	set BIT_TEST_BATTLE, [hl]
 
 	; wNumBagItems and wBagItems are not initialized here,

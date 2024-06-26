@@ -1,5 +1,5 @@
 Route18Gate1F_Script:
-	ld hl, wStatusFlags6
+	ld hl, wStatusFlags5
 	res BIT_ALWAYS_ON_BIKE, [hl]
 	call EnableAutoTextBoxDrawing
 	ld a, [wRoute18Gate1FCurScript]

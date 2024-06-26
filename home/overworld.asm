@@ -20,7 +20,7 @@ EnterMap::
 	res BIT_BATTLE_OVER_OR_BLACKOUT, [hl]
 	call z, ResetUsingStrengthOutOfBattleBit
 	call nz, MapEntryAfterBattle
-	ld hl, wStatusFlags6
+	ld hl, wStatusFlags5
 	ld a, [hl]
 	and (1 << BIT_FLY_WARP) | (1 << BIT_DUNGEON_WARP)
 	jr z, .didNotEnterUsingFlyWarpOrDungeonWarp
@@ -58,7 +58,7 @@ OverworldLoopLessDelay::
 	bit BIT_WARP_FROM_CUR_SCRIPT, [hl]
 	res BIT_WARP_FROM_CUR_SCRIPT, [hl]
 	jp nz, WarpFound2
-	ld a, [wStatusFlags6]
+	ld a, [wStatusFlags5]
 	and (1 << BIT_FLY_WARP) | (1 << BIT_DUNGEON_WARP)
 	jp nz, HandleFlyWarpOrDungeonWarp
 	ld a, [wCurOpponent]
@@ -326,7 +326,7 @@ OverworldLoopLessDelay::
 .battleOccurred
 	ld hl, wStatusFlags3
 	res BIT_TALKED_TO_TRAINER, [hl]
-	ld hl, wStatusFlags7
+	ld hl, wStatusFlags6
 	res BIT_TRAINER_BATTLE, [hl]
 	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
@@ -423,7 +423,7 @@ CheckWarpsNoCollisionLoop::
 	pop hl
 	jr nc, CheckWarpsNoCollisionRetry2
 ; if the extra check passed
-	ld a, [wStatusFlags7]
+	ld a, [wStatusFlags6]
 	bit BIT_FORCED_WARP, a
 	jr nz, WarpFound1
 	push de
@@ -516,7 +516,7 @@ WarpFound2::
 	dec a ; is the player on a warp pad?
 	jr nz, .notWarpPad
 ; if the player is on a warp pad
-	ld hl, wStatusFlags6
+	ld hl, wStatusFlags5
 	set BIT_FLY_WARP, [hl]
 	call LeaveMapAnim
 	jr .skipMapChangeSound
@@ -788,7 +788,7 @@ HandleFlyWarpOrDungeonWarp::
 	ld [wWalkBikeSurfState], a
 	ld [wIsInBattle], a
 	ld [wMapPalOffset], a
-	ld hl, wStatusFlags6
+	ld hl, wStatusFlags5
 	set BIT_FLY_OR_DUNGEON_WARP, [hl]
 	res BIT_ALWAYS_ON_BIKE, [hl]
 	call LeaveMapAnim
@@ -1825,7 +1825,7 @@ JoypadOverworld::
 	ld [wSpritePlayerStateData1XStepVector], a
 	call RunMapScript
 	call Joypad
-	ld a, [wStatusFlags7]
+	ld a, [wStatusFlags6]
 	bit BIT_TRAINER_BATTLE, a
 	jr nz, .notForcedDownwards
 	ld a, [wCurMap]
@@ -2342,10 +2342,10 @@ LoadMapData::
 	ld b, SET_PAL_OVERWORLD
 	call RunPaletteCommand
 	call LoadPlayerSpriteGraphics
-	ld a, [wStatusFlags6]
+	ld a, [wStatusFlags5]
 	and (1 << BIT_FLY_WARP) | (1 << BIT_DUNGEON_WARP)
 	jr nz, .restoreRomBank
-	ld a, [wStatusFlags7]
+	ld a, [wStatusFlags6]
 	bit BIT_NO_MAP_MUSIC, a
 	jr nz, .restoreRomBank
 	call UpdateMusic6Times

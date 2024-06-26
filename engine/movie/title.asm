@@ -15,10 +15,12 @@ PrepareTitleScreen::
 	xor a
 	ldh [hWY], a
 	ld [wLetterPrintingDelayFlags], a
-	ld hl, wStatusFlags6
+	ld hl, wStatusFlags5
 	ld [hli], a
-	ld [hli], a ; wStatusFlags7
-	ld [hl], a  ; wElite4Flags
+	assert wStatusFlags5 + 1 == wStatusFlags6
+	ld [hli], a
+	assert wStatusFlags6 + 1 == wElite4Flags
+	ld [hl], a
 	ld a, BANK(Music_TitleScreen)
 	ld [wAudioROMBank], a
 	ld [wAudioSavedROMBank], a

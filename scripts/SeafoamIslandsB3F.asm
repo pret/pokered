@@ -36,7 +36,7 @@ SeafoamIslandsB3F_Script:
 	ld [wDungeonWarpDestinationMap], a
 	ld hl, Seafoam4HolesCoords
 	call IsPlayerOnDungeonWarp
-	ld a, [wStatusFlags6]
+	ld a, [wStatusFlags5]
 	bit BIT_DUNGEON_WARP, a
 	ret nz
 .runCurrentMapScript
@@ -72,7 +72,7 @@ SeafoamIslandsB3FDefaultScript:
 	dec a
 	ld [wSimulatedJoypadStatesIndex], a
 	call StartSimulatingJoypadStates
-	ld hl, wStatusFlags7
+	ld hl, wStatusFlags6
 	set BIT_FORCED_WARP, [hl]
 	ld a, SCRIPT_SEAFOAMISLANDSB3F_OBJECT_MOVING1
 	ld [wSeafoamIslandsB3FCurScript], a
@@ -114,7 +114,7 @@ SeafoamIslandsB3FMoveObjectScript:
 	ld [wSpritePlayerStateData2MovementByte1], a
 	ld hl, wStateFlags
 	set BIT_SCRIPTED_MOVEMENT_STATE, [hl]
-	ld hl, wStatusFlags7
+	ld hl, wStatusFlags6
 	set BIT_FORCED_WARP, [hl]
 	ld a, SCRIPT_SEAFOAMISLANDSB3F_OBJECT_MOVING2
 .playerNotInStrongCurrent

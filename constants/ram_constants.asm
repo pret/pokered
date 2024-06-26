@@ -84,7 +84,7 @@ DEF NUM_BADGES EQU const_value
 	const BIT_NO_TEXT_DELAY           ; 6
 	const BIT_SCRIPTED_MOVEMENT_STATE ; 7
 
-; wStatusFlags6
+; wStatusFlags5
 	const_def
 	const BIT_GAME_TIMER_COUNTING ; 0
 	const BIT_DEBUG_MODE          ; 1
@@ -94,7 +94,7 @@ DEF NUM_BADGES EQU const_value
 	const BIT_ALWAYS_ON_BIKE      ; 5
 	const BIT_ESCAPE_WARP         ; 6
 
-; wStatusFlags7
+; wStatusFlags6
 	const_def
 	const BIT_TEST_BATTLE        ; 0
 	const BIT_NO_MAP_MUSIC       ; 1

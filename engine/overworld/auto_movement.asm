@@ -79,7 +79,7 @@ PalletMovementScript_OakMoveLeft:
 	ld a, $3
 	ld [wNPCMovementScriptFunctionNum], a
 .done
-	ld hl, wStatusFlags7
+	ld hl, wStatusFlags6
 	set BIT_NO_MAP_MUSIC, [hl]
 	ld a, SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a

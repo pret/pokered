@@ -2063,15 +2063,11 @@ wStatusFlags2:: db
 wCableClubDestinationMap::
 wStatusFlags3:: db
 wStatusFlags4:: db
-
 	ds 1
-
 wStateFlags:: db
-
 	ds 1
-
+wStatusFlags5:: db
 wStatusFlags6:: db
-wStatusFlags7:: db
 wElite4Flags:: db
 	ds 1
 wMovementFlags:: db

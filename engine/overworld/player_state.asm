@@ -32,7 +32,7 @@ IsPlayerStandingOnWarp::
 	ret
 
 CheckForceBikeOrSurf::
-	ld hl, wStatusFlags6
+	ld hl, wStatusFlags5
 	bit BIT_ALWAYS_ON_BIKE, [hl]
 	ret nz
 	ld hl, ForcedBikeOrSurfMaps
@@ -64,7 +64,7 @@ CheckForceBikeOrSurf::
 	ld a, SCRIPT_SEAFOAMISLANDSB4F_MOVE_OBJECT
 	ld [wSeafoamIslandsB4FCurScript], a
 	jr z, .forceSurfing
-	ld hl, wStatusFlags6
+	ld hl, wStatusFlags5
 	set BIT_ALWAYS_ON_BIKE, [hl]
 	ld a, $1
 	ld [wWalkBikeSurfState], a

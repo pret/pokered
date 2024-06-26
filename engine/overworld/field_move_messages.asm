@@ -24,7 +24,7 @@ IsSurfingAllowed:
 ; Seafoam Islands before the current has been slowed with boulders.
 	ld hl, wStatusFlags
 	set BIT_SURF_ALLOWED, [hl]
-	ld a, [wStatusFlags6]
+	ld a, [wStatusFlags5]
 	bit BIT_ALWAYS_ON_BIKE, a
 	jr nz, .forcedToRideBike
 	ld a, [wCurMap]

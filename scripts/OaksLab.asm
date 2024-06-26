@@ -117,7 +117,7 @@ OaksLabFollowedOakScript:
 	ldh [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 	call UpdateSprites
-	ld hl, wStatusFlags7
+	ld hl, wStatusFlags6
 	res BIT_NO_MAP_MUSIC, [hl]
 	call PlayDefaultMusic
 

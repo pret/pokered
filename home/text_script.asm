@@ -128,7 +128,7 @@ CloseTextDisplay::
 	call InitMapSprites ; reload sprite tile pattern data (since it was partially overwritten by text tile patterns)
 	ld hl, wFontLoaded
 	res 0, [hl]
-	ld a, [wStatusFlags6]
+	ld a, [wStatusFlags5]
 	bit BIT_FLY_WARP, a
 	call z, LoadPlayerSpriteGraphics
 	call LoadCurrentMapView
@@ -196,9 +196,9 @@ PokemonFaintedText::
 DisplayPlayerBlackedOutText::
 	ld hl, PlayerBlackedOutText
 	call PrintText
-	ld a, [wStatusFlags6]
+	ld a, [wStatusFlags5]
 	res BIT_ALWAYS_ON_BIKE, a
-	ld [wStatusFlags6], a
+	ld [wStatusFlags5], a
 	jp HoldTextDisplayOpen
 
 PlayerBlackedOutText::

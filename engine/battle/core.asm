@@ -924,7 +924,7 @@ TrainerBattleVictory:
 	cp RIVAL3 ; final battle against rival
 	jr nz, .notrival
 	ld b, MUSIC_DEFEATED_GYM_LEADER
-	ld hl, wStatusFlags7
+	ld hl, wStatusFlags6
 	set BIT_NO_MAP_MUSIC, [hl]
 .notrival
 	ld a, [wLinkState]
@@ -1157,9 +1157,9 @@ HandlePlayerBlackOut:
 	ld hl, LinkBattleLostText
 .noLinkBattle
 	call PrintText
-	ld a, [wStatusFlags6]
+	ld a, [wStatusFlags5]
 	res BIT_ALWAYS_ON_BIKE, a
-	ld [wStatusFlags6], a
+	ld [wStatusFlags5], a
 	call ClearScreen
 	scf
 	ret
@@ -2558,7 +2558,7 @@ MoveSelectionMenu:
 	cp LINK_STATE_BATTLING
 	jr z, .matchedkeyspicked
 	; Disable left, right, and START buttons in regular battles.
-	ld a, [wStatusFlags7]
+	ld a, [wStatusFlags6]
 	bit BIT_TEST_BATTLE, a
 	ld b, D_UP | D_DOWN | A_BUTTON | B_BUTTON | SELECT
 	jr z, .matchedkeyspicked
@@ -2587,7 +2587,7 @@ SelectMenuItem:
 	jr .select
 .battleselect
 	; Hide move swap cursor in TestBattle.
-	ld a, [wStatusFlags7]
+	ld a, [wStatusFlags6]
 	bit BIT_TEST_BATTLE, a
 	; This causes PrintMenuItem to not run in TestBattle.
 	; MoveSelectionMenu still draws part of its window, an issue
@@ -6092,7 +6092,7 @@ GetCurrentMove:
 .player
 	ld de, wPlayerMoveNum
 	; Apply InitBattleVariables to TestBattle.
-	ld a, [wStatusFlags7]
+	ld a, [wStatusFlags6]
 	bit BIT_TEST_BATTLE, a
 	ld a, [wTestBattlePlayerSelectedMove]
 	jr nz, .selected
@@ -6776,7 +6776,7 @@ InitOpponent:
 	jr InitBattleCommon
 
 DetermineWildOpponent:
-	ld a, [wStatusFlags6]
+	ld a, [wStatusFlags5]
 	bit BIT_DEBUG_MODE, a
 	jr z, .notDebugMode
 	ldh a, [hJoyHeld]

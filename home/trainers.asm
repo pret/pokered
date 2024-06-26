@@ -16,7 +16,7 @@ ExecuteCurMapScriptInTable::
 	pop hl
 	pop af
 	push hl
-	ld hl, wStatusFlags7
+	ld hl, wStatusFlags6
 	bit BIT_USE_CUR_MAP_SCRIPT, [hl]
 	res BIT_USE_CUR_MAP_SCRIPT, [hl]
 	jr z, .useProvidedIndex   ; test if map script index was overridden manually
@@ -114,7 +114,7 @@ TalkToTrainer::
 	call ReadTrainerHeaderInfo     ; read end battle text
 	pop de
 	call SaveEndBattleTextPointers
-	ld hl, wStatusFlags7
+	ld hl, wStatusFlags6
 	set BIT_USE_CUR_MAP_SCRIPT, [hl] ; activate map script index override (index is set below)
 	ld hl, wStrengthFlags
 	bit BIT_SEEN_BY_TRAINER, [hl]  ; test if player is already engaging the trainer (because the trainer saw the player)
@@ -143,7 +143,7 @@ ENDC
 	ld [wTrainerHeaderFlagBit], a
 	ret
 .trainerEngaging
-	ld hl, wStatusFlags7
+	ld hl, wStatusFlags6
 	set BIT_TRAINER_BATTLE, [hl]
 	ld [wEmotionBubbleSpriteIndex], a
 	xor a ; EXCLAMATION_BUBBLE

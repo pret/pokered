@@ -5,13 +5,13 @@ EnterMapAnim::
 	call Delay3
 	push hl
 	call GBFadeInFromWhite
-	ld hl, wStatusFlags7
+	ld hl, wStatusFlags6
 	bit BIT_USED_FLY, [hl]
 	res BIT_USED_FLY, [hl]
 	jr nz, .flyAnimation
 	ld a, SFX_TELEPORT_ENTER_1
 	call PlaySound
-	ld hl, wStatusFlags6
+	ld hl, wStatusFlags5
 	bit BIT_DUNGEON_WARP, [hl]
 	res BIT_DUNGEON_WARP, [hl]
 	pop hl
@@ -122,7 +122,7 @@ _LeaveMapAnim::
 .playerNotStandingOnWarpPadOrHole
 	ld a, $4
 	call StopMusic
-	ld a, [wStatusFlags6]
+	ld a, [wStatusFlags5]
 	bit BIT_ESCAPE_WARP, a
 	jr z, .flyAnimation
 ; if going to the last used pokemon center

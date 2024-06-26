@@ -119,7 +119,7 @@ MainMenu:
 	jp nz, SpecialEnterMap
 	xor a
 	ld [wDestinationMap], a
-	ld hl, wStatusFlags6
+	ld hl, wStatusFlags5
 	set BIT_FLY_OR_DUNGEON_WARP, [hl]
 	call PrepareForSpecialWarp
 	jp SpecialEnterMap
@@ -272,7 +272,7 @@ LinkMenu:
 	call PrintText
 	ld c, 50
 	call DelayFrames
-	ld hl, wStatusFlags6
+	ld hl, wStatusFlags5
 	res BIT_DEBUG_MODE, [hl]
 	ld a, [wDefaultMap]
 	ld [wDestinationMap], a
@@ -312,7 +312,7 @@ LinkCanceledText:
 	text_end
 
 StartNewGame:
-	ld hl, wStatusFlags6
+	ld hl, wStatusFlags5
 	; Ensure debug mode is not used when starting a regular new game.
 	; Debug mode persists in saved games for both debug and non-debug builds, and is
 	; only reset here by the main menu.
@@ -330,7 +330,7 @@ SpecialEnterMap::
 	ldh [hJoyHeld], a
 	ldh [hJoy5], a
 	ld [wCableClubDestinationMap], a
-	ld hl, wStatusFlags6
+	ld hl, wStatusFlags5
 	set BIT_GAME_TIMER_COUNTING, [hl]
 	call ResetPlayerSpriteData
 	ld c, 20

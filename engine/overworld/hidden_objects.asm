@@ -10,7 +10,7 @@ IsPlayerOnDungeonWarp::
 	ld [wWhichDungeonWarp], a
 	ld hl, wStatusFlags3
 	set BIT_ON_DUNGEON_WARP, [hl]
-	ld hl, wStatusFlags6
+	ld hl, wStatusFlags5
 	set BIT_DUNGEON_WARP, [hl]
 	ret
 

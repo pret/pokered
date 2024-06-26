@@ -1,7 +1,7 @@
 PrepareForSpecialWarp::
 	call LoadSpecialWarpData
 	predef LoadTilesetHeader
-	ld hl, wStatusFlags6
+	ld hl, wStatusFlags5
 	bit BIT_FLY_OR_DUNGEON_WARP, [hl]
 	res BIT_FLY_OR_DUNGEON_WARP, [hl]
 	jr z, .debugNewGameWarp
@@ -22,7 +22,7 @@ PrepareForSpecialWarp::
 	jr nz, .next2
 	ld a, b
 .next2
-	ld hl, wStatusFlags6
+	ld hl, wStatusFlags5
 	bit BIT_DUNGEON_WARP, [hl]
 	ret nz
 	ld [wLastMap], a
@@ -48,7 +48,7 @@ LoadSpecialWarpData:
 	ld hl, ColosseumFriendWarp
 	jr .copyWarpData
 .notColosseum
-	ld a, [wStatusFlags6]
+	ld a, [wStatusFlags5]
 	bit BIT_DEBUG_MODE, a
 	; warp to wLastMap (PALLET_TOWN) for StartNewGameDebug
 	jr nz, .notNewGameWarp
@@ -70,7 +70,7 @@ LoadSpecialWarpData:
 	jr .done
 .notNewGameWarp
 	ld a, [wLastMap] ; this value is overwritten before it's ever read
-	ld hl, wStatusFlags6
+	ld hl, wStatusFlags5
 	bit BIT_DUNGEON_WARP, [hl]
 	jr nz, .usedDungeonWarp
 	bit BIT_ESCAPE_WARP, [hl]

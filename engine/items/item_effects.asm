@@ -1505,7 +1505,7 @@ ItemUseEscapeRope:
 	jr z, .notUsable
 	cp b
 	jr nz, .loop
-	ld hl, wStatusFlags6
+	ld hl, wStatusFlags5
 	set BIT_FLY_WARP, [hl]
 	set BIT_ESCAPE_WARP, [hl]
 	ld hl, wStatusFlags4
