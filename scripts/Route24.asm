@@ -119,9 +119,9 @@ Route24CooltrainerM1Text:
 	call PrintText
 	ld hl, .JoinTeamRocketText
 	call PrintText
-	ld hl, wd72d
-	set 6, [hl]
-	set 7, [hl]
+	ld hl, wStatusFlags3
+	set BIT_TALKED_TO_TRAINER, [hl]
+	set BIT_PRINT_END_BATTLE_TEXT, [hl]
 	ld hl, .DefeatedText
 	ld de, .DefeatedText
 	call SaveEndBattleTextPointers

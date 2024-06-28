@@ -199,7 +199,7 @@ _AddPartyMon::
 	inc de
 	ld [de], a
 	push de
-	ld a, [wCurEnemyLVL]
+	ld a, [wCurEnemyLevel]
 	ld d, a
 	callfar CalcExperience
 	pop de
@@ -224,7 +224,7 @@ _AddPartyMon::
 	pop hl
 	call AddPartyMon_WriteMovePP
 	inc de
-	ld a, [wCurEnemyLVL]
+	ld a, [wCurEnemyLevel]
 	ld [de], a
 	inc de
 	ld a, [wIsInBattle]
@@ -500,7 +500,7 @@ _MoveMon::
 	call LoadMonData
 	farcall CalcLevelFromExperience
 	ld a, d
-	ld [wCurEnemyLVL], a
+	ld [wCurEnemyLevel], a
 	pop hl
 	ld bc, wBoxMon2 - wBoxMon1
 	add hl, bc

@@ -41,8 +41,8 @@ ViridianGymDefaultScript:
 	cp $ff
 	jp z, CheckFightingMapTrainers
 	call StartSimulatingJoypadStates
-	ld hl, wd736
-	set 7, [hl]
+	ld hl, wMovementFlags
+	set BIT_SPINNING, [hl]
 	ld a, SFX_ARROW_TILES
 	call PlaySound
 	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
@@ -120,8 +120,8 @@ ViridianGymPlayerSpinningScript:
 	jr nz, .ViridianGymLoadSpinnerArrow
 	xor a
 	ld [wJoyIgnore], a
-	ld hl, wd736
-	res 7, [hl]
+	ld hl, wMovementFlags
+	res BIT_SPINNING, [hl]
 	ld a, SCRIPT_VIRIDIANGYM_DEFAULT
 	ld [wCurMapScript], a
 	ret
@@ -229,9 +229,9 @@ ViridianGymGiovanniText:
 .beforeBeat
 	ld hl, .PreBattleText
 	call PrintText
-	ld hl, wd72d
-	set 6, [hl]
-	set 7, [hl]
+	ld hl, wStatusFlags3
+	set BIT_TALKED_TO_TRAINER, [hl]
+	set BIT_PRINT_END_BATTLE_TEXT, [hl]
 	ld hl, .ReceivedEarthBadgeText
 	ld de, .ReceivedEarthBadgeText
 	call SaveEndBattleTextPointers

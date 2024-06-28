@@ -4,8 +4,8 @@ TryDoWildEncounter:
 	ld a, [wNPCMovementScriptPointerTableNum]
 	and a
 	ret nz
-	ld a, [wd736]
-	and a
+	ld a, [wMovementFlags]
+	and a ; is player exiting a door, jumping over a ledge, or fishing?
 	ret nz
 	callfar IsPlayerStandingOnDoorTileOrWarpTile
 	jr nc, .notStandingOnDoorOrWarpTile
@@ -74,7 +74,7 @@ TryDoWildEncounter:
 	ld b, 0
 	add hl, bc
 	ld a, [hli]
-	ld [wCurEnemyLVL], a
+	ld [wCurEnemyLevel], a
 	ld a, [hl]
 	ld [wcf91], a
 	ld [wEnemyMonSpecies2], a
@@ -83,7 +83,7 @@ TryDoWildEncounter:
 	jr z, .willEncounter
 	ld a, [wPartyMon1Level]
 	ld b, a
-	ld a, [wCurEnemyLVL]
+	ld a, [wCurEnemyLevel]
 	cp b
 	jr c, .CantEncounter2 ; repel prevents encounters if the leading party mon's level is higher than the wild mon
 	jr .willEncounter

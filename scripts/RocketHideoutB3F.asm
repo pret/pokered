@@ -23,8 +23,8 @@ RocketHideoutB3FDefaultScript:
 	call DecodeArrowMovementRLE
 	cp $ff
 	jp z, CheckFightingMapTrainers
-	ld hl, wd736
-	set 7, [hl]
+	ld hl, wMovementFlags
+	set BIT_SPINNING, [hl]
 	call StartSimulatingJoypadStates
 	ld a, SFX_ARROW_TILES
 	call PlaySound
@@ -119,8 +119,8 @@ RocketHideoutB3FPlayerSpinningScript:
 	jp nz, LoadSpinnerArrowTiles
 	xor a
 	ld [wJoyIgnore], a
-	ld hl, wd736
-	res 7, [hl]
+	ld hl, wMovementFlags
+	res BIT_SPINNING, [hl]
 	ld a, SCRIPT_ROCKETHIDEOUTB3F_DEFAULT
 	ld [wCurMapScript], a
 	ret
@@ -165,7 +165,7 @@ RocketHideoutB3FRocket2Text:
 	jp TextScriptEnd
 
 RocketHideoutB3FRocket2BattleText:
-	text_far _RocketHideout3BattleTxt
+	text_far _RocketHideout3BattleText
 	text_end
 
 RocketHideoutB3FRocket2EndBattleText:

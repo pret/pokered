@@ -14,8 +14,8 @@ LoreleiShowOrHideExitBlock:
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld hl, wBeatLorelei
-	set 1, [hl]
+	ld hl, wElite4Flags
+	set BIT_STARTED_ELITE_4, [hl]
 	CheckEvent EVENT_BEAT_LORELEIS_ROOM_TRAINER_0
 	jr z, .blockExitToNextRoom
 	ld a, $5

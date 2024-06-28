@@ -397,8 +397,8 @@ ShowPokedexData:
 
 ; function to display pokedex data from inside the pokedex
 ShowPokedexDataInternal:
-	ld hl, wd72c
-	set 1, [hl]
+	ld hl, wStatusFlags2
+	set BIT_NO_AUDIO_FADE_OUT, [hl]
 	ld a, $33 ; 3/7 volume
 	ldh [rNR50], a
 	call GBPalWhiteOut ; zero all palettes
@@ -583,8 +583,8 @@ ShowPokedexDataInternal:
 	call RunDefaultPaletteCommand
 	call LoadTextBoxTilePatterns
 	call GBPalNormal
-	ld hl, wd72c
-	res 1, [hl]
+	ld hl, wStatusFlags2
+	res BIT_NO_AUDIO_FADE_OUT, [hl]
 	ld a, $77 ; max volume
 	ldh [rNR50], a
 	ret

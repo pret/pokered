@@ -33,7 +33,7 @@ Route12DefaultScript:
 	ld a, SNORLAX
 	ld [wCurOpponent], a
 	ld a, 30
-	ld [wCurEnemyLVL], a
+	ld [wCurEnemyLevel], a
 	ld a, HS_ROUTE_12_SNORLAX
 	ld [wMissableObjectIndex], a
 	predef HideObject

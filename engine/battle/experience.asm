@@ -160,11 +160,11 @@ GainExperience:
 	ld a, [hl] ; current level
 	cp d
 	jp z, .nextMon ; if level didn't change, go to next mon
-	ld a, [wCurEnemyLVL]
+	ld a, [wCurEnemyLevel]
 	push af
 	push hl
 	ld a, d
-	ld [wCurEnemyLVL], a
+	ld [wCurEnemyLevel], a
 	ld [hl], a
 	ld bc, wPartyMon1Species - wPartyMon1Level
 	add hl, bc
@@ -261,7 +261,7 @@ GainExperience:
 	predef FlagActionPredef
 	pop hl
 	pop af
-	ld [wCurEnemyLVL], a
+	ld [wCurEnemyLevel], a
 
 .nextMon
 	ld a, [wPartyCount]

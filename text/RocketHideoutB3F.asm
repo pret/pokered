@@ -16,7 +16,7 @@ _RocketHideoutB3FRocket1AfterBattleText::
 	cont "here somewhere."
 	done
 
-_RocketHideout3BattleTxt::
+_RocketHideout3BattleText::
 	text "We got word from"
 	line "upstairs that you"
 	cont "were coming!"

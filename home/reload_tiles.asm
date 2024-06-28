@@ -30,8 +30,8 @@ ReloadTilesetTilePatterns::
 
 ; shows the town map and lets the player choose a destination to fly to
 ChooseFlyDestination::
-	ld hl, wd72e
-	res 4, [hl]
+	ld hl, wStatusFlags4
+	res BIT_NO_BATTLES, [hl]
 	farjp LoadTownMap_Fly
 
 ; causes the text box to close without waiting for a button press after displaying text
