@@ -483,7 +483,7 @@ MoveAnimationContent:
 .noWaiting
 	xor a
 	ld [wSubAnimSubEntryAddr], a
-	;ld [wUnusedD09B], a ; PureRGBnote: this value is unused so we dont need to load it
+	;ld [wUnusedMoveAnimByte], a ; PureRGBnote: this value is unused so we dont need to load it
 	ld [wSubAnimTransform], a
 	dec a ; NO_MOVE - 1
 	ld [wAnimSoundID], a
@@ -1316,12 +1316,12 @@ AnimationTileEverywhere:
 	ld a, 16
 	ld [wBaseCoordY], a
 	;xor a
-	;ld [wUnusedD08A], a
+	;ld [wUnusedWaterDropletsByte], a
 	call _AnimationWaterDroplets
 	ld a, 24
 	ld [wBaseCoordY], a
 	;ld a, 32
-	;ld [wUnusedD08A], a
+	;ld [wUnusedWaterDropletsByte], a
 	call _AnimationWaterDroplets
 	dec d
 	jr nz, .loop

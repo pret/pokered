@@ -1,6 +1,7 @@
 SECTION "Audio RAM", WRAM0
 
-wUnusedC000:: db ; PureRGBnote: CHANGED: used for various temporary flags
+wUnusedC000::
+wUnusedMusicByte:: db ; PureRGBnote: CHANGED: used for various temporary flags
 
 wSoundID:: db
 
@@ -605,6 +606,7 @@ ENDU
 	ds 1 ; unused lone byte
 
 wNPCMovementDirections2Index::
+wUnusedLinkMenuByte::
 ; number of items in wFilteredBagItems list
 wFilteredBagItemsCount:: db
 
@@ -612,7 +614,7 @@ wFilteredBagItemsCount:: db
 ; 0 if the joypad state is not being simulated
 wSimulatedJoypadStatesIndex:: db
 
-; PureRGBnote: CHANGED: this variable was previously unused but now it is used
+; PureRGBnote: CHANGED: these two bytes were previously unused but now they are used
 wTempStore1:: db
 wTempStore2:: db
 
@@ -1538,7 +1540,7 @@ wOptionsInitialized::
 wNewSlotMachineBallTile::
 ; how much to add to the X/Y coord
 wCoordAdjustmentAmount::
-wUnusedD08A::
+wUnusedWaterDropletsByte::
 	db
 
 wSlideMonDelay::
@@ -1587,7 +1589,7 @@ wPartyMenuAnimMonEnabled::
 ; non-zero when enabled. causes nest locations to blink on and off.
 ; the town selection cursor will blink regardless of what this value is
 wTownMapSpriteBlinkingEnabled::
-wUnusedD09B:: db
+wUnusedMoveAnimByte:: db
 
 ; current destination address in OAM for frame blocks (big endian)
 wFBDestAddr:: dw
@@ -1706,7 +1708,7 @@ wMoveNum:: db
 wItemList:: 
 wMovesString:: ds 56
 
-wUnusedD119:: db
+wUnusedCurMapTilesetCopy:: db
 
 ; wWalkBikeSurfState is sometimes copied here, but it doesn't seem to be used for anything
 wWalkBikeSurfStateCopy:: db
@@ -1871,7 +1873,7 @@ wSerialPlayerDataBlock:: ; ds $1a8
 wPseudoItemID:: db
 
 wEnemyStatEXPStore:: ; shinpokerednote: ADDED: store for EVs applied to the opponent's pokemon if the option is turned on
-wUnusedD153:: dw
+wUnusedAlreadyOwnedFlag:: db
 
 	ds 1 ; unused lone byte
 
@@ -2002,8 +2004,7 @@ wYBlockCoord:: db
 wXBlockCoord:: db
 
 wLastMap:: db
-
-wUnusedD366:: db ; unused save file byte
+wUnusedLastMapWidth:: db ; unused save file byte
 
 wCurMapHeader::
 wCurMapTileset:: db
@@ -2138,7 +2139,7 @@ wCurrentBoxNum:: db
 ; number of HOF teams
 wNumHoFTeams:: db
 
-wUnusedD5A3:: db
+wUnusedMapVariable:: db
 
 wPlayerCoins:: dw ; BCD
 
@@ -2298,7 +2299,6 @@ wdef5:: db
 	ds 4 ; unused save file 4 bytes
 
 wObtainedHiddenItemsFlags:: flag_array MAX_HIDDEN_ITEMS
-
 wObtainedHiddenCoinsFlags:: flag_array MAX_HIDDEN_COINS
 
 ; $00 = walking
@@ -2339,7 +2339,8 @@ wLastBlackoutMap:: db
 ; destination map (for certain types of special warps, not ordinary walking)
 wDestinationMap:: db
 
-wUnusedD71B:: db
+; initialized to $ff, but nothing ever reads it
+wUnusedPlayerDataByte:: db
 
 ; used to store the tile in front of the boulder when trying to push a boulder
 ; also used to store the result of the collision check ($ff for a collision and $00 for no collision)
@@ -2351,7 +2352,7 @@ wDungeonWarpDestinationMap:: db
 ; which dungeon warp within the source map was used
 wWhichDungeonWarp:: db
 
-wUnusedD71F:: db
+wUnusedCardKeyGateID:: db
 
 	ds 8 ; unused save file 8 bytes
 
@@ -2520,8 +2521,7 @@ wPkmnTypeRemapFlags:: ds 3 ; flag array for changing pokemon back to their origi
 
 ; the trainer the player must face after getting a wrong answer in the Cinnabar
 ; gym quiz
-wOpponentAfterWrongAnswer::
-wUnusedDA38:: db
+wOpponentAfterWrongAnswer:: db
 
 ; index of current map script, mostly used as index for function pointer array
 ; mostly copied from map-specific map script pointer and written back later
@@ -2641,3 +2641,5 @@ SECTION "Stack", WRAMX
 ; the stack grows downward
 	ds $100 - 1
 wStack:: db
+
+ENDSECTION

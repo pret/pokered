@@ -1,5 +1,4 @@
 ; shinpokerednote: audionote: This file was heavily modified to be closer to pokeyellow's audio engine
-
 Audio3_PlaySound::
 	ld [wSoundID], a
 	cp SFX_STOP_ALL_MUSIC
@@ -13,6 +12,7 @@ Audio3_PlaySound::
 .playMusic
 	call InitMusicVariables
 	jp PlaySoundCommon_3
+
 
 PlaySfxRemapDrums_3:
 	push af

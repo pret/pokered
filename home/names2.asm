@@ -87,10 +87,6 @@ GetName::
 	ld bc, NAME_BUFFER_LENGTH
 	rst _CopyData
 .gotPtr
-	;ld a, e
-	;ld [wPPTrackingPointer], a
-	;ld a, d
-	;ld [wPPTrackingPointer + 1], a
 	pop de
 	pop bc
 	pop hl

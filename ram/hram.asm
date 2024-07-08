@@ -401,5 +401,6 @@ hDisableJoypadPolling:: db
 ;bit 1 - BGmap update functions will not run in Vblank while this bit is set
 hFlagsFFFA::db 
 hRGB:: ds 3 ; FFFB=Red, FFFC=Green, FFFD=BLUE ; shinpokerednote: ADDED: used to store color RGB color values
-hHRAMend::
 hGBC:: db ; shinpokerednote: gbcnote: hram indicator from pokeyellow for where we're playing on GBC
+
+ENDSECTION

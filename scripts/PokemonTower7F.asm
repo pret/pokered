@@ -58,7 +58,7 @@ PokemonTower7FHideNPCScript:
 	ld [wJoyIgnore], a
 	ld [wSpriteIndex], a
 	ld [wTrainerHeaderFlagBit], a
-	ld [wUnusedDA38], a
+	ld [wOpponentAfterWrongAnswer], a ; not used here; likely a mistake copied from maps/CinnabarGym.asm
 	ld a, SCRIPT_POKEMONTOWER7F_DEFAULT
 	ld [wPokemonTower7FCurScript], a
 	ld [wCurMapScript], a

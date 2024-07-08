@@ -563,7 +563,7 @@ WarpFound2::
 	ld [wLastMap], a
 	call PlayMapChangeSound ; PureRGBnote: CHANGED: this was moved earlier to fix jank with entering rock tunnel
 	; ld a, [wCurMapWidth]
-	; ld [wUnusedD366], a ; not read
+	; ld [wUnusedLastMapWidth], a ; not read
 	ldh a, [hWarpDestinationMap]
 	ld [wCurMap], a
 	cp ROCK_TUNNEL_1F
@@ -1954,7 +1954,7 @@ LoadPlayerSpriteGraphicsCommon::
 LoadMapHeader::
 	farcall MarkTownVisitedAndLoadMissableObjects
 	;ld a, [wCurMapTileset]
-	;ld [wUnusedD119], a
+	;ld [wUnusedCurMapTilesetCopy], a
 	ld a, [wCurMap]
 	call SwitchToMapRomBank
 	ld a, [wCurMapTileset]
@@ -2258,7 +2258,7 @@ LoadMapData::
 	ldh [hSCY], a
 	ldh [hSCX], a
 	ld [wWalkCounter], a
-	;ld [wUnusedD119], a
+	;ld [wUnusedCurMapTilesetCopy], a
 	ld [wWalkBikeSurfStateCopy], a
 	ld [wSpriteSetID], a
 	call LoadTextBoxTilePatterns
