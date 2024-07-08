@@ -82,9 +82,9 @@ DEF SPDSPCDV_TRAINER EQU $88
 	const THRASHING_ABOUT          ; 1 ; e.g. Thrash
 	const ATTACKING_MULTIPLE_TIMES ; 2 ; e.g. Double Kick, Fury Attack
 	const FLINCHED                 ; 3
-	const CHARGING_UP              ; 4 ; e.g. Solar Beam, Fly
+	const CHARGING_UP              ; 4 ; e.g. Fly/Dig
 	const USING_TRAPPING_MOVE      ; 5 ; e.g. Wrap
-	const INVULNERABLE             ; 6 ; charging up Fly/Dig
+	const INVULNERABLE             ; 6 ; first turn of Fly/Dig
 	const CONFUSED                 ; 7
 
 ; wPlayerBattleStatus2 or wEnemyBattleStatus2 bit flags

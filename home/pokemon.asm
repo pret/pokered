@@ -153,6 +153,7 @@ PlayCry::
 
 GetCryData::
 ; Load cry data for monster a.
+; TODO: remap the duplicate cries to sound a bit more different based on an option
 	dec a
 	ld c, a
 	ld b, 0

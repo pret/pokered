@@ -6,6 +6,7 @@ MACRO overworld_sprite
 	db BANK(\1)
 ENDM
 
+; TODO: reuse menu icons for sprites where applicable (fossil, pokeball, snorlax, etc.)
 SpriteSheetPointerTable:
 	table_width 4, SpriteSheetPointerTable
 	; graphics, tile count

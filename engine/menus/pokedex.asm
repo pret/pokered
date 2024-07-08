@@ -1056,9 +1056,9 @@ HeightWeightText:
 	db   "HT  ?′??″"
 	next "WT   ???lb@"
 
-; XXX does anything point to this?
-PokeText:
-	db "#@"
+; XXX does anything point to this? ; PureRGBnote: CHANGED: no, so comment out
+;PokeText:
+;	db "#@"
 
 ; horizontal line that divides the pokedex text description from the rest of the data
 PokedexDataDividerLine:

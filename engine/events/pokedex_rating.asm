@@ -20,9 +20,7 @@ DisplayDexRating:
 	inc hl
 	jr .findRating
 .foundRating
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a ; load text pointer into hl
+	hl_deref
 	CheckAndResetEventA EVENT_HALL_OF_FAME_DEX_RATING
 	jr nz, .hallOfFame
 	push hl
