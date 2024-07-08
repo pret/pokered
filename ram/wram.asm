@@ -398,7 +398,7 @@ wNPCMovementDirections:: ds 180
 NEXTU
 wDexRatingNumMonsSeen:: db
 wDexRatingNumMonsOwned:: db
-wDexRatingText:: 
+wDexRatingText:: ; PureRGBnote: actually uses 5 bytes from here, not just 1
 wTrainerCardBadgeAttributes:: db
 ; shinpokerednote: gbcnote: modified to match yellow
 
@@ -1706,7 +1706,6 @@ wMoveNum:: db
 wItemList:: 
 wMovesString:: ds 56
 
-wWhichTrainerClass:: ; PureRGBnote: ADDED: indicates which trainer class is being battled - lasts until the very end of battle
 wUnusedD119:: db
 
 ; wWalkBikeSurfState is sometimes copied here, but it doesn't seem to be used for anything

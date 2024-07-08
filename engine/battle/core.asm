@@ -1424,7 +1424,7 @@ EnemySendOutFirstMon:
 	dec a
 	ld [wAICount], a
 	ld hl, wPlayerBattleStatus1
-	res 5, [hl]
+	res USING_TRAPPING_MOVE, [hl]
 	hlcoord 18, 0
 	ld a, 8
 	call SlideTrainerPicOffScreen
@@ -6869,6 +6869,7 @@ QuarterSpeedDueToParalysis:
 	ldh a, [hWhoseTurn]
 	and a
 	jr z, .playerTurn
+	; TODO: pointless copied and pasted code
 .enemyTurn ; quarter the player's speed
 	ld a, [wBattleMonStatus]
 	and 1 << PAR
@@ -6912,6 +6913,7 @@ HalveAttackDueToBurn:
 	ldh a, [hWhoseTurn]
 	and a
 	jr z, .playerTurn
+	; TODO: pointless copied and pasted code
 .enemyTurn ; halve the player's attack
 	ld a, [wBattleMonStatus]
 	and 1 << BRN
@@ -7433,29 +7435,23 @@ _InitBattleCommon:
 .emptyString
 	db "@"
 
-;;;;;;;;;; PureRGBnote: ADDED: now two banks are used for trainer sprites instead of 1
-
-CheckTrainerPicBank:
-	ld a, [wLinkState]
-	and a
-	ld a, BANK(RedPicFront)
-	ret nz
-.defaultSprite
-	ld a, [wWhichTrainerClass]
-	cp OPP_COOL_KID
-	ld a, BANK("Pics 6") ; this is where most of the trainer pics are
-	ret c
-	ld a, BANK(KidPic) ; this is where extra trainer pics are (trainers after Cool Kid in ID)
-	ret
-
-;;;;;;;;;;
-
 _LoadTrainerPic:
 	ld a, [wTrainerPicPointer]
 	ld e, a
 	ld a, [wTrainerPicPointer + 1]
 	ld d, a ; de contains pointer to trainer pic
-	call CheckTrainerPicBank
+	ld a, [wLinkState]
+	and a
+	ld a, BANK(RedPicFront)
+	jr nz, .loadSprite
+;;;;;;;;;; PureRGBnote: ADDED: now two banks are used for trainer sprites instead of 1
+.defaultSprite
+	ld a, [wCurOpponent]
+	cp OPP_COOL_KID
+	ld a, BANK("Pics 6") ; this is where most of the trainer pics are
+	jr c, .loadSprite
+	ld a, BANK(KidPic) ; this is where extra trainer pics are (trainers after Cool Kid in ID)
+;;;;;;;;;;
 .loadSprite
 	call UncompressSpriteFromDE
 	ld de, vFrontPic
@@ -7611,12 +7607,9 @@ LoadBackSpriteUnzoomed:
 ;;;;;;;;;;
 
 GetBackSpriteTarget:
-	ld de, vBackPic
-	ld a, [wIsInBattle]
-	and a
-	ret nz ; in battle we always draw the sprite at vBackPic
 	ld a, [wPokedexDataFlags]
 	bit BIT_VIEWING_POKEDEX, a
+	ld de, vBackPic
 	ret z
 	ld de, vFrontPic ; in the pokedex we render it to where the front sprite shows up for easier toggling
 	ret

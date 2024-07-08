@@ -1253,7 +1253,6 @@ BlueIntroText:
 
 ChampArenaStoreInitBattleData:	
 	ld [wCurOpponent], a
-	ld [wWhichTrainerClass], a
 	ld a, b
 	ld [wTrainerNo], a
 	call SaveEndBattleTextPointers
