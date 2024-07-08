@@ -1290,6 +1290,8 @@ wEnemyMonNick:: ds NAME_LENGTH
 
 wEnemyMon:: battle_struct wEnemyMon
 
+ENDSECTION
+
 SECTION "WRAM 1", WRAMX
 
 ;;;;;;;;;;; PureRGBnote: MOVED: moved from above wEnemyMonNick so that section WRAM 1 can start at exactly address $d000 as intended
@@ -1875,7 +1877,7 @@ wPseudoItemID:: db
 wEnemyStatEXPStore:: ; shinpokerednote: ADDED: store for EVs applied to the opponent's pokemon if the option is turned on
 wUnusedAlreadyOwnedFlag:: db
 
-	ds 1 ; unused lone byte
+	ds 2 ; unused 2 bytes
 
 wEvoStoneItemID:: db
 

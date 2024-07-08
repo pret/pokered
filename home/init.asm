@@ -42,7 +42,9 @@ DEF rLCDC_DEFAULT EQU %11100011
 	ld sp, wStack
 
 	ld hl, STARTOF(WRAM0)
-	ld bc, SIZEOF(WRAM0)
+	; PureRGBnote: WRAMX is the interchangeable second wram set on GBC. If we add it with WRAM0 it will have the original size of WRAM of the game.
+	; on PureRGB another wram bank is used on GBC for the GBC fade animation function's storage so WRAMX was introduced to the code.
+	ld bc, SIZEOF(WRAM0) + SIZEOF(WRAMX)
 .loop
 ; PureRGBnote: OPTIMIZED
 	xor a
