@@ -1,7 +1,7 @@
 ; creates a set of moves that may be used and returns its address in hl
 ; unused slots are filled with 0, all used slots may be chosen with equal probability
 AIEnemyTrainerChooseMoves:
-	ld a, $a
+	ld a, 10
 	ld hl, wBuffer ; init temporary move selection array. Only the moves with the lowest numbers are chosen in the end
 	ld [hli], a   ; move 1
 	ld [hli], a   ; move 2

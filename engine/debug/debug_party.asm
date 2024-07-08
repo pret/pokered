@@ -23,8 +23,8 @@ DebugNewGameParty: ; unreferenced except in _DEBUG
 	db MEW, 50
 	db ARMORED_MEWTWO, 99
 	db HARDENED_ONIX, 99
-	db ARTICUNO, 99
-	db PIKACHU, 15
+	db DITTO, 99
+	db LAPRAS, 15
 	db -1 ; end
 
 PrepareNewGameDebug: ; dummy except in _DEBUG
@@ -51,7 +51,7 @@ IF DEF(_DEBUG)
 	ld [hli], a
 	ld a, SURF
 	ld [hli], a
-	ld [hl], PSYCHIC_M
+	ld [hl], EGG_BOMB
 	ld hl, wPartyMon1PP
 	ld a, 15
 	ld [hli], a
@@ -121,6 +121,10 @@ IF DEF(_DEBUG)
 	SetEvent EVENT_GOT_POKEDEX
 	SetEvent EVENT_GOT_MOVEDEX
 	SetEvent EVENT_LEARNED_TO_DIG_BETWEEN_TOWNS
+	SetEvent EVENT_DELETED_ROUTE2_TREES
+	SetEvent EVENT_DELETED_CERULEAN_TREE
+	SetEvent EVENT_DELETED_ROUTE9_TREE
+	SetEvent EVENT_DELETED_FUCHSIA_TREES 
 
 	
 	ld a, HS_LYING_OLD_MAN
