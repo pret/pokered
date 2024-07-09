@@ -27,7 +27,8 @@ BattleOptionsHeader:
 	dw BattleOptionsLeftRightFuncs
 	dw DisplaySpriteOptions
 	dw DisplayOptions2
-	dw OptionsPageAButtonDefault
+	dw OptionsPageAorSelectButtonDefault
+	dw BattleOptionsInfoTextJumpTable
 	; fall through
 DisplayBattleOptions:
 	ld hl, BattleOptionsHeader
@@ -162,3 +163,28 @@ SetGenericCursorPositionFromOptions:
 	ld l, a
 	pop af
 	jp SetSingleBitOptionCursorPosition
+
+BattleOptionsInfoTextJumpTable:
+	dw TypeMatchupText
+	dw TypeMatchupText
+	dw TypeMatchupText
+	dw TypeMatchupText
+	dw EXPBarText
+	dw NPCEVsText
+	dw NPCPPText
+
+TypeMatchupText:
+	text_far _TypeMatchupText
+	text_end
+
+EXPBarText:
+	text_far _EXPBarText
+	text_end
+
+NPCEVsText:
+	text_far _NPCEVsText
+	text_end
+
+NPCPPText:
+	text_far _NPCPPText
+	text_end

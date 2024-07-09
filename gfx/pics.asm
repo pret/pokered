@@ -660,3 +660,5 @@ LightSwitchOn:: INCBIN "gfx/icons/light_switch_on.2bpp"
 OldNewTypes:: INCBIN "gfx/font/old_new_types.2bpp"
 
 LoveEmote:: INCBIN "gfx/emotes/love.2bpp"
+
+InfoPromptGraphics:: INCBIN "gfx/pokedex/info_prompt.2bpp"

@@ -288,6 +288,7 @@ SECTION "Text 12", ROMX
 INCLUDE "text/TypeGuysHouse.asm"
 INCLUDE "text/ChampArena.asm"
 INCLUDE "text/DiamondMine.asm"
+INCLUDE "text/OptionsInfoText.asm"
 
 SECTION "Pokédex Text", ROMX
 
