@@ -37,14 +37,14 @@ DisplayTextBoxID_::
 	call TextBoxBorder
 	pop hl
 	call GetTextBoxIDText
-	ld a, [wd730]
+	ld a, [wStatusFlags5]
 	push af
-	ld a, [wd730]
-	set 6, a ; no pauses between printing each letter
-	ld [wd730], a
+	ld a, [wStatusFlags5]
+	set BIT_NO_TEXT_DELAY, a
+	ld [wStatusFlags5], a
 	call PlaceString
 	pop af
-	ld [wd730], a
+	ld [wStatusFlags5], a
 	call UpdateSprites
 	ret
 
@@ -128,8 +128,8 @@ GetAddressOfScreenCoords:
 INCLUDE "data/text_boxes.asm"
 
 DisplayMoneyBox:
-	ld hl, wd730
-	set 6, [hl]
+	ld hl, wStatusFlags5
+	set BIT_NO_TEXT_DELAY, [hl]
 	ld a, MONEY_BOX_TEMPLATE
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
@@ -141,17 +141,17 @@ DisplayMoneyBox:
 	ld de, wPlayerMoney
 	ld c, $a3
 	call PrintBCDNumber
-	ld hl, wd730
-	res 6, [hl]
+	ld hl, wStatusFlags5
+	res BIT_NO_TEXT_DELAY, [hl]
 	ret
 
 CurrencyString:
 	db "      ¥@"
 
 DoBuySellQuitMenu:
-	ld a, [wd730]
-	set 6, a ; no printing delay
-	ld [wd730], a
+	ld a, [wStatusFlags5]
+	set BIT_NO_TEXT_DELAY, a
+	ld [wStatusFlags5], a
 	xor a
 	ld [wChosenMenuItem], a
 	ld a, BUY_SELL_QUIT_MENU_TEMPLATE
@@ -169,9 +169,9 @@ DoBuySellQuitMenu:
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
 	ld [wMenuWatchMovingOutOfBounds], a
-	ld a, [wd730]
-	res 6, a ; turn on the printing delay
-	ld [wd730], a
+	ld a, [wStatusFlags5]
+	res BIT_NO_TEXT_DELAY, a
+	ld [wStatusFlags5], a
 	call HandleMenuInput
 	call PlaceUnfilledArrowMenuCursor
 	bit BIT_A_BUTTON, a
@@ -205,9 +205,9 @@ DoBuySellQuitMenu:
 ; hl = address where the text box border should be drawn
 DisplayTwoOptionMenu:
 	push hl
-	ld a, [wd730]
-	set 6, a ; no printing delay
-	ld [wd730], a
+	ld a, [wStatusFlags5]
+	set BIT_NO_TEXT_DELAY, a
+	ld [wStatusFlags5], a
 
 ; pointless because both values are overwritten before they are read
 	xor a
@@ -277,8 +277,8 @@ DisplayTwoOptionMenu:
 	pop hl
 	add hl, bc
 	call PlaceString
-	ld hl, wd730
-	res 6, [hl] ; turn on the printing delay
+	ld hl, wStatusFlags5
+	res BIT_NO_TEXT_DELAY, [hl]
 	ld a, [wTwoOptionMenuID]
 	cp NO_YES_MENU
 	jr nz, .notNoYesMenu
@@ -287,12 +287,12 @@ DisplayTwoOptionMenu:
 ; it only seems to be used when confirming the deletion of a save file
 	xor a
 	ld [wTwoOptionMenuID], a
-	ld a, [wFlags_0xcd60]
+	ld a, [wMiscFlags]
 	push af
 	push hl
-	ld hl, wFlags_0xcd60
-	bit 5, [hl]
-	set 5, [hl] ; don't play sound when A or B is pressed in menu
+	ld hl, wMiscFlags
+	bit BIT_NO_MENU_BUTTON_SOUND, [hl]
+	set BIT_NO_MENU_BUTTON_SOUND, [hl]
 	pop hl
 .noYesMenuInputLoop
 	call HandleMenuInput
@@ -300,7 +300,7 @@ DisplayTwoOptionMenu:
 	jr nz, .noYesMenuInputLoop ; try again if B was not pressed
 	pop af
 	pop hl
-	ld [wFlags_0xcd60], a
+	ld [wMiscFlags], a
 	ld a, SFX_PRESS_AB
 	call PlaySound
 	jr .pressedAButton

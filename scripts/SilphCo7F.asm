@@ -169,8 +169,8 @@ SilphCo7FDefaultScript:
 	db -1 ; end
 
 SilphCo7FRivalStartBattleScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
 	xor a
 	ld [wJoyIgnore], a
@@ -178,9 +178,9 @@ SilphCo7FRivalStartBattleScript:
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	call Delay3
-	ld hl, wd72d
-	set 6, [hl]
-	set 7, [hl]
+	ld hl, wStatusFlags3
+	set BIT_TALKED_TO_TRAINER, [hl]
+	set BIT_PRINT_END_BATTLE_TEXT, [hl]
 	ld hl, SilphCo7FRivalDefeatedText
 	ld de, SilphCo7FRivalVictoryText
 	call SaveEndBattleTextPointers
@@ -252,8 +252,8 @@ SilphCo7FRivalAfterBattleScript:
 	db -1 ; end
 
 SilphCo7FRivalExitScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
 	ld a, HS_SILPH_CO_7F_RIVAL
 	ld [wMissableObjectIndex], a
@@ -296,8 +296,8 @@ SilphCo7TrainerHeader3:
 SilphCo7FSilphWorkerM1Text:
 ; lapras guy
 	text_asm
-	ld a, [wd72e]
-	bit 0, a ; got lapras?
+	ld a, [wStatusFlags4]
+	bit BIT_GOT_LAPRAS, a
 	jr z, .give_lapras
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .saved_silph
@@ -316,8 +316,8 @@ SilphCo7FSilphWorkerM1Text:
 	call EnableAutoTextBoxDrawing
 	ld hl, .LaprasDescriptionText
 	call PrintText
-	ld hl, wd72e
-	set 0, [hl]
+	ld hl, wStatusFlags4
+	set BIT_GOT_LAPRAS, [hl]
 	jr .done
 .saved_silph
 	ld hl, .SavedText

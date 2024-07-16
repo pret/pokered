@@ -21,14 +21,14 @@ MainMenu:
 	ld [hli], a
 	ld [hl], a
 	ld [wDefaultMap], a
-	ld hl, wd72e
-	res 6, [hl]
+	ld hl, wStatusFlags4
+	res BIT_LINK_CONNECTED, [hl]
 	call ClearScreen
 	call RunDefaultPaletteCommand
 	call LoadTextBoxTilePatterns
 	call LoadFontTilePatterns
-	ld hl, wd730
-	set 6, [hl]
+	ld hl, wStatusFlags5
+	set BIT_NO_TEXT_DELAY, [hl]
 	ld a, [wSaveFileStatus]
 	cp 1
 	jr z, .noSaveFile
@@ -50,8 +50,8 @@ MainMenu:
 	ld de, NewGameText
 	call PlaceString
 .next2
-	ld hl, wd730
-	res 6, [hl]
+	ld hl, wStatusFlags5
+	res BIT_NO_TEXT_DELAY, [hl]
 	call UpdateSprites
 	xor a
 	ld [wCurrentMenuItem], a
@@ -85,7 +85,7 @@ MainMenu:
 	cp 1
 	jp z, StartNewGame
 	call DisplayOptionMenu
-	ld a, 1
+	ld a, TRUE
 	ld [wOptionsInitialized], a
 	jp .mainMenuLoop
 .choseContinue
@@ -99,10 +99,10 @@ MainMenu:
 	ldh [hJoyHeld], a
 	call Joypad
 	ldh a, [hJoyHeld]
-	bit 0, a
+	bit BIT_A_BUTTON, a
 	jr nz, .pressedA
-	bit 1, a
-	jp nz, .mainMenuLoop ; pressed B
+	bit BIT_B_BUTTON, a
+	jp nz, .mainMenuLoop
 	jr .inputLoop
 .pressedA
 	call GBPalWhiteOutWithDelay3
@@ -114,18 +114,18 @@ MainMenu:
 	ld a, [wNumHoFTeams]
 	and a
 	jp z, SpecialEnterMap
-	ld a, [wCurMap] ; map ID
+	ld a, [wCurMap]
 	cp HALL_OF_FAME
 	jp nz, SpecialEnterMap
 	xor a
 	ld [wDestinationMap], a
-	ld hl, wd732
-	set 2, [hl] ; fly warp or dungeon warp
+	ld hl, wStatusFlags6
+	set BIT_FLY_OR_DUNGEON_WARP, [hl]
 	call PrepareForSpecialWarp
 	jp SpecialEnterMap
 
 InitOptions:
-	ld a, TEXT_DELAY_FAST
+	ld a, 1 << BIT_FAST_TEXT_DELAY
 	ld [wLetterPrintingDelayFlags], a
 	ld a, TEXT_DELAY_MEDIUM
 	ld [wOptions], a
@@ -134,8 +134,8 @@ InitOptions:
 LinkMenu:
 	xor a
 	ld [wLetterPrintingDelayFlags], a
-	ld hl, wd72e
-	set 6, [hl]
+	ld hl, wStatusFlags4
+	set BIT_LINK_CONNECTED, [hl]
 	ld hl, LinkMenuEmptyText
 	call PrintText
 	call SaveScreenTilesToBuffer1
@@ -151,20 +151,25 @@ LinkMenu:
 	call PlaceString
 	xor a
 	ld [wUnusedLinkMenuByte], a
-	ld [wd72d], a
+	ld [wCableClubDestinationMap], a
 	ld hl, wTopMenuItemY
-	ld a, $7
+	ld a, 7
 	ld [hli], a
-	ld a, $6
+	assert wTopMenuItemY + 1 == wTopMenuItemX
+	ld a, 6
 	ld [hli], a
+	assert wTopMenuItemX + 1 == wCurrentMenuItem
 	xor a
 	ld [hli], a
 	inc hl
-	ld a, $2
+	assert wCurrentMenuItem + 2 == wMaxMenuItem
+	ld a, 2
 	ld [hli], a
+	assert wMaxMenuItem + 1 == wMenuWatchedKeys
+	assert 2 + 1 == A_BUTTON | B_BUTTON
 	inc a
-	; ld a, A_BUTTON | B_BUTTON
-	ld [hli], a ; wMenuWatchedKeys
+	ld [hli], a
+	assert wMenuWatchedKeys + 1 == wLastMenuItem
 	xor a
 	ld [hl], a
 .waitForInputLoop
@@ -262,12 +267,12 @@ LinkMenu:
 	jr nz, .next
 	ld a, TRADE_CENTER
 .next
-	ld [wd72d], a
+	ld [wCableClubDestinationMap], a
 	ld hl, PleaseWaitText
 	call PrintText
 	ld c, 50
 	call DelayFrames
-	ld hl, wd732
+	ld hl, wStatusFlags6
 	res BIT_DEBUG_MODE, [hl]
 	ld a, [wDefaultMap]
 	ld [wDestinationMap], a
@@ -290,8 +295,8 @@ LinkMenu:
 	ld hl, LinkCanceledText
 	vc_hook Wireless_net_end
 	call PrintText
-	ld hl, wd72e
-	res 6, [hl]
+	ld hl, wStatusFlags4
+	res BIT_LINK_CONNECTED, [hl]
 	ret
 
 WhereWouldYouLikeText:
@@ -307,11 +312,9 @@ LinkCanceledText:
 	text_end
 
 StartNewGame:
-	ld hl, wd732
-	; Ensure debug mode is not used when
-	; starting a regular new game.
-	; Debug mode persists in saved games for
-	; both debug and non-debug builds, and is
+	ld hl, wStatusFlags6
+	; Ensure debug mode is not used when starting a regular new game.
+	; Debug mode persists in saved games for both debug and non-debug builds, and is
 	; only reset here by the main menu.
 	res BIT_DEBUG_MODE, [hl]
 	; fallthrough
@@ -326,9 +329,9 @@ SpecialEnterMap::
 	ldh [hJoyPressed], a
 	ldh [hJoyHeld], a
 	ldh [hJoy5], a
-	ld [wd72d], a
-	ld hl, wd732
-	set 0, [hl] ; count play time
+	ld [wCableClubDestinationMap], a
+	ld hl, wStatusFlags6
+	set BIT_GAME_TIMER_COUNTING, [hl]
 	call ResetPlayerSpriteData
 	ld c, 20
 	call DelayFrames
@@ -465,7 +468,8 @@ DisplayOptionMenu:
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
-	inc a
+	assert BIT_FAST_TEXT_DELAY == 0
+	inc a ; 1 << BIT_FAST_TEXT_DELAY
 	ld [wLetterPrintingDelayFlags], a
 	ld [wOptionsCancelCursorX], a
 	ld a, 3 ; text speed cursor Y coordinate
@@ -556,12 +560,12 @@ DisplayOptionMenu:
 	jp .loop
 .cursorInBattleAnimation
 	ld a, [wOptionsBattleAnimCursorX] ; battle animation cursor X coordinate
-	xor $0b ; toggle between 1 and 10
+	xor 1 ^ 10 ; toggle between 1 and 10
 	ld [wOptionsBattleAnimCursorX], a
 	jp .eraseOldMenuCursor
 .cursorInBattleStyle
 	ld a, [wOptionsBattleStyleCursorX] ; battle style cursor X coordinate
-	xor $0b ; toggle between 1 and 10
+	xor 1 ^ 10 ; toggle between 1 and 10
 	ld [wOptionsBattleStyleCursorX], a
 	jp .eraseOldMenuCursor
 .pressedLeftInTextSpeed
@@ -622,19 +626,19 @@ SetOptionsFromCursorPositions:
 	dec a
 	jr z, .battleAnimationOn
 .battleAnimationOff
-	set 7, d
+	set BIT_BATTLE_ANIMATION, d
 	jr .checkBattleStyle
 .battleAnimationOn
-	res 7, d
+	res BIT_BATTLE_ANIMATION, d
 .checkBattleStyle
 	ld a, [wOptionsBattleStyleCursorX] ; battle style cursor X coordinate
 	dec a
 	jr z, .battleStyleShift
 .battleStyleSet
-	set 6, d
+	set BIT_BATTLE_SHIFT, d
 	jr .storeOptions
 .battleStyleShift
-	res 6, d
+	res BIT_BATTLE_SHIFT, d
 .storeOptions
 	ld a, d
 	ld [wOptions], a

@@ -48,8 +48,8 @@ SeafoamIslandsB4FDefaultScript:
 	ld a, D_UP
 	ld [wSimulatedJoypadStatesEnd], a
 	call StartSimulatingJoypadStates
-	ld hl, wFlags_D733
-	res 2, [hl]
+	ld hl, wStatusFlags7
+	res BIT_FORCED_WARP, [hl]
 	ld a, SCRIPT_SEAFOAMISLANDSB4F_OBJECT_MOVING1
 	ld [wSeafoamIslandsB4FCurScript], a
 	ret

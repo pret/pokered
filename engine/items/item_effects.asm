@@ -495,7 +495,7 @@ ItemUseBall:
 	ld a, [wEnemyMonSpecies2]
 	ld [wcf91], a
 	ld a, [wEnemyMonLevel]
-	ld [wCurEnemyLVL], a
+	ld [wCurEnemyLevel], a
 	callfar LoadEnemyMonData
 	pop af
 	ld [wcf91], a
@@ -679,8 +679,8 @@ ItemUseSurfboard:
 	jp c, SurfingAttemptFailed
 .surf
 	call .makePlayerMoveForward
-	ld hl, wd730
-	set 7, [hl]
+	ld hl, wStatusFlags5
+	set BIT_SCRIPTED_MOVEMENT_STATE, [hl]
 	ld a, 2
 	ld [wWalkBikeSurfState], a ; change player state to surfing
 	call PlayDefaultMusic ; play surfing music
@@ -715,8 +715,8 @@ ItemUseSurfboard:
 	jp PrintText
 .stopSurfing
 	call .makePlayerMoveForward
-	ld hl, wd730
-	set 7, [hl]
+	ld hl, wStatusFlags5
+	set BIT_SCRIPTED_MOVEMENT_STATE, [hl]
 	xor a
 	ld [wWalkBikeSurfState], a ; change player state to walking
 	dec a
@@ -1259,7 +1259,7 @@ ItemUseMedicine:
 	ld bc, wPartyMon1Level - wPartyMon1
 	add hl, bc ; hl now points to level
 	ld a, [hl] ; a = level
-	ld [wCurEnemyLVL], a ; store level
+	ld [wCurEnemyLevel], a ; store level
 	call GetMonHeader
 	push de
 	ld a, d
@@ -1338,7 +1338,7 @@ ItemUseMedicine:
 	jr z, .vitaminNoEffect ; can't raise level above 100
 	inc a
 	ld [hl], a ; store incremented level
-	ld [wCurEnemyLVL], a
+	ld [wCurEnemyLevel], a
 	push hl
 	push de
 	ld d, a
@@ -1505,11 +1505,11 @@ ItemUseEscapeRope:
 	jr z, .notUsable
 	cp b
 	jr nz, .loop
-	ld hl, wd732
-	set 3, [hl]
-	set 6, [hl]
-	ld hl, wd72e
-	res 4, [hl]
+	ld hl, wStatusFlags6
+	set BIT_FLY_WARP, [hl]
+	set BIT_ESCAPE_WARP, [hl]
+	ld hl, wStatusFlags4
+	res BIT_NO_BATTLES, [hl]
 	ResetEvent EVENT_IN_SAFARI_ZONE
 	xor a
 	ld [wNumSafariBalls], a
@@ -1597,8 +1597,8 @@ ItemUseCardKey:
 .done
 	ld hl, ItemUseText00
 	call PrintText
-	ld hl, wd728
-	set 7, [hl]
+	ld hl, wStatusFlags1
+	set BIT_UNUSED_CARD_KEY, [hl] ; never checked
 	ret
 
 INCLUDE "data/events/card_key_coords.asm"
@@ -1872,7 +1872,7 @@ RodResponse:
 	ld a, 1
 	ld [wMoveMissed], a
 	ld a, b ; level
-	ld [wCurEnemyLVL], a
+	ld [wCurEnemyLevel], a
 	ld a, c ; species
 	ld [wCurOpponent], a
 
@@ -2774,7 +2774,7 @@ SendNewMonToBox:
 	ld [de], a
 	inc de
 	push de
-	ld a, [wCurEnemyLVL]
+	ld a, [wCurEnemyLevel]
 	ld d, a
 	callfar CalcExperience
 	pop de

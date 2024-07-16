@@ -8,8 +8,8 @@ RedsHouse1F_TextPointers:
 
 RedsHouse1FMomText:
 	text_asm
-	ld a, [wd72e]
-	bit 3, a ; received a Pokémon from Oak?
+	ld a, [wStatusFlags4]
+	bit BIT_GOT_STARTER, a
 	jr nz, .heal
 	ld hl, .WakeUpText
 	call PrintText

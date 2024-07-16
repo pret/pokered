@@ -5,14 +5,14 @@ ActivatePC::
 	ld hl, TurnedOnPC1Text
 	call PrintText
 	call WaitForSoundToFinish
-	ld hl, wFlags_0xcd60
-	set 3, [hl]
+	ld hl, wMiscFlags
+	set BIT_USING_GENERIC_PC, [hl]
 	call LoadScreenTilesFromBuffer2
 	call Delay3
 PCMainMenu:
 	farcall DisplayPCMainMenu
-	ld hl, wFlags_0xcd60
-	set 5, [hl]
+	ld hl, wMiscFlags
+	set BIT_NO_MENU_BUTTON_SOUND, [hl]
 	call HandleMenuInput
 	bit BIT_B_BUTTON, a
 	jp nz, LogOff
@@ -48,9 +48,9 @@ PCMainMenu:
 	jp z, PKMNLeague ;if current menu item id is 3, it's pkmnleague
 	jp LogOff        ;otherwise, it's 4, and you're logging off
 .playersPC
-	ld hl, wFlags_0xcd60
-	res 5, [hl]
-	set 3, [hl]
+	ld hl, wMiscFlags
+	res BIT_NO_MENU_BUTTON_SOUND, [hl]
+	set BIT_USING_GENERIC_PC, [hl]
 	ld a, SFX_ENTER_PC
 	call PlaySound
 	call WaitForSoundToFinish
@@ -93,9 +93,9 @@ LogOff:
 	ld a, SFX_TURN_OFF_PC
 	call PlaySound
 	call WaitForSoundToFinish
-	ld hl, wFlags_0xcd60
-	res 3, [hl]
-	res 5, [hl]
+	ld hl, wMiscFlags
+	res BIT_USING_GENERIC_PC, [hl]
+	res BIT_NO_MENU_BUTTON_SOUND, [hl]
 	ret
 
 TurnedOnPC1Text:

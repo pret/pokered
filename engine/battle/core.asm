@@ -844,7 +844,7 @@ FaintEnemyPokemon:
 ; the player has exp all
 ; now, set the gain exp flag for every party member
 ; half of the total stat exp and normal exp will divided evenly amongst every party member
-	ld a, $1
+	ld a, TRUE
 	ld [wBoostExpByExpAll], a
 	ld a, [wPartyCount]
 	ld b, 0
@@ -924,8 +924,8 @@ TrainerBattleVictory:
 	cp RIVAL3 ; final battle against rival
 	jr nz, .notrival
 	ld b, MUSIC_DEFEATED_GYM_LEADER
-	ld hl, wFlags_D733
-	set 1, [hl]
+	ld hl, wStatusFlags7
+	set BIT_NO_MAP_MUSIC, [hl]
 .notrival
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
@@ -1157,9 +1157,9 @@ HandlePlayerBlackOut:
 	ld hl, LinkBattleLostText
 .noLinkBattle
 	call PrintText
-	ld a, [wd732]
-	res 5, a
-	ld [wd732], a
+	ld a, [wStatusFlags6]
+	res BIT_ALWAYS_ON_BIKE, a
+	ld [wStatusFlags6], a
 	call ClearScreen
 	scf
 	ret
@@ -1179,10 +1179,10 @@ LinkBattleLostText:
 ; slides pic of fainted mon downwards until it disappears
 ; bug: when this is called, [hAutoBGTransferEnabled] is non-zero, so there is screen tearing
 SlideDownFaintedMonPic:
-	ld a, [wd730]
+	ld a, [wStatusFlags5]
 	push af
-	set 6, a
-	ld [wd730], a
+	set BIT_NO_TEXT_DELAY, a
+	ld [wStatusFlags5], a
 	ld b, 7 ; number of times to slide
 .slideStepLoop ; each iteration, the mon is slid down one row
 	push bc
@@ -1221,7 +1221,7 @@ SlideDownFaintedMonPic:
 	dec b
 	jr nz, .slideStepLoop
 	pop af
-	ld [wd730], a
+	ld [wStatusFlags5], a
 	ret
 
 SevenSpacesText:
@@ -1344,7 +1344,7 @@ EnemySendOutFirstMon:
 	ld bc, wEnemyMon2 - wEnemyMon1
 	call AddNTimes
 	ld a, [hl]
-	ld [wCurEnemyLVL], a
+	ld [wCurEnemyLevel], a
 	ld a, [wWhichPokemon]
 	inc a
 	ld hl, wEnemyPartyCount
@@ -2558,7 +2558,7 @@ MoveSelectionMenu:
 	cp LINK_STATE_BATTLING
 	jr z, .matchedkeyspicked
 	; Disable left, right, and START buttons in regular battles.
-	ld a, [wFlags_D733]
+	ld a, [wStatusFlags7]
 	bit BIT_TEST_BATTLE, a
 	ld b, D_UP | D_DOWN | A_BUTTON | B_BUTTON | SELECT
 	jr z, .matchedkeyspicked
@@ -2587,7 +2587,7 @@ SelectMenuItem:
 	jr .select
 .battleselect
 	; Hide move swap cursor in TestBattle.
-	ld a, [wFlags_D733]
+	ld a, [wStatusFlags7]
 	bit BIT_TEST_BATTLE, a
 	; This causes PrintMenuItem to not run in TestBattle.
 	; MoveSelectionMenu still draws part of its window, an issue
@@ -4404,7 +4404,7 @@ GetEnemyMonStat:
 	ret
 .notLinkBattle
 	ld a, [wEnemyMonLevel]
-	ld [wCurEnemyLVL], a
+	ld [wCurEnemyLevel], a
 	ld a, [wEnemyMonSpecies]
 	ld [wd0b5], a
 	call GetMonHeader
@@ -6092,7 +6092,7 @@ GetCurrentMove:
 .player
 	ld de, wPlayerMoveNum
 	; Apply InitBattleVariables to TestBattle.
-	ld a, [wFlags_D733]
+	ld a, [wStatusFlags7]
 	bit BIT_TEST_BATTLE, a
 	ld a, [wTestBattlePlayerSelectedMove]
 	jr nz, .selected
@@ -6143,7 +6143,7 @@ LoadEnemyMonData:
 	ld [hli], a
 	ld [hl], b
 	ld de, wEnemyMonLevel
-	ld a, [wCurEnemyLVL]
+	ld a, [wCurEnemyLevel]
 	ld [de], a
 	inc de
 	ld b, $0
@@ -6776,7 +6776,7 @@ InitOpponent:
 	jr InitBattleCommon
 
 DetermineWildOpponent:
-	ld a, [wd732]
+	ld a, [wStatusFlags6]
 	bit BIT_DEBUG_MODE, a
 	jr z, .notDebugMode
 	ldh a, [hJoyHeld]
@@ -6794,7 +6794,7 @@ InitBattleCommon:
 	ld hl, wLetterPrintingDelayFlags
 	ld a, [hl]
 	push af
-	res 1, [hl]
+	res BIT_TEXT_DELAY, [hl] ; no delay
 	callfar InitBattleVariables
 	ld a, [wEnemyMonSpecies2]
 	sub OPP_ID_OFFSET

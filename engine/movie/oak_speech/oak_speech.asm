@@ -8,7 +8,7 @@ PrepareOakSpeech:
 	; which causes CheckForceBikeOrSurf to not return.
 	; To fix this in debug builds, reset bit 5 here or in StartNewGame.
 	; In non-debug builds, the instructions can be removed.
-	ld a, [wd732]
+	ld a, [wStatusFlags6]
 	push af
 	ld hl, wPlayerName
 	ld bc, wBoxDataEnd - wPlayerName
@@ -19,7 +19,7 @@ PrepareOakSpeech:
 	xor a
 	call FillMemory
 	pop af
-	ld [wd732], a
+	ld [wStatusFlags6], a
 	pop af
 	ld [wOptions], a
 	pop af
@@ -61,7 +61,7 @@ OakSpeech:
 	call PrepareForSpecialWarp
 	xor a
 	ldh [hTileAnimations], a
-	ld a, [wd732]
+	ld a, [wStatusFlags6]
 	bit BIT_DEBUG_MODE, a
 	jp nz, .skipSpeech
 	ld de, ProfOakPic
@@ -106,8 +106,8 @@ OakSpeech:
 	lb bc, BANK(RedPicFront), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	call GBFadeInFromWhite
-	ld a, [wd72d]
-	and a
+	ld a, [wStatusFlags3]
+	and a ; ???
 	jr nz, .next
 	ld hl, OakSpeechText3
 	call PrintText

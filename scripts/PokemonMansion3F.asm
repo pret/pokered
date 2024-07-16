@@ -60,17 +60,17 @@ PokemonMansion3FDefaultScript:
 .isPlayerFallingDownHole:
 	xor a
 	ld [wWhichDungeonWarp], a
-	ld a, [wd72d]
-	bit 4, a
+	ld a, [wStatusFlags3]
+	bit BIT_ON_DUNGEON_WARP, a
 	ret nz
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, [wCoordIndex]
 	ld [wWhichDungeonWarp], a
-	ld hl, wd72d
-	set 4, [hl]
-	ld hl, wd732
-	set 4, [hl]
+	ld hl, wStatusFlags3
+	set BIT_ON_DUNGEON_WARP, [hl]
+	ld hl, wStatusFlags6
+	set BIT_DUNGEON_WARP, [hl]
 	ret
 
 Mansion3Script_Switches::

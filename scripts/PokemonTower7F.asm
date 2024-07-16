@@ -23,8 +23,8 @@ PokemonTower7F_ScriptPointers:
 	dw_const PokemonTower7FWarpToMrFujiHouseScript, SCRIPT_POKEMONTOWER7F_WARP_TO_MR_FUJI_HOUSE
 
 PokemonTower7FEndBattleScript:
-	ld hl, wFlags_0xcd60
-	res 0, [hl]
+	ld hl, wMiscFlags
+	res BIT_SEEN_BY_TRAINER, [hl]
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, PokemonTower7FSetDefaultScript
@@ -41,8 +41,8 @@ PokemonTower7FEndBattleScript:
 	ret
 
 PokemonTower7FHideNPCScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
 	ld hl, wMissableObjectList
 	ld a, [wSpriteIndex]
@@ -78,8 +78,8 @@ PokemonTower7FWarpToMrFujiHouseScript:
 	ld [wDestinationWarpID], a
 	ld a, LAVENDER_TOWN
 	ld [wLastMap], a
-	ld hl, wd72d
-	set 3, [hl]
+	ld hl, wStatusFlags3
+	set BIT_WARP_FROM_CUR_SCRIPT, [hl]
 	ld a, SCRIPT_POKEMONTOWER7F_DEFAULT
 	ld [wPokemonTower7FCurScript], a
 	ld [wCurMapScript], a

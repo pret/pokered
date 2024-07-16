@@ -91,8 +91,8 @@ PalletTownOakWalksToPlayerScript:
 	ret
 
 PalletTownOakNotSafeComeWithMeScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
 	xor a ; ld a, SPRITE_FACING_DOWN
 	ld [wSpritePlayerStateData1FacingDirection], a

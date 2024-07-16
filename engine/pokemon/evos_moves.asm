@@ -105,7 +105,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	cp b ; is the mon's level greater than the evolution requirement?
 	jp c, .nextEvoEntry2 ; if so, go the next evolution entry
 .doEvolution
-	ld [wCurEnemyLVL], a
+	ld [wCurEnemyLevel], a
 	ld a, 1
 	ld [wEvolutionOccurred], a
 	push hl
@@ -340,7 +340,7 @@ LearnMoveFromLevelUp:
 	and a ; have we reached the end of the learn set?
 	jr z, .done ; if we've reached the end of the learn set, jump
 	ld b, a ; level the move is learnt at
-	ld a, [wCurEnemyLVL]
+	ld a, [wCurEnemyLevel]
 	cp b ; is the move learnt at the mon's current level?
 	ld a, [hli] ; move ID
 	jr nz, .learnSetLoop
@@ -375,7 +375,7 @@ LearnMoveFromLevelUp:
 	ld [wd11e], a
 	ret
 
-; writes the moves a mon has at level [wCurEnemyLVL] to [de]
+; writes the moves a mon has at level [wCurEnemyLevel] to [de]
 ; move slots are being filled up sequentially and shifted if all slots are full
 WriteMonMoves:
 	call GetPredefRegisters
@@ -407,7 +407,7 @@ WriteMonMoves:
 	and a
 	jp z, .done       ; end of list
 	ld b, a
-	ld a, [wCurEnemyLVL]
+	ld a, [wCurEnemyLevel]
 	cp b
 	jp c, .done       ; mon level < move level (assumption: learnset is sorted by level)
 	ld a, [wLearningMovesFromDayCare]

@@ -15,8 +15,8 @@ EmotionBubble:
 	push af
 	ld a, $ff
 	ld [wUpdateSpritesEnabled], a
-	ld a, [wd736]
-	bit 6, a ; are the last 4 OAM entries reserved for a shadow or fishing rod?
+	ld a, [wMovementFlags]
+	bit BIT_LEDGE_OR_FISHING, a ; are the last 4 OAM entries reserved for a shadow or fishing rod?
 	ld hl, wShadowOAMSprite35Attributes
 	ld de, wShadowOAMSprite39Attributes
 	jr z, .next

@@ -16,9 +16,9 @@ ExecuteCurMapScriptInTable::
 	pop hl
 	pop af
 	push hl
-	ld hl, wFlags_D733
-	bit 4, [hl]
-	res 4, [hl]
+	ld hl, wStatusFlags7
+	bit BIT_USE_CUR_MAP_SCRIPT, [hl]
+	res BIT_USE_CUR_MAP_SCRIPT, [hl]
 	jr z, .useProvidedIndex   ; test if map script index was overridden manually
 	ld a, [wCurMapScript]
 .useProvidedIndex
@@ -114,10 +114,10 @@ TalkToTrainer::
 	call ReadTrainerHeaderInfo     ; read end battle text
 	pop de
 	call SaveEndBattleTextPointers
-	ld hl, wFlags_D733
-	set 4, [hl]                    ; activate map script index override (index is set below)
-	ld hl, wFlags_0xcd60
-	bit 0, [hl]                    ; test if player is already engaging the trainer (because the trainer saw the player)
+	ld hl, wStatusFlags7
+	set BIT_USE_CUR_MAP_SCRIPT, [hl] ; activate map script index override (index is set below)
+	ld hl, wMiscFlags
+	bit BIT_SEEN_BY_TRAINER, [hl]  ; test if player is already engaging the trainer (because the trainer saw the player)
 	ret nz
 ; if the player talked to the trainer of his own volition
 	call EngageMapTrainer
@@ -143,8 +143,8 @@ ENDC
 	ld [wTrainerHeaderFlagBit], a
 	ret
 .trainerEngaging
-	ld hl, wFlags_D733
-	set 3, [hl]
+	ld hl, wStatusFlags7
+	set BIT_TRAINER_BATTLE, [hl]
 	ld [wEmotionBubbleSpriteIndex], a
 	xor a ; EXCLAMATION_BUBBLE
 	ld [wWhichEmotionBubble], a
@@ -160,8 +160,8 @@ ENDC
 
 ; display the before battle text after the enemy trainer has walked up to the player's sprite
 DisplayEnemyTrainerTextAndStartBattle::
-	ld a, [wd730]
-	and $1
+	ld a, [wStatusFlags5]
+	and 1 << BIT_SCRIPTED_NPC_MOVEMENT
 	ret nz ; return if the enemy trainer hasn't finished walking to the player's sprite
 	ld [wJoyIgnore], a
 	ld a, [wSpriteIndex]
@@ -173,11 +173,11 @@ StartTrainerBattle::
 	xor a
 	ld [wJoyIgnore], a
 	call InitBattleEnemyParameters
-	ld hl, wd72d
-	set 6, [hl]
-	set 7, [hl]
-	ld hl, wd72e
-	set 1, [hl]
+	ld hl, wStatusFlags3
+	set BIT_TALKED_TO_TRAINER, [hl]
+	set BIT_PRINT_END_BATTLE_TEXT, [hl]
+	ld hl, wStatusFlags4
+	set BIT_UNKNOWN_4_1, [hl]
 	ld hl, wCurMapScript
 	inc [hl]        ; increment map script index (next script function is usually EndTrainerBattle)
 	ret
@@ -186,10 +186,10 @@ EndTrainerBattle::
 	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
 	set 6, [hl]
-	ld hl, wd72d
-	res 7, [hl]
-	ld hl, wFlags_0xcd60
-	res 0, [hl]                  ; player is no longer engaged by any trainer
+	ld hl, wStatusFlags3
+	res BIT_PRINT_END_BATTLE_TEXT, [hl]
+	ld hl, wMiscFlags
+	res BIT_SEEN_BY_TRAINER, [hl] ; player is no longer engaged by any trainer
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, ResetButtonPressedAndMapScript
@@ -211,9 +211,9 @@ EndTrainerBattle::
 	ld [wMissableObjectIndex], a               ; load corresponding missable object index and remove it
 	predef HideObject
 .skipRemoveSprite
-	ld hl, wd730
-	bit 4, [hl]
-	res 4, [hl]
+	ld hl, wStatusFlags5
+	bit BIT_UNKNOWN_5_4, [hl]
+	res BIT_UNKNOWN_5_4, [hl]
 	ret nz
 
 ResetButtonPressedAndMapScript::
@@ -240,7 +240,7 @@ InitBattleEnemyParameters::
 	ld [wTrainerNo], a
 	ret
 .noTrainer
-	ld [wCurEnemyLVL], a
+	ld [wCurEnemyLevel], a
 	ret
 
 GetSpritePosition1::
@@ -340,9 +340,9 @@ EngageMapTrainer::
 
 PrintEndBattleText::
 	push hl
-	ld hl, wd72d
-	bit 7, [hl]
-	res 7, [hl]
+	ld hl, wStatusFlags3
+	bit BIT_PRINT_END_BATTLE_TEXT, [hl]
+	res BIT_PRINT_END_BATTLE_TEXT, [hl]
 	pop hl
 	ret z
 	ldh a, [hLoadedROMBank]
@@ -389,8 +389,8 @@ TrainerEndBattleText::
 ; engaged with another trainer
 ; XXX unused?
 CheckIfAlreadyEngaged::
-	ld a, [wFlags_0xcd60]
-	bit 0, a
+	ld a, [wMiscFlags]
+	bit BIT_SEEN_BY_TRAINER, a
 	ret nz
 	call EngageMapTrainer
 	xor a

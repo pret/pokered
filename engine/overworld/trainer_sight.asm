@@ -221,8 +221,8 @@ TrainerEngage:
 	ld a, [wTrainerSpriteOffset]
 	and a
 	jr z, .noEngage
-	ld hl, wFlags_0xcd60
-	set 0, [hl]
+	ld hl, wMiscFlags
+	set BIT_SEEN_BY_TRAINER, [hl]
 	call EngageMapTrainer
 	ld a, $ff
 .noEngage

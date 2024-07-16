@@ -108,7 +108,7 @@ InGameTrade_DoTrade:
 	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes
 	ld a, [hl]
-	ld [wCurEnemyLVL], a
+	ld [wCurEnemyLevel], a
 	ld hl, wCompletedInGameTradeFlags
 	ld a, [wWhichTrade]
 	ld c, a
@@ -118,13 +118,13 @@ InGameTrade_DoTrade:
 	call PrintText
 	ld a, [wWhichPokemon]
 	push af
-	ld a, [wCurEnemyLVL]
+	ld a, [wCurEnemyLevel]
 	push af
 	call LoadHpBarAndStatusTilePatterns
 	call InGameTrade_PrepareTradeData
 	predef InternalClockTradeAnim
 	pop af
-	ld [wCurEnemyLVL], a
+	ld [wCurEnemyLevel], a
 	pop af
 	ld [wWhichPokemon], a
 	ld a, [wInGameTradeReceiveMonSpecies]
