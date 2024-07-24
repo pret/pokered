@@ -104,7 +104,7 @@ PrintFossilsInBag:
 	ldh a, [hItemCounter]
 	ld bc, SCREEN_WIDTH * 2
 	call AddNTimes
-	ld de, wcd6d
+	ld de, wNameBuffer
 	call PlaceString
 	ld hl, hItemCounter
 	inc [hl]

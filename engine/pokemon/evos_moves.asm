@@ -267,7 +267,7 @@ RenameEvolvedMon:
 	call GetName
 	pop af
 	ld [wd0b5], a
-	ld hl, wcd6d
+	ld hl, wNameBuffer
 	ld de, wStringBuffer
 .compareNamesLoop
 	ld a, [de]
@@ -283,7 +283,7 @@ RenameEvolvedMon:
 	call AddNTimes
 	push hl
 	call GetName
-	ld hl, wcd6d
+	ld hl, wNameBuffer
 	pop de
 	jp CopyData
 

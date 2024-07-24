@@ -435,7 +435,7 @@ GetMonHeader::
 	ld [MBC1RomBank], a
 	ret
 
-; copy party pokemon's name to wcd6d
+; copy party pokemon's name to wNameBuffer
 GetPartyMonName2::
 	ld a, [wWhichPokemon] ; index within party
 	ld hl, wPartyMonNicks
@@ -445,7 +445,7 @@ GetPartyMonName::
 	push hl
 	push bc
 	call SkipFixedLengthTextEntries ; add NAME_LENGTH to hl, a times
-	ld de, wcd6d
+	ld de, wNameBuffer
 	push de
 	ld bc, NAME_LENGTH
 	call CopyData

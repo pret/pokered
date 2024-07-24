@@ -261,13 +261,13 @@ AddPartyMon_WriteMovePP:
 	ld hl, Moves
 	ld bc, MOVE_LENGTH
 	call AddNTimes
-	ld de, wcd6d
+	ld de, wMoveData
 	ld a, BANK(Moves)
 	call FarCopyData
 	pop bc
 	pop de
 	pop hl
-	ld a, [wcd6d + 5] ; PP is byte 5 of move data
+	ld a, [wMoveData + MOVE_PP]
 .empty
 	inc de
 	ld [de], a

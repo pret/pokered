@@ -3,7 +3,7 @@ LearnMove:
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMonNicks
 	call GetPartyMonName
-	ld hl, wcd6d
+	ld hl, wNameBuffer
 	ld de, wLearnMoveMonName
 	ld bc, NAME_LENGTH
 	call CopyData

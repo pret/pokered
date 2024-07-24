@@ -2493,10 +2493,10 @@ GetMaxPP:
 	ld hl, Moves
 	ld bc, MOVE_LENGTH
 	call AddNTimes
-	ld de, wcd6d
+	ld de, wMoveData
 	ld a, BANK(Moves)
 	call FarCopyData
-	ld de, wcd6d + 5 ; PP is byte 5 of move data
+	ld de, wMoveData + MOVE_PP
 	ld a, [de]
 	ld b, a ; b = normal max PP
 	pop hl

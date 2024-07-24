@@ -51,7 +51,7 @@ _OaksLabMonEnergeticText::
 _OaksLabReceivedMonText::
 	text "<PLAYER> received"
 	line "a @"
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text "!@"
 	text_end
 
@@ -243,7 +243,7 @@ _OaksLabRivalIllTakeThisOneText::
 _OaksLabRivalReceivedMonText::
 	text "<RIVAL> received"
 	line "a @"
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text "!@"
 	text_end
 

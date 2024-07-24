@@ -72,7 +72,7 @@ OakSpeechSlidePicLeft:
 	ld c, 10
 	call DelayFrames
 	pop de
-	ld hl, wcd6d
+	ld hl, wNameBuffer
 	ld bc, NAME_LENGTH
 	call CopyData
 	call Delay3
@@ -209,7 +209,7 @@ GetDefaultName:
 .foundName
 	ld h, d
 	ld l, e
-	ld de, wcd6d
+	ld de, wNameBuffer
 	ld bc, NAME_BUFFER_LENGTH
 	jp CopyData
 

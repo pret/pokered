@@ -32,7 +32,7 @@ Trade_PrintEnemyMonInfoText:
 	lb bc, LEADING_ZEROES | 1, 3
 	call PrintNumber
 	hlcoord 5, 12
-	ld de, wcd6d
+	ld de, wNameBuffer
 	call PlaceString
 	hlcoord 8, 14
 	ld de, wTradedEnemyMonOT

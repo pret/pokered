@@ -38,7 +38,7 @@ _CinnabarLabFossilRoomScientist1FossilIsBackToLifeText::
 _CinnabarLabFossilRoomScientist1SeesFossilText::
 	text "Oh! That is"
 	line "@"
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text "!"
 
 	para "It is fossil of"
@@ -60,7 +60,7 @@ _CinnabarLabFossilRoomScientist1TakesFossilText::
 
 	para "<PLAYER> handed"
 	line "over @"
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text "!"
 	prompt
 

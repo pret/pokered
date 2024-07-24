@@ -1,6 +1,6 @@
 PayDayEffect_:
 	xor a
-	ld hl, wcd6d
+	ld hl, wPayDayMoney
 	ld [hli], a
 	ldh a, [hWhoseTurn]
 	and a
@@ -21,7 +21,7 @@ PayDayEffect_:
 	ld b, $4
 	call Divide
 	ldh a, [hQuotient + 3]
-	ld [hli], a
+	ld [hli], a ; wPayDayMoney + 1
 	ldh a, [hRemainder]
 	ldh [hDividend + 3], a
 	ld a, 10
@@ -33,7 +33,7 @@ PayDayEffect_:
 	ld b, a
 	ldh a, [hRemainder]
 	add b
-	ld [hl], a
+	ld [hl], a ; wPayDayMoney + 2
 	ld de, wTotalPayDayMoney + 2
 	ld c, $3
 	predef AddBCDPredef

@@ -165,7 +165,7 @@ HoFDisplayMonInfo:
 	ld de, HoFMonInfoText
 	call PlaceString
 	hlcoord 1, 4
-	ld de, wcd6d
+	ld de, wNameBuffer
 	call PlaceString
 	ld a, [wHoFMonLevel]
 	hlcoord 8, 7
@@ -275,7 +275,7 @@ HoFRecordMonInfo:
 	ld [hli], a
 	ld e, l
 	ld d, h
-	ld hl, wcd6d
+	ld hl, wNameBuffer
 	ld bc, NAME_LENGTH
 	jp CopyData
 

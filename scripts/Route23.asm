@@ -81,7 +81,7 @@ Route23CopyBadgeTextScript:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld de, wcd6d
+	ld de, wNameBuffer
 .copyTextLoop
 	ld a, [hli]
 	ld [de], a
