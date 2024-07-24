@@ -4,7 +4,7 @@ GiveItem::
 ; Return carry on success.
 	ld a, b
 	ld [wd11e], a
-	ld [wcf91], a
+	ld [wCurItem], a
 	ld a, c
 	ld [wItemQuantity], a
 	ld hl, wNumBagItems
@@ -18,7 +18,7 @@ GiveItem::
 GivePokemon::
 ; Give the player monster b at level c.
 	ld a, b
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	ld a, c
 	ld [wCurEnemyLevel], a
 	xor a ; PLAYER_PARTY_DATA

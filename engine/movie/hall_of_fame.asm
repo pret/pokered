@@ -101,7 +101,7 @@ HoFShowMonOrPlayer:
 	ld a, $c0
 	ldh [hSCX], a
 	ld a, [wHoFMonSpecies]
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	ld [wd0b5], a
 	ld [wBattleMonSpecies2], a
 	ld [wWholeScreenPaletteMonSpecies], a

@@ -124,28 +124,30 @@ DisplayListMenuIDLoop::
 	ld b, 0
 	add hl, bc
 	ld a, [hl]
-	ld [wcf91], a
+	ld [wCurListMenuItem], a
 	ld a, [wListMenuID]
 	and a ; PCPOKEMONLISTMENU?
 	jr z, .pokemonList
+; if it's an item menu
+	assert wCurListMenuItem == wCurItem
 	push hl
 	call GetItemPrice
 	pop hl
 	ld a, [wListMenuID]
 	cp ITEMLISTMENU
 	jr nz, .skipGettingQuantity
-; if it's an item menu
 	inc hl
 	ld a, [hl] ; a = item quantity
 	ld [wMaxItemQuantity], a
 .skipGettingQuantity
-	ld a, [wcf91]
+	ld a, [wCurItem]
 	ld [wd0b5], a
 	ld a, BANK(ItemNames)
 	ld [wPredefBank], a
 	call GetName
 	jr .storeChosenEntry
 .pokemonList
+	assert wCurListMenuItem == wCurPartySpecies
 	ld hl, wPartyCount
 	ld a, [wListPointer]
 	cp l ; is it a list of party pokemon or box pokemon?
@@ -413,8 +415,8 @@ PrintListMenuEntries::
 	push hl
 	ld a, [de]
 	ld de, ItemPrices
-	ld [wcf91], a
-	call GetItemPrice ; get price
+	ld [wCurItem], a
+	call GetItemPrice
 	pop hl
 	ld bc, SCREEN_WIDTH + 5 ; 1 row down and 5 columns right
 	add hl, bc
@@ -468,7 +470,7 @@ PrintListMenuEntries::
 	jr nz, .nextListEntry
 .printItemQuantity
 	ld a, [wd11e]
-	ld [wcf91], a
+	ld [wCurItem], a
 	call IsKeyItem ; check if item is unsellable
 	ld a, [wIsKeyItem]
 	and a ; is the item unsellable?

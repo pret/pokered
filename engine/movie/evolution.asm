@@ -2,7 +2,7 @@ EvolveMon:
 	push hl
 	push de
 	push bc
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	push af
 	ld a, [wd0b5]
 	push af
@@ -25,7 +25,7 @@ EvolveMon:
 	ld c, 0
 	call EvolutionSetWholeScreenPalette
 	ld a, [wEvoNewSpecies]
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	ld [wd0b5], a
 	call Evolution_LoadPic
 	ld de, vFrontPic
@@ -33,7 +33,7 @@ EvolveMon:
 	ld bc, 7 * 7
 	call CopyVideoData
 	ld a, [wEvoOldSpecies]
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	ld [wd0b5], a
 	call Evolution_LoadPic
 	ld a, $1
@@ -77,7 +77,7 @@ EvolveMon:
 	pop af
 	ld [wd0b5], a
 	pop af
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	pop bc
 	pop de
 	pop hl

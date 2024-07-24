@@ -53,13 +53,13 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld h, [hl]
 	ld l, a
 	push hl
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	push af
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a
 	call LoadMonData
 	pop af
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	pop hl
 
 .evoEntryLoop ; loop over evolution entries
@@ -95,7 +95,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 .checkItemEvo
 	ld a, [hli]
 	ld b, a ; evolution item
-	ld a, [wcf91] ; this is supposed to be the last item used, but it is also used to hold species numbers
+	ld a, [wCurItem]
 	cp b ; was the evolution item in this entry used?
 	jp nz, .nextEvoEntry1 ; if not, go to the next evolution entry
 .checkLevel
@@ -320,7 +320,7 @@ Evolution_ReloadTilesetTilePatterns:
 LearnMoveFromLevelUp:
 	ld hl, EvosMovesPointerTable
 	ld a, [wd11e] ; species
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	dec a
 	ld bc, 0
 	ld hl, EvosMovesPointerTable
@@ -371,7 +371,7 @@ LearnMoveFromLevelUp:
 	call CopyToStringBuffer
 	predef LearnMove
 .done
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	ld [wd11e], a
 	ret
 
@@ -384,7 +384,7 @@ WriteMonMoves:
 	push bc
 	ld hl, EvosMovesPointerTable
 	ld b, 0
-	ld a, [wcf91]  ; cur mon ID
+	ld a, [wCurPartySpecies]
 	dec a
 	add a
 	rl b

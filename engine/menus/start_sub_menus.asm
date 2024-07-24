@@ -166,7 +166,7 @@ StartMenu_Pokemon::
 	res BIT_SURF_ALLOWED, [hl]
 	jp z, .loop
 	ld a, SURFBOARD
-	ld [wcf91], a
+	ld [wCurItem], a
 	ld [wPseudoItemID], a
 	call UseItem
 	ld a, [wActionResultOrTookBattleTurn]
@@ -194,7 +194,7 @@ StartMenu_Pokemon::
 	text_end
 .dig
 	ld a, ESCAPE_ROPE
-	ld [wcf91], a
+	ld [wCurItem], a
 	ld [wPseudoItemID], a
 	call UseItem
 	ld a, [wActionResultOrTookBattleTurn]
@@ -259,7 +259,7 @@ StartMenu_Pokemon::
 	ld a, [wPartyAndBillsPCSavedMenuItem]
 	push af
 	ld a, POTION
-	ld [wcf91], a
+	ld [wCurItem], a
 	ld [wPseudoItemID], a
 	call UseItem
 	pop af
@@ -337,7 +337,7 @@ StartMenu_Item::
 	call PlaceUnfilledArrowMenuCursor
 	xor a
 	ld [wMenuItemToSwap], a
-	ld a, [wcf91]
+	ld a, [wCurItem]
 	cp BICYCLE
 	jp z, .useOrTossItem
 .notBicycle1
@@ -364,11 +364,11 @@ StartMenu_Item::
 	jr z, .useOrTossItem
 	jp ItemMenuLoop
 .useOrTossItem ; if the player made the choice to use or toss the item
-	ld a, [wcf91]
+	ld a, [wCurItem]
 	ld [wd11e], a
 	call GetItemName
 	call CopyToStringBuffer
-	ld a, [wcf91]
+	ld a, [wCurItem]
 	cp BICYCLE
 	jr nz, .notBicycle2
 	ld a, [wStatusFlags6]
@@ -383,14 +383,14 @@ StartMenu_Item::
 	jr nz, .tossItem
 ; use item
 	ld [wPseudoItemID], a ; a must be 0 due to above conditional jump
-	ld a, [wcf91]
+	ld a, [wCurItem]
 	cp HM01
 	jr nc, .useItem_partyMenu
 	ld hl, UsableItems_CloseMenu
 	ld de, 1
 	call IsInArray
 	jr c, .useItem_closeMenu
-	ld a, [wcf91]
+	ld a, [wCurItem]
 	ld hl, UsableItems_PartyMenu
 	ld de, 1
 	call IsInArray
@@ -426,7 +426,7 @@ StartMenu_Item::
 	ld a, [wIsKeyItem]
 	and a
 	jr nz, .skipAskingQuantity
-	ld a, [wcf91]
+	ld a, [wCurItem]
 	call IsItemHM
 	jr c, .skipAskingQuantity
 	call DisplayChooseQuantityMenu

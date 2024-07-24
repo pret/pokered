@@ -21,7 +21,7 @@ _AddPartyMon::
 	jr nc, .noCarry
 	inc d
 .noCarry
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	ld [de], a ; write species of new mon in party list
 	inc de
 	ld a, $ff ; terminator
@@ -64,7 +64,7 @@ _AddPartyMon::
 	ld e, l
 	ld d, h
 	push hl
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	ld [wd0b5], a
 	call GetMonHeader
 	ld hl, wMonHeader
@@ -80,7 +80,7 @@ _AddPartyMon::
 	jr nz, .next4
 
 ; If the mon is being added to the player's party, update the pokedex.
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	ld [wd11e], a
 	push de
 	predef IndexToPokedex
@@ -275,7 +275,7 @@ AddPartyMon_WriteMovePP:
 	jr nz, .pploop ; there are still moves to read
 	ret
 
-; adds enemy mon [wcf91] (at position [wWhichPokemon] in enemy list) to own party
+; adds enemy mon [wCurPartySpecies] (at position [wWhichPokemon] in enemy list) to own party
 ; used in the cable club trade center
 _AddEnemyMonToPlayerParty::
 	ld hl, wPartyCount
@@ -288,7 +288,7 @@ _AddEnemyMonToPlayerParty::
 	ld c, a
 	ld b, $0
 	add hl, bc
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	ld [hli], a      ; add mon as last list entry
 	ld [hl], $ff     ; write new sentinel
 	ld hl, wPartyMons
@@ -322,7 +322,7 @@ _AddEnemyMonToPlayerParty::
 	call SkipFixedLengthTextEntries
 	ld bc, NAME_LENGTH
 	call CopyData    ; write new mon's nickname (from an enemy mon)
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	ld [wd11e], a
 	predef IndexToPokedex
 	ld a, [wd11e]
@@ -371,7 +371,7 @@ _MoveMon::
 	cp DAYCARE_TO_PARTY
 	ld a, [wDayCareMon]
 	jr z, .copySpecies
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 .copySpecies
 	ld [hli], a          ; write new mon ID
 	ld [hl], $ff         ; write new sentinel

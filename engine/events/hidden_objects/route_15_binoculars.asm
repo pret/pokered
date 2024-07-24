@@ -5,7 +5,7 @@ Route15GateLeftBinoculars:
 	call EnableAutoTextBoxDrawing
 	tx_pre Route15UpstairsBinocularsText
 	ld a, ARTICUNO
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	call PlayCry
 	jp DisplayMonFrontSpriteInBox
 

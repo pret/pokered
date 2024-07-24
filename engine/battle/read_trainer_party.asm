@@ -54,7 +54,7 @@ ReadTrainer:
 	ld a, [hli]
 	and a ; have we reached the end of the trainer data?
 	jr z, .FinishUp
-	ld [wcf91], a ; write species somewhere (XXX why?)
+	ld [wCurPartySpecies], a
 	ld a, ENEMY_PARTY_DATA
 	ld [wMonDataLocation], a
 	push hl
@@ -71,7 +71,7 @@ ReadTrainer:
 	jr z, .AddLoneMove
 	ld [wCurEnemyLevel], a
 	ld a, [hli]
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	ld a, ENEMY_PARTY_DATA
 	ld [wMonDataLocation], a
 	push hl

@@ -321,7 +321,7 @@ OaksLabRivalChoosesStarterScript:
 	call Delay3
 	ld a, [wRivalStarterTemp]
 	ld [wRivalStarter], a
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	ld [wd11e], a
 	call GetMonName
 	ld a, OAKSLAB_RIVAL
@@ -824,7 +824,7 @@ OaksLabBulbasaurPokeBallText:
 	ld b, OAKSLAB_BULBASAUR_POKE_BALL
 
 OaksLabSelectedPokeBallScript:
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	ld [wd11e], a
 	ld a, b
 	ld [wSpriteIndex], a
@@ -897,7 +897,7 @@ OaksLabMonChoiceMenu:
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, OaksLabMonChoiceEnd
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	ld [wPlayerStarter], a
 	ld [wd11e], a
 	call GetMonName
@@ -926,7 +926,7 @@ OaksLabMonChoiceMenu:
 	ld [wMonDataLocation], a
 	ld a, 5
 	ld [wCurEnemyLevel], a
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	ld [wd11e], a
 	call AddPartyMon
 	ld hl, wStatusFlags4

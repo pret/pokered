@@ -1,6 +1,6 @@
 GetItemPrice::
 ; Stores item's price as BCD at hItemPrice (3 bytes)
-; Input: [wcf91] = item id
+; Input: [wCurItem] = item id
 	ldh a, [hLoadedROMBank]
 	push af
 	ld a, [wListMenuID]
@@ -15,7 +15,7 @@ GetItemPrice::
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [wcf91] ; a contains item id
+	ld a, [wCurItem]
 	cp HM01
 	jr nc, .getTMPrice
 	ld bc, $3

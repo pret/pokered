@@ -28,7 +28,7 @@ RemoveItemFromInventory::
 ; function to add an item (in varying quantities) to the player's bag or PC box
 ; INPUT:
 ; HL = address of inventory (either wNumBagItems or wNumBoxItems)
-; [wcf91] = item ID
+; [wCurItem] = item ID
 ; [wItemQuantity] = item quantity
 ; sets carry flag if successful, unsets carry flag if unsuccessful
 AddItemToInventory::

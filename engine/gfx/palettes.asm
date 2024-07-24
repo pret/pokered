@@ -69,7 +69,7 @@ SetPal_StatusScreen:
 	ld de, wPalPacket
 	ld bc, $10
 	call CopyData
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	cp NUM_POKEMON_INDEXES + 1
 	jr c, .pokemon
 	ld a, $1 ; not pokemon
@@ -97,7 +97,7 @@ SetPal_Pokedex:
 	ld de, wPalPacket
 	ld bc, $10
 	call CopyData
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	call DeterminePaletteIDOutOfBattle
 	ld hl, wPalPacket + 3
 	ld [hl], a

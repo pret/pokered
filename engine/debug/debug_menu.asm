@@ -98,7 +98,7 @@ TestBattle: ; unreferenced except in _DEBUG
 
 	; Give the player a level 20 Rhydon.
 	ld a, RHYDON
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	ld a, 20
 	ld [wCurEnemyLevel], a
 	xor a

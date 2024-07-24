@@ -8,7 +8,7 @@ AskName:
 	ld b, 4
 	ld c, 11
 	call z, ClearScreenArea ; only if in wild battle
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	ld [wd11e], a
 	call GetMonName
 	ld hl, DoYouWantToNicknameText
@@ -457,7 +457,7 @@ PrintNamingText:
 	ld de, RivalsTextString
 	dec a
 	jr z, .notNickname
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	ld [wMonPartySpriteSpecies], a
 	push af
 	farcall WriteMonPartySpriteOAMBySpecies

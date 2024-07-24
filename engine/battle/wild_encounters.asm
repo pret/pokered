@@ -76,7 +76,7 @@ TryDoWildEncounter:
 	ld a, [hli]
 	ld [wCurEnemyLevel], a
 	ld a, [hl]
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	ld [wEnemyMonSpecies2], a
 	ld a, [wRepelRemainingSteps]
 	and a

@@ -1,6 +1,6 @@
-; tests if mon [wcf91] can learn move [wMoveNum]
+; tests if mon [wCurPartySpecies] can learn move [wMoveNum]
 CanLearnTM:
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	ld [wd0b5], a
 	call GetMonHeader
 	ld hl, wMonHLearnset
