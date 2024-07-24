@@ -18861,7 +18861,11 @@ WRAM0 bank #0:
 	         $cd6b = wJoyIgnore
 	         $cd6c = wNumMovesMinusOne
 	         $cd6c = wDownscaledMonSize
-	         $cd6d = wcd6d
+	         $cd6d = wMoveData
+	         $cd6d = wNameBuffer
+	         $cd6d = wPayDayMoney
+	         $cd6d = wBattleMenuCurrentPP
+	         $cd6d = wEvoDataBuffer
 	         $cd71 = wStatusScreenCurrentPP
 	         $cd78 = wNormalMaxPPList
 	         $cd81 = wSerialOtherGameboyRandomNumberListBlock

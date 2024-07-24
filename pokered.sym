@@ -18472,7 +18472,11 @@
 00:cd6b wJoyIgnore
 00:cd6c wNumMovesMinusOne
 00:cd6c wDownscaledMonSize
-00:cd6d wcd6d
+00:cd6d wMoveData
+00:cd6d wNameBuffer
+00:cd6d wPayDayMoney
+00:cd6d wBattleMenuCurrentPP
+00:cd6d wEvoDataBuffer
 00:cd71 wStatusScreenCurrentPP
 00:cd78 wNormalMaxPPList
 00:cd81 wSerialOtherGameboyRandomNumberListBlock
