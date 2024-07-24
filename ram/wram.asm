@@ -876,16 +876,28 @@ wDownscaledMonSize::
 wNumMovesMinusOne:: db
 
 UNION
-wcd6d:: ds NAME_BUFFER_LENGTH ; buffer for various data
+; storage buffer for various name strings
+wNameBuffer:: ds NAME_BUFFER_LENGTH
 
 NEXTU
-	ds 4
-; temp variable used to print a move's current PP on the status screen
+; data copied from Moves for one move
+wMoveData:: ds MOVE_LENGTH
+
+NEXTU
+; amount of money made from one use of Pay Day
+wPayDayMoney:: ds 3
+
+NEXTU
+; evolution data for one mon
+wEvoDataBuffer:: ds 4 * 3 + 1 ; enough for Eevee's three 4-byte evolutions and 0 terminator
+
+NEXTU
+wBattleMenuCurrentPP:: db
+	ds 3
 wStatusScreenCurrentPP:: db
 	ds 6
 ; list of normal max PP (without PP up) values
 wNormalMaxPPList:: ds NUM_MOVES
-	ds 5
 ENDU
 
 UNION

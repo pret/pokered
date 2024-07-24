@@ -89,7 +89,7 @@ LeaguePCShowMon:
 	ld [wWholeScreenPaletteMonSpecies], a
 	ld a, [hli]
 	ld [wHoFMonLevel], a
-	ld de, wcd6d
+	ld de, wNameBuffer
 	ld bc, NAME_LENGTH
 	call CopyData
 	ld b, SET_PAL_POKEMON_WHOLE_SCREEN

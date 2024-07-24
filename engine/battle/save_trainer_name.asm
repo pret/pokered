@@ -9,7 +9,7 @@ SaveTrainerName::
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld de, wcd6d
+	ld de, wNameBuffer
 .CopyCharacter
 	ld a, [hli]
 	ld [de], a

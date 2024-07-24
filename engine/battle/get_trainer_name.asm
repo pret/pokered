@@ -17,8 +17,8 @@ GetTrainerName_::
 	ld a, BANK(TrainerNames)
 	ld [wPredefBank], a
 	call GetName
-	ld hl, wcd6d
+	ld hl, wNameBuffer
 .foundName
 	ld de, wTrainerName
-	ld bc, $d
+	ld bc, ITEM_NAME_LENGTH
 	jp CopyData

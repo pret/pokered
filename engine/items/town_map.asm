@@ -1,5 +1,7 @@
 DEF NOT_VISITED EQU $fe
 
+DEF BIRD_BASE_TILE EQU $04
+
 DisplayTownMap:
 	call LoadTownMap
 	ld hl, wUpdateSpritesEnabled
@@ -12,15 +14,15 @@ DisplayTownMap:
 	ld a, [wCurMap]
 	push af
 	ld b, $0
-	call DrawPlayerOrBirdSprite ; player sprite
+	call DrawPlayerOrBirdSprite
 	hlcoord 1, 0
-	ld de, wcd6d
+	ld de, wNameBuffer
 	call PlaceString
 	ld hl, wShadowOAM
 	ld de, wTileMapBackup
 	ld bc, $10
 	call CopyData
-	ld hl, vSprites tile $04
+	ld hl, vSprites tile BIRD_BASE_TILE
 	ld de, TownMapCursor
 	lb bc, BANK(TownMapCursor), (TownMapCursorEnd - TownMapCursor) / $8
 	call CopyVideoDataDouble
@@ -50,15 +52,15 @@ DisplayTownMap:
 	ld hl, wShadowOAMSprite04
 	call WriteTownMapSpriteOAM ; town map cursor sprite
 	pop hl
-	ld de, wcd6d
+	ld de, wNameBuffer
 .copyMapName
 	ld a, [hli]
 	ld [de], a
 	inc de
-	cp $50
+	cp "@"
 	jr nz, .copyMapName
 	hlcoord 1, 0
-	ld de, wcd6d
+	ld de, wNameBuffer
 	call PlaceString
 	ld hl, wShadowOAMSprite04
 	ld de, wTileMapBackup + 16
@@ -142,7 +144,7 @@ LoadTownMap_Fly::
 	call LoadPlayerSpriteGraphics
 	call LoadFontTilePatterns
 	ld de, BirdSprite
-	ld hl, vSprites tile $04
+	ld hl, vSprites tile BIRD_BASE_TILE
 	lb bc, BANK(BirdSprite), 12
 	call CopyVideoData
 	ld de, TownMapUpArrow
@@ -173,10 +175,10 @@ LoadTownMap_Fly::
 	call ClearScreenArea
 	pop hl
 	ld a, [hl]
-	ld b, $4
-	call DrawPlayerOrBirdSprite ; draw bird sprite
+	ld b, BIRD_BASE_TILE
+	call DrawPlayerOrBirdSprite
 	hlcoord 3, 0
-	ld de, wcd6d
+	ld de, wNameBuffer
 	call PlaceString
 	ld c, 15
 	call DelayFrames
@@ -356,7 +358,7 @@ DrawPlayerOrBirdSprite:
 	call TownMapCoordsToOAMCoords
 	call WritePlayerOrBirdSpriteOAM
 	pop hl
-	ld de, wcd6d
+	ld de, wNameBuffer
 .loop
 	ld a, [hli]
 	ld [de], a
