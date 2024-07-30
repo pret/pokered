@@ -42,35 +42,35 @@ _DexRatingText_Own30To39::
 	done
 
 _DexRatingText_Own40To49::
-	text "Looking good!"
-	line "Go find my AIDE"
-	cont "when you get 50!"
-	done
-
-_DexRatingText_Own50To59::
-	text "You finally got at"
-	line "least 50 species!"
-	cont "Be sure to get"
-	cont "EXP.ALL from my"
-	cont "AIDE!"
-	done
-
-_DexRatingText_Own60To69::
-	text "Ho! This is"
-	line "getting even"
-	cont "better!"
-	done
-
-_DexRatingText_Own70To79::
 	text "Very good!"
 	line "Go fish for some"
 	cont "marine #MON!"
 	done
 
-_DexRatingText_Own80To89::
+_DexRatingText_Own50To59::
+	text "Ho! This is"
+	line "getting even"
+	cont "better!"
+	done
+
+_DexRatingText_Own60To69::
 	text "Wonderful!"
 	line "Do you like to"
 	cont "collect things?"
+	done
+
+_DexRatingText_Own70To79::
+	text "Looking good!"
+	line "Go find my AIDE"
+	cont "when you get 80!"
+	done
+
+_DexRatingText_Own80To89::
+	text "You finally got at"
+	line "least 80 species!"
+	cont "Be sure to get a"
+	cont "BOOSTER CHIP from"
+	cont "my AIDE!"
 	done
 
 _DexRatingText_Own90To99::
