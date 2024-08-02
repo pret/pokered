@@ -1,3 +1,6 @@
+---
+name: Test
+about: Report an issue or bug with PureRGB. Not for feature suggestions or questions.
 name: Write a Review
 description: Write a review of the romhack.
 title: "[Review]: "
@@ -23,3 +26,4 @@ body:
       placeholder: I was whelmed by this romhack.
     validations:
       required: true
+---
