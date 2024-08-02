@@ -1,7 +1,6 @@
 ---
-name: Test
-about: Report an issue or bug with PureRGB. Not for feature suggestions or questions.
-name: Write a Review
+name: Review
+about: Write a review of the romhack.
 description: Write a review of the romhack.
 title: "[Review]: "
 labels: ["review"]
