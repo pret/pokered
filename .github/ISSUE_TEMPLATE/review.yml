@@ -1,16 +1,8 @@
 name: Review
 description: Write a review of the romhack.
-title: "[Review]: "
+title: "[Review]: Summarize your review here"
 labels: ["review"]
 body:
-  - type: input
-    id: headline
-    attributes:
-      label: Review Headline
-      description: Summarize your review in a few words.
-      placeholder: Made me rethink my life decisions.
-    validations:
-      required: true
   - type: textarea
     id: review
     attributes:
