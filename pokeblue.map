@@ -18875,7 +18875,9 @@ WRAM0 bank #0:
 	         $cf8b = wListPointer
 	         $cf8d = wUnusedNamePointer
 	         $cf8f = wItemPrices
-	         $cf91 = wcf91
+	         $cf91 = wCurListMenuItem
+	         $cf91 = wCurItem
+	         $cf91 = wCurPartySpecies
 	         $cf92 = wWhichPokemon
 	         $cf93 = wPrintItemPrices
 	         $cf94 = wHPBarType
@@ -19827,8 +19829,8 @@ WRAM0 bank #0:
 	         $daaf = wBoxMon1SpecialExp
 	         $dab1 = wBoxMon1DVs
 	         $dab3 = wBoxMon1PP
-	         $dab7 = wBoxMon2
 	         $dab7 = wBoxMon2Species
+	         $dab7 = wBoxMon2
 	         $dab8 = wBoxMon2HP
 	         $daba = wBoxMon2BoxLevel
 	         $dabb = wBoxMon2Status

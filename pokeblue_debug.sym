@@ -18551,7 +18551,9 @@
 00:cf8b wListPointer
 00:cf8d wUnusedNamePointer
 00:cf8f wItemPrices
-00:cf91 wcf91
+00:cf91 wCurListMenuItem
+00:cf91 wCurItem
+00:cf91 wCurPartySpecies
 00:cf92 wWhichPokemon
 00:cf93 wPrintItemPrices
 00:cf94 wHPBarType
@@ -19500,8 +19502,8 @@
 00:daaf wBoxMon1SpecialExp
 00:dab1 wBoxMon1DVs
 00:dab3 wBoxMon1PP
-00:dab7 wBoxMon2
 00:dab7 wBoxMon2Species
+00:dab7 wBoxMon2
 00:dab8 wBoxMon2HP
 00:daba wBoxMon2BoxLevel
 00:dabb wBoxMon2Status
