@@ -77,7 +77,7 @@ DrawHPBar::
 ; 02: current box
 ; 03: daycare
 ; OUTPUT:
-; [wcf91] = pokemon ID
+; [wCurPartySpecies] = pokemon ID
 ; wLoadedMon = base address of pokemon data
 ; wMonHeader = base address of base stats
 LoadMonData::
@@ -101,7 +101,7 @@ LoadFrontSpriteByMonIndex::
 	push hl
 	ld a, [wd11e]
 	push af
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	ld [wd11e], a
 	predef IndexToPokedex
 	ld hl, wd11e
@@ -115,7 +115,7 @@ LoadFrontSpriteByMonIndex::
 	jr c, .validDexNumber   ; dex >#151 invalid
 .invalidDexNumber
 	ld a, RHYDON ; $1
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	ret
 .validDexNumber
 	push hl
@@ -264,7 +264,7 @@ HandlePartyMenuInput::
 	ld c, a
 	add hl, bc
 	ld a, [hl]
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	ld [wBattleMonSpecies2], a
 	call BankswitchBack
 	and a

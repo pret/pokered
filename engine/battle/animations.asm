@@ -683,7 +683,7 @@ DoSpecialEffectByAnimationId:
 INCLUDE "data/battle_anims/special_effects.asm"
 
 DoBallTossSpecialEffects:
-	ld a, [wcf91]
+	ld a, [wCurItem]
 	cp ULTRA_BALL + 1 ; is it a Master Ball or Ultra Ball?
 	jr nc, .skipFlashingEffect
 .flashingEffect ; do a flashing effect if it's Master Ball or Ultra Ball
@@ -2031,7 +2031,7 @@ ChangeMonPic:
 	and a
 	jr z, .playerTurn
 	ld a, [wChangeMonPicEnemyTurnSpecies]
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	ld [wd0b5], a
 	xor a
 	ld [wSpriteFlipped], a
@@ -2599,7 +2599,7 @@ TossBallAnimation:
 
 	ld hl, .PokeBallAnimations
 	; choose which toss animation to use
-	ld a, [wcf91]
+	ld a, [wCurItem]
 	cp POKE_BALL
 	ld b, TOSS_ANIM
 	jr z, .done

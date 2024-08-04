@@ -225,7 +225,7 @@ PlayerPCToss:
 	ld a, [wIsKeyItem]
 	and a
 	jr nz, .next
-	ld a, [wcf91]
+	ld a, [wCurItem]
 	call IsItemHM
 	jr c, .next
 ; if it's not a key item, there can be more than one of the item

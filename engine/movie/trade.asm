@@ -727,7 +727,7 @@ Trade_CircleOAM3:
 
 ; a = species
 Trade_LoadMonSprite:
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	ld [wd0b5], a
 	ld [wWholeScreenPaletteMonSpecies], a
 	ld b, SET_PAL_POKEMON_WHOLE_SCREEN

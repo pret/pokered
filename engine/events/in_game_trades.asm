@@ -99,7 +99,7 @@ InGameTrade_DoTrade:
 	jp c, .tradeFailed ; jump if the player didn't select a pokemon
 	ld a, [wInGameTradeGiveMonSpecies]
 	ld b, a
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	cp b
 	ld a, $2
 	jr nz, .tradeFailed ; jump if the selected mon's species is not the required one
@@ -128,7 +128,7 @@ InGameTrade_DoTrade:
 	pop af
 	ld [wWhichPokemon], a
 	ld a, [wInGameTradeReceiveMonSpecies]
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	xor a
 	ld [wMonDataLocation], a ; not used
 	ld [wRemoveMonFromBox], a

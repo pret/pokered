@@ -52,7 +52,7 @@ OakSpeech:
 	predef InitPlayerData2
 	ld hl, wNumBoxItems
 	ld a, POTION
-	ld [wcf91], a
+	ld [wCurItem], a
 	ld a, 1
 	ld [wItemQuantity], a
 	call AddItemToInventory
@@ -74,7 +74,7 @@ OakSpeech:
 	call ClearScreen
 	ld a, NIDORINO
 	ld [wd0b5], a
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	call GetMonHeader
 	hlcoord 6, 4
 	call LoadFlippedFrontSpriteByMonIndex

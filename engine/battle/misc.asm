@@ -118,5 +118,5 @@ GetMonSpecies:
 	ld d, 0
 	add hl, de
 	ld a, [hl]
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	ret

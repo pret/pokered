@@ -170,9 +170,9 @@ StatusScreen:
 	call GBPalNormal
 	hlcoord 1, 0
 	call LoadFlippedFrontSpriteByMonIndex ; draw Pokémon picture
-	ld a, [wcf91]
-	call PlayCry ; play Pokémon cry
-	call WaitForTextScrollButtonPress ; wait for button
+	ld a, [wCurPartySpecies]
+	call PlayCry
+	call WaitForTextScrollButtonPress
 	pop af
 	ldh [hTileAnimations], a
 	ret

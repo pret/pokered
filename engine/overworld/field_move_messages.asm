@@ -9,7 +9,7 @@ PrintStrengthText:
 UsedStrengthText:
 	text_far _UsedStrengthText
 	text_asm
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	call PlayCry
 	call Delay3
 	jp TextScriptEnd

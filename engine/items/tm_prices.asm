@@ -1,7 +1,7 @@
 GetMachinePrice::
-; Input:  [wcf91] = Item Id of a TM
+; Input:  [wCurItem] = Item ID of a TM
 ; Output: Stores the TM price at hItemPrice
-	ld a, [wcf91] ; a contains TM item id
+	ld a, [wCurItem]
 	sub TM01 ; underflows below 0 for HM items (before TM items)
 	ret c ; HMs are priceless
 	ld d, a

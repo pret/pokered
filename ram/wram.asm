@@ -1073,7 +1073,10 @@ wUnusedNamePointer:: dw
 
 wItemPrices:: dw
 
-wcf91:: db ; used with a lot of things (too much to list here)
+wCurPartySpecies::
+wCurItem::
+wCurListMenuItem::
+	db
 
 ; which pokemon you selected
 wWhichPokemon:: db

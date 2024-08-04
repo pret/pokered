@@ -16,7 +16,7 @@ UncompressMonSprite::
 ; $4A ≤ index < $74:       bank $B ("Pics 3")
 ; $74 ≤ index < $99:       bank $C ("Pics 4")
 ; $99 ≤ index:             bank $D ("Pics 5")
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	ld b, a
 	cp MEW
 	ld a, BANK(MewPicFront)
