@@ -976,7 +976,7 @@ wBoughtOrSoldItemInMart:: db
 ; $02 - draw
 wBattleResult:: db
 
-; bit 0: if set, DisplayTextID automatically draws a text box
+; bit 0: if set, prevents DisplayTextID from automatically drawing a text box
 wAutoTextBoxDrawingControl:: db
 
 ; used in some overworld scripts to vary scripted movement
