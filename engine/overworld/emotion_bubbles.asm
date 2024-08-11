@@ -1,6 +1,6 @@
 ; PureRGBnote: ADDED: the emotion bubble code was split into three functions that differ in how long the bubble shows.
 ; also, added a new heart bubble
-EmotionBubble:
+EmotionBubble::
 	call EmotionBubbleCommon
 	ld c, 60
 	rst _DelayFrames

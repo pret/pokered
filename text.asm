@@ -25,7 +25,7 @@ INCLUDE "text/SilphCo2F.asm"
 INCLUDE "text/SilphCo3F.asm"
 INCLUDE "text/SilphCo4F.asm"
 INCLUDE "text/SilphCo5F.asm"
-INCLUDE "text/ProspectorsHouse.asm"
+INCLUDE "text/CinnabarVolcano.asm"
 
 
 SECTION "Text 2", ROMX
@@ -76,6 +76,7 @@ INCLUDE "text/SaffronGates.asm"
 INCLUDE "text/Daycare.asm"
 ; moved from Text 2
 INCLUDE "text/SafariZoneWest.asm"
+INCLUDE "text/ProspectorsHouse.asm"
 
 
 SECTION "Text 4", ROMX

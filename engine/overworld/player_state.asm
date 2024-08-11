@@ -67,7 +67,7 @@ CheckForceBikeOrSurf::
 	;force bike riding
 	ld hl, wd732
 	set 5, [hl]
-	ld a, $1
+	ld a, BIKING
 	ld [wWalkBikeSurfState], a
 	ld [wWalkBikeSurfStateCopy], a
 	jp ForceBikeOrSurf
@@ -77,7 +77,7 @@ CheckForceBikeOrSurf::
 	inc hl
 	jr .loop
 .forceSurfing
-	ld a, $2
+	ld a, SURFING
 	ld [wWalkBikeSurfState], a
 	ld [wWalkBikeSurfStateCopy], a
 	jp ForceBikeOrSurf

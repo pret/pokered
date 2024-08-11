@@ -9,3 +9,10 @@ LedgeTiles:
 	db SPRITE_FACING_RIGHT, $2C, $1D, D_RIGHT
 	db SPRITE_FACING_RIGHT, $39, $0D, D_RIGHT
 	db -1 ; end
+
+VolcanoLedgeTiles:
+	; player direction, ledge tile, input required
+	db SPRITE_FACING_DOWN,  $41, D_DOWN
+	db SPRITE_FACING_RIGHT,  $40, D_RIGHT
+	db SPRITE_FACING_LEFT,  $30, D_LEFT
+	db -1

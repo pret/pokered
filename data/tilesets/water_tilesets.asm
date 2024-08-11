@@ -9,4 +9,5 @@ WaterTilesets:
 	db CAVERN
 	db FACILITY
 	db PLATEAU
+	db VOLCANO ; but it's lava
 	db -1 ; end

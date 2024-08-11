@@ -425,7 +425,6 @@ Route15Gate2F_Blocks:
 Route12Gate2F_Blocks:
 Route11Gate2F_Blocks: INCBIN "maps/Route11Gate2F.blk"
 
-
 SECTION "Maps 8", ROMX
 
 INCLUDE "scripts/Route7.asm"
@@ -494,20 +493,10 @@ INCLUDE "scripts/CeladonMart5F.asm"
 INCLUDE "data/maps/objects/CeladonMart5F.asm"
 CeladonMart5F_Blocks: INCBIN "maps/CeladonMart5F.blk"
 
-INCLUDE "data/maps/headers/GameCornerPrizeRoom.asm"
-INCLUDE "scripts/GameCornerPrizeRoom.asm"
-INCLUDE "data/maps/objects/GameCornerPrizeRoom.asm"
-GameCornerPrizeRoom_Blocks: INCBIN "maps/GameCornerPrizeRoom.blk"
-
 INCLUDE "data/maps/headers/CeladonDiner.asm"
 INCLUDE "scripts/CeladonDiner.asm"
 INCLUDE "data/maps/objects/CeladonDiner.asm"
 CeladonDiner_Blocks: INCBIN "maps/CeladonDiner.blk"
-
-INCLUDE "data/maps/headers/CeladonChiefHouse.asm"
-INCLUDE "scripts/CeladonChiefHouse.asm"
-INCLUDE "data/maps/objects/CeladonChiefHouse.asm"
-CeladonChiefHouse_Blocks: INCBIN "maps/CeladonChiefHouse.blk"
 
 INCLUDE "data/maps/headers/CeladonHotel.asm"
 INCLUDE "scripts/CeladonHotel.asm"
@@ -574,15 +563,10 @@ INCLUDE "scripts/MtMoonB2F.asm"
 INCLUDE "data/maps/objects/MtMoonB2F.asm"
 MtMoonB2F_Blocks: INCBIN "maps/MtMoonB2F.blk"
 
-INCLUDE "data/maps/headers/SafariZoneWest.asm"
-INCLUDE "scripts/SafariZoneWest.asm"
-INCLUDE "data/maps/objects/SafariZoneWest.asm"
-SafariZoneWest_Blocks: INCBIN "maps/SafariZoneWest.blk"
-
-INCLUDE "data/maps/headers/SafariZoneSecretHouse.asm"
-INCLUDE "scripts/SafariZoneSecretHouse.asm"
-INCLUDE "data/maps/objects/SafariZoneSecretHouse.asm"
-SafariZoneSecretHouse_Blocks: INCBIN "maps/SafariZoneSecretHouse.blk"
+INCLUDE "data/maps/headers/CinnabarVolcano.asm"
+INCLUDE "data/maps/objects/CinnabarVolcano.asm"
+CinnabarVolcano_Blocks: INCBIN "maps/CinnabarVolcano.blk"
+INCLUDE "scripts/CinnabarVolcano.asm"
 
 
 SECTION "Maps 9", ROMX
@@ -675,6 +659,26 @@ INCLUDE "data/maps/headers/TypeGuysHouse.asm"
 INCLUDE "scripts/TypeGuysHouse.asm"
 INCLUDE "data/maps/objects/TypeGuysHouse.asm"
 TypeGuysHouse_Blocks: INCBIN "maps/TypeGuysHouse.blk"
+
+INCLUDE "data/maps/headers/SafariZoneWest.asm"
+INCLUDE "scripts/SafariZoneWest.asm"
+INCLUDE "data/maps/objects/SafariZoneWest.asm"
+SafariZoneWest_Blocks: INCBIN "maps/SafariZoneWest.blk"
+
+INCLUDE "data/maps/headers/SafariZoneSecretHouse.asm"
+INCLUDE "scripts/SafariZoneSecretHouse.asm"
+INCLUDE "data/maps/objects/SafariZoneSecretHouse.asm"
+SafariZoneSecretHouse_Blocks: INCBIN "maps/SafariZoneSecretHouse.blk"
+
+INCLUDE "data/maps/headers/GameCornerPrizeRoom.asm"
+INCLUDE "scripts/GameCornerPrizeRoom.asm"
+INCLUDE "data/maps/objects/GameCornerPrizeRoom.asm"
+GameCornerPrizeRoom_Blocks: INCBIN "maps/GameCornerPrizeRoom.blk"
+
+INCLUDE "data/maps/headers/CeladonChiefHouse.asm"
+INCLUDE "scripts/CeladonChiefHouse.asm"
+INCLUDE "data/maps/objects/CeladonChiefHouse.asm"
+CeladonChiefHouse_Blocks: INCBIN "maps/CeladonChiefHouse.blk"
 
 
 SECTION "Maps 11", ROMX

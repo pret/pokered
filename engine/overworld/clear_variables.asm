@@ -14,6 +14,7 @@ ClearVariablesOnEnterMap::
 	ld [wUnusedMapVariable], a
 	ld [wIsAltPalettePkmn], a
 	ld [wIsAltPalettePkmnData], a
+	ld [wOverworldAnimationCounter], a
 	ld hl, wCardKeyDoorY
 	ld [hli], a
 	ld [hl], a

@@ -30,6 +30,7 @@ BurnEffect_:
 	ld a, [wMoveMissed]
 	and a
 	jr nz, .didntAffect
+.burned
 	set BRN, [hl]
 	callfar HalveAttackDueToBurn
 	ld c, 30
@@ -44,3 +45,11 @@ BurnEffect_:
 	ld c, 50
 	rst _DelayFrames
 	jpfar PrintDoesntAffectText
+
+; input de = wBattleMonStatus or wEnemyMonStatus
+AutoBurnEffect::
+	ld h, d
+	ld l, e
+	set BRN, [hl]
+	callfar HalveAttackDueToBurn
+	jpfar PrintBurnText

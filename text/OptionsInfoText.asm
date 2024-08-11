@@ -81,15 +81,15 @@ _GBCFadeInfoText::
 	prompt
 
 _TypeMatchupText::
-	text "Choose how"
+	text "Chooses how"
 	line "effective the"
 	cont "left TYPE is when"
 	cont "attacking the"
 	cont "right TYPE."
 	para "0×: no effect"
 	line "0.5×: notvery eff"
-	para "1×: normal eff"
-	line "2×: super eff"
+	para "1×: normal effect"
+	line "2×: super effect"
 	prompt
 
 _EXPBarText::
@@ -164,5 +164,20 @@ _FrontSpriteGenericText::
 	line "been tweaked a"
 	cont "bit visually from"
 	cont "their originals."
+	prompt
+
+_VolcanoInfoText::
+	text "If ON, a new cave"
+	line "will show up on"
+	cont "the sea route"
+	cont "between PALLET"
+	cont "and CINNABAR."
+	para "This is an area"
+	line "inspired by beta"
+	cont "development code."
+	para "You can catch a"
+	line "MOLTRES earlier"
+	cont "here and find"
+	cont "other new events."
 	prompt
 

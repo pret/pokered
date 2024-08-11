@@ -189,6 +189,7 @@ ROMX $2F
 	"Pics 9"
 ROMX $30
 	"Pics 10"
+	"NPC Sprites 3"
 ROMX $31
 	"Movedex Text"
 ROMX $32
@@ -208,6 +209,8 @@ ROMX $36
 	"Music 4"
 ROMX $37
 	"Music 5"
+ROMX $38
+	"NPC Sprites 4"
 WRAM0
 	"Audio RAM"
 	org $c100

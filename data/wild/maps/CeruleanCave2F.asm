@@ -7,9 +7,9 @@ CeruleanCave2FWildMons:
 	db 55, GENGAR
 	db 57, GENGAR
 	db 62, ARCANINE
-	db 54, MAGMAR
-	db 65, MAGMAR
-	db 70, MAGMAR
+	db 54, LICKITUNG
+	db 65, LICKITUNG
+	db 70, LICKITUNG
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate

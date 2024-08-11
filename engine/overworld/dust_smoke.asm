@@ -66,8 +66,16 @@ MoveBoulderDustFunctionPointerTable:
 	boulder_dust_adjust  1, 1, AdjustOAMBlockXPos3start ; left
 	boulder_dust_adjust -1, 1, AdjustOAMBlockXPos3start ; right
 
+
+; de = where to load the smoke tiles
+FarLoadSmokeTileFourTimes::
+	ld h, d
+	ld l, e
+	jr LoadSmokeTileFourTimesCommon
+	
 LoadSmokeTileFourTimes::
 	ld hl, vChars1 tile $7c
+LoadSmokeTileFourTimesCommon::
 	ld c, 4
 .loop
 	push bc

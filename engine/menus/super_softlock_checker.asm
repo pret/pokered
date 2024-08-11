@@ -17,6 +17,13 @@ CeladonCutAlcove1::   db 2, 17, 27, 31
 CeladonCutAlcove2::   db 2, 36, 32, 34
 CeladonGymCutAlcove:: db 2, 7, 3, 7
 
+VolcanoMainRoomRange:: db 12, 33, 0, 17
+VolcanoFloor1Range:: db 12, 35, 22, 29
+VolcanoFloor2Range:: db 40, 51, 0, 41
+VolcanoFloor3RangePart1:: db 0, 39, 28, 50
+VolcanoFloor3RangePart2:: db 36, 51, 44, 50
+VolcanoFloor4Range:: db 0, 51, 54, 67
+
 ; input
 ; de = address (in this bank) of the coordinate range to check the player is within
 FarArePlayerCoordsInRange::
@@ -45,7 +52,9 @@ SurfRestrictedAreas:
 	db ROUTE_21, 8, 13, 1, 9
 	db ROUTE_21, 4, 7, 24, 25
 	db ROUTE_21, 14, 17, 56, 57
+	db ROUTE_21, 6, 13, 52, 55
 	db ROUTE_23, 8, 9, 90, 91
+	db CINNABAR_VOLCANO, 4, 5, 14, 23
 	db -1
 
 CheckInSurfRestrictedMapOrArea::

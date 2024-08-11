@@ -75,12 +75,7 @@ DoRet::
 	ret
 
 ; PureRGBnote: MOVED: 3 extra bytes of space left here, may as well move something here that puts the space to some use
-TextScriptEndingText::
-	text_end
-
-TextScriptPromptButton::
-	text_promptbutton
-	text_end
+PlacePKMNText::   db "<PK><MN>@"
 
 ; Game Boy hardware interrupts
 

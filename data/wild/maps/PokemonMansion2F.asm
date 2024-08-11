@@ -5,8 +5,8 @@ PokemonMansion2FWildMons:
 	db 35, MUK
 	db 35, WEEZING
 	db 40, HYPNO
-	db 34, CHARMELEON
-	db 35, CHARMELEON
+	db 34, CLEFABLE
+	db 35, CLEFABLE
 	db 42, HYPNO
 	db 39, PORYGON
 	db 37, PORYGON

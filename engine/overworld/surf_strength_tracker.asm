@@ -32,6 +32,7 @@ SurfRestrictedMapsOnMoveDelete:
 	db SEAFOAM_ISLANDS_B3F
 	db SEAFOAM_ISLANDS_B4F
 	db POWER_PLANT
+	db CINNABAR_VOLCANO
 	db -1
 
 CheckResetSurfStrengthFlags::

@@ -2,8 +2,8 @@ Route15WildMons:
 	def_grass_wildmons 20 ; encounter rate
 	db 26, SANDSHREW
 	db 30, SANDSLASH
-	db 27, SANDSLASH
-	db 26, SANDSLASH
+	db 27, SANDSHREW
+	db 26, SANDSHREW
 	db 26, MEOWTH
 	db 28, PERSIAN
 	db 30, PERSIAN

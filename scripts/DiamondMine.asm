@@ -10,6 +10,7 @@ DiamondMine_Script:
 	jp EnableAutoTextBoxDrawing
 
 DiamondMineJiggleBoomBox::
+	; TODO: make it an overworld animation
 	CheckEvent EVENT_DIAMOND_MINE_STARTED_BOOMBOX
 	ret z
 .jiggleBoombox
@@ -239,13 +240,8 @@ DiamondMineCheckDigAnimation:
 	call DiamondMineShakeScreen
 	ld c, 8
 .soundEffectLoop
-	ld a, SFX_TRADE_MACHINE
-	rst _PlaySound
-	ld hl, wChannelCommandPointers + CHAN5 * 2
 	ld de, SFX_Pickaxe_Tink
-	ld a, e
-	ld [hli], a
-	ld [hl], d
+	call PlayNewSoundChannel5
 	ld b, 4
 .runForwardLoop
 	ld a, [wSprite01StateData1ImageIndex]
@@ -272,13 +268,8 @@ DiamondMineCheckDigAnimation:
 	ld a, $A2
 	ld [wNewTileBlockID], a
 	predef ReplaceTileBlock
-	ld a, SFX_PUSH_BOULDER
-	rst _PlaySound
-	ld hl, wChannelCommandPointers + CHAN8 * 2
 	ld de, SFX_Break_Stone
-	ld a, e
-	ld [hli], a
-	ld [hl], d
+	call PlayNewSoundChannel8
 	call DiamondMineShakeScreen
 	ResetEvent EVENT_DIAMOND_MINE_DIG_ANIMATION
 	SetEvent EVENT_DIAMOND_MINE_HIT_BEDROCK
@@ -356,13 +347,8 @@ DiamondMineProspectorText:
 	ld hl, .giveRepels4
 	rst _PrintText
 	call GBFadeOutToBlack
-	ld a, SFX_PUSH_BOULDER
-	rst _PlaySound
-	ld hl, wChannelCommandPointers + CHAN8 * 2
 	ld de, SFX_Spray_Repel
-	ld a, e
-	ld [hli], a
-	ld [hl], d
+	call PlayNewSoundChannel8
 	ld c, 100
 	rst _DelayFrames
 	call GBFadeInFromBlack
@@ -640,6 +626,7 @@ DiamondMineBoombox:
 	text_far _SecretLabMewtwoReactionText4
 	text_end
 
+GenericShowPartyMenuSelection::
 DiamondMineShowPartyMenuSelection:
 	xor a ; NORMAL_PARTY_MENU
 	ld [wPartyMenuTypeOrMessageID], a

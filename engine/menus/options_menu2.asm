@@ -254,7 +254,7 @@ CompareOptions2:
 	ret
 .tryPlayBikeMusic
 	ld a, [wWalkBikeSurfState]
-	cp 1
+	cp BIKING
 	ret nz
 	ld a, [wCurMapConnections]
 	bit BIT_EXTRA_MUSIC_MAP, a

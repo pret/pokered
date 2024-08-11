@@ -91,7 +91,7 @@ INCLUDE "engine/menus/start_sub_menus.asm"
 INCLUDE "engine/items/tms.asm"
 INCLUDE "engine/battle/end_of_battle.asm"
 INCLUDE "engine/battle/wild_encounters.asm"
-INCLUDE "engine/battle/move_effects/recoil.asm"
+; INCLUDE "engine/battle/move_effects/recoil.asm" ; moved to battle engine 9
 INCLUDE "engine/battle/get_trainer_name.asm"
 INCLUDE "engine/math/random.asm"
 
@@ -249,6 +249,7 @@ INCLUDE "engine/events/hidden_objects/indigo_plateau_hq.asm"
 SECTION "Battle Engine 9", ROMX
 
 INCLUDE "engine/battle/experience.asm"
+INCLUDE "engine/battle/move_effects/recoil.asm" ; PureRGBnote: MOVED: moved from battle engine 1
 
 
 SECTION "Diploma", ROMX
@@ -369,6 +370,8 @@ INCLUDE "engine/movie/splash.asm"
 INCLUDE "engine/movie/hall_of_fame.asm"
 
 SECTION "movedCode", ROMX
+; moved from home bank
+INCLUDE "data/tilesets/collision_tile_ids.asm"
 ; moved from bank 8 (audio engine 2 bank)
 INCLUDE "engine/pokemon/bills_pc.asm"
 ; moved from bank1e
@@ -376,9 +379,10 @@ INCLUDE "engine/overworld/healing_machine.asm"
 ; moved from home bank
 INCLUDE "audio/fade_audio.asm"
 INCLUDE "engine/gfx/animated_tiles_code.asm"
-INCLUDE "data/tilesets/collision_tile_ids.asm"
 ; moved from bank1C
 INCLUDE "engine/overworld/fly_animation.asm"
+; moved from audio home code
+INCLUDE "audio/check_bike_surf_music.asm"
 
 SECTION "Party Sprites", ROMX, BANK[$34]
 ; PureRGBnote: ADDED: new menu sprite icons raw data
@@ -436,3 +440,6 @@ INCLUDE "data/trainers/custom_movesets.asm"
 INCLUDE "engine/gbc/gbc_fade.asm"
 INCLUDE "engine/menus/dig.asm"
 INCLUDE "engine/battle/pp_tracker.asm"
+INCLUDE "engine/menus/world_options.asm"
+INCLUDE "engine/battle/volcano_battle_init.asm"
+

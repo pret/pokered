@@ -14,6 +14,7 @@ Route21_Object:
 	db $43 ; border block
 
 	def_warp_events
+	warp_event  10, 51, CINNABAR_VOLCANO, 2
 
 	def_bg_events
 

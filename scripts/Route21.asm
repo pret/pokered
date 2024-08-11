@@ -1,4 +1,5 @@
 Route21_Script:
+	call CheckRemoveVolcano
 	call EnableAutoTextBoxDrawing
 	ld hl, Route21TrainerHeaders
 	ld de, Route21_ScriptPointers
@@ -6,6 +7,32 @@ Route21_Script:
 	call ExecuteCurMapScriptInTable
 	ld [wRoute21CurScript], a
 	ret
+
+CheckRemoveVolcano:
+	ld hl, wCurrentMapScriptFlags
+	bit 5, [hl]
+	res 5, [hl]
+	jr nz, .checkRemoveLavaSuit
+	bit 4, [hl]
+	res 4, [hl]
+	jr nz, .replaceTiles
+	ret
+.checkRemoveLavaSuit
+	; if we just exited the volcano, remove lava suit
+	ld a, [wWalkBikeSurfState]
+	cp WEARING_LAVA_SUIT
+	jr nz, .replaceTiles
+	ld a, WALKING
+	ld [wWalkBikeSurfState], a
+	call LoadWalkingPlayerSpriteGraphics
+.replaceTiles
+	CheckFlag FLAG_VOLCANO_AREA_TURNED_OFF
+	ret z
+	ld a, $43
+	ld [wNewTileBlockID], a ; water block
+	ld de, Route21TileBlockReplacements
+	jpfar ReplaceMultipleTileBlockLineHorizontalWithOneBlock
+	
 
 Route21_ScriptPointers:
 	def_script_pointers

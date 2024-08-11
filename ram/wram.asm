@@ -354,7 +354,9 @@ wNPCMovementScriptPointerTableNum:: db
 ; ROM bank of current NPC movement script
 wNPCMovementScriptBank:: db
 
-	ds 2 ; Unused 2 bytes
+
+wOverworldAnimationCounter:: db ; used for tracking an overworld animation while you move that happens on each map script run
+wOverworldAnimationCooldown:: db ; used to make sure occasional animations don't happen too often
 
 ; This union spans 180 bytes.
 UNION
@@ -1817,7 +1819,8 @@ wDexMinSeenMon::
 wDexMinSeenMove::
 wWhatStat:: db ; contains the stat currently being modified by a stat changing move
 ; bit 0 = set to 1 when we should mark a move as seen in the movedex flags on showing its animation, 0 otherwise
-; bit 1-7 = unused
+; bit 1 = set if we ran from battle
+; bit 2-7 = unused
 wBattleFunctionalFlags:: db
 ;;;
 
@@ -2306,6 +2309,7 @@ wObtainedHiddenCoinsFlags:: flag_array MAX_HIDDEN_COINS
 ; $00 = walking
 ; $01 = biking
 ; $02 = surfing
+; $03 = lava suit
 wWalkBikeSurfState:: db
 
 	ds 10 ; unused save file 10 bytes

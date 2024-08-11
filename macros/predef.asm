@@ -9,7 +9,8 @@ ENDM
 
 MACRO predef_jump
 	predef_id \1
-	jp Predef
+	rst _Predef
+	ret
 ENDM
 
 

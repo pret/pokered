@@ -179,7 +179,6 @@ TMCharText::      db "TM@"
 RocketCharText::  db "ROCKET@"
 SixDotsCharText:: db "……@"
 EnemyText::       db "Enemy @"
-PlacePKMNText::   db "<PK><MN>@"
 
 ContText::
 	push de
@@ -212,11 +211,13 @@ PromptText::
 
 DoneText::
 	pop hl
-	ld de, .stop
+	ld de, TextScriptEndingText
 	dec de
 	ret
 
-.stop:
+TextScriptPromptButton::
+	text_promptbutton
+TextScriptEndingText::
 	text_end
 
 Paragraph::
