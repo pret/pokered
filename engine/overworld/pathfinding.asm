@@ -192,6 +192,3 @@ NPCMovementDirectionsToJoypadMasksTable:
 	db NPC_MOVEMENT_LEFT, D_LEFT
 	db NPC_MOVEMENT_RIGHT, D_RIGHT
 	db $ff
-
-; unreferenced
-	ret
