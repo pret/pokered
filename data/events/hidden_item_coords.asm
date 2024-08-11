@@ -75,5 +75,6 @@ HiddenItemCoords:
 	hidden_item PEWTER_CITY,				   23,   2
 	hidden_item SAFARI_ZONE_NORTH,			    7,  13
 	hidden_item SECRET_LAB,                     9,  25
+	hidden_item CINNABAR_VOLCANO,              43,  64
 	assert_max_table_length MAX_HIDDEN_ITEMS
 	db -1 ; end

@@ -67,8 +67,8 @@ CeruleanOldRodHouseFoodText:
 	text_asm
 	ld hl, .wowFish
 	rst _PrintText
-	ld d, CERULEANOLDRODHOUSE_FISHING_GURU
-	callfar FarSetSpriteFacingUp
+	ld a, CERULEANOLDRODHOUSE_FISHING_GURU
+	call SetSpriteFacingUp
 	ld hl, .whatCanISayLoveCooking
 	rst _PrintText
 	rst TextScriptEnd

@@ -9,10 +9,9 @@ hSoftReset:: db
 UNION
 hBaseTileID:: ; base tile ID to which offsets are added
 hDexWeight::
-hWarpDestinationMap::
 hOAMTile::
 hROMBankTemp::
-hPreviousTileset::
+hPreviousTileset:: ; PureRGBnote: TODO: does this byte even work as expected for tilesets because so many things write to this byte?!?
 hRLEByteValue::
 	db
 
@@ -285,7 +284,7 @@ hTileAnimations:: db
 
 hMovingBGTilesCounter1:: db
 
-	ds 1
+	ds 1 ; unused hram byte
 
 hCurrentSpriteOffset:: db ; multiple of $10
 
@@ -331,7 +330,7 @@ hInteractedWithBookshelf::
 	db
 ENDU
 
-	ds 1
+	ds 1 ; unused hram byte
 
 hBackupGymGateIndex::
 hUnlockedSilphCoDoors::
@@ -340,7 +339,7 @@ hUnlockedSilphCoDoors::
 ; the first tile ID in a sequence of tile IDs that increase by 1 each step
 hStartTileID:: db
 
-	ds 2
+	ds 2 ; unused 2 hram bytes
 
 hNewPartyLength:: db
 
@@ -378,13 +377,13 @@ hSavedMapTextPtr:: dw
 	ds 1
 ENDU
 
-	ds 4
+	ds 4 ; unused 4 hram bytes
 
 hWhoseTurn:: db ; 0 on player's turn, 1 on enemy's turn
 
 hClearLetterPrintingDelayFlags:: db
 
-	ds 1
+hWarpDestinationMap:: db ; PureRGBnote: MOVED: used to share a byte with a bunch of things such as hROMBankTemp which could cause issues
 
 ; bit 0: draw HP fraction to the right of bar instead of below (for party menu)
 ; bit 1: menu is double spaced

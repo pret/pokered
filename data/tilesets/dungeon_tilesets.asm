@@ -11,4 +11,5 @@ DungeonTilesets:
 	db CEMETERY
 	db GYM
 	db SECRET_LAB_TS
+	db VOLCANO
 	db -1 ; end

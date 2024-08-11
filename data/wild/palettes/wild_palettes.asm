@@ -1,5 +1,10 @@
 ; PureRGBnote: ADDED: these all indicate whether wild pokemon in an area will use alternate palettes if the feature is turned on.
 
+DEF NUM_ENCOUNTER_SLOTS EQU 24
+DEF NUM_GRASS_ENCOUNTER_SLOTS EQU 10
+DEF NUM_WATER_ENCOUNTER_SLOTS EQU 10
+DEF NUM_SUPER_ROD_ENCOUNTER_SLOTS EQU 4
+
 ; the below pointers are 24 bits in length and each bit indicates which palette a pokemon will be for that wild data
 ; bit = 1 -> alt palette
 ; bit = 0 -> default palette
@@ -124,7 +129,7 @@ WildPalettePointers:
 	dw DefaultPalettes
 	dw DefaultPalettes
 	dw DefaultPalettes
-	dw DefaultPalettes
+	dw CinnabarVolcanoWildPalettes
 	dw DefaultPalettes
 	dw DefaultPalettes
 	dw DefaultPalettes
@@ -206,7 +211,7 @@ WildPalettePointers:
 	dw DefaultPalettes
 	dw DefaultPalettes
 	dw DefaultPalettes ;digletts cave
-	dw VictoryRoad3FWildPalettes
+	dw DefaultPalettes ; victory road 3f
 	dw DefaultPalettes
 	dw DefaultPalettes
 	dw DefaultPalettes
@@ -322,3 +327,4 @@ INCLUDE "data/wild/palettes/maps/VermilionCity.asm"
 INCLUDE "data/wild/palettes/maps/FuchsiaCity.asm"
 INCLUDE "data/wild/palettes/maps/ViridianCity.asm"
 INCLUDE "data/wild/palettes/maps/BillsGarden.asm"
+INCLUDE "data/wild/palettes/maps/CinnabarVolcano.asm"

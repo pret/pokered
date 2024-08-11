@@ -13,41 +13,138 @@ ReplaceTileBlock:
 	jp RedrawMapView 
 
 ReplaceMultipleTileBlocks::
+	ld h, d
+	ld l, e
+	ld e, 0
 	call ReplaceMultipleTileBlocksNoRedraw
 	ld a, d
 	and a
 	ret z
 	jp RedrawMapView
 
-ReplaceMultipleTileBlocksNoRedraw::
+ReplaceMultipleTileBlocksWithOneBlock::
 	ld h, d
 	ld l, e
+	ld e, 1
+	call ReplaceMultipleTileBlocksNoRedraw
+	ld a, d
+	and a
+	ret z
+	jp RedrawMapView
+
+ReplaceMultipleTileBlockLineHorizontalWithOneBlock::
+	ld h, d
+	ld l, e
+	ld d, 0
+.loop
+	call ReplaceTileBlockLineHorizontalWithOneBlockCommon
+	ld a, [hl]
+	cp -1
+	jr nz, .loop
+	ld a, d
+	and a
+	ret z
+	jp RedrawMapView
+
+ReplaceTileBlockLineHorizontalWithOneBlock::
+	ld h, d
+	ld l, e
+	ld d, 0
+	call ReplaceTileBlockLineHorizontalWithOneBlockCommon
+	ld a, d
+	and a
+	ret z
+	jp RedrawMapView
+
+ReplaceTileBlockLineHorizontalWithOneBlockCommon::
+	ld a, [hli] ; number of blocks to replace
+	ld e, a
+	ld a, [hli] ; y coord
+	ld b, a
+	ld a, [hli] ; x coord
+	ld c, a
+.loop
+	call ReplaceTileBlockAndCheckForRedraw
+	inc c
+	dec e
+	jr nz, .loop
+	ret
+
+ReplaceMultipleTileBlockLineVerticalWithOneBlock::
+	ld h, d
+	ld l, e
+	ld d, 0
+.loop
+	call ReplaceTileBlockLineHorizontalWithOneBlockCommon
+	ld a, [hl]
+	cp -1
+	jr nz, .loop
+	ld a, d
+	and a
+	ret z
+	jp RedrawMapView
+
+ReplaceTileBlockLineVerticalWithOneBlock::
+	ld h, d
+	ld l, e
+	ld d, 0
+	call ReplaceTileBlockLineVerticalWithOneBlockCommon
+	ld a, d
+	and a
+	ret z
+	jp RedrawMapView
+
+ReplaceTileBlockLineVerticalWithOneBlockCommon::
+	ld a, [hli] ; number of blocks to replace
+	ld e, a
+	ld a, [hli] ; y coord
+	ld b, a
+	ld a, [hli] ; x coord
+	ld c, a
+.loop
+	call ReplaceTileBlockAndCheckForRedraw
+	inc b
+	dec e
+	jr nz, .loop
+	ret
+
+ReplaceMultipleTileBlocksNoRedraw::
 	ld d, 0
 .loop
 	ld a, [hli]
 	ld b, a
 	ld a, [hli]
 	ld c, a
+	ld a, e
+	and a
+	jr nz, .sameBlock
 	ld a, [hli]
 	ld [wNewTileBlockID], a
-	push de
-	push hl
-	call ReplaceTileBlockCommon
-	jr z, .popNoRedraw
-	call IsBCInHLTileBlockMapView
-	pop hl
-	pop de
-	jr c, .noRedraw
-	inc d
-.noRedraw
+.sameBlock
+	call ReplaceTileBlockAndCheckForRedraw
 	ld a, [hl]
 	cp -1
 	jr nz, .loop
 	ret
-.popNoRedraw
+
+ReplaceTileBlockAndCheckForRedraw:
+	push de
+	push hl
+	push bc
+	call ReplaceTileBlockCommon
+	jr z, .popNoRedraw
+	call IsBCInHLTileBlockMapView
+	pop bc
 	pop hl
 	pop de
-	jr .noRedraw
+	ret c
+	inc d
+	ret
+.popNoRedraw
+	pop bc
+	pop hl
+	pop de
+	ret
 
 INCLUDE "engine/overworld/tile_block_replacements.asm"
 
@@ -93,6 +190,8 @@ RedrawMapView::
 	ld a, [wIsInBattle]
 	inc a
 	ret z
+	CheckFlag FLAG_SKIP_MAP_REDRAW
+	ret nz
 	ldh a, [hAutoBGTransferEnabled]
 	push af
 	ldh a, [hTileAnimations]

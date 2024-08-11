@@ -4,15 +4,19 @@ HandleLedges::
 	ret nz
 	ld a, [wCurMapTileset]
 	and a ; OVERWORLD
-	ret nz
+	jr z, .overworld
+	cp VOLCANO
+	jr z, .volcano
+	ret
+.overworld
 	predef GetTileAndCoordsInFrontOfPlayer
+	ld hl, LedgeTiles
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	ld b, a
 	lda_coord 8, 9
 	ld c, a
 	ld a, [wTileInFrontOfPlayer]
 	ld d, a
-	ld hl, LedgeTiles
 .loop
 	ld a, [hli]
 	cp $ff
@@ -66,6 +70,37 @@ HandleLedges::
 	ret z
 	jr .noCutTile
 ;;;;;;;;;;
+;;;;;;;;;; PureRGBnote: ADDED: in the volcano area, we need custom code for new ledges
+.volcano
+	ld a, [wSpritePlayerStateData1FacingDirection]
+	cp SPRITE_FACING_DOWN
+	jr z, .down
+	cp SPRITE_FACING_LEFT
+	jr z, .left
+	cp SPRITE_FACING_RIGHT
+	jr z, .right
+	ret
+.down
+	lda_coord 8, 10
+	cp $41 ; down ledge
+	ret nz
+	ld e, D_DOWN
+	jr .noCutTile
+.left
+	lda_coord 7, 9
+	cp $30 ; left ledge
+	ret nz
+	ld e, D_LEFT
+	jr .noCutTile
+.right
+	lda_coord 10, 9
+	cp $40 ; right ledge
+	ret nz
+	ld e, D_RIGHT
+	jr .noCutTile
+;;;;;;;;
+
+
 
 INCLUDE "data/tilesets/ledge_tiles.asm"
 

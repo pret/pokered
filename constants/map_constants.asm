@@ -28,7 +28,7 @@ ENDM
 	map_const CINNABAR_ISLAND,               10,  9 ; $09
 	map_const INDIGO_PLATEAU,                10,  9 ; $0A
 DEF NUM_CITY_MAPS EQU const_value
-	map_const UNUSED_MAP_0B,                  0,  0 ; $0B
+	map_const UNUSED_MAP_0B,                  0,  0 ; $0B ; unused map
 DEF FIRST_ROUTE_MAP EQU const_value
 	map_const ROUTE_1,                       10, 18 ; $0C
 	map_const ROUTE_2,                       10, 36 ; $0D
@@ -88,16 +88,16 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const BIKE_SHOP,                      4,  4 ; $42
 	map_const CERULEAN_MART,                  4,  4 ; $43
 	map_const MT_MOON_POKECENTER,             7,  4 ; $44
-	map_const CERULEAN_TRASHED_HOUSE_COPY,    4,  4 ; $45
+	map_const CERULEAN_TRASHED_HOUSE_COPY,    4,  4 ; $45 ; pointless map
 	map_const ROUTE_5_GATE,                   4,  3 ; $46
 	map_const UNDERGROUND_PATH_ROUTE_5,       4,  4 ; $47
 	map_const DAYCARE,                        4,  4 ; $48
 	map_const ROUTE_6_GATE,                   4,  3 ; $49
 	map_const UNDERGROUND_PATH_ROUTE_6,       4,  4 ; $4A
-	map_const UNDERGROUND_PATH_ROUTE_6_COPY,  4,  4 ; $4B
+	map_const UNDERGROUND_PATH_ROUTE_6_COPY,  4,  4 ; $4B ; pointless map
 	map_const ROUTE_7_GATE,                   3,  4 ; $4C
 	map_const UNDERGROUND_PATH_ROUTE_7,       4,  4 ; $4D
-	map_const UNDERGROUND_PATH_ROUTE_7_COPY,  4,  4 ; $4E
+	map_const UNDERGROUND_PATH_ROUTE_7_COPY,  4,  4 ; $4E ; pointless map
 	map_const ROUTE_8_GATE,                   3,  4 ; $4F
 	map_const UNDERGROUND_PATH_ROUTE_8,       4,  4 ; $50
 	map_const ROCK_TUNNEL_POKECENTER,         7,  4 ; $51
@@ -135,8 +135,8 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const LANCES_ROOM,                   13, 13 ; $71
 	map_const CHAMP_ARENA,                    8,  9 ; $72 ; PureRGBnote: ADDED: New map
 	map_const DIAMOND_MINE,                  11, 10 ; $73 ; PureRGBnote: ADDED: New map
-	map_const UNUSED_MAP_74,                  0,  0 ; $74
-	map_const UNUSED_MAP_75,                  0,  0 ; $75
+	map_const CINNABAR_VOLCANO,              26, 34 ; $74 ; PureRGBnote: ADDED: New map
+	map_const UNUSED_MAP_75,                  0,  0 ; $75 ; unused map
 	map_const HALL_OF_FAME,                   5,  4 ; $76
 	map_const UNDERGROUND_PATH_NORTH_SOUTH,   4, 23 ; $77 ; ERROR: UndergroundPathNorthSouth.blk is actually 4x23 PureRGBnote: FIXED
 	map_const CHAMPIONS_ROOM,                 4,  4 ; $78
@@ -225,7 +225,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const ROCKET_HIDEOUT_ELEVATOR,        3,  4 ; $CB
 	map_const FUCHSIA_TREE_DELETER_HOUSE,     4,  4 ; $CC ; PureRGBnote: ADDED: New map
 	map_const FOSSIL_GUYS_HOUSE,              5,  4 ; $CD ; PureRGBnote: ADDED: New map
-	map_const UNUSED_MAP_CE,                  0,  0 ; $CE
+	map_const UNUSED_MAP_CE,                  0,  0 ; $CE ; unused map
 	map_const SILPH_CO_2F,                   15,  9 ; $CF
 	map_const SILPH_CO_3F,                   15,  9 ; $D0
 	map_const SILPH_CO_4F,                   15,  9 ; $D1
@@ -250,23 +250,30 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const CERULEAN_CAVE_1F,              15,  9 ; $E4
 	map_const NAME_RATERS_HOUSE,              4,  4 ; $E5
 	map_const CERULEAN_BADGE_HOUSE,           4,  4 ; $E6
-	map_const UNUSED_MAP_E7,                  0,  0 ; $E7
+	map_const UNUSED_MAP_E7,                  0,  0 ; $E7 ; unused map
 	map_const ROCK_TUNNEL_B1F,               20, 18 ; $E8
 	map_const SILPH_CO_9F,                   13,  9 ; $E9
 	map_const SILPH_CO_10F,                   8,  9 ; $EA
 	map_const SILPH_CO_11F,                   9,  9 ; $EB
 	map_const SILPH_CO_ELEVATOR,              2,  2 ; $EC
-	map_const UNUSED_MAP_ED,                  0,  0 ; $ED
-	map_const UNUSED_MAP_EE,                  0,  0 ; $EE
+	map_const UNUSED_MAP_ED,                  0,  0 ; $ED ; unused map
+	map_const UNUSED_MAP_EE,                  0,  0 ; $EE ; unused map
 	map_const TRADE_CENTER,                   5,  4 ; $EF
 	map_const COLOSSEUM,                      5,  4 ; $F0
-	map_const UNUSED_MAP_F1,                  0,  0 ; $F1
-	map_const UNUSED_MAP_F2,                  0,  0 ; $F2
-	map_const UNUSED_MAP_F3,                  0,  0 ; $F3
-	map_const UNUSED_MAP_F4,                  0,  0 ; $F4
+	map_const UNUSED_MAP_F1,                  0,  0 ; $F1 ; unused map
+	map_const UNUSED_MAP_F2,                  0,  0 ; $F2 ; unused map
+	map_const UNUSED_MAP_F3,                  0,  0 ; $F3 ; unused map
+	map_const UNUSED_MAP_F4,                  0,  0 ; $F4 ; unused map
 	map_const LORELEIS_ROOM,                  5,  6 ; $F5
 	map_const BRUNOS_ROOM,                    5,  6 ; $F6
 	map_const AGATHAS_ROOM,                   5,  6 ; $F7
+	;map_const UNUSED_MAP_F8,                  0,  0 ; $F8 ; unused map
+	;map_const UNUSED_MAP_F9,                  0,  0 ; $F9 ; unused map
+	;map_const UNUSED_MAP_FA,                  0,  0 ; $FA ; unused map
+	;map_const UNUSED_MAP_FB,                  0,  0 ; $FB ; unused map
+	;map_const UNUSED_MAP_FC,                  0,  0 ; $FC ; unused map
+	;map_const UNUSED_MAP_FD,                  0,  0 ; $FD ; unused map
+	;map_const UNUSED_MAP_FE,                  0,  0 ; $FE ; unused map
 DEF NUM_MAPS EQU const_value
 
 ; Indoor maps, such as houses, use this as the Map ID in their exit warps

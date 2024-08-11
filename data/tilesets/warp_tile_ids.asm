@@ -27,6 +27,7 @@ WarpTileIDPointers:
 	dw .SchoolWarpTileIDs
 	dw .SecretLabWarpTileIDs
 	dw .ChampCupWarpTileIDs
+	dw .VolcanoWarpTileIDs
 	assert_table_length NUM_TILESETS
 
 MACRO warp_tiles
@@ -102,3 +103,6 @@ ENDM
 
 .ChampCupWarpTileIDs:
 	warp_tiles $37
+
+.VolcanoWarpTileIDs
+	warp_tiles $01, $18, $1A, $1F, $4A

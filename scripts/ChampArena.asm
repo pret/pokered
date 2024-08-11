@@ -1519,45 +1519,19 @@ AssistantPrintIntroText:
 	rst _PrintText
 AssistantFacesDown:
 	ld a, CHAMP_ARENA_ASSISTANT
-	jr SetSpriteFacingDown
+	jp SetSpriteFacingDown
 
 AssistantHoldsUpLeftHand:
 	ld a, CHAMP_ARENA_ASSISTANT
-	jr SetSpriteFacingLeft
+	jp SetSpriteFacingLeft
 
 AssistantHoldsUpRightHand:
 	ld a, CHAMP_ARENA_ASSISTANT
-	jr SetSpriteFacingRight
+	jp SetSpriteFacingRight
 
 AssistantBows:
 	ld a, CHAMP_ARENA_ASSISTANT
-	jr SetSpriteFacingUp
-
-SetSpriteFacingRight:
-	ld b, SPRITE_FACING_RIGHT
-	jr ChangeSpriteFacing
-; a = which sprite
-SetSpriteFacingLeft:
-	ld b, SPRITE_FACING_LEFT
-	jr ChangeSpriteFacing
-; a = which sprite
-SetSpriteFacingUp:
-	ld b, SPRITE_FACING_UP
-	jr ChangeSpriteFacing
-; a = which sprite
-SetSpriteFacingDown:
-	ld b, SPRITE_FACING_DOWN
-; a = which sprite
-; b = which facing
-ChangeSpriteFacing:
-	ldh [hSpriteIndex], a
-	ld a, b
-	ldh [hSpriteFacingDirection], a
-	jp SetSpriteFacingDirection
-
-FarSetSpriteFacingUp:
-	ld a, d
-	jr SetSpriteFacingUp
+	jp SetSpriteFacingUp
 
 AudienceClaps:
 	call PlayAudienceClappingSFX

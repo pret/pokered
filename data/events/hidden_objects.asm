@@ -100,6 +100,7 @@ HiddenObjectMaps:
 	db VIRIDIAN_SCHOOL_HOUSE_B1F
 	db SECRET_LAB
 	db TYPE_GUYS_HOUSE
+	db CINNABAR_VOLCANO
 	db -1 ; end
 
 HiddenObjectPointers:
@@ -203,6 +204,7 @@ HiddenObjectPointers:
 	dw ViridianSchoolB1FHiddenObjects
 	dw SecretLabHiddenObjects
 	dw TypeGuysHouseHiddenObjects
+	dw CinnabarVolcanoHiddenObjects
 
 MACRO hidden_object
 	db \2 ; y coord
@@ -800,4 +802,12 @@ TypeGuysHouseHiddenObjects:
 	hidden_object 12, 0, 0, TypeGuysHouseLightSwitch
 	hidden_object  8, 3, 0, TypeGuysHouseComputer
 	hidden_object  9, 3, 0, TypeGuysHouseComputer
+	db -1
+
+CinnabarVolcanoHiddenObjects:
+	hidden_object 43, 64, HIDDEN_ITEM_VOLCANO_LAVA_SEA_NEW, HiddenItems ; NEW
+	hidden_object 34, 28, 0, VolcanoBombableRockFloor1
+	hidden_object 48, 38, 0, VolcanoBombableRockFloor2
+	hidden_object 50, 50, 0, VolcanoBombableRockFloor3
+	hidden_object 48, 66, 0, VolcanoBombableRockFloor4
 	db -1

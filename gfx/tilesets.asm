@@ -70,4 +70,7 @@ SecretLab_GFX::     INCBIN "gfx/tilesets/secret_lab.2bpp"
 SecretLab_Block::   INCBIN "gfx/blocksets/secret_lab.bst"
 ChampCup_GFX::     INCBIN "gfx/tilesets/champ_cup.2bpp"
 ChampCup_Block::   INCBIN "gfx/blocksets/champ_cup.bst"
+Volcano_GFX::       INCBIN "gfx/tilesets/volcano.2bpp"
+Volcano_Block::     INCBIN "gfx/blocksets/volcano.bst"
+
 

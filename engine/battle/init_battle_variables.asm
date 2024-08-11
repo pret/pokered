@@ -26,6 +26,7 @@ InitBattleVariables:
 	ld [wAITargetMonType2], a
 	ld [wAITargetMonStatus], a
 	ld [wPokedexDataFlags], a
+	ld [wBattleFunctionalFlags], a
 	ld a, [wAIWhichPokemonSentOutAlready]
 	and $81	;clear bits 1 to 6 only by ANDing with 1000 0001
 	ld [wAIWhichPokemonSentOutAlready], a

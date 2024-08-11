@@ -5,8 +5,8 @@ VictoryRoad1FWildMons:
 	db 35, PRIMEAPE
 	db 45, GRAVELER
 	db 45, GRAVELER
-	db 50, GOLEM
-	db 49, GOLEM
+	db 50, NIDOKING
+	db 49, PRIMEAPE
 	db 41, ONIX
 	db 42, ONIX
 	db 43, ONIX

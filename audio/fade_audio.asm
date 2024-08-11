@@ -64,9 +64,14 @@ PlayExtraMusic:
 	jr z, .diamondMine
 	cp CELADON_MANSION_2F
 	jr z, .prospectorsHouseCheck
+	cp CINNABAR_VOLCANO
+	jr z, .volcano
 	ret
 .secretlab
 	jpfar SecretLabPlayMusic
+.volcano
+	call FadeOutAudio.noExtraMusic
+	jpfar VolcanoPlayMusic
 .diamondMine
 	ld a, d
 	and a

@@ -36,4 +36,5 @@ Tilesets:
 	tileset School,       -1, -1, -1, -1, TILEANIM_NONE
 	tileset SecretLab,    -1, -1, -1, -1, TILEANIM_NONE
 	tileset ChampCup,     -1, -1, -1, -1, TILEANIM_NONE
+	tileset Volcano,      -1, -1, -1, -1, TILEANIM_WATER_FLOWER
 	assert_table_length NUM_TILESETS

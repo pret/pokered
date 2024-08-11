@@ -26,7 +26,8 @@ FrontSpriteOptions4Header:
 	dw FrontSpriteOptions4LeftRightFuncs
 	dw DisplayFrontSpriteOptions
 	dw DisplayFrontSpriteOptions3
-	dw OptionsPageAButtonDefault
+	dw FrontSpriteSelectButtonDefault
+	dw OptionsDoNothing
 	; fall through
 DisplayFrontSpriteOptions4:
 	ld hl, FrontSpriteOptions4Header
