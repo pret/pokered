@@ -135,6 +135,7 @@ SetSpriteOptionsFromCursorPositions:
 	ld de, EditPrompt ; reload the EDIT prompt tiles
 	ld hl, vChars1 tile $40
 	lb bc, BANK(EditPrompt), 3
+	; TODO: fix info prompt needing reload
 	call CopyVideoData
 	jp GBPalNormal
 

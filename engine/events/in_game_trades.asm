@@ -166,7 +166,7 @@ GetTradeMonPalette:
 	cp 8
 	jr c, .firstByte
 	inc hl
-	sub 8
+	sub 8 ; PureRGBnote: if you have more than 16 in game trades this code will need to be updated.
 .firstByte
 	and a
 	ld b, a

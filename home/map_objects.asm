@@ -1,5 +1,6 @@
 ; checks if the player's coordinates match an arrow movement tile's coordinates
 ; and if so, decodes the RLE movement data
+; TODO: move to different bank? probably only used once or twice
 ; b = player Y
 ; c = player X
 DecodeArrowMovementRLE::
