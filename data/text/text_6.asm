@@ -85,6 +85,11 @@ _AlreadySurfingText::
 	line "surfing."
 	prompt
 
+_LavaSurfingText::
+	text "Surfing on lava?!"
+	line "Not happening."
+	prompt
+
 _ApexChipPutOnPokeballText::
 	text "You installed the"
 	line "APEX CHIP on"

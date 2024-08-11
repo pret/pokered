@@ -20,26 +20,11 @@ PlayDefaultMusicFadeOutCurrent::
 	ld d, c
 
 PlayDefaultMusicCommon::
-	ld a, [wWalkBikeSurfState]
-	and a
-	jr z, .walking
-	cp $2
-	jr z, .surfing 
-;;;;;;;;;; PureRGBnote: ADDED: bike music can be disabled via options.
-	ld a, [wOptions2]
-	bit BIT_BIKE_MUSIC, a
-	jr z, .bikeMusic ; jump if bike music is enabled
-	; else only play bike music if in cycling road
-	ld a, [wd732] ; forcibly riding bike (cycling road)
-	bit 5, a
-	jr z, .walking
-.bikeMusic
-;;;;;;;;;;
-	ld a, MUSIC_BIKE_RIDING
-	jr .next
-
-.surfing
-	ld a, MUSIC_SURFING
+	push bc
+	callfar CheckForBikeSurfMusic
+	pop bc
+	jr c, .walking
+	ld a, e ; which music will be played from the bike/surf music
 
 .next
 	ld b, a
@@ -355,3 +340,26 @@ RemapCommandPointerLoop:
 	jp BankswitchCommon
 
 ;;;;;;;;;;
+
+
+PlayNewSoundChannel5::
+	ld a, SFX_TRADE_MACHINE
+	ld hl, wChannelCommandPointers + CHAN5 * 2
+	jr PlayNewSound
+
+PlayNewSoundChannel8::
+	ld a, SFX_PUSH_BOULDER
+	ld hl, wChannelCommandPointers + CHAN8 * 2
+	; fall through
+; input hl = which channel the sound plays on
+; input de = address of the sound effect
+; sound effect data must use the same sound engine bank as the currently playing music to work
+PlayNewSound::
+	rst _PlaySound
+	; remap the sound pointer immediately to cause the new sound to play.
+RemapSoundChannel::
+	ld a, e
+	ld [hli], a
+	ld [hl], d
+	ret
+	

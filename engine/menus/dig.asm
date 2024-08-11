@@ -16,6 +16,8 @@ DigFromPartyMenu::
 	; check if we're trying to use dig in a dungeon
 	callfar IsEscapeRopeUsable
 	jr z, .noEscapeDungeon
+	call LavaRoomCheck ; can't dig if we're standing on lava in the lava room
+	jr z, .doneFailed
 	ld a, ESCAPE_ROPE
 	ld [wcf91], a
 	ld [wPseudoItemID], a
@@ -325,4 +327,20 @@ GetBlockAtCoord::
 	ld c, d
 	add hl, bc
 	ld a, [hl]
+	ret
+
+; in the flooding lava room of the volcano we need to block dig/teleporting out when you're standing on lava
+; it's possible to pause while standing on lava for 1 frame and dig/teleporting at that point glitches the game out
+LavaRoomCheck:
+	ld a, [wCurMap]
+	cp CINNABAR_VOLCANO
+	ret nz
+	CheckEvent EVENT_LAVA_FLOOD_ACTIVE
+	jr z, .noLava
+	ld a, [wTilePlayerStandingOn]
+	cp $2A ; flood lava tile
+	ret
+.noLava
+	ld a, 1
+	and a
 	ret

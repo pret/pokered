@@ -872,12 +872,26 @@ ItemUseSurfboard:
 	call CheckForTilePairCollisions
 	jp c, SurfingAttemptFailed
 .surf
+	ld a, [wCurMapTileset]
+	cp VOLCANO
+	jr nz, .notVolcano
+	 ; only certain pokemon can surf on lava
+	ld a, [wBattleMonSpecies2]
+	cp RHYDON
+	jr z, .notVolcano
+	cp HARDENED_ONIX
+	jr z, .notVolcano
+	ld hl, LavaSurfText
+	jp ItemUseFailed
+.notVolcano
 	call .makePlayerMoveForward
 	ld hl, wd730
 	set 7, [hl]
 	ld a, 2
 	ld [wWalkBikeSurfState], a ; change player state to surfing
-	call PlayDefaultMusic ; play surfing music
+	ld a, [wCurMapTileset]
+	cp VOLCANO
+	call nz, PlayDefaultMusic ; play surfing music (but not in volcano)
 ;;;;;;;;;; PureRGBnote: ADDED: flag to indicate we are in the "able to surf" state (needed for autosurf functionality)
 	ld hl, wd728
 	set 2, [hl]
@@ -947,6 +961,10 @@ SurfingGotOnText:
 
 AlreadySurfingText:
 	text_far _AlreadySurfingText
+	text_end
+
+LavaSurfText:
+	text_far _LavaSurfingText
 	text_end
 
 ItemUsePokedex:
@@ -1864,6 +1882,8 @@ ItemUsePocketAbra:
 	ld a, [wIsInBattle]
 	and a
 	jp nz, ItemUseNotTime
+	callfar LavaRoomCheck
+	jp z, ItemUseNotTime ; can't teleport when lava flood happening
 	ld hl, .wantToTeleportText
 	rst _PrintText
 	call YesNoChoice
@@ -3390,6 +3410,8 @@ WaterTileSetIsNextTileShoreOrWater::
 	jr z, .skipShoreTiles ; if it's the Vermilion Dock tileset
 	cp CAVERN ; PureRGBnote: ADDED: fixes an issue with the unused tiles in the cavern tileset causing surf incorrectly (they are used now)
 	jr z, .skipShoreTiles
+	cp VOLCANO
+	jr z, .volcanoTiles
 	ld a, [wTileInFrontOfPlayer] ; tile in front of player
 	cp $48 ; eastern shore tile in Safari Zone
 	jr z, .shoreOrWater
@@ -3405,6 +3427,33 @@ WaterTileSetIsNextTileShoreOrWater::
 .shoreOrWater
 	and a
 	ret
+.volcanoTiles
+	push hl
+	push de
+	push bc
+	ld hl, .volcanoCheck
+	call hl_caller
+	pop bc
+	pop de
+	pop hl
+	ret
+.volcanoCheck
+	ld a, [wYCoord] ; 3
+	cp 53 ; 2
+	jr nc, .volcanoTileCheck ; can lava surf on bottom floor
+	ld de, VolcanoMainRoomRange
+	callfar FarArePlayerCoordsInRange
+	jr nc, .notShoreOrWater
+.volcanoTileCheck
+	ld a, [wTileInFrontOfPlayer]
+	ld de, 1
+	ld hl, LavaSurfTiles
+	call IsInArray
+	jr c, .shoreOrWater
+	jr .notShoreOrWater
+
+LavaSurfTiles::
+	db $06, $14, $21, $23, $24, $25, $26, -1
 
 INCLUDE "data/tilesets/water_tilesets.asm"
 

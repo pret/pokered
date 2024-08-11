@@ -30,7 +30,8 @@ OptionsMenu2Header:
 	dw Options2LeftRightFuncs
 	dw DisplayBattleOptions
 	dw DisplayOptionMenu
-	dw OptionsPage2AButton
+	dw OptionsPage2AorSelectButton
+	dw OptionsMenu2InfoTextJumpTable
 	; fall through
 DisplayOptions2:
 	ld hl, OptionsMenu2Header
@@ -92,6 +93,11 @@ Options2Text:
 	next " BIKE SONG: ON OFF"
 	next " GBC FADE:  OFF ON@"
 
+OptionsPage2AorSelectButton:
+	ld a, [hJoy5]
+	bit BIT_A_BUTTON, a
+	jp z, OptionsPageAorSelectButtonDefault
+	; fall through
 OptionsPage2AButton:
 	ld a, [Options2YCoordVariableOffsetList]
 	ld b, a
@@ -248,7 +254,7 @@ CompareOptions2:
 	ret
 .tryPlayBikeMusic
 	ld a, [wWalkBikeSurfState]
-	cp 1
+	cp BIKING
 	ret nz
 	ld a, [wCurMapConnections]
 	bit BIT_EXTRA_MUSIC_MAP, a
@@ -332,3 +338,35 @@ PrintSGBOptionNumber:
 	ret z
 	ld [hl], "1"
 	ret
+
+OptionsMenu2InfoTextJumpTable:
+	dw ColorsOptionInfoText
+	dw AltPkmnColorsInfoText
+	dw MusicInfoText
+	dw AudioPanInfoText
+	dw BikeSongInfoText
+	dw GBCFadeInfoText
+
+ColorsOptionInfoText:
+	text_far _ColorsOptionInfoText
+	text_end
+
+AltPkmnColorsInfoText:
+	text_far _AltPkmnColorsInfoText
+	text_end	
+
+MusicInfoText:
+	text_far _MusicInfoText
+	text_end
+
+AudioPanInfoText:
+	text_far _AudioPanInfoText
+	text_end
+
+BikeSongInfoText:
+	text_far _BikeSongInfoText
+	text_end
+
+GBCFadeInfoText:
+	text_far _GBCFadeInfoText
+	text_end

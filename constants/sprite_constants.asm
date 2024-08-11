@@ -89,18 +89,21 @@
 	const SPRITE_AGATHA_SITTING            ; $54
 	const SPRITE_GIOVANNI_SITTING          ; $55
 	const SPRITE_BLUE_SITTING              ; $56
+	const SPRITE_LAVA_SUIT                 ; $57
+	const SPRITE_MONSTER_SWIMMING          ; $58
+	const SPRITE_GRAVELER                  ; $59
 DEF FIRST_STILL_SPRITE EQU const_value
-	const SPRITE_POKE_BALL                 ; $57
-	const SPRITE_FOSSIL                    ; $58
-	const SPRITE_BOULDER                   ; $59
-	const SPRITE_PAPER                     ; $5a
-	const SPRITE_POKEDEX                   ; $5b
-	const SPRITE_CLIPBOARD                 ; $5c
-	const SPRITE_SNORLAX                   ; $5d
-	const SPRITE_OLD_AMBER                 ; $5e
-	const SPRITE_GAMBLER_ASLEEP            ; $5f
-	const SPRITE_MONSTER2_STILL            ; $60
-	const SPRITE_POKE_BALL2			 	   ; $61
-	const SPRITE_DARK_CHANNELER            ; $62
-	const SPRITE_BOOMBOX                   ; $63
+	const SPRITE_POKE_BALL                 ; $5a
+	const SPRITE_FOSSIL                    ; $5b
+	const SPRITE_BOULDER                   ; $5c
+	const SPRITE_PAPER                     ; $5d
+	const SPRITE_POKEDEX                   ; $5e
+	const SPRITE_CLIPBOARD                 ; $5f
+	const SPRITE_SNORLAX                   ; $60
+	const SPRITE_OLD_AMBER                 ; $61
+	const SPRITE_GAMBLER_ASLEEP            ; $62
+	const SPRITE_MONSTER2_STILL            ; $63
+	const SPRITE_POKE_BALL2			 	   ; $64
+	const SPRITE_DARK_CHANNELER            ; $65
+	const SPRITE_BOOMBOX                   ; $66
 DEF NUM_SPRITES EQU const_value - 1

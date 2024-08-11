@@ -74,7 +74,7 @@ BrunoSprite::            INCBIN "gfx/sprites/bruno.2bpp"
 LoreleiSprite::          INCBIN "gfx/sprites/lorelei.2bpp"
 SeelSprite::             INCBIN "gfx/sprites/seel.2bpp"
 
-SECTION "NPC Sprites 3", ROMX, BANK[$30]
+SECTION "NPC Sprites 3", ROMX
 
 PsychicSprite::          INCBIN "gfx/sprites/psychic.2bpp"
 FightingSprite::          INCBIN "gfx/sprites/fighting.2bpp"
@@ -104,8 +104,12 @@ OakSittingSprite:: INCBIN "gfx/sprites/champ_arena_audience/oak_sitting.2bpp"
 AgathaSittingSprite:: INCBIN "gfx/sprites/champ_arena_audience/agatha_sitting.2bpp"
 GiovanniSittingSprite:: INCBIN "gfx/sprites/champ_arena_audience/giovanni_sitting.2bpp"
 BlueSittingSprite:: INCBIN "gfx/sprites/champ_arena_audience/blue_sitting.2bpp"
+LavaSuitSprite:: INCBIN "gfx/sprites/lava_suit.2bpp"
 BoomboxSprite:: INCBIN "gfx/sprites/boombox.2bpp"
 
+SECTION "NPC Sprites 4", ROMX
+
+; new ones
 VoltorbSpriteFrame2::   INCBIN "gfx/sprites/voltorb2.2bpp"
 PokeballSprite2::		INCBIN "gfx/sprites/poke_ball.2bpp"
 DaisyBlinkingSprite::   INCBIN "gfx/sprites/daisy_blinking.2bpp"
@@ -116,3 +120,8 @@ MonsterDiggingSprite:: INCBIN "gfx/sprites/monster_digging.2bpp"
 MonsterDiggingSprite2:: INCBIN "gfx/sprites/monster_digging2.2bpp"
 DiglettBlinkingSprite:: INCBIN "gfx/sprites/diglett_blinking.2bpp"
 DiglettDiggingSprite:: INCBIN "gfx/sprites/diglett_digging.2bpp"
+LavaSuitDrillingSprite:: INCBIN "gfx/sprites/lava_suit_drilling.2bpp"
+LavaSuitDrillingSprite2:: INCBIN "gfx/sprites/lava_suit_drilling2.2bpp"
+MonsterSwimmingSprite:: INCBIN "gfx/sprites/monster_swimming.2bpp"
+GravelerSprite::  INCBIN "gfx/sprites/graveler.2bpp"
+

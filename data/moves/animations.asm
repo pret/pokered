@@ -206,6 +206,7 @@ AttackAnimationPointers:
 	dw ThrowRockAnim
 	dw ThrowBaitAnim
 	dw FlyAnimPart1
+	dw FirePillarAnim
 	assert_table_length NUM_ATTACK_ANIMS
 	dw ZigZagScreenAnim
 
@@ -1521,3 +1522,8 @@ AmnesiaEnemyAnim:
 	battle_anim KINESIS, SUBANIM_AMNESIA_ENEMY, 0, 16
 	battle_anim DOUBLE_TEAM, SE_SHOOT_MANY_BALLS_UPWARD
 	db -1 ; end
+
+FirePillarAnim:
+	battle_anim FLAMETHROWER, SE_FIRE_EVERYWHERE
+	battle_anim BARRIER, SUBANIM_0_WATER_1_FIRE_BARRIER, 1, 3
+	db -1

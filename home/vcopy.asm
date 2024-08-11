@@ -395,16 +395,5 @@ UpdateMovingBgTiles::
 	ret c
 ;;;;;;;;;;
 
-	ldh a, [hMovingBGTilesCounter1]
-	inc a
-	ldh [hMovingBGTilesCounter1], a
-	cp 20
-	ret c
-	cp 21
-	jr z, .flower
-
-; PureRGBnote: CHANGED: the code for animating these tiles was moved to another bank for space.
-	jpfar AnimateWaterTile
-.flower
-	jpfar AnimateFlowerTile
+	jpfar AnimateTiles
 	

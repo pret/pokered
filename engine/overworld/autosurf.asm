@@ -21,9 +21,11 @@ CheckForAutoSurf::
 	jr z, .seaFoamCheck ; check if we're in the spot in seafoam where we can't surf if the water is running too quickly
 .surfAllowed
 	; should autosurf
-	ld a, 2
+	ld a, [wWalkBikeSurfState]
+	cp WEARING_LAVA_SUIT
+	ld a, SURFING
 	ld [wWalkBikeSurfState], a ; change player state to surfing
-	call PlayDefaultMusic ; play surfing music
+	call nz, PlayDefaultMusic ; play surfing music (but not if surfing on lava)
 	call LoadPlayerSpriteGraphics
 	and a
 	ret

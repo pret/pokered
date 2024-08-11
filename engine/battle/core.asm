@@ -321,6 +321,7 @@ MainInBattleLoop:
 	call SaveScreenTilesToBuffer1
 	xor a
 	ld [wFirstMonsNotOutYet], a
+	callfar VolcanoBattleInit
 	ld a, [wPlayerBattleStatus2]
 	and (1 << NEEDS_TO_RECHARGE) ; check if the player is needs to recharge
 	jr nz, .selectEnemyMove
@@ -858,7 +859,11 @@ FaintEnemyPokemon:
 	ld a, d
 	and a
 	ret z
+	CheckEvent EVENT_BATTLING_VOLCANO_MAGMAR
 	ld hl, EnemyMonFaintedText
+	jr z, .notmagmarboss
+	ld hl, EnemyMonWasDefeatedText
+.notmagmarboss
 	rst _PrintText
 	call PrintEmptyString
 	call SaveScreenTilesToBuffer1
@@ -908,6 +913,10 @@ FaintEnemyPokemon:
 
 EnemyMonFaintedText:
 	text_far _EnemyMonFaintedText
+	text_end
+
+EnemyMonWasDefeatedText:
+	text_far _EnemyMonWasDefeatedText
 	text_end
 
 EndLowHealthAlarm:
@@ -1724,6 +1733,8 @@ TryRunningFromBattle:
 	dec a
 .playSound
 	ld [wBattleResult], a
+	ld hl, wBattleFunctionalFlags
+	set 1, [hl] ; indicates we ran from battle rather than caught the pokemon
 	ld a, SFX_RUN
 	call PlaySoundWaitForCurrent
 	ld hl, GotAwayText
@@ -1891,6 +1902,7 @@ SendOutMon:
 	call PlayCry
 	call PrintEmptyString
 	jp SaveScreenTilesToBuffer1
+	
 
 ; show 2 stages of the player mon getting smaller before disappearing
 AnimateRetreatingPlayerMon:
@@ -7299,6 +7311,12 @@ DetermineWildOpponent:
 	callfar TryDoWildEncounter
 	ret nz
 InitBattleCommon:
+	ld a, [wCurMap]
+	cp CINNABAR_VOLCANO
+	jr nz, .notVolcano
+	ld hl, wFlags_D733
+	set 1, [hl] ; prevents surf music from playing when returning from a battle on lava
+.notVolcano
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; shinpokerednote: ADDED: store PKMN Levels at the beginning of the Battle.
 	farcall StorePKMNLevels
@@ -7422,6 +7440,7 @@ _InitBattleCommon:
 	ld a, [wIsInBattle]
 	dec a ; is it a wild battle?
 	call z, DrawEnemyHUDAndHPBar ; draw enemy HUD and HP bar if it's a wild battle
+	callfar VolcanoInitMagmarBattle
 	call StartBattle
 	callfar EndOfBattle
 	pop af

@@ -35,11 +35,13 @@ TryDoWildEncounter:
 	jr z, .CanEncounter
 ; even if not in grass/water, standing anywhere we can encounter pokemon
 ; so long as the map is "indoor" and has wild pokemon defined.
-; ...as long as it's not Viridian Forest or Safari Zone.
+; ...as long as it's not Viridian Forest or Safari Zone or Volcano.
 	ld a, [wCurMap]
 	cp FIRST_INDOOR_MAP ; is this an indoor map?
 	jr c, .CantEncounter2
 	ld a, [wCurMapTileset]
+	cp VOLCANO
+	jr z, .CantEncounter2
 	cp FOREST ; Viridian Forest/Safari Zone
 	jr z, .CantEncounter2
 	ld a, [wGrassRate]
@@ -119,9 +121,36 @@ TestGrassTile:
 	cp c
 	ret z
 	ld a, [wCurMapTileset]
+	cp VOLCANO
+	jr z, .volcano
 	cp FOREST
 	ret nz
 	ld a, $34	; check for the extra grass tile in the forest tileset
+	cp c
+	ret
+.volcano
+	; no encounters in first room
+	ld a, [wXCoord]
+	cp 6
+	jr nc, .normal
+	ld a, [wYCoord]
+	cp 8
+	ret c
+.normal
+	; volcano has a couple of encounter tiles
+	ld a, $05
+	cp c
+	ret z
+	ld a, $16
+	cp c
+	ret z
+	ld a, $20
+	cp c
+	ret z
+	; don't encounter on this specific tile in the lava flood room, but otherwise do
+	CheckEvent EVENT_IN_LAVA_FLOOD_ROOM
+	ret nz
+	ld a, $27
 	cp c
 	ret
 
@@ -139,6 +168,8 @@ TestWaterTile:
 	cp c
 	ret z
 	ld a, [wCurMapTileset]
+	cp VOLCANO
+	jr z, .volcano
 	cp FOREST ; every map in FOREST tileset will treat the coast tile as a water encounter tile as well
 	jr z, .forestCoastTileCheck 
 	cp OVERWORLD
@@ -157,6 +188,13 @@ TestWaterTile:
 	ret
 .overworldCoastTileCheck
 	ld a, $32 ; left coast tile in OVERWORLD tileset
+	cp c
+	ret
+.volcano ; volcano has two lava bubble tiles that generate encounters too
+	ld a, $21
+	cp c
+	ret z
+	ld a, $06
 	cp c
 	ret
 

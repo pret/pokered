@@ -5,6 +5,12 @@ EnterMapAnim::
 	ld [wSpritePlayerStateData1YPixels], a
 	call Delay3
 	push hl
+	ld a, [wCurMapTileset]
+	cp VOLCANO
+	jr nz, .notVolcano1 ; volcano warp end animation
+	callfar LavaFloodReset
+	callfar VolcanoDoRoomSpecificMapLoadCode ; TODO: should it be CinnabarVolcanoOnMapLoad?
+.notVolcano1
 	call GBFadeInFromWhite
 	ld hl, wFlags_D733
 	bit 7, [hl] ; used fly out of battle?
@@ -12,6 +18,14 @@ EnterMapAnim::
 	jr nz, .flyAnimation
 	CheckAndResetEvent FLAG_DIG_OVERWORLD_ANIMATION
 	jr nz, .dig
+	ld a, [wCurMapTileset]
+	cp VOLCANO
+	jr nz, .notVolcano2 ; volcano warp end animation
+	ld de, FallDownHole
+	call PlayNewSoundChannel5
+	call PlayerSpinWhileMovingDown
+	jr .done
+.notVolcano2
 	ld a, SFX_TELEPORT_ENTER_1
 	rst _PlaySound
 	ld hl, wd732
@@ -94,8 +108,16 @@ _LeaveMapAnim::
 	dec a
 	jp nz, LeaveMapThroughHoleAnim
 .spinWhileMovingUp
+	ld a, [wCurMapTileset]
+	cp VOLCANO
+	jr nz, .notVolcano
+	ld de, SFX_Drilled_Hole
+	call PlayNewSoundChannel8
+	jr .doneSound
+.notVolcano
 	ld a, SFX_TELEPORT_EXIT_1
 	rst _PlaySound
+.doneSound
 	ld hl, wPlayerSpinWhileMovingUpOrDownAnimDeltaY
 	ld a, -$10
 	ld [hli], a ; wPlayerSpinWhileMovingUpOrDownAnimDeltaY
@@ -188,14 +210,8 @@ LeaveMapThroughHoleAnim:
 	rst _DelayFrames
 ;;;;;;;;;; PureRGBnote: ADDED: sound effect when falling into a hole
 	; play a sound effect of falling in
-	ld a, SFX_TRADE_MACHINE
-	rst _PlaySound
 	ld de, FallDownHole
-	; remap channel five to play a small pitch sweep sound
-	ld hl, wChannelCommandPointers + CHAN5 * 2
-	ld a, e
-	ld [hli], a
-	ld [hl], d
+	call PlayNewSoundChannel5
 ;;;;;;;;;;
 	; hide upper half of player's sprite
 	ld a, $a0

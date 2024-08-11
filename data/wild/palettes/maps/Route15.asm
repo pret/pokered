@@ -1,4 +1,4 @@
 Route15WildPalettes:
-	db $FF
+	db %11111101
 	db %00000011
 	db 0

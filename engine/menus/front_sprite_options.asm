@@ -28,12 +28,25 @@ FrontSpriteOptionsHeader:
 	dw FrontSpriteOptionsLeftRightFuncs
 	dw DisplayFrontSpriteOptions2
 	dw DisplayFrontSpriteOptions4
-	dw OptionsPageAButtonDefault
+	dw FrontSpriteSelectButtonDefault
+	dw OptionsDoNothing
 	; fall through
 DisplayFrontSpriteOptions:
 	ld hl, FrontSpriteOptionsHeader
 	ld bc, FrontSpriteOptionsData
 	jp DisplayOptionMenuCommon
+
+FrontSpriteSelectButtonDefault:
+	ld a, [hJoy5]
+	bit BIT_SELECT, a
+	ret z
+	ld a, [wTopMenuItemY]
+	cp PAGE_CONTROLS_Y_COORD ; is cursor on NEXT/PREV row?
+	ret z ; don't do anything when player presses select if it's on that row
+	ld hl, FrontSpriteGenericText
+	call PrintText
+	scf
+	ret
 
 ; first byte = y coord
 ; second byte = which option on the page it is (cancel always = max option value)
@@ -112,3 +125,7 @@ SetFrontSpriteOptionsFromCursorPositions:
 SetCursorPositionFromFrontSpriteOptions:
 	ld hl, FrontSpriteOptionsXPosBitData
 	jp SetGenericCursorPositionFromOptions
+
+FrontSpriteGenericText:
+	text_far _FrontSpriteGenericText
+	text_end

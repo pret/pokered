@@ -13,13 +13,15 @@ ENDM
 MACRO farjp
 	ld b, BANK(\1)
 	ld hl, \1
-	jp Bankswitch
+	rst _Bankswitch
+	ret
 ENDM
 
 MACRO jpfar
 	ld hl, \1
 	ld b, BANK(\1)
-	jp Bankswitch
+	rst _Bankswitch
+	ret
 ENDM
 
 MACRO callbs	; shinpokerednote: audionote: added from pokeyellow

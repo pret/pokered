@@ -27,7 +27,7 @@ PlayerPCMenu:
 	set 5, [hl]
 	call LoadScreenTilesFromBuffer2
 	hlcoord 0, 0
-	lb bc, 8, 14
+	lb bc, 10, 14 ; PureRGBnote: CHANGED: increased menu size for WORLD OPTIONS to be added
 	call TextBoxBorder
 	call UpdateSprites
 	hlcoord 2, 2
@@ -40,7 +40,7 @@ PlayerPCMenu:
 	ld [hli], a ; wTopMenuItemX
 	inc hl
 	inc hl
-	ld a, 3
+	ld a, 4 ; PureRGBnote: CHANGED: increased menu length for WORLD OPTIONS to be added
 	ld [hli], a ; wMaxMenuItem
 	ld a, A_BUTTON | B_BUTTON
 	ld [hli], a ; wMenuWatchedKeys
@@ -66,6 +66,8 @@ PlayerPCMenu:
 	jp z, PlayerPCDeposit
 	dec a
 	jp z, PlayerPCToss
+	dec a
+	jp z, WorldOptions
 
 ExitPlayerPC:
 	ld a, [wFlags_0xcd60]
@@ -374,10 +376,24 @@ DepositItemFromItemMenu::
 	ld [wBagSavedMenuItem], a
 	ret
 
+WorldOptions:
+	call ClearScreen
+	ld hl, wd730
+	res 6, [hl] ; turn off instant text to display the options menu
+	xor a
+	ld [wOptionsCancelCursorX], a
+	ld [wTopMenuItemY], a
+	callfar DisplayWorldOptions
+	ld hl, wd730
+	set 6, [hl] ; go back to instant text
+	jp PlayerPCMenu
+
+
 PlayersPCMenuEntries:
 	db   "WITHDRAW ITEM"
 	next "DEPOSIT ITEM"
 	next "TOSS ITEM"
+	next "WORLD OPTIONS"
 	next "LOG OFF@"
 
 TurnedOnPC2Text:

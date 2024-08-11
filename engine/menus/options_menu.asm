@@ -15,11 +15,29 @@ ArrowYcoordXVariableOffsetList:
 	db PAGE_CONTROLS_Y_COORD, MAX_OPTIONS_PER_PAGE
 
 OptionsNextBackText::
-	db "NEXT  PREV@"
+	db "  NEXT  PREV  @"
 
 OptionsDoNothing:
-OptionsPageAButtonDefault:
-	ret ; do nothing currently
+	ret
+
+OptionsPageAorSelectButtonDefault:
+	; by default the A button does nothing but the select button displays info on each option
+	ldh a, [hJoy5]
+	bit BIT_SELECT, a
+	ret z ; if select wasn't pressed do nothing
+	ld a, [wTopMenuItemY]
+	cp PAGE_CONTROLS_Y_COORD ; is cursor on NEXT/PREV row?
+	ret z ; don't do anything when player presses select if it's on that row
+	ld h, b
+	ld l, c ; put the header pointer back into hl from bc
+	inc hl
+	inc hl ; 8th function in options header jump table
+	hl_deref
+	ld a, [wCurrentOptionIndex]
+	call GetAddressFromPointerArray ; get which text script to run
+	call PrintText
+	scf
+	ret
 
 OptionMenu1Data:
 	db OPTION_PAGE_1_COUNT ; length of list
@@ -49,6 +67,9 @@ DrawOptionMenu:
 	hlcoord 1, 6
 	ld de, BattleAnimationOptionText
 	call PlaceString
+	hlcoord 0, 15
+	lb bc, 3, SCREEN_WIDTH
+	call ClearScreenArea
 	hlcoord 1, 11
 	ld de, BattleStyleOptionText
 	jp PlaceString
@@ -67,13 +88,30 @@ DrawOptionsPageInfo:
 	inc bc
 	ld a, [bc] ; number of pages in total
 	add NUMBER_CHAR_OFFSET
+	ld [hli], a
+	ld [hl], " "
+	hlcoord 14, PAGE_CONTROLS_Y_COORD
+	ld a, [hl]
+	cp $7a ; check if info text has just displayed and trashed the coords beside page number with a menu border
+	jr nz, .skip
+	;if so, clear the menu border tiles out
+	ld a, " "
+	ld [hli], a
 	ld [hl], a
-	hlcoord 2, PAGE_CONTROLS_Y_COORD
+.skip
+	hlcoord 0, PAGE_CONTROLS_Y_COORD
 	ld de, OptionsNextBackText
 	call PlaceString
 ; add cursor in front of NEXT
 	hlcoord 1, PAGE_CONTROLS_Y_COORD
 	ld [hl], "▷"
+; add SELECT:INFO prompt to top of menu
+	push bc
+	hlcoord 14, 0
+	lb bc, $C3, 5 ; start of SELECT:INFO prompt
+	ld de, 1
+	call DrawTileLineIncrement
+	pop bc
 	pop hl
 	ret
 
@@ -105,12 +143,21 @@ OptionMenu1Header:
 	dw OptionLeftRightFuncs
 	dw DisplayOptions2
 	dw DisplaySpriteOptions
-	dw OptionsPageAButtonDefault
+	dw OptionsPageAorSelectButtonDefault
+	dw OptionsMenu1InfoTextJumpTable
 	; fall through (options display address should be after A button pointer)
 DisplayOptionMenu:
 	ld de, EditPrompt
 	ld hl, vChars1 tile $40
 	lb bc, BANK(EditPrompt), 3
+	call CopyVideoData
+	ld de, PokedexPromptGraphics
+	ld hl, vChars1 tile $43
+	lb bc, BANK(PokedexPromptGraphics), 3
+	call CopyVideoData
+	ld de, InfoPromptGraphics
+	ld hl, vChars1 tile $46
+	lb bc, BANK(InfoPromptGraphics), 2
 	call CopyVideoData
 	ld hl, OptionMenu1Header
 	ld bc, OptionMenu1Data
@@ -198,22 +245,30 @@ OptionsMenuLoop:
 	call JoypadLowSensitivity
 	ldh a, [hJoy5]
 	ld b, a
-	and A_BUTTON | B_BUTTON | START | D_RIGHT | D_LEFT | D_UP | D_DOWN ; any key besides select pressed?
+	and A_BUTTON | B_BUTTON | START | SELECT | D_RIGHT | D_LEFT | D_UP | D_DOWN 
 	jr z, .getJoypadStateLoop
 	bit BIT_B_BUTTON, b
 	jr nz, .exitMenu
 	bit BIT_START, b
 	jr nz, .exitMenu
+	bit BIT_SELECT, b
+	jr nz, .selectPressed
 	bit BIT_A_BUTTON, b
 	jr z, .checkDirectionKeys
+.AbuttonPressed
 	ld b, PAGE_CONTROLS_Y_COORD
 	ld a, [wTopMenuItemY]
 	cp b ; is the cursor on the next/back row?
 	jr z, .pageRow
+.selectPressed ; both select and the A button if not on the bottom row use this function
 	lb de, 0, 8
 	add hl, de ; seventh function in header
+	ld b, h
+	ld c, l ; put the header index into bc for use in the a button/select button action code
 	and a ; clear carry
 	call CallOptionsMenuHeaderFunction ; A-button action when not on the bottom row
+	inc hl
+	inc hl
 	inc hl
 	inc hl ; hl points to the function that draws this whole options menu
 	jr nc, .skip
@@ -538,3 +593,20 @@ CopyOptionsFromSRAM::
 	ld [MBC1SRamBankingMode], a
 	ld [MBC1SRamEnable], a
 	ret
+
+OptionsMenu1InfoTextJumpTable:
+	dw TextSpeedInfoText
+	dw BattleAnimationInfoText
+	dw BattleStyleInfoText
+
+TextSpeedInfoText:
+	text_far _TextSpeedInfoText
+	text_end
+
+BattleAnimationInfoText:
+	text_far _BattleAnimationInfoText
+	text_end	
+
+BattleStyleInfoText:
+	text_far _BattleStyleInfoText
+	text_end

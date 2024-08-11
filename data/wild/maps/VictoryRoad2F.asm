@@ -4,8 +4,8 @@ VictoryRoad2FWildMons:
 	db 36, MACHOKE
 	db 35, POLIWRATH
 	db 45, RHYDON
-	db 45, RHYDON
-	db 50, GOLEM
+	db 45, NIDOQUEEN
+	db 50, POLIWRATH
 	db 41, GOLEM
 	db 40, DUGTRIO
 	db 40, DUGTRIO

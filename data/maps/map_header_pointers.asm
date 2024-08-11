@@ -117,7 +117,7 @@ MapHeaderPointers::
 	dw LancesRoom_h
 	dw ChampArena_h ; UNUSED_MAP_72
 	dw DiamondMine_h ; UNUSED_MAP_73
-	dw LancesRoom_h ; UNUSED_MAP_74
+	dw CinnabarVolcano_h ; UNUSED_MAP_74
 	dw LancesRoom_h ; UNUSED_MAP_75
 	dw HallOfFame_h
 	dw UndergroundPathNorthSouth_h

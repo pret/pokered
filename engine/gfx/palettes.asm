@@ -240,6 +240,8 @@ GetOverworldPalette:
 	jr z, .PokemonTowerOrAgatha
 	cp SECRET_LAB_TS
 	jr z, .SecretLab
+	cp VOLCANO
+	jr z, .volcano
 	cp CAVERN
 	jr z, .caveOrBruno
 	ld a, [wCurMap]
@@ -301,6 +303,9 @@ GetOverworldPalette:
 	jr .town
 .powerPlant ; PureRGBnote: CHANGED: the power plant uses a different palette that looks more abandoned power plant-y
 	ld a, PAL_MEWMON - 1
+	jr .town
+.volcano
+	ld a, PAL_VOLCANO - 1
 	jr .town
 .diamond_mine
 ; PureRGBnote: ADDED: in the diamond mine area, we use a different palette depending on where you are in the map.
