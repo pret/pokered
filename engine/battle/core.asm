@@ -3666,6 +3666,13 @@ CheckPlayerStatusConditions:
 	; clear thrashing, charging up, and trapping moves such as warp (already cleared for confusion damage)
 	and ~((1 << THRASHING_ABOUT) | (1 << CHARGING_UP) | (1 << USING_TRAPPING_MOVE)) ; PureRGBnote: CHANGED: bide code removed since its effect was changed
 	ld [hl], a
+	; PureRGBnote: FIXED: in link battles only, the player doesn't stay invulnerable when they hurt themselves in confusion
+	; or get fully paralyzed while using dig/fly. In normal battles ONLY the player can have this happen because it's funny.
+	ld a, [wLinkState]
+	cp LINK_STATE_BATTLING
+	jr nz, .dontClearInvulFlag
+	res INVULNERABLE, [hl]
+.dontClearInvulFlag
 	ld a, [wPlayerMoveEffect]
 	cp FLY_EFFECT
 	jr z, .FlyOrChargeEffect
@@ -6287,8 +6294,10 @@ CheckEnemyStatusConditions:
 .monHurtItselfOrFullyParalysed
 	ld hl, wEnemyBattleStatus1
 	ld a, [hl]
-	; clear thrashing about, charging up, and multi-turn moves such as wrap ; PureRGBnote: CHANGED: bide effect changed so don't need that code
-	and ~((1 << THRASHING_ABOUT) | (1 << CHARGING_UP) | (1 << USING_TRAPPING_MOVE))
+	; clear thrashing about, charging up, and multi-turn moves such as wrap 
+	; PureRGBnote: CHANGED: bide effect changed so don't need that code
+	; PureRGBnote: CHANGED: invulnerability flag cleared so opponents don't get stuck in invulnerable state
+	and ~((1 << THRASHING_ABOUT) | (1 << CHARGING_UP) | (1 << USING_TRAPPING_MOVE) | (1 << INVULNERABLE))
 	ld [hl], a
 	ld a, [wEnemyMoveEffect]
 	cp FLY_EFFECT
