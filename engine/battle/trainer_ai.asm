@@ -1001,6 +1001,7 @@ BlackbeltAI:
 GiovanniAI:
 	cp 20 percent + 1
 	ret nc
+	and a ; clear carry
 	ld a, [wEnemyBattleStatus2]
 	bit GETTING_PUMPED, a
 	ret nz
@@ -1448,7 +1449,7 @@ AIUseDireHit:
 	jr c, .clearCarryAndReturn
 	call AIPlayRestoringSFX
 	ld hl, wEnemyBattleStatus2
-	set 2, [hl]
+	set GETTING_PUMPED, [hl]
 	ld a, DIRE_HIT
 	jp AIPrintItemUse
 .clearCarryAndReturn
