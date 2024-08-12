@@ -8,7 +8,7 @@ VictoryRoad3F_Script:
 	ld [wVictoryRoad3FCurScript], a
 	ret
 
-VictoryRoad3FCheckBoulderEventScript:
+VictoryRoad3FCheckBoulderEventScript::
 	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]

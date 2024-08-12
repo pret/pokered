@@ -1,8 +1,3 @@
-HandleMidJump::
-; Handle the player jumping down
-; a ledge in the overworld.
-	farjp _HandleMidJump
-
 EnterMap::
 ; Load a new map.
 	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
@@ -20,6 +15,9 @@ EnterMap::
 	res 5, [hl] ; unset the "battle just happened" flag
 	call z, ResetUsingStrengthSurfOutOfBattleBits
 	call nz, MapEntryAfterBattle
+	ld hl, wCurrentMapScriptFlags
+	set 5, [hl]
+	set 6, [hl]
 	ld hl, wd732
 	ld a, [hl]
 	and 1 << 4 | 1 << 3 ; fly warp or dungeon warp
@@ -32,9 +30,6 @@ EnterMap::
 	ld hl, wd72d
 	res 5, [hl]
 	call UpdateSprites
-	ld hl, wCurrentMapScriptFlags
-	set 5, [hl]
-	set 6, [hl]
 	xor a
 	ld [wJoyIgnore], a
 
@@ -46,7 +41,11 @@ OverworldLoopLessDelay::
 	call LoadGBPal
 	ld a, [wd736]
 	bit 6, a ; jumping down a ledge?
-	call nz, HandleMidJump
+	jr z, .notMidJump
+	; Handle the player jumping down
+	; a ledge in the overworld.
+	callfar HandleMidJump
+.notMidJump
 	CheckFlag FLAG_MAP_HAS_OVERWORLD_ANIMATION
 	jr z, .noAnimation
 	callfar CheckOverworldAnimation

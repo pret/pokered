@@ -10,7 +10,7 @@ SilphCo3F_Script:
 	ld [wSilphCo3FCurScript], a
 	ret
 
-SilphCo3FGateCallbackScript:
+SilphCo3FGateCallbackScript::
 	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]

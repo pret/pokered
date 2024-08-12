@@ -1,6 +1,8 @@
 ; PureRGBnote: CHANGED: the code for animating these tiles was moved to another bank for space.
 AnimateTiles::
 	ld a, [wCurMapTileset]
+	cp CAVERN
+	jr z, .cavern
 	cp VOLCANO
 	jr nz, .normal
 	CheckEvent EVENT_LAVA_FLOOD_ACTIVE
@@ -13,7 +15,7 @@ AnimateTiles::
 	cp 6
 	jp z, AnimateLavaBubbles1
 	cp 10
-	jr z, AnimateLavaTiles
+	jp z, AnimateLavaTiles
 	cp 11
 	ret c
 	xor a
@@ -31,6 +33,13 @@ AnimateTiles::
 	cp 41
 	ret c
 	jp AnimateLavaBubbles2
+.cavern
+	ld a, [wCurMap]
+	cp SEAFOAM_ISLANDS_B3F
+	jr z, .seafoamCurrents
+	cp SEAFOAM_ISLANDS_B4F
+	jr z, .seafoamCurrents
+	; fall through
 .normal
 	ldh a, [hMovingBGTilesCounter1]
 	inc a
@@ -38,11 +47,24 @@ AnimateTiles::
 	cp 20
 	ret c
 	cp 21
-	jr nz, .water
+	jr nz, AnimateWaterTile
 	jp AnimateFlowerTile
-.water
-	; fall through
-
+.seafoamCurrents
+	ldh a, [hMovingBGTilesCounter1]
+	inc a
+	ldh [hMovingBGTilesCounter1], a
+	; for whatever reason if we have fast currents on map load it gets visually glitched out
+	; so we'll set it once the map loads in the script file
+	ld hl, wCurrentMapScriptFlags
+	bit 5, [hl]
+	jr nz, .skipQuickCurrent
+	rrca ; every other frame update currents
+	call nc, AnimateSeafoamCurrents 
+	ldh a, [hMovingBGTilesCounter1]
+.skipQuickCurrent
+	cp 20
+	ret c
+	; fall through		
 ; moves water tile sometimes left and and sometimes right to look like waves
 AnimateWaterTile::
 	ld hl, vTileset tile $14
@@ -148,6 +170,15 @@ LavaBubbleJumpTable:
 	dw LavaBubble2
 	dw LavaBubble3
 	dw LavaBubble4
+
+AnimateSeafoamCurrents:
+	ld hl, vTileset tile $3B ; right flowing water
+	call ScrollTileRight
+	ld hl, vTileset tile $42 ; down flowing water
+	call ScrollTileDown
+	ld hl, vTileset tile $30 ; up flowing water
+	jp ScrollTileUp
+
 
 ScrollTileRight:
 	ld c, 16

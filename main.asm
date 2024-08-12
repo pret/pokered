@@ -442,4 +442,4 @@ INCLUDE "engine/menus/dig.asm"
 INCLUDE "engine/battle/pp_tracker.asm"
 INCLUDE "engine/menus/world_options.asm"
 INCLUDE "engine/battle/volcano_battle_init.asm"
-
+INCLUDE "engine/gfx/enter_map_replace_tiles_check.asm"

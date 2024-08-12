@@ -3406,10 +3406,10 @@ IsNextTileShoreOrWater::
 	; fall through
 WaterTileSetIsNextTileShoreOrWater::
 	ld a, [wCurMapTileset]
+	cp CAVERN ; PureRGBnote: ADDED: fixes an issue with the unused tiles in the cavern tileset causing surf incorrectly (they are used now)
+	jr z, .cavern
 	cp SHIP_PORT ; Vermilion Dock tileset
 	jr z, .skipShoreTiles ; if it's the Vermilion Dock tileset
-	cp CAVERN ; PureRGBnote: ADDED: fixes an issue with the unused tiles in the cavern tileset causing surf incorrectly (they are used now)
-	jr z, .skipShoreTiles
 	cp VOLCANO
 	jr z, .volcanoTiles
 	ld a, [wTileInFrontOfPlayer] ; tile in front of player
@@ -3451,6 +3451,23 @@ WaterTileSetIsNextTileShoreOrWater::
 	call IsInArray
 	jr c, .shoreOrWater
 	jr .notShoreOrWater
+.cavern
+	ld a, [wCurMap]
+	cp SEAFOAM_ISLANDS_B3F
+	jr z, .currentTiles
+	cp SEAFOAM_ISLANDS_B4F
+	jr z, .currentTiles
+	jr .skipShoreTiles
+.currentTiles
+	; seafoam islands has water current tiles
+	ld a, [wTileInFrontOfPlayer]
+	cp $30
+	jr z, .shoreOrWater
+	cp $3B
+	jr z, .shoreOrWater
+	cp $42
+	jr z, .shoreOrWater
+	jr .skipShoreTiles
 
 LavaSurfTiles::
 	db $06, $14, $21, $23, $24, $25, $26, -1

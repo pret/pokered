@@ -1,12 +1,6 @@
 VictoryRoad2F_Script:
-	ld hl, wCurrentMapScriptFlags
-	bit 6, [hl]
-	res 6, [hl]
-	call nz, VictoryRoad2FResetBoulderEventScript
-	ld hl, wCurrentMapScriptFlags
-	bit 5, [hl]
-	res 5, [hl]
-	call nz, VictoryRoad2FCheckBoulderEventScript
+	call VictoryRoad2FResetBoulderEventScript
+	call VictoryRoad2FCheckBoulderEventScript
 	call EnableAutoTextBoxDrawing
 	ld hl, VictoryRoad2TrainerHeaders
 	ld de, VictoryRoad2F_ScriptPointers
@@ -16,9 +10,18 @@ VictoryRoad2F_Script:
 	ret
 
 VictoryRoad2FResetBoulderEventScript:
+	ld hl, wCurrentMapScriptFlags
+	bit 6, [hl]
+	res 6, [hl]
+	ret z
 	ResetEvent EVENT_VICTORY_ROAD_1_BOULDER_ON_SWITCH
 	ret ; avoids running the below code twice because bit 5 of wCurrentMapScriptFlags is always set when bit 6 is set too
-VictoryRoad2FCheckBoulderEventScript:
+
+VictoryRoad2FCheckBoulderEventScript::
+	ld hl, wCurrentMapScriptFlags
+	bit 5, [hl]
+	res 5, [hl]
+	ret z
 	CheckEvent EVENT_VICTORY_ROAD_2_BOULDER_ON_SWITCH1
 	jr z, .not_on_switch
 	push af
@@ -27,7 +30,7 @@ VictoryRoad2FCheckBoulderEventScript:
 	call VictoryRoad2FReplaceTileBlockScript
 	pop af
 .not_on_switch
-	bit 7, a
+	bit EVENT_VICTORY_ROAD_2_BOULDER_ON_SWITCH2 % 8, a
 	ret z
 	ld a, $1d
 	lb bc, 7, 11

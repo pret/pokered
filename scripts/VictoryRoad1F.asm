@@ -1,8 +1,5 @@
 VictoryRoad1F_Script:
-	ld hl, wCurrentMapScriptFlags
-	bit 5, [hl]
-	res 5, [hl]
-	call nz, .next
+	call VictoryRoad1FMapLoadScript
 	call EnableAutoTextBoxDrawing
 	ld hl, VictoryRoad1TrainerHeaders
 	ld de, VictoryRoad1F_ScriptPointers
@@ -10,7 +7,12 @@ VictoryRoad1F_Script:
 	call ExecuteCurMapScriptInTable
 	ld [wVictoryRoad1FCurScript], a
 	ret
-.next
+
+VictoryRoad1FMapLoadScript::
+	ld hl, wCurrentMapScriptFlags
+	bit 5, [hl]
+	res 5, [hl]
+	ret z
 	CheckEvent EVENT_VICTORY_ROAD_1_BOULDER_ON_SWITCH
 	ret z
 	ld a, $1d

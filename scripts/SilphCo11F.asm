@@ -11,7 +11,7 @@ SilphCo11F_Script:
 	ld [wSilphCo11FCurScript], a
 	ret
 
-SilphCo11FGateCallbackScript:
+SilphCo11FGateCallbackScript::
 	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]

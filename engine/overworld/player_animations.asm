@@ -5,27 +5,26 @@ EnterMapAnim::
 	ld [wSpritePlayerStateData1YPixels], a
 	call Delay3
 	push hl
-	ld a, [wCurMapTileset]
-	cp VOLCANO
-	jr nz, .notVolcano1 ; volcano warp end animation
-	callfar LavaFloodReset
-	callfar VolcanoDoRoomSpecificMapLoadCode ; TODO: should it be CinnabarVolcanoOnMapLoad?
-.notVolcano1
+	callfar EnterMapAnimReplaceTileBlocks
 	call GBFadeInFromWhite
 	ld hl, wFlags_D733
 	bit 7, [hl] ; used fly out of battle?
 	res 7, [hl]
 	jr nz, .flyAnimation
 	CheckAndResetEvent FLAG_DIG_OVERWORLD_ANIMATION
-	jr nz, .dig
+	jr z, .notDigInDungeon
+	pop hl
+	jr .dig
+.notDigInDungeon
 	ld a, [wCurMapTileset]
 	cp VOLCANO
-	jr nz, .notVolcano2 ; volcano warp end animation
+	jr nz, .notVolcano ; volcano warp end animation
 	ld de, FallDownHole
 	call PlayNewSoundChannel5
+	pop hl
 	call PlayerSpinWhileMovingDown
 	jr .done
-.notVolcano2
+.notVolcano
 	ld a, SFX_TELEPORT_ENTER_1
 	rst _PlaySound
 	ld hl, wd732
@@ -467,7 +466,7 @@ RedFishingTiles:
 	fishing_gfx RedFishingTilesSide,  2, $0a
 	fishing_gfx RedFishingRodTiles,   3, $fd
 
-_HandleMidJump::
+HandleMidJump::
 	ld a, [wPlayerJumpingYScreenCoordsIndex]
 	ld c, a
 	inc a

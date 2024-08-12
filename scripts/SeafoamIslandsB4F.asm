@@ -1,8 +1,30 @@
 SeafoamIslandsB4F_Script:
 	call EnableAutoTextBoxDrawing
+	call SeafoamIslandsB4FOnMapLoad
 	ld a, [wSeafoamIslandsB4FCurScript]
 	ld hl, SeafoamIslandsB4F_ScriptPointers
 	jp CallFunctionInTable
+
+SeafoamIslandsB4FOnMapLoad::
+	ld hl, wCurrentMapScriptFlags
+	bit 5, [hl]
+	res 5, [hl]
+	ret z
+	CheckBothEventsSet EVENT_SEAFOAM3_BOULDER1_DOWN_HOLE, EVENT_SEAFOAM3_BOULDER2_DOWN_HOLE
+	call z, SeafoamB4FReplaceEastCurrentBlock
+	CheckBothEventsSet EVENT_SEAFOAM4_BOULDER1_DOWN_HOLE, EVENT_SEAFOAM4_BOULDER2_DOWN_HOLE
+	ret nz
+	ld de, SeafoamB4FCurrentWestHorizontalReplacements
+	ld a, $76
+	ld [wNewTileBlockID], a
+	jpfar ReplaceMultipleTileBlockLineHorizontalWithOneBlock
+
+SeafoamB4FReplaceEastCurrentBlock:
+	ld a, $76
+	lb bc, 8, 10
+SeafoamReplaceTileBlockEntry:
+	ld [wNewTileBlockID], a
+	predef_jump ReplaceTileBlock
 
 SeafoamIslandsB4FResetScript:
 	xor a
@@ -14,12 +36,9 @@ SeafoamIslandsB4F_ScriptPointers:
 	def_script_pointers
 	dw_const SeafoamIslandsB4FDefaultScript,       SCRIPT_SEAFOAMISLANDSB4F_DEFAULT
 	dw_const SeafoamIslandsB4FObjectMoving1Script, SCRIPT_SEAFOAMISLANDSB4F_OBJECT_MOVING1
-	dw_const SeafoamIslandsB4FMoveObjectScript,    SCRIPT_SEAFOAMISLANDSB4F_MOVE_OBJECT
-	dw_const SeafoamIslandsB4FObjectMoving2Script, SCRIPT_SEAFOAMISLANDSB4F_OBJECT_MOVING2
-	dw_const SeafoamIslandsB4FObjectMoving3Script, SCRIPT_SEAFOAMISLANDSB4F_OBJECT_MOVING3
-	EXPORT SCRIPT_SEAFOAMISLANDSB4F_MOVE_OBJECT ; used by engine/overworld/player_state.asm
+	dw_const SeafoamIslandsB4FEndArticunoBattleScript, SCRIPT_SEAFOAMISLANDSB4F_ARTICUNO_BATTLE_END
 
-SeafoamIslandsB4FObjectMoving3Script:
+SeafoamIslandsB4FEndArticunoBattleScript:
 	ld a, [wIsInBattle]
 	cp $ff
 	jr z, SeafoamIslandsB4FResetScript
@@ -29,37 +48,20 @@ SeafoamIslandsB4FObjectMoving3Script:
 	ret
 
 SeafoamIslandsB4FDefaultScript:
+	ld a, [wYCoord]
+	cp 18
+	jr c, .leftSideCurrent
 	CheckBothEventsSet EVENT_SEAFOAM3_BOULDER1_DOWN_HOLE, EVENT_SEAFOAM3_BOULDER2_DOWN_HOLE
+	jr nz, .doCurrents
+.leftSideCurrent
+	CheckBothEventsSet EVENT_SEAFOAM4_BOULDER1_DOWN_HOLE, EVENT_SEAFOAM4_BOULDER2_DOWN_HOLE
 	ret z
-	ld hl, .Coords
-	call ArePlayerCoordsInArray
+.doCurrents
+	call SeafoamIslandsCurrents ; in SeafoamIslandsB3F.asm
 	ret nc
-	ld a, [wCoordIndex]
-	cp $3
-	jr nc, .only1UpInputNeeded
-	ld a, NPC_MOVEMENT_UP
-	ld [wSimulatedJoypadStatesEnd + 1], a
-	ld a, 2
-	jr .forcePlayerUpFromSurfExit
-.only1UpInputNeeded
-	ld a, 1
-.forcePlayerUpFromSurfExit
-	ld [wSimulatedJoypadStatesIndex], a
-	ld a, D_UP
-	ld [wSimulatedJoypadStatesEnd], a
-	call StartSimulatingJoypadStates
-	ld hl, wFlags_D733
-	res 2, [hl]
 	ld a, SCRIPT_SEAFOAMISLANDSB4F_OBJECT_MOVING1
 	ld [wSeafoamIslandsB4FCurScript], a
 	ret
-
-.Coords
-	dbmapcoord 20, 17
-	dbmapcoord 21, 17
-	dbmapcoord 20, 16
-	dbmapcoord 21, 16
-	db -1 ; end
 
 SeafoamIslandsB4FObjectMoving1Script:
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -67,66 +69,18 @@ SeafoamIslandsB4FObjectMoving1Script:
 	ret nz
 	xor a
 	ld [wJoyIgnore], a
+	ld a, [wYCoord]
+	cp 12
+	jr nz, .skip
+	ld a, [wXCoord]
+	cp 7
+	call z, SeafoamDoneForcedSurfMovementLeft
+.skip
 	ld a, SCRIPT_SEAFOAMISLANDSB4F_DEFAULT
 	ld [wSeafoamIslandsB4FCurScript], a
 	ret
 
-SeafoamIslandsB4FMoveObjectScript:
-	CheckBothEventsSet EVENT_SEAFOAM4_BOULDER1_DOWN_HOLE, EVENT_SEAFOAM4_BOULDER2_DOWN_HOLE
-	ld a, SCRIPT_SEAFOAMISLANDSB4F_DEFAULT
-	jr z, .playerNotInStrongCurrent
-	ld hl, .Coords
-	call ArePlayerCoordsInArray
-	ld a, SCRIPT_SEAFOAMISLANDSB4F_DEFAULT
-	jr nc, .playerNotInStrongCurrent
-	ld a, [wCoordIndex]
-	cp $1
-	jr nz, .nearRightBoulder
-	ld de, .RLEList_StrongCurrentNearLeftBoulder
-	jr .forceSurfMovement
-.nearRightBoulder
-	ld de, .RLEList_StrongCurrentNearRightBoulder
-.forceSurfMovement
-	ld hl, wSimulatedJoypadStatesEnd
-	call DecodeRLEList
-	dec a
-	ld [wSimulatedJoypadStatesIndex], a
-	call StartSimulatingJoypadStates
-	ld a, SCRIPT_SEAFOAMISLANDSB4F_OBJECT_MOVING2
-.playerNotInStrongCurrent
-	ld [wSeafoamIslandsB4FCurScript], a
-	ret
-
-.Coords
-	dbmapcoord  4, 14
-	dbmapcoord  5, 14
-	db -1 ; end
-
-.RLEList_StrongCurrentNearRightBoulder:
-	db D_UP, 3
-	db D_RIGHT, 2
-	db D_UP, 1
-	db -1 ; end
-
-.RLEList_StrongCurrentNearLeftBoulder:
-	db D_UP, 3
-	db D_RIGHT, 3
-	db D_UP, 1
-	db -1 ; end
-
-SeafoamIslandsB4FObjectMoving2Script:
-	ld a, [wSimulatedJoypadStatesIndex]
-	ld b, a
-	cp $1
-	call z, .doneForcedSurfMovement
-	ld a, b
-	and a
-	ret nz
-	ld a, SCRIPT_SEAFOAMISLANDSB4F_DEFAULT
-	ld [wSeafoamIslandsB4FCurScript], a
-	ret
-
-.doneForcedSurfMovement:
+SeafoamDoneForcedSurfMovementLeft:
 	xor a
 	ld [wWalkBikeSurfState], a
 	ld [wWalkBikeSurfStateCopy], a
@@ -153,7 +107,7 @@ SeafoamIslandsB4FArticunoText:
 	text_asm
 	ld hl, ArticunoTrainerHeader
 	call TalkToTrainer
-	ld a, SCRIPT_SEAFOAMISLANDSB4F_OBJECT_MOVING3
+	ld a, SCRIPT_SEAFOAMISLANDSB4F_ARTICUNO_BATTLE_END
 	ld [wSeafoamIslandsB4FCurScript], a
 	rst TextScriptEnd
 

@@ -74,3 +74,15 @@ VolcanoMoltresTileBlockReplacements::
 
 VolcanoMainRoomTileBlockReplacements::
 	db 4, 2, 11
+
+SeafoamB4FCurrentWestHorizontalReplacements::
+	db 1, 7, 2
+	db 4, 6, 2
+	db -1
+
+SeafoamB3FCurrentWestVerticalReplacements::
+	db 2, 4, 7
+	db 2, 4, 8
+	db 3, 3, 9
+	db 4, 5, 10
+	db -1

@@ -1,7 +1,7 @@
 ; PureRGBnote: ADDED: card key will be consumed if all card key doors were opened in the game.
 
 SilphCo6F_Script:
-	call SilphCo6F_GateCallbackScript
+	call SilphCo6FGateCallbackScript
 	call EnableAutoTextBoxDrawing
 	ld hl, SilphCo6TrainerHeaders
 	ld de, SilphCo6F_ScriptPointers
@@ -10,7 +10,7 @@ SilphCo6F_Script:
 	ld [wSilphCo6FCurScript], a
 	ret
 
-SilphCo6F_GateCallbackScript:
+SilphCo6FGateCallbackScript::
 	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]

@@ -75,7 +75,7 @@ ReplaceMultipleTileBlockLineVerticalWithOneBlock::
 	ld l, e
 	ld d, 0
 .loop
-	call ReplaceTileBlockLineHorizontalWithOneBlockCommon
+	call ReplaceTileBlockLineVerticalWithOneBlockCommon
 	ld a, [hl]
 	cp -1
 	jr nz, .loop
