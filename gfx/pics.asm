@@ -651,4 +651,5 @@ BurningAnimation:: INCBIN "gfx/overworld/fire_burning.2bpp"
 RockShatterAnimation:: INCBIN "gfx/overworld/rock_breaking.2bpp"
 FrozenWaterTile:: INCBIN "gfx/overworld/frozen_water.2bpp"
 IceCrystal:: INCBIN "gfx/overworld/ice_crystal.2bpp"
+SleepingEmote:: INCBIN "gfx/emotes/sleeping.2bpp"
 

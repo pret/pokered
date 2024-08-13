@@ -1706,6 +1706,14 @@ ProspectorInMainRoom::
 	ld [wSprite01StateData2MapY], a
 	ret
 
+FarSlideSpriteDown::
+	ld a, d
+	jr SlideSpriteDown
+
+FarSlideSpriteUp::
+	ld a, d
+	jr SlideSpriteUp
+
 SlideSpriteDownWithWalkAnimation:
 	lb de, 0, 1 ; down, walk
 	jr SlideSpriteUpOrDown
@@ -1860,16 +1868,8 @@ MoltresBattleAnimation:
 	rst _DelayFrame
 	call GBPalNormal
 	; make moltres open its wings
-	ld hl, vNPCSprites tile $30
-	ld a, [wSpriteOptions2]
-	bit BIT_MENU_ICON_SPRITES, a
-	ld de, LegendaryBirdSprite tile 12
-	lb bc, BANK(LegendaryBirdSprite), 4
-	jr nz, .gotSprite
-	ld de, BirdSprite tile 12
-	lb bc, BANK(BirdSprite), 4
-.gotSprite
-	call CopyVideoData
+	ld de, vNPCSprites tile $30
+	callfar FarOpenBirdSpriteWings
 	ld hl, vNPCSprites tile $78 ; start of vram tiles for the old amber sprite
 	ld de, BurningAnimation
 	lb bc, BANK(BurningAnimation), 4

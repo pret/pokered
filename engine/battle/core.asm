@@ -859,11 +859,13 @@ FaintEnemyPokemon:
 	ld a, d
 	and a
 	ret z
-	CheckEvent EVENT_BATTLING_VOLCANO_MAGMAR
-	ld hl, EnemyMonFaintedText
-	jr z, .notmagmarboss
+	CheckEitherEventSet EVENT_FIGHT_ROUTE16_SNORLAX, EVENT_FIGHT_ROUTE12_SNORLAX
 	ld hl, EnemyMonWasDefeatedText
-.notmagmarboss
+	jr nz, .doDefeatText
+	CheckEvent EVENT_BATTLING_VOLCANO_MAGMAR
+	jr nz, .doDefeatText
+	ld hl, EnemyMonFaintedText
+.doDefeatText
 	rst _PrintText
 	call PrintEmptyString
 	call SaveScreenTilesToBuffer1

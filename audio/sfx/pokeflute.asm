@@ -17,5 +17,5 @@ SFX_Pokeflute_Ch3:
 	note A_, 2
 	note F_, 2
 	note G_, 8
-	rest 12
+	rest 4
 	sound_ret

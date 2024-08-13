@@ -9,9 +9,18 @@ TryPushingBoulder::
 	ldh [hSpriteIndexOrTextID], a
 	call IsSpriteInFrontOfPlayer
 	ldh a, [hSpriteIndexOrTextID]
-	ld [wBoulderSpriteIndex], a
 	and a
-	jp z, ResetBoulderPushFlags
+	jr z, .loadThenReset
+	;;;; PureRGBnote: FIXED: there was a bug where if you're facing a different boulder and walk towards another, 
+	;;;; you'll instantly push it.
+	;;;; this only really can happen in b3f of seafoam islands but it's really annoying when it does happen.
+	ld h, a
+	ld a, [wBoulderSpriteIndex]
+	cp h ; check if the boulder in front is the same one as before
+	ldh a, [hSpriteIndexOrTextID]
+	ld [wBoulderSpriteIndex], a
+	jr nz, .loadThenReset ; if not, reset the boulder push flags
+	;;;;
 	ld hl, wSpritePlayerStateData1MovementStatus
 	ld d, $0
 	ldh a, [hSpriteIndexOrTextID]
@@ -69,6 +78,9 @@ TryPushingBoulder::
 	ld hl, wFlags_0xcd60
 	set 1, [hl]
 	ret
+.loadThenReset
+	ld [wBoulderSpriteIndex], a
+	jp ResetBoulderPushFlags
 
 PushBoulderUpMovementData:
 	db NPC_MOVEMENT_UP

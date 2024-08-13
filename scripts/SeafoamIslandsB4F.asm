@@ -139,7 +139,7 @@ SeafoamIslandsB4FArticunoIntroAnimation:
 	call UpdateSprites
 	; make moltres open its wings
 	ld hl, vNPCSprites tile $0C
-	call OpenBirdWingsSprite
+	call OpenBirdSpriteWings
 	; show snowflakes flying outwards in an X pattern
 	call UpdateSprites
 	call Delay3
@@ -277,8 +277,11 @@ BoulderBlockingWaterB4F:
 	text_far _BoulderBlockingCurrent
 	text_end
 
+FarOpenBirdSpriteWings::
+	ld h, d
+	ld l, e
 ; input hl = where in vram to replace it
-OpenBirdWingsSprite:
+OpenBirdSpriteWings:
 	ld a, [wSpriteOptions2]
 	bit BIT_MENU_ICON_SPRITES, a
 	ld de, LegendaryBirdSprite tile 12

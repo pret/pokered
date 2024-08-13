@@ -178,3 +178,9 @@ _Route12SignText::
 _Route12SportFishingSignText::
 	text "SPORT FISHING AREA"
 	done
+
+_SnorlaxWentBackToSleepText::
+	text "Looking bored,"
+	line "SNORLAX went back"
+	cont "to sleep."
+	done

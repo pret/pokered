@@ -50,8 +50,8 @@ Route12DefaultScript:
 	CheckEventHL EVENT_BEAT_ROUTE12_SNORLAX
 	jp nz, CheckFightingMapTrainers
 	CheckEventReuseHL EVENT_FIGHT_ROUTE12_SNORLAX
-	ResetEventReuseHL EVENT_FIGHT_ROUTE12_SNORLAX
 	jp z, CheckFightingMapTrainers
+	call SnorlaxWakesUpAnimation
 	ld a, TEXT_ROUTE12_SNORLAX_WOKE_UP
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
@@ -59,36 +59,149 @@ Route12DefaultScript:
 	ld [wCurOpponent], a
 	ld a, 40 ; PureRGBnote: CHANGED: raised snorlax's level to balance with party levels
 	ld [wCurEnemyLVL], a
-	ld a, HS_ROUTE_12_SNORLAX
-	ld [wMissableObjectIndex], a
-	predef HideObject
+	ld a, ROUTE12_SNORLAX
+	ldh [hSpriteIndexOrTextID], a ; makes snorlax stay on screen during battle transition
 	ld a, SCRIPT_ROUTE12_SNORLAX_POST_BATTLE
 	ld [wRoute12CurScript], a
 	ld [wCurMapScript], a
 	ret
 
+SnorlaxWakesUpAnimation::
+	; show an exclamation bubble when snorlax wakes up for effect
+	ld a, 1
+	ld [wMuteAudioAndPauseMusic], a
+	ld a, [wAudioROMBank]
+	push af
+	ld a, BANK(ExclamationBubbleSFX)
+	ld [wAudioROMBank], a
+	ld de, ExclamationBubbleSFX
+	call PlayNewSoundChannel5
+	ld a, EXCLAMATION_BUBBLE
+	call Route12PrepareEmotionBubble
+	call WaitForSoundToFinish
+	pop af
+	ld [wAudioROMBank], a
+	ld a, SNORLAX
+	call PlayCry
+	; make snorlax move around a bit
+	ld b, 12
+.loop
+	push bc
+	srl b
+	ld de, PartyMonSprites2 tile 10
+	lb bc, BANK(PartyMonSprites2), 2
+	jr nc, .replaceSprite
+	ld de, SnorlaxSprite
+	lb bc, BANK(SnorlaxSprite), 2
+.replaceSprite
+	ld hl, vNPCSprites tile $7C
+	call CopyVideoData
+	pop bc
+	rst _DelayFrame
+	rst _DelayFrame
+	dec b
+	jr nz, .loop
+	ret
+
 Route12SnorlaxPostBattleScript:
+	ResetEvent EVENT_FIGHT_ROUTE12_SNORLAX
 	ld a, [wIsInBattle]
 	cp $ff
-	jr z, Route12ResetScripts
-	call UpdateSprites
+	jp z, Route12ResetScripts
+	ld hl, wCurrentMapScriptFlags
+	res 3, [hl] ; indicates we loaded the map after battle, since we went to a script need to reset here to prevent a double fade
+	ld a, [wBattleFunctionalFlags]
+	bit 1, a ; ran from battle
+	jr nz, .goBackToSleep
 	ld a, [wBattleResult]
-	cp $2
+	cp $2 ; caught pokemon (or ran away)
 	jr z, .caught_snorlax
+.didntCatch
 	ld a, TEXT_ROUTE12_SNORLAX_CALMED_DOWN
-	ldh [hSpriteIndexOrTextID], a
-	call DisplayTextID
+	call FadeInAndDisplayText
+	ld d, SFX_RUN
+	ld hl, .snorlaxruns
+	call PlayBattleSFXWhenNotInBattle
+	call .hide_snorlax
+	jr .done
+.snorlaxruns
+	ld a, 0
+.loop
+	push af
+	ld d, ROUTE12_SNORLAX
+	ld a, [wSpritePlayerStateData1FacingDirection]
+	cp SPRITE_FACING_DOWN
+	jr z, .moveDown
+	callfar FarSlideSpriteUp
+	jr .doneSlide
+.moveDown
+	callfar FarSlideSpriteDown
+.doneSlide
+	pop af
+	call ReplaceSnorlaxSprite
+	inc a
+	cp 5
+	jr nz, .loop
+	ret
 .caught_snorlax
+	call .hide_snorlax
+	call GBFadeInFromWhite
+	jr .done
+.hide_snorlax
 	SetEvent EVENT_BEAT_ROUTE12_SNORLAX
-	call Delay3
+	ld a, HS_ROUTE_12_SNORLAX
+	ld [wMissableObjectIndex], a
+	predef_jump HideObject
+.done
 	ld a, SCRIPT_ROUTE12_DEFAULT
 	ld [wRoute12CurScript], a
 	ld [wCurMapScript], a
 	ret
+.goBackToSleep
+	ld a, TEXT_ROUTE12_SNORLAX_WENT_BACK_TO_SLEEP
+	call FadeInAndDisplayText
+	jr .done
+
+FadeInAndDisplayText:
+	ldh [hSpriteIndexOrTextID], a
+	call GBFadeInFromWhite
+	jp DisplayTextID
+
+ReplaceSnorlaxSprite:
+	ld d, 0
+	ld e, a
+	push af
+	and %11 ; only first 2 bits so it loops
+	ld hl, SnorlaxRollingSprites
+	add hl, de
+	add hl, de
+	hl_deref
+	pop af
+	push af
+	and %11 ; only first 2 bits so it loops
+	cp 3
+	lb bc, BANK(SnorlaxSprite), 4
+	jr z, .load
+	lb bc, BANK(SnorlaxRollingSprite), 4
+.load
+	ld d, h
+	ld e, l
+	ld hl, vNPCSprites tile $7C
+	call CopyVideoData
+	pop af
+	ret
+
+SnorlaxRollingSprites:
+	dw SnorlaxRollingSprite
+	dw SnorlaxRollingSprite tile 4
+	dw SnorlaxRollingSprite tile 8
+	dw SnorlaxSprite
+
+
 
 Route12_TextPointers:
 	def_text_pointers
-	dw_const Route12SnorlaxText,           TEXT_ROUTE12_SNORLAX
+	dw_const SnorlaxText,                  TEXT_ROUTE12_SNORLAX
 	dw_const Route12Fisher1Text,           TEXT_ROUTE12_FISHER1
 	dw_const Route12Fisher2Text,           TEXT_ROUTE12_FISHER2
 	dw_const Route12CooltrainerMText,      TEXT_ROUTE12_COOLTRAINER_M
@@ -105,6 +218,7 @@ Route12_TextPointers:
 	dw_const Route12SportFishingSignText,  TEXT_ROUTE12_SPORT_FISHING_SIGN
 	dw_const Route12SnorlaxWokeUpText,     TEXT_ROUTE12_SNORLAX_WOKE_UP
 	dw_const Route12SnorlaxCalmedDownText, TEXT_ROUTE12_SNORLAX_CALMED_DOWN
+	dw_const Route12SnorlaxWentBackToSleepText, TEXT_ROUTE12_SNORLAX_WENT_BACK_TO_SLEEP
 
 Route12TrainerHeaders:
 	def_trainers 2
@@ -128,23 +242,53 @@ Route12TrainerHeader8:
 	trainer EVENT_BEAT_ROUTE_12_TRAINER_8, 3, Route12BattleText9, Route12EndBattleText9, Route12AfterBattleText9
 	db -1 ; end
 
-Route12SnorlaxText:
+SnorlaxText::
+	text_asm
+	call SnorlaxSnoring
+	ld hl, .sleeping
+	rst _PrintText
+	rst TextScriptEnd
+.sleeping
 	text_far _Route12SnorlaxText
 	text_end
 
+SnorlaxSnoring::
+	call .sound
+	ld a, 1
+	ld [wMuteAudioAndPauseMusic], a
+	ld c, 10
+	rst _DelayFrames
+.sound
+	ld d, SFX_BATTLE_21
+	lb bc, $10, $12
+	ld hl, .showEmotionBubble
+	jp PlayBattleSFXWhenNotInBattleWithMods
+.showEmotionBubble
+	ld a, SLEEPING_BUBBLE
+	jp Route12PrepareEmotionBubble
+
+Route12PrepareEmotionBubble:
+  	ld [wWhichEmotionBubble], a
+  	ld a, [wCurMap]
+  	cp ROUTE_12
+	ld a, ROUTE12_SNORLAX
+  	jr z, .load
+  	ld a, ROUTE16_SNORLAX
+.load
+	ld [wEmotionBubbleSpriteIndex], a
+	predef_jump EmotionBubble
+
 Route12SnorlaxWokeUpText:
+	text_asm
+	ld hl, .wokeUp
+	rst _PrintText
+	callfar PlayTrainerMusic
+	rst TextScriptEnd
+.wokeUp
 	text_far _Route12SnorlaxWokeUpText
 	text_end
 
 Route12SnorlaxCalmedDownText:
-	text_asm
-	ld hl, wCurrentMapScriptFlags
-	res 3, [hl] ; indicates we loaded the map after battle, since we went to a script need to reset here to prevent a double fade
-	call GBFadeInFromWhite ; have to fade in here because of DEFER_SHOWING_MAP bit set on this map.
-	ld hl, .returnedToMountains
-	rst _PrintText
-	rst TextScriptEnd
-.returnedToMountains
 	text_far _Route12SnorlaxCalmedDownText
 	text_end
 
@@ -316,4 +460,8 @@ Route12SignText:
 
 Route12SportFishingSignText:
 	text_far _Route12SportFishingSignText
+	text_end
+
+Route12SnorlaxWentBackToSleepText:
+	text_far _SnorlaxWentBackToSleepText
 	text_end

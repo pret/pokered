@@ -4,6 +4,7 @@
 	const QUESTION_BUBBLE    ; 1
 	const SMILE_BUBBLE       ; 2
 	const HEART_BUBBLE       ; 3
+	const SLEEPING_BUBBLE    ; 4
 
 ; slot symbols
 DEF SLOTS7      EQU $0200

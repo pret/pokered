@@ -2259,7 +2259,6 @@ PlayedFluteHadEffectText:
 	ld a, [wChannelSoundIDs + CHAN3]
 	cp SFX_POKEFLUTE
 	jr z, .musicWaitLoop
-	call PlayDefaultMusic ; start playing normal music again
 .done
 	rst TextScriptEnd ; end text
 

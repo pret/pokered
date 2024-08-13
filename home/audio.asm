@@ -363,3 +363,31 @@ RemapSoundChannel::
 	ld [hl], d
 	ret
 	
+; input b = frequency mod, c = tempo mod
+PlayBattleSFXWhenNotInBattleWithMods::
+	ld a, b
+	ld [wTempoModifier], a
+	ld a, c
+	ld [wFrequencyModifier], a
+; d = which sound effect
+; hl = what code to run while the sound is playing
+; by definition map music can't be playing while the sound effect is
+PlayBattleSFXWhenNotInBattle::
+	ld a, 1
+	ld [wMuteAudioAndPauseMusic], a
+	ld a, [wAudioROMBank]
+	push af
+	ld a, BANK("Audio Engine 2")
+	ld [wAudioROMBank], a
+	push hl
+	ld a, d
+	rst _PlaySound
+	pop hl
+	call hl_caller
+	call WaitForSoundToFinish
+	pop af
+	ld [wAudioROMBank], a
+	xor a
+	ld [wMuteAudioAndPauseMusic], a
+	ret
+

@@ -43,8 +43,8 @@ Route16DefaultScript:
 	CheckEventHL EVENT_BEAT_ROUTE16_SNORLAX
 	jp nz, CheckFightingMapTrainers
 	CheckEventReuseHL EVENT_FIGHT_ROUTE16_SNORLAX
-	ResetEventReuseHL EVENT_FIGHT_ROUTE16_SNORLAX
 	jp z, CheckFightingMapTrainers
+	call SnorlaxWakesUpAnimation
 	ld a, TEXT_ROUTE16_SNORLAX_WOKE_UP
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
@@ -52,33 +52,65 @@ Route16DefaultScript:
 	ld [wCurOpponent], a
 	ld a, 40 ; PureRGBnote: CHANGED: raised snorlax's level to balance with party levels
 	ld [wCurEnemyLVL], a
-	ld a, HS_ROUTE_16_SNORLAX
-	ld [wMissableObjectIndex], a
-	predef HideObject
-	call UpdateSprites
+	ld a, ROUTE16_SNORLAX
+	ldh [hSpriteIndexOrTextID], a ; makes snorlax stay on screen during battle transition
 	ld a, SCRIPT_ROUTE16_SNORLAX_POST_BATTLE
 	ld [wRoute16CurScript], a
 	ld [wCurMapScript], a
 	ret
 
 Route16SnorlaxPostBattleScript:
+	ResetEvent EVENT_FIGHT_ROUTE16_SNORLAX
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, Route16ResetScripts
+	ld hl, wCurrentMapScriptFlags
+	res 3, [hl] ; indicates we loaded the map after battle, since we went to a script need to reset here to prevent a double fade
 	call UpdateSprites
+	ld a, [wBattleFunctionalFlags]
+	bit 1, a ; ran from battle
+	jr nz, .goBackToSleep
 	ld a, [wBattleResult]
 	cp $2
-	jr z, .caught
+	jr z, .caught_snorlax
+.didntCatch
 	ld a, TEXT_ROUTE16_SNORLAX_RETURNED_TO_MOUNTAINS
-	ldh [hSpriteIndexOrTextID], a
-	call DisplayTextID
-.caught
+	call FadeInAndDisplayText
+	ld d, SFX_RUN
+	ld hl, .snorlaxruns
+	call PlayBattleSFXWhenNotInBattle
+	call .hide_snorlax
+	jr .done
+.snorlaxruns
+	ld a, 0
+.loop
+	push af
+	ld d, ROUTE16_SNORLAX
+	callfar FarSlideSpriteUp
+	pop af
+	call ReplaceSnorlaxSprite
+	inc a
+	cp 5
+	jr nz, .loop
+	ret
+.caught_snorlax
+	call .hide_snorlax
+	call GBFadeInFromWhite
+	jr .done
+.hide_snorlax
 	SetEvent EVENT_BEAT_ROUTE16_SNORLAX
-	call Delay3
+	ld a, HS_ROUTE_16_SNORLAX
+	ld [wMissableObjectIndex], a
+	predef_jump HideObject
+.done
 	ld a, SCRIPT_ROUTE16_DEFAULT
 	ld [wRoute16CurScript], a
 	ld [wCurMapScript], a
 	ret
+.goBackToSleep
+	ld a, TEXT_ROUTE16_SNORLAX_WENT_BACK_TO_SLEEP
+	call FadeInAndDisplayText
+	jr .done
 
 Route16_TextPointers:
 	def_text_pointers
@@ -88,11 +120,12 @@ Route16_TextPointers:
 	dw_const Route16Biker4Text,                     TEXT_ROUTE16_BIKER4
 	dw_const Route16Biker5Text,                     TEXT_ROUTE16_BIKER5
 	dw_const Route16Biker6Text,                     TEXT_ROUTE16_BIKER6
-	dw_const Route16SnorlaxText,                    TEXT_ROUTE16_SNORLAX
+	dw_const SnorlaxText,                           TEXT_ROUTE16_SNORLAX
 	dw_const Route16CyclingRoadSignText,            TEXT_ROUTE16_CYCLING_ROAD_SIGN
 	dw_const Route16SignText,                       TEXT_ROUTE16_SIGN
-	dw_const Route16SnorlaxWokeUpText,              TEXT_ROUTE16_SNORLAX_WOKE_UP
-	dw_const Route16SnorlaxReturnedToMountainsText, TEXT_ROUTE16_SNORLAX_RETURNED_TO_MOUNTAINS
+	dw_const Route12SnorlaxWokeUpText,              TEXT_ROUTE16_SNORLAX_WOKE_UP
+	dw_const Route12SnorlaxCalmedDownText,          TEXT_ROUTE16_SNORLAX_RETURNED_TO_MOUNTAINS
+	dw_const Route12SnorlaxWentBackToSleepText,     TEXT_ROUTE16_SNORLAX_WENT_BACK_TO_SLEEP
 
 Route16TrainerHeaders:
 	def_trainers
@@ -216,26 +249,6 @@ Route16Biker6EndBattleText:
 
 Route16Biker6AfterBattleText:
 	text_far _Route16Biker6AfterBattleText
-	text_end
-
-Route16SnorlaxText:
-	text_far _Route16Text7
-	text_end
-
-Route16SnorlaxWokeUpText:
-	text_far _Route16SnorlaxWokeUpText
-	text_end
-
-Route16SnorlaxReturnedToMountainsText:
-	text_asm
-	ld hl, wCurrentMapScriptFlags
-	res 3, [hl] ; indicates we loaded the map after battle, since we went to a script need to reset here to prevent a double fade
-	call GBFadeInFromWhite ; have to fade in here because of DEFER_SHOWING_MAP bit set on this map.
-	ld hl, .returnedToMountains
-	rst _PrintText
-	rst TextScriptEnd
-.returnedToMountains
-	text_far _Route16SnorlaxReturnedToMountainsText
 	text_end
 
 Route16CyclingRoadSignText:
