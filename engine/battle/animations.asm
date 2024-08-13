@@ -1228,7 +1228,7 @@ AnimationResetScreenPalette:
 ;	lb bc, $40, $40
 ;	jr SetAnimationBGPalette
 
-AnimationLightScreenPalette:
+AnimationLightScreenPalette::
 ; Changes the screen to use a palette with light colors.
 	lb bc, $90, $90
 	; fall through

@@ -12,3 +12,9 @@ _SeafoamIslandsB4FDangerSignText::
 	text "DANGER"
 	line "Fast current!"
 	done
+
+_BoulderBlockingCurrent::
+	text "The boulders are"
+	line "blocking the flow"
+	cont "of the current!"
+	done

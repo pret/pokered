@@ -127,8 +127,8 @@ SeafoamIslandsB3F_TextPointers:
 	dw_const BoulderText, TEXT_SEAFOAMISLANDSB3F_BOULDER2
 	dw_const BoulderText, TEXT_SEAFOAMISLANDSB3F_BOULDER3
 	dw_const BoulderText, TEXT_SEAFOAMISLANDSB3F_BOULDER4
-	dw_const BoulderText, TEXT_SEAFOAMISLANDSB3F_BOULDER5
-	dw_const BoulderText, TEXT_SEAFOAMISLANDSB3F_BOULDER6
+	dw_const BoulderBlockingWaterB3F, TEXT_SEAFOAMISLANDSB3F_BOULDER5
+	dw_const BoulderBlockingWaterB3F, TEXT_SEAFOAMISLANDSB3F_BOULDER6
 	dw_const PickUpFossilText, TEXT_SEAFOAMISLANDSB3F_DOME_FOSSIL
 	dw_const PickUpFossilText, TEXT_SEAFOAMISLANDSB3F_HELIX_FOSSIL
 
@@ -137,3 +137,7 @@ PickUpFossilText:
 	SetEvent EVENT_SEAFOAM_FOUND_OTHER_FOSSIL
 	predef PickUpItem
 	rst TextScriptEnd
+
+BoulderBlockingWaterB3F:
+	text_far _BoulderBlockingCurrent
+	text_end

@@ -1949,8 +1949,7 @@ MoltresBattleAnimation:
 	callfar PlayTrainerMusic
 	ld c, 100
 	rst _DelayFrames
-	call HideAnimationSprite
-	ret
+	jp HideAnimationSprite
 .doubleBTimes
 	push bc
 .loop

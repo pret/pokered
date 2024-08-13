@@ -110,6 +110,7 @@ BoomboxSprite:: INCBIN "gfx/sprites/boombox.2bpp"
 SECTION "NPC Sprites 4", ROMX
 
 ; new ones
+NothingSprite::   INCBIN "gfx/sprites/nothing.2bpp"
 VoltorbSpriteFrame2::   INCBIN "gfx/sprites/voltorb2.2bpp"
 PokeballSprite2::		INCBIN "gfx/sprites/poke_ball.2bpp"
 DaisyBlinkingSprite::   INCBIN "gfx/sprites/daisy_blinking.2bpp"
@@ -124,4 +125,4 @@ LavaSuitDrillingSprite:: INCBIN "gfx/sprites/lava_suit_drilling.2bpp"
 LavaSuitDrillingSprite2:: INCBIN "gfx/sprites/lava_suit_drilling2.2bpp"
 MonsterSwimmingSprite:: INCBIN "gfx/sprites/monster_swimming.2bpp"
 GravelerSprite::  INCBIN "gfx/sprites/graveler.2bpp"
-
+IceCrystalSprite:: INCBIN "gfx/overworld/ice_crystal_sprite.2bpp"

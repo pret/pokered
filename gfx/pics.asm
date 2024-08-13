@@ -626,45 +626,29 @@ SECTION "Menu Prompt Graphics", ROMX
 
 PokedexPromptGraphics::  INCBIN "gfx/pokedex/prompts.2bpp"
 PokedexPromptGraphicsEnd::
-
 MovedexPromptGraphics::  INCBIN "gfx/movedex/prompts.2bpp"
 MovedexPromptGraphicsEnd::
-
 MovedexUI::          INCBIN "gfx/movedex/movedex_ui.2bpp"
 MovedexUIEnd::
-
 PokedexDataUI::	INCBIN "gfx/pokedex/left_right.2bpp"
 PokedexDataUIEnd::
-
 MapAreasUI::	INCBIN "gfx/town_map/area_type_ui.2bpp"
 MapAreasUIEnd::
-
 FishingWaterIcons:: INCBIN "gfx/town_map/mon_fishing_water_icons.2bpp"
-
 ExtraMenuBorderConnectors:: INCBIN "gfx/font/extra_menu_border_connectors.2bpp"
-
 FromToChangeBoxPrompt:: INCBIN "gfx/font/from_to_change_box_prompt.2bpp"
-
 EditPrompt:: INCBIN "gfx/font/edit_prompt.2bpp"
-
 TeaTile:: INCBIN "gfx/icons/tea.2bpp"
-
 FoodTiles:: INCBIN "gfx/icons/food_on_table.2bpp"
-
 HaunterFace:: INCBIN "gfx/overworld/haunter_face.2bpp"
-
 LightSwitchOff:: INCBIN "gfx/icons/light_switch_off.2bpp"
-
 LightSwitchOn:: INCBIN "gfx/icons/light_switch_on.2bpp"
-
 OldNewTypes:: INCBIN "gfx/font/old_new_types.2bpp"
-
 LoveEmote:: INCBIN "gfx/emotes/love.2bpp"
-
 InfoPromptGraphics:: INCBIN "gfx/pokedex/info_prompt.2bpp"
-
 ExplosionAnimation:: INCBIN "gfx/overworld/explosion.2bpp"
-
 BurningAnimation:: INCBIN "gfx/overworld/fire_burning.2bpp"
-
 RockShatterAnimation:: INCBIN "gfx/overworld/rock_breaking.2bpp"
+FrozenWaterTile:: INCBIN "gfx/overworld/frozen_water.2bpp"
+IceCrystal:: INCBIN "gfx/overworld/ice_crystal.2bpp"
+
