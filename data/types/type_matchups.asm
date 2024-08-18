@@ -98,5 +98,6 @@ TypeEffects:
 	db GROUND,       CRYSTAL,      SUPER_EFFECTIVE
 	db FLYING,       CRYSTAL,      NOT_VERY_EFFECTIVE
 	db TRI,          CRYSTAL,      NOT_VERY_EFFECTIVE
+	db GROUND,       FLOATING,     NO_EFFECT
 	db -1 ; end
 

@@ -37,8 +37,14 @@ LoadExtraSprites::
 LoadExtraTiles::
 	ld a, [wCurMap]
 	cp TYPE_GUYS_HOUSE
-	ret nz
+	jr z, .typeGuyHouse
+	cp POWER_PLANT_ROOF
+	jr z, .powerPlantRoof
+	ret
+.typeGuyHouse
 	jpfar CheckLoadLightSwitch
+.powerPlantRoof
+	jpfar CheckLoadPowerPlantRoofTiles
 
 
 UpdateNonPlayerSprite:

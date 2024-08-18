@@ -12,4 +12,5 @@ DungeonTilesets:
 	db GYM
 	db SECRET_LAB_TS
 	db VOLCANO
+	db REACTOR
 	db -1 ; end

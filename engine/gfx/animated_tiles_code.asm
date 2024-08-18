@@ -3,6 +3,8 @@ AnimateTiles::
 	ld a, [wCurMapTileset]
 	cp CAVERN
 	jr z, .cavern
+	cp REACTOR
+	jp z, ReactorAnimatedTiles
 	cp VOLCANO
 	jr nz, .normal
 	CheckEvent EVENT_LAVA_FLOOD_ACTIVE
@@ -252,6 +254,36 @@ ScrollTileUp:
 	jr nz, .loop
 	ret
 
+ReactorAnimatedTiles:
+	CheckEvent EVENT_BEAT_ZAPDOS
+	ret nz
+	callfar PowerPlantOverworldSFX
+	ldh a, [hMovingBGTilesCounter1]
+	inc a
+	ldh [hMovingBGTilesCounter1], a
+	rrca
+	ret c
+	rrca
+	ret c
+	rrca
+	jr nc, .secondSet
+.firstSet
+	; on frames divisible by 4 but not 8 switch to these tiles
+	ld hl, ElectricityTiles
+	ld de, vTileset tile $0F
+	call AnimateCopyTile
+	ld hl, ElectricityTiles tile 1
+	ld de, vTileset tile $1F
+	jp AnimateCopyTile
+.secondSet
+	; on frames divisible by 8 switch to these tiles
+	ld hl, ElectricityTiles tile 2
+	ld de, vTileset tile $0F
+	call AnimateCopyTile
+	ld hl, ElectricityTiles tile 3
+	ld de, vTileset tile $1F
+	jp AnimateCopyTile
+
 ;	ld hl, LavaBubble1
 ;	jr z, .copy
 ;	; add 16 bytes up to 3 times to navigate to the next tile according to the counter
@@ -269,3 +301,5 @@ LavaBubble1: INCBIN "gfx/tilesets/lava/lava1.2bpp"
 LavaBubble2: INCBIN "gfx/tilesets/lava/lava2.2bpp"
 LavaBubble3: INCBIN "gfx/tilesets/lava/lava3.2bpp"
 LavaBubble4: INCBIN "gfx/tilesets/lava/lava4.2bpp"
+
+ElectricityTiles: INCBIN "gfx/tilesets/electricity/electricity.2bpp"

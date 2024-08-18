@@ -21,6 +21,23 @@ MACRO CheckFlag
 	CheckEvent \1
 ENDM
 
+MACRO CheckHideShowState
+	DEF hide_show_byte = ((\1) / 8)
+	ld a, [wMissableObjectFlags + hide_show_byte]
+
+	IF _NARG > 1
+		IF ((\1) % 8) == 7
+			add a
+		ELSE
+			REPT ((\1) % 8) + 1
+				rrca
+			ENDR
+		ENDC
+	ELSE
+		bit (\1) % 8, a
+	ENDC
+ENDM
+
 MACRO CheckExtraHideShowState
 	DEF hide_show_byte = ((\1) / 8)
 	ld a, [wExtraMissableObjectFlags + hide_show_byte]

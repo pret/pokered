@@ -251,6 +251,8 @@ GetOverworldPalette:
 	jr z, .rocketHouseBasement
 	cp POWER_PLANT
 	jr z, .powerPlant
+	cp POWER_PLANT_ROOF
+	jr z, .powerPlant
 	cp CERULEAN_CAVE_2F
 	jr c, .normalDungeonOrBuilding
 	cp LORELEIS_ROOM

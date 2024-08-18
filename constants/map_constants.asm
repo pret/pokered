@@ -88,7 +88,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const BIKE_SHOP,                      4,  4 ; $42
 	map_const CERULEAN_MART,                  4,  4 ; $43
 	map_const MT_MOON_POKECENTER,             7,  4 ; $44
-	map_const CERULEAN_TRASHED_HOUSE_COPY,    4,  4 ; $45 ; pointless map
+	map_const POWER_PLANT_ROOF,              15,  8 ; $45
 	map_const ROUTE_5_GATE,                   4,  3 ; $46
 	map_const UNDERGROUND_PATH_ROUTE_5,       4,  4 ; $47
 	map_const DAYCARE,                        4,  4 ; $48
@@ -102,7 +102,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const UNDERGROUND_PATH_ROUTE_8,       4,  4 ; $50
 	map_const ROCK_TUNNEL_POKECENTER,         7,  4 ; $51
 	map_const ROCK_TUNNEL_1F,                20, 18 ; $52
-	map_const POWER_PLANT,                   20, 18 ; $53
+	map_const POWER_PLANT,                   29, 18 ; $53
 	map_const ROUTE_11_GATE_1F,               4,  5 ; $54
 	map_const DIGLETTS_CAVE_ROUTE_11,         4,  4 ; $55
 	map_const ROUTE_11_GATE_2F,               4,  4 ; $56

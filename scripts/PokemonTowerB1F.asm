@@ -100,7 +100,6 @@ GengarTransformation:
 	ld a, SFX_INTRO_LUNGE
 	call PlayMusic
 	call GBFadeOutToBlack
-	hlcoord 0, 0
 	ld d, $47
 	call FillScreenWithTile
 	call GBPalNormal
@@ -119,7 +118,7 @@ GengarTransformation:
 	callfar ChangePartyPokemonSpecies
 	jpfar CheckMonNickNameDefault
 
-FillScreenWithTile:
+FillScreenWithTile::
 ; File screen with tile d, then wait
 ; for the bg map to update.
 	ld a, d

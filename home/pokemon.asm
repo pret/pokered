@@ -393,6 +393,7 @@ GetMonHeader::
 	push hl
 	ld a, [wd11e]
 	push af
+	; TODO: factor out of home bank because it's getting complicated
 	ld a, [wd0b5]
 	ld [wd11e], a
 	ld de, FossilKabutopsPic
@@ -412,6 +413,8 @@ GetMonHeader::
 	jr z, .powered_haunter
 	cp HARDENED_ONIX
 	jr z, .hardened_onix
+	cp FLOATING_MAGNETON
+	jr z, .floating_magneton
 	predef IndexToPokedex   ; convert pokemon ID in [wd11e] to pokedex number
 	ld a, [wd11e]
 	and a
@@ -432,6 +435,9 @@ GetMonHeader::
 	ld [hli], a ; write front sprite pointer
 	ld [hl], d
 	jr .done
+.floating_magneton
+	ld hl, FloatingMagnetonBaseStats
+	jr .copyBaseStats
 .hardened_onix
 	ld hl, HardenedOnixBaseStats
 	jr .copyBaseStats

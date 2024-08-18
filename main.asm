@@ -118,7 +118,7 @@ INCLUDE "engine/overworld/doors.asm"
 INCLUDE "engine/overworld/ledges.asm"
 
 
-SECTION "Pokémon Names", ROMX
+SECTION "Pokémon Names", ROMX ; PureRGBnote: MOVED: this section was assigned to a later bank
 
 INCLUDE "data/pokemon/names.asm"
 INCLUDE "engine/movie/oak_speech/clear_save.asm"

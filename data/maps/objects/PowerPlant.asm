@@ -20,9 +20,25 @@ PowerPlant_Object:
 	def_warp_events
 	warp_event  4, 35, LAST_MAP, 4
 	warp_event  5, 35, LAST_MAP, 4
-	warp_event  0, 11, LAST_MAP, 4
+	warp_event  1, 10, POWER_PLANT, 4
+	warp_event 45,  2, POWER_PLANT, 3
+	warp_event 45,  1, POWER_PLANT, 6
+	warp_event 45, 10, POWER_PLANT, 5
+	warp_event 45,  9, POWER_PLANT, 8
+	warp_event 45, 34, POWER_PLANT, 7
+	warp_event 46, 35, POWER_PLANT_ROOF, 1
+	warp_event 47, 35, POWER_PLANT_ROOF, 1
+	warp_event 55,  1, POWER_PLANT_ROOF, 2
+	warp_event 55,  2, POWER_PLANT, 13
+	warp_event 55,  9, POWER_PLANT, 12
+	warp_event 55, 10, POWER_PLANT, 15
+	warp_event 55, 26, POWER_PLANT, 14
 
 	def_bg_events
+	bg_event 46, 23, TEXT_POWERPLANT_COMPUTER1
+	bg_event 47, 23, TEXT_POWERPLANT_COMPUTER2
+	bg_event 53, 23, TEXT_POWERPLANT_COMPUTER3
+	bg_event 54, 23, TEXT_POWERPLANT_COMPUTER4	
 
 	def_object_events
 	object_event  9, 20, SPRITE_POKE_BALL2, STAY, NONE, TEXT_POWERPLANT_VOLTORB1, VOLTORB, 40

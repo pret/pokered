@@ -73,4 +73,7 @@ ChampCup_Block::   INCBIN "gfx/blocksets/champ_cup.bst"
 Volcano_GFX::       INCBIN "gfx/tilesets/volcano.2bpp"
 Volcano_Block::     INCBIN "gfx/blocksets/volcano.bst"
 
+Section "Tilesets 5", ROMX
 
+Reactor_GFX::       INCBIN "gfx/tilesets/reactor.2bpp"
+Reactor_Block::     INCBIN "gfx/blocksets/reactor.bst"

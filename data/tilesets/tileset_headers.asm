@@ -37,4 +37,5 @@ Tilesets:
 	tileset SecretLab,    -1, -1, -1, -1, TILEANIM_NONE
 	tileset ChampCup,     -1, -1, -1, -1, TILEANIM_NONE
 	tileset Volcano,      -1, -1, -1, -1, TILEANIM_WATER_FLOWER
+	tileset Reactor,      -1, -1, -1, -1, TILEANIM_WATER
 	assert_table_length NUM_TILESETS

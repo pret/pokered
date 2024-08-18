@@ -86,7 +86,10 @@ wChannelTranspositions:: ; stores octave transpositions for each wave channel so
 wChannel1Transposition::db
 wChannel2Transposition::db
 wChannel3Transposition::db
-	; unused audio wram 7 bytes
+; bit 0 = we are currently waiting for a sound to finish
+; other bits = unused
+wAudioFlags::db
+	; unused audio wram 6 bytes
 ENDU
 
 
@@ -2144,7 +2147,7 @@ wCurrentBoxNum:: db
 ; number of HOF teams
 wNumHoFTeams:: db
 
-wUnusedMapVariable:: db
+wUnusedMapVariable:: db ; unused save file byte?
 
 wPlayerCoins:: dw ; BCD
 
@@ -2346,7 +2349,7 @@ wLastBlackoutMap:: db
 wDestinationMap:: db
 
 ; initialized to $ff, but nothing ever reads it
-wUnusedPlayerDataByte:: db
+wUnusedPlayerDataByte:: db ; unused save file byte?
 
 ; used to store the tile in front of the boulder when trying to push a boulder
 ; also used to store the result of the collision check ($ff for a collision and $00 for no collision)
@@ -2358,7 +2361,7 @@ wDungeonWarpDestinationMap:: db
 ; which dungeon warp within the source map was used
 wWhichDungeonWarp:: db
 
-wUnusedCardKeyGateID:: db
+wUnusedCardKeyGateID:: db ; unused save file byte?
 
 	ds 8 ; unused save file 8 bytes
 

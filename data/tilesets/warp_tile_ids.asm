@@ -28,6 +28,7 @@ WarpTileIDPointers:
 	dw .SecretLabWarpTileIDs
 	dw .ChampCupWarpTileIDs
 	dw .VolcanoWarpTileIDs
+	dw .ReactorWarpTileIDs
 	assert_table_length NUM_TILESETS
 
 MACRO warp_tiles
@@ -82,6 +83,7 @@ ENDM
 .LabWarpTileIDs:
 	warp_tiles $34
 
+.ReactorWarpTileIDs:
 .FacilityWarpTileIDs:
 	db $43, $58, $20
 	; fallthrough

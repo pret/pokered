@@ -83,3 +83,43 @@ LoopRemapSpritePictureIDs::
 	dec a
 	ret z
 	jr .loop
+
+StoreOriginalPictureIDs::
+	ld h, d
+	ld l, e
+	call ReadHLIntoCFromMapRomBank
+	inc hl
+	ld b, c
+	; hl pointing to first sprite's ID
+.loop
+	call ReadHLIntoCFromMapRomBank
+	ld d, c
+	push hl
+	push bc
+	ld hl, wMapSpriteOriginalPictureIDs
+	ld a, [wNumSprites]
+	sub b
+	ld b, 0
+	ld c, a
+	add hl, bc
+	ld [hl], d
+	pop bc
+	pop hl
+	ld d, 0
+	ld e, 5
+	add hl, de
+	call ReadHLIntoCFromMapRomBank
+	ld a, c
+	; points to 6th byte in sprite struct which will tell us how many more bytes are in this sprite's data
+	bit 6, a
+	ld e, 3
+	jr nz, .add1
+	bit 7, a
+	ld e, 2
+	jr nz, .add1
+	ld e, 1
+.add1
+	add hl, de
+	dec b
+	jr nz, .loop
+	ret

@@ -18,6 +18,9 @@ WaitForSoundToFinish::
 	bit 7, a ; set if low health alarm sound is currently playing
 	ret nz
 	push hl
+	ld hl, wAudioFlags
+	set 0, [hl]
+	push hl
 .waitLoop
 	ld hl, wChannelSoundIDs + CHAN5
 	xor a
@@ -28,5 +31,7 @@ WaitForSoundToFinish::
 	inc hl
 	or [hl]
 	jr nz, .waitLoop
+	pop hl ; wAudioFlags
+	res 0, [hl]
 	pop hl
 	ret

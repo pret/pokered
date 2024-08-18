@@ -20,6 +20,18 @@ ChangeSpriteFacing::
 	ld a, b
 	ldh [hSpriteFacingDirection], a
 	jp SetSpriteFacingDirection
+
+ReadHLIntoCFromMapRomBank::
+	ldh a, [hLoadedROMBank]
+	push af
+	ldh a, [hMapROMBank]
+	ldh [hLoadedROMBank], a
+	ld [MBC1RomBank], a
+	ld c, [hl]
+	pop af
+	ldh [hLoadedROMBank], a
+	ld [MBC1RomBank], a
+	ret
 	
 GenericMoveDown::
 	db NPC_MOVEMENT_DOWN

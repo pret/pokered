@@ -55,7 +55,7 @@ PokedexOrder:
 	db DEX_ELECTABUZZ
 	db DEX_MAGNETON
 	db DEX_KOFFING
-	db 0 ; MISSINGNO.
+	db DEX_MAGNETON ; floating magneton
 	db DEX_MANKEY
 	db DEX_SEEL
 	db DEX_DIGLETT
@@ -171,7 +171,7 @@ PokedexOrder:
 	db DEX_GEODUDE
 	db DEX_PORYGON
 	db DEX_AERODACTYL
-	db DEX_ONIX
+	db DEX_ONIX ; Hardened onix
 	db DEX_MAGNEMITE
 	db DEX_MEWTWO ; Armored Mewtwo
 	db DEX_HAUNTER ; Powered Haunter

@@ -68,7 +68,7 @@ InternalMapEntries:
 	internal_map MT_MOON_B2F,                    6,  2, MountMoonName
 	internal_map CERULEAN_MART,                 10,  2, CeruleanCityName
 	internal_map MT_MOON_POKECENTER,             5,  2, Route4Name
-	internal_map CERULEAN_TRASHED_HOUSE_COPY,   10,  2, CeruleanCityName
+	internal_map POWER_PLANT_ROOF,              15,  3, PowerPlantName
 	internal_map DAYCARE,                       10,  4, Route5Name
 	internal_map UNDERGROUND_PATH_ROUTE_6_COPY, 10,  6, Route6Name
 	internal_map UNDERGROUND_PATH_ROUTE_7_COPY,  9,  5, Route7Name

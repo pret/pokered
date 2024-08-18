@@ -543,6 +543,11 @@ CeruleanCave3HiddenObjects:
 PowerPlantHiddenObjects:
 	hidden_object 17, 16, HIDDEN_ITEM_POWER_PLANT_CENTRAL_BOXES_ALCOVE, HiddenItems2
 	hidden_object 12,  1, HIDDEN_ITEM_POWER_PLANT_NEAR_ZAPDOS_ALCOVE, HiddenItems
+	hidden_object 11,  4, SPRITE_FACING_UP, PowerPlantElectricity1
+	hidden_object 11,  5, SPRITE_FACING_UP, PowerPlantElectricity2
+	hidden_object 11,  6, SPRITE_FACING_UP, PowerPlantElectricity3
+	hidden_object 11,  7, SPRITE_FACING_UP, PowerPlantElectricity4
+	hidden_object 50, 17, SPRITE_FACING_UP, PowerPlantMagnet
 	db -1 ; end
 
 SeafoamIslands3HiddenObjects:

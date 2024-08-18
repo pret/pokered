@@ -161,3 +161,5 @@ PoweredHaunterBaseStats::
 INCLUDE "data/pokemon/base_stats/powered_haunter.asm"
 HardenedOnixBaseStats::
 INCLUDE "data/pokemon/base_stats/hardened_onix.asm"
+FloatingMagnetonBaseStats::
+INCLUDE "data/pokemon/base_stats/floating_magneton.asm"

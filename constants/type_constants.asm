@@ -26,5 +26,6 @@ DEF SPECIAL EQU const_value
 	const ICE          ; $19
 	const DRAGON       ; $1A
 	const TRI          ; $1B PureRGBnote: ADDED: used with tri attack
+	const FLOATING     ; $1C PureRGBnote: ADDED: used with floating magneton / weezing, can upgrade yours in specific places
 
 DEF NUM_TYPES EQU const_value

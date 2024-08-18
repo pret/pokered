@@ -414,7 +414,7 @@ MoveAnimationTilesPointers:
 	anim_tileset 79, MoveAnimationTiles1
 	anim_tileset 64, MoveAnimationTiles2
 
-MoveAnimationTiles0:
+MoveAnimationTiles0::
 MoveAnimationTiles2:
 	INCBIN "gfx/battle/move_anim_0.2bpp"
 
@@ -1261,7 +1261,7 @@ AnimationShakeScreenHorizontallyFast:
 ;	ld e, $76
 ;	jr AnimationTileEverywhereInit
 
-AnimationWaterDropletsEverywhereDefault:
+AnimationWaterDropletsEverywhereDefault::
 ; Draws water droplets all over the screen and makes them
 ; scroll. It's hard to describe, but it's the main animation
 ; in Surf/Mist/Haze.
@@ -1372,7 +1372,8 @@ _AnimationWaterDroplets:
 	cp 112
 	jr c, .loop
 	call AnimationCleanOAM
-	jp DelayFrame
+	rst _DelayFrame
+	ret
 
 AnimationSlideMonUp:
 ; Slides the mon's sprite upwards.

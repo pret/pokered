@@ -57,7 +57,6 @@ ROMX $6
 	"Doors and Ledges"
 ROMX $7
 	"Maps 3"
-	"Pokémon Names"
 	"Maps 4"
 	"Hidden Objects 1"
 ROMX $8
@@ -199,6 +198,7 @@ ROMX $32
 	"Trade Graphics"
 ROMX $33
 	"movedCode"
+	"Pokémon Names"
 	"Text 12"
 ROMX $34
 	"Party Sprites"
@@ -210,6 +210,7 @@ ROMX $36
 ROMX $37
 	"Music 5"
 ROMX $38
+	"Tilesets 5"
 	"NPC Sprites 4"
 WRAM0
 	"Audio RAM"

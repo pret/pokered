@@ -24,6 +24,7 @@ ENDR
 	dw .Ice
 	dw .Dragon
 	dw .Tri
+	dw .Floating
 
 	assert_table_length NUM_TYPES
 
@@ -45,4 +46,4 @@ ENDR
 .Dragon:   db "DRAGON@"
 .Tri:      db "TRI@"
 .Crystal:  db "CRYSTAL@"
-
+.Floating: db "FLOATING@"

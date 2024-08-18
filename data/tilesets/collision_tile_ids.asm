@@ -95,3 +95,6 @@ ChampCup_Coll::
 
 Volcano_Coll::
 	coll_tiles $01, $05, $0D, $15, $18, $1A, $1F, $20, $27, $2A, $4A
+
+Reactor_Coll::
+	coll_tiles $01, $10, $13, $2F, $30, $3D, $42, $43, $52, $55, $56, $59, $5A

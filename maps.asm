@@ -70,6 +70,11 @@ INCLUDE "scripts/SilphCo6F.asm"
 INCLUDE "data/maps/objects/SilphCo6F.asm"
 SilphCo6F_Blocks: INCBIN "maps/SilphCo6F.blk"
 
+INCLUDE "data/maps/headers/PowerPlantRoof.asm"
+INCLUDE "scripts/PowerPlantRoof.asm"
+INCLUDE "data/maps/objects/PowerPlantRoof.asm"
+PowerPlantRoof_Blocks: INCBIN "maps/PowerPlantRoof.blk"
+
 
 SECTION "Maps 3", ROMX
 

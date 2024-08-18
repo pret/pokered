@@ -658,7 +658,7 @@ PlayMapChangeSound::
 ;;;;;;;;;; shinpokerednote: FIXED: fixes a bit of jank with entering rock tunnel
 	jp z, GBFadeOutToBlack
 	push af
-	inc a
+	ld a, 7
 	ld [wMapPalOffset], a
 	call LoadGBPal
 	pop af
@@ -671,6 +671,8 @@ CheckIfInFlyMap::
 	cp CELADON_MART_ROOF ; PureRGBnote: FIXED: can fly on roofs
 	ret z
 	cp CELADON_MANSION_ROOF ; PureRGBnote: FIXED: can fly on roofs
+	ret z
+	cp POWER_PLANT_ROOF
 	ret z
 	; fall through
 CheckIfInDigMap:: ; can dig outside, but not on roofs
@@ -2102,7 +2104,7 @@ LoadMapHeader::
 .loadSpriteData
 	ld a, [wd72e]
 	bit 5, a ; did a battle happen immediately before this?
-	jp nz, .finishUp ; if so, skip this because battles don't destroy this data
+	jp nz, .getRemappedSpriteIDsThenFinishUp ; if so, skip most of this because battle doesn't destroy the data
 	ld a, [hli]
 	ld [wNumSprites], a ; save the number of sprites
 	push hl
@@ -2171,8 +2173,8 @@ LoadMapHeader::
 	add hl, bc
 	ldh a, [hLoadSpriteTemp1]
 	ld [hli], a ; store movement byte 2 in byte 0 of sprite entry
-	ldh a, [hLoadSpriteTemp2]
-	ld [hl], a ; this appears pointless, since the value is overwritten immediately after
+	;ldh a, [hLoadSpriteTemp2]
+	;ld [hl], a ; this appears pointless, since the value is overwritten immediately after
 	ldh a, [hLoadSpriteTemp2]
 	ldh [hLoadSpriteTemp1], a
 	and $3f
@@ -2257,6 +2259,11 @@ LoadMapHeader::
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret
+.getRemappedSpriteIDsThenFinishUp
+	ld d, h
+	ld e, l
+	callfar StoreOriginalPictureIDs
+	jr .finishUp
 
 ; function to copy map connection data from ROM to WRAM
 ; Input: hl = source, de = destination

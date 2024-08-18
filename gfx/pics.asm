@@ -652,4 +652,5 @@ RockShatterAnimation:: INCBIN "gfx/overworld/rock_breaking.2bpp"
 FrozenWaterTile:: INCBIN "gfx/overworld/frozen_water.2bpp"
 IceCrystal:: INCBIN "gfx/overworld/ice_crystal.2bpp"
 SleepingEmote:: INCBIN "gfx/emotes/sleeping.2bpp"
-
+PowerPlantRoofTiles:: INCBIN "gfx/overworld/power_plant_roof_extra_tiles.2bpp"
+PowerPlantStormTiles:: INCBIN "gfx/overworld/storm.2bpp"
