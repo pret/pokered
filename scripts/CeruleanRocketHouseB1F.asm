@@ -55,8 +55,8 @@ CeruleanRocketHouseMissingnoScript:
 	ld c, BANK(SFX_SS_Anne_Horn_1)
 	ld a, SFX_SS_ANNE_HORN
 	call PlayMusic
-	ld c, 2
-	rst _DelayFrames
+	rst _DelayFrame
+	rst _DelayFrame
 	pop bc
 	dec b
 	jr nz, .loop
@@ -65,7 +65,25 @@ CeruleanRocketHouseMissingnoScript:
 	ld c, BANK(SFX_Noise_Instrument05_1)
 	ld a, SFX_NOISE_INSTRUMENT05
 	call PlayMusic
-	call GBFadeOutToBlack
+	ld hl, vNPCSprites2 tile $40
+	; copy 4 tiles of random garbage from a random bank into vram
+	call Random
+	and %1111111
+	ld d, a
+	call Random
+	ld e, a
+	call Random
+	and %1111 ; only use first 16 banks
+	ld b, a
+	ld c, 4
+	call CopyVideoData
+	; fill the screen with garbage tiles to make things look like they glitched out
+	call FillScreenWithRandomTilesFromC0
+	xor a
+	ldh [hWY], a ; put the window on the screen
+	ld [wUpdateSpritesEnabled], a
+	inc a
+	ldh [hAutoBGTransferEnabled], a ; enable continuous WRAM to VRAM transfer each V-blank
 	ld b, $FF
 	rst _DelayFrames
 	ld a, MISSINGNO
@@ -81,6 +99,21 @@ CeruleanRocketHouseMissingnoScript:
 	xor a
 	ld [wCeruleanRocketHouseCurScript], a
 	jp BattleOccurred
+
+FillScreenWithRandomTilesFromC0:
+	ld bc, 20 * 18
+	inc b
+	hlcoord 0, 0
+.loop
+	call Random
+	and %11
+	add $C0
+	ld [hli], a
+	dec c
+	jr nz, .loop
+	dec b
+	jr nz, .loop
+	jp Delay3
 
 CeruleanRocketHouseB1FBeforeTradeText:
 	text_far _CeruleanRocketHouseB1FBeforeTradeText
