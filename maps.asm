@@ -298,11 +298,6 @@ INCLUDE "scripts/SeafoamIslands1F.asm"
 INCLUDE "data/maps/objects/SeafoamIslands1F.asm"
 SeafoamIslands1F_Blocks: INCBIN "maps/SeafoamIslands1F.blk"
 
-INCLUDE "data/maps/headers/SSAnne3F.asm"
-INCLUDE "scripts/SSAnne3F.asm"
-INCLUDE "data/maps/objects/SSAnne3F.asm"
-SSAnne3F_Blocks: INCBIN "maps/SSAnne3F.blk"
-
 INCLUDE "data/maps/headers/VictoryRoad3F.asm"
 INCLUDE "scripts/VictoryRoad3F.asm"
 INCLUDE "data/maps/objects/VictoryRoad3F.asm"
@@ -332,11 +327,6 @@ INCLUDE "data/maps/headers/RocketHideoutElevator.asm"
 INCLUDE "scripts/RocketHideoutElevator.asm"
 INCLUDE "data/maps/objects/RocketHideoutElevator.asm"
 RocketHideoutElevator_Blocks: INCBIN "maps/RocketHideoutElevator.blk"
-
-INCLUDE "data/maps/headers/SilphCoElevator.asm"
-INCLUDE "scripts/SilphCoElevator.asm"
-INCLUDE "data/maps/objects/SilphCoElevator.asm"
-SilphCoElevator_Blocks: INCBIN "maps/SilphCoElevator.blk"
 
 INCLUDE "data/maps/headers/SafariZoneEast.asm"
 INCLUDE "scripts/SafariZoneEast.asm"
@@ -1001,6 +991,20 @@ INCLUDE "data/maps/headers/VictoryRoad1F.asm"
 INCLUDE "scripts/VictoryRoad1F.asm"
 INCLUDE "data/maps/objects/VictoryRoad1F.asm"
 VictoryRoad1F_Blocks: INCBIN "maps/VictoryRoad1F.blk"
+
+;;;;; PureRGBnote: MOVED: moved from maps 6 section
+
+INCLUDE "data/maps/headers/SSAnne3F.asm"
+INCLUDE "scripts/SSAnne3F.asm"
+INCLUDE "data/maps/objects/SSAnne3F.asm"
+SSAnne3F_Blocks: INCBIN "maps/SSAnne3F.blk"
+
+INCLUDE "data/maps/headers/SilphCoElevator.asm"
+INCLUDE "scripts/SilphCoElevator.asm"
+INCLUDE "data/maps/objects/SilphCoElevator.asm"
+SilphCoElevator_Blocks: INCBIN "maps/SilphCoElevator.blk"
+
+;;;;;
 
 
 SECTION "Maps 17", ROMX

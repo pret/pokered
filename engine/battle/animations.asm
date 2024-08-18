@@ -2203,7 +2203,7 @@ CopyTempPicToMonPic:
 	ld bc, 7 * 7
 	jp CopyVideoData
 
-AnimationWavyScreen:
+AnimationWavyScreen::
 ; used in Psywave/Psychic etc.
 	ld hl, vBGMap0
 	call BattleAnimCopyTileMapToVRAM
