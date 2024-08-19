@@ -476,9 +476,9 @@ CuboneEvosMoves:
 	db EVOLVE_LEVEL, 28, MAROWAK
 	db 0
 ; Learnset
-	db 14, DEFENSE_CURL
+	db 14, FOCUS_ENERGY
 	db 18, SCREECH
-	db 22, FOCUS_ENERGY
+	db 22, LIGHT_SCREEN
 	db 25, COMET_PUNCH
 	db 27, HEADBUTT
 	db 30, DIG
@@ -638,7 +638,7 @@ BlastoiseEvosMoves:
 	db 0
 ; Learnset
 	db 8, BUBBLE
-	db 11, DEFENSE_CURL
+	db 11, LIGHT_SCREEN
 	db 14, WATER_GUN
 	db 19, BITE
 	db 24, GLARE
@@ -715,7 +715,7 @@ OnixEvosMoves:
 	db 15, BIND
 	db 17, ROAR
 	db 19, SCREECH
-	db 22, DEFENSE_CURL
+	db 22, LIGHT_SCREEN
 	db 25, RAGE
 	db 29, CLAMP
 	db 31, MIRROR_MOVE
@@ -794,10 +794,10 @@ GravelerEvosMoves:
 	db EVOLVE_LEVEL, 37, GOLEM
 	db 0
 ; Learnset
-	db 11, DEFENSE_CURL
+	db 11, HARDEN
 	db 13, FURY_SWIPES ; DUST CLAW
 	db 16, ROCK_THROW
-	db 19, HARDEN
+	db 19, DEFENSE_CURL
 	db 21, SELFDESTRUCT
 	db 28, ROCK_SLIDE
 	db 31, BARRAGE
@@ -958,10 +958,10 @@ GolemEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
-	db 11, DEFENSE_CURL
+	db 11, HARDEN
 	db 13, FURY_SWIPES ; DUST CLAW
 	db 16, ROCK_THROW
-	db 19, HARDEN
+	db 19, DEFENSE_CURL
 	db 21, SELFDESTRUCT
 	db 28, ROCK_SLIDE
 	db 31, BARRAGE
@@ -1393,7 +1393,7 @@ PikachuEvosMoves:
 	db 9, THUNDER_WAVE
 	db 12, QUICK_ATTACK
 	db 16, FURY_SWIPES ; DUST CLAW
-	db 22, DEFENSE_CURL
+	db 22, LIGHT_SCREEN
 	db 26, THUNDERBOLT
 	db 36, WITHDRAW
 	db 45, THUNDER
@@ -1406,7 +1406,7 @@ RaichuEvosMoves:
 ; Learnset
 	db 12, QUICK_ATTACK
 	db 16, FURY_SWIPES ; DUST CLAW
-	db 22, DEFENSE_CURL
+	db 22, LIGHT_SCREEN
 	db 26, THUNDERBOLT
 	db 36, WITHDRAW
 	db 45, THUNDER
@@ -1566,7 +1566,7 @@ OmanyteEvosMoves:
 	db 30, WATERFALL
 	db 35, SPIKE_CANNON
 	db 39, BODY_SLAM
-	db 43, SWIFT
+	db 43, DEFENSE_CURL
 	db 48, HYDRO_PUMP
 	db 0
 
@@ -1579,7 +1579,7 @@ OmastarEvosMoves:
 	db 30, WATERFALL
 	db 35, SPIKE_CANNON
 	db 39, BODY_SLAM
-	db 43, SWIFT
+	db 43, DEFENSE_CURL
 	db 48, HYDRO_PUMP
 	db 0
 
@@ -2213,9 +2213,9 @@ MarowakEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
-	db 14, DEFENSE_CURL
+	db 14, FOCUS_ENERGY
 	db 18, SCREECH
-	db 22, FOCUS_ENERGY
+	db 22, LIGHT_SCREEN
 	db 25, COMET_PUNCH
 	db 27, HEADBUTT
 	db 30, DIG
@@ -2543,10 +2543,10 @@ GeodudeEvosMoves:
 	db EVOLVE_LEVEL, 24, GRAVELER
 	db 0
 ; Learnset
-	db 11, DEFENSE_CURL
+	db 11, HARDEN
 	db 13, FURY_SWIPES ; DUST CLAW
 	db 16, ROCK_THROW
-	db 19, HARDEN
+	db 19, DEFENSE_CURL
 	db 21, SELFDESTRUCT
 	db 28, ROCK_SLIDE
 	db 31, BARRAGE
@@ -2641,7 +2641,7 @@ SquirtleEvosMoves:
 	db 0
 ; Learnset
 	db 8, BUBBLE
-	db 11, DEFENSE_CURL
+	db 11, LIGHT_SCREEN
 	db 14, WATER_GUN
 	db 18, BITE
 	db 23, GLARE
@@ -2674,7 +2674,7 @@ WartortleEvosMoves:
 	db 0
 ; Learnset
 	db 8, BUBBLE
-	db 11, DEFENSE_CURL
+	db 11, LIGHT_SCREEN
 	db 14, WATER_GUN
 	db 18, BITE
 	db 23, GLARE
@@ -2834,7 +2834,7 @@ HardenedOnixEvosMoves:
 	db 15, BIND
 	db 17, ROAR
 	db 19, SCREECH
-	db 22, DEFENSE_CURL
+	db 22, LIGHT_SCREEN
 	db 25, RAGE
 	db 27, ROCK_SLIDE
 	db 29, CLAMP

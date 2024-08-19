@@ -78,7 +78,7 @@ DEF SPDSPCDV_TRAINER EQU $88
 
 ; wPlayerBattleStatus1 or wEnemyBattleStatus1 bit flags
 	const_def
-	const STORING_ENERGY           ; 0 ; Bide ; PureRGBnote: CHANGED: (now unused since bide is a normal buff move)
+	const DEFENSE_CURLED           ; 0 ; PureRGBnote: CHANGED: used to be bide, now it's for defense curl's super effective move resist
 	const THRASHING_ABOUT          ; 1 ; e.g. Thrash
 	const ATTACKING_MULTIPLE_TIMES ; 2 ; e.g. Double Kick, Fury Attack
 	const FLINCHED                 ; 3

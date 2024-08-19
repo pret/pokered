@@ -1904,3 +1904,6 @@ IsStatMaxed:
 .maxed
 	scf
 	ret
+
+DefenseCurlEffect:
+	jpfar _DefenseCurlEffect

@@ -41,7 +41,7 @@ MoveEffectPointerTable:
 	dw OneHitKOEffect            ; OHKO_EFFECT
 	dw ChargeEffect              ; CHARGE_EFFECT
 	dw NULL                      ; SUPER_FANG_EFFECT
-	dw NULL                      ; SPECIAL_DAMAGE_EFFECT ; unused
+	dw NULL                      ; SPECIAL_DAMAGE_EFFECT
 	dw TrappingEffect            ; TRAPPING_EFFECT
 	dw ChargeEffect              ; FLY_EFFECT
 	dw TwoToFiveAttacksEffect    ; ATTACK_TWICE_EFFECT
@@ -89,4 +89,5 @@ MoveEffectPointerTable:
 	dw DisableEffect             ; DISABLE_EFFECT
 	dw WithdrawEffect            ; WITHDRAW_EFFECT
 	dw GrowthEffect              ; GROWTH_EFFECT
+	dw DefenseCurlEffect         ; DEFENSE_CURL_EFFECT
 	assert_table_length NUM_MOVE_EFFECTS

@@ -1240,9 +1240,9 @@ _DefenseCurlDexEntry::
 	next "ball that raises"
 	next "defensibility."
 
-	bage "Cuts SPECIAL"
-	next "attack damage"
-	next "in half"
+	bage "The user won't take"
+	next "super effective"
+	next "hits from moves"
 	dex
 
 _BarrierDexEntry::

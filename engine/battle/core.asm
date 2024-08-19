@@ -5436,7 +5436,7 @@ AdjustDamageForMoveType:
 .loop
 	ld a, [hli] ; a = "attacking type" of the current type pair
 	cp $ff
-	ret z
+	jr z, .checkForceNeutralDamage
 	cp b ; does move type match "attacking type"?
 	jr nz, .nextTypePair
 	ld a, [hl] ; a = "defending type" of the current type pair
@@ -5481,12 +5481,52 @@ AdjustDamageForMoveType:
 	inc hl
 	inc hl
 	jp .loop
+.checkForceNeutralDamage
+	; after calculating damage, if the player has defense curl we make all super effective hits normally effective
+	ld hl, wDamageMultipliers
+	call CheckIfDefenseCurlModifierGetTurn
+	ret c
+	ld a, [hl]
+	push af
+	and %10000000
+	add EFFECTIVE
+	ld [hl], a ; set damage multipler tracker to normal effectiveness
+	pop af
+	and $7f
+	cp FOUR_TIMES_EFFECTIVE
+	call z, .halfDamage ; half to cut it in half twice to get normal damage
+.halfDamage
+	ld a, NOT_VERY_EFFECTIVE
+	ldh [hMultiplier], a
+	jr ApplyDamageMultiplier2
+
+CheckIfDefenseCurlModifierGetTurn:
+	ldh a, [hWhoseTurn]
+	and a
+	ld a, [wEnemyBattleStatus1]
+	jr z, .gotTurn
+	ld a, [wPlayerBattleStatus1]
+.gotTurn
+	ld b, a
+CheckIfDefenseCurlModifier:
+	ld a, [hl]
+	and $7f
+	cp SUPER_EFFECTIVE
+	ret c ; less than SUPER_EFFECTIVE = return
+	and a
+.doDefenseCurlCheck
+	bit DEFENSE_CURLED, b
+	ret nz
+	scf
+	ret
+
 
 ForceTypeImmunity:
 	xor a
 	ldh [hMultiplier], a 
 ApplyDamageMultiplier:
 	ld [wDamageMultipliers], a
+ApplyDamageMultiplier2:
 	xor a
 	ldh [hMultiplicand], a
 	ld hl, wDamage
@@ -5637,7 +5677,7 @@ AIGetTypeEffectiveness:
 .loop
 	ld a, [hli]
 	cp $ff
-	ret z
+	jr z, .checkDefenseCurl ; if done checking type effectivenesses
 	cp d                      ; match the type of the move
 	jr nz, .nextTypePair1
 	ld a, [hli]
@@ -5678,6 +5718,14 @@ AIGetTypeEffectiveness:
 .done
 	;joenote - removed		ld a, [hl]
 	ld [wTypeEffectiveness], a ; store damage multiplier
+	ret
+.checkDefenseCurl
+	ld a, [wPlayerBattleStatus1]
+	ld b, a
+	ld hl, wTypeEffectiveness
+	call CheckIfDefenseCurlModifier
+	ret c
+	ld [hl], EFFECTIVE ; force normal effectiveness if the move would have been super effective
 	ret
 
 INCLUDE "data/types/type_matchups.asm"

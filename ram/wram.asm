@@ -1399,7 +1399,7 @@ wPlayerStatsToDouble:: db
 ; always 0
 wPlayerStatsToHalve:: db
 
-; bit 0 - bide (PureRGBnote: CHANGED: now unused)
+; bit 0 - protected against super effective moves (PureRGBnote: CHANGED: used to be for bide)
 ; bit 1 - thrash / petal dance
 ; bit 2 - attacking multiple times (e.g. double kick)
 ; bit 3 - flinch

@@ -334,10 +334,14 @@ _DreamWasEatenText::
 	line "dream was eaten!"
 	prompt
 
+_ColosseumOpponentText::
 _TradeCenterOpponentText::
 	text "!"
 	done
 
-_ColosseumOpponentText::
-	text "!"
-	done
+_GuardedAgainstSuperEffectiveMovesText::
+	text "<USER>"
+	line "protected against"
+	para "super effective"
+	line "hits!"
+	prompt

@@ -95,4 +95,5 @@
 	const DISABLE_EFFECT             ; $56
 	const WITHDRAW_EFFECT            ; $57
 	const GROWTH_EFFECT              ; $58
+	const DEFENSE_CURL_EFFECT        ; $59
 DEF NUM_MOVE_EFFECTS EQU const_value - 1

@@ -193,6 +193,8 @@ AIMoveChoiceModification1:
 	jp z, .checkFullHealth
 	cp GROWTH_EFFECT
 	jp z, .checkFullHealth
+	cp DEFENSE_CURL_EFFECT
+	jp z, .checkDefenseCurlUp
 	ld a, [wEnemyMoveEffect]
 	push hl
 	push de
@@ -323,6 +325,12 @@ AIMoveChoiceModification1:
 	call CheckAIMoveIsPriority
 	jp c, .discourage ; discourage priority moves if player is invulnerable due to fly/dig
 	jp .notSemiInvulnerable
+.checkDefenseCurlUp
+	ld a, [wEnemyBattleStatus1]
+	bit DEFENSE_CURLED, a
+	jp nz, .discourage ; if the enemy has a defense curl up dont use the move again
+	jp .nextMove
+
 
 StatusAilmentMoveEffects:
 	db SLEEP_EFFECT
@@ -520,6 +528,7 @@ Modifier2PreferredMoves:
 	db HAZE_EFFECT
 	db MIST_EFFECT
 	db MIMIC_EFFECT
+	db DEFENSE_CURL_EFFECT
 	db -1
 
 ; PureRGBnote: ADDED: function that does a couple of comparisons before deciding whether the player is "dangerous" or not
