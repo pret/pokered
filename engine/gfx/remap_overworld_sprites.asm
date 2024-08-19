@@ -85,11 +85,13 @@ LoopRemapSpritePictureIDs::
 	jr .loop
 
 StoreOriginalPictureIDs::
+	ld a, [wNumSprites]
+	and a
+	ret z ; don't do anything if no sprites in map
 	ld h, d
 	ld l, e
-	call ReadHLIntoCFromMapRomBank
 	inc hl
-	ld b, c
+	ld b, a ; num of sprites in map
 	; hl pointing to first sprite's ID
 .loop
 	call ReadHLIntoCFromMapRomBank
