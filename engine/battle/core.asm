@@ -3317,6 +3317,7 @@ PlayerCanExecuteChargingMove:
 	res INVULNERABLE, [hl]
 PlayerCanExecuteMove:
 	call PrintMonName1Text
+	callfar CheckRemapMoveData
 	ld hl, DecrementPP
 	ld de, wPlayerSelectedMove ; pointer to the move just used
 	ld b, BANK(DecrementPP)
@@ -3841,9 +3842,9 @@ SavingEnergyText:
 	text_far _SavingEnergyText
 	text_end
 
-UnleashedEnergyText:
-	text_far _UnleashedEnergyText
-	text_end
+;UnleashedEnergyText:
+;	text_far _UnleashedEnergyText
+;	text_end
 
 ThrashingAboutText:
 	text_far _ThrashingAboutText
@@ -6014,6 +6015,7 @@ EnemyCanExecuteMove:
 	xor a
 	ld [wMonIsDisobedient], a
 	call PrintMonName1Text
+	callfar CheckRemapMoveData
 	ld a, [wEnemyMoveEffect]
 	ld hl, ResidualEffects1
 	ld de, $1

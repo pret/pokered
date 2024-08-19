@@ -81,3 +81,20 @@ _StruggleDexEntry::
 	next "to the user"
 	dex
 
+_DoubleslapDexEntry::
+	text "Repeatedly slaps"
+	next "the opponent with"
+	next "two hands."
+
+	bage "Power doubles if"
+	next "foe is asleep, but"
+	next "foe will wake up."
+
+	bage "Hits 2-5 times in"
+	next "succession."
+	next "2 hits → 37.5%"
+
+	bage "3 hits → 37.5%"
+	next "4 hits → 12.5%"
+	next "5 hits → 12.5%@"
+	text_end

@@ -1097,17 +1097,28 @@ TeleportWildPokemon::
 	cp d
 	ret
 
+
 TwoToFiveAttacksEffect:
+	ldh a, [hWhoseTurn]
+	and a
 	ld hl, wPlayerBattleStatus1
 	ld de, wPlayerNumAttacksLeft
 	ld bc, wPlayerNumHits
-	ldh a, [hWhoseTurn]
-	and a
+	ld a, [wPlayerMoveNum]
 	jr z, .twoToFiveAttacksEffect
 	ld hl, wEnemyBattleStatus1
 	ld de, wEnemyNumAttacksLeft
 	ld bc, wEnemyNumHits
+	ld a, [wEnemyMoveNum]
 .twoToFiveAttacksEffect
+	cp DOUBLESLAP
+	jr nz, .notDoubleSlap
+	push hl
+	push bc
+	callfar DoubleSlapModifierPart2
+	pop bc
+	pop hl
+.notDoubleSlap
 	bit ATTACKING_MULTIPLE_TIMES, [hl] ; is mon attacking multiple times?
 	ret nz
 	set ATTACKING_MULTIPLE_TIMES, [hl] ; mon is now attacking multiple times
@@ -1907,3 +1918,4 @@ IsStatMaxed:
 
 DefenseCurlEffect:
 	jpfar _DefenseCurlEffect
+
