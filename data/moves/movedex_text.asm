@@ -1154,7 +1154,7 @@ _DoubleTeamDexEntry::
 
 	bage "decrease chances"
 	next "of being hit and"
-	next "trick the foe."
+	next "tricks the foe."
 
 	bage "Raises user's"
 	next "EVASION."
