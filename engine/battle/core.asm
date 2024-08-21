@@ -309,6 +309,10 @@ EnemyRanText:
 	text_end
 
 MainInBattleLoop:
+	ld hl, wPlayerTurnCount
+	inc [hl]
+	inc hl
+	inc [hl] ; wEnemyTurnCount
 	call ReadPlayerMonCurHPAndStatus
 	ld hl, wBattleMonHP
 	ld a, [hli]
@@ -771,6 +775,7 @@ HandleEnemyMonFainted:
 ;;;;;;;;;; PureRGBnote: CHANGED: clear the previous move used when the pokemon faints so disable won't pick it up
 	xor a
 	ld [wEnemyLastSelectedMoveDisable], a
+	ld [wEnemyTurnCount], a
 ;;;;;;;;;;
 	ld a, $1
 	ld [wActionResultOrTookBattleTurn], a
@@ -1088,8 +1093,7 @@ HandlePlayerMonFainted:
 	jp z, TrainerBattleVictory
 .doUseNextMonDialogue
 ;;;;;;;;;; PureRGBnote: CHANGED: clear the previous move used when the pokemon faints so disable won't pick it up
-	xor a
-	ld [wPlayerLastSelectedMoveDisable], a
+	call ResetDisableAndPlayerMovedFlag
 ;;;;;;;;;;
 	call DoUseNextMonDialogue
 	ret c ; return if the player ran from battle
@@ -1193,8 +1197,7 @@ UseNextMonText:
 ; stores whether enemy mon has no HP left in Z flag
 ChooseNextMon:
 	;;;;;;;;; PureRGB: CHANGED: reset disable move indicator when we switch pokemon so the move disabled is random until we use a move again with the new pokemon.
-	xor a
-	ld [wPlayerLastSelectedMoveDisable], a
+	call ResetDisableAndPlayerMovedFlag
 	;;;;;;;;;
 	ld a, BATTLE_PARTY_MENU
 	ld [wPartyMenuTypeOrMessageID], a
@@ -2579,8 +2582,7 @@ PartyMenuOrRockOrRun:
 SwitchPlayerMon:
 	callfar RetreatMon
 	;;;;;;;;; PureRGB: CHANGED: reset disable move indicator when we switch pokemon so the move disabled is random until we use a move again with the new pokemon.
-	xor a
-	ld [wPlayerLastSelectedMoveDisable], a
+	call ResetDisableAndPlayerMovedFlag
 	;;;;;;;;;
 	ld c, 50
 	rst _DelayFrames
@@ -7863,4 +7865,10 @@ OldManListMenuInit::
 	ld [wMenuCursorLocation], a
 	ld a, h
 	ld [wMenuCursorLocation + 1], a
+	ret
+
+ResetDisableAndPlayerMovedFlag:
+	xor a
+	ld [wPlayerLastSelectedMoveDisable], a
+	ld [wPlayerTurnCount], a
 	ret

@@ -8,6 +8,7 @@ PriorityMoves:
 	db SWIFT
 	db TRANSFORM
 	db MIRROR_MOVE
+	db SONICBOOM
 	db -1 ; end
 
 FarCheckPriority:

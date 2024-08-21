@@ -65,7 +65,7 @@ GetMoveRemapData2:
 	ret
 
 ; byte 1 = move
-; byet 2 = required pokemon for modifier or -1 for any pokemon
+; byte 2 = required pokemon for modifier or -1 for any pokemon
 ; byte 4 = modified power or -1 if no change or -2 if the move uses a modifier function
 ; byte 3 = modified accuracy or 0 if no accuracy change, or which modifier function to use if previous byte was -2
 RemappableMoves::
@@ -73,6 +73,7 @@ RemappableMoves::
 	db DOUBLESLAP, -1, -2, 0
 	db POISON_STING, BEEDRILL, 45, 0
 	db TWINEEDLE, BEEDRILL, 65, 0 
+	db ACID, ARBOK, 100, 0
 	db DRILL_PECK, FEAROW, 110, 0
 	db ROCK_SLIDE, GOLEM, 110, 0
 	db HI_JUMP_KICK, HITMONLEE, 160, 0

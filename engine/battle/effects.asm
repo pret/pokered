@@ -1173,12 +1173,17 @@ FlinchSideEffect:
 	ret nz
 	ld hl, wEnemyBattleStatus1
 	ld de, wPlayerMoveEffect
+	ld bc, wPlayerMoveNum
 	ldh a, [hWhoseTurn]
 	and a
 	jr z, .flinchSideEffect
 	ld hl, wPlayerBattleStatus1
 	ld de, wEnemyMoveEffect
+	ld bc, wEnemyMoveNum
 .flinchSideEffect
+	ld a, [bc]
+	cp SONICBOOM
+	jr z, .sonicBoom
 	ld a, [de]
 	cp FLINCH_SIDE_EFFECT1
 	ld b, 10 percent + 1 ; chance of flinch (FLINCH_SIDE_EFFECT1)
@@ -1188,8 +1193,21 @@ FlinchSideEffect:
 	call BattleRandom
 	cp b
 	ret nc
+.flinch
 	set FLINCHED, [hl] ; set mon's status to flinching
 	jp ClearHyperBeam
+.sonicBoom
+	; sonic boom always flinches if it's used the first turn a pokemon is out
+	ldh a, [hWhoseTurn]
+	and a
+	ld a, [wPlayerTurnCount]
+	jr z, .gotTurn
+	ld a, [wEnemyTurnCount]
+.gotTurn
+	cp 1 ; the count will be 1 on first turn mon is out
+	ret nz
+	jr .flinch
+
 
 OneHitKOEffect:
 	jpfar OneHitKOEffect_

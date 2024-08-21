@@ -853,7 +853,7 @@ MrMimeEvosMoves:
 	db 31, SEISMIC_TOSS
 	db 35, MEDITATE
 	db 39, PSYCHIC_M
-	db 44, SWIFT
+	db 44, SONICBOOM
 	db 48, SUBSTITUTE
 	db 53, MIMIC
 	db 0
@@ -896,7 +896,9 @@ ArbokEvosMoves:
 	db 22, MEGA_DRAIN
 	db 26, SLAM ; FILTHY SLAM
 	db 30, WITHDRAW
+	db 33, ACID
 	db 36, LEECH_LIFE
+	db 38, ACID_ARMOR
 	db 43, SUPER_FANG
 	db 50, SKULL_BASH
 	db 54, HAZE
@@ -1031,7 +1033,6 @@ MagnetonEvosMoves:
 	db 43, CONVERSION
 	db 47, THUNDER
 	db 52, SELFDESTRUCT
-	db 57, SWIFT
 	db 0
 
 KoffingEvosMoves:
@@ -1076,6 +1077,7 @@ MankeyEvosMoves:
 	db 39, COMET_PUNCH
 	db 45, COUNTER ; DRAIN PUNCH
 	db 51, EXPLOSION
+	db 54, SONICBOOM
 	db 0
 
 SeelEvosMoves:
@@ -1159,6 +1161,7 @@ FarfetchdEvosMoves:
 	db 24, SWIFT
 	db 27, SLASH
 	db 31, RAZOR_LEAF
+	db 35, SONICBOOM
 	db 40, POISON_GAS
 	db 45, WHIRLWIND
 	db 0
@@ -1364,7 +1367,7 @@ VulpixEvosMoves:
 	db 35, FLAMETHROWER
 	db 44, AMNESIA
 	db 50, PSYCHIC_M
-	db 56, SWIFT
+	db 56, SONICBOOM
 	db 60, FIRE_SPIN
 	db 0
 
@@ -1381,7 +1384,7 @@ NinetalesEvosMoves:
 	db 35, FLAMETHROWER
 	db 44, AMNESIA
 	db 50, PSYCHIC_M
-	db 56, SWIFT
+	db 56, SONICBOOM
 	db 60, FIRE_SPIN
 	db 0
 
@@ -1591,7 +1594,6 @@ JigglypuffEvosMoves:
 	db 9, DISABLE
 	db 13, DEFENSE_CURL
 	db 16, DOUBLESLAP
-	db 19, LOVELY_KISS
 	db 24, BODY_SLAM
 	db 32, RECOVER
 	db 37, DIZZY_PUNCH
@@ -1607,7 +1609,6 @@ WigglytuffEvosMoves:
 	db 9, DISABLE
 	db 13, DEFENSE_CURL
 	db 16, DOUBLESLAP
-	db 19, LOVELY_KISS
 	db 24, BODY_SLAM
 	db 32, RECOVER
 	db 37, DIZZY_PUNCH
@@ -1715,11 +1716,11 @@ ZubatEvosMoves:
 	db 25, CONFUSE_RAY
 	db 28, SWORDS_DANCE
 	db 30, SLUDGE
-	db 36, SUBMISSION
-	db 42, SKULL_BASH
-	db 49, SUPER_FANG
-	db 54, POISON_GAS
-	db 60, HAZE
+	db 37, SKULL_BASH
+	db 44, SUPER_FANG
+	db 50, POISON_GAS
+	db 55, HAZE
+	db 59, SONICBOOM
 	db 0
 
 EkansEvosMoves:
@@ -1734,7 +1735,9 @@ EkansEvosMoves:
 	db 23, MEGA_DRAIN
 	db 26, SLAM ; FILTHY SLAM
 	db 30, WITHDRAW
+	db 33, ACID
 	db 36, LEECH_LIFE
+	db 38, ACID_ARMOR
 	db 43, SUPER_FANG
 	db 50, SKULL_BASH
 	db 54, HAZE
@@ -1812,7 +1815,6 @@ BeedrillEvosMoves:
 	db 10, FOCUS_ENERGY
 	db 14, LIGHT_SCREEN
 	db 17, WING_ATTACK
-	db 19, ACID
 	db 22, TWINEEDLE
 	db 25, FURY_ATTACK
 	db 30, PIN_MISSILE
@@ -1860,6 +1862,7 @@ PrimeapeEvosMoves:
 	db 39, COMET_PUNCH
 	db 45, COUNTER ; DRAIN PUNCH
 	db 51, EXPLOSION
+	db 54, SONICBOOM
 	db 0
 
 DugtrioEvosMoves:
@@ -2033,11 +2036,11 @@ GolbatEvosMoves:
 	db 25, CONFUSE_RAY
 	db 28, SWORDS_DANCE
 	db 30, SLUDGE
-	db 36, SUBMISSION
-	db 42, SKULL_BASH
-	db 49, SUPER_FANG
-	db 54, POISON_GAS
-	db 60, HAZE
+	db 37, SKULL_BASH
+	db 44, SUPER_FANG
+	db 50, POISON_GAS
+	db 55, HAZE
+	db 59, SONICBOOM
 	db 0
 
 MewtwoEvosMoves:
@@ -2603,7 +2606,6 @@ MagnemiteEvosMoves:
 	db 43, CONVERSION
 	db 47, THUNDER
 	db 52, SELFDESTRUCT
-	db 57, SWIFT
 	db 0
 
 MissingNoAEEvosMoves:

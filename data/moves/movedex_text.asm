@@ -483,9 +483,9 @@ _SonicboomDexEntry::
 	next "generates a "
 	next "shockwave."
 
-	bage "Always does"
-	next "precisely 20"
-	next "damage"
+	bage "Always goes first."
+	next "If user's 1st turn,"
+	next "foe will flinch."
 	dex
 
 _DisableDexEntry::

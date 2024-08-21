@@ -522,10 +522,10 @@ SupersonicAnim:
 	db -1 ; end
 
 SonicBoomAnim:
-	battle_anim ROAR, SUBANIM_1_SHOUT, 1, 6
-	battle_anim ROAR, SUBANIM_1_SHOUT, 1, 6
-	battle_anim GUST, SUBANIM_1_TORNADO, 1, 6
-	battle_anim NO_MOVE, SUBANIM_1_STAR_BIG, 1, 6
+	battle_anim DIG, SUBANIM_1_SHOUT, 1, 3
+	battle_anim DIG, SUBANIM_1_SHOUT, 1, 6
+	battle_anim LEECH_SEED, SUBANIM_0_SOUND_WAVE_SHOT, 0, 2
+	battle_anim EGG_BOMB, SUBANIM_1_EXPLOSION_SMALL_ENEMY, 0, 4
 	db -1 ; end
 
 DisableAnim:

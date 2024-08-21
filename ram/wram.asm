@@ -491,7 +491,8 @@ wLinkBattleRandomNumberListIndex:: db
 ; number of times remaining that AI action can occur
 wAICount:: db
 
-	ds 2
+wPlayerTurnCount:: db
+wEnemyTurnCount:: db
 
 wEnemyMoveListIndex:: db
 
