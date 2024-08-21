@@ -90,4 +90,5 @@ MoveEffectPointerTable:
 	dw WithdrawEffect            ; WITHDRAW_EFFECT
 	dw GrowthEffect              ; GROWTH_EFFECT
 	dw DefenseCurlEffect         ; DEFENSE_CURL_EFFECT
+	dw ReflectLightScreenEffect  ; ACID_ARMOR
 	assert_table_length NUM_MOVE_EFFECTS

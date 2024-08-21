@@ -96,4 +96,5 @@
 	const WITHDRAW_EFFECT            ; $57
 	const GROWTH_EFFECT              ; $58
 	const DEFENSE_CURL_EFFECT        ; $59
+	const ACID_ARMOR_EFFECT          ; $5A
 DEF NUM_MOVE_EFFECTS EQU const_value - 1

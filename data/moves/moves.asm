@@ -123,7 +123,7 @@ Moves:
 	move SMOKESCREEN,  ACCURACY_DOWN1_EFFECT,        0, ROCK,         100, 20
 	move CONFUSE_RAY,  CONFUSION_EFFECT,             0, GHOST,        100, 10
 	move WITHDRAW,     WITHDRAW_EFFECT,              0, WATER,        100, 10
-	move DEFENSE_CURL, DEFENSE_CURL_EFFECT,          0, NORMAL,       100, 40
+	move DEFENSE_CURL, DEFENSE_CURL_EFFECT,          0, NORMAL,       100, 15
 	move BARRIER,      DEFENSE_UP2_EFFECT,           0, GHOST,        100, 30
 	move LIGHT_SCREEN, LIGHT_SCREEN_EFFECT,          0, PSYCHIC_TYPE, 100, 30
 	move HAZE,         HAZE_EFFECT,                  0, POISON,       100, 30
@@ -163,7 +163,7 @@ Moves:
 	move FLASH,        FLINCH_SIDE_EFFECT1,         60, ELECTRIC,     100, 15 ; priority move
 	move PSYWAVE,      SPECIAL_DOWN_SIDE_EFFECT,    30, PSYCHIC_TYPE, 100, 20
 	move SPLASH,       SPLASH_EFFECT,                0, NORMAL,       100, 40
-	move ACID_ARMOR,   DEFENSE_UP2_EFFECT,           0, POISON,       100, 40
+	move ACID_ARMOR,   ACID_ARMOR_EFFECT,            0, POISON,       100, 20
 	move CRABHAMMER,   NO_ADDITIONAL_EFFECT,        90, WATER,         95, 10 ; high critical hit ratio
 	move EXPLOSION,    BIG_RECOIL_EFFECT,          140, ROCK,         100,  5
 	move FURY_SWIPES,  NO_ADDITIONAL_EFFECT,        40, GROUND,       100, 15 ; -> DUST CLAW

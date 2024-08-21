@@ -485,7 +485,7 @@ _SonicboomDexEntry::
 
 	bage "Always goes first."
 	next "If user's 1st turn,"
-	next "foe will flinch."
+	next "foe will flinch"
 	dex
 
 _DisableDexEntry::
@@ -1154,7 +1154,7 @@ _DoubleTeamDexEntry::
 
 	bage "decrease chances"
 	next "of being hit and"
-	next "confuse the foe."
+	next "trick the foe."
 
 	bage "Raises user's"
 	next "EVASION."
@@ -1725,13 +1725,13 @@ _AcidArmorDexEntry::
 	next "its cellular"
 	next "structure causing"
 
-	bage "it to liquify for"
+	bage "it to liquefy for"
 	next "additional"
 	next "protection."
 
-	bage "Greatly raises"
-	next "user's DEFENSE."
-	next "(+2 DEFENSE)"
+	bage "Cuts all damage"
+	next "(Physical/Special)"
+	next "in half"
 	dex
 	
 _CrabhammerDexEntry::

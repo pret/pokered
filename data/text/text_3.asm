@@ -345,3 +345,10 @@ _GuardedAgainstSuperEffectiveMovesText::
 	para "super effective"
 	line "hits!"
 	prompt
+
+_AcidArmorLiquifiedText::
+	text "<USER>"
+	line "liquified!"
+	para "All damage to it"
+	line "is halved!"
+	prompt
