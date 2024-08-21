@@ -10,12 +10,12 @@ Route21_Script:
 
 CheckRemoveVolcano:
 	ld hl, wCurrentMapScriptFlags
-	bit 5, [hl]
-	res 5, [hl]
-	jr nz, .checkRemoveLavaSuit
 	bit 4, [hl]
 	res 4, [hl]
 	jr nz, .replaceTiles
+	bit 5, [hl]
+	res 5, [hl]
+	jr nz, .checkRemoveLavaSuit
 	ret
 .checkRemoveLavaSuit
 	; if we just exited the volcano, remove lava suit

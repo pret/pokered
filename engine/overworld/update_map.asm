@@ -108,6 +108,11 @@ ReplaceTileBlockLineVerticalWithOneBlockCommon::
 	jr nz, .loop
 	ret
 
+ReplaceMultipleTileBlocksForceNoRedraw::
+	ld h, d
+	ld l, e
+	ld e, 0
+
 ReplaceMultipleTileBlocksNoRedraw::
 	ld d, 0
 .loop

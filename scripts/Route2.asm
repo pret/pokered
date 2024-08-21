@@ -14,12 +14,12 @@ Route2_Script:
 ; after using the "Tree Deleter" all but 1 of the cut trees will be removed
 Route2ReplaceCutTiles:
 	ld hl, wCurrentMapScriptFlags
-	bit 5, [hl] ; did we load the map from a save/warp/door/battle, etc?
-	res 5, [hl]
-	jr nz, .removeAddCutTiles
 	bit 4, [hl] ; did we enter the map by traversal from another route
 	res 4, [hl]
 	jr nz, .removeAddCutTilesNoRedraw
+	bit 5, [hl] ; did we load the map from a save/warp/door/battle, etc?
+	res 5, [hl]
+	jr nz, .removeAddCutTiles
 	ret
 .removeAddCutTiles
 	CheckEvent EVENT_DELETED_ROUTE2_TREES
@@ -42,7 +42,7 @@ Route2ReplaceCutTiles:
 	ret z
 	ld de, Route2TileBlockReplacements
 	; this guarantees avoiding redrawing the map because when going between areas these tiles are offscreen.
-	jpfar ReplaceMultipleTileBlocksNoRedraw
+	jpfar ReplaceMultipleTileBlocksForceNoRedraw
 
 Route2_ScriptPointers:
 	def_script_pointers

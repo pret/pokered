@@ -8,12 +8,12 @@ FuchsiaCity_Script:
 ; PureRGBnote: ADDED: function that will remove all cut trees in fuchsia if we deleted them with the tree deleter
 FuchsiaCityDefaultScript:
 	ld hl, wCurrentMapScriptFlags
-	bit 5, [hl] ; did we load the map from a save/warp/door/battle, etc?
-	res 5, [hl]
-	jr nz, .removeAddCutTiles
 	bit 4, [hl] ; did we enter the map by traversal from another route
 	res 4, [hl]
 	jr nz, .removeAddCutTilesNoRedraw
+	bit 5, [hl] ; did we load the map from a save/warp/door/battle, etc?
+	res 5, [hl]
+	jr nz, .removeAddCutTiles
 	ret
 .removeAddCutTiles
 	CheckEvent EVENT_DELETED_FUCHSIA_TREES
@@ -26,7 +26,7 @@ FuchsiaCityDefaultScript:
 	CheckEvent EVENT_DELETED_FUCHSIA_TREES
 	jr z, .firstLoadCommon
 	ld de, FuchsiaCityCutTreeTileBlockReplacements
-	callfar ReplaceMultipleTileBlocksNoRedraw
+	callfar ReplaceMultipleTileBlocksForceNoRedraw
 .firstLoadCommon
 	ResetEvent EVENT_FOSSIL_FAN_TEXT_TOGGLE ; this is just a good place to clear this event so the guy says the first text every time you reload the area.
 	; fall through
