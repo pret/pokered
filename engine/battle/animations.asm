@@ -944,13 +944,29 @@ FlashScreenEveryFourFrameBlocks:
 
 ; used for Explosion and Selfdestruct
 DoExplodeSpecialEffects:
+	ldh a, [hWhoseTurn]
+	and a
+	ld a, [wPlayerMoveEffect]
+	jr z, .gotTurn
+	ld a, [wEnemyMoveEffect]
+.gotTurn
+	; if explosion/selfdestruct isn't powered up, the effect will be EXPLODE_RECOIL_EFFECT
+	cp EXPLODE_EFFECT
+	jr nz, .Delay2FramesEveryFourFrameBlocks
 	ld a, [wSubAnimCounter]
 	cp 1 ; is it the end of the subanimation?
 	jr nz, FlashScreenEveryFourFrameBlocks
-	ret
 	; if it's the end of the subanimation, make the attacking pokemon disappear
-	;hlcoord 1, 5
-	;jp AnimationHideMonPic ; make pokemon disappear
+	hlcoord 1, 5
+	jp AnimationHideMonPic ; make pokemon disappear
+.Delay2FramesEveryFourFrameBlocks
+	; makes sure the EXPLODE_RECOIL_EFFECT's animation is still a similar length to original but has no flashing
+	ld a, [wSubAnimCounter]
+	and 3
+	ret nz
+	rst _DelayFrame
+	rst _DelayFrame
+	ret
 
 ; flashes the screen when subanimation counter is 1 modulo 4
 DoBlizzardSpecialEffects:
@@ -1178,6 +1194,16 @@ AnimationFlashLightScreen:
 	ld a, %10010000 ; light screen colors
 	jr AnimationFlashScreenCommon
 
+MegaPunchSpecialEffect::
+	ldh a, [hWhoseTurn]
+	and a
+	ld a, [wPlayerMoveEffect]
+	jr z, .gotTurn
+	ld a, [wEnemyMoveEffect]
+.gotTurn
+	cp EXPLODE_RECOIL_EFFECT
+	ret z
+	; fall through
 AnimationFlashScreen:
 	ldh a, [rBGP]
 	push af ; save initial palette

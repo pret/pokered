@@ -1,3 +1,17 @@
+ExplodeRecoilEffect_:
+	ld a, [wMoveMissed]
+	and a
+	jr z, BigRecoilEffect_
+	; if explosion/selfdestruct missed, the recoil will be 1/4 the health of the user
+	call GetMaxHPIntoDE
+	ld h, d
+	ld l, e
+	call CalculateRecoilDamage ; 1/2 of max HP
+	srl b
+	rr c ; 1/4
+	jr GotRecoilDamage
+
+
 BigRecoilEffect_: ; PureRGBnote: ADDED: big recoil effect does 50% of the damage inflicted, used with selfdestruct, explosion, and struggle.
 	call RecoilEffect_
 	jr GotRecoilDamage
@@ -8,20 +22,29 @@ DefaultRecoilEffect_:
 	rr c
 	jr GotRecoilDamage
 
-RecoilEffect_:
+GetMaxHPIntoDE:
 	ldh a, [hWhoseTurn]
 	and a
 	ld a, [wPlayerMoveNum]
-	ld hl, wBattleMonMaxHP
-	jr z, .recoilEffect
+	ld de, wBattleMonMaxHP
+	ret z
 	ld a, [wEnemyMoveNum]
-	ld hl, wEnemyMonMaxHP
+	ld de, wEnemyMonMaxHP
+	ret
+
+RecoilEffect_:
+	ld hl, wDamage 
+CalculateRecoilDamage:
+	call GetMaxHPIntoDE
 .recoilEffect
-	ld d, a
-	ld a, [wDamage]
+	push af
+	ld a, [hli]
 	ld b, a
-	ld a, [wDamage + 1]
-	ld c, a
+	ld c, [hl]
+	ld h, d
+	ld l, e
+	pop af
+	ld d, a
 	srl b
 	rr c
 	ret

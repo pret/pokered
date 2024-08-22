@@ -237,17 +237,15 @@ ItemUseBall:
 	jp nc, .skipShakeCalculations ;Hyper Ball always captures pokemon with catch rate >25
 	push hl
 	push bc
+	push de
 	; if the catch rate is 25 or lower it will guarantee catching if the pokemon has <1/3 health.
-	ld a, 3
-	ld [wUnusedC000], a ; store 1/3 in the fraction to check
-	callfar AICheckIfHPBelowFractionStore ; TODO: remove usage of wUnusedC000
+	ld d, 3
+	callfar FarCheckIfEnemyHPBelowFraction
+	pop de
 	pop bc
 	pop hl
-	ld a, [wUnusedC000] ; wUnusedC000 contains the result of AICheckIfHPBelowFractionPredef
-	and a
-	ld a, 0
-	ld [wUnusedC000], a ; reset this variable so it doesn't mess with other places that use it
-	jp nz, .skipShakeCalculations
+	jp c, .skipShakeCalculations
+	ld a, HYPER_BALL
 	jr .loopreturn
 ;;;;;;;;;;
 .checkForAilments

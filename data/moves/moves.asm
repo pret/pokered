@@ -132,7 +132,7 @@ Moves:
 	move BIDE,         ATTACK_DEFENSE_UP1_EFFECT,    0, NORMAL,       100, 20
 	move METRONOME,    METRONOME_EFFECT,             0, NORMAL,       100, 10 
 	move MIRROR_MOVE,  MIRROR_MOVE_EFFECT,           0, FLYING,       100, 10 ; priority move, always uses the previously used enemy move without restrictions
-	move SELFDESTRUCT, BIG_RECOIL_EFFECT,          140, FIRE,         100,  5
+	move SELFDESTRUCT, EXPLODE_RECOIL_EFFECT,      140, FIRE,         100,  5
 	move EGG_BOMB,     NO_ADDITIONAL_EFFECT,       100, DRAGON,       100, 10
 	move LICK,         PARALYZE_SIDE_EFFECT1,       35, GHOST,        100, 30
 	move SMOG,         POISON_SIDE_EFFECT2,         40, POISON,       100, 20
@@ -165,7 +165,7 @@ Moves:
 	move SPLASH,       SPLASH_EFFECT,                0, NORMAL,       100, 40
 	move ACID_ARMOR,   ACID_ARMOR_EFFECT,            0, POISON,       100, 20
 	move CRABHAMMER,   NO_ADDITIONAL_EFFECT,        90, WATER,         95, 10 ; high critical hit ratio
-	move EXPLOSION,    BIG_RECOIL_EFFECT,          140, ROCK,         100,  5
+	move EXPLOSION,    EXPLODE_RECOIL_EFFECT,      140, ROCK,         100,  5
 	move FURY_SWIPES,  NO_ADDITIONAL_EFFECT,        40, GROUND,       100, 15 ; -> DUST CLAW
 	move BONEMERANG,   BONEMERANG_EFFECT,           55, GROUND,        90, 10 ; hits twice, 30% chance to lower speed of opponent
 	move REST,         HEAL_EFFECT,                  0, PSYCHIC_TYPE, 100, 10

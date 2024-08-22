@@ -21,6 +21,10 @@ PalletTown_ScriptPointers:
 PalletTownDefaultScript:
 	CheckEvent EVENT_FOLLOWED_OAK_INTO_LAB
 	ret nz
+IF DEF(_DEBUG)
+	call DebugPressedOrHeldB
+	ret nz
+ENDC
 	ld a, [wYCoord]
 	cp 1 ; is player near north exit?
 	ret nz

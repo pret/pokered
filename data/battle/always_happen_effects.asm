@@ -12,4 +12,5 @@ AlwaysHappenSideEffects:
 	db TWINEEDLE_EFFECT
 	db ATTACK_UP_SIDE_EFFECT ; PureRGBnote: ADDED:
 	db BONEMERANG_EFFECT ; PureRGBnote: ADDED:
+	db EXPLODE_RECOIL_EFFECT
 	db -1 ; end

@@ -71,6 +71,8 @@ GetMoveRemapData2:
 RemappableMoves::
 	db SING, -1, -2, 1
 	db DOUBLESLAP, -1, -2, 0
+	db EXPLOSION, -1, -2, 2
+	db SELFDESTRUCT, -1, -2, 2
 	db POISON_STING, BEEDRILL, 45, 0
 	db TWINEEDLE, BEEDRILL, 65, 0 
 	db ACID, ARBOK, 100, 0
@@ -92,6 +94,7 @@ RemappableMoves::
 ModifierFuncs:
 	dw DoubleSlapModifier
 	dw SingModifier
+	dw ExplosionSelfdestructModifier
 
 CheckIfAsleep::
 	ldh a, [hWhoseTurn]
@@ -140,4 +143,48 @@ SingModifier::
 	ld [de], a ; sing gets 85% accuracy for jigglypuff/wigglytuff if they're past level 20
 	ret
 
-
+ExplosionSelfdestructModifier:
+	xor a
+	ld [wAnimationType], a
+	ldh a, [hWhoseTurn]
+	and a
+	jr z, .playerTurn
+.enemyTurn
+	ld d, 3
+	callfar FarCheckIfEnemyHPBelowFraction
+	jr .doneHPCheck
+.playerTurn
+	ld d, 3
+	callfar FarCheckIfPlayerHPBelowFraction
+.doneHPCheck
+	ret nc
+	ldh a, [hWhoseTurn]
+	and a
+	ld hl, wPlayerMovePower
+	ld bc, wPlayerMoveEffect
+	jr z, .gotTurn
+	ld hl, wEnemyMovePower
+	ld bc, wEnemyMoveEffect
+.gotTurn
+	; if less then 1/3 hp, explosion/selfdestruct do their original effect and much more power
+	ld [hl], 250
+	ld a, EXPLODE_EFFECT
+	ld [bc], a
+	; the below code was originally in ExplodeEffect but was moved because it looks nicer to happen instantly on using the move
+	ld hl, wBattleMonHP
+	ld de, wPlayerBattleStatus2
+	ldh a, [hWhoseTurn]
+	and a
+	jr z, .faintUser
+	ld hl, wEnemyMonHP
+	ld de, wEnemyBattleStatus2
+.faintUser
+	xor a
+	ld [hli], a ; set the mon's HP to 0
+	ld [hli], a
+	inc hl
+	ld [hl], a ; set mon's status to 0
+	ld a, [de]
+	res SEEDED, a ; clear mon's leech seed status
+	ld [de], a
+	jpfar DrawHUDsAndHPBars

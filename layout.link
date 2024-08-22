@@ -174,7 +174,6 @@ ROMX $2A
 	"Text 11"
 ROMX $2B
 	"Pokédex Text"
-	"Movedex Text 2"
 ROMX $2C
 	"Move Names"
 	"Wild Mons"

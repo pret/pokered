@@ -716,15 +716,14 @@ HandlePoisonBurnLeechSeed_IncreaseEnemyHP:
 	pop hl
 	ret
 
-UpdateCurMonHPBar:
+UpdateCurMonHPBar::
 	hlcoord 10, 9    ; tile pointer to player HP bar
 	ldh a, [hWhoseTurn]
 	and a
-	ld a, $1
 	jr z, .playersTurn
 	hlcoord 2, 2    ; tile pointer to enemy HP bar
-	xor a
 .playersTurn
+	xor 1
 	push bc
 	ld [wHPBarType], a
 	predef UpdateHPBar2
@@ -3357,9 +3356,14 @@ handleIfPlayerMoveMissed:
 	and a
 	jr z, getPlayerAnimationType
 	ld a, [wPlayerMoveEffect]
-	sub EXPLODE_EFFECT
-	jr z, playPlayerMoveAnimation ; don't play any animation if the move missed, unless it was EXPLODE_EFFECT
+	cp EXPLODE_EFFECT ; don't play any animation if the move missed, unless it was EXPLODE_EFFECT
+	jr z, .explodeAnimation
+	cp EXPLODE_RECOIL_EFFECT
+	jr z, .explodeAnimation
 	jr playerCheckIfFlyOrChargeEffect
+.explodeAnimation
+	xor a
+	jr playPlayerMoveAnimation
 getPlayerAnimationType:
 	ld a, [wPlayerMoveEffect]
 	and a
@@ -3430,6 +3434,8 @@ MirrorMoveCheck:
 	call PrintMoveFailureText
 	ld a, [wPlayerMoveEffect]
 	cp EXPLODE_EFFECT ; even if Explosion or Selfdestruct missed, its effect still needs to be activated
+	jr z, .notDone
+	cp EXPLODE_RECOIL_EFFECT
 	jr z, .notDone
 	jp ExecutePlayerMoveDone ; otherwise, we're done if the move missed
 .moveDidNotMiss
@@ -6055,6 +6061,8 @@ handleIfEnemyMoveMissed:
 	ld a, [wEnemyMoveEffect]
 	cp EXPLODE_EFFECT
 	jr z, handleExplosionMiss
+	cp EXPLODE_RECOIL_EFFECT
+	jr z, handleExplosionMiss
 	jr EnemyCheckIfFlyOrChargeEffect
 .moveDidNotMiss
 	call SwapPlayerAndEnemyLevels
@@ -6133,6 +6141,8 @@ EnemyCheckIfMirrorMoveEffect:
 	call PrintMoveFailureText
 	ld a, [wEnemyMoveEffect]
 	cp EXPLODE_EFFECT
+	jr z, .handleExplosionMiss
+	cp EXPLODE_RECOIL_EFFECT
 	jr z, .handleExplosionMiss
 	jp ExecuteEnemyMoveDone
 .moveDidNotMiss
@@ -6703,6 +6713,12 @@ LoadEnemyMonData:
 	dec de
 	dec de
 	dec de
+IF DEF(_DEBUG)
+	; makes sure only the default moves are used on route 1 for debug purposes
+	ld a, [wCurMap]
+	cp ROUTE_1
+	jr z, .loadMovePPs
+ENDC
 	xor a
 	ld [wLearningMovesFromDayCare], a
 	predef WriteMonMoves ; get moves based on current level
@@ -7345,8 +7361,7 @@ PlayMoveAnimation:
 	vc_hook_red Reduce_move_anim_flashing_Psychic
 ;;;;;;;;;; shinpokerednote: gbcnote: color code from yellow
 	predef MoveAnimation
-	callfar Func_78e98
-	ret
+	jpfar Func_78e98
 ;;;;;;;;;;
 
 InitBattle::

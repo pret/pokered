@@ -256,6 +256,7 @@ PotentiallyPointlessMoveEffectsJumpTable:
 	dbw GROWTH_EFFECT, CheckFullHealth
 	dbw DEFENSE_CURL_EFFECT, CheckDefenseCurlUp
 	dbw ACID_ARMOR_EFFECT, CheckBothReflectLightScreenUp
+	db -1
 
 StatusAilmentMoveEffects:
 	db SLEEP_EFFECT
@@ -1486,19 +1487,6 @@ AIUseDireHit:
 	and a
 	ret
 
-; PureRGBnote: ADDED: if enemy HP is below a 1/[wUnusedC000], store 1 in wUnusedC000.
-; used for checking whether the hyper ball item should guarantee success on use
-AICheckIfHPBelowFractionStore::
-	ld a, [wUnusedC000]
-	call AICheckIfHPBelowFraction
-	jr c, .below
-	xor a
-	jr .done
-.below
-	ld a, 1
-.done
-	ld [wUnusedC000], a 
-	ret
 
 AICheckIfHPBelowFractionWrapped:
 	push hl
@@ -1510,10 +1498,26 @@ AICheckIfHPBelowFractionWrapped:
 	pop hl
 	ret
 
+
+FarCheckIfPlayerHPBelowFraction::
+	ld a, d
+	; fall through
+CheckIfPlayerHPBelowFraction::
+	ld hl, wBattleMonMaxHP
+	ld de, wBattleMonHP + 1
+	jr CheckIfHPBelowFractionCommon
+
+; PureRGBnote: ADDED: if enemy HP is below a 1/[wUnusedC000], store 1 in wUnusedC000.
+; used for checking whether the hyper ball item should guarantee success on use
+FarCheckIfEnemyHPBelowFraction::
+	ld a, d
+	; fall through
 AICheckIfHPBelowFraction:
+	ld hl, wEnemyMonMaxHP
+	ld de, wEnemyMonHP + 1
+CheckIfHPBelowFractionCommon:
 ; return carry if enemy trainer's current HP is below 1 / a of the maximum
 	ldh [hDivisor], a
-	ld hl, wEnemyMonMaxHP
 	ld a, [hli]
 	ldh [hDividend], a
 	ld a, [hl]
@@ -1524,7 +1528,8 @@ AICheckIfHPBelowFraction:
 	ld c, a
 	ldh a, [hQuotient + 2]
 	ld b, a
-	ld hl, wEnemyMonHP + 1
+	ld h, d
+	ld l, e ; hl = MonHP + 1
 	ld a, [hld]
 	ld e, a
 	ld a, [hl]

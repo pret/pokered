@@ -426,6 +426,13 @@ TextCommand_BCD::
 	pop hl
 	jr NextTextCommand
 
+TextCommand_JUMP::
+; jump to a different address in the same text bank so we can reuse text
+	pop hl
+	hl_deref
+	push hl
+	jr TextCommand_START
+
 TextCommand_MOVE::
 ; move to a new tile
 	pop hl
@@ -656,4 +663,5 @@ ENDC
 	dw TextCommand_SOUND         ; TX_SOUND_GET_ITEM_1 (also handles other TX_SOUND_* commands)
 	dw TextCommand_DOTS          ; TX_DOTS
 	dw TextCommand_WAIT_BUTTON   ; TX_WAIT_BUTTON
+	dw TextCommand_JUMP          ; TX_JUMP
 	; greater TX_* constants are handled directly by NextTextCommand

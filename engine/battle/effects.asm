@@ -172,24 +172,7 @@ BadlyPoisonedText:
 DrainHPEffect:
 	jpfar DrainHPEffect_
 
-;ExplodeEffect:
-;	ld hl, wBattleMonHP
-;	ld de, wPlayerBattleStatus2
-;	ldh a, [hWhoseTurn]
-;	and a
-;	jr z, .faintUser
-;	ld hl, wEnemyMonHP
-;	ld de, wEnemyBattleStatus2
-;.faintUser
-;	xor a
-;	ld [hli], a ; set the mon's HP to 0
-;	ld [hli], a
-;	inc hl
-;	ld [hl], a ; set mon's status to 0
-;	ld a, [de]
-;	res SEEDED, a ; clear mon's leech seed status
-;	ld [de], a
-;	ret
+; ExplodeEffect: ; PureRGBnote: MOVED: handled within remap_move_data.asm
 
 FreezeBurnParalyzeEffect:
 	xor a
@@ -1342,7 +1325,10 @@ RecoilEffect:
 	jpfar DefaultRecoilEffect_
 
 BigRecoilEffect:
-	jpfar BigRecoilEffect_ ; PureRGBnote: ADDED: recoil effect that does 1/2 of the damage done to the user.
+	jpfar BigRecoilEffect_ ; PureRGBnote: ADDED: recoil effect that does 1/2 of the damage done to the user
+
+ExplodeRecoilEffect:
+	jpfar ExplodeRecoilEffect_ ; PureRGBnote: ADDED: same as bigrecoileffect, but if it misses does 1/4 the health of the user in recoil still
 
 ConfusionSideEffect:
 	call BattleRandom

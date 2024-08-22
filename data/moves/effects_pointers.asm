@@ -7,7 +7,7 @@ MoveEffectPointerTable:
 	dw FreezeBurnParalyzeEffect  ; BURN_SIDE_EFFECT1
 	dw FreezeBurnParalyzeEffect  ; FREEZE_SIDE_EFFECT
 	dw FreezeBurnParalyzeEffect  ; PARALYZE_SIDE_EFFECT1
-	dw NULL                      ; EXPLODE_EFFECT ; unused
+	dw DoRet                     ; EXPLODE_EFFECT
 	dw DrainHPEffect             ; DREAM_EATER_EFFECT
 	dw NULL                      ; MIRROR_MOVE_EFFECT
 	dw StatModifierUpEffect      ; ATTACK_UP1_EFFECT
@@ -90,5 +90,6 @@ MoveEffectPointerTable:
 	dw WithdrawEffect            ; WITHDRAW_EFFECT
 	dw GrowthEffect              ; GROWTH_EFFECT
 	dw DefenseCurlEffect         ; DEFENSE_CURL_EFFECT
-	dw ReflectLightScreenEffect  ; ACID_ARMOR
+	dw ReflectLightScreenEffect  ; ACID_ARMOR_EFFECT
+	dw ExplodeRecoilEffect       ; EXPLODE_RECOIL_EFFECT
 	assert_table_length NUM_MOVE_EFFECTS

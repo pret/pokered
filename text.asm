@@ -303,7 +303,3 @@ INCLUDE "data/moves/names.asm"
 SECTION "Movedex Text", ROMX
 
 INCLUDE "data/moves/movedex_text.asm"
-
-SECTION "Movedex Text 2", ROMX
-
-INCLUDE "data/moves/movedex_text2.asm"
