@@ -1394,8 +1394,8 @@ ConfusionEffectFailed:
 	rst _DelayFrames
 	jp ConditionalPrintButItFailed
 
-BurnEffect:
-	jpfar BurnEffect_
+FirewallEffect:
+	jpfar FirewallEffect_
 
 ParalyzeEffect:
 	jpfar ParalyzeEffect_

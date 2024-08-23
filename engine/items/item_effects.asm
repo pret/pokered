@@ -1108,42 +1108,13 @@ ItemUseMedicine:
 	and c ; does the pokemon have a status ailment the item can cure?
 	jp z, .healingItemNoEffect
 ; if the pokemon has a status the item can heal
-;;;;;;;;;; PureRGBnote: ADDED: code that helps make the trainer AI not predict healing statuses perfectly and reapplying the same turn.
-	ld a, 1
-	ld [wAIMoveSpamAvoider], a
-	ld a, [wBattleMonStatus]
-	ld [wAITargetMonStatus], a
-;;;;;;;;;;
 	xor a
 	ld [hl], a ; remove the status ailment in the party data
 	ld a, b
 	ld [wPartyMenuTypeOrMessageID], a ; the message to display for the item used
 	ld a, [wPlayerMonNumber]
 	cp d ; is pokemon the item was used on active in battle?
-	jp nz, .doneHealing
-; if it is active in battle
-;;;;;;;;;; shinpokerednote: FIXED: reset burn and paralyze stat drops on healing
-	push hl
-	ld hl, wPlayerBattleStatus3
-	res BADLY_POISONED, [hl] ; heal Toxic status
-	ldh a, [hWhoseTurn]
-	push af
-	xor a	;forcibly set it to the player's turn
-	ldh [hWhoseTurn], a
-	callfar UndoBurnParStats	;undo brn/par stat changes
-	pop af
-	ldh [hWhoseTurn], a
-	pop hl
-	xor a
-	ld [wBattleMonStatus], a ; remove the status ailment in the in-battle pokemon data
-	ld [wPlayerToxicCounter], a	;clear toxic counter
-;;;;;;;;;;
-	ld bc, wPartyMon1Stats - wPartyMon1Status
-	add hl, bc ; hl now points to party stats
-	ld de, wBattleMonStats
-	ld bc, NUM_STATS * 2
-	;rst _CopyData ; copy party stats to in-battle stat data
-	;predef DoubleOrHalveSelectedStats ; shinpokerednote: FIXED: these function calls are redundant after the above code block
+	call z, ClearParaBurnBattleFlagsOnHeal ; if it is active in battle clear more flags
 	jp .doneHealing
 .healHP
 	inc hl ; hl = address of current HP
@@ -1388,30 +1359,20 @@ ItemUseMedicine:
 	jr nz, .updateInBattleData
 	ld bc, wPartyMon1Status - (wPartyMon1MaxHP + 1)
 	add hl, bc
-;;;;;;;;;; shinpokerednote: FIXED: reset burn and paralyze stat drops on healing via full restore
-	ld a, [wIsInBattle]
-	and a
-	jr z, .clearParBrn	;do not adjust the stats if not currently in battle
-	push hl
-	push de
-	ldh a, [hWhoseTurn]
-	push af
-	xor a	;forcibly set it to the player's turn
-	ldh [hWhoseTurn], a
-	callfar UndoBurnParStats	;undo brn/par stat changes
-	pop af
-	ldh [hWhoseTurn], a
-	pop de
-	pop hl
-.clearParBrn
-;;;;;;;;;;
 	xor a
 	ld [hl], a ; remove the status ailment in the party data
-	ld [wPlayerToxicCounter], a	; shinpokerednote: FIXED: clear toxic counter
+	ld h, d
+	ld l, e
+	pop de
+	ld a, [wPlayerMonNumber]
+	cp d ; is pokemon the item was used on active in battle?
+	call z, ClearParaBurnBattleFlagsOnHeal ; clear additional flags if so
+	jr .updateInBattleData2
 .updateInBattleData
 	ld h, d
 	ld l, e
 	pop de
+.updateInBattleData2
 	ld a, [wPlayerMonNumber]
 	cp d ; is pokemon the item was used on active in battle?
 	jr nz, .calculateHPBarCoords
@@ -1425,10 +1386,6 @@ ItemUseMedicine:
 	jr nz, .calculateHPBarCoords
 	xor a
 	ld [wBattleMonStatus], a ; remove the status ailment in the in-battle pokemon data
-;;;;;;;;;; PureRGBnote: ADDED: if we healed a status ailment with full restore, make sure the AI opponent doesn't instantly see this cure
-	inc a
-	ld [wAIMoveSpamAvoider], a ; load this value so the AI doesn't spam status moves right after you heal a status
-;;;;;;;;;;
 .calculateHPBarCoords
 	hlcoord 4, -1
 	ld bc, 2 * SCREEN_WIDTH
@@ -3595,3 +3552,38 @@ UseTopSecretKey:
 TopSecretKeyText:
 	text_far _TopSecretKeyText
 	text_end
+
+ClearParaBurnBattleFlagsOnHeal:
+;;;;;;;;;; shinpokerednote: FIXED: reset burn and paralyze stat drops on healing via full restore
+;;;;;;;;;; PureRGBnote: ADDED: code that helps make the trainer AI not predict healing statuses perfectly and reapplying the same turn.
+	ld a, [wIsInBattle]
+	and a
+	ret z
+	push hl
+	push de
+	; store active mon's status before being healed for AI purposes
+	ld a, [wBattleMonStatus]
+	ld [wAITargetMonStatus], a
+	; reset toxic and "extra firewall damage" flags in active mon status flags
+	ld hl, wPlayerBattleStatus3
+	res BADLY_POISONED, [hl]
+	res BOOSTED_FIREWALL, [hl]
+	ldh a, [hWhoseTurn]
+	push af
+	xor a	;forcibly set it to the player's turn
+	ldh [hWhoseTurn], a
+	callfar UndoBurnParStats	;undo brn/par stat changes
+	pop af
+	ldh [hWhoseTurn], a
+	; remove the status ailment in the in-battle pokemon data (have to do this after undoburnparstats)
+	xor a
+	ld [wBattleMonStatus], a 
+	ld [wPlayerToxicCounter], a	; shinpokerednote: FIXED: clear toxic counter
+	inc a
+	ld [wAIMoveSpamAvoider], a
+	pop de
+	pop hl
+	ret
+;;;;;;;;;;
+
+	

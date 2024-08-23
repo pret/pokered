@@ -73,6 +73,7 @@ RemappableMoves::
 	db DOUBLESLAP, -1, -2, 0
 	db EXPLOSION, -1, -2, 2
 	db SELFDESTRUCT, -1, -2, 2
+	db KINESIS, -1, -2, 3 ; FIREWALL
 	db POISON_STING, BEEDRILL, 45, 0
 	db TWINEEDLE, BEEDRILL, 65, 0 
 	db ACID, ARBOK, 100, 0
@@ -95,6 +96,7 @@ ModifierFuncs:
 	dw DoubleSlapModifier
 	dw SingModifier
 	dw ExplosionSelfdestructModifier
+	dw FirewallModifier
 
 CheckIfAsleep::
 	ldh a, [hWhoseTurn]
@@ -188,3 +190,40 @@ ExplosionSelfdestructModifier:
 	res SEEDED, a ; clear mon's leech seed status
 	ld [de], a
 	jpfar DrawHUDsAndHPBars
+
+FirewallModifier:
+	ldh a, [hWhoseTurn]
+	and a
+	ld hl, wEnemyBattleStatus3
+	ld de, wEnemyMonStatus
+	jr z, .gotTurn
+	ld hl, wPlayerBattleStatus3
+	ld de, wBattleMonStatus
+.gotTurn
+	ld a, [de]
+	bit BRN, a
+	ret z ; no power boosts if opponent not already burned
+	push hl
+	call GetMoveRemapData
+	ld a, e
+	cp 50 ; is pokemon at least level 50
+	jr nc, .stronger ; if so the move will boost higher in power on burned mons
+.weaker
+	pop hl
+	bit BOOSTED_FIREWALL, [hl]
+	ld a, 50
+	jr z, .loadPower
+	ld a, 80
+	jr .loadPower
+.stronger
+	pop hl
+	bit BOOSTED_FIREWALL, [hl]
+	ld a, 80
+	jr z, .loadPower
+	ld a, 140
+.loadPower
+	push af
+	call GetMoveRemapData2
+	pop af
+	ld [bc], a
+	ret

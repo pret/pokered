@@ -1427,11 +1427,24 @@ _KinesisDexEntry::
 	next "scorches the foe."
 
 	bage "Causes burn if"
-	next "it works."
+	next "it hits. Can't"
+	next "burn FIRE-types."
 
-	bage "Doesn't work on"
-	next "FIRE-type"
-	next "#MON"
+	bage "Each time the move"
+	next "hits a burned foe,"
+	next "the fire wall gets"
+
+	bage "larger; move power"
+	next "increases by 30"
+	next "points each hit,"
+
+	bage "to max 80 power."
+	next "If the user is at"
+	next "least level 50,"
+
+	bage "power raises by 60"
+	next "points each hit to"
+	next "maximum 140 power"
 	dex
 
 _SoftboiledDexEntry::

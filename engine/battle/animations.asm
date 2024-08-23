@@ -195,6 +195,7 @@ PlayAnimation:
 	xor a
 	ldh [hROMBankTemp], a ; it looks like nothing reads this
 	ld [wSubAnimTransform], a
+	ld [wSubAnimStepCounter], a
 	ld a, [wAnimationID] ; get animation number
 	dec a
 	ld l, a
@@ -295,6 +296,9 @@ PlayAnimation:
 	vc_hook_blue Stop_reducing_move_anim_flashing_Bubblebeam_Hyper_Beam_Blizzard
 	pop hl
 	vc_hook Stop_reducing_move_anim_flashing_Guillotine
+	ld a, [wSubAnimStepCounter]
+	inc a
+	ld [wSubAnimStepCounter], a
 	jr .animationLoop
 
 LoadSubanimation:
@@ -945,6 +949,46 @@ FlashScreenEveryFourFrameBlocks:
 	call z, AnimationFlashScreen
 	ret
 
+FirewallSpecialEffect:
+	ldh a, [hWhoseTurn]
+	and a
+	ld hl, wEnemyBattleStatus3
+	ld de, wEnemyMonStatus
+	jr z, .gotTurn
+	ld hl, wPlayerBattleStatus3
+	ld de, wBattleMonStatus
+.gotTurn
+	ld a, [de]
+	bit BRN, a
+	ret z
+	bit BOOSTED_FIREWALL, [hl]
+	jr nz, .endOfAnimCheck
+.notEndAnim
+	ld hl, AnimationLightScreenPalette
+	ld a, [wSubAnimCounter]
+	and 11
+	ret nz
+	call hl_caller
+	rst _DelayFrame
+	call AnimationResetScreenPalette
+	rst _DelayFrame
+	ret
+.endOfAnimCheck
+	ld a, [wSubAnimCounter]
+	cp 1
+	jr nz, .notEndAnim
+	ld a, [wSubAnimStepCounter]
+	cp 3
+	jr nz, .notEndAnim
+	ld a, $20
+	ld [wFrequencyModifier], a
+	ld a, $00
+	ld [wTempoModifier], a
+	ld a, SFX_BATTLE_26
+	rst _PlaySound
+	ld hl, AnimationSpiralFireInwardFast
+	jp CallWithTurnFlipped
+
 ; used for Explosion and Selfdestruct
 DoExplodeSpecialEffects:
 	ldh a, [hWhoseTurn]
@@ -1096,13 +1140,15 @@ TailWhipAnimationUnused:
 	ld a, 1
 	ld [wSubAnimCounter], a
 	ld c, 20
-	jp DelayFrames
+	rst _DelayFrames
+	ret
 
 INCLUDE "data/battle_anims/special_effect_pointers.asm"
 
 AnimationDelay10:
 	ld c, 10
-	jp DelayFrames
+	rst _DelayFrames
+	ret
 
 ; calls a function with the turn flipped from player to enemy or vice versa
 ; input - hl - address of function to call
@@ -1236,9 +1282,9 @@ AnimationDarkenMonPalette:
 	lb bc, $f9, $f4
 	jr SetAnimationBGPalette
 
-;AnimationUnusedPalette1:
-;	lb bc, $fe, $f8
-;	jr SetAnimationBGPalette
+AnimationUnusedPalette1:
+	lb bc, $fe, $f8
+	jr SetAnimationBGPalette
 
 ;AnimationUnusedPalette2:
 ;	lb bc, $ff, $ff
@@ -1756,15 +1802,28 @@ AnimationResetMonPosition:
 	jp AnimationShowMonPic
 
 ;;;;;;;;;; PureRGBnote: ADDED: new animation used for Horn Drill, Drill Peck, and when using a Master Ball
+AnimationSpiralFireInwardFast::
+	lb de, $72, 1
+	ld a, 1
+	ld [wUnusedC000], a
+	ld c, a
+	call AnimationSpiralBallsInward
+	xor a
+	ld [wUnusedC000], a
+	ret
+
+	
 AnimationSpiralBallsInwardFast:
 	ld d, $50 ; tile number
 AnimationSpiralBallsInwardFastDefault:
 	ld e, 2 ; delay
+	ld c, 0
 	jr AnimationSpiralBallsInward
 ;;;;;;;;;;
 
 AnimationSpiralBallsInwardDefault:
 	lb de, $7a, 5 ; tile number, delay
+	ld c, 0
 ; Creates an effect that looks like energy balls spiralling into the
 ; player mon's sprite.  Used in Focus Energy, for example.
 ; PureRGBnote: CHANGED: modified this function so the delay is customizable, and it can repeatedly play a sound effect while the animation is happening.
@@ -1796,9 +1855,9 @@ AnimationSpiralBallsInward:
 	ld [wSpiralBallsBaseY], a
 	ld [wSpiralBallsBaseX], a
 .next
+	ld a, c ; which tileset to use
 	; d still has the tile number stored
 	ld c, 3 ; number of balls
-	xor a
 	call InitMultipleObjectsOAM
 	ld hl, SpiralBallAnimationCoordinates
 .loop

@@ -1413,10 +1413,10 @@ wPlayerBattleStatus1:: db
 ; bit 0 - X Accuracy effect 
 ; bit 1 - protected by "mist"
 ; bit 2 - focus energy effect
-; bit 3 - unused
+; bit 3 - immune to psychic moves (triggered by haze)
 ; bit 4 - has a substitute
 ; bit 5 - need to recharge
-; bit 6 - rage (PureRGBnote: CHANGED: now never set)
+; bit 6 - immune to normal/fighting moves (triggered by mist)
 ; bit 7 - leech seeded
 wPlayerBattleStatus2:: db
 
@@ -1425,6 +1425,7 @@ wPlayerBattleStatus2:: db
 ; bit 2 - reflect
 ; bit 3 - transformed
 ; bit 4 - PureRGBnote: ADDED: already acted this turn (used when an enemy switches or uses an item)
+; bit 5 - has been hit by firewall already once while burned
 wPlayerBattleStatus3:: db
 
 ; always 0
@@ -1572,7 +1573,7 @@ UNION
 
 w2CharStringBuffer:: ds 3 ; don't use this buffer during attack animations
 NEXTU
-ds 1
+wSubAnimStepCounter:: db
 ; the address _of the address_ of the current subanimation entry
 wSubAnimAddrPtr:: dw
 ENDU

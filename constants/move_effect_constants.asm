@@ -34,7 +34,7 @@
 	const THRASH_PETAL_DANCE_EFFECT  ; $1B
 	const TELEPORT_EFFECT            ; $1C
 	const TWO_TO_FIVE_ATTACKS_EFFECT ; $1D
-	const BURN_EFFECT                ; $1E ; PureRGBnote: ADDED: new effect, burns the opponent, used in FIREWALL (kinesis)
+	const FIREWALL_EFFECT            ; $1E ; PureRGBnote: ADDED: new effect, burns the opponent, used in FIREWALL (kinesis)
 	const FLINCH_SIDE_EFFECT1        ; $1F
 	const SLEEP_EFFECT               ; $20
 	const POISON_SIDE_EFFECT2        ; $21

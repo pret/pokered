@@ -167,6 +167,8 @@ AIMoveChoiceModification1:
 	jp z, .checkAsleep
 	cp OHKO_EFFECT
 	jr z, .ohko
+	cp FIREWALL_EFFECT
+	jp z, .firewall
 	ld a, [wEnemyMovePower]
 	and a
 	jr nz, .nextMove
@@ -205,15 +207,15 @@ AIMoveChoiceModification1:
 					   ; even if the player heals the status or switches out that turn
 	ld a, [wAIMoveSpamAvoider] ; set if we switched or healed this turn
 	cp 2 ; set to 2 if we switched
-	jp z, .nextMove ; if the AI thinks the player DOESNT have a status before they switch, we should avoid discouraging status moves
+	jr z, .nextMove ; if the AI thinks the player DOESNT have a status before they switch, we should avoid discouraging status moves
 	ld a, [wBattleMonStatus]
 	and a
-	jp z, .nextMove ; no need to discourage status moves if the player doesn't have a status
+	jr z, .nextMove ; no need to discourage status moves if the player doesn't have a status
 .discourage
 	ld a, [hl]
 	add 5 ; heavily discourage move
 	ld [hl], a
-	jr .nextMove
+	jp .nextMove
 .ohko
 	call WillOHKOMoveAlwaysFail
 	jp nc, .nextMove
@@ -241,6 +243,25 @@ AIMoveChoiceModification1:
 	jp nz, .nextMove
 	; heavily discourage, if the player isn't asleep avoid using dream eater
 	jr .discourage
+.firewall
+	; discourage firewall if opponent has a status that isn't burned since it will stay at 20 power in that case
+	ld a, [wAITargetMonStatus]
+	and a
+	jr nz, .aiThinksStatus
+	; ai doesn't think opponent has status on switching/healing
+	ld a, [wAIMoveSpamAvoider] ; set if we switched or healed this turn
+	cp 2 ; set to 2 if we switched
+	jr z, .firewallNext ; if we switched and opponent thinks no status, don't discourage firewall 
+	ld a, [wBattleMonStatus]
+	and a
+	jr z, .firewallNext ; if no status, don't discourage
+.aiThinksStatus
+	bit BRN, a
+	jr z, .discourage
+	; fall through
+.firewallNext
+	jp .nextMove
+
 
 PotentiallyPointlessMoveEffectsJumpTable:
 	dbw TELEPORT_EFFECT, CheckTeleportUsable
@@ -262,7 +283,6 @@ StatusAilmentMoveEffects:
 	db SLEEP_EFFECT
 	db POISON_EFFECT
 	db PARALYZE_EFFECT
-	db BURN_EFFECT
 	db -1 ; end
 
 CheckTeleportUsable:
@@ -402,9 +422,6 @@ CheckStatusImmunity:
 	jr z, .getMonTypes
 	cp PARALYZE_EFFECT
 	jr z, .checkParalyze
-	cp BURN_EFFECT
-	ld b, FIRE
-	jr z, .getMonTypes
 	jr .done
 .checkParalyze
 	ld a, [wEnemyMoveType]
@@ -934,14 +951,11 @@ AIMoveChoiceModification4:
 	; only use teleport to heal if health it less than 1/2
 	jr .checkWorthHealing
 
-
-
-
 Modifier4PreferredMoves:
 	db SLEEP_EFFECT
 	db POISON_EFFECT
 	db PARALYZE_EFFECT
-	db BURN_EFFECT
+	db FIREWALL_EFFECT ; todo: remove?
 	db CONFUSION_EFFECT
 	db -1 ; end
 

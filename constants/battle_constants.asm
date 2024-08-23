@@ -105,3 +105,4 @@ DEF SPDSPCDV_TRAINER EQU $88
 	const HAS_REFLECT_UP      ; 2
 	const TRANSFORMED         ; 3
 	const ALREADY_ACTED		  ; 4 ; PureRGBnote: ADDED: marker for whether an opponent used an item or switched pokemon at the start of a turn
+	const BOOSTED_FIREWALL    ; 5

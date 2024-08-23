@@ -213,9 +213,24 @@ ENDC
 	dec de
 	dec de
 	dec de
+IF DEF(_DEBUG)
+	ld a, [wMonDataLocation]
+	cp ENEMY_PARTY_DATA
+	jr nz, .notDebugOpponent
+	ld a, [wCurOpponent]
+	cp OPP_JR_TRAINER_M
+	jr nz, .notDebugOpponent
+	ld a, [wTrainerNo]
+	cp 5
+	jr nz, .notDebugOpponent
+	; in debug mode against a specific trainer don't replace moves so they have the mon's default moves
+	jr .skipWriteMoves
+.notDebugOpponent
+ENDC
 	xor a
 	ld [wLearningMovesFromDayCare], a
 	predef WriteMonMoves
+.skipWriteMoves
 	pop de
 	ld a, [wPlayerID]  ; set trainer ID to player ID
 	inc de
