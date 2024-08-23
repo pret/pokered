@@ -174,6 +174,7 @@ ROMX $2A
 	"Text 11"
 ROMX $2B
 	"Pokédex Text"
+	"Move Animation Tiles"
 ROMX $2C
 	"Move Names"
 	"Wild Mons"

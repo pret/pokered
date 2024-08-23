@@ -881,4 +881,12 @@ Trade_ShowAnimation:
 	ld [wAnimationID], a
 	xor a
 	ld [wAnimationType], a
-	predef_jump MoveAnimation
+	ld a, [wCurMap]
+	push af
+	; we will load animation tiles differently based on this setting
+	ld a, TRADE_CENTER
+	ld [wCurMap], a
+	predef MoveAnimation
+	pop af
+	ld [wCurMap], a
+	ret

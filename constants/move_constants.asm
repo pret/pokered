@@ -216,5 +216,6 @@ DEF NUM_ATTACKS EQU const_value - 1
 	const BAIT_ANIM ; throw bait
 	const FLY_ANIM_PART1
 	const FIRE_PILLAR_ANIM
+	const RAGE_ENEMY_ANIM
 
 DEF NUM_ATTACK_ANIMS EQU const_value - 1

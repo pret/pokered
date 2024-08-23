@@ -39,7 +39,7 @@ MoveSoundTable:
 	db SFX_SUPER_EFFECTIVE,    $00, $a0 ; TAKE_DOWN
 	db SFX_BATTLE_22,          $11, $c0 ; THRASH
 	db SFX_SUPER_EFFECTIVE,    $20, $c0 ; DOUBLE_EDGE
-	db SFX_BATTLE_21,          $00, $80 ; TAIL_WHIP
+	db SFX_BATTLE_32,          $90, $ff ; TAIL_WHIP ; but actually used for first part of RAGE
 	db SFX_BATTLE_1B,          $00, $80 ; POISON_STING
 	db SFX_BATTLE_1B,          $20, $c0 ; TWINEEDLE
 	db SFX_BATTLE_19,          $00, $80 ; PIN_MISSILE
@@ -54,7 +54,7 @@ MoveSoundTable:
 	db SFX_BATTLE_2A,          $80, $c0 ; ACID
 	db SFX_BATTLE_19,          $10, $a0 ; EMBER
 	db SFX_BATTLE_19,          $21, $e0 ; FLAMETHROWER
-	db SFX_BATTLE_29,          $00, $80 ; MIST
+	db SFX_BATTLE_25,          $28, $ff ; MIST ; but actually used for thrash/petal dance charging animation
 	db SFX_BATTLE_24,          $20, $60 ; WATER_GUN
 	db SFX_BATTLE_2A,          $00, $80 ; HYDRO_PUMP
 	db SFX_BATTLE_2C,          $00, $80 ; SURF
@@ -127,7 +127,7 @@ MoveSoundTable:
 	db SFX_BATTLE_2A,          $20, $20 ; SLUDGE
 	db SFX_BATTLE_32,          $00, $80 ; BONE_CLUB
 	db SFX_BATTLE_29,          $1f, $20 ; FIRE_BLAST
-	db SFX_BATTLE_25,          $2f, $80 ; WATERFALL
+	db SFX_BATTLE_25,          $2f, $80 ; WATERFALL ; unused sfx
 	db SFX_BATTLE_0F,          $1f, $ff ; CLAMP
 	db SFX_BATTLE_2B,          $1f, $60 ; SWIFT
 	db SFX_BATTLE_26,          $1e, $20 ; SKULL_BASH

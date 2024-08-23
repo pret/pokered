@@ -157,6 +157,10 @@ DEF FIRST_SE_ID EQU const_value
 	const SUBANIM_0_SPARKLES_FALLING
 	const SUBANIM_0_CIRCLE_SPLITTING
 	const SUBANIM_0_SOUND_WAVE_SHOT
+	const SUBANIM_2_BONE_TOSS
+	const SUBANIM_2_BONE_RECOVER
+	const SUBANIM_2_ANGER_SYMBOL
+	const SUBANIM_2_ANGER_SYMBOL_ENEMY
 ;;;;;;;;;;
 DEF NUM_SUBANIMS EQU const_value
 
@@ -297,6 +301,9 @@ DEF NUM_SUBANIMS EQU const_value
 	const FRAMEBLOCK_7A
 	const FRAMEBLOCK_7B
 	const FRAMEBLOCK_7C
+	const FRAMEBLOCK_7D
+	const FRAMEBLOCK_7E
+	const FRAMEBLOCK_7F
 DEF NUM_FRAMEBLOCKS EQU const_value
 
 ; base coordinates that are part of subanimations

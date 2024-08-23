@@ -394,32 +394,33 @@ LoadMoveAnimationTiles:
 	ld [wTempTilesetNumTiles], a ; number of tiles
 	ld a, [hli]
 	ld e, a
-	ld a, [hl]
+	ld a, [hli]
 	ld d, a ; de = address of tileset
+	ld b, [hl] ; bank of tileset
 	ld hl, vSprites tile $31
-	ld b, BANK(MoveAnimationTiles0) ; ROM bank
+	ld a, [wCurMap]
+	cp TRADE_CENTER
 	ld a, [wTempTilesetNumTiles]
+	jr nz, .load
+	ld a, 64 ; we load less tiles in the trade center
+.load
 	ld c, a ; number of tiles
 	jp CopyVideoData ; load tileset
 
 MACRO anim_tileset
 	db \1
 	dw \2
-	db -1 ; padding
+	db BANK(\2)
 ENDM
 
 MoveAnimationTilesPointers:
 	; number of tiles, gfx pointer
 	anim_tileset 79, MoveAnimationTiles0
 	anim_tileset 79, MoveAnimationTiles1
-	anim_tileset 64, MoveAnimationTiles2
+	anim_tileset  6, MoveAnimationTiles2
 
 MoveAnimationTiles0::
-MoveAnimationTiles2:
 	INCBIN "gfx/battle/move_anim_0.2bpp"
-
-MoveAnimationTiles1:
-	INCBIN "gfx/battle/move_anim_1.2bpp"
 
 MoveAnimationNoWaitingForSound:
 	push hl
@@ -506,7 +507,9 @@ ShareMoveAnimations:
 	cp AMNESIA
 	ld b, AMNESIA_ENEMY_ANIM ; PureRGBnote: CHANGED: amnesia has its own new animation
 	jr z, .replaceAnim
-
+	cp RAGE
+	ld b, RAGE_ENEMY_ANIM
+	jr z, .replaceAnim
 	cp REST
 	ld b, SLP_ANIM
 	ret nz
