@@ -10,11 +10,7 @@
 	INCBIN "gfx/pokemon/front/rattata.pic", 0, 1 ; sprite dimensions
 	dw RattataPicFront, RattataPicBackSW
 
-IF DEF(_DEBUG)
-	db DEBUG_OPPONENT_TEST_MOVE_1, DEBUG_OPPONENT_TEST_MOVE_2, NO_MOVE, NO_MOVE ; level 1 learnset
-ELSE
 	db TACKLE, TAIL_WHIP, NO_MOVE, NO_MOVE ; level 1 learnset
-ENDC
 	db GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset

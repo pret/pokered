@@ -92,4 +92,5 @@ MoveEffectPointerTable:
 	dw DefenseCurlEffect         ; DEFENSE_CURL_EFFECT
 	dw ReflectLightScreenEffect  ; ACID_ARMOR_EFFECT
 	dw ExplodeRecoilEffect       ; EXPLODE_RECOIL_EFFECT
+	dw ConversionEffect          ; CONVERSION_EFFECT
 	assert_table_length NUM_MOVE_EFFECTS

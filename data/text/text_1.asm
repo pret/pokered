@@ -173,3 +173,22 @@ _OaksAideNoRoomText::
 	text_ram wOaksAideRewardItemName
 	text "."
 	done
+
+_ConversionEnteredAttackModeText::
+	text "<USER>"
+	line "converted to"
+	cont "ATTACK mode!"
+	prompt
+
+_ConversionEnteredDefenseModeText::
+	text "<USER>"
+	line "converted to"
+	cont "DEFENSE mode!"
+	prompt
+
+_ConversionAlreadyDefenseModeText::
+	text "<USER> is"
+	line "already in"
+	cont "DEFENSE mode."
+	prompt
+

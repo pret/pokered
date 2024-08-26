@@ -1714,9 +1714,21 @@ _ConversionDexEntry::
 	next "suited for taking"
 	next "down its enemy."
 
-	bage "Greatly raises"
-	next "user's SPECIAL."
-	next "(+2 SPECIAL)"
+	bage "The user converts"
+	next "to either ATTACK"
+	next "or DEFENSE mode."
+
+	bage "In ATTACK mode"
+	next "the user queries"
+	next "a move that will"
+
+	bage "always work well"
+	next "on the foe from"
+	next "its data banks."
+
+	bage "In DEFENSE mode,"
+	next "damage from foe's"
+	next "moves is halved"
 	dex
 
 _TriAttackDexEntry::

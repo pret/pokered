@@ -266,9 +266,9 @@ _HitWithRecoilText::
 	line "hit with recoil!"
 	prompt
 
-_ConvertedTypeText::
-	text "Converted type to"
-	line "<TARGET>'s!"
+_ConversionChooseModeText::
+	text "Convert to which"
+	line "mode?"
 	prompt
 
 _StatusChangesEliminatedText::
@@ -349,6 +349,9 @@ _GuardedAgainstSuperEffectiveMovesText::
 _AcidArmorLiquifiedText::
 	text "<USER>"
 	line "liquified!"
-	para "All damage to it"
+	para "@"
+	; fall through
+_AllDamageHalvedText::
+	text "All damage to it"
 	line "is halved!"
 	prompt

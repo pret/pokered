@@ -2833,6 +2833,9 @@ SelectMenuItem:
 	add hl, bc
 	ld a, [hl]
 	ld [wPlayerSelectedMove], a
+	cp CONVERSION
+	jr z, .conversion
+.conversionChosen
 	xor a
 	ret
 .disabled
@@ -2842,8 +2845,13 @@ SelectMenuItem:
 	ld hl, MoveNoPPText
 .print
 	rst _PrintText
+.conversionGoBack
 	call LoadScreenTilesFromBuffer1
 	jp MoveSelectionMenu
+.conversion
+	callfar ShowConversionMenu
+	jr c, .conversionChosen
+	jr .conversionGoBack
 
 MoveNoPPText:
 	text_far _MoveNoPPText
@@ -3421,6 +3429,8 @@ MirrorMoveCheck:
 	call MetronomePickMove
 	jp CheckIfPlayerNeedsToChargeUp ; Go back to damage calculation for the move picked by Metronome
 .next
+	cp CONVERSION_EFFECT
+	jp z, ConversionEffect
 	cp MIMIC_EFFECT
 	jp z, MimicEffect
 	ld a, [wPlayerMoveEffect]
@@ -5278,6 +5288,8 @@ MirrorMoveFailedText:
 	text_far _MirrorMoveFailedText
 	text_end
 
+FarReloadMoveData::
+	ld a, [wd11e]
 ; function used to reload move data for moves like Mirror Move and Metronome
 ReloadMoveData:
 	ld [wd11e], a
@@ -6128,6 +6140,8 @@ EnemyCheckIfMirrorMoveEffect:
 	call MetronomePickMove
 	jp CheckIfEnemyNeedsToChargeUp
 .notMetronomeEffect
+	cp CONVERSION_EFFECT
+	jp z, ConversionEffect
 	cp MIMIC_EFFECT
 	jp z, MimicEffect
 	ld a, [wEnemyMoveEffect]
@@ -6714,10 +6728,22 @@ LoadEnemyMonData:
 	dec de
 	dec de
 IF DEF(_DEBUG)
-	; makes sure only the default moves are used on route 1 for debug purposes
+	; makes sure only the debug moves are used on route 1 for debug purposes
 	ld a, [wCurMap]
 	cp ROUTE_1
-	jr z, .loadMovePPs
+	jr nz, .notRoute1
+	ld a, DEBUG_OPPONENT_TEST_MOVE_1
+	ld [de], a
+	inc de
+	ld a, DEBUG_OPPONENT_TEST_MOVE_2
+	ld [de], a
+	inc de
+	ld a, NO_MOVE
+	ld [de], a
+	inc de
+	ld [de], a
+	jr .loadMovePPs
+.notRoute1
 ENDC
 	xor a
 	ld [wLearningMovesFromDayCare], a

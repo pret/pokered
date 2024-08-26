@@ -10,6 +10,8 @@ ReflectLightScreenEffect_:
 	ld a, [de]
 	cp ACID_ARMOR_EFFECT
 	jr z, .acid_armor
+	cp CONVERSION_EFFECT
+	jr z, .acid_armor
 	cp LIGHT_SCREEN_EFFECT
 	jr nz, .reflect
 	bit HAS_LIGHT_SCREEN_UP, [hl] ; is mon already protected by light screen?
@@ -27,7 +29,9 @@ ReflectLightScreenEffect_:
 	ld hl, PlayCurrentMoveAnimation
 	call EffectCallBattleCore
 	pop hl
-	jp PrintText
+.print
+	rst _PrintText
+	ret
 .moveFailed
 	ld c, 50
 	rst _DelayFrames
@@ -42,6 +46,10 @@ ReflectLightScreenEffect_:
 .canUseAcidArmor
 	set HAS_REFLECT_UP, [hl]
 	set HAS_LIGHT_SCREEN_UP, [hl]
+	ld a, [de]
+	cp CONVERSION_EFFECT
+	ld hl, AllDamageHalvedText
+	jr z, .print
 	ld hl, AcidArmorShieldText
 	jr .playAnim
 
@@ -55,6 +63,10 @@ ReflectGainedArmorText:
 
 AcidArmorShieldText:
 	text_far _AcidArmorLiquifiedText
+	text_end
+
+AllDamageHalvedText:
+	text_far _AllDamageHalvedText
 	text_end
 
 EffectCallBattleCore:

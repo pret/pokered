@@ -208,6 +208,8 @@ AttackAnimationPointers:
 	dw FlyAnimPart1
 	dw FirePillarAnim
 	dw RageEnemyAnim
+	dw ConversionDefenseModeAnim
+	dw ConversionAttackModeAnim
 	assert_table_length NUM_ATTACK_ANIMS
 	dw ZigZagScreenAnim
 
@@ -1326,7 +1328,6 @@ ConversionAnim:
 	battle_anim CONVERSION, SE_DARK_SCREEN_FLASH
 	battle_anim NO_MOVE, SUBANIM_0_CIRCLE_1_SQUARE_CLOSING, 1, 3
 	battle_anim NO_MOVE, SUBANIM_0_CIRCLE_1_SQUARE_CLOSING, 1, 3
-	battle_anim NO_MOVE, SE_DARK_SCREEN_FLASH
 	db -1 ; end
 
 TriAttackAnim:
@@ -1531,3 +1532,14 @@ RageEnemyAnim:
 	battle_anim TAIL_WHIP, SUBANIM_2_ANGER_SYMBOL_ENEMY, 2, 16
 	battle_anim RAGE, SUBANIM_0_STAR_TWICE, 0, 6
 	db -1 ; end
+
+ConversionDefenseModeAnim:
+	battle_anim BARRIER, SUBANIM_1_BARRIER, 1, 1
+	battle_anim BARRIER, SUBANIM_1_BARRIER, 1, 1
+	battle_anim BARRIER, SUBANIM_1_BARRIER, 1, 1
+	battle_anim BARRIER, SUBANIM_1_BARRIER, 1, 1
+	db -1
+
+ConversionAttackModeAnim:
+	battle_anim NO_MOVE, SE_CROSSHAIR_SCANS_OPPONENT
+	db -1

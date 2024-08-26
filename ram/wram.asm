@@ -542,7 +542,9 @@ wPlayerMonMinimized:: db
 wEnemyNumHits:: ; db
 
 ; the amount of damage accumulated by the enemy while biding
-wEnemyBideAccumulatedDamage:: dw ; PureRGBnote: CHANGED: bide effect changed to normal buff move, so this is unused
+;wEnemyBideAccumulatedDamage:: dw ; PureRGBnote: CHANGED: bide effect changed to normal buff move, so this is unused
+wPlayerConversionMode:: db
+	ds 1
 
 	ds 8
 	

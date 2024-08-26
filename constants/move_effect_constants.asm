@@ -11,7 +11,7 @@
 	const BURN_SIDE_EFFECT1          ; $04
 	const FREEZE_SIDE_EFFECT         ; $05
 	const PARALYZE_SIDE_EFFECT1      ; $06
-	const EXPLODE_EFFECT             ; $07 Explosion, Self Destruct (unused)
+	const EXPLODE_EFFECT             ; $07 Explosion, Self Destruct
 	const DREAM_EATER_EFFECT         ; $08
 	const MIRROR_MOVE_EFFECT         ; $09
 	const ATTACK_UP1_EFFECT          ; $0A
@@ -98,4 +98,5 @@
 	const DEFENSE_CURL_EFFECT        ; $59
 	const ACID_ARMOR_EFFECT          ; $5A
 	const EXPLODE_RECOIL_EFFECT      ; $5B
+	const CONVERSION_EFFECT          ; $5C
 DEF NUM_MOVE_EFFECTS EQU const_value - 1

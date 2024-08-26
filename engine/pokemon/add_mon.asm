@@ -223,7 +223,17 @@ IF DEF(_DEBUG)
 	ld a, [wTrainerNo]
 	cp 5
 	jr nz, .notDebugOpponent
-	; in debug mode against a specific trainer don't replace moves so they have the mon's default moves
+	; in debug mode against a specific trainer replace moves with the debug ones
+	ld a, DEBUG_OPPONENT_TEST_MOVE_1
+	ld [de], a
+	inc de
+	ld a, DEBUG_OPPONENT_TEST_MOVE_2
+	ld [de], a
+	inc de
+	ld a, NO_MOVE
+	ld [de], a
+	inc de
+	ld [de], a
 	jr .skipWriteMoves
 .notDebugOpponent
 ENDC

@@ -573,7 +573,7 @@ Modifier2PreferredMoves:
 ; PureRGBnote: ADDED: function that does a couple of comparisons before deciding whether the player is "dangerous" or not
 ; used to help decide whether the opponent should use boosting moves for AI move choice 2 on the first turn,
 ; and also used to decide for some trainers whether to use boosting items like X Attack.
-IsPlayerPokemonDangerous:
+IsPlayerPokemonDangerous::
 	; check if player is asleep, paralyzed, frozen, or confused, if so, not considered dangerous
 	ld a, [wAITargetMonStatus]
 	bit FRZ, a
@@ -690,6 +690,8 @@ AIMoveChoiceModification3:
 	inc de
 	call ReadMove
 	ld a, [wEnemyMoveNum]
+	cp CONVERSION
+	jr z, .skipEffectivenessCheckAndEncourage
 	cp MIRROR_MOVE
 	call z, GetMirrorMoveResultMove ; we will treat mirror move as the move it will use if selected
 	ld a, [wEnemyMovePower]
@@ -719,6 +721,7 @@ AIMoveChoiceModification3:
 	jr nz, .checkSpecificEffects
 	call CheckHarderAIActive
 	jr z, .checkSpecificEffects ; only encourages 4x moves further once you've obtained the soulbadge
+.skipEffectivenessCheckAndEncourage
 	dec [hl] ; encourage 4x effective moves further
 .checkSpecificEffects ; we'll further encourage certain moves
 	call EncouragePriorityIfSlow
@@ -741,6 +744,8 @@ AIMoveChoiceModification3:
 	jr z, .done
 	call ReadMove
 	ld a, [wEnemyMoveEffect]
+	cp CONVERSION
+	jr z, .betterMoveFound ; Conversion is considered a better move
 	cp SUPER_FANG_EFFECT
 	jr z, .betterMoveFound ; Super Fang is considered to be a better move
 	cp SPECIAL_DAMAGE_EFFECT

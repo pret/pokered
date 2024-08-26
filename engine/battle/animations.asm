@@ -421,7 +421,7 @@ MoveAnimationTilesPointers:
 	; number of tiles, gfx pointer
 	anim_tileset 79, MoveAnimationTiles0
 	anim_tileset 79, MoveAnimationTiles1
-	anim_tileset  6, MoveAnimationTiles2
+	anim_tileset  9, MoveAnimationTiles2
 
 MoveAnimationTiles0::
 	INCBIN "gfx/battle/move_anim_0.2bpp"
@@ -964,11 +964,10 @@ FirewallSpecialEffect:
 	bit BOOSTED_FIREWALL, [hl]
 	jr nz, .endOfAnimCheck
 .notEndAnim
-	ld hl, AnimationLightScreenPalette
 	ld a, [wSubAnimCounter]
 	and 11
 	ret nz
-	call hl_caller
+	call AnimationLightScreenPalette
 	rst _DelayFrame
 	call AnimationResetScreenPalette
 	rst _DelayFrame
@@ -3142,3 +3141,182 @@ SetMoveDexSeen:
 	res 0, [hl]
 	ret
 ;;;;;;;;;;
+
+AnimationCrosshairScansOpponent:
+	ld d, $36 ; crosshair tile
+	ld b, 0
+	ld a, 2 ; which tileset to use
+	ld c, 4 ; need 4 tiles for the crosshair
+	call InitMultipleObjectsOAM
+	; flip the crosshair tiles to make one
+	ld hl, wShadowOAMSprite01Attributes
+	set 5, [hl] ; horizontal flip
+	ld hl, wShadowOAMSprite02Attributes
+	set 6, [hl] ; vertical flip
+	ld hl, wShadowOAMSprite03Attributes
+	set 5, [hl] ; horizontal flip
+	set 6, [hl] ; vertical flip
+	; add the "data" tiles into oam too
+	ld hl, wShadowOAMSprite04TileID
+	ld [hl], $37
+	ld hl, wShadowOAMSprite05TileID
+	ld [hl], $37
+	ld hl, wShadowOAMSprite06TileID
+	ld [hl], $38
+	ldh a, [hWhoseTurn]
+	and a
+	lb bc, 110, 56 ; crosshair starting coords (used on opponent)
+	jr z, .gotTurn
+	lb bc, 24, 96 ; crosshair starting coords (used on player)
+.gotTurn
+	push bc
+	ld hl, wShadowOAMSprite00YCoord
+	ld [hl], c
+	inc hl
+	ld [hl], b
+	ld hl, wShadowOAMSprite01YCoord
+	ld a, b
+	add 8
+	ld [hl], c
+	inc hl
+	ld [hl], a
+	ld hl, wShadowOAMSprite02YCoord
+	ld a, c
+	add 8
+	ld [hl], a
+	inc hl
+	ld [hl], b
+	ld hl, wShadowOAMSprite03YCoord
+	ld [hl], a
+	ld a, b
+	add 8
+	inc hl
+	ld [hl], a
+	; show first data sprite
+	ld hl, wShadowOAMSprite04YCoord
+	pop bc
+	ld a, b
+	sub 16
+	ld b, a
+	push bc
+	ld [hl], c
+	inc hl
+	ld [hl], b
+	rst _DelayFrame
+	; default coord loaded for crosshair
+	; step 1 - make crosshair scan from bottom left to top right of sprite
+	ld b, 16 ; 16x2 pixels
+	ld hl, .diagonallyUpRight
+	ld de, wShadowOAMSprite04Attributes
+	call .functionForEachCrosshairTile
+	; show second data sprite
+	ld hl, wShadowOAMSprite06YCoord
+	pop bc
+	ld a, c
+	sub 8
+	ld c, a
+	push bc
+	ld [hl], c
+	inc hl
+	ld [hl], b
+	; step 2 - make crosshair scan down to bottom right of sprite
+	ld b, 8 ; 8x4 pixels
+	ld hl, .straightDown
+	ld de, wShadowOAMSprite06Attributes
+	call .functionForEachCrosshairTile
+	; show third data sprite
+	ld hl, wShadowOAMSprite05YCoord
+	pop bc
+	ld a, c
+	sub 8
+	ld [hl], a
+	inc hl
+	ld [hl], b
+	; step 3 - make crosshair scan from bottom right to top left
+	ld b, 16 ; 16x2 pixels
+	ld hl, .diagonallyUpLeft
+	ld de, wShadowOAMSprite05Attributes
+	call .functionForEachCrosshairTile
+	ld c, 20
+	rst _DelayFrames
+	call AnimationCleanOAM
+	call AnimationLightScreenPalette
+	ld c, 2
+	rst _DelayFrames
+	ld a, $01
+	ld [wFrequencyModifier], a
+	ld a, $80
+	ld [wTempoModifier], a
+	ld a, SFX_SILPH_SCOPE
+	rst _PlaySound
+	jp AnimationResetScreenPalette
+.functionForEachCrosshairTile
+	call .scanSound
+.loop
+	call .forEachCrossHairTile
+	rst _DelayFrame
+	call .forEachCrossHairTile
+	; flip the data tile provided every second frame
+	ld a, [de]
+	xor %01000000 ; vertical flip
+	ld [de], a
+	rst _DelayFrame
+	dec b
+	jr nz, .loop
+	ret
+.forEachCrossHairTile
+	push de
+	ld c, 4 ; 4 tiles to move
+	ld de, wShadowOAMSprite00YCoord
+.innerLoop
+	push hl
+	call hl_caller
+	pop hl
+	dec c
+	jr nz, .innerLoop
+	pop de
+	ret
+.diagonallyUpRight
+	ld h, d
+	ld l, e
+	dec [hl]
+	inc hl
+	inc [hl]
+	inc hl
+	inc hl
+	inc hl
+	ld d, h
+	ld e, l
+	ret
+.diagonallyUpLeft
+	ld h, d
+	ld l, e
+	dec [hl]
+	inc hl
+	dec [hl]
+	inc hl
+	inc hl
+	inc hl
+	ld d, h
+	ld e, l
+	ret
+.straightDown
+	ld h, d
+	ld l, e
+	inc [hl]
+	inc [hl]
+	inc hl
+	inc hl
+	inc hl
+	inc hl
+	ld d, h
+	ld e, l
+	ret
+.scanSound
+	ld a, $ff
+	ld [wFrequencyModifier], a
+	ld a, $00
+	ld [wTempoModifier], a
+	ld a, SFX_BATTLE_33
+	rst _PlaySound
+	ret

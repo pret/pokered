@@ -468,3 +468,7 @@ ChampArenaMusicTextData::
 	li "TENSE"
 	db -1
 
+ConversionMenu::
+	dw TwoOptionMenu
+	db "ATTACK"
+	next "DEFENSE@"

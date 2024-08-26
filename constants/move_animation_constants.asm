@@ -2,8 +2,9 @@
 ; SpecialEffectPointers associates them with effect routines (see data/battle_anims/special_effect_pointers.asm)
 	const_def $C0
 DEF FIRST_SE_ID EQU const_value
-	const_skip $F
+	const_skip $E
 ;;;;;;;;;; PureRGBnote: ADDED: new special effects
+	const SE_CROSSHAIR_SCANS_OPPONENT  ; $CF used in Conversion attack mode anim
 	const SE_LIGHT_SCREEN_FLASH        ; $D0 used in Teleport
 	const SE_SNOWFLAKES_EVERYWHERE     ; $D1 used in Blizzard
 	const SE_STATIC_EVERYWHERE         ; $D2 used in Constrict (Static Snag)

@@ -1436,13 +1436,18 @@ ClearHyperBeam:
 	;set USING_RAGE, [hl] ; mon is now in "rage" mode
 	;ret
 
+ConversionEffect:
+	callfar ConversionEffect_
+	ret nc
+	jp ExecuteReplacedMove
+
 MimicEffect:
 	ld c, 50
 	rst _DelayFrames
 	call MoveHitTest
 	ld a, [wMoveMissed]
 	and a
-	jp nz, .mimicMissed
+	jp nz, MimicMissed
 	ldh a, [hWhoseTurn]
 	and a
 	ld hl, wBattleMonMoves
@@ -1455,7 +1460,7 @@ MimicEffect:
 	ld a, [wEnemyBattleStatus1]
 .enemyTurn
 	bit INVULNERABLE, a
-	jr nz, .mimicMissed
+	jr nz, MimicMissed
 .getRandomMove
 	push hl
 	call BattleRandom
@@ -1479,7 +1484,7 @@ MimicEffect:
 .letPlayerChooseMove
 	ld a, [wEnemyBattleStatus1]
 	bit INVULNERABLE, a
-	jr nz, .mimicMissed
+	jr nz, MimicMissed
 	ld a, [wCurrentMenuItem]
 	push af
 	ld a, $1
@@ -1518,12 +1523,14 @@ MimicEffect:
 	pop af
 	ld [hl], a
 	call ReloadMoveData
+	; fall through
+ExecuteReplacedMove::
 	ldh a, [hWhoseTurn]
 	and a
 	jp z, CheckIfPlayerNeedsToChargeUp
 	jp CheckIfEnemyNeedsToChargeUp
 ;;;;;;;;;;
-.mimicMissed
+MimicMissed:
 	ld c, 50
 	rst _DelayFrames
 	jp PrintButItFailedText_
