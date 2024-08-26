@@ -1,0 +1,2 @@
+warning: weird-comments.asm(2): [-Wnested-comment]
+    /* in block comment

@@ -1,0 +1,15 @@
+error: code-after-endm-endr-endc.asm(6):
+    syntax error, unexpected PRINTLN, expecting newline or end of buffer
+error: code-after-endm-endr-endc.asm(7):
+    Macro "mac" not defined
+error: code-after-endm-endr-endc.asm(12):
+    syntax error, unexpected PRINTLN, expecting newline or end of buffer
+error: code-after-endm-endr-endc.asm(17):
+    syntax error, unexpected PRINTLN, expecting newline
+error: code-after-endm-endr-endc.asm(19):
+    syntax error, unexpected PRINTLN, expecting newline or end of buffer
+error: code-after-endm-endr-endc.asm(23):
+    syntax error, unexpected PRINTLN, expecting newline
+error: code-after-endm-endr-endc.asm(25):
+    syntax error, unexpected PRINTLN, expecting newline or end of buffer
+error: Assembly aborted (7 errors)!

@@ -1,0 +1,3 @@
+error: purge-refs.asm(6):
+    Symbol "Floating" is referenced and thus cannot be purged
+error: Assembly aborted (1 error)!

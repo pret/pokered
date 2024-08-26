@@ -1,0 +1,12 @@
+/rgbasm
+/rgblink
+/rgbfix
+/rgbgfx
+/rgbshim.sh
+*.o
+*.exe
+*.dll
+.checkpatch-camelcase.*
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake

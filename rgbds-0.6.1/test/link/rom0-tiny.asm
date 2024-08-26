@@ -1,0 +1,2 @@
+SECTION "rom", ROM0
+DS $8000

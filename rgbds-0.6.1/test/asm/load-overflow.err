@@ -1,0 +1,11 @@
+error: load-overflow.asm(5):
+    Section 'Overflow' grew too big (max size = 0x8000 bytes, reached 0x8001).
+error: load-overflow.asm(5):
+    Section 'oops' grew too big (max size = 0x2000 bytes, reached 0x2001).
+error: load-overflow.asm(13):
+    Section 'Moar overflow' grew too big (max size = 0x8000 bytes, reached 0x8001).
+error: load-overflow.asm(22):
+    Section 'lol' grew too big (max size = 0x2000 bytes, reached 0x2001).
+error: load-overflow.asm(25):
+    Section 'Not overflowing' grew too big (max size = 0x8000 bytes, reached 0x8001).
+error: Assembly aborted (5 errors)!

@@ -1,0 +1,6 @@
+warning: db-dw-dl-string.asm(15): [-Wnumeric-string]
+    Treating 4-character string as a number
+warning: db-dw-dl-string.asm(16): [-Wnumeric-string]
+    Treating 4-character string as a number
+warning: db-dw-dl-string.asm(17): [-Wnumeric-string]
+    Treating 4-character string as a number

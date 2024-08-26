@@ -1,0 +1,3 @@
+error: purge.asm(9):
+    Symbol "Referenced" is referenced and thus cannot be purged
+error: Assembly aborted (1 error)!

@@ -1,0 +1,8 @@
+
+SECTION "Byte", ROM0
+
+	db 2
+
+SECTION "ROM0", ROM0, ALIGN[16]
+
+	db 1

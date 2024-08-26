@@ -1,0 +1,9 @@
+ROM0
+	"output 1"
+	"output 2"
+	"output 3"
+WRAM0
+	"a" ; $C000
+WRAMX 1
+	ORG $DAB0
+	"b"

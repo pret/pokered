@@ -1,0 +1,2 @@
+FATAL: elif-after-else.asm(14):
+    Found ELIF after an ELSE block

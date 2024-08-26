@@ -1,0 +1,9 @@
+error: undefined-builtins.asm(3):
+    PC has no value outside a section
+error: undefined-builtins.asm(4):
+    Interpolated symbol "@" does not exist
+error: undefined-builtins.asm(8):
+    _NARG does not make sense outside of a macro
+error: undefined-builtins.asm(9):
+    Interpolated symbol "_NARG" does not exist
+error: Assembly aborted (4 errors)!

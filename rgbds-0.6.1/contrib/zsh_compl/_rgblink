@@ -1,0 +1,25 @@
+#compdef rgblink
+
+local args=(
+	# Arguments are listed here in the same order as in the manual, except for the version
+	'(- : * options)'{-V,--version}'[Print version number]'
+
+	'(-d --dmg)'{-d,--dmg}'[Enable DMG mode (-w + no VRAM banking)]'
+	'(-t --tiny)'{-t,--tiny}'[Enable tiny mode, disabling ROM banking]'
+	'(-v --verbose)'{-v,--verbose}'[Enable verbose output]'
+	'(-w --wramx)'{-w,--wramx}'[Disable WRAM banking]'
+	'(-x --nopad)'{-x,--nopad}'[Disable padding the end of the final file]'
+
+	'(-l --linkerscript)'{-l,--linkerscript}"+[Use a linker script]:linker script:_files -g '*.link'"
+	'(-M --no-sym-in-map)'{-M,--no-sym-in-map}'[Do not output symbol names in map file]'
+	'(-m --map)'{-m,--map}"+[Produce a map file]:map file:_files -g '*.map'"
+	'(-n --sym)'(-n,--sym)"+[Produce a symbol file]:sym file:_files -g '*.sym'"
+	'(-O --overlay)'{-O,--overlay}'+[Overlay sections over on top of bin file]:base overlay:_files'
+	'(-o --output)'{-o,--output}"+[Write ROM image to this file]:rom file:_files -g '*.{gb,sgb,gbc}'"
+	'(-p --pad-value)'{-p,--pad-value}'+[Set padding byte]:padding byte:'
+	'(-S --scramble)'{-s,--scramble}'+[Activate scrambling]:scramble spec'
+	'(-s --smart)'{-s,--smart}'+[!BROKEN! Perform smart linking from this symbol]:symbol name:'
+
+	'*'":object files:_files -g '*.o'"
+)
+_arguments -s -S : $args

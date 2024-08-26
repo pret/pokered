@@ -1,0 +1,5 @@
+error: opt-Q.asm(17) -> opt-Q.asm::test(3):
+    Argument for option 'Q' must be between 1 and 31
+error: opt-Q.asm(18) -> opt-Q.asm::test(3):
+    Argument for option 'Q' must be between 1 and 31
+error: Assembly aborted (2 errors)!

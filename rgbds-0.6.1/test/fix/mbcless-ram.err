@@ -1,0 +1,3 @@
+warning: MBC "ROM" has no RAM, but RAM size was set to 2
+warning: Overwrote a non-zero byte in the cartridge type
+warning: Overwrote a non-zero byte in the RAM size

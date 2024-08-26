@@ -1,0 +1,127 @@
+name: "Create release artifacts"
+on:
+  push:
+    tags:
+      - v[0-9]*
+
+jobs:
+  windows:
+    runs-on: windows-2022
+    strategy:
+      matrix:
+        bits: [32, 64]
+        include:
+          - bits: 32
+            arch: x86
+            platform: Win32
+          - bits: 64
+            arch: x86_x64
+            platform: x64
+      fail-fast: false
+    steps:
+      - name: Get version from tag
+        shell: bash
+        run: | # Turn "vX.Y.Z" into "X.Y.Z"
+          VERSION="${{ github.ref_name }}"
+          echo "version=${VERSION#v}" >> $GITHUB_ENV
+      - uses: actions/checkout@v3
+      - name: Install deps
+        run: .github/scripts/get_win_deps.ps1
+      - uses: actions/cache@v3
+        id: cache
+        with:
+          path: |
+            zbuild
+            pngbuild
+          key: ${{ matrix.arch }}-${{ hashFiles('zlib/**', 'libpng/**') }}
+      - name: Build zlib
+        run: | # BUILD_SHARED_LIBS causes the output DLL to be correctly called `zlib1.dll`
+          cmake -S zlib -B zbuild -A ${{ matrix.platform }} -Wno-dev -DCMAKE_INSTALL_PREFIX=install_dir -DBUILD_SHARED_LIBS=ON
+          cmake --build zbuild --config Release -j
+        if: steps.cache.outputs.cache-hit != 'true'
+      - name: Install zlib
+        run: |
+          cmake --install zbuild
+      - name: Build libpng
+        shell: bash
+        run: |
+          cmake -S libpng -B pngbuild -A ${{ matrix.platform }} -Wno-dev -DCMAKE_INSTALL_PREFIX=install_dir -DPNG_SHARED=ON -DPNG_STATIC=OFF -DPNG_TESTS=OFF -DPNG_BUILD_ZLIB=ON -DZLIB_INCLUDE_DIR="$PWD"/install_dir/include -DZLIB_LIBRARY="$PWD"/install_dir/lib/zlib.lib
+          cmake --build pngbuild --config Release -j
+        if: steps.cache.outputs.cache-hit != 'true'
+      - name: Install libpng
+        run: |
+          cmake --install pngbuild
+      - name: Build Windows binaries
+        shell: bash
+        run: |
+          cmake -S . -B build -A ${{ matrix.platform }} -DCMAKE_INSTALL_PREFIX=install_dir -DCMAKE_BUILD_TYPE=Release -DZLIB_LIBRARY="$PWD"/install_dir/lib/zlib.lib -DZLIB_INCLUDE_DIR="$PWD"/install_dir/include -DPNG_LIBRARY="$PWD"/install_dir/lib/libpng16.lib -DPNG_INCLUDE_DIR="$PWD"/install_dir/include
+          cmake --build build --config Release -j --verbose
+          cmake --install build --verbose --prefix install_dir --strip
+      - name: Package binaries
+        run: |
+          Compress-Archive -LiteralPath @("install_dir/bin/rgbasm.exe", "install_dir/bin/rgblink.exe", "install_dir/bin/rgbfix.exe", "install_dir/bin/rgbgfx.exe", "install_dir/bin/zlib1.dll", "install_dir/bin/libpng16.dll") "rgbds-${{ env.version }}-win${{ matrix.bits }}.zip"
+      - name: Upload Windows binaries
+        uses: actions/upload-artifact@v3
+        with:
+          name: win${{ matrix.bits }}
+          path: rgbds-${{ env.version }}-win${{ matrix.bits }}.zip
+
+  macos:
+    runs-on: macos-12
+    steps:
+      - name: Get version from tag
+        shell: bash
+        run: | # Turn "refs/tags/vX.Y.Z" into "X.Y.Z"
+          VERSION="${{ github.ref_name }}"
+          echo "version=${VERSION#v}" >> $GITHUB_ENV
+      - uses: actions/checkout@v3
+      - name: Install deps
+        shell: bash
+        run: |
+          ./.github/scripts/install_deps.sh macos-latest
+      # We force linking libpng statically; the other libs are provided by macOS itself
+      - name: Build binaries
+        run: |
+          export PATH="/usr/local/opt/bison/bin:$PATH"
+          make -j WARNFLAGS="-Wall -Wextra -mmacosx-version-min=10.9" PKG_CONFIG="pkg-config --static" PNGLDLIBS="$(pkg-config --static --libs-only-L libpng | cut -c 3-)/libpng.a $(pkg-config --static --libs-only-l libpng | sed s/-lpng[0-9]*//g)" Q=
+      - name: Package binaries
+        run: |
+          zip --junk-paths rgbds-${{ env.version }}-macos-x86-64.zip rgb{asm,link,fix,gfx} man/* .github/scripts/install.sh
+      - name: Upload macOS binaries
+        uses: actions/upload-artifact@v3
+        with:
+          name: macos
+          path: rgbds-${{ env.version }}-macos-x86-64.zip
+
+  release:
+    runs-on: ubuntu-latest
+    needs: [windows, macos]
+    steps:
+      - name: Get version from tag
+        shell: bash
+        run: | # Turn "refs/tags/vX.Y.Z" into "X.Y.Z"
+          VERSION="${{ github.ref_name }}"
+          echo "version=${VERSION#v}" >> $GITHUB_ENV
+      - uses: actions/checkout@v3
+      - name: Package sources
+        run: |
+          make dist Q=
+          ls
+      - uses: actions/download-artifact@v3
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          body: |
+            Please ensure that the three assets below work properly.
+            Once that's done, replace this text with the changelog, un-draft the release, and update the `release` branch.
+            By the way, if you forgot to update `include/version.h`, RGBASM's version test is gonna fail in the tag's regression testing! (Use `git push --delete origin <tag>` to delete it)
+          draft: true # Don't publish the release quite yet...
+          prerelease: ${{ contains(github.ref, '-rc') }}
+          files: |
+            win32/rgbds-${{ env.version }}-win32.zip
+            win64/rgbds-${{ env.version }}-win64.zip
+            macos/rgbds-${{ env.version }}-macos-x86-64.zip
+            rgbds-${{ env.version }}.tar.gz
+          fail_on_unmatched_files: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

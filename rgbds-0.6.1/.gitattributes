@@ -1,0 +1,6 @@
+# Shell scripts need Unix line endings (see https://github.com/gbdev/rgbds/issues/841)
+*.sh text eol=lf
+*.bash text eol=lf
+
+# Flags also need Unix line endings (see https://github.com/gbdev/rgbds/issues/955)
+*.flags text eol=lf

@@ -1,0 +1,8 @@
+warning: equs-newline.asm(3): [-Wuser]
+    First
+while expanding symbol "ACT"
+warning: equs-newline.asm(3): [-Wuser]
+    Second
+while expanding symbol "ACT"
+warning: equs-newline.asm(4): [-Wuser]
+    Third

@@ -1,0 +1,265 @@
+name: "Regression testing"
+on:
+  - push
+  - pull_request
+
+jobs:
+  unix-testing:
+    strategy:
+      matrix:
+        os: [ubuntu-20.04, ubuntu-22.04, macos-11, macos-12]
+        cc: [gcc, clang]
+        buildsys: [make, cmake]
+        exclude:
+          # `gcc` is just an alias to `clang` on macOS, don't bother
+          - os: macos-11
+            cc: gcc
+          - os: macos-12
+            cc: gcc
+        include:
+          - cc: gcc
+            cxx: g++
+          - cc: clang
+            cxx: clang++
+      fail-fast: false
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install deps
+        shell: bash
+        run: |
+          ./.github/scripts/install_deps.sh ${{ matrix.os }}
+      # The `export` lines are to allow working on macOS...
+      # Apple's base version is severely outdated, not even supporting -Wall,
+      # but it overrides Homebrew's version nonetheless...
+      - name: Build & install using Make
+        if: matrix.buildsys == 'make'
+        run: |
+          export PATH="/usr/local/opt/bison/bin:$PATH"
+          make develop -j Q= CC=${{ matrix.cc }} CXX=${{ matrix.cxx }}
+          sudo make install -j Q=
+      - name: Build & install using CMake
+        if: matrix.buildsys == 'cmake'
+        run: |
+          export PATH="/usr/local/opt/bison/bin:$PATH"
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=${{ matrix.cc }} -DCMAKE_CXX_COMPILER=${{ matrix.cxx }} -DSANITIZERS=ON -DMORE_WARNINGS=ON
+          cmake --build build -j --verbose
+          cp build/src/rgb{asm,link,fix,gfx} .
+          sudo cmake --install build --verbose
+      - name: Package binaries
+        run: |
+          mkdir bins
+          cp rgb{asm,link,fix,gfx} bins
+      - name: Upload binaries
+        uses: actions/upload-artifact@v3
+        with:
+          name: rgbds-canary-${{ matrix.os }}-${{ matrix.cc }}-${{ matrix.buildsys }}
+          path: bins
+      - name: Compute test dependency cache params
+        id: test-deps-cache-params
+        shell: bash
+        run: |
+          paths=$(test/fetch-test-deps.sh --get-paths)
+          hash=$(test/fetch-test-deps.sh --get-hash)
+          tee -a <<<"paths=\"${paths//,/\\n}\"" $GITHUB_OUTPUT
+          tee -a <<<"hash=${hash%-}" $GITHUB_OUTPUT
+      - name: Check test dependency repositories cache
+        id: test-deps-cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ fromJSON(steps.test-deps-cache-params.outputs.paths) }}
+          key: ${{ matrix.os }}-${{ steps.test-deps-cache-params.outputs.hash }}
+      - if: steps.test-deps-cache.outputs.cache-hit != 'true'
+        name: Fetch test dependency repositories
+        continue-on-error: true
+        run: |
+          test/fetch-test-deps.sh
+      - name: Test
+        shell: bash
+        run: |
+          test/run-tests.sh
+
+  windows-testing:
+    strategy:
+      matrix:
+        bits: [32, 64]
+        os: [windows-2019, windows-2022]
+        include:
+          - bits: 32
+            arch: x86
+            platform: Win32
+          - bits: 64
+            arch: x86_x64
+            platform: x64
+      fail-fast: false
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install deps
+        run: .github/scripts/get_win_deps.ps1
+      - uses: actions/cache@v3
+        id: cache
+        with:
+          path: |
+            zbuild
+            pngbuild
+          key: ${{ matrix.arch }}-${{ hashFiles('zlib/**', 'libpng/**') }}
+      - name: Build zlib
+        run: | # BUILD_SHARED_LIBS causes the output DLL to be correctly called `zlib1.dll`
+          cmake -S zlib -B zbuild -A ${{ matrix.platform }} -Wno-dev -DCMAKE_INSTALL_PREFIX=install_dir -DBUILD_SHARED_LIBS=ON
+          cmake --build zbuild --config Release -j
+        if: steps.cache.outputs.cache-hit != 'true'
+      - name: Install zlib
+        run: |
+          cmake --install zbuild
+      - name: Build libpng
+        shell: bash
+        run: |
+          cmake -S libpng -B pngbuild -A ${{ matrix.platform }} -Wno-dev -DCMAKE_INSTALL_PREFIX=install_dir -DPNG_SHARED=ON -DPNG_STATIC=OFF -DPNG_TESTS=OFF -DPNG_BUILD_ZLIB=ON -DZLIB_INCLUDE_DIR="$PWD"/install_dir/include -DZLIB_LIBRARY="$PWD"/install_dir/lib/zlib.lib
+          cmake --build pngbuild --config Release -j
+        if: steps.cache.outputs.cache-hit != 'true'
+      - name: Install libpng
+        run: |
+          cmake --install pngbuild
+      - name: Build Windows binaries
+        shell: bash
+        run: |
+          cmake -S . -B build -A ${{ matrix.platform }} -DCMAKE_INSTALL_PREFIX=install_dir -DCMAKE_BUILD_TYPE=Release -DZLIB_LIBRARY="$PWD"/install_dir/lib/zlib.lib -DZLIB_INCLUDE_DIR="$PWD"/install_dir/include -DPNG_LIBRARY="$PWD"/install_dir/lib/libpng16.lib -DPNG_INCLUDE_DIR="$PWD"/install_dir/include
+          cmake --build build --config Release -j --verbose
+          cmake --install build --verbose --prefix install_dir
+      - name: Package binaries
+        shell: bash
+        run: |
+          mkdir bins
+          cp install_dir/bin/{rgbasm.exe,rgblink.exe,rgbfix.exe,rgbgfx.exe,zlib1.dll,libpng16.dll} bins
+      - name: Upload Windows binaries
+        uses: actions/upload-artifact@v3
+        with:
+          name: rgbds-canary-win${{ matrix.bits }}
+          path: bins
+      - name: Compute test dependency cache params
+        id: test-deps-cache-params
+        shell: bash
+        run: |
+          paths=$(test/fetch-test-deps.sh --get-paths)
+          hash=$(test/fetch-test-deps.sh --get-hash)
+          tee -a <<<"paths=\"${paths//,/\\n}\"" $GITHUB_OUTPUT
+          tee -a <<<"hash=${hash%-}" $GITHUB_OUTPUT
+      - name: Check test dependency repositories cache
+        id: test-deps-cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ fromJSON(steps.test-deps-cache-params.outputs.paths) }}
+          key: ${{ matrix.os }}-${{ matrix.bits }}-${{ steps.test-deps-cache-params.outputs.hash }}
+      - if: steps.test-deps-cache.outputs.cache-hit != 'true'
+        name: Fetch test dependency repositories
+        shell: bash
+        continue-on-error: true
+        run: |
+          test/fetch-test-deps.sh
+      - name: Test
+        shell: bash
+        run: |
+          cp bins/* .
+          cp bins/*.dll test/gfx
+          test/run-tests.sh
+
+  windows-xbuild:
+    strategy:
+      matrix:
+        bits: [32, 64]
+        include:
+          - bits: 32
+            arch: i686
+            triplet: i686-w64-mingw32
+          - bits: 64
+            arch: x86-64
+            triplet: x86_64-w64-mingw32
+      fail-fast: false
+    runs-on: ubuntu-22.04
+    env:
+      DIST_DIR: win${{ matrix.bits }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install deps
+        shell: bash
+        run: |
+          ./.github/scripts/install_deps.sh ${{ matrix.os }}
+      - name: Install MinGW
+        run: | # dpkg-dev is apparently required for pkg-config for cross-building
+          sudo apt-get install {gcc,g++}-mingw-w64-${{ matrix.arch }}-win32 mingw-w64-tools libz-mingw-w64-dev dpkg-dev
+      - name: Install libpng dev headers for MinGW
+        run: |
+          sudo ./.github/scripts/mingw-w64-libpng-dev.sh ${{ matrix.triplet }}
+      - name: Cross-build Windows binaries
+        run: |
+          make mingw${{ matrix.bits }} -j Q=
+      - name: Package binaries
+        run: | # DLL dependencies can be figured out using e.g. Dependency Walker
+          mkdir bins
+          mv -v rgb{asm,link,fix,gfx}.exe bins/
+          cp -v /usr/${{ matrix.triplet }}/lib/zlib1.dll bins
+          cp -v /usr/${{ matrix.triplet }}/bin/libpng16-16.dll bins
+          [ "${{ matrix.bits }}" -ne 32 ] || cp -v /usr/lib/gcc/${{ matrix.triplet }}/10-win32/lib{gcc_s_dw2-1,ssp-0,stdc++-6}.dll bins
+      - name: Upload Windows binaries
+        uses: actions/upload-artifact@v3
+        with:
+          name: rgbds-canary-mingw-win${{ matrix.bits }}
+          path: bins
+      - name: Upload Windows test binaries
+        uses: actions/upload-artifact@v3
+        with:
+          name: testing-programs-mingw-win${{ matrix.bits }}
+          path: |
+            test/gfx/randtilegen.exe
+            test/gfx/rgbgfx_test.exe
+
+  windows-xtesting:
+    needs: windows-xbuild
+    strategy:
+      matrix:
+        os: [windows-2019, windows-2022]
+        bits: [32, 64]
+      fail-fast: false
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Retrieve binaries
+        uses: actions/download-artifact@v3
+        with:
+          name: rgbds-canary-mingw-win${{ matrix.bits }}
+          path: bins
+      - name: Retrieve test binaries
+        uses: actions/download-artifact@v3
+        with:
+          name: testing-programs-mingw-win${{ matrix.bits }}
+          path: test/gfx
+      - name: Extract binaries
+        shell: bash
+        run: |
+          cp bins/* .
+          cp bins/*.dll test/gfx
+      - name: Compute test dependency cache params
+        id: test-deps-cache-params
+        shell: bash
+        run: |
+          paths=$(test/fetch-test-deps.sh --get-paths)
+          hash=$(test/fetch-test-deps.sh --get-hash)
+          tee -a <<<"paths=\"${paths//,/\\n}\"" $GITHUB_OUTPUT
+          tee -a <<<"hash=${hash%-}" $GITHUB_OUTPUT
+      - name: Check test dependency repositories cache
+        id: test-deps-cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ fromJSON(steps.test-deps-cache-params.outputs.paths) }}
+          key: mingw-${{ matrix.bits }}-${{ steps.test-deps-cache-params.outputs.hash }}
+      - if: steps.test-deps-cache.outputs.cache-hit != 'true'
+        name: Fetch test dependency repositories
+        shell: bash
+        continue-on-error: true
+        run: |
+          test/fetch-test-deps.sh
+      - name: Run tests
+        shell: bash
+        run: |
+          test/run-tests.sh

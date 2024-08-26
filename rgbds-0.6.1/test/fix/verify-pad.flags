@@ -1,0 +1,4 @@
+-vp 69
+Check that the global checksum is correctly affected by padding:
+Padding adds extra bytes (carefully picked *not* to be 0, or other values),
+which must be properly accounted for.

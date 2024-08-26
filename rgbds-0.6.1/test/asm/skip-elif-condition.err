@@ -1,0 +1,2 @@
+FATAL: skip-elif-condition.asm(18) -> skip-elif-condition.asm::mac(6):
+    Division by zero

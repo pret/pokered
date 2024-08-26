@@ -1,0 +1,2 @@
+warning: label-indent.asm(10): [-Wobsolete]
+    `mac: MACRO` is deprecated; use `MACRO mac`

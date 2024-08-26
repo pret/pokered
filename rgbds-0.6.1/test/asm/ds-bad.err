@@ -1,0 +1,5 @@
+error: ds-bad.asm(3):
+    Expected constant expression: 'unknown' is not constant at assembly time
+warning: ds-bad.asm(4): [-Wtruncation]
+    Expression must be 8-bit
+error: Assembly aborted (1 error)!

@@ -1,0 +1,7 @@
+error: purge-ref.asm(4):
+    Symbol "ref" is referenced and thus cannot be purged
+error: purge-ref.asm(11):
+    Symbol "NotOK" is referenced and thus cannot be purged
+error: purge-ref.asm(15):
+    Symbol "EvenLessOK" is referenced and thus cannot be purged
+error: Assembly aborted (3 errors)!

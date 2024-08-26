@@ -1,0 +1,20 @@
+warning: strsub.asm(14) -> strsub.asm::xstrsub(4): [-Wbuiltin-args]
+    STRSUB: Position starts at 1
+warning: strsub.asm(16) -> strsub.asm::xstrsub(4): [-Wbuiltin-args]
+    STRSUB: Position 5 is past the end of the string
+warning: strsub.asm(17) -> strsub.asm::xstrsub(4): [-Wbuiltin-args]
+    STRSUB: Position starts at 1
+warning: strsub.asm(20) -> strsub.asm::xstrsub(4): [-Wbuiltin-args]
+    STRSUB: Length too big: 32
+warning: strsub.asm(21) -> strsub.asm::xstrsub(4): [-Wbuiltin-args]
+    STRSUB: Length too big: 300
+warning: strsub.asm(22) -> strsub.asm::xstrsub(4): [-Wbuiltin-args]
+    STRSUB: Position starts at 1
+warning: strsub.asm(22) -> strsub.asm::xstrsub(4): [-Wbuiltin-args]
+    STRSUB: Length too big: 300
+warning: strsub.asm(24) -> strsub.asm::xstrsub(4): [-Wbuiltin-args]
+    STRSUB: Position 5 is past the end of the string
+warning: strsub.asm(25) -> strsub.asm::xstrsub(4): [-Wbuiltin-args]
+    STRSUB: Length too big: 1
+warning: strsub.asm(28) -> strsub.asm::xstrsub(4): [-Wbuiltin-args]
+    STRSUB: Length too big: 10

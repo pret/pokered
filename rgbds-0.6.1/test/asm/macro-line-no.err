@@ -1,0 +1,8 @@
+warning: macro-line-no.asm(2): [-Wuser]
+    Line 2
+warning: macro-line-no.asm(6): [-Wuser]
+    Line 6
+warning: macro-line-no.asm(7) -> macro-line-no.asm::m(4): [-Wuser]
+    Line 4
+warning: macro-line-no.asm(8): [-Wuser]
+    Line 8

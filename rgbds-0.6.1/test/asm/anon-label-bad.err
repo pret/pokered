@@ -1,0 +1,7 @@
+error: anon-label-bad.asm(2):
+    Label "!0" created outside of a SECTION
+error: anon-label-bad.asm(6):
+    Reference to anonymous label 2 before, when only 1 has been created so far
+error: anon-label-bad.asm(18):
+    syntax error, unexpected :
+error: Assembly aborted (3 errors)!

@@ -1,0 +1,2 @@
+warning: Overwrote a non-zero byte in the CGB flag
+warning: Overwrote a non-zero byte in the header checksum

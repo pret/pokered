@@ -1,0 +1,2 @@
+warning: if-macro.asm(10) -> if-macro.asm::m(5): [-Wuser]
+    5

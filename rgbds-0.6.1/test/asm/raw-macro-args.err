@@ -1,0 +1,9 @@
+error: raw-macro-args.asm(26):
+    Unterminated string
+error: raw-macro-args.asm(26) -> raw-macro-args.asm::printargs(2) -> raw-macro-args.asm::printargs::REPT~1(3):
+    Unterminated string
+error: raw-macro-args.asm(37):
+    Unterminated string
+error: raw-macro-args.asm(38):
+    Unterminated string
+error: Assembly aborted (4 errors)!

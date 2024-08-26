@@ -1,0 +1,632 @@
+'\" e
+.\"
+.\" This file is part of RGBDS.
+.\"
+.\" Copyright (c) 2013-2021, stag019 and RGBDS contributors.
+.\"
+.\" SPDX-License-Identifier: MIT
+.\"
+.Dd March 28, 2021
+.Dt RGBGFX 1
+.Os
+.Sh NAME
+.Nm rgbgfx
+.Nd Game Boy graphics converter
+.Sh SYNOPSIS
+.Nm
+.Op Fl CmuVZ
+.Op Fl v Op Fl v No ...
+.Op Fl a Ar attrmap | Fl A
+.Op Fl b Ar base_ids
+.Op Fl c Ar color_spec
+.Op Fl d Ar depth
+.Op Fl L Ar slice
+.Op Fl N Ar nb_tiles
+.Op Fl n Ar nb_pals
+.Op Fl o Ar out_file
+.Op Fl p Ar pal_file | Fl P
+.Op Fl q Ar pal_map | Fl Q
+.Op Fl r Ar stride
+.Op Fl s Ar nb_colors
+.Op Fl t Ar tilemap | Fl T
+.Op Fl x Ar quantity
+.Ar file
+.Sh DESCRIPTION
+The
+.Nm
+program converts PNG images into data suitable for display on the Game Boy and Game Boy Color, or vice-versa.
+.Pp
+The main function of
+.Nm
+is to divide the input PNG into 8\[tmu]8 pixel
+.Em squares ,
+convert each of those squares into 1bpp or 2bpp tile data, and save all of the tile data in a file.
+It also has options to generate a tile map, attribute map, and/or palette set as well; more on that and how the conversion process can be tweaked below.
+.Sh ARGUMENTS
+Note that options can be abbreviated as long as the abbreviation is unambiguous:
+.Fl Fl verb
+is
+.Fl Fl verbose ,
+but
+.Fl Fl ver
+is invalid because it could also be
+.Fl Fl version .
+.Pp
+.Nm
+accepts decimal, binary, and hexadecimal numbers in option arguments.
+Decimal numbers are written as usual; binary numbers must be prefixed with either
+.Ql %
+or
+.Ql 0b ,
+and hexadecimal numbers must be prefixed with either
+.Ql $
+(which will likely need escaping or quoting to avoid being interpreted by the shell), or
+.Ql 0x .
+Leading zeros (after the base prefix, if any) are accepted, and letters are not case-sensitive.
+All of these are equivalent:
+.Ql 42 ,
+.Ql 042 ,
+.Ql 0b00101010 ,
+.Ql 0B101010 ,
+.Ql 0x2A ,
+.Ql 0X2A ,
+.Ql 0x2a .
+.Pp
+Unless otherwise noted, passing
+.Ql -
+(a single dash) as a file name makes
+.Nm
+use standard input (for input files) or standard output (for output files).
+To suppress this behavior, and open a file in the current directory actually called
+.Ql - ,
+pass
+.Ql ./-
+instead.
+Using standard input or output more than once in a single command will likely produce unexpected results.
+.Pp
+The following options are accepted:
+.Bl -tag -width Ds
+.It Fl a Ar attrmap , Fl Fl attr-map Ar attrmap
+Generate an attribute map, which is a file containing tile
+.Dq attributes .
+For each square of the input image, its corresponding attribute map byte contains the mirroring bits (if
+.Fl m
+was specified), the bank bit
+.Pq see Fl N ,
+and the palette index.
+See
+.Lk https://gbdev.io/pandocs/Tile_Maps#bg-map-attributes-cgb-mode-only Pan Docs
+for the individual bytes' format.
+The output is written just like the tile map (see
+.Fl t ) ,
+follows the same order
+.Pq Fl Z ,
+and has the same size.
+.It Fl A , Fl Fl output-attr-map
+Same as
+.Fl a Ar path ,
+where
+.Ar path
+is the input image's path with the extension set to
+.Pa .attrmap .
+.It Fl b Ar base_ids , Fl Fl base-tiles Ar base_ids
+Set the base IDs for tile map output.
+.Ar base_ids
+should be one or two numbers between 0 and 255, separated by a comma; they are for bank 0 and bank 1 respectively.
+Both default to 0.
+.It Fl C , Fl Fl color-curve
+When generating palettes, use a color curve mimicking the Game Boy Color's screen.
+The resulting colors may look closer to the input image's
+.Sy on hardware and accurate emulators .
+.It Fl c Ar color_spec , Fl Fl colors Ar color_spec
+Use the specified color palettes instead of having
+.Nm
+automatically determine some.
+.Ar color_spec
+can be one of the following:
+.Bl -tag -width Ds
+.It Sy inline palette spec
+If
+.Ar color_spec
+begins with a hash character
+.Ql # ,
+it is treated as an inline palette specification.
+It should contain a comma-separated list of hexadecimal colors, each beginning with a hash.
+Colors in are accepted either as
+.Ql #rgb
+or
+.Ql #rrggbb
+format.
+Palettes must be separated by a colon or semicolon (the latter may require quoting to avoid special handling by the shell), and spaces are allowed around colons, semicolons and commas; trailing commas and semicolons are allowed.
+See
+.Sx EXAMPLES
+for an example of an inline palette specification.
+.It Sy embedded palette spec
+If
+.Ar color_spec
+is the case-insensitive word
+.Cm embedded ,
+then the first four colors of the input PNG's embedded palette are used.
+It is an error if the PNG is not indexed, or if colors other than these 4 are used.
+.Pq This is different from the default behavior of indexed PNGs, as then unused entries in the embedded palette are ignored, whereas they are not with Fl c Cm embedded .
+.It Sy external palette spec
+Otherwise,
+.Ar color_spec
+is assumed to be an external palette specification.
+The expected format is
+.Ql format:path ,
+where
+.Ar path
+is a path to a file
+.Ql ( -
+is not treated specially), which will be processed according to the
+.Ar format .
+See
+.Sx PALETTE SPECIFICATION FORMATS
+for a list of formats and their descriptions.
+.El
+.It Fl d Ar depth , Fl Fl depth Ar depth
+Set the bit depth of the output tile data, in bits per pixel (bpp), either 1 or 2 (the default).
+This changes how tile data is output, and the maximum number of colors per palette (2 and 4 respectively).
+.It Fl L Ar slice , Fl Fl slice Ar slice
+Only process a given rectangle of the image.
+This is useful for example if the input image is a sheet of some sort, and you want to convert each cel individually.
+The default is to process the whole image as-is.
+.Pp
+.Ar slice
+must be two number pairs, separated by a colon.
+The numbers must be separated by commas; space is allowed around all punctuation.
+The first number pair specifies the X and Y coordinates of the top-left pixel that will be processed (anything above it or to its left will be ignored).
+The second number pair specifies how many tiles to process horizontally and vertically, respectively.
+.Pp
+.Sy Fl L Sy is ignored in reverse mode , No no padding is inserted .
+.It Fl m , Fl Fl mirror-tiles
+Deduplicate tiles that are mirrors of each other.
+Tiles are checked for horizontal, vertical, and horizontal-vertical mirroring.
+Useful with a tile map and attribute map together to keep track of the duplicated tiles and the dimension(s) mirrored.
+Implies
+.Fl u .
+.It Fl N Ar nb_tiles , Fl Fl nb-tiles Ar nb_tiles
+Set a maximum number of tiles that can be placed in each VRAM bank.
+.Ar nb_tiles
+should be one or two numbers between 0 and 256, separated by a comma; if the latter is omitted, it defaults to 0.
+Setting either number to 0 prevents any tiles from being output in that bank.
+.Pp
+If more tiles are generated than can fit in the two banks combined,
+.Nm
+will abort.
+If
+.Fl N
+is not specified, no limit will be set on the amount of tiles placed in bank 0, and tiles will not be placed in bank 1.
+.It Fl n Ar nb_pals , Fl Fl nb-palettes Ar nb_pals
+Abort if more than
+.Ar nb_pals
+palettes are generated.
+This may not be more than 256.
+.Pp
+Note that attribute map output only has 3 bits for the palette ID, so a limit higher than 8 may yield incomplete data unless relying on a palette map
+.Pq see Fl q .
+.It Fl o Ar out_file , Fl Fl output Ar out_file
+Output the tile data in native 2bpp format or in 1bpp
+.Pq depending on Fl d
+to this file.
+.It Fl p Ar pal_file , Fl Fl palette Ar pal_file
+Output the image's palette set to this file.
+.It Fl P , Fl Fl output-palette
+Same as
+.Fl p Ar path ,
+where
+.Ar path
+is the input image's path with the extension set to
+.Pa .pal .
+.It Fl q Ar pal_file , Fl Fl palette-map Ar pal_file
+Output the image's palette map to this file.
+This is useful if the input image contains more than 8 palettes, as the attribute map only contains the lower 3 bits of the palette indices.
+.It Fl Q , Fl Fl output-palette-map
+Same as
+.Fl q Ar path ,
+where
+.Ar path
+is the input image's path with the extension set to
+.Pa .palmap .
+.It Fl r Ar width , Fl Fl reverse Ar width
+Switches
+.Nm
+into
+.Dq Sy reverse
+mode.
+In this mode, instead of converting a PNG image into Game Boy data,
+.Nm
+will attempt to reverse the process, and render Game Boy data into an image.
+See
+.Sx REVERSE MODE
+below for details.
+.Pp
+.Ar width
+is the image's width, in tiles
+.Pq including any margins specified by Fl L .
+.It Fl s Ar nb_colors , Fl Fl palette-size Ar nb_colors
+Specify how many colors each palette contains, including the transparent one if any.
+.Ar nb_colors
+cannot be more than
+.Ql 1 << Ar depth
+.Pq see Fl d .
+.It Fl t Ar tilemap , Fl Fl tilemap Ar tilemap
+Generate a file of tile indices.
+For each square of the input image, its corresponding tile map byte contains the index of the associated tile in the tile data file.
+The IDs wrap around from 255 back to 0, and do not include the bank bit; use
+.Fl a
+for that.
+Useful in combination with
+.Fl u
+and/or
+.Fl m
+to keep track of duplicate tiles.
+.It Fl T , Fl Fl output-tilemap
+Same as
+.Fl t Ar path ,
+where
+.Ar path
+is the input image's path with the extension set to
+.Pa .tilemap .
+.It Fl u , Fl Fl unique-tiles
+Deduplicate identical tiles, and omit the duplicates from the tile data file.
+Useful with a tile map
+.Pq see Fl t
+to keep track of the duplicated tiles.
+.Pp
+Note that if this option is enabled, no guarantee is made on the order in which tiles are output; while it
+.Em should
+be consistent across identical runs of a given
+.Nm
+release, the same is not true for different releases.
+.It Fl V , Fl Fl version
+Print the version of the program and exit.
+.It Fl v , Fl Fl verbose
+Be verbose.
+The verbosity level is increased by one each time the flag is specified, with each level including the previous:
+.Bl -enum -width 2n -compact
+.It
+.Nm
+prints out its configuration before doing anything.
+.It
+A generic message is printed before doing most actions.
+.It
+Some of the actions' intermediate results are printed.
+.It
+Some internal debug printing is enabled.
+.El
+The verbosity level does not go past 6.
+.Pp
+Note that verbose output is only intended to be consumed by humans, and may change without notice between RGBDS releases; relying on those for scripts is not advised.
+.It Fl x Ar quantity , Fl Fl trim-end Ar quantity
+Do not output the last
+.Ar quantity
+tiles to the tile data file; no other output is affected.
+This is useful for trimming
+.Dq filler
+/ blank squares at the end of an image.
+If fewer than
+.Ar quantity
+tiles would have been emitted, the file will be empty.
+.Pp
+Note that this is done
+.Em after
+deduplication if
+.Fl u
+was enabled, so you probably don't want to use this option in combination with
+.Fl u .
+Note also that the tiles that don't get output will not count towards
+.Fl N Ap s
+limit.
+.It Fl Z , Fl Fl columns
+Read squares from the PNG in column-major order (column by column), instead of the default row-major order (line by line).
+This primarily affects tile map and attribute map output, although it may also change generated tile data and palettes.
+.El
+.Ss At-files
+In a given project, many images are to be converted with different flags.
+The traditional way of solving this problem has been to specify the different flags for each image in the Makefile / build script; this can be inconvenient, as it centralizes all those flags away from the images they concern.
+.Pp
+To avoid these drawbacks,
+.Nm
+supports
+.Dq at-files :
+any command-line argument that begins with an at sign
+.Pq Ql @
+is interpreted as one.
+The rest of the argument (without the @, that is) is interpreted as the path to a file, whose contents are interpreted as if given on the command line.
+At-files can be stored right next to the corresponding image, for example:
+.Pp
+.Dl $ rgbgfx -o image.2bpp -t image.tilemap @image.flags image.png
+.Pp
+This will read additional flags from file
+.Ql image.flags ,
+which could contains for example
+.Ql -b 128
+to specify a base offset for the image's tiles.
+The above command could be generated from the following
+.Xr make 1
+rule, for example:
+.Bd -literal -offset indent
+%.2bpp %.tilemap: %.flags %.png
+	rgbgfx -o $*.2bpp -t $*.tilemap @$*.flags $*.png
+.Ed
+.Pp
+Since the contents of at-files are interpreted by
+.Nm ,
+.Sy no shell processing is performed ;
+for example, shell variables are not expanded
+.Ql ( $PWD ,
+.Ql %WINDIR% ,
+etc.).
+In at-files, lines that are empty or contain only whitespace are ignored; lines that begin with a hash sign
+.Pq Ql # ,
+optionally preceded by whitespace, are considered comments and also ignored.
+Each line can contain any number of arguments, which are separated by whitespace.
+.Pq \&No quoting feature to prevent this is provided.
+.Pp
+Note that a leading
+.Ql @
+has no special meaning on option arguments, and that the standard
+.Ql --
+to stop option processing also disables at-file processing.
+For example, the following command line reads command-line options from
+.Ql tilesets/town.flags
+then
+.Ql tilesets.flags ,
+but processes
+.Ql @tilesets/town.png
+as the input image and outputs tile data to
+.Ql @tilesets/town.2bpp :
+.Pp
+.Dl $ rgbgfx -o @tilesets/town.2bpp @tilesets/town.flags @tilesets.flags -- @tilesets/town.png
+.Pp
+At-files can also specify the input image directly, and call for more at-files, both using the regular syntax.
+Note that while
+.Ql --
+can be used in an at-file (with identical semantics), it is only effective inside of it\(emnormal option processing continues in the parent scope.
+.Sh PALETTE SPECIFICATION FORMATS
+The following formats are supported:
+.Bl -tag -width Ds
+.It Cm act
+.Lk https://www.adobe.com/devnet-apps/photoshop/fileformatashtml/#50577411_pgfId-1070626 Adobe Photoshop color table .
+.It Cm aco
+.Lk https://www.adobe.com/devnet-apps/photoshop/fileformatashtml/#50577411_pgfId-1055819 Adobe Photoshop color swatch .
+.It Cm gbc
+A GBC palette memory dump, as emitted by
+.Nm Fl p .
+Useful to force several images to share the same palette.
+.It Cm gpl
+.Lk https://docs.gimp.org/2.10/en/gimp-concepts-palettes.html GIMP palette .
+.It Cm hex
+Plaintext lines of hexadecimal colors in
+.Ql rrggbb
+format.
+.It Cm psp
+.Lk https://www.selapa.net/swatches/colors/fileformats.php#psp_pal Paint Shop Pro palette .
+.El
+.Pp
+If you wish for another format to be supported, please open an issue (see
+.Sx BUGS
+below) or contact us, and supply a few sample files.
+.Sh PALETTE GENERATION
+.Nm
+must generate palettes from the colors in the input image, unless
+.Fl c
+was used; in that case, the provided palettes will be used.
+.Sy If the order of colors in the palettes is important to you ,
+for example because you want to use palette swaps, please use
+.Fl c
+to specify the palette explicitly.
+.Pp
+First, if the image contains
+.Em any
+transparent pixel, color #0 of
+.Em all
+palettes will be allocated to it.
+This is done
+.Sy even if palettes were explicitly specified using Fl c ;
+then the specification only covers color #1 onwards.
+.Pq If you do not want this, ask your image editor to remove the alpha channel.
+.Pp
+After generating palettes,
+.Nm
+sorts colors within those palettes using the following rules:
+.EQ
+delim $$
+.EN
+.Bl -bullet -offset indent
+.It
+If the PNG file internally contains a palette (often dubbed an
+.Dq indexed
+PNG), then colors in each output palette will be sorted according to their order in the PNG's palette.
+Any unused entries will be ignored, and only the first entry is considered if there are any duplicates.
+.Po If you want a given color to appear more than once, or an unused color to appear at all, you should specify the palettes explicitly instead using Fl c ;
+.Fl c Cm embedded
+may be appropriate.
+.Pc
+.It
+Otherwise, if the PNG only contains shades of gray, they will be categorized into as many
+.Dq bins
+as there are colors per palette, and the palette is set to these bins.
+The darkest gray will end up in bin #0, and so on; note that this is the opposite of the RGB method below.
+If two distinct grays end up in the same bin, the RGB method is used instead.
+.Pp
+Be careful that
+.Nm
+is picky about what it considers
+.Dq grays :
+the red, green, and blue components of each color must
+.Em all
+be
+.Em exactly
+the same.
+.It
+If none of the above apply, colors are sorted from lightest (first) to darkest (last).
+The definition of luminance that
+.Nm
+uses is
+.Do
+$2126 times red + 7152 times green + 722 times blue$
+.Dc .
+.El
+.EQ
+delim off
+.EN
+.Pp
+Note that the
+.Dq indexed
+behavior depends on an internal detail of how the PNG is saved, specifically its
+.Ql PLTE
+chunk.
+Since few image editors (such as GIMP) expose that detail, this behavior is only kept for compatibility and should be considered deprecated.
+.Sh OUTPUT FILES
+All files output by
+.Nm
+are binary files, and designed to follow the Game Boy and Game Boy Color's native formats.
+What follows is succinct descriptions of those formats, including
+.Nm Ns -specific
+details.
+For more complete, beginner-friendly descriptions of the native formats with illustrations, please check out
+.Lk https://gbdev.io/pandocs/Rendering Pan Docs .
+.Ss Tile data
+Tile data is output like a binary dump of VRAM, with no padding between tiles.
+Each tile is 16 bytes, 2 per row of 8 pixels; the bits of color IDs are split into each byte
+.Pq or Dq bitplane .
+The leftmost pixel's color ID is stored in the two bytes' most significant bits, and the rightmost pixel's color ID in their least significant bits.
+.Pp
+When the bit depth
+.Pq Fl d
+is set to 1, the most significant bitplane (second byte) of each row, being all zeros, is simply not output.
+.Ss Palette data
+Palette data is output like a dump of palette memory.
+Each color is written as GBC-native little-endian RGB555, with the unused bit 15 set to 0.
+There is no padding between colors, nor between palettes; however, empty colors in the palettes are output as 0xFFFF.
+.EQ
+delim $$
+.EN
+For example, if 5 palettes are generated with
+.Fl s Cm 4 ,
+the palette data file will be $2 times 4 times 5 = 40$ bytes long, even if some palettes contain less than 3 colors.
+.EQ
+delim off
+.EN
+Note that
+.Fl n
+only caps how many palettes are generated (and thus this file's size), but fewer may be generated still.
+.Ss Tile map data
+A tile map is an array of tile IDs, with one byte per tile ID.
+The first byte always corresponds to the ID of the tile in top-left corner of the input image; the second byte is either the ID of the tile to its right (by default), or below it
+.Pq with Fl Z ;
+and so on, continuing in the same direction.
+Rows / columns (respectively) are stored consecutively, with no padding.
+.Ss Attribute map data
+Attribute maps mirror the format of tile maps, like on the GBC, especially the order in which bytes are output.
+The contents of individual bytes follows the GBC's native format:
+.Bl -column "Bit 2\(en0" "Background Palette number"
+.It Bit 7 Ta BG-to-OAM Priority Ta Set to 0
+.It Bit 6 Ta Vertical Flip Ta 0=Normal, 1=Mirror vertically
+.It Bit 5 Ta Horizontal Flip Ta 0=Normal, 1=Mirror horizontally
+.It Bit 4 Ta Not used Ta Set to 0
+.It Bit 3 Ta Tile VRAM Bank number Ta 0=Bank 0, 1=Bank 1
+.It Bit 2\(en0 Ta Background Palette number Ta BGP0-7
+.El
+.Pp
+Note that if more than 8 palettes are used, only the lowest 3 bits of the palette ID are output.
+.Sh REVERSE MODE
+.Nm
+can produce a PNG image from valid data.
+This may be useful for ripping graphics, recovering lost source images, etc.
+An important caveat on that last one, though: the conversion process is
+.Sy lossy
+both ways, so the
+.Do reversed Dc image won't be perfectly identical to the original\(embut it should be close to a Game Boy's output .
+.Pq Keep in mind that many of consoles output different colors, so there is no true reference rendering.
+.Pp
+When using reverse mode, make sure to pass the same flags that were given when generating the data, especially
+.Fl C , d , N , s , x ,
+and
+.Fl Z .
+.Do Sx At-files Dc may help with this .
+.Nm
+will warn about any inconsistencies it detects.
+.Pp
+Files that are normally outputs
+.Pq Fl a , p , t
+become inputs, and
+.Ar file
+will be written to instead of read from, and thus needs not exist beforehand.
+Any of these inputs not passed is assumed to be some default:
+.Bl -column "attribute map"
+.It palettes Ta Unspecified palette data makes
+.Nm
+assume DMG (monochrome Game Boy) mode: a single palette of 4 grays.
+It is possible to pass palettes using
+.Fl c
+instead of
+.Fl p .
+.It tile data Ta Tile data must be provided, as there is no reasonable assumption to fall back on.
+.It tile map Ta A missing tile map makes
+.Nm
+assume that tiles were not deduplicated, and should be laid out in the order they are stored.
+.It attribute map Ta Without an attribute map,
+.Nm
+assumes that no tiles were mirrored.
+.El
+.Sh NOTES
+Some flags have had their functionality removed.
+.Fl D , f ,
+and
+.Fl F
+are now ignored, and
+.Fl h
+is an alias for the new (and less confusingly named)
+.Fl Z .
+These will be removed and/or repurposed in future versions of
+.Nm ,
+so relying on them is not recommended.
+The same applies to the corresponding long options.
+.Pp
+If you are curious, you may find out that palette generation is an NP-complete problem, so
+.Nm
+does not attempt to find the optimal solution, but instead to find a good one in a reasonable amount of time.
+It is possible to compute the optimal solution externally (using a solver, for example), and then provide it to
+.Nm
+via
+.Fl c .
+.Sh EXAMPLES
+The following will only validate the PNG (check its size, that all tiles have a suitable amount of colors, etc.), but output nothing:
+.Pp
+.Dl $ rgbgfx src/res/maps/overworld/tileset.png
+.Pp
+The following will convert the image using the two given palettes (and only those), and store the generated 2bpp tile data in
+.Ql tileset.2bpp ,
+and the attribute map in
+.Ql tileset.attrmap .
+.Pp
+.Dl $ rgbgfx -c '#ffffff,#8d05de, #dc7905,#000000 ; #fff,#8d05de, #7e0000 \&, #000' -A -o tileset.2bpp tileset.png
+.Pp
+TODO: more examples.
+.Sh BUGS
+Please report bugs and mistakes in this man page on
+.Lk https://github.com/gbdev/rgbds/issues GitHub .
+Bug reports and feature requests about RGBDS are also welcome!
+.Sh SEE ALSO
+.Xr rgbds 7 ,
+.Xr rgbasm 1 ,
+.Xr rgblink 1 ,
+.Xr rgbfix 1 ,
+.Xr gbz80 7
+.Pp
+The Game Boy hardware reference
+.Lk https://gbdev.io/pandocs/Rendering.html Pan Docs ,
+particularly the section about graphics.
+.Sh HISTORY
+.Nm
+was originally created by
+.An stag019
+to be included in RGBDS.
+It was later rewritten by
+.An ISSOtm ,
+and is now maintained by a number of contributors at
+.Lk https://github.com/gbdev/rgbds .

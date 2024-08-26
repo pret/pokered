@@ -1,0 +1,6 @@
+warning: break.asm(9): [-Wuser]
+    done 5
+warning: break.asm(17): [-Wuser]
+    OK
+FATAL: break.asm(18) -> break.asm::REPT~1(22):
+    Ended block with 1 unterminated IF construct

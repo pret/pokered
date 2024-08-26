@@ -1,0 +1,2 @@
+-f LHG
+Checks that the global checksum is correctly affected by the header checksum

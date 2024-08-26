@@ -1,0 +1,5 @@
+ROM0
+	org $18
+	"sec"
+	org $20
+	"secfix"

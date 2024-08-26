@@ -1,0 +1,3 @@
+error: invalid-macro-arg-symbol.asm(1):
+    Bracketed symbol "foo" does not exist
+error: Assembly aborted (1 error)!

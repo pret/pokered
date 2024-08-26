@@ -1,0 +1,14 @@
+1 << 1 = $2
+1 << 32 = $0
+1 << 9001 = $0
+-1 << 1 = $FFFFFFFE
+-1 << 32 = $0
+-1 << -9001 = $FFFFFFFF
+-1 >> 1 = $FFFFFFFF
+-1 >> 32 = $FFFFFFFF
+-1 >> 9001 = $FFFFFFFF
+-4 >> 1 = $FFFFFFFE
+-4 >> 2 = $FFFFFFFF
+-1 >> -9001 = $0
+$DEADBEEF >> 1 = $EF56DF77
+$DEADBEEF >>> 1 = $6F56DF77

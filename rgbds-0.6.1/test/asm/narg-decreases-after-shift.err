@@ -1,0 +1,2 @@
+warning: narg-decreases-after-shift.asm(14) -> narg-decreases-after-shift.asm::testing(9): [-Wmacro-shift]
+    Cannot shift macro arguments past their end

@@ -1,0 +1,6 @@
+error: Section "conflicting alignment" is defined with conflicting 8-byte alignment (offset 7) and 16-byte alignment (offset 14)
+---
+error: <stdin>(18):
+    Section already declared with incompatible 8-byte alignment (offset 7)
+FATAL: <stdin>(18):
+    Cannot create section "conflicting alignment" (1 error)

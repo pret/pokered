@@ -1,0 +1,5 @@
+error: def.asm(23):
+    'constant' already defined at def.asm(10)
+error: def.asm(29):
+    syntax error
+error: Assembly aborted (2 errors)!

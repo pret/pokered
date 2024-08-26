@@ -1,0 +1,3 @@
+error: line-continuation.asm(7):
+    Label "foo" created outside of a SECTION
+error: Assembly aborted (1 error)!

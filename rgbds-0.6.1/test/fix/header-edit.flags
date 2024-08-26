@@ -1,0 +1,2 @@
+-Cf h
+Checks that the header checksum properly accounts for header modifications

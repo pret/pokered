@@ -1,0 +1,6 @@
+error: Section "conflicting alignment" is defined with conflicting 4-byte alignment (offset 0) and address $cafe
+---
+error: <stdin>(18):
+    Section already declared as aligned to 4 bytes (offset 0)
+FATAL: <stdin>(18):
+    Cannot create section "conflicting alignment" (1 error)

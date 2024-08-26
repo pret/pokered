@@ -1,0 +1,2 @@
+warning: file-sym.asm(1): [-Wobsolete]
+    `__FILE__` is deprecated

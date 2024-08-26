@@ -1,0 +1,6 @@
+error: Section "different data" is of type ROM0, which cannot be unionized
+---
+error: <stdin>(16):
+    Cannot declare ROM sections as UNION
+FATAL: <stdin>(16):
+    Cannot create section "different data" (1 error)

@@ -1,0 +1,22 @@
+warning: macro-arguments.asm(18): [-Wlong-string]
+    Macro argument too long
+warning: macro-arguments.asm(21): [-Wempty-macro-arg]
+    Empty macro argument
+warning: macro-arguments.asm(23): [-Wempty-macro-arg]
+    Empty macro argument
+warning: macro-arguments.asm(24): [-Wempty-macro-arg]
+    Empty macro argument
+warning: macro-arguments.asm(24): [-Wempty-macro-arg]
+    Empty macro argument
+warning: macro-arguments.asm(25): [-Wempty-macro-arg]
+    Empty macro argument
+warning: macro-arguments.asm(26): [-Wempty-macro-arg]
+    Empty macro argument
+warning: macro-arguments.asm(27): [-Wempty-macro-arg]
+    Empty macro argument
+warning: macro-arguments.asm(27): [-Wempty-macro-arg]
+    Empty macro argument
+warning: macro-arguments.asm(27): [-Wempty-macro-arg]
+    Empty macro argument
+warning: macro-arguments.asm(27): [-Wempty-macro-arg]
+    Empty macro argument

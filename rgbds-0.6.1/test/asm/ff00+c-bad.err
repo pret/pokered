@@ -1,0 +1,5 @@
+error: ff00+c-bad.asm(8):
+    Expected constant expression equal to $FF00 for "$ff00+c"
+error: ff00+c-bad.asm(9):
+    Expected constant expression equal to $FF00 for "$ff00+c"
+error: Assembly aborted (2 errors)!

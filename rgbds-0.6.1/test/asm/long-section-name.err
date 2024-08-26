@@ -1,0 +1,2 @@
+warning: long-section-name.asm(1): [-Wlong-string]
+    String constant too long

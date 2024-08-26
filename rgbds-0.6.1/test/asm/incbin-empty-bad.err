@@ -1,0 +1,3 @@
+error: incbin-empty-bad.asm(3):
+    Specified range in INCBIN is out of bounds (0 + 1 > 0)
+error: Assembly aborted (1 error)!

@@ -1,0 +1,3 @@
+error: local-purge.asm(8):
+    Interpolated symbol ".loc" does not exist
+error: Assembly aborted (1 error)!

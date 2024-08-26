@@ -1,0 +1,2 @@
+-C -t 0123456789ABCDEF
+Checks that the CGB flag correctly truncates the title to 15 chars only

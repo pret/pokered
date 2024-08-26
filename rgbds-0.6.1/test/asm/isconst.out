@@ -1,0 +1,6 @@
+Test #1: ISCONST reports $1
+Test #2: ISCONST reports $0
+Test #3: ISCONST reports $1
+Test #4: ISCONST reports $1
+Test #5: ISCONST reports $0
+Test #6: ISCONST reports $1

@@ -1,0 +1,3 @@
+error: macro-arg-in-string.asm(12):
+    Illegal character escape '!'
+error: Assembly aborted (1 error)!

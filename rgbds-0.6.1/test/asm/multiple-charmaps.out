@@ -1,0 +1,36 @@
+main charmap
+$0
+newcharmap map1
+$6162
+newcharmap map2, main
+$0
+setcharmap map1
+$6162
+newcharmap map3
+$1
+newcharmap map4, map3
+$1
+$2
+setcharmap map3
+$1
+$6364
+setcharmap main
+$0
+modify main charmap
+$0
+$3
+setcharmap map1
+pushc
+setcharmap map2
+pushc
+setcharmap map3
+$1
+$6364
+$6566
+popc
+$0
+popc
+$6162
+newcharmap map1
+setcharmap map5
+popc

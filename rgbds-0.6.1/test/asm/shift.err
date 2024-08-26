@@ -1,0 +1,28 @@
+warning: shift.asm(14) -> shift.asm::test(8): [-Wshift-amount]
+    Shifting left by large amount 32
+warning: shift.asm(15) -> shift.asm::test(8): [-Wshift-amount]
+    Shifting left by large amount 9001
+warning: shift.asm(17) -> shift.asm::test(8): [-Wshift-amount]
+    Shifting left by large amount 32
+warning: shift.asm(18) -> shift.asm::test(8): [-Wshift-amount]
+    Shifting left by negative amount -9001
+warning: shift.asm(20) -> shift.asm::test(8): [-Wshift]
+    Shifting right negative value -1
+warning: shift.asm(21) -> shift.asm::test(8): [-Wshift]
+    Shifting right negative value -1
+warning: shift.asm(21) -> shift.asm::test(8): [-Wshift-amount]
+    Shifting right by large amount 32
+warning: shift.asm(22) -> shift.asm::test(8): [-Wshift]
+    Shifting right negative value -1
+warning: shift.asm(22) -> shift.asm::test(8): [-Wshift-amount]
+    Shifting right by large amount 9001
+warning: shift.asm(23) -> shift.asm::test(8): [-Wshift]
+    Shifting right negative value -4
+warning: shift.asm(24) -> shift.asm::test(8): [-Wshift]
+    Shifting right negative value -4
+warning: shift.asm(25) -> shift.asm::test(8): [-Wshift]
+    Shifting right negative value -1
+warning: shift.asm(25) -> shift.asm::test(8): [-Wshift-amount]
+    Shifting right by negative amount -9001
+warning: shift.asm(27) -> shift.asm::test(8): [-Wshift]
+    Shifting right negative value -559038737

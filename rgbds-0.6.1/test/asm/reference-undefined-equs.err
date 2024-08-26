@@ -1,0 +1,5 @@
+error: reference-undefined-equs.asm(4):
+    's1' already referenced at reference-undefined-equs.asm(2)
+error: reference-undefined-equs.asm(5):
+    's2' already referenced at reference-undefined-equs.asm(2)
+error: Assembly aborted (2 errors)!

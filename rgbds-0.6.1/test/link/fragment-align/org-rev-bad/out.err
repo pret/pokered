@@ -1,0 +1,1 @@
+error: Section "Frag" is defined with conflicting 4-byte alignment (offset 1) and address $0006

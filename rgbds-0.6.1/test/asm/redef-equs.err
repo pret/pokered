@@ -1,0 +1,3 @@
+error: redef-equs.asm(23):
+    'N' already defined as non-EQUS at redef-equs.asm(22)
+error: Assembly aborted (1 error)!

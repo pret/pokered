@@ -1,0 +1,6 @@
+error: Could not fit tile colors [$6c8a, $7f55, $7fff] in specified palettes
+error: Could not fit tile colors [$6c8a, $7f55] in specified palettes
+note: The following palettes were specified:
+        [$7fff, $7f55]
+        [$7fff, $6c8a]
+Conversion aborted after 2 errors

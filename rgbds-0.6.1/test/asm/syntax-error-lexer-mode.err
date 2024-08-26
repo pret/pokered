@@ -1,0 +1,5 @@
+error: syntax-error-lexer-mode.asm(7):
+    syntax error, unexpected af
+error: syntax-error-lexer-mode.asm(11):
+    syntax error, unexpected af, expecting identifier
+error: Assembly aborted (2 errors)!

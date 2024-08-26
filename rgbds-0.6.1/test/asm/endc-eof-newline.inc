@@ -1,0 +1,3 @@
+IF X
+	PRINTLN "Yosh!"
+ENDC

@@ -1,0 +1,2 @@
+error: rst-bad.asm(2): Value 1 is not a RST vector
+Linking failed with 1 error

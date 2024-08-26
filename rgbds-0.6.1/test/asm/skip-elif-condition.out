@@ -1,0 +1,3 @@
+small 2 + 2
+small STRLEN("abcdef")
+large 101

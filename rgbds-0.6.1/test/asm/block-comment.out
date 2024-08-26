@@ -1,0 +1,3 @@
+hi
+block (/* ... */) comments at ends of line are fine
+mutliline

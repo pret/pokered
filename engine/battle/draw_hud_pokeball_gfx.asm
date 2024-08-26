@@ -136,6 +136,26 @@ PlaceEnemyHUDTiles:
 	ld de, wHUDGraphicsTiles
 	ld bc, $3
 	call CopyData
+	
+	ld a, [wEnemyMonSpecies2]
+	and a
+	jr z, .pokeBallHUD
+	ld a, [wEnemyMon]
+	ld [wd11e], a
+	predef IndexToPokedex
+	ld hl, wPokedexOwned
+	ld a, [wd11e]
+	dec a
+	ld c, a
+	ld b, FLAG_TEST
+	predef FlagActionPredef
+	ld a, c
+	and a
+	jr z, .notOwned
+	coord hl, 1, 1
+	ld [hl], $de
+.notOwned
+.pokeBallHUD	
 	hlcoord 1, 2
 	ld de, $1
 	jr PlaceHUDTiles

@@ -1,0 +1,7 @@
+error: const-and.asm(2):
+    PC has no value outside a section
+error: const-and.asm(11):
+    Expected constant expression: 'Aligned' is not constant at assembly time
+error: const-and.asm(17):
+    Expected constant expression: PC is not constant at assembly time
+error: Assembly aborted (3 errors)!

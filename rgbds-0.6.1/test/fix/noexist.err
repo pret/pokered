@@ -1,0 +1,2 @@
+FATAL: Failed to open "noexist" for reading+writing: No such file or directory
+Fixing "noexist" failed with 1 error

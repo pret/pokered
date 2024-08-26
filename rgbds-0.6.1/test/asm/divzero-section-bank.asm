@@ -1,0 +1,1 @@
+SECTION "sec", ROMX[1/0]

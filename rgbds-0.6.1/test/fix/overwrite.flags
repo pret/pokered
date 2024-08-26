@@ -1,0 +1,2 @@
+-O -Cjv -t PM_CRYSTAL -i BYTE -n 0 -k 01 -l 0x33 -m 0x10 -r 3 -p 0
+Checks that the -O flag suppresses "Overwrote a non-zero byte" warnings from the rest

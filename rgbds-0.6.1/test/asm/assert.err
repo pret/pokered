@@ -1,0 +1,10 @@
+error: assert.asm(4):
+    Assertion failed
+warning: assert.asm(10): [-Wassert]
+    Assertion failed
+error: assert.asm(18):
+    Expected constant expression: 'FloatingBase' is not constant at assembly time
+error: assert.asm(18):
+    Assertion failed
+FATAL: assert.asm(21):
+    Assertion failed

@@ -1,0 +1,5 @@
+error: invalid-utf-8.asm(6) -> invalid-utf-8.asm::m(4):
+    Unknown character 0xCF
+error: invalid-utf-8.asm(6) -> invalid-utf-8.asm::m(4):
+    Unknown character 0xD3
+error: Assembly aborted (2 errors)!

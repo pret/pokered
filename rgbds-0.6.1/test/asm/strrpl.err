@@ -1,0 +1,4 @@
+warning: strrpl.asm(4): [-Wempty-strrpl]
+    STRRPL: Cannot replace an empty string
+warning: strrpl.asm(6): [-Wlong-string]
+    STRRPL: String too long, got truncated

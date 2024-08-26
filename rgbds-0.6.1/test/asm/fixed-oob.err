@@ -1,0 +1,15 @@
+error: fixed-oob.asm(1):
+    Section "ROM0"'s fixed address 0xbabe is outside of range [0; 0x7fff]
+error: fixed-oob.asm(3):
+    Section "ROMX"'s fixed address 0xbeef is outside of range [0x4000; 0x7fff]
+error: fixed-oob.asm(5):
+    Section "VRAM"'s fixed address 0xc0de is outside of range [0x8000; 0x9fff]
+error: fixed-oob.asm(7):
+    Section "SRAM"'s fixed address 0xcafe is outside of range [0xa000; 0xbfff]
+error: fixed-oob.asm(11):
+    Section "WRAMX"'s fixed address 0xdad is outside of range [0xd000; 0xdfff]
+error: fixed-oob.asm(13):
+    Section "OAM"'s fixed address 0xcab is outside of range [0xfe00; 0xfe9f]
+error: fixed-oob.asm(15):
+    Section "HRAM"'s fixed address 0xbad is outside of range [0xff80; 0xfffe]
+error: Assembly aborted (7 errors)!

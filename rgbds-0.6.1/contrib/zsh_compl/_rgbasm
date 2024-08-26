@@ -1,0 +1,66 @@
+#compdef rgbasm
+
+_rgbasm_warnings() {
+	local warnings=(
+		'error:Turn all warnings into errors'
+
+		'all:Enable most warning messages'
+		'extra:Enable extra, possibly unwanted, messages'
+		'everything:Enable literally everything'
+
+		'assert:Warn when WARN-type asserts fail'
+		'backwards-for:Warn when start and stop are backwards relative to step'
+		'builtin-args:Report incorrect args to built-in funcs'
+		'charmap-redef:Warn when redefining a charmap mapping'
+		'div:Warn when dividing the smallest int by -1'
+		'empty-data-directive:Warn on arg-less d[bwl] in ROM'
+		'empty-macro-arg:Warn on empty macro arg'
+		'empty-strrpl:Warn on calling STRRPL with empty pattern'
+		'large-constant:Warn on constants too large for a signed 32-bit int'
+		'long-string:Warn on strings too long'
+		'macro-shift:Warn when shifting macro args part their limits'
+		'nested-comment:Warn on "/*" inside block comments'
+		'numeric-string:Warn when a multi-character string is treated as a number'
+		'obsolete:Warn when using deprecated features'
+		'shift:Warn when shifting negative values'
+		'shift-amount:Warn when a shift'\''s operand it negative or \> 32'
+		'truncation:Warn when implicit truncation loses bits'
+		'unmapped-char:Warn on unmapped character'
+		'user:Warn when executing the WARN built-in'
+	)
+	# TODO: handle `no-` and `error=` somehow?
+	# TODO: handle `=0|1|2` levels for `numeric-string`, `truncation`, and `unmapped-char`?
+	_describe warning warnings
+}
+
+local args=(
+	# Arguments are listed here in the same order as in the manual, except for the version
+	'(- : * options)'{-V,--version}'[Print version number]'
+
+	'(-E --export-all)'{-E,--export-all}'[Export all symbols]'
+	'(-H --nop-after-halt)'{-H,--nop-after-halt}'[Output a `nop` after `halt`]'
+	'(-h --halt-without-nop)'{-h,--halt-without-nop}'[Prevent outputting a `nop` after `halt`]'
+	'(-L --preserve-ld)'{-L,--preserve-ld}'[Prevent optimizing `ld` into `ldh`]'
+	'(-l --auto-ldh)'{-l,--auto-ldh}'[Optimize `ld` into `ldh`]'
+	'(-v --verbose)'{-v,--verbose}'[Print additional messages regarding progression]'
+	-w'[Disable all warnings]'
+
+	'(-b --binary-digits)'{-b,--binary-digits}'+[Change chars for binary constants]:digit spec:'
+	'*'{-D,--define}'+[Define a string symbol]:name + value (default 1):'
+	'(-g --gfx-chars)'{-g,--gfx-chars}'+[Change chars for gfx constants]:chars spec:'
+	'(-I --include)'{-I,--include}'+[Add an include directory]:include path:_files -/'
+	'(-M --dependfile)'{-M,--dependfile}"+[List deps in make format]:output file:_files -g '*.{d,mk}'"
+	-MG'[Assume missing files should be generated]'
+	-MP'[Add phony targets to all deps]'
+	'*'-MT"+[Add a target to the rules]:target:_files -g '*.{d,mk,o}'"
+	'*'-MQ"+[Add a target to the rules]:target:_files -g '*.{d,mk,o}'"
+	'(-o --output)'{-o,--output}'+[Output file]:output file:_files'
+	'(-P --preinclude)'{-P,--preinclude}"+[Pre-include a file]:include file:_files -g '*.{asm,inc}'"
+	'(-p --pad-value)'{-p,--pad-value}'+[Set padding byte]:padding byte:'
+	'(-Q --q-precision)'{-Q,--q-precision}'+[Set fixed-point precision]:precision:'
+	'(-r --recursion-depth)'{-r,--recursion-depth}'+[Set maximum recursion depth]:depth:'
+	'(-W --warning)'{-W,--warning}'+[Toggle warning flags]:warning flag:_rgbasm_warnings'
+
+	":assembly sources:_files -g '*.asm'"
+)
+_arguments -s -S : $args

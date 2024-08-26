@@ -1,0 +1,3 @@
+error: sym-noexist.asm(3): Unknown symbol "nothing"
+error: sym-noexist.asm(2): Unknown symbol "where"
+Linking failed with 2 errors

@@ -1,0 +1,3 @@
+error: expand-empty-string.asm(6) -> expand-empty-string.asm::test(4):
+    syntax error
+error: Assembly aborted (1 error)!

@@ -1,0 +1,9 @@
+error: sym-scope.asm(4):
+    Local label '.tooSoon' in main scope
+error: sym-scope.asm(5):
+    Local label 'Nice.try' in main scope
+error: sym-scope.asm(17):
+    Not currently in the scope of 'Parentheses'
+error: sym-scope.asm(21):
+    Not currently in the scope of 'Parent'
+error: Assembly aborted (4 errors)!

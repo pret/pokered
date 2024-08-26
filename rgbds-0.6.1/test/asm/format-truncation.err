@@ -1,0 +1,35 @@
+error: format-truncation.asm(5):
+    Formatted numeric value too long
+error: format-truncation.asm(6):
+    Formatted numeric value too long
+error: format-truncation.asm(7):
+    Fractional width 260 too long, limiting to 255
+error: format-truncation.asm(7):
+    Formatted numeric value too long
+error: format-truncation.asm(8):
+    Formatted string value too long
+error: format-truncation.asm(9):
+    Formatted string value too long
+error: format-truncation.asm(11):
+    Formatted numeric value too long
+warning: format-truncation.asm(11): [-Wlong-string]
+    String constant too long
+error: format-truncation.asm(12):
+    Formatted numeric value too long
+warning: format-truncation.asm(12): [-Wlong-string]
+    String constant too long
+error: format-truncation.asm(13):
+    Fractional width 260 too long, limiting to 255
+error: format-truncation.asm(13):
+    Formatted numeric value too long
+warning: format-truncation.asm(13): [-Wlong-string]
+    String constant too long
+error: format-truncation.asm(14):
+    Formatted string value too long
+warning: format-truncation.asm(14): [-Wlong-string]
+    String constant too long
+error: format-truncation.asm(15):
+    Formatted string value too long
+warning: format-truncation.asm(15): [-Wlong-string]
+    String constant too long
+error: Assembly aborted (12 errors)!

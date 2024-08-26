@@ -1,0 +1,5 @@
+error: invalid-macro-arg-character.asm(1):
+    Invalid character in bracketed macro argument '!'
+error: invalid-macro-arg-character.asm(1):
+    syntax error, unexpected >
+error: Assembly aborted (2 errors)!

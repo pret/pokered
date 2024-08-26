@@ -1,0 +1,6 @@
+	println strrpl("\tld [hli], a", "[hli]", "[hl+]")
+	println strrpl("lolololol", "lol", "hah")
+	println strrpl("h e  ll   o", " ", "")
+	println strrpl("world", "", "x")
+	println strrpl("", "a", "b")
+	println strrpl("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "a", "[bbbbbbbb]")

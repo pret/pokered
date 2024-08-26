@@ -1,0 +1,6 @@
+error: Section "conflicting banks" is defined with conflicting banks 4 and 1
+---
+error: <stdin>(14):
+    Section already declared with different bank 4
+FATAL: <stdin>(14):
+    Cannot create section "conflicting banks" (1 error)

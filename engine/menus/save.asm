@@ -141,11 +141,6 @@ LoadSAVIgnoreBadCheckSum:
 	jp LoadSAV2
 
 SaveSAV:
-	farcall PrintSaveScreenText
-	ld hl, WouldYouLikeToSaveText
-	call SaveSAVConfirm
-	and a   ;|0 = Yes|1 = No|
-	ret nz
 	ld a, [wSaveFileStatus]
 	dec a
 	jr z, .save
@@ -161,20 +156,13 @@ SaveSAV:
 	lb bc, 4, 18
 	call ClearScreenArea
 	hlcoord 1, 14
-	ld de, NowSavingString
-	call PlaceString
-	ld c, 120
-	call DelayFrames
 	ld hl, GameSavedText
 	call PrintText
 	ld a, SFX_SAVE
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
-	ld c, 30
+	ld c, 10
 	jp DelayFrames
-
-NowSavingString:
-	db "Now saving...@"
 
 SaveSAVConfirm:
 	call PrintText
@@ -185,10 +173,6 @@ SaveSAVConfirm:
 	call DisplayTextBoxID ; yes/no menu
 	ld a, [wCurrentMenuItem]
 	ret
-
-WouldYouLikeToSaveText:
-	text_far _WouldYouLikeToSaveText
-	text_end
 
 GameSavedText:
 	text_far _GameSavedText
@@ -343,12 +327,6 @@ BoxSRAMPointerTable:
 	dw sBox6 ; sBox12
 
 ChangeBox::
-	ld hl, WhenYouChangeBoxText
-	call PrintText
-	call YesNoChoice
-	ld a, [wCurrentMenuItem]
-	and a
-	ret nz ; return if No was chosen
 	ld hl, wCurrentBoxNum
 	bit 7, [hl] ; is it the first time player is changing the box?
 	call z, EmptyAllSRAMBoxes ; if so, empty all boxes in SRAM

@@ -1,0 +1,11 @@
+error: cascading-errors.asm(18): Unknown symbol "Foo"
+error: cascading-errors.asm(19): Unknown symbol "Bar"
+error: cascading-errors.asm(16): Unknown symbol "hNonExist"
+error: cascading-errors.asm(14): Unknown symbol "NonExist"
+error: cascading-errors.asm(12): Unknown symbol "Foo"
+error: cascading-errors.asm(10): Unknown symbol "Foo"
+error: cascading-errors.asm(10): Division by 0
+error: cascading-errors.asm(9): Unknown symbol "Foo"
+error: cascading-errors.asm(9): Unknown symbol "Bar"
+error: cascading-errors.asm(8): Unknown symbol "Bar"
+Linking failed with 10 errors

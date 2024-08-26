@@ -1,0 +1,4 @@
+PRINTLN %Oo_Oo_Oo
+
+OPT b.X
+PRINTLN %..X._X.X.

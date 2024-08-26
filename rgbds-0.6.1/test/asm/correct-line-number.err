@@ -1,0 +1,4 @@
+warning: correct-line-number.asm(5): [-Wuser]
+    Am I geting ahead of myself?
+warning: correct-line-number.asm(11): [-Wuser]
+    Hopefully not.

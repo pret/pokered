@@ -1,0 +1,21 @@
+error: label-macro-arg.asm(38) -> label-macro-arg.asm::test_char(25):
+    syntax error, unexpected =
+while expanding symbol "VAR_DEF"
+error: label-macro-arg.asm(38) -> label-macro-arg.asm::test_char(26):
+    syntax error, unexpected =
+error: label-macro-arg.asm(38) -> label-macro-arg.asm::test_char(29):
+    Interpolated symbol "sizeof_.something" does not exist
+error: label-macro-arg.asm(39) -> label-macro-arg.asm::test_char(25):
+    Label "sizeof_" created outside of a SECTION
+while expanding symbol "VAR_DEF"
+error: label-macro-arg.asm(39) -> label-macro-arg.asm::test_char(25):
+    Macro "something" not defined
+error: label-macro-arg.asm(39) -> label-macro-arg.asm::test_char(26):
+    'sizeof_' already defined at label-macro-arg.asm(39) -> label-macro-arg.asm::test_char(25)
+error: label-macro-arg.asm(39) -> label-macro-arg.asm::test_char(26):
+    Macro "something" not defined
+error: label-macro-arg.asm(39) -> label-macro-arg.asm::test_char(29):
+    Invalid format spec 'sizeof_'
+error: label-macro-arg.asm(39) -> label-macro-arg.asm::test_char(29):
+    Interpolated symbol "something" does not exist
+error: Assembly aborted (9 errors)!

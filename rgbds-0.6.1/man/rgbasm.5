@@ -1,0 +1,2117 @@
+'\" e
+.\"
+.\" This file is part of RGBDS.
+.\"
+.\" Copyright (c) 2017-2021, Antonio Nino Diaz and RGBDS contributors.
+.\"
+.\" SPDX-License-Identifier: MIT
+.\"
+.Dd March 28, 2021
+.Dt RGBASM 5
+.Os
+.Sh NAME
+.Nm rgbasm
+.Nd language documentation
+.Sh DESCRIPTION
+This is the full description of the language used by
+.Xr rgbasm 1 .
+The description of the instructions supported by the Game Boy CPU is in
+.Xr gbz80 7 .
+.Pp
+It is advisable to have some familiarity with the Game Boy hardware before reading this document.
+RGBDS is specifically targeted at the Game Boy, and thus a lot of its features tie directly to its concepts.
+This document is not intended to be a Game Boy hardware reference.
+.Pp
+Generally,
+.Dq the linker
+will refer to
+.Xr rgblink 1 ,
+but any program that processes RGBDS object files (described in
+.Xr rgbds 5 )
+can be used in its place.
+.Sh SYNTAX
+The syntax is line-based, just as in any other assembler, meaning that you do one instruction or directive per line:
+.Pp
+.Dl Oo Ar label Oc Oo Ar instruction Oc Oo Ar ;\ comment Oc
+.Pp
+Example:
+.Bd -literal -offset indent
+John: ld a,87 ;Weee
+.Ed
+.Pp
+All reserved keywords (directives, mnemonics, registers, etc.) are case-insensitive;
+all identifiers (symbol names) are case-sensitive.
+.Pp
+Comments are used to give humans information about the code, such as explanations.
+The assembler
+.Em always
+ignores comments and their contents.
+.Pp
+There are two syntaxes for comments.
+The most common is that anything that follows a semicolon
+.Ql \&;
+not inside a string, is a comment until the end of the line.
+The second is a block comment, beginning with
+.Ql /*
+and ending with
+.Ql */ .
+It can be split across multiple lines, or occur in the middle of an expression:
+.Bd -literal -offset indent
+DEF X = /* the value of x
+           should be 3 */ 3
+.Ed
+.Pp
+Sometimes lines can be too long and it may be necessary to split them.
+To do so, put a backslash at the end of the line:
+.Bd -literal -offset indent
+    DB 1, 2, 3,\ \e
+       4, 5, 6,\ \e\ ;\ Put it before any comments
+       7, 8, 9
+    DB "Hello,\ \e\ \ ;\ Space before the \e is included
+world!"\ \ \ \ \ \ \ \ \ \ \ ;\ Any leading space is included
+.Ed
+.Ss Symbol interpolation
+A funky feature is writing a symbol between
+.Ql {braces} ,
+called
+.Dq symbol interpolation .
+This will paste the symbol's contents as if they were part of the source file.
+If it is a string symbol, its characters are simply inserted as-is.
+If it is a numeric symbol, its value is converted to hexadecimal notation with a dollar sign
+.Sq $
+prepended.
+.Pp
+Symbol interpolations can be nested, too!
+.Bd -literal -offset indent
+DEF topic EQUS "life, the universe, and \e"everything\e""
+DEF meaning EQUS "answer"
+;\ Defines answer = 42
+DEF {meaning} = 42
+;\ Prints "The answer to life, the universe, and "everything" is $2A"
+PRINTLN "The {meaning} to {topic} is {{meaning}}"
+PURGE topic, meaning, {meaning}
+.Ed
+.Pp
+Symbols can be
+.Em interpolated
+even in the contexts that disable automatic
+.Em expansion
+of string constants:
+.Ql name
+will be expanded in all of
+.Ql DEF({name}) ,
+.Ql DEF {name} EQU/=/EQUS/etc ... ,
+.Ql PURGE {name} ,
+and
+.Ql MACRO {name} ,
+but, for example, won't be in
+.Ql DEF(name) .
+.Pp
+It's possible to change the way symbols are printed by specifying a print format like so:
+.Ql {fmt:symbol} .
+The
+.Ql fmt
+specifier consists of these parts:
+.Ql <sign><prefix><align><pad><width><frac><type> .
+These parts are:
+.Bl -column "<prefix>"
+.It Sy Part Ta Sy Meaning
+.It Ql <sign> Ta May be
+.Ql +
+or
+.Ql \  .
+If specified, prints this character in front of non-negative numbers.
+.It Ql <prefix> Ta May be
+.Ql # .
+If specified, prints the appropriate prefix for numbers,
+.Ql $ ,
+.Ql & ,
+or
+.Ql % .
+.It Ql <align> Ta May be
+.Ql - .
+If specified, aligns left instead of right.
+.It Ql <pad> Ta May be
+.Ql 0 .
+If specified, pads right-aligned numbers with zeros instead of spaces.
+.It Ql <width> Ta May be one or more
+.Ql 0
+\[en]
+.Ql 9 .
+If specified, pads the value to this width, right-aligned with spaces by default.
+.It Ql <frac> Ta May be
+.Ql \&.
+followed by one or more
+.Ql 0
+\[en]
+.Ql 9 .
+If specified, prints this many digits of a fixed-point fraction.
+Defaults to 5 digits, maximum 255 digits.
+.It Ql <type> Ta Specifies the type of value.
+.El
+.Pp
+All the format specifier parts are optional except the
+.Ql <type> .
+Valid print types are:
+.Bl -column -offset indent "Print type" "Lowercase hexadecimal" "Example"
+.It Sy Print type Ta Sy Format Ta Sy Example
+.It Ql d Ta Signed decimal Ta -42
+.It Ql u Ta Unsigned decimal Ta 42
+.It Ql x Ta Lowercase hexadecimal Ta 2a
+.It Ql X Ta Uppercase hexadecimal Ta 2A
+.It Ql b Ta Binary Ta 101010
+.It Ql o Ta Octal Ta 52
+.It Ql f Ta Fixed-point Ta 1234.56789
+.It Ql s Ta String Ta \&"example\&"
+.El
+.Pp
+Examples:
+.Bd -literal -offset indent
+SECTION "Test", ROM0[2]
+X:                 ;\ This works with labels **whose address is known**
+DEF Y = 3          ;\ This also works with variables
+DEF SUM EQU X + Y  ;\ And likewise with numeric constants
+; Prints "%0010 + $3 == 5"
+PRINTLN "{#05b:X} + {#x:Y} == {d:SUM}"
+
+rsset 32
+DEF PERCENT rb 1   ;\ Same with offset constants
+DEF VALUE = 20
+DEF RESULT = MUL(20.0, 0.32)
+; Prints "32% of 20 = 6.40"
+PRINTLN "{d:PERCENT}% of {d:VALUE} = {f:RESULT}"
+
+DEF WHO EQUS STRLWR("WORLD")
+; Prints "Hello world!"
+PRINTLN "Hello {s:WHO}!"
+.Ed
+.Pp
+Although, for these examples,
+.Ic STRFMT
+would be more approriate; see
+.Sx String expressions
+further below.
+.Sh EXPRESSIONS
+An expression can be composed of many things.
+Numeric expressions are always evaluated using signed 32-bit math.
+Zero is considered to be the only "false" number, all non-zero numbers (including negative) are "true".
+.Pp
+An expression is said to be "constant" if
+.Nm
+knows its value.
+This is generally always the case, unless a label is involved, as explained in the
+.Sx SYMBOLS
+section.
+.Pp
+The instructions in the macro-language generally require constant expressions.
+.Ss Numeric formats
+There are a number of numeric formats.
+.Bl -column -offset indent "Precise fixed-point" "Prefix"
+.It Sy Format type Ta Sy Prefix Ta Sy Accepted characters
+.It Hexadecimal Ta $ Ta 0123456789ABCDEF
+.It Decimal Ta none Ta 0123456789
+.It Octal Ta & Ta 01234567
+.It Binary Ta % Ta 01
+.It Fixed-point Ta none Ta 01234.56789
+.It Precise fixed-point Ta none Ta 12.34q8
+.It Character constant Ta none Ta \(dqABYZ\(dq
+.It Gameboy graphics Ta \` Ta 0123
+.El
+.Pp
+Underscores are also accepted in numbers, except at the beginning of one.
+This can be useful for grouping digits, like
+.Ql 123_456
+or
+.Ql %1100_1001 .
+.Pp
+The "character constant" form yields the value the character maps to in the current charmap.
+For example, by default
+.Pq refer to Xr ascii 7
+.Sq \(dqA\(dq
+yields 65.
+See
+.Sx Character maps
+for information on charmaps.
+.Pp
+The last one, Gameboy graphics, is quite interesting and useful.
+After the backtick, 8 digits between 0 and 3 are expected, corresponding to pixel values.
+The resulting value is the two bytes of tile data that would produce that row of pixels.
+For example,
+.Sq \`01012323
+is equivalent to
+.Sq $0F55 .
+.Pp
+You can also use symbols, which are implicitly replaced with their value.
+.Ss Operators
+A great number of operators you can use in expressions are available (listed from highest to lowest precedence):
+.Bl -column -offset indent "!= == <= >= < >"
+.It Sy Operator Ta Sy Meaning
+.It Li \&( \&) Ta Precedence override
+.It Li FUNC() Ta Built-in function call
+.It Li ** Ta Exponent
+.It Li ~ + - Ta Unary complement/plus/minus
+.It Li * / % Ta Multiply/divide/modulo
+.It Li << Ta Shift left
+.It Li >> Ta Signed shift right (sign-extension)
+.It Li >>> Ta Unsigned shift right (zero-extension)
+.It Li & \&| ^ Ta Binary and/or/xor
+.It Li + - Ta Add/subtract
+.It Li != == <= >= < > Ta Comparison
+.It Li && || Ta Boolean and/or
+.It Li \&! Ta Unary not
+.El
+.Pp
+.Ic ~
+complements a value by inverting all its bits.
+.Pp
+.Ic %
+is used to get the remainder of the corresponding division, so that
+.Sq a / b * b + a % b == a
+is always true.
+The result has the same sign as the divisor.
+This makes
+.Sq a % b .
+equal to
+.Sq (a + b) % b
+or
+.Sq (a - b) % b .
+.Pp
+Shifting works by shifting all bits in the left operand either left
+.Pq Sq <<
+or right
+.Pq Sq >>
+by the right operand's amount.
+When shifting left, all newly-inserted bits are reset; when shifting right, they are copies of the original most significant bit instead.
+This makes
+.Sq a << b
+and
+.Sq a >> b
+equivalent to multiplying and dividing by 2 to the power of b, respectively.
+.Pp
+Comparison operators return 0 if the comparison is false, and 1 otherwise.
+.Pp
+Unlike in a lot of languages, and for technical reasons,
+.Nm
+still evaluates both operands of
+.Sq &&
+and
+.Sq || .
+.Pp
+.Ic \&!
+returns 1 if the operand was 0, and 0 otherwise.
+.Ss Fixed-point expressions
+Fixed-point numbers are basically normal (32-bit) integers, which count fractions instead of whole numbers.
+They offer better precision than integers but limit the range of values.
+By default, the upper 16 bits are used for the integer part and the lower 16 bits are used for the fraction (65536ths).
+The default number of fractional bits can be changed with the
+.Fl Q
+command-line option.
+You can also specify a precise fixed-point value by appending a
+.Dq q
+to it followed by the number of fractional bits, such as
+.Ql 12.34q8 .
+.Pp
+Since fixed-point values are still just integers, you can use them in normal integer expressions.
+Some integer operators like
+.Sq +
+and
+.Sq -
+don't care whether the operands are integers or fixed-point.
+You can easily truncate a fixed-point number into an integer by shifting it right by 16 bits.
+It follows that you can convert an integer to a fixed-point number by shifting it left.
+.Pp
+The following functions are designed to operate with fixed-point numbers:
+.EQ
+delim $$
+.EN
+.Bl -column -offset indent "ATAN2(x, y)"
+.It Sy Name Ta Sy Operation
+.It Fn DIV x y Ta Fixed-point division $( x \[di] y ) \[mu] ( 2 ^ precision )$
+.It Fn MUL x y Ta Fixed-point multiplication $( x \[mu] y ) \[di] ( 2 ^ precision )$
+.It Fn FMOD x y Ta Fixed-point modulo $( x % y ) \[di] ( 2 ^ precision )$
+.It Fn POW x y Ta $x$ to the $y$ power
+.It Fn LOG x y Ta Logarithm of $x$ to the base $y$
+.It Fn ROUND x Ta Round $x$ to the nearest integer
+.It Fn CEIL x Ta Round $x$ up to an integer
+.It Fn FLOOR x Ta Round $x$ down to an integer
+.It Fn SIN x Ta Sine of $x$
+.It Fn COS x Ta Cosine of $x$
+.It Fn TAN x Ta Tangent of $x$
+.It Fn ASIN x Ta Inverse sine of $x$
+.It Fn ACOS x Ta Inverse cosine of $x$
+.It Fn ATAN x Ta Inverse tangent of $x$
+.It Fn ATAN2 x y Ta Angle between $( x , y )$ and $( 1 , 0 )$
+.El
+.EQ
+delim off
+.EN
+.Pp
+All of these fixed-point functions can take an optional final argument, which is the precision to use.
+For example,
+.Ql MUL(6.0q8, 7.0q8, 8)
+will evaluate to
+.Ql 42.0q8
+no matter what value is set as the current
+.Cm Q
+option.
+.Pp
+The trigonometry functions (
+.Ic SIN ,
+.Ic COS ,
+.Ic TAN ,
+etc) are defined in terms of a circle divided into 1.0 "turns" (equal to 2pi radians or 360 degrees).
+.Pp
+These functions are useful for automatic generation of various tables.
+For example:
+.Bd -literal -offset indent
+; Generate a table of sine values from sin(0.0) to sin(1.0), with
+; amplitude scaled from [-1.0, 1.0] to [0.0, 128.0]
+DEF turns = 0.0
+REPT 256
+    db MUL(64.0, SIN(turns) + 1.0) >> 16
+    DEF turns += 1.0 / 256
+ENDR
+.Ed
+.Ss String expressions
+The most basic string expression is any number of characters contained in double quotes
+.Pq Ql \&"for instance" .
+The backslash character
+.Ql \e
+is special in that it causes the character following it to be
+.Dq escaped ,
+meaning that it is treated differently from normal.
+There are a number of escape sequences you can use within a string:
+.Bl -column -offset indent "Qo \e1 Qc \[en] Qo \e9 Qc"
+.It Sy String Ta Sy Meaning
+.It Ql \e\e Ta Produces a backslash
+.It Ql \e" Ta Produces a double quote without terminating
+.It Ql \e{ Ta Curly bracket left
+.It Ql \e} Ta Curly bracket right
+.It Ql \en Ta Newline ($0A)
+.It Ql \er Ta Carriage return ($0D)
+.It Ql \et Ta Tab ($09)
+.It Qo \e1 Qc \[en] Qo \e9 Qc Ta Macro argument (Only in the body of a macro; see Sx Invoking macros )
+.It Ql \e# Ta All Dv _NARG No macro arguments, separated by commas (Only in the body of a macro)
+.It Ql \e@ Ta Label name suffix (Only in the body of a macro or a Ic REPT No block)
+.El
+(Note that some of those can be used outside of strings, when noted further in this document.)
+.Pp
+Multi-line strings are contained in triple quotes
+.Pq Ql \&"\&"\&"for instance\&"\&"\&" .
+Escape sequences work the same way in multi-line strings; however, literal newline
+characters will be included as-is, without needing to escape them with
+.Ql \er
+or
+.Ql \en .
+.Pp
+The following functions operate on string expressions.
+Most of them return a string, however some of these functions actually return an integer and can be used as part of an integer expression!
+.Bl -column "STRSUB(str, pos, len)"
+.It Sy Name Ta Sy Operation
+.It Fn STRLEN str Ta Returns the number of characters in Ar str .
+.It Fn STRCAT strs... Ta Concatenates Ar strs .
+.It Fn STRCMP str1 str2 Ta Returns -1 if Ar str1 No is alphabetically lower than Ar str2 No , zero if they match, 1 if Ar str1 No is greater than Ar str2 .
+.It Fn STRIN str1 str2 Ta Returns the first position of Ar str2 No in Ar str1 No or zero if it's not present Pq first character is position 1 .
+.It Fn STRRIN str1 str2 Ta Returns the last position of Ar str2 No in Ar str1 No or zero if it's not present Pq first character is position 1 .
+.It Fn STRSUB str pos len Ta Returns a substring from Ar str No starting at Ar pos No (first character is position 1, last is position -1) and Ar len No characters long. If Ar len No is not specified the substring continues to the end of Ar str .
+.It Fn STRUPR str Ta Returns Ar str No with all letters in uppercase.
+.It Fn STRLWR str Ta Returns Ar str No with all letters in lowercase.
+.It Fn STRRPL str old new Ta Returns Ar str No with each non-overlapping occurrence of the substring Ar old No replaced with Ar new .
+.It Fn STRFMT fmt args... Ta Returns the string Ar fmt No with each
+.Ql %spec
+pattern replaced by interpolating the format
+.Ar spec
+.Pq using the same syntax as Sx Symbol interpolation
+with its corresponding argument in
+.Ar args
+.Pq So %% Sc is replaced by the So % Sc character .
+.It Fn CHARLEN str Ta Returns the number of charmap entries in Ar str No with the current charmap.
+.It Fn CHARSUB str pos Ta Returns the substring for the charmap entry at Ar pos No in Ar str No (first character is position 1, last is position -1) with the current charmap.
+.El
+.Ss Character maps
+When writing text strings that are meant to be displayed on the Game Boy, the character encoding in the ROM may need to be different than the source file encoding.
+For example, the tiles used for uppercase letters may be placed starting at tile index 128, which differs from ASCII starting at 65.
+.Pp
+Character maps allow mapping strings to arbitrary 8-bit values:
+.Bd -literal -offset indent
+CHARMAP "<LF>", 10
+CHARMAP "&iacute", 20
+CHARMAP "A", 128
+.Ed
+This would result in
+.Ql db \(dqAmen<LF>\(dq
+being equivalent to
+.Ql db 128, 109, 101, 110, 10 .
+.Pp
+Any characters in a string without defined mappings will be copied directly, using the source file's encoding of characters to bytes.
+.Pp
+It is possible to create multiple character maps and then switch between them as desired.
+This can be used to encode debug information in ASCII and use a different encoding for other purposes, for example.
+Initially, there is one character map called
+.Sq main
+and it is automatically selected as the current character map from the beginning.
+There is also a character map stack that can be used to save and restore which character map is currently active.
+.Bl -column "NEWCHARMAP name, basename"
+.It Sy Command Ta Sy Meaning
+.It Ic NEWCHARMAP Ar name Ta Creates a new, empty character map called Ar name No and switches to it.
+.It Ic NEWCHARMAP Ar name , basename Ta Creates a new character map called Ar name , No copied from character map Ar basename , No and switches to it.
+.It Ic SETCHARMAP Ar name Ta Switch to character map Ar name .
+.It Ic PUSHC Ta Push the current character map onto the stack.
+.It Ic POPC Ta Pop a character map off the stack and switch to it.
+.El
+.Pp
+.Sy Note:
+Modifications to a character map take effect immediately from that point onward.
+.Ss Other functions
+There are a few other functions that do various useful things:
+.Bl -column "DEF(symbol)"
+.It Sy Name Ta Sy Operation
+.It Fn BANK arg Ta Returns a bank number.
+If
+.Ar arg
+is the symbol
+.Ic @ ,
+this function returns the bank of the current section.
+If
+.Ar arg
+is a string, it returns the bank of the section that has that name.
+If
+.Ar arg
+is a label, it returns the bank number the label is in.
+The result may be constant if
+.Nm
+is able to compute it.
+.It Fn SECTION symbol Ta Returns the name of the section that
+.Ar symbol
+is in.
+.Ar symbol
+must have been defined already.
+.It Fn SIZEOF arg Ta Returns the size of the section named
+.Ar arg .
+The result is not constant, since only RGBLINK can compute its value.
+.It Fn STARTOF arg Ta Returns the starting address of the section named
+.Ar arg .
+The result is not constant, since only RGBLINK can compute its value.
+.It Fn DEF symbol Ta Returns TRUE (1) if
+.Ar symbol
+has been defined, FALSE (0) otherwise.
+String constants are not expanded within the parentheses.
+.It Fn HIGH arg Ta Returns the top 8 bits of the operand if Ar arg No is a label or constant, or the top 8-bit register if it is a 16-bit register.
+.It Fn LOW arg Ta Returns the bottom 8 bits of the operand if Ar arg No is a label or constant, or the bottom 8-bit register if it is a 16-bit register Pq Cm AF No isn't a valid register for this function .
+.It Fn ISCONST arg Ta Returns 1 if Ar arg Ap s value is known by RGBASM (e.g. if it can be an argument to
+.Ic IF ) ,
+or 0 if only RGBLINK can compute its value.
+.El
+.Sh SECTIONS
+Before you can start writing code, you must define a section.
+This tells the assembler what kind of information follows and, if it is code, where to put it.
+.Pp
+.Dl SECTION Ar name , type
+.Dl SECTION Ar name , type , options
+.Dl SECTION Ar name , type Ns Bo Ar addr Bc
+.Dl SECTION Ar name , type Ns Bo Ar addr Bc , Ar options
+.Pp
+.Ar name
+is a string enclosed in double quotes, and can be a new name or the name of an existing section.
+If the type doesn't match, an error occurs.
+All other sections must have a unique name, even in different source files, or the linker will treat it as an error.
+.Pp
+Possible section
+.Ar type Ns s
+are as follows:
+.Bl -tag -width Ds
+.It Ic ROM0
+A ROM section.
+.Ar addr
+can range from
+.Ad $0000
+to
+.Ad $3FFF ,
+or
+.Ad $0000
+to
+.Ad $7FFF
+if tiny ROM mode is enabled in the linker.
+.It Ic ROMX
+A banked ROM section.
+.Ar addr
+can range from
+.Ad $4000
+to
+.Ad $7FFF .
+.Ar bank
+can range from 1 to 511.
+Becomes an alias for
+.Ic ROM0
+if tiny ROM mode is enabled in the linker.
+.It Ic VRAM
+A banked video RAM section.
+.Ar addr
+can range from
+.Ad $8000
+to
+.Ad $9FFF .
+.Ar bank
+can be 0 or 1, but bank 1 is unavailable if DMG mode is enabled in the linker.
+.It Ic SRAM
+A banked external (save) RAM section.
+.Ar addr
+can range from
+.Ad $A000
+to
+.Ad $BFFF .
+.Ar bank
+can range from 0 to 15.
+.It Ic WRAM0
+A general-purpose RAM section.
+.Ar addr
+can range from
+.Ad $C000
+to
+.Ad $CFFF ,
+or
+.Ad $C000
+to
+.Ad $DFFF
+if WRAM0 mode is enabled in the linker.
+.It Ic WRAMX
+A banked general-purpose RAM section.
+.Ar addr
+can range from
+.Ad $D000
+to
+.Ad $DFFF .
+.Ar bank
+can range from 1 to 7.
+Becomes an alias for
+.Ic WRAM0
+if WRAM0 mode is enabled in the linker.
+.It Ic OAM
+An object attribute RAM section.
+.Ar addr
+can range from
+.Ad $FE00
+to
+.Ad $FE9F .
+.It Ic HRAM
+A high RAM section.
+.Ar addr
+can range from
+.Ad $FF80
+to
+.Ad $FFFE .
+.Pp
+.Sy Note :
+While
+.Nm
+will automatically optimize
+.Ic ld
+instructions to the smaller and faster
+.Ic ldh
+(see
+.Xr gbz80 7 )
+whenever possible, it is generally unable to do so when a label is involved.
+Using the
+.Ic ldh
+instruction directly is recommended.
+This forces the assembler to emit a
+.Ic ldh
+instruction and the linker to check if the value is in the correct range.
+.El
+.Pp
+Since RGBDS produces ROMs, code and data can only be placed in
+.Ic ROM0
+and
+.Ic ROMX
+sections.
+To put some in RAM, have it stored in ROM, and copy it to RAM.
+.Pp
+.Ar option Ns s are comma-separated and may include:
+.Bl -tag -width Ds
+.It Ic BANK Ns Bq Ar bank
+Specify which
+.Ar bank
+for the linker to place the section in.
+See above for possible values for
+.Ar bank ,
+depending on
+.Ar type .
+.It Ic ALIGN Ns Bq Ar align , offset
+Place the section at an address whose
+.Ar align
+least-significant bits are equal to
+.Ar offset .
+(Note that
+.Ic ALIGN Ns Bq Ar align
+is a shorthand for
+.Ic ALIGN Ns Bq Ar align , No 0 ) .
+This option can be used with
+.Bq Ar addr ,
+as long as they don't contradict eachother.
+It's also possible to request alignment in the middle of a section, see
+.Sx Requesting alignment
+below.
+.El
+.Pp
+If
+.Bq Ar addr
+is not specified, the section is considered
+.Dq floating ;
+the linker will automatically calculate an appropriate address for the section.
+Similarly, if
+.Ic BANK Ns Bq Ar bank
+is not specified, the linker will automatically find a bank with enough space.
+.Pp
+Sections can also be placed by using a linker script file.
+The format is described in
+.Xr rgblink 5 .
+They allow the user to place floating sections in the desired bank in the order specified in the script.
+This is useful if the sections can't be placed at an address manually because the size may change, but they have to be together.
+.Pp
+Section examples:
+.Bl -item
+.It
+.Bd -literal -offset indent
+SECTION "Cool Stuff",ROMX
+.Ed
+This switches to the section called
+.Dq CoolStuff ,
+creating it if it doesn't already exist.
+It can end up in any ROM bank.
+Code and data may follow.
+.It
+If it is needed, the the base address of the section can be specified:
+.Bd -literal -offset indent
+SECTION "Cool Stuff",ROMX[$4567]
+.Ed
+.It
+An example with a fixed bank:
+.Bd -literal -offset indent
+SECTION "Cool Stuff",ROMX[$4567],BANK[3]
+.Ed
+.It
+And if you want to force only the section's bank, and not its position within the bank, that's also possible:
+.Bd -literal -offset indent
+SECTION "Cool Stuff",ROMX,BANK[7]
+.Ed
+.It
+Alignment examples:
+The first one could be useful for defining an OAM buffer to be DMA'd, since it must be aligned to 256 bytes.
+The second could also be appropriate for GBC HDMA, or for an optimized copy code that requires alignment.
+.Bd -literal -offset indent
+SECTION "OAM Data",WRAM0,ALIGN[8] ;\ align to 256 bytes
+SECTION "VRAM Data",ROMX,BANK[2],ALIGN[4] ;\ align to 16 bytes
+.Ed
+.El
+.Ss Section stack
+.Ic POPS
+and
+.Ic PUSHS
+provide the interface to the section stack.
+The number of entries in the stack is limited only by the amount of memory in your machine.
+.Pp
+.Ic PUSHS
+will push the current section context on the section stack.
+.Ic POPS
+can then later be used to restore it.
+Useful for defining sections in included files when you don't want to override the section context at the point the file was included.
+.Ss RAM code
+Sometimes you want to have some code in RAM.
+But then you can't simply put it in a RAM section, you have to store it in ROM and copy it to RAM at some point.
+.Pp
+This means the code (or data) will not be stored in the place it gets executed.
+Luckily,
+.Ic LOAD
+blocks are the perfect solution to that.
+Here's an example of how to use them:
+.Bd -literal -offset indent
+SECTION "LOAD example", ROMX
+CopyCode:
+    ld de, RAMCode
+    ld hl, RAMLocation
+    ld c, RAMLocation.end - RAMLocation
+\&.loop
+    ld a, [de]
+    inc de
+    ld [hli], a
+    dec c
+    jr nz, .loop
+    ret
+
+RAMCode:
+  LOAD "RAM code", WRAM0
+RAMLocation:
+    ld hl, .string
+    ld de, $9864
+\&.copy
+    ld a, [hli]
+    ld [de], a
+    inc de
+    and a
+    jr nz, .copy
+    ret
+
+\&.string
+    db "Hello World!", 0
+\&.end
+  ENDL
+.Ed
+.Pp
+A
+.Ic LOAD
+block feels similar to a
+.Ic SECTION
+declaration because it creates a new one.
+All data and code generated within such a block is placed in the current section like usual, but all labels are created as if they were placed in this newly-created section.
+.Pp
+In the example above, all of the code and data will end up in the "LOAD example" section.
+You will notice the
+.Sq RAMCode
+and
+.Sq RAMLocation
+labels.
+The former is situated in ROM, where the code is stored, the latter in RAM, where the code will be loaded.
+.Pp
+You cannot nest
+.Ic LOAD
+blocks, nor can you change the current section within them.
+.Pp
+.Ic LOAD
+blocks can use the
+.Ic UNION
+or
+.Ic FRAGMENT
+modifiers, as described below.
+.Ss Unionized sections
+When you're tight on RAM, you may want to define overlapping static memory allocations, as explained in the
+.Sx Unions
+section.
+However, a
+.Ic UNION
+only works within a single file, so it can't be used e.g. to define temporary variables across several files, all of which use the same statically allocated memory.
+Unionized sections solve this problem.
+To declare an unionized section, add a
+.Ic UNION
+keyword after the
+.Ic SECTION
+one; the declaration is otherwise not different.
+Unionized sections follow some different rules from normal sections:
+.Bl -bullet -offset indent
+.It
+The same unionized section (i.e. having the same name) can be declared several times per
+.Nm
+invocation, and across several invocations.
+Different declarations are treated and merged identically whether within the same invocation, or different ones.
+.It
+If one section has been declared as unionized, all sections with the same name must be declared unionized as well.
+.It
+All declarations must have the same type.
+For example, even if
+.Xr rgblink 1 Ap s
+.Fl w
+flag is used,
+.Ic WRAM0
+and
+.Ic WRAMX
+types are still considered different.
+.It
+Different constraints (alignment, bank, etc.) can be specified for each unionized section declaration, but they must all be compatible.
+For example, alignment must be compatible with any fixed address, all specified banks must be the same, etc.
+.It
+Unionized sections cannot have type
+.Ic ROM0
+or
+.Ic ROMX .
+.El
+.Pp
+Different declarations of the same unionized section are not appended, but instead overlaid on top of eachother, just like
+.Sx Unions .
+Similarly, the size of an unionized section is the largest of all its declarations.
+.Ss Section fragments
+Section fragments are sections with a small twist: when several of the same name are encountered, they are concatenated instead of producing an error.
+This works within the same file (paralleling the behavior "plain" sections has in previous versions), but also across object files.
+To declare an section fragment, add a
+.Ic FRAGMENT
+keyword after the
+.Ic SECTION
+one; the declaration is otherwise not different.
+However, similarly to
+.Sx Unionized sections ,
+some rules must be followed:
+.Bl -bullet -offset indent
+.It
+If one section has been declared as fragment, all sections with the same name must be declared fragments as well.
+.It
+All declarations must have the same type.
+For example, even if
+.Xr rgblink 1 Ap s
+.Fl w
+flag is used,
+.Ic WRAM0
+and
+.Ic WRAMX
+types are still considered different.
+.It
+Different constraints (alignment, bank, etc.) can be specified for each unionized section declaration, but they must all be compatible.
+For example, alignment must be compatible with any fixed address, all specified banks must be the same, etc.
+.It
+A section fragment may not be unionized; after all, that wouldn't make much sense.
+.El
+.Pp
+When RGBASM merges two fragments, the one encountered later is appended to the one encountered earlier.
+.Pp
+When RGBLINK merges two fragments, the one whose file was specified last is appended to the one whose file was specified first.
+For example, assuming
+.Ql bar.o ,
+.Ql baz.o ,
+and
+.Ql foo.o
+all contain a fragment with the same name, the command
+.Dl rgblink -o rom.gb baz.o foo.o bar.o
+would produce the fragment from
+.Ql baz.o
+first, followed by the one from
+.Ql foo.o ,
+and the one from
+.Ql bar.o
+last.
+.Sh SYMBOLS
+RGBDS supports several types of symbols:
+.Bl -hang
+.It Sy Label
+Numeric symbol designating a memory location.
+May or may not have a value known at assembly time.
+.It Sy Constant
+Numeric symbol whose value has to be known at assembly time.
+.It Sy Macro
+A block of
+.Nm
+code that can be invoked later.
+.It Sy String
+A text string that can be expanded later, similarly to a macro.
+.El
+.Pp
+Symbol names can contain ASCII letters, numbers, underscores
+.Sq _ ,
+hashes
+.Sq #
+and at signs
+.Sq @ .
+However, they must begin with either a letter or an underscore.
+Additionally, label names can contain up to a single dot
+.Ql \&. ,
+which may not be the first character.
+.Pp
+A symbol cannot have the same name as a reserved keyword.
+.Ss Labels
+One of the assembler's main tasks is to keep track of addresses for you, so you can work with meaningful names instead of
+.Dq magic
+numbers.
+Labels enable just that: a label ties a name to a specific location within a section.
+A label resolves to a bank and address, determined at the same time as its parent section's (see further in this section).
+.Pp
+A label is defined by writing its name at the beginning of a line, followed by one or two colons, without any whitespace between the label name and the colon(s).
+Declaring a label (global or local) with two colons
+.Ql ::
+will define and
+.Ic EXPORT
+it at the same time.
+(See
+.Sx Exporting and importing symbols
+below).
+When defining a local label, the colon can be omitted, and
+.Nm
+will act as if there was only one.
+.Pp
+A label is said to be
+.Em local
+if its name contains a dot
+.Ql \&. ;
+otherwise, it is said to be
+.Em global
+(not to be mistaken with
+.Dq exported ,
+explained in
+.Sx Exporting and importing symbols
+further below).
+More than one dot in label names is not allowed.
+.Pp
+For convenience, local labels can use a shorthand syntax: when a symbol name starting with a dot is found (for example, inside an expression, or when declaring a label), then the current
+.Dq label scope
+is implicitly prepended.
+.Pp
+Defining a global label sets it as the current
+.Dq label scope ,
+until the next global label definition, or the end of the current section.
+.Pp
+Here are some examples of label definitions:
+.Bd -literal -offset indent
+GlobalLabel:
+AnotherGlobal:
+\&.locallabel ;\ This defines "AnotherGlobal.locallabel"
+\&.another_local:
+AnotherGlobal.with_another_local:
+ThisWillBeExported:: ;\ Note the two colons
+ThisWillBeExported.too::
+.Ed
+.Pp
+In a numeric expression, a label evaluates to its address in memory.
+.Po To obtain its bank, use the
+.Ql BANK()
+function described in
+.Sx Other functions
+.Pc .
+For example, given the following,
+.Ql ld de, vPlayerTiles
+would be equivalent to
+.Ql ld de, $80C0
+assuming the section ends up at
+.Ad $80C0 :
+.Bd -literal -offset indent
+SECTION "Player tiles", VRAM
+vPlayerTiles:
+    ds 6 * 16
+\&.end
+.Ed
+.Pp
+A label's location (and thus value) is usually not determined until the linking stage, so labels usually cannot be used as constants.
+However, if the section in which the label is defined has a fixed base address, its value is known at assembly time.
+.Pp
+Also, while
+.Nm
+obviously can compute the difference between two labels if both are constant, it is also able to compute the difference between two non-constant labels if they both belong to the same section, such as
+.Ql PlayerTiles
+and
+.Ql PlayerTiles.end
+above.
+.Ss Anonymous labels
+Anonymous labels are useful for short blocks of code.
+They are defined like normal labels, but without a name before the colon.
+Anonymous labels are independent of label scoping, so defining one does not change the scoped label, and referencing one is not affected by the current scoped label.
+.Pp
+Anonymous labels are referenced using a colon
+.Ql \&:
+followed by pluses
+.Ql +
+or minuses
+.Ql - .
+Thus
+.Ic :+
+references the next one after the expression,
+.Ic :++
+the one after that;
+.Ic :-
+references the one before the expression;
+and so on.
+.Bd -literal -offset indent
+    ld hl, :++
+:   ld a, [hli] ; referenced by "jr nz"
+    ldh [c], a
+    dec c
+    jr nz, :-
+    ret
+
+:   ; referenced by "ld hl"
+    dw $7FFF, $1061, $03E0, $58A5
+.Ed
+.Ss Variables
+An equal sign
+.Ic =
+is used to define mutable numeric symbols.
+Unlike the other symbols described below, variables can be redefined.
+This is useful for internal symbols in macros, for counters, etc.
+.Bd -literal -offset indent
+DEF ARRAY_SIZE EQU 4
+DEF COUNT = 2
+DEF COUNT = 3
+DEF COUNT = ARRAY_SIZE + COUNT
+DEF COUNT *= 2
+;\ COUNT now has the value 14
+.Ed
+.Pp
+Note that colons
+.Ql \&:
+following the name are not allowed.
+.Pp
+Variables can be conveniently redefined by compound assignment operators like in C:
+.Bl -column -offset indent "*= /= %="
+.It Sy Operator Ta Sy Meaning
+.It Li += -= Ta Compound plus/minus
+.It Li *= /= %= Ta Compound multiply/divide/modulo
+.It Li <<= >>= Ta Compound shift left/right
+.It Li &= \&|= ^= Ta Compound and/or/xor
+.El
+.Pp
+Examples:
+.Bd -literal -offset indent
+DEF x = 10
+DEF x += 1    ; x == 11
+DEF y = x - 1 ; y == 10
+DEF y *= 2    ; y == 20
+DEF y >>= 1   ; y == 10
+DEF x ^= y    ; x == 1
+.Ed
+.Ss Numeric constants
+.Ic EQU
+is used to define immutable numeric symbols.
+Unlike
+.Ic =
+above, constants defined this way cannot be redefined.
+These constants can be used for unchanging values such as properties of the hardware.
+.Bd -literal -offset indent
+def SCREEN_WIDTH  equ 160 ;\ In pixels
+def SCREEN_HEIGHT equ 144
+.Ed
+.Pp
+Note that colons
+.Ql \&:
+following the name are not allowed.
+.Pp
+If you
+.Em really
+need to, the
+.Ic REDEF
+keyword will define or redefine a numeric constant symbol.
+(It can also be used for variables, although it's not necessary since they are mutable.)
+This can be used, for example, to update a constant using a macro, without making it mutable in general.
+.Bd -literal -offset indent
+    def NUM_ITEMS equ 0
+MACRO add_item
+    redef NUM_ITEMS equ NUM_ITEMS + 1
+    def ITEM_{02x:NUM_ITEMS} equ \e1
+ENDM
+    add_item 1
+    add_item 4
+    add_item 9
+    add_item 16
+    assert NUM_ITEMS == 4
+    assert ITEM_04 == 16
+.Ed
+.Ss Offset constants
+The RS group of commands is a handy way of defining structure offsets:
+.Bd -literal -offset indent
+               RSRESET
+DEF str_pStuff RW   1
+DEF str_tData  RB   256
+DEF str_bCount RB   1
+DEF str_SIZEOF RB   0
+.Ed
+.Pp
+The example defines four constants as if by:
+.Bd -literal -offset indent
+DEF str_pStuff EQU 0
+DEF str_tData  EQU 2
+DEF str_bCount EQU 258
+DEF str_SIZEOF EQU 259
+.Ed
+.Pp
+There are five commands in the RS group of commands:
+.Bl -column "RSSET constexpr"
+.It Sy Command Ta Sy Meaning
+.It Ic RSRESET Ta Equivalent to Ql RSSET 0 .
+.It Ic RSSET Ar constexpr Ta Sets the Ic _RS No counter to Ar constexpr .
+.It Ic RB Ar constexpr Ta Sets the preceding symbol to Ic _RS No and adds Ar constexpr No to Ic _RS .
+.It Ic RW Ar constexpr Ta Sets the preceding symbol to Ic _RS No and adds Ar constexpr No * 2 to Ic _RS .
+.It Ic RL Ar constexpr Ta Sets the preceding symbol to Ic _RS No and adds Ar constexpr No * 4 to Ic _RS .
+.El
+.Pp
+If the argument to
+.Ic RB , RW ,
+or
+.Ic RL
+is omitted, it's assumed to be 1.
+.Pp
+Note that colons
+.Ql \&:
+following the name are not allowed.
+.Ss String constants
+.Ic EQUS
+is used to define string constant symbols.
+Wherever the assembler reads a string constant, it gets
+.Em expanded :
+the symbol's name is replaced with its contents.
+If you are familiar with C, you can think of it as similar to
+.Fd #define .
+This expansion is disabled in a few contexts:
+.Ql DEF(name) ,
+.Ql DEF name EQU/=/EQUS/etc ... ,
+.Ql PURGE name ,
+and
+.Ql MACRO name
+will not expand string constants in their names.
+.Bd -literal -offset indent
+DEF COUNTREG EQUS "[hl+]"
+    ld a,COUNTREG
+
+DEF PLAYER_NAME EQUS "\e"John\e""
+    db PLAYER_NAME
+.Ed
+.Pp
+This will be interpreted as:
+.Bd -literal -offset indent
+    ld a,[hl+]
+    db "John"
+.Ed
+.Pp
+String constants can also be used to define small one-line macros:
+.Bd -literal -offset indent
+DEF pusha EQUS "push af\enpush bc\enpush de\enpush hl\en"
+.Ed
+.Pp
+Note that colons
+.Ql \&:
+following the name are not allowed.
+.Pp
+String constants can't be exported or imported.
+.Pp
+String constants, like numeric constants, cannot be redefined.
+However, the
+.Ic REDEF
+keyword will define or redefine a string constant symbol.
+For example:
+.Bd -literal -offset indent
+DEF s EQUS "Hello, "
+REDEF s EQUS "{s}world!"
+; prints "Hello, world!"
+PRINTLN "{s}\n"
+.Ed
+.Pp
+.Sy Important note :
+When a string constant is expanded, its expansion may contain another string constant, which will be expanded as well.
+If this creates an infinite loop,
+.Nm
+will error out once a certain depth is
+reached.
+See the
+.Fl r
+command-line option in
+.Xr rgbasm 1 .
+The same problem can occur if the expansion of a macro invokes another macro, recursively.
+.Pp
+The examples above for
+.Ql EQU ,
+.Ql = ,
+.Ql RB ,
+.Ql RW ,
+.Ql RL ,
+and
+.Ql EQUS
+all start with
+.Ql DEF .
+(A variable definition may start with
+.Ql REDEF
+instead, since they are redefinable.)
+You may use the older syntax without
+.Ql DEF ,
+but then the name being defined
+.Em must not
+have any whitespace before it;
+otherwise
+.Nm
+will treat it as a macro invocation.
+Furthermore, without the
+.Ql DEF
+keyword,
+string constants may be expanded for the name.
+This can lead to surprising results:
+.Bd -literal -offset indent
+X EQUS "Y"
+; this defines Y, not X!
+X EQU 42
+; prints "Y $2A"
+PRINTLN "{X} {Y}"
+.Ed
+.Ss Macros
+One of the best features of an assembler is the ability to write macros for it.
+Macros can be called with arguments, and can react depending on input using
+.Ic IF
+constructs.
+.Bd -literal -offset indent
+MACRO MyMacro
+         ld a, 80
+         call MyFunc
+ENDM
+.Ed
+.Pp
+The example above defines
+.Ql MyMacro
+as a new macro.
+String constants are not expanded within the name of the macro.
+.Pp
+(Using the
+.Em deprecated
+older syntax
+.Ql MyMacro: MACRO
+instead of
+.Ql MACRO MyMacro ,
+with a single colon
+.Ql \&:
+following the macro's name, string constants may be expanded for the name.)
+.Pp
+Macros can't be exported or imported.
+.Pp
+Plainly nesting macro definitions is not allowed, but this can be worked around using
+.Ic EQUS .
+So this won't work:
+.Bd -literal -offset indent
+MACRO outer
+    MACRO inner
+        PRINTLN "Hello!"
+    ENDM
+ENDM
+.Ed
+.Pp
+But this will:
+.Bd -literal -offset indent
+MACRO outer
+DEF definition EQUS "MACRO inner\enPRINTLN \e"Hello!\e"\enENDM"
+    definition
+    PURGE definition
+ENDM
+.Ed
+.Pp
+Macro arguments support all the escape sequences of strings, as well as
+.Ql \e,
+to escape commas, as well as
+.Ql \e(
+and
+.Ql \e)
+to escape parentheses, since those otherwise separate and enclose arguments, respectively.
+.Ss Exporting and importing symbols
+Importing and exporting of symbols is a feature that is very useful when your project spans many source files and, for example, you need to jump to a routine defined in another file.
+.Pp
+Exporting of symbols has to be done manually, importing is done automatically if
+.Nm
+finds a symbol it does not know about.
+.Pp
+The following will cause
+.Ar symbol1 , symbol2
+and so on to be accessible to other files during the link process:
+.Dl Ic EXPORT Ar symbol1 Bq , Ar symbol2 , No ...
+.Pp
+For example, if you have the following three files:
+.Pp
+.Ql a.asm :
+.Bd -literal -compact
+SECTION "a", WRAM0
+LabelA:
+.Ed
+.Pp
+.Ql b.asm :
+.Bd -literal -compact
+SECTION "b", WRAM0
+ExportedLabelB1::
+ExportedLabelB2:
+	EXPORT ExportedLabelB2
+.Ed
+.Pp
+.Ql c.asm :
+.Bd -literal -compact
+SECTION "C", ROM0[0]
+	dw LabelA
+	dw ExportedLabelB1
+	dw ExportedLabelB2
+.Ed
+.Pp
+Then
+.Ql c.asm
+can use
+.Ql ExportedLabelB1
+and
+.Ql ExportedLabelB2 ,
+but not
+.Ql LabelA ,
+so linking them together will fail:
+.Bd -literal
+$ rgbasm -o a.o a.asm
+$ rgbasm -o b.o b.asm
+$ rgbasm -o c.o c.asm
+$ rgblink a.o b.o c.o
+error: c.asm(2): Unknown symbol "LabelA"
+Linking failed with 1 error
+.Ed
+.Pp
+Note also that only exported symbols will appear in symbol and map files produced by
+.Xr rgblink 1 .
+.Ss Purging symbols
+.Ic PURGE
+allows you to completely remove a symbol from the symbol table as if it had never existed.
+.Em USE WITH EXTREME CAUTION!
+I can't stress this enough,
+.Sy you seriously need to know what you are doing .
+DON'T purge a symbol that you use in expressions the linker needs to calculate.
+When not sure, it's probably not safe to purge anything other than variables, numeric or string constants, or macros.
+.Bd -literal -offset indent
+DEF Kamikaze EQUS  "I don't want to live anymore"
+DEF AOLer    EQUS  "Me too"
+         PURGE Kamikaze, AOLer
+.Ed
+.Pp
+String constants are not expanded within the symbol names.
+.Ss Predeclared symbols
+The following symbols are defined by the assembler:
+.Bl -column -offset indent "__ISO_8601_LOCAL__" "EQUS"
+.It Sy Name Ta Sy Type Ta Sy Contents
+.It Dv @ Ta Ic EQU Ta PC value (essentially, the current memory address)
+.It Dv _RS Ta Ic = Ta _RS Counter
+.It Dv _NARG Ta Ic EQU Ta Number of arguments passed to macro, updated by Ic SHIFT
+.It Dv __DATE__ Ta Ic EQUS Ta Today's date
+.It Dv __TIME__ Ta Ic EQUS Ta The current time
+.It Dv __ISO_8601_LOCAL__ Ta Ic EQUS Ta ISO 8601 timestamp (local)
+.It Dv __ISO_8601_UTC__ Ta Ic EQUS Ta ISO 8601 timestamp (UTC)
+.It Dv __UTC_YEAR__ Ta Ic EQU Ta Today's year
+.It Dv __UTC_MONTH__ Ta Ic EQU Ta Today's month number, 1\[en]12
+.It Dv __UTC_DAY__ Ta Ic EQU Ta Today's day of the month, 1\[en]31
+.It Dv __UTC_HOUR__ Ta Ic EQU Ta Current hour, 0\[en]23
+.It Dv __UTC_MINUTE__ Ta Ic EQU Ta Current minute, 0\[en]59
+.It Dv __UTC_SECOND__ Ta Ic EQU Ta Current second, 0\[en]59
+.It Dv __RGBDS_MAJOR__ Ta Ic EQU Ta Major version number of RGBDS
+.It Dv __RGBDS_MINOR__ Ta Ic EQU Ta Minor version number of RGBDS
+.It Dv __RGBDS_PATCH__ Ta Ic EQU Ta Patch version number of RGBDS
+.It Dv __RGBDS_RC__ Ta Ic EQU Ta Release candidate ID of RGBDS, not defined for final releases
+.It Dv __RGBDS_VERSION__ Ta Ic EQUS Ta Version of RGBDS, as printed by Ql rgbasm --version
+.El
+.Pp
+The current time values will be taken from the
+.Dv SOURCE_DATE_EPOCH
+environment variable if that is defined as a UNIX timestamp.
+Refer to the spec at
+.Lk https://reproducible-builds.org/docs/source-date-epoch/ .
+.Sh DEFINING DATA
+.Ss Statically allocating space in RAM
+.Ic DS
+statically allocates a number of empty bytes.
+This is the preferred method of allocating space in a RAM section.
+You can also use
+.Ic DB , DW
+and
+.Ic DL
+without any arguments instead (see
+.Sx Defining constant data in ROM
+below).
+.Bd -literal -offset indent
+DS 42 ;\ Allocates 42 bytes
+.Ed
+.Pp
+Empty space in RAM sections will not be initialized.
+In ROM sections, it will be filled with the value passed to the
+.Fl p
+command-line option, except when using overlays with
+.Fl O .
+.Ss Defining constant data in ROM
+.Ic DB
+defines a list of bytes that will be stored in the final image.
+Ideal for tables and text.
+.Bd -literal -offset indent
+DB 1,2,3,4,"This is a string"
+.Ed
+.Pp
+Alternatively, you can use
+.Ic DW
+to store a list of words (16-bit) or
+.Ic DL
+to store a list of double-words/longs (32-bit).
+Both of these write their data in little-endian byte order; for example,
+.Ql dw $CAFE
+is equivalent to
+.Ql db $FE, $CA
+and not
+.Ql db $CA, $FE .
+.Pp
+Strings are handled a little specially: they first undergo charmap conversion (see
+.Sx Character maps ) ,
+then each resulting character is output individually.
+For example, under the default charmap, the following two lines are identical:
+.Bd -literal -offset indent
+DW "Hello!"
+DW "H", "e", "l", "l", "o", "!"
+.Ed
+.Pp
+If you do not want this special handling, enclose the string in parentheses.
+.Pp
+.Ic DS
+can also be used to fill a region of memory with some repeated values.
+For example:
+.Bd -literal -offset indent
+; outputs 3 bytes: $AA, $AA, $AA
+DS 3, $AA
+; outputs 7 bytes: $BB, $CC, $BB, $CC, $BB, $CC, $BB
+DS 7, $BB, $CC
+.Ed
+.Pp
+You can also use
+.Ic DB , DW
+and
+.Ic DL
+without arguments.
+This works exactly like
+.Ic DS 1 , DS 2
+and
+.Ic DS 4
+respectively.
+Consequently, no-argument
+.Ic DB , DW
+and
+.Ic DL
+can be used in a
+.Ic WRAM0
+/
+.Ic WRAMX
+/
+.Ic HRAM
+/
+.Ic VRAM
+/
+.Ic SRAM
+section.
+.Ss Including binary files
+You probably have some graphics, level data, etc. you'd like to include.
+Use
+.Ic INCBIN
+to include a raw binary file as it is.
+If the file isn't found in the current directory, the include-path list passed to
+.Xr rgbasm 1
+(see the
+.Fl i
+option) on the command line will be searched.
+.Bd -literal -offset indent
+INCBIN "titlepic.bin"
+INCBIN "sprites/hero.bin"
+.Ed
+.Pp
+You can also include only part of a file with
+.Ic INCBIN .
+The example below includes 256 bytes from data.bin, starting from byte 78.
+.Bd -literal -offset indent
+INCBIN "data.bin",78,256
+.Ed
+.Pp
+The length argument is optional.
+If only the start position is specified, the bytes from the start position until the end of the file will be included.
+.Ss Unions
+Unions allow multiple static memory allocations to overlap, like unions in C.
+This does not increase the amount of memory available, but allows re-using the same memory region for different purposes.
+.Pp
+A union starts with a
+.Ic UNION
+keyword, and ends at the corresponding
+.Ic ENDU
+keyword.
+.Ic NEXTU
+separates each block of allocations, and you may use it as many times within a union as necessary.
+.Bd -literal -offset indent
+    ; Let's say PC = $C0DE here
+    UNION
+    ; Here, PC = $C0DE
+Name: ds 8
+    ; PC = $C0E6
+Nickname: ds 8
+    ; PC = $C0EE
+    NEXTU
+    ; PC is back to $C0DE
+Health: dw
+    ; PC = $C0E0
+Something: ds 6
+    ; And so on
+Lives: db
+    NEXTU
+VideoBuffer: ds 19
+    ENDU
+.Ed
+.Pp
+In the example above,
+.Sq Name , Health , VideoBuffer
+all have the same value, as do
+.Sq Nickname
+and
+.Sq Lives .
+Thus, keep in mind that
+.Ic ld [Health], a
+is identical to
+.Ic ld [Name], a .
+.Pp
+The size of this union is 19 bytes, as this is the size of the largest block (the last one, containing
+.Sq VideoBuffer ) .
+Nesting unions is possible, with each inner union's size being considered as described above.
+.Pp
+Unions may be used in any section, but inside them may only be
+.Ic DS -
+like commands (see
+.Sx Statically allocating space in RAM ) .
+.Sh THE MACRO LANGUAGE
+.Ss Invoking macros
+You execute the macro by inserting its name.
+.Bd -literal -offset indent
+         add a,b
+         ld sp,hl
+         MyMacro ;\ This will be expanded
+         sub a,87
+.Ed
+.Pp
+It's valid to call a macro from a macro (yes, even the same one).
+.Pp
+When
+.Nm
+sees
+.Ic MyMacro
+it will insert the macro definition (the code enclosed in
+.Ic MACRO
+/
+.Ic ENDM ) .
+.Pp
+Suppose your macro contains a loop.
+.Bd -literal -offset indent
+MACRO LoopyMacro
+            xor  a,a
+\&.loop       ld   [hl+],a
+            dec  c
+            jr   nz,.loop
+ENDM
+.Ed
+.Pp
+This is fine, but only if you use the macro no more than once per scope.
+To get around this problem, there is the escape sequence
+.Ic \e@
+that expands to a unique string.
+.Pp
+.Ic \e@
+also works in
+.Ic REPT
+blocks.
+.Bd -literal -offset indent
+MACRO LoopyMacro
+            xor  a,a
+\&.loop\e@     ld   [hl+],a
+            dec  c
+            jr   nz,.loop\e@
+ENDM
+.Ed
+.Pp
+.Sy Important note :
+Since a macro can call itself (or a different macro that calls the first one), there can be circular dependency problems.
+If this creates an infinite loop,
+.Nm
+will error out once a certain depth is
+reached.
+See the
+.Fl r
+command-line option in
+.Xr rgbasm 1 .
+Also, a macro can have inside an
+.Sy EQUS
+which references the same macro, which has the same problem.
+.Pp
+It's possible to pass arguments to macros as well!
+You retrieve the arguments by using the escape sequences
+.Ic \e1
+through
+.Ic \e9 , \e1
+being the first argument specified on the macro invocation.
+.Bd -literal -offset indent
+MACRO LoopyMacro
+            ld   hl,\e1
+            ld   c,\e2
+            xor  a,a
+\&.loop\e@     ld   [hl+],a
+            dec  c
+            jr   nz,.loop\e@
+            ENDM
+.Ed
+.Pp
+Now you can call the macro specifying two arguments, the first being the address and the second being a byte count.
+The generated code will then reset all bytes in this range.
+.Bd -literal -offset indent
+LoopyMacro MyVars,54
+.Ed
+.Pp
+Arguments are passed as string constants, although there's no need to enclose them in quotes.
+Thus, an expression will not be evaluated first but kind of copy-pasted.
+This means that it's probably a very good idea to use brackets around
+.Ic \e1
+to
+.Ic \e9
+if you perform further calculations on them.
+For instance, consider the following:
+.Bd -literal -offset indent
+MACRO print_double
+    PRINTLN \e1 * 2
+ENDM
+    print_double 1 + 2
+.Ed
+.Pp
+The
+.Ic PRINTLN
+statement will expand to
+.Ql PRINTLN 1 + 2 * 2 ,
+which will print 5 and not 6 as you might have expected.
+.Pp
+Line continuations work as usual inside macros or lists of macro arguments.
+However, some characters need to be escaped, as in the following example:
+.Bd -literal -offset indent
+MACRO PrintMacro1
+    PRINTLN STRCAT(\e1)
+ENDM
+    PrintMacro1 "Hello "\e, \e
+                       "world"
+MACRO PrintMacro2
+    PRINT \e1
+ENDM
+    PrintMacro2 STRCAT("Hello ", \e
+                       "world\en")
+.Ed
+.Pp
+The comma in
+.Ql PrintMacro1
+needs to be escaped to prevent it from starting another macro argument.
+The comma in
+.Ql PrintMacro2
+does not need escaping because it is inside parentheses, similar to macro arguments in C.
+The backslash in
+.Ql \en
+also does not need escaping because string literals work as usual inside macro arguments.
+.Pp
+Since there are only nine digits, you can only access the first nine macro arguments like this.
+To use the rest, you need to put the multi-digit argument number in angle brackets, like
+.Ql \e<10> .
+This bracketed syntax supports decimal numbers and numeric constant symbols.
+For example,
+.Ql \e<_NARG>
+will get the last argument.
+.Pp
+Other macro arguments and symbol interpolations will be expanded inside the angle brackets.
+For example, if
+.Ql \e1
+is
+.Ql 13 ,
+then
+.Ql \e<\e1>
+will expand to
+.Ql \e<13> .
+Or if
+.Ql v10 = 42
+and
+.Ql x = 10 ,
+then
+.Ql \e<v{d:x}>
+will expand to
+.Ql \e<42> .
+.Pp
+Another way to access more than nine macro arguments is the
+.Ic SHIFT
+command, a special command only available in macros.
+It will shift the arguments by one to the left, and decrease
+.Dv _NARG
+by 1.
+.Ic \e1
+will get the value of
+.Ic \e2 , \e2
+will get the value of
+.Ic \e3 ,
+and so forth.
+.Pp
+.Ic SHIFT
+can optionally be given an integer parameter, and will apply the above shifting that number of times.
+A negative parameter will shift the arguments in reverse.
+.Pp
+.Ic SHIFT
+is useful in
+.Ic REPT
+blocks to repeat the same commands with multiple arguments.
+.Ss Printing things during assembly
+The
+.Ic PRINT
+and
+.Ic PRINTLN
+commands print text and values to the standard output.
+Useful for debugging macros, or wherever you may feel the need to tell yourself some important information.
+.Bd -literal -offset indent
+PRINT "Hello world!\en"
+PRINTLN "Hello world!"
+PRINT _NARG, " arguments\en"
+PRINTLN "sum: ", 2+3, " product: ", 2*3
+PRINTLN "Line #", __LINE__
+PRINTLN STRFMT("E = %f", 2.718)
+.Ed
+.Bl -inset
+.It Ic PRINT
+prints out each of its comma-separated arguments.
+Numbers are printed as unsigned uppercase hexadecimal with a leading
+.Ic $ .
+For different formats, use
+.Ic STRFMT .
+.It Ic PRINTLN
+prints out each of its comma-separated arguments, if any, followed by a line feed
+.Pq Ql \en .
+.El
+.Ss Automatically repeating blocks of code
+Suppose you want to unroll a time consuming loop without copy-pasting it.
+.Ic REPT
+is here for that purpose.
+Everything between
+.Ic REPT
+and the matching
+.Ic ENDR
+will be repeated a number of times just as if you had done a copy/paste operation yourself.
+The following example will assemble
+.Ql add a,c
+four times:
+.Bd -literal -offset indent
+REPT 4
+  add  a,c
+ENDR
+.Ed
+.Pp
+You can also use
+.Ic REPT
+to generate tables on the fly:
+.Bd -literal -offset indent
+; Generate a table of square values from 0**2 = 0 to 100**2 = 10000
+DEF x = 0
+REPT 101
+    dw x * x
+    DEF x += 1
+ENDR
+.Ed
+.Pp
+As in macros, you can also use the escape sequence
+.Ic \e@ .
+.Ic REPT
+blocks can be nested.
+.Pp
+A common pattern is to repeat a block for each value in some range.
+.Ic FOR
+is simpler than
+.Ic REPT
+for that purpose.
+Everything between
+.Ic FOR
+and the matching
+.Ic ENDR
+will be repeated for each value of a given symbol.
+String constants are not expanded within the symbol name.
+For example, this code will produce a table of squared values from 0 to 255:
+.Bd -literal -offset indent
+FOR N, 256
+      dw N * N
+ENDR
+.Ed
+.Pp
+It acts just as if you had done:
+.Bd -literal -offset indent
+N = 0
+      dw N * N
+N = 1
+      dw N * N
+N = 2
+      dw N * N
+; ...
+N = 255
+      dw N * N
+N = 256
+.Ed
+.Pp
+You can customize the range of
+.Ic FOR
+values, similarly to Python's
+.Ql range
+function:
+.Bl -column "FOR V, start, stop, step"
+.It Sy Code Ta Sy Range
+.It Ic FOR Ar V , stop Ta Ar V No increments from 0 to Ar stop
+.It Ic FOR Ar V , start , stop Ta Ar V No increments from Ar start No to Ar stop
+.It Ic FOR Ar V , start , stop , step Ta Ar V No goes from Ar start No to Ar stop No by Ar step
+.El
+.Pp
+The
+.Ic FOR
+value will be updated by
+.Ar step
+until it reaches or exceeds
+.Ar stop ,
+i.e. it covers the half-open range from
+.Ar start
+(inclusive) to
+.Ar stop
+(exclusive).
+The variable
+.Ar V
+will be assigned this value at the beginning of each new iteration; any changes made to it within the
+.Ic FOR
+loop's body will be overwritten.
+So the symbol
+.Ar V
+need not be already defined before any iterations of the
+.Ic FOR
+loop, but it must be a variable
+.Pq Sx Variables
+if so.
+For example:
+.Bd -literal -offset indent
+FOR V, 4, 25, 5
+      PRINT "{d:V} "
+      DEF V *= 2
+ENDR
+      PRINTLN "done {d:V}"
+.Ed
+.Pp
+This will print:
+.Bd -literal -offset indent
+4 9 14 19 24 done 29
+.Ed
+.Pp
+Just like with
+.Ic REPT
+blocks, you can use the escape sequence
+.Ic \e@
+inside of
+.Ic FOR
+blocks, and they can be nested.
+.Pp
+You can stop a repeating block with the
+.Ic BREAK
+command.
+A
+.Ic BREAK
+inside of a
+.Ic REPT
+or
+.Ic FOR
+block will interrupt the current iteration and not repeat any more.
+It will continue running code after the block's
+.Ic ENDR .
+For example:
+.Bd -literal -offset indent
+FOR V, 1, 100
+      PRINT "{d:V}"
+      IF V == 5
+          PRINT " stop! "
+          BREAK
+      ENDC
+      PRINT ", "
+ENDR
+      PRINTLN "done {d:V}"
+.Ed
+.Pp
+This will print:
+.Bd -literal -offset indent
+1, 2, 3, 4, 5 stop! done 5
+.Ed
+.Ss Aborting the assembly process
+.Ic FAIL
+and
+.Ic WARN
+can be used to print errors and warnings respectively during the assembly process.
+This is especially useful for macros that get an invalid argument.
+.Ic FAIL
+and
+.Ic WARN
+take a string as the only argument and they will print this string out as a normal error with a line number.
+.Pp
+.Ic FAIL
+stops assembling immediately while
+.Ic WARN
+shows the message but continues afterwards.
+.Pp
+If you need to ensure some assumption is correct when compiling, you can use
+.Ic ASSERT
+and
+.Ic STATIC_ASSERT .
+Syntax examples are given below:
+.Bd -literal -offset indent
+Function:
+      xor a
+ASSERT LOW(MyByte) == 0
+      ld h, HIGH(MyByte)
+      ld l, a
+      ld a, [hli]
+; You can also indent this!
+      ASSERT BANK(OtherFunction) == BANK(Function)
+      call OtherFunction
+; Lowercase also works
+      ld hl, FirstByte
+      ld a, [hli]
+assert FirstByte + 1 == SecondByte
+      ld b, [hl]
+      ret
+\&.end
+      ; If you specify one, a message will be printed
+      STATIC_ASSERT .end - Function < 256, "Function is too large!"
+.Ed
+.Pp
+First, the difference between
+.Ic ASSERT
+and
+.Ic STATIC_ASSERT
+is that the former is evaluated by RGBASM if it can, otherwise by RGBLINK; but the latter is only ever evaluated by RGBASM.
+If RGBASM cannot compute the value of the argument to
+.Ic STATIC_ASSERT ,
+it will produce an error.
+.Pp
+Second, as shown above, a string can be optionally added at the end, to give insight into what the assertion is checking.
+.Pp
+Finally, you can add one of
+.Ic WARN , FAIL
+or
+.Ic FATAL
+as the first optional argument to either
+.Ic ASSERT
+or
+.Ic STATIC_ASSERT .
+If the assertion fails,
+.Ic WARN
+will cause a simple warning (controlled by
+.Xr rgbasm 1
+flag
+.Fl Wassert )
+to be emitted;
+.Ic FAIL
+(the default) will cause a non-fatal error; and
+.Ic FATAL
+immediately aborts.
+.Ss Including other source files
+Use
+.Ic INCLUDE
+to process another assembler file and then return to the current file when done.
+If the file isn't found in the current directory, the include path list (see the
+.Fl i
+option in
+.Xr rgbasm 1 )
+will be searched.
+You may nest
+.Ic INCLUDE
+calls infinitely (or until you run out of memory, whichever comes first).
+.Bd -literal -offset indent
+    INCLUDE "irq.inc"
+.Ed
+.Pp
+You may also implicitly
+.Ic INCLUDE
+a file before the source file with the
+.Fl P
+option of
+.Xr rgbasm 1 .
+.Ss Conditional assembling
+The four commands
+.Ic IF , ELIF , ELSE ,
+and
+.Ic ENDC
+let you have
+.Nm
+skip over parts of your code depending on a condition.
+This is a powerful feature commonly used in macros.
+.Bd -literal -offset indent
+IF NUM < 0
+  PRINTLN "NUM < 0"
+ELIF NUM == 0
+  PRINTLN "NUM == 0"
+ELSE
+  PRINTLN "NUM > 0"
+ENDC
+.Ed
+.Pp
+The
+.Ic ELIF
+(standing for "else if") and
+.Ic ELSE
+blocks are optional.
+.Ic IF
+/
+.Ic ELIF
+/
+.Ic ELSE
+/
+.Ic ENDC
+blocks can be nested.
+.Pp
+Note that if an
+.Ic ELSE
+block is found before an
+.Ic ELIF
+block, the
+.Ic ELIF
+block will be ignored.
+All
+.Ic ELIF
+blocks must go before the
+.Ic ELSE
+block.
+Also, if there is more than one
+.Ic ELSE
+block, all of them but the first one are ignored.
+.Sh MISCELLANEOUS
+.Ss Changing options while assembling
+.Ic OPT
+can be used to change some of the options during assembling from within the source, instead of defining them on the command-line.
+.Pq See Xr rgbasm 1 .
+.Pp
+.Ic OPT
+takes a comma-separated list of options as its argument:
+.Bd -literal -offset indent
+PUSHO
+    OPT g.oOX, Wdiv, L    ; acts like command-line -g.oOX -Wdiv -L
+    DW `..ooOOXX          ; uses the graphics constant characters from OPT g
+    PRINTLN $80000000/-1  ; prints a warning about division
+    LD [$FF88], A         ; encoded as LD, not LDH
+POPO
+    DW `00112233          ; uses the default graphics constant characters
+    PRINTLN $80000000/-1  ; no warning by default
+    LD [$FF88], A         ; optimized to use LDH by default
+.Ed
+.Pp
+The options that
+.Ic OPT
+can modify are currently:
+.Cm b , g , p , Q , r , h , L ,
+and
+.Cm W .
+The Boolean flag options
+.Cm H , h , L ,
+and
+.Cm l
+can be negated like
+.Ql OPT !H
+to act like omitting them from the command-line.
+.Pp
+.Ic POPO
+and
+.Ic PUSHO
+provide the interface to the option stack.
+.Ic PUSHO
+will push the current set of options on the option stack.
+.Ic POPO
+can then later be used to restore them.
+Useful if you want to change some options in an include file and you don't want to destroy the options set by the program that included your file.
+The stack's number of entries is limited only by the amount of memory in your machine.
+.Ss Requesting alignment
+While
+.Ic ALIGN
+as presented in
+.Sx SECTIONS
+is often useful as-is, sometimes you instead want a particular piece of data (or code) in the middle of the section to be aligned.
+This is made easier through the use of mid-section
+.Ic ALIGN Ar align , offset .
+It will alter the section's attributes to ensure that the location the
+.Ic ALIGN
+directive is at, has its
+.Ar align
+lower bits equal to
+.Ar offset .
+.Pp
+If the constraint cannot be met (for example because the section is fixed at an incompatible address), an error is produced.
+Note that
+.Ic ALIGN Ar align
+is a shorthand for
+.Ic ALIGN Ar align , No 0 .
+.Sh SEE ALSO
+.Xr rgbasm 1 ,
+.Xr rgblink 1 ,
+.Xr rgblink 5 ,
+.Xr rgbds 5 ,
+.Xr rgbds 7 ,
+.Xr gbz80 7
+.Sh HISTORY
+.Nm
+was originally written by Carsten S\(/orensen as part of the ASMotor package,
+and was later packaged in RGBDS by Justin Lloyd.
+It is now maintained by a number of contributors at
+.Lk https://github.com/gbdev/rgbds .

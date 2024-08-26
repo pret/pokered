@@ -1,0 +1,10 @@
+warning: rept-line-no.asm(2): [-Wuser]
+    Line 2
+warning: rept-line-no.asm(3) -> rept-line-no.asm::REPT~1(5): [-Wuser]
+    Line 5
+warning: rept-line-no.asm(3) -> rept-line-no.asm::REPT~2(5): [-Wuser]
+    Line 5
+warning: rept-line-no.asm(3) -> rept-line-no.asm::REPT~3(5): [-Wuser]
+    Line 5
+warning: rept-line-no.asm(8): [-Wuser]
+    Line 8

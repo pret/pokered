@@ -1,0 +1,60 @@
+#compdef rgbfix
+
+_mbc_names() {
+	local mbc_names=(
+		'ROM:$00'
+		'MBC1:$01'
+		'MBC1+RAM:$02'
+		'MBC1+RAM+BATTERY:$03'
+		'MBC2:$05'
+		'MBC2+BATTERY:$06'
+		'ROM+RAM:$08'
+		'ROM+RAM+BATTERY:$09'
+		'MMM01:$0B'
+		'MMM01+RAM:$0C'
+		'MMM01+RAM+BATTERY:$0D'
+		'MBC3+TIMER+BATTERY:$0F'
+		'MBC3+TIMER+RAM+BATTERY:$10'
+		'MBC3:$11'
+		'MBC3+RAM:$12'
+		'MBC3+RAM+BATTERY:$13'
+		'MBC5:$19'
+		'MBC5+RAM:$1A'
+		'MBC5+RAM+BATTERY:$1B'
+		'MBC5+RUMBLE:$1C'
+		'MBC5+RUMBLE+RAM:$1D'
+		'MBC5+RUMBLE+RAM+BATTERY:$1E'
+		'MBC6:$20'
+		'MBC7+SENSOR+RUMBLE+RAM+BATTERY:$22'
+		'POCKET_CAMERA:$FC'
+		'BANDAI_TAMA5:$FD'
+		'HUC3:$FE'
+		'HUC1+RAM+BATTERY:$FF'
+	)
+	_describe "MBC name" mbc_names
+}
+
+local args=(
+	# Arguments are listed here in the same order as in the manual, except for the version
+	'(- : * options)'{-V,--version}'[Print version number]'
+
+	'(-C --color-only -c --color-compatible)'{-C,--color-only}'[Mark ROM as GBC-only]'
+	'(-C --color-only -c --color-compatible)'{-c,--color-compatible}'[Mark ROM as GBC-compatible]'
+	'(-j --non-japanese)'{-j,--non-japanese}'[Set the non-Japanese region flag]'
+	'(-O --overwrite)'{-O,--overwrite}'[Allow overwriting non-zero bytes]'
+	'(-s --sgb-compatible)'{-s,--sgb-compatible}'[Set the SGB flag]'
+	'(-f --fix-spec -v --validate)'{-v,--validate}'[Shorthand for -f lhg]'
+
+	'(-f --fix-spec -v --validate)'{-f,--fix-spec}'+[Fix or trash some header values]:fix spec:'
+	'(-i --game-id)'{-i,--game-id}'+[Set game ID string]:4-char game ID:'
+	'(-k --new-licensee)'{-k,--new-licensee}'+[Set new licensee string]:2-char licensee ID:'
+	'(-l --old-licensee)'{-l,--old-licensee}'+[Set old licensee ID]:licensee number:'
+	'(-m --mbc-type)'{-m,--mbc-type}"+[Set MBC flags]:mbc name:_mbc_names"
+	'(-n --rom-version)'{-n,--rom-version}'+[Set ROM version]:rom version byte:'
+	'(-p --pad-value)'{-p,--pad-value}'+[Pad to next valid size using this byte as padding]:padding byte:'
+	'(-r --ram-size)'{-r,--ram-size}'+[Set RAM size]:ram size byte:'
+	'(-t --title)'{-t,--title}'+[Set title string]:11-char title string:'
+
+	'*'":ROM files:_files -g '*.{gb,sgb,gbc}'"
+)
+_arguments -s -S : $args

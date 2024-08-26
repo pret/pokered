@@ -1,0 +1,2 @@
+FATAL: "<filename>" too short, expected at least 336 ($150) bytes, got only 20
+Fixing "<filename>" failed with 1 error

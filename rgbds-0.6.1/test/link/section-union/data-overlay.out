@@ -1,0 +1,6 @@
+error: Section "overlaid data" is of type ROM0, which cannot be unionized
+---
+error: <stdin>(18):
+    Cannot declare ROM sections as UNION
+FATAL: <stdin>(18):
+    Cannot create section "overlaid data" (1 error)

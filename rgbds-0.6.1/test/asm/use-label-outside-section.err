@@ -1,0 +1,5 @@
+error: use-label-outside-section.asm(1):
+    Label "lab" created outside of a SECTION
+error: use-label-outside-section.asm(2):
+    Expected constant expression: 'lab' is not constant at assembly time
+error: Assembly aborted (2 errors)!

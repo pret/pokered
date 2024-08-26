@@ -1,0 +1,5 @@
+warning: TPP1 overwrites region flag for its identification code, ignoring `-j`
+warning: Overwrote a non-zero byte in the cartridge type
+warning: Overwrote a non-zero byte in the TPP1 identification code
+warning: Overwrote a non-zero byte in the TPP1 revision number
+warning: Overwrote a non-zero byte in the TPP1 feature flags

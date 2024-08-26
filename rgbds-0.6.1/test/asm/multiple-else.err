@@ -1,0 +1,2 @@
+FATAL: multiple-else.asm(11):
+    Found ELSE after an ELSE block

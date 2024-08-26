@@ -1,0 +1,15 @@
+"""
+Hello
+world
+The multi-line string can contain:
+- "single quotes"
+- ""double quotes""
+- even escaped """triple""" """quotes"""
+!
+arg <">
+arg (")
+arg <"""multi-line
+string argument""">
+arg ("""multi-line
+string argument""")
+()

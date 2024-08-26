@@ -1,0 +1,183 @@
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~1(12): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def minBadValue = -2147483648.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~2(12): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def minBadValue = 1073741824.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~2(17): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def worseValue = 1073741866.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~3(12): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def minBadValue = 536870912.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~3(17): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def worseValue = 536870954.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~4(12): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def minBadValue = 268435456.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~4(17): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def worseValue = 268435498.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~5(12): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def minBadValue = 134217728.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~5(17): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def worseValue = 134217770.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~6(12): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def minBadValue = 67108864.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~6(17): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def worseValue = 67108906.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~7(12): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def minBadValue = 33554432.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~7(17): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def worseValue = 33554474.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~8(12): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def minBadValue = 16777216.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~8(17): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def worseValue = 16777258.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~9(12): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def minBadValue = 8388608.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~9(17): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def worseValue = 8388650.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~10(12): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def minBadValue = 4194304.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~10(17): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def worseValue = 4194346.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~11(12): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def minBadValue = 2097152.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~11(17): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def worseValue = 2097194.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~12(12): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def minBadValue = 1048576.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~12(17): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def worseValue = 1048618.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~13(12): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def minBadValue = 524288.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~13(17): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def worseValue = 524330.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~14(12): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def minBadValue = 262144.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~14(17): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def worseValue = 262186.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~15(12): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def minBadValue = 131072.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~15(17): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def worseValue = 131114.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~16(12): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def minBadValue = 65536.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~16(17): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def worseValue = 65578.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~17(12): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def minBadValue = 32768.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~17(17): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def worseValue = 32810.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~18(12): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def minBadValue = 16384.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~18(17): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def worseValue = 16426.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~19(12): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def minBadValue = 8192.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~19(17): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def worseValue = 8234.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~20(12): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def minBadValue = 4096.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~20(17): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def worseValue = 4138.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~21(12): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def minBadValue = 2048.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~21(17): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def worseValue = 2090.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~22(12): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def minBadValue = 1024.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~22(17): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def worseValue = 1066.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~23(12): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def minBadValue = 512.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~23(17): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def worseValue = 554.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~24(12): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def minBadValue = 256.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~24(17): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def worseValue = 298.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~25(12): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def minBadValue = 128.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~25(17): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def worseValue = 170.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~26(12): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def minBadValue = 64.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~26(17): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def worseValue = 106.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~27(12): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def minBadValue = 32.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~27(17): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def worseValue = 74.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~28(12): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def minBadValue = 16.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~28(17): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def worseValue = 58.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~29(12): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def minBadValue = 8.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~29(17): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def worseValue = 50.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~30(12): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def minBadValue = 4.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~30(17): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def worseValue = 46.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~31(12): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def minBadValue = 2.0"
+warning: fixed-point-magnitude.asm(1) -> fixed-point-magnitude.asm::REPT~31(17): [-Wlarge-constant]
+    Magnitude of fixed-point constant is too large
+while expanding symbol "def worseValue = 44.0"

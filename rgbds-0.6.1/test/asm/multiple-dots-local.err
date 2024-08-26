@@ -1,0 +1,2 @@
+FATAL: multiple-dots-local.asm(6):
+    'Parent...spare' is a nonsensical reference to a nested local label

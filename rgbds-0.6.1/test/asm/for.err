@@ -1,0 +1,10 @@
+warning: for.asm(12): [-Wbackwards-for]
+    FOR goes backwards from 2 to 1 by 1
+error: for.asm(16):
+    FOR cannot have a step value of 0
+warning: for.asm(20): [-Wbackwards-for]
+    FOR goes backwards from 1 to 2 by -1
+error: for.asm(45) -> for.asm::REPT~4(51):
+    'v' already defined as constant at for.asm(45) -> for.asm::REPT~4(49)
+FATAL: for.asm(45) -> for.asm::REPT~4(51):
+    Failed to update FOR symbol value

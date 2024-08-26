@@ -1,0 +1,405 @@
+.\"
+.\" This file is part of RGBDS.
+.\"
+.\" Copyright (c) 2017-2021, Antonio Nino Diaz and RGBDS contributors.
+.\"
+.\" SPDX-License-Identifier: MIT
+.\"
+.Dd March 28, 2021
+.Dt RGBDS 5
+.Os
+.Sh NAME
+.Nm rgbds
+.Nd object file format documentation
+.Sh DESCRIPTION
+This is the description of the object files used by
+.Xr rgbasm 1
+and
+.Xr rgblink 1 .
+.Em Please note that the specification is not stable yet.
+RGBDS is still in active development, and some new features require adding more information to the object file, or modifying some fields, both of which break compatibility with older versions.
+.Sh FILE STRUCTURE
+The following types are used:
+.Pp
+.Cm LONG
+is a 32-bit integer stored in little-endian format.
+.Cm BYTE
+is an 8-bit integer.
+.Cm STRING
+is a 0-terminated string of
+.Cm BYTE .
+Brackets after a type
+.Pq e.g. Cm LONG Ns Bq Ar n
+indicate
+.Ar n
+consecutive elements
+.Pq here, Cm LONG Ns s .
+All items are contiguous, with no padding anywhere\(emthis also means that they may not be aligned in the file!
+.Pp
+.Cm REPT Ar n
+indicates that the fields between the
+.Cm REPT
+and corresponding
+.Cm ENDR
+are repeated
+.Ar n
+times.
+.Pp
+All IDs refer to objects within the file; for example, symbol ID $0001 refers to the second symbol defined in
+.Em this
+object file's
+.Sx Symbols
+array.
+The only exception is the
+.Sx Source file info
+nodes, whose IDs are backwards, i.e. source node ID $0000 refers to the
+.Em last
+node in the array, not the first one.
+References to other object files are made by imports (symbols), by name (sections), etc.\(embut never by ID.
+.Ss Header
+.Bl -tag -width Ds -compact
+.It Cm BYTE Ar Magic[4]
+"RGB9"
+.It Cm LONG Ar RevisionNumber
+The format's revision number this file uses.
+.Pq This is always in the same place in all revisions.
+.It Cm LONG Ar NumberOfSymbols
+How many symbols are defined in this object file.
+.It Cm LONG Ar NumberOfSections
+How many sections are defined in this object file.
+.El
+.Ss Source file info
+.Bl -tag -width Ds -compact
+.It Cm LONG Ar NumberOfNodes
+The number of source context nodes contained in this file.
+.It Cm REPT Ar NumberOfNodes
+.Bl -tag -width Ds -compact
+.It Cm LONG Ar ParentID
+ID of the parent node, -1 meaning that this is the root node.
+.Pp
+.Sy Important :
+the nodes are actually written in
+.Sy reverse
+order, meaning the node with ID 0 is the last one in the list!
+.It Cm LONG Ar ParentLineNo
+Line at which the parent node's context was exited; meaningless for the root node.
+.It Cm BYTE Ar Type
+.Bl -column "Value" -compact
+.It Sy Value Ta Sy Meaning
+.It 0 Ta REPT node
+.It 1 Ta File node
+.It 2 Ta Macro node
+.El
+.It Cm IF Ar Type No \(!= 0
+If the node is not a REPT node...
+.Pp
+.Bl -tag -width Ds -compact
+.It Cm STRING Ar Name
+The node's name: either a file name, or the macro's name prefixes by its definition's file name
+.Pq e.g. Ql src/includes/defines.asm::error .
+.El
+.It Cm ELSE
+If the node is a REPT, it also contains the iteration counter of all parent REPTs.
+.Pp
+.Bl -tag -width Ds -compact
+.It Cm LONG Ar Depth
+.It Cm LONG Ar Iter Ns Bq Ar Depth
+The number of REPT iterations, by increasing depth.
+.El
+.It Cm ENDC
+.El
+.It Cm ENDR
+.El
+.Ss Symbols
+.Bl -tag -width Ds -compact
+.It Cm REPT Ar NumberOfSymbols
+.Bl -tag -width Ds -compact
+.It Cm STRING Ar Name
+This symbol's name.
+Local symbols are stored as their full name
+.Pq Ql Scope.symbol .
+.It Cm BYTE Ar Type
+.Bl -column "Value" -compact
+.It Sy Value Ta Sy Meaning
+.It 0 Ta Sy Local No symbol only used in this file.
+.It 1 Ta Sy Import No of an exported symbol (by name) from another object file.
+.It 2 Ta Sy Exported No symbol visible from other object files.
+.El
+.It Cm IF Ar Type No \(!= 1
+If the symbol is defined in this object file...
+.Pp
+.Bl -tag -width Ds -compact
+.It Cm LONG Ar NodeID
+Context in which the symbol was defined.
+.It Cm LONG Ar LineNo
+Line number in the context at which the symbol was defined.
+.It Cm LONG Ar SectionID
+The ID of the section in which the symbol is defined.
+If the symbol doesn't belong to any specific section (i.e. it's a constant), this field contains -1.
+.It Cm LONG Ar Value
+The symbol's value.
+If the symbol belongs to a section, this is the offset within that symbol's section.
+.El
+.It Cm ENDC
+.El
+.It Cm ENDR
+.El
+.Ss Sections
+.Bl -tag -width Ds -compact
+.It Cm REPT Ar NumberOfSections
+.Bl -tag -width Ds -compact
+.It Cm STRING Ar Name
+The section's name.
+.It Cm LONG Ar Size
+The section's size, in bytes.
+.It Cm BYTE Ar Type
+Bits 0\(en2 indicate the section's type:
+.Bl -column "Value" -compact
+.It Sy Value Ta Sy Meaning
+.It 0 Ta WRAM0
+.It 1 Ta VRAM
+.It 2 Ta ROMX
+.It 3 Ta ROM0
+.It 4 Ta HRAM
+.It 5 Ta WRAMX
+.It 6 Ta SRAM
+.It 7 Ta OAM
+.El
+.Pp
+Bit\ 7 being set means that the section is a "union"
+.Pq see Do Unionized sections Dc in Xr rgbasm 5 .
+Bit\ 6 being set means that the section is a "fragment"
+.Pq see Do Section fragments Dc in Xr rgbasm 5 .
+These two bits are mutually exclusive.
+.It Cm LONG Ar Address
+Address this section must be placed at.
+This must either be valid for the section's
+.Ar Type
+(as affected by flags like
+.Fl t
+or
+.Fl d
+in
+.Xr rgblink 1 ) ,
+or -1 to indicate that the linker should automatically decide
+.Pq the section is Dq floating .
+.It Cm LONG Ar Bank
+ID of the bank this section must be placed in.
+This must either be valid for the section's
+.Ar Type
+(with the same caveats as for the
+.Ar Address ) ,
+or -1 to indicate that the linker should automatically decide.
+.It Cm BYTE Ar Alignment
+How many bits of the section's address should be equal to
+.Ar AlignOfs ,
+starting from the least-significant bit.
+.It Cm LONG Ar AlignOfs
+Alignment offset.
+Must be strictly less than
+.Ql 1 << Ar Alignment .
+.It Cm IF Ar Type No \(eq 2 || Ar Type No \(eq 3
+If the section has ROM type, it contains data.
+.Pp
+.Bl -tag -width Ds -compact
+.It Cm BYTE Ar Data Ns Bq Size
+The section's raw data.
+Bytes that will be patched over must be present, even though their contents will be overwritten.
+.It Cm LONG Ar NumberOfPatches
+How many patches must be applied to this section's
+.Ar Data .
+.It Cm REPT Ar NumberOfPatches
+.Bl -tag -width Ds -compact
+.It Cm LONG Ar NodeID
+Context in which the patch was defined.
+.It Cm LONG Ar LineNo
+Line number in the context at which the patch was defined.
+.It Cm LONG Ar Offset
+Offset within the section's
+.Ar Data
+at which the patch should be applied.
+Must not be greater than the section's
+.Ar Size
+minus the patch's size
+.Pq see Ar Type No below .
+.It Cm LONG Ar PCSectionID
+ID of the section in which PC is located.
+(This is usually the same section within which the patch is applied, except for e.g.\&
+.Ql LOAD
+blocks, see
+.Do RAM code Dc in Xr rgbasm 5 . )
+.It Cm LONG Ar PCOffset
+Offset of the PC symbol within the section designated by
+.Ar PCSectionID .
+It is expected that PC points to the instruction's first byte for instruction operands (i.e.\&
+.Ql jp @
+must be an infinite loop), and to the patch's first byte otherwise
+.Ql ( db ,
+.Ql dw ,
+.Ql dl ) .
+.It Cm BYTE Ar Type
+.Bl -column "Value" -compact
+.It Sy Value Ta Sy Meaning
+.It 0 Ta Single-byte patch
+.It 1 Ta Little-endian two-byte patch
+.It 2 Ta Little-endian four-byte patch
+.It 3 Ta Single-byte Ql jr
+patch; the patch's value will be subtracted to PC + 2 (i.e.\&
+.Ql jr @
+must be the infinite loop
+.Ql 18 FE ) .
+.El
+.It Cm LONG Ar RPNSize
+Size of the
+.Ar RPNExpr
+below.
+.It Cm BYTE Ar RPNExpr Ns Bq RPNSize
+The patch's value, encoded as a RPN expression
+.Pq see Sx RPN EXPRESSIONS .
+.El
+.It Cm ENDR
+.El
+.It Cm ENDC
+.El
+.El
+.Ss Assertions
+.Bl -tag -width Ds -compact
+.It Cm LONG Ar NumberOfAssertions
+How many assertions this object file contains.
+.It Cm REPT Ar NumberOfAssertions
+Assertions are essentially patches with a message.
+.Pp
+.Bl -tag -width Ds -compact
+.It Cm LONG Ar NodeID
+Context in which the assertions was defined.
+.It Cm LONG Ar LineNo
+Line number in the context at which the assertion was defined.
+.It Cm LONG Ar Offset
+Unused leftover from the patch structure.
+.It Cm LONG Ar PCSectionID
+ID of the section in which PC is located.
+.It Cm LONG Ar PCOffset
+Offset of the PC symbol within the section designated by
+.Ar PCSectionID .
+.It Cm BYTE Ar Type
+Describes what should happen if the expression evaluates to a non-zero value.
+.Bl -column "Value" -compact
+.It Sy Value Ta Sy Meaning
+.It 0 Ta Print a warning message, and continue linking normally.
+.It 1 Ta Print an error message, so linking will fail, but allow other assertions to be evaluated.
+.It 2 Ta Print a fatal error message, and abort immediately.
+.El
+.It Cm LONG Ar RPNSize
+Size of the
+.Ar RPNExpr
+below.
+.It Cm BYTE Ar RPNExpr Ns Bq RPNSize
+The patch's value, encoded as a RPN expression
+.Pq see Sx RPN EXPRESSIONS .
+.It Cm STRING Ar Message
+The message displayed if the expression evaluates to a non-zero value.
+If empty, a generic message is displayed instead.
+.El
+.It Cm ENDR
+.El
+.Ss RPN EXPRESSIONS
+Expressions in the object file are stored as RPN, or
+.Dq Reverse Polish Notation ,
+which is a notation that allows computing arbitrary expressions with just a simple stack.
+For example, the expression
+.Ql 2 5 -
+will first push the value
+.Dq 2
+to the stack, then
+.Dq 5 .
+The
+.Ql -
+operator pops two arguments from the stack, subtracts them, and then pushes back the result
+.Pq Dq 3
+on the stack.
+A well-formed RPN expression never tries to pop from an empty stack, and leaves exactly one value in it at the end.
+.Pp
+RGBDS encodes RPN expressions as an array of
+.Cm BYTE Ns s .
+The first byte encodes either an operator, or a literal, which consumes more
+.Cm BYTE Ns s
+after it.
+.Bl -column -offset Ds "Value"
+.It Sy Value Ta Sy Meaning
+.It Li $00 Ta Addition operator Pq Ql +
+.It Li $01 Ta Subtraction operator Pq Ql -
+.It Li $02 Ta Multiplication operator Pq Ql *
+.It Li $03 Ta Division operator Pq Ql /
+.It Li $04 Ta Modulo operator Pq Ql %
+.It Li $05 Ta Negation Pq unary Ql -
+.It Li $06 Ta Exponent operator Pq Ql **
+.It Li $10 Ta Bitwise OR operator Pq Ql \&|
+.It Li $11 Ta Bitwise AND operator Pq Ql &
+.It Li $12 Ta Bitwise XOR operator Pq Ql ^
+.It Li $13 Ta Bitwise complement operator Pq unary Ql ~
+.It Li $21 Ta Logical AND operator Pq Ql &&
+.It Li $22 Ta Logical OR operator Pq Ql ||
+.It Li $23 Ta Logical complement operator Pq unary Ql \&!
+.It Li $30 Ta Equality operator Pq Ql ==
+.It Li $31 Ta Non-equality operator Pq Ql !=
+.It Li $32 Ta Greater-than operator Pq Ql >
+.It Li $33 Ta Less-than operator Pq Ql <
+.It Li $34 Ta Greater-than-or-equal operator Pq Ql >=
+.It Li $35 Ta Less-than-or-equal operator Pq Ql <=
+.It Li $40 Ta Left shift operator Pq Ql <<
+.It Li $41 Ta Arithmetic/signed right shift operator Pq Ql >>
+.It Li $42 Ta Logical/unsigned right shift operator Pq Ql >>>
+.It Li $50 Ta Fn BANK symbol ,
+followed by the
+.Ar symbol Ap s Cm LONG
+ID.
+.It Li $51 Ta Fn BANK section ,
+followed by the
+.Ar section Ap s Cm STRING
+name.
+.It Li $52 Ta PC's Fn BANK Pq i.e. Ql BANK(@) .
+.It Li $53 Ta Fn SIZEOF section ,
+followed by the
+.Ar section Ap s Cm STRING
+name.
+.It Li $54 Ta Fn STARTOF section ,
+followed by the
+.Ar section Ap s Cm STRING
+name.
+.It Li $60 Ta Ql ldh
+check.
+Checks if the value is a valid
+.Ql ldh
+operand
+.Pq see Do Load Instructions Dc in Xr gbz80 7 ,
+i.e. that it is between either $00 and $FF, or $FF00 and $FFFF, both inclusive.
+The value is then ANDed with $00FF
+.Pq Ql & $FF .
+.It Li $61 Ta Ql rst
+check.
+Checks if the value is a valid
+.Ql rst
+.Pq see Do RST vec Dc in Xr gbz80 7
+vector, that is one of $00, $08, $10, $18, $20, $28, $30, or $38.
+The value is then ORed with $C7
+.Pq Ql \&| $C7 .
+.It Li $80 Ta Integer literal.
+Followed by the
+.Cm LONG
+integer.
+.It Li $81 Ta A symbol's value.
+Followed by the symbol's
+.Cm LONG
+ID.
+.El
+.Sh SEE ALSO
+.Xr rgbasm 1 ,
+.Xr rgblink 1 ,
+.Xr rgbds 7 ,
+.Xr gbz80 7
+.Sh HISTORY
+.Nm
+was originally written by Carsten S\(/orensen as part of the ASMotor package,
+and was later packaged in RGBDS by Justin Lloyd.
+It is now maintained by a number of contributors at
+.Lk https://github.com/gbdev/rgbds .

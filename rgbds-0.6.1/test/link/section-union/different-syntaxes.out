@@ -1,0 +1,6 @@
+error: Section "different syntaxes" is of type ROM0, which cannot be unionized
+---
+error: <stdin>(18):
+    Cannot declare ROM sections as UNION
+FATAL: <stdin>(18):
+    Cannot create section "different syntaxes" (1 error)

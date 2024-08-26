@@ -1,0 +1,38 @@
+warning: warn-numeric-string.asm(20) -> warn-numeric-string.asm::try(12): [-Wnumeric-string]
+    Treating string as a number ignores first 1 character
+warning: warn-numeric-string.asm(20) -> warn-numeric-string.asm::try(13): [-Wnumeric-string]
+    Treating string as a number ignores first 1 character
+warning: warn-numeric-string.asm(20) -> warn-numeric-string.asm::try(13): [-Wnumeric-string]
+    Treating string as a number ignores first 2 characters
+warning: warn-numeric-string.asm(22) -> warn-numeric-string.asm::try(12): [-Wnumeric-string]
+    Treating string as a number ignores first 1 character
+warning: warn-numeric-string.asm(22) -> warn-numeric-string.asm::try(13): [-Wnumeric-string]
+    Treating string as a number ignores first 1 character
+warning: warn-numeric-string.asm(22) -> warn-numeric-string.asm::try(13): [-Wnumeric-string]
+    Treating string as a number ignores first 2 characters
+warning: warn-numeric-string.asm(23) -> warn-numeric-string.asm::try(12): [-Wnumeric-string]
+    Treating string as a number ignores first 1 character
+warning: warn-numeric-string.asm(23) -> warn-numeric-string.asm::try(13): [-Wnumeric-string]
+    Treating string as a number ignores first 1 character
+warning: warn-numeric-string.asm(23) -> warn-numeric-string.asm::try(13): [-Wnumeric-string]
+    Treating string as a number ignores first 2 characters
+warning: warn-numeric-string.asm(23) -> warn-numeric-string.asm::try(15): [-Wnumeric-string]
+    Treating 2-character string as a number
+warning: warn-numeric-string.asm(23) -> warn-numeric-string.asm::try(16): [-Wnumeric-string]
+    Treating 3-character string as a number
+error: warn-numeric-string.asm(24) -> warn-numeric-string.asm::try(12): [-Werror=numeric-string]
+    Treating string as a number ignores first 1 character
+error: warn-numeric-string.asm(24) -> warn-numeric-string.asm::try(13): [-Werror=numeric-string]
+    Treating string as a number ignores first 1 character
+error: warn-numeric-string.asm(24) -> warn-numeric-string.asm::try(13): [-Werror=numeric-string]
+    Treating string as a number ignores first 2 characters
+error: warn-numeric-string.asm(25) -> warn-numeric-string.asm::try(12): [-Werror=numeric-string]
+    Treating string as a number ignores first 1 character
+error: warn-numeric-string.asm(25) -> warn-numeric-string.asm::try(13): [-Werror=numeric-string]
+    Treating string as a number ignores first 1 character
+error: warn-numeric-string.asm(25) -> warn-numeric-string.asm::try(13): [-Werror=numeric-string]
+    Treating string as a number ignores first 2 characters
+error: warn-numeric-string.asm(25) -> warn-numeric-string.asm::try(15): [-Werror=numeric-string]
+    Treating 2-character string as a number
+error: warn-numeric-string.asm(25) -> warn-numeric-string.asm::try(16): [-Werror=numeric-string]
+    Treating 3-character string as a number

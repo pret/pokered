@@ -1,0 +1,2 @@
+error: bank-const/b.asm(2): Requested BANK() of non-label symbol "CONSTANT"
+Linking failed with 1 error

@@ -1,0 +1,7 @@
+error: bracketed-symbols.asm(16):
+    Formatting string as type 'X'
+error: bracketed-symbols.asm(20):
+    "Label" does not have a constant value
+error: bracketed-symbols.asm(21):
+    Expected constant PC but section is not fixed
+error: Assembly aborted (3 errors)!

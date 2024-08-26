@@ -1,0 +1,6 @@
+error: section-union/assert.asm(11): Force failing the build
+Linking failed with 1 error
+---
+error: <stdin>(30):
+    Assertion failed: Force failing the build
+error: Assembly aborted (1 error)!

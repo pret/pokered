@@ -1,7 +1,7 @@
 roms := \
 	pokered.gbc \
 	pokeblue.gbc \
-	pokeblue_debug.gbc
+#	pokeblue_debug.gbc
 patches := \
 	pokered.patch \
 	pokeblue.patch

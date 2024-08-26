@@ -1,0 +1,15 @@
+
+SECTION "Output", ROM0[0]
+    db SIZEOF("ROM CODE")
+    db SIZEOF("RAM CODE")
+    db SIZEOF("HRAM")
+
+
+SECTION "ROM CODE",ROM0
+    ds $80
+LOAD "RAM CODE",SRAM
+PUSHS
+SECTION "HRAM",HRAM
+    ds 1
+POPS
+ENDL

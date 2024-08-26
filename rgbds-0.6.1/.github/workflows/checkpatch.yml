@@ -1,0 +1,25 @@
+name: "Code style checking"
+on: pull_request
+
+jobs:
+  checkpatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up repo
+        run: |
+          git clone -b "${{ github.event.pull_request.head.ref }}" "${{ github.event.pull_request.head.repo.clone_url }}" rgbds
+          cd rgbds
+          git remote add upstream "${{ github.event.pull_request.base.repo.clone_url }}"
+          git fetch upstream
+      - name: Set up checkpatch
+        working-directory: rgbds
+        run: |
+          wget 'https://raw.githubusercontent.com/torvalds/linux/master/scripts/checkpatch.pl'
+          chmod +x checkpatch.pl
+          wget 'https://raw.githubusercontent.com/torvalds/linux/master/scripts/const_structs.checkpatch'
+          wget 'https://raw.githubusercontent.com/torvalds/linux/master/scripts/spelling.txt'
+      - name: Checkpatch
+        working-directory: rgbds
+        run: |
+          make checkpatch CHECKPATCH=./checkpatch.pl "BASE_REF=${{ github.event.pull_request.base.sha }}" Q= | tee log
+          if grep -q ERROR: log; then exit 1; else exit 0; fi

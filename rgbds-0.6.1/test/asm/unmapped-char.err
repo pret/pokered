@@ -1,0 +1,6 @@
+warning: unmapped-char.asm(12): [-Wunmapped-char]
+    Unmapped character 'A' not in main charmap
+warning: unmapped-char.asm(15): [-Wunmapped-char]
+    Unmapped character 'A'
+warning: unmapped-char.asm(21): [-Wunmapped-char]
+    Unmapped character 'A'

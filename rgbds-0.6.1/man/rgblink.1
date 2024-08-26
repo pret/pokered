@@ -1,0 +1,207 @@
+.\"
+.\" This file is part of RGBDS.
+.\"
+.\" Copyright (c) 2010-2021, Anthony J. Bentley and RGBDS contributors.
+.\"
+.\" SPDX-License-Identifier: MIT
+.\"
+.Dd March 28, 2021
+.Dt RGBLINK 1
+.Os
+.Sh NAME
+.Nm rgblink
+.Nd Game Boy linker
+.Sh SYNOPSIS
+.Nm
+.Op Fl dMtVvwx
+.Op Fl l Ar linker_script
+.Op Fl m Ar map_file
+.Op Fl n Ar sym_file
+.Op Fl O Ar overlay_file
+.Op Fl o Ar out_file
+.Op Fl p Ar pad_value
+.Op Fl S Ar spec
+.Op Fl s Ar symbol
+.Ar
+.Sh DESCRIPTION
+The
+.Nm
+program links RGB object files, typically created by
+.Xr rgbasm 1 ,
+into a single Game Boy ROM file.
+The format is documented in
+.Xr rgbds 5 .
+.Pp
+ROM0 sections are placed in the first 16 KiB of the output ROM, and ROMX sections are placed in any 16 KiB
+.Dq bank
+except the first.
+If your ROM will only be 32 KiB, you can use the
+.Fl t
+option to change this.
+.Pp
+Similarly, WRAM0 sections are placed in the first 4 KiB of WRAM
+.Pq Dq bank 0 ,
+and WRAMX sections are placed in any bank of the last 4 KiB.
+If your ROM doesn't use banked WRAM, you can use the
+.Fl w
+option to change this.
+.Pp
+Also, if your ROM is designed for a monochrome Game Boy, you can make sure that you don't use any incompatible section by using the
+.Fl d
+option, which implies
+.Fl w
+but also prohibits the use of banked VRAM.
+.Pp
+Note that options can be abbreviated as long as the abbreviation is unambiguous:
+.Fl Fl verb
+is
+.Fl Fl verbose ,
+but
+.Fl Fl ver
+is invalid because it could also be
+.Fl Fl version .
+The arguments are as follows:
+.Bl -tag -width Ds
+.It Fl d , Fl Fl dmg
+Enable DMG mode.
+Prohibit the use of sections that doesn't exist on a DMG, such as VRAM bank 1.
+This option automatically enables
+.Fl w .
+.It Fl l Ar linker_script , Fl Fl linkerscript Ar linker_script
+Specify a linker script file that tells the linker how sections must be placed in the ROM.
+The attributes assigned in the linker script must be consistent with any assigned in the code.
+See
+.Xr rgblink 5
+for more information about the linker script format.
+.It Fl M , Fl Fl no-sym-in-map
+If specified, the map file will not list symbols, only sections.
+.It Fl m Ar map_file , Fl Fl map Ar map_file
+Write a map file to the given filename, listing how sections and symbols were assigned.
+.It Fl n Ar sym_file , Fl Fl sym Ar sym_file
+Write a symbol file to the given filename, listing the address of all exported symbols.
+Several external programs can use this information, for example to help debugging ROMs.
+.It Fl O Ar overlay_file , Fl Fl overlay Ar overlay_file
+If specified, sections will be overlaid "on top" of the provided ROM image.
+In that case, all sections must be fixed.
+This may be used to patch an existing binary.
+.It Fl o Ar out_file , Fl Fl output Ar out_file
+Write the ROM image to the given file.
+.It Fl p Ar pad_value , Fl Fl pad Ar pad_value
+When inserting padding between sections, pad with this value.
+Has no effect if
+.Fl O
+is specified.
+The default is 0.
+.It Fl S Ar spec , Fl Fl scramble Ar spec
+Enables a different
+.Dq scrambling
+algorithm for placing sections.
+See
+.Sx Scrambling algorithm
+below for an explanation and a description of
+.Ar spec .
+.It Fl s Ar symbol , Fl Fl smart Ar symbol
+This option is ignored.
+It was supposed to perform smart linking but fell into disrepair, and so has been removed.
+It will be reimplemented at some point.
+.It Fl t , Fl Fl tiny
+Expand the ROM0 section size from 16 KiB to the full 32 KiB assigned to ROM.
+ROMX sections that are fixed to a bank other than 1 become errors, other ROMX sections are treated as ROM0.
+Useful for ROMs that fit in 32 KiB.
+.It Fl V , Fl Fl version
+Print the version of the program and exit.
+.It Fl v , Fl Fl verbose
+Verbose: enable printing more information to standard error.
+.It Fl w , Fl Fl wramx
+Expand the WRAM0 section size from 4 KiB to the full 8 KiB assigned to WRAM.
+WRAMX sections that are fixed to a bank other than 1 become errors, other WRAMX sections are treated as WRAM0.
+.It Fl x , Fl Fl nopad
+Disables padding the end of the final file.
+This option automatically enables
+.Fl t .
+You can use this when not not making a ROM.
+When making a ROM, be careful that not using this is not a replacement for
+.Xr rgbfix 1 Ap s Fl p
+option!
+.El
+.Ss Scrambling algorithm
+The default section placement algorithm tries to minimize the number of banks used;
+.Dq scrambling
+instead places sections into a given pool of banks, trying to minimize the number of sections sharing a given bank.
+This is useful to catch broken bank assumptions, such as expecting two different sections to land in the same bank (that is not guaranteed unless both are manually assigned the same bank number).
+.Pp
+A scrambling spec is a comma-separated list of region specs.
+A trailing comma is allowed, as well as whitespace between all specs and their components.
+Each region spec has the following form:
+.D1 Ar region Ns Op = Ns Ar size
+.Ar region
+must be one of the following (case-insensitive), while
+.Ar size
+must be a positive decimal integer between 1 and the corresponding maximum.
+Certain regions allow omitting the size, in which case it defaults to its max value.
+.Bl -column "Region name" "Max value" "Size optional"
+Region name Ta Max size Ta Size optional
+.Cm romx Ta 65535 Ta \&No
+.Cm sram Ta 255 Ta \&No
+.Cm wramx Ta 7 Ta Yes
+.El
+.Pp
+A
+.Ar size
+of 0 disables scrambling for that region.
+.Pp
+For example,
+.Ql romx=64,wramx=4
+will scramble
+.Ic ROMX
+sections among ROM banks 1 to 64,
+.Ic WRAMX
+sections among RAM banks 1 to 4, and will not scramble
+.Ic SRAM
+sections.
+.Pp
+Later region specs override earlier ones; for example,
+.Ql romx=42, Romx=0
+disables scrambling for
+.Cm romx .
+.Pp
+.Cm wramx
+scrambling is silently ignored if
+.Fl w
+is passed (including if implied by
+.Fl d ) ,
+as
+.Ic WRAMX
+sections will be treated as
+.Ic WRAM0 .
+.Sh EXAMPLES
+All you need for a basic ROM is an object file, which can be made into a ROM image like so:
+.Pp
+.Dl $ rgblink -o bar.gb foo.o
+.Pp
+The resulting
+.Ar bar.gb
+will not have correct checksums (unless you put them in the assembly source).
+You should use
+.Xr rgbfix 1
+to fix these so that the program will actually run in a Game Boy:
+.Pp
+.Dl $ rgbfix -v bar.gb
+.Pp
+Here is a more complete example:
+.Pp
+.Dl $ rgblink -o bin/game.gb -n bin/game.sym -p 0xFF obj/title.o obj/engine.o
+.Sh BUGS
+Please report bugs on
+.Lk https://github.com/gbdev/rgbds/issues GitHub .
+.Sh SEE ALSO
+.Xr rgbasm 1 ,
+.Xr rgblink 5 ,
+.Xr rgbfix 1 ,
+.Xr rgbds 5 ,
+.Xr rgbds 7
+.Sh HISTORY
+.Nm
+was originally written by Carsten S\(/orensen as part of the ASMotor package, and was later packaged in RGBDS by Justin Lloyd.
+It is now maintained by a number of contributors at
+.Lk https://github.com/gbdev/rgbds .

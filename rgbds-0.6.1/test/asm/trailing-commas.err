@@ -1,0 +1,2 @@
+warning: trailing-commas.asm(7): [-Wempty-macro-arg]
+    Empty macro argument

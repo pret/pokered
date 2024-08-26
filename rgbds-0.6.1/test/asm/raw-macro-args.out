@@ -1,0 +1,23 @@
+$2A
+42
+str"ing
+$10
+"literal \"\\\""
+literal "\"
+multi-"line"
+  ""string"" arg
+$60000
+unclosed
+NUM
+"42"
+"str\"ing"
+16
+"\"literal \\\"\\\\\\\"\""
+"literal \"\\\""
+"""multi-"line"
+  ""string"" arg"""
+MUL(2.0, 3.0)
+this
+ is, {not} a\n syntax" error
+"unclosed
+"""EOF

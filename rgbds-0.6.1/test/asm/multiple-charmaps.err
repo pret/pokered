@@ -1,0 +1,19 @@
+warning: multiple-charmaps.asm(41) -> multiple-charmaps.asm::print_mapped(29): [-Wnumeric-string]
+    Treating 2-character string as a number
+warning: multiple-charmaps.asm(49) -> multiple-charmaps.asm::print_mapped(29): [-Wnumeric-string]
+    Treating 2-character string as a number
+warning: multiple-charmaps.asm(68) -> multiple-charmaps.asm::print_mapped(29): [-Wnumeric-string]
+    Treating 2-character string as a number
+warning: multiple-charmaps.asm(91) -> multiple-charmaps.asm::print_mapped(29): [-Wnumeric-string]
+    Treating 2-character string as a number
+warning: multiple-charmaps.asm(92) -> multiple-charmaps.asm::print_mapped(29): [-Wnumeric-string]
+    Treating 2-character string as a number
+warning: multiple-charmaps.asm(100) -> multiple-charmaps.asm::print_mapped(29): [-Wnumeric-string]
+    Treating 2-character string as a number
+error: multiple-charmaps.asm(102) -> multiple-charmaps.asm::new_(9):
+    Charmap 'map1' already exists
+error: multiple-charmaps.asm(104) -> multiple-charmaps.asm::set_(15):
+    Charmap 'map5' doesn't exist
+error: multiple-charmaps.asm(106) -> multiple-charmaps.asm::pop_(25):
+    No entries in the charmap stack
+error: Assembly aborted (3 errors)!

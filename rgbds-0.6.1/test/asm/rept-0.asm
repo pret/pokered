@@ -1,0 +1,3 @@
+REPT 0
+	WARN "2"
+ENDR

@@ -1,0 +1,12 @@
+error: interpolation-overflow.asm(4):
+    Fractional width 99999999 too long, limiting to 255
+error: interpolation-overflow.asm(4):
+    Formatted numeric value too long
+warning: interpolation-overflow.asm(4): [-Wlarge-constant]
+    Precision of fixed-point constant is too large
+while expanding symbol "0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+error: interpolation-overflow.asm(4):
+    Macro argument '\1' not defined
+error: interpolation-overflow.asm(4):
+    syntax error, unexpected number
+error: Assembly aborted (4 errors)!

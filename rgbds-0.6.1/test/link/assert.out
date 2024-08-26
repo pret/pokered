@@ -1,0 +1,4 @@
+warning: assert.asm(5): Worry about me, but not too much.
+error: assert.asm(6): Okay, this is getting serious!
+FATAL: assert.asm(7): It all ends now.
+Linking aborted after 2 errors

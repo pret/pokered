@@ -1,0 +1,7 @@
+rept 3
+rept 3
+rept 3
+for 0/3
+for 1/3
+for 2/3
+12 + 34 = 46

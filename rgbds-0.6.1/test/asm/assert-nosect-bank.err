@@ -1,0 +1,3 @@
+error: assert-nosect-bank.asm(1):
+    PC has no bank outside a section
+error: Assembly aborted (1 error)!

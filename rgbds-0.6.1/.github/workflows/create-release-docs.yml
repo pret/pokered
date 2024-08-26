@@ -1,0 +1,46 @@
+name: "Create release docs"
+on:
+  release:
+    types:
+      - released # This avoids triggering on pre-releases
+
+jobs:
+  build:
+    if: github.repository_owner == 'gbdev'
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout rgbds@release
+        uses: actions/checkout@v3
+        with:
+          path: rgbds
+      - name: Checkout rgbds-www@master
+        uses: actions/checkout@v3
+        with:
+          repository: ${{ github.repository_owner }}/rgbds-www
+          path: rgbds-www
+      - name: Install groff and mandoc
+        run: |
+          sudo apt-get -qq update
+          sudo apt-get install -yq groff mandoc
+      - name: Update pages
+        working-directory: rgbds/man
+        run: | # The ref appears to be in the format "refs/tags/<version>", so strip that
+          ../../rgbds-www/maintainer/man_to_html.sh ${GITHUB_REF##*/} *
+      - name: Push new pages
+        working-directory: rgbds-www
+        run: |
+          mkdir -p -m 700 ~/.ssh
+          cat > ~/.ssh/id_ed25519 <<<"${{ secrets.SSH_KEY_SECRET }}"
+          chmod 0600 ~/.ssh/id_ed25519
+          eval $(ssh-agent -s)
+          ssh-add ~/.ssh/id_ed25519
+          git config --global user.name "GitHub Action"
+          git config --global user.email "community@gbdev.io"
+          git add -A
+          git commit -m "Create RGBDS ${GITHUB_REF##*/} documentation"
+          if git remote | grep -q origin; then
+            git remote set-url origin git@github.com:${{ github.repository_owner }}/rgbds-www.git
+          else
+            git remote add origin git@github.com:${{ github.repository_owner }}/rgbds-www.git
+          fi
+          git push origin master

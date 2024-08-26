@@ -1,0 +1,37 @@
+error: label-diff.asm(32) -> label-diff.asm::print_diff(20):
+    Expected constant expression: 'Known' is not constant at assembly time
+error: label-diff.asm(32) -> label-diff.asm::print_diff(21):
+    Expected constant expression: 'Known' is not constant at assembly time
+error: label-diff.asm(34) -> label-diff.asm::print_diff(20):
+    Expected constant expression: 'Unknown' is not constant at assembly time
+error: label-diff.asm(34) -> label-diff.asm::print_diff(21):
+    Expected constant expression: 'Unknown' is not constant at assembly time
+error: label-diff.asm(36) -> label-diff.asm::print_diff(20):
+    Expected constant expression: 'Known' is not constant at assembly time
+error: label-diff.asm(36) -> label-diff.asm::print_diff(21):
+    Expected constant expression: 'Unknown' is not constant at assembly time
+error: label-diff.asm(38) -> label-diff.asm::print_diff(20):
+    Expected constant expression: 'Unknown' is not constant at assembly time
+error: label-diff.asm(38) -> label-diff.asm::print_diff(21):
+    Expected constant expression: 'Unknown2' is not constant at assembly time
+error: label-diff.asm(45) -> label-diff.asm::print_diff(20):
+    Expected constant expression: 'Known' is not constant at assembly time
+error: label-diff.asm(45) -> label-diff.asm::print_diff(21):
+    Expected constant expression: 'Known' is not constant at assembly time
+error: label-diff.asm(47) -> label-diff.asm::print_diff(20):
+    Expected constant expression: 'Unknown' is not constant at assembly time
+error: label-diff.asm(47) -> label-diff.asm::print_diff(21):
+    Expected constant expression: 'Unknown' is not constant at assembly time
+error: label-diff.asm(58) -> label-diff.asm::print_diff(20):
+    Expected constant expression: PC is not constant at assembly time
+error: label-diff.asm(58) -> label-diff.asm::print_diff(21):
+    Expected constant expression: PC is not constant at assembly time
+error: label-diff.asm(60) -> label-diff.asm::print_diff(20):
+    Expected constant expression: 'Known' is not constant at assembly time
+error: label-diff.asm(60) -> label-diff.asm::print_diff(21):
+    Expected constant expression: PC is not constant at assembly time
+error: label-diff.asm(62) -> label-diff.asm::print_diff(20):
+    Expected constant expression: 'Unknown' is not constant at assembly time
+error: label-diff.asm(62) -> label-diff.asm::print_diff(21):
+    Expected constant expression: PC is not constant at assembly time
+error: Assembly aborted (18 errors)!

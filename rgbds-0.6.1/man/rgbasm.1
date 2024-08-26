@@ -1,0 +1,374 @@
+.\"
+.\" This file is part of RGBDS.
+.\"
+.\" Copyright (c) 2010-2021, Anthony J. Bentley and RGBDS contributors.
+.\"
+.\" SPDX-License-Identifier: MIT
+.\"
+.Dd March 28, 2021
+.Dt RGBASM 1
+.Os
+.Sh NAME
+.Nm rgbasm
+.Nd Game Boy assembler
+.Sh SYNOPSIS
+.Nm
+.Op Fl EHhLlVvw
+.Op Fl b Ar chars
+.Op Fl D Ar name Ns Op = Ns Ar value
+.Op Fl g Ar chars
+.Op Fl I Ar path
+.Op Fl M Ar depend_file
+.Op Fl MG
+.Op Fl MP
+.Op Fl MT Ar target_file
+.Op Fl MQ Ar target_file
+.Op Fl o Ar out_file
+.Op Fl P Ar include_file
+.Op Fl p Ar pad_value
+.Op Fl Q Ar fix_precision
+.Op Fl r Ar recursion_depth
+.Op Fl W Ar warning
+.Ar asmfile
+.Sh DESCRIPTION
+The
+.Nm
+program creates an RGB object file from an assembly source file.
+The input
+.Ar asmfile
+can be a path to a file, or
+.Cm \-
+to read from standard input.
+.Pp
+Note that options can be abbreviated as long as the abbreviation is unambiguous:
+.Fl Fl verb
+is
+.Fl Fl verbose ,
+but
+.Fl Fl ver
+is invalid because it could also be
+.Fl Fl version .
+The arguments are as follows:
+.Bl -tag -width Ds
+.It Fl b Ar chars , Fl Fl binary-digits Ar chars
+Change the two characters used for binary constants.
+The defaults are 01.
+.It Fl D Ar name Ns Oo = Ns Ar value Oc , Fl Fl define Ar name Ns Oo = Ns Ar value Oc
+Add a string symbol to the compiled source code.
+This is equivalent to
+.Ql Ar name Ic EQUS No \(dq Ns Ar value Ns \(dq
+in code, or
+.Ql Ar name Ic EQUS No \(dq1\(dq
+if
+.Ar value
+is not specified.
+.It Fl E , Fl Fl export-all
+Export all labels, including unreferenced and local labels.
+.It Fl g Ar chars , Fl Fl gfx-chars Ar chars
+Change the four characters used for gfx constants.
+The defaults are 0123.
+.It Fl H , Fl Fl nop-after-halt
+By default,
+.Nm
+inserts a
+.Ic nop
+instruction immediately after any
+.Ic halt
+instruction,
+but this has been deprecated and prints a warning message the first time it occurs.
+The
+.Fl H
+option opts into this insertion,
+so no warning will be printed.
+.It Fl h , Fl Fl halt-without-nop
+Disables inserting a
+.Ic nop
+instruction immediately after any
+.Ic halt
+instruction.
+.It Fl I Ar path , Fl Fl include Ar path
+Add a new
+.Dq include path ; Ar path
+must point to a directory.
+When a
+.Ic INCLUDE
+.Pq including the implicit one from Fl P
+or
+.Ic INCBIN
+is attempted,
+.Nm
+first looks up the provided path from its working directory; if this fails, it tries again from each of the
+.Dq include path
+directories, in the order they were provided.
+.It Fl L , Fl Fl preserve-ld
+By default,
+.Nm
+optimizes loads of the form
+.Ic LD [$FF00+n8],A
+into the opcode
+.Ic LDH [$FF00+n8],A ,
+but this has been deprecated and prints a warning message the first time it occurs.
+The
+.Fl L
+option disables this optimization.
+.It Fl l , Fl Fl auto-ldh
+Optimize loads of the form
+.Ic LD [$FF00+n8],A
+into the opcode
+.Ic LDH [$FF00+n8],A .
+.It Fl M Ar depend_file , Fl Fl dependfile Ar depend_file
+Print
+.Xr make 1
+dependencies to
+.Ar depend_file .
+.It Fl MG
+To be used in conjunction with
+.Fl M .
+This makes
+.Nm
+assume that missing files are auto-generated: when
+.Ic INCLUDE
+.Pq including the implicit one from Fl P
+or
+.Ic INCBIN
+is attempted on a non-existent file, it is added as a dependency, then
+.Nm
+exits normally instead of erroring out.
+This feature is used in automatic updating of makefiles.
+.It Fl MP
+When enabled, this causes a phony target to be added for each dependency other than the main file.
+This prevents
+.Xr make 1
+from erroring out when dependency files are deleted.
+.It Fl MT Ar target_file
+Add a target to the rules emitted by
+.Fl M .
+The exact string provided will be written, including spaces and special characters.
+.Dl Fl MT No fileA Fl MT No fileB
+is equivalent to
+.Dl Fl MT No 'fileA fileB' .
+If neither this nor
+.Fl MQ
+is specified, the output file name is used.
+.It Fl MQ Ar target_file
+Same as
+.Fl MT ,
+but additionally escapes any special
+.Xr make 1
+characters, essentially
+.Sq $ .
+.It Fl o Ar out_file , Fl Fl output Ar out_file
+Write an object file to the given filename.
+.It Fl P Ar include_file , Fl Fl preinclude Ar include_file
+Pre-include a file.
+This acts as if a
+.Ql Ic INCLUDE Qq Ar include_file
+was read before the input
+.Ar asmfile .
+.It Fl p Ar pad_value , Fl Fl pad-value Ar pad_value
+When padding an image, pad with this value.
+The default is 0x00.
+.It Fl Q Ar fix_precision , Fl Fl q-precision Ar fix_precision
+Use this as the precision of fixed-point numbers after the decimal point, unless they specify their own precision.
+The default is 16, so fixed-point numbers are Q16.16 (since they are 32-bit integers).
+The argument may start with a
+.Ql \&.
+to match the Q notation, for example,
+.Ql Fl Q Ar .16 .
+.It Fl r Ar recursion_depth , Fl Fl recursion-depth Ar recursion_depth
+Specifies the recursion depth past which RGBASM will assume being in an infinite loop.
+The default is 64.
+.It Fl V , Fl Fl version
+Print the version of the program and exit.
+.It Fl v , Fl Fl verbose
+Be verbose.
+.It Fl W Ar warning , Fl Fl warning Ar warning
+Set warning flag
+.Ar warning .
+A warning message will be printed if
+.Ar warning
+is an unknown warning flag.
+See the
+.Sx DIAGNOSTICS
+section for a list of warnings.
+.It Fl w
+Disable all warning output, even when turned into errors.
+.El
+.Sh DIAGNOSTICS
+Warnings are diagnostic messages that indicate possibly erroneous behavior that does not necessarily compromise the assembling process.
+The following options alter the way warnings are processed.
+.Bl -tag -width Ds
+.It Fl Werror
+Make all warnings into errors.
+.It Fl Werror=
+Make the specified warning into an error.
+A warning's name is appended
+.Pq example: Fl Werror=obsolete ,
+and this warning is implicitly enabled and turned into an error.
+This is an error if used with a meta warning, such as
+.Fl Werror=all .
+.El
+.Pp
+The following warnings are
+.Dq meta
+warnings, that enable a collection of other warnings.
+If a specific warning is toggled via a meta flag and a specific one, the more specific one takes priority.
+The position on the command-line acts as a tie breaker, the last one taking effect.
+.Bl -tag -width Ds
+.It Fl Wall
+This enables warnings that are likely to indicate an error or undesired behavior, and that can easily be fixed.
+.It Fl Wextra
+This enables extra warnings that are less likely to pose a problem, but that may still be wanted.
+.It Fl Weverything
+Enables literally every warning.
+.El
+.Pp
+The following warnings are actual warning flags; with each description, the corresponding warning flag is included.
+Note that each of these flag also has a negation (for example,
+.Fl Wcharmap-redef
+enables the warning that
+.Fl Wno-charmap-redef
+disables).
+Only the non-default flag is listed here.
+Ignoring the
+.Dq no-
+prefix, entries are listed alphabetically.
+.Bl -tag -width Ds
+.It Fl Wno-assert
+Warn when
+.Ic WARN Ns No -type
+assertions fail. (See
+.Dq Aborting the assembly process
+in
+.Xr rgbasm 5
+for
+.Ic ASSERT ) .
+.It Fl Wbackwards-for
+Warn when
+.Ic FOR
+loops have their start and stop values switched according to the step value.
+This warning is enabled by
+.Fl Wall .
+.It Fl Wbuiltin-args
+Warn about incorrect arguments to built-in functions, such as
+.Fn STRSUB
+with indexes outside of the string's bounds.
+This warning is enabled by
+.Fl Wall .
+.It Fl Wcharmap-redef
+Warn when re-defining a charmap mapping.
+This warning is enabled by
+.Fl Wall .
+.It Fl Wdiv
+Warn when dividing the smallest negative integer (-2**31) by -1, which yields itself due to integer overflow.
+.It Fl Wempty-macro-arg
+Warn when a macro argument is empty.
+This warning is enabled by
+.Fl Wextra .
+.It Fl Wempty-strrpl
+Warn when
+.Fn STRRPL
+is called with an empty string as its second argument (the substring to replace).
+This warning is enabled by
+.Fl Wall .
+.It Fl Wlarge-constant
+Warn when a constant too large to fit in a signed 32-bit integer is encountered.
+This warning is enabled by
+.Fl Wall .
+.It Fl Wlong-string
+Warn when a string too long to fit in internal buffers is encountered.
+This warning is enabled by
+.Fl Wall .
+.It Fl Wmacro-shift
+Warn when shifting macro arguments past their limits.
+This warning is enabled by
+.Fl Wextra .
+.It Fl Wno-obsolete
+Warn when obsolete constructs such as the
+.Ic _PI
+constant or
+.Ic PRINTT
+directive are encountered.
+.It Fl Wnumeric-string=
+Warn when a multi-character string is treated as a number.
+.Fl Wnumeric-string=0
+or
+.Fl Wno-numeric-string
+disables this warning.
+.Fl Wnumeric-string=1
+or just
+.Fl Wnumeric-string
+warns about strings longer than four characters, since four or fewer characters fit within a 32-bit integer.
+.Fl Wnumeric-string=2
+warns about any multi-character string.
+.It Fl Wshift
+Warn when shifting right a negative value.
+Use a division by 2**N instead.
+.It Fl Wshift-amount
+Warn when a shift's operand is negative or greater than 32.
+.It Fl Wtruncation=
+Warn when an implicit truncation (for example,
+.Ic db
+to an 8-bit value) loses some bits.
+.Fl Wtruncation=0
+or
+.Fl Wno-truncation
+disables this warning.
+.Fl Wtruncation=1
+warns when an N-bit value's absolute value is 2**N or greater.
+.Fl Wtruncation=2
+or just
+.Fl Wtruncation
+also warns when an N-bit value is less than -2**(N-1), which will not fit in two's complement encoding.
+.It Fl Wunmapped-char=
+Warn when a character goes through charmap conversion but has no defined mapping.
+.Fl Wunmapped-char=0
+or
+.Fl Wunmapped-char
+disables this warning.
+.Fl Wunmapped-char=1
+or just
+.Fl Wunmapped-char
+only warns if the active charmap is not empty.
+.Fl Wunmapped-char=2
+warns if the active charmap is empty, and/or is not the default charmap
+.Sq main .
+.It Fl Wno-user
+Warn when the
+.Ic WARN
+built-in is executed. (See
+.Dq Aborting the assembly process
+in
+.Xr rgbasm 5
+for
+.Ic WARN ) .
+.El
+.Sh EXAMPLES
+You can assemble a source file in two ways.
+.Pp
+Straightforward way:
+.Dl $ rgbasm -o bar.o foo.asm
+.Pp
+Pipes way:
+.Dl $ cat foo.asm | rgbasm -o bar.o -
+.Dl $ rgbasm -o bar.o - < foo.asm
+.Pp
+The resulting object file is not yet a usable ROM image\(emit must first be run through
+.Xr rgblink 1
+and then
+.Xr rgbfix 1 .
+.Sh BUGS
+Please report bugs on
+.Lk https://github.com/gbdev/rgbds/issues GitHub .
+.Sh SEE ALSO
+.Xr rgbasm 5 ,
+.Xr rgbfix 1 ,
+.Xr rgblink 1 ,
+.Xr rgbds 5 ,
+.Xr rgbds 7 ,
+.Xr gbz80 7
+.Sh HISTORY
+.Nm
+was originally written by Carsten S\(/orensen as part of the ASMotor package, and was later packaged in RGBDS by Justin Lloyd.
+It is now maintained by a number of contributors at
+.Lk https://github.com/gbdev/rgbds .

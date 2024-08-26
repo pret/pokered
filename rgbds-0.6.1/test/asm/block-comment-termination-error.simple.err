@@ -1,0 +1,5 @@
+error: block-comment-termination-error.asm(1):
+    Unterminated block comment
+error: block-comment-termination-error.asm(1):
+    syntax error
+error: Assembly aborted (2 errors)!

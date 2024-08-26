@@ -1,0 +1,3 @@
+error: fixed-point-precision.asm(21):
+    Fixed-point constant precision must be between 1 and 31
+error: Assembly aborted (1 error)!

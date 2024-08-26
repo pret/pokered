@@ -1,0 +1,7 @@
+warning: macro-syntax.asm(2): [-Wobsolete]
+    `old: MACRO` is deprecated; use `MACRO old`
+error: macro-syntax.asm(13):
+    syntax error, unexpected identifier, expecting newline
+error: macro-syntax.asm(15):
+    syntax error, unexpected ENDM
+error: Assembly aborted (2 errors)!

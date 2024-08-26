@@ -1,0 +1,4 @@
+warning: long-string-constant.asm(5): [-Wlong-string]
+    String constant too long
+warning: long-string-constant.asm(13) -> long-string-constant.asm::mac(9): [-Wlong-string]
+    String constant too long

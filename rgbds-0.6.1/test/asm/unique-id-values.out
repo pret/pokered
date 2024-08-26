@@ -1,0 +1,54 @@
+p = 0: _u1
+  m: _u2
+    q = 0: _u3
+    q = 1
+    q = 2: _u4
+  (m: still _u2)
+  m: _u5
+    q = 3
+    q = 4: _u6
+    q = 5
+  (m: still _u5)
+ (p: still _u1)
+p = 1
+p = 2
+p = 3: _u7
+  m: _u8
+    q = 0: _u9
+    q = 1
+    q = 2: _u10
+  (m: still _u8)
+  m: _u11
+    q = 3
+    q = 4: _u12
+    q = 5
+  (m: still _u11)
+ (p: still _u7)
+p = 4
+p = 5
+p = 6: _u13
+  m: _u14
+    q = 0: _u15
+    q = 1
+    q = 2: _u16
+  (m: still _u14)
+  m: _u17
+    q = 3
+    q = 4: _u18
+    q = 5
+  (m: still _u17)
+ (p: still _u13)
+p = 7
+p = 8
+p = 9: _u19
+  m: _u20
+    q = 0: _u21
+    q = 1
+    q = 2: _u22
+  (m: still _u20)
+  m: _u23
+    q = 3
+    q = 4: _u24
+    q = 5
+  (m: still _u23)
+ (p: still _u19)

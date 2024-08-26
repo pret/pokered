@@ -1,0 +1,31 @@
+warning: unique-id.asm(12) -> unique-id.asm::m(4): [-Wuser]
+    _u1!
+while expanding symbol "warn_unique"
+warning: unique-id.asm(12) -> unique-id.asm::m(5) -> unique-id.asm::m::REPT~1(6): [-Wuser]
+    _u2!
+while expanding symbol "warn_unique"
+warning: unique-id.asm(12) -> unique-id.asm::m(5) -> unique-id.asm::m::REPT~2(6): [-Wuser]
+    _u3!
+while expanding symbol "warn_unique"
+warning: unique-id.asm(12) -> unique-id.asm::m(8): [-Wuser]
+    _u1!
+while expanding symbol "warn_unique"
+warning: unique-id.asm(14) -> unique-id.asm::m(4): [-Wuser]
+    _u4!
+while expanding symbol "warn_unique"
+warning: unique-id.asm(14) -> unique-id.asm::m(5) -> unique-id.asm::m::REPT~1(6): [-Wuser]
+    _u5!
+while expanding symbol "warn_unique"
+warning: unique-id.asm(14) -> unique-id.asm::m(5) -> unique-id.asm::m::REPT~2(6): [-Wuser]
+    _u6!
+while expanding symbol "warn_unique"
+warning: unique-id.asm(14) -> unique-id.asm::m(8): [-Wuser]
+    _u4!
+while expanding symbol "warn_unique"
+error: unique-id.asm(15):
+    Macro argument '\@' not defined
+while expanding symbol "warn_unique"
+warning: unique-id.asm(15): [-Wuser]
+    !
+while expanding symbol "warn_unique"
+error: Assembly aborted (1 error)!

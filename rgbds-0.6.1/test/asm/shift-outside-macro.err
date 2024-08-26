@@ -1,0 +1,5 @@
+error: shift-outside-macro.asm(1):
+    Cannot shift macro arguments outside of a macro
+error: shift-outside-macro.asm(2):
+    Cannot shift macro arguments outside of a macro
+error: Assembly aborted (2 errors)!

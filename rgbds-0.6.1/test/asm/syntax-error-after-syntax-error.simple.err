@@ -1,0 +1,13 @@
+error: syntax-error-after-syntax-error.asm(6):
+    syntax error
+error: syntax-error-after-syntax-error.asm(7):
+    syntax error
+    To invoke `mac` as a macro it must be indented
+error: syntax-error-after-syntax-error.asm(8):
+    syntax error
+    To invoke `mac` as a macro it must be indented
+error: syntax-error-after-syntax-error.asm(9):
+    'mac' already defined at syntax-error-after-syntax-error.asm(1)
+error: syntax-error-after-syntax-error.asm(10):
+    'mac' already defined at syntax-error-after-syntax-error.asm(1)
+error: Assembly aborted (5 errors)!

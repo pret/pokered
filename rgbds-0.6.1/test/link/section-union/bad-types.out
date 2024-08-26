@@ -1,0 +1,6 @@
+error: Section "conflicting types" is defined with conflicting types HRAM and WRAM0
+---
+error: <stdin>(18):
+    Section already exists but with type HRAM
+FATAL: <stdin>(18):
+    Cannot create section "conflicting types" (1 error)

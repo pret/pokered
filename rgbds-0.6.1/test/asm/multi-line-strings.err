@@ -1,0 +1,5 @@
+error: multi-line-strings.asm(23):
+    Unterminated string
+warning: multi-line-strings.asm(35): [-Wuser]
+    check the line number
+error: Assembly aborted (1 error)!

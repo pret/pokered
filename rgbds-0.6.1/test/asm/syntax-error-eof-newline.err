@@ -1,0 +1,3 @@
+error: syntax-error-eof-newline.asm(5) -> syntax-error-eof-newline.inc(1):
+    syntax error, unexpected newline
+error: Assembly aborted (1 error)!

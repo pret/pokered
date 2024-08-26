@@ -1,0 +1,5 @@
+error: error-recovery.asm(3):
+    syntax error, unexpected number
+error: error-recovery.asm(5) -> error-recovery.asm::REPT~1(7):
+    syntax error, unexpected identifier
+error: Assembly aborted (2 errors)!

@@ -1,0 +1,17 @@
+name: "Code coverage checking"
+on: pull_request
+
+jobs:
+  checkdiff:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up repo
+        run: |
+          git clone -b "${{ github.event.pull_request.head.ref }}" "${{ github.event.pull_request.head.repo.clone_url }}" rgbds
+          cd rgbds
+          git remote add upstream "${{ github.event.pull_request.base.repo.clone_url }}"
+          git fetch upstream
+      - name: Checkdiff
+        working-directory: rgbds
+        run: |
+          make checkdiff "BASE_REF=${{ github.event.pull_request.base.sha }}" Q= | tee log

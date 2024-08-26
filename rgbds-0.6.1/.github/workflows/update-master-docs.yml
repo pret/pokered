@@ -1,0 +1,59 @@
+name: "Update master docs"
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - man/gbz80.7
+      - man/rgbds.5
+      - man/rgbds.7
+      - man/rgbasm.1
+      - man/rgbasm.5
+      - man/rgblink.1
+      - man/rgblink.5
+      - man/rgbfix.1
+      - man/rgbgfx.1
+
+jobs:
+  build:
+    if: github.repository_owner == 'gbdev'
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout rgbds@master
+        uses: actions/checkout@v3
+        with:
+          repository: gbdev/rgbds
+          ref: master
+          path: rgbds
+      - name: Checkout rgbds-www@master
+        uses: actions/checkout@v3
+        with:
+          repository: gbdev/rgbds-www
+          ref: master
+          path: rgbds-www
+      - name: Install groff and mandoc
+        run: |
+          sudo apt-get -qq update
+          sudo apt-get install -yq groff mandoc
+      - name: Update pages
+        working-directory: rgbds/man
+        run: |
+          ../../rgbds-www/maintainer/man_to_html.sh master *
+      - name: Push new pages
+        working-directory: rgbds-www
+        run: |
+          mkdir -p -m 700 ~/.ssh
+          echo "${{ secrets.SSH_KEY_SECRET }}" > ~/.ssh/id_ed25519
+          chmod 0600 ~/.ssh/id_ed25519
+          eval $(ssh-agent -s)
+          ssh-add ~/.ssh/id_ed25519
+          git config --global user.name "GitHub Action"
+          git config --global user.email "community@gbdev.io"
+          git add -A
+          git commit -m "Update RGBDS master documentation"
+          if git remote | grep -q origin; then
+            git remote set-url origin git@github.com:gbdev/rgbds-www.git
+          else
+            git remote add origin git@github.com:gbdev/rgbds-www.git
+          fi
+          git push origin master

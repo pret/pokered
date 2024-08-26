@@ -1,0 +1,2 @@
+warning: opt.asm(20): [-Wdiv]
+    Division of -2147483648 by -1 yields -2147483648

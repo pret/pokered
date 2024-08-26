@@ -1,0 +1,42 @@
+#compdef rgbgfx
+
+_depths() {
+	local depths=(
+		'1:1bpp'
+		'2:2bpp (native)'
+	)
+
+	_describe 'bit depth' depths
+}
+
+local args=(
+	# Arguments are listed here in the same order as in the manual, except for the version
+	'(- : * options)'{-V,--version}'[Print version number]'
+
+	'(-a --attr-map -A --output-attr-map)'{-A,--output-attr-map}'[Shortcut for -a <file>.attrmap]'
+	'(-C --color-curve)'{-C,--color-curve}'[Generate palettes using GBC color curve]'
+	'(-m --mirror-tiles)'{-m,--mirror-tiles}'[Eliminate mirrored tiles from output]'
+	'(-p --palette -P --output-palette)'{-P,--output-palette}'[Shortcut for -p <file>.pal]'
+	'(-q --palette-map -Q --output-palette-map)'{-Q,--output-palette-map}'[Shortcut for -p <file>.palmap]'
+	'(-t --tilemap -T --output-tilemap)'{-T,--output-tilemap}'[Shortcut for -t <file>.tilemap]'
+	'(-u --unique-tiles)'{-u,--unique-tiles}'[Eliminate redundant tiles]'
+	{-v,--verbose}'[Enable verbose output]'
+	'(-h --horizontal -Z --columns)'{-Z,--columns}'[Read the image in column-major order]'
+
+	'(-a --attr-map -A --output-attr-map)'{-a,--attr-map}'+[Generate a map of tile attributes (mirroring)]:attrmap file:_files'
+	'(-b --base-tiles)'{-b,--base-tiles}'+[Base tile IDs for tile map output]:base tile IDs:'
+	'(-d --depth)'{-d,--depth}'+[Set bit depth]:bit depth:_depths'
+	'(-L --slice)'{-L,--slice}'+[Only process a portion of the image]:input slice:'
+	'(-N --nb-tiles)'{-n,--nb-tiles}'+[Limit number of tiles]:tile count:'
+	'(-n --nb-palettes)'{-n,--nb-palettes}'+[Limit number of palettes]:palette count:'
+	'(-o --output)'{-o,--output}'+[Set output file]:output file:_files'
+	'(-p --palette -P --output-palette)'{-p,--palette}"+[Output the image's palette in little-endian native RGB555 format]:palette file:_files"
+	'(-q --palette-map -Q --output-palette-map)'{-p,--palette-map}"+[Output the image's palette map]:palette map file:_files"
+	'(-r --reverse)'{-r,--reverse}'+[Yield an image from binary data]:image width (in tiles):'
+	'(-s --palette-size)'{-s,--palette-size}'+[Limit palette size]:palette size:'
+	'(-t --tilemap -T --output-tilemap)'{-t,--tilemap}'+[Generate a map of tile indices]:tilemap file:_files'
+	'(-x --trim-end)'{-x,--trim-end}'+[Trim end of output by this many tiles]:tile count:'
+
+	":input png file:_files -g '*.png'"
+)
+_arguments -s -S : $args
