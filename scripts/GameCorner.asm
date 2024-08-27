@@ -555,7 +555,7 @@ GameCornerDrawCoinBox:
 	ld de, GameCornerMoneyText
 	call PlaceString
 	hlcoord 12, 3
-	ld de, GameCornerBlankText1
+	ld de, GameCornerBlankText
 	call PlaceString
 	hlcoord 12, 3
 	ld de, wPlayerMoney
@@ -565,7 +565,7 @@ GameCornerDrawCoinBox:
 	ld de, GameCornerCoinText
 	call PlaceString
 	hlcoord 12, 5
-	ld de, GameCornerBlankText2
+	ld de, GameCornerBlankText
 	call PlaceString
 	hlcoord 15, 5
 	ld de, wPlayerCoins
@@ -581,10 +581,7 @@ GameCornerMoneyText:
 GameCornerCoinText:
 	db "COIN@"
 
-GameCornerBlankText1:
-	db "       @"
-
-GameCornerBlankText2:
+GameCornerBlankText:
 	db "       @"
 
 Has9990Coins:

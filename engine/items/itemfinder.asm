@@ -1,5 +1,10 @@
 HiddenItemNear:
+	call CheckIfLookingForCoins
 	ld hl, HiddenItemCoords
+	jr nc, .gotCoordList
+	; PureRGBnote: ADDED: detect hidden coins in game corner.
+	ld hl, HiddenCoinCoords
+.gotCoordList
 	ld b, 0
 .loop
 	ld de, 3
@@ -8,7 +13,12 @@ HiddenItemNear:
 	ret nc ; return if current map has no hidden items
 	push bc
 	push hl
+	; PureRGBnote: ADDED: detect hidden coins in game corner.
+	call CheckIfLookingForCoins
 	ld hl, wObtainedHiddenItemsFlags
+	jr nc, .gotFlagArray
+	ld hl, wObtainedHiddenCoinsFlags
+.gotFlagArray
 	ld c, b
 	ld b, FLAG_TEST
 	predef FlagActionPredef
@@ -114,4 +124,16 @@ CheckExactCoordMatch:
 	ret
 .clearCF
 	and a ; clear carry flag
+	ret
+
+CheckIfLookingForCoins:
+	CheckEvent EVENT_GOT_COIN_CASE
+	jr z, .no
+	ld a, [wCurMap]
+	cp GAME_CORNER
+	jr nz, .no
+	scf
+	ret
+.no
+	and a
 	ret

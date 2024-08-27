@@ -361,7 +361,9 @@ GameCornerHiddenObjects:
 	hidden_object 13, 13, ANY_FACING, StartSlotMachine
 	hidden_object 13, 14, ANY_FACING, StartSlotMachine
 	hidden_object 13, 15, ANY_FACING, StartSlotMachine
-	hidden_object 12, 15, ANY_FACING, StartSlotMachine
+	; PureRGBnote: FIXED: this machine is inaccessible due to the NPC in front, and is blocking obtaining the coins
+	; defined on its coordinate below, so remove it to make those coins accessible.
+	;hidden_object 12, 15, ANY_FACING, StartSlotMachine 
 	hidden_object 12, 14, ANY_FACING, StartSlotMachine
 	hidden_object 12, 13, ANY_FACING, StartSlotMachine
 	hidden_object 12, 12, ANY_FACING, StartSlotMachine
