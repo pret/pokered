@@ -61,11 +61,13 @@ VermilionCityDefaultScript:
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, [wObtainedBadges] ; PureRGBnote: CHANGED: ship returns after obtaining the soul badge so let the player in if they have the ticket
-	bit 4, a
+	bit BIT_SOULBADGE, a
 	jr nz, .default
 	CheckEvent EVENT_SS_ANNE_LEFT
 	jr nz, .ship_departed
 .default
+	CheckEvent EVENT_GOT_HM01
+	ret nz ; after getting CUT don't need SS ticket to enter
 	ld b, S_S_TICKET
 	predef GetQuantityOfItemInBag
 	ld a, b
@@ -182,32 +184,34 @@ VermilionCitySailor1Text:
 	jr z, .greet_player
 	ld hl, .inFrontOfOrBehindGuardCoords
 	call ArePlayerCoordsInArray
-	jr nc, .greet_player_and_check_ticket
-.greet_player
-	ld hl, .WelcomeToSSAnneText
-	rst _PrintText
-	jr .end
+	jr c, .greet_player
 .greet_player_and_check_ticket
+	CheckEvent EVENT_GOT_HM01
+	ld hl, .ComeOnThroughText
+	jr nz, .player_has_ticket
 	ld hl, .DoYouHaveATicketText
 	rst _PrintText
 	ld b, S_S_TICKET
 	predef GetQuantityOfItemInBag
 	ld a, b
 	and a
+	ld hl, .FlashedTicketText
 	jr nz, .player_has_ticket
 	ld hl, .YouNeedATicketText
 	rst _PrintText
-	jr .end
+	rst TextScriptEnd
+.greet_player
+	ld hl, .WelcomeToSSAnneText
+	jr .printDone
 .player_has_ticket
-	ld hl, .FlashedTicketText
 	rst _PrintText
 	ld a, SCRIPT_VERMILIONCITY_PLAYER_ALLOWED_TO_PASS
 	ld [wVermilionCityCurScript], a
-	jr .end
+	rst TextScriptEnd
 .ship_departed
 	ld hl, .ShipSetSailText
+.printDone
 	rst _PrintText
-.end
 	rst TextScriptEnd
 
 .inFrontOfOrBehindGuardCoords
@@ -235,6 +239,10 @@ VermilionCitySailor1Text:
 	text_far _VermilionCitySailor1ShipSetSailText
 	text_end
 
+.ComeOnThroughText:
+	text_far _VermilionCity1OhItsYouText
+	text_end
+
 VermilionCityGambler2Text:
 	text_far _VermilionCityGambler2Text
 	text_end
@@ -244,7 +252,6 @@ VermilionCityMachopText:
 	text_asm
 	ld a, MACHOP
 	call PlayCry
-	call WaitForSoundToFinish
 	ld hl, .StompingTheLandFlatText
 	ret
 
@@ -295,22 +302,17 @@ VermilionCityHarborSignText:
 VermilionCityDockBeautyText: 
 	text_asm
 	CheckEvent EVENT_GOT_DOCK_BEAUTY_ITEM
-	jr nz, .endText
+	ld hl, VermilionCityDockBeautyEndText
+	jr nz, .printDone
 	ld hl, VermilionCityDockBeautyGreeting
 	rst _PrintText
 	lb bc, ITEM_VERMILION_SECRET_DOCK_BEAUTY_NEW, 1
 	call GiveItem
-	jr nc, .bagfull
+	ld hl, VermilionCityDockBeautyNoRoomText
+	jr nc, .printDone
 	SetEvent EVENT_GOT_DOCK_BEAUTY_ITEM
 	ld hl, VermilionCityDockBeautyReceivedItemText
-	rst _PrintText
-	jr .done
-.bagfull
-	ld hl, VermilionCityDockBeautyNoRoomText
-	rst _PrintText
-	jr .done
-.endText
-	ld hl, VermilionCityDockBeautyEndText
+.printDone
 	rst _PrintText
 .done
 	rst TextScriptEnd
@@ -324,7 +326,7 @@ VermilionCityDockBeautyNoRoomText:
 	text_end
 
 VermilionCityDockBeautyReceivedItemText:
-	text_far _VermilionCityDockBeautyReceivedItemText
+	text_far _MrFujisHouseMrFujiReceivedPokeFluteText
 	sound_get_key_item
 	text_end
 

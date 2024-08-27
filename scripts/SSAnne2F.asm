@@ -19,6 +19,10 @@ SSAnne2F_ScriptPointers:
 	dw_const DoRet,                          SCRIPT_SSANNE2F_NOOP
 
 SSAnne2FDefaultScript:
+IF DEF(_DEBUG)
+	call DebugPressedOrHeldB
+	ret nz
+ENDC
 	ld hl, .PlayerCoordinatesArray
 	call ArePlayerCoordsInArray
 	ret nc

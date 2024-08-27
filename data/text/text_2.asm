@@ -1818,3 +1818,9 @@ _TextIDErrorText::
 _ContCharText::
 	text "<_CONT>@"
 	text_end
+
+_CantDepositSSTicketText::
+	text "You need that"
+	line "ticket while"
+	cont "on the S.S.ANNE!"
+	prompt

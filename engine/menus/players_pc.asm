@@ -326,6 +326,39 @@ RestoreItemListIndex:
 
 ; PureRGBnote: ADDED: dialog for depositing an item from the item menu. Press start on the item menu to trigger it.
 DepositItemFromItemMenu::
+	ld a, [wcf91]
+	cp S_S_TICKET
+	jr nz, .notSSTicket
+	; block depositing the SS ticket when past the vermilion guard
+	ld a, [wCurMap]
+	cp VERMILION_CITY
+	jr nz, .notVermilionCity
+	ld a, [wXCoord]
+	cp 18
+	jr z, .checkYCoord
+	cp 19
+	jr z, .checkYCoord
+	jr .notSSTicket
+.checkYCoord
+	ld a, [wYCoord]
+	cp 30
+	jr z, .blockSSTicket
+	cp 31
+	jr z, .blockSSTicket
+	jr .notSSTicket
+.notVermilionCity
+	; also block it inside the ss anne areas
+	cp SS_ANNE_B1F_ROOMS + 1 ; last SS ANNE room
+	jr nc, .notSSTicket
+	cp VERMILION_DOCK ; first SS ANNE room
+	jr c, .notSSTicket
+.blockSSTicket
+	ld a, SFX_DENIED
+	rst _PlaySound
+	ld hl, .cantDeposit
+	rst _PrintText
+	ret
+.notSSTicket
 	call IsKeyItem
 	ld a, 1
 	ld [wItemQuantity], a
@@ -375,6 +408,9 @@ DepositItemFromItemMenu::
 	; wCurrentMenuItem's new value still currently loaded in a
 	ld [wBagSavedMenuItem], a
 	ret
+.cantDeposit
+	text_far _CantDepositSSTicketText
+	text_end
 
 WorldOptions:
 	call ClearScreen

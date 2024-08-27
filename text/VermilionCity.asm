@@ -42,6 +42,13 @@ _VermilionCitySailor1FlashedTicketText::
 	line "S.S.ANNE!"
 	done
 
+_VermilionCity1OhItsYouText::
+	text "Oh! <PLAYER>!"
+	para "You're a friend"
+	line "of the CAPTAIN!"
+	para "Come on through!"
+	done
+
 _VermilionCitySailor1YouNeedATicketText::
 	text "<PLAYER> doesn't"
 	line "have the needed"
@@ -143,13 +150,6 @@ _VermilionCityDockBeautyGreeting::
 	line "I'm here!"
 	para "Take this!"
 	prompt
-
-_VermilionCityDockBeautyReceivedItemText::
-	text "<PLAYER> received"
-	line "a @"
-	text_ram wStringBuffer
-	text "!"
-	done
 
 _VermilionCityDockBeautyEndText::
 	text "This is where I"

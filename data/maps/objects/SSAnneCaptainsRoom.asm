@@ -10,6 +10,7 @@ SSAnneCaptainsRoom_Object:
 	def_bg_events
 	bg_event  4,  1, TEXT_SSANNECAPTAINSROOM_TRASH
 	bg_event  1,  2, TEXT_SSANNECAPTAINSROOM_SEASICK_BOOK
+	bg_event  5,  1, TEXT_SSANNECAPTAINSROOM_CUT_BOOK
 
 	def_object_events
 	object_event  4,  2, SPRITE_CAPTAIN, STAY, UP, TEXT_SSANNECAPTAINSROOM_CAPTAIN

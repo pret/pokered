@@ -14,33 +14,95 @@ SSAnneCaptainsRoom_TextPointers:
 	dw_const SSAnneCaptainsRoomCaptainText,     TEXT_SSANNECAPTAINSROOM_CAPTAIN
 	dw_const SSAnneCaptainsRoomTrashText,       TEXT_SSANNECAPTAINSROOM_TRASH
 	dw_const SSAnneCaptainsRoomSeasickBookText, TEXT_SSANNECAPTAINSROOM_SEASICK_BOOK
+	dw_const SSAnneCaptainsRoomCutBookText, TEXT_SSANNECAPTAINSROOM_CUT_BOOK
 
 SSAnneCaptainsRoomCaptainText:
 	text_asm
 	CheckEvent EVENT_GOT_HM01
-	jr nz, .got_item
+	ld hl, SSAnneCaptainsRoomCaptainNotSickAnymoreText
+	jp nz, .printDone
 	ld hl, SSAnneCaptainsRoomRubCaptainsBackText
 	rst _PrintText
 	ld hl, SSAnneCaptainsRoomCaptainIFeelMuchBetterText
 	rst _PrintText
 	lb bc, HM_CUT, 1
 	call GiveItem
-	jr nc, .bag_full
+	jp nc, .bag_full
 	ld hl, SSAnneCaptainsRoomCaptainReceivedHM01Text
 	rst _PrintText
 	SetEvent EVENT_GOT_HM01
-	jr .done
-.bag_full
-	ld hl, SSAnneCaptainsRoomCaptainHM01NoRoomText
+	ld hl, .SSAnneCaptainsRoomCaptainFeelingABitBetter
 	rst _PrintText
+	ld a, SFX_CUT
+	rst _PlaySound
+	ld a, [wPlayerDirection]
+	cp PLAYER_DIR_UP
+	jr z, .up
+	ld hl, vNPCSprites tile 08
+	ld de, RedSprite tile 20 ; red walking
+	lb bc, BANK(RedSprite), 4
+	call CopyVideoData
+	ld hl, vNPCSprites tile $14
+	ld de, CaptainWalking tile 4
+	lb bc, BANK(CaptainWalking), 4
+	call CopyVideoData
+	rst _DelayFrame
+	rst _DelayFrame
+	ld hl, vNPCSprites tile 08
+	ld de, RedSprite tile 8 ; red normal
+	lb bc, BANK(RedSprite), 4
+	call CopyVideoData
+	ld hl, vNPCSprites tile $14
+	ld de, CaptainSprite tile 8
+	jr .cutTicket
+.up
+	ld hl, vNPCSprites tile 04
+	ld de, RedSprite tile 16 ; red walking
+	lb bc, BANK(RedSprite), 4
+	call CopyVideoData
+	ld hl, vNPCSprites tile 12
+	ld de, CaptainWalking
+	lb bc, BANK(CaptainWalking), 4
+	call CopyVideoData
+	rst _DelayFrame
+	rst _DelayFrame
+	ld hl, vNPCSprites tile 04
+	ld de, RedSprite tile 4 ; red normal
+	lb bc, BANK(RedSprite), 4
+	call CopyVideoData
+	ld hl, vNPCSprites tile 12
+	ld de, CaptainSprite
+.cutTicket
+	push hl
+	push de
+	ld hl, .SSAnneCaptainCutYourTicket
+	rst _PrintText
+	pop de
+	pop hl
+	lb bc, BANK(CaptainSprite), 4
+	call CopyVideoData
+	ld a, S_S_TICKET
+	ldh [hItemToRemoveID], a
+	farcall RemoveItemByID
+	ld hl, .SSAnneWontBeNeedingThatAnymore
+	jr .printDone
+.bag_full
 	ld hl, wd72d
 	set 5, [hl]
-	jr .done
-.got_item
-	ld hl, SSAnneCaptainsRoomCaptainNotSickAnymoreText
+	ld hl, SSAnneCaptainsRoomCaptainHM01NoRoomText
+.printDone
 	rst _PrintText
 .done
 	rst TextScriptEnd
+.SSAnneCaptainsRoomCaptainFeelingABitBetter
+	text_far _SSAnneCaptainsRoomCaptainFeelingABitBetter
+	text_end
+.SSAnneCaptainCutYourTicket
+	text_far _SSAnneCaptainCutYourTicket
+	text_end
+.SSAnneWontBeNeedingThatAnymore
+	text_far _SSAnneWontBeNeedingThatAnymore
+	text_end
 
 SSAnneCaptainsRoomRubCaptainsBackText:
 	text_far _SSAnneCaptainsRoomRubCaptainsBackText
@@ -71,8 +133,9 @@ SSAnneCaptainsRoomCaptainIFeelMuchBetterText:
 	text_end
 
 SSAnneCaptainsRoomCaptainReceivedHM01Text:
-	text_far _SSAnneCaptainsRoomCaptainReceivedHM01Text
+	text_far _Route1Youngster1GotPotionText
 	sound_get_key_item
+	text_promptbutton
 	text_end
 
 SSAnneCaptainsRoomCaptainNotSickAnymoreText:
@@ -89,4 +152,10 @@ SSAnneCaptainsRoomTrashText:
 
 SSAnneCaptainsRoomSeasickBookText:
 	text_far _SSAnneCaptainsRoomSeasickBookText
+	text_end
+
+SSAnneCaptainsRoomCutBookText:
+	text_far _SSAnneCaptainsRoomCutBookText
+	text_far _FlippedToARandomPage
+	text_far _SSAnneCaptainsRoomCutBookText2
 	text_end

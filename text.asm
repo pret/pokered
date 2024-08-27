@@ -24,7 +24,6 @@ INCLUDE "text/RocketHideoutElevator.asm"
 INCLUDE "text/SilphCo2F.asm"
 INCLUDE "text/SilphCo3F.asm"
 INCLUDE "text/SilphCo4F.asm"
-INCLUDE "text/SilphCo5F.asm"
 INCLUDE "text/CinnabarVolcano.asm"
 
 
@@ -285,6 +284,7 @@ INCLUDE "text/CeladonMart1FPhoneCalls.asm"
 INCLUDE "text/PalletPhoneResultEvents.asm"
 INCLUDE "text/BillsGarden.asm"
 INCLUDE "text/SecretLab.asm"
+INCLUDE "text/SilphCo5F.asm"
 
 SECTION "Text 12", ROMX
 INCLUDE "text/TypeGuysHouse.asm"
