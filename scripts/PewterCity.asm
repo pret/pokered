@@ -173,6 +173,8 @@ PewterCityResetYoungsterScript:
 	ld a, HS_GYM_GUY
 	ld [wMissableObjectIndex], a
 	predef ShowObject
+	ld hl, wMapSpriteData + (PEWTERCITY_YOUNGSTER - 1) * 2 ; movement byte of youngster
+	ld [hl], DOWN ; reset behaviour to facing down
 	xor a
 	ld [wJoyIgnore], a
 	ld a, SCRIPT_PEWTERCITY_DEFAULT

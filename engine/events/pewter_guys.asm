@@ -37,9 +37,19 @@ PewterGuys:
 	ret z
 	ld [de], a
 	inc de
-	ld a, [wSimulatedJoypadStatesIndex]
-	inc a
-	ld [wSimulatedJoypadStatesIndex], a
+	push hl
+	ld hl, wSimulatedJoypadStatesIndex
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;shinpokerednote: CHANGED: double the pauses due to 60fps
+	and a
+	jr nz, .notWaitIndicator
+	ld [de], a
+	inc de
+	inc [hl]
+.notWaitIndicator
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	inc [hl]
+	pop hl
 	jr .copyMovementDataLoop
 .nextEntry1
 	inc hl
