@@ -34,12 +34,15 @@ ENDC
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
 	ResetEvent EVENT_POKEMON_TOWER_RIVAL_ON_LEFT
+	ld hl, wMapSpriteData + ((POKEMONTOWER2F_RIVAL - 1) * 2)
 	ld a, [wCoordIndex]
 	cp $1
 	ld a, PLAYER_DIR_UP
 	ld b, SPRITE_FACING_DOWN
+	ld [hl], DOWN ; make rival stay facing down always
 	jr nz, .player_below_rival
 ; the rival is on the left side and the player is on the right side
+	ld [hl], RIGHT ; make rival stay facing right always
 	SetEvent EVENT_POKEMON_TOWER_RIVAL_ON_LEFT
 	ld a, PLAYER_DIR_LEFT
 	ld b, SPRITE_FACING_RIGHT

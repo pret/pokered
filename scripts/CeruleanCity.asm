@@ -159,6 +159,9 @@ CeruleanCityRivalBattleScript:
 	ld a, [wd730]
 	bit 0, a
 	ret nz
+	; reset rival's sprite movement facing byte otherwise he can look around weirdly after battle for a moment
+	ld hl, wMapSpriteData + ((CERULEANCITY_RIVAL - 1) * 2)
+	ld [hl], DOWN
 	xor a
 	ld [wJoyIgnore], a
 	ld a, TEXT_CERULEANCITY_RIVAL

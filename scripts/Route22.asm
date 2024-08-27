@@ -92,6 +92,15 @@ Route22Rival1StartBattleScript:
 	ld a, [wd730]
 	bit 0, a
 	ret nz
+	; reset rival's sprite behaviour bytes otherwise he can look around weirdly after battle for a moment
+	ld hl, wMapSpriteData + ((ROUTE22_RIVAL1 - 1) * 2)
+	ld a, [wYCoord] ; player's y coord
+	cp 4
+	ld a, UP
+	jr z, .gotDir
+	ld a, RIGHT
+.gotDir
+	ld [hl], a
 	ld a, [wSavedCoordIndex]
 	cp 1 ; index of second, lower entry in Route22DefaultScript.Route22RivalBattleCoords
 	jr nz, .set_rival_facing_right
@@ -240,6 +249,15 @@ Route22Rival2StartBattleScript:
 	ld a, [wd730]
 	bit 0, a
 	ret nz
+	; reset rival's sprite behaviour bytes otherwise he can look around weirdly after battle for a moment
+	ld hl, wMapSpriteData + ((ROUTE22_RIVAL2 - 1) * 2)
+	ld a, [wYCoord] ; player's y coord
+	cp 4
+	ld a, UP
+	jr z, .gotDir
+	ld a, RIGHT
+.gotDir
+	ld [hl], a
 	ld a, ROUTE22_RIVAL2
 	ldh [hSpriteIndex], a
 	ld a, [wSavedCoordIndex]

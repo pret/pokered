@@ -269,6 +269,7 @@ SilphCo11FGiovanniBattleFacingScript:
 	ld a, [wd730]
 	bit 0, a
 	ret nz
+	; TODO: reset giovanni's map sprite movement data?
 	ld a, SILPHCO11F_GIOVANNI
 	ldh [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF

@@ -377,7 +377,9 @@ OaksLabRivalStartBattleScript:
 	ld a, [wd730]
 	bit 0, a
 	ret nz
-
+	; reset rival's sprite movement facing byte otherwise he can look around weirdly after battle for a moment
+	ld hl, wMapSpriteData + ((OAKSLAB_RIVAL - 1) * 2)
+	ld [hl], DOWN
 	; define which team rival uses, and fight it
 	ld a, OPP_RIVAL1
 	ld [wCurOpponent], a

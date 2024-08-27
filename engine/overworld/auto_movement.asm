@@ -277,7 +277,8 @@ FreezeEnemyTrainerSprite::
 	cp POKEMON_TOWER_7F
 	ret z ; the Rockets on Pokemon Tower 7F leave after battling, so don't freeze them
 	ld hl, RivalIDs
-	ld a, [wEngagedTrainerClass]
+	 ; PureRGBnote: FIXED: this byte will actually hold the value they wanted to check here...old one was overwritten in battle
+	ld a, [wCurOpponent]
 	ld b, a
 .loop
 	ld a, [hli]
