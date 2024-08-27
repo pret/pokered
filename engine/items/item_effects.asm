@@ -2354,6 +2354,7 @@ ItemUseItemfinder:
 	farcall HiddenItemNear ; check for hidden items
 	ld hl, ItemfinderFoundNothingText
 	jr nc, .printText ; if no hidden items
+	call Delay3
 	ld c, 4
 	ld a, [wItemFinderItemDirection]
 	and a ; a = 0 means we're on top of the item
