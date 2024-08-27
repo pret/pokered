@@ -1174,8 +1174,8 @@ NEXTU
 ;;;;;;;;;; PureRGBnote: ADDED: new wram variables
 wTempLevelStore::
 wItemFinderItemDirection::db 
-wSawItemFinderText::db ; the "yes, an item is nearby!" text will only display once per game restart
-wItemDuplicationActive:: db ; after seeing the old man catch pokemon, this flag is enabled until the game restarts - allows missingno item dupe glitch
+wSawItemFinderText::db ; the "yes, an item is nearby!" text will only display once per game restart TODO: make a flag
+wItemDuplicationActive:: db ; after seeing the old man catch pokemon, this flag is enabled until the game restarts - allows missingno item dupe glitch TODO: make a flag
 
 ; set to 1 if you healed this turn, 2 if you switched out this turn (prevents ai from spamming certain moves in some cases)
 wAIMoveSpamAvoider:: db
