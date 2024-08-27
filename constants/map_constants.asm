@@ -224,7 +224,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const ROCKET_HIDEOUT_B4F,            15, 12 ; $CA
 	map_const ROCKET_HIDEOUT_ELEVATOR,        3,  4 ; $CB
 	map_const FUCHSIA_TREE_DELETER_HOUSE,     4,  4 ; $CC ; PureRGBnote: ADDED: New map
-	map_const FOSSIL_GUYS_HOUSE,              5,  4 ; $CD ; PureRGBnote: ADDED: New map
+	map_const FOSSIL_GUYS_HOUSE,             11,  4 ; $CD ; PureRGBnote: ADDED: New map
 	map_const UNUSED_MAP_CE,                  0,  0 ; $CE ; unused map
 	map_const SILPH_CO_2F,                   15,  9 ; $CF
 	map_const SILPH_CO_3F,                   15,  9 ; $D0

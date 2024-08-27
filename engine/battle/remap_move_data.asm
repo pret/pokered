@@ -89,7 +89,7 @@ RemappableMoves::
 	db WATERFALL, SEAKING, 160, 0
 	db DIZZY_PUNCH, KANGASKHAN, 130, 0
 	db LICK, LICKITUNG, 70, 0
-	db SPIKE_CANNON, OMASTAR, 80, 0
+	db SPIKE_CANNON, OMASTAR, 70, 0
 	db -1
 
 ModifierFuncs:
@@ -226,4 +226,32 @@ FirewallModifier:
 	call GetMoveRemapData2
 	pop af
 	ld [bc], a
+	ret
+
+; input d = which pokemon
+GetRemappedMoveAndPowerFromPokemon::
+	ld hl, RemappableMoves + 1
+.loop
+	ld a, [hl]
+	cp d
+	jr z, .found
+	dec hl
+	ld a, [hli]
+	cp $FF
+	jr z, .notFound
+	inc hl
+	inc hl
+	inc hl
+	inc hl
+	jr .loop
+.notFound
+	and a
+	ret
+.found
+	scf
+	dec hl
+	ld d, [hl] ; move ID
+	inc hl
+	inc hl
+	ld e, [hl] ; move remapped power
 	ret

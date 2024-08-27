@@ -77,6 +77,7 @@ INCLUDE "text/Daycare.asm"
 ; moved from Text 2
 INCLUDE "text/SafariZoneWest.asm"
 INCLUDE "text/ProspectorsHouse.asm"
+INCLUDE "text/MoveMystic.asm"
 
 
 SECTION "Text 4", ROMX
