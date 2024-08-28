@@ -2073,10 +2073,9 @@ wBagItems:: ds BAG_ITEM_CAPACITY * 2 + 1 ; now holds 30 items
 wWildMonPalettes:: ds 3 ; flag array for the current map: which wild pokemon should use alt palettes
 
 wColorSwapsUsed:: db ; how many times the player has used the color changer NPC
-wBoosterChipActive:: db ; whether the player gets boosted EXP from the effects of the boosterchip ; TODO: change to event flag
 
-; 50 bytes remaining in union
-; unused save file 50 bytes
+; 51 bytes remaining in union
+; unused save file 51 bytes
 
 ENDU
 ;;;;;;;;;;

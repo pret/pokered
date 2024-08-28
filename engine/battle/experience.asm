@@ -71,8 +71,7 @@ GainExperience:
 	ld a, [hli]
 	ld b, a ; party mon OTID
 ;;;;;;;;;; PureRGBnote: ADDED: new item that causes all pokemon to gain EXP as if they were received from a trade.
-	ld a, [wBoosterChipActive] ; always get traded pokemon boost if BOOSTER CHIP was used.
-	and a
+	CheckEvent EVENT_BOOSTER_CHIP_ACTIVE ; always get traded pokemon boost if BOOSTER CHIP was used.
 	jr nz, .tradedMon
 ;;;;;;;;;;
 	ld a, [wPlayerID]
@@ -88,6 +87,9 @@ GainExperience:
 	ld a, 1
 .next
 	ld [wGainBoostedExp], a
+	ld a, [wCurMap]
+	cp ROUTE_23
+	call z, BoostExp ; on route 23 we will boost exp gain to make training for elite four quicker
 	ld a, [wIsInBattle]
 	dec a ; is it a trainer battle?
 	call nz, BoostExp ; if so, boost exp

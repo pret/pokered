@@ -1,15 +1,15 @@
 Route23WildMons:
 	def_grass_wildmons 40 ; encounter rate
+	db 40, CHANSEY
+	db 41, PRIMEAPE
+	db 40, ARBOK
+	db 41, FEAROW
+	db 43, CHANSEY
+	db 44, CHANSEY
+	db 45, CHANSEY
+	db 46, CHANSEY
 	db 60, CHANSEY
 	db 60, CHANSEY
-	db 60, CHANSEY
-	db 60, CHANSEY
-	db 60, CHANSEY
-	db 60, CHANSEY
-	db 60, CHANSEY
-	db 60, CHANSEY
-	db 80, CHANSEY
-	db 80, CHANSEY
 	end_grass_wildmons
 
 	def_water_wildmons 5 ; encounter rate

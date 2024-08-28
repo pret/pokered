@@ -746,8 +746,7 @@ ItemUseBoosterChip:
 	ld a, [wIsInBattle]
 	and a
 	jp nz, ItemUseNotTime
-	ld a, 1
-	ld [wBoosterChipActive], a
+	SetEvent EVENT_BOOSTER_CHIP_ACTIVE
 	ld a, SFX_SWITCH
 	call PlaySoundWaitForCurrent
 	ld hl, BoosterChipInstalledText

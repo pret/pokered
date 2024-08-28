@@ -28,8 +28,7 @@ Route15Gate2FOaksAideText:
 	jr nz, .no_item
 	SetEvent EVENT_GOT_BOOSTER_CHIP
 .got_item
-	ld a, [wBoosterChipActive]
-	and a
+	CheckEvent EVENT_BOOSTER_CHIP_ACTIVE
 	jr z, .boosterChipNotActive
 	ld hl, Route15GateUpstairsRemoveBoosterText
 	rst _PrintText
@@ -40,8 +39,7 @@ Route15Gate2FOaksAideText:
 	lb bc, BOOSTER_CHIP, 1
 	call GiveItem
 	jr nc, .bagFull
-	xor a
-	ld [wBoosterChipActive], a
+	ResetEvent EVENT_BOOSTER_CHIP_ACTIVE
 	call RemoveBoosterChipSounds
 	ld hl, Route15GateUpstairsDoneText
 	rst _PrintText
