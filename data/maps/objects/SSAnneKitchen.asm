@@ -6,6 +6,7 @@
 	const_export SSANNEKITCHEN_COOK5
 	const_export SSANNEKITCHEN_COOK6
 	const_export SSANNEKITCHEN_COOK7
+	const_export SSANNEKITCHEN_WAITER
 
 SSAnneKitchen_Object:
 	db $c ; border block
@@ -23,5 +24,6 @@ SSAnneKitchen_Object:
 	object_event 13,  8, SPRITE_COOK, STAY, NONE, TEXT_SSANNEKITCHEN_COOK5
 	object_event 13, 10, SPRITE_COOK, STAY, NONE, TEXT_SSANNEKITCHEN_COOK6
 	object_event 11, 13, SPRITE_COOK, STAY, UP, TEXT_SSANNEKITCHEN_COOK7
+	object_event  2, 13, SPRITE_COOK, STAY, UP, TEXT_SSANNEKITCHEN_WAITER
 
 	def_warps_to SS_ANNE_KITCHEN

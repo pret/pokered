@@ -240,7 +240,7 @@ HealFade:
 	call MomHealPokemonImmediate
 	jp GBFadeInFromWhite
 
-MomHealPokemonImmediate:
+MomHealPokemonImmediate::
 	call StopAllMusic
 	predef HealParty
 	call HealPokemonSound

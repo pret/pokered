@@ -10,7 +10,6 @@ INCLUDE "text/SSAnne1F.asm"
 INCLUDE "text/SSAnne2F.asm"
 INCLUDE "text/SSAnne3F.asm"
 INCLUDE "text/SSAnneBow.asm"
-INCLUDE "text/SSAnneKitchen.asm"
 INCLUDE "text/SSAnneCaptainsRoom.asm"
 INCLUDE "text/SSAnne1FRooms.asm"
 INCLUDE "text/SSAnne2FRooms.asm"
@@ -138,6 +137,7 @@ INCLUDE "text/Route24.asm"
 INCLUDE "text/ViridianSchoolHouseQuiz.asm"
 INCLUDE "text/CinnabarLabTradeRoom.asm"
 INCLUDE "text/FuchsiaMeetingRoom.asm"
+INCLUDE "text/SSAnneKitchen.asm"
 
 
 SECTION "Text 6", ROMX

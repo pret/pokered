@@ -67,3 +67,18 @@ SSAnneKitchenCook7PrimeBeefSteakText::
 	para "But, have I enough"
 	line "fillets du beef?"
 	done
+
+_SSAnneKitchenWaiter::
+	text "Would you like"
+	line "something to eat?"
+	done
+
+_SSAnneKitchenWaiterHaveSeat::
+	text "Then have a seat"
+	line "right here."
+	done
+
+_SSAnneKitchenWaiterComingRightUp::
+	text "Great choice!"
+	line "Coming right up!"
+	prompt

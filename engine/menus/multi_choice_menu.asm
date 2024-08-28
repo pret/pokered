@@ -472,3 +472,9 @@ ConversionMenu::
 	dw TwoOptionMenu
 	db "ATTACK"
 	next "DEFENSE@"
+
+SSAnneFoodMenu::
+	dw ThreeOptionMenu
+	db "Barbecue Eel"
+	next "Prime Steak"
+	next "Salmon Salad@"

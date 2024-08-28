@@ -2368,6 +2368,8 @@ BlaineLeavesVolcano:
 	db NPC_MOVEMENT_DOWN
 	db -1
 
+FarNPCSpriteQuickSpin:
+	ld a, d
 ; input a = which sprite
 NPCSpriteQuickSpin:
 	ld d, 8

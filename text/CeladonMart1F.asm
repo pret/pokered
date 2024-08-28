@@ -129,7 +129,10 @@ _CeladonMartCallMomHomesickText::
 	line "TOWN any time!"
 	para "I'll make you"
 	line "some food."
-	para "What would you"
+	para "@"
+	; fall through
+_WhatWouldYouLikeText::
+	text "What would you"
 	line "like?"
 	prompt
 
