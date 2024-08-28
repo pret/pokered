@@ -41,6 +41,10 @@
 	STRENGTH
 	; end
 
-	dw BANK(HitmonchanPicFront), BANK(HitmonchanPicBack)
+	db BANK(HitmonchanPicFront)
+	db 0
+	db BANK(HitmonchanPicBack)
+	db BANK(HitmonchanPicBackSW)
 
-	dw 1, HitmonchanPicBack
+	dw 0, HitmonchanPicBack
+

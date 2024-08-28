@@ -31,6 +31,10 @@
 	; end
 
 
-	dw BANK(WeedlePicFront), BANK(WeedlePicBack)
+	db BANK(WeedlePicFront)
+	db 0
+	db BANK(WeedlePicBack)
+	db BANK(WeedlePicBackSW)
 
-	dw 1, WeedlePicBack
+	dw 0, WeedlePicBack
+

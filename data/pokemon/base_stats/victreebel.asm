@@ -41,6 +41,10 @@
 	FLASH
 	; end
 
-	dw BANK(VictreebelPicFront), BANK(VictreebelPicBack)
+	db BANK(VictreebelPicFront)
+	db 0
+	db BANK(VictreebelPicBack)
+	db BANK(VictreebelPicBackSW)
 
-	dw 1, VictreebelPicBack
+	dw 0, VictreebelPicBack
+

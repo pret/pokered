@@ -45,6 +45,10 @@
 	; end
 
 
-	dw BANK(SandshrewPicFront), BANK(SandshrewPicBack)
+	db BANK(SandshrewPicFront)
+	db 0
+	db BANK(SandshrewPicBack)
+	db BANK(SandshrewPicBackSW)
 
-	dw 1, SandshrewPicBack
+	dw 0, SandshrewPicBack
+

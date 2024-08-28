@@ -42,6 +42,10 @@
 	STRENGTH
 	; end
 
-	dw BANK(OnixPicFront), BANK(OnixPicBack)
+	db BANK(OnixPicFront)
+	db BANK(OnixPicFrontAlt)
+	db BANK(OnixPicBack)
+	db BANK(OnixPicBackSW)
 
 	dw OnixPicFrontAlt, OnixPicBack
+

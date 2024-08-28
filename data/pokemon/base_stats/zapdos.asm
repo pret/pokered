@@ -43,6 +43,10 @@
 	; end
 
 
-	dw BANK(ZapdosPicFront), BANK(ZapdosPicBack)
+	db BANK(ZapdosPicFront)
+	db BANK(ZapdosPicFrontAlt)
+	db BANK(ZapdosPicBack)
+	db BANK(ZapdosPicBackSW)
 
 	dw ZapdosPicFrontAlt, ZapdosPicBack
+

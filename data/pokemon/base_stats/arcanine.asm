@@ -39,6 +39,10 @@
 	FLASH
 	; end
 
-	dw BANK(ArcaninePicFront), BANK(ArcaninePicBack)
+	db BANK(ArcaninePicFront)
+	db BANK(ArcaninePicFrontAlt)
+	db BANK(ArcaninePicBack)
+	db BANK(ArcaninePicBackSW)
 
 	dw ArcaninePicFrontAlt, ArcaninePicBack
+

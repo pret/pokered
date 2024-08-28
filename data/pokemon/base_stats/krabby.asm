@@ -45,6 +45,10 @@
 	; end
 
 
-	dw BANK(KrabbyPicFront), BANK(KrabbyPicBack)
+	db BANK(KrabbyPicFront)
+	db 0
+	db BANK(KrabbyPicBack)
+	db BANK(KrabbyPicBackSW)
 
-	dw 1, KrabbyPicBack
+	dw 0, KrabbyPicBack
+

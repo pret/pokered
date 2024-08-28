@@ -37,6 +37,10 @@
 	; end
 
 
-	dw BANK(KoffingPicFront), BANK(KoffingPicBack)
+	db BANK(KoffingPicFront)
+	db BANK(KoffingPicFrontAlt)
+	db BANK(KoffingPicBack)
+	db BANK(KoffingPicBackSW)
 
 	dw KoffingPicFrontAlt, KoffingPicBack
+

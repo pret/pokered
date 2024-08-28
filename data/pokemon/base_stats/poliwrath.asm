@@ -47,6 +47,10 @@
 	FLASH
 	; end
 
-	dw BANK(PoliwrathPicFront), BANK(PoliwrathPicBack)
+	db BANK(PoliwrathPicFront)
+	db 0
+	db BANK(PoliwrathPicBack)
+	db BANK(PoliwrathPicBackSW)
 
-	dw 1, PoliwrathPicBack
+	dw 0, PoliwrathPicBack
+

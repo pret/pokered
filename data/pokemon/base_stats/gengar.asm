@@ -43,6 +43,10 @@
 	FLASH
 	; end
 
-	dw BANK(GengarPicFront), BANK(GengarPicBack)
+	db BANK(GengarPicFront)
+	db BANK(GengarPicFrontAlt)
+	db BANK(GengarPicBack)
+	db BANK(GengarPicBackSW)
 
 	dw GengarPicFrontAlt, GengarPicBack
+

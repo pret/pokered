@@ -2,11 +2,9 @@
 ;                     this code will check which to display when about to render a front sprite.
 
 CheckSpriteOptions::
-	ld a, [wMonHAltFrontSprite]
-	cp 1
-	ld hl, wMonHFrontSprite - wMonHeader
-	ret z ; we set wMonHAltFrontSprite to 1 if they don't have one so we can avoid doing all these checks below.
-	push de
+	ld a, [wMonHAltPicBank]
+	and a
+	jr z, .defaultSprite ; the alt pic will never be in bank 0 (home bank) so this will indicate no alt sprite for the mon
 	ld a,[wcf91]
 	ld de, 3
 	ld hl, SpriteOptionMapping
@@ -30,11 +28,13 @@ CheckSpriteOptions::
 	ld a, c
 	and a ; was the bit set?
 	ld hl, wMonHAltFrontSprite - wMonHeader
+	ld a, [wMonHAltPicBank]
 	jr nz, .done
 .defaultSprite
 	ld hl, wMonHFrontSprite - wMonHeader
+	ld a, [wMonHPicBank]
 .done
-	pop de
+	ld d, a
 	ret
 
 SpriteOptionsPointers:
@@ -42,6 +42,7 @@ SpriteOptionsPointers:
 	dw wSpriteOptions2
 	dw wSpriteOptions3
 	dw wSpriteOptions4
+	dw wEventFlags + (SPRITE_OPTIONS_FLAGS_FIFTH_BATCH_START / 8)
 
 SpriteOptionMapping:
 	db BULBASAUR, BIT_BULBASAUR_SPRITE, 1
@@ -74,4 +75,12 @@ SpriteOptionMapping:
 	db ZAPDOS, BIT_ZAPDOS_SPRITE, 4
 	db MEWTWO, BIT_MEWTWO_SPRITE, 1
 	db ARMORED_MEWTWO, BIT_MEWTWO_SPRITE, 1
+	; TODO: add new options page
+	db ARTICUNO, FLAG_ARTICUNO_SPRITE % 8, 5
+	db SPEAROW, FLAG_SPEAROW_SPRITE % 8, 5
+	db JYNX, FLAG_JYNX_SPRITE % 8, 5
+	db FARFETCHD, FLAG_FARFETCHD_SPRITE % 8, 5
+	db OMANYTE, FLAG_OMANYTE_SPRITE % 8, 5
+	db SCYTHER, FLAG_SCYTHER_SPRITE % 8, 5
+	db GOLDUCK, FLAG_GOLDUCK_SPRITE % 8, 5
 	db -1 ; end

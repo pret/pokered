@@ -39,6 +39,10 @@
 	; end
 
 
-	dw BANK(PoliwagPicFront), BANK(PoliwagPicBack)
+	db BANK(PoliwagPicFront)
+	db 0
+	db BANK(PoliwagPicBack)
+	db BANK(PoliwagPicBackSW)
 
-	dw 1, PoliwagPicBack
+	dw 0, PoliwagPicBack
+

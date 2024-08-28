@@ -47,6 +47,10 @@
 	FLASH
 	; end
 
-	dw BANK(VenusaurPicFront), BANK(VenusaurPicBack)
+	db BANK(VenusaurPicFront)
+	db 0
+	db BANK(VenusaurPicBack)
+	db BANK(VenusaurPicBackSW)
 
-	dw 1, VenusaurPicBack
+	dw 0, VenusaurPicBack
+

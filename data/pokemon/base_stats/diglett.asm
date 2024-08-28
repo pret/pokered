@@ -35,6 +35,10 @@
 	; end
 
 
-	dw BANK(DiglettPicFront), BANK(DiglettPicBack)
+	db BANK(DiglettPicFront)
+	db 0
+	db BANK(DiglettPicBack)
+	db BANK(DiglettPicBackSW)
 
-	dw 1, DiglettPicBack
+	dw 0, DiglettPicBack
+

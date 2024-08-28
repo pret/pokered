@@ -30,6 +30,10 @@
 	FLASH
 	; end
 
-	dw BANK(KakunaPicFront), BANK(KakunaPicBack)
+	db BANK(KakunaPicFront)
+	db 0
+	db BANK(KakunaPicBack)
+	db BANK(KakunaPicBackSW)
 
-	dw 1, KakunaPicBack
+	dw 0, KakunaPicBack
+

@@ -45,6 +45,10 @@
 	FLASH
 	; end
 
-	dw BANK(DrowzeePicFront), BANK(DrowzeePicBack)
+	db BANK(DrowzeePicFront)
+	db 0
+	db BANK(DrowzeePicBack)
+	db BANK(DrowzeePicBackSW)
 
-	dw 1, DrowzeePicBack
+	dw 0, DrowzeePicBack
+

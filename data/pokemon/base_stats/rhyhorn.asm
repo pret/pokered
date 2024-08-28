@@ -44,6 +44,10 @@
 	; end
 
 
-	dw BANK(RhyhornPicFront), BANK(RhyhornPicBack)
+	db BANK(RhyhornPicFront)
+	db 0
+	db BANK(RhyhornPicBack)
+	db BANK(RhyhornPicBackSW)
 
-	dw 1, RhyhornPicBack
+	dw 0, RhyhornPicBack
+

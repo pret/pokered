@@ -44,6 +44,10 @@
 	FLASH
 	; end
 
-	dw BANK(CharmeleonPicFront), BANK(CharmeleonPicBack)
+	db BANK(CharmeleonPicFront)
+	db 0
+	db BANK(CharmeleonPicBack)
+	db BANK(CharmeleonPicBackSW)
 
-	dw 1, CharmeleonPicBack
+	dw 0, CharmeleonPicBack
+

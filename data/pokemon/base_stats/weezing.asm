@@ -37,6 +37,10 @@
 	FLASH
 	; end
 
-	dw BANK(WeezingPicFront), BANK(WeezingPicBack)
+	db BANK(WeezingPicFront)
+	db 0
+	db BANK(WeezingPicBack)
+	db BANK(WeezingPicBackSW)
 
-	dw 1, WeezingPicBack
+	dw 0, WeezingPicBack
+

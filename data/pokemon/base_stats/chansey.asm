@@ -40,6 +40,10 @@
 	; end
 
 
-	dw BANK(ChanseyPicFront), BANK(ChanseyPicBack)
+	db BANK(ChanseyPicFront)
+	db 0
+	db BANK(ChanseyPicBack)
+	db BANK(ChanseyPicBackSW)
 
-	dw 1, ChanseyPicBack
+	dw 0, ChanseyPicBack
+

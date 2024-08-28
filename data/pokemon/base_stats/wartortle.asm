@@ -44,6 +44,10 @@
 	STRENGTH,\
 	FLASH
 
-	dw BANK(WartortlePicFront), BANK(WartortlePicBack)
+	db BANK(WartortlePicFront)
+	db 0
+	db BANK(WartortlePicBack)
+	db BANK(WartortlePicBackSW)
 
-	dw 1, WartortlePicBack
+	dw 0, WartortlePicBack
+

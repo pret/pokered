@@ -35,6 +35,10 @@
 	; end
 
 
-	dw BANK(EeveePicFront), BANK(EeveePicBack)
+	db BANK(EeveePicFront)
+	db 0
+	db BANK(EeveePicBack)
+	db BANK(EeveePicBackSW)
 
-	dw 1, EeveePicBack
+	dw 0, EeveePicBack
+

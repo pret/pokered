@@ -38,6 +38,10 @@
 	FLASH
 	; end
 
-	dw BANK(GolbatPicFront), BANK(GolbatPicBack)
+	db BANK(GolbatPicFront)
+	db BANK(GolbatPicFrontAlt)
+	db BANK(GolbatPicBack)
+	db BANK(GolbatPicBackSW)
 
 	dw GolbatPicFrontAlt, GolbatPicBack
+

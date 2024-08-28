@@ -44,6 +44,10 @@
 	; end
 
 
-	dw BANK(KabutoPicFront), BANK(KabutoPicBack)
+	db BANK(KabutoPicFront)
+	db 0
+	db BANK(KabutoPicBack)
+	db BANK(KabutoPicBackSW)
 
-	dw 1, KabutoPicBack
+	dw 0, KabutoPicBack
+

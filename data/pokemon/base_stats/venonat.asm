@@ -38,6 +38,10 @@
 	; end
 
 
-	dw BANK(VenonatPicFront), BANK(VenonatPicBack)
+	db BANK(VenonatPicFront)
+	db 0
+	db BANK(VenonatPicBack)
+	db BANK(VenonatPicBackSW)
 
-	dw 1, VenonatPicBack
+	dw 0, VenonatPicBack
+

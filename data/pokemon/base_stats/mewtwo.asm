@@ -57,6 +57,10 @@
 	; end
 
 
-	dw BANK(MewtwoPicFront), BANK(MewtwoPicBack)
+	db BANK(MewtwoPicFront)
+	db BANK(MewtwoPicFrontAlt)
+	db BANK(MewtwoPicBack)
+	db BANK(MewtwoPicBackSW)
 
 	dw MewtwoPicFrontAlt, MewtwoPicBack
+

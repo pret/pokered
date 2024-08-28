@@ -36,6 +36,10 @@
 	; end
 
 
-	dw BANK(SpearowPicFront), BANK(SpearowPicBack)
+	db BANK(SpearowPicFront)
+	db BANK(SpearowPicFrontAlt)
+	db BANK(SpearowPicBack)
+	db BANK(SpearowPicBackSW)
 
-	dw 1, SpearowPicBack
+	dw SpearowPicFrontAlt, SpearowPicBack
+

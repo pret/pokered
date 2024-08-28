@@ -29,6 +29,9 @@
 	FLASH
 	;end
 
-	dw BANK(CaterpiePicFront), BANK(CaterpiePicBack)
+	db BANK(CaterpiePicFront)
+	db 0
+	db BANK(CaterpiePicBack)
+	db BANK(CaterpiePicBackSW)
 
-	dw 1, CaterpiePicBack
+	dw 0, CaterpiePicBack

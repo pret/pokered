@@ -40,6 +40,10 @@
 	; end
 
 
-	dw BANK(VulpixPicFront), BANK(VulpixPicBack)
+	db BANK(VulpixPicFront)
+	db 0
+	db BANK(VulpixPicBack)
+	db BANK(VulpixPicBackSW)
 
-	dw 1, VulpixPicBack
+	dw 0, VulpixPicBack
+

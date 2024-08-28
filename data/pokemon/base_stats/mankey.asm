@@ -45,6 +45,10 @@
 	; end
 
 
-	dw BANK(MankeyPicFront), BANK(MankeyPicBack)
+	db BANK(MankeyPicFront)
+	db BANK(MankeyPicFrontAlt)
+	db BANK(MankeyPicBack)
+	db BANK(MankeyPicBackSW)
 
 	dw MankeyPicFrontAlt, MankeyPicBack
+

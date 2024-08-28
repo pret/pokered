@@ -11,72 +11,16 @@ UncompressMonBackSprite::
 	ld [wSpriteInputPtr+1],a
 	ld a, [wSpriteOptions2]
 	bit BIT_BACK_SPRITES, a
-	jr nz, .swSprites
-.ogSprites
+	ld a,[wMonHSpaceWorldBackPicBank]
+	jr nz, .GotBank
 	ld a,[wMonHBackPicBank]
-	jr .GotBank
-.swSprites
-	ld a,[wMonHPicBank]
-.GotBank
-	jp UncompressSpriteData
-
-; dannye33note: CHANGED: code for rendering sprites from an arbitrary bank instead of hardcoded.
-UncompressMonSprite::
-	ld bc,wMonHeader
-	add hl,bc
-	ld a,[hli]
-	ld [wSpriteInputPtr],a    ; fetch sprite input pointer
-	ld a,[hl]
-	ld [wSpriteInputPtr+1],a
-	ld a, [wcf91]
-	cp MISSINGNO
-	jr z,.missingNo
-	cp FOSSIL_KABUTOPS
-	jr z,.RecallBank
-	cp FOSSIL_AERODACTYL
-	jr z,.RecallBank
-	cp MON_GHOST
-	jr z,.RecallBank
-	ld a,[wMonHPicBank]
-	jr .GotBank
-;;;;;;;;;; PureRGBnote: ADDED: missingno has a randomized front sprite
-.missingNo
-	call Random ; missingno sometimes displays other front sprites
-	and %111
-	jr z, .fossilAerodactyl ; 1/8 chance of fossil aerodactyl
-	cp 1
-	jr z, .fossilKabutops ; 1/8 chance of fossil kabutops
-	cp 2
-	jr z, .ghost ; 1/8 chance of ghost
-	ld a, [wMonHPicBank]
-	jr .GotBank
-.ghost
-	ld de, GhostPic
-	jr .fossilGhostDimensions
-.fossilKabutops
-	ld de, FossilKabutopsPic
-.fossilGhostDimensions
-	ld a, $66 ; dimensions of kabutops and ghost sprite
-	ld [wMonHSpriteDim], a
-	jr .loadMissingnoRandomizedSprite
-.fossilAerodactyl
-	ld de, FossilAerodactylPic ; don't need to update dimensions as this sprite is the same size as missingno's
-.loadMissingnoRandomizedSprite
-	ld a, e
-	ld [wSpriteInputPtr], a
-	ld a, d
-	ld [wSpriteInputPtr+1], a
-;;;;;;;;;;
-.RecallBank
-	ld a,BANK(FossilKabutopsPic)    
 .GotBank
 	jp UncompressSpriteData
 
 ; de: destination location
 LoadMonFrontSprite::
 	push de
-	callfar CheckSpriteOptions ; PureRGBnote: ADDED: we need to check options and remap the front sprite based on player settings here
-	call UncompressMonSprite
+	callfar UncompressMonSprite
 	ld hl, wMonHSpriteDim
 	ld a, [hli]
 	; fall through

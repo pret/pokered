@@ -44,6 +44,10 @@
 	STRENGTH,\
 	FLASH
 
-	dw BANK(SquirtlePicFront), BANK(SquirtlePicBack)
+	db BANK(SquirtlePicFront)
+	db BANK(SquirtlePicFrontAlt)
+	db BANK(SquirtlePicBack)
+	db BANK(SquirtlePicBackSW)
 
 	dw SquirtlePicFrontAlt, SquirtlePicBack
+

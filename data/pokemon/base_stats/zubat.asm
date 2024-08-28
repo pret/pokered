@@ -36,6 +36,10 @@
 	; end
 
 
-	dw BANK(ZubatPicFront), BANK(ZubatPicBack)
+	db BANK(ZubatPicFront)
+	db 0
+	db BANK(ZubatPicBack)
+	db BANK(ZubatPicBackSW)
 
-	dw 1, ZubatPicBack
+	dw 0, ZubatPicBack
+

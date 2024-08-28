@@ -42,6 +42,10 @@
 	FLASH
 	; end
 
-	dw BANK(JolteonPicFront), BANK(JolteonPicBack)
+	db BANK(JolteonPicFront)
+	db 0
+	db BANK(JolteonPicBack)
+	db BANK(JolteonPicBackSW)
 
-	dw 1, JolteonPicBack
+	dw 0, JolteonPicBack
+

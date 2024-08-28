@@ -42,6 +42,10 @@
 	STRENGTH
 	; end
 
-	dw BANK(MachampPicFront), BANK(MachampPicBack)
+	db BANK(MachampPicFront)
+	db 0
+	db BANK(MachampPicBack)
+	db BANK(MachampPicBackSW)
 
-	dw 1, MachampPicBack
+	dw 0, MachampPicBack
+

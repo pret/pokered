@@ -41,6 +41,10 @@
 	STRENGTH
 	; end
 
-	dw BANK(MachokePicFront), BANK(MachokePicBack)
+	db BANK(MachokePicFront)
+	db 0
+	db BANK(MachokePicBack)
+	db BANK(MachokePicBackSW)
 
-	dw 1, MachokePicBack
+	dw 0, MachokePicBack
+

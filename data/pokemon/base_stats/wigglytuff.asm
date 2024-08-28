@@ -54,6 +54,10 @@
 	FLASH
 	; end
 
-	dw BANK(WigglytuffPicFront), BANK(WigglytuffPicBack)
+	db BANK(WigglytuffPicFront)
+	db 0
+	db BANK(WigglytuffPicBack)
+	db BANK(WigglytuffPicBackSW)
 
-	dw 1, WigglytuffPicBack
+	dw 0, WigglytuffPicBack
+

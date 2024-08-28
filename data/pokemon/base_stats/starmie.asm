@@ -41,6 +41,10 @@
 	FLASH
 	; end
 
-	dw BANK(StarmiePicFront), BANK(StarmiePicBack)
+	db BANK(StarmiePicFront)
+	db BANK(StarmiePicFrontAlt)
+	db BANK(StarmiePicBack)
+	db BANK(StarmiePicBackSW)
 
 	dw StarmiePicFrontAlt, StarmiePicBack
+

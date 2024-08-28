@@ -45,6 +45,10 @@
 	FLASH
 	; end
 
-	dw BANK(KinglerPicFront), BANK(KinglerPicBack)
+	db BANK(KinglerPicFront)
+	db 0
+	db BANK(KinglerPicBack)
+	db BANK(KinglerPicBackSW)
 
-	dw 1, KinglerPicBack
+	dw 0, KinglerPicBack
+

@@ -39,6 +39,10 @@
 	FLASH
 	; end
 	
-	dw BANK(WeepinbellPicFront), BANK(WeepinbellPicBack)
+	db BANK(WeepinbellPicFront)
+	db 0
+	db BANK(WeepinbellPicBack)
+	db BANK(WeepinbellPicBackSW)
 
-	dw 1, WeepinbellPicBack
+	dw 0, WeepinbellPicBack
+

@@ -153,13 +153,9 @@ INCLUDE "data/pokemon/base_stats/mewtwo.asm"
 INCLUDE "data/pokemon/base_stats/mew.asm"
 	assert_table_length NUM_POKEMON - 1 ; discount missingno
 
-MissingnoBaseStats:: ; PureRGBnote: ADDED: give missingno a proper base stat header
+NonDexMonsBaseStats::
 INCLUDE "data/pokemon/base_stats/missingno.asm"
-ArmoredMewtwoBaseStats::
 INCLUDE "data/pokemon/base_stats/armored_mewtwo.asm"
-PoweredHaunterBaseStats::
 INCLUDE "data/pokemon/base_stats/powered_haunter.asm"
-HardenedOnixBaseStats::
 INCLUDE "data/pokemon/base_stats/hardened_onix.asm"
-FloatingMagnetonBaseStats::
 INCLUDE "data/pokemon/base_stats/floating_magneton.asm"

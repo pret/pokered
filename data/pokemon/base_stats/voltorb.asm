@@ -39,6 +39,10 @@
 	; end
 
 
-	dw BANK(VoltorbPicFront), BANK(VoltorbPicBack)
+	db BANK(VoltorbPicFront)
+	db BANK(VoltorbPicFrontAlt)
+	db BANK(VoltorbPicBack)
+	db BANK(VoltorbPicBackSW)
 
 	dw VoltorbPicFrontAlt, VoltorbPicBack
+

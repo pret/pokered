@@ -42,6 +42,10 @@
 	FLASH
 	; end
 
-	dw BANK(DragonairPicFront), BANK(DragonairPicBack)
+	db BANK(DragonairPicFront)
+	db 0
+	db BANK(DragonairPicBack)
+	db BANK(DragonairPicBackSW)
 
-	dw 1, DragonairPicBack
+	dw 0, DragonairPicBack
+

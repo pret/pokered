@@ -44,6 +44,9 @@
 	FLASH
 	; end
 
-	dw BANK(ArbokPicFront), BANK(ArbokPicBack)
+	db BANK(ArbokPicFront)
+	db 0
+	db BANK(ArbokPicBack)
+	db BANK(ArbokPicBackSW)
 
-	dw 1, ArbokPicBack
+	dw 0, ArbokPicBack

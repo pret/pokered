@@ -55,6 +55,10 @@
 	; end
 
 
-	dw BANK(ClefairyPicFront), BANK(ClefairyPicBack)
+	db BANK(ClefairyPicFront)
+	db 0
+	db BANK(ClefairyPicBack)
+	db BANK(ClefairyPicBackSW)
 
-	dw 1, ClefairyPicBack
+	dw 0, ClefairyPicBack
+

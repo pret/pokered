@@ -4,19 +4,19 @@ DEF FRONT_SPRITE_OPTIONS_PAGE_3_NUMBER EQU 3 ; must be 1 digit.
 
 ; format: "bit set" x position, "bit not set" x position, which bit it is, pointer to wram variable
 FrontSpriteOptions3XPosBitData:
+	db 16, 13, BIT_KADABRA_SPRITE
+	dw wSpriteOptions4
+	db 16, 13, BIT_MACHOP_SPRITE
+	dw wSpriteOptions4
 	db 16, 13, BIT_TENTACRUEL_SPRITE
 	dw wSpriteOptions4
 	db 16, 13, BIT_GRAVELER_SPRITE
 	dw wSpriteOptions4
+	db 16, 13, FLAG_FARFETCHD_SPRITE % 8
+	dw wEventFlags + (FLAG_FARFETCHD_SPRITE / 8)
 	db 16, 13, BIT_CLOYSTER_SPRITE
 	dw wSpriteOptions4
 	db 16, 13, BIT_GENGAR_SPRITE
-	dw wSpriteOptions3
-	db 16, 13, BIT_ONIX_SPRITE
-	dw wSpriteOptions3
-	db 16, 13, BIT_VOLTORB_SPRITE
-	dw wSpriteOptions3
-	db 16, 13, BIT_EXEGGCUTE_SPRITE
 	dw wSpriteOptions3
 
 FrontSpriteOptions3Header:
@@ -42,13 +42,13 @@ FrontSpriteOptions3Data:
 
 FrontSpriteOptions3Text:
 	db   "SPRITES→FRONT 3"
+	next " KADABRA:    RB RG"
+	next " MACHOP:     RB RG"
 	next " TENTACRUEL: RB RG"
 	next " GRAVELER:   RB RG"
+	next " FARFETCHD:  RG RB"
 	next " CLOYSTER:   RB RG"
-	next " GENGAR:     RB Y"
-	next " ONIX:       RB RG"
-	next " VOLTORB:    RB RG"
-	next " EXEGGCUTE:  RB Y@"
+	next " GENGAR:     RB Y@"
 
 DrawFrontSpriteOptions3Menu:
 	hlcoord 0, 0

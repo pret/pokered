@@ -38,6 +38,10 @@
 	FLASH
 	; end
 
-	dw BANK(HaunterPicFront), BANK(HaunterPicBack)
+	db BANK(HaunterPicFront)
+	db 0
+	db BANK(HaunterPicBack)
+	db BANK(HaunterPicBackSW)
 
-	dw 1, HaunterPicBack
+	dw 0, HaunterPicBack
+

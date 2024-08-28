@@ -20,6 +20,10 @@
 	; end
 
 
-	dw BANK(MagikarpPicFront), BANK(MagikarpPicBack)
+	db BANK(MagikarpPicFront)
+	db 0
+	db BANK(MagikarpPicBack)
+	db BANK(MagikarpPicBackSW)
 
-	dw 1, MagikarpPicBack
+	dw 0, MagikarpPicBack
+

@@ -43,6 +43,10 @@
 	; end
 
 
-	dw BANK(ArticunoPicFront), BANK(ArticunoPicBack)
+	db BANK(ArticunoPicFront)
+	db BANK(ArticunoPicFrontAlt)
+	db BANK(ArticunoPicBack)
+	db BANK(ArticunoPicBackSW)
 
-	dw 1, ArticunoPicBack
+	dw ArticunoPicFrontAlt, ArticunoPicBack
+

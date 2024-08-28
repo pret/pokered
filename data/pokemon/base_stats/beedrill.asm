@@ -46,6 +46,9 @@
 	; end
 
 
-	dw BANK(BeedrillPicFront), BANK(BeedrillPicBack)
+	db BANK(BeedrillPicFront)
+	db 0
+	db BANK(BeedrillPicBack)
+	db BANK(BeedrillPicBackSW)
 
-	dw 1, BeedrillPicBack
+	dw 0, BeedrillPicBack

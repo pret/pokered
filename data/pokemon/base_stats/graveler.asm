@@ -40,6 +40,10 @@
 	STRENGTH
 	; end
 
-	dw BANK(GravelerPicFront), BANK(GravelerPicBack)
+	db BANK(GravelerPicFront)
+	db BANK(GravelerPicFrontAlt)
+	db BANK(GravelerPicBack)
+	db BANK(GravelerPicBackSW)
 
 	dw GravelerPicFrontAlt, GravelerPicBack
+

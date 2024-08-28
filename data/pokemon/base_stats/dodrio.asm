@@ -42,6 +42,10 @@
 	STRENGTH
 	; end
 
-	dw BANK(DodrioPicFront), BANK(DodrioPicBack)
+	db BANK(DodrioPicFront)
+	db 0
+	db BANK(DodrioPicBack)
+	db BANK(DodrioPicBackSW)
 
-	dw 1, DodrioPicBack
+	dw 0, DodrioPicBack
+

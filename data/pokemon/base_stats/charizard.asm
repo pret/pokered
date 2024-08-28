@@ -50,6 +50,10 @@
 	FLASH
 	; end
 
-	dw BANK(CharizardPicFront), BANK(CharizardPicBack)
+	db BANK(CharizardPicFront)
+	db 0
+	db BANK(CharizardPicBack)
+	db BANK(CharizardPicBackSW)
 
-	dw 1, CharizardPicBack
+	dw 0, CharizardPicBack
+

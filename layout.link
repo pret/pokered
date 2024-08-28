@@ -179,7 +179,6 @@ ROMX $2C
 	"Move Names"
 	"Wild Mons"
 	"Evos Moves"
-	"Splash Animation"
 ROMX $2D
 	"Pics 7"
 ROMX $2E
@@ -191,6 +190,7 @@ ROMX $30
 	"NPC Sprites 3"
 ROMX $31
 	"Movedex Text"
+	"Splash Animation"
 ROMX $32
 	"Type Icons"
 	"Menu Prompt Graphics"
@@ -212,6 +212,7 @@ ROMX $37
 ROMX $38
 	"Tilesets 5"
 	"NPC Sprites 4"
+	"Pics 11"
 WRAM0
 	"Audio RAM"
 	org $c100

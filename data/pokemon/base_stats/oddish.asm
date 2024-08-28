@@ -38,6 +38,10 @@
 	; end
 
 
-	dw BANK(OddishPicFront), BANK(OddishPicBack)
+	db BANK(OddishPicFront)
+	db 0
+	db BANK(OddishPicBack)
+	db BANK(OddishPicBackSW)
 
-	dw 1, OddishPicBack
+	dw 0, OddishPicBack
+

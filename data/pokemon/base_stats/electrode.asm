@@ -39,6 +39,10 @@
 	FLASH
 	; end
 
-	dw BANK(ElectrodePicFront), BANK(ElectrodePicBack)
+	db BANK(ElectrodePicFront)
+	db 0
+	db BANK(ElectrodePicBack)
+	db BANK(ElectrodePicBackSW)
 
-	dw 1, ElectrodePicBack
+	dw 0, ElectrodePicBack
+

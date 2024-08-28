@@ -38,6 +38,10 @@
 	; end
 
 
-	dw BANK(HorseaPicFront), BANK(HorseaPicBack)
+	db BANK(HorseaPicFront)
+	db 0
+	db BANK(HorseaPicBack)
+	db BANK(HorseaPicBackSW)
 
-	dw 1, HorseaPicBack
+	dw 0, HorseaPicBack
+

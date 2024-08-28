@@ -38,6 +38,10 @@
 	FLASH
 	; end
 
-	dw BANK(SeakingPicFront), BANK(SeakingPicBack)
+	db BANK(SeakingPicFront)
+	db 0
+	db BANK(SeakingPicBack)
+	db BANK(SeakingPicBackSW)
 
-	dw 1, SeakingPicBack
+	dw 0, SeakingPicBack
+

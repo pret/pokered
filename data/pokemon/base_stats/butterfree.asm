@@ -42,6 +42,9 @@
 	FLASH
 	;end
 
-	dw BANK(ButterfreePicFront), BANK(ButterfreePicBack)
+	db BANK(ButterfreePicFront)
+	db BANK(ButterfreePicFrontAlt)
+	db BANK(ButterfreePicBack)
+	db BANK(ButterfreePicBackSW)
 
 	dw ButterfreePicFrontAlt, ButterfreePicBack

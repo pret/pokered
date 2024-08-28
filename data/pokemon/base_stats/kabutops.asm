@@ -50,6 +50,10 @@
 	FLASH
 	; end
 
-	dw BANK(KabutopsPicFront), BANK(KabutopsPicBack)
+	db BANK(KabutopsPicFront)
+	db 0
+	db BANK(KabutopsPicBack)
+	db BANK(KabutopsPicBackSW)
 
-	dw 1, KabutopsPicBack
+	dw 0, KabutopsPicBack
+

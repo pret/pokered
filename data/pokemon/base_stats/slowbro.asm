@@ -50,6 +50,10 @@
 	FLASH
 	; end
 
-	dw BANK(SlowbroPicFront), BANK(SlowbroPicBack)
+	db BANK(SlowbroPicFront)
+	db 0
+	db BANK(SlowbroPicBack)
+	db BANK(SlowbroPicBackSW)
 
-	dw 1, SlowbroPicBack
+	dw 0, SlowbroPicBack
+

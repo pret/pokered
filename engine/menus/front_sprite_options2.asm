@@ -4,20 +4,20 @@ DEF FRONT_SPRITE_OPTIONS_PAGE_2_NUMBER EQU 2 ; must be 1 digit.
 
 ; format: "bit set" x position, "bit not set" x position, which bit it is, pointer to wram variable
 FrontSpriteOptions2XPosBitData:
+	db 16, 13, FLAG_SPEAROW_SPRITE % 8
+	dw wEventFlags + (FLAG_SPEAROW_SPRITE / 8)
 	db 16, 13, BIT_NIDORINO_SPRITE
 	dw wSpriteOptions2
 	db 16, 13, BIT_GOLBAT_SPRITE
 	dw wSpriteOptions
+	db 16, 13, FLAG_GOLDUCK_SPRITE % 8
+	dw wEventFlags + (FLAG_GOLDUCK_SPRITE / 8)
 	db 16, 13, BIT_MANKEY_SPRITE
 	dw wSpriteOptions
 	db 16, 13, BIT_ARCANINE_SPRITE
 	dw wSpriteOptions
 	db 16, 13, BIT_ABRA_SPRITE
 	dw wSpriteOptions3
-	db 16, 13, BIT_KADABRA_SPRITE
-	dw wSpriteOptions4
-	db 16, 13, BIT_MACHOP_SPRITE
-	dw wSpriteOptions4
 
 FrontSpriteOptions2Header:
 	dw DrawFrontSpriteOptions2Menu
@@ -42,13 +42,13 @@ FrontSpriteOptions2Data:
 
 FrontSpriteOptions2Text:
 	db   "SPRITES→FRONT 2"
+	next " SPEAROW:    RB RG"
 	next " NIDORINO:   RB RG"
 	next " GOLBAT:     Y  RB"
+	next " GOLDUCK:    RB RG"
 	next " MANKEY:     RB RG"
 	next " ARCANINE:   RB RG"
-	next " ABRA:       RB RG"
-	next " KADABRA:    RB RG"
-	next " MACHOP:     RB RG@"
+	next " ABRA:       RB RG@"
 
 DrawFrontSpriteOptions2Menu:
 	hlcoord 0, 0

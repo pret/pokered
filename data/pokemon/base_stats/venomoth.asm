@@ -43,6 +43,10 @@
 	FLASH
 	; end
 
-	dw BANK(VenomothPicFront), BANK(VenomothPicBack)
+	db BANK(VenomothPicFront)
+	db 0
+	db BANK(VenomothPicBack)
+	db BANK(VenomothPicBackSW)
 
-	dw 1, VenomothPicBack
+	dw 0, VenomothPicBack
+

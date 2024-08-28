@@ -42,6 +42,10 @@
 	; end
 
 
-	dw BANK(HitmonleePicFront), BANK(HitmonleePicBack)
+	db BANK(HitmonleePicFront)
+	db 0
+	db BANK(HitmonleePicBack)
+	db BANK(HitmonleePicBackSW)
 
-	dw 1, HitmonleePicBack
+	dw 0, HitmonleePicBack
+

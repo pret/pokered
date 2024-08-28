@@ -45,6 +45,10 @@
 	; end
 
 
-	dw BANK(SlowpokePicFront), BANK(SlowpokePicBack)
+	db BANK(SlowpokePicFront)
+	db 0
+	db BANK(SlowpokePicBack)
+	db BANK(SlowpokePicBackSW)
 
-	dw 1, SlowpokePicBack
+	dw 0, SlowpokePicBack
+

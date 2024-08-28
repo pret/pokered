@@ -44,6 +44,10 @@
 	FLASH
 	; end
 
-	dw BANK(VaporeonPicFront), BANK(VaporeonPicBack)
+	db BANK(VaporeonPicFront)
+	db 0
+	db BANK(VaporeonPicBack)
+	db BANK(VaporeonPicBackSW)
 
-	dw 1, VaporeonPicBack
+	dw 0, VaporeonPicBack
+

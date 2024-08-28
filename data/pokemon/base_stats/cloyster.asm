@@ -37,6 +37,10 @@
 	FLASH
 	; end
 
-	dw BANK(CloysterPicFront), BANK(CloysterPicBack)
+	db BANK(CloysterPicFront)
+	db BANK(CloysterPicFrontAlt)
+	db BANK(CloysterPicBack)
+	db BANK(CloysterPicBackSW)
 
 	dw CloysterPicFrontAlt, CloysterPicBack
+

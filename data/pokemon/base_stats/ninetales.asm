@@ -44,6 +44,10 @@
 	FLASH
 	; end
 
-	dw BANK(NinetalesPicFront), BANK(NinetalesPicBack)
+	db BANK(NinetalesPicFront)
+	db 0
+	db BANK(NinetalesPicBack)
+	db BANK(NinetalesPicBackSW)
 
-	dw 1, NinetalesPicBack
+	dw 0, NinetalesPicBack
+

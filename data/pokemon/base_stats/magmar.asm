@@ -54,6 +54,10 @@
 	; end
 
 
-	dw BANK(MagmarPicFront), BANK(MagmarPicBack)
+	db BANK(MagmarPicFront)
+	db 0
+	db BANK(MagmarPicBack)
+	db BANK(MagmarPicBackSW)
 
-	dw 1, MagmarPicBack
+	dw 0, MagmarPicBack
+

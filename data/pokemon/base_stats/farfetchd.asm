@@ -50,6 +50,10 @@
 	; end
 
 
-	dw BANK(FarfetchdPicFront), BANK(FarfetchdPicBack)
+	db BANK(FarfetchdPicFront)
+	db BANK(FarfetchdPicFrontAlt)
+	db BANK(FarfetchdPicBack)
+	db BANK(FarfetchdPicBackSW)
 
-	dw 1, FarfetchdPicBack
+	dw FarfetchdPicFrontAlt, FarfetchdPicBack
+

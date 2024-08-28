@@ -53,6 +53,10 @@
 	STRENGTH
 	; end
 
-	dw BANK(RhydonPicFront), BANK(RhydonPicBack)
+	db BANK(RhydonPicFront)
+	db 0
+	db BANK(RhydonPicBack)
+	db BANK(RhydonPicBackSW)
 
-	dw 1, RhydonPicBack
+	dw 0, RhydonPicBack
+

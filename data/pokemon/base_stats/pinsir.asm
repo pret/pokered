@@ -46,6 +46,10 @@
 	; end
 
 
-	dw BANK(PinsirPicFront), BANK(PinsirPicBack)
+	db BANK(PinsirPicFront)
+	db BANK(PinsirPicFrontAlt)
+	db BANK(PinsirPicBack)
+	db BANK(PinsirPicBackSW)
 
 	dw PinsirPicFrontAlt, PinsirPicBack
+

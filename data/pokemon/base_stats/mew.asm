@@ -72,6 +72,10 @@
 	FLASH
 	; end
 
-	dw BANK(MewPicFront), BANK(MewPicBack)
+	db BANK(MewPicFront)
+	db 0
+	db BANK(MewPicBack)
+	db BANK(MewPicBackSW)
 
-	dw 1, MewPicBack
+	dw 0, MewPicBack
+

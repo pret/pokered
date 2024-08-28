@@ -40,6 +40,10 @@
 	FLASH
 	; end
 
-	dw BANK(VileplumePicFront), BANK(VileplumePicBack)
+	db BANK(VileplumePicFront)
+	db 0
+	db BANK(VileplumePicBack)
+	db BANK(VileplumePicBackSW)
 
-	dw 1, VileplumePicBack
+	dw 0, VileplumePicBack
+

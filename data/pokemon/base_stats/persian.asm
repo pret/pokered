@@ -44,6 +44,10 @@
 	; end
 
 
-	dw BANK(PersianPicFront), BANK(PersianPicBack)
+	db BANK(PersianPicFront)
+	db 0
+	db BANK(PersianPicBack)
+	db BANK(PersianPicBackSW)
 
-	dw 1, PersianPicBack
+	dw 0, PersianPicBack
+

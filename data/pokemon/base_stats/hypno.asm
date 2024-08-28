@@ -46,6 +46,10 @@
 	FLASH
 	; end
 
-	dw BANK(HypnoPicFront), BANK(HypnoPicBack)
+	db BANK(HypnoPicFront)
+	db 0
+	db BANK(HypnoPicBack)
+	db BANK(HypnoPicBackSW)
 
-	dw 1, HypnoPicBack
+	dw 0, HypnoPicBack
+

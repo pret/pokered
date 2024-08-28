@@ -46,6 +46,10 @@
 	FLASH
 	; end
 
-	dw BANK(OmastarPicFront), BANK(OmastarPicBack)
+	db BANK(OmastarPicFront)
+	db 0
+	db BANK(OmastarPicBack)
+	db BANK(OmastarPicBackSW)
 
-	dw 1, OmastarPicBack
+	dw 0, OmastarPicBack
+

@@ -41,6 +41,10 @@
 	STRENGTH
 	; end
 
-	dw BANK(GolemPicFront), BANK(GolemPicBack)
+	db BANK(GolemPicFront)
+	db 0
+	db BANK(GolemPicBack)
+	db BANK(GolemPicBackSW)
 
-	dw 1, GolemPicBack
+	dw 0, GolemPicBack
+

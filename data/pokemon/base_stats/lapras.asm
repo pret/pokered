@@ -44,6 +44,10 @@
 	; end
 
 
-	dw BANK(LaprasPicFront), BANK(LaprasPicBack)
+	db BANK(LaprasPicFront)
+	db 0
+	db BANK(LaprasPicBack)
+	db BANK(LaprasPicBackSW)
 
-	dw 1, LaprasPicBack
+	dw 0, LaprasPicBack
+

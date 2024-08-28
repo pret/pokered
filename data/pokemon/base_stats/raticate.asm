@@ -49,6 +49,10 @@
 	; end
 
 
-	dw BANK(RaticatePicFront), BANK(RaticatePicBack)
+	db BANK(RaticatePicFront)
+	db BANK(RaticatePicFrontAlt)
+	db BANK(RaticatePicBack)
+	db BANK(RaticatePicBackSW)
 
 	dw RaticatePicFrontAlt, RaticatePicBack
+

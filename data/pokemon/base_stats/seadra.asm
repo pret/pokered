@@ -43,6 +43,10 @@
 	FLASH
 	; end
 
-	dw BANK(SeadraPicFront), BANK(SeadraPicBack)
+	db BANK(SeadraPicFront)
+	db 0
+	db BANK(SeadraPicBack)
+	db BANK(SeadraPicBackSW)
 
-	dw 1, SeadraPicBack
+	dw 0, SeadraPicBack
+

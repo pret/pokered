@@ -51,6 +51,10 @@
 	; end
 
 
-	dw BANK(KangaskhanPicFront), BANK(KangaskhanPicBack)
+	db BANK(KangaskhanPicFront)
+	db 0
+	db BANK(KangaskhanPicBack)
+	db BANK(KangaskhanPicBackSW)
 
-	dw 1, KangaskhanPicBack
+	dw 0, KangaskhanPicBack
+

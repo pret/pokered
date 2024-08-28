@@ -50,6 +50,10 @@
 	; end
 
 
-	dw BANK(GrimerPicFront), BANK(GrimerPicBack)
+	db BANK(GrimerPicFront)
+	db 0
+	db BANK(GrimerPicBack)
+	db BANK(GrimerPicBackSW)
 
-	dw 1, GrimerPicBack
+	dw 0, GrimerPicBack
+

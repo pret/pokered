@@ -43,6 +43,10 @@
 	; end
 
 
-	dw BANK(ParasPicFront), BANK(ParasPicBack)
+	db BANK(ParasPicFront)
+	db 0
+	db BANK(ParasPicBack)
+	db BANK(ParasPicBackSW)
 
-	dw 1, ParasPicBack
+	dw 0, ParasPicBack
+

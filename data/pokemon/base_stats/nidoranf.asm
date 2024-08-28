@@ -40,6 +40,10 @@
 	; end
 
 
-	dw BANK(NidoranFPicFront), BANK(NidoranFPicBack)
+	db BANK(NidoranFPicFront)
+	db 0
+	db BANK(NidoranFPicBack)
+	db BANK(NidoranFPicBackSW)
 
-	dw 1, NidoranFPicBack
+	dw 0, NidoranFPicBack
+

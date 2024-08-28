@@ -53,6 +53,10 @@
 	; end
 
 
-	dw BANK(MrMimePicFront), BANK(MrMimePicBack)
+	db BANK(MrMimePicFront)
+	db 0
+	db BANK(MrMimePicBack)
+	db BANK(MrMimePicBackSW)
 
-	dw 1, MrMimePicBack
+	dw 0, MrMimePicBack
+

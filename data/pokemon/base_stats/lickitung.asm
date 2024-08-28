@@ -62,6 +62,10 @@
 	; end
 
 
-	dw BANK(LickitungPicFront), BANK(LickitungPicBack)
+	db BANK(LickitungPicFront)
+	db 0
+	db BANK(LickitungPicBack)
+	db BANK(LickitungPicBackSW)
 
-	dw 1, LickitungPicBack
+	dw 0, LickitungPicBack
+

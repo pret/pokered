@@ -37,6 +37,10 @@
 	; end
 
 
-	dw BANK(ShellderPicFront), BANK(ShellderPicBack)
+	db BANK(ShellderPicFront)
+	db 0
+	db BANK(ShellderPicBack)
+	db BANK(ShellderPicBackSW)
 
-	dw 1, ShellderPicBack
+	dw 0, ShellderPicBack
+

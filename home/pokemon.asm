@@ -388,76 +388,7 @@ GetMonHeader::
 	ld a, BANK(BaseStats)
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
-	push bc
-	push de
-	push hl
-	ld a, [wd11e]
-	push af
-	; TODO: factor out of home bank because it's getting complicated
-	ld a, [wd0b5]
-	ld [wd11e], a
-	ld de, FossilKabutopsPic
-	ld b, $66 ; size of Kabutops fossil and Ghost sprites
-	cp FOSSIL_KABUTOPS ; Kabutops fossil
-	jr z, .specialID
-	ld de, GhostPic
-	cp MON_GHOST ; Ghost
-	jr z, .specialID
-	ld de, FossilAerodactylPic
-	ld b, $77 ; size of Aerodactyl fossil sprite
-	cp FOSSIL_AERODACTYL ; Aerodactyl fossil
-	jr z, .specialID
-	cp ARMORED_MEWTWO
-	jr z, .armored_mewtwo
-	cp POWERED_HAUNTER
-	jr z, .powered_haunter
-	cp HARDENED_ONIX
-	jr z, .hardened_onix
-	cp FLOATING_MAGNETON
-	jr z, .floating_magneton
-	predef IndexToPokedex   ; convert pokemon ID in [wd11e] to pokedex number
-	ld a, [wd11e]
-	and a
-	jr z, .missingno ; PureRGBnote: ADDED: index of 0 is missingno
-	dec a
-	ld bc, BASE_DATA_SIZE
-	ld hl, BaseStats
-	call AddNTimes
-	jr .copyBaseStats
-.missingno
-	ld hl, MissingnoBaseStats
-	jr .copyBaseStats
-.specialID
-	ld hl, wMonHSpriteDim
-	ld a, b
-	ld [hli], a ; write sprite dimensions
-	ld a, e
-	ld [hli], a ; write front sprite pointer
-	ld [hl], d
-	jr .done
-.floating_magneton
-	ld hl, FloatingMagnetonBaseStats
-	jr .copyBaseStats
-.hardened_onix
-	ld hl, HardenedOnixBaseStats
-	jr .copyBaseStats
-.powered_haunter
-	ld hl, PoweredHaunterBaseStats
-	jr .copyBaseStats
-.armored_mewtwo
-	ld hl, ArmoredMewtwoBaseStats 
-.copyBaseStats
-	ld bc, BASE_DATA_SIZE
-	ld de, wMonHeader
-	rst _CopyData ; PureRGBnote: CHANGED: mew header now in same bank as rest of base stat data so no need to farcopy
-.done
-	ld a, [wd0b5]
-	ld [wMonHIndex], a
-	pop af
-	ld [wd11e], a
-	pop hl
-	pop de
-	pop bc
+	call GetMonHeader2 ; moved to BaseStats bank because it was getting unwieldy
 	pop af
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a

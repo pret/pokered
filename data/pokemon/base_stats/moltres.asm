@@ -42,6 +42,10 @@
 	; end
 
 
-	dw BANK(MoltresPicFront), BANK(MoltresPicBack)
+	db BANK(MoltresPicFront)
+	db 0
+	db BANK(MoltresPicBack)
+	db BANK(MoltresPicBackSW)
 
-	dw 1, MoltresPicBack
+	dw 0, MoltresPicBack
+

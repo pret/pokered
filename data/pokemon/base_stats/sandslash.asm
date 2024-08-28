@@ -45,6 +45,10 @@
 	STRENGTH
 	; end
 
-	dw BANK(SandslashPicFront), BANK(SandslashPicBack)
+	db BANK(SandslashPicFront)
+	db 0
+	db BANK(SandslashPicBack)
+	db BANK(SandslashPicBackSW)
 
-	dw 1, SandslashPicBack
+	dw 0, SandslashPicBack
+

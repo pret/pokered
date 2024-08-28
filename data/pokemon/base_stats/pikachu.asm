@@ -46,6 +46,10 @@
 	; end
 
 
-	dw BANK(PikachuPicFront), BANK(PikachuPicBack)
+	db BANK(PikachuPicFront)
+	db 0
+	db BANK(PikachuPicBack)
+	db BANK(PikachuPicBackSW)
 
-	dw 1, PikachuPicBack
+	dw 0, PikachuPicBack
+

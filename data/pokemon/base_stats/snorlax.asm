@@ -51,6 +51,10 @@
 	; end
 
 
-	dw BANK(SnorlaxPicFront), BANK(SnorlaxPicBack)
+	db BANK(SnorlaxPicFront)
+	db 0
+	db BANK(SnorlaxPicBack)
+	db BANK(SnorlaxPicBackSW)
 
-	dw 1, SnorlaxPicBack
+	dw 0, SnorlaxPicBack
+

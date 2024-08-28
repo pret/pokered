@@ -43,6 +43,10 @@
 	; end
 
 
-	dw BANK(ScytherPicFront), BANK(ScytherPicBack)
+	db BANK(ScytherPicFront)
+	db BANK(ScytherPicFrontAlt)
+	db BANK(ScytherPicBack)
+	db BANK(ScytherPicBackSW)
 
-	dw 1, ScytherPicBack
+	dw ScytherPicFrontAlt, ScytherPicBack
+

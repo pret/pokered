@@ -43,6 +43,10 @@
 	FLASH
 	; end
 
-	dw BANK(TentacruelPicFront), BANK(TentacruelPicBack)
+	db BANK(TentacruelPicFront)
+	db BANK(TentacruelPicFrontAlt)
+	db BANK(TentacruelPicBack)
+	db BANK(TentacruelPicBackSW)
 
 	dw TentacruelPicFrontAlt, TentacruelPicBack
+

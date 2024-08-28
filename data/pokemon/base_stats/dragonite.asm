@@ -48,6 +48,10 @@
 	FLASH
 	; end
 
-	dw BANK(DragonitePicFront), BANK(DragonitePicBack)
+	db BANK(DragonitePicFront)
+	db 0
+	db BANK(DragonitePicBack)
+	db BANK(DragonitePicBackSW)
 
-	dw 1, DragonitePicBack
+	dw 0, DragonitePicBack
+

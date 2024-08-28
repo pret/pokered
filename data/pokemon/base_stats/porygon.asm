@@ -45,6 +45,10 @@
 	; end
 
 
-	dw BANK(PorygonPicFront), BANK(PorygonPicBack)
+	db BANK(PorygonPicFront)
+	db 0
+	db BANK(PorygonPicBack)
+	db BANK(PorygonPicBackSW)
 
-	dw 1, PorygonPicBack
+	dw 0, PorygonPicBack
+

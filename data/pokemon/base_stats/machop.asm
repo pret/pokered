@@ -42,6 +42,10 @@
 	; end
 
 
-	dw BANK(MachopPicFront), BANK(MachopPicBack)
+	db BANK(MachopPicFront)
+	db BANK(MachopPicFrontAlt)
+	db BANK(MachopPicBack)
+	db BANK(MachopPicBackSW)
 
 	dw MachopPicFrontAlt, MachopPicBack
+

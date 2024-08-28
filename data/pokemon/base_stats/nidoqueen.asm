@@ -56,6 +56,10 @@
 	FLASH
 	; end
 
-	dw BANK(NidoqueenPicFront), BANK(NidoqueenPicBack)
+	db BANK(NidoqueenPicFront)
+	db 0
+	db BANK(NidoqueenPicBack)
+	db BANK(NidoqueenPicBackSW)
 
-	dw 1, NidoqueenPicBack
+	dw 0, NidoqueenPicBack
+

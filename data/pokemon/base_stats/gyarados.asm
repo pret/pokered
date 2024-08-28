@@ -42,6 +42,10 @@
 	; end
 
 
-	dw BANK(GyaradosPicFront), BANK(GyaradosPicBack)
+	db BANK(GyaradosPicFront)
+	db 0
+	db BANK(GyaradosPicBack)
+	db BANK(GyaradosPicBackSW)
 
-	dw 1, GyaradosPicBack
+	dw 0, GyaradosPicBack
+

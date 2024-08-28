@@ -51,6 +51,10 @@
 	; end
 
 
-	dw BANK(ElectabuzzPicFront), BANK(ElectabuzzPicBack)
+	db BANK(ElectabuzzPicFront)
+	db BANK(ElectabuzzPicFrontAlt)
+	db BANK(ElectabuzzPicBack)
+	db BANK(ElectabuzzPicBackSW)
 
 	dw ElectabuzzPicFrontAlt, ElectabuzzPicBack
+

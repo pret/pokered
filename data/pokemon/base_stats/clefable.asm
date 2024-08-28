@@ -55,6 +55,10 @@
 	FLASH
 	; end
 
-	dw BANK(ClefablePicFront), BANK(ClefablePicBack)
+	db BANK(ClefablePicFront)
+	db 0
+	db BANK(ClefablePicBack)
+	db BANK(ClefablePicBackSW)
 
-	dw 1, ClefablePicBack
+	dw 0, ClefablePicBack
+

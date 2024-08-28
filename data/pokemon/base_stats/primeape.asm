@@ -45,6 +45,10 @@
 	STRENGTH
 	; end
 
-	dw BANK(PrimeapePicFront), BANK(PrimeapePicBack)
+	db BANK(PrimeapePicFront)
+	db 0
+	db BANK(PrimeapePicBack)
+	db BANK(PrimeapePicBackSW)
 
-	dw 1, PrimeapePicBack
+	dw 0, PrimeapePicBack
+

@@ -35,6 +35,10 @@
 	STRENGTH
 	; end
 
-	dw BANK(DugtrioPicFront), BANK(DugtrioPicBack)
+	db BANK(DugtrioPicFront)
+	db 0
+	db BANK(DugtrioPicBack)
+	db BANK(DugtrioPicBackSW)
 
-	dw 1, DugtrioPicBack
+	dw 0, DugtrioPicBack
+

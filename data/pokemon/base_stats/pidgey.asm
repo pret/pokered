@@ -37,6 +37,10 @@
 	; end
 
 
-	dw BANK(PidgeyPicFront), BANK(PidgeyPicBack)
+	db BANK(PidgeyPicFront)
+	db 0
+	db BANK(PidgeyPicBack)
+	db BANK(PidgeyPicBackSW)
 
-	dw 1, PidgeyPicBack
+	dw 0, PidgeyPicBack
+

@@ -39,6 +39,10 @@
 	; end
 
 
-	dw BANK(BellsproutPicFront), BANK(BellsproutPicBack)
+	db BANK(BellsproutPicFront)
+	db 0
+	db BANK(BellsproutPicBack)
+	db BANK(BellsproutPicBackSW)
 
-	dw 1, BellsproutPicBack
+	dw 0, BellsproutPicBack
+

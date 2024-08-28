@@ -42,6 +42,10 @@
 	; end
 
 
-	dw BANK(DratiniPicFront), BANK(DratiniPicBack)
+	db BANK(DratiniPicFront)
+	db 0
+	db BANK(DratiniPicBack)
+	db BANK(DratiniPicBackSW)
 
-	dw 1, DratiniPicBack
+	dw 0, DratiniPicBack
+

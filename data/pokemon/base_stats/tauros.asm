@@ -43,6 +43,10 @@
 	STRENGTH
 	; end
 
-	dw BANK(TaurosPicFront), BANK(TaurosPicBack)
+	db BANK(TaurosPicFront)
+	db 0
+	db BANK(TaurosPicBack)
+	db BANK(TaurosPicBackSW)
 
-	dw 1, TaurosPicBack
+	dw 0, TaurosPicBack
+

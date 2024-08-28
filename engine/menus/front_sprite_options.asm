@@ -1,7 +1,7 @@
 ; PureRGBnote: ADDED: one of the new pages in the options menu. This one's one of the two pages for options related to game sprites.
 DEF FRONT_SPRITE_OPTIONS_PAGE_1_COUNT EQU 7 ; number of options on this page
 DEF FRONT_SPRITE_OPTIONS_PAGE_1_NUMBER EQU 1 ; must be 1 digit.
-DEF HOW_MANY_FRONT_SPRITE_OPTIONS_PAGES EQU 4
+DEF HOW_MANY_FRONT_SPRITE_OPTIONS_PAGES EQU 5
 
 ; format: "bit set" x position, "bit not set" x position, which bit it is, pointer to wram variable
 FrontSpriteOptionsXPosBitData:
@@ -27,7 +27,7 @@ FrontSpriteOptionsHeader:
 	dw SetFrontSpriteOptionsFromCursorPositions
 	dw FrontSpriteOptionsLeftRightFuncs
 	dw DisplayFrontSpriteOptions2
-	dw DisplayFrontSpriteOptions4
+	dw DisplayFrontSpriteOptions5
 	dw FrontSpriteSelectButtonDefault
 	dw OptionsDoNothing
 	; fall through

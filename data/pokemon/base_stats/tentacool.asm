@@ -42,6 +42,10 @@
 	; end
 
 
-	dw BANK(TentacoolPicFront), BANK(TentacoolPicBack)
+	db BANK(TentacoolPicFront)
+	db 0
+	db BANK(TentacoolPicBack)
+	db BANK(TentacoolPicBackSW)
 
-	dw 1, TentacoolPicBack
+	dw 0, TentacoolPicBack
+

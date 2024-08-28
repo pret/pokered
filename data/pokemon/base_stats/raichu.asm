@@ -47,6 +47,10 @@
 	FLASH
 	; end
 
-	dw BANK(RaichuPicFront), BANK(RaichuPicBack)
+	db BANK(RaichuPicFront)
+	db 0
+	db BANK(RaichuPicBack)
+	db BANK(RaichuPicBackSW)
 
-	dw 1, RaichuPicBack
+	dw 0, RaichuPicBack
+

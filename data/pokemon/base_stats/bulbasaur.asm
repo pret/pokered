@@ -43,10 +43,11 @@
 	FLASH
 	; end
 
-	dw BANK(BulbasaurPicFront), BANK(BulbasaurPicBack)
+	db BANK(BulbasaurPicFront)
+	db BANK(BulbasaurPicFrontAlt)
+	db BANK(BulbasaurPicBack)
+	db BANK(BulbasaurPicBackSW)
 
-	dw BulbasaurPicRGFront, BulbasaurPicBack
+	dw BulbasaurPicFrontAlt, BulbasaurPicBack
 
-	
 
-	; end

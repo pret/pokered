@@ -39,6 +39,10 @@
 	; end
 
 
-	dw BANK(FearowPicFront), BANK(FearowPicBack)
+	db BANK(FearowPicFront)
+	db 0
+	db BANK(FearowPicBack)
+	db BANK(FearowPicBackSW)
 
-	dw 1, FearowPicBack
+	dw 0, FearowPicBack
+

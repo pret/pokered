@@ -35,6 +35,10 @@
 	; end
 
 
-	dw BANK(GastlyPicFront), BANK(GastlyPicBack)
+	db BANK(GastlyPicFront)
+	db 0
+	db BANK(GastlyPicBack)
+	db BANK(GastlyPicBackSW)
 
-	dw 1, GastlyPicBack
+	dw 0, GastlyPicBack
+

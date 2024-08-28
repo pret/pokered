@@ -39,6 +39,10 @@
 	FLASH
 	; end
 
-	dw BANK(GloomPicFront), BANK(GloomPicBack)
+	db BANK(GloomPicFront)
+	db 0
+	db BANK(GloomPicBack)
+	db BANK(GloomPicBackSW)
 
-	dw 1, GloomPicBack
+	dw 0, GloomPicBack
+

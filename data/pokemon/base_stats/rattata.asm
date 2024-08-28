@@ -41,6 +41,10 @@
 	; end
 
 
-	dw BANK(RattataPicFront), BANK(RattataPicBack)
+	db BANK(RattataPicFront)
+	db 0
+	db BANK(RattataPicBack)
+	db BANK(RattataPicBackSW)
 
-	dw 1, RattataPicBack
+	dw 0, RattataPicBack
+

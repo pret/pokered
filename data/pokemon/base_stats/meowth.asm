@@ -43,6 +43,10 @@
 	; end
 
 
-	dw BANK(MeowthPicFront), BANK(MeowthPicBack)
+	db BANK(MeowthPicFront)
+	db 0
+	db BANK(MeowthPicBack)
+	db BANK(MeowthPicBackSW)
 
-	dw 1, MeowthPicBack
+	dw 0, MeowthPicBack
+

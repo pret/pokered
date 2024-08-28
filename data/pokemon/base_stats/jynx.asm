@@ -47,6 +47,10 @@
 	; end
 
 
-	dw BANK(JynxPicFront), BANK(JynxPicBack)
+	db BANK(JynxPicFront)
+	db BANK(JynxPicFrontAlt)
+	db BANK(JynxPicBack)
+	db BANK(JynxPicBackSW)
 
-	dw 1, JynxPicBack
+	dw JynxPicFrontAlt, JynxPicBack
+

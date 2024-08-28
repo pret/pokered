@@ -41,6 +41,10 @@
 	; end
 
 
-	dw BANK(StaryuPicFront), BANK(StaryuPicBack)
+	db BANK(StaryuPicFront)
+	db 0
+	db BANK(StaryuPicBack)
+	db BANK(StaryuPicBackSW)
 
-	dw 1, StaryuPicBack
+	dw 0, StaryuPicBack
+

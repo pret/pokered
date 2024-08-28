@@ -36,6 +36,10 @@
 	; end
 
 
-	dw BANK(ExeggcutePicFront), BANK(ExeggcutePicBack)
+	db BANK(ExeggcutePicFront)
+	db BANK(ExeggcutePicFrontAlt)
+	db BANK(ExeggcutePicBack)
+	db BANK(ExeggcutePicBackSW)
 
 	dw ExeggcutePicFrontAlt, ExeggcutePicBack
+

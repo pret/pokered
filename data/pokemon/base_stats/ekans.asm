@@ -43,6 +43,10 @@
 	; end
 
 
-	dw BANK(EkansPicFront), BANK(EkansPicBack)
+	db BANK(EkansPicFront)
+	db 0
+	db BANK(EkansPicBack)
+	db BANK(EkansPicBackSW)
 
-	dw 1, EkansPicBack
+	dw 0, EkansPicBack
+

@@ -44,6 +44,10 @@
 	FLASH
 	; end
 
-	dw BANK(PoliwhirlPicFront), BANK(PoliwhirlPicBack)
+	db BANK(PoliwhirlPicFront)
+	db 0
+	db BANK(PoliwhirlPicBack)
+	db BANK(PoliwhirlPicBackSW)
 
-	dw 1, PoliwhirlPicBack
+	dw 0, PoliwhirlPicBack
+

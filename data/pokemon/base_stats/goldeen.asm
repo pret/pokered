@@ -38,6 +38,10 @@
 	; end
 
 
-	dw BANK(GoldeenPicFront), BANK(GoldeenPicBack)
+	db BANK(GoldeenPicFront)
+	db 0
+	db BANK(GoldeenPicBack)
+	db BANK(GoldeenPicBackSW)
 
-	dw 1, GoldeenPicBack
+	dw 0, GoldeenPicBack
+

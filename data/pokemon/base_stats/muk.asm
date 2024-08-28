@@ -50,6 +50,10 @@
 	FLASH
 	; end
 
-	dw BANK(MukPicFront), BANK(MukPicBack)
+	db BANK(MukPicFront)
+	db 0
+	db BANK(MukPicBack)
+	db BANK(MukPicBackSW)
 
-	dw 1, MukPicBack
+	dw 0, MukPicBack
+

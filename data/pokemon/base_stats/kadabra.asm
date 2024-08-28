@@ -33,6 +33,10 @@
 	FLASH
 	; end
 
-	dw BANK(KadabraPicFront), BANK(KadabraPicBack)
+	db BANK(KadabraPicFront)
+	db BANK(KadabraPicFrontAlt)
+	db BANK(KadabraPicBack)
+	db BANK(KadabraPicBackSW)
 
 	dw KadabraPicFrontAlt, KadabraPicBack
+

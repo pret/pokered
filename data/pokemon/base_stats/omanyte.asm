@@ -44,6 +44,10 @@
 	FLASH
 	; end
 
-	dw BANK(OmanytePicFront), BANK(OmanytePicBack)
+	db BANK(OmanytePicFront)
+	db BANK(OmanytePicFrontAlt)
+	db BANK(OmanytePicBack)
+	db BANK(OmanytePicBackSW)
 
-	dw 1, OmanytePicBack
+	dw OmanytePicFrontAlt, OmanytePicBack
+

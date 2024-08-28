@@ -38,6 +38,10 @@
 	; end
 
 
-	dw BANK(PidgeotPicFront), BANK(PidgeotPicBack)
+	db BANK(PidgeotPicFront)
+	db BANK(PidgeotPicFrontAlt)
+	db BANK(PidgeotPicBack)
+	db BANK(PidgeotPicBackSW)
 
 	dw PidgeotPicFrontAlt, PidgeotPicBack
+

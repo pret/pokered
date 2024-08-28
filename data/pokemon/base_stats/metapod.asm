@@ -29,6 +29,10 @@
 	FLASH
 	;end
 
-	dw BANK(MetapodPicFront), BANK(MetapodPicBack)
+	db BANK(MetapodPicFront)
+	db 0
+	db BANK(MetapodPicBack)
+	db BANK(MetapodPicBackSW)
 
-	dw 1, MetapodPicBack
+	dw 0, MetapodPicBack
+

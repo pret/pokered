@@ -223,7 +223,7 @@ SECTION "Pics 5", ROMX, BANK[PICS_5]
 
 BulbasaurPicFront::    INCBIN "gfx/pokemon/front/bulbasaur.pic"
 BulbasaurPicBackSW::   INCBIN "gfx/pokemon/back_sw/bulbasaurb.pic"
-BulbasaurPicRGFront::  INCBIN "gfx/pokemon/front_alt/bulbasaur.pic"
+BulbasaurPicFrontAlt::  INCBIN "gfx/pokemon/front_alt/bulbasaur.pic"
 VenusaurPicFront::     INCBIN "gfx/pokemon/front/venusaur.pic"
 VenusaurPicBackSW::    INCBIN "gfx/pokemon/back_sw/venusaurb.pic"
 SeakingPicFront::      INCBIN "gfx/pokemon/front/seaking.pic"
@@ -336,7 +336,7 @@ ScytherPicBackSW::    INCBIN "gfx/pokemon/back_sw/scytherb.pic"
 StaryuPicFront::      INCBIN "gfx/pokemon/front/staryu.pic"
 StaryuPicBackSW::     INCBIN "gfx/pokemon/back_sw/staryub.pic"
 BlastoisePicFront::   INCBIN "gfx/pokemon/front/blastoise.pic"
-BlastoisePicRGFront:: INCBIN "gfx/pokemon/front_alt/blastoise.pic"
+BlastoisePicFrontAlt:: INCBIN "gfx/pokemon/front_alt/blastoise.pic"
 BlastoisePicBackSW::  INCBIN "gfx/pokemon/back_sw/blastoiseb.pic"
 MankeyPicFront::      INCBIN "gfx/pokemon/front/mankey.pic"
 MankeyPicBackSW::     INCBIN "gfx/pokemon/back_sw/mankeyb.pic"
@@ -581,7 +581,7 @@ WeepinbellPicBack::    INCBIN "gfx/pokemon/back/weepinbellb.pic"
 OddishPicBack::        INCBIN "gfx/pokemon/back/oddishb.pic"
 GloomPicBack::         INCBIN "gfx/pokemon/back/gloomb.pic"
 VileplumePicBack::     INCBIN "gfx/pokemon/back/vileplumeb.pic"
-ArmoredMewtwoBack::    INCBIN "gfx/pokemon/back/armored_mewtwob.pic"
+ArmoredMewtwoPicBack::    INCBIN "gfx/pokemon/back/armored_mewtwob.pic"
 
 KoffingPicFront::     INCBIN "gfx/pokemon/front/koffing.pic"
 KoffingPicBackSW::    INCBIN "gfx/pokemon/back_sw/koffingb.pic"
@@ -600,6 +600,16 @@ RookiePic::        INCBIN "gfx/unused_prototype_sprites/rookie.pic"
 SoldierPic::       INCBIN "gfx/unused_prototype_sprites/soldier.pic"
 ChiefPic::         INCBIN "gfx/unused_prototype_sprites/chief.pic"
 GymGuidePic::      INCBIN "gfx/unused_prototype_sprites/gym_guide.pic"
+
+SECTION "Pics 11", ROMX
+
+ArticunoPicFrontAlt:: INCBIN "gfx/pokemon/front_alt/articuno.pic"
+JynxPicFrontAlt:: INCBIN "gfx/pokemon/front_alt/jynx.pic"
+FarfetchdPicFrontAlt:: INCBIN "gfx/pokemon/front_alt/farfetchd.pic"
+OmanytePicFrontAlt:: INCBIN "gfx/pokemon/front_alt/omanyte.pic"
+SpearowPicFrontAlt:: INCBIN "gfx/pokemon/front_alt/spearow.pic"
+ScytherPicFrontAlt:: INCBIN "gfx/pokemon/front_alt/scyther.pic"
+GolduckPicFrontAlt:: INCBIN "gfx/pokemon/front_alt/golduck.pic"
 
 SECTION "Type Icons", ROMX
 

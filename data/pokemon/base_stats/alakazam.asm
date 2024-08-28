@@ -34,6 +34,9 @@
 	FLASH
 	; end
 
-	dw BANK(AlakazamPicFront), BANK(AlakazamPicBack)
+	db BANK(AlakazamPicFront)
+	db 0 ; no alt front sprite
+	db BANK(AlakazamPicBack)
+	db BANK(AlakazamPicBackSW)
 
-	dw 1, AlakazamPicBack
+	dw 0, AlakazamPicBack

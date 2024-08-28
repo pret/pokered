@@ -55,6 +55,10 @@
 	FLASH
 	; end
 
-	dw BANK(GolduckPicFront), BANK(GolduckPicBack)
+	db BANK(GolduckPicFront)
+	db BANK(GolduckPicFrontAlt)
+	db BANK(GolduckPicBack)
+	db BANK(GolduckPicBackSW)
 
-	dw 1, GolduckPicBack
+	dw GolduckPicFrontAlt, GolduckPicBack
+

@@ -43,6 +43,10 @@
 	FLASH
 	; end
 
-	dw BANK(IvysaurPicFront), BANK(IvysaurPicBack)
+	db BANK(IvysaurPicFront)
+	db 0
+	db BANK(IvysaurPicBack)
+	db BANK(IvysaurPicBackSW)
 
-	dw 1, IvysaurPicBack
+	dw 0, IvysaurPicBack
+

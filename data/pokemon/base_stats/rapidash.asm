@@ -41,6 +41,10 @@
 	FLASH
 	; end
 
-	dw BANK(RapidashPicFront), BANK(RapidashPicBack)
+	db BANK(RapidashPicFront)
+	db 0
+	db BANK(RapidashPicBack)
+	db BANK(RapidashPicBackSW)
 
-	dw 1, RapidashPicBack
+	dw 0, RapidashPicBack
+

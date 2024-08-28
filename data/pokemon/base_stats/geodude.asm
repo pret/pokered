@@ -40,6 +40,10 @@
 	; end
 
 
-	dw BANK(GeodudePicFront), BANK(GeodudePicBack)
+	db BANK(GeodudePicFront)
+	db 0
+	db BANK(GeodudePicBack)
+	db BANK(GeodudePicBackSW)
 
-	dw 1, GeodudePicBack
+	dw 0, GeodudePicBack
+

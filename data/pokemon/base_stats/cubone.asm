@@ -50,6 +50,10 @@
 	; end
 
 
-	dw BANK(CubonePicFront), BANK(CubonePicBack)
+	db BANK(CubonePicFront)
+	db 0
+	db BANK(CubonePicBack)
+	db BANK(CubonePicBackSW)
 
-	dw 1, CubonePicBack
+	dw 0, CubonePicBack
+

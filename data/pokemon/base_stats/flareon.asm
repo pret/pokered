@@ -43,6 +43,10 @@
 	FLASH
 	; end
 
-	dw BANK(FlareonPicFront), BANK(FlareonPicBack)
+	db BANK(FlareonPicFront)
+	db 0
+	db BANK(FlareonPicBack)
+	db BANK(FlareonPicBackSW)
 
-	dw 1, FlareonPicBack
+	dw 0, FlareonPicBack
+

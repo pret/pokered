@@ -41,6 +41,10 @@
 	; end
 
 
-	dw BANK(TangelaPicFront), BANK(TangelaPicBack)
+	db BANK(TangelaPicFront)
+	db 0
+	db BANK(TangelaPicBack)
+	db BANK(TangelaPicBackSW)
 
-	dw 1, TangelaPicBack
+	dw 0, TangelaPicBack
+

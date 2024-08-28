@@ -54,6 +54,10 @@
 	; end
 
 
-	dw BANK(JigglypuffPicFront), BANK(JigglypuffPicBack)
+	db BANK(JigglypuffPicFront)
+	db 0
+	db BANK(JigglypuffPicBack)
+	db BANK(JigglypuffPicBackSW)
 
-	dw 1, JigglypuffPicBack
+	dw 0, JigglypuffPicBack
+

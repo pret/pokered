@@ -1691,8 +1691,10 @@ wMonHMoves:: ds NUM_MOVES
 wMonHGrowthRate:: db
 wMonHLearnset:: flag_array NUM_TMS + NUM_HMS
 ; PureRGBnote: ADDED: new properties in the pokemon header - these take up new space in WRAM.
-wMonHPicBank:: dw ; shifts
-wMonHBackPicBank:: dw ; shifts
+wMonHPicBank:: db ; shifts
+wMonHAltPicBank:: db ; shifts
+wMonHBackPicBank:: db ; shifts
+wMonHSpaceWorldBackPicBank:: db ; shifts
 wMonHAltFrontSprite:: dw ; shifts
 wMonHAltBackSprite:: dw ; shifts
     ds 1 ; unused byte

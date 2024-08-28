@@ -4,27 +4,27 @@ DEF FRONT_SPRITE_OPTIONS_PAGE_4_NUMBER EQU 4 ; must be 1 digit.
 
 ; format: "bit set" x position, "bit not set" x position, which bit it is, pointer to wram variable
 FrontSpriteOptions4XPosBitData:
+	db 16, 13, BIT_ONIX_SPRITE
+	dw wSpriteOptions3
+	db 16, 13, BIT_VOLTORB_SPRITE
+	dw wSpriteOptions3
+	db 16, 13, BIT_EXEGGCUTE_SPRITE
+	dw wSpriteOptions3
 	db 16, 13, BIT_EXEGGUTOR_SPRITE
 	dw wSpriteOptions2
 	db 16, 13, BIT_KOFFING_SPRITE
 	dw wSpriteOptions3
 	db 16, 13, BIT_STARMIE_SPRITE
 	dw wSpriteOptions4
-	db 16, 13, BIT_PINSIR_SPRITE
-	dw wSpriteOptions4
-	db 16, 13, BIT_ELECTABUZZ_SPRITE
-	dw wSpriteOptions2
-	db 16, 13, BIT_ZAPDOS_SPRITE
-	dw wSpriteOptions4
-	db 16, 13, BIT_MEWTWO_SPRITE
-	dw wSpriteOptions
+	db 16, 13, FLAG_SCYTHER_SPRITE % 8
+	dw wEventFlags + (FLAG_SCYTHER_SPRITE / 8)
 
 FrontSpriteOptions4Header:
 	dw DrawFrontSpriteOptions4Menu
 	dw FrontSpriteOptions4SetCursorPositionActions
 	dw SetFrontSpriteOptions4FromCursorPositions
 	dw FrontSpriteOptions4LeftRightFuncs
-	dw DisplayFrontSpriteOptions
+	dw DisplayFrontSpriteOptions5
 	dw DisplayFrontSpriteOptions3
 	dw FrontSpriteSelectButtonDefault
 	dw OptionsDoNothing
@@ -42,13 +42,13 @@ FrontSpriteOptions4Data:
 
 FrontSpriteOptions4Text:
 	db   "SPRITES→FRONT 4"
+	next " ONIX:       RB RG"
+	next " VOLTORB:    RB RG"
+	next " EXEGGCUTE:  RB Y "
 	next " EXEGGUTOR:  Y  RB"
 	next " KOFFING:    RG RB"
 	next " STARMIE:    RB RG"
-	next " PINSIR:     RB RG"
-	next " ELECTABUZZ: RB RG"
-	next " ZAPDOS:     RB RG"
-	next " MEWTWO:     RB RG@"
+	next " SCYTHER:    RB RG@"
 
 DrawFrontSpriteOptions4Menu:
 	hlcoord 0, 0

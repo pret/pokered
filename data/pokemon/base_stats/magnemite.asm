@@ -36,6 +36,10 @@
 	; end
 
 
-	dw BANK(MagnemitePicFront), BANK(MagnemitePicBack)
+	db BANK(MagnemitePicFront)
+	db 0
+	db BANK(MagnemitePicBack)
+	db BANK(MagnemitePicBackSW)
 
-	dw 1, MagnemitePicBack
+	dw 0, MagnemitePicBack
+

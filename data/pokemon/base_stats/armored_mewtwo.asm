@@ -57,6 +57,10 @@
 	; end
 
 
-	dw BANK(ArmoredMewtwoPicFront), BANK(ArmoredMewtwoBack)
+	db BANK(ArmoredMewtwoPicFront)
+	db BANK(ArmoredMewtwoPicFrontAlt)
+	db BANK(ArmoredMewtwoPicBack)
+	db BANK(ArmoredMewtwoPicBackSW)
 
-	dw ArmoredMewtwoPicFrontAlt, ArmoredMewtwoBack
+	dw ArmoredMewtwoPicFrontAlt, ArmoredMewtwoPicBack
+

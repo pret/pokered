@@ -42,6 +42,10 @@
 	; end
 
 
-	dw BANK(DoduoPicFront), BANK(DoduoPicBack)
+	db BANK(DoduoPicFront)
+	db 0
+	db BANK(DoduoPicBack)
+	db BANK(DoduoPicBackSW)
 
-	dw 1, DoduoPicBack
+	dw 0, DoduoPicBack
+

@@ -46,6 +46,10 @@
 	STRENGTH,\
 	FLASH
 
-	dw BANK(BlastoisePicFront), BANK(BlastoisePicBack)
+	db BANK(BlastoisePicFront)
+	db BANK(BlastoisePicFrontAlt)
+	db BANK(BlastoisePicBack)
+	db BANK(BlastoisePicBackSW)
 
-	dw BlastoisePicRGFront, BlastoisePicBack
+	dw BlastoisePicFrontAlt, BlastoisePicBack
+

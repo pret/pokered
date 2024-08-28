@@ -40,6 +40,10 @@
 	FLASH
 	; end
 
-	dw BANK(ExeggutorPicFront), BANK(ExeggutorPicBack)
+	db BANK(ExeggutorPicFront)
+	db BANK(ExeggutorPicFrontAlt)
+	db BANK(ExeggutorPicBack)
+	db BANK(ExeggutorPicBackSW)
 
 	dw ExeggutorPicFrontAlt, ExeggutorPicBack
+

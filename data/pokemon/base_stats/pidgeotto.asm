@@ -36,6 +36,10 @@
 	FLY
 	; end
 
-	dw BANK(PidgeottoPicFront), BANK(PidgeottoPicBack)
+	db BANK(PidgeottoPicFront)
+	db BANK(PidgeottoPicFrontAlt)
+	db BANK(PidgeottoPicBack)
+	db BANK(PidgeottoPicBackSW)
 
 	dw PidgeottoPicFrontAlt, PidgeottoPicBack
+

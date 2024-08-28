@@ -38,6 +38,10 @@
 	STRENGTH,\
 	FLASH
 
-	dw BANK(DewgongPicFront), BANK(DewgongPicBack)
+	db BANK(DewgongPicFront)
+	db 0
+	db BANK(DewgongPicBack)
+	db BANK(DewgongPicBackSW)
 
-	dw 1, DewgongPicBack
+	dw 0, DewgongPicBack
+

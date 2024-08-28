@@ -33,7 +33,10 @@
 	FLASH
 	; end
 
-	; TODO: since I used two words here instead of two bytes, can expand to 4 bytes and use the 2nd and 4th bytes for other data if necessary (like bank of alt front sprite)
-	dw BANK(AbraPicFront), BANK(AbraPicBack) ; PureRGBnote: ADDED: in pokemon base stat headers, these point to which bank the front and original back pic are stored in.
+	; PureRGBnote: ADDED: in pokemon base stat headers, these point to which bank the front and original back pic are stored in.
+	db BANK(AbraPicFront)
+	db BANK(AbraPicFrontAlt)
+	db BANK(AbraPicBack) 
+	db BANK(AbraPicBackSW)
 
 	dw AbraPicFrontAlt, AbraPicBack ; PureRGBnote: ADDED: the first byte is a pointer to alt front sprite if the pokemon has one, the second is a pointer to the original back sprite.

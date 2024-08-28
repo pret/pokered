@@ -39,6 +39,10 @@
 	; end
 
 
-	dw BANK(SeelPicFront), BANK(SeelPicBack)
+	db BANK(SeelPicFront)
+	db 0
+	db BANK(SeelPicBack)
+	db BANK(SeelPicBackSW)
 
-	dw 1, SeelPicBack
+	dw 0, SeelPicBack
+

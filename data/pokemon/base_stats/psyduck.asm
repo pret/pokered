@@ -54,6 +54,10 @@
 	; end
 
 
-	dw BANK(PsyduckPicFront), BANK(PsyduckPicBack)
+	db BANK(PsyduckPicFront)
+	db 0
+	db BANK(PsyduckPicBack)
+	db BANK(PsyduckPicBackSW)
 
-	dw 1, PsyduckPicBack
+	dw 0, PsyduckPicBack
+

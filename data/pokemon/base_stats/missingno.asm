@@ -73,6 +73,10 @@
 	; end
 
 
-	dw BANK(MissingnoPicFront), BANK(MissingnoPicBack)
+	db BANK(MissingnoPicFront)
+	db 0
+	db BANK(MissingnoPicBack)
+	db BANK(MissingnoPicBackSW)
 
-	dw 1, MissingnoPicBack
+	dw 0, MissingnoPicBack
+

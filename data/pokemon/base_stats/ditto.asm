@@ -17,6 +17,10 @@
 	tmhm
 	; end
 
-	dw BANK(DittoPicFront), BANK(DittoPicBack)
+	db BANK(DittoPicFront)
+	db 0
+	db BANK(DittoPicBack)
+	db BANK(DittoPicBackSW)
 
-	dw 1, DittoPicBack
+	dw 0, DittoPicBack
+

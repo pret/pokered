@@ -36,6 +36,10 @@
 	FLASH
 	; end
 
-	dw BANK(MagnetonPicFront), BANK(MagnetonPicBack)
+	db BANK(MagnetonPicFront)
+	db 0
+	db BANK(MagnetonPicBack)
+	db BANK(MagnetonPicBackSW)
 
-	dw 1, MagnetonPicBack
+	dw 0, MagnetonPicBack
+

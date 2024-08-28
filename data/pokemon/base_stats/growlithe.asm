@@ -39,6 +39,10 @@
 	; end
 
 
-	dw BANK(GrowlithePicFront), BANK(GrowlithePicBack)
+	db BANK(GrowlithePicFront)
+	db 0
+	db BANK(GrowlithePicBack)
+	db BANK(GrowlithePicBackSW)
 
-	dw 1, GrowlithePicBack
+	dw 0, GrowlithePicBack
+

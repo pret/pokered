@@ -45,6 +45,10 @@
 	FLASH
 	; end
 
-	dw BANK(NidorinoPicFront), BANK(NidorinoPicBack)
+	db BANK(NidorinoPicFront)
+	db BANK(NidorinoPicFrontAlt)
+	db BANK(NidorinoPicBack)
+	db BANK(NidorinoPicBackSW)
 
 	dw NidorinoPicFrontAlt, NidorinoPicBack
+

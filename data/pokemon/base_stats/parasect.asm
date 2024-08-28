@@ -45,6 +45,10 @@
 	FLASH
 	; end
 
-	dw BANK(ParasectPicFront), BANK(ParasectPicBack)
+	db BANK(ParasectPicFront)
+	db 0
+	db BANK(ParasectPicBack)
+	db BANK(ParasectPicBackSW)
 
-	dw 1, ParasectPicBack
+	dw 0, ParasectPicBack
+

@@ -160,6 +160,8 @@ _FrontSpriteGenericText::
 	line "RED/BLUE sprite."
 	para "Y: YELLOW version"
 	line "sprite."
+	para "SW: Spaceworld 97"
+	line "sprite."
 	para "Some sprites have"
 	line "been tweaked a"
 	cont "bit visually from"

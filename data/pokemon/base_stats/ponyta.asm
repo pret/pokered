@@ -40,6 +40,10 @@
 	; end
 
 
-	dw BANK(PonytaPicFront), BANK(PonytaPicBack)
+	db BANK(PonytaPicFront)
+	db 0
+	db BANK(PonytaPicBack)
+	db BANK(PonytaPicBackSW)
 
-	dw 1, PonytaPicBack
+	dw 0, PonytaPicBack
+

@@ -360,6 +360,7 @@ INCLUDE "engine/overworld/wild_mons.asm"
 INCLUDE "engine/overworld/wild_mon_alt_palettes.asm"
 
 SECTION "Evos Moves", ROMX
+INCLUDE "engine/pokemon/get_mon_header.asm"
 ; PureRGBnote: MOVED: moved from battle engine 7
 INCLUDE "engine/pokemon/evos_moves.asm"
 INCLUDE "data/pokemon/base_stats.asm"
@@ -415,6 +416,7 @@ INCLUDE "engine/menus/front_sprite_options.asm"
 INCLUDE "engine/menus/front_sprite_options2.asm"
 INCLUDE "engine/menus/front_sprite_options3.asm"
 INCLUDE "engine/menus/front_sprite_options4.asm"
+INCLUDE "engine/menus/front_sprite_options5.asm"
 INCLUDE "engine/gfx/mon_icons2.asm"
 INCLUDE "engine/overworld/select_button_functionality.asm"
 INCLUDE "engine/overworld/use_another_repel.asm"

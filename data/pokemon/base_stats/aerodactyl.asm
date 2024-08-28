@@ -42,6 +42,9 @@
 	; end
 
 
-	dw BANK(AerodactylPicFront), BANK(AerodactylPicBack)
+	db BANK(AerodactylPicFront)
+	db 0 ; no alt sprite
+	db BANK(AerodactylPicBack)
+	db BANK(AerodactylPicBackSW)
 
-	dw 1, AerodactylPicBack
+	dw 0, AerodactylPicBack
