@@ -1578,6 +1578,11 @@ _WhatText::
 	text "What?"
 	done
 
+_ViewModeText::
+	text "BOX viewer"
+	line "mode active."
+	done
+
 _DepositWhichMonText::
 	text "Deposit which"
 	line "#MON?"

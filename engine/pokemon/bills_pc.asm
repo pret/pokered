@@ -113,6 +113,7 @@ BillsPC_::
 BillsPCMenu:
 	ld a, [wParentMenuItem]
 	ld [wCurrentMenuItem], a
+	ResetFlag FLAG_VIEW_PC_PKMN
 	callfar LoadBillsPCExtraTiles
 	call LoadScreenTilesFromBuffer2DisableBGTransfer
 	hlcoord 0, 0
@@ -130,7 +131,7 @@ BillsPCMenu:
 	inc hl
 	ld a, 4
 	ld [hli], a ; wMaxMenuItem
-	ld a, A_BUTTON | B_BUTTON
+	ld a, A_BUTTON | B_BUTTON | SELECT
 	ld [hli], a ; wMenuWatchedKeys
 	xor a
 	ld [hli], a ; wLastMenuItem
@@ -146,7 +147,10 @@ BillsPCMenu:
 	ld a, 1
 	ldh [hAutoBGTransferEnabled], a
 	call Delay3
+.handleMenuInput
 	call HandleMenuInput
+	bit BIT_SELECT, a
+	jr nz, .select
 	bit BIT_B_BUTTON, a
 	jp nz, ExitBillsPC
 	call PlaceUnfilledArrowMenuCursor
@@ -160,6 +164,14 @@ BillsPCMenu:
 	jp z, BillsPCRelease ; release
 	cp $3
 	jp z, BillsPCChangeBox ; change box
+.select
+	ld a, [wCurrentMenuItem]
+	and a
+	jr nz, .handleMenuInput
+	ld [wParentMenuItem], a
+	SetFlag FLAG_VIEW_PC_PKMN
+	jp BillsPCWithdraw
+
 
 ExitBillsPC:
 	ld a, [wFlags_0xcd60]
@@ -259,6 +271,8 @@ BillsPCWithdraw:
 	rst _PrintText
 	jp BillsPCMenu
 .boxNotEmpty
+	CheckFlag FLAG_VIEW_PC_PKMN
+	jr nz, .viewStart
 	ld a, [wPartyCount]
 	cp PARTY_LENGTH
 	jr nz, .partyNotFull
@@ -267,10 +281,15 @@ BillsPCWithdraw:
 	ld hl, CantTakeMonText
 	rst _PrintText
 	jp BillsPCMenu
+.viewStart
+	ld hl, ViewMode
+	call .redrawTextBoxAndCurrentBox
 .partyNotFull
 	ld hl, wBoxCount
 	call DisplayMonListMenu
 	jp c, BillsPCMenu
+	CheckFlag FLAG_VIEW_PC_PKMN
+	jr nz, .viewPkmn
 	call BillsPCBackupListIndex
 	call DisplayDepositWithdrawMenu
 	jr nc, .doneWithdrawDialogBox
@@ -298,12 +317,21 @@ BillsPCWithdraw:
 	ld a, [wPartyCount]
 	cp PARTY_LENGTH
 	jp z, BillsPCMenu ; if party is full (can't withdraw more), exit the menu automatically
+	ld hl, WhatText
+	call .redrawTextBoxAndCurrentBox
+	jp BillsPCWithdraw ; otherwise go back to the menu
+.redrawTextBoxAndCurrentBox
+	push hl
 	ld hl, wd730
 	set 6, [hl] ; turn off letter printing delay so we get instant text
-	ld hl, WhatText
+	pop hl
 	rst _PrintText
-	call RedrawCurrentBoxPrompt
-	jp BillsPCWithdraw ; otherwise go back to the menu
+	jp RedrawCurrentBoxPrompt
+.viewPkmn
+	call DisplayDepositWithdrawMenu.viewStats
+	ld hl, ViewMode
+	call .redrawTextBoxAndCurrentBox
+	jp BillsPCWithdraw
 
 	
 
@@ -495,6 +523,8 @@ DisplayDepositWithdrawMenu:
 	call ReloadTilesetTilePatterns
 	call RunDefaultPaletteCommand
 	call LoadGBPal
+	CheckFlag FLAG_VIEW_PC_PKMN
+	jr nz, .exit
 	jr .loop
 
 DepositPCText:  db "DEPOSIT@"
@@ -509,6 +539,10 @@ SwitchOnText:
 
 WhatText:
 	text_far _WhatText
+	text_end
+
+ViewMode:
+	text_far _ViewModeText
 	text_end
 
 DepositWhichMonText:

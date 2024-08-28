@@ -971,7 +971,8 @@ DEF FLAG_SKIP_STAT_ANIMATION EQU const_value
 	const FLAG_SPINNER_TOGGLER
 	const FLAG_MAP_HAS_OVERWORLD_ANIMATION
 	const FLAG_FAST_AUTO_MOVEMENT
-	; 9 flag spaces remain
+	const FLAG_VIEW_PC_PKMN
+	; 8 flag spaces remain
 
 ; Indigo Plateau events
 	const_next $8E0
