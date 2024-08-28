@@ -153,33 +153,11 @@ PlayCry::
 
 GetCryData::
 ; Load cry data for monster a.
-; TODO: remap the duplicate cries to sound a bit more different based on an option
-	dec a
-	ld c, a
-	ld b, 0
-	ld hl, CryData
-	add hl, bc
-	add hl, bc
-	add hl, bc
-
-	ld a, BANK(CryData)
-	call BankswitchHome
-	ld a, [hli]
-	ld b, a ; cry id
-	ld a, [hli]
-	ld [wFrequencyModifier], a
-	ld a, [hl]
-	ld [wTempoModifier], a
-	call BankswitchBack
-
-	; Cry headers have 3 channels,
-	; and start from index CRY_SFX_START,
-	; so add 3 times the cry id.
-	ld a, b
-	ld c, CRY_SFX_START
-	rlca ; * 2
-	add b
-	add c
+	push de
+	ld e, a
+	callfar GetCryData2
+	ld a, d
+	pop de
 	ret
 
 DisplayPartyMenu::

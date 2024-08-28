@@ -197,3 +197,62 @@ CryData::
 	mon_cry SFX_CRY_25, $44, $20 ; Weepinbell
 	mon_cry SFX_CRY_25, $66, $CC ; Victreebel
 	assert_table_length NUM_POKEMON_INDEXES
+
+; input e = which pokemon
+GetCryData2::
+	push de
+	ld a, [wOptions2]
+	bit BIT_MUSIC, a
+	jr z, .notRemappableCry
+	ld a, e
+	ld de, 4
+	ld hl, RemappableCries
+	call IsInArray
+	jr nz, .notRemappableCry
+	inc hl
+	call .obtainCryDataFromHL
+	pop de
+	jr .gotCryData
+.notRemappableCry
+	pop de
+	dec e
+	ld d, 0
+	ld hl, CryData
+	add hl, de
+	add hl, de
+	add hl, de
+	call .obtainCryDataFromHL
+.gotCryData
+	; Cry headers have 3 channels,
+	; and start from index CRY_SFX_START,
+	; so add 3 times the cry id.
+	ld a, b
+	ld c, CRY_SFX_START
+	rlca ; * 2
+	add b
+	add c
+	ld d, a
+	ret
+.obtainCryDataFromHL
+	ld a, [hli]
+	ld b, a ; cry id
+	ld a, [hli]
+	ld [wFrequencyModifier], a
+	ld a, [hl]
+	ld [wTempoModifier], a
+	ret
+
+RemappableCries::
+	db OMANYTE
+	mon_cry SFX_CRY_1F, $FC, $15
+	db RHYHORN
+	mon_cry SFX_CRY_04, $0F, $00
+	db VILEPLUME
+	mon_cry SFX_CRY_23, $05, $FF
+	db DITTO
+	mon_cry SFX_CRY_0E, $82, $FF ;$D4
+	db POLIWHIRL
+	mon_cry SFX_CRY_0E, 119, 218 
+	db GOLDEEN
+	mon_cry SFX_CRY_16, 121, 208
+	db -1
