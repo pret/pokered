@@ -32,7 +32,7 @@ GBPalWhiteOut::
 	ldh [rOBP1], a
 	;fall through
 
-UpdatePal: ; shinpokerednote: gbcnote: gbc color code from pokeyellow
+UpdatePal:: ; shinpokerednote: gbcnote: gbc color code from pokeyellow
 	ldh [rOBP0], a
 	call UpdateGBCPal_BGP
 	call UpdateGBCPal_OBP0

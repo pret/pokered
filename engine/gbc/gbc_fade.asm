@@ -616,7 +616,7 @@ GBCFadeOutToBlack::
 	push af
 	
 	push de
-	call DelayFrame ; allow player sprite to refresh before doing the fadeout
+	rst _DelayFrame ; allow player sprite to refresh before doing the fadeout
 	ld de, FadePal4
 	farcall BufferAllPokeyellowColorsGBC		;back up all colors to a buffer space in wram
 	

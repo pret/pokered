@@ -108,15 +108,22 @@ GengarTransformation:
 	call DrawHaunterFaces
 	ld c, 20
 	rst _DelayFrames
+	call GBPalBlackOut
 	call LoadScreenTilesFromBuffer2
+	call Delay3
 	xor a
 	ld [wMapPalOffset], a
-	call LoadGBPal
 	call GBFadeInFromBlack
 	ld a, POWERED_HAUNTER
 	ld [wcf91], a
 	callfar ChangePartyPokemonSpecies
 	jpfar CheckMonNickNameDefault
+
+GBPalBlackOut:
+	ld a, $FF
+	ldh [rBGP], a
+	ldh [rOBP1], a
+	jp UpdatePal
 
 FillScreenWithTile::
 ; File screen with tile d, then wait
@@ -238,6 +245,7 @@ DrawHaunterFace:
 
 DrawHaunterFaces:
 	; yes, this should be a loop, but I'm too lazy to figure that out this time
+	; TODO: make it a loop genius
 	hlcoord 0, 0
 	call DrawHaunterFace
 	hlcoord 5, 0
@@ -301,15 +309,15 @@ DrawHaunterFaces:
 	ld c, BANK(SFX_Psychic_M)
 	ld a, SFX_PSYCHIC_M
 	call PlayMusic
-	call GBFadeOutToBlack
-	call GBFadeInFromBlack
-	call GBFadeOutToBlack
+	call GBFadeOutToBlackForcedOriginal
+	call GBFadeInFromBlackForcedOriginal
+	call GBFadeOutToBlackForcedOriginal
 	ld a, 255
 	ld [wFrequencyModifier], a
 	ld a, 255
 	ld [wTempoModifier], a
 	ld a, SFX_PSYCHIC_M
 	rst _PlaySound
-	call GBFadeInFromBlack
-	call GBFadeOutToBlack
-	jp GBFadeInFromBlack
+	call GBFadeInFromBlackForcedOriginal
+	call GBFadeOutToBlackForcedOriginal
+	jp GBFadeInFromBlackForcedOriginal

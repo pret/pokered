@@ -400,19 +400,25 @@ DiamondMineProspectorText:
 	callfar ChangePartyPokemonSpecies ; turn the onix into a hardened onix
 	call SaveScreenTilesToBuffer2
 	call GBFadeOutToWhite
+	xor a
+	ld [wUpdateSpritesEnabled], a
+	rst _DelayFrame
 	call ClearScreen
-	ld hl, TextScriptEndingText
-	rst _PrintText ; seemingly the only way of preventing sprites from flickering on the screen during the next printText
 	call GBPalNormal
 	ld hl, .weeksOfWork
 	rst _PrintText
 	call ClearScreen
+	call GBPalWhiteOut
+	ld a, 1
+	ld [wUpdateSpritesEnabled], a
 	call LoadScreenTilesFromBuffer2
 	SetEvent EVENT_DIAMOND_MINE_COMPLETED
 	ld a, HS_PROSPECTORS_HOUSE_PROSPECTOR
 	ld [wMissableObjectIndex], a
 	predef ShowExtraObject
 	call DiamondMineReplaceHole
+	call UpdateSprites
+	call Delay3
 	call GBFadeInFromWhite
 	SetEvent EVENT_DIAMOND_MINE_FINAL_STEP
 	call DiamondMineCheckPlayBoomboxMusic ; reset music

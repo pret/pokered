@@ -41,6 +41,7 @@ GBFadeInFromBlack::
 	ld hl, FadePal4
 	lb bc, 1, 1
 	jr z, GBFadeIncCommon.delayset
+GBFadeInFromBlackForcedOriginal::
 	ld hl, FadePal1
 	ld b, 4
 	jr GBFadeIncCommon
@@ -78,6 +79,7 @@ GBFadeOutToBlack::
 	ld hl, FadePal1 + 2
 	lb bc, 1, 1
 	jr z, GBFadeDecCommon.delayset
+GBFadeOutToBlackForcedOriginal::
 	ld hl, FadePal4 + 2
 	ld b, 4
 	jr GBFadeDecCommon

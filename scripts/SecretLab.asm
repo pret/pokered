@@ -978,9 +978,9 @@ SecretLabMewtwoTransformation:
 	ld a, SFX_INTRO_LUNGE
 	rst _PlaySound
 	call GBFadeOutToWhite
+	SetFlag FLAG_HIDE_PLAYER_SPRITE
+	call UpdateSprites
 	call ClearScreen
-	xor a
-	ld [wUpdateSpritesEnabled], a
 	call GBPalNormal
 	call Delay3
 	ld b, SET_PAL_GENERIC
@@ -991,8 +991,7 @@ SecretLabMewtwoTransformation:
 	call GetMonHeader ; load pokemon picture location
 	call LoadFlippedFrontSpriteByMonIndex
 	ld a, [wcf91]
-	call PlayCry
-	jp WaitForSoundToFinish
+	jp PlayCry
 .done
 	ld c, 30
 	rst _DelayFrames
@@ -1000,7 +999,8 @@ SecretLabMewtwoTransformation:
 	call GBPalWhiteOutWithDelay3
 	call RestoreScreenTilesAndReloadTilePatterns
 	call ReloadTilesetTilePatterns
-	call LoadGBPal
+	ResetFlag FLAG_HIDE_PLAYER_SPRITE
+	call UpdateSprites
 	call GBFadeInFromWhite
 	ld hl, SecretLabMewtwoTransformCompleteText
 	rst _PrintText
