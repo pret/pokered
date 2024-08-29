@@ -83,8 +83,10 @@ ENDM
 .LabWarpTileIDs:
 	warp_tiles $34
 
-.ReactorWarpTileIDs:
 .FacilityWarpTileIDs:
+	db $5C
+	; fall through
+.ReactorWarpTileIDs:
 	db $43, $58, $20
 	; fallthrough
 .CemeteryWarpTileIDs:

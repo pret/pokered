@@ -478,3 +478,10 @@ SSAnneFoodMenu::
 	db "Barbecue Eel"
 	next "Prime Steak"
 	next "Salmon Salad@"
+
+RocketPasswordMenu::
+	dw FourOptionMenu
+	db "ROCKET"
+	next "BROCKET"
+	next "SPROCKET"
+	next "DENNIS@"

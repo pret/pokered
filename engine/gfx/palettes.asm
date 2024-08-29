@@ -244,6 +244,8 @@ GetOverworldPalette:
 	jr z, .volcano
 	cp CAVERN
 	jr z, .caveOrBruno
+	cp UNDERGROUND
+	jr z, .townOrRoute
 	ld a, [wCurMap]
 	cp FIRST_INDOOR_MAP
 	jr c, .townOrRoute

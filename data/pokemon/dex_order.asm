@@ -145,7 +145,7 @@ PokedexOrder:
 	db DEX_WEEZING
 	db DEX_PERSIAN
 	db DEX_MAROWAK
-	db 0 ; MISSINGNO.
+	db DEX_WEEZING ; floating weezing
 	db DEX_HAUNTER
 	db DEX_ABRA
 	db DEX_ALAKAZAM

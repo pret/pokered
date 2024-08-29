@@ -4,6 +4,10 @@
 	const_export SILPHCO1F_SOLDIER2
 	const_export SILPHCO1F_FIREFIGHTER2
 	const_export SILPHCO1F_LINK_RECEPTIONIST
+	const_export SILPHCO1F_ROCKET1
+	const_export SILPHCO1F_ROCKET2
+	const_export SILPHCO1F_ROCKET3
+	const_export SILPHCO1F_WEEZING_PROXY
 
 SilphCo1F_Object:
 	db $2e ; border block
@@ -14,8 +18,13 @@ SilphCo1F_Object:
 	warp_event 26,  0, SILPH_CO_2F, 1
 	warp_event 20,  0, SILPH_CO_ELEVATOR, 1
 	warp_event 16, 10, SILPH_CO_3F, 7
+	warp_event 57, 11, LAST_MAP, 11
+	warp_event 52,  4, SILPH_CO_1F, 8
+	warp_event 40, 15, SILPH_CO_1F, 7
+	warp_event 38,  8, DIGLETTS_CAVE, 3
 
 	def_bg_events
+	bg_event 54, 4, TEXT_SILPHCO1F_BROKEN_STAIRS
 
 	def_object_events
 	object_event  11, 13, SPRITE_GUARD, STAY, UP, TEXT_SILPHCO1F_FIREFIGHTER1, OPP_FIREFIGHTER, 3
@@ -23,5 +32,9 @@ SilphCo1F_Object:
 	object_event  12, 14, SPRITE_SAILOR, STAY, UP, TEXT_SILPHCO1F_SOLDIER2, OPP_SOLDIER, 4
 	object_event  11, 14, SPRITE_GUARD, STAY, UP, TEXT_SILPHCO1F_FIREFIGHTER2, OPP_FIREFIGHTER, 4
 	object_event  4,  2, SPRITE_LINK_RECEPTIONIST, STAY, DOWN, TEXT_SILPHCO1F_LINK_RECEPTIONIST
+	object_event  56, 10, SPRITE_ROCKET, STAY, DOWN, TEXT_SILPHCO1F_ROCKET1
+	object_event  50,  6, SPRITE_ROCKET, STAY, RIGHT, TEXT_SILPHCO1F_ROCKET2
+	object_event  40,  9, SPRITE_ROCKET, STAY, LEFT, TEXT_SILPHCO1F_ROCKET3
+	object_event  36,  0, SPRITE_SEEL, STAY, DOWN, TEXT_SILPHCO1F_WEEZING_PROXY
 
 	def_warps_to SILPH_CO_1F

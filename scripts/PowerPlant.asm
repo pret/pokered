@@ -685,67 +685,10 @@ MagnetonSuperchargeAnimation:
 	; load magneton sprite into vram
 	call .loadMagnetonSprite
 .doneSpriteReplace
-	ld c, 30
-	rst _DelayFrames
-	; do animation
-	; make magneton sprite wobble back and forth
-	ld a, [wSprite04StateData1XPixels]
-	ld d, a
-	ld a, 20
-.loop
-	push af
-	push de
-	rrca
-	ld a, d
-	jr c, .right
-	dec a
-	ld [wSprite04StateData1XPixels], a
-	jr .doneWobble
-.right
-	inc a
-	ld [wSprite04StateData1XPixels], a
-.doneWobble
+	ld a, POWERPLANT_ELECTRODE1
+	ldh [hSpriteIndex], a
 	ld de, PowerPlantElectricityFar
-	call PlayNewSoundChannel8
-	rst _DelayFrame
-	rst _DelayFrame
-	pop de
-	pop af
-	dec a
-	jr nz, .loop
-	ld a, d
-	ld [wSprite04StateData1XPixels], a
-	rst _DelayFrame
-	ld de, StopSFXSound
-	call PlayNewSoundChannel8
-	; move magneton up
-	ld d, POWERPLANT_ELECTRODE1
-	callfar FarSlideSpriteUp
-	ld de, PowerPlantMagnetonFloating
-	call PlayNewSoundChannel5
-	; show magneton floating up and down a little bit
-	ld hl, wSprite04StateData1YPixels
-	ld b, 6
-.loop2
-	ld c, 2
-.innerLoop2Part1
-	inc [hl]
-	rst _DelayFrame
-	rst _DelayFrame
-	dec c
-	jr nz, .innerLoop2Part1
-	ld c, 2
-.innerLoop2Part2
-	dec [hl]
-	rst _DelayFrame
-	rst _DelayFrame
-	dec c
-	jr nz, .innerLoop2Part2
-	dec b
-	jr nz, .loop2
-	; move magneton down
-	ld d, POWERPLANT_ELECTRODE1
-	callfar FarSlideSpriteDown
+	call FloatingAnimation
 	ld a, TEXT_MAGNETON_WAS_SUPERCHARGED
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
@@ -764,15 +707,8 @@ MagnetonSuperchargeAnimation:
 	ld [wCurMapScript], a
 	ret
 .doBallPoof
-	ld de, SFX_Volcano_Ball_Poof_Ch5
-	call PlayNewSoundChannel5
-	ld de, SFX_Volcano_Ball_Poof_Ch8
-	call PlayNewSoundChannel8
 	ld de, vNPCSprites tile $78
-	callfar FarLoadSmokeTileFourTimes
-	ld c, 4
-	rst _DelayFrames
-	ret
+	jp DoBallPoofOnNPC
 .loadPokeballSprite
 	ld hl, vNPCSprites tile $78
 	ld de, PokeBallSprite
@@ -804,3 +740,94 @@ PowerPlantCheckPowersBack:
 PowerPlantPowerBackText::
 	text_far _PowerCameBackText
 	text_end
+
+DoBallPoofOnNPC::
+	push de
+	ld de, SFX_Volcano_Ball_Poof_Ch5
+	call PlayNewSoundChannel5
+	ld de, SFX_Volcano_Ball_Poof_Ch8
+	call PlayNewSoundChannel8
+	pop de
+	callfar FarLoadSmokeTileFourTimes
+	ld c, 4
+	rst _DelayFrames
+	ret
+
+; input [hSpriteIndex] = which sprite
+; de = which sound to play at the beginning
+FloatingAnimation::
+	push de
+	ld a, SPRITESTATEDATA1_XPIXELS
+	ldh [hSpriteDataOffset], a
+	call GetPointerWithinSpriteStateData1
+	; hl = wSpriteStateDataXPixels
+	ld c, 30
+	rst _DelayFrames
+	pop de
+	; do animation
+	; make magneton sprite wobble back and forth
+	ld a, [hl]
+	ld b, a
+	ld a, 20
+.loop
+	push af
+	push bc
+	rrca
+	ld a, b
+	jr c, .right
+	dec a
+	ld [hl], a
+	jr .doneWobble
+.right
+	inc a
+	ld [hl], a
+.doneWobble
+	push hl
+	; de = which sound to play here
+	call PlayNewSoundChannel8
+	pop hl
+	rst _DelayFrame
+	rst _DelayFrame
+	pop bc
+	pop af
+	dec a
+	jr nz, .loop
+	ld a, b
+	ld [hl], a
+	rst _DelayFrame
+	ld de, StopSFXSound
+	call PlayNewSoundChannel8
+	; move magneton up
+	ldh a, [hSpriteIndex]
+	ld d, a 
+	callfar FarSlideSpriteUp
+	ld de, PowerPlantMagnetonFloating
+	call PlayNewSoundChannel5
+	; show magneton floating up and down a little bit
+	ld a, SPRITESTATEDATA1_YPIXELS
+	ldh [hSpriteDataOffset], a
+	call GetPointerWithinSpriteStateData1
+	; hl = wSpriteStateDataYPixels
+	ld b, 6
+.loop2
+	ld c, 2
+.innerLoop2Part1
+	inc [hl]
+	rst _DelayFrame
+	rst _DelayFrame
+	dec c
+	jr nz, .innerLoop2Part1
+	ld c, 2
+.innerLoop2Part2
+	dec [hl]
+	rst _DelayFrame
+	rst _DelayFrame
+	dec c
+	jr nz, .innerLoop2Part2
+	dec b
+	jr nz, .loop2
+	; move magneton down
+	ldh a, [hSpriteIndex]
+	ld d, a 
+	callfar FarSlideSpriteDown
+	ret

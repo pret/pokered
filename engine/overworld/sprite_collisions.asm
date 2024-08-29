@@ -40,11 +40,15 @@ LoadExtraTiles::
 	jr z, .typeGuyHouse
 	cp POWER_PLANT_ROOF
 	jr z, .powerPlantRoof
+	cp SILPH_CO_1F
+	jr z, .saffronAbandonedBuilding
 	ret
 .typeGuyHouse
 	jpfar CheckLoadLightSwitch
 .powerPlantRoof
 	jpfar CheckLoadPowerPlantRoofTiles
+.saffronAbandonedBuilding
+	jpfar SilphCo1FReplaceTiles
 
 
 UpdateNonPlayerSprite:

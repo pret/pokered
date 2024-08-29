@@ -20,7 +20,7 @@ Tilesets:
 	tileset House,        -1, -1, -1,  -1, TILEANIM_NONE
 	tileset ForestGate,  $17,$32, -1,  -1, TILEANIM_NONE
 	tileset Museum,      $17,$32, -1,  -1, TILEANIM_NONE
-	tileset Underground,  -1, -1, -1,  -1, TILEANIM_NONE
+	tileset Underground,  -1, -1, -1, $0D, TILEANIM_NONE
 	tileset Gate,        $17,$32, -1,  -1, TILEANIM_NONE
 	tileset Ship,         -1, -1, -1,  -1, TILEANIM_WATER
 	tileset ShipPort,     -1, -1, -1,  -1, TILEANIM_WATER

@@ -145,7 +145,7 @@ MonsterNames::
 	db "WEEZING@@@"
 	db "PERSIAN@@@"
 	db "MAROWAK@@@"
-	db "MISSINGNO."
+	db "WEEZING@@@"
 	db "HAUNTER@@@"
 	db "ABRA@@@@@@"
 	db "ALAKAZAM@@"

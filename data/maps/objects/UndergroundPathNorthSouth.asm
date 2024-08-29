@@ -9,6 +9,7 @@ UndergroundPathNorthSouth_Object:
 	def_warp_events
 	warp_event  5,  4, UNDERGROUND_PATH_ROUTE_5, 3
 	warp_event  2, 41, UNDERGROUND_PATH_ROUTE_6, 3
+	warp_event  0, 22, DIGLETTS_CAVE, 4
 
 	def_bg_events
 

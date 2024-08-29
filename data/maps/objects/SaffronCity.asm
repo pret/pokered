@@ -29,6 +29,7 @@ SaffronCity_Object:
 	warp_event 29, 29, MR_PSYCHICS_HOUSE, 1
 	warp_event 22, 29, FOSSIL_GUYS_HOUSE, 1
 	warp_event 38,  3, FOSSIL_GUYS_HOUSE, 3
+	warp_event 14, 20, SILPH_CO_1F, 6
 
 	def_bg_events
 	bg_event 17,  5, TEXT_SAFFRONCITY_SIGN
@@ -41,6 +42,7 @@ SaffronCity_Object:
 	bg_event 10, 29, TEXT_SAFFRONCITY_POKECENTER_SIGN
 	bg_event 27, 29, TEXT_SAFFRONCITY_MR_PSYCHICS_HOUSE_SIGN
 	bg_event  1, 19, TEXT_SAFFRONCITY_SILPH_CO_LATEST_PRODUCT_SIGN
+	bg_event 11, 21, TEXT_SAFFRONCITY_BUSINESS_SPACE_FOR_LEASE
 
 	def_object_events
 	object_event  7,  6, SPRITE_ROCKET, STAY, NONE, TEXT_SAFFRONCITY_ROCKET1 ; person

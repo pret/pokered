@@ -3364,6 +3364,8 @@ WaterTileSetIsNextTileShoreOrWater::
 	jr z, .cavern
 	cp SHIP_PORT ; Vermilion Dock tileset
 	jr z, .skipShoreTiles ; if it's the Vermilion Dock tileset
+	cp FACILITY
+	jr z, .skipShoreTiles
 	cp VOLCANO
 	jr z, .volcanoTiles
 	ld a, [wTileInFrontOfPlayer] ; tile in front of player

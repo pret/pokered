@@ -233,7 +233,9 @@ ConversionEffect_:
 	; This will always be a poison pkmn since fighting mons don't learn haze.
 	bit PSYCHIC_IMMUNITY, c
 	jr z, .gotMoveDoneChecks
-	; TODO: floating weezing check
+	ld a, d
+	cp FLOATING_WEEZING
+	jr z, .replaceDizzyPunch ; psychic immune floating weezing has no weaknesses so use super fang
 	pop af
 	ld a, EARTHQUAKE
 	jr .gotReplacedMove
@@ -431,7 +433,7 @@ ConversionAttackTable:
 	db PSYCHIC_M             ; WEEZING            
 	db DIZZY_PUNCH           ; PERSIAN            
 	db SOLARBEAM             ; MAROWAK            
-	db 0               ; $92
+	db PSYCHIC_M             ; FLOATING_WEEZING
 	db EARTHQUAKE            ; HAUNTER            
 	db TWINEEDLE             ; ABRA               
 	db TWINEEDLE             ; ALAKAZAM           
@@ -476,6 +478,8 @@ ConversionAttackTable:
 	db CONVERT_GRASS_POISON  ; BELLSPROUT         
 	db CONVERT_GRASS_POISON  ; WEEPINBELL         
 	db ICE_BEAM              ; VICTREEBEL       
+
+; for some mons, porygon is better off using solarbeam or tri attack due to stab compared to magneton
 
 SecondaryConversionPorygon:  
 	db SOLARBEAM  ; CONVERT_WATER

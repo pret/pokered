@@ -1,6 +1,7 @@
 ; PureRGBnote: ADDED: trainers in this location
 
 UndergroundPathNorthSouth_Script:
+	call UndergroundPathNorthSouthOnMapLoad
 	call EnableAutoTextBoxDrawing
 	ld hl, UndergroundPathNorthSouthTrainerHeaders
 	ld de, UndergroundPathNorthSouth_ScriptPointers
@@ -8,6 +9,20 @@ UndergroundPathNorthSouth_Script:
 	call ExecuteCurMapScriptInTable
 	ld [wUndergroundPathNorthSouthCurScript], a
 	ret
+
+UndergroundPathNorthSouthOnMapLoad:
+	ld hl, wCurrentMapScriptFlags
+	bit 5, [hl]
+	res 5, [hl]
+	ret z
+	ld a, ROUTE_5
+	ld [wLastMap], a
+	CheckEvent EVENT_FOUND_SECRET_DIG_TUNNEL
+	ret nz
+	lb bc, 11, 0
+	ld a, 13
+	ld [wNewTileBlockID], a
+	predef_jump ReplaceTileBlock
 
 UndergroundPathNorthSouth_ScriptPointers:
 	def_script_pointers

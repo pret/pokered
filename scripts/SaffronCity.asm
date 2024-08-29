@@ -29,6 +29,7 @@ SaffronCity_TextPointers:
 	dw_const PokeCenterSignText,                      TEXT_SAFFRONCITY_POKECENTER_SIGN
 	dw_const SaffronCityMrPsychicsHouseSignText,      TEXT_SAFFRONCITY_MR_PSYCHICS_HOUSE_SIGN
 	dw_const SaffronCitySilphCoLatestProductSignText, TEXT_SAFFRONCITY_SILPH_CO_LATEST_PRODUCT_SIGN
+	dw_const SaffronCityBusinessSpaceForLease,        TEXT_SAFFRONCITY_BUSINESS_SPACE_FOR_LEASE
 
 SaffronCityRocket1Text:
 	text_far _SaffronCityRocket1Text
@@ -121,4 +122,8 @@ SaffronCityMrPsychicsHouseSignText:
 
 SaffronCitySilphCoLatestProductSignText:
 	text_far _SaffronCitySilphCoLatestProductSignText
+	text_end
+
+SaffronCityBusinessSpaceForLease:
+	text_far _SaffronCityBusinessSpaceForLease
 	text_end

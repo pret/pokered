@@ -643,7 +643,6 @@ DiamondMineShowPartyMenuSelection:
 	push af
 	call GBPalWhiteOutWithDelay3
 	call RestoreScreenTilesAndReloadTilePatterns
-	call ReloadTilesetTilePatterns
 	call Delay3
 	call LoadGBPal
 	pop af

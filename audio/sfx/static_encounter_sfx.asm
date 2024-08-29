@@ -48,6 +48,7 @@ PowerPlantElectricityFar::
 
 PowerPlantRoofRain::
 	noise_note 3, 8, 6, 95
+GasSound::
 	noise_note 15, 3, -3, 5
 	sound_ret
 

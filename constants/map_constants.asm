@@ -200,7 +200,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const SAFFRON_GYM,                   10,  9 ; $B2
 	map_const SAFFRON_PIDGEY_HOUSE,           4,  4 ; $B3
 	map_const SAFFRON_MART,                   4,  4 ; $B4
-	map_const SILPH_CO_1F,                   15,  9 ; $B5
+	map_const SILPH_CO_1F,                   29,  9 ; $B5
 	map_const SAFFRON_POKECENTER,             7,  4 ; $B6
 	map_const MR_PSYCHICS_HOUSE,              4,  4 ; $B7
 	map_const ROUTE_15_GATE_1F,               4,  5 ; $B8

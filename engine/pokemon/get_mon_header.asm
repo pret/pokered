@@ -68,6 +68,7 @@ NonDexPokemonSpecies:
 	db POWERED_HAUNTER
 	db HARDENED_ONIX
 	db FLOATING_MAGNETON
+	db FLOATING_WEEZING
 	db -1
 	
 

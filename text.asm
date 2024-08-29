@@ -138,7 +138,7 @@ INCLUDE "text/ViridianSchoolHouseQuiz.asm"
 INCLUDE "text/CinnabarLabTradeRoom.asm"
 INCLUDE "text/FuchsiaMeetingRoom.asm"
 INCLUDE "text/SSAnneKitchen.asm"
-
+INCLUDE "text/SaffronAbandonedBuilding.asm"
 
 SECTION "Text 6", ROMX
 

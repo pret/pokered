@@ -101,6 +101,7 @@ HiddenObjectMaps:
 	db SECRET_LAB
 	db TYPE_GUYS_HOUSE
 	db CINNABAR_VOLCANO
+	db SILPH_CO_1F
 	db -1 ; end
 
 HiddenObjectPointers:
@@ -205,6 +206,7 @@ HiddenObjectPointers:
 	dw SecretLabHiddenObjects
 	dw TypeGuysHouseHiddenObjects
 	dw CinnabarVolcanoHiddenObjects
+	dw SilphCo1FHiddenObjects
 
 MACRO hidden_object
 	db \2 ; y coord
@@ -817,4 +819,8 @@ CinnabarVolcanoHiddenObjects:
 	hidden_object 48, 38, 0, VolcanoBombableRockFloor2
 	hidden_object 50, 50, 0, VolcanoBombableRockFloor3
 	hidden_object 48, 66, 0, VolcanoBombableRockFloor4
+	db -1
+
+SilphCo1FHiddenObjects:
+	hidden_object 37, 13, 0, SaffronAbandonedBuildingHeliumPipe
 	db -1
