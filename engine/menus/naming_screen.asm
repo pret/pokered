@@ -81,6 +81,24 @@ DisplayNameRaterScreen::
 	ret
 
 DisplayNamingScreen:
+	ld a, [wNamingScreenType]
+	cp NAME_MON_SCREEN
+	jr nz, .dontLowerVolume
+  	ld a, [wd72c]
+  	set 1, a
+  	ld [wd72c], a
+	ld a, $33 ; 3/7 volume
+	ldh [rNR50], a
+.dontLowerVolume
+	call DisplayNamingScreenWrap
+	ld a, $77 ; max volume
+	ldh [rNR50], a
+  	ld a, [wd72c]
+  	res 1, a
+  	ld [wd72c], a
+	ret
+
+DisplayNamingScreenWrap:
 	push hl
 	ld hl, wd730
 	set 6, [hl]
