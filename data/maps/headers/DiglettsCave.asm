@@ -1,2 +1,2 @@
-	map_header DiglettsCave, DIGLETTS_CAVE, CAVERN, 0
+	map_header DiglettsCave, DIGLETTS_CAVE, CAVERN, SPECIAL_ANIMATION_MAP | DEFER_SHOWING_MAP
 	end_map_header

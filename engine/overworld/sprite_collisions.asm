@@ -30,9 +30,14 @@ _UpdateSprites::
 ; PureRGBnote: ADDED: when exiting the pokemon menu we have to reload the kabuto sprite that can display in fuchsia city
 LoadExtraSprites::
 	ld a, [wCurMap]
+	cp DIGLETTS_CAVE
+	jr z, .digletts_cave
 	cp FUCHSIA_CITY
 	ret nz
 	jpfar CheckLoadKabutoShell
+.digletts_cave
+	jpfar DiglettsCaveLoadDiglettSprites
+
 
 LoadExtraTiles::
 	ld a, [wCurMap]

@@ -24,6 +24,11 @@ VolcanoFloor3RangePart1:: db 0, 39, 28, 50
 VolcanoFloor3RangePart2:: db 36, 51, 44, 50
 VolcanoFloor4Range:: db 0, 51, 54, 67
 
+Diglett1Range:: db 22, 25, 26, 29
+Diglett2Range:: db 12, 16, 26, 29
+Diglett3Range:: db  8, 13, 16, 20
+Diglett4Range:: db  4,  5,  6, 10
+
 ; input
 ; de = address (in this bank) of the coordinate range to check the player is within
 FarArePlayerCoordsInRange::

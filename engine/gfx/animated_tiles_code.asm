@@ -1,8 +1,14 @@
 ; PureRGBnote: CHANGED: the code for animating these tiles was moved to another bank for space.
 AnimateTiles::
+	ld a, [wCurMapConnections]
+	bit BIT_SPECIAL_ANIMATION_MAP, a
+	jr z, .normal
+	ld a, [wCurMap]
+	cp DIGLETTS_CAVE
+	jp z, ProximityDigletts
 	ld a, [wCurMapTileset]
 	cp CAVERN
-	jr z, .cavern
+	jr z, .seafoamCurrents
 	cp REACTOR
 	jp z, ReactorAnimatedTiles
 	cp VOLCANO
@@ -35,13 +41,6 @@ AnimateTiles::
 	cp 41
 	ret c
 	jp AnimateLavaBubbles2
-.cavern
-	ld a, [wCurMap]
-	cp SEAFOAM_ISLANDS_B3F
-	jr z, .seafoamCurrents
-	cp SEAFOAM_ISLANDS_B4F
-	jr z, .seafoamCurrents
-	; fall through
 .normal
 	ldh a, [hMovingBGTilesCounter1]
 	inc a
@@ -283,6 +282,9 @@ ReactorAnimatedTiles:
 	ld hl, ElectricityTiles tile 3
 	ld de, vTileset tile $1F
 	jp AnimateCopyTile
+
+ProximityDigletts:
+	jpfar ProximityDigletts2
 
 ;	ld hl, LavaBubble1
 ;	jr z, .copy
