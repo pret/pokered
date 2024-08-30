@@ -1000,7 +1000,7 @@ ShowNextPokemonData:
 	call SeekToNextMon
 	jr c, .reloadwd11e
 	pop af
-	call ChangeListPosition
+	call ChangeMonListPosition
 	call PokedexToIndex
 	jr .showNextPokemon
 .prevMon
@@ -1011,7 +1011,7 @@ ShowNextPokemonData:
 	call SeekToPreviousMon
 	jr c, .reloadwd11e
 	pop af
-	call ChangeListPosition
+	call ChangeMonListPosition
 	call PokedexToIndex
 	jr .showNextPokemon
 .reloadwd11e
