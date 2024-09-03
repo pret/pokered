@@ -5668,6 +5668,24 @@ GetPlayerTypeEffectiveness:
 	ld c, a
 	jr AIGetTypeEffectiveness.load
 
+CheckPlayerHazeMistImmunity:
+;;;;;;;;;; PureRGBnote: ADDED: check if the opponent is immune to the attack being used due to Haze or Mist
+	ld a, [wEnemyMoveType]
+	ld hl, wPlayerBattleStatus2
+	jp CheckHazeMistImmunity
+;;;;;;;;;;
+
+AIGetImmediateTypeEffectiveness:
+	call CheckPlayerHazeMistImmunity
+	jr c, AIGetTypeEffectiveness.immunity
+	ld a, [wEnemyMoveType]
+	ld d, a                    ; d = type of enemy move
+	ld a, [wBattleMonType1]
+	ld b, a
+	ld a, [wBattleMonType2]
+	ld c, a
+	jr AIGetTypeEffectiveness.load
+
 ; function to tell how effective the type of an enemy attack is on the player's current pokemon
 ; now takes into account the effects that dual types can have
 ; (e.g. 4x weakness / resistance, weaknesses and resistances canceling)
@@ -5680,9 +5698,7 @@ AIGetTypeEffectiveness:
 ;		-also changed neutral value from $10 to $0A since it makes more sense
 ;		-and modifying this to take into account both types
 ;;;;;;;;;; PureRGBnote: ADDED: check if the opponent is immune to the attack being used due to Haze or Mist
-	ld a, [wEnemyMoveType]
-	ld hl, wPlayerBattleStatus2
-	call CheckHazeMistImmunity
+	call CheckPlayerHazeMistImmunity
 	jr c, .immunity ; if the pokemon is immune to the move due to haze or mist, skip ahead
 ;;;;;;;;;;
 	ld a, [wEnemyMoveType]

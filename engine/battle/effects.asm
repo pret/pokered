@@ -1276,7 +1276,7 @@ TrappingEffect:
 	ldh a, [hWhoseTurn]
 	and a
 	jr z, .player
-	call AIGetTypeEffectiveness
+	call AIGetImmediateTypeEffectiveness
 	jr .retIfImmune
 .player
 	call GetPlayerTypeEffectiveness
