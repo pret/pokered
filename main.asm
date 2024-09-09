@@ -252,7 +252,6 @@ INCLUDE "engine/battle/experience.asm"
 INCLUDE "engine/battle/move_effects/recoil.asm" ; PureRGBnote: MOVED: moved from battle engine 1
 INCLUDE "engine/battle/moved_battle_code.asm"
 
-
 SECTION "Diploma", ROMX
 
 INCLUDE "engine/events/diploma.asm"
