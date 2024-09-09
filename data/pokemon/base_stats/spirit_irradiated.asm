@@ -10,7 +10,7 @@
 	INCBIN "gfx/battle/spirit_irradiated.pic", 0, 1 ; sprite dimensions
 	dw IrradiatedPicFront, HitmonchanPicBackSW
 
-	db GROWTH, SLUDGE, STRUGGLE, NO_MOVE ; level 1 learnset
+	db GROWTH, SLUDGE, STRUGGLE, EGG_BOMB ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
