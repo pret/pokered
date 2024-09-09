@@ -183,7 +183,7 @@ MonsterNames::
 	db "MISSINGNO."
 	db "MISSINGNO."
 	db "MISSINGNO."
-	db "MISSINGNO."
+	db "GHOST@@@@@"
 	db "ODDISH@@@@"
 	db "GLOOM@@@@@"
 	db "VILEPLUME@"

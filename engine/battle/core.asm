@@ -2525,27 +2525,7 @@ PartyMenuOrRockOrRun:
 ; display the two status screens
 	predef StatusScreenLoop
 ; now we need to reload the enemy mon pic
-	ld a, [wEnemyBattleStatus2]
-	bit HAS_SUBSTITUTE_UP, a ; does the enemy mon have a substitute?
-	ld hl, AnimationSubstituteEnemyMon
-	jr nz, .doEnemyMonAnimation
-; enemy mon doesn't have substitute
-	ld a, [wEnemyMonMinimized]
-	and a ; has the enemy mon used Minimise?
-	ld hl, AnimationMinimizeEnemyMon
-	jr nz, .doEnemyMonAnimation
-; enemy mon is not minimised
-	ld a, [wEnemyMonSpecies]
-	ld [wcf91], a
-	ld [wd0b5], a
-	call GetMonHeader
-	ld de, vFrontPic
-	call LoadMonFrontSprite
-	jr .enemyMonPicReloaded
-.doEnemyMonAnimation
-	ld b, BANK(AnimationSubstitute) ; BANK(AnimationMinimizeMon)
-	rst _Bankswitch
-.enemyMonPicReloaded ; enemy mon pic has been reloaded, so return to the party menu
+	callfar ReloadEnemyMonPicAfterStatusScreen
 	jp .partyMenuWasSelected
 .switchMon
 	ld a, [wPlayerMonNumber]
@@ -7495,39 +7475,10 @@ InitWildBattle:
 	ld [wIsInBattle], a
 	call LoadEnemyMonData
 	call DoBattleTransitionAndInitBattleVariables
-	ld a, [wCurOpponent]
-	cp RESTLESS_SOUL
-	jr z, .isGhost
-	call IsGhostBattle
-	jr nz, .isNoGhost
+	callfar CheckShouldLoadGhostSprite
+	jr nc, .isNoGhost
 .isGhost
-	ld hl, wMonHSpriteDim
-	ld a, $66
-	ld [hli], a   ; write sprite dimensions
-	ld bc, GhostPic
-	ld a, c
-	ld [hli], a   ; write front sprite pointer
-	ld [hl], b
-	ld hl, wEnemyMonNick  ; set name to "GHOST"
-	ld a, "G"
-	ld [hli], a
-	ld a, "H"
-	ld [hli], a
-	ld a, "O"
-	ld [hli], a
-	ld a, "S"
-	ld [hli], a
-	ld a, "T"
-	ld [hli], a
-	ld [hl], "@"
-	ld a, [wcf91]
-	push af
-	ld a, MON_GHOST
-	ld [wcf91], a
-	ld de, vFrontPic
-	call LoadMonFrontSprite ; load ghost sprite
-	pop af
-	ld [wcf91], a
+	callfar LoadGhostData
 	jr .spriteLoaded
 .isNoGhost
 	ld de, vFrontPic
