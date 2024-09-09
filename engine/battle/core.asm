@@ -2527,12 +2527,12 @@ PartyMenuOrRockOrRun:
 ; now we need to reload the enemy mon pic
 	ld a, [wEnemyBattleStatus2]
 	bit HAS_SUBSTITUTE_UP, a ; does the enemy mon have a substitute?
-	ld hl, AnimationSubstitute
+	ld hl, AnimationSubstituteEnemyMon
 	jr nz, .doEnemyMonAnimation
 ; enemy mon doesn't have substitute
 	ld a, [wEnemyMonMinimized]
 	and a ; has the enemy mon used Minimise?
-	ld hl, AnimationMinimizeMon
+	ld hl, AnimationMinimizeEnemyMon
 	jr nz, .doEnemyMonAnimation
 ; enemy mon is not minimised
 	ld a, [wEnemyMonSpecies]
