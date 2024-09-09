@@ -149,11 +149,10 @@ RocketHideoutB4FGiovanniText:
 	ld a, SCRIPT_ROCKETHIDEOUTB4F_BEAT_GIOVANNI
 	ld [wRocketHideoutB4FCurScript], a
 	ld [wCurMapScript], a
-	jr .done ; TODO: rst textscriptend
+	rst TextScriptEnd
 .beat_giovanni
 	ld hl, RocketHideoutB4FGiovanniHopeWeMeetAgainText
 	rst _PrintText
-.done
 	rst TextScriptEnd
 
 .ImpressedYouGotHereText:

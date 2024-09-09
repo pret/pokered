@@ -7372,7 +7372,7 @@ ENDC
 	ret
 
 
-HandleExplodingAnimation: ; TODO: is still used unintentionally?
+HandleExplodingAnimation:
 	ldh a, [hWhoseTurn]
 	and a
 	ld hl, wEnemyMonType1

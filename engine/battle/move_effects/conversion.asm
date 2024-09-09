@@ -363,7 +363,7 @@ ConversionAttackTable:
 	db SPIKE_CANNON          ; MOLTRES            
 	db SPIKE_CANNON          ; ARTICUNO           
 	db SPIKE_CANNON          ; ZAPDOS             
-	db 0                     ; DITTO         ; TODO: ditto needs unique code to check what it transformed into           
+	db 0                     ; DITTO      ; ditto has specific code for it             
 	db DIZZY_PUNCH           ; MEOWTH             
 	db CONVERT_WATER         ; KRABBY             
 	db 0               ; $4F

@@ -79,8 +79,6 @@ SelectInVolcano:
 
 
 DrillAnimation::
-	; TODO: if not yet given drill, say it's too hot to use bike
-	; TODO: ensure other sprites not facing forward?
 	; copy drilling sprite to red's sprite
 	xor a
 	ld [wPlayerMovingDirection], a ; make player stop
