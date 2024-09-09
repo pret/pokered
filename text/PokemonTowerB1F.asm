@@ -13,7 +13,10 @@ _DarkChannelerGreeting2::
 	para "Very spooky!"
 	para "Only CHANNELERS"
 	line "can go down."
-	para "Anyway, back to"
+	prompt
+
+_DarkChannelerBackToMyself::
+	text "Anyway, back to"
 	line "myself."
 	prompt
 

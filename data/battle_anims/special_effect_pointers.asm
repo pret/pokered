@@ -53,4 +53,5 @@ SpecialEffectPointers:
 	special_effect SE_SNOWFLAKES_EVERYWHERE, AnimationSnowflakesEverywhere ; $D1
 	special_effect SE_LIGHT_SCREEN_FLASH, AnimationFlashLightScreen ; $D0
 	special_effect SE_CROSSHAIR_SCANS_OPPONENT, AnimationCrosshairScansOpponent ; $CF
+	special_effect SE_DIVINE_PROTECTION, AnimationDivineProtection ; $CE
 	db -1 ; end

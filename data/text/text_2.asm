@@ -1249,6 +1249,7 @@ _WildMonAppearedText::
 
 _HookedMonAttackedText::
 	text "The hooked"
+_WildMonAppearedTextEnd::
 	line "@"
 	text_ram wEnemyMonNick
 	text_start
@@ -1829,3 +1830,36 @@ _CantDepositSSTicketText::
 	line "ticket while"
 	cont "on the S.S.ANNE!"
 	prompt
+
+_SpiritAppearedNextLine::
+	text_end
+	text " spirit@"
+	text_jump _WildMonAppearedTextEnd
+
+_SpiritAppeared::
+	text_end
+	text " spirit"
+	line "@"
+	text_ram wEnemyMonNick
+	text " attacked!"
+	prompt
+
+_TorchedAppeared::
+	text "Blazing@"
+	text_jump _SpiritAppeared
+
+_ChunkyAppeared::
+	text "Hungry@"
+	text_jump _SpiritAppeared
+
+_PainlessAppeared::
+	text "Injured@"
+	text_jump _SpiritAppearedNextLine
+
+_IrradiatedAppeared::
+	text "Nuclear@"
+	text_jump _SpiritAppearedNextLine
+
+_TheMawAppeared::
+	text "Dark@"
+	text_jump _SpiritAppeared

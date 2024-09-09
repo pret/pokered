@@ -123,7 +123,15 @@
 	const_skip ;const EVENT_RESCUED_MR_FUJI_2 ; PureRGBnote: CHANGED: this event was set but not used ever
 	const EVENT_MET_DARK_CHANNELER
 	const EVENT_MET_LIGHT_CHANNELER
-	const_skip 14
+	const EVENT_BEAT_TORCHED
+	const EVENT_BEAT_CHUNKY
+	const EVENT_BEAT_PAINLESS
+	const EVENT_BEAT_IRRADIATED
+	const EVENT_BEAT_THE_MAW
+	const EVENT_ENTERED_CATACOMBS
+	const EVENT_CUBONE_FIGHTING_THE_MAW
+	const EVENT_CATACOMBS_SPRITE_WALKING
+	const_skip 6
 	const EVENT_GOT_POKE_FLUTE
 
 ; Cinnabar Volcano Events

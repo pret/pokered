@@ -1,5 +1,5 @@
 GetTrainerName_::
-	ld hl, wGrassRate
+	ld hl, wLinkEnemyTrainerName
 	ld a, [wLinkState]
 	and a
 	jr nz, .foundName

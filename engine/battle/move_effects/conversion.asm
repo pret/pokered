@@ -318,7 +318,7 @@ ConversionAttackTable:
 	db CONVERT_WATER         ; BLASTOISE          
 	db PSYCHIC_M               ; PINSIR             
 	db CONVERT_TRI_GRASS     ; TANGELA            
-	db 0
+	db POISON_GAS            ; TORCHED
 	db 0
 	db SURF                  ; GROWLITHE          
 	db MEGA_DRAIN            ; ONIX               
@@ -337,7 +337,7 @@ ConversionAttackTable:
 	db CONVERT_WATER         ; PSYDUCK            
 	db TWINEEDLE             ; DROWZEE            
 	db MEGA_DRAIN            ; GOLEM              
-	db 0        
+	db PSYCHIC_M             ; IRRADIATED        
 	db SPIKE_CANNON          ; MAGMAR             
 	db 0               ; $34
 	db EARTHQUAKE            ; ELECTABUZZ         
@@ -373,7 +373,7 @@ ConversionAttackTable:
 	db SPIKE_CANNON          ; NINETALES          
 	db EARTHQUAKE            ; PIKACHU            
 	db EARTHQUAKE            ; RAICHU             
-	db 0               ; $56
+	db SUPER_FANG            ; SPIRIT_CHUNKY
 	db 0               ; $57
 	db ICE_BEAM              ; DRATINI            
 	db ICE_BEAM              ; DRAGONAIR          
@@ -402,7 +402,7 @@ ConversionAttackTable:
 	db CONVERT_TRI_BUG       ; WEEDLE             
 	db CONVERT_TRI_BUG       ; KAKUNA             
 	db CONVERT_TRI_BUG       ; BEEDRILL           
-	db 0               ; $73
+	db TOXIC                 ; PAINLESS
 	db ICE_BEAM              ; DODRIO             
 	db PSYCHIC_M             ; PRIMEAPE           
 	db SOLARBEAM             ; DUGTRIO            
@@ -421,7 +421,7 @@ ConversionAttackTable:
 	db TWINEEDLE             ; MEWTWO             
 	db DIZZY_PUNCH           ; SNORLAX            
 	db CONVERT_WATER         ; MAGIKARP           
-	db 0               ; $86
+	db CONVERT_TRI_FLYING    ; SPIRIT_THE_MAW
 	db 0               ; $87
 	db PSYCHIC_M             ; MUK                
 	db 0               ; $89

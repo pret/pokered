@@ -77,5 +77,6 @@ ENDC
 	RGB 29,31,30, 18,24,22, 21,14,09, 03,02,02 ; PAL_SAFARIBALL ; safari ball palette when throwing one in battle
 	RGB 29,31,30, 14,17,31, 10,11,11, 03,02,02 ; PAL_SECRETLAB
 	RGB 29,31,30, 29,04,00, 10,11,11, 03,02,02 ; PAL_VOLCANO
+	RGB 29,31,30, 26,00,00, 18,00,00, 03,02,02 ; PAL_REALLY_REDMON
 ;;;;;;;;;;
 	assert_table_length NUM_SGB_PALS

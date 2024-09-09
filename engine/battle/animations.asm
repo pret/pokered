@@ -3320,3 +3320,56 @@ AnimationCrosshairScansOpponent:
 	ld a, SFX_BATTLE_33
 	rst _PlaySound
 	ret
+
+; at the moment this animation can only happen on the player
+AnimationDivineProtection:
+	ld d, $39 ; "sparkle" tile
+	ld b, 0
+	ld a, 2 ; which tileset to use
+	ld c, 1 ; need 1 sparkle
+	call InitMultipleObjectsOAM
+	ld a, SFX_BATTLE_35
+	rst _PlaySound
+	ld hl, wChannelCommandPointers + CHAN5 * 2
+	ld de, SFX_Sparkle_Ch5
+	call RemapSoundChannel
+	inc hl
+	ld de, SFX_Sparkle_Ch6
+	call RemapSoundChannel
+	call AnimationLightScreenPalette
+	ld b, 4 ; number of sprites to show falling
+	ld hl, wShadowOAMSprite00YCoord
+	ld c, 28  ; pixels / 2 to fall
+	ld d, 20  ; leftmost x coord
+.outerLoopFallingSparkles
+	ld a, 50
+	ld [hli], a ; init y coord
+	ld [hl], d ; init x coord
+	dec hl
+	push bc
+.innerLoopFallingSparkles
+	inc [hl]
+	inc [hl]
+	ld a, c
+	and %11
+	jr nz, .noFlip
+	; flip the sparkle every 4 frames
+	push hl
+	inc hl
+	inc hl
+	inc hl
+	ld a, [hl]
+	xor %01000000
+	ld [hl], a
+	pop hl
+.noFlip
+	rst _DelayFrame
+	dec c
+	jr nz, .innerLoopFallingSparkles
+	ld a, 16
+	add d
+	ld d, a
+	pop bc
+	dec b
+	jr nz, .outerLoopFallingSparkles
+	jp AnimationCleanOAM

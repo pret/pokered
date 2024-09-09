@@ -292,6 +292,9 @@ INCLUDE "text/ChampArena.asm"
 INCLUDE "text/DiamondMine.asm"
 INCLUDE "text/OptionsInfoText.asm"
 
+SECTION "Text 13", ROMX
+INCLUDE "text/PokemonTowerCatacombs.asm"
+
 SECTION "Pokédex Text", ROMX
 
 INCLUDE "data/pokemon/dex_text.asm"

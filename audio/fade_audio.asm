@@ -66,6 +66,8 @@ PlayExtraMusic:
 	jr z, .prospectorsHouseCheck
 	cp CINNABAR_VOLCANO
 	jr z, .volcano
+	cp POKEMON_TOWER_B1F
+	jr z, .towerB1F
 	ret
 .secretlab
 	jpfar SecretLabPlayMusic
@@ -77,6 +79,8 @@ PlayExtraMusic:
 	and a
 	jr z, .fadingOut
 	jpfar DiamondMinePlayMusic
+.towerB1F
+	jpfar PokemonTowerB1FPlayMusic
 .prospectorsHouseCheck
 	jpfar CheckBoomboxPlaying
 .fadingOut

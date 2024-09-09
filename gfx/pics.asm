@@ -611,6 +611,14 @@ SpearowPicFrontAlt:: INCBIN "gfx/pokemon/front_alt/spearow.pic"
 ScytherPicFrontAlt:: INCBIN "gfx/pokemon/front_alt/scyther.pic"
 GolduckPicFrontAlt:: INCBIN "gfx/pokemon/front_alt/golduck.pic"
 
+; spirits
+TorchedPicFront:: INCBIN "gfx/battle/spirit_torched.pic"
+ChunkyPicFront:: INCBIN "gfx/battle/spirit_chunky.pic"
+PainlessPicFront:: INCBIN "gfx/battle/spirit_painless.pic"
+IrradiatedPicFront:: INCBIN "gfx/battle/spirit_irradiated.pic"
+TheMawPicFront:: INCBIN "gfx/battle/spirit_the_maw.pic"
+
+
 SECTION "Type Icons", ROMX
 
 NormalTypeIcon::     INCBIN "gfx/movedex/type_icons/normal.2bpp"
@@ -665,3 +673,4 @@ SleepingEmote:: INCBIN "gfx/emotes/sleeping.2bpp"
 PowerPlantRoofTiles:: INCBIN "gfx/overworld/power_plant_roof_extra_tiles.2bpp"
 PowerPlantStormTiles:: INCBIN "gfx/overworld/storm.2bpp"
 VerticalPipeTiles:: INCBIN "gfx/overworld/vertical_pipe.2bpp"
+HyperBeamBubble:: INCBIN "gfx/overworld/bubble.2bpp"

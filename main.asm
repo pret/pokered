@@ -250,6 +250,7 @@ SECTION "Battle Engine 9", ROMX
 
 INCLUDE "engine/battle/experience.asm"
 INCLUDE "engine/battle/move_effects/recoil.asm" ; PureRGBnote: MOVED: moved from battle engine 1
+INCLUDE "engine/battle/moved_battle_code.asm"
 
 
 SECTION "Diploma", ROMX

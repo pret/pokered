@@ -245,6 +245,8 @@ INCLUDE "audio/sfx/cry20_2.asm"
 INCLUDE "audio/sfx/cry21_2.asm"
 INCLUDE "audio/sfx/cry22_2.asm"
 
+INCLUDE "audio/sfx/extra_battle_sfx.asm"
+
 
 SECTION "Sound Effects 3", ROMX
 

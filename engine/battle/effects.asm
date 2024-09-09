@@ -816,6 +816,8 @@ StatModifierDownEffect:
 	sub ATTACK_DOWN_SIDE_EFFECT ; map each stat to 0-3
 	jr .decrementStatMod
 .nonSideEffect ; non-side effects only
+	CheckFlag FLAG_SKIP_STAT_ANIMATION ; at the moment if we're skipping the stat animation for a stat down effect it means we always want the effect to happen
+	jr nz, .skipMoveHitTest
 	push hl
 	push de
 	push bc
@@ -829,6 +831,7 @@ StatModifierDownEffect:
 	ld a, [bc]
 	bit INVULNERABLE, a ; fly/dig
 	jp nz, MoveMissed
+.skipMoveHitTest
 	ld a, [de]
 	sub ATTACK_DOWN1_EFFECT
 	cp EVASION_DOWN1_EFFECT + $3 - ATTACK_DOWN1_EFFECT ; covers all -1 effects
@@ -930,6 +933,8 @@ UpdateLoweredStatDone:
 	push de
 	call PrintStatText
 	pop de
+	CheckFlag FLAG_SKIP_STAT_ANIMATION
+	jr nz, .ApplyBadgeBoostsAndStatusPenalties
 	ld a, [de]
 	cp $44
 	call c, PlayCurrentMoveAnimation2

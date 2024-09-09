@@ -248,6 +248,9 @@ Audio2_InitMusicVariables::
 	ld d, 3
 	ld hl, wChannelTranspositions
 	call FillAudioRAM2
+	ld d, 2
+	ld hl, wChannel5Transposition
+	call FillAudioRAM2
 	;ld hl, wChannelSimulatedRests
 	;call FillAudioRAM2
 	;ld hl, wChannelCutoffs

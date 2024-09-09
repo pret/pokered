@@ -61,3 +61,28 @@ PowerPlantMagnetonFloating::
 	pitch_sweep 0, 8
 	square_note 0, 0, 0, 0
 	sound_ret
+
+Ghost_Encounter_SFX::
+	execute_music
+	vibrato 18, 3, 3
+	duty_cycle 3
+	note_type 6, 4, 8
+	octave 5
+	note G#, 1
+	note A_, 1
+	note A#, 1
+	note B_, 1
+	note_type 12, 4, 8
+	octave 6
+	note C_, 7
+	vibrato 0, 3, 3
+	volume_envelope 4, 6
+	note C_, 2
+	sound_ret
+
+Ghost_Encounter_SFX2::
+	transpose 1, 2
+	sound_call Ghost_Encounter_SFX
+	transpose 0, 0
+	sound_ret
+

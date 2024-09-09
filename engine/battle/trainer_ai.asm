@@ -992,7 +992,7 @@ INCLUDE "data/trainers/special_moves.asm"
 INCLUDE "data/trainers/parties.asm"
 
 TrainerAI:
-	and a
+	and a ; clear carry
 	ld a, [wIsInBattle]
 	dec a
 	ret z ; if not a trainer, we're done here

@@ -210,6 +210,8 @@ AttackAnimationPointers:
 	dw RageEnemyAnim
 	dw ConversionDefenseModeAnim
 	dw ConversionAttackModeAnim
+	dw RadiationAnim
+	dw DivineProtectionAnim
 	assert_table_length NUM_ATTACK_ANIMS
 	dw ZigZagScreenAnim
 
@@ -1542,4 +1544,18 @@ ConversionDefenseModeAnim:
 
 ConversionAttackModeAnim:
 	battle_anim NO_MOVE, SE_CROSSHAIR_SCANS_OPPONENT
+	db -1
+
+RadiationAnim:
+	battle_anim STRUGGLE, SE_SMOKE_EVERYWHERE
+	battle_anim NO_MOVE, SE_SMOKE_EVERYWHERE
+	db -1
+
+DivineProtectionAnim:
+	battle_anim NO_MOVE, SE_DIVINE_PROTECTION
+	battle_anim REFLECT, SUBANIM_1_BARRIER, 1, 1
+	battle_anim REFLECT, SUBANIM_1_BARRIER, 1, 1
+	battle_anim REFLECT, SUBANIM_1_BARRIER, 1, 1
+	battle_anim REFLECT, SUBANIM_1_BARRIER, 1, 1
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
 	db -1

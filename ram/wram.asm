@@ -89,7 +89,10 @@ wChannel3Transposition::db
 ; bit 0 = we are currently waiting for a sound to finish
 ; other bits = unused
 wAudioFlags::db
-	; unused audio wram 6 bytes
+wChannel5Transposition::db
+wChannel6Transposition::db
+
+	; unused audio wram 4 bytes
 ENDU
 
 
@@ -290,6 +293,7 @@ wTextDest:: dw
 ; if non-zero, skip waiting for a button press after displaying text in DisplayTextID
 wDoNotWaitForButtonPressAfterDisplayingText:: db
 
+; this union spans 11 bytes
 UNION
 ; the received menu selection is stored twice
 wLinkMenuSelectionReceiveBuffer:: dw
@@ -1186,7 +1190,7 @@ wAITargetMonType1:: db ; the type of the pokemon the AI should think it's attack
 wAITargetMonType2:: db ; the type of the pokemon the AI should think it's attacking (stays as the previous pokemon when you switch pokemon)
 wAITargetMonStatus:: db ; the current status of the pokemon the AI should think it's attacking (set when healing a pokemon's status or switching it out)
 wStoredMovedexListIndex:: db
-ds 5 ; unused 6 bytes
+ds 5 ; unused 5 bytes
 ;;;;;;;;;;
 ENDU
 

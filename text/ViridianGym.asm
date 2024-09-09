@@ -262,3 +262,4 @@ _ViridianGymGuideSeeAtPokemonLeagueText::
 	text "See you at the"
 	line "#MON LEAGUE!"
 	done
+

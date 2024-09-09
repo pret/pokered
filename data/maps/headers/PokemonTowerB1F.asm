@@ -1,2 +1,2 @@
-	map_header PokemonTowerB1F, POKEMON_TOWER_B1F, CEMETERY, 0
+	map_header PokemonTowerB1F, POKEMON_TOWER_B1F, CEMETERY, DEFER_SHOWING_MAP | EXTRA_MUSIC_MAP
 	end_map_header

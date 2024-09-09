@@ -10,6 +10,8 @@ PrintBeginningBattleText:
 .notPokemonTower
 	ld a, [wEnemyMonSpecies2]
 	call PlayCry
+	call CheckSpecialWildBattleIntroText
+	jr c, .wildBattle
 	ld a, [wMoveMissed]
 	and a
 	ld hl, WildMonAppearedText
@@ -71,6 +73,48 @@ PrintBeginningBattleText:
 	ld a, SFX_SILPH_SCOPE
 	rst _PlaySound
 	jp WaitForSoundToFinish
+
+CheckSpecialWildBattleIntroText:
+	ld a, [wCurMap]
+	cp POKEMON_TOWER_B1F
+	jr nz, .no
+	ld a, [wEnemyMonSpecies2]
+	cp SPIRIT_TORCHED
+	ld hl, .torched
+	jr z, .yes
+	cp SPIRIT_CHUNKY
+	ld hl, .chunky
+	jr z, .yes
+	cp SPIRIT_PAINLESS
+	ld hl, .painless
+	jr z, .yes
+	cp SPIRIT_IRRADIATED
+	ld hl, .irradiated
+	jr z, .yes
+	; the maw
+	ld hl, .maw
+.yes
+	scf
+	ret
+.no
+	and a
+	ret
+.torched
+	text_far _TorchedAppeared
+	text_end
+.chunky
+	text_far _ChunkyAppeared
+	text_end
+.painless
+	text_far _PainlessAppeared
+	text_end
+.irradiated
+	text_far _IrradiatedAppeared
+	text_end
+.maw
+	text_far _TheMawAppeared
+	text_end
+
 
 ;;;;;;;;;; PureRGBnote: ADDED: a sound effect for ghosts encountered
 PlayGhostSfx:

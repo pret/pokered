@@ -423,6 +423,14 @@ BadgeBlkDataLengths:
 	db 6     ; Volcano Badge
 	db 6     ; Earth Badge
 
+NonMonCustomPalettes:
+	db SPIRIT_TORCHED, PAL_VOLCANO
+	db SPIRIT_CHUNKY, PAL_MEWMON
+	db SPIRIT_PAINLESS, PAL_PINKMON ; whitemon?
+	db SPIRIT_IRRADIATED, PAL_SAFARIBALL
+	db SPIRIT_THE_MAW, PAL_REALLY_REDMON
+	db -1
+
 DeterminePaletteID:
 	bit TRANSFORMED, a ; a is battle status 3
 	ld a, DEX_DITTO	;ld a, PAL_GREYMON  ; shinpokerednote: FIXED: if the mon has used Transform, use Ditto's palette
@@ -435,6 +443,11 @@ DeterminePaletteIDOutOfBattle:
 	ld [wd11e], a
 	and a ; is the mon index 0?
 	jr z, .skipDexNumConversion
+	ld hl, NonMonCustomPalettes
+	ld de, 2
+	call IsInArray
+	inc hl
+	jr c, .gotPalette
 	predef IndexToPokedex
 	ld a, [wd11e]
 	; 0 = missingno is a valid value here
@@ -456,11 +469,15 @@ DeterminePaletteIDOutOfBattle:
 	ld hl, MonsterPalettes ; not just for Pokemon, Trainers use it too
 .usePalette
 	add hl, de
+.gotPalette2
 	xor a
 	ld [wIsAltPalettePkmn], a ; always reset this value after displaying a pokemon sprite
 ;;;;;;;;;;
 	ld a, [hl]
 	ret
+.gotPalette
+	pop bc
+	jr .gotPalette2
 ;;;;;;;;;; PureRGBnote: ADDED: hardened onix has hardcoded palettes
 .hardened_onix
 	lb bc, PAL_BLACKMON, PAL_BLUEMON

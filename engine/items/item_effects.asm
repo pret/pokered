@@ -155,6 +155,10 @@ ItemUseBall:
 	callfar IsGhostBattle
 	ld b, $10 ; can't be caught value
 	jp z, .setAnimData
+	ld a, [wCurMap]
+	cp POKEMON_TOWER_B1F ; can't catch spirits in pokemon tower catacombs
+	; b still = $10
+	jp z, .setAnimData
 
 	ld a, [wBattleType]
 	dec a

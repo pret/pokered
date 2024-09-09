@@ -63,19 +63,23 @@ ChangePartyPokemonSpecies::
 CheckMonNickNameDefault::
 	ld a, [wcf91]
 	cp POWERED_HAUNTER
-	ld a, GENGAR
+	ld d, GENGAR
 	jr z, .checkRename
 	cp GENGAR
-	ld a, POWERED_HAUNTER
+	ld d, POWERED_HAUNTER
+	jr z, .checkRename
+	cp CUBONE
 	ret nz
+	; always rename ghost marowak -> cubone change
+	call .getNick
+	push hl
+	jr .rename
 .checkRename
+	ld a, d
 	ld [wd11e], a
 	call GetMonName
 	ld de, wcd6d
-	ld a, [wWhichPokemon]
-	ld hl, wPartyMonNicks
-	lb bc, 0, NAME_LENGTH
-	call AddNTimes
+	call .getNick
 	push hl
 .loop
 	ld a, [hli]
@@ -87,6 +91,7 @@ CheckMonNickNameDefault::
 	cp "@"
 	jr nz, .loop
 	; they're the same, so rename
+.rename
 	ld a, [wcf91]
 	ld [wd11e], a
 	call GetMonName
@@ -102,4 +107,8 @@ CheckMonNickNameDefault::
 .noMatch
 	pop hl
 	ret
-
+.getNick
+	ld a, [wWhichPokemon]
+	ld hl, wPartyMonNicks
+	lb bc, 0, NAME_LENGTH
+	jp AddNTimes

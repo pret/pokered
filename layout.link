@@ -213,6 +213,8 @@ ROMX $38
 	"Tilesets 5"
 	"NPC Sprites 4"
 	"Pics 11"
+ROMX $39
+	"Text 13"
 WRAM0
 	"Audio RAM"
 	org $c100

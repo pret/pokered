@@ -38,8 +38,8 @@
 	const BLASTOISE          ; $1C
 	const PINSIR             ; $1D
 	const TANGELA            ; $1E
-	const_skip               ; $1F
-	const_skip               ; $20
+	const SPIRIT_TORCHED     ; $1F
+	const_skip               ; $20 ; enhanced lickitung
 	const GROWLITHE          ; $21
 	const ONIX               ; $22
 	const FEAROW             ; $23
@@ -57,9 +57,9 @@
 	const PSYDUCK            ; $2F
 	const DROWZEE            ; $30
 	const GOLEM              ; $31
-	const_skip               ; $32
+	const SPIRIT_IRRADIATED  ; $32
 	const MAGMAR             ; $33
-	const_skip               ; $34
+	const_skip               ; $34 ; magmatic magmar
 	const ELECTABUZZ         ; $35
 	const MAGNETON           ; $36
 	const KOFFING            ; $37
@@ -74,7 +74,7 @@
 	const FARFETCHD          ; $40
 	const VENONAT            ; $41
 	const DRAGONITE          ; $42
-	const_skip               ; $43
+	const_skip               ; $43 ; enhanced farfetchd
 	const_skip               ; $44
 	const_skip               ; $45
 	const DODUO              ; $46
@@ -93,7 +93,7 @@
 	const NINETALES          ; $53
 	const PIKACHU            ; $54
 	const RAICHU             ; $55
-	const_skip               ; $56
+	const SPIRIT_CHUNKY      ; $56
 	const_skip               ; $57
 	const DRATINI            ; $58
 	const DRAGONAIR          ; $59
@@ -101,7 +101,7 @@
 	const KABUTOPS           ; $5B
 	const HORSEA             ; $5C
 	const SEADRA             ; $5D
-	const_skip               ; $5E
+	const_skip               ; $5E ; icy dragonair
 	const_skip               ; $5F
 	const SANDSHREW          ; $60
 	const SANDSLASH          ; $61
@@ -122,7 +122,7 @@
 	const WEEDLE             ; $70
 	const KAKUNA             ; $71
 	const BEEDRILL           ; $72
-	const_skip               ; $73
+	const SPIRIT_PAINLESS    ; $73
 	const DODRIO             ; $74
 	const PRIMEAPE           ; $75
 	const DUGTRIO            ; $76
@@ -141,7 +141,7 @@
 	const MEWTWO             ; $83
 	const SNORLAX            ; $84
 	const MAGIKARP           ; $85
-	const_skip               ; $86
+	const SPIRIT_THE_MAW     ; $86
 	const_skip               ; $87
 	const MUK                ; $88
 	const_skip               ; $89

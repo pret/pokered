@@ -208,7 +208,7 @@ ViridianGymGiovanniText:
 	jr nz, .afterBeat
 	call z, ViridianGymReceiveTM27
 	call DisableWaitingAfterTextDisplay
-	jr .text_script_end
+	rst TextScriptEnd
 .afterBeat
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
@@ -220,9 +220,27 @@ ViridianGymGiovanniText:
 	predef HideObject
 	call UpdateSprites
 	call Delay3
+	CheckEvent EVENT_CAUGHT_GHOST_MAROWAK
+	jr z, .dontMoveKarateKing
+	; move karate king position for ghost marowak text
+	ld c, VIRIDIANGYM_HIKER3
+	lb de, 0, 1 ; same x coord, down 1 y coord
+	callfar FarMoveSpriteInRelationToPlayer
+	call UpdateSprites
+.dontMoveKarateKing
 	call GBFadeInFromBlack
 	callfar PlayDefaultMusicIfMusicBitSet
-	jr .text_script_end
+	CheckEvent EVENT_CAUGHT_GHOST_MAROWAK
+	jr z, .text_script_end
+	ld a, PLAYER_DIR_DOWN
+	ld [wPlayerMovingDirection], a
+	ld hl, .GhostMarowakText
+	rst _PrintText
+	ld a, SFX_TELEPORT_EXIT_2
+	call PlaySoundWaitForCurrent
+	ld d, VIRIDIANGYM_HIKER3
+	callfar FarNPCSpriteQuickSpin
+	rst TextScriptEnd
 .beforeBeat
 	ld hl, .PreBattleText
 	rst _PrintText
@@ -254,6 +272,11 @@ ViridianGymGiovanniText:
 
 .PostBattleAdviceText:
 	text_far _ViridianGymGiovanniPostBattleAdviceText
+	text_waitbutton
+	text_end
+
+.GhostMarowakText:
+	text_far _GhostMarowakAfterGiovanniText
 	text_waitbutton
 	text_end
 
@@ -365,9 +388,21 @@ ViridianGymCooltrainerM2AfterBattleText:
 
 ViridianGymHiker3Text:
 	text_asm
+	CheckBothEventsSet EVENT_CAUGHT_GHOST_MAROWAK, EVENT_BEAT_VIRIDIAN_GYM_GIOVANNI
+	jr nz, .normal
+	ld a, [wSprite07StateData2MapX]
+	cp 14 ; 10 + 4 = normal position
+	jr z, .normal
+	ld hl, .what
+	rst _PrintText
+	rst TextScriptEnd
+.normal
 	ld hl, ViridianGymTrainerHeader5
 	call TalkToTrainer
 	rst TextScriptEnd
+.what
+	text_far _ViridianGymHiker3WhatText
+	text_end
 
 ViridianGymHiker3BattleText:
 	text_far _ViridianGymHiker3BattleText

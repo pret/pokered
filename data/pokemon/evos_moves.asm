@@ -42,7 +42,7 @@ EvosMovesPointerTable:
 	dw BlastoiseEvosMoves
 	dw PinsirEvosMoves
 	dw TangelaEvosMoves
-	dw MissingNo1FEvosMoves
+	dw NothingEvosMoves ; torched
 	dw MissingNo20EvosMoves
 	dw GrowlitheEvosMoves
 	dw OnixEvosMoves
@@ -61,7 +61,7 @@ EvosMovesPointerTable:
 	dw PsyduckEvosMoves
 	dw DrowzeeEvosMoves
 	dw GolemEvosMoves
-	dw MissingNo32EvosMoves
+	dw NothingEvosMoves ; irradiated
 	dw MagmarEvosMoves
 	dw MissingNo34EvosMoves
 	dw ElectabuzzEvosMoves
@@ -97,7 +97,7 @@ EvosMovesPointerTable:
 	dw NinetalesEvosMoves
 	dw PikachuEvosMoves
 	dw RaichuEvosMoves
-	dw MissingNo56EvosMoves
+	dw NothingEvosMoves ; chunky
 	dw MissingNo57EvosMoves
 	dw DratiniEvosMoves
 	dw DragonairEvosMoves
@@ -126,7 +126,7 @@ EvosMovesPointerTable:
 	dw WeedleEvosMoves
 	dw KakunaEvosMoves
 	dw BeedrillEvosMoves
-	dw MissingNo73EvosMoves
+	dw NothingEvosMoves ; painless
 	dw DodrioEvosMoves
 	dw PrimeapeEvosMoves
 	dw DugtrioEvosMoves
@@ -145,7 +145,7 @@ EvosMovesPointerTable:
 	dw MewtwoEvosMoves
 	dw SnorlaxEvosMoves
 	dw MagikarpEvosMoves
-	dw MissingNo86EvosMoves
+	dw NothingEvosMoves ; the maw
 	dw MissingNo87EvosMoves
 	dw MukEvosMoves
 	dw MissingNo8AEvosMoves
@@ -680,7 +680,7 @@ TangelaEvosMoves:
 	db 54, SELFDESTRUCT
 	db 0
 
-MissingNo1FEvosMoves:
+NothingEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset

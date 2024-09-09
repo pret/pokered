@@ -1255,7 +1255,7 @@ PlayUnusedFanfareThenTextPrompt:
 	ld hl, TextScriptPromptButton
 	jp TextCommandProcessor
 
-PlayUnusedFanfare:
+PlayUnusedFanfare::
 	; play success sound
 	ld a, SFX_GET_ITEM_1
 	rst _PlaySound
@@ -1718,6 +1718,11 @@ FarSlideSpriteUp::
 	ld a, d
 	jr SlideSpriteUp
 
+FarSlideSpriteUpArbitrarySpeed::
+	ld a, d
+	lb de, 1, 0 ; up, slide
+	jr SlideSpriteUpOrDownCommon
+
 SlideSpriteDownWithWalkAnimation:
 	lb de, 0, 1 ; down, walk
 	jr SlideSpriteUpOrDown
@@ -1730,6 +1735,9 @@ SlideSpriteUp:
 SlideSpriteDown:
 	lb de, 0, 0 ; down, slide
 SlideSpriteUpOrDown:
+	ld hl, wTempStore1
+	ld [hl], 1
+SlideSpriteUpOrDownCommon:
 	; a = which sprite to perform this movement on
 	dec a
 	push af
@@ -1755,7 +1763,11 @@ SlideSpriteUpOrDown:
 .down2
 	inc [hl]
 .doneIncDec
-	rst _DelayFrame
+	push bc
+	ld a, [wTempStore1]
+	ld c, a
+	rst _DelayFrames
+	pop bc
 	dec b
 	jr nz, .walkLoop
 	ld a, e
@@ -1782,6 +1794,8 @@ SlideSpriteUpOrDown:
 	inc a
 .done
 	ld [bc], a
+	xor a
+	ld [wTempStore1], a
 	ret
 
 CheckIfVolcanoBattleOccurred:

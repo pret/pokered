@@ -1,5 +1,6 @@
 Music_PkmnHealed_Ch1::
 	tempo 144
+Music_PkmnHealed_Ch1_NoTempo::
 	volume 7, 7
 	duty_cycle 2
 	toggle_perfect_pitch

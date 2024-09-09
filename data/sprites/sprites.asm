@@ -99,6 +99,7 @@ SpriteSheetPointerTable:
 	overworld_sprite MonsterSwimmingSprite, 12        ; SPRITE_MONSTER_SWIMMING
 	overworld_sprite GravelerSprite, 12                ; SPRITE_GRAVELER
 	overworld_sprite NothingSprite, 12                 ; SPRITE_NOTHING
+	overworld_sprite GhostSprite, 12                  ; SPRITE_GHOST
 	overworld_sprite PokeBallSprite, 4                ; SPRITE_POKE_BALL
 	overworld_sprite FossilSprite, 4                  ; SPRITE_FOSSIL
 	overworld_sprite BoulderSprite, 4                 ; SPRITE_BOULDER

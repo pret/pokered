@@ -322,10 +322,11 @@ MainInBattleLoop:
 	ld a, [hli]
 	or [hl] ; is enemy mon HP 0?
 	jp z, HandleEnemyMonFainted ; if enemy mon HP is 0, jump
+	callfar CheckPerTurnSpecialBattleEffect
+.loopNoMoveSelected ; will loop to here in the case that the player didn't choose a move from the move selection menu
 	call SaveScreenTilesToBuffer1
 	xor a
 	ld [wFirstMonsNotOutYet], a
-	callfar VolcanoBattleInit
 	ld a, [wPlayerBattleStatus2]
 	and (1 << NEEDS_TO_RECHARGE) ; check if the player is needs to recharge
 	jr nz, .selectEnemyMove
@@ -370,7 +371,7 @@ MainInBattleLoop:
 	call LoadScreenTilesFromBuffer1
 	call DrawHUDsAndHPBars
 	pop af
-	jr nz, MainInBattleLoop ; if the player didn't select a move, jump
+	jr nz, .loopNoMoveSelected ; if the player didn't select a move, jump
 .selectEnemyMove
 	call SelectEnemyMove
 	ld a, [wLinkState]
@@ -863,11 +864,8 @@ FaintEnemyPokemon:
 	ld a, d
 	and a
 	ret z
-	CheckEitherEventSet EVENT_FIGHT_ROUTE16_SNORLAX, EVENT_FIGHT_ROUTE12_SNORLAX
-	ld hl, EnemyMonWasDefeatedText
-	jr nz, .doDefeatText
-	CheckEvent EVENT_BATTLING_VOLCANO_MAGMAR
-	jr nz, .doDefeatText
+	callfar CheckSpecialFaintText
+	jr c, .doDefeatText
 	ld hl, EnemyMonFaintedText
 .doDefeatText
 	rst _PrintText
@@ -1616,7 +1614,7 @@ HasMonFainted:
 	ld a, [wFirstMonsNotOutYet]
 	and a
 	jr nz, .done
-	call EmptyPartyMenuRedraw ; PureRGBnote: FIXED: minor graphical glitch when selecting a fainted pokemon 
+	callfar EmptyPartyMenuRedraw ; PureRGBnote: FIXED: minor graphical glitch when selecting a fainted pokemon 
 	ld hl, NoWillText
 	rst _PrintText
 .done
@@ -1640,7 +1638,15 @@ TryRunningFromBattle:
 	jp z, .canEscape
 	ld a, [wIsInBattle]
 	dec a
-	jr nz, .trainerBattle ; jump if it's a trainer battle
+	jp nz, .trainerBattle ; jump if it's a trainer battle
+	ld a, [wCurMap]
+	cp POKEMON_TOWER_B1F
+	jr nz, .normal
+	ld a, [wEnemyMonSpecies]
+	cp SPIRIT_THE_MAW
+	jp z, .cantEscape
+	jp .canEscape ; can always run from the other spirits
+.normal
 	ld a, [wNumRunAttempts]
 	inc a
 	ld [wNumRunAttempts], a
@@ -1703,6 +1709,7 @@ TryRunningFromBattle:
 	cp b
 	jr nc, .canEscape ; if the random value was less than or equal to the quotient
 	                  ; plus 30 times the number of attempts, the player can escape
+.cantEscape
 ; can't escape
 	ld a, $1
 	ld [wActionResultOrTookBattleTurn], a ; you lose your turn when you can't escape
@@ -1905,8 +1912,8 @@ SendOutMon:
 	ld a, [wcf91]
 	call PlayCry
 	call PrintEmptyString
-	jp SaveScreenTilesToBuffer1
-	
+	call SaveScreenTilesToBuffer1
+	jpfar CheckOnSendOutSpecialEffect
 
 ; show 2 stages of the player mon getting smaller before disappearing
 AnimateRetreatingPlayerMon:
@@ -2547,7 +2554,7 @@ PartyMenuOrRockOrRun:
 	cp d ; check if the mon to switch to is already out
 	jr nz, .notAlreadyOut
 ; mon is already out
-	call EmptyPartyMenuRedraw ; PureRGBnote: FIXED: minor graphical glitch avoided by redrawing the party menu before displaying the text
+	callfar EmptyPartyMenuRedraw ; PureRGBnote: FIXED: minor graphical glitch avoided by redrawing the party menu before displaying the text
 	ld hl, AlreadyOutText
 	rst _PrintText
 	jp .partyMonDeselected
@@ -3203,7 +3210,7 @@ SelectEnemyMove:
 	pop de
 .done
 	ld [wEnemySelectedMove], a
-	ret
+	jpfar TheMawChooseMove
 .linkedOpponentUsedStruggle
 	ld a, STRUGGLE
 	jr .done
@@ -3327,6 +3334,7 @@ PlayerCanExecuteChargingMove:
 PlayerCanExecuteMove:
 	call PrintMonName1Text
 	callfar CheckRemapMoveData
+	callfar CheckSpecialBattleMoveModifiersPlayer
 	ld hl, DecrementPP
 	ld de, wPlayerSelectedMove ; pointer to the move just used
 	ld b, BANK(DecrementPP)
@@ -6052,6 +6060,7 @@ EnemyCanExecuteMove:
 	ld [wMonIsDisobedient], a
 	call PrintMonName1Text
 	callfar CheckRemapMoveData
+	callfar CheckSpecialBattleMoveModifiersEnemy
 	ld a, [wEnemyMoveEffect]
 	ld hl, ResidualEffects1
 	ld de, $1
@@ -7369,11 +7378,11 @@ HandleExplodingAnimation: ; TODO: is still used unintentionally?
 	ld hl, wEnemyMonType1
 	ld de, wEnemyBattleStatus1
 	ld a, [wPlayerMoveNum]
-	jr z, .player
+	jr z, .gotTurn
 	ld hl, wBattleMonType1
 	ld de, wEnemyBattleStatus1
 	ld a, [wEnemyMoveNum]
-.player
+.gotTurn
 	cp SELFDESTRUCT
 	jr z, .isExplodingMove
 	cp EXPLOSION
@@ -7382,12 +7391,12 @@ HandleExplodingAnimation: ; TODO: is still used unintentionally?
 	ld a, [de]
 	bit INVULNERABLE, a ; fly/dig
 	ret nz
-	ld a, [hli]
-	cp GHOST
-	ret z
-	ld a, [hl]
-	cp GHOST
-	ret z
+	;ld a, [hli]
+	;cp GHOST
+	;ret z
+	;ld a, [hl]
+	;cp GHOST
+	;ret z ; both explosion moves affect ghost types now
 	ld a, [wMoveMissed]
 	and a
 	ret nz
@@ -7560,7 +7569,7 @@ _InitBattleCommon:
 	ld a, [wIsInBattle]
 	dec a ; is it a wild battle?
 	call z, DrawEnemyHUDAndHPBar ; draw enemy HUD and HP bar if it's a wild battle
-	callfar VolcanoInitMagmarBattle
+	callfar CheckInitSpecialBattleEffect
 	call StartBattle
 	callfar EndOfBattle
 	pop af
@@ -7864,18 +7873,6 @@ SetAISentOut:
 	set 1, a
 .partyret
 	ld [wAIWhichPokemonSentOutAlready], a
-	ret
-
-; PureRGBnote: FIXED: function to redraw the party menu without any bottom box text, used to avoid minor graphical glitches
-EmptyPartyMenuRedraw:
-	hlcoord 11, 11
-	lb bc, 1, 9
-	call ClearScreenArea
-	ld a, EMPTY_PARTY_MENU ; new party menu text option - it just displays no text in the bottom box since we'll be writing there immediately
-	ld [wPartyMenuTypeOrMessageID], a
-	call RedrawPartyMenu 
-	xor a ; NORMAL_PARTY_MENU
-	ld [wPartyMenuTypeOrMessageID], a
 	ret
 
 ; PureRGBnote: ADDED: determines if the opponent is immune to the move being used due to having used haze or mist

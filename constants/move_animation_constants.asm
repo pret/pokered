@@ -2,8 +2,9 @@
 ; SpecialEffectPointers associates them with effect routines (see data/battle_anims/special_effect_pointers.asm)
 	const_def $C0
 DEF FIRST_SE_ID EQU const_value
-	const_skip $E
+	const_skip $D
 ;;;;;;;;;; PureRGBnote: ADDED: new special effects
+	const SE_DIVINE_PROTECTION         ; $CE used in THE MAW battle if you switch to CUBONE
 	const SE_CROSSHAIR_SCANS_OPPONENT  ; $CF used in Conversion attack mode anim
 	const SE_LIGHT_SCREEN_FLASH        ; $D0 used in Teleport
 	const SE_SNOWFLAKES_EVERYWHERE     ; $D1 used in Blizzard

@@ -44,4 +44,8 @@ GenericMoveLeft::
 GenericMoveUp::
 	db NPC_MOVEMENT_UP
 	db -1
+
+GenericMoveRight::
+	db NPC_MOVEMENT_RIGHT
+	db -1
 	

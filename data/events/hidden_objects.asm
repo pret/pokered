@@ -102,6 +102,7 @@ HiddenObjectMaps:
 	db TYPE_GUYS_HOUSE
 	db CINNABAR_VOLCANO
 	db SILPH_CO_1F
+	db POKEMON_TOWER_B1F
 	db -1 ; end
 
 HiddenObjectPointers:
@@ -207,6 +208,7 @@ HiddenObjectPointers:
 	dw TypeGuysHouseHiddenObjects
 	dw CinnabarVolcanoHiddenObjects
 	dw SilphCo1FHiddenObjects
+	dw PokemonTowerB1FHiddenObjects
 
 MACRO hidden_object
 	db \2 ; y coord
@@ -823,4 +825,11 @@ CinnabarVolcanoHiddenObjects:
 
 SilphCo1FHiddenObjects:
 	hidden_object 37, 13, 0, SaffronAbandonedBuildingHeliumPipe
+	db -1
+
+PokemonTowerB1FHiddenObjects:
+	hidden_object 5, 48, 0, PokemonTowerB1FFirstGrave
+	hidden_object 5, 42, 0, PokemonTowerB1FSecondGrave
+	hidden_object 5, 36, 0, PokemonTowerB1FThirdGrave
+	hidden_object 5, 30, 0, PokemonTowerB1FFourthGrave
 	db -1

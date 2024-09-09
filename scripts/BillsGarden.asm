@@ -504,6 +504,7 @@ BillsGardenOakText5:
 
 ; input d = which pokemon to find
 ; returns flag c if found
+; TODO: duplicate code, also doesn't account for party potentially not being 6 mons
 FindPokemonInParty:
 	ld b, PARTY_LENGTH
 	ld hl, wPartySpecies
@@ -516,6 +517,9 @@ FindPokemonInParty:
 	and a
 	ret
 .found
+	ld a, PARTY_LENGTH
+	sub b
+	ld d, a ; which mon it was
 	scf
 	ret
 

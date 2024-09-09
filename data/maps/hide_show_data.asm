@@ -155,7 +155,7 @@ MapHSPointers:
 	dw PokemonTower7FHS
 	dw MrFujisHouseHS
 	dw NoHS
-	dw NoHS
+	dw LavenderTownCuboneHouseHS
 	dw NoHS
 	dw NoHS
 	dw NoHS
@@ -686,5 +686,7 @@ DiglettsCaveHS:
 	db DIGLETTS_CAVE, DIGLETTS_CAVE_DIGLETT2, HIDE
 	db DIGLETTS_CAVE, DIGLETTS_CAVE_DIGLETT3, HIDE
 	db DIGLETTS_CAVE, DIGLETTS_CAVE_DIGLETT4, HIDE
+LavenderTownCuboneHouseHS:
+	db LAVENDER_CUBONE_HOUSE, LAVENDERCUBONEHOUSE_CUBONE, SHOW
 	db $FF, $01, SHOW ; end
 	assert_table_length NUM_EXTRA_HS_OBJECTS + 1
