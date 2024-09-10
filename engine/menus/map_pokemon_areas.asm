@@ -155,7 +155,7 @@ DisplayWildLocations:
 	ld de, FishingWaterIcons
 	ld hl, vSprites tile $05
 	lb bc, BANK(FishingWaterIcons), 2
-	call CopyVideoData
+	call CopyVideoDataDouble
 	
 	call GetAreaDisplayTypes
 	ld a, [wTownMapAreaTypeFlags]

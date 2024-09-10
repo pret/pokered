@@ -145,7 +145,7 @@ CheckSaveTypeTextScreenTiles:
 	ld hl, vChars1 tile $40
 	ld de, OldNewTypes
 	lb bc, BANK(OldNewTypes), 4
-	call CopyVideoData
+	call CopyVideoDataDouble
 	; we need to save some tiles for later in case we display a TM text box above these tiles
 	hlcoord 4, 13
 	lb bc, 16, 5

@@ -39,12 +39,12 @@ LoadLightSwitchOffGraphic:
 	ld hl, vChars2 tile $46
 	ld de, LightSwitchOff
 	lb bc, BANK(LightSwitchOff), 1
-	jp CopyVideoData
+	jp CopyVideoDataDouble
 LoadLightSwitchOnGraphic:
 	ld hl, vChars2 tile $46
 	ld de, LightSwitchOn
 	lb bc, BANK(LightSwitchOn), 1
-	jp CopyVideoData
+	jp CopyVideoDataDouble
 
 TypeGuysHouseLightSwitch::
 	ld a, SFX_TELEPORT_ENTER_2

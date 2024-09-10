@@ -525,9 +525,9 @@ ShowPokedexDataInternal:
 	ld [wMenuCursorLocation+1], a
 	; load pokedex data page UI tiles (left + right arrows)
 	ld de, PokedexDataUI
-	lb bc, BANK(PokedexDataUI), (PokedexDataUIEnd - PokedexDataUI) / $10
+	lb bc, BANK(PokedexDataUI), 2
 	ld hl, vChars1 tile $4C
-	call CopyVideoData
+	call CopyVideoDataDouble
 
 	ld a, B_BUTTON
 	ld [wMenuWatchedKeys], a ; buttons this menu will track when displaying text (A Button used to proceed the text)

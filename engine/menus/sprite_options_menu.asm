@@ -136,7 +136,7 @@ SetSpriteOptionsFromCursorPositions:
 	ld hl, vChars1 tile $40
 	lb bc, BANK(EditPrompt), 3
 	; TODO: fix info prompt needing reload
-	call CopyVideoData
+	call CopyVideoDataDouble
 	jp GBPalNormal
 
 SetCursorPositionFromSpriteOptions:

@@ -14,11 +14,11 @@ LoadBillsPCExtraTiles::
 	ld de, ExtraMenuBorderConnectors
 	ld hl, vChars1 tile $40
 	lb bc, BANK(ExtraMenuBorderConnectors), 8
-	call CopyVideoData
+	call CopyVideoDataDouble
 	ld de, FromToChangeBoxPrompt
 	ld hl, vChars1 tile $48
 	lb bc, BANK(FromToChangeBoxPrompt), 5
-	jp CopyVideoData
+	jp CopyVideoDataDouble
 
 ; PureRGBnote: MOVED: moved from save.asm to here since it didn't rely on much from the other file
 ; this function was updated a bunch to display extra information about boxes and reformat the layout

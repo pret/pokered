@@ -333,9 +333,9 @@ ShowMoveData:
 
 	; load movedex data page UI tiles
 	ld de, MovedexUI
-	lb bc, BANK(MovedexUI), (MovedexUIEnd - MovedexUI) / $10
+	lb bc, BANK(MovedexUI), 21
 	ld hl, vChars1 tile $44
-	call CopyVideoData
+	call CopyVideoDataDouble
 
 	call DrawDataBorder
 

@@ -150,7 +150,7 @@ DisplayOptionMenu:
 	ld de, EditPrompt
 	ld hl, vChars1 tile $40
 	lb bc, BANK(EditPrompt), 3
-	call CopyVideoData
+	call CopyVideoDataDouble
 	ld de, PokedexPromptGraphics
 	ld hl, vChars1 tile $43
 	lb bc, BANK(PokedexPromptGraphics), 3
