@@ -1557,18 +1557,19 @@ wCapturedMonSpecies:: db
 wFirstMonsNotOutYet:: db
 
 wNamedObjectIndex::
+wNumSetBits::
+wTypeEffectiveness::
+wMoveType::
+wUsingPPUp::
+wMaxPP::
+wMoveGrammar::
+; 0 for player, non-zero for enemy
+wCalculateWhoseStats::
 wPokeBallCaptureCalcTemp::
 ; lower nybble: number of shakes
 ; upper nybble: number of animations to play
 wPokeBallAnimData::
-wUsingPPUp::
-wMaxPP::
-; 0 for player, non-zero for enemy
-wCalculateWhoseStats::
-wTypeEffectiveness::
-wMoveType::
-wNumSetBits::
-; used as a Pokemon and Item storage value. Also used as an output value for CountSetBits
+; used as a Pokemon and Item storage value.
 wd11e::
 	db
 
