@@ -328,3 +328,13 @@ DataSndPacket8:
 
 
 PalPacket_Movedex:        PAL_SET PAL_BLUEGREENMON, 0, 0, 0
+
+PalPacket_Celadon:        PAL_SET PAL_REDMON, PAL_ROUTE, PAL_BLUEMON, PAL_YELLOWMON
+
+BlkPacket_Celadon:
+	ATTR_BLK 4
+	ATTR_BLK_DATA %001, 0,0,0, 00,00, 04,17 ; left: pal 1
+	ATTR_BLK_DATA %001, 1,0,0, 05,00, 09,17 ; center left: pal 2
+	ATTR_BLK_DATA %001, 2,0,0, 10,00, 14,17 ; center right: pal 3
+	ATTR_BLK_DATA %001, 3,0,0, 15,00, 19,17 ; right: pal 4
+	ds 2, 0

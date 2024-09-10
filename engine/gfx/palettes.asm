@@ -220,6 +220,22 @@ SetPal_GameFreakIntro:
 ; PureRGBnote: CHANGED: abstracted code to a function called GetOverworldPalette for reusability.
 ; uses PalPacket_Empty to build a packet based on the current map
 SetPal_Overworld:
+	CheckEvent EVENT_CELADON_RAINBOW_COLORS_ACTIVE
+	jr z, .notCeladon
+	ld a, [wCurMap]
+	cp CELADON_CITY
+	jr z, .rainbow
+	cp FIRST_INDOOR_MAP
+	jr c, .notCeladon
+	ld a, [wLastMap]
+	cp CELADON_CITY
+	jr nz, .notCeladon
+	ld a, [wCurMap]
+	ld hl, NoRainbowCeladonMaps
+	ld de, 1
+	call IsInArray
+	jr nc, .rainbow
+.notCeladon
 	ld hl, PalPacket_Empty
 	ld de, wPalPacket
 	ld bc, $10
@@ -231,6 +247,27 @@ SetPal_Overworld:
 	ld a, SET_PAL_OVERWORLD
 	ld [wDefaultPaletteCommand], a
 	ret
+.rainbow
+	ld hl, PalPacket_Celadon
+	ld de, wPalPacket
+	ld bc, $10
+	rst _CopyData
+	ld hl, PalPacket_Celadon
+	ld de, BlkPacket_Celadon
+	ld a, SET_PAL_OVERWORLD
+	ld [wDefaultPaletteCommand], a
+	ret
+
+; some maps look weird with the celadon rainbow so don't use it in them even if turned on.
+NoRainbowCeladonMaps:
+	db CELADON_GYM
+	db GAME_CORNER
+	db ROCKET_HIDEOUT_B1F
+	db ROCKET_HIDEOUT_B2F
+	db ROCKET_HIDEOUT_B3F
+	db ROCKET_HIDEOUT_B4F
+	db ROCKET_HIDEOUT_ELEVATOR
+	db -1
 
 ; PureRGBnote: CHANGED: abstracted into its own function, removed some redundant code
 ; stores the palette used  for the current map in a
@@ -1200,7 +1237,7 @@ palPacketPointers:
 	dw wPartyMenuBlkPacket
 	dw wTrainerCardBlkPacket
 	dw BlkPacket_GameFreakIntro
-	dw wPalPacket
+	dw BlkPacket_Celadon
 	dw BlkPacket_PokemonMiddleScreenBox
 palPacketPointersEnd:
 

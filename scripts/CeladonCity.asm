@@ -124,6 +124,16 @@ CeladonCityTrainerTips1Text:
 	text_end
 
 CeladonCitySignText:
+	text_asm
+	ld hl, .text
+	rst _PrintText
+	CheckAndSetEvent EVENT_CELADON_RAINBOW_COLORS_ACTIVE
+	jr z, .done
+	ResetEventReuseHL EVENT_CELADON_RAINBOW_COLORS_ACTIVE
+.done
+	call RunDefaultPaletteCommand
+	rst TextScriptEnd
+.text
 	text_far _CeladonCitySignText
 	text_end
 

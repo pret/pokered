@@ -107,7 +107,7 @@ LoadBGMapAttributes::
 
 BGMapAttributesPointers:
 	dw BGMapAttributes_PokemonMiddleScreenBox
-	dw BGMapAttributes_Unknown2
+	dw BGMapAttributes_Celadon
 	dw BGMapAttributes_GameFreakIntro
 	dw BGMapAttributes_TrainerCard
 	dw BGMapAttributes_PartyMenu
