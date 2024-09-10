@@ -102,9 +102,9 @@ LoadFrontSpriteByMonIndex::
 	ld a, [wd11e]
 	push af
 	ld a, [wCurPartySpecies]
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	predef IndexToPokedex
-	ld hl, wd11e
+	ld hl, wPokedexNum
 	ld a, [hl]
 	pop bc
 	ld [hl], b
@@ -384,7 +384,7 @@ GetMonHeader::
 	ld a, [wd11e]
 	push af
 	ld a, [wd0b5]
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	ld de, FossilKabutopsPic
 	ld b, $66 ; size of Kabutops fossil and Ghost sprites
 	cp FOSSIL_KABUTOPS ; Kabutops fossil
@@ -398,8 +398,8 @@ GetMonHeader::
 	jr z, .specialID
 	cp MEW
 	jr z, .mew
-	predef IndexToPokedex   ; convert pokemon ID in [wd11e] to pokedex number
-	ld a, [wd11e]
+	predef IndexToPokedex
+	ld a, [wPokedexNum]
 	dec a
 	ld bc, BASE_DATA_SIZE
 	ld hl, BaseStats

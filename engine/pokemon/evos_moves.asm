@@ -153,12 +153,12 @@ Evolution_PartyMonLoop: ; loop over party mons
 	call DelayFrames
 	call ClearScreen
 	call RenameEvolvedMon
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	push af
 	ld a, [wd0b5]
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	predef IndexToPokedex
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	dec a
 	ld hl, BaseStats
 	ld bc, BASE_DATA_SIZE
@@ -168,7 +168,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, [wd0b5]
 	ld [wMonHIndex], a
 	pop af
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	ld hl, wLoadedMonHPExp - 1
 	ld de, wLoadedMonStats
 	ld b, $1
@@ -204,7 +204,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	pop bc
 	call CopyData
 	ld a, [wd0b5]
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	xor a
 	ld [wMonDataLocation], a
 	call LearnMoveFromLevelUp
@@ -214,7 +214,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	and a
 	call z, Evolution_ReloadTilesetTilePatterns
 	predef IndexToPokedex
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	dec a
 	ld c, a
 	ld b, FLAG_SET

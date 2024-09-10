@@ -1560,6 +1560,7 @@ wNamedObjectIndex::
 wNumSetBits::
 wTypeEffectiveness::
 wMoveType::
+wPokedexNum::
 wUsingPPUp::
 wMaxPP::
 wMoveGrammar::

@@ -54,9 +54,9 @@ _GivePokemon::
 SetPokedexOwnedFlag:
 	ld a, [wCurPartySpecies]
 	push af
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	predef IndexToPokedex
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	dec a
 	ld c, a
 	ld hl, wPokedexOwned

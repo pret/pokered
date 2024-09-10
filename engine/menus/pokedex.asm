@@ -471,7 +471,7 @@ ShowPokedexDataInternal:
 	ld h, b
 	ld l, c
 	push de
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	push af
 	call IndexToPokedex
 
@@ -480,7 +480,7 @@ ShowPokedexDataInternal:
 	ld [hli], a
 	ld a, "<DOT>"
 	ld [hli], a
-	ld de, wd11e
+	ld de, wPokedexNum
 	lb bc, LEADING_ZEROES | 1, 3
 	call PrintNumber ; print pokedex number
 
@@ -624,10 +624,10 @@ DrawTileLine:
 INCLUDE "data/pokemon/dex_entries.asm"
 
 PokedexToIndex:
-	; converts the Pokédex number at wd11e to an index
+	; converts the Pokédex number at [wPokedexNum] to an index
 	push bc
 	push hl
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	ld b, a
 	ld c, 0
 	ld hl, PokedexOrder
@@ -639,23 +639,23 @@ PokedexToIndex:
 	jr nz, .loop
 
 	ld a, c
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	pop hl
 	pop bc
 	ret
 
 IndexToPokedex:
-	; converts the index number at wd11e to a Pokédex number
+	; converts the index number at [wPokedexNum] to a Pokédex number
 	push bc
 	push hl
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	dec a
 	ld hl, PokedexOrder
 	ld b, 0
 	ld c, a
 	add hl, bc
 	ld a, [hl]
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	pop hl
 	pop bc
 	ret
