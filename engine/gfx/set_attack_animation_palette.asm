@@ -96,8 +96,8 @@ TypePalColorList:
 	db PAL_BLACK2;typeless
 	db PAL_GREENBAR;bug
 	db PAL_PURPLEMON;ghost
-	db PAL_BLACK2;unused
-	db PAL_BLACK2;unused
+	db PAL_BLACK2;crystal (no moves)
+	db PAL_WHITEMON; bonemerang
 	db PAL_BLACK2;unused
 	db PAL_BLACK2;unused
 	db PAL_BLACK2;unused
@@ -165,6 +165,7 @@ AnimPaletteMapping:
 	db CONVERSION_ATTACK_MODE_ANIM, PAL_GREENBAR
 	db RADIATION_ANIM, PAL_GREENBAR
 	db DIVINE_PROTECTION_ANIM, PAL_YELLOWMON
+	db BONE_CLUB, PAL_WHITEMON
 	db -1 
 
 IsInArrayWrapped:

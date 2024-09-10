@@ -277,7 +277,8 @@ HoFDisplayPlayerStats:
 HoFPrintTextAndDelay:
 	rst _PrintText
 	ld c, 120
-	jp DelayFrames
+	rst _DelayFrames
+	ret
 
 HoFPlayTimeText:
 	db "PLAY TIME@"
@@ -306,7 +307,8 @@ HoFRecordMonInfo:
 	ld d, h
 	ld hl, wcd6d
 	ld bc, NAME_LENGTH
-	jp CopyData
+	rst _CopyData
+	ret
 
 HoFFadeOutScreenAndMusic:
 	ld a, 10

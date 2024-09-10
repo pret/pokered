@@ -11,6 +11,7 @@ TypeNames:
 	dw .Bug
 	dw .Ghost
 	dw .Crystal
+	dw .Ground ; bonemerang type
 
 REPT UNUSED_TYPES_END - UNUSED_TYPES
 	dw .Normal

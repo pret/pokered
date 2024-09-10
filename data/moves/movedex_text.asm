@@ -1664,7 +1664,12 @@ _BonemerangDexEntry::
 	next "to strike the foe"
 
 	bage "2 times in quick"
-	next "succession.@"
+	next "succession. Unlike"
+	next "other GROUND-type"
+
+	bage "moves, it can hit"
+	next "#MON that are"
+	next "FLYING-type.@"
 
 	text_jump _Generic33PercentLowerSpeedText
 

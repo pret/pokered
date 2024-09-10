@@ -24,7 +24,8 @@ LoadShootingStarGraphics:
 	ld hl, GameFreakShootingStarOAMData
 	ld de, wShadowOAM
 	ld bc, GameFreakShootingStarOAMDataEnd - GameFreakShootingStarOAMData
-	jp CopyData
+	rst _CopyData
+	ret
 
 AnimateShootingStar:
 	call LoadShootingStarGraphics
@@ -264,6 +265,5 @@ GameFreakShootingStarOAMData:	;shinpokerednote: gbcnote: changing the attribute 
 	db $08,$A8,$A1,$34
 GameFreakShootingStarOAMDataEnd:
 
-FallingStar:
-	INCBIN "gfx/splash/falling_star.2bpp"
-FallingStarEnd:
+FallingStar:: INCBIN "gfx/splash/falling_star.2bpp"
+FallingStarEnd::

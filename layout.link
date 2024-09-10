@@ -66,6 +66,7 @@ ROMX $8
 	"Low Health Alarm (Audio Engine 2)"
 	"Audio Engine 2"
 	"Music 2"
+	"Splash Animation"
 ROMX $9
 	"Pics 1"
 ROMX $A
@@ -190,7 +191,6 @@ ROMX $30
 	"NPC Sprites 3"
 ROMX $31
 	"Movedex Text"
-	"Splash Animation"
 ROMX $32
 	"Type Icons"
 	"Menu Prompt Graphics"

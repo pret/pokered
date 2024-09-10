@@ -167,7 +167,7 @@ Moves:
 	move CRABHAMMER,   NO_ADDITIONAL_EFFECT,        90, WATER,         95, 10 ; high critical hit ratio
 	move EXPLOSION,    EXPLODE_RECOIL_EFFECT,      140, ROCK,         100,  5
 	move FURY_SWIPES,  NO_ADDITIONAL_EFFECT,        40, GROUND,       100, 15 ; -> DUST CLAW
-	move BONEMERANG,   BONEMERANG_EFFECT,           60, GROUND,        95, 10 ; hits twice, 30% chance to lower speed of opponent
+	move BONEMERANG,   BONEMERANG_EFFECT,           60, BONEMERANG_TYPE, 95, 10 ; hits twice, 30% chance to lower speed of opponent
 	move REST,         HEAL_EFFECT,                  0, PSYCHIC_TYPE, 100, 10
 	move ROCK_SLIDE,   FLINCH_SIDE_EFFECT1,         80, ROCK,         100, 10
 	move HYPER_FANG,   FLINCH_SIDE_EFFECT1,         80, NORMAL,        90, 15

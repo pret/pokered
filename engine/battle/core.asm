@@ -5363,59 +5363,9 @@ IncrementMovePP:
 
 ; function to adjust the base damage of an attack to account for type effectiveness
 AdjustDamageForMoveType:
-; values for player turn
-	ld hl, wBattleMonType
-	ld a, [hli]
-	ld b, a    ; b = type 1 of attacker
-	ld c, [hl] ; c = type 2 of attacker
-	ld hl, wEnemyMonType
-	ld a, [hli]
-	ld d, a    ; d = type 1 of defender
-	ld e, [hl] ; e = type 2 of defender
-	ld a, [wPlayerMoveType]
-	ld [wMoveType], a
-	ldh a, [hWhoseTurn]
-	and a
-	jr z, .next
-; values for enemy turn
-	ld hl, wEnemyMonType
-	ld a, [hli]
-	ld b, a    ; b = type 1 of attacker
-	ld c, [hl] ; c = type 2 of attacker
-	ld hl, wBattleMonType
-	ld a, [hli]
-	ld d, a    ; d = type 1 of defender
-	ld e, [hl] ; e = type 2 of defender
-	ld a, [wEnemyMoveType]
-	ld [wMoveType], a
-.next
-	ld a, [wMoveType]
-	cp b ; does the move type match type 1 of the attacker?
-	jr z, .sameTypeAttackBonus
-	cp c ; does the move type match type 2 of the attacker?
-	jr z, .sameTypeAttackBonus
-;;;;;;;;;; PureRGBnote: ADDED: CRYSTAL type pokemon get STAB on ROCK attacks
-	cp ROCK
-	jr z, .checkCrystalStab
-;;;;;;;;;;
-;;;;;;;;;; PureRGBnote: ADDED: normal type pokemon get STAB on tri attack
-	cp TRI
-	jr nz, .skipSameTypeAttackBonus
-	ld a, NORMAL 
-	cp b ; does NORMAL match type 1 of the attacker?
-	jr z, .sameTypeAttackBonus
-	cp c ; does NORMAL match type 2 of the attacker?
-	jr z, .sameTypeAttackBonus
-;;;;;;;;;
-	jr .skipSameTypeAttackBonus
-;;;;;;;;;; PureRGBnote: ADDED: CRYSTAL type pokemon get STAB on ROCK attacks
-.checkCrystalStab
-	ld a, CRYSTAL ; ROCK type moves still get STAB for CRYSTAL type pokemon (only hardened onix at the moment)
-	cp b ; does CRYSTAL match type 1 of the attacker?
-	jr z, .sameTypeAttackBonus
-	cp c ; does CRYSTAL match type 2 of the attacker?
-	jr nz, .skipSameTypeAttackBonus
-;;;;;;;;;;
+	callfar ShouldMoveGetStabBoost
+	; de still set to defending mon's types after above callfar
+	jr nc, .skipSameTypeAttackBonus
 .sameTypeAttackBonus
 ; if the move type matches one of the attacker's types
 	ld hl, wDamage + 1

@@ -22,8 +22,8 @@ TypePaletteMapping:
 	db PAL_SAFARIBALL;typeless
 	db PAL_GREENMON;bug
 	db PAL_BLACKMON;ghost
-	db PAL_BLACK2;unused
-	db PAL_BLACK2;unused
+	db PAL_BLACK2; crystal (no moves use this type)
+	db PAL_REDMON ; bonemerang (same as ground)
 	db PAL_BLACK2;unused
 	db PAL_BLACK2;unused
 	db PAL_BLACK2;unused
@@ -71,8 +71,8 @@ TypeGraphicMapping:
 	dw TypelessIcon;typeless
 	dw BugTypeIcon;bug
 	dw GhostTypeIcon;ghost
-	dw 0 ;unused
-	dw 0 ;unused
+	dw 0 ; crystal (no moves use this type)
+	dw GroundTypeIcon ; bonemerang
 	dw 0 ;unused
 	dw 0 ;unused
 	dw 0 ;unused
