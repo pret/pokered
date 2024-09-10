@@ -99,7 +99,7 @@ LoadFlippedFrontSpriteByMonIndex::
 
 LoadFrontSpriteByMonIndex::
 	push hl
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	push af
 	ld a, [wCurPartySpecies]
 	ld [wPokedexNum], a
@@ -355,8 +355,8 @@ PrintLevelFull::
 	ld a, [wLoadedMonLevel] ; level
 
 PrintLevelCommon::
-	ld [wd11e], a
-	ld de, wd11e
+	ld [wTempByteValue], a
+	ld de, wTempByteValue
 	ld b, LEFT_ALIGN | 1 ; 1 byte
 	jp PrintNumber
 
@@ -381,7 +381,7 @@ GetMonHeader::
 	push bc
 	push de
 	push hl
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	push af
 	ld a, [wd0b5]
 	ld [wPokedexNum], a
@@ -426,7 +426,7 @@ GetMonHeader::
 	ld a, [wd0b5]
 	ld [wMonHIndex], a
 	pop af
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	pop hl
 	pop de
 	pop bc

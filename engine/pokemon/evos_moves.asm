@@ -319,7 +319,7 @@ Evolution_ReloadTilesetTilePatterns:
 
 LearnMoveFromLevelUp:
 	ld hl, EvosMovesPointerTable
-	ld a, [wd11e] ; species
+	ld a, [wPokedexNum] ; species
 	ld [wCurPartySpecies], a
 	dec a
 	ld bc, 0
@@ -372,7 +372,7 @@ LearnMoveFromLevelUp:
 	predef LearnMove
 .done
 	ld a, [wCurPartySpecies]
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	ret
 
 ; writes the moves a mon has at level [wCurEnemyLevel] to [de]

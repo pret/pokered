@@ -9,7 +9,7 @@ ShowPokedexMenu:
 	ld [wListScrollOffset], a
 	ld [wLastMenuItem], a
 	inc a
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	ldh [hJoy7], a
 .setUpGraphics
 	ld b, SET_PAL_GENERIC
@@ -68,8 +68,8 @@ HandlePokedexSideMenu:
 	push af
 	add b
 	inc a
-	ld [wd11e], a
-	ld a, [wd11e]
+	ld [wPokedexNum], a
+	ld a, [wPokedexNum]
 	push af
 	ld a, [wDexMaxSeenMon]
 	push af ; this doesn't need to be preserved
@@ -111,7 +111,7 @@ HandlePokedexSideMenu:
 	pop af
 	ld [wDexMaxSeenMon], a
 	pop af
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	pop af
 	ld [wListScrollOffset], a
 	pop af
@@ -142,7 +142,7 @@ HandlePokedexSideMenu:
 
 ; play pokemon cry
 .choseCry
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	call GetCryData
 	call PlaySound
 	jr .handleMenuInput
@@ -222,7 +222,7 @@ HandlePokedexListMenu:
 	call ClearScreenArea
 	hlcoord 1, 3
 	ld a, [wListScrollOffset]
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	ld d, 7
 	ld a, [wDexMaxSeenMon]
 	cp 7
@@ -233,17 +233,17 @@ HandlePokedexListMenu:
 ; loop to print pokemon pokedex numbers and names
 ; if the player has owned the pokemon, it puts a pokeball beside the name
 .printPokemonLoop
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	inc a
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	push af
 	push de
 	push hl
 	ld de, -SCREEN_WIDTH
 	add hl, de
-	ld de, wd11e
+	ld de, wPokedexNum
 	lb bc, LEADING_ZEROES | 1, 3
-	call PrintNumber ; print the pokedex number
+	call PrintNumber
 	ld de, SCREEN_WIDTH
 	add hl, de
 	dec hl
@@ -276,7 +276,7 @@ HandlePokedexListMenu:
 	add hl, bc
 	pop de
 	pop af
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	dec d
 	jr nz, .printPokemonLoop
 	ld a, 01
@@ -376,10 +376,10 @@ PokedexMenuItemsText:
 
 ; tests if a pokemon's bit is set in the seen or owned pokemon bit fields
 ; INPUT:
-; [wd11e] = pokedex number
+; [wPokedexNum] = pokedex number
 ; hl = address of bit field
 IsPokemonBitSet:
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	dec a
 	ld c, a
 	ld b, FLAG_TEST
@@ -403,13 +403,13 @@ ShowPokedexDataInternal:
 	ldh [rNR50], a
 	call GBPalWhiteOut ; zero all palettes
 	call ClearScreen
-	ld a, [wd11e] ; pokemon ID
+	ld a, [wPokedexNum]
 	ld [wCurPartySpecies], a
 	push af
 	ld b, SET_PAL_POKEDEX
 	call RunPaletteCommand
 	pop af
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	ldh a, [hTileAnimations]
 	push af
 	xor a
@@ -455,7 +455,7 @@ ShowPokedexDataInternal:
 	call PlaceString
 
 	ld hl, PokedexEntryPointers
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	dec a
 	ld e, a
 	ld d, 0
@@ -487,7 +487,7 @@ ShowPokedexDataInternal:
 	ld hl, wPokedexOwned
 	call IsPokemonBitSet
 	pop af
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	ld a, [wCurPartySpecies]
 	ld [wd0b5], a
 	pop de

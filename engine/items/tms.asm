@@ -20,17 +20,17 @@ CanLearnTM:
 	ld b, FLAG_TEST
 	predef_jump FlagActionPredef
 
-; converts TM/HM number in wd11e into move number
+; converts TM/HM number in [wTempTMHM] into move number
 ; HMs start at 51
 TMToMove:
-	ld a, [wd11e]
+	ld a, [wTempTMHM]
 	dec a
 	ld hl, TechnicalMachines
 	ld b, $0
 	ld c, a
 	add hl, bc
 	ld a, [hl]
-	ld [wd11e], a
+	ld [wTempTMHM], a
 	ret
 
 INCLUDE "data/moves/tmhm_moves.asm"

@@ -825,7 +825,7 @@ OaksLabBulbasaurPokeBallText:
 
 OaksLabSelectedPokeBallScript:
 	ld [wCurPartySpecies], a
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	ld a, b
 	ld [wSpriteIndex], a
 	CheckEvent EVENT_GOT_STARTER
@@ -927,7 +927,7 @@ OaksLabMonChoiceMenu:
 	ld a, 5
 	ld [wCurEnemyLevel], a
 	ld a, [wCurPartySpecies]
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	call AddPartyMon
 	ld hl, wStatusFlags4
 	set BIT_GOT_STARTER, [hl]

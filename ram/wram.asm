@@ -1557,10 +1557,12 @@ wCapturedMonSpecies:: db
 wFirstMonsNotOutYet:: db
 
 wNamedObjectIndex::
+wTempByteValue::
 wNumSetBits::
 wTypeEffectiveness::
 wMoveType::
 wPokedexNum::
+wTempTMHM::
 wUsingPPUp::
 wMaxPP::
 wMoveGrammar::
@@ -1570,8 +1572,6 @@ wPokeBallCaptureCalcTemp::
 ; lower nybble: number of shakes
 ; upper nybble: number of animations to play
 wPokeBallAnimData::
-; used as a Pokemon and Item storage value.
-wd11e::
 	db
 
 ; When this value is non-zero, the player isn't allowed to exit the party menu
