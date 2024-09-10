@@ -248,8 +248,8 @@ _BillsGardenBikeShopOwnerMistyOverheardText::
 	para "Sounds like when"
 	line "I bike up CYCLING"
 	cont "ROAD to exercise!"
-	para "MISTY: -What a"
-	line "hunk!-"
+	para "MISTY: (What a"
+	line "hunk!)"
 	done
 
 _BillsGardenBikeShopOwnerText::

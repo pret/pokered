@@ -98,7 +98,7 @@ _SSAnneCaptainsRoomSeasickBookText::
 	done
 
 _SSAnneCaptainsRoomCutBookText::
-	text "STUDY SCYTHER;"
+	text "STUDY SCYTHER:"
 	line "STUDY THE BLADE@"
 	text_end
 

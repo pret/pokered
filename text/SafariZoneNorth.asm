@@ -153,7 +153,7 @@ _SafariZoneNorthSuperNerdAfterBattleText::
 	para "Hyuck hyuck"
 	line "hyuck hyuck!"
 
-	para "--What a weirdo!--"
+	para "(What a weirdo!)"
 	done
 
 _SafariZoneNorthEngineerText::

@@ -50,7 +50,7 @@ _CeruleanRocketHouseB1FLeftComputerText2::
 	cont "#MON has"
 	cont "proven useful."
 	para "At the moment"
-	line "-automation- has"
+	line "“automation” has"
 	cont "only been"
 	cont "attained with"
 	cont "#MON of very"

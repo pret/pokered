@@ -47,8 +47,8 @@
 	charmap "ぅ",         $6f ; hiragana small u, unused
 	charmap "‘",         $70 ; opening single quote
 	charmap "’",         $71 ; closing single quote
-	charmap "“",         $72 ; opening quote
-	charmap "”",         $73 ; closing quote
+	charmap "<EXTRAOPENQUOTE>",         $72 ; opening quote 
+	charmap "<EXTRACLOSEQUOTE>",         $73 ; closing quote 
 	charmap "·",         $74 ; middle dot, unused
 	charmap "…",         $75 ; ellipsis
 	charmap "ぁ",         $76 ; hiragana small a, unused
@@ -121,8 +121,8 @@
 	charmap ")",         $9b
 	charmap ":",         $9c
 	charmap ";",         $9d
-	charmap "[",         $9e
-	charmap "]",         $9f
+	charmap "“",         $9e
+	charmap "”",         $9f
 
 	charmap "a",         $a0
 	charmap "b",         $a1
