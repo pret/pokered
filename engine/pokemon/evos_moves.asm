@@ -135,7 +135,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	call PrintText
 	pop hl
 	ld a, [hl]
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	ld [wLoadedMonSpecies], a
 	ld [wEvoNewSpecies], a
 	ld a, MONSTER_NAME
@@ -155,7 +155,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	call RenameEvolvedMon
 	ld a, [wPokedexNum]
 	push af
-	ld a, [wd0b5]
+	ld a, [wCurSpecies]
 	ld [wPokedexNum], a
 	predef IndexToPokedex
 	ld a, [wPokedexNum]
@@ -165,7 +165,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	call AddNTimes
 	ld de, wMonHeader
 	call CopyData
-	ld a, [wd0b5]
+	ld a, [wCurSpecies]
 	ld [wMonHIndex], a
 	pop af
 	ld [wPokedexNum], a
@@ -203,7 +203,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	dec hl
 	pop bc
 	call CopyData
-	ld a, [wd0b5]
+	ld a, [wCurSpecies]
 	ld [wPokedexNum], a
 	xor a
 	ld [wMonDataLocation], a
@@ -260,13 +260,14 @@ Evolution_PartyMonLoop: ; loop over party mons
 RenameEvolvedMon:
 ; Renames the mon to its new, evolved form's standard name unless it had a
 ; nickname, in which case the nickname is kept.
-	ld a, [wd0b5]
+	assert wCurSpecies == wNameListIndex ; save+restore wCurSpecies while using wNameListIndex
+	ld a, [wCurSpecies]
 	push af
 	ld a, [wMonHIndex]
-	ld [wd0b5], a
+	ld [wNameListIndex], a
 	call GetName
 	pop af
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	ld hl, wNameBuffer
 	ld de, wStringBuffer
 .compareNamesLoop

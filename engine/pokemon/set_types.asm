@@ -4,7 +4,7 @@ SetPartyMonTypes:
 	ld bc, wPartyMon1Type - wPartyMon1 ; $5
 	add hl, bc
 	ld a, [wPokedexNum]
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	push hl
 	call GetMonHeader
 	pop hl

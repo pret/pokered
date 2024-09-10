@@ -140,7 +140,7 @@ StatusScreen:
 	call PrintLevel ; Pokémon level
 	ld a, [wMonHIndex]
 	ld [wPokedexNum], a
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	predef IndexToPokedex
 	hlcoord 3, 7
 	ld de, wPokedexNum

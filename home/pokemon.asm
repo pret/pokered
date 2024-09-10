@@ -371,7 +371,7 @@ GetwMoves::
 
 ; copies the base stat data of a pokemon to wMonHeader
 ; INPUT:
-; [wd0b5] = pokemon ID
+; [wCurSpecies] = pokemon ID
 GetMonHeader::
 	ldh a, [hLoadedROMBank]
 	push af
@@ -383,7 +383,7 @@ GetMonHeader::
 	push hl
 	ld a, [wPokedexNum]
 	push af
-	ld a, [wd0b5]
+	ld a, [wCurSpecies]
 	ld [wPokedexNum], a
 	ld de, FossilKabutopsPic
 	ld b, $66 ; size of Kabutops fossil and Ghost sprites
@@ -423,7 +423,7 @@ GetMonHeader::
 	ld a, BANK(MewBaseStats)
 	call FarCopyData
 .done
-	ld a, [wd0b5]
+	ld a, [wCurSpecies]
 	ld [wMonHIndex], a
 	pop af
 	ld [wPokedexNum], a

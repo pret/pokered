@@ -113,8 +113,8 @@ GainExperience:
 	ld b, 0
 	ld hl, wPartySpecies
 	add hl, bc
-	ld a, [hl] ; species
-	ld [wd0b5], a
+	ld a, [hl]
+	ld [wCurSpecies], a
 	call GetMonHeader
 	ld d, MAX_LEVEL
 	callfar CalcExperience ; get max exp
@@ -168,8 +168,8 @@ GainExperience:
 	ld [hl], a
 	ld bc, wPartyMon1Species - wPartyMon1Level
 	add hl, bc
-	ld a, [hl] ; species
-	ld [wd0b5], a
+	ld a, [hl]
+	ld [wCurSpecies], a
 	ld [wPokedexNum], a
 	call GetMonHeader
 	ld bc, (wPartyMon1MaxHP + 1) - wPartyMon1Species
@@ -251,7 +251,7 @@ GainExperience:
 	call LoadScreenTilesFromBuffer1
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a
-	ld a, [wd0b5]
+	ld a, [wCurSpecies]
 	ld [wPokedexNum], a
 	predef LearnMoveFromLevelUp
 	ld hl, wCanEvolveFlags

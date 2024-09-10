@@ -1421,7 +1421,7 @@ EnemySendOutFirstMon:
 	call PrintText
 	ld a, [wEnemyMonSpecies2]
 	ld [wCurPartySpecies], a
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	call GetMonHeader
 	ld de, vFrontPic
 	call LoadMonFrontSprite
@@ -1642,7 +1642,7 @@ LoadBattleMonFromParty:
 	ld bc, wBattleMonPP - wBattleMonLevel
 	call CopyData
 	ld a, [wBattleMonSpecies2]
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	call GetMonHeader
 	ld hl, wPartyMonNicks
 	ld a, [wPlayerMonNumber]
@@ -1686,7 +1686,7 @@ LoadEnemyMonFromParty:
 	ld bc, wEnemyMonPP - wEnemyMonLevel
 	call CopyData
 	ld a, [wEnemyMonSpecies]
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	call GetMonHeader
 	ld hl, wEnemyMonNicks
 	ld a, [wWhichPokemon]
@@ -2380,7 +2380,7 @@ PartyMenuOrRockOrRun:
 ; enemy mon is not minimised
 	ld a, [wEnemyMonSpecies]
 	ld [wCurPartySpecies], a
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	call GetMonHeader
 	ld de, vFrontPic
 	call LoadMonFrontSprite
@@ -4406,7 +4406,7 @@ GetEnemyMonStat:
 	ld a, [wEnemyMonLevel]
 	ld [wCurEnemyLevel], a
 	ld a, [wEnemyMonSpecies]
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	call GetMonHeader
 	ld hl, wEnemyMonDVs
 	ld de, wLoadedMonSpeedExp
@@ -4610,7 +4610,7 @@ CriticalHitTest:
 	jr nz, .handleEnemy
 	ld a, [wBattleMonSpecies]
 .handleEnemy
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	call GetMonHeader
 	ld a, [wMonHBaseSpeed]
 	ld b, a
@@ -5625,7 +5625,7 @@ EnemyCanExecuteChargingMove:
 	res CHARGING_UP, [hl] ; no longer charging up for attack
 	res INVULNERABLE, [hl] ; no longer invulnerable to typical attacks
 	ld a, [wEnemyMoveNum]
-	ld [wd0b5], a
+	ld [wNameListIndex], a
 	ld a, BANK(MoveNames)
 	ld [wPredefBank], a
 	ld a, MOVE_NAME
@@ -6098,7 +6098,7 @@ GetCurrentMove:
 	jr nz, .selected
 	ld a, [wPlayerSelectedMove]
 .selected
-	ld [wd0b5], a
+	ld [wNameListIndex], a
 	dec a
 	ld hl, Moves
 	ld bc, MOVE_LENGTH
@@ -6120,7 +6120,7 @@ LoadEnemyMonData:
 	jp z, LoadEnemyMonFromParty
 	ld a, [wEnemyMonSpecies2]
 	ld [wEnemyMonSpecies], a
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	call GetMonHeader
 	ld a, [wEnemyBattleStatus3]
 	bit TRANSFORMED, a ; is enemy mon transformed?

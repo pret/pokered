@@ -489,7 +489,7 @@ ShowPokedexDataInternal:
 	pop af
 	ld [wPokedexNum], a
 	ld a, [wCurPartySpecies]
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	pop de
 
 	push af

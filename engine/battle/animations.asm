@@ -2032,7 +2032,7 @@ ChangeMonPic:
 	jr z, .playerTurn
 	ld a, [wChangeMonPicEnemyTurnSpecies]
 	ld [wCurPartySpecies], a
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	xor a
 	ld [wSpriteFlipped], a
 	call GetMonHeader
@@ -2044,7 +2044,7 @@ ChangeMonPic:
 	push af
 	ld a, [wChangeMonPicPlayerTurnSpecies]
 	ld [wBattleMonSpecies2], a
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	call GetMonHeader
 	predef LoadMonBackPic
 	xor a ; TILEMAP_MON_PIC

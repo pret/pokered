@@ -1,7 +1,7 @@
 ; calculates the level a mon should be based on its current exp
 CalcLevelFromExperience::
 	ld a, [wLoadedMonSpecies]
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	call GetMonHeader
 	ld d, $1 ; init level to 1
 .loop

@@ -65,7 +65,7 @@ _AddPartyMon::
 	ld d, h
 	push hl
 	ld a, [wCurPartySpecies]
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	call GetMonHeader
 	ld hl, wMonHeader
 	ld a, [hli]

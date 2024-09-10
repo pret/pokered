@@ -32,7 +32,7 @@ GetItemName::
 	cp HM01 ; is this a TM/HM?
 	jr nc, .Machine
 
-	ld [wd0b5], a
+	ld [wNameListIndex], a
 	ld a, ITEM_NAME
 	ld [wNameListType], a
 	ld a, BANK(ItemNames)
@@ -131,7 +131,7 @@ GetMoveName::
 	ld a, MOVE_NAME
 	ld [wNameListType], a
 	ld a, [wNamedObjectIndex]
-	ld [wd0b5], a
+	ld [wNameListIndex], a
 	ld a, BANK(MoveNames)
 	ld [wPredefBank], a
 	call GetName

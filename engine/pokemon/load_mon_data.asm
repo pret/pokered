@@ -19,7 +19,7 @@ LoadMonData_::
 
 .GetMonHeader
 	ld a, [wCurPartySpecies]
-	ld [wd0b5], a ; input for GetMonHeader
+	ld [wCurSpecies], a
 	call GetMonHeader
 
 	ld hl, wPartyMons

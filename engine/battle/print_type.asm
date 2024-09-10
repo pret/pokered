@@ -1,4 +1,4 @@
-; [wd0b5] = pokemon ID
+; [wCurSpecies] = pokemon ID
 ; hl = dest addr
 PrintMonType:
 	call GetPredefRegisters

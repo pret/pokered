@@ -842,7 +842,7 @@ ItemUseMedicine:
 	ld d, a
 	ld a, [wCurPartySpecies]
 	ld e, a
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	pop af
 	ld [wCurItem], a
 	pop af
@@ -1254,7 +1254,7 @@ ItemUseMedicine:
 .useVitamin
 	push hl
 	ld a, [hl]
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	ld [wPokedexNum], a
 	ld bc, wPartyMon1Level - wPartyMon1
 	add hl, bc ; hl now points to level
@@ -2651,7 +2651,7 @@ SendNewMonToBox:
 	inc a
 	ld [de], a
 	ld a, [wCurPartySpecies]
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	ld c, a
 .loop
 	inc de

@@ -60,7 +60,7 @@ DisplayCreditsMon:
 	add hl, bc ; go that far in the list of monsters and get the next one
 	ld a, [hl]
 	ld [wCurPartySpecies], a
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	hlcoord 8, 6
 	call GetMonHeader
 	call LoadFrontSpriteByMonIndex

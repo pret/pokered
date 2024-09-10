@@ -1490,8 +1490,10 @@ wSpriteDecodeTable0Ptr:: dw
 ; pointer to differential decoding table (assuming initial value 1)
 wSpriteDecodeTable1Ptr:: dw
 
-wd0b5:: db ; used as a temp storage area for Pokemon Species, and other Pokemon/Battle related things
-
+; input for GetMonHeader
+wCurSpecies::
+; input for GetName
+wNameListIndex:: db
 wNameListType:: db
 
 wPredefBank:: db
