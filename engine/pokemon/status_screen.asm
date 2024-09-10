@@ -420,7 +420,7 @@ StatusScreen2:
 	hlcoord 9, 1
 	call StatusScreen_ClearName
 	ld a, [wMonHIndex]
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMonName
 	hlcoord 9, 1
 	call PlaceString

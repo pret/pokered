@@ -9,7 +9,7 @@ AskName:
 	ld c, 11
 	call z, ClearScreenArea ; only if in wild battle
 	ld a, [wCurPartySpecies]
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMonName
 	ld hl, DoYouWantToNicknameText
 	call PrintText
@@ -462,7 +462,7 @@ PrintNamingText:
 	push af
 	farcall WriteMonPartySpriteOAMBySpecies
 	pop af
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMonName
 	hlcoord 4, 1
 	call PlaceString

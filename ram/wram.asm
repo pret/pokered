@@ -1556,6 +1556,7 @@ wCapturedMonSpecies:: db
 ; which will be the first mon sent out.
 wFirstMonsNotOutYet:: db
 
+wNamedObjectIndex::
 wPokeBallCaptureCalcTemp::
 ; lower nybble: number of shakes
 ; upper nybble: number of animations to play

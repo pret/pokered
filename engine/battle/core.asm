@@ -2237,7 +2237,7 @@ DisplayBagMenu:
 UseBagItem:
 	; either use an item from the bag or use a safari zone item
 	ld a, [wCurItem]
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetItemName
 	call CopyToStringBuffer
 	xor a
@@ -3564,7 +3564,7 @@ CheckPlayerStatusConditions:
 	bit USING_RAGE, a ; is mon using rage?
 	jp z, .checkPlayerStatusConditionsDone ; if we made it this far, mon can move normally this turn
 	ld a, RAGE
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMoveName
 	call CopyToStringBuffer
 	xor a
@@ -3654,7 +3654,7 @@ PrintMoveIsDisabledText:
 	res CHARGING_UP, a ; end the pokemon's
 	ld [de], a
 	ld a, [hl]
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMoveName
 	ld hl, MoveIsDisabledText
 	jp PrintText
@@ -6067,7 +6067,7 @@ CheckEnemyStatusConditions:
 	bit USING_RAGE, a ; is mon using rage?
 	jp z, .checkEnemyStatusConditionsDone ; if we made it this far, mon can move normally this turn
 	ld a, RAGE
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMoveName
 	call CopyToStringBuffer
 	xor a
@@ -6245,7 +6245,7 @@ LoadEnemyMonData:
 	ld a, [hl]     ; base exp
 	ld [de], a
 	ld a, [wEnemyMonSpecies2]
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMonName
 	ld hl, wNameBuffer
 	ld de, wEnemyMonNick

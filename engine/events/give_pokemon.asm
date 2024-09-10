@@ -63,7 +63,7 @@ SetPokedexOwnedFlag:
 	ld b, FLAG_SET
 	predef FlagActionPredef
 	pop af
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMonName
 	ld hl, GotMonText
 	jp PrintText

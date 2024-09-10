@@ -29,7 +29,7 @@ DontAbandonLearning:
 	jp c, AbandonLearning
 	push hl
 	push de
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMoveName
 	ld hl, OneTwoAndText
 	call PrintText

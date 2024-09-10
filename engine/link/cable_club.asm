@@ -660,7 +660,7 @@ TradeCenter_PrintPartyListNames:
 	ld a, [de]
 	cp $ff
 	ret z
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	push bc
 	push hl
 	push de
@@ -697,7 +697,7 @@ TradeCenter_Trade:
 	ld b, 0
 	add hl, bc
 	ld a, [hl]
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMonName
 	ld hl, wNameBuffer
 	ld de, wNameOfPlayerMonToBeTraded
@@ -709,7 +709,7 @@ TradeCenter_Trade:
 	ld b, 0
 	add hl, bc
 	ld a, [hl]
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMonName
 	ld hl, WillBeTradedText
 	bccoord 1, 14

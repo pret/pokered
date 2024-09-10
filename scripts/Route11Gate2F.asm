@@ -24,7 +24,7 @@ Route11Gate2FOaksAideText:
 	ldh [hOaksAideRequirement], a
 	ld a, ITEMFINDER
 	ldh [hOaksAideRewardItem], a
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetItemName
 	ld h, d
 	ld l, e

@@ -16,7 +16,7 @@ GetName::
 ;
 ; returns pointer to name in de
 	ld a, [wd0b5]
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 
 	; TM names are separate from item names.
 	; BUG: This applies to all names instead of just items.

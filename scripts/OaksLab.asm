@@ -322,7 +322,7 @@ OaksLabRivalChoosesStarterScript:
 	ld a, [wRivalStarterTemp]
 	ld [wRivalStarter], a
 	ld [wCurPartySpecies], a
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMonName
 	ld a, OAKSLAB_RIVAL
 	ldh [hSpriteIndex], a
@@ -899,7 +899,7 @@ OaksLabMonChoiceMenu:
 	jr nz, OaksLabMonChoiceEnd
 	ld a, [wCurPartySpecies]
 	ld [wPlayerStarter], a
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMonName
 	ld a, [wSpriteIndex]
 	cp OAKSLAB_CHARMANDER_POKE_BALL

@@ -1988,7 +1988,7 @@ ItemUsePPRestore:
 	call GetSelectedMoveOffset
 	push hl
 	ld a, [hl]
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMoveName
 	call CopyToStringBuffer
 	pop hl
@@ -2558,7 +2558,7 @@ TossItem_::
 	jr nz, .tooImportantToToss
 	push hl
 	ld a, [wCurItem]
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetItemName
 	call CopyToStringBuffer
 	ld hl, IsItOKToTossItemText
@@ -2578,7 +2578,7 @@ TossItem_::
 	ld a, [wWhichPokemon]
 	call RemoveItemFromInventory
 	ld a, [wCurItem]
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetItemName
 	call CopyToStringBuffer
 	ld hl, ThrewAwayItemText

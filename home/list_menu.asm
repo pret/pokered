@@ -367,7 +367,7 @@ PrintListMenuEntries::
 	ld a, b
 	ld [wWhichPokemon], a
 	ld a, [de]
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	cp $ff
 	jp z, .printCancelMenuItem
 	push bc

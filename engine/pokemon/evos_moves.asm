@@ -366,7 +366,7 @@ LearnMoveFromLevelUp:
 	jr nz, .checkCurrentMovesLoop
 	ld a, d
 	ld [wMoveNum], a
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMoveName
 	call CopyToStringBuffer
 	predef LearnMove
