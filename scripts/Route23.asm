@@ -46,7 +46,7 @@ Route23DefaultScript:
 	ret nc
 .not_past_victory_road
 	ld a, e
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndex], a
 	ld a, c
 	ld [wWhichBadge], a
 	ld b, FLAG_TEST

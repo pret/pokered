@@ -20,7 +20,7 @@ Route18Gate1FDefaultScript:
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, TEXT_ROUTE18GATE1F_GUARD_EXCUSE_ME
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	xor a
 	ldh [hJoyHeld], a
@@ -60,7 +60,7 @@ Route18Gate1FPlayerMovingUpScript:
 
 Route18Gate1FGuardScript:
 	ld a, TEXT_ROUTE18GATE1F_GUARD
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a

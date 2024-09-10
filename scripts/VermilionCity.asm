@@ -49,7 +49,7 @@ VermilionCityDefaultScript:
 	ldh [hJoyHeld], a
 	ld [wSavedCoordIndex], a ; unnecessary
 	ld a, TEXT_VERMILIONCITY_SAILOR1
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	CheckEvent EVENT_SS_ANNE_LEFT
 	jr nz, .ship_departed

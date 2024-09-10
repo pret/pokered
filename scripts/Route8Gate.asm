@@ -37,7 +37,7 @@ Route8GateDefaultScript:
 	and a
 	jr nz, .have_drink
 	ld a, TEXT_ROUTE8GATE_GUARD_GEE_IM_THIRSTY
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	call Route8GateMovePlayerRightScript
 	ld a, SCRIPT_ROUTE8GATE_PLAYER_MOVING
@@ -47,7 +47,7 @@ Route8GateDefaultScript:
 	ld hl, wStatusFlags1
 	set BIT_GAVE_SAFFRON_GUARDS_DRINK, [hl]
 	ld a, TEXT_ROUTE8GATE_GUARD_GIVE_DRINK
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	jp DisplayTextID
 
 .PlayerInCoordsArray:

@@ -28,7 +28,7 @@ Route12DefaultScript:
 	ResetEventReuseHL EVENT_FIGHT_ROUTE12_SNORLAX
 	jp z, CheckFightingMapTrainers
 	ld a, TEXT_ROUTE12_SNORLAX_WOKE_UP
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	ld a, SNORLAX
 	ld [wCurOpponent], a
@@ -51,7 +51,7 @@ Route12SnorlaxPostBattleScript:
 	cp $2
 	jr z, .caught_snorlax
 	ld a, TEXT_ROUTE12_SNORLAX_CALMED_DOWN
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 .caught_snorlax
 	SetEvent EVENT_BEAT_ROUTE12_SNORLAX

@@ -688,11 +688,11 @@ ItemUseSurfboard:
 	jp PrintText
 .tryToStopSurfing
 	xor a
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndex], a
 	ld d, 16 ; talking range in pixels (normal range)
 	call IsSpriteInFrontOfPlayer2
 	res 7, [hl]
-	ldh a, [hSpriteIndexOrTextID]
+	ldh a, [hSpriteIndex]
 	and a ; is there a sprite in the way?
 	jr nz, .cannotStopSurfing
 	ld hl, TilePairCollisionsWater
@@ -2512,9 +2512,10 @@ GetMaxPP:
 	and %11000000 ; get PP Up count
 	pop bc
 	or b ; place normal max PP in 6 lower bits of a
+	assert wMoveData + MOVE_PP + 1 == wPPUpCountAndMaxPP
 	ld h, d
 	ld l, e
-	inc hl ; hl = wcd73
+	inc hl ; hl = wPPUpCountAndMaxPP
 	ld [hl], a
 	xor a ; add the bonus for the existing PP Up count
 	ld [wUsingPPUp], a

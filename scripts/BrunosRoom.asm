@@ -75,7 +75,7 @@ BrunosRoomDefaultScript:
 	jr z, BrunoScriptWalkIntoRoom
 .stopPlayerFromLeaving
 	ld a, TEXT_BRUNOSROOM_BRUNO_DONT_RUN_AWAY
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID  ; "Don't run away!"
 	ld a, D_UP
 	ld [wSimulatedJoypadStatesEnd], a
@@ -111,7 +111,7 @@ BrunosRoomBrunoEndBattleScript:
 	cp $ff
 	jp z, ResetBrunoScript
 	ld a, TEXT_BRUNOSROOM_BRUNO
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	jp DisplayTextID
 
 BrunosRoom_TextPointers:

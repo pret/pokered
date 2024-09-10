@@ -124,7 +124,7 @@ Route22Rival1StartBattleScript:
 	xor a
 	ld [wJoyIgnore], a
 	ld a, TEXT_ROUTE22_RIVAL1
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	ld hl, wStatusFlags3
 	set BIT_TALKED_TO_TRAINER, [hl]
@@ -166,7 +166,7 @@ Route22Rival1AfterBattleScript:
 	ld [wJoyIgnore], a
 	SetEvent EVENT_BEAT_ROUTE22_RIVAL_1ST_BATTLE
 	ld a, TEXT_ROUTE22_RIVAL1
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
@@ -280,7 +280,7 @@ Route22Rival2StartBattleScript:
 	xor a
 	ld [wJoyIgnore], a
 	ld a, TEXT_ROUTE22_RIVAL2
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	ld hl, wStatusFlags3
 	set BIT_TALKED_TO_TRAINER, [hl]
@@ -325,7 +325,7 @@ Route22Rival2AfterBattleScript:
 	ld [wJoyIgnore], a
 	SetEvent EVENT_BEAT_ROUTE22_RIVAL_2ND_BATTLE
 	ld a, TEXT_ROUTE22_RIVAL2
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a

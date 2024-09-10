@@ -1,6 +1,7 @@
 ; this function is used to display sign messages, sprite dialog, etc.
-; INPUT: [hSpriteIndexOrTextID] = sprite ID or text ID
+; INPUT: [hSpriteIndex] = sprite ID or [hTextID] = text ID
 DisplayTextID::
+	assert hSpriteIndex == hTextID ; these are at the same memory location
 	ldh a, [hLoadedROMBank]
 	push af
 	farcall DisplayTextIDInit ; initialization
@@ -18,7 +19,7 @@ DisplayTextID::
 	ld h, [hl]
 	ld l, a ; hl = map text pointer
 	ld d, $00
-	ldh a, [hSpriteIndexOrTextID] ; text ID
+	ldh a, [hTextID]
 	ld [wSpriteIndex], a
 
 	dict TEXT_START_MENU,       DisplayStartMenu
@@ -29,7 +30,7 @@ DisplayTextID::
 
 	ld a, [wNumSprites]
 	ld e, a
-	ldh a, [hSpriteIndexOrTextID] ; sprite ID
+	ldh a, [hSpriteIndex] ; sprite ID
 	cp e
 	jr z, .spriteHandling
 	jr nc, .skipSpriteHandling
@@ -42,7 +43,7 @@ DisplayTextID::
 	pop bc
 	pop de
 	ld hl, wMapSpriteData ; NPC text entries
-	ldh a, [hSpriteIndexOrTextID]
+	ldh a, [hSpriteIndex]
 	dec a
 	add a
 	add l

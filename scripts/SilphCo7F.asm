@@ -138,7 +138,7 @@ SilphCo7FDefaultScript:
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
 	ld a, TEXT_SILPHCO7F_RIVAL
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	ld a, SILPHCO7F_RIVAL
 	ldh [hSpriteIndex], a
@@ -175,7 +175,7 @@ SilphCo7FRivalStartBattleScript:
 	xor a
 	ld [wJoyIgnore], a
 	ld a, TEXT_SILPHCO7F_RIVAL_WAITED_HERE
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	call Delay3
 	ld hl, wStatusFlags3
@@ -218,7 +218,7 @@ SilphCo7FRivalAfterBattleScript:
 	ldh [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, TEXT_SILPHCO7F_RIVAL_GOOD_LUCK_TO_YOU
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a

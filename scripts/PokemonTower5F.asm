@@ -36,7 +36,7 @@ PokemonTower5FDefaultScript:
 	call Delay3
 	call GBFadeInFromWhite
 	ld a, TEXT_POKEMONTOWER5F_PURIFIEDZONE
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	xor a
 	ld [wJoyIgnore], a

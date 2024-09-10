@@ -32,7 +32,7 @@ PokemonTower7FEndBattleScript:
 	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	ld a, [wSpriteIndex]
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndex], a
 	call DisplayTextID
 	call PokemonTower7FRocketLeaveMovementScript
 	ld a, SCRIPT_POKEMONTOWER7F_HIDE_NPC

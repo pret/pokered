@@ -16,7 +16,7 @@ hPreviousTileset::
 hRLEByteValue::
 	db
 
-hSpriteIndexOrTextID:: ; DisplayTextID's argument
+hTextID:: ; DisplayTextID's argument
 hPartyMonIndex::
 	db
 

@@ -882,6 +882,7 @@ wNameBuffer:: ds NAME_BUFFER_LENGTH
 NEXTU
 ; data copied from Moves for one move
 wMoveData:: ds MOVE_LENGTH
+wPPUpCountAndMaxPP:: db
 
 NEXTU
 ; amount of money made from one use of Pay Day

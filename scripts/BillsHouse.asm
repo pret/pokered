@@ -110,7 +110,7 @@ BillsHouseCleanupScript:
 
 BillsHousePCScript:
 	ld a, TEXT_BILLSHOUSE_ACTIVATE_PC
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	ld a, SCRIPT_BILLSHOUSE_DEFAULT
 	ld [wBillsHouseCurScript], a

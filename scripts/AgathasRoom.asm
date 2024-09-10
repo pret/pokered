@@ -75,7 +75,7 @@ AgathasRoomDefaultScript:
 	jr z, AgathaScriptWalkIntoRoom
 .stopPlayerFromLeaving
 	ld a, TEXT_AGATHASROOM_AGATHA_DONT_RUN_AWAY
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	ld a, D_UP
 	ld [wSimulatedJoypadStatesEnd], a
@@ -111,7 +111,7 @@ AgathasRoomAgathaEndBattleScript:
 	cp $ff
 	jp z, ResetAgathaScript
 	ld a, TEXT_AGATHASROOM_AGATHA
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	ld a, SCRIPT_CHAMPIONSROOM_PLAYER_ENTERS
 	ld [wChampionsRoomCurScript], a

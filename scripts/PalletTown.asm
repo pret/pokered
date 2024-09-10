@@ -47,7 +47,7 @@ PalletTownOakHeyWaitScript:
 	xor a
 	ld [wOakWalkedToPlayer], a
 	ld a, TEXT_PALLETTOWN_OAK
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
@@ -101,7 +101,7 @@ PalletTownOakNotSafeComeWithMeScript:
 	ld a, SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	ld a, TEXT_PALLETTOWN_OAK
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 ; set up movement script that causes the player to follow Oak to his lab
 	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN

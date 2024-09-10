@@ -31,7 +31,7 @@ PokemonTower6FDefaultScript:
 	xor a
 	ldh [hJoyHeld], a
 	ld a, TEXT_POKEMONTOWER6F_BEGONE
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	ld a, RESTLESS_SOUL
 	ld [wCurOpponent], a
@@ -63,7 +63,7 @@ PokemonTower6FMarowakBattleScript:
 	jr nz, .did_not_defeat
 	SetEvent EVENT_BEAT_GHOST_MAROWAK
 	ld a, TEXT_POKEMONTOWER6F_MAROWAK_DEPARTED
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	xor a
 	ld [wJoyIgnore], a
