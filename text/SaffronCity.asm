@@ -135,7 +135,7 @@ _SaffronCityTrainerTips2Text::
 
 _SaffronCitySilphCoSignText::
 	text "SILPH CO."
-	line "OFFICE BUILDING"
+	line "OFFICE BUILDING →"
 	done
 
 _SaffronCityMrPsychicsHouseSignText::
