@@ -8,24 +8,18 @@ SafariZoneSecretHouse_TextPointers:
 SafariZoneSecretHouseFishingGuruText:
 	text_asm
 	CheckEvent EVENT_GOT_HM03
-	jr nz, .got_item
+	ld hl, .HM03ExplanationText
+	jr nz, .done
 	ld hl, .YouHaveWonText
 	rst _PrintText
 	lb bc, HM_SURF, 1
 	call GiveItem
-	jr nc, .bag_full
-	ld hl, .ReceivedHM03Text
-	rst _PrintText
-	SetEvent EVENT_GOT_HM03
-	jr .done
-.bag_full
 	ld hl, .HM03NoRoomText
-	rst _PrintText
-	jr .done
-.got_item
-	ld hl, .HM03ExplanationText
-	rst _PrintText
+	jr nc, .done
+	SetEvent EVENT_GOT_HM03
+	ld hl, .ReceivedHM03Text
 .done
+	rst _PrintText
 	rst TextScriptEnd
 
 .YouHaveWonText:

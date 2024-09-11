@@ -135,7 +135,6 @@ IsMoveInParty:
 ; d = move ID
 ; output
 ; z = not found, nz = found
-
 IsMoveLearnableByParty:
 	ld a, [wMoveNum]
 	push af
