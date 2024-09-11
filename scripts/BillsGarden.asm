@@ -503,23 +503,22 @@ BillsGardenOakText5:
 
 
 ; input d = which pokemon to find
-; returns flag c if found
-; TODO: duplicate code, also doesn't account for party potentially not being 6 mons
+; returns flag c if found and d = which pokemon in party it was
 FindPokemonInParty:
-	ld b, PARTY_LENGTH
+	ld b, 0
 	ld hl, wPartySpecies
 .loop
 	ld a, [hli]
 	cp d
 	jr z, .found
-	dec b
+	inc b
+	ld a, [wPartyCount]
+	cp b
 	jr nz, .loop
 	and a
 	ret
 .found
-	ld a, PARTY_LENGTH
-	sub b
-	ld d, a ; which mon it was
+	ld d, b ; which mon it was
 	scf
 	ret
 

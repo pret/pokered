@@ -776,18 +776,12 @@ SecretLabComputer4Text:
 
 SecretLabMewtwoMachineText:
 	text_asm
-	ld c, MEWTWO
+	ld d, MEWTWO
+	callfar FindPokemonInParty
+	jr c, .foundMewtwo
 	ld d, ARMORED_MEWTWO
-	ld b, PARTY_LENGTH
-	ld hl, wPartySpecies
-.loop
-	ld a, [hli]
-	cp c
-	jr z, .foundMewtwo
-	cp d
-	jr z, .foundMewtwo
-	dec b
-	jr nz, .loop
+	callfar FindPokemonInParty
+	jr c, .foundMewtwo
 	ld hl, SecretLabMewtwoMachineText1
 	rst _PrintText
 	rst TextScriptEnd
@@ -880,14 +874,9 @@ SecretLabMewtwoHereWeGoText:
 
 SecretLabMewMachineText:
 	text_asm
-	lb bc, PARTY_LENGTH, MEW
-	ld hl, wPartySpecies
-.loop
-	ld a, [hli]
-	cp c
-	jr z, .foundMew
-	dec b
-	jr nz, .loop
+	ld d, MEW
+	callfar FindPokemonInParty
+	jr c, .foundMew
 	ld hl, SecretLabMewMachineText1
 	rst _PrintText
 	rst TextScriptEnd

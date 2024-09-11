@@ -117,8 +117,8 @@ IsMoveInParty:
 	dec b
 	jr nz, .moveloop
 	inc e
-	ld a, e
-	cp PARTY_LENGTH
+	ld a, [wPartyCount]
+	cp e
 	jr z, .done
 	push bc
 	ld hl, wPartyMon1Moves
@@ -156,8 +156,8 @@ IsMoveLearnableByParty:
 	and a ; can the pokemon learn the move?
 	jr nz, .learnable
 	inc e
-	ld a, e
-	cp PARTY_LENGTH
+	ld a, [wPartyCount]
+	cp e
 	jr z, .notLearnable
 	ld hl, wPartyMon1Species
 	ld bc, wPartyMon2 - wPartyMon1
@@ -251,7 +251,8 @@ CheckSetCutEvents:
 IsMonInParty::
 	ld hl, wPartyMon1Species
 	ld bc, wPartyMon2 - wPartyMon1
-	ld e, PARTY_LENGTH
+	ld a, [wPartyCount]
+	ld e, a
 .loop
 	ld a, [hl]
 	cp d
