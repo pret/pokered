@@ -22,104 +22,14 @@ ViridianGym_ScriptPointers:
 	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_VIRIDIANGYM_START_BATTLE
 	dw_const EndTrainerBattle,                      SCRIPT_VIRIDIANGYM_END_BATTLE
 	dw_const ViridianGymGiovanniPostBattle,         SCRIPT_VIRIDIANGYM_GIOVANNI_POST_BATTLE
-	dw_const ViridianGymPlayerSpinningScript,       SCRIPT_VIRIDIANGYM_PLAYER_SPINNING
 
 ViridianGymDefaultScript:
-	ld a, [wYCoord]
-	ld b, a
-	ld a, [wXCoord]
-	ld c, a
-	ld hl, ViridianGymArrowTilePlayerMovement
-	call DecodeArrowMovementRLE
-	cp $ff
+	callfar CheckStartStopSpinning
+	; we're doing this here because CheckFightingMapTrainers needs to be run while we're in this map's bank
+	ld hl, wd736
+	bit 7, [hl]
 	jp z, CheckFightingMapTrainers
-	call StartSimulatingJoypadStates
-	ld hl, wd736
-	set 7, [hl]
-	ld a, SFX_ARROW_TILES
-	rst _PlaySound
-	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
-	ld [wJoyIgnore], a
-	ld a, SCRIPT_VIRIDIANGYM_PLAYER_SPINNING
-	ld [wCurMapScript], a
-	ret
-
-ViridianGymArrowTilePlayerMovement:
-	map_coord_movement 19, 11, ViridianGymArrowMovement1
-	map_coord_movement 19,  1, ViridianGymArrowMovement2
-	map_coord_movement 18,  2, ViridianGymArrowMovement3
-	map_coord_movement 11,  2, ViridianGymArrowMovement4
-	map_coord_movement 16, 10, ViridianGymArrowMovement5
-	map_coord_movement  4,  6, ViridianGymArrowMovement6
-	map_coord_movement  5, 13, ViridianGymArrowMovement7
-	map_coord_movement  4, 14, ViridianGymArrowMovement8
-	map_coord_movement  0, 15, ViridianGymArrowMovement9
-	map_coord_movement  1, 15, ViridianGymArrowMovement10
-	map_coord_movement 13, 16, ViridianGymArrowMovement11
-	map_coord_movement 13, 17, ViridianGymArrowMovement12
-	db -1 ; end
-
-ViridianGymArrowMovement1:
-	db D_UP, 9
-	db -1 ; end
-
-ViridianGymArrowMovement2:
-	db D_LEFT, 8
-	db -1 ; end
-
-ViridianGymArrowMovement3:
-	db D_DOWN, 9
-	db -1 ; end
-
-ViridianGymArrowMovement4:
-	db D_RIGHT, 6
-	db -1 ; end
-
-ViridianGymArrowMovement5:
-	db D_DOWN, 2
-	db -1 ; end
-
-ViridianGymArrowMovement6:
-	db D_DOWN, 7
-	db -1 ; end
-
-ViridianGymArrowMovement7:
-	db D_RIGHT, 8
-	db -1 ; end
-
-ViridianGymArrowMovement8:
-	db D_RIGHT, 9
-	db -1 ; end
-
-ViridianGymArrowMovement9:
-	db D_UP, 8
-	db -1 ; end
-
-ViridianGymArrowMovement10:
-	db D_UP, 6
-	db -1 ; end
-
-ViridianGymArrowMovement11:
-	db D_LEFT, 6
-	db -1 ; end
-
-ViridianGymArrowMovement12:
-	db D_LEFT, 12
-	db -1 ; end
-
-ViridianGymPlayerSpinningScript:
-	ld a, [wSimulatedJoypadStatesIndex]
-	and a
-	jr nz, .ViridianGymLoadSpinnerArrow
-	xor a
-	ld [wJoyIgnore], a
-	ld hl, wd736
-	res 7, [hl]
-	ld a, SCRIPT_VIRIDIANGYM_DEFAULT
-	ld [wCurMapScript], a
-	ret
-.ViridianGymLoadSpinnerArrow
-	farjp LoadSpinnerArrowTiles
+	jpfar LoadSpinnerArrowTiles
 
 ViridianGymGiovanniPostBattle:
 	ld a, [wIsInBattle]

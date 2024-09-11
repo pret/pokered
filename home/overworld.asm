@@ -1807,7 +1807,13 @@ JoypadOverworld::
 	and b
 	ret nz ; return if the simulated button presses are overridden
 	ld hl, wSimulatedJoypadStatesIndex
-	dec [hl]
+	ld a, [wd736]
+	bit 7, a ; is player spinning?
+	jr nz, .noDec
+	; we will keep the same joypad state index while spinning so we don't have to program the entire movement direction list
+	; for every single spinner in the game-instead just simulate the same direction indefinitely until hitting end or another spinner
+	dec [hl] 
+.noDec
 	ld a, [hl]
 	cp $ff
 	jr z, .doneSimulating ; if the end of the simulated button presses has been reached
