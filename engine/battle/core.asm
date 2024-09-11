@@ -5509,7 +5509,7 @@ ApplyDamageMultiplier2:
 ; if damage is 0, make the move miss
 ; this only occurs if a move that would do 2 or 3 damage is 0.25x effective against the target
 	inc a
-	ld [wMoveMissed], a ; TODO: change?
+	ld [wMoveMissed], a 
 	ret
 
 ; PureRGBnote: ADDED: type matchups can be switched to match how they behave in later generations if so desired
@@ -6940,32 +6940,16 @@ ApplyBurnAndParalysisPenalties:
 QuarterSpeedDueToParalysis:
 	ldh a, [hWhoseTurn]
 	and a
-	jr z, .playerTurn
-	; TODO: pointless copied and pasted code
-.enemyTurn ; quarter the player's speed
-	ld a, [wBattleMonStatus]
-	and 1 << PAR
-	ret z ; return if player not paralysed
-	ld hl, wBattleMonSpeed + 1
-	ld a, [hld]
-	ld b, a
-	ld a, [hl]
-	srl a
-	rr b
-	srl a
-	rr b
-	ld [hli], a
-	or b
-	jr nz, .storePlayerSpeed
-	ld b, 1 ; give the player a minimum of at least one speed point
-.storePlayerSpeed
-	ld [hl], b
-	ret
-.playerTurn ; quarter the enemy's speed
+	; if player's turn, we will run this on the enemy's data
 	ld a, [wEnemyMonStatus]
-	and 1 << PAR
-	ret z ; return if enemy not paralysed
 	ld hl, wEnemyMonSpeed + 1
+	jr z, .gotTurn
+	; if enemy's turn, we will run this on the player's data
+	ld a, [wBattleMonStatus]
+	ld hl, wBattleMonSpeed + 1
+.gotTurn ; quarter the target's speed
+	and 1 << PAR
+	ret z ; return if target not paralyzed
 	ld a, [hld]
 	ld b, a
 	ld a, [hl]
@@ -6975,39 +6959,25 @@ QuarterSpeedDueToParalysis:
 	rr b
 	ld [hli], a
 	or b
-	jr nz, .storeEnemySpeed
-	ld b, 1 ; give the enemy a minimum of at least one speed point
-.storeEnemySpeed
+	jr nz, .storeSpeed
+	inc b ; give target at least 1 speed
+.storeSpeed
 	ld [hl], b
 	ret
 
 HalveAttackDueToBurn:
 	ldh a, [hWhoseTurn]
 	and a
-	jr z, .playerTurn
-	; TODO: pointless copied and pasted code
-.enemyTurn ; halve the player's attack
-	ld a, [wBattleMonStatus]
-	and 1 << BRN
-	ret z ; return if player not burnt
-	ld hl, wBattleMonAttack + 1
-	ld a, [hld]
-	ld b, a
-	ld a, [hl]
-	srl a
-	rr b
-	ld [hli], a
-	or b
-	jr nz, .storePlayerAttack
-	ld b, 1 ; give the player a minimum of at least one attack point
-.storePlayerAttack
-	ld [hl], b
-	ret
-.playerTurn ; halve the enemy's attack
+	; if player's turn, we will run this on the enemy's data
 	ld a, [wEnemyMonStatus]
-	and 1 << BRN
-	ret z ; return if enemy not burnt
 	ld hl, wEnemyMonAttack + 1
+	jr z, .gotTurn
+	; if enemy's turn, we will run this on the player's data
+	ld a, [wBattleMonStatus]
+	ld hl, wBattleMonAttack + 1
+.gotTurn ; halve the target's attack
+	and 1 << BRN
+	ret z ; return if target not burnt
 	ld a, [hld]
 	ld b, a
 	ld a, [hl]
@@ -7015,9 +6985,9 @@ HalveAttackDueToBurn:
 	rr b
 	ld [hli], a
 	or b
-	jr nz, .storeEnemyAttack
-	ld b, 1 ; give the enemy a minimum of at least one attack point
-.storeEnemyAttack
+	jr nz, .storeAttack
+	inc b ; give the target a minimum of at least one attack point
+.storeAttack
 	ld [hl], b
 	ret
 
@@ -7144,9 +7114,8 @@ ApplyBadgeBoostsForSpecificStat: ;badge boosts a specific stat based on wWhatSta
 	ld hl, wBattleMonSpecial
 	bit BIT_VOLCANOBADGE, d
 .done
-	jp nz, ApplyBoostToStat
-	ret
-
+	ret z
+	jr ApplyBoostToStat
 ;;;;;;;;;;
 
 ;;;;;;;;;; PureRGBnote: FIXED: thunderbadge boosts speed as the game's text indicates and soulbadge boosts defense.
