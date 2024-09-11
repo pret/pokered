@@ -20,9 +20,10 @@ CheckStrengthUsage::
 	and a
 	jr nz, .moveloop
 	inc e
-	ld a, e
-	cp PARTY_LENGTH
+	ld a, [wPartyCount]
+	cp e
 	jr z, .noStrength
+	ld a, e
 	ld hl, wPartyMon1Moves
 	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes
