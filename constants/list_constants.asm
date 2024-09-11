@@ -22,4 +22,3 @@
 	const INIT_BAG_ITEM_LIST   ; 2
 	const INIT_OTHER_ITEM_LIST ; 3
 	const INIT_PLAYEROT_LIST   ; 4
-	const INIT_MON_LIST        ; 5

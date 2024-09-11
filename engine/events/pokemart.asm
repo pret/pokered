@@ -44,9 +44,7 @@ DisplayPokemartDialogue_::
 .sellMenu
 	xor a
 	ld [wCurrentMenuItem], a
-	ld a, INIT_BAG_ITEM_LIST
-	ld [wInitListType], a
-	callfar InitList
+	callfar InitBagItemList
 
 	ld a, [wNumBagItems]
 	and a
@@ -132,9 +130,7 @@ DisplayPokemartDialogue_::
 .buyMenu
 	; 0 is already loaded in a
 	ld [wCurrentMenuItem], a
-	ld a, INIT_OTHER_ITEM_LIST
-	ld [wInitListType], a
-	callfar InitList
+	callfar InitItemList
 
 	ld hl, PokemartBuyingGreetingText
 	rst _PrintText

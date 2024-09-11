@@ -51,41 +51,31 @@ FormatMovesString:
 	ld [de], a
 	ret
 
-; XXX this is called in a few places, but it doesn't appear to do anything useful
-InitList:
-	ld a, [wInitListType]
-	cp INIT_ENEMYOT_LIST
-	jr nz, .notEnemy
+;;;;;; PureRGBnote: CHANGED: these functions don't need a wram variable to differentiate between them pointlessly.
+;;;;;; Also the pokemon list init was unused so get rid of it.
+InitEnemyOTList::
 	ld hl, wEnemyPartyCount
 	ld de, wEnemyMonOT
 	ld a, ENEMYOT_NAME
-	jr .done
-.notEnemy
-	cp INIT_PLAYEROT_LIST
-	jr nz, .notPlayer
+	jr InitListLoad
+
+InitPlayerOTList::
 	ld hl, wPartyCount
 	ld de, wPartyMonOT
 	ld a, PLAYEROT_NAME
-	jr .done
-.notPlayer
-	cp INIT_MON_LIST
-	jr nz, .notMonster
-	ld hl, wItemList
-	ld de, MonsterNames
-	ld a, MONSTER_NAME
-	jr .done
-.notMonster
-	cp INIT_BAG_ITEM_LIST
-	jr nz, .notBag
+	jr InitListLoad
+
+InitBagItemList::
 	ld hl, wNumBagItems
-	ld de, ItemNames
-	ld a, ITEM_NAME
-	jr .done
-.notBag
+	jr InitItemList.names
+
+InitItemList::
 	ld hl, wItemList
+.names
 	ld de, ItemNames
 	ld a, ITEM_NAME
-.done
+	; fall through
+InitListLoad:
 	ld [wNameListType], a
 	ld a, l
 	ld [wListPointer], a
@@ -97,6 +87,7 @@ InitList:
 	ld a, b
 	ld [wItemPrices + 1], a
 	ret
+;;;;;;
 
 ; get species of mon e in list [wMonDataLocation] for LoadMonData
 GetMonSpecies:

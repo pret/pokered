@@ -30,7 +30,7 @@ TransformEffect_:
 	ld b, BANK(HideSubstituteShowMonAnim)
 	call nz, Bankswitch
 	ld a, [wOptions]
-	add a ; TODO: Make clearer what it's checking (battle animation flag?)
+	add a ; BIT_BATTLE_ANIMATION is bit 7 (highest bit), so if we add wOptions with itself, it won't generate a carry unless this bit is set
 	ld hl, PlayCurrentMoveAnimation
 	ld b, BANK(PlayCurrentMoveAnimation)
 	jr nc, .gotAnimToPlay

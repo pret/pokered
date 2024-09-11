@@ -439,7 +439,7 @@ wSwitchPartyMonTempBuffer:: ds 44 ; party_struct size
 NEXTU
 	ds 120
 ; this is the end of the joypad states
-; the list starts above this address and extends downwards in memory until here
+; the list starts below this address and extends upwards in memory until here
 ; overloaded with below labels
 wSimulatedJoypadStatesEnd::
 
@@ -1731,8 +1731,7 @@ wUnusedCurMapTilesetCopy:: db
 ; wWalkBikeSurfState is sometimes copied here, but it doesn't seem to be used for anything
 wWalkBikeSurfStateCopy:: db
 
-; the type of list for InitList to init
-wInitListType:: db
+ds 1 ; unused byte (used to be wInitListType but that was a pointless waste of a variable)
 
 ; 0 if no mon was captured
 wCapturedMonSpecies:: db
