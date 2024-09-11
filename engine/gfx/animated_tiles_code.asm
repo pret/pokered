@@ -22,8 +22,13 @@ AnimateTiles::
 	ret c
 	cp 6
 	jp z, AnimateLavaBubbles1
+	; in the lava flood room there's only down and right flow tiles so don't update the other ones
+	cp 8
+	jp z, AnimateLavaFlowDown
+	cp 9
+	jp z, AnimateLavaFlowRight
 	cp 10
-	jp z, AnimateLavaTiles
+	jp z, AnimateLavaWaterTiles
 	cp 11
 	ret c
 	xor a
@@ -37,7 +42,9 @@ AnimateTiles::
 	cp 21
 	jp z, AnimateLavaBubbles1
 	cp 40
-	jr z, AnimateLavaTiles
+	jr c, AnimateLavaFlowTiles
+	cp 40
+	jp z, AnimateLavaWaterTiles
 	cp 41
 	ret c
 	jp AnimateLavaBubbles2
@@ -59,8 +66,7 @@ AnimateTiles::
 	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	jr nz, .skipQuickCurrent
-	rrca ; every other frame update currents
-	call nc, AnimateSeafoamCurrents 
+	call CheckAnimateSeafoamCurrents
 	ldh a, [hMovingBGTilesCounter1]
 .skipQuickCurrent
 	cp 20
@@ -117,15 +123,32 @@ AnimateCopyTile:
 	jr nz, .loop
 	ret
 
-AnimateLavaTiles::
+AnimateLavaFlowTiles:
+	cp 36
+	ret c
+	jr z, AnimateLavaFlowDown
+	cp 37
+	jr z, AnimateLavaFlowUp
+	cp 38
+	jr z, AnimateLavaFlowLeft
+	; fall through for 39
+AnimateLavaFlowRight:
 	ld hl, vTileset tile $23 ; right flowing lava
-	call ScrollTileRight
-	ld hl, vTileset tile $24 ; down flowing lava
-	call ScrollTileDown
-	ld hl, vTileset tile $25 ; left flowing lava
-	call ScrollTileLeft
+	jp ScrollTileRight
+
+AnimateLavaFlowUp:
 	ld hl, vTileset tile $26 ; up flowing lava
-	call ScrollTileUp
+	jp ScrollTileUp
+
+AnimateLavaFlowLeft:
+	ld hl, vTileset tile $25 ; left flowing lava
+	jp ScrollTileLeft
+
+AnimateLavaFlowDown:
+	ld hl, vTileset tile $24 ; down flowing lava
+	jp ScrollTileDown
+
+AnimateLavaWaterTiles::
 	call AnimateWaterTile ; stationary lava uses default water tile
 	CheckEvent EVENT_LAVA_FLOOD_ACTIVE
 	ret z
@@ -172,13 +195,44 @@ LavaBubbleJumpTable:
 	dw LavaBubble3
 	dw LavaBubble4
 
+CheckAnimateSeafoamCurrents:
+	ldh a, [hGBC]
+	and a
+	ldh a, [hMovingBGTilesCounter1]
+	jr z, .slowerCurrents
+	rrca ; every other frame update all the currents on GBC
+	ret c
+	jr AnimateSeafoamCurrents
+.slowerCurrents
+	; when not on GBC we have to animate the currents slower on different frames or vblank goes too long and the tiles get corrupted
+	and %11
+	cp 1
+	jr z, AnimateSeafoamCurrentsDown
+	cp 2
+	jr z, AnimateSeafoamCurrentsRight
+	cp 3
+	jr z, AnimateSeafoamCurrentsUp
+	ret
+
 AnimateSeafoamCurrents:
 	ld hl, vTileset tile $3B ; right flowing water
 	call ScrollTileRight
 	ld hl, vTileset tile $42 ; down flowing water
 	call ScrollTileDown
 	ld hl, vTileset tile $30 ; up flowing water
-	jp ScrollTileUp
+	jr ScrollTileUp
+
+AnimateSeafoamCurrentsRight:
+	ld hl, vTileset tile $3B ; right flowing water
+	jr ScrollTileRight
+
+AnimateSeafoamCurrentsDown:
+	ld hl, vTileset tile $42 ; down flowing water
+	jr ScrollTileDown
+
+AnimateSeafoamCurrentsUp:
+	ld hl, vTileset tile $30 ; up flowing water
+	jr ScrollTileUp
 
 
 ScrollTileRight:
