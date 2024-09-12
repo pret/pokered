@@ -479,9 +479,10 @@ PrintNamingText:
 	call GetMonName
 	hlcoord 4, 1
 	call PlaceString
-	ld hl, $1
-	add hl, bc
-	ld [hl], "の" ; leftover from Japanese version; blank tile $c9 in English ; TODO: remove?
+	; PureRGBnote: OPTIMIZED: don't need this blank character anymore in english
+	;ld hl, $1
+	;add hl, bc
+	;ld [hl], "の" ; leftover from Japanese version; blank tile $c9 in English 
 	hlcoord 1, 3
 	ld de, NicknameTextString
 	jr .placeString
