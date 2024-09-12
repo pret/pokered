@@ -222,6 +222,8 @@ SilphCo11FDefaultScript:
 
 SilphCo11FSetPlayerAndSpriteFacingDirectionScript:
 	ld [wPlayerMovingDirection], a
+	ld a, c
+	ld [wMapSpriteData + ((SILPHCO11F_GIOVANNI - 1) * 2)], a
 	ld a, SILPHCO11F_GIOVANNI
 	ldh [hSpriteIndex], a
 	ld a, b
@@ -234,14 +236,14 @@ SilphCo11FGiovanniAfterBattleScript:
 	jp z, SilphCo11FResetCurScript
 	ld a, [wSavedCoordIndex]
 	cp 1 ; index of second, upper-right entry in SilphCo11FDefaultScript.PlayerCoordsArray
-	jr z, .face_player_up
-	ld a, PLAYER_DIR_LEFT
-	ld b, SPRITE_FACING_RIGHT
-	jr .continue
-.face_player_up
 	ld a, PLAYER_DIR_UP
 	ld b, SPRITE_FACING_DOWN
-.continue
+	ld c, DOWN
+	jr z, .gotDirections
+	ld a, PLAYER_DIR_LEFT
+	ld b, SPRITE_FACING_RIGHT
+	ld c, RIGHT
+.gotDirections
 	call SilphCo11FSetPlayerAndSpriteFacingDirectionScript
 	call UpdateSprites
 	call SilphCo11FGateCallbackScript
@@ -269,20 +271,19 @@ SilphCo11FGiovanniBattleFacingScript:
 	ld a, [wd730]
 	bit 0, a
 	ret nz
-	; TODO: reset giovanni's map sprite movement data?
 	ld a, SILPHCO11F_GIOVANNI
 	ldh [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
 	ld a, [wSavedCoordIndex]
 	cp 1 ; index of second, upper-right entry in SilphCo11FDefaultScript.PlayerCoordsArray
-	jr z, .face_player_up
-	ld a, PLAYER_DIR_LEFT
-	ld b, SPRITE_FACING_RIGHT
-	jr .continue
-.face_player_up
 	ld a, PLAYER_DIR_UP
 	ld b, SPRITE_FACING_DOWN
-.continue
+	ld c, DOWN
+	jr z, .gotDirections
+	ld a, PLAYER_DIR_LEFT
+	ld b, SPRITE_FACING_RIGHT
+	ld c, RIGHT
+.gotDirections
 	call SilphCo11FSetPlayerAndSpriteFacingDirectionScript
 	call Delay3
 	ld a, SCRIPT_SILPHCO11F_GIOVANNI_START_BATTLE
