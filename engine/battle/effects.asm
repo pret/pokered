@@ -44,7 +44,8 @@ SleepEffect:
 	and $7
 	jr z, .notAlreadySleeping ; can't affect a mon that is already asleep
 	ld hl, AlreadyAsleepText
-	jp PrintText
+	rst _PrintText
+	ret
 .notAlreadySleeping
 	ld a, b
 	and a
@@ -63,7 +64,8 @@ SleepEffect:
 	ld [de], a
 	call PlayCurrentMoveAnimation2
 	ld hl, FellAsleepText
-	jp PrintText
+	rst _PrintText
+	ret
 .didntAffect
 	jp PrintDidntAffectText
 
@@ -148,10 +150,12 @@ PoisonEffect:
 	jr z, .regularPoisonEffect
 	ld a, b
 	call PlayBattleAnimation2
-	jp PrintText
+	rst _PrintText
+	ret
 .regularPoisonEffect
 	call PlayCurrentMoveAnimation2
-	jp PrintText
+	rst _PrintText
+	ret
 .noEffect
 	ld a, [de]
 	cp POISON_EFFECT
@@ -309,7 +313,8 @@ FreezeBurnParalyzeEffect:
 
 PrintBurnText:
 	ld hl, BurnedText
-	jp PrintText
+	rst _PrintText
+	ret
 
 BurnedText:
 	text_far _BurnedText
@@ -317,7 +322,8 @@ BurnedText:
 
 PrintFrozenText:
 	ld hl, FrozenText
-	jp PrintText
+	rst _PrintText
+	ret
 
 FrozenText:
 	text_far _FrozenText
@@ -973,7 +979,8 @@ CantLowerAnymore:
 	cp ATTACK_DOWN_SIDE_EFFECT
 	ret nc
 	ld hl, NothingHappenedText
-	jp PrintText
+	rst _PrintText
+	ret
 
 MoveMissed:
 	ld a, [de]
@@ -1227,7 +1234,8 @@ ChargeEffect:
 	ld a, [de]
 	ld [wChargeMoveNum], a
 	ld hl, ChargeMoveEffectText
-	jp PrintText
+	rst _PrintText
+	ret
 
 ChargeMoveEffectText:
 	text_far _ChargeMoveEffectText
@@ -1384,7 +1392,8 @@ ConfusionSideEffectSuccess:
 ;;;;;;;;;;
 .done
 	ld hl, BecameConfusedText
-	jp PrintText
+	rst _PrintText
+	ret
 
 BecameConfusedText:
 	text_far _BecameConfusedText
@@ -1650,7 +1659,8 @@ DisableEffect:
 	ld [hl], a
 	call GetMoveName
 	ld hl, MoveWasDisabledText
-	jp PrintText
+	rst _PrintText
+	ret
 .moveMissedPopHL
 	pop hl
 .moveMissed
@@ -1746,7 +1756,8 @@ NothingHappenedText:
 
 PrintNoEffectText:
 	ld hl, NoEffectText
-	jp PrintText
+	rst _PrintText
+	ret
 
 NoEffectText:
 	text_far _NoEffectText
@@ -1781,7 +1792,8 @@ IsUnaffectedText:
 
 PrintMayNotAttackText:
 	ld hl, ParalyzedMayNotAttackText
-	jp PrintText
+	rst _PrintText
+	ret
 
 ParalyzedMayNotAttackText:
 	text_far _ParalyzedMayNotAttackText

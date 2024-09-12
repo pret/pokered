@@ -207,7 +207,8 @@ StartBattle:
 	jr nz, .notOutOfSafariBalls
 	call LoadScreenTilesFromBuffer1
 	ld hl, .outOfSafariBallsText
-	jp PrintText
+	rst _PrintText
+	ret
 .notOutOfSafariBalls
 	callfar PrintSafariZoneBattleText
 	ld a, [wEnemyMonSpeed + 1]
@@ -1150,7 +1151,8 @@ RemoveFaintedPlayerMon:
 	ld a, [wBattleMonSpecies]
 	call PlayCry
 	ld hl, PlayerMonFaintedText
-	jp PrintText
+	rst _PrintText
+	ret
 
 PlayerMonFaintedText:
 	text_far _PlayerMonFaintedText
@@ -3880,7 +3882,8 @@ PrintMoveIsDisabledText:
 	ld [wd11e], a
 	call GetMoveName
 	ld hl, MoveIsDisabledText
-	jp PrintText
+	rst _PrintText
+	ret
 
 MoveIsDisabledText:
 	text_far _MoveIsDisabledText
@@ -4030,7 +4033,8 @@ UnaffectedText:
 
 PrintDoesntAffectText:
 	ld hl, DoesntAffectMonText
-	jp PrintText
+	rst _PrintText
+	ret
 
 DoesntAffectMonText:
 	text_far _DoesntAffectMonText
@@ -4055,7 +4059,8 @@ PrintCriticalOHKOText:
 	ld [wCriticalHitOrOHKO], a
 .done
 	ld c, 20
-	jp DelayFrames
+	rst _DelayFrames
+	ret
 
 CriticalOHKOTextPointers:
 	dw CriticalHitText
@@ -7206,7 +7211,8 @@ LoadHudTilePatterns:
 
 PrintEmptyString:
 	ld hl, .emptyString
-	jp PrintText
+	rst _PrintText
+	ret
 
 .emptyString
 	db "@"
