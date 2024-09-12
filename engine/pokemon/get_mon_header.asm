@@ -76,7 +76,6 @@ NonDexPokemonSpecies:
 	db SPIRIT_THE_MAW
 	db -1
 	
-
 UncompressMonSprite::
 	callfar CheckSpriteOptions ; PureRGBnote: ADDED: we need to check options and remap the front sprite based on player settings here
 	push de
@@ -104,12 +103,16 @@ UncompressMonSprite::
 	jr z, .loadMissingnoRandomizedSprite ; 1/8 chance of fossil aerodactyl
 	dec a
 	ld de, FossilKabutopsPic
-	jr z, .loadMissingnoRandomizedSprite ; 1/8 chance of fossil kabutops
+	jr z, .loadMissingnoRandomizedSpriteSmaller ; 1/8 chance of fossil kabutops
 	dec a
 	ld de, GhostPic
-	jr z, .loadMissingnoRandomizedSprite ; 1/8 chance of ghost
+	jr z, .loadMissingnoRandomizedSpriteSmaller ; 1/8 chance of ghost
+	pop de
 	ld a, [wMonHPicBank]
 	jr .GotBank
+.loadMissingnoRandomizedSpriteSmaller
+	ld a, $66
+	ld [wMonHSpriteDim], a
 .loadMissingnoRandomizedSprite
 	ld a, e
 	ld [wSpriteInputPtr], a
