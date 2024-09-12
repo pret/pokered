@@ -929,6 +929,8 @@ wFlags_0xcd60:: db
 ; new set of flags for things during game
 ; bit 0 = set when we're in-game rather than in the main menu before loading a game
 ; bit 1 = set when we're using a pokemart menu
+; bit 2 = set when we've viewed the itemfinder "yes an item is nearby!" text once per game reset
+; bit 3 = set when we've activated item duplication by letting the old man show us how to capture a pokemon
 wNewInGameFlags:: db
 
 wListMenuCustomType:: db ; for list menus with custom list entry text rendering methods, which entry text renderer should be used
@@ -1177,10 +1179,8 @@ ds 16 ; PureRGBnote: CHANGED: used to be wItemList:: but now the item list for m
 NEXTU
 ;;;;;;;;;; PureRGBnote: ADDED: new wram variables
 wTempLevelStore::
-wItemFinderItemDirection::db 
-wSawItemFinderText::db ; the "yes, an item is nearby!" text will only display once per game restart TODO: make a flag
-wItemDuplicationActive:: db ; after seeing the old man catch pokemon, this flag is enabled until the game restarts - allows missingno item dupe glitch TODO: make a flag
-
+wStoredMovedexListIndex::
+wItemFinderItemDirection:: db 
 ; set to 1 if you healed this turn, 2 if you switched out this turn (prevents ai from spamming certain moves in some cases)
 wAIMoveSpamAvoider:: db
 wEnemyLastSelectedMoveDisable:: db ; store for disable functionality
@@ -1189,8 +1189,7 @@ wChampArenaChallenger:: db ; which challenger we're currently fighting in the ch
 wAITargetMonType1:: db ; the type of the pokemon the AI should think it's attacking (stays as the previous pokemon when you switch pokemon)
 wAITargetMonType2:: db ; the type of the pokemon the AI should think it's attacking (stays as the previous pokemon when you switch pokemon)
 wAITargetMonStatus:: db ; the current status of the pokemon the AI should think it's attacking (set when healing a pokemon's status or switching it out)
-wStoredMovedexListIndex:: db
-ds 5 ; unused 5 bytes
+; 8 unused bytes left
 ;;;;;;;;;;
 ENDU
 
@@ -2602,7 +2601,7 @@ wPlayTimeFrames:: db
 
 wSafariZoneGameOver:: db
 
-wNumRangersLeft:: ; TODO: use this label
+wNumRangersLeft::
 wNumSafariBalls:: db
 
 

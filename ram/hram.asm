@@ -11,7 +11,7 @@ hBaseTileID:: ; base tile ID to which offsets are added
 hDexWeight::
 hOAMTile::
 hROMBankTemp::
-hPreviousTileset:: ; PureRGBnote: TODO: does this byte even work as expected for tilesets because so many things write to this byte?!?
+hPreviousTileset:: 
 hRLEByteValue::
 	db
 

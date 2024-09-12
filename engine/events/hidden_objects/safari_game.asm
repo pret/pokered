@@ -57,9 +57,9 @@ SafariZoneGameOver:
 	call DisplayTextID
 	jr .doneSafari
 .rangerHuntDone	
-	ld a, [wNumSafariBalls]
+	ld a, [wNumRangersLeft]
 	and a
-	jr nz, .noRangerHuntSuccess ; if wNumSafariBalls isn't 0, display the normal game over text
+	jr nz, .noRangerHuntSuccess ; if wNumRangersLeft isn't 0, display the normal game over text
 	; otherwise we've defeated all the rangers and have won the safari game
 .rangerHuntSuccess
 	ld a, TEXT_RANGER_SAFARI_GAME_OVER

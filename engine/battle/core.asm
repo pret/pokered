@@ -2182,10 +2182,6 @@ DisplayBattleMenu::
 	; to get overwritten when entering a map with wild Pokémon,
 	; but an oversight prevents this in Cinnabar and Route 21,
 	; so the infamous MissingNo. glitch can show up.
-;;;;;;;;;; PureRGBnote: ADDED: enable item duplication "glitch" via this new wram variable
-	ld a, 1
-	ld [wItemDuplicationActive], a ; each time the game is reset we have to trigger this to allow item duplication from missingno
-;;;;;;;;;;
 	ld hl, wPlayerName
 	ld de, wLinkEnemyTrainerName
 	ld bc, NAME_LENGTH

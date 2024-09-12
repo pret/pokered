@@ -91,7 +91,7 @@ SafariZoneGateLeavingSafariScript:
 	ld a, TEXT_SAFARIZONEGATE_SAFARI_ZONE_WORKER1_GOOD_HAUL_COME_AGAIN
 	jr .doneSafari
 .rangerHuntDone
-	ld a, [wNumSafariBalls] ; if wNumSafariBalls = 0 at the end of Ranger Hunt safari, we've defeated all rangers and won
+	ld a, [wNumRangersLeft] ; if wNumRangersLeft = 0 at the end of Ranger Hunt safari, we've defeated all rangers and won
 	and a
 	jr z, .rangerHuntSuccess
 	ld a, TEXT_SAFARIZONEGATE_FAILED_RANGER_HUNT
@@ -101,7 +101,7 @@ SafariZoneGateLeavingSafariScript:
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
-	ld [wNumSafariBalls], a
+	ld [wNumRangersLeft], a
 	ld a, D_DOWN
 	ld c, $2
 	call SafariZoneEntranceAutoWalk
@@ -436,7 +436,7 @@ SafariRangerHuntPaidInfo:
 	ld hl, SafariZonePATextNoBalls
 	rst _PrintText
 	ld a, 5
-	ld [wNumSafariBalls], a ; Number of Rangers (reused Safari Ball flag)
+	ld [wNumRangersLeft], a
 	ld a, HIGH(702)
 	ld [wSafariSteps], a
 	ld a, LOW(702)

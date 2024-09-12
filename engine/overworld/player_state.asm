@@ -266,7 +266,7 @@ PrintSafariZoneSteps::
 	ld de, RangersLeftText2
 	call PlaceString
 	hlcoord 6, 5
-	ld de, wNumSafariBalls
+	ld de, wNumRangersLeft
 	lb bc, 1, 2
 	jp PrintNumber
 ;;;;;;;;;;

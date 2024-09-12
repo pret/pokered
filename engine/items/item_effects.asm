@@ -2373,13 +2373,12 @@ ItemUseItemfinder:
 	jr nz, .loop2
 .doneLoop
 	; say itemfinder found an item if we haven't seen this text yet
-	ld a, [wSawItemFinderText]
-	and a
+	ld hl, wNewInGameFlags
+	bit 2, [hl]
+	set 2, [hl]
 	jr nz, .doDirectionFacing ; already have seen the text since restarting the cartridge
 	ld hl, ItemfinderFoundItemText
 	rst _PrintText
-	ld a, 1
-	ld [wSawItemFinderText], a ; PureRGBnote: CHANGED: only display the "yes! itemfinder found an item!" text once per game restart
 .doDirectionFacing
 	ld a, [wItemFinderItemDirection]
 	and a ; a = 0 means we're on top of the item
