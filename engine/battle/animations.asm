@@ -1726,6 +1726,33 @@ AnimationShowEnemyMonPic:
 	ld hl, AnimationShowMonPic
 	jp CallWithTurnFlipped
 
+StationaryFairyOAMData:
+	db 48, 104, $3B, 0
+	db 48, 112, $3C, 0
+	db 56, 104, $4B, 0
+	db 56, 112, $4C, 0
+
+AnimationEnemyShakeBackAndForth:
+	; show pokedoll in front of mon
+	ld hl, StationaryFairyOAMData
+	ld de, wShadowOAMSprite00YCoord
+	ld bc, 16
+	rst _CopyData
+	rst _DelayFrame
+	ld b, 3
+.loop
+	push bc
+	ld c, 1
+	ld hl, AnimationShakeBackAndForthInit
+	call CallWithTurnFlipped
+	call AnimationShowEnemyMonPic
+	ld c, 8
+	rst _DelayFrames
+	pop bc
+	dec b
+	jr nz, .loop
+	ret
+
 ;;;;;;;;;; PureRGBnote: ADDED: new animation used with rolling kick
 AnimationShakeBackAndForthShort:
 	ld c, $05
@@ -3392,3 +3419,16 @@ AnimationDivineProtection:
 	dec b
 	jr nz, .outerLoopFallingSparkles
 	jp AnimationCleanOAM
+
+AnimationLoadPokeDoll:
+	ld hl, vSprites tile $3B
+	ld de, FairySprite
+	lb bc, BANK(FairySprite), 2
+	call CopyVideoData
+	ld hl, vSprites tile $4B
+	ld de, FairySprite tile 2
+	lb bc, BANK(FairySprite), 2
+	call CopyVideoData
+	ld a, SFX_BALL_TOSS
+	rst _PlaySound
+	ret

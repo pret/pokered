@@ -212,6 +212,7 @@ AttackAnimationPointers:
 	dw ConversionAttackModeAnim
 	dw RadiationAnim
 	dw DivineProtectionAnim
+	dw PokeDollAnim
 	assert_table_length NUM_ATTACK_ANIMS
 	dw ZigZagScreenAnim
 
@@ -1558,4 +1559,10 @@ DivineProtectionAnim:
 	battle_anim REFLECT, SUBANIM_1_BARRIER, 1, 1
 	battle_anim REFLECT, SUBANIM_1_BARRIER, 1, 1
 	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
+	db -1
+
+PokeDollAnim:
+	battle_anim NO_MOVE, SE_LOAD_POKEDOLL
+	battle_anim NO_MOVE, SUBANIM_1_CLOUD_TOSS, 2, 2
+	battle_anim NO_MOVE, SE_SHAKE_ENEMY_BACK_AND_FORTH
 	db -1

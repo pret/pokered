@@ -152,6 +152,7 @@ _VitaminNoEffectText::
 	cont "further."
 	prompt
 
+_ItemUseNoEffectText::
 _RareCandyNoEffectText::
 	text "It won't have any"
 	line "effect."
@@ -307,11 +308,6 @@ _ItemUseInBattleText::
 _ItemUseNotYoursToUseText::
 	text "This isn't yours"
 	line "to use!"
-	prompt
-
-_ItemUseNoEffectText::
-	text "It won't have any"
-	line "effect."
 	prompt
 
 _ThrowBallAtTrainerMonText1::

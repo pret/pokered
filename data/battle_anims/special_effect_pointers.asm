@@ -45,7 +45,7 @@ SpecialEffectPointers:
 	special_effect SE_SUBSTITUTE_MON,            AnimationSubstitute              ; $D9
 	special_effect SE_WAVY_SCREEN,               AnimationWavyScreen              ; $D8
 	special_effect SE_SHAKE_BACK_AND_FORTH_SHORT,AnimationShakeBackAndForthShort  ; $D7
-	special_effect SE_SLIDE_ENEMY_MON_HALF_OFF,  AnimationSlideEnemyMonHalfOff    ; $D6
+	special_effect SE_SHAKE_ENEMY_BACK_AND_FORTH,  AnimationEnemyShakeBackAndForth    ; $D6
 	special_effect SE_SLIDE_ENEMY_MON_DOWN_AND_HIDE,  AnimationSlideEnemyMonDownAndHide ; $D5
 	special_effect SE_FIRE_EVERYWHERE,  AnimationFireEverywhere ; $D4
 	special_effect SE_SMOKE_EVERYWHERE, AnimationSmokeEverywhere ; $D3
@@ -54,4 +54,5 @@ SpecialEffectPointers:
 	special_effect SE_LIGHT_SCREEN_FLASH, AnimationFlashLightScreen ; $D0
 	special_effect SE_CROSSHAIR_SCANS_OPPONENT, AnimationCrosshairScansOpponent ; $CF
 	special_effect SE_DIVINE_PROTECTION, AnimationDivineProtection ; $CE
+	special_effect SE_LOAD_POKEDOLL, AnimationLoadPokeDoll ; $CD
 	db -1 ; end

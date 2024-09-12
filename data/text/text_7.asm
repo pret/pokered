@@ -203,3 +203,9 @@ _UsedCutText::
 	text " hacked"
 	line "away with CUT!"
 	prompt
+
+_ItemUseWildMonText::
+	text "This can only"
+	line "be used on wild"
+	cont "#MON."
+	prompt

@@ -221,5 +221,9 @@ DEF NUM_ATTACKS EQU const_value - 1
 	const CONVERSION_ATTACK_MODE_ANIM
 	const RADIATION_ANIM
 	const DIVINE_PROTECTION_ANIM
+	const POKE_DOLL_ANIM
+
+	; 45 non-move anims + 166 move anims = 201 anims
+	; 53 slots left
 
 DEF NUM_ATTACK_ANIMS EQU const_value - 1

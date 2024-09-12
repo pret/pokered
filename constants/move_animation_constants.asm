@@ -4,6 +4,7 @@
 DEF FIRST_SE_ID EQU const_value
 	const_skip $D
 ;;;;;;;;;; PureRGBnote: ADDED: new special effects
+	const SE_LOAD_POKEDOLL             ; $CD used in pokedoll animation
 	const SE_DIVINE_PROTECTION         ; $CE used in THE MAW battle if you switch to CUBONE
 	const SE_CROSSHAIR_SCANS_OPPONENT  ; $CF used in Conversion attack mode anim
 	const SE_LIGHT_SCREEN_FLASH        ; $D0 used in Teleport
@@ -12,7 +13,7 @@ DEF FIRST_SE_ID EQU const_value
 	const SE_SMOKE_EVERYWHERE          ; $D3 used in Poison Gas 
 	const SE_FIRE_EVERYWHERE           ; $D4 used in Take Down (Heat Rush)
 	const SE_SLIDE_ENEMY_MON_DOWN_AND_HIDE   ; $D5 used in Sludge 
-	const SE_SLIDE_ENEMY_MON_HALF_OFF  ; $D6 used in Slam 
+	const SE_SHAKE_ENEMY_BACK_AND_FORTH ; $D6 used in pokedoll animation 
 	const SE_SHAKE_BACK_AND_FORTH_SHORT; $D7 used in Rolling Kick
 ;;;;;;;;;;
 	const SE_WAVY_SCREEN               ; $D8 used in Psywave/Night Shade/Psychic etc.

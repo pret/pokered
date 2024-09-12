@@ -461,19 +461,7 @@ ItemUseBall:
 
 	; Do the animation.
 	call MapBallToAnimation ; PureRGBnote: CHANGED: choose which toss animation to use before entering animation code
-	xor a
-	ldh [hWhoseTurn], a
-	ld [wAnimationType], a
-	ld [wDamageMultipliers], a
-	ld a, [wWhichPokemon]
-	push af
-	ld a, [wcf91]
-	push af
-	predef MoveAnimation
-	pop af
-	ld [wcf91], a
-	pop af
-	ld [wWhichPokemon], a
+	call ItemEffectsDoMoveAnimation
 
 ; Determine the message to display from the animation.
 	ld a, [wPokeBallAnimData]
@@ -1976,10 +1964,27 @@ ItemUseCardKey:
 ItemUsePokeDoll:
 	ld a, [wIsInBattle]
 	dec a
-	jp nz, ItemUseInBattle ; PureRGBnote: CHANGED: text that displays when using out of battle indicates it's for use in battle
+	jp nz, ItemUseOnWildMons ; PureRGBnote: CHANGED: text that indicates to use it on wild pokemon only
+;;;;;; PureRGBnote: CHANGED: now it has an animation when used in battle
+	call LoadScreenTilesFromBuffer1 ; restore saved screen
+	call Delay3
+	ld hl, ItemUseText00
+	rst _PrintText
+	ld a, SFX_HEAL_AILMENT
+	rst _PlaySound
+	call RemoveUsedItem
+	call WaitForSoundToFinish
+	ld c, 10
+	rst _DelayFrames
+	ld a, POKE_DOLL_ANIM
+	ld [wAnimationID], a
+	call ItemEffectsDoMoveAnimation
+	ld c, 30
+	rst _DelayFrames
 	ld a, $01
 	ld [wEscapedFromBattle], a
-	jp PrintItemUseTextAndRemoveItem
+	ret
+;;;;;;
 
 ItemUseGuardSpec:
 	ld a, [wIsInBattle]
@@ -2781,6 +2786,11 @@ ItemUseInBattle:
 	ld hl, ItemUseInBattleText
 	jr ItemUseFailed
 
+ItemUseOnWildMons:
+	ld hl, ItemUseWildMonText
+	jr ItemUseFailed
+;
+
 ItemUseNotYoursToUse:
 	ld hl, ItemUseNotYoursToUseText
 	jr ItemUseFailed
@@ -2828,6 +2838,10 @@ ItemUseFossilText:
 
 ItemUseInBattleText:
 	text_far _ItemUseInBattleText
+	text_end
+
+ItemUseWildMonText:
+	text_far _ItemUseWildMonText
 	text_end
 
 ItemUseNotYoursToUseText:
@@ -3581,4 +3595,19 @@ ClearParaBurnBattleFlagsOnHeal:
 	ret
 ;;;;;;;;;;
 
+ItemEffectsDoMoveAnimation:
+	xor a
+	ldh [hWhoseTurn], a
+	ld [wAnimationType], a
+	ld [wDamageMultipliers], a
+	ld a, [wWhichPokemon]
+	push af
+	ld a, [wcf91]
+	push af
+	predef MoveAnimation
+	pop af
+	ld [wcf91], a
+	pop af
+	ld [wWhichPokemon], a
+	ret
 	
