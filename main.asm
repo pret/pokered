@@ -31,7 +31,6 @@ INCLUDE "engine/menus/display_text_id_init.asm"
 INCLUDE "engine/menus/draw_start_menu.asm"
 INCLUDE "engine/link/cable_club_npc.asm"
 INCLUDE "engine/menus/text_box.asm"
-INCLUDE "engine/battle/move_effects/drain_hp.asm" ; TODO: move from this bank???
 INCLUDE "engine/menus/players_pc.asm"
 INCLUDE "engine/pokemon/remove_mon.asm"
 INCLUDE "engine/events/display_pokedex.asm"
@@ -184,6 +183,7 @@ INCLUDE "engine/battle/move_effects/teleport.asm"
 INCLUDE "engine/battle/move_effects/transform.asm"
 INCLUDE "engine/battle/move_effects/reflect_light_screen.asm"
 INCLUDE "engine/battle/move_effects/tri_attack.asm" ; PureRGBnote: ADDED: new tri attack effect code
+INCLUDE "engine/battle/move_effects/drain_hp.asm" ; PureRGBnote: MOVED: from bank 1
 
 
 SECTION "Slot Machines", ROMX

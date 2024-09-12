@@ -93,7 +93,8 @@ DrainHPEffect_:
 	jr nz, .printText
 	ld hl, DreamWasEatenText
 .printText
-	jp PrintText
+	rst _PrintText
+	ret
 
 SuckedHealthText:
 	text_far _SuckedHealthText
