@@ -36,14 +36,15 @@ CheckLoadLightSwitch::
 	; fall through
 
 LoadLightSwitchOffGraphic:
-	ld hl, vChars2 tile $46
 	ld de, LightSwitchOff
 	lb bc, BANK(LightSwitchOff), 1
-	jp CopyVideoDataDouble
+	jr LoadLightSwitchGraphicCommon
 LoadLightSwitchOnGraphic:
-	ld hl, vChars2 tile $46
 	ld de, LightSwitchOn
 	lb bc, BANK(LightSwitchOn), 1
+	; fall through
+LoadLightSwitchGraphicCommon:
+	ld hl, vChars2 tile $46
 	jp CopyVideoDataDouble
 
 TypeGuysHouseLightSwitch::
