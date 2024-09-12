@@ -2345,6 +2345,11 @@ AnimationWavyScreen::
 	ld c, $ff
 	ld hl, WavyScreenLineOffsets
 .loop
+;;;;; shinpokerednote: FIXED: Sync hSCX to the first line. This avoids the top 3 pixels from being overridden by the vsync interrupt
+;;;;; credit to easyaspi314 for finding this
+	ld a, [hl]
+	ldh [hSCX], a
+;;;;;
 	push hl
 .innerLoop
 	call WavyScreen_SetSCX
