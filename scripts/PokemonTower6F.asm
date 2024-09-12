@@ -63,13 +63,21 @@ PokemonTower6FMarowakBattleScript:
 	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 ;;;;;;;;;; PureRGBnote: ADDED: ghost marowak can be caught and the event will complete if you do so
-; TODO: check battlefunctionalflags instead of setting this in item_effects. can set here and save space
-	CheckEvent EVENT_CAUGHT_GHOST_MAROWAK
-	jr nz, .success 
-;;;;;;;;;;
-	ld a, [wBattleResult]
+	ld hl, wBattleFunctionalFlags
+	bit 1, [hl]
+	jr nz, .did_not_defeat ; ran
+	ld a, [wEscapedFromBattle]
 	and a
-	jr nz, .did_not_defeat
+	jr nz, .success ; used pokedoll
+	ld a, [wBattleResult]
+	cp 2
+	jr z, .caught
+	and a
+	jr nz, .did_not_defeat ; lost battle
+	jr .success ; defeated it
+.caught
+	SetEvent EVENT_CAUGHT_GHOST_MAROWAK
+;;;;;;;;;
 .success
 	SetEvent EVENT_BEAT_GHOST_MAROWAK
 	ld a, TEXT_POKEMONTOWER6F_MAROWAK_DEPARTED

@@ -556,17 +556,6 @@ ItemUseBall:
 
 	ld hl, ItemUseBallText05
 	rst _PrintText
-	
-;;;;;;;;;; PureRGBnote: ADDED: ghost marowak can be caught and the event will complete if you do so
-	ld a, [wCurMap]
-	cp POKEMON_TOWER_6F
-	jr nz, .notGhostMarowak
-	ld a, [wEnemyMonSpecies2]
-	cp RESTLESS_SOUL
-	jp nz, .notGhostMarowak
-	SetEvent EVENT_CAUGHT_GHOST_MAROWAK
-.notGhostMarowak
-;;;;;;;;;;
 
 ; Add the caught Pokémon to the Pokédex.
 	predef IndexToPokedex
