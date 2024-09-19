@@ -28,7 +28,7 @@ CeruleanCityRocketDefeatedScript:
 	ld [wJoyIgnore], a
 	SetEvent EVENT_BEAT_CERULEAN_ROCKET_THIEF
 	ld a, TEXT_CERULEANCITY_ROCKET
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	xor a ; SCRIPT_CERULEANCITY_DEFAULT
 	ld [wJoyIgnore], a
@@ -58,7 +58,7 @@ ENDC
 	ld [wSprite02StateData1FacingDirection], a
 	call Delay3
 	ld a, TEXT_CERULEANCITY_ROCKET
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	jp DisplayTextID
 .skipRocketThiefEncounter
 	CheckEvent EVENT_BEAT_CERULEAN_RIVAL
@@ -131,7 +131,7 @@ CeruleanCityRivalBattleScript:
 	xor a
 	ld [wJoyIgnore], a
 	ld a, TEXT_CERULEANCITY_RIVAL
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	ld hl, wStatusFlags3
 	set BIT_TALKED_TO_TRAINER, [hl]
@@ -174,7 +174,7 @@ CeruleanCityRivalDefeatedScript:
 	ld [wJoyIgnore], a
 	SetEvent EVENT_BEAT_CERULEAN_RIVAL
 	ld a, TEXT_CERULEANCITY_RIVAL
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
@@ -295,7 +295,7 @@ CeruleanCityRocketText:
 	ld hl, .IGiveUpText
 	ld de, .IGiveUpText
 	call SaveEndBattleTextPointers
-	ldh a, [hSpriteIndexOrTextID]
+	ldh a, [hTextID]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters

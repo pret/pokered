@@ -80,7 +80,7 @@ Mansion3Script_Switches::
 	xor a
 	ldh [hJoyHeld], a
 	ld a, TEXT_POKEMONMANSION3F_SWITCH
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	jp DisplayTextID
 
 PokemonMansion3F_TextPointers:

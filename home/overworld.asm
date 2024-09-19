@@ -76,7 +76,7 @@ OverworldLoopLessDelay::
 	jr z, .startButtonNotPressed
 ; if START is pressed
 	xor a ; TEXT_START_MENU
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	jp .displayDialogue
 .startButtonNotPressed
 	bit BIT_A_BUTTON, a
@@ -92,7 +92,7 @@ OverworldLoopLessDelay::
 	and a
 	jp z, OverworldLoop ; jump if a hidden object or bookshelf was found, but not if a card key door was found
 	call IsSpriteOrSignInFrontOfPlayer
-	ldh a, [hSpriteIndexOrTextID]
+	ldh a, [hTextID]
 	and a
 	jp z, OverworldLoop
 .displayDialogue
@@ -1072,11 +1072,11 @@ LoadEastWestConnectionsTileMap::
 	ret
 
 ; function to check if there is a sign or sprite in front of the player
-; if so, it is stored in [hSpriteIndexOrTextID]
-; if not, [hSpriteIndexOrTextID] is set to 0
+; if so, it is stored in [hTextID]
+; if not, [hTextID] is set to 0
 IsSpriteOrSignInFrontOfPlayer::
 	xor a
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	ld a, [wNumSigns]
 	and a
 	jr z, .extendRangeOverCounter
@@ -1106,7 +1106,7 @@ IsSpriteOrSignInFrontOfPlayer::
 	dec c
 	add hl, bc
 	ld a, [hl]
-	ldh [hSpriteIndexOrTextID], a ; store sign text ID
+	ldh [hTextID], a ; store sign text ID
 	pop bc
 	pop hl
 	ret
@@ -1127,7 +1127,7 @@ IsSpriteOrSignInFrontOfPlayer::
 	jr nz, .counterTilesLoop
 
 ; part of the above function, but sometimes its called on its own, when signs are irrelevant
-; the caller must zero [hSpriteIndexOrTextID]
+; the caller must zero [hTextID]
 IsSpriteInFrontOfPlayer::
 	ld d, $10 ; talking range in pixels (normal range)
 IsSpriteInFrontOfPlayer2::
@@ -1212,7 +1212,7 @@ IsSpriteInFrontOfPlayer2::
 	ld l, a ; hl = x#SPRITESTATEDATA1_MOVEMENTSTATUS
 	set 7, [hl] ; set flag to make the sprite face the player
 	ld a, e
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	ret
 
 ; function to check if the player will jump down a ledge and check if the tile ahead is passable (when not surfing)
@@ -1231,9 +1231,9 @@ CollisionCheckOnLand::
 	and d ; check if a sprite is in the direction the player is trying to go
 	jr nz, .collision
 	xor a
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call IsSpriteInFrontOfPlayer ; check for sprite collisions again? when does the above check fail to detect a sprite collision?
-	ldh a, [hSpriteIndexOrTextID]
+	ldh a, [hTextID]
 	and a ; was there a sprite collision?
 	jr nz, .collision
 ; if no sprite collision

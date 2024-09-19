@@ -50,7 +50,7 @@ Mansion4Script_Switches::
 	xor a
 	ldh [hJoyHeld], a
 	ld a, TEXT_POKEMONMANSIONB1F_SWITCH
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	jp DisplayTextID
 
 PokemonMansionB1F_ScriptPointers:

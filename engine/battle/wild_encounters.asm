@@ -90,7 +90,7 @@ TryDoWildEncounter:
 .lastRepelStep
 	ld [wRepelRemainingSteps], a
 	ld a, TEXT_REPEL_WORE_OFF
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call EnableAutoTextBoxDrawing
 	call DisplayTextID
 .CantEncounter2

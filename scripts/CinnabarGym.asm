@@ -38,7 +38,7 @@ CinnabarGymResetScripts:
 	ret
 
 CinnabarGymSetTrainerHeader:
-	ldh a, [hSpriteIndexOrTextID]
+	ldh a, [hTextID]
 	ld [wTrainerHeaderFlagBit], a
 	ret
 
@@ -88,7 +88,7 @@ CinnabarGymGetOpponentTextScript:
 	ld [wJoyIgnore], a
 	ld a, [wOpponentAfterWrongAnswer]
 	ld [wTrainerHeaderFlagBit], a
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	jp DisplayTextID
 
 CinnabarGymFlagAction:
@@ -145,20 +145,20 @@ CinnabarGymBlainePostBattleScript:
 ; fallthrough
 CinnabarGymReceiveTM38:
 	ld a, TEXT_CINNABARGYM_BLAINE_VOLCANO_BADGE_INFO
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	SetEvent EVENT_BEAT_BLAINE
 	lb bc, TM_FIRE_BLAST, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, TEXT_CINNABARGYM_BLAINE_RECEIVED_TM38
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	SetEvent EVENT_GOT_TM38
 	jr .gymVictory
 .BagFull
 	ld a, TEXT_CINNABARGYM_BLAINE_TM38_NO_ROOM
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 .gymVictory
 	ld hl, wObtainedBadges
@@ -190,7 +190,7 @@ CinnabarGym_TextPointers:
 	dw_const CinnabarGymBlaineTM38NoRoomText,       TEXT_CINNABARGYM_BLAINE_TM38_NO_ROOM
 
 CinnabarGymStartBattleScript:
-	ldh a, [hSpriteIndexOrTextID]
+	ldh a, [hSpriteIndex]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters

@@ -1,5 +1,5 @@
 PrintPredefTextID::
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	ld hl, TextPredefs
 	call SetMapTextPointer
 	ld hl, wTextPredefFlag

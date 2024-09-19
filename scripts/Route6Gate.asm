@@ -26,7 +26,7 @@ Route6GateDefaultScript:
 	and a
 	jr nz, .have_drink
 	ld a, TEXT_ROUTE6GATE_GUARD_GEE_IM_THIRSTY
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	call Route6GateMovePlayerDownScript
 	ld a, SCRIPT_ROUTE6GATE_PLAYER_MOVING
@@ -36,7 +36,7 @@ Route6GateDefaultScript:
 	ld hl, wStatusFlags1
 	set BIT_GAVE_SAFFRON_GUARDS_DRINK, [hl]
 	ld a, TEXT_ROUTE6GATE_GUARD_GIVE_DRINK
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	jp DisplayTextID
 
 .PlayerInCoordsArray:

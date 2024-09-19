@@ -5,7 +5,7 @@ DisplayTextIDInit::
 	ld a, [wAutoTextBoxDrawingControl]
 	bit 0, a
 	jr nz, .skipDrawingTextBoxBorder
-	ldh a, [hSpriteIndexOrTextID] ; text ID (or sprite ID)
+	ldh a, [hTextID]
 	and a
 	jr nz, .notStartMenu
 ; if text ID is 0 (i.e. the start menu)

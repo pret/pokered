@@ -56,17 +56,14 @@ WhichPrizeTextPtr:
 	text_end
 
 GetPrizeMenuId:
-; determine which one among the three
-; prize-texts has been selected
-; using the text ID (stored in [hSpriteIndexOrTextID])
-; load the three prizes at wd13d-wd13f
-; load the three prices at wd141-wd146
-; display the three prizes' names
-; (distinguishing between Pokemon names
-; and Items (specifically TMs) names)
-	ldh a, [hSpriteIndexOrTextID]
-	sub 3       ; prize-texts' id are 3, 4 and 5
-	ld [wWhichPrizeWindow], a    ; prize-texts' id (relative, i.e. 0, 1 or 2)
+; determine which one among the three prize texts has been selected using the text ID (stored in [hTextID])
+; prize texts' IDs are TEXT_GAMECORNERPRIZEROOM_PRIZE_VENDOR_1-TEXT_GAMECORNERPRIZEROOM_PRIZE_VENDOR_3
+; load the three prizes at wPrize1-wPrice3
+; load the three prices at wPrize1Price-wPrize3Price
+; display the three prizes' names, distinguishing between Pokemon names and item names (specifically TMs)
+	ldh a, [hTextID]
+	sub TEXT_GAMECORNERPRIZEROOM_PRIZE_VENDOR_1
+	ld [wWhichPrizeWindow], a ; prize texts' relative ID (i.e. 0-2)
 	add a
 	add a
 	ld d, 0
@@ -88,7 +85,7 @@ GetPrizeMenuId:
 	ld bc, 6
 	call CopyData
 	ld a, [wWhichPrizeWindow]
-	cp 2        ;is TM_menu?
+	cp 2 ; is TM_menu?
 	jr nz, .putMonName
 	ld a, [wPrize1]
 	ld [wd11e], a

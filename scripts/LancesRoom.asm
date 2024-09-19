@@ -63,7 +63,7 @@ LancesRoomDefaultScript:
 	cp $3  ; Is player standing next to Lance's sprite?
 	jr nc, .notStandingNextToLance
 	ld a, TEXT_LANCESROOM_LANCE
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	jp DisplayTextID
 .notStandingNextToLance
 	cp $5  ; Is player standing on the entrance staircase?
@@ -90,7 +90,7 @@ LancesRoomLanceEndBattleScript:
 	cp $ff
 	jp z, ResetLanceScript
 	ld a, TEXT_LANCESROOM_LANCE
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	jp DisplayTextID
 
 WalkToLance:

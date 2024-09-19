@@ -6,15 +6,15 @@ TryPushingBoulder::
 	bit BIT_BOULDER_DUST, a
 	ret nz
 	xor a
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndex], a
 	call IsSpriteInFrontOfPlayer
-	ldh a, [hSpriteIndexOrTextID]
+	ldh a, [hSpriteIndex]
 	ld [wBoulderSpriteIndex], a
 	and a
 	jp z, ResetBoulderPushFlags
 	ld hl, wSpritePlayerStateData1MovementStatus
 	ld d, $0
-	ldh a, [hSpriteIndexOrTextID]
+	ldh a, [hSpriteIndex]
 	swap a
 	ld e, a
 	add hl, de

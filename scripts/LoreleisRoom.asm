@@ -77,7 +77,7 @@ LoreleisRoomDefaultScript:
 	jr z, LoreleiScriptWalkIntoRoom
 .stopPlayerFromLeaving
 	ld a, TEXT_LORELEISROOM_DONT_RUN_AWAY
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID  ; "Don't run away!"
 	ld a, D_UP
 	ld [wSimulatedJoypadStatesEnd], a
@@ -113,7 +113,7 @@ LoreleisRoomLoreleiEndBattleScript:
 	cp $ff
 	jp z, ResetLoreleiScript
 	ld a, TEXT_LORELEISROOM_LORELEI
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	jp DisplayTextID
 
 LoreleisRoom_TextPointers:

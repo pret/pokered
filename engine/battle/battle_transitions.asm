@@ -11,7 +11,7 @@ BattleTransition:
 ; Determine which OAM block is being used by the enemy trainer sprite (if there
 ; is one).
 	ld hl, wSpritePlayerStateData1ImageIndex
-	ldh a, [hSpriteIndexOrTextID] ; enemy trainer sprite index (0 if wild battle)
+	ldh a, [hSpriteIndex] ; enemy trainer sprite index (0 if wild battle)
 	ld c, a
 	ld b, 0
 	ld de, $10

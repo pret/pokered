@@ -28,7 +28,7 @@ ViridianMart_ScriptPointers:
 ViridianMartDefaultScript:
 	call UpdateSprites
 	ld a, TEXT_VIRIDIANMART_CLERK_YOU_CAME_FROM_PALLET_TOWN
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	ld hl, wSimulatedJoypadStatesEnd
 	ld de, .PlayerMovement
@@ -51,7 +51,7 @@ ViridianMartOaksParcelScript:
 	ret nz
 	call Delay3
 	ld a, TEXT_VIRIDIANMART_CLERK_PARCEL_QUEST
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	lb bc, OAKS_PARCEL, 1
 	call GiveItem
