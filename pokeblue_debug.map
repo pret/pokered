@@ -18822,6 +18822,7 @@ WRAM0 bank #0:
 	         $cd6d = wBattleMenuCurrentPP
 	         $cd6d = wEvoDataBuffer
 	         $cd71 = wStatusScreenCurrentPP
+	         $cd73 = wPPUpCountAndMaxPP
 	         $cd78 = wNormalMaxPPList
 	         $cd81 = wSerialOtherGameboyRandomNumberListBlock
 	         $cd81 = wTileMapBackup2
@@ -20274,9 +20275,9 @@ HRAM bank #0:
 	         $ff8c = hNorthSouthConnectedMapWidth
 	         $ff8c = hSpriteHeight
 	         $ff8c = hPartyMonIndex
-	         $ff8c = hSpriteIndexOrTextID
 	         $ff8c = hMapWidth
 	         $ff8c = hSpriteIndex
+	         $ff8c = hTextID
 	         $ff8c = hSlidingRegionSize
 	         $ff8c = hDownArrowBlinkCount2
 	         $ff8d = hEnemySpeed

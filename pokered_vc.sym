@@ -18533,6 +18533,7 @@
 00:cd6d wBattleMenuCurrentPP
 00:cd6d wEvoDataBuffer
 00:cd71 wStatusScreenCurrentPP
+00:cd73 wPPUpCountAndMaxPP
 00:cd78 wNormalMaxPPList
 00:cd81 wSerialOtherGameboyRandomNumberListBlock
 00:cd81 wTileMapBackup2
@@ -19975,9 +19976,9 @@
 00:ff8c hNorthSouthConnectedMapWidth
 00:ff8c hSpriteHeight
 00:ff8c hPartyMonIndex
-00:ff8c hSpriteIndexOrTextID
 00:ff8c hMapWidth
 00:ff8c hSpriteIndex
+00:ff8c hTextID
 00:ff8c hSlidingRegionSize
 00:ff8c hDownArrowBlinkCount2
 00:ff8d hEnemySpeed
