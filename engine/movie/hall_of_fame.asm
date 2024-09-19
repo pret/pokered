@@ -102,7 +102,7 @@ HoFShowMonOrPlayer:
 	ldh [hSCX], a
 	ld a, [wHoFMonSpecies]
 	ld [wCurPartySpecies], a
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	ld [wBattleMonSpecies2], a
 	ld [wWholeScreenPaletteMonSpecies], a
 	ld a, [wHoFMonOrPlayer]
@@ -171,7 +171,7 @@ HoFDisplayMonInfo:
 	hlcoord 8, 7
 	call PrintLevelCommon
 	ld a, [wHoFMonSpecies]
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	hlcoord 3, 9
 	predef PrintMonType
 	ld a, [wHoFMonSpecies]

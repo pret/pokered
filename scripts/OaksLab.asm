@@ -322,7 +322,7 @@ OaksLabRivalChoosesStarterScript:
 	ld a, [wRivalStarterTemp]
 	ld [wRivalStarter], a
 	ld [wCurPartySpecies], a
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMonName
 	ld a, OAKSLAB_RIVAL
 	ldh [hSpriteIndex], a
@@ -825,7 +825,7 @@ OaksLabBulbasaurPokeBallText:
 
 OaksLabSelectedPokeBallScript:
 	ld [wCurPartySpecies], a
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	ld a, b
 	ld [wSpriteIndex], a
 	CheckEvent EVENT_GOT_STARTER
@@ -899,7 +899,7 @@ OaksLabMonChoiceMenu:
 	jr nz, OaksLabMonChoiceEnd
 	ld a, [wCurPartySpecies]
 	ld [wPlayerStarter], a
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMonName
 	ld a, [wSpriteIndex]
 	cp OAKSLAB_CHARMANDER_POKE_BALL
@@ -927,7 +927,7 @@ OaksLabMonChoiceMenu:
 	ld a, 5
 	ld [wCurEnemyLevel], a
 	ld a, [wCurPartySpecies]
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	call AddPartyMon
 	ld hl, wStatusFlags4
 	set BIT_GOT_STARTER, [hl]

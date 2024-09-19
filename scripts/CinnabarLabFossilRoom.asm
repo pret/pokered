@@ -18,7 +18,7 @@ Lab4Script_GetFossilsInBag:
 	jr z, .done
 	push hl
 	push de
-	ld [wd11e], a
+	ld [wTempByteValue], a
 	ld b, a
 	predef GetQuantityOfItemInBag
 	pop de
@@ -26,9 +26,8 @@ Lab4Script_GetFossilsInBag:
 	ld a, b
 	and a
 	jr z, .loop
-
-	; A fossil's in the bag
-	ld a, [wd11e]
+	; A fossil is in the bag
+	ld a, [wTempByteValue]
 	ld [de], a
 	inc de
 	push hl

@@ -281,7 +281,7 @@ ChampionsRoomOakText:
 ChampionsRoomOakCongratulatesPlayerText:
 	text_asm
 	ld a, [wPlayerStarter]
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMonName
 	ld hl, .Text
 	call PrintText

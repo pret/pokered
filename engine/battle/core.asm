@@ -1421,7 +1421,7 @@ EnemySendOutFirstMon:
 	call PrintText
 	ld a, [wEnemyMonSpecies2]
 	ld [wCurPartySpecies], a
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	call GetMonHeader
 	ld de, vFrontPic
 	call LoadMonFrontSprite
@@ -1642,7 +1642,7 @@ LoadBattleMonFromParty:
 	ld bc, wBattleMonPP - wBattleMonLevel
 	call CopyData
 	ld a, [wBattleMonSpecies2]
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	call GetMonHeader
 	ld hl, wPartyMonNicks
 	ld a, [wPlayerMonNumber]
@@ -1686,7 +1686,7 @@ LoadEnemyMonFromParty:
 	ld bc, wEnemyMonPP - wEnemyMonLevel
 	call CopyData
 	ld a, [wEnemyMonSpecies]
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	call GetMonHeader
 	ld hl, wEnemyMonNicks
 	ld a, [wWhichPokemon]
@@ -2237,7 +2237,7 @@ DisplayBagMenu:
 UseBagItem:
 	; either use an item from the bag or use a safari zone item
 	ld a, [wCurItem]
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetItemName
 	call CopyToStringBuffer
 	xor a
@@ -2380,7 +2380,7 @@ PartyMenuOrRockOrRun:
 ; enemy mon is not minimised
 	ld a, [wEnemyMonSpecies]
 	ld [wCurPartySpecies], a
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	call GetMonHeader
 	ld de, vFrontPic
 	call LoadMonFrontSprite
@@ -3564,7 +3564,7 @@ CheckPlayerStatusConditions:
 	bit USING_RAGE, a ; is mon using rage?
 	jp z, .checkPlayerStatusConditionsDone ; if we made it this far, mon can move normally this turn
 	ld a, RAGE
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMoveName
 	call CopyToStringBuffer
 	xor a
@@ -3654,7 +3654,7 @@ PrintMoveIsDisabledText:
 	res CHARGING_UP, a ; end the pokemon's
 	ld [de], a
 	ld a, [hl]
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMoveName
 	ld hl, MoveIsDisabledText
 	jp PrintText
@@ -3728,13 +3728,13 @@ MonName1Text:
 	ld hl, wEnemyUsedMove
 .playerTurn
 	ld [hl], a
-	ld [wd11e], a
+	ld [wMoveGrammar], a
 	call DetermineExclamationPointTextNum
 	ld a, [wMonIsDisobedient]
 	and a
 	ld hl, Used2Text
 	ret nz
-	ld a, [wd11e]
+	ld a, [wMoveGrammar]
 	cp 3
 	ld hl, Used2Text
 	ret c
@@ -3771,7 +3771,7 @@ _PrintMoveName:
 	text_far _MoveNameText
 	text_asm
 	ld hl, ExclamationPointPointerTable
-	ld a, [wd11e] ; exclamation point num
+	ld a, [wMoveGrammar]
 	add a
 	push bc
 	ld b, $0
@@ -3819,7 +3819,7 @@ ExclamationPoint5Text:
 ; but the functionality didn't get removed
 DetermineExclamationPointTextNum:
 	push bc
-	ld a, [wd11e] ; move ID
+	ld a, [wMoveGrammar] ; move ID
 	ld c, a
 	ld b, $0
 	ld hl, ExclamationPointMoveSets
@@ -3835,7 +3835,7 @@ DetermineExclamationPointTextNum:
 	jr .loop
 .done
 	ld a, b
-	ld [wd11e], a ; exclamation point num
+	ld [wMoveGrammar], a
 	pop bc
 	ret
 
@@ -4406,7 +4406,7 @@ GetEnemyMonStat:
 	ld a, [wEnemyMonLevel]
 	ld [wCurEnemyLevel], a
 	ld a, [wEnemyMonSpecies]
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	call GetMonHeader
 	ld hl, wEnemyMonDVs
 	ld de, wLoadedMonSpeedExp
@@ -4610,7 +4610,7 @@ CriticalHitTest:
 	jr nz, .handleEnemy
 	ld a, [wBattleMonSpecies]
 .handleEnemy
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	call GetMonHeader
 	ld a, [wMonHBaseSpeed]
 	ld b, a
@@ -5120,7 +5120,7 @@ MirrorMoveFailedText:
 
 ; function used to reload move data for moves like Mirror Move and Metronome
 ReloadMoveData:
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	dec a
 	ld hl, Moves
 	ld bc, MOVE_LENGTH
@@ -5625,7 +5625,7 @@ EnemyCanExecuteChargingMove:
 	res CHARGING_UP, [hl] ; no longer charging up for attack
 	res INVULNERABLE, [hl] ; no longer invulnerable to typical attacks
 	ld a, [wEnemyMoveNum]
-	ld [wd0b5], a
+	ld [wNameListIndex], a
 	ld a, BANK(MoveNames)
 	ld [wPredefBank], a
 	ld a, MOVE_NAME
@@ -6067,7 +6067,7 @@ CheckEnemyStatusConditions:
 	bit USING_RAGE, a ; is mon using rage?
 	jp z, .checkEnemyStatusConditionsDone ; if we made it this far, mon can move normally this turn
 	ld a, RAGE
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMoveName
 	call CopyToStringBuffer
 	xor a
@@ -6098,7 +6098,7 @@ GetCurrentMove:
 	jr nz, .selected
 	ld a, [wPlayerSelectedMove]
 .selected
-	ld [wd0b5], a
+	ld [wNameListIndex], a
 	dec a
 	ld hl, Moves
 	ld bc, MOVE_LENGTH
@@ -6120,7 +6120,7 @@ LoadEnemyMonData:
 	jp z, LoadEnemyMonFromParty
 	ld a, [wEnemyMonSpecies2]
 	ld [wEnemyMonSpecies], a
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	call GetMonHeader
 	ld a, [wEnemyBattleStatus3]
 	bit TRANSFORMED, a ; is enemy mon transformed?
@@ -6245,16 +6245,16 @@ LoadEnemyMonData:
 	ld a, [hl]     ; base exp
 	ld [de], a
 	ld a, [wEnemyMonSpecies2]
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMonName
 	ld hl, wNameBuffer
 	ld de, wEnemyMonNick
 	ld bc, NAME_LENGTH
 	call CopyData
 	ld a, [wEnemyMonSpecies2]
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	predef IndexToPokedex
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	dec a
 	ld c, a
 	ld b, FLAG_SET

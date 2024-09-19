@@ -365,7 +365,7 @@ StartMenu_Item::
 	jp ItemMenuLoop
 .useOrTossItem ; if the player made the choice to use or toss the item
 	ld a, [wCurItem]
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetItemName
 	call CopyToStringBuffer
 	ld a, [wCurItem]

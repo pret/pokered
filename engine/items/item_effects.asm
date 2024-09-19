@@ -510,7 +510,7 @@ ItemUseBall:
 	ld a, [wEnemyMonSpecies]
 	ld [wCapturedMonSpecies], a
 	ld [wCurPartySpecies], a
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	ld a, [wBattleType]
 	dec a ; is this the old man battle?
 	jr z, .oldManCaughtMon ; if so, don't give the player the caught Pokémon
@@ -520,7 +520,7 @@ ItemUseBall:
 
 ; Add the caught Pokémon to the Pokédex.
 	predef IndexToPokedex
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	dec a
 	ld c, a
 	ld b, FLAG_TEST
@@ -528,7 +528,7 @@ ItemUseBall:
 	predef FlagActionPredef
 	ld a, c
 	push af
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	dec a
 	ld c, a
 	ld b, FLAG_SET
@@ -542,7 +542,7 @@ ItemUseBall:
 	call PrintText
 	call ClearSprites
 	ld a, [wEnemyMonSpecies]
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	predef ShowPokedexData
 
 .skipShowingPokedexData
@@ -842,7 +842,7 @@ ItemUseMedicine:
 	ld d, a
 	ld a, [wCurPartySpecies]
 	ld e, a
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	pop af
 	ld [wCurItem], a
 	pop af
@@ -1254,8 +1254,8 @@ ItemUseMedicine:
 .useVitamin
 	push hl
 	ld a, [hl]
-	ld [wd0b5], a
-	ld [wd11e], a
+	ld [wCurSpecies], a
+	ld [wPokedexNum], a
 	ld bc, wPartyMon1Level - wPartyMon1
 	add hl, bc ; hl now points to level
 	ld a, [hl] ; a = level
@@ -1396,7 +1396,7 @@ ItemUseMedicine:
 	ld a, d
 	ld [wWhichPokemon], a
 	ld a, e
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a
 	call LoadMonData
@@ -1988,7 +1988,7 @@ ItemUsePPRestore:
 	call GetSelectedMoveOffset
 	push hl
 	ld a, [hl]
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMoveName
 	call CopyToStringBuffer
 	pop hl
@@ -2009,7 +2009,7 @@ ItemUsePPRestore:
 	add 1 << 6 ; increase PP Up count by 1
 	ld [hl], a
 	ld a, 1 ; 1 PP Up used
-	ld [wd11e], a
+	ld [wUsingPPUp], a
 	call RestoreBonusPP ; add the bonus PP to current PP
 	ld hl, PPIncreasedText
 	call PrintText
@@ -2162,9 +2162,9 @@ ItemUseTMHM:
 	add NUM_TMS + NUM_HMS ; adjust HM IDs to come after TM IDs
 .skipAdding
 	inc a
-	ld [wd11e], a
+	ld [wTempTMHM], a
 	predef TMToMove ; get move ID from TM/HM ID
-	ld a, [wd11e]
+	ld a, [wTempTMHM]
 	ld [wMoveNum], a
 	call GetMoveName
 	call CopyToStringBuffer
@@ -2558,7 +2558,7 @@ TossItem_::
 	jr nz, .tooImportantToToss
 	push hl
 	ld a, [wCurItem]
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetItemName
 	call CopyToStringBuffer
 	ld hl, IsItOKToTossItemText
@@ -2578,7 +2578,7 @@ TossItem_::
 	ld a, [wWhichPokemon]
 	call RemoveItemFromInventory
 	ld a, [wCurItem]
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetItemName
 	call CopyToStringBuffer
 	ld hl, ThrewAwayItemText
@@ -2651,7 +2651,7 @@ SendNewMonToBox:
 	inc a
 	ld [de], a
 	ld a, [wCurPartySpecies]
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	ld c, a
 .loop
 	inc de
@@ -2893,7 +2893,7 @@ ItemUseReloadOverworldData:
 	call LoadCurrentMapView
 	jp UpdateSprites
 
-; creates a list at wBuffer of maps where the mon in [wd11e] can be found.
+; creates a list at wBuffer of maps where the mon in [wPokedexNum] can be found.
 ; this is used by the pokedex to display locations the mon can be found on the map.
 FindWildLocationsOfMon:
 	ld hl, WildDataPointers
@@ -2928,7 +2928,7 @@ CheckMapForMon:
 	inc hl
 	ld b, NUM_WILDMONS
 .loop
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	cp [hl]
 	jr nz, .nextEntry
 	ld a, c

@@ -84,7 +84,7 @@ LeaguePCShowMon:
 	ld a, [hli]
 	ld [wHoFMonSpecies], a
 	ld [wCurPartySpecies], a
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	ld [wBattleMonSpecies2], a
 	ld [wWholeScreenPaletteMonSpecies], a
 	ld a, [hli]

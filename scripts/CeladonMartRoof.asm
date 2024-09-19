@@ -13,15 +13,16 @@ CeladonMartRoofScript_GetDrinksInBag:
 	jr z, .done
 	push hl
 	push de
-	ld [wd11e], a
+	ld [wTempByteValue], a
 	ld b, a
 	predef GetQuantityOfItemInBag
 	pop de
 	pop hl
 	ld a, b
 	and a
-	jr z, .loop ; if the item isn't in the bag
-	ld a, [wd11e]
+	jr z, .loop
+	; A drink is in the bag
+	ld a, [wTempByteValue]
 	ld [de], a
 	inc de
 	push hl
@@ -192,7 +193,7 @@ CeladonMartRoofScript_PrintDrinksInBag:
 	cp $ff
 	ret z
 	push hl
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetItemName
 	hlcoord 2, 2
 	ldh a, [hItemCounter]

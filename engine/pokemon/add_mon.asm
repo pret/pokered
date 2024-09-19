@@ -65,7 +65,7 @@ _AddPartyMon::
 	ld d, h
 	push hl
 	ld a, [wCurPartySpecies]
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	call GetMonHeader
 	ld hl, wMonHeader
 	ld a, [hli]
@@ -81,11 +81,11 @@ _AddPartyMon::
 
 ; If the mon is being added to the player's party, update the pokedex.
 	ld a, [wCurPartySpecies]
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	push de
 	predef IndexToPokedex
 	pop de
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	dec a
 	ld c, a
 	ld b, FLAG_TEST
@@ -93,7 +93,7 @@ _AddPartyMon::
 	call FlagAction
 	ld a, c ; whether the mon was already flagged as owned
 	ld [wUnusedAlreadyOwnedFlag], a
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	dec a
 	ld c, a
 	ld b, FLAG_SET
@@ -323,9 +323,9 @@ _AddEnemyMonToPlayerParty::
 	ld bc, NAME_LENGTH
 	call CopyData    ; write new mon's nickname (from an enemy mon)
 	ld a, [wCurPartySpecies]
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	predef IndexToPokedex
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	dec a
 	ld c, a
 	ld b, FLAG_SET

@@ -35,7 +35,7 @@ DisplayMonFrontSpriteInBox:
 	call DisplayTextBoxID
 	call UpdateSprites
 	ld a, [wCurPartySpecies]
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	call GetMonHeader
 	ld de, vChars1 tile $31
 	call LoadMonFrontSprite

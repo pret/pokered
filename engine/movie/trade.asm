@@ -186,14 +186,14 @@ LoadTradingGFXAndMonNames:
 	xor a
 	ldh [hAutoBGTransferEnabled], a
 	ld a, [wTradedPlayerMonSpecies]
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMonName
 	ld hl, wNameBuffer
 	ld de, wStringBuffer
 	ld bc, NAME_LENGTH
 	call CopyData
 	ld a, [wTradedEnemyMonSpecies]
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	jp GetMonName
 
 Trade_LoadMonPartySpriteGfx:
@@ -728,7 +728,7 @@ Trade_CircleOAM3:
 ; a = species
 Trade_LoadMonSprite:
 	ld [wCurPartySpecies], a
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	ld [wWholeScreenPaletteMonSpecies], a
 	ld b, SET_PAL_POKEMON_WHOLE_SCREEN
 	ld c, 0

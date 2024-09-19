@@ -1490,8 +1490,10 @@ wSpriteDecodeTable0Ptr:: dw
 ; pointer to differential decoding table (assuming initial value 1)
 wSpriteDecodeTable1Ptr:: dw
 
-wd0b5:: db ; used as a temp storage area for Pokemon Species, and other Pokemon/Battle related things
-
+; input for GetMonHeader
+wCurSpecies::
+; input for GetName
+wNameListIndex:: db
 wNameListType:: db
 
 wPredefBank:: db
@@ -1556,19 +1558,22 @@ wCapturedMonSpecies:: db
 ; which will be the first mon sent out.
 wFirstMonsNotOutYet:: db
 
+wNamedObjectIndex::
+wTempByteValue::
+wNumSetBits::
+wTypeEffectiveness::
+wMoveType::
+wPokedexNum::
+wTempTMHM::
+wUsingPPUp::
+wMaxPP::
+wMoveGrammar::
+; 0 for player, non-zero for enemy
+wCalculateWhoseStats::
 wPokeBallCaptureCalcTemp::
 ; lower nybble: number of shakes
 ; upper nybble: number of animations to play
 wPokeBallAnimData::
-wUsingPPUp::
-wMaxPP::
-; 0 for player, non-zero for enemy
-wCalculateWhoseStats::
-wTypeEffectiveness::
-wMoveType::
-wNumSetBits::
-; used as a Pokemon and Item storage value. Also used as an output value for CountSetBits
-wd11e::
 	db
 
 ; When this value is non-zero, the player isn't allowed to exit the party menu

@@ -98,7 +98,7 @@ PrintFossilsInBag:
 	cp $ff
 	ret z
 	push hl
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetItemName
 	hlcoord 2, 2
 	ldh a, [hItemCounter]
@@ -114,10 +114,10 @@ PrintFossilsInBag:
 ; loads the names of the fossil item and the resulting mon
 LoadFossilItemAndMonName::
 	ld a, [wFossilMon]
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMonName
 	call CopyToStringBuffer
 	ld a, [wFossilItem]
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetItemName
 	ret

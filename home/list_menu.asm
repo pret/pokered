@@ -141,7 +141,7 @@ DisplayListMenuIDLoop::
 	ld [wMaxItemQuantity], a
 .skipGettingQuantity
 	ld a, [wCurItem]
-	ld [wd0b5], a
+	ld [wNameListIndex], a
 	ld a, BANK(ItemNames)
 	ld [wPredefBank], a
 	call GetName
@@ -367,7 +367,7 @@ PrintListMenuEntries::
 	ld a, b
 	ld [wWhichPokemon], a
 	ld a, [de]
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	cp $ff
 	jp z, .printCancelMenuItem
 	push bc
@@ -427,7 +427,7 @@ PrintListMenuEntries::
 	and a ; PCPOKEMONLISTMENU?
 	jr nz, .skipPrintingPokemonLevel
 .printPokemonLevel
-	ld a, [wd11e]
+	ld a, [wNamedObjectIndex]
 	push af
 	push hl
 	ld hl, wPartyCount
@@ -460,7 +460,7 @@ PrintListMenuEntries::
 	add hl, bc
 	call PrintLevel
 	pop af
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 .skipPrintingPokemonLevel
 	pop hl
 	pop de
@@ -469,7 +469,7 @@ PrintListMenuEntries::
 	cp ITEMLISTMENU
 	jr nz, .nextListEntry
 .printItemQuantity
-	ld a, [wd11e]
+	ld a, [wNamedObjectIndex]
 	ld [wCurItem], a
 	call IsKeyItem ; check if item is unsellable
 	ld a, [wIsKeyItem]
@@ -480,18 +480,18 @@ PrintListMenuEntries::
 	add hl, bc
 	ld a, "×"
 	ld [hli], a
-	ld a, [wd11e]
+	ld a, [wNamedObjectIndex]
 	push af
 	ld a, [de]
 	ld [wMaxItemQuantity], a
 	push de
-	ld de, wd11e
+	ld de, wTempByteValue
 	ld [de], a
 	lb bc, 1, 2
 	call PrintNumber
 	pop de
 	pop af
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	pop hl
 .skipPrintingItemQuantity
 	inc de

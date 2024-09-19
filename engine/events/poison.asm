@@ -44,7 +44,7 @@ ApplyOutOfBattlePoisonDamage:
 	inc hl
 	ld [hl], a
 	ld a, [de]
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	push de
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMonNicks

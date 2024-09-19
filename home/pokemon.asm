@@ -99,12 +99,12 @@ LoadFlippedFrontSpriteByMonIndex::
 
 LoadFrontSpriteByMonIndex::
 	push hl
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	push af
 	ld a, [wCurPartySpecies]
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	predef IndexToPokedex
-	ld hl, wd11e
+	ld hl, wPokedexNum
 	ld a, [hl]
 	pop bc
 	ld [hl], b
@@ -355,8 +355,8 @@ PrintLevelFull::
 	ld a, [wLoadedMonLevel] ; level
 
 PrintLevelCommon::
-	ld [wd11e], a
-	ld de, wd11e
+	ld [wTempByteValue], a
+	ld de, wTempByteValue
 	ld b, LEFT_ALIGN | 1 ; 1 byte
 	jp PrintNumber
 
@@ -371,7 +371,7 @@ GetwMoves::
 
 ; copies the base stat data of a pokemon to wMonHeader
 ; INPUT:
-; [wd0b5] = pokemon ID
+; [wCurSpecies] = pokemon ID
 GetMonHeader::
 	ldh a, [hLoadedROMBank]
 	push af
@@ -381,10 +381,10 @@ GetMonHeader::
 	push bc
 	push de
 	push hl
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	push af
-	ld a, [wd0b5]
-	ld [wd11e], a
+	ld a, [wCurSpecies]
+	ld [wPokedexNum], a
 	ld de, FossilKabutopsPic
 	ld b, $66 ; size of Kabutops fossil and Ghost sprites
 	cp FOSSIL_KABUTOPS ; Kabutops fossil
@@ -398,8 +398,8 @@ GetMonHeader::
 	jr z, .specialID
 	cp MEW
 	jr z, .mew
-	predef IndexToPokedex   ; convert pokemon ID in [wd11e] to pokedex number
-	ld a, [wd11e]
+	predef IndexToPokedex
+	ld a, [wPokedexNum]
 	dec a
 	ld bc, BASE_DATA_SIZE
 	ld hl, BaseStats
@@ -423,10 +423,10 @@ GetMonHeader::
 	ld a, BANK(MewBaseStats)
 	call FarCopyData
 .done
-	ld a, [wd0b5]
+	ld a, [wCurSpecies]
 	ld [wMonHIndex], a
 	pop af
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	pop hl
 	pop de
 	pop bc

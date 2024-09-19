@@ -362,7 +362,7 @@ ClearBothBGMaps:
 
 LoadTitleMonSprite:
 	ld [wCurPartySpecies], a
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	hlcoord 5, 10
 	call GetMonHeader
 	jp LoadFrontSpriteByMonIndex

@@ -8,7 +8,7 @@ _DisplayPokedex::
 	ld c, 10
 	call DelayFrames
 	predef IndexToPokedex
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	dec a
 	ld c, a
 	ld b, FLAG_SET

@@ -5,7 +5,7 @@ GetMonName::
 	ld a, BANK(MonsterNames)
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
-	ld a, [wd11e]
+	ld a, [wNamedObjectIndex]
 	dec a
 	ld hl, MonsterNames
 	ld c, NAME_LENGTH - 1
@@ -25,14 +25,14 @@ GetMonName::
 	ret
 
 GetItemName::
-; given an item ID at [wd11e], store the name of the item in wNameBuffer
+; given an item ID at [wNamedObjectIndex], store the name of the item in wNameBuffer
 	push hl
 	push bc
-	ld a, [wd11e]
+	ld a, [wNamedObjectIndex]
 	cp HM01 ; is this a TM/HM?
 	jr nc, .Machine
 
-	ld [wd0b5], a
+	ld [wNameListIndex], a
 	ld a, ITEM_NAME
 	ld [wNameListType], a
 	ld a, BANK(ItemNames)
@@ -49,18 +49,18 @@ GetItemName::
 	ret
 
 GetMachineName::
-; copies the name of the TM/HM in [wd11e] to wNameBuffer
+; copies the name of the TM/HM in [wNamedObjectIndex] to wNameBuffer
 	push hl
 	push de
 	push bc
-	ld a, [wd11e]
+	ld a, [wNamedObjectIndex]
 	push af
 	cp TM01 ; is this a TM? [not HM]
 	jr nc, .WriteTM
 ; if HM, then write "HM" and add NUM_HMS to the item ID, so we can reuse the
 ; TM printing code
 	add NUM_HMS
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	ld hl, HiddenPrefix ; points to "HM"
 	ld bc, 2
 	jr .WriteMachinePrefix
@@ -72,7 +72,7 @@ GetMachineName::
 	call CopyData
 
 ; now get the machine number and convert it to text
-	ld a, [wd11e]
+	ld a, [wNamedObjectIndex]
 	sub TM01 - 1
 	ld b, "0"
 .FirstDigit
@@ -94,7 +94,7 @@ GetMachineName::
 	ld a, "@"
 	ld [de], a
 	pop af
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	pop bc
 	pop de
 	pop hl
@@ -130,8 +130,8 @@ GetMoveName::
 	push hl
 	ld a, MOVE_NAME
 	ld [wNameListType], a
-	ld a, [wd11e]
-	ld [wd0b5], a
+	ld a, [wNamedObjectIndex]
+	ld [wNameListIndex], a
 	ld a, BANK(MoveNames)
 	ld [wPredefBank], a
 	call GetName

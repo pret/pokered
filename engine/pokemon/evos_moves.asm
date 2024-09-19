@@ -135,7 +135,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	call PrintText
 	pop hl
 	ld a, [hl]
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	ld [wLoadedMonSpecies], a
 	ld [wEvoNewSpecies], a
 	ld a, MONSTER_NAME
@@ -153,22 +153,22 @@ Evolution_PartyMonLoop: ; loop over party mons
 	call DelayFrames
 	call ClearScreen
 	call RenameEvolvedMon
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	push af
-	ld a, [wd0b5]
-	ld [wd11e], a
+	ld a, [wCurSpecies]
+	ld [wPokedexNum], a
 	predef IndexToPokedex
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	dec a
 	ld hl, BaseStats
 	ld bc, BASE_DATA_SIZE
 	call AddNTimes
 	ld de, wMonHeader
 	call CopyData
-	ld a, [wd0b5]
+	ld a, [wCurSpecies]
 	ld [wMonHIndex], a
 	pop af
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	ld hl, wLoadedMonHPExp - 1
 	ld de, wLoadedMonStats
 	ld b, $1
@@ -203,8 +203,8 @@ Evolution_PartyMonLoop: ; loop over party mons
 	dec hl
 	pop bc
 	call CopyData
-	ld a, [wd0b5]
-	ld [wd11e], a
+	ld a, [wCurSpecies]
+	ld [wPokedexNum], a
 	xor a
 	ld [wMonDataLocation], a
 	call LearnMoveFromLevelUp
@@ -214,7 +214,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	and a
 	call z, Evolution_ReloadTilesetTilePatterns
 	predef IndexToPokedex
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	dec a
 	ld c, a
 	ld b, FLAG_SET
@@ -260,13 +260,14 @@ Evolution_PartyMonLoop: ; loop over party mons
 RenameEvolvedMon:
 ; Renames the mon to its new, evolved form's standard name unless it had a
 ; nickname, in which case the nickname is kept.
-	ld a, [wd0b5]
+	assert wCurSpecies == wNameListIndex ; save+restore wCurSpecies while using wNameListIndex
+	ld a, [wCurSpecies]
 	push af
 	ld a, [wMonHIndex]
-	ld [wd0b5], a
+	ld [wNameListIndex], a
 	call GetName
 	pop af
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	ld hl, wNameBuffer
 	ld de, wStringBuffer
 .compareNamesLoop
@@ -319,7 +320,7 @@ Evolution_ReloadTilesetTilePatterns:
 
 LearnMoveFromLevelUp:
 	ld hl, EvosMovesPointerTable
-	ld a, [wd11e] ; species
+	ld a, [wPokedexNum] ; species
 	ld [wCurPartySpecies], a
 	dec a
 	ld bc, 0
@@ -366,13 +367,13 @@ LearnMoveFromLevelUp:
 	jr nz, .checkCurrentMovesLoop
 	ld a, d
 	ld [wMoveNum], a
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMoveName
 	call CopyToStringBuffer
 	predef LearnMove
 .done
 	ld a, [wCurPartySpecies]
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	ret
 
 ; writes the moves a mon has at level [wCurEnemyLevel] to [de]
