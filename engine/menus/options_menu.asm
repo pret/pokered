@@ -136,17 +136,7 @@ GetOptionCoordOffsetsList:
 	ld l, a
 	ret
 
-OptionMenu1Header:
-	dw DrawOptionMenu
-	dw OptionSetCursorPositionActions
-	dw SetOptionsFromCursorPositions
-	dw OptionLeftRightFuncs
-	dw DisplayOptions2
-	dw DisplaySpriteOptions
-	dw OptionsPageAorSelectButtonDefault
-	dw OptionsMenu1InfoTextJumpTable
-	; fall through (options display address should be after A button pointer)
-DisplayOptionMenu:
+OptionsLoadExtraTiles:
 	ld de, EditPrompt
 	ld hl, vChars1 tile $40
 	lb bc, BANK(EditPrompt), 3
@@ -158,7 +148,20 @@ DisplayOptionMenu:
 	ld de, InfoPromptGraphics
 	ld hl, vChars1 tile $46
 	lb bc, BANK(InfoPromptGraphics), 2
-	call CopyVideoData
+	jp CopyVideoData
+
+OptionMenu1Header:
+	dw DrawOptionMenu
+	dw OptionSetCursorPositionActions
+	dw SetOptionsFromCursorPositions
+	dw OptionLeftRightFuncs
+	dw DisplayOptions2
+	dw DisplaySpriteOptions
+	dw OptionsPageAorSelectButtonDefault
+	dw OptionsMenu1InfoTextJumpTable
+	; fall through (options display address should be after A button pointer)
+DisplayOptionMenu:
+	call OptionsLoadExtraTiles
 	ld hl, OptionMenu1Header
 	ld bc, OptionMenu1Data
 	; fall through

@@ -132,11 +132,7 @@ SetSpriteOptionsFromCursorPositions:
 	call GBPalWhiteOut
 	callfar LoopRemapSpritePictureIDs ; if we did, modify the sprites in wram to have the correct IDs
 	call ReloadMapSpriteTilePatterns ; reload their tiles so they have the right sprites
-	ld de, EditPrompt ; reload the EDIT prompt tiles
-	ld hl, vChars1 tile $40
-	lb bc, BANK(EditPrompt), 3
-	; TODO: fix info prompt needing reload
-	call CopyVideoDataDouble
+	call OptionsLoadExtraTiles
 	jp GBPalNormal
 
 SetCursorPositionFromSpriteOptions:
