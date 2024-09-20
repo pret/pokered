@@ -124,5 +124,6 @@ CeruleanBadgeHouseEarthBadgeText:
 ; PureRGBnote: ADDED: some text where it seems like there should be an interaction.
 
 CeruleanBadgeHouseGarbageText:
+	text_far _GarbageCrumpledUpPaper
 	text_far _CeruleanBadgeHouseGarbageText
 	text_end

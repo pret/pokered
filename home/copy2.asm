@@ -5,13 +5,10 @@ FarCopyData2::
 	ldh a, [hLoadedROMBank]
 	push af
 	ldh a, [hROMBankTemp]
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call SetCurBank
 	rst _CopyData
 	pop af
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
-	ret
+	jp SetCurBank
 
 FarCopyData3::
 ; Copy bc bytes from a:de to hl.
@@ -19,8 +16,7 @@ FarCopyData3::
 	ldh a, [hLoadedROMBank]
 	push af
 	ldh a, [hROMBankTemp]
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call SetCurBank
 	push hl
 	push de
 	push de
@@ -31,9 +27,7 @@ FarCopyData3::
 	pop de
 	pop hl
 	pop af
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
-	ret
+	jp SetCurBank
 
 ;;;;;;;;;; PureRGBnote: ADDED: these functions are used when loading maps to get everything loaded without having to disable LCD
 FarCopyData4::
@@ -41,13 +35,10 @@ FarCopyData4::
 	ldh a, [hLoadedROMBank]
 	push af
 	ldh a, [hROMBankTemp]
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call SetCurBank
 	call CheckSpecialCopyData
 	pop af
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
-	ret
+	jp SetCurBank
 
 CheckSpecialCopyData:
 	push af
@@ -87,8 +78,7 @@ FarCopyDataDouble::
 	ldh a, [hLoadedROMBank]
 	push af
 	ldh a, [hROMBankTemp]
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call SetCurBank
 .loop
 	ld a, [hli]
 	ld [de], a
@@ -100,9 +90,7 @@ FarCopyDataDouble::
 	or b
 	jr nz, .loop
 	pop af
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
-	ret
+	jp SetCurBank
 
 CopyVideoData::
 ; Wait for the next VBlank, then copy c 2bpp
@@ -118,8 +106,7 @@ CopyVideoData::
 	ldh [hROMBankTemp], a
 
 	ld a, b
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call SetCurBank
 
 	ld a, e
 	ldh [hVBlankCopySource], a
@@ -140,8 +127,7 @@ CopyVideoData::
 	ldh [hVBlankCopySize], a
 	rst _DelayFrame
 	ldh a, [hROMBankTemp]
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call SetCurBank
 	pop af
 	ldh [hAutoBGTransferEnabled], a
 	ret
@@ -167,8 +153,7 @@ CopyVideoDataDouble::
 	ldh [hROMBankTemp], a
 
 	ld a, b
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call SetCurBank
 
 	ld a, e
 	ldh [hVBlankCopyDoubleSource], a
@@ -189,8 +174,7 @@ CopyVideoDataDouble::
 	ldh [hVBlankCopyDoubleSize], a
 	rst _DelayFrame
 	ldh a, [hROMBankTemp]
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call SetCurBank
 	pop af
 	ldh [hAutoBGTransferEnabled], a
 	ret

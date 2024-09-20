@@ -31,7 +31,10 @@ TMKidGreet2::
 	text_end
 
 VermilionMartTMKidFlavor:
+	text_far _TMKidBringingTMsAnyCost
+	text_far _TMKidSellingTMsCopiedDadOriginals
 	text_far _VermilionMartTMKidFlavor
+	text_far _TMKidWantSomeTMsText
 	text_end
 
 TMKidQuick2::

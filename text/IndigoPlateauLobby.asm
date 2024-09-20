@@ -1,5 +1,5 @@
 _IndigoPlateauLobbyGymGuideText::
-	text "Yo! Champ in"
+	text "Yo! Champ in" ; TODO: genericize text
 	line "making!"
 
 	para "At #MON LEAGUE,"
@@ -12,7 +12,7 @@ _IndigoPlateauLobbyGymGuideText::
 	cont "over again! This"
 	cont "is it! Go for it!"
 
-	para "If you need TMs"
+	para "If you need <TM>s"
 	line "just talk to"
 	cont "my son!"
 
@@ -26,7 +26,7 @@ _IndigoPlateauGymGuideChampGreeting::
 
 	para "I saw a fire in"
 	line "your eyes back in"
-	cont "PEWTER CITY..."
+	cont "PEWTER CITY<...>"
 	cont "I knew you'd go"
 	cont "places!"
 
@@ -78,7 +78,7 @@ _IndigoPlateauGymGuideSonText::
 	text "Yo! Champ in"
 	line "making!"
 
-	para "It's me! The TM"
+	para "It's me! The <TM>"
 	line "Pirate and Gym"
 	cont "Guide in making!"
 	prompt
@@ -86,7 +86,7 @@ _IndigoPlateauGymGuideSonText::
 _IndigoPlateauGymGuideSonChampText::
 	text "Yo! Champ!!"
 
-	para "It's me! The TM"
+	para "It's me! The <TM>"
 	line "Pirate and Gym"
 	cont "Guide in making!"
 	prompt
@@ -98,22 +98,18 @@ _IndigoPlateauGymGuideSonIntro::
 	cont "day!"
 
 	para "I'm a certified"
-	line "TM engineer now!"
+	line "<TM> engineer now!"
 
 	para "Got some powerful"
-	line "TMs copied from"
+	line "<TM>s copied from"
 	cont "dad's originals!"
 
 	para "Want some?"
 	done
 
-_IndigoPlateauGymGuideSonShopStart::
-	text "Want some TMs?"
-	done
-
 _IndigoPlateauGymGuideSonMoreTMs::
 	text "I've got every"
-	line "single TM copied"
+	line "single <TM> copied"
 	cont "and ready for you"
 	cont "now! Want some?"
 	done

@@ -49,11 +49,6 @@ _PokemartNotEnoughMoneyText::
 	line "enough money."
 	prompt
 
-_PokemartItemBagFullText::
-	text "You can't carry"
-	line "any more items."
-	prompt
-
 _PokemonSellingGreetingText::
 	text "What would you"
 	line "like to sell?"
@@ -147,7 +142,7 @@ _PressStartToLearnText::
 	text_end
 
 _OneTwoAndText::
-	text "1, 2 and...@"
+	text "1, 2 and<...>@"
 	text_end
 
 _PoofText::
@@ -163,7 +158,7 @@ _ForgotAndText::
 	text_ram wcd6d
 	text "!"
 
-	para "And..."
+	para "And<...>"
 	prompt
 
 ;_HMCantDeleteText::

@@ -93,12 +93,12 @@ _Route11Gambler3AfterBattleText::
 
 _Route11Gambler4BattleText::
 	text "I have never won"
-	line "before..."
+	line "before<...>"
 	done
 
 _Route11Gambler4EndBattleText::
 	text "I saw"
-	line "this coming..."
+	line "this coming<...>"
 	prompt
 
 _Route11Gambler4AfterBattleText::

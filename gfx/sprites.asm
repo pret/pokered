@@ -106,6 +106,7 @@ GiovanniSittingSprite:: INCBIN "gfx/sprites/champ_arena_audience/giovanni_sittin
 BlueSittingSprite:: INCBIN "gfx/sprites/champ_arena_audience/blue_sitting.2bpp"
 LavaSuitSprite:: INCBIN "gfx/sprites/lava_suit.2bpp"
 BoomboxSprite:: INCBIN "gfx/sprites/boombox.2bpp"
+ScubaSuitSprite:: INCBIN "gfx/sprites/scuba_suit.2bpp"
 
 SECTION "NPC Sprites 4", ROMX
 
@@ -131,3 +132,4 @@ PsychicEyeSprite:: INCBIN "gfx/overworld/eye.2bpp"
 CaptainWalking:: INCBIN "gfx/sprites/captain_walking.2bpp"
 GhostSprite:: INCBIN "gfx/sprites/ghost.2bpp"
 MonsterCryingSprite:: INCBIN "gfx/sprites/monster_crying.2bpp"
+SnakeSprite:: INCBIN "gfx/sprites/snake.2bpp"

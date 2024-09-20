@@ -9,13 +9,15 @@ _CinnabarMartScientistText::
 	line "have extra items!"
 	done
 
-_CinnabarMartTMKidFlavor::
-	text "Bringing TMs to"
+_TMKidBringingTMsAnyCost::
+	text "Bringing <TM>s to"
 	line "the place they"
 	cont "should be, at"
-	cont "any cost!"
+	cont "any cost!@"
+	text_end
 
-	para "My dad found out"
+_CinnabarMartTMKidFlavor::
+	text "<PARA>My dad found out"
 	line "CINNABAR GYM was"
 	cont "locked when we"
 	cont "arrived."
@@ -26,12 +28,16 @@ _CinnabarMartTMKidFlavor::
 	para "They were so"
 	line "dumbfounded that"
 	cont "they just let him"
-	cont "stay there!"
+	cont "stay there!@"
+	text_end
 
-	para "I'm selling TMs"
+_TMKidSellingTMsCopiedDadOriginals::
+	text "<PARA>I'm selling <TM>s"
 	line "that I copied"
 	cont "from my dad's"
-	cont "originals!"
+	cont "originals!@"
+	text_end
 
-	para "Want some?"
+_TMKidWantSomeText::
+	text "<PARA>Want some?"
 	done

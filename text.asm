@@ -294,6 +294,7 @@ INCLUDE "text/OptionsInfoText.asm"
 
 SECTION "Text 13", ROMX
 INCLUDE "text/PokemonTowerCatacombs.asm"
+INCLUDE "text/ErikAndSara.asm"
 
 SECTION "Pokédex Text", ROMX
 

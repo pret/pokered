@@ -10,6 +10,9 @@ SeafoamIslandsB4FOnMapLoad::
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
+	ld a, [wSeafoamIslandsB4FCurScript]
+	cp SCRIPT_SEAFOAMISLANDSB4F_DRAGONAIR_EVENT_START
+	jp z, SeafoamIslandsB4FDragonairEventOnMapLoad
 	CheckEvent EVENT_BEAT_ARTICUNO
 	jr z, .dontMoveCrystals
 	call SeafoamMoveCrystals
@@ -57,6 +60,7 @@ SeafoamIslandsB4F_ScriptPointers:
 	dw_const SeafoamIslandsB4FObjectMoving1Script, SCRIPT_SEAFOAMISLANDSB4F_OBJECT_MOVING1
 	dw_const SeafoamIslandsB4FArticunoIntroAnimation, SCRIPT_SEAFOAMISLANDSB4F_ARTICUNO_INTRO_ANIMATION
 	dw_const SeafoamIslandsB4FEndArticunoBattleScript, SCRIPT_SEAFOAMISLANDSB4F_ARTICUNO_BATTLE_END
+	dw_const SeafoamIslandsB4FDragonairEventStartScript, SCRIPT_SEAFOAMISLANDSB4F_DRAGONAIR_EVENT_START
 
 SeafoamIslandsB4FEndArticunoBattleScript:
 	ld a, [wIsInBattle]
@@ -114,7 +118,7 @@ SeafoamIslandsB4F_TextPointers:
 	dw_const BoulderBlockingWaterB4F,              TEXT_SEAFOAMISLANDSB4F_BOULDER2
 	dw_const SeafoamIslandsB4FArticunoText,     TEXT_SEAFOAMISLANDSB4F_ARTICUNO
 	dw_const PickUpItemText,                    TEXT_SEAFOAMISLANDSB4F_ITEM1 ; PureRGBnote: ADDED: new item located here.
-	dw_const DoRet,                             TEXT_SEAFOAMISLANDSB4F_ANIMSPRITE1 
+	dw_const SeafoamIslandsB4FDragonairEventStartText, TEXT_SEAFOAMISLANDSB4F_ANIMSPRITE1 
 	dw_const DoRet,                             TEXT_SEAFOAMISLANDSB4F_ANIMSPRITE2
 	dw_const DoRet,                             TEXT_SEAFOAMISLANDSB4F_ANIMSPRITE3
 	dw_const DoRet,                             TEXT_SEAFOAMISLANDSB4F_ANIMSPRITE4
@@ -291,3 +295,118 @@ OpenBirdSpriteWings:
 	lb bc, BANK(BirdSprite), 4
 .gotSprite
 	jp CopyVideoData
+
+SeafoamIslandsB4FDragonairEventOnMapLoad:
+	; replace nothing sprite with scuba sprite
+	ld de, ScubaSuitSprite
+	lb bc, BANK(ScubaSuitSprite), 4
+	ld hl, vNPCSprites tile $18
+	call CopyVideoData
+	; make player face down
+	ld a, PLAYER_DIR_DOWN
+	ld [wPlayerMovingDirection], a
+	ld a, 1 << PLAYER_DIR_BIT_DOWN
+	ld [wPlayerDirection], a
+	; move 2 of the nothing sprites near player to be sara and erik
+	lb de, -1, -1
+	ld c, SEAFOAMISLANDSB4F_ANIMSPRITE1
+	callfar FarMoveSpriteInRelationToPlayer
+	lb de, 1, -1
+	ld c, SEAFOAMISLANDSB4F_ANIMSPRITE2
+	callfar FarMoveSpriteInRelationToPlayer
+	jp UpdateSprites
+
+SeafoamIslandsB4FDragonairEventStartScript:
+	ld a, [wd730] ; is the player moving?
+	bit 0, a
+	ret nz
+	bit 7, a
+	ret nz
+	ld a, [wYCoord]
+	cp 5
+	jr z, .initialText
+	xor a
+	ld [wJoyIgnore], a
+	ld c, 60
+	rst _DelayFrames
+	; play a splash sound
+	ld a, SFX_INTRO_RAISE
+	rst _PlaySound
+	; diving animation
+	ld de, GhostSprite tile 4
+	lb bc, BANK(GhostSprite), 4
+	call .copyPlayerSprite
+	ld de, GhostSprite tile 8
+	lb bc, BANK(GhostSprite), 4
+	call .copyPlayerSprite
+	ld de, NothingSprite
+	lb bc, BANK(NothingSprite), 4
+	call .copyPlayerSprite
+	ld c, 60
+	rst _DelayFrames
+  	; load scripted warp to seafoam islands 1f
+  	ld a, 7 ; 8th warp
+	ld [wDestinationWarpID], a
+	ld a, SEAFOAM_ISLANDS_1F
+	ldh [hWarpDestinationMap], a
+	ld hl, wd72d
+	set 3, [hl] ; scripted warp flag
+	
+	ld a, SCRIPT_SEAFOAMISLANDSB4F_DEFAULT
+	ld [wSeafoamIslandsB4FCurScript], a
+	ret
+.copyPlayerSprite
+	ld hl, vNPCSprites
+	call CopyVideoData
+	jp Delay3
+.initialText
+	call GBFadeInFromBlack
+	ld a, TEXT_SEAFOAMISLANDSB4F_ANIMSPRITE1
+	ldh [hSpriteIndexOrTextID], a
+	call DisplayTextID
+	; add more "downs" to the surf auto movement
+	ld a, D_DOWN
+	ld hl, wSimulatedJoypadStatesEnd + 1
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+	ld a, 5
+	ld [wSimulatedJoypadStatesIndex], a
+	ret
+
+SeafoamIslandsB4FDragonairEventStartText:
+	text_asm
+	CheckEvent EVENT_DRAGONAIR_EVENT_CLEARED_ONCE
+	jr nz, .skipFirstText
+	ld hl, .initialText
+	rst _PrintText
+.skipFirstText 
+	ld hl, .initialText2
+	rst _PrintText
+	ld a, SFX_INTRO_WHOOSH
+	rst _PlaySound
+	callfar PlayerQuickSpin
+	ld de, ScubaSuitSprite
+	lb bc, BANK(ScubaSuitSprite), 4
+	ld hl, vNPCSprites
+	call CopyVideoData
+	ld a, SFX_TRADE_MACHINE
+	rst _PlaySound
+	ld c, 60
+	rst _DelayFrames
+	ld a, $14 ; water tile
+	ld [wTileInFrontOfPlayer], a ; this isn't loaded correctly sometimes, just force it because we're facing water for sure
+	ld a, SURFBOARD
+	ld [wcf91], a
+	ld [wPseudoItemID], a
+	call UseItem
+	ld a, $1
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
+	rst TextScriptEnd
+.initialText
+	text_far _SeafoamIslandsB4FDragonairEventStartText
+	text_end
+.initialText2
+	text_far _SeafoamIslandsB4FDragonairEventStartText2
+	text_end

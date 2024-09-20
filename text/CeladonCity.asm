@@ -39,7 +39,25 @@ _CeladonCityGramps3Text::
 	line "dropping by!"
 	prompt
 
+_PewterGymReceivedTM34Text::
+_CeruleanGymMistyReceivedTM11Text::
+_VermilionGymLTSurgeReceivedTM24Text::
+_CeladonGymReceivedTM21Text::
 _CeladonCityGramps3ReceivedTM41Text::
+_CeladonMart3FClerkReceivedTM18Text::
+_CeladonMartRoofLittleGirlReceivedTM13Text::
+_CeladonMartRoofLittleGirlReceivedTM48Text::
+_CopycatsHouse2FCopycatReceivedTM31Text::
+_MrPsychicsHouseMrPsychicReceivedTM29Text::
+_SaffronGymSabrinaReceivedTM46Text::
+_FuchsiaGymKogaReceivedTM06Text::
+_WardensHouseWardenReceivedHM04Text::
+_SafariZoneSecretHouseFishingGuruReceivedHM03Text::
+_CinnabarGymBlaineReceivedTM38Text::
+_CinnabarLabMetronomeRoomScientist1ReceivedTM35Text::
+_ViridianCityFisherReceivedTM42Text::
+_ViridianGymGiovanniReceivedTM27Text::
+_Route12Gate2FBrunetteGirlReceivedTM39Text::
 	text "<PLAYER> received"
 	line "@"
 	text_ram wStringBuffer
@@ -47,7 +65,7 @@ _CeladonCityGramps3ReceivedTM41Text::
 	text_end
 
 _CeladonCityGramps3TM41ExplanationText::
-	text "TM41 teaches"
+	text "<TM>41 teaches"
 	line "MEDITATE!"
 
 	para "It raises ATTACK,"
@@ -83,12 +101,12 @@ _CeladonCityRocket1Text::
 	done
 
 _CeladonCityRocket2Text::
-	text "Keep out of TEAM"
-	line "ROCKET's way!"
+	text "Keep out of <TEAM>"
+	line "<ROCKET>'s way!"
 	done
 
 _CeladonCityTrainerTips1Text::
-	text "TRAINER TIPS"
+	text "<TIPS>" ; TODO: genericize message?
 
 	para "X ACCURACY boosts"
 	line "the accuracy of"
@@ -97,7 +115,8 @@ _CeladonCityTrainerTips1Text::
 	para "DIRE HIT jacks up"
 	line "the likelihood of"
 	cont "critical hits!"
-
+	; fall through
+_GetYourItemsAtDeptStore::
 	para "Get your items at"
 	line "CELADON DEPT."
 	cont "STORE!"
@@ -129,18 +148,15 @@ _CeladonCityDeptStoreSignText::
 	done
 
 _CeladonCityTrainerTips2Text::
-	text "TRAINER TIPS"
+	text "<TIPS>"
 
 	para "GUARD SPEC."
 	line "protects #MON"
 	cont "against status"
 	cont "moves like LEER"
-	cont "or SAND-ATTACK!"
+	cont "or SAND-ATTACK!@"
 
-	para "Get your items at"
-	line "CELADON DEPT."
-	cont "STORE!"
-	done
+	text_jump _GetYourItemsAtDeptStore
 
 _CeladonCityPrizeExchangeSignText::
 	text "Coins exchanged"
@@ -149,19 +165,19 @@ _CeladonCityPrizeExchangeSignText::
 	done
 
 _CeladonCityGameCornerSignText::
-	text "ROCKET GAME CORNER"
+	text "<ROCKET> GAME CORNER"
 	line "The playground"
 	cont "for grown-ups!"
 	done
 
 _CeladonCityText19::
-	text "TRAINER TIPS"
+	text "<TIPS>"
 	para "Open the START"
 	line "menu and scroll"
 	cont "down to the SAVE"
 	cont "option."
 	para "Then press SELECT"
-	line "to change PC"
+	line "to change <PC>"
 	cont "boxes whenever"
 	cont "you like!"
 	done

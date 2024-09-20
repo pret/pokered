@@ -82,7 +82,7 @@ _Museum1FScientist2TakeThisToAPokemonLabText::
 
 _Museum1FScientist2ReceivedOldAmberText::
 	text "<PLAYER> received"
-	line "OLD AMBER!@"
+	line "OLD AMBER!@" ; TODO: load item name?
 	text_end
 
 _Museum1FScientist2GetTheOldAmberCheckText::

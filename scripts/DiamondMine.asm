@@ -433,8 +433,7 @@ DiamondMineProspectorText:
 	ld d, ONIX
 	callfar IsMonInParty
 	jr nc, .done3
-	ld hl, TextScriptPromptButton
-	call TextCommandProcessor
+	call DisplayTextPromptButton
 	ld hl, .moreOnix1
 	rst _PrintText
 	call YesNoChoice

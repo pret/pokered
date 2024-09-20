@@ -14,21 +14,9 @@ _FuchsiaMartCooltrainerFText::
 	done
 
 _FuchsiaMartTMKidFlavor::
-	text "Bringing TMs to"
-	line "the place they"
-	cont "should be, at"
-	cont "any cost!"
-
-	para "I hear someone"
+	text "<PARA>I hear someone"
 	line "donated a"
 	cont "prehistoric"
 	cont "#MON to the"
-	cont "zoo here! Cool!"
-
-	para "I'm selling TMs"
-	line "that I copied"
-	cont "from my dad's"
-	cont "originals!"
-
-	para "Want some?"
-	done
+	cont "zoo here! Cool!@"
+	text_end

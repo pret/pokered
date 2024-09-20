@@ -31,7 +31,10 @@ TMKidGreet5::
 	text_end
 
 FuchsiaMartTMKidFlavor:
+	text_far _TMKidBringingTMsAnyCost
 	text_far _FuchsiaMartTMKidFlavor
+	text_far _TMKidSellingTMsCopiedDadOriginals
+	text_far _TMKidWantSomeText
 	text_end
 
 TMKidQuick5::

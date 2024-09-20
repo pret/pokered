@@ -53,7 +53,7 @@ _GameCornerMiddleAgedMan1Text::
 
 	para "It's rumored that"
 	line "this place is run"
-	cont "by TEAM ROCKET."
+	cont "by <TEAM><ROCKET>."
 	done
 
 _GameCornerBeauty2Text::
@@ -145,6 +145,7 @@ _GameCornerClerk2WantSomeCoinsText::
 	line "some coins?"
 	prompt
 
+_GameCornerGentlemanReceived20CoinsText::
 _GameCornerClerk2Received20CoinsText::
 	text "<PLAYER> received"
 	line "20 coins!@"
@@ -168,11 +169,6 @@ _GameCornerGentlemanThrowingMeOffText::
 	cont "coins, shoo!"
 	prompt
 
-_GameCornerGentlemanReceived20CoinsText::
-	text "<PLAYER> received"
-	line "20 coins!@"
-	text_end
-
 _GameCornerGentlemanYouGotYourOwnCoinsText::
 	text "You've got your"
 	line "own coins!"
@@ -190,6 +186,7 @@ _GameCornerRocketImGuardingThisPosterText::
 	cont "Go away, or else!"
 	done
 
+_Route21Fisher1EndBattleText::
 _GameCornerRocketBattleEndText::
 	text "Dang!"
 	prompt

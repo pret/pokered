@@ -37,5 +37,5 @@ _VermilionGymBookshelfText::
 	para "RECONNAISSANCE"
 	line "SPEAROW STYLE,"
 	para "THE DANGER OF"
-	line "DITTO SPIES..."
+	line "DITTO SPIES<...>"
 	done

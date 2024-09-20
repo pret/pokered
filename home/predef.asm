@@ -13,21 +13,17 @@ Predef::
 
 	push af
 	ld a, BANK(GetPredefPointer)
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call SetCurBank
 
 	call GetPredefPointer
 
 	ld a, [wPredefBank]
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call SetCurBank
 
 	call hl_caller
 
 	pop af
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
-	ret
+	jp SetCurBank
 
 GetPredefRegisters::
 ; Restore the contents of register pairs

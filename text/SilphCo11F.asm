@@ -69,7 +69,7 @@ _SilphCo11FGiovanniText::
 
 	para "Keep your nose"
 	line "out of grown-up"
-	cont "matters..."
+	cont "matters<...>"
 
 	para "Or, experience a"
 	line "world of pain!"
@@ -85,13 +85,13 @@ _SilphCo11FGiovanniYouRuinedOurPlansText::
 	line "You ruined our"
 	cont "plans for SILPH!"
 
-	para "But, TEAM ROCKET"
+	para "But, <TEAM><ROCKET>"
 	line "will never fall!"
 
 	para "<PLAYER>! Never"
 	line "forget that all"
 	cont "#MON exist"
-	cont "for TEAM ROCKET!"
+	cont "for <TEAM><ROCKET>!"
 
 	para "I must go, but I"
 	line "shall return!"
@@ -103,7 +103,7 @@ _SilphCo11FRocket1BattleText::
 	done
 
 _SilphCo11FRocket1EndBattleText::
-	text "Don't..."
+	text "Don't<...>"
 	line "Please!"
 	prompt
 

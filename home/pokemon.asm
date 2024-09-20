@@ -124,17 +124,14 @@ LoadFrontSpriteByMonIndex::
 	ldh a, [hLoadedROMBank]
 	push af
 	ld a, BANK(CopyUncompressedPicToHL)
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call SetCurBank
 	xor a
 	ldh [hStartTileID], a
 	call CopyUncompressedPicToHL
 	xor a
 	ld [wSpriteFlipped], a
 	pop af
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
-	ret
+	jp SetCurBank
 
 
 ;;;;;;;;;; PureRGbnote: ADDED: code that remaps channel 8 of armored mewtwo's cry if it's passed to this function
@@ -364,13 +361,10 @@ GetMonHeader::
 	ldh a, [hLoadedROMBank]
 	push af
 	ld a, BANK(BaseStats)
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call SetCurBank
 	call GetMonHeader2 ; moved to BaseStats bank because it was getting unwieldy
 	pop af
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
-	ret
+	jp SetCurBank
 
 ; copy party pokemon's name to wcd6d
 GetPartyMonName2::

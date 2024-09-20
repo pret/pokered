@@ -71,7 +71,7 @@ _ChampionsRoomRivalAfterBattleText::
 
 	para "I never made any"
 	line "mistakes raising"
-	cont "my #MON..."
+	cont "my #MON<...>"
 
 	para "Darn it! You're"
 	line "the new #MON"

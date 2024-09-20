@@ -307,8 +307,7 @@ PokemonTowerB1FDarkChannelerText:
 	rst _PrintText
 	call .checkForGengar
 	jr nc, .done
-	ld hl, TextScriptPromptButton
-	call TextCommandProcessor
+	call DisplayTextPromptButton
 .skipGreeting
 	call DarkChannelerEyesAndHandsFiddling
 	ld hl, DarkChannelerGengar
@@ -871,6 +870,9 @@ MoveSpriteInRelationToPlayer:
 	ld [hl], a
 	ret
 
+
+FarMoveSpriteOffScreen::
+	ld a, c
 ; a = which sprite
 ; d = X coord on map to move it to
 ; e = Y coord on map to move it to
@@ -1033,7 +1035,7 @@ PokemonTowerB1FCuboneText:
 	text_asm
 	ld a, CUBONE
 	call PlayCry
-	call .prompt
+	call DisplayTextPromptButton
 	ld a, POKEMONTOWERB1F_CUBONE
 	call SetSpriteFacingUp
 	call CheckIfGhostMarowakInParty ; sets wWhichMon according to ghost marowak's index in party
@@ -1042,7 +1044,7 @@ PokemonTowerB1FCuboneText:
 	rst _PrintText
 	ld a, MAROWAK
 	call PlayCry
-	call .prompt
+	call DisplayTextPromptButton
 	ld a, PLAYER_DIR_UP
 	ld [wPlayerMovingDirection], a
 	lb de, 0, -1
@@ -1054,9 +1056,6 @@ PokemonTowerB1FCuboneText:
 	lb de, 8, 54
 	call MoveSpriteOffscreen
 	rst TextScriptEnd
-.prompt
-	ld hl, TextScriptPromptButton
-	jp TextCommandProcessor
 .marowakTouched
 	text_far _CatacombsMarowakTouchedText
 	text_end
@@ -1258,8 +1257,7 @@ PokemonTowerB1FMarowakBlockedHyperBeamText:
 	call GBFadeInFromWhite
 	ld hl, .afterlife
 	rst _PrintText
-	ld hl, TextScriptPromptButton
-	call TextCommandProcessor
+	call DisplayTextPromptButton
 	ld a, POKEMONTOWERB1F_CUBONE
 	call SetSpriteFacingDown
 	call UpdateSprites

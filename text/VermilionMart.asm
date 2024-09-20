@@ -4,7 +4,7 @@ _VermilionMartCooltrainerMText::
 	cont "use #MON for"
 	cont "criminal acts."
 
-	para "TEAM ROCKET"
+	para "<TEAM><ROCKET>"
 	line "traffics in rare"
 	cont "#MON."
 
@@ -23,30 +23,22 @@ _VermilionMartCooltrainerFText::
 	done
 
 _VermilionMartTMKidFlavor::
-	text "Bringing TMs to"
-	line "the place they"
-	cont "should be, at"
-	cont "any cost!"
-
-	para "I'm selling TMs"
-	line "that I copied"
-	cont "from my dad's"
-	cont "originals!"
-
-	para "The clerk here"
+	text "<PARA>The clerk here"
 	line "thinks copying"
-	cont "and selling TMs"
+	cont "and selling <TM>s"
 	cont "is wrong!"
 
 	para "Little do they"
 	line "know that my dad"
 	cont "helped create"
 	cont "the software for"
-	cont "TMs!"
+	cont "<TM>s!"
 
 	para "He gave my little"
-	line "‘business’ his"
-	cont "approval!"
+	line "“business” his"
+	cont "approval!@"
+	text_end
 
-	para "Want some TMs?"
+_TMKidWantSomeTMsText::
+	text "<PARA>Want some <TM>s?"
 	done

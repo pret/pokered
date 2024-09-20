@@ -47,8 +47,7 @@ LightChannelerText:
 	SetEvent EVENT_MET_LIGHT_CHANNELER
 	call .checkForHaunter
 	jp nc, .done
-	ld hl, TextScriptPromptButton
-	call TextCommandProcessor
+	call DisplayTextPromptButton
 .skipGreeting
 	ld hl, LightChannelerHaunter
 	rst _PrintText

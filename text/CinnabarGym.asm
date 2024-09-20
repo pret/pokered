@@ -42,13 +42,6 @@ _CinnabarGymBlaineVolcanoBadgeInfoText::
 	line "have this too!"
 	done
 
-_CinnabarGymBlaineReceivedTM38Text::
-	text "<PLAYER> received"
-	line "@"
-	text_ram wStringBuffer
-	text "!@"
-	text_end
-
 _CinnabarGymBlaineTM38ExplanationText::
 	text_start
 	para "@"
@@ -83,10 +76,10 @@ _CinnabarGymSuperNerd1EndBattleText::
 _CinnabarGymSuperNerd1AfterBattleText::
 	text "Fire, or to be"
 	line "more precise,"
-	cont "combustion..."
+	cont "combustion<...>"
 
 	para "Blah, blah, blah,"
-	line "blah..."
+	line "blah<...>"
 	done
 
 _CinnabarGymBurglar1BattleText::
@@ -95,6 +88,7 @@ _CinnabarGymBurglar1BattleText::
 	cont "as a trainer!"
 	done
 
+_RocketHideoutB1FRocketEndBattleText::
 _CinnabarGymBurglar1EndBattleText::
 	text "I"
 	line "surrender!"

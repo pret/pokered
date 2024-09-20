@@ -13,18 +13,13 @@ _SaffronMartCooltrainerFText::
 	done
 
 _SaffronMartTMKidFlavor::
-	text "Bringing TMs to"
-	line "the place they"
-	cont "should be, at"
-	cont "any cost!"
-
-	para "My dad snuck"
+	text "<PARA>My dad snuck"
 	line "into SAFFRON GYM"
-	cont "when TEAM ROCKET"
+	cont "when <TEAM><ROCKET>"
 	cont "wasn't looking!"
 
-	para "I'm selling TMs"
-	line "to TEAM ROCKET"
+	para "I'm selling <TM>s"
+	line "to <TEAM><ROCKET>"
 	cont "actually."
 
 	para "Except they're"
@@ -32,7 +27,5 @@ _SaffronMartTMKidFlavor::
 	cont "teach SPLASH!"
 
 	para "Take that," 
-	line "thieves!"
-
-	para "Want some TMs?"
-	done
+	line "thieves!@"
+	text_end

@@ -23,13 +23,6 @@ _VermilionGymLTSurgeThunderBadgeInfoText::
 	line "kid! Take this!"
 	done
 
-_VermilionGymLTSurgeReceivedTM24Text::
-	text "<PLAYER> received"
-	line "@"
-	text_ram wStringBuffer
-	text "!@"
-	text_end
-
 _TM24ExplanationText::
 	text_start
 	para "@"

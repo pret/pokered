@@ -1,14 +1,14 @@
 _SSAnneCaptainsRoomRubCaptainsBackText::
-	text "CAPTAIN: Ooargh..."
-	line "I feel hideous..."
-	cont "Urrp! Seasick..."
+	text "CAPTAIN: Ooargh<...>"
+	line "I feel hideous<...>"
+	cont "Urrp! Seasick<...>"
 
 	para "<PLAYER> rubbed"
 	line "the CAPTAIN's"
 	cont "back!"
 
-	para "Rub-rub..."
-	line "Rub-rub...@"
+	para "Rub-rub<...>"
+	line "Rub-rub<...>@"
 	text_end
 
 _SSAnneCaptainsRoomCaptainIFeelMuchBetterText::
@@ -20,7 +20,7 @@ _SSAnneCaptainsRoomCaptainIFeelMuchBetterText::
 	line "my CUT technique?"
 
 	para "I could show you"
-	line "if I wasn't ill..."
+	line "if I wasn't ill<...>"
 
 	para "I know! You can"
 	line "have this!"
@@ -92,7 +92,7 @@ _SSAnneCaptainsRoomTrashText::
 
 _SSAnneCaptainsRoomSeasickBookText::
 	text "How to Conquer"
-	line "Seasickness..."
+	line "Seasickness<...>"
 	cont "The CAPTAIN's"
 	cont "reading this!"
 	done

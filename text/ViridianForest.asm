@@ -88,7 +88,7 @@ _ViridianForestBattleTextSamurai::
 
 _ViridianForestEndBattleTextSamurai::
 	text "After"
-	line "all I did..."
+	line "all I did<...>"
 	prompt
 
 _ViridianForestAfterBattleTextSamurai::
@@ -108,7 +108,7 @@ _ViridianForestYoungster5Text::
 	done
 
 _ViridianForestTrainerTips1Text::
-	text "TRAINER TIPS"
+	text "<TIPS>"
 
 	para "If you want to"
 	line "avoid battles,"
@@ -123,16 +123,16 @@ _ViridianForestUseAntidoteSignText::
 	done
 
 _ViridianForestTrainerTips2Text::
-	text "TRAINER TIPS"
+	text "<TIPS>"
 
 	para "Contact PROF.OAK"
-	line "via PC to get"
+	line "via <PC> to get"
 	cont "your #DEX"
 	cont "evaluated!"
 	done
 
 _ViridianForestTrainerTips3Text::
-	text "TRAINER TIPS"
+	text "<TIPS>"
 
 	para "No stealing of"
 	line "#MON from"
@@ -142,7 +142,7 @@ _ViridianForestTrainerTips3Text::
 	done
 
 _ViridianForestTrainerTips4Text::
-	text "TRAINER TIPS"
+	text "<TIPS>"
 
 	para "Weaken #MON"
 	line "before attempting"

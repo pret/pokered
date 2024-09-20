@@ -23,7 +23,7 @@ _RocketHideoutB4FGiovanniHopeWeMeetAgainText::
 	line "aside this time!"
 
 	para "I hope we meet"
-	line "again..."
+	line "again<...>"
 	done
 
 _RocketHideoutB4FGiovanniBattleText::
@@ -40,7 +40,7 @@ _RocketHideoutB4FGiovanniEndBattleText::
 _RocketHideoutB4FGiovanniAfterBattleText::
 	text "Do you have"
 	line "something against"
-	cont "TEAM ROCKET?"
+	cont "<TEAM><ROCKET>?"
 	done
 
 _RocketHideoutB4FRocket1BattleText::
@@ -63,10 +63,6 @@ _RocketHideoutB4FRocket2BattleText::
 	line "doesn't work? Who"
 	cont "has the LIFT KEY?"
 	done
-
-_RocketHideoutB4FRocket2EndBattleText::
-	text "No!"
-	prompt
 
 _RocketHideoutB4FRocket2AfterBattleText::
 	text "Oh no! I dropped"

@@ -12,7 +12,7 @@ MapHSPointers:
 	dw NoHS
 	dw NoHS
 	dw SaffronCityHS
-	dw NoHS
+	dw FuchsiaCityHS
 	dw NoHS
 	dw NoHS
 	dw NoHS
@@ -168,7 +168,7 @@ MapHSPointers:
 	dw SeafoamIslandsB3FHS
 	dw SeafoamIslandsB4FHS
 	dw NoHS
-	dw NoHS
+	dw FuchsiaGoodRodHouseHS
 	dw PokemonMansion1FHS
 	dw NoHS
 	dw NoHS
@@ -225,7 +225,7 @@ MapHSPointers:
 	dw SafariZoneNorthHS
 	dw SafariZoneWestHS
 	dw SafariZoneCenterHS
-	dw NoHS
+	dw SafariZoneCenterRestHouseHS
 	dw NoHS
 	dw NoHS
 	dw NoHS
@@ -688,5 +688,14 @@ DiglettsCaveHS:
 	db DIGLETTS_CAVE, DIGLETTS_CAVE_DIGLETT4, HIDE
 LavenderTownCuboneHouseHS:
 	db LAVENDER_CUBONE_HOUSE, LAVENDERCUBONEHOUSE_CUBONE, SHOW
+FuchsiaCityHS:
+	db FUCHSIA_CITY, FUCHSIACITY_ERIK, SHOW
+SafariZoneCenterRestHouseHS:
+	db SAFARI_ZONE_CENTER_REST_HOUSE, SAFARIZONECENTERRESTHOUSE_SARA, SHOW
+	db SAFARI_ZONE_CENTER_REST_HOUSE, SAFARIZONECENTERRESTHOUSE_ERIK, HIDE
+FuchsiaGoodRodHouseHS:
+	db FUCHSIA_GOOD_ROD_HOUSE, FUCHSIAGOODRODHOUSE_SARA, HIDE
+	db FUCHSIA_GOOD_ROD_HOUSE, FUCHSIAGOODRODHOUSE_ERIK, HIDE
+	db FUCHSIA_GOOD_ROD_HOUSE, FUCHSIAGOODRODHOUSE_NOTE2, HIDE
 	db $FF, $01, SHOW ; end
 	assert_table_length NUM_EXTRA_HS_OBJECTS + 1

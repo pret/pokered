@@ -8,14 +8,14 @@ _SilphCo1FLinkReceptionistText::
 
 _SilphCo1FBattleText1::
 	text "Trying to escape?"
-	para "TEAM ROCKET is"
+	para "<TEAM><ROCKET> is"
 	line "going down!"
 	done
 
 _SilphCo1FEndBattleText1::
 	text "Oh,"
 	line "you're not a"
-	cont "ROCKET?"
+	cont "<ROCKET>?"
 	prompt
 
 _SilphCo1FAfterBattleText1::
@@ -24,7 +24,7 @@ _SilphCo1FAfterBattleText1::
 	cont "the streets."
 	para "We're here to"
 	line "clean out the"
-	cont "ROCKETs in their"
+	cont "<ROCKET>s in their"
 	cont "stead."
 	para "But I guess our"
 	line "job is already"
@@ -46,7 +46,7 @@ _SilphCo1FEndBattleText2::
 
 _SilphCo1FAfterBattleText2::
 	text "Did you take"
-	line "down TEAM ROCKET"
+	line "down <TEAM><ROCKET>"
 	cont "here all on your"
 	cont "own?!"
 	done
@@ -64,7 +64,7 @@ _SilphCo1FEndBattleText3::
 
 _SilphCo1FAfterBattleText3::
 	text "I was ready to"
-	line "kick some ROCKET"
+	line "kick some <ROCKET>"
 	cont "behind in battle!"
 	done
 
@@ -80,13 +80,13 @@ _SilphCo1FEndBattleText4::
 _SilphCo1FAfterBattleText4::
 	text "You'd better"
 	line "get out of here."
-	para "Some crazy ROCKET"
+	para "Some crazy <ROCKET>"
 	line "on FIREFIGHTER"
 	cont "#MON battles"
 	cont "are about to"
 	cont "happen."
-	para "Wait a minute..."
-	para "All the ROCKETs"
+	para "Wait a minute<...>"
+	para "All the <ROCKET>s"
 	line "left?!"
-	para "It can't be..."
+	para "It can't be<...>"
 	done

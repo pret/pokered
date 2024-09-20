@@ -41,8 +41,8 @@ _Route8SuperNerd2EndBattleText::
 
 _Route8SuperNerd2AfterBattleText::
 	text "Go with GRIMER"
-	line "first...and..."
-	cont "...and...then..."
+	line "first<...>and<...>"
+	cont "<...>and<...>then<...>"
 	done
 
 _Route8CooltrainerF1BattleText::

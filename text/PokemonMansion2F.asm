@@ -119,17 +119,3 @@ _PokemonMansion2FDiary2Text::
 	cont "newly discovered"
 	cont "#MON, MEW."
 	done
-
-_PokemonMansion2FSwitchText::
-	text "A secret switch!"
-
-	para "Press it?"
-	done
-
-_PokemonMansion2FSwitchPressedText::
-	text "Who wouldn't?"
-	prompt
-
-_PokemonMansion2FSwitchNotPressedText::
-	text "Not quite yet!"
-	done

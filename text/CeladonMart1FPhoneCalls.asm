@@ -20,7 +20,7 @@ _CeladonMartCallDadSquirtleText::
 	line "many weaknesses"
 	cont "either!"
 	para "And BLASTOISE's"
-	line "water cannons..."
+	line "water cannons<...>"
 	para "What a sight!"
 	para "Wouldn't want to"
 	line "be on the other"
@@ -98,7 +98,7 @@ _CeladonMartCallOakTextKeepingBusy::
 	line "undertaking!"
 	para "I don't think"
 	line "we'll finish it"
-	cont "this year..."
+	cont "this year<...>"
 	prompt
 
 _CeladonMartCallOakTextHowsDaisy::
@@ -131,7 +131,7 @@ _CeladonMartCallOakTextGottaGo::
 _CeladonMartCallRivalText::
 	text "OAK Residence,"
 	line "DAISY speaking!"
-	para "...<PLAYER>?"
+	para "<...><PLAYER>?"
 	para "What a pleasant"
 	line "surprise!"
 	para "You're at CELADON"

@@ -16,11 +16,11 @@ _PokemonTower1FBaldingGuyText::
 	line "for my CLEFAIRY."
 
 	para "Sniff! I can't"
-	line "stop crying..."
+	line "stop crying<...>"
 	done
 
 _PokemonTower1FGirlText::
-	text "My GROWLITHE..."
+	text "My GROWLITHE<...>"
 	line "Why did you die?"
 	done
 

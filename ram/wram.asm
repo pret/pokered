@@ -1189,7 +1189,8 @@ wChampArenaChallenger:: db ; which challenger we're currently fighting in the ch
 wAITargetMonType1:: db ; the type of the pokemon the AI should think it's attacking (stays as the previous pokemon when you switch pokemon)
 wAITargetMonType2:: db ; the type of the pokemon the AI should think it's attacking (stays as the previous pokemon when you switch pokemon)
 wAITargetMonStatus:: db ; the current status of the pokemon the AI should think it's attacking (set when healing a pokemon's status or switching it out)
-; 8 unused bytes left
+wMapMultiTextTracker:: db
+; 7 unused bytes left
 ;;;;;;;;;;
 ENDU
 

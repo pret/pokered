@@ -92,7 +92,7 @@ _Route4AfterBattleText4::
 	done
 
 _Route4Text8::
-	text "TRAINER TIPS"
+	text "<TIPS>"
 	para "Press LEFT D-PAD"
 	line "at the top of the"
 	cont "ITEM menu to"
@@ -100,11 +100,11 @@ _Route4Text8::
 	cont "bottom and back."
 
 	para "This works with"
-	line "PC menus as well!"
+	line "<PC> menus as well!"
 	done
 
 _Route4Text9::
-	text "TRAINER TIPS"
+	text "<TIPS>"
 	para "You can hold up"
 	line "to 30 items."
 	para "If you run out"
@@ -112,5 +112,5 @@ _Route4Text9::
 	cont "press START in"
 	cont "the ITEM menu to"
 	cont "deposit an item"
-	cont "to your PC!"
+	cont "to your <PC>!"
 	done

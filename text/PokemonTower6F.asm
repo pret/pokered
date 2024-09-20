@@ -18,7 +18,7 @@ _PokemonTower2Text_Caught::
 	text "It wants to"
 	line "fight alongside"
 	cont "you against"
-	cont "TEAM ROCKET!"
+	cont "<TEAM><ROCKET>!"
 	para "This is its"
 	line "final wish before"
 	cont "departing to the"
@@ -26,8 +26,8 @@ _PokemonTower2Text_Caught::
 	done
 
 _PokemonTower6FChanneler1BattleText::
-	text "Give...me..."
-	line "blood..."
+	text "Give<...>me<...>"
+	line "blood<...>"
 	done
 
 _PokemonTower6FChanneler1EndBattleText::
@@ -36,11 +36,11 @@ _PokemonTower6FChanneler1EndBattleText::
 
 _PokemonTower6FChanneler1AfterBattleText::
 	text "I feel anemic and"
-	line "weak..."
+	line "weak<...>"
 	done
 
 _PokemonTower6FChanneler2BattleText::
-	text "Urff... Kwaah!"
+	text "Urff<...> Kwaah!"
 	done
 
 _PokemonTower6FChanneler2EndBattleText::
@@ -55,8 +55,8 @@ _PokemonTower6FChanneler2AfterBattleText::
 	done
 
 _PokemonTower6FChanneler3BattleText::
-	text "Ke..ke...ke..."
-	line "ke..ke...ke!!"
+	text "Ke<...>ke<...>ke<...>"
+	line "ke<...>ke<...>ke!!"
 	done
 
 _PokemonTower6FChanneler3EndBattleText::
@@ -69,6 +69,6 @@ _PokemonTower6FChanneler3AfterBattleText::
 	done
 
 _PokemonTower6FBeGoneText::
-	text "Be gone..."
-	line "Intruders..."
+	text "Be gone<...>"
+	line "Intruders<...>"
 	done

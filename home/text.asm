@@ -57,54 +57,24 @@ PlaceNextChar::
 	ld c, l
 	pop hl
 	ret
-
 .NotTerminator
-	cp "<NEXT>"
-	jr nz, .NotNext
-	ld bc, 2 * SCREEN_WIDTH
-	ldh a, [hUILayoutFlags]
-	bit 2, a
-	jr z, .ok
-	ld bc, SCREEN_WIDTH
-.ok
-	pop hl
-	add hl, bc
-	push hl
-	jp NextChar
-
-.NotNext
-	cp "<LINE>"
-	jr nz, .NotLine
-	pop hl
-	hlcoord 1, 16
-	push hl
-	jp NextChar
-
-.NotLine
-
 ; Check against a dictionary
-	dict "<NULL>",    NullChar
-	dict "<BAGE>",    MultiButtonPageChar
-	dict "<SCROLL>",  _ContTextNoPause
-	dict "<_CONT>",   _ContText
-	dict "<PARA>",    Paragraph
-	dict "<PAGE>",    PageChar
-	dict "<PLAYER>",  PrintPlayerName
-	dict "<RIVAL>",   PrintRivalName
-	dict "#",         PlacePOKe
-	dict "<PC>",      PCChar
-	dict "<ROCKET>",  RocketChar
-	dict "<TM>",      TMChar
-	dict "<TRAINER>", TrainerChar
-	dict "<CONT>",    ContText
-	dict "<……>",      SixDotsChar
-	dict "<DONE>",    DoneText
-	dict "<PROMPT>",  PromptText
-	dict "<PKMN>",    PlacePKMN
-	dict "<DEXEND>",  PlaceDexEnd
-	dict "<TARGET>",  PlaceMoveTargetsName
-	dict "<USER>",    PlaceMoveUsersName
-
+	push hl
+	push de
+	ld hl, TextShortcutCommandJumpTable
+	ld de, 3
+	call IsInArray
+	pop de
+	jr nc, .no
+	inc hl
+	hl_deref
+	ld b, h
+	ld c, l
+	pop hl
+	jp_bc
+.no
+	pop hl
+	ld a, [de]
 	ld [hli], a
 	call PrintLetterDelay
 
@@ -122,7 +92,58 @@ NullChar:: ; unused
 	; This is a debugging leftover.
 	ld de, TextIDErrorText
 	dec de
-	ret
+	ret	
+
+TextShortcutCommandJumpTable:
+	dbw "<NEXT>",    NextCharCmd
+	dbw "<LINE>",    LineChar
+	dbw "<NULL>",    NullChar
+	dbw "<BAGE>",    MultiButtonPageChar
+	dbw "<SCROLL>",  _ContTextNoPause
+	dbw "<_CONT>",   _ContText
+	dbw "<PARA>",    Paragraph
+	dbw "<PAGE>",    PageChar
+	dbw "<PLAYER>",  PrintPlayerName
+	dbw "<RIVAL>",   PrintRivalName
+	dbw "#",         PlacePOKe
+	dbw "<PC>",      PCChar
+	dbw "<TEAM>",    TeamChar
+	dbw "<ROCKET>",  RocketChar
+	dbw "<TM>",      TMChar
+	dbw "<TRAINER>", TrainerChar
+	dbw "<CONT>",    ContText
+	dbw "<...>",     ThreeDotsChar
+	dbw "<DONE>",    DoneText
+	dbw "<PROMPT>",  PromptText
+	dbw "<PKMN>",    PlacePKMN
+	dbw "<DEXEND>",  PlaceDexEnd
+	dbw "<TARGET>",  PlaceMoveTargetsName
+	dbw "<USER>",    PlaceMoveUsersName
+	dbw "<TIPS>",    TrainerTipsChar
+	dbw "#MON",      PokemonChar
+	dbw "<opponent>",OpponentChar
+	dbw "<user>",    UserChar
+	dbw "the",       TheChar
+	dbw "you",       YouChar
+	db -1
+
+LineChar::
+	pop hl
+	hlcoord 1, 16
+	push hl
+	jp NextChar
+
+NextCharCmd::
+	ld bc, 2 * SCREEN_WIDTH
+	ldh a, [hUILayoutFlags]
+	bit 2, a
+	jr z, .ok
+	ld bc, SCREEN_WIDTH
+.ok
+	pop hl
+	add hl, bc
+	push hl
+	jp NextChar
 
 MACRO print_name
 	push de
@@ -138,8 +159,16 @@ TMChar::      print_name TMCharText
 PCChar::      print_name PCCharText
 RocketChar::  print_name RocketCharText
 PlacePOKe::   print_name PlacePOKeText
-SixDotsChar:: print_name SixDotsCharText
 PlacePKMN::   print_name PlacePKMNText
+TeamChar::    print_name TeamCharText
+ThreeDotsChar:: print_name ThreeDotsText
+TrainerTipsChar:: print_name TrainerTipsText
+PokemonChar:: print_name PlaceMonText
+OpponentChar:: print_name OpponentText
+UserChar:: print_name UserText
+TheChar:: print_name TheText
+YouChar:: print_name YouText
+	
 
 PlaceMoveTargetsName::
 	ldh a, [hWhoseTurn]
@@ -176,9 +205,15 @@ PlaceCommandCharacter::
 
 TrainerCharText:: db "TRAINER@"
 TMCharText::      db "TM@"
+TeamCharText::    db "TEAM @"
 RocketCharText::  db "ROCKET@"
-SixDotsCharText:: db "……@"
 EnemyText::       db "Enemy @"
+ThreeDotsText::   db "...@"
+TrainerTipsText:: db "<TRAINER> TIPS@"
+UserText::        db "user@"
+OpponentText::    db "opponent@"
+TheText::         db "t","he@" ; have to separate with a comma to avoid it entering the same macro again
+YouText::         db "y","ou@" ; have to separate with a comma to avoid it entering the same macro again
 
 ContText::
 	push de
@@ -341,6 +376,7 @@ NextTextCommand::
 	ld a, [hli]
 	cp TX_END
 	jr nz, .TextCommand
+.NoNextTextCommand:
 	pop af
 	ld [wLetterPrintingDelayFlags], a
 	ret
@@ -381,9 +417,15 @@ TextCommand_BOX::
 	pop hl
 	jr NextTextCommand
 
+TextCommand_START_storeFlags:
+	ld a, [wLetterPrintingDelayFlags]
+	push af
+	jr TextCommand_START_noPop
+
 TextCommand_START::
 ; write text until "@"
 	pop hl
+TextCommand_START_noPop::
 	ld d, h
 	ld e, l
 	ld h, b
@@ -432,6 +474,23 @@ TextCommand_JUMP::
 	hl_deref
 	push hl
 	jr TextCommand_START
+
+TextCommand_CALL::
+; call different text in the same bank then come back
+	pop hl
+	push hl
+	hl_deref
+	ResetFlag FLAG_INTERRUPTED_TEXT
+	call TextCommand_START_storeFlags
+	ld b, h
+	ld c, l
+	pop hl
+	CheckFlag FLAG_INTERRUPTED_TEXT
+	jp nz, NextTextCommand.NoNextTextCommand
+	; inc hl twice to increment past the text_call address
+	inc hl
+	inc hl
+	jp TextCommand_START_noPop ; assumes after returning from call we will do additional text
 
 TextCommand_MOVE::
 ; move to a new tile
@@ -628,9 +687,7 @@ TextCommand_FAR::
 	ld a, [hli]
 	ld d, a
 	ld a, [hli]
-
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call SetCurBank
 
 	push hl
 	ld l, e
@@ -639,8 +696,7 @@ TextCommand_FAR::
 	pop hl
 
 	pop af
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call SetCurBank
 	jp NextTextCommand
 
 TextCommandJumpTable::
@@ -664,4 +720,5 @@ ENDC
 	dw TextCommand_DOTS          ; TX_DOTS
 	dw TextCommand_WAIT_BUTTON   ; TX_WAIT_BUTTON
 	dw TextCommand_JUMP          ; TX_JUMP
+	dw TextCommand_CALL          ; TX_CALL
 	; greater TX_* constants are handled directly by NextTextCommand

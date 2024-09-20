@@ -45,7 +45,7 @@ _PokemonFanClubChairmanIntroText::
 	line "when it comes to"
 	cont "#MON!"
 
-	para "So..."
+	para "So<...>"
 
 	para "Did you come"
 	line "visit to hear"
@@ -57,23 +57,23 @@ _PokemonFanClubChairmanStoryText::
 	line "Then listen up!"
 
 	para "My favorite"
-	line "RAPIDASH..."
+	line "RAPIDASH<...>"
 
-	para "It...cute..."
-	line "lovely...smart..."
-	cont "plus...amazing..."
-	cont "you think so?..."
-	cont "oh yes...it..."
-	cont "stunning..."
-	cont "kindly..."
+	para "It<...>cute<...>"
+	line "lovely<...>smart<...>"
+	cont "plus<...>amazing<...>"
+	cont "you think so?<...>"
+	cont "oh yes<...>it<...>"
+	cont "stunning<...>"
+	cont "kindly<...>"
 	cont "love it!"
 
-	para "Hug it...when..."
-	cont "sleeping...warm"
-	cont "and cuddly..."
-	cont "spectacular..."
-	cont "ravishing..."
-	cont "...Oops! Look at"
+	para "Hug it<...>when<...>"
+	cont "sleeping<...>warm"
+	cont "and cuddly<...>"
+	cont "spectacular<...>"
+	cont "ravishing<...>"
+	cont "<...>Oops! Look at"
 	cont "the time! I kept"
 	cont "you too long!"
 
@@ -81,13 +81,6 @@ _PokemonFanClubChairmanStoryText::
 	line "me out! I want"
 	cont "you to have this!"
 	prompt
-
-_PokemonFanClubReceivedBikeVoucherText::
-	text "<PLAYER> received"
-	line "a @"
-	text_ram wStringBuffer
-	text "!@"
-	text_end
 
 _PokemonFanClubExplainBikeVoucherText::
 	text_start

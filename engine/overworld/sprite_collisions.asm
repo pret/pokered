@@ -32,12 +32,13 @@ LoadExtraSprites::
 	ld a, [wCurMap]
 	cp DIGLETTS_CAVE
 	jr z, .digletts_cave
+	cp SEAFOAM_ISLANDS_1F
+	jr z, LoadExtraTiles.seafoamIslands1F
 	cp FUCHSIA_CITY
 	ret nz
 	jpfar CheckLoadKabutoShell
 .digletts_cave
 	jpfar DiglettsCaveLoadDiglettSprites
-
 
 LoadExtraTiles::
 	ld a, [wCurMap]
@@ -47,6 +48,8 @@ LoadExtraTiles::
 	jr z, .powerPlantRoof
 	cp SILPH_CO_1F
 	jr z, .saffronAbandonedBuilding
+	cp SEAFOAM_ISLANDS_1F
+	jr z, .seafoamIslands1F
 	ret
 .typeGuyHouse
 	jpfar CheckLoadLightSwitch
@@ -54,6 +57,8 @@ LoadExtraTiles::
 	jpfar CheckLoadPowerPlantRoofTiles
 .saffronAbandonedBuilding
 	jpfar SilphCo1FReplaceTiles
+.seafoamIslands1F
+	jpfar SeafoamIslands1FCheckLoadCustomTiles
 
 
 UpdateNonPlayerSprite:

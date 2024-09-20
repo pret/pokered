@@ -47,14 +47,14 @@ _NameRatersHouseNameRaterComeAnyTimeYouLikeText::
 	line "time you like!"
 	done
 
-_NameRatersHouseNameRaterATrulyImpeccableNameText::
-	text_ram wcd6d
-	text ", is it?"
-	line "That is a truly"
-	cont "impeccable name!"
-
-	para "Take good care of"
-	line "@"
-	text_ram wcd6d
-	text "!"
-	done
+;_NameRatersHouseNameRaterATrulyImpeccableNameText::
+;	text_ram wcd6d
+;	text ", is it?"
+;	line "That is a truly"
+;	cont "impeccable name!"
+;
+;	para "Take good care of"
+;	line "@"
+;	text_ram wcd6d
+;	text "!"
+;	done

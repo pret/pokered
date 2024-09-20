@@ -16,11 +16,11 @@ _SSAnneKitchenCook3Text::
 
 _SSAnneKitchenCook4Text::
 	text "Hum-de-hum-de-"
-	line "ho..."
+	line "ho<...>"
 
 	para "I peel spuds"
 	line "every day!"
-	cont "Hum-hum..."
+	cont "Hum-hum<...>"
 	done
 
 _SSAnneKitchenCook5Text::
@@ -32,11 +32,11 @@ _SSAnneKitchenCook5Text::
 	done
 
 _SSAnneKitchenCook6Text::
-	text "Snivel...Sniff..."
+	text "Snivel<...>Sniff<...>"
 
 	para "I only get to"
-	line "peel onions..."
-	cont "Snivel..."
+	line "peel onions<...>"
+	cont "Snivel<...>"
 	done
 
 _SSAnneKitchenCook7MainCourseIsText::

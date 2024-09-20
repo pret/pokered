@@ -105,7 +105,7 @@ EvosMovesPointerTable:
 	dw KabutopsEvosMoves
 	dw HorseaEvosMoves
 	dw SeadraEvosMoves
-	dw NothingEvosMoves
+	dw WinterDragonairEvosMoves
 	dw NothingEvosMoves
 	dw SandshrewEvosMoves
 	dw SandslashEvosMoves
@@ -1355,6 +1355,7 @@ DratiniEvosMoves:
 DragonairEvosMoves:
 ; Evolutions
 	db EVOLVE_LEVEL, 46, DRAGONITE
+WinterDragonairEvosMoves:
 	db 0
 ; Learnset
 	db 20, THUNDER_WAVE

@@ -103,7 +103,7 @@ _Route12Fisher4BattleText::
 
 _Route12Fisher4EndBattleText::
 	text "It's"
-	line "not easy..."
+	line "not easy<...>"
 	prompt
 
 _Route12Fisher4AfterBattleText::
@@ -162,7 +162,7 @@ _Route12EndBattleText9::
 
 _Route12AfterBattleText9::
 	text "Breathing"
-	line "underwater..."
+	line "underwater<...>"
 	para "I'd love to be"
 	line "able to do that!"
 	para "I'll stick to"

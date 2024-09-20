@@ -86,6 +86,7 @@ _RockTunnelB1FCooltrainerF2BattleText::
 	cont "will fight you."
 	done
 
+_Route19Swimmer5EndBattleText::
 _RockTunnelB1FCooltrainerF2EndBattleText::
 	text "Oh!"
 	line "I lost!"

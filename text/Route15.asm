@@ -118,7 +118,7 @@ _Route15Biker1AfterBattleText::
 	text "You only live"
 	line "once, so I live"
 	cont "as an outlaw!"
-	cont "TEAM ROCKET RULES!"
+	cont "<TEAM><ROCKET> RULES!"
 	done
 
 _Route15Biker2BattleText::

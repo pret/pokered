@@ -47,7 +47,7 @@ _CeruleanCityRivalIWentToBillsText::
 
 	para "He invented the"
 	line "#MON Storage"
-	cont "System on PC!"
+	cont "System on <PC>!"
 
 	para "Since you're using"
 	line "his system, go"
@@ -98,7 +98,7 @@ _CeruleanCityRocketIGiveUpText::
 
 _CeruleanCityRocketIllReturnTheTMText::
 	text "OK! I'll return"
-	line "the TM I stole!"
+	line "the <TM> I stole!"
 	prompt
 
 _CeruleanCityCooltrainerMText::
@@ -146,13 +146,13 @@ _CeruleanCityGuardText::
 	line "were robbed."
 
 	para "It's obvious that"
-	line "TEAM ROCKET is"
+	line "<TEAM><ROCKET> is"
 	cont "behind this most"
 	cont "heinous crime!"
 
 	para "Even our POLICE"
 	line "force has trouble"
-	cont "with the ROCKETs!"
+	cont "with the <ROCKET>s!"
 	done
 
 _CeruleanCityCooltrainerF1SlowbroUseSonicboomText::
@@ -183,22 +183,22 @@ _CeruleanCityCooltrainerF1SlowbroWithdrawText::
 
 _CeruleanCitySlowbroTookASnoozeText::
 	text "SLOWBRO took a"
-	line "snooze..."
+	line "snooze<...>"
 	done
 
 _CeruleanCitySlowbroIsLoafingAroundText::
 	text "SLOWBRO is"
-	line "loafing around..."
+	line "loafing around<...>"
 	done
 
 _CeruleanCitySlowbroTurnedAwayText::
 	text "SLOWBRO turned"
-	line "away..."
+	line "away<...>"
 	done
 
 _CeruleanCitySlowbroIgnoredOrdersText::
 	text "SLOWBRO"
-	line "ignored orders..."
+	line "ignored orders<...>"
 	done
 
 _CeruleanCityCooltrainerF2Text::
@@ -230,7 +230,7 @@ _CeruleanCitySignText::
 	done
 
 _CeruleanCityTrainerTipsText::
-	text "TRAINER TIPS"
+	text "<TIPS>"
 
 	para "Pressing B Button"
 	line "during evolution"
@@ -334,9 +334,9 @@ _OakFirstLoseText::
 	line "works there!"
 	para "He'll know what"
 	line "to do!"
-	para "..."
-	para "..."
-	para "..."
+	para "<...>"
+	para "<...>"
+	para "<...>"
 	para "PROF.OAK wrote"
 	line "a note for you!@"
 	text_end

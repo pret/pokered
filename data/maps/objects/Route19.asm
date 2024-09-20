@@ -14,6 +14,7 @@ Route19_Object:
 	db $43 ; border block
 
 	def_warp_events
+	warp_event 13, 49, FUCHSIA_GOOD_ROD_HOUSE, 4
 
 	def_bg_events
 	bg_event 11,  9, TEXT_ROUTE19_SIGN

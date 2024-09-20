@@ -28,7 +28,7 @@ _BillsGardenErikaSabrinaOverheardText::
 	cont "staring."
 	para "ERIKA: Not to"
 	line "mention all those"
-	cont "autographs..."
+	cont "autographs<...>"
 	para "SABRINA: I can"
 	line "sense someone"
 	cont "eavesdropping."
@@ -190,10 +190,10 @@ _BillsGardenBlueText4::
 	prompt
 
 _BillsGardenBlueText4Yes::
-	text "........."
-	line "........."
-	para "........."
-	line "...thanks."
+	text "<...><...><...>"
+	line "<...><...><...>"
+	para "<...><...><...>"
+	line "<...>thanks."
 	done
 
 _BillsGardenBlueText4No::
@@ -449,7 +449,7 @@ _BillsGardenGiovanniText::
 	done
 
 _BillsGardenMrFujiMewtwoText::
-	text "MEWTWO..."
+	text "MEWTWO<...>"
 	para "Take great care"
 	line "in raising such a"
 	cont "powerful #MON."
@@ -476,7 +476,7 @@ _BillsGardenMrFujiArmoredMewtwoText::
 	done
 
 _BillsGardenGiovanniMewtwoText::
-	text "It can't be..."
+	text "It can't be<...>"
 	line "MEWTWO??"
 	para "You found it deep"
 	line "in CERULEAN CAVE?"
@@ -509,7 +509,7 @@ _BillsGardenGiovanniMewtwoText::
 
 _BillsGardenGiovanniArmoredMewtwoText::
 	text "I see you found"
-	line "MEWTWO's armor..."
+	line "MEWTWO's armor<...>"
 	para "That design was"
 	line "my pride and joy."
 	para "I'm surprised"
@@ -579,7 +579,7 @@ _BillsGardenDadText3Yes::
 	cont "much by avoiding"
 	cont "the topic of"
 	cont "sneaking into"
-	cont "TEAM ROCKET"
+	cont "<TEAM><ROCKET>"
 	cont "operations."
 	prompt
 

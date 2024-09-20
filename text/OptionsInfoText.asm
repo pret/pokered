@@ -16,7 +16,7 @@ _BattleStyleInfoText::
 	line "can switch out to"
 	cont "another #MON"
 	cont "after defeating"
-	cont "an opponent's."
+	cont "an <opponent>'s."
 	para "SHIFT mode is a"
 	line "bit easier."
 	prompt
@@ -99,7 +99,7 @@ _EXPBarText::
 	prompt
 
 _NPCEVsText::
-	text "If ON, Opponent"
+	text "If ON, <opponent>"
 	line "trainer #MON"
 	cont "will receive stat"
 	cont "EXP in battles."
@@ -108,7 +108,7 @@ _NPCEVsText::
 	prompt
 
 _NPCPPText::
-	text "If ON, Opponents"
+	text "If ON, <opponent>s"
 	line "can run out of PP"
 	cont "for their MOVEs."
 	para "Battles will be a"

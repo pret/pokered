@@ -66,6 +66,7 @@ _FuchsiaCityGymSignText::
 	line "Ninja Master"
 	done
 
+; TODO: use string buffer?
 _FuchsiaCityChanseySignText::
 	text "Name: CHANSEY"
 
@@ -120,7 +121,7 @@ _FuchsiaCityFossilSignKabutoText::
 	prompt
 
 _FuchsiaCityFossilSignUndeterminedText::
-	text "..."
+	text "<...>"
 	done
 
 _FuchsiaCityFossilFanText::

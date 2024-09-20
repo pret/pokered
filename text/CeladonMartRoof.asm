@@ -3,22 +3,17 @@ _CeladonMartRoofLittleGirlGiveHerWhichDrinkText::
 	line "drink?"
 	done
 
-_CeladonMartRoofLittleGirlYayFreshWaterText::
+_CeladonMartRoofLittleGirlYayText::
 	text "Yay!"
 
-	para "FRESH WATER!"
+	para "@"
+	text_ram wcd6d
+	text "!"
 
 	para "Thank you!"
 
 	para "You can have this"
 	line "from me!@"
-	text_end
-
-_CeladonMartRoofLittleGirlReceivedTM13Text::
-	text "<PLAYER> received"
-	line "@"
-	text_ram wStringBuffer
-	text "!@"
 	text_end
 
 _CeladonMartRoofLittleGirlTM13ExplanationText::
@@ -33,24 +28,6 @@ _CeladonMartRoofLittleGirlTM13ExplanationText::
 	line "target sometimes!@"
 	text_end
 
-_CeladonMartRoofLittleGirlYaySodaPopText::
-	text "Yay!"
-
-	para "SODA POP!"
-
-	para "Thank you!"
-
-	para "You can have this"
-	line "from me!@"
-	text_end
-
-_CeladonMartRoofLittleGirlReceivedTM48Text::
-	text "<PLAYER> received"
-	line "@"
-	text_ram wStringBuffer
-	text "!@"
-	text_end
-
 _CeladonMartRoofLittleGirlTM48ExplanationText::
 	text_start
 
@@ -61,17 +38,6 @@ _CeladonMartRoofLittleGirlTM48ExplanationText::
 
 	para "It can spook the"
 	line "target sometimes!@"
-	text_end
-
-_CeladonMartRoofLittleGirlYayLemonadeText::
-	text "Yay!"
-
-	para "LEMONADE!"
-
-	para "Thank you!"
-
-	para "You can have this"
-	line "from me!@"
 	text_end
 
 _CeladonMartRoofLittleGirlTM49ExplanationText::
@@ -114,16 +80,7 @@ _CeladonMartRoofLittleGirlImThirstyText::
 	done
 
 _CeladonMartRoofLittleGirlGiveHerADrinkText::
-	text "I'm thirsty!"
-	line "I want something"
-	cont "to drink!"
-
-	para "Give her a drink?"
-	done
-
-_CeladonMartRoofCurrentFloorSignText::
-	text "ROOFTOP SQUARE:"
-	line "VENDING MACHINES"
+	text "Give her a drink?"
 	done
 
 _VendingMachineText1::

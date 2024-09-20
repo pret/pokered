@@ -447,7 +447,7 @@ DakutensAndHandakutens:
 	ld [wNamingScreenLetter], a
 	ret
 
-INCLUDE "data/text/dakutens.asm"
+INCLUDE "data/text/dakutens.asm" ; TODO: remove?
 
 ; calculates the length of the string at wStringBuffer and stores it in c
 CalcStringLength:

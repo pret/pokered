@@ -3,7 +3,7 @@ _SafariZoneCenterRestHouseSignText::
 	done
 
 _SafariZoneCenterTrainerTipsSignText::
-	text "TRAINER TIPS"
+	text "<TIPS>"
 
 	para "Press the START"
 	line "Button to check"
@@ -36,7 +36,7 @@ _SafariZoneCenterEngineerText::
 	done
 
 _SafariZoneCenterEngineerEndBattleText::
-	text "Mmm..."
+	text "Mmm<...>"
 	line "Pastrami!"
 	prompt
 

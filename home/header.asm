@@ -103,8 +103,7 @@ PlacePOKeText::   db "POKé@"
 SECTION "serial", ROM0[$0058]
 	jp Serial
 ; PureRGBnote: MOVED: 5 extra bytes of space left here, may as well move something here that puts the space to some use	
-TrainerFlagAction::
-	predef_jump FlagActionPredef
+PlaceMonText::    db "#","MON@" ; have to separate to avoid using the combined macro
 
 SECTION "joypad", ROM0[$0060]
 	reti

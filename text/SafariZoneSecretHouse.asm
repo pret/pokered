@@ -14,13 +14,6 @@ _SafariZoneSecretHouseFishingGuruYouHaveWonText::
 	line "You have won!"
 	prompt
 
-_SafariZoneSecretHouseFishingGuruReceivedHM03Text::
-	text "<PLAYER> received"
-	line "@"
-	text_ram wStringBuffer
-	text "!@"
-	text_end
-
 _SafariZoneSecretHouseFishingGuruHM03ExplanationText::
 	text "HM03 is SURF!"
 

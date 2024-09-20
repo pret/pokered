@@ -4,19 +4,12 @@ _Route12Gate2FBrunetteGirlYouCanHaveThisText::
 	cont "in #MON TOWER."
 
 	para "You can have this"
-	line "TM. I don't need"
-	cont "it any more..."
+	line "<TM>. I don't need"
+	cont "it any more<...>"
 	prompt
 
-_Route12Gate2FBrunetteGirlReceivedTM39Text::
-	text "<PLAYER> received"
-	line "@"
-	text_ram wStringBuffer
-	text "!@"
-	text_end
-
 _Route12Gate2FBrunetteGirlTM39ExplanationText::
-	text "TM39 is a move"
+	text "<TM>39 is a move"
 	line "called"
 	cont "FILTHY SLAM."
 

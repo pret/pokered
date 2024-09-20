@@ -37,7 +37,9 @@ _AgathaAfterBattleText::
 	line "else to say! Run"
 	cont "along now, child!"
 	done
-
+	
+_LoreleisRoomLoreleiDontRunAwayText::
+_BrunosRoomBrunoDontRunAwayText::
 _AgathasRoomAgathaDontRunAwayText::
 	text "Someone's voice:"
 	line "Don't run away!"

@@ -94,19 +94,21 @@
 	const SPRITE_GRAVELER                  ; $59
 	const SPRITE_NOTHING                   ; $5a
 	const SPRITE_GHOST                     ; $5b
+	const SPRITE_SNAKE                     ; $5c
 DEF FIRST_STILL_SPRITE EQU const_value
-	const SPRITE_POKE_BALL                 ; $5c
-	const SPRITE_FOSSIL                    ; $5d
-	const SPRITE_BOULDER                   ; $5e
-	const SPRITE_PAPER                     ; $5f
-	const SPRITE_POKEDEX                   ; $60
-	const SPRITE_CLIPBOARD                 ; $61
-	const SPRITE_SNORLAX                   ; $62
-	const SPRITE_OLD_AMBER                 ; $63
-	const SPRITE_GAMBLER_ASLEEP            ; $64
-	const SPRITE_MONSTER2_STILL            ; $65
-	const SPRITE_POKE_BALL2			 	   ; $66
-	const SPRITE_DARK_CHANNELER            ; $67
-	const SPRITE_BOOMBOX                   ; $68
-	const SPRITE_NOTHING_STILL             ; $69
+	const SPRITE_POKE_BALL                 ; $5d
+	const SPRITE_FOSSIL                    ; $5e
+	const SPRITE_BOULDER                   ; $5f
+	const SPRITE_PAPER                     ; $60
+	const SPRITE_POKEDEX                   ; $61
+	const SPRITE_CLIPBOARD                 ; $62
+	const SPRITE_SNORLAX                   ; $63
+	const SPRITE_OLD_AMBER                 ; $64
+	const SPRITE_GAMBLER_ASLEEP            ; $65
+	const SPRITE_MONSTER2_STILL            ; $66
+	const SPRITE_POKE_BALL2			 	   ; $67
+	const SPRITE_DARK_CHANNELER            ; $68
+	const SPRITE_BOOMBOX                   ; $69
+	const SPRITE_NOTHING_STILL             ; $6a
+	const SPRITE_SCUBA_DIVER               ; $6b
 DEF NUM_SPRITES EQU const_value - 1

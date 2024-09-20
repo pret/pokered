@@ -3,7 +3,7 @@ _SafariZoneEastRestHouseSignText::
 	done
 
 _SafariZoneEastTrainerTipsText::
-	text "TRAINER TIPS"
+	text "<TIPS>"
 
 	para "The remaining time"
 	line "declines only"
@@ -121,7 +121,7 @@ _SafariZoneEastCooltrainerMAfterBattleText::
 	line "is the cutest."
 
 	para "What a lovely"
-	line "girl..."
+	line "girl<...>"
 
 	para "I'm way too"
 	line "nervous to flirt"

@@ -33,7 +33,7 @@ _Route9CooltrainerM1AfterBattleText::
 _Route9CooltrainerM2BattleText::
 	text "I'm taking ROCK"
 	line "TUNNEL to go to"
-	cont "LAVENDER..."
+	cont "LAVENDER<...>"
 	done
 
 _Route9CooltrainerM2EndBattleText::
@@ -115,7 +115,7 @@ _Route9Youngster1EndBattleText::
 _Route9Youngster1AfterBattleText::
 	text "I have to collect"
 	line "more than bugs to"
-	cont "get stronger..."
+	cont "get stronger<...>"
 	done
 
 _Route9Hiker3BattleText::
@@ -141,7 +141,7 @@ _Route9Youngster2BattleText::
 
 _Route9Youngster2EndBattleText::
 	text "My"
-	line "bugs..."
+	line "bugs<...>"
 	prompt
 
 _Route9Youngster2AfterBattleText::

@@ -15,7 +15,7 @@ _SaffronCityRocket3Text::
 
 _SaffronCityRocket4Text::
 	text "SAFFRON belongs"
-	line "to TEAM ROCKET!"
+	line "to <TEAM><ROCKET>!"
 	done
 
 _SaffronCityRocket5Text::
@@ -36,13 +36,13 @@ _SaffronCityRocket7Text::
 	done
 
 _SaffronCityScientistText::
-	text "You beat TEAM"
-	line "ROCKET all alone?"
+	text "You beat <TEAM>"
+	line "<ROCKET> all alone?"
 	cont "That's amazing!"
 	done
 
 _SaffronCitySilphWorkerMText::
-	text "Yeah! TEAM ROCKET"
+	text "Yeah! <TEAM><ROCKET>"
 	line "is gone!"
 	cont "It's safe to go"
 	cont "out again!"
@@ -69,7 +69,7 @@ _SaffronCityPidgeotText::
 	text_end
 
 _SaffronCityRockerText::
-	text "I saw ROCKET"
+	text "I saw <ROCKET>"
 	line "BOSS escaping"
 	cont "SILPH's building."
 	done
@@ -83,8 +83,8 @@ _SaffronCityRocket8Text::
 	done
 
 _SaffronCityRocket9Text::
-	text "..."
-	line "Snore..."
+	text "<...>"
+	line "Snore<...>"
 
 	para "Hah! He's taking"
 	line "a snooze!"
@@ -110,7 +110,7 @@ _SaffronCityGymSignText::
 	done
 
 _SaffronCityTrainerTips1Text::
-	text "TRAINER TIPS"
+	text "<TIPS>"
 
 	para "FULL HEAL cures"
 	line "all ailments like"
@@ -122,7 +122,7 @@ _SaffronCityTrainerTips1Text::
 	done
 
 _SaffronCityTrainerTips2Text::
-	text "TRAINER TIPS"
+	text "<TIPS>"
 
 	para "New GREAT BALL"
 	line "offers improved"
@@ -148,5 +148,5 @@ _SaffronCitySilphCoLatestProductSignText::
 	line "product!"
 
 	para "Release to be"
-	line "determined..."
+	line "determined<...>"
 	done

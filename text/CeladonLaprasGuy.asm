@@ -10,18 +10,18 @@ _CeladonLaprasGuyIntro::
 	para "But I'm worried"
 	line "about showing off"
 	cont "the #MON while"
-	cont "TEAM ROCKET is"
+	cont "<TEAM><ROCKET> is"
 	cont "slinking around."
 	done
 
 _CeladonLaprasGuyReady::
 	text "So you were the" 
 	line "one who kicked"
-	cont "TEAM ROCKET's"
+	cont "<TEAM><ROCKET>'s"
 	cont "butt in their"
 	cont "hideout?"
 
-	para "The ROCKETs are"
+	para "The <ROCKET>s are"
 	line "all moping around"
 	cont "now. Hah!"
 
@@ -47,7 +47,7 @@ _CeladonLaprasGuyAfter::
 
 _SwitchPCBoxesFirst::
 	text "No room in your"
-	line "PC box."
+	line "<PC> box."
 	para "Switch to another"
 	line "one first!"
 	done
@@ -58,7 +58,7 @@ _LaprasGuySilphCoAlreadyText::
 	cont "doing?"
 	para "I guess you're"
 	line "saving us from"
-	cont "TEAM ROCKET"
+	cont "<TEAM><ROCKET>"
 	cont "again, huh?"
 	para "We're in good"
 	line "hands then!"

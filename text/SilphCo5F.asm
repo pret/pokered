@@ -1,12 +1,12 @@
 _SilphCo5FSilphWorkerMThatsYouRightText::
-	text "TEAM ROCKET is"
+	text "<TEAM><ROCKET> is"
 	line "in an uproar over"
 	cont "some intruder."
 	cont "That's you right?"
 	done
 
 _SilphCo5FSilphWorkerMYoureOurHeroText::
-	text "TEAM ROCKET took"
+	text "<TEAM><ROCKET> took"
 	line "off! You're our"
 	cont "hero! Thank you!"
 	done
@@ -23,7 +23,7 @@ _SilphCo5FRocket1EndBattleText::
 _SilphCo5FRocket1AfterBattleText::
 	text "It's not smart"
 	line "to pick a fight"
-	cont "with TEAM ROCKET!"
+	cont "with <TEAM><ROCKET>!"
 	done
 
 _SilphCo5FScientistBattleText::

@@ -381,6 +381,11 @@ MoveMysticCrystalBallText:
 	ld e, a
 	add hl, de
 	ld a, [hl] ; chosen mon
+	push af
+	ld [wd11e], a
+	call GetMonName
+	call CopyToStringBuffer
+	pop af
 	ld b, a
 	push bc
 	ld hl, MoveMysticMonsList
@@ -430,7 +435,7 @@ MoveMysticCrystalBallText:
 	ld hl, .ahyes
 	rst _PrintText
 	pop hl ; pokemon-specific text
-	rst _PrintText
+	call TextCommandProcessor
 	pop de
 	; d = which pokemon we chose
 	ld a, d
@@ -454,7 +459,7 @@ MoveMysticCrystalBallText:
 .gotMove
 	; d = move ID, e = remapped power
 	ld a, e
-	ld [wStringBuffer], a
+	ld [w2CharStringBuffer], a
 	ld a, d
 	ld [wd11e], a
 	call GetMoveName

@@ -189,7 +189,7 @@ _RocksGoneText::
 	done
 
 _WhereRubiesText::
-	text "Time to dig to the"
+	text "Time to dig to the" ; TODO: duplicated text
 	line "next floor!"
 	para "Where are those"
 	line "RUBIES?"
@@ -201,12 +201,17 @@ _FoundRubyText::
 	done
 
 _RubyTwoMoreToGoText::
-	text "Two more to go!"
+	text "Two@"
+	text_jump _MoreToGoText
+	
+_MoreToGoText:
+	text_end
+	text " more to go!"
 	done
 
 _RubyOneMoreToGoText::
-	text "One more to go!"
-	done
+	text "One@"
+	text_jump _MoreToGoText
 
 _RubyGotAllOfThemText::
 	text "<PLAYER> inserted"

@@ -85,7 +85,7 @@ _Museum2FWalletKidWalletGive::
 
 _Museum2FReceivedLostWalletText::
 	text "<PLAYER> received"
-	line "the LOST WALLET!@"
+	line "the LOST WALLET!@" ; TODO: parameterize
 	text_end
 
 _Museum2FWalletKidEnd::

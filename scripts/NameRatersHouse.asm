@@ -104,6 +104,6 @@ NameRatersHouseNameRaterText:
 	text_far _NameRatersHouseNameRaterComeAnyTimeYouLikeText
 	text_end
 
-.ATrulyImpeccableNameText:
-	text_far _NameRatersHouseNameRaterATrulyImpeccableNameText
-	text_end
+;.ATrulyImpeccableNameText:
+;	text_far _NameRatersHouseNameRaterATrulyImpeccableNameText
+;	text_end

@@ -15,7 +15,7 @@ _VermilionPidgeyHouseLetterText::
 
 	para "I heard SAFFRON"
 	line "has problems with"
-	cont "TEAM ROCKET."
+	cont "<TEAM><ROCKET>."
 
 	para "VERMILION appears"
 	line "to be safe."

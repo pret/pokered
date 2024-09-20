@@ -3,7 +3,7 @@ _SafariZoneNorthRestHouseSignText::
 	done
 
 _SafariZoneNorthTrainerTips1Text::
-	text "TRAINER TIPS"
+	text "<TIPS>"
 
 	para "The SECRET HOUSE"
 	line "is still ahead!"
@@ -14,7 +14,7 @@ _SafariZoneNorthSignText::
 	done
 
 _SafariZoneNorthTrainerTips2Text::
-	text "TRAINER TIPS"
+	text "<TIPS>"
 
 	para "GHOST type moves"
 	line "are dynamic!"
@@ -34,7 +34,7 @@ _SafariZoneNorthTrainerTips2Text::
 	done
 
 _SafariZoneNorthTrainerTips3Text::
-	text "TRAINER TIPS"
+	text "<TIPS>"
 
 	para "Win a free HM for"
 	line "finding the"
@@ -184,7 +184,7 @@ _SafariZoneNorthEngineerAfterBattleText::
 	cont "style feel!"
 
 	para "If I ever see"
-	line "a PC or healing"
+	line "a <PC> or healing"
 	cont "machine in one"
 	cont "of them, I'm"
 	cont "quitting!"

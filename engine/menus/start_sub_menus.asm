@@ -796,7 +796,7 @@ SwitchPartyMon_ClearGfx:
 	ld a, SFX_SWAP
 	jp PlaySound
 
-SwitchPartyMon_InitVarOrSwapData:
+SwitchPartyMon_InitVarOrSwapData::
 ; This is used to initialise [wMenuItemToSwap] and to actually swap the data.
 	ld a, [wMenuItemToSwap]
 	and a ; has [wMenuItemToSwap] been initialised yet?

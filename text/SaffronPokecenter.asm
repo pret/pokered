@@ -8,5 +8,5 @@ _SaffronPokecenterGentlemanText::
 	text "SILPH CO. is very"
 	line "famous. That's"
 	cont "why it attracted"
-	cont "TEAM ROCKET!"
+	cont "<TEAM><ROCKET>!"
 	done

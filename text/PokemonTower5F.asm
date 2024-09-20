@@ -7,8 +7,8 @@ _PokemonTower5FChanneler1Text::
 	done
 
 _PokemonTower5FChanneler2BattleText::
-	text "Give...me..."
-	line "your...soul..."
+	text "Give<...>me<...>"
+	line "your<...>soul<...>"
 	done
 
 _PokemonTower5FChanneler2EndBattleText::
@@ -21,8 +21,8 @@ _PokemonTower5FChanneler2AfterBattleText::
 	done
 
 _PokemonTower5FChanneler3BattleText::
-	text "You...shall..."
-	line "join...us..."
+	text "You<...>shall<...>"
+	line "join<...>us<...>"
 	done
 
 _PokemonTower5FChanneler3EndBattleText::
@@ -48,8 +48,8 @@ _PokemonTower5FChanneler4AfterBattleText::
 	done
 
 _PokemonTower5FChanneler5BattleText::
-	text "Urgah..."
-	line "Urff...."
+	text "Urgah<...>"
+	line "Urff<...>."
 	done
 
 _PokemonTower5FChanneler5EndBattleText::

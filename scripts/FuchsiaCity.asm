@@ -14,7 +14,25 @@ FuchsiaCityDefaultScript:
 	bit 5, [hl] ; did we load the map from a save/warp/door/battle, etc?
 	res 5, [hl]
 	jr nz, .removeAddCutTiles
-	ret
+	; check if ERIK is walking away
+	CheckEventHL EVENT_ERIK_LEAVING
+	ret z
+	ld a, $FF
+	ld [wJoyIgnore], a
+	ld a, [wd730]
+	bit 0, a
+	ret nz
+	ResetEventReuseHL EVENT_ERIK_LEAVING
+	xor a
+	ld [wJoyIgnore], a
+	; hide erik sprite
+	ld a, HS_FUCHSIA_ERIK
+	ld [wMissableObjectIndex], a
+	predef HideExtraObject
+	ld a, HS_SAFARI_ZONE_CENTER_REST_HOUSE_ERIK
+	ld [wMissableObjectIndex], a
+	; show erik in safari zone sprite
+	predef_jump ShowExtraObject
 .removeAddCutTiles
 	CheckEvent EVENT_DELETED_FUCHSIA_TREES
 	jr z, .firstLoadCommon
@@ -113,7 +131,88 @@ FuchsiaCityGamblerText:
 
 FuchsiaCityErikText:
 	text_far _FuchsiaCityErikText
+	text_asm
+	SetEvent EVENT_MET_ERIK
+	CheckEvent EVENT_MET_SARA
+	jr z, .notMet
+	call DisplayTextPromptButton
+	ld hl, .ohShesInSafariZone
+	rst _PrintText
+	call .checkTreeBlockPresent
+	jr z, .treePresent
+	ld a, [wXCoord]
+	cp 29
+	ld de, ErikLeavesNoTreeLeft
+	jr z, .gotDirections
+	cp 30
+	ld de, ErikLeavesNoTreeDown
+	jr z, .gotDirections
+	ld de, ErikLeavesNoTreeRight
+	jr .gotDirections
+.treePresent
+	ld a, [wXCoord]
+	cp 29
+	ld de, ErikLeavesTreeLeft
+	jr z, .gotDirections
+	cp 30
+	ld de, ErikLeavesTreeDown
+	jr z, .gotDirections
+	ld de, ErikLeavesTreeRight
+	jr .gotDirections
+.gotDirections
+	ld hl, wNPCMovementDirections2
+	call DecodeRLEList
+	SetEvent EVENT_ERIK_LEAVING
+	ld a, FUCHSIACITY_ERIK
+	ldh [hSpriteIndex], a
+	ld de, wNPCMovementDirections2
+	callfar MoveSpriteButAllowAOrBPress
+.notMet
+	rst TextScriptEnd
+.ohShesInSafariZone
+	text_far _ErikSaraInSafariZoneText
 	text_end
+.checkTreeBlockPresent
+	ld a, [wXCoord]
+	cp 29
+	lb de, 1, 1
+	jr z, .gotBlock
+	lb de, 0, 1
+.gotBlock
+	callfar GetBlockAtCoord
+	ld a, d
+	cp $60 ; tree block
+	ret
+
+ErikLeavesNoTreeLeft:
+	db NPC_MOVEMENT_DOWN, 1
+	db NPC_MOVEMENT_LEFT, 4
+	db NPC_MOVEMENT_UP, 5
+	db -1
+
+ErikLeavesNoTreeDown:
+	db NPC_MOVEMENT_LEFT, 4
+	db NPC_MOVEMENT_UP, 3
+	db -1
+
+ErikLeavesNoTreeRight:
+	db NPC_MOVEMENT_LEFT, 3
+	db -1
+
+ErikLeavesTreeLeft:
+	db NPC_MOVEMENT_RIGHT, 5
+	db -1
+
+ErikLeavesTreeDown:
+	db NPC_MOVEMENT_RIGHT, 5
+	db NPC_MOVEMENT_UP, 3
+	db -1
+
+ErikLeavesTreeRight:
+	db NPC_MOVEMENT_DOWN, 1
+	db NPC_MOVEMENT_RIGHT, 5
+	db NPC_MOVEMENT_UP, 5
+	db -1
 
 FuchsiaCityYoungster2Text:
 	text_asm

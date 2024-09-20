@@ -130,7 +130,7 @@ _DexRatingText::
 	text "#DEX Rating<COLON>"
 	done
 
-_GymStatueText1::
+_GymStatueText1:: ; TODO: parameterize
 	text_ram wStringBuffer
 	text_start
 	line "#MON GYM"
@@ -138,7 +138,7 @@ _GymStatueText1::
 	text_ram wcd6d
 	text_start
 
-	para "WINNING TRAINERS:"
+	para "WINNING <TRAINER>S:"
 	line "<RIVAL>"
 	done
 
@@ -150,7 +150,7 @@ _GymStatueText2::
 	text_ram wcd6d
 	text_start
 
-	para "WINNING TRAINERS:"
+	para "WINNING <TRAINER>S:"
 	line "<RIVAL>"
 	cont "<PLAYER>"
 	done
@@ -167,10 +167,10 @@ _PewterCityPokecenterGuyText::
 
 	para "When JIGGLYPUFF"
 	line "sings, #MON"
-	cont "get drowsy..."
+	cont "get drowsy<...>"
 
-	para "...Me too..."
-	line "Snore..."
+	para "<...>Me too<...>"
+	line "Snore<...>"
 	done
 
 _CeruleanPokecenterGuyText::
@@ -193,7 +193,7 @@ _MtMoonPokecenterBenchGuyText::
 	text "If you have too"
 	line "many #MON, you"
 	cont "should store them"
-	cont "via PC!"
+	cont "via <PC>!"
 	done
 
 _RockTunnelPokecenterGuyText::
@@ -209,7 +209,7 @@ _UnusedBenchGuyText1::
 
 _UnusedBenchGuyText2::
 	text "I'm tired from"
-	line "all the fun..."
+	line "all the fun<...>"
 	done
 
 _UnusedBenchGuyText3::
@@ -222,7 +222,7 @@ _VermilionPokecenterGuyText::
 	text "It is true that a"
 	line "higher level"
 	cont "#MON will be"
-	cont "more powerful..."
+	cont "more powerful<...>"
 
 	para "But, all #MON"
 	line "will have weak"
@@ -264,11 +264,11 @@ _SaffronCityPokecenterGuyText1::
 	text "It would be great"
 	line "if the ELITE FOUR"
 	cont "came and stomped"
-	cont "TEAM ROCKET!"
+	cont "<TEAM><ROCKET>!"
 	done
 
 _SaffronCityPokecenterGuyText2::
-	text "TEAM ROCKET took"
+	text "<TEAM><ROCKET> took"
 	line "off! We can go"
 	cont "out safely again!"
 	cont "That's great!"
@@ -339,7 +339,7 @@ _CinnabarGymQuizIntroText::
 	para "If you want to"
 	line "conserve your"
 	cont "#MON for the"
-	cont "GYM LEADER..."
+	cont "GYM LEADER<...>"
 
 	para "Then get it right!"
 	line "Here we go!"
@@ -375,7 +375,7 @@ _CinnabarQuizQuestionsText5::
 	prompt
 
 _CinnabarQuizQuestionsText6::
-	text "TM28 contains"
+	text "<TM>28 contains"
 	line "TOMBSTONER?"
 	prompt
 
@@ -401,7 +401,7 @@ _MagazinesText::
 _BillsHouseMonitorText::
 	text "TELEPORTER is"
 	line "displayed on the"
-	cont "PC monitor."
+	cont "<PC> monitor."
 	done
 
 _BillsHouseInitiatedText::
@@ -420,13 +420,14 @@ _BillsHousePokemonListText2::
 	line "you want to see?"
 	done
 
-_OakLabEmailText::
+_EmailHereText::
 	text "There's an e-mail"
 	line "message here!"
+	para "<...>@"
+	text_end
 
-	para "..."
-
-	para "Calling all"
+_OakLabEmailText::
+	text "<PARA>Calling all"
 	line "#MON trainers!"
 
 	para "The elite trainers"
@@ -444,7 +445,7 @@ _OakLabEmailText::
 
 	para "PS: PROF.OAK,"
 	line "please visit us!"
-	cont "..."
+	cont "<...>"
 	done
 
 _GameCornerCoinCaseText::
@@ -478,11 +479,11 @@ _JustAMomentText::
 
 TMNotebookText::
 	text "It's a pamphlet"
-	line "on TMs."
+	line "on <TM>s."
 
-	para "..."
+	para "<...>"
 
-	para "There are 50 TMs"
+	para "There are 50 <TM>s"
 	line "in all."
 
 	para "There are also 5"
@@ -510,7 +511,7 @@ _ViridianSchoolNotebookText1::
 	text "Looked at the"
 	line "notebook!"
 
-	para "First page..."
+	para "First page<...>"
 
 	para "# BALLs are"
 	line "used to catch"
@@ -526,7 +527,7 @@ _ViridianSchoolNotebookText1::
 	prompt
 
 _ViridianSchoolNotebookText2::
-	text "Second page..."
+	text "Second page<...>"
 
 	para "A healthy #MON"
 	line "may be hard to"
@@ -539,7 +540,7 @@ _ViridianSchoolNotebookText2::
 	prompt
 
 _ViridianSchoolNotebookText3::
-	text "Third page..."
+	text "Third page<...>"
 
 	para "#MON trainers"
 	line "seek others to"
@@ -552,7 +553,7 @@ _ViridianSchoolNotebookText3::
 	prompt
 
 _ViridianSchoolNotebookText4::
-	text "Fourth page..."
+	text "Fourth page<...>"
 
 	para "The goal for"
 	line "#MON trainers"
@@ -561,7 +562,7 @@ _ViridianSchoolNotebookText4::
 	cont "GYM LEADERs."
 
 	para "Do so to earn the"
-	line "right to face..."
+	line "right to face<...>"
 
 	para "The ELITE FOUR of"
 	line "#MON LEAGUE!"
@@ -589,13 +590,13 @@ _IndigoPlateauHQText::
 _RedBedroomSNESText::
 	text "<PLAYER> is"
 	line "playing the SNES!"
-	cont "...Okay!"
+	cont "<...>Okay!"
 	cont "It's time to go!"
 	done
 
 _Route15UpstairsBinocularsText::
 	text "Looked into the"
-	line "binoculars..."
+	line "binoculars<...>"
 
 	para "A large, shining"
 	line "bird is flying"
@@ -615,7 +616,7 @@ _KabutopsFossilText::
 	done
 
 _LinkCableHelpText1::
-	text "TRAINER TIPS"
+	text "<TIPS>"
 
 	para "Using a Game Link"
 	line "Cable"
@@ -1016,8 +1017,8 @@ _ScaredText::
 	prompt
 
 _GetOutText::
-	text "GHOST: Get out..."
-	line "Get out..."
+	text "GHOST: Get out<...>"
+	line "Get out<...>"
 	prompt
 
 _FastAsleepText::
@@ -1330,7 +1331,7 @@ _SuperEffectiveText::
 
 _NotVeryEffectiveText::
 	text "It's not very"
-	line "effective..."
+	line "effective<...>"
 	prompt
 
 _SafariZoneEatingText::
@@ -1385,7 +1386,7 @@ _PartyMenuBattleText::
 	done
 
 _PartyMenuUseTMText::
-	text "Use TM on which"
+	text "Use <TM> on which"
 	line "#MON?"
 	done
 
@@ -1458,12 +1459,12 @@ _RareCandyText::
 
 _TurnedOnPC1Text::
 	text "<PLAYER> turned on"
-	line "the PC."
+	line "the <PC>."
 	prompt
 
 _AccessedBillsPCText::
 	text "Accessed BILL's"
-	line "PC."
+	line "<PC>."
 
 	para "Accessed #MON"
 	line "Storage System."
@@ -1471,14 +1472,14 @@ _AccessedBillsPCText::
 
 _AccessedSomeonesPCText::
 	text "Accessed someone's"
-	line "PC."
+	line "<PC>."
 
 	para "Accessed #MON"
 	line "Storage System."
 	prompt
 
 _AccessedMyPCText::
-	text "Accessed my PC."
+	text "Accessed my <PC>."
 
 	para "Accessed Item"
 	line "Storage System."
@@ -1486,7 +1487,7 @@ _AccessedMyPCText::
 
 _TurnedOnPC2Text::
 	text "<PLAYER> turned on"
-	line "the PC."
+	line "the <PC>."
 	prompt
 
 _WhatDoYouWantText::
@@ -1500,12 +1501,12 @@ _WhatToDepositText::
 	done
 
 _WantToDepositText::
-	text "Deposit to PC?"
+	text "Deposit to <PC>?"
 	done
 
 _DepositHowManyToPCText::
 	text "Deposit how many"
-	line "to PC?"
+	line "to <PC>?"
 	done
 
 _DepositHowManyText::
@@ -1515,7 +1516,7 @@ _DepositHowManyText::
 _ItemWasStoredText::
 	text_ram wcd6d
 	text " was"
-	line "stored via PC."
+	line "stored via <PC>."
 	prompt
 
 _NothingToDepositText::
@@ -1549,6 +1550,7 @@ _NothingStoredText::
 	line "stored."
 	prompt
 
+_PokemartItemBagFullText::
 _CantCarryMoreText::
 	text "You can't carry"
 	line "any more items."
@@ -1703,12 +1705,12 @@ _GetDexRatedText::
 
 _ClosedOaksPCText::
 	text "Closed link to"
-	line "PROF.OAK's PC.@"
+	line "PROF.OAK's <PC>.@"
 	text_end
 
 _AccessedOaksPCText::
 	text "Accessed PROF."
-	line "OAK's PC."
+	line "OAK's <PC>."
 
 	para "Accessed #DEX"
 	line "Rating System."
@@ -1754,7 +1756,7 @@ _OakSpeechText2B::
 	cont "pets. Others use"
 	cont "them for fights."
 
-	para "Myself..."
+	para "Myself<...>"
 
 	para "I study #MON"
 	line "as a profession."
@@ -1771,7 +1773,7 @@ _IntroduceRivalText::
 	cont "your rival since"
 	cont "you were a baby."
 
-	para "...Erm, what is"
+	para "<...>Erm, what is"
 	line "his name again?"
 	prompt
 

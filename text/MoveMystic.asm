@@ -29,98 +29,102 @@ _MoveMysticLookDeep::
 	prompt
 
 _MoveMysticAhYes::
-	text "Ah yes..."
+	text "Ah yes<...>"
 	line "I see it."
-	prompt
+	para "@"
+	text_ram wStringBuffer
+	text ", the@"
+	text_end
 
+; TODO: use pokemon's names correctly with stringbuffer
 _BeedrillMoveMysticText::
-	text "BEEDRILL, the"
+	text_start
 	line "hypodermic"
 	cont "hornet."
 	prompt
 
 _ArbokMoveMysticText::
-	text "ARBOK, the"
+	text_start
 	line "venomous viper."
 	prompt
 
 _FearowMoveMysticText::
-	text "FEAROW, the"
+	text_start
 	line "bloodthirsty"
 	cont "beak."
 	prompt
 
 _GolemMoveMysticText::
-	text "GOLEM, the"
+	text_start
 	line "rolling rock."
 	prompt
 
 _HitmonleeMoveMysticText::
-	text "HITMONLEE, the"
+	text_start
 	line "king of kicks."
 	prompt
 
 _HitmonchanMoveMysticText::
-	text "HITMONCHAN, the"
+	text_start
 	line "furious fist."
 	prompt
 
 _ElectabuzzMoveMysticText::
-	text "ELECTABUZZ, the"
+	text_start
 	line "voltaic vanguard."
 	prompt
 
 _MagmarMoveMysticText::
-	text "MAGMAR, the"
+	text_start
 	line "pyroclastic"
 	cont "punisher."
 	prompt
 
 _JynxMoveMysticText::
-	text "JYNX, the"
+	text_start
 	line "glacial goddess."
 	prompt
 
 _HypnoMoveMysticText::
-	text "HYPNO, the"
+	text_start
 	line "hypnotic horror."
 	prompt
 
 _DragoniteMoveMysticText::
-	text "DRAGONITE, the"
+	text_start
 	line "mystical monarch."
 	prompt
 
 _SeakingMoveMysticText::
-	text "SEAKING, the"
+	text_start
 	line "fabulous fish."
 	prompt
 	
 _KangaskhanMoveMysticText::
-	text "KANGASKHAN, the"
+	text_start
 	line "parental"
 	cont "powerhouse."
 	prompt
 	
 _LickitungMoveMysticText::
-	text "LICKITUNG, the"
+	text_start
 	line "salivating"
 	cont "slurper."
 	prompt
 
 _OmastarMoveMysticText::
-	text "OMASTAR, the"
+	text_start
 	line "ancient ammonite."
 	prompt
 
 _JigglypuffMoveMysticText::
-	text "JIGGLYPUFF, the"
+	text_start
 	line "spherical"
 	cont "songstress."
 	prompt
 
 _WigglytuffMoveMysticText::
-	text "WIGGLYTUFF, the"
+	text_start
 	line "globular glory."
 	prompt
 
@@ -175,9 +179,10 @@ _MoveMysticJigglyWigglyOnlyLevel20Text::
 	line "above level 20!"
 	done
 
+; TODO: use another smaller buffer
 _GenericMovePowerIncreasesText::
 	text "Its POWER"
 	line "increases to @"
-	text_decimal wStringBuffer, 1, 3
+	text_decimal w2CharStringBuffer, 1, 3
 	text "!"
 	done

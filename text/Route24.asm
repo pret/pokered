@@ -11,13 +11,6 @@ _Route24CooltrainerM1YouJustEarnedAPrizeText::
 	line "fabulous prize!"
 	prompt
 
-_Route24CooltrainerM1ReceivedNuggetText::
-	text "<PLAYER> received"
-	line "a @"
-	text_ram wStringBuffer
-	text "!@"
-	text_end
-
 _Route24CooltrainerM1NoRoomText::
 	text "You don't have"
 	line "any room!"
@@ -26,7 +19,7 @@ _Route24CooltrainerM1NoRoomText::
 _Route24CooltrainerM1JoinTeamRocketText::
 	text "By the way, would"
 	line "you like to join"
-	cont "TEAM ROCKET?"
+	cont "<TEAM><ROCKET>?"
 
 	para "We're a group"
 	line "dedicated to evil"
@@ -58,7 +51,7 @@ _Route24CooltrainerM1YouCouldBecomeATopLeaderText::
 	text "With your ability,"
 	line "you could become"
 	cont "a top leader in"
-	cont "TEAM ROCKET!"
+	cont "<TEAM><ROCKET>!"
 	done
 
 _Route24CooltrainerM2BattleText::

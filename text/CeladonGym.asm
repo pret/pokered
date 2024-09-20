@@ -3,7 +3,7 @@ _CeladonGymErikaPreBattleText::
 	line "weather isn't it?"
 	cont "It's so pleasant."
 
-	para "...Oh dear..."
+	para "<...>Oh dear<...>"
 	line "I must have dozed"
 	cont "off. Welcome."
 
@@ -60,13 +60,6 @@ _CeladonGymRainbowBadgeInfoText::
 	para "Please also take"
 	line "this with you."
 	done
-
-_CeladonGymReceivedTM21Text::
-	text "<PLAYER> received"
-	line "@"
-	text_ram wStringBuffer
-	text "!@"
-	text_end
 
 _TM21ExplanationText::
 	text_start
@@ -149,6 +142,7 @@ _CeladonGymBattleText5::
 	line "to raise!"
 	done
 
+_RocketHideoutB4FRocket2EndBattleText::
 _CeladonGymEndBattleText5::
 	text "No!"
 	prompt

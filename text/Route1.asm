@@ -12,6 +12,7 @@ _Route1Youngster1MartSampleText::
 	cont "Here you go!"
 	prompt
 
+_SilphCo2FSilphWorkerFReceivedTM36Text::
 _Route1Youngster1GotPotionText::
 	text "<PLAYER> got"
 	line "@"
@@ -23,11 +24,6 @@ _Route1Youngster1AlsoGotPokeballsText::
 	text "We also carry"
 	line "# BALLs for"
 	cont "catching #MON!"
-	done
-
-_Route1Youngster1NoRoomText::
-	text "You have too much"
-	line "stuff with you!"
 	done
 
 _Route1Youngster2Text::

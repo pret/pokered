@@ -1,6 +1,6 @@
 _PokemonTower3FChanneler1BattleText::
-	text "Urrg...Awaa..."
-	line "Huhu...graa.."
+	text "Urrg<...>Awaa<...>"
+	line "Huhu<...>graa<...>"
 	done
 
 _PokemonTower3FChanneler1EndBattleText::
@@ -11,11 +11,11 @@ _PokemonTower3FChanneler1EndBattleText::
 _PokemonTower3FChanneler1AfterBattleText::
 	text "The GHOSTs can be"
 	line "identified by the"
-	cont "SILPH SCOPE."
+	cont "SILPH SCOPE." ; TODO: Parameterize?
 	done
 
 _PokemonTower3FChanneler2BattleText::
-	text "Kekeke...."
+	text "Kekeke<...>."
 	line "Kwaaah!"
 	done
 

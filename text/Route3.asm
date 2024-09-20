@@ -1,7 +1,7 @@
 _Route3Text1::
-	text "Whew... I better"
-	line "take a rest..."
-	cont "Groan..."
+	text "Whew<...> I better"
+	line "take a rest<...>"
+	cont "Groan<...>"
 
 	para "That tunnel from"
 	line "CERULEAN takes a"
@@ -39,7 +39,7 @@ _Route3Youngster2EndBattleText::
 _Route3Youngster2AfterBattleText::
 	text "Are you storing"
 	line "your #MON on"
-	cont "PC? Each BOX can"
+	cont "<PC>? Each BOX can"
 	cont "hold 20 #MON!"
 	done
 
@@ -72,7 +72,7 @@ _Route3Youngster3EndBattleText::
 
 _Route3Youngster3AfterBattleText::
 	text "If a #MON BOX"
-	line "on the PC gets"
+	line "on the <PC> gets"
 	cont "full, just switch"
 	cont "to another BOX!"
 	done

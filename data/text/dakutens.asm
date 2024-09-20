@@ -9,7 +9,7 @@ Dakutens:
 	db "ハバ", "ヒビ", "フブ", "へべ", "ホボ"
 	db -1 ; end
 
-Handakutens:
+Handakutens: ; TODO: remove these from importing
 	db "はぱ", "ひぴ", "ふぷ", "へぺ", "ほぽ"
 	db "ハパ", "ヒピ", "フプ", "へぺ", "ホポ"
 	db -1 ; end

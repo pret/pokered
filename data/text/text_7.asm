@@ -82,7 +82,7 @@ _WannaTrade1Text::
 
 _NoTrade1Text::
 	text "Awww!"
-	line "Oh well..."
+	line "Oh well<...>"
 	done
 
 _WrongMon1Text::
@@ -125,7 +125,7 @@ _TradeColorPaletteText::
 
 _NoTrade2Text::
 	text "Well, if you"
-	line "don't want to..."
+	line "don't want to<...>"
 	done
 
 _WrongMon2Text::
@@ -168,7 +168,7 @@ _NoTrade3Text::
 	done
 
 _WrongMon3Text::
-	text "...This is no"
+	text "<...>This is no"
 	line "@"
 	text_ram wInGameTradeGiveMonName
 	text "."

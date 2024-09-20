@@ -47,7 +47,10 @@ _MrFujisHouseMrFujiIThinkThisMayHelpYourQuestText::
 	line "help your quest."
 	prompt
 
+_PokemonFanClubReceivedBikeVoucherText::
+_LastTwoGurusReceivedItemText::
 _MrFujisHouseMrFujiReceivedPokeFluteText::
+_Route24CooltrainerM1ReceivedNuggetText::
 	text "<PLAYER> received"
 	line "a @"
 	text_ram wStringBuffer
@@ -82,7 +85,7 @@ _MrFujisHouseMrFujiPokedexText::
 	cont "Drawing!"
 
 	para "The application"
-	line "form is..."
+	line "form is<...>"
 
 	para "Gone! It's been"
 	line "clipped out!"

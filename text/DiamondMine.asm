@@ -140,7 +140,7 @@ _DiamondMineWeeksOfWork::
 	text_ram wcd6d
 	text " could"
 	cont "make progress."
-	para "Until..."
+	para "Until<...>"
 	prompt
 
 _DiamondMineFinished::

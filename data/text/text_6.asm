@@ -38,14 +38,14 @@ _ItemUseBallText07::
 	text_ram wBoxMonNicks
 	text " was"
 	line "transferred to"
-	cont "BILL's PC!"
+	cont "BILL's <PC>!"
 	prompt
 
 _ItemUseBallText08::
 	text_ram wBoxMonNicks
 	text " was"
 	line "transferred to"
-	cont "someone's PC!"
+	cont "someone's <PC>!"
 	prompt
 
 _NoBoxSlotsLeftText::
@@ -232,7 +232,7 @@ _PPRestoredText::
 	prompt
 
 _BootedUpTMText::
-	text "Booted up a TM!"
+	text "Booted up a <TM>!"
 	prompt
 
 _BootedUpHMText::
@@ -294,7 +294,7 @@ _ItemUseFossilText::
 	text "This fossil is"
 	line "fun to admire!"
 	para "Maybe putting it"
-	line "in the PC until"
+	line "in the <PC> until"
 	cont "finding a use"
 	cont "for it is best."
 	prompt

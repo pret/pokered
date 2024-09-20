@@ -31,7 +31,10 @@ TMKidGreet1::
 	text_end
 
 CeruleanMartTMKidFlavor:
+	text_far _TMKidBringingTMsAnyCost
 	text_far _CeruleanMartTMKidFlavor
+	text_far _TMKidSellingTMsCopiedDadOriginals
+	text_far _TMKidWantSomeText
 	text_end
 
 TMKidQuick1::

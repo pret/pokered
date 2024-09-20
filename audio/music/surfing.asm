@@ -1,5 +1,6 @@
 Music_Surfing_Ch1::
 	tempo 160
+Music_Surfing_Ch1_NoTempo::
 	volume 7, 7
 	duty_cycle 3
 	vibrato 12, 3, 4

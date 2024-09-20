@@ -8,26 +8,36 @@ _CeladonMart1FReceptionistText::
 	cont "the store layout."
 	done
 
-_CeladonMart1FDirectorySignText::
-	text "1F: SERVICE"
-	line "    COUNTER"
-
-	para "2F: TRAINER'S"
-	line "    MARKET"
-
-	para "3F: TV GAME SHOP"
-
-	para "4F: WISEMAN GIFTS"
-
-	para "5F: DRUG STORE"
-
-	para "ROOFTOP SQUARE:"
-	line "VENDING MACHINES"
-	done
-
 _CeladonMart1FCurrentFloorSignText::
 	text "1F: SERVICE"
 	line "    COUNTER"
+	done
+
+_CeladonMart2FCurrentFloorSignText::
+	text "Top Grade Items"
+	line "for Trainers!"
+	prompt
+
+_CeladonMart2FDirectorySignText::
+	text "2F: <TRAINER>'S"
+	line "    MARKET"
+	done
+
+_CeladonMart3FCurrentFloorSignText::
+	text "3F: TV GAME SHOP"
+	done
+
+_CeladonMart4FDirectorySignText::
+	text "4F: WISEMAN GIFTS"
+	prompt
+
+_CeladonMart5FCurrentFloorSignText::
+	text "5F: DRUG STORE"
+	done
+
+_CeladonMartRoofCurrentFloorSignText::
+	text "ROOFTOP SQUARE:"
+	line "VENDING MACHINES"
 	done
 
 _CeladonMartUsePhoneText::
@@ -46,7 +56,7 @@ _CeladonMartCallWhoText::
 
 _CeladonMartCallStartText::
 	text "Here we go!"
-	line "Dialing..."
+	line "Dialing<...>"
 	done
 
 _CeladonMartUsePhoneCallEnd::
@@ -78,7 +88,7 @@ _CeladonMartCallMomBoredText::
 	text "Getting bored of"
 	line "battling?"
 	para "Well, you're in"
-	line "CELADON CITY..."
+	line "CELADON CITY<...>"
 	para "I heard they have"
 	line "some sort of GAME"
 	cont "CORNER there."
@@ -239,7 +249,7 @@ _CeladonMartCallDadText2::
 	text "So you have @"
 	text_ram w2CharStringBuffer
 	text " "
-	line "badges..."
+	line "badges<...>"
 	para "I'm impressed!"
 	para "You're doing"
 	line "very well!"

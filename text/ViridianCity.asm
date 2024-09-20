@@ -74,25 +74,18 @@ ViridianCityFisherYouCanHaveThisText::
 	line "about a GASTLY"
 	cont "eating my dream."
 	cont "What's this?"
-	cont "Where did this TM"
+	cont "Where did this <TM>"
 	cont "come from?"
 
 	para "This is spooky!"
 	line "Here, you can"
-	cont "have this TM."
+	cont "have this <TM>."
 	prompt
 
-_ViridianCityFisherReceivedTM42Text::
-	text "<PLAYER> received"
-	line "@"
-	text_ram wStringBuffer
-	text "!@"
-	text_end
-
 _ViridianCityFisherTM42ExplanationText::
-	text "TM42 contains"
-	line "LOVELY KISS..."
-	cont "...Snore..."
+	text "<TM>42 contains"
+	line "LOVELY KISS<...>"
+	cont "<...>Snore<...>"
 	done
 
 _ViridianCityFisherTM42NoRoomText::
@@ -130,7 +123,7 @@ _ViridianCityOldManKnowHowToCatchPokemonText::
 	done
 
 _ViridianCityOldManTimeIsMoneyText::
-	text "Time is money..."
+	text "Time is money<...>"
 	line "Go along then."
 	done
 
@@ -147,7 +140,7 @@ _ViridianCitySignText::
 	done
 
 _ViridianCityTrainerTips1Text::
-	text "TRAINER TIPS"
+	text "<TIPS>"
 
 	para "Catch #MON"
 	line "and expand your"
@@ -159,7 +152,7 @@ _ViridianCityTrainerTips1Text::
 	done
 
 _ViridianCityTrainerTips2Text::
-	text "TRAINER TIPS"
+	text "<TIPS>"
 
 	para "The battle moves"
 	line "of #MON are"
@@ -179,5 +172,5 @@ _ViridianCityGymSignText::
 
 _ViridianCityGymLockedText::
 	text "The GYM's doors"
-	line "are locked..."
+	line "are locked<...>"
 	done

@@ -15,7 +15,37 @@ CeladonMart1FReceptionistText:
 	text_end
 
 CeladonMart1FDirectorySignText:
-	text_far _CeladonMart1FDirectorySignText
+	text_far _CeladonMart1FCurrentFloorSignText
+	text_promptbutton
+	text_asm
+	ld hl, .2f
+	rst _PrintText
+	ld hl, .3f
+	rst _PrintText
+	ld hl, .4f
+	rst _PrintText
+	ld hl, .5f
+	rst _PrintText
+	ld hl, .roof
+	rst _PrintText
+	rst TextScriptEnd
+.2f
+	text_far _CeladonMart2FDirectorySignText
+	text_promptbutton
+	text_end
+.3f
+	text_far _CeladonMart3FCurrentFloorSignText
+	text_promptbutton
+	text_end
+.4f
+	text_far _CeladonMart4FDirectorySignText
+	text_end
+.5f
+	text_far _CeladonMart5FCurrentFloorSignText
+	text_promptbutton
+	text_end
+.roof
+	text_far _CeladonMartRoofCurrentFloorSignText
 	text_end
 
 CeladonMart1FCurrentFloorSignText:

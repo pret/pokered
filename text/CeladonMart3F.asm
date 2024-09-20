@@ -7,15 +7,8 @@ _CeladonMart3FClerkTM18PreReceiveText::
 	cont "useful!"
 	prompt
 
-_CeladonMart3FClerkReceivedTM18Text::
-	text "<PLAYER> received"
-	line "@"
-	text_ram wStringBuffer
-	text "!@"
-	text_end
-
 _CeladonMart3FClerkTM18ExplanationText::
-	text "TM35 is AGILITY!"
+	text "<TM>35 is AGILITY!"
 	para "Use speed to your"
 	line "advantage!"
 	para "If you go first,"
@@ -97,10 +90,6 @@ _CeladonMart3FFightingGameText::
 	line "Looks tough!"
 	done
 
-_CeladonMart3FCurrentFloorSignText::
-	text "3F: TV GAME SHOP"
-	done
-
 _CeladonMart3FPokemonPosterText::
 	text "Red, Blue, and"
 	line "Green!"
@@ -122,14 +111,14 @@ _CeladonMartTMKidFlavor::
 	cont "CORNER."
 
 	para "For once the"
-	line "MART here has TMs"
+	line "MART here has <TM>s"
 	cont "so I'm not selling"
 	cont "any of my own!"
 
 	para "I think I'll use"
 	line "some of the cash"
 	cont "I made selling"
-	cont "TMs to buy a"
+	cont "<TM>s to buy a"
 	cont "GAME BOY COLOR."
 	
 	para "I heard that"

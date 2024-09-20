@@ -17,11 +17,11 @@ _BikeShopCantAffordText::
 	prompt
 
 _BikeShopClerkOhThatsAVoucherText::
-	text "Oh, that's..."
+	text "Oh, that's<...>"
 
-	para "A BIKE VOUCHER!"
+	para "A BIKE VOUCHER!" ; TODO: load item name into string buffer?
 
-	para "OK! Here you go!"
+	para "OK! Here you go!" ; TODO: generic Here you go! text?
 	prompt
 
 _BikeShopExchangedVoucherText::
@@ -44,6 +44,7 @@ _BikeShopClerkHowDoYouLikeYourBicycleText::
 	cont "and in caves!"
 	done
 
+_CeruleanGymMistyTM11NoRoomText::
 _BikeShopBagFullText::
 	text "You better make"
 	line "room for this!"

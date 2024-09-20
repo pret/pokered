@@ -93,7 +93,7 @@ MonsterNames::
 	db "KABUTOPS@@"
 	db "HORSEA@@@@"
 	db "SEADRA@@@@"
-	db "MISSINGNO."
+	db "DRAGONAIR@"
 	db "MISSINGNO."
 	db "SANDSHREW@"
 	db "SANDSLASH@"

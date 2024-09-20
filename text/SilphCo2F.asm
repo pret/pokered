@@ -3,21 +3,14 @@ SilphCo2FSilphWorkerFPleaseTakeThisText::
 	line "No! Stop! Help!"
 
 	para "Oh, you're not"
-	line "with TEAM ROCKET."
-	cont "I thought..."
+	line "with <TEAM><ROCKET>."
+	cont "I thought<...>"
 	cont "I'm sorry. Here,"
 	cont "please take this!"
 	prompt
 
-_SilphCo2FSilphWorkerFReceivedTM36Text::
-	text "<PLAYER> got"
-	line "@"
-	text_ram wStringBuffer
-	text "!@"
-	text_end
-
 _SilphCo2FSilphWorkerFTM36ExplanationText::
-	text "TM36 is"
+	text "<TM>36 is"
 	line "BARRAGE!"
 
 	para "It's hits twice,"
@@ -41,13 +34,13 @@ _SilphCo2FScientist1BattleText::
 _SilphCo2FScientist1EndBattleText::
 	text "How"
 	line "did you know I"
-	cont "was a ROCKET?"
+	cont "was a <ROCKET>?"
 	prompt
 
 _SilphCo2FScientist1AfterBattleText::
 	text "I work for both"
-	line "SILPH and TEAM"
-	cont "ROCKET!"
+	line "SILPH and <TEAM>"
+	cont "<ROCKET>!"
 	done
 
 _SilphCo2FScientist2BattleText::
@@ -95,5 +88,5 @@ _SilphCo2FRocket2EndBattleText::
 _SilphCo2FRocket2AfterBattleText::
 	text "SILPH CO. will"
 	line "be merged with"
-	cont "TEAM ROCKET!"
+	cont "<TEAM><ROCKET>!"
 	done

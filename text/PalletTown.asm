@@ -33,7 +33,7 @@ _PalletTownFisherText::
 	para "You can now store"
 	line "and recall items"
 	cont "and #MON as"
-	cont "data via PC!"
+	cont "data via <PC>!"
 	
 	para "You can even"
 	line "store items any"

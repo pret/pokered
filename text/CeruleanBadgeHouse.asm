@@ -11,7 +11,7 @@ _CeruleanBadgeHouseMiddleAgedManText::
 	prompt
 
 _CeruleanBadgeHouseMiddleAgedManWhichBadgeText::
-	text "Now then..."
+	text "Now then<...>"
 
 	para "Which of the 8"
 	line "BADGEs should I"
@@ -96,14 +96,17 @@ _CeruleanBadgeHouseEarthBadgeText::
 	line "obey you!"
 	prompt
 
-_CeruleanBadgeHouseGarbageText::
+_GarbageCrumpledUpPaper::
 	text "What's in the"
 	line "garbage bin?"
 	para "A crumpled up"
 	line "sheet of paper."
-	para "What's on it?"
-	para "Ohoho."
+	para "What's on it?@"
+	text_end
+
+_CeruleanBadgeHouseGarbageText::
+	text "<PARA>Ohoho."
 	para "Some drawings"
-	cont "of BADGEs."
+	line "of BADGEs."
 	para "Is he a designer?"
 	done

@@ -31,14 +31,11 @@ RunNPCMovementScript::
 	ldh a, [hLoadedROMBank]
 	push af
 	ld a, [wNPCMovementScriptBank]
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call SetCurBank
 	ld a, [wNPCMovementScriptFunctionNum]
 	call CallFunctionInTable
 	pop af
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
-	ret
+	jp SetCurBank
 
 .NPCMovementScriptPointerTables
 	dw PalletMovementScriptPointerTable

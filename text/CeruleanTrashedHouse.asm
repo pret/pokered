@@ -1,11 +1,11 @@
 _CeruleanTrashedHouseFishingGuruTheyStoleATMText::
 	text "Those miserable"
-	line "ROCKETs!"
+	line "<ROCKET>s!"
 
 	para "Look what they"
 	line "did here!"
 
-	para "They stole a TM"
+	para "They stole a <TM>"
 	line "for teaching"
 	cont "#MON how to"
 	cont "DIG holes!"
@@ -20,17 +20,17 @@ _CeruleanTrashedHouseFishingGuruWhatsLostIsLostText::
 
 	para "I decided to teach"
 	line "DIGLETT how to"
-	cont "DIG without a TM!"
+	cont "DIG without a <TM>!"
 	done
 
 _CeruleanTrashedHouseGirlText::
-	text "TEAM ROCKET must"
+	text "<TEAM><ROCKET> must"
 	line "be trying to DIG"
 	cont "their way into no"
 	cont "good!"
 	done
 
 _CeruleanTrashedHouseWallHoleText::
-	text "TEAM ROCKET left"
+	text "<TEAM><ROCKET> left"
 	line "a way out!"
 	done

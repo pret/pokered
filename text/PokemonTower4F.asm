@@ -10,7 +10,7 @@ _PokemonTower4FChanneler1EndBattleText::
 
 _PokemonTower4FChanneler1AfterBattleText::
 	text "I must have been"
-	line "dreaming..."
+	line "dreaming<...>"
 	done
 
 _PokemonTower4FChanneler2BattleText::
@@ -29,7 +29,7 @@ _PokemonTower4FChanneler2AfterBattleText::
 	done
 
 _PokemonTower4FChanneler3BattleText::
-	text "Huhuhu..."
+	text "Huhuhu<...>"
 	line "Beat me not!"
 	done
 
@@ -41,5 +41,5 @@ _PokemonTower4FChanneler3EndBattleText::
 _PokemonTower4FChanneler3AfterBattleText::
 	text "May the departed"
 	line "souls of #MON"
-	cont "rest in peace..."
+	cont "rest in peace<...>"
 	done

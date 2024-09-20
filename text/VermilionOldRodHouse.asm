@@ -19,7 +19,7 @@ _VermilionOldRodHouseFishingGuruTakeThisText::
 	para "Take this and"
 	line "fish, young one!"
 
-	para "<PLAYER> received"
+	para "<PLAYER> received" ; TODO: remove?
 	line "a @"
 	text_ram wStringBuffer
 	text "!@"

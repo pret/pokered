@@ -80,6 +80,12 @@ CeladonMartRoofScript_GiveDrinkToGirl:
 	add hl, de
 	ld a, [hl]
 	ldh [hItemToRemoveID], a
+	push af
+	ld [wd11e], a
+	call GetItemName
+	ld hl, wcd6d
+	call CopyString
+	pop af
 	cp FRESH_WATER
 	jr z, .gaveFreshWater
 	cp SODA_POP
@@ -87,7 +93,7 @@ CeladonMartRoofScript_GiveDrinkToGirl:
 ; gave Lemonade
 	CheckEvent EVENT_GOT_TM49
 	jr nz, .alreadyGaveDrink
-	ld hl, CeladonMartRoofLittleGirlYayLemonadeText
+	ld hl, CeladonMartRoofLittleGirlYayText
 	rst _PrintText
 	call RemoveItemByIDBank12
 	lb bc, TM_CELADON_MART_ROOF_GIRL_LEMONADE, 1
@@ -100,7 +106,7 @@ CeladonMartRoofScript_GiveDrinkToGirl:
 .gaveSodaPop
 	CheckEvent EVENT_GOT_TM48
 	jr nz, .alreadyGaveDrink
-	ld hl, CeladonMartRoofLittleGirlYaySodaPopText
+	ld hl, CeladonMartRoofLittleGirlYayText
 	rst _PrintText
 	call RemoveItemByIDBank12
 	lb bc, TM_CELADON_MART_ROOF_GIRL_SODA_POP, 1
@@ -113,7 +119,7 @@ CeladonMartRoofScript_GiveDrinkToGirl:
 .gaveFreshWater
 	CheckEvent EVENT_GOT_TM13
 	jr nz, .alreadyGaveDrink
-	ld hl, CeladonMartRoofLittleGirlYayFreshWaterText
+	ld hl, CeladonMartRoofLittleGirlYayText
 	rst _PrintText
 	call RemoveItemByIDBank12
 	lb bc, TM_CELADON_MART_ROOF_GIRL_FRESH_WATER, 1
@@ -137,8 +143,8 @@ CeladonMartRoofLittleGirlGiveHerWhichDrinkText:
 	text_far _CeladonMartRoofLittleGirlGiveHerWhichDrinkText
 	text_end
 
-CeladonMartRoofLittleGirlYayFreshWaterText:
-	text_far _CeladonMartRoofLittleGirlYayFreshWaterText
+CeladonMartRoofLittleGirlYayText:
+	text_far _CeladonMartRoofLittleGirlYayText
 	text_waitbutton
 	text_end
 
@@ -149,20 +155,10 @@ CeladonMartRoofLittleGirlReceivedTM13Text:
 	text_waitbutton
 	text_end
 
-CeladonMartRoofLittleGirlYaySodaPopText:
-	text_far _CeladonMartRoofLittleGirlYaySodaPopText
-	text_waitbutton
-	text_end
-
 CeladonMartRoofLittleGirlReceivedTM48Text:
 	text_far _CeladonMartRoofLittleGirlReceivedTM48Text
 	sound_get_item_1
 	text_far _CeladonMartRoofLittleGirlTM48ExplanationText
-	text_waitbutton
-	text_end
-
-CeladonMartRoofLittleGirlYayLemonadeText:
-	text_far _CeladonMartRoofLittleGirlYayLemonadeText
 	text_waitbutton
 	text_end
 
@@ -220,10 +216,13 @@ CeladonMartRoofSuperNerdText:
 
 CeladonMartRoofLittleGirlText:
 	text_asm
+	ld hl, .ImThirstyText
+	rst _PrintText
 	call CeladonMartRoofScript_GetDrinksInBag
 	ld a, [wFilteredBagItemsCount]
 	and a
 	jr z, .noDrinksInBag
+	call DisplayTextPromptButton
 	ld a, 1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, .GiveHerADrinkText
@@ -232,11 +231,7 @@ CeladonMartRoofLittleGirlText:
 	ld a, [wCurrentMenuItem]
 	and a
 	call z, CeladonMartRoofScript_GiveDrinkToGirl
-	jr .done
 .noDrinksInBag
-	ld hl, .ImThirstyText
-	rst _PrintText
-.done
 	rst TextScriptEnd
 
 .ImThirstyText:

@@ -23,6 +23,3 @@ _CeladonMart5FSailorText::
 	line "DEFENSE!"
 	done
 
-_CeladonMart5FCurrentFloorSignText::
-	text "5F: DRUG STORE"
-	done

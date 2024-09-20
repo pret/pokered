@@ -46,6 +46,7 @@ _FightingDojoBlackbelt1BattleText::
 	line "shoes off!"
 	done
 
+_SilphCo3FRocketEndBattleText::
 _FightingDojoBlackbelt1EndBattleText::
 	text "I give"
 	line "up!"
@@ -126,5 +127,5 @@ _FightingDojoHitmonchanPokeBallText::
 
 _FightingDojoBetterNotGetGreedyText::
 	text "Better not get"
-	line "greedy..."
+	line "greedy<...>"
 	done

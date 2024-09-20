@@ -21,7 +21,7 @@ _FuchsiaBillsGrandpasHouseBillsGrandpaText::
 _FuchsiaBillsGrandpasHouseYoungsterText::
 	text "BILL files his"
 	line "own #MON data"
-	cont "on his PC!"
+	cont "on his <PC>!"
 
 	para "Did he show you?"
 	done

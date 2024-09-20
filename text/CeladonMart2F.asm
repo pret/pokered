@@ -1,7 +1,7 @@
 _CeladonMart2FMiddleAgedManText::
 	text "SUPER REPEL keeps"
 	line "weak #MON at"
-	cont "bay..."
+	cont "bay<...>"
 
 	para "Hmm, it's a more"
 	line "powerful REPEL!"
@@ -13,10 +13,3 @@ _CeladonMart2FGirlText::
 	cont "REVIVE."
 	done
 
-_CeladonMart2FCurrentFloorSignText::
-	text "Top Grade Items"
-	line "for Trainers!"
-
-	para "2F: TRAINER'S"
-	line "    MARKET"
-	done

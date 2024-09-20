@@ -3,6 +3,10 @@
 	const_export SEAFOAMISLANDSB4F_BOULDER2
 	const_export SEAFOAMISLANDSB4F_ARTICUNO
 	const_export SEAFOAMISLANDSB4F_ITEM1
+	const_export SEAFOAMISLANDSB4F_ANIMSPRITE1
+	const_export SEAFOAMISLANDSB4F_ANIMSPRITE2
+	const_export SEAFOAMISLANDSB4F_ANIMSPRITE3
+	const_export SEAFOAMISLANDSB4F_ANIMSPRITE4
 
 SeafoamIslandsB4F_Object:
 	db $7d ; border block
@@ -12,6 +16,7 @@ SeafoamIslandsB4F_Object:
 	warp_event 21, 17, SEAFOAM_ISLANDS_B3F, 7
 	warp_event 11,  7, SEAFOAM_ISLANDS_B3F, 2
 	warp_event 25,  4, SEAFOAM_ISLANDS_B3F, 3
+	warp_event 23,  5, SEAFOAM_ISLANDS_B3F, 3
 
 	def_bg_events
 	bg_event  9, 15, TEXT_SEAFOAMISLANDSB4F_BOULDERS_SIGN

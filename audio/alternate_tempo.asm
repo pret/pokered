@@ -24,14 +24,14 @@ Music_RivalAlternateTempo::
 	call PlayMusic
 	ld hl, wChannelCommandPointers
 	ld de, Music_MeetRival_Ch1_AlternateTempo
-	jp Audio1_OverwriteChannelPointer
+	jr Audio1_OverwriteChannelPointer
 
 ; applies both the alternate start and alternate tempo
 Music_RivalAlternateStartAndTempo::
 	call Music_RivalAlternateStart
 	ld hl, wChannelCommandPointers
 	ld de, Music_MeetRival_Ch1_AlternateStartAndTempo
-	jp Audio1_OverwriteChannelPointer
+	jr Audio1_OverwriteChannelPointer
 
 ; an alternate tempo for Cities1 which is used for the Hall of Fame room
 Music_Cities1AlternateTempo::
@@ -47,9 +47,9 @@ Music_Cities1AlternateTempo::
 	call PlayMusic
 	ld hl, wChannelCommandPointers
 	ld de, Music_Cities1_Ch1_AlternateTempo
-	jp Audio1_OverwriteChannelPointer
+	jr Audio1_OverwriteChannelPointer
 
 PlayArmoredMewtwoCry1::
 	ld de, SFX_Armored_Mewtwo_Cry1_Ch8
 	ld hl, wChannelCommandPointers + CHAN8 * 2
-	jp Audio1_OverwriteChannelPointer
+	jr Audio1_OverwriteChannelPointer

@@ -74,16 +74,19 @@ _Mansion1AfterBattleText4::
 	line "to get trapped!"
 	done
 
+_PokemonMansion2FSwitchText::
 _PokemonMansion1FSwitchText::
 	text "A secret switch!"
 
 	para "Press it?"
 	done
 
+_PokemonMansion2FSwitchPressedText::
 _PokemonMansion1FSwitchPressedText::
 	text "Who wouldn't?"
 	prompt
 
+_PokemonMansion2FSwitchNotPressedText::
 _PokemonMansion1FSwitchNotPressedText::
 	text "Not quite yet!"
 	done

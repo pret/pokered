@@ -193,7 +193,7 @@ _SchoolB1FLeftBookcaseA::
 	text_end
 _FlippedToARandomPage::
 	text "<PARA>Flipped to a"
-	line "random page...@"
+	line "random page<...>@"
 	text_end
 _SchoolB1FLeftBookcaseA2::
 	text "<PARA>UNEXPLAINED"

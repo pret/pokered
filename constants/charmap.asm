@@ -3,6 +3,13 @@
 ; Control characters (see home/text.asm)
 
 	charmap "<NULL>",    $00
+	charmap "the",       $41
+	charmap "you",       $42
+	charmap "<opponent>",$43
+	charmap "<user>",    $44
+	charmap "#MON",      $45 ; POKéMON
+	charmap "<TIPS>",    $46
+	charmap "<TEAM>",    $47
 	charmap "<BAGE>",    $48 ; PureRGBnote: ADDED: same as PAGE, but can watch more buttons than just A or B for being pressed
 	charmap "<PAGE>",    $49
 	charmap "<PKMN>",    $4a ; "<PK><MN>"
@@ -16,7 +23,7 @@
 	charmap "<RIVAL>",   $53 ; wRivalName
 	charmap "#",         $54 ; "POKé"
 	charmap "<CONT>",    $55
-	charmap "<……>",      $56 ; "……"
+	charmap "<...>",     $56 ; "..."
 	charmap "<DONE>",    $57
 	charmap "<PROMPT>",  $58
 	charmap "<TARGET>",  $59

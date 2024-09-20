@@ -750,8 +750,7 @@ HandleBlackOut::
 	ld hl, wd72e
 	res 5, [hl]
 	ld a, BANK(ResetStatusAndHalveMoneyOnBlackout) ; also BANK(PrepareForSpecialWarp) and BANK(SpecialEnterMap)
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call SetCurBank
 	call ResetStatusAndHalveMoneyOnBlackout
 	call PrepareForSpecialWarp
 	call PlayDefaultMusicFadeOutCurrent
@@ -786,8 +785,7 @@ HandleFlyWarpOrDungeonWarp::
 	res 5, [hl] ; forced to ride bike
 	call LeaveMapAnim
 	ld a, BANK(PrepareForSpecialWarp)
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call SetCurBank
 	call PrepareForSpecialWarp
 	jp SpecialEnterMap
 
@@ -1315,8 +1313,7 @@ LoadCurrentMapView::
 	ldh a, [hLoadedROMBank]
 	push af
 	ld a, [wTilesetBank] ; tile data ROM bank
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a ; switch to ROM bank that contains tile data
+	call SetCurBank ; switch to ROM bank that contains tile data
 	ld a, [wCurrentTileBlockMapViewPointer] ; address of upper left corner of current map view
 	ld e, a
 	ld a, [wCurrentTileBlockMapViewPointer + 1]
@@ -1397,9 +1394,7 @@ LoadCurrentMapView::
 	dec b
 	jr nz, .rowLoop2
 	pop af
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a ; restore previous ROM bank
-	ret
+	jp SetCurBank ; restore previous ROM bank
 
 AdvancePlayerSprite::
 	ld a, [wSpritePlayerStateData1YStepVector]
@@ -2252,8 +2247,7 @@ LoadMapHeader::
 	ldh a, [hLoadedROMBank]
 	push af
 	ld a, BANK(MapSongBanks)
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call SetCurBank
 	ld hl, MapSongBanks
 	add hl, bc
 	add hl, bc
@@ -2262,9 +2256,7 @@ LoadMapHeader::
 	ld a, [hl]
 	ld [wMapMusicROMBank], a ; music 2
 	pop af
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
-	ret
+	jp SetCurBank
 .getRemappedSpriteIDsThenFinishUp
 	ld d, h
 	ld e, l
@@ -2345,9 +2337,7 @@ LoadMapData::
 	;call PlayDefaultMusicFadeOutCurrent
 .restoreRomBank
 	pop af
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
-	ret
+	jp SetCurBank
 
 ; function to switch to the ROM bank that a map is stored in
 ; Input: a = map number
@@ -2364,8 +2354,7 @@ SwitchToMapRomBank::
 	ldh [hMapROMBank], a
 	call BankswitchBack
 	ldh a, [hMapROMBank]
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call SetCurBank
 	pop bc
 	pop hl
 	ret
@@ -2430,8 +2419,7 @@ LoadDestinationWarpPosition::
 	ldh a, [hLoadedROMBank]
 	push af
 	ld a, [wPredefParentBank]
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call SetCurBank
 	ld a, b
 	add a
 	add a
@@ -2442,9 +2430,7 @@ LoadDestinationWarpPosition::
 	ld de, wCurrentTileBlockMapViewPointer
 	rst _CopyData
 	pop af
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
-	ret
+	jp SetCurBank
 
 ; PureRGBnote: ADDED: code for setting blackout map on flying or entering a pokecenter (instead of just when healing pokemon)
 

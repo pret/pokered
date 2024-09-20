@@ -1,5 +1,5 @@
 _FuchsiaTreeDeleterText1::
-	text "Huh? ...Oh, Yes,"
+	text "Huh? <...>Oh, Yes,"
 	line "I'm the TREE"
 	cont "DELETER."
 
@@ -110,11 +110,11 @@ _FuchsiaTreeDeleterFinalText2::
 _FuchsiaTreeDeleterSnorlax::
 	text "SNORLAX: Snooore-"
 
-	para "..."
+	para "<...>"
 
-	para "..."
+	para "<...>"
 
-	para "..."
+	para "<...>"
 
 	para "-laaaaaaaaax@"
 	text_end

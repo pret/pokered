@@ -9,15 +9,13 @@ CheckForHiddenObjectOrBookshelfOrCardKeyDoor::
 	jr z, .nothingFound
 ; A button is pressed
 	ld a, BANK(CheckForHiddenObject)
-	ld [MBC1RomBank], a
-	ldh [hLoadedROMBank], a
+	call SetCurBank
 	call CheckForHiddenObject
 	ldh a, [hDidntFindAnyHiddenObject]
 	and a
 	jr nz, .hiddenObjectNotFound
 	ld a, [wHiddenObjectFunctionRomBank]
-	ld [MBC1RomBank], a
-	ldh [hLoadedROMBank], a
+	call SetCurBank
 	call hl_caller
 	xor a
 	jr .done
@@ -31,6 +29,4 @@ CheckForHiddenObjectOrBookshelfOrCardKeyDoor::
 .done
 	ldh [hItemAlreadyFound], a
 	pop af
-	ld [MBC1RomBank], a
-	ldh [hLoadedROMBank], a
-	ret
+	jp SetCurBank

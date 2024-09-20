@@ -1,7 +1,7 @@
 _BillsHouseBillImNotAPokemonText::
 	text "Hiya! I'm a"
-	line "#MON..."
-	cont "...No I'm not!"
+	line "#MON<...>"
+	cont "<...>No I'm not!"
 
 	para "Call me BILL!"
 	line "I'm a true blue"
@@ -22,7 +22,7 @@ _BillsHouseBillImNotAPokemonText::
 _BillsHouseBillUseSeparationSystemText::
 	text "When I'm in the"
 	line "TELEPORTER, go to"
-	cont "my PC and run the"
+	cont "my <PC> and run the"
 	cont "Cell Separation"
 	cont "System!"
 	done
@@ -49,7 +49,7 @@ _BillsHouseBillThankYouText::
 	cont "That's a bummer."
 
 	para "I've got to thank"
-	line "you... Oh here,"
+	line "you<...> Oh here,"
 	cont "maybe this'll do."
 	prompt
 
@@ -84,7 +84,7 @@ _BillsHouseBillCheckOutMyRarePokemonText::
 	text "BILL: Look, bud,"
 	line "just check out"
 	cont "some of my rare"
-	cont "#MON on my PC!"
+	cont "#MON on my <PC>!"
 	done
 
 _BillsHouseGardenInfo::

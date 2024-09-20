@@ -27,14 +27,11 @@ CheckHideMrFujiInPokemonTower:
 MrFujisHouseSuperNerdText:
 	text_asm
 	CheckEvent EVENT_RESCUED_MR_FUJI
-	jr nz, .rescued_mr_fuji
-	ld hl, .MrFujiIsntHereText
-	rst _PrintText
-	jr .done
-.rescued_mr_fuji
 	ld hl, .MrFujiHadBeenPrayingText
+	jr nz, .printDone
+	ld hl, .MrFujiIsntHereText
+.printDone
 	rst _PrintText
-.done
 	rst TextScriptEnd
 
 .MrFujiIsntHereText:
@@ -48,14 +45,11 @@ MrFujisHouseSuperNerdText:
 MrFujisHouseLittleGirlText:
 	text_asm
 	CheckEvent EVENT_RESCUED_MR_FUJI
-	jr nz, .rescued_mr_fuji
-	ld hl, .ThisIsMrFujisHouseText
-	rst _PrintText
-	jr .done
-.rescued_mr_fuji
 	ld hl, .PokemonAreNiceToHugText
+	jr nz, .printDone
+	ld hl, .ThisIsMrFujisHouseText
+.printDone
 	rst _PrintText
-.done
 	rst TextScriptEnd
 
 .ThisIsMrFujisHouseText:
@@ -70,37 +64,34 @@ MrFujisHousePsyduckText:
 	text_far _MrFujisHousePsyduckText
 	text_asm
 	ld a, PSYDUCK
-	call PlayCry
-	rst TextScriptEnd
+	jr MrFujisHousePlayCryDone
 
 MrFujisHouseNidorinoText:
 	text_far _MrFujisHouseNidorinoText
 	text_asm
 	ld a, NIDORINO
+	; fall through
+MrFujisHousePlayCryDone:
 	call PlayCry
 	rst TextScriptEnd
 
 MrFujisHouseMrFujiText:
 	text_asm
 	CheckEvent EVENT_GOT_POKE_FLUTE
-	jr nz, .got_item
+	ld hl, .HasMyFluteHelpedYouText
+	jr nz, .printDone
 	ld hl, .IThinkThisMayHelpYourQuestText
 	rst _PrintText
 	lb bc, POKE_FLUTE, 1
 	call GiveItem
-	jr nc, .bag_full
+	ld hl, .PokeFluteNoRoomText
+	jr nc, .printDone
 	ld hl, .ReceivedPokeFluteText
 	rst _PrintText
 	SetEvent EVENT_GOT_POKE_FLUTE
-	jr .done
-.bag_full
-	ld hl, .PokeFluteNoRoomText
+	rst TextScriptEnd
+.printDone
 	rst _PrintText
-	jr .done
-.got_item
-	ld hl, .HasMyFluteHelpedYouText
-	rst _PrintText
-.done
 	rst TextScriptEnd
 
 .IThinkThisMayHelpYourQuestText:

@@ -5,5 +5,5 @@ _DiglettsCaveRoute2FishingGuruText::
 
 	para "If a #MON's"
 	line "FLASH could light"
-	cont "it up..."
+	cont "it up<...>"
 	done

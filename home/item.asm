@@ -22,14 +22,11 @@ TossItem::
 	ldh a, [hLoadedROMBank]
 	push af
 	ld a, BANK(TossItem_)
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call SetCurBank
 	call TossItem_
 	pop de
 	ld a, d
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
-	ret
+	jp SetCurBank
 
 ; checks if an item is a key item
 ; INPUT:

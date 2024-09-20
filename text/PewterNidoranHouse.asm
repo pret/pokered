@@ -21,7 +21,7 @@ _PewterNidoranHouseMiddleAgedManText::
 	cont "in battle!"
 
 	para "If only we had"
-	line "some BADGEs..."
+	line "some BADGEs<...>"
 	done
 
 _PewterHouse1Text4Color::

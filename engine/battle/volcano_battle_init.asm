@@ -361,6 +361,8 @@ CheckSpecialFaintText::
 	jr nz, .yes
 	CheckEvent EVENT_BATTLING_VOLCANO_MAGMAR
 	jr nz, .yes
+	CheckEvent EVENT_DRAGONAIR_EVENT_BATTLING_CLOYSTER
+	jr nz, .yes
 	ld a, [wCurMap]
 	cp POKEMON_TOWER_B1F
 	jr z, .yes

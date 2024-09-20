@@ -13,7 +13,7 @@ TextCommandPromptMultiButton::
 	ld [hl], " "
 	ld a, d
 	and a
-	ret nz ; exit if they pressed one of the specified watched buttons
+	jr nz, .interrupted ; exit if they pressed one of the specified watched buttons
 	; otherwise they pressed A, so clear the text box and continue the script
 	push de
 	hlcoord 1, 10
@@ -22,6 +22,10 @@ TextCommandPromptMultiButton::
 	ld c, 20
 	rst _DelayFrames
 	pop de
+	ret
+.interrupted
+	; if we're in a TEXT_CALL this will indicate higher up that the text printing was interrupted by a special button press
+	SetFlag FLAG_INTERRUPTED_TEXT
 	ret
 
 ; waits for A being pressed or specific watched buttons, if A was pressed plays a sound, otherwise just exits

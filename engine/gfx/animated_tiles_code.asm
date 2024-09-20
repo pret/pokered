@@ -6,6 +6,8 @@ AnimateTiles::
 	ld a, [wCurMap]
 	cp DIGLETTS_CAVE
 	jp z, ProximityDigletts
+	cp SEAFOAM_ISLANDS_1F
+	jp z, Seafoam1FAnimatedTiles
 	ld a, [wCurMapTileset]
 	cp CAVERN
 	jr z, .seafoamCurrents
@@ -339,6 +341,11 @@ ReactorAnimatedTiles:
 
 ProximityDigletts:
 	jpfar ProximityDigletts2
+
+Seafoam1FAnimatedTiles:
+	callfar Seafoam1FAnimatedTiles2
+	jp nc, AnimateWaterTile
+	ret
 
 ;	ld hl, LavaBubble1
 ;	jr z, .copy

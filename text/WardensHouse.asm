@@ -43,13 +43,6 @@ _WardensHouseWardenThanksText::
 	cont "your trouble."
 	prompt
 
-_WardensHouseWardenReceivedHM04Text::
-	text "<PLAYER> received"
-	line "@"
-	text_ram wStringBuffer
-	text "!@"
-	text_end
-
 _WardensHouseWardenHM04ExplanationText::
 	text "WARDEN: HM04"
 	line "teaches STRENGTH!"

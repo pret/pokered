@@ -263,7 +263,7 @@ ChampArenaLanceMoveset:
 	db BODY_SLAM
 	; dragonair
 	db THUNDER_WAVE
-	db BODY_SLAM
+	db ICE_BEAM
 	db FLAMETHROWER
 	db FLASH
 	; seadra
@@ -335,11 +335,11 @@ ChampArenaLoreleiMoveset:
 	db BLIZZARD
 	db THUNDERPUNCH
 	db PSYCHIC_M
-	; vaporeon
+	; winter dragonair
 	db MEGA_DRAIN
 	db SURF
 	db ICE_BEAM
-	db SWIFT
+	db THUNDERBOLT
 	; lapras
 	db BLIZZARD
 	db HYDRO_PUMP

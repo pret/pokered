@@ -101,7 +101,7 @@
 	const KABUTOPS           ; $5B
 	const HORSEA             ; $5C
 	const SEADRA             ; $5D
-	const_skip               ; $5E ; icy dragonair
+	const WINTER_DRAGONAIR   ; $5E
 	const_skip               ; $5F
 	const SANDSHREW          ; $60
 	const SANDSLASH          ; $61

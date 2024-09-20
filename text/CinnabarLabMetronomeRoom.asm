@@ -1,17 +1,10 @@
 _CinnabarLabMetronomeRoomScientist1Text::
 	text "Tch-tch-tch!"
-	line "I made a cool TM!"
+	line "I made a cool <TM>!"
 
 	para "It can cause all"
 	line "kinds of fun!"
 	prompt
-
-_CinnabarLabMetronomeRoomScientist1ReceivedTM35Text::
-	text "<PLAYER> received"
-	line "@"
-	text_ram wStringBuffer
-	text "!@"
-	text_end
 
 _CinnabarLabMetronomeRoomScientist1TM35ExplanationText::
 	text "Tch-tch-tch!"
@@ -24,7 +17,7 @@ _CinnabarLabMetronomeRoomScientist1TM35ExplanationText::
 
 	para "I love that move"
 	line "so much, I made a"
-	cont "TM to teach it to"
+	cont "<TM> to teach it to"
 	cont "other #MON!"
 
 	para "When in doubt:"
@@ -47,7 +40,7 @@ _CinnabarLabMetronomeRoomPCText::
 	text "There's an e-mail"
 	line "message!"
 
-	para "..."
+	para "<...>"
 
 	para "The 3 legendary"
 	line "bird #MON are"
@@ -62,9 +55,9 @@ _CinnabarLabMetronomeRoomPCText::
 	cont "to CERULEAN."
 
 	para "From: #MON"
-	line "RESEARCH TEAM"
+	line "RESEARCH <TEAM>"
 
-	para "..."
+	para "<...>"
 	done
 
 _CinnabarLabMetronomeRoomAmberPipeText::

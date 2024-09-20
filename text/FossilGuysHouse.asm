@@ -67,13 +67,13 @@ _FossilGuyCameBackFossil::
 	line "you gave me."
 
 	para "Not to burst your"
-	line "bubble, but..."
+	line "bubble, but<...>"
 
-	para "..."
+	para "<...>"
 
-	para "...."
+	para "<...>."
 
-	para "....."
+	para "<...>.."
 
 	para "We revived it"
 	line "perfectly into"
@@ -233,7 +233,7 @@ _FossilGuysComputer1::
 	para "What's this?"
 
 	para "His desktop"
-	line "background..."
+	line "background<...>"
 
 	para "It's a picture"
 	line "of SABRINA in a"

@@ -47,8 +47,7 @@ GetName::
 .otherEntries
 	; 2-7 = other names
 	ld a, [wPredefBank]
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call SetCurBank
 	ld a, [wNameListType]
 	dec a
 	add a
@@ -91,6 +90,4 @@ GetName::
 	pop bc
 	pop hl
 	pop af
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
-	ret
+	jp SetCurBank

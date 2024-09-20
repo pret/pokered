@@ -17,7 +17,6 @@ _LabColorChangerGreetingYes::
 	line "ein genie!"
 	prompt
 	
-
 _LabColorChangerGreetingNo::
 	text "Das ist okay!"
 	prompt

@@ -1113,8 +1113,7 @@ CinnabarVolcanoRubyTextCommon:
 	call WaitForSoundToFinish
 	xor a
 	ld [wMuteAudioAndPauseMusic], a
-	ld hl, TextScriptPromptButton
-	call TextCommandProcessor
+	call DisplayTextPromptButton
 	ld hl, .drillPoweredUp
 	rst _PrintText
 	rst TextScriptEnd
@@ -1252,8 +1251,7 @@ CinnabarVolcanoBombRockText:
 
 PlayUnusedFanfareThenTextPrompt:
 	call PlayUnusedFanfare
-	ld hl, TextScriptPromptButton
-	jp TextCommandProcessor
+	jp DisplayTextPromptButton
 
 PlayUnusedFanfare::
 	; play success sound
@@ -1454,8 +1452,7 @@ CinnabarVolcanoHungryGravelerText:
 	call PlayCry
 	CheckExtraHideShowState HS_VOLCANO_RUBY_2
 	jr z, .noRockSalts
-	ld hl, TextScriptPromptButton
-	call TextCommandProcessor
+	call DisplayTextPromptButton
 	ld hl, .giveRockSalts
 	rst _PrintText
 	call YesNoChoice
@@ -1509,8 +1506,7 @@ CinnabarVolcanoSickRhydonText:
 	CheckExtraHideShowState HS_VOLCANO_RUBY_3
 	jr z, .noLimestone
 	call WaitForSoundToFinish
-	ld hl, TextScriptPromptButton
-	call TextCommandProcessor
+	call DisplayTextPromptButton
 	ld hl, .giveLimestone
 	rst _PrintText
 	call YesNoChoice
@@ -1523,8 +1519,7 @@ CinnabarVolcanoSickRhydonText:
 	ld de, SFX_Drill
 	call PlayNewSoundChannel8
 	call WaitForSoundToFinish
-	ld hl, TextScriptPromptButton
-	call TextCommandProcessor
+	call DisplayTextPromptButton
 	ld hl, .antacid
 	rst _PrintText
 	call PlayUnusedFanfareThenTextPrompt
@@ -1584,8 +1579,7 @@ CinnabarVolcanoBossMagmarText:
 	rst _PrintText
 	ld a, MAGMAR
 	call PlayCry
-	ld hl, TextScriptPromptButton
-	call TextCommandProcessor
+	call DisplayTextPromptButton
 	ld hl, .battleQuestion
 	rst _PrintText
 	call YesNoChoice
@@ -2416,7 +2410,7 @@ NPCSpriteQuickSpinArbitrary:
 NPCQuickSpinFacings:
 	db SPRITE_FACING_LEFT, SPRITE_FACING_UP, SPRITE_FACING_RIGHT, SPRITE_FACING_DOWN
 
-PlayerQuickSpin:
+PlayerQuickSpin::
 	ld d, 8
 .outerLoop
 	ld hl, PlayerQuickSpinFacings

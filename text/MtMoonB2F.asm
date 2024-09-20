@@ -5,7 +5,7 @@ _MtMoonB2FDomeFossilYouWantText::
 
 _MtMoonB2FHelixFossilYouWantText::
 	text "You want the"
-	line "HELIX FOSSIL?"
+	line "HELIX FOSSIL?" ; TODO: name buffer
 	done
 
 _MtMoonB2FReceivedFossilText::
@@ -122,7 +122,7 @@ _MtMoonB2FSuperNerdThenThisIsMineText::
 	text_end
 
 _MtMoonB2FRocket1BattleText::
-	text "TEAM ROCKET will"
+	text "<TEAM><ROCKET> will"
 	line "find the fossils,"
 	cont "revive and sell"
 	cont "them for cash!"
@@ -135,12 +135,12 @@ _MtMoonB2FRocket1EndBattleText::
 
 _MtMoonB2FRocket1AfterBattleText::
 	text "You made me mad!"
-	line "TEAM ROCKET will"
+	line "<TEAM><ROCKET> will"
 	cont "blacklist you!"
 	done
 
 _MtMoonB2FRocket2BattleText::
-	text "We, TEAM ROCKET,"
+	text "We, <TEAM><ROCKET>,"
 	line "are #MON"
 	cont "gangsters!"
 	done

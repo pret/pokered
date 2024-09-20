@@ -11,9 +11,7 @@ ReloadMapData::
 	call EnableLCD
 	callfar LoadExtraTiles ; PureRGBnote: ADDED: in some maps we overwrite unused tiles for the given map.
 	pop af
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
-	ret
+	jp SetCurBank
 
 ; reloads tileset tile patterns
 ReloadTilesetTilePatterns::
@@ -25,9 +23,7 @@ ReloadTilesetTilePatterns::
 	call LoadTilesetTilePatternData
 	call EnableLCD
 	pop af
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
-	ret
+	jp SetCurBank
 
 ; shows the town map and lets the player choose a destination to fly to
 ChooseFlyDestination::

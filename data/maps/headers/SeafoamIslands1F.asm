@@ -1,2 +1,2 @@
-	map_header SeafoamIslands1F, SEAFOAM_ISLANDS_1F, CAVERN, 0
+	map_header SeafoamIslands1F, SEAFOAM_ISLANDS_1F, CAVERN, DEFER_SHOWING_MAP | SPECIAL_ANIMATION_MAP
 	end_map_header

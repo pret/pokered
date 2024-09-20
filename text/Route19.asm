@@ -93,11 +93,6 @@ _Route19Swimmer5BattleText::
 	cont "have it if I win?"
 	done
 
-_Route19Swimmer5EndBattleText::
-	text "Oh!"
-	line "I lost!"
-	prompt
-
 _Route19Swimmer5AfterBattleText::
 	text "It's still a long"
 	line "way to go to"
@@ -131,7 +126,7 @@ _Route19Swimmer7EndBattleText::
 
 _Route19Swimmer7AfterBattleText::
 	text "I got a cramp!"
-	line "Glub, glub..."
+	line "Glub, glub<...>"
 	done
 
 _Route19Swimmer8BattleText::
@@ -141,7 +136,7 @@ _Route19Swimmer8BattleText::
 
 _Route19Swimmer8EndBattleText::
 	text "I'm"
-	line "exhausted..."
+	line "exhausted<...>"
 	prompt
 
 _Route19Swimmer8AfterBattleText::

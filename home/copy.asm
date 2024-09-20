@@ -4,13 +4,10 @@ FarCopyData::
 	ldh a, [hLoadedROMBank]
 	push af
 	ld a, [wBuffer]
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call SetCurBank
 	rst _CopyData
 	pop af
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
-	ret
+	jp SetCurBank
 
 CopyData::
 ; Copy bc bytes from hl to de.

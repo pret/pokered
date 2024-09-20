@@ -100,6 +100,7 @@ SpriteSheetPointerTable:
 	overworld_sprite GravelerSprite, 12                ; SPRITE_GRAVELER
 	overworld_sprite NothingSprite, 12                 ; SPRITE_NOTHING
 	overworld_sprite GhostSprite, 12                  ; SPRITE_GHOST
+	overworld_sprite SnakeSprite, 12                  ; SPRITE_SNAKE
 	overworld_sprite PokeBallSprite, 4                ; SPRITE_POKE_BALL
 	overworld_sprite FossilSprite, 4                  ; SPRITE_FOSSIL
 	overworld_sprite BoulderSprite, 4                 ; SPRITE_BOULDER
@@ -114,4 +115,5 @@ SpriteSheetPointerTable:
 	overworld_sprite DarkChannelerSprite, 4           ; SPRITE_DARK_CHANNELER
 	overworld_sprite BoomboxSprite, 4                 ; SPRITE_BOOMBOX
 	overworld_sprite NothingSprite, 4                 ; SPRITE_NOTHING_STILL
+	overworld_sprite ScubaSuitSprite, 4               ; SPRITE_SCUBA_DIVER
 	assert_table_length NUM_SPRITES

@@ -155,18 +155,18 @@ _Route13CooltrainerM3EndBattleText::
 _Route13CooltrainerM3AfterBattleText::
 	text "I wish I could"
 	line "fly like a"
-	cont "FEAROW..."
+	cont "FEAROW<...>"
 	done
 
 _Route13TrainerTips1Text::
-	text "TRAINER TIPS"
+	text "<TIPS>"
 
 	para "Look to the left"
 	line "of that post!"
 	done
 
 _Route13TrainerTips2Text::
-	text "TRAINER TIPS"
+	text "<TIPS>"
 
 	para "Use SELECT to"
 	line "switch items in"

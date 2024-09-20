@@ -31,7 +31,9 @@ TMKidGreet6::
 	text_end
 
 SaffronMartTMKidFlavor:
+	text_far _TMKidBringingTMsAnyCost
 	text_far _SaffronMartTMKidFlavor
+	text_far _TMKidWantSomeTMsText
 	text_end
 
 TMKidQuick6::

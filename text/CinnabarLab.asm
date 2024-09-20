@@ -13,6 +13,7 @@ _CinnabarLabPhotoText::
 	cont "DR.FUJI!"
 	done
 
+; TODO: genericize
 _CinnabarLabMeetingRoomSignText::
 	text "#MON LAB"
 	line "Meeting Room"

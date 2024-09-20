@@ -153,8 +153,7 @@ ENDC
 	ld a, SFX_SHRINK
 	rst _PlaySound
 	pop af
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call SetCurBank
 	ld c, 4
 	rst _DelayFrames
 	ld de, RedSprite
@@ -182,8 +181,7 @@ ENDC
 	ld [wNewSoundID], a
 	rst _PlaySound
 	pop af
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call SetCurBank
 IF DEF(_DEBUG)
 	ld a, [wd732]
 	bit 1, a

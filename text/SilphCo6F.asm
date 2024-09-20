@@ -1,5 +1,5 @@
 _SilphCo6FSilphWorkerM1TookOverTheBuildingText::
-	text "The ROCKETs came"
+	text "The <ROCKET>s came"
 	line "and took over the"
 	cont "building!"
 	done
@@ -31,14 +31,14 @@ _SilphCo6FSilphWorkerF1HaveToMarryHimText::
 	done
 
 _SilphCo6FSilphWorkerF2TeamRocketConquerWorldText::
-	text "TEAM ROCKET is"
+	text "<TEAM><ROCKET> is"
 	line "trying to conquer"
 	cont "the world with"
 	cont "#MON!"
 	done
 
 _SilphCo6FSilphWorkerF2TeamRocketRanText::
-	text "TEAM ROCKET ran"
+	text "<TEAM><ROCKET> ran"
 	line "because of you!"
 	done
 
@@ -55,9 +55,12 @@ _SilphCo6FSilphWorkerM3WorkForSilphText::
 	cont "get older!"
 	done
 
+_SilphCo9FRocket2BattleText::
+_SilphCo8FRocket2BattleText::
+_SilphCo7FRocket2BattleText::
 _SilphCo6FRocket1BattleText::
 	text "I am one of the 4"
-	line "ROCKET BROTHERS!"
+	line "<ROCKET> BROTHERS!"
 	done
 
 _SilphCo6Rocket1EndBattleText::
@@ -92,7 +95,7 @@ _SilphCo6FScientistAfterBattleText::
 
 _SilphCo6FRocket2BattleText::
 	text "You dare betray"
-	line "TEAM ROCKET?"
+	line "<TEAM><ROCKET>?"
 	done
 
 _SilphCo6FRocket2EndBattleText::

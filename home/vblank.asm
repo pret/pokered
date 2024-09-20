@@ -12,8 +12,7 @@ VBlank::
 	ld a, [wDelayFrameBank]
 	and a
 	jr z, .no_delay_bank
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call SetCurBank
 .no_delay_bank
 ;;;;;;;;;;
 
@@ -78,8 +77,7 @@ VBlank::
 	call z, ReadJoypad
 
 	ld a, [wVBlankSavedROMBank]
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call SetCurBank
 
 	pop hl
 	pop de

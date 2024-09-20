@@ -139,7 +139,7 @@ _ReceivedHyperBallText::
 	text "Here's your well-"
 	line "earned prize!!"
 
-	para "<PLAYER> received"
+	para "<PLAYER> received" ; TODO: use generic message
 	line "a @"
 	text_ram wStringBuffer
 	text "!@"

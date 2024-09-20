@@ -10,7 +10,7 @@ _SaffronGateGuardGeeImThirstyText::
 _SaffronGateGuardImParchedText::
 	text "Whoa, boy!"
 	line "I'm parched!"
-	cont "..."
+	cont "<...>"
 	cont "Huh? I can have"
 	cont "this drink?"
 	cont "Gee, thanks!@"
@@ -19,13 +19,13 @@ _SaffronGateGuardImParchedText::
 _SaffronGateGuardYouCanGoOnThroughText::
 	text_start
 
-	para "..."
-	line "Glug glug..."
-	cont "..."
-	cont "Gulp..."
+	para "<...>"
+	line "Glug glug<...>"
+	cont "<...>"
+	cont "Gulp<...>"
 	cont "If you want to go"
-	cont "to SAFFRON CITY..."
-	cont "..."
+	cont "to SAFFRON CITY<...>"
+	cont "<...>"
 	cont "You can go on"
 	cont "through. I'll"
 	cont "share this with"

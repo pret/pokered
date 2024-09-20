@@ -164,8 +164,8 @@ _GhostMarowakAfterGiovanniText::
 	cont "through the"
 	cont "KARATE KING."
 	para "Thank you for"
-	line "defeating TEAM"
-	cont "ROCKET."
+	line "defeating <TEAM>"
+	cont "<ROCKET>."
 	para "It was my last"
 	line "wish to help get"
 	cont "rid of them."
@@ -375,7 +375,7 @@ _PokemonTowerGhostMarowakAfterText::
 	para "Don't be sad."
 	para "Enjoy life while"
 	line "you can-"
-	para "Goodbye..."
+	para "Goodbye<...>"
 	prompt
 
 _PokemonTowerCatacombsDoneText::

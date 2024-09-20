@@ -185,7 +185,7 @@ _CeruleanRocketHouseB1FLeftPaperText::
 
 _CeruleanRocketHouseB1FRightPaperText::
 	text "An inventory list"
-	line "for TEAM ROCKET"
+	line "for <TEAM><ROCKET>"
 	cont "uniforms."
 	para "Apparently a big"
 	line "order of female"
@@ -199,7 +199,7 @@ _CeruleanRocketHouseB1FBeforeTradeText::
 	line "this place so"
 	cont "deserted before."
 	para "Everyone left."
-	para "Hey..."
+	para "Hey<...>"
 	para "Can I ask you"
 	line "a question?"
 	prompt
@@ -208,12 +208,12 @@ _CeruleanRocketHouseB1FAfterTradeText::
 	text "I once asked"
 	line "GIOVANNI what"
 	cont "his goals with"
-	cont "TEAM ROCKET were."
+	cont "<TEAM><ROCKET> were."
 	para "I remember what"
 	line "he said exactly:"
 
-	para "TEAM ROCKET is"
-	line "but a SPROCKET"
+	para "<TEAM><ROCKET> is"
+	line "but a SP<ROCKET>"
 	cont "in my POCKET!"
 	
 	para "That really"
@@ -225,7 +225,7 @@ _CeruleanRocketHouseB1FAfterTradeText::
 	
 	para "So it's time"
 	line "I take the"
-	cont "SPROCKET in my"
+	cont "SP<ROCKET> in my"
 	cont "own POCKET and"
 	cont "HOCK it."
 	done

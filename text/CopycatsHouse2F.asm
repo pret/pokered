@@ -26,13 +26,6 @@ _CopycatsHouse2FCopycatTM31PreReceiveText::
 	line "this, then!"
 	prompt
 
-_CopycatsHouse2FCopycatReceivedTM31Text::
-	text "<PLAYER> received"
-	line "@"
-	text_ram wStringBuffer
-	text "!@"
-	text_end
-
 _CopycatsHouse2FCopycatTM31Explanation1Text::
 	text_start
 	para "@"
@@ -51,7 +44,7 @@ _CopycatsHouse2FCopycatTM31Explanation1Text::
 
 _CopycatsHouse2FCopycatTM31Explanation2Text::
 	text "<PLAYER>: Hi!"
-	line "Thanks for TM50!"
+	line "Thanks for <TM>50!"
 
 	para "<PLAYER>: Pardon?"
 
@@ -90,7 +83,7 @@ _CopycatsHouse2FSNESText::
 	done
 
 _CopycatsHouse2FPCMySecretsText::
-	text "..."
+	text "<...>"
 
 	para "My Secrets!"
 

@@ -17,22 +17,15 @@ _PewterGymBrockWaitTakeThisText::
 	line "with you!"
 	done
 
-_PewterGymReceivedTM34Text::
-	text "<PLAYER> received"
-	line "@"
-	text_ram wStringBuffer
-	text "!@"
-	text_end
-
 _TM34ExplanationText::
 	text_start
 
-	para "A TM contains a"
+	para "A <TM> contains a"
 	line "technique that"
 	cont "can be taught to"
 	cont "#MON!"
 
-	para "A TM is good only"
+	para "A <TM> is good only"
 	line "once! So when you"
 	cont "use one to teach"
 	cont "a new technique,"

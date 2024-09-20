@@ -18,7 +18,7 @@ _CeruleanGymMistyPreBattleText::
 	done
 
 _CeruleanGymMistyTM11ExplanationText::
-	text "TM11 teaches"
+	text "<TM>11 teaches"
 	line "BUBBLEBEAM!"
 
 	para "Use it on an"
@@ -42,19 +42,7 @@ _CeruleanGymMistyCascadeBadgeInfoText::
 	cont "open new paths!"
 
 	para "You can also have"
-	line "my favorite TM!"
-	done
-
-_CeruleanGymMistyReceivedTM11Text::
-	text "<PLAYER> received"
-	line "@"
-	text_ram wStringBuffer
-	text "!@"
-	text_end
-
-_CeruleanGymMistyTM11NoRoomText::
-	text "You better make"
-	line "room for this!"
+	line "my favorite <TM>!"
 	done
 
 _CeruleanGymMistyReceivedCascadeBadgeText::
@@ -136,7 +124,7 @@ _CeruleanGymGymGuideBeatMistyText::
 
 _GymGuideMoreApexChipText::
 	text "I've got two more"
-	line "APEX CHIPs,here!"
+	line "APEX CHIPs, here!"
 	prompt
 
 _CeruleanGymGuideApexChipWaterText::

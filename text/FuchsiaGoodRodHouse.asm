@@ -27,23 +27,16 @@ _LastTwoGurusTextAlreadyHaveSuperRod::
 
 	para "That's my job!"
 
-	para "What to do..."
+	para "What to do<...>"
 
 	para "Hmm, maybe this"
 	line "will be useful"
 	cont "to you instead?"
 	prompt
 
-_LastTwoGurusReceivedItemText::
-	text "<PLAYER> received"
-	line "a @"
-	text_ram wStringBuffer
-	text "!@"
-	text_end
-
 _LastTwoGurusTextNo::
-	text "Oh... That's so"
-	line "disappointing..."
+	text "Oh<...> That's so"
+	line "disappointing<...>"
 	done
 
 _LastTwoGurusTextBagFull::

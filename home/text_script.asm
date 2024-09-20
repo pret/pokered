@@ -143,8 +143,7 @@ CloseTextDisplaySpriteUpdateLoop:
 
 CloseTextDisplayPart2:
 	ld a, BANK(InitMapSprites)
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call SetCurBank
 	call InitMapSprites ; reload sprite tile pattern data (since it was partially overwritten by text tile patterns)
 	ld hl, wFontLoaded
 	res 0, [hl]
@@ -153,8 +152,7 @@ CloseTextDisplayPart2:
 	call z, LoadPlayerSpriteGraphics
 	call LoadCurrentMapView
 	pop af
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call SetCurBank
 	jp UpdateSprites
 
 DisplayPokemartDialogue::
@@ -227,3 +225,6 @@ DisplayRepelWoreOffText::
 	callfar UseAnotherRepel ; PureRGBnote: ADDED: when repel wears off ask to use another if available
 	jp CloseTextDisplay
 	
+DisplayTextPromptButton::
+	ld hl, TextScriptPromptButton
+	jp TextCommandProcessor

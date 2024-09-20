@@ -91,12 +91,7 @@ TalkToTrainer::
 	call StoreTrainerHeaderPointer
 	xor a
 	call ReadTrainerHeaderInfo     ; read flag's bit
-	ld a, $2
-	call ReadTrainerHeaderInfo     ; read flag's byte ptr
-	ld a, [wTrainerHeaderFlagBit]
-	ld c, a
-	ld b, FLAG_TEST
-	call TrainerFlagAction      ; read trainer's flag
+	call TrainerFlagActionTest      ; read trainer's flag
 	ld a, c
 	and a
 	jr z, .trainerNotYetFought     ; test trainer's flag
@@ -194,10 +189,6 @@ EndTrainerBattle::
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, ResetButtonPressedAndMapScript
-	ld a, $2
-	call ReadTrainerHeaderInfo
-	ld a, [wTrainerHeaderFlagBit]
-	ld c, a
 	ld b, FLAG_SET
 	call TrainerFlagAction   ; flag trainer as fought
 	ld a, [wEnemyMonOrTrainerClass]
@@ -277,12 +268,7 @@ CheckForEngagingTrainers::
 	ld [wTrainerHeaderFlagBit], a
 	cp -1
 	ret z
-	ld a, $2
-	call ReadTrainerHeaderInfo       ; read trainer flag's byte ptr
-	ld b, FLAG_TEST
-	ld a, [wTrainerHeaderFlagBit]
-	ld c, a
-	call TrainerFlagAction        ; read trainer flag
+	call TrainerFlagActionTest        ; read trainer flag
 	ld a, c
 	and a ; has the trainer already been defeated?
 	jr nz, .continue
@@ -352,16 +338,14 @@ PrintEndBattleText::
 	ldh a, [hLoadedROMBank]
 	push af
 	ld a, [wEndBattleTextRomBank]
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call SetCurBank
 	push hl
 	farcall SaveTrainerName
 	ld hl, TrainerEndBattleText
 	rst _PrintText
 	pop hl
 	pop af
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call SetCurBank
 	farcall FreezeEnemyTrainerSprite
 	jp WaitForSoundToFinish
 
@@ -382,6 +366,16 @@ TrainerEndBattleText::
 	call GetSavedEndBattleTextPointer
 	call TextCommandProcessor
 	rst TextScriptEnd
+
+TrainerFlagActionTest::
+	ld b, FLAG_TEST
+	; fall through
+TrainerFlagAction::
+	ld a, $2
+	call ReadTrainerHeaderInfo     ; read flag's byte ptr (does not change b register)
+	ld a, [wTrainerHeaderFlagBit]
+	ld c, a
+	predef_jump FlagActionPredef
 
 ; only engage with the trainer if the player is not already
 ; engaged with another trainer

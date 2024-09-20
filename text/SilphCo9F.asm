@@ -25,7 +25,7 @@ _SilphCo9FRocket1EndBattleText::
 _SilphCo9FRocket1AfterBattleText::
 	text "If I had started"
 	line "as a trainer at"
-	cont "your age..."
+	cont "your age<...>"
 	done
 
 _SilphCo9FScientistBattleText::
@@ -44,11 +44,6 @@ _SilphCo9FScientistAfterBattleText::
 	line "spots does work!"
 	cont "Think about"
 	cont "element types!"
-	done
-
-_SilphCo9FRocket2BattleText::
-	text "I am one of the 4"
-	line "ROCKET BROTHERS!"
 	done
 
 _SilphCo9FRocket2EndBattleText::

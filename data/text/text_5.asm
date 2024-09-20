@@ -86,7 +86,7 @@ _PocketAbraFlavorText5::
 _PocketAbraNo::
 	text_ram wPocketAbraNick
 	text " looks"
-	line "disappointed..."
+	line "disappointed<...>"
 	prompt
 
 _WarpToLastPokemonCenterText::
@@ -165,7 +165,7 @@ _SentToBoxText::
 	cont "sent to #MON"
 	cont "BOX @"
 	text_ram wStringBuffer
-	text " on PC!"
+	text " on <PC>!"
 	prompt
 
 _BoxIsFullText::

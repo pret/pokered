@@ -288,11 +288,6 @@ INCLUDE "scripts/PokemonMansion1F.asm"
 INCLUDE "data/maps/objects/PokemonMansion1F.asm"
 PokemonMansion1F_Blocks: INCBIN "maps/PokemonMansion1F.blk"
 
-INCLUDE "data/maps/headers/RockTunnel1F.asm"
-INCLUDE "scripts/RockTunnel1F.asm"
-INCLUDE "data/maps/objects/RockTunnel1F.asm"
-RockTunnel1F_Blocks: INCBIN "maps/RockTunnel1F.blk"
-
 INCLUDE "data/maps/headers/SeafoamIslands1F.asm"
 INCLUDE "scripts/SeafoamIslands1F.asm"
 INCLUDE "data/maps/objects/SeafoamIslands1F.asm"
@@ -368,11 +363,6 @@ INCLUDE "data/maps/headers/CeruleanCaveB1F.asm"
 INCLUDE "scripts/CeruleanCaveB1F.asm"
 INCLUDE "data/maps/objects/CeruleanCaveB1F.asm"
 CeruleanCaveB1F_Blocks: INCBIN "maps/CeruleanCaveB1F.blk"
-
-INCLUDE "data/maps/headers/RockTunnelB1F.asm"
-INCLUDE "scripts/RockTunnelB1F.asm"
-INCLUDE "data/maps/objects/RockTunnelB1F.asm"
-RockTunnelB1F_Blocks: INCBIN "maps/RockTunnelB1F.blk"
 
 INCLUDE "data/maps/headers/SeafoamIslandsB1F.asm"
 INCLUDE "scripts/SeafoamIslandsB1F.asm"
@@ -1003,6 +993,16 @@ INCLUDE "data/maps/headers/SilphCoElevator.asm"
 INCLUDE "scripts/SilphCoElevator.asm"
 INCLUDE "data/maps/objects/SilphCoElevator.asm"
 SilphCoElevator_Blocks: INCBIN "maps/SilphCoElevator.blk"
+
+INCLUDE "data/maps/headers/RockTunnel1F.asm"
+INCLUDE "scripts/RockTunnel1F.asm"
+INCLUDE "data/maps/objects/RockTunnel1F.asm"
+RockTunnel1F_Blocks: INCBIN "maps/RockTunnel1F.blk"
+
+INCLUDE "data/maps/headers/RockTunnelB1F.asm"
+INCLUDE "scripts/RockTunnelB1F.asm"
+INCLUDE "data/maps/objects/RockTunnelB1F.asm"
+RockTunnelB1F_Blocks: INCBIN "maps/RockTunnelB1F.blk"
 
 ;;;;;
 

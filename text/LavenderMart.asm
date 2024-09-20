@@ -30,12 +30,7 @@ _LavenderMartCooltrainerMNuggetText::
 	done
 
 _LavenderMartTMKidFlavor::
-	text "Bringing TMs to"
-	line "the place they"
-	cont "should be, at"
-	cont "any cost!"
-
-	para "Me and my dad"
+	text "<PARA>Me and my dad"
 	line "were on our way"
 	cont "to CELADON CITY"
 	cont "when he got food"
@@ -50,12 +45,5 @@ _LavenderMartTMKidFlavor::
 	cont "S.S. ANNE."
 
 	para "He's recovering"
-	line "in the hotel."
-
-	para "I'm selling TMs"
-	line "that I copied"
-	cont "from my dad's"
-	cont "originals!"
-
-	para "Want some?"
-	done
+	line "in the hotel.@"
+	text_end

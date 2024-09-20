@@ -24,6 +24,7 @@ _MapHelpText::
 	cont "MAP. Easy!"
 	done
 
+_Route1Youngster1NoRoomText::
 _BluesHouseDaisyBagFullText::
 	text "You have too much"
 	line "stuff with you."

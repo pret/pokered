@@ -31,7 +31,10 @@ CinnabarMartTMKid: ; PureRGBnote: ADDED: new NPC who will sell TMs
 	text_end
 
 .TMKidFlavor:
+	text_far _TMKidBringingTMsAnyCost
 	text_far _CinnabarMartTMKidFlavor
+	text_far _TMKidSellingTMsCopiedDadOriginals
+	text_far _TMKidWantSomeText
 	text_end
 
 .TMKidQuick::

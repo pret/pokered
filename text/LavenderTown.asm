@@ -5,7 +5,7 @@ _LavenderTownLittleGirlDoYouBelieveInGhostsText::
 
 _LavenderTownLittleGirlSoThereAreBelieversText::
 	text "Really? So there"
-	line "are believers..."
+	line "are believers<...>"
 	done
 
 _LavenderTownLittleGirlHaHaGuessNotText::
@@ -34,7 +34,7 @@ _LavenderTownSuperNerdText::
 	para "I think they're"
 	line "the spirits of"
 	cont "#MON that the"
-	cont "ROCKETs killed."
+	cont "<ROCKET>s killed."
 	done
 
 _LavenderTownSignText::

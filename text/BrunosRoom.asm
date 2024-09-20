@@ -30,8 +30,3 @@ _BrunoAfterBattleText::
 	line "Go face your next"
 	cont "challenge!"
 	done
-
-_BrunosRoomBrunoDontRunAwayText::
-	text "Someone's voice:"
-	line "Don't run away!"
-	done

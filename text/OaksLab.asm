@@ -28,7 +28,7 @@ _OaksLabThoseArePokeBallsText::
 _OaksLabYouWantCharmanderText::
 	text "So! You want the"
 	line "fire #MON,"
-	cont "CHARMANDER?"
+	cont "CHARMANDER?" ; TODO: parameterize?
 	done
 
 _OaksLabYouWantSquirtleText::
@@ -192,7 +192,7 @@ _OaksLabRivalFedUpWithWaitingText::
 
 _OaksLabOakChooseMonText::
 	text "OAK: <RIVAL>?"
-	line "Let me think..."
+	line "Let me think<...>"
 
 	para "Oh, that's right,"
 	line "I told you to"
@@ -321,7 +321,7 @@ _OaksLabOakThatWasMyDreamText::
 	text "To make a complete"
 	line "guide on all the"
 	cont "#MON in the"
-	cont "world..."
+	cont "world<...>"
 
 	para "That was my dream!"
 

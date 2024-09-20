@@ -100,3 +100,13 @@ ENDM
 MACRO dec_a_nc
 	adc -1
 ENDM
+
+MACRO jp_bc
+	push bc
+	ret
+ENDM
+
+MACRO jp_de
+	push de
+	ret
+ENDM

@@ -270,34 +270,36 @@ NoRainbowCeladonMaps:
 	db -1
 
 ; PureRGBnote: CHANGED: abstracted into its own function, removed some redundant code
-; stores the palette used  for the current map in a
+; stores the palette used for the current map in a
 GetOverworldPalette:
+	; first check if the current map has a custom palette
+	ld a, [wCurMap]
+	ld hl, MapPalettesJumpTable
+	ld de, 2
+	call IsInArray
+	jr c, .foundPalette
+	; next check if the map has its own palette function
+	ld a, [wCurMap]
+	ld hl, MapPalettesSpecialFunctionTable
+	ld de, 3
+	call IsInArray
+	jr nc, .noSpecialMapPaletteFunction
+	; special function found
+	inc hl
+	hl_deref
+	jp hl
+.noSpecialMapPaletteFunction
+	; lastly check if the tileset has its own map palette
 	ld a, [wCurMapTileset]
-	cp CEMETERY
-	jr z, .PokemonTowerOrAgatha
-	cp SECRET_LAB_TS
-	jr z, .SecretLab
-	cp VOLCANO
-	jr z, .volcano
-	cp CAVERN
-	jr z, .caveOrBruno
-	cp UNDERGROUND
-	jr z, .townOrRoute
+	ld hl, MapTilesetPalettesTable
+	ld de, 2
+	call IsInArray
+	jr c, .foundPalette
+	; next, if it's a town or route, use the town palette or route palette
 	ld a, [wCurMap]
 	cp FIRST_INDOOR_MAP
 	jr c, .townOrRoute
-	cp CERULEAN_ROCKET_HOUSE_B1F ; PureRGBnote: ADDED: this new map uses the red pokemon palette
-	jr z, .rocketHouseBasement
-	cp POWER_PLANT
-	jr z, .powerPlant
-	cp POWER_PLANT_ROOF
-	jr z, .powerPlant
-	cp CERULEAN_CAVE_2F
-	jr c, .normalDungeonOrBuilding
-	cp LORELEIS_ROOM
-	jr z, .Lorelei
-	cp BRUNOS_ROOM
-	jr z, .caveOrBruno
+	; otherwise, use the last overworld map's palette for this indoor map
 .normalDungeonOrBuilding
 	ld a, [wLastMap] ; town or route that current dungeon or building is located
 .townOrRoute
@@ -307,59 +309,58 @@ GetOverworldPalette:
 .town
 	inc a ; a town's palette ID is its map ID + 1
 	ret
-.SecretLab
-	ld a, PAL_SECRETLAB - 1
-	jr .town
-.rocketHouseBasement
-	ld a, PAL_REDMON - 1
-	jr .town
-.PokemonTowerOrAgatha
-	ld a, [wCurMap]
-	cp POKEMON_TOWER_B1F
-	ld a, PAL_BLACKMON - 1
-	jr z, .town
-	ld a, PAL_GREYMON - 1
-	jr .town
-.caveOrBruno ; PureRGBnote: CHANGED: seafoam islands use a bluish purple color palette instead of brown.
-	ld a, [wCurMap]
-	cp DIAMOND_MINE
-	jr z, .diamond_mine
-	cp SEAFOAM_ISLANDS_1F
-	jr z, .seafoam
-	cp SEAFOAM_ISLANDS_B1F
-	jr c, .caveDefault
-	cp SEAFOAM_ISLANDS_B4F + 1
-	jr c, .seafoam
-.caveDefault
-	ld a, PAL_CAVE - 1
-	jr .town
-.Lorelei
+.foundPalette
+	inc hl
+	ld a, [hl]
+	ret
+
+LoreleiPalettes:
 	call GetPalettes
-	jr nc, .seafoam
-.gbcLorelei ; PureRGBnote: CHANGED: lorelei's room uses a bluish purple palette instead of light green on SGB colors.
-	xor a
-	jr .town
-.seafoam
-	ld a, PAL_0F - 1
-	jr .town
-.powerPlant ; PureRGBnote: CHANGED: the power plant uses a different palette that looks more abandoned power plant-y
-	ld a, PAL_MEWMON - 1
-	jr .town
-.volcano
-	ld a, PAL_VOLCANO - 1
-	jr .town
-.diamond_mine
+	ld a, PAL_0F
+	ret nc
+	; PureRGBnote: CHANGED: lorelei's room uses a bluish purple palette instead of light green on SGB colors.
+	ld a, PAL_PALLET
+	ret
+
+DiamondMinePalettes:
 ; PureRGBnote: ADDED: in the diamond mine area, we use a different palette depending on where you are in the map.
 	ld a, [wXCoord]
 	cp 10
-	ld a, PAL_CAVE - 1
-	jr c, .town
+	ld a, PAL_CAVE
+	ret c
 	ld a, [wYCoord]
 	cp 10
-	ld a, PAL_CAVE - 1
-	jr nc, .town
-	ld a, PAL_BLUEMON - 1
-	jr .town
+	ld a, PAL_CAVE
+	ret nc
+	ld a, PAL_BLUEMON
+	ret
+
+MapPalettesSpecialFunctionTable:
+	dbw DIAMOND_MINE, DiamondMinePalettes
+	dbw LORELEIS_ROOM, LoreleiPalettes
+	db -1
+
+MapTilesetPalettesTable:
+	db CEMETERY, PAL_GREYMON
+	db SECRET_LAB_TS, PAL_SECRETLAB
+	db VOLCANO, PAL_VOLCANO
+	db UNDERGROUND, PAL_ROUTE
+	db CAVERN, PAL_CAVE
+	db -1
+
+MapPalettesJumpTable:
+	db SEAFOAM_ISLANDS_1F, PAL_0F
+	db SEAFOAM_ISLANDS_B1F, PAL_0F
+	db SEAFOAM_ISLANDS_B2F, PAL_0F
+	db SEAFOAM_ISLANDS_B3F, PAL_0F
+	db SEAFOAM_ISLANDS_B4F, PAL_0F
+	db POWER_PLANT, PAL_MEWMON
+	db POWER_PLANT_ROOF, PAL_MEWMON
+	db BRUNOS_ROOM, PAL_CAVE
+	db FUCHSIA_GOOD_ROD_HOUSE, PAL_FUCHSIA
+	db CERULEAN_ROCKET_HOUSE_B1F, PAL_REDMON
+	db POKEMON_TOWER_B1F, PAL_BLACKMON
+	db -1
 
 ; PureRGBnote: ADDED: updated function to allow alternate palette pokemon based on loaded data.
 ; used when a Pokemon is the only thing on the screen
@@ -468,6 +469,11 @@ NonMonCustomPalettes:
 	db SPIRIT_THE_MAW, PAL_REALLY_REDMON
 	db -1
 
+SpecialMonCustomPalettes:
+	db HARDENED_ONIX, PAL_BLACKMON, PAL_BLUEMON
+	db WINTER_DRAGONAIR, PAL_BLUEMON, PAL_0F
+	db -1
+
 DeterminePaletteID:
 	bit TRANSFORMED, a ; a is battle status 3
 	ld a, DEX_DITTO	;ld a, PAL_GREYMON  ; shinpokerednote: FIXED: if the mon has used Transform, use Ditto's palette
@@ -475,8 +481,6 @@ DeterminePaletteID:
 	ld a, [hl]
 DeterminePaletteIDOutOfBattle:
 	push bc
-	cp HARDENED_ONIX
-	jr z, .hardened_onix
 	ld [wd11e], a
 	and a ; is the mon index 0?
 	jr z, .skipDexNumConversion
@@ -485,6 +489,11 @@ DeterminePaletteIDOutOfBattle:
 	call IsInArray
 	inc hl
 	jr c, .gotPalette
+	ld a, [wd11e]
+	ld hl, SpecialMonCustomPalettes
+	ld de, 3
+	call IsInArray
+	jr c, .specialMonPalette
 	predef IndexToPokedex
 	ld a, [wd11e]
 	; 0 = missingno is a valid value here
@@ -515,26 +524,17 @@ DeterminePaletteIDOutOfBattle:
 .gotPalette
 	pop bc
 	jr .gotPalette2
-;;;;;;;;;; PureRGBnote: ADDED: hardened onix has hardcoded palettes
-.hardened_onix
-	lb bc, PAL_BLACKMON, PAL_BLUEMON
-.checkAltPaletteHardcoded
+;;;;;;;;;; PureRGBnote: ADDED: certain mons have other palettes
+.specialMonPalette
+	inc hl
 	ld a, [wIsAltPalettePkmn]
 	and a
-	ld a, b
-	jr z, .doneHardcodedPalette
+	jr z, .gotPalette
 	ld a, [wOptions2]
 	bit BIT_ALT_PKMN_PALETTES, a ; do we have alt palettes enabled
-	ld a, b
-	jr z, .doneHardcodedPalette ; if not show default palettes always
-	ld a, c
-.doneHardcodedPalette
-	push af
-	xor a
-	ld [wIsAltPalettePkmn], a ; always reset this value after displaying a pokemon sprite
-	pop af
-	pop bc
-	ret
+	jr z, .gotPalette ; if not show default palettes always
+	inc hl
+	jr .gotPalette
 ;;;;;;;;;;
 
 InitPartyMenuBlkPacket:

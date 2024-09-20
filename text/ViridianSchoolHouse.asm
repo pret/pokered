@@ -143,16 +143,16 @@ _SchoolB1FRockerYes::
 	text "Winners like us"
 	line "think the same!"
 	para "You're firin'"
-	line "me up, dude!"
-	para "Lets battle right"
-	line "here, right now!!"
-	done
+	line "me up, dude!@"
+	text_jump _SchoolB1FRockerBattleNow
 
 _SchoolB1FRockerNo::
 	text "Now I'm angry!"
 	para "Dweebs like you"
 	line "need to be taken"
 	cont "down a peg!"
+	; fall through
+_SchoolB1FRockerBattleNow::
 	para "Lets battle right"
 	line "here, right now!!"
 	done

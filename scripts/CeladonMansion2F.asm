@@ -33,8 +33,7 @@ ProspectorsHouseProspectorText:
 	rst _PrintText
 	CheckEvent EVENT_LEARNED_TO_DIG_BETWEEN_TOWNS
 	jr nz, .reallyDone
-	ld hl, TextScriptPromptButton
-	call TextCommandProcessor
+	call DisplayTextPromptButton
 	ld hl, .byTheWayDigBetweenTowns
 	rst _PrintText
 	ld a, CELADON_PROSPECTORS_HOUSE_PROSPECTOR

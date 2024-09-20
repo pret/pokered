@@ -327,6 +327,7 @@ GetBlockAtCoord::
 	ld c, d
 	add hl, bc
 	ld a, [hl]
+	ld d, a
 	ret
 
 ; in the flooding lava room of the volcano we need to block dig/teleporting out when you're standing on lava

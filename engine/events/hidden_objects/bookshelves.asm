@@ -12,6 +12,8 @@ PrintBookshelfText::
 	jr z, .noMatch
 	cp SS_ANNE_CAPTAINS_ROOM
 	jr z, .noMatch
+	cp FUCHSIA_GOOD_ROD_HOUSE
+	jr z, .noMatch
 	cp CELADON_MANSION_2F
 	jr nz, .notCeladonHouses
 	callfar CeladonHouse2FBookCaseCheck

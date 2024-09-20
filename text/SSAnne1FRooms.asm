@@ -13,7 +13,7 @@ _SSAnne1FRoomsGentleman1BattleText::
 
 _SSAnne1FRoomsGentleman1EndBattleText::
 	text "My, my"
-	line "friends..."
+	line "friends<...>"
 	prompt
 
 _SSAnne1FRoomsGentleman1AfterBattleText::
@@ -101,5 +101,5 @@ _SSAnne1FRoomsGentleman3Text::
 	line "POLICE agent!"
 
 	para "I'm on the trail"
-	line "of TEAM ROCKET!"
+	line "of <TEAM><ROCKET>!"
 	done

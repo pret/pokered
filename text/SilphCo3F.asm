@@ -14,11 +14,6 @@ _SilphCo3FRocketBattleText::
 	line "us, kid!"
 	done
 
-_SilphCo3FRocketEndBattleText::
-	text "I give"
-	line "up!"
-	prompt
-
 _SilphCo3FRocketAfterBattleText::
 	text "A hint? You can"
 	line "open doors with a"
@@ -26,8 +21,8 @@ _SilphCo3FRocketAfterBattleText::
 	done
 
 _SilphCo3FScientistBattleText::
-	text "I support TEAM"
-	line "ROCKET more than"
+	text "I support <TEAM>"
+	line "<ROCKET> more than"
 	cont "I support SILPH!"
 	done
 
@@ -37,9 +32,9 @@ _SilphCo3FScientistEndBattleText::
 	prompt
 
 _SilphCo3FScientistAfterBattleText::
-	text "Humph..."
+	text "Humph<...>"
 
-	para "TEAM ROCKET said"
+	para "<TEAM><ROCKET> said"
 	line "that if I helped"
 	cont "them, they'd let"
 	cont "me study #MON!"

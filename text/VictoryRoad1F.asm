@@ -22,7 +22,7 @@ _VictoryRoad1FCooltrainerMBattleText::
 
 _VictoryRoad1FCooltrainerMEndBattleText::
 	text "I"
-	line "had a chance..."
+	line "had a chance<...>"
 	prompt
 
 _VictoryRoad1FCooltrainerMAfterBattleText::

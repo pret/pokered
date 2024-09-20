@@ -1,8 +1,8 @@
 _TypeGuysHouseTypeGuySleepingText::
-	text "Zzzzz..."
-	para "Snort..."
-	para "No mom...don't"
-	line "hit the lights..."
+	text "Zzzzz<...>"
+	para "Snort<...>"
+	para "No mom<...>don't"
+	line "hit the lights<...>"
 	done
 
 _TypeGuysHouseTypeGuyAwakeText::

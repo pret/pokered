@@ -1,6 +1,6 @@
 _ViridianPokecenterGentlemanText::
 	text "You can use that"
-	line "PC in the corner."
+	line "<PC> in the corner."
 
 	para "The receptionist"
 	line "told me. So kind!"

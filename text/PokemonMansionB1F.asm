@@ -76,7 +76,7 @@ _PokemonMansionB1FDiaryText::
 
 	para "We have failed to"
 	line "curb its vicious"
-	cont "tendencies..."
+	cont "tendencies<...>"
 	done
 
 _MansionB1FKeyHoleText::

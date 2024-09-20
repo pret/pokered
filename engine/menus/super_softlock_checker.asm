@@ -52,6 +52,7 @@ SurfRestrictedAreas:
 	db VERMILION_CITY, 4, 7, 28, 29
 	db ROUTE_10, 2, 15, 30, 45
 	db ROUTE_12, 14, 15, 34, 37
+	db ROUTE_19, 10, 17, 48, 50
 	db ROUTE_20, 32, 35, 8, 9
 	db ROUTE_20, 46, 61, 2, 11
 	db ROUTE_21, 8, 13, 1, 9

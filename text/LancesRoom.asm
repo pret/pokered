@@ -45,14 +45,14 @@ _LancesRoomLanceAfterBattleText::
 	line "#MON LEAGUE"
 	cont "champion!"
 
-	para "...Or, you would"
+	para "<...>Or, you would"
 	line "have been, but"
 	cont "you have one more"
 	cont "challenge ahead."
 
 	para "You have to face"
 	line "another trainer!"
-	cont "His name is..."
+	cont "His name is<...>"
 
 	para "<RIVAL>!"
 	line "He beat the ELITE"

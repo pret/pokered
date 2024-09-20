@@ -10,13 +10,13 @@ _SilphCo5FRockerAfterBattleText::
 	done
 
 _SilphCo5FRocket2BattleText::
-	text "Show TEAM ROCKET"
+	text "Show <TEAM><ROCKET>"
 	line "a little respect!"
 	done
 
 _SilphCo5FRocket2EndBattleText::
-	text "Cough..."
-	line "Cough..."
+	text "Cough<...>"
+	line "Cough<...>"
 	prompt
 
 _SilphCo5FRocket2AfterBattleText::

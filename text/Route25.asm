@@ -42,7 +42,7 @@ _Route25CooltrainerMBattleText::
 
 _Route25CooltrainerMEndBattleText::
 	text "Aww,"
-	line "darn..."
+	line "darn<...>"
 	prompt
 
 _Route25CooltrainerMAfterBattleText::
@@ -156,7 +156,7 @@ _Route25BillSignText::
 	done
 
 _Route25Text12::
-	text "TRAINER TIPS"
+	text "<TIPS>"
 	para "Hold both the"
 	line "A and B Buttons" 
 	cont "while standing"

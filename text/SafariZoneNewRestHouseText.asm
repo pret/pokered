@@ -69,7 +69,7 @@ _SafariZoneRestHouse4TextChansey::
 	done
 
 _SafariZoneCenterText3RangerHunt::
-	text "TRAINER TIPS"
+	text "<TIPS>"
 
 	para "Press the START"
 	line "Button to check"
@@ -79,7 +79,7 @@ _SafariZoneCenterText3RangerHunt::
 	done
 
 _SafariZoneCenterText3FreeRoam::
-	text "TRAINER TIPS"
+	text "<TIPS>"
 
 	para "Every area of"
 	line "the SAFARI ZONE"
@@ -88,7 +88,7 @@ _SafariZoneCenterText3FreeRoam::
 	done
 
 _SafariZoneEastText6NotClassic::
-	text "TRAINER TIPS"
+	text "<TIPS>"
 
 	para "Every time you"
 	line "play a FREE ROAM"

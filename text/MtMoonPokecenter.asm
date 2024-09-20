@@ -7,11 +7,11 @@ _MtMoonPokecenterYoungsterText::
 	done
 
 _MtMoonPokecenterGentlemanText::
-	text "TEAM ROCKET"
+	text "<TEAM><ROCKET>"
 	line "attacks CERULEAN"
-	cont "citizens..."
+	cont "citizens<...>"
 
-	para "TEAM ROCKET is"
+	para "<TEAM><ROCKET> is"
 	line "always in the"
 	cont "news!"
 	done
@@ -41,8 +41,4 @@ _MtMoonPokecenterMagikarpSalesmanNoMoneyText::
 _MtMoonPokecenterMagikarpSalesmanNoRefundsText::
 	text "MAN: Well, I don't"
 	line "give refunds!"
-	done
-
-_MtMoonPokecenterClipboardText::
-	text_start
 	done

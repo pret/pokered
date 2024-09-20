@@ -54,4 +54,4 @@ _PokemonTower2FChannelerText::
 	para "A SILPH SCOPE"
 	line "might be able to"
 	cont "unmask them."
-	done
+	done ; TODO: parameterize silph scope?

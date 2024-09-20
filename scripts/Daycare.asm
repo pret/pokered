@@ -257,9 +257,9 @@ DaycareGentlemanText:
 	text_far _DaycareGentlemanOnlyHaveOneMonText
 	text_end
 
-.CantAcceptMonWithHMText:
-	text_far _DaycareGentlemanCantAcceptMonWithHMText
-	text_end
+;.CantAcceptMonWithHMText:
+;	text_far _DaycareGentlemanCantAcceptMonWithHMText
+;	text_end
 
 .HeresYourMonText:
 	text_far _DaycareGentlemanHeresYourMonText

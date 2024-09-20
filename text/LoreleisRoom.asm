@@ -36,7 +36,3 @@ _LoreleisRoomLoreleiAfterBattleText::
 	cont "LEAGUE power!"
 	done
 
-_LoreleisRoomLoreleiDontRunAwayText::
-	text "Someone's voice:"
-	line "Don't run away!"
-	done

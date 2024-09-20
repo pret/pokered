@@ -52,15 +52,8 @@ _SaffronGymSabrinaMarshBadgeInfoText::
 	cont "much!"
 
 	para "Wait, please take"
-	line "this TM with you!"
+	line "this <TM> with you!"
 	done
-
-_SaffronGymSabrinaReceivedTM46Text::
-	text "<PLAYER> received"
-	line "@"
-	text_ram wStringBuffer
-	text "!@"
-	text_end
 
 _TM46ExplanationText::
 	text_start

@@ -10,8 +10,8 @@ _Route6CooltrainerM1EndBattleText::
 	prompt
 
 _Route6CooltrainerAfterBattleText::
-	text "Whisper..."
-	line "whisper..."
+	text "Whisper<...>"
+	line "whisper<...>"
 	done
 
 _Route6CooltrainerF1BattleText::
@@ -112,7 +112,7 @@ _Route6AfterBattleText7::
 	done
 
 _Route6BattleText8::
-	text "Heheheheh..."
+	text "Heheheheh<...>"
 	line "that escape was"
 	cont "perfect!"
 	para "I'm already at"

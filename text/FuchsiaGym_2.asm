@@ -24,13 +24,6 @@ _FuchsiaGymKogaSoulBadgeInfoText::
 	line "too!"
 	done
 
-_FuchsiaGymKogaReceivedTM06Text::
-	text "<PLAYER> received"
-	line "@"
-	text_ram wStringBuffer
-	text "!@"
-	text_end
-
 _FuchsiaGymKogaTM06ExplanationText::
 	text_start
 	para "@"

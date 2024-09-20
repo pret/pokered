@@ -1,6 +1,6 @@
 _SilphCo7FSilphWorkerM1HaveThisPokemonText::
 	text "Oh! Hi! You're"
-	line "not a ROCKET! You"
+	line "not a <ROCKET>! You"
 	cont "came to save us?"
 	cont "Why, thank you!"
 
@@ -28,7 +28,7 @@ _SilphCo7FSilphWorkerM1LaprasDescriptionText::
 	done
 
 _SilphCo7FSilphWorkerM1IsOurPresidentOkText::
-	text "TEAM ROCKET's"
+	text "<TEAM><ROCKET>'s"
 	line "BOSS went to the"
 	cont "boardroom! Is our"
 	cont "PRESIDENT OK?"
@@ -40,7 +40,7 @@ _SilphCo7FSilphWorkerM1SavedText::
 	done
 
 _SilphCo7FSilphWorkerM2AfterTheMasterBallText::
-	text "TEAM ROCKET was"
+	text "<TEAM><ROCKET> was"
 	line "after the MASTER"
 	cont "BALL which will"
 	cont "catch any #MON!"
@@ -50,19 +50,19 @@ _SilphCo7FSilphWorkerM2CancelledMasterBallText::
 	text "We canceled the"
 	line "MASTER BALL"
 	cont "project because"
-	cont "of TEAM ROCKET."
+	cont "of <TEAM><ROCKET>."
 	done
 
 _SilphCo7FSilphWorkerM3ItWouldBeBadText::
 	text "It would be bad"
-	line "if TEAM ROCKET"
+	line "if <TEAM><ROCKET>"
 	cont "took over SILPH"
 	cont "or our #MON!"
 	done
 
 _SilphCo7FSilphWorkerM3YouChasedOffTeamRocketText::
 	text "Wow! You chased"
-	line "off TEAM ROCKET"
+	line "off <TEAM><ROCKET>"
 	cont "all by yourself?"
 	done
 
@@ -112,11 +112,6 @@ _SilphCo7FScientistAfterBattleText::
 	cont "trainer!"
 	done
 
-_SilphCo7FRocket2BattleText::
-	text "I am one of the 4"
-	line "ROCKET BROTHERS!"
-	done
-
 _SilphCo7FRocket2EndBattleText::
 	text "Aack!"
 	line "Brothers, I lost!"
@@ -155,8 +150,8 @@ _SilphCo7FRivalWaitedHereText::
 	cont "turn up if I"
 	cont "waited here!"
 
-	para "I guess TEAM"
-	line "ROCKET slowed you"
+	para "I guess <TEAM>"
+	line "<ROCKET> slowed you"
 	cont "down! Not that I"
 	cont "care!"
 
@@ -169,7 +164,7 @@ _SilphCo7FRivalWaitedHereText::
 _SilphCo7FRivalDefeatedText::
 	text "Oh ho!"
 	line "So, you are ready"
-	cont "for BOSS ROCKET!"
+	cont "for BOSS <ROCKET>!"
 	prompt
 
 _SilphCo7FRivalVictoryText::

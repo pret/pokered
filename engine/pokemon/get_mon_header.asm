@@ -74,6 +74,7 @@ NonDexPokemonSpecies:
 	db SPIRIT_PAINLESS
 	db SPIRIT_IRRADIATED
 	db SPIRIT_THE_MAW
+	db WINTER_DRAGONAIR
 	db -1
 	
 UncompressMonSprite::

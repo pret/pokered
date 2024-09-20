@@ -1,6 +1,6 @@
 _CinnabarIslandDoorIsLockedText::
 	text "The door is"
-	line "locked..."
+	line "locked<...>"
 	done
 
 _CinnabarIslandGirlText::

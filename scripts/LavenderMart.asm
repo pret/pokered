@@ -31,7 +31,10 @@ TMKidGreet3::
 	text_end
 
 LavenderMartTMKidFlavor:
+	text_far _TMKidBringingTMsAnyCost
 	text_far _LavenderMartTMKidFlavor
+	text_far _TMKidSellingTMsCopiedDadOriginals
+	text_far _TMKidWantSomeText
 	text_end
 
 TMKidQuick3::

@@ -25,13 +25,10 @@ ReadHLIntoCFromMapRomBank::
 	ldh a, [hLoadedROMBank]
 	push af
 	ldh a, [hMapROMBank]
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call SetCurBank
 	ld c, [hl]
 	pop af
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
-	ret
+	jp SetCurBank
 	
 GenericMoveDown::
 	db NPC_MOVEMENT_DOWN

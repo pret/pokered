@@ -19,6 +19,7 @@ MtMoonPokecenterYoungsterText:
 	text_far _MtMoonPokecenterYoungsterText
 	text_end
 
+MtMoonPokecenterClipboardText:
 MtMoonPokecenterGentlemanText:
 	text_far _MtMoonPokecenterGentlemanText
 	text_end
@@ -86,10 +87,6 @@ MtMoonPokecenterMagikarpSalesmanText:
 
 .NoRefundsText
 	text_far _MtMoonPokecenterMagikarpSalesmanNoRefundsText
-	text_end
-
-MtMoonPokecenterClipboardText:
-	text_far _MtMoonPokecenterClipboardText
 	text_end
 
 MtMoonPokecenterLinkReceptionistText:

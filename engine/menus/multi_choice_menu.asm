@@ -481,7 +481,7 @@ SSAnneFoodMenu::
 
 RocketPasswordMenu::
 	dw FourOptionMenu
-	db "ROCKET"
-	next "BROCKET"
-	next "SPROCKET"
+	db "<ROCKET>"
+	next "B<ROCKET>"
+	next "SP<ROCKET>"
 	next "DENNIS@"

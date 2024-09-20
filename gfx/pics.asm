@@ -610,6 +610,7 @@ OmanytePicFrontAlt:: INCBIN "gfx/pokemon/front_alt/omanyte.pic"
 SpearowPicFrontAlt:: INCBIN "gfx/pokemon/front_alt/spearow.pic"
 ScytherPicFrontAlt:: INCBIN "gfx/pokemon/front_alt/scyther.pic"
 GolduckPicFrontAlt:: INCBIN "gfx/pokemon/front_alt/golduck.pic"
+WinterDragonairPicFront:: INCBIN "gfx/pokemon/front_alt/dragonair.pic"
 
 ; spirits
 TorchedPicFront:: INCBIN "gfx/battle/spirit_torched.pic"
@@ -675,3 +676,4 @@ PowerPlantStormTiles:: INCBIN "gfx/overworld/storm.2bpp"
 VerticalPipeTiles:: INCBIN "gfx/overworld/vertical_pipe.2bpp"
 HyperBeamBubble:: INCBIN "gfx/overworld/bubble.2bpp"
 ApexPrompt:: INCBIN "gfx/font/apex.1bpp"
+IceCrystalLarge:: INCBIN "gfx/overworld/ice_crystal_large.2bpp"

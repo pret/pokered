@@ -16,7 +16,7 @@ _RockTunnel1FHiker1AfterBattleText::
 
 _RockTunnel1FHiker2BattleText::
 	text "Hmm. Maybe I'm"
-	line "lost in here..."
+	line "lost in here<...>"
 	done
 
 _RockTunnel1FHiker2EndBattleText::

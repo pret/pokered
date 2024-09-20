@@ -1161,6 +1161,8 @@ PlayerMonFaintedText:
 ; asks if you want to use next mon
 ; stores whether you ran in C flag
 DoUseNextMonDialogue:
+	CheckEvent EVENT_DRAGONAIR_EVENT_BATTLING_CLOYSTER
+	jp nz, TryRunningFromBattle.canEscape
 	call PrintEmptyString
 	call SaveScreenTilesToBuffer1
 	ld a, [wIsInBattle]
@@ -2450,6 +2452,15 @@ ItemsCantBeUsedHereText:
 	text_far _ItemsCantBeUsedHereText
 	text_end
 
+NoPartyMenuAllowedText:
+	text_far _DragonairEventNoPartyMenuText
+	text_end
+
+NoPartyMenuAllowed:
+	ld hl, NoPartyMenuAllowedText
+	rst _PrintText
+	jp DisplayBattleMenu
+
 PartyMenuOrRockOrRun:
 	dec a ; was Run selected?
 	jp nz, BattleMenu_RunWasSelected
@@ -2463,6 +2474,8 @@ PartyMenuOrRockOrRun:
 	ld [wcf91], a
 	jp UseBagItem
 .partyMenuWasSelected
+	CheckEvent EVENT_DRAGONAIR_EVENT_BATTLING_CLOYSTER
+	jr nz, NoPartyMenuAllowed
 	call LoadScreenTilesFromBuffer1
 	xor a ; NORMAL_PARTY_MENU
 	ld [wPartyMenuTypeOrMessageID], a

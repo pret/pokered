@@ -3506,8 +3506,7 @@ ItemUseReloadOverworldData:
 ;;;;;;;;;; pureRGBnote: ADDED: text indicating your box is full or how much is left
 PrintRemainingBoxSpacePrompt:
 	call PrintRemainingBoxSpace
-	ld hl, TextScriptPromptButton
-	jp TextCommandProcessor
+	jp DisplayTextPromptButton
 
 PrintRemainingBoxSpace:
 	ld hl, wBoxNumString

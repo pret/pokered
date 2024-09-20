@@ -92,7 +92,7 @@ _MtMoon1FYoungster2EndBattleText::
 _MtMoon1FYoungster2AfterBattleText::
 	text "I saw them! I'm"
 	line "sure they're from"
-	cont "TEAM ROCKET!"
+	cont "<TEAM><ROCKET>!"
 	done
 
 _MtMoon1FYoungster3BattleText::

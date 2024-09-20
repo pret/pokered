@@ -3,8 +3,8 @@ _ViridianGymGiovanniPreBattleText::
 	line "my hideout!"
 
 	para "I planned to"
-	line "resurrect TEAM"
-	cont "ROCKET here!"
+	line "resurrect <TEAM>"
+	cont "<ROCKET> here!"
 
 	para "But, you have"
 	line "caught me again!"
@@ -31,7 +31,7 @@ _ViridianGymGiovanniPostBattleAdviceText::
 	text "Having lost, I"
 	line "cannot face my"
 	cont "underlings!"
-	cont "TEAM ROCKET is"
+	cont "<TEAM><ROCKET> is"
 	cont "finished forever!"
 
 	para "I will dedicate my"
@@ -60,16 +60,9 @@ _ViridianGymGiovanniEarthBadgeInfoText::
 	line "your #MON"
 	cont "LEAGUE challenge!"
 
-	para "Take this TM"
+	para "Take this <TM>"
 	line "as well!"
 	done
-
-_ViridianGymGiovanniReceivedTM27Text::
-	text "<PLAYER> received"
-	line "@"
-	text_ram wStringBuffer
-	text "!@"
-	text_end
 
 _ViridianGymGiovanniTM27ExplanationText::
 	text_start
@@ -83,7 +76,7 @@ _ViridianGymGiovanniTM27ExplanationText::
 
 	para "I made it when I"
 	line "ran the GYM here,"
-	cont "too long ago..."
+	cont "too long ago<...>"
 	done
 
 _ViridianGymGiovanniTM27NoRoomText::
@@ -153,7 +146,7 @@ _ViridianGymHiker2EndBattleText::
 _ViridianGymHiker2AfterBattleText::
 	text "If my #MON"
 	line "were as good at"
-	cont "Karate as I..."
+	cont "Karate as I<...>"
 	done
 
 _ViridianGymCooltrainerM2BattleText::

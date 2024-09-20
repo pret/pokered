@@ -38,7 +38,7 @@ _Mansion3BattleText3::
 	done
 
 _Mansion3EndBattleText3::
-	text "Ahh..."
+	text "Ahh<...>"
 	prompt
 
 _Mansion3AfterBattleText3::

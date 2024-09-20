@@ -39,7 +39,7 @@ _CeladonMansion3FGameDesignerCompletedDexText::
 	line "You completed"
 	cont "your #DEX!"
 	cont "Congratulations!"
-	cont "...@"
+	cont "<...>@"
 	text_end
 
 _CeladonMansion3FGameProgramPCText::
