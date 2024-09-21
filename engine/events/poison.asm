@@ -1,7 +1,7 @@
 ApplyOutOfBattlePoisonDamage:
 	ld a, [wStatusFlags5]
 	assert BIT_SCRIPTED_MOVEMENT_STATE == 7
-	add a ; overflows bit 7 into carry flag
+	add a ; overflows scripted movement state bit into carry flag
 	jp c, .noBlackOut ; no black out if joypad states are being simulated
 	ld a, [wPartyCount]
 	and a

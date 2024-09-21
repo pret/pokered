@@ -41,7 +41,7 @@ DrawHP_:
 	call DrawHPBar
 	pop hl
 	ldh a, [hUILayoutFlags]
-	bit 0, a
+	bit BIT_PARTY_MENU_HP_BAR, a
 	jr z, .printFractionBelowBar
 	ld bc, $9 ; right of bar
 	jr .printFraction

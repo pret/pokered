@@ -50,7 +50,7 @@ PlayerPCMenu:
 	ld hl, WhatDoYouWantText
 	call PrintText
 	call HandleMenuInput
-	bit 1, a
+	bit BIT_B_BUTTON, a
 	jp nz, ExitPlayerPC
 	call PlaceUnfilledArrowMenuCursor
 	ld a, [wCurrentMenuItem]

@@ -1,3 +1,8 @@
+; wSlotMachineFlags
+	const_def 6
+	const BIT_SLOTS_CAN_WIN               ; 6
+	const BIT_SLOTS_CAN_WIN_WITH_7_OR_BAR ; 7
+
 ; wMiscFlags
 	const_def
 	const BIT_SEEN_BY_TRAINER      ; 0
@@ -8,6 +13,15 @@
 	const BIT_NO_MENU_BUTTON_SOUND ; 5
 	const BIT_TRIED_PUSH_BOULDER   ; 6
 	const BIT_PUSHED_BOULDER       ; 7
+
+; wAutoTextBoxDrawingControl
+DEF BIT_NO_AUTO_TEXT_BOX EQU 0
+
+; wTextPredefFlag
+DEF BIT_TEXT_PREDEF EQU 0
+
+; wFontLoaded
+DEF BIT_FONT_LOADED EQU 0
 
 ; wOptions
 DEF TEXT_DELAY_MASK EQU %111
@@ -23,6 +37,12 @@ DEF TEXT_DELAY_SLOW   EQU %101 ; 5
 	const_def
 	const BIT_FAST_TEXT_DELAY ; 0
 	const BIT_TEXT_DELAY      ; 1
+
+; wCurMapTileset
+DEF BIT_NO_PREVIOUS_MAP EQU 7
+
+; wCurrentBoxNum
+DEF BIT_HAS_CHANGED_BOXES EQU 7
 
 ; wObtainedBadges, wBeatGymFlags
 	const_def
@@ -117,3 +137,13 @@ DEF NUM_BADGES EQU const_value
 	const_skip 3               ; 3-5 ; unused
 	const BIT_LEDGE_OR_FISHING ; 6
 	const BIT_SPINNING         ; 7
+
+; hFindPathFlags
+	const_def
+	const BIT_PATH_FOUND_Y ; 0
+	const BIT_PATH_FOUND_X ; 1
+
+; hNPCPlayerRelativePosFlags
+	const_def
+	const BIT_PLAYER_LOWER_Y ; 0
+	const BIT_PLAYER_LOWER_X ; 1

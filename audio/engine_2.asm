@@ -17,9 +17,9 @@ Audio2_UpdateMusic::
 	ld a, [wMuteAudioAndPauseMusic]
 	and a
 	jr z, .applyAffects
-	bit 7, a
+	bit BIT_MUTE_AUDIO, a
 	jr nz, .nextChannel
-	set 7, a
+	set BIT_MUTE_AUDIO, a
 	ld [wMuteAudioAndPauseMusic], a
 	xor a ; disable all channels' output
 	ldh [rNR51], a
@@ -163,8 +163,8 @@ Audio2_PlayNextNote:
 	ld a, c
 	cp CHAN5
 	jr nz, .beginChecks
-	ld a, [wLowHealthAlarm] ; low health alarm enabled?
-	bit 7, a
+	ld a, [wLowHealthAlarm]
+	bit BIT_LOW_HEALTH_ALARM, a
 	ret nz
 .beginChecks
 	; ---
@@ -208,7 +208,7 @@ Audio2_sound_ret:
 .dontDisable
 	jr .afterDisable
 .returnFromCall
-	res 1, [hl]
+	res BIT_SOUND_CALL, [hl]
 	ld d, $0
 	ld a, c
 	add a
@@ -388,8 +388,8 @@ Audio2_toggle_perfect_pitch:
 	ld hl, wChannelFlags1
 	add hl, bc
 	ld a, [hl]
-	xor $1
-	ld [hl], a ; flip bit 0 of wChannelFlags1
+	xor 1 << BIT_PERFECT_PITCH
+	ld [hl], a
 	jp Audio2_sound_ret
 
 Audio2_vibrato:
@@ -978,7 +978,7 @@ Audio2_ResetCryModifiers:
 	cp CHAN5
 	jr nz, .skip
 	ld a, [wLowHealthAlarm]
-	bit 7, a
+	bit BIT_LOW_HEALTH_ALARM, a
 	jr z, .skip
 	xor a
 	ld [wFrequencyModifier], a

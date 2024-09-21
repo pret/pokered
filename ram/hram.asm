@@ -388,6 +388,7 @@ hClearLetterPrintingDelayFlags:: db
 
 ; bit 0: draw HP fraction to the right of bar instead of below (for party menu)
 ; bit 1: menu is double spaced
+; bit 2: text is single spaced
 hUILayoutFlags:: db
 
 hFieldMoveMonMenuTopMenuItemX:: db

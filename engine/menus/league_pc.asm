@@ -44,7 +44,7 @@ PKMNLeaguePC:
 	pop af
 	ld [wUpdateSpritesEnabled], a
 	pop hl
-	res 6, [hl]
+	res BIT_NO_TEXT_DELAY, [hl]
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	call RunDefaultPaletteCommand
@@ -57,7 +57,7 @@ LeaguePCShowTeam:
 	call LeaguePCShowMon
 	call WaitForTextScrollButtonPress
 	ldh a, [hJoyHeld]
-	bit 1, a
+	bit BIT_B_BUTTON, a
 	jr nz, .exit
 	ld hl, wHallOfFame + HOF_MON
 	ld de, wHallOfFame

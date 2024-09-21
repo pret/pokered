@@ -137,12 +137,12 @@ PlaceMenuCursor::
 	jr z, .checkForArrow1
 	push af
 	ldh a, [hUILayoutFlags]
-	bit 1, a ; is the menu double spaced?
+	bit BIT_DOUBLE_SPACED_MENU, a
 	jr z, .doubleSpaced1
-	ld bc, 20
+	ld bc, SCREEN_WIDTH
 	jr .getOldMenuItemScreenPosition
 .doubleSpaced1
-	ld bc, 40
+	ld bc, SCREEN_WIDTH * 2
 .getOldMenuItemScreenPosition
 	pop af
 .oldMenuItemLoop
@@ -163,12 +163,12 @@ PlaceMenuCursor::
 	jr z, .checkForArrow2
 	push af
 	ldh a, [hUILayoutFlags]
-	bit 1, a ; is the menu double spaced?
+	bit BIT_DOUBLE_SPACED_MENU, a
 	jr z, .doubleSpaced2
-	ld bc, 20
+	ld bc, SCREEN_WIDTH
 	jr .getCurrentMenuItemScreenPosition
 .doubleSpaced2
-	ld bc, 40
+	ld bc, SCREEN_WIDTH * 2
 .getCurrentMenuItemScreenPosition
 	pop af
 .currentMenuItemLoop
@@ -272,7 +272,7 @@ EnableAutoTextBoxDrawing::
 	jr AutoTextBoxDrawingCommon
 
 DisableAutoTextBoxDrawing::
-	ld a, TRUE
+	ld a, 1 << BIT_NO_AUTO_TEXT_BOX
 
 AutoTextBoxDrawingCommon::
 	ld [wAutoTextBoxDrawingControl], a

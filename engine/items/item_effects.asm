@@ -691,7 +691,7 @@ ItemUseSurfboard:
 	ldh [hSpriteIndex], a
 	ld d, 16 ; talking range in pixels (normal range)
 	call IsSpriteInFrontOfPlayer2
-	res 7, [hl]
+	res BIT_FACE_PLAYER, [hl]
 	ldh a, [hSpriteIndex]
 	and a ; is there a sprite in the way?
 	jr nz, .cannotStopSurfing
@@ -1052,13 +1052,13 @@ ItemUseMedicine:
 	ld a, SFX_HEAL_HP
 	call PlaySoundWaitForCurrent
 	ldh a, [hUILayoutFlags]
-	set 0, a
+	set BIT_PARTY_MENU_HP_BAR, a
 	ldh [hUILayoutFlags], a
 	ld a, $02
 	ld [wHPBarType], a
 	predef UpdateHPBar2 ; animate HP bar decrease of pokemon that used Softboiled
 	ldh a, [hUILayoutFlags]
-	res 0, a
+	res BIT_PARTY_MENU_HP_BAR, a
 	ldh [hUILayoutFlags], a
 	pop af
 	ld b, a ; store heal amount (1/5 of max HP)
@@ -1202,13 +1202,13 @@ ItemUseMedicine:
 	ld a, SFX_HEAL_HP
 	call PlaySoundWaitForCurrent
 	ldh a, [hUILayoutFlags]
-	set 0, a
+	set BIT_PARTY_MENU_HP_BAR, a
 	ldh [hUILayoutFlags], a
 	ld a, $02
 	ld [wHPBarType], a
 	predef UpdateHPBar2 ; animate the HP bar lengthening
 	ldh a, [hUILayoutFlags]
-	res 0, a
+	res BIT_PARTY_MENU_HP_BAR, a
 	ldh [hUILayoutFlags], a
 	ld a, REVIVE_MSG
 	ld [wPartyMenuTypeOrMessageID], a

@@ -18,7 +18,7 @@ TryPushingBoulder::
 	swap a
 	ld e, a
 	add hl, de
-	res 7, [hl]
+	res BIT_FACE_PLAYER, [hl]
 	call GetSpriteMovementByte2Pointer
 	ld a, [hl]
 	cp BOULDER_MOVEMENT_BYTE_2

@@ -224,7 +224,7 @@ GainExperience:
 	call CopyData
 	pop hl
 	ld a, [wPlayerBattleStatus3]
-	bit 3, a ; is the mon transformed?
+	bit TRANSFORMED, a
 	jr nz, .recalcStatChanges
 ; the mon is not transformed, so update the unmodified stats
 	ld de, wPlayerMonUnmodifiedLevel

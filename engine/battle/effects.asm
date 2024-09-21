@@ -194,7 +194,7 @@ ExplodeEffect:
 FreezeBurnParalyzeEffect:
 	xor a
 	ld [wAnimationType], a
-	call CheckTargetSubstitute ; test bit 4 of d063/d068 flags [target has substitute flag]
+	call CheckTargetSubstitute
 	ret nz ; return if they have a substitute, can't effect them
 	ldh a, [hWhoseTurn]
 	and a
