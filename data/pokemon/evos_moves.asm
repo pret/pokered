@@ -1386,6 +1386,7 @@ KabutopsEvosMoves:
 ; Learnset
 	db 24, LEECH_LIFE
 	db 28, BIND
+	db 33, SHARPEN
 	db 35, FURY_ATTACK
 	db 39, SKULL_BASH
 	db 44, TWINEEDLE
