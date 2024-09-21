@@ -560,11 +560,11 @@ EliteFourLanceMoveset:
 	; dragonair
 	db HYPER_BEAM
 	db DRAGON_RAGE
-	db MIST
+	db THUNDER_WAVE
 	db BODY_SLAM
 	; seadra
 	db MEGA_DRAIN
-	db DOUBLE_TEAM
+	db BARRAGE
 	db DRAGON_RAGE
 	db HYDRO_PUMP
 	; dragonite
