@@ -960,7 +960,7 @@ Modifier4PreferredMoves:
 	db SLEEP_EFFECT
 	db POISON_EFFECT
 	db PARALYZE_EFFECT
-	db FIREWALL_EFFECT ; todo: remove?
+	db FIREWALL_EFFECT
 	db CONFUSION_EFFECT
 	db -1 ; end
 

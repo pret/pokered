@@ -229,10 +229,10 @@ KangaskhanEvosMoves:
 	db 23, STOMP
 	db 27, HEADBUTT
 	db 30, MIMIC
-	db 33, DIZZY_PUNCH
 	db 36, REST
+	db 39, DOUBLE_EDGE
 	db 41, FOCUS_ENERGY
-	db 46, DOUBLE_EDGE
+	db 44, DIZZY_PUNCH
 	db 52, HYPER_BEAM
 	db 56, SUBMISSION
 	db 0
@@ -288,7 +288,7 @@ SpearowEvosMoves:
 	db 30, FURY_ATTACK
 	db 33, AGILITY
 	db 37, DRILL_PECK
-	db 45, SKY_ATTACK
+	db 45, SONICBOOM
 	db 50, SPIKE_CANNON
 	db 0
 
@@ -731,7 +731,7 @@ FearowEvosMoves:
 	db 30, FURY_ATTACK
 	db 33, AGILITY
 	db 37, DRILL_PECK
-	db 45, SKY_ATTACK
+	db 45, SONICBOOM
 	db 50, SPIKE_CANNON
 	db 0
 
@@ -872,6 +872,7 @@ HitmonchanEvosMoves:
 	db 0
 ; Learnset
 	db 19, DOUBLE_TEAM
+	db 22, COMET_PUNCH
 	db 24, FIRE_PUNCH
 	db 25, ICE_PUNCH
 	db 26, THUNDERPUNCH
@@ -948,7 +949,7 @@ DrowzeeEvosMoves:
 	db 37, PSYCHIC_M
 	db 43, MEDITATE
 	db 48, DREAM_EATER
-	db 54, LOVELY_KISS
+	db 48, HYPNOSIS
 	db 0
 
 GolemEvosMoves:
@@ -978,9 +979,9 @@ MagmarEvosMoves:
 	db 18, ROLLING_KICK
 	db 20, CONFUSE_RAY
 	db 23, TELEPORT
+	db 25, BARRAGE
 	db 27, FIRE_PUNCH
-	db 32, BARRAGE
-	db 38, FLAMETHROWER
+	; TODO: shore up moveset when making magmatic magmar
 	db 43, EARTHQUAKE
 	db 47, PSYCHIC_M
 	db 52, POISON_GAS
@@ -990,10 +991,9 @@ ElectabuzzEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
-	db 22, THUNDERPUNCH
 	db 26, COMET_PUNCH
 	db 28, LIGHT_SCREEN
-	db 30, THUNDERBOLT
+	db 30, THUNDERPUNCH
 	db 33, COUNTER ; DRAIN PUNCH
 	db 37, TAKE_DOWN ; HEAT RUSH
 	db 42, MEGA_PUNCH
@@ -1153,9 +1153,9 @@ DragoniteEvosMoves:
 	db 29, BODY_SLAM
 	db 33, MIST
 	db 38, DRAGON_RAGE
-	db 46, HYPER_BEAM
-	;db 52, WHIRLWIND ; TODO: add but check lance's moveset works still
-	;db 52, SHARPEN
+	db 46, WHIRLWIND
+	db 47, SHARPEN
+	db 52, HYPER_BEAM
 	db 0
 
 DoduoEvosMoves:
@@ -1898,7 +1898,7 @@ HypnoEvosMoves:
 	db 37, PSYCHIC_M
 	db 43, MEDITATE
 	db 48, DREAM_EATER
-	db 54, LOVELY_KISS
+	db 48, HYPNOSIS
 	db 0
 
 GolbatEvosMoves:
@@ -2231,7 +2231,6 @@ GoldeenEvosMoves:
 	db 38, SKULL_BASH
 	db 43, WITHDRAW
 	db 45, MIST
-	db 47, HYDRO_PUMP
 	db 52, TWINEEDLE
 	db 57, HYPER_BEAM
 	db 0
@@ -2250,7 +2249,6 @@ SeakingEvosMoves:
 	db 38, SKULL_BASH
 	db 43, WITHDRAW
 	db 45, MIST
-	db 47, HYDRO_PUMP
 	db 52, TWINEEDLE
 	db 57, HYPER_BEAM
 	db 0

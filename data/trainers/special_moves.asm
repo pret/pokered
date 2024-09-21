@@ -16,12 +16,9 @@ LoneMoves:
 	db 5, 3, EARTHQUAKE
 
 ; unique moves for elite 4
-; all trainers in this class are given this move automatically
+; all trainers in this class are given this move automatically on their 6th pokemon's 2nd move slot
 ; (unrelated to LoneMoves)
 TeamMoves:
 	; trainer, move
-	db LORELEI, ICE_BEAM
-	db BRUNO,   MEGA_PUNCH
 	db AGATHA,  THUNDERBOLT
-	db LANCE,   RAZOR_WIND ; ROOST
 	db -1 ; end
