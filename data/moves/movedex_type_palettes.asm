@@ -30,7 +30,7 @@ TypePaletteMapping:
 	db PAL_BLACK2;unused
 	db PAL_BLACK2;unused
 	db PAL_BLACK2;unused
-	db PAL_BLACK2;unused
+	db PAL_WHITEMON;tri
 	db PAL_BLACK2;unused
 	db PAL_BLACK2;unused
 	db PAL_REDMON;fire
@@ -40,7 +40,6 @@ TypePaletteMapping:
 	db PAL_PINKMON;psychic
 	db PAL_CYANMON;ice
 	db PAL_0F;dragon
-	db PAL_WHITEMON;tri
 
 ; input d = type ID
 LoadTypeIcon:
@@ -79,7 +78,7 @@ TypeGraphicMapping:
 	dw 0 ;unused
 	dw 0 ;unused
 	dw 0 ;unused
-	dw 0 ;unused
+	dw TriTypeIcon ;tri
 	dw 0 ;unused
 	dw 0 ;unused
 	dw FireTypeIcon;fire
@@ -89,7 +88,6 @@ TypeGraphicMapping:
 	dw PsychicTypeIcon;psychic
 	dw IceTypeIcon;ice
 	dw DragonTypeIcon;dragon
-	dw TriTypeIcon;tri
 
 CheckGBCPsychic:
 	ld a, [wOptions2]
