@@ -16,7 +16,9 @@ TypeNames:
 REPT UNUSED_TYPES_END - UNUSED_TYPES
 	dw .Normal
 ENDR
-
+	dw .Tri
+	dw .Floating
+	dw .Magma
 	dw .Fire
 	dw .Water
 	dw .Grass
@@ -24,8 +26,6 @@ ENDR
 	dw .Psychic
 	dw .Ice
 	dw .Dragon
-	dw .Tri
-	dw .Floating
 
 	assert_table_length NUM_TYPES
 
@@ -48,3 +48,4 @@ ENDR
 .Tri:      db "TRI@"
 .Crystal:  db "CRYSTAL@"
 .Floating: db "FLOATING@"
+.Magma:    db "MAGMA@"

@@ -90,7 +90,7 @@ InternalMapEntries:
 	internal_map SECRET_LAB,                     2, 15, PokemonMansionName
 	internal_map CHAMP_ARENA,                    0,  2, PokemonLeagueName
 	internal_map DIAMOND_MINE,                  12,  4, DiamondMineName
-	internal_map CINNABAR_VOLCANO,               2, 13, CinnabarVolcanoName
+	internal_map CINNABAR_VOLCANO_WEST,          1, 13, CinnabarVolcanoName
 	internal_map HALL_OF_FAME,                   0,  2, PokemonLeagueName
 	internal_map UNDERGROUND_PATH_NORTH_SOUTH,  10,  5, UndergroundPathName
 	internal_map CHAMPIONS_ROOM,                 0,  2, PokemonLeagueName

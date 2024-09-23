@@ -63,7 +63,7 @@ EvosMovesPointerTable:
 	dw GolemEvosMoves
 	dw NothingEvosMoves ; irradiated
 	dw MagmarEvosMoves
-	dw NothingEvosMoves
+	dw MagmarEvosMoves ; volcanic magmar
 	dw ElectabuzzEvosMoves
 	dw MagnetonEvosMoves
 	dw KoffingEvosMoves
@@ -976,15 +976,16 @@ MagmarEvosMoves:
 	db 0
 ; Learnset
 	db 15, SMOG
-	db 18, ROLLING_KICK
-	db 20, CONFUSE_RAY
-	db 23, TELEPORT
-	db 25, BARRAGE
+	db 17, SMOKESCREEN
+	db 20, ROLLING_KICK
+	db 22, CONFUSE_RAY
+	db 24, TELEPORT
 	db 27, FIRE_PUNCH
-	; TODO: shore up moveset when making magmatic magmar
+	db 30, BARRAGE
+	db 37, EGG_BOMB
 	db 43, EARTHQUAKE
-	db 47, PSYCHIC_M
-	db 52, POISON_GAS
+	db 49, POISON_GAS
+	db 54, FIRE_BLAST
 	db 0
 
 ElectabuzzEvosMoves:

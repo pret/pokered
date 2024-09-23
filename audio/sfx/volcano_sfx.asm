@@ -43,6 +43,7 @@ SFX_Lava_Flows::
 	noise_note 10, 13, 5, 113
 	noise_note 1, 0, 0, 0
 	sound_loop 2, SFX_Lava_Flows
+SFX_Lava_Splash::
 	noise_note 15, 13, 7, 23
 	sound_ret
 
@@ -50,6 +51,7 @@ SFX_Melt_Rocks::
 	noise_note 7, 15, 3, 53
 	noise_note 9, 15, 6, 69
 	sound_loop 4, SFX_Melt_Rocks
+SFX_Fire_Powerup::
 	noise_note 15, 15, -7, 125
 	noise_note 15, 15, 7, 126
 	sound_ret

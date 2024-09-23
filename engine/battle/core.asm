@@ -8,7 +8,7 @@ INCLUDE "data/battle/special_effects.asm"
 
 SlidePlayerAndEnemySilhouettesOnScreen:
 	; TODO: optional trainer colors
-	call LoadPlayerBackPic
+	callfar LoadPlayerBackPic
 	ld a, MESSAGE_BOX ; the usual text box at the bottom of the screen
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
@@ -6833,104 +6833,6 @@ SwapPlayerAndEnemyLevels:
 	pop bc
 	ret
 
-; loads either red back pic or old man back pic
-; also writes OAM data and loads tile patterns for the Red or Old Man back sprite's head
-; (for use when scrolling the player sprite and enemy's silhouettes on screen)
-LoadPlayerBackPic:
-;;;;;;;;;; PureRGBnote: ADDED: choose between the original back sprite for the player or the high res one
-	ld a, [wSpriteOptions2]
-	bit BIT_BACK_SPRITES, a
-	jr z, .ogBackSprite
-	ld a, [wBattleType]
-	dec a ; is it the old man tutorial?
-	ld de, RedPicBackSW
-	jr nz, .next
-	ld de, OldManPicBackSW
-	jr z, .next
-.ogBackSprite
-;;;;;;;;;;
-	ld a, [wBattleType]
-	dec a ; is it the old man tutorial?
-	ld de, RedPicBack
-	jr nz, .next
-	ld de, OldManPicBack
-.next
-;;;;;;;;;; PureRGBnote: ADDED: choose between the original back sprite for the player or the high res one
-	ld a, [wSpriteOptions2]
-	bit BIT_BACK_SPRITES, a
-	jr z, .ogBackSpriteBank
-	ld a, BANK(RedPicBackSW)
-	ASSERT BANK(RedPicBackSW) == BANK(OldManPicBackSW)
-	call UncompressSpriteFromDE
-	call LoadBackSpriteUnzoomed
-	jr .nextAgain
-.ogBackSpriteBank
-;;;;;;;;;;
-	ld a, BANK(RedPicBack)
-	ASSERT BANK(RedPicBack) == BANK(OldManPicBack)
-	call UncompressSpriteFromDE
-	predef ScaleSpriteByTwo
-.nextAgain	
-	ld hl, wShadowOAM
-	xor a
-	ldh [hOAMTile], a ; initial tile number
-	ld b, $7 ; 7 columns
-	ld e, $a0 ; X for the left-most column
-.loop ; each loop iteration writes 3 OAM entries in a vertical column
-	ld c, $3 ; 3 tiles per column
-	ld d, $38 ; Y for the top of each column
-.innerLoop ; each loop iteration writes 1 OAM entry in the column
-	ld a, d
-	ld [hli], a ; OAM Y
-	ld [hl], e ; OAM X
-	ld a, $8 ; height of tile
-	add d ; increase Y by height of tile
-	ld d, a
-	inc hl
-	ldh a, [hOAMTile]
-	ld [hli], a ; OAM tile number
-	inc a ; increment tile number
-	ldh [hOAMTile], a
-	;;;;; shinpokerednote: gbcnote: load correct palette for hat object
-	ld a, 2
-	ld [hli], a
-	;;;;;
-	dec c
-	jr nz, .innerLoop
-	ldh a, [hOAMTile]
-	add $4 ; increase tile number by 4
-	ldh [hOAMTile], a
-	ld a, $8 ; width of tile
-	add e ; increase X by width of tile
-	ld e, a
-	dec b
-	jr nz, .loop
-;;;;;;;;;; PureRGBnote: ADDED: in the case of high res sprites we dont need to run the interlace code
-	ld a, [wSpriteOptions2]
-	bit BIT_BACK_SPRITES, a
-	jr nz, .nextFinish
-.ogSpriteRoutine
-;;;;;;;;;;
-	ld de, vBackPic
-	call InterlaceMergeSpriteBuffers
-.nextFinish
-	ld a, $a
-	ld [MBC1SRamEnable], a
-	xor a
-	ld [MBC1SRamBank], a
-	ld hl, vSprites
-	ld de, sSpriteBuffer1
-	ldh a, [hLoadedROMBank]
-	ld b, a
-	ld c, 7 * 7
-	call CopyVideoData
-	xor a
-	ld [MBC1SRamEnable], a
-	ld a, $31
-	ldh [hStartTileID], a
-	hlcoord 1, 5
-	predef_jump CopyUncompressedPicToTilemap
-
 ; does nothing since no stats are ever selected (barring glitches)
 ;DoubleOrHalveSelectedStats:
 ;	callfar DoubleSelectedStats
@@ -7354,8 +7256,8 @@ DetermineWildOpponent:
 	callfar TryDoWildEncounter
 	ret nz
 InitBattleCommon:
-	ld a, [wCurMap]
-	cp CINNABAR_VOLCANO
+	ld a, [wCurMapTileset]
+	cp VOLCANO
 	jr nz, .notVolcano
 	ld hl, wFlags_D733
 	set 1, [hl] ; prevents surf music from playing when returning from a battle on lava
@@ -7632,7 +7534,7 @@ LoadBackSpriteZoomed:
 	call GetBackSpriteTarget
 	jp InterlaceMergeSpriteBuffers ; combine the two buffers to a single 2bpp sprite
 
-LoadBackSpriteUnzoomed:
+LoadBackSpriteUnzoomed::
 	call GetBackSpriteTarget
 	ld a, $66
 	push de

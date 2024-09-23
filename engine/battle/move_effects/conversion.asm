@@ -329,7 +329,7 @@ ConversionAttackTable:
 	db MEGA_DRAIN            ; GRAVELER           
 	db DIZZY_PUNCH           ; CHANSEY            
 	db PSYCHIC_M             ; MACHOKE            
-	db CONVERT_MR_MIME       ; MR_MIME  ##Needs option remap  
+	db CONVERT_MR_MIME       ; MR_MIME  
 	db PSYCHIC_M             ; HITMONLEE          
 	db PSYCHIC_M             ; HITMONCHAN         
 	db PSYCHIC_M             ; ARBOK              
@@ -338,8 +338,8 @@ ConversionAttackTable:
 	db TWINEEDLE             ; DROWZEE            
 	db MEGA_DRAIN            ; GOLEM              
 	db PSYCHIC_M             ; IRRADIATED        
-	db SPIKE_CANNON          ; MAGMAR             
-	db 0               ; $34
+	db SPIKE_CANNON          ; MAGMAR
+	db EARTHQUAKE            ; VOLCANIC_MAGMAR
 	db EARTHQUAKE            ; ELECTABUZZ         
 	db EARTHQUAKE            ; MAGNETON           
 	db PSYCHIC_M             ; KOFFING            

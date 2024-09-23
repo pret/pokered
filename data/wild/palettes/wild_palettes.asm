@@ -130,7 +130,7 @@ WildPalettePointers:
 	dw DefaultPalettes
 	dw DefaultPalettes
 	dw CinnabarVolcanoWildPalettes
-	dw DefaultPalettes
+	dw CinnabarVolcanoWildPalettes
 	dw DefaultPalettes
 	dw DefaultPalettes
 	dw DefaultPalettes

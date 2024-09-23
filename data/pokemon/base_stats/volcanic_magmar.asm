@@ -3,12 +3,12 @@
 	db  75,  95,  57,  93,  95
 	;   hp  atk  def  spd  spc
 
-	db FIRE, FIRE ; type
+	db FIRE, MAGMA ; type
 	db 85 ; catch rate
 	db 167 ; base exp
 
-	INCBIN "gfx/pokemon/front/magmar.pic", 0, 1 ; sprite dimensions
-	dw MagmarPicFront, MagmarPicBackSW
+	INCBIN "gfx/pokemon/front_alt/volcanic_magmar.pic", 0, 1 ; sprite dimensions
+	dw VolcanicMagmarPicFront, VolcanicMagmarPicBackSW
 
 	db EMBER, FIRE_SPIN, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -54,10 +54,10 @@
 	; end
 
 
-	db BANK(MagmarPicFront)
+	db BANK(VolcanicMagmarPicFront)
 	db 0
 	db BANK(MagmarPicBack)
-	db BANK(MagmarPicBackSW)
+	db BANK(VolcanicMagmarPicBackSW)
 
 	dw 0, MagmarPicBack
 

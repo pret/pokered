@@ -120,7 +120,7 @@ PartyMonSpeedsSlow:
 LoadMonPartySpriteGfx:
 ; Load mon party sprite tile patterns into VRAM during V-blank.
 	ld hl, MonPartySpritePointers
-	ld a, $1c
+	ld a, 2
 
 LoadAnimSpriteGfx:
 ; Load animated sprite tile patterns into VRAM during V-blank. hl is the address
@@ -313,17 +313,5 @@ WriteMonPartySpriteOAM:
 ;	ret
 
 ; INCLUDE "data/pokemon/menu_icons.asm"
-
-DEF INC_FRAME_1 EQUS "0, $20"
-DEF INC_FRAME_2 EQUS "$20, $20"
-
-BugIconFrame1:       INCBIN "gfx/icons/bug.2bpp", INC_FRAME_1
-PlantIconFrame1:     INCBIN "gfx/icons/plant.2bpp", INC_FRAME_1
-BugIconFrame2:       INCBIN "gfx/icons/bug.2bpp", INC_FRAME_2
-PlantIconFrame2:     INCBIN "gfx/icons/plant.2bpp", INC_FRAME_2
-SnakeIconFrame1:     INCBIN "gfx/icons/snake.2bpp", INC_FRAME_1
-QuadrupedIconFrame1: INCBIN "gfx/icons/quadruped.2bpp", INC_FRAME_1
-SnakeIconFrame2:     INCBIN "gfx/icons/snake.2bpp", INC_FRAME_2
-QuadrupedIconFrame2: INCBIN "gfx/icons/quadruped.2bpp", INC_FRAME_2
 
 TradeBubbleIconGFX:  INCBIN "gfx/trade/bubble.2bpp"

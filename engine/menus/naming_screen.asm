@@ -109,7 +109,7 @@ DisplayNamingScreenWrap:
 	call RunPaletteCommand
 	call LoadHpBarAndStatusTilePatterns
 	call LoadEDTile
-	farcall LoadMonPartySpriteGfx
+	;farcall LoadMonPartySpriteGfx ; Not needed due to icon changes??
 	hlcoord 0, 4
 	lb bc, 9, 18
 	call TextBoxBorder

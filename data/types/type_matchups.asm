@@ -105,5 +105,7 @@ TypeEffects:
 	db BONEMERANG_TYPE,   BUG,          NOT_VERY_EFFECTIVE
 	db BONEMERANG_TYPE,   ROCK,         SUPER_EFFECTIVE
 	db BONEMERANG_TYPE,   POISON,       SUPER_EFFECTIVE
+	db WATER,        MAGMA,         NO_EFFECT
+	db FIRE,         MAGMA,         NO_EFFECT
 	db -1 ; end
 

@@ -118,7 +118,7 @@ MapHeaderBanks::
 	db BANK(ChampArena_h)
 	db BANK(DiamondMine_h) ; UNUSED_MAP_73
 	db BANK(CinnabarVolcano_h) ; UNUSED_MAP_74
-	db $1D ; UNUSED_MAP_75
+	db BANK(CinnabarVolcanoWest_h) ; UNUSED_MAP_75
 	db BANK(HallOfFame_h)
 	db BANK(UndergroundPathNorthSouth_h)
 	db BANK(ChampionsRoom_h)

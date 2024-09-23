@@ -311,9 +311,8 @@ SECTION "Version Graphics", ROMX
 INCLUDE "gfx/version.asm"
 
 SECTION "bank1C", ROMX
-; PureRGBnote: MOVED: splash.asm, healing_machine.asm, and hall_of_fame.asm were moved
+; PureRGBnote: MOVED: splash.asm, ghost_marowak_anim.asm, healing_machine.asm, and hall_of_fame.asm were moved
 INCLUDE "engine/overworld/player_animations.asm"
-INCLUDE "engine/battle/ghost_marowak_anim.asm"
 INCLUDE "engine/battle/battle_transitions.asm"
 INCLUDE "engine/items/town_map.asm"
 INCLUDE "engine/gfx/mon_icons.asm"
@@ -377,6 +376,7 @@ INCLUDE "data/tilesets/collision_tile_ids.asm"
 INCLUDE "engine/pokemon/bills_pc.asm"
 ; moved from bank1e
 INCLUDE "engine/overworld/healing_machine.asm"
+INCLUDE "engine/battle/ghost_marowak_anim.asm"
 ; moved from home bank
 INCLUDE "audio/fade_audio.asm"
 INCLUDE "engine/gfx/animated_tiles_code.asm"
@@ -452,3 +452,4 @@ INCLUDE "engine/gfx/enter_map_replace_tiles_check.asm"
 INCLUDE "engine/battle/move_effects/defense_curl_effect.asm"
 INCLUDE "engine/battle/remap_move_data.asm"
 INCLUDE "engine/battle/move_effects/conversion.asm"
+INCLUDE "engine/overworld/overworld_animation.asm"

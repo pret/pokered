@@ -119,7 +119,7 @@ WildDataPointers:
 	dw NothingWildMons
 	dw NothingWildMons
 	dw CinnabarVolcanoWildMons
-	dw NothingWildMons
+	dw CinnabarVolcanoWildMons
 	dw NothingWildMons
 	dw NothingWildMons
 	dw NothingWildMons

@@ -14,10 +14,13 @@ DEF PHYSICAL EQU const_value
 	const CRYSTAL      ; $09 PureRGBnote: ADDED: used with hardened onix (same as rock type but resists water and ice + normally damaged by grass, still gets stab on rock moves)
 	const BONEMERANG_TYPE ; $0A PureRGBnote: ADDED: used with bonemerang...same as ground but can hit flying/floating pokemon for neutral dmg
 DEF UNUSED_TYPES EQU const_value
-	const_next 20
+	const_next 17
 DEF UNUSED_TYPES_END EQU const_value
 
 DEF SPECIAL EQU const_value
+	const TRI          ; $11 PureRGBnote: ADDED: used with tri attack
+	const FLOATING     ; $12 PureRGBnote: ADDED: used with floating magneton / weezing, can upgrade yours in specific places
+	const MAGMA        ; $13 PureRGBnote: ADDED: used with volcanic magmar
 	const FIRE         ; $14
 	const WATER        ; $15
 	const GRASS        ; $16
@@ -25,7 +28,5 @@ DEF SPECIAL EQU const_value
 	const PSYCHIC_TYPE ; $18
 	const ICE          ; $19
 	const DRAGON       ; $1A
-	const TRI          ; $1B PureRGBnote: ADDED: used with tri attack
-	const FLOATING     ; $1C PureRGBnote: ADDED: used with floating magneton / weezing, can upgrade yours in specific places
 
 DEF NUM_TYPES EQU const_value

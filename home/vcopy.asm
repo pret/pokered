@@ -384,16 +384,5 @@ ENDR
 UpdateMovingBgTiles::
 ; Animate water and flower
 ; tiles in the overworld.
-
-	ldh a, [hTileAnimations]
-	and a
-	ret z
-
-;;;;;;;;;; shinpokerednote: gbcnote: fixes a strange incident where $FF is written to this one byte of a water tile
-	ldh a, [rLY]
-	cp $90 ; check if not in vblank period??? (maybe if vblank is too long)
-	ret c
-;;;;;;;;;;
-
 	jpfar AnimateTiles
 	

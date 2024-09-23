@@ -50,6 +50,8 @@ LoadExtraTiles::
 	jr z, .saffronAbandonedBuilding
 	cp SEAFOAM_ISLANDS_1F
 	jr z, .seafoamIslands1F
+	cp CINNABAR_VOLCANO
+	jr z, .cinnabarVolcano
 	ret
 .typeGuyHouse
 	jpfar CheckLoadLightSwitch
@@ -59,6 +61,8 @@ LoadExtraTiles::
 	jpfar SilphCo1FReplaceTiles
 .seafoamIslands1F
 	jpfar SeafoamIslands1FCheckLoadCustomTiles
+.cinnabarVolcano
+	jpfar CinnabarVolcanoCheckLoadCustomTiles
 
 
 UpdateNonPlayerSprite:

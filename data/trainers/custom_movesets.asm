@@ -109,7 +109,7 @@ ChampArenaBlaineMoveset:
 	db DISABLE
 	db SONICBOOM
 	db CONFUSE_RAY
-	; magmar
+	; volcanic magmar
 	db PSYCHIC_M
 	db FIRE_PUNCH
 	db ICE_PUNCH

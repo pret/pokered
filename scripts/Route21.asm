@@ -25,6 +25,9 @@ CheckRemoveVolcano:
 	ld a, WALKING
 	ld [wWalkBikeSurfState], a
 	call LoadWalkingPlayerSpriteGraphics
+	; also turn on autosurf bit since we are guaranteed to have surfed to here and to prevent softlocks should have surf turned on again
+	ld hl, wd728
+	set 2, [hl] ; set autosurf bit
 .replaceTiles
 	CheckFlag FLAG_VOLCANO_AREA_TURNED_OFF
 	ret z
@@ -52,6 +55,7 @@ Route21_TextPointers:
 	dw_const Route21Fisher3Text,  TEXT_ROUTE21_FISHER3
 	dw_const Route21Fisher4Text,  TEXT_ROUTE21_FISHER4
 	dw_const PickUpItemText,      TEXT_ROUTE21_ITEM1 ; PureRGBnote: ADDED: new item on this route.
+	dw_const Route21CinnabarVolcanoSignText, TEXT_ROUTE21_CINNABAR_VOLCANO_SIGN
 
 Route21TrainerHeaders:
 	def_trainers
@@ -235,4 +239,15 @@ Route21Fisher4EndBattleText:
 
 Route21Fisher4AfterBattleText:
 	text_far _Route21Fisher4AfterBattleText
+	text_end
+
+Route21CinnabarVolcanoSign::
+	CheckFlag FLAG_VOLCANO_AREA_TURNED_OFF
+	ret nz
+	ld a, TEXT_ROUTE21_CINNABAR_VOLCANO_SIGN
+	ldh [hSpriteIndexOrTextID], a
+	jp DisplayTextID
+
+Route21CinnabarVolcanoSignText:
+	text_far _Route21CinnabarVolcanoSignText
 	text_end

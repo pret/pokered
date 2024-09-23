@@ -611,6 +611,8 @@ SpearowPicFrontAlt:: INCBIN "gfx/pokemon/front_alt/spearow.pic"
 ScytherPicFrontAlt:: INCBIN "gfx/pokemon/front_alt/scyther.pic"
 GolduckPicFrontAlt:: INCBIN "gfx/pokemon/front_alt/golduck.pic"
 WinterDragonairPicFront:: INCBIN "gfx/pokemon/front_alt/dragonair.pic"
+VolcanicMagmarPicFront:: INCBIN "gfx/pokemon/front_alt/volcanic_magmar.pic"
+VolcanicMagmarPicBackSW:: INCBIN "gfx/pokemon/back_sw/volcanic_magmarb.pic"
 
 ; spirits
 TorchedPicFront:: INCBIN "gfx/battle/spirit_torched.pic"
@@ -618,6 +620,10 @@ ChunkyPicFront:: INCBIN "gfx/battle/spirit_chunky.pic"
 PainlessPicFront:: INCBIN "gfx/battle/spirit_painless.pic"
 IrradiatedPicFront:: INCBIN "gfx/battle/spirit_irradiated.pic"
 TheMawPicFront:: INCBIN "gfx/battle/spirit_the_maw.pic"
+
+; new player battle sprites
+LavaSuitBattlePicSW:: INCBIN "gfx/player/lava_suitb_big.pic"
+LavaSuitBattlePic::   INCBIN "gfx/player/lava_suitb.pic"
 
 
 SECTION "Type Icons", ROMX

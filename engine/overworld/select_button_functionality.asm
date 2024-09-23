@@ -32,8 +32,8 @@ CheckForRodBike::
 	ld a, [wWalkBikeSurfState]
 	cp SURFING
 	ret z
-	ld a, [wCurMap]
-	cp CINNABAR_VOLCANO
+	ld a, [wCurMapTileset]
+	cp VOLCANO
 	jr z, SelectInVolcano
 	;else check if bike is in bag
 	ld b, BICYCLE

@@ -1,5 +1,30 @@
+TownMapWaterTiles:
+	ld hl, wTownMapSpriteBlinkingEnabled ; this is used as the counter for the town map so we don't mess up the normal counter
+	inc [hl]
+	ld a, [hl]
+	cp 60
+	ret nz
+	push hl
+	ld hl, vTileset tile $64
+	call AnimateArbitraryWaterTile2
+	pop hl
+	ld [hl], 1 ; needs to be kept at a minimum of 1 while viewing town map to keep blinking active
+	ret
+
 ; PureRGBnote: CHANGED: the code for animating these tiles was moved to another bank for space.
 AnimateTiles::
+	ld a, [wTownMapSpriteBlinkingEnabled] ; set to 1 when viewing town map
+	and a
+	jr nz, TownMapWaterTiles
+	ldh a, [hTileAnimations]
+	and a
+	ret z
+
+;;;;;;;;;; shinpokerednote: gbcnote: fixes a strange incident where $FF is written to this one byte of a water tile
+	ldh a, [rLY]
+	cp $90 ; check if not in vblank period??? (maybe if vblank is too long)
+	ret c
+;;;;;;;;;;
 	ld a, [wCurMapConnections]
 	bit BIT_SPECIAL_ANIMATION_MAP, a
 	jr z, .normal
@@ -77,6 +102,7 @@ AnimateTiles::
 ; moves water tile sometimes left and and sometimes right to look like waves
 AnimateWaterTile::
 	ld hl, vTileset tile $14
+AnimateArbitraryWaterTile2:
 	ld a, [wMovingBGTilesCounter2]
 	inc a
 	and 7

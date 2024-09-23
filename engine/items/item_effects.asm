@@ -2315,9 +2315,13 @@ RodResponse:
 ; checks if fishing is possible and if so, runs initialization code common to all rods
 ; unsets carry if fishing is possible, sets carry if not
 FishingInit:
+	ld a, [wCurMapTileset]
+	cp VOLCANO
+	jr z, .cantFish ; no volcano fishing
 	ld a, [wIsInBattle]
 	and a
 	jr z, .notInBattle
+.cantFish
 	scf ; can't fish during battle
 	ret
 .notInBattle
@@ -3400,8 +3404,15 @@ WaterTileSetIsNextTileShoreOrWater::
 	pop hl
 	ret
 .volcanoCheck
-	ld a, [wYCoord] ; 3
-	cp 53 ; 2
+	ld a, [wCurMap]
+	cp CINNABAR_VOLCANO
+	ld a, [wYCoord]
+	jr z, .cinnabarVolcano
+	; west cinnabar volcano
+	cp 8
+	jr c, .volcanoTileCheck
+.cinnabarVolcano
+	cp 53
 	jr nc, .volcanoTileCheck ; can lava surf on bottom floor
 	ld de, VolcanoMainRoomRange
 	callfar FarArePlayerCoordsInRange

@@ -59,7 +59,7 @@
 	const GOLEM              ; $31
 	const SPIRIT_IRRADIATED  ; $32
 	const MAGMAR             ; $33
-	const_skip               ; $34 ; magmatic magmar
+	const VOLCANIC_MAGMAR    ; $34
 	const ELECTABUZZ         ; $35
 	const MAGNETON           ; $36
 	const KOFFING            ; $37

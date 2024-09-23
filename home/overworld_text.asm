@@ -9,6 +9,7 @@
 
 PickUpItemText::
 	text_asm
+PickupItemTextBody::
 	predef PickUpItem
 	rst TextScriptEnd
 

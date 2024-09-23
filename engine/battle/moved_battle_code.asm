@@ -113,44 +113,152 @@ ShouldMoveGetStabBoost::
 	jr z, .sameTypeAttackBonus
 	cp c ; does the move type match type 2 of the attacker?
 	jr z, .sameTypeAttackBonus
-;;;;;;;;;; PureRGBnote: ADDED: CRYSTAL type pokemon get STAB on ROCK attacks
+;;;;;;;;;; PureRGBnote: ADDED: some special types pokemon get STAB on other type attacks
+	cp GROUND
+	jr z, .checkMagmaStab
 	cp ROCK
 	jr z, .checkCrystalStab
-;;;;;;;;;;
-;;;;;;;;;; PureRGBnote: ADDED: GROUND type pokemon get STAB on bonemerang since it uses its own unique type to hit flying/floating mons
 	cp BONEMERANG_TYPE
 	jr z, .checkGroundStab
-;;;;;;;;;;
-;;;;;;;;;; PureRGBnote: ADDED: normal type pokemon get STAB on tri attack
 	cp TRI
 	jr nz, .skipSameTypeAttackBonus
-	ld a, NORMAL 
-	cp b ; does NORMAL match type 1 of the attacker?
-	jr z, .sameTypeAttackBonus
-	cp c ; does NORMAL match type 2 of the attacker?
-	jr z, .sameTypeAttackBonus
-;;;;;;;;;
-	jr .skipSameTypeAttackBonus
-;;;;;;;;;; PureRGBnote: ADDED: CRYSTAL type pokemon get STAB on ROCK attacks
+	ld a, NORMAL ; TRI type moves get stab on normal-type pokemon (porygon)
+	jr .checkAlternateStab
+.checkMagmaStab
+	ld a, MAGMA ; GROUND type moves get stab on magma-type pokemon (volcanic magmar)
+	jr .checkAlternateStab
 .checkCrystalStab
-	ld a, CRYSTAL ; ROCK type moves still get STAB for CRYSTAL type pokemon (only hardened onix at the moment)
-	cp b ; does CRYSTAL match type 1 of the attacker?
-	jr z, .sameTypeAttackBonus
-	cp c ; does CRYSTAL match type 2 of the attacker?
-	jr z, .sameTypeAttackBonus
-	jr .skipSameTypeAttackBonus
-;;;;;;;;;;
-;;;;;;;;;;; PureRGBnote: ADDED: GROUND type pokemon get STAB on bonemerang since it uses its own unique type to hit flying/floating mons
+	ld a, CRYSTAL ; ROCK type moves still get STAB for CRYSTAL type pokemon (hardened onix)
+	jr .checkAlternateStab
 .checkGroundStab
-	ld a, GROUND
-	cp b ; does GROUND match type 1 of the attacker?
+	ld a, GROUND ; bonemerang-type moves get STAB on ground pokemon (only used with bonemerang)
+.checkAlternateStab
+	cp b ; does a match type 1 of the attacker?
 	jr z, .sameTypeAttackBonus
-	cp c ; does GROUND match type 2 of the attacker?
+	cp c ; does a match type 2 of the attacker?
 	jr nz, .skipSameTypeAttackBonus
 ;;;;;;;;;;;
+
 .sameTypeAttackBonus
 	scf
 	ret
 .skipSameTypeAttackBonus
 	and a
 	ret
+
+
+; loads either red back pic or old man back pic
+; also writes OAM data and loads tile patterns for the Red or Old Man back sprite's head
+; (for use when scrolling the player sprite and enemy's silhouettes on screen)
+LoadPlayerBackPic::
+;;;;;;;;;; PureRGBnote: ADDED: choose between the original back sprite for the player or the high res one
+	ld a, [wSpriteOptions2]
+	bit BIT_BACK_SPRITES, a
+	jr z, .ogBackSprite
+	ld a, [wCurMapTileset]
+	cp VOLCANO
+	ld de, LavaSuitBattlePicSW
+	jr z, .next
+	ld a, [wBattleType]
+	dec a ; is it the old man tutorial?
+	ld de, RedPicBackSW
+	jr nz, .next
+	ld de, OldManPicBackSW
+	jr z, .next
+.ogBackSprite
+;;;;;;;;;;
+	ld a, [wCurMapTileset]
+	cp VOLCANO
+	ld de, LavaSuitBattlePic
+	jr z, .next
+	ld a, [wBattleType]
+	dec a ; is it the old man tutorial?
+	ld de, RedPicBack
+	jr nz, .next
+	ld de, OldManPicBack
+.next
+;;;;;;;;;; PureRGBnote: ADDED: choose between the original back sprite for the player or the high res one
+	ld a, [wSpriteOptions2]
+	bit BIT_BACK_SPRITES, a
+	jr z, .ogBackSpriteBank
+	ld a, [wCurMapTileset]
+	cp VOLCANO
+	ld a, BANK(LavaSuitBattlePicSW)
+	jr z, .uncompress
+	ld a, BANK(RedPicBackSW)
+	ASSERT BANK(RedPicBackSW) == BANK(OldManPicBackSW)
+.uncompress
+	call UncompressSpriteFromDE
+	callfar LoadBackSpriteUnzoomed
+	jr .nextAgain
+.ogBackSpriteBank
+	ld a, [wCurMapTileset]
+	cp VOLCANO
+	ld a, BANK(LavaSuitBattlePicSW)
+	jr z, .uncompress2
+;;;;;;;;;;
+	ld a, BANK(RedPicBack)
+	ASSERT BANK(RedPicBack) == BANK(OldManPicBack)
+.uncompress2
+	call UncompressSpriteFromDE
+	predef ScaleSpriteByTwo
+.nextAgain	
+	ld hl, wShadowOAM
+	xor a
+	ldh [hOAMTile], a ; initial tile number
+	ld b, $7 ; 7 columns
+	ld e, $a0 ; X for the left-most column
+.loop ; each loop iteration writes 3 OAM entries in a vertical column
+	ld c, $3 ; 3 tiles per column
+	ld d, $38 ; Y for the top of each column
+.innerLoop ; each loop iteration writes 1 OAM entry in the column
+	ld a, d
+	ld [hli], a ; OAM Y
+	ld [hl], e ; OAM X
+	ld a, $8 ; height of tile
+	add d ; increase Y by height of tile
+	ld d, a
+	inc hl
+	ldh a, [hOAMTile]
+	ld [hli], a ; OAM tile number
+	inc a ; increment tile number
+	ldh [hOAMTile], a
+	;;;;; shinpokerednote: gbcnote: load correct palette for hat object
+	ld a, 2
+	ld [hli], a
+	;;;;;
+	dec c
+	jr nz, .innerLoop
+	ldh a, [hOAMTile]
+	add $4 ; increase tile number by 4
+	ldh [hOAMTile], a
+	ld a, $8 ; width of tile
+	add e ; increase X by width of tile
+	ld e, a
+	dec b
+	jr nz, .loop
+;;;;;;;;;; PureRGBnote: ADDED: in the case of high res sprites we dont need to run the interlace code
+	ld a, [wSpriteOptions2]
+	bit BIT_BACK_SPRITES, a
+	jr nz, .nextFinish
+.ogSpriteRoutine
+;;;;;;;;;;
+	ld de, vBackPic
+	call InterlaceMergeSpriteBuffers
+.nextFinish
+	ld a, $a
+	ld [MBC1SRamEnable], a
+	xor a
+	ld [MBC1SRamBank], a
+	ld hl, vSprites
+	ld de, sSpriteBuffer1
+	ldh a, [hLoadedROMBank]
+	ld b, a
+	ld c, 7 * 7
+	call CopyVideoData
+	xor a
+	ld [MBC1SRamEnable], a
+	ld a, $31
+	ldh [hStartTileID], a
+	hlcoord 1, 5
+	predef_jump CopyUncompressedPicToTilemap

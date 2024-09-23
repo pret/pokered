@@ -1006,6 +1006,11 @@ RockTunnelB1F_Blocks: INCBIN "maps/RockTunnelB1F.blk"
 
 ;;;;;
 
+INCLUDE "data/maps/headers/CinnabarVolcanoWest.asm"
+INCLUDE "scripts/CinnabarVolcanoWest.asm"
+INCLUDE "data/maps/objects/CinnabarVolcanoWest.asm"
+CinnabarVolcanoWest_Blocks: INCBIN "maps/CinnabarVolcanoWest.blk"
+
 
 SECTION "Maps 17", ROMX
 

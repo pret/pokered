@@ -36,6 +36,16 @@ GetAreaDisplayTypes:
 	ld a, [wd11e]
 	cp PIKACHU
 	call z, .turnOffSurfLocationsIfNotChampYet
+	CheckEvent FLAG_VOLCANO_AREA_TURNED_OFF
+	jr z, .doneChecks
+	ld a, [wd11e]
+	push hl
+	ld hl, DisableVolcanoSurfingMons
+	ld de, 1
+	call IsInArray
+	pop hl
+	call c, .forceNoWaterLocations
+.doneChecks
 	CheckBothEventsSet EVENT_GOT_FUCHSIA_FISHING_GURU_ITEM, EVENT_GOT_ROUTE12_FISHING_GURU_ITEM
 	ret nz
 	ld hl, wTownMapAreaTypeFlags
@@ -55,8 +65,17 @@ GetAreaDisplayTypes:
 	; hide pikachu's secret surf encounter in bills garden if not champ yet
 	CheckEvent EVENT_BECAME_CHAMP
 	ret nz
+.forceNoWaterLocations
 	res BIT_HAS_WATER_LOCATIONS, [hl]
 	ret
+
+DisableVolcanoSurfingMons:
+	db MAGMAR
+	db GRAVELER
+	db RHYDON
+	db GOLEM
+	db ONIX
+	db -1
 
 DrawMonAreaButtonPrompt:
 	ld a, [wTownMapAreaState]
@@ -409,14 +428,20 @@ LoadMapIcons:
 	jr z, .exitLoop
 	;cp 0 ; indicates a duplicate entry ; PureRGBnote: CHANGED: won't have duplicates anymore by default
 	;jr z, .nextEntry
-	push hl
 	ld b, a
+	cp CINNABAR_VOLCANO
+	jr z, .checkHideCinnabarVolcano
+	cp CINNABAR_VOLCANO_WEST
+	jr z, .checkHideCinnabarVolcano
+	cp CERULEAN_CAVE_2F
+	jr c, .dontSkip
+	cp CERULEAN_CAVE_1F + 1
+	jr c, .checkShouldSkipCeruleanCave
+.dontSkip
+	push hl
 	predef FarLoadTownMapEntry
 	pop hl
 	ld a, [de]
-	cp $19 ; Cerulean Cave's coordinates
-	jr z, .checkShouldSkipCeruleanCave 
-.dontSkipCeruleanCave
 	call TownMapCoordsToOAMCoords2
 	pop af ; get icon tile to display
 	push af
@@ -430,13 +455,15 @@ LoadMapIcons:
 	pop af
 	ret
 .checkShouldSkipCeruleanCave
-	ld b, a
-	push bc
 	CheckEvent EVENT_BECAME_CHAMP ; show cerulean cave pokemon locations only after becoming champ
-	pop bc
-	ld a, b
 	jr z, .nextEntry
-	jr .dontSkipCeruleanCave
+	jr .dontSkip
+.checkHideCinnabarVolcano
+	CheckEvent FLAG_VOLCANO_AREA_TURNED_OFF
+	jr nz, .nextEntry
+	jr .dontSkip
+
+
 
 
 TownMapCoordsToOAMCoords2:

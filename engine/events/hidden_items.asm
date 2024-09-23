@@ -1,6 +1,6 @@
 ;;;;;;;;;; PureRGBnote: ADDED: CHANGED: most of these functions were modified to allow multiple hidden items to be picked up at once. 
 
-HiddenItems:
+HiddenItems::
 	call HiddenItemsInit
 	ret nz
 	ld a, 1

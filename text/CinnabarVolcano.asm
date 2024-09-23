@@ -6,6 +6,8 @@ _CinnabarVolcanoBombRocksText::
 	line "a #MON?"
 	done
 
+_CinnabarVolcanoBombRocksTextDoneJump::
+	para "@"
 _CinnabarVolcanoBombRocksTextDone::
 	text "Lava's flowing out"
 	line "of the volcano."
@@ -189,10 +191,11 @@ _RocksGoneText::
 	done
 
 _WhereRubiesText::
-	text "Time to dig to the" ; TODO: duplicated text
-	line "next floor!"
-	para "Where are those"
-	line "RUBIES?"
+	text "Time to find"
+	line "some RUBIES for"
+	cont "the DRILL!"
+	para "They should be"
+	line "on this floor!"
 	done
 
 _FoundRubyText::
@@ -488,4 +491,105 @@ _VolcanoGetToIt::
 	line "don't have #MON"
 	cont "to bring with me!"
 	para "Get to it, kid!"
+	done
+
+_FailedDrillFloorText::
+	text "The DRILL is too"
+	line "dull to dig down!"
+	para "Find 3 RUBIES"
+	line "to make a new"
+	cont "DRILL bit!"
+	done
+
+_CinnabarVolcanoFloor2WarpTilesText::
+	text "Whoa! What are"
+	line "those?"
+	para "Looks like the"
+	line "lava flow opened"
+	cont "up the ground"
+	cont "over there!"
+	done
+
+_CinnabarVolcanoWestMagmar1Text::
+	text "Many MAGMAR are"
+	line "relaxing in the"
+	cont "lava flow."
+	done
+
+_CinnabarVolcanoWestMagmar1QuestionText::
+	text "It looks like"
+	line "there's room for"
+	cont "one more!"
+	prompt
+
+_CinnabarVolcanoWestMagmar2Text::
+	text "MAGMAR: Fwoo?"
+	done
+
+_CinnabarVolcanoWestMagmar3Text::
+	text "MAGMAR: Fshaa!"
+	done
+
+_CinnabarVolcanoWestLavaFlowText::
+	text "This is where"
+	line "BLAINE cleared a"
+	cont "lava blockage.@"
+	text_jump _CinnabarVolcanoBombRocksTextDoneJump
+
+_CinnabarVolcanoWestMagmarTransformText1::
+	text "@"
+	text_ram wcd6d
+	text " looks"
+	line "excited for a"
+	cont "lava bath!"
+	done
+
+_CinnabarVolcanoWestMagmarTransformText2::
+	text "@"
+	text_ram wcd6d
+	text " did a"
+	line "cannonball into"
+	cont "the lava pool!"
+	done
+
+_CinnabarVolcanoWestMagmarTransformText3::
+	text "Volcanic power"
+	line "radiated through"
+	cont "@"
+	text_ram wcd6d
+	text "!"
+	done
+
+_MagmarEventAlready::
+	text "It's already"
+	line "filled with the"
+	cont "burning heat"
+	cont "of the volcano."
+	done
+
+_CinnabarVolcanoWestMagmarTransformText4::
+	text "<PARA>It became so"
+	line "scorchingly hot,"
+	cont "all water near it"
+	cont "will vaporize!"
+	para "@"
+	text_ram wcd6d
+	text " became"
+	line "immune to WATER"
+	cont "and FIRE-type"
+	cont "moves!"
+	para "The tectonic power"
+	line "of the volcano"
+	cont "flows through it!"
+	para "GROUND-type moves"
+	line "will get bonus"
+	cont "damage!"
+	done
+
+_Route21CinnabarVolcanoSignText::
+	text "CINNABAR VOLCANO"
+	para "DANGER!"
+	para "DO NOT ENTER"
+	line "WITHOUT HEAT-"
+	cont "RESISTANT KIT!"
 	done

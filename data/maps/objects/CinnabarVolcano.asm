@@ -43,6 +43,7 @@ CinnabarVolcano_Object:
 	warp_event 47, 47, CINNABAR_VOLCANO, 21 ; proxy "lava touch warp" 2
 	warp_event  3, 30, CINNABAR_VOLCANO, 23
 	warp_event  4, 54, CINNABAR_VOLCANO, 22
+	warp_event 12,  2, CINNABAR_VOLCANO_WEST, 1
 
 	def_bg_events
 

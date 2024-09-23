@@ -263,7 +263,7 @@ TypeGuysHouseTypeGuyText:
 	text_end
 
 PokemonTypeGuyList::
-	db 24
+	db 23
 	db BUTTERFREE
 	db FEAROW
 	db SANDSHREW
@@ -284,7 +284,6 @@ PokemonTypeGuyList::
 	db SEAKING
 	db MR_MIME
 	db ELECTABUZZ
-	db MAGMAR
 	db PINSIR
 	db KABUTO
 	db KABUTOPS

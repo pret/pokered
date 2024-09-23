@@ -103,6 +103,7 @@ HiddenObjectMaps:
 	db CINNABAR_VOLCANO
 	db SILPH_CO_1F
 	db POKEMON_TOWER_B1F
+	db ROUTE_21
 	db -1 ; end
 
 HiddenObjectPointers:
@@ -209,6 +210,7 @@ HiddenObjectPointers:
 	dw CinnabarVolcanoHiddenObjects
 	dw SilphCo1FHiddenObjects
 	dw PokemonTowerB1FHiddenObjects
+	dw Route21HiddenObjects
 
 MACRO hidden_object
 	db \2 ; y coord
@@ -816,7 +818,7 @@ TypeGuysHouseHiddenObjects:
 	db -1
 
 CinnabarVolcanoHiddenObjects:
-	hidden_object 43, 64, HIDDEN_ITEM_VOLCANO_LAVA_SEA_NEW, HiddenItems ; NEW
+	hidden_object 43, 64, HIDDEN_ITEM_VOLCANO_LAVA_SEA_NEW, VolcanoHiddenItemInit ; NEW
 	hidden_object 34, 28, 0, VolcanoBombableRockFloor1
 	hidden_object 48, 38, 0, VolcanoBombableRockFloor2
 	hidden_object 50, 50, 0, VolcanoBombableRockFloor3
@@ -832,4 +834,8 @@ PokemonTowerB1FHiddenObjects:
 	hidden_object 5, 42, 0, PokemonTowerB1FSecondGrave
 	hidden_object 5, 36, 0, PokemonTowerB1FThirdGrave
 	hidden_object 5, 30, 0, PokemonTowerB1FFourthGrave
+	db -1
+
+Route21HiddenObjects:
+	hidden_object 9, 53, 0, Route21CinnabarVolcanoSign
 	db -1

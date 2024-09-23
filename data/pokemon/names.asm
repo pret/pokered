@@ -51,7 +51,7 @@ MonsterNames::
 	db "GOLEM@@@@@"
 	db "IRRADIATED"
 	db "MAGMAR@@@@"
-	db "MISSINGNO."
+	db "MAGMAR@@@@"
 	db "ELECTABUZZ"
 	db "MAGNETON@@"
 	db "KOFFING@@@"

@@ -89,6 +89,12 @@ DisplayTownMap:
 .pressedUp
 	ld a, [wWhichTownMapLocation]
 	inc a
+	cp 43 ; cinnabar volcano index
+	jr nz, .skipExtraInc
+	CheckEventHL FLAG_VOLCANO_AREA_TURNED_OFF ; if the player turned off the volcano, don't show it on town map while scrolling through locations
+	jr z, .skipExtraInc
+	inc a
+.skipExtraInc
 	cp TownMapOrderEnd - TownMapOrder ; number of list items + 1
 	jr nz, .noOverflow
 	xor a
@@ -98,6 +104,12 @@ DisplayTownMap:
 .pressedDown
 	ld a, [wWhichTownMapLocation]
 	dec a
+	cp 43 ; cinnabar volcano index
+	jr nz, .skipExtraDec
+	CheckEventHL FLAG_VOLCANO_AREA_TURNED_OFF ; if the player turned off the volcano, don't show it on town map while scrolling through locations
+	jr z, .skipExtraDec
+	dec a
+.skipExtraDec
 	cp -1
 	jr nz, .noUnderflow
 	ld a, TownMapOrderEnd - TownMapOrder - 1 ; number of list items
@@ -336,6 +348,11 @@ LoadTownMap:
 	inc de
 	jr .nextTile
 .done
+	CheckFlag FLAG_VOLCANO_AREA_TURNED_OFF
+	jr nz, .noVolcanoMarker
+	hlcoord 3, 14
+	ld [hl], $6C
+.noVolcanoMarker
 	call EnableLCD
 	ld b, SET_PAL_TOWN_MAP
 	call RunPaletteCommand

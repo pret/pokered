@@ -136,7 +136,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const CHAMP_ARENA,                    8,  9 ; $72 ; PureRGBnote: ADDED: New map
 	map_const DIAMOND_MINE,                  11, 10 ; $73 ; PureRGBnote: ADDED: New map
 	map_const CINNABAR_VOLCANO,              26, 34 ; $74 ; PureRGBnote: ADDED: New map
-	map_const UNUSED_MAP_75,                  0,  0 ; $75 ; unused map
+	map_const CINNABAR_VOLCANO_WEST,         15, 10 ; $75 ; PureRGBnote: ADDED: New map
 	map_const HALL_OF_FAME,                   5,  4 ; $76
 	map_const UNDERGROUND_PATH_NORTH_SOUTH,   4, 23 ; $77 ; ERROR: UndergroundPathNorthSouth.blk is actually 4x23 PureRGBnote: FIXED
 	map_const CHAMPIONS_ROOM,                 4,  4 ; $78

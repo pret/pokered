@@ -57,7 +57,7 @@ CryData::
 	mon_cry SFX_CRY_12, $E0, $40 ; Golem
 	mon_cry SFX_CRY_1C, 219, $00 ; Irradiated
 	mon_cry SFX_CRY_04, $FF, $30 ; Magmar
-	mon_cry SFX_CRY_00, $00, $00 ; MissingNo.
+	mon_cry SFX_CRY_04, $FF, 78 ; Volcanic Magmar
 	mon_cry SFX_CRY_06, $8F, $FF ; Electabuzz
 	mon_cry SFX_CRY_1C, $20, $C0 ; Magneton
 	mon_cry SFX_CRY_12, $E6, $DD ; Koffing
