@@ -18215,15 +18215,15 @@
 00:cc38 wTradeCenterPointerTableIndex
 00:cc3a wTextDest
 00:cc3c wDoNotWaitForButtonPressAfterDisplayingText
-00:cc3d wLinkMenuSelectionReceiveBuffer
 00:cc3d wSerialExchangeNybbleTempReceiveData
+00:cc3d wLinkMenuSelectionReceiveBuffer
 00:cc3d wSerialSyncAndExchangeNybbleReceiveData
 00:cc3e wSerialExchangeNybbleReceiveData
 00:cc42 wSerialExchangeNybbleSendData
 00:cc42 wLinkMenuSelectionSendBuffer
 00:cc47 wUnknownSerialCounter
-00:cc47 wEnteringCableClub
 00:cc47 wLinkTimeoutCounter
+00:cc47 wEnteringCableClub
 00:cc49 wWhichTradeMonSelectionMenu
 00:cc49 wMonDataLocation
 00:cc4a wMenuWrappingEnabled
@@ -18357,7 +18357,6 @@
 00:cd3d wWhichTownMapLocation
 00:cd3d wFlyAnimUsingCoordList
 00:cd3d wRivalStarterTemp
-00:cd3d wHoFTeamIndex
 00:cd3d wHoFMonSpecies
 00:cd3d wSSAnneSmokeDriftAmount
 00:cd3d wInwardSpiralUpdateScreenCounter
@@ -18372,6 +18371,7 @@
 00:cd3d wCoordIndex
 00:cd3d wTempSCX
 00:cd3d wBoxMonCounts
+00:cd3d wHoFTeamIndex
 00:cd3d wUnusedCreditsByte
 00:cd3d wDayCareStartLevel
 00:cd3d wMoveDownSmallStarsOAMCount
@@ -19919,8 +19919,8 @@
 00:ff8b hOAMTile
 00:ff8b hBaseTileID
 00:ff8b hItemPrice
-00:ff8b hEastWestConnectedMapWidth
 00:ff8b hDexWeight
+00:ff8b hEastWestConnectedMapWidth
 00:ff8b hSpriteInterlaceCounter
 00:ff8b hRLEByteValue
 00:ff8c hNorthSouthConnectedMapWidth
@@ -20032,12 +20032,12 @@
 00:ffdb hGymTrashCanRandNumMask
 00:ffdb hSavedCoordIndex
 00:ffdb hItemCounter
+00:ffdb hItemToRemoveID
 00:ffdb hDexRatingNumMonsSeen
 00:ffdb hGymGateIndex
 00:ffdb hVendingMachineItem
 00:ffdb hPlayerFacing
 00:ffdb hOaksAideResult
-00:ffdb hItemToRemoveID
 00:ffdb hMissableObjectIndex
 00:ffdb hOaksAideRequirement
 00:ffdc hDexRatingNumMonsOwned

@@ -18549,15 +18549,15 @@ WRAM0 bank #0:
 	         $cc38 = wTradeCenterPointerTableIndex
 	         $cc3a = wTextDest
 	         $cc3c = wDoNotWaitForButtonPressAfterDisplayingText
-	         $cc3d = wLinkMenuSelectionReceiveBuffer
 	         $cc3d = wSerialExchangeNybbleTempReceiveData
+	         $cc3d = wLinkMenuSelectionReceiveBuffer
 	         $cc3d = wSerialSyncAndExchangeNybbleReceiveData
 	         $cc3e = wSerialExchangeNybbleReceiveData
 	         $cc42 = wSerialExchangeNybbleSendData
 	         $cc42 = wLinkMenuSelectionSendBuffer
 	         $cc47 = wUnknownSerialCounter
-	         $cc47 = wEnteringCableClub
 	         $cc47 = wLinkTimeoutCounter
+	         $cc47 = wEnteringCableClub
 	         $cc49 = wWhichTradeMonSelectionMenu
 	         $cc49 = wMonDataLocation
 	         $cc4a = wMenuWrappingEnabled
@@ -18691,7 +18691,6 @@ WRAM0 bank #0:
 	         $cd3d = wWhichTownMapLocation
 	         $cd3d = wFlyAnimUsingCoordList
 	         $cd3d = wRivalStarterTemp
-	         $cd3d = wHoFTeamIndex
 	         $cd3d = wHoFMonSpecies
 	         $cd3d = wSSAnneSmokeDriftAmount
 	         $cd3d = wInwardSpiralUpdateScreenCounter
@@ -18706,6 +18705,7 @@ WRAM0 bank #0:
 	         $cd3d = wCoordIndex
 	         $cd3d = wTempSCX
 	         $cd3d = wBoxMonCounts
+	         $cd3d = wHoFTeamIndex
 	         $cd3d = wUnusedCreditsByte
 	         $cd3d = wDayCareStartLevel
 	         $cd3d = wMoveDownSmallStarsOAMCount
@@ -20263,8 +20263,8 @@ HRAM bank #0:
 	         $ff8b = hOAMTile
 	         $ff8b = hBaseTileID
 	         $ff8b = hItemPrice
-	         $ff8b = hEastWestConnectedMapWidth
 	         $ff8b = hDexWeight
+	         $ff8b = hEastWestConnectedMapWidth
 	         $ff8b = hSpriteInterlaceCounter
 	         $ff8b = hRLEByteValue
 	         $ff8c = hNorthSouthConnectedMapWidth
@@ -20376,12 +20376,12 @@ HRAM bank #0:
 	         $ffdb = hGymTrashCanRandNumMask
 	         $ffdb = hSavedCoordIndex
 	         $ffdb = hItemCounter
+	         $ffdb = hItemToRemoveID
 	         $ffdb = hDexRatingNumMonsSeen
 	         $ffdb = hGymGateIndex
 	         $ffdb = hVendingMachineItem
 	         $ffdb = hPlayerFacing
 	         $ffdb = hOaksAideResult
-	         $ffdb = hItemToRemoveID
 	         $ffdb = hMissableObjectIndex
 	         $ffdb = hOaksAideRequirement
 	         $ffdc = hDexRatingNumMonsOwned
