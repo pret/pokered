@@ -30,7 +30,7 @@ VictoryRoad2FCheckBoulderEventScript::
 	call VictoryRoad2FReplaceTileBlockScript
 	pop af
 .not_on_switch
-	bit EVENT_VICTORY_ROAD_2_BOULDER_ON_SWITCH2 % 8, a
+	CheckEventReuseA EVENT_VICTORY_ROAD_2_BOULDER_ON_SWITCH2
 	ret z
 	ld a, $1d
 	lb bc, 7, 11
