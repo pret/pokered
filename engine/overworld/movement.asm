@@ -57,7 +57,7 @@ UpdatePlayerSprite:
 .next
 	ld [wSpritePlayerStateData1FacingDirection], a
 	ld a, [wFontLoaded]
-	bit 0, a
+	bit BIT_FONT_LOADED, a
 	jr nz, .notMoving
 .moving
 	ld a, [wMovementFlags]
@@ -135,11 +135,11 @@ UpdateNPCSprite:
 	ld l, a
 	inc l
 	ld a, [hl]        ; x#SPRITESTATEDATA1_MOVEMENTSTATUS
-	bit 7, a ; is the face player flag set?
+	bit BIT_FACE_PLAYER, a
 	jp nz, MakeNPCFacePlayer
 	ld b, a
 	ld a, [wFontLoaded]
-	bit 0, a
+	bit BIT_FONT_LOADED, a
 	jp nz, notYetMoving
 	ld a, b
 	cp $2
@@ -412,7 +412,7 @@ MakeNPCFacePlayer:
 	ld a, [wStatusFlags3]
 	bit BIT_NO_NPC_FACE_PLAYER, a
 	jr nz, notYetMoving
-	res 7, [hl]
+	res BIT_FACE_PLAYER, [hl]
 	ld a, [wPlayerDirection]
 	bit PLAYER_DIR_BIT_UP, a
 	jr z, .notFacingDown

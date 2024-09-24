@@ -227,8 +227,8 @@ DisplayTwoOptionMenu:
 	ld [wMenuWatchMovingOutOfBounds], a
 	push hl
 	ld hl, wTwoOptionMenuID
-	bit 7, [hl] ; select second menu item by default?
-	res 7, [hl]
+	bit BIT_SECOND_MENU_OPTION_DEFAULT, [hl]
+	res BIT_SECOND_MENU_OPTION_DEFAULT, [hl]
 	jr z, .storeCurrentMenuItem
 	inc a
 .storeCurrentMenuItem

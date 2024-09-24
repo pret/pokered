@@ -63,7 +63,7 @@ PlaceNextChar::
 	jr nz, .NotNext
 	ld bc, 2 * SCREEN_WIDTH
 	ldh a, [hUILayoutFlags]
-	bit 2, a
+	bit BIT_SINGLE_SPACED_LINES, a
 	jr z, .ok
 	ld bc, SCREEN_WIDTH
 .ok

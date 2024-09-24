@@ -282,7 +282,7 @@ CableClub_DoBattleOrTradeAgain:
 	call ClearScreen
 	call Delay3
 	ld hl, wOptions
-	res 7, [hl]
+	res BIT_BATTLE_ANIMATION, [hl]
 	predef InitOpponent
 	predef HealParty
 	jp ReturnToCableClubRoom
@@ -342,10 +342,10 @@ TradeCenter_SelectMon:
 	ld [wTopMenuItemX], a
 .enemyMonMenu_HandleInput
 	ld hl, hUILayoutFlags
-	set 1, [hl]
+	set BIT_DOUBLE_SPACED_MENU, [hl]
 	call HandleMenuInput
 	ld hl, hUILayoutFlags
-	res 1, [hl]
+	res BIT_DOUBLE_SPACED_MENU, [hl]
 	and a
 	jp z, .getNewInput
 	bit BIT_A_BUTTON, a
@@ -407,10 +407,10 @@ TradeCenter_SelectMon:
 	call ClearScreenArea
 .playerMonMenu_HandleInput
 	ld hl, hUILayoutFlags
-	set 1, [hl]
+	set BIT_DOUBLE_SPACED_MENU, [hl]
 	call HandleMenuInput
 	ld hl, hUILayoutFlags
-	res 1, [hl]
+	res BIT_DOUBLE_SPACED_MENU, [hl]
 	and a ; was anything pressed?
 	jr nz, .playerMonMenu_SomethingPressed
 	jp .getNewInput
@@ -489,7 +489,7 @@ TradeCenter_SelectMon:
 	ld a, 1
 	ld [wTopMenuItemX], a
 	call HandleMenuInput
-	bit 4, a ; Right pressed?
+	bit BIT_D_RIGHT, a
 	jr nz, .selectTradeMenuItem
 	bit BIT_B_BUTTON, a
 	jr z, .displayPlayerMonStats
@@ -585,7 +585,7 @@ ReturnToCableClubRoom:
 	ld a, [hl]
 	push af
 	push hl
-	res 0, [hl]
+	res BIT_FONT_LOADED, [hl]
 	xor a
 	ld [wStatusFlags3], a ; clears BIT_INIT_TRADE_CENTER_FACING
 	dec a

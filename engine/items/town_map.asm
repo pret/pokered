@@ -75,9 +75,9 @@ DisplayTownMap:
 	jr z, .inputLoop
 	ld a, SFX_TINK
 	call PlaySound
-	bit 6, b
+	bit BIT_D_UP, b
 	jr nz, .pressedUp
-	bit 7, b
+	bit BIT_D_DOWN, b
 	jr nz, .pressedDown
 	xor a
 	ld [wTownMapSpriteBlinkingEnabled], a
@@ -196,13 +196,13 @@ LoadTownMap_Fly::
 	pop hl
 	and A_BUTTON | B_BUTTON | D_UP | D_DOWN
 	jr z, .inputLoop
-	bit 0, b
+	bit BIT_A_BUTTON, b
 	jr nz, .pressedA
 	ld a, SFX_TINK
 	call PlaySound
-	bit 6, b
+	bit BIT_D_UP, b
 	jr nz, .pressedUp
-	bit 7, b
+	bit BIT_D_DOWN, b
 	jr nz, .pressedDown
 	jr .pressedB
 .pressedA

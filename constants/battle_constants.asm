@@ -72,6 +72,10 @@ DEF MAX_STAT_VALUE EQU 999
 DEF ATKDEFDV_TRAINER EQU $98
 DEF SPDSPCDV_TRAINER EQU $88
 
+; wDamageMultipliers
+DEF BIT_STAB_DAMAGE EQU 7
+DEF EFFECTIVENESS_MASK EQU %01111111
+
 ; wPlayerBattleStatus1 or wEnemyBattleStatus1 bit flags
 	const_def
 	const STORING_ENERGY           ; 0 ; Bide

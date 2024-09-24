@@ -114,13 +114,13 @@ DrawFrameBlock:
 	ld [de], a ; store tile ID
 	inc de
 	ld a, [hli]
-	bit 5, a ; is horizontal flip enabled?
+	bit OAM_X_FLIP, a
 	jr nz, .disableHorizontalFlip
 .enableHorizontalFlip
-	set 5, a
+	set OAM_X_FLIP, a
 	jr .storeFlags2
 .disableHorizontalFlip
-	res 5, a
+	res OAM_X_FLIP, a
 .storeFlags2
 	ld [de], a
 	inc de

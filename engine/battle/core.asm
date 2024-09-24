@@ -1007,12 +1007,12 @@ RemoveFaintedPlayerMon:
 	ld b, FLAG_RESET
 	predef FlagActionPredef ; clear gain exp flag for fainted mon
 	ld hl, wEnemyBattleStatus1
-	res 2, [hl]   ; reset "attacking multiple times" flag
+	res ATTACKING_MULTIPLE_TIMES, [hl]
 	ld a, [wLowHealthAlarm]
-	bit 7, a      ; skip sound flag (red bar (?))
+	bit BIT_LOW_HEALTH_ALARM, a
 	jr z, .skipWaitForSound
-	ld a, $ff
-	ld [wLowHealthAlarm], a ;disable low health alarm
+	ld a, DISABLE_LOW_HEALTH_ALARM
+	ld [wLowHealthAlarm], a
 	call WaitForSoundToFinish
 .skipWaitForSound
 ; a is 0, so this zeroes the enemy's accumulated damage.
@@ -1305,7 +1305,7 @@ EnemySendOutFirstMon:
 	dec a
 	ld [wAICount], a
 	ld hl, wPlayerBattleStatus1
-	res 5, [hl]
+	res USING_TRAPPING_MOVE, [hl]
 	hlcoord 18, 0
 	ld a, 8
 	call SlideTrainerPicOffScreen
@@ -1860,15 +1860,15 @@ DrawPlayerHUDAndHPBar:
 	jr z, .setLowHealthAlarm
 .fainted
 	ld hl, wLowHealthAlarm
-	bit 7, [hl] ;low health alarm enabled?
-	ld [hl], $0
+	bit BIT_LOW_HEALTH_ALARM, [hl]
+	ld [hl], 0
 	ret z
 	xor a
 	ld [wChannelSoundIDs + CHAN5], a
 	ret
 .setLowHealthAlarm
 	ld hl, wLowHealthAlarm
-	set 7, [hl] ;enable low health alarm
+	set BIT_LOW_HEALTH_ALARM, [hl]
 	ret
 
 DrawEnemyHUDAndHPBar:
@@ -2121,7 +2121,7 @@ DisplayBattleMenu::
 	ld a, D_LEFT | A_BUTTON
 	ld [hli], a ; wMenuWatchedKeys
 	call HandleMenuInput
-	bit 5, a ; check if left was pressed
+	bit BIT_D_LEFT, a
 	jr nz, .leftColumn ; if left was pressed, jump
 	ld a, [wCurrentMenuItem]
 	add $2 ; if we're in the right column, the actual id is +2
@@ -2473,11 +2473,11 @@ MoveSelectionMenu:
 .writemoves
 	ld de, wMovesString
 	ldh a, [hUILayoutFlags]
-	set 2, a
+	set BIT_SINGLE_SPACED_LINES, a
 	ldh [hUILayoutFlags], a
 	call PlaceString
 	ldh a, [hUILayoutFlags]
-	res 2, a
+	res BIT_SINGLE_SPACED_LINES, a
 	ldh [hUILayoutFlags], a
 	ret
 
@@ -2604,10 +2604,10 @@ SelectMenuItem:
 	ld [hl], "▷"
 .select
 	ld hl, hUILayoutFlags
-	set 1, [hl]
+	set BIT_DOUBLE_SPACED_MENU, [hl]
 	call HandleMenuInput
 	ld hl, hUILayoutFlags
-	res 1, [hl]
+	res BIT_DOUBLE_SPACED_MENU, [hl]
 	bit BIT_D_UP, a
 	jp nz, SelectMenuItem_CursorUp
 	bit BIT_D_DOWN, a
@@ -2652,7 +2652,7 @@ SelectMenuItem:
 	cp c
 	jr z, .disabled
 	ld a, [wPlayerBattleStatus3]
-	bit 3, a ; transformed
+	bit TRANSFORMED, a
 	jr nz, .transformedMoveSelected
 .transformedMoveSelected ; pointless
 	; Allow moves copied by Transform to be used.
@@ -3850,7 +3850,7 @@ PrintMoveFailureText:
 .playersTurn
 	ld hl, DoesntAffectMonText
 	ld a, [wDamageMultipliers]
-	and $7f
+	and EFFECTIVENESS_MASK
 	jr z, .gotTextToPrint
 	ld hl, AttackMissedText
 	ld a, [wCriticalHitOrOHKO]
@@ -5248,7 +5248,7 @@ AdjustDamageForMoveType:
 	ld a, l
 	ld [wDamage + 1], a
 	ld hl, wDamageMultipliers
-	set 7, [hl]
+	set BIT_STAB_DAMAGE, [hl]
 .skipSameTypeAttackBonus
 	ld a, [wMoveType]
 	ld b, a
@@ -5271,7 +5271,7 @@ AdjustDamageForMoveType:
 	push bc
 	inc hl
 	ld a, [wDamageMultipliers]
-	and $80
+	and 1 << BIT_STAB_DAMAGE
 	ld b, a
 	ld a, [hl] ; a = damage multiplier
 	ldh [hMultiplier], a

@@ -3,7 +3,7 @@ DisplayTextIDInit::
 	xor a
 	ld [wListMenuID], a
 	ld a, [wAutoTextBoxDrawingControl]
-	bit 0, a
+	bit BIT_NO_AUTO_TEXT_BOX, a
 	jr nz, .skipDrawingTextBoxBorder
 	ldh a, [hTextID]
 	and a
@@ -31,7 +31,7 @@ DisplayTextIDInit::
 	call TextBoxBorder
 .skipDrawingTextBoxBorder
 	ld hl, wFontLoaded
-	set 0, [hl]
+	set BIT_FONT_LOADED, [hl]
 	ld hl, wMiscFlags
 	bit BIT_NO_SPRITE_UPDATES, [hl]
 	res BIT_NO_SPRITE_UPDATES, [hl]

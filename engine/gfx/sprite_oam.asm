@@ -124,7 +124,7 @@ PrepareOAMData::
 	inc hl
 	inc e
 	ld a, [hl]
-	bit 1, a ; is the tile allowed to set the sprite priority bit?
+	bit BIT_SPRITE_UNDER_GRASS, a
 	jr z, .skipPriority
 	ldh a, [hSpritePriority]
 	or [hl]
@@ -132,7 +132,7 @@ PrepareOAMData::
 	inc hl
 	ld [de], a
 	inc e
-	bit 0, a ; OAMFLAG_ENDOFDATA
+	bit BIT_END_OF_OAM_DATA, a
 	jr z, .tileLoop
 
 	ld a, e

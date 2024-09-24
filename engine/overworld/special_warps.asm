@@ -52,7 +52,7 @@ LoadSpecialWarpData:
 	bit BIT_DEBUG_MODE, a
 	; warp to wLastMap (PALLET_TOWN) for StartNewGameDebug
 	jr nz, .notNewGameWarp
-	bit 2, a
+	bit BIT_FLY_OR_DUNGEON_WARP, a
 	jr nz, .notNewGameWarp
 	ld hl, NewGameWarp
 .copyWarpData

@@ -121,7 +121,7 @@ OverworldLoopLessDelay::
 	ld a, [wCurMap]
 	call SwitchToMapRomBank ; switch to the ROM bank of the current map
 	ld hl, wCurMapTileset
-	set 7, [hl]
+	set BIT_NO_PREVIOUS_MAP, [hl]
 .changeMap
 	jp EnterMap
 .checkForOpponent
@@ -879,10 +879,10 @@ LoadTilesetTilePatternData::
 	ld a, [wTilesetBank]
 	jp FarCopyData2
 
-; this loads the current maps complete tile map (which references blocks, not individual tiles) to C6E8
+; this loads the current map's complete tile map (which references blocks, not individual tiles) to wOverworldMap
 ; it can also load partial tile maps of connected maps into a border of length 3 around the current map
 LoadTileBlockMap::
-; fill C6E8-CBFB with the background tile
+; fill wOverworldMap-wOverworldMapEnd with the background tile
 	ld hl, wOverworldMap
 	ld a, [wMapBackgroundTile]
 	ld d, a
@@ -1210,7 +1210,7 @@ IsSpriteInFrontOfPlayer2::
 	and $f0
 	inc a
 	ld l, a ; hl = x#SPRITESTATEDATA1_MOVEMENTSTATUS
-	set 7, [hl] ; set flag to make the sprite face the player
+	set BIT_FACE_PLAYER, [hl]
 	ld a, e
 	ldh [hTextID], a
 	ret
@@ -1303,7 +1303,7 @@ CheckForTilePairCollisions::
 	ld a, [wTileInFrontOfPlayer]
 	ld c, a
 .tilePairCollisionLoop
-	ld a, [wCurMapTileset] ; tileset number
+	ld a, [wCurMapTileset]
 	ld b, a
 	ld a, [hli]
 	cp $ff
@@ -1943,7 +1943,7 @@ CollisionCheckOnWater::
 	call PlayDefaultMusic
 	jr .noCollision
 .checkIfVermilionDockTileset
-	ld a, [wCurMapTileset] ; tileset
+	ld a, [wCurMapTileset]
 	cp SHIP_PORT ; Vermilion Dock tileset
 	jr nz, .noCollision ; keep surfing if it's not the boarding platform tile
 	jr .stopSurfing ; if it is the boarding platform tile, stop surfing
@@ -2015,10 +2015,10 @@ LoadMapHeader::
 	call SwitchToMapRomBank
 	ld a, [wCurMapTileset]
 	ld b, a
-	res 7, a
+	res BIT_NO_PREVIOUS_MAP, a
 	ld [wCurMapTileset], a
 	ldh [hPreviousTileset], a
-	bit 7, b
+	bit BIT_NO_PREVIOUS_MAP, b
 	ret nz
 	ld hl, MapHeaderPointers
 	ld a, [wCurMap]
@@ -2203,9 +2203,9 @@ LoadMapHeader::
 	ld [hl], a ; store text ID in byte 1 of sprite entry
 	pop hl
 	ldh a, [hLoadSpriteTemp1]
-	bit 6, a
+	bit BIT_TRAINER, a
 	jr nz, .trainerSprite
-	bit 7, a
+	bit BIT_ITEM, a
 	jr nz, .itemBallSprite
 	jr .regularSprite
 .trainerSprite

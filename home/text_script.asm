@@ -6,8 +6,8 @@ DisplayTextID::
 	push af
 	farcall DisplayTextIDInit ; initialization
 	ld hl, wTextPredefFlag
-	bit 0, [hl]
-	res 0, [hl]
+	bit BIT_TEXT_PREDEF, [hl]
+	res BIT_TEXT_PREDEF, [hl]
 	jr nz, .skipSwitchToMapBank
 	ld a, [wCurMap]
 	call SwitchToMapRomBank
@@ -128,7 +128,7 @@ CloseTextDisplay::
 	ld [MBC1RomBank], a
 	call InitMapSprites ; reload sprite tile pattern data (since it was partially overwritten by text tile patterns)
 	ld hl, wFontLoaded
-	res 0, [hl]
+	res BIT_FONT_LOADED, [hl]
 	ld a, [wStatusFlags6]
 	bit BIT_FLY_WARP, a
 	call z, LoadPlayerSpriteGraphics
