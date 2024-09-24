@@ -850,18 +850,22 @@ GetPalettes:
 	and %11
 	cp PALETTES_YELLOW
 	jr z, .gbcPalettes
-	cp PALETTES_SGB2
-	jr z, .sgbPalettes2
+	ld a, [wOptions2]
+	bit BIT_SECONDARY_PALETTES, a
 	ld de, SuperPalettes
+	jr z, .gotSuperPalettes
+	ld de, SuperPalettes2
+.gotSuperPalettes
 	and a
 	ret
 .gbcPalettes
+	ld a, [wOptions2]
+	bit BIT_SECONDARY_PALETTES, a
 	ld de, GBCBasePalettes
+	jr z, .gotGBCPalettes
+	ld de, GBCBasePalettes2
+.gotGBCPalettes
 	scf
-	ret
-.sgbPalettes2
-	ld de, SuperPalettes2
-	and a
 	ret
 
 
@@ -1314,6 +1318,7 @@ INCLUDE "data/pokemon/alt_palettes.asm"
 INCLUDE "data/sgb/sgb_palettes.asm"
 INCLUDE "data/gbc/gbc_palettes.asm"
 INCLUDE "data/sgb/sgb_palettes2.asm"
+INCLUDE "data/gbc/gbc_palettes2.asm"
 
 INCLUDE "data/sgb/sgb_border.asm"
 

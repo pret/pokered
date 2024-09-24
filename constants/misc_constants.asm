@@ -29,18 +29,19 @@ DEF TEXT_DELAY_BITS    EQU %11 ; which bits in wOptions are assigned to text spe
 
 ; wOptions2
 
-DEF PALETTES_DEFAULT    EQU %00 ; 0 
-DEF PALETTES_SGB        EQU %01 ; 1
-DEF PALETTES_SGB2       EQU %10 ; 2
-DEF PALETTES_YELLOW     EQU %11 ; 3
+DEF PALETTES_DEFAULT    EQU  %00 ; 0 
+DEF PALETTES_SGB        EQU  %01 ; 1
+DEF PALETTES_SGB2       EQU  %01000001
+DEF PALETTES_YELLOW     EQU  %11 ; 3
+DEF PALETTES_YELLOW2    EQU  %01000011
 
 	const_def 2 ; first two bits are the palette options above
-	const BIT_ALT_PKMN_PALETTES ; 2
-	const BIT_AUDIO_PAN         ; 3
-	const BIT_BIKE_MUSIC        ; 4
-	const BIT_GBC_FADE          ; 5
-	const_skip		            ; 6 (unused)
-	const BIT_MUSIC             ; 7
+	const BIT_ALT_PKMN_PALETTES  ; 2
+	const BIT_AUDIO_PAN          ; 3
+	const BIT_BIKE_MUSIC         ; 4
+	const BIT_GBC_FADE           ; 5
+	const BIT_SECONDARY_PALETTES ; 6 ; if set, changes SGB to SGB2, or Yellow to Yellow2 palettes.
+	const BIT_MUSIC              ; 7
 
 ; wOptions3
 	const_def

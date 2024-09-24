@@ -3,9 +3,9 @@
 DEF OPTIONS_PAGE_2_COUNT EQU 6 ; number of options on this page
 DEF OPTIONS_PAGE_2_NUMBER EQU 2 ; must be 1 digit
 
-DEF OPTION_COLORS_LEFT_XPOS EQU 9
-DEF OPTION_COLORS_MIDDLE_XPOS EQU 12
-DEF OPTION_COLORS_RIGHT_XPOS EQU 17
+DEF OPTION_COLORS_LEFT_XPOS EQU 8
+DEF OPTION_COLORS_MIDDLE_XPOS EQU 11
+DEF OPTION_COLORS_RIGHT_XPOS EQU 16
 DEF OPTION_ALT_PALETTES_LEFT_XPOS EQU 4
 DEF OPTION_ALT_PALETTES_RIGHT_XPOS EQU 11
 DEF OPTION_MUSIC_LEFT_XPOS EQU 12
@@ -80,12 +80,12 @@ DrawOptions2Menu:
 	ld de, Options2Text
 	call PlaceString
 	ld a, [wOptions2]
-	and %11
-	jp PrintSGBOptionNumber
+	and %01000011
+	jp PrintSGBYellowOptionNumbers
 
 Options2Text:
 	db   "OPTIONS 2"
-	next " COLORS: OG SGB  Y"
+	next " COLOR: OG SGB  Y "
 	next " ALT PKMN COLORS:"
 	next "    OFF    ON"
 	next " MUSIC:     OG OG+"
@@ -105,16 +105,16 @@ OptionsPage2AButton:
 	cp b ;is the cursor on the COLORS row?
 	jr nz, .done
 	ld a, [wTopMenuItemX]
-	cp OPTION_COLORS_MIDDLE_XPOS ; is the cursor on SGB?
-	call z, ToggleAltSGBColors
+	cp OPTION_COLORS_LEFT_XPOS ; is the cursor on anything other than OG?
+	call nz, ToggleAltSGBYellowColors
 .done
 	and a ; clear carry
 	ret
 
 CursorInColors:
 	push bc
-	ld a, PALETTES_SGB
-	call PrintSGBOptionNumber ; if we move left or right on the COLORS menu we will switch SGB text back to SGB1
+	xor a
+	call PrintSGBYellowOptionNumbers ; if we move left or right on the COLORS menu we will switch back to SGB1 and Y1 visually
 	pop bc
 	call GetTwoBitXPosition
 	ld a, b
@@ -210,17 +210,21 @@ SetTwoBitPropFromXPosition:
 	ld b, PALETTES_DEFAULT
 	jr .done
 .option1setRight
+	ld a, [wOptions2]
+	and %01000011
+	cp PALETTES_YELLOW2
+	ret z ; don't set middle if we set it to the second SGB type
 	ld b, PALETTES_YELLOW
 	jr .done
 .option1setMiddle
 	ld a, [wOptions2]
-	and %11
+	and %01000011
 	cp PALETTES_SGB2
 	ret z ; don't set middle if we set it to the second SGB type
 	ld b, PALETTES_SGB
 .done
 	ld a, [wOptions2]
-	and %11111100
+	and %10111100 ; always reset bit 6 when we move between colors
 	xor b
 	ld [wOptions2], a
 	ret
@@ -228,10 +232,10 @@ SetTwoBitPropFromXPosition:
 CompareOptions2:
 	ld hl, wOptions2
 	ld a, b ; b = old setting of Options2 before changing it
-	and %11
+	and %01000011
 	ld c, a
 	ld a, [hl]
-	and %11
+	and %01000011
 	cp c
 	jp nz, RunDefaultPaletteCommand ; reset palettes according to the colors we just selected if colors changed
 	ld a, [wNewInGameFlags]
@@ -320,24 +324,31 @@ GetTwoBitXPositionFromOptions:
 	ld b, OPTION_COLORS_MIDDLE_XPOS
 	ret
 
-ToggleAltSGBColors:
+ToggleAltSGBYellowColors:
 	ld a, SFX_PRESS_AB
 	rst _PlaySound
 	ld a, [wOptions2]
-	xor %11 ; %10 becomes %01, toggles between the two sgb options.
+	xor %01000000
 	ld [wOptions2], a
-	and %11
-	call PrintSGBOptionNumber
+	and %01000011
+	call PrintSGBYellowOptionNumbers
 	jp RunDefaultPaletteCommand
 
-; input: a = what SGB color mode we want to be printed on the screen, a = %10 = SGB2, anything else = SGB1
-PrintSGBOptionNumber:
-	hlcoord 16, 3
-	cp %10
+; input: a = color mode indicator. Bit 6 indicates if alternate color mode is activated. First 2 bits indictate the main color mode.
+PrintSGBYellowOptionNumbers:
+	hlcoord 15, 3
+	cp %01000001
+	ld [hl], "2"
+	jr z, .next
+	ld [hl], "1"
+.next
+	hlcoord 18, 3
+	cp %01000011
 	ld [hl], "2"
 	ret z
 	ld [hl], "1"
 	ret
+
 
 OptionsMenu2InfoTextJumpTable:
 	dw ColorsOptionInfoText
