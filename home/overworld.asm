@@ -33,8 +33,8 @@ EnterMap::
 	res BIT_NO_NPC_FACE_PLAYER, [hl]
 	call UpdateSprites
 	ld hl, wCurrentMapScriptFlags
-	set 5, [hl]
-	set 6, [hl]
+	set BIT_CUR_MAP_LOADED_1, [hl]
+	set BIT_CUR_MAP_LOADED_2, [hl]
 	xor a
 	ld [wJoyIgnore], a
 
@@ -329,8 +329,8 @@ OverworldLoopLessDelay::
 	ld hl, wStatusFlags7
 	res BIT_TRAINER_BATTLE, [hl]
 	ld hl, wCurrentMapScriptFlags
-	set 5, [hl]
-	set 6, [hl]
+	set BIT_CUR_MAP_LOADED_1, [hl]
+	set BIT_CUR_MAP_LOADED_2, [hl]
 	xor a
 	ldh [hJoyHeld], a
 	ld a, [wCurMap]

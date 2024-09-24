@@ -1,13 +1,13 @@
 VermilionCity_Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, wCurrentMapScriptFlags
-	bit 6, [hl]
-	res 6, [hl]
+	bit BIT_CUR_MAP_LOADED_2, [hl]
+	res BIT_CUR_MAP_LOADED_2, [hl]
 	push hl
 	call nz, VermilionCityLeftSSAnneCallbackScript
 	pop hl
-	bit 5, [hl]
-	res 5, [hl]
+	bit BIT_CUR_MAP_LOADED_1, [hl]
+	res BIT_CUR_MAP_LOADED_1, [hl]
 	call nz, .setFirstLockTrashCanIndex
 	ld hl, VermilionCity_ScriptPointers
 	ld a, [wVermilionCityCurScript]

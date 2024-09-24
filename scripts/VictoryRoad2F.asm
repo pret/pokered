@@ -1,11 +1,11 @@
 VictoryRoad2F_Script:
 	ld hl, wCurrentMapScriptFlags
-	bit 6, [hl]
-	res 6, [hl]
+	bit BIT_CUR_MAP_LOADED_2, [hl]
+	res BIT_CUR_MAP_LOADED_2, [hl]
 	call nz, VictoryRoad2FResetBoulderEventScript
 	ld hl, wCurrentMapScriptFlags
-	bit 5, [hl]
-	res 5, [hl]
+	bit BIT_CUR_MAP_LOADED_1, [hl]
+	res BIT_CUR_MAP_LOADED_1, [hl]
 	call nz, VictoryRoad2FCheckBoulderEventScript
 	call EnableAutoTextBoxDrawing
 	ld hl, VictoryRoad2TrainerHeaders
@@ -60,7 +60,7 @@ VictoryRoad2FDefaultScript:
 	ret nz
 .set_script_flag
 	ld hl, wCurrentMapScriptFlags
-	set 5, [hl]
+	set BIT_CUR_MAP_LOADED_1, [hl]
 	ret
 
 .SwitchCoords:

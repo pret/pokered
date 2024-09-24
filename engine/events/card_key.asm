@@ -50,7 +50,7 @@ PrintCardKeyText:
 	ld [wNewTileBlockID], a
 	predef ReplaceTileBlock
 	ld hl, wCurrentMapScriptFlags
-	set 5, [hl]
+	set BIT_CUR_MAP_LOADED_1, [hl]
 	ld a, SFX_GO_INSIDE
 	jp PlaySound
 .noCardKey

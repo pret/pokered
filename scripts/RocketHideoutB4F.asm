@@ -10,8 +10,8 @@ RocketHideoutB4F_Script:
 
 RocketHideoutB4FDoorCallbackScript:
 	ld hl, wCurrentMapScriptFlags
-	bit 5, [hl]
-	res 5, [hl]
+	bit BIT_CUR_MAP_LOADED_1, [hl]
+	res BIT_CUR_MAP_LOADED_1, [hl]
 	ret z
 	CheckEvent EVENT_ROCKET_HIDEOUT_4_DOOR_UNLOCKED
 	jr nz, .door_already_unlocked
@@ -67,7 +67,7 @@ RocketHideoutB4FBeatGiovanniScript:
 	xor a
 	ld [wJoyIgnore], a
 	ld hl, wCurrentMapScriptFlags
-	set 5, [hl]
+	set BIT_CUR_MAP_LOADED_1, [hl]
 	ld a, SCRIPT_ROCKETHIDEOUTB4F_DEFAULT
 	ld [wRocketHideoutB4FCurScript], a
 	ld [wCurMapScript], a

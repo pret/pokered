@@ -10,8 +10,8 @@ VictoryRoad3F_Script:
 
 VictoryRoad3FCheckBoulderEventScript:
 	ld hl, wCurrentMapScriptFlags
-	bit 5, [hl]
-	res 5, [hl]
+	bit BIT_CUR_MAP_LOADED_1, [hl]
+	res BIT_CUR_MAP_LOADED_1, [hl]
 	ret z
 	CheckEventHL EVENT_VICTORY_ROAD_3_BOULDER_ON_SWITCH1
 	ret z
@@ -38,7 +38,7 @@ VictoryRoad3FDefaultScript:
 	cp $1
 	jr nz, .handle_hole
 	ld hl, wCurrentMapScriptFlags
-	set 5, [hl]
+	set BIT_CUR_MAP_LOADED_1, [hl]
 	SetEvent EVENT_VICTORY_ROAD_3_BOULDER_ON_SWITCH1
 	ret
 .handle_hole

@@ -11,8 +11,8 @@ LoreleisRoom_Script:
 LoreleiShowOrHideExitBlock:
 ; Blocks or clears the exit to the next room.
 	ld hl, wCurrentMapScriptFlags
-	bit 5, [hl]
-	res 5, [hl]
+	bit BIT_CUR_MAP_LOADED_1, [hl]
+	res BIT_CUR_MAP_LOADED_1, [hl]
 	ret z
 	ld hl, wElite4Flags
 	set BIT_STARTED_ELITE_4, [hl]

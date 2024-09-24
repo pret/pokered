@@ -97,7 +97,7 @@ GymTrashScript:
 ; Completed the trash can puzzle.
 	SetEvent EVENT_2ND_LOCK_OPENED
 	ld hl, wCurrentMapScriptFlags
-	set 6, [hl]
+	set BIT_CUR_MAP_LOADED_2, [hl]
 
 	tx_pre_id VermilionGymTrashSuccessText3
 

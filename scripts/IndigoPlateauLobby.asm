@@ -2,8 +2,8 @@ IndigoPlateauLobby_Script:
 	call Serial_TryEstablishingExternallyClockedConnection
 	call EnableAutoTextBoxDrawing
 	ld hl, wCurrentMapScriptFlags
-	bit 6, [hl]
-	res 6, [hl]
+	bit BIT_CUR_MAP_LOADED_2, [hl]
+	res BIT_CUR_MAP_LOADED_2, [hl]
 	ret z
 	ResetEvent EVENT_VICTORY_ROAD_1_BOULDER_ON_SWITCH
 	; Reset Elite Four events if the player started challenging them before

@@ -23,6 +23,12 @@ DEF BIT_TEXT_PREDEF EQU 0
 ; wFontLoaded
 DEF BIT_FONT_LOADED EQU 0
 
+; wCurrentMapScriptFlags
+	const_def 5
+	const BIT_CUR_MAP_LOADED_1 ; 5
+	const BIT_CUR_MAP_LOADED_2 ; 6
+	const BIT_CUR_MAP_USED_ELEVATOR ; 7
+
 ; wOptions
 DEF TEXT_DELAY_MASK EQU %111
 	const_def 6

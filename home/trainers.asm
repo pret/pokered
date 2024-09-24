@@ -184,8 +184,8 @@ StartTrainerBattle::
 
 EndTrainerBattle::
 	ld hl, wCurrentMapScriptFlags
-	set 5, [hl]
-	set 6, [hl]
+	set BIT_CUR_MAP_LOADED_1, [hl]
+	set BIT_CUR_MAP_LOADED_2, [hl]
 	ld hl, wStatusFlags3
 	res BIT_PRINT_END_BATTLE_TEXT, [hl]
 	ld hl, wMiscFlags
