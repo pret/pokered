@@ -81,8 +81,14 @@ DEF rWave_d           EQU $ff3d
 DEF rWave_e           EQU $ff3e
 DEF rWave_f           EQU $ff3f
 DEF rLCDC             EQU $ff40 ; LCD Control (R/W)
-DEF rLCDC_ENABLE      EQU 7
-DEF rLCDC_ENABLE_MASK EQU 1 << rLCDC_ENABLE
+DEF rLCDC_BG_PRIORITY    EQU 0
+DEF rLCDC_SPRITES_ENABLE EQU 1
+DEF rLCDC_SPRITE_SIZE    EQU 2
+DEF rLCDC_BG_TILEMAP     EQU 3
+DEF rLCDC_TILE_DATA      EQU 4
+DEF rLCDC_WINDOW_ENABLE  EQU 5
+DEF rLCDC_WINDOW_TILEMAP EQU 6
+DEF rLCDC_ENABLE         EQU 7
 DEF rSTAT             EQU $ff41 ; LCDC Status (R/W)
 DEF rSCY              EQU $ff42 ; Scroll Y (R/W)
 DEF rSCX              EQU $ff43 ; Scroll X (R/W)
@@ -111,3 +117,8 @@ DEF rSVBK             EQU $ff70 ; CGB Mode Only - WRAM Bank
 DEF rPCM12            EQU $ff76 ; Channels 1 & 2 Amplitude (R)
 DEF rPCM34            EQU $ff77 ; Channels 3 & 4 Amplitude (R)
 DEF rIE               EQU $ffff ; Interrupt Enable (R/W)
+DEF rIE_VBLANK EQU 0
+DEF rIE_LCD    EQU 1
+DEF rIE_TIMER  EQU 2
+DEF rIE_SERIAL EQU 3
+DEF rIE_JOYPAD EQU 4

@@ -3,7 +3,7 @@ DisableLCD::
 	ldh [rIF], a
 	ldh a, [rIE]
 	ld b, a
-	res 0, a
+	res rIE_VBLANK, a
 	ldh [rIE], a
 
 .wait
@@ -12,7 +12,7 @@ DisableLCD::
 	jr nz, .wait
 
 	ldh a, [rLCDC]
-	and ~rLCDC_ENABLE_MASK
+	and ~(1 << rLCDC_ENABLE)
 	ldh [rLCDC], a
 	ld a, b
 	ldh [rIE], a
