@@ -147,6 +147,13 @@ ShouldMoveGetStabBoost::
 	ret
 
 
+
+	const_def
+	const RED_BACK_PIC
+	const OLD_MAN_BACK_PIC
+	const LAVA_SUIT_BACK_PIC
+	const SCUBA_SUIT_BACK_PIC
+
 ; loads either red back pic or old man back pic
 ; also writes OAM data and loads tile patterns for the Red or Old Man back sprite's head
 ; (for use when scrolling the player sprite and enemy's silhouettes on screen)
@@ -154,55 +161,41 @@ LoadPlayerBackPic::
 ;;;;;;;;;; PureRGBnote: ADDED: choose between the original back sprite for the player or the high res one
 	ld a, [wSpriteOptions2]
 	bit BIT_BACK_SPRITES, a
-	jr z, .ogBackSprite
+	ld hl, OriginalBackPicTable
+	jr z, .gotSpriteTable
+	ld hl, SpaceworldBackPicTable
+.gotSpriteTable
 	ld a, [wCurMapTileset]
 	cp VOLCANO
-	ld de, LavaSuitBattlePicSW
-	jr z, .next
+	ld a, LAVA_SUIT_BACK_PIC
+	jr z, .getBackSpriteData
+	CheckEvent EVENT_DRAGONAIR_EVENT_BATTLING_CLOYSTER
+	ld a, SCUBA_SUIT_BACK_PIC
+	jr nz, .getBackSpriteData
 	ld a, [wBattleType]
 	dec a ; is it the old man tutorial?
-	ld de, RedPicBackSW
-	jr nz, .next
-	ld de, OldManPicBackSW
-	jr z, .next
-.ogBackSprite
-;;;;;;;;;;
-	ld a, [wCurMapTileset]
-	cp VOLCANO
-	ld de, LavaSuitBattlePic
-	jr z, .next
-	ld a, [wBattleType]
-	dec a ; is it the old man tutorial?
-	ld de, RedPicBack
-	jr nz, .next
-	ld de, OldManPicBack
-.next
-;;;;;;;;;; PureRGBnote: ADDED: choose between the original back sprite for the player or the high res one
+	ld a, OLD_MAN_BACK_PIC
+	jr z, .getBackSpriteData
+	ld a, RED_BACK_PIC
+.getBackSpriteData
+	ld d, 0
+	ld e, a
+	add hl, de
+	add hl, de
+	add hl, de
+	de_deref
+	inc hl	
+	ld a, [hl]
+	call UncompressSpriteFromDE
 	ld a, [wSpriteOptions2]
 	bit BIT_BACK_SPRITES, a
-	jr z, .ogBackSpriteBank
-	ld a, [wCurMapTileset]
-	cp VOLCANO
-	ld a, BANK(LavaSuitBattlePicSW)
-	jr z, .uncompress
-	ld a, BANK(RedPicBackSW)
-	ASSERT BANK(RedPicBackSW) == BANK(OldManPicBackSW)
-.uncompress
-	call UncompressSpriteFromDE
-	callfar LoadBackSpriteUnzoomed
-	jr .nextAgain
-.ogBackSpriteBank
-	ld a, [wCurMapTileset]
-	cp VOLCANO
-	ld a, BANK(LavaSuitBattlePicSW)
-	jr z, .uncompress2
-;;;;;;;;;;
-	ld a, BANK(RedPicBack)
-	ASSERT BANK(RedPicBack) == BANK(OldManPicBack)
-.uncompress2
-	call UncompressSpriteFromDE
+	jr nz, .uncompressed
+.doubleSpriteSize
 	predef ScaleSpriteByTwo
-.nextAgain	
+	jr .next
+.uncompressed
+	callfar LoadBackSpriteUnzoomed
+.next
 	ld hl, wShadowOAM
 	xor a
 	ldh [hOAMTile], a ; initial tile number
@@ -262,3 +255,15 @@ LoadPlayerBackPic::
 	ldh [hStartTileID], a
 	hlcoord 1, 5
 	predef_jump CopyUncompressedPicToTilemap
+
+SpaceworldBackPicTable:
+	dwb RedPicBackSW, BANK(RedPicBackSW)
+	dwb OldManPicBackSW, BANK(OldManPicBackSW)
+	dwb LavaSuitBattlePicSW, BANK(LavaSuitBattlePicSW)
+	dwb ScubaSuitBattlePicSW, BANK(ScubaSuitBattlePicSW)
+
+OriginalBackPicTable:
+	dwb RedPicBack, BANK(RedPicBack)
+	dwb OldManPicBack, BANK(OldManPicBack)
+	dwb LavaSuitBattlePic, BANK(LavaSuitBattlePic)
+	dwb ScubaSuitBattlePic, BANK(ScubaSuitBattlePic)

@@ -624,6 +624,8 @@ TheMawPicFront:: INCBIN "gfx/battle/spirit_the_maw.pic"
 ; new player battle sprites
 LavaSuitBattlePicSW:: INCBIN "gfx/player/lava_suitb_big.pic"
 LavaSuitBattlePic::   INCBIN "gfx/player/lava_suitb.pic"
+ScubaSuitBattlePicSW:: INCBIN "gfx/player/scuba_suitb_big.pic"
+ScubaSuitBattlePic::   INCBIN "gfx/player/scuba_suitb.pic"
 
 
 SECTION "Type Icons", ROMX
