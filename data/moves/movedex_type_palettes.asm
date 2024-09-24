@@ -79,8 +79,8 @@ TypeGraphicMapping:
 	dw 0 ;unused
 	dw 0 ;unused
 	dw TriTypeIcon ;tri
-	dw 0 ;unused
-	dw 0 ;unused
+	dw 0 ;unused (floating - no moves use this type)
+	dw 0 ;unused (magma - no moves use this type)
 	dw FireTypeIcon;fire
 	dw WaterTypeIcon;water
 	dw GrassTypeIcon;grass

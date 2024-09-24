@@ -65,6 +65,7 @@ DisplayMonFrontSpriteInBox:
 	call Delay3 ; allow box to finish closing before resetting hWY
 	ld a, $90
 	ldh [hWY], a
+	; TODO: reset hAutoBGTransferEnabled?
 	ret
 
 ;;;;;;;;
