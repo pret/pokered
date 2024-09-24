@@ -1,7 +1,7 @@
 VictoryRoad1F_Script:
 	ld hl, wCurrentMapScriptFlags
-	bit 5, [hl]
-	res 5, [hl]
+	bit BIT_CUR_MAP_LOADED_1, [hl]
+	res BIT_CUR_MAP_LOADED_1, [hl]
 	call nz, .next
 	call EnableAutoTextBoxDrawing
 	ld hl, VictoryRoad1TrainerHeaders
@@ -31,7 +31,7 @@ VictoryRoad1FDefaultScript:
 	call CheckBoulderCoords
 	jp nc, CheckFightingMapTrainers
 	ld hl, wCurrentMapScriptFlags
-	set 5, [hl]
+	set BIT_CUR_MAP_LOADED_1, [hl]
 	SetEvent EVENT_VICTORY_ROAD_1_BOULDER_ON_SWITCH
 	ret
 

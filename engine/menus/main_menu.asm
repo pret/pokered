@@ -91,7 +91,7 @@ MainMenu:
 .choseContinue
 	call DisplayContinueGameInfo
 	ld hl, wCurrentMapScriptFlags
-	set 5, [hl]
+	set BIT_CUR_MAP_LOADED_1, [hl]
 .inputLoop
 	xor a
 	ldh [hJoyPressed], a

@@ -8,8 +8,8 @@ GameCorner_Script:
 
 GameCornerSelectLuckySlotMachine:
 	ld hl, wCurrentMapScriptFlags
-	bit 6, [hl]
-	res 6, [hl]
+	bit BIT_CUR_MAP_LOADED_2, [hl]
+	res BIT_CUR_MAP_LOADED_2, [hl]
 	ret z
 	call Random
 	ldh a, [hRandomAdd]
@@ -25,8 +25,8 @@ GameCornerSelectLuckySlotMachine:
 
 GameCornerSetRocketHideoutDoorTile:
 	ld hl, wCurrentMapScriptFlags
-	bit 5, [hl]
-	res 5, [hl]
+	bit BIT_CUR_MAP_LOADED_1, [hl]
+	res BIT_CUR_MAP_LOADED_1, [hl]
 	ret z
 	CheckEvent EVENT_FOUND_ROCKET_HIDEOUT
 	ret nz
@@ -111,8 +111,8 @@ GameCornerRocketExitScript:
 	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld hl, wCurrentMapScriptFlags
-	set 5, [hl]
-	set 6, [hl]
+	set BIT_CUR_MAP_LOADED_1, [hl]
+	set BIT_CUR_MAP_LOADED_2, [hl]
 	ld a, SCRIPT_GAMECORNER_DEFAULT
 	ld [wGameCornerCurScript], a
 	ret

@@ -83,7 +83,7 @@ CinnabarGymQuiz_AskQuestion:
 	cp c
 	jr nz, .wrongAnswer
 	ld hl, wCurrentMapScriptFlags
-	set 5, [hl]
+	set BIT_CUR_MAP_LOADED_1, [hl]
 	ldh a, [hGymGateIndex]
 	ldh [hBackupGymGateIndex], a
 	ld hl, CinnabarGymQuizCorrectText
