@@ -53,7 +53,6 @@ EndOfBattle:
 	ld [wCurOpponent], a
 	ld [wForcePlayerToChooseMon], a
 	ld [wNumRunAttempts], a
-	ld [wEscapedFromBattle], a
 	ld hl, wPartyAndBillsPCSavedMenuItem
 	ld [hli], a
 	ld [hli], a

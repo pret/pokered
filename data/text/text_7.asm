@@ -209,3 +209,9 @@ _ItemUseWildMonText::
 	line "be used on wild"
 	cont "#MON."
 	prompt
+
+_NoPokeDollsOnSpiritsText::
+	text "A # DOLL won't"
+	line "distract this"
+	cont "violent spirit!"
+	prompt

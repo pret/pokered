@@ -1795,7 +1795,6 @@ ItemUseEscapeRope:
 	res 4, [hl]
 	callfar ClearSafariFlags ; PureRGBnote: CHANGED: new function to clear safari flags on warping or flying out of it
 	ld a, 1
-	ld [wEscapedFromBattle], a
 	ld [wActionResultOrTookBattleTurn], a ; item used
 	ld a, [wPseudoItemID]
 	and a ; using Dig?
@@ -1965,6 +1964,9 @@ ItemUsePokeDoll:
 	ld a, [wIsInBattle]
 	dec a
 	jp nz, ItemUseOnWildMons ; PureRGBnote: CHANGED: text that indicates to use it on wild pokemon only
+	ld a, [wEnemyMonSpecies]
+	cp SPIRIT_THE_MAW
+	jp z, NoPokeDollsOnSpirits
 ;;;;;; PureRGBnote: CHANGED: now it has an animation when used in battle
 	call LoadScreenTilesFromBuffer1 ; restore saved screen
 	call Delay3
@@ -2792,6 +2794,10 @@ ItemUseInBattle:
 ItemUseOnWildMons:
 	ld hl, ItemUseWildMonText
 	jr ItemUseFailed
+
+NoPokeDollsOnSpirits::
+	ld hl, NoPokeDollsOnSpiritsText
+	jr ItemUseFailed
 ;
 
 ItemUseNotYoursToUse:
@@ -2845,6 +2851,10 @@ ItemUseInBattleText:
 
 ItemUseWildMonText:
 	text_far _ItemUseWildMonText
+	text_end
+
+NoPokeDollsOnSpiritsText:
+	text_far _NoPokeDollsOnSpiritsText
 	text_end
 
 ItemUseNotYoursToUseText:
