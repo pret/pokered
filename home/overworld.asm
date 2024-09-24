@@ -2002,7 +2002,7 @@ LoadPlayerSpriteGraphicsCommon::
 	jr nc, .noCarry
 	inc d
 .noCarry
-	set 3, h
+	set 3, h ; add $800 ($80 tiles) to hl (1 << 3 == $8)
 	lb bc, BANK(RedSprite), $0c
 	jp CopyVideoData
 

@@ -187,7 +187,7 @@ LoadMapSpriteTilePatterns:
 	jr nz, .loadWhileLCDOn
 	pop af
 	pop hl
-	set 3, h ; add $80 tiles to hl
+	set 3, h ; add $800 ($80 tiles) to hl (1 << 3 == $8)
 	push hl
 	ld h, d
 	ld l, e
@@ -200,7 +200,7 @@ LoadMapSpriteTilePatterns:
 .loadWhileLCDOn
 	pop af
 	pop hl
-	set 3, h ; add $80 tiles to hl
+	set 3, h ; add $800 ($80 tiles) to hl (1 << 3 == $8)
 	ld b, a
 	swap c
 	call CopyVideoData ; load tile pattern data for sprite when walking

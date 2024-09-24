@@ -3,7 +3,7 @@ IndigoPlateauStatues::
 	ld hl, IndigoPlateauStatuesText1
 	call PrintText
 	ld a, [wXCoord]
-	bit 0, a
+	bit 0, a ; even or odd?
 	ld hl, IndigoPlateauStatuesText2
 	jr nz, .ok
 	ld hl, IndigoPlateauStatuesText3

@@ -4,9 +4,9 @@ PrepareOakSpeech:
 	ld a, [wOptions]
 	push af
 	; Retrieve BIT_DEBUG_MODE set in DebugMenu for StartNewGameDebug.
-	; BUG: StartNewGame carries over bit 5 from previous save files,
+	; BUG: StartNewGame carries over BIT_ALWAYS_ON_BIKE from previous save files,
 	; which causes CheckForceBikeOrSurf to not return.
-	; To fix this in debug builds, reset bit 5 here or in StartNewGame.
+	; To fix this in debug builds, reset BIT_ALWAYS_ON_BIKE here or in StartNewGame.
 	; In non-debug builds, the instructions can be removed.
 	ld a, [wStatusFlags6]
 	push af

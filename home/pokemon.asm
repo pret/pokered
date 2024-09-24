@@ -252,7 +252,7 @@ HandlePartyMenuInput::
 	jp nz, .swappingPokemon
 	pop af
 	ldh [hTileAnimations], a
-	bit 1, b
+	bit BIT_B_BUTTON, b
 	jr nz, .noPokemonChosen
 	ld a, [wPartyCount]
 	and a

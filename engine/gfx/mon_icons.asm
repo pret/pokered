@@ -269,7 +269,7 @@ GetPartyMonSpriteID:
 	ld d, 0
 	add hl, de
 	ld a, [hl]
-	bit 0, c
+	bit 0, c ; even or odd?
 	jr nz, .skipSwap
 	swap a ; use lower nybble if pokedex num is even
 .skipSwap
