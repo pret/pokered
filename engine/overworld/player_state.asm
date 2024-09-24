@@ -294,6 +294,13 @@ _GetTileAndCoordsInFrontOfPlayer:
 	ld [wTileInFrontOfPlayer], a
 	ret
 
+; hPlayerFacing
+	const_def
+	const BIT_FACING_DOWN  ; 0
+	const BIT_FACING_UP    ; 1
+	const BIT_FACING_LEFT  ; 2
+	const BIT_FACING_RIGHT ; 3
+
 GetTileTwoStepsInFrontOfPlayer:
 	xor a
 	ldh [hPlayerFacing], a
@@ -306,7 +313,7 @@ GetTileTwoStepsInFrontOfPlayer:
 	jr nz, .notFacingDown
 ; facing down
 	ld hl, hPlayerFacing
-	set 0, [hl]
+	set BIT_FACING_DOWN, [hl]
 	lda_coord 8, 13
 	inc d
 	jr .storeTile
@@ -315,7 +322,7 @@ GetTileTwoStepsInFrontOfPlayer:
 	jr nz, .notFacingUp
 ; facing up
 	ld hl, hPlayerFacing
-	set 1, [hl]
+	set BIT_FACING_UP, [hl]
 	lda_coord 8, 5
 	dec d
 	jr .storeTile
@@ -324,7 +331,7 @@ GetTileTwoStepsInFrontOfPlayer:
 	jr nz, .notFacingLeft
 ; facing left
 	ld hl, hPlayerFacing
-	set 2, [hl]
+	set BIT_FACING_LEFT, [hl]
 	lda_coord 4, 9
 	dec e
 	jr .storeTile
@@ -333,7 +340,7 @@ GetTileTwoStepsInFrontOfPlayer:
 	jr nz, .storeTile
 ; facing right
 	ld hl, hPlayerFacing
-	set 3, [hl]
+	set BIT_FACING_RIGHT, [hl]
 	lda_coord 12, 9
 	inc e
 .storeTile
@@ -385,7 +392,7 @@ CheckForBoulderCollisionWithSprites:
 	ld de, $f
 	ld hl, wSprite01StateData2MapY
 	ldh a, [hPlayerFacing]
-	and $3 ; facing up or down?
+	and (1 << BIT_FACING_UP) | (1 << BIT_FACING_DOWN)
 	jr z, .pushingHorizontallyLoop
 .pushingVerticallyLoop
 	inc hl
@@ -396,6 +403,7 @@ CheckForBoulderCollisionWithSprites:
 	ld a, [hli]
 	ld b, a
 	ldh a, [hPlayerFacing]
+	assert BIT_FACING_DOWN == 0
 	rrca
 	jr c, .pushingDown
 ; pushing up
@@ -421,7 +429,7 @@ CheckForBoulderCollisionWithSprites:
 	jr nz, .nextSprite2
 	ld b, [hl]
 	ldh a, [hPlayerFacing]
-	bit 2, a
+	bit BIT_FACING_LEFT, a
 	jr nz, .pushingLeft
 ; pushing right
 	ldh a, [hPlayerXCoord]

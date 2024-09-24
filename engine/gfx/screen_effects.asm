@@ -61,7 +61,7 @@ PredefShakeScreenHorizontally:
 	ldh a, [hMutateWX]
 	xor b
 	ldh [hMutateWX], a
-	bit 7, a
+	bit 7, a ; negative?
 	jr z, .skipZeroing
 	xor a ; zero a if it's negative
 .skipZeroing
