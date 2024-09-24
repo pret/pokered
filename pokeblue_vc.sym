@@ -18490,8 +18490,8 @@
 00:cd45 wSlotMachineWheel2MiddleTile
 00:cd46 wTempCoins1
 00:cd46 wSlotMachineWheel2TopTile
-00:cd47 wSlotMachineWheel3BottomTile
 00:cd47 wBattleTransitionSpiralDirection
+00:cd47 wSlotMachineWheel3BottomTile
 00:cd48 wFacingDirectionList
 00:cd48 wSlotMachineWheel3MiddleTile
 00:cd49 wTempObtainedBadgesBooleans

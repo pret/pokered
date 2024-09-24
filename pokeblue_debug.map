@@ -18782,8 +18782,8 @@ WRAM0 bank #0:
 	         $cd45 = wSlotMachineWheel2MiddleTile
 	         $cd46 = wTempCoins1
 	         $cd46 = wSlotMachineWheel2TopTile
-	         $cd47 = wSlotMachineWheel3BottomTile
 	         $cd47 = wBattleTransitionSpiralDirection
+	         $cd47 = wSlotMachineWheel3BottomTile
 	         $cd48 = wFacingDirectionList
 	         $cd48 = wSlotMachineWheel3MiddleTile
 	         $cd49 = wTempObtainedBadgesBooleans
