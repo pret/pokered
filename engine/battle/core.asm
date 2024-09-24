@@ -1011,7 +1011,7 @@ RemoveFaintedPlayerMon:
 	ld a, [wLowHealthAlarm]
 	bit BIT_LOW_HEALTH_ALARM, a
 	jr z, .skipWaitForSound
-	ld a, (1 << BIT_LOW_HEALTH_ALARM) | $7f
+	ld a, DISABLE_LOW_HEALTH_ALARM
 	ld [wLowHealthAlarm], a
 	call WaitForSoundToFinish
 .skipWaitForSound

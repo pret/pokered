@@ -1,6 +1,6 @@
 Music_DoLowHealthAlarm::
 	ld a, [wLowHealthAlarm]
-	cp $ff
+	cp DISABLE_LOW_HEALTH_ALARM
 	jr z, .disableAlarm
 
 	bit BIT_LOW_HEALTH_ALARM, a
