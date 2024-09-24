@@ -18240,8 +18240,8 @@
 00:c39f wShadowOAMSprite39Attributes
 00:c3a0 wShadowOAMEnd
 00:c3a0 wTileMap
-00:c508 wTileMapBackup
 00:c508 wSerialPartyMonsPatchList
+00:c508 wTileMapBackup
 00:c5d0 wSerialEnemyMonsPatchList
 00:c6e8 wTempPic
 00:c6e8 wOverworldMap
@@ -18397,7 +18397,6 @@
 00:cd3d wNumShakes
 00:cd3d wPPRestoreItem
 00:cd3d wDexMaxSeenMon
-00:cd3d wWhichTrade
 00:cd3d wSavedY
 00:cd3d wChangeBoxSavedMapTextPointer
 00:cd3d wBadgeNumberTile
@@ -18417,14 +18416,16 @@
 00:cd3d wBoxNumString
 00:cd3d wTradingWhichPlayerMon
 00:cd3d wTradedPlayerMonSpecies
+00:cd3d wChargeMoveNum
+00:cd3d wPriceTemp
 00:cd3d wFieldMoves
 00:cd3d wPlayerCharacterOAMTile
-00:cd3d wChargeMoveNum
 00:cd3d wCoordIndex
 00:cd3d wTempSCX
 00:cd3d wBoxMonCounts
 00:cd3d wHoFTeamIndex
 00:cd3d wUnusedCreditsByte
+00:cd3d wWhichTrade
 00:cd3d wDayCareStartLevel
 00:cd3d wMoveDownSmallStarsOAMCount
 00:cd3d wWereAnyMonsAsleep
@@ -18432,7 +18433,6 @@
 00:cd3d wTrainerSpriteOffset
 00:cd3d wPlayerSpinWhileMovingUpOrDownAnimDeltaY
 00:cd3d wStoppingWhichSlotMachineWheel
-00:cd3d wPriceTemp
 00:cd3e wNumCreditsMonsDisplayed
 00:cd3e wTrainerInfoTextBoxWidth
 00:cd3e wTrainerEngageDistance

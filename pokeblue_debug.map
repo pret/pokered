@@ -18530,8 +18530,8 @@ WRAM0 bank #0:
 	         $c3a0 = wShadowOAMEnd
 	SECTION: $c3a0-$c6e7 ($0348 bytes) ["Tilemap"]
 	         $c3a0 = wTileMap
-	         $c508 = wTileMapBackup
 	         $c508 = wSerialPartyMonsPatchList
+	         $c508 = wTileMapBackup
 	         $c5d0 = wSerialEnemyMonsPatchList
 	SECTION: $c6e8-$cbfb ($0514 bytes) ["Overworld Map"]
 	         $c6e8 = wTempPic
@@ -18689,7 +18689,6 @@ WRAM0 bank #0:
 	         $cd3d = wNumShakes
 	         $cd3d = wPPRestoreItem
 	         $cd3d = wDexMaxSeenMon
-	         $cd3d = wWhichTrade
 	         $cd3d = wSavedY
 	         $cd3d = wChangeBoxSavedMapTextPointer
 	         $cd3d = wBadgeNumberTile
@@ -18709,14 +18708,16 @@ WRAM0 bank #0:
 	         $cd3d = wBoxNumString
 	         $cd3d = wTradingWhichPlayerMon
 	         $cd3d = wTradedPlayerMonSpecies
+	         $cd3d = wChargeMoveNum
+	         $cd3d = wPriceTemp
 	         $cd3d = wFieldMoves
 	         $cd3d = wPlayerCharacterOAMTile
-	         $cd3d = wChargeMoveNum
 	         $cd3d = wCoordIndex
 	         $cd3d = wTempSCX
 	         $cd3d = wBoxMonCounts
 	         $cd3d = wHoFTeamIndex
 	         $cd3d = wUnusedCreditsByte
+	         $cd3d = wWhichTrade
 	         $cd3d = wDayCareStartLevel
 	         $cd3d = wMoveDownSmallStarsOAMCount
 	         $cd3d = wWereAnyMonsAsleep
@@ -18724,7 +18725,6 @@ WRAM0 bank #0:
 	         $cd3d = wTrainerSpriteOffset
 	         $cd3d = wPlayerSpinWhileMovingUpOrDownAnimDeltaY
 	         $cd3d = wStoppingWhichSlotMachineWheel
-	         $cd3d = wPriceTemp
 	         $cd3e = wNumCreditsMonsDisplayed
 	         $cd3e = wTrainerInfoTextBoxWidth
 	         $cd3e = wTrainerEngageDistance
