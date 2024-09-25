@@ -33,7 +33,7 @@ PredefPointers::
 	add_predef AnyPartyAlive
 	add_predef ShowObject
 	add_predef ReplaceTileBlock
-	add_predef InitPlayerData2
+	add_predef InitPlayerData2 ; TODO: duplicate predef
 	add_predef LoadTilesetHeader
 	add_predef LearnMoveFromLevelUp
 	add_predef LearnMove
