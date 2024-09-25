@@ -43,7 +43,7 @@ FrontSpriteOptions5Data:
 FrontSpriteOptions5Text:
 	db   "SPRITES→FRONT 5"
 	next " JYNX:       RG SW"
-	next " ELECTABUZZ: RG RB"
+	next " ELECTABUZZ: RB RG"
 	next " PINSIR:     RB RG"
 	next " OMANYTE:    RB RG"
 	next " ARTICUNO:   RB Y"
