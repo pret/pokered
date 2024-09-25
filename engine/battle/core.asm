@@ -7256,12 +7256,6 @@ DetermineWildOpponent:
 	callfar TryDoWildEncounter
 	ret nz
 InitBattleCommon:
-	ld a, [wCurMapTileset]
-	cp VOLCANO
-	jr nz, .notVolcano
-	ld hl, wFlags_D733
-	set 1, [hl] ; prevents surf music from playing when returning from a battle on lava
-.notVolcano
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; shinpokerednote: ADDED: store PKMN Levels at the beginning of the Battle.
 	farcall StorePKMNLevels

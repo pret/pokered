@@ -4,7 +4,7 @@ CheckForBikeSurfMusic::
 	jr z, .biking
 	dec a
 	ld e, MUSIC_SURFING
-	jr z, .otherMusic
+	jr z, .surfing
 	jr .walking
 .biking
 	ld e, MUSIC_BIKE_RIDING
@@ -23,3 +23,9 @@ CheckForBikeSurfMusic::
 .walking
 	scf
 	ret
+.surfing
+	; no surfing music in the volcano when lava surfing
+	ld a, [wCurMapTileset]
+	cp VOLCANO
+	jr z, .walking
+	jr .otherMusic

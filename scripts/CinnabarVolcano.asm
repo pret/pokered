@@ -1545,8 +1545,6 @@ CinnabarVolcanoBossMagmarText:
 	ld [wEngagedTrainerSet], a
 	call InitBattleEnemyParameters
 	SetEvent EVENT_BATTLING_VOLCANO_MAGMAR
-	ld hl, wFlags_D733
-	set 1, [hl] ; prevents surf music from playing when we come back from battle
 	ld hl, .letsdothis
 	rst _PrintText
 	callfar PlayTrainerMusic
@@ -1743,33 +1741,15 @@ SlideSpriteUpOrDownCommon:
 	ld [wTempStore1], a
 	ret
 
-VolcanoAfterBattleOccurred::
-	ld hl, wFlags_D733
-	res 1, [hl]
-	ld a, [wIsInBattle]
-	cp -1 ; lost battle
-	ret z ; do nothing when you lost the battle
-	ld hl, wWalkBikeSurfState
-	ld a, [hl]
-	cp SURFING
-	jr nz, .normal
-	ld [hl], WEARING_LAVA_SUIT
-	push hl
-	call PlayDefaultMusicFadeOutCurrent
-	pop hl
-	ld [hl], SURFING
-	jr .doneRestartMusic
-.normal
-	call PlayDefaultMusicFadeOutCurrent
-.doneRestartMusic
-	jp GBFadeInFromWhite
-
 CheckIfVolcanoBattleOccurred:
 	ld hl, wCurrentMapScriptFlags
 	bit 3, [hl]
 	res 3, [hl]
 	ret z
-	call VolcanoAfterBattleOccurred
+	ld a, [wIsInBattle]
+	cp -1 ; lost battle
+	ret z ; do nothing when you lost the battle
+	call GBFadeInFromWhite
 	CheckAndResetEvent EVENT_BATTLING_VOLCANO_MAGMAR
 	jr nz, .magmarWin
 	CheckAndResetEvent EVENT_BATTLING_MOLTRES

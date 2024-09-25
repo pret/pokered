@@ -1,17 +1,10 @@
 CinnabarVolcanoWest_Script:
-	call CinnabarVolcanoWestOnMapLoad
+	ld hl, wCurrentMapScriptFlags
+	res 5, [hl]
 	call CheckStartMagmarTransform
 	callfar CheckForceSurfDirection
 	jp EnableAutoTextBoxDrawing
-
-CinnabarVolcanoWestOnMapLoad:
-	ld hl, wCurrentMapScriptFlags
-	res 5, [hl]
-	bit 3, [hl]
-	res 3, [hl]
-	ret z
-	jpfar VolcanoAfterBattleOccurred
-
+	
 CinnabarVolcanoWest_TextPointers:
 	def_text_pointers
 	dw_const CinnabarVolcanoWestMagmar1Text,  TEXT_CINNABAR_VOLCANO_WEST_MAGMAR1
