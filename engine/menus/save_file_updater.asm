@@ -120,7 +120,6 @@ OriginalGameSaveFileUpdate:
 	ld c, MAX_HIDDEN_ITEMS / 8
 	ld hl, wObtainedHiddenItemsFlags
 	call InsertValuesToFlagArray
-	SetEvent EVENT_GOT_MOVEDEX ; TODO: REMOVE
 	; step 12: EVENT_BECAME_CHAMP set if player became champ
 	CheckEvent EVENT_BEAT_CHAMPION_RIVAL
 	ret z
