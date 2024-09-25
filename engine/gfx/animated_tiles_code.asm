@@ -1,21 +1,18 @@
-TownMapWaterTiles:
-	ld hl, wTownMapSpriteBlinkingEnabled ; this is used as the counter for the town map so we don't mess up the normal counter
-	inc [hl]
-	ld a, [hl]
-	cp 60
-	ret nz
-	push hl
-	ld hl, vTileset tile $64
-	call AnimateArbitraryWaterTile2
-	pop hl
-	ld [hl], 1 ; needs to be kept at a minimum of 1 while viewing town map to keep blinking active
-	ret
+;TownMapWaterTiles:
+;	ld a, [wAnimCounter] ; this is used as the counter for the town map so we don't mess up the normal counter
+;	cp 49
+;	ret nz
+;	push hl
+;	ld hl, vTileset tile $64
+;	call AnimateArbitraryWaterTile2
+;	pop hl
+;	ret
 
 ; PureRGBnote: CHANGED: the code for animating these tiles was moved to another bank for space.
 AnimateTiles::
-	ld a, [wTownMapSpriteBlinkingEnabled] ; set to 1 when viewing town map
-	and a
-	jr nz, TownMapWaterTiles
+;	ld a, [wViewingTownMap] ; bit 7 set when viewing town map
+;	bit VIEWING_TOWN_MAP, a
+;	jr nz, TownMapWaterTiles
 	ldh a, [hTileAnimations]
 	and a
 	ret z

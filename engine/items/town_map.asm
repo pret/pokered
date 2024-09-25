@@ -1,4 +1,5 @@
 DEF NOT_VISITED EQU $fe
+DEF VIEWING_TOWN_MAP EQU 7
 
 DisplayTownMap:
 	call LoadTownMap
@@ -358,6 +359,8 @@ LoadTownMap:
 	call RunPaletteCommand
 	call Delay3
 	call GBPalNormal
+;	ld hl, wViewingTownMap
+;	set VIEWING_TOWN_MAP, [hl]
 	xor a
 	ld [wAnimCounter], a
 	inc a
@@ -371,6 +374,8 @@ ExitTownMap:
 ; clear town map graphics data and load usual graphics data
 	xor a
 	ld [wTownMapSpriteBlinkingEnabled], a
+	;ld hl, wViewingTownMap
+	;res VIEWING_TOWN_MAP, [hl]
 	call GBPalWhiteOut
 	call ClearScreen
 	call ClearSprites
