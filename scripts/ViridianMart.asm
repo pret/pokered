@@ -7,12 +7,10 @@ ViridianMart_Script:
 
 ViridianMartCheckParcelDeliveredScript:
 	CheckEvent EVENT_OAK_GOT_PARCEL
+	ld hl, ViridianMart_TextPointers2
 	jr nz, .delivered_parcel
 	ld hl, ViridianMart_TextPointers
-	jr .done
 .delivered_parcel
-	ld hl, ViridianMart_TextPointers2
-.done
 	ld a, l
 	ld [wCurMapTextPtr], a
 	ld a, h
