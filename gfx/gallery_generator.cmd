@@ -42,17 +42,19 @@ magick row1.png row2.png row3.png row4.png row5.png row6.png row7.png row8.png r
 del row1.png row2.png row3.png row4.png row5.png row6.png row7.png row8.png row9.png
 
 cd front_alt
-magick bulbasaur.png squirtle.png blastoise.png butterfree.png pidgeotto.png pidgeot.png raticate.png nidorino.png golbat.png mankey.png arcanine.png abra.png kadabra.png machop.png +append ../row1.png
-magick tentacruel.png graveler.png cloyster.png gengar.png onix.png voltorb.png exeggcute.png exeggutor.png koffing.png starmie.png pinsir.png electabuzz.png zapdos.png mewtwo.png +append ../row2.png
+magick bulbasaur.png squirtle.png blastoise.png butterfree.png pidgeotto.png pidgeot.png raticate.png spearow.png nidorino.png golbat.png golduck.png mankey.png arcanine.png abra.png kadabra.png machop.png tentacruel.png graveler.png +append ../row1.png
+magick farfetchd.png cloyster.png gengar.png onix.png voltorb.png exeggcute.png exeggutor.png koffing.png starmie.png scyther.png jynx.png electabuzz.png pinsir.png omanyte.png articuno.png zapdos.png mewtwo.png +append ../row2.png
 cd ..
 magick row1.png row2.png -append gallery/alt_front_sprites.png
 del row1.png row2.png
 
-magick front/bulbasaur.png front_alt/bulbasaur.png front/squirtle.png front_alt/squirtle.png front/blastoise.png front_alt/blastoise.png front/butterfree.png front_alt/butterfree.png front/pidgeotto.png front_alt/pidgeotto.png front/pidgeot.png front_alt/pidgeot.png front/raticate.png front_alt/raticate.png front/nidorino.png front_alt/nidorino.png front/golbat.png front_alt/golbat.png +append row1.png
+magick front/bulbasaur.png front_alt/bulbasaur.png front/squirtle.png front_alt/squirtle.png front/blastoise.png front_alt/blastoise.png front/butterfree.png front_alt/butterfree.png front/pidgeotto.png front_alt/pidgeotto.png front/pidgeot.png front_alt/pidgeot.png front/raticate.png front_alt/raticate.png front/spearow.png front_alt/spearow.png front/nidorino.png front_alt/nidorino.png +append row1.png
 
-magick front/mankey.png front_alt/mankey.png front/arcanine.png front_alt/arcanine.png front/abra.png front_alt/abra.png front/kadabra.png front_alt/kadabra.png front/machop.png front_alt/machop.png front/tentacruel.png front_alt/tentacruel.png front/graveler.png front_alt/graveler.png front/cloyster.png front_alt/cloyster.png front/gengar.png front_alt/gengar.png front/onix.png front_alt/onix.png +append row2.png
+magick front/golbat.png front_alt/golbat.png front/golduck.png front_alt/golduck.png front/mankey.png front_alt/mankey.png front/arcanine.png front_alt/arcanine.png front/abra.png front_alt/abra.png front/kadabra.png front_alt/kadabra.png front/machop.png front_alt/machop.png front/tentacruel.png front_alt/tentacruel.png front/graveler.png front_alt/graveler.png +append row2.png
 
-magick front/voltorb.png front_alt/voltorb.png front/exeggcute.png front_alt/exeggcute.png front/exeggutor.png front_alt/exeggutor.png front/koffing.png front_alt/koffing.png front/starmie.png front_alt/starmie.png front/pinsir.png front_alt/pinsir.png front/electabuzz.png front_alt/electabuzz.png front/zapdos.png front_alt/zapdos.png front/mewtwo.png front_alt/mewtwo.png +append row3.png
+magick front/farfetchd.png front_alt/farfetchd.png front/cloyster.png front_alt/cloyster.png front/gengar.png front_alt/gengar.png front/onix.png front_alt/onix.png front/voltorb.png front_alt/voltorb.png front/exeggcute.png front_alt/exeggcute.png front/exeggutor.png front_alt/exeggutor.png front/koffing.png front_alt/koffing.png +append row3.png
 
-magick row1.png row2.png row3.png -append gallery/front_sprite_options.png
-del row1.png row2.png row3.png
+magick front/starmie.png front_alt/starmie.png front/scyther.png front_alt/scyther.png front/jynx.png front_alt/jynx.png front/electabuzz.png front_alt/electabuzz.png front/pinsir.png front_alt/pinsir.png front/omanyte.png front_alt/omanyte.png front/articuno.png front_alt/articuno.png  front/zapdos.png front_alt/zapdos.png front/mewtwo.png front_alt/mewtwo.png +append row4.png
+
+magick row1.png row2.png row3.png row4.png -append gallery/front_sprite_options.png
+del row1.png row2.png row3.png row4.png
