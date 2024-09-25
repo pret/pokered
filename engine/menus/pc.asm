@@ -16,37 +16,25 @@ PCMainMenu:
 	call HandleMenuInput
 	bit BIT_B_BUTTON, a
 	jp nz, LogOff
-	ld a, [wMaxMenuItem]
-	cp 2
-	jr nz, .next ;if not 2 menu items (not counting log off) (2 occurs before you get the pokedex)
+	ld a, [wMaxMenuItem] ; minimum of 2 for 3 options
+	dec a
+	ld c, a
 	ld a, [wCurrentMenuItem]
+	ld b, a
 	and a
-	jp z, BillsPC    ;if current menu item id is 0, it's bills pc
-	cp 1
+	jr z, BillsPC    ;if current menu item id is 0, it's bills pc
+	dec b
 	jr z, .playersPC ;if current menu item id is 1, it's players pc
-	jp LogOff        ;otherwise, it's 2, and you're logging off
-.next
-	cp 3
-	jr nz, .next2 ;if not 3 menu items (not counting log off) (3 occurs after you get the pokedex, before you beat the pokemon league)
-	ld a, [wCurrentMenuItem]
-	and a
-	jp z, BillsPC    ;if current menu item id is 0, it's bills pc
-	cp 1
-	jr z, .playersPC ;if current menu item id is 1, it's players pc
-	cp 2
-	jp z, OaksPC     ;if current menu item id is 2, it's oaks pc
-	jp LogOff        ;otherwise, it's 3, and you're logging off
-.next2
-	ld a, [wCurrentMenuItem]
-	and a
-	jp z, BillsPC    ;if current menu item id is 0, it's bills pc
-	cp 1
-	jr z, .playersPC ;if current menu item id is 1, it's players pc
-	cp 2
-	jp z, OaksPC     ;if current menu item id is 2, it's oaks pc
-	cp 3
-	jp z, PKMNLeague ;if current menu item id is 3, it's pkmnleague
-	jp LogOff        ;otherwise, it's 4, and you're logging off
+	dec c
+	jr z, .logOff ; if we only have 3 options (wMaxMenuItem = 2), log off is the only other option
+	dec b
+	jr z, OaksPC ; otherwise check if we chose oaks PC (wCurrentMenuItem = 2)
+	dec c
+	jr z, .logOff ; if we only have 4 options (wMaxMenuItem = 3), log off is the only other option
+	dec b
+	jr z, PKMNLeague ; otherwise check if we chose Pkmn League (wCurrentMenuItem = 3)
+.logOff
+	jp LogOff ; otherwise you chose log off.
 .playersPC
 	ld hl, wFlags_0xcd60
 	res 5, [hl]
@@ -119,13 +107,15 @@ AccessedMyPCText:
 RemoveNumItemByID::
 	ld a, d
 	ld [wItemQuantity], a
-	jr RemoveItemByIDCommon
+	jr RemoveBagItemByIDCommon
 ; removes one of the specified item ID [hItemToRemoveID] from bag (if existent)
 RemoveItemByID::
 	ld a, $1
 	ld [wItemQuantity], a
-RemoveItemByIDCommon::
+RemoveBagItemByIDCommon::
 	ld hl, wBagItems
+	ld de, wNumBagItems
+RemoveItemByIDCommon::
 	ldh a, [hItemToRemoveID]
 	ld b, a
 	xor a
@@ -144,5 +134,13 @@ RemoveItemByIDCommon::
 .foundItem
 	ldh a, [hItemToRemoveIndex]
 	ld [wWhichPokemon], a
-	ld hl, wNumBagItems
+	ld h, d
+	ld l, e
 	jp RemoveItemFromInventory
+
+RemoveBoxItemByID::
+	ld a, 1
+	ld [wItemQuantity], a
+	ld hl, wBoxItems
+	ld de, wNumBoxItems
+	jr RemoveItemByIDCommon

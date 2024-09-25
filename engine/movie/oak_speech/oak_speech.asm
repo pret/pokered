@@ -64,7 +64,13 @@ PrepareOakSpeech:
 	ld hl, DebugNewGameRivalName
 	ld de, wRivalName
 	ld bc, NAME_LENGTH
-	jp CopyData
+	rst _CopyData
+	; make sure the new game has the internal save file version stored so the save updater doesn't detect it
+	ld hl, wGameInternalVersion
+	ld [hl], CURRENT_INTERNAL_VERSION
+	ld a, SFX_TINK
+	rst _PlaySound
+	ret
 
 ; PureRGBnote: CHANGED: this subroutine was modified to make debug mode (wd732 bit 1 = non-zero) skip through it quickly to start debugging faster
 OakSpeech:

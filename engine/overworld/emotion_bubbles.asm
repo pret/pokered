@@ -102,6 +102,7 @@ EmotionBubblesOAM:
 	dbsprite  0, -1,  0,  0, $f9, 0
 	dbsprite  0, -1,  0,  2, $fb, 0
 
+; TODO: move elsewhere?
 EmotionBubbles:
 ShockEmote:    INCBIN "gfx/emotes/shock.2bpp"
 QuestionEmote: INCBIN "gfx/emotes/question.2bpp"

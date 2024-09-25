@@ -405,6 +405,10 @@ SECTION "Move Animation Tiles", ROMX
 
 INCLUDE "engine/battle/animations/move_animation_tiles.asm"
 
+SECTION "Save File Updater", ROMX
+
+INCLUDE "engine/menus/save_file_updater.asm"
+
 SECTION "newCode", ROMX
 ; PureRGBnote: ADDED: new code
 INCLUDE "engine/gfx/front_sprite_toggler.asm"

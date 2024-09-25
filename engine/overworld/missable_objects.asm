@@ -118,7 +118,7 @@ InitializeMissableObjectsFlags:
 	inc hl
 	jr .missableObjectsLoop
 
-InitializeExtraMissableObjectsFlags:
+InitializeExtraMissableObjectsFlags::
 	ld hl, wExtraMissableObjectFlags
 	ld bc, wExtraMissableObjectFlagsEnd - wExtraMissableObjectFlags
 	xor a
@@ -280,4 +280,15 @@ MissableObjectFlagAction:
 	pop de
 	pop hl
 	ld c, a
+	ret
+
+; input e = which flag it is
+; output d = what the default state is
+GetObjectDefaultState::
+	ld hl, MissableObjects + 2
+	ld d, 0
+	add hl, de
+	add hl, de
+	add hl, de
+	ld d, [hl]
 	ret

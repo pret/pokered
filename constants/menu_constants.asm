@@ -1,5 +1,5 @@
 DEF BAG_ITEM_CAPACITY EQU 30 ; PureRGBnote: CHANGED: bag size increased to 30
-DEF PC_ITEM_CAPACITY  EQU 50
+DEF PC_ITEM_CAPACITY  EQU 60
 
 ; text box IDs
 	const_def 1

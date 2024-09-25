@@ -176,6 +176,7 @@ ROMX $2A
 ROMX $2B
 	"Pokédex Text"
 	"Move Animation Tiles"
+	"Save File Updater"
 ROMX $2C
 	"Move Names"
 	"Wild Mons"

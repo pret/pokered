@@ -485,3 +485,8 @@ RocketPasswordMenu::
 	next "B<ROCKET>"
 	next "SP<ROCKET>"
 	next "DENNIS@"
+
+SaveFileUpdaterMenu::
+	dw TwoOptionMenu
+	db "Before v2.6.0"
+	next "Original Game@"

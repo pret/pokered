@@ -112,24 +112,34 @@ MainMenu:
 	jp nz, .mainMenuLoop ; pressed B
 	jr .inputLoop
 .pressedA
-	call GBPalWhiteOutWithDelay3
-	call ClearScreen
-	ld a, PLAYER_DIR_DOWN
-	ld [wPlayerDirection], a
-	ld c, 10
-	rst _DelayFrames
+	callfar SaveFileUpdateCheck
+	jp c, .mainMenuLoop
+	jr nz, .saveUpdateWarp
+	call .getReadyToLoad
 	ld a, [wNumHoFTeams]
 	and a
 	jp z, SpecialEnterMap
 	ld a, [wCurMap] ; map ID
 	cp HALL_OF_FAME
 	jp nz, SpecialEnterMap
-	xor a
+.palletTownWarp
+	xor a ; a = PALLET_TOWN
 	ld [wDestinationMap], a
 	ld hl, wd732
 	set 2, [hl] ; fly warp or dungeon warp
 	call PrepareForSpecialWarp
 	jp SpecialEnterMap
+.getReadyToLoad
+	call GBPalWhiteOutWithDelay3
+	call ClearScreen
+	ld a, PLAYER_DIR_DOWN
+	ld [wPlayerDirection], a
+	ld c, 10
+	rst _DelayFrames
+	ret
+.saveUpdateWarp
+	call .getReadyToLoad
+	jr .palletTownWarp
 
 InitOptions:
 	ld a, TEXT_DELAY_FAST

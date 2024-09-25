@@ -4,6 +4,19 @@ ShowMovedexMenu:
 	call GBPalWhiteOut
 	call ClearScreen
 	call UpdateSprites
+	ld hl, wMovedexSeen
+	ld b, wMovedexSeenEnd - wMovedexSeen
+	call CountSetBits
+	ld a, [wNumSetBits]
+	and a
+	jr nz, .hasMoves
+	; if the player hasn't seen any moves but has the movedex (possible from older save files), it can cause issues, so mark TACKLE as seen.
+	; at the point of obtaining the movedex, you will have encountered this move through normal gameplay anyway.
+	ld c, TACKLE - 1
+	ld b, FLAG_SET
+	ld hl, wMovedexSeen
+	predef FlagActionPredef ; mark this move as seen in the movedex
+.hasMoves
 	ld a, [wListScrollOffset]
 	push af
 	xor a

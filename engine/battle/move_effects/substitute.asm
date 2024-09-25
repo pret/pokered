@@ -70,7 +70,8 @@ SubstituteEffect_:
 .notEnoughHP
 	ld hl, TooWeakSubstituteText
 .printText
-	jp PrintText
+	rst _PrintText
+	ret
 
 SubstituteText:
 	text_far _SubstituteText

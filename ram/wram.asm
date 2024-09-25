@@ -371,6 +371,16 @@ wVermilionDockTileMapBuffer:: ds 5 * BG_MAP_WIDTH + SCREEN_WIDTH
 wVermilionDockTileMapBufferEnd::
 
 NEXTU
+
+wSaveTransferTempData::
+wSaveTransferTempPocketAbraNick:: ds 11
+wSaveTransferTempNumBagItems:: db
+wSaveTransferTempBagItemsStart:: ds 30 * 2 + 1
+ds 3
+wSaveTransferTempColorSwapsUsed:: db
+wSaveTransferTempDataEnd::
+
+NEXTU
 wOaksAideRewardItemName:: ds ITEM_NAME_LENGTH
 
 NEXTU
@@ -1244,7 +1254,8 @@ wLoadedMon:: party_struct wLoadedMon
 ;bit 4: 4th pkmn (position 3)
 ;bit 5: 5th pkmn (position 4)
 ;bit 6: 6th pkmn (position 5)
-;bit 7: unused bit
+;bit 7: viewing town map currently
+;wViewingTownMap::
 wAIWhichPokemonSentOutAlready::
 wFontLoaded:: db
 
@@ -1949,6 +1960,9 @@ UNION
 ds 20 ; 20 of the 42 bytes of space are alotted to new missable object flags
 
 NEXTU
+wOriginalGameBagItemsData::db ; this data originally started here
+
+NEXTU
 
 ; PureRGBnote: ADDED: we use this empty space currently for a store of extra flags to hide/show objects in the safari zone.
 wExtraMissableObjectFlags:: flag_array NUM_EXTRA_HS_OBJECTS ; max size 20 bytes or 152 flags
@@ -1991,7 +2005,7 @@ wOptions:: db
 
 wObtainedBadges:: flag_array NUM_BADGES
 
-ds 1 ; unused save file byte
+wGameInternalVersion:: db
 
 ; bit 0: If 0, limit the delay to 1 frame. Note that this has no effect if
 ;        the delay has been disabled entirely through bit 1 of this variable
@@ -2068,20 +2082,20 @@ UNION
 ds 128
 
 NEXTU
-wPocketAbraNick:: ds NAME_LENGTH
+wPrior2_6_0_StartData::
+wPrior2_6_0_PocketAbraNick:: ds 11
+wPrior2_6_0_NumBagItems:: db
+wPrior2_6_0_BagItemsStart:: ds 30 * 2 + 1
+ds 3
+wPrior2_6_0_ColorSwapsUsed:: db
+wPrior2_6_0_EndData::
 
-;;;; moved from after wPokedexSeenEnd
-wNumBagItems:: db
-; item, quantity
-wBagItems:: ds BAG_ITEM_CAPACITY * 2 + 1 ; now holds 30 items
-;;;;
+NEXTU
 
-wWildMonPalettes:: ds 3 ; flag array for the current map: which wild pokemon should use alt palettes
+wNumBoxItems::db
+wBoxItems:: ds PC_ITEM_CAPACITY * 2 + 1 ; now holds 60 items
 
-wColorSwapsUsed:: db ; how many times the player has used the color changer NPC
-
-; 51 bytes remaining in union
-; unused save file 51 bytes
+; 6 bytes remain
 
 ENDU
 ;;;;;;;;;;
@@ -2143,9 +2157,23 @@ wGrassTile:: db
 
 	ds 4 ; unused save file 4 bytes
 
-wNumBoxItems:: db
+UNION
 ; item, quantity
-wBoxItems:: ds PC_ITEM_CAPACITY * 2 + 1
+wPrior2_6_0_BoxItemsData::
+wOriginalGameBoxItemsData:: ds 50 * 2 + 2
+wOriginalGameBoxItemsDataEnd::
+NEXTU
+wNumBagItems:: db
+wBagItems:: ds BAG_ITEM_CAPACITY * 2 + 1
+
+wPocketAbraNick:: ds NAME_LENGTH
+wWildMonPalettes:: ds 3 ; flag array for the current map: which wild pokemon should use alt palettes
+
+wColorSwapsUsed:: db ; how many times the player has used the color changer NPC
+
+; 25 bytes of space left
+
+ENDU
 
 ; bits 0-6: box number
 ; bit 7: whether the player has changed boxes before
@@ -2345,7 +2373,7 @@ wPlayerJumpingYScreenCoordsIndex:: db
 
 wRivalStarter:: db
 
-	ds 1 ; unused save file byte
+	ds 1
 
 wPlayerStarter:: db
 
@@ -2384,10 +2412,11 @@ wUnusedCardKeyGateID:: db ; unused save file byte?
 ; bit 7: set by ItemUseCardKey, which is leftover code from a previous implementation of the Card Key
 wd728:: db
 
-	ds 1 ; unused save file byte
+	ds 1
 
 ; redundant because it matches wObtainedBadges
 ; used to determine whether to show name on statue and in two NPC text scripts
+; TODO: remove pointless dupe?
 wBeatGymFlags:: db
 
 	ds 1 ; unused save file byte

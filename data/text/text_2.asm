@@ -1865,3 +1865,31 @@ _IrradiatedAppeared::
 _TheMawAppeared::
 	text "Dark@"
 	text_jump _SpiritAppeared
+
+_SaveFileUpdateText::
+	text "This save file"
+	line "seems to be from"
+	cont "an older build"
+	cont "of the game."
+	para "Which older build"
+	line "did it come from?"
+	done
+
+_SaveFileUpdateTextConfirm::
+	text "Press START to"
+	line "confirm."
+	done
+
+_SaveFileUpdateCompleteText::
+	text "Your save file has"
+	line "been updated."
+	done
+
+_SaveFileUpdateWarpText::
+	text "If you warp to"
+	line "PALLET TOWN, it"
+	cont "will reduce bugs"
+	cont "from changing"
+	cont "to a new version."
+	para "Warp to PALLET?"
+	done

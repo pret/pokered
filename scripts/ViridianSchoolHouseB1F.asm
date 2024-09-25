@@ -12,6 +12,15 @@ CheckGusGLeaves:
 	call GBFadeOutToWhite
 	ld c, 20
 	rst _DelayFrames
+	call SetDetentionHideShows
+	call UpdateSprites
+	call Delay3
+	call GBFadeInFromWhite
+	CheckEvent EVENT_GUS_IN_DETENTION
+	ret z
+	jp PlayDefaultMusic
+
+SetDetentionHideShows::
 	CheckEvent EVENT_GUS_IN_DETENTION
 	jr z, .hideGus
 	ld a, HS_VIRIDIAN_SCHOOL_HOUSE_DETENTION
@@ -27,7 +36,7 @@ CheckGusGLeaves:
 	ld [wMissableObjectIndex], a
 	predef HideExtraObject
 	ResetEvent EVENT_GUS_IN_DETENTION
-	jr .doneShow
+	ret
 .hideGus
 	ld a, HS_VIRIDIAN_SCHOOL_HOUSE_DETENTION
 	ld [wMissableObjectIndex], a
@@ -42,12 +51,6 @@ CheckGusGLeaves:
 	ld [wMissableObjectIndex], a
 	predef ShowExtraObject
 	SetEvent EVENT_GUS_IN_DETENTION
-.doneShow
-	call UpdateSprites
-	call Delay3
-	call GBFadeInFromWhite
-	CheckEvent EVENT_GUS_IN_DETENTION
-	call nz, PlayDefaultMusic
 	ret
 
 ViridianSchoolHouseB1F_TextPointers:
