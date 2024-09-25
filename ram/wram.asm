@@ -1743,7 +1743,7 @@ wOptions:: db
 
 wObtainedBadges:: flag_array NUM_BADGES
 
-wUnusedObtainedBadges:: db ; written but not read (see init_player_data.asm)
+wUnusedObtainedBadges:: db
 
 wLetterPrintingDelayFlags:: db
 
