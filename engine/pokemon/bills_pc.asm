@@ -150,7 +150,14 @@ BillsPCMenu:
 .handleMenuInput
 	call HandleMenuInput
 	bit BIT_SELECT, a
-	jr nz, .select
+	jr z, .notSelect
+	ld a, [wCurrentMenuItem]
+	and a
+	jr nz, .handleMenuInput
+	ld [wParentMenuItem], a
+	SetFlag FLAG_VIEW_PC_PKMN
+	jp BillsPCWithdraw
+.notSelect
 	bit BIT_B_BUTTON, a
 	jp nz, ExitBillsPC
 	call PlaceUnfilledArrowMenuCursor
@@ -164,14 +171,6 @@ BillsPCMenu:
 	jp z, BillsPCRelease ; release
 	cp $3
 	jp z, BillsPCChangeBox ; change box
-.select
-	ld a, [wCurrentMenuItem]
-	and a
-	jr nz, .handleMenuInput
-	ld [wParentMenuItem], a
-	SetFlag FLAG_VIEW_PC_PKMN
-	jp BillsPCWithdraw
-
 
 ExitBillsPC:
 	ld a, [wFlags_0xcd60]
