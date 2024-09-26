@@ -67,9 +67,12 @@ EmotionBubblesPointerTable:
 	dw QuestionEmote
 	dw HappyEmote
 
+; tile ID and attribute
 EmotionBubblesOAM:
-	dbsprite  0, -1,  0,  0, $f9, 0
-	dbsprite  0, -1,  0,  2, $fb, 0
+	db $f8, 0
+	db $f9, 0
+	db $fa, 0
+	db $fb, 0
 
 EmotionBubbles:
 ShockEmote:    INCBIN "gfx/emotes/shock.2bpp"
