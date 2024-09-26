@@ -709,7 +709,6 @@ OnixEvosMoves:
 ; Learnset
 	db 15, BIND
 	db 17, ROAR
-	db 19, SCREECH
 	db 22, LIGHT_SCREEN
 	db 25, RAGE
 	db 29, CLAMP
@@ -887,8 +886,9 @@ ArbokEvosMoves:
 	db 0
 ; Learnset
 	db 10, BITE
-	db 13, CONSTRICT ; STATIC SNAG
-	db 18, GLARE
+	db 13, SMOG
+	db 17, GLARE
+	db 19, CONSTRICT ; STATIC SNAG
 	db 22, MEGA_DRAIN
 	db 26, SLAM ; FILTHY SLAM
 	db 30, WITHDRAW
@@ -1632,8 +1632,9 @@ EkansEvosMoves:
 ; Learnset
 	db 7, ABSORB
 	db 10, BITE
-	db 13, CONSTRICT ; STATIC SNAG
-	db 18, GLARE
+	db 13, SMOG
+	db 17, GLARE
+	db 19, CONSTRICT ; STATIC SNAG
 	db 23, MEGA_DRAIN
 	db 26, SLAM ; FILTHY SLAM
 	db 30, WITHDRAW
