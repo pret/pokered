@@ -19082,6 +19082,7 @@
 00:d34a wRivalName
 00:d355 wOptions
 00:d356 wObtainedBadges
+00:d357 wUnusedObtainedBadges
 00:d358 wLetterPrintingDelayFlags
 00:d359 wPlayerID
 00:d35b wMapMusicSoundID

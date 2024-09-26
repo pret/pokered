@@ -19376,6 +19376,7 @@ WRAM0 bank #0:
 	         $d34a = wRivalName
 	         $d355 = wOptions
 	         $d356 = wObtainedBadges
+	         $d357 = wUnusedObtainedBadges
 	         $d358 = wLetterPrintingDelayFlags
 	         $d359 = wPlayerID
 	         $d35b = wMapMusicSoundID
