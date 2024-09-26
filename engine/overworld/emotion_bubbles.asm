@@ -2,23 +2,42 @@
 ; also, added a new heart bubble
 EmotionBubble::
 	call EmotionBubbleCommon
+EmotionBubbleAfter::
 	ld c, 60
 	rst _DelayFrames
-	jp EmotionBubbleCommon2
+	jr EmotionBubbleCommon2
+
+FishingEmotionBubble::
+	ld hl, vChars1 tile $43
+	ld de, FishingEmotionBubblesOAM
+	call EmotionBubbleArbitrary
+	jr EmotionBubbleAfter
 
 EmotionBubbleQuick::
 	call EmotionBubbleCommon
 	ld c, 30
 	rst _DelayFrames
-	jp EmotionBubbleCommon2
+	jr EmotionBubbleCommon2
 
 EmotionBubbleVeryFast::
 	call EmotionBubbleCommon
 	ld c, 20
 	rst _DelayFrames
-	jp EmotionBubbleCommon2
+	; fall through
+EmotionBubbleCommon2:
+	ld a, d
+	ld [wUpdateSpritesEnabled], a
+	rst _DelayFrame
+	jp UpdateSprites
 
 EmotionBubbleCommon:
+	ld hl, vChars1 tile $78
+	ld de, EmotionBubblesOAM
+EmotionBubbleArbitrary:
+	ld a, [wUpdateSpritesEnabled]
+	push af
+	push de
+	push hl
 	ld a, [wWhichEmotionBubble]
 	ld c, a
 	ld b, 0
@@ -28,7 +47,7 @@ EmotionBubbleCommon:
 	ld a, [hli]
 	ld e, a
 	ld d, [hl]
-	ld hl, vChars1 tile $78
+	pop hl
 	ld a, [wWhichEmotionBubble]
 	cp HEART_BUBBLE
 	lb bc, BANK(EmotionBubbles), 4
@@ -37,8 +56,6 @@ EmotionBubbleCommon:
 	lb bc, BANK(LoveEmote), 4
 .gotBank
 	call CopyVideoData
-	ld a, [wUpdateSpritesEnabled]
-	push af
 	ld a, $ff
 	ld [wUpdateSpritesEnabled], a
 	ld a, [wd736]
@@ -77,18 +94,12 @@ EmotionBubbleCommon:
 	add $8
 	ld c, a
 
-	ld de, EmotionBubblesOAM
+	pop de
 	xor a
 	call WriteOAMBlock
 	pop af
 	ld d, a
 	ret
-
-EmotionBubbleCommon2:
-	ld a, d
-	ld [wUpdateSpritesEnabled], a
-	rst _DelayFrame
-	jp UpdateSprites
 
 EmotionBubblesPointerTable:
 ; entries correspond to *_BUBBLE constants
@@ -98,9 +109,19 @@ EmotionBubblesPointerTable:
 	dw LoveEmote
 	dw SleepingEmote
 
+; tile ID and attribute
 EmotionBubblesOAM:
-	dbsprite  0, -1,  0,  0, $f9, 0
-	dbsprite  0, -1,  0,  2, $fb, 0
+	db $f8, 0
+	db $f9, 0
+	db $fa, 0
+	db $fb, 0
+
+; tile ID and attribute
+FishingEmotionBubblesOAM:
+	db $c3, 0
+	db $c4, 0
+	db $c5, 0
+	db $c6, 0
 
 ; TODO: move elsewhere?
 EmotionBubbles:

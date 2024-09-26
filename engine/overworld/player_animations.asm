@@ -410,7 +410,7 @@ FishingAnim:
 	xor a
 	ld [hli], a ; player's sprite
 	ld [hl], a ; EXCLAMATION_BUBBLE
-	predef EmotionBubble
+	callfar FishingEmotionBubble
 
 ; If the player is facing up, unhide the fishing rod.
 	ld a, [wSpritePlayerStateData1ImageIndex] ; (image index is locked to standing images)
@@ -448,10 +448,10 @@ ItsABiteText:
 
 FishingRodOAM:
 ; specifies how the fishing rod should be drawn on the screen
-	dbsprite  9, 11,  4,  3, $fd, 0         ; down
-	dbsprite  9,  8,  4,  4, $fd, 0         ; up
-	dbsprite  8, 10,  0,  0, $fe, 0         ; left
-	dbsprite 11, 10,  0,  0, $fe, OAM_HFLIP ; right
+	dbsprite  9, 11,  4,  3, $c0, 0         ; down
+	dbsprite  9,  8,  4,  4, $c0, 0         ; up
+	dbsprite  8, 10,  0,  0, $c1, 0         ; left
+	dbsprite 11, 10,  0,  0, $c1, OAM_HFLIP ; right
 
 MACRO fishing_gfx
 	dw \1
@@ -464,7 +464,7 @@ RedFishingTiles:
 	fishing_gfx RedFishingTilesFront, 2, $02
 	fishing_gfx RedFishingTilesBack,  2, $06
 	fishing_gfx RedFishingTilesSide,  2, $0a
-	fishing_gfx RedFishingRodTiles,   3, $fd
+	fishing_gfx RedFishingRodTiles,   3, $c0
 
 HandleMidJump::
 	ld a, [wPlayerJumpingYScreenCoordsIndex]
