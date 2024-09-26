@@ -474,10 +474,11 @@ ConversionMenu::
 	next "DEFENSE@"
 
 SSAnneFoodMenu::
-	dw ThreeOptionMenu
+	dw FourOptionMenu
 	db "Barbecue Eel"
 	next "Prime Steak"
-	next "Salmon Salad@"
+	next "Salmon Salad"
+	next "Cherry Pie@"
 
 RocketPasswordMenu::
 	dw FourOptionMenu

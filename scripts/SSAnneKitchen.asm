@@ -1,5 +1,57 @@
 SSAnneKitchen_Script:
-	jp EnableAutoTextBoxDrawing
+	call EnableAutoTextBoxDrawing
+	CheckEvent EVENT_GENERIC_NPC_WALKING_FLAG
+	ret z
+	ld a, $FF
+	ld [wJoyIgnore], a
+	ld a, [wd730]
+	bit 0, a
+	ret nz
+	ld a, SSANNEKITCHEN_WAITER
+	call GetMapSpriteLocation
+	ld a, e
+	cp 7
+	jr nz, .done
+	; Hide waiter sprite, then wait a bit
+	ld c, SSANNEKITCHEN_WAITER
+	lb de, 12, 12
+	callfar FarMoveSpriteOffScreen
+	call UpdateSprites
+	ld c, 60
+	rst _DelayFrames
+	ld c, SSANNEKITCHEN_WAITER
+	lb de, 6, 0
+	callfar FarMoveSpriteInRelationToPlayer
+	; Make Waiter come back
+	ld de, MovementWaiterWalksLeft
+	ld hl, wNPCMovementDirections2
+	call DecodeRLEList
+	ld a, SSANNEKITCHEN_WAITER
+	ldh [hSpriteIndex], a
+	ld de, wNPCMovementDirections2
+	jpfar MoveSprite
+.done
+	ResetEvent EVENT_GENERIC_NPC_WALKING_FLAG
+	xor a
+	ld [wJoyIgnore], a
+	; Waiter done walking
+	ld d, SSANNEKITCHEN_WAITER
+	callfar FarNPCSpriteQuickSpin
+	ld a, PLAYER_DIR_DOWN
+	ld [wPlayerMovingDirection], a
+	call UpdateSprites
+	ld a, $2B
+	call KitchenReplaceFoodTileBlock
+	ld a, SFX_NOISE_INSTRUMENT02
+	rst _PlaySound
+	ld a, SFX_59
+	call PlaySoundWaitForCurrent
+	ld c, 60
+	rst _DelayFrames
+	ld a, TEXT_SSANNEKITCHEN_WAITER_RETURNS
+	ldh [hSpriteIndexOrTextID], a
+	jp DisplayTextID
+
 
 SSAnneKitchen_TextPointers:
 	def_text_pointers
@@ -11,6 +63,7 @@ SSAnneKitchen_TextPointers:
 	dw_const SSAnneKitchenCook6Text, TEXT_SSANNEKITCHEN_COOK6
 	dw_const SSAnneKitchenCook7Text, TEXT_SSANNEKITCHEN_COOK7
 	dw_const SSAnneKitchenWaiterText, TEXT_SSANNEKITCHEN_WAITER
+	dw_const SSAnneKitchenWaiterReturnsText, TEXT_SSANNEKITCHEN_WAITER_RETURNS
 
 SSAnneKitchenCook1Text:
 	text_far _SSAnneKitchenCook1Text
@@ -97,34 +150,15 @@ SSAnneKitchenWaiterText:
 	jr nz, .suitYourself
 	ld hl, .comingRightUp
 	rst _PrintText
-	call GBFadeOutToWhite
-	ld c, 60
-	rst _DelayFrames
-	call GBFadeInFromWhite
-	ld d, SSANNEKITCHEN_WAITER
-	callfar FarNPCSpriteQuickSpin
-	ld a, PLAYER_DIR_DOWN
-	ld [wPlayerMovingDirection], a
-	call UpdateSprites
-	ld a, $2B
-	call .replaceFoodTileBlock
-	ld a, SFX_NOISE_INSTRUMENT02
-	rst _PlaySound
-	ld a, SFX_59
-	call PlaySoundWaitForCurrent
-	ld c, 60
-	rst _DelayFrames
-	ld hl, .bonAppetit
-	rst _PrintText
-	call GBFadeOutToWhite
-	callfar MomHealPokemonImmediate
-	ld a, $3F
-	call .replaceFoodTileBlock
-	call GBFadeInFromWhite
+	ld de, MovementWaiterWalksRight
+	ld hl, wNPCMovementDirections2
+	call DecodeRLEList
+	SetEvent EVENT_GENERIC_NPC_WALKING_FLAG
 	ld a, SSANNEKITCHEN_WAITER
-	call SetSpriteFacingLeft
-	ld hl, .comeAgain
-	jr .printDone
+	ldh [hSpriteIndex], a
+	ld de, wNPCMovementDirections2
+	callfar MoveSpriteButAllowAOrBPress
+	rst TextScriptEnd
 .suitYourself
 	ld hl, .suitYourselfText
 	jr .printDone
@@ -135,10 +169,6 @@ SSAnneKitchenWaiterText:
 .printDone
 	rst _PrintText
 	rst TextScriptEnd
-.replaceFoodTileBlock
-	lb bc, 7, 0
-	ld [wNewTileBlockID], a
-	predef_jump ReplaceTileBlock
 .suitYourselfText
 	text_far _FossilGuyDenied
 	text_end
@@ -151,9 +181,50 @@ SSAnneKitchenWaiterText:
 .comingRightUp
 	text_far _SSAnneKitchenWaiterComingRightUp
 	text_end
-.bonAppetit
+
+SSAnneKitchenWaiterReturnsText:
 	text_far _MomFoodBonAppetit
-	text_end
+	text_asm
+	call GBFadeOutToWhite
+	callfar MomHealPokemonImmediate
+	ld a, $3F
+	call KitchenReplaceFoodTileBlock
+	call GBFadeInFromWhite
+	ld a, SSANNEKITCHEN_WAITER
+	call SetSpriteFacingLeft
+	ld hl, .comeAgain
+	rst _PrintText
+	rst TextScriptEnd
 .comeAgain
 	text_far _CableClubNPCPleaseComeAgainText
 	text_end
+
+KitchenReplaceFoodTileBlock:
+	lb bc, 7, 0
+	ld [wNewTileBlockID], a
+	predef_jump ReplaceTileBlock
+
+MovementWaiterWalksRight:
+	db NPC_MOVEMENT_RIGHT, 5
+	db -1
+
+MovementWaiterWalksLeft:
+	db NPC_MOVEMENT_LEFT, 5
+	db -1
+
+; output hl = pointer to sprite location data
+; output d = y location e = x location
+FarGetMapSpriteLocation::
+	ld a, d
+GetMapSpriteLocation::
+	ldh [hSpriteIndex], a
+	ld a, SPRITESTATEDATA2_MAPY
+	ldh [hSpriteDataOffset], a
+	call GetPointerWithinSpriteStateData2
+	ld a, [hli]
+	sub 4
+	ld d, a
+	ld a, [hld]
+	sub 4
+	ld e, a
+	ret

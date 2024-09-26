@@ -81,4 +81,4 @@ _SSAnneKitchenWaiterHaveSeat::
 _SSAnneKitchenWaiterComingRightUp::
 	text "Great choice!"
 	line "Coming right up!"
-	prompt
+	done
