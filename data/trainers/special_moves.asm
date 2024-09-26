@@ -6,7 +6,7 @@
 ; the fourth entry in the list.
 LoneMoves:
 	; pokemon index, move index, move to give nth pokemon
-	db 1, 1, BIDE
+	db 1, 2, BIDE
 	db 1, 3, BUBBLEBEAM
 	db 2, 3, THUNDERBOLT
 	db 2, 1, RAZOR_LEAF
