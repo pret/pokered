@@ -1,4 +1,5 @@
 DEF COIN_CASE EQU $45 ; constant was changed
+DEF TOWN_MAP EQU $05 ; constant was changed
 
 SaveFileUpdateText:
 	text_far _SaveFileUpdateText
@@ -72,6 +73,9 @@ OriginalGameSaveFileUpdate:
 	ld de, wNumBagItems
 	ld bc, 42 ; 20 items * 2 plus extra byte plus number of items byte
 	rst _CopyData
+	CheckEvent EVENT_GOT_TOWN_MAP
+	ld a, TOWN_MAP
+	call nz, RemoveItemFromBagAndBox
 	; step 4: check if COIN CASE has been obtained by player. If so remove coin case item from player inventory.
 	CheckEvent EVENT_GOT_COIN_CASE
 	ld a, COIN_CASE
