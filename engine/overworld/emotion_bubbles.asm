@@ -67,8 +67,8 @@ EmotionBubblesPointerTable:
 	dw QuestionEmote
 	dw HappyEmote
 
-; tile ID and attribute
 EmotionBubblesOAM:
+; tile ID, attributes
 	db $f8, 0
 	db $f9, 0
 	db $fa, 0
