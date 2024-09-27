@@ -123,8 +123,11 @@ WriteCutOrBoulderDustAnimationOAMBlock:
 	jp WriteOAMBlock
 
 CutOrBoulderDustAnimationTilesAndAttributes:
-	dbsprite  2, -1,  0,  4, $fd, OAM_OBP1
-	dbsprite  2, -1,  0,  6, $ff, OAM_OBP1
+	; tile ID, attributes
+	db $FC, %10010100
+	db $FD, %10010100
+	db $FE, %10010100
+	db $FF, %10010100
 
 GetCutOrBoulderDustAnimationOffsets:
 	ld hl, wSpritePlayerStateData1YPixels
