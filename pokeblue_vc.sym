@@ -3253,7 +3253,7 @@
 03:7044 InitCutAnimOAM.loop
 03:704c LoadCutGrassAnimationTilePattern
 03:7055 WriteCutOrBoulderDustAnimationOAMBlock
-03:7060 CutOrBoulderDustAnimationTilesAndAttributes
+03:7060 WriteCutOrBoulderDustAnimationOAMBlock.OAMBlock
 03:7068 GetCutOrBoulderDustAnimationOffsets
 03:7084 GetCutOrBoulderDustAnimationOffsets.next
 03:708f CutAnimationOffsets
@@ -3803,7 +3803,7 @@
 05:7c7a EmotionBubble.next
 05:7c7d EmotionBubble.loop
 05:7caf EmotionBubblesPointerTable
-05:7cb5 EmotionBubblesOAM
+05:7cb5 EmotionBubblesOAMBlock
 05:7cbd EmotionBubbles
 05:7cbd ShockEmote
 05:7cfd QuestionEmote
@@ -4337,7 +4337,7 @@
 06:66f0 LoadHoppingShadowOAM
 06:6708 LedgeHoppingShadow
 06:6710 LedgeHoppingShadowEnd
-06:6710 LedgeHoppingShadowOAM
+06:6710 LedgeHoppingShadowOAMBlock
 07:4000 CinnabarIsland_h
 07:4022 CinnabarIsland_Object
 07:4069 CinnabarIsland_Blocks
@@ -7710,7 +7710,7 @@
 10:52e7 Trade_AnimateBallEnteringLinkCable.moveBallInsideLinkCableLoop
 10:5300 Trade_AnimateBallEnteringLinkCable.cycleLinkCableBulgeTile
 10:5318 Trade_AnimateBallEnteringLinkCable.ballSpriteReachedEdgeOfScreen
-10:532e Trade_BallInsideLinkCableOAM
+10:532e Trade_BallInsideLinkCableOAMBlock
 10:5336 Trade_ShowEnemyMon
 10:5376 Trade_AnimLeftToRight
 10:53c6 Trade_AnimRightToLeft
@@ -7735,13 +7735,13 @@
 10:5536 Trade_AnimMonMoveVertical.movingLeft
 10:553f Trade_AnimMonMoveVertical.doAnim
 10:5549 Trade_AnimMonMoveVertical.loop
-10:5558 Trade_WriteCircleOAM
-10:555e Trade_WriteCircleOAM.loop
-10:5574 Trade_CircleOAMPointers
-10:5584 Trade_CircleOAM0
-10:558c Trade_CircleOAM1
-10:5594 Trade_CircleOAM2
-10:559c Trade_CircleOAM3
+10:5558 Trade_WriteCircleOAMBlock
+10:555e Trade_WriteCircleOAMBlock.loop
+10:5574 Trade_CircleOAMBlocks
+10:5584 Trade_CircleOAMBlocks.OAMBlock0
+10:558c Trade_CircleOAMBlocks.OAMBlock1
+10:5594 Trade_CircleOAMBlocks.OAMBlock2
+10:559c Trade_CircleOAMBlocks.OAMBlock3
 10:55a4 Trade_LoadMonSprite
 10:55c8 Trade_ShowClearedWindow
 10:55df Trade_SlideTextBoxOffScreen

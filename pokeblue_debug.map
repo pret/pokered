@@ -3291,7 +3291,7 @@ ROMX bank #3:
 	         $7044 = InitCutAnimOAM.loop
 	         $704c = LoadCutGrassAnimationTilePattern
 	         $7055 = WriteCutOrBoulderDustAnimationOAMBlock
-	         $7060 = CutOrBoulderDustAnimationTilesAndAttributes
+	         $7060 = WriteCutOrBoulderDustAnimationOAMBlock.OAMBlock
 	         $7068 = GetCutOrBoulderDustAnimationOffsets
 	         $7084 = GetCutOrBoulderDustAnimationOffsets.next
 	         $708f = CutAnimationOffsets
@@ -3854,7 +3854,7 @@ ROMX bank #5:
 	         $7c7a = EmotionBubble.next
 	         $7c7d = EmotionBubble.loop
 	         $7caf = EmotionBubblesPointerTable
-	         $7cb5 = EmotionBubblesOAM
+	         $7cb5 = EmotionBubblesOAMBlock
 	         $7cbd = EmotionBubbles
 	         $7cbd = ShockEmote
 	         $7cfd = QuestionEmote
@@ -4396,7 +4396,7 @@ ROMX bank #6:
 	         $66f8 = LoadHoppingShadowOAM
 	         $6710 = LedgeHoppingShadow
 	         $6718 = LedgeHoppingShadowEnd
-	         $6718 = LedgeHoppingShadowOAM
+	         $6718 = LedgeHoppingShadowOAMBlock
 	EMPTY: $6720-$7fff ($18e0 bytes)
 	TOTAL EMPTY: $18e0 bytes
 
@@ -7822,7 +7822,7 @@ ROMX bank #16:
 	         $52e7 = Trade_AnimateBallEnteringLinkCable.moveBallInsideLinkCableLoop
 	         $5300 = Trade_AnimateBallEnteringLinkCable.cycleLinkCableBulgeTile
 	         $5318 = Trade_AnimateBallEnteringLinkCable.ballSpriteReachedEdgeOfScreen
-	         $532e = Trade_BallInsideLinkCableOAM
+	         $532e = Trade_BallInsideLinkCableOAMBlock
 	         $5336 = Trade_ShowEnemyMon
 	         $5376 = Trade_AnimLeftToRight
 	         $53c6 = Trade_AnimRightToLeft
@@ -7847,13 +7847,13 @@ ROMX bank #16:
 	         $5536 = Trade_AnimMonMoveVertical.movingLeft
 	         $553f = Trade_AnimMonMoveVertical.doAnim
 	         $5549 = Trade_AnimMonMoveVertical.loop
-	         $5558 = Trade_WriteCircleOAM
-	         $555e = Trade_WriteCircleOAM.loop
-	         $5574 = Trade_CircleOAMPointers
-	         $5584 = Trade_CircleOAM0
-	         $558c = Trade_CircleOAM1
-	         $5594 = Trade_CircleOAM2
-	         $559c = Trade_CircleOAM3
+	         $5558 = Trade_WriteCircleOAMBlock
+	         $555e = Trade_WriteCircleOAMBlock.loop
+	         $5574 = Trade_CircleOAMBlocks
+	         $5584 = Trade_CircleOAMBlocks.OAMBlock0
+	         $558c = Trade_CircleOAMBlocks.OAMBlock1
+	         $5594 = Trade_CircleOAMBlocks.OAMBlock2
+	         $559c = Trade_CircleOAMBlocks.OAMBlock3
 	         $55a4 = Trade_LoadMonSprite
 	         $55c8 = Trade_ShowClearedWindow
 	         $55df = Trade_SlideTextBoxOffScreen
