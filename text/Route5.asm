@@ -10,8 +10,7 @@ _Route5BattleText1::
 	cont "thinking."
 	para "You know what?"
 	para "I'm positively"
-	line "going to beat"
-	cont "you!"
+	line "going to beat you!"
 	done
 
 _Route5EndBattleText1::

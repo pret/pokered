@@ -217,6 +217,9 @@ _DarkChannelerCatacombsIntroText::
 	line "purify spirits"
 	cont "better than a"
 	cont "SILPH SCOPE!"
+	para "All because of the"
+	line "special hexes I"
+	cont "put on it!"
 	para "<PLAYER> borrowed"
 	line "CHANNELER's STAFF!"
 	done
