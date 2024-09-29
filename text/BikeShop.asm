@@ -84,3 +84,55 @@ _BikeShopToolboxText::
 	line "a pump, hex keys,"
 	cont "tools galore!"
 	done
+
+_BikeShopSignRightText::
+	text "WELCOME TO"
+	line "MIRACLE CYCLE!"
+	done
+
+
+_BikeShopSignLeftText::
+	text "MIRACLE CYCLE"
+	para "The trendsetter of"
+	line "the bicycle boom!"
+	done
+
+_BikeShopStatsText::
+	text "Graphs and data"
+	line "comparing many"
+	cont "different BIKEs!"
+	para "Number of gears,"
+	line "shock absorption,"
+	cont "reliability<...>"
+	done
+
+_BikeShopArcade1Text::
+	text "Whoa!"
+	para "It's EXCITEBIKE!"
+	para "This game's a"
+	line "classic!"
+	para "It's one of Dad's"
+	line "favorites!"
+	para "There's an arcade"
+	line "version?!"
+	para "And it has two-"
+	line "player mode too!"
+	done
+
+_BikeShopArcade2Text::
+	text "A freestyle BMX"
+	line "arcade game!"
+	para "Wow, the biker"
+	line "did a backflip!"
+	done
+
+_BikeShopArcade3Text::
+	text "An 8-bit arcade"
+	line "game starring a"
+	cont "paper delivery"
+	cont "boy on a bicycle!"
+	para "Hah!"
+	para "He threw a"
+	line "newspaper through"
+	cont "someone's window!"
+	done

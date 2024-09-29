@@ -12,8 +12,21 @@ BikeShop_Object:
 
 	def_bg_events
 	bg_event  4, 0, TEXT_BIKESHOP_BASKET_BIKE
-	bg_event  6, 6, TEXT_BIKESHOP_TOOLBOX1
-	bg_event  7, 7, TEXT_BIKESHOP_TOOLBOX2
+	bg_event  6, 6, TEXT_BIKESHOP_TOOLBOX
+	bg_event  7, 7, TEXT_BIKESHOP_TOOLBOX
+	bg_event  3, 1, TEXT_BIKESHOP_NEW_BIKE
+	bg_event  3, 2, TEXT_BIKESHOP_NEW_BIKE
+	bg_event  1, 4, TEXT_BIKESHOP_NEW_BIKE
+	bg_event  9, 6, TEXT_BIKESHOP_NEW_BIKE
+	bg_event  9, 7, TEXT_BIKESHOP_NEW_BIKE
+	bg_event  2, 2, TEXT_BIKESHOP_NEW_BIKE
+	bg_event  0, 5, TEXT_BIKESHOP_ENTRANCE_SIGN1
+	bg_event  1, 5, TEXT_BIKESHOP_ENTRANCE_SIGN2
+	bg_event 11, 3, TEXT_BIKESHOP_ARCADE1
+	bg_event 11, 5, TEXT_BIKESHOP_ARCADE2
+	bg_event 11, 7, TEXT_BIKESHOP_ARCADE3
+	bg_event 10, 0, TEXT_BIKESHOP_STATS
+	bg_event 11, 0, TEXT_BIKESHOP_STATS
 
 
 	def_object_events

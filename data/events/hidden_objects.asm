@@ -71,7 +71,6 @@ HiddenObjectMaps:
 	db ROUTE_10
 	db INDIGO_PLATEAU_LOBBY
 	db CINNABAR_LAB_FOSSIL_ROOM
-	db BIKE_SHOP
 	db ROUTE_11
 	db ROUTE_12
 	db POKEMON_MANSION_2F
@@ -178,7 +177,6 @@ HiddenObjectPointers:
 	dw Route10HiddenObjects
 	dw IndigoPlateauLobbyHiddenObjects
 	dw CinnabarLab4HiddenObjects
-	dw BikeShopHiddenObjects
 	dw Route11HiddenObjects
 	dw Route12HiddenObjects
 	dw Mansion2HiddenObjects
@@ -651,15 +649,6 @@ IndigoPlateauLobbyHiddenObjects:
 CinnabarLab4HiddenObjects:
 	hidden_object  0,  4, SPRITE_FACING_UP, OpenPokemonCenterPC
 	hidden_object  2,  4, SPRITE_FACING_UP, OpenPokemonCenterPC
-	db -1 ; end
-
-BikeShopHiddenObjects:
-	hidden_object  1,  0, ANY_FACING, PrintNewBikeText
-	hidden_object  2,  1, ANY_FACING, PrintNewBikeText
-	hidden_object  1,  2, ANY_FACING, PrintNewBikeText
-	hidden_object  3,  2, ANY_FACING, PrintNewBikeText
-	hidden_object  0,  4, ANY_FACING, PrintNewBikeText
-	hidden_object  1,  5, ANY_FACING, PrintNewBikeText
 	db -1 ; end
 
 Route11HiddenObjects:

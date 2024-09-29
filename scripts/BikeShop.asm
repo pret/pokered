@@ -7,8 +7,14 @@ BikeShop_TextPointers:
 	dw_const BikeShopMiddleAgedWomanText,   TEXT_BIKESHOP_MIDDLE_AGED_WOMAN
 	dw_const BikeShopYoungsterText,         TEXT_BIKESHOP_YOUNGSTER
 	dw_const BikeShopBasketBikeText,        TEXT_BIKESHOP_BASKET_BIKE
-	dw_const BikeShopToolboxText,           TEXT_BIKESHOP_TOOLBOX1
-	dw_const BikeShopToolboxText,           TEXT_BIKESHOP_TOOLBOX2
+	dw_const BikeShopToolboxText,           TEXT_BIKESHOP_TOOLBOX
+	dw_const NewBicycleText,                TEXT_BIKESHOP_NEW_BIKE
+	dw_const BikeShopSignLeftText,          TEXT_BIKESHOP_ENTRANCE_SIGN1
+	dw_const BikeShopSignRightText,         TEXT_BIKESHOP_ENTRANCE_SIGN2
+	dw_const BikeShopArcade1Text,           TEXT_BIKESHOP_ARCADE1
+	dw_const BikeShopArcade2Text,           TEXT_BIKESHOP_ARCADE2
+	dw_const BikeShopArcade3Text,           TEXT_BIKESHOP_ARCADE3
+	dw_const BikeShopStatsText,             TEXT_BIKESHOP_STATS
 
 BikeShopClerkText:
 	text_asm
@@ -151,4 +157,32 @@ BikeShopBasketBikeText:
 
 BikeShopToolboxText:
 	text_far _BikeShopToolboxText
+	text_end
+
+NewBicycleText::
+	text_far _NewBicycleText
+	text_end
+
+BikeShopSignRightText::
+	text_far _BikeShopSignRightText
+	text_end
+
+BikeShopSignLeftText::
+	text_far _BikeShopSignLeftText
+	text_end
+
+BikeShopStatsText::
+	text_far _BikeShopStatsText
+	text_end
+
+BikeShopArcade1Text::
+	text_far _BikeShopArcade1Text
+	text_end
+
+BikeShopArcade2Text::
+	text_far _BikeShopArcade2Text
+	text_end
+
+BikeShopArcade3Text::
+	text_far _BikeShopArcade3Text
 	text_end
