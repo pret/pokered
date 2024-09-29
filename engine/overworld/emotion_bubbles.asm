@@ -51,7 +51,7 @@ EmotionBubble:
 	add $8
 	ld c, a
 
-	ld de, EmotionBubblesOAM
+	ld de, EmotionBubblesOAMBlock
 	xor a
 	call WriteOAMBlock
 	ld c, 60
@@ -67,7 +67,7 @@ EmotionBubblesPointerTable:
 	dw QuestionEmote
 	dw HappyEmote
 
-EmotionBubblesOAM:
+EmotionBubblesOAMBlock:
 ; tile ID, attributes
 	db $f8, 0
 	db $f9, 0
