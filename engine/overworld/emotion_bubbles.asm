@@ -51,7 +51,7 @@ EmotionBubble:
 	add $8
 	ld c, a
 
-	ld de, EmotionBubblesOAM
+	ld de, EmotionBubblesOAMBlock
 	xor a
 	call WriteOAMBlock
 	ld c, 60
@@ -67,9 +67,12 @@ EmotionBubblesPointerTable:
 	dw QuestionEmote
 	dw HappyEmote
 
-EmotionBubblesOAM:
-	dbsprite  0, -1,  0,  0, $f9, 0
-	dbsprite  0, -1,  0,  2, $fb, 0
+EmotionBubblesOAMBlock:
+; tile ID, attributes
+	db $f8, 0
+	db $f9, 0
+	db $fa, 0
+	db $fb, 0
 
 EmotionBubbles:
 ShockEmote:    INCBIN "gfx/emotes/shock.2bpp"
