@@ -772,6 +772,7 @@ SlowpokeEvosMoves:
 KadabraEvosMoves:
 ; Evolutions
 	db EVOLVE_LEVEL, 37, ALAKAZAM
+	db EVOLVE_TRADE, 1, ALAKAZAM
 	db 0
 ; Learnset
 	db 16, CONFUSION
@@ -786,6 +787,7 @@ KadabraEvosMoves:
 GravelerEvosMoves:
 ; Evolutions
 	db EVOLVE_LEVEL, 37, GOLEM
+	db EVOLVE_TRADE, 1, GOLEM
 	db 0
 ; Learnset
 	db 11, HARDEN
@@ -819,6 +821,7 @@ ChanseyEvosMoves:
 MachokeEvosMoves:
 ; Evolutions
 	db EVOLVE_LEVEL, 37, MACHAMP
+	db EVOLVE_TRADE, 1, MACHAMP
 	db 0
 ; Learnset
 	db 15, LOW_KICK
@@ -2088,6 +2091,7 @@ MarowakEvosMoves:
 HaunterEvosMoves:
 ; Evolutions
 	db EVOLVE_LEVEL, 37, GENGAR
+	db EVOLVE_TRADE, 1, GENGAR
 	db 0
 ; Learnset
 	db 21, HYPNOSIS
