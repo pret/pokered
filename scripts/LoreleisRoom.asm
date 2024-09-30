@@ -107,6 +107,7 @@ LoreleisRoomLoreleiEndBattleScript:
 	ld a, [wIsInBattle]
 	cp $ff
 	jr z, ResetLoreleiScript
+	call DoEliteFourFacing 
 	ld a, TEXT_LORELEISROOM_LORELEI
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
@@ -119,6 +120,37 @@ ResetLoreleiScript:
 	xor a ; SCRIPT_LORELEISROOM_DEFAULT
 	ld [wLoreleisRoomCurScript], a
 	ret
+
+DoEliteFourFacing::
+	call .doFacings
+	jp UpdateSprites
+.doFacings:
+	ld hl, wSprite01StateData2MapY
+	ld a, [hli]
+	sub 4
+	ld b, a
+	ld a, [hl]
+	sub 4
+	ld c, a
+	ld a, [wXCoord]
+	cp c
+	jr z, .aboveOrBelow
+	jr nc, .right
+.left
+	ld a, 1
+	jp SetSpriteFacingLeft
+.right
+	ld a, 1
+	jp SetSpriteFacingRight
+.aboveOrBelow
+	ld a, [wYCoord]
+	cp b
+	jr nc, .below
+	ld a, 1
+	jp SetSpriteFacingUp
+.below
+	ld a, 1
+	jp SetSpriteFacingDown
 
 LoreleisRoom_TextPointers:
 	def_text_pointers

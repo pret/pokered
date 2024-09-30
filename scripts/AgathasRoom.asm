@@ -105,6 +105,7 @@ AgathasRoomAgathaEndBattleScript:
 	ld a, [wIsInBattle]
 	cp $ff
 	jr z, ResetAgathaScript
+	call DoEliteFourFacing
 	ld a, TEXT_AGATHASROOM_AGATHA
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID

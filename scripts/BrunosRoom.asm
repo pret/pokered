@@ -105,6 +105,7 @@ BrunosRoomBrunoEndBattleScript:
 	ld a, [wIsInBattle]
 	cp $ff
 	jr z, ResetBrunoScript
+	call DoEliteFourFacing
 	ld a, TEXT_BRUNOSROOM_BRUNO
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
