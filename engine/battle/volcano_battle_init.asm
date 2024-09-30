@@ -418,6 +418,7 @@ TheMawChooseMove::
 	jr z, .hyperBeam
 	cp FLYING
 	jr z, .hyperBeam
+	and a ; clear carry
 	ret
 .megaDrain
 	; use mega drain on rock pokemon
