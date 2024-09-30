@@ -1759,7 +1759,8 @@ CheckIfVolcanoBattleOccurred:
 	ld a, HS_VOLCANO_MOLTRES
 	call VolcanoHideSpriteEntry
 	ld a, HS_MOLTRES
-	jp VolcanoHideSpriteEntry
+	ld [wMissableObjectIndex], a
+	predef_jump HideObject
 .magmarWin
 	ld a, [wBattleFunctionalFlags]
 	bit 1, a
