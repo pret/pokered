@@ -14,9 +14,9 @@ TryPushingBoulder::
 	;;;; PureRGBnote: FIXED: there was a bug where if you're facing a different boulder and walk towards another, 
 	;;;; you'll instantly push it.
 	;;;; this only really can happen in b3f of seafoam islands but it's really annoying when it does happen.
-	ld h, a
+	ld d, a
 	ld a, [wBoulderSpriteIndex]
-	cp h ; check if the boulder in front is the same one as before
+	cp d ; check if the boulder in front is the same one as before
 	ldh a, [hSpriteIndexOrTextID]
 	ld [wBoulderSpriteIndex], a
 	jr nz, .loadThenReset ; if not, reset the boulder push flags
@@ -79,6 +79,7 @@ TryPushingBoulder::
 	set 1, [hl]
 	ret
 .loadThenReset
+	res 7, [hl]
 	ld [wBoulderSpriteIndex], a
 	jp ResetBoulderPushFlags
 
