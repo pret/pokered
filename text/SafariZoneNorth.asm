@@ -105,9 +105,9 @@ _SafariZoneNorthCooltrainerMText::
 	done
 
 _SafariZoneNorthCooltrainerMEndBattleText::
-	text "Ah,"
-	line "the great"
-	cont "outdoors!"
+	text "Ah!"
+	para "The great"
+	line "outdoors!"
 	prompt
 
 _SafariZoneNorthCooltrainerMAfterBattleText::

@@ -50,9 +50,13 @@ _SilphCo5FPokemonReport3Text::
 	line "REPORT!"
 
 	para "4 #MON evolve"
-	line "at level 37."
+	line "by trading."
 
 	para "They are:"
 	line "GRAVELER, HAUNTER"
 	cont "MACHOKE, KADABRA."
+
+	para "They can all also"
+	line "evolve normally"
+	cont "at level 37!"
 	done
