@@ -177,7 +177,7 @@ PokemonTowerB1FOnMapLoad:
 	ld [wSimulatedJoypadStatesIndex], a
 	jp StartSimulatingJoypadStates
 .replaceTileBlockEntryClosed
-	ld a, $2D
+	ld a, $38
 .replaceTileBlockEntry
 	ld [wNewTileBlockID], a
 	predef_jump ReplaceTileBlock
