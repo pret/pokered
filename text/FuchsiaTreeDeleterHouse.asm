@@ -120,7 +120,6 @@ _FuchsiaTreeDeleterSnorlax::
 	text_end
 
 _FuchsiaTreeDeleterSnorlax2::
-	text_start
-	para "What a couch"
+	text "What a couch"
 	line "potato!"
 	done

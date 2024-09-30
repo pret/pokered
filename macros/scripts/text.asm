@@ -117,10 +117,11 @@ MACRO sound_pokedex_rating
 	db TX_SOUND_POKEDEX_RATING
 ENDM
 
-	const TX_SOUND_CRY_SNORLAX ; $11
-MACRO sound_cry_snorlax
-	db TX_SOUND_CRY_SNORLAX
-ENDM
+;	const TX_SOUND_CRY_SNORLAX ; $11
+;MACRO sound_cry_snorlax
+;	db TX_SOUND_CRY_SNORLAX
+;ENDM
+	const_skip
 
 	const TX_SOUND_GET_ITEM_2 ; $12
 MACRO sound_get_item_2
@@ -141,11 +142,12 @@ ENDM
 MACRO sound_dex_page_added
 	db TX_SOUND_DEX_PAGE_ADDED
 ENDM
-
-	const TX_SOUND_CRY_NIDORINA ; $16
-MACRO sound_cry_nidorina
-	db TX_SOUND_CRY_NIDORINA
-ENDM
+	
+	const_skip
+;	const TX_SOUND_CRY_NIDORINA ; $16
+;MACRO sound_cry_nidorina
+;	db TX_SOUND_CRY_NIDORINA
+;ENDM
 
 	const TX_FAR ; $17
 MACRO text_far
@@ -153,15 +155,15 @@ MACRO text_far
 	dab \1 ; address of text commands
 ENDM
 
-	const TX_SOUND_CRY_PIDGEOT ; $18
-MACRO sound_cry_pidgeot
-	db TX_SOUND_CRY_PIDGEOT
-ENDM
+;	const TX_SOUND_CRY_PIDGEOT ; $18
+;MACRO sound_cry_pidgeot
+;	db TX_SOUND_CRY_PIDGEOT
+;ENDM
 
-	const TX_SOUND_CRY_MEOWTH ; $19
-MACRO sound_cry_meowth
-	db TX_SOUND_CRY_MEOWTH
-ENDM
+;	const TX_SOUND_CRY_MEOWTH ; $19
+;MACRO sound_cry_meowth
+;	db TX_SOUND_CRY_MEOWTH
+;ENDM
 
 	const_next $50
 

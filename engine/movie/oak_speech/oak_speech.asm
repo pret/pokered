@@ -210,7 +210,14 @@ OakSpeechText1:
 OakSpeechText2:
 	text_far _OakSpeechText2A
 	; BUG: The cry played does not match the sprite displayed. PureRGBnote: FIXED: Plays nidorino's cry now.
-	sound_cry_nidorina
+	text_asm
+	ld a, NIDORINO
+	call PlayCry
+	call DisplayTextPromptButton
+	ld hl, .2b
+	rst _PrintText
+	rst TextScriptEnd
+.2b
 	text_far _OakSpeechText2B
 	text_end
 IntroducePlayerText:

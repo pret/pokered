@@ -18,7 +18,14 @@ FuchsiaTreeDeleterHouseText2:
 
 TreeDeleterSnorlaxText:
 	text_far _FuchsiaTreeDeleterSnorlax
-	sound_cry_snorlax
+	text_asm
+	ld a, SNORLAX
+	call PlayCry
+	call DisplayTextPromptButton
+	ld hl, .couchPotato
+	rst _PrintText
+	rst TextScriptEnd
+.couchPotato
 	text_far _FuchsiaTreeDeleterSnorlax2
 	text_end
 

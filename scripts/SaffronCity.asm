@@ -77,8 +77,10 @@ SaffronCityGentlemanText:
 
 SaffronCityPidgeotText:
 	text_far _SaffronCityPidgeotText
-	sound_cry_pidgeot
-	text_end
+	text_asm
+	ld a, PIDGEOT
+	call PlayCry
+	rst TextScriptEnd
 
 SaffronCityRockerText:
 	text_far _SaffronCityRockerText

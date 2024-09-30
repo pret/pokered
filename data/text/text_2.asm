@@ -1749,9 +1749,7 @@ _OakSpeechText2A::
 	text_end
 
 _OakSpeechText2B::
-	text_start
-
-	para "For some people,"
+	text "For some people,"
 	line "#MON are"
 	cont "pets. Others use"
 	cont "them for fights."

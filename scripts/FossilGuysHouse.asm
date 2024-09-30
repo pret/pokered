@@ -274,9 +274,12 @@ FossilGuyFacesPlayerDirection:
 
 FossilGuysHouseCatText1:
 	text_far _CeladonMansion1FMeowthText
-	sound_cry_meowth
-	text_promptbutton
-	text_end
+	text_asm
+.MeowthCry
+	ld a, MEOWTH
+	call PlayCry
+	call DisplayTextPromptButton
+	rst TextScriptEnd
 
 FossilGuysHouseCatText2:
 	text_far _FossilGuysCat2
@@ -284,9 +287,8 @@ FossilGuysHouseCatText2:
 
 FossilGuysHouseCatText3:
 	text_far _FossilGuysCat1
-	sound_cry_meowth
-	text_promptbutton
-	text_end
+	text_asm
+	jr FossilGuysHouseCatText1.MeowthCry
 
 FossilGuysHouseCatText4:
 	text_far _FossilGuysCat3
