@@ -1046,7 +1046,7 @@ TrainerBattleVictory:
 	cp CHAMP_ARENA
 	jr nz, .skipDefaultMusic
 .battlevictoryguide
-	call StopAllMusic
+	call StopAllMusicWait
 	ld c, BANK(Music_BattleVictoryGuide)
 	ld hl, Music_BattleVictoryGuide
 	call PlaySpecialBattleMusic3
@@ -1060,11 +1060,14 @@ TrainerDefeatedText:
 	text_far _TrainerDefeatedText
 	text_end
 
-PlayBattleVictoryMusic:
-	push af
+StopAllMusicWait:
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	call PlaySoundWaitForCurrent
+	jp PlaySoundWaitForCurrent
+
+PlayBattleVictoryMusic:
+	push af
+	call StopAllMusicWait
 	ld c, BANK(Music_DefeatedTrainer)
 	pop af
 	call PlayMusic
