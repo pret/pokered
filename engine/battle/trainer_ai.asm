@@ -1275,13 +1275,13 @@ AIUseFullRestore:
 AIUsePotion:
 ; enemy trainer heals his monster with a potion
 	ld a, POTION
-	ld b, 20
+	ld b, 50
 	jr AIRecoverHP
 
 AIUseSuperPotion:
 ; enemy trainer heals his monster with a super potion
 	ld a, SUPER_POTION
-	ld b, 50
+	ld b, 100
 	jr AIRecoverHP
 
 AIUseHyperPotion:
