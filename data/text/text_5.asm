@@ -21,9 +21,16 @@ _CanMoveBouldersText::
 	done
 
 _CurrentTooFastText::
-	text "The current is"
+	text_start
+_CurrentTooFastTextEntry::
+	db "The current is"
 	line "much too fast!"
-	prompt
+	done
+
+_CurrentTooFastText2::
+	text "Can't SURF here!"
+	para "@"
+	text_jump _CurrentTooFastTextEntry
 
 _CyclingIsFunText::
 	text "Cycling is fun!"

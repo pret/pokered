@@ -124,6 +124,7 @@ SeafoamIslandsB4F_TextPointers:
 	dw_const DoRet,                             TEXT_SEAFOAMISLANDSB4F_ANIMSPRITE4
 	dw_const SeafoamIslandsB4FBouldersSignText, TEXT_SEAFOAMISLANDSB4F_BOULDERS_SIGN
 	dw_const SeafoamIslandsB4FDangerSignText,   TEXT_SEAFOAMISLANDSB4F_DANGER_SIGN
+	dw_const SeafoamIslandsB4FFastCurrentText,  TEXT_SEAFOAMISLANDSB4F_FAST_CURRENT
 
 SeafoamIslandsB4FArticunoText:
 	text_far _SeafoamIslandsB4FArticunoBattleText
@@ -409,4 +410,18 @@ SeafoamIslandsB4FDragonairEventStartText:
 	text_end
 .initialText2
 	text_far _SeafoamIslandsB4FDragonairEventStartText2
+	text_end
+
+SeafoamIslandsB4FFastCurrent::
+	ld a, [wSpritePlayerStateData1FacingDirection]
+	cp SPRITE_FACING_DOWN
+	ret nz
+	CheckBothEventsSet EVENT_SEAFOAM4_BOULDER1_DOWN_HOLE, EVENT_SEAFOAM4_BOULDER2_DOWN_HOLE
+	ret z
+	ld a, TEXT_SEAFOAMISLANDSB4F_FAST_CURRENT
+	ldh [hSpriteIndexOrTextID], a
+	jp DisplayTextID
+
+SeafoamIslandsB4FFastCurrentText::
+	text_far _CurrentTooFastText2
 	text_end

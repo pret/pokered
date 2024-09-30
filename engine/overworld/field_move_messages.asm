@@ -52,6 +52,7 @@ SeafoamIslandsB4FStairsCoords:
 
 CurrentTooFastText:
 	text_far _CurrentTooFastText
+	text_promptbutton
 	text_end
 
 CyclingIsFunText:

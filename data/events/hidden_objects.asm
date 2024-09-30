@@ -562,6 +562,7 @@ SeafoamIslands3HiddenObjects:
 
 SeafoamIslands5HiddenObjects:
 	hidden_object 25, 17, HIDDEN_ITEM_SEAFOAM_B4F_SURF_ALCOVE, HiddenItems2
+	hidden_object  7, 12, SPRITE_FACING_DOWN, SeafoamIslandsB4FFastCurrent
 	db -1 ; end
 
 Mansion1HiddenObjects:
