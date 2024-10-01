@@ -172,10 +172,12 @@ AIMoveChoiceModification1:
 	ld a, [wEnemyMovePower]
 	and a
 	jr nz, .nextMove
-	ld a, [wEnemyMoveEffect]
 	push hl
 	push de
 	push bc
+	jp .discourageStatBoostingMoveWhenMaxedOut
+.notStatBoostingMove
+	ld a, [wEnemyMoveEffect]
 	ld hl, PotentiallyPointlessMoveEffectsJumpTable
 	ld de, 3
 	call IsInArray
@@ -226,7 +228,7 @@ AIMoveChoiceModification1:
 	jp z, .notSemiInvulnerable ; swift will hit even invulnerable opponents so don't discourage
 	call CheckAIMoveIsPriority
 	jr c, .discourage ; discourage priority moves if player is invulnerable due to fly/dig
-	jr .notSemiInvulnerable
+	jp .notSemiInvulnerable
 .checkAsleep
 	ld a, [wAITargetMonType1]
 	cp NORMAL
@@ -261,7 +263,67 @@ AIMoveChoiceModification1:
 	; fall through
 .firewallNext
 	jp .nextMove
-
+.discourageStatBoostingMoveWhenMaxedOut
+	ld a, [wEnemyMoveEffect]
+	ld hl, StatBoostingEffectList
+	ld de, 1
+	call IsInArray
+	jp nc, .notStatBoostingMove
+	ld a, [wEnemyMoveEffect]
+	cp ATTACK_SPECIAL_SPEED_UP1
+	jr z, .meditateCheck
+	cp ATTACK_ACCURACY_UP1_EFFECT
+	jr z, .sharpenCheck
+	cp ATTACK_DEFENSE_UP1_EFFECT
+	jr z, .bideCheck
+	ld d, a
+	callfar FarMapEffectToStat
+	ld hl, wEnemyMonStatMods
+	ld e, d
+	ld d, 0
+	add hl, de
+	ld a, [hl] ; number of stat mods
+	cp MAX_STAT_LEVEL
+	jr z, .discourageStatBoostMove
+.notMaxedOut
+	pop bc
+	pop de
+	pop hl
+	jp .nextMove
+.discourageStatBoostMove
+	pop bc
+	pop de
+	pop hl
+	jp .discourage
+.meditateCheck
+	ld a, [wEnemyMonAttackMod]
+	cp MAX_STAT_LEVEL
+	jr nz, .notMaxedOut
+	ld hl, wEnemyMonSpeedMod
+	ld a, [hli]
+	cp MAX_STAT_LEVEL
+	jr nz, .notMaxedOut
+	ld a, [hl]
+	cp MAX_STAT_LEVEL
+	jr nz, .notMaxedOut	
+	jr .discourageStatBoostMove
+.sharpenCheck
+	ld a, [wEnemyMonAttackMod]
+	cp MAX_STAT_LEVEL
+	jr nz, .notMaxedOut
+	ld a, [wEnemyMonAccuracyMod]
+	cp MAX_STAT_LEVEL
+	jr nz, .notMaxedOut
+	jr .discourageStatBoostMove
+.bideCheck
+	ld hl, wEnemyMonAttackMod
+	ld a, [hli]
+	cp MAX_STAT_LEVEL
+	jr nz, .notMaxedOut
+	ld a, [hl]
+	cp MAX_STAT_LEVEL
+	jr nz, .notMaxedOut
+	jr .discourageStatBoostMove
 
 PotentiallyPointlessMoveEffectsJumpTable:
 	dbw TELEPORT_EFFECT, CheckTeleportUsable
@@ -535,21 +597,6 @@ Modifier2PreferredMoves:
 	db FOCUS_ENERGY_EFFECT
 	db REFLECT_EFFECT
 	db LIGHT_SCREEN_EFFECT
-	db ATTACK_UP1_EFFECT
-	db DEFENSE_UP1_EFFECT
-	db SPEED_UP1_EFFECT
-	db SPECIAL_UP1_EFFECT
-	db ACCURACY_UP1_EFFECT
-	db EVASION_UP1_EFFECT
-	db ATTACK_UP2_EFFECT
-	db DEFENSE_UP2_EFFECT
-	db SPEED_UP2_EFFECT
-	db SPECIAL_UP2_EFFECT
-	db ACCURACY_UP2_EFFECT
-	db EVASION_UP2_EFFECT
-	db ATTACK_ACCURACY_UP1_EFFECT
-	db ATTACK_DEFENSE_UP1_EFFECT
-	db ATTACK_SPECIAL_SPEED_UP1
 	db ATTACK_UP_SIDE_EFFECT
 	db ATTACK_DOWN2_EFFECT
 	db DEFENSE_DOWN2_EFFECT
@@ -568,6 +615,22 @@ Modifier2PreferredMoves:
 	db MIST_EFFECT
 	db MIMIC_EFFECT
 	db DEFENSE_CURL_EFFECT
+StatBoostingEffectList:
+	db ATTACK_UP1_EFFECT
+	db DEFENSE_UP1_EFFECT
+	db SPEED_UP1_EFFECT
+	db SPECIAL_UP1_EFFECT
+	db ACCURACY_UP1_EFFECT
+	db EVASION_UP1_EFFECT
+	db ATTACK_UP2_EFFECT
+	db DEFENSE_UP2_EFFECT
+	db SPEED_UP2_EFFECT
+	db SPECIAL_UP2_EFFECT
+	db ACCURACY_UP2_EFFECT
+	db EVASION_UP2_EFFECT
+	db ATTACK_ACCURACY_UP1_EFFECT
+	db ATTACK_DEFENSE_UP1_EFFECT
+	db ATTACK_SPECIAL_SPEED_UP1
 	db -1
 
 ; PureRGBnote: ADDED: function that does a couple of comparisons before deciding whether the player is "dangerous" or not
@@ -712,7 +775,7 @@ AIMoveChoiceModification3:
 
 	ld a, [wTypeEffectiveness]
 	cp EFFECTIVE
-	jr z, .checkSpecificEffects
+	jr z, .checkSpecificEffects2
 	jr c, .notEffectiveMove
 	;ld a, [wEnemyMoveEffect]
 	; check for reasons not to use a super effective move here
@@ -725,10 +788,16 @@ AIMoveChoiceModification3:
 	dec [hl] ; encourage 4x effective moves further
 .checkSpecificEffects ; we'll further encourage certain moves
 	call EncouragePriorityIfSlow
+.checkSpecificEffects2
 	call EncourageDrainingMoveIfLowHealth
 	call EncourageOHKOMoveIfXAccuracy
 	jr .nextMove
 .notEffectiveMove ; discourages non-effective moves if better moves are available
+	cp NO_EFFECT
+	jr nz, .notNoEffect
+	inc [hl]
+	inc [hl] ; discourage ineffective moves even more than not very effective moves regardless of other move options
+.notNoEffect
 	push hl
 	push de
 	push bc

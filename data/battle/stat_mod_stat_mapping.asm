@@ -42,6 +42,12 @@ SideEffectMapping:
 	db -1 ; end
 	
 
+FarMapEffectToStat:
+	ld a, d
+	call MapEffectToStat
+	ld d, a
+	ret
+
 MapEffectToStat:
 	push bc
 	push de
