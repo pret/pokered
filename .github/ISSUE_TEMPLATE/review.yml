@@ -1,0 +1,13 @@
+name: Review
+description: Write a review of the game.
+title: "[Review]: Summarize your review here"
+labels: ["review"]
+body:
+  - type: textarea
+    id: review
+    attributes:
+      label: Review Content
+      description: Write your review here.
+      placeholder: I was whelmed by PureRGB.
+    validations:
+      required: true
