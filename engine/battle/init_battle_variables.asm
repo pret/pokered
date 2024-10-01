@@ -1,6 +1,7 @@
 InitBattleVariables:
 	ldh a, [hTileAnimations]
 	ld [wSavedTileAnimations], a
+	ResetEvent FLAG_SKIP_STAT_ANIMATION
 	xor a
 	ld [wActionResultOrTookBattleTurn], a
 	ld [wBattleResult], a
