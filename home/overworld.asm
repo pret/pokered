@@ -154,18 +154,18 @@ OverworldLoopLessDelay::
 	call UpdateSprites
 ;;;;;;;;;;; PureRGBnote: ADDED: code for changing direction without moving by pressing A+B and a direction when standing still.
 	ldh a, [hJoyHeld] 
-	and B_BUTTON
-	jr z, .resetDirectionChangeState
-	ldh a, [hJoyHeld] 
-	and A_BUTTON
-	jr z, .resetDirectionChangeState ; hold both B and A button to go into "change direction without moving" mode.
-	ld hl, wDirectionChangeModeCounter
-	inc [hl]
-	jr .noDirectionButtonsPressed2
+	and B_BUTTON | A_BUTTON
+	cp B_BUTTON | A_BUTTON
+	jr nz, .resetDirectionChangeState ; hold both B and A button to go into "change direction without moving" mode.
+	ld a, [wDirectionChangeModeCounter]
+	and %01111111 ; prevents wrapping to 0 by incrementing past 255
+	inc a
+	ld [wDirectionChangeModeCounter], a
+	jr .doneCheckingDirectionChangeMode
 .resetDirectionChangeState
 	xor a
 	ld [wDirectionChangeModeCounter], a
-.noDirectionButtonsPressed2
+.doneCheckingDirectionChangeMode
 ;;;;;;;;;;;
 	ld a, [wPlayerMovingDirection] ; the direction that was pressed last time
 	and a
