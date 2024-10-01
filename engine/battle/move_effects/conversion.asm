@@ -256,11 +256,8 @@ ConversionEffect_:
 	; This will always be a poison pkmn since fighting mons don't learn haze.
 	bit PSYCHIC_IMMUNITY, c
 	jr z, .gotMoveDoneChecks
-	ld a, d
-	cp FLOATING_WEEZING
-	jr z, .replaceDizzyPunch ; psychic immune floating weezing has no weaknesses so use super fang
 	pop af
-	ld a, EARTHQUAKE
+	ld a, BONEMERANG
 	jr .gotReplacedMove
 .notPsychic
 	cp DIZZY_PUNCH
@@ -368,7 +365,7 @@ ConversionAttackTable:
 	db EARTHQUAKE            ; ELECTABUZZ         
 	db EARTHQUAKE            ; MAGNETON           
 	db PSYCHIC_M             ; KOFFING            
-	db SUPER_FANG            ; FLOATING_MAGNETON
+	db BONEMERANG            ; FLOATING_MAGNETON
 	db PSYCHIC_M             ; MANKEY             
 	db CONVERT_WATER         ; SEEL               
 	db SOLARBEAM             ; DIGLETT            
