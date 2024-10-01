@@ -8,6 +8,9 @@ CeruleanCaveB1F_Object:
 
 	def_warp_events
 	warp_event  3,  6, CERULEAN_CAVE_1F, 9
+IF DEF(_DEBUG)
+	warp_event 26, 13, CERULEAN_CAVE_1F, 1 ; allows easily warping to mewtwo
+ENDC
 
 	def_bg_events
 
