@@ -494,6 +494,7 @@ Additionally, GHOST type was made a "Dynamic type". What this means, is it can d
 - A small sound effect plays when the doors behind the first 3 elite four members open upon defeating them.
 - If you set MUSIC to OG+ mode, 6 pokemon (POLIWHIRL, VILEPLUME, GOLDEEN, RHYHORN, OMANYTE, DITTO) will have slightly different cries so their cries aren't exact duplicates of other pokemon.
 - Music volume was decreased when you enter the pokemon nicknaming screen.
+- The game's unused fanfare sound effect has been used in a couple of new events such as the VOLCANO area.
 
 ## Pokemon Green visuals
 The version-specific visuals of japanese pokemon green were added into PureGreen.
