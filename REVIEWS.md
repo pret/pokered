@@ -1,4 +1,7 @@
 # Reviews
+
+Want to leave a review? Go [here](https://github.com/Vortyne/pureRGB/issues/new?assignees=&labels=review&projects=&template=review.yml&title=%5BReview%5D%3A+Summarize+your+review+here).
+
 ## Reviews from Romhacking.net
 
 ### Review by robby2gloves on v2.5.5 - Amazing Upgrade
