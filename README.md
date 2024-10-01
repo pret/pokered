@@ -10,6 +10,8 @@ If you want info on the game while playing it (learnsets, for example), see [**T
 
 If you experience a bug or have an issue while playing, report it [**Here**](https://github.com/Vortyne/pureRGB/issues/new?assignees=&labels=&template=blank_issue.md)
 
+If you played through the romhack and want to leave a review, you can review it [**Here**](https://github.com/Vortyne/pureRGB/issues/new?assignees=&labels=review&projects=&template=review.yml&title=%5BReview%5D%3A+Summarize+your+review+here)
+
 This is a purist's enhancement of Pokemon Red/Blue/Green. The goal is to enhance the original games for excellent replayability without bringing in mechanics, moves, sprites, visuals, type matchups, or pokemon that were introduced in later games. 
 - It makes the bulk of the 151 original pokemon all more obtainable and usable in the early game, with better movesets and more balanced stats. 
 - Many moves in the game were rebalanced or modified. When I say "rebalanced", I mean "the useless things were made more useful!" 
