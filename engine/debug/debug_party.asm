@@ -20,11 +20,11 @@ DebugNewGameParty: ; unreferenced except in _DEBUG
 	; always using this character while I was debugging the program."
 	; From https://web.archive.org/web/20000607152840/http://pocket.ign.com/news/14973.html
 	db TENTACRUEL, 99
-	db MEW, 50
+	db VOLCANIC_MAGMAR, 50
 	db ARMORED_MEWTWO, 99
 	db HARDENED_ONIX, 99
-	db DITTO, 99
-	db LAPRAS, 15
+	db WINTER_DRAGONAIR, 99
+	db MAROWAK, 30
 	db -1 ; end
 
 PrepareNewGameDebug: ; dummy except in _DEBUG
@@ -51,7 +51,7 @@ IF DEF(_DEBUG)
 	ld [hli], a
 	ld a, SURF
 	ld [hli], a
-	ld [hl], EGG_BOMB
+	ld [hl], CONVERSION
 	ld hl, wPartyMon1PP
 	ld a, 15
 	ld [hli], a
@@ -88,6 +88,8 @@ IF DEF(_DEBUG)
 	ld a, FLASH
 	ld [hli], a
 	ld [hl], DIG
+	ld hl, wPartyMon6Flags
+	set 0, [hl] ; ghost marowak
 
 	; Get some debug items.
 	ld hl, wNumBagItems
@@ -125,6 +127,10 @@ IF DEF(_DEBUG)
 	SetEvent EVENT_DELETED_CERULEAN_TREE
 	SetEvent EVENT_DELETED_ROUTE9_TREE
 	SetEvent EVENT_DELETED_FUCHSIA_TREES 
+	SetEvent EVENT_CAUGHT_GHOST_MAROWAK
+	;SetEvent EVENT_ARENA_ALL_CHALLENGERS_DEFEATED
+
+	;callfar SilphCo11FTeamRocketLeavesScript
 
 	
 	ld a, HS_LYING_OLD_MAN
@@ -173,6 +179,7 @@ DebugItemsList:
 	db HM_FLY, 1
 	db TM_SUBSTITUTE, 20
 	db TOPSECRETKEY, 1
+	db POKE_DOLL, 1
 	db -1 ; end
 
 ELSE
