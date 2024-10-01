@@ -70,12 +70,13 @@ The fourth page contains Sprite-related options.
 
  ![Menu Icons 1](/gfx/icons/menusprites1.png?raw=true) ![Menu Icons 2](/gfx/icons/menusprites2.png?raw=true)
     ![Brock](/gfx/sprites/brock.png?raw=true) ![Misty](/gfx/sprites/misty.png?raw=true) ![LtSurge](/gfx/sprites/lt_surge.png?raw=true) ![Erika](/gfx/sprites/erika.png?raw=true) ![Sabrina](/gfx/sprites/sabrina.png?raw=true) ![Blaine](/gfx/sprites/blaine.png?raw=true)
-  - If you press A on `EDIT` of the 3rd Option, it will open 4 new pages on another level. These 4 pages are for customizing the front sprites of the game. 
+  - If you press A on `EDIT` of the 3rd Option, it will open 5 new pages on another level. These 5 pages are for customizing the front sprites of the game. 
 
 ![Front Sprite Options 1](/screenshots/front_sprite_options1.png?raw=true)
 ![Front Sprite Options 2](/screenshots/front_sprite_options2.png?raw=true)
 ![Front Sprite Options 3](/screenshots/front_sprite_options3.png?raw=true)
 ![Front Sprite Options 4](/screenshots/front_sprite_options4.png?raw=true)
+![Front Sprite Options 4](/screenshots/front_sprite_options5.png?raw=true)
 
   You can customize the below sprites:
 
