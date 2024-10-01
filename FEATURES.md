@@ -314,12 +314,14 @@ The fourth page contains Sprite-related options.
 - Elevators will shake for longer or shorter depending on how far away the floor you selected was.
 - A little animation plays when you push a boulder onto a switch in Victory Road.
 - A little animation plays when you use FLASH to light up Rock Tunnel.
-- In seafoam islands, you can see the water currents moving visually.
 - The power plant uses a new tileset based on a beta tileset from Spaceworld 97 that was intended for the power plant.
 - When you engage static pokemon (Articuno/Moltres/Zapdos/Mewtwo/Snorlax) a special animation will play for each before battle starts.
 - If you turn on OG+ Icons mode, in diglett's cave you will see DIGLETTs popping up and down visually and hiding from you.
 - If you're playing on SGB or GBC, talking to the "Saffron City - City of Rainbow Dreams" sign will switch between a special Rainbow palette (unused code from the original game) and the original palette.
 - Using a poke doll in battle will have a little animation now.
+- In seafoam islands, you can see the water currents moving visually.
+![Seafoam Currents](/screenshots/seafoam_currents.png?raw=true)
+
 
 ## Bugfixes
 - High Jump Kick / Jump Kick crash damage on missing does more damage instead of 1 damage always now. (1/4 the damage of what it would have done to the opponent)
