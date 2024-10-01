@@ -320,6 +320,7 @@ The fourth page contains Sprite-related options.
 - If you're playing on SGB or GBC, talking to the "Saffron City - City of Rainbow Dreams" sign will switch between a special Rainbow palette (unused code from the original game) and the original palette.
 - Using a poke doll in battle will have a little animation now.
 - In seafoam islands, you can see the water currents moving visually.
+
 ![Seafoam Currents](/screenshots/seafoam_currents.png?raw=true)
 
 
