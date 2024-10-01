@@ -154,6 +154,7 @@ The fourth page contains Sprite-related options.
 - Many pokemon have better learnsets than before. See the wiki for the data.
 - You can use the itemfinder in the GAME CORNER to detect hidden coins now.
 - A Save file updater was implemented, allowing you to transfer your save from the original game to work with PureRGB. Just open the original save file on PureRGB and the game will ask whether to update it.
+- Press SELECT while on the WITHDRAW option of the PC. You can view the pokemon in the box even if your party is full by doing this.
 
 ## New Gameplay Features
 - Mew is under the truck!!! Use strength on it from the right side. If the SS Anne has left, it returns after obtaining the Soul Badge.
@@ -253,6 +254,10 @@ The fourth page contains Sprite-related options.
 
 ![saffron abandoned building](/screenshots/saffron_abandoned_building.png?raw=true)
 
+- The MOVE MYSTIC in Saffron City can tell you all about new SIGNATURE MOVES that some pokemon have. They get bonus power or accuracy on specific moves.
+
+![move mystic](/screenshots/move_mystic.png?raw=true)
+
 - You can now eat food on the SS Anne to heal your pokemon while on it.
 
 - A secret stairway opens up in a building somewhere after you become champ. The last in-game trade and some interesting stuff to see is in there. 
@@ -281,6 +286,10 @@ The fourth page contains Sprite-related options.
 - There were unused icy-looking tiles in the Cave tileset that were meant to be used in seafoam island. Now they are used there!
 ![seafoam cut tiles](/screenshots/seafoam_islands_cut_content_tiles.png?raw=true)
 - Some unused trainers from existing classes were added into the game in various originally empty places
+- The new tileset in the POWER PLANT is based on cut content from Spaceworld 97.
+- Erik and Sara's house on route 19 was inspired by a house showing on earlier builds of the game on route 21.
+- Cinnabar Volcano as an area was inspired by an unused map called MOLTRES in earlier builds of the game.
+- You can enable and disable a cut content "Rainbow Palette" for Celadon City by talking to the "Celadon City - City of Rainbow Dreams" sign.
 
 ## Visual changes
 - Burn status has a burn animation instead of reusing the poison animation.
