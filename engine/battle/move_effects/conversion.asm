@@ -12,19 +12,20 @@ ShowConversionMenu::
 	jr nz, .back
 	call LoadScreenTilesFromBuffer1
 	ld a, [wCurrentMenuItem]
-	ld [wPlayerConversionMode], a
 	and a
-	jr z, .notAlreadyInDefenseMode
+	jr z, .choseMode
 	ld a, [wPlayerBattleStatus3]
 	bit HAS_REFLECT_UP, a
-	jr z, .notAlreadyInDefenseMode
+	jr z, .choseMode
 	bit HAS_LIGHT_SCREEN_UP, a
-	jr z, .notAlreadyInDefenseMode
+	jr z, .choseMode
 	ld hl, .alreadyDefenseMode
 	rst _PrintText
 	; loop it
 	jr ShowConversionMenu
-.notAlreadyInDefenseMode
+.choseMode
+	ld a, [wCurrentMenuItem]
+	ld [wPlayerConversionMode], a
 	scf
 	ret
 .back
@@ -47,7 +48,6 @@ ConversionEffect_:
 	ld e, a
 	ld a, [wEnemyBattleStatus2]
 	ld c, a
-	ld a, [wPlayerConversionMode]
 	jr z, .playerTurn
 	ld a, [wBattleMonSpecies]
 	ld d, a
@@ -56,6 +56,13 @@ ConversionEffect_:
 	ld a, [wPlayerBattleStatus2]
 	ld c, a
 .enemyTurn
+	ld a, [wForcedConversionMode]
+	and a
+	jr z, .noForcedModeEnemy
+	dec a
+	jr z, .enemyAttackMode
+	jr .enemyDefenseMode
+.noForcedModeEnemy
 	; NPC enemy using conversion
 	ld a, [wIsInBattle]
 	cp 1 ; is it a wild battle?
@@ -63,31 +70,45 @@ ConversionEffect_:
 	call Random
 	rrca
 	; wild pokemon choose the mode randomly
-	jr c, .defenseMode
-	jr .attackMode
+	jr c, .enemyDefenseMode
+	jr .enemyAttackMode
 .trainerBattle
 	; only use defense mode potentially on the first turn
 	ld a, [wAILayer2Encouragement]
 	cp 1
-	jr nz, .attackMode
+	jr nz, .enemyAttackMode
 	push bc
 	push de
 	callfar IsPlayerPokemonDangerous
 	pop de
 	pop bc
-	jr c, .attackMode ; if they're dangerous focus on attacking asap
+	jr c, .enemyAttackMode ; if they're dangerous focus on attacking asap
 	call .getBattleStatus3
 	bit HAS_LIGHT_SCREEN_UP, [hl]
-	jr z, .defenseMode
+	jr z, .enemyDefenseMode
 	bit HAS_REFLECT_UP, [hl]
-	jr z, .defenseMode
+	jr z, .enemyDefenseMode
+	jr .enemyAttackMode
+.enemyDefenseMode
+	ld a, 1
+	ld [wEnemyPreviousConversionMode], a
+	jr .defenseMode
+.enemyAttackMode
+	xor a
+	ld [wEnemyPreviousConversionMode], a
 	jr .attackMode
 .playerTurn
-	ld h, a
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	jr z, .attackMode ; in link battles we will always use ATTACK mode
-	ld a, h
+	ld a, [wForcedConversionMode]
+	and a
+	jr z, .noForcedModePlayer
+	dec a
+	jr z, .attackMode
+	jr .defenseMode
+.noForcedModePlayer
+	ld a, [wPlayerConversionMode]
 	and a
 	jr z, .attackMode
 .defenseMode
@@ -96,6 +117,8 @@ ConversionEffect_:
 	ld a, CONVERSION_DEFENSE_MODE_ANIM
 	call .doModeAnimation
 	callfar ReflectLightScreenEffect_
+	xor a
+	ld [wForcedConversionMode], a
 	and a ; clear carry so we don't execute another move when returning from this
 	ret
 .enteredDefenseMode
@@ -273,6 +296,8 @@ ConversionEffect_:
 	ld de, wPlayerMoveNum
 .callfarReload
 	callfar FarReloadMoveData
+	xor a
+	ld [wForcedConversionMode], a
 	scf
 	ret
 

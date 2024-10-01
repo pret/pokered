@@ -553,14 +553,15 @@ wPlayerMonMinimized:: db
 	ds 13
 
 ; number of hits by enemy in attacks like Double Slap, etc.
-wEnemyNumHits:: ; db
+wEnemyNumHits:: db
 
 ; the amount of damage accumulated by the enemy while biding
 ;wEnemyBideAccumulatedDamage:: dw ; PureRGBnote: CHANGED: bide effect changed to normal buff move, so this is unused
 wPlayerConversionMode:: db
-	ds 1
+wEnemyPreviousConversionMode::db
+wForcedConversionMode:: db ; if used mirror move to execute conversion, it will use whatever mode the foe used previously
 
-	ds 8
+	ds 6
 	
 wMiscBattleDataEnd::
 

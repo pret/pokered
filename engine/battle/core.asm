@@ -5285,6 +5285,19 @@ MirrorMoveCopyMove:
 	pop de
 	pop hl
 	pop af
+	push af
+	cp CONVERSION
+	jr nz, .skipLoadConversionMode
+	ldh a, [hWhoseTurn]
+	and a
+	ld a, [wEnemyPreviousConversionMode]
+	jr z, .loadForcedConversionMode
+	ld a, [wPlayerConversionMode]
+.loadForcedConversionMode
+	inc a
+	ld [wForcedConversionMode], a
+.skipLoadConversionMode
+	pop af
 	ld [hl], a
 	jr ReloadMoveData
 ;;;;;;;;;;
