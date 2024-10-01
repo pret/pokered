@@ -139,23 +139,29 @@ SaveFileUpdaterLoadPointer:
    	ret
 
 EarlierVersionSaveFileUpdate:
+	; step 1: Booster chip variable was changed to an event flag, set event flag if it was set previously in the other version
+	ld a, [wPrior2_6_0_BoosterChipActive]
+	and a
+	jr z, .dontSet
+	SetEvent EVENT_BOOSTER_CHIP_ACTIVE
+.dontSet
 	; first we will copy item data to the correct locations since pc items was moved in 2.6.0
-	; step 1: copy data that is in the space that wBoxItems will be moved to to a temporary storage area
+	; step 2: copy data that is in the space that wBoxItems will be moved to to a temporary storage area
 	ld hl, wPrior2_6_0_StartData
 	ld de, wSaveTransferTempData
 	ld bc, wPrior2_6_0_EndData - wPrior2_6_0_StartData
 	rst _CopyData
-	; step 2: copy the pc item data over to the new location
+	; step 3: copy the pc item data over to the new location
 	ld hl, wPrior2_6_0_BoxItemsData
 	ld de, wNumBoxItems
 	ld bc, 102 ; 50 items * 2 plus extra byte plus number of items byte
 	rst _CopyData
-	; step 3: copy the bag item data over from temporary storage
+	; step 4: copy the bag item data over from temporary storage
 	ld hl, wSaveTransferTempNumBagItems
 	ld de, wNumBagItems
 	ld bc, 62 ; 30 items * 2 plus extra byte plus number of items byte
 	rst _CopyData
-	; step 4: copy other data that was moved
+	; step 5: copy other data that was moved
 	ld hl, wSaveTransferTempPocketAbraNick
 	ld de, wPocketAbraNick
 	ld bc, 11
@@ -163,7 +169,7 @@ EarlierVersionSaveFileUpdate:
 	ld a, [wSaveTransferTempColorSwapsUsed]
 	ld [wColorSwapsUsed], a
 	call EarlierVersionEventConstantsUpdate
-	; step 5: update hide show variables based on events (if possible)
+	; step 6: update hide show variables based on events (if possible)
 	CheckEvent EVENT_MET_DAD
 	ld a, HS_REDS_HOUSE_1F_DAD
 	call z, .hideExtraObjectEntry

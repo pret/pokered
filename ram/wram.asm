@@ -2090,6 +2090,7 @@ wPrior2_6_0_BagItemsStart:: ds 30 * 2 + 1
 ds 3
 wPrior2_6_0_ColorSwapsUsed:: db
 wPrior2_6_0_EndData::
+wPrior2_6_0_BoosterChipActive:: db
 
 NEXTU
 
