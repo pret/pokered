@@ -8,6 +8,6 @@ body:
     attributes:
       label: Review Content
       description: Write your review here.
-      placeholder: I was whelmed by PureRGB.
+      placeholder: I was whelmed by PureRGB. (Ignore that it says "Submit new issue" below that's the "Submit Review" button.)
     validations:
       required: true
