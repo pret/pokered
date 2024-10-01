@@ -193,7 +193,7 @@ The fourth page contains Sprite-related options.
 
 - The Power Plant has been enhanced visually with a beta tileset from Spaceworld 1997. Now it also has a bit more of a puzzle. You must press a bunch of buttons to unlock electrical gates, which allow you to reach the end of the area. It also has a roof area, and a secret area where your MAGNETON can be powered up!
 
-![power plant](/screenshots/power_plant.png?raw=true)
+![power plant](/screenshots/power_plant.png?raw=true) ![power plant2](/screenshots/power_plant2.png?raw=true)
 
 - The urban legend - Bills Garden - was added into the game! It only is accessible once you become champ. You'll find some amusing stuff there. Visit it a couple of times! What you find might change! If you have alt palettes turned on in the options...is that a blue pikachu??
 
