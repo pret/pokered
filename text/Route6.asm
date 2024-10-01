@@ -143,3 +143,16 @@ _Route6UndergroundPathSignText::
 	line "CERULEAN CITY -"
 	cont "VERMILION CITY"
 	done
+
+_Route6TrainerTipsText::
+	text "<TIPS>"
+	para "In the PC, scroll"
+	line "to WITHDRAW, then"
+	cont "press SELECT."
+	para "You can view info"
+	line "of #MON in the"
+	cont "current box."
+	para "This can be done"
+	line "even with a full"
+	cont "party!"
+	done

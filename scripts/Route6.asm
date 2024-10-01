@@ -27,6 +27,7 @@ Route6_TextPointers:
 	dw_const Route6Text8,                   TEXT_ROUTE6_BURGLAR
 	dw_const PickUp3ItemText,               TEXT_ROUTE6_ITEM1 ; PureRGBnote: ADDED: new item on this route.
 	dw_const Route6UndergroundPathSignText, TEXT_ROUTE6_UNDERGROUND_PATH_SIGN
+	dw_const Route6TrainerTipsText,         TEXT_ROUTE6_TRAINER_TIPS
 
 Route6TrainerHeaders:
 	def_trainers
@@ -190,4 +191,8 @@ Route6AfterBattleText8:
 
 Route6UndergroundPathSignText:
 	text_far _Route6UndergroundPathSignText
+	text_end
+
+Route6TrainerTipsText:
+	text_far _Route6TrainerTipsText
 	text_end

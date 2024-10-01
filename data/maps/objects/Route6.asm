@@ -20,6 +20,7 @@ Route6_Object:
 
 	def_bg_events
 	bg_event 19, 15, TEXT_ROUTE6_UNDERGROUND_PATH_SIGN
+	bg_event  1, 29, TEXT_ROUTE6_TRAINER_TIPS
 
 	def_object_events
 	object_event 10, 21, SPRITE_COOLTRAINER_M, STAY, RIGHT, TEXT_ROUTE6_COOLTRAINER_M1, OPP_JR_TRAINER_M, 4
