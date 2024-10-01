@@ -5,7 +5,7 @@ The only version differences between PureRed / PureBlue / PureGreen are visual. 
 ## New Options in the Options Menu
 Many options have been added to the game's options menu. To be clear, there are **4 pages of options** now. **Use the Next button on the options page** to cycle through the pages when in-game.
 
-
+You can press SELECT to get an explanation of the current option in any option menu.
 
 The first page contains the original game's options. Text speed has an "Instant" option now, and the "Slow" option is now the original game's "Medium". The game defaults to "Fast" speed. Other than that, the way Battle Style and Battle Animations options work haven't changed.
 
@@ -30,7 +30,7 @@ The second page contains new big features related to general gameplay.
     Pictured Below: Left = SGB1, Right = SGB2
 
     ![sgb1 sgb2 comparison 1](/screenshots/sgb1_sgb2_comparison_pallet.png?raw=true) ![sgb1 sgb2 comparison 2](/screenshots/sgb1_sgb2_comparison_pewter.png?raw=true) ![sgb1 sgb2 comparison 3](/screenshots/sgb1_sgb2_comparison_lavender.png?raw=true) ![sgb1 sgb2 comparison 4](/screenshots/sgb1_sgb2_comparison_saffron.png?raw=true)  ![sgb1 sgb2 comparison 5](/screenshots/sgb1_sgb2_comparison_indigo.png?raw=true)
-    - `GBC`: Force GBC color palettes. On Super Gameboy, it'll now have Pokemon Yellow's GBC more intense color palettes. Same with GBC and GBA. On GBC and GBA, enables full color mode. Attack animations will have color in this mode when on GBC or GBA, along with some other color enhancements.
+    - `Y1 or Y2`: Force GBC color palettes. On Super Gameboy, it'll now have Pokemon Yellow's GBC more intense color palettes. Same with GBC and GBA. On GBC and GBA, enables full color mode. Attack animations will have color in this mode when on GBC or GBA, along with some other color enhancements. Y1 are the original palettes for pokemon yellow. Y2 are the same colors as Y1 with reduced intensity, to look like you are playing on an original GBC's screen when you are emulating the game.
     
     ![Blue Title GBC](/screenshots/blue_title_gbc_colors_on_gbc.png?raw=true) ![Red Title GBC](/screenshots/red_title_gbc_colors_on_gbc.png?raw=true) ![Green Title GBC](/screenshots/green_title_gbc_colors_on_gbc.png?raw=true)
   - The second option, `ALT PKMN COLORS` will enable or disable pokemon from being able to have special color palettes (Default: OFF). When turned on, features related to alternate color pokemon are enabled. In certain regions, you will find differently colored pokemon, like blue nidorinos and purple nidorinas. Think of them as regional color variants. This is just an amusing feature to allow for additional enjoyment in finding unique pokemon by exploring different places.
@@ -88,6 +88,7 @@ The fourth page contains Sprite-related options.
 - TMs are all useful attacks
 - Level up movesets vastly improved for all pokemon
 - Bag size increased to 30 up from 20
+- PC item space increase to 60 up from 50
 - You can deposit items to your PC directly from the items menu by pressing START on the item you wish to deposit. Technology is amazing! Now items can be stored wirelessly!
 
 ![Deposit Item From Start Menu](/screenshots/deposit_item_from_menu.png?raw=true)
@@ -131,6 +132,7 @@ The fourth page contains Sprite-related options.
 - When doing the Cinnabar Gym quiz, it won't keep explaining the quiz every time you start it up.
 - Coin Case doesn't take up space in your bag. Go to the game corner if you need to check how many coins you have.
 - Secret Key, Card Key, and Lift Key are consumed when you no-longer need them. Less item clutter.
+- The SS Anne Captain will make sure you don't need the SS Ticket anymore to get into the SS Anne area after you help him.
 - Town Map does not take up space in your bag. To check it, go to your pokedex and press SELECT. (You still must obtain it in Pallet Town to use this feature.)
 - Fishing animation is a bit shorter in general
 - Fishing has a straight 75% rate of landing a pokemon
@@ -145,11 +147,13 @@ The fourth page contains Sprite-related options.
 - Seafoam Islands, Cerulean Cave, and the Safari Zone will remember you used Surf between going between map areas so you don't have to repeatedly use it.
 - Fuchsia City's layout has been modified very slightly to be less annoying to navigate.
 - The Daycare has a PC in it.
-- Route 23 has some grass just after the north exit of Victory Road to allow reaching those encounters more easily late game.
+- Route 23 has some grass just after the north exit of Victory Road to allow reaching those encounters more easily late game. The pokemon here will give full EXP unlike all other wild pokemon so it's a good place to train.
 - Elevators will tell you when you select the floor you're already on.
 - Some pokemon evolve at earlier levels
 - Many pokemon have better base stats. You can view base stats by checking the pokedex entry after catching the pokemon. Or, see the wiki for the full data.
 - Many pokemon have better learnsets than before. See the wiki for the data.
+- You can use the itemfinder in the GAME CORNER to detect hidden coins now.
+- A Save file updater was implemented, allowing you to transfer your save from the original game to work with PureRGB. Just open the original save file on PureRGB and the game will ask whether to update it.
 
 ## New Gameplay Features
 - Mew is under the truck!!! Use strength on it from the right side. If the SS Anne has left, it returns after obtaining the Soul Badge.
@@ -157,7 +161,7 @@ The fourth page contains Sprite-related options.
 
  ![Missingno](/screenshots/missingno.png?raw=true)
 
-- And entirely new pokedex mode has been added. It's called the MOVEDEX. This tracks every move you have seen the animation of in battle, and will list all their information and data in detail for you to see. Try to complete your MOVEDEX! The movedex is unlocked in a new basement classroom of the schoolhouse in Viridian City.
+- And entirely new pokedex mode has been added. It's called the MOVEDEX. This tracks every move you have seen the animation of in battle, and will list all their information and data in detail for you to see. Try to complete your MOVEDEX! The movedex is unlocked in a new basement classroom of the schoolhouse in Viridian City. You can switch the sorting mode of the movedex from ID to alphabetical with SELECT while viewing the movedex.
 
 ![movedex](/screenshots/movedex.png?raw=true) ![movedex thunderbolt](/screenshots/movedex_thunderbolt.png?raw=true) ![movedex flamethrower](/screenshots/movedex_flamethrower.png?raw=true) ![movedex surf](/screenshots/movedex_surf.png?raw=true) ![movedex eq](/screenshots/movedex_earthquake.png?raw=true)
  
@@ -173,14 +177,22 @@ The fourth page contains Sprite-related options.
 - New Items:
   - `POCKET ABRA`: It's an Abra that fits in your bag. A pocket pokemon! Isn't that redundant?...It allows you to teleport whenever you want, even in buildings or caves, back to the last pokemon center. Keep it on hand at all times for maximum convenience. You can nickname it even!
   - `BOOSTER CHIP`: Replaces `EXP.ALL` - Oak's aide on Route 15 will give you this if you catch at least 80 pokemon. When you install it to your pokeball belt, all your pokemon will gain boosted EXP as if they were traded pokemon! Great for training up pokemon when you're trying to catch them all.
-  - `APEX CHIP`: The Gym Guide's creation! It maximizes DVs (also known as IVs) when installed. The Gym Guide will give you 2 of them after you beat each gym leader. Inside a pokemon's pokeball, this chip will simulate their natural habitat, helping them be happy and achieve their maximum potential! 
+  - `APEX CHIP`: The Gym Guide's creation! It maximizes DVs (also known as IVs) when installed. The Gym Guide will give you 2 of them after you beat each gym leader. Inside a pokemon's pokeball, this chip will simulate their natural habitat, helping them be happy and achieve their maximum potential! It'll indicate if DVs are maxed out on the status screen too.
   - `HYPER BALL`: As discussed above, a new type of Poke Ball that never fails to catch pokemon if they're below 1/3 health. For many non-legendary pokemon, it will never fail even at full health! You might want to save these for legendaries because they're a bit hard to come by.
  
 - An entirely new area was added in Indigo Plateau. After becoming champ you can talk to the woman in the top left of the indigo plateau lobby to enter the Champ Arena. In the Champ Arena you can battle all the gym leaders and elite four in rematches. Also some fun animations and sequences while doing it. Opponents in the Champ Arena have perfect IVs...so make sure to use APEX CHIPs on all your team! They also have custom movesets for all their pokemon, and the highest level of AI, so be ready. You can choose from many different audio tracks to play while battling all these opponents. Initially you face the opponents in a set order. After defeating all of them you can choose who you battle. They will be even stronger the second time you fight them!
 
    ![Champ Arena](/screenshots/champ_arena.png?raw=true)
 
-- The "TM Pirate" is a kid who appears in most PokeMarts who will sell you TMs! It's just a fun way of adding more purchasable TMs to the game. 
+- The "TM Pirate" is a kid who appears in most PokeMarts who will sell you TMs! It's just a fun way of adding more purchasable TMs to the game.
+
+- A new area based on pre-release "Moltres dungeon" data was added to the game on the sea route between Pallet Town and Cinnabar Island. Cinnabar Volcano! You can catch Moltres earlier in the game here. You can also turn this area off entirely if you don't want it by going to Your PC and turning it off in the WORLD OPTIONS menu. Explore a new volcano area with lots of new visuals. You can upgrade your MAGMAR here with the power of the volcano!
+
+![volcano](/screenshots/volcano.png?raw=true)
+
+- The Power Plant has been enhanced visually with a beta tileset from Spaceworld 1997. Now it also has a bit more of a puzzle. You must press a bunch of buttons to unlock electrical gates, which allow you to reach the end of the area. It also has a roof area, and a secret area where your MAGNETON can be powered up!
+
+![power plant](/screenshots/power_plant.png?raw=true)
 
 - The urban legend - Bills Garden - was added into the game! It only is accessible once you become champ. You'll find some amusing stuff there. Visit it a couple of times! What you find might change! If you have alt palettes turned on in the options...is that a blue pikachu??
 
@@ -190,6 +202,10 @@ The fourth page contains Sprite-related options.
 
 ![Super Nerd House in Saffron](/screenshots/super_nerd_in_saffron_city.png?raw=true)
 - You can obtain the fossil that you didn't choose in Mt.Moon hidden inside Seafoam Islands.
+
+- Erik and Sara are characters in the original game who were looking for each other in Fuchsia City. Help them find each other to find out all about them, and visit their house on the sea route south of Fuchsia (Route 19) after! Upgrade your DRAGONAIR by following their scuba diving adventure. This house on route 19 was based on beta content showing a house on an island on route 21.
+
+![erik and sara](/screenshots/erik_and_sara.png?raw=true)
 
 - In Celadon City there is an NPC in the Hotel who will give you LAPRAS early after clearing Rocket Hideout. It's the same guy who gives you it in Silph Co on a business trip. He ends up stuck in Silph Co later on as expected! If you don't get LAPRAS early you can still get it the original way.
 
@@ -221,6 +237,10 @@ The fourth page contains Sprite-related options.
 
 ![dark channeler](/screenshots/dark_channeler.png?raw=true)
 
+- After beating GIOVANNI in VIRIDIAN GYM, if you caught GHOST MAROWAK, you can lay it to rest in the basement of Pokemon Tower! A touching reunion with CUBONE and some spooky pokemon spirits to fight on the way.
+
+![ghost marowak area](/screenshots/ghost_marowak_area.png?raw=true)
+
 - On Route 8 you can find a new small cave housing a prospector digging for diamonds. If you help him, he will enhance your ONIX to be stronger. Its base stats will be boosted and it will take less damage from WATER, ICE, and GRASS type moves.
 
 ![diamond mine](/screenshots/diamond_mine.png?raw=true)
@@ -228,6 +248,12 @@ The fourth page contains Sprite-related options.
 - After helping the prospector, you can find him at his house in Celadon. If you talk to him there after obtaining HM02, he will teach you how to use DIG to go between towns similar to the way you do with FLY. (Unlike FLY, DIG cannot be used while surfing, or on a dock above water.)
 
 ![prospectors house](/screenshots/prospector's_house.png?raw=true) 
+
+- A secret area in Saffron City can be found near SILPH CO. This is where TEAM ROCKET snuck into the city undetected! So that's how they got there...in this area you can upgrade your WEEZING!
+
+![saffron abandoned building](/screenshots/saffron_abandoned_building.png?raw=true)
+
+- You can now eat food on the SS Anne to heal your pokemon while on it.
 
 - A secret stairway opens up in a building somewhere after you become champ. The last in-game trade and some interesting stuff to see is in there. 
 
@@ -279,6 +305,12 @@ The fourth page contains Sprite-related options.
 - Elevators will shake for longer or shorter depending on how far away the floor you selected was.
 - A little animation plays when you push a boulder onto a switch in Victory Road.
 - A little animation plays when you use FLASH to light up Rock Tunnel.
+- In seafoam islands, you can see the water currents moving visually.
+- The power plant uses a new tileset based on a beta tileset from Spaceworld 97 that was intended for the power plant.
+- When you engage static pokemon (Articuno/Moltres/Zapdos/Mewtwo/Snorlax) a special animation will play for each before battle starts.
+- If you turn on OG+ Icons mode, in diglett's cave you will see DIGLETTs popping up and down visually and hiding from you.
+- If you're playing on SGB or GBC, talking to the "Saffron City - City of Rainbow Dreams" sign will switch between a special Rainbow palette (unused code from the original game) and the original palette.
+- Using a poke doll in battle will have a little animation now.
 
 ## Bugfixes
 - High Jump Kick / Jump Kick crash damage on missing does more damage instead of 1 damage always now. (1/4 the damage of what it would have done to the opponent)
@@ -314,6 +346,9 @@ The fourth page contains Sprite-related options.
 - If all your pokemon are fainted except for the current one, SHIFT mode won't ask you if you want to switch pokemon before the opponent sends out their next pokemon.
 - The LAPRAS npc in the fuchsia city zoo can now swim around its enclosure like it was coded to be able to.
 - Trapping moves won't erroneously still do ongoing damage to pokemon who are immune. Example: Wrap on a ghost pokemon.
+- In the original game if you or your opponent hurts theirself in confusion or is fully paralyzed while digging or flying, the pokemon will be stuck in an invulnerable state, making all attacks miss. This was fixed so it doesn't happen in link battles, and in normal gameplay, doesn't happen to enemy pokemon. But since it's a funny bug, it can still happen to the player - you will become invulnerable if this bug happens to you.
+- In the original game, if your opponent used minimize or substitute, you opened your FIGHT menu, exited, went to PARTY, looked at a pokemon's status menu, then returned to the fight, the opponent's sprite would be all messed up. Now it's fixed and doesn't do that.
+- Doing the same thing as the above on unidentified GHOSTS would reveal what pokemon they are. Now it doesn't.
 
 ## Tweaks
 - Trainers in general have a bit less type-specific parties and more varied pokemon. 
@@ -340,6 +375,7 @@ The fourth page contains Sprite-related options.
 - Every badge will raise the level traded pokemon will obey you by 10 up until the marshbadge, instead of by 20 levels every 2 badges. The badge explanation text is unchanged, however. This is just for easier usage of in-game traded pokemon during a normal playthrough.
 - Unused text about Porygon was added to the computer monitor on Silph Co 11F.
 - New text entries were added to objects where there was previously either nothing at all or generic reused text in some cases. (Example: some trash cans in peoples house's now have unique text)
+- You can use a larger variation of characters in pokemon/player nicknames.
 
 ## Move changes
 - Disable disables the previously selected move of the opponent. If they haven't selected a move yet, it chooses a random move. It has 85% accuracy. It lasts 2-7 turns.
@@ -347,7 +383,7 @@ The fourth page contains Sprite-related options.
 - 7 moves that people almost never use were renamed and changed to have much more useful effects (mostly based on unused prototype moves):
   - CONSTRICT is now STATIC SNAG - 75 base power, electric type, 30% chance of paralysis, 100% accuracy (Inspired by the unused prototype moves `PARALYZING SCISSORS` and `ELEKITER`)
   - TAKE DOWN is now HEAT RUSH - 75 base power, fire type, 30% chance of burn, 100% accuracy (Inspired by the unused prototype move `MEGA FIRE`)
-  - KINESIS is now FIREWALL - status move, fire type, causes burn, 80% accuracy (Inspired by the unused prototype move `F WALL`)
+  - KINESIS is now FIREWALL - 20 base power, fire type, causes burn, 90% accuracy (Inspired by the unused prototype move `F WALL`). If used on a pokemon that is already burned, power increases to 40. If used again after that, power increases to a maximum of 80. If the user is at least level 50, the increases are instead to 80 and 140 power maximum.
   - COUNTER is now DRAIN PUNCH - 75 base power, fighting type, drains HP, 100% accuracy
   - RAZOR WIND is now ROOST - heals 1/2 max HP
   - SLAM is now FILTHY SLAM - 80 base power, poison type, no additional effect, 100% accuracy  (Inspired by the unused prototype move `GASTRO ACID`)
@@ -356,19 +392,19 @@ The fourth page contains Sprite-related options.
   - WHIRLWIND - 110 base power, flying type, 30% chance of confusion, 85% accuracy
   - WITHDRAW - heals around 1/3 max HP and raises DEFENSE. Doesn't do anything if you have full health.
   - GROWTH - heals around 1/3 max HP and raises SPECIAL. Doesn't do anything if you have full health.
-  - DEFENSE CURL - acts like LIGHT SCREEN, increases special defense
+  - DEFENSE CURL - makes all SUPER EFFECTIVE moves do normal damage to the user until the user switches out
   - MEDITATE - raises all of attack, speed, and special by 1 stage
   - SUBMISSION - 60 base power, fighting type, raises attack by 1 stage, 100% accuracy
   - CUT - 70 base power, bug type, no additional effect, 100% accuracy
   - FLASH - 60 base power, electric type, priority move, 10% chance of flinching, 100% accuracy
-  - CONVERSION - acts like AMNESIA, raises SPECIAL two stages
+  - CONVERSION - The user can convert between DEFENSE mode and ATTACK mode. DEFENSE mode halves all damage to the user. ATTACK mode will remove defense mode, but will use an attack that is guaranteed to be super effective against the opponent.
   - COMET PUNCH - 60 base power, fighting type, priority move, 100% accuracy
   - KARATE CHOP, MEGA PUNCH, MEGA KICK, STRENGTH, and DIZZY PUNCH are all Fighting type moves now
   - VICEGRIP - 75 base power, bug type, 30% chance of paralysis, 100% accuracy
   - WING ATTACK - 50 base power, flying type, priority move, 100% accuracy
   - BIDE - Raises attack and defense both by 1 stage
-  - SELFDESTRUCT - 140 base power, fire type, deals heavy recoil, 100% accuracy
-  - EXPLOSION - 140 base power, rock type, deals heavy recoil, 100% accuracy
+  - SELFDESTRUCT - 140 base power, fire type, deals heavy recoil, 100% accuracy. If you have less than 1/3 health left, it will be 250 power and half the opponent's defense, but also makes the user faint immediately.
+  - EXPLOSION - 140 base power, rock type, deals heavy recoil, 100% accuracy. If you have less than 1/3 health left, it will be 250 power and half the opponent's defense, but also makes the user faint immediately.
   - SKULL BASH - 100 base power, rock type, if it misses it deals crash damage like jump kick/hi jump kick, 90% accuracy
   - SPIKE CANNON - 42 base power, rock type, hits 2 or 3 times (50% chance of each outcome), 100% accuracy
   - POISON GAS - 60 base power, poison type, high critical hit ratio, 10% chance of poison, 100% accuracy
@@ -376,9 +412,13 @@ The fourth page contains Sprite-related options.
   - ROCK SLIDE and ROCK THROW both have 100% accuracy
   - MIRROR MOVE - is a priority move and always uses the previous attack the opponent used regardless of if the pokemon that used it fainted
   - MIMIC - you can still choose the exact move to mimic, but now it will use that move the same turn you mimic it
-  - BONEMERANG - 55 base power, hits twice, 90 accuracy, 30% chance of lowering opponent's speed.
+  - BONEMERANG - 60 base power, hits twice, 95 accuracy, 30% chance of lowering opponent's speed. It also can hit FLYING-type pokemon for neutral damage unlike other GROUND-type moves.
   - SUPER FANG - now deals a set 2/3 the opponent's HP instead of 1/2. Useful for catching rare pokemon!
   - TELEPORT - actually does something in trainer battles now! The user will switch out, and heal 25% health by doing so. Still works the same as it used to when wild pokemon use it.
+  - DOUBLESLAP - does double damage on sleeping pokemon! But also makes them wake up.
+  - SONICBOOM - Priority move, GHOST type, 50 power. If you use it on the first turn you can attack, it will always cause the opponent to flinch.
+  - ACID ARMOR - Does both LIGHT SCREEN and REFLECT in one move.
+- Some pokemon get SIGNATURE MOVES! This means they do more damage or get better accuracy with specific moves. For example, if ARBOK uses ACID, its power will be 100 instead of 50. An NPC in Saffron City can tell you which pokemon get signature moves and what the bonuses are to those moves. 
 - There are many more tweaks to moves. Check your MOVEDEX in game to see what a move you just saw's effects were, or see the wiki for a link to the complete move list. Be sure to try almost every move and don't write them off. Except for splash. It still does nothing as usual.
 
 ## Pokemon type changes
@@ -401,7 +441,6 @@ An NPC in a house in indigo plateau route 23 (past the first guard) can customiz
 - Ponyta and Rapidash are now Fire/Normal 
 - Goldeen and Seaking are now Water/Normal
 - Victreebel is Grass/Dragon
-- Magmar is Fire/Psychic
 
 Additionally, GHOST type was made a "Dynamic type". What this means, is it can do Physical or Special damage depending on your base SPECIAL and base ATTACK. If base SPECIAL is higher than base ATTACK for your pokemon, GHOST type moves will be use SPECIAL for damage calculation. Otherwise, they will use ATTACK and the opponent's DEFENSE for damage calculation. This lets pokemon like Gengar be a bit more useful while also allowing physical attacker pokemon to benefit from physical damage on ghost attacks.
 
@@ -438,6 +477,8 @@ Additionally, GHOST type was made a "Dynamic type". What this means, is it can d
 - A small sound effect plays when you push a boulder onto a switch in Victory Road.
 - A small sound effect plays when you light up Rock Tunnel with FLASH.
 - A small sound effect plays when the doors behind the first 3 elite four members open upon defeating them.
+- If you set MUSIC to OG+ mode, 6 pokemon (POLIWHIRL, VILEPLUME, GOLDEEN, RHYHORN, OMANYTE, DITTO) will have slightly different cries so their cries aren't exact duplicates of other pokemon.
+- Music volume was decreased when you enter the pokemon nicknaming screen.
 
 ## Pokemon Green visuals
 The version-specific visuals of japanese pokemon green were added into PureGreen.
