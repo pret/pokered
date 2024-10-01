@@ -189,7 +189,7 @@ The fourth page contains Sprite-related options.
 
 - A new area based on pre-release "Moltres dungeon" data was added to the game on the sea route between Pallet Town and Cinnabar Island. Cinnabar Volcano! You can catch Moltres earlier in the game here. You can also turn this area off entirely if you don't want it by going to Your PC and turning it off in the WORLD OPTIONS menu. Explore a new volcano area with lots of new visuals. You can upgrade your MAGMAR here with the power of the volcano!
 
-![volcano](/screenshots/volcano.png?raw=true)
+![volcano](/screenshots/volcano.png?raw=true) ![world options](/screenshots/world_options.png?raw=true)
 
 - The Power Plant has been enhanced visually with a beta tileset from Spaceworld 1997. Now it also has a bit more of a puzzle. You must press a bunch of buttons to unlock electrical gates, which allow you to reach the end of the area. It also has a roof area, and a secret area where your MAGNETON can be powered up!
 
