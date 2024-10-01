@@ -70,12 +70,13 @@ The fourth page contains Sprite-related options.
 
  ![Menu Icons 1](/gfx/icons/menusprites1.png?raw=true) ![Menu Icons 2](/gfx/icons/menusprites2.png?raw=true)
     ![Brock](/gfx/sprites/brock.png?raw=true) ![Misty](/gfx/sprites/misty.png?raw=true) ![LtSurge](/gfx/sprites/lt_surge.png?raw=true) ![Erika](/gfx/sprites/erika.png?raw=true) ![Sabrina](/gfx/sprites/sabrina.png?raw=true) ![Blaine](/gfx/sprites/blaine.png?raw=true)
-  - If you press A on `EDIT` of the 3rd Option, it will open 4 new pages on another level. These 4 pages are for customizing the front sprites of the game. 
+  - If you press A on `EDIT` of the 3rd Option, it will open 5 new pages on another level. These 5 pages are for customizing the front sprites of the game. 
 
 ![Front Sprite Options 1](/screenshots/front_sprite_options1.png?raw=true)
 ![Front Sprite Options 2](/screenshots/front_sprite_options2.png?raw=true)
 ![Front Sprite Options 3](/screenshots/front_sprite_options3.png?raw=true)
 ![Front Sprite Options 4](/screenshots/front_sprite_options4.png?raw=true)
+![Front Sprite Options 4](/screenshots/front_sprite_options5.png?raw=true)
 
   You can customize the below sprites:
 
@@ -189,7 +190,7 @@ The fourth page contains Sprite-related options.
 
 - A new area based on pre-release "Moltres dungeon" data was added to the game on the sea route between Pallet Town and Cinnabar Island. Cinnabar Volcano! You can catch Moltres earlier in the game here. You can also turn this area off entirely if you don't want it by going to Your PC and turning it off in the WORLD OPTIONS menu. Explore a new volcano area with lots of new visuals. You can upgrade your MAGMAR here with the power of the volcano!
 
-![volcano](/screenshots/volcano.png?raw=true)
+![volcano](/screenshots/volcano.png?raw=true) ![world options](/screenshots/world_options.png?raw=true)
 
 - The Power Plant has been enhanced visually with a beta tileset from Spaceworld 1997. Now it also has a bit more of a puzzle. You must press a bunch of buttons to unlock electrical gates, which allow you to reach the end of the area. It also has a roof area, and a secret area where your MAGNETON can be powered up!
 
@@ -314,12 +315,15 @@ The fourth page contains Sprite-related options.
 - Elevators will shake for longer or shorter depending on how far away the floor you selected was.
 - A little animation plays when you push a boulder onto a switch in Victory Road.
 - A little animation plays when you use FLASH to light up Rock Tunnel.
-- In seafoam islands, you can see the water currents moving visually.
 - The power plant uses a new tileset based on a beta tileset from Spaceworld 97 that was intended for the power plant.
 - When you engage static pokemon (Articuno/Moltres/Zapdos/Mewtwo/Snorlax) a special animation will play for each before battle starts.
 - If you turn on OG+ Icons mode, in diglett's cave you will see DIGLETTs popping up and down visually and hiding from you.
 - If you're playing on SGB or GBC, talking to the "Saffron City - City of Rainbow Dreams" sign will switch between a special Rainbow palette (unused code from the original game) and the original palette.
 - Using a poke doll in battle will have a little animation now.
+- In seafoam islands, you can see the water currents moving visually.
+
+![Seafoam Currents](/screenshots/seafoam_currents.png?raw=true)
+
 
 ## Bugfixes
 - High Jump Kick / Jump Kick crash damage on missing does more damage instead of 1 damage always now. (1/4 the damage of what it would have done to the opponent)
