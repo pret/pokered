@@ -3,6 +3,14 @@ description: Write a review of the game.
 title: "[Review]: Summarize your review here"
 labels: ["review"]
 body:
+  - type: dropdown
+    id: played
+    attributes:
+      label: Did you finish playing the game before leaving a review?
+      multiple: false
+      options:
+        - Yes
+        - No
   - type: textarea
     id: review
     attributes:
