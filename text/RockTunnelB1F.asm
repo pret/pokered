@@ -74,6 +74,7 @@ _RockTunnelB1FHiker2EndBattleText::
 	cont "technician!"
 	prompt
 
+; TODO: learnset guy -> gives hitmonlee learnset?
 _RockTunnelB1FHiker2AfterBattleText::
 	text "In mountains,"
 	line "you'll often find"
