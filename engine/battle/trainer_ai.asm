@@ -230,21 +230,27 @@ AIMoveChoiceModification1:
 	jr c, .discourage ; discourage priority moves if player is invulnerable due to fly/dig
 	jp .notSemiInvulnerable
 .checkAsleep
-	ld a, [wAITargetMonType1]
-	cp NORMAL
-	jr z, .discourage ; discourage dream eater if the player is normal type (immune to ghost)
-	ld a, [wAITargetMonType2]
-	cp NORMAL
-	jr z, .discourage ; discourage dream eater if the player is normal type (immune to ghost)
+	push hl
+	push bc
+	ld b, NORMAL
+	call CheckTypeMatchesB
+	jr c, .sleepDiscourage
 	ld a, [wAITargetMonStatus]
 	and SLP_MASK
-	jp nz, .nextMove ; if we just healed sleep or switched out a sleeping pokemon, 
+	jp nz, .sleepNextMove ; if we just healed sleep or switched out a sleeping pokemon, 
 	       ; the AI shouldn't predict this perfectly when deciding whether to use dream eater
 	ld a, [wBattleMonStatus]
 	and SLP_MASK
-	jp nz, .nextMove
+	jp nz, .sleepNextMove
+.sleepDiscourage
+	pop bc
+	pop hl
 	; heavily discourage, if the player isn't asleep avoid using dream eater
 	jr .discourage
+.sleepNextMove
+	pop bc
+	pop hl
+	jp .nextMove
 .firewall
 	; discourage firewall if opponent has a status that isn't burned since it will stay at 20 power in that case
 	ld a, [wAITargetMonStatus]
@@ -451,19 +457,20 @@ CheckBothReflectLightScreenUp:
 CheckSeeded:
 	ld a, [wPlayerBattleStatus2]
 	bit SEEDED, a
-	jr nz, .discourage ; if the enemy has used leech seed don't use again
+	jr nz, CheckTypeMatchesB.discourage ; if the enemy has used leech seed don't use again
+	ld b, GRASS
+CheckTypeMatchesB:
 	ld a, [wAIMoveSpamAvoider]
 	cp 2 ; set to 2 if we switched out this turn
 	ld hl, wBattleMonType1
 	jr nz, .noSwitchOut
 	ld hl, wAITargetMonType1 ; stores what the AI thinks the player's type is when a switchout happens
 .noSwitchOut	
-	ld a, [hl]
-	cp GRASS
+	ld a, [hli]
+	cp b
 	jr z, .discourage ; leech seed does not affect grass types
-	inc hl
 	ld a, [hl]
-	cp GRASS
+	cp b
 	jr z, .discourage ; leech seed does not affect grass types
 	and a
 	ret
@@ -491,21 +498,8 @@ CheckStatusImmunity:
 	ld b, GROUND
 	jr nz, .done
 .getMonTypes
-	ld a, [wAIMoveSpamAvoider] ; set if we healed status or switched out this turn
-	cp 2 ; it's 2 if we switched out
-	jr nz, .noSwitchOut
-	ld hl, wAITargetMonType1
-	jr .checkTypes
-.noSwitchOut
-	ld hl, wBattleMonType1
-.checkTypes
-	ld a, [hl]
-	cp b
-	jr z, .discourage
-	inc hl
-	ld a, [hl]
-	cp b
-	jr z, .discourage
+	call CheckTypeMatchesB
+	jr c, .discourage
 .done
 	pop hl
 	pop bc
@@ -584,12 +578,13 @@ AIMoveChoiceModification2:
 	ld a, [wPlayerBattleStatus2]
 	bit SEEDED, a
 	jr nz, .nextMove ; player already seeded
-	ld a, [wAITargetMonType1]
-	cp GRASS
-	jr z, .nextMove ; player is immune to leech seed
-	ld a, [wAITargetMonType2]
-	cp GRASS
-	jr z, .nextMove ; player is immune to leech seed
+	push hl
+	push bc
+	ld b, GRASS
+	call CheckTypeMatchesB
+	pop bc
+	pop hl
+	jr c, .nextMove ; player is grass type (immune to leech seed)
 	jr .preferMove
 
 
