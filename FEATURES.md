@@ -33,6 +33,8 @@ The second page contains new big features related to general gameplay.
     - `Y1 or Y2`: Force GBC color palettes. On Super Gameboy, it'll now have Pokemon Yellow's GBC more intense color palettes. Same with GBC and GBA. On GBC and GBA, enables full color mode. Attack animations will have color in this mode when on GBC or GBA, along with some other color enhancements. Y1 are the original palettes for pokemon yellow. Y2 are the same colors as Y1 with reduced intensity, to look like you are playing on an original GBC's screen when you are emulating the game.
     
     ![Blue Title GBC](/screenshots/blue_title_gbc_colors_on_gbc.png?raw=true) ![Red Title GBC](/screenshots/red_title_gbc_colors_on_gbc.png?raw=true) ![Green Title GBC](/screenshots/green_title_gbc_colors_on_gbc.png?raw=true)
+
+    ![Blue Title GBC2](/screenshots/blue_title_y2_colors_on_gbc.png?raw=true) ![Red Title GBC2](/screenshots/red_title_y2_colors_on_gbc.png?raw=true) ![Green Title GBC2](/screenshots/green_title_y2_colors_on_gbc.png?raw=true)
   - The second option, `ALT PKMN COLORS` will enable or disable pokemon from being able to have special color palettes (Default: OFF). When turned on, features related to alternate color pokemon are enabled. In certain regions, you will find differently colored pokemon, like blue nidorinos and purple nidorinas. Think of them as regional color variants. This is just an amusing feature to allow for additional enjoyment in finding unique pokemon by exploring different places.
 
 ![Alt Colors Off](/screenshots/alt_pokemon_colors_off.png?raw=true) ![Alt Colors On](/screenshots/alt_pokemon_colors_on.png?raw=true)
