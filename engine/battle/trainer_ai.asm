@@ -770,7 +770,7 @@ AIMoveChoiceModification3:
 
 	ld a, [wTypeEffectiveness]
 	cp EFFECTIVE
-	jr z, .checkSpecificEffects2
+	jr z, .checkSpecificEffects
 	jr c, .notEffectiveMove
 	;ld a, [wEnemyMoveEffect]
 	; check for reasons not to use a super effective move here
@@ -783,7 +783,6 @@ AIMoveChoiceModification3:
 	dec [hl] ; encourage 4x effective moves further
 .checkSpecificEffects ; we'll further encourage certain moves
 	call EncouragePriorityIfSlow
-.checkSpecificEffects2
 	call EncourageDrainingMoveIfLowHealth
 	call EncourageOHKOMoveIfXAccuracy
 	jr .nextMove
