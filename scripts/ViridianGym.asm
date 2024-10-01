@@ -132,6 +132,8 @@ ViridianGymGiovanniText:
 	call Delay3
 	CheckEvent EVENT_CAUGHT_GHOST_MAROWAK
 	jr z, .dontMoveKarateKing
+	ld a, VIRIDIANGYM_HIKER3
+	call SetSpriteFacingUp
 	; move karate king position for ghost marowak text
 	ld c, VIRIDIANGYM_HIKER3
 	lb de, 0, 1 ; same x coord, down 1 y coord
