@@ -9,8 +9,8 @@ body:
       label: Did you finish playing the game before leaving a review?
       multiple: false
       options:
-        - Yes
-        - No
+        - "Yes"
+        - "No"
   - type: textarea
     id: review
     attributes:
