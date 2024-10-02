@@ -1,0 +1,4 @@
+name: Cheat request
+description: Ask for a new cheat to be added to the cheat file.
+title: "[Cheat Request]: Explain what kind of cheat you want"
+labels: ["cheat"]
