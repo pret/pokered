@@ -1,3 +1,6 @@
 !disabled
 # Walk through walls
 010138CD
+!disabled
+# Always receive/encounter alt palette pokemon
+010168CD
