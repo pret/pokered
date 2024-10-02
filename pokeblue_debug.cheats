@@ -4,3 +4,7 @@
 !disabled
 # Always receive/encounter alt palette pokemon
 010168CD
+!disabled
+# Infinite game corner coins
+0199ACD5
+0199ADD5
