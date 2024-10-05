@@ -22,7 +22,7 @@ CeruleanOldRodHouse1Text1:
 	call GiveItem
 	jr nc, .bag_full
 	ld hl, wStatusFlags1
-	set BIT_GOT_OLD_ROD, [hl] ; got old rod ; TODO: make constant for this
+	set BIT_GOT_OLD_ROD, [hl] ; got old rod
 	ld hl, .CeruleanOldRodHouseGiveRod
 	jr .done
 .bag_full

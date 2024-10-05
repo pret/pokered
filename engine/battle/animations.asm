@@ -3127,7 +3127,7 @@ TossBallAnimation:
 	ld [wNumShakes], a
 	; PureRGBnote: gbcnote: pokeball toss animations don't get remapped here anymore, they each have a unique animation
 	ld hl, .PokeBallAnimations
-	ld a, [wAnimationID] ; TODO: pointless?
+	ld a, [wAnimationID]
 .PlayNextAnimation
 	ld [wAnimationID], a
 	push bc

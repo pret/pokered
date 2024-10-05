@@ -45,7 +45,7 @@ PrepareOakSpeech:
 	ld [wSpriteOptions], a
 ;;;;;;;;;;
 	pop af
-	res 5, a ; prevent forced bike state on new game ; TODO: new flag constant
+	res BIT_ALWAYS_ON_BIKE, a ; prevent forced bike state on new game
 	ld [wStatusFlags6], a
 	pop af
 	ld [wOptions], a

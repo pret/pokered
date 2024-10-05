@@ -383,7 +383,7 @@ BattleOccurred::
 	ld hl, wCurrentMapScriptFlags
 	set BIT_CUR_MAP_LOADED_1, [hl]
 	set BIT_CUR_MAP_LOADED_2, [hl]
-	set 3, [hl] ; PureRGBnote: ADDED: new bit indicating we reloaded a map from a battle ; TODO: new constant
+	set BIT_MAP_LOADED_AFTER_BATTLE, [hl] ; PureRGBnote: ADDED: new bit indicating we reloaded a map from a battle 
 	xor a
 	ldh [hJoyHeld], a
 	ld a, [wCurMap]
@@ -775,7 +775,7 @@ HandleFlyWarpOrDungeonWarp::
 	ld [wMapPalOffset], a
 	ld hl, wStatusFlags6
 ;;;;;;;;;; PureRGBnote: CHANGED: don't clear bike or surf state on falling down a hole (keeps you on your bike if you're on it)
-	bit 4, [hl] ; fell down hole warp ; TODO: new constant
+	bit BIT_DUNGEON_WARP, [hl] ; fell down hole warp
 	jr nz, .dontResetBikeState ; don't reset bike state on falling down a hole
 	ld [wWalkBikeSurfState], a
 .dontResetBikeState
@@ -2369,7 +2369,7 @@ IgnoreInputForHalfSecond:
 
 ResetUsingStrengthSurfOutOfBattleBits:
 	ld a, [wStatusFlags1]
-	and %00000101 ; TODO: combine constants BIT_STRENGTH_ACTIVE
+	and 1 << BIT_STRENGTH_ACTIVE | 1 << BIT_AUTOSURF
 	ret z
 	jpfar CheckResetSurfStrengthFlags ; PureRGBnote: ADDED: sometimes we don't want to reset the strength/surf bits when loading a map
 

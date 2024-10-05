@@ -106,7 +106,7 @@ _CeladonCityRocket2Text::
 	done
 
 _CeladonCityTrainerTips1Text::
-	text "<TIPS>" ; TODO: genericize message?
+	text "<TIPS>"
 
 	para "X ACCURACY boosts"
 	line "the accuracy of"

@@ -93,7 +93,7 @@ ReadTrainer:
 	and a ; have we reached the end of the trainer data?
 	ret z
 ;;;;;;;;;; PureRGBnote: ADDED: final bit of "pokemon level" in special parties is used to indicate pokemon having alternate palette.
-	bit 7, a ; TODO: create constant
+	bit BIT_ALT_PALETTE_TRAINER_MON, a
 	push af
 	ld a, 1 
 	jr nz, .altPalette

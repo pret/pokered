@@ -84,11 +84,10 @@ FuchsiaGoodRodHouseFishingGuruText:
 	ld hl, FuchsiaGuruIntro
 	rst _PrintText
 	callfar LastTwoGurusScript
-	jr .done ; TODO: rst TextScriptEnd
+	rst TextScriptEnd
 .printEndText
 	ld hl, FuchsiaGuruEnd
 	rst _PrintText
-.done
 	rst TextScriptEnd
 
 FuchsiaGuruIntro:

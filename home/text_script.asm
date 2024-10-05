@@ -215,9 +215,8 @@ DisplayPokemonFaintedText::
 DisplayPlayerBlackedOutText::
 	ld hl, PlayerBlackedOutText
 	rst _PrintText
-	ld a, [wStatusFlags6] ; TODO: use hl?
-	res BIT_ALWAYS_ON_BIKE, a ; reset forced to use bike bit
-	ld [wStatusFlags6], a
+	ld hl, wStatusFlags6
+	res BIT_ALWAYS_ON_BIKE, [hl] ; reset forced to use bike bit
 	jp HoldTextDisplayOpen
 
 DisplayRepelWoreOffText::
