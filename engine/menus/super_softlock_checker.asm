@@ -139,9 +139,9 @@ IsMoveInParty:
 IsMoveLearnableByParty:
 	ld a, [wMoveNum]
 	push af
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	push af
-	ld a, [wd0b5]
+	ld a, [wCurSpecies]
 	push af
 	ld a, d
 	ld [wMoveNum], a
@@ -149,7 +149,7 @@ IsMoveLearnableByParty:
 	ld hl, wPartyMon1Species
 .loop
 	ld a, [hl]
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	push de
 	predef CanLearnTM
 	pop de
@@ -172,9 +172,9 @@ IsMoveLearnableByParty:
 	ld b, 0
 .done
 	pop af
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	pop af
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	pop af
 	ld [wMoveNum], a
 	ld a, b

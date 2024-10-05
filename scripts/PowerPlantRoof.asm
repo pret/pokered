@@ -69,7 +69,7 @@ CheckShowDarkClouds::
 	xor a
 	ld [wMuteAudioAndPauseMusic], a
 	ld a, TEXT_POWER_PLANT_ROOF_DARK_CLOUDS
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	jp DisplayTextID
 
 PlayThunderRumbleSound::
@@ -265,7 +265,7 @@ CheckDoZapdosLightningAnimation:
 	ld c, 90
 	rst _DelayFrames
 	ld a, POWER_PLANT_ROOF_ZAPDOS
-	ldh [hSpriteIndexOrTextID], a ; makes zapdos stay on screen during battle transition
+	ldh [hSpriteIndex], a ; makes zapdos stay on screen during battle transition
 	SetEvent EVENT_FIGHTING_ZAPDOS
 	ret
 

@@ -78,7 +78,7 @@ _DadChowedDownText::
 
 _MomFoodPokemonJoinsText::
 	text "@"
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text " "
 	line "had some as well!"
 	prompt
@@ -166,7 +166,7 @@ _TeaReaction::
 	para "It's so very"
 	line "revitalizing!"
 	para "@"
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text " "
 	line "is looking at"
 	cont "DAISY."

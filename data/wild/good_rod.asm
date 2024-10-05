@@ -16,10 +16,10 @@ GoodRodMonsOcean:
 	db 16, TENTACOOL
 	db -1, -1 ; end
 
-; sets bit 1 and 2 of wTownMapAreaTypeFlags respectively if the pokemon in wd11e is included in either good rod mons list
+; sets bit 1 and 2 of wTownMapAreaTypeFlags respectively if the pokemon in wPokedexNum is included in either good rod mons list
 
 CheckHasGoodRod:
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	ld hl, wTownMapAreaTypeFlags
 	push hl
 	ld hl, GoodRodMons + 1
@@ -31,7 +31,7 @@ CheckHasGoodRod:
 	set BIT_HAS_GOOD_ROD_FRESH, [hl]
 .noLakeMon
 	push hl
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	ld hl, GoodRodMonsOcean + 1
 	ld de, 2
 	call IsInArray

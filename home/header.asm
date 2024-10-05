@@ -34,7 +34,7 @@ _DelayFrames::
 	jp DelayFrames
 
 ; PureRGBnote: MOVED: 5 extra bytes of space left here, may as well move something here that puts the space to some use	
-TextIDErrorText:: ; "[hSpriteIndexOrTextID] ERROR."
+TextIDErrorText:: ; "[hTextID] ERROR."
 	text_far _TextIDErrorText
 	text_end
 

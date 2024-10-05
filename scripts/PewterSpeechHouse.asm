@@ -39,8 +39,8 @@ PewterSpeechHouseLostWalletBeautyText:
 		rst _PrintText
 		SetEvent EVENT_RETURNED_LOST_WALLET
 		ld a, ABRA
-		ld [wcf91], a
-		ld [wd11e], a
+		ld [wCurPartySpecies], a
+		ld [wPokedexNum], a
 		call PlayCry
 		ld a, SFX_GET_ITEM_2
 		call PlaySoundWaitForCurrent

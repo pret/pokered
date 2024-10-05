@@ -17,7 +17,7 @@ GetMonNameListMenu:
 	jp GetMonName
 
 GetTrainerNameListMenu:
-	ld a, [wd11e]
+	ld a, [wNamedObjectIndex]
 	ld [wTrainerClass], a
 	callfar GetTrainerName_
 	ld de, wTrainerName
@@ -84,7 +84,7 @@ CheckLoadTypes:
 	call GetListEntryID
 	jr c, .noText
 	; a = which pokemon ID in the list is selected
-	ld [wd0b5], a ; needed to make PrintMonType work
+	ld [wCurSpecies], a ; needed to make PrintMonType work
 	ld a, 1
 	ld [wListMenuHoverTextShown], a
 	hlcoord 4, 13

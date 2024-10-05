@@ -3,8 +3,8 @@
 ; It's not reset by crossing in between maps outside like routes.
 ; It's not reset by entering and leaving a battle.
 CheckForAutoSurf::
-	ld a, [wd728]
-	bit 2, a ; is surf active?
+	ld a, [wStatusFlags1]
+	bit BIT_AUTOSURF, a ; is surf active?
 	scf
 	ret z ; if not we dont need to check anything
 	callfar IsNextTileShoreOrWater ; is the tile in front of us a water tile?
@@ -12,8 +12,8 @@ CheckForAutoSurf::
 	ld hl, TilePairCollisionsWater
 	call CheckForTilePairCollisions ; is it a water tile, but on a different elevation from the player's current position?
 	ret c ; if so, don't try to surf on it
-	ld a, [wd732]
-	bit 5, a
+	ld a, [wStatusFlags6]
+	bit BIT_ALWAYS_ON_BIKE, a
 	scf
 	ret nz ; forced to ride bike on cycling road, no surfing allowed
 	ld a, [wCurMap]

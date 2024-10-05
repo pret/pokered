@@ -2,10 +2,10 @@ GetMonHeader2::
 	push bc
 	push de
 	push hl
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	push af
-	ld a, [wd0b5]
-	ld [wd11e], a
+	ld a, [wCurSpecies]
+	ld [wPokedexNum], a
 	ld hl, NonPokemonSpecies
 	ld de, 4
 	call IsInArray
@@ -22,7 +22,7 @@ GetMonHeader2::
 	ld [hl], d
 	jr .done
 .notNonPokemonSpecies
-	ld a, [wd0b5]
+	ld a, [wCurSpecies]
 	ld hl, NonDexPokemonSpecies
 	ld de, 1
 	call IsInArray
@@ -33,8 +33,8 @@ GetMonHeader2::
 	call AddNTimes
 	jr .copyBaseStats
 .notNonDexPokemonSpecies
-	predef IndexToPokedex   ; convert pokemon ID in [wd11e] to pokedex number
-	ld a, [wd11e]
+	predef IndexToPokedex   ; convert pokemon ID in [wPokedexNum] to pokedex number
+	ld a, [wPokedexNum]
 	dec a
 	ld bc, BASE_DATA_SIZE
 	ld hl, BaseStats
@@ -44,10 +44,10 @@ GetMonHeader2::
 	ld de, wMonHeader
 	rst _CopyData ; PureRGBnote: CHANGED: mew header now in same bank as rest of base stat data so no need to farcopy
 .done
-	ld a, [wd0b5]
+	ld a, [wCurSpecies]
 	ld [wMonHIndex], a
 	pop af
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	pop hl
 	pop de
 	pop bc
@@ -87,7 +87,7 @@ UncompressMonSprite::
 	ld [wSpriteInputPtr],a    ; fetch sprite input pointer
 	ld a,[hl]
 	ld [wSpriteInputPtr+1],a
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	cp MISSINGNO
 	jr z, .missingno
 	ld hl, NonPokemonSpecies

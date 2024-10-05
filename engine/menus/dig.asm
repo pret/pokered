@@ -19,7 +19,7 @@ DigFromPartyMenu::
 	call LavaRoomCheck ; can't dig if we're standing on lava in the lava room
 	jr z, .doneFailed
 	ld a, ESCAPE_ROPE
-	ld [wcf91], a
+	ld [wCurItem], a
 	ld [wPseudoItemID], a
 	call UseItem
 	ld a, [wActionResultOrTookBattleTurn]
@@ -46,15 +46,15 @@ DigFromPartyMenu::
 	call CheckTileNotDock
 	ld hl, .noWhereToDigDown
 	jr z, .printFailed
-	ld hl, wd72e
-	res 4, [hl]
+	ld hl, wStatusFlags4
+	res BIT_NO_BATTLES, [hl]
 	callfar LoadTownMap_Dig
-	ld a, [wd732]
-	bit 3, a ; did the player decide to dig?
+	ld a, [wStatusFlags6]
+	bit BIT_FLY_WARP, a ; did the player decide to dig?
 	jr nz, .doFly
 	call LoadFontTilePatterns
-	ld hl, wd72e
-	set 1, [hl]
+	ld hl, wStatusFlags4
+	set BIT_UNKNOWN_4_1, [hl]
 	scf
 	ret
 .itemNotUse

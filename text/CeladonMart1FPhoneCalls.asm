@@ -49,7 +49,7 @@ _CeladonMartCallOakText::
 	line "you to call over"
 	cont "the phone!"
 	para "How is @"
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text " "
 	line "doing?"
 	prompt

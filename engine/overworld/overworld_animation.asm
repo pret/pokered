@@ -78,8 +78,8 @@ CheckOverworldAnimation::
 	ldh [hWarpDestinationMap], a
 	ld a, [wWarpedFromWhichWarp]
 	ld [wDestinationWarpID], a
-	ld hl, wd72d
-	set 3, [hl]
+	ld hl, wStatusFlags3
+	set BIT_WARP_FROM_CUR_SCRIPT, [hl]
 	ret
 
 CinnabarVolcanoCheckLoadCustomTiles::

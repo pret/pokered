@@ -9,8 +9,8 @@ CeruleanOldRodHouse_TextPointers:
 
 CeruleanOldRodHouse1Text1:
 	text_asm
-	ld a, [wd728]
-	bit 3, a ; got old rod?
+	ld a, [wStatusFlags1]
+	bit BIT_GOT_OLD_ROD, a ; got old rod?
 	jr nz, .got_item
 	ld hl, .CeruleanOldRodHouseImTheFishingGuruText
 	rst _PrintText
@@ -21,8 +21,8 @@ CeruleanOldRodHouse1Text1:
 	lb bc, OLD_ROD, 1
 	call GiveItem
 	jr nc, .bag_full
-	ld hl, wd728
-	set 3, [hl] ; got old rod ; TODO: make constant for this
+	ld hl, wStatusFlags1
+	set BIT_GOT_OLD_ROD, [hl] ; got old rod ; TODO: make constant for this
 	ld hl, .CeruleanOldRodHouseGiveRod
 	jr .done
 .bag_full

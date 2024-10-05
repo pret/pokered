@@ -80,8 +80,8 @@ VolcanoDoRoomSpecificMapLoadCode::
 	; no volcano shaking in entrance room
 	ResetFlag FLAG_MAP_HAS_OVERWORLD_ANIMATION
 	; reset surf flag in entrance area so player can't automatically surf on lava
-	ld hl, wd728
-	res 2, [hl] ; reset autosurf bit
+	ld hl, wStatusFlags1
+	res BIT_AUTOSURF, [hl] ; reset autosurf bit
 	CheckEvent EVENT_VOLCANO_TALKED_TO_BLAINE
 	jr nz, .notLastConvo
 	CheckEventReuseA EVENT_FINISHED_VOLCANO
@@ -130,8 +130,8 @@ VolcanoDoRoomSpecificMapLoadCode::
 	ld a, $3C
 	jp ReplaceTileBlockEntry
 .floor1
-	ld hl, wd728
-	res 2, [hl] ; reset autosurf bit to make sure entering main room that surfing from downstairs isn't still present
+	ld hl, wStatusFlags1
+	res BIT_AUTOSURF, [hl] ; reset autosurf bit to make sure entering main room that surfing from downstairs isn't still present
 	CheckEvent EVENT_VOLCANO_DUG_TO_FLOOR2
 	jr z, .skipLadderReplaceFloor1
 	lb bc, 12, 6
@@ -245,8 +245,8 @@ MoveOnlyTwoRubyLocations:
 CheckHoleDrillFinish:
 	CheckEvent EVENT_HOLE_DRILL_FINISHED
 	ret z
-	ld a, [wd736]
-	bit 1, a
+	ld a, [wMovementFlags]
+	bit BIT_EXITING_DOOR, a
 	ret nz
 	ResetEvent EVENT_HOLE_DRILL_FINISHED
 	ld a, PLAYER_DIR_DOWN
@@ -338,8 +338,8 @@ CheckReassignFloodLavaWarp:
 CheckShowSurfableRhydon:
 	CheckEvent EVENT_SURFING_ON_RHYDON
 	ret z
-	ld a, [wd730]
-	bit 7, a
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_MOVEMENT_STATE, a
 	ret nz
 	ld a, [wYCoord]
 	cp 57
@@ -356,8 +356,8 @@ CheckForceSurfDirection::
 	ld a, [wWalkBikeSurfState]
 	cp SURFING
 	ret nz
-	ld a, [wd730]
-	bit 7, a
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_MOVEMENT_STATE, a
 	ret nz
 	lda_coord 8, 9 ; tile below player
 	cp $24 ; down flowing lava
@@ -496,7 +496,7 @@ FailedDrillFloor:
 	rst _PlaySound
 	ld a, TEXT_CINNABAR_VOLCANO_FAILED_DRILLING
 CinnabarVolcanoDisplayTextIDEntry:
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	jp DisplayTextID
 
 FailedDrillFloorText:
@@ -1214,11 +1214,11 @@ CinnabarVolcanoSurfingRhydonText:
 	and a
 	jr nz, .no
 	ld a, RHYDON
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	ld [wBattleMonSpecies2], a
 	call GetMonName
 	ld a, SURFBOARD
-	ld [wcf91], a
+	ld [wCurItem], a
 	ld [wPseudoItemID], a
 	call UseItem
 	ld hl, .gotOn
@@ -1596,26 +1596,26 @@ CheckWaitForVolcanoSpriteWalk:
 	ld [wJoyIgnore], a
 	jpfar AnimateBoulderDust
 .normalWalk
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
-	bit 7, a
+	bit BIT_SCRIPTED_MOVEMENT_STATE, a
 	ret nz
 	ResetEvent EVENT_VOLCANO_SPRITE_MOVING
 	xor a
 	ld [wJoyIgnore], a
 	ret
 .easternWall
-	ld a, [wd730]
-	bit 7, a
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_MOVEMENT_STATE, a
 	ret nz
 	ResetEvent EVENT_VOLCANO_SPRITE_MOVING
 	xor a
 	ld [wJoyIgnore], a
 	jp VolcanoBlowWallOpen
 .blaineWalksOut
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
 	ResetEvent EVENT_VOLCANO_SPRITE_MOVING
 	xor a
@@ -1623,10 +1623,10 @@ CheckWaitForVolcanoSpriteWalk:
 	ld a, HS_VOLCANO_BLAINE
 	jp VolcanoHideSpriteEntry
 .entranceMovement
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
-	bit 7, a
+	bit BIT_SCRIPTED_MOVEMENT_STATE, a
 	ret nz
 	ResetEvent EVENT_VOLCANO_SPRITE_MOVING
 	xor a
@@ -2152,8 +2152,8 @@ CinnabarVolcanoProspectorText:
 	ldh [hWarpDestinationMap], a
 	ld a, 3
 	ld [wDestinationWarpID], a
-	ld hl, wd72d
-	set 3, [hl]
+	ld hl, wStatusFlags3
+	set BIT_WARP_FROM_CUR_SCRIPT, [hl]
 	rst TextScriptEnd
 .finalConvo
 	ld hl, .phew

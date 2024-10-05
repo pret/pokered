@@ -63,7 +63,7 @@ SafariZoneGameOver:
 	; otherwise we've defeated all the rangers and have won the safari game
 .rangerHuntSuccess
 	ld a, TEXT_RANGER_SAFARI_GAME_OVER
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 .doneSafari	
 ;;;;;;;;;;

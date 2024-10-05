@@ -534,7 +534,7 @@ SetTextSpeedCursorPosition:
 	push de
 	ld hl, TextSpeedOptionData + 1
 	ld a, [wOptions]
-	and TEXT_DELAY_BITS
+	and TEXT_DELAY_MASK
 	ld de, 2
 	call IsInArray
 	dec hl

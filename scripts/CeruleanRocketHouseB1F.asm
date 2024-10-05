@@ -89,7 +89,7 @@ CeruleanRocketHouseMissingnoScript:
 	ld a, MISSINGNO
 	call PlayCry
 	ld a, 120
-	ld [wCurEnemyLVL], a
+	ld [wCurEnemyLevel], a
 	ld a, MISSINGNO
 	ld [wCurOpponent], a
 	xor a

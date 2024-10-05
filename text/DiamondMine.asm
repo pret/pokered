@@ -93,13 +93,13 @@ _DiamondMineBoomboxZap::
 	done
 
 _DiamondMineBoomboxZapProc::
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text " zapped"
 	line "the boombox!"
 	done
 
 _DiamondMineBoomboxZapProc2::
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text " zapped"
 	line "the boombox with"
 	cont "THUNDER WAVE!"
@@ -113,7 +113,7 @@ _DiamondMineBoomboxFunctional::
 
 _DiamondMinePickedOnix::
 	text "Okay @"
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text ","
 	line "now the real hard"
 	cont "work begins!"
@@ -130,14 +130,14 @@ _DiamondMineWeeksOfWork::
 	text "<PLAYER>, the"
 	line "prospector, and"
 	cont "@"
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text " spent"
 	cont "weeks digging"
 	cont "through the hard"
 	cont "bedrock."
 	para "Soon only"
 	line "@"
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text " could"
 	cont "make progress."
 	para "Until<...>"
@@ -148,7 +148,7 @@ _DiamondMineFinished::
 	line "Everywhere!!"
 	para "It's all thanks"
 	line "to @"
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text "!"
 	para "Looks like"
 	line "its rocky body"
@@ -161,7 +161,7 @@ _DiamondMineFinished::
 _DiamondMineFinished2::
 	text_start
 	para "@"
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text " has"
 	line "been powered up!"
 	done

@@ -5,7 +5,7 @@ CheckSpriteOptions::
 	ld a, [wMonHAltPicBank]
 	and a
 	jr z, .defaultSprite ; the alt pic will never be in bank 0 (home bank) so this will indicate no alt sprite for the mon
-	ld a,[wcf91]
+	ld a, [wCurPartySpecies]
 	ld de, 3
 	ld hl, SpriteOptionMapping
 	call IsInArray

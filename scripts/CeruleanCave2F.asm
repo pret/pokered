@@ -22,7 +22,7 @@ CeruleanCave2FAfterOakBattleScript:
 	bit BIT_ALT_PKMN_PALETTES, a ; do we have alt palettes enabled
 	jr z, .done ; don't do anything if alt palettes are turned off
 	ld a, TEXT_CERULEANCAVE2F_OAK_FIRST_DEFEAT
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
     call DisplayTextID
 	SetEvent EVENT_BEAT_PROF_OAK_ONCE
 .done
@@ -59,9 +59,9 @@ OakBattle:
 	ld hl, OakBattleWinText
 	ld de, OakBattleLoseText
 	call SaveEndBattleTextPointers
-	ld hl, wd72d
-	set 6, [hl]
-	set 7, [hl]
+	ld hl, wStatusFlags3
+	set BIT_TALKED_TO_TRAINER, [hl]
+	set BIT_PRINT_END_BATTLE_TEXT, [hl]
 	ld a, OPP_PROF_OAK
 	ld [wCurOpponent], a
 

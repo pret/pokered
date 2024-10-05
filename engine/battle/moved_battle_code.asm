@@ -25,8 +25,8 @@ ReloadEnemyMonPicAfterStatusScreen::
 	jr c, LoadGhostSprite
 ; enemy mon is showing normally
 	ld a, [wEnemyMonSpecies]
-	ld [wcf91], a
-	ld [wd0b5], a
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
 	call GetMonHeader
 	ld de, vFrontPic
 	jp LoadMonFrontSprite
@@ -37,9 +37,9 @@ ReloadEnemyMonPicAfterStatusScreen::
 
 LoadGhostData::
 	ld a, MON_GHOST
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMonName
-	ld hl, wcd6d
+	ld hl, wNameBuffer
 	ld de, wEnemyMonNick  ; set name to "GHOST"
 	ld bc, NAME_LENGTH
 	rst _CopyData
@@ -52,14 +52,14 @@ LoadGhostSprite:
 	ld a, c
 	ld [hli], a   ; write front sprite pointer
 	ld [hl], b
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	push af
 	ld a, MON_GHOST
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	ld de, vFrontPic
 	call LoadMonFrontSprite ; load ghost sprite
 	pop af
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	ret
 
 CheckShouldLoadGhostSprite::

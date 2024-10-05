@@ -108,11 +108,11 @@ Group10:
 	db 19, MAGIKARP
 	db -1
 
-; goes through all the super rod encounters and sets bit 3 in wTownMapAreaTypeFlags if the pokemon in wd11e appears at all.
+; goes through all the super rod encounters and sets bit 3 in wTownMapAreaTypeFlags if the pokemon in wPokedexNum appears at all.
 CheckHasSuperRod:
 	ld hl, wTownMapAreaTypeFlags
 	push hl
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	ld c, a
 	ld hl, SuperRodEntries
 .loop
@@ -160,7 +160,7 @@ FindSuperRodLocations:
 	ld h, [hl]
 	ld l, a ; now hl points to the pokemon list for that map
 	push bc
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	ld c, a
 	call CheckSuperRodGroupForMon
 	jr nz, .addMapToList

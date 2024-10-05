@@ -14,8 +14,8 @@ SilphCo1F_Script:
 
 SilphCo1FOnMapLoad:
 	ld hl, wCurrentMapScriptFlags
-	bit 5, [hl]
-	res 5, [hl]
+	bit BIT_CUR_MAP_LOADED_1, [hl]
+	res BIT_CUR_MAP_LOADED_1, [hl]
 	ret z
 	ld a, [wXCoord]
 	cp 30
@@ -67,7 +67,7 @@ CheckForceTalkToEntranceRocket:
 	ld a, PLAYER_DIR_UP
 	ld [wPlayerMovingDirection], a
 	ld a, TEXT_SILPHCO1F_ROCKET1
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	; force talking to 
 	jp DisplayTextID
 
@@ -265,7 +265,7 @@ SaffronAbandonedBuildingHeliumPipe::
 	cp SPRITE_FACING_UP
 	ret nz
 	ld a, TEXT_SILPHCO1F_HELIUM_PIPE
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	CheckEvent EVENT_FLOATING_WEEZING_ANIMATION
 	ret z
@@ -310,7 +310,7 @@ SaffronAbandonedBuildingHeliumPipeText:
 .weezing
 	SetEvent EVENT_FLOATING_WEEZING_ANIMATION
 	ld a, FLOATING_WEEZING
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	callfar ChangePartyPokemonSpecies ; change weezing into floating weezing
 	ld hl, .weezingText
 	jr .printDone
@@ -334,8 +334,8 @@ SaffronAbandonedBuildingHeliumPipeText:
 	text_end
 
 CheckFloatingWeezingAnimation:
-	ld a, [wd730]
-	bit 7, a
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_MOVEMENT_STATE, a
 	ret nz ; wait for player to finish walking
 	CheckAndResetEvent EVENT_FLOATING_WEEZING_ANIMATION
 	ret z
@@ -371,7 +371,7 @@ CheckFloatingWeezingAnimation:
 	ld de, StopSFXSound
 	call PlayNewSoundChannel8
 	ld a, TEXT_WEEZING_STARTED_FLOATING
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	xor a
 	ld [wMuteAudioAndPauseMusic], a

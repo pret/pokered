@@ -19,8 +19,8 @@ FuchsiaCityDefaultScript:
 	ret z
 	ld a, $FF
 	ld [wJoyIgnore], a
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
 	ResetEventReuseHL EVENT_ERIK_LEAVING
 	xor a

@@ -82,9 +82,9 @@ CeladonMartRoofScript_GiveDrinkToGirl:
 	ld a, [hl]
 	ldh [hItemToRemoveID], a
 	push af
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetItemName
-	ld hl, wcd6d
+	ld hl, wNameBuffer
 	call CopyString
 	pop af
 	cp FRESH_WATER

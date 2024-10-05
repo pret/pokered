@@ -175,7 +175,7 @@ ConversionEffect_:
 	jr nc, .notTypeRemap
 	pop af
 	push af
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	push hl
 	push bc
 	call IsMonTypeRemapped
@@ -231,7 +231,7 @@ ConversionEffect_:
 	; check if mrmime is type remapped
 	push bc
 	ld a, MR_MIME
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	call IsMonTypeRemapped
 	pop bc
 	ld a, TWINEEDLE ; if it's PSYCHIC type only, use twineedle
@@ -278,10 +278,10 @@ ConversionEffect_:
 	pop af
 .gotReplacedMove
 	; replace the move and do the animation
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	ldh a, [hWhoseTurn]
 	and a
-	ld a, [wd11e]
+	ld a, [wNamedObjectIndex]
 	jr z, .doReplaceMovePlayer
 	ld hl, wEnemySelectedMove
 	ld [hl], a

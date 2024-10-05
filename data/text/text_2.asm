@@ -135,7 +135,7 @@ _GymStatueText1:: ; TODO: parameterize
 	text_start
 	line "#MON GYM"
 	cont "LEADER: @"
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text_start
 
 	para "WINNING <TRAINER>S:"
@@ -147,7 +147,7 @@ _GymStatueText2::
 	text_start
 	line "#MON GYM"
 	cont "LEADER: @"
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text_start
 
 	para "WINNING <TRAINER>S:"
@@ -777,7 +777,7 @@ _FoundHiddenItemText::
 _FoundHiddenItemMultiText::
 	text "<PLAYER> found"
 	line "@"
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text " ×@"
 	text_ram wTempStore1
 	text "!@"

@@ -37,7 +37,7 @@ SetAttackAnimPal:
 	push hl
 	push bc
 	push de
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	push af
 	
 	call GetSpecificAnimPalettes
@@ -73,7 +73,7 @@ SetAttackAnimPal:
 	dec e
 	ld a, b	
 	add NUM_POKEMON_INDEXES+2
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	push bc
 	farcall TransferMonPal
 	pop bc
@@ -81,7 +81,7 @@ SetAttackAnimPal:
 	jr nz, .transfer
 	
 	pop af
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	pop de
 	pop bc
 	pop hl
@@ -213,7 +213,7 @@ SetAttackAnimPal_resetPalettes:
 	ld b, 4
 .loop2
 	ldh a, [rLCDC]
-	and rLCDC_ENABLE_MASK
+	and 1 << rLCDC_ENABLE
 	jr z, .lcd_dis
 	;lcd in enabled otherwise
 .wait1

@@ -75,7 +75,7 @@ LightChannelerText:
 	pop af
 	ld hl, LightChannelerHaunterNo
 	jr c, .no
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	cp POWERED_HAUNTER
 	jr nz, .no
 	ld hl, TextScriptEndingText
@@ -98,7 +98,7 @@ LightChannelerText:
 	call Delay3
 	call GBFadeInFromWhite
 	ld a, GENGAR
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	call PlayCry
 	callfar ChangePartyPokemonSpecies
 	callfar CheckMonNickNameDefault

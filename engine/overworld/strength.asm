@@ -1,7 +1,7 @@
 ; PureRGBnote: ADDED: checks if we can use strength when pressing A on a boulder and asks the player whether to do so if it's possible
 CheckStrengthUsage::
-	ld a, [wd728]
-	bit 0, a
+	ld a, [wStatusFlags1]
+	bit BIT_STRENGTH_ACTIVE, a
 	jr nz, .boulderTextActive ; already using it
 	ld a, [wObtainedBadges]
 	bit BIT_RAINBOWBADGE, a
@@ -43,12 +43,12 @@ CheckStrengthUsage::
 	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes
 	ld a, [hl]
-	ld [wcf91], a
-	ld hl, wd728
-	set 0, [hl]
+	ld [wCurPartySpecies], a
+	ld hl, wStatusFlags1
+	set BIT_STRENGTH_ACTIVE, [hl]
 	ld hl, UsedStrengthText2
 	rst _PrintText
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	call PlayCry
 	call Delay3
 	ld hl, CanMoveBouldersText2

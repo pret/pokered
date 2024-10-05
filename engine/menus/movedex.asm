@@ -25,7 +25,7 @@ ShowMovedexMenu:
 	ld [wLastMenuItem], a
 	ld [wStoredMovedexListIndex], a
 	inc a
-	ld [wd11e], a
+	ld [wMovedexMoveID], a
 	ldh [hJoy7], a
 .setUpGraphics
 	ld b, SET_PAL_TOWN_MAP
@@ -161,7 +161,7 @@ HandleMovedexListMenu:
 	ld a, [wStoredMovedexListIndex]
 	inc a
 	ld [wStoredMovedexListIndex], a
-	ld [wd11e], a ; which move we're on
+	ld [wMovedexMoveID], a ; which move we're on
 	CheckFlag FLAG_MOVEDEX_SORTING_MODE
 	jr z, .dontConvertValue
 	call MoveConvertIndexToAlphabetical ; if alphabetical, need to convert the index to the move ID
@@ -171,7 +171,7 @@ HandleMovedexListMenu:
 	push hl
 	ld de, -SCREEN_WIDTH
 	add hl, de
-	ld de, wd11e
+	ld de, wMovedexMoveID
 	lb bc, LEADING_ZEROES | 1, 3
 	call PrintNumber ; print the move number
 	ld de, SCREEN_WIDTH
@@ -306,10 +306,10 @@ DrawMovedexSortPrompt:
 
 ; tests if a move's bit is set in the seen bit fields
 ; INPUT:
-; [wd11e] = move id
+; [wMovedexMoveID] = move id
 ; hl = address of bit field
 IsMoveBitSet:
-	ld a, [wd11e]
+	ld a, [wMovedexMoveID]
 	dec a
 	ld c, a
 	ld b, FLAG_TEST
@@ -325,7 +325,7 @@ ShowMoveData:
 	ld a, [wListScrollOffset]
 	add b
 	inc a
-	ld [wd11e], a
+	ld [wMovedexMoveID], a
 	ld [wStoredMovedexListIndex], a
 	CheckFlag FLAG_MOVEDEX_SORTING_MODE
 	jr z, .dontConvertValue
@@ -334,8 +334,8 @@ ShowMoveData:
 	ld hl, wMovedexSeen
 	call IsMoveBitSet
 	ret z
-	ld hl, wd72c
-	set 1, [hl]
+	ld hl, wStatusFlags2
+	set BIT_NO_AUDIO_FADE_OUT, [hl]
 	ld a, $33 ; 3/7 volume
 	ldh [rNR50], a
 	call ClearScreen
@@ -380,18 +380,18 @@ ShowMoveData:
 ; display the move data itself - if switching between moves with left/right, we don't need to reload the above stuff
 
 ShowNextMoveData:
-	ld a, [wd11e] ; move ID
+	ld a, [wMovedexMoveID] ; move ID
 	push af
 	call LoadMoveDexMoveData
 	ld a, [wPlayerMoveType]
 	ld d, a
 	call LoadTypeIcon
 	ld a, [wPlayerMoveType]
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	ld b, SET_PAL_MOVEDEX
 	call RunPaletteCommand
 	pop af
-	ld [wd11e], a
+	ld [wMovedexMoveID], a
 
 	hlcoord 1, 3
 	ld a, $C0 ; type icon first tile
@@ -437,7 +437,7 @@ ShowNextMoveData:
 	ld [hli], a
 	ld a, "<DOT>"
 	ld [hli], a
-	ld de, wd11e
+	ld de, wMovedexMoveID
 	lb bc, LEADING_ZEROES | 1, 3
 	call PrintNumber ; print move number
 
@@ -536,7 +536,7 @@ ShowNextMoveData:
 	ld [wMenuWatchedKeys], a
 
 	ld hl, MovedexEntryPointers
-	ld a, [wd11e]
+	ld a, [wMovedexMoveID]
 	dec a
 	ld e, a
 	ld d, 0
@@ -586,8 +586,8 @@ ShowNextMoveData:
 	call RunDefaultPaletteCommand
 	call LoadTextBoxTilePatterns
 	call GBPalNormal
-	ld hl, wd72c
-	res 1, [hl]
+	ld hl, wStatusFlags2
+	res BIT_NO_AUDIO_FADE_OUT, [hl]
 	ld a, $77 ; max volume
 	ldh [rNR50], a
 	ld a, 1 ; 1 = indicate we have shown the data page and need to reload more stuff to go back
@@ -624,10 +624,10 @@ ShowNextMoveData:
 	call ClearScreenArea
 	jp .printDescription
 
-; loads the move identified by wd11e's properties (power, accuracy, pp, type) into wram
+; loads the move identified by wMovedexMoveID's properties (power, accuracy, pp, type) into wram
 LoadMoveDexMoveData:
 	ld de, wPlayerMoveNum
-	ld a, [wd11e]
+	ld a, [wMovedexMoveID]
 	dec a
 	ld hl, Moves
 	ld bc, MOVE_LENGTH
@@ -756,13 +756,13 @@ SeekToNextMove:
 	ld de, wStoredMovedexListIndex
 	call SeekToNext
 	ld a, [de]
-	ld [wd11e], a
+	ld [wMovedexMoveID], a
 	CheckFlag FLAG_MOVEDEX_SORTING_MODE
 	ret z
 	jp MoveConvertIndexToAlphabetical
 
 SeekToNextMon:
-	ld de, wd11e
+	ld de, wPokedexNum
 SeekToNext:
 	ld a, [de] ; = move index
 	push de
@@ -809,13 +809,13 @@ SeekToPreviousMove:
 	ld de, wStoredMovedexListIndex
 	call SeekToPrevious
 	ld a, [de]
-	ld [wd11e], a
+	ld [wMovedexMoveID], a
 	CheckFlag FLAG_MOVEDEX_SORTING_MODE
 	ret z
 	jp MoveConvertIndexToAlphabetical
 
 SeekToPreviousMon:
-	ld de, wd11e
+	ld de, wPokedexNum
 SeekToPrevious:
 	ld a, [de] ; = move ID
 	push de
@@ -858,7 +858,7 @@ SeekToPrevious:
 	ret
 
 ChangeMonListPosition:
-	ld hl, wd11e
+	ld hl, wPokedexNum
 	jr ChangeListPosition
 ChangeMoveListPosition:
 	ld hl, wStoredMovedexListIndex
@@ -983,14 +983,14 @@ MoveConvertIndexToAlphabetical:
 	push af
 	push hl
 	push de
-	ld a, [wd11e] ; INDEX + 1
+	ld a, [wMovedexMoveID] ; INDEX + 1
 	dec a
 	ld hl, MovedexOrder
 	ld d, 0
 	ld e, a
 	add hl, de
 	ld a, [hl]
-	ld [wd11e], a
+	ld [wMovedexMoveID], a
 	pop de
 	pop hl
 	pop af

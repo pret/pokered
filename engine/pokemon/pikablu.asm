@@ -31,7 +31,7 @@ PikabluNicknameLoad::
 	cp PIKACHU
 	ret nz
 PikabluNicknameLoadQuick::
-	ld hl, wcd6d  ; set name to "PIKABLU"
+	ld hl, wNameBuffer  ; set name to "PIKABLU"
 	ld de, PikabluName
 	jp CopyName
 	

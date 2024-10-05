@@ -18,7 +18,7 @@ CheckLoadTmName:: ; loads a TM name when the cursor is on TMs
 	add NUM_TMS + NUM_HMS ; adjust HM IDs to come after TM IDs
 .skipAdding
 	inc a
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	predef TMToMove ; get move ID from TM/HM ID
 
 	hlcoord 4, 13
@@ -27,7 +27,7 @@ CheckLoadTmName:: ; loads a TM name when the cursor is on TMs
 	call UpdateSprites
 	ld a, [wNameListType] ; GetMoveName changes this value so we need to back it up
 	push af
-	ld a, [wd11e]
+	ld a, [wNamedObjectIndex]
 	ld [wMoveNum], a
 	call GetMoveName
 	pop af

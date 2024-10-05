@@ -131,13 +131,13 @@ _WigglytuffMoveMysticText::
 _MoveMysticMasterOfMoveText::
 	text "It's a master"
 	line "of @"
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text "!"
 	prompt
 
 _MoveMysticTalentOfMoveText::
 	text "@"
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text ""
 	line "is its talent!"
 	prompt
@@ -145,14 +145,14 @@ _MoveMysticTalentOfMoveText::
 _MoveMysticSoulCallsForMoveText::
 	text "Its soul calls"
 	line "for @"
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text "!"
 	prompt
 
 _MoveMysticLovesMoveText::
 	text "It loves to use"
 	line "@"
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text "!"
 	prompt
 

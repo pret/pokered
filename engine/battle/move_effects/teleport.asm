@@ -52,7 +52,7 @@ _TeleportEffect::
 .wildBattle
 	ld a, [wBattleMonLevel]
 	ld b, a
-	ld a, [wCurEnemyLVL]
+	ld a, [wCurEnemyLevel]
 	cp b
 	jr nc, .runAwaySuccessful
 	add b

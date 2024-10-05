@@ -86,7 +86,7 @@ TypeGuysHouseComputer::
 	cp SPRITE_FACING_UP
 	ret nz
 	ld a, TEXT_TYPE_GUYS_HOUSE_COMPUTER
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	jp DisplayTextID
 .text
 	text_asm

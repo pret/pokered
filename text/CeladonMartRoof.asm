@@ -7,7 +7,7 @@ _CeladonMartRoofLittleGirlYayText::
 	text "Yay!"
 
 	para "@"
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text "!"
 
 	para "Thank you!"

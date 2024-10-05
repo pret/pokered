@@ -114,7 +114,7 @@ _CannotFlyHereText::
 	prompt
 
 _CannotDigHereText::
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text " can't"
 	line "DIG here."
 	prompt

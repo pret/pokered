@@ -57,7 +57,7 @@ Load3FCheckCardKeyText:
 	CheckEvent EVENT_ALL_CARD_KEY_DOORS_OPENED
 	ret z
 	ld a, TEXT_SILPHCO3F_CARD_KEY_DONE
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	jp DisplayTextID
 
 SilphCo3Text5:

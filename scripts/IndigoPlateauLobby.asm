@@ -204,7 +204,7 @@ IndigoPlateauArenaAssistantText:
 	; walks into door and leaves
 	ld de, AssistantWalksUp
 	ld a, INDIGOPLATEAULOBBY_ARENA_ASSISTANT
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndex], a
 	call MoveSprite
 	xor a
 	ld [wJoyIgnore], a
@@ -227,8 +227,8 @@ CheckArenaAssistantWalking:
 	ret z
 	ld a, -1
 	ld [wJoyIgnore], a ; ignore all input until she is done walking
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
 	ResetEvent EVENT_ARENA_ASSISTANT_WALKING
 	xor a

@@ -84,8 +84,8 @@ CinnabarVolcanoWestLavaFlowText:
 	text_end
 
 CheckStartMagmarTransform:
-	ld a, [wd736]
-	bit 1, a
+	ld a, [wMovementFlags]
+	bit BIT_EXITING_DOOR, a
 	ret nz
 	CheckAndResetEvent EVENT_MAGMAR_TRANSFORMATION
 	ret z
@@ -132,7 +132,7 @@ CheckStartMagmarTransform:
 	dec b
 	jr nz, .loop
 	ld a, TEXT_CINNABAR_VOLCANO_WEST_PROXY_POKEMON
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	ld c, 60
 	rst _DelayFrames
@@ -149,7 +149,7 @@ CheckStartMagmarTransform:
 	rst _DelayFrames
 	call GBFadeInFromWhite
 	ld a, TEXT_CINNABAR_VOLCANO_MAGMAR_TRANSFORM2
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	ld de, MonsterSwimmingSprite
 	lb bc, BANK(MonsterSwimmingSprite), 4
@@ -157,7 +157,7 @@ CheckStartMagmarTransform:
 	xor a
 	ld [wMuteAudioAndPauseMusic], a
 	ld a, VOLCANIC_MAGMAR
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	callfar ChangePartyPokemonSpecies
 	ld c, 60
 	rst _DelayFrames

@@ -89,8 +89,8 @@ DragonairUnderWaterEventAreaScript:
 	ld [wMapPalOffset], a
 	jp LoadGBPal
 .defaultScript
-	ld a, [wd730] ; is the player moving?
-	bit 7, a
+	ld a, [wStatusFlags5] ; is the player moving?
+	bit BIT_SCRIPTED_MOVEMENT_STATE, a
 	ret nz
 	CheckEvent EVENT_DRAGONAIR_EVENT_BEAT_CLOYSTER
 	jr nz, .beatCloyster
@@ -104,7 +104,7 @@ DragonairUnderWaterEventAreaScript:
 	ld a, PLAYER_DIR_RIGHT
 	ld [wPlayerMovingDirection], a
 	ld a, TEXT_SEAFOAMISLANDS1F_CLOYSTER
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	jp DisplayTextID
 .beatCloyster
 	ld a, [wYCoord]
@@ -115,7 +115,7 @@ DragonairUnderWaterEventAreaScript:
 	ld [wWhichPokemon], a ; reload this, dragonair is guaranteed to be in first slot now
 	call GetPartyMonName2
 	ld a, TEXT_SEAFOAMISLANDS1F_ERIK
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 .warpOut
 	xor a
@@ -129,8 +129,8 @@ DragonairUnderWaterEventAreaScript:
 	ld [wDestinationWarpID], a
 	ld a, FUCHSIA_GOOD_ROD_HOUSE
 	ldh [hWarpDestinationMap], a
-	ld hl, wd72d
-	set 3, [hl] ; scripted warp flag
+	ld hl, wStatusFlags3
+	set BIT_WARP_FROM_CUR_SCRIPT, [hl] ; scripted warp flag
 	ret
 .afterBattleScript
 	ResetEvent EVENT_DRAGONAIR_EVENT_BATTLING_CLOYSTER
@@ -154,7 +154,7 @@ DragonairUnderWaterEventAreaScript:
 	jr .doAutoMovement
 .notCaught
 	ld a, TEXT_SEAFOAMISLANDS1F_CLOYSTER
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 .doAutoMovement
 	ld a, [wXCoord]
@@ -378,7 +378,7 @@ DragonairEventCloysterText:
 	ld a, 45
 	ld [wEngagedTrainerSet], a
 	ld a, SEAFOAMISLANDS1F_CLOYSTER
-	ldh [hSpriteIndexOrTextID], a ; makes cloyster stay on screen during battle transition
+	ldh [hSpriteIndex], a ; makes cloyster stay on screen during battle transition
 	call InitBattleEnemyParameters
 	SetEvent EVENT_DRAGONAIR_EVENT_BATTLING_CLOYSTER
 	rst TextScriptEnd
@@ -437,7 +437,7 @@ DragonairEventTransformText:
 	ld hl, .transformed
 	rst _PrintText
 	ld a, WINTER_DRAGONAIR
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	callfar ChangePartyPokemonSpecies
 	ld a, SFX_INTRO_WHOOSH
 	rst _PlaySound
@@ -457,7 +457,7 @@ DragonairEventTransformText:
 	; doesn't have ice beam, trigger learning
 	ld a, ICE_BEAM
 	ld [wMoveNum], a
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMoveName
 	call CopyToStringBuffer
 	call SaveScreenTilesToBuffer2

@@ -304,7 +304,7 @@ CallHome:
 	jr .done
 .dad
 	ld a, [wPlayerStarter]
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMonName
 	ld hl, CeladonMartCallDadText
 	rst _PrintText
@@ -442,7 +442,7 @@ CallOak:
 	ld a, MUSIC_MEET_PROF_OAK
 	call PlayMusic
 	ld a, [wPlayerStarter]
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMonName
 	ld hl, CeladonMartCallOakText
 	rst _PrintText

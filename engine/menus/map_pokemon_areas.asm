@@ -33,12 +33,12 @@ DEF STATE_SUPER_ROD_AREAS EQU 4
 GetAreaDisplayTypes:
 	callfar CheckHasGrassCaveWater
 	ld hl, wTownMapAreaTypeFlags
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	cp PIKACHU
 	call z, .turnOffSurfLocationsIfNotChampYet
 	CheckEvent FLAG_VOLCANO_AREA_TURNED_OFF
 	jr z, .doneChecks
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	push hl
 	ld hl, DisableVolcanoSurfingMons
 	ld de, 1
@@ -49,7 +49,7 @@ GetAreaDisplayTypes:
 	CheckBothEventsSet EVENT_GOT_FUCHSIA_FISHING_GURU_ITEM, EVENT_GOT_ROUTE12_FISHING_GURU_ITEM
 	ret nz
 	ld hl, wTownMapAreaTypeFlags
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	cp MAGIKARP
 	jr z, .hasOldRod
 	cp GOLDEEN

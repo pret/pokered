@@ -13,8 +13,8 @@ CeladonDinerCookText:
 ; PureRGBnote: ADDED: celadon diner sells drinks after giving a drink to the guards guarding saffron
 ; allows you to buy a bunch of drinks at once if you want.
 	text_asm
-	ld a, [wd728]
-	bit 6, a
+	ld a, [wStatusFlags1]
+	bit BIT_GAVE_SAFFRON_GUARDS_DRINK, a
 	jr nz, .noBreak
 	ld hl, CeladonDinerBreakText
 	rst _PrintText

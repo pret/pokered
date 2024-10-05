@@ -10,10 +10,10 @@ DisplayMultiChoiceMenu::
 	ldh [hAutoBGTransferEnabled], a ; disable auto-transfer
 	ld a, 1
 	ldh [hJoy7], a ; joypad state update flag
-	ld a, [wd730]
+	ld a, [wStatusFlags5]
 	push af
-	set 6, a ; turn off letter printing delay
-	ld [wd730], a
+	set BIT_NO_TEXT_DELAY, a ; turn off letter printing delay
+	ld [wStatusFlags5], a
 	hl_deref wListPointer ; hl = address of the list
 	ld a, [hli]
 	ld e, a
@@ -42,7 +42,7 @@ DoneDrawFunc:
 	xor a
 	ldh [hJoy7], a ; joypad state update flag
 	pop af
-	ld [wd730], a ; reset letter printing delay to what it was before calling this function
+	ld [wStatusFlags5], a ; reset letter printing delay to what it was before calling this function
 	ret
 
 ; multi-option menus can have 2-6 options, visually set up by the below functions
@@ -236,7 +236,7 @@ ChampArenaMusicSelectMenu::
 	xor a
 	ldh [hJoy7], a ; joypad state update flag
 	pop af
-	ld [wd730], a ; reset letter printing delay to what it was before calling this function
+	ld [wStatusFlags5], a ; reset letter printing delay to what it was before calling this function
 	ret
 
 MoveDexQuestion1::
@@ -419,7 +419,7 @@ ChampArenaMusicSelectBlue::
 	next "TITLE@"
 
 GetChampArenaMusicNameIntoWRAM:
-	ld a, [wd11e]
+	ld a, [wNamedObjectIndex]
 	and a
 	ld hl, ClassicText
 	jr z, .loadNameIntoWram
@@ -429,7 +429,7 @@ GetChampArenaMusicNameIntoWRAM:
 	dec a
 	call GetChampArenaMusicName
 .loadNameIntoWram
-	ld de, wcd6d
+	ld de, wNameBuffer
 .loop
 	ld a, [hli]
 	ld [de], a
@@ -438,7 +438,7 @@ GetChampArenaMusicNameIntoWRAM:
 	inc de
 	jr .loop
 .done
-	ld de, wcd6d
+	ld de, wNameBuffer
 	ret
 
 GetChampArenaMusicName:

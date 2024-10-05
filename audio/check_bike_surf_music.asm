@@ -13,8 +13,8 @@ CheckForBikeSurfMusic::
 	bit BIT_BIKE_MUSIC, a
 	jr z, .otherMusic ; jump if bike music is enabled
 	; else only play bike music if in cycling road
-	ld a, [wd732] ; forcibly riding bike (cycling road)
-	bit 5, a
+	ld a, [wStatusFlags6] ; forcibly riding bike (cycling road)
+	bit BIT_ALWAYS_ON_BIKE, a
 	jr z, .walking
 .otherMusic
 ;;;;;;;;;;

@@ -25,8 +25,8 @@ CheckForRodBike::
 
 ;.nofishing
 	;do nothing if forced to ride bike
-	ld a, [wd732]
-	bit 5, a
+	ld a, [wStatusFlags6]
+	bit BIT_ALWAYS_ON_BIKE, a
 	ret nz
 	; do nothing if surfing
 	ld a, [wWalkBikeSurfState]
@@ -66,9 +66,9 @@ PrepareText:
 
 	call UseBike
 	
-	;use $ff value loaded into hSpriteIndexOrTextID to make DisplayTextID display nothing and close any text
+	;use $ff value loaded into hTextID to make DisplayTextID display nothing and close any text
 	ld a, $FF
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	jp DisplayTextID
 
 SelectInVolcano:
@@ -145,8 +145,8 @@ DrillAnimation::
 UseBike:
 	;determine item to use
 	ld a, BICYCLE
-	ld [wcf91], a	;load item to be used
-	ld [wd11e], a	;load item so its name can be grabbed
+	ld [wCurItem], a	;load item to be used
+	ld [wNamedObjectIndex], a	;load item so its name can be grabbed
 	call GetItemName	;get the item name into de register
 	call CopyToStringBuffer ; copy name from de to wcf4b so it shows up in text
 	jp UseItem	;use the item

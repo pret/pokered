@@ -285,8 +285,8 @@ TruckCheck:
 	ld [wMissableObjectIndex], a
 	predef HideObject
 .skiphidingmew
-	ld a, [wd728]
-	bit 0, a ; using Strength?
+	ld a, [wStatusFlags1]
+	bit BIT_STRENGTH_ACTIVE, a ; using Strength?
 	jr z, NoTruckAction
 	; the position for moving the truck is 22,0
 	ld hl, wYCoord

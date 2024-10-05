@@ -80,8 +80,8 @@ DiamondMineCheckHandleHole:
 	ld [wDungeonWarpDestinationMap], a
 	ld hl, DiamondMineHoleCoords
 	call IsPlayerOnDungeonWarp
-	ld a, [wd72d]
-	bit 4, a
+	ld a, [wStatusFlags3]
+	bit BIT_ON_DUNGEON_WARP, a
 	ret nz
 	CheckEvent EVENT_DIAMOND_MINE_COMPLETED
 	ret z
@@ -278,10 +278,10 @@ DiamondMineCheckDigAnimation:
 DiamondMineCheckFinalStep:
 	CheckEvent EVENT_DIAMOND_MINE_FINAL_STEP
 	ret z
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
-	bit 7, a
+	bit BIT_SCRIPTED_MOVEMENT_STATE, a
 	ret nz
 	ResetEvent EVENT_DIAMOND_MINE_FINAL_STEP
 
@@ -293,7 +293,7 @@ DiamondMineCheckFinalStep:
   	call SetSpriteFacingDirection
 
 	ld a, TEXT_DIAMOND_MINE_COMPLETED
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	jp DisplayTextID
 
 DiamondMine_TextPointers:
@@ -386,7 +386,7 @@ DiamondMineProspectorText:
 	rst _PrintText
 	rst TextScriptEnd
 .notDone1
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	cp ONIX
 	jp nz, DiamondMineBoombox.printWrongMon
 	call GetPartyMonName2
@@ -396,7 +396,7 @@ DiamondMineProspectorText:
 	call PlayCry
 	call WaitForSoundToFinish
 	ld a, HARDENED_ONIX
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	callfar ChangePartyPokemonSpecies ; turn the onix into a hardened onix
 	call SaveScreenTilesToBuffer2
 	call GBFadeOutToWhite
@@ -446,13 +446,13 @@ DiamondMineProspectorText:
 	call DiamondMineShowPartyMenuSelection
 	ld hl, .okayThen
 	jr c, .done2
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	cp ONIX
 	jp nz, DiamondMineBoombox.printWrongMon
 	; onix was selected
 	call GetPartyMonName2
 	ld a, HARDENED_ONIX
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	callfar ChangePartyPokemonSpecies ; turn the onix into a hardened onix
 	call GBFadeOutToWhite
 	ld c, 60
@@ -523,8 +523,8 @@ DiamondMineProspectorText:
 	text_end
 
 DiamondMineLoadPlayerDirections:
-	ld hl, wd730
-	set 7, [hl]
+	ld hl, wStatusFlags5
+	set BIT_SCRIPTED_MOVEMENT_STATE, [hl]
 	ld hl, wSimulatedJoypadStatesEnd
 	ld a, [wXCoord]
 	cp 3

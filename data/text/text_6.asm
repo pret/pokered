@@ -94,7 +94,7 @@ _ApexChipPutOnPokeballText::
 	text "You installed the"
 	line "APEX CHIP on"
 	para "@"
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text "'s"
 	line "Poké Ball.@"
 	text_asm
@@ -111,7 +111,7 @@ _ApexChipPutOnPokeballText::
 	rst TextScriptEnd
 
 _ApexChipDVsMaxedText::
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text "'s"
 	line "potential is"
 	cont "maximized!"
@@ -123,7 +123,7 @@ _ApexChipAlreadyUsedText::
 	line "an APEX CHIP"
 	para "installed on"
 	line "@"
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text "'s"
 	cont "Poké Ball."
 	prompt

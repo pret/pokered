@@ -1,31 +1,31 @@
 ; PureRGBnote: ADDED: function that changed a pokemon in the party to a different pokemon. 
 ; Used with Armored Mewtwo, "Cursed" Haunter, and "Hardened" Onix
 ; input: 
-; [wcf91] = target pokemon species
+; [wCurPartySpecies] = target pokemon species
 ; [wWhichPokemon] = which party pokemon to change
 
 ChangePartyPokemonSpecies::
-	ld a, [wcf91]
-	ld [wd0b5], a
+	ld a, [wCurPartySpecies]
+	ld [wCurSpecies], a
 	call GetMonHeader
 	ld hl, wPartySpecies
 	ld a, [wWhichPokemon]
 	ld d, 0
 	ld e, a
 	add hl, de
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	ld [hl], a
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMon1Species
 	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes
 	push hl
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	ld [hl], a ; set the pokemon's species to the desired one
 	ld bc, wPartyMon1Level - wPartyMon1
 	add hl, bc
 	ld a, [hli]
-	ld [wCurEnemyLVL], a ; value needed for stat calculation
+	ld [wCurEnemyLevel], a ; value needed for stat calculation
 	ld d, h
 	ld e, l ; de now points to stats
 	ld bc, (wPartyMon1Exp + 2) - wPartyMon1Stats
@@ -58,10 +58,10 @@ ChangePartyPokemonSpecies::
 	ret
 
 ; PureRGBnote: ADDED: function that renames a pokemon if it has its default name only. Used for changing Gengar to "Cursed" Haunter and back again.
-; [wcf91] = target pokemon to change default name to
+; [wCurPartySpecies] = target pokemon to change default name to
 ; [wWhichPokemon] = which pokemon in party will potentially be changed
 CheckMonNickNameDefault::
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	cp POWERED_HAUNTER
 	ld d, GENGAR
 	jr z, .checkRename
@@ -76,9 +76,9 @@ CheckMonNickNameDefault::
 	jr .rename
 .checkRename
 	ld a, d
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMonName
-	ld de, wcd6d
+	ld de, wNameBuffer
 	call .getNick
 	push hl
 .loop
@@ -92,10 +92,10 @@ CheckMonNickNameDefault::
 	jr nz, .loop
 	; they're the same, so rename
 .rename
-	ld a, [wcf91]
-	ld [wd11e], a
+	ld a, [wCurPartySpecies]
+	ld [wNamedObjectIndex], a
 	call GetMonName
-	ld de, wcd6d
+	ld de, wNameBuffer
 	pop hl
 .loop2
 	ld a, [de]

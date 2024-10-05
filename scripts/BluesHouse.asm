@@ -30,7 +30,7 @@ BluesHouseDefaultScript:
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, 4
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	jp DisplayTextID	
 .clearWaiting
 	; if you go to leave the house, it'll stop her from waiting for you to sit down.

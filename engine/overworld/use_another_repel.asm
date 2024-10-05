@@ -25,8 +25,8 @@ UseAnotherRepel::
 	and a
 	ret nz
 	ld a, b
-	ld [wcf91], a	;load item to be used
-	ld [wd11e], a	;load item so its name can be grabbed
+	ld [wCurItem], a	;load item to be used
+	ld [wNamedObjectIndex], a	;load item so its name can be grabbed
 	predef GetIndexOfItemInBag
 	ld a, b
 	ld [wWhichPokemon], a ; load item index to be deleted when used

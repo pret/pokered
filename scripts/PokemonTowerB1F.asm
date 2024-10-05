@@ -107,7 +107,7 @@ PokemonTowerB1FOnMapLoad:
 	call DarkChannelerAppears
 	pop de
 	pop af
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	push de
 	call DisplayTextID
 	call PokemonTowerB1FDisappearGhost
@@ -146,7 +146,7 @@ PokemonTowerB1FOnMapLoad:
 	call PokemonTowerB1FDisappearGhost
 	pop af
 	ld a, TEXT_POKEMONTOWERB1F_THE_MAW_GRAVE
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	ld a, POKEMONTOWERB1F_GHOST_MAROWAK
 	lb de, -1, 0
@@ -244,8 +244,8 @@ PrepareScriptedCatacombsWarp:
 	ld [wDestinationWarpID], a
 	ld a, POKEMON_TOWER_B1F
 	ldh [hWarpDestinationMap], a
-	ld hl, wd72d
-	set 3, [hl] ; scripted warp
+	ld hl, wStatusFlags3
+	set BIT_WARP_FROM_CUR_SCRIPT, [hl] ; scripted warp
 	ret
 
 
@@ -327,7 +327,7 @@ PokemonTowerB1FDarkChannelerText:
 	pop af
 	ld hl, DarkChannelerGengarFalseAlarm
 	jr c, .printDone2
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	cp GENGAR
 	jr nz, .printDone2
 	ld hl, TextScriptEndingText
@@ -404,7 +404,7 @@ GengarTransformation:
 	ld [wMapPalOffset], a
 	call GBFadeInFromBlack
 	ld a, POWERED_HAUNTER
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	callfar ChangePartyPokemonSpecies
 	jpfar CheckMonNickNameDefault
 
@@ -610,7 +610,7 @@ PokemonTowerB1FFirstGrave::
 	CheckEvent EVENT_BEAT_TORCHED
 	ret nz
 	ld a, TEXT_POKEMONTOWERB1F_TORCHED_GRAVE
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	lb bc, SPIRIT_TORCHED, 71
 	; fall though
@@ -625,7 +625,7 @@ PokemonTowerB1FSecondGrave::
 	CheckEvent EVENT_BEAT_CHUNKY
 	ret nz
 	ld a, TEXT_POKEMONTOWERB1F_CHUNKY_GRAVE
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	lb bc, SPIRIT_CHUNKY, 72
 	jr StartCatacombsBattle
@@ -634,7 +634,7 @@ PokemonTowerB1FThirdGrave::
 	CheckEvent EVENT_BEAT_PAINLESS
 	ret nz
 	ld a, TEXT_POKEMONTOWERB1F_PAINLESS_GRAVE
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	lb bc, SPIRIT_PAINLESS, 73
 	jr StartCatacombsBattle
@@ -643,7 +643,7 @@ PokemonTowerB1FFourthGrave::
 	CheckEvent EVENT_BEAT_IRRADIATED
 	ret nz
 	ld a, TEXT_POKEMONTOWERB1F_IRRADIATED_GRAVE
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	lb bc, SPIRIT_IRRADIATED, 74
 	jr StartCatacombsBattle
@@ -820,7 +820,7 @@ PokemonTowerB1FCheckCatacombsIntroText:
 	ret nz
 	call UpdateSprites
 	ld a, TEXT_POKEMONTOWERB1F_CATACOMBS_INFO
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	jp DisplayTextID
 
 PokemonTowerB1FCatacombsIntroText:
@@ -954,10 +954,10 @@ PokemonTowerB1FHideGhost:
 PokemonTowerB1FWaitForNPCWalk:
 	CheckEvent EVENT_CATACOMBS_SPRITE_WALKING
 	jr z, .checkStartPlayerWalk
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
-	bit 7, a
+	bit BIT_SCRIPTED_MOVEMENT_STATE, a
 	ret nz
 	ld a, [wXCoord]
 	cp 5
@@ -975,7 +975,7 @@ PokemonTowerB1FWaitForNPCWalk:
 	ld a, UP
 	ld [wMapSpriteData + ((POKEMONTOWERB1F_CUBONE - 1) * 2)], a ; make cubone face up after walking always
 	ld a, TEXT_POKEMONTOWERB1F_THE_MAW_GRAVE
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	jp TheMawAnimation
 .secondWalk
@@ -991,7 +991,7 @@ PokemonTowerB1FWaitForNPCWalk:
 	ld a, PLAYER_DIR_LEFT
 	ld [wPlayerMovingDirection], a
 	ld a, TEXT_POKEMONTOWERB1F_CUBONE
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	ld a, D_RIGHT
 	ld hl, wSimulatedJoypadStatesEnd
@@ -1026,7 +1026,7 @@ PokemonTowerB1FWaitForNPCWalk:
 	ld [wJoyIgnore], a
 	ResetEvent EVENT_CATACOMBS_SPRITE_WALKING
 	ld a, TEXT_POKEMONTOWERB1F_GHOST_MAROWAK
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	ret
 
@@ -1166,20 +1166,20 @@ PokemonTowerB1FMarowakBlockedHyperBeamText:
 	ld hl, .joinedParty
 	rst _PrintText
 	; copy marowak nickname to wTrainerName to be used in battle
-	ld hl, wcd6d
+	ld hl, wNameBuffer
 	ld de, wTrainerName
 	ld bc, NAME_LENGTH
 	rst _CopyData
 	; change ghost marowak to cubone
 	ld a, CUBONE
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	callfar ChangePartyPokemonSpecies
 	; rename marowak to default CUBONE name (we'll ask nickname later)
 	callfar CheckMonNickNameDefault
 	; try to learn sonic boom immediately
 	ld a, SONICBOOM
 	ld [wMoveNum], a
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMoveName
 	call CopyToStringBuffer
 	call SaveScreenTilesToBuffer2
@@ -1281,8 +1281,8 @@ PokemonTowerB1FMarowakBlockedHyperBeamText:
 	; give a nickname to cubone?
 	call CheckIfGhostCuboneInParty
 	ld a, CUBONE
-	ld [wcf91], a
-	ld [wd11e], a
+	ld [wCurPartySpecies], a
+	ld [wNamedObjectIndex], a
 	ld a, NAME_MON_SCREEN
 	ld [wNamingScreenType], a
 	ld hl, wPartyMonNicks
@@ -1349,7 +1349,7 @@ TheMawAnimation:
 	call MoveSpriteInRelationToPlayer
 	call SpiritToggleImageIndex3Times
 	ld a, TEXT_POKEMONTOWERB1F_THE_MAW_HYPER_BEAM
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	call StopAllMusic
 	; hyper beam anim
@@ -1421,7 +1421,7 @@ TheMawAnimation:
 	ld [wAudioROMBank], a
 	; ghost marowak blocks it
 	ld a, TEXT_POKEMONTOWERB1F_GHOST_MAROWAK
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	ld c, 30
 	rst _DelayFrames

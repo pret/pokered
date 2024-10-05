@@ -101,21 +101,22 @@ WalletKidPostBattle:
 	cp $ff
 	jr z, ResetScripts
 GiveWallet:
+	; TODO: optimize
 	SetEvent EVENT_BEAT_WALLET_KID
-	ld a, 9
-	ldh [hSpriteIndexOrTextID], a
+	ld a, TEXT_MUSEUM2F_WALLET_KID_WALLET_GIVE
+	ldh [hTextID], a
 	call DisplayTextID
 	lb bc, LOST_WALLET, 1
 	call GiveItem
 	jr nc, .BagFull
-	ld a, 10
-	ldh [hSpriteIndexOrTextID], a
+	ld a, TEXT_MUSEUM2F_RECEIVED_LOST_WALLET
+	ldh [hTextID], a
 	call DisplayTextID
 	SetEvent EVENT_GOT_LOST_WALLET
 	jr ResetScripts
 .BagFull
-	ld a, 11
-	ldh [hSpriteIndexOrTextID], a
+	ld a, TEXT_MUSEUM2F_WALLET_KID_NO_ROOM
+	ldh [hTextID], a
 	call DisplayTextID
 	jr ResetScripts
 

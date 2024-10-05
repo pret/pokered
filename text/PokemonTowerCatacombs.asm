@@ -258,7 +258,7 @@ _CatacombsCuboneText::
 
 _CatacombsMarowakTouchedText::
 	text "@"
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text " seems"
 	line "really happy!"
 	done
@@ -267,7 +267,7 @@ _DarkChannelerReunionText::
 	text "What a touching"
 	line "reunion!"
 	para "But @"
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text ""
 	line "can't be laid to"
 	cont "rest yet!"
@@ -302,7 +302,7 @@ _PokemonTowerB1FTheMawUsedHyperBeamText::
 
 _PokemonTowerB1FMarowakBlockedHyperBeamText::
 	text "@"
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text " blocked"
 	line "the HYPER BEAM"
 	cont "from hitting"
@@ -310,7 +310,7 @@ _PokemonTowerB1FMarowakBlockedHyperBeamText::
 	para "But the beam was"
 	line "too powerful!"
 	para "@"
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text " can't"
 	line "maintain its"
 	cont "physical form"
@@ -319,7 +319,7 @@ _PokemonTowerB1FMarowakBlockedHyperBeamText::
 
 _PokemonTowerB1FMarowakBuffedCubone::
 	text "@"
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text "'s spirit"
 	line "cradled CUBONE,"
 	cont "and transferred"

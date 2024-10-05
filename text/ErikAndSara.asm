@@ -415,7 +415,7 @@ _SeafoamIslandsB4FDragonairEventStartText::
 	line "the plan!"
 	para "We'll dive down"
 	line "with @"
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text_start
 	cont "into the water"
 	cont "and see what"
@@ -490,7 +490,7 @@ _DragonairEventCloysterBeatenText::
 
 _DragonairEventTransformText::
 	text "@"
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text " went"
 	line "near the ice"
 	cont "crystals."
@@ -498,7 +498,7 @@ _DragonairEventTransformText::
 
 _DragonairEventTransformText2::
 	text "@"
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text " was"
 	line "filled with the"
 	cont "freezing power of"

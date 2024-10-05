@@ -37,18 +37,18 @@ SurfRestrictedMapsOnMoveDelete:
 	db -1
 
 CheckResetSurfStrengthFlags::
-	ld a, [wd728]
-	bit 0, a
+	ld a, [wStatusFlags1]
+	bit BIT_STRENGTH_ACTIVE, a
 	jr z, .onlyCheckSurf
 	ld hl, NoResetStrengthMaps
 	ld de, 1
 	ld a, [wCurMap]
 	call IsInArray
-	ld hl, wd728
+	ld hl, wStatusFlags1
 	jr c, .skipReset
-	res 0, [hl] ; reset strength bit
+	res BIT_STRENGTH_ACTIVE, [hl] ; reset strength bit
 .skipReset
-	bit 2, [hl]
+	bit BIT_AUTOSURF, [hl]
 	ret z
 .onlyCheckSurf
 	; if we load a map while surfing (like when loading a save), don't clear the autosurf bit (avoids softlocking on islands)
@@ -63,8 +63,8 @@ CheckResetSurfStrengthFlags::
 	; in some places like islands in maps with a lot of water, we avoid resetting the surf bit to prevent softlocks on loading the map
 	call CheckInSurfRestrictedArea
 	jr c, .skipReset2
-	ld hl, wd728
-	res 2, [hl] ; reset surf bit
+	ld hl, wStatusFlags1
+	res BIT_AUTOSURF, [hl] ; reset surf bit
 .skipReset2
 	cp a ; set z flag
 	ret

@@ -115,7 +115,7 @@ UndoBurnParStats:
 	ret
 
 ;shinpokerednote: ADDED: this function puts statexp per enemy pkmn level into de
-;requires a, b, de, and wCurEnemyLVL
+;requires a, b, de, and wCurEnemyLevel
 CalcEnemyStatEXP:
 	ld a, [wOptions3]	;load game options
 	bit BIT_NPC_STAT_EXP, a			; check stat exp bit
@@ -127,7 +127,7 @@ CalcEnemyStatEXP:
 	ldh [hMultiplicand + 1], a
 	xor a
 	ldh [hMultiplicand + 2], a
-	ld a, [wCurEnemyLVL]
+	ld a, [wCurEnemyLevel]
 	ldh [hMultiplier], a
 	call Multiply
 	ldh a, [hMultiplicand]

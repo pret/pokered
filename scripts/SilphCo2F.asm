@@ -84,7 +84,7 @@ SilphCo2F_UnlockedDoorEventScript:
 	jr nz, .unlock_door1
 	SetEventReuseHL EVENT_SILPH_CO_2_UNLOCKED_DOOR1
 	ld a, TEXT_SILPHCO2F_CARD_KEY_DONE
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	callfar CheckAllCardKeyEvents
 	jp Load2FCheckCardKeyText
 .unlock_door1
@@ -95,7 +95,7 @@ Load2FCheckCardKeyText:
 	CheckEvent EVENT_ALL_CARD_KEY_DOORS_OPENED
 	ret z
 	ld a, TEXT_SILPHCO2F_CARD_KEY_DONE
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	jp DisplayTextID
 
 SilphCo2Text6:

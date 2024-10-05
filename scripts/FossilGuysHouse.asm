@@ -384,7 +384,7 @@ MoveMysticCrystalBallText:
 	add hl, de
 	ld a, [hl] ; chosen mon
 	push af
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMonName
 	call CopyToStringBuffer
 	pop af
@@ -463,7 +463,7 @@ MoveMysticCrystalBallText:
 	ld a, e
 	ld [w2CharStringBuffer], a
 	ld a, d
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMoveName
 	call Random
 	and %11

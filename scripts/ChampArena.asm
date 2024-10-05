@@ -53,10 +53,10 @@ InitNewArenaCutscene:
 ChampArenaWaitForPlayerWalkToFinish:
 	CheckEvent EVENT_ARENA_PLAYER_WALKING
 	ret z
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
-	bit 7, a
+	bit BIT_SCRIPTED_MOVEMENT_STATE, a
 	ret nz
 	ResetEvent EVENT_ARENA_PLAYER_WALKING
 	call GBFadeOutToWhite
@@ -112,7 +112,7 @@ HideShowArenaSprites:
 ChampArenaStartIntroScript:
 	; start the battle text
 	ld a, TEXT_CHAMP_ARENA_INTRO
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 ChampArenaStartNewBattle:
 	SetEvent EVENT_ARENA_OPPONENT_WALKING
@@ -126,7 +126,7 @@ ChampArenaStartNewBattle:
 	; make opponent walk in
 	ld de, OpponentWalksUp
 	ld a, CHAMP_ARENA_CHALLENGER
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndex], a
 	call MoveSprite
 	jp OpenDoor
 
@@ -143,10 +143,10 @@ ChampArenaWaitForOpponentWalkToFinish:
 	CheckEvent EVENT_ARENA_OPPONENT_WALKING
 	ret z
 	call CheckOpponentOpenCloseDoor
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
-	bit 7, a
+	bit BIT_SCRIPTED_MOVEMENT_STATE, a
 	ret nz
 
 	ResetEvent EVENT_ARENA_OPPONENT_WALKING
@@ -163,7 +163,7 @@ ChampArenaWaitForOpponentWalkToFinish:
 	call CloseDoor
 	; they were leaving, ask the player if they want to continue battling
 	ld a, TEXT_CHAMP_ARENA_CONTINUE
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	ld a, [wCurrentMenuItem]
 	and a
@@ -211,7 +211,7 @@ ChampArenaWaitForOpponentWalkToFinish:
 .noTMKid
 	; start the battle text
 	ld a, TEXT_CHAMP_ARENA_START_BATTLE
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	; choose music?
 	; make opponent and player move to their positions?
@@ -249,7 +249,7 @@ ChampArenaCheckBattleComplete:
 	ld [wMapSpriteData + 6], a ; fourth sprite's movement 2 byte
 	; end battle text
 	ld a, TEXT_CHAMP_ARENA_END_BATTLE
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	ld a, [wChampArenaChallenger]
 	cp 11 ; gym guide
@@ -264,7 +264,7 @@ ChampArenaCheckBattleComplete:
 	SetEvent EVENT_ARENA_OPPONENT_WALKING
 	ld de, OpponentLeaves
 	ld a, CHAMP_ARENA_CHALLENGER
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndex], a
 	jp MoveSprite
 
 ChampArenaHideNPCs:
@@ -395,8 +395,8 @@ ChampArenaAssistantText:
 	rst _PrintText
 	SetEvent EVENT_ARENA_PLAYER_WALKING
 	; player walks away
-	ld hl, wd730
-	set 7, [hl]
+	ld hl, wStatusFlags5
+	set BIT_SCRIPTED_MOVEMENT_STATE, [hl]
 	ld hl, wSimulatedJoypadStatesEnd
 	ld a, [wXCoord]
 	ld de, PlayerCenterFieldDirectionsRight
@@ -716,8 +716,8 @@ ChampArenaStartBattleText:
 .letBattleCommence
 	ld hl, .battleCommence
 	rst _PrintText
-	ld a, 2
-	ldh [hSpriteIndexOrTextID], a ; makes the battle transition show the correct trainer when doing the battle transition animation
+	ld a, CHAMP_ARENA_CHALLENGER
+	ldh [hSpriteIndex], a ; makes the battle transition show the correct trainer when doing the battle transition animation
 	rst TextScriptEnd
 .chooseMusicFromFullList
 	pop hl
@@ -1256,9 +1256,9 @@ ChampArenaStoreInitBattleData:
 	ld a, b
 	ld [wTrainerNo], a
 	call SaveEndBattleTextPointers
-	ld hl, wd72d
-	set 6, [hl]
-	set 7, [hl]
+	ld hl, wStatusFlags3
+	set BIT_TALKED_TO_TRAINER, [hl]
+	set BIT_PRINT_END_BATTLE_TEXT, [hl]
 	ret
 
 ErikaDefeatedText:

@@ -69,7 +69,7 @@ BillsGardenScript0:
 	cp 5
 	ret z ; no overheard for mom/dad
 	ld a, TEXT_BILLS_GARDEN_OVERHEARD
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	jp DisplayTextID
 
 

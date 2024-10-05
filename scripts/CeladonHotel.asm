@@ -143,7 +143,7 @@ CeladonLaprasGuyLeaves:
 	jr nz, .losernotinway
 .loserinway
 	ld a, 4
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndex], a
 	call MoveSprite
 	ld a, 5
 	ld [wCeladonHotelCurScript], a
@@ -152,7 +152,7 @@ CeladonLaprasGuyLeaves:
 .losernotinway
 	; make the other guy stop moving
 	ld a, 4
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndex], a
 	call GetSpriteMovementByte1Pointer
 	ld [hl], STAY
 	; silph guy walks away according to where you are
@@ -163,7 +163,7 @@ CeladonLaprasGuyLeaves:
 	ld de, CeladonLaprasGuyMovement2
 .notLeftOfLaprasGuy
 	ld a, 5
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndex], a
 	call MoveSprite
 	ld a, 4
 	ld [wCeladonHotelCurScript], a
@@ -194,8 +194,8 @@ CeladonLaprasGuyMovement2:
 
 CeladonLaprasGuyGoesThroughDoor:
 	; leaves through the door with a sound
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
 	ld a, SFX_GO_OUTSIDE
 	rst _PlaySound
@@ -203,7 +203,7 @@ CeladonLaprasGuyGoesThroughDoor:
 	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, 4
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndex], a
 	call GetSpriteMovementByte1Pointer
 	ld [hl], WALK
 	call GetSpriteMovementByte2Pointer
@@ -215,8 +215,8 @@ CeladonLaprasGuyGoesThroughDoor:
 	ret	
 
 CeladonLaprasGuyWaitingForLoserToMove:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
 	ld a, 3
 	ld [wCeladonHotelCurScript], a

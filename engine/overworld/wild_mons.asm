@@ -38,7 +38,7 @@ FindWaterLocations:
 
 FindGrassCaveLocations:
 	ld b, 0
-; PureRGBnote: MOVED: creates a list at wBuffer of maps where the mon in [wd11e] can be found.
+; PureRGBnote: MOVED: creates a list at wBuffer of maps where the mon in [wPokedexNum] can be found.
 ; this is used by the pokedex to display locations the mon can be found on the map.
 ; input b = grass or water (0 = grass, 1 = water)
 ; now it will only find either grass or water locations into wBuffer, not both.
@@ -94,7 +94,7 @@ CheckMapForMon:
 	push bc
 	ld b, NUM_WILDMONS
 .loop
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	cp [hl]
 	jr z, .match
 	; no match, go to next entry
@@ -169,7 +169,7 @@ CheckMapForMonMatch:
 	inc hl
 	ld b, NUM_WILDMONS
 .loop
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	cp [hl]
 	jr nz, .nextEntry
 .seekloop

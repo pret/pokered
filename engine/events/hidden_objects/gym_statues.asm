@@ -75,9 +75,10 @@ GetStatueNames:
 	call GetAddressFromPointer
 	ld d, h
 	ld e, l
-	ld hl, wcd6d
+	ld hl, wNameBuffer
 	jp CopyString
 
+; TODO: user trainer names? GetTrainerName_
 StatueTextMap::
 	db PEWTER_GYM, 
 	dw PewterCityName, BrockName

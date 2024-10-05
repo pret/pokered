@@ -4,8 +4,8 @@ SSAnneKitchen_Script:
 	ret z
 	ld a, $FF
 	ld [wJoyIgnore], a
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
 	ld a, SSANNEKITCHEN_WAITER
 	call GetMapSpriteLocation
@@ -49,7 +49,7 @@ SSAnneKitchen_Script:
 	ld c, 60
 	rst _DelayFrames
 	ld a, TEXT_SSANNEKITCHEN_WAITER_RETURNS
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	jp DisplayTextID
 
 

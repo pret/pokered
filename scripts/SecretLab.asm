@@ -115,7 +115,7 @@ CheckOpponentWalkIn:
 	ld [wSprite01StateData2MapX], a
 	ld de, SoldierWalkInMovement
 	ld a, SECRETLAB_SOLDIER1
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndex], a
 	call MoveSprite
 	call .playEncounterMusic
 	jr .done
@@ -127,13 +127,13 @@ CheckOpponentWalkIn:
 	ld [wSprite02StateData2MapX], a
 	ld de, SoldierWalkInMovement
 	ld a, SECRETLAB_SOLDIER2
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndex], a
 	call MoveSprite
 	call .playEncounterMusic
 	jr .done
 .walkUpToChief
-	ld hl, wd730
-	set 7, [hl]
+	ld hl, wStatusFlags5
+	set BIT_SCRIPTED_MOVEMENT_STATE, [hl]
 	ld a, 3
 	ld [wSimulatedJoypadStatesIndex], a
 	ld a, D_UP
@@ -173,10 +173,10 @@ CheckOpponentWalkIn:
 	jp PlayMusic
 
 WaitForWalkFinish:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
-	bit 7, a
+	bit BIT_SCRIPTED_MOVEMENT_STATE, a
 	ret nz
 	ResetEvent EVENT_SECRET_LAB_NPC_WALK_IN_HAPPENING
 	xor a
@@ -184,7 +184,7 @@ WaitForWalkFinish:
 	CheckEvent EVENT_SECRET_LAB_NPC_WALK_OUT_HAPPENING
 	jr nz, .hideNPC
 	ld a, TEXT_SECRETLAB_ENGAGE_TRAINER
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	jp DisplayTextID
 .hideNPC
 	ld a, SFX_GO_OUTSIDE
@@ -224,10 +224,10 @@ CheckOpponentLeaves:
 	ld a, [wIsInBattle]
 	cp $FF
 	ret z
-	ld hl, wd72d
-	res 7, [hl]
-	ld hl, wFlags_0xcd60
-	res 0, [hl]
+	ld hl, wStatusFlags3
+	res BIT_PRINT_END_BATTLE_TEXT, [hl]
+	ld hl, wMiscFlags
+	res BIT_SEEN_BY_TRAINER, [hl]
 	CheckEvent EVENT_BEAT_SECRET_LAB_SOLDIER_0
 	ld a, SECRETLAB_SOLDIER1
 	jr z, .beatSoldier1
@@ -253,7 +253,7 @@ CheckOpponentLeaves:
 	ld hl, wCurrentMapScriptFlags
 	res 3, [hl] ; prevents fade in from happening later ; TODO: needs constant
 	ld a, TEXT_SECRETLAB_AFTER_BATTLE
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	; make them walk away
 	ld a, [wXCoord]
@@ -263,7 +263,7 @@ CheckOpponentLeaves:
 	ld de, SoldierLeaveMovementAlternative
 .walkAway
 	pop af
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndex], a
 	call MoveSprite
 	SetEvent EVENT_SECRET_LAB_NPC_WALK_OUT_HAPPENING
 	ret
@@ -434,8 +434,8 @@ CheckPasswordCorrect:
 	call StopAllMusic
 	ld a, SFX_SWITCH
 	rst _PlaySound
-	ld hl, wd730
-	set 7, [hl]
+	ld hl, wStatusFlags5
+	set BIT_SCRIPTED_MOVEMENT_STATE, [hl]
 	ld hl, PlayerMoveToDoor
 	ld de, wSimulatedJoypadStatesEnd
 	ld bc, 4
@@ -484,8 +484,8 @@ NotePassword:
 CheckWalkingToDoor:
 	CheckEvent EVENT_SECRET_LAB_WALKING_IN_FRONT_OF_DOOR
 	ret z
-	ld a, [wd730]
-	bit 7, a
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_MOVEMENT_STATE, a
 	ret nz
 	ResetEvent EVENT_SECRET_LAB_WALKING_IN_FRONT_OF_DOOR
 	ld a, PLAYER_DIR_UP
@@ -572,8 +572,8 @@ ToggleMachineDoorQuick:
 CheckMewtwoTransform:
 	CheckEvent EVENT_STARTED_MEWTWO_TRANSFORMATION
 	ret z
-	ld a, [wd730]
-	bit 7, a
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_MOVEMENT_STATE, a
 	ret nz
 	ResetEvent EVENT_STARTED_MEWTWO_TRANSFORMATION
 	ld a, PLAYER_DIR_UP
@@ -582,7 +582,7 @@ CheckMewtwoTransform:
 	xor a
 	ld [wJoyIgnore], a
 	ld a, TEXT_SECRETLAB_MEWTWO_TRANSFORMATION
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	jp DisplayTextID
 
 SecretLabFailedClones::
@@ -601,7 +601,7 @@ SecretLabCheckDisplayTextID:
 	cp SPRITE_FACING_UP
 	ret nz
 	ld a, b
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	jp DisplayTextID
 
 
@@ -645,8 +645,8 @@ SecretLab_EngageTrainerText:
 .startTrainer
 	ld [wSpriteIndex], a
 	call TalkToTrainer
-	ld hl, wFlags_D733
-	res 4, [hl] ; TODO: needs constant
+	ld hl, wStatusFlags7
+	res BIT_USE_CUR_MAP_SCRIPT, [hl]
 	; end text
 	SetEvent EVENT_SECRET_LAB_BATTLE_COMPLETED
 	rst TextScriptEnd
@@ -809,7 +809,7 @@ SecretLabMewtwoMachineText:
 	pop af
 	ld hl, SecretLabMewtwoForgetItText
 	jr c, .done
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	cp MEWTWO
 	jr z, .success
 	cp ARMORED_MEWTWO
@@ -824,8 +824,8 @@ SecretLabMewtwoMachineText:
 	rst _CopyData
 	ld a, 5
 	ld [wSimulatedJoypadStatesIndex], a
-	ld hl, wd730
-	set 7, [hl]
+	ld hl, wStatusFlags5
+	set BIT_SCRIPTED_MOVEMENT_STATE, [hl]
 	ld a, [wXCoord]
 	cp 7
 	jr nz, .startTransform
@@ -907,7 +907,7 @@ SecretLabMewtwoTransformation:
 	rst _PlaySound
 	ld hl, SecretLabMewtwoTransformText
 	rst _PrintText
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	cp MEWTWO
 	jr z, .resultArmoredMewtwo
 	cp ARMORED_MEWTWO
@@ -915,7 +915,7 @@ SecretLabMewtwoTransformation:
 	ret
 .resultArmoredMewtwo
 	ld a, ARMORED_MEWTWO
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	ld hl, SecretLabMewtwoTransformArmorText
 	rst _PrintText
 	call SecretLabMewtwoTransformRumble
@@ -934,7 +934,7 @@ SecretLabMewtwoTransformation:
 	jr .done
 .resultMewtwo
 	ld a, MEWTWO
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	ld hl, SecretLabMewtwoTransformNormalText
 	rst _PrintText
 	ld a, SFX_INTRO_RAISE
@@ -975,11 +975,11 @@ SecretLabMewtwoTransformation:
 	ld b, SET_PAL_GENERIC
 	call RunPaletteCommand
 	hlcoord 7, 4
-	ld a, [wcf91]
-	ld [wd0b5], a ; getmonheader input pokemon
+	ld a, [wCurPartySpecies]
+	ld [wCurSpecies], a ; getmonheader input pokemon
 	call GetMonHeader ; load pokemon picture location
 	call LoadFlippedFrontSpriteByMonIndex
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	jp PlayCry
 .done
 	ld c, 30

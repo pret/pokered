@@ -88,14 +88,14 @@ _SaffronAbandonedBuildingAlready::
 	done
 
 _SaffronAbandonedBuildingWeezing::
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text " inhaled"
 	line "the gas coming"
 	cont "from the pipe."
 	done
 
 _SaffronAbandonedBuildingWeezing2::
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text ""
 	line "was filled with"
 	cont "super-light"

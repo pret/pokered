@@ -70,7 +70,7 @@ CheckUnlockLab::
 	ld [wItemQuantity], a
 	call RemoveItemFromInventory
 	ld a, TEXT_POKEMONMANSIONB1F_TOP_SECRET_KEYHOLE
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	ld a, SFX_TELEPORT_ENTER_2
 	rst _PlaySound

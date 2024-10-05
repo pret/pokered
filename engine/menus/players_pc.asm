@@ -50,8 +50,8 @@ PlayerPCMenu:
 	ld [hli], a ; wListScrollOffset
 	ld [hl], a ; wMenuWatchMovingOutOfBounds
 	ld [wPlayerMonNumber], a
-	ld hl, wd730
-	set 6, [hl]
+	ld hl, wStatusFlags5
+	set BIT_NO_TEXT_DELAY, [hl]
 	ld hl, WhatDoYouWantText
 	rst _PrintText
 	call HandleMenuInput
@@ -99,14 +99,14 @@ PlayerPCDeposit:
 	ld a, [wNumBagItems]
 	and a
 	jr nz, .loop
-	ld hl, wd730
-	res 6, [hl]
+	ld hl, wStatusFlags5
+	res BIT_NO_TEXT_DELAY, [hl]
 	ld hl, NothingToDepositText
 	rst _PrintText
 	jp PlayerPCMenu
 .loop
-	ld hl, wd730
-	set 6, [hl]
+	ld hl, wStatusFlags5
+	set BIT_NO_TEXT_DELAY, [hl]
 	ld hl, WhatToDepositText
 	rst _PrintText
 	ld hl, wNumBagItems
@@ -163,14 +163,14 @@ PlayerPCWithdraw:
 	ld a, [wNumBoxItems]
 	and a
 	jr nz, .loop
-	ld hl, wd730
-	res 6, [hl]
+	ld hl, wStatusFlags5
+	res BIT_NO_TEXT_DELAY, [hl]
 	ld hl, NothingStoredText
 	rst _PrintText
 	jp PlayerPCMenu
 .loop
-	ld hl, wd730
-	set 6, [hl]
+	ld hl, wStatusFlags5
+	set BIT_NO_TEXT_DELAY, [hl]
 	ld hl, WhatToWithdrawText
 	rst _PrintText
 	ld hl, wNumBoxItems
@@ -227,14 +227,14 @@ PlayerPCToss:
 	ld a, [wNumBoxItems]
 	and a
 	jr nz, .loop
-	ld hl, wd730
-	res 6, [hl]
+	ld hl, wStatusFlags5
+	res BIT_NO_TEXT_DELAY, [hl]
 	ld hl, NothingStoredText
 	rst _PrintText
 	jp PlayerPCMenu
 .loop
-	ld hl, wd730
-	set 6, [hl]
+	ld hl, wStatusFlags5
+	set BIT_NO_TEXT_DELAY, [hl]
 	ld hl, WhatToTossText
 	rst _PrintText
 	ld hl, wNumBoxItems
@@ -288,8 +288,8 @@ CheckButtonStartPressed::
 	ld a, [wIsInBattle]
 	and a
 	jr nz, .dontDoAnything ; are we in the battle item list?
-	ld a, [wFlags_0xcd60]
-	bit 3, a ; are we in item list within PC menu?
+	ld a, [wMiscFlags]
+	bit BIT_USING_GENERIC_PC, a ; are we in item list within PC menu?
 	jr nz, .dontDoAnything
 	ld a, [wNewInGameFlags]
 	bit IN_POKEMART_MENU, a
@@ -326,7 +326,7 @@ RestoreItemListIndex:
 
 ; PureRGBnote: ADDED: dialog for depositing an item from the item menu. Press start on the item menu to trigger it.
 DepositItemFromItemMenu::
-	ld a, [wcf91]
+	ld a, [wCurItem]
 	cp S_S_TICKET
 	jr nz, .notSSTicket
 	; block depositing the SS ticket when past the vermilion guard
@@ -414,14 +414,14 @@ DepositItemFromItemMenu::
 
 WorldOptions:
 	call ClearScreen
-	ld hl, wd730
-	res 6, [hl] ; turn off instant text to display the options menu
+	ld hl, wStatusFlags5
+	res BIT_NO_TEXT_DELAY, [hl] ; turn off instant text to display the options menu
 	xor a
 	ld [wOptionsCancelCursorX], a
 	ld [wTopMenuItemY], a
 	callfar DisplayWorldOptions
-	ld hl, wd730
-	set 6, [hl] ; go back to instant text
+	ld hl, wStatusFlags5
+	set BIT_NO_TEXT_DELAY, [hl] ; go back to instant text
 	jp PlayerPCMenu
 
 

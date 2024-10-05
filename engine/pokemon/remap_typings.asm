@@ -27,7 +27,7 @@ db KABUTOPS, ROCK, WATER
 db -1
 
 ; input: de = address of original typings in wram to be remapped
-; wd0b5: which pokemon species to check
+; wCurSpecies: which pokemon species to check
 ; output: rewrites the typings in wram if necessary
 TryRemapTyping:
 	call IsMonTypeRemapped
@@ -40,7 +40,7 @@ TryRemapTyping:
 	ret
 
 ; input: d = type 1 e = type 2
-; wd0b5: which pokemon species to check
+; wCurSpecies: which pokemon species to check
 ; output: d = type 1 (may be remapped) e = type 2 (may be remapped)
 TryRemapTypingNoWramChange::
 	call IsMonTypeRemapped
@@ -60,7 +60,7 @@ IsMonTypeRemapped:
 	jr z, .noRemap
 	ld hl, OriginalTypings
 	ld de, 3
-	ld a, [wd0b5]
+	ld a, [wCurSpecies]
 	call IsInArray
 	jr nc, .noRemap
 	push hl
@@ -82,10 +82,10 @@ IsMonTypeRemapped:
 	ret
 	
 CountSetBitsPreserveWRAM::
-	ld a, [wd11e]
+	ld a, [wNumSetBits]
 	push af
 	call CountSetBits
 	pop af
-	ld [wd11e], a
+	ld [wNumSetBits], a
 	ld a, c
 	ret

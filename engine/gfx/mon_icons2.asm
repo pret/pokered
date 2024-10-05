@@ -63,9 +63,9 @@ LoadPartyMonSpriteIntoVRAM:
 	jp FarCopyData
 
 GetPartyMonSpriteID:
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	predef IndexToPokedex
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	; missingno is allowed here, 0 is a valid value
 	ld b, a
 	ld a, [wSpriteOptions2]
