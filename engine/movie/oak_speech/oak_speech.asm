@@ -88,7 +88,7 @@ ENDC
 	call ClearScreen
 	call LoadTextBoxTilePatterns
 	call PrepareOakSpeech
-	predef InitPlayerData2
+	predef InitPlayerData
 	call RunDefaultPaletteCommand	; shinpokerednote: gbcnote: reinitialize the default palette in case the pointers got cleared
 	ld hl, wNumBoxItems
 	ld a, ITEM_INITIAL_PC_ITEM

@@ -25,7 +25,7 @@ PredefPointers::
 	add_predef SubBCDPredef
 	add_predef DivideBCDPredef3
 	add_predef DivideBCDPredef4
-	add_predef InitPlayerData
+	add_predef CopyMenuSpritesVideoDataFar
 	add_predef FlagActionPredef
 	add_predef HideObject
 	add_predef IsObjectHidden
@@ -33,7 +33,7 @@ PredefPointers::
 	add_predef AnyPartyAlive
 	add_predef ShowObject
 	add_predef ReplaceTileBlock
-	add_predef InitPlayerData2 ; TODO: duplicate predef
+	add_predef InitPlayerData
 	add_predef LoadTilesetHeader
 	add_predef LearnMoveFromLevelUp
 	add_predef LearnMove
@@ -113,5 +113,4 @@ PredefPointers::
 	add_predef FarLoadTownMapEntry
 	add_predef SaveScreenTileAreaToBuffer3
 	add_predef LoadScreenTileAreaFromBuffer3
-	add_predef CopyMenuSpritesVideoDataFar
 	

@@ -14,11 +14,11 @@ Route2_Script:
 ; after using the "Tree Deleter" all but 1 of the cut trees will be removed
 Route2ReplaceCutTiles:
 	ld hl, wCurrentMapScriptFlags
-	bit 4, [hl] ; did we enter the map by traversal from another route
-	res 4, [hl]
+	bit BIT_CROSSED_MAP_CONNECTION, [hl] ; did we enter the map by traversal from another route
+	res BIT_CROSSED_MAP_CONNECTION, [hl]
 	jr nz, .removeAddCutTilesNoRedraw
-	bit 5, [hl] ; did we load the map from a save/warp/door/battle, etc?
-	res 5, [hl]
+	bit BIT_CUR_MAP_LOADED_1, [hl] ; did we load the map from a save/warp/door/battle, etc?
+	res BIT_CUR_MAP_LOADED_1, [hl]
 	jr nz, .removeAddCutTiles
 	ret
 .removeAddCutTiles

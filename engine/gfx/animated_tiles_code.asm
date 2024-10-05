@@ -88,7 +88,7 @@ AnimateTiles::
 	; for whatever reason if we have fast currents on map load it gets visually glitched out
 	; so we'll set it once the map loads in the script file
 	ld hl, wCurrentMapScriptFlags
-	bit 5, [hl]
+	bit BIT_CUR_MAP_LOADED_1, [hl]
 	jr nz, .skipQuickCurrent
 	call CheckAnimateSeafoamCurrents
 	ldh a, [hMovingBGTilesCounter1]

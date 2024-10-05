@@ -63,8 +63,8 @@ PlayEnhancedSecretLabMusic:
 
 ReplaceDoor:
 	ld hl, wCurrentMapScriptFlags
-	bit 5, [hl]
-	res 5, [hl]
+	bit BIT_CUR_MAP_LOADED_1, [hl]
+	res BIT_CUR_MAP_LOADED_1, [hl]
 	ret z
 	ResetEvent EVENT_OPENED_MACHINE_DOOR
 	CheckEvent EVENT_OPENED_SECRET_LAB_BARRICADE
@@ -251,7 +251,7 @@ CheckOpponentLeaves:
   	call UpdateSprites
 	call GBFadeInFromWhite ; have to fade in here after the battle
 	ld hl, wCurrentMapScriptFlags
-	res 3, [hl] ; prevents fade in from happening later ; TODO: needs constant
+	res BIT_MAP_LOADED_AFTER_BATTLE, [hl] ; prevents fade in from happening later
 	ld a, TEXT_SECRETLAB_AFTER_BATTLE
 	ldh [hTextID], a
 	call DisplayTextID

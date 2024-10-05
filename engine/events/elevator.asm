@@ -50,7 +50,7 @@ DisplayElevatorFloorMenu:
 	ld [wElevatorTravelDistance], a
 	pop bc
 	ld hl, wCurrentMapScriptFlags
-	set 7, [hl]
+	set BIT_CUR_MAP_USED_ELEVATOR, [hl]
 ;;;;;;;;;;
 	ld hl, wWarpEntries
 	call .UpdateWarp ; update first warp

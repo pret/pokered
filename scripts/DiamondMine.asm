@@ -32,7 +32,7 @@ DiamondMineJiggleBoomBox::
 
 DiamondMineCheckWalkOutOfHole:
 	ld a, [wCurrentMapScriptFlags]
-	bit 5, a
+	bit BIT_CUR_MAP_LOADED_1, a
 	ret z
 DiamondMineReplaceHole:
 	; replace hole block and move prospector sprite if necessary
@@ -73,8 +73,8 @@ DiamondMineLeaveHoleCoords:
 
 DiamondMineCheckHandleHole:
 	ld hl, wCurrentMapScriptFlags
-	bit 5, [hl]
-	res 5, [hl]
+	bit BIT_CUR_MAP_LOADED_1, [hl]
+	res BIT_CUR_MAP_LOADED_1, [hl]
 	ret nz
 	ld a, DIAMOND_MINE
 	ld [wDungeonWarpDestinationMap], a

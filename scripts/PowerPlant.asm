@@ -18,8 +18,8 @@ PowerPlant_Script:
 
 PowerPlantOnMapLoad:
 	ld hl, wCurrentMapScriptFlags
-	bit 5, [hl]
-	res 5, [hl]
+	bit BIT_CUR_MAP_LOADED_1, [hl]
+	res BIT_CUR_MAP_LOADED_1, [hl]
 	ret z
 	CheckEvent EVENT_BEAT_ZAPDOS
 	jr nz, .noPowerOutage
@@ -726,7 +726,7 @@ MagnetonSuperchargeAnimation:
 
 PowerPlantCheckPowersBack:
 	ld hl, wCurrentMapScriptFlags
-	bit 5, [hl]
+	bit BIT_CUR_MAP_LOADED_1, [hl]
 	ret nz
 	CheckEvent EVENT_SAW_POWER_BACK_TEXT
 	ret nz

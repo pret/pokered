@@ -18,8 +18,8 @@ CheckAutoHideDigletts:
 
 DiglettsCaveCheckStandingOnWarp:
 	ld hl, wCurrentMapScriptFlags
-	bit 5, [hl]
-	res 5, [hl]
+	bit BIT_CUR_MAP_LOADED_1, [hl]
+	res BIT_CUR_MAP_LOADED_1, [hl]
 	jr z, .checkStandingOnWarp
 	call .standingOnBottomWarp
 	jr nz, .loadDigletts
@@ -124,7 +124,7 @@ IsPlayerNearDigletts:
 
 ProximityDigletts2::
 	ld hl, wCurrentMapScriptFlags
-	bit 5, [hl]
+	bit BIT_CUR_MAP_LOADED_1, [hl]
 	ret nz
 	ld a, [wSpriteOptions2]
 	bit BIT_MENU_ICON_SPRITES, a

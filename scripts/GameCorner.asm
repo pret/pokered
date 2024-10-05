@@ -33,8 +33,8 @@ GameCornerSetRocketHideoutDoorTile:
 	lb bc, 2, 8
 	predef ReplaceTileBlock
 	ld hl, wCurrentMapScriptFlags
-	bit 3, [hl]
-	res 3, [hl]
+	bit BIT_MAP_LOADED_AFTER_BATTLE, [hl]
+	res BIT_MAP_LOADED_AFTER_BATTLE, [hl]
 	ret z
 	jp GBFadeInFromWhite ; PureRGBnote: ADDED: since trainer instantly talks to us after battle we need to fade back in here
 

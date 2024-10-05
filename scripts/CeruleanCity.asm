@@ -8,11 +8,11 @@ CeruleanCity_Script:
 ; PureRGBnote: ADDED: function that will remove the cut tree if we deleted it with the tree deleter
 CeruleanCityReplaceCutTile:
 	ld hl, wCurrentMapScriptFlags
-	bit 4, [hl]
-	res 4, [hl]
+	bit BIT_CROSSED_MAP_CONNECTION, [hl]
+	res BIT_CROSSED_MAP_CONNECTION, [hl]
 	jr nz, .replaceTileNoRedraw
-	bit 5, [hl]
-	res 5, [hl]
+	bit BIT_CUR_MAP_LOADED_1, [hl]
+	res BIT_CUR_MAP_LOADED_1, [hl]
 	jr nz, .replaceTile
 	ret
 .replaceTile
@@ -50,7 +50,7 @@ CeruleanCity_ScriptPointers:
 
 CeruleanCityRocketDefeatedScript:
 	ld hl, wCurrentMapScriptFlags
-	res 3, [hl]
+	res BIT_MAP_LOADED_AFTER_BATTLE, [hl]
 	call GBFadeInFromWhite ; PureRGBnote: ADDED: since trainer instantly talks to us after battle we need to fade back in here
 	ld a, [wIsInBattle]
 	cp $ff
@@ -191,7 +191,7 @@ CeruleanCityRivalBattleScript:
 
 CeruleanCityRivalDefeatedScript:
 	ld hl, wCurrentMapScriptFlags
-	res 3, [hl]
+	res BIT_MAP_LOADED_AFTER_BATTLE, [hl]
 	call GBFadeInFromWhite ; PureRGBnote: ADDED: since trainer instantly talks to us after battle we need to fade back in here
 	ld a, [wIsInBattle]
 	cp $ff

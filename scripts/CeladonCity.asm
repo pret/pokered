@@ -5,8 +5,8 @@ CeladonCity_Script:
 ; PureRGBnote: ADDED: code that keeps the cut tree cut down if we're in its alcove. Prevents getting softlocked if you delete cut.
 CeladonCityCheckHideCutTree:
 	ld hl, wCurrentMapScriptFlags
-	bit 5, [hl] ; did we load the map from a save/warp/door/battle, etc?
-	res 5, [hl]
+	bit BIT_CUR_MAP_LOADED_1, [hl] ; did we load the map from a save/warp/door/battle, etc?
+	res BIT_CUR_MAP_LOADED_1, [hl]
 	ret z ; map wasn't just loaded
 	ld de, CeladonCutAlcove1
 	callfar FarArePlayerCoordsInRange

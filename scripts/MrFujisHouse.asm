@@ -14,8 +14,8 @@ MrFujisHouse_TextPointers:
 ;;;;;;;;;; PureRGBnote: MOVED: moved this hiding routine here because it looks weird that mr fuji gets hidden before we warp to his house
 CheckHideMrFujiInPokemonTower:
 	ld hl, wCurrentMapScriptFlags
-	bit 5, [hl]
-	res 5, [hl]
+	bit BIT_CUR_MAP_LOADED_1, [hl]
+	res BIT_CUR_MAP_LOADED_1, [hl]
 	ret z
 	CheckEvent EVENT_RESCUED_MR_FUJI
 	ret z

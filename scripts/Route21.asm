@@ -10,11 +10,11 @@ Route21_Script:
 
 CheckRemoveVolcano:
 	ld hl, wCurrentMapScriptFlags
-	bit 4, [hl]
-	res 4, [hl]
+	bit BIT_CROSSED_MAP_CONNECTION, [hl]
+	res BIT_CROSSED_MAP_CONNECTION, [hl]
 	jr nz, .replaceTiles
-	bit 5, [hl]
-	res 5, [hl]
+	bit BIT_CUR_MAP_LOADED_1, [hl]
+	res BIT_CUR_MAP_LOADED_1, [hl]
 	jr nz, .checkRemoveLavaSuit
 	ret
 .checkRemoveLavaSuit

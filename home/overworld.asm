@@ -624,7 +624,7 @@ CheckMapConnections::
 	jr nz, .didNotEnterConnectedMap
 .loadNewMap ; load the connected map that was entered
 	ld hl, wCurrentMapScriptFlags
-	set 4, [hl] ; PureRGBnote: ADDED: flag to indicate we crossed between maps by walking in the overworld
+	set BIT_CROSSED_MAP_CONNECTION, [hl] ; PureRGBnote: ADDED: flag to indicate we crossed between maps by walking in the overworld
 	call LoadMapHeader
 	call PlayDefaultMusicFadeOutCurrent
 	ld b, SET_PAL_OVERWORLD
@@ -1923,8 +1923,8 @@ RunMapScript::
 ;;;;;;;;;; PureRGBnote: ADDED: code that will fade back in after battle in specific maps with a bit in their header
 ;;;;;;;;;; used to keep tileblock replacements unseen
 	ld hl, wCurrentMapScriptFlags
-	bit 3, [hl]
-	res 3, [hl]
+	bit BIT_MAP_LOADED_AFTER_BATTLE, [hl]
+	res BIT_MAP_LOADED_AFTER_BATTLE, [hl]
 	ret z
 	ld a, [wCurMapConnections]
 	bit BIT_DEFER_SHOWING_MAP, a

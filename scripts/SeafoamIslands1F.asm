@@ -4,7 +4,7 @@ SeafoamIslands1F_Script:
 	cp 32
 	jp nc, DragonairUnderWaterEventAreaScript
 	ld hl, wCurrentMapScriptFlags
-	res 5, [hl]
+	res BIT_CUR_MAP_LOADED_1, [hl]
 	SetEvent EVENT_IN_SEAFOAM_ISLANDS
 	ld hl, wMiscFlags
 	bit BIT_PUSHED_BOULDER, [hl]
@@ -60,8 +60,8 @@ SeafoamIslands1F_TextPointers:
 
 DragonairUnderWaterEventAreaScript:
 	ld hl, wCurrentMapScriptFlags
-	bit 5, [hl]
-	res 5, [hl]
+	bit BIT_CUR_MAP_LOADED_1, [hl]
+	res BIT_CUR_MAP_LOADED_1, [hl]
 	jr z, .defaultScript
 	bit 3, [hl]
 	res 3, [hl]

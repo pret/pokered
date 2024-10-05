@@ -248,7 +248,7 @@ SilphCo11FGiovanniAfterBattleScript:
 	call UpdateSprites
 	call SilphCo11FGateCallbackScript
 	ld hl, wCurrentMapScriptFlags
-	res 3, [hl]
+	res BIT_MAP_LOADED_AFTER_BATTLE, [hl]
 	call GBFadeInFromWhite ; PureRGBnote: ADDED: since trainer instantly talks to us after battle we need to fade back in here
 	callfar PlayGiovanniMusic
 	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN

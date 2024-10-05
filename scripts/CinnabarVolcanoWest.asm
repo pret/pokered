@@ -1,6 +1,6 @@
 CinnabarVolcanoWest_Script:
 	ld hl, wCurrentMapScriptFlags
-	res 5, [hl]
+	res BIT_CUR_MAP_LOADED_1, [hl]
 	call CheckStartMagmarTransform
 	callfar CheckForceSurfDirection
 	jp EnableAutoTextBoxDrawing

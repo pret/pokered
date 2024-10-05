@@ -20,8 +20,8 @@ PokemonTowerB1F_TextPointers:
 
 PokemonTowerB1FOnMapLoad:
 	ld hl, wCurrentMapScriptFlags
-	bit 5, [hl]
-	res 5, [hl]
+	bit BIT_CUR_MAP_LOADED_1, [hl]
+	res BIT_CUR_MAP_LOADED_1, [hl]
 	ret z
 	ld a, [wYCoord]
 	cp 18
@@ -61,8 +61,8 @@ PokemonTowerB1FOnMapLoad:
 	call LoadGBPal
 	pop hl
 	; hl = wCurrentMapScriptFlags
-	bit 3, [hl]
-	res 3, [hl]
+	bit BIT_MAP_LOADED_AFTER_BATTLE, [hl]
+	res BIT_MAP_LOADED_AFTER_BATTLE, [hl]
 	ret z
 	; BELOW: code that only runs when you return from a battle in the catacombs
 	ld a, [wIsInBattle]

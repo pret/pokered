@@ -1,7 +1,7 @@
 CinnabarVolcano_Script:
 	ld hl, wCurrentMapScriptFlags
-	bit 5, [hl]
-	res 5, [hl]
+	bit BIT_CUR_MAP_LOADED_1, [hl]
+	res BIT_CUR_MAP_LOADED_1, [hl]
 	call nz, CinnabarVolcanoOnMapLoad
 	call CheckForceTalkToProspector
 	call CheckHoleDrillFinish
@@ -1743,8 +1743,8 @@ SlideSpriteUpOrDownCommon:
 
 CheckIfVolcanoBattleOccurred:
 	ld hl, wCurrentMapScriptFlags
-	bit 3, [hl]
-	res 3, [hl]
+	bit BIT_MAP_LOADED_AFTER_BATTLE, [hl]
+	res BIT_MAP_LOADED_AFTER_BATTLE, [hl]
 	ret z
 	ld a, [wIsInBattle]
 	cp -1 ; lost battle

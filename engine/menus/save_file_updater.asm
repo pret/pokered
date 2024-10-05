@@ -511,7 +511,7 @@ UpdateNewHideShowFlagsBasedOnGameProgression:
 	call SaveFileUpdaterHideObjectEntry
 .dontHideRocketHouseGuy
 	ld a, [wStatusFlags4]
-	bit BIT_GOT_LAPRAS, a ; got lapras in silph co
+	bit BIT_GOT_SILPH_CO_LAPRAS_OR_ITEM, a
 	jr z, .dontHideCeladonLaprasGuy
 	ld a, HS_LAPRAS_GUY_CELADON
 	call SaveFileUpdaterHideObjectEntry

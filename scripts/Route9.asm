@@ -11,11 +11,11 @@ Route9_Script:
 ; PureRGBnote: ADDED: function that will remove the cut tree if we deleted it with the tree deleter
 Route9ReplaceCutTile:
 	ld hl, wCurrentMapScriptFlags
-	bit 4, [hl]
-	res 4, [hl]
+	bit BIT_CROSSED_MAP_CONNECTION, [hl]
+	res BIT_CROSSED_MAP_CONNECTION, [hl]
 	jr nz, .replaceTileNoRedraw
-	bit 5, [hl]
-	res 5, [hl]
+	bit BIT_CUR_MAP_LOADED_1, [hl]
+	res BIT_CUR_MAP_LOADED_1, [hl]
 	jr nz, .replaceTile
 	ret
 .replaceTile

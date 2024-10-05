@@ -13,8 +13,8 @@ Route12_Script:
 ; PureRGBnote: ADDED: code that keeps the cut tree cut down if we're in its alcove. Prevents getting softlocked if you delete cut.
 Route12CheckHideCutTree:
 	ld hl, wCurrentMapScriptFlags
-	bit 5, [hl] ; did we load the map from a save/warp/door/battle, etc?
-	res 5, [hl]
+	bit BIT_CUR_MAP_LOADED_1, [hl] ; did we load the map from a save/warp/door/battle, etc?
+	res BIT_CUR_MAP_LOADED_1, [hl]
 	ret z ; map wasn't just loaded
 	ld de, Route12CutAlcove1
 	callfar FarArePlayerCoordsInRange
@@ -109,7 +109,7 @@ Route12SnorlaxPostBattleScript:
 	cp $ff
 	jp z, Route12ResetScripts
 	ld hl, wCurrentMapScriptFlags
-	res 3, [hl] ; indicates we loaded the map after battle, since we went to a script need to reset here to prevent a double fade
+	res BIT_MAP_LOADED_AFTER_BATTLE, [hl] ; indicates we loaded the map after battle, since we went to a script need to reset here to prevent a double fade
 	ld a, [wBattleFunctionalFlags]
 	bit 1, a ; ran from battle
 	jr nz, .goBackToSleep

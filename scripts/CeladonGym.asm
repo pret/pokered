@@ -11,8 +11,8 @@ CeladonGym_Script:
 ; PureRGBnote: ADDED: code that keeps the cut trees cut down if we're in their alcove. Prevents getting softlocked if you delete cut.
 CeladonGymCheckHideCutTrees:
 	ld hl, wCurrentMapScriptFlags
-	bit 5, [hl] ; did we load the map from a save/warp/door/battle, etc?
-	res 5, [hl]
+	bit BIT_CUR_MAP_LOADED_1, [hl] ; did we load the map from a save/warp/door/battle, etc?
+	res BIT_CUR_MAP_LOADED_1, [hl]
 	ret z
 	ld de, CeladonGymCutAlcove
 	callfar FarArePlayerCoordsInRange
@@ -65,7 +65,7 @@ CeladonGym_ScriptPointers:
 
 CeladonGymErikaPostBattleScript:
 	ld hl, wCurrentMapScriptFlags
-	res 3, [hl]
+	res BIT_MAP_LOADED_AFTER_BATTLE, [hl]
 	call GBFadeInFromWhite ; PureRGBnote: ADDED: since trainer instantly talks to us after battle we need to fade back in here
 	ld a, [wIsInBattle]
 	cp $ff

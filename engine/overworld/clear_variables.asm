@@ -23,7 +23,7 @@ ClearVariablesOnEnterMap::
 	call FillMemory
 ;;;;;;;;;; PureRGBnote: ADDED: code that helps track which of the new music tracks is playing if any are
 	ld a, [wCurrentMapScriptFlags]
-	bit 3, a
+	bit BIT_MAP_LOADED_AFTER_BATTLE, a
 	jr nz, .clear
 	ld a, [wCurMapConnections]
 	bit BIT_EXTRA_MUSIC_MAP, a ; bit that indicates the map has extra music

@@ -44,8 +44,8 @@ SilphCo7FGateCallbackScript::
 	predef ReplaceTileBlock
 .maybeFadeIn
 	ld hl, wCurrentMapScriptFlags
-	bit 3, [hl]
-	res 3, [hl]
+	bit BIT_MAP_LOADED_AFTER_BATTLE, [hl]
+	res BIT_MAP_LOADED_AFTER_BATTLE, [hl]
 	ret z
 	jp GBFadeInFromWhite ; PureRGBnote: ADDED: since trainer instantly talks to us after battle we need to fade back in here
 
@@ -319,7 +319,7 @@ SilphCo7FSilphWorkerM1Text:
 	CheckEventHL EVENT_GOT_LAPRAS_EARLY
 	jr nz, .gotLaprasAlready
 	ld a, [wStatusFlags4]
-	bit BIT_GOT_LAPRAS, a ; got lapras?
+	bit BIT_GOT_SILPH_CO_LAPRAS_OR_ITEM, a ; got lapras?
 	jr z, .give_lapras
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .savedsilph
@@ -340,7 +340,7 @@ SilphCo7FSilphWorkerM1Text:
 	ld hl, .LaprasDescriptionText
 	rst _PrintText
 	ld hl, wStatusFlags4
-	set BIT_GOT_LAPRAS, [hl]
+	set BIT_GOT_SILPH_CO_LAPRAS_OR_ITEM, [hl]
 	jr .done
 .savedsilph
 	ld hl, .SavedText
@@ -351,7 +351,7 @@ SilphCo7FSilphWorkerM1Text:
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .savedsilph
 	ld a, [wStatusFlags4]
-	bit BIT_GOT_LAPRAS, a ; got his item already?
+	bit BIT_GOT_SILPH_CO_LAPRAS_OR_ITEM, a ; got his item already?
 	jr nz, .noItemToGive
 	ld hl, .LaprasGuyAlreadyText
 	rst _PrintText
@@ -364,7 +364,7 @@ SilphCo7FSilphWorkerM1Text:
 	ld hl, .LaprasGuyGoodLuckText
 	rst _PrintText
 	ld hl, wStatusFlags4
-	set BIT_GOT_LAPRAS, [hl]
+	set BIT_GOT_SILPH_CO_LAPRAS_OR_ITEM, [hl]
 	jr .done
 .noRoom
 	ld hl, .LaprasGuyNoBagRoomText

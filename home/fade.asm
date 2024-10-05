@@ -31,7 +31,7 @@ LoadGBPal::
 ;;;;;;;;;;
 .checkFirstLoad
 	ld hl, wCurrentMapScriptFlags
-	bit 5, [hl]
+	bit BIT_CUR_MAP_LOADED_1, [hl]
 	ret nz
 	jr .notFirstLoad
 

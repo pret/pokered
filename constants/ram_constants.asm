@@ -25,7 +25,9 @@ DEF BIT_TEXT_PREDEF EQU 0
 DEF BIT_FONT_LOADED EQU 0
 
 ; wCurrentMapScriptFlags
-	const_def 5
+	const_def 3
+	const BIT_MAP_LOADED_AFTER_BATTLE ; 3
+	const BIT_CROSSED_MAP_CONNECTION ; 4
 	const BIT_CUR_MAP_LOADED_1 ; 5
 	const BIT_CUR_MAP_LOADED_2 ; 6
 	const BIT_CUR_MAP_USED_ELEVATOR ; 7
@@ -98,14 +100,14 @@ DEF NUM_BADGES EQU const_value
 
 ; wStatusFlags4
 	const_def
-	const BIT_GOT_LAPRAS              ; 0 ; TODO: rename to indicate it can also give an item
-	const BIT_UNKNOWN_4_1             ; 1
-	const BIT_USED_POKECENTER         ; 2
-	const BIT_GOT_STARTER             ; 3
-	const BIT_NO_BATTLES              ; 4
-	const BIT_BATTLE_OVER_OR_BLACKOUT ; 5
-	const BIT_LINK_CONNECTED          ; 6
-	const BIT_INIT_SCRIPTED_MOVEMENT  ; 7
+	const BIT_GOT_SILPH_CO_LAPRAS_OR_ITEM  ; 0
+	const BIT_UNKNOWN_4_1                  ; 1
+	const BIT_USED_POKECENTER              ; 2
+	const BIT_GOT_STARTER                  ; 3
+	const BIT_NO_BATTLES                   ; 4
+	const BIT_BATTLE_OVER_OR_BLACKOUT      ; 5
+	const BIT_LINK_CONNECTED               ; 6
+	const BIT_INIT_SCRIPTED_MOVEMENT       ; 7
 
 ; wStatusFlags5
 	const_def

@@ -1,7 +1,7 @@
 CeruleanCaveB1F_Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, wCurrentMapScriptFlags
-	res 5, [hl]
+	res BIT_CUR_MAP_LOADED_1, [hl]
 	ld a, [wCeruleanCaveB1FCurScript]
 	ld hl, CeruleanCaveB1F_ScriptPointers
 	jp CallFunctionInTable
