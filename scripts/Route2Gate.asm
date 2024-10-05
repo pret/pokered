@@ -14,9 +14,9 @@ Route2GateOaksAideText:
 	ldh [hOaksAideRequirement], a
 	ld a, HM_FLASH
 	ldh [hOaksAideRewardItem], a
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetItemName
-	ld hl, wcd6d
+	ld hl, wNameBuffer
 	ld de, wOaksAideRewardItemName
 	ld bc, ITEM_NAME_LENGTH
 	rst _CopyData

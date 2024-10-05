@@ -26,7 +26,7 @@ _CardKeyDoneText::
 	done
 
 _TrainerNameText::
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text ": @"
 	text_end
 

@@ -120,8 +120,8 @@ GainExperience:
 	ld b, 0
 	ld hl, wPartySpecies
 	add hl, bc
-	ld a, [hl] ; species
-	ld [wd0b5], a
+	ld a, [hl]
+	ld [wCurSpecies], a
 	call GetMonHeader
 	ld d, MAX_LEVEL
 	callfar CalcExperience ; get max exp
@@ -182,17 +182,17 @@ GainExperience:
 	pop hl
 .noExpBar2
 ;;;;;;;;;;
-	ld a, [wCurEnemyLVL]
+	ld a, [wCurEnemyLevel]
 	push af
 	push hl
 	ld a, d
-	ld [wCurEnemyLVL], a
+	ld [wCurEnemyLevel], a
 	ld [hl], a
 	ld bc, wPartyMon1Species - wPartyMon1Level
 	add hl, bc
-	ld a, [hl] ; species
-	ld [wd0b5], a
-	ld [wd11e], a
+	ld a, [hl]
+	ld [wCurSpecies], a
+	ld [wPokedexNum], a
 	call GetMonHeader
 	ld bc, (wPartyMon1MaxHP + 1) - wPartyMon1Species
 	add hl, bc
@@ -246,7 +246,7 @@ GainExperience:
 	rst _CopyData
 	pop hl
 	ld a, [wPlayerBattleStatus3]
-	bit 3, a ; is the mon transformed?
+	bit TRANSFORMED, a
 	jr nz, .recalcStatChanges
 ; the mon is not transformed, so update the unmodified stats
 	ld de, wPlayerMonUnmodifiedLevel
@@ -279,18 +279,18 @@ GainExperience:
 	call LoadScreenTilesFromBuffer1
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a
-	ld a, [wd0b5]
-	ld [wd11e], a
+	ld a, [wCurSpecies]
+	ld [wPokedexNum], a
 ;;;;;;;;;;;;;;;;;;;;
 ;shinpokerednote: FIXED: fixing skip move-learn glitch: here is where moves are learned from level-up
-	ld a, [wCurEnemyLVL]	; load the level to advance to into a. this starts out as the final level.
+	ld a, [wCurEnemyLevel]	; load the level to advance to into a. this starts out as the final level.
 	ld c, a	; load the final level to grow to over to c
 	ld a, [wTempLevelStore]	; load the current level into a
 	ld b, a	; load the current level over to b
 .inc_level	; marker for looping back 
 	inc b	;increment 	the current level
 	ld a, b	;put the current level in a
-	ld [wCurEnemyLVL], a	;and reset the level to advance to as merely 1 higher
+	ld [wCurEnemyLevel], a	;and reset the level to advance to as merely 1 higher
 	push bc	;save b & c on the stack as they hold the current a true final level
 	predef LearnMoveFromLevelUp
 	pop bc	;get the current and final level values back from the stack
@@ -305,7 +305,7 @@ GainExperience:
 	predef FlagActionPredef
 	pop hl
 	pop af
-	ld [wCurEnemyLVL], a
+	ld [wCurEnemyLevel], a
 
 .nextMon
 	ld a, [wPartyCount]
@@ -350,7 +350,7 @@ DivideExpDataByNumMonsGainingExp:
 	jr nz, .countSetBitsLoop
 	cp $2
 	ret c ; return if only one mon is gaining exp
-	ld [wd11e], a ; store number of mons gaining exp
+	ld [wTempByteValue], a ; store number of mons gaining exp
 	ld hl, wEnemyMonBaseStats
 	ld c, wEnemyMonBaseExp + 1 - wEnemyMonBaseStats
 .divideLoop
@@ -358,7 +358,7 @@ DivideExpDataByNumMonsGainingExp:
 	ldh [hDividend], a
 	ld a, [hl]
 	ldh [hDividend + 1], a
-	ld a, [wd11e]
+	ld a, [wTempByteValue]
 	ldh [hDivisor], a
 	ld b, $2
 	call Divide ; divide value by number of mons gaining exp

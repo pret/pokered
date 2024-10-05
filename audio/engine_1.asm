@@ -16,9 +16,9 @@ Audio1_UpdateMusic::
 	ld a, [wMuteAudioAndPauseMusic]
 	and a
 	jr z, .applyAffects
-	bit 7, a
+	bit BIT_MUTE_AUDIO, a
 	jr nz, .nextChannel
-	set 7, a
+	set BIT_MUTE_AUDIO, a
 	ld [wMuteAudioAndPauseMusic], a
 	xor a ; disable all channels' output
 	ldh [rNR51], a
@@ -196,7 +196,7 @@ Audio1_sound_ret:
 	ld [wDisableChannelOutputWhenSfxEnds], a
 	jr .disableChannelOutput
 .returnFromCall
-	res 1, [hl]
+	res BIT_SOUND_CALL, [hl]
 	ld d, $0
 	ld a, c
 	add a
@@ -371,8 +371,8 @@ Audio1_toggle_perfect_pitch:
 	ld hl, wChannelFlags1
 	add hl, bc
 	ld a, [hl]
-	xor $1
-	ld [hl], a ; flip bit 0 of wChannelFlags1
+	xor 1 << BIT_PERFECT_PITCH
+	ld [hl], a
 	jp Audio1_sound_ret
 
 Audio1_vibrato:

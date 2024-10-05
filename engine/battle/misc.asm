@@ -8,16 +8,16 @@ FormatMovesString:
 	and a ; end of move list?
 	jr z, .printDashLoop ; print dashes when no moves are left
 	push hl
-	ld [wd0b5], a
+	ld [wNameListIndex], a
 	ld a, BANK(MoveNames)
 	ld [wPredefBank], a
 	ld a, MOVE_NAME
 	ld [wNameListType], a
 	call GetName
-	ld hl, wcd6d
+	ld hl, wNameBuffer
 .copyNameLoop
 	ld a, [hli]
-	cp $50
+	cp "@"
 	jr z, .doneCopyingName
 	ld [de], a
 	inc de
@@ -26,7 +26,7 @@ FormatMovesString:
 	ld a, b
 	ld [wNumMovesMinusOne], a
 	inc b
-	ld a, $4e ; line break
+	ld a, "<NEXT>"
 	ld [de], a
 	inc de
 	pop hl
@@ -42,7 +42,7 @@ FormatMovesString:
 	ld a, b
 	cp NUM_MOVES
 	jr z, .done
-	ld a, $4e ; line break
+	ld a, "<NEXT>"
 	ld [de], a
 	inc de
 	jr .printDashLoop
@@ -105,5 +105,5 @@ GetMonSpecies:
 	ld d, 0
 	add hl, de
 	ld a, [hl]
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	ret

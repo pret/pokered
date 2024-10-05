@@ -181,7 +181,7 @@ DrainHPEffect:
 FreezeBurnParalyzeEffect:
 	xor a
 	ld [wAnimationType], a
-	call CheckTargetSubstitute ; test bit 4 of d063/d068 flags [target has substitute flag]
+	call CheckTargetSubstitute
 	ret nz ; return if they have a substitute, can't effect them
 	ldh a, [hWhoseTurn]
 	and a
@@ -1519,7 +1519,7 @@ MimicEffect:
 	add hl, bc
 	ld a, d
 	ld [hl], a
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	push af
 	call GetMoveName
 	call PlayCurrentMoveAnimation
@@ -1587,7 +1587,7 @@ DisableEffect:
 	ld a, b ; load the player or enemy's previously used move
 	and a 
 	jr z, .doRandomSelection ; if this value is 0, they haven't selected a move yet or are unable to act, so randomly select a move instead
-	ld [wd11e], a ; store move ID 
+	ld [wNamedObjectIndex], a ; store move ID 
 	ld c, 0
 .findPreviousMoveIndex
 	ld a, [hli]
@@ -1606,7 +1606,7 @@ DisableEffect:
 	pop hl
 	and a
 	jr z, .pickMoveToDisable ; loop until a non-00 move slot is found
-	ld [wd11e], a ; store move number	
+	ld [wNamedObjectIndex], a ; store move number
 	push hl
 	ldh a, [hWhoseTurn]
 	and a
@@ -1655,7 +1655,7 @@ DisableEffect:
 	jr nz, .printDisableText
 	inc hl ; wEnemyDisabledMoveNumber
 .printDisableText
-	ld a, [wd11e] ; move number
+	ld a, [wNamedObjectIndex] ; move number
 	ld [hl], a
 	call GetMoveName
 	ld hl, MoveWasDisabledText

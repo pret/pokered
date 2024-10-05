@@ -27,10 +27,11 @@ HallOfFameResetEventsAndSaveScript:
 	predef HallOfFamePC
 	pop af
 	ld [wLetterPrintingDelayFlags], a
-	ld hl, wFlags_D733
-	res 1, [hl]
+	ld hl, wStatusFlags7
+	res BIT_NO_MAP_MUSIC, [hl]
+	assert wStatusFlags7 + 1 == wElite4Flags
 	inc hl
-	set BIT_TEST_BATTLE, [hl] ; debug, unused?
+	set BIT_UNUSED_BEAT_ELITE_4, [hl] ; debug, unused?
 	xor a ; SCRIPT_*_DEFAULT
 	ld hl, wLoreleisRoomCurScript
 	ld [hli], a ; wLoreleisRoomCurScript
@@ -90,7 +91,7 @@ HallOfFameOakCongratulationsScript:
 	inc a ; PLAYER_DIR_RIGHT
 	ld [wPlayerMovingDirection], a
 	ld a, TEXT_HALLOFFAME_OAK
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a

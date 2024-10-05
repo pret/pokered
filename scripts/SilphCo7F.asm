@@ -12,8 +12,8 @@ SilphCo7F_Script:
 
 SilphCo7FGateCallbackScript::
 	ld hl, wCurrentMapScriptFlags
-	bit 5, [hl]
-	res 5, [hl]
+	bit BIT_CUR_MAP_LOADED_1, [hl]
+	res BIT_CUR_MAP_LOADED_1, [hl]
 	ret z
 	ld hl, .GateCoordinates
 	call SilphCo7F_SetCardKeyDoorYScript
@@ -116,7 +116,7 @@ Load7FCheckCardKeyText:
 	CheckEvent EVENT_ALL_CARD_KEY_DOORS_OPENED
 	ret z
 	ld a, TEXT_SILPHCO7F_CARD_KEY_DONE
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	jp DisplayTextID
 
 SilphCo7Text16:
@@ -161,7 +161,7 @@ SilphCo7FDefaultScript:
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
 	ld a, TEXT_SILPHCO7F_RIVAL
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	ld a, SILPHCO7F_RIVAL
 	ldh [hSpriteIndex], a
@@ -192,8 +192,8 @@ SilphCo7FDefaultScript:
 	db -1 ; end
 
 SilphCo7FRivalStartBattleScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
 	; reset rival's sprite behaviour bytes otherwise he can look around weirdly after battle for a moment
 	ld hl, wMapSpriteData + ((SILPHCO7F_RIVAL - 1) * 2)
@@ -201,12 +201,12 @@ SilphCo7FRivalStartBattleScript:
 	xor a
 	ld [wJoyIgnore], a
 	ld a, TEXT_SILPHCO7F_RIVAL_WAITED_HERE
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	call Delay3
-	ld hl, wd72d
-	set 6, [hl]
-	set 7, [hl]
+	ld hl, wStatusFlags3
+	set BIT_TALKED_TO_TRAINER, [hl]
+	set BIT_PRINT_END_BATTLE_TEXT, [hl]
 	ld hl, SilphCo7FRivalDefeatedText
 	ld de, SilphCo7FRivalVictoryText
 	call SaveEndBattleTextPointers
@@ -234,7 +234,7 @@ SilphCo7FRivalAfterBattleScript:
 	ldh [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, TEXT_SILPHCO7F_RIVAL_GOOD_LUCK_TO_YOU
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
@@ -268,8 +268,8 @@ SilphCo7FRivalAfterBattleScript:
 	db -1 ; end
 
 SilphCo7FRivalExitScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
 	ld a, HS_SILPH_CO_7F_RIVAL
 	ld [wMissableObjectIndex], a
@@ -318,8 +318,8 @@ SilphCo7FSilphWorkerM1Text:
 	predef HideObject
 	CheckEventHL EVENT_GOT_LAPRAS_EARLY
 	jr nz, .gotLaprasAlready
-	ld a, [wd72e]
-	bit 0, a ; got lapras?
+	ld a, [wStatusFlags4]
+	bit BIT_GOT_LAPRAS, a ; got lapras?
 	jr z, .give_lapras
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .savedsilph
@@ -339,8 +339,8 @@ SilphCo7FSilphWorkerM1Text:
 	call EnableAutoTextBoxDrawing
 	ld hl, .LaprasDescriptionText
 	rst _PrintText
-	ld hl, wd72e
-	set 0, [hl]
+	ld hl, wStatusFlags4
+	set BIT_GOT_LAPRAS, [hl]
 	jr .done
 .savedsilph
 	ld hl, .SavedText
@@ -350,8 +350,8 @@ SilphCo7FSilphWorkerM1Text:
 .gotLaprasAlready
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .savedsilph
-	ld a, [wd72e]
-	bit 0, a ; got his item already?
+	ld a, [wStatusFlags4]
+	bit BIT_GOT_LAPRAS, a ; got his item already?
 	jr nz, .noItemToGive
 	ld hl, .LaprasGuyAlreadyText
 	rst _PrintText
@@ -363,8 +363,8 @@ SilphCo7FSilphWorkerM1Text:
 	rst _PrintText
 	ld hl, .LaprasGuyGoodLuckText
 	rst _PrintText
-	ld hl, wd72e
-	set 0, [hl]
+	ld hl, wStatusFlags4
+	set BIT_GOT_LAPRAS, [hl]
 	jr .done
 .noRoom
 	ld hl, .LaprasGuyNoBagRoomText

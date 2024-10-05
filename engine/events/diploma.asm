@@ -6,8 +6,8 @@ DisplayDiploma::
 	call ClearScreen
 	xor a
 	ld [wUpdateSpritesEnabled], a
-	ld hl, wd730
-	set 6, [hl]
+	ld hl, wStatusFlags5
+	set BIT_NO_TEXT_DELAY, [hl]
 	call DisableLCD
 	rst _DelayFrame	; shinpokerednote: FIXED: the overworld sprite wobble fix makes the player sprites hidden unless a delay is added
 	ld hl, CircleTile
@@ -67,8 +67,8 @@ DisplayDiploma::
 	ldh [rOBP0], a
 	call UpdateGBCPal_OBP0 ; shinpokerednote: gbcnote: gbc color code from pokemon yellow
 	call WaitForTextScrollButtonPress
-	ld hl, wd730
-	res 6, [hl]
+	ld hl, wStatusFlags5
+	res BIT_NO_TEXT_DELAY, [hl]
 	call GBPalWhiteOutWithDelay3
 	call RestoreScreenTilesAndReloadTilePatterns
 	call Delay3

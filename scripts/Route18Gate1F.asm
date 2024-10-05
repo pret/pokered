@@ -1,6 +1,6 @@
 Route18Gate1F_Script:
-	ld hl, wd732
-	res 5, [hl]
+	ld hl, wStatusFlags6
+	res BIT_ALWAYS_ON_BIKE, [hl]
 	call EnableAutoTextBoxDrawing
 	ld a, [wRoute18Gate1FCurScript]
 	ld hl, Route18Gate1F_ScriptPointers
@@ -20,7 +20,7 @@ Route18Gate1FDefaultScript:
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, TEXT_ROUTE18GATE1F_GUARD_EXCUSE_ME
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	xor a
 	ldh [hJoyHeld], a
@@ -60,7 +60,7 @@ Route18Gate1FPlayerMovingUpScript:
 
 Route18Gate1FGuardScript:
 	ld a, TEXT_ROUTE18GATE1F_GUARD
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
@@ -77,8 +77,8 @@ Route18Gate1FPlayerMovingRightScript:
 	ret nz
 	xor a
 	ld [wJoyIgnore], a
-	ld hl, wd730
-	res 7, [hl]
+	ld hl, wStatusFlags5
+	res BIT_SCRIPTED_MOVEMENT_STATE, [hl]
 	ld a, SCRIPT_ROUTE18GATE1F_DEFAULT
 	ld [wRoute18Gate1FCurScript], a
 	ret

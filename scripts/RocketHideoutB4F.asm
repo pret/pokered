@@ -34,8 +34,8 @@ PlayDefaultMusicIfMusicBitSet:
 
 RocketHideoutB4FDoorCallbackScript:
 	ld hl, wCurrentMapScriptFlags
-	bit 5, [hl]
-	res 5, [hl]
+	bit BIT_CUR_MAP_LOADED_1, [hl]
+	res BIT_CUR_MAP_LOADED_1, [hl]
 	ret z
 	CheckEvent EVENT_ROCKET_HIDEOUT_4_DOOR_UNLOCKED
 	jr nz, .door_already_unlocked
@@ -83,7 +83,7 @@ RocketHideoutB4FBeatGiovanniScript:
 	ld [wJoyIgnore], a
 	SetEvent EVENT_BEAT_ROCKET_HIDEOUT_GIOVANNI
 	ld a, TEXT_ROCKETHIDEOUTB4F_GIOVANNI_HOPE_WE_MEET_AGAIN
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	call GBFadeOutToBlack
 	ld a, HS_ROCKET_HIDEOUT_B4F_GIOVANNI
@@ -97,7 +97,7 @@ RocketHideoutB4FBeatGiovanniScript:
 	xor a
 	ld [wJoyIgnore], a
 	ld hl, wCurrentMapScriptFlags
-	set 5, [hl]
+	set BIT_CUR_MAP_LOADED_1, [hl]
 	ld a, SCRIPT_ROCKETHIDEOUTB4F_DEFAULT
 	ld [wRocketHideoutB4FCurScript], a
 	ld [wCurMapScript], a
@@ -134,9 +134,9 @@ RocketHideoutB4FGiovanniText:
 	jp nz, .beat_giovanni
 	ld hl, .ImpressedYouGotHereText
 	rst _PrintText
-	ld hl, wd72d
-	set 6, [hl]
-	set 7, [hl]
+	ld hl, wStatusFlags3
+	set BIT_TALKED_TO_TRAINER, [hl]
+	set BIT_PRINT_END_BATTLE_TEXT, [hl]
 	ld hl, .WhatCannotBeText
 	ld de, .WhatCannotBeText
 	call SaveEndBattleTextPointers

@@ -21,14 +21,14 @@ MainMenu:
 	ld [hli], a
 	ld [hl], a
 	ld [wDefaultMap], a
-	ld hl, wd72e
-	res 6, [hl]
+	ld hl, wStatusFlags4
+	res BIT_LINK_CONNECTED, [hl]
 	call ClearScreen
 	call RunDefaultPaletteCommand
 	call LoadTextBoxTilePatterns
 	call LoadFontTilePatterns
-	ld hl, wd730
-	set 6, [hl]
+	ld hl, wStatusFlags5
+	set BIT_NO_TEXT_DELAY, [hl]
 	ld a, [wSaveFileStatus]
 	cp 1
 	jr z, .noSaveFile
@@ -53,8 +53,8 @@ MainMenu:
 	ld de, VersionText
 	call PlaceString
 
-	ld hl, wd730
-	res 6, [hl]
+	ld hl, wStatusFlags5
+	res BIT_NO_TEXT_DELAY, [hl]
 	call UpdateSprites
 	xor a
 	ld [wCurrentMenuItem], a
@@ -92,13 +92,13 @@ MainMenu:
 	ld [wOptionsCancelCursorX], a
 	ld [wTopMenuItemY], a
 	callfar DisplayOptionMenu
-	ld a, 1
+	ld a, TRUE
 	ld [wOptionsInitialized], a
 	jp .mainMenuLoop
 .choseContinue
 	call DisplayContinueGameInfo
 	ld hl, wCurrentMapScriptFlags
-	set 5, [hl]
+	set BIT_CUR_MAP_LOADED_1, [hl]
 .inputLoop
 	xor a
 	ldh [hJoyPressed], a
@@ -106,10 +106,10 @@ MainMenu:
 	ldh [hJoyHeld], a
 	call Joypad
 	ldh a, [hJoyHeld]
-	bit 0, a
+	bit BIT_A_BUTTON, a
 	jr nz, .pressedA
-	bit 1, a
-	jp nz, .mainMenuLoop ; pressed B
+	bit BIT_B_BUTTON, a
+	jp nz, .mainMenuLoop
 	jr .inputLoop
 .pressedA
 	callfar SaveFileUpdateCheck
@@ -119,14 +119,14 @@ MainMenu:
 	ld a, [wNumHoFTeams]
 	and a
 	jp z, SpecialEnterMap
-	ld a, [wCurMap] ; map ID
+	ld a, [wCurMap]
 	cp HALL_OF_FAME
 	jp nz, SpecialEnterMap
 .palletTownWarp
 	xor a ; a = PALLET_TOWN
 	ld [wDestinationMap], a
-	ld hl, wd732
-	set 2, [hl] ; fly warp or dungeon warp
+	ld hl, wStatusFlags6
+	set BIT_FLY_OR_DUNGEON_WARP, [hl]
 	call PrepareForSpecialWarp
 	jp SpecialEnterMap
 .getReadyToLoad
@@ -142,7 +142,7 @@ MainMenu:
 	jr .palletTownWarp
 
 InitOptions:
-	ld a, TEXT_DELAY_FAST
+	ld a, TEXT_DELAY_FAST ; TODO: 1 << BIT_FAST_TEXT_DELAY  ?
 	ld [wLetterPrintingDelayFlags], a
 	ld a, TEXT_DELAY_MEDIUM
 	ld [wOptions], a
@@ -151,8 +151,8 @@ InitOptions:
 LinkMenu:
 	xor a
 	ld [wLetterPrintingDelayFlags], a
-	ld hl, wd72e
-	set 6, [hl]
+	ld hl, wStatusFlags4
+	set BIT_LINK_CONNECTED, [hl]
 	ld hl, LinkMenuEmptyText
 	rst _PrintText
 	call SaveScreenTilesToBuffer1
@@ -167,20 +167,25 @@ LinkMenu:
 	call PlaceString
 	xor a
 	; ld [wUnusedLinkMenuByte], a
-	ld [wd72d], a
+	ld [wCableClubDestinationMap], a
 	ld hl, wTopMenuItemY
-	ld a, $7
+	ld a, 7
 	ld [hli], a
-	ld a, $6
+	assert wTopMenuItemY + 1 == wTopMenuItemX
+	ld a, 6
 	ld [hli], a
+	assert wTopMenuItemX + 1 == wCurrentMenuItem
 	xor a
 	ld [hli], a
 	inc hl
-	ld a, $2
+	assert wCurrentMenuItem + 2 == wMaxMenuItem
+	ld a, 2
 	ld [hli], a
+	assert wMaxMenuItem + 1 == wMenuWatchedKeys
+	assert 2 + 1 == A_BUTTON | B_BUTTON
 	inc a
-	; ld a, A_BUTTON | B_BUTTON
-	ld [hli], a ; wMenuWatchedKeys
+	ld [hli], a
+	assert wMenuWatchedKeys + 1 == wLastMenuItem
 	xor a
 	ld [hl], a
 .waitForInputLoop
@@ -277,12 +282,12 @@ LinkMenu:
 	jr nz, .next
 	ld a, TRADE_CENTER
 .next
-	ld [wd72d], a
+	ld [wCableClubDestinationMap], a
 	ld hl, PleaseWaitText
 	rst _PrintText
 	ld c, 50
 	rst _DelayFrames
-	ld hl, wd732
+	ld hl, wStatusFlags6
 	res BIT_DEBUG_MODE, [hl]
 	ld a, [wDefaultMap]
 	ld [wDestinationMap], a
@@ -305,8 +310,8 @@ LinkMenu:
 	ld hl, LinkCanceledText
 	vc_hook Wireless_net_end
 	rst _PrintText
-	ld hl, wd72e
-	res 6, [hl]
+	ld hl, wStatusFlags4
+	res BIT_LINK_CONNECTED, [hl]
 	ret
 
 WhereWouldYouLikeText:
@@ -322,19 +327,17 @@ LinkCanceledText:
 	text_end
 
 StartNewGame:
-	ld hl, wd732
-	; Ensure debug mode is not used when
-	; starting a regular new game.
-	; Debug mode persists in saved games for
-	; both debug and non-debug builds, and is
+	ld hl, wStatusFlags6
+	; Ensure debug mode is not used when starting a regular new game.
+	; Debug mode persists in saved games for both debug and non-debug builds, and is
 	; only reset here by the main menu.
 	res BIT_DEBUG_MODE, [hl]
 	; fallthrough
 StartNewGameDebug:
 	call OakSpeech
 IF DEF(_DEBUG)
-	ld a, [wd732]
-	bit 1, a
+	ld a, [wStatusFlags6]
+	bit BIT_DEBUG_MODE, a
 	jr z, .normal
 	ld hl, wSpriteOptions2
 	set BIT_BACK_SPRITES, [hl]
@@ -355,9 +358,9 @@ SpecialEnterMap::
 	ldh [hJoyPressed], a
 	ldh [hJoyHeld], a
 	ldh [hJoy5], a
-	ld [wd72d], a
-	ld hl, wd732
-	set 0, [hl] ; count play time
+	ld [wCableClubDestinationMap], a
+	ld hl, wStatusFlags6
+	set BIT_GAME_TIMER_COUNTING, [hl]
 	call ResetPlayerSpriteData
 	ld c, 20
 	rst _DelayFrames

@@ -53,7 +53,7 @@ SafariZoneGameOver:
 	jr nz, .rangerHuntDone ; if we finished a Ranger Hunt game (wSafariType = 1) we will display different ending text
 .noRangerHuntSuccess	
 	ld a, TEXT_SAFARI_GAME_OVER
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	jr .doneSafari
 .rangerHuntDone	

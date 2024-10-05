@@ -31,7 +31,7 @@ ViridianCityCheckGymOpenScript:
 	cp 32
 	ret nz
 	ld a, TEXT_VIRIDIANCITY_GYM_LOCKED
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	xor a
 	ldh [hJoyHeld], a
@@ -50,7 +50,7 @@ ViridianCityCheckGotPokedexScript:
 	cp 19
 	ret nz
 	ld a, TEXT_VIRIDIANCITY_OLD_MAN_SLEEPY
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	xor a
 	ldh [hJoyHeld], a
@@ -80,7 +80,7 @@ ViridianCityOldManStartCatchTrainingScript:
 	ld a, BATTLE_TYPE_OLD_MAN
 	ld [wBattleType], a
 	ld a, 5
-	ld [wCurEnemyLVL], a
+	ld [wCurEnemyLevel], a
 	ld a, WEEDLE
 	ld [wCurOpponent], a
 	ld a, SCRIPT_VIRIDIANCITY_OLD_MAN_END_CATCH_TRAINING
@@ -101,7 +101,7 @@ ViridianCityOldManEndCatchTrainingScript:
 	xor a
 	ld [wJoyIgnore], a
 	ld a, TEXT_VIRIDIANCITY_OLD_MAN_YOU_NEED_TO_WEAKEN_THE_TARGET
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	xor a
 	ld [wBattleType], a

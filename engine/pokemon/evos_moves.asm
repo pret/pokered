@@ -67,13 +67,13 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld h, [hl]
 	ld l, a
 	push hl
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	push af
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a
 	call LoadMonData
 	pop af
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	pop hl
 
 .evoEntryLoop ; loop over evolution entries
@@ -114,7 +114,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	jp nz, .nextEvoEntry1
 ;;;;;;;;;;
 	ld b, a ; evolution item
-	ld a, [wcf91] ; BUG *fixed above*: this is supposed to be the last item used, but it is also used to hold species numbers
+	ld a, [wCurItem] ; BUG *fixed above*: this is supposed to be the last item used, but it is also used to hold species numbers
 	cp b ; was the evolution item in this entry used?
 	jp nz, .nextEvoEntry1 ; if not, go to the next evolution entry
 .checkLevel
@@ -124,7 +124,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	cp b ; is the mon's level greater than the evolution requirement?
 	jp c, .nextEvoEntry2 ; if so, go the next evolution entry
 .doEvolution
-	ld [wCurEnemyLVL], a
+	ld [wCurEnemyLevel], a
 	ld a, 1
 	ld [wEvolutionOccurred], a
 ;;;;;;;;;; shinpokerednote: FIXED: skipping evolution learned moves if levelled up a non-evolved pokemon multiple times then evolving
@@ -162,7 +162,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	rst _PrintText
 	pop hl
 	ld a, [hl]
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	ld [wLoadedMonSpecies], a
 	ld [wEvoNewSpecies], a
 	ld a, MONSTER_NAME
@@ -180,13 +180,13 @@ Evolution_PartyMonLoop: ; loop over party mons
 	rst _DelayFrames
 	call ClearScreen
 	call RenameEvolvedMon
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	push af
-	ld a, [wd0b5]
-	ld [wd11e], a
+	ld a, [wCurSpecies]
+	ld [wPokedexNum], a
 	predef IndexToPokedex
 ;;;;;;;;;; FIXME: ? code that requires BaseStats to be in the same bank as evos_moves
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	; missingno or mew can't evolve so this is never reached for them and their base stats aren't important here
 	dec a
 	ld hl, BaseStats
@@ -195,10 +195,10 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld de, wMonHeader
 	rst _CopyData
 ;;;;;;;;;;
-	ld a, [wd0b5]
+	ld a, [wCurSpecies]
 	ld [wMonHIndex], a
 	pop af
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	ld hl, wLoadedMonHPExp - 1
 	ld de, wLoadedMonStats
 	ld b, $1
@@ -232,8 +232,8 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld [hld], a
 	pop bc
 	rst _CopyData
-	ld a, [wd0b5]
-	ld [wd11e], a
+	ld a, [wCurSpecies]
+	ld [wPokedexNum], a
 	xor a
 	ld [wMonDataLocation], a
 	call EeveelutionForceLearnMove ; PureRGBnote: ADDED: Force eeveelutions to learn a move on evolution
@@ -243,7 +243,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	jr z, .notinbattle
 	push bc
 	
-	ld a, [wCurEnemyLVL]	; load the final level into a.
+	ld a, [wCurEnemyLevel]	; load the final level into a.
 	ld c, a	; load the final level to over to c
 	ld a, [wTempLevelStore]	; load the evolution level into a
 	ld b, a	; load the evolution level over to b
@@ -251,7 +251,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 .inc_level	; marker for looping back 
 	inc b	;increment 	the current evolution level
 	ld a, b	;put the evolution level in a
-	ld [wCurEnemyLVL], a	;and reset the final level to the evolution level
+	ld [wCurEnemyLevel], a	;and reset the final level to the evolution level
 	push bc	;save b & c on the stack as they hold the currently tracked evolution level a true final level
 	call LearnMoveFromLevelUp
 	pop bc	;get the current evolution and final level values back from the stack
@@ -271,7 +271,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	and a
 	call z, Evolution_ReloadTilesetTilePatterns
 	predef IndexToPokedex
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	; missingno or mew can't evolve so this is never reached for them and their base stats aren't important here
 	dec a
 	ld c, a
@@ -318,14 +318,15 @@ Evolution_PartyMonLoop: ; loop over party mons
 RenameEvolvedMon:
 ; Renames the mon to its new, evolved form's standard name unless it had a
 ; nickname, in which case the nickname is kept.
-	ld a, [wd0b5]
+	assert wCurSpecies == wNameListIndex ; save+restore wCurSpecies while using wNameListIndex
+	ld a, [wCurSpecies]
 	push af
 	ld a, [wMonHIndex]
-	ld [wd0b5], a
+	ld [wNameListIndex], a
 	call GetName
 	pop af
-	ld [wd0b5], a
-	ld hl, wcd6d
+	ld [wCurSpecies], a
+	ld hl, wNameBuffer
 	ld de, wStringBuffer
 .compareNamesLoop
 	ld a, [de]
@@ -341,7 +342,7 @@ RenameEvolvedMon:
 	call AddNTimes
 	push hl
 	call GetName
-	ld hl, wcd6d
+	ld hl, wNameBuffer
 	pop de
 	jp CopyData
 
@@ -378,8 +379,8 @@ Evolution_ReloadTilesetTilePatterns:
 ; shinpokerednote: FIXED: supports learning multiple moves at the same level
 LearnMoveFromLevelUp: 
 	ld hl, EvosMovesPointerTable
-	ld a, [wd11e] ; species
-	ld [wcf91], a
+	ld a, [wPokedexNum] ; species
+	ld [wCurPartySpecies], a
 	dec a
 	ld bc, 0
 	ld hl, EvosMovesPointerTable
@@ -399,7 +400,7 @@ LearnMoveFromLevelUp:
 	and a ; have we reached the end of the learn set?
 	jr z, .done ; if we've reached the end of the learn set, jump
 	ld b, a ; level the move is learnt at
-	ld a, [wCurEnemyLVL]
+	ld a, [wCurEnemyLevel]
 	cp b ; is the move learnt at the mon's current level?
 	ld a, [hli] ; move ID
 	jr nz, .learnSetLoop
@@ -429,7 +430,7 @@ LearnMoveFromLevelUp:
 	jr nz, .checkCurrentMovesLoop
 	ld a, d
 	ld [wMoveNum], a
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMoveName
 	call CopyToStringBuffer
 	predef LearnMove
@@ -439,14 +440,14 @@ LearnMoveFromLevelUp:
 	
 	
 .done
-	ld a, [wcf91]
-	ld [wd11e], a
+	ld a, [wCurPartySpecies]
+	ld [wPokedexNum], a
 	ret
 
 ; PureRGBnote: ADDED: used to force the eeveelutions to learn a specific move on evolution so this move cannot be missed
 EeveelutionForceLearnMove:
 	push bc
-	ld a, [wd11e] ; species
+	ld a, [wPokedexNum] ; species
 	cp FLAREON
 	ld b, EMBER
 	jr z, .forceLearnMove
@@ -462,20 +463,20 @@ EeveelutionForceLearnMove:
 	push hl	
 	push de
 	ld [wMoveNum], a
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMoveName
 	call CopyToStringBuffer
 	predef LearnMove
 	pop de
 	pop hl
 	pop af ; retrieve species number from the stack
-	ld [wd11e], a
+	ld [wPokedexNum], a
 .done
 	pop bc
 	ret
 
 
-; writes the moves a mon has at level [wCurEnemyLVL] to [de]
+; writes the moves a mon has at level [wCurEnemyLevel] to [de]
 ; move slots are being filled up sequentially and shifted if all slots are full
 WriteMonMoves:
 	call GetPredefRegisters
@@ -484,7 +485,7 @@ WriteMonMoves:
 	push bc
 	ld hl, EvosMovesPointerTable
 	ld b, 0
-	ld a, [wcf91]  ; cur mon ID
+	ld a, [wCurPartySpecies]
 	dec a
 	add a
 	rl b
@@ -507,7 +508,7 @@ WriteMonMoves:
 	and a
 	jp z, .done       ; end of list
 	ld b, a
-	ld a, [wCurEnemyLVL]
+	ld a, [wCurEnemyLevel]
 	cp b
 	jp c, .done       ; mon level < move level (assumption: learnset is sorted by level)
 	ld a, [wLearningMovesFromDayCare]

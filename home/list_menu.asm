@@ -19,8 +19,8 @@ DisplayListMenuID::
 	and a
 	call nz, CheckSaveHoverTextScreenTiles
 ;;;;;;;;;;
-	ld hl, wd730
-	set 6, [hl] ; turn off letter printing delay
+	ld hl, wStatusFlags5
+	set BIT_NO_TEXT_DELAY, [hl] ; turn off letter printing delay
 	xor a
 	ld [wMenuItemToSwap], a ; 0 means no item is currently being swapped
 	ld [wListCount], a
@@ -115,30 +115,31 @@ DisplayListMenuIDLoop::
 	ld b, 0
 	add hl, bc
 	ld a, [hl]
-	ld [wcf91], a
+	ld [wCurListMenuItem], a
 	ld a, [wListMenuID]
 	and a ; PCPOKEMONLISTMENU?
 	jr z, .pokemonList
 	cp CUSTOMLISTMENU
 	jr z, .skipGetName
+	assert wCurListMenuItem == wCurItem
 	push hl
 	call GetItemPrice
 	pop hl
 	ld a, [wListMenuID]
 	cp ITEMLISTMENU
 	jr nz, .skipGettingQuantity
-; if it's an item menu
 	inc hl
 	ld a, [hl] ; a = item quantity
 	ld [wMaxItemQuantity], a
 .skipGettingQuantity
-	ld a, [wcf91]
-	ld [wd0b5], a
+	ld a, [wCurItem]
+	ld [wNameListIndex], a
 	ld a, BANK(ItemNames)
 	ld [wPredefBank], a
 	call GetName
 	jr .storeChosenEntry
 .pokemonList
+	assert wCurListMenuItem == wCurPartySpecies
 	ld hl, wPartyCount
 	ld a, [wListPointer]
 	cp l ; is it a list of party pokemon or box pokemon?
@@ -149,7 +150,7 @@ DisplayListMenuIDLoop::
 	ld a, [wWhichPokemon]
 	call GetPartyMonName
 .storeChosenEntry ; store the menu entry that the player chose and return
-	ld de, wcd6d
+	ld de, wNameBuffer
 	call CopyToStringBuffer
 .skipGetName
 	ld a, CHOSE_MENU_ITEM
@@ -159,8 +160,8 @@ DisplayListMenuIDLoop::
 	xor a
 	ldh [hJoy7], a ; joypad state update flag
 	ld [wListMenuHoverTextShown], a ; PureRGBnote: ADDED: once we pick a list entry, we consider TM text not shown so we will re-render it after finishing
-	ld hl, wd730
-	res 6, [hl] ; turn on letter printing delay
+	ld hl, wStatusFlags5
+	res BIT_NO_TEXT_DELAY, [hl] ; turn on letter printing delay
 	jp BankswitchBack
 .checkOtherKeys ; check B, SELECT, Up, and Down keys
 	bit BIT_B_BUTTON, a
@@ -358,8 +359,8 @@ ExitListMenu::
 	ld a, CANCELLED_MENU
 	ld [wMenuExitMethod], a
 	ld [wMenuWatchMovingOutOfBounds], a
-	ld hl, wd730
-	res 6, [hl]
+	ld hl, wStatusFlags5
+	res BIT_NO_TEXT_DELAY, [hl]
 	call BankswitchBack
 	xor a
 	ld [wListMenuHoverTextShown], a ; PureRGBnote: ADDED: when we leave a list menu we are no longer displaying any TM text
@@ -399,7 +400,7 @@ PrintListMenuEntries::
 	ld a, b
 	ld [wWhichPokemon], a
 	ld a, [de]
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	cp $ff
 	jp z, .printCancelMenuItem
 	push bc
@@ -457,8 +458,8 @@ PrintListMenuEntries::
 	push hl
 	ld a, [de]
 	ld de, ItemPrices
-	ld [wcf91], a
-	call GetItemPrice ; get price
+	ld [wCurItem], a
+	call GetItemPrice
 	pop hl
 	ld bc, SCREEN_WIDTH + 5 ; 1 row down and 5 columns right
 	add hl, bc
@@ -471,7 +472,7 @@ PrintListMenuEntries::
 	jr nz, .skipPrintingPokemonLevel
 ;;;; code for printing levels (specific to box menus)
 .printPokemonLevel
-	ld a, [wd11e]
+	ld a, [wNamedObjectIndex]
 	push af
 	push hl
 	ld hl, wPartyCount
@@ -502,7 +503,7 @@ PrintListMenuEntries::
 	add hl, bc
 	call PrintLevel
 	pop af
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 ;;;;
 .skipPrintingPokemonLevel
 	pop hl
@@ -513,8 +514,8 @@ PrintListMenuEntries::
 	jr nz, .nextListEntry
 ;;;; code for printing item quantities (specific to item menus)
 .printItemQuantity
-	ld a, [wd11e]
-	ld [wcf91], a
+	ld a, [wNamedObjectIndex]
+	ld [wCurItem], a
 	call IsKeyItem ; check if item is unsellable
 	ld a, [wIsKeyItem]
 	and a ; is the item unsellable?
@@ -524,18 +525,18 @@ PrintListMenuEntries::
 	add hl, bc
 	ld a, "×"
 	ld [hli], a
-	ld a, [wd11e]
+	ld a, [wNamedObjectIndex]
 	push af
 	ld a, [de]
 	ld [wMaxItemQuantity], a
 	push de
-	ld de, wd11e
+	ld de, wTempByteValue
 	ld [de], a
 	lb bc, 1, 2
 	call PrintNumber
 	pop de
 	pop af
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	pop hl
 ;;;;
 .skipPrintingItemQuantity

@@ -66,3 +66,11 @@ DEF HW_CH4_DISABLE_MASK EQU (~HW_CH4_ENABLE_MASK & $ff)
 
 ; wChannelFlags2 constant (only has one flag)
 DEF BIT_EXECUTE_MUSIC EQU 0 ; if in execute music
+
+; wMuteAudioAndPauseMusic
+DEF BIT_MUTE_AUDIO EQU 7
+
+; wLowHealthAlarm
+DEF BIT_LOW_HEALTH_ALARM EQU 7
+DEF LOW_HEALTH_TIMER_MASK EQU %01111111
+DEF DISABLE_LOW_HEALTH_ALARM EQU $ff

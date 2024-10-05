@@ -12,12 +12,12 @@ MtMoonB2F_Script:
 	ld hl, MtMoonB2FFossilAreaCoords
 	call ArePlayerCoordsInArray
 	jr nc, .enable_battles
-	ld hl, wd72e
-	set 4, [hl]
+	ld hl, wStatusFlags4
+	set BIT_NO_BATTLES, [hl]
 	ret
 .enable_battles
-	ld hl, wd72e
-	res 4, [hl]
+	ld hl, wStatusFlags4
+	res BIT_NO_BATTLES, [hl]
 	ret
 
 MtMoonB2FFossilAreaCoords:
@@ -67,7 +67,7 @@ MtMoonB2FDefaultScript:
 	xor a
 	ldh [hJoyHeld], a
 	ld a, TEXT_MTMOONB2F_SUPER_NERD
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	jp DisplayTextID
 
 MtMoonB2FDefeatedSuperNerdScript:
@@ -126,15 +126,15 @@ MtMoon3FSuperNerdMoveUpMovementData:
 	db -1 ; end
 
 MtMoonB2FSuperNerdTakesOtherFossilScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
 	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld a, TEXT_MTMOONB2F_SUPER_NERD_THEN_THIS_IS_MINE
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	CheckEvent EVENT_GOT_DOME_FOSSIL
 	ld a, HS_MT_MOON_B2F_FOSSIL_1
@@ -167,7 +167,7 @@ MtMoonB2FSuperNerdTakesOtherFossilScript:
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld [wJoyIgnore], a
 	ld a, 11
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 
 ;;;;;;;;;; PureRGBnote: ADDED: hide or show the fossil in seafoam islands depending on what you chose
@@ -227,9 +227,9 @@ MtMoonB2FSuperNerdText:
 .beat_super_nerd
 	ld hl, MtMoonB2FSuperNerdTheyreBothMineText
 	rst _PrintText
-	ld hl, wd72d
-	set 6, [hl]
-	set 7, [hl]
+	ld hl, wStatusFlags3
+	set BIT_TALKED_TO_TRAINER, [hl]
+	set BIT_PRINT_END_BATTLE_TEXT, [hl]
 	ld hl, MtMoonB2FSuperNerdOkIllShareText
 	ld de, MtMoonB2FSuperNerdOkIllShareText
 	call SaveEndBattleTextPointers

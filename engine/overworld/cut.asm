@@ -36,8 +36,8 @@ UsedCut:
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMonNicks
 	call GetPartyMonName
-	ld hl, wd730
-	set 6, [hl]
+	ld hl, wStatusFlags5
+	set BIT_NO_TEXT_DELAY, [hl]
 	call GBPalWhiteOutWithDelay3
 	call ClearSprites
 	call RestoreScreenTilesAndReloadTilePatterns
@@ -53,8 +53,8 @@ UsedCut:
 	ld hl, UsedCutText
 	rst _PrintText
 	call LoadScreenTilesFromBuffer2
-	ld hl, wd730
-	res 6, [hl]
+	ld hl, wStatusFlags5
+	res BIT_NO_TEXT_DELAY, [hl]
 	ld a, $ff
 	ld [wUpdateSpritesEnabled], a
 	call InitCutAnimOAM
@@ -124,13 +124,17 @@ LoadCutGrassAnimationTilePattern:
 WriteCutOrBoulderDustAnimationOAMBlock:
 	call GetCutOrBoulderDustAnimationOffsets
 	ld a, $9
-	ld de, CutOrBoulderDustAnimationTilesAndAttributes
+	ld de, .OAMBlock
 	jp WriteOAMBlock
 
-CutOrBoulderDustAnimationTilesAndAttributes:
+.OAMBlock:
+; tile ID, attributes
+; TODO: update second byte with constants like OAM_OBP1
 ; shinpokerednote: gbcnote: updated attributes for GBC
-	db $FC,$14,$FD,$14
-	db $FE,$14,$FF,$14
+	db $FC,%00010100
+	db $FD,%00010100
+	db $FE,%00010100
+	db $FF,%00010100
 
 GetCutOrBoulderDustAnimationOffsets:
 	ld hl, wSpritePlayerStateData1YPixels

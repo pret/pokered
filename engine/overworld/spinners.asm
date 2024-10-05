@@ -139,8 +139,8 @@ SpinnerArrowAnimTiles:
 ; based on them. We will force the player to keep moving in that direction until they hit another arrow tile or a "stop" tile.
 CheckStartStopSpinningLoadArrowTiles:
 	call CheckStartStopSpinning
-	ld hl, wd736
-	bit 7, [hl]
+	ld hl, wMovementFlags
+	bit BIT_SPINNING, [hl]
 	jp z, CheckFightingMapTrainers
 	jp LoadSpinnerArrowTiles
 
@@ -175,9 +175,9 @@ CheckStartStopSpinning::
 	xor a
 	ld [wSimulatedJoypadStatesIndex], a
 	call StartSimulatingJoypadStates
-	ld hl, wd736
-	bit 7, [hl]
-	set 7, [hl]
+	ld hl, wMovementFlags
+	bit BIT_SPINNING, [hl]
+	set BIT_SPINNING, [hl]
 	ret nz ; if we're already spinning don't replay the sound or reload joyignore
 	ld a, SFX_ARROW_TILES
 	rst _PlaySound
@@ -190,9 +190,9 @@ CheckStartStopSpinning::
 	inc hl
 	jr .loop
 .stopSpinning
-	ld hl, wd736
-	bit 7, [hl]
-	res 7, [hl]
+	ld hl, wMovementFlags
+	bit BIT_SPINNING, [hl]
+	res BIT_SPINNING, [hl]
 	ret z ; if we're already stopped, don't do the below stuff again
 	xor a
 	ld [wJoyIgnore], a

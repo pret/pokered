@@ -318,10 +318,10 @@ SeafoamIslandsB4FDragonairEventOnMapLoad:
 	jp UpdateSprites
 
 SeafoamIslandsB4FDragonairEventStartScript:
-	ld a, [wd730] ; is the player moving?
-	bit 0, a
+	ld a, [wStatusFlags5] ; is the player moving?
+	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
-	bit 7, a
+	bit BIT_SCRIPTED_MOVEMENT_STATE, a
 	ret nz
 	ld a, [wYCoord]
 	cp 5
@@ -350,8 +350,8 @@ SeafoamIslandsB4FDragonairEventStartScript:
 	ld [wDestinationWarpID], a
 	ld a, SEAFOAM_ISLANDS_1F
 	ldh [hWarpDestinationMap], a
-	ld hl, wd72d
-	set 3, [hl] ; scripted warp flag
+	ld hl, wStatusFlags3
+	set BIT_WARP_FROM_CUR_SCRIPT, [hl] ; scripted warp flag
 	
 	ld a, SCRIPT_SEAFOAMISLANDSB4F_DEFAULT
 	ld [wSeafoamIslandsB4FCurScript], a
@@ -363,7 +363,7 @@ SeafoamIslandsB4FDragonairEventStartScript:
 .initialText
 	call GBFadeInFromBlack
 	ld a, TEXT_SEAFOAMISLANDSB4F_ANIMSPRITE1
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	; add more "downs" to the surf auto movement
 	ld a, D_DOWN
@@ -399,7 +399,7 @@ SeafoamIslandsB4FDragonairEventStartText:
 	ld a, $14 ; water tile
 	ld [wTileInFrontOfPlayer], a ; this isn't loaded correctly sometimes, just force it because we're facing water for sure
 	ld a, SURFBOARD
-	ld [wcf91], a
+	ld [wCurItem], a
 	ld [wPseudoItemID], a
 	call UseItem
 	ld a, $1
@@ -419,7 +419,7 @@ SeafoamIslandsB4FFastCurrent::
 	CheckBothEventsSet EVENT_SEAFOAM4_BOULDER1_DOWN_HOLE, EVENT_SEAFOAM4_BOULDER2_DOWN_HOLE
 	ret z
 	ld a, TEXT_SEAFOAMISLANDSB4F_FAST_CURRENT
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	jp DisplayTextID
 
 SeafoamIslandsB4FFastCurrentText::

@@ -20,7 +20,6 @@ PlaySfxRemapDrums:
 	pop af
 	jp CheckRemapNoiseInstrument_2
 
-
 PlaySfx:
 	ld l, a
 	ld e, a

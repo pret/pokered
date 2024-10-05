@@ -13,7 +13,7 @@ _GivePokemon::
 ; add to box
 	xor a
 	ld [wEnemyBattleStatus3], a
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	ld [wEnemyMonSpecies2], a
 	callfar LoadEnemyMonData
 	call SetPokedexOwnedFlag
@@ -64,11 +64,11 @@ _GivePokemon::
 	ret
 
 SetPokedexOwnedFlag:
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	push af
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	predef IndexToPokedex
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	and a
 	ret z ; PureRGBnote: ADDED: do nothing for missingno to avoid glitchy results (missingno isn't part of the dex	)
 	dec a
@@ -77,7 +77,7 @@ SetPokedexOwnedFlag:
 	ld b, FLAG_SET
 	predef FlagActionPredef
 	pop af
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMonName
 	ld hl, GotMonText
 	jp PrintText

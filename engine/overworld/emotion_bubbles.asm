@@ -9,7 +9,7 @@ EmotionBubbleAfter::
 
 FishingEmotionBubble::
 	ld hl, vChars1 tile $43
-	ld de, FishingEmotionBubblesOAM
+	ld de, FishingEmotionBubblesOAMBlock
 	call EmotionBubbleArbitrary
 	jr EmotionBubbleAfter
 
@@ -32,7 +32,7 @@ EmotionBubbleCommon2:
 
 EmotionBubbleCommon:
 	ld hl, vChars1 tile $78
-	ld de, EmotionBubblesOAM
+	ld de, EmotionBubblesOAMBlock
 EmotionBubbleArbitrary:
 	ld a, [wUpdateSpritesEnabled]
 	push af
@@ -58,8 +58,8 @@ EmotionBubbleArbitrary:
 	call CopyVideoData
 	ld a, $ff
 	ld [wUpdateSpritesEnabled], a
-	ld a, [wd736]
-	bit 6, a ; are the last 4 OAM entries reserved for a shadow or fishing rod?
+	ld a, [wMovementFlags]
+	bit BIT_LEDGE_OR_FISHING, a ; are the last 4 OAM entries reserved for a shadow or fishing rod?
 	ld hl, wShadowOAMSprite35Attributes
 	ld de, wShadowOAMSprite39Attributes
 	jr z, .next
@@ -109,15 +109,15 @@ EmotionBubblesPointerTable:
 	dw LoveEmote
 	dw SleepingEmote
 
-; tile ID and attribute
-EmotionBubblesOAM:
+EmotionBubblesOAMBlock:
+; tile ID, attributes
 	db $f8, 0
 	db $f9, 0
 	db $fa, 0
 	db $fb, 0
 
-; tile ID and attribute
-FishingEmotionBubblesOAM:
+FishingEmotionBubblesOAMBlock:
+; tile ID, attributes
 	db $c3, 0
 	db $c4, 0
 	db $c5, 0

@@ -77,9 +77,9 @@ DoInGameTradeDialogue:
 ; copies name of species a to hl
 InGameTrade_GetMonName:
 	push de
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMonName
-	ld hl, wcd6d
+	ld hl, wNameBuffer
 	pop de
 	ld bc, NAME_LENGTH
 	jp CopyData
@@ -99,7 +99,7 @@ InGameTrade_DoTrade:
 	jp c, .tradeFailed ; jump if the player didn't select a pokemon
 	ld a, [wInGameTradeGiveMonSpecies]
 	ld b, a
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	cp b
 	ld a, $2
 	jp nz, .tradeFailed ; jump if the selected mon's species is not the required one
@@ -115,7 +115,7 @@ InGameTrade_DoTrade:
 	add hl, bc ; go to level
 	ld a, [hl]
 ;;;;;;;;;;
-	ld [wCurEnemyLVL], a
+	ld [wCurEnemyLevel], a
 	ld hl, wCompletedInGameTradeFlags
 	ld a, [wWhichTrade]
 	ld c, a
@@ -125,18 +125,18 @@ InGameTrade_DoTrade:
 	rst _PrintText
 	ld a, [wWhichPokemon]
 	push af
-	ld a, [wCurEnemyLVL]
+	ld a, [wCurEnemyLevel]
 	push af
 	call GetTradeMonPalette ; PureRGBnote: ADDED: stores whether mon you receive via trade has an alternate palette into wIsAltPalettePkmnData
 	call LoadHpBarAndStatusTilePatterns
 	call InGameTrade_PrepareTradeData
 	predef InternalClockTradeAnim
 	pop af
-	ld [wCurEnemyLVL], a
+	ld [wCurEnemyLevel], a
 	pop af
 	ld [wWhichPokemon], a
 	ld a, [wInGameTradeReceiveMonSpecies]
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	xor a
 	ld [wMonDataLocation], a ; not used
 	ld [wRemoveMonFromBox], a

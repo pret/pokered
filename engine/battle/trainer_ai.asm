@@ -1546,14 +1546,14 @@ AICureStatus:	;shinpokerednote: CHANGED: modified to be more robust and also und
 AIUseXAccuracy:
 	call AIPlayRestoringSFX
 	ld hl, wEnemyBattleStatus2
-	set 0, [hl]
+	set USING_X_ACCURACY, [hl]
 	ld a, X_ACCURACY
 	jp AIPrintItemUse
 
 ;AIUseGuardSpec: ; PureRGBnote: CHANGED: now unused
 ;	call AIPlayRestoringSFX
 ;	ld hl, wEnemyBattleStatus2
-;	set 1, [hl]
+;	set STAT_DOWN_IMMUNITY, [hl]
 ;	ld a, GUARD_SPEC
 ;	jp AIPrintItemUse
 
@@ -1677,7 +1677,7 @@ AIPrintItemUse:
 AIPrintItemUse_:
 ; print "x used [wAIItem] on z!"
 	ld a, [wAIItem]
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetItemName
 	ld hl, AIBattleUseItemText
 	jp PrintText

@@ -141,13 +141,13 @@ DrawFrameBlock:
 	ld [de], a ; store tile ID
 	inc de
 	ld a, [hli]
-	bit 5, a ; is horizontal flip enabled?
+	bit OAM_X_FLIP, a
 	jr nz, .disableHorizontalFlip
 .enableHorizontalFlip
-	set 5, a
+	set OAM_X_FLIP, a
 	jr .storeFlags2
 .disableHorizontalFlip
-	res 5, a
+	res OAM_X_FLIP, a
 .storeFlags2
 ;;;;;;;;;; shinpokerednote: gbcnote: oam updates from yellow version
 	ld b, a
@@ -758,7 +758,7 @@ DoBallTossSpecialEffects:
 	ld a, [wSubAnimCounter]
 	cp 1
 	jr z, .skipFlashingEffect ; don't complement colors on the last frame
-	ld a, [wcf91]
+	ld a, [wCurItem]
 	cp HYPER_BALL
 	jr z, .flashingEffect
 	cp ULTRA_BALL + 1 ; is it a Master Ball or Ultra Ball?
@@ -780,7 +780,7 @@ DoBallTossSpecialEffects:
 	ld a, [wIsInBattle]
 	cp 2 ; is it a trainer battle?
 	jr z, .isTrainerBattle
-	ld a, [wd11e]
+	ld a, [wPokeBallAnimData]
 	cp $10 ; is the enemy pokemon the Ghost Marowak?
 	ret nz
 ; if the enemy pokemon is the Ghost Marowak, make it dodge during the last 3 frames
@@ -1561,7 +1561,7 @@ ShakeEnemyHUD_WritePlayerMonPicOAM:
 	and a
 	jr z, .notGBC
 	ld a, [wBattleMonSpecies]
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	lb de, CONVERT_OBP0, 1
 	callfar TransferMonPal
 .notGBC
@@ -2507,8 +2507,8 @@ ChangeMonPic:
 	and a
 	jr z, .playerTurn
 	ld a, [wChangeMonPicEnemyTurnSpecies]
-	ld [wcf91], a
-	ld [wd0b5], a
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
 	xor a
 	ld [wSpriteFlipped], a
 	call GetMonHeader
@@ -2520,7 +2520,7 @@ ChangeMonPic:
 	push af
 	ld a, [wChangeMonPicPlayerTurnSpecies]
 	ld [wBattleMonSpecies2], a
-	ld [wd0b5], a
+	ld [wCurSpecies], a
 	call GetMonHeader
 	predef LoadMonBackPic
 	xor a ; TILEMAP_MON_PIC
@@ -3127,7 +3127,7 @@ TossBallAnimation:
 	ld [wNumShakes], a
 	; PureRGBnote: gbcnote: pokeball toss animations don't get remapped here anymore, they each have a unique animation
 	ld hl, .PokeBallAnimations
-	ld a, [wAnimationID]
+	ld a, [wAnimationID] ; TODO: pointless?
 .PlayNextAnimation
 	ld [wAnimationID], a
 	push bc

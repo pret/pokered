@@ -1,9 +1,9 @@
 PrintPredefTextID::
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	ld hl, TextPredefs
 	call SetMapTextPointer
 	ld hl, wTextPredefFlag
-	set 0, [hl]
+	set BIT_TEXT_PREDEF, [hl]
 	call DisplayTextID
 
 RestoreMapTextPointer::

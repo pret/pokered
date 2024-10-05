@@ -1,6 +1,6 @@
 HandleLedges::
-	ld a, [wd736]
-	bit 6, a ; already jumping down ledge
+	ld a, [wMovementFlags]
+	bit BIT_LEDGE_OR_FISHING, a
 	ret nz
 	ld a, [wCurMapTileset]
 	and a ; OVERWORLD
@@ -51,8 +51,8 @@ HandleLedges::
 	ret z
 	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
-	ld hl, wd736
-	set 6, [hl] ; jumping down ledge
+	ld hl, wMovementFlags
+	set BIT_LEDGE_OR_FISHING, [hl]
 	call StartSimulatingJoypadStates
 	ld a, e
 	ld [wSimulatedJoypadStatesEnd], a
@@ -111,13 +111,16 @@ LoadHoppingShadowOAM:
 	call CopyVideoDataDouble
 	ld a, $9
 	lb bc, $54, $48 ; b, c = y, x coordinates of shadow
-	ld de, LedgeHoppingShadowOAM
+	ld de, LedgeHoppingShadowOAMBlock
 	jp WriteOAMBlock
 
 LedgeHoppingShadow:
 	INCBIN "gfx/overworld/shadow.1bpp"
 LedgeHoppingShadowEnd:
 
-LedgeHoppingShadowOAM:
-	dbsprite  2, -1,  0,  7, $ff, OAM_HFLIP
-	dbsprite  8, -1,  0,  7, $ff, OAM_HFLIP | OAM_VFLIP
+LedgeHoppingShadowOAMBlock:
+; tile ID, attributes
+	db $ff, OAM_OBP1
+	db $ff, OAM_HFLIP
+	db $ff, OAM_VFLIP
+	db $ff, OAM_HFLIP | OAM_VFLIP

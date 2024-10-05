@@ -7,8 +7,8 @@ Route23_Script:
 
 Route23SetVictoryRoadBoulders:
 	ld hl, wCurrentMapScriptFlags
-	bit 6, [hl]
-	res 6, [hl]
+	bit BIT_CUR_MAP_LOADED_2, [hl]
+	res BIT_CUR_MAP_LOADED_2, [hl]
 	ret z
 	ResetEvents EVENT_VICTORY_ROAD_2_BOULDER_ON_SWITCH1, EVENT_VICTORY_ROAD_2_BOULDER_ON_SWITCH2
 	ResetEvents EVENT_VICTORY_ROAD_3_BOULDER_ON_SWITCH1, EVENT_VICTORY_ROAD_3_BOULDER_ON_SWITCH2
@@ -46,7 +46,7 @@ Route23DefaultScript:
 	ret nc
 .not_past_victory_road
 	ld a, e
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndex], a
 	ld a, c
 	ld [wWhichBadge], a
 	ld b, FLAG_TEST
@@ -81,7 +81,7 @@ Route23CopyBadgeTextScript:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld de, wcd6d
+	ld de, wNameBuffer
 .copyTextLoop
 	ld a, [hli]
 	ld [de], a

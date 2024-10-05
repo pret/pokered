@@ -48,13 +48,6 @@ jobs:
             return 1
           fi
 
-      - name: Discord webhook
-        if: ${{ github.event_name == 'push' && github.repository_owner == 'pret' }}
-        env:
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-        run: |
-          .github/webhook.sh
-
       - name: Checkout symbols
         if: ${{ github.event_name == 'push' && github.repository_owner == 'pret' }}
         uses: actions/checkout@master

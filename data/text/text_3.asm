@@ -50,7 +50,7 @@ _EvolvedText::
 _IntoText::
 	text_start
 	line "into @"
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text "!"
 	done
 
@@ -186,14 +186,14 @@ _MimicLearnedMoveText::
 	text "<USER>"
 	line "learned"
 	cont "@"
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text "!"
 	prompt
 
 _MoveWasDisabledText::
 	text "<TARGET>'s"
 	line "@"
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text " was"
 	cont "disabled!"
 	prompt
@@ -302,7 +302,7 @@ _TransformedText::
 	text "<USER>"
 	line "transformed into"
 	cont "@"
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text "!"
 	prompt
 

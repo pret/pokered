@@ -1,5 +1,5 @@
 Museum1F_Script:
-	ld a, TRUE
+	ld a, 1 << BIT_NO_AUTO_TEXT_BOX
 	ld [wAutoTextBoxDrawingControl], a
 	xor a
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
@@ -26,7 +26,7 @@ Museum1FDefaultScript:
 	xor a
 	ldh [hJoyHeld], a
 	ld a, TEXT_MUSEUM1F_SCIENTIST1
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	jp DisplayTextID
 
 Museum1F_TextPointers:

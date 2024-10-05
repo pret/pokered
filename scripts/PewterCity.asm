@@ -32,7 +32,7 @@ ENDC
 	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	ld a, TEXT_PEWTERCITY_YOUNGSTER
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	jp DisplayTextID
 
 PewterCityPlayerLeavingEastCoords:
@@ -55,10 +55,10 @@ PewterCitySuperNerd1ShowsPlayerMuseumScript:
 	ldh [hSpriteImageIndex], a
 	call SetSpriteImageIndexAfterSettingFacingDirection
 	call PlayDefaultMusic
-	ld hl, wFlags_0xcd60
-	set 4, [hl]
+	ld hl, wMiscFlags
+	set BIT_NO_SPRITE_UPDATES, [hl]
 	ld a, TEXT_PEWTERCITY_SUPER_NERD1_ITS_RIGHT_HERE
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	ld a, $3c
 	ldh [hSpriteScreenYCoord], a
@@ -87,8 +87,8 @@ MovementData_PewterMuseumGuyExit:
 	db -1 ; end
 
 PewterCityHideSuperNerd1Script:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
 	ld a, HS_MUSEUM_GUY
 	ld [wMissableObjectIndex], a
@@ -123,10 +123,10 @@ PewterCityYoungsterShowsPlayerGymScript:
 	ldh [hSpriteImageIndex], a
 	call SetSpriteImageIndexAfterSettingFacingDirection
 	call PlayDefaultMusic
-	ld hl, wFlags_0xcd60
-	set 4, [hl]
+	ld hl, wMiscFlags
+	set BIT_NO_SPRITE_UPDATES, [hl]
 	ld a, TEXT_PEWTERCITY_YOUNGSTER_GO_TAKE_ON_BROCK
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	ld a, $3c
 	ldh [hSpriteScreenYCoord], a
@@ -156,8 +156,8 @@ MovementData_PewterGymGuyExit:
 	db -1 ; end
 
 PewterCityHideYoungsterScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
 	ld a, HS_GYM_GUY
 	ld [wMissableObjectIndex], a

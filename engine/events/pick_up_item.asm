@@ -10,7 +10,7 @@ PickUpItemCommon:
 	push bc
 	call EnableAutoTextBoxDrawing
 
-	ldh a, [hSpriteIndexOrTextID]
+	ldh a, [hSpriteIndex]
 	ld b, a
 	ld hl, wMissableObjectList
 .missableObjectsListLoop
@@ -27,7 +27,7 @@ PickUpItemCommon:
 	ldh [hMissableObjectIndex], a
 
 	ld hl, wMapSpriteExtraData
-	ldh a, [hSpriteIndexOrTextID]
+	ldh a, [hSpriteIndex]
 	dec a
 	add a
 	ld d, 0

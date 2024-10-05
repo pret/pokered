@@ -3,7 +3,7 @@ LearnMove:
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMonNicks
 	call GetPartyMonName
-	ld hl, wcd6d
+	ld hl, wNameBuffer
 	ld de, wLearnMoveMonName
 	ld bc, NAME_LENGTH
 	rst _CopyData
@@ -29,7 +29,7 @@ DontAbandonLearning:
 	jp c, AbandonLearning
 	push hl
 	push de
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMoveName
 	ld hl, OneTwoAndText
 	rst _PrintText
@@ -156,11 +156,11 @@ TryingToLearn:
 	hlcoord 6, 8
 	ld de, wMovesString
 	ldh a, [hUILayoutFlags]
-	set 2, a
+	set BIT_SINGLE_SPACED_LINES, a
 	ldh [hUILayoutFlags], a
 	call PlaceString
 	ldh a, [hUILayoutFlags]
-	res 2, a
+	res BIT_SINGLE_SPACED_LINES, a
 	ldh [hUILayoutFlags], a
 	ld hl, wTopMenuItemY
 	ld a, 8
@@ -176,13 +176,13 @@ TryingToLearn:
 	ld [hli], a ; wMenuWatchedKeys
 	ld [hl], 0 ; wLastMenuItem
 	ld hl, hUILayoutFlags
-	set 1, [hl]
-.menuLoop	
+	set BIT_DOUBLE_SPACED_MENU, [hl]
+.menuLoop
 	call HandleMenuInput
 	bit BIT_A_BUTTON, a ; PureRGBnote: FIXED: Press START to learn a move instead of A to prevent accidental mashing A move-forget woes
 	jr nz, .pressStart
 	ld hl, hUILayoutFlags
-	res 1, [hl]
+	res BIT_DOUBLE_SPACED_MENU, [hl]
 	push af
 	call LoadScreenTilesFromBuffer1
 	pop af
@@ -237,8 +237,8 @@ ResetStrengthOverworldBit:
 	ld a, d ; how many pokemon with strength are in current party
 	cp 2
 	ret nc ; don't clear the bit if another pokemon has strength still
-	ld hl, wd728
-	res 0, [hl]
+	ld hl, wStatusFlags1
+	res BIT_STRENGTH_ACTIVE, [hl]
 	ret
 
 ResetSurfOverworldBit:
@@ -254,8 +254,8 @@ ResetSurfOverworldBit:
 	; check if the player is on an island or map where we want to keep surf active even if deleted
 	callfar CheckInSurfRestrictedMapOrArea
 	ret c ; if so, don't clear the autosurf bit to avoid softlocks
-	ld hl, wd728
-	res 2, [hl]
+	ld hl, wStatusFlags1
+	res BIT_AUTOSURF, [hl]
 	ret
 
 LearnedMove1Text:

@@ -96,7 +96,7 @@ _ChampionsRoomOakCongratulatesPlayerText::
 	line "much since you"
 	cont "first left with"
 	cont "@"
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text "!"
 
 	para "<PLAYER>, you have"

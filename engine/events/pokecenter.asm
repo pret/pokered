@@ -3,10 +3,10 @@
 
 DisplayPokemonCenterDialogue_::
 	call SaveScreenTilesToBuffer1 ; save screen
-	ld hl, wd72e
-	bit 2, [hl]
-	set 1, [hl]
-	set 2, [hl]
+	ld hl, wStatusFlags4
+	bit BIT_USED_POKECENTER, [hl]
+	set BIT_UNKNOWN_4_1, [hl]
+	set BIT_USED_POKECENTER, [hl]
 	ldh a, [hJoyHeld]
 	bit BIT_B_BUTTON, a
 	jr z, .normalWelcome ; NEW: if you're holding b when you start talking to the nurse, it'll skip right to healing.

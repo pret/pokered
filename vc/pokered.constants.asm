@@ -2,7 +2,7 @@
 
 MACRO vc_const
 	DEF x = \1
-	PRINTLN "00:{04x:x} \1" ; same format as rgblink's .sym file
+	PRINTLN "{02x:x} \1" ; same format as rgblink's .sym file
 ENDM
 
 ; [FPA 001 Begin]

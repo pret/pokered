@@ -223,47 +223,6 @@ WriteMonPartySpriteOAMBySpecies:
 	callfar GetPartyMonSpriteID ; mechanicalpennote: ADDED: new code for deciding which pokemon icon to display
 	ld [wOAMBaseTile], a
 	; fall through
-	;jr WriteMonPartySpriteOAM
-
-; PureRGBnote: CHANGED: don't need this code since it's unused
-;UnusedPartyMonSpriteFunction:
-; This function is unused and doesn't appear to do anything useful. It looks
-; like it may have been intended to load the tile patterns and OAM data for
-; the mon party sprite associated with the species in [wcf91].
-; However, its calculations are off and it loads garbage data.
-;	ld a, [wcf91]
-;	call GetPartyMonSpriteID
-;	push af
-;	ld hl, vSprites tile $00
-;	call .LoadTilePatterns
-;	pop af
-;	add $54
-;	ld hl, vSprites tile $04
-;	call .LoadTilePatterns
-;	xor a
-;	ld [wMonPartySpriteSpecies], a
-;	jr WriteMonPartySpriteOAMBySpecies
-;
-;.LoadTilePatterns
-;	push hl
-;	add a
-;	ld c, a
-;	ld b, 0
-;	ld hl, MonPartySpritePointers
-;	add hl, bc
-;	add hl, bc
-;	add hl, bc
-;	ld a, [hli]
-;	ld e, a
-;	ld a, [hli]
-;	ld d, a
-;	ld a, [hli]
-;	ld c, a
-;	ld a, [hli]
-;	ld b, a
-;	pop hl
-;	jp CopyVideoData
-
 WriteMonPartySpriteOAM:
 ; Write the OAM blocks for the first animation frame into the OAM buffer and
 ; make a copy at wMonPartySpritesSavedOAM.
@@ -289,29 +248,5 @@ WriteMonPartySpriteOAM:
 	ld de, wMonPartySpritesSavedOAM
 	ld bc, $60
 	jp CopyData
-
-; mechanicalpennote: CHANGED: don't need this code since we have a new way of displaying menu icons
-;GetPartyMonSpriteIDOld:
-;	ld [wd11e], a
-;	predef IndexToPokedex
-;	ld a, [wd11e]
-;	ld c, a
-;	dec a
-;	srl a
-;	ld hl, MonPartyData
-;	ld e, a
-;	ld d, 0
-;	add hl, de
-;	ld a, [hl]
-;	bit 0, c
-;	jr nz, .skipSwap
-;	swap a ; use lower nybble if pokedex num is even
-;.skipSwap
-;	and $f0
-;	srl a ; value == ICON constant << 2
-;	srl a
-;	ret
-
-; INCLUDE "data/pokemon/menu_icons.asm"
 
 TradeBubbleIconGFX:  INCBIN "gfx/trade/bubble.2bpp"

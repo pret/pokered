@@ -4,11 +4,11 @@ LoadMonData_::
 ;  1: enemymon
 ;  2: boxmon
 ;  3: daycaremon
-; Return monster id at wcf91 and its data at wLoadedMon.
+; Return monster id at wCurPartySpecies and its data at wLoadedMon.
 ; Also load base stats at wMonHeader for convenience.
 
 	ld a, [wDayCareMonSpecies]
-	ld [wcf91], a
+	ld [wCurPartySpecies], a
 	ld a, [wMonDataLocation]
 	cp DAYCARE_DATA
 	jr z, .GetMonHeader
@@ -18,8 +18,8 @@ LoadMonData_::
 	callfar GetMonSpecies
 
 .GetMonHeader
-	ld a, [wcf91]
-	ld [wd0b5], a ; input for GetMonHeader
+	ld a, [wCurPartySpecies]
+	ld [wCurSpecies], a
 	call GetMonHeader
 
 	ld hl, wPartyMons

@@ -37,9 +37,6 @@ DEF MOVE_ACC    rb
 DEF MOVE_PP     rb
 DEF MOVE_LENGTH EQU _RS
 
-; D733 flags
-DEF BIT_TEST_BATTLE EQU 0
-
 ; battle type constants (wBattleType values)
 	const_def
 	const BATTLE_TYPE_NORMAL  ; 0
@@ -76,10 +73,14 @@ DEF MAX_STAT_VALUE EQU 999
 DEF ATKDEFDV_TRAINER EQU $98
 DEF SPDSPCDV_TRAINER EQU $88
 
+; wDamageMultipliers
+DEF BIT_STAB_DAMAGE EQU 7
+DEF EFFECTIVENESS_MASK EQU %01111111
+
 ; wPlayerBattleStatus1 or wEnemyBattleStatus1 bit flags
 	const_def
 	const DEFENSE_CURLED           ; 0 ; PureRGBnote: CHANGED: used to be bide, now it's for defense curl's super effective move resist
-	const THRASHING_ABOUT          ; 1 ; e.g. Thrash
+	const THRASHING_ABOUT          ; 1 ; e.g. Thrash, Petal Dance
 	const ATTACKING_MULTIPLE_TIMES ; 2 ; e.g. Double Kick, Fury Attack
 	const FLINCHED                 ; 3
 	const CHARGING_UP              ; 4 ; e.g. Fly/Dig
@@ -100,7 +101,7 @@ DEF SPDSPCDV_TRAINER EQU $88
 
 ; wPlayerBattleStatus3 or wEnemyBattleStatus3 bit flags
 	const_def
-	const BADLY_POISONED      ; 0
+	const BADLY_POISONED      ; 0 ; Toxic
 	const HAS_LIGHT_SCREEN_UP ; 1
 	const HAS_REFLECT_UP      ; 2
 	const TRANSFORMED         ; 3

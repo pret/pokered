@@ -28,7 +28,7 @@ PrintCardKeyText:
 	call GetCoordsInFrontOfPlayer
 	push de
 	tx_pre_id CardKeySuccessText
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call PrintPredefTextID
 	pop de
 	srl d
@@ -48,12 +48,12 @@ PrintCardKeyText:
 	ld [wNewTileBlockID], a
 	predef ReplaceTileBlock
 	ld hl, wCurrentMapScriptFlags
-	set 5, [hl]
+	set BIT_CUR_MAP_LOADED_1, [hl]
 	ld a, SFX_GO_INSIDE
 	jp PlaySound
 .noCardKey
 	tx_pre_id CardKeyFailText
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	jp PrintPredefTextID
 
 CheckAllCardKeyEvents::

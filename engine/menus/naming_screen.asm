@@ -7,8 +7,8 @@ AskName:
 	hlcoord 0, 0
 	lb bc, 4, 11
 	call z, ClearScreenArea ; only if in wild battle
-	ld a, [wcf91]
-	ld [wd11e], a
+	ld a, [wCurPartySpecies]
+	ld [wNamedObjectIndex], a
 	call GetMonName
 	ld hl, DoYouWantToNicknameText
 	rst _PrintText
@@ -44,7 +44,7 @@ AskName:
 	ld d, h
 	ld e, l
 ForceLoadNickname::
-	ld hl, wcd6d
+	ld hl, wNameBuffer
 	ld bc, NAME_LENGTH
 	jp CopyData
 
@@ -84,24 +84,24 @@ DisplayNamingScreen:
 	ld a, [wNamingScreenType]
 	cp NAME_MON_SCREEN
 	jr nz, .dontLowerVolume
-  	ld a, [wd72c]
-  	set 1, a
-  	ld [wd72c], a
+  	ld a, [wStatusFlags2]
+  	set BIT_NO_AUDIO_FADE_OUT, a
+  	ld [wStatusFlags2], a
 	ld a, $33 ; 3/7 volume
 	ldh [rNR50], a
 .dontLowerVolume
 	call DisplayNamingScreenWrap
 	ld a, $77 ; max volume
 	ldh [rNR50], a
-  	ld a, [wd72c]
-  	res 1, a
-  	ld [wd72c], a
+  	ld a, [wStatusFlags2]
+  	res BIT_NO_AUDIO_FADE_OUT, a
+  	ld [wStatusFlags2], a
 	ret
 
 DisplayNamingScreenWrap:
 	push hl
-	ld hl, wd730
-	set 6, [hl]
+	ld hl, wStatusFlags5
+	set BIT_NO_TEXT_DELAY, [hl]
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	call UpdateSprites
@@ -183,8 +183,8 @@ DisplayNamingScreenWrap:
 	call GBPalNormal
 	xor a
 	ld [wAnimCounter], a
-	ld hl, wd730
-	res 6, [hl]
+	ld hl, wStatusFlags5
+	res BIT_NO_TEXT_DELAY, [hl]
 	ld a, [wIsInBattle]
 	and a
 	jp z, LoadTextBoxTilePatterns
@@ -470,12 +470,12 @@ PrintNamingText:
 	ld de, RivalsTextString
 	dec a
 	jr z, .notNickname
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	ld [wMonPartySpriteSpecies], a
 	push af
 	farcall LoadNicknameMonSprite ; mechanicalpennote: CHANGED: new code for choosing which sprite displays on the nicknaming menus
 	pop af
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMonName
 	hlcoord 4, 1
 	call PlaceString

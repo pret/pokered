@@ -40,7 +40,7 @@ HiddenItemsInit:
 	ld a, 1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld a, [wHiddenObjectFunctionArgument] ; item ID
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetItemName
 	xor a ; clear z flag and set a = 0
 	ret

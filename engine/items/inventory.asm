@@ -1,7 +1,7 @@
 ; function to add an item (in varying quantities) to the player's bag or PC box
 ; INPUT:
 ; hl = address of inventory (either wNumBagItems or wNumBoxItems)
-; [wcf91] = item ID
+; [wCurItem] = item ID
 ; [wItemQuantity] = item quantity
 ; sets carry flag if successful, unsets carry flag if unsuccessful
 AddItemToInventory_::
@@ -30,7 +30,7 @@ AddItemToInventory_::
 .notAtEndOfInventory
 	ld a, [hli]
 	ld b, a ; b = ID of current item in table
-	ld a, [wcf91] ; a = ID of item being added
+	ld a, [wCurItem] ; a = ID of item being added
 	cp b ; does the current item in the table match the item being added?
 	jp z, .increaseItemQuantity ; if so, increase the item's quantity
 	inc hl
@@ -50,7 +50,7 @@ AddItemToInventory_::
 	ld c, a
 	ld b, 0
 	add hl, bc ; hl = address to store the item
-	ld a, [wcf91]
+	ld a, [wCurItem]
 	ld [hli], a ; store item ID
 	ld a, [wItemQuantity]
 	ld [hli], a ; store item quantity

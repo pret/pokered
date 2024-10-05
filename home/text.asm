@@ -88,7 +88,7 @@ NullChar:: ; unused
 	pop hl
 	; A "<NULL>" character in a printed string
 	; displays an error message with the current value
-	; of hSpriteIndexOrTextID in decimal format.
+	; of hTextID in decimal format.
 	; This is a debugging leftover.
 	ld de, TextIDErrorText
 	dec de
@@ -362,7 +362,7 @@ ProtectedDelay3::
 TextCommandProcessor::
 	ld a, [wLetterPrintingDelayFlags]
 	push af
-	set 1, a
+	set BIT_TEXT_DELAY, a
 	ld e, a
 	ldh a, [hClearLetterPrintingDelayFlags]
 	xor e
@@ -600,7 +600,7 @@ TextCommand_SOUND::
 .play
 ;;;;;;;;;; shinpokerednote: FIXED: when there's 0 delay on text, we need to wait here to get text command sounds to work right.
 	ld a, [wOptions]
-	and TEXT_DELAY_BITS
+	and TEXT_DELAY_MASK
 	call z, WaitForSoundToFinish
 ;;;;;;;;;;
 	ld a, [hl]

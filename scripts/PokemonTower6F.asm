@@ -31,7 +31,7 @@ PokemonTower6FDefaultScript:
 	xor a
 	ldh [hJoyHeld], a
 	ld a, TEXT_POKEMONTOWER6F_BEGONE
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 ;;;;;;;;;; PureRGBnote: ADDED: ghost marowak uses a special color palette if the feature is enabled
 	ld a, 1
@@ -40,7 +40,7 @@ PokemonTower6FDefaultScript:
 	ld a, RESTLESS_SOUL
 	ld [wCurOpponent], a
 	ld a, 30
-	ld [wCurEnemyLVL], a
+	ld [wCurEnemyLevel], a
 	ld a, SCRIPT_POKEMONTOWER6F_MAROWAK_BATTLE
 	ld [wPokemonTower6FCurScript], a
 	ld [wCurMapScript], a
@@ -56,8 +56,8 @@ PokemonTower6FMarowakBattleScript:
 	jp z, PokemonTower6FSetDefaultScript
 	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
-	ld a, [wd72d]
-	bit 6, a
+	ld a, [wStatusFlags3]
+	bit BIT_TALKED_TO_TRAINER, a
 	ret nz
 	call UpdateSprites
 	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
@@ -81,7 +81,7 @@ PokemonTower6FMarowakBattleScript:
 .success
 	SetEvent EVENT_BEAT_GHOST_MAROWAK
 	ld a, TEXT_POKEMONTOWER6F_MAROWAK_DEPARTED
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	xor a ; same as SCRIPT_POKEMONTOWER6F_DEFAULT
 	ld [wJoyIgnore], a
@@ -96,8 +96,8 @@ PokemonTower6FMarowakBattleScript:
 	xor a
 	ld [wSpritePlayerStateData2MovementByte1], a
 	ld [wOverrideSimulatedJoypadStatesMask], a
-	ld hl, wd730
-	set 7, [hl]
+	ld hl, wStatusFlags5
+	set BIT_SCRIPTED_MOVEMENT_STATE, [hl]
 	ld a, SCRIPT_POKEMONTOWER6F_PLAYER_MOVING
 	ld [wPokemonTower6FCurScript], a
 	ld [wCurMapScript], a

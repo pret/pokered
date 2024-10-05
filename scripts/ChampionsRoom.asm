@@ -51,14 +51,14 @@ ChampionsRoomRivalReadyToBattleScript:
 	xor a
 	ld [wJoyIgnore], a
 	ld hl, wOptions
-	res 7, [hl]  ; Turn on battle animations to make the battle feel more epic.
+	res BIT_BATTLE_ANIMATION, [hl]
 	ld a, TEXT_CHAMPIONSROOM_RIVAL
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	call Delay3
-	ld hl, wd72d
-	set 6, [hl]
-	set 7, [hl]
+	ld hl, wStatusFlags3
+	set BIT_TALKED_TO_TRAINER, [hl]
+	set BIT_PRINT_END_BATTLE_TEXT, [hl]
 	ld hl, RivalDefeatedText
 	ld de, RivalVictoryText
 	call SaveEndBattleTextPointers
@@ -85,7 +85,7 @@ ChampionsRoomRivalDefeatedScript:
 	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	ld a, TEXT_CHAMPIONSROOM_RIVAL
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call ChampionsRoom_DisplayTextID_AllowABSelectStart
 	ld a, CHAMPIONSROOM_RIVAL
 	ldh [hSpriteIndex], a
@@ -97,7 +97,7 @@ ChampionsRoomRivalDefeatedScript:
 ChampionsRoomOakArrivesScript:
 	farcall Music_Cities1AlternateTempo
 	ld a, TEXT_CHAMPIONSROOM_OAK
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call ChampionsRoom_DisplayTextID_AllowABSelectStart
 	ld a, CHAMPIONSROOM_OAK
 	ldh [hSpriteIndex], a
@@ -122,8 +122,8 @@ OakEntranceAfterVictoryMovement:
 	db -1 ; end
 
 ChampionsRoomOakCongratulatesPlayerScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
 	ld a, PLAYER_DIR_LEFT
 	ld [wPlayerMovingDirection], a
@@ -138,7 +138,7 @@ ChampionsRoomOakCongratulatesPlayerScript:
 	ldh [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, TEXT_CHAMPIONSROOM_OAK_CONGRATULATES_PLAYER
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call ChampionsRoom_DisplayTextID_AllowABSelectStart
 	ld a, SCRIPT_CHAMPIONSROOM_OAK_DISAPPOINTED_WITH_RIVAL
 	ld [wChampionsRoomCurScript], a
@@ -151,7 +151,7 @@ ChampionsRoomOakDisappointedWithRivalScript:
 	ldh [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, TEXT_CHAMPIONSROOM_OAK_DISAPPOINTED_WITH_RIVAL
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call ChampionsRoom_DisplayTextID_AllowABSelectStart
 	ld a, SCRIPT_CHAMPIONSROOM_OAK_COME_WITH_ME
 	ld [wChampionsRoomCurScript], a
@@ -164,7 +164,7 @@ ChampionsRoomOakComeWithMeScript:
 	ldh [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, TEXT_CHAMPIONSROOM_OAK_COME_WITH_ME
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call ChampionsRoom_DisplayTextID_AllowABSelectStart
 	ld de, OakExitChampionsRoomMovement
 	ld a, CHAMPIONSROOM_OAK
@@ -180,8 +180,8 @@ OakExitChampionsRoomMovement:
 	db -1 ; end
 
 ChampionsRoomOakExitsScript:
-	ld a, [wd730]
-	bit 0, a
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
 	ld a, HS_CHAMPIONS_ROOM_OAK
 	ld [wMissableObjectIndex], a
@@ -266,7 +266,7 @@ ChampionsRoomOakText:
 ChampionsRoomOakCongratulatesPlayerText:
 	text_asm
 	ld a, [wPlayerStarter]
-	ld [wd11e], a
+	ld [wNamedObjectIndex], a
 	call GetMonName
 	ld hl, .Text
 	rst _PrintText

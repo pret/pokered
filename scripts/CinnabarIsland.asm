@@ -23,7 +23,7 @@ CinnabarIslandDefaultScript:
 	ld a, PLAYER_DIR_UP
 	ld [wPlayerMovingDirection], a
 	ld a, TEXT_CINNABARISLAND_DOOR_IS_LOCKED
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	CheckEvent EVENT_USED_SECRET_KEY
 	ret nz

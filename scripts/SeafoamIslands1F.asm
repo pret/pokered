@@ -6,9 +6,9 @@ SeafoamIslands1F_Script:
 	ld hl, wCurrentMapScriptFlags
 	res 5, [hl]
 	SetEvent EVENT_IN_SEAFOAM_ISLANDS
-	ld hl, wFlags_0xcd60
-	bit 7, [hl]
-	res 7, [hl]
+	ld hl, wMiscFlags
+	bit BIT_PUSHED_BOULDER, [hl]
+	res BIT_PUSHED_BOULDER, [hl]
 	jr z, .noBoulderWasPushed
 	ld hl, Seafoam1HolesCoords
 	call CheckBoulderCoords

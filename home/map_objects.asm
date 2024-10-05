@@ -28,8 +28,8 @@ StartSimulatingJoypadStates::
 	xor a
 	ld [wOverrideSimulatedJoypadStatesMask], a
 	ld [wSpritePlayerStateData2MovementByte1], a
-	ld hl, wd730
-	set 7, [hl]
+	ld hl, wStatusFlags5
+	set BIT_SCRIPTED_MOVEMENT_STATE, [hl]
 	ret
 
 IsItemInBag::
@@ -43,7 +43,7 @@ IsItemInBag::
 	ret
 
 DisplayPokedex::
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	farjp _DisplayPokedex
 
 SetSpriteFacingDirectionAndDelay::
@@ -202,7 +202,7 @@ SetSpriteMovementBytesToFF::
 
 ; returns the sprite movement byte 1 pointer for sprite [hSpriteIndex] in hl
 GetSpriteMovementByte1Pointer::
-	ld h, $C2
+	ld h, HIGH(wSpriteStateData2)
 	ldh a, [hSpriteIndex]
 	swap a
 	add 6

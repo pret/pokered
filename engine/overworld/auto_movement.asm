@@ -1,6 +1,6 @@
 PlayerStepOutFromDoor::
-	ld hl, wd730
-	res 1, [hl]
+	ld hl, wStatusFlags5 ; should this be wMovementFlags?
+	res BIT_EXITING_DOOR, [hl]
 	call IsPlayerStandingOnDoorTile
 ;;;;;;;;;; PureRGBnote: CHANGED: this code was slightly updated to allow calling from arbitrary places
 	jr nc, ForceStepFromDoor.notStandingOnDoor
@@ -11,8 +11,8 @@ ForceStepFromDoor::
 	push af
 	ld a, SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
-	ld hl, wd736
-	set 1, [hl]
+	ld hl, wMovementFlags
+	set BIT_EXITING_DOOR, [hl]
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
 	pop af
@@ -25,21 +25,21 @@ ForceStepFromDoor::
 	xor a
 	ld [wSimulatedJoypadStatesIndex], a
 	ld [wSimulatedJoypadStatesEnd], a
-	ld hl, wd736
-	res 0, [hl]
-	res 1, [hl]
-	ld hl, wd730
-	res 7, [hl]
+	ld hl, wMovementFlags
+	res BIT_STANDING_ON_DOOR, [hl]
+	res BIT_EXITING_DOOR, [hl]
+	ld hl, wStatusFlags5
+	res BIT_SCRIPTED_MOVEMENT_STATE, [hl]
 	ret
 
 _EndNPCMovementScript::
-	ld hl, wd730
-	res 7, [hl]
-	ld hl, wd72e
-	res 7, [hl]
-	ld hl, wd736
-	res 0, [hl]
-	res 1, [hl]
+	ld hl, wStatusFlags5
+	res BIT_SCRIPTED_MOVEMENT_STATE, [hl]
+	ld hl, wStatusFlags4
+	res BIT_INIT_SCRIPTED_MOVEMENT, [hl]
+	ld hl, wMovementFlags
+	res BIT_STANDING_ON_DOOR, [hl]
+	res BIT_EXITING_DOOR, [hl]
 	xor a
 	ld [wNPCMovementScriptSpriteOffset], a
 	ld [wNPCMovementScriptPointerTableNum], a
@@ -83,15 +83,15 @@ PalletMovementScript_OakMoveLeft:
 	ld a, $3
 	ld [wNPCMovementScriptFunctionNum], a
 .done
-	ld hl, wFlags_D733
-	set 1, [hl]
+	ld hl, wStatusFlags7
+	set BIT_NO_MAP_MUSIC, [hl]
 	ld a, SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	ret
 
 PalletMovementScript_PlayerMoveLeft:
-	ld a, [wd730]
-	bit 0, a ; is an NPC being moved by a script?
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz ; return if Oak is still moving
 	ld a, [wNumStepsToTake]
 	ld [wSimulatedJoypadStatesIndex], a
@@ -123,10 +123,10 @@ PalletMovementScript_WalkToLab:
 	ld hl, wNPCMovementDirections2
 	ld de, RLEList_ProfOakWalkToLab
 	call DecodeRLEList
-	ld hl, wd72e
-	res 7, [hl]
-	ld hl, wd730
-	set 7, [hl]
+	ld hl, wStatusFlags4
+	res BIT_INIT_SCRIPTED_MOVEMENT, [hl]
+	ld hl, wStatusFlags5
+	set BIT_SCRIPTED_MOVEMENT_STATE, [hl]
 	ld a, $4
 	ld [wNPCMovementScriptFunctionNum], a
 	ret
@@ -155,10 +155,10 @@ PalletMovementScript_Done:
 	ld a, HS_PALLET_TOWN_OAK
 	ld [wMissableObjectIndex], a
 	predef HideObject
-	ld hl, wd730
-	res 7, [hl]
-	ld hl, wd72e
-	res 7, [hl]
+	ld hl, wStatusFlags5
+	res BIT_SCRIPTED_MOVEMENT_STATE, [hl]
+	ld hl, wStatusFlags4
+	res BIT_INIT_SCRIPTED_MOVEMENT, [hl]
 	jp EndNPCMovementScript
 
 PewterMuseumGuyMovementScriptPointerTable::
@@ -188,8 +188,8 @@ PewterMovementScript_WalkToMuseum:
 	ld hl, wNPCMovementDirections2
 	ld de, RLEList_PewterMuseumGuy
 	call DecodeRLEList
-	ld hl, wd72e
-	res 7, [hl]
+	ld hl, wStatusFlags4
+	res BIT_INIT_SCRIPTED_MOVEMENT, [hl]
 	ld a, $1
 	ld [wNPCMovementScriptFunctionNum], a
 	ret
@@ -212,10 +212,10 @@ PewterMovementScript_Done:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
-	ld hl, wd730
-	res 7, [hl]
-	ld hl, wd72e
-	res 7, [hl]
+	ld hl, wStatusFlags5
+	res BIT_SCRIPTED_MOVEMENT_STATE, [hl]
+	ld hl, wStatusFlags4
+	res BIT_INIT_SCRIPTED_MOVEMENT, [hl]
 	jp EndNPCMovementScript
 
 PewterGymGuyMovementScriptPointerTable::
@@ -246,10 +246,10 @@ PewterMovementScript_WalkToGym:
 	ld hl, wNPCMovementDirections2
 	ld de, RLEList_PewterGymGuy
 	call DecodeRLEList
-	ld hl, wd72e
-	res 7, [hl]
-	ld hl, wd730
-	set 7, [hl]
+	ld hl, wStatusFlags4
+	res BIT_INIT_SCRIPTED_MOVEMENT, [hl]
+	ld hl, wStatusFlags5
+	set BIT_SCRIPTED_MOVEMENT_STATE, [hl]
 	ld a, $1
 	ld [wNPCMovementScriptFunctionNum], a
 	ret

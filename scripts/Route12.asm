@@ -53,14 +53,14 @@ Route12DefaultScript:
 	jp z, CheckFightingMapTrainers
 	call SnorlaxWakesUpAnimation
 	ld a, TEXT_ROUTE12_SNORLAX_WOKE_UP
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	ld a, SNORLAX
 	ld [wCurOpponent], a
 	ld a, 40 ; PureRGBnote: CHANGED: raised snorlax's level to balance with party levels
-	ld [wCurEnemyLVL], a
+	ld [wCurEnemyLevel], a
 	ld a, ROUTE12_SNORLAX
-	ldh [hSpriteIndexOrTextID], a ; makes snorlax stay on screen during battle transition
+	ldh [hSpriteIndex], a ; makes snorlax stay on screen during battle transition
 	ld a, SCRIPT_ROUTE12_SNORLAX_POST_BATTLE
 	ld [wRoute12CurScript], a
 	ld [wCurMapScript], a
@@ -163,7 +163,7 @@ Route12SnorlaxPostBattleScript:
 	jr .done
 
 FadeInAndDisplayText:
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call GBFadeInFromWhite
 	jp DisplayTextID
 

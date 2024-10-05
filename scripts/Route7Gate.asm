@@ -10,8 +10,8 @@ Route7Gate_ScriptPointers:
 	dw_const Route7PlayerMovingScript, SCRIPT_ROUTE7GATE_PLAYER_MOVING
 
 Route7GateMovePlayerLeftScript:
-	ld hl, wd730
-	set 7, [hl]
+	ld hl, wStatusFlags5
+	set BIT_SCRIPTED_MOVEMENT_STATE, [hl]
 	ld a, D_LEFT
 	ld [wSimulatedJoypadStatesEnd], a
 	ld a, $1
@@ -22,8 +22,8 @@ Route7GateMovePlayerLeftScript:
 	ret
 
 Route7DefaultScript:
-	ld a, [wd728]
-	bit 6, a
+	ld a, [wStatusFlags1]
+	bit BIT_GAVE_SAFFRON_GUARDS_DRINK, a
 	ret nz
 	ld hl, .PlayerInCoordsArray
 	call ArePlayerCoordsInArray
@@ -37,7 +37,7 @@ Route7DefaultScript:
 	and a
 	jr nz, .have_drink
 	ld a, TEXT_ROUTE7GATE_GUARD_GEE_IM_THIRSTY
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	call Route7GateMovePlayerLeftScript
 	ld a, SCRIPT_ROUTE7GATE_PLAYER_MOVING
@@ -45,10 +45,10 @@ Route7DefaultScript:
 	ret
 .have_drink
 	ld a, TEXT_ROUTE7GATE_GUARD_GIVE_DRINK
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
-	ld hl, wd728
-	set 6, [hl]
+	ld hl, wStatusFlags1
+	set BIT_GAVE_SAFFRON_GUARDS_DRINK, [hl]
 	ret
 
 .PlayerInCoordsArray:

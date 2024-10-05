@@ -97,8 +97,8 @@ HandleMenuInput_::
 	and A_BUTTON | B_BUTTON
 	jr z, .skipPlayingSound
 .AButtonOrBButtonPressed
-	ld a, [wFlags_0xcd60] ;shinpokerednote: CHANGED: remove push/pop with hl to save 2 bytes
-	bit 5, a
+	ld a, [wMiscFlags] ;shinpokerednote: CHANGED: remove push/pop with hl to save 2 bytes
+	bit BIT_NO_MENU_BUTTON_SOUND, a
 	jr nz, .skipPlayingSound
 	ld a, SFX_PRESS_AB
 	rst _PlaySound
@@ -138,12 +138,12 @@ PlaceMenuCursor::
 	jr z, .checkForArrow1
 	push af
 	ldh a, [hUILayoutFlags]
-	bit 1, a ; is the menu double spaced?
+	bit BIT_DOUBLE_SPACED_MENU, a
 	jr z, .doubleSpaced1
-	ld bc, 20
+	ld bc, SCREEN_WIDTH
 	jr .getOldMenuItemScreenPosition
 .doubleSpaced1
-	ld bc, 40
+	ld bc, SCREEN_WIDTH * 2
 .getOldMenuItemScreenPosition
 	pop af
 .oldMenuItemLoop
@@ -164,12 +164,12 @@ PlaceMenuCursor::
 	jr z, .checkForArrow2
 	push af
 	ldh a, [hUILayoutFlags]
-	bit 1, a ; is the menu double spaced?
+	bit BIT_DOUBLE_SPACED_MENU, a
 	jr z, .doubleSpaced2
-	ld bc, 20
+	ld bc, SCREEN_WIDTH
 	jr .getCurrentMenuItemScreenPosition
 .doubleSpaced2
-	ld bc, 40
+	ld bc, SCREEN_WIDTH * 2
 .getCurrentMenuItemScreenPosition
 	pop af
 .currentMenuItemLoop
@@ -273,7 +273,7 @@ EnableAutoTextBoxDrawing::
 	jr AutoTextBoxDrawingCommon
 
 DisableAutoTextBoxDrawing::
-	ld a, TRUE
+	ld a, 1 << BIT_NO_AUTO_TEXT_BOX
 
 AutoTextBoxDrawingCommon::
 	ld [wAutoTextBoxDrawingControl], a

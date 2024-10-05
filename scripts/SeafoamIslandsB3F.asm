@@ -1,9 +1,9 @@
 SeafoamIslandsB3F_Script:
 	call EnableAutoTextBoxDrawing
 	call SeafoamIslandsB3FOnMapLoad
-	ld hl, wFlags_0xcd60
-	bit 7, [hl]
-	res 7, [hl]
+	ld hl, wMiscFlags
+	bit BIT_PUSHED_BOULDER, [hl]
+	res BIT_PUSHED_BOULDER, [hl]
 	jr z, .noBoulderWasPushed
 	ld hl, Seafoam4HolesCoords
 	call CheckBoulderCoords
@@ -39,8 +39,8 @@ SeafoamIslandsB3F_Script:
 	ld [wDungeonWarpDestinationMap], a
 	ld hl, Seafoam4HolesCoords
 	call IsPlayerOnDungeonWarp
-	ld a, [wd732]
-	bit 4, a
+	ld a, [wStatusFlags6]
+	bit BIT_DUNGEON_WARP, a
 	ret nz
 .runCurrentMapScript
 	ld hl, SeafoamIslandsB3F_ScriptPointers
@@ -74,8 +74,8 @@ SeafoamIslandsB3FDefaultScript:
 	ret z
 	call SeafoamIslandsCurrents
 	ret nc
-	ld hl, wFlags_D733
-	set 2, [hl]
+	ld hl, wStatusFlags7
+	set BIT_FORCED_WARP, [hl]
 	ld a, SCRIPT_SEAFOAMISLANDSB3F_OBJECT_MOVING1
 	ld [wSeafoamIslandsB3FCurScript], a
 	ret

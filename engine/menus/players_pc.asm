@@ -1,16 +1,16 @@
 ; PureRGBnote: CHANGED: most of the players pc code was changed to remember your location in the item list after performing actions
 ; like withdrawing, depositing...etc.
 PlayerPC::
-	ld hl, wd730
-	set 6, [hl]
+	ld hl, wStatusFlags5
+	set BIT_NO_TEXT_DELAY, [hl]
 	ld a, ITEM_NAME
 	ld [wNameListType], a
 	call SaveScreenTilesToBuffer1
 	xor a
 	ld [wBagSavedMenuItem], a
 	ld [wParentMenuItem], a
-	ld a, [wFlags_0xcd60]
-	bit 3, a ; accessing player's PC through another PC?
+	ld a, [wMiscFlags]
+	bit BIT_USING_GENERIC_PC, a
 	jr nz, PlayerPCMenu
 ; accessing it directly
 	ld a, SFX_TURN_ON_PC
@@ -23,8 +23,8 @@ PlayerPCMenu:
 	ld [wListMenuHoverTextType], a ; PureRGBnote: ADDED: this list menu can't have TMs so turn off that flag so it doesn't even check to display
 	ld a, [wParentMenuItem]
 	ld [wCurrentMenuItem], a
-	ld hl, wFlags_0xcd60
-	set 5, [hl]
+	ld hl, wMiscFlags
+	set BIT_NO_MENU_BUTTON_SOUND, [hl]
 	call LoadScreenTilesFromBuffer2
 	hlcoord 0, 0
 	lb bc, 10, 14 ; PureRGBnote: CHANGED: increased menu size for WORLD OPTIONS to be added
@@ -55,7 +55,7 @@ PlayerPCMenu:
 	ld hl, WhatDoYouWantText
 	rst _PrintText
 	call HandleMenuInput
-	bit 1, a
+	bit BIT_B_BUTTON, a
 	jp nz, ExitPlayerPC
 	call PlaceUnfilledArrowMenuCursor
 	ld a, [wCurrentMenuItem]
@@ -70,22 +70,22 @@ PlayerPCMenu:
 	jp z, WorldOptions
 
 ExitPlayerPC:
-	ld a, [wFlags_0xcd60]
-	bit 3, a ; accessing player's PC through another PC?
+	ld a, [wMiscFlags]
+	bit BIT_USING_GENERIC_PC, a
 	jr nz, .next
 ; accessing it directly
 	ld a, SFX_TURN_OFF_PC
 	rst _PlaySound
 	call WaitForSoundToFinish
 .next
-	ld hl, wFlags_0xcd60
-	res 5, [hl]
+	ld hl, wMiscFlags
+	res BIT_NO_MENU_BUTTON_SOUND, [hl]
 	call LoadScreenTilesFromBuffer2
 	xor a
 	ld [wListScrollOffset], a
 	ld [wBagSavedMenuItem], a
-	ld hl, wd730
-	res 6, [hl]
+	ld hl, wStatusFlags5
+	res BIT_NO_TEXT_DELAY, [hl]
 	xor a
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ret
@@ -259,7 +259,7 @@ PlayerPCToss:
 	ld a, [wIsKeyItem]
 	and a
 	jr nz, .next
-	ld a, [wcf91]
+	ld a, [wCurItem]
 	call IsItemHM
 	jr c, .next
 ; if it's not a key item, there can be more than one of the item

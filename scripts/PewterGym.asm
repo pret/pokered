@@ -30,20 +30,20 @@ PewterGymBrockPostBattle:
 ; fallthrough
 PewterGymScriptReceiveTM34:
 	ld a, TEXT_PEWTERGYM_BROCK_WAIT_TAKE_THIS
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	SetEvent EVENT_BEAT_BROCK
 	lb bc, TM_BROCK, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, TEXT_PEWTERGYM_RECEIVED_TM34
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	SetEvent EVENT_GOT_TM34
 	jr .gymVictory
 .BagFull
 	ld a, TEXT_PEWTERGYM_TM34_NO_ROOM
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 .gymVictory
 	ld hl, wObtainedBadges
@@ -96,9 +96,9 @@ PewterGymBrockText:
 .beforeBeat
 	ld hl, .PreBattleText
 	rst _PrintText
-	ld hl, wd72d
-	set 6, [hl]
-	set 7, [hl]
+	ld hl, wStatusFlags3
+	set BIT_TALKED_TO_TRAINER, [hl]
+	set BIT_PRINT_END_BATTLE_TEXT, [hl]
 	ld hl, PewterGymBrockReceivedBoulderBadgeText
 	ld de, PewterGymBrockReceivedBoulderBadgeText
 	call SaveEndBattleTextPointers

@@ -77,7 +77,7 @@ SetPal_StatusScreen:
 	ld de, wPalPacket
 	ld bc, $10
 	rst _CopyData
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	cp NUM_POKEMON_INDEXES + 1
 	jr c, .pokemon
 	ld a, $1 ; not pokemon
@@ -113,7 +113,7 @@ SetPal_Pokedex:
 	ld de, wPalPacket
 	ld bc, $10
 	rst _CopyData
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	; no alt palette colors when viewing pokedex entries
 	call DeterminePaletteIDOutOfBattle
 	ld hl, wPalPacket + 3
@@ -128,7 +128,7 @@ SetPal_Movedex:
 	ld de, wPalPacket
 	ld bc, $10
 	rst _CopyData
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	ld d, a
 	callfar GetTypePalette
 	ld a, d
@@ -150,7 +150,7 @@ SetPal_MiddleScreenMonBox:
 	ld hl, wPalPacket + 1
 	ld [hl], a
 	
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	; no alt palette pkmn colors in this case
 	call DeterminePaletteIDOutOfBattle
 	ld hl, wPalPacket + 3
@@ -170,14 +170,14 @@ SetPal_ColorBeforeAfter:
 	and 1 ; only the 1st bit of the flags determines alt palette, zero the other ones
 	ld c, a
 	ld [wIsAltPalettePkmn], a
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	call DeterminePaletteIDOutOfBattle
 	ld b, a
 	; after picture
 	ld a, c
 	xor 1 ; second palette should always be alternate one
 	ld [wIsAltPalettePkmn], a
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	call DeterminePaletteIDOutOfBattle
 	ld c, a
 	ld hl, wPalPacket + 1
@@ -481,7 +481,7 @@ DeterminePaletteID:
 	ld a, [hl]
 DeterminePaletteIDOutOfBattle:
 	push bc
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	and a ; is the mon index 0?
 	jr z, .skipDexNumConversion
 	ld hl, NonMonCustomPalettes
@@ -489,13 +489,13 @@ DeterminePaletteIDOutOfBattle:
 	call IsInArray
 	inc hl
 	jr c, .gotPalette
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	ld hl, SpecialMonCustomPalettes
 	ld de, 3
 	call IsInArray
 	jr c, .specialMonPalette
 	predef IndexToPokedex
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	; 0 = missingno is a valid value here
 .skipDexNumConversion
 	pop bc
@@ -834,7 +834,7 @@ SendSGBPackets:
 	;shinpokerednote: gbcnote: initialize the second pal packet in de (now in hl) then enable the lcd
 	call InitGBCPalettesNew
 	ldh a, [rLCDC]
-	and rLCDC_ENABLE_MASK
+	and 1 << rLCDC_ENABLE
 	ret z
 	jp Delay3
 .notGBC
@@ -1024,7 +1024,7 @@ TransferCurBGPData:: ;shinpokerednote: gbcnote: code from pokemon yellow
 	ld de, rBGPD
 	ld hl, wGBCPal
 	ldh a, [rLCDC]
-	and rLCDC_ENABLE_MASK
+	and 1 << rLCDC_ENABLE
 	jr nz, .lcdEnabled
 	rept NUM_COLORS
 	call TransferPalColorLCDDisabled
@@ -1065,7 +1065,7 @@ BufferBGPPal:: ;shinpokerednote: gbcnote: code from pokemon yellow
 TransferBGPPals:: ;shinpokerednote: gbcnote: code from pokemon yellow
 ; Transfer the buffered BG palettes.
 	ldh a, [rLCDC]
-	and rLCDC_ENABLE_MASK
+	and 1 << rLCDC_ENABLE
 	jr z, .lcdDisabled
 	; have to wait until LCDC is disabled
 	; LCD should only ever be disabled during the V-blank period to prevent hardware damage
@@ -1103,7 +1103,7 @@ TransferCurOBPData: ;shinpokerednote: gbcnote: code from pokemon yellow
 	ld de, rOBPD
 	ld hl, wGBCPal
 	ldh a, [rLCDC]
-	and rLCDC_ENABLE_MASK
+	and 1 << rLCDC_ENABLE
 	jr nz, .lcdEnabled
 	rept NUM_COLORS
 	call TransferPalColorLCDDisabled
@@ -1275,10 +1275,10 @@ CopySGBBorderTiles:
 	jr nz, .tileLoop
 	ret
 
-;shinpokerednote: gbcnote: This function loads the palette for a given pokemon index in wcf91 into a specified palette register on the GBC
+;shinpokerednote: gbcnote: This function loads the palette for a given pokemon index in wCurPartySpecies into a specified palette register on the GBC
 ;d = CONVERT_OBP0, CONVERT_OBP1, or CONVERT_BGP
 ;e = palette register # (0 to 7)
-;if wcf91 has bit 7 set, then it the address holds a specific palette instead of a 'mon
+;if wCurPartySpecies has bit 7 set, then it the address holds a specific palette instead of a 'mon
 TransferMonPal:
 	ldh a, [hGBC]
 	and a
@@ -1287,7 +1287,7 @@ TransferMonPal:
 	push af
 	ld a, d
 	push af
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	cp NUM_POKEMON_INDEXES+2
 	jr c, .isMon
 	sub NUM_POKEMON_INDEXES+2

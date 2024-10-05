@@ -161,7 +161,7 @@ LoadMapSpriteTilePatterns:
 	pop de
 	ld b, a
 	ld a, [wFontLoaded]
-	bit 0, a ; reloading upper half of tile patterns after displaying text?
+	bit BIT_FONT_LOADED, a ; reloading upper half of tile patterns after displaying text?
 	jr nz, .skipFirstLoad ; if so, skip loading data into the lower half
 	ld a, b
 	ld b, 0
@@ -182,11 +182,11 @@ LoadMapSpriteTilePatterns:
 	inc d
 .noCarry3
 	ld a, [wFontLoaded]
-	bit 0, a ; reloading upper half of tile patterns after displaying text?
+	bit BIT_FONT_LOADED, a ; reloading upper half of tile patterns after displaying text?
 	jr nz, .loadWhileLCDOn
 	pop af
 	pop hl
-	set 3, h ; add $80 tiles to hl
+	set 3, h ; add $800 ($80 tiles) to hl (1 << 3 == $8)
 	push hl
 	ld h, d
 	ld l, e
@@ -199,7 +199,7 @@ LoadMapSpriteTilePatterns:
 .loadWhileLCDOn
 	pop af
 	pop hl
-	set 3, h ; add $80 tiles to hl
+	set 3, h ; add $800 ($80 tiles) to hl (1 << 3 == $8)
 	ld b, a
 	swap c
 	call CopyVideoData ; load tile pattern data for sprite when walking
@@ -267,7 +267,7 @@ InitOutsideMapSprites:
 	call nc, GetSplitMapSpriteSetID ; if so, choose the appropriate one
 	ld b, a ; b = spriteSetID
 	ld a, [wFontLoaded]
-	bit 0, a ; reloading upper half of tile patterns after displaying text?
+	bit BIT_FONT_LOADED, a ; reloading upper half of tile patterns after displaying text?
 	jr nz, .loadSpriteSet ; if so, forcibly reload the sprite set
 	ld a, [wSpriteSetID]
 	cp b ; has the sprite set ID changed?

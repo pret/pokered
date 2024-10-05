@@ -50,7 +50,7 @@ FuchsiaGoodRodHouseOnMapLoad:
 	call CopyVideoData
 	call DoErikSaraFacings
 	ld a, TEXT_ERIKSARASHOUSE_AFTER_EVENT
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	call GBFadeOutToBlack
 	ld a, FUCHSIAGOODRODHOUSE_ERIK
@@ -84,7 +84,7 @@ FuchsiaGoodRodHouseFishingGuruText:
 	ld hl, FuchsiaGuruIntro
 	rst _PrintText
 	callfar LastTwoGurusScript
-	jr .done
+	jr .done ; TODO: rst TextScriptEnd
 .printEndText
 	ld hl, FuchsiaGuruEnd
 	rst _PrintText
@@ -382,7 +382,7 @@ ErikSarasHouseSaraText:
   	predef HealParty
   	pop af
   	ld [wWhichPokemon], a
-	call GetPartyMonName2 ; have to re-get its name since healparty changes wcd6d
+	call GetPartyMonName2 ; have to re-get its name since healparty changes wNameBuffer
 	ResetEvent EVENT_DRAGONAIR_EVENT_BEAT_CLOYSTER ; allows repeating of the dragonair event
 	ResetEvent EVENT_DRAGONAIR_EVENT_FOUGHT_CLOYSTER_ONCE
   	; load scripted warp to seafoam islands b4f
@@ -390,8 +390,8 @@ ErikSarasHouseSaraText:
 	ld [wDestinationWarpID], a
 	ld a, SEAFOAM_ISLANDS_B4F
 	ldh [hWarpDestinationMap], a
-	ld hl, wd72d
-	set 3, [hl] ; scripted warp flag
+	ld hl, wStatusFlags3
+	set BIT_WARP_FROM_CUR_SCRIPT, [hl] ; scripted warp flag
 	ld a, SCRIPT_SEAFOAMISLANDSB4F_DRAGONAIR_EVENT_START
 	ld [wSeafoamIslandsB4FCurScript], a
   	ld hl, .letsDoThis

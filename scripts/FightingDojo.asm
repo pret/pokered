@@ -49,7 +49,7 @@ FightingDojoDefaultScript:
 	ldh [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, TEXT_FIGHTINGDOJO_KARATE_MASTER
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	jp DisplayTextID
 
 FightingDojoKarateMasterPostBattleScript:
@@ -71,7 +71,7 @@ FightingDojoKarateMasterPostBattleScript:
 	ld [wJoyIgnore], a
 	SetEventRange EVENT_BEAT_KARATE_MASTER, EVENT_BEAT_FIGHTING_DOJO_TRAINER_3
 	ld a, TEXT_FIGHTINGDOJO_KARATE_MASTER_I_WILL_GIVE_YOU_A_POKEMON
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	xor a ; SCRIPT_FIGHTINGDOJO_DEFAULT
 	ld [wJoyIgnore], a
@@ -110,13 +110,13 @@ FightingDojoKarateMasterText:
 	jp nz, .defeated_master
 	ld hl, .Text
 	rst _PrintText
-	ld hl, wd72d
-	set 6, [hl]
-	set 7, [hl]
+	ld hl, wStatusFlags3
+	set BIT_TALKED_TO_TRAINER, [hl]
+	set BIT_PRINT_END_BATTLE_TEXT, [hl]
 	ld hl, .DefeatedText
 	ld de, .DefeatedText
 	call SaveEndBattleTextPointers
-	ldh a, [hSpriteIndexOrTextID]
+	ldh a, [hSpriteIndex]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
@@ -238,7 +238,7 @@ FightingDojoHitmonleePokeBallText:
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .done
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	ld b, a
 	ld c, 30
 	call GivePokemon
@@ -272,7 +272,7 @@ FightingDojoHitmonchanPokeBallText:
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .done
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	ld b, a
 	ld c, 30
 	call GivePokemon

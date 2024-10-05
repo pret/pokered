@@ -11,16 +11,16 @@ VictoryRoad2F_Script:
 
 VictoryRoad2FResetBoulderEventScript:
 	ld hl, wCurrentMapScriptFlags
-	bit 6, [hl]
-	res 6, [hl]
+	bit BIT_CUR_MAP_LOADED_2, [hl]
+	res BIT_CUR_MAP_LOADED_2, [hl]
 	ret z
 	ResetEvent EVENT_VICTORY_ROAD_1_BOULDER_ON_SWITCH
 	ret ; avoids running the below code twice because bit 5 of wCurrentMapScriptFlags is always set when bit 6 is set too
 
 VictoryRoad2FCheckBoulderEventScript::
 	ld hl, wCurrentMapScriptFlags
-	bit 5, [hl]
-	res 5, [hl]
+	bit BIT_CUR_MAP_LOADED_1, [hl]
+	res BIT_CUR_MAP_LOADED_1, [hl]
 	ret z
 	CheckEvent EVENT_VICTORY_ROAD_2_BOULDER_ON_SWITCH1
 	jr z, .not_on_switch
@@ -45,8 +45,8 @@ VictoryRoad2F_ScriptPointers:
 	dw_const EndTrainerBattle,                      SCRIPT_VICTORYROAD2F_END_BATTLE
 
 VictoryRoad2FDefaultScript:
-	ld a, [wFlags_0xcd60]
-	bit 1, a
+	ld a, [wMiscFlags]
+	bit BIT_BOULDER_DUST, a
 	ret nz ; PureRGBnote: ADDED: if a boulder animation is playing forget doing this, helps reduce lag
 	ld hl, .SwitchCoords
 	call CheckBoulderCoords
@@ -68,7 +68,7 @@ VictoryRoad2FDefaultScript:
 .set_script_flag
 	callfar BoulderOnButtonAnim
 	ld hl, wCurrentMapScriptFlags
-	set 5, [hl]
+	set BIT_CUR_MAP_LOADED_1, [hl]
 	ret
 
 .SwitchCoords:

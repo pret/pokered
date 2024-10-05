@@ -1,12 +1,12 @@
 SilphCoElevator_Script:
 	ld hl, wCurrentMapScriptFlags
-	bit 5, [hl]
-	res 5, [hl]
+	bit BIT_CUR_MAP_LOADED_1, [hl]
+	res BIT_CUR_MAP_LOADED_1, [hl]
 	push hl
 	call nz, SilphCoElevatorStoreWarpEntriesScript
 	pop hl
-	bit 7, [hl]
-	res 7, [hl]
+	bit BIT_CUR_MAP_USED_ELEVATOR, [hl]
+	res BIT_CUR_MAP_USED_ELEVATOR, [hl]
 	call nz, SilphCoElevatorShakeScript
 	xor a
 	ld [wAutoTextBoxDrawingControl], a

@@ -15,9 +15,11 @@ PrepareTitleScreen::
 	xor a
 	ldh [hWY], a
 	ld [wLetterPrintingDelayFlags], a
-	ld hl, wd732
+	ld hl, wStatusFlags6
 	ld [hli], a
+	assert wStatusFlags6 + 1 == wStatusFlags7
 	ld [hli], a
+	assert wStatusFlags7 + 1 == wElite4Flags
 	ld [hl], a
 	ld a, BANK(Music_TitleScreen)
 	ld [wAudioROMBank], a
@@ -225,7 +227,7 @@ ENDC
 	ld [wNewSoundID], a
 	rst _PlaySound
 	xor a
-	ld [wUnusedCC5B], a
+	ld [wUnusedFlag], a
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; shinpokerednote: gbcnote: The tiles in the window need to be shifted so that the bottom
@@ -392,8 +394,8 @@ ClearBothBGMaps:
 	jp FillMemory
 
 LoadTitleMonSprite:
-	ld [wcf91], a
-	ld [wd0b5], a
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
 	hlcoord 5, 10
 	call GetMonHeader
 	jp LoadFrontSpriteByMonIndex

@@ -20,7 +20,7 @@ _AddPartyMon::
 	jr nc, .noCarry
 	inc d
 .noCarry
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	ld [de], a ; write species of new mon in party list
 	inc de
 	ld a, $ff ; terminator
@@ -55,16 +55,16 @@ IF DEF(_DEBUG)
 	ld a, [wMonDataLocation]
 	and %01000000
 	jr z, .skipDebugNaming
-	ld a, [wcf91]
-	ld [wd11e], a
-	call GetMonName ; puts pokemon name in wcd6d
+	ld a, [wCurPartySpecies]
+	ld [wPokedexNum], a
+	call GetMonName ; puts pokemon name in wNameBuffer
 	ld hl, wPartyMonNicks
 	ldh a, [hNewPartyLength]
 	dec a
 	call SkipFixedLengthTextEntries
 	ld d, h
 	ld e, l
-	ld hl, wcd6d
+	ld hl, wNameBuffer
 	ld bc, NAME_LENGTH
 	call CopyData
 .skipDebugNaming
@@ -83,8 +83,8 @@ ENDC
 	ld e, l
 	ld d, h
 	push hl
-	ld a, [wcf91]
-	ld [wd0b5], a
+	ld a, [wCurPartySpecies]
+	ld [wCurSpecies], a
 	call GetMonHeader
 	ld hl, wMonHeader
 	ld a, [hli]
@@ -99,12 +99,12 @@ ENDC
 	jr nz, .next4
 
 ; If the mon is being added to the player's party, update the pokedex.
-	ld a, [wcf91]
-	ld [wd11e], a
+	ld a, [wCurPartySpecies]
+	ld [wPokedexNum], a
 	push de
 	predef IndexToPokedex
 	pop de
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	and a
 	jr z, .missingnoskip ; PureRGBnote: ADDED: if it's missingno don't do any pokedex actions
 	dec a
@@ -114,7 +114,7 @@ ENDC
 	call FlagAction
 	;ld a, c ; whether the mon was already flagged as owned
 	;ld [wUnusedAlreadyOwnedFlag], a ; not read
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	dec a
 	ld c, a
 	ld b, FLAG_SET
@@ -249,7 +249,7 @@ ENDC
 	inc de
 	ld [de], a
 	push de
-	ld a, [wCurEnemyLVL]
+	ld a, [wCurEnemyLevel]
 	ld d, a
 	callfar CalcExperience
 	pop de
@@ -274,7 +274,7 @@ ENDC
 	pop hl
 	call AddPartyMon_WriteMovePP
 	inc de
-	ld a, [wCurEnemyLVL]
+	ld a, [wCurEnemyLevel]
 	ld [de], a
 	inc de
 	ld a, [wIsInBattle]
@@ -311,13 +311,13 @@ AddPartyMon_WriteMovePP:
 	ld hl, Moves
 	ld bc, MOVE_LENGTH
 	call AddNTimes
-	ld de, wcd6d
+	ld de, wMoveData
 	ld a, BANK(Moves)
 	call FarCopyData
 	pop bc
 	pop de
 	pop hl
-	ld a, [wcd6d + 5] ; PP is byte 5 of move data
+	ld a, [wMoveData + MOVE_PP]
 .empty
 	inc de
 	ld [de], a
@@ -325,7 +325,7 @@ AddPartyMon_WriteMovePP:
 	jr nz, .pploop ; there are still moves to read
 	ret
 
-; adds enemy mon [wcf91] (at position [wWhichPokemon] in enemy list) to own party
+; adds enemy mon [wCurPartySpecies] (at position [wWhichPokemon] in enemy list) to own party
 ; used in the cable club trade center
 _AddEnemyMonToPlayerParty::
 ;;;;;;;;;; PureRGBnote: need to store whether the pokemon uses alternate palette after trading then reset that flag
@@ -344,7 +344,7 @@ _AddEnemyMonToPlayerParty::
 	ld c, a
 	ld b, $0
 	add hl, bc
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	ld [hli], a      ; add mon as last list entry
 	ld [hl], $ff     ; write new sentinel
 	ld hl, wPartyMons
@@ -378,10 +378,10 @@ _AddEnemyMonToPlayerParty::
 	call SkipFixedLengthTextEntries
 	ld bc, NAME_LENGTH
 	rst _CopyData    ; write new mon's nickname (from an enemy mon)
-	ld a, [wcf91]
-	ld [wd11e], a
+	ld a, [wCurPartySpecies]
+	ld [wPokedexNum], a
 	predef IndexToPokedex
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	dec a
 	ld c, a
 	ld b, FLAG_SET
@@ -427,7 +427,7 @@ _MoveMon::
 	cp DAYCARE_TO_PARTY
 	ld a, [wDayCareMon]
 	jr z, .copySpecies
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 .copySpecies
 	ld [hli], a          ; write new mon ID to wPartySpecies on the last byte where party ends (eg 5 if 5 pokemon now in party)
 	ld [hl], $ff         ; write new sentinel
@@ -556,7 +556,7 @@ _MoveMon::
 	call LoadMonData
 	farcall CalcLevelFromExperience
 	ld a, d
-	ld [wCurEnemyLVL], a
+	ld [wCurEnemyLevel], a
 	pop hl
 	ld bc, wBoxMon2 - wBoxMon1
 	add hl, bc

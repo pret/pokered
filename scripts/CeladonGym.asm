@@ -75,20 +75,20 @@ CeladonGymErikaPostBattleScript:
 
 CeladonGymReceiveTM21:
 	ld a, TEXT_CELADONGYM_RAINBOWBADGE_INFO
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	SetEvent EVENT_BEAT_ERIKA
 	lb bc, TM_ERIKA, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, TEXT_CELADONGYM_RECEIVED_TM21
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	SetEvent EVENT_GOT_TM21
 	jr .gymVictory
 .BagFull
 	ld a, TEXT_CELADONGYM_TM21_NO_ROOM
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 .gymVictory
 	ld hl, wObtainedBadges
@@ -149,9 +149,9 @@ CeladonGymErikaText:
 .beforeBeat
 	ld hl, .PreBattleText
 	rst _PrintText
-	ld hl, wd72d
-	set 6, [hl]
-	set 7, [hl]
+	ld hl, wStatusFlags3
+	set BIT_TALKED_TO_TRAINER, [hl]
+	set BIT_PRINT_END_BATTLE_TEXT, [hl]
 	ld hl, .ReceivedRainbowBadgeText
 	ld de, .ReceivedRainbowBadgeText
 	call SaveEndBattleTextPointers

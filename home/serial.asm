@@ -30,7 +30,7 @@ Serial::
 	ldh [rDIV], a
 .waitLoop
 	ldh a, [rDIV]
-	bit 7, a
+	bit 7, a ; wait until rDIV has incremented from $3 to $80 or more
 	jr nz, .waitLoop
 	ld a, START_TRANSFER_EXTERNAL_CLOCK
 	ldh [rSC], a

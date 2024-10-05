@@ -1,8 +1,8 @@
 VermilionGym_Script:
 	ld hl, wCurrentMapScriptFlags
-	res 5, [hl]
-	bit 6, [hl]
-	res 6, [hl]
+	res BIT_CUR_MAP_LOADED_1, [hl]
+	bit BIT_CUR_MAP_LOADED_2, [hl]
+	res BIT_CUR_MAP_LOADED_2, [hl]
 	call nz, VermilionGymSetDoorTile
 	call EnableAutoTextBoxDrawing
 	ld hl, VermilionGymTrainerHeaders
@@ -54,20 +54,20 @@ VermilionGymLTSurgeAfterBattleScript:
 
 VermilionGymLTSurgeReceiveTM24Script:
 	ld a, TEXT_VERMILIONGYM_LT_SURGE_THUNDER_BADGE_INFO
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	SetEvent EVENT_BEAT_LT_SURGE
 	lb bc, TM_SURGE, 1
 	call GiveItem
 	jr nc, .bag_full
 	ld a, TEXT_VERMILIONGYM_LT_SURGE_RECEIVED_TM24
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	SetEvent EVENT_GOT_TM24
 	jr .gym_victory
 .bag_full
 	ld a, TEXT_VERMILIONGYM_LT_SURGE_TM24_NO_ROOM
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 .gym_victory
 	ld hl, wObtainedBadges
@@ -119,9 +119,9 @@ VermilionGymLTSurgeText:
 .before_beat
 	ld hl, .PreBattleText
 	rst _PrintText
-	ld hl, wd72d
-	set 6, [hl]
-	set 7, [hl]
+	ld hl, wStatusFlags3
+	set BIT_TALKED_TO_TRAINER, [hl]
+	set BIT_PRINT_END_BATTLE_TEXT, [hl]
 	ld hl, VermilionGymLTSurgeReceivedThunderBadgeText
 	ld de, VermilionGymLTSurgeReceivedThunderBadgeText
 	call SaveEndBattleTextPointers

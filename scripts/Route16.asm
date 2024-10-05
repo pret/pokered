@@ -46,14 +46,14 @@ Route16DefaultScript:
 	jp z, CheckFightingMapTrainers
 	call SnorlaxWakesUpAnimation
 	ld a, TEXT_ROUTE16_SNORLAX_WOKE_UP
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	ld a, SNORLAX
 	ld [wCurOpponent], a
 	ld a, 40 ; PureRGBnote: CHANGED: raised snorlax's level to balance with party levels
-	ld [wCurEnemyLVL], a
+	ld [wCurEnemyLevel], a
 	ld a, ROUTE16_SNORLAX
-	ldh [hSpriteIndexOrTextID], a ; makes snorlax stay on screen during battle transition
+	ldh [hSpriteIndex], a ; makes snorlax stay on screen during battle transition
 	ld a, SCRIPT_ROUTE16_SNORLAX_POST_BATTLE
 	ld [wRoute16CurScript], a
 	ld [wCurMapScript], a

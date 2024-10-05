@@ -1,5 +1,5 @@
 ; PureRGBnote: CHANGED: this function was modified in order to facilitate remapping types of pokemon to their original ones.
-; [wd0b5] = pokemon ID
+; [wCurSpecies] = pokemon ID
 ; hl = dest addr
 PrintMonType:
 	call GetPredefRegisters

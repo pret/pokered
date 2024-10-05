@@ -140,12 +140,12 @@ StartMenu_Pokemon::
 	jp .loop
 .canFly
 	call ChooseFlyDestination
-	ld a, [wd732]
-	bit 3, a ; did the player decide to fly?
+	ld a, [wStatusFlags6]
+	bit BIT_FLY_WARP, a ; did the player decide to fly?
 	jr nz, .doFly
 	call LoadFontTilePatterns
-	ld hl, wd72e
-	set 1, [hl]
+	ld hl, wStatusFlags4
+	set BIT_UNKNOWN_4_1, [hl]
 	jp StartMenu_Pokemon
 .doFly
 	ResetFlag FLAG_DIG_OVERWORLD_ANIMATION
@@ -164,12 +164,12 @@ StartMenu_Pokemon::
 	bit BIT_SOULBADGE, a
 	jp z, .newBadgeRequired
 	farcall IsSurfingAllowed
-	ld hl, wd728
-	bit 1, [hl]
-	res 1, [hl]
+	ld hl, wStatusFlags1
+	bit BIT_SURF_ALLOWED, [hl]
+	res BIT_SURF_ALLOWED, [hl]
 	jp z, .loop
 	ld a, SURFBOARD
-	ld [wcf91], a
+	ld [wCurItem], a
 	ld [wPseudoItemID], a
 	call UseItem
 	ld a, [wActionResultOrTookBattleTurn]
@@ -180,7 +180,7 @@ StartMenu_Pokemon::
 .strength
 	bit BIT_RAINBOWBADGE, a
 	jp z, .newBadgeRequired
-	predef PrintStrengthTxt
+	predef PrintStrengthText
 	call GBPalWhiteOutWithDelay3
 	jp .goBackToMap
 .flash
@@ -204,8 +204,8 @@ StartMenu_Pokemon::
 	callfar DigFromPartyMenu
 	jp c, StartMenu_Pokemon
 	jp z, .loop
-	ld a, [wd732]
-	bit 3, a ; did the player decide to dig?
+	ld a, [wStatusFlags6]
+	bit BIT_FLY_WARP, a ; did the player decide to dig?
 	jp nz, .doDig
 	jp .goBackToMap
 .teleport
@@ -220,12 +220,12 @@ StartMenu_Pokemon::
 .canTeleport
 	ld hl, .warpToLastPokemonCenterText
 	rst _PrintText
-	ld hl, wd732
-	set 3, [hl]
-	set 6, [hl]
-	ld hl, wd72e
-	set 1, [hl]
-	res 4, [hl]
+	ld hl, wStatusFlags6
+	set BIT_FLY_WARP, [hl]
+	set BIT_ESCAPE_WARP, [hl]
+	ld hl, wStatusFlags4
+	set BIT_UNKNOWN_4_1, [hl]
+	res BIT_NO_BATTLES, [hl]
 	ld c, 60
 	rst _DelayFrames
 	call GBPalWhiteOutWithDelay3
@@ -266,7 +266,7 @@ StartMenu_Pokemon::
 	ld a, [wPartyAndBillsPCSavedMenuItem]
 	push af
 	ld a, POTION
-	ld [wcf91], a
+	ld [wCurItem], a
 	ld [wPseudoItemID], a
 	call UseItem
 	pop af
@@ -362,7 +362,7 @@ StartMenu_Item::
 	call PlaceUnfilledArrowMenuCursor
 	xor a
 	ld [wMenuItemToSwap], a
-	ld a, [wcf91]
+	ld a, [wCurItem]
 	cp BICYCLE
 	jp z, .useOrTossItem
 	cp POCKET_ABRA
@@ -392,11 +392,11 @@ StartMenu_Item::
 	bit BIT_B_BUTTON, a
 	jp nz, ItemMenuLoop
 .useOrTossItem ; if the player made the choice to use or toss the item
-	ld a, [wcf91]
-	ld [wd11e], a
+	ld a, [wCurItem]
+	ld [wNamedObjectIndex], a
 	call GetItemName
 	call CopyToStringBuffer
-	ld a, [wcf91]
+	ld a, [wCurItem]
 	cp BICYCLE
 ;;;;;;;;;; PureRGBnote: ADDED: pocket abra closes the item menu after usage.
 	jr z, .yesBicycle
@@ -405,8 +405,8 @@ StartMenu_Item::
 	jr .useItem_closeMenu
 .yesBicycle
 ;;;;;;;;;;
-	ld a, [wd732]
-	bit 5, a
+	ld a, [wStatusFlags6]
+	bit BIT_ALWAYS_ON_BIKE, a
 	jr z, .useItem_closeMenu
 	ld hl, CannotGetOffHereText
 	rst _PrintText
@@ -417,14 +417,14 @@ StartMenu_Item::
 	jr nz, .tossItem
 ; use item
 	ld [wPseudoItemID], a ; a must be 0 due to above conditional jump
-	ld a, [wcf91]
+	ld a, [wCurItem]
 	cp HM01
 	jr nc, .useItem_partyMenu
 	ld hl, UsableItems_CloseMenu
 	ld de, 1
 	call IsInArray
 	jr c, .useItem_closeMenu
-	ld a, [wcf91]
+	ld a, [wCurItem]
 	ld hl, UsableItems_PartyMenu
 	ld de, 1
 	call IsInArray
@@ -462,7 +462,7 @@ StartMenu_Item::
 	ld a, [wIsKeyItem]
 	and a
 	jr nz, .skipAskingQuantity
-	ld a, [wcf91]
+	ld a, [wCurItem]
 	call IsItemHM
 	jr c, .skipAskingQuantity
 	call DisplayChooseQuantityMenu
@@ -701,8 +701,8 @@ TrainerInfo_DrawVerticalLine:
 	ret
 
 StartMenu_SaveReset::
-	ld a, [wd72e]
-	bit 6, a ; is the player using the link feature?
+	ld a, [wStatusFlags4]
+	bit BIT_LINK_CONNECTED, a
 	jp nz, Init
 	predef SaveSAV ; save the game
 	call LoadScreenTilesFromBuffer2 ; restore saved screen

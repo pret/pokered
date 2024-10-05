@@ -10,8 +10,8 @@ Route8Gate_ScriptPointers:
 	dw_const Route8GatePlayerMovingScript, SCRIPT_ROUTE8GATE_PLAYER_MOVING
 
 Route8GateMovePlayerRightScript:
-	ld hl, wd730
-	set 7, [hl]
+	ld hl, wStatusFlags5
+	set BIT_SCRIPTED_MOVEMENT_STATE, [hl]
 	ld a, D_RIGHT
 	ld [wSimulatedJoypadStatesEnd], a
 	ld a, $1
@@ -22,8 +22,8 @@ Route8GateMovePlayerRightScript:
 	ret
 
 Route8GateDefaultScript:
-	ld a, [wd728]
-	bit 6, a
+	ld a, [wStatusFlags1]
+	bit BIT_GAVE_SAFFRON_GUARDS_DRINK, a
 	ret nz
 	ld hl, .PlayerInCoordsArray
 	call ArePlayerCoordsInArray
@@ -37,17 +37,17 @@ Route8GateDefaultScript:
 	and a
 	jr nz, .have_drink
 	ld a, TEXT_ROUTE8GATE_GUARD_GEE_IM_THIRSTY
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	call Route8GateMovePlayerRightScript
 	ld a, SCRIPT_ROUTE8GATE_PLAYER_MOVING
 	ld [wRoute8GateCurScript], a
 	ret
 .have_drink
-	ld hl, wd728
-	set 6, [hl]
+	ld hl, wStatusFlags1
+	set BIT_GAVE_SAFFRON_GUARDS_DRINK, [hl]
 	ld a, TEXT_ROUTE8GATE_GUARD_GIVE_DRINK
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	jp DisplayTextID
 
 .PlayerInCoordsArray:

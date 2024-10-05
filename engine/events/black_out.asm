@@ -8,7 +8,7 @@ ResetStatusAndHalveMoneyOnBlackout::
 	ld [wNPCMovementScriptFunctionNum], a
 	ldh [hJoyHeld], a
 	ld [wNPCMovementScriptPointerTableNum], a
-	ld [wFlags_0xcd60], a
+	ld [wMiscFlags], a
 
 	;;;;;;; PureRGBnote: CHANGED: removed pointless code that isn't needed since a carry is never produced.
 	;ldh [hMoney], a
@@ -44,10 +44,10 @@ ResetStatusAndHalveMoneyOnBlackout::
 	callfar ClearSafariFlags
 
 ;.lostmoney
-	ld hl, wd732
-	set 2, [hl]
-	res 3, [hl]
-	set 6, [hl]
-	ld a, %11111111
+	ld hl, wStatusFlags6
+	set BIT_FLY_OR_DUNGEON_WARP, [hl]
+	res BIT_FLY_WARP, [hl]
+	set BIT_ESCAPE_WARP, [hl]
+	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	predef_jump HealParty

@@ -1,6 +1,5 @@
 LoadSAV:
-;(if carry -> write
-;"the file data is destroyed")
+; if carry, write "the file data is destroyed"
 	call ClearScreen
 	call LoadFontTilePatterns
 	call LoadTextBoxTilePatterns
@@ -13,15 +12,15 @@ LoadSAV:
 	ld a, $2 ; good checksum
 	jr .goodsum
 .badsum
-	ld hl, wd730
+	ld hl, wStatusFlags5
 	push hl
-	set 6, [hl]
+	set BIT_NO_TEXT_DELAY, [hl]
 	ld hl, FileDataDestroyedText
 	rst _PrintText
 	ld c, 100
 	rst _DelayFrames
 	pop hl
-	res 6, [hl]
+	res BIT_NO_TEXT_DELAY, [hl]
 	ld a, $1 ; bad checksum
 .goodsum
 	ld [wSaveFileStatus], a
@@ -67,7 +66,7 @@ LoadSAV0:
 	ld bc, wMainDataEnd - wMainDataStart
 	rst _CopyData
 	ld hl, wCurMapTileset
-	set 7, [hl]
+	set BIT_NO_PREVIOUS_MAP, [hl]
 	ld hl, sSpriteData
 	ld de, wSpriteDataStart
 	ld bc, wSpriteDataEnd - wSpriteDataStart
@@ -347,11 +346,11 @@ BoxSRAMPointerTable:
 ; PureRGBnote: CHANGED: a lot of this function was modified to have a more advanced change box menu
 ChangeBox::
 	CheckEvent EVENT_HIDE_CHANGE_BOX_SAVE_MSG
-	ld a, [wd730]
+	ld a, [wStatusFlags5]
 	push af
 	jr nz, .savePromptSkip
-	res 6, a ; turn on letter printing delay so we don't get instant text
-	ld [wd730], a 
+	res BIT_NO_TEXT_DELAY, a ; turn on letter printing delay so we don't get instant text
+	ld [wStatusFlags5], a 
 	
 	ld hl, WhenYouChangeBoxText
 	rst _PrintText
@@ -380,18 +379,18 @@ ChangeBox::
 	rst _PrintText
 .savePromptSkip
 .yes
-	set 6, a ; turn off letter printing delay so we get instant text
-	ld [wd730], a
+	set BIT_NO_TEXT_DELAY, a ; turn off letter printing delay so we get instant text
+	ld [wStatusFlags5], a
 	ld hl, wCurrentBoxNum
-	bit 7, [hl] ; is it the first time player is changing the box?
+	bit BIT_HAS_CHANGED_BOXES, [hl] ; is it the first time player is changing the box?
 	call z, EmptyAllSRAMBoxes ; if so, empty all boxes in SRAM
 	callfar DisplayChangeBoxMenu
 	call UpdateSprites
 	ld hl, hUILayoutFlags
-	set 1, [hl]
+	set BIT_DOUBLE_SPACED_MENU, [hl]
 	call HandleMenuInput
 	ld hl, hUILayoutFlags
-	res 1, [hl]
+	res BIT_DOUBLE_SPACED_MENU, [hl]
 	bit BIT_B_BUTTON, a
 	jr nz, .done
 	call GetBoxSRAMLocation
@@ -400,7 +399,7 @@ ChangeBox::
 	ld hl, wBoxDataStart
 	call CopyBoxToOrFromSRAM ; copy old box from WRAM to SRAM
 	ld a, [wCurrentMenuItem]
-	set 7, a
+	set BIT_HAS_CHANGED_BOXES, a
 	ld [wCurrentBoxNum], a
 	call GetBoxSRAMLocation
 	ld de, wBoxDataStart
@@ -421,7 +420,7 @@ ChangeBox::
 	call WaitForSoundToFinish
 .done
 	pop af
-	ld [wd730], a
+	ld [wStatusFlags5], a
 	ret
 
 WhenYouChangeBoxText:

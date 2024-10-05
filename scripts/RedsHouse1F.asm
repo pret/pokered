@@ -28,8 +28,8 @@ RedsHouse1FMomText:
 	inc b
 	CheckEvent EVENT_CALLED_MOM_LASAGNA
 	jr nz, .foodReady
-	ld a, [wd72e]
-	bit 3, a ; received a Pokémon from Oak?
+	ld a, [wStatusFlags4]
+	bit BIT_GOT_STARTER, a
 	jr nz, .heal
 	ld hl, .WakeUpText
 	rst _PrintText

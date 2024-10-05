@@ -26,8 +26,8 @@ ViridianGym_ScriptPointers:
 ViridianGymDefaultScript:
 	callfar CheckStartStopSpinning
 	; we're doing this here because CheckFightingMapTrainers needs to be run while we're in this map's bank
-	ld hl, wd736
-	bit 7, [hl]
+	ld hl, wMovementFlags
+	bit BIT_SPINNING, [hl]
 	jp z, CheckFightingMapTrainers
 	jpfar LoadSpinnerArrowTiles
 
@@ -41,20 +41,20 @@ ViridianGymGiovanniPostBattle:
 ViridianGymReceiveTM27:
 	callfar PlayGiovanniMusic
 	ld a, TEXT_VIRIDIANGYM_GIOVANNI_EARTH_BADGE_INFO
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	SetEvent EVENT_BEAT_VIRIDIAN_GYM_GIOVANNI
 	lb bc, TM_GIOVANNI, 1
 	call GiveItem
 	jr nc, .bag_full
 	ld a, TEXT_VIRIDIANGYM_GIOVANNI_RECEIVED_TM27
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	SetEvent EVENT_GOT_TM27
 	jr .gym_victory
 .bag_full
 	ld a, TEXT_VIRIDIANGYM_GIOVANNI_TM27_NO_ROOM
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 .gym_victory
 	ld hl, wObtainedBadges
@@ -156,9 +156,9 @@ ViridianGymGiovanniText:
 .beforeBeat
 	ld hl, .PreBattleText
 	rst _PrintText
-	ld hl, wd72d
-	set 6, [hl]
-	set 7, [hl]
+	ld hl, wStatusFlags3
+	set BIT_TALKED_TO_TRAINER, [hl]
+	set BIT_PRINT_END_BATTLE_TEXT, [hl]
 	ld hl, .ReceivedEarthBadgeText
 	ld de, .ReceivedEarthBadgeText
 	call SaveEndBattleTextPointers

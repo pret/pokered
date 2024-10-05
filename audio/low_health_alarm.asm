@@ -1,9 +1,9 @@
 Music_DoLowHealthAlarm::
 	ld a, [wLowHealthAlarm]
-	cp $ff
+	cp DISABLE_LOW_HEALTH_ALARM
 	jr z, .disableAlarm
 
-	bit 7, a  ;alarm enabled?
+	bit BIT_LOW_HEALTH_ALARM, a  ;alarm enabled?
 ;	ret z     ;nope
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; shinpokerednote: FIXED: low health alarm only rings a couple times before stopping after triggering
@@ -43,7 +43,7 @@ Music_DoLowHealthAlarm::
 	ld a, [wLowHealthAlarm]
 	cp $81
 	ld a, [wLowHealthTonePairs]	;tone pairs will be 2 or higher when this line is reached
-	set 7, a
+	set BIT_LOW_HEALTH_ALARM, a
 	ld [wLowHealthTonePairs], a
 	jr nz, .do_alarm_tone		;jump if wLowHealthAlarm was != $81
 	dec a	;decrement the value from wLowHealthTonePairs
@@ -52,7 +52,7 @@ Music_DoLowHealthAlarm::
 	pop af
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-	and $7f   ;low 7 bits are the timer.
+	and LOW_HEALTH_TIMER_MASK
 	jr nz, .notToneHi ;if timer > 0, play low tone.
 
 	call .playToneHi
@@ -64,15 +64,15 @@ Music_DoLowHealthAlarm::
 	call z, .playToneLo ;actually set the sound registers.
 
 .noTone ;if timer == 20,
-	ld a, $86
+	ld a, CRY_SFX_END
 	ld [wChannelSoundIDs + CHAN5], a ;disable sound channel?
 	ld a, [wLowHealthAlarm]
-	and $7f ;decrement alarm timer.
+	and LOW_HEALTH_TIMER_MASK
 	dec a
 
 .resetTimer
 	; reset the timer and enable flag.
-	set 7, a
+	set BIT_LOW_HEALTH_ALARM, a
 	ld [wLowHealthAlarm], a
 	ret
 

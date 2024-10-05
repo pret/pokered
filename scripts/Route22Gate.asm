@@ -25,7 +25,7 @@ Route22GateDefaultScript:
 	xor a
 	ldh [hJoyHeld], a
 	ld a, TEXT_ROUTE22GATE_GUARD
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	jp DisplayTextID
 
 Route22GateScriptCoords:

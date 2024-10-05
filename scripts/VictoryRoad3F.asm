@@ -10,8 +10,8 @@ VictoryRoad3F_Script:
 
 VictoryRoad3FCheckBoulderEventScript::
 	ld hl, wCurrentMapScriptFlags
-	bit 5, [hl]
-	res 5, [hl]
+	bit BIT_CUR_MAP_LOADED_1, [hl]
+	res BIT_CUR_MAP_LOADED_1, [hl]
 	ret z
 	CheckEventHL EVENT_VICTORY_ROAD_3_BOULDER_ON_SWITCH1
 	ret z
@@ -27,11 +27,11 @@ VictoryRoad3F_ScriptPointers:
 	dw_const EndTrainerBattle,                      SCRIPT_VICTORYROAD3F_END_BATTLE
 
 VictoryRoad3FDefaultScript:
-	ld hl, wFlags_0xcd60
-	bit 1, [hl]
+	ld hl, wMiscFlags
+	bit BIT_BOULDER_DUST, [hl]
 	ret nz ; PureRGBnote: ADDED: if a boulder animation is playing forget doing this, helps reduce lag
-	bit 7, [hl]
-	res 7, [hl]
+	bit BIT_PUSHED_BOULDER, [hl]
+	res BIT_PUSHED_BOULDER, [hl]
 	jp z, .check_switch_hole
 	ld hl, .SwitchOrHoleCoords
 	call CheckBoulderCoords
@@ -42,7 +42,7 @@ VictoryRoad3FDefaultScript:
 	ld de, wSprite07StateData1YPixels
 	callfar BoulderOnButtonAnim
 	ld hl, wCurrentMapScriptFlags
-	set 5, [hl]
+	set BIT_CUR_MAP_LOADED_1, [hl]
 	SetEvent EVENT_VICTORY_ROAD_3_BOULDER_ON_SWITCH1
 	ret
 .handle_hole
@@ -69,14 +69,14 @@ VictoryRoad3FDefaultScript:
 	ld a, [wCoordIndex]
 	cp $1
 	jr nz, .hole
-	ld hl, wd72d
-	res 4, [hl]
-	ld hl, wd732
-	res 4, [hl]
+	ld hl, wStatusFlags3
+	res BIT_ON_DUNGEON_WARP, [hl]
+	ld hl, wStatusFlags6
+	res BIT_DUNGEON_WARP, [hl]
 	ret
 .hole
-	ld a, [wd72d]
-	bit 4, a
+	ld a, [wStatusFlags3]
+	bit BIT_ON_DUNGEON_WARP, a
 	jp z, CheckFightingMapTrainers
 	ret
 
