@@ -75,7 +75,7 @@ _SSAnneWontBeNeedingThatAnymore::
 	cont "ticket anymore!"
 	para "You're always"
 	line "welcome on the"
-	cont "the S.S.ANNE!"
+	cont "S.S.ANNE!"
 	para "I'll tell my crew"
 	line "not to hassle you!"
 	done
