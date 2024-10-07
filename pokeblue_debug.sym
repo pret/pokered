@@ -4302,9 +4302,9 @@
 06:6589 PewterMovementScript_WalkToGym
 06:65d5 RLEList_PewterGymPlayer
 06:65e2 RLEList_PewterGymGuy
-06:65ef FreezeEnemyTrainerSprite
-06:65fc FreezeEnemyTrainerSprite.loop
-06:6605 FreezeEnemyTrainerSprite.notRival
+06:65ef SetEnemyTrainerToStayAndFaceAnyDirection
+06:65fc SetEnemyTrainerToStayAndFaceAnyDirection.loop
+06:6605 SetEnemyTrainerToStayAndFaceAnyDirection.notRival
 06:660d RivalIDs
 06:6611 IsPlayerStandingOnDoorTile
 06:6629 IsPlayerStandingOnDoorTile.loop

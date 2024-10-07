@@ -4367,9 +4367,9 @@ ROMX bank #6:
 	         $6589 = PewterMovementScript_WalkToGym
 	         $65d5 = RLEList_PewterGymPlayer
 	         $65e2 = RLEList_PewterGymGuy
-	         $65ef = FreezeEnemyTrainerSprite
-	         $65fc = FreezeEnemyTrainerSprite.loop
-	         $6605 = FreezeEnemyTrainerSprite.notRival
+	         $65ef = SetEnemyTrainerToStayAndFaceAnyDirection
+	         $65fc = SetEnemyTrainerToStayAndFaceAnyDirection.loop
+	         $6605 = SetEnemyTrainerToStayAndFaceAnyDirection.notRival
 	         $660d = RivalIDs
 	         $6611 = IsPlayerStandingOnDoorTile
 	         $6629 = IsPlayerStandingOnDoorTile.loop
