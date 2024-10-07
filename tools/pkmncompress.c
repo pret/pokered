@@ -44,15 +44,18 @@ int read_bit(uint8_t *data) {
 }
 
 void transpose_tiles(uint8_t *data, int width) {
-	int size = width * width * 0x10;
-	uint8_t *transposed = xmalloc(size);
+	int size = width * width;
 	for (int i = 0; i < size; i++) {
-		int j = (i / 0x10) * width * 0x10;
-		j = (j % size) + 0x10 * (j / size) + (i % 0x10);
-		transposed[j] = data[i];
+		int j = (i * width + i / width) % size;
+		if (i < j) {
+			uint8_t tmp[0x10];
+			uint8_t *p = data + i * COUNTOF(tmp);
+			uint8_t *q = data + j * COUNTOF(tmp);
+			memcpy(tmp, p, COUNTOF(tmp));
+			memcpy(p, q, COUNTOF(tmp));
+			memcpy(q, tmp, COUNTOF(tmp));
+		}
 	}
-	memcpy(data, transposed, size);
-	free(transposed);
 }
 
 void compress_plane(uint8_t *plane, int width) {
