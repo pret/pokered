@@ -52,6 +52,14 @@ SeafoamIslandsB3FOnMapLoad::
 	bit BIT_CUR_MAP_LOADED_1, [hl]
 	res BIT_CUR_MAP_LOADED_1, [hl]
 	ret z
+	; script constants were changed from older save file versions so potentially need to update them here to remove invalid values
+	ld hl, wSeafoamIslandsB3FCurScript
+	ld a, [hl]
+	cp SCRIPT_SEAFOAMISLANDSB3F_END
+	jr c, .noIncorrectValue
+	xor a
+	ld [hl], a
+.noIncorrectValue
 	CheckBothEventsSet EVENT_SEAFOAM3_BOULDER1_DOWN_HOLE, EVENT_SEAFOAM3_BOULDER2_DOWN_HOLE
 	ret nz
 	ld de, SeafoamB3FCurrentWestVerticalReplacements
@@ -68,6 +76,7 @@ SeafoamIslandsB3F_ScriptPointers:
 	def_script_pointers
 	dw_const SeafoamIslandsB3FDefaultScript,       SCRIPT_SEAFOAMISLANDSB3F_DEFAULT
 	dw_const SeafoamIslandsB3FObjectMoving1Script, SCRIPT_SEAFOAMISLANDSB3F_OBJECT_MOVING1
+	DEF SCRIPT_SEAFOAMISLANDSB3F_END EQU const_value
 
 SeafoamIslandsB3FDefaultScript:
 	CheckBothEventsSet EVENT_SEAFOAM3_BOULDER1_DOWN_HOLE, EVENT_SEAFOAM3_BOULDER2_DOWN_HOLE
@@ -106,14 +115,6 @@ SeafoamIslandsCurrents:
 	ret
 
 SeafoamIslandsB3FObjectMoving1Script:
-	ld a, [wSimulatedJoypadStatesIndex]
-	and a
-	ret nz
-	ld a, SCRIPT_SEAFOAMISLANDSB3F_DEFAULT
-	ld [wSeafoamIslandsB3FCurScript], a
-	ret
-
-SeafoamIslandsB3FObjectMoving2Script:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
