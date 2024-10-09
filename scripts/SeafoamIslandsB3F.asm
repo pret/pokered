@@ -53,6 +53,7 @@ SeafoamIslandsB3FOnMapLoad::
 	res BIT_CUR_MAP_LOADED_1, [hl]
 	ret z
 	; script constants were changed from older save file versions so potentially need to update them here to remove invalid values
+	; TODO: remove later?
 	ld hl, wSeafoamIslandsB3FCurScript
 	ld a, [hl]
 	cp SCRIPT_SEAFOAMISLANDSB3F_END
