@@ -226,6 +226,12 @@ EarlierVersionEventConstantsUpdate:
 	ld a, S_S_TICKET
 	call RemoveItemFromBagAndBox
 .didntGetCutYet
+	; these script constants were changed so fix their values to 0
+	xor a
+	ld hl, wSeafoamIslandsB3FCurScript
+	ld [hl], a
+	ld hl, wSeafoamIslandsB4FCurScript
+	ld [hl], a
 	ret
 
 RemoveItemFromBagAndBox:
