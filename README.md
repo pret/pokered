@@ -79,3 +79,4 @@ LJSTAR - Most of the work creating the type icons used in the movedex
 Mord - Most of the work creating LT.Surge and Erika overworld sprites
 
 pret discord and pret in general for their original disassembly work on Red / Blue
+

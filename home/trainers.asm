@@ -346,7 +346,7 @@ PrintEndBattleText::
 	pop hl
 	pop af
 	call SetCurBank
-	farcall FreezeEnemyTrainerSprite
+	farcall SetEnemyTrainerToStayAndFaceAnyDirection
 	jp WaitForSoundToFinish
 
 GetSavedEndBattleTextPointer::

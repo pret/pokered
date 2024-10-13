@@ -194,9 +194,9 @@ SetSpriteMovementBytesToFE::
 SetSpriteMovementBytesToFF::
 	push hl
 	call GetSpriteMovementByte1Pointer
-	ld [hl], $FF
+	ld [hl], STAY
 	call GetSpriteMovementByte2Pointer
-	ld [hl], $FF ; prevent person from walking?
+	ld [hl], NONE
 	pop hl
 	ret
 

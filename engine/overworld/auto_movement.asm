@@ -272,10 +272,10 @@ RLEList_PewterGymGuy:
 	db NPC_MOVEMENT_RIGHT, 3
 	db -1 ; end
 
-FreezeEnemyTrainerSprite::
+SetEnemyTrainerToStayAndFaceAnyDirection::
 	ld a, [wCurMap]
 	cp POKEMON_TOWER_7F
-	ret z ; the Rockets on Pokemon Tower 7F leave after battling, so don't freeze them
+	ret z ; the Rockets on Pokemon Tower 7F leave after battling, so don't set them
 	ld hl, DontFreezeIDs
 	 ; PureRGBnote: FIXED: this byte will actually hold the value they wanted to check here...old one was overwritten in battle
 	ld a, [wCurOpponent]
