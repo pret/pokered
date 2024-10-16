@@ -3,13 +3,13 @@
 ; Control characters (see home/text.asm)
 
 	charmap "<NULL>",    $00
-	charmap "the",       $41
-	charmap "you",       $42
-	charmap "<opponent>",$43
-	charmap "<user>",    $44
+	charmap "the",       $41 ; PureRGBnote: ADDED: single byte version of the
+	charmap "you",       $42 ; PureRGBnote: ADDED: single byte version of you
+	charmap "<opponent>",$43 ; PureRGBnote: ADDED: single byte version of opponent
+	charmap "<user>",    $44 ; PureRGBnote: ADDED: single byte version of user
 	charmap "#MON",      $45 ; POKéMON
-	charmap "<TIPS>",    $46
-	charmap "<TEAM>",    $47
+	charmap "<TIPS>",    $46 ; PureRGBnote: ADDED: single byte version of TRAINER TIPS
+	charmap "<TEAM>",    $47 ; PureRGBnote: ADDED: single byte version of TEAM
 	charmap "<BAGE>",    $48 ; PureRGBnote: ADDED: same as PAGE, but can watch more buttons than just A or B for being pressed
 	charmap "<PAGE>",    $49
 	charmap "<PKMN>",    $4a ; "<PK><MN>"
@@ -23,7 +23,7 @@
 	charmap "<RIVAL>",   $53 ; wRivalName
 	charmap "#",         $54 ; "POKé"
 	charmap "<CONT>",    $55
-	charmap "<...>",     $56 ; "..."
+	charmap "<...>",     $56 ; PureRGBnote: CHANGED: changed from "……" to "..." since it's used way more and looks better
 	charmap "<DONE>",    $57
 	charmap "<PROMPT>",  $58
 	charmap "<TARGET>",  $59
@@ -54,8 +54,8 @@
 	charmap "ぅ",         $6f ; hiragana small u, unused
 	charmap "‘",         $70 ; opening single quote
 	charmap "’",         $71 ; closing single quote
-	charmap "<EXTRAOPENQUOTE>",         $72 ; opening quote 
-	charmap "<EXTRACLOSEQUOTE>",         $73 ; closing quote 
+	charmap "<EXTRAOPENQUOTE>",         $72 ; opening quote ; PureRGBnote: CHANGED: crappier quotation mark
+	charmap "<EXTRACLOSEQUOTE>",         $73 ; closing quote ; PureRGBnote: CHANGED: crappier quotation mark 2
 	charmap "·",         $74 ; middle dot, unused
 	charmap "…",         $75 ; ellipsis
 	charmap "ぁ",         $76 ; hiragana small a, unused
@@ -128,8 +128,8 @@
 	charmap ")",         $9b
 	charmap ":",         $9c
 	charmap ";",         $9d
-	charmap "“",         $9e
-	charmap "”",         $9f
+	charmap "“",         $9e ; PureRGBnote: CHANGED: used to be square bracket, now it's a better quotation open
+	charmap "”",         $9f ; PureRGBnote: CHANGED: used to be square bracket, now it's a better quotation close
 
 	charmap "a",         $a0
 	charmap "b",         $a1

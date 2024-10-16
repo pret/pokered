@@ -1,3 +1,4 @@
+; PureRGBnote: ADDED: various new sound effects that are used in the volcano.
 SFX_Drill::
 	; channel 8
 	noise_note 15, 10, 4, 73

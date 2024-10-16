@@ -1,3 +1,4 @@
+; PureRGBnote: CHANGED: more symbols were added to each case instead of duplicated symbols.
 LowerCaseAlphabet:
 	db "abcdefghi"
 	db "jklmnopqr"

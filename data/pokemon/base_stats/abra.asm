@@ -33,7 +33,7 @@
 	FLASH
 	; end
 
-	; PureRGBnote: ADDED: in pokemon base stat headers, these point to which bank the front and original back pic are stored in.
+	; PureRGBnote: ADDED: in pokemon base stat headers, these point to which bank the various sprites are stored in.
 	db BANK(AbraPicFront)
 	db BANK(AbraPicFrontAlt)
 	db BANK(AbraPicBack) 

@@ -1,6 +1,6 @@
 Music_PkmnHealed_Ch1::
 	tempo 144
-Music_PkmnHealed_Ch1_NoTempo::
+Music_PkmnHealed_Ch1_NoTempo:: ; PureRGBnote: Used in the ghost marowak event for slower music
 	volume 7, 7
 	duty_cycle 2
 	toggle_perfect_pitch

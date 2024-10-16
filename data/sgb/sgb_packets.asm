@@ -326,8 +326,9 @@ DataSndPacket8:
 	db  $EA                 ; nop
 	db  $EA                 ; nop
 
-
 PalPacket_Movedex:        PAL_SET PAL_BLUEGREENMON, 0, 0, 0
+
+; PureRGBnote: ADDED: used when you turn on the "rainbow" palette in Celadon City.
 
 PalPacket_Celadon:        PAL_SET PAL_REDMON, PAL_ROUTE, PAL_BLUEMON, PAL_YELLOWMON
 

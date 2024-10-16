@@ -1,3 +1,4 @@
+; PureRGBnote: ADDED: The alternate versions don't set tempo and are used in the lavender basement
 Music_Lavender_Alternate::
 	channel_count 4
 	channel 1, Music_Lavender_Ch1_Alternate

@@ -17,5 +17,5 @@ SFX_Pokeflute_Ch3:
 	note A_, 2
 	note F_, 2
 	note G_, 8
-	rest 4
+	rest 4 ; PureRGBnote: CHANGED: reduced the amount of waiting when the song is finished.
 	sound_ret

@@ -1,3 +1,4 @@
+; PureRGBnote: MOVED: moved out of home bank since the logic for choosing which song to play was made a bit more complicated
 CheckForBikeSurfMusic::
 	ld a, [wWalkBikeSurfState]
 	dec a

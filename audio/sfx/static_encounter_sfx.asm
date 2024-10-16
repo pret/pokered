@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: these new sound effects are used in various static encounters or new areas.
+
 ; ch 8
 ArticunoIcyWindSFX::
 	noise_note 15, 13, 7, 52
@@ -62,7 +64,7 @@ PowerPlantMagnetonFloating::
 	square_note 0, 0, 0, 0
 	sound_ret
 
-Ghost_Encounter_SFX::
+Ghost_Encounter_SFX:: ; Actually just the beginning of the Pokemon Pinball graveyard music.
 	execute_music
 	vibrato 18, 3, 3
 	duty_cycle 3
@@ -80,7 +82,7 @@ Ghost_Encounter_SFX::
 	note C_, 2
 	sound_ret
 
-Ghost_Encounter_SFX2::
+Ghost_Encounter_SFX2:: ; Actually just the beginning of the Pokemon Pinball graveyard music. (transposed to make the two channels sound off-key)
 	transpose 1, 2
 	sound_call Ghost_Encounter_SFX
 	transpose 0, 0

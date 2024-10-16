@@ -48,7 +48,7 @@ DEF NUM_ACTIVE_PALS EQU 4
 	const WALKING ; 0
 	const BIKING ; 1
 	const SURFING ; 2
-	const WEARING_LAVA_SUIT ; 3
+	const WEARING_LAVA_SUIT ; 3 ; PureRGBnote: ADDED: used in the volcano to show the lava suit sprite
 	
 DEF LEARN_BY_ITEM EQU 1
 

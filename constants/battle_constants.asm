@@ -106,4 +106,4 @@ DEF EFFECTIVENESS_MASK EQU %01111111
 	const HAS_REFLECT_UP      ; 2
 	const TRANSFORMED         ; 3
 	const ALREADY_ACTED		  ; 4 ; PureRGBnote: ADDED: marker for whether an opponent used an item or switched pokemon at the start of a turn
-	const BOOSTED_FIREWALL    ; 5
+	const BOOSTED_FIREWALL    ; 5 ; PureRGBnote: ADDED: used firewall on a burned opponent once (triggers highest damage state)

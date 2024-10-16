@@ -1,3 +1,4 @@
+; PureRGBnote: CHANGED: now used in a couple of new areas such as the Volcano.
 ; This corresponds to SFX_KEY_ITEM in pokegold and pokecrystal.
 SFX_UnusedFanfare_Ch5::
 	execute_music

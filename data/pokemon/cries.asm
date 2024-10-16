@@ -198,6 +198,8 @@ CryData::
 	mon_cry SFX_CRY_25, $66, $CC ; Victreebel
 	assert_table_length NUM_POKEMON_INDEXES
 
+
+; PureRGBnote: MOVED: moved from its original location. 6 pokemon's cries can get remapped to sound a bit different if OG+ music is turned on.
 ; input e = which pokemon
 GetCryData2::
 	push de

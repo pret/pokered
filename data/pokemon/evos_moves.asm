@@ -1,4 +1,5 @@
 ; PureRGBnote: CHANGED: many learnsets and evolution levels were adjusted versus the original game
+; Also many pointless empty movesets were removed and pointed to a single empty moveset.
 ; See constants/pokemon_data_constants.asm
 ; Evos+moves data structure:
 ; - Evolution methods:

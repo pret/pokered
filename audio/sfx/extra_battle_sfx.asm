@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: sound effect from gold/silver/crystal, used for the master ball visual effect in those games, but in PureRGB it's used in the
+; THE MAW battle for when Cubone gets powered up.
 SFX_Sparkle_Ch5::
 SFX_Sparkle_Ch6::
 	execute_music

@@ -95,8 +95,8 @@
 	const DISABLE_EFFECT             ; $56
 	const WITHDRAW_EFFECT            ; $57
 	const GROWTH_EFFECT              ; $58
-	const DEFENSE_CURL_EFFECT        ; $59
-	const ACID_ARMOR_EFFECT          ; $5A
-	const EXPLODE_RECOIL_EFFECT      ; $5B
-	const CONVERSION_EFFECT          ; $5C
+	const DEFENSE_CURL_EFFECT        ; $59 ; PureRGBnote: ADDED: new effect, makes super effective moves do neutral damage
+	const ACID_ARMOR_EFFECT          ; $5A ; PureRGBnote: ADDED: new effect, does light screen and reflect in one move
+	const EXPLODE_RECOIL_EFFECT      ; $5B ; PureRGBnote: ADDED: new effect, selfdestruct/explosion base effect, changes at lower health to EXPLODE_EFFECT
+	const CONVERSION_EFFECT          ; $5C ; PureRGBnote: ADDED: new effect, used with conversion
 DEF NUM_MOVE_EFFECTS EQU const_value - 1

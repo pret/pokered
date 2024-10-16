@@ -1,3 +1,4 @@
+; PureRGBnote: ADDED: used to alphabetically order the movedex
 MovedexOrder:
 	table_width 1, MovedexOrder
 	db ABSORB

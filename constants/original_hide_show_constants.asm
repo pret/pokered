@@ -1,4 +1,4 @@
-; Hide show constants for the original game before any changes - used with save file updater.
+; PureRGBnote: ADDED: Hide show constants for the original game before any changes - used with save file updater.
 
 	const_def
 	const HS_ORIGINAL_PALLET_TOWN_OAK               ; 00

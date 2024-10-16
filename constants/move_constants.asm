@@ -214,6 +214,7 @@ DEF NUM_ATTACKS EQU const_value - 1
 	const HIDEPIC_ANIM ; monster disappears
 	const ROCK_ANIM ; throw rock
 	const BAIT_ANIM ; throw bait
+;;;;; PureRGBnote: ADDED: new animation constants
 	const FLY_ANIM_PART1
 	const FIRE_PILLAR_ANIM
 	const RAGE_ENEMY_ANIM
@@ -222,6 +223,7 @@ DEF NUM_ATTACKS EQU const_value - 1
 	const RADIATION_ANIM
 	const DIVINE_PROTECTION_ANIM
 	const POKE_DOLL_ANIM
+;;;;;
 
 	; 45 non-move anims + 166 move anims = 201 anims
 	; 53 slots left

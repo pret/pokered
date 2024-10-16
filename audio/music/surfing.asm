@@ -1,6 +1,6 @@
 Music_Surfing_Ch1::
 	tempo 160
-Music_Surfing_Ch1_NoTempo::
+Music_Surfing_Ch1_NoTempo:: ; PureRGBnote: used in the dragonair event for slower music
 	volume 7, 7
 	duty_cycle 3
 	vibrato 12, 3, 4

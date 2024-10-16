@@ -72,7 +72,7 @@
 	const EVENT_GOT_TM34
 	const EVENT_BEAT_BROCK
 
-; World Options
+; World Options ; PureRGBnote: ADDED: flags for the world options menu (only 1 at the moment)
 	const_next $82
 	const FLAG_VOLCANO_AREA_TURNED_OFF
 
@@ -122,6 +122,7 @@
 	const_skip 2
 	const EVENT_MET_LAVENDER_TM_KID
 	const_skip ;const EVENT_RESCUED_MR_FUJI_2 ; PureRGBnote: CHANGED: this event was set but not used ever
+	; PureRGBnote: ADDED: pokemon mansion basement events
 	const EVENT_MET_DARK_CHANNELER
 	const EVENT_MET_LIGHT_CHANNELER
 	const EVENT_BEAT_TORCHED
@@ -135,7 +136,7 @@
 	const_skip 6
 	const EVENT_GOT_POKE_FLUTE
 
-; Cinnabar Volcano Events
+; Cinnabar Volcano Events ; PureRGBnote: ADDED: 
 	const_next $130
 	const EVENT_GOT_LAVA_SUIT
 	const EVENT_GOT_DRILL
@@ -225,6 +226,7 @@
 	const_next $238
 	const EVENT_GOT_HM04
 	const EVENT_GAVE_GOLD_TEETH
+;;;;; PureRGBnote: ADDED: Erik and Sara / Dragonair Events
 	const EVENT_MET_ERIK
 	const EVENT_MET_SARA
 	const EVENT_ERIK_LEAVING
@@ -236,6 +238,7 @@
 	const EVENT_DRAGONAIR_EVENT_CLEARED_ONCE
 	const EVENT_DRAGONAIR_EVENT_ENDING_TEXT_TRIGGER
 	const EVENT_DRAGONAIR_EVENT_FOUGHT_CLOYSTER_ONCE
+;;;;;
 	const_skip 8
 	const EVENT_RELOADED_KABUTO_SPRITE
 	const EVENT_SAFARI_GAME_OVER
@@ -1040,6 +1043,7 @@ DEF INDIGO_PLATEAU_EVENTS_END EQU const_value - 1
 	const_skip 4
 	const EVENT_VICTORY_ROAD_1_BOULDER_ON_SWITCH
 
+; PureRGBnote: ADDED: front sprite flags were added in event options since there is so much free space in here.
 	const_next $920
 DEF SPRITE_OPTIONS_FLAGS_FIFTH_BATCH_START EQU const_value
 	const FLAG_ARTICUNO_SPRITE
