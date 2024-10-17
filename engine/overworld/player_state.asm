@@ -31,6 +31,7 @@ IsPlayerStandingOnWarp::
 	jr nz, .loop
 	ret
 
+; PureRGBnote: CHANGED: since the seafoam water current scripts were simplified, this function was also simplified.
 CheckForceBikeOrSurf::
 	ld hl, wStatusFlags6
 	bit BIT_ALWAYS_ON_BIKE, [hl]

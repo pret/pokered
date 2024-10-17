@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: some small functions for changing sprite facings or basic sprite movement were added to home bank
+; since they are used a lot in new areas.
 ; a = which sprite
 SetSpriteFacingRight::
 	ld b, SPRITE_FACING_RIGHT

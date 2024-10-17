@@ -1,4 +1,5 @@
-
+; PureRGBnote: CHANGED: this subroutine was updated to deal with DIG's overworld animation for warping between towns,
+; as well as some specific map animations in the volcano.
 EnterMapAnim::
 	call InitFacingDirectionList
 	ld a, $ec

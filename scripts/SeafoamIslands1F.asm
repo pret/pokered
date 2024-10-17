@@ -1,3 +1,4 @@
+; PureRGBnote: ADDED: This map is also used for the "Bottom of the seafoam cave lake" underwater area you see in the dragonair event.
 SeafoamIslands1F_Script:
 	call EnableAutoTextBoxDrawing
 	ld a, [wXCoord]

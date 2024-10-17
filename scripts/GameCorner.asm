@@ -581,6 +581,7 @@ GameCornerMoneyText:
 GameCornerCoinText:
 	db "COIN@"
 
+; TODO: just clear the screen area instead of making this pointless blank text data
 GameCornerBlankText:
 	db "       @"
 

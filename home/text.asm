@@ -58,7 +58,7 @@ PlaceNextChar::
 	pop hl
 	ret
 .NotTerminator
-; Check against a dictionary
+; PureRGBnote: CHANGED: Check against a jump table instead of a dictionary.
 	push hl
 	push de
 	ld hl, TextShortcutCommandJumpTable
@@ -94,6 +94,8 @@ NullChar:: ; unused
 	dec de
 	ret	
 
+; PureRGBnote: CHANGED: many shortcut commands were added here 
+; because it greatly reduces text data size if certain commonly used phrases are parameterized.
 TextShortcutCommandJumpTable:
 	dbw "<NEXT>",    NextCharCmd
 	dbw "<LINE>",    LineChar
@@ -468,15 +470,15 @@ TextCommand_BCD::
 	pop hl
 	jr NextTextCommand
 
+; PureRGBnote: ADDED: jump to a different address in the same text bank so we can reuse text
 TextCommand_JUMP::
-; jump to a different address in the same text bank so we can reuse text
 	pop hl
 	hl_deref
 	push hl
 	jr TextCommand_START
 
+; PureRGBnote: ADDED: call different text in the same bank then come back
 TextCommand_CALL::
-; call different text in the same bank then come back
 	pop hl
 	push hl
 	hl_deref

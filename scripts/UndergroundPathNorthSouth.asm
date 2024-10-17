@@ -1,4 +1,5 @@
 ; PureRGBnote: ADDED: trainers in this location
+; PureRGBnote: CHANGED: if you found the secret path from saffron to here, it will be open on loading the map.
 
 UndergroundPathNorthSouth_Script:
 	call UndergroundPathNorthSouthOnMapLoad

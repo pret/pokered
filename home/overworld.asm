@@ -15,9 +15,11 @@ EnterMap::
 	res BIT_BATTLE_OVER_OR_BLACKOUT, [hl] ; unset the "battle just happened" flag
 	call z, ResetUsingStrengthSurfOutOfBattleBits
 	call nz, MapEntryAfterBattle
+;;;;; PureRGBnote: MOVED: from slightly later in the function
 	ld hl, wCurrentMapScriptFlags
 	set BIT_CUR_MAP_LOADED_1, [hl]
 	set BIT_CUR_MAP_LOADED_2, [hl]
+;;;;;
 	ld hl, wStatusFlags6
 	ld a, [hl]
 	and (1 << BIT_FLY_WARP) | (1 << BIT_DUNGEON_WARP)
@@ -46,10 +48,12 @@ OverworldLoopLessDelay::
 	; a ledge in the overworld.
 	callfar HandleMidJump
 .notMidJump
+;;;;; PureRGBnote: ADDED: in some maps there are special map animations that play. This is where they are checked whether to happen.
 	CheckFlag FLAG_MAP_HAS_OVERWORLD_ANIMATION
 	jr z, .noAnimation
 	callfar CheckOverworldAnimation
 .noAnimation
+;;;;;
 	ld a, [wWalkCounter]
 	and a
 	jp nz, .moveAhead ; if the player sprite has not yet completed the walking animation
@@ -317,7 +321,7 @@ OverworldLoopLessDelay::
 	ld a, [wMovementFlags]
 	bit BIT_SPINNING, a
 	jr nz, .spinnerSpeed ; PureRGBnote: CHANGED: faster spin tile movement
-	CheckFlag FLAG_FAST_AUTO_MOVEMENT
+	CheckFlag FLAG_FAST_AUTO_MOVEMENT ; PureRGBnote: ADDED: flag that makes the player move quicker during auto movement scripts if set.
 	jr nz, .spinnerSpeed
 	ld a, [wWalkBikeSurfState]
 	dec a ; riding a bike?
@@ -1801,6 +1805,8 @@ JoypadOverworld::
 	and b
 	ret nz ; return if the simulated button presses are overridden
 	ld hl, wSimulatedJoypadStatesIndex
+;;;;; PureRGBnote: ADDED: spinner auto movement was greatly simplified. We just keep doing the same thing in the auto movement script
+;;;;; until the spinner flag is unset.
 	ld a, [wMovementFlags]
 	bit BIT_SPINNING, a ; is player spinning?
 	jr nz, .noDec
@@ -1808,6 +1814,7 @@ JoypadOverworld::
 	; for every single spinner in the game-instead just simulate the same direction indefinitely until hitting end or another spinner
 	dec [hl] 
 .noDec
+;;;;;
 	ld a, [hl]
 	cp $ff
 	jr z, .doneSimulating ; if the end of the simulated button presses has been reached
@@ -1827,7 +1834,7 @@ JoypadOverworld::
 
 ; if done simulating button presses
 .doneSimulating
-	ResetFlag FLAG_FAST_AUTO_MOVEMENT
+	ResetFlag FLAG_FAST_AUTO_MOVEMENT ; PureRGBnote: ADDED: when done auto movement always turn off fast auto movement. Must be enabled per script.
 	xor a
 	ld [wSimulatedJoypadStatesIndex], a
 	ld [wSimulatedJoypadStatesEnd], a
@@ -1887,12 +1894,14 @@ CollisionCheckOnWater::
 	and a
 	ret
 .stopSurfing
+;;;;; PureRGBnote: CHANGED: in the volcano we need to wear the lava suit after surfing ends instead of the normal player sprite.
 	ld a, [wCurMapTileset]
 	cp VOLCANO
 	ld a, WALKING
 	jr nz, .stopSurfToWalking
 	ld a, WEARING_LAVA_SUIT
 .stopSurfToWalking
+;;;;;
 	ld [wWalkBikeSurfState], a
 	call nz, PlayDefaultMusic ; play default music if walking but not if lava suit
 	call LoadPlayerSpriteGraphics
@@ -1935,15 +1944,18 @@ RunMapScript::
 	jp MapFadeAfterBattle
 ;;;;;;;;;;
 
+;;;;; PureRGBnote: ADDED: when in the volcano the player can wear a special lava suit.
 LoadLavaSuitSpriteGraphics::
 	ld de, LavaSuitSprite
 	lb bc, BANK(LavaSuitSprite), $0c
 	jr LoadPlayerSpriteGraphicsArbitrary
+;;;;;
 
 LoadWalkingPlayerSpriteGraphics::
 	ld de, RedSprite
 	jr LoadPlayerSpriteGraphicsCommon
 
+;;;;; PureRGBnote: CHANGED: in the volcano the surfing sprite uses a rhydon instead of seel sprite, since only rhydon and hardened onix can lava surf.
 LoadSurfingPlayerSpriteGraphics::
 	ld a, [wCurMapTileset]
 	cp VOLCANO
@@ -1952,6 +1964,7 @@ LoadSurfingPlayerSpriteGraphics::
 	ld de, MonsterSwimmingSprite
 	lb bc, BANK(MonsterSwimmingSprite), $0c
 	jr LoadPlayerSpriteGraphicsArbitrary
+;;;;;
 
 LoadBikePlayerSpriteGraphics::
 	ld de, RedBikeSprite
@@ -2256,11 +2269,13 @@ LoadMapHeader::
 	ld [wMapMusicROMBank], a ; music 2
 	pop af
 	jp SetCurBank
+;;;;; PureRGBnote: ADDED: After battle we have to reload original picture IDs since battle data trashes their wram area.
 .getRemappedSpriteIDsThenFinishUp
 	ld d, h
 	ld e, l
 	callfar StoreOriginalPictureIDs
 	jr .finishUp
+;;;;;
 
 ; function to copy map connection data from ROM to WRAM
 ; Input: hl = source, de = destination

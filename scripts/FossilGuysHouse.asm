@@ -1,5 +1,6 @@
 ; PureRGBnote: ADDED: new house in saffron city. The super nerd from Mt Moon returns and will teleport to cinnabar with his teleporter
 ; in order to revive fossils for you early. There is also a bunch of amusing text to read in his house.
+; PureRGBnote: ADDED: this map is also used for the MOVE MYSTIC's house and scripts.
 FossilGuysHouse_Script:
 	ld hl, wCurrentMapScriptFlags
 	bit BIT_CUR_MAP_LOADED_1, [hl]

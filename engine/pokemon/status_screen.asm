@@ -101,6 +101,7 @@ StatusScreen:
 	ld hl, vChars2 tile $72
 	lb bc, BANK(PTile), 1
 	call CopyVideoDataDouble ; bold P (for PP)
+;;;;; PureRGBnote: ADDED: If the pokemon has max DVs, load the APEX prompt into vram.
 	call DoesLoadedMonHaveMaxDVs
 	jr nc, .notMaxDVs
 	ld hl, vFont tile 73
@@ -108,6 +109,7 @@ StatusScreen:
 	lb bc, BANK(ApexPrompt), 2
 	call CopyVideoDataDouble
 .notMaxDVs
+;;;;;
 	ldh a, [hTileAnimations]
 	push af
 	xor a
@@ -173,6 +175,7 @@ StatusScreen:
 	call PrintNumber ; ID Number
 	ld d, $0
 	call PrintStatsBox
+;;;;; PureRGBnote: ADDED: If the pokemon has max DVs, display the APEX prompt on their status screen.
 	call DoesLoadedMonHaveMaxDVs
 	jr nc, .notMaxDVs2
 	; set APEX prompt near the pokemon's stats
@@ -181,6 +184,7 @@ StatusScreen:
 	inc hl
 	ld [hl], $CA
 .notMaxDVs2
+;;;;;
 	call Delay3
 	call GBPalNormal
 	hlcoord 1, 0

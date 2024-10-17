@@ -14,6 +14,7 @@ FuchsiaCityDefaultScript:
 	bit BIT_CUR_MAP_LOADED_1, [hl] ; did we load the map from a save/warp/door/battle, etc?
 	res BIT_CUR_MAP_LOADED_1, [hl]
 	jr nz, .removeAddCutTiles
+; PureRGBnote: ADDED: ERIK can walk away after you tell him where SARA is.
 	; check if ERIK is walking away
 	CheckEventHL EVENT_ERIK_LEAVING
 	ret z
@@ -129,6 +130,7 @@ FuchsiaCityGamblerText:
 	text_far _FuchsiaCityGamblerText
 	text_end
 
+; PureRGBnote: CHANGED: ERIK can be sent off to find SARA once you find her in the SAFARI ZONE.
 FuchsiaCityErikText:
 	text_far _FuchsiaCityErikText
 	text_asm

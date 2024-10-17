@@ -30,6 +30,7 @@ MewtwoBattleText:
 	ld [wCeruleanCaveB1FCurScript], a
 	rst TextScriptEnd
 
+; PureRGBnote: ADDED: a special animation happens before you battle MEWTWO.
 MewtwoAnimation:
 	ld a, CERULEANCAVEB1F_MEWTWO
 	call SetSpriteFacingDown

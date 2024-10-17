@@ -1,3 +1,5 @@
+; PureRGBnote: CHANGED: MOVED: This code was moved out of home bank since it's getting complicated and needs some jump tables to facilitate 
+; "alternate" pokemon like powered up dragonair, haunter, volcanic magmar, etc.
 GetMonHeader2::
 	push bc
 	push de

@@ -87,6 +87,7 @@ ReadTrainerHeaderInfo::
 	pop de
 	ret
 
+; PureRGBnote: CHANGED: this function was optimized a bit.
 TalkToTrainer::
 	call StoreTrainerHeaderPointer
 	xor a

@@ -1,3 +1,4 @@
+; PureRGBnote: CHANGED: some of this script was optimized a bit.
 MrFujisHouse_Script:
 	call CheckHideMrFujiInPokemonTower
 	jp EnableAutoTextBoxDrawing

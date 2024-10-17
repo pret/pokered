@@ -193,6 +193,7 @@ Route6UndergroundPathSignText:
 	text_far _Route6UndergroundPathSignText
 	text_end
 
+ ; PureRGBnote: ADDED: New trainer tips sign
 Route6TrainerTipsText:
 	text_far _Route6TrainerTipsText
 	text_end

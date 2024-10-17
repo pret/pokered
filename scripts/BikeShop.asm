@@ -1,3 +1,6 @@
+; PureRGBnote: CHANGED: The Bike Shop was expanded a bit to use some of the trade center / collosseum tiles you wouldn't see ever in the entire
+; game unless you played over link cable. Also a couple beta tiles are added to the tileset to make things look nice.
+; Some text that wasn't fully translated from japanese is added in new signs here.
 BikeShop_Script:
 	jp EnableAutoTextBoxDrawing
 

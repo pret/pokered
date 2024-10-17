@@ -71,6 +71,8 @@ PrepareText:
 	ldh [hTextID], a
 	jp DisplayTextID
 
+; PureRGBnote: ADDED: In the volcano, select will use a drill that allows the player to dig down to the next floor.
+
 SelectInVolcano:
 	CheckEvent EVENT_GOT_DRILL
 	ret z

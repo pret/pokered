@@ -1,3 +1,4 @@
+; PureRGBnote: ADDED: This is the new roof map for the power plant where you fight ZAPDOS in a thunderstorm.
 PowerPlantRoof_Script:
 	call PowerPlantRoofOnMapLoad
 	call CheckShowDarkClouds

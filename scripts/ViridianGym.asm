@@ -1,4 +1,5 @@
 ; PureRGBnote: ADDED: code that plays Giovanni's theme if we have the option turned on
+; PureRGBnote: CHANGED: code related to spinners found in this map script was GREATLY simplified to reduce the space the script uses.
 
 ViridianGym_Script:
 	call EnableAutoTextBoxDrawing
@@ -142,6 +143,8 @@ ViridianGymGiovanniText:
 .dontMoveKarateKing
 	call GBFadeInFromBlack
 	callfar PlayDefaultMusicIfMusicBitSet
+;;;;; PureRGBnote: ADDED: if you caught ghost marowak, a scene where marowak tells the player to lay it to rest plays after
+;;;;; giovanni disappears.
 	CheckEvent EVENT_CAUGHT_GHOST_MAROWAK
 	jr z, .text_script_end
 	ld a, PLAYER_DIR_DOWN
@@ -153,6 +156,7 @@ ViridianGymGiovanniText:
 	ld d, VIRIDIANGYM_HIKER3
 	callfar FarNPCSpriteQuickSpin
 	rst TextScriptEnd
+;;;;;
 .beforeBeat
 	ld hl, .PreBattleText
 	rst _PrintText
@@ -300,6 +304,7 @@ ViridianGymCooltrainerM2AfterBattleText:
 
 ViridianGymHiker3Text:
 	text_asm
+;;;;; PureRGBnote: ADDED: if the ghost marowak scene has just played, make him say something about it.
 	CheckBothEventsSet EVENT_CAUGHT_GHOST_MAROWAK, EVENT_BEAT_VIRIDIAN_GYM_GIOVANNI
 	jr nz, .normal
 	ld a, [wSprite07StateData2MapX]
@@ -312,6 +317,7 @@ ViridianGymHiker3Text:
 	ld hl, ViridianGymTrainerHeader5
 	call TalkToTrainer
 	rst TextScriptEnd
+;;;;;
 .what
 	text_far _ViridianGymHiker3WhatText
 	text_end

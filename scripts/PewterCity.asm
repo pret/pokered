@@ -173,8 +173,10 @@ PewterCityResetYoungsterScript:
 	ld a, HS_GYM_GUY
 	ld [wMissableObjectIndex], a
 	predef ShowObject
+;;;;; PureRGBnote: FIXED: After the youngster shows you to the gym, they need to have their movement data reset so they face DOWN instead of NONE.
 	ld hl, wMapSpriteData + (PEWTERCITY_YOUNGSTER - 1) * 2 ; movement byte of youngster
 	ld [hl], DOWN ; reset behaviour to facing down
+;;;;;
 	xor a
 	ld [wJoyIgnore], a
 	ld a, SCRIPT_PEWTERCITY_DEFAULT

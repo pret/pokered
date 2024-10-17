@@ -1,5 +1,6 @@
 ; PureRGBnote: CHANGED: most of the bills pc functions were adjusted to kick you out of the menu less
 ; after doing something like depositing/withdrawing or viewing data of a pokemon.
+; PureRGBnote: ADDED: Pressing SELECT while the cursor is on WITHDRAW lets you view the box pokemon regardless of if your party is full.
 DisplayPCMainMenu::
 	xor a
 	ldh [hAutoBGTransferEnabled], a

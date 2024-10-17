@@ -126,6 +126,7 @@ SaffronCitySilphCoLatestProductSignText:
 	text_far _SaffronCitySilphCoLatestProductSignText
 	text_end
 
+; PureRGBnote: ADDED: One of the buildings has its door barred, and will display this text when you interact with the door.
 SaffronCityBusinessSpaceForLease:
 	text_far _SaffronCityBusinessSpaceForLease
 	text_end

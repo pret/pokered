@@ -1,6 +1,8 @@
 ; PureRGBnote: ADDED: we use a careful assignment between the default item ball sprite and a copy of it and replace one or the other
 ; with a voltorb sprite to make it look like the pokeball you just pressed A on turned into a voltorb if it was a voltorb/electrode.
 ; Two are needed because it's possible to have two voltorb pokeballs on screen at once, so we don't want them all to change appearance at once.
+; PureRGBnote: CHANGED: lots of visual changes to this map, and new scripts for electricity, buttons, various new stuff to facilitate a bit of a puzzle.
+; ZAPDOS also flies away to the roof and you have to follow it up there.
 DEF VOLTORB_POKEBALL_TILE1 EQU $780
 DEF VOLTORB_POKEBALL_TILE2 EQU $7C0
 

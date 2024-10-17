@@ -1,4 +1,5 @@
 ; PureRGBnote: ADDED: new trainers in this location. Only after defeating giovanni on 11F though.
+; PureRGBnote: ADDED: this map is also used for the abandoned building left of silph co.
 
 SilphCo1F_Script:
 	call SilphCo1FOnMapLoad

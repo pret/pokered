@@ -1,3 +1,4 @@
+; PureRGBnote: ADDED: You can now eat in the SS Anne Kitchen.
 SSAnneKitchen_Script:
 	call EnableAutoTextBoxDrawing
 	CheckEvent EVENT_GENERIC_NPC_WALKING_FLAG

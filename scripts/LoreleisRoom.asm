@@ -121,6 +121,8 @@ ResetLoreleiScript:
 	ld [wLoreleisRoomCurScript], a
 	ret
 
+; PureRGBnote: ADDED: this function will make sure the opponent is facing the player after battle. 
+; Sometimes the sprite can update to another direction right after battle ends before fade in.
 DoEliteFourFacing::
 	call .doFacings
 	jp UpdateSprites

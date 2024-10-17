@@ -1,3 +1,4 @@
+; PureRGBnote: CHANGED: This map script was changed a bunch to simplify how currents move the player around.
 SeafoamIslandsB3F_Script:
 	call EnableAutoTextBoxDrawing
 	call SeafoamIslandsB3FOnMapLoad

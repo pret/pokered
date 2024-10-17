@@ -1,3 +1,4 @@
+; PureRGBnote: CHANGED: Code in this script related to spinners was GREATLY simplified to take up a lot less space.
 RocketHideoutB2F_Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, RocketHideout2TrainerHeaders

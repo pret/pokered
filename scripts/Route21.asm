@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: The volcano was added in this route, so we need to check whether to remove it if the player turned it off, along with
+; checking whether to remove the lava suit and a couple other things when leaving the volcano.
 Route21_Script:
 	call CheckRemoveVolcano
 	call EnableAutoTextBoxDrawing

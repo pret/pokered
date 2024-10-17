@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: Map where you can power up your MAGMAR. Wanted it to be combined with CINNABAR_VOLCANO but the map was too big to fit
+; everything so had to split them into two maps.
 CinnabarVolcanoWest_Script:
 	ld hl, wCurrentMapScriptFlags
 	res BIT_CUR_MAP_LOADED_1, [hl]

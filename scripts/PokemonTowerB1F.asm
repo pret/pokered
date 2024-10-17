@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: This is the area where you can curse your GENGAR into a HAUNTER (with gengar stats)
+; and also the catacombs where you lay MAROWAK to rest.
 PokemonTowerB1F_Script:
 	call PokemonTowerB1FOnMapLoad
 	call PokemonTowerB1FCheckCatacombsIntroText

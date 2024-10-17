@@ -372,6 +372,8 @@ wVermilionDockTileMapBufferEnd::
 
 NEXTU
 
+;;;;; PureRGBnote: when we transfer a save file from an earlier version, we need to copy some data here because the PC items will go where this
+;;;;; data used to be as we move wram around a bit to increase PC item space.
 wSaveTransferTempData::
 wSaveTransferTempPocketAbraNick:: ds 11
 wSaveTransferTempNumBagItems:: db
@@ -379,6 +381,7 @@ wSaveTransferTempBagItemsStart:: ds 30 * 2 + 1
 ds 3
 wSaveTransferTempColorSwapsUsed:: db
 wSaveTransferTempDataEnd::
+;;;;;
 
 NEXTU
 wOaksAideRewardItemName:: ds ITEM_NAME_LENGTH
@@ -557,8 +560,8 @@ wEnemyNumHits:: db
 
 ; the amount of damage accumulated by the enemy while biding
 ;wEnemyBideAccumulatedDamage:: dw ; PureRGBnote: CHANGED: bide effect changed to normal buff move, so this is unused
-wPlayerConversionMode:: db
-wEnemyPreviousConversionMode::db
+wPlayerConversionMode:: db ; PureRGBnote: ADDED: which conversion mode the player selected
+wEnemyPreviousConversionMode::db ; PureRGBnote: ADDED: which conversion mode the enemy last selected, needed for mirror move to use the correct mode.
 wForcedConversionMode:: db ; if used mirror move to execute conversion, it will use whatever mode the foe used previously
 
 	ds 6
@@ -1213,7 +1216,7 @@ wChampArenaChallenger:: db ; which challenger we're currently fighting in the ch
 wAITargetMonType1:: db ; the type of the pokemon the AI should think it's attacking (stays as the previous pokemon when you switch pokemon)
 wAITargetMonType2:: db ; the type of the pokemon the AI should think it's attacking (stays as the previous pokemon when you switch pokemon)
 wAITargetMonStatus:: db ; the current status of the pokemon the AI should think it's attacking (set when healing a pokemon's status or switching it out)
-wMapMultiTextTracker:: db
+wMapMultiTextTracker:: db ; in a few maps there is "randomized" multi-text for certain things you speak to. This ensures the text will cycle through each available text before repeating. ; TODO: use in ss anne kitchen
 ; 7 unused bytes left
 ;;;;;;;;;;
 ENDU
@@ -1606,7 +1609,7 @@ UNION
 
 w2CharStringBuffer:: ds 3 ; don't use this buffer during attack animations
 NEXTU
-wSubAnimStepCounter:: db
+wSubAnimStepCounter:: db ; PureRGBnote: ADDED: used to track how far we are in an animation.
 ; the address _of the address_ of the current subanimation entry
 wSubAnimAddrPtr:: dw
 ENDU
@@ -2025,7 +2028,7 @@ wOptions:: db
 
 wObtainedBadges:: flag_array NUM_BADGES
 
-wGameInternalVersion:: db
+wGameInternalVersion:: db ; PureRGBnote: ADDED: set to 0 in original game and any version before 2.6.0. This tracks what save file version the game uses for the save updater.
 
 wLetterPrintingDelayFlags:: db
 
@@ -2098,6 +2101,8 @@ UNION
 ds 128
 
 NEXTU
+;;;;; PureRGBnote: CHANGED: This data was moved somewhere else at version 2.6.0 and the save file updater will copy it elsewhere
+;;;;; to make room for the bigger PC item space that now uses this space during save file update.
 wPrior2_6_0_StartData::
 wPrior2_6_0_PocketAbraNick:: ds 11
 wPrior2_6_0_NumBagItems:: db
@@ -2106,6 +2111,7 @@ ds 3
 wPrior2_6_0_ColorSwapsUsed:: db
 wPrior2_6_0_EndData::
 wPrior2_6_0_BoosterChipActive:: db
+;;;;;
 
 NEXTU
 
@@ -2175,10 +2181,13 @@ wGrassTile:: db
 	ds 4 ; unused save file 4 bytes
 
 UNION
+;;;;; PureRGBnote: CHANGED: Box items were moved elsewhere to expand the pc item capacity in version 2.6.0.
+;;;;; Need these old labels to identify where they used to be for the save file updater.
 ; item, quantity
 wPrior2_6_0_BoxItemsData::
 wOriginalGameBoxItemsData:: ds 50 * 2 + 2
 wOriginalGameBoxItemsDataEnd::
+;;;;;
 NEXTU
 wNumBagItems:: db
 wBagItems:: ds BAG_ITEM_CAPACITY * 2 + 1

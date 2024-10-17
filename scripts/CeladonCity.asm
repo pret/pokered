@@ -124,6 +124,7 @@ CeladonCityTrainerTips1Text:
 	text_end
 
 CeladonCitySignText:
+;;;;; PureRGBnote: ADDED: can enable or disable the beta unused rainbow palette for celadon city by talking to the sign.
 	text_asm
 	ld hl, .text
 	rst _PrintText
@@ -136,6 +137,7 @@ CeladonCitySignText:
 .text
 	text_far _CeladonCitySignText
 	text_end
+;;;;;
 
 CeladonCityGymSignText:
 	text_far _CeladonCityGymSignText

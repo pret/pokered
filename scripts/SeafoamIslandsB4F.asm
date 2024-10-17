@@ -1,3 +1,6 @@
+; PureRGBnote: CHANGED: This script was adjusted a bunch to simplify how currents move the player, and to add an animation
+; before you fight ARTICUNO, and some events/text when SARA and ERIK come here to research the DRAGONAIR in the lake.
+
 SeafoamIslandsB4F_Script:
 	call EnableAutoTextBoxDrawing
 	call SeafoamIslandsB4FOnMapLoad

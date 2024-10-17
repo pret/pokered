@@ -66,6 +66,7 @@ Route12DefaultScript:
 	ld [wCurMapScript], a
 	ret
 
+; PureRGBnote: ADDED: There's a new animation when snorlax wakes up.
 SnorlaxWakesUpAnimation::
 	; show an exclamation bubble when snorlax wakes up for effect
 	ld a, 1
@@ -242,7 +243,7 @@ Route12TrainerHeader8:
 	trainer EVENT_BEAT_ROUTE_12_TRAINER_8, 3, Route12BattleText9, Route12EndBattleText9, Route12AfterBattleText9
 	db -1 ; end
 
-SnorlaxText::
+SnorlaxText:: ; PureRGBnote: CHANGED: now also used by route 16's snorlax
 	text_asm
 	call SnorlaxSnoring
 	ld hl, .sleeping
@@ -252,6 +253,7 @@ SnorlaxText::
 	text_far _Route12SnorlaxText
 	text_end
 
+; PureRGBnote: ADDED: when you talk to sleeping snorlax, there's a little snoring animation.
 SnorlaxSnoring::
 	call .sound
 	ld a, 1
@@ -278,7 +280,7 @@ Route12PrepareEmotionBubble:
 	ld [wEmotionBubbleSpriteIndex], a
 	predef_jump EmotionBubble
 
-Route12SnorlaxWokeUpText:
+Route12SnorlaxWokeUpText: ; PureRGBnote: CHANGED: now also used by route 16's snorlax
 	text_asm
 	ld hl, .wokeUp
 	rst _PrintText
@@ -288,7 +290,7 @@ Route12SnorlaxWokeUpText:
 	text_far _Route12SnorlaxWokeUpText
 	text_end
 
-Route12SnorlaxCalmedDownText:
+Route12SnorlaxCalmedDownText: ; PureRGBnote: CHANGED: now also used by route 16's snorlax
 	text_far _Route12SnorlaxCalmedDownText
 	text_end
 

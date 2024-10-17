@@ -1,6 +1,8 @@
 CeladonMartRoof_Script:
 	jp EnableAutoTextBoxDrawing
 
+; PureRGBnote: CHANGED: The "talking to little girl" script was optimized a bunch to reduce duplicate text.
+
 CeladonMartRoofScript_GetDrinksInBag:
 ; construct a list of all drinks in the player's bag
 	xor a

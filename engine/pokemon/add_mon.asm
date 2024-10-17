@@ -213,6 +213,7 @@ ENDC
 	dec de
 	dec de
 	dec de
+;;;;; PureRGBnote: ADDED: This code ensures in the debug build that the jr trainer above vermillion has the debug pokemon with debug moves.
 IF DEF(_DEBUG)
 	ld a, [wMonDataLocation]
 	cp ENEMY_PARTY_DATA
@@ -237,6 +238,7 @@ IF DEF(_DEBUG)
 	jr .skipWriteMoves
 .notDebugOpponent
 ENDC
+;;;;;
 	xor a
 	ld [wLearningMovesFromDayCare], a
 	predef WriteMonMoves

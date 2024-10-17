@@ -1,3 +1,4 @@
+; PureRGBnote: ADDED: Erik and Sara can now be reunited in this map. After they will go to their house on ROUTE 19.
 SafariZoneCenterRestHouse_Script:
 	jp EnableAutoTextBoxDrawing
 

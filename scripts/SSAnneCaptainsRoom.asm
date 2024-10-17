@@ -1,3 +1,5 @@
+; PureRGBnote: CHANGED: The CAPTAIN now gets rid of your SS Ticket and makes it so you won't need one anymore.
+; Also his bookcase has some unique text now.
 SSAnneCaptainsRoom_Script:
 	call SSAnneCaptainsRoomEventScript
 	jp EnableAutoTextBoxDrawing

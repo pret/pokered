@@ -1,5 +1,6 @@
 ; PureRGBnote: CHANGED: since Old rod is obtained in cerulean and good rod in vermilion now, this fishing guru will give either
 ; the SUPER ROD or the FISHING GUIDE depending on which of the last two gurus you talked to first.
+; PureRGBnote: ADDED: This map is also used for ERIK and SARA's house.
 FuchsiaGoodRodHouse_Script:
 	call FuchsiaGoodRodHouseOnMapLoad
 	jp EnableAutoTextBoxDrawing
