@@ -87,9 +87,12 @@ GainExperience:
 	ld a, 1
 .next
 	ld [wGainBoostedExp], a
+;;;;;;;;;; PureRGBnote: ADDED: on route 23 we will boost exp gain to make training for elite four quicker. EXP gain will be like you were
+;;;;;;;;;; fighting a trainer battle.
 	ld a, [wCurMap]
 	cp ROUTE_23
-	call z, BoostExp ; on route 23 we will boost exp gain to make training for elite four quicker
+	call z, BoostExp
+;;;;;;;;;;
 	ld a, [wIsInBattle]
 	dec a ; is it a trainer battle?
 	call nz, BoostExp ; if so, boost exp

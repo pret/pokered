@@ -10,6 +10,8 @@ EmptyPartyMenuRedraw::
 	ld [wPartyMenuTypeOrMessageID], a
 	ret
 
+; PureRGBnote: FIXED: MOVED: This code was moved from Battle Core, and now correctly redraws ghost sprites if we're facing an unidentified ghost.
+; It also correctly minimizes/substitutes the opponent if they were minimized/substituted.
 ReloadEnemyMonPicAfterStatusScreen::
 	ld a, [wEnemyBattleStatus2]
 	bit HAS_SUBSTITUTE_UP, a ; does the enemy mon have a substitute?
@@ -35,6 +37,7 @@ ReloadEnemyMonPicAfterStatusScreen::
 	rst _Bankswitch
 	ret ; enemy mon pic has been reloaded, so return to the party menu
 
+; PureRGBnote: MOVED: out of core battle engine. Makes it easier to reload this pic when coming back from the status screen in the above subroutines.
 LoadGhostData::
 	ld a, MON_GHOST
 	ld [wNamedObjectIndex], a
@@ -77,6 +80,7 @@ CheckShouldReloadGhostSprite::
 	and a
 	ret
 
+; PureRGBnote: MOVED: Since this code is getting more complicated move it out of core battle engine bank.
 ; output:
 ; carry flag: whether the move gets stab or not
 ; [wMoveType] will contain the move's type
@@ -154,6 +158,7 @@ ShouldMoveGetStabBoost::
 	const LAVA_SUIT_BACK_PIC
 	const SCUBA_SUIT_BACK_PIC
 
+; PureRGBnote: MOVED: CHANGED: Moved out of core battle engine bank and simplified the code with a jump table. 
 ; loads either red back pic or old man back pic
 ; also writes OAM data and loads tile patterns for the Red or Old Man back sprite's head
 ; (for use when scrolling the player sprite and enemy's silhouettes on screen)

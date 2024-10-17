@@ -1,3 +1,5 @@
+; PureRGBnote: CHANGED: Conversion has a whole new set of effects. Can switch between two modes. Defense mode halves damage from attacks.
+; Attack mode will use a move that is super effective against the opponent.
 ShowConversionMenu::
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING

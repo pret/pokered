@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: A bunch of new areas have new animated tiles that are coded here.
+
 ;TownMapWaterTiles:
 ;	ld a, [wAnimCounter] ; this is used as the counter for the town map so we don't mess up the normal counter
 ;	cp 49

@@ -310,10 +310,13 @@ EnemyRanText:
 	text_end
 
 MainInBattleLoop:
+;;;;;; PureRGBnote: ADDED: code that makes SonicBoom work as expected - only can flinch the first turn a mon is out.
+;;;;;; Meaning when these counts = exactly 1.
 	ld hl, wPlayerTurnCount
 	inc [hl]
 	inc hl
 	inc [hl] ; wEnemyTurnCount
+;;;;;;
 	call ReadPlayerMonCurHPAndStatus
 	ld hl, wBattleMonHP
 	ld a, [hli]
@@ -1164,8 +1167,11 @@ PlayerMonFaintedText:
 ; asks if you want to use next mon
 ; stores whether you ran in C flag
 DoUseNextMonDialogue:
+;;;;; PureRGBnote: ADDED: during the dragonair event you face a cloyster that you must defeat with only your dragonair.
+;;;;; If dragonair faints during this battle, auto run away.
 	CheckEvent EVENT_DRAGONAIR_EVENT_BATTLING_CLOYSTER
 	jp nz, TryRunningFromBattle.canEscape
+;;;;;
 	call PrintEmptyString
 	call SaveScreenTilesToBuffer1
 	ld a, [wIsInBattle]
@@ -1646,6 +1652,7 @@ TryRunningFromBattle:
 	ld a, [wIsInBattle]
 	dec a
 	jp nz, .trainerBattle ; jump if it's a trainer battle
+;;;;; PureRGBnote: ADDED: when battling spirits in pokemon tower basement, you can always run away, unless it's THE MAW, then you can't run away at all.
 	ld a, [wCurMap]
 	cp POKEMON_TOWER_B1F
 	jr nz, .normal
@@ -1653,6 +1660,7 @@ TryRunningFromBattle:
 	cp SPIRIT_THE_MAW
 	jp z, .cantEscape
 	jp .canEscape ; can always run from the other spirits
+;;;;;
 .normal
 	ld a, [wNumRunAttempts]
 	inc a
@@ -2455,6 +2463,7 @@ ItemsCantBeUsedHereText:
 	text_far _ItemsCantBeUsedHereText
 	text_end
 
+;;;;; PureRGBnote: ADDED: When fighting CLOYSTER with your dragonair in the dragonair event, you cannot change pokemon.
 NoPartyMenuAllowedText:
 	text_far _DragonairEventNoPartyMenuText
 	text_end
@@ -2463,6 +2472,7 @@ NoPartyMenuAllowed:
 	ld hl, NoPartyMenuAllowedText
 	rst _PrintText
 	jp DisplayBattleMenu
+;;;;;
 
 PartyMenuOrRockOrRun:
 	dec a ; was Run selected?
@@ -2834,9 +2844,11 @@ SelectMenuItem:
 	add hl, bc
 	ld a, [hl]
 	ld [wPlayerSelectedMove], a
+;;;;; PureRGBnote: ADDED: when using CONVERSION, a special menu shows up when selecting the move to select the conversion mode.
 	cp CONVERSION
 	jr z, .conversion
 .conversionChosen
+;;;;;
 	xor a
 	ret
 .disabled
@@ -2849,10 +2861,12 @@ SelectMenuItem:
 .conversionGoBack
 	call LoadScreenTilesFromBuffer1
 	jp MoveSelectionMenu
+;;;;; PureRGBnote: ADDED: when using CONVERSION, a special menu shows up when selecting the move to select the conversion mode.
 .conversion
 	callfar ShowConversionMenu
 	jr c, .conversionChosen
 	jr .conversionGoBack
+;;;;;
 
 MoveNoPPText:
 	text_far _MoveNoPPText
@@ -3368,7 +3382,7 @@ handleIfPlayerMoveMissed:
 	ld a, [wPlayerMoveEffect]
 	cp EXPLODE_EFFECT ; don't play any animation if the move missed, unless it was EXPLODE_EFFECT
 	jr z, .explodeAnimation
-	cp EXPLODE_RECOIL_EFFECT
+	cp EXPLODE_RECOIL_EFFECT ; PureRGBnote: ADDED: when using explosion at higher health, this effect is now used. (Makes sure it plays even if you miss.)
 	jr z, .explodeAnimation
 	jr playerCheckIfFlyOrChargeEffect
 .explodeAnimation
@@ -3432,7 +3446,7 @@ MirrorMoveCheck:
 	jp CheckIfPlayerNeedsToChargeUp ; Go back to damage calculation for the move picked by Metronome
 .next
 	cp CONVERSION_EFFECT
-	jp z, ConversionEffect
+	jp z, ConversionEffect ; PureRGBnote: ADDED: conversion may remap the move you're using if it's ATTACK mode.
 	cp MIMIC_EFFECT
 	jp z, MimicEffect
 	ld a, [wPlayerMoveEffect]
@@ -3689,13 +3703,14 @@ CheckPlayerStatusConditions:
 	; clear thrashing, charging up, and trapping moves such as warp (already cleared for confusion damage)
 	and ~((1 << THRASHING_ABOUT) | (1 << CHARGING_UP) | (1 << USING_TRAPPING_MOVE)) ; PureRGBnote: CHANGED: bide code removed since its effect was changed
 	ld [hl], a
-	; PureRGBnote: FIXED: in link battles only, the player doesn't stay invulnerable when they hurt themselves in confusion
-	; or get fully paralyzed while using dig/fly. In normal battles ONLY the player can have this happen because it's funny.
+;;;;; PureRGBnote: FIXED: in link battles only, the player doesn't stay invulnerable when they hurt themselves in confusion
+;;;;; or get fully paralyzed while using dig/fly. In normal battles ONLY the player can have this happen because it's funny.
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	jr nz, .dontClearInvulFlag
 	res INVULNERABLE, [hl]
 .dontClearInvulFlag
+;;;;;
 	ld a, [wPlayerMoveEffect]
 	cp FLY_EFFECT
 	jr z, .FlyOrChargeEffect
@@ -5275,6 +5290,7 @@ MirrorMoveCopyMove:
 	xor a
 	ret
 ;;;;;;;;;; PureRGBnote: ADDED: Mirror move has a small animation before using the mirrored move now
+;;;;;;;;;; Also, if it ends up using conversion, use the conversion mode the opponent last used.
 .doMirrorMove
 	ld a, [hl]
 	push af
@@ -5470,6 +5486,7 @@ AdjustDamageForMoveType:
 	inc hl
 	inc hl
 	jp .loop
+;;;;; PureRGBnote: ADDED: if the target has DEFENSE CURL active, super effective moves turn into normally effective moves.
 .checkForceNeutralDamage
 	; after calculating damage, if the player has defense curl we make all super effective hits normally effective
 	ld hl, wDamageMultipliers
@@ -5508,6 +5525,7 @@ CheckIfDefenseCurlModifier:
 	ret nz
 	scf
 	ret
+;;;;;
 
 
 ForceTypeImmunity:
@@ -6712,8 +6730,8 @@ LoadEnemyMonData:
 	dec de
 	dec de
 	dec de
+;;;;;; PureRGBnote: ADDED: makes sure only the debug moves are used on route 1 for debug purposes
 IF DEF(_DEBUG)
-	; makes sure only the debug moves are used on route 1 for debug purposes
 	ld a, [wCurMap]
 	cp ROUTE_1
 	jr nz, .notRoute1
@@ -6730,6 +6748,7 @@ IF DEF(_DEBUG)
 	jr .loadMovePPs
 .notRoute1
 ENDC
+;;;;;;
 	xor a
 	ld [wLearningMovesFromDayCare], a
 	predef WriteMonMoves ; get moves based on current level
@@ -6869,6 +6888,8 @@ ApplyBurnAndParalysisPenalties:
 	call QuarterSpeedDueToParalysis
 	jp HalveAttackDueToBurn
 
+
+; PureRGBnote: CHANGED: this subroutine was optimized a lot but does the same thing.
 QuarterSpeedDueToParalysis:
 	ldh a, [hWhoseTurn]
 	and a
@@ -6897,6 +6918,7 @@ QuarterSpeedDueToParalysis:
 	ld [hl], b
 	ret
 
+; PureRGBnote: CHANGED: this subroutine was optimized a lot but does the same thing.
 HalveAttackDueToBurn:
 	ldh a, [hWhoseTurn]
 	and a
@@ -7203,7 +7225,6 @@ ENDC
 	pop hl
 	ret
 
-
 HandleExplodingAnimation:
 	ldh a, [hWhoseTurn]
 	and a
@@ -7228,7 +7249,7 @@ HandleExplodingAnimation:
 	;ret z
 	;ld a, [hl]
 	;cp GHOST
-	;ret z ; both explosion moves affect ghost types now
+	;ret z ; PureRGBnote: CHANGED: both explosion moves affect ghost types now
 	ld a, [wMoveMissed]
 	and a
 	ret nz

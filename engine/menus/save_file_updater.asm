@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: When continuing the game, if your game is from a previous version (decided by wGameInternalVersion)
+; the game will try to update your save to work with the current version.
 DEF COIN_CASE EQU $45 ; constant was changed
 DEF TOWN_MAP EQU $05 ; constant was changed
 

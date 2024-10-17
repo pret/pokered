@@ -1106,6 +1106,7 @@ TwoToFiveAttacksEffect:
 	ld bc, wEnemyNumHits
 	ld a, [wEnemyMoveNum]
 .twoToFiveAttacksEffect
+;;;;; PureRGBnote: ADDED: If doubleslap hits a sleeping pokemon, set it to wake up.
 	cp DOUBLESLAP
 	jr nz, .notDoubleSlap
 	push hl
@@ -1114,6 +1115,7 @@ TwoToFiveAttacksEffect:
 	pop bc
 	pop hl
 .notDoubleSlap
+;;;;;
 	bit ATTACKING_MULTIPLE_TIMES, [hl] ; is mon attacking multiple times?
 	ret nz
 	set ATTACKING_MULTIPLE_TIMES, [hl] ; mon is now attacking multiple times
@@ -1191,8 +1193,8 @@ FlinchSideEffect:
 .flinch
 	set FLINCHED, [hl] ; set mon's status to flinching
 	jp ClearHyperBeam
+;;;;; PureRGBnote: ADDED: sonic boom always flinches if it's used the first turn a pokemon is out
 .sonicBoom
-	; sonic boom always flinches if it's used the first turn a pokemon is out
 	ldh a, [hWhoseTurn]
 	and a
 	ld a, [wPlayerTurnCount]
@@ -1202,6 +1204,7 @@ FlinchSideEffect:
 	cp 1 ; the count will be 1 on first turn mon is out
 	ret nz
 	jr .flinch
+;;;;;
 
 
 OneHitKOEffect:

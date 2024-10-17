@@ -1,4 +1,4 @@
-; PureRGBnote: ADDED: new effect that just applies burn to the opponent. Used in firewall.
+; PureRGBnote: ADDED: Firewall burns the opponent, and its power increases each time you use it on burned opponents.
 
 FirewallEffect_:
 	ld hl, wEnemyMonStatus

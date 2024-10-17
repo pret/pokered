@@ -1,4 +1,4 @@
-; PureRGBnote: ADDED: one of the new pages in the options menu. This one's one of the two pages for options related to game sprites.
+; PureRGBnote: ADDED: Accessed from your PC. This options page changes what areas are in the world. Currently only Volcano can be turned off/on.
 DEF WORLD_OPTIONS_COUNT EQU 1 ; number of options on this page
 DEF WORLD_OPTIONS_PAGE_NUMBER EQU 1 ; must be 1 digit.
 DEF HOW_MANY_WORLD_OPTIONS_PAGES EQU 1

@@ -1,5 +1,5 @@
-; Certain moves get better accuracy, power, or other effects when used by specific pokemon
-
+; PureRGBnote: ADDED: Certain moves get better accuracy, power, or other effects when used by specific pokemon
+; Also this list can be used to modify a move's data such as power/accuracy after selecting it based on the current state of battle.
 CheckRemapMoveData::
 	call GetMoveRemapData
 	push de

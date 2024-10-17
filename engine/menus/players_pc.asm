@@ -326,6 +326,7 @@ RestoreItemListIndex:
 
 ; PureRGBnote: ADDED: dialog for depositing an item from the item menu. Press start on the item menu to trigger it.
 DepositItemFromItemMenu::
+;;;;; PureRGBnote: CHANGED: cannot deposit SS TICKET while you're on the SS ANNE.
 	ld a, [wCurItem]
 	cp S_S_TICKET
 	jr nz, .notSSTicket
@@ -359,6 +360,7 @@ DepositItemFromItemMenu::
 	rst _PrintText
 	ret
 .notSSTicket
+;;;;;
 	call IsKeyItem
 	ld a, 1
 	ld [wItemQuantity], a

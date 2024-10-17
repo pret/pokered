@@ -80,6 +80,7 @@ DisplayNameRaterScreen::
 	scf
 	ret
 
+; PureRGBnote: CHANGED: In battle if the naming screen comes up it will lower the music volume during naming.
 DisplayNamingScreen:
 	ld a, [wNamingScreenType]
 	cp NAME_MON_SCREEN

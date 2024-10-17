@@ -128,6 +128,7 @@ TestGrassTile:
 	ld a, $34	; check for the extra grass tile in the forest tileset
 	cp c
 	ret
+;;;;; PureRGBnote: ADDED: In the volcano there are multiple encounter tiles and some are conditional.
 .volcano
 	; no encounters in first room
 	ld a, [wXCoord]
@@ -153,6 +154,7 @@ TestGrassTile:
 	ld a, $27
 	cp c
 	ret
+;;;;;
 
 TestWaterTile:
 ;;;;;;;;;; PureRGBnote: ADDED: when in bills garden, if alt palettes are not turned on, don't encounter any pokemon at all
@@ -190,13 +192,15 @@ TestWaterTile:
 	ld a, $32 ; left coast tile in OVERWORLD tileset
 	cp c
 	ret
-.volcano ; volcano has two lava bubble tiles that generate encounters too
+;;;;; PureRGBnote: ADDED: volcano has two lava bubble tiles that generate encounters too
+.volcano
 	ld a, $21
 	cp c
 	ret z
 	ld a, $06
 	cp c
 	ret
+;;;;;
 
 TestWaterTile2:
 	push bc

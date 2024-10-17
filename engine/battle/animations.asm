@@ -296,9 +296,11 @@ PlayAnimation:
 	vc_hook_blue Stop_reducing_move_anim_flashing_Bubblebeam_Hyper_Beam_Blizzard
 	pop hl
 	vc_hook Stop_reducing_move_anim_flashing_Guillotine
+;;;;;;;;;; PureRGBnote: ADDED: when we do an animation this counter counts which step of the animation we're on
 	ld a, [wSubAnimStepCounter]
 	inc a
 	ld [wSubAnimStepCounter], a
+;;;;;;;;;;
 	jr .animationLoop
 
 LoadSubanimation:
@@ -386,6 +388,8 @@ GetSubanimationTransform2:
 	ret
 
 ; loads tile patterns for battle animations
+; PureRGBnote: CHANGED: now the third move animation tileset is a new tileset, it used to be a duplicate that copied less tiles for the trade
+; center animation graphics. But now that's done in a hardcoded manner instead.
 LoadMoveAnimationTiles:
 	ld a, [wWhichBattleAnimTileset]
 	add a
@@ -414,7 +418,7 @@ LoadMoveAnimationTiles:
 MACRO anim_tileset
 	db \1
 	dw \2
-	db BANK(\2)
+	db BANK(\2) ; PureRGBnote: CHANGED: used to be padding. Wasn't needed so now it indicates the bank of the animation tile graphics so it can be in any bank we want.
 ENDM
 
 MoveAnimationTilesPointers:
@@ -512,7 +516,7 @@ ShareMoveAnimations:
 	ld b, AMNESIA_ENEMY_ANIM ; PureRGBnote: CHANGED: amnesia has its own new animation
 	jr z, .replaceAnim
 	cp RAGE
-	ld b, RAGE_ENEMY_ANIM
+	ld b, RAGE_ENEMY_ANIM ; PureRGBnote: CHANGED: rage needs to have a unique animation for player vs opponent due to visual changes in it.
 	jr z, .replaceAnim
 	cp REST
 	ld b, SLP_ANIM
@@ -949,6 +953,7 @@ FlashScreenEveryFourFrameBlocks:
 	call z, AnimationFlashScreen
 	ret
 
+; PureRGBnote: ADDED: when using firewall on a burned opponent, the animation changes slightly to indicate how powerful it is.
 FirewallSpecialEffect:
 	ldh a, [hWhoseTurn]
 	and a
@@ -989,6 +994,7 @@ FirewallSpecialEffect:
 	jp CallWithTurnFlipped
 
 ; used for Explosion and Selfdestruct
+; PureRGBnote: CHANGED: the animations don't flash when doing normal explosion, but with the powerful one at low health, flashing happens.
 DoExplodeSpecialEffects:
 	ldh a, [hWhoseTurn]
 	and a
@@ -1260,8 +1266,10 @@ MegaPunchSpecialEffect::
 	jr z, .gotTurn
 	ld a, [wEnemyMoveEffect]
 .gotTurn
+;;;;; PureRGBnote: ADDED: Prevents the "mega punch" animation from explosion/selfdestruct from flashing the screen unless its the "powerful" low health explosion.
 	cp EXPLODE_RECOIL_EFFECT
 	ret z
+;;;;;
 	; fall through
 AnimationFlashScreen:
 	ldh a, [rBGP]
@@ -1557,6 +1565,7 @@ _AnimationSlideMonUp:
 	ret
 
 ShakeEnemyHUD_WritePlayerMonPicOAM:
+;;;;; PureRGBnote: FIXED: shows the correct palette for the player sprite when shaking enemy hud on GBC
 	ldh a, [hGBC]
 	and a
 	jr z, .notGBC
@@ -1565,6 +1574,7 @@ ShakeEnemyHUD_WritePlayerMonPicOAM:
 	lb de, CONVERT_OBP0, 1
 	callfar TransferMonPal
 .notGBC
+;;;;;
 ; Writes the OAM entries for a copy of the player mon's pic in OAM.
 ; The top 5 rows are reproduced in OAM, although only 2 are actually needed.
 	ld a, $10
@@ -1734,6 +1744,7 @@ AnimationShowEnemyMonPic:
 	ld hl, AnimationShowMonPic
 	jp CallWithTurnFlipped
 
+;;;;;; PureRGBnote: ADDED: animation code related to the new poke doll throwing animation
 StationaryFairyOAMData:
 	db 48, 104, $3B, 0
 	db 48, 112, $3C, 0
@@ -1760,6 +1771,7 @@ AnimationEnemyShakeBackAndForth:
 	dec b
 	jr nz, .loop
 	ret
+;;;;;;
 
 ;;;;;;;;;; PureRGBnote: ADDED: new animation used with rolling kick
 AnimationShakeBackAndForthShort:
@@ -1846,7 +1858,7 @@ AnimationResetMonPosition:
 	call ClearMonPicFromTileMap
 	jp AnimationShowMonPic
 
-;;;;;;;;;; PureRGBnote: ADDED: new animation used for Horn Drill, Drill Peck, and when using a Master Ball
+;;;;;;;;;; PureRGBnote: ADDED: new animations used for Horn Drill, Drill Peck, Firewall's most powerful version, and when using a Master Ball
 AnimationSpiralFireInwardFast::
 	lb de, $72, 1
 	ld a, 1
@@ -2170,9 +2182,11 @@ UpwardBallsAnimXCoordinatesEnemyTurn:
 	db -1 ; end
 ;;;;;;;;;;;;;;;;;;;;;;
 
+;;;;;; PureRGBnote: ADDED: Makes sure minimizing the opponent always does it on the opponent's sprite.
 AnimationMinimizeEnemyMon:
 	ld hl, AnimationMinimizeMon
 	jp CallOnEnemyTurn
+;;;;;;
 
 AnimationMinimizeMon:
 ; Changes the mon's sprite to a mini black sprite. Used by the
@@ -2404,9 +2418,12 @@ WavyScreenLineOffsets:
 	db 0, 0, 0, 0, 0, -1, -1, -1, -2, -2, -2, -2, -2, -1, -1, -1
 	db $80 ; terminator
 
+
+;;;;;; PureRGBnote: ADDED: Makes sure substituting the opponent always does it on the opponent's sprite.
 AnimationSubstituteEnemyMon:
 	ld hl, AnimationSubstitute
 	jp CallOnEnemyTurn
+;;;;;;
 
 AnimationSubstitute:
 ; Changes the pokemon's sprite to the mini sprite
@@ -3201,6 +3218,7 @@ SetMoveDexSeen:
 	ret
 ;;;;;;;;;;
 
+;;;;;; PureRGBnote: ADDED: new animation for Conversion's Attack mode using new graphics.
 AnimationCrosshairScansOpponent:
 	ld d, $36 ; crosshair tile
 	ld b, 0
@@ -3379,8 +3397,10 @@ AnimationCrosshairScansOpponent:
 	ld a, SFX_BATTLE_33
 	rst _PlaySound
 	ret
+;;;;;;
 
-; at the moment this animation can only happen on the player
+;;;;;; PureRGBnote: ADDED: animation for when you send out Cubone vs THE MAW.
+;;;;;; at the moment this animation can only happen on the player
 AnimationDivineProtection:
 	ld d, $39 ; "sparkle" tile
 	ld b, 0
@@ -3432,7 +3452,9 @@ AnimationDivineProtection:
 	dec b
 	jr nz, .outerLoopFallingSparkles
 	jp AnimationCleanOAM
+;;;;;;
 
+;;;;;; PureRGBnote: ADDED: more code related to the new poke doll throwing animation
 AnimationLoadPokeDoll:
 	ld hl, vSprites tile $3B
 	ld de, FairySprite
@@ -3445,3 +3467,4 @@ AnimationLoadPokeDoll:
 	ld a, SFX_BALL_TOSS
 	rst _PlaySound
 	ret
+;;;;;;

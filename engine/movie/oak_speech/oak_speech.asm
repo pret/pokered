@@ -65,7 +65,7 @@ PrepareOakSpeech:
 	ld de, wRivalName
 	ld bc, NAME_LENGTH
 	rst _CopyData
-	; make sure the new game has the internal save file version stored so the save updater doesn't detect it
+	; PureRGBnote: ADDED: make sure the new game has the internal save file version stored so the save updater doesn't get triggered
 	ld hl, wGameInternalVersion
 	ld [hl], CURRENT_INTERNAL_VERSION
 	ret

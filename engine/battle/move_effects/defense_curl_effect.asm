@@ -1,3 +1,4 @@
+; PureRGBnote: ADDED: Defense curl has a new effect in which super effective moves hitting the user will be reduced to neutral damage.
 _DefenseCurlEffect::
 	ld hl, wPlayerBattleStatus1
 	ldh a, [hWhoseTurn]

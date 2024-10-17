@@ -74,6 +74,9 @@ PrintBeginningBattleText:
 	rst _PlaySound
 	jp WaitForSoundToFinish
 
+
+;;;;;; PureRGBnote: ADDED: function that chooses what text will display when encountering a pokemon.
+;;;;;; In some of the new areas the text is slightly different for special encounters.
 CheckSpecialWildBattleIntroText:
 	ld a, [wCurMap]
 	cp POKEMON_TOWER_B1F
@@ -114,6 +117,7 @@ CheckSpecialWildBattleIntroText:
 .maw
 	text_far _TheMawAppeared
 	text_end
+;;;;;;
 
 
 ;;;;;;;;;; PureRGBnote: ADDED: a sound effect for ghosts encountered

@@ -84,6 +84,7 @@ LoopRemapSpritePictureIDs::
 	ret z
 	jr .loop
 
+; After battle we need to reload the "original sprite picture IDs" since battle data overwrites them.
 StoreOriginalPictureIDs::
 	ld a, [wNumSprites]
 	and a

@@ -218,6 +218,7 @@ SetPal_GameFreakIntro:
 	ret
 
 ; PureRGBnote: CHANGED: abstracted code to a function called GetOverworldPalette for reusability.
+; also switched to using a lookup table instead of many comparisons.
 ; uses PalPacket_Empty to build a packet based on the current map
 SetPal_Overworld:
 	CheckEvent EVENT_CELADON_RAINBOW_COLORS_ACTIVE
@@ -461,6 +462,7 @@ BadgeBlkDataLengths:
 	db 6     ; Volcano Badge
 	db 6     ; Earth Badge
 
+;;;;; PureRGBnote: ADDED: some opponents or variant pokemon get special palettes instead of the default for their species.
 NonMonCustomPalettes:
 	db SPIRIT_TORCHED, PAL_VOLCANO
 	db SPIRIT_CHUNKY, PAL_MEWMON
@@ -473,6 +475,7 @@ SpecialMonCustomPalettes:
 	db HARDENED_ONIX, PAL_BLACKMON, PAL_BLUEMON
 	db WINTER_DRAGONAIR, PAL_BLUEMON, PAL_0F
 	db -1
+;;;;;
 
 DeterminePaletteID:
 	bit TRANSFORMED, a ; a is battle status 3

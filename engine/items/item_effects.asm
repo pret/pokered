@@ -156,7 +156,7 @@ ItemUseBall:
 	ld b, $10 ; can't be caught value
 	jp z, .setAnimData
 	ld a, [wCurMap]
-	cp POKEMON_TOWER_B1F ; can't catch spirits in pokemon tower catacombs
+	cp POKEMON_TOWER_B1F ; PureRGBnote: ADDED: can't catch spirits in pokemon tower catacombs
 	; b still = $10
 	jp z, .setAnimData
 
@@ -571,10 +571,11 @@ ItemUseBall:
 
 	ld hl, ItemUseBallText06
 	rst _PrintText
-	; have to wait a couple of frames to ensure the next sound actually plays for pokemon with short names
+;;;;;; PureRGBnote: FIXED: have to wait a couple of frames to ensure the next sound actually plays for pokemon with short names
 	call WaitForSoundToFinish
 	ld hl, ItemUseBallText06Sound
 	call TextCommandProcessor
+;;;;;;
 	call ClearSprites
 	ld a, [wEnemyMonSpecies]
 	ld [wPokedexNum], a
@@ -856,6 +857,7 @@ ItemUseSurfboard:
 	call CheckForTilePairCollisions
 	jp c, SurfingAttemptFailed
 .surf
+;;;;; PureRGBnote: ADDED: only certain pokemon can surf on lava.
 	ld a, [wCurMapTileset]
 	cp VOLCANO
 	jr nz, .notVolcano
@@ -868,6 +870,7 @@ ItemUseSurfboard:
 	ld hl, LavaSurfText
 	jp ItemUseFailed
 .notVolcano
+;;;;;
 	call .makePlayerMoveForward
 	ld hl, wStatusFlags5
 	set BIT_SCRIPTED_MOVEMENT_STATE, [hl]
@@ -1788,8 +1791,10 @@ ItemUsePocketAbra:
 	ld a, [wIsInBattle]
 	and a
 	jp nz, ItemUseNotTime
+;;;;; PureRGBnote: ADDED: can't teleport when lava flood happening
 	callfar LavaRoomCheck
-	jp z, ItemUseNotTime ; can't teleport when lava flood happening
+	jp z, ItemUseNotTime 
+;;;;;
 	ld hl, .wantToTeleportText
 	rst _PrintText
 	call YesNoChoice

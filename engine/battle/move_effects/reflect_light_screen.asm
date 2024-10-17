@@ -1,3 +1,4 @@
+; PureRGBnote: CHANGED: ACID ARMOR and CONVERSION defense mode apply both light screen and reflect when used.
 ReflectLightScreenEffect_:
 	ld hl, wPlayerBattleStatus3
 	ld de, wPlayerMoveEffect

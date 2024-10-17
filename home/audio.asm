@@ -341,6 +341,7 @@ RemapCommandPointerLoop:
 
 ;;;;;;;;;;
 
+;;;;;;;;;; PureRGBnote: ADDED: new functions to play new sound effects regardless of if they have a SFX identifier.
 
 PlayNewSoundChannel5::
 	ld a, SFX_TRADE_MACHINE
@@ -391,3 +392,4 @@ PlayBattleSFXWhenNotInBattle::
 	ld [wMuteAudioAndPauseMusic], a
 	ret
 
+;;;;;;;;;;

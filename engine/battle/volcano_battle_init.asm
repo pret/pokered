@@ -1,3 +1,5 @@
+; PureRGBnote: ADDED: function used in some special battles where some effect happens each turn.
+; like in the volcano, each turn you have a non fire/rock/ground pokemon out they will get burned if they aren't burned.
 CheckPerTurnSpecialBattleEffect::
 	ld a, [wCurMapTileset]
 	cp VOLCANO
@@ -141,6 +143,7 @@ CheckPerTurnSpecialBattleEffect::
 	text_far _IrradiatedGrowsLarger
 	text_end
 
+; PureRGBnote: ADDED: when battle starts in special battles something can happen, for example moltres in the volcano gets powered up by magma.
 CheckInitSpecialBattleEffect::
 	ld a, [wCurMapTileset]
 	cp VOLCANO
@@ -221,6 +224,7 @@ SpecialBattleEffectDoAnimation:
 	ldh [hWhoseTurn], a
 	jpfar PlayBattleAnimationGotID
 
+; PureRGBnote: ADDED: in specific battles we may modify the data (accuracy/power) of the move the player chose based on the current state of battle.
 CheckSpecialBattleMoveModifiersPlayer:
 	ld a, [wCurMap]
 	cp POKEMON_TOWER_B1F
@@ -237,7 +241,7 @@ CheckSpecialBattleMoveModifiersPlayer:
 	ld [hl], 1 ; set all moves with power > 1 to 1 when fighting PAINLESS
 	ret
 
-
+; PureRGBnote: ADDED: in special battles the opponent's moves may get new effects / different data.
 CheckSpecialBattleMoveModifiersEnemy:
 	ld a, [wCurMap]
 	cp POKEMON_TOWER_B1F
@@ -277,6 +281,8 @@ IsBattleMonGhostCubone:
 	and a
 	ret
 
+; PureRGBnote: ADDED: This function runs when sending out a pokemon, in case we want to trigger a special event or effect when you
+; send out every mon or a specific mon. Example: Sending out CUBONE vs THE MAW powers up Cubone.
 CheckOnSendOutSpecialEffect::
 	ld a, [wCurMap]
 	cp POKEMON_TOWER_B1F
@@ -356,6 +362,8 @@ CheckOnSendOutSpecialEffect::
 	text_far _CuboneGainedUltimateProtection
 	text_end
 
+;;;;; PureRGBnote: ADDED: in some cases, we don't want to display "Opponent fainted!" after defeating a wild pokemon.
+;;;;; Such as when fighting static Snorlax, since it doesn't faint, it leaves once losing the fight.
 CheckSpecialFaintText::
 	CheckEitherEventSet EVENT_FIGHT_ROUTE16_SNORLAX, EVENT_FIGHT_ROUTE12_SNORLAX
 	jr nz, .yes
@@ -372,7 +380,11 @@ CheckSpecialFaintText::
 	ld hl, EnemyMonWasDefeatedText
 	scf
 	ret
+;;;;;
 
+
+; PureRGBnote: ADDED: when facing THE MAW specifically, it has rudimentary AI to choose a good move to use on your pokemon.
+; On CUBONE it just uses random moves.
 TheMawChooseMove::
 ; to make it harder to win without using cubone, the maw will use attacks depending on your pokemon's types
 	ld a, [wCurMap]
