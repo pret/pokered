@@ -2119,6 +2119,7 @@ wNumBoxItems::db
 wBoxItems:: ds PC_ITEM_CAPACITY * 2 + 1 ; now holds 60 items
 
 ; 6 bytes remain
+; unused save file 6 bytes
 
 ENDU
 ;;;;;;;;;;
@@ -2198,6 +2199,7 @@ wWildMonPalettes:: ds 3 ; flag array for the current map: which wild pokemon sho
 wColorSwapsUsed:: db ; how many times the player has used the color changer NPC
 
 ; 25 bytes of space left
+; unused save file 25 bytes
 
 ENDU
 

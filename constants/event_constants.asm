@@ -1054,6 +1054,11 @@ DEF SPRITE_OPTIONS_FLAGS_FIFTH_BATCH_START EQU const_value
 	const FLAG_JYNX_SPRITE
 	const FLAG_FARFETCHD_SPRITE
 
+	const_next $930
+DEF LEARNSET_FLAGS_START EQU const_value
+	const_next $980
+DEF LEARNSET_FLAGS_END EQU const_value
+
 ; Rock Tunnel events
 	const_next $9B0
 	const EVENT_DONATED_TO_POKECENTER_CHARITY
