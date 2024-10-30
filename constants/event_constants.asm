@@ -1003,7 +1003,8 @@ DEF FLAG_SKIP_STAT_ANIMATION EQU const_value
 	const FLAG_VIEW_PC_PKMN
 	const FLAG_MOVEDEX_SORTING_MODE
 	const FLAG_INTERRUPTED_TEXT
-	; 6 flag spaces remain
+	const FLAG_SKIP_MULTI_CHOICE_LOADGBPAL
+	; 5 flag spaces remain
 
 ; Indigo Plateau events
 	const_next $8E0

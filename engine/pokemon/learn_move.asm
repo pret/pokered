@@ -117,6 +117,7 @@ TryingToLearn:
 	jr nz, .skipFourMovesQuestion
 
 	rst _PrintText
+	SetEvent FLAG_SKIP_MULTI_CHOICE_LOADGBPAL
 	ld hl, YesNoHideTM
 	ld b, A_BUTTON | B_BUTTON
 	call DisplayMultiChoiceTextBox
