@@ -2,6 +2,12 @@
 
 Want to leave a review? Go [here](https://github.com/Vortyne/pureRGB/issues/new?assignees=&labels=review&projects=&template=review.yml&title=%5BReview%5D%3A+Summarize+your+review+here).
 
+### Review by meldridge on v2.6.1 - Exactly what I was looking for.
+
+This romhack is exactly what I was looking for. It has all the quality of life improvements I wanted, and also changes just enough of the game to keep it interesting. All of the changes are very well designed and fit in with the feel of Gen 1 perfectly. For many, it makes you wonder why the game wasn't built that way to begin with.
+
+If you're after a purely vanilla romhack with just QoL improvements, this isn't it. But I'd encourage you to try it anyway. I wasn't sold on the type changes at first, but I've left them on and I'm quite enjoying them.
+
 ## Reviews from Romhacking.net
 
 ### Review by robby2gloves on v2.5.5 - Amazing Upgrade
