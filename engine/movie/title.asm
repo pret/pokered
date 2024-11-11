@@ -268,7 +268,10 @@ ENDC
 	ld a, HIGH(vBGMap1)
 	call TitleScreenCopyTileMapToVRAM
 	call Delay3
-	call LoadGBPal
+;;;;;;; PureRGBnote: FIXED: Prevents colors in the main menu from getting dark if player saved in a dark area 
+;;;;;;; (rock tunnel) and went from title to continue screen twice
+	call GBPalNormal
+;;;;;;;
 	ldh a, [hJoyHeld]
 	ld b, a
 	and D_UP | SELECT | B_BUTTON
