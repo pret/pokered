@@ -235,6 +235,7 @@ DisplayOptionMenuCommon:
 	ld a, 1
 	ldh [hAutoBGTransferEnabled], a ; enable auto background transfer
 	call Delay3
+	call GBPalNormal
 	inc hl
 	inc hl ; third function in hl
 	; fall through
