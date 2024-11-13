@@ -136,6 +136,7 @@ The fourth page contains Sprite-related options.
 - Coin Case doesn't take up space in your bag. Go to the game corner if you need to check how many coins you have.
 - Secret Key, Card Key, and Lift Key are consumed when you no-longer need them. Less item clutter.
 - The SS Anne Captain will make sure you don't need the SS Ticket anymore to get into the SS Anne area after you help him.
+- After saving Mr.Fuji, A Channeler on the 2nd floor of pokemon tower wants to borrow your SILPH SCOPE. They'll give it back when you ask. You can store it there so you don't need to take up space in your bag or PC.
 - Town Map does not take up space in your bag. To check it, go to your pokedex and press SELECT. (You still must obtain it in Pallet Town to use this feature.)
 - Fishing animation is a bit shorter in general
 - Fishing has a straight 75% rate of landing a pokemon
@@ -364,6 +365,7 @@ The fourth page contains Sprite-related options.
 - In the original game if you or your opponent hurts theirself in confusion or is fully paralyzed while digging or flying, the pokemon will be stuck in an invulnerable state, making all attacks miss. This was fixed so it doesn't happen in link battles, and in normal gameplay, doesn't happen to enemy pokemon. But since it's a funny bug, it can still happen to the player - you will become invulnerable if this bug happens to you.
 - In the original game, if your opponent used minimize or substitute, you opened your FIGHT menu, exited, went to PARTY, looked at a pokemon's status menu, then returned to the fight, the opponent's sprite would be all messed up. Now it's fixed and doesn't do that.
 - Doing the same thing as the above on unidentified GHOSTS would reveal what pokemon they are. Now it doesn't.
+- After saving in rock tunnel, going title screen -> continue screen -> title screen -> continue screen will cause the continue screen to take on darker colors. Now it stays normal colors.
 
 ## Tweaks
 - Trainers in general have a bit less type-specific parties and more varied pokemon. 
@@ -391,6 +393,7 @@ The fourth page contains Sprite-related options.
 - Unused text about Porygon was added to the computer monitor on Silph Co 11F.
 - New text entries were added to objects where there was previously either nothing at all or generic reused text in some cases. (Example: some trash cans in peoples house's now have unique text)
 - You can use a larger variation of characters in pokemon/player nicknames.
+- In the original game, if you open the OPTIONS menu in rock tunnel while it's dark, the menu will also be dark. Now it's normal colors.
 
 ## Move changes
 - Disable disables the previously selected move of the opponent. If they haven't selected a move yet, it chooses a random move. It has 85% accuracy. It lasts 2-7 turns.
