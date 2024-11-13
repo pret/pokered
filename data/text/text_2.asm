@@ -1869,7 +1869,10 @@ _SaveFileUpdateText::
 	line "seems to be from"
 	cont "an older build"
 	cont "of the game."
-	para "Which older build"
+	prompt
+
+_SaveFileUpdateText2::
+	text "Which older build"
 	line "did it come from?"
 	done
 

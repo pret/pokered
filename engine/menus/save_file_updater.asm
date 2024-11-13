@@ -7,6 +7,10 @@ SaveFileUpdateText:
 	text_far _SaveFileUpdateText
 	text_end
 
+SaveFileUpdateText2:
+	text_far _SaveFileUpdateText2
+	text_end
+
 PressStartToContinueText:
 	text_far _SaveFileUpdateTextConfirm
 	text_end
@@ -23,7 +27,16 @@ SaveFileUpdateCheck::
 	ld a, [wGameInternalVersion]
 	cp CURRENT_INTERNAL_VERSION
 	ret z ; also nc
+	push af
 	ld hl, SaveFileUpdateText
+	rst _PrintText
+	pop af
+	cp INTERNAL_VERSION_ORIGINAL_GAME
+	jr z, .updateSave
+	; TODO: future save file updates go here
+	jr .askPalletWarp
+.updateSave
+	ld hl, SaveFileUpdateText2
 	rst _PrintText
 	call SaveScreenTilesToBuffer1
 	xor a
@@ -45,6 +58,7 @@ SaveFileUpdateCheck::
 	ld hl, SaveFileUpdateCompleteText
 	rst _PrintText
 	call DisplayTextPromptButton
+.askPalletWarp
 	; last step: set the current internal version so we don't update the save again later
 	ld hl, wGameInternalVersion
 	ld [hl], CURRENT_INTERNAL_VERSION
