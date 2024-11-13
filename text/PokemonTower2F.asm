@@ -51,7 +51,76 @@ _PokemonTower2FChannelerText::
 	line "identify the"
 	cont "wayward GHOSTs!"
 
-	para "A SILPH SCOPE"
+	para "A @"
+	text_ram wNameBuffer
+	text_start
 	line "might be able to"
 	cont "unmask them."
-	done ; TODO: parameterize silph scope?
+	done
+
+_PokemonTower2FChannelerText2::
+	text "Thanks for"
+	line "getting rid of"
+	cont "<TEAM><ROCKET>"
+	cont "in our tower!"
+	done
+
+_PokemonTower2FChannelerText3::
+	text "Thanks for all"
+	line "your help!"
+	done
+
+_PokemonTower2FChannelerTextBorrowSilphScope::
+	text "Before you go,"
+	line "maybe you could"
+	cont "lend me that"
+	cont "@"
+	text_ram wNameBuffer
+	text "?"
+	para "It'd help us"
+	line "with the wayward"
+	cont "spirits!"
+	para "I'll give it"
+	line "back whenever"
+	cont "you visit here!"
+	para "How about it?"
+	done
+
+_PokemonTower2FChannelerTextBorrowSilphScopeYes::
+	text "Perfect!"
+	para "<PLAYER> handed"
+	line "the channeler the"
+	cont "@"
+	text_ram wNameBuffer
+	text "."
+	done
+
+_PokemonTower2FChannelerTextBack::
+	text "Do you want your"
+	line "@"
+	text_ram wNameBuffer
+	text " back?"
+	done
+
+_PlayerGotBackItem::
+	text "<PARA><PLAYER> got back"
+	line "the @"
+	text_ram wNameBuffer
+	text "!"
+	done
+
+_PokemonTower2FChannelerTextBorrowAgain::
+	text "By the way<...>"
+	para "May I borrow your"
+	line "@"
+	text_ram wNameBuffer
+	text " again?"
+	done
+
+_GenericWaitText::
+	text "Wait!"
+	done
+
+_OhHelloAgainText::
+	text "Oh, hello again!"
+	done
