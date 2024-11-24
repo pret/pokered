@@ -9,7 +9,7 @@
 	const POISON_SIDE_EFFECT1        ; $02
 	const DRAIN_HP_EFFECT            ; $03
 	const BURN_SIDE_EFFECT1          ; $04
-	const FREEZE_SIDE_EFFECT         ; $05
+	const FREEZE_SIDE_EFFECT1        ; $05
 	const PARALYZE_SIDE_EFFECT1      ; $06
 	const EXPLODE_EFFECT             ; $07 Explosion, Self Destruct
 	const DREAM_EATER_EFFECT         ; $08
@@ -39,7 +39,7 @@
 	const SLEEP_EFFECT               ; $20
 	const POISON_SIDE_EFFECT2        ; $21
 	const BURN_SIDE_EFFECT2          ; $22
-	const_skip                       ; $23
+	const FREEZE_SIDE_EFFECT2        ; $23 unused (Blizzard in JP Red/Green)
 	const PARALYZE_SIDE_EFFECT2      ; $24
 	const FLINCH_SIDE_EFFECT2        ; $25
 	const OHKO_EFFECT                ; $26 moves like Horn Drill
