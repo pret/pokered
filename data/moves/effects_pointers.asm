@@ -5,7 +5,7 @@ MoveEffectPointerTable:
 	dw PoisonEffect              ; POISON_SIDE_EFFECT1
 	dw DrainHPEffect             ; DRAIN_HP_EFFECT
 	dw FreezeBurnParalyzeEffect  ; BURN_SIDE_EFFECT1
-	dw FreezeBurnParalyzeEffect  ; FREEZE_SIDE_EFFECT
+	dw FreezeBurnParalyzeEffect  ; FREEZE_SIDE_EFFECT1
 	dw FreezeBurnParalyzeEffect  ; PARALYZE_SIDE_EFFECT1
 	dw ExplodeEffect             ; EXPLODE_EFFECT
 	dw DrainHPEffect             ; DREAM_EATER_EFFECT
@@ -35,7 +35,7 @@ MoveEffectPointerTable:
 	dw SleepEffect               ; SLEEP_EFFECT
 	dw PoisonEffect              ; POISON_SIDE_EFFECT2
 	dw FreezeBurnParalyzeEffect  ; BURN_SIDE_EFFECT2
-	dw FreezeBurnParalyzeEffect  ; unused effect
+	dw FreezeBurnParalyzeEffect  ; FREEZE_SIDE_EFFECT2
 	dw FreezeBurnParalyzeEffect  ; PARALYZE_SIDE_EFFECT2
 	dw FlinchSideEffect          ; FLINCH_SIDE_EFFECT2
 	dw OneHitKOEffect            ; OHKO_EFFECT
