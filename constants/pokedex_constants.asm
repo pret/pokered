@@ -72,6 +72,7 @@
 	const DEX_MACHOP     ; 66
 	const DEX_MACHOKE    ; 67
 	const DEX_MACHAMP    ; 68
+	const DEX_GARGOYLE   ; CAP TBD (Placed behind Machamp due to being an edit.)
 	const DEX_BELLSPROUT ; 69
 	const DEX_WEEPINBELL ; 70
 	const DEX_VICTREEBEL ; 71
@@ -80,6 +81,8 @@
 	const DEX_GEODUDE    ; 74
 	const DEX_GRAVELER   ; 75
 	const DEX_GOLEM      ; 76
+	const DEX_PINEPREVO  ; CAP UNF
+	const DEX_PINEGUIN   ; CAP TBD
 	const DEX_PONYTA     ; 77
 	const DEX_RAPIDASH   ; 78
 	const DEX_SLOWPOKE   ; 79
@@ -91,6 +94,7 @@
 	const DEX_DODRIO     ; 85
 	const DEX_SEEL       ; 86
 	const DEX_DEWGONG    ; 87
+	const DEX_PROBOSICLE ; CAP TBD (VE to Red, Dewgong to Blue.)
 	const DEX_GRIMER     ; 88
 	const DEX_MUK        ; 89
 	const DEX_SHELLDER   ; 90
@@ -111,11 +115,12 @@
 	const DEX_MAROWAK    ; 105
 	const DEX_HITMONLEE  ; 106
 	const DEX_HITMONCHAN ; 107
-	const DEX_LICKITUNG  ; 108
+	const DEX_LICKITUNG  ; 108 (RIP 108 joke.)
 	const DEX_KOFFING    ; 109
 	const DEX_WEEZING    ; 110
 	const DEX_RHYHORN    ; 111
 	const DEX_RHYDON     ; 112
+	const DEX_MANDRELEC  ; CAP TBD
 	const DEX_CHANSEY    ; 113
 	const DEX_TANGELA    ; 114
 	const DEX_KANGASKHAN ; 115
@@ -126,6 +131,7 @@
 	const DEX_STARYU     ; 120
 	const DEX_STARMIE    ; 121
 	const DEX_MR_MIME    ; 122
+	const DEX_PHANTOM    ; CAP TBD
 	const DEX_SCYTHER    ; 123
 	const DEX_JYNX       ; 124
 	const DEX_ELECTABUZZ ; 125
@@ -134,6 +140,7 @@
 	const DEX_TAUROS     ; 128
 	const DEX_MAGIKARP   ; 129
 	const DEX_GYARADOS   ; 130
+	const DEX_CORUPCAKE  ; CAP TBD
 	const DEX_LAPRAS     ; 131
 	const DEX_DITTO      ; 132
 	const DEX_EEVEE      ; 133
@@ -147,6 +154,8 @@
 	const DEX_KABUTOPS   ; 141
 	const DEX_AERODACTYL ; 142
 	const DEX_SNORLAX    ; 143
+	const DEX_PREVOSPARO ; CAP UNF
+	const DEX_SPAROPHIM  ; CAP TBD (Not a legendary bird.)
 	const DEX_ARTICUNO   ; 144
 	const DEX_ZAPDOS     ; 145
 	const DEX_MOLTRES    ; 146
