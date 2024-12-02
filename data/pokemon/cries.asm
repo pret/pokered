@@ -36,8 +36,8 @@ CryData::
 	mon_cry SFX_CRY_13, $00, $80 ; Blastoise
 	mon_cry SFX_CRY_14, $00, $80 ; Pinsir
 	mon_cry SFX_CRY_12, $00, $80 ; Tangela
-	mon_cry SFX_CRY_00, $00, $00 ; MissingNo.
-	mon_cry SFX_CRY_00, $00, $00 ; MissingNo.
+	mon_cry SFX_CRY_00, $00, $00 ; Corupcake
+	mon_cry SFX_CRY_00, $00, $00 ; Gargoyle
 	mon_cry SFX_CRY_1F, $20, $40 ; Growlithe
 	mon_cry SFX_CRY_17, $FF, $C0 ; Onix
 	mon_cry SFX_CRY_18, $40, $A0 ; Fearow
@@ -55,24 +55,24 @@ CryData::
 	mon_cry SFX_CRY_21, $20, $60 ; Psyduck
 	mon_cry SFX_CRY_0D, $88, $20 ; Drowzee
 	mon_cry SFX_CRY_12, $E0, $40 ; Golem
-	mon_cry SFX_CRY_00, $00, $00 ; MissingNo.
+	mon_cry SFX_CRY_00, $00, $00 ; Phantom
 	mon_cry SFX_CRY_04, $FF, $30 ; Magmar
-	mon_cry SFX_CRY_00, $00, $00 ; MissingNo.
+	mon_cry SFX_CRY_00, $00, $00 ; Mandrelec
 	mon_cry SFX_CRY_06, $8F, $FF ; Electabuzz
 	mon_cry SFX_CRY_1C, $20, $C0 ; Magneton
 	mon_cry SFX_CRY_12, $E6, $DD ; Koffing
-	mon_cry SFX_CRY_00, $00, $00 ; MissingNo.
+	mon_cry SFX_CRY_00, $00, $00 ; Pineguin
 	mon_cry SFX_CRY_0A, $DD, $60 ; Mankey
 	mon_cry SFX_CRY_0C, $88, $C0 ; Seel
 	mon_cry SFX_CRY_0B, $AA, $01 ; Diglett
 	mon_cry SFX_CRY_1D, $11, $40 ; Tauros
-	mon_cry SFX_CRY_00, $00, $00 ; MissingNo.
-	mon_cry SFX_CRY_00, $00, $00 ; MissingNo.
+	mon_cry SFX_CRY_00, $00, $00 ; Probosicle
+	mon_cry SFX_CRY_00, $00, $00 ; Prevosparo (Currently Nameless)
 	mon_cry SFX_CRY_00, $00, $00 ; MissingNo.
 	mon_cry SFX_CRY_10, $DD, $01 ; Farfetch'd
 	mon_cry SFX_CRY_1A, $44, $40 ; Venonat
 	mon_cry SFX_CRY_0F, $3C, $C0 ; Dragonite
-	mon_cry SFX_CRY_00, $80, $10 ; MissingNo.
+	mon_cry SFX_CRY_00, $80, $10 ; Pineprevo (Currently Nameless)
 	mon_cry SFX_CRY_00, $00, $00 ; MissingNo.
 	mon_cry SFX_CRY_1D, $E0, $80 ; MissingNo.
 	mon_cry SFX_CRY_0B, $BB, $01 ; Doduo
@@ -132,7 +132,7 @@ CryData::
 	mon_cry SFX_CRY_1C, $CC, $01 ; Metapod
 	mon_cry SFX_CRY_16, $77, $40 ; Butterfree
 	mon_cry SFX_CRY_1F, $08, $C0 ; Machamp
-	mon_cry SFX_CRY_11, $20, $10 ; MissingNo.
+	mon_cry SFX_CRY_11, $20, $10 ; Sparophim
 	mon_cry SFX_CRY_21, $FF, $40 ; Golduck
 	mon_cry SFX_CRY_0D, $EE, $40 ; Hypno
 	mon_cry SFX_CRY_1D, $FA, $80 ; Golbat
