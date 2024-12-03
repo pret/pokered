@@ -19,10 +19,10 @@ RBY CAP Artists:
 - [The Faz](https://www.smogon.com/forums/members/the-faz.375033/) - Gargoyle
 - [Gaboswampert](https://www.smogon.com/forums/members/gaboswampert.566431/) - Pineguin
 - [Coop](https://github.com/coastergat) - Probosicle
-- [~ChronoSariel~](https://www.smogon.com/forums/members/chronosariel.693264/) - Sparophim
+- [ChronoSariel](https://www.smogon.com/forums/members/chronosariel.693264/) - Sparophim
 
 RBY CAP Dragon Heaven:
-- Yoshiblaze
+- [Yoshiblaze](https://github.com/Yoshiblaze) - RBY CAP implementation
 
 
 # Pokémon Red and Blue [![Build Status][ci-badge]][ci]
