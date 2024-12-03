@@ -58,7 +58,7 @@
 	const GOLEM              ; $31
 	const PHANTOM            ; $32 (CAP)
 	const MAGMAR             ; $33
-	const MANDRELEC          ; $34
+	const MANDRELEC          ; $34 (CAP)
 	const ELECTABUZZ         ; $35
 	const MAGNETON           ; $36
 	const KOFFING            ; $37
