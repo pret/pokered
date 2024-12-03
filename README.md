@@ -26,7 +26,6 @@ RBY CAP Artists:
 
 RBY CAP Dragon Heaven:
 - [Yoshiblaze](https://github.com/Yoshiblaze) - Added RBY CAP to DH
-- Pet Mods Staff - Approving RBY CAP
 
 Special Thanks:
 - Pet Mods Staff - Approving RBY CAP
