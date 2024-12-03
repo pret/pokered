@@ -30,8 +30,8 @@ PokedexEntryPointers:
 	dw BlastoiseDexEntry
 	dw PinsirDexEntry
 	dw TangelaDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
+	dw CorupcakeDexEntry ; (CAP)
+	dw GargoyleDexEntry ; (CAP)
 	dw GrowlitheDexEntry
 	dw OnixDexEntry
 	dw FearowDexEntry
@@ -49,24 +49,24 @@ PokedexEntryPointers:
 	dw PsyduckDexEntry
 	dw DrowzeeDexEntry
 	dw GolemDexEntry
-	dw MissingNoDexEntry
+	dw PhantomDexEntry ; (CAP)
 	dw MagmarDexEntry
-	dw MissingNoDexEntry
+	dw MandrelecDexEntry ; (CAP)
 	dw ElectabuzzDexEntry
 	dw MagnetonDexEntry
 	dw KoffingDexEntry
-	dw MissingNoDexEntry
+	dw PineguinDexEntry ; (CAP)
 	dw MankeyDexEntry
 	dw SeelDexEntry
 	dw DiglettDexEntry
 	dw TaurosDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
+	dw ProbosicleDexEntry ; (CAP)
+	dw PrevoSparoDexEntry ; (UNF)
 	dw MissingNoDexEntry
 	dw FarfetchdDexEntry
 	dw VenonatDexEntry
 	dw DragoniteDexEntry
-	dw MissingNoDexEntry
+	dw PinePrevoDexEntry ; (UNF)
 	dw MissingNoDexEntry
 	dw MissingNoDexEntry
 	dw DoduoDexEntry
@@ -126,7 +126,7 @@ PokedexEntryPointers:
 	dw MetapodDexEntry
 	dw ButterfreeDexEntry
 	dw MachampDexEntry
-	dw MissingNoDexEntry
+	dw SparophimDexEntry ; (CAP)
 	dw GolduckDexEntry
 	dw HypnoDexEntry
 	dw GolbatDexEntry
@@ -407,6 +407,20 @@ TangelaDexEntry:
 	text_far _TangelaDexEntry
 	text_end
 
+CorupcakeDexEntry:
+	db "BIRTHDAY@"
+	db 4,7
+	dw 4180
+	text_far _CorupcakeDexEntry
+	text_end ; (CAP)
+
+GargoyleDexEntry:
+	db "PROTECTOR@"
+	db 4,11
+	dw 3040
+	text_far _GargoyleDexEntry
+	text_end ; (CAP)
+
 GrowlitheDexEntry:
 	db "PUPPY@"
 	db 2,4
@@ -526,12 +540,26 @@ GolemDexEntry:
 	text_far _GolemDexEntry
 	text_end
 
+PhantomDexEntry:
+	db "APPARITION@"
+	db 3,7
+	dw 2
+	text_far _PhantomDexEntry
+	text_end ; (CAP)
+
 MagmarDexEntry:
 	db "SPITFIRE@"
 	db 4,3
 	dw 980
 	text_far _MagmarDexEntry
 	text_end
+
+MandrelecDexEntry:
+	db "SPOTTED@"
+	db 3,9
+	dw 950
+	text_far _MandrelecDexEntry
+	text_end ; (CAP)
 
 ElectabuzzDexEntry:
 	db "ELECTRIC@"
@@ -553,6 +581,13 @@ KoffingDexEntry:
 	dw 20
 	text_far _KoffingDexEntry
 	text_end
+
+PineguinDexEntry:
+	db "CAMOUFLAGE@"
+	db 3,2
+	dw 2330
+	text_far _PineguinDexEntry
+	text_end ; (CAP)
 
 MankeyDexEntry:
 	db "PIG MONKEY@"
@@ -582,6 +617,20 @@ TaurosDexEntry:
 	text_far _TaurosDexEntry
 	text_end
 
+ProbosicleDexEntry:
+	db "ICE SPIKE@"
+	db 5,3
+	dw 4630
+	text_far _ProbosicleDexEntry
+	text_end ; (CAP)
+
+PrevoSparoDexEntry:
+	db "UNF@"
+	db 9,9
+	dw 9999
+	text_far _PrevoSparoDexEntry
+	text_end ; (UNF)
+
 FarfetchdDexEntry:
 	db "WILD DUCK@"
 	db 2,7
@@ -602,6 +651,13 @@ DragoniteDexEntry:
 	dw 4630
 	text_far _DragoniteDexEntry
 	text_end
+
+PinePrevoDexEntry:
+	db "UNF@"
+	db 9,9
+	dw 9999
+	text_far _PinePrevoDexEntry
+	text_end ; (UNF)
 
 DoduoDexEntry:
 	db "TWIN BIRD@"
@@ -931,6 +987,13 @@ MachampDexEntry:
 	dw 2870
 	text_far _MachampDexEntry
 	text_end
+
+SparophimDexEntry:
+	db "CELESTIAL@"
+	db 6,11
+	dw 1760
+	text_far _SparophimDexEntry
+	text_end ; (CAP)
 
 GolduckDexEntry:
 	db "DUCK@"
