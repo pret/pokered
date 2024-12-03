@@ -1,26 +1,28 @@
 # RBY CAP
 
 A Red and Blue ROM hack based on [RBY CAP](https://www.smogon.com/forums/threads/3.3737699/).
-I highly encourage that you check it out!
+
+I highly encourage that you check it out.
+
 You can play RBY CAP at [Dragon Heaven](http://petmodsdh.com/)!
 
 # Credits
 
-Hack made by [Coop (coastergat)](https://github.com/coastergat)
+ROM hack made by [Coop](https://github.com/coastergat).
 
 RBY CAP Council: 
-[gastlies](https://www.smogon.com/forums/members/gastlies.540559/)
-[Sabelette](https://www.smogon.com/forums/members/sabelette.583793/)
+- [gastlies](https://www.smogon.com/forums/members/gastlies.540559/)
+- [Sabelette](https://www.smogon.com/forums/members/sabelette.583793/)
 
 RBY CAP Artists:
-[zxgzxg](https://www.smogon.com/forums/members/zxgzxg.501316/) - Corupcake, Phantom, Mandrelec
-[The Faz](https://www.smogon.com/forums/members/the-faz.375033/) - Gargoyle
-[Gaboswampert](https://www.smogon.com/forums/members/gaboswampert.566431/) - Pineguin
-[Coop](https://github.com/coastergat) - Probosicle
-[~ChronoSariel~](https://www.smogon.com/forums/members/chronosariel.693264/) - Sparophim
+- [zxgzxg](https://www.smogon.com/forums/members/zxgzxg.501316/) - Corupcake, Phantom, Mandrelec
+- [The Faz](https://www.smogon.com/forums/members/the-faz.375033/) - Gargoyle
+- [Gaboswampert](https://www.smogon.com/forums/members/gaboswampert.566431/) - Pineguin
+- [Coop](https://github.com/coastergat) - Probosicle
+- [~ChronoSariel~](https://www.smogon.com/forums/members/chronosariel.693264/) - Sparophim
 
 RBY CAP Dragon Heaven:
-Yoshiblaze
+- Yoshiblaze
 
 
 # Pokémon Red and Blue [![Build Status][ci-badge]][ci]
