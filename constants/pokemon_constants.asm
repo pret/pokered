@@ -37,8 +37,8 @@
 	const BLASTOISE          ; $1C
 	const PINSIR             ; $1D
 	const TANGELA            ; $1E
-	const CORUPCAKE          ; $1F
-	const GARGOYLE           ; $20
+	const CORUPCAKE          ; $1F (CAP)
+	const GARGOYLE           ; $20 (CAP)
 	const GROWLITHE          ; $21
 	const ONIX               ; $22
 	const FEAROW             ; $23
@@ -56,7 +56,7 @@
 	const PSYDUCK            ; $2F
 	const DROWZEE            ; $30
 	const GOLEM              ; $31
-	const PHANTOM            ; $32
+	const PHANTOM            ; $32 (CAP)
 	const MAGMAR             ; $33
 	const MANDRELEC          ; $34
 	const ELECTABUZZ         ; $35
@@ -67,13 +67,13 @@
 	const SEEL               ; $3A
 	const DIGLETT            ; $3B
 	const TAUROS             ; $3C
-	const PROBOSICLE         ; $3D
-	const PREVOSPARO         ; $3E
+	const PROBOSICLE         ; $3D (CAP)
+	const PREVOSPARO         ; $3E (CAP)
 	const_skip               ; $3F
 	const FARFETCHD          ; $40
 	const VENONAT            ; $41
 	const DRAGONITE          ; $42
-	const PINEPREVO          ; $43 (Cactormus, bird-like, 0 128 16)
+	const PINEPREVO          ; $43 (Cactormus, bird-like, 0 128 16) (CAP)
 	const_skip               ; $44
 	const_skip               ; $45 (Bittybat, 29 244 64)
 	const DODUO              ; $46
@@ -87,7 +87,7 @@
 	const KRABBY             ; $4E
 	const_skip               ; $4F (Cheep, 34 255 64)
 	const_skip               ; $50
-	const_skip               ; $51 (Vulpiii, 14 224 96) 
+	const_skip               ; $51 (Vulpiii, 14 224 96)
 	const VULPIX             ; $52
 	const NINETALES          ; $53
 	const PIKACHU            ; $54
@@ -100,7 +100,7 @@
 	const KABUTOPS           ; $5B
 	const HORSEA             ; $5C
 	const SEADRA             ; $5D
-	const_skip               ; $5E (15 64 192)
+	const_skip               ; $5E (15 64 192) 
 	const_skip               ; $5F (15 32 192) 
 	const SANDSHREW          ; $60
 	const SANDSLASH          ; $61
@@ -133,7 +133,7 @@
 	const METAPOD            ; $7C
 	const BUTTERFREE         ; $7D
 	const MACHAMP            ; $7E
-	const SPAROPHIM          ; $7F (Weirduck I believe, outlandish, 17 32 16)
+	const SPAROPHIM          ; $7F (Weirduck I believe, outlandish, 17 32 16) (CAP)
 	const GOLDUCK            ; $80
 	const HYPNO              ; $81
 	const GOLBAT             ; $82
