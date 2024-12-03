@@ -1,14 +1,16 @@
 # RBY CAP
 
-A Red and Blue ROM hack based on [RBY CAP](https://www.smogon.com/forums/threads/3.3737699/).
+A Red and Blue ROM hack based on [RBY CAP](https://www.smogon.com/forums/threads/3.3737699/) using [pret's](github.com/pret) pokered disassembly.
 
-I highly encourage that you check it out.
+I highly encourage that you check it out!
 
-You can play RBY CAP at [Dragon Heaven](http://petmodsdh.com/)!
+You can play RBY CAP on [Dragon Heaven](http://petmodsdh.com/).
+
+Info for the CAPmons can be found on [this spreadsheet](https://docs.google.com/spreadsheets/d/1B4zGi6cBzuy3Vrfhz59VJsjdXtS1Bh60UFUOwzBmVGQ/edit?gid=955529693#gid=955529693).
 
 # Credits
 
-ROM hack made by [Coop](https://github.com/coastergat).
+ROM hack made by [Coop](https://github.com/coastergat)
 
 RBY CAP Council: 
 - [gastlies](https://www.smogon.com/forums/members/gastlies.540559/)
@@ -16,13 +18,20 @@ RBY CAP Council:
 
 RBY CAP Artists:
 - [zxgzxg](https://www.smogon.com/forums/members/zxgzxg.501316/) - Corupcake, Phantom, Mandrelec
-- [The Faz](https://www.smogon.com/forums/members/the-faz.375033/) - Gargoyle
+- [The Faz](https://www.smogon.com/forums/members/the-faz.375033/) - Gargoyle, RBY CAP logo
 - [Gaboswampert](https://www.smogon.com/forums/members/gaboswampert.566431/) - Pineguin
 - [Coop](https://github.com/coastergat) - Probosicle
 - [ChronoSariel](https://www.smogon.com/forums/members/chronosariel.693264/) - Sparophim
+- [RAALightning](https://www.smogon.com/forums/members/raalightning.530917/) - Original Phantom 
 
 RBY CAP Dragon Heaven:
-- [Yoshiblaze](https://github.com/Yoshiblaze) - RBY CAP implementation
+- [Yoshiblaze](https://github.com/Yoshiblaze) - Added RBY CAP to DH
+- Pet Mods Staff - Approving RBY CAP
+
+Special Thanks:
+- Pet Mods Staff - Approving RBY CAP
+- DuoM2 - Original RBY CAP
+- EVERYONE WHO HAS PARTICIPATED IN THE TIER AND SLATES!
 
 
 # Pokémon Red and Blue [![Build Status][ci-badge]][ci]
