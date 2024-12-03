@@ -36,8 +36,8 @@ CryData::
 	mon_cry SFX_CRY_13, $00, $80 ; Blastoise
 	mon_cry SFX_CRY_14, $00, $80 ; Pinsir
 	mon_cry SFX_CRY_12, $00, $80 ; Tangela
-	mon_cry SFX_CRY_09, $0F, $4F ; Corupcake (9 15 79, finished, base -1 later due to error)
-	mon_cry SFX_CRY_1F, $00, $2B ; Gargoyle (31 0 43, finished)
+	mon_cry SFX_CRY_08, $0F, $CE ; Corupcake (9 15 79, FINISHED)
+	mon_cry SFX_CRY_1F, $00, $AA ; Gargoyle (31 0 43, FINISHED)
 	mon_cry SFX_CRY_1F, $20, $40 ; Growlithe
 	mon_cry SFX_CRY_17, $FF, $C0 ; Onix
 	mon_cry SFX_CRY_18, $40, $A0 ; Fearow
@@ -55,9 +55,9 @@ CryData::
 	mon_cry SFX_CRY_21, $20, $60 ; Psyduck
 	mon_cry SFX_CRY_0D, $88, $20 ; Drowzee
 	mon_cry SFX_CRY_12, $E0, $40 ; Golem
-	mon_cry SFX_CRY_10, $B7, $7F ; Phantom (10 183 127, finished, base -1 later due to error)
+	mon_cry SFX_CRY_0F, $B7, $FF ; Phantom (10 183 127, FINISHED)
 	mon_cry SFX_CRY_04, $FF, $30 ; Magmar
-	mon_cry SFX_CRY_17, $2C, $2D ; Mandrelec (23 44 45, finished, base -1 later due to error)
+	mon_cry SFX_CRY_16, $2C, $AC ; Mandrelec (23 44 45, FINISHED)
 	mon_cry SFX_CRY_06, $8F, $FF ; Electabuzz
 	mon_cry SFX_CRY_1C, $20, $C0 ; Magneton
 	mon_cry SFX_CRY_12, $E6, $DD ; Koffing
@@ -66,8 +66,8 @@ CryData::
 	mon_cry SFX_CRY_0C, $88, $C0 ; Seel
 	mon_cry SFX_CRY_0B, $AA, $01 ; Diglett
 	mon_cry SFX_CRY_1D, $11, $40 ; Tauros
-	mon_cry SFX_CRY_16, $C9, $52 ; Probosicle (22 201 52, finished, base -1 later due to error)
-	mon_cry SFX_CRY_1F, $7D, $1B ; Prevosparo (Currently Nameless, 31 125 27, finished, base -1 later due to error)
+	mon_cry SFX_CRY_15, $C9, $D1 ; Probosicle (22 201 52, FINISHED)
+	mon_cry SFX_CRY_1E, $7D, $4C ; Prevosparo (Currently Nameless, 31 125 -52, FINISHED)
 	mon_cry SFX_CRY_00, $00, $00 ; MissingNo.
 	mon_cry SFX_CRY_10, $DD, $01 ; Farfetch'd
 	mon_cry SFX_CRY_1A, $44, $40 ; Venonat
