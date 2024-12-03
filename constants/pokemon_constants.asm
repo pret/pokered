@@ -62,7 +62,7 @@
 	const ELECTABUZZ         ; $35
 	const MAGNETON           ; $36
 	const KOFFING            ; $37
-	const PINEGUIN           ; $38
+	const PINEGUIN           ; $38 (CAP)
 	const MANKEY             ; $39
 	const SEEL               ; $3A
 	const DIGLETT            ; $3B
