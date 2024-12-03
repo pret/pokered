@@ -68,6 +68,7 @@ MonPartyData:
 	nybble ICON_MON       ; Machop
 	nybble ICON_MON       ; Machoke
 	nybble ICON_MON       ; Machamp
+	nybble ICON_MON       ; Gargoyle (CAP)
 	nybble ICON_GRASS     ; Bellsprout
 	nybble ICON_GRASS     ; Weepinbell
 	nybble ICON_GRASS     ; Victreebel
@@ -76,6 +77,8 @@ MonPartyData:
 	nybble ICON_MON       ; Geodude
 	nybble ICON_MON       ; Graveler
 	nybble ICON_MON       ; Golem
+	nybble ICON_BIRD      ; PinePrevo (UNF)
+	nybble ICON_BIRD      ; Pineguin (CAP)
 	nybble ICON_QUADRUPED ; Ponyta
 	nybble ICON_QUADRUPED ; Rapidash
 	nybble ICON_QUADRUPED ; Slowpoke
@@ -87,6 +90,7 @@ MonPartyData:
 	nybble ICON_BIRD      ; Dodrio
 	nybble ICON_WATER     ; Seel
 	nybble ICON_WATER     ; Dewgong
+	nybble ICON_BUG       ; Probosicle (CAP)
 	nybble ICON_MON       ; Grimer
 	nybble ICON_MON       ; Muk
 	nybble ICON_HELIX     ; Shellder
@@ -112,6 +116,7 @@ MonPartyData:
 	nybble ICON_MON       ; Weezing
 	nybble ICON_QUADRUPED ; Rhyhorn
 	nybble ICON_MON       ; Rhydon
+	nybble ICON_SNAKE     ; Mandrelec (CAP)
 	nybble ICON_FAIRY     ; Chansey
 	nybble ICON_GRASS     ; Tangela
 	nybble ICON_MON       ; Kangaskhan
@@ -121,6 +126,7 @@ MonPartyData:
 	nybble ICON_WATER     ; Seaking
 	nybble ICON_HELIX     ; Staryu
 	nybble ICON_HELIX     ; Starmie
+	nybble ICON_BALL      ; Phantom (CAP)
 	nybble ICON_MON       ; Mr.Mime
 	nybble ICON_BUG       ; Scyther
 	nybble ICON_MON       ; Jynx
@@ -130,6 +136,7 @@ MonPartyData:
 	nybble ICON_QUADRUPED ; Tauros
 	nybble ICON_WATER     ; Magikarp
 	nybble ICON_SNAKE     ; Gyarados
+	nybble ICON_QUADRUPED ; Corupcake (CAP)
 	nybble ICON_WATER     ; Lapras
 	nybble ICON_MON       ; Ditto
 	nybble ICON_QUADRUPED ; Eevee
@@ -143,6 +150,8 @@ MonPartyData:
 	nybble ICON_HELIX     ; Kabutops
 	nybble ICON_BIRD      ; Aerodactyl
 	nybble ICON_MON       ; Snorlax
+	nybble ICON_BIRD      ; PrevoSparo (UNF)
+	nybble ICON_BIRD      ; Sparophim (CAP)
 	nybble ICON_BIRD      ; Articuno
 	nybble ICON_BIRD      ; Zapdos
 	nybble ICON_BIRD      ; Moltres
