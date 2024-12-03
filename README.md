@@ -2,7 +2,7 @@
 
 A Red and Blue ROM hack based on [RBY CAP](https://www.smogon.com/forums/threads/3.3737699/) using [pret's](github.com/pret) pokered disassembly.
 
-I highly encourage that you check it out!
+I highly encourage that you check out the tier!
 
 You can play RBY CAP on [Dragon Heaven](http://petmodsdh.com/).
 
