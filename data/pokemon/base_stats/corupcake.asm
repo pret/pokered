@@ -1,6 +1,6 @@
 	db DEX_CORUPCAKE ; pokedex id
 
-	db  97, 105,  87,  95,  81
+	db  97, 105,  87,  81,  95
 	;   hp  atk  def  spd  spc
 
 	db FIRE, POISON ; type
