@@ -130,8 +130,8 @@
 	const DEX_SEAKING    ; 119
 	const DEX_STARYU     ; 120
 	const DEX_STARMIE    ; 121
-	const DEX_MR_MIME    ; 122
 	const DEX_PHANTOM    ; CAP TBD
+	const DEX_MR_MIME    ; 122
 	const DEX_SCYTHER    ; 123
 	const DEX_JYNX       ; 124
 	const DEX_ELECTABUZZ ; 125
