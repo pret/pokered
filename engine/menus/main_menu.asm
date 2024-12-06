@@ -317,11 +317,13 @@ StartNewGame:
 	; Debug mode persists in saved games for both debug and non-debug builds, and is
 	; only reset here by the main menu.
 	res BIT_DEBUG_MODE, [hl]
+	jp StartRandomBattle ; Reroute new game to new startbattle - Alex Cattani
 	; fallthrough
 StartNewGameDebug:
 	call OakSpeech
 	ld c, 20
 	call DelayFrames
+
 
 ; enter map after using a special warp or loading the game from the main menu
 SpecialEnterMap::
@@ -724,3 +726,28 @@ CheckForPlayerNameInSRAM:
 	ld [MBC1SRamBankingMode], a
 	scf
 	ret
+
+	; ORIGINAL CODE BY ALEX CATTANI
+StartRandomBattle:
+	ld hl, BattleStartText
+	call PrintText
+	; TODO
+	; Load Yes/No Menu Box
+	; If no, go to start again idk
+	; If yes, --
+	;	- Delete everything from screen
+	;	- Copy technique for starting battle
+	ld c, 60
+	call DelayFrames
+	call PrepareRandomBattle
+	; ld a, TWO_OPTION_MENU
+	; ld [wTextBoxID], a
+	; call DisplayTextBoxID
+	; call HandleMenuInput
+	ld c, 20
+	call DelayFrames
+
+BattleStartText:
+	text_far _BattleStartText
+	text_end
+; END ORIGINAL CODE

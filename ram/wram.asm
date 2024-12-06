@@ -435,9 +435,10 @@ wPlayerSubstituteHP:: db
 wEnemySubstituteHP:: db
 
 ; used for TestBattle (unused in non-debug builds)
-wTestBattlePlayerSelectedMove:: db
+; wTestBattlePlayerSelectedMove:: db
 
-	ds 1
+; 	ds 1
+ds 2
 
 ; 0=regular, 1=mimic, 2=above message box (relearn, heal pp..)
 wMoveMenuType:: db

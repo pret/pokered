@@ -298,6 +298,16 @@ _TangelaDexEntry::
 	next "shake as it walks"
 	dex
 
+_ShuckleDexEntry::
+	text "It stores berries"
+	next "inside its shell."
+	next "To avoid attacks,"
+
+	page "it hides beneath"
+	next "rocks and remains"
+	next "completely still."
+	dex
+
 _GrowlitheDexEntry::
 	text "Very protective"
 	next "of its territory."

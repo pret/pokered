@@ -396,8 +396,8 @@ GetMonHeader::
 	ld b, $77 ; size of Aerodactyl fossil sprite
 	cp FOSSIL_AERODACTYL ; Aerodactyl fossil
 	jr z, .specialID
-	cp MEW
-	jr z, .mew
+	; cp MEW
+	; jr z, .mew
 	predef IndexToPokedex
 	ld a, [wPokedexNum]
 	dec a
@@ -415,13 +415,13 @@ GetMonHeader::
 	ld [hl], e ; write front sprite pointer
 	inc hl
 	ld [hl], d
-	jr .done
-.mew
-	ld hl, MewBaseStats
-	ld de, wMonHeader
-	ld bc, BASE_DATA_SIZE
-	ld a, BANK(MewBaseStats)
-	call FarCopyData
+; 	jr .done
+; .mew
+; 	ld hl, MewBaseStats
+; 	ld de, wMonHeader
+; 	ld bc, BASE_DATA_SIZE
+; 	ld a, BANK(MewBaseStats)
+; 	call FarCopyData
 .done
 	ld a, [wCurSpecies]
 	ld [wMonHIndex], a

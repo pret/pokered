@@ -37,7 +37,7 @@
 	const BLASTOISE          ; $1C
 	const PINSIR             ; $1D
 	const TANGELA            ; $1E
-	const_skip               ; $1F
+	const SHUCKLE            ; $1F
 	const_skip               ; $20
 	const GROWLITHE          ; $21
 	const ONIX               ; $22

@@ -1,3 +1,10 @@
+; New Code - Alex Cattani
+_BattleStartText::
+	text "This is a random"
+	line "battle simulation"
+	cont "by Alex Cattani."
+	done
+
 _AIBattleWithdrawText::
 	text_ram wTrainerName
 	text " with-"

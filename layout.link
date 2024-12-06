@@ -82,7 +82,7 @@ ROMX $C
 	"Battle Engine 6"
 ROMX $D
 	"Pics 5"
-	"Slot Machines"
+	; "Slot Machines"
 ROMX $E
 	"Battle Engine 7"
 ROMX $F
