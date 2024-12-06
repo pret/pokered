@@ -2206,7 +2206,6 @@ CinnabarVolcanoProspectorText:
 	rst _DelayFrames
 	ld a, CINNABAR_VOLCANO_BLAINE
 	call SetSpriteFacingUp
-	rst _PrintText
 	ld hl, .blainemoltres
 	rst _PrintText
 	ld a, CINNABAR_VOLCANO_BLAINE

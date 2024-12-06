@@ -235,7 +235,7 @@ DisplayOptionMenuCommon:
 	ld a, 1
 	ldh [hAutoBGTransferEnabled], a ; enable auto background transfer
 	call Delay3
-	call GBPalNormal
+	call GBPalNormal ; PureRGBnote: CHANGED: prevents options menu from being dark in dark areas like rock tunnel.
 	inc hl
 	inc hl ; third function in hl
 	; fall through

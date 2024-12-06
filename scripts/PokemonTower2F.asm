@@ -1,3 +1,5 @@
+; PureRGBnote: CHANGED: The channeler on this floor can borrow your SILPH SCOPE after saving Mr.Fuji. You can get it back later. Saves some space in your bag / PC.
+
 PokemonTower2F_Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, PokemonTower2F_ScriptPointers
