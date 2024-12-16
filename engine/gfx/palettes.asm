@@ -170,7 +170,7 @@ SetPal_Overworld:
 	ld [wDefaultPaletteCommand], a
 	ret
 .PokemonTowerOrAgatha
-	ld a, PAL_GREYMON - 1
+	ld a, PAL_GRAYMON - 1
 	jr .town
 .caveOrBruno
 	ld a, PAL_CAVE - 1
@@ -271,7 +271,7 @@ BadgeBlkDataLengths:
 
 DeterminePaletteID:
 	bit TRANSFORMED, a ; a is battle status 3
-	ld a, PAL_GREYMON  ; if the mon has used Transform, use Ditto's palette
+	ld a, PAL_GRAYMON  ; if the mon has used Transform, use Ditto's palette
 	ret nz
 	ld a, [hl]
 DeterminePaletteIDOutOfBattle:

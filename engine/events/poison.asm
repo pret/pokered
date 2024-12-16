@@ -90,7 +90,7 @@ ApplyOutOfBattlePoisonDamage:
 	and a ; are any party members poisoned?
 	jr z, .skipPoisonEffectAndSound
 	ld b, $2
-	predef ChangeBGPalColor0_4Frames ; change BG white to dark grey for 4 frames
+	predef ChangeBGPalColor0_4Frames ; change BG white to dark gray for 4 frames
 	ld a, SFX_POISONED
 	call PlaySound
 .skipPoisonEffectAndSound

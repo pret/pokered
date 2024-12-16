@@ -16,7 +16,7 @@ MarowakAnim:
 	ld a, $1
 	ldh [hWhoseTurn], a
 	callfar ChangeMonPic
- ; alternate between black and light grey 8 times.
+ ; alternate between black and light gray 8 times.
  ; this makes the ghost's body appear to flash
 	ld d, $80
 	call FlashSprite8Times

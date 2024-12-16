@@ -15,7 +15,7 @@ ENDM
 
 ; used in data/pokemon/base_stats/*.asm
 MACRO tmhm
-; initialize bytes to 0
+	; initialize bytes to 0
 	FOR n, (NUM_TM_HM + 7) / 8
 		DEF _tm{d:n} = 0
 	ENDR
