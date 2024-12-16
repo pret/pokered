@@ -411,9 +411,13 @@ ENDM
 ; returns the complement of whether either event is set in Z flag
 ;\1 = event index 1
 ;\2 = event index 2
+;\3 = try to reuse a (optional)
 MACRO CheckEitherEventSet
 	IF ((\1) / 8) == ((\2) / 8)
-		ld a, [wEventFlags + ((\1) / 8)]
+		IF (_NARG < 3) || (((\1) / 8) != event_byte)
+			DEF event_byte = ((\1) / 8)
+			ld a, [wEventFlags + ((\1) / 8)]
+		ENDC
 		and (1 << ((\1) % 8)) | (1 << ((\2) % 8))
 	ELSE
 		; This case doesn't happen in the original ROM.
