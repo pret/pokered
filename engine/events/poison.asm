@@ -15,7 +15,7 @@ ApplyOutOfBattlePoisonDamage:
 	ld de, wPartySpecies
 .applyDamageLoop
 	ld a, [hl]
-	and (1 << PSN)
+	and 1 << PSN
 	jr z, .nextMon2 ; not poisoned
 	dec hl
 	dec hl
@@ -79,7 +79,7 @@ ApplyOutOfBattlePoisonDamage:
 	ld e, 0
 .countPoisonedLoop
 	ld a, [hl]
-	and (1 << PSN)
+	and 1 << PSN
 	or e
 	ld e, a
 	ld bc, wPartyMon2 - wPartyMon1

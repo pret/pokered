@@ -511,7 +511,7 @@ WriteSymmetricMonPartySpriteOAM:
 	ld [hli], a ; tile
 	ld a, [wSymmetricSpriteOAMAttributes]
 	ld [hli], a ; attributes
-	xor (1 << OAM_X_FLIP)
+	xor 1 << OAM_X_FLIP
 	ld [wSymmetricSpriteOAMAttributes], a
 	inc d
 	ld a, 8

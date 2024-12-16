@@ -2409,7 +2409,7 @@ FallingObjects_UpdateOAMEntry:
 	sub b
 	ld [hli], a ; X
 	inc hl
-	ld a, (1 << OAM_X_FLIP)
+	ld a, 1 << OAM_X_FLIP
 .next2
 	ld [hl], a ; attribute
 	ret

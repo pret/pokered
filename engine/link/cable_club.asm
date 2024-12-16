@@ -119,7 +119,7 @@ CableClub_DoBattleOrTradeAgain:
 	ldh [rSC], a
 .skipSendingTwoZeroBytes
 	call Delay3
-	ld a, (1 << SERIAL)
+	ld a, 1 << SERIAL
 	ldh [rIE], a
 	ld hl, wSerialRandomNumberListBlock
 	ld de, wSerialOtherGameboyRandomNumberListBlock
