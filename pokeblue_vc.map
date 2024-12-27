@@ -698,8 +698,8 @@ ROM0 bank #0:
 	         $296e = DisplayTextID.spriteHandling
 	         $2987 = DisplayTextID.noCarry
 	         $298a = DisplayTextID.skipSpriteHandling
-	         $29ba = DisplayTextID.not_u1
-	         $29cd = DisplayTextID.not_u2
+	         $29ba = DisplayTextID.not_u2
+	         $29cd = DisplayTextID.not_u3
 	         $29d6 = AfterDisplayingTextID
 	         $29df = HoldTextDisplayOpen
 	         $29e8 = CloseTextDisplay
@@ -2375,7 +2375,6 @@ ROMX bank #2:
 	         $5b1f = Audio1_HWChannelDisableMasks
 	         $5b27 = Audio1_HWChannelEnableMasks
 	         $5b2f = Audio1_Pitches
-	         $5b2f = Audio1_Pitches._table_width_u1
 	         $5b47 = Music_RivalAlternateStart
 	         $5b60 = Audio1_OverwriteChannelPointer
 	         $5b65 = Music_RivalAlternateTempo
@@ -5635,7 +5634,6 @@ ROMX bank #8:
 	         $62de = Audio2_HWChannelDisableMasks
 	         $62e6 = Audio2_HWChannelEnableMasks
 	         $62ee = Audio2_Pitches
-	         $62ee = Audio2_Pitches._table_width_u2
 	         $6306 = Music_PokeFluteInBattle
 	         $631d = Audio2_OverwriteChannelPointer
 	SECTION: $6322-$7f51 ($1c30 bytes) ["Music 2"]
@@ -14923,7 +14921,6 @@ ROMX bank #31:
 	         $5b93 = Audio3_HWChannelDisableMasks
 	         $5b9b = Audio3_HWChannelEnableMasks
 	         $5ba3 = Audio3_Pitches
-	         $5ba3 = Audio3_Pitches._table_width_u3
 	SECTION: $5bbb-$7ff9 ($243f bytes) ["Music 3"]
 	         $5bbb = Music_BikeRiding_Ch1
 	         $5bc9 = Music_BikeRiding_Ch1.mainloop
@@ -20355,9 +20352,9 @@ HRAM bank #0:
 	         $ff95 = hDividend
 	         $ff95 = hSignCoordPointer
 	         $ff95 = hQuotient
-	         $ff95 = hProduct
 	         $ff95 = hNPCMovementDirections2Index
 	         $ff95 = hPastLeadingZeros
+	         $ff95 = hProduct
 	         $ff95 = hSwapTemp
 	         $ff96 = hMutateWY
 	         $ff96 = hSwapItemQuantity

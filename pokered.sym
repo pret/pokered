@@ -667,8 +667,8 @@
 00:296e DisplayTextID.spriteHandling
 00:2987 DisplayTextID.noCarry
 00:298a DisplayTextID.skipSpriteHandling
-00:29ba DisplayTextID.not_u1
-00:29cd DisplayTextID.not_u2
+00:29ba DisplayTextID.not_u2
+00:29cd DisplayTextID.not_u3
 00:29d6 AfterDisplayingTextID
 00:29df HoldTextDisplayOpen
 00:29e8 CloseTextDisplay
@@ -2321,7 +2321,6 @@
 02:5b1f Audio1_HWChannelDisableMasks
 02:5b27 Audio1_HWChannelEnableMasks
 02:5b2f Audio1_Pitches
-02:5b2f Audio1_Pitches._table_width_u1
 02:5b47 Music_RivalAlternateStart
 02:5b60 Audio1_OverwriteChannelPointer
 02:5b65 Music_RivalAlternateTempo
@@ -5536,7 +5535,6 @@
 08:62de Audio2_HWChannelDisableMasks
 08:62e6 Audio2_HWChannelEnableMasks
 08:62ee Audio2_Pitches
-08:62ee Audio2_Pitches._table_width_u2
 08:6306 Music_PokeFluteInBattle
 08:631d Audio2_OverwriteChannelPointer
 08:6322 SFX_Pokeflute_Ch5
@@ -14639,7 +14637,6 @@
 1f:5b93 Audio3_HWChannelDisableMasks
 1f:5b9b Audio3_HWChannelEnableMasks
 1f:5ba3 Audio3_Pitches
-1f:5ba3 Audio3_Pitches._table_width_u3
 1f:5bbb Music_BikeRiding_Ch1
 1f:5bc9 Music_BikeRiding_Ch1.mainloop
 1f:5c6c Music_BikeRiding_Ch2
@@ -18370,9 +18367,9 @@
 00:cd3d wPlayerCharacterOAMTile
 00:cd3d wCoordIndex
 00:cd3d wTempSCX
+00:cd3d wUnusedCreditsByte
 00:cd3d wBoxMonCounts
 00:cd3d wHoFTeamIndex
-00:cd3d wUnusedCreditsByte
 00:cd3d wWhichTrade
 00:cd3d wDayCareStartLevel
 00:cd3d wMoveDownSmallStarsOAMCount
