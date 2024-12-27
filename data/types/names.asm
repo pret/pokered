@@ -1,5 +1,5 @@
 TypeNames:
-	table_width 2, TypeNames
+	table_width 2
 
 	dw .Normal
 	dw .Fighting

@@ -77,7 +77,7 @@ DEF NUM_BATTLE_TRANSITION_BITS EQU const_value
 ; bit 1: set if enemy is at least 3 levels higher than player
 ; bit 2: set if dungeon map
 BattleTransitions:
-	table_width 2, BattleTransitions
+	table_width 2
 	dw BattleTransition_DoubleCircle      ; %000
 	dw BattleTransition_Spiral            ; %001
 	dw BattleTransition_Circle            ; %010

@@ -2,7 +2,7 @@
 ; define constants for the item IDs and for the corresponding move values.
 
 TechnicalMachines:
-	table_width 1, TechnicalMachines
+	table_width 1
 
 FOR n, 1, NUM_TMS + 1
 	db TM{02d:n}_MOVE

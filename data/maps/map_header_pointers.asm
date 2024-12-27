@@ -1,6 +1,6 @@
 ; see also MapHeaderBanks
 MapHeaderPointers::
-	table_width 2, MapHeaderPointers
+	table_width 2
 	dw PalletTown_h
 	dw ViridianCity_h
 	dw PewterCity_h

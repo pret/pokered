@@ -5,7 +5,7 @@ MACRO overworld_sprite
 ENDM
 
 SpriteSheetPointerTable:
-	table_width 4, SpriteSheetPointerTable
+	table_width 4
 	; graphics, tile count
 	overworld_sprite RedSprite, 12              ; SPRITE_RED
 	overworld_sprite BlueSprite, 12             ; SPRITE_BLUE

@@ -1,5 +1,5 @@
 WildDataPointers:
-	table_width 2, WildDataPointers
+	table_width 2
 	dw NothingWildMons         ; PALLET_TOWN
 	dw NothingWildMons         ; VIRIDIAN_CITY
 	dw NothingWildMons         ; PEWTER_CITY
