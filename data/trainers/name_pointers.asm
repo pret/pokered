@@ -2,7 +2,7 @@ TrainerNamePointers:
 ; These are only used for trainers' defeat speeches.
 ; They were originally shortened variants of the trainer class names
 ; in the Japanese versions, but are now redundant with TrainerNames.
-	table_width 2, TrainerNamePointers
+	table_width 2
 	dw .YoungsterName
 	dw .BugCatcherName
 	dw .LassName

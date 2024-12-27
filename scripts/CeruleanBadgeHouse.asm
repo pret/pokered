@@ -53,7 +53,7 @@ CeruleanBadgeHouseMiddleAgedManText:
 	jp TextScriptEnd
 
 .BadgeItemList:
-	table_width 1, .BadgeItemList
+	table_width 1
 	db NUM_BADGES ; #
 	db BOULDERBADGE
 	db CASCADEBADGE
@@ -79,7 +79,7 @@ CeruleanBadgeHouseMiddleAgedManText:
 	text_end
 
 CeruleanBadgeHouseBadgeTextPointers:
-	table_width 2, CeruleanBadgeHouseBadgeTextPointers
+	table_width 2
 	dw CeruleanBadgeHouseBoulderBadgeText
 	dw CeruleanBadgeHouseCascadeBadgeText
 	dw CeruleanBadgeHouseThunderBadgeText
