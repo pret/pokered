@@ -9,7 +9,7 @@ RockTunnelB1FWildMons:
 	db 17, MACHOP
 	db 17, ONIX
 	db 13, ONIX
-	db 18, GEODUDE
+	db 18, HITMONCHAN
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate

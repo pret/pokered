@@ -9,7 +9,7 @@ Route18WildMons:
 	db 28, DODUO
 	db 29, RATICATE
 	db 27, FEAROW
-	db 29, FEAROW
+	db 29, FARFETCHD
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate

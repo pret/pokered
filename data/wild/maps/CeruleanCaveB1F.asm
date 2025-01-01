@@ -5,7 +5,7 @@ CeruleanCaveB1FWildMons:
 	db 55, ELECTRODE
 	db 64, CHANSEY
 	db 64, PARASECT
-	db 64, RAICHU
+	db 5, SQUIRTLE
 IF DEF(_RED)
 	db 57, ARBOK
 ENDC

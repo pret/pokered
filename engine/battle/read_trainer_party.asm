@@ -128,7 +128,33 @@ ReadTrainer:
 ; pidgeot
 	ld a, SKY_ATTACK
 	ld [wEnemyMon1Moves + 2], a
-
+; variable 1
+	ld a, [wRivalStarter]
+	cp STARTER3
+	ld b, BLIZZARD
+	jr z, .GiveVariable1Move
+	cp STARTER1
+	ld b, MEGA_DRAIN
+	jr z, .GiveVariable1Move
+	ld b, FIRE_BLAST ; must be arcanine
+.GiveVariable1Move
+	ld a, b
+	ld [wEnemyMon4Moves + 2], a
+variable 2
+	ld a, [wRivalStarter]
+	cp STARTER3
+	ld b, FIRE_BLAST
+	jr z, .GiveVariable1Move
+	cp STARTER1
+	ld b, BLIZZARD
+	jr z, .GiveVariable1Move
+	ld b, MEGA_DRAIN ; must be exeggutor
+.GiveVariable2Move
+	ld a, b
+	ld [wEnemyMon5Moves + 2], a
+.GiveStarterMove
+	ld a, b
+	ld [wEnemyMon1Moves + 2], a
 ; starter
 	ld a, [wRivalStarter]
 	cp STARTER3

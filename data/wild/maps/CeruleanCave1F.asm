@@ -14,7 +14,7 @@ ENDC
 	db 49, KADABRA
 	db 52, PARASECT
 	db 53, RAICHU
-	db 53, DITTO
+	db 5, BULBASAUR
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate

@@ -5,7 +5,7 @@ PowerPlantWildMons:
 	db 20, PIKACHU
 	db 24, PIKACHU
 	db 23, MAGNEMITE
-	db 23, VOLTORB
+	db 35, ELECTABUZZ
 	db 32, MAGNETON
 	db 35, MAGNETON
 IF DEF(_RED)

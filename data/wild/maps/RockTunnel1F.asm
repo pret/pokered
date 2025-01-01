@@ -9,7 +9,7 @@ RockTunnel1FWildMons:
 	db 15, ZUBAT
 	db 17, MACHOP
 	db 13, ONIX
-	db 15, ONIX
+	db 15, HITMONLEE
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate

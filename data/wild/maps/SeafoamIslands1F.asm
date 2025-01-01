@@ -5,7 +5,7 @@ IF DEF(_RED)
 	db 30, SLOWPOKE
 	db 30, SHELLDER
 	db 30, HORSEA
-	db 28, HORSEA
+	db 28, STARYU
 	db 21, ZUBAT
 	db 29, GOLBAT
 	db 28, PSYDUCK
