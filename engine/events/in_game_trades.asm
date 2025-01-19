@@ -137,7 +137,7 @@ InGameTrade_DoTrade:
 	ld [wMonDataLocation], a
 	call AddPartyMon
 	call InGameTrade_CopyDataToReceivedMon
-	callfar EvolveTradeMon
+	callfar CheckEvolveTradeMonName
 	call ClearScreen
 	call InGameTrade_RestoreScreen
 	farcall RedrawMapView

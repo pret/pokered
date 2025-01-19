@@ -157,10 +157,10 @@ ItemUseBall:
 	jr nz, .notOldManBattle
 
 .oldManBattle
-	ld hl, wGrassRate
+	ld hl, wLinkEnemyTrainerName ; same as wGrassRate
 	ld de, wPlayerName
 	ld bc, NAME_LENGTH
-	call CopyData ; save the player's name in the Wild Monster data (part of the Cinnabar Island Missingno. glitch)
+	call CopyData
 	jp .captured
 
 .notOldManBattle
@@ -468,9 +468,9 @@ ItemUseBall:
 
 	push hl
 
-; If the Pokémon is transformed, the Pokémon is assumed to be a Ditto.
-; This is a bug because a wild Pokémon could have used Transform via
-; Mirror Move even though the only wild Pokémon that knows Transform is Ditto.
+	; BUG: If the Pokémon is transformed, the Pokémon is assumed to be a Ditto.
+	; A wild Pokémon could have used Transform via Mirror Move
+	; even though the only wild Pokémon that knows Transform is Ditto.
 	ld hl, wEnemyBattleStatus3
 	bit TRANSFORMED, [hl]
 	jr z, .notTransformed
@@ -2077,10 +2077,11 @@ ItemUsePPRestore:
 	ret
 .fullyRestorePP
 	ld a, [hl] ; move PP
-; Note that this code has a bug. It doesn't mask out the upper two bits, which
-; are used to count how many PP Ups have been used on the move. So, Max Ethers
-; and Max Elixirs will not be detected as having no effect on a move with full
-; PP if the move has had any PP Ups used on it.
+	; BUG: This code doesn't mask out the upper two bits, which
+	; are used to count how many PP Ups have been used on the move.
+	; So, Max Ethers and Max Elixirs will not be detected as having
+	; no effect on a move with full PP if the move has had
+	; any PP Ups used on it.
 	cp b ; does current PP equal max PP?
 	ret z
 	jr .storeNewAmount

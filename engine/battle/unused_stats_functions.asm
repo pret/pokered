@@ -1,5 +1,4 @@
-; does nothing since no stats are ever selected (barring glitches)
-DoubleSelectedStats:
+DoubleSelectedStats: ; unused
 	ldh a, [hWhoseTurn]
 	and a
 	ld a, [wPlayerStatsToDouble]
@@ -28,8 +27,7 @@ DoubleSelectedStats:
 	ld [hli], a
 	ret
 
-; does nothing since no stats are ever selected (barring glitches)
-HalveSelectedStats:
+HalveSelectedStats: ; unused
 	ldh a, [hWhoseTurn]
 	and a
 	ld a, [wPlayerStatsToHalve]

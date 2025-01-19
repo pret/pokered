@@ -1186,11 +1186,11 @@ Audio3_InitPitchSlideVars:
 	sub e
 	ld e, a
 
-; Bug. Instead of borrowing from the high byte of the target frequency as it
-; should, it borrows from the high byte of the current frequency instead.
-; This means that the result will be 0x200 greater than it should be if the
-; low byte of the current frequency is greater than the low byte of the
-; target frequency.
+	; BUG: Instead of borrowing from the high byte of the target frequency as it
+	; should, it borrows from the high byte of the current frequency instead.
+	; This means that the result will be 0x200 greater than it should be if the
+	; low byte of the current frequency is greater than the low byte of the
+	; target frequency.
 	ld a, d
 	sbc b
 	ld d, a

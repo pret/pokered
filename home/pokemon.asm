@@ -110,11 +110,12 @@ LoadFrontSpriteByMonIndex::
 	ld [hl], b
 	and a
 	pop hl
-	jr z, .invalidDexNumber ; dex #0 invalid
+	jr z, .invalidDexNumber
 	cp NUM_POKEMON + 1
-	jr c, .validDexNumber   ; dex >#151 invalid
+	jr c, .validDexNumber
 .invalidDexNumber
-	ld a, RHYDON ; $1
+	; This is the so-called "Rhydon trap".
+	ld a, RHYDON
 	ld [wCurPartySpecies], a
 	ret
 .validDexNumber

@@ -57,8 +57,8 @@ CableClub_DoBattleOrTradeAgain:
 	ld [hli], a
 	dec b
 	jr nz, .zeroPlayerDataPatchListLoop
-	ld hl, wGrassRate
-	ld bc, wTrainerHeaderPtr - wGrassRate
+	ld hl, wLinkEnemyTrainerName ; same as wGrassRate
+	ld bc, wTrainerHeaderPtr - wLinkEnemyTrainerName
 .zeroEnemyPartyLoop
 	xor a
 	ld [hli], a
@@ -915,7 +915,7 @@ CableClub_Run:
 	ld a, l
 	ld [wTilesetCollisionPtr], a
 	xor a
-	ld [wGrassRate], a
+	ld [wLinkEnemyTrainerName], a ; same as [wGrassRate]
 	inc a ; LINK_STATE_IN_CABLE_CLUB
 	ld [wLinkState], a
 	ldh [hJoy5], a

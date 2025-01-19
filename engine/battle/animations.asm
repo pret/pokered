@@ -1341,7 +1341,8 @@ AdjustOAMBlockYPos2:
 	cp 112
 	jr c, .skipSettingPreviousEntrysAttribute
 	dec hl
-	ld a, 160 ; bug, sets previous OAM entry's attribute
+	; BUG: sets previous OAM entry's attribute
+	ld a, 160
 	ld [hli], a
 .skipSettingPreviousEntrysAttribute
 	ld [hl], a
@@ -1833,9 +1834,9 @@ _AnimationSlideMonOff:
 .PlayerNextTile
 	ld a, [hl]
 	add 7
-; This is a bug. The lower right corner tile of the mon back pic is blanked
-; while the mon is sliding off the screen. It should compare with the max tile
-; plus one instead.
+	; BUG: The lower right corner tile of the mon back pic is blanked
+	; while the mon is sliding off the screen. It should compare with
+	; the max tile plus one instead.
 	cp $61
 	ret c
 	ld a, " "
@@ -1844,8 +1845,9 @@ _AnimationSlideMonOff:
 .EnemyNextTile
 	ld a, [hl]
 	sub 7
-; This has the same problem as above, but it has no visible effect because
-; the lower right tile is in the first column to slide off the screen.
+	; BUG: This has the same problem as above, but it has no visible effect
+	; because the lower right tile is in the first column to slide off
+	; the screen.
 	cp $30
 	ret c
 	ld a, " "
@@ -2187,8 +2189,7 @@ AnimCopyRowRight:
 	jr nz, AnimCopyRowRight
 	ret
 
-; get the sound of the move id in b
-GetMoveSoundB:
+GetMoveSoundB: ; unused
 	ld a, b
 	call GetMoveSound
 	ld b, a

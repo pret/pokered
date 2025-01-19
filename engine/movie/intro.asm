@@ -211,7 +211,6 @@ IntroClearScreen:
 	jr IntroClearCommon
 
 IntroClearMiddleOfScreen:
-; clear the area of the tile map between the black bars on the top and bottom
 	hlcoord 0, 4
 	ld bc, SCREEN_WIDTH * 10
 
@@ -275,8 +274,7 @@ CopyTileIDsFromList_ZeroBaseTileID:
 	ld c, 0
 	predef_jump CopyTileIDsFromList
 
-PlayMoveSoundB:
-; unused
+PlayMoveSoundB: ; unreferenced
 	predef GetMoveSoundB
 	ld a, b
 	jp PlaySound
@@ -325,8 +323,9 @@ PlayShootingStar:
 	call DelayFrames
 	farcall AnimateShootingStar
 	push af
+	; the call to LoadPresentsGraphic here was removed in localization
 	pop af
-	jr c, .next ; skip the delay if the user interrupted the animation
+	jr c, .next
 	ld c, 40
 	call DelayFrames
 .next
@@ -341,7 +340,6 @@ PlayShootingStar:
 	jp Delay3
 
 IntroDrawBlackBars:
-; clear the screen and draw black bars on the top and bottom
 	call IntroClearScreen
 	hlcoord 0, 0
 	ld c, SCREEN_WIDTH * 4
@@ -356,7 +354,10 @@ IntroDrawBlackBars:
 	ld c,  BG_MAP_WIDTH * 4
 	jp IntroPlaceBlackTiles
 
-EmptyFunc2:
+LoadPresentsGraphic: ; dummy, unreferenced
+	; This routine loads the "PRESENTS" graphic
+	; (tiles $67, $68, $69, $6A, $6B, and $6C)
+	; at coordinates (11, 7) in the Japanese versions.
 	ret
 
 IntroNidorinoAnimation0:
@@ -462,5 +463,4 @@ FightIntroFrontMon3:
 ENDC
 
 FightIntroFrontMonEnd:
-
 	ds 16, $00 ; blank tile

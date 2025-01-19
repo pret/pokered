@@ -544,7 +544,7 @@ HurtByLeechSeedText:
 	text_end
 
 ; decreases the mon's current HP by 1/16 of the Max HP (multiplied by number of toxic ticks if active)
-; note that the toxic ticks are considered even if the damage is not poison (hence the Leech Seed glitch)
+; note that the toxic ticks are considered even if the damage is not poison (hence the Leech Seed bug)
 ; hl: HP pointer
 ; bc (out): total damage
 HandlePoisonBurnLeechSeed_DecreaseOwnHP:
@@ -744,7 +744,7 @@ FaintEnemyPokemon:
 .wild
 	ld hl, wPlayerBattleStatus1
 	res ATTACKING_MULTIPLE_TIMES, [hl]
-; Bug. This only zeroes the high byte of the player's accumulated damage,
+; BUG: This only zeroes the high byte of the player's accumulated damage,
 ; setting the accumulated damage to itself mod 256 instead of 0 as was probably
 ; intended. That alone is problematic, but this mistake has another more severe
 ; effect. This function's counterpart for when the player mon faints,
@@ -794,7 +794,7 @@ FaintEnemyPokemon:
 	ld a, MUSIC_DEFEATED_WILD_MON
 	call PlayBattleVictoryMusic
 .sfxplayed
-; bug: win sfx is played for wild battles before checking for player mon HP
+; BUG: win sfx is played for wild battles before checking for player mon HP
 ; this can lead to odd scenarios where both player and enemy faint, as the win sfx plays yet the player never won the battle
 	ld hl, wBattleMonHP
 	ld a, [hli]
@@ -1177,7 +1177,7 @@ LinkBattleLostText:
 	text_end
 
 ; slides pic of fainted mon downwards until it disappears
-; bug: when this is called, [hAutoBGTransferEnabled] is non-zero, so there is screen tearing
+; BUG: when this is called, [hAutoBGTransferEnabled] is non-zero, so there is screen tearing
 SlideDownFaintedMonPic:
 	ld a, [wStatusFlags5]
 	push af
@@ -1230,7 +1230,7 @@ SevenSpacesText:
 ; slides the player or enemy trainer off screen
 ; a is the number of tiles to slide it horizontally (always 9 for the player trainer or 8 for the enemy trainer)
 ; if a is 8, the slide is to the right, else it is to the left
-; bug: when this is called, [hAutoBGTransferEnabled] is non-zero, so there is screen tearing
+; BUG: when this is called, [hAutoBGTransferEnabled] is non-zero, so there is screen tearing
 SlideTrainerPicOffScreen:
 	ldh [hSlideAmount], a
 	ld c, a
@@ -2013,26 +2013,17 @@ DisplayBattleMenu::
 .menuselected
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
- ; handle menu input if it's not the old man tutorial
 	ld a, [wBattleType]
-	dec a
+	dec a ; BATTLE_TYPE_OLD_MAN
 	jp nz, .handleBattleMenuInput
-; the following happens for the old man tutorial
-	; Temporarily save the player name in wLinkEnemyTrainerName.
-	; Since wLinkEnemyTrainerName == wGrassRate, this affects wild encounters.
-	; The wGrassRate byte and following wGrassMons buffer are supposed
-	; to get overwritten when entering a map with wild Pokémon,
-	; but an oversight prevents this in Cinnabar and Route 21,
-	; so the infamous MissingNo. glitch can show up.
 	ld hl, wPlayerName
-	ld de, wLinkEnemyTrainerName
+	ld de, wLinkEnemyTrainerName ; same as wGrassRate
 	ld bc, NAME_LENGTH
 	call CopyData
 	ld hl, .oldManName
 	ld de, wPlayerName
 	ld bc, NAME_LENGTH
 	call CopyData
-; the following simulates the keystrokes by drawing menus on screen
 	hlcoord 9, 14
 	ld [hl], "▶"
 	ld c, 80
@@ -2043,7 +2034,7 @@ DisplayBattleMenu::
 	ld c, 50
 	call DelayFrames
 	ld [hl], "▷"
-	ld a, $2 ; select the "ITEM" menu
+	ld a, 2 ; ITEM
 	jp .upperLeftMenuItemWasNotSelected
 .oldManName
 	db "OLD MAN@"
@@ -2133,19 +2124,16 @@ DisplayBattleMenu::
 	ld a, [wCurrentMenuItem]
 	ld [wBattleAndStartSavedMenuItem], a
 	jr z, .handleMenuSelection
-; not Safari battle
-; swap the IDs of the item menu and party menu (this is probably because they swapped the positions
-; of these menu items in first generation English versions)
-	cp $1 ; was the item menu selected?
+; Swap the ITEM and <PK><MN> battle menu functions.
+; This change applies to all Western localizations.
+	cp 1 ; ITEM
 	jr nz, .notItemMenu
-; item menu was selected
-	inc a ; increment a to 2
+	inc a
 	jr .handleMenuSelection
 .notItemMenu
-	cp $2 ; was the party menu selected?
+	cp 2 ; <PK><MN>
 	jr nz, .handleMenuSelection
-; party menu selected
-	dec a ; decrement a to 1
+	dec a
 .handleMenuSelection
 	and a
 	jr nz, .upperLeftMenuItemWasNotSelected
@@ -2489,8 +2477,7 @@ MoveSelectionMenu:
 	hlcoord 4, 12
 	ld b, 4
 	ld c, 14
-	di ; out of pure coincidence, it is possible for vblank to occur between the di and ei
-	   ; so it is necessary to put the di ei block to not cause tearing
+	di
 	call TextBoxBorder
 	hlcoord 4, 12
 	ld [hl], "─"
@@ -4630,8 +4617,9 @@ CriticalHitTest:
 	ld c, [hl]                   ; read move id
 	ld a, [de]
 	bit GETTING_PUMPED, a        ; test for focus energy
-	jr nz, .focusEnergyUsed      ; bug: using focus energy causes a shift to the right instead of left,
-	                             ; resulting in 1/4 the usual crit chance
+	; BUG: Using Focus Energy causes a shift to the right
+	; instead of left, resulting in 1/4 the usual crit chance.
+	jr nz, .focusEnergyUsed
 	sla b                        ; (effective (base speed/2)*2)
 	jr nc, .noFocusEnergyUsed
 	ld b, $ff                    ; cap at 255/256
@@ -4675,7 +4663,7 @@ HandleCounterMove:
 ; This is irrelevant for the opponent's side outside of link battles, since the move selection is controlled by the AI.
 ; However, in the scenario where the player switches out and the opponent uses Counter,
 ; the outcome may be affected by the player's actions in the move selection menu prior to switching the Pokemon.
-; This might also lead to desync glitches in link battles.
+; This might also lead to desync bugs in link battles.
 
 	ldh a, [hWhoseTurn] ; whose turn
 	and a
@@ -4977,7 +4965,7 @@ AttackSubstitute:
 ; Self-confusion damage as well as Hi-Jump Kick and Jump Kick recoil cause a momentary turn swap before being applied.
 ; If the user has a Substitute up and would take damage because of that,
 ; damage will be applied to the other player's Substitute.
-; Normal recoil such as from Double-Edge isn't affected by this glitch,
+; Normal recoil such as from Double-Edge isn't affected by this bug,
 ; because this function is never called in that case.
 
 	ld hl, SubstituteTookDamageText
@@ -5324,7 +5312,8 @@ AIGetTypeEffectiveness:
 	inc hl
 	ld c, [hl]                 ; c = type 2 of player's pokemon
 	; initialize to neutral effectiveness
-	ld a, $10 ; bug: should be EFFECTIVE (10)
+	; BUG: should be EFFECTIVE (10)
+	ld a, $10
 	ld [wTypeEffectiveness], a
 	ld hl, TypeEffects
 .loop
@@ -6385,8 +6374,7 @@ LoadPlayerBackPic:
 	hlcoord 1, 5
 	predef_jump CopyUncompressedPicToTilemap
 
-; does nothing since no stats are ever selected (barring glitches)
-DoubleOrHalveSelectedStats:
+DoubleOrHalveSelectedStats: ; unused
 	callfar DoubleSelectedStats
 	jpfar HalveSelectedStats
 

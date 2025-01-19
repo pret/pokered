@@ -29,25 +29,23 @@ ENDC
 IF DEF(_DEBUG)
 	db PIKACHU, 5
 ENDC
-	db -1 ; end
+	db -1
 
 PrepareNewGameDebug: ; dummy except in _DEBUG
 IF DEF(_DEBUG)
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a
 
-	; Fly anywhere.
-	dec a ; $ff (all bits)
+	dec a ; NUM_CITY_MAPS
 	ld [wTownVisitedFlag], a
 	ld [wTownVisitedFlag + 1], a
 
-	; Get all badges except Earth Badge.
 	ld a, ~(1 << BIT_EARTHBADGE)
 	ld [wObtainedBadges], a
 
 	call SetDebugNewGameParty
 
-	; Exeggutor gets four HM moves.
+	; EXEGGUTOR
 	ld hl, wPartyMon1Moves
 	ld a, FLY
 	ld [hli], a
@@ -66,7 +64,7 @@ IF DEF(_DEBUG)
 	ld [hli], a
 	ld [hl], a
 
-	; Jolteon gets Thunderbolt.
+	; JOLTEON
 	ld hl, wPartyMon3Moves + 3
 	ld a, THUNDERBOLT
 	ld [hl], a
@@ -74,7 +72,7 @@ IF DEF(_DEBUG)
 	ld a, 15
 	ld [hl], a
 
-	; Articuno gets Fly.
+	; ARTICUNO
 	ld hl, wPartyMon5Moves
 	ld a, FLY
 	ld [hl], a
@@ -82,7 +80,7 @@ IF DEF(_DEBUG)
 	ld a, 15
 	ld [hl], a
 
-	; Pikachu gets Surf.
+	; PIKACHU
 	ld hl, wPartyMon6Moves + 2
 	ld a, SURF
 	ld [hl], a
@@ -90,9 +88,8 @@ IF DEF(_DEBUG)
 	ld a, 15
 	ld [hl], a
 
-	; Get some debug items.
 	ld hl, wNumBagItems
-	ld de, DebugItemsList
+	ld de, DebugNewGameItemsList
 .items_loop
 	ld a, [de]
 	cp -1
@@ -106,19 +103,16 @@ IF DEF(_DEBUG)
 	jr .items_loop
 .items_end
 
-	; Complete the Pokédex.
 	ld hl, wPokedexOwned
 	call DebugSetPokedexEntries
 	ld hl, wPokedexSeen
 	call DebugSetPokedexEntries
 	SetEvent EVENT_GOT_POKEDEX
 
-	; Rival chose Squirtle,
-	; Player chose Charmander.
 	ld hl, wRivalStarter
 	ld a, STARTER2
 	ld [hli], a
-	inc hl ; hl = wPlayerStarter
+	inc hl ; wPlayerStarter
 	ld a, STARTER1
 	ld [hl], a
 
@@ -134,7 +128,7 @@ DebugSetPokedexEntries:
 	ld [hl], %01111111
 	ret
 
-DebugItemsList:
+DebugNewGameItemsList:
 	db BICYCLE, 1
 	db FULL_RESTORE, 99
 	db FULL_HEAL, 99
@@ -146,10 +140,10 @@ DebugItemsList:
 	db CARD_KEY, 1
 	db S_S_TICKET, 1
 	db LIFT_KEY, 1
-	db -1 ; end
+	db -1
 
-DebugUnusedList:
-	db -1 ; end
+DebugUnusedList: ; unreferenced
+	db -1
 ELSE
 	ret
 ENDC

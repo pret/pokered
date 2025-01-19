@@ -1,21 +1,19 @@
 LoadWildData::
 	ld hl, WildDataPointers
 	ld a, [wCurMap]
-
-	; get wild data for current map
 	ld c, a
 	ld b, 0
 	add hl, bc
 	add hl, bc
 	ld a, [hli]
 	ld h, [hl]
-	ld l, a       ; hl now points to wild data for current map
+	ld l, a
 	ld a, [hli]
-	ld [wGrassRate], a
+	ld [wGrassRate], a ; same as [wLinkEnemyTrainerName]
 	and a
-	jr z, .NoGrassData ; if no grass data, skip to surfing data
+	jr z, .NoGrassData
 	push hl
-	ld de, wGrassMons ; otherwise, load grass data
+	ld de, wGrassMons
 	ld bc, $14
 	call CopyData
 	pop hl
@@ -25,8 +23,8 @@ LoadWildData::
 	ld a, [hli]
 	ld [wWaterRate], a
 	and a
-	ret z        ; if no water data, we're done
-	ld de, wWaterMons  ; otherwise, load surfing data
+	ret z
+	ld de, wWaterMons
 	ld bc, $14
 	jp CopyData
 

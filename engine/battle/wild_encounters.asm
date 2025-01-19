@@ -1,11 +1,9 @@
-; try to initiate a wild pokemon encounter
-; returns success in Z
 TryDoWildEncounter:
 	ld a, [wNPCMovementScriptPointerTableNum]
 	and a
 	ret nz
 	ld a, [wMovementFlags]
-	and a ; is player exiting a door, jumping over a ledge, or fishing?
+	and a
 	ret nz
 	callfar IsPlayerStandingOnDoorTileOrWarpTile
 	jr nc, .notStandingOnDoorOrWarpTile
@@ -23,30 +21,37 @@ TryDoWildEncounter:
 	jr z, .lastRepelStep
 	ld [wRepelRemainingSteps], a
 .next
-; determine if wild pokemon can appear in the half-block we're standing in
-; is the bottom right tile (9,9) of the half-block we're standing in a grass/water tile?
-	hlcoord 9, 9
+	; BUG: This coordinates set is inconsistent with
+	; the one in the .gotEncounterSlot subroutine below.
+	; It was changed from the Japanese versions and
+	; reverted for the Western localizations of Yellow.
+	; A (9, 9) coordinates set affects wild encounters as
+	; they do not occur in tile $34 of the FOREST tileset.
+	; The inconsistency causes wGrassRate, which is also
+	; wLinkEnemyTrainerName, in both NPC trades and the
+	; old man battle type to have random wild encounter data.
+	; This localization issue is infamously responsible for
+	; the discovery of MISSINGNO. in English Red and Blue
+	; while surfing on the eastern shore of CINNABAR_ISLAND,
+	; which is actually part of the ROUTE_20 map.
+	hlcoord 9, 9 ; should be hlcoord 8, 9
 	ld c, [hl]
 	ld a, [wGrassTile]
 	cp c
-	ld a, [wGrassRate]
+	ld a, [wGrassRate] ; same as [wLinkEnemyTrainerName]
 	jr z, .CanEncounter
-	ld a, $14 ; in all tilesets with a water tile, this is its id
+	ld a, $14 ; water tile
 	cp c
 	ld a, [wWaterRate]
 	jr z, .CanEncounter
-; even if not in grass/water, standing anywhere we can encounter pokemon
-; so long as the map is "indoor" and has wild pokemon defined.
-; ...as long as it's not Viridian Forest or Safari Zone.
 	ld a, [wCurMap]
-	cp FIRST_INDOOR_MAP ; is this an indoor map?
+	cp FIRST_INDOOR_MAP
 	jr c, .CantEncounter2
 	ld a, [wCurMapTileset]
-	cp FOREST ; Viridian Forest/Safari Zone
+	cp FOREST ; VIRIDIAN_FOREST, SAFARI_ZONE
 	jr z, .CantEncounter2
-	ld a, [wGrassRate]
+	ld a, [wGrassRate] ; same as [wLinkEnemyTrainerName]
 .CanEncounter
-; compare encounter chance with a random number to determine if there will be an encounter
 	ld b, a
 	ldh a, [hRandomAdd]
 	cp b
@@ -61,15 +66,12 @@ TryDoWildEncounter:
 	inc hl
 	jr .determineEncounterSlot
 .gotEncounterSlot
-; determine which wild pokemon (grass or water) can appear in the half-block we're standing in
 	ld c, [hl]
 	ld hl, wGrassMons
 	lda_coord 8, 9
-	cp $14 ; is the bottom left tile (8,9) of the half-block we're standing in a water tile?
-	jr nz, .gotWildEncounterType ; else, it's treated as a grass tile by default
+	cp $14 ; water tile
+	jr nz, .gotWildEncounterType
 	ld hl, wWaterMons
-; since the bottom right tile of a "left shore" half-block is $14 but the bottom left tile is not,
-; "left shore" half-blocks (such as the one in the east coast of Cinnabar) load grass encounters.
 .gotWildEncounterType
 	ld b, 0
 	add hl, bc
@@ -85,7 +87,7 @@ TryDoWildEncounter:
 	ld b, a
 	ld a, [wCurEnemyLevel]
 	cp b
-	jr c, .CantEncounter2 ; repel prevents encounters if the leading party mon's level is higher than the wild mon
+	jr c, .CantEncounter2
 	jr .willEncounter
 .lastRepelStep
 	ld [wRepelRemainingSteps], a

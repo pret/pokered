@@ -47,14 +47,15 @@ GymTrashScript:
 	add hl, de
 	ld a, [hli]
 
-; There is a bug in this code. It should calculate a value in the range [0, 3]
-; but if the mask and random number don't have any 1 bits in common, then
-; the result of the AND will be 0. When 1 is subtracted from that, the value
-; will become $ff. This will result in 255 being added to hl, which will cause
-; hl to point to one of the zero bytes that pad the end of the ROM bank.
-; Trash can 0 was intended to be able to have the second lock only when the
-; first lock was in trash can 1 or 3. However, due to this bug, trash can 0 can
-; have the second lock regardless of which trash can had the first lock.
+	; BUG: It should calculate a value in the range [0, 3]
+	; but if the mask and random number don't have any 1 bits in common, then
+	; the result of the AND will be 0. When 1 is subtracted from that, the value
+	; will become $ff. This will result in 255 being added to hl, which will
+	; cause hl to point to one of the zero bytes that pad the end of the
+	; ROM bank.
+	; Trash can 0 was intended to be able to have the second lock only when the
+	; first lock was in trash can 1 or 3. However, due to this bug, trash can 0
+	; can have the second lock regardless of which trash can had the first lock.
 
 	ldh [hGymTrashCanRandNumMask], a
 	push hl

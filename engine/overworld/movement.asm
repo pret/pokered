@@ -644,7 +644,7 @@ CanWalkOntoTile:
 	bit 7, d           ; check if going upwards (d == -1)
 	jr nz, .upwards
 	add d
-	; bug: these tests against $5 probably were supposed to prevent
+	; BUG: these tests against $5 probably were supposed to prevent
 	; sprites from walking out too far, but this line makes sprites get
 	; stuck whenever they walked upwards 5 steps
 	; on the other hand, the amount a sprite can walk out to the
