@@ -157,6 +157,12 @@ SECTION "Tilemap", WRAM0
 wTileMap:: ds SCREEN_WIDTH * SCREEN_HEIGHT
 
 UNION
+; buffer to load the screen view from blocks in tiles during LoadCurrentMapView 
+; in blocks : 6 columns by 5 rows worth of tiles
+; in tiles : 24 columns by 20 rows
+wSurroundingTiles:: ds SURROUNDING_WIDTH * SURROUNDING_HEIGHT
+
+NEXTU
 ; buffer for temporarily saving and restoring current screen's tiles
 ; (e.g. if menus are drawn on top)
 wTileMapBackup:: ds SCREEN_WIDTH * SCREEN_HEIGHT
@@ -168,8 +174,6 @@ wSerialPartyMonsPatchList:: ds 200
 ; list of indexes to patch with SERIAL_NO_DATA_BYTE after transfer
 wSerialEnemyMonsPatchList:: ds 200
 ENDU
-
-	ds 80
 
 
 SECTION "Overworld Map", WRAM0
