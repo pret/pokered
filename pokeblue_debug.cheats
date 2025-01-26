@@ -16,4 +16,7 @@
 !disabled
 # Always Encounter Rhydon (Change to other pokemon: change the XX in 01XX00D0 to the pokemon IDs found at this link: https://github.com/Vortyne/pureRGB/blob/master/constants/pokemon_constants.asm)
 010100D0
-
+!disabled
+# 99 Rare candies replace the first item in your bag (Change to other items: change XX in 01XX43D5 with the item IDs found at this link: https://github.com/Vortyne/pureRGB/blob/master/constants/item_constants.asm)
+012843D5
+016344D5
