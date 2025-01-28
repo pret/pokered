@@ -156,6 +156,7 @@ SECTION "Tilemap", WRAM0
 ; buffer for tiles that are visible on screen (20 columns by 18 rows)
 wTileMap:: ds SCREEN_WIDTH * SCREEN_HEIGHT
 
+; This union spans 480 bytes.
 UNION
 ; buffer for temporarily saving and restoring current screen's tiles
 ; (e.g. if menus are drawn on top)
