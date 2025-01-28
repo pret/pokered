@@ -18,9 +18,9 @@ DisplayTownMap:
 	hlcoord 1, 0
 	ld de, wNameBuffer
 	call PlaceString
-	ld hl, wShadowOAM
-	ld de, wTileMapBackup
-	ld bc, $10
+	ld hl, wShadowOAMSprite00
+	ld de, wShadowOAMBackupSprite00
+	ld bc, 4 * 4
 	call CopyData
 	ld hl, vSprites tile BIRD_BASE_TILE
 	ld de, TownMapCursor
@@ -63,8 +63,8 @@ DisplayTownMap:
 	ld de, wNameBuffer
 	call PlaceString
 	ld hl, wShadowOAMSprite04
-	ld de, wTileMapBackup + 16
-	ld bc, $10
+	ld de, wShadowOAMBackupSprite04
+	ld bc, 4 * 4
 	call CopyData
 .inputLoop
 	call TownMapSpriteBlinkingAnimation
@@ -366,8 +366,8 @@ DrawPlayerOrBirdSprite:
 	cp "@"
 	jr nz, .loop
 	ld hl, wShadowOAM
-	ld de, wTileMapBackup
-	ld bc, $a0
+	ld de, wShadowOAMBackup
+	ld bc, NUM_SPRITE_OAM_STRUCTS * 4
 	jp CopyData
 
 DisplayWildLocations:
@@ -414,8 +414,8 @@ DisplayWildLocations:
 	call DrawPlayerOrBirdSprite
 .done
 	ld hl, wShadowOAM
-	ld de, wTileMapBackup
-	ld bc, $a0
+	ld de, wShadowOAMBackup
+	ld bc, NUM_SPRITE_OAM_STRUCTS * 4
 	jp CopyData
 
 AreaUnknownText:
@@ -602,15 +602,15 @@ TownMapSpriteBlinkingAnimation::
 	cp 50
 	jr nz, .done
 ; show sprites when the counter reaches 50
-	ld hl, wTileMapBackup
+	ld hl, wShadowOAMBackup
 	ld de, wShadowOAM
-	ld bc, $90
+	ld bc, (NUM_SPRITE_OAM_STRUCTS - 4) * 4
 	call CopyData
 	xor a
 	jr .done
 .hideSprites
 	ld hl, wShadowOAM
-	ld b, $24
+	ld b, NUM_SPRITE_OAM_STRUCTS - 4
 	ld de, $4
 .hideSpritesLoop
 	ld [hl], $a0

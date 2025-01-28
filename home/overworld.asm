@@ -1357,12 +1357,12 @@ LoadCurrentMapView::
 	ld e, a
 	ld a, [wCurrentTileBlockMapViewPointer + 1]
 	ld d, a
-	ld hl, wTileMapBackup
-	ld b, $05
+	ld hl, wSurroundingTiles
+	ld b, SCREEN_BLOCK_HEIGHT
 .rowLoop ; each loop iteration fills in one row of tile blocks
 	push hl
 	push de
-	ld c, $06
+	ld c, SCREEN_BLOCK_WIDTH
 .rowInnerLoop ; loop to draw each tile block of the current row
 	push bc
 	push de
@@ -1391,7 +1391,7 @@ LoadCurrentMapView::
 .noCarry
 ; update tile map pointer to next row's address
 	pop hl
-	ld a, $60
+	ld a, SURROUNDING_WIDTH * BLOCK_HEIGHT
 	add l
 	ld l, a
 	jr nc, .noCarry2
@@ -1399,19 +1399,19 @@ LoadCurrentMapView::
 .noCarry2
 	dec b
 	jr nz, .rowLoop
-	ld hl, wTileMapBackup
-	ld bc, $0
+	ld hl, wSurroundingTiles
+	ld bc, 0
 .adjustForYCoordWithinTileBlock
 	ld a, [wYBlockCoord]
 	and a
 	jr z, .adjustForXCoordWithinTileBlock
-	ld bc, $30
+	ld bc, SURROUNDING_WIDTH * 2
 	add hl, bc
 .adjustForXCoordWithinTileBlock
 	ld a, [wXBlockCoord]
 	and a
 	jr z, .copyToVisibleAreaBuffer
-	ld bc, $2
+	ld bc, BLOCK_WIDTH / 2
 	add hl, bc
 .copyToVisibleAreaBuffer
 	decoord 0, 0 ; base address for the tiles that are directly transferred to VRAM during V-blank
@@ -1424,7 +1424,7 @@ LoadCurrentMapView::
 	inc de
 	dec c
 	jr nz, .rowInnerLoop2
-	ld a, $04
+	ld a, SURROUNDING_WIDTH - SCREEN_WIDTH
 	add l
 	ld l, a
 	jr nc, .noCarry3
@@ -1755,7 +1755,7 @@ ScheduleColumnRedrawHelper::
 	ld a, [hl]
 	ld [de], a
 	inc de
-	ld a, 19
+	ld a, SCREEN_WIDTH - 1
 	add l
 	ld l, a
 	jr nc, .noCarry
@@ -1796,22 +1796,18 @@ DrawTileBlock::
 	ld d, h
 	ld e, l ; de = address of the tile block's tiles
 	pop hl
-	ld c, $04 ; 4 loop iterations
+	ld c, BLOCK_HEIGHT ; 4 loop iterations
 .loop ; each loop iteration, write 4 tile numbers
 	push bc
+REPT BLOCK_WIDTH - 1
 	ld a, [de]
 	ld [hli], a
 	inc de
-	ld a, [de]
-	ld [hli], a
-	inc de
-	ld a, [de]
-	ld [hli], a
-	inc de
+ENDR
 	ld a, [de]
 	ld [hl], a
 	inc de
-	ld bc, $15
+	ld bc, SURROUNDING_WIDTH - (BLOCK_WIDTH - 1)
 	add hl, bc
 	pop bc
 	dec c
