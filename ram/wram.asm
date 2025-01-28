@@ -157,15 +157,22 @@ SECTION "Tilemap", WRAM0
 wTileMap:: ds SCREEN_WIDTH * SCREEN_HEIGHT
 
 UNION
-; buffer to load the screen view from blocks in tiles during LoadCurrentMapView 
-; in blocks : 6 columns by 5 rows worth of tiles
-; in tiles : 24 columns by 20 rows
-wSurroundingTiles:: ds SURROUNDING_WIDTH * SURROUNDING_HEIGHT
-
-NEXTU
 ; buffer for temporarily saving and restoring current screen's tiles
 ; (e.g. if menus are drawn on top)
 wTileMapBackup:: ds SCREEN_WIDTH * SCREEN_HEIGHT
+
+NEXTU
+; buffer for the blocks surrounding the player (6 columns by 5 rows of 4x4-tile blocks)
+wSurroundingTiles:: ds SURROUNDING_WIDTH * SURROUNDING_HEIGHT
+
+NEXTU
+; buffer for temporarily saving and restoring shadow OAM
+wShadowOAMBackup::
+; wShadowOAMBackupSprite00 - wShadowOAMBackupSprite39
+FOR n, NUM_SPRITE_OAM_STRUCTS
+wShadowOAMBackupSprite{02d:n}:: sprite_oam_struct wShadowOAMBackupSprite{02d:n}
+ENDR
+wShadowOAMBackupEnd::
 
 NEXTU
 ; list of indexes to patch with SERIAL_NO_DATA_BYTE after transfer

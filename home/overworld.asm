@@ -1400,7 +1400,7 @@ LoadCurrentMapView::
 	dec b
 	jr nz, .rowLoop
 	ld hl, wSurroundingTiles
-	ld bc, $0
+	ld bc, 0
 .adjustForYCoordWithinTileBlock
 	ld a, [wYBlockCoord]
 	and a
