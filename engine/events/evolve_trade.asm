@@ -1,4 +1,4 @@
-EvolveTradeMon:
+InGameTrade_CheckForTradeEvo:
 ; Verify the TradeMon's species name before
 ; attempting to initiate a trade evolution.
 
@@ -34,7 +34,7 @@ EvolveTradeMon:
 	ld a, [wPartyCount]
 	dec a
 	ld [wWhichPokemon], a
-	ld a, $1
+	ld a, TRUE
 	ld [wForceEvolution], a
 	ld a, LINK_STATE_TRADING
 	ld [wLinkState], a
