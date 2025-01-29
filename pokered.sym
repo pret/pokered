@@ -3791,8 +3791,8 @@
 05:7cbd ShockEmote
 05:7cfd QuestionEmote
 05:7d3d HappyEmote
-05:7d7d EvolveTradeMon
-05:7d8d EvolveTradeMon.ok
+05:7d7d InGameTrade_CheckForTradeEvo
+05:7d8d InGameTrade_CheckForTradeEvo.ok
 05:7dad SubstituteEffect_
 05:7dc9 SubstituteEffect_.notEnemy
 05:7dea SubstituteEffect_.userHasZeroOrMoreHP
@@ -7750,12 +7750,12 @@
 10:5831 IntroMoveMon.next
 10:583f IntroCopyTiles
 10:5842 CopyTileIDsFromList_ZeroBaseTileID
-10:5849 PlayMoveSoundB
+10:5849 PlayIntroMoveSound
 10:5852 LoadIntroGraphics
 10:588a PlayShootingStar
 10:58d0 PlayShootingStar.next
 10:58e9 IntroDrawBlackBars
-10:590c EmptyFunc2
+10:590c LoadPresentsGraphic
 10:590d IntroNidorinoAnimation0
 10:5910 IntroNidorinoAnimation1
 10:591b IntroNidorinoAnimation2
@@ -9171,7 +9171,7 @@
 13:7f09 BattleTransitionPredef
 13:7f0c CopyTileIDsFromListPredef
 13:7f0f PlayIntroPredef
-13:7f12 GetMoveSoundBPredef
+13:7f12 GetIntroMoveSoundPredef
 13:7f15 FlashScreenPredef
 13:7f18 GetTileAndCoordsInFrontOfPlayerPredef
 13:7f1b StatusScreenPredef
@@ -13673,7 +13673,7 @@
 1e:5842 GetTileIDList
 1e:585b AnimCopyRowLeft
 1e:5862 AnimCopyRowRight
-1e:5869 GetMoveSoundB
+1e:5869 GetIntroMoveSound
 1e:586f GetMoveSound
 1e:5889 GetMoveSound.next
 1e:588c GetMoveSound.Continue

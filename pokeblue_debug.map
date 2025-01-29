@@ -1587,7 +1587,7 @@ ROMX bank #1:
 	         $65ea = PrepareNewGameDebug.items_end
 	         $6606 = DebugSetPokedexEntries
 	         $660a = DebugSetPokedexEntries.loop
-	         $6611 = DebugItemsList
+	         $6611 = DebugNewGameItemsList
 	         $6628 = DebugUnusedList
 	         $6629 = AskName
 	         $667c = AskName.inBattle
@@ -3858,8 +3858,8 @@ ROMX bank #5:
 	         $7cbd = ShockEmote
 	         $7cfd = QuestionEmote
 	         $7d3d = HappyEmote
-	         $7d7d = EvolveTradeMon
-	         $7d8d = EvolveTradeMon.ok
+	         $7d7d = InGameTrade_CheckForTradeEvo
+	         $7d8d = InGameTrade_CheckForTradeEvo.ok
 	         $7dad = SubstituteEffect_
 	         $7dc9 = SubstituteEffect_.notEnemy
 	         $7dea = SubstituteEffect_.userHasZeroOrMoreHP
@@ -7889,12 +7889,12 @@ ROMX bank #16:
 	         $5831 = IntroMoveMon.next
 	         $583f = IntroCopyTiles
 	         $5842 = CopyTileIDsFromList_ZeroBaseTileID
-	         $5849 = PlayMoveSoundB
+	         $5849 = PlayIntroMoveSound
 	         $5852 = LoadIntroGraphics
 	         $588a = PlayShootingStar
 	         $58d0 = PlayShootingStar.next
 	         $58e9 = IntroDrawBlackBars
-	         $590c = EmptyFunc2
+	         $590c = LoadPresentsGraphic
 	         $590d = IntroNidorinoAnimation0
 	         $5910 = IntroNidorinoAnimation1
 	         $591b = IntroNidorinoAnimation2
@@ -9332,7 +9332,7 @@ ROMX bank #19:
 	         $7f09 = BattleTransitionPredef
 	         $7f0c = CopyTileIDsFromListPredef
 	         $7f0f = PlayIntroPredef
-	         $7f12 = GetMoveSoundBPredef
+	         $7f12 = GetIntroMoveSoundPredef
 	         $7f15 = FlashScreenPredef
 	         $7f18 = GetTileAndCoordsInFrontOfPlayerPredef
 	         $7f1b = StatusScreenPredef
@@ -13909,7 +13909,7 @@ ROMX bank #30:
 	         $5842 = GetTileIDList
 	         $585b = AnimCopyRowLeft
 	         $5862 = AnimCopyRowRight
-	         $5869 = GetMoveSoundB
+	         $5869 = GetIntroMoveSound
 	         $586f = GetMoveSound
 	         $5889 = GetMoveSound.next
 	         $588c = GetMoveSound.Continue
