@@ -155,21 +155,21 @@ LinkMenu:
 	ld hl, wTopMenuItemY
 	ld a, 7
 	ld [hli], a
-	assert wTopMenuItemY + 1 == wTopMenuItemX
+	ASSERT wTopMenuItemY + 1 == wTopMenuItemX
 	ld a, 6
 	ld [hli], a
-	assert wTopMenuItemX + 1 == wCurrentMenuItem
+	ASSERT wTopMenuItemX + 1 == wCurrentMenuItem
 	xor a
 	ld [hli], a
 	inc hl
-	assert wCurrentMenuItem + 2 == wMaxMenuItem
+	ASSERT wCurrentMenuItem + 2 == wMaxMenuItem
 	ld a, 2
 	ld [hli], a
-	assert wMaxMenuItem + 1 == wMenuWatchedKeys
-	assert 2 + 1 == A_BUTTON | B_BUTTON
+	ASSERT wMaxMenuItem + 1 == wMenuWatchedKeys
+	ASSERT 2 + 1 == A_BUTTON | B_BUTTON
 	inc a
 	ld [hli], a
-	assert wMenuWatchedKeys + 1 == wLastMenuItem
+	ASSERT wMenuWatchedKeys + 1 == wLastMenuItem
 	xor a
 	ld [hl], a
 .waitForInputLoop
@@ -468,7 +468,7 @@ DisplayOptionMenu:
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
-	assert BIT_FAST_TEXT_DELAY == 0
+	ASSERT BIT_FAST_TEXT_DELAY == 0
 	inc a ; 1 << BIT_FAST_TEXT_DELAY
 	ld [wLetterPrintingDelayFlags], a
 	ld [wOptionsCancelCursorX], a

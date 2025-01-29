@@ -5,7 +5,7 @@ MACRO move
 	db \4 ; type
 	db \5 percent ; accuracy
 	db \6 ; pp
-	assert \6 <= 40, "PP must be 40 or less"
+	ASSERT \6 <= 40, "PP must be 40 or less"
 ENDM
 
 Moves:
