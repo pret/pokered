@@ -2512,7 +2512,7 @@ GetMaxPP:
 	and %11000000 ; get PP Up count
 	pop bc
 	or b ; place normal max PP in 6 lower bits of a
-	assert wMoveData + MOVE_PP + 1 == wPPUpCountAndMaxPP
+	ASSERT wMoveData + MOVE_PP + 1 == wPPUpCountAndMaxPP
 	ld h, d
 	ld l, e
 	inc hl ; hl = wPPUpCountAndMaxPP

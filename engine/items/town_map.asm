@@ -212,7 +212,7 @@ LoadTownMap_Fly::
 	ld [wDestinationMap], a
 	ld hl, wStatusFlags6
 	set BIT_FLY_WARP, [hl]
-	assert wStatusFlags6 + 1 == wStatusFlags7
+	ASSERT wStatusFlags6 + 1 == wStatusFlags7
 	inc hl
 	set BIT_USED_FLY, [hl]
 .pressedB
