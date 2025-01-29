@@ -1,4 +1,4 @@
-CopyDebugName: ; unused
+CopyDebugName:
 	ld bc, NAME_LENGTH
 	jp CopyData
 

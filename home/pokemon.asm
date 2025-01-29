@@ -114,7 +114,11 @@ LoadFrontSpriteByMonIndex::
 	cp NUM_POKEMON + 1
 	jr c, .validDexNumber   ; dex >#151 invalid
 .invalidDexNumber
-	ld a, RHYDON ; $1
+	; This is the so-called "Rhydon trap" or "Rhydon glitch"
+	; to fail-safe invalid dex numbers
+	; (see https://glitchcity.wiki/wiki/Rhydon_trap
+	; or https://bulbapedia.bulbagarden.net/wiki/Rhydon_glitch)
+	ld a, RHYDON
 	ld [wCurPartySpecies], a
 	ret
 .validDexNumber

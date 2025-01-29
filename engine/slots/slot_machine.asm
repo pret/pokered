@@ -298,8 +298,8 @@ SlotMachine_StopWheel1Early:
 	cp HIGH(SLOTSCHERRY)
 	jr nz, .stopWheel
 	ret
-; It looks like this was intended to make the wheel stop when a 7 symbol was
-; visible, but it has a bug and so the wheel stops randomly.
+; Bug: This looks intended to make the wheel stop when a
+; 7 symbol was visible, but instead the wheel stops randomly.
 .sevenAndBarMode
 	ld c, $3
 .loop
