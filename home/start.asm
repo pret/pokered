@@ -1,10 +1,10 @@
 _Start::
-	cp GBC
-	jr z, .gbc
+	cp CGB
+	jr z, .cgb
 	xor a
 	jr .ok
-.gbc
+.cgb
 	ld a, FALSE
 .ok
-	ld [wGBC], a
+	ld [wOnCGB], a
 	jp Init
