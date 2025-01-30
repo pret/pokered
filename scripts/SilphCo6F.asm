@@ -56,7 +56,7 @@ SilphCo6F_TextPointers:
 SilphCo6TrainerHeaders:
 	def_trainers 6
 SilphCo6TrainerHeader0:
-	trainer EVENT_BEAT_SILPH_CO_6F_TRAINER_0, 2, SilphCo6FRocket1BattleText, SilphCo6Rocket1EndBattleText, SilphCo6Rocket1AfterBattleText
+	trainer EVENT_BEAT_SILPH_CO_6F_TRAINER_0, 2, SilphCo6FRocket1BattleText, SilphCo6FRocket1EndBattleText, SilphCo6FRocket1AfterBattleText
 SilphCo6TrainerHeader1:
 	trainer EVENT_BEAT_SILPH_CO_6F_TRAINER_1, 3, SilphCo6FScientistBattleText, SilphCo6FScientistEndBattleText, SilphCo6FScientistAfterBattleText
 SilphCo6TrainerHeader2:
@@ -158,12 +158,12 @@ SilphCo6FRocket1BattleText:
 	text_far _SilphCo6FRocket1BattleText
 	text_end
 
-SilphCo6Rocket1EndBattleText:
-	text_far _SilphCo6Rocket1EndBattleText
+SilphCo6FRocket1EndBattleText:
+	text_far _SilphCo6FRocket1EndBattleText
 	text_end
 
-SilphCo6Rocket1AfterBattleText:
-	text_far _SilphCo6Rocket1AfterBattleText
+SilphCo6FRocket1AfterBattleText:
+	text_far _SilphCo6FRocket1AfterBattleText
 	text_end
 
 SilphCo6FScientistText:
