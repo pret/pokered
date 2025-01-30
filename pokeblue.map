@@ -36,7 +36,7 @@ ROM0 bank #0:
 	         $0100 = Start
 	SECTION: $0150-$3fa5 ($3e56 bytes) ["Home"]
 	         $0150 = _Start
-	         $0157 = _Start.gbc
+	         $0157 = _Start.cgb
 	         $0159 = _Start.ok
 	         $015f = ReadJoypad
 	         $019a = Joypad
@@ -12836,7 +12836,7 @@ ROMX bank #28:
 	         $6002 = SendSGBPacket.nextBit0
 	         $600a = SendSGBPacket.next0
 	         $602b = LoadSGB
-	         $603f = LoadSGB.notGBC
+	         $603f = LoadSGB.notCGB
 	         $6075 = PrepareSuperNintendoVRAMTransfer
 	         $607a = PrepareSuperNintendoVRAMTransfer.loop
 	         $6089 = PrepareSuperNintendoVRAMTransfer.packetPointers
@@ -12851,10 +12851,10 @@ ROMX bank #28:
 	         $614a = Wait7000
 	         $614d = Wait7000.loop
 	         $6156 = SendSGBPackets
-	         $6165 = SendSGBPackets.notGBC
-	         $616d = InitGBCPalettes
-	         $6174 = InitGBCPalettes.loop
-	         $6180 = InitGBCPalettes.noCarry
+	         $6165 = SendSGBPackets.notCGB
+	         $616d = InitCGBPalettes
+	         $6174 = InitCGBPalettes.loop
+	         $6180 = InitCGBPalettes.noCarry
 	         $6187 = EmptyFunc3
 	         $6188 = CopySGBBorderTiles
 	         $618a = CopySGBBorderTiles.tileLoop
@@ -19055,7 +19055,7 @@ WRAM0 bank #0:
 	         $cf14 = wCurSpriteMovement2
 	         $cf17 = wNPCMovementScriptSpriteOffset
 	         $cf18 = wScriptedNPCWalkCounter
-	         $cf1a = wGBC
+	         $cf1a = wOnCGB
 	         $cf1b = wOnSGB
 	         $cf1c = wDefaultPaletteCommand
 	         $cf1d = wWholeScreenPaletteMonSpecies

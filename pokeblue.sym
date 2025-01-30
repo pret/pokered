@@ -11,7 +11,7 @@
 00:00b5 CopyData
 00:0100 Start
 00:0150 _Start
-00:0157 _Start.gbc
+00:0157 _Start.cgb
 00:0159 _Start.ok
 00:015f ReadJoypad
 00:019a Joypad
@@ -12625,7 +12625,7 @@
 1c:6002 SendSGBPacket.nextBit0
 1c:600a SendSGBPacket.next0
 1c:602b LoadSGB
-1c:603f LoadSGB.notGBC
+1c:603f LoadSGB.notCGB
 1c:6075 PrepareSuperNintendoVRAMTransfer
 1c:607a PrepareSuperNintendoVRAMTransfer.loop
 1c:6089 PrepareSuperNintendoVRAMTransfer.packetPointers
@@ -12640,10 +12640,10 @@
 1c:614a Wait7000
 1c:614d Wait7000.loop
 1c:6156 SendSGBPackets
-1c:6165 SendSGBPackets.notGBC
-1c:616d InitGBCPalettes
-1c:6174 InitGBCPalettes.loop
-1c:6180 InitGBCPalettes.noCarry
+1c:6165 SendSGBPackets.notCGB
+1c:616d InitCGBPalettes
+1c:6174 InitCGBPalettes.loop
+1c:6180 InitCGBPalettes.noCarry
 1c:6187 EmptyFunc3
 1c:6188 CopySGBBorderTiles
 1c:618a CopySGBBorderTiles.tileLoop
@@ -18721,7 +18721,7 @@
 00:cf14 wCurSpriteMovement2
 00:cf17 wNPCMovementScriptSpriteOffset
 00:cf18 wScriptedNPCWalkCounter
-00:cf1a wGBC
+00:cf1a wOnCGB
 00:cf1b wOnSGB
 00:cf1c wDefaultPaletteCommand
 00:cf1d wWholeScreenPaletteMonSpecies
