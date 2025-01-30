@@ -26,49 +26,49 @@ _RocketHideoutB4FGiovanniHopeWeMeetAgainText::
 	line "again..."
 	done
 
-_RocketHideoutB4FGiovanniBattleText::
+_RocketHideoutB4FRocket1BattleText::
 	text "I know you! You"
 	line "ruined our plans"
 	cont "at MT.MOON!"
 	done
 
-_RocketHideoutB4FGiovanniEndBattleText::
+_RocketHideoutB4FRocket1EndBattleText::
 	text "Burned"
 	line "again!"
 	prompt
 
-_RocketHideoutB4FGiovanniAfterBattleText::
+_RocketHideoutB4FRocket1AfterBattleText::
 	text "Do you have"
 	line "something against"
 	cont "TEAM ROCKET?"
 	done
 
-_RocketHideoutB4FRocket1BattleText::
+_RocketHideoutB4FRocket2BattleText::
 	text "How can you not"
 	line "see the beauty of"
 	cont "our evil?"
 	done
 
-_RocketHideoutB4FRocket1EndBattleText::
+_RocketHideoutB4FRocket2EndBattleText::
 	text "Ayaya!"
 	prompt
 
-_RocketHideoutB4FRocket1AfterBattleText::
+_RocketHideoutB4FRocket2AfterBattleText::
 	text "BOSS! I'm sorry I"
 	line "failed you!"
 	done
 
-_RocketHideoutB4FRocket2BattleText::
+_RocketHideoutB4FRocket3BattleText::
 	text "The elevator"
 	line "doesn't work? Who"
 	cont "has the LIFT KEY?"
 	done
 
-_RocketHideoutB4FRocket2EndBattleText::
+_RocketHideoutB4FRocket3EndBattleText::
 	text "No!"
 	prompt
 
-_RocketHideoutB4FRocket2AfterBattleText::
+_RocketHideoutB4FRocket3AfterBattleText::
 	text "Oh no! I dropped"
 	line "the LIFT KEY!"
 	done

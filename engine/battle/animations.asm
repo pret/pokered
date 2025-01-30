@@ -1935,7 +1935,7 @@ AnimationSubstitute:
 ; Changes the pokemon's sprite to the mini sprite
 	ld hl, wTempPic
 	xor a
-	ld bc, $310
+	ld bc, 7 * 7 tiles
 	call FillMemory
 	ldh a, [hWhoseTurn]
 	and a
@@ -2120,7 +2120,7 @@ GetMonSpriteTileMapPointerFromRowCount:
 	ldh a, [hWhoseTurn]
 	and a
 	jr nz, .enemyTurn
-	ld a, 20 * 5 + 1
+	ld a, 5 * SCREEN_WIDTH + 1
 	jr .next
 .enemyTurn
 	ld a, 12
@@ -2133,7 +2133,7 @@ GetMonSpriteTileMapPointerFromRowCount:
 	sub b
 	and a
 	jr z, .done
-	ld de, 20
+	ld de, SCREEN_WIDTH
 .loop
 	add hl, de
 	dec a
@@ -2294,7 +2294,7 @@ CopyTileIDs:
 	dec c
 	jr nz, .columnLoop
 	pop hl
-	ld bc, 20
+	ld bc, SCREEN_WIDTH
 	add hl, bc
 	pop bc
 	dec b

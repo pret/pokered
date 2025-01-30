@@ -106,8 +106,8 @@ ENDM
 ;\1 event flag
 ;\2 view range
 ;\3 TextBeforeBattle
-;\4 TextAfterBattle
-;\5 TextEndBattle
+;\4 TextEndBattle
+;\5 TextAfterBattle
 MACRO trainer
 	DEF _ev_bit = \1 % 8
 	DEF _cur_bit = CURRENT_TRAINER_BIT % 8
