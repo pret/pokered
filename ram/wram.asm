@@ -1029,7 +1029,8 @@ wScriptedNPCWalkCounter:: db
 
 	ds 1
 
-wGBC:: db
+; always 0 since full CGB support was not implemented
+wOnCGB:: db
 
 ; if running on SGB, it's 1, else it's 0
 wOnSGB:: db

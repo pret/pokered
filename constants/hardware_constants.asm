@@ -1,6 +1,6 @@
-; From http://nocash.emubase.de/pandocs.htm.
+; From https://problemkaputt.de/pandocs.htm
 
-DEF GBC EQU $11
+DEF CGB EQU $11
 
 ; MBC1
 DEF MBC1SRamEnable      EQU $0000
