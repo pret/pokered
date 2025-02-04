@@ -427,7 +427,7 @@ ConditionValueC = {dws_ R_CHAR        O_CHAR          C_CHAR          K_CHAR    
 [FPA 76 Begin@Reduce_move_anim_flashing_Explosion]                                                  
 Mode = 3                                                         
 Type = 0                                                         
-Address = 0x78186                                              
+Address = {hex @}                                              
 MotionBEnable0 = 3                                               
 MotionBlur0 = 28                                                 
 ConditionType = 0                                                
