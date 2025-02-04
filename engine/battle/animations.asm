@@ -2681,6 +2681,7 @@ AnimCopyRowRight:
 	ret
 
 ; get the sound of the move id in b
+; TODO: remove unused code?
 GetMoveSoundB:
 	ld a, b
 	call GetMoveSound

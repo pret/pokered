@@ -1291,6 +1291,7 @@ ChampArenaAI:
 	jr FullRestore50Percent ; otherwise has 50% chance to use full restore when HP is below 1/5th of max
 .useFullHeal
 	pop af
+	; TODO: check if low health, full restore if low and status instead of full heal
 	jp AIUseFullHeal
 
 

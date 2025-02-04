@@ -91,7 +91,6 @@ wChannel3Transposition::db
 wAudioFlags::db
 wChannel5Transposition::db
 wChannel6Transposition::db
-
 	; unused audio wram 4 bytes
 ENDU
 
@@ -189,11 +188,7 @@ wSerialPartyMonsPatchList:: ds 200
 wSerialEnemyMonsPatchList:: ds 200
 ENDU
 
-UNION
 	ds 80
-NEXTU
-	; unused tilemap wram 80 bytes
-ENDU
 
 
 SECTION "Overworld Map", WRAM0
@@ -1790,7 +1785,7 @@ wPokeBallCaptureCalcTemp::
 ; lower nybble: number of shakes
 ; upper nybble: number of animations to play
 wPokeBallAnimData::
-	db
+	db ; wd11e
 
 ; When this value is non-zero, the player isn't allowed to exit the party menu
 ; by pressing B and not choosing a mon.

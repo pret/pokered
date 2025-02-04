@@ -80,7 +80,7 @@ PredefPointers::
 	add_predef CanLearnTM
 	add_predef TMToMove
 	add_predef _RunPaletteCommand
-	add_predef StarterDex
+	add_predef StarterDex ; TODO: is this necessary to be a predef, it's barely used
 	add_predef _AddPartyMon
 	add_predef UpdateHPBar2
 	add_predef DrawEnemyHUDAndHPBar

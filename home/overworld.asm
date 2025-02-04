@@ -390,11 +390,13 @@ BattleOccurred::
 	set BIT_MAP_LOADED_AFTER_BATTLE, [hl] ; PureRGBnote: ADDED: new bit indicating we reloaded a map from a battle 
 	xor a
 	ldh [hJoyHeld], a
+;;;;; TODO: remove pointless crap?
 	ld a, [wCurMap]
 	cp CINNABAR_GYM
 	jr nz, .notCinnabarGym
 	SetEvent EVENT_2A7
 .notCinnabarGym
+;;;;;
 	ld hl, wStatusFlags4
 	set BIT_BATTLE_OVER_OR_BLACKOUT, [hl]
 	ld a, [wCurMap]
