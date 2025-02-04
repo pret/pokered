@@ -80,10 +80,10 @@ _DexRatingText_Own90To99::
 	done
 
 _DexRatingText_Own100To109::
-	text "You finally got at"
+	text "I can't believe"
+	line "how good you are!"
+	para "You finally got at"
 	line "least 100 species!"
-	cont "I can't believe"
-	cont "how good you are!"
 	done
 
 _DexRatingText_Own110To119::
@@ -112,7 +112,7 @@ _DexRatingText_Own140To149::
 	done
 
 _DexRatingText_Own150To151::
-	text "Your #DEX is"
+	text "Congratulations!"
+	para "Your #DEX is"
 	line "entirely complete!"
-	cont "Congratulations!"
 	done
