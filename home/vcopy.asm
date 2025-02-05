@@ -127,46 +127,40 @@ AutoBgMapTransfer::
 	ldh a, [hAutoBGTransferEnabled]
 	and a
 	ret z
-	ld hl, sp + 0
-	ld a, h
-	ldh [hSPTemp], a
-	ld a, l
-	ldh [hSPTemp + 1], a ; save stack pointer
+;;;;;;;; PureRGBnote: OPTIMIZED 
+;;;; 11 cycles
+	;ld hl, sp + 0
+	;ld a, h
+	;ldh [hSPTemp], a
+	;ld a, l
+	;ldh [hSPTemp + 1], a ; save stack pointer
+;;;; 5 cycles
+	ld [hSPTemp], sp
+;;;;;;;;
+;;;;;;;; PureRGBnote: OPTIMIZED
+	ld sp, hAutoBGTransferDest
+    pop hl
 	ldh a, [hAutoBGTransferPortion]
 	and a
 	jr z, .transferTopThird
 	dec a
 	jr z, .transferMiddleThird
 .transferBottomThird
-	hlcoord 0, 12
-	ld sp, hl
-	ldh a, [hAutoBGTransferDest + 1]
-	ld h, a
-	ldh a, [hAutoBGTransferDest]
-	ld l, a
+    coord sp, 0, 12
 	ld de, (12 * 32)
 	add hl, de
 	xor a ; TRANSFERTOP
 	jr .doTransfer
 .transferTopThird
-	hlcoord 0, 0
-	ld sp, hl
-	ldh a, [hAutoBGTransferDest + 1]
-	ld h, a
-	ldh a, [hAutoBGTransferDest]
-	ld l, a
+    coord sp, 0, 0
 	ld a, TRANSFERMIDDLE
 	jr .doTransfer
 .transferMiddleThird
-	hlcoord 0, 6
-	ld sp, hl
-	ldh a, [hAutoBGTransferDest + 1]
-	ld h, a
-	ldh a, [hAutoBGTransferDest]
-	ld l, a
+    coord sp, 0, 6
 	ld de, (6 * 32)
 	add hl, de
 	ld a, TRANSFERBOTTOM
+;;;;;;;;
 .doTransfer
 	ldh [hAutoBGTransferPortion], a ; store next portion
 	ld b, 6
@@ -194,10 +188,16 @@ ENDR
 	dec b
 	jr nz, TransferBgRows
 
-	ldh a, [hSPTemp]
-	ld h, a
-	ldh a, [hSPTemp + 1]
-	ld l, a
+;;;;;;;; PureRGBnote: OPTIMIZED
+;;;;; 8 cycles
+	;ldh a, [hSPTemp]
+	;ld h, a
+	;ldh a, [hSPTemp + 1]
+	;ld l, a
+;;;;; 6 cycles
+	ld sp, hSPTemp
+	pop hl
+;;;;;;;;
 	ld sp, hl
 	ret
 
@@ -207,15 +207,22 @@ VBlankCopyBgMap::
 	ldh a, [hVBlankCopyBGSource] ; doubles as enabling byte
 	and a
 	ret z
-	ld hl, sp + 0
-	ld a, h
-	ldh [hSPTemp], a
-	ld a, l
-	ldh [hSPTemp + 1], a ; save stack pointer
-	ldh a, [hVBlankCopyBGSource]
-	ld l, a
-	ldh a, [hVBlankCopyBGSource + 1]
-	ld h, a
+;;;;;;;; PureRGBnote: OPTIMIZED
+;;;;; 19 cycles
+	;ld hl, sp + 0
+	;ld a, h
+	;ldh [hSPTemp], a
+	;ld a, l
+	;ldh [hSPTemp + 1], a ; save stack pointer
+	;ldh a, [hVBlankCopyBGSource]
+	;ld l, a
+	;ldh a, [hVBlankCopyBGSource + 1]
+	;ld h, a
+;;;;; 11 cycles
+	ld [hSPTemp], sp
+	ld sp, hVBlankCopyBGSource
+	pop hl
+;;;;;;;;
 	ld sp, hl
 	ldh a, [hVBlankCopyBGDest]
 	ld l, a
@@ -239,17 +246,23 @@ VBlankCopyDouble::
 	ldh a, [hVBlankCopyDoubleSize]
 	and a
 	ret z
+;;;;;;;; PureRGBnote: OPTIMIZED
+;;;; 19 cycles
+	;ld hl, sp + 0
+	;ld a, h
+	;ldh [hSPTemp], a
+	;ld a, l
+	;ldh [hSPTemp + 1], a
 
-	ld hl, sp + 0
-	ld a, h
-	ldh [hSPTemp], a
-	ld a, l
-	ldh [hSPTemp + 1], a
-
-	ldh a, [hVBlankCopyDoubleSource]
-	ld l, a
-	ldh a, [hVBlankCopyDoubleSource + 1]
-	ld h, a
+	;ldh a, [hVBlankCopyDoubleSource]
+	;ld l, a
+	;ldh a, [hVBlankCopyDoubleSource + 1]
+	;ld h, a
+;;;; 11 cycles
+	ld [hSPTemp], sp
+	ld sp, hVBlankCopyDoubleSource
+	pop hl
+;;;;;;;;
 	ld sp, hl
 
 	ldh a, [hVBlankCopyDoubleDest]
@@ -263,49 +276,66 @@ VBlankCopyDouble::
 	ldh [hVBlankCopyDoubleSize], a
 
 .loop
-REPT LEN_2BPP_TILE / 4 - 1
+;;;;;;;; PureRGBnote: OPTIMIZED
+;;;; More cycles
+;REPT LEN_2BPP_TILE / 4 - 1
+;	pop de
+;	ld [hl], e
+;	inc l
+;	ld [hl], e
+;	inc l
+;	ld [hl], d
+;	inc l
+;	ld [hl], d
+;	inc l
+;ENDR
+;	pop de
+;	ld [hl], e
+;	inc l
+;	ld [hl], e
+;	inc l
+;	ld [hl], d
+;	inc l
+;	ld a, d
+;	ld [hli], a
+;;;; Less cycles
+REPT LEN_2BPP_TILE / 4
 	pop de
-	ld [hl], e
-	inc l
-	ld [hl], e
-	inc l
-	ld [hl], d
-	inc l
-	ld [hl], d
-	inc l
-ENDR
-	pop de
-	ld [hl], e
-	inc l
-	ld [hl], e
-	inc l
-	ld [hl], d
-	inc l
-; PureRGBnote: OPTIMIZED
+	ld a, e
+	ld [hli], a
+	ld [hli], a
 	ld a, d
 	ld [hli], a
-	;ld [hl], d
-	;inc hl
+	ld [hli], a
+ENDR
+;;;;;;;;
 	dec b
 	jr nz, .loop
+;;;;;;;; PureRGBnote: OPTIMIZED
+;;;; 27 cycles
+	;ld a, l
+	;ldh [hVBlankCopyDoubleDest], a
+	;ld a, h
+	;ldh [hVBlankCopyDoubleDest + 1], a
 
-	ld a, l
-	ldh [hVBlankCopyDoubleDest], a
-	ld a, h
-	ldh [hVBlankCopyDoubleDest + 1], a
+	;ld hl, sp + 0
+	;ld a, l
+	;ldh [hVBlankCopyDoubleSource], a
+	;ld a, h
+	;ldh [hVBlankCopyDoubleSource + 1], a
 
-	ld hl, sp + 0
-	ld a, l
-	ldh [hVBlankCopyDoubleSource], a
-	ld a, h
-	ldh [hVBlankCopyDoubleSource + 1], a
-
-	ldh a, [hSPTemp]
-	ld h, a
-	ldh a, [hSPTemp + 1]
-	ld l, a
+	;ldh a, [hSPTemp]
+	;ld h, a
+	;ldh a, [hSPTemp + 1]
+	;ld l, a
+;;;; 18 cycles
+	ld [hVBlankCopyDoubleSource], sp
+	ld sp, hVBlankCopyDoubleDest + 2
+	push hl
+	ld sp, hSPTemp
+	pop hl
+;;;;;;;;	
 	ld sp, hl
-
 	ret
 
 
@@ -319,17 +349,23 @@ VBlankCopy::
 	ldh a, [hVBlankCopySize]
 	and a
 	ret z
+;;;;;;;; PureRGBnote: OPTIMIZED
+;;;; 19 cycles
+	;ld hl, sp + 0
+	;ld a, h
+	;ldh [hSPTemp], a
+	;ld a, l
+	;ldh [hSPTemp + 1], a
 
-	ld hl, sp + 0
-	ld a, h
-	ldh [hSPTemp], a
-	ld a, l
-	ldh [hSPTemp + 1], a
-
-	ldh a, [hVBlankCopySource]
-	ld l, a
-	ldh a, [hVBlankCopySource + 1]
-	ld h, a
+	;ldh a, [hVBlankCopySource]
+	;ld l, a
+	;ldh a, [hVBlankCopySource + 1]
+	;ld h, a
+;;;; 11 cycles
+	ld [hSPTemp], sp
+	ld sp, hVBlankCopySource
+	pop hl
+;;;;;;;;
 	ld sp, hl
 
 	ldh a, [hVBlankCopyDest]
@@ -343,41 +379,43 @@ VBlankCopy::
 	ldh [hVBlankCopySize], a
 
 .loop
-REPT LEN_2BPP_TILE / 2 - 1
+;;;;;;;; PureRGBnote: OPTIMIZED
+REPT LEN_2BPP_TILE / 2
 	pop de
-	ld [hl], e
-	inc l
-	ld [hl], d
-	inc l
-ENDR
-	pop de
-	ld [hl], e
-	inc l
-; PureRGBnote: OPTIMIZED
+	ld a, e
+	ld [hli], a
 	ld a, d
 	ld [hli], a
-	;ld [hl], d
-	;inc hl
+ENDR
+;;;;;;;;
 	dec b
 	jr nz, .loop
 
-	ld a, l
-	ldh [hVBlankCopyDest], a
-	ld a, h
-	ldh [hVBlankCopyDest + 1], a
+;;;;;;;; PureRGBnote: OPTIMIZED
+;;;; 27 cycles
+	;ld a, l
+	;ldh [hVBlankCopyDest], a
+	;ld a, h
+	;ldh [hVBlankCopyDest + 1], a
 
-	ld hl, sp + 0
-	ld a, l
-	ldh [hVBlankCopySource], a
-	ld a, h
-	ldh [hVBlankCopySource + 1], a
+	;ld hl, sp + 0
+	;ld a, l
+	;ldh [hVBlankCopySource], a
+	;ld a, h
+	;ldh [hVBlankCopySource + 1], a
 
-	ldh a, [hSPTemp]
-	ld h, a
-	ldh a, [hSPTemp + 1]
-	ld l, a
+	;ldh a, [hSPTemp]
+	;ld h, a
+	;ldh a, [hSPTemp + 1]
+	;ld l, a
+;;;; 18 cycles
+	ld [hVBlankCopySource], sp
+	ld sp, hVBlankCopyDest + 2
+	push hl
+	ld sp, hSPTemp
+	pop hl
+;;;;;;;;
 	ld sp, hl
-
 	ret
 
 
