@@ -1,6 +1,11 @@
 SFX_Shooting_Star_Ch5:
+IF DEF(_BLUE)
 	duty_cycle_pattern 3, 2, 1, 0
 	pitch_sweep 2, -7
+ELSE
+	duty_cycle 2
+	pitch_sweep 5, -7
+ENDC
 	square_note 4, 4, 0, 2016
 	square_note 4, 6, 0, 2016
 	square_note 4, 8, 0, 2016
