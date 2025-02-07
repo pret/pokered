@@ -6,10 +6,17 @@
 DEF ANIMATION_END EQU 80
 
 PlayIntro:
+IF DEF(_BLUE)
 	xor a
 	ldh [hJoyHeld], a
 	inc a
 	ldh [hAutoBGTransferEnabled], a
+ELSE
+	ld a, 1
+	ldh [hAutoBGTransferEnabled], a
+	xor a
+	ldh [hJoyHeld], a
+ENDC
 	call PlayShootingStar
 	call PlayIntroScene
 	call GBFadeOutToWhite
@@ -31,7 +38,11 @@ PlayIntroScene:
 	ldh [hSCX], a
 	ld b, TILEMAP_GENGAR_INTRO_1
 	call IntroCopyTiles
+IF DEF(_BLUE)
 	ld a, 0
+ELSE
+	ld a, 8 ; Nidorino is 8px further over Jigglypuff in the JP Red and Green
+ENDC
 	ld [wBaseCoordX], a
 	ld a, 80
 	ld [wBaseCoordY], a
@@ -115,8 +126,13 @@ PlayIntroScene:
 	ld [wIntroNidorinoBaseTile], a
 	ld de, IntroNidorinoAnimation4
 	call AnimateIntroNidorino
+IF DEF(_BLUE)
 ; hop
 	ld a, SFX_INTRO_HOP
+ELSE
+; hip
+	ld a, SFX_INTRO_HOP
+ENDC
 	call PlaySound
 	ld de, IntroNidorinoAnimation5
 	call AnimateIntroNidorino
@@ -138,7 +154,13 @@ PlayIntroScene:
 	ld a, (FightIntroFrontMon3 - FightIntroFrontMon) / LEN_2BPP_TILE
 	ld [wIntroNidorinoBaseTile], a
 	ld de, IntroNidorinoAnimation7
+IF DEF(_BLUE)
 	jp AnimateIntroNidorino
+ELSE
+	call AnimateIntroNidorino
+	ld c, 80
+	jp CheckForUserInterruption
+ENDC
 
 AnimateIntroNidorino:
 	ld a, [de]
@@ -324,7 +346,7 @@ PlayShootingStar:
 	call DelayFrames
 	farcall AnimateShootingStar
 	push af
-	; A `call LoadPresentsGraphic` here was removed in localization
+	call LoadPresentsGraphic
 	pop af
 	jr c, .next ; skip the delay if the user interrupted the animation
 	ld c, 40
@@ -356,12 +378,14 @@ IntroDrawBlackBars:
 	ld c,  BG_MAP_WIDTH * 4
 	jp IntroPlaceBlackTiles
 
-LoadPresentsGraphic: ; unreferenced
-	; This routine loaded the "PRESENTS" text graphic (tiles
-	; $67, $68, $69, $6A, $6B, and $6C from gamefreak_presents.2bpp)
-	; at coordinates (11, 7) in the Japanese versions.
-	; It was dummied out in the English localization.
-	ret
+LoadPresentsGraphic:
+	hlcoord 7, 11
+	ld de, PresentsTextString
+	jp PlaceString
+
+PresentsTextString:
+	db $67, $68, $69, $6A, $6B, $6C ; PRESENTS
+	db "@"
 
 IntroNidorinoAnimation0:
 	db 0, 0
