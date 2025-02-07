@@ -1,4 +1,4 @@
-IF DEF(BLUE)
+IF DEF(_BLUE)
 SECTION "Pics 1", ROMX
 
 RhydonPicFront::      INCBIN "gfx/pokemon/front/rhydon.pic"
@@ -192,12 +192,6 @@ PoliwhirlPicFront::   INCBIN "gfx/pokemon/front/poliwhirl.pic"
 PoliwhirlPicBack::    INCBIN "gfx/pokemon/back/poliwhirlb.pic"
 PoliwrathPicFront::   INCBIN "gfx/pokemon/front/poliwrath.pic"
 PoliwrathPicBack::    INCBIN "gfx/pokemon/back/poliwrathb.pic"
-WeedlePicFront::      INCBIN "gfx/pokemon/front/weedle.pic"
-WeedlePicBack::       INCBIN "gfx/pokemon/back/weedleb.pic"
-KakunaPicFront::      INCBIN "gfx/pokemon/front/kakuna.pic"
-KakunaPicBack::       INCBIN "gfx/pokemon/back/kakunab.pic"
-BeedrillPicFront::    INCBIN "gfx/pokemon/front/beedrill.pic"
-BeedrillPicBack::     INCBIN "gfx/pokemon/back/beedrillb.pic"
 
 FossilKabutopsPic::   INCBIN "gfx/pokemon/front/fossilkabutops.pic"
 
@@ -334,6 +328,7 @@ VictreebelPicFront::   INCBIN "gfx/pokemon/front/victreebel.pic"
 VictreebelPicBack::    INCBIN "gfx/pokemon/back/victreebelb.pic"
 
 ELSE
+
 SECTION "Pics 1", ROMX
 
 RhydonPicFront::      INCBIN "gfx/pokemon/front_rg/rhydon.pic"
