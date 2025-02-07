@@ -31,9 +31,15 @@ DisplayTitleScreen:
 	ldh [hAutoBGTransferEnabled], a
 	xor a
 	ldh [hTileAnimations], a
+IF DEF(_BLUE)
 	ldh [hSCX], a
 	ld a, $40
 	ldh [hSCY], a
+ELSE
+	ldh [hSCY], a
+	ld a, -112
+	ldh [hSCX], a
+ENDC
 	ld a, $90
 	ldh [hWY], a
 	call ClearScreen
@@ -156,9 +162,18 @@ ENDC
 	ld a, %11100100
 	ldh [rOBP0], a
 
+IF DEF(_BLUE)
 ; make pokemon logo bounce up and down
 	ld bc, hSCY ; background scroll Y
 	ld hl, .TitleScreenPokemonLogoYScrolls
+ELSE
+	ld a, SFX_INTRO_WHOOSH
+	call PlaySound
+	
+; make pokemon logo slide in from the right
+	ld bc, hSCX ; background scroll X
+	ld hl, .TitleScreenPokemonLogoXScrolls
+ENDC
 .bouncePokemonLogoLoop
 	ld a, [hli]
 	and a
@@ -174,6 +189,7 @@ ENDC
 	call .ScrollTitleScreenPokemonLogo
 	jr .bouncePokemonLogoLoop
 
+IF DEF(_BLUE)
 .TitleScreenPokemonLogoYScrolls:
 ; Controls the bouncing effect of the Pokemon logo on the title screen
 	db -4,16  ; y scroll amount, number of times to scroll
@@ -183,6 +199,10 @@ ENDC
 	db -2,2
 	db 1,2
 	db -1,2
+ELSE
+	.TitleScreenPokemonLogoXScrolls:
+	db 4,28  ; y scroll amount, number of times to scroll
+ENDC
 	db 0      ; terminate list with 0
 
 .ScrollTitleScreenPokemonLogo:
@@ -198,15 +218,22 @@ ENDC
 
 .finishedBouncingPokemonLogo
 	call LoadScreenTilesFromBuffer1
+IF DEF(_BLUE)
 	ld c, 36
+ELSE
+	ld c, $14
+ENDC
 	call DelayFrames
+IF DEF(_BLUE)
 	ld a, SFX_INTRO_WHOOSH
 	call PlaySound
+ENDC
 
 ; scroll game version in from the right
 	call PrintGameVersionOnTitleScreen
 	ld a, SCREEN_HEIGHT_PX
 	ldh [hWY], a
+IF DEF(_BLUE)
 	ld d, 144
 .scrollTitleScreenGameVersionLoop
 	ld h, d
@@ -220,13 +247,18 @@ ENDC
 	ld d, a
 	and a
 	jr nz, .scrollTitleScreenGameVersionLoop
+ELSE
+	call Delay3
+ENDC
 
 	ld a, HIGH(vBGMap1)
 	call TitleScreenCopyTileMapToVRAM
 	call LoadScreenTilesFromBuffer2
 	call PrintGameVersionOnTitleScreen
 	call Delay3
+IF DEF(_BLUE)
 	call WaitForSoundToFinish
+ENDC
 	ld a, MUSIC_TITLE_SCREEN
 	ld [wNewSoundID], a
 	call PlaySound
@@ -235,14 +267,20 @@ ENDC
 
 ; Keep scrolling in new mons indefinitely until the user performs input.
 .awaitUserInterruptionLoop
+IF DEF(_BLUE)
 	ld c, 200
+ELSE
+	ld c, $ff ;Pokemon Scroll fast in JP R/G
+ENDC
 	call CheckForUserInterruption
 	jr c, .finishedWaiting
 	call TitleScreenScrollInMon
+IF DEF(_BLUE)
 	ld c, 1
 	call CheckForUserInterruption
 	jr c, .finishedWaiting
 	farcall TitleScreenAnimateBallIfStarterOut
+ENDC
 	call TitleScreenPickNewMon
 	jr .awaitUserInterruptionLoop
 
@@ -254,7 +292,11 @@ ENDC
 	call ClearSprites
 	xor a
 	ldh [hWY], a
+IF DEF(_BLUE)
 	inc a
+ELSE
+	ld a, 1
+ENDC
 	ldh [hAutoBGTransferEnabled], a
 	call ClearScreen
 	ld a, HIGH(vBGMap0)

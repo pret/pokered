@@ -1,3 +1,4 @@
+IF DEF(_BLUE)
 TitleScroll_WaitBall:
 ; Wait around for the TitleBall animation to play out.
 ; hi: speed
@@ -15,22 +16,37 @@ TitleScroll_Out:
 ; hi: speed
 ; lo: duration
 	db $12, $22, $32, $42, $52, $62, $83, $93, 0
+ENDC
 
 TitleScroll:
 	ld a, d
 
+IF DEF(_BLUE)
 	ld bc, TitleScroll_In
 	ld d, $88
 	ld e, 0 ; don't animate titleball
+ELSE
+	lb bc, $8, $14
+ENDC
 
 	and a
+IF DEF(_BLUE)
 	jr nz, .ok
+ELSE
+	jr z, .ok
+ENDC
 
+IF DEF(_BLUE)
 	ld bc, TitleScroll_Out
 	ld d, $00
 	ld e, 0 ; don't animate titleball
+ELSE
+	ld d, $a0
+	ld c, $c
+ENDC
 .ok
 
+IF DEF(_BLUE)
 _TitleScroll:
 	ld a, [bc]
 	and a
@@ -46,6 +62,7 @@ _TitleScroll:
 	and $f0
 	swap a
 	ld b, a
+ENDC
 
 .loop
 	ld h, d
@@ -60,12 +77,21 @@ _TitleScroll:
 	add b
 	ld d, a
 
+IF DEF(_BLUE)
 	call GetTitleBallY
+ENDC
 	dec c
 	jr nz, .loop
+IF DEF(_BLUE)
+	; nothing
+ELSE
+	ret
+ENDC
 
+IF DEF(_BLUE)
 	pop bc
 	jr _TitleScroll
+ENDC
 
 .ScrollBetween:
 .wait
@@ -82,14 +108,11 @@ _TitleScroll:
 	jr z, .wait2
 	ret
 
+IF DEF(_BLUE)
 TitleBallYTable:
 ; OBJ y-positions for the Poke Ball held by Red in the title screen.
 ; This is really two 0-terminated lists. Initiated with an index of 1.
-IF DEF(_BLUE)
 	db 0, $71, $6f, $6e, $6d, $6c, $6d, $6e, $6f, $71, $74, 0
-ELSE
-	db 0, $70, 0
-ENDC
 
 TitleScreenAnimateBallIfStarterOut:
 ; Animate the TitleBall if a starter just got scrolled out.
@@ -122,3 +145,4 @@ GetTitleBallY:
 	ld [wShadowOAMSprite10YCoord], a
 	inc e
 	ret
+ENDC
