@@ -8,7 +8,7 @@ IF DEF(_RED)
 	db SCYTHER,  25
 	db PORYGON,  26
 ENDC
-IF DEF(_BLUE)
+IF DEF(_GREEN)
 	db ABRA,      6
 	db CLEFAIRY, 12
 	db NIDORINO, 17
@@ -16,4 +16,13 @@ IF DEF(_BLUE)
 	db PINSIR,   20
 	db DRATINI,  24
 	db PORYGON,  18
+ENDC
+IF DEF(_BLUE)
+	db ABRA,      6
+	db PIKACHU,  12
+	db HORSEA,   18
+	
+	db CLEFABLE, 24
+	db DRAGONAIR, 30
+	db PORYGON,  22
 ENDC

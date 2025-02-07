@@ -356,13 +356,23 @@ INCLUDE "data/maps/objects/SafariZoneNorthRestHouse.asm"
 
 INCLUDE "data/maps/headers/CeruleanCave2F.asm"
 INCLUDE "scripts/CeruleanCave2F.asm"
+IF DEF(_BLUE)
+INCLUDE "data/maps/objects/CeruleanCave2F_b.asm"
+CeruleanCave2F_Blocks: INCBIN "maps/CeruleanCave2F_b.blk"
+ELSE
 INCLUDE "data/maps/objects/CeruleanCave2F.asm"
 CeruleanCave2F_Blocks: INCBIN "maps/CeruleanCave2F.blk"
+ENDC
 
 INCLUDE "data/maps/headers/CeruleanCaveB1F.asm"
 INCLUDE "scripts/CeruleanCaveB1F.asm"
+IF DEF(_BLUE)
+INCLUDE "data/maps/objects/CeruleanCaveB1F_b.asm"
+CeruleanCaveB1F_Blocks: INCBIN "maps/CeruleanCaveB1F_b.blk"
+ELSE
 INCLUDE "data/maps/objects/CeruleanCaveB1F.asm"
 CeruleanCaveB1F_Blocks: INCBIN "maps/CeruleanCaveB1F.blk"
+ENDC
 
 INCLUDE "data/maps/headers/RockTunnelB1F.asm"
 INCLUDE "scripts/RockTunnelB1F.asm"
@@ -1125,9 +1135,13 @@ INCLUDE "data/maps/objects/PewterMart.asm"
 
 INCLUDE "data/maps/headers/CeruleanCave1F.asm"
 INCLUDE "scripts/CeruleanCave1F.asm"
+IF DEF(_BLUE)
+INCLUDE "data/maps/objects/CeruleanCave1F_b.asm"
+CeruleanCave1F_Blocks: INCBIN "maps/CeruleanCave1F_b.blk"
+ELSE
 INCLUDE "data/maps/objects/CeruleanCave1F.asm"
 CeruleanCave1F_Blocks: INCBIN "maps/CeruleanCave1F.blk"
-
+ENDC
 INCLUDE "data/maps/headers/CeruleanBadgeHouse.asm"
 INCLUDE "scripts/CeruleanBadgeHouse.asm"
 INCLUDE "data/maps/objects/CeruleanBadgeHouse.asm"

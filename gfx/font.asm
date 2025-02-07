@@ -13,7 +13,12 @@ BattleHudTiles2: INCBIN "gfx/battle/battle_hud_2.1bpp"
 BattleHudTiles3: INCBIN "gfx/battle/battle_hud_3.1bpp"
 BattleHudTiles3End:
 
-NintendoCopyrightLogoGraphics: INCBIN "gfx/splash/copyright.2bpp"
+NintendoCopyrightLogoGraphics:
+IF DEF(_BLUE)
+INCBIN "gfx/splash/copyright_b.2bpp"
+ELSE
+INCBIN "gfx/splash/copyright.2bpp"
+ENDC
 
 GameFreakLogoGraphics: INCBIN "gfx/title/gamefreak_inc.2bpp"
 GameFreakLogoGraphicsEnd:
@@ -27,5 +32,11 @@ PokedexTileGraphicsEnd:
 WorldMapTileGraphics: INCBIN "gfx/town_map/town_map.2bpp"
 WorldMapTileGraphicsEnd:
 
-PlayerCharacterTitleGraphics: INCBIN "gfx/title/player.2bpp"
+PlayerCharacterTitleGraphics:
+IF DEF(_BLUE)
+INCBIN "gfx/title/player_b.2bpp"
+ELSE
+INCBIN "gfx/title/player.2bpp"
+ENDC
+
 PlayerCharacterTitleGraphicsEnd:

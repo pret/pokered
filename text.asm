@@ -269,9 +269,11 @@ INCLUDE "data/text/text_7.asm"
 
 
 SECTION "Pokédex Text", ROMX
-
+IF DEF(_BLUE)
+INCLUDE "data/pokemon/dex_text_b.asm"
+ELSE
 INCLUDE "data/pokemon/dex_text.asm"
-
+ENDC
 
 SECTION "Move Names", ROMX
 
