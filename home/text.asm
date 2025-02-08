@@ -59,12 +59,15 @@ PlaceNextChar::
 	ret
 
 .NotTerminator
+	cp "<LF>" ; used on town map for names
+	jr z, .line_feed
 	cp "<NEXT>"
 	jr nz, .NotNext
 	ld bc, 2 * SCREEN_WIDTH
 	ldh a, [hUILayoutFlags]
 	bit BIT_SINGLE_SPACED_LINES, a
 	jr z, .ok
+.line_feed
 	ld bc, SCREEN_WIDTH
 .ok
 	pop hl
