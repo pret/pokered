@@ -200,12 +200,12 @@ _ArcanineDexEntry::
 
 _MewDexEntry::
 	text "So rare that it"
-	next "is still said to"
-	next "be a mirage by"
+	next "is still called a"
+	next "mirage #MON."
 
-	page "many experts. Only"
-	next "a few people have"
-	next "seen it worldwide"
+	page "Only a few people"
+	next "have seen it in"
+	next "the whole country"
 	dex
 
 _GyaradosDexEntry::
@@ -1506,4 +1506,9 @@ _VictreebelDexEntry::
 	page "although no one"
 	next "has ever returned"
 	next "from there"
+	dex
+
+_MissingNoDexEntry::
+	text "Comment to be"
+	next "written"
 	dex

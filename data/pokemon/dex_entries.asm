@@ -1259,7 +1259,16 @@ VictreebelDexEntry:
 	text_end
 
 MissingNoDexEntry:
+IF DEF(_BLUE)
 	db "???@"
+ELSE
+	db "@" 
+ENDC
 	db 10 ; 1.0 m
 	dw 100 ; 10.0 kg
-	db "To be written@" ; コメント作成中 (Comment to be written)
+IF DEF(_BLUE)
+	text_far _MissingNoDexEntry
+	text_end
+ELSE
+	db "@"
+ENDC
