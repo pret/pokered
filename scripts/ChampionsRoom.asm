@@ -5,7 +5,7 @@ ChampionsRoom_Script:
 	jp CallFunctionInTable
 
 ResetRivalScript:
-	xor a ; SCENE_CHAMPIONSROOM_DEFAULT
+	xor a ; SCRIPT_CHAMPIONSROOM_DEFAULT
 	ld [wJoyIgnore], a
 	ld [wChampionsRoomCurScript], a
 	ret

@@ -1,5 +1,5 @@
 PokedexEntryPointers:
-	table_width 2, PokedexEntryPointers
+	table_width 2
 	dw RhydonDexEntry
 	dw KangaskhanDexEntry
 	dw NidoranMDexEntry

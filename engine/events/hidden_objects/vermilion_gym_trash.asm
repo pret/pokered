@@ -47,7 +47,7 @@ GymTrashScript:
 	add hl, de
 	ld a, [hli]
 
-; There is a bug in this code. It should calculate a value in the range [0, 3]
+; Bug: This code should calculate a value in the range [0, 3],
 ; but if the mask and random number don't have any 1 bits in common, then
 ; the result of the AND will be 0. When 1 is subtracted from that, the value
 ; will become $ff. This will result in 255 being added to hl, which will cause

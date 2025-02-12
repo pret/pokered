@@ -2214,8 +2214,7 @@ AnimationMinimizeMon:
 
 MinimizedMonSprite:
 ; 8x5 partial tile graphic
-pusho
-opt b.X ; . = 0, X = 1
+pusho b.X ; . = 0, X = 1
 	db %...XX...
 	db %..XXXX..
 	db %.XXXXXX.
@@ -2429,7 +2428,7 @@ AnimationSubstitute:
 ; Changes the pokemon's sprite to the mini sprite
 	ld hl, wTempPic
 	xor a
-	ld bc, $310
+	ld bc, 7 * 7 tiles
 	call FillMemory
 	ldh a, [hWhoseTurn]
 	and a
@@ -2616,7 +2615,7 @@ GetMonSpriteTileMapPointerFromRowCount:
 	and a
 	ld a, 12
 	jr nz, .next
-	ld a, 20 * 5 + 1
+	ld a, 5 * SCREEN_WIDTH + 1
 .next
 	hlcoord 0, 0
 	ld e, a
@@ -2626,7 +2625,7 @@ GetMonSpriteTileMapPointerFromRowCount:
 	sub b
 	and a
 	jr z, .done
-	ld de, 20
+	ld de, SCREEN_WIDTH
 .loop
 	add hl, de
 	dec a
@@ -2680,9 +2679,9 @@ AnimCopyRowRight:
 	jr nz, AnimCopyRowRight
 	ret
 
-; get the sound of the move id in b
+; only used by the unreferenced PlayIntroMoveSound
 ; TODO: remove unused code?
-GetMoveSoundB:
+GetIntroMoveSound:
 	ld a, b
 	call GetMoveSound
 	ld b, a
@@ -2786,7 +2785,7 @@ CopyTileIDs:
 	dec c
 	jr nz, .columnLoop
 	pop hl
-	ld bc, 20
+	ld bc, SCREEN_WIDTH
 	add hl, bc
 	pop bc
 	dec b
@@ -2932,7 +2931,7 @@ FallingObjects_UpdateOAMEntry:
 .asm_79e5c
 ;;;;;;;;;;
 	inc hl
-	ld a, (1 << OAM_X_FLIP)
+	ld a, 1 << OAM_X_FLIP
 .next2
 ;;;;;;;;;; shinpokerednote: gbcnote: oam updates from pokemon yellow
 	ld b, a

@@ -21,7 +21,7 @@ DisplayTownMap:
 	call PlaceString
 	ld hl, wShadowOAM
 	ld de, wTownMapSavedOAM
-	ld bc, $10
+	ld bc, 4 * 4
 	rst _CopyData
 	ld hl, vSprites tile BIRD_BASE_TILE
 	ld de, TownMapCursor
@@ -65,7 +65,7 @@ DisplayTownMap:
 	call PlaceString
 	ld hl, wShadowOAMSprite04
 	ld de, wTownMapSavedOAM + 16
-	ld bc, $10
+	ld bc, 4 * 4
 	rst _CopyData
 .inputLoop
 	call TownMapSpriteBlinkingAnimation
@@ -248,7 +248,7 @@ LoadTownMap_Fly_Common:
 	ld [wDestinationMap], a
 	ld hl, wStatusFlags6
 	set BIT_FLY_WARP, [hl]
-	assert wStatusFlags6 + 1 == wStatusFlags7
+	ASSERT wStatusFlags6 + 1 == wStatusFlags7
 	inc hl
 	set BIT_USED_FLY, [hl]
 .pressedB
@@ -414,7 +414,7 @@ DrawPlayerOrBirdSprite:
 	jr nz, .loop
 	ld hl, wShadowOAM
 	ld de, wTownMapSavedOAM
-	ld bc, $a0
+	ld bc, NUM_SPRITE_OAM_STRUCTS * 4
 	jp CopyData
 
 TownMapCoordsToOAMCoords:
@@ -507,7 +507,7 @@ WriteSymmetricMonPartySpriteOAM:
 	ld [hli], a ; tile
 	ld a, [wSymmetricSpriteOAMAttributes]
 	ld [hli], a ; attributes
-	xor (1 << OAM_X_FLIP)
+	xor 1 << OAM_X_FLIP
 	ld [wSymmetricSpriteOAMAttributes], a
 	inc d
 	ld a, 8
@@ -581,13 +581,13 @@ TownMapSpriteBlinkingAnimation::
 ; show sprites when the counter reaches 50
 	ld hl, wTownMapSavedOAM
 	ld de, wShadowOAM
-	ld bc, $90
+	ld bc, (NUM_SPRITE_OAM_STRUCTS - 4) * 4
 	rst _CopyData
 	xor a
 	jr .done
 .hideSprites
 	ld hl, wShadowOAM
-	ld b, $24
+	ld b, NUM_SPRITE_OAM_STRUCTS - 4
 	ld de, $4
 .hideSpritesLoop
 	ld [hl], $a0

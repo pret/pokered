@@ -1,5 +1,5 @@
 MonsterNames::
-	table_width NAME_LENGTH - 1, MonsterNames
+	table_width NAME_LENGTH - 1
 	db "RHYDON@@@@"
 	db "KANGASKHAN"
 	db "NIDORAN♂@@"

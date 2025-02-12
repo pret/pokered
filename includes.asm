@@ -57,3 +57,9 @@ INCLUDE "data/maps/items/hidden_item_location_assignments.asm"
 INCLUDE "data/maps/items/tm_location_assignments.asm"
 
 INCLUDE "constants/debug_constants.asm"
+IF DEF(_RED_VC)
+INCLUDE "vc/pokered.constants.asm"
+ENDC
+IF DEF(_BLUE_VC)
+INCLUDE "vc/pokeblue.constants.asm"
+ENDC

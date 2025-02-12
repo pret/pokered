@@ -126,15 +126,15 @@ GetPrizeMenuId:
 ; reg. c:
 ; [low nybble] number of bytes
 ; [bits 765 = %100] space-padding (not zero-padding)
-	ld c, (1 << 7 | 2)
+	ld c, (1 << 7) | 2
 	call PrintBCDNumber
 	ld de, wPrize2Price
 	hlcoord 13, 7
-	ld c, (1 << 7 | 2)
+	ld c, (1 << 7) | 2
 	call PrintBCDNumber
 	ld de, wPrize3Price
 	hlcoord 13, 9
-	ld c, (1 << 7 | 2)
+	ld c, (1 << 7) | 2
 	jp PrintBCDNumber
 
 INCLUDE "data/events/prizes.asm"

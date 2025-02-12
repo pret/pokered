@@ -3,6 +3,7 @@ MACRO hidden_coin
 ENDM
 
 HiddenCoinCoords:
+	table_width 3
 	; map id, x, y
 	table_width 3, HiddenCoinCoords
 	hidden_coin GAME_CORNER,  0,  8

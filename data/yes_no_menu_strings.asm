@@ -5,7 +5,7 @@ ENDM
 
 TwoOptionMenuStrings:
 ; entries correspond to *_MENU constants
-	table_width 5, TwoOptionMenuStrings
+	table_width 5
 	; width, height, blank line before first menu item?, text pointer
 	two_option_menu 4, 3, FALSE, .YesNoMenu
 	two_option_menu 6, 3, FALSE, .NorthWestMenu

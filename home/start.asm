@@ -1,5 +1,5 @@
 _Start::
-	cp GBC
+	cp CGB
 	jr z, .gbc
 	xor a
 	jr .ok

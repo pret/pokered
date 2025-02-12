@@ -2,7 +2,7 @@
 ;                       some sprite sets were modified.
 
 MapSpriteSets:
-	table_width 1, MapSpriteSets
+	table_width 1
 	db SPRITESET_PALLET_VIRIDIAN ; PALLET_TOWN
 	db SPRITESET_PALLET_VIRIDIAN ; VIRIDIAN_CITY
 	db SPRITESET_PEWTER_CERULEAN ; PEWTER_CITY
@@ -48,7 +48,7 @@ MapSpriteSets:
 ; #3: sprite set ID if on the west or north side
 ; #4: sprite set ID if on the east or south side
 SplitMapSpriteSets:
-	table_width 4, SplitMapSpriteSets
+	table_width 4
 	db NORTH_SOUTH, 37, SPRITESET_PEWTER_CERULEAN, SPRITESET_PALLET_VIRIDIAN ; SPLITSET_ROUTE_2
 	db NORTH_SOUTH, 50, SPRITESET_PEWTER_CERULEAN, SPRITESET_LAVENDER        ; SPLITSET_ROUTE_10
 	db EAST_WEST,   57, SPRITESET_VERMILION,       SPRITESET_SILENCE_BRIDGE  ; SPLITSET_ROUTE_11
@@ -64,7 +64,7 @@ SplitMapSpriteSets:
 	assert_table_length NUM_SPLIT_SETS
 
 SpriteSets:
-	table_width SPRITE_SET_LENGTH, SpriteSets
+	table_width SPRITE_SET_LENGTH
 
 ; SPRITESET_PALLET_VIRIDIAN
 	db SPRITE_BLUE

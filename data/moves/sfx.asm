@@ -1,5 +1,5 @@
 MoveSoundTable:
-	table_width 3, MoveSoundTable
+	table_width 3
 	; ID, pitch mod, tempo mod
 	db SFX_POUND,              $00, $80 ; POUND
 	db SFX_BATTLE_0C,          $10, $80 ; KARATE_CHOP

@@ -1,5 +1,5 @@
 ItemNames::
-	list_start ItemNames
+	list_start
 	li "MASTER BALL"
 	li "ULTRA BALL"
 	li "GREAT BALL"

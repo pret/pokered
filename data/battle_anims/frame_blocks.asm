@@ -1,5 +1,5 @@
 FrameBlockPointers:
-	table_width 2, FrameBlockPointers
+	table_width 2
 	dw FrameBlock00
 	dw FrameBlock01
 	dw FrameBlock02

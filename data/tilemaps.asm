@@ -5,7 +5,7 @@ ENDM
 
 TileIDListPointerTable:
 ; entries correspond to TILEMAP_* constants (see constants/gfx_constants.asm)
-	table_width 3, TileIDListPointerTable
+	table_width 3
 	; tilemap pointer, width, height
 	tile_ids MonTiles,               7,  7
 	tile_ids SlideDownMonTiles_7x5,  7,  5

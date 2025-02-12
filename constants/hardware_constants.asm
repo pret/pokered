@@ -1,6 +1,8 @@
-; From http://nocash.emubase.de/pandocs.htm.
+; Reference documents:
+; https://gbdev.io/pandocs/
+; https://github.com/gbdev/hardware.inc
 
-DEF GBC EQU $11
+DEF CGB EQU $11
 
 ; MBC1
 DEF MBC1SRamEnable      EQU $0000

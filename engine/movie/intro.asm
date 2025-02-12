@@ -280,9 +280,8 @@ CopyTileIDsFromList_ZeroBaseTileID:
 	ld c, 0
 	predef_jump CopyTileIDsFromList
 
-PlayMoveSoundB:
-; unused
-	predef GetMoveSoundB
+PlayIntroMoveSound: ; unreferenced
+	predef GetIntroMoveSound
 	ld a, b
 	jp PlaySound
 
@@ -331,6 +330,7 @@ PlayShootingStar:
 	rst _DelayFrames
 	farcall AnimateShootingStar
 	push af
+	; A `call LoadPresentsGraphic` here was removed in localization
 	pop af
 	jr c, .next ; skip the delay if the user interrupted the animation
 	ld c, 40
@@ -361,7 +361,7 @@ IntroDrawBlackBars:
 	hlbgcoord 0, 14, vBGMap1
 	ld c,  BG_MAP_WIDTH * 4
 	jp IntroPlaceBlackTiles
-
+	
 IntroNidorinoAnimation0:
 	db 0, 0
 	db ANIMATION_END

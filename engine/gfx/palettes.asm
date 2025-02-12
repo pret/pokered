@@ -342,7 +342,7 @@ MapPalettesSpecialFunctionTable:
 	db -1
 
 MapTilesetPalettesTable:
-	db CEMETERY, PAL_GREYMON
+	db CEMETERY, PAL_GRAYMON
 	db SECRET_LAB_TS, PAL_SECRETLAB
 	db VOLCANO, PAL_VOLCANO
 	db UNDERGROUND, PAL_ROUTE
@@ -479,7 +479,7 @@ SpecialMonCustomPalettes:
 
 DeterminePaletteID:
 	bit TRANSFORMED, a ; a is battle status 3
-	ld a, DEX_DITTO	;ld a, PAL_GREYMON  ; shinpokerednote: FIXED: if the mon has used Transform, use Ditto's palette
+	ld a, DEX_DITTO	;ld a, PAL_GRAYMON  ; shinpokerednote: FIXED: if the mon has used Transform, use Ditto's palette
 	jr nz, DeterminePaletteIDOutOfBattle.ditto ;ret nz
 	ld a, [hl]
 DeterminePaletteIDOutOfBattle:
@@ -845,7 +845,6 @@ SendSGBPackets:
 	call SendSGBPacket
 	pop hl
 	jp SendSGBPacket
-
 
 ; PureRGBnote: ADDED: figure out if we have SGB or GBC palettes selected in the options.
 GetPalettes:

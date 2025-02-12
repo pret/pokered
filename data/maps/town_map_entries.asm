@@ -6,7 +6,7 @@ ENDM
 ; PureRGBnote: CHANGED: some coordinates were changed for better positioning here
 ; the appearance of towns and routes in the town map
 ExternalMapEntries:
-	table_width 3, ExternalMapEntries
+	table_width 3
 	; x, y, name
 	external_map  2, 11, PalletTownName
 	external_map  2,  8, ViridianCityName

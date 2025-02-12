@@ -1,69 +1,64 @@
 ; These are all the asm constants needed to make the blue_vc patch.
 
-MACRO vc_const
-	DEF x = \1
-	PRINTLN "{02x:x} \1" ; same format as rgblink's .sym file
-ENDM
-
 ; [FPA 001 Begin]
-	vc_const "M"
-	vc_const "E"
-	vc_const "G"
-	vc_const "A"
-	vc_const "P"
-	vc_const "S"
-	vc_const "L"
-	vc_const "F"
-	vc_const "X"
-	vc_const MEGA_PUNCH
+EXPORT DEF M_CHAR EQU "M"
+EXPORT DEF E_CHAR EQU "E"
+EXPORT DEF G_CHAR EQU "G"
+EXPORT DEF A_CHAR EQU "A"
+EXPORT DEF P_CHAR EQU "P"
+EXPORT DEF S_CHAR EQU "S"
+EXPORT DEF L_CHAR EQU "L"
+EXPORT DEF F_CHAR EQU "F"
+EXPORT DEF X_CHAR EQU "X"
+EXPORT MEGA_PUNCH
 
 ; [FPA 001 End]
-	vc_const EXPLOSION
+EXPORT EXPLOSION
 
 ; [FPA 002 Begin]
-	vc_const "U"
-	vc_const "I"
-	vc_const GUILLOTINE
+EXPORT DEF U_CHAR EQU "U"
+EXPORT DEF I_CHAR EQU "I"
+EXPORT GUILLOTINE
 
 ; [FPA 002 End]
-	vc_const "K"
-	vc_const MEGA_KICK
+EXPORT DEF K_CHAR EQU "K"
+EXPORT MEGA_KICK
 
 ; [FPA 004 Begin]
-	vc_const "B"
-	vc_const "Z"
-	vc_const BLIZZARD
+EXPORT DEF B_CHAR EQU "B"
+EXPORT DEF Z_CHAR EQU "Z"
+EXPORT BLIZZARD
 
 ; [FPA 005 Begin]
-	vc_const BUBBLEBEAM
+EXPORT BUBBLEBEAM
 
 ; [FPA 005 End]
-	vc_const HYPER_BEAM
+EXPORT HYPER_BEAM
 
 ; [FPA 006 Begin]
-	vc_const "H"
-	vc_const "Y"
+EXPORT DEF H_CHAR EQU "H"
+EXPORT DEF Y_CHAR EQU "Y"
 
 ; [FPA 007 Begin]
-	vc_const "T"
-	vc_const "N"
-	vc_const THUNDERBOLT
+EXPORT DEF T_CHAR EQU "T"
+EXPORT DEF N_CHAR EQU "N"
+EXPORT THUNDERBOLT
 
 ; [FPA 008 Begin]
-	vc_const "R"
-	vc_const REFLECT
+EXPORT DEF R_CHAR EQU "R"
+EXPORT REFLECT
 
 ; [FPA 009 Begin]
-	vc_const SELFDESTRUCT
+EXPORT SELFDESTRUCT
 
 ; [FPA 010 Begin]
-	vc_const "D"
-	vc_const DREAM_EATER
+EXPORT DEF D_CHAR EQU "D"
+EXPORT DREAM_EATER
 
 ; [FPA 011 Begin]
-	vc_const "O"
-	vc_const SPORE
+EXPORT DEF O_CHAR EQU "O"
+EXPORT SPORE
 
 ; [FPA 012 Begin]
-	vc_const "C"
-	vc_const ROCK_SLIDE
+EXPORT DEF C_CHAR EQU "C"
+EXPORT ROCK_SLIDE

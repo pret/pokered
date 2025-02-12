@@ -495,7 +495,7 @@ ItemUseBall:
 
 	push hl
 
-; If the Pokémon is transformed, the Pokémon is assumed to be a Ditto.
+; Bug: If the Pokémon is transformed, the Pokémon is assumed to be a Ditto.
 ; This is a bug because a wild Pokémon could have used Transform via
 ; Mirror Move even though the only wild Pokémon that knows Transform is Ditto.
 	ld hl, wEnemyBattleStatus3
@@ -941,7 +941,7 @@ ItemUseEvoStone:
 	jr c, .canceledItemUse
 	ld a, b
 	ld [wCurPartySpecies], a
-	ld a, $01
+	ld a, TRUE
 	ld [wForceEvolution], a
 	ld a, SFX_HEAL_AILMENT
 	call PlaySoundWaitForCurrent
@@ -2478,10 +2478,10 @@ ItemUsePPRestore:
 	ret
 .fullyRestorePP
 	ld a, [hl] ; move PP
-; Note that this code has a bug. It doesn't mask out the upper two bits, which
-; are used to count how many PP Ups have been used on the move. So, Max Ethers
-; and Max Elixirs will not be detected as having no effect on a move with full
-; PP if the move has had any PP Ups used on it.
+; Bug: This code doesn't mask out the upper two bits, which are used to count
+; how many PP Ups have been used on the move.
+; So, Max Ethers and Max Elixirs will not be detected as having no effect on
+; a move with full PP if the move has had any PP Ups used on it.
 	cp b ; does current PP equal max PP?
 	ret z
 	jr .storeNewAmount
@@ -2975,7 +2975,7 @@ GetMaxPP:
 	and %11000000 ; get PP Up count
 	pop bc
 	or b ; place normal max PP in 6 lower bits of a
-	assert wMoveData + MOVE_PP + 1 == wPPUpCountAndMaxPP
+	ASSERT wMoveData + MOVE_PP + 1 == wPPUpCountAndMaxPP
 	ld h, d
 	ld l, e
 	inc hl ; hl = wPPUpCountAndMaxPP

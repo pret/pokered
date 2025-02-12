@@ -1,5 +1,5 @@
 TrainerAIPointers:
-	table_width 3, TrainerAIPointers
+	table_width 3
 	; one entry per trainer class
 	; first byte, number of times (per Pokémon) it can occur
 	; next two bytes, pointer to AI subroutine for trainer class
