@@ -142,7 +142,7 @@ _CeladonGymBattleText5::
 	line "to raise!"
 	done
 
-_RocketHideoutB4FRocket2EndBattleText::
+_RocketHideoutB4FRocket3EndBattleText::
 _CeladonGymEndBattleText5::
 	text "No!"
 	prompt

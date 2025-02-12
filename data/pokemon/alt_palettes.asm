@@ -29,7 +29,7 @@ AltMonsterPalettes: ; pokemon have alternate palettes depending on where you enc
 	db PAL_REDMON ; ARBOK
 	db PAL_BLUEMON ; PIKACHU
 	db PAL_BLUEMON ; RAICHU
-	db PAL_GREYMON  ; SANDSHREW
+	db PAL_GRAYMON  ; SANDSHREW
 	db PAL_BLACKMON  ; SANDSLASH
 	db PAL_PURPLEMON ; NIDORAN_F
 	db PAL_PURPLEMON ; NIDORINA
@@ -37,8 +37,8 @@ AltMonsterPalettes: ; pokemon have alternate palettes depending on where you enc
 	db PAL_BLUEMON   ; NIDORAN_M
 	db PAL_BLUEMON   ; NIDORINO
 	db PAL_BLUEMON   ; NIDOKING
-	db PAL_GREYMON   ; CLEFAIRY
-	db PAL_GREYMON   ; CLEFABLE
+	db PAL_GRAYMON   ; CLEFAIRY
+	db PAL_GRAYMON   ; CLEFABLE
 	db PAL_PURPLEMON    ; VULPIX
 	db PAL_CYANMON ; NINETALES
 	db PAL_PURPLEMON   ; JIGGLYPUFF
@@ -54,17 +54,17 @@ AltMonsterPalettes: ; pokemon have alternate palettes depending on where you enc
 	db PAL_REDMON  ; VENOMOTH
 	db PAL_BLACKMON  ; DIGLETT
 	db PAL_BLACKMON  ; DUGTRIO
-	db PAL_GREYMON ; MEOWTH
-	db PAL_GREYMON ; PERSIAN
+	db PAL_GRAYMON ; MEOWTH
+	db PAL_GRAYMON ; PERSIAN
 	db PAL_CYANMON   ; PSYDUCK
 	db PAL_YELLOWMON ; GOLDUCK
 	db PAL_WHITEMON  ; MANKEY
 	db PAL_WHITEMON  ; PRIMEAPE
 	db PAL_REDBAR    ; GROWLITHE
 	db PAL_REDBAR    ; ARCANINE
-	db PAL_GREYMON   ; POLIWAG
-	db PAL_GREYMON   ; POLIWHIRL
-	db PAL_GREYMON   ; POLIWRATH
+	db PAL_GRAYMON   ; POLIWAG
+	db PAL_GRAYMON   ; POLIWHIRL
+	db PAL_GRAYMON   ; POLIWRATH
 	db PAL_MEWMON ; ABRA
 	db PAL_MEWMON ; KADABRA
 	db PAL_MEWMON ; ALAKAZAM
@@ -108,7 +108,7 @@ AltMonsterPalettes: ; pokemon have alternate palettes depending on where you enc
 	db PAL_REDBAR  ; EXEGGUTOR
 	db PAL_WHITEMON   ; CUBONE
 	db PAL_WHITEMON   ; MAROWAK
-	db PAL_GREYMON  ; HITMONLEE
+	db PAL_GRAYMON  ; HITMONLEE
 	db PAL_WHITEMON  ; HITMONCHAN
 	db PAL_PURPLEMON   ; LICKITUNG
 	db PAL_GREENMON ; KOFFING
@@ -117,7 +117,7 @@ AltMonsterPalettes: ; pokemon have alternate palettes depending on where you enc
 	db PAL_BLACKMON   ; RHYDON
 	db PAL_WHITEMON   ; CHANSEY
 	db PAL_GREENMON   ; TANGELA
-	db PAL_GREYMON  ; KANGASKHAN
+	db PAL_GRAYMON  ; KANGASKHAN
 	db PAL_0F   ; HORSEA
 	db PAL_0F   ; SEADRA
 	db PAL_BLUEMON    ; GOLDEEN

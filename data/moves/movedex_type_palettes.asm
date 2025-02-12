@@ -18,7 +18,7 @@ TypePaletteMapping:
 	db PAL_MEWMON;flying
 	db PAL_PURPLEMON;poison
 	db PAL_REDMON;ground
-	db PAL_GREYMON;rock
+	db PAL_GRAYMON;rock
 	db PAL_SAFARIBALL;typeless
 	db PAL_GREENMON;bug
 	db PAL_BLACKMON;ghost

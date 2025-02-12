@@ -88,11 +88,11 @@ SetAttackAnimPal:
 	ret	
 TypePalColorList:
 	db PAL_BLACK2;normal
-	db PAL_GREYMON;fighting
+	db PAL_GRAYMON;fighting
 	db PAL_MEWMON;flying
 	db PAL_PURPLEMON;poison
 	db PAL_BROWNMON;ground
-	db PAL_GREYMON;rock
+	db PAL_GRAYMON;rock
 	db PAL_BLACK2;typeless
 	db PAL_GREENBAR;bug
 	db PAL_PURPLEMON;ghost

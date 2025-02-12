@@ -88,7 +88,7 @@ _CinnabarGymBurglar1BattleText::
 	cont "as a trainer!"
 	done
 
-_RocketHideoutB1FRocketEndBattleText::
+_RocketHideoutB2FRocketEndBattleText::
 _CinnabarGymBurglar1EndBattleText::
 	text "I"
 	line "surrender!"
