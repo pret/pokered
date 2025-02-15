@@ -23,3 +23,6 @@
 !disabled
 # Mute music
 018002C0
+!disabled
+# Set first party pokemon's first move to CONVERSION (Change to other moves, change XX in 01XX7BD1 with the move IDs found at this link: https://github.com/Vortyne/pureRGB/blob/master/constants/move_constants.asm)
+01A07BD1
