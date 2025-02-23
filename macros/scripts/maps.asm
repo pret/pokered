@@ -225,8 +225,14 @@ MACRO connection
 	dw wOverworldMap + _win
 ENDM
 
-DEF def_script_pointers EQUS "const_def"
+MACRO def_script_pointers
+	const_def
+ENDM
 
-DEF def_text_pointers EQUS "const_def 1"
+MACRO def_text_pointers
+	const_def 1
+ENDM
 
-DEF object_const_def EQUS "const_def 1"
+MACRO object_const_def
+	const_def 1
+ENDM
