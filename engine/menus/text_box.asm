@@ -138,8 +138,11 @@ DisplayMoneyBox:
 	ld c, 6
 	call ClearScreenArea
 	hlcoord 12, 1
+	ld de, CurrencyString
+	call PlaceString
+	hlcoord 12, 1
 	ld de, wPlayerMoney
-	ld c, $a3
+	ld c, 3 | LEADING_ZEROES
 	call PrintBCDNumber
 	ld hl, wStatusFlags5
 	res BIT_NO_TEXT_DELAY, [hl]

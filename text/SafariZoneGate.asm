@@ -4,7 +4,7 @@ _SafariZoneGateSafariZoneWorker1Text::
 	done
 
 _SafariZoneGateSafariZoneWorker1WouldYouLikeToJoinText::
-	text "For just ¥500,"
+	text "For just 500¥,"
 	line "you can catch all"
 	cont "the #MON you"
 	cont "want in the park!"
@@ -14,7 +14,7 @@ _SafariZoneGateSafariZoneWorker1WouldYouLikeToJoinText::
 	text_end
 
 _SafariZoneGateSafariZoneWorker1ThatllBe500PleaseText::
-	text "That'll be ¥500"
+	text "That'll be 500¥"
 	line "please!"
 
 	para "We only use a"

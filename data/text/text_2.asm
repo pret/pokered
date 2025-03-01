@@ -576,7 +576,7 @@ _IndigoPlateauHQText::
 
 _RedBedroomSNESText::
 	text "<PLAYER> is"
-	line "playing the SNES!"
+	line "playing the NES!"
 	cont "...Okay!"
 	cont "It's time to go!"
 	done
@@ -803,8 +803,8 @@ _PokemonBooksText::
 	done
 
 _DiglettSculptureText::
-	text "It's a sculpture"
-	line "of DIGLETT."
+	text "It's a buddhist"
+	line "altar..."
 	done
 
 _ElevatorText::
@@ -865,9 +865,9 @@ _EnemyMonFaintedText::
 	prompt
 
 _MoneyForWinningText::
-	text "<PLAYER> got ¥@"
+	text "<PLAYER> got @"
 	text_bcd wAmountMoneyWon, 3 | LEADING_ZEROES | LEFT_ALIGN
-	text_start
+	text "¥"
 	line "for winning!"
 	prompt
 
@@ -1342,9 +1342,9 @@ _SafariZoneAngryText::
 ; money related
 _PickUpPayDayMoneyText::
 	text "<PLAYER> picked up"
-	line "¥@"
+	line "@"
 	text_bcd wTotalPayDayMoney, 3 | LEADING_ZEROES | LEFT_ALIGN
-	text "!"
+	text "¥!"
 	prompt
 
 _ClearSaveDataText::
@@ -1731,11 +1731,11 @@ _IntroducePlayerText::
 
 _IntroduceRivalText::
 	text "This is my grand-"
-	line "son. He's been"
-	cont "your rival since"
-	cont "you were a baby."
+	line "son. He's your"
+	cont "childhood friend"
+	cont "and your rival."
 
-	para "...Erm, what is"
+	para "...Erm, what was"
 	line "his name again?"
 	prompt
 

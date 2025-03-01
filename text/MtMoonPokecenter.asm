@@ -23,7 +23,7 @@ _MtMoonPokecenterMagikarpSalesmanIGotADealText::
 
 	para "I'll let you have"
 	line "a swell MAGIKARP"
-	cont "for just ¥500!"
+	cont "for just 500¥!"
 	cont "What do you say?"
 	done
 

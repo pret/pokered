@@ -38,9 +38,9 @@ _DaycareGentlemanMonHasGrownText::
 	prompt
 
 _DaycareGentlemanOweMoneyText::
-	text "You owe me ¥@"
+	text "You owe me @"
 	text_bcd wDayCareTotalCost, 2 | LEADING_ZEROES | LEFT_ALIGN
-	text_start
+	text "¥"
 	line "for the return"
 	cont "of this #MON."
 	done

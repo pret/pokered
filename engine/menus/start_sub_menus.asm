@@ -552,8 +552,9 @@ DrawTrainerInfo:
 	call PlaceString
 	hlcoord 8, 4
 	ld de, wPlayerMoney
-	ld c, $e3
+	ld c, 3 | LEADING_ZEROES | LEFT_ALIGN
 	call PrintBCDNumber
+	ld [hl], "¥"
 	hlcoord 9, 6
 	ld de, wPlayTimeHours ; hours
 	lb bc, LEFT_ALIGN | 1, 3

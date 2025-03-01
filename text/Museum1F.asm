@@ -3,7 +3,7 @@ _Museum1FScientist1ComeAgainText::
 	done
 
 _Museum1FScientist1WouldYouLikeToComeInText::
-	text "It's ¥50 for a"
+	text "It's 50¥ for a"
 	line "child's ticket."
 
 	para "Would you like to"
@@ -11,7 +11,7 @@ _Museum1FScientist1WouldYouLikeToComeInText::
 	done
 
 _Museum1FScientist1ThankYouText::
-	text "Right, ¥50!"
+	text "Right, 50¥!"
 	line "Thank you!"
 	done
 

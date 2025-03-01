@@ -30,9 +30,9 @@ _PokemartTellBuyPriceText::
 	text_ram wStringBuffer
 	text "?"
 	line "That will be"
-	cont "¥@"
+	cont "@"
 	text_bcd hMoney, 3 | LEADING_ZEROES | LEFT_ALIGN
-	text ". OK?"
+	text "¥. OK?"
 	done
 
 _PokemartBoughtItemText::
@@ -57,9 +57,9 @@ _PokemonSellingGreetingText::
 
 _PokemartTellSellPriceText::
 	text "I can pay you"
-	line "¥@"
+	line "@"
 	text_bcd hMoney, 3 | LEADING_ZEROES | LEFT_ALIGN
-	text " for that."
+	text "¥ for that."
 	done
 
 _PokemartItemBagEmptyText::
