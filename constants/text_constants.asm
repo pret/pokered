@@ -2,7 +2,7 @@ DEF NAME_LENGTH EQU 11
 DEF ITEM_NAME_LENGTH EQU 13
 DEF NAME_BUFFER_LENGTH EQU 20
 
-; PrintNumber
+; PrintNumber, PrintBCDNumber
 	const_def 5
 	const BIT_MONEY_SIGN     ; 5
 	const BIT_LEFT_ALIGN     ; 6

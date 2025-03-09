@@ -511,7 +511,7 @@ GameCornerDrawCoinBox:
 	call PlaceString
 	hlcoord 15, 5
 	ld de, wPlayerCoins
-	ld c, $82
+	ld c, 2 | LEADING_ZEROES
 	call PrintBCDNumber
 	ld hl, wStatusFlags5
 	res BIT_NO_TEXT_DELAY, [hl]
