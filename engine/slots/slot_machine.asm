@@ -645,7 +645,7 @@ SlotMachine_SubtractBetFromPlayerCoins:
 SlotMachine_PrintCreditCoins:
 	hlcoord 5, 1
 	ld de, wPlayerCoins
-	ld c, $2
+	ld c, 2
 	jp PrintBCDNumber
 
 SlotMachine_PrintPayoutCoins:
