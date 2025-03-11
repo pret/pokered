@@ -131,7 +131,7 @@ IF DEF(_BLUE)
 	ld a, SFX_INTRO_HOP
 ELSE
 ; hip
-	ld a, SFX_INTRO_HOP
+	ld a, SFX_INTRO_HIP
 ENDC
 	call PlaySound
 	ld de, IntroNidorinoAnimation5
