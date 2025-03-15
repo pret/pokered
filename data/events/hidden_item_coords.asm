@@ -15,19 +15,11 @@ HiddenItemCoords:
 	hidden_item ROUTE_10,                       9,  17
 	hidden_item ROUTE_10,                      16,  53
 	hidden_item ROCKET_HIDEOUT_B1F,            21,  15
-IF DEF(_BLUE)
 	hidden_item ROCKET_HIDEOUT_B3F,            27,  17
-ELSE
-	hidden_item ROCKET_HIDEOUT_B3F,            22,  23
-ENDC
 	hidden_item ROCKET_HIDEOUT_B4F,            25,   1
 	hidden_item POKEMON_TOWER_5F,               4,  12
 	hidden_item ROUTE_13,                       1,  14
-IF DEF(_BLUE)
 	hidden_item ROUTE_13,                      16,  13
-ELSE
-	hidden_item ROUTE_13,                      48,   8
-ENDC
 	hidden_item POKEMON_MANSION_B1F,            1,   9
 	hidden_item SAFARI_ZONE_GATE,              10,   1 ; inaccessible
 	hidden_item SAFARI_ZONE_WEST,               6,   5
@@ -39,13 +31,11 @@ ENDC
 	hidden_item SILPH_CO_9F,                    2,  15
 IF DEF(_BLUE)
 	hidden_item COPYCATS_HOUSE_2F,              1,   1
+ELSE
+	hidden_item COPYCATS_HOUSE_2F,              0,   6
+ENDC
 	hidden_item CERULEAN_CAVE_1F,              14,  11
 	hidden_item CERULEAN_CAVE_B1F,             27,   3
-ELSE
-	hidden_item COPYCATS_HOUSE_2F,              0,   1
-	hidden_item CERULEAN_CAVE_1F,              15,  11
-	hidden_item CERULEAN_CAVE_B1F,             29,  22
-ENDC
 	hidden_item POWER_PLANT,                   17,  16
 	hidden_item POWER_PLANT,                   12,   1
 	hidden_item SEAFOAM_ISLANDS_B2F,           15,  15
