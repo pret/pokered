@@ -486,7 +486,11 @@ SafariZoneWestHiddenObjects:
 	db -1 ; end
 
 SilphCo5FHiddenObjects:
+IF DEF(_BLUE)
 	hidden_object 12,  3, ELIXER, HiddenItems
+ELSE
+	hidden_object 11,  3, ELIXER, HiddenItems
+ENDC
 	db -1 ; end
 
 SilphCo9FHiddenObjects:
@@ -494,7 +498,11 @@ SilphCo9FHiddenObjects:
 	db -1 ; end
 
 CopycatsHouse2FHiddenObjects:
+IF DEF(_BLUE)
 	hidden_object  1,  1, NUGGET, HiddenItems
+ELSE
+	hidden_object  0,  6, NUGGET, HiddenItems
+ENDC
 	db -1 ; end
 
 CeruleanCave1HiddenObjects:
@@ -630,7 +638,11 @@ SilphCo11FHiddenObjects:
 	db -1 ; end
 
 Route17HiddenObjects:
+IF DEF(_BLUE)
 	hidden_object 15,  14, RARE_CANDY, HiddenItems
+ELSE
+	hidden_object 15,  15, RARE_CANDY, HiddenItems
+ENDC
 	hidden_object  8,  45, FULL_RESTORE, HiddenItems
 	hidden_object 17,  72, PP_UP, HiddenItems
 	hidden_object  4,  91, MAX_REVIVE, HiddenItems

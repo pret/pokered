@@ -11,6 +11,9 @@ VermilionTradeHouse_Object:
 	def_bg_events
 
 	def_object_events
+IF DEF(_BLUE)
 	object_event  3,  5, SPRITE_LITTLE_GIRL, STAY, UP, TEXT_VERMILIONTRADEHOUSE_LITTLE_GIRL
-
+ELSE
+	object_event  3,  5, SPRITE_GENTLEMAN, STAY, UP, TEXT_VERMILIONTRADEHOUSE_LITTLE_GIRL
+ENDC
 	def_warps_to VERMILION_TRADE_HOUSE
