@@ -17,7 +17,7 @@ _PokemonMansion2FSuperNerdAfterBattleText::
 
 _PokemonMansion2FDiary1Text::
 	text "Diary: July 5"
-	line "Guyana,"
+	line "Here in Guyana,"
 	cont "South America"
 
 	para "A new #MON was"
@@ -27,7 +27,7 @@ _PokemonMansion2FDiary1Text::
 
 _PokemonMansion2FDiary2Text::
 	text "Diary: July 10"
-	line "We christened the"
+	line "I christened the"
 	cont "newly discovered"
 	cont "#MON, MEW."
 	done

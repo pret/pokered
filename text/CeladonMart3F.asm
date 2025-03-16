@@ -42,18 +42,19 @@ _CeladonMart3FGameBoyKid2Text::
 	para "My buddy's going"
 	line "to trade me his"
 	cont "KANGASKHAN for my"
-	cont "GRAVELER!"
+	cont "HAUNTER!"
 	done
 
 _CeladonMart3FGameBoyKid3Text::
-	text "Come on GRAVELER!"
+	text "Come to me, my"
+	line "dear HAUNTER!"
 
-	para "I love GRAVELER!"
-	line "I collect them!"
+	para "I'm an absolute"
+	line "HAUNTER maniac!"
 
 	para "Huh?"
 
-	para "GRAVELER turned"
+	para "HAUNTER turned"
 	line "into a different"
 	cont "#MON!"
 	done
@@ -94,6 +95,6 @@ _CeladonMart3FCurrentFloorSignText::
 	done
 
 _CeladonMart3FPokemonPosterText::
-	text "Red and Blue!"
+	text "Red and Green!"
 	line "Both are #MON!"
 	done

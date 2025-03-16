@@ -5,9 +5,9 @@ _OaksLabRivalGrampsIsntAroundText::
 	done
 
 _OaksLabRivalGoAheadAndChooseText::
-	text "<RIVAL>: Heh, I"
-	line "don't need to be"
-	cont "greedy like you!"
+	text "<RIVAL>: Heh, I'm"
+	line "mature, so I'm"
+	cont "not in a hurry."
 
 	para "Go ahead and"
 	line "choose, <PLAYER>!"
@@ -341,21 +341,24 @@ _OaksLabOakThatWasMyDreamText::
 	done
 
 _OaksLabRivalLeaveItAllToMeText::
-	text "<RIVAL>: Alright"
+	text "<RIVAL>: Alright,"
 	line "Gramps! Leave it"
 	cont "all to me!"
 
 	para "<PLAYER>, I hate to"
 	line "say it, but I"
-	cont "don't need you!"
+	cont "won't need you!"
 
-	para "I know! I'll"
+	para "Oh, Right! I'll"
 	line "borrow a TOWN MAP"
 	cont "from my sis!"
 
 	para "I'll tell her not"
-	line "to lend you one,"
-	cont "<PLAYER>! Hahaha!"
+	line "to lend you one."
+	
+	para "<PLAYER>, don't"
+	line "bother going to"
+	cont "my house!"
 	done
 
 _OaksLabScientistText::

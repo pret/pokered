@@ -11,23 +11,28 @@ _SilphCo6FSilphWorkerM1BackToWorkText::
 
 _SilphCo6FSilphWorkerMHelpMePleaseText::
 	text "Oh dear, oh dear."
-	line "Help me please!"
+	line "God, Buddha,"
+	cont "help me!"
 	done
 
 _SilphCo6FSilphWorkerMWeGotEngagedText::
 	text "We got engaged!"
-	line "Heheh!"
+	line "... This is"
+	cont "embarassing."
 	done
 
 _SilphCo6FSilphWorkerF1SuchACowardText::
-	text "Look at him! He's"
-	line "such a coward!"
+	text "The person next"
+	line "to me... He's so"
+	cont "pathetic for a"
+	cont "guy."
 	done
 
 _SilphCo6FSilphWorkerF1HaveToMarryHimText::
-	text "I feel so sorry"
-	line "for him, I have"
-	cont "to marry him!"
+	text "He would be"
+	line "useless without"
+	cont "me. That's what"
+	cont "I thought."
 	done
 
 _SilphCo6FSilphWorkerF2TeamRocketConquerWorldText::
@@ -77,7 +82,7 @@ _SilphCo6FScientistBattleText::
 
 	para "He shouldn't have"
 	line "sent me to the"
-	cont "TIKSI BRANCH!"
+	cont "TUNGUSKA BRANCH!"
 	done
 
 _SilphCo6FScientistEndBattleText::
@@ -85,7 +90,7 @@ _SilphCo6FScientistEndBattleText::
 	prompt
 
 _SilphCo6FScientistAfterBattleText::
-	text "TIKSI BRANCH?"
+	text "TUNGUSKA BRANCH?"
 	line "It's in Russian"
 	cont "no man's land!"
 	done

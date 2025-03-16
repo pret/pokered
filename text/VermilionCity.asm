@@ -8,13 +8,13 @@ _VermilionCityBeautyText::
 	done
 
 _VermilionCityGambler1DidYouSeeText::
-	text "Did you see S.S."
+	text "Did you see ST."
 	line "ANNE moored in"
 	cont "the harbor?"
 	done
 
 _VermilionCityGambler1SSAnneDepartedText::
-	text "So, S.S.ANNE has"
+	text "So, ST.ANNE has"
 	line "departed!"
 
 	para "She'll be back in"
@@ -22,12 +22,12 @@ _VermilionCityGambler1SSAnneDepartedText::
 	done
 
 _VermilionCitySailor1WelcomeToSSAnneText::
-	text "Welcome to S.S."
+	text "Welcome to ST."
 	line "ANNE!"
 	done
 
 _VermilionCitySailor1DoYouHaveATicketText::
-	text "Welcome to S.S."
+	text "Welcome to ST."
 	line "ANNE!"
 
 	para "Excuse me, do you"
@@ -36,16 +36,16 @@ _VermilionCitySailor1DoYouHaveATicketText::
 
 _VermilionCitySailor1FlashedTicketText::
 	text "<PLAYER> flashed"
-	line "the S.S.TICKET!"
+	line "the SHIP TICKET!"
 
 	para "Great! Welcome to"
-	line "S.S.ANNE!"
+	line "the ST.ANNE!"
 	done
 
 _VermilionCitySailor1YouNeedATicketText::
 	text "<PLAYER> doesn't"
 	line "have the needed"
-	cont "S.S.TICKET."
+	cont "SHIP TICKET."
 
 	para "Sorry!"
 
@@ -79,7 +79,7 @@ _VermilionCityMachopStompingTheLandFlatText::
 	done
 
 _VermilionCitySailor2Text::
-	text "S.S.ANNE is a"
+	text "ST.ANNE is a"
 	line "famous luxury"
 	cont "cruise ship."
 

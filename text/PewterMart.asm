@@ -2,7 +2,7 @@ _PewterMartYoungsterText::
 	text "A shady, old man"
 	line "got me to buy"
 	cont "this really weird"
-	cont "fish #MON!"
+	cont "#MON!"
 
 	para "It's totally weak"
 	line "and it cost 500¥!"

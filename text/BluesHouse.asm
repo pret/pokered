@@ -7,8 +7,12 @@ _BluesHouseDaisyRivalAtLabText::
 _BluesHouseDaisyOfferMapText::
 	text "Grandpa asked you"
 	line "to run an errand?"
-	cont "Here, this will"
-	cont "help you!"
+	
+	para "That sounds like"
+	line "a difficult job."
+	
+	para "Here, this will"
+	line "help you!"
 	prompt
 
 _GotMapText::
@@ -37,6 +41,9 @@ _BluesHouseDaisyWalkingText::
 	done
 
 _BluesHouseTownMapText::
-	text "It's a big map!"
-	line "This is useful!"
+	text "It's a map of the"
+	line "KANTO region."
+	
+	para "...Would you be"
+	line "happy to get it?"
 	done

@@ -1,6 +1,6 @@
 _Route1Youngster1MartSampleText::
-	text "Hi! I work at a"
-	line "#MON MART."
+	text "Hi! I work at the"
+	line "FRIENDLY SHOP."
 
 	para "It's a convenient"
 	line "shop, so please"

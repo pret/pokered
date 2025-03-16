@@ -20,16 +20,16 @@ _Route10Hiker1BattleText::
 	done
 
 _Route10Hiker1EndBattleText::
-	text "Ha-haha!"
-	line "Not laughing!"
-	cont "Ha-hay fever!"
-	cont "Haha-ha-choo!"
+	text "Ha! Ha-haha...!"
+	line "The truth is..."
+	cont "I've eaten laugh"
+	cont "mushrooms."
 	prompt
 
 _Route10Hiker1AfterBattleText::
-	text "Haha-ha-choo!"
-	line "Ha-choo!"
-	cont "Snort! Snivel!"
+	text "Haha!"
+	line "Ha-ha-ha!"
+	cont "...Huff Huff..."
 	done
 
 _Route10SuperNerd2BattleText::
@@ -38,7 +38,7 @@ _Route10SuperNerd2BattleText::
 	done
 
 _Route10SuperNerd2EndBattleText::
-	text "Oh no!"
+	text "Oh, no!"
 	line "My #MON!"
 	prompt
 

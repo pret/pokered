@@ -47,9 +47,9 @@ _BoulderText::
 	done
 
 _MartSignText::
-	text "All your item"
-	line "needs fulfilled!"
-	cont "#MON MART"
+	text "Full of #MON"
+	line "goods!"
+	cont "FRIENDLY SHOP"
 	done
 
 _PokeCenterSignText::

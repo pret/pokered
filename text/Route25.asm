@@ -19,7 +19,7 @@ _Route25Youngster1AfterBattleText::
 _Route25Youngster2BattleText::
 	text "Dad took me to a"
 	line "great party on"
-	cont "S.S.ANNE at"
+	cont "ST. ANNE at"
 	cont "VERMILION CITY!"
 	done
 
@@ -29,7 +29,7 @@ _Route25Youngster2EndBattleText::
 	prompt
 
 _Route25Youngster2AfterBattleText::
-	text "On S.S.ANNE, I"
+	text "On ST. ANNE, I"
 	line "saw trainers from"
 	cont "around the world."
 	done
