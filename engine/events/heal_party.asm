@@ -50,7 +50,7 @@ HealParty:
 	push bc
 	ld b, a
 	ld a, [hl]
-	and $c0
+	and PP_UP_MASK
 	add b
 	ld [hl], a
 	pop bc
