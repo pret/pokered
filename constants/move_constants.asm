@@ -214,9 +214,3 @@ DEF NUM_ATTACKS EQU const_value - 1
 	const BAIT_ANIM ; throw bait
 
 DEF NUM_ATTACK_ANIMS EQU const_value - 1
-
-; The PP value stored for pokemon in the party contains two values. The upper
-; two bits count the number of PP up used and the rest count the currently
-; remaining PP
-DEF PP_UP_MASK    EQU %11000000
-DEF PP_VALUE_MASK EQU ~PP_UP_MASK

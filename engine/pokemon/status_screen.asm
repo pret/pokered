@@ -364,7 +364,7 @@ StatusScreen2:
 	ld bc, wPartyMon1PP - wPartyMon1Moves - 1
 	add hl, bc
 	ld a, [hl]
-	and PP_VALUE_MASK
+	and PP_MASK
 	ld [wStatusScreenCurrentPP], a
 	ld h, d
 	ld l, e
