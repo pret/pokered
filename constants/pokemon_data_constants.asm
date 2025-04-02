@@ -99,8 +99,6 @@ DEF NUM_GROWTH_RATES EQU const_value
 DEF NUM_WILDMONS EQU 10
 DEF WILDDATA_LENGTH EQU 1 + NUM_WILDMONS * 2
 
-; The PP value stored for pokemon in the party contains two values. The upper
-; two bits count the number of PP up used and the rest count the currently
-; remaining PP
-DEF PP_UP_MASK EQU %11000000
-DEF PP_MASK    EQU ~PP_UP_MASK
+; PP in box_struct (see macros/ram.asm)
+DEF PP_UP_MASK EQU %11000000 ; number of PP Up used
+DEF PP_MASK    EQU %00111111 ; currently remaining PP
