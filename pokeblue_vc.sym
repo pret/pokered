@@ -18195,8 +18195,8 @@
 00:c37d wShadowOAMSprite31XCoord
 00:c37e wShadowOAMSprite31TileID
 00:c37f wShadowOAMSprite31Attributes
-00:c380 wShadowOAMSprite32
 00:c380 wShadowOAMSprite32YCoord
+00:c380 wShadowOAMSprite32
 00:c381 wShadowOAMSprite32XCoord
 00:c382 wShadowOAMSprite32TileID
 00:c383 wShadowOAMSprite32Attributes

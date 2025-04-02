@@ -18529,8 +18529,8 @@ WRAM0 bank #0:
 	         $c37d = wShadowOAMSprite31XCoord
 	         $c37e = wShadowOAMSprite31TileID
 	         $c37f = wShadowOAMSprite31Attributes
-	         $c380 = wShadowOAMSprite32
 	         $c380 = wShadowOAMSprite32YCoord
+	         $c380 = wShadowOAMSprite32
 	         $c381 = wShadowOAMSprite32XCoord
 	         $c382 = wShadowOAMSprite32TileID
 	         $c383 = wShadowOAMSprite32Attributes
