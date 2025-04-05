@@ -2629,7 +2629,7 @@ SelectMenuItem:
 	ld b, $0
 	add hl, bc
 	ld a, [hl]
-	and $3f
+	and PP_MASK
 	jr z, .noPP
 	ld a, [wPlayerDisabledMove]
 	swap a
@@ -2709,7 +2709,7 @@ AnyMoveToSelect:
 	or [hl]
 	inc hl
 	or [hl]
-	and $3f
+	and PP_MASK
 	ret nz
 	jr .noMovesLeft
 .handleDisabledMove
@@ -2863,7 +2863,7 @@ PrintMenuItem:
 	ld hl, wBattleMonPP
 	add hl, bc
 	ld a, [hl]
-	and $3f
+	and PP_MASK
 	ld [wBattleMenuCurrentPP], a
 ; print TYPE/<type> and <curPP>/<maxPP>
 	hlcoord 1, 9
@@ -4056,18 +4056,18 @@ CheckForDisobedience:
 	ld hl, wBattleMonPP
 	push hl
 	ld a, [hli]
-	and $3f
+	and PP_MASK
 	ld b, a
 	ld a, [hli]
-	and $3f
+	and PP_MASK
 	add b
 	ld b, a
 	ld a, [hli]
-	and $3f
+	and PP_MASK
 	add b
 	ld b, a
 	ld a, [hl]
-	and $3f
+	and PP_MASK
 	add b
 	pop hl
 	push af
@@ -4076,7 +4076,7 @@ CheckForDisobedience:
 	ld b, $0
 	add hl, bc
 	ld a, [hl]
-	and $3f
+	and PP_MASK
 	ld b, a
 	pop af
 	cp b
