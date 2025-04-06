@@ -2,6 +2,11 @@
 
 Want to leave a review? Go [here](https://github.com/Vortyne/pureRGB/issues/new?assignees=&labels=review&projects=&template=review.yml&title=%5BReview%5D%3A+Summarize+your+review+here).
 
+
+### Review by MrHaSaN-96 on v2.6.3
+
+It is one of the best 'vanilla+' ROM hacks available, offering essential quality-of-life improvements and bug fixes. Additionally, it introduces secret areas and expanded post-game content that encourage players to rediscover the game with fresh perspectives.
+
 ### Review by meldridge on v2.6.1 - Exactly what I was looking for. 
 
 Finished game?: No
