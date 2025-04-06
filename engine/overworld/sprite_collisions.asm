@@ -58,7 +58,7 @@ LoadExtraTiles::
 .powerPlantRoof
 	jpfar CheckLoadPowerPlantRoofTiles
 .saffronAbandonedBuilding
-	jpfar SilphCo1FReplaceTiles
+	jpfar SilphCo1FReplaceTilesCheck
 .seafoamIslands1F
 	jpfar SeafoamIslands1FCheckLoadCustomTiles
 .cinnabarVolcano

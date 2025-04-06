@@ -21,13 +21,12 @@ SilphCo1FOnMapLoad:
 	ld a, [wXCoord]
 	cp 30
 	call nc, SilphCo1FCheckHideRockets
+SilphCo1FReplaceTilesCheck::
 	ld a, [wXCoord]
 	cp 42
 	ret nc
 	cp 36
 	ret c
-	; fall through
-SilphCo1FReplaceTiles::
 	ld hl, vTileset tile 1
 	ld de, Facility_GFX tile $32
 	lb bc, BANK(Facility_GFX), 1
