@@ -44,6 +44,6 @@ _BluesHouseTownMapText::
 	text "It's a map of the"
 	line "KANTO region."
 	
-	para "...Would you be"
-	line "happy to get it?"
+	para "Would you be happy"
+	line "if you had it?"
 	done
