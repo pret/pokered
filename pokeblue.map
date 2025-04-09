@@ -3849,7 +3849,7 @@ ROMX bank #5:
 	         $7cfd = QuestionEmote
 	         $7d3d = HappyEmote
 	         $7d7d = InGameTrade_CheckForTradeEvo
-	         $7d8d = InGameTrade_CheckForTradeEvo.ok
+	         $7d8d = InGameTrade_CheckForTradeEvo.nameMatched
 	         $7dad = SubstituteEffect_
 	         $7dc9 = SubstituteEffect_.notEnemy
 	         $7dea = SubstituteEffect_.userHasZeroOrMoreHP

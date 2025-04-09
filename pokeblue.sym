@@ -3792,7 +3792,7 @@
 05:7cfd QuestionEmote
 05:7d3d HappyEmote
 05:7d7d InGameTrade_CheckForTradeEvo
-05:7d8d InGameTrade_CheckForTradeEvo.ok
+05:7d8d InGameTrade_CheckForTradeEvo.nameMatched
 05:7dad SubstituteEffect_
 05:7dc9 SubstituteEffect_.notEnemy
 05:7dea SubstituteEffect_.userHasZeroOrMoreHP
