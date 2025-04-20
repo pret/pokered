@@ -24,7 +24,7 @@ TrainerDataPointers:
 	dw TamerData
 	dw BirdKeeperData
 	dw BlackbeltData
-	dw Green1Data
+	dw Rival1Data
 	dw ProfOakData
 	dw ChiefData
 	dw ScientistData
@@ -41,8 +41,8 @@ TrainerDataPointers:
 	dw BlaineData
 	dw SabrinaData
 	dw GentlemanData
-	dw Green2Data
-	dw Green3Data
+	dw Rival2Data
+	dw Rival3Data
 	dw LoreleiData
 	dw ChannelerData
 	dw AgathaData
@@ -484,7 +484,7 @@ BlackbeltData:
 ; Victory Road 2F
 	db 43, MACHOKE, MACHOP, MACHOKE, 0
 
-Green1Data:
+Rival1Data:
 	db 5, SQUIRTLE, 0
 	db 5, BULBASAUR, 0
 	db 5, CHARMANDER, 0
@@ -672,7 +672,7 @@ GentlemanData:
 ; SS Anne 2F Rooms
 	db 17, GROWLITHE, PONYTA, 0
 
-Green2Data:
+Rival2Data:
 ; SS Anne 2F
 	db $FF, 19, PIDGEOTTO, 16, RATICATE, 18, KADABRA, 20, WARTORTLE, 0
 	db $FF, 19, PIDGEOTTO, 16, RATICATE, 18, KADABRA, 20, IVYSAUR, 0
@@ -690,7 +690,7 @@ Green2Data:
 	db $FF, 47, PIDGEOT, 45, RHYHORN, 45, GYARADOS, 47, GROWLITHE, 50, ALAKAZAM, 53, VENUSAUR, 0
 	db $FF, 47, PIDGEOT, 45, RHYHORN, 45, EXEGGCUTE, 47, GYARADOS, 50, ALAKAZAM, 53, CHARIZARD, 0
 
-Green3Data:
+Rival3Data:
 	db $FF, 61, PIDGEOT, 59, ALAKAZAM, 61, RHYDON, 61, ARCANINE, 63, EXEGGUTOR, 65, BLASTOISE, 0
 	db $FF, 61, PIDGEOT, 59, ALAKAZAM, 61, RHYDON, 61, GYARADOS, 63, ARCANINE, 65, VENUSAUR, 0
 	db $FF, 61, PIDGEOT, 59, ALAKAZAM, 61, RHYDON, 61, EXEGGUTOR, 63, GYARADOS, 65, CHARIZARD, 0
