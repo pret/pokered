@@ -6378,7 +6378,7 @@ ROMX bank #14:
 	         $6151 = TamerData
 	         $616b = BirdKeeperData
 	         $61be = BlackbeltData
-	         $61e4 = Green1Data
+	         $61e4 = Rival1Data
 	         $621d = ProfOakData
 	         $6241 = ChiefData
 	         $6241 = ScientistData
@@ -6395,8 +6395,8 @@ ROMX bank #14:
 	         $63db = BlaineData
 	         $63e5 = SabrinaData
 	         $63ef = GentlemanData
-	         $6401 = Green2Data
-	         $6491 = Green3Data
+	         $6401 = Rival2Data
+	         $6491 = Rival3Data
 	         $64bb = LoreleiData
 	         $64c7 = ChannelerData
 	         $6516 = AgathaData

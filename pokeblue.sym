@@ -6249,7 +6249,7 @@
 0e:6151 TamerData
 0e:616b BirdKeeperData
 0e:61be BlackbeltData
-0e:61e4 Green1Data
+0e:61e4 Rival1Data
 0e:621d ProfOakData
 0e:6241 ChiefData
 0e:6241 ScientistData
@@ -6266,8 +6266,8 @@
 0e:63db BlaineData
 0e:63e5 SabrinaData
 0e:63ef GentlemanData
-0e:6401 Green2Data
-0e:6491 Green3Data
+0e:6401 Rival2Data
+0e:6491 Rival3Data
 0e:64bb LoreleiData
 0e:64c7 ChannelerData
 0e:6516 AgathaData
