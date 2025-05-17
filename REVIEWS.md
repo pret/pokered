@@ -2,7 +2,7 @@
 
 Want to leave a review? Go [here](https://github.com/Vortyne/pureRGB/issues/new?assignees=&labels=review&projects=&template=review.yml&title=%5BReview%5D%3A+Summarize+your+review+here).
 
-### Review by snowyleapord on v2.6.3
+### Review by snowyleapord on v2.6.3 - awsome
 
 I wanted to complete a gen 1 game as I was too young to apprisiate it and had played silver/ruby to death. This was great because after doing the second map on silver I wanted to do gen 1 but kept getting board doing the standard game. I actually completed it this time yay! That bloody volcano was hard af much like the sky tower for that funny green flying snake thing in ruby. It was the same enough for me to enjoy it and different enough to keep me entertained. Ghost marawack was awesome always wanted a better ending for that. Battle with oak awsome also. Starter Pokémon wild much better also. Space world stuff awsome also. Please re do silver and gold in a similar likeness. Overall 20/10 many thanks !!
 
