@@ -34,6 +34,8 @@
 	const EVENT_PALLET_AFTER_GETTING_POKEBALLS_2
 	const EVENT_OAK_APPEARED_IN_PALLET
 
+	; pureRGBnote: no free event space?
+
 ; Viridian City events
 	const_next $28
 	const EVENT_VIRIDIAN_GYM_OPEN
@@ -58,6 +60,8 @@
 	const EVENT_BEAT_VIRIDIAN_GYM_TRAINER_6
 	const EVENT_BEAT_VIRIDIAN_GYM_TRAINER_7
 
+	; pureRGBnote: ~15 bits of unused event space
+
 ; Pewter City events
 	const_next $68
 	const EVENT_BOUGHT_MUSEUM_TICKET
@@ -72,9 +76,13 @@
 	const EVENT_GOT_TM34
 	const EVENT_BEAT_BROCK
 
+	; pureRGBnote: ~11 bits of unused event space
+
 ; World Options ; PureRGBnote: ADDED: flags for the world options menu (only 1 at the moment)
 	const_next $82
 	const FLAG_VOLCANO_AREA_TURNED_OFF
+
+	; pureRGBnote: ~21 bits of unused event space
 
 ; Cerulean City events
 	const_next $98
@@ -89,6 +97,8 @@
 	const EVENT_GOT_TM11
 	const EVENT_BEAT_MISTY
 	const EVENT_GOT_BICYCLE
+
+	; pureRGBnote: ~46 bits of unused event space
 
 ; Lavender Town events
 	const_next $F0 - 2 ; $EE
@@ -136,6 +146,8 @@
 	const_skip 6
 	const EVENT_GOT_POKE_FLUTE
 
+	; pureRGBnote: ~7 bits of unused event space
+
 ; Cinnabar Volcano Events ; PureRGBnote: ADDED: 
 	const_next $130
 	const EVENT_GOT_LAVA_SUIT
@@ -164,7 +176,8 @@
 	const EVENT_FINISHED_VOLCANO
 	const EVENT_VOLCANO_TALKED_TO_BLAINE
 	const EVENT_MAGMAR_TRANSFORMATION
-	; 6 left
+	
+	; pureRGBnote: ~6 bits of unused event space
 	
 
 ; Vermilion City events
@@ -186,6 +199,8 @@
 	const EVENT_GOT_VERMILION_APEX_CHIPS
 	const EVENT_GOT_TM24
 	const EVENT_BEAT_LT_SURGE
+
+	; pureRGBnote: ~25 bits of unused event space
 
 ; Celadon City events
 	const_next $180
@@ -221,6 +236,8 @@
 	const EVENT_GOT_20_COINS_2
 	const_skip 35
 	const EVENT_GOT_COIN_CASE
+
+	; pureRGBnote: ~58 bits of unused event space
 
 ; Fuchsia City events
 	const_next $238
@@ -259,6 +276,8 @@
 	const EVENT_BEAT_FUCHSIA_GYM_TRAINER_3
 	const EVENT_BEAT_FUCHSIA_GYM_TRAINER_4
 	const EVENT_BEAT_FUCHSIA_GYM_TRAINER_5
+
+	; pureRGBnote: ~19 bits of unused event space
 
 ; Cinnabar Island events
 	const_next $278
@@ -319,6 +338,8 @@
 	const EVENT_LAB_STILL_REVIVING_FOSSIL
 	const EVENT_LAB_HANDING_OVER_FOSSIL_MON
 
+	; pureRGBnote: ~94 bits of unused event space
+
 ; Saffron City events
 	const_next $340
 	const EVENT_GOT_TM31
@@ -363,9 +384,13 @@
 	const_skip 20
 	const EVENT_GOT_TM29
 
+	; pureRGBnote: ~16 bits of unused event space
+
 ; Route 1 events
 	const_next $3C0
 	const EVENT_GOT_POTION_SAMPLE
+
+	; pureRGBnote: ~23 bits of unused event space
 
 ; Route 2 events
 	const_next $3D8
@@ -373,6 +398,8 @@
 	const EVENT_BEAT_ROUTE_2_TRAINER_0
 	const EVENT_BEAT_ROUTE_2_TRAINER_1
 	const EVENT_BEAT_ROUTE_2_TRAINER_2
+
+	; pureRGBnote: ~5 bits of unused event space
 
 ; Route 3 events
 	const_next $3E0
@@ -385,6 +412,8 @@
 	const EVENT_BEAT_ROUTE_3_TRAINER_5
 	const EVENT_BEAT_ROUTE_3_TRAINER_6
 	const EVENT_BEAT_ROUTE_3_TRAINER_7
+
+	; pureRGBnote: ~7 bits of unused event space
 
 ; Route 4 events
 	const_next $3F0
@@ -408,6 +437,8 @@
 	const EVENT_BEAT_UNDERGROUND_PATH_NORTH_SOUTH_TRAINER_1
 	const EVENT_BEAT_UNDERGROUND_PATH_NORTH_SOUTH_TRAINER_2
 
+	; pureRGBnote: ~16 bits of unused event space
+
 ; Route 6 events
 	const_next $410
 	const_skip
@@ -429,6 +460,8 @@
 	const EVENT_BEAT_UNDERGROUND_PATH_WEST_EAST_TRAINER_1
 	const EVENT_BEAT_UNDERGROUND_PATH_WEST_EAST_TRAINER_2
 
+	; pureRGBnote: ~2 bits of unused event space
+
 ; Diamond Mine Events
 	const_next $420
 	const EVENT_DIAMOND_MINE_AGREED_TO_HELP
@@ -441,6 +474,8 @@
 	const EVENT_DIAMOND_MINE_COMPLETED 
 DEF FLAG_JIGGLE_TOGGLE EQU const_value
 	const FLAG_DIAMOND_MINE_BOOMBOX_JIGGLE
+
+	; pureRGBnote: ~7 bits of unused event space
 
 ; Route 8 events
 	const_next $430
@@ -457,6 +492,8 @@ DEF FLAG_JIGGLE_TOGGLE EQU const_value
 	const EVENT_CUT_DOWN_ROUTE8_LEFT_TREE
 	const EVENT_CUT_DOWN_ROUTE8_RIGHT_TREE
 
+	; pureRGBnote: ~4 bits of unused event space
+
 ; Route 9 events
 	const_next $440
 	const_skip
@@ -469,6 +506,8 @@ DEF FLAG_JIGGLE_TOGGLE EQU const_value
 	const EVENT_BEAT_ROUTE_9_TRAINER_6
 	const EVENT_BEAT_ROUTE_9_TRAINER_7
 	const EVENT_BEAT_ROUTE_9_TRAINER_8
+
+	; pureRGBnote: ~6 bits of unused event space
 
 ; Route 10 events
 	const_next $450
@@ -1057,8 +1096,89 @@ DEF SPRITE_OPTIONS_FLAGS_FIFTH_BATCH_START EQU const_value
 
 	const_next $930
 DEF LEARNSET_FLAGS_START EQU const_value
-	const_next $980
+	const FLAG_VENUSAUR_FAMILY_LEARNSET
+	const FLAG_CHARIZARD_FAMILY_LEARNSET
+	const FLAG_BLASTOISE_FAMILY_LEARNSET
+	const FLAG_BUTTERFREE_FAMILY_LEARNSET
+	const FLAG_BEEDRILL_FAMILY_LEARNSET
+	const FLAG_PIDGEOT_FAMILY_LEARNSET
+	const FLAG_RATICATE_FAMILY_LEARNSET
+	const FLAG_FEAROW_FAMILY_LEARNSET
+	const FLAG_ARBOK_FAMILY_LEARNSET
+	const FLAG_RAICHU_FAMILY_LEARNSET
+	const FLAG_SANDSLASH_FAMILY_LEARNSET
+	const FLAG_NIDOQUEEN_FAMILY_LEARNSET
+	const FLAG_NIDOKING_FAMILY_LEARNSET
+	const FLAG_CLEFABLE_FAMILY_LEARNSET
+	const FLAG_NINETALES_FAMILY_LEARNSET
+	const FLAG_WIGGLYTUFF_FAMILY_LEARNSET
+	const FLAG_GOLBAT_FAMILY_LEARNSET
+	const FLAG_VILEPLUME_FAMILY_LEARNSET
+	const FLAG_PARASECT_FAMILY_LEARNSET
+	const FLAG_VENOMOTH_FAMILY_LEARNSET
+	const FLAG_DUGTRIO_FAMILY_LEARNSET
+	const FLAG_PERSIAN_FAMILY_LEARNSET
+	const FLAG_GOLDUCK_FAMILY_LEARNSET
+	const FLAG_PRIMEAPE_FAMILY_LEARNSET
+	const FLAG_ARCANINE_FAMILY_LEARNSET
+	const FLAG_POLIWRATH_FAMILY_LEARNSET
+	const FLAG_ALAKAZAM_FAMILY_LEARNSET
+	const FLAG_MACHAMP_FAMILY_LEARNSET
+	const FLAG_VICTREEBEL_FAMILY_LEARNSET
+	const FLAG_TENTACRUEL_FAMILY_LEARNSET
+	const FLAG_GOLEM_FAMILY_LEARNSET
+	const FLAG_RAPIDASH_FAMILY_LEARNSET
+	const FLAG_SLOWBRO_FAMILY_LEARNSET
+	const FLAG_FARFETCHD_LEARNSET
+	const FLAG_DODRIO_FAMILY_LEARNSET
+	const FLAG_DEWGONG_FAMILY_LEARNSET
+	const FLAG_MUK_FAMILY_LEARNSET
+	const FLAG_CLOYSTER_FAMILY_LEARNSET
+	const FLAG_GENGAR_FAMILY_LEARNSET
+	const FLAG_ONIX_LEARNSET
+	const FLAG_HYPNO_FAMILY_LEARNSET
+	const FLAG_KINGLER_FAMILY_LEARNSET
+	const FLAG_ELECTRODE_FAMILY_LEARNSET
+	const FLAG_EXEGGUTOR_FAMILY_LEARNSET
+	const FLAG_MAROWAK_FAMILY_LEARNSET
+	const FLAG_HITMONLEE_LEARNSET
+	const FLAG_HITMONCHAN_LEARNSET
+	const FLAG_LICKITUNG_LEARNSET
+	const FLAG_WEEZING_FAMILY_LEARNSET
+	const FLAG_RHYDON_FAMILY_LEARNSET
+	const FLAG_CHANSEY_LEARNSET
+	const FLAG_TANGELA_LEARNSET
+	const FLAG_KANGASKHAN_LEARNSET
+	const FLAG_SEADRA_FAMILY_LEARNSET
+	const FLAG_SEAKING_FAMILY_LEARNSET
+	const FLAG_STARMIE_FAMILY_LEARNSET
+	const FLAG_MRMIME_LEARNSET
+	const FLAG_SCYTHER_LEARNSET
+	const FLAG_JYNX_LEARNSET
+	const FLAG_ELECTABUZZ_LEARNSET
+	const FLAG_MAGMAR_LEARNSET
+	const FLAG_PINSIR_LEARNSET
+	const FLAG_TAUROS_LEARNSET
+	const FLAG_GYARADOS_FAMILY_LEARNSET
+	const FLAG_LAPRAS_LEARNSET
+	const FLAG_DITTO_LEARNSET
+	const FLAG_EEVEE_LEARNSET
+	const FLAG_VAPOREON_LEARNSET
+	const FLAG_JOLTEON_LEARNSET
+	const FLAG_FLAREON_LEARNSET
+	const FLAG_PORYGON_LEARNSET
+	const FLAG_OMASTAR_FAMILY_LEARNSET
+	const FLAG_KABUTOPS_FAMILY_LEARNSET
+	const FLAG_AERODACTYL_LEARNSET
+	const FLAG_SNORLAX_LEARNSET
+	const FLAG_ARTICUNO_LEARNSET
+	const FLAG_ZAPDOS_LEARNSET
+	const FLAG_MOLTRES_LEARNSET
+	const FLAG_DRAGONITE_FAMILY_LEARNSET
+	const FLAG_MEWTWO_LEARNSET
+	const FLAG_MEW_LEARNSET
 DEF LEARNSET_FLAGS_END EQU const_value
+	const_next $980
 
 ; Rock Tunnel events
 	const_next $9B0
