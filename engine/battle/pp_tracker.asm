@@ -204,8 +204,8 @@ transformPPtasks:
 
 advancedLoadPP:
 	ld a, [wIsInBattle]
-	cp 1
-	jr z, .doRegular	;don't do anything special for wild battles
+	cp 2
+	jr nz, .doRegular ; don't do anything special for wild battles, and gift pokemon (outside battle)
 	;else see if the mon has been sent out before
 	callfar CheckAISentOut
 	jr z, .doRegular	;don't do anything special if the mon has not been out before
