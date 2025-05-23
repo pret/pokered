@@ -6679,6 +6679,7 @@ LoadEnemyMonData:
 	ld a, [hli]            ; copy type 2
 	ld [de], a
 	inc de
+	; ??? TODO: This can run if a gift or caught pokemon, does it cause issues?
 	push de
 	push hl
 	push bc

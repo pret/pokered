@@ -53,6 +53,7 @@ ShakeElevator::
 	ld a, SFX_SAFARI_ZONE_PA
 	call PlayMusic
 .musicLoop
+	; TODO: instead of making it wait for the sound to finish, pause and unpause music in map script when it's done?
 	ld a, [wChannelSoundIDs + CHAN5]
 	cp SFX_SAFARI_ZONE_PA
 	jr z, .musicLoop

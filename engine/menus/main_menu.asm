@@ -398,6 +398,8 @@ db " v"
 INCLUDE "version_number.asm"
 db "@"
 
+; TODO: optimize below here
+
 DisplayContinueGameInfo:
 	xor a
 	ldh [hAutoBGTransferEnabled], a
