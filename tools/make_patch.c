@@ -183,6 +183,16 @@ int parse_arg_value(const char *arg, bool absolute, const struct Symbol *symbols
 		return parse_number(arg, 0);
 	}
 
+	// Symbols may take the low or high part
+	enum { SYM_WHOLE, SYM_LOW, SYM_HIGH } part = SYM_WHOLE;
+	if (arg[0] == '<') {
+		part = SYM_LOW;
+		arg++;
+	} else if (arg[0] == '>') {
+		part = SYM_HIGH;
+		arg++;
+	}
+
 	// Symbols evaluate to their offset or address, plus an optional offset mod
 	int offset_mod = 0;
 	char *plus = strchr(arg, '+');
@@ -190,9 +200,13 @@ int parse_arg_value(const char *arg, bool absolute, const struct Symbol *symbols
 		offset_mod = parse_number(plus, 0);
 		*plus = '\0';
 	}
+
+	// Symbols evaluate to their offset or address
 	const char *sym_name = !strcmp(arg, "@") ? patch_name : arg; // "@" is the current patch label
 	const struct Symbol *symbol = symbol_find(symbols, sym_name);
-	return (absolute ? symbol->offset : symbol->address) + offset_mod;
+
+	int value = (absolute ? symbol->offset : symbol->address) + offset_mod;
+	return part == SYM_LOW ? value & 0xff : part == SYM_HIGH ? value >> 8 : value;
 }
 
 void interpret_command(char *command, const struct Symbol *current_hook, const struct Symbol *symbols, struct Buffer *patches, FILE *restrict new_rom, FILE *restrict orig_rom, FILE *restrict output) {
@@ -413,7 +427,7 @@ struct Buffer *process_template(const char *template_filename, const char *patch
 int compare_patch(const void *patch1, const void *patch2) {
 	unsigned int offset1 = ((const struct Patch *)patch1)->offset;
 	unsigned int offset2 = ((const struct Patch *)patch2)->offset;
-	return offset1 > offset2 ? 1 : offset1 < offset2 ? -1 : 0;
+	return (offset1 > offset2) - (offset1 < offset2);
 }
 
 bool verify_completeness(FILE *restrict orig_rom, FILE *restrict new_rom, struct Buffer *patches) {
