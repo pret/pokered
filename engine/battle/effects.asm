@@ -1632,7 +1632,7 @@ DisableEffect:
 	or [hl]
 	inc hl
 	or [hl]
-	and $3f
+	and PP_MASK
 	pop hl ; wBattleMonPP or wEnemyMonPP
 	jr z, .moveMissedPopHL ; nothing to do if all moves have no PP left
 	add hl, bc

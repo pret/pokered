@@ -6,8 +6,11 @@ TradeMons:
 	; give mon, get mon, dialog id, nickname
 	; The two instances of TRADE_DIALOGSET_EVOLUTION are a leftover
 	; from the Japanese Blue trades, which used species that evolve.
-	; Japanese Red and Green used TRADE_DIALOGSET_CASUAL, and had
-	; the same species as English Red and Blue.
+	; TRADE_DIALOGSET_EVOLUTION did not refer to evolution in Japanese
+	; Red/Green. Japanese Blue changed _AfterTrade2Text to say your Pokémon
+	; "went and evolved" and also changed the trades to match. English
+	; Red/Blue uses the original JP Red/Green trades but with the JP Blue
+	; post-trade text.
 	db ODDISH,     PONYTA,    TRADE_DIALOGSET_CASUAL, "Seabiscuit@" ; route 11
 	db DROWZEE,    GRIMER,    TRADE_DIALOGSET_CASUAL, "Goopinator@" ; route 2
 	db ALAKAZAM,   MAGNETON,  TRADE_DIALOGSET_SPROCKET, "SPROCKET@@@" ; cerulean city rocket house basement

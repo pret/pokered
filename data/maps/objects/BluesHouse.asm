@@ -8,11 +8,7 @@ BluesHouse_Object:
 
 	def_warp_events
 	warp_event  2,  7, LAST_MAP, 2
-IF DEF(_DEBUG)
-	warp_event  3,  7, BLUES_HOUSE_1F_DEBUG_WARP_MAP, BLUES_HOUSE_1F_DEBUG_WARP_WHICH
-ELSE
 	warp_event  3,  7, LAST_MAP, 2
-ENDC
 
 	def_bg_events
 
