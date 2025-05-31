@@ -18596,7 +18596,6 @@
 00:cd3d wNumShakes
 00:cd3d wPPRestoreItem
 00:cd3d wDexMaxSeenMon
-00:cd3d wSavedY
 00:cd3d wChangeBoxSavedMapTextPointer
 00:cd3d wBadgeNumberTile
 00:cd3d wOptionsTextSpeedCursorX
@@ -18626,6 +18625,7 @@
 00:cd3d wBoxMonCounts
 00:cd3d wHoFTeamIndex
 00:cd3d wWhichTrade
+00:cd3d wSavedY
 00:cd3d wDayCareStartLevel
 00:cd3d wMoveDownSmallStarsOAMCount
 00:cd3d wWereAnyMonsAsleep

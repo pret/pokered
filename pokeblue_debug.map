@@ -18888,7 +18888,6 @@ WRAM0 bank #0:
 	         $cd3d = wNumShakes
 	         $cd3d = wPPRestoreItem
 	         $cd3d = wDexMaxSeenMon
-	         $cd3d = wSavedY
 	         $cd3d = wChangeBoxSavedMapTextPointer
 	         $cd3d = wBadgeNumberTile
 	         $cd3d = wOptionsTextSpeedCursorX
@@ -18918,6 +18917,7 @@ WRAM0 bank #0:
 	         $cd3d = wBoxMonCounts
 	         $cd3d = wHoFTeamIndex
 	         $cd3d = wWhichTrade
+	         $cd3d = wSavedY
 	         $cd3d = wDayCareStartLevel
 	         $cd3d = wMoveDownSmallStarsOAMCount
 	         $cd3d = wWereAnyMonsAsleep
