@@ -317,7 +317,7 @@ MainInBattleLoop:
 	bit USING_TRAPPING_MOVE, a ; check if enemy is using a multi-turn attack like wrap
 	jr z, .selectPlayerMove ; if not, jump
 ; enemy is using a multi-turn attack like wrap, so player is trapped and cannot execute a move
-	ld a, $ff
+	ld a, CANNOT_MOVE
 	ld [wPlayerSelectedMove], a
 	jr .selectEnemyMove
 .selectPlayerMove
@@ -3018,7 +3018,8 @@ LinkBattleExchangeData:
 	ld b, LINKBATTLE_STRUGGLE
 	jr z, .next
 	dec b ; LINKBATTLE_NO_ACTION
-	inc a ; does move equal -1 (i.e. no action)?
+	ASSERT CANNOT_MOVE == $ff
+	inc a
 	jr z, .next
 	ld a, [wPlayerMoveListIndex]
 	jr .doExchange
@@ -3071,8 +3072,9 @@ ExecutePlayerMove:
 	xor a
 	ldh [hWhoseTurn], a ; set player's turn
 	ld a, [wPlayerSelectedMove]
+	ASSERT CANNOT_MOVE == $ff
 	inc a
-	jp z, ExecutePlayerMoveDone ; for selected move = FF, skip most of player's turn
+	jp z, ExecutePlayerMoveDone ; if the player cannot move, skip most of their turn
 	xor a
 	ld [wMoveMissed], a
 	ld [wMonIsDisobedient], a
@@ -5584,6 +5586,7 @@ RandomizeDamage:
 ; for more detailed commentary, see equivalent function for player side (ExecutePlayerMove)
 ExecuteEnemyMove:
 	ld a, [wEnemySelectedMove]
+	ASSERT CANNOT_MOVE == $ff
 	inc a
 	jp z, ExecuteEnemyMoveDone
 	call PrintGhostText
