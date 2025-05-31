@@ -1,6 +1,6 @@
 # Reviews
 
-Want to leave a review? Go [here](https://github.com/Vortyne/pureRGB/issues/new?assignees=&labels=review&projects=&template=review.yml&title=%5BReview%5D%3A+Summarize+your+review+here).
+Want to leave a review? Go [here](https://www.romhacking.net/?page=reviews&action=addentrypage&section=Hacks&subid=8803) or [here](https://github.com/Vortyne/pureRGB/issues/new?assignees=&labels=review&projects=&template=review.yml&title=%5BReview%5D%3A+Summarize+your+review+here).
 
 ### Review by snowyleapord on v2.6.3 - awsome
 
