@@ -213,7 +213,7 @@ SetPal_TrainerCard:
 	srl a
 	push af
 	jr c, .haveBadge
-; The player doens't have the badge, so zero the badge's blk data.
+; The player doesn't have the badge, so zero the badge's blk data.
 	push bc
 	ld a, [de]
 	ld c, a
