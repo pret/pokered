@@ -1599,7 +1599,7 @@ ROMX bank #1:
 	         $668c = DisplayNamingScreen.pressedStart
 	         $6692 = DisplayNamingScreen.pressedA
 	         $66a0 = DisplayNamingScreen.didNotPressED
-	         $66ae = DisplayNamingScreen.didNotPressCaseSwtich
+	         $66ae = DisplayNamingScreen.didNotPressCaseSwitch
 	         $66db = DisplayNamingScreen.checkMonNameLength
 	         $66e0 = DisplayNamingScreen.checkNameLength
 	         $66e3 = DisplayNamingScreen.dakutensAndHandakutens
@@ -11754,7 +11754,7 @@ ROMX bank #23:
 	         $5e7d = GymTrashCans
 	         $5ec8 = VermilionGymTrashSuccessText1
 	         $5edb = VermilionGymTrashSuccessText2
-	         $5ee0 = VermilionGymTrashSuccesPlaySfx
+	         $5ee0 = VermilionGymTrashSuccessPlaySfx
 	         $5eef = VermilionGymTrashSuccessText3
 	         $5f02 = VermilionGymTrashFailText
 	EMPTY: $5f15-$7fff ($20eb bytes)

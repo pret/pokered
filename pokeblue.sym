@@ -1569,7 +1569,7 @@
 01:668c DisplayNamingScreen.pressedStart
 01:6692 DisplayNamingScreen.pressedA
 01:66a0 DisplayNamingScreen.didNotPressED
-01:66ae DisplayNamingScreen.didNotPressCaseSwtich
+01:66ae DisplayNamingScreen.didNotPressCaseSwitch
 01:66db DisplayNamingScreen.checkMonNameLength
 01:66e0 DisplayNamingScreen.checkNameLength
 01:66e3 DisplayNamingScreen.dakutensAndHandakutens
@@ -11571,7 +11571,7 @@
 17:5e7d GymTrashCans
 17:5ec8 VermilionGymTrashSuccessText1
 17:5edb VermilionGymTrashSuccessText2
-17:5ee0 VermilionGymTrashSuccesPlaySfx
+17:5ee0 VermilionGymTrashSuccessPlaySfx
 17:5eef VermilionGymTrashSuccessText3
 17:5f02 VermilionGymTrashFailText
 18:4000 ViridianForest_Blocks
