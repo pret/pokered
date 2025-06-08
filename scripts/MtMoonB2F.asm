@@ -12,6 +12,11 @@ MtMoonB2F_Script:
 	ld hl, MtMoonB2FFossilAreaCoords
 	call ArePlayerCoordsInArray
 	jr nc, .enable_battles
+;;;;; PureRGBnote: FIXED: using pocket abra near the super nerd can get battles stuck disabled, so enable battles in that specific case
+	ld hl, wStatusFlags6
+	bit BIT_ESCAPE_WARP, [hl]
+	jr nz, .enable_battles
+;;;;;
 	ld hl, wStatusFlags4
 	set BIT_NO_BATTLES, [hl]
 	ret
