@@ -44,7 +44,7 @@ MACRO list_start
 ENDM
 
 MACRO li
-	ASSERT STRFIND(\1, "@") == -1, STRCAT("String terminator \"@\" in list entry: ", \1)
+	ASSERT STRFIND(\1, "@") == -1, "String terminator \"@\" in list entry: \1"
 	db \1, "@"
 	DEF list_index += 1
 ENDM
