@@ -29,7 +29,7 @@ PokemonTower7FEndBattleScript:
 	cp $ff
 	jp z, PokemonTower7FSetDefaultScript
 	call EndTrainerBattle
-	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld a, PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
 	ld [wJoyIgnore], a
 	ld a, [wSpriteIndex]
 	ldh [hSpriteIndex], a
@@ -65,7 +65,7 @@ PokemonTower7FHideNPCScript:
 	ret
 
 PokemonTower7FWarpToMrFujiHouseScript:
-	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld a, PAD_A | PAD_B | PAD_SELECT | PAD_START | PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
 	ld [wJoyIgnore], a
 	ld a, HS_POKEMON_TOWER_7F_MR_FUJI
 	ld [wMissableObjectIndex], a

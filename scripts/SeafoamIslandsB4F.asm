@@ -45,7 +45,7 @@ SeafoamIslandsB4FDefaultScript:
 	ld a, 1
 .forcePlayerUpFromSurfExit
 	ld [wSimulatedJoypadStatesIndex], a
-	ld a, D_UP
+	ld a, PAD_UP
 	ld [wSimulatedJoypadStatesEnd], a
 	call StartSimulatingJoypadStates
 	ld hl, wStatusFlags7
@@ -103,15 +103,15 @@ SeafoamIslandsB4FMoveObjectScript:
 	db -1 ; end
 
 .RLEList_StrongCurrentNearRightBoulder:
-	db D_UP, 3
-	db D_RIGHT, 2
-	db D_UP, 1
+	db PAD_UP, 3
+	db PAD_RIGHT, 2
+	db PAD_UP, 1
 	db -1 ; end
 
 .RLEList_StrongCurrentNearLeftBoulder:
-	db D_UP, 3
-	db D_RIGHT, 3
-	db D_UP, 1
+	db PAD_UP, 3
+	db PAD_RIGHT, 3
+	db PAD_UP, 1
 	db -1 ; end
 
 SeafoamIslandsB4FObjectMoving2Script:

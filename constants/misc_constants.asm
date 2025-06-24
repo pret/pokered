@@ -7,3 +7,6 @@ DEF TRUE  EQU 1
 	const FLAG_RESET ; 0
 	const FLAG_SET   ; 1
 	const FLAG_TEST  ; 2
+
+; input
+DEF NO_INPUT EQU 0

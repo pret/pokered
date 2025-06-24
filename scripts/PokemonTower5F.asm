@@ -26,7 +26,7 @@ PokemonTower5FDefaultScript:
 	ret nz
 	xor a
 	ldh [hJoyHeld], a
-	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld a, PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
 	ld [wJoyIgnore], a
 	ld hl, wStatusFlags4
 	set BIT_NO_BATTLES, [hl]

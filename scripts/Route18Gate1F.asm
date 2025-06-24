@@ -32,7 +32,7 @@ Route18Gate1FDefaultScript:
 	ld [wSimulatedJoypadStatesIndex], a
 	ld b, 0
 	ld c, a
-	ld a, D_UP
+	ld a, PAD_UP
 	ld hl, wSimulatedJoypadStatesEnd
 	call FillMemory
 	call StartSimulatingJoypadStates
@@ -55,7 +55,7 @@ Route18Gate1FPlayerMovingUpScript:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
-	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld a, PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
 	ld [wJoyIgnore], a
 
 Route18Gate1FGuardScript:
@@ -64,7 +64,7 @@ Route18Gate1FGuardScript:
 	call DisplayTextID
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
-	ld a, D_RIGHT
+	ld a, PAD_RIGHT
 	ld [wSimulatedJoypadStatesEnd], a
 	call StartSimulatingJoypadStates
 	ld a, SCRIPT_ROUTE18GATE1F_PLAYER_MOVING_RIGHT

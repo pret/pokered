@@ -28,7 +28,7 @@ RocketHideoutB3FDefaultScript:
 	call StartSimulatingJoypadStates
 	ld a, SFX_ARROW_TILES
 	call PlaySound
-	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld a, PAD_A | PAD_B | PAD_SELECT | PAD_START | PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
 	ld [wJoyIgnore], a
 	ld a, SCRIPT_ROCKETHIDEOUTB3F_PLAYER_SPINNING
 	ld [wCurMapScript], a
@@ -56,61 +56,61 @@ RocketHideout3ArrowTilePlayerMovement:
 ;format: direction, count
 ;each list is read starting from the $FF and working backwards
 RocketHideout3ArrowMovement1:
-	db D_RIGHT, 4
-	db D_UP, 4
-	db D_RIGHT, 4
+	db PAD_RIGHT, 4
+	db PAD_UP, 4
+	db PAD_RIGHT, 4
 	db -1 ; end
 
 RocketHideout3ArrowMovement2:
-	db D_DOWN, 4
-	db D_RIGHT, 4
+	db PAD_DOWN, 4
+	db PAD_RIGHT, 4
 	db -1 ; end
 
 RocketHideout3ArrowMovement3:
-	db D_LEFT, 2
+	db PAD_LEFT, 2
 	db -1 ; end
 
 RocketHideout3ArrowMovement4:
-	db D_RIGHT, 4
-	db D_UP, 2
-	db D_RIGHT, 2
+	db PAD_RIGHT, 4
+	db PAD_UP, 2
+	db PAD_RIGHT, 2
 	db -1 ; end
 
 RocketHideout3ArrowMovement5:
-	db D_RIGHT, 4
-	db D_UP, 2
-	db D_RIGHT, 2
-	db D_UP, 3
+	db PAD_RIGHT, 4
+	db PAD_UP, 2
+	db PAD_RIGHT, 2
+	db PAD_UP, 3
 	db -1 ; end
 
 RocketHideout3ArrowMovement6:
-	db D_RIGHT, 4
+	db PAD_RIGHT, 4
 	db -1 ; end
 
 RocketHideout3ArrowMovement7:
-	db D_RIGHT, 2
+	db PAD_RIGHT, 2
 	db -1 ; end
 
 RocketHideout3ArrowMovement8:
-	db D_RIGHT, 4
-	db D_UP, 2
+	db PAD_RIGHT, 4
+	db PAD_UP, 2
 	db -1 ; end
 
 RocketHideout3ArrowMovement9:
-	db D_RIGHT, 4
-	db D_UP, 4
+	db PAD_RIGHT, 4
+	db PAD_UP, 4
 	db -1 ; end
 
 RocketHideout3ArrowMovement10:
-	db D_DOWN, 4
+	db PAD_DOWN, 4
 	db -1 ; end
 
 RocketHideout3ArrowMovement11:
-	db D_UP, 2
+	db PAD_UP, 2
 	db -1 ; end
 
 RocketHideout3ArrowMovement12:
-	db D_UP, 1
+	db PAD_UP, 1
 	db -1 ; end
 
 RocketHideoutB3FPlayerSpinningScript:

@@ -40,7 +40,7 @@ SaffronGymSabrinaPostBattle:
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, SaffronGymResetScripts
-	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld a, PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
 	ld [wJoyIgnore], a
 
 SaffronGymSabrinaReceiveTM46Script:
