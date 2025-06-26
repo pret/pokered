@@ -9226,7 +9226,7 @@ ROMX bank #18:
 	TOTAL EMPTY: $1c71 bytes
 
 ROMX bank #19:
-	SECTION: $4000-$7d03 ($3d04 bytes) ["Pics 6"]
+	SECTION: $4000-$7d03 ($3d04 bytes) ["Trainer Pics"]
 	         $4000 = YoungsterPic
 	         $40c6 = BugCatcherPic
 	         $4200 = LassPic
