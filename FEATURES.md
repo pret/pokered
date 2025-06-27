@@ -441,7 +441,7 @@ The fourth page contains Sprite-related options.
 
 ## Pokemon type changes
 These changes were all made to make the pokemon more fun to use / more unique from similar pokemon / less bad.
-An NPC in a house in indigo plateau route 23 (past the first guard) can customize which pokemon use new types or their original types if you don't like these changes.
+As soon as you have your first badge (Boulderbadge) from Pewter City, there is an NPC in a house in indigo plateau route 23 past the first guard who can customize which pokemon use new types or their original types if you don't like these changes. However I would recommend keeping at least some of them turned on because they are pretty fun to use and the game and the pokemon's movesets are kind of balanced around them.
 - Ninetales is Fire/Ghost
 - Golduck is Water/Psychic
 - Seadra is Water/Dragon
