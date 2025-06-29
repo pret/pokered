@@ -13,7 +13,7 @@
 ; these are the definitions for the channel 3 instruments
 ; each instrument definition is made up of 32 points (nibbles) that form
 ; the graph of the wave
-; the current instrument is copied to rWave_0--rWave_f
+; the current instrument is copied to _AUD3WAVERAM
 .wave0
 	dn  0,  2,  4,  6,  8, 10, 12, 14, 15, 15, 15, 14, 14, 13, 13, 12, 12, 11, 10,  9,  8,  7,  6,  5,  4,  4,  3,  3,  2,  2,  1,  1
 

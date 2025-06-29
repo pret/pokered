@@ -79,9 +79,9 @@ SeafoamIslandsB3FDefaultScript:
 	ret
 
 RLEList_ForcedSurfingStrongCurrentNearSteps:
-	db D_DOWN, 6
-	db D_RIGHT, 5
-	db D_DOWN, 3
+	db PAD_DOWN, 6
+	db PAD_RIGHT, 5
+	db PAD_DOWN, 3
 	db -1 ; end
 
 SeafoamIslandsB3FObjectMoving1Script:
@@ -122,16 +122,16 @@ SeafoamIslandsB3FMoveObjectScript:
 	ret
 
 .RLEList_StrongCurrentNearRightBoulder:
-	db D_DOWN, 6
-	db D_RIGHT, 2
-	db D_DOWN, 4
-	db D_LEFT, 1
+	db PAD_DOWN, 6
+	db PAD_RIGHT, 2
+	db PAD_DOWN, 4
+	db PAD_LEFT, 1
 	db -1 ; end
 
 .RLEList_StrongCurrentNearLeftBoulder:
-	db D_DOWN, 6
-	db D_RIGHT, 2
-	db D_DOWN, 4
+	db PAD_DOWN, 6
+	db PAD_RIGHT, 2
+	db PAD_DOWN, 4
 	db -1 ; end
 
 SeafoamIslandsB3FObjectMoving2Script:

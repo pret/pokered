@@ -5,16 +5,16 @@ MACRO RGB
 	ENDR
 ENDM
 
-DEF palred   EQUS "(1 << 0) *"
-DEF palgreen EQUS "(1 << 5) *"
-DEF palblue  EQUS "(1 << 10) *"
+DEF palred   EQUS "(1 << B_COLOR_RED) *"
+DEF palgreen EQUS "(1 << B_COLOR_GREEN) *"
+DEF palblue  EQUS "(1 << B_COLOR_BLUE) *"
 
 DEF palettes EQUS "* PALETTE_SIZE"
 DEF palette  EQUS "+ PALETTE_SIZE *"
 DEF color    EQUS "+ PAL_COLOR_SIZE *"
 
-DEF tiles EQUS "* LEN_2BPP_TILE"
-DEF tile  EQUS "+ LEN_2BPP_TILE *"
+DEF tiles EQUS "* TILE_SIZE"
+DEF tile  EQUS "+ TILE_SIZE *"
 
 MACRO dbsprite
 ; x tile, y tile, x pixel, y pixel, vtile offset, attributes

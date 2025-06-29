@@ -80,7 +80,7 @@ StatusScreen:
 	ld hl, wStatusFlags2
 	set BIT_NO_AUDIO_FADE_OUT, [hl]
 	ld a, $33
-	ldh [rNR50], a ; Reduce the volume
+	ldh [rAUDVOL], a ; Reduce the volume
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	call UpdateSprites
@@ -433,7 +433,7 @@ StatusScreen2:
 	ld hl, wStatusFlags2
 	res BIT_NO_AUDIO_FADE_OUT, [hl]
 	ld a, $77
-	ldh [rNR50], a
+	ldh [rAUDVOL], a
 	call GBPalWhiteOut
 	jp ClearScreen
 

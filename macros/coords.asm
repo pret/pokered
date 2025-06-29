@@ -47,11 +47,11 @@ ENDM
 
 MACRO bgcoord
 ; register, x, y[, origin]
-	validate_coords \2, \3, BG_MAP_WIDTH, BG_MAP_HEIGHT
+	validate_coords \2, \3, TILEMAP_WIDTH, TILEMAP_HEIGHT
 	IF _NARG >= 4
-		ld \1, (\3) * BG_MAP_WIDTH + (\2) + \4
+		ld \1, (\3) * TILEMAP_WIDTH + (\2) + \4
 	ELSE
-		ld \1, (\3) * BG_MAP_WIDTH + (\2) + vBGMap0
+		ld \1, (\3) * TILEMAP_WIDTH + (\2) + vBGMap0
 	ENDC
 ENDM
 

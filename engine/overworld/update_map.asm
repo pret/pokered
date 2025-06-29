@@ -63,7 +63,7 @@ RedrawMapView:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld de, -2 * BG_MAP_WIDTH
+	ld de, -2 * TILEMAP_WIDTH
 	add hl, de
 	ld a, h
 	and $3
@@ -88,7 +88,7 @@ RedrawMapView:
 	jr nz, .calcWRAMAddrLoop
 	call CopyToRedrawRowOrColumnSrcTiles
 	pop hl
-	ld de, BG_MAP_WIDTH
+	ld de, TILEMAP_WIDTH
 	ldh a, [hRedrawMapViewRowOffset]
 	ld c, a
 .calcVRAMAddrLoop

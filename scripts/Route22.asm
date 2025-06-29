@@ -65,7 +65,7 @@ Route22DefaultScript:
 	ld [wSavedCoordIndex], a
 	xor a
 	ldh [hJoyHeld], a
-	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld a, PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
 	ld [wJoyIgnore], a
 	ld a, PLAYER_DIR_LEFT
 	ld [wPlayerMovingDirection], a
@@ -162,7 +162,7 @@ Route22Rival1AfterBattleScript:
 	ld a, ROUTE22_RIVAL1
 	ldh [hSpriteIndex], a
 	call SetSpriteFacingDirectionAndDelay
-	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld a, PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
 	ld [wJoyIgnore], a
 	SetEvent EVENT_BEAT_ROUTE22_RIVAL_1ST_BATTLE
 	ld a, TEXT_ROUTE22_RIVAL1
@@ -321,7 +321,7 @@ Route22Rival2AfterBattleScript:
 .set_rival_facing_direction
 	ldh [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
-	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld a, PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
 	ld [wJoyIgnore], a
 	SetEvent EVENT_BEAT_ROUTE22_RIVAL_2ND_BATTLE
 	ld a, TEXT_ROUTE22_RIVAL2

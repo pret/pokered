@@ -14,13 +14,13 @@ Predef::
 	push af
 	ld a, BANK(GetPredefPointer)
 	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	ld [rROMB], a
 
 	call GetPredefPointer
 
 	ld a, [wPredefBank]
 	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	ld [rROMB], a
 
 	ld de, .done
 	push de
@@ -29,7 +29,7 @@ Predef::
 
 	pop af
 	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	ld [rROMB], a
 	ret
 
 GetPredefRegisters::

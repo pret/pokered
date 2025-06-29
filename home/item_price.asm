@@ -10,7 +10,7 @@ GetItemPrice::
 	ld a, $f ; hardcoded Bank
 .ok
 	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	ld [rROMB], a
 	ld hl, wItemPrices
 	ld a, [hli]
 	ld h, [hl]
@@ -34,11 +34,11 @@ GetItemPrice::
 .getTMPrice
 	ld a, BANK(GetMachinePrice)
 	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	ld [rROMB], a
 	call GetMachinePrice
 .done
 	ld de, hItemPrice
 	pop af
 	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	ld [rROMB], a
 	ret

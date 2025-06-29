@@ -14,7 +14,7 @@ VermilionDock_Script:
 	ld hl, wStatusFlags5
 	set BIT_SCRIPTED_MOVEMENT_STATE, [hl]
 	ld hl, wSimulatedJoypadStatesEnd
-	ld a, D_UP
+	ld a, PAD_UP
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a

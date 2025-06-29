@@ -80,13 +80,13 @@ DrawFrameBlock:
 ; toggle horizontal and vertical flip
 	ld a, [hli] ; flags
 	and a
-	ld b, OAM_VFLIP | OAM_HFLIP
+	ld b, OAM_YFLIP | OAM_XFLIP
 	jr z, .storeFlags1
-	cp OAM_HFLIP
-	ld b, OAM_VFLIP
+	cp OAM_XFLIP
+	ld b, OAM_YFLIP
 	jr z, .storeFlags1
-	cp OAM_VFLIP
-	ld b, OAM_HFLIP
+	cp OAM_YFLIP
+	ld b, OAM_XFLIP
 	jr z, .storeFlags1
 	ld b, 0
 .storeFlags1
@@ -114,13 +114,13 @@ DrawFrameBlock:
 	ld [de], a ; store tile ID
 	inc de
 	ld a, [hli]
-	bit OAM_X_FLIP, a
+	bit B_OAM_XFLIP, a
 	jr nz, .disableHorizontalFlip
 .enableHorizontalFlip
-	set OAM_X_FLIP, a
+	set B_OAM_XFLIP, a
 	jr .storeFlags2
 .disableHorizontalFlip
-	res OAM_X_FLIP, a
+	res B_OAM_XFLIP, a
 .storeFlags2
 	ld [de], a
 	inc de
@@ -726,7 +726,7 @@ DoBallTossSpecialEffects:
 	dec b
 	jr nz, .loop
 	ld a, %00001000
-	ldh [rNR10], a ; Channel 1 sweep register
+	ldh [rAUD1SWEEP], a ; Channel 1 sweep register
 	ret
 .isTrainerBattle ; if it's a trainer battle, shorten the animation by one frame
 	ld a, [wSubAnimCounter]
@@ -2408,7 +2408,7 @@ FallingObjects_UpdateOAMEntry:
 	sub b
 	ld [hli], a ; X
 	inc hl
-	ld a, 1 << OAM_X_FLIP
+	ld a, OAM_XFLIP
 .next2
 	ld [hl], a ; attribute
 	ret

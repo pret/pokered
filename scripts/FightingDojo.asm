@@ -68,7 +68,7 @@ FightingDojoKarateMasterPostBattleScript:
 	ldh [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 .already_facing
-	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld a, PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
 	ld [wJoyIgnore], a
 	SetEventRange EVENT_BEAT_KARATE_MASTER, EVENT_BEAT_FIGHTING_DOJO_TRAINER_3
 	ld a, TEXT_FIGHTINGDOJO_KARATE_MASTER_I_WILL_GIVE_YOU_A_POKEMON

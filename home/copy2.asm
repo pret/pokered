@@ -6,11 +6,11 @@ FarCopyData2::
 	push af
 	ldh a, [hROMBankTemp]
 	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	ld [rROMB], a
 	call CopyData
 	pop af
 	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	ld [rROMB], a
 	ret
 
 FarCopyData3::
@@ -20,7 +20,7 @@ FarCopyData3::
 	push af
 	ldh a, [hROMBankTemp]
 	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	ld [rROMB], a
 	push hl
 	push de
 	push de
@@ -32,7 +32,7 @@ FarCopyData3::
 	pop hl
 	pop af
 	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	ld [rROMB], a
 	ret
 
 FarCopyDataDouble::
@@ -43,7 +43,7 @@ FarCopyDataDouble::
 	push af
 	ldh a, [hROMBankTemp]
 	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	ld [rROMB], a
 .loop
 	ld a, [hli]
 	ld [de], a
@@ -56,7 +56,7 @@ FarCopyDataDouble::
 	jr nz, .loop
 	pop af
 	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	ld [rROMB], a
 	ret
 
 CopyVideoData::
@@ -74,7 +74,7 @@ CopyVideoData::
 
 	ld a, b
 	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	ld [rROMB], a
 
 	ld a, e
 	ldh [hVBlankCopySource], a
@@ -96,7 +96,7 @@ CopyVideoData::
 	call DelayFrame
 	ldh a, [hROMBankTemp]
 	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	ld [rROMB], a
 	pop af
 	ldh [hAutoBGTransferEnabled], a
 	ret
@@ -123,7 +123,7 @@ CopyVideoDataDouble::
 
 	ld a, b
 	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	ld [rROMB], a
 
 	ld a, e
 	ldh [hVBlankCopyDoubleSource], a
@@ -145,7 +145,7 @@ CopyVideoDataDouble::
 	call DelayFrame
 	ldh a, [hROMBankTemp]
 	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	ld [rROMB], a
 	pop af
 	ldh [hAutoBGTransferEnabled], a
 	ret

@@ -1,6 +1,6 @@
 LoadFontTilePatterns::
 	ldh a, [rLCDC]
-	bit rLCDC_ENABLE, a
+	bit B_LCDC_ENABLE, a
 	jr nz, .on
 .off
 	ld hl, FontGraphics
@@ -16,7 +16,7 @@ LoadFontTilePatterns::
 
 LoadTextBoxTilePatterns::
 	ldh a, [rLCDC]
-	bit rLCDC_ENABLE, a
+	bit B_LCDC_ENABLE, a
 	jr nz, .on
 .off
 	ld hl, TextBoxGraphics
@@ -32,7 +32,7 @@ LoadTextBoxTilePatterns::
 
 LoadHpBarAndStatusTilePatterns::
 	ldh a, [rLCDC]
-	bit rLCDC_ENABLE, a
+	bit B_LCDC_ENABLE, a
 	jr nz, .on
 .off
 	ld hl, HpBarAndStatusGraphics

@@ -62,7 +62,7 @@ BillsHousePokemonEntersMachineScript:
 BillsHouseBillExitsMachineScript:
 	CheckEvent EVENT_USED_CELL_SEPARATOR_ON_BILL
 	ret z
-	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld a, PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
 	ld [wJoyIgnore], a
 	ld a, BILLSHOUSE_BILL1
 	ld [wSpriteIndex], a

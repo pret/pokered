@@ -6,7 +6,7 @@ FadeOutAudio::
 	bit BIT_NO_AUDIO_FADE_OUT, a
 	ret nz
 	ld a, $77
-	ldh [rNR50], a
+	ldh [rAUDVOL], a
 	ret
 .fadingOut
 	ld a, [wAudioFadeOutCounter]
@@ -18,7 +18,7 @@ FadeOutAudio::
 .counterReachedZero
 	ld a, [wAudioFadeOutCounterReloadValue]
 	ld [wAudioFadeOutCounter], a
-	ldh a, [rNR50]
+	ldh a, [rAUDVOL]
 	and a ; has the volume reached 0?
 	jr z, .fadeOutComplete
 	ld b, a
@@ -31,7 +31,7 @@ FadeOutAudio::
 	dec a
 	swap a
 	or c
-	ldh [rNR50], a
+	ldh [rAUDVOL], a
 	ret
 .fadeOutComplete
 	ld a, [wAudioFadeOutControl]

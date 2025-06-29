@@ -143,7 +143,7 @@ TryingToLearn:
 	inc hl
 	ld a, [wNumMovesMinusOne]
 	ld [hli], a ; wMaxMenuItem
-	ld a, A_BUTTON | B_BUTTON
+	ld a, PAD_A | PAD_B
 	ld [hli], a ; wMenuWatchedKeys
 	ld [hl], 0 ; wLastMenuItem
 	ld hl, hUILayoutFlags
@@ -155,7 +155,7 @@ TryingToLearn:
 	call LoadScreenTilesFromBuffer1
 	pop af
 	pop hl
-	bit BIT_B_BUTTON, a
+	bit B_PAD_B, a
 	jr nz, .cancel
 	push hl
 	ld a, [wCurrentMenuItem]

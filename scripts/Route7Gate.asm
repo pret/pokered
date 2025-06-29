@@ -13,7 +13,7 @@ Route7Gate_ScriptPointers:
 Route7GateMovePlayerLeftScript:
 	ld hl, wStatusFlags5
 	set BIT_SCRIPTED_MOVEMENT_STATE, [hl]
-	ld a, D_LEFT
+	ld a, PAD_LEFT
 	ld [wSimulatedJoypadStatesEnd], a
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a

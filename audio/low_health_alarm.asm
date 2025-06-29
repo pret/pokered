@@ -49,7 +49,7 @@ Music_DoLowHealthAlarm::
 
 ;update sound channel 1 to play the alarm, overriding all other sounds.
 .playTone
-	ld hl, rNR10 ;channel 1 sound register
+	ld hl, rAUD1SWEEP ;channel 1 sound register
 	ld c, $5
 	xor a
 

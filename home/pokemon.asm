@@ -130,7 +130,7 @@ LoadFrontSpriteByMonIndex::
 	push af
 	ld a, BANK(CopyUncompressedPicToHL)
 	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	ld [rROMB], a
 	xor a
 	ldh [hStartTileID], a
 	call CopyUncompressedPicToHL
@@ -138,7 +138,7 @@ LoadFrontSpriteByMonIndex::
 	ld [wSpriteFlipped], a
 	pop af
 	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	ld [rROMB], a
 	ret
 
 
@@ -226,11 +226,11 @@ PartyMenuInit::
 	ld [hli], a ; max menu item ID
 	ld a, [wForcePlayerToChooseMon]
 	and a
-	ld a, A_BUTTON | B_BUTTON
+	ld a, PAD_A | PAD_B
 	jr z, .next
 	xor a
 	ld [wForcePlayerToChooseMon], a
-	inc a ; a = A_BUTTON
+	inc a ; a = PAD_A
 .next
 	ld [hli], a ; menu watched keys
 	pop af
@@ -256,7 +256,7 @@ HandlePartyMenuInput::
 	jp nz, .swappingPokemon
 	pop af
 	ldh [hTileAnimations], a
-	bit BIT_B_BUTTON, b
+	bit B_PAD_B, b
 	jr nz, .noPokemonChosen
 	ld a, [wPartyCount]
 	and a
@@ -278,7 +278,7 @@ HandlePartyMenuInput::
 	scf
 	ret
 .swappingPokemon
-	bit BIT_B_BUTTON, b
+	bit B_PAD_B, b
 	jr z, .handleSwap ; if not, handle swapping the pokemon
 .cancelSwap ; if the B button was pressed
 	farcall ErasePartyMenuCursors
@@ -381,7 +381,7 @@ GetMonHeader::
 	push af
 	ld a, BANK(BaseStats)
 	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	ld [rROMB], a
 	push bc
 	push de
 	push hl
@@ -436,7 +436,7 @@ GetMonHeader::
 	pop bc
 	pop af
 	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	ld [rROMB], a
 	ret
 
 ; copy party pokemon's name to wNameBuffer

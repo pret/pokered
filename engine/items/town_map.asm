@@ -71,13 +71,13 @@ DisplayTownMap:
 	call JoypadLowSensitivity
 	ldh a, [hJoy5]
 	ld b, a
-	and A_BUTTON | B_BUTTON | D_UP | D_DOWN
+	and PAD_A | PAD_B | PAD_UP | PAD_DOWN
 	jr z, .inputLoop
 	ld a, SFX_TINK
 	call PlaySound
-	bit BIT_D_UP, b
+	bit B_PAD_UP, b
 	jr nz, .pressedUp
-	bit BIT_D_DOWN, b
+	bit B_PAD_DOWN, b
 	jr nz, .pressedDown
 	xor a
 	ld [wTownMapSpriteBlinkingEnabled], a
@@ -194,15 +194,15 @@ LoadTownMap_Fly::
 	ldh a, [hJoy5]
 	ld b, a
 	pop hl
-	and A_BUTTON | B_BUTTON | D_UP | D_DOWN
+	and PAD_A | PAD_B | PAD_UP | PAD_DOWN
 	jr z, .inputLoop
-	bit BIT_A_BUTTON, b
+	bit B_PAD_A, b
 	jr nz, .pressedA
 	ld a, SFX_TINK
 	call PlaySound
-	bit BIT_D_UP, b
+	bit B_PAD_UP, b
 	jr nz, .pressedUp
-	bit BIT_D_DOWN, b
+	bit B_PAD_DOWN, b
 	jr nz, .pressedDown
 	jr .pressedB
 .pressedA
@@ -367,7 +367,7 @@ DrawPlayerOrBirdSprite:
 	jr nz, .loop
 	ld hl, wShadowOAM
 	ld de, wShadowOAMBackup
-	ld bc, NUM_SPRITE_OAM_STRUCTS * 4
+	ld bc, OAM_COUNT * 4
 	jp CopyData
 
 DisplayWildLocations:
@@ -415,7 +415,7 @@ DisplayWildLocations:
 .done
 	ld hl, wShadowOAM
 	ld de, wShadowOAMBackup
-	ld bc, NUM_SPRITE_OAM_STRUCTS * 4
+	ld bc, OAM_COUNT * 4
 	jp CopyData
 
 AreaUnknownText:
@@ -511,7 +511,7 @@ WriteSymmetricMonPartySpriteOAM:
 	ld [hli], a ; tile
 	ld a, [wSymmetricSpriteOAMAttributes]
 	ld [hli], a ; attributes
-	xor 1 << OAM_X_FLIP
+	xor OAM_XFLIP
 	ld [wSymmetricSpriteOAMAttributes], a
 	inc d
 	ld a, 8
@@ -604,13 +604,13 @@ TownMapSpriteBlinkingAnimation::
 ; show sprites when the counter reaches 50
 	ld hl, wShadowOAMBackup
 	ld de, wShadowOAM
-	ld bc, (NUM_SPRITE_OAM_STRUCTS - 4) * 4
+	ld bc, (OAM_COUNT - 4) * 4
 	call CopyData
 	xor a
 	jr .done
 .hideSprites
 	ld hl, wShadowOAM
-	ld b, NUM_SPRITE_OAM_STRUCTS - 4
+	ld b, OAM_COUNT - 4
 	ld de, $4
 .hideSpritesLoop
 	ld [hl], $a0

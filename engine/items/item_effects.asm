@@ -727,15 +727,15 @@ ItemUseSurfboard:
 .makePlayerMoveForward
 	ld a, [wPlayerDirection] ; direction the player is going
 	bit PLAYER_DIR_BIT_UP, a
-	ld b, D_UP
+	ld b, PAD_UP
 	jr nz, .storeSimulatedButtonPress
 	bit PLAYER_DIR_BIT_DOWN, a
-	ld b, D_DOWN
+	ld b, PAD_DOWN
 	jr nz, .storeSimulatedButtonPress
 	bit PLAYER_DIR_BIT_LEFT, a
-	ld b, D_LEFT
+	ld b, PAD_LEFT
 	jr nz, .storeSimulatedButtonPress
-	ld b, D_RIGHT
+	ld b, PAD_RIGHT
 .storeSimulatedButtonPress
 	ld a, b
 	ld [wSimulatedJoypadStatesEnd], a

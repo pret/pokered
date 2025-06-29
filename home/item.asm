@@ -23,12 +23,12 @@ TossItem::
 	push af
 	ld a, BANK(TossItem_)
 	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	ld [rROMB], a
 	call TossItem_
 	pop de
 	ld a, d
 	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	ld [rROMB], a
 	ret
 
 ; checks if an item is a key item

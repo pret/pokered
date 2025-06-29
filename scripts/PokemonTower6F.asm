@@ -50,13 +50,13 @@ PokemonTower6FMarowakBattleScript:
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, PokemonTower6FSetDefaultScript
-	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld a, PAD_A | PAD_B | PAD_SELECT | PAD_START | PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
 	ld [wJoyIgnore], a
 	ld a, [wStatusFlags3]
 	bit BIT_TALKED_TO_TRAINER, a
 	ret nz
 	call UpdateSprites
-	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld a, PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
 	ld [wJoyIgnore], a
 	ld a, [wBattleResult]
 	and a
@@ -74,7 +74,7 @@ PokemonTower6FMarowakBattleScript:
 .did_not_defeat
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
-	ld a, D_RIGHT
+	ld a, PAD_RIGHT
 	ld [wSimulatedJoypadStatesEnd], a
 	xor a
 	ld [wSpritePlayerStateData2MovementByte1], a

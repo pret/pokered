@@ -23,7 +23,7 @@ ClearBgMap::
 	jr .next
 	ld a, l
 .next
-	ld de, BG_MAP_WIDTH * BG_MAP_HEIGHT
+	ld de, TILEMAP_WIDTH * TILEMAP_HEIGHT
 	ld l, e
 .loop
 	ld [hli], a
@@ -61,7 +61,7 @@ RedrawRowOrColumn::
 	inc de
 	ld a, [hli]
 	ld [de], a
-	ld a, BG_MAP_WIDTH - 1
+	ld a, TILEMAP_WIDTH - 1
 	add e
 	ld e, a
 	jr nc, .noCarry
@@ -86,7 +86,7 @@ RedrawRowOrColumn::
 	push de
 	call .DrawHalf ; draw upper half
 	pop de
-	ld a, BG_MAP_WIDTH ; width of VRAM background map
+	ld a, TILEMAP_WIDTH ; width of VRAM background map
 	add e
 	ld e, a
 	; fall through and draw lower half
@@ -181,7 +181,7 @@ ENDR
 	inc l
 	ld [hl], d
 
-	ld a, BG_MAP_WIDTH - (SCREEN_WIDTH - 1)
+	ld a, TILEMAP_WIDTH - (SCREEN_WIDTH - 1)
 	add l
 	ld l, a
 	jr nc, .ok
@@ -259,7 +259,7 @@ VBlankCopyDouble::
 	ldh [hVBlankCopyDoubleSize], a
 
 .loop
-REPT LEN_2BPP_TILE / 4 - 1
+REPT TILE_SIZE / 4 - 1
 	pop de
 	ld [hl], e
 	inc l
@@ -336,7 +336,7 @@ VBlankCopy::
 	ldh [hVBlankCopySize], a
 
 .loop
-REPT LEN_2BPP_TILE / 2 - 1
+REPT TILE_SIZE / 2 - 1
 	pop de
 	ld [hl], e
 	inc l

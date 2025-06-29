@@ -254,12 +254,12 @@ ENDC
 	call LoadGBPal
 	ldh a, [hJoyHeld]
 	ld b, a
-	and D_UP | SELECT | B_BUTTON
-	cp D_UP | SELECT | B_BUTTON
+	and PAD_UP | PAD_SELECT | PAD_B
+	cp PAD_UP | PAD_SELECT | PAD_B
 	jp z, .doClearSaveDialogue
 IF DEF(_DEBUG)
 	ld a, b
-	bit BIT_SELECT, a
+	bit B_PAD_SELECT, a
 	jp nz, DebugMenu
 ENDC
 	jp MainMenu

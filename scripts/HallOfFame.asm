@@ -58,7 +58,7 @@ HallOfFameResetEventsAndSaveScript:
 	jp Init
 
 HallOfFameDefaultScript:
-	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld a, PAD_A | PAD_B | PAD_SELECT | PAD_START | PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
 	ld [wJoyIgnore], a
 	ld hl, wSimulatedJoypadStatesEnd
 	ld de, HallOfFameEntryMovement
@@ -71,7 +71,7 @@ HallOfFameDefaultScript:
 	ret
 
 HallOfFameEntryMovement:
-	db D_UP, 5
+	db PAD_UP, 5
 	db -1 ; end
 
 HallOfFameOakCongratulationsScript:
@@ -94,7 +94,7 @@ HallOfFameOakCongratulationsScript:
 	ld a, TEXT_HALLOFFAME_OAK
 	ldh [hTextID], a
 	call DisplayTextID
-	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld a, PAD_A | PAD_B | PAD_SELECT | PAD_START | PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
 	ld [wJoyIgnore], a
 	ld a, HS_CERULEAN_CAVE_GUY
 	ld [wMissableObjectIndex], a

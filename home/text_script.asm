@@ -99,7 +99,7 @@ AfterDisplayingTextID::
 HoldTextDisplayOpen::
 	call Joypad
 	ldh a, [hJoyHeld]
-	bit BIT_A_BUTTON, a
+	bit B_PAD_A, a
 	jr nz, HoldTextDisplayOpen
 
 CloseTextDisplay::
@@ -125,7 +125,7 @@ CloseTextDisplay::
 	jr nz, .restoreSpriteFacingDirectionLoop
 	ld a, BANK(InitMapSprites)
 	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	ld [rROMB], a
 	call InitMapSprites ; reload sprite tile pattern data (since it was partially overwritten by text tile patterns)
 	ld hl, wFontLoaded
 	res BIT_FONT_LOADED, [hl]
@@ -135,7 +135,7 @@ CloseTextDisplay::
 	call LoadCurrentMapView
 	pop af
 	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	ld [rROMB], a
 	jp UpdateSprites
 
 DisplayPokemartDialogue::

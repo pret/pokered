@@ -191,10 +191,10 @@ ConvertNPCMovementDirectionToJoypadMask:
 	ret
 
 NPCMovementDirectionsToJoypadMasksTable:
-	db NPC_MOVEMENT_UP, D_UP
-	db NPC_MOVEMENT_DOWN, D_DOWN
-	db NPC_MOVEMENT_LEFT, D_LEFT
-	db NPC_MOVEMENT_RIGHT, D_RIGHT
+	db NPC_MOVEMENT_UP, PAD_UP
+	db NPC_MOVEMENT_DOWN, PAD_DOWN
+	db NPC_MOVEMENT_LEFT, PAD_LEFT
+	db NPC_MOVEMENT_RIGHT, PAD_RIGHT
 	db $ff
 
 ; unreferenced

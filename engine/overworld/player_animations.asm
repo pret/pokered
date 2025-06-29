@@ -473,7 +473,7 @@ FishingRodOAM:
 	dbsprite  9, 11,  4,  3, $fd, 0         ; down
 	dbsprite  9,  8,  4,  4, $fd, 0         ; up
 	dbsprite  8, 10,  0,  0, $fe, 0         ; left
-	dbsprite 11, 10,  0,  0, $fe, OAM_HFLIP ; right
+	dbsprite 11, 10,  0,  0, $fe, OAM_XFLIP ; right
 
 MACRO fishing_gfx
 	dw \1
