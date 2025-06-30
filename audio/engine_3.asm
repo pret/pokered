@@ -22,7 +22,7 @@ Audio3_UpdateMusic::
 	xor a ; disable all channels' output
 	ldh [rAUDTERM], a
 	ldh [rAUD3ENA], a
-	ld a, $80
+	ld a, AUD3ENA_ON
 	ldh [rAUD3ENA], a
 	jr .nextChannel
 .applyAffects
@@ -182,9 +182,9 @@ Audio3_sound_ret:
 	cp CHAN7
 	jr nz, .skipSfxChannel3
 ; restart hardware channel 3 (wave channel) output
-	ld a, $0
+	ld a, AUD3ENA_OFF
 	ldh [rAUD3ENA], a
-	ld a, $80
+	ld a, AUD3ENA_ON
 	ldh [rAUD3ENA], a
 .skipSfxChannel3
 	jr nz, .dontDisable
@@ -927,7 +927,7 @@ Audio3_ApplyWavePatternAndFrequency:
 	inc hl
 	ld d, [hl]
 	ld hl, _AUD3WAVERAM
-	ld b, $f
+	ld b, AUD3WAVE_SIZE - 1
 	ld a, $0 ; stop hardware channel 3
 	ldh [rAUD3ENA], a
 .loop
@@ -938,7 +938,7 @@ Audio3_ApplyWavePatternAndFrequency:
 	dec b
 	and a
 	jr nz, .loop
-	ld a, $80 ; start hardware channel 3
+	ld a, AUD3ENA_ON ; start hardware channel 3
 	ldh [rAUD3ENA], a
 	pop de
 .notChannel3
@@ -1401,13 +1401,13 @@ Audio3_PlaySound::
 	ld [wStereoPanning], a
 	xor a
 	ldh [rAUDVOL], a
-	ld a, $8
+	ld a, AUD1SWEEP_DOWN
 	ldh [rAUD1SWEEP], a
 	ld a, 0
 	ldh [rAUDTERM], a
 	xor a
 	ldh [rAUD3ENA], a
-	ld a, $80
+	ld a, AUD3ENA_ON
 	ldh [rAUD3ENA], a
 	ld a, $77
 	ldh [rAUDVOL], a
@@ -1555,7 +1555,7 @@ Audio3_PlaySound::
 	ld a, e
 	cp CHAN5
 	jr nz, .skipSweepDisable
-	ld a, $8
+	ld a, AUD1SWEEP_DOWN
 	ldh [rAUD1SWEEP], a ; sweep off
 .skipSweepDisable
 	ld a, c
@@ -1565,18 +1565,18 @@ Audio3_PlaySound::
 	jp .sfxChannelLoop
 
 .stopAllAudio
-	ld a, $80
+	ld a, AUDENA_ON
 	ldh [rAUDENA], a ; sound hardware on
 	ldh [rAUD3ENA], a ; wave playback on
 	xor a
 	ldh [rAUDTERM], a ; no sound output
 	ldh [rAUD3LEVEL], a ; mute channel 3 (wave channel)
-	ld a, $8
+	ld a, AUD1SWEEP_DOWN
 	ldh [rAUD1SWEEP], a ; sweep off
 	ldh [rAUD1ENV], a ; mute channel 1 (pulse channel 1)
 	ldh [rAUD2ENV], a ; mute channel 2 (pulse channel 2)
 	ldh [rAUD4ENV], a ; mute channel 4 (noise channel)
-	ld a, $40
+	ld a, AUD1HIGH_LENGTH_ON
 	ldh [rAUD1HIGH], a ; counter mode
 	ldh [rAUD2HIGH], a
 	ldh [rAUD4GO], a
