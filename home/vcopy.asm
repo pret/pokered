@@ -23,7 +23,7 @@ ClearBgMap::
 	jr .next
 	ld a, l
 .next
-	ld de, TILEMAP_WIDTH * TILEMAP_HEIGHT
+	ld de, TILEMAP_AREA
 	ld l, e
 .loop
 	ld [hli], a

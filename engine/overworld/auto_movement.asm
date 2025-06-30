@@ -3,7 +3,7 @@ PlayerStepOutFromDoor::
 	res BIT_EXITING_DOOR, [hl]
 	call IsPlayerStandingOnDoorTile
 	jr nc, .notStandingOnDoor
-	ld a, PAD_SELECT | PAD_START | PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
+	ld a, PAD_SELECT | PAD_START | PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	ld hl, wMovementFlags
 	set BIT_EXITING_DOOR, [hl]
@@ -81,7 +81,7 @@ PalletMovementScript_OakMoveLeft:
 .done
 	ld hl, wStatusFlags7
 	set BIT_NO_MAP_MUSIC, [hl]
-	ld a, PAD_SELECT | PAD_START | PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
+	ld a, PAD_SELECT | PAD_START | PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	ret
 

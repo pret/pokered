@@ -5,7 +5,7 @@ HandleMidJump::
 
 EnterMap::
 ; Load a new map.
-	ld a, PAD_A | PAD_B | PAD_SELECT | PAD_START | PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
+	ld a, PAD_BUTTONS | PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	call LoadMapData
 	farcall ClearVariablesOnEnterMap
@@ -432,7 +432,7 @@ CheckWarpsNoCollisionLoop::
 	pop bc
 	pop de
 	ldh a, [hJoyHeld]
-	and PAD_DOWN | PAD_UP | PAD_LEFT | PAD_RIGHT
+	and PAD_CTRL_PAD
 	jr z, CheckWarpsNoCollisionRetry2 ; if directional buttons aren't being pressed, do not pass through the warp
 	jr WarpFound1
 
@@ -1828,7 +1828,7 @@ JoypadOverworld::
 	cp ROUTE_17 ; Cycling Road
 	jr nz, .notForcedDownwards
 	ldh a, [hJoyHeld]
-	and PAD_DOWN | PAD_UP | PAD_LEFT | PAD_RIGHT | PAD_B | PAD_A
+	and PAD_CTRL_PAD | PAD_B | PAD_A
 	jr nz, .notForcedDownwards
 	ld a, PAD_DOWN
 	ldh [hJoyHeld], a ; on the cycling road, if there isn't a trainer and the player isn't pressing buttons, simulate a down press

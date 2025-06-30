@@ -18,7 +18,7 @@ SlidePlayerAndEnemySilhouettesOnScreen:
 	call LoadFontTilePatterns
 	call LoadHudAndHpBarAndStatusTilePatterns
 	ld hl, vBGMap0
-	ld bc, TILEMAP_WIDTH * TILEMAP_HEIGHT
+	ld bc, TILEMAP_AREA
 .clearBackgroundLoop
 	ld a, " "
 	ld [hli], a
@@ -2561,9 +2561,9 @@ MoveSelectionMenu:
 	; Disable left, right, and START buttons in regular battles.
 	ld a, [wStatusFlags7]
 	bit BIT_TEST_BATTLE, a
-	ld b, PAD_UP | PAD_DOWN | PAD_A | PAD_B | PAD_SELECT
+	ld b, ~(PAD_LEFT | PAD_RIGHT | PAD_START)
 	jr z, .matchedkeyspicked
-	ld b, PAD_UP | PAD_DOWN | PAD_LEFT | PAD_RIGHT | PAD_A | PAD_B | PAD_SELECT | PAD_START
+	ld b, PAD_CTRL_PAD | PAD_BUTTONS
 .matchedkeyspicked
 	ld a, b
 	ld [hli], a ; wMenuWatchedKeys

@@ -55,7 +55,7 @@ GameCornerRocketBattleScript:
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, GameCornerReenterMapAfterPlayerLoss
-	ld a, PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
+	ld a, PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	ld a, TEXT_GAMECORNER_ROCKET_AFTER_BATTLE
 	ldh [hTextID], a

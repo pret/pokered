@@ -39,7 +39,7 @@ HandleLedges::
 	ldh a, [hJoyHeld]
 	and e
 	ret z
-	ld a, PAD_A | PAD_B | PAD_SELECT | PAD_START | PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
+	ld a, PAD_BUTTONS | PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	ld hl, wMovementFlags
 	set BIT_LEDGE_OR_FISHING, [hl]

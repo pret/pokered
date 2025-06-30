@@ -28,7 +28,7 @@ TryPushingBoulder::
 	set BIT_TRIED_PUSH_BOULDER, [hl]
 	ret z ; the player must try pushing twice before the boulder will move
 	ldh a, [hJoyHeld]
-	and PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
+	and PAD_CTRL_PAD
 	ret z
 	predef CheckForCollisionWhenPushingBoulder
 	ld a, [wTileInFrontOfBoulderAndBoulderCollisionResult]
