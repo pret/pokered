@@ -28,7 +28,7 @@ TryPushingBoulder::
 	set BIT_TRIED_PUSH_BOULDER, [hl]
 	ret z ; the player must try pushing twice before the boulder will move
 	ldh a, [hJoyHeld]
-	and D_RIGHT | D_LEFT | D_UP | D_DOWN
+	and PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
 	ret z
 	predef CheckForCollisionWhenPushingBoulder
 	ld a, [wTileInFrontOfBoulderAndBoulderCollisionResult]
@@ -44,22 +44,22 @@ TryPushingBoulder::
 	cp SPRITE_FACING_RIGHT
 	jr z, .pushBoulderRight
 .pushBoulderDown
-	bit BIT_D_DOWN, b
+	bit B_PAD_DOWN, b
 	ret z
 	ld de, PushBoulderDownMovementData
 	jr .done
 .pushBoulderUp
-	bit BIT_D_UP, b
+	bit B_PAD_UP, b
 	ret z
 	ld de, PushBoulderUpMovementData
 	jr .done
 .pushBoulderLeft
-	bit BIT_D_LEFT, b
+	bit B_PAD_LEFT, b
 	ret z
 	ld de, PushBoulderLeftMovementData
 	jr .done
 .pushBoulderRight
-	bit BIT_D_RIGHT, b
+	bit B_PAD_RIGHT, b
 	ret z
 	ld de, PushBoulderRightMovementData
 .done

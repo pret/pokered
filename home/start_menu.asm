@@ -1,7 +1,7 @@
 DisplayStartMenu::
 	ld a, BANK(StartMenu_Pokedex)
 	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	ld [rROMB], a
 	ld a, [wWalkBikeSurfState] ; walking/biking/surfing
 	ld [wWalkBikeSurfStateCopy], a
 	ld a, SFX_START_MENU
@@ -15,7 +15,7 @@ RedisplayStartMenu::
 	call HandleMenuInput
 	ld b, a
 .checkIfUpPressed
-	bit BIT_D_UP, a
+	bit B_PAD_UP, a
 	jr z, .checkIfDownPressed
 	ld a, [wCurrentMenuItem] ; menu selection
 	and a
@@ -33,7 +33,7 @@ RedisplayStartMenu::
 	call EraseMenuCursor
 	jr .loop
 .checkIfDownPressed
-	bit BIT_D_DOWN, a
+	bit B_PAD_DOWN, a
 	jr z, .buttonPressed
 ; if the player pressed tried to go past the bottom item, wrap around to the top
 	CheckEvent EVENT_GOT_POKEDEX
@@ -54,7 +54,7 @@ RedisplayStartMenu::
 	ld a, [wCurrentMenuItem]
 	ld [wBattleAndStartSavedMenuItem], a ; save current menu selection
 	ld a, b
-	and B_BUTTON | START ; was the Start button or B button pressed?
+	and PAD_B | PAD_START ; was the Start button or B button pressed?
 	jp nz, CloseStartMenu
 	call SaveScreenTilesToBuffer2 ; copy background from wTileMap to wTileMapBackup2
 	CheckEvent EVENT_GOT_POKEDEX
@@ -79,7 +79,7 @@ RedisplayStartMenu::
 CloseStartMenu::
 	call Joypad
 	ldh a, [hJoyPressed]
-	bit BIT_A_BUTTON, a
+	bit B_PAD_A, a
 	jr nz, CloseStartMenu
 	call LoadTextBoxTilePatterns
 	jp CloseTextDisplay

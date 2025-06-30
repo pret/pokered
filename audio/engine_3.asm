@@ -20,10 +20,10 @@ Audio3_UpdateMusic::
 	set BIT_MUTE_AUDIO, a
 	ld [wMuteAudioAndPauseMusic], a
 	xor a ; disable all channels' output
-	ldh [rNR51], a
-	ldh [rNR30], a
+	ldh [rAUDTERM], a
+	ldh [rAUD3ENA], a
 	ld a, $80
-	ldh [rNR30], a
+	ldh [rAUD3ENA], a
 	jr .nextChannel
 .applyAffects
 	call Audio3_ApplyMusicAffects
@@ -183,9 +183,9 @@ Audio3_sound_ret:
 	jr nz, .skipSfxChannel3
 ; restart hardware channel 3 (wave channel) output
 	ld a, $0
-	ldh [rNR30], a
+	ldh [rAUD3ENA], a
 	ld a, $80
-	ldh [rNR30], a
+	ldh [rAUD3ENA], a
 .skipSfxChannel3
 	jr nz, .dontDisable
 	ld a, [wDisableChannelOutputWhenSfxEnds]
@@ -219,9 +219,9 @@ Audio3_sound_ret:
 .disableChannelOutput
 	ld hl, Audio3_HWChannelDisableMasks
 	add hl, bc
-	ldh a, [rNR51]
+	ldh a, [rAUDTERM]
 	and [hl]
-	ldh [rNR51], a
+	ldh [rAUDTERM], a
 .afterDisable
 	ld a, [wChannelSoundIDs + CHAN5]
 	cp CRY_SFX_START
@@ -241,7 +241,7 @@ Audio3_sound_ret:
 	ret c
 .skipRewind
 	ld a, [wSavedVolume]
-	ldh [rNR50], a
+	ldh [rAUDVOL], a
 	xor a
 	ld [wSavedVolume], a
 .skipCry
@@ -548,7 +548,7 @@ Audio3_volume:
 	cp volume_cmd
 	jr nz, Audio3_execute_music
 	call Audio3_GetNextMusicByte
-	ldh [rNR50], a ; store volume
+	ldh [rAUDVOL], a ; store volume
 	jp Audio3_sound_ret
 
 Audio3_execute_music:
@@ -638,7 +638,7 @@ Audio3_pitch_sweep:
 	bit BIT_EXECUTE_MUSIC, [hl]
 	jr nz, Audio3_note ; no
 	call Audio3_GetNextMusicByte
-	ldh [rNR10], a
+	ldh [rAUD1SWEEP], a
 	jp Audio3_sound_ret
 
 Audio3_note:
@@ -770,9 +770,9 @@ Audio3_note_pitch:
 	ld b, 0
 	ld hl, Audio3_HWChannelDisableMasks
 	add hl, bc
-	ldh a, [rNR51]
+	ldh a, [rAUDTERM]
 	and [hl]
-	ldh [rNR51], a ; disable hardware channel 3's output
+	ldh [rAUDTERM], a ; disable hardware channel 3's output
 	jr .done
 .notChannel3
 	ld b, REG_VOLUME_ENVELOPE
@@ -845,7 +845,7 @@ Audio3_EnableChannelOutput:
 	ld b, 0
 	ld hl, Audio3_HWChannelEnableMasks
 	add hl, bc
-	ldh a, [rNR51]
+	ldh a, [rAUDTERM]
 	or [hl] ; set this channel's bits
 	ld d, a
 	ld a, c
@@ -867,7 +867,7 @@ Audio3_EnableChannelOutput:
 	add hl, bc
 	and [hl]
 	ld d, a
-	ldh a, [rNR51]
+	ldh a, [rAUDTERM]
 	ld hl, Audio3_HWChannelDisableMasks
 	add hl, bc
 	and [hl] ; reset this channel's output bits
@@ -875,7 +875,7 @@ Audio3_EnableChannelOutput:
 	ld d, a
 .skip
 	ld a, d
-	ldh [rNR51], a
+	ldh [rAUDTERM], a
 	ret
 
 Audio3_ApplyDutyCycleAndSoundLength:
@@ -926,10 +926,10 @@ Audio3_ApplyWavePatternAndFrequency:
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
-	ld hl, rWave_0
+	ld hl, _AUD3WAVERAM
 	ld b, $f
 	ld a, $0 ; stop hardware channel 3
-	ldh [rNR30], a
+	ldh [rAUD3ENA], a
 .loop
 	ld a, [de]
 	inc de
@@ -939,7 +939,7 @@ Audio3_ApplyWavePatternAndFrequency:
 	and a
 	jr nz, .loop
 	ld a, $80 ; start hardware channel 3
-	ldh [rNR30], a
+	ldh [rAUD3ENA], a
 	pop de
 .notChannel3
 	ld a, d
@@ -1400,17 +1400,17 @@ Audio3_PlaySound::
 	ld a, $ff
 	ld [wStereoPanning], a
 	xor a
-	ldh [rNR50], a
+	ldh [rAUDVOL], a
 	ld a, $8
-	ldh [rNR10], a
+	ldh [rAUD1SWEEP], a
 	ld a, 0
-	ldh [rNR51], a
+	ldh [rAUDTERM], a
 	xor a
-	ldh [rNR30], a
+	ldh [rAUD3ENA], a
 	ld a, $80
-	ldh [rNR30], a
+	ldh [rAUD3ENA], a
 	ld a, $77
-	ldh [rNR50], a
+	ldh [rAUDVOL], a
 	jp .playSoundCommon
 
 .playSfx
@@ -1556,7 +1556,7 @@ Audio3_PlaySound::
 	cp CHAN5
 	jr nz, .skipSweepDisable
 	ld a, $8
-	ldh [rNR10], a ; sweep off
+	ldh [rAUD1SWEEP], a ; sweep off
 .skipSweepDisable
 	ld a, c
 	and a
@@ -1566,22 +1566,22 @@ Audio3_PlaySound::
 
 .stopAllAudio
 	ld a, $80
-	ldh [rNR52], a ; sound hardware on
-	ldh [rNR30], a ; wave playback on
+	ldh [rAUDENA], a ; sound hardware on
+	ldh [rAUD3ENA], a ; wave playback on
 	xor a
-	ldh [rNR51], a ; no sound output
-	ldh [rNR32], a ; mute channel 3 (wave channel)
+	ldh [rAUDTERM], a ; no sound output
+	ldh [rAUD3LEVEL], a ; mute channel 3 (wave channel)
 	ld a, $8
-	ldh [rNR10], a ; sweep off
-	ldh [rNR12], a ; mute channel 1 (pulse channel 1)
-	ldh [rNR22], a ; mute channel 2 (pulse channel 2)
-	ldh [rNR42], a ; mute channel 4 (noise channel)
+	ldh [rAUD1SWEEP], a ; sweep off
+	ldh [rAUD1ENV], a ; mute channel 1 (pulse channel 1)
+	ldh [rAUD2ENV], a ; mute channel 2 (pulse channel 2)
+	ldh [rAUD4ENV], a ; mute channel 4 (noise channel)
 	ld a, $40
-	ldh [rNR14], a ; counter mode
-	ldh [rNR24], a
-	ldh [rNR44], a
+	ldh [rAUD1HIGH], a ; counter mode
+	ldh [rAUD2HIGH], a
+	ldh [rAUD4GO], a
 	ld a, $77
-	ldh [rNR50], a ; full volume
+	ldh [rAUDVOL], a ; full volume
 	xor a
 	ld [wUnusedMusicByte], a
 	ld [wDisableChannelOutputWhenSfxEnds], a
@@ -1700,10 +1700,10 @@ Audio3_PlaySound::
 	ld a, [wSavedVolume]
 	and a
 	jr nz, .done
-	ldh a, [rNR50]
+	ldh a, [rAUDVOL]
 	ld [wSavedVolume], a
 	ld a, $77
-	ldh [rNR50], a ; full volume
+	ldh [rAUDVOL], a ; full volume
 .done
 	ret
 

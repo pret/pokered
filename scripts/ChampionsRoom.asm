@@ -28,7 +28,7 @@ ChampionsRoomDefaultScript:
 	ret
 
 ChampionsRoomPlayerEntersScript:
-	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld a, PAD_A | PAD_B | PAD_SELECT | PAD_START | PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
 	ld [wJoyIgnore], a
 	ld hl, wSimulatedJoypadStatesEnd
 	ld de, RivalEntrance_RLEMovement
@@ -41,9 +41,9 @@ ChampionsRoomPlayerEntersScript:
 	ret
 
 RivalEntrance_RLEMovement:
-	db D_UP, 1
-	db D_RIGHT, 1
-	db D_UP, 3
+	db PAD_UP, 1
+	db PAD_RIGHT, 1
+	db PAD_UP, 3
 	db -1 ; end
 
 ChampionsRoomRivalReadyToBattleScript:
@@ -96,7 +96,7 @@ ChampionsRoomRivalDefeatedScript:
 	jp z, ResetRivalScript
 	call UpdateSprites
 	SetEvent EVENT_BEAT_CHAMPION_RIVAL
-	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld a, PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
 	ld [wJoyIgnore], a
 	ld a, TEXT_CHAMPIONSROOM_RIVAL
 	ldh [hTextID], a
@@ -205,7 +205,7 @@ ChampionsRoomOakExitsScript:
 	ret
 
 ChampionsRoomPlayerFollowsOakScript:
-	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld a, PAD_A | PAD_B | PAD_SELECT | PAD_START | PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
 	ld [wJoyIgnore], a
 	ld hl, wSimulatedJoypadStatesEnd
 	ld de, WalkToHallOfFame_RLEMovement
@@ -218,8 +218,8 @@ ChampionsRoomPlayerFollowsOakScript:
 	ret
 
 WalkToHallOfFame_RLEMovement:
-	db D_UP, 4
-	db D_LEFT, 1
+	db PAD_UP, 4
+	db PAD_LEFT, 1
 	db -1 ; end
 
 ChampionsRoomCleanupScript:
@@ -233,10 +233,10 @@ ChampionsRoomCleanupScript:
 	ret
 
 ChampionsRoom_DisplayTextID_AllowABSelectStart:
-	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld a, PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
 	ld [wJoyIgnore], a
 	call DisplayTextID
-	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld a, PAD_A | PAD_B | PAD_SELECT | PAD_START | PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
 	ld [wJoyIgnore], a
 	ret
 

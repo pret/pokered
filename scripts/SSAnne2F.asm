@@ -42,7 +42,7 @@ SSAnne2FDefaultScript:
 	call SetSpriteMovementBytesToFF
 	xor a
 	ldh [hJoyHeld], a
-	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld a, PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
 	ld [wJoyIgnore], a
 	ldh a, [hSavedCoordIndex]
 	cp $2
@@ -126,7 +126,7 @@ SSAnne2FRivalAfterBattleScript:
 	cp $ff
 	jp z, SSAnne2FResetScripts
 	call SSAnne2FSetFacingDirectionScript
-	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld a, PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
 	ld [wJoyIgnore], a
 	ld a, TEXT_SSANNE2F_RIVAL_CUT_MASTER
 	ldh [hTextID], a

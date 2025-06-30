@@ -145,7 +145,7 @@ SECTION "OAM Buffer", WRAM0
 ; buffer for OAM data. Copied to OAM by DMA
 wShadowOAM::
 ; wShadowOAMSprite00 - wShadowOAMSprite39
-FOR n, NUM_SPRITE_OAM_STRUCTS
+FOR n, OAM_COUNT
 wShadowOAMSprite{02d:n}:: sprite_oam_struct wShadowOAMSprite{02d:n}
 ENDR
 wShadowOAMEnd::
@@ -170,7 +170,7 @@ NEXTU
 ; buffer for temporarily saving and restoring shadow OAM
 wShadowOAMBackup::
 ; wShadowOAMBackupSprite00 - wShadowOAMBackupSprite39
-FOR n, NUM_SPRITE_OAM_STRUCTS
+FOR n, OAM_COUNT
 wShadowOAMBackupSprite{02d:n}:: sprite_oam_struct wShadowOAMBackupSprite{02d:n}
 ENDR
 wShadowOAMBackupEnd::
@@ -346,7 +346,7 @@ wNPCMovementScriptBank:: db
 
 ; This union spans 180 bytes.
 UNION
-wVermilionDockTileMapBuffer:: ds 5 * BG_MAP_WIDTH + SCREEN_WIDTH
+wVermilionDockTileMapBuffer:: ds 5 * TILEMAP_WIDTH + SCREEN_WIDTH
 wVermilionDockTileMapBufferEnd::
 
 NEXTU

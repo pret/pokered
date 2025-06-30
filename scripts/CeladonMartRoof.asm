@@ -48,7 +48,7 @@ CeladonMartRoofScript_GiveDrinkToGirl:
 	call PrintText
 	xor a
 	ld [wCurrentMenuItem], a
-	ld a, A_BUTTON | B_BUTTON
+	ld a, PAD_A | PAD_B
 	ld [wMenuWatchedKeys], a
 	ld a, [wFilteredBagItemsCount]
 	dec a
@@ -72,7 +72,7 @@ CeladonMartRoofScript_GiveDrinkToGirl:
 	ld hl, wStatusFlags5
 	res BIT_NO_TEXT_DELAY, [hl]
 	call HandleMenuInput
-	bit BIT_B_BUTTON, a
+	bit B_PAD_B, a
 	ret nz
 	ld hl, wFilteredBagItems
 	ld a, [wCurrentMenuItem]

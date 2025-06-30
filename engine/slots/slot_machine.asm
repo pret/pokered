@@ -68,7 +68,7 @@ MainSlotMachineLoop:
 	call PrintText
 	call SaveScreenTilesToBuffer1
 .loop
-	ld a, A_BUTTON | B_BUTTON
+	ld a, PAD_A | PAD_B
 	ld [wMenuWatchedKeys], a
 	ld a, 2
 	ld [wMaxMenuItem], a
@@ -88,7 +88,7 @@ MainSlotMachineLoop:
 	ld de, CoinMultiplierSlotMachineText
 	call PlaceString
 	call HandleMenuInput
-	and B_BUTTON
+	and PAD_B
 	jp nz, LoadScreenTilesFromBuffer1
 	ld a, [wCurrentMenuItem]
 	ld b, a
@@ -827,7 +827,7 @@ SlotMachine_HandleInputWhileWheelsSpin:
 	call DelayFrame
 	call JoypadLowSensitivity
 	ldh a, [hJoy5]
-	and A_BUTTON
+	and PAD_A
 	ret z
 	ld hl, wStoppingWhichSlotMachineWheel
 	ld a, [hl]

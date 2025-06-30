@@ -3,13 +3,13 @@ PlayerStepOutFromDoor::
 	res BIT_EXITING_DOOR, [hl]
 	call IsPlayerStandingOnDoorTile
 	jr nc, .notStandingOnDoor
-	ld a, SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld a, PAD_SELECT | PAD_START | PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
 	ld [wJoyIgnore], a
 	ld hl, wMovementFlags
 	set BIT_EXITING_DOOR, [hl]
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
-	ld a, D_DOWN
+	ld a, PAD_DOWN
 	ld [wSimulatedJoypadStatesEnd], a
 	xor a
 	ld [wSpritePlayerStateData1ImageIndex], a
@@ -81,7 +81,7 @@ PalletMovementScript_OakMoveLeft:
 .done
 	ld hl, wStatusFlags7
 	set BIT_NO_MAP_MUSIC, [hl]
-	ld a, SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld a, PAD_SELECT | PAD_START | PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
 	ld [wJoyIgnore], a
 	ret
 
@@ -137,11 +137,11 @@ RLEList_ProfOakWalkToLab:
 	db -1 ; end
 
 RLEList_PlayerWalkToLab:
-	db D_UP, 2
-	db D_RIGHT, 3
-	db D_DOWN, 5
-	db D_LEFT, 1
-	db D_DOWN, 6
+	db PAD_UP, 2
+	db PAD_RIGHT, 3
+	db PAD_DOWN, 5
+	db PAD_LEFT, 1
+	db PAD_DOWN, 6
 	db -1 ; end
 
 PalletMovementScript_Done:
@@ -191,9 +191,9 @@ PewterMovementScript_WalkToMuseum:
 
 RLEList_PewterMuseumPlayer:
 	db NO_INPUT, 1
-	db D_UP, 3
-	db D_LEFT, 13
-	db D_UP, 6
+	db PAD_UP, 3
+	db PAD_LEFT, 13
+	db PAD_UP, 6
 	db -1 ; end
 
 RLEList_PewterMuseumGuy:
@@ -250,11 +250,11 @@ PewterMovementScript_WalkToGym:
 
 RLEList_PewterGymPlayer:
 	db NO_INPUT, 1
-	db D_RIGHT, 2
-	db D_DOWN, 5
-	db D_LEFT, 11
-	db D_UP, 5
-	db D_LEFT, 15
+	db PAD_RIGHT, 2
+	db PAD_DOWN, 5
+	db PAD_LEFT, 11
+	db PAD_UP, 5
+	db PAD_LEFT, 15
 	db -1 ; end
 
 RLEList_PewterGymGuy:
