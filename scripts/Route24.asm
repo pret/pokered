@@ -64,7 +64,7 @@ Route24AfterRocketBattleScript:
 	cp $ff
 	jp z, Route24SetDefaultScript
 	call UpdateSprites
-	ld a, PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
+	ld a, PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	SetEvent EVENT_BEAT_ROUTE24_ROCKET
 	ld a, TEXT_ROUTE24_COOLTRAINER_M1

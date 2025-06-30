@@ -3,7 +3,7 @@ _Joypad::
 ; hJoyPressed:  (hJoyLast ^ hJoyInput) & hJoyInput
 
 	ldh a, [hJoyInput]
-	cp PAD_A + PAD_B + PAD_SELECT + PAD_START ; soft reset
+	cp PAD_BUTTONS ; soft reset
 	jp z, TrySoftReset
 
 	ld b, a

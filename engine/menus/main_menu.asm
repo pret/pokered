@@ -487,7 +487,7 @@ DisplayOptionMenu:
 	call JoypadLowSensitivity
 	ldh a, [hJoy5]
 	ld b, a
-	and PAD_A | PAD_B | PAD_START | PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN ; any key besides select pressed?
+	and ~PAD_SELECT ; any key besides select pressed?
 	jr z, .getJoypadStateLoop
 	bit B_PAD_B, b
 	jr nz, .exitMenu

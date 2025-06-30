@@ -154,13 +154,13 @@ wShadowOAMEnd::
 SECTION "Tilemap", WRAM0
 
 ; buffer for tiles that are visible on screen (20 columns by 18 rows)
-wTileMap:: ds SCREEN_WIDTH * SCREEN_HEIGHT
+wTileMap:: ds SCREEN_AREA
 
 ; This union spans 480 bytes.
 UNION
 ; buffer for temporarily saving and restoring current screen's tiles
 ; (e.g. if menus are drawn on top)
-wTileMapBackup:: ds SCREEN_WIDTH * SCREEN_HEIGHT
+wTileMapBackup:: ds SCREEN_AREA
 
 NEXTU
 ; buffer for the blocks surrounding the player (6 columns by 5 rows of 4x4-tile blocks)
@@ -921,7 +921,7 @@ UNION
 wSerialOtherGameboyRandomNumberListBlock:: ds $11
 NEXTU
 ; second buffer for temporarily saving and restoring current screen's tiles (e.g. if menus are drawn on top)
-wTileMapBackup2:: ds SCREEN_WIDTH * SCREEN_HEIGHT
+wTileMapBackup2:: ds SCREEN_AREA
 ENDU
 
 ; This union spans 30 bytes.

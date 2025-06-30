@@ -49,7 +49,7 @@ RocketHideoutB4FBeatGiovanniScript:
 	cp $ff
 	jp z, RocketHideoutB4FSetDefaultScript
 	call UpdateSprites
-	ld a, PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
+	ld a, PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	SetEvent EVENT_BEAT_ROCKET_HIDEOUT_GIOVANNI
 	ld a, TEXT_ROCKETHIDEOUTB4F_GIOVANNI_HOPE_WE_MEET_AGAIN
