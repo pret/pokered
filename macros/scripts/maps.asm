@@ -84,6 +84,8 @@ MACRO def_warps_to
 	FOR n, {_NUM_WARP_EVENTS}
 		warp_to _WARP_{d:n}_X, _WARP_{d:n}_Y, \1_WIDTH
 	ENDR
+	ASSERT {_NUM_WARP_EVENTS} <= MAX_WARP_EVENTS, \
+		"Too many warp_events (above {d:MAX_WARP_EVENTS})!"
 ENDM
 
 ;\1 x position
