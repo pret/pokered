@@ -6225,8 +6225,8 @@
 0e:5c48 GetMonSpecies.enemyParty
 0e:5c4b GetMonSpecies.getSpecies
 0e:5c53 ReadTrainer
-0e:5c73 ReadTrainer.outer
-0e:5c76 ReadTrainer.inner
+0e:5c73 ReadTrainer.CheckNextTrainer
+0e:5c76 ReadTrainer.SkipTrainer
 0e:5c7c ReadTrainer.IterateTrainer
 0e:5c84 ReadTrainer.LoopTrainerData
 0e:5c97 ReadTrainer.SpecialTrainer

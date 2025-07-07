@@ -6328,8 +6328,8 @@ ROMX bank #14:
 	         $5c48 = GetMonSpecies.enemyParty
 	         $5c4b = GetMonSpecies.getSpecies
 	         $5c53 = ReadTrainer
-	         $5c73 = ReadTrainer.outer
-	         $5c76 = ReadTrainer.inner
+	         $5c73 = ReadTrainer.CheckNextTrainer
+	         $5c76 = ReadTrainer.SkipTrainer
 	         $5c7c = ReadTrainer.IterateTrainer
 	         $5c84 = ReadTrainer.LoopTrainerData
 	         $5c97 = ReadTrainer.SpecialTrainer
