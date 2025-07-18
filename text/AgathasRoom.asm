@@ -42,3 +42,5 @@ _AgathasRoomAgathaDontRunAwayText::
 	text "Someone's voice:"
 	line "Don't run away!"
 	done
+	
+	; added a comment to the file
