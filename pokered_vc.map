@@ -18112,8 +18112,8 @@ WRAM0 bank #0:
 	         $c1cb = wSprite12StateData1XAdjusted
 	         $c1cc = wSprite12StateData1CollisionData
 	         $c1d0 = wSprite13StateData1PictureID
-	         $c1d0 = wSprite12StateData1End
 	         $c1d0 = wSprite13StateData1
+	         $c1d0 = wSprite12StateData1End
 	         $c1d1 = wSprite13StateData1MovementStatus
 	         $c1d2 = wSprite13StateData1ImageIndex
 	         $c1d3 = wSprite13StateData1YStepVector
