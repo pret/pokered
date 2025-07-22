@@ -22,7 +22,7 @@ endc
 ; Define the include guard and the current hardware.inc version
 ; (do this after the RGBDS version check since the `def` syntax depends on it)
 def HARDWARE_INC equ 1
-def HARDWARE_INC_VERSION equs "5.1.0"
+def HARDWARE_INC_VERSION equs "5.2.0"
 
 ; Usage: rev_Check_hardware_inc <min_ver>
 ; Examples:
@@ -66,7 +66,7 @@ def B_JOYP_DOWN   equ 3 ; 0 = Down is pressed   (if reading Control Pad) [ro]
 def B_JOYP_UP     equ 2 ; 0 = Up is pressed     (if reading Control Pad) [ro]
 def B_JOYP_LEFT   equ 1 ; 0 = Left is pressed   (if reading Control Pad) [ro]
 def B_JOYP_RIGHT  equ 0 ; 0 = Right is pressed  (if reading Control Pad) [ro]
-    def JOYP_INPUTS equ %0000_1111
+    def JOYP_INPUTS equ %0000_1111 ; bits equal to 0 indicate pressed (when reading inputs)
     def JOYP_START  equ 1 << B_JOYP_START
     def JOYP_SELECT equ 1 << B_JOYP_SELECT
     def JOYP_B      equ 1 << B_JOYP_B
@@ -422,8 +422,6 @@ def B_AUDENA_ENABLE_CH1 equ 0 ; 1 = channel 1 is running [ro]
 
 ; -- AUD3WAVE ($FF30-$FF3F) ---------------------------------------------------
 ; Audio channel 3 wave pattern RAM [r/w]
-def _AUD3WAVERAM equ $FF30 ; $FF30-$FF3F
-
 def rAUD3WAVE_0 equ $FF30
 def rAUD3WAVE_1 equ $FF31
 def rAUD3WAVE_2 equ $FF32
@@ -440,8 +438,6 @@ def rAUD3WAVE_C equ $FF3C
 def rAUD3WAVE_D equ $FF3D
 def rAUD3WAVE_E equ $FF3E
 def rAUD3WAVE_F equ $FF3F
-
-def AUD3WAVE_SIZE equ 16
 
 ; -- LCDC ($FF40) -------------------------------------------------------------
 ; PPU graphics control
@@ -551,7 +547,7 @@ def rWY equ $FF4A
 ; X coordinate of the Window's top-left pixel, plus 7 (7-166) [r/w]
 def rWX equ $FF4B
 
-def WX_OFS equ 7 ; subtract this to get the actual Window Y coordinate
+def WX_OFS equ 7 ; subtract this to get the actual Window X coordinate
 
 ; -- SYS / KEY0 ($FF4C) -------------------------------------------------------
 ; (CGB boot ROM only) CPU mode select
@@ -606,7 +602,7 @@ def rVDMA_SRC_LOW equ $FF52
 ; (CGB only) VRAM DMA destination address (high 8 bits) [wo]
 def rVDMA_DEST_HIGH equ $FF53
 
-; -- VDMA_DEST_LOW / HDMA3 ($FF54) --------------------------------------------
+; -- VDMA_DEST_LOW / HDMA4 ($FF54) --------------------------------------------
 ; (CGB only) VRAM DMA destination address (low 8 bits) [wo]
 def rVDMA_DEST_LOW equ $FF54
 
@@ -812,7 +808,7 @@ def rRTCREG equ $A000
 
 ; ** MBC5 only ****************************************************************
 
-; -- ROMB0 ($2000-$3FFF) ------------------------------------------------------
+; -- ROMB0 ($2000-$2FFF) ------------------------------------------------------
 ; ROM bank number low byte (bits 0-7) [wo]
 def rROMB0 equ $2000
 
@@ -868,12 +864,14 @@ def RAMREG_ENABLE equ $40
 ; Latch accelerometer start [wo]
 def rACCLATCH0 equ $A000
 
+; Write $55 to ACCLATCH0 to erase the latched data
 def ACCLATCH0_START equ $55
 
 ; -- ACCLATCH1 ($Ax1x) --------------------------------------------------------
 ; Latch accelerometer finish [wo]
 def rACCLATCH1 equ $A010
 
+; Write $AA to ACCLATCH1 to latch the accelerometer and update ACCEL*
 def ACCLATCH1_FINISH equ $AA
 
 ; -- ACCELX0 ($Ax2x) ----------------------------------------------------------
@@ -903,6 +901,7 @@ def rEEPROM equ $A080
 ; IR register [r/w]
 def rIRREG equ $A000
 
+; whether the IR transmitter sees light
 def IR_LED_OFF equ $C0
 def IR_LED_ON  equ $C1
 
@@ -937,6 +936,12 @@ def COLOR_SIZE equ 2 ; size of color in bytes (little-endian BGR555)
         def COLOR_BLUE       equ %0_11111_00 ; for the high byte
 def PAL_COLORS equ 4 ; colors per palette
 def PAL_SIZE   equ COLOR_SIZE * PAL_COLORS ; size of palette in bytes
+
+; (DMG only) grayscale shade indexes for BGP, OBP0, and OBP1
+def SHADE_WHITE equ %00
+def SHADE_LIGHT equ %01
+def SHADE_DARK  equ %10
+def SHADE_BLACK equ %11
 
 ; Tilemaps the BG or Window can read from (controlled by LCDC)
 def TILEMAP0 equ $9800 ; $9800-$9BFF
@@ -984,6 +989,20 @@ def OBJ_SIZE    rb 0 ; size of OBJ in bytes = 4
 
 def OAM_COUNT equ 40 ; how many OBJs there are room for in OAM
 def OAM_SIZE  equ OBJ_SIZE * OAM_COUNT
+
+
+;******************************************************************************
+; Audio channel RAM addresses
+;******************************************************************************
+
+def AUD1RAM equ $FF10 ; $FF10-$FF14
+def AUD2RAM equ $FF15 ; $FF15-$FF19
+def AUD3RAM equ $FF1A ; $FF1A-$FF1E
+def AUD4RAM equ $FF1F ; $FF1F-$FF23
+def AUDRAM_SIZE equ 5 ; size of each audio channel RAM in bytes
+
+def _AUD3WAVERAM equ $FF30 ; $FF30-$FF3F
+def AUD3WAVE_SIZE equ 16 ; size of wave pattern RAM in bytes
 
 
 ;******************************************************************************
