@@ -18807,8 +18807,8 @@ WRAM0 bank #0:
 	         $cc3e = wSerialExchangeNybbleReceiveData
 	         $cc42 = wSerialExchangeNybbleSendData
 	         $cc42 = wLinkMenuSelectionSendBuffer
-	         $cc47 = wUnknownSerialCounter
 	         $cc47 = wLinkTimeoutCounter
+	         $cc47 = wUnknownSerialCounter
 	         $cc47 = wEnteringCableClub
 	         $cc49 = wWhichTradeMonSelectionMenu
 	         $cc49 = wMonDataLocation
@@ -18954,9 +18954,9 @@ WRAM0 bank #0:
 	         $cd3d = wTitleMonSpecies
 	         $cd3d = wPlayerSpinWhileMovingUpOrDownAnimDeltaY
 	         $cd3d = wTempSCX
+	         $cd3d = wUnusedCreditsByte
 	         $cd3d = wMoveDownSmallStarsOAMCount
 	         $cd3d = wStoppingWhichSlotMachineWheel
-	         $cd3d = wUnusedCreditsByte
 	         $cd3d = wFieldMoves
 	         $cd3d = wCoordIndex
 	         $cd3d = wHoFTeamIndex
