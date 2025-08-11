@@ -22,7 +22,7 @@ endc
 ; Define the include guard and the current hardware.inc version
 ; (do this after the RGBDS version check since the `def` syntax depends on it)
 def HARDWARE_INC equ 1
-def HARDWARE_INC_VERSION equs "5.2.0"
+def HARDWARE_INC_VERSION equs "5.3.0"
 
 ; Usage: rev_Check_hardware_inc <min_ver>
 ; Examples:
@@ -76,6 +76,14 @@ def B_JOYP_RIGHT  equ 0 ; 0 = Right is pressed  (if reading Control Pad) [ro]
     def JOYP_LEFT   equ 1 << B_JOYP_LEFT
     def JOYP_RIGHT  equ 1 << B_JOYP_RIGHT
 
+; SGB command packet transfer uses for JOYP bits
+def B_JOYP_SGB_ONE  equ 5 ; 0 = sending 1 bit
+def B_JOYP_SGB_ZERO equ 4 ; 0 = sending 0 bit
+    def JOYP_SGB_START  equ %00_00_0000 ; start SGB packet transfer
+    def JOYP_SGB_ONE    equ %00_01_0000 ; send 1 bit
+    def JOYP_SGB_ZERO   equ %00_10_0000 ; send 0 bit
+    def JOYP_SGB_FINISH equ %00_11_0000 ; finish SGB packet transfer
+
 ; Combined input byte, with Control Pad in high nybble (conventional order)
 def B_PAD_DOWN   equ 7
 def B_PAD_UP     equ 6
@@ -95,7 +103,6 @@ def B_PAD_A      equ 0
     def PAD_SELECT   equ 1 << B_PAD_SELECT
     def PAD_B        equ 1 << B_PAD_B
     def PAD_A        equ 1 << B_PAD_A
-
 
 ; Combined input byte, with Control Pad in low nybble (swapped order)
 def B_PAD_SWAP_START  equ 7
@@ -222,7 +229,7 @@ def AUD1ENV_PACE equ %00000_111 ; how long between envelope iterations
                                 ; (in 64 Hz ticks, ~15.6 ms apart) [r/w]
 
 ; -- AUD1LOW / NR13 ($FF13) ---------------------------------------------------
-; Audio channel 1 period (low 8 bits) [r/w]
+; Audio channel 1 period (low 8 bits) [wo]
 def rAUD1LOW equ $FF13
 
 ; -- AUD1HIGH / NR14 ($FF14) --------------------------------------------------
@@ -266,7 +273,7 @@ def AUD2ENV_PACE equ %00000_111 ; how long between envelope iterations
                                 ; (in 64 Hz ticks, ~15.6 ms apart) [r/w]
 
 ; -- AUD2LOW / NR23 ($FF18) ---------------------------------------------------
-; Audio channel 2 period (low 8 bits) [r/w]
+; Audio channel 2 period (low 8 bits) [wo]
 def rAUD2LOW equ $FF18
 
 ; -- AUD2HIGH / NR24 ($FF19) --------------------------------------------------
@@ -304,7 +311,7 @@ def AUD3LEVEL_VOLUME equ %0_11_00000 ; volume level [r/w]
     def AUD3LEVEL_25   equ %0_11_00000 ; 25%
 
 ; -- AUD3LOW / NR33 ($FF1D) ---------------------------------------------------
-; Audio channel 3 period (low 8 bits) [r/w]
+; Audio channel 3 period (low 8 bits) [wo]
 def rAUD3LOW equ $FF1D
 
 ; -- AUD3HIGH / NR34 ($FF1E) --------------------------------------------------
@@ -927,15 +934,18 @@ def TILE_HEIGHT equ  8 ; height of tile in pixels
 def TILE_SIZE   equ 16 ; size of tile in bytes (2 bits/pixel)
 
 def COLOR_SIZE equ 2 ; size of color in bytes (little-endian BGR555)
-    def B_COLOR_RED   equ  0 ; bits 4-0
-    def B_COLOR_GREEN equ  5 ; bits 9-5
-    def B_COLOR_BLUE  equ 10 ; bits 14-10
+def PAL_COLORS equ 4 ; colors per palette
+def PAL_SIZE   equ COLOR_SIZE * PAL_COLORS ; size of palette in bytes
+
+def COLOR_CH_WIDTH equ 5 ; bits per RGB color channel
+def COLOR_CH_MAX   equ (1 << COLOR_CH_WIDTH) - 1
+    def B_COLOR_RED   equ COLOR_CH_WIDTH * 0 ; bits 4-0
+    def B_COLOR_GREEN equ COLOR_CH_WIDTH * 1 ; bits 9-5
+    def B_COLOR_BLUE  equ COLOR_CH_WIDTH * 2 ; bits 14-10
         def COLOR_RED        equ %000_11111  ; for the low byte
         def COLOR_GREEN_LOW  equ %111_00000  ; for the low byte
         def COLOR_GREEN_HIGH equ %0_00000_11 ; for the high byte
         def COLOR_BLUE       equ %0_11111_00 ; for the high byte
-def PAL_COLORS equ 4 ; colors per palette
-def PAL_SIZE   equ COLOR_SIZE * PAL_COLORS ; size of palette in bytes
 
 ; (DMG only) grayscale shade indexes for BGP, OBP0, and OBP1
 def SHADE_WHITE equ %00
@@ -1031,6 +1041,22 @@ def BOOTUP_A_MGB equ $FF
 def B_BOOTUP_B_AGB equ 0
     def BOOTUP_B_CGB equ 0 << B_BOOTUP_B_AGB
     def BOOTUP_B_AGB equ 1 << B_BOOTUP_B_AGB
+
+; Register C = CPU qualifier
+def BOOTUP_C_DMG equ $13
+def BOOTUP_C_SGB equ $14
+def BOOTUP_C_CGB equ $00 ; CGB or AGB
+
+; Register D = color qualifier
+def BOOTUP_D_MONO  equ $00 ; DMG, MGB, SGB, or CGB or AGB in DMG mode
+def BOOTUP_D_COLOR equ $FF ; CGB or AGB
+
+; Register E = CPU qualifier (distinguishes DMG variants)
+def BOOTUP_E_DMG0        equ $C1
+def BOOTUP_E_DMG         equ $C8
+def BOOTUP_E_SGB         equ $00
+def BOOTUP_E_CGB_DMGMODE equ $08 ; CGB or AGB in DMG mode
+def BOOTUP_E_CGB         equ $56 ; CGB or AGB
 
 
 ;******************************************************************************
