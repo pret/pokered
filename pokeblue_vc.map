@@ -13206,6 +13206,7 @@ ROMX bank #29:
 	         $4e24 = CeruleanBadgeHouseMiddleAgedManText.loop
 	         $4e61 = CeruleanBadgeHouseMiddleAgedManText.done
 	         $4e6e = CeruleanBadgeHouseMiddleAgedManText.BadgeItemList
+	         $4e6f = CeruleanBadgeHouseMiddleAgedManText._table_width_u613
 	         $4e78 = CeruleanBadgeHouseMiddleAgedManText.Text
 	         $4e7d = CeruleanBadgeHouseMiddleAgedManText.WhichBadgeText
 	         $4e82 = CeruleanBadgeHouseMiddleAgedManText.VisitAnyTimeText
