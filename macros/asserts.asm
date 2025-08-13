@@ -27,15 +27,19 @@ MACRO table_width
 ENDM
 
 MACRO assert_table_length
-	DEF x = \1
-	ASSERT x * CURRENT_TABLE_WIDTH == @ - {CURRENT_TABLE_START}, \
-		"{CURRENT_TABLE_START}: expected {d:x} entries, each {d:CURRENT_TABLE_WIDTH} bytes"
+	DEF w = \1
+	DEF x = w * CURRENT_TABLE_WIDTH
+	DEF y = @ - {CURRENT_TABLE_START}
+	ASSERT x == y, "{CURRENT_TABLE_START}: expected {d:w} entries, each {d:CURRENT_TABLE_WIDTH} " ++ \
+		"bytes, for {d:x} total; but got {d:y} bytes"
 ENDM
 
 MACRO assert_max_table_length
-	DEF x = \1
-	ASSERT x * CURRENT_TABLE_WIDTH >= @ - {CURRENT_TABLE_START}, \
-		"{CURRENT_TABLE_START}: expected a maximum of {d:x} entries, each {d:CURRENT_TABLE_WIDTH} bytes"
+	DEF w = \1
+	DEF x = w * CURRENT_TABLE_WIDTH
+	DEF y = @ - {CURRENT_TABLE_START}
+	ASSERT x >= y, "{CURRENT_TABLE_START}: expected a maximum of {d:w} entries, each " ++ \
+		"{d:CURRENT_TABLE_WIDTH} bytes, for maximum {d:x} total; but got {d:y} bytes"
 ENDM
 
 MACRO list_start
@@ -134,12 +138,13 @@ MACRO def_grass_wildmons
 ENDM
 
 MACRO end_grass_wildmons
+	DEF x = @ - {CURRENT_GRASS_WILDMONS_LABEL}
 	IF CURRENT_GRASS_WILDMONS_RATE == 0
-		ASSERT 1 == @ - {CURRENT_GRASS_WILDMONS_LABEL}, \
-			"def_grass_wildmons {d:CURRENT_GRASS_WILDMONS_RATE}: expected 1 byte"
+		ASSERT 1 == x, \
+			"def_grass_wildmons {d:CURRENT_GRASS_WILDMONS_RATE}: expected 1 byte, got {d:x}"
 	ELSE
-		ASSERT WILDDATA_LENGTH == @ - {CURRENT_GRASS_WILDMONS_LABEL}, \
-			"def_grass_wildmons {d:CURRENT_GRASS_WILDMONS_RATE}: expected {d:WILDDATA_LENGTH} bytes"
+		ASSERT WILDDATA_LENGTH == x, \
+			"def_grass_wildmons {d:CURRENT_GRASS_WILDMONS_RATE}: expected {d:WILDDATA_LENGTH} bytes, got {d:x}"
 	ENDC
 ENDM
 
@@ -152,11 +157,12 @@ MACRO def_water_wildmons
 ENDM
 
 MACRO end_water_wildmons
+	DEF x = @ - {CURRENT_WATER_WILDMONS_LABEL}
 	IF CURRENT_WATER_WILDMONS_RATE == 0
-		ASSERT 1 == @ - {CURRENT_WATER_WILDMONS_LABEL}, \
-			"def_water_wildmons {d:CURRENT_WATER_WILDMONS_RATE}: expected 1 byte"
+		ASSERT 1 == x, \
+			"def_water_wildmons {d:CURRENT_WATER_WILDMONS_RATE}: expected 1 byte, got {d:x}"
 	ELSE
-		ASSERT WILDDATA_LENGTH == @ - {CURRENT_WATER_WILDMONS_LABEL}, \
-			"def_water_wildmons {d:CURRENT_WATER_WILDMONS_RATE}: expected {d:WILDDATA_LENGTH} bytes"
+		ASSERT WILDDATA_LENGTH == x, \
+			"def_water_wildmons {d:CURRENT_WATER_WILDMONS_RATE}: expected {d:WILDDATA_LENGTH} bytes, got {d:x}"
 	ENDC
 ENDM
