@@ -29,9 +29,3 @@
 *.sn*
 *.sa*
 *.sg1
-
-# macOS
-.DS_Store
-
-# DataSpell
-.idea/
