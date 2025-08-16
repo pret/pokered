@@ -15,7 +15,7 @@ Route3_Object:
 	def_warp_events
 
 	def_bg_events
-	bg_event 59,  9, 10 ; Route3SignText
+	bg_event 59,  9, TEXT_ROUTE3_SIGN
 
 	def_object_events
 	object_event 57, 11, SPRITE_SUPER_NERD, STAY, NONE, TEXT_ROUTE3_SUPER_NERD

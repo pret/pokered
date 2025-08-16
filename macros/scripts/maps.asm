@@ -72,6 +72,12 @@ ENDM
 
 ;\1 source map
 MACRO def_warps_to
+	ASSERT {_NUM_WARP_EVENTS} <= MAX_WARP_EVENTS, \
+		"Too many warp_events (above {d:MAX_WARP_EVENTS})!"
+	ASSERT {_NUM_BG_EVENTS} <= MAX_BG_EVENTS, \
+		"Too many bg_events (above {d:MAX_BG_EVENTS})!"
+	ASSERT {_NUM_OBJECT_EVENTS} <= MAX_OBJECT_EVENTS, \
+		"Too many object_events (above {d:MAX_OBJECT_EVENTS})!"
 	; text ID values are significant (see DisplayTextID in home/text_scripts.asm)
 	FOR n, {_NUM_BG_EVENTS}
 		ASSERT {_BG_EVENT_{d:n}_TEXT_ID} > {_NUM_OBJECT_EVENTS}, \
@@ -106,8 +112,8 @@ ENDM
 ;\1 event flag
 ;\2 view range
 ;\3 TextBeforeBattle
-;\4 TextAfterBattle
-;\5 TextEndBattle
+;\4 TextEndBattle
+;\5 TextAfterBattle
 MACRO trainer
 	DEF _ev_bit = \1 % 8
 	DEF _cur_bit = CURRENT_TRAINER_BIT % 8
@@ -225,8 +231,14 @@ MACRO connection
 	dw wOverworldMap + _win
 ENDM
 
-DEF def_script_pointers EQUS "const_def"
+MACRO def_script_pointers
+	const_def
+ENDM
 
-DEF def_text_pointers EQUS "const_def 1"
+MACRO def_text_pointers
+	const_def 1
+ENDM
 
-DEF object_const_def EQUS "const_def 1"
+MACRO object_const_def
+	const_def 1
+ENDM

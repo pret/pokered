@@ -35,7 +35,7 @@ Route8TrainerHeader1:
 Route8TrainerHeader2:
 	trainer EVENT_BEAT_ROUTE_8_TRAINER_2, 4, Route8SuperNerd2BattleText, Route8SuperNerd2EndBattleText, Route8SuperNerd2AfterBattleText
 Route8TrainerHeader3:
-	trainer EVENT_BEAT_ROUTE_8_TRAINER_3, 2, Route8CooltrainerF1BattleText, Route8CooltrainerF21EndBattleText, Route8CooltrainerF1AfterBattleText
+	trainer EVENT_BEAT_ROUTE_8_TRAINER_3, 2, Route8CooltrainerF1BattleText, Route8CooltrainerF1EndBattleText, Route8CooltrainerF1AfterBattleText
 Route8TrainerHeader4:
 	trainer EVENT_BEAT_ROUTE_8_TRAINER_4, 3, Route8SuperNerd3BattleText, Route8SuperNerd3EndBattleText, Route8SuperNerd3AfterBattleText
 Route8TrainerHeader5:
@@ -112,8 +112,8 @@ Route8CooltrainerF1BattleText:
 	text_far _Route8CooltrainerF1BattleText
 	text_end
 
-Route8CooltrainerF21EndBattleText:
-	text_far _Route8CooltrainerF21EndBattleText
+Route8CooltrainerF1EndBattleText:
+	text_far _Route8CooltrainerF1EndBattleText
 	text_end
 
 Route8CooltrainerF1AfterBattleText:

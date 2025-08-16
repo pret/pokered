@@ -42,9 +42,9 @@ Run setup and leave the default settings. At the "**Select Packages**" step, cho
 
 Double click on the text that says "**Skip**" next to each package to select the most recent version to install.
 
-Then follow the [**rgbds** install instructions](https://rgbds.gbdev.io/install#pre-built) for Windows with Cygwin to install **rgbds 0.7.0**.
+Then follow the [**rgbds** install instructions](https://rgbds.gbdev.io/install#pre-built) for Windows with Cygwin to install **rgbds 0.9.3**.
 
-**Note:** If you already have an installed rgbds older than 0.7.0, you will need to update to 0.7.0. Ignore this if you have never installed rgbds before. If a version newer than 0.7.0 does not work, try downloading 0.7.0.
+**Note:** If you already have an installed rgbds older than 0.9.3, you will need to update to 0.9.3. Ignore this if you have never installed rgbds before. If a version newer than 0.9.3 does not work, try downloading 0.9.3.
 
 Now open the **Cygwin terminal** and enter the following commands.
 
@@ -67,7 +67,7 @@ Install [**Homebrew**](https://brew.sh/). Follow the official instructions.
 
 Open **Terminal** and prepare to enter commands.
 
-Then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#pre-built) for macOS to install **rgbds 0.7.0**.
+Then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#pre-built) for macOS to install **rgbds 0.9.3**.
 
 Now you're ready to [build **pokered**](#build-pokered).
 
@@ -84,7 +84,7 @@ To install the software required for **pokered**:
 sudo apt-get install make gcc git
 ```
 
-Then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#building-from-source) to build **rgbds 0.7.0** from source.
+Then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#building-from-source) to build **rgbds 0.9.3** from source.
 
 ### OpenSUSE
 
@@ -94,7 +94,7 @@ To install the software required for **pokered**:
 sudo zypper install make gcc git
 ```
 
-Then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#building-from-source) to build **rgbds 0.7.0** from source.
+Then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#building-from-source) to build **rgbds 0.9.3** from source.
 
 ### Arch Linux
 
@@ -104,23 +104,23 @@ To install the software required for **pokered**:
 sudo pacman -S make gcc git rgbds
 ```
 
-If you want to compile and install **rgbds** yourself instead, then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#building-from-source) to build **rgbds 0.7.0** from source.
+If you want to compile and install **rgbds** yourself instead, then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#building-from-source) to build **rgbds 0.9.3** from source.
 
 ### Termux
 
 To install the software required for **pokered**:
 
 ```bash
-sudo apt install make clang git sed
+pkg install make clang git sed
 ```
 
 To install **rgbds**:
 
 ```bash
-sudo apt install rgbds
+pkg install rgbds
 ```
 
-If you want to compile and install **rgbds** yourself instead, then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#building-from-source) to build **rgbds 0.7.0** from source.
+If you want to compile and install **rgbds** yourself instead, then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#building-from-source) to build **rgbds 0.9.3** from source.
 
 ### Other distros
 
@@ -131,7 +131,7 @@ If your distro is not listed here, try to find the required software in its repo
 - `git`
 - `rgbds`
 
-If `rgbds` is not available, you'll need to follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#building-from-source) to build **rgbds 0.7.0** from source.
+If `rgbds` is not available, you'll need to follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#building-from-source) to build **rgbds 0.9.3** from source.
 
 Now you're ready to [build **pokered**](#build-pokered).
 
@@ -153,8 +153,8 @@ make
 
 ### Build with a local rgbds version
 
-If you have different projects that require different versions of `rgbds`, it might not be convenient to install rgbds 0.7.0 globally. Instead, you can put its files in a directory within pokered, such as `pokered/rgbds-0.7.0/`. Then specify it when you run `make`:
+If you have different projects that require different versions of `rgbds`, it might not be convenient to install rgbds 0.9.3 globally. Instead, you can put its files in a directory within pokered, such as `pokered/rgbds-0.9.3/`. Then specify it when you run `make`:
 
 ```bash
-make RGBDS=rgbds-0.7.0/
+make RGBDS=rgbds-0.9.3/
 ```

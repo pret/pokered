@@ -50,7 +50,7 @@ DisplayListMenuID::
 	ld [wTopMenuItemY], a
 	ld a, 5
 	ld [wTopMenuItemX], a
-	ld a, A_BUTTON | B_BUTTON | SELECT
+	ld a, PAD_A | PAD_B | PAD_SELECT
 	ld [wMenuWatchedKeys], a
 	ld c, 10
 	call DelayFrames
@@ -84,7 +84,7 @@ DisplayListMenuIDLoop::
 	push af
 	call PlaceMenuCursor
 	pop af
-	bit BIT_A_BUTTON, a
+	bit B_PAD_A, a
 	jp z, .checkOtherKeys
 .buttonAPressed
 	ld a, [wCurrentMenuItem]
@@ -129,7 +129,7 @@ DisplayListMenuIDLoop::
 	and a ; PCPOKEMONLISTMENU?
 	jr z, .pokemonList
 ; if it's an item menu
-	assert wCurListMenuItem == wCurItem
+	ASSERT wCurListMenuItem == wCurItem
 	push hl
 	call GetItemPrice
 	pop hl
@@ -147,7 +147,7 @@ DisplayListMenuIDLoop::
 	call GetName
 	jr .storeChosenEntry
 .pokemonList
-	assert wCurListMenuItem == wCurPartySpecies
+	ASSERT wCurListMenuItem == wCurPartySpecies
 	ld hl, wPartyCount
 	ld a, [wListPointer]
 	cp l ; is it a list of party pokemon or box pokemon?
@@ -170,12 +170,12 @@ DisplayListMenuIDLoop::
 	res BIT_NO_TEXT_DELAY, [hl]
 	jp BankswitchBack
 .checkOtherKeys ; check B, SELECT, Up, and Down keys
-	bit BIT_B_BUTTON, a
+	bit B_PAD_B, a
 	jp nz, ExitListMenu ; if so, exit the menu
-	bit BIT_SELECT, a
+	bit B_PAD_SELECT, a
 	jp nz, HandleItemListSwapping ; if so, allow the player to swap menu entries
 	ld b, a
-	bit BIT_D_DOWN, b
+	bit B_PAD_DOWN, b
 	ld hl, wListScrollOffset
 	jr z, .upPressed
 .downPressed
@@ -222,13 +222,13 @@ DisplayChooseQuantityMenu::
 .waitForKeyPressLoop
 	call JoypadLowSensitivity
 	ldh a, [hJoyPressed] ; newly pressed buttons
-	bit BIT_A_BUTTON, a
+	bit B_PAD_A, a
 	jp nz, .buttonAPressed
-	bit BIT_B_BUTTON, a
+	bit B_PAD_B, a
 	jp nz, .buttonBPressed
-	bit BIT_D_UP, a
+	bit B_PAD_UP, a
 	jr nz, .incrementQuantity
-	bit BIT_D_DOWN, a
+	bit B_PAD_DOWN, a
 	jr nz, .decrementQuantity
 	jr .waitForKeyPressLoop
 .incrementQuantity
@@ -295,7 +295,7 @@ DisplayChooseQuantityMenu::
 	ld de, SpacesBetweenQuantityAndPriceText
 	call PlaceString
 	ld de, hMoney ; total price
-	ld c, $a3
+	ld c, 3 | LEADING_ZEROES | MONEY_SIGN
 	call PrintBCDNumber
 	hlcoord 9, 10
 .printQuantity
@@ -420,7 +420,7 @@ PrintListMenuEntries::
 	pop hl
 	ld bc, SCREEN_WIDTH + 5 ; 1 row down and 5 columns right
 	add hl, bc
-	ld c, $a3 ; no leading zeroes, right-aligned, print currency symbol, 3 bytes
+	ld c, 3 | LEADING_ZEROES | MONEY_SIGN
 	call PrintBCDNumber
 .skipPrintingItemPrice
 	ld a, [wListMenuID]

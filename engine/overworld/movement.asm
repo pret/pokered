@@ -95,7 +95,7 @@ UpdatePlayerSprite:
 	cp c
 	ld a, 0
 	jr nz, .next2
-	ld a, OAM_BEHIND_BG
+	ld a, OAM_PRIO
 .next2
 	ld [wSpritePlayerStateData2GrassPriority], a
 	ret
@@ -549,7 +549,7 @@ CheckSpriteAvailability:
 	cp c
 	ld a, 0
 	jr nz, .notInGrass
-	ld a, OAM_BEHIND_BG
+	ld a, OAM_PRIO
 .notInGrass
 	ld [hl], a       ; x#SPRITESTATEDATA2_GRASSPRIORITY
 	and a

@@ -217,11 +217,11 @@ DisplayNamingScreen:
 .didNotPressED
 	ld a, [wCurrentMenuItem]
 	cp $6 ; case switch row
-	jr nz, .didNotPressCaseSwtich
+	jr nz, .didNotPressCaseSwitch
 	ld a, [wTopMenuItemX]
 	cp $1 ; case switch column
 	jr z, .pressedA_changedCase
-.didNotPressCaseSwtich
+.didNotPressCaseSwitch
 	ld hl, wMenuCursorLocation
 	ld a, [hli]
 	ld h, [hl]

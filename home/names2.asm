@@ -48,7 +48,7 @@ GetName::
 	; 2-7 = other names
 	ld a, [wPredefBank]
 	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	ld [rROMB], a
 	ld a, [wNameListType]
 	dec a
 	add a
@@ -96,5 +96,5 @@ GetName::
 	pop hl
 	pop af
 	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	ld [rROMB], a
 	ret

@@ -21,6 +21,7 @@ MACRO tmhm
 	ENDR
 	; set bits of bytes
 	REPT _NARG
+		ASSERT FATAL, STRFIND("\1", " ") == -1, "Invalid move: \1"
 		IF DEF(\1_TMNUM)
 			DEF n = (\1_TMNUM - 1) / 8
 			DEF i = (\1_TMNUM - 1) % 8

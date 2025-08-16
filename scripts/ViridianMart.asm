@@ -41,8 +41,8 @@ ViridianMartDefaultScript:
 	ret
 
 .PlayerMovement:
-	db D_LEFT, 1
-	db D_UP, 2
+	db PAD_LEFT, 1
+	db PAD_UP, 2
 	db -1 ; end
 
 ViridianMartOaksParcelScript:

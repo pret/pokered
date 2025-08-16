@@ -139,7 +139,7 @@ DisplayMoneyBox:
 	call ClearScreenArea
 	hlcoord 12, 1
 	ld de, wPlayerMoney
-	ld c, $a3
+	ld c, 3 | LEADING_ZEROES | MONEY_SIGN
 	call PrintBCDNumber
 	ld hl, wStatusFlags5
 	res BIT_NO_TEXT_DELAY, [hl]
@@ -157,7 +157,7 @@ DoBuySellQuitMenu:
 	ld a, BUY_SELL_QUIT_MENU_TEMPLATE
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
-	ld a, A_BUTTON | B_BUTTON
+	ld a, PAD_A | PAD_B
 	ld [wMenuWatchedKeys], a
 	ld a, $2
 	ld [wMaxMenuItem], a
@@ -174,9 +174,9 @@ DoBuySellQuitMenu:
 	ld [wStatusFlags5], a
 	call HandleMenuInput
 	call PlaceUnfilledArrowMenuCursor
-	bit BIT_A_BUTTON, a
+	bit B_PAD_A, a
 	jr nz, .pressedA
-	bit BIT_B_BUTTON, a ; always true since only A/B are watched
+	bit B_PAD_B, a ; always true since only A/B are watched
 	jr z, .pressedA
 	ld a, CANCELLED_MENU
 	ld [wMenuExitMethod], a
@@ -214,7 +214,7 @@ DisplayTwoOptionMenu:
 	ld [wChosenMenuItem], a
 	ld [wMenuExitMethod], a
 
-	ld a, A_BUTTON | B_BUTTON
+	ld a, PAD_A | PAD_B
 	ld [wMenuWatchedKeys], a
 	ld a, $1
 	ld [wMaxMenuItem], a
@@ -296,7 +296,7 @@ DisplayTwoOptionMenu:
 	pop hl
 .noYesMenuInputLoop
 	call HandleMenuInput
-	bit BIT_B_BUTTON, a
+	bit B_PAD_B, a
 	jr nz, .noYesMenuInputLoop ; try again if B was not pressed
 	pop af
 	pop hl
@@ -309,7 +309,7 @@ DisplayTwoOptionMenu:
 	ld [wTwoOptionMenuID], a
 	call HandleMenuInput
 	pop hl
-	bit BIT_B_BUTTON, a
+	bit B_PAD_B, a
 	jr nz, .choseSecondMenuItem ; automatically choose the second option if B is pressed
 .pressedAButton
 	ld a, [wCurrentMenuItem]

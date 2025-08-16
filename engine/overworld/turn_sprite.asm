@@ -12,8 +12,8 @@ UpdateSpriteFacingOffsetAndDelayMovement::
 	ld a, [hld] ; x#SPRITESTATEDATA1_FACINGDIRECTION
 	ld b, a
 	xor a
-	ld [hld], a
-	ld [hl], a ; x#SPRITESTATEDATA1_ANIMFRAMECOUNTER
+	ld [hld], a ; x#SPRITESTATEDATA1_ANIMFRAMECOUNTER
+	ld [hl], a ; x#SPRITESTATEDATA1_INTRAANIMFRAMECOUNTER
 	ldh a, [hCurrentSpriteOffset]
 	add SPRITESTATEDATA1_IMAGEINDEX
 	ld l, a

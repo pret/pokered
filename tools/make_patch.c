@@ -1,5 +1,5 @@
 #define PROGRAM_NAME "make_patch"
-#define USAGE_OPTS "labels.sym constants.sym patched.gbc original.gbc vc.patch.template vc.patch"
+#define USAGE_OPTS "values.sym patched.gbc original.gbc vc.patch.template vc.patch"
 
 #include "common.h"
 
@@ -113,13 +113,14 @@ void parse_symbol_value(char *input, int *restrict bank, int *restrict address) 
 	}
 }
 
-void parse_symbols(const char *filename, struct Symbol **symbols) {
+struct Symbol *parse_symbols(const char *filename) {
 	FILE *file = xfopen(filename, 'r');
 	struct Buffer *buffer = buffer_create(1);
 
 	enum { SYM_PRE, SYM_VALUE, SYM_SPACE, SYM_NAME } state = SYM_PRE;
 	int bank = 0;
 	int address = 0;
+	struct Symbol *symbols = NULL;
 
 	for (;;) {
 		int c = getc(file);
@@ -127,7 +128,7 @@ void parse_symbols(const char *filename, struct Symbol **symbols) {
 			if (state == SYM_NAME) {
 				// The symbol name has ended; append the buffered symbol
 				buffer_append(buffer, &(char []){'\0'});
-				symbol_append(symbols, buffer->data, bank, address);
+				symbol_append(&symbols, buffer->data, bank, address);
 			}
 			// Skip to the next line, ignoring anything after the symbol value and name
 			state = SYM_PRE;
@@ -156,6 +157,7 @@ void parse_symbols(const char *filename, struct Symbol **symbols) {
 
 	fclose(file);
 	buffer_free(buffer);
+	return symbols;
 }
 
 int strfind(const char *s, const char *list[], int count) {
@@ -181,6 +183,16 @@ int parse_arg_value(const char *arg, bool absolute, const struct Symbol *symbols
 		return parse_number(arg, 0);
 	}
 
+	// Symbols may take the low or high part
+	enum { SYM_WHOLE, SYM_LOW, SYM_HIGH } part = SYM_WHOLE;
+	if (arg[0] == '<') {
+		part = SYM_LOW;
+		arg++;
+	} else if (arg[0] == '>') {
+		part = SYM_HIGH;
+		arg++;
+	}
+
 	// Symbols evaluate to their offset or address, plus an optional offset mod
 	int offset_mod = 0;
 	char *plus = strchr(arg, '+');
@@ -188,9 +200,13 @@ int parse_arg_value(const char *arg, bool absolute, const struct Symbol *symbols
 		offset_mod = parse_number(plus, 0);
 		*plus = '\0';
 	}
+
+	// Symbols evaluate to their offset or address
 	const char *sym_name = !strcmp(arg, "@") ? patch_name : arg; // "@" is the current patch label
 	const struct Symbol *symbol = symbol_find(symbols, sym_name);
-	return (absolute ? symbol->offset : symbol->address) + offset_mod;
+
+	int value = (absolute ? symbol->offset : symbol->address) + offset_mod;
+	return part == SYM_LOW ? value & 0xff : part == SYM_HIGH ? value >> 8 : value;
 }
 
 void interpret_command(char *command, const struct Symbol *current_hook, const struct Symbol *symbols, struct Buffer *patches, FILE *restrict new_rom, FILE *restrict orig_rom, FILE *restrict output) {
@@ -411,7 +427,7 @@ struct Buffer *process_template(const char *template_filename, const char *patch
 int compare_patch(const void *patch1, const void *patch2) {
 	unsigned int offset1 = ((const struct Patch *)patch1)->offset;
 	unsigned int offset2 = ((const struct Patch *)patch2)->offset;
-	return offset1 > offset2 ? 1 : offset1 < offset2 ? -1 : 0;
+	return (offset1 > offset2) - (offset1 < offset2);
 }
 
 bool verify_completeness(FILE *restrict orig_rom, FILE *restrict new_rom, struct Buffer *patches) {
@@ -443,20 +459,18 @@ bool verify_completeness(FILE *restrict orig_rom, FILE *restrict new_rom, struct
 }
 
 int main(int argc, char *argv[]) {
-	if (argc != 7) {
+	if (argc != 6) {
 		usage_exit(1);
 	}
 
-	struct Symbol *symbols = NULL;
-	parse_symbols(argv[1], &symbols);
-	parse_symbols(argv[2], &symbols);
+	struct Symbol *symbols = parse_symbols(argv[1]);
 
-	FILE *new_rom = xfopen(argv[3], 'r');
-	FILE *orig_rom = xfopen(argv[4], 'r');
-	struct Buffer *patches = process_template(argv[5], argv[6], new_rom, orig_rom, symbols);
+	FILE *new_rom = xfopen(argv[2], 'r');
+	FILE *orig_rom = xfopen(argv[3], 'r');
+	struct Buffer *patches = process_template(argv[4], argv[5], new_rom, orig_rom, symbols);
 
 	if (!verify_completeness(orig_rom, new_rom, patches)) {
-		fprintf(stderr, PROGRAM_NAME ": Warning: Not all ROM differences are defined by \"%s\"\n", argv[6]);
+		fprintf(stderr, PROGRAM_NAME ": Warning: Not all ROM differences are defined by \"%s\"\n", argv[5]);
 	}
 
 	symbol_free(symbols);

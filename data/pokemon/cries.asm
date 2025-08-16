@@ -4,7 +4,7 @@ MACRO mon_cry
 ENDM
 
 CryData::
-	table_width 3, CryData
+	table_width 3
 	; base cry, pitch, length
 	mon_cry SFX_CRY_11, $00, $80 ; Rhydon
 	mon_cry SFX_CRY_03, $00, $80 ; Kangaskhan

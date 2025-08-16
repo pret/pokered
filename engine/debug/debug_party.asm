@@ -92,7 +92,7 @@ IF DEF(_DEBUG)
 
 	; Get some debug items.
 	ld hl, wNumBagItems
-	ld de, DebugItemsList
+	ld de, DebugNewGameItemsList
 .items_loop
 	ld a, [de]
 	cp -1
@@ -116,9 +116,10 @@ IF DEF(_DEBUG)
 	; Rival chose Squirtle,
 	; Player chose Charmander.
 	ld hl, wRivalStarter
+	ASSERT wRivalStarter + 2 == wPlayerStarter
 	ld a, STARTER2
 	ld [hli], a
-	inc hl ; hl = wPlayerStarter
+	inc hl
 	ld a, STARTER1
 	ld [hl], a
 
@@ -134,7 +135,7 @@ DebugSetPokedexEntries:
 	ld [hl], %01111111
 	ret
 
-DebugItemsList:
+DebugNewGameItemsList:
 	db BICYCLE, 1
 	db FULL_RESTORE, 99
 	db FULL_HEAL, 99
@@ -148,7 +149,7 @@ DebugItemsList:
 	db LIFT_KEY, 1
 	db -1 ; end
 
-DebugUnusedList:
+DebugUnusedList: ; unreferenced
 	db -1 ; end
 ELSE
 	ret

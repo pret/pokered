@@ -73,7 +73,7 @@ BillsHousePokemonList::
 	ld [wMenuItemOffset], a ; not used
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
-	ld a, A_BUTTON | B_BUTTON
+	ld a, PAD_A | PAD_B
 	ld [wMenuWatchedKeys], a
 	ld a, 4
 	ld [wMaxMenuItem], a
@@ -95,7 +95,7 @@ BillsHousePokemonList::
 	call PrintText
 	call SaveScreenTilesToBuffer2
 	call HandleMenuInput
-	bit BIT_B_BUTTON, a
+	bit B_PAD_B, a
 	jr nz, .cancel
 	ld a, [wCurrentMenuItem]
 	add EEVEE

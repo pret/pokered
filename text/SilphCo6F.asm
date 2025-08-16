@@ -60,12 +60,12 @@ _SilphCo6FRocket1BattleText::
 	line "ROCKET BROTHERS!"
 	done
 
-_SilphCo6Rocket1EndBattleText::
+_SilphCo6FRocket1EndBattleText::
 	text "Flame"
 	line "out!"
 	prompt
 
-_SilphCo6Rocket1AfterBattleText::
+_SilphCo6FRocket1AfterBattleText::
 	text "No matter!"
 	line "My brothers will"
 	cont "avenge me!"

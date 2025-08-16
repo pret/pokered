@@ -127,7 +127,7 @@ SilphCo7FDefaultScript:
 	jp nc, CheckFightingMapTrainers
 	xor a
 	ldh [hJoyHeld], a
-	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld a, PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	ld a, PLAYER_DIR_DOWN
 	ld [wPlayerMovingDirection], a
@@ -207,7 +207,7 @@ SilphCo7FRivalAfterBattleScript:
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, SilphCo7FSetDefaultScript
-	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld a, PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	SetEvent EVENT_BEAT_SILPH_CO_RIVAL
 	ld a, PLAYER_DIR_DOWN
@@ -310,7 +310,7 @@ SilphCo7FSilphWorkerM1Text:
 	lb bc, LAPRAS, 15
 	call GivePokemon
 	jr nc, .done
-	ld a, [wSimulatedJoypadStatesEnd]
+	ld a, [wAddedToParty]
 	and a
 	call z, WaitForTextScrollButtonPress
 	call EnableAutoTextBoxDrawing

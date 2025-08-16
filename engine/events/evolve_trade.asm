@@ -1,40 +1,24 @@
-EvolveTradeMon:
-; Verify the TradeMon's species name before
-; attempting to initiate a trade evolution.
-
-; The names of the trade evolutions in Blue (JP)
-; are checked. In that version, TradeMons that
-; can evolve are Graveler and Haunter.
-
-; In localization, this check was translated
-; before monster names were finalized.
-; Then, Haunter's name was "Spectre".
-; Since its name no longer starts with
-; "SP", it is prevented from evolving.
-
-; This may have been why Red/Green's trades
-; were used instead, where none can evolve.
-
-; This was fixed in Yellow.
-
+InGameTrade_CheckForTradeEvo:
+; In Japanese Blue, TradeMons include a Graveler and a Haunter,
+; both of which have Japanese names that start with "ゴ",
+; which is what this routine originally checked in that game.
+; For English Red and Blue, this routine was adjusted for
+; Graveler's English name and Haunter's early English name "Spectre".
+; The final release replaced Graveler and Haunter in TradeMons.
 	ld a, [wInGameTradeReceiveMonName]
-
-	; GRAVELER
-	cp "G"
-	jr z, .ok
-
+	cp "G" ; GRAVELER
+	jr z, .nameMatched
 	; "SPECTRE" (HAUNTER)
 	cp "S"
 	ret nz
 	ld a, [wInGameTradeReceiveMonName + 1]
 	cp "P"
 	ret nz
-
-.ok
+.nameMatched
 	ld a, [wPartyCount]
 	dec a
 	ld [wWhichPokemon], a
-	ld a, $1
+	ld a, TRUE
 	ld [wForceEvolution], a
 	ld a, LINK_STATE_TRADING
 	ld [wLinkState], a

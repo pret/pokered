@@ -40,7 +40,7 @@ CeruleanGymMistyPostBattleScript:
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, CeruleanGymResetScripts
-	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld a, PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 
 CeruleanGymReceiveTM11:

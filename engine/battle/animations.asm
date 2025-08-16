@@ -80,13 +80,13 @@ DrawFrameBlock:
 ; toggle horizontal and vertical flip
 	ld a, [hli] ; flags
 	and a
-	ld b, OAM_VFLIP | OAM_HFLIP
+	ld b, OAM_YFLIP | OAM_XFLIP
 	jr z, .storeFlags1
-	cp OAM_HFLIP
-	ld b, OAM_VFLIP
+	cp OAM_XFLIP
+	ld b, OAM_YFLIP
 	jr z, .storeFlags1
-	cp OAM_VFLIP
-	ld b, OAM_HFLIP
+	cp OAM_YFLIP
+	ld b, OAM_XFLIP
 	jr z, .storeFlags1
 	ld b, 0
 .storeFlags1
@@ -114,13 +114,13 @@ DrawFrameBlock:
 	ld [de], a ; store tile ID
 	inc de
 	ld a, [hli]
-	bit OAM_X_FLIP, a
+	bit B_OAM_XFLIP, a
 	jr nz, .disableHorizontalFlip
 .enableHorizontalFlip
-	set OAM_X_FLIP, a
+	set B_OAM_XFLIP, a
 	jr .storeFlags2
 .disableHorizontalFlip
-	res OAM_X_FLIP, a
+	res B_OAM_XFLIP, a
 .storeFlags2
 	ld [de], a
 	inc de
@@ -726,7 +726,7 @@ DoBallTossSpecialEffects:
 	dec b
 	jr nz, .loop
 	ld a, %00001000
-	ldh [rNR10], a ; Channel 1 sweep register
+	ldh [rAUD1SWEEP], a ; Channel 1 sweep register
 	ret
 .isTrainerBattle ; if it's a trainer battle, shorten the animation by one frame
 	ld a, [wSubAnimCounter]
@@ -1743,8 +1743,7 @@ AnimationMinimizeMon:
 
 MinimizedMonSprite:
 ; 8x5 partial tile graphic
-pusho
-opt b.X ; . = 0, X = 1
+pusho b.X ; . = 0, X = 1
 	db %...XX...
 	db %..XXXX..
 	db %.XXXXXX.
@@ -1936,7 +1935,7 @@ AnimationSubstitute:
 ; Changes the pokemon's sprite to the mini sprite
 	ld hl, wTempPic
 	xor a
-	ld bc, $310
+	ld bc, 7 * 7 tiles
 	call FillMemory
 	ldh a, [hWhoseTurn]
 	and a
@@ -2121,7 +2120,7 @@ GetMonSpriteTileMapPointerFromRowCount:
 	ldh a, [hWhoseTurn]
 	and a
 	jr nz, .enemyTurn
-	ld a, 20 * 5 + 1
+	ld a, 5 * SCREEN_WIDTH + 1
 	jr .next
 .enemyTurn
 	ld a, 12
@@ -2134,7 +2133,7 @@ GetMonSpriteTileMapPointerFromRowCount:
 	sub b
 	and a
 	jr z, .done
-	ld de, 20
+	ld de, SCREEN_WIDTH
 .loop
 	add hl, de
 	dec a
@@ -2188,8 +2187,8 @@ AnimCopyRowRight:
 	jr nz, AnimCopyRowRight
 	ret
 
-; get the sound of the move id in b
-GetMoveSoundB:
+; only used by the unreferenced PlayIntroMoveSound
+GetIntroMoveSound:
 	ld a, b
 	call GetMoveSound
 	ld b, a
@@ -2295,7 +2294,7 @@ CopyTileIDs:
 	dec c
 	jr nz, .columnLoop
 	pop hl
-	ld bc, 20
+	ld bc, SCREEN_WIDTH
 	add hl, bc
 	pop bc
 	dec b
@@ -2409,7 +2408,7 @@ FallingObjects_UpdateOAMEntry:
 	sub b
 	ld [hli], a ; X
 	inc hl
-	ld a, 1 << OAM_X_FLIP
+	ld a, OAM_XFLIP
 .next2
 	ld [hl], a ; attribute
 	ret

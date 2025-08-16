@@ -1,39 +1,54 @@
 ; Macros to verify assumptions about the data or code
 
-MACRO table_width
-	DEF CURRENT_TABLE_WIDTH = \1
-	IF _NARG == 2
-		REDEF CURRENT_TABLE_START EQUS "\2"
-	ELSE
-		REDEF CURRENT_TABLE_START EQUS "._table_width\@"
-	{CURRENT_TABLE_START}:
+MACRO _redef_current_label
+	IF DEF(\1)
+		PURGE \1
+	ENDC
+	IF _NARG == 3 + (\3)
+		DEF \1 EQUS "\<_NARG>"
+	ELIF DEF(..)
+		IF .. - @ == 0
+			DEF \1 EQUS "{..}"
+		ENDC
+	ELIF DEF(.)
+		if . - @ == 0
+			DEF \1 EQUS "{.}"
+		ENDC
+	ENDC
+	if !DEF(\1)
+		DEF \1 EQUS \2
+		{\1}:
 	ENDC
 ENDM
 
+MACRO table_width
+	DEF CURRENT_TABLE_WIDTH = \1
+	_redef_current_label CURRENT_TABLE_START, "._table_width\@", 2, \#
+ENDM
+
 MACRO assert_table_length
-	DEF x = \1
-	ASSERT x * CURRENT_TABLE_WIDTH == @ - {CURRENT_TABLE_START}, \
-		"{CURRENT_TABLE_START}: expected {d:x} entries, each {d:CURRENT_TABLE_WIDTH} bytes"
+	DEF w = \1
+	DEF x = w * CURRENT_TABLE_WIDTH
+	DEF y = @ - {CURRENT_TABLE_START}
+	ASSERT x == y, "{CURRENT_TABLE_START}: expected {d:w} entries, each {d:CURRENT_TABLE_WIDTH} " ++ \
+		"bytes, for {d:x} total; but got {d:y} bytes"
 ENDM
 
 MACRO assert_max_table_length
-	DEF x = \1
-	ASSERT x * CURRENT_TABLE_WIDTH >= @ - {CURRENT_TABLE_START}, \
-		"{CURRENT_TABLE_START}: expected a maximum of {d:x} entries, each {d:CURRENT_TABLE_WIDTH} bytes"
+	DEF w = \1
+	DEF x = w * CURRENT_TABLE_WIDTH
+	DEF y = @ - {CURRENT_TABLE_START}
+	ASSERT x >= y, "{CURRENT_TABLE_START}: expected a maximum of {d:w} entries, each " ++ \
+		"{d:CURRENT_TABLE_WIDTH} bytes, for maximum {d:x} total; but got {d:y} bytes"
 ENDM
 
 MACRO list_start
 	DEF list_index = 0
-	IF _NARG == 1
-		REDEF CURRENT_LIST_START EQUS "\1"
-	ELSE
-		REDEF CURRENT_LIST_START EQUS "._list_start\@"
-	{CURRENT_LIST_START}:
-	ENDC
+	_redef_current_label CURRENT_LIST_START, "._list_start\@", 1, \#
 ENDM
 
 MACRO li
-	ASSERT !STRIN(\1, "@"), STRCAT("String terminator \"@\" in list entry: ", \1)
+	ASSERT STRFIND(\1, "@") == -1, "String terminator \"@\" in list entry: \1"
 	db \1, "@"
 	DEF list_index += 1
 ENDM
@@ -123,12 +138,13 @@ MACRO def_grass_wildmons
 ENDM
 
 MACRO end_grass_wildmons
+	DEF x = @ - {CURRENT_GRASS_WILDMONS_LABEL}
 	IF CURRENT_GRASS_WILDMONS_RATE == 0
-		ASSERT 1 == @ - {CURRENT_GRASS_WILDMONS_LABEL}, \
-			"def_grass_wildmons {d:CURRENT_GRASS_WILDMONS_RATE}: expected 1 byte"
+		ASSERT 1 == x, \
+			"def_grass_wildmons {d:CURRENT_GRASS_WILDMONS_RATE}: expected 1 byte, got {d:x}"
 	ELSE
-		ASSERT WILDDATA_LENGTH == @ - {CURRENT_GRASS_WILDMONS_LABEL}, \
-			"def_grass_wildmons {d:CURRENT_GRASS_WILDMONS_RATE}: expected {d:WILDDATA_LENGTH} bytes"
+		ASSERT WILDDATA_LENGTH == x, \
+			"def_grass_wildmons {d:CURRENT_GRASS_WILDMONS_RATE}: expected {d:WILDDATA_LENGTH} bytes, got {d:x}"
 	ENDC
 ENDM
 
@@ -141,11 +157,12 @@ MACRO def_water_wildmons
 ENDM
 
 MACRO end_water_wildmons
+	DEF x = @ - {CURRENT_WATER_WILDMONS_LABEL}
 	IF CURRENT_WATER_WILDMONS_RATE == 0
-		ASSERT 1 == @ - {CURRENT_WATER_WILDMONS_LABEL}, \
-			"def_water_wildmons {d:CURRENT_WATER_WILDMONS_RATE}: expected 1 byte"
+		ASSERT 1 == x, \
+			"def_water_wildmons {d:CURRENT_WATER_WILDMONS_RATE}: expected 1 byte, got {d:x}"
 	ELSE
-		ASSERT WILDDATA_LENGTH == @ - {CURRENT_WATER_WILDMONS_LABEL}, \
-			"def_water_wildmons {d:CURRENT_WATER_WILDMONS_RATE}: expected {d:WILDDATA_LENGTH} bytes"
+		ASSERT WILDDATA_LENGTH == x, \
+			"def_water_wildmons {d:CURRENT_WATER_WILDMONS_RATE}: expected {d:WILDDATA_LENGTH} bytes, got {d:x}"
 	ENDC
 ENDM

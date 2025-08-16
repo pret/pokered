@@ -31,9 +31,9 @@ HallOfFameResetEventsAndSaveScript:
 	ld [wLetterPrintingDelayFlags], a
 	ld hl, wStatusFlags7
 	res BIT_NO_MAP_MUSIC, [hl]
-	assert wStatusFlags7 + 1 == wElite4Flags
+	ASSERT wStatusFlags7 + 1 == wElite4Flags
 	inc hl
-	set BIT_UNUSED_BEAT_ELITE_4, [hl] ; debug, unused?
+	set BIT_UNUSED_BEAT_ELITE_4, [hl] ; unused
 	xor a ; SCRIPT_*_DEFAULT
 	ld hl, wLoreleisRoomCurScript
 	ld [hli], a ; wLoreleisRoomCurScript
@@ -58,7 +58,7 @@ HallOfFameResetEventsAndSaveScript:
 	jp Init
 
 HallOfFameDefaultScript:
-	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld a, PAD_BUTTONS | PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	ld hl, wSimulatedJoypadStatesEnd
 	ld de, HallOfFameEntryMovement
@@ -71,7 +71,7 @@ HallOfFameDefaultScript:
 	ret
 
 HallOfFameEntryMovement:
-	db D_UP, 5
+	db PAD_UP, 5
 	db -1 ; end
 
 HallOfFameOakCongratulationsScript:
@@ -94,7 +94,7 @@ HallOfFameOakCongratulationsScript:
 	ld a, TEXT_HALLOFFAME_OAK
 	ldh [hTextID], a
 	call DisplayTextID
-	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld a, PAD_BUTTONS | PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	ld a, HS_CERULEAN_CAVE_GUY
 	ld [wMissableObjectIndex], a

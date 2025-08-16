@@ -1,4 +1,4 @@
-CopyDebugName: ; unused
+CopyDebugName:
 	ld bc, NAME_LENGTH
 	jp CopyData
 
@@ -17,9 +17,9 @@ PrepareTitleScreen::
 	ld [wLetterPrintingDelayFlags], a
 	ld hl, wStatusFlags6
 	ld [hli], a
-	assert wStatusFlags6 + 1 == wStatusFlags7
+	ASSERT wStatusFlags6 + 1 == wStatusFlags7
 	ld [hli], a
-	assert wStatusFlags7 + 1 == wElite4Flags
+	ASSERT wStatusFlags7 + 1 == wElite4Flags
 	ld [hl], a
 	ld a, BANK(Music_TitleScreen)
 	ld [wAudioROMBank], a
@@ -254,12 +254,12 @@ ENDC
 	call LoadGBPal
 	ldh a, [hJoyHeld]
 	ld b, a
-	and D_UP | SELECT | B_BUTTON
-	cp D_UP | SELECT | B_BUTTON
+	and PAD_UP | PAD_SELECT | PAD_B
+	cp PAD_UP | PAD_SELECT | PAD_B
 	jp z, .doClearSaveDialogue
 IF DEF(_DEBUG)
 	ld a, b
-	bit BIT_SELECT, a
+	bit B_PAD_SELECT, a
 	jp nz, DebugMenu
 ENDC
 	jp MainMenu

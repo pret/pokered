@@ -26,7 +26,7 @@ YesNoChoicePokeCenter::
 	lb bc, 8, 12
 	jr DisplayYesNoChoice
 
-WideYesNoChoice:: ; unused
+WideYesNoChoice:: ; unreferenced
 	call SaveScreenTilesToBuffer1
 	ld a, WIDE_YES_NO_MENU
 	ld [wTwoOptionMenuID], a

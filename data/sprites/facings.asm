@@ -53,7 +53,7 @@ SpriteFacingAndAnimationTable:
 
 .FlippedOAM:
 	; y, x, attributes
-	db 0, 8, OAM_HFLIP ; top left
-	db 0, 0, OAM_HFLIP ; top right
-	db 8, 8, OAM_HFLIP | UNDER_GRASS ; bottom left
-	db 8, 0, OAM_HFLIP | UNDER_GRASS | FACING_END ; bottom right
+	db 0, 8, OAM_XFLIP ; top left
+	db 0, 0, OAM_XFLIP ; top right
+	db 8, 8, OAM_XFLIP | UNDER_GRASS ; bottom left
+	db 8, 0, OAM_XFLIP | UNDER_GRASS | FACING_END ; bottom right

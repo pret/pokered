@@ -1,6 +1,6 @@
 ; see also MapHeaderPointers
 MapHeaderBanks::
-	table_width 1, MapHeaderBanks
+	table_width 1
 	db BANK(PalletTown_h)
 	db BANK(ViridianCity_h)
 	db BANK(PewterCity_h)

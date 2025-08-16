@@ -1,6 +1,6 @@
 MoveEffectPointerTable:
 ; entries correspond to *_EFFECT constants
-	table_width 2, MoveEffectPointerTable
+	table_width 2
 	dw SleepEffect               ; EFFECT_01
 	dw PoisonEffect              ; POISON_SIDE_EFFECT1
 	dw DrainHPEffect             ; DRAIN_HP_EFFECT

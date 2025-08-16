@@ -72,7 +72,7 @@ DisplayPCMainMenu::
 	ld de, LogOffPCText
 .next3
 	call PlaceString
-	ld a, A_BUTTON | B_BUTTON
+	ld a, PAD_A | PAD_B
 	ld [wMenuWatchedKeys], a
 	ld a, 2
 	ld [wTopMenuItemY], a
@@ -135,7 +135,7 @@ BillsPCMenu:
 	inc hl
 	ld a, 4
 	ld [hli], a ; wMaxMenuItem
-	ld a, A_BUTTON | B_BUTTON
+	ld a, PAD_A | PAD_B
 	ld [hli], a ; wMenuWatchedKeys
 	xor a
 	ld [hli], a ; wLastMenuItem
@@ -171,7 +171,7 @@ BillsPCMenu:
 	ldh [hAutoBGTransferEnabled], a
 	call Delay3
 	call HandleMenuInput
-	bit BIT_B_BUTTON, a
+	bit B_PAD_B, a
 	jp nz, ExitBillsPC
 	call PlaceUnfilledArrowMenuCursor
 	ld a, [wCurrentMenuItem]
@@ -405,7 +405,7 @@ DisplayDepositWithdrawMenu:
 	inc hl
 	ld a, 2
 	ld [hli], a ; wMaxMenuItem
-	ld a, A_BUTTON | B_BUTTON
+	ld a, PAD_A | PAD_B
 	ld [hli], a ; wMenuWatchedKeys
 	xor a
 	ld [hl], a ; wLastMenuItem
@@ -416,7 +416,7 @@ DisplayDepositWithdrawMenu:
 	ld [wPartyAndBillsPCSavedMenuItem], a
 .loop
 	call HandleMenuInput
-	bit BIT_B_BUTTON, a
+	bit B_PAD_B, a
 	jr nz, .exit
 	ld a, [wCurrentMenuItem]
 	and a
