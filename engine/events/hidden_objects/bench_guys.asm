@@ -17,6 +17,15 @@ PrintBenchGuyText:
 	ld b, a
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp b
+
+	; bug: an 'inc hl' instruction is needed before looping back. When trying to
+	; talk to a bench guy from above, this Sprite Facing test will fail, and the
+	; next loop iteration will be misaligned within BenchGuyTextPointers table.
+	; As a result, the routine will miss the terminator byte, and continue to
+	; process data beyond the table boundary.
+	; It seems that it will only return after starting to read data from VRAM
+	; (According to Pan Docs, during PPU mode 3, reads return garbage value,
+	; usually $FF).
 	jr nz, .loop ; player isn't facing the bench guy
 	ld a, [hl]
 	jp PrintPredefTextID
