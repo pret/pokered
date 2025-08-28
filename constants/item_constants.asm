@@ -27,6 +27,7 @@
 	const HYPER_POTION  ; $12
 	const SUPER_POTION  ; $13
 	const POTION        ; $14
+; badges use item IDs (see scripts/CeruleanBadgeHouse.asm)
 	const BOULDERBADGE  ; $15
 DEF SAFARI_BAIT EQU BOULDERBADGE ; overload
 	const CASCADEBADGE  ; $16
@@ -94,7 +95,7 @@ DEF SAFARI_ROCK EQU CASCADEBADGE ; overload
 	const MAX_ELIXER    ; $53
 DEF NUM_ITEMS EQU const_value - 1
 
-; elevator floors use item IDs
+; elevator floors use item IDs (see scripts/CeladonMartElevator.asm and scripts/SilphCoElevator.asm)
 	const FLOOR_B2F     ; $54
 	const FLOOR_B1F     ; $55
 	const FLOOR_1F      ; $56
