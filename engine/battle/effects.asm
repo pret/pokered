@@ -7,9 +7,9 @@ _JumpMoveEffect:
 	ldh a, [hWhoseTurn]
 	and a
 	ld a, [wPlayerMoveEffect]
-	jr z, .next1
+	jr z, .next
 	ld a, [wEnemyMoveEffect]
-.next1
+.next
 	dec a ; subtract 1, there is no special effect for 00
 	add a ; x2, 16bit pointers
 	ld hl, MoveEffectPointerTable
@@ -680,14 +680,14 @@ UpdateLoweredStatDone:
 	call PrintStatText
 	pop de
 	ld a, [de]
-	cp $44
+	cp ATTACK_DOWN_SIDE_EFFECT ; for all side effects, move animation has already played, skip it
 	jr nc, .ApplyBadgeBoostsAndStatusPenalties
 	call PlayCurrentMoveAnimation2
 .ApplyBadgeBoostsAndStatusPenalties
 	ldh a, [hWhoseTurn]
 	and a
 	call nz, ApplyBadgeStatBoosts ; whenever the player uses a stat-down move, badge boosts get reapplied again to every stat,
-	                              ; even to those not affected by the stat-up move (will be boosted further)
+	                              ; even to those not affected by the stat-down move (will be boosted further)
 	ld hl, MonsStatsFellText
 	call PrintText
 
@@ -1438,9 +1438,9 @@ CheckTargetSubstitute:
 	ld hl, wEnemyBattleStatus2
 	ldh a, [hWhoseTurn]
 	and a
-	jr z, .next1
+	jr z, .next
 	ld hl, wPlayerBattleStatus2
-.next1
+.next
 	bit HAS_SUBSTITUTE_UP, [hl]
 	pop hl
 	ret

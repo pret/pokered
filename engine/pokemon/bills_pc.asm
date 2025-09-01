@@ -538,6 +538,7 @@ JustAMomentText::
 	text_far _JustAMomentText
 	text_end
 
+UnusedOpenBillsPC: ; unreferenced
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
 	ret nz

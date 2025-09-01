@@ -606,10 +606,11 @@ SAVCheckRandomID:
 ; checks if Sav file is the same by checking player's name 1st letter
 ; and the two random numbers generated at game beginning
 ; (which are stored at wPlayerID)s
-	ld a, $0a
+	ld a, RAMG_SRAM_ENABLE
 	ld [rRAMG], a
-	ld a, $01
+	ld a, BMODE_ADVANCED
 	ld [rBMODE], a
+	ASSERT BANK("Save Data") == BMODE_ADVANCED
 	ld [rRAMB], a
 	ld a, [sPlayerName]
 	and a
@@ -631,7 +632,7 @@ SAVCheckRandomID:
 	ld a, [wPlayerID + 1]
 	cp h
 .next
-	ld a, $00
+	ld a, RAMG_SRAM_DISABLE ; BMODE_SIMPLE
 	ld [rBMODE], a
 	ld [rRAMG], a
 	ret
@@ -674,7 +675,7 @@ LoadHallOfFameTeams:
 HallOfFame_Copy:
 	ld a, RAMG_SRAM_ENABLE
 	ld [rRAMG], a
-	ld a, $1
+	ld a, BMODE_ADVANCED
 	ld [rBMODE], a
 	xor a
 	ld [rRAMB], a
@@ -687,15 +688,15 @@ HallOfFame_Copy:
 ClearSAV:
 	ld a, RAMG_SRAM_ENABLE
 	ld [rRAMG], a
-	ld a, $1
+	ld a, BMODE_ADVANCED
 	ld [rBMODE], a
 	xor a
 	call PadSRAM_FF
-	ld a, $1
+	ld a, BANK("Save Data")
 	call PadSRAM_FF
-	ld a, $2
+	ld a, BANK("Saved Boxes 1")
 	call PadSRAM_FF
-	ld a, $3
+	ld a, BANK("Saved Boxes 2")
 	call PadSRAM_FF
 	xor a
 	ld [rBMODE], a

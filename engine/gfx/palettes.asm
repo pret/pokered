@@ -523,15 +523,15 @@ CopyGfxToSuperNintendoVRAM:
 	call CopySGBBorderTiles
 	jr .next
 .notCopyingTileData
-	ld bc, $1000
+	ld bc, 256 tiles
 	call CopyData
 .next
 	ld hl, vBGMap0
-	ld de, $c
+	ld de, TILEMAP_WIDTH - SCREEN_WIDTH
 	ld a, $80
-	ld c, $d
+	ld c, 13 ; enough screen lines to fit 256 tiles
 .loop
-	ld b, $14
+	ld b, SCREEN_WIDTH
 .innerLoop
 	ld [hli], a
 	inc a
@@ -540,7 +540,7 @@ CopyGfxToSuperNintendoVRAM:
 	add hl, de
 	dec c
 	jr nz, .loop
-	ld a, $e3
+	ld a, LCDC_DEFAULT
 	ldh [rLCDC], a
 	pop hl
 	call SendSGBPacket

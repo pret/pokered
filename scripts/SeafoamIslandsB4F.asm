@@ -37,7 +37,7 @@ SeafoamIslandsB4FDefaultScript:
 	ld a, [wCoordIndex]
 	cp $3
 	jr nc, .only1UpInputNeeded
-	ld a, NPC_MOVEMENT_UP
+	ld a, PAD_UP
 	ld [wSimulatedJoypadStatesEnd + 1], a
 	ld a, 2
 	jr .forcePlayerUpFromSurfExit

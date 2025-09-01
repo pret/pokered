@@ -50,7 +50,7 @@ VermilionDockSSAnneLeavesScript:
 	ld [wSpritePlayerStateData1ImageIndex], a
 	ld c, 120
 	call DelayFrames
-	ld b, $9c
+	ld b, HIGH(vBGMap1)
 	call CopyScreenTileBufferToVRAM
 	hlcoord 0, 10
 	ld bc, SCREEN_WIDTH * 6

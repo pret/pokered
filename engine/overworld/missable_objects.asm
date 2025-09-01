@@ -15,9 +15,6 @@ MarkTownVisitedAndLoadMissableObjects::
 	add hl, bc
 	ld a, [hli]                ; load missable objects pointer in hl
 	ld h, [hl]
-	; fall through
-
-LoadMissableObjects:
 	ld l, a
 	push hl
 	ld de, MissableObjects     ; calculate difference between out pointer and the base pointer

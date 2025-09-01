@@ -84,7 +84,7 @@ ENDM
 	dict  TX_SCRIPT_PRIZE_VENDOR,            TextScript_GameCornerPrizeMenu
 	dict2 TX_SCRIPT_CABLE_CLUB_RECEPTIONIST, callfar CableClubNPC
 
-	call PrintText_NoCreatingTextBox ; display the text
+	call PrintText_NoCreatingTextBox
 	ld a, [wDoNotWaitForButtonPressAfterDisplayingText]
 	and a
 	jr nz, HoldTextDisplayOpen
@@ -93,7 +93,7 @@ AfterDisplayingTextID::
 	ld a, [wEnteringCableClub]
 	and a
 	jr nz, HoldTextDisplayOpen
-	call WaitForTextScrollButtonPress ; wait for a button press after displaying all the text
+	call WaitForTextScrollButtonPress
 
 ; loop to hold the dialogue box open as long as the player keeps holding down the A button
 HoldTextDisplayOpen::
