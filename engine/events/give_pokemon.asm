@@ -20,7 +20,7 @@ _GivePokemon::
 	callfar SendNewMonToBox
 	ld hl, wStringBuffer
 	ld a, [wCurrentBoxNum]
-	and $7f
+	and BOX_NUM_MASK
 	cp 9
 	jr c, .singleDigitBoxNum
 	sub 9

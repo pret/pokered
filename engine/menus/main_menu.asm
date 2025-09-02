@@ -8,7 +8,7 @@ MainMenu:
 	call CheckForPlayerNameInSRAM
 	jr nc, .mainMenuLoop
 
-	predef LoadSAV
+	predef TryLoadSaveFile
 
 .mainMenuLoop
 	ld c, 20
@@ -701,8 +701,9 @@ CheckForPlayerNameInSRAM:
 ; in carry.
 	ld a, RAMG_SRAM_ENABLE
 	ld [rRAMG], a
-	ld a, $1
+	ld a, BMODE_ADVANCED
 	ld [rBMODE], a
+	ASSERT BANK(sPlayerName) == BMODE_ADVANCED
 	ld [rRAMB], a
 	ld b, NAME_LENGTH
 	ld hl, sPlayerName

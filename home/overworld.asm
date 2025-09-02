@@ -114,7 +114,7 @@ OverworldLoopLessDelay::
 	ld [wEnteringCableClub], a
 	jr z, .changeMap
 ; XXX can this code be reached?
-	predef LoadSAV
+	predef TryLoadSaveFile
 	ld a, [wCurMap]
 	ld [wDestinationMap], a
 	call PrepareForSpecialWarp

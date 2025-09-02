@@ -529,7 +529,7 @@ CopyGfxToSuperNintendoVRAM:
 	ld hl, vBGMap0
 	ld de, TILEMAP_WIDTH - SCREEN_WIDTH
 	ld a, $80
-	ld c, 13 ; enough screen lines to fit 256 tiles
+	ld c, (256 + SCREEN_WIDTH - 1) / SCREEN_WIDTH ; enough rows to fit 256 tiles
 .loop
 	ld b, SCREEN_WIDTH
 .innerLoop

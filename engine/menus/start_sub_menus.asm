@@ -642,7 +642,7 @@ StartMenu_SaveReset::
 	ld a, [wStatusFlags4]
 	bit BIT_LINK_CONNECTED, a
 	jp nz, Init
-	predef SaveSAV
+	predef SaveMenu
 	call LoadScreenTilesFromBuffer2
 	jp HoldTextDisplayOpen
 

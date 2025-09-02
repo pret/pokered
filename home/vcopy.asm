@@ -140,7 +140,7 @@ AutoBgMapTransfer::
 	ld h, a
 	ldh a, [hAutoBGTransferDest]
 	ld l, a
-	ld de, 12 * 32
+	ld de, 12 * TILEMAP_WIDTH
 	add hl, de
 	xor a ; TRANSFERTOP
 	jr .doTransfer
@@ -160,7 +160,7 @@ AutoBgMapTransfer::
 	ld h, a
 	ldh a, [hAutoBGTransferDest]
 	ld l, a
-	ld de, 6 * 32
+	ld de, 6 * TILEMAP_WIDTH
 	add hl, de
 	ld a, TRANSFERBOTTOM
 .doTransfer

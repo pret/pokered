@@ -861,7 +861,7 @@ TradeCenter_Trade:
 	hlcoord 1, 14
 	ld de, TradeCompleted
 	call PlaceString
-	predef SaveSAVtoSRAM2
+	predef SavePartyAndDexData ; this allows reset into Pokecenter
 	vc_hook Trade_save_game_end
 	ld c, 50
 	call DelayFrames

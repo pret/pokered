@@ -49,6 +49,7 @@ DEF BIT_NO_PREVIOUS_MAP EQU 7
 
 ; wCurrentBoxNum
 DEF BIT_HAS_CHANGED_BOXES EQU 7
+DEF BOX_NUM_MASK EQU %01111111
 
 ; wObtainedBadges, wBeatGymFlags
 	const_def
@@ -153,3 +154,14 @@ DEF NUM_BADGES EQU const_value
 	const_def
 	const BIT_PLAYER_LOWER_Y ; 0
 	const BIT_PLAYER_LOWER_X ; 1
+
+; rLCDC
+; * LCD enabled
+; * Window tile map at $9C00
+; * Window display enabled
+; * BG and window tile data at $8800
+; * BG tile map at $9800
+; * 8x8 OBJ size
+; * OBJ display enabled
+; * BG display enabled
+DEF LCDC_DEFAULT EQU LCDC_ON | LCDC_WIN_9C00 | LCDC_WIN_ON | LCDC_BLOCK21 | LCDC_BG_9800 | LCDC_OBJ_8 | LCDC_OBJ_ON | LCDC_BG_ON
