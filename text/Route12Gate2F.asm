@@ -26,7 +26,7 @@ _Route12Gate2FBrunetteGirlTM39NoRoomText::
 	done
 
 _Route12Gate2FLeftBinocularsText::
-	text "Looked into the"
+	text "Looked into the" ; TODO: parameterize "looked into the binoculars"
 	line "binoculars."
 
 	para "A man fishing!"

@@ -168,6 +168,6 @@ CheckBadOffset::
 	cp 1
 	ret nz
 	ld hl, wListScrollOffset
-	dec [hl]
+	dec [hl] ; decs once because it is assumed only 1 item can be removed from the list at a time
 	ret
 

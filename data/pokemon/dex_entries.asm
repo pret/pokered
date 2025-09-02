@@ -1,3 +1,4 @@
+; TODO: convert to dex constant index so no pointless missingno entries taking up space?
 PokedexEntryPointers:
 	table_width 2
 	dw RhydonDexEntry
@@ -1254,6 +1255,7 @@ VictreebelDexEntry:
 	text_far _VictreebelDexEntry
 	text_end
 
+; TODO: remove?
 MissingNoDexEntry:
 	db "???@"
 	db 10 ; 1.0 m
