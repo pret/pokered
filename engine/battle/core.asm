@@ -7595,11 +7595,7 @@ do999StatCap:
 	;If the bit is already set from the lesser nibble, then its addition here can still make it remain set if a is low enough.
 	ret c ;jump to next marker if the c_flag is set. This only remains set if BC <  the cap of $03E7.
 	;else let's continue and set the 999 cap
-	ld a, MAX_STAT_VALUE / $100 ; else load $03 into a
-	ld b, a ;and store it as the high byte
-	ld a, MAX_STAT_VALUE % $100 ; else load $E7 into a
-	ld c, a ;and store it as the low byte
-	;now registers b & c together contain $03E7 for a capped stat value of 999
+	lb bc, MAX_STAT_VALUE / $100 , MAX_STAT_VALUE % $100 ; $03 into high byte, $E7 into low byte which is 999
 	ret
 ;;;;;;;;;;
 
