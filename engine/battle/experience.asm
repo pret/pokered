@@ -301,11 +301,26 @@ GainExperience:
 	cp c	;compare it with the final level
 	jr nz, .inc_level	;loop back again if final level has not been reached
 ;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;
+; pureRGBnote: ADDED: we want to avoid ghost cubone evolving during a specific fight
+	ld a, [wIsInBattle]
+	dec a
+	jr nz, .skipMaw
+	; no cubone evolutions while facing the maw (ghost cubone intended to stay cubone until after this event)
+	ld a, [wEnemyMonSpecies]
+	cp SPIRIT_THE_MAW
+	jr nz, .skipMaw
+	ld a, [wCurSpecies]
+	cp CUBONE
+	jr z, .noEvos
+.skipMaw
+;;;;;;;;;;;;;;;;;;;;
 	ld hl, wCanEvolveFlags
 	ld a, [wWhichPokemon]
 	ld c, a
 	ld b, FLAG_SET
 	predef FlagActionPredef
+.noEvos
 	pop hl
 	pop af
 	ld [wCurEnemyLevel], a

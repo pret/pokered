@@ -52,6 +52,7 @@ _WardensHouseWardenHM04ExplanationText::
 	cont "when you're out-"
 	cont "side of battle."
 
+; TODO: modify depending on if you already did or not
 	para "Oh yes, did you"
 	line "find SECRET HOUSE"
 	cont "in SAFARI ZONE?"

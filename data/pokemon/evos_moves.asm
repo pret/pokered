@@ -205,6 +205,8 @@ EvosMovesPointerTable:
 	dw VictreebelEvosMoves
 	assert_table_length NUM_POKEMON_INDEXES
 
+; TODO: combine evolved pokemon data with prevo pokemon data to save space since their learnsets are almost always the same anyway
+
 RhydonEvosMoves:
 ; Evolutions
 	db 0

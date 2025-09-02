@@ -34,6 +34,8 @@
 	const EVENT_PALLET_AFTER_GETTING_POKEBALLS_2
 	const EVENT_OAK_APPEARED_IN_PALLET
 
+	; pureRGBnote: no free event space?
+
 ; Viridian City events
 	const_next $28
 	const EVENT_VIRIDIAN_GYM_OPEN
@@ -58,6 +60,8 @@
 	const EVENT_BEAT_VIRIDIAN_GYM_TRAINER_6
 	const EVENT_BEAT_VIRIDIAN_GYM_TRAINER_7
 
+	; pureRGBnote: ~15 bits of unused event space
+
 ; Pewter City events
 	const_next $68
 	const EVENT_BOUGHT_MUSEUM_TICKET
@@ -72,9 +76,13 @@
 	const EVENT_GOT_TM34
 	const EVENT_BEAT_BROCK
 
+	; pureRGBnote: ~11 bits of unused event space
+
 ; World Options ; PureRGBnote: ADDED: flags for the world options menu (only 1 at the moment)
 	const_next $82
 	const FLAG_VOLCANO_AREA_TURNED_OFF
+
+	; pureRGBnote: ~21 bits of unused event space
 
 ; Cerulean City events
 	const_next $98
@@ -89,6 +97,8 @@
 	const EVENT_GOT_TM11
 	const EVENT_BEAT_MISTY
 	const EVENT_GOT_BICYCLE
+
+	; pureRGBnote: ~46 bits of unused event space (large)
 
 ; Lavender Town events
 	const_next $F0 - 2 ; $EE
@@ -136,6 +146,8 @@
 	const_skip 6
 	const EVENT_GOT_POKE_FLUTE
 
+	; pureRGBnote: ~7 bits of unused event space
+
 ; Cinnabar Volcano Events ; PureRGBnote: ADDED: 
 	const_next $130
 	const EVENT_GOT_LAVA_SUIT
@@ -164,7 +176,8 @@
 	const EVENT_FINISHED_VOLCANO
 	const EVENT_VOLCANO_TALKED_TO_BLAINE
 	const EVENT_MAGMAR_TRANSFORMATION
-	; 6 left
+	
+	; pureRGBnote: ~6 bits of unused event space
 	
 
 ; Vermilion City events
@@ -186,6 +199,8 @@
 	const EVENT_GOT_VERMILION_APEX_CHIPS
 	const EVENT_GOT_TM24
 	const EVENT_BEAT_LT_SURGE
+
+	; pureRGBnote: ~25 bits of unused event space
 
 ; Celadon City events
 	const_next $180
@@ -219,8 +234,10 @@
 	const EVENT_GOT_10_COINS
 	const EVENT_GOT_20_COINS
 	const EVENT_GOT_20_COINS_2
-	const_skip 35
+	const_skip 35 ; pureRGBnote: (large)
 	const EVENT_GOT_COIN_CASE
+
+	; pureRGBnote: ~58 bits of unused event space (large)
 
 ; Fuchsia City events
 	const_next $238
@@ -259,6 +276,8 @@
 	const EVENT_BEAT_FUCHSIA_GYM_TRAINER_3
 	const EVENT_BEAT_FUCHSIA_GYM_TRAINER_4
 	const EVENT_BEAT_FUCHSIA_GYM_TRAINER_5
+
+	; pureRGBnote: ~19 bits of unused event space
 
 ; Cinnabar Island events
 	const_next $278
@@ -305,7 +324,7 @@
 	const EVENT_CINNABAR_GYM_GATE4_UNLOCKED
 	const EVENT_CINNABAR_GYM_GATE5_UNLOCKED
 	const EVENT_CINNABAR_GYM_GATE6_UNLOCKED
-	const_skip 40
+	const_skip 40 ; pureRGBnote: (large)
 	const EVENT_GOT_TM35
 	const EVENT_STANDING_ON_BUTTON_D#
 	const EVENT_STANDING_ON_BUTTON_E
@@ -318,6 +337,8 @@
 	const EVENT_GAVE_FOSSIL_TO_LAB
 	const EVENT_LAB_STILL_REVIVING_FOSSIL
 	const EVENT_LAB_HANDING_OVER_FOSSIL_MON
+
+	; pureRGBnote: ~94 bits of unused event space (large)
 
 ; Saffron City events
 	const_next $340
@@ -363,9 +384,13 @@
 	const_skip 20
 	const EVENT_GOT_TM29
 
+	; pureRGBnote: ~16 bits of unused event space
+
 ; Route 1 events
 	const_next $3C0
 	const EVENT_GOT_POTION_SAMPLE
+
+	; pureRGBnote: ~23 bits of unused event space
 
 ; Route 2 events
 	const_next $3D8
@@ -373,6 +398,8 @@
 	const EVENT_BEAT_ROUTE_2_TRAINER_0
 	const EVENT_BEAT_ROUTE_2_TRAINER_1
 	const EVENT_BEAT_ROUTE_2_TRAINER_2
+
+	; pureRGBnote: ~5 bits of unused event space
 
 ; Route 3 events
 	const_next $3E0
@@ -385,6 +412,8 @@
 	const EVENT_BEAT_ROUTE_3_TRAINER_5
 	const EVENT_BEAT_ROUTE_3_TRAINER_6
 	const EVENT_BEAT_ROUTE_3_TRAINER_7
+
+	; pureRGBnote: ~7 bits of unused event space
 
 ; Route 4 events
 	const_next $3F0
@@ -408,6 +437,8 @@
 	const EVENT_BEAT_UNDERGROUND_PATH_NORTH_SOUTH_TRAINER_1
 	const EVENT_BEAT_UNDERGROUND_PATH_NORTH_SOUTH_TRAINER_2
 
+	; pureRGBnote: ~16 bits of unused event space
+
 ; Route 6 events
 	const_next $410
 	const_skip
@@ -429,6 +460,8 @@
 	const EVENT_BEAT_UNDERGROUND_PATH_WEST_EAST_TRAINER_1
 	const EVENT_BEAT_UNDERGROUND_PATH_WEST_EAST_TRAINER_2
 
+	; pureRGBnote: ~2 bits of unused event space
+
 ; Diamond Mine Events
 	const_next $420
 	const EVENT_DIAMOND_MINE_AGREED_TO_HELP
@@ -441,6 +474,8 @@
 	const EVENT_DIAMOND_MINE_COMPLETED 
 DEF FLAG_JIGGLE_TOGGLE EQU const_value
 	const FLAG_DIAMOND_MINE_BOOMBOX_JIGGLE
+
+	; pureRGBnote: ~7 bits of unused event space
 
 ; Route 8 events
 	const_next $430
@@ -457,6 +492,8 @@ DEF FLAG_JIGGLE_TOGGLE EQU const_value
 	const EVENT_CUT_DOWN_ROUTE8_LEFT_TREE
 	const EVENT_CUT_DOWN_ROUTE8_RIGHT_TREE
 
+	; pureRGBnote: ~4 bits of unused event space
+
 ; Route 9 events
 	const_next $440
 	const_skip
@@ -469,6 +506,8 @@ DEF FLAG_JIGGLE_TOGGLE EQU const_value
 	const EVENT_BEAT_ROUTE_9_TRAINER_6
 	const EVENT_BEAT_ROUTE_9_TRAINER_7
 	const EVENT_BEAT_ROUTE_9_TRAINER_8
+
+	; pureRGBnote: ~6 bits of unused event space
 
 ; Route 10 events
 	const_next $450
@@ -505,6 +544,8 @@ DEF FLAG_JIGGLE_TOGGLE EQU const_value
 	const EVENT_POWER_PLANT_ROOF_STORM_COMING
 	const EVENT_SAW_POWER_BACK_TEXT
 
+	; pureRGBnote: 0 bits of space
+
 ; Route 11 events
 	const_next $471
 	const EVENT_BEAT_ROUTE_11_TRAINER_0
@@ -519,6 +560,8 @@ DEF FLAG_JIGGLE_TOGGLE EQU const_value
 	const EVENT_BEAT_ROUTE_11_TRAINER_9
 	const_skip 4
 	const EVENT_GOT_ITEMFINDER
+
+	; pureRGBnote: 0 bits of space
 
 ; Route 12 events
 	const_next $480
@@ -537,6 +580,8 @@ DEF FLAG_JIGGLE_TOGGLE EQU const_value
 	const EVENT_FIGHT_ROUTE12_SNORLAX
 	const EVENT_BEAT_ROUTE12_SNORLAX
 
+	; pureRGBnote: 0 bits of space
+
 ; Route 13 events
 	const_next $490
 	const_skip
@@ -550,6 +595,8 @@ DEF FLAG_JIGGLE_TOGGLE EQU const_value
 	const EVENT_BEAT_ROUTE_13_TRAINER_7
 	const EVENT_BEAT_ROUTE_13_TRAINER_8
 	const EVENT_BEAT_ROUTE_13_TRAINER_9
+
+	; pureRGBnote: ~5 bits of unused event space
 
 ; Route 14 events
 	const_next $4A0
@@ -567,6 +614,8 @@ DEF FLAG_JIGGLE_TOGGLE EQU const_value
 	const EVENT_BEAT_ROUTE_14_TRAINER_10
 	const EVENT_BEAT_ROUTE_14_TRAINER_11
 
+	; pureRGBnote: 0 bits of unused space
+
 ; Route 15 events
 	const_next $4AF
 	const EVENT_BOOSTER_CHIP_ACTIVE
@@ -581,6 +630,8 @@ DEF FLAG_JIGGLE_TOGGLE EQU const_value
 	const EVENT_BEAT_ROUTE_15_TRAINER_7
 	const EVENT_BEAT_ROUTE_15_TRAINER_8
 	const EVENT_BEAT_ROUTE_15_TRAINER_9
+
+	; pureRGbnote: 5 bits of unused space
 
 ; Route 16 events
 	const_next $4C0
@@ -598,6 +649,8 @@ DEF FLAG_JIGGLE_TOGGLE EQU const_value
 	const EVENT_GOT_HM02
 	const EVENT_RESCUED_MR_FUJI
 
+	; pureRGBnote: 0 bits of unused space
+
 ; Route 17 events
 	const_next $4D0
 	const_skip
@@ -612,6 +665,8 @@ DEF FLAG_JIGGLE_TOGGLE EQU const_value
 	const EVENT_BEAT_ROUTE_17_TRAINER_8
 	const EVENT_BEAT_ROUTE_17_TRAINER_9
 
+	; pureRGBnote: ~5 bits of unused space
+
 ; Route 18 events
 	const_next $4E0
 	const_skip
@@ -620,6 +675,8 @@ DEF FLAG_JIGGLE_TOGGLE EQU const_value
 	const EVENT_BEAT_ROUTE_18_TRAINER_2
 	const EVENT_BEAT_ROUTE_18_TRAINER_3
 	const EVENT_BEAT_ROUTE_18_TRAINER_4
+
+	; pureRGBnote: ~10 bits of unused space
 
 ; Route 19 events
 	const_next $4F0
@@ -634,6 +691,8 @@ DEF FLAG_JIGGLE_TOGGLE EQU const_value
 	const EVENT_BEAT_ROUTE_19_TRAINER_7
 	const EVENT_BEAT_ROUTE_19_TRAINER_8
 	const EVENT_BEAT_ROUTE_19_TRAINER_9
+
+	; pureRGBnote: ~5 bits of unused space
 
 ; Route 20 events
 	const_next $500
@@ -653,6 +712,8 @@ DEF FLAG_JIGGLE_TOGGLE EQU const_value
 	const EVENT_SEAFOAM1_BOULDER1_DOWN_HOLE
 	const EVENT_SEAFOAM1_BOULDER2_DOWN_HOLE
 
+	; pureRGBnote: 0 bits of unused space
+
 ; Route 21 events
 	const_next $510
 	const_skip
@@ -666,6 +727,8 @@ DEF FLAG_JIGGLE_TOGGLE EQU const_value
 	const EVENT_BEAT_ROUTE_21_TRAINER_7
 	const EVENT_BEAT_ROUTE_21_TRAINER_8
 
+	; pureRGBnote: ~5 bits of unused space
+
 ; Route 22 events
 	const_next $520
 	const EVENT_1ST_ROUTE22_RIVAL_BATTLE
@@ -674,6 +737,8 @@ DEF FLAG_JIGGLE_TOGGLE EQU const_value
 	const EVENT_BEAT_ROUTE22_RIVAL_1ST_BATTLE
 	const EVENT_BEAT_ROUTE22_RIVAL_2ND_BATTLE
 	const EVENT_ROUTE22_RIVAL_WANTS_BATTLE
+
+	; pureRGBnote: ~8 bits of unused space
 
 ; Route 23 events
 	const_next $530
@@ -694,6 +759,8 @@ DEF FLAG_JIGGLE_TOGGLE EQU const_value
 	const EVENT_BEAT_MOLTRES
 	const EVENT_VICTORY_ROAD_2_BOULDER_ON_SWITCH2
 
+	; pureRGBnote: 0 bits of unused space
+
 ; Route 24 events
 	const_next $540
 	const EVENT_GOT_NUGGET
@@ -706,7 +773,7 @@ DEF FLAG_JIGGLE_TOGGLE EQU const_value
 	const EVENT_BEAT_ROUTE_24_TRAINER_5
 	const_skip
 	const EVENT_NUGGET_REWARD_AVAILABLE
-	; 4 flags unused
+	; pureRGBnote: 4 bits of unused event space
 
 ; Route 25 events
 	const_next $54E
@@ -729,6 +796,8 @@ DEF FLAG_JIGGLE_TOGGLE EQU const_value
 	const EVENT_BILL_SAID_USE_CELL_SEPARATOR
 	const EVENT_LEFT_BILLS_HOUSE_AFTER_HELPING
 
+	; pureRGBnote: 0 bits of unused space
+
 ; Viridian Forest events
 	const_next $560
 	const_skip 2
@@ -737,6 +806,8 @@ DEF FLAG_JIGGLE_TOGGLE EQU const_value
 	const EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_2
 	const EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_3
 	const EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_4
+
+	; pureRGBnote: ~9 bits of unused space
 
 ; Mt. Moon events
 	const_next $570
@@ -760,6 +831,8 @@ DEF FLAG_JIGGLE_TOGGLE EQU const_value
 ; Type Guy's house
 	const EVENT_TYPE_GUY_LIGHT_SWITCH
 	const EVENT_TYPE_GUY_SKIP_INTRO
+
+	; pureRGBnote: ~62 bits of unused space (large)
 
 ; S.S. Anne events
 	const_next $5C0
@@ -794,6 +867,8 @@ DEF FLAG_JIGGLE_TOGGLE EQU const_value
 	const EVENT_BEAT_SS_ANNE_10_TRAINER_4
 	const EVENT_BEAT_SS_ANNE_10_TRAINER_5
 
+	; pureRGBnote: ~73 bits of unused event space (large)
+
 ; Victory Road 3F events
 	const_next $660
 	const EVENT_VICTORY_ROAD_3_BOULDER_ON_SWITCH1
@@ -803,6 +878,8 @@ DEF FLAG_JIGGLE_TOGGLE EQU const_value
 	const EVENT_BEAT_VICTORY_ROAD_3_TRAINER_3
 	const_skip
 	const EVENT_VICTORY_ROAD_3_BOULDER_ON_SWITCH2
+
+	; pureRGBnote: ~8 bits of unused event space
 
 ; Rocket Hideout events
 	const_next $670
@@ -828,6 +905,8 @@ DEF FLAG_JIGGLE_TOGGLE EQU const_value
 	const EVENT_ROCKET_HIDEOUT_4_DOOR_UNLOCKED
 	const EVENT_ROCKET_DROPPED_LIFT_KEY
 	const EVENT_BEAT_ROCKET_HIDEOUT_GIOVANNI
+
+	; pureRGBnote: ~72 bits of unused event space (large)
 
 ; Silph Co. events
 	const_next $6F0
@@ -908,6 +987,8 @@ DEF FLAG_JIGGLE_TOGGLE EQU const_value
 	const EVENT_ALL_CARD_KEY_DOORS_OPENED
 	const EVENT_BEAT_SILPH_CO_GIOVANNI
 
+	; pureRGBnote: ~16 bits of unused event space
+
 ; Pokémon Mansion events
 	const_next $800
 	const_skip
@@ -925,6 +1006,8 @@ DEF FLAG_JIGGLE_TOGGLE EQU const_value
 	const EVENT_BEAT_MANSION_4_TRAINER_1
 	const EVENT_BEAT_MANSION_4_TRAINER_2
 	const EVENT_BEAT_MANSION_4_TRAINER_3
+
+	; pureRGBnote: ~91 bits of unused event space (large)
 
 ; Safari Zone events
 	const_next $880
@@ -957,6 +1040,8 @@ DEF FLAG_JIGGLE_TOGGLE EQU const_value
 	const EVENT_BEAT_SAFARI_ZONE_WEST_TRAINER_3
 	const EVENT_BEAT_SAFARI_ZONE_WEST_TRAINER_4
 
+	; pureRGBnote: 0 bits of unused space
+
 ; Champ Arena events
 	const_next $8A0
 DEF CHAMP_ARENA_BATTLE_EVENTS_START EQU const_value
@@ -981,11 +1066,15 @@ DEF CHAMP_ARENA_BATTLE_EVENTS_END EQU const_value
 	const EVENT_ARENA_BATTLE_INITIATED
 	const EVENT_ARENA_ALL_CHALLENGERS_DEFEATED
 
+	; pureRGBnote: ~13 bits of unused event space
+
 ; Cerulean Cave events
 	const_next $8C0
 	const EVENT_BEAT_PROF_OAK
 	const EVENT_BEAT_MEWTWO
 	const EVENT_BEAT_PROF_OAK_ONCE
+
+	; pureRGBnote: ~13 bits of unused event space
 
 ; arbitrary flags
 	const_next $8D0
@@ -1004,7 +1093,8 @@ DEF FLAG_SKIP_STAT_ANIMATION EQU const_value
 	const FLAG_MOVEDEX_SORTING_MODE
 	const FLAG_INTERRUPTED_TEXT
 	const FLAG_SKIP_MULTI_CHOICE_LOADGBPAL
-	; 5 flag spaces remain
+	
+	; pureRGBnote: 5 flag spaces remain
 
 ; Indigo Plateau events
 	const_next $8E0
@@ -1036,6 +1126,8 @@ DEF INDIGO_PLATEAU_EVENTS_END EQU const_value - 1
 	const EVENT_TALKED_GYM_GUIDE_AFTER_CHAMP
 	const EVENT_TALKED_GYM_GUIDE_SON_AFTER_CHAMP
 
+	; pureRGBnote: ~6 bits of unused event space
+
 ; Victory Road 1F events
 	const_next $910
 	const_skip
@@ -1043,6 +1135,8 @@ DEF INDIGO_PLATEAU_EVENTS_END EQU const_value - 1
 	const EVENT_BEAT_VICTORY_ROAD_1_TRAINER_1
 	const_skip 4
 	const EVENT_VICTORY_ROAD_1_BOULDER_ON_SWITCH
+
+	; pureRGBnote: ~8 bits of unused event space
 
 ; PureRGBnote: ADDED: front sprite flags were added in event options since there is so much free space in here.
 	const_next $920
@@ -1055,10 +1149,95 @@ DEF SPRITE_OPTIONS_FLAGS_FIFTH_BATCH_START EQU const_value
 	const FLAG_JYNX_SPRITE
 	const FLAG_FARFETCHD_SPRITE
 
+	; pureRGBnote: ~9 bits of unused event space
+
 	const_next $930
 DEF LEARNSET_FLAGS_START EQU const_value
-	const_next $980
+	const FLAG_VENUSAUR_FAMILY_LEARNSET
+	const FLAG_CHARIZARD_FAMILY_LEARNSET
+	const FLAG_BLASTOISE_FAMILY_LEARNSET
+	const FLAG_BUTTERFREE_FAMILY_LEARNSET
+	const FLAG_BEEDRILL_FAMILY_LEARNSET
+	const FLAG_PIDGEOT_FAMILY_LEARNSET
+	const FLAG_RATICATE_FAMILY_LEARNSET
+	const FLAG_FEAROW_FAMILY_LEARNSET
+	const FLAG_ARBOK_FAMILY_LEARNSET
+	const FLAG_RAICHU_FAMILY_LEARNSET
+	const FLAG_SANDSLASH_FAMILY_LEARNSET
+	const FLAG_NIDOQUEEN_FAMILY_LEARNSET
+	const FLAG_NIDOKING_FAMILY_LEARNSET
+	const FLAG_CLEFABLE_FAMILY_LEARNSET
+	const FLAG_NINETALES_FAMILY_LEARNSET
+	const FLAG_WIGGLYTUFF_FAMILY_LEARNSET
+	const FLAG_GOLBAT_FAMILY_LEARNSET
+	const FLAG_VILEPLUME_FAMILY_LEARNSET
+	const FLAG_PARASECT_FAMILY_LEARNSET
+	const FLAG_VENOMOTH_FAMILY_LEARNSET
+	const FLAG_DUGTRIO_FAMILY_LEARNSET
+	const FLAG_PERSIAN_FAMILY_LEARNSET
+	const FLAG_GOLDUCK_FAMILY_LEARNSET
+	const FLAG_PRIMEAPE_FAMILY_LEARNSET
+	const FLAG_ARCANINE_FAMILY_LEARNSET
+	const FLAG_POLIWRATH_FAMILY_LEARNSET
+	const FLAG_ALAKAZAM_FAMILY_LEARNSET
+	const FLAG_MACHAMP_FAMILY_LEARNSET
+	const FLAG_VICTREEBEL_FAMILY_LEARNSET
+	const FLAG_TENTACRUEL_FAMILY_LEARNSET
+	const FLAG_GOLEM_FAMILY_LEARNSET
+	const FLAG_RAPIDASH_FAMILY_LEARNSET
+	const FLAG_SLOWBRO_FAMILY_LEARNSET
+	const FLAG_FARFETCHD_LEARNSET
+	const FLAG_DODRIO_FAMILY_LEARNSET
+	const FLAG_DEWGONG_FAMILY_LEARNSET
+	const FLAG_MUK_FAMILY_LEARNSET
+	const FLAG_CLOYSTER_FAMILY_LEARNSET
+	const FLAG_GENGAR_FAMILY_LEARNSET
+	const FLAG_ONIX_LEARNSET
+	const FLAG_HYPNO_FAMILY_LEARNSET
+	const FLAG_KINGLER_FAMILY_LEARNSET
+	const FLAG_ELECTRODE_FAMILY_LEARNSET
+	const FLAG_EXEGGUTOR_FAMILY_LEARNSET
+	const FLAG_MAROWAK_FAMILY_LEARNSET
+	const FLAG_HITMONLEE_LEARNSET
+	const FLAG_HITMONCHAN_LEARNSET
+	const FLAG_LICKITUNG_LEARNSET
+	const FLAG_WEEZING_FAMILY_LEARNSET
+	const FLAG_RHYDON_FAMILY_LEARNSET
+	const FLAG_CHANSEY_LEARNSET
+	const FLAG_TANGELA_LEARNSET
+	const FLAG_KANGASKHAN_LEARNSET
+	const FLAG_SEADRA_FAMILY_LEARNSET
+	const FLAG_SEAKING_FAMILY_LEARNSET
+	const FLAG_STARMIE_FAMILY_LEARNSET
+	const FLAG_MRMIME_LEARNSET
+	const FLAG_SCYTHER_LEARNSET
+	const FLAG_JYNX_LEARNSET
+	const FLAG_ELECTABUZZ_LEARNSET
+	const FLAG_MAGMAR_LEARNSET
+	const FLAG_PINSIR_LEARNSET
+	const FLAG_TAUROS_LEARNSET
+	const FLAG_GYARADOS_FAMILY_LEARNSET
+	const FLAG_LAPRAS_LEARNSET
+	const FLAG_DITTO_LEARNSET
+	const FLAG_EEVEE_LEARNSET
+	const FLAG_VAPOREON_LEARNSET
+	const FLAG_JOLTEON_LEARNSET
+	const FLAG_FLAREON_LEARNSET
+	const FLAG_PORYGON_LEARNSET
+	const FLAG_OMASTAR_FAMILY_LEARNSET
+	const FLAG_KABUTOPS_FAMILY_LEARNSET
+	const FLAG_AERODACTYL_LEARNSET
+	const FLAG_SNORLAX_LEARNSET
+	const FLAG_ARTICUNO_LEARNSET
+	const FLAG_ZAPDOS_LEARNSET
+	const FLAG_MOLTRES_LEARNSET
+	const FLAG_DRAGONITE_FAMILY_LEARNSET
+	const FLAG_MEWTWO_LEARNSET
+	const FLAG_MEW_LEARNSET
 DEF LEARNSET_FLAGS_END EQU const_value
+	const_next $980
+
+	; pureRGBnote: ~48 bits of unused event space (large)
 
 ; Rock Tunnel events
 	const_next $9B0
@@ -1073,6 +1252,8 @@ DEF LEARNSET_FLAGS_END EQU const_value
 	const EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_7
 	const EVENT_USED_FLASH_FROM_PARTY_MENU
 
+	; pureRGBnote: ~6 bits of unused event space
+
 ; Seafoam Islands events
 	const_next $9C0
 	const EVENT_SEAFOAM2_BOULDER1_DOWN_HOLE
@@ -1085,6 +1266,8 @@ DEF LEARNSET_FLAGS_END EQU const_value
 	const EVENT_SEAFOAM4_BOULDER2_DOWN_HOLE
 	const_skip 8
 	const EVENT_BEAT_ARTICUNO
+
+	; pureRGBnote: 37 bits of unused space (large)
 
 ; End of events
 	const_next $A00

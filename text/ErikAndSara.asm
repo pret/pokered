@@ -90,7 +90,7 @@ _ErikSarasHouseNoteHomeText::
 	cont "the northern"
 	cont "VERMILION SEAWAY."
 	para "Perhaps this is"
-	line "where foundlings"
+	line "where juveniles"
 	cont "go for safety?"
 	done
 
@@ -358,7 +358,7 @@ _ErikDragonairResearch::
 	cont "are now gathering"
 	cont "down there."
 	para "SARA: Many are at"
-	line "an unusually high"
+	line "unusually high"
 	cont "levels!"
 	para "At levels they"
 	line "usually would've"

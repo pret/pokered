@@ -1189,6 +1189,7 @@ PokemonTowerB1FMarowakBlockedHyperBeamText:
 	call ClearScreen
 	call Delay3
 	predef LearnMove ; teach sonicboom
+	call .markCuboneSeenCaught
 	call LoadScreenTilesFromBuffer2
 	call Delay3
 	ld a, POKEMONTOWERB1F_CUBONE
@@ -1298,6 +1299,15 @@ PokemonTowerB1FMarowakBlockedHyperBeamText:
 	ld a, 2 ; back to first floor
 	call PrepareScriptedCatacombsWarp
 	rst TextScriptEnd
+.markCuboneSeenCaught
+	; make sure cubone is marked off on the pokedex because they could have only caught marowak at this point
+	ld hl, wPokedexOwned
+	call .markOff
+	ld hl, wPokedexSeen
+.markOff
+	ld c, DEX_CUBONE - 1
+	ld b, FLAG_SET
+	predef_jump FlagActionPredef
 .joinedParty
 	text_far _PokemonTowerB1FMarowakBuffedCubone
 	text_end

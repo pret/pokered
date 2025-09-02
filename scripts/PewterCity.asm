@@ -130,7 +130,7 @@ PewterCityYoungsterShowsPlayerGymScript:
 	call DisplayTextID
 	ld a, $3c
 	ldh [hSpriteScreenYCoord], a
-	ld a, $40
+	ld a, $50 ; pureRGBnote: FIXED: slight visual glitch in original game because this value was incorrectly set
 	ldh [hSpriteScreenXCoord], a
 	ld a, 22
 	ldh [hSpriteMapYCoord], a

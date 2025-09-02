@@ -361,19 +361,25 @@ VBlankCopy::
 	;ld l, a
 	;ldh a, [hVBlankCopySource + 1]
 	;ld h, a
-;;;; 11 cycles
+;;;; 15 cycles
 	ld [hSPTemp], sp
 	ld sp, hVBlankCopySource
 	pop hl
+	pop de
 ;;;;;;;;
 	ld sp, hl
 
-	ldh a, [hVBlankCopyDest]
-	ld l, a
-	ldh a, [hVBlankCopyDest + 1]
-	ld h, a
-
-	ldh a, [hVBlankCopySize]
+;;;;;;;;; PureRGBnote: OPTIMIZED
+;;;; 11 cycles
+	;ldh a, [hVBlankCopyDest]
+	;ld l, a
+	;ldh a, [hVBlankCopyDest + 1]
+	;ld h, a
+	;ldh a, [hVBlankCopySize]
+;;;; 2 cycles
+	ld h, d
+	ld l, e
+;;;;;;;;;
 	ld b, a
 	xor a ; transferred
 	ldh [hVBlankCopySize], a
