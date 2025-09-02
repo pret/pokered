@@ -9,7 +9,7 @@ _LabColorChangerGreeting::
 	line "of ein #MON!"
 	para "Wunderbar!"
 	para "Sprechen sie"
-	line "Deutsche?@"
+	line "Deutsch?@"
 	text_end
 
 _LabColorChangerGreetingYes::

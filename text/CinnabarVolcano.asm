@@ -359,7 +359,7 @@ _MagmarDefeat::
 
 _UhohVolcano::
 	text "Uh oh. The lava"
-	line "is above to burst"
+	line "is about to burst"
 	cont "through the whole"
 	cont "eastern wall!"
 	para "Gotta get behind"
