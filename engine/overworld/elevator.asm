@@ -24,7 +24,6 @@ ShakeElevator::
 	dec e
 	jr nz, .getTravelDistanceLoop
 	ld b, a ; how many frames will the shake loop happen for (depends on how far the elevator is travelling now)
-	ld a, [wWarpEntries + 3] ; map we will go to
 ;;;;;;;;;;
 	ldh a, [hSCY]
 	ld d, a

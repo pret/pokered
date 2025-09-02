@@ -58,6 +58,8 @@ DisplayElevatorFloorMenu:
 	; destination map ID still loaded
 	; PureRGBnote: ADDED: update the "map ID we came from" variable so the above usage of this variable thinks are now on the new floor
 	ld [wWarpedFromWhichMap], a
+	ld a, b ; destination warp id
+	ld [wWarpedFromWhichWarp], a
 .done
 	xor a
 	ld [wCurrentMenuItem], a
