@@ -47,6 +47,7 @@ CheckPerTurnSpecialBattleEffect::
 	ld [hl], 0
 	ld hl, .autoPoisoned
 	rst _PrintText
+	callfar ReadPlayerMonCurHPAndStatus
 .noPoison
 	ld hl, .growsLarger
 	rst _PrintText
@@ -124,6 +125,7 @@ CheckPerTurnSpecialBattleEffect::
 	ldh [hWhoseTurn], a ; force enemy turn so player's stats are lowered
 	ld de, wBattleMonStatus
 	callfar AutoBurnEffect
+	callfar ReadPlayerMonCurHPAndStatus
 	pop af
 	ldh [hWhoseTurn], a
 	ret
