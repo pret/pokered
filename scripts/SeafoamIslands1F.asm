@@ -362,6 +362,20 @@ DragonairEventCloysterText:
   	jr z, .printNo
   	cp $FD
   	jr nc, .promptNo
+  	push af
+	ld a, [wWhichPokemon]
+	ld hl, wPartyMon1HP
+	ld bc, wPartyMon2 - wPartyMon1
+	call AddNTimes
+	ld a, [hli]
+	or [hl]
+	jr nz, .good
+	pop af
+	ld hl, .noWill
+	rst _PrintText
+	jr .no
+.good
+	pop af
   	and a
   	jr z, .noSwapMon
   	ld a, 1
@@ -413,6 +427,9 @@ DragonairEventCloysterText:
 	text_end
 .beaten
 	text_far _DragonairEventCloysterBeatenText
+	text_end
+.noWill
+	text_far _NoWillText
 	text_end
 
 DragonairEventOpenUpCloysterSprite:

@@ -302,10 +302,10 @@ GainExperience:
 	jr nz, .inc_level	;loop back again if final level has not been reached
 ;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;
-; pureRGBnote: ADDED: we want to avoid ghost cubone evolving during a specific fight
+; pureRGBnote: ADDED: we want to avoid ghost cubone or dragonair evolving during a event fights
 	ld a, [wIsInBattle]
 	dec a
-	jr nz, .skipMaw
+	jr nz, .skipEventEvos
 	; no cubone evolutions while facing the maw (ghost cubone intended to stay cubone until after this event)
 	ld a, [wEnemyMonSpecies]
 	cp SPIRIT_THE_MAW
@@ -314,6 +314,12 @@ GainExperience:
 	cp CUBONE
 	jr z, .noEvos
 .skipMaw
+	CheckEvent EVENT_DRAGONAIR_EVENT_BATTLING_CLOYSTER
+	jr z, .skipEventEvos
+	ld a, [wCurSpecies]
+	cp DRAGONAIR
+	jr z, .noEvos
+.skipEventEvos
 ;;;;;;;;;;;;;;;;;;;;
 	ld hl, wCanEvolveFlags
 	ld a, [wWhichPokemon]

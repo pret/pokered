@@ -1235,7 +1235,6 @@ DEF LEARNSET_FLAGS_START EQU const_value
 	const FLAG_MEWTWO_LEARNSET
 	const FLAG_MEW_LEARNSET
 DEF LEARNSET_FLAGS_END EQU const_value
-	const_next $980
 
 	; pureRGBnote: ~48 bits of unused event space (large)
 

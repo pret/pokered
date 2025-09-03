@@ -2540,7 +2540,6 @@ wSecondLockTrashCanIndex:: db
 	ds 2 ; unused save file 2 bytes
 
 wEventFlags:: flag_array NUM_EVENTS
-DEF wLearnsetFlags EQU wEventFlags + LEARNSET_FLAGS_START / 8
 
 
 UNION
