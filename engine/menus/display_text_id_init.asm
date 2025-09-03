@@ -69,7 +69,7 @@ DisplayTextIDInit::
 	add hl, de
 	dec c
 	jr nz, .spriteStandStillLoop
-	ld b, $9c ; window background address
+	ld b, HIGH(vBGMap1)
 	call CopyScreenTileBufferToVRAM ; transfer background in WRAM to VRAM
 	xor a
 	ldh [hWY], a ; put the window on the screen

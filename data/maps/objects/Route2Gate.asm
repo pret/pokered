@@ -1,6 +1,6 @@
 	object_const_def
-	const_export ROUTE2_OAKS_AIDE
-	const_export ROUTE2_YOUNGSTER
+	const_export ROUTE2GATE_OAKS_AIDE
+	const_export ROUTE2GATE_YOUNGSTER
 
 Route2Gate_Object:
 	db $a ; border block

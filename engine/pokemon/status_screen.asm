@@ -427,7 +427,7 @@ StatusScreen2:
 	ld a, $1
 	ldh [hAutoBGTransferEnabled], a
 	call Delay3
-	call WaitForTextScrollButtonPress ; wait for button
+	call WaitForTextScrollButtonPress
 	pop af
 	ldh [hTileAnimations], a
 	ld hl, wStatusFlags2

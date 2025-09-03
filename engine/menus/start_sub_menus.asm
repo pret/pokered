@@ -1,6 +1,6 @@
 StartMenu_Pokedex::
 	predef ShowPokedexMenu
-	call LoadScreenTilesFromBuffer2 ; restore saved screen
+	call LoadScreenTilesFromBuffer2
 	call Delay3
 	call LoadGBPal
 	call UpdateSprites
@@ -63,7 +63,7 @@ StartMenu_Pokemon::
 	ld [hl], a
 	call HandleMenuInput
 	push af
-	call LoadScreenTilesFromBuffer1 ; restore saved screen
+	call LoadScreenTilesFromBuffer1
 	pop af
 	bit B_PAD_B, a
 	jp nz, .loop
@@ -117,7 +117,7 @@ StartMenu_Pokemon::
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [wObtainedBadges] ; badges obtained
+	ld a, [wObtainedBadges]
 	jp hl
 .outOfBattleMovePointers
 	dw .cut
@@ -286,7 +286,7 @@ StartMenu_Pokemon::
 ; writes a blank tile to all possible menu cursor positions on the party menu
 ErasePartyMenuCursors::
 	hlcoord 0, 1
-	ld bc, 2 * 20 ; menu cursor positions are 2 rows apart
+	ld bc, 2 * SCREEN_WIDTH ; menu cursor positions are 2 rows apart
 	ld a, 6 ; 6 menu cursor positions
 .loop
 	ld [hl], " "
@@ -296,7 +296,7 @@ ErasePartyMenuCursors::
 	ret
 
 ItemMenuLoop:
-	call LoadScreenTilesFromBuffer2DisableBGTransfer ; restore saved screen
+	call LoadScreenTilesFromBuffer2DisableBGTransfer
 	call RunDefaultPaletteCommand
 
 StartMenu_Item::
@@ -323,7 +323,7 @@ StartMenu_Item::
 	ld [wBagSavedMenuItem], a
 	jr nc, .choseItem
 .exitMenu
-	call LoadScreenTilesFromBuffer2 ; restore saved screen
+	call LoadScreenTilesFromBuffer2
 	call LoadTextBoxTilePatterns
 	call UpdateSprites
 	jp RedisplayStartMenu
@@ -363,7 +363,7 @@ StartMenu_Item::
 	bit B_PAD_B, a
 	jr z, .useOrTossItem
 	jp ItemMenuLoop
-.useOrTossItem ; if the player made the choice to use or toss the item
+.useOrTossItem
 	ld a, [wCurItem]
 	ld [wNamedObjectIndex], a
 	call GetItemName
@@ -459,14 +459,14 @@ StartMenu_TrainerInfo::
 	xor a
 	ldh [hTileAnimations], a
 	call DrawTrainerInfo
-	predef DrawBadges ; draw badges
+	predef DrawBadges
 	ld b, SET_PAL_TRAINER_CARD
 	call RunPaletteCommand
 	call GBPalNormal
-	call WaitForTextScrollButtonPress ; wait for button press
+	call WaitForTextScrollButtonPress
 	call GBPalWhiteOut
 	call LoadFontTilePatterns
-	call LoadScreenTilesFromBuffer2 ; restore saved screen
+	call LoadScreenTilesFromBuffer2
 	call RunDefaultPaletteCommand
 	call ReloadMapData
 	call LoadGBPal
@@ -489,7 +489,7 @@ DrawTrainerInfo:
 	ld de, vChars2 tile $00
 	ld bc, $1c tiles
 	call CopyData
-	ld hl, TrainerInfoTextBoxTileGraphics ; trainer info text box tile patterns
+	ld hl, TrainerInfoTextBoxTileGraphics
 	ld de, vChars2 tile $77
 	ld bc, 8 tiles
 	push bc
@@ -499,10 +499,10 @@ DrawTrainerInfo:
 	ld bc, $17 tiles
 	call TrainerInfo_FarCopyData
 	pop bc
-	ld hl, BadgeNumbersTileGraphics  ; badge number tile patterns
+	ld hl, BadgeNumbersTileGraphics
 	ld de, vChars1 tile $58
 	call TrainerInfo_FarCopyData
-	ld hl, GymLeaderFaceAndBadgeTileGraphics  ; gym leader face and badge tile patterns
+	ld hl, GymLeaderFaceAndBadgeTileGraphics
 	ld de, vChars2 tile $20
 	ld bc, 8 * 8 tiles
 	ld a, BANK(GymLeaderFaceAndBadgeTileGraphics)
@@ -555,12 +555,12 @@ DrawTrainerInfo:
 	ld c, 3 | LEADING_ZEROES | LEFT_ALIGN | MONEY_SIGN
 	call PrintBCDNumber
 	hlcoord 9, 6
-	ld de, wPlayTimeHours ; hours
+	ld de, wPlayTimeHours
 	lb bc, LEFT_ALIGN | 1, 3
 	call PrintNumber
 	ld [hl], $d6 ; colon tile ID
 	inc hl
-	ld de, wPlayTimeMinutes ; minutes
+	ld de, wPlayTimeMinutes
 	lb bc, LEADING_ZEROES | 1, 2
 	jp PrintNumber
 
@@ -642,8 +642,8 @@ StartMenu_SaveReset::
 	ld a, [wStatusFlags4]
 	bit BIT_LINK_CONNECTED, a
 	jp nz, Init
-	predef SaveSAV ; save the game
-	call LoadScreenTilesFromBuffer2 ; restore saved screen
+	predef SaveMenu
+	call LoadScreenTilesFromBuffer2
 	jp HoldTextDisplayOpen
 
 StartMenu_Option::
@@ -652,7 +652,7 @@ StartMenu_Option::
 	call ClearScreen
 	call UpdateSprites
 	callfar DisplayOptionMenu
-	call LoadScreenTilesFromBuffer2 ; restore saved screen
+	call LoadScreenTilesFromBuffer2
 	call LoadTextBoxTilePatterns
 	call UpdateSprites
 	jp RedisplayStartMenu

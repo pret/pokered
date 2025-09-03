@@ -151,7 +151,7 @@ BillsPCMenu:
 	ld c, 9
 	call TextBoxBorder
 	ld a, [wCurrentBoxNum]
-	and $7f
+	and BOX_NUM_MASK
 	cp 9
 	jr c, .singleDigitBoxNum
 ; two digit box num
@@ -236,7 +236,7 @@ BillsPCDeposit:
 	call WaitForSoundToFinish
 	ld hl, wBoxNumString
 	ld a, [wCurrentBoxNum]
-	and $7f
+	and BOX_NUM_MASK
 	cp 9
 	jr c, .singleDigitBoxNum
 	sub 9
@@ -538,6 +538,7 @@ JustAMomentText::
 	text_far _JustAMomentText
 	text_end
 
+UnusedOpenBillsPC: ; unreferenced
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
 	ret nz
