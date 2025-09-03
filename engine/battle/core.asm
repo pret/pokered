@@ -1794,7 +1794,8 @@ AnimateRetreatingPlayerMon:
 	lb bc, 7, 7
 	jp ClearScreenArea
 
-; reads player's current mon's HP into wBattleMonHP
+; Copies player's current pokemon's current HP and status into the party
+; struct data so it stays after battle or switching
 ReadPlayerMonCurHPAndStatus:
 	ld a, [wPlayerMonNumber]
 	ld hl, wPartyMon1HP
