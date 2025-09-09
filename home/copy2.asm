@@ -163,18 +163,18 @@ ClearScreenArea::
 ; Clear tilemap area cxb at hl.
 	ld a, " "
 	ld de, SCREEN_WIDTH
-.y
+.loopRows
 	push hl
 	push bc
-.x
+.loopTiles
 	ld [hli], a
 	dec c
-	jr nz, .x
+	jr nz, .loopTiles
 	pop bc
 	pop hl
 	add hl, de
 	dec b
-	jr nz, .y
+	jr nz, .loopRows
 	ret
 
 CopyScreenTileBufferToVRAM::
@@ -215,7 +215,7 @@ CopyScreenTileBufferToVRAM::
 ClearScreen::
 ; Clear wTileMap, then wait
 ; for the bg map to update.
-	ld bc, 20 * 18
+	ld bc, SCREEN_AREA
 	inc b
 	hlcoord 0, 0
 	ld a, " "
