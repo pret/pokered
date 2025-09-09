@@ -161,8 +161,8 @@ CopyVideoDataDouble::
 
 ClearScreenArea::
 ; Clear tilemap area cxb at hl.
-	ld a, " " ; blank tile
-	ld de, 20 ; screen width
+	ld a, " "
+	ld de, SCREEN_WIDTH
 .y
 	push hl
 	push bc
