@@ -181,19 +181,19 @@ CopyScreenTileBufferToVRAM::
 ; Copy wTileMap to the BG Map starting at b * $100.
 ; This is done in thirds of 6 rows, so it takes 3 frames.
 
-	ld c, 6
+	ld c, SCREEN_HEIGHT / 3
 
-	ld hl, $600 * 0
+	lb hl, 0, 0
 	decoord 0, 6 * 0
 	call .setup
 	call DelayFrame
 
-	ld hl, $600 * 1
+	lb hl, SCREEN_HEIGHT / 3, 0
 	decoord 0, 6 * 1
 	call .setup
 	call DelayFrame
 
-	ld hl, $600 * 2
+	lb hl, 2 * SCREEN_HEIGHT / 3, 0
 	decoord 0, 6 * 2
 	call .setup
 	jp DelayFrame
