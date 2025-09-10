@@ -161,39 +161,39 @@ CopyVideoDataDouble::
 
 ClearScreenArea::
 ; Clear tilemap area cxb at hl.
-	ld a, " " ; blank tile
-	ld de, 20 ; screen width
-.y
+	ld a, " "
+	ld de, SCREEN_WIDTH
+.loopRows
 	push hl
 	push bc
-.x
+.loopTiles
 	ld [hli], a
 	dec c
-	jr nz, .x
+	jr nz, .loopTiles
 	pop bc
 	pop hl
 	add hl, de
 	dec b
-	jr nz, .y
+	jr nz, .loopRows
 	ret
 
 CopyScreenTileBufferToVRAM::
 ; Copy wTileMap to the BG Map starting at b * $100.
 ; This is done in thirds of 6 rows, so it takes 3 frames.
 
-	ld c, 6
+	ld c, SCREEN_HEIGHT / 3
 
-	ld hl, $600 * 0
+	lb hl, 0, 0
 	decoord 0, 6 * 0
 	call .setup
 	call DelayFrame
 
-	ld hl, $600 * 1
+	lb hl, SCREEN_HEIGHT / 3, 0
 	decoord 0, 6 * 1
 	call .setup
 	call DelayFrame
 
-	ld hl, $600 * 2
+	lb hl, 2 * SCREEN_HEIGHT / 3, 0
 	decoord 0, 6 * 2
 	call .setup
 	jp DelayFrame
@@ -215,7 +215,7 @@ CopyScreenTileBufferToVRAM::
 ClearScreen::
 ; Clear wTileMap, then wait
 ; for the bg map to update.
-	ld bc, 20 * 18
+	ld bc, SCREEN_AREA
 	inc b
 	hlcoord 0, 0
 	ld a, " "
