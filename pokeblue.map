@@ -388,8 +388,8 @@ ROM0 bank #0:
 	         $18a7 = CopyVideoDataDouble.done
 	         $18b7 = CopyVideoDataDouble.keepgoing
 	         $18c4 = ClearScreenArea
-	         $18c9 = ClearScreenArea.y
-	         $18cb = ClearScreenArea.x
+	         $18c9 = ClearScreenArea.loopRows
+	         $18cb = ClearScreenArea.loopTiles
 	         $18d6 = CopyScreenTileBufferToVRAM
 	         $18fc = CopyScreenTileBufferToVRAM.setup
 	         $190f = ClearScreen

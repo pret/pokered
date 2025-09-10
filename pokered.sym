@@ -363,8 +363,8 @@
 00:18a7 CopyVideoDataDouble.done
 00:18b7 CopyVideoDataDouble.keepgoing
 00:18c4 ClearScreenArea
-00:18c9 ClearScreenArea.y
-00:18cb ClearScreenArea.x
+00:18c9 ClearScreenArea.loopRows
+00:18cb ClearScreenArea.loopTiles
 00:18d6 CopyScreenTileBufferToVRAM
 00:18fc CopyScreenTileBufferToVRAM.setup
 00:190f ClearScreen
