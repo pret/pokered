@@ -18681,6 +18681,7 @@
 00:cd71 wStatusScreenCurrentPP
 00:cd73 wPPUpCountAndMaxPP
 00:cd78 wNormalMaxPPList
+00:cd7a wEvoDataBufferEnd
 00:cd81 wSerialOtherGameboyRandomNumberListBlock
 00:cd81 wTileMapBackup2
 00:cee9 wBuffer

@@ -19070,6 +19070,7 @@ WRAM0 bank #0:
 	         $cd71 = wStatusScreenCurrentPP
 	         $cd73 = wPPUpCountAndMaxPP
 	         $cd78 = wNormalMaxPPList
+	         $cd7a = wEvoDataBufferEnd
 	         $cd81 = wSerialOtherGameboyRandomNumberListBlock
 	         $cd81 = wTileMapBackup2
 	         $cee9 = wLearningMovesFromDayCare
