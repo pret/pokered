@@ -131,7 +131,7 @@ RedrawPartyMenu_::
 	ld l, a
 	ld de, wEvoDataBuffer
 	ld a, BANK(EvosMovesPointerTable)
-	ld bc, 4 * 3 + 1 ; enough for Eevee's three 4-byte evolutions and 0 terminator
+	ld bc, wEvoDataBufferEnd - wEvoDataBuffer
 	call FarCopyData
 	ld hl, wEvoDataBuffer
 	ld de, .notAbleToEvolveText
