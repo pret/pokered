@@ -11,8 +11,8 @@ ClearSprites::
 HideSprites::
 	ld a, 160
 	ld hl, wShadowOAM
-	ld de, 4
-	ld b, 40
+	ld de, OBJ_SIZE
+	ld b, OAM_COUNT
 .loop
 	ld [hl], a
 	add hl, de

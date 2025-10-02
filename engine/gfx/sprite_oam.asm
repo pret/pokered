@@ -148,7 +148,7 @@ PrepareOAMData::
 	ldh a, [hOAMBufferOffset]
 	ld l, a
 	ld h, HIGH(wShadowOAM)
-	ld de, $4
+	ld de, OBJ_SIZE
 	ld b, $a0
 	ld a, [wMovementFlags]
 	bit BIT_LEDGE_OR_FISHING, a

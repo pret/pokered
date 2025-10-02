@@ -246,7 +246,7 @@ Credits:
 	pop de
 	ld de, TheEndGfx
 	ld hl, vChars2 tile $60
-	lb bc, BANK(TheEndGfx), (TheEndGfxEnd - TheEndGfx) / $10
+	lb bc, BANK(TheEndGfx), (TheEndGfxEnd - TheEndGfx) / TILE_SIZE
 	call CopyVideoData
 	hlcoord 4, 8
 	ld de, TheEndTextString

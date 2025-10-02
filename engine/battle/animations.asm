@@ -928,7 +928,7 @@ BallMoveDistances2:
 DoGrowlSpecialEffects:
 	ld hl, wShadowOAM
 	ld de, wShadowOAMSprite04
-	ld bc, $10
+	ld bc, OBJ_SIZE * 4
 	call CopyData ; copy the musical note graphic
 	ld a, [wSubAnimCounter]
 	dec a
@@ -1308,7 +1308,7 @@ AdjustOAMBlockXPos:
 	ld h, d
 
 AdjustOAMBlockXPos2:
-	ld de, 4
+	ld de, OBJ_SIZE
 .loop
 	ld a, [wCoordAdjustmentAmount]
 	ld b, a
@@ -1332,7 +1332,7 @@ AdjustOAMBlockYPos:
 	ld h, d
 
 AdjustOAMBlockYPos2:
-	ld de, 4
+	ld de, OBJ_SIZE
 .loop
 	ld a, [wCoordAdjustmentAmount]
 	ld b, a
@@ -1670,7 +1670,7 @@ _AnimationShootBallsUpward:
 	dec a
 	ld [wNumShootingBalls], a
 .next
-	ld de, 4
+	ld de, OBJ_SIZE
 	add hl, de ; next OAM entry
 	dec b
 	jr nz, .innerLoop
@@ -1723,10 +1723,10 @@ AnimationMinimizeMon:
 	ld hl, wTempPic
 	push hl
 	xor a
-	ld bc, 7 * 7 * $10
+	ld bc, 7 * 7 tiles
 	call FillMemory
 	pop hl
-	ld de, 7 * 3 * $10 + 4 * $10 + 4
+	ld de, 7 * 3 tiles + 4 tiles + 4
 	add hl, de
 	ld de, MinimizedMonSprite
 	ld c, MinimizedMonSpriteEnd - MinimizedMonSprite
