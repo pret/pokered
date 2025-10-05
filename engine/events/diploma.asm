@@ -11,7 +11,7 @@ DisplayDiploma::
 	call DisableLCD
 	ld hl, CircleTile
 	ld de, vChars2 tile CIRCLE_TILE_ID
-	ld bc, $10
+	ld bc, 1 tiles
 	ld a, BANK(CircleTile)
 	call FarCopyData2
 	hlcoord 0, 0

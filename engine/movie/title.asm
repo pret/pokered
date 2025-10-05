@@ -104,7 +104,7 @@ DisplayTitleScreen:
 ; place tiles for title screen copyright
 	hlcoord 2, 17
 	ld de, .tileScreenCopyrightTiles
-	ld b, $10
+	ld b, .tileScreenCopyrightTilesEnd - .tileScreenCopyrightTiles
 .tileScreenCopyrightTilesLoop
 	ld a, [de]
 	ld [hli], a
@@ -116,6 +116,7 @@ DisplayTitleScreen:
 
 .tileScreenCopyrightTiles
 	db $41,$42,$43,$42,$44,$42,$45,$46,$47,$48,$49,$4A,$4B,$4C,$4D,$4E ; ©'95.'96.'98 GAME FREAK inc.
+.tileScreenCopyrightTilesEnd
 
 .next
 	call SaveScreenTilesToBuffer2
@@ -380,7 +381,7 @@ LoadCopyrightAndTextBoxTiles:
 LoadCopyrightTiles:
 	ld de, NintendoCopyrightLogoGraphics
 	ld hl, vChars2 tile $60
-	lb bc, BANK(NintendoCopyrightLogoGraphics), (GameFreakLogoGraphicsEnd - NintendoCopyrightLogoGraphics) / $10
+	lb bc, BANK(NintendoCopyrightLogoGraphics), (GameFreakLogoGraphicsEnd - NintendoCopyrightLogoGraphics) / TILE_SIZE
 	call CopyVideoData
 	hlcoord 2, 7
 	ld de, CopyrightTextString

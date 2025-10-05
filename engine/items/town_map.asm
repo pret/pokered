@@ -24,7 +24,7 @@ DisplayTownMap:
 	call CopyData
 	ld hl, vSprites tile BIRD_BASE_TILE
 	ld de, TownMapCursor
-	lb bc, BANK(TownMapCursor), (TownMapCursorEnd - TownMapCursor) / $8
+	lb bc, BANK(TownMapCursor), (TownMapCursorEnd - TownMapCursor) / TILE_1BPP_SIZE
 	call CopyVideoDataDouble
 	xor a
 	ld [wWhichTownMapLocation], a
@@ -149,7 +149,7 @@ LoadTownMap_Fly::
 	call CopyVideoData
 	ld de, TownMapUpArrow
 	ld hl, vChars1 tile $6d
-	lb bc, BANK(TownMapUpArrow), (TownMapUpArrowEnd - TownMapUpArrow) / $8
+	lb bc, BANK(TownMapUpArrow), (TownMapUpArrowEnd - TownMapUpArrow) / TILE_1BPP_SIZE
 	call CopyVideoDataDouble
 	call BuildFlyLocationsList
 	ld hl, wUpdateSpritesEnabled
@@ -611,7 +611,7 @@ TownMapSpriteBlinkingAnimation::
 .hideSprites
 	ld hl, wShadowOAM
 	ld b, OAM_COUNT - 4
-	ld de, $4
+	ld de, OBJ_SIZE
 .hideSpritesLoop
 	ld [hl], $a0
 	add hl, de

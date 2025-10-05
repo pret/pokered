@@ -14,7 +14,7 @@ BattleTransition:
 	ldh a, [hSpriteIndex] ; enemy trainer sprite index (0 if wild battle)
 	ld c, a
 	ld b, 0
-	ld de, $10
+	ld de, SPRITESTATEDATA1_LENGTH
 .loop1
 	ld a, [hl]
 	cp $ff
@@ -35,13 +35,13 @@ BattleTransition:
 	jr z, .skip2 ; skip clearing the block if the enemy trainer is using it
 	push hl
 	push bc
-	ld bc, $10
+	ld bc, OBJ_SIZE * 4
 	xor a
 	call FillMemory
 	pop bc
 	pop hl
 .skip2
-	ld de, $10
+	ld de, OBJ_SIZE * 4
 	add hl, de
 	dec c
 	jr nz, .loop2

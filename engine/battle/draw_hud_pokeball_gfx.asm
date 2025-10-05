@@ -13,7 +13,7 @@ DrawEnemyPokeballs:
 LoadPartyPokeballGfx:
 	ld de, PokeballTileGraphics
 	ld hl, vSprites tile $31
-	lb bc, BANK(PokeballTileGraphics), (PokeballTileGraphicsEnd - PokeballTileGraphics) / $10
+	lb bc, BANK(PokeballTileGraphics), (PokeballTileGraphicsEnd - PokeballTileGraphics) / TILE_SIZE
 	jp CopyVideoData
 
 SetupOwnPartyPokeballs:

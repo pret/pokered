@@ -3,7 +3,7 @@ LoadPokedexTilePatterns:
 	call LoadHpBarAndStatusTilePatterns
 	ld de, PokedexTileGraphics
 	ld hl, vChars2 tile $60
-	lb bc, BANK(PokedexTileGraphics), (PokedexTileGraphicsEnd - PokedexTileGraphics) / $10
+	lb bc, BANK(PokedexTileGraphics), (PokedexTileGraphicsEnd - PokedexTileGraphics) / TILE_SIZE
 	call CopyVideoData
 	ld de, PokeballTileGraphics
 	ld hl, vChars2 tile $72

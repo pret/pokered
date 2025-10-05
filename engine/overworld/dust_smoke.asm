@@ -79,7 +79,7 @@ LoadSmokeTileFourTimes::
 
 LoadSmokeTile:
 	ld de, SSAnneSmokePuffTile
-	lb bc, BANK(SSAnneSmokePuffTile), (SSAnneSmokePuffTileEnd - SSAnneSmokePuffTile) / $10
+	lb bc, BANK(SSAnneSmokePuffTile), (SSAnneSmokePuffTileEnd - SSAnneSmokePuffTile) / TILE_SIZE
 	jp CopyVideoData
 
 SSAnneSmokePuffTile:

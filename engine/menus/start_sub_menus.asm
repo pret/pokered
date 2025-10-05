@@ -678,9 +678,9 @@ SwitchPartyMon_ClearGfx:
 	jr nz, .clearMonBGLoop
 	pop af
 	ld hl, wShadowOAM
-	ld bc, $10
+	ld bc, OBJ_SIZE * 4
 	call AddNTimes
-	ld de, $4
+	ld de, OBJ_SIZE
 	ld c, e
 .clearMonOAMLoop
 	ld [hl], $a0
